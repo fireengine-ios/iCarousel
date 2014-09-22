@@ -10,9 +10,11 @@
 
 @implementation MenuSearchCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withMetaData:(MetaMenu *)_metaData {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        self.metaData = _metaData;
+        
         textField = [[SearchTextField alloc] initWithFrame:CGRectMake(12, 5, 252, 50)];
         [self addSubview:textField];
     }

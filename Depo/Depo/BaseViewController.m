@@ -9,6 +9,7 @@
 #import "BaseViewController.h"
 #import "MyViewController.h"
 #import "HomeController.h"
+#import "SettingsController.h"
 #import "AppSession.h"
 #import "AppDelegate.h"
 #import "AppUtil.h"
@@ -160,6 +161,10 @@
 }
 
 - (void) didTriggerProfile {
+    SettingsController *settings = [[SettingsController alloc] init];
+    settings.nav = self.nav;
+    settings.myDelegate = self;
+    [self.nav setViewControllers:@[settings] animated:NO];
 }
 
 - (void) showBaseLoading {

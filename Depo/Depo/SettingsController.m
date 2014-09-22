@@ -1,23 +1,23 @@
 //
-//  HomeController.m
+//  SettingsController.m
 //  Depo
 //
-//  Created by Mahir on 9/19/14.
+//  Created by Mahir on 9/22/14.
 //  Copyright (c) 2014 com.igones. All rights reserved.
 //
 
-#import "HomeController.h"
+#import "SettingsController.h"
 
-@interface HomeController ()
+@interface SettingsController ()
 
 @end
 
-@implementation HomeController
+@implementation SettingsController
 
 - (id)init {
     self = [super init];
     if (self) {
-        self.title = @"";
+        self.title = @"Settings";
     }
     return self;
 }

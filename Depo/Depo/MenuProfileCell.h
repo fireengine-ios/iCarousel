@@ -11,4 +11,6 @@
 
 @interface MenuProfileCell : AbstractMenuCell
 
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withMetaData:(MetaMenu *) _metaData;
+
 @end

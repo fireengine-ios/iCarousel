@@ -72,6 +72,7 @@
 		051E1EB119CB20FC00FD1E03 /* MetaMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 051E1EB019CB20FC00FD1E03 /* MetaMenu.m */; };
 		051E1EB419CB2D1300FD1E03 /* AppSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 051E1EB319CB2D1300FD1E03 /* AppSession.m */; };
 		051E1EB719CB2DAC00FD1E03 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 051E1EB619CB2DAC00FD1E03 /* User.m */; };
+		057DF50519D02E100005A389 /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 057DF50419D02E100005A389 /* SettingsController.m */; };
 		0589061B19CC226D00A9E517 /* home_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0589060319CC226D00A9E517 /* home_icon.png */; };
 		0589061C19CC226D00A9E517 /* home_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0589060419CC226D00A9E517 /* home_icon@2x.png */; };
 		0589061F19CC226D00A9E517 /* photos_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0589060719CC226D00A9E517 /* photos_icon.png */; };
@@ -258,6 +259,8 @@
 		051E1EB319CB2D1300FD1E03 /* AppSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppSession.m; sourceTree = "<group>"; };
 		051E1EB519CB2DAC00FD1E03 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		051E1EB619CB2DAC00FD1E03 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		057DF50319D02E100005A389 /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
+		057DF50419D02E100005A389 /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
 		0589060319CC226D00A9E517 /* home_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_icon.png; sourceTree = "<group>"; };
 		0589060419CC226D00A9E517 /* home_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_icon@2x.png"; sourceTree = "<group>"; };
 		0589060719CC226D00A9E517 /* photos_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photos_icon.png; sourceTree = "<group>"; };
@@ -456,6 +459,8 @@
 				051DE35B19CC128600F27C85 /* BaseViewController.m */,
 				051DE37419CC162700F27C85 /* HomeController.h */,
 				051DE37519CC162700F27C85 /* HomeController.m */,
+				057DF50319D02E100005A389 /* SettingsController.h */,
+				057DF50419D02E100005A389 /* SettingsController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -874,6 +879,7 @@
 				051E1E5719CAC90700FD1E03 /* AFPropertyListRequestOperation.m in Sources */,
 				051E1E7F19CAC92700FD1E03 /* Reachability.m in Sources */,
 				051DE36919CC12FD00F27C85 /* CheckButton.m in Sources */,
+				057DF50519D02E100005A389 /* SettingsController.m in Sources */,
 				051DE36819CC12FD00F27C85 /* ToggleButton.m in Sources */,
 				0589065919CC509700A9E517 /* SearchTextField.m in Sources */,
 				0589066D19CC560100A9E517 /* CustomLabel.m in Sources */,

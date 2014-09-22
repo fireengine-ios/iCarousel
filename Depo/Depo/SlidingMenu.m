@@ -126,10 +126,10 @@
     
     if(APPDELEGATE.session.user) {
         if(indexPath.section == 0) {
-            MenuProfileCell *cell = [[MenuProfileCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+            MenuProfileCell *cell = [[MenuProfileCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withMetaData:metaData];
             return cell;
         } else if(indexPath.section == 1) {
-            MenuSearchCell *cell = [[MenuSearchCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+            MenuSearchCell *cell = [[MenuSearchCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withMetaData:metaData];
             return cell;
         } else {
             MenuCell *cell = [[MenuCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withMetaData:metaData isCollapsible:NO isCollapsed:YES];
@@ -137,10 +137,10 @@
         }
     } else {
         if(indexPath.section == 0) {
-            MenuProfileCell *cell = [[MenuProfileCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+            MenuProfileCell *cell = [[MenuProfileCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withMetaData:metaData];
             return cell;
         } else if(indexPath.section == 1) {
-            MenuSearchCell *cell = [[MenuSearchCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+            MenuSearchCell *cell = [[MenuSearchCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withMetaData:metaData];
             return cell;
         } else {
             MenuCell *cell = [[MenuCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withMetaData:metaData isCollapsible:NO isCollapsed:YES];
@@ -150,9 +150,6 @@
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if(indexPath.section == 0)
-        return;
     
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
