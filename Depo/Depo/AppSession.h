@@ -12,5 +12,6 @@
 @interface AppSession : NSObject
 
 @property (nonatomic, strong) User *user;
+@property (nonatomic, strong) NSString *authToken;
 
 @end

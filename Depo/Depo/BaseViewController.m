@@ -33,6 +33,11 @@
     self = [super init];
     if (self) {
 
+        tokenDao = [[RequestTokenDao alloc] init];
+//        tokenDao.delegate = self;
+//        tokenDao.successMethod = @selector(requestTokenSuccessCallback:);
+//        tokenDao.failMethod = @selector(requestTokenFailCallback:);
+        
         scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
         scroll.scrollEnabled = NO;
         [scroll setShowsHorizontalScrollIndicator:NO];
@@ -74,6 +79,8 @@
                                                      initWithTarget:self action:@selector(swipeRight:)];
         recognizerRight.direction = UISwipeGestureRecognizerDirectionRight;
         [self.view addGestureRecognizer:recognizerRight];
+        
+        [tokenDao requestTokenForMsisdn:@"5322109090" andPassword:@"5322109090"];
     }
     return self;
 }

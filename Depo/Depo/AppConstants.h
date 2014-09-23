@@ -27,6 +27,18 @@
 
 #define MENU_CLOSED_NOTIFICATION @"MENU_CLOSED_NOTIFICATION"
 
+#define MSISDN_STORE_KEY @"MSISDN_STORE_KEY"
+
+#define PASS_STORE_KEY @"PASS_STORE_KEY"
+
+#define SuppressPerformSelectorLeakWarning(Stuff) \
+do { \
+_Pragma("clang diagnostic push") \
+_Pragma("clang diagnostic ignored \"-Warc-performSelector-leaks\"") \
+Stuff; \
+_Pragma("clang diagnostic pop") \
+} while (0)
+
 typedef enum {
 	LoginTypeRadius = 0,
 	LoginTypeWebSifre

@@ -18,6 +18,7 @@
 
 @synthesize session;
 @synthesize base;
+@synthesize tokenManager;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -26,13 +27,25 @@
         [application setStatusBarStyle:UIStatusBarStyleLightContent];
     }
     session = [[AppSession alloc] init];
-
-    MyViewController *homeController = [[HomeController alloc] init];
-    base = [[BaseViewController alloc] initWithRootViewController:homeController];
-    [self.window setRootViewController:base];
+    
+    tokenManager = [[TokenManager alloc] init];
+    tokenManager.delegate = self;
+    [tokenManager requestToken];
 
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (void) tokenManagerInadequateInfo {
+}
+
+- (void) tokenManagerDidFailReceivingToken {
+}
+
+- (void) tokenManagerDidReceiveToken {
+    MyViewController *homeController = [[HomeController alloc] init];
+    base = [[BaseViewController alloc] initWithRootViewController:homeController];
+    [self.window setRootViewController:base];
 }
 
 - (void) showCustomAlert:(CustomAlertView *) alertView {

@@ -11,8 +11,10 @@
 #import "SlidingMenu.h"
 #import "MyViewController.h"
 #import "MBProgressHUD.h"
+#import "RequestTokenDao.h"
 
 @interface BaseViewController : UIViewController <SlidingMenuDelegate, SlidingMenuCloseDelegate, MyViewDelegate> {
+    RequestTokenDao *tokenDao;
 }
 
 @property (nonatomic, strong) UIScrollView *scroll;

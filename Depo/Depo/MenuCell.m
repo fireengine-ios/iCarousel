@@ -38,7 +38,7 @@
         titleLabel.text = self.metaData.title;
         titleLabel.backgroundColor = [UIColor clearColor];
         titleLabel.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:17];
-        titleLabel.textAlignment = UITextAlignmentLeft;
+        titleLabel.textAlignment = NSTextAlignmentLeft;
 //        titleLabel.adjustsFontSizeToFitWidth = YES;
         titleLabel.textColor = [Util UIColorForHexColor:@"DEDEDE"];
         [self addSubview:titleLabel];

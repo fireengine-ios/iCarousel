@@ -5,36 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>735A8771-639F-4A5C-A3CB-62D9D3766752</string>
+	<string>256A681E-5ECA-4C30-877B-1DF628EFBC3C</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Depo</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>93929CB7-6782-4966-9FE5-9626C450A26A</key>
-		<string>https://bitbucket.org/igones/depo.git</string>
+		<key>E1B5C184-B9F4-4CD5-ABB8-54C074ABF70D</key>
+		<string>https://stash.turkcell.com.tr/git/scm/adr/akillidepo-ios.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Depo/Depo.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>93929CB7-6782-4966-9FE5-9626C450A26A</key>
+		<key>E1B5C184-B9F4-4CD5-ABB8-54C074ABF70D</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://bitbucket.org/igones/depo.git</string>
+	<string>https://stash.turkcell.com.tr/git/scm/adr/akillidepo-ios.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>93929CB7-6782-4966-9FE5-9626C450A26A</string>
+	<string>E1B5C184-B9F4-4CD5-ABB8-54C074ABF70D</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>93929CB7-6782-4966-9FE5-9626C450A26A</string>
+			<string>E1B5C184-B9F4-4CD5-ABB8-54C074ABF70D</string>
 			<key>IDESourceControlWCCName</key>
-			<string>depo</string>
+			<string>akillidepo-ios</string>
 		</dict>
 	</array>
 </dict>

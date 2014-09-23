@@ -7,7 +7,10 @@
 //
 
 #import "MyViewController.h"
+#import "FileListDao.h"
 
-@interface HomeController : MyViewController
+@interface HomeController : MyViewController {
+    FileListDao *fileListDao;
+}
 
 @end

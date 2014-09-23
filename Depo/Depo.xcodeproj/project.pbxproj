@@ -72,7 +72,13 @@
 		051E1EB119CB20FC00FD1E03 /* MetaMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 051E1EB019CB20FC00FD1E03 /* MetaMenu.m */; };
 		051E1EB419CB2D1300FD1E03 /* AppSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 051E1EB319CB2D1300FD1E03 /* AppSession.m */; };
 		051E1EB719CB2DAC00FD1E03 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 051E1EB619CB2DAC00FD1E03 /* User.m */; };
+		0557C73819D1C905005E9F6B /* MetaFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 0557C73719D1C905005E9F6B /* MetaFile.m */; };
+		056AC8FB19D15DBB00AC96C3 /* TokenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 056AC8FA19D15DBB00AC96C3 /* TokenManager.m */; };
+		056AC8FE19D15EA200AC96C3 /* CacheUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 056AC8FD19D15EA200AC96C3 /* CacheUtil.m */; };
 		057DF50519D02E100005A389 /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 057DF50419D02E100005A389 /* SettingsController.m */; };
+		057DF50819D038080005A389 /* RequestTokenDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 057DF50719D038080005A389 /* RequestTokenDao.m */; };
+		057DF50B19D04EDF0005A389 /* RequestBaseUrlDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 057DF50A19D04EDF0005A389 /* RequestBaseUrlDao.m */; };
+		057DF50E19D050F00005A389 /* FileListDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 057DF50D19D050F00005A389 /* FileListDao.m */; };
 		0589061B19CC226D00A9E517 /* home_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0589060319CC226D00A9E517 /* home_icon.png */; };
 		0589061C19CC226D00A9E517 /* home_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0589060419CC226D00A9E517 /* home_icon@2x.png */; };
 		0589061F19CC226D00A9E517 /* photos_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0589060719CC226D00A9E517 /* photos_icon.png */; };
@@ -259,8 +265,20 @@
 		051E1EB319CB2D1300FD1E03 /* AppSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppSession.m; sourceTree = "<group>"; };
 		051E1EB519CB2DAC00FD1E03 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		051E1EB619CB2DAC00FD1E03 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		0557C73619D1C905005E9F6B /* MetaFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetaFile.h; sourceTree = "<group>"; };
+		0557C73719D1C905005E9F6B /* MetaFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MetaFile.m; sourceTree = "<group>"; };
+		056AC8F919D15DBB00AC96C3 /* TokenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TokenManager.h; sourceTree = "<group>"; };
+		056AC8FA19D15DBB00AC96C3 /* TokenManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TokenManager.m; sourceTree = "<group>"; };
+		056AC8FC19D15EA200AC96C3 /* CacheUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CacheUtil.h; sourceTree = "<group>"; };
+		056AC8FD19D15EA200AC96C3 /* CacheUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CacheUtil.m; sourceTree = "<group>"; };
 		057DF50319D02E100005A389 /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
 		057DF50419D02E100005A389 /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
+		057DF50619D038080005A389 /* RequestTokenDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestTokenDao.h; sourceTree = "<group>"; };
+		057DF50719D038080005A389 /* RequestTokenDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestTokenDao.m; sourceTree = "<group>"; };
+		057DF50919D04EDF0005A389 /* RequestBaseUrlDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestBaseUrlDao.h; sourceTree = "<group>"; };
+		057DF50A19D04EDF0005A389 /* RequestBaseUrlDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestBaseUrlDao.m; sourceTree = "<group>"; };
+		057DF50C19D050F00005A389 /* FileListDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileListDao.h; sourceTree = "<group>"; };
+		057DF50D19D050F00005A389 /* FileListDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileListDao.m; sourceTree = "<group>"; };
 		0589060319CC226D00A9E517 /* home_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_icon.png; sourceTree = "<group>"; };
 		0589060419CC226D00A9E517 /* home_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_icon@2x.png"; sourceTree = "<group>"; };
 		0589060719CC226D00A9E517 /* photos_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photos_icon.png; sourceTree = "<group>"; };
@@ -395,6 +413,7 @@
 		051E1DFC19CAC2F900FD1E03 /* Depo */ = {
 			isa = PBXGroup;
 			children = (
+				056AC8F819D15DAE00AC96C3 /* manager */,
 				051E1E3A19CAC8EA00FD1E03 /* out */,
 				051E1E2919CAC53E00FD1E03 /* model */,
 				051E1E2819CAC53A00FD1E03 /* http */,
@@ -488,6 +507,8 @@
 				051E1E2E19CAC56A00FD1E03 /* AppUtil.m */,
 				051E1E3019CAC57400FD1E03 /* Util.h */,
 				051E1E3119CAC57400FD1E03 /* Util.m */,
+				056AC8FC19D15EA200AC96C3 /* CacheUtil.h */,
+				056AC8FD19D15EA200AC96C3 /* CacheUtil.m */,
 			);
 			name = util;
 			sourceTree = "<group>";
@@ -497,6 +518,12 @@
 			children = (
 				051E1E3719CAC85100FD1E03 /* BaseDao.h */,
 				051E1E3819CAC85100FD1E03 /* BaseDao.m */,
+				057DF50619D038080005A389 /* RequestTokenDao.h */,
+				057DF50719D038080005A389 /* RequestTokenDao.m */,
+				057DF50919D04EDF0005A389 /* RequestBaseUrlDao.h */,
+				057DF50A19D04EDF0005A389 /* RequestBaseUrlDao.m */,
+				057DF50C19D050F00005A389 /* FileListDao.h */,
+				057DF50D19D050F00005A389 /* FileListDao.m */,
 			);
 			name = http;
 			sourceTree = "<group>";
@@ -510,6 +537,8 @@
 				051E1EB319CB2D1300FD1E03 /* AppSession.m */,
 				051E1EB519CB2DAC00FD1E03 /* User.h */,
 				051E1EB619CB2DAC00FD1E03 /* User.m */,
+				0557C73619D1C905005E9F6B /* MetaFile.h */,
+				0557C73719D1C905005E9F6B /* MetaFile.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -632,6 +661,15 @@
 				051E1E7E19CAC92700FD1E03 /* ASIProgressDelegate.h */,
 			);
 			name = "SBJSON+ASI";
+			sourceTree = "<group>";
+		};
+		056AC8F819D15DAE00AC96C3 /* manager */ = {
+			isa = PBXGroup;
+			children = (
+				056AC8F919D15DBB00AC96C3 /* TokenManager.h */,
+				056AC8FA19D15DBB00AC96C3 /* TokenManager.m */,
+			);
+			name = manager;
 			sourceTree = "<group>";
 		};
 		0589060219CC226500A9E517 /* images */ = {
@@ -831,11 +869,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0557C73819D1C905005E9F6B /* MetaFile.m in Sources */,
 				051E1E5819CAC90700FD1E03 /* AFURLConnectionOperation.m in Sources */,
 				051E1E8619CAC92700FD1E03 /* ASIAuthenticationDialog.m in Sources */,
 				051E1E8519CAC92700FD1E03 /* SBJsonWriter.m in Sources */,
 				051E1E5919CAC90700FD1E03 /* AFXMLRequestOperation.m in Sources */,
 				051E1E8B19CAC92700FD1E03 /* ASIHTTPRequest.m in Sources */,
+				057DF50B19D04EDF0005A389 /* RequestBaseUrlDao.m in Sources */,
 				051E1EAE19CB20D500FD1E03 /* MenuSearchCell.m in Sources */,
 				051E1E5519CAC90700FD1E03 /* AFJSONRequestOperation.m in Sources */,
 				051E1E8919CAC92700FD1E03 /* ASIDownloadCache.m in Sources */,
@@ -843,8 +883,10 @@
 				051E1E5319CAC90700FD1E03 /* AFHTTPRequestOperation.m in Sources */,
 				051E1E8A19CAC92700FD1E03 /* ASIFormDataRequest.m in Sources */,
 				051E1E8019CAC92700FD1E03 /* NSObject+SBJSON.m in Sources */,
+				056AC8FB19D15DBB00AC96C3 /* TokenManager.m in Sources */,
 				051E1E2F19CAC56A00FD1E03 /* AppUtil.m in Sources */,
 				051E1E3919CAC85100FD1E03 /* BaseDao.m in Sources */,
+				056AC8FE19D15EA200AC96C3 /* CacheUtil.m in Sources */,
 				051E1E8119CAC92700FD1E03 /* NSString+SBJSON.m in Sources */,
 				051DE37619CC162700F27C85 /* HomeController.m in Sources */,
 				051E1E5119CAC90700FD1E03 /* UIButton+AFNetworking.m in Sources */,
@@ -854,9 +896,11 @@
 				051E1EAB19CB20AD00FD1E03 /* MenuProfileCell.m in Sources */,
 				051DE35E19CC128600F27C85 /* BaseViewController.m in Sources */,
 				051E1E8319CAC92700FD1E03 /* SBJsonBase.m in Sources */,
+				057DF50819D038080005A389 /* RequestTokenDao.m in Sources */,
 				051E1E3619CAC7D400FD1E03 /* MBProgressHUD.m in Sources */,
 				051E1E8D19CAC92700FD1E03 /* ASINetworkQueue.m in Sources */,
 				051DE35D19CC128600F27C85 /* MyViewController.m in Sources */,
+				057DF50E19D050F00005A389 /* FileListDao.m in Sources */,
 				051E1E5419CAC90700FD1E03 /* AFImageRequestOperation.m in Sources */,
 				051E1E8819CAC92700FD1E03 /* ASIDataDecompressor.m in Sources */,
 				051E1E8719CAC92700FD1E03 /* ASIDataCompressor.m in Sources */,

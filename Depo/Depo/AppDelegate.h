@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "AppSession.h"
+#import "TokenManager.h"
 
 @class CustomAlertView;
 @class CustomConfirmView;
@@ -17,11 +18,12 @@
 
 #define APPDELEGATE ((AppDelegate *)[[UIApplication sharedApplication] delegate])
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, TokenManagerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) AppSession *session;
 @property (strong, nonatomic) BaseViewController *base;
+@property (strong, nonatomic) TokenManager *tokenManager;
 
 - (void) showCustomAlert:(CustomAlertView *) alertView;
 - (void) showCustomConfirm:(CustomConfirmView *) alertView;

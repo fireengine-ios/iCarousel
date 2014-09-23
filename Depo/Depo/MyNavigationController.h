@@ -10,4 +10,7 @@
 
 @interface MyNavigationController : UINavigationController
 
+- (void) hideNavigationBar;
+- (void) showNavigationBar;
+
 @end
