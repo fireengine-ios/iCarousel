@@ -14,5 +14,6 @@
 + (CGFloat) calculateWidthForText:(NSString *)str forHeight:(CGFloat)height forFont:(UIFont *)font;
 + (UIColor *) UIColorForHexColor:(NSString *) hexColor;
 + (UIImage*) circularScaleNCrop:(UIImage*)image forRect:(CGRect) rect;
++ (NSString *) transformedSizeValue:(long) byteCount;
 
 @end

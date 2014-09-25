@@ -7,9 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AppConstants.h"
 
 @interface AppUtil : NSObject
 
 + (NSArray *) readMenuItemsForLoggedIn;
++ (NSString *) iconNameByContentType:(ContentType) contentType;
++ (NSString *) nakedFileFolderName:(NSString *) fileFolderName;
++ (NSString *) buttonImgNameByAddType:(AddType) addType;
++ (NSString *) buttonTitleByAddType:(AddType) addType;
 
 @end

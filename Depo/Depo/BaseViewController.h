@@ -11,21 +11,23 @@
 #import "SlidingMenu.h"
 #import "MyViewController.h"
 #import "MBProgressHUD.h"
-#import "RequestTokenDao.h"
+#import "FloatingAddButton.h"
+#import "FloatingAddMenu.h"
 
-@interface BaseViewController : UIViewController <SlidingMenuDelegate, SlidingMenuCloseDelegate, MyViewDelegate> {
-    RequestTokenDao *tokenDao;
-}
+@interface BaseViewController : UIViewController <SlidingMenuDelegate, SlidingMenuCloseDelegate, MyViewDelegate, FloatingAddButtonDelegate>
 
 @property (nonatomic, strong) UIScrollView *scroll;
 @property (nonatomic, strong) UIView *transparentView;
 @property (nonatomic, strong) MyNavigationController *nav;
 @property (nonatomic, strong) SlidingMenu *menu;
 @property (nonatomic, strong) MBProgressHUD *baseProgress;
+@property (nonatomic, strong) FloatingAddButton *addButton;
+@property (nonatomic, strong) FloatingAddMenu *addMenu;
 @property (nonatomic) BOOL menuOpen;
 
 - (void) showBaseLoading;
 - (void) hideBaseLoading;
 - (id)initWithRootViewController:(MyViewController *) rootViewController;
+- (void) presentAddButtonWithDelegate:(id) delegate;
 
 @end

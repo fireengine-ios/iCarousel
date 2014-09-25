@@ -44,5 +44,6 @@
 - (void) resetTableUpdateCounter;
 - (void) resetPageOffset;
 - (void) triggerMenuLoginWithinPage;
+- (void) presentAddButtonWithDelegate:(id) delegate;
 
 @end

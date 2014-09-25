@@ -32,6 +32,8 @@
     tokenManager.delegate = self;
     [tokenManager requestToken];
 
+    [self addInitialBgImage];
+    
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -46,6 +48,16 @@
     MyViewController *homeController = [[HomeController alloc] init];
     base = [[BaseViewController alloc] initWithRootViewController:homeController];
     [self.window setRootViewController:base];
+}
+
+- (void) addInitialBgImage {
+    UIImage *bgImg = [UIImage imageNamed:@"Default.png"];
+    if(IS_IPHONE_5) {
+        bgImg = [UIImage imageNamed:@"Default-568h@2x.png"];
+    }
+    UIImageView *bgImgView = [[UIImageView alloc] initWithImage:bgImg];
+    bgImgView.frame = CGRectMake(0, 0, self.window.frame.size.width, self.window.frame.size.height);
+    [self.window addSubview:bgImgView];
 }
 
 - (void) showCustomAlert:(CustomAlertView *) alertView {

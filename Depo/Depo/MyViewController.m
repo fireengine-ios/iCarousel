@@ -13,6 +13,7 @@
 #import "AppConstants.h"
 #import "CustomAlertView.h"
 #import "CustomConfirmView.h"
+#import "BaseViewController.h"
 
 @interface MyViewController ()
 
@@ -46,10 +47,10 @@
         }
 
         if(IS_BELOW_7) {
-            topIndex = 0;
+            topIndex = 44;
             bottomIndex = 44;
         } else {
-            topIndex = 0;
+            topIndex = 64;
             bottomIndex = 60;
         }
         
@@ -125,6 +126,10 @@
 
 - (void) triggerMenuLoginWithinPage {
     [myDelegate shouldTriggerLogin];
+}
+
+- (void) presentAddButtonWithDelegate:(id) delegate {
+    [APPDELEGATE.base presentAddButtonWithDelegate:delegate];
 }
 
 @end

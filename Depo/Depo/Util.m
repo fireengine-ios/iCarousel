@@ -63,4 +63,19 @@
     return finalImage;
 }
 
++ (NSString *) transformedSizeValue:(long) byteCount {
+    
+    double convertedValue = (double) byteCount;
+    int multiplyFactor = 0;
+    
+    NSArray *tokens = [NSArray arrayWithObjects:@"bytes", @"KB", @"MB", @"GB", @"TB", nil];
+    
+    while (convertedValue > 1024) {
+        convertedValue /= 1024;
+        multiplyFactor++;
+    }
+    
+    return [NSString stringWithFormat:@"%4.1f %@", convertedValue, [tokens objectAtIndex:multiplyFactor]];
+}
+
 @end

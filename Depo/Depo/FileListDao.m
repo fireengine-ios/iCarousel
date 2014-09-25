@@ -7,12 +7,32 @@
 //
 
 #import "FileListDao.h"
-#import "MetaFile.h"
+#import "AppUtil.h"
 
 @implementation FileListDao
 
 - (void) requestFileListingForParentForOffset:(int) offset andSize:(int) size {
     NSString *parentListingUrl = [NSString stringWithFormat:FILE_LISTING_MAIN_URL, @"parent", @"", @"name", offset, size];
+	NSURL *url = [NSURL URLWithString:parentListingUrl];
+	
+	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    [request setDelegate:self];
+    
+    [self sendGetRequest:request];
+}
+
+- (void) requestFileListingForFolder:(NSString *) folder andForOffset:(int) offset andSize:(int) size {
+    NSString *parentListingUrl = [NSString stringWithFormat:FILE_LISTING_MAIN_URL, @"parent", [self enrichFileFolderName:folder], @"name", offset, size];
+	NSURL *url = [NSURL URLWithString:parentListingUrl];
+	
+	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    [request setDelegate:self];
+    
+    [self sendGetRequest:request];
+}
+
+- (void) requestPhotosForOffset:(int) offset andSize:(int) size {
+    NSString *parentListingUrl = [NSString stringWithFormat:IMG_LISTING_MAIN_URL, @"content_type", @"image", @"last_modified", offset, size];
 	NSURL *url = [NSURL URLWithString:parentListingUrl];
 	
 	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
@@ -74,7 +94,9 @@
     file.url = [self strByRawVal:url];
     file.tempDownloadUrl = [self strByRawVal:tempDownloadURL];
     file.lastModified = [self dateByRawVal:last_modified];
-    file.contentType = [self strByRawVal:content_type];
+    file.rawContentType = [self strByRawVal:content_type];
+    file.contentType = [self contentTypeByRawValue:file];
+    file.visibleName = [AppUtil nakedFileFolderName:file.name];
     return file;
 }
 

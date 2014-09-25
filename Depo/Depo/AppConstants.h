@@ -10,6 +10,8 @@
 
 #define IS_BELOW_6 ([[[UIDevice currentDevice] systemVersion] floatValue] < 6.0)
 
+#define DEGREES_TO_RADIANS(angle) ((angle) / 180.0 * M_PI)
+
 #define turkcellAuthAppIdTest @"151"
 #define turkcellAuthSecretKeyTest @"7dad024c-600e-468b-9bcd-5fb518399d15"
 
@@ -30,6 +32,18 @@
 #define MSISDN_STORE_KEY @"MSISDN_STORE_KEY"
 
 #define PASS_STORE_KEY @"PASS_STORE_KEY"
+
+#define CONTENT_TYPE_JPEG_VALUE @"image/jpeg"
+
+#define CONTENT_TYPE_JPG_VALUE @"image/jpg"
+
+#define CONTENT_TYPE_PNG_VALUE @"image/png"
+
+#define CONTENT_TYPE_MUSIC_VALUE @"audio/mp3"
+
+#define CONTENT_TYPE_PDF_VALUE @"application/pdf"
+
+#define CONTENT_TYPE_DOC_VALUE @"application/doc"
 
 #define SuppressPerformSelectorLeakWarning(Stuff) \
 do { \
@@ -64,6 +78,22 @@ typedef enum {
     ModalTypeApprove,
     ModalTypeInfo
 } ModalType;
+
+typedef enum {
+	ContentTypeFolder = 0,
+	ContentTypePhoto,
+	ContentTypeMusic,
+	ContentTypeDoc,
+	ContentTypeOther
+} ContentType;
+
+typedef enum {
+	AddTypeFolder = 0,
+	AddTypePhoto,
+	AddTypeMusic,
+	AddTypeCamera,
+	AddTypeOther
+} AddType;
 
 @interface AppConstants : NSObject
 

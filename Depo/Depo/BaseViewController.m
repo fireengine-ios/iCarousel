@@ -9,6 +9,8 @@
 #import "BaseViewController.h"
 #import "MyViewController.h"
 #import "HomeController.h"
+#import "FileListController.h"
+#import "PhotoListController.h"
 #import "SettingsController.h"
 #import "AppSession.h"
 #import "AppDelegate.h"
@@ -28,16 +30,13 @@
 @synthesize menu;
 @synthesize baseProgress;
 @synthesize transparentView;
+@synthesize addButton;
+@synthesize addMenu;
 
 - (id)initWithRootViewController:(MyViewController *) rootViewController {
     self = [super init];
     if (self) {
 
-        tokenDao = [[RequestTokenDao alloc] init];
-//        tokenDao.delegate = self;
-//        tokenDao.successMethod = @selector(requestTokenSuccessCallback:);
-//        tokenDao.failMethod = @selector(requestTokenFailCallback:);
-        
         scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
         scroll.scrollEnabled = NO;
         [scroll setShowsHorizontalScrollIndicator:NO];
@@ -70,6 +69,15 @@
         baseProgress.opacity = 0.4f;
         [self.view addSubview:baseProgress];
 
+        self.addMenu = [[FloatingAddMenu alloc] initWithFrame:CGRectMake(kMenuOpenOriginX, 0, self.view.frame.size.width, self.view.frame.size.height) withBasePoint:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height - 65)];
+        addMenu.hidden = YES;
+        [scroll addSubview:addMenu];
+        
+        self.addButton = [[FloatingAddButton alloc] initWithFrame:CGRectMake(kMenuOpenOriginX + (self.view.frame.size.width - 70)/2, self.view.frame.size.height - 100, 70, 70)];
+        addButton.hidden = YES;
+        addButton.delegate = self;
+        [scroll addSubview:addButton];
+        
         UISwipeGestureRecognizer *recognizerLeft = [[UISwipeGestureRecognizer alloc]
                                                     initWithTarget:self action:@selector(swipeLeft:)];
         recognizerLeft.direction = UISwipeGestureRecognizerDirectionLeft;
@@ -80,7 +88,6 @@
         recognizerRight.direction = UISwipeGestureRecognizerDirectionRight;
         [self.view addGestureRecognizer:recognizerRight];
         
-        [tokenDao requestTokenForMsisdn:@"5322109090" andPassword:@"5322109090"];
     }
     return self;
 }
@@ -153,9 +160,17 @@
 }
 
 - (void) didTriggerFiles {
+    FileListController *file = [[FileListController alloc] initForFolder:nil];
+    file.nav = self.nav;
+    file.myDelegate = self;
+    [self.nav setViewControllers:@[file] animated:NO];
 }
 
 - (void) didTriggerPhotos {
+    PhotoListController *photo = [[PhotoListController alloc] init];
+    photo.nav = self.nav;
+    photo.myDelegate = self;
+    [self.nav setViewControllers:@[photo] animated:NO];
 }
 
 - (void) didTriggerMusic {
@@ -199,6 +214,21 @@
                      }];
 }
 
+#pragma mark FloatingAddButtonDelegate
+- (void) floatingAddButtonDidOpenMenu {
+    addMenu.hidden = NO;
+    [addMenu presentWithAnimation];
+}
+
+- (void) floatingAddButtonDidCloseMenu {
+    [addMenu dismissWithAnimation];
+    [self performSelector:@selector(hideAddMenu) withObject:nil afterDelay:0.3];
+}
+
+- (void) hideAddMenu {
+    addMenu.hidden = YES;
+}
+
 - (void) shouldToggleMenu {
     [self showMenu];
 }
@@ -219,6 +249,11 @@
 
 - (void) logoutFailCallback:(NSString *) errorMessage {
     [self hideBaseLoading];
+}
+
+- (void) presentAddButtonWithDelegate:(id) delegate {
+    self.addButton.hidden = NO;
+    [scroll bringSubviewToFront:self.addButton];
 }
 
 - (void)viewDidLoad {

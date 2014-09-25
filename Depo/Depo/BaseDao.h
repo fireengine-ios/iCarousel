@@ -10,6 +10,7 @@
 #import "ASIFormDataRequest.h"
 #import "SBJSON.h"
 #import "AppConstants.h"
+#import "MetaFile.h"
 
 #define BASE_URL @"https://tcloudstb.turkcell.com.tr/api"
 
@@ -18,6 +19,8 @@
 #define USER_BASE_URL BASE_URL@"/container/baseUrl"
 
 #define FILE_LISTING_MAIN_URL BASE_URL@"/search/byField?fieldName=%@&fieldValue=%@&exactMatch=true&sortBy=%@&sortOrder=ASC&from=%d&size=%d"
+
+#define IMG_LISTING_MAIN_URL BASE_URL@"/search/byField?fieldName=%@&fieldValue=%@&sortBy=%@&sortOrder=DESC&from=%d&size=%d"
 
 #define APN_URL @"http://pushserver.turkcell.com.tr/PushServer/rest/registerdevice/"
 
@@ -61,6 +64,8 @@
 - (long) longByNumber:(NSNumber *) numberObj;
 - (NSString *) strByRawVal:(NSString *) rawStr;
 - (NSDate *) dateByRawVal:(NSString *) rawStr;
+- (NSString *) enrichFileFolderName:(NSString *) fileFolderName;
+- (ContentType) contentTypeByRawValue:(MetaFile *) metaFile;
 - (void) shouldReturnSuccess;
 - (void) shouldReturnSuccessWithObject:(id) obj;
 - (void) shouldReturnFailWithMessage:(NSString *) errorMessage;

@@ -14,12 +14,14 @@
 @synthesize subDir;
 @synthesize parent;
 @synthesize name;
+@synthesize visibleName;
 @synthesize bytes;
 @synthesize folder;
 @synthesize hidden;
 @synthesize path;
 @synthesize url;
 @synthesize tempDownloadUrl;
+@synthesize rawContentType;
 @synthesize contentType;
 @synthesize lastModified;
 

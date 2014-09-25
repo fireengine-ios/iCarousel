@@ -60,4 +60,73 @@
     return @[profileMenu, searchMenu, homeMenu, favMenu, fileMenu, photoMenu, musicMenu, docMenu, logoutMenu];
 }
 
++ (NSString *) iconNameByContentType:(ContentType) contentType {
+    NSString *iconName = @"document_icon.png";
+    switch (contentType) {
+        case ContentTypeMusic:
+            iconName = @"green_music_icon.png";
+            break;
+        case ContentTypeFolder:
+            iconName = @"folder_icon.png";
+            break;
+        default:
+            break;
+    }
+    return iconName;
+}
+
++ (NSString *) buttonImgNameByAddType:(AddType) addType {
+    NSString *iconName = @"blue_add_photo_icon.png";
+    switch (addType) {
+        case AddTypeMusic:
+            iconName = @"blue_add_music_icon.png";
+            break;
+        case AddTypeFolder:
+            iconName = @"blue_add_new_folder_icon.png";
+            break;
+        case AddTypePhoto:
+            iconName = @"blue_add_photo_icon.png";
+            break;
+        case AddTypeCamera:
+            iconName = @"blue_add_camera_shot_icon.png";
+            break;
+        default:
+            break;
+    }
+    return iconName;
+}
+
++ (NSString *) buttonTitleByAddType:(AddType) addType {
+    NSString *title = @"";
+    switch (addType) {
+        case AddTypeMusic:
+            title = @"Add Music";
+            break;
+        case AddTypeFolder:
+            title = @"New Folder";
+            break;
+        case AddTypePhoto:
+            title = @"Add Photo";
+            break;
+        case AddTypeCamera:
+            title = @"Use Camera";
+            break;
+        default:
+            break;
+    }
+    return title;
+}
+
++ (NSString *) nakedFileFolderName:(NSString *) fileFolderName {
+    if([fileFolderName hasSuffix:@"/"]) {
+        fileFolderName = [fileFolderName substringToIndex:[fileFolderName length]-1];
+    }
+    NSArray *components = [fileFolderName componentsSeparatedByString:@"/"];
+    if([components count] == 0) {
+        return fileFolderName;
+    } else {
+        return [components objectAtIndex:[components count]-1];
+    }
+}
+
 @end

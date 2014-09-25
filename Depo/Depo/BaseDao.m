@@ -38,6 +38,7 @@
 
 - (void) sendPostRequest:(ASIFormDataRequest *) request {
     [request setRequestMethod:@"POST"];
+    request.timeOutSeconds = 30;
     [request addRequestHeader:@"Accept" value:@"application/json"];
     [request addRequestHeader:@"Content-Type" value:@"application/json; encoding=utf-8"];
     if(APPDELEGATE.session.authToken) {
@@ -48,6 +49,7 @@
 
 - (void) sendGetRequest:(ASIFormDataRequest *) request {
     [request setRequestMethod:@"GET"];
+    request.timeOutSeconds = 30;
     [request addRequestHeader:@"Accept" value:@"application/json"];
     [request addRequestHeader:@"Content-Type" value:@"application/json; encoding=utf-8"];
     if(APPDELEGATE.session.authToken) {
@@ -105,6 +107,27 @@
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
     [df setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS"];
     return [df dateFromString:rawStr];
+}
+
+- (NSString *) enrichFileFolderName:(NSString *) fileFolderName {
+    if(![fileFolderName hasSuffix:@"/"]) {
+        return [NSString stringWithFormat:@"%@/", fileFolderName];
+    }
+    return fileFolderName;
+}
+
+- (ContentType) contentTypeByRawValue:(MetaFile *) metaFile {
+    if(metaFile.folder) {
+        return ContentTypeFolder;
+    }
+    if([metaFile.rawContentType isEqualToString:CONTENT_TYPE_JPEG_VALUE] || [metaFile.rawContentType isEqualToString:CONTENT_TYPE_JPG_VALUE] || [metaFile.rawContentType isEqualToString:CONTENT_TYPE_PNG_VALUE]) {
+        return ContentTypePhoto;
+    } else if([metaFile.rawContentType isEqualToString:CONTENT_TYPE_MUSIC_VALUE]) {
+            return ContentTypeMusic;
+    } else if([metaFile.rawContentType isEqualToString:CONTENT_TYPE_PDF_VALUE] || [metaFile.rawContentType isEqualToString:CONTENT_TYPE_DOC_VALUE]) {
+        return ContentTypeDoc;
+    }
+    return ContentTypeOther;
 }
 
 - (void) shouldReturnSuccess {

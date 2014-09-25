@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AppConstants.h"
 
 @interface MetaFile : NSObject
 
@@ -14,13 +15,15 @@
 @property (nonatomic, strong) NSString *subDir;
 @property (nonatomic, strong) NSString *parent;
 @property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *visibleName;
 @property (nonatomic) long bytes;
 @property (nonatomic) BOOL folder;
 @property (nonatomic) BOOL hidden;
 @property (nonatomic, strong) NSString *path;
 @property (nonatomic, strong) NSString *url;
 @property (nonatomic, strong) NSString *tempDownloadUrl;
-@property (nonatomic, strong) NSString *contentType;
+@property (nonatomic, strong) NSString *rawContentType;
+@property (nonatomic) ContentType contentType;
 @property (nonatomic, strong) NSDate *lastModified;
 
 @end
