@@ -10,7 +10,7 @@
 #import "AbstractMenuCell.h"
 #import "SearchTextField.h"
 
-@interface MenuSearchCell : AbstractMenuCell {
+@interface MenuSearchCell : AbstractMenuCell <UITextFieldDelegate> {
     SearchTextField *textField;
 }
 

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MyNavigationController.h"
 #import "MBProgressHUD.h"
+#import "MoreMenuView.h"
 
 @protocol MyViewDelegate <NSObject>
 - (void) shouldToggleMenu;
@@ -25,6 +26,7 @@
 @property (nonatomic, strong) MBProgressHUD *progress;
 @property (nonatomic, strong) NSArray *refPageList;
 @property (nonatomic, strong) NSString *searchQueryRef;
+@property (nonatomic, strong) MoreMenuView *moreMenuView;
 @property (nonatomic) int navBarHeight;
 @property (nonatomic) int topIndex;
 @property (nonatomic) int bottomIndex;
@@ -44,6 +46,7 @@
 - (void) resetTableUpdateCounter;
 - (void) resetPageOffset;
 - (void) triggerMenuLoginWithinPage;
-- (void) presentAddButtonWithDelegate:(id) delegate;
+- (void) presentMoreMenuWithList:(NSArray *) itemList;
+- (void) dismissMoreMenu;
 
 @end

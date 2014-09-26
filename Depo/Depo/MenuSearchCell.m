@@ -16,9 +16,19 @@
         self.metaData = _metaData;
         
         textField = [[SearchTextField alloc] initWithFrame:CGRectMake(12, 5, 252, 50)];
+        textField.delegate = self;
         [self addSubview:textField];
     }
     return self;
+}
+
+- (void) textFieldDidEndEditing:(UITextField *) _textField {
+    [textField resignFirstResponder];
+}
+
+- (BOOL) textFieldShouldReturn:(UITextField *) _textField {
+    [textField resignFirstResponder];
+    return YES;
 }
 
 - (void)awakeFromNib

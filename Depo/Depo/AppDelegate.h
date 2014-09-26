@@ -15,6 +15,7 @@
 @class BaseViewController;
 @class MyNavigationController;
 @class MyViewController;
+@class MapUtil;
 
 #define APPDELEGATE ((AppDelegate *)[[UIApplication sharedApplication] delegate])
 
@@ -24,6 +25,7 @@
 @property (strong, nonatomic) AppSession *session;
 @property (strong, nonatomic) BaseViewController *base;
 @property (strong, nonatomic) TokenManager *tokenManager;
+@property (strong, nonatomic) MapUtil *mapUtil;
 
 - (void) showCustomAlert:(CustomAlertView *) alertView;
 - (void) showCustomConfirm:(CustomConfirmView *) alertView;

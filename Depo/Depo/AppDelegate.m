@@ -13,12 +13,14 @@
 #import "MyNavigationController.h"
 #import "BaseViewController.h"
 #import "HomeController.h"
+#import "MapUtil.h"
 
 @implementation AppDelegate
 
 @synthesize session;
 @synthesize base;
 @synthesize tokenManager;
+@synthesize mapUtil;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -27,6 +29,8 @@
         [application setStatusBarStyle:UIStatusBarStyleLightContent];
     }
     session = [[AppSession alloc] init];
+    
+    mapUtil = [[MapUtil alloc] init];
     
     tokenManager = [[TokenManager alloc] init];
     tokenManager.delegate = self;

@@ -256,6 +256,10 @@
     [scroll bringSubviewToFront:self.addButton];
 }
 
+- (void) dismissAddButton {
+    self.addButton.hidden = YES;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 }

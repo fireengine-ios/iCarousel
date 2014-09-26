@@ -148,6 +148,13 @@
 		051E1EB119CB20FC00FD1E03 /* MetaMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 051E1EB019CB20FC00FD1E03 /* MetaMenu.m */; };
 		051E1EB419CB2D1300FD1E03 /* AppSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 051E1EB319CB2D1300FD1E03 /* AppSession.m */; };
 		051E1EB719CB2DAC00FD1E03 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 051E1EB619CB2DAC00FD1E03 /* User.m */; };
+		0526444519D5445700B63759 /* FloatingMapping.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0526444419D5445700B63759 /* FloatingMapping.plist */; };
+		0526444819D546BB00B63759 /* MapUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0526444719D546BB00B63759 /* MapUtil.m */; };
+		0526444B19D5578C00B63759 /* FolderEmptyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0526444A19D5578C00B63759 /* FolderEmptyCell.m */; };
+		0526444E19D5625E00B63759 /* MoreMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0526444D19D5625E00B63759 /* MoreMenuView.m */; };
+		0526445119D5627900B63759 /* MoreMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0526445019D5627900B63759 /* MoreMenuCell.m */; };
+		0526445419D5868300B63759 /* menu_drop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0526445219D5868300B63759 /* menu_drop@2x.png */; };
+		0526445519D5868300B63759 /* menu_drop.png in Resources */ = {isa = PBXBuildFile; fileRef = 0526445319D5868300B63759 /* menu_drop.png */; };
 		05440ADC19D4363D009803D7 /* green_music_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 05440ADA19D4363D009803D7 /* green_music_icon.png */; };
 		05440ADD19D4363D009803D7 /* green_music_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05440ADB19D4363D009803D7 /* green_music_icon@2x.png */; };
 		05440AE019D4445D009803D7 /* FloatingAddButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 05440ADF19D4445D009803D7 /* FloatingAddButton.m */; };
@@ -429,6 +436,17 @@
 		051E1EB319CB2D1300FD1E03 /* AppSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppSession.m; sourceTree = "<group>"; };
 		051E1EB519CB2DAC00FD1E03 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		051E1EB619CB2DAC00FD1E03 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		0526444419D5445700B63759 /* FloatingMapping.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = FloatingMapping.plist; sourceTree = "<group>"; };
+		0526444619D546BB00B63759 /* MapUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapUtil.h; sourceTree = "<group>"; };
+		0526444719D546BB00B63759 /* MapUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapUtil.m; sourceTree = "<group>"; };
+		0526444919D5578C00B63759 /* FolderEmptyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderEmptyCell.h; sourceTree = "<group>"; };
+		0526444A19D5578C00B63759 /* FolderEmptyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderEmptyCell.m; sourceTree = "<group>"; };
+		0526444C19D5625E00B63759 /* MoreMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreMenuView.h; sourceTree = "<group>"; };
+		0526444D19D5625E00B63759 /* MoreMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreMenuView.m; sourceTree = "<group>"; };
+		0526444F19D5627900B63759 /* MoreMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreMenuCell.h; sourceTree = "<group>"; };
+		0526445019D5627900B63759 /* MoreMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreMenuCell.m; sourceTree = "<group>"; };
+		0526445219D5868300B63759 /* menu_drop@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_drop@2x.png"; sourceTree = "<group>"; };
+		0526445319D5868300B63759 /* menu_drop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_drop.png; sourceTree = "<group>"; };
 		05440ADA19D4363D009803D7 /* green_music_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green_music_icon.png; sourceTree = "<group>"; };
 		05440ADB19D4363D009803D7 /* green_music_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green_music_icon@2x.png"; sourceTree = "<group>"; };
 		05440ADE19D4445D009803D7 /* FloatingAddButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FloatingAddButton.h; sourceTree = "<group>"; };
@@ -601,6 +619,7 @@
 		051E1DFD19CAC2F900FD1E03 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0526444319D5441C00B63759 /* properties */,
 				0589065A19CC51E100A9E517 /* fonts */,
 				0589065B19CC51EC00A9E517 /* TurkcellSaturaReg.ttf */,
 				0589065C19CC51EC00A9E517 /* TurkcellSaturaMedIta.ttf */,
@@ -669,6 +688,8 @@
 				051E1E2C19CAC55000FD1E03 /* textfield */,
 				051E1E2B19CAC54B00FD1E03 /* button */,
 				051E1E2A19CAC54500FD1E03 /* cell */,
+				0526444C19D5625E00B63759 /* MoreMenuView.h */,
+				0526444D19D5625E00B63759 /* MoreMenuView.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -683,6 +704,8 @@
 				051E1E3119CAC57400FD1E03 /* Util.m */,
 				056AC8FC19D15EA200AC96C3 /* CacheUtil.h */,
 				056AC8FD19D15EA200AC96C3 /* CacheUtil.m */,
+				0526444619D546BB00B63759 /* MapUtil.h */,
+				0526444719D546BB00B63759 /* MapUtil.m */,
 			);
 			name = util;
 			sourceTree = "<group>";
@@ -738,6 +761,10 @@
 				051CB39D19D2E41600E5FC88 /* ImageCell.m */,
 				051CB39F19D2E42300E5FC88 /* DocCell.h */,
 				051CB3A019D2E42300E5FC88 /* DocCell.m */,
+				0526444919D5578C00B63759 /* FolderEmptyCell.h */,
+				0526444A19D5578C00B63759 /* FolderEmptyCell.m */,
+				0526444F19D5627900B63759 /* MoreMenuCell.h */,
+				0526445019D5627900B63759 /* MoreMenuCell.m */,
 			);
 			name = cell;
 			sourceTree = "<group>";
@@ -849,6 +876,14 @@
 				051E1E7E19CAC92700FD1E03 /* ASIProgressDelegate.h */,
 			);
 			name = "SBJSON+ASI";
+			sourceTree = "<group>";
+		};
+		0526444319D5441C00B63759 /* properties */ = {
+			isa = PBXGroup;
+			children = (
+				0526444419D5445700B63759 /* FloatingMapping.plist */,
+			);
+			name = properties;
 			sourceTree = "<group>";
 		};
 		056AC8F819D15DAE00AC96C3 /* manager */ = {
@@ -967,6 +1002,8 @@
 				0589061319CC226D00A9E517 /* profile_bg.png */,
 				0589061419CC226D00A9E517 /* profile_bg@2x.png */,
 				0589061519CC226D00A9E517 /* dark_blue_bg.png */,
+				0526445219D5868300B63759 /* menu_drop@2x.png */,
+				0526445319D5868300B63759 /* menu_drop.png */,
 				0589061619CC226D00A9E517 /* nav_favourite_icon.png */,
 				0589061719CC226D00A9E517 /* nav_favourite_icon@2x.png */,
 				0589061819CC226D00A9E517 /* blue_bg.png */,
@@ -1065,6 +1102,7 @@
 				051CB41119D2F71200E5FC88 /* check_unchecked_icon@2x.png in Resources */,
 				051CB40B19D2F71200E5FC88 /* action_bar_preloader@2x.png in Resources */,
 				051CB41719D2F71200E5FC88 /* action_menu_overlay.png in Resources */,
+				0526444519D5445700B63759 /* FloatingMapping.plist in Resources */,
 				051CB3B419D2F6F700E5FC88 /* passive_dots_icon.png in Resources */,
 				0589066519CC524900A9E517 /* TurkcellSaturaMed.ttf in Resources */,
 				051CB41919D2F71200E5FC88 /* blue_add_camera_shot_icon@2x.png in Resources */,
@@ -1094,6 +1132,7 @@
 				0589062B19CC226D00A9E517 /* profile_bg.png in Resources */,
 				051CB3FA19D2F71200E5FC88 /* blue_add_new_folder_icon.png in Resources */,
 				051CB40819D2F71200E5FC88 /* passive_dots_icon@2x.png in Resources */,
+				0526445519D5868300B63759 /* menu_drop.png in Resources */,
 				051E1E0119CAC2F900FD1E03 /* InfoPlist.strings in Resources */,
 				051CB3EE19D2F71200E5FC88 /* nav_delete_icon.png in Resources */,
 				0589062F19CC226D00A9E517 /* nav_favourite_icon@2x.png in Resources */,
@@ -1107,6 +1146,7 @@
 				0589062719CC226D00A9E517 /* pause_icon.png in Resources */,
 				051412A019D46393000EAE63 /* Default.png in Resources */,
 				051CB3FB19D2F71200E5FC88 /* blue_add_music_icon.png in Resources */,
+				0526445419D5868300B63759 /* menu_drop@2x.png in Resources */,
 				0589062819CC226D00A9E517 /* pause_icon@2x.png in Resources */,
 				0589064C19CC2B9500A9E517 /* yellow_file_icon.png in Resources */,
 				051CB41C19D2F71200E5FC88 /* blue_add_new_folder_icon@2x.png in Resources */,
@@ -1196,6 +1236,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0557C73819D1C905005E9F6B /* MetaFile.m in Sources */,
+				0526444819D546BB00B63759 /* MapUtil.m in Sources */,
 				051E1E5819CAC90700FD1E03 /* AFURLConnectionOperation.m in Sources */,
 				051E1E8619CAC92700FD1E03 /* ASIAuthenticationDialog.m in Sources */,
 				051E1E8519CAC92700FD1E03 /* SBJsonWriter.m in Sources */,
@@ -1227,6 +1268,7 @@
 				051412A819D46A84000EAE63 /* AddTypeButton.m in Sources */,
 				051E1E8319CAC92700FD1E03 /* SBJsonBase.m in Sources */,
 				057DF50819D038080005A389 /* RequestTokenDao.m in Sources */,
+				0526445119D5627900B63759 /* MoreMenuCell.m in Sources */,
 				051E1E3619CAC7D400FD1E03 /* MBProgressHUD.m in Sources */,
 				051E1E8D19CAC92700FD1E03 /* ASINetworkQueue.m in Sources */,
 				051DE35D19CC128600F27C85 /* MyViewController.m in Sources */,
@@ -1248,9 +1290,11 @@
 				051E1E0319CAC2F900FD1E03 /* main.m in Sources */,
 				051DE36C19CC130A00F27C85 /* LoginTextfield.m in Sources */,
 				051CB39819D2E3FF00E5FC88 /* FolderCell.m in Sources */,
+				0526444E19D5625E00B63759 /* MoreMenuView.m in Sources */,
 				051E1E3219CAC57400FD1E03 /* Util.m in Sources */,
 				051DE35519CC06F000F27C85 /* AbstractMenuCell.m in Sources */,
 				051E1E8C19CAC92700FD1E03 /* ASIInputStream.m in Sources */,
+				0526444B19D5578C00B63759 /* FolderEmptyCell.m in Sources */,
 				051E1EB719CB2DAC00FD1E03 /* User.m in Sources */,
 				051E1E5219CAC90700FD1E03 /* AFHTTPClient.m in Sources */,
 				051DE36719CC12FD00F27C85 /* CustomButton.m in Sources */,
@@ -1384,6 +1428,7 @@
 				INFOPLIST_FILE = "Depo/Depo-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "f3d07236-b9ab-4c3e-8cd7-a40a0591e27e";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1398,6 +1443,7 @@
 				INFOPLIST_FILE = "Depo/Depo-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "f3d07236-b9ab-4c3e-8cd7-a40a0591e27e";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

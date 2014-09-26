@@ -14,6 +14,7 @@
 #import "CustomAlertView.h"
 #import "CustomConfirmView.h"
 #import "BaseViewController.h"
+#import "MapUtil.h"
 
 @interface MyViewController ()
 
@@ -27,6 +28,7 @@
 @synthesize navBarHeight;
 @synthesize topIndex;
 @synthesize bottomIndex;
+@synthesize moreMenuView;
 @synthesize refPageList;
 @synthesize resetResultTable;
 @synthesize pageOffset;
@@ -47,7 +49,7 @@
         }
 
         if(IS_BELOW_7) {
-            topIndex = 44;
+            topIndex = 0;
             bottomIndex = 44;
         } else {
             topIndex = 64;
@@ -128,8 +130,34 @@
     [myDelegate shouldTriggerLogin];
 }
 
-- (void) presentAddButtonWithDelegate:(id) delegate {
-    [APPDELEGATE.base presentAddButtonWithDelegate:delegate];
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    NSArray *addTypesForController = [APPDELEGATE.mapUtil readAddTypesByController:NSStringFromClass(self.class)];
+    if(addTypesForController != nil) {
+        [APPDELEGATE.base presentAddButtonWithDelegate:self];
+    } else {
+        [APPDELEGATE.base dismissAddButton];
+    }
+}
+
+- (void) viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+}
+
+- (void) presentMoreMenuWithList:(NSArray *) itemList {
+    if(moreMenuView) {
+        [moreMenuView removeFromSuperview];
+    }
+
+    moreMenuView = [[MoreMenuView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex) withList:itemList];
+    [self.view addSubview:moreMenuView];
+    [self.view bringSubviewToFront:moreMenuView];
+}
+
+- (void) dismissMoreMenu {
+    if(moreMenuView) {
+        [moreMenuView removeFromSuperview];
+    }
 }
 
 @end

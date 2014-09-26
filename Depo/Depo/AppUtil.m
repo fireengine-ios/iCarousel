@@ -129,4 +129,58 @@
     }
 }
 
++ (NSString *) moreMenuRowImgNameByMoreMenuType:(MoreMenuType) menuType {
+    NSString *iconName = @"blue_add_photo_icon.png";
+    switch (menuType) {
+        case MoreMenuTypeSort:
+            iconName = @"nav_sort_icon.png";
+            break;
+        case MoreMenuTypeSelect:
+            iconName = @"nav_select_icon.png";
+            break;
+        case MoreMenuTypeDetail:
+            iconName = @"nav_detail_icon.png";
+            break;
+        case MoreMenuTypeShare:
+            iconName = @"nav_share_icon.png";
+            break;
+        case MoreMenuTypeFav:
+            iconName = @"nav_favourite_icon.png";
+            break;
+        case MoreMenuTypeDelete:
+            iconName = @"nav_delete_icon.png";
+            break;
+        default:
+            break;
+    }
+    return iconName;
+}
+
++ (NSString *) moreMenuRowTitleByMoreMenuType:(MoreMenuType) menuType {
+    NSString *title = @"";
+    switch (menuType) {
+        case MoreMenuTypeSort:
+            title = @"Sort";
+            break;
+        case MoreMenuTypeSelect:
+            title = @"Select";
+            break;
+        case MoreMenuTypeDetail:
+            title = @"Folder Details";
+            break;
+        case MoreMenuTypeShare:
+            title = @"Share Folder";
+            break;
+        case MoreMenuTypeFav:
+            title = @"Favourite Folder";
+            break;
+        case MoreMenuTypeDelete:
+            title = @"Delete Folder";
+            break;
+        default:
+            break;
+    }
+    return title;
+}
+
 @end

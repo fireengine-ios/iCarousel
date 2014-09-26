@@ -95,6 +95,15 @@ typedef enum {
 	AddTypeOther
 } AddType;
 
+typedef enum {
+	MoreMenuTypeSort = 0,
+	MoreMenuTypeSelect,
+	MoreMenuTypeDetail,
+	MoreMenuTypeShare,
+	MoreMenuTypeFav,
+    MoreMenuTypeDelete
+} MoreMenuType;
+
 @interface AppConstants : NSObject
 
 @end

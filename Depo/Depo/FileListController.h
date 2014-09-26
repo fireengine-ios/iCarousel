@@ -16,6 +16,7 @@
 
 @property (nonatomic, strong) MetaFile *folder;
 @property (nonatomic, strong) UITableView *fileTable;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, strong) NSArray *fileList;
 
 - (id)initForFolder:(MetaFile *) _folder;

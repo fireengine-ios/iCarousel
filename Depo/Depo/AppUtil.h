@@ -16,5 +16,7 @@
 + (NSString *) nakedFileFolderName:(NSString *) fileFolderName;
 + (NSString *) buttonImgNameByAddType:(AddType) addType;
 + (NSString *) buttonTitleByAddType:(AddType) addType;
++ (NSString *) moreMenuRowImgNameByMoreMenuType:(MoreMenuType) menuType;
++ (NSString *) moreMenuRowTitleByMoreMenuType:(MoreMenuType) menuType;
 
 @end

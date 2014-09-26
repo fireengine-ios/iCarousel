@@ -30,8 +30,8 @@
 }
 
 - (CGRect)textRectForBounds:(CGRect)bounds {
-    return CGRectMake(bounds.origin.x + 20, bounds.origin.y + 20,
-                      bounds.size.width - 40, bounds.size.height - 40);
+    return CGRectMake(bounds.origin.x + 20, bounds.origin.y + 15,
+                      bounds.size.width - 40, bounds.size.height - 30);
 }
 - (CGRect)editingRectForBounds:(CGRect)bounds {
     return [self textRectForBounds:bounds];
