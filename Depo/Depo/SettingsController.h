@@ -7,7 +7,14 @@
 //
 
 #import "MyViewController.h"
+#import "TitleCell.h"
 
-@interface SettingsController : MyViewController
+@interface SettingsController : MyViewController <UITableViewDataSource, UITableViewDelegate> {
+    UITableView *pageContentTable;
+    int topIndex;
+    UIView *imageOptionsArea;
+    UIView *darkArea;
+    UIView *popupContainer;
+}
 
 @end
