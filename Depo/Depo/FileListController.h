@@ -9,9 +9,17 @@
 #import "MyViewController.h"
 #import "FileListDao.h"
 #import "MetaFile.h"
+#import "AddFolderDao.h"
+#import "UploadManager.h"
 
 @interface FileListController : MyViewController <UITableViewDelegate, UITableViewDataSource> {
     FileListDao *fileListDao;
+    FileListDao *loadMoreDao;
+    AddFolderDao *addFolderDao;
+    UploadManager *uploadManager;
+
+    int listOffset;
+    BOOL isLoading;
 }
 
 @property (nonatomic, strong) MetaFile *folder;

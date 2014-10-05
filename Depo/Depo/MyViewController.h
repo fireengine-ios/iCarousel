@@ -10,6 +10,9 @@
 #import "MyNavigationController.h"
 #import "MBProgressHUD.h"
 #import "MoreMenuView.h"
+#import "ProcessFooterView.h"
+#import "NewFolderModalController.h"
+#import "CameraCaptureModalController.h"
 
 @protocol MyViewDelegate <NSObject>
 - (void) shouldToggleMenu;
@@ -17,7 +20,7 @@
 - (void) shouldTriggerLogin;
 @end
 
-@interface MyViewController : UIViewController {
+@interface MyViewController : UIViewController <NewFolderDelegate, CameraCapturaModalDelegate> {
     NSMutableDictionary *filterDictionary;
 }
 
@@ -27,6 +30,7 @@
 @property (nonatomic, strong) NSArray *refPageList;
 @property (nonatomic, strong) NSString *searchQueryRef;
 @property (nonatomic, strong) MoreMenuView *moreMenuView;
+@property (nonatomic, strong) ProcessFooterView *processView;
 @property (nonatomic) int navBarHeight;
 @property (nonatomic) int topIndex;
 @property (nonatomic) int bottomIndex;
@@ -48,5 +52,9 @@
 - (void) triggerMenuLoginWithinPage;
 - (void) presentMoreMenuWithList:(NSArray *) itemList;
 - (void) dismissMoreMenu;
+- (void) pushProgressViewWithProcessMessage:(NSString *) progressMsg andSuccessMessage:(NSString *) successMsg andFailMessage:(NSString *) failMsg;
+- (void) proceedSuccessForProgressView;
+- (void) proceedFailureForProgressView;
+- (void) popProgressView;
 
 @end

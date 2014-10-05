@@ -18,42 +18,42 @@
     profileMenu.selectedIconName = @"";
     
     MetaMenu *searchMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeSearch];
-    searchMenu.title = @"Search";
+    searchMenu.title = NSLocalizedString(@"MenuSearch", @"");
     searchMenu.iconName = @"";
     searchMenu.selectedIconName = @"";
     
     MetaMenu *homeMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeHome];
-    homeMenu.title = @"Home";
+    homeMenu.title = NSLocalizedString(@"MenuHome", @"");
     homeMenu.iconName = @"home_icon.png";
     homeMenu.selectedIconName = @"yellow_home_icon.png";
     
     MetaMenu *favMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeFav];
-    favMenu.title = @"Favourites";
+    favMenu.title = NSLocalizedString(@"MenuFav", @"");
     favMenu.iconName = @"fav_icon.png";
     favMenu.selectedIconName = @"yellow_fav_icon.png";
     
     MetaMenu *fileMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeFiles];
-    fileMenu.title = @"All Files";
+    fileMenu.title = NSLocalizedString(@"MenuFiles", @"");
     fileMenu.iconName = @"file_icon.png";
     fileMenu.selectedIconName = @"yellow_file_icon.png";
     
     MetaMenu *photoMenu = [[MetaMenu alloc] initWithMenuType:MenuTypePhoto];
-    photoMenu.title = @"Photos & Videos";
+    photoMenu.title = NSLocalizedString(@"MenuPhoto", @"");
     photoMenu.iconName = @"photos_icon.png";
     photoMenu.selectedIconName = @"yellow_photos_icon.png";
     
     MetaMenu *musicMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeMusic];
-    musicMenu.title = @"Music";
+    musicMenu.title = NSLocalizedString(@"MenuMusic", @"");
     musicMenu.iconName = @"music_icon.png";
     musicMenu.selectedIconName = @"yellow_music_icon.png";
     
     MetaMenu *docMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeDoc];
-    docMenu.title = @"Documents";
+    docMenu.title = NSLocalizedString(@"MenuDoc", @"");
     docMenu.iconName = @"documents_icon.png";
     docMenu.selectedIconName = @"yellow_documents_icon.png";
     
     MetaMenu *logoutMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeLogout];
-    logoutMenu.title = @"Logout";
+    logoutMenu.title = NSLocalizedString(@"MenuLogout", @"");
     logoutMenu.iconName = @"logout_icon.png";
     logoutMenu.selectedIconName = @"yellow_logout_icon.png";
 
@@ -100,16 +100,16 @@
     NSString *title = @"";
     switch (addType) {
         case AddTypeMusic:
-            title = @"Add Music";
+            title = NSLocalizedString(@"AddTypeMusicTitle", @"");
             break;
         case AddTypeFolder:
-            title = @"New Folder";
+            title = NSLocalizedString(@"AddTypeFolderTitle", @"");
             break;
         case AddTypePhoto:
-            title = @"Add Photo";
+            title = NSLocalizedString(@"AddTypePhotoTitle", @"");
             break;
         case AddTypeCamera:
-            title = @"Use Camera";
+            title = NSLocalizedString(@"AddTypeCameraTitle", @"");
             break;
         default:
             break;
@@ -127,6 +127,16 @@
     } else {
         return [components objectAtIndex:[components count]-1];
     }
+}
+
++ (NSString *) enrichFileFolderName:(NSString *) fileFolderName {
+    if(![fileFolderName hasSuffix:@"/"]) {
+        fileFolderName = [NSString stringWithFormat:@"%@/", fileFolderName];
+    }
+    if(![fileFolderName hasPrefix:@"/"]) {
+        fileFolderName = [NSString stringWithFormat:@"/%@", fileFolderName];
+    }
+    return fileFolderName;
 }
 
 + (NSString *) moreMenuRowImgNameByMoreMenuType:(MoreMenuType) menuType {
@@ -160,27 +170,43 @@
     NSString *title = @"";
     switch (menuType) {
         case MoreMenuTypeSort:
-            title = @"Sort";
+            title = NSLocalizedString(@"MoreMenuSortTitle", @"");
             break;
         case MoreMenuTypeSelect:
-            title = @"Select";
+            title = NSLocalizedString(@"MoreMenuSelectTitle", @"");
             break;
         case MoreMenuTypeDetail:
-            title = @"Folder Details";
+            title = NSLocalizedString(@"MoreMenuDetailTitle", @"");
             break;
         case MoreMenuTypeShare:
-            title = @"Share Folder";
+            title = NSLocalizedString(@"MoreMenuShareTitle", @"");
             break;
         case MoreMenuTypeFav:
-            title = @"Favourite Folder";
+            title = NSLocalizedString(@"MoreMenuFavTitle", @"");
             break;
         case MoreMenuTypeDelete:
-            title = @"Delete Folder";
+            title = NSLocalizedString(@"MoreMenuDeleteTitle", @"");
             break;
         default:
             break;
     }
     return title;
+}
+
++ (BOOL) isMetaFileImage:(MetaFile *) file {
+    return ([file.rawContentType isEqualToString:CONTENT_TYPE_JPEG_VALUE] || [file.rawContentType isEqualToString:CONTENT_TYPE_JPG_VALUE] || [file.rawContentType isEqualToString:CONTENT_TYPE_PNG_VALUE]);
+}
+
++ (BOOL) isMetaFileVideo:(MetaFile *) file {
+    return [file.rawContentType isEqualToString:CONTENT_TYPE_VIDEO_VALUE];
+}
+
++ (BOOL) isMetaFileMusic:(MetaFile *) file {
+    return ([file.rawContentType isEqualToString:CONTENT_TYPE_AUDIO_MP3_VALUE] || [file.rawContentType isEqualToString:CONTENT_TYPE_AUDIO_MPEG_VALUE]);
+}
+
++ (BOOL) isMetaFileDoc:(MetaFile *) file {
+    return ([file.rawContentType isEqualToString:CONTENT_TYPE_PDF_VALUE] || [file.rawContentType isEqualToString:CONTENT_TYPE_DOC_VALUE] || [file.rawContentType isEqualToString:CONTENT_TYPE_TXT_VALUE] || [file.rawContentType isEqualToString:CONTENT_TYPE_HTML_VALUE]);
 }
 
 @end

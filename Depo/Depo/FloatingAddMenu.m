@@ -10,6 +10,7 @@
 
 @implementation FloatingAddMenu
 
+@synthesize delegate;
 @synthesize folderButton;
 @synthesize musicButton;
 @synthesize photoButton;
@@ -31,18 +32,22 @@
         
         folderButton = [[AddTypeButton alloc] initWithFrame:CGRectMake(0, 0, 100, buttonHeight) withAddType:AddTypeFolder];
         folderButton.center = initialPoint;
+        [folderButton addTarget:self action:@selector(triggerAddFolder) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:folderButton];
 
         musicButton = [[AddTypeButton alloc] initWithFrame:CGRectMake(0, 0, 100, buttonHeight) withAddType:AddTypeMusic];
         musicButton.center = initialPoint;
+        [musicButton addTarget:self action:@selector(triggerAddMusic) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:musicButton];
 
         photoButton = [[AddTypeButton alloc] initWithFrame:CGRectMake(0, 0, 100, buttonHeight) withAddType:AddTypePhoto];
         photoButton.center = initialPoint;
+        [photoButton addTarget:self action:@selector(triggerAddPhoto) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:photoButton];
 
         cameraButton = [[AddTypeButton alloc] initWithFrame:CGRectMake(0, 0, 100, buttonHeight) withAddType:AddTypeCamera];
         cameraButton.center = initialPoint;
+        [cameraButton addTarget:self action:@selector(triggerCamera) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:cameraButton];
     }
     return self;
@@ -83,6 +88,22 @@
                      }
                      completion:^(BOOL finished) {
                      }];
+}
+
+- (void) triggerAddFolder {
+    [delegate floatingMenuDidTriggerAddFolder];
+}
+
+- (void) triggerAddMusic {
+    [delegate floatingMenuDidTriggerAddMusic];
+}
+
+- (void) triggerAddPhoto {
+    [delegate floatingMenuDidTriggerAddPhoto];
+}
+
+- (void) triggerCamera {
+    [delegate floatingMenuDidTriggerCamera];
 }
 
 /*

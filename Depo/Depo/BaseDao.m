@@ -42,7 +42,7 @@
     [request addRequestHeader:@"Accept" value:@"application/json"];
     [request addRequestHeader:@"Content-Type" value:@"application/json; encoding=utf-8"];
     if(APPDELEGATE.session.authToken) {
-        [request addRequestHeader:APPDELEGATE.session.authToken value:@"X-Auth-Token"];
+        [request addRequestHeader:@"X-Auth-Token" value:APPDELEGATE.session.authToken];
     }
     [request startAsynchronous];
 }
@@ -52,6 +52,15 @@
     request.timeOutSeconds = 30;
     [request addRequestHeader:@"Accept" value:@"application/json"];
     [request addRequestHeader:@"Content-Type" value:@"application/json; encoding=utf-8"];
+    if(APPDELEGATE.session.authToken) {
+        [request addRequestHeader:@"X-Auth-Token" value:APPDELEGATE.session.authToken];
+    }
+    [request startAsynchronous];
+}
+
+- (void) sendPutRequest:(ASIFormDataRequest *) request {
+    [request setRequestMethod:@"PUT"];
+    request.timeOutSeconds = 90;
     if(APPDELEGATE.session.authToken) {
         [request addRequestHeader:@"X-Auth-Token" value:APPDELEGATE.session.authToken];
     }
@@ -122,9 +131,11 @@
     }
     if([metaFile.rawContentType isEqualToString:CONTENT_TYPE_JPEG_VALUE] || [metaFile.rawContentType isEqualToString:CONTENT_TYPE_JPG_VALUE] || [metaFile.rawContentType isEqualToString:CONTENT_TYPE_PNG_VALUE]) {
         return ContentTypePhoto;
-    } else if([metaFile.rawContentType isEqualToString:CONTENT_TYPE_MUSIC_VALUE]) {
+    } else if([metaFile.rawContentType isEqualToString:CONTENT_TYPE_AUDIO_MP3_VALUE] || [metaFile.rawContentType isEqualToString:CONTENT_TYPE_AUDIO_MPEG_VALUE]) {
             return ContentTypeMusic;
-    } else if([metaFile.rawContentType isEqualToString:CONTENT_TYPE_PDF_VALUE] || [metaFile.rawContentType isEqualToString:CONTENT_TYPE_DOC_VALUE]) {
+    } else if([metaFile.rawContentType isEqualToString:CONTENT_TYPE_VIDEO_VALUE]) {
+        return ContentTypeVideo;
+    } else if([metaFile.rawContentType isEqualToString:CONTENT_TYPE_PDF_VALUE] || [metaFile.rawContentType isEqualToString:CONTENT_TYPE_DOC_VALUE] || [metaFile.rawContentType isEqualToString:CONTENT_TYPE_TXT_VALUE] || [metaFile.rawContentType isEqualToString:CONTENT_TYPE_HTML_VALUE]) {
         return ContentTypeDoc;
     }
     return ContentTypeOther;

@@ -28,7 +28,7 @@
         CustomLabel *nameLabel = [[CustomLabel alloc] initWithFrame:nameFieldRect withFont:nameFont withColor:[self readNameColor] withText:self.fileFolder.visibleName];
         [self addSubview:nameLabel];
 
-        CustomLabel *detailLabel = [[CustomLabel alloc] initWithFrame:detailFieldRect withFont:detailFont withColor:[self readDetailColor] withText:[NSString stringWithFormat:@"%d item", 1]];
+        CustomLabel *detailLabel = [[CustomLabel alloc] initWithFrame:detailFieldRect withFont:detailFont withColor:[self readDetailColor] withText:[NSString stringWithFormat:NSLocalizedString(@"FolderSubTitle", @""), 1]];
         [self addSubview:detailLabel];
         
         UIView *progressSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 67, self.frame.size.width, 1)];

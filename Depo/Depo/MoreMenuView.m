@@ -8,6 +8,7 @@
 
 #import "MoreMenuView.h"
 #import "MoreMenuCell.h"
+#import "Util.h"
 
 @implementation MoreMenuView
 
@@ -24,6 +25,12 @@
         bgView.alpha = 0.8;
         [self addSubview:bgView];
 
+        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(triggerDismiss)];
+        tapGestureRecognizer.numberOfTapsRequired = 1;
+        tapGestureRecognizer.enabled = YES;
+        tapGestureRecognizer.delegate = self;
+        [self addGestureRecognizer:tapGestureRecognizer];
+
         moreTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) style:UITableViewStylePlain];
         moreTable.bounces = NO;
         moreTable.delegate = self;
@@ -31,6 +38,7 @@
         moreTable.backgroundColor = [UIColor clearColor];
         moreTable.backgroundView = nil;
         moreTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [moreTable sizeToFit];
         [self addSubview:moreTable];
         
         UIImage *dropImg = [UIImage imageNamed:@"menu_drop.png"];
@@ -62,6 +70,17 @@
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+//    [self removeFromSuperview];
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if ([touch.view isDescendantOfView:moreTable]) {
+        return NO;
+    }
+    return YES;
+}
+
+- (void) triggerDismiss {
     [self removeFromSuperview];
 }
 

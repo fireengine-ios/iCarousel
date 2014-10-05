@@ -24,5 +24,6 @@
 @synthesize rawContentType;
 @synthesize contentType;
 @synthesize lastModified;
+@synthesize detail;
 
 @end

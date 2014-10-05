@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "AppConstants.h"
+#import "FileDetail.h"
 
 @interface MetaFile : NSObject
 
@@ -25,5 +26,6 @@
 @property (nonatomic, strong) NSString *rawContentType;
 @property (nonatomic) ContentType contentType;
 @property (nonatomic, strong) NSDate *lastModified;
+@property (nonatomic, strong) FileDetail *detail;
 
 @end

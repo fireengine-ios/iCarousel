@@ -29,6 +29,7 @@
 @synthesize topIndex;
 @synthesize bottomIndex;
 @synthesize moreMenuView;
+@synthesize processView;
 @synthesize refPageList;
 @synthesize resetResultTable;
 @synthesize pageOffset;
@@ -158,6 +159,53 @@
     if(moreMenuView) {
         [moreMenuView removeFromSuperview];
     }
+}
+
+- (void) pushProgressViewWithProcessMessage:(NSString *) progressMsg andSuccessMessage:(NSString *) successMsg andFailMessage:(NSString *) failMsg {
+    if(processView) {
+        [processView removeFromSuperview];
+    }
+    
+    processView = [[ProcessFooterView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60) withProcessMessage:progressMsg withFinalMessage:successMsg withFailMessage:failMsg];
+    [self.view addSubview:processView];
+    [self.view bringSubviewToFront:processView];
+
+    [processView startLoading];
+    [APPDELEGATE.base dismissAddButton];
+}
+
+- (void) proceedSuccessForProgressView {
+    if(processView) {
+        [processView showMessageForSuccess];
+    }
+}
+
+- (void) proceedFailureForProgressView {
+    if(processView) {
+        [processView showMessageForFailure];
+    }
+}
+
+- (void) popProgressView {
+    if(processView) {
+        [processView removeFromSuperview];
+    }
+    NSArray *addTypesForController = [APPDELEGATE.mapUtil readAddTypesByController:NSStringFromClass(self.class)];
+    if(addTypesForController != nil) {
+        [APPDELEGATE.base presentAddButtonWithDelegate:nil];
+    }
+}
+
+- (void) newFolderModalDidTriggerNewFolderWithName:(NSString *)folderName {
+    NSLog(@"At MyView newFolderModalDidTriggerNewFolderWithName");
+}
+
+- (void) cameraCapturaModalDidCancel {
+    NSLog(@"At MyView cameraCapturaModalDidCancel");
+}
+
+- (void) cameraCapturaModalDidCaptureAndStoreImageToPath:(NSString *)filepath {
+    NSLog(@"At MyView cameraCapturaModalDidCaptureAndStoreImageToPath for filePath:%@", filepath);
 }
 
 @end

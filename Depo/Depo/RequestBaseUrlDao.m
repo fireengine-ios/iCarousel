@@ -7,6 +7,8 @@
 //
 
 #import "RequestBaseUrlDao.h"
+#import "AppDelegate.h"
+#import "AppSession.h"
 
 @implementation RequestBaseUrlDao
 
@@ -29,6 +31,10 @@
         
 		SBJSON *jsonParser = [SBJSON new];
 		NSDictionary *mainDict = [jsonParser objectWithString:responseEnc];
+        if(mainDict != nil && ![mainDict isKindOfClass:[NSNull class]]) {
+            NSString *baseUrlValue = [mainDict objectForKey:@"value"];
+            APPDELEGATE.session.baseUrl = [self strByRawVal:baseUrlValue];
+        }
         
         [self shouldReturnSuccess];
 		

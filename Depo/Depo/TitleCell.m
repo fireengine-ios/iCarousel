@@ -124,7 +124,7 @@
         [linkLabel setText:linkText];
         linkLabel.font = [UIFont fontWithName:@"TurkcellSaturaMed" size:17];
         linkLabel.textColor = [Util UIColorForHexColor:@"5D667C"];
-        linkLabel.textAlignment = UITextAlignmentRight;
+        linkLabel.textAlignment = NSTextAlignmentRight;
         [self addSubview:linkLabel];
     }
 }

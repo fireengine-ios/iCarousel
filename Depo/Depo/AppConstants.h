@@ -39,11 +39,21 @@
 
 #define CONTENT_TYPE_PNG_VALUE @"image/png"
 
-#define CONTENT_TYPE_MUSIC_VALUE @"audio/mp3"
+#define CONTENT_TYPE_AUDIO_MP3_VALUE @"audio/mp3"
+
+#define CONTENT_TYPE_AUDIO_MPEG_VALUE @"audio/mpeg"
+
+#define CONTENT_TYPE_VIDEO_VALUE @"video/mp4"
 
 #define CONTENT_TYPE_PDF_VALUE @"application/pdf"
 
 #define CONTENT_TYPE_DOC_VALUE @"application/doc"
+
+#define CONTENT_TYPE_TXT_VALUE @"text/plain"
+
+#define CONTENT_TYPE_HTML_VALUE @"text/html"
+
+#define NO_OF_FILES_PER_PAGE 10
 
 #define SuppressPerformSelectorLeakWarning(Stuff) \
 do { \
@@ -82,6 +92,7 @@ typedef enum {
 typedef enum {
 	ContentTypeFolder = 0,
 	ContentTypePhoto,
+    ContentTypeVideo,
 	ContentTypeMusic,
 	ContentTypeDoc,
 	ContentTypeOther

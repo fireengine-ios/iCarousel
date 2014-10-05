@@ -19,8 +19,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.isChecked = isInitiallyChecked;
-        self.checkedImage = [UIImage imageNamed:@"cekBox2.png"];
-        self.uncheckedImage = [UIImage imageNamed:@"cekBox.png"];
+        self.checkedImage = [UIImage imageNamed:@"dont_show_blue_tick.png"];
+        self.uncheckedImage = [UIImage imageNamed:@"selectAll_checkbox.png"];
         
         if(self.isChecked) {
             [self setImage:self.checkedImage forState:UIControlStateNormal];

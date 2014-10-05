@@ -13,5 +13,6 @@
 
 @property (nonatomic, strong) User *user;
 @property (nonatomic, strong) NSString *authToken;
+@property (nonatomic, strong) NSString *baseUrl;
 
 @end

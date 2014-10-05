@@ -13,6 +13,10 @@
 #import "DocCell.h"
 #import "CustomButton.h"
 #import "FolderEmptyCell.h"
+#import "FileDetailInWebViewController.h"
+#import "AppUtil.h"
+#import "ImagePreviewController.h"
+#import "PreviewUnavailableController.h"
 
 @interface FileListController ()
 
@@ -29,17 +33,28 @@
     self = [super init];
     if (self) {
         self.folder = _folder;
+        listOffset = 0;
 
         if(self.folder) {
             self.title = self.folder.visibleName;
         } else {
-            self.title = @"All Files";
+            self.title = NSLocalizedString(@"FilesTitle", @"");
         }
 
         fileListDao = [[FileListDao alloc] init];
         fileListDao.delegate = self;
         fileListDao.successMethod = @selector(fileListSuccessCallback:);
         fileListDao.failMethod = @selector(fileListFailCallback:);
+        
+        loadMoreDao = [[FileListDao alloc] init];
+        loadMoreDao.delegate = self;
+        loadMoreDao.successMethod = @selector(loadMoreSuccessCallback:);
+        loadMoreDao.failMethod = @selector(loadMoreFailCallback:);
+        
+        addFolderDao = [[AddFolderDao alloc] init];
+        addFolderDao.delegate = self;
+        addFolderDao.successMethod = @selector(addFolderSuccessCallback);
+        addFolderDao.failMethod = @selector(addFolderFailCallback:);
         
         fileTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex) style:UITableViewStylePlain];
         fileTable.delegate = self;
@@ -54,9 +69,9 @@
         [fileTable addSubview:refreshControl];
 
         if(self.folder) {
-            [fileListDao requestFileListingForFolder:self.folder.name andForOffset:0 andSize:10];
+            [fileListDao requestFileListingForFolder:self.folder.name andForOffset:listOffset*NO_OF_FILES_PER_PAGE andSize:NO_OF_FILES_PER_PAGE];
         } else {
-            [fileListDao requestFileListingForParentForOffset:0 andSize:10];
+            [fileListDao requestFileListingForParentForOffset:listOffset*NO_OF_FILES_PER_PAGE andSize:NO_OF_FILES_PER_PAGE];
         }
     }
     return self;
@@ -67,10 +82,11 @@
 }
 
 - (void) triggerRefresh {
+    listOffset = 0;
     if(self.folder) {
-        [fileListDao requestFileListingForFolder:self.folder.name andForOffset:0 andSize:10];
+        [fileListDao requestFileListingForFolder:self.folder.name andForOffset:listOffset*NO_OF_FILES_PER_PAGE andSize:NO_OF_FILES_PER_PAGE];
     } else {
-        [fileListDao requestFileListingForParentForOffset:0 andSize:10];
+        [fileListDao requestFileListingForParentForOffset:listOffset*NO_OF_FILES_PER_PAGE andSize:NO_OF_FILES_PER_PAGE];
     }
 }
 
@@ -88,6 +104,40 @@
         [refreshControl endRefreshing];
     }
     [self showErrorAlertWithMessage:errorMessage];
+}
+
+- (void) loadMoreSuccessCallback:(NSArray *) files {
+    if(refreshControl) {
+        [refreshControl endRefreshing];
+    }
+    self.fileList = [fileList arrayByAddingObjectsFromArray:files];
+    isLoading = NO;
+    self.tableUpdateCounter ++;
+    [fileTable reloadData];
+}
+
+- (void) loadMoreFailCallback:(NSString *) errorMessage {
+    if(refreshControl) {
+        [refreshControl endRefreshing];
+    }
+    [self showErrorAlertWithMessage:errorMessage];
+}
+
+- (void) addFolderSuccessCallback {
+    [self proceedSuccessForProgressView];
+    [self performSelector:@selector(popProgressView) withObject:nil afterDelay:1.0f];
+
+    listOffset = 0;
+    if(self.folder) {
+        [fileListDao requestFileListingForFolder:self.folder.name andForOffset:listOffset*NO_OF_FILES_PER_PAGE andSize:NO_OF_FILES_PER_PAGE];
+    } else {
+        [fileListDao requestFileListingForParentForOffset:listOffset*NO_OF_FILES_PER_PAGE andSize:NO_OF_FILES_PER_PAGE];
+    }
+}
+
+- (void) addFolderFailCallback:(NSString *) errorMessage {
+    [self proceedFailureForProgressView];
+    [self performSelector:@selector(popProgressView) withObject:nil afterDelay:1.0f];
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -146,8 +196,43 @@
         FileListController *innerList = [[FileListController alloc] initForFolder:fileAtIndex];
         innerList.nav = self.nav;
         [self.nav pushViewController:innerList animated:NO];
+    } else {
+        if([AppUtil isMetaFileImage:fileAtIndex]) {
+            ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFile:fileAtIndex];
+            detail.nav = self.nav;
+            [self.nav pushViewController:detail animated:NO];
+        } else if([AppUtil isMetaFileDoc:fileAtIndex] || [AppUtil isMetaFileVideo:fileAtIndex] || [AppUtil isMetaFileMusic:fileAtIndex]){
+            FileDetailInWebViewController *detail = [[FileDetailInWebViewController alloc] initWithFile:fileAtIndex];
+            detail.nav = self.nav;
+            [self.nav pushViewController:detail animated:NO];
+        } else {
+            PreviewUnavailableController *detail = [[PreviewUnavailableController alloc] initWithFile:fileAtIndex];
+            detail.nav = self.nav;
+            [self.nav pushViewController:detail animated:NO];
+        }
     }
     
+}
+
+- (void) scrollViewDidScroll:(UIScrollView *)scrollView {
+    if(!isLoading) {
+        CGFloat currentOffset = fileTable.contentOffset.y;
+        CGFloat maximumOffset = fileTable.contentSize.height - fileTable.frame.size.height;
+        
+        if (currentOffset - maximumOffset >= 0.0) {
+            isLoading = YES;
+            [self dynamicallyLoadNextPage];
+        }
+    }
+}
+
+- (void) dynamicallyLoadNextPage {
+    listOffset ++;
+    if(self.folder) {
+        [loadMoreDao requestFileListingForFolder:self.folder.name andForOffset:listOffset*NO_OF_FILES_PER_PAGE andSize:NO_OF_FILES_PER_PAGE];
+    } else {
+        [loadMoreDao requestFileListingForParentForOffset:listOffset*NO_OF_FILES_PER_PAGE andSize:NO_OF_FILES_PER_PAGE];
+    }
 }
 
 - (void) moreClicked {
@@ -170,15 +255,25 @@
     [super didReceiveMemoryWarning];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void) newFolderModalDidTriggerNewFolderWithName:(NSString *)folderName {
+    [addFolderDao requestAddFolderAtPath:[self appendNewFileName:folderName]];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"FolderAddProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"FolderAddSuccessMessage", @"") andFailMessage:NSLocalizedString(@"FolderAddFailMessage", @"")];
 }
-*/
 
+- (void) cameraCapturaModalDidCaptureAndStoreImageToPath:(NSString *)filepath {
+    uploadManager = [[UploadManager alloc] initWithAssetsLibrary:nil];
+    [uploadManager startUploadingFile:filepath atFolder:nil withFileName:@"fromCam.png"];
+}
+
+- (NSString *) appendNewFileName:(NSString *) newFileName {
+    if(self.folder) {
+        if([self.folder.name hasSuffix:@"/"]) {
+            return [AppUtil enrichFileFolderName:[NSString stringWithFormat:@"%@%@", self.folder.name, newFileName]];
+        } else {
+            return [AppUtil enrichFileFolderName:[NSString stringWithFormat:@"%@/%@", self.folder.name, newFileName]];
+        }
+    } else {
+        return [AppUtil enrichFileFolderName:newFileName];
+    }
+}
 @end

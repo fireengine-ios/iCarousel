@@ -15,7 +15,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier withFileFolder:_fileFolder];
     if (self) {
         UIImageView *thumbImgView = [[UIImageView alloc] initWithFrame:CGRectMake(17, 16, 35, 35)];
-        [thumbImgView setImageWithURL:[NSURL URLWithString:self.fileFolder.url]];
+        [thumbImgView setImageWithURL:[NSURL URLWithString:self.fileFolder.detail.thumbSmallUrl]];
         [self addSubview:thumbImgView];
 
         CGRect nameFieldRect = CGRectMake(70, 13, self.frame.size.width - 80, 22);

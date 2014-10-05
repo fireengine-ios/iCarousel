@@ -9,10 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "AddTypeButton.h"
 
+@protocol FloatingAddDelegate <NSObject>
+- (void) floatingMenuDidTriggerAddFolder;
+- (void) floatingMenuDidTriggerAddMusic;
+- (void) floatingMenuDidTriggerAddPhoto;
+- (void) floatingMenuDidTriggerCamera;
+@end
+
 @interface FloatingAddMenu : UIView {
     int buttonHeight;
 }
 
+@property (nonatomic, strong) id<FloatingAddDelegate> delegate;
 @property (nonatomic, strong) AddTypeButton *folderButton;
 @property (nonatomic, strong) AddTypeButton *musicButton;
 @property (nonatomic, strong) AddTypeButton *photoButton;

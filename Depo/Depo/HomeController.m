@@ -18,7 +18,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        self.title = @"";
+        self.title = NSLocalizedString(@"HomeTitle", @"");
     }
     return self;
 }

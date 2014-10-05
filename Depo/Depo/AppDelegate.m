@@ -48,10 +48,20 @@
 - (void) tokenManagerDidFailReceivingToken {
 }
 
-- (void) tokenManagerDidReceiveToken {
+- (void) tokenManagerDidReceiveBaseUrl {
     MyViewController *homeController = [[HomeController alloc] init];
     base = [[BaseViewController alloc] initWithRootViewController:homeController];
     [self.window setRootViewController:base];
+}
+
+- (void) tokenManagerDidFailReceivingBaseUrl {
+    MyViewController *homeController = [[HomeController alloc] init];
+    base = [[BaseViewController alloc] initWithRootViewController:homeController];
+    [self.window setRootViewController:base];
+}
+
+- (void) tokenManagerDidReceiveToken {
+    [tokenManager requestBaseUrl];
 }
 
 - (void) addInitialBgImage {

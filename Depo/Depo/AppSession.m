@@ -12,6 +12,7 @@
 
 @synthesize user;
 @synthesize authToken;
+@synthesize baseUrl;
 
 - (id) init {
     if(self = [super init]) {

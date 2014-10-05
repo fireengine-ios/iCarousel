@@ -15,6 +15,11 @@
 #import "AppSession.h"
 #import "AppDelegate.h"
 #import "AppUtil.h"
+#import "NewFolderModalController.h"
+#import "PhotoListModalController.h"
+#import "AlbumListModalController.h"
+#import "MusicListModalController.h"
+#import "CameraCaptureModalController.h"
 
 #define kMenuOpenOriginX 276
 
@@ -71,6 +76,7 @@
 
         self.addMenu = [[FloatingAddMenu alloc] initWithFrame:CGRectMake(kMenuOpenOriginX, 0, self.view.frame.size.width, self.view.frame.size.height) withBasePoint:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height - 65)];
         addMenu.hidden = YES;
+        addMenu.delegate = self;
         [scroll addSubview:addMenu];
         
         self.addButton = [[FloatingAddButton alloc] initWithFrame:CGRectMake(kMenuOpenOriginX + (self.view.frame.size.width - 70)/2, self.view.frame.size.height - 100, 70, 70)];
@@ -223,6 +229,48 @@
 - (void) floatingAddButtonDidCloseMenu {
     [addMenu dismissWithAnimation];
     [self performSelector:@selector(hideAddMenu) withObject:nil afterDelay:0.3];
+}
+
+#pragma mark FloatingAddDelegate
+- (void) floatingMenuDidTriggerAddFolder {
+    [addButton immediateReset];
+    [addMenu dismissWithAnimation];
+    [self performSelector:@selector(hideAddMenu) withObject:nil afterDelay:0.3];
+    
+    NewFolderModalController *folderController = [[NewFolderModalController alloc] init];
+    folderController.delegate = [self.nav topViewController];
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:folderController];
+    [self presentViewController:modalNav animated:YES completion:nil];
+}
+
+- (void) floatingMenuDidTriggerAddMusic {
+    [addButton immediateReset];
+    [addMenu dismissWithAnimation];
+    [self performSelector:@selector(hideAddMenu) withObject:nil afterDelay:0.3];
+    
+    MusicListModalController *musicController = [[MusicListModalController alloc] init];
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:musicController];
+    [self presentViewController:modalNav animated:YES completion:nil];
+}
+
+- (void) floatingMenuDidTriggerAddPhoto {
+    [addButton immediateReset];
+    [addMenu dismissWithAnimation];
+    [self performSelector:@selector(hideAddMenu) withObject:nil afterDelay:0.3];
+
+    AlbumListModalController *imgController = [[AlbumListModalController alloc] init];
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:imgController];
+    [self presentViewController:modalNav animated:YES completion:nil];
+}
+
+- (void) floatingMenuDidTriggerCamera {
+    [addButton immediateReset];
+    [addMenu dismissWithAnimation];
+    [self performSelector:@selector(hideAddMenu) withObject:nil afterDelay:0.3];
+    
+    CameraCaptureModalController *cameraController = [[CameraCaptureModalController alloc] init];
+    cameraController.modalDelegate = [self.nav topViewController];
+    [self presentViewController:cameraController animated:YES completion:nil];
 }
 
 - (void) hideAddMenu {

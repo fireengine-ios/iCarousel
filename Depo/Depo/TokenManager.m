@@ -21,6 +21,11 @@
         tokenDao.delegate = self;
         tokenDao.successMethod = @selector(tokenDaoSuccessCallback);
         tokenDao.failMethod = @selector(tokenDaoFailCallback:);
+        
+        baseUrlDao = [[RequestBaseUrlDao alloc] init];
+        baseUrlDao.delegate = self;
+        baseUrlDao.successMethod = @selector(baseUrlDaoSuccessCallback);
+        baseUrlDao.failMethod = @selector(baseUrlDaoFailCallback:);
     }
     return self;
 }
@@ -34,12 +39,24 @@
     [delegate tokenManagerInadequateInfo];
 }
 
+- (void) requestBaseUrl {
+    [baseUrlDao requestBaseUrl];
+}
+
 - (void) tokenDaoSuccessCallback {
     [delegate tokenManagerDidReceiveToken];
 }
 
 - (void) tokenDaoFailCallback:(NSString *) errorMessage {
     [delegate tokenManagerDidFailReceivingToken];
+}
+
+- (void) baseUrlDaoSuccessCallback {
+    [delegate tokenManagerDidReceiveBaseUrl];
+}
+
+- (void) baseUrlDaoFailCallback:(NSString *) errorMessage {
+    [delegate tokenManagerDidFailReceivingBaseUrl];
 }
 
 @end

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MoreMenuView : UIView <UITableViewDataSource, UITableViewDelegate>
+@interface MoreMenuView : UIView <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UITableView *moreTable;
 @property (nonatomic, strong) NSArray *moreList;

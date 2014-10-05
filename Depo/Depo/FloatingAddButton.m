@@ -58,6 +58,14 @@
     }
 }
 
+- (void) immediateReset {
+    [self setImage:[UIImage imageNamed:@"big_plus_icon.png"] forState:UIControlStateNormal];
+    double rads = DEGREES_TO_RADIANS(0);
+    CGAffineTransform transform = CGAffineTransformRotate(CGAffineTransformIdentity, rads);
+    self.transform = transform;
+    isActive = NO;
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

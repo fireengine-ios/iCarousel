@@ -14,7 +14,7 @@
 #import "FloatingAddButton.h"
 #import "FloatingAddMenu.h"
 
-@interface BaseViewController : UIViewController <SlidingMenuDelegate, SlidingMenuCloseDelegate, MyViewDelegate, FloatingAddButtonDelegate>
+@interface BaseViewController : UIViewController <SlidingMenuDelegate, SlidingMenuCloseDelegate, MyViewDelegate, FloatingAddButtonDelegate, FloatingAddDelegate>
 
 @property (nonatomic, strong) UIScrollView *scroll;
 @property (nonatomic, strong) UIView *transparentView;

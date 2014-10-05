@@ -8,15 +8,21 @@
 
 #import <Foundation/Foundation.h>
 #import "AppConstants.h"
+#import "MetaFile.h"
 
 @interface AppUtil : NSObject
 
 + (NSArray *) readMenuItemsForLoggedIn;
 + (NSString *) iconNameByContentType:(ContentType) contentType;
 + (NSString *) nakedFileFolderName:(NSString *) fileFolderName;
++ (NSString *) enrichFileFolderName:(NSString *) fileFolderName;
 + (NSString *) buttonImgNameByAddType:(AddType) addType;
 + (NSString *) buttonTitleByAddType:(AddType) addType;
 + (NSString *) moreMenuRowImgNameByMoreMenuType:(MoreMenuType) menuType;
 + (NSString *) moreMenuRowTitleByMoreMenuType:(MoreMenuType) menuType;
++ (BOOL) isMetaFileImage:(MetaFile *) file;
++ (BOOL) isMetaFileVideo:(MetaFile *) file;
++ (BOOL) isMetaFileMusic:(MetaFile *) file;
++ (BOOL) isMetaFileDoc:(MetaFile *) file;
 
 @end

@@ -19,6 +19,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.menuType = _menuType;
+        self.backgroundColor = [UIColor whiteColor];
 
         UIImage *iconImg = [UIImage imageNamed:[AppUtil moreMenuRowImgNameByMoreMenuType:menuType]];
         UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(15, (40 - iconImg.size.height)/2, iconImg.size.width, iconImg.size.height)];

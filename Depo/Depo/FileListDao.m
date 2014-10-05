@@ -8,6 +8,7 @@
 
 #import "FileListDao.h"
 #import "AppUtil.h"
+#import "FileDetail.h"
 
 @implementation FileListDao
 
@@ -97,6 +98,22 @@
     file.rawContentType = [self strByRawVal:content_type];
     file.contentType = [self contentTypeByRawValue:file];
     file.visibleName = [AppUtil nakedFileFolderName:file.name];
+    
+    NSDictionary *detailDict = [dict objectForKey:@"metadata"];
+    if(detailDict != nil && ![detailDict isKindOfClass:[NSNull class]]) {
+        NSNumber *favFlag = [detailDict objectForKey:@"X-Object-Meta-Favourite"];
+        NSString *thumbLarge = [detailDict objectForKey:@"X-Object-Meta-Thumbnail-Large"];
+        NSString *thumbMedium = [detailDict objectForKey:@"X-Object-Meta-Thumbnail-Medium"];
+        NSString *thumbSmall = [detailDict objectForKey:@"X-Object-Meta-Thumbnail-Small"];
+
+        FileDetail *detail = [[FileDetail alloc] init];
+        detail.favoriteFlag = [self boolByNumber:favFlag];
+        detail.thumbLargeUrl = thumbLarge;
+        detail.thumbMediumUrl = thumbMedium;
+        detail.thumbSmallUrl = thumbSmall;
+        
+        file.detail = detail;
+    }
     return file;
 }
 

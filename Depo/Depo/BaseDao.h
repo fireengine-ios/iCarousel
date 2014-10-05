@@ -22,6 +22,10 @@
 
 #define IMG_LISTING_MAIN_URL BASE_URL@"/search/byField?fieldName=%@&fieldValue=%@&sortBy=%@&sortOrder=DESC&from=%d&size=%d"
 
+#define ADD_FOLDER_URL BASE_URL@"/container/createFolder"
+
+#define UPLOAD_NOTIFY_URL BASE_URL@"/notification/onFileUpload?fileName=%@"
+
 #define APN_URL @"http://pushserver.turkcell.com.tr/PushServer/rest/registerdevice/"
 
 #define SHORTEN_URL @"https://www.googleapis.com/urlshortener/v1/url"
@@ -58,6 +62,7 @@
 - (NSString *) hasFinishedSuccessfully:(NSDictionary *) mainDict;
 - (void) sendPostRequest:(ASIFormDataRequest *) request;
 - (void) sendGetRequest:(ASIFormDataRequest *) request;
+- (void) sendPutRequest:(ASIFormDataRequest *) request;
 - (BOOL) boolByNumber:(NSNumber *) numberObj;
 - (int) intByNumber:(NSNumber *) numberObj;
 - (float) floatByNumber:(NSNumber *) numberObj;
