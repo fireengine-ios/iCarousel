@@ -13,10 +13,15 @@
 #import "UploadManager.h"
 #import "MetaAlbum.h"
 
+@protocol PhotoModalDelegate <NSObject>
+- (void) photoModalDidTriggerUploadForUrls:(NSArray *) assetUrls;
+@end
+
 @interface PhotoListModalController : MyModalController <SelectibleAssetDelegate, MultipleUploadFooterDelegate> {
     UploadManager *uploadManager;
 }
 
+@property (nonatomic, strong) id<PhotoModalDelegate> modalDelegate;
 @property (nonatomic, strong) NSMutableArray *assets;
 @property (nonatomic, strong) NSMutableArray *selectedAssets;
 @property (nonatomic, strong) UIScrollView *mainScroll;

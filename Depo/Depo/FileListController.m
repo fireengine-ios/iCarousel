@@ -17,6 +17,10 @@
 #import "AppUtil.h"
 #import "ImagePreviewController.h"
 #import "PreviewUnavailableController.h"
+#import "UploadRef.h"
+#import "UploadingImageCell.h"
+#import "AppDelegate.h"
+#import "AppSession.h"
 
 @interface FileListController ()
 
@@ -94,7 +98,7 @@
     if(refreshControl) {
         [refreshControl endRefreshing];
     }
-    self.fileList = files;
+    self.fileList = [[APPDELEGATE.session uploadRefsForFolder:[self.folder name]] arrayByAddingObjectsFromArray:files];
     self.tableUpdateCounter ++;
     [fileTable reloadData];
 }
@@ -169,20 +173,26 @@
         if(fileList == nil || [fileList count] == 0) {
             cell = [[FolderEmptyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFolderTitle:self.folder.visibleName];
         } else {
-            MetaFile *fileAtIndex = [fileList objectAtIndex:indexPath.row];
-            switch (fileAtIndex.contentType) {
-                case ContentTypeFolder:
-                    cell = [[FolderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex];
-                    break;
-                case ContentTypePhoto:
-                    cell = [[ImageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex];
-                    break;
-                case ContentTypeMusic:
-                    cell = [[MusicCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex];
-                    break;
-                default:
-                    cell = [[DocCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex];
-                    break;
+            id objAtIndex = [fileList objectAtIndex:indexPath.row];
+            if([objAtIndex isKindOfClass:[MetaFile class]]) {
+                MetaFile *fileAtIndex = (MetaFile *) objAtIndex;
+                switch (fileAtIndex.contentType) {
+                    case ContentTypeFolder:
+                        cell = [[FolderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex];
+                        break;
+                    case ContentTypePhoto:
+                        cell = [[ImageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex];
+                        break;
+                    case ContentTypeMusic:
+                        cell = [[MusicCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex];
+                        break;
+                    default:
+                        cell = [[DocCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex];
+                        break;
+                }
+            } else {
+                UploadRef *refAtIndex = (UploadRef *) objAtIndex;
+                cell = [[UploadingImageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withUploadRef:refAtIndex atFolder:[self.folder name]];
             }
         }
     }
@@ -261,7 +271,7 @@
 }
 
 - (void) cameraCapturaModalDidCaptureAndStoreImageToPath:(NSString *)filepath {
-    uploadManager = [[UploadManager alloc] initWithAssetsLibrary:nil];
+    uploadManager = [[UploadManager alloc] init];
     [uploadManager startUploadingFile:filepath atFolder:nil withFileName:@"fromCam.png"];
 }
 
@@ -276,4 +286,18 @@
         return [AppUtil enrichFileFolderName:newFileName];
     }
 }
+
+- (void) photoModalDidTriggerUploadForUrls:(NSArray *)assetUrls {
+    for(UploadRef *ref in assetUrls) {
+        UploadManager *manager = [[UploadManager alloc] init];
+        ref.folderName = [self.folder name];
+        manager.uploadRef = ref;
+        [manager startUploadingAsset:ref.filePath atFolder:self.folder];
+        [APPDELEGATE.session.uploadManagers addObject:manager];
+    }
+    fileList = [assetUrls arrayByAddingObjectsFromArray:fileList];
+    self.tableUpdateCounter++;
+    [self.fileTable reloadData];
+}
+
 @end

@@ -149,6 +149,9 @@
 		051E1EB119CB20FC00FD1E03 /* MetaMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 051E1EB019CB20FC00FD1E03 /* MetaMenu.m */; };
 		051E1EB419CB2D1300FD1E03 /* AppSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 051E1EB319CB2D1300FD1E03 /* AppSession.m */; };
 		051E1EB719CB2DAC00FD1E03 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 051E1EB619CB2DAC00FD1E03 /* User.m */; };
+		052160A319E2E56B0007B321 /* DepoUploadTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 052160A219E2E56B0007B321 /* DepoUploadTask.m */; };
+		052160A619E308380007B321 /* UploadingImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 052160A519E308380007B321 /* UploadingImageCell.m */; };
+		052160A919E30D640007B321 /* UploadRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 052160A819E30D640007B321 /* UploadRef.m */; };
 		05224A9519DC1CBC00214767 /* PhotoListModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05224A9419DC1CBC00214767 /* PhotoListModalController.m */; };
 		05224A9719DC345B00214767 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05224A9619DC345B00214767 /* AssetsLibrary.framework */; };
 		05224A9A19DC3FDA00214767 /* SelectibleAssetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05224A9919DC3FDA00214767 /* SelectibleAssetView.m */; };
@@ -530,6 +533,12 @@
 		051E1EB319CB2D1300FD1E03 /* AppSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppSession.m; sourceTree = "<group>"; };
 		051E1EB519CB2DAC00FD1E03 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		051E1EB619CB2DAC00FD1E03 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		052160A119E2E56B0007B321 /* DepoUploadTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DepoUploadTask.h; sourceTree = "<group>"; };
+		052160A219E2E56B0007B321 /* DepoUploadTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DepoUploadTask.m; sourceTree = "<group>"; };
+		052160A419E308380007B321 /* UploadingImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadingImageCell.h; sourceTree = "<group>"; };
+		052160A519E308380007B321 /* UploadingImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadingImageCell.m; sourceTree = "<group>"; };
+		052160A719E30D640007B321 /* UploadRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadRef.h; sourceTree = "<group>"; };
+		052160A819E30D640007B321 /* UploadRef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadRef.m; sourceTree = "<group>"; };
 		05224A9319DC1CBC00214767 /* PhotoListModalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoListModalController.h; sourceTree = "<group>"; };
 		05224A9419DC1CBC00214767 /* PhotoListModalController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoListModalController.m; sourceTree = "<group>"; };
 		05224A9619DC345B00214767 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
@@ -885,28 +894,7 @@
 		051E1E2519CAC52B00FD1E03 /* controller */ = {
 			isa = PBXGroup;
 			children = (
-				057DF50319D02E100005A389 /* SettingsController.h */,
-				057DF50419D02E100005A389 /* SettingsController.m */,
-				0526449A19D5A2A600B63759 /* SettingsContactsController.m */,
-				0526449B19D5A2A600B63759 /* SettingsPhotosVideosController.m */,
-				0526449C19D5A2A600B63759 /* SettingsContactsController.h */,
-				0526449D19D5A2A600B63759 /* SettingsDocumentsController.m */,
-				052644C019D5A3A400B63759 /* SettingsDocumentsController.h */,
-				0526449E19D5A2A600B63759 /* SettingsMusicController.m */,
-				0526449F19D5A2A600B63759 /* SettingsMusicController.h */,
-				052644A019D5A2A600B63759 /* SettingsBaseViewController.m */,
-				052644A119D5A2A600B63759 /* SettingsBaseViewController.h */,
-				052644A219D5A2A600B63759 /* SettingsUploadController.m */,
-				052644A319D5A2A600B63759 /* SettingsStorageController.m */,
-				052644A419D5A2A600B63759 /* SettingsPhotosVideosController.h */,
-				052644A519D5A2A600B63759 /* SettingsConnectedDevicesController.m */,
-				052644A619D5A2A600B63759 /* SettingsConnectedDevicesController.h */,
-				052644A719D5A2A600B63759 /* SettingsUploadController.h */,
-				052644A819D5A2A600B63759 /* SettingsStorageController.h */,
-				052644A919D5A2A600B63759 /* SettingsNotificationsController.m */,
-				052644AA19D5A2A600B63759 /* SettingsNotificationsController.h */,
-				052644AB19D5A2A600B63759 /* SettingsHelpController.m */,
-				052644AC19D5A2A600B63759 /* SettingsHelpController.h */,
+				052160AA19E31AA70007B321 /* profile */,
 				051DE35619CC128600F27C85 /* MyNavigationController.h */,
 				051DE35719CC128600F27C85 /* MyNavigationController.m */,
 				051DE35819CC128600F27C85 /* MyViewController.h */,
@@ -919,10 +907,10 @@
 				051CB38E19D2DD7100E5FC88 /* FileListController.m */,
 				051CB39019D2DD7C00E5FC88 /* PhotoListController.h */,
 				051CB39119D2DD7C00E5FC88 /* PhotoListController.m */,
-				053EC44F19DA99C4000C2B77 /* NewFolderModalController.h */,
-				053EC45019DA99C4000C2B77 /* NewFolderModalController.m */,
 				053D0ED619DAC959006A13E0 /* MyModalController.h */,
 				053D0ED719DAC959006A13E0 /* MyModalController.m */,
+				053EC44F19DA99C4000C2B77 /* NewFolderModalController.h */,
+				053EC45019DA99C4000C2B77 /* NewFolderModalController.m */,
 				05224A9319DC1CBC00214767 /* PhotoListModalController.h */,
 				05224A9419DC1CBC00214767 /* PhotoListModalController.m */,
 				05E8112D19DF09DB0063F99A /* AlbumListModalController.h */,
@@ -1016,6 +1004,8 @@
 				0524E32819D955FA00E2698E /* FileDetail.m */,
 				05E8113019DF0ACB0063F99A /* MetaAlbum.h */,
 				05E8113119DF0ACB0063F99A /* MetaAlbum.m */,
+				052160A719E30D640007B321 /* UploadRef.h */,
+				052160A819E30D640007B321 /* UploadRef.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -1055,6 +1045,8 @@
 				05E8113419DF10340063F99A /* RefAlbumCell.m */,
 				05BBE71219E07D0400805215 /* RefSongCell.h */,
 				05BBE71319E07D0400805215 /* RefSongCell.m */,
+				052160A419E308380007B321 /* UploadingImageCell.h */,
+				052160A519E308380007B321 /* UploadingImageCell.m */,
 			);
 			name = cell;
 			sourceTree = "<group>";
@@ -1170,6 +1162,44 @@
 			name = "SBJSON+ASI";
 			sourceTree = "<group>";
 		};
+		052160A019E2E54A0007B321 /* task */ = {
+			isa = PBXGroup;
+			children = (
+				052160A119E2E56B0007B321 /* DepoUploadTask.h */,
+				052160A219E2E56B0007B321 /* DepoUploadTask.m */,
+			);
+			name = task;
+			sourceTree = "<group>";
+		};
+		052160AA19E31AA70007B321 /* profile */ = {
+			isa = PBXGroup;
+			children = (
+				057DF50319D02E100005A389 /* SettingsController.h */,
+				057DF50419D02E100005A389 /* SettingsController.m */,
+				0526449A19D5A2A600B63759 /* SettingsContactsController.m */,
+				0526449B19D5A2A600B63759 /* SettingsPhotosVideosController.m */,
+				0526449C19D5A2A600B63759 /* SettingsContactsController.h */,
+				0526449D19D5A2A600B63759 /* SettingsDocumentsController.m */,
+				052644C019D5A3A400B63759 /* SettingsDocumentsController.h */,
+				0526449E19D5A2A600B63759 /* SettingsMusicController.m */,
+				0526449F19D5A2A600B63759 /* SettingsMusicController.h */,
+				052644A019D5A2A600B63759 /* SettingsBaseViewController.m */,
+				052644A119D5A2A600B63759 /* SettingsBaseViewController.h */,
+				052644A219D5A2A600B63759 /* SettingsUploadController.m */,
+				052644A319D5A2A600B63759 /* SettingsStorageController.m */,
+				052644A419D5A2A600B63759 /* SettingsPhotosVideosController.h */,
+				052644A519D5A2A600B63759 /* SettingsConnectedDevicesController.m */,
+				052644A619D5A2A600B63759 /* SettingsConnectedDevicesController.h */,
+				052644A719D5A2A600B63759 /* SettingsUploadController.h */,
+				052644A819D5A2A600B63759 /* SettingsStorageController.h */,
+				052644A919D5A2A600B63759 /* SettingsNotificationsController.m */,
+				052644AA19D5A2A600B63759 /* SettingsNotificationsController.h */,
+				052644AB19D5A2A600B63759 /* SettingsHelpController.m */,
+				052644AC19D5A2A600B63759 /* SettingsHelpController.h */,
+			);
+			name = profile;
+			sourceTree = "<group>";
+		};
 		0526444319D5441C00B63759 /* properties */ = {
 			isa = PBXGroup;
 			children = (
@@ -1189,6 +1219,7 @@
 		056AC8F819D15DAE00AC96C3 /* manager */ = {
 			isa = PBXGroup;
 			children = (
+				052160A019E2E54A0007B321 /* task */,
 				056AC8F919D15DBB00AC96C3 /* TokenManager.h */,
 				056AC8FA19D15DBB00AC96C3 /* TokenManager.m */,
 				054206DC19DD6DCD0026771C /* UploadManager.h */,
@@ -1662,11 +1693,13 @@
 				051CB3A119D2E42300E5FC88 /* DocCell.m in Sources */,
 				057DF50B19D04EDF0005A389 /* RequestBaseUrlDao.m in Sources */,
 				051E1EAE19CB20D500FD1E03 /* MenuSearchCell.m in Sources */,
+				052160A619E308380007B321 /* UploadingImageCell.m in Sources */,
 				051E1E5519CAC90700FD1E03 /* AFJSONRequestOperation.m in Sources */,
 				05224A9A19DC3FDA00214767 /* SelectibleAssetView.m in Sources */,
 				051CB39E19D2E41600E5FC88 /* ImageCell.m in Sources */,
 				051E1E8919CAC92700FD1E03 /* ASIDownloadCache.m in Sources */,
 				053EC45119DA99C4000C2B77 /* NewFolderModalController.m in Sources */,
+				052160A919E30D640007B321 /* UploadRef.m in Sources */,
 				051E1EA219CB206500FD1E03 /* SlidingMenu.m in Sources */,
 				051E1E5319CAC90700FD1E03 /* AFHTTPRequestOperation.m in Sources */,
 				051E1E8A19CAC92700FD1E03 /* ASIFormDataRequest.m in Sources */,
@@ -1688,6 +1721,7 @@
 				052644BE19D5A32300B63759 /* HeaderCell.m in Sources */,
 				05224A9519DC1CBC00214767 /* PhotoListModalController.m in Sources */,
 				051E1E0719CAC2F900FD1E03 /* AppDelegate.m in Sources */,
+				052160A319E2E56B0007B321 /* DepoUploadTask.m in Sources */,
 				05BBE71119E06FB100805215 /* CameraCaptureModalController.m in Sources */,
 				051DE37319CC140100F27C85 /* CustomConfirmView.m in Sources */,
 				051E1EAB19CB20AD00FD1E03 /* MenuProfileCell.m in Sources */,

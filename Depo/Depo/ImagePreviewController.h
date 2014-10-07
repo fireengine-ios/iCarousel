@@ -9,7 +9,9 @@
 #import "MyViewController.h"
 #import "MetaFile.h"
 
-@interface ImagePreviewController : MyViewController
+@interface ImagePreviewController : MyViewController <UIScrollViewDelegate> {
+    UIImageView *imgView;
+}
 
 @property (nonatomic, strong) MetaFile *file;
 

@@ -26,8 +26,8 @@
             topIndex = 0;
             bottomIndex = 44;
         } else {
-            topIndex = 64;
-            bottomIndex = 60;
+            topIndex = 0;
+            bottomIndex = 64;
         }
     }
     return self;

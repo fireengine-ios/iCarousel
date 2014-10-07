@@ -53,8 +53,8 @@
             topIndex = 0;
             bottomIndex = 44;
         } else {
-            topIndex = 64;
-            bottomIndex = 60;
+            topIndex = 0;
+            bottomIndex = 64;
         }
         
         pageOffset = 1;
@@ -150,7 +150,7 @@
         [moreMenuView removeFromSuperview];
     }
 
-    moreMenuView = [[MoreMenuView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex) withList:itemList];
+    moreMenuView = [[MoreMenuView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height) withList:itemList];
     [self.view addSubview:moreMenuView];
     [self.view bringSubviewToFront:moreMenuView];
 }
@@ -206,6 +206,10 @@
 
 - (void) cameraCapturaModalDidCaptureAndStoreImageToPath:(NSString *)filepath {
     NSLog(@"At MyView cameraCapturaModalDidCaptureAndStoreImageToPath for filePath:%@", filepath);
+}
+
+- (void) photoModalDidTriggerUploadForUrls:(NSArray *)assetUrls {
+    NSLog(@"At MyView photoModalDidTriggerUploadForUrls");
 }
 
 @end

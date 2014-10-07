@@ -14,5 +14,8 @@
 @property (nonatomic, strong) User *user;
 @property (nonatomic, strong) NSString *authToken;
 @property (nonatomic, strong) NSString *baseUrl;
+@property (nonatomic, strong) NSMutableArray *uploadManagers;
+
+- (NSArray *) uploadRefsForFolder:(NSString *) folderName;
 
 @end

@@ -260,6 +260,7 @@
 
     AlbumListModalController *imgController = [[AlbumListModalController alloc] init];
     MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:imgController];
+    imgController.delegateRef = [self.nav topViewController];
     [self presentViewController:modalNav animated:YES completion:nil];
 }
 

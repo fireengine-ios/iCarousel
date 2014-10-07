@@ -37,3 +37,6 @@
 "MusicsTitle"="Müziklerim";
 "UnavailablePreviewTitle"="Dosya açılamıyor";
 "UnavailablePreviewSubtitle"="Bu dosya türü desteklenmiyor";
+"UploadingPlaceholder"="Dosya yükleniyor";
+"UploadFinishedPlaceholder"="Dosya yüklemesi tamamlandı";
+"UploadFailedPlaceholder"="Dosya yüklemesi başarısız";

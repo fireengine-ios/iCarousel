@@ -37,3 +37,6 @@
 "MusicsTitle"="My Music";
 "UnavailablePreviewTitle"="Unable to open file";
 "UnavailablePreviewSubtitle"="This file isn't supported";
+"UploadingPlaceholder"="Uploading file";
+"UploadFinishedPlaceholder"="Uploading finished";
+"UploadFailedPlaceholder"="Uploading failed";

@@ -7,15 +7,19 @@
 //
 
 #import "AppSession.h"
+#import "UploadManager.h"
 
 @implementation AppSession
 
 @synthesize user;
 @synthesize authToken;
 @synthesize baseUrl;
+@synthesize uploadManagers;
 
 - (id) init {
     if(self = [super init]) {
+        self.uploadManagers = [[NSMutableArray alloc] init];
+
         //TODO
         self.user = [[User alloc] init];
         self.user.profileImgUrl = @"http://s.turkcell.com.tr/profile_img/532/225/cjXlJsupflKCNP2jmf23A.jpg?wruN55vtoNoCItHngeSqW9QN4XM1Y9qgZHRnZnp8bGOut1pQZOk1!207944990!1411130039277";
@@ -24,6 +28,20 @@
         self.user.password = @"5322109091";
     }
     return self;
+}
+
+- (NSArray *) uploadRefsForFolder:(NSString *) folderName {
+    NSMutableArray *result = [[NSMutableArray alloc] init];
+    for(UploadManager *manager in self.uploadManagers) {
+        if(!manager.hasFinished) {
+            if(manager.uploadRef.folderName == nil && folderName == nil) {
+                [result addObject:manager.uploadRef];
+            } else if([folderName isEqualToString:manager.uploadRef.folderName]){
+                [result addObject:manager.uploadRef];
+            }
+        }
+    }
+    return result;
 }
 
 @end

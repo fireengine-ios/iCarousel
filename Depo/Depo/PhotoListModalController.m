@@ -9,6 +9,7 @@
 #import "PhotoListModalController.h"
 #import "CustomLabel.h"
 #import "Util.h"
+#import "UploadRef.h"
 
 @interface PhotoListModalController ()
 
@@ -16,6 +17,7 @@
 
 @implementation PhotoListModalController
 
+@synthesize modalDelegate;
 @synthesize assets;
 @synthesize selectedAssets;
 @synthesize mainScroll;
@@ -47,7 +49,6 @@
             if(group) {
                 [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
                      NSString *albumName = [group valueForProperty:ALAssetsGroupPropertyName];
-                    NSLog(@"ALBUM NAME: %@", albumName);
                     if(asset && [albumName isEqualToString:self.album.albumName]) {
                         [assets addObject:asset];
                     }
@@ -58,7 +59,7 @@
          } failureBlock:^(NSError *error) {
          }];
         
-        footerView = [[MultipleUploadFooterView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60)];
+        footerView = [[MultipleUploadFooterView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60)];
         footerView.delegate = self;
         [self.view addSubview:footerView];
         
@@ -102,17 +103,15 @@
 
 - (void) multipleUploadFooterDidTriggerUpload {
     if([selectedAssets count] > 0) {
-        ALAsset *firstAsset = [selectedAssets objectAtIndex:0];
-
-        ALAssetRepresentation *representation = [firstAsset defaultRepresentation];
-        Byte *buffer = (Byte*)malloc(representation.size);
-
-        NSUInteger buffered = [representation getBytes:buffer fromOffset:0.0 length:representation.size error:nil];
-        NSData *sourceData = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
-        
-        uploadManager = [[UploadManager alloc] initWithAssetsLibrary:self.al];
-        [uploadManager startUploadingData:sourceData atFolder:nil withFileName:representation.filename];
-//        [uploadManager startUploadingData:sourceData atFolder:nil withFileName:firstAsset.defaultRepresentation.filename];
+        NSMutableArray *selectedAssetUrls = [[NSMutableArray alloc] init];
+        for(ALAsset *row in selectedAssets) {
+            UploadRef *ref = [[UploadRef alloc] init];
+            ref.fileName = row.defaultRepresentation.filename;
+            ref.filePath = [row.defaultRepresentation.url absoluteString];
+            [selectedAssetUrls addObject:ref];
+        }
+        [modalDelegate photoModalDidTriggerUploadForUrls:selectedAssetUrls];
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
 

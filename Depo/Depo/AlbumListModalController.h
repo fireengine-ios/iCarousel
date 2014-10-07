@@ -12,6 +12,7 @@
 
 @interface AlbumListModalController : MyModalController <UITableViewDelegate, UITableViewDataSource>
 
+@property (nonatomic, strong) id delegateRef;
 @property (nonatomic, strong) NSMutableArray *albums;
 @property (nonatomic, strong) UITableView *albumTable;
 @property (nonatomic, strong) ALAssetsLibrary *al;

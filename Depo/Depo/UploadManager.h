@@ -10,9 +10,10 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "UploadNotifyDao.h"
 #import "MetaFile.h"
+#import "UploadRef.h"
 
 @protocol UploadManagerDelegate <NSObject>
-- (void) uploadManagerDidSendData:(int) bytes forAsset:(ALAsset *) assetToUpload;
+- (void) uploadManagerDidSendData:(long) sentBytes inTotal:(long) totalBytes;
 - (void) uploadManagerDidFinishUploadingForAsset:(ALAsset *) assetToUpload;
 - (void) uploadManagerDidFailUploadingForAsset:(ALAsset *) assetToUpload;
 - (void) uploadManagerDidFinishUploadingAsData;
@@ -23,6 +24,7 @@
     NSURLSessionUploadTask *uploadTask;
     UploadNotifyDao *notifyDao;
     NSURLSession *session;
+    NSString *tempPath;
 }
 
 @property (nonatomic, strong) id<UploadManagerDelegate> delegate;
@@ -31,9 +33,10 @@
 @property (nonatomic, strong) NSString *urlForUpload;
 @property (nonatomic, strong) MetaFile *folder;
 @property (nonatomic, strong) UIImage *largeimage;
+@property (nonatomic, strong) UploadRef *uploadRef;
+@property (nonatomic) BOOL hasFinished;
 
-- (id) initWithAssetsLibrary:(ALAssetsLibrary *) assetsLib;
-- (void) startUploadingAsset:(ALAsset *) _asset atFolder:(MetaFile *) _folder;
+- (void) startUploadingAsset:(NSString *) assetUrl atFolder:(MetaFile *) _folder;
 - (void) startUploadingData:(NSData *) _dataToUpload atFolder:(MetaFile *) _folder withFileName:(NSString *) fileName;
 - (void) startUploadingFile:(NSString *) filePath atFolder:(MetaFile *) _folder withFileName:(NSString *) fileName;
 

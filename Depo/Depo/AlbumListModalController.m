@@ -16,6 +16,7 @@
 
 @implementation AlbumListModalController
 
+@synthesize delegateRef;
 @synthesize albums;
 @synthesize albumTable;
 @synthesize al;
@@ -47,7 +48,6 @@
             if(group) {
                 [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
                     NSString *albumName = [group valueForProperty:ALAssetsGroupPropertyName];
-                    NSLog(@"ALBUM NAME: %@", albumName);
                     NSUInteger compareIndex = [albums indexOfObjectPassingTest:^BOOL(MetaAlbum *obj, NSUInteger idx, BOOL *stop) {
                         return [obj.albumName isEqualToString:albumName];
                     }];
@@ -102,6 +102,7 @@
     MetaAlbum *album = [self.albums objectAtIndex:indexPath.row];
     
     PhotoListModalController *photoListController = [[PhotoListModalController alloc] initWithAlbum:album];
+    photoListController.modalDelegate = self.delegateRef;
     [self.navigationController pushViewController:photoListController animated:YES];
 }
 

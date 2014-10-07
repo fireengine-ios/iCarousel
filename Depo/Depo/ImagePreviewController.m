@@ -25,13 +25,22 @@
         self.title = self.file.visibleName;
         self.view.backgroundColor = [Util UIColorForHexColor:@"191e24"];
 
-        UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex)];
+        UIScrollView *mainScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex)];
+        mainScroll.delegate = self;
+        mainScroll.maximumZoomScale = 5.0f;
+        [self.view addSubview:mainScroll];
+        
+        imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, mainScroll.frame.size.width, mainScroll.frame.size.height)];
         imgView.contentMode = UIViewContentModeScaleAspectFit;
         [imgView setImageWithURL:[NSURL URLWithString:self.file.url]];
-        [self.view addSubview:imgView];
+        [mainScroll addSubview:imgView];
 
     }
     return self;
+}
+
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+    return imgView;
 }
 
 - (void) viewWillAppear:(BOOL)animated {

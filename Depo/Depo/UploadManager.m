@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "AppSession.h"
 #import "Util.h"
+#import "AppUtil.h"
 
 typedef void (^ALAssetsLibraryAssetForURLResultBlock)(ALAsset *asset);
 typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
@@ -22,14 +23,14 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 @synthesize urlForUpload;
 @synthesize folder;
 @synthesize largeimage;
+@synthesize uploadRef;
+@synthesize hasFinished;
 
-- (id) initWithAssetsLibrary:(ALAssetsLibrary *) assetsLib {
+- (id) init {
     if(self = [super init]) {
-        self.assetsLibrary = assetsLib;
-
         NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration  defaultSessionConfiguration];
         session = [NSURLSession sessionWithConfiguration:sessionConfig delegate:self delegateQueue:nil];
-
+        
         notifyDao = [[UploadNotifyDao alloc] init];
         notifyDao.delegate = self;
         notifyDao.successMethod = @selector(uploadNotifySuccessCallback);
@@ -42,16 +43,13 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     self.folder = _folder;
     self.urlForUpload = [NSString stringWithFormat:@"%@/%@", APPDELEGATE.session.baseUrl, fileName];
 
-    NSLog(@"File Path To Upload: %@", filePath);
-    
     uploadTask = [session uploadTaskWithRequest:[self prepareRequest] fromFile:[NSURL fileURLWithPath:filePath] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        NSLog(@"At uploadTask completion handler");
         NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
         if (!error && httpResp.statusCode == 201) {
             [notifyDao requestNotifyUploadForFile:self.folder ? [NSString stringWithFormat:@"%@/%@", self.folder.name, fileName] : [NSString stringWithFormat:@"/%@", fileName]];
         } else {
-            NSLog(@"uploadTask completion handler failed, status:%d", httpResp.statusCode);
             [delegate uploadManagerDidFailUploadingAsData];
+            hasFinished = YES;
         }
     }];
     [uploadTask resume];
@@ -62,87 +60,90 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     self.urlForUpload = [NSString stringWithFormat:@"%@/%@", APPDELEGATE.session.baseUrl, fileName];
     
     uploadTask = [session uploadTaskWithRequest:[self prepareRequest] fromData:_dataToUpload completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        NSLog(@"At uploadTask completion handler");
         NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
         if (!error && httpResp.statusCode == 201) {
             [notifyDao requestNotifyUploadForFile:self.folder ? [NSString stringWithFormat:@"%@/%@", self.folder.name, fileName] : [NSString stringWithFormat:@"/%@", fileName]];
         } else {
-            NSLog(@"uploadTask completion handler failed, status:%d", httpResp.statusCode);
             [delegate uploadManagerDidFailUploadingAsData];
+            hasFinished = YES;
         }
     }];
     [uploadTask resume];
 }
 
-- (void) startUploadingAsset:(ALAsset *) _asset atFolder:(MetaFile *) _folder {
+- (void) startUploadingAsset:(NSString *) assetUrl atFolder:(MetaFile *) _folder {
     self.folder = _folder;
-    self.asset = _asset;
-    self.urlForUpload = [NSString stringWithFormat:@"%@/%@", APPDELEGATE.session.baseUrl, asset.defaultRepresentation.filename];
+    self.assetsLibrary = [[ALAssetsLibrary alloc] init];
     
-    [self findLargeImage];
-    /*
-    [uploadTask addObserver:self forKeyPath:@"countOfBytesSent" options:NSKeyValueObservingOptionNew task:^(id obj, NSDictionary *change) {
-        NSURLSessionUploadTask *observedTask = obj;
-        CGFloat fractionCompleted = roundf(100*((CGFloat)observedTask.countOfBytesSent)/((CGFloat)imageData.length))/100.0f;
-        NSLog(@"fractionCompleted: %.2f", fractionCompleted);
+    [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+        if(group) {
+            [group enumerateAssetsUsingBlock:^(ALAsset *_asset, NSUInteger index, BOOL *stop) {
+                if(_asset && !asset) {
+                    NSURL *_assetUrl = _asset.defaultRepresentation.url;
+                    if([[_assetUrl absoluteString] isEqualToString:assetUrl]) {
+                        self.asset = _asset;
+                        [self triggerAndStartAssetsTask];
+                    }
+                }
+            }];
+        }
+    } failureBlock:^(NSError *error) {
     }];
-     */
-    
 }
 
-- (void) triggerAndStartTask {
-    uploadTask = [session uploadTaskWithRequest:[self prepareRequest] fromFile:asset.defaultRepresentation.url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        NSLog(@"At uploadTask completion handler for: %@", asset.defaultRepresentation.url);
+- (void) triggerAndStartAssetsTask {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    tempPath = [documentsDirectory stringByAppendingFormat:@"/%@", asset.defaultRepresentation.filename];
+    
+    UIImage *image = [UIImage imageWithCGImage:[asset.defaultRepresentation fullResolutionImage]];
+    [UIImagePNGRepresentation(image) writeToFile:tempPath atomically:YES];
+
+    self.urlForUpload = [NSString stringWithFormat:@"%@%@%@", APPDELEGATE.session.baseUrl, self.folder ? [AppUtil enrichFileFolderName:self.folder.name] : @"/", asset.defaultRepresentation.filename];
+    
+    uploadTask = [session uploadTaskWithRequest:[self prepareRequest] fromFile:[NSURL fileURLWithPath:tempPath] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
         if (!error && httpResp.statusCode == 201) {
-            [notifyDao requestNotifyUploadForFile:self.folder ? [NSString stringWithFormat:@"%@/%@", self.folder.name, asset.defaultRepresentation.filename] : [NSString stringWithFormat:@"/%@", asset.defaultRepresentation.filename]];
+            [self removeTemporaryFile];
+            [notifyDao requestNotifyUploadForFile:self.folder ? [NSString stringWithFormat:@"%@%@", [AppUtil enrichFileFolderName:self.folder.name], asset.defaultRepresentation.filename] : [NSString stringWithFormat:@"/%@", asset.defaultRepresentation.filename]];
         } else {
-            NSLog(@"uploadTask completion handler failed, status:%d", httpResp.statusCode);
+            [self removeTemporaryFile];
             [delegate uploadManagerDidFailUploadingForAsset:self.asset];
+            hasFinished = YES;
         }
     }];
     [uploadTask resume];
+}
+
+- (void) removeTemporaryFile {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    [fileManager removeItemAtPath:tempPath error:nil];
+    [delegate uploadManagerDidFailUploadingForAsset:self.asset];
 }
 
 - (NSMutableURLRequest *) prepareRequest {
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:self.urlForUpload]];
-    NSLog(@"UPLOAD URL: %@", self.urlForUpload);
     
     [request setHTTPMethod:@"PUT"];
     [request setValue:APPDELEGATE.session.authToken forHTTPHeaderField:@"X-Auth-Token"];
     [request setValue:@"false" forHTTPHeaderField:@"X-Object-Meta-Favourite"];
     [request setValue:@"1" forHTTPHeaderField:@"x-meta-strategy"];
+    [request addValue:@"image/png" forHTTPHeaderField:@"Content-Type"];
     return request;
 }
 
 - (void) uploadNotifySuccessCallback {
     [delegate uploadManagerDidFinishUploadingForAsset:self.asset];
+    hasFinished = YES;
 }
 
 - (void) uploadNotifyFailCallback:(NSString *) errorMessage {
     [delegate uploadManagerDidFailUploadingForAsset:self.asset];
-}
-
-- (void) findLargeImage {
-    ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset) {
-        ALAssetRepresentation *rep = [myasset defaultRepresentation];
-        CGImageRef iref = [rep fullResolutionImage];
-        if (iref) {
-            largeimage = [UIImage imageWithCGImage:iref];
-            [self triggerAndStartTask];
-        }
-    };
-    
-    ALAssetsLibraryAccessFailureBlock failureblock  = ^(NSError *myerror) {
-        NSLog(@"cant get image - %@",[myerror localizedDescription]);
-    };
-    
-    NSURL *asseturl = self.asset.defaultRepresentation.url;
-    [assetsLibrary assetForURL:asseturl resultBlock:resultblock failureBlock:failureblock];
+    hasFinished = YES;
 }
 
 - (void) URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didSendBodyData:(int64_t)bytesSent totalBytesSent:(int64_t)totalBytesSent totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend {
-    NSLog(@"upload manager didSendBodyData:%d", (int)totalBytesSent);
+    [delegate uploadManagerDidSendData:(long)totalBytesSent inTotal:(long)totalBytesExpectedToSend];
 }
 
 @end
