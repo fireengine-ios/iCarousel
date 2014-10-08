@@ -1,5 +1,6 @@
 "HomeTitle"="Home";
 "FilesTitle"="All Files";
+"PhotosTitle"="Photos";
 "MenuSearch"="Search";
 "MenuHome"="Home";
 "MenuFav"="Favourites";
@@ -40,3 +41,5 @@
 "UploadingPlaceholder"="Uploading file";
 "UploadFinishedPlaceholder"="Uploading finished";
 "UploadFailedPlaceholder"="Uploading failed";
+"PhotoHeaderPhotosButton"="ALL PHOTOS";
+"PhotoHeaderAlbumsButton"="ALBUMS";

@@ -13,6 +13,8 @@
 		051412A219D46393000EAE63 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0514129F19D46393000EAE63 /* Default-568h@2x.png */; };
 		051412A519D46748000EAE63 /* FloatingAddMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 051412A419D46748000EAE63 /* FloatingAddMenu.m */; };
 		051412A819D46A84000EAE63 /* AddTypeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 051412A719D46A84000EAE63 /* AddTypeButton.m */; };
+		0515706419E5AC2600C62B98 /* PhotoHeaderSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0515706319E5AC2600C62B98 /* PhotoHeaderSegmentView.m */; };
+		0515706719E5B34100C62B98 /* SquareImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0515706619E5B34100C62B98 /* SquareImageView.m */; };
 		051CB38F19D2DD7100E5FC88 /* FileListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 051CB38E19D2DD7100E5FC88 /* FileListController.m */; };
 		051CB39219D2DD7C00E5FC88 /* PhotoListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 051CB39119D2DD7C00E5FC88 /* PhotoListController.m */; };
 		051CB39519D2E3F200E5FC88 /* AbstractFileFolderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 051CB39419D2E3F200E5FC88 /* AbstractFileFolderCell.m */; };
@@ -332,6 +334,10 @@
 		051412A419D46748000EAE63 /* FloatingAddMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FloatingAddMenu.m; sourceTree = "<group>"; };
 		051412A619D46A84000EAE63 /* AddTypeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTypeButton.h; sourceTree = "<group>"; };
 		051412A719D46A84000EAE63 /* AddTypeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTypeButton.m; sourceTree = "<group>"; };
+		0515706219E5AC2600C62B98 /* PhotoHeaderSegmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoHeaderSegmentView.h; sourceTree = "<group>"; };
+		0515706319E5AC2600C62B98 /* PhotoHeaderSegmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoHeaderSegmentView.m; sourceTree = "<group>"; };
+		0515706519E5B34100C62B98 /* SquareImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SquareImageView.h; sourceTree = "<group>"; };
+		0515706619E5B34100C62B98 /* SquareImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SquareImageView.m; sourceTree = "<group>"; };
 		051CB38D19D2DD7100E5FC88 /* FileListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileListController.h; sourceTree = "<group>"; };
 		051CB38E19D2DD7100E5FC88 /* FileListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileListController.m; sourceTree = "<group>"; };
 		051CB39019D2DD7C00E5FC88 /* PhotoListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoListController.h; sourceTree = "<group>"; };
@@ -948,6 +954,10 @@
 				05224A9919DC3FDA00214767 /* SelectibleAssetView.m */,
 				05EA75B319DC6C2400AC77AB /* MultipleUploadFooterView.h */,
 				05EA75B419DC6C2400AC77AB /* MultipleUploadFooterView.m */,
+				0515706219E5AC2600C62B98 /* PhotoHeaderSegmentView.h */,
+				0515706319E5AC2600C62B98 /* PhotoHeaderSegmentView.m */,
+				0515706519E5B34100C62B98 /* SquareImageView.h */,
+				0515706619E5B34100C62B98 /* SquareImageView.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -1724,6 +1734,7 @@
 				052160A319E2E56B0007B321 /* DepoUploadTask.m in Sources */,
 				05BBE71119E06FB100805215 /* CameraCaptureModalController.m in Sources */,
 				051DE37319CC140100F27C85 /* CustomConfirmView.m in Sources */,
+				0515706419E5AC2600C62B98 /* PhotoHeaderSegmentView.m in Sources */,
 				051E1EAB19CB20AD00FD1E03 /* MenuProfileCell.m in Sources */,
 				051DE35E19CC128600F27C85 /* BaseViewController.m in Sources */,
 				051412A819D46A84000EAE63 /* AddTypeButton.m in Sources */,
@@ -1788,6 +1799,7 @@
 				0524E32919D955FA00E2698E /* FileDetail.m in Sources */,
 				05EA75B519DC6C2400AC77AB /* MultipleUploadFooterView.m in Sources */,
 				052644B619D5A2A600B63759 /* SettingsHelpController.m in Sources */,
+				0515706719E5B34100C62B98 /* SquareImageView.m in Sources */,
 				05E8113519DF10340063F99A /* RefAlbumCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

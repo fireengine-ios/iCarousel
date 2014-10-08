@@ -28,7 +28,7 @@
         
         [self setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
         
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, (self.frame.size.height - (font.lineHeight  + 5))/2, self.frame.size.width, font.lineHeight  + 5)];
+        titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, (self.frame.size.height - (font.lineHeight  + 5))/2, self.frame.size.width, font.lineHeight  + 5)];
         titleLabel.text = title;
         titleLabel.backgroundColor = [UIColor clearColor];
         titleLabel.font = font;
@@ -48,7 +48,7 @@
             [self setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
         }
         
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, (self.frame.size.height - (font.lineHeight  + 5))/2, self.frame.size.width, font.lineHeight  + 5)];
+        titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, (self.frame.size.height - (font.lineHeight  + 5))/2, self.frame.size.width, font.lineHeight  + 5)];
         titleLabel.text = title;
         titleLabel.backgroundColor = [UIColor clearColor];
         titleLabel.font = font;
@@ -68,7 +68,7 @@
         bgImgView.image = [UIImage imageNamed:imageName];
         [self addSubview:bgImgView];
         
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, (self.frame.size.height - (font.lineHeight  + 5))/2, self.frame.size.width, font.lineHeight  + 5)];
+        titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, (self.frame.size.height - (font.lineHeight  + 5))/2, self.frame.size.width, font.lineHeight  + 5)];
         titleLabel.text = title;
         titleLabel.backgroundColor = [UIColor clearColor];
         titleLabel.font = font;
@@ -77,6 +77,10 @@
         [self addSubview:titleLabel];
     }
     return self;
+}
+
+- (void) changeTextColor:(UIColor *) newColor {
+    titleLabel.textColor = newColor;
 }
 
 /*

@@ -1,5 +1,6 @@
 "HomeTitle"="Anasayfa";
 "FilesTitle"="Tüm Dosyalar";
+"PhotosTitle"="Resimler";
 "MenuSearch"="Arama";
 "MenuHome"="Anasayfa";
 "MenuFav"="Favoriler";
@@ -40,3 +41,5 @@
 "UploadingPlaceholder"="Dosya yükleniyor";
 "UploadFinishedPlaceholder"="Dosya yüklemesi tamamlandı";
 "UploadFailedPlaceholder"="Dosya yüklemesi başarısız";
+"PhotoHeaderPhotosButton"="RESİMLER";
+"PhotoHeaderAlbumsButton"="ALBÜMLER";

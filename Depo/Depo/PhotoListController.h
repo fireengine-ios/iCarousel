@@ -9,9 +9,13 @@
 #import "MyViewController.h"
 #import "FileListDao.h"
 #import "MetaFile.h"
+#import "PhotoHeaderSegmentView.h"
 
-@interface PhotoListController : MyViewController {
+@interface PhotoListController : MyViewController <PhotoHeaderSegmentDelegate> {
     FileListDao *fileListDao;
 }
+
+@property (nonatomic, strong) PhotoHeaderSegmentView *headerView;
+@property (nonatomic, strong) UIScrollView *photosScroll;
 
 @end

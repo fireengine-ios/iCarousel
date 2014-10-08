@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CustomButton : UIButton
+@interface CustomButton : UIButton {
+    UILabel *titleLabel;
+}
 
 - (id)initWithFrame:(CGRect)frame withImageName:(NSString *) imageName;
 - (id)initWithFrame:(CGRect)frame withImageName:(NSString *) imageName withTitle:(NSString *) title withFont:(UIFont *) font;
 - (id)initWithFrame:(CGRect)frame withImageName:(NSString *) imageName withTitle:(NSString *) title withFont:(UIFont *) font fillXY:(BOOL) shouldFillXY;
 - (id)initWithFrame:(CGRect)frame withImageName:(NSString *) imageName withTitle:(NSString *) title withFont:(UIFont *) font withColor:(UIColor *) textColor;
+- (void) changeTextColor:(UIColor *) newColor;
 
 @end
