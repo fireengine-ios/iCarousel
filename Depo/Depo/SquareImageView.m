@@ -11,6 +11,7 @@
 
 @implementation SquareImageView
 
+@synthesize delegate;
 @synthesize file;
 
 - (id)initWithFrame:(CGRect)frame withFile:(MetaFile *) _file {
@@ -20,10 +21,13 @@
 
         UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
         [imgView setImageWithURL:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
-        NSLog(@"IMG URL: %@", [self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]);
         [self addSubview:imgView];
     }
     return self;
+}
+
+- (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    [delegate squareImageWasSelectedForFile:self.file];
 }
 
 /*

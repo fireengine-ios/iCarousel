@@ -26,6 +26,8 @@
 
 #define UPLOAD_NOTIFY_URL BASE_URL@"/notification/onFileUpload?fileName=%@"
 
+#define ALBUM_LIST_URL BASE_URL@"/album?page=%d&size=%d&sortBy=label&sortOrder=ASC"
+
 #define APN_URL @"http://pushserver.turkcell.com.tr/PushServer/rest/registerdevice/"
 
 #define SHORTEN_URL @"https://www.googleapis.com/urlshortener/v1/url"
@@ -74,5 +76,6 @@
 - (void) shouldReturnSuccess;
 - (void) shouldReturnSuccessWithObject:(id) obj;
 - (void) shouldReturnFailWithMessage:(NSString *) errorMessage;
+- (MetaFile *) parseFile:(NSDictionary *) dict;
 
 @end

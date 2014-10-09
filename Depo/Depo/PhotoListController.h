@@ -10,12 +10,24 @@
 #import "FileListDao.h"
 #import "MetaFile.h"
 #import "PhotoHeaderSegmentView.h"
+#import "SquareImageView.h"
+#import "AlbumListDao.h"
 
-@interface PhotoListController : MyViewController <PhotoHeaderSegmentDelegate> {
+@interface PhotoListController : MyViewController <PhotoHeaderSegmentDelegate, SquareImageDelegate, UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate> {
+    
     FileListDao *fileListDao;
+    AlbumListDao *albumListDao;
+    
+    int listOffset;
+    BOOL isLoading;
 }
 
 @property (nonatomic, strong) PhotoHeaderSegmentView *headerView;
 @property (nonatomic, strong) UIScrollView *photosScroll;
+@property (nonatomic, strong) NSMutableArray *photoList;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
+
+@property (nonatomic, strong) NSMutableArray *albumList;
+@property (nonatomic, strong) UITableView *albumTable;
 
 @end

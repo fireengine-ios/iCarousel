@@ -306,6 +306,9 @@
 		05BBE71119E06FB100805215 /* CameraCaptureModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BBE71019E06FB100805215 /* CameraCaptureModalController.m */; };
 		05BBE71419E07D0400805215 /* RefSongCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BBE71319E07D0400805215 /* RefSongCell.m */; };
 		05BBE71619E07DA600805215 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05BBE71519E07DA600805215 /* MediaPlayer.framework */; };
+		05D2B19719E676BF00FC309D /* AlbumListDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D2B19619E676BF00FC309D /* AlbumListDao.m */; };
+		05D2B19A19E679E500FC309D /* PhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D2B19919E679E500FC309D /* PhotoAlbum.m */; };
+		05D2B19D19E67C6900FC309D /* MainPhotoAlbumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D2B19C19E67C6900FC309D /* MainPhotoAlbumCell.m */; };
 		05E8112F19DF09DB0063F99A /* AlbumListModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8112E19DF09DB0063F99A /* AlbumListModalController.m */; };
 		05E8113219DF0ACB0063F99A /* MetaAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8113119DF0ACB0063F99A /* MetaAlbum.m */; };
 		05E8113519DF10340063F99A /* RefAlbumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8113419DF10340063F99A /* RefAlbumCell.m */; };
@@ -741,6 +744,12 @@
 		05BBE71219E07D0400805215 /* RefSongCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefSongCell.h; sourceTree = "<group>"; };
 		05BBE71319E07D0400805215 /* RefSongCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefSongCell.m; sourceTree = "<group>"; };
 		05BBE71519E07DA600805215 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		05D2B19519E676BF00FC309D /* AlbumListDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumListDao.h; sourceTree = "<group>"; };
+		05D2B19619E676BF00FC309D /* AlbumListDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumListDao.m; sourceTree = "<group>"; };
+		05D2B19819E679E500FC309D /* PhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoAlbum.h; sourceTree = "<group>"; };
+		05D2B19919E679E500FC309D /* PhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoAlbum.m; sourceTree = "<group>"; };
+		05D2B19B19E67C6900FC309D /* MainPhotoAlbumCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPhotoAlbumCell.h; sourceTree = "<group>"; };
+		05D2B19C19E67C6900FC309D /* MainPhotoAlbumCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPhotoAlbumCell.m; sourceTree = "<group>"; };
 		05E8112D19DF09DB0063F99A /* AlbumListModalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumListModalController.h; sourceTree = "<group>"; };
 		05E8112E19DF09DB0063F99A /* AlbumListModalController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumListModalController.m; sourceTree = "<group>"; };
 		05E8113019DF0ACB0063F99A /* MetaAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetaAlbum.h; sourceTree = "<group>"; };
@@ -995,6 +1004,8 @@
 				05EA75B719DC78C800AC77AB /* UploadDao.m */,
 				054206D919DD399C0026771C /* UploadNotifyDao.h */,
 				054206DA19DD399C0026771C /* UploadNotifyDao.m */,
+				05D2B19519E676BF00FC309D /* AlbumListDao.h */,
+				05D2B19619E676BF00FC309D /* AlbumListDao.m */,
 			);
 			name = http;
 			sourceTree = "<group>";
@@ -1016,6 +1027,8 @@
 				05E8113119DF0ACB0063F99A /* MetaAlbum.m */,
 				052160A719E30D640007B321 /* UploadRef.h */,
 				052160A819E30D640007B321 /* UploadRef.m */,
+				05D2B19819E679E500FC309D /* PhotoAlbum.h */,
+				05D2B19919E679E500FC309D /* PhotoAlbum.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -1057,6 +1070,8 @@
 				05BBE71319E07D0400805215 /* RefSongCell.m */,
 				052160A419E308380007B321 /* UploadingImageCell.h */,
 				052160A519E308380007B321 /* UploadingImageCell.m */,
+				05D2B19B19E67C6900FC309D /* MainPhotoAlbumCell.h */,
+				05D2B19C19E67C6900FC309D /* MainPhotoAlbumCell.m */,
 			);
 			name = cell;
 			sourceTree = "<group>";
@@ -1709,6 +1724,7 @@
 				051CB39E19D2E41600E5FC88 /* ImageCell.m in Sources */,
 				051E1E8919CAC92700FD1E03 /* ASIDownloadCache.m in Sources */,
 				053EC45119DA99C4000C2B77 /* NewFolderModalController.m in Sources */,
+				05D2B19A19E679E500FC309D /* PhotoAlbum.m in Sources */,
 				052160A919E30D640007B321 /* UploadRef.m in Sources */,
 				051E1EA219CB206500FD1E03 /* SlidingMenu.m in Sources */,
 				051E1E5319CAC90700FD1E03 /* AFHTTPRequestOperation.m in Sources */,
@@ -1796,6 +1812,8 @@
 				051CB39519D2E3F200E5FC88 /* AbstractFileFolderCell.m in Sources */,
 				0589066D19CC560100A9E517 /* CustomLabel.m in Sources */,
 				05E8113819DF27690063F99A /* MusicListModalController.m in Sources */,
+				05D2B19D19E67C6900FC309D /* MainPhotoAlbumCell.m in Sources */,
+				05D2B19719E676BF00FC309D /* AlbumListDao.m in Sources */,
 				0524E32919D955FA00E2698E /* FileDetail.m in Sources */,
 				05EA75B519DC6C2400AC77AB /* MultipleUploadFooterView.m in Sources */,
 				052644B619D5A2A600B63759 /* SettingsHelpController.m in Sources */,

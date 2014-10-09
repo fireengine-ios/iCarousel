@@ -32,7 +32,7 @@
         
         imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, mainScroll.frame.size.width, mainScroll.frame.size.height)];
         imgView.contentMode = UIViewContentModeScaleAspectFit;
-        [imgView setImageWithURL:[NSURL URLWithString:self.file.url]];
+        [imgView setImageWithURL:[NSURL URLWithString:[self.file.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding ]]];
         [mainScroll addSubview:imgView];
 
     }
