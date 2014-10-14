@@ -39,6 +39,7 @@
 @synthesize tableUpdateCounter;
 @synthesize totalPageCount;
 @synthesize searchQueryRef;
+@synthesize scrollingLastContentOffset;
 
 - (id)init {
     self = [super init];
@@ -135,7 +136,8 @@
     [super viewDidAppear:animated];
     NSArray *addTypesForController = [APPDELEGATE.mapUtil readAddTypesByController:NSStringFromClass(self.class)];
     if(addTypesForController != nil) {
-        [APPDELEGATE.base presentAddButtonWithDelegate:self];
+        [APPDELEGATE.base presentAddButtonWithList:addTypesForController];
+        NSLog(@"DICT: %@", addTypesForController);
     } else {
         [APPDELEGATE.base dismissAddButton];
     }
@@ -192,7 +194,7 @@
     }
     NSArray *addTypesForController = [APPDELEGATE.mapUtil readAddTypesByController:NSStringFromClass(self.class)];
     if(addTypesForController != nil) {
-        [APPDELEGATE.base presentAddButtonWithDelegate:nil];
+        [APPDELEGATE.base presentAddButtonWithList:addTypesForController];
     }
 }
 

@@ -25,5 +25,6 @@
 @synthesize contentType;
 @synthesize lastModified;
 @synthesize detail;
+@synthesize contentLengthDisplay;
 
 @end

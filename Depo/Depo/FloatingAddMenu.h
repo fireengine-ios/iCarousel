@@ -11,6 +11,7 @@
 
 @protocol FloatingAddDelegate <NSObject>
 - (void) floatingMenuDidTriggerAddFolder;
+- (void) floatingMenuDidTriggerAddAlbum;
 - (void) floatingMenuDidTriggerAddMusic;
 - (void) floatingMenuDidTriggerAddPhoto;
 - (void) floatingMenuDidTriggerCamera;
@@ -21,13 +22,11 @@
 }
 
 @property (nonatomic, strong) id<FloatingAddDelegate> delegate;
-@property (nonatomic, strong) AddTypeButton *folderButton;
-@property (nonatomic, strong) AddTypeButton *musicButton;
-@property (nonatomic, strong) AddTypeButton *photoButton;
-@property (nonatomic, strong) AddTypeButton *cameraButton;
+@property (nonatomic, strong) NSMutableArray *buttons;
 @property (nonatomic) CGPoint initialPoint;
 
 - (id)initWithFrame:(CGRect)frame withBasePoint:(CGPoint) basePoint;
+- (void) loadButtons:(NSArray *) buttonTypes;
 - (void) presentWithAnimation;
 - (void) dismissWithAnimation;
 

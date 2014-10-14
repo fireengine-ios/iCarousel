@@ -13,6 +13,7 @@
 "AddTypeFolderTitle"="Yeni Klasör";
 "AddTypePhotoTitle"="Foto Ekle";
 "AddTypeCameraTitle"="Kamerayı Aç";
+"AddTypeAlbumTitle"="Albüm Ekle";
 "MoreMenuSortTitle"="Sırala";
 "MoreMenuSelectTitle"="Seç";
 "MoreMenuDetailTitle"="Klasör Detayları";
@@ -43,3 +44,8 @@
 "UploadFailedPlaceholder"="Dosya yüklemesi başarısız";
 "PhotoHeaderPhotosButton"="RESİMLER";
 "PhotoHeaderAlbumsButton"="ALBÜMLER";
+"AlbumCellSubtitle"="%d Foto, %d Video";
+"AlbumCellSubtitlePhotosOnly"="%d Foto";
+"AlbumCellSubtitleVideosOnly"="%d Video";
+"NoAlbumMessage"="Albüm Yok";
+"NoAlbumSubmessage"="Yeni bir albüm oluşturmak için \"+\" düğmesine basınız";

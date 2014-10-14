@@ -42,6 +42,7 @@
 @property (nonatomic) BOOL isLoadingMore;
 @property (nonatomic) BOOL isLoadingEnabled;
 @property (nonatomic) BOOL resetResultTable;
+@property (nonatomic, assign) CGFloat scrollingLastContentOffset;
 
 - (void) showLoading;
 - (void) hideLoading;

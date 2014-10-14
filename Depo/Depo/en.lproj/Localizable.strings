@@ -13,6 +13,7 @@
 "AddTypeFolderTitle"="New Folder";
 "AddTypePhotoTitle"="Add Photo";
 "AddTypeCameraTitle"="Use Camera";
+"AddTypeAlbumTitle"="Add Album";
 "MoreMenuSortTitle"="Sort";
 "MoreMenuSelectTitle"="Select";
 "MoreMenuDetailTitle"="Folder Details";
@@ -43,3 +44,8 @@
 "UploadFailedPlaceholder"="Uploading failed";
 "PhotoHeaderPhotosButton"="ALL PHOTOS";
 "PhotoHeaderAlbumsButton"="ALBUMS";
+"AlbumCellSubtitle"="%d Photos, %d Videos";
+"AlbumCellSubtitlePhotosOnly"="%d Photos";
+"AlbumCellSubtitleVideosOnly"="%d Videos";
+"NoAlbumMessage"="No Album";
+"NoAlbumSubmessage"="Tap the \"+\" button to create a new photo album";

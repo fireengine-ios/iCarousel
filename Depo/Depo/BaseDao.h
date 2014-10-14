@@ -28,6 +28,8 @@
 
 #define ALBUM_LIST_URL BASE_URL@"/album?page=%d&size=%d&sortBy=label&sortOrder=ASC"
 
+#define ALBUM_DETAIL_URL BASE_URL@"/album/%d?page=%d&size=%d&sortBy=createdDate&sortOrder=DESC&"
+
 #define APN_URL @"http://pushserver.turkcell.com.tr/PushServer/rest/registerdevice/"
 
 #define SHORTEN_URL @"https://www.googleapis.com/urlshortener/v1/url"

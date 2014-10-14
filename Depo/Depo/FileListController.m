@@ -21,6 +21,7 @@
 #import "UploadingImageCell.h"
 #import "AppDelegate.h"
 #import "AppSession.h"
+#import "VideoPreviewController.h"
 
 @interface FileListController ()
 
@@ -211,8 +212,12 @@
             ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFile:fileAtIndex];
             detail.nav = self.nav;
             [self.nav pushViewController:detail animated:NO];
-        } else if([AppUtil isMetaFileDoc:fileAtIndex] || [AppUtil isMetaFileVideo:fileAtIndex] || [AppUtil isMetaFileMusic:fileAtIndex]){
+        } else if([AppUtil isMetaFileDoc:fileAtIndex] || [AppUtil isMetaFileMusic:fileAtIndex]){
             FileDetailInWebViewController *detail = [[FileDetailInWebViewController alloc] initWithFile:fileAtIndex];
+            detail.nav = self.nav;
+            [self.nav pushViewController:detail animated:NO];
+        } else if([AppUtil isMetaFileVideo:fileAtIndex]) {
+            VideoPreviewController *detail = [[VideoPreviewController alloc] initWithFile:fileAtIndex];
             detail.nav = self.nav;
             [self.nav pushViewController:detail animated:NO];
         } else {

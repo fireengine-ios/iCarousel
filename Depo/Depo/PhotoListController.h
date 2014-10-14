@@ -18,6 +18,9 @@
     FileListDao *fileListDao;
     AlbumListDao *albumListDao;
     
+    float normalizedContentHeight;
+    float maximizedContentHeight;
+    
     int listOffset;
     BOOL isLoading;
 }

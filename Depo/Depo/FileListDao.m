@@ -33,7 +33,7 @@
 }
 
 - (void) requestPhotosForOffset:(int) offset andSize:(int) size {
-    NSString *parentListingUrl = [NSString stringWithFormat:IMG_LISTING_MAIN_URL, @"content_type", @"image", @"last_modified", offset, size];
+    NSString *parentListingUrl = [NSString stringWithFormat:IMG_LISTING_MAIN_URL, @"content_type", @"image%20OR%20video", @"last_modified", offset*size, size];
 	NSURL *url = [NSURL URLWithString:parentListingUrl];
 	
 	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];

@@ -4,10 +4,16 @@
 <dict>
 	<key>FileListController</key>
 	<array>
-		<string>AddTypeFolder</string>
-		<string>AddTypeMusic</string>
-		<string>AddTypePhoto</string>
 		<string>AddTypeCamera</string>
+		<string>AddTypePhoto</string>
+		<string>AddTypeMusic</string>
+		<string>AddTypeFolder</string>
+	</array>
+	<key>PhotoListController</key>
+	<array>
+		<string>AddTypeCamera</string>
+		<string>AddTypePhoto</string>
+		<string>AddTypeAlbum</string>
 	</array>
 </dict>
 </plist>

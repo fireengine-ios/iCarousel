@@ -82,6 +82,7 @@
             iconName = @"blue_add_music_icon.png";
             break;
         case AddTypeFolder:
+        case AddTypeAlbum:
             iconName = @"blue_add_new_folder_icon.png";
             break;
         case AddTypePhoto:
@@ -104,6 +105,9 @@
             break;
         case AddTypeFolder:
             title = NSLocalizedString(@"AddTypeFolderTitle", @"");
+            break;
+        case AddTypeAlbum:
+            title = NSLocalizedString(@"AddTypeAlbumTitle", @"");
             break;
         case AddTypePhoto:
             title = NSLocalizedString(@"AddTypePhotoTitle", @"");
@@ -198,7 +202,7 @@
 }
 
 + (BOOL) isMetaFileVideo:(MetaFile *) file {
-    return [file.rawContentType isEqualToString:CONTENT_TYPE_VIDEO_VALUE];
+    return ([file.rawContentType isEqualToString:CONTENT_TYPE_QUICKTIME_VALUE] || [file.rawContentType isEqualToString:CONTENT_TYPE_MP4_VALUE]);
 }
 
 + (BOOL) isMetaFileMusic:(MetaFile *) file {
@@ -207,6 +211,19 @@
 
 + (BOOL) isMetaFileDoc:(MetaFile *) file {
     return ([file.rawContentType isEqualToString:CONTENT_TYPE_PDF_VALUE] || [file.rawContentType isEqualToString:CONTENT_TYPE_DOC_VALUE] || [file.rawContentType isEqualToString:CONTENT_TYPE_TXT_VALUE] || [file.rawContentType isEqualToString:CONTENT_TYPE_HTML_VALUE]);
+}
+
++ (AddType) strToAddType:(NSString *) str {
+    if([str isEqualToString:@"AddTypeAlbum"]) {
+        return AddTypeAlbum;
+    } else if([str isEqualToString:@"AddTypeMusic"]) {
+            return AddTypeMusic;
+    } else if([str isEqualToString:@"AddTypePhoto"]) {
+        return AddTypePhoto;
+    } else if([str isEqualToString:@"AddTypeCamera"]) {
+        return AddTypeCamera;
+    }
+    return AddTypeFolder;
 }
 
 @end

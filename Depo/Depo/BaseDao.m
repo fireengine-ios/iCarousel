@@ -133,7 +133,7 @@
         return ContentTypePhoto;
     } else if([metaFile.rawContentType isEqualToString:CONTENT_TYPE_AUDIO_MP3_VALUE] || [metaFile.rawContentType isEqualToString:CONTENT_TYPE_AUDIO_MPEG_VALUE]) {
             return ContentTypeMusic;
-    } else if([metaFile.rawContentType isEqualToString:CONTENT_TYPE_VIDEO_VALUE]) {
+    } else if([metaFile.rawContentType isEqualToString:CONTENT_TYPE_QUICKTIME_VALUE] || [metaFile.rawContentType isEqualToString:CONTENT_TYPE_MP4_VALUE]) {
         return ContentTypeVideo;
     } else if([metaFile.rawContentType isEqualToString:CONTENT_TYPE_PDF_VALUE] || [metaFile.rawContentType isEqualToString:CONTENT_TYPE_DOC_VALUE] || [metaFile.rawContentType isEqualToString:CONTENT_TYPE_TXT_VALUE] || [metaFile.rawContentType isEqualToString:CONTENT_TYPE_HTML_VALUE]) {
         return ContentTypeDoc;
@@ -182,6 +182,7 @@
     file.rawContentType = [self strByRawVal:content_type];
     file.contentType = [self contentTypeByRawValue:file];
     file.visibleName = [AppUtil nakedFileFolderName:file.name];
+    file.contentLengthDisplay = @"02:04";
     
     NSDictionary *detailDict = [dict objectForKey:@"metadata"];
     if(detailDict != nil && ![detailDict isKindOfClass:[NSNull class]]) {

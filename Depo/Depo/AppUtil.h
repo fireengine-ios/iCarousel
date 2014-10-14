@@ -24,5 +24,6 @@
 + (BOOL) isMetaFileVideo:(MetaFile *) file;
 + (BOOL) isMetaFileMusic:(MetaFile *) file;
 + (BOOL) isMetaFileDoc:(MetaFile *) file;
++ (AddType) strToAddType:(NSString *) str;
 
 @end

@@ -300,7 +300,8 @@
     [self hideBaseLoading];
 }
 
-- (void) presentAddButtonWithDelegate:(id) delegate {
+- (void) presentAddButtonWithList:(NSArray *) addTypeList {
+    [self.addMenu loadButtons:addTypeList];
     self.addButton.hidden = NO;
     [scroll bringSubviewToFront:self.addButton];
 }

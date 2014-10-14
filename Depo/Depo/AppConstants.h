@@ -10,6 +10,8 @@
 
 #define IS_BELOW_6 ([[[UIDevice currentDevice] systemVersion] floatValue] < 6.0)
 
+#define IS_IPAD ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+
 #define DEGREES_TO_RADIANS(angle) ((angle) / 180.0 * M_PI)
 
 #define turkcellAuthAppIdTest @"151"
@@ -43,7 +45,9 @@
 
 #define CONTENT_TYPE_AUDIO_MPEG_VALUE @"audio/mpeg"
 
-#define CONTENT_TYPE_VIDEO_VALUE @"video/mp4"
+#define CONTENT_TYPE_QUICKTIME_VALUE @"video/quicktime"
+
+#define CONTENT_TYPE_MP4_VALUE @"video/mp4"
 
 #define CONTENT_TYPE_PDF_VALUE @"application/pdf"
 
@@ -100,6 +104,7 @@ typedef enum {
 
 typedef enum {
 	AddTypeFolder = 0,
+	AddTypeAlbum,
 	AddTypePhoto,
 	AddTypeMusic,
 	AddTypeCamera,

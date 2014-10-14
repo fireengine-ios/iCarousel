@@ -8,6 +8,7 @@
 
 #import "SquareImageView.h"
 #import "UIImageView+AFNetworking.h"
+#import "CustomLabel.h"
 
 @implementation SquareImageView
 
@@ -22,6 +23,16 @@
         UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
         [imgView setImageWithURL:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
         [self addSubview:imgView];
+        
+        if(self.file.contentType == ContentTypeVideo) {
+            UIImageView *playIconView = [[UIImageView alloc] initWithFrame:CGRectMake(4, self.frame.size.height - 22, 18, 18)];
+            playIconView.image = [UIImage imageNamed:@"mini_play_icon.png"];
+            [self addSubview:playIconView];
+        
+            CustomLabel *durationLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(22, self.frame.size.height - 22, self.frame.size.width - 26, 18) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:15] withColor:[UIColor whiteColor] withText:self.file.contentLengthDisplay];
+            durationLabel.textAlignment = NSTextAlignmentRight;
+            [self addSubview:durationLabel];
+        }
     }
     return self;
 }

@@ -28,7 +28,7 @@
 - (void) showBaseLoading;
 - (void) hideBaseLoading;
 - (id)initWithRootViewController:(MyViewController *) rootViewController;
-- (void) presentAddButtonWithDelegate:(id) delegate;
+- (void) presentAddButtonWithList:(NSArray *) _addTypeList;
 - (void) dismissAddButton;
 
 @end

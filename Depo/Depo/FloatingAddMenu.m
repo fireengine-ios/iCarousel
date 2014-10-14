@@ -7,14 +7,12 @@
 //
 
 #import "FloatingAddMenu.h"
+#import "AppUtil.h"
 
 @implementation FloatingAddMenu
 
 @synthesize delegate;
-@synthesize folderButton;
-@synthesize musicButton;
-@synthesize photoButton;
-@synthesize cameraButton;
+@synthesize buttons;
 @synthesize initialPoint;
 
 - (id)initWithFrame:(CGRect)frame withBasePoint:(CGPoint) basePoint {
@@ -30,27 +28,26 @@
         
         buttonHeight = (self.frame.size.height - 120) / 4;
         
-        folderButton = [[AddTypeButton alloc] initWithFrame:CGRectMake(0, 0, 100, buttonHeight) withAddType:AddTypeFolder];
-        folderButton.center = initialPoint;
-        [folderButton addTarget:self action:@selector(triggerAddFolder) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:folderButton];
-
-        musicButton = [[AddTypeButton alloc] initWithFrame:CGRectMake(0, 0, 100, buttonHeight) withAddType:AddTypeMusic];
-        musicButton.center = initialPoint;
-        [musicButton addTarget:self action:@selector(triggerAddMusic) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:musicButton];
-
-        photoButton = [[AddTypeButton alloc] initWithFrame:CGRectMake(0, 0, 100, buttonHeight) withAddType:AddTypePhoto];
-        photoButton.center = initialPoint;
-        [photoButton addTarget:self action:@selector(triggerAddPhoto) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:photoButton];
-
-        cameraButton = [[AddTypeButton alloc] initWithFrame:CGRectMake(0, 0, 100, buttonHeight) withAddType:AddTypeCamera];
-        cameraButton.center = initialPoint;
-        [cameraButton addTarget:self action:@selector(triggerCamera) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:cameraButton];
+        buttons = [[NSMutableArray alloc] init];
     }
     return self;
+}
+
+- (void) loadButtons:(NSArray *) buttonTypes {
+    for(AddTypeButton *button in buttons) {
+        [button removeFromSuperview];
+    }
+    [buttons removeAllObjects];
+    
+    for(NSString *buttonType in buttonTypes) {
+        AddType addType = [AppUtil strToAddType:buttonType];
+        AddTypeButton *button = [[AddTypeButton alloc] initWithFrame:CGRectMake(0, 0, 100, 90) withAddType:addType];
+        button.center = initialPoint;
+        button.tag = addType;
+        [button addTarget:self action:@selector(triggerAddButton:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:button];
+        [buttons addObject:button];
+    }
 }
 
 - (void) presentWithAnimation {
@@ -58,14 +55,12 @@
                           delay:0.0
                         options:0
                      animations:^{
-                         folderButton.frame = CGRectMake(110, 20, 100, buttonHeight);
-                         folderButton.alpha = 1.0f;
-                         musicButton.frame = CGRectMake(110, buttonHeight + 20, 100, buttonHeight);
-                         musicButton.alpha = 1.0f;
-                         photoButton.frame = CGRectMake(110, buttonHeight*2 + 20, 100, buttonHeight);
-                         photoButton.alpha = 1.0f;
-                         cameraButton.frame = CGRectMake(110, buttonHeight*3 + 20, 100, buttonHeight);
-                         cameraButton.alpha = 1.0f;
+                         int counter = 1;
+                         for(AddTypeButton *button in buttons) {
+                             button.frame = CGRectMake(110, initialPoint.y - 35 - counter * 90, 100, 90);
+                             button.alpha = 1.0f;
+                             counter ++;
+                         }
                      }
                      completion:^(BOOL finished) {
                      }];
@@ -76,18 +71,36 @@
                           delay:0.0
                         options:0
                      animations:^{
-                         folderButton.center = initialPoint;
-                         musicButton.center = initialPoint;
-                         photoButton.center = initialPoint;
-                         cameraButton.center = initialPoint;
-
-                         folderButton.alpha = 0.0f;
-                         musicButton.alpha = 0.0f;
-                         photoButton.alpha = 0.0f;
-                         cameraButton.alpha = 0.0f;
+                         for(AddTypeButton *button in buttons) {
+                             button.center = initialPoint;
+                             button.alpha = 0.0f;
+                         }
                      }
                      completion:^(BOOL finished) {
                      }];
+}
+
+- (void) triggerAddButton:(id)sender {
+    AddTypeButton *senderButton = (AddTypeButton *) sender;
+    switch (senderButton.tag) {
+        case AddTypeFolder:
+            [delegate floatingMenuDidTriggerAddFolder];
+            break;
+        case AddTypeMusic:
+            [delegate floatingMenuDidTriggerAddMusic];
+            break;
+        case AddTypePhoto:
+            [delegate floatingMenuDidTriggerAddPhoto];
+            break;
+        case AddTypeCamera:
+            [delegate floatingMenuDidTriggerCamera];
+            break;
+        case AddTypeAlbum:
+            [delegate floatingMenuDidTriggerAddFolder];
+            break;
+        default:
+            break;
+    }
 }
 
 - (void) triggerAddFolder {

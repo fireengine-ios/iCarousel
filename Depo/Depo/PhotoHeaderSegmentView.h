@@ -15,11 +15,13 @@
 @end
 
 @interface PhotoHeaderSegmentView : UIView {
-    UIImageView *flapView;
+    UIImageView *bgView;
 }
 
 @property (nonatomic, strong) id<PhotoHeaderSegmentDelegate> delegate;
 @property (nonatomic, strong) CustomButton *photoButton;
 @property (nonatomic, strong) CustomButton *albumButton;
+@property (nonatomic, strong) UIImage *firstBgImg;
+@property (nonatomic, strong) UIImage *secondBgImg;
 
 @end

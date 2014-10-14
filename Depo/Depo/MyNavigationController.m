@@ -72,11 +72,11 @@
 }
 
 - (void) hideNavigationBar {
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [self setNavigationBarHidden:YES animated:YES];
 }
 
 - (void) showNavigationBar {
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)viewDidLoad

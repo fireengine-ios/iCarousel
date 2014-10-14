@@ -27,5 +27,6 @@
 @property (nonatomic) ContentType contentType;
 @property (nonatomic, strong) NSDate *lastModified;
 @property (nonatomic, strong) FileDetail *detail;
+@property (nonatomic, strong) NSString *contentLengthDisplay;
 
 @end
