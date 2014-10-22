@@ -10,6 +10,6 @@
 
 @interface UploadNotifyDao : BaseDao
 
-- (void) requestNotifyUploadForFile:(NSString *) fileContext;
+- (void) requestNotifyUploadForFile:(NSString *) fileUuid atParentFolder:(NSString *) parentUuid;
 
 @end

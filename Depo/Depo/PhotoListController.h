@@ -7,16 +7,18 @@
 //
 
 #import "MyViewController.h"
-#import "FileListDao.h"
+#import "ElasticSearchDao.h"
 #import "MetaFile.h"
 #import "PhotoHeaderSegmentView.h"
 #import "SquareImageView.h"
 #import "AlbumListDao.h"
+#import "AddAlbumDao.h"
 
 @interface PhotoListController : MyViewController <PhotoHeaderSegmentDelegate, SquareImageDelegate, UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate> {
     
-    FileListDao *fileListDao;
+    ElasticSearchDao *elasticSearchDao;
     AlbumListDao *albumListDao;
+    AddAlbumDao *addAlbumDao;
     
     float normalizedContentHeight;
     float maximizedContentHeight;

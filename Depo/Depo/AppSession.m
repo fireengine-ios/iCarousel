@@ -24,19 +24,31 @@
         self.user = [[User alloc] init];
         self.user.profileImgUrl = @"http://s.turkcell.com.tr/profile_img/532/225/cjXlJsupflKCNP2jmf23A.jpg?wruN55vtoNoCItHngeSqW9QN4XM1Y9qgZHRnZnp8bGOut1pQZOk1!207944990!1411130039277";
         self.user.fullName = @"Mahir Kemal Tarlan";
-        self.user.msisdn = @"5322109091";
-        self.user.password = @"5322109091";
+        self.user.msisdn = @"5322109094";
+        self.user.password = @"5322109094";
     }
     return self;
 }
 
-- (NSArray *) uploadRefsForFolder:(NSString *) folderName {
+- (NSArray *) uploadRefsForFolder:(NSString *) folderUuid {
     NSMutableArray *result = [[NSMutableArray alloc] init];
     for(UploadManager *manager in self.uploadManagers) {
         if(!manager.hasFinished) {
-            if(manager.uploadRef.folderName == nil && folderName == nil) {
+            if(manager.uploadRef.folderUuid == nil && folderUuid == nil) {
                 [result addObject:manager.uploadRef];
-            } else if([folderName isEqualToString:manager.uploadRef.folderName]){
+            } else if([folderUuid isEqualToString:manager.uploadRef.folderUuid]){
+                [result addObject:manager.uploadRef];
+            }
+        }
+    }
+    return result;
+}
+
+- (NSArray *) uploadImageRefs {
+    NSMutableArray *result = [[NSMutableArray alloc] init];
+    for(UploadManager *manager in self.uploadManagers) {
+        if(!manager.hasFinished) {
+            if(manager.uploadRef.contentType == ContentTypePhoto || manager.uploadRef.contentType == ContentTypeVideo) {
                 [result addObject:manager.uploadRef];
             }
         }

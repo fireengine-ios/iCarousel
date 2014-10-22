@@ -20,14 +20,15 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 @synthesize delegate;
 @synthesize asset;
 @synthesize assetsLibrary;
-@synthesize urlForUpload;
 @synthesize folder;
 @synthesize largeimage;
 @synthesize uploadRef;
 @synthesize hasFinished;
 
-- (id) init {
+- (id) initWithUploadReference:(UploadRef *) ref {
     if(self = [super init]) {
+        self.uploadRef = ref;
+        
         NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration  defaultSessionConfiguration];
         session = [NSURLSession sessionWithConfiguration:sessionConfig delegate:self delegateQueue:nil];
         
@@ -40,13 +41,17 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 }
 
 - (void) startUploadingFile:(NSString *) filePath atFolder:(MetaFile *) _folder withFileName:(NSString *) fileName {
+    NSString *newUuid = [[NSUUID UUID] UUIDString];
     self.folder = _folder;
-    self.urlForUpload = [NSString stringWithFormat:@"%@/%@", APPDELEGATE.session.baseUrl, fileName];
+    
+    self.uploadRef.urlForUpload = [NSString stringWithFormat:@"%@/%@", APPDELEGATE.session.baseUrl, newUuid];
+    self.uploadRef.fileUuid = newUuid;
+    self.uploadRef.folderUuid = _folder ? _folder.uuid : nil;
 
-    uploadTask = [session uploadTaskWithRequest:[self prepareRequest] fromFile:[NSURL fileURLWithPath:filePath] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    uploadTask = [session uploadTaskWithRequest:[self prepareRequestWithFileName:fileName] fromFile:[NSURL fileURLWithPath:filePath] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
         if (!error && httpResp.statusCode == 201) {
-            [notifyDao requestNotifyUploadForFile:self.folder ? [NSString stringWithFormat:@"%@/%@", self.folder.name, fileName] : [NSString stringWithFormat:@"/%@", fileName]];
+            [notifyDao requestNotifyUploadForFile:newUuid atParentFolder:self.folder?self.folder.uuid : @""];
         } else {
             [delegate uploadManagerDidFailUploadingAsData];
             hasFinished = YES;
@@ -56,13 +61,17 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 }
 
 - (void) startUploadingData:(NSData *) _dataToUpload atFolder:(MetaFile *) _folder withFileName:(NSString *) fileName {
+    NSString *newUuid = [[NSUUID UUID] UUIDString];
     self.folder = _folder;
-    self.urlForUpload = [NSString stringWithFormat:@"%@/%@", APPDELEGATE.session.baseUrl, fileName];
     
-    uploadTask = [session uploadTaskWithRequest:[self prepareRequest] fromData:_dataToUpload completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    self.uploadRef.fileUuid = newUuid;
+    self.uploadRef.urlForUpload = [NSString stringWithFormat:@"%@/%@", APPDELEGATE.session.baseUrl, newUuid];
+    self.uploadRef.folderUuid = _folder ? _folder.uuid : nil;
+    
+    uploadTask = [session uploadTaskWithRequest:[self prepareRequestWithFileName:fileName] fromData:_dataToUpload completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
         if (!error && httpResp.statusCode == 201) {
-            [notifyDao requestNotifyUploadForFile:self.folder ? [NSString stringWithFormat:@"%@/%@", self.folder.name, fileName] : [NSString stringWithFormat:@"/%@", fileName]];
+            [notifyDao requestNotifyUploadForFile:newUuid atParentFolder:self.folder?self.folder.uuid:@""];
         } else {
             [delegate uploadManagerDidFailUploadingAsData];
             hasFinished = YES;
@@ -74,6 +83,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 - (void) startUploadingAsset:(NSString *) assetUrl atFolder:(MetaFile *) _folder {
     self.folder = _folder;
     self.assetsLibrary = [[ALAssetsLibrary alloc] init];
+    self.uploadRef.folderUuid = _folder ? _folder.uuid : nil;
     
     [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
         if(group) {
@@ -92,20 +102,23 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 }
 
 - (void) triggerAndStartAssetsTask {
+    NSString *newUuid = [[NSUUID UUID] UUIDString];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     tempPath = [documentsDirectory stringByAppendingFormat:@"/%@", asset.defaultRepresentation.filename];
+    self.uploadRef.tempUrl = tempPath;
+    self.uploadRef.fileUuid = newUuid;
     
     UIImage *image = [UIImage imageWithCGImage:[asset.defaultRepresentation fullResolutionImage]];
     [UIImagePNGRepresentation(image) writeToFile:tempPath atomically:YES];
 
-    self.urlForUpload = [NSString stringWithFormat:@"%@%@%@", APPDELEGATE.session.baseUrl, self.folder ? [AppUtil enrichFileFolderName:self.folder.name] : @"/", asset.defaultRepresentation.filename];
+    self.uploadRef.urlForUpload = [NSString stringWithFormat:@"%@/%@", APPDELEGATE.session.baseUrl, newUuid];
     
-    uploadTask = [session uploadTaskWithRequest:[self prepareRequest] fromFile:[NSURL fileURLWithPath:tempPath] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    uploadTask = [session uploadTaskWithRequest:[self prepareRequestWithFileName:asset.defaultRepresentation.filename] fromFile:[NSURL fileURLWithPath:tempPath] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
         if (!error && httpResp.statusCode == 201) {
             [self removeTemporaryFile];
-            [notifyDao requestNotifyUploadForFile:self.folder ? [NSString stringWithFormat:@"%@%@", [AppUtil enrichFileFolderName:self.folder.name], asset.defaultRepresentation.filename] : [NSString stringWithFormat:@"/%@", asset.defaultRepresentation.filename]];
+            [notifyDao requestNotifyUploadForFile:newUuid atParentFolder:self.folder?self.folder.uuid:@""];
         } else {
             [self removeTemporaryFile];
             [delegate uploadManagerDidFailUploadingForAsset:self.asset];
@@ -121,13 +134,19 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     [delegate uploadManagerDidFailUploadingForAsset:self.asset];
 }
 
-- (NSMutableURLRequest *) prepareRequest {
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:self.urlForUpload]];
+- (NSMutableURLRequest *) prepareRequestWithFileName:(NSString *) fileName {
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:self.uploadRef.urlForUpload]];
     
     [request setHTTPMethod:@"PUT"];
     [request setValue:APPDELEGATE.session.authToken forHTTPHeaderField:@"X-Auth-Token"];
     [request setValue:@"false" forHTTPHeaderField:@"X-Object-Meta-Favourite"];
     [request setValue:@"1" forHTTPHeaderField:@"x-meta-strategy"];
+    if(self.folder) {
+        [request setValue:self.folder.uuid forHTTPHeaderField:@"X-Object-Meta-Parent-Uuid"];
+    } else {
+        [request setValue:@"" forHTTPHeaderField:@"X-Object-Meta-Parent-Uuid"];
+    }
+    [request setValue:fileName forHTTPHeaderField:@"X-Object-Meta-File-Name"];
     [request addValue:@"image/png" forHTTPHeaderField:@"Content-Type"];
     return request;
 }

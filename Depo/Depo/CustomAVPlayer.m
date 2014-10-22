@@ -7,6 +7,7 @@
 
 #import "CustomAVPlayer.h"
 #import "AppDelegate.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 static void *AVPlayerPlaybackViewControllerRateObservationContext = &AVPlayerPlaybackViewControllerRateObservationContext;
 static void *AVPlayerPlaybackViewControllerStatusObservationContext = &AVPlayerPlaybackViewControllerStatusObservationContext;
@@ -20,6 +21,7 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
 @synthesize mPlayerItem;
 @synthesize player;
 @synthesize playerLayer;
+@synthesize currentAsset;
 @synthesize seekToZeroBeforePlay;
 @synthesize controlVisible;
 @synthesize video;
@@ -44,18 +46,17 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
 }
 
 - (void) initializePlayer {
-    AVURLAsset *asset = [AVURLAsset URLAssetWithURL:[NSURL URLWithString:self.video.tempDownloadUrl] options:nil];
-    [AVURLAsset URLAssetWithURL:[NSURL URLWithString:self.video.tempDownloadUrl] options:nil];
+    self.currentAsset = [AVURLAsset URLAssetWithURL:[NSURL URLWithString:self.video.tempDownloadUrl] options:nil];
     
     NSArray *requestedKeys = [NSArray arrayWithObjects:@"tracks", @"playable", nil];
     
     /* Tells the asset to load the values of any of the specified keys that are not already loaded. */
-    [asset loadValuesAsynchronouslyForKeys:requestedKeys completionHandler:
+    [currentAsset loadValuesAsynchronouslyForKeys:requestedKeys completionHandler:
      ^{
          dispatch_async( dispatch_get_main_queue(),
                         ^{
                             /* IMPORTANT: Must dispatch to main queue in order to operate on the AVPlayer and AVPlayerItem. */
-                            [self prepareToPlayAsset:asset withKeys:requestedKeys];
+                            [self prepareToPlayAsset:currentAsset withKeys:requestedKeys];
                             [self initializeControlAndInfo];
                         });
      }];
@@ -66,7 +67,7 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
         [controlView removeFromSuperview];
     }
     
-    controlView = [[CustomAVControl alloc] initWithFrame:CGRectMake(0, self.frame.size.height-40, self.frame.size.width, 40) withTotalDuration:self.video.contentLengthDisplay];
+    controlView = [[CustomAVControl alloc] initWithFrame:CGRectMake(0, self.frame.size.height-110, self.frame.size.width, 110) withTotalDuration:self.video.contentLengthDisplay];
     //        controlView.alpha = 0.8;
     controlView.delegate = self;
     controlVisible = YES;
@@ -184,7 +185,10 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
             case AVPlayerStatusReadyToPlay: {
                 [self.player play];
                 [self.controlView videoDidStart];
-
+                
+                float currentVolumeVal = [self.player volume];
+                [self.controlView initialVolumeLevel:currentVolumeVal];
+                
                 UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(move:)];
                 [panRecognizer setMinimumNumberOfTouches:1];
                 [panRecognizer setMaximumNumberOfTouches:1];
@@ -255,6 +259,26 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
 
 - (void) customAVShouldSeek:(CMTime)timeToSeek {
     [self.player seekToTime:timeToSeek];
+}
+
+- (void) customAVShouldChangeVolumeTo:(float)volumeVal {
+    if(player) {
+        NSArray *audioTracks = [currentAsset tracksWithMediaType:AVMediaTypeAudio];
+
+        NSMutableArray *allAudioParams = [NSMutableArray array];
+        for (AVAssetTrack *track in audioTracks) {
+            AVMutableAudioMixInputParameters *audioInputParams =
+            [AVMutableAudioMixInputParameters audioMixInputParameters];
+            [audioInputParams setVolume:volumeVal atTime:kCMTimeZero];
+            [audioInputParams setTrackID:[track trackID]];
+            [allAudioParams addObject:audioInputParams];
+        }
+        
+        AVMutableAudioMix *audioMix = [AVMutableAudioMix audioMix];
+        [audioMix setInputParameters:allAudioParams];
+        
+        [mPlayerItem setAudioMix:audioMix];
+    }
 }
 
 - (void) syncSlider {

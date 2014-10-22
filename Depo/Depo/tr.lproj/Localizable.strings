@@ -49,3 +49,6 @@
 "AlbumCellSubtitleVideosOnly"="%d Video";
 "NoAlbumMessage"="Albüm Yok";
 "NoAlbumSubmessage"="Yeni bir albüm oluşturmak için \"+\" düğmesine basınız";
+"NewAlbumTitle"="Yeni Albüm";
+"AlbumAddTitle"="ALBÜM İSMİ";
+"AlbumNamePlaceholder"="Örnek Albüm İsmi";

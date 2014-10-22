@@ -108,6 +108,11 @@
             UploadRef *ref = [[UploadRef alloc] init];
             ref.fileName = row.defaultRepresentation.filename;
             ref.filePath = [row.defaultRepresentation.url absoluteString];
+            if ([[row valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
+                ref.contentType = ContentTypeVideo;
+            } else {
+                ref.contentType = ContentTypePhoto;
+            }
             [selectedAssetUrls addObject:ref];
         }
         [modalDelegate photoModalDidTriggerUploadForUrls:selectedAssetUrls];
@@ -116,6 +121,20 @@
 }
 
 - (void) multipleUploadFooterDidTriggerSelectAll {
+    if(mainScroll) {
+        for(UIView *innerView in mainScroll.subviews) {
+            if([innerView isKindOfClass:[SelectibleAssetView class]]) {
+                SelectibleAssetView *assetView = (SelectibleAssetView *) innerView;
+                if(!assetView.isSelected) {
+                    [assetView manuallySelect];
+                    if(![selectedAssets containsObject:assetView.asset]) {
+                        [selectedAssets addObject:assetView.asset];
+                    }
+                }
+            }
+        }
+        self.title = [NSString stringWithFormat:NSLocalizedString(@"AddPhotosTitle", @""), [selectedAssets count], [assets count]];
+    }
 }
 
 - (void) multipleUploadFooterDidTriggerDeselectAll {

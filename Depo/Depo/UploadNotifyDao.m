@@ -10,8 +10,8 @@
 
 @implementation UploadNotifyDao
 
-- (void) requestNotifyUploadForFile:(NSString *) fileContext {
-    NSString *urlStr = [NSString stringWithFormat:UPLOAD_NOTIFY_URL, fileContext];
+- (void) requestNotifyUploadForFile:(NSString *) fileUuid atParentFolder:(NSString *) parentUuid {
+    NSString *urlStr = [NSString stringWithFormat:UPLOAD_NOTIFY_URL, parentUuid, fileUuid];
 	NSURL *url = [NSURL URLWithString:urlStr];
 
 	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];

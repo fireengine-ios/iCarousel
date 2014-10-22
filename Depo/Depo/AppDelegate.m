@@ -21,6 +21,7 @@
 @synthesize base;
 @synthesize tokenManager;
 @synthesize mapUtil;
+@synthesize progress;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -32,12 +33,17 @@
     
     mapUtil = [[MapUtil alloc] init];
     
+    [self addInitialBgImage];
+
+    progress = [[MBProgressHUD alloc] initWithWindow:self.window];
+    progress.opacity = 0.4f;
+    [self.window addSubview:progress];
+
     tokenManager = [[TokenManager alloc] init];
     tokenManager.delegate = self;
     [tokenManager requestToken];
+    [self showMainLoading];
 
-    [self addInitialBgImage];
-    
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -49,12 +55,16 @@
 }
 
 - (void) tokenManagerDidReceiveBaseUrl {
+    [self hideMainLoading];
+    
     MyViewController *homeController = [[HomeController alloc] init];
     base = [[BaseViewController alloc] initWithRootViewController:homeController];
     [self.window setRootViewController:base];
 }
 
 - (void) tokenManagerDidFailReceivingBaseUrl {
+    [self hideMainLoading];
+
     MyViewController *homeController = [[HomeController alloc] init];
     base = [[BaseViewController alloc] initWithRootViewController:homeController];
     [self.window setRootViewController:base];
@@ -82,6 +92,15 @@
 - (void) showCustomConfirm:(CustomConfirmView *) alertView {
     [self.window addSubview:alertView];
     [self.window bringSubviewToFront:alertView];
+}
+
+- (void) showMainLoading {
+    [progress show:YES];
+    [self.window bringSubviewToFront:progress];
+}
+
+- (void) hideMainLoading {
+    [progress hide:YES];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

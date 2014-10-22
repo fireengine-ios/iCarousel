@@ -37,9 +37,9 @@
         
         photoList = [[NSMutableArray alloc] init];
         
-        if(self.album.cover.url) {
+        if(self.album.cover.tempDownloadUrl) {
             UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 160)];
-            [bgImgView setImageWithURL:[NSURL URLWithString:self.album.cover.url]];
+            [bgImgView setImageWithURL:[NSURL URLWithString:self.album.cover.tempDownloadUrl]];
             [self.view addSubview:bgImgView];
             
             UIImageView *maskImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 160)];
@@ -78,7 +78,7 @@
         [self.view addSubview:photosScroll];
         
         listOffset = 0;
-        [detailDao requestDetailOfAlbum:self.album.albumId forStart:0 andSize:20];
+        [detailDao requestDetailOfAlbum:self.album.uuid forStart:0 andSize:20];
 
     }
     return self;

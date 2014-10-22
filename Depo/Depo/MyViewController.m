@@ -214,4 +214,8 @@
     NSLog(@"At MyView photoModalDidTriggerUploadForUrls");
 }
 
+- (void) newAlbumModalDidTriggerNewAlbumWithName:(NSString *)albumName {
+    NSLog(@"At MyView newAlbumModalDidTriggerNewAlbumWithName");
+}
+
 @end

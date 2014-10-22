@@ -83,6 +83,10 @@
     titleLabel.textColor = newColor;
 }
 
+- (void) updateImage:(NSString *) newImgName {
+    [self setImage:[UIImage imageNamed:newImgName] forState:UIControlStateNormal];
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

@@ -10,6 +10,7 @@
 
 @implementation MetaFile
 
+@synthesize uuid;
 @synthesize hash;
 @synthesize subDir;
 @synthesize parent;
@@ -19,7 +20,6 @@
 @synthesize folder;
 @synthesize hidden;
 @synthesize path;
-@synthesize url;
 @synthesize tempDownloadUrl;
 @synthesize rawContentType;
 @synthesize contentType;

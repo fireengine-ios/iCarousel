@@ -10,8 +10,8 @@
 
 @implementation AddFolderDao
 
-- (void) requestAddFolderAtPath:(NSString *) path {
-	NSURL *url = [NSURL URLWithString:ADD_FOLDER_URL];
+- (void) requestAddFolderToParent:(NSString *) parentUuid withName:(NSString *) folderName {
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:ADD_FOLDER_URL, parentUuid]];
 	
     NSDictionary *metadata = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO], @"X-Object-Meta-Favourite", nil];
     NSDictionary *payload = [NSDictionary dictionaryWithObjectsAndKeys:metadata, @"metadata", nil];
@@ -21,10 +21,9 @@
     NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
     
     NSLog(@"Add Folder Payload: %@", jsonStr);
-    NSLog(@"Add Folder Destination Path: %@", [self enrichFileFolderName:path]);
     
 	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request addRequestHeader:@"Destination-Path" value:[self enrichFileFolderName:path]];
+    [request addRequestHeader:@"Folder-Name" value:folderName];
     [request setPostBody:[postData mutableCopy]];
     [request setDelegate:self];
     

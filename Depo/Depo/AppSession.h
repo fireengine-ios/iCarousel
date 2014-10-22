@@ -16,6 +16,7 @@
 @property (nonatomic, strong) NSString *baseUrl;
 @property (nonatomic, strong) NSMutableArray *uploadManagers;
 
-- (NSArray *) uploadRefsForFolder:(NSString *) folderName;
+- (NSArray *) uploadRefsForFolder:(NSString *) folderUuid;
+- (NSArray *) uploadImageRefs;
 
 @end

@@ -212,44 +212,23 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 		
 		taskInProgress = NO;
 		rotationTransform = CGAffineTransformIdentity;
-
-        iconYIndex = 28;
-        UIImageView *customImgView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"loading_bg.png"]] autorelease];
-        customImgView.frame = CGRectMake(0, 0, 120, 120);
-        customImgView.center = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
-
-
-        iconView = [[UIImageView alloc] initWithFrame:CGRectMake(51, 36, 18, 18)];
-        iconView.image = [UIImage imageNamed:@"loading_icon.png"];
-        [customImgView addSubview:iconView];
-
-        /*
-         CGPoint startPoint = CGPointMake((customImgView.frame.size.width-15)/2, (customImgView.frame.size.height-15)/2 - iconYIndex);
-         CGPoint endPoint = CGPointMake((customImgView.frame.size.width-15)/2, (customImgView.frame.size.height-15)/2 + iconYIndex);
-         CGPoint middlePoint = CGPointMake((customImgView.frame.size.width-15)/2 + iconYIndex, (customImgView.frame.size.height-15)/2);
-        CGMutablePathRef path = CGPathCreateMutable();
-        CGPathMoveToPoint(path, NULL, startPoint.x, startPoint.y);
-        CGPathAddQuadCurveToPoint(path, NULL,middlePoint.x, middlePoint.y,endPoint.x,endPoint.y);
-        CAKeyframeAnimation *pathAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
-        pathAnimation.removedOnCompletion = NO;
-        pathAnimation.path = path;
-        [pathAnimation setCalculationMode:kCAAnimationCubic];
-        [pathAnimation setFillMode:kCAFillModeForwards];
-        pathAnimation.duration = 1.0;
-        [iconView.layer addAnimation:pathAnimation forKey:nil];
-         */
-        CAKeyframeAnimation *a = [CAKeyframeAnimation animationWithKeyPath:@"position"];
-        CGRect circleRect = CGRectMake(30, 30, iconYIndex*2, iconYIndex*2);
-        a.duration = 1.2;
-//        a.rotationMode = kCAAnimationRotateAuto;
-        a.path = [UIBezierPath bezierPathWithOvalInRect:circleRect].CGPath;
-        a.repeatCount = INFINITY;
-        [a setCalculationMode:kCAAnimationPaced];
-        [iconView.layer addAnimation:a forKey:@"moveCircle"];
         
+        UIView *customContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
+        customContainer.center = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
         
-        self.customView = customImgView;
-		
+        UIImageView *customImgView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"inner_loading_bg.png"]] autorelease];
+        customImgView.frame = CGRectMake(0, 0, 75, 75);
+        customImgView.center = CGPointMake(customContainer.frame.size.width/2, customContainer.frame.size.height/2);
+        [customContainer addSubview:customImgView];
+        
+        windowProgress = 0.0f;
+        annularIndicator = [[MBRoundProgressView alloc] initWithFrame:CGRectMake(3, 3, 74, 74)];
+        [annularIndicator setAnnular:YES];
+        annularIndicator.progress = windowProgress;
+        [customContainer addSubview:annularIndicator];
+        windowTimer = [NSTimer scheduledTimerWithTimeInterval:0.05f target:self selector:@selector(increaseWindowLoading) userInfo:nil repeats:YES];
+        
+        self.customView = customContainer;
 		[self setupLabels];
 		[self updateIndicators];
 		[self registerForKVO];
@@ -299,16 +278,16 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 		taskInProgress = NO;
 		rotationTransform = CGAffineTransformIdentity;
         
-        UIView *customContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
+        UIView *customContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 155, 155)];
         customContainer.center = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
         
-        UIImageView *customImgView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"loading1.png"]] autorelease];
-        customImgView.frame = CGRectMake(0, 0, 75, 75);
+        UIImageView *customImgView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"default_loading_bg.png"]] autorelease];
+        customImgView.frame = CGRectMake(0, 0, 150, 150);
         customImgView.center = CGPointMake(customContainer.frame.size.width/2, customContainer.frame.size.height/2);
         [customContainer addSubview:customImgView];
 
         windowProgress = 0.0f;
-        annularIndicator = [[MBRoundProgressView alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
+        annularIndicator = [[MBRoundProgressView alloc] initWithFrame:CGRectMake(0, 0, 155, 155)];
         [annularIndicator setAnnular:YES];
         annularIndicator.progress = windowProgress;
         [customContainer addSubview:annularIndicator];

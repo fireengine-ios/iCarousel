@@ -20,6 +20,7 @@
 #import "AlbumListModalController.h"
 #import "MusicListModalController.h"
 #import "CameraCaptureModalController.h"
+#import "NewAlbumModalController.h"
 
 #define kMenuOpenOriginX 276
 
@@ -272,6 +273,17 @@
     CameraCaptureModalController *cameraController = [[CameraCaptureModalController alloc] init];
     cameraController.modalDelegate = [self.nav topViewController];
     [self presentViewController:cameraController animated:YES completion:nil];
+}
+
+- (void) floatingMenuDidTriggerAddAlbum {
+    [addButton immediateReset];
+    [addMenu dismissWithAnimation];
+    [self performSelector:@selector(hideAddMenu) withObject:nil afterDelay:0.3];
+    
+    NewAlbumModalController *folderController = [[NewAlbumModalController alloc] init];
+    folderController.delegate = [self.nav topViewController];
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:folderController];
+    [self presentViewController:modalNav animated:YES completion:nil];
 }
 
 - (void) hideAddMenu {

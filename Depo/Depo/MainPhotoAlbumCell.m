@@ -20,9 +20,9 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.album = _album;
         
-        if(self.album.cover.url) {
+        if(self.album.cover.tempDownloadUrl) {
             UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 160)];
-            [bgImgView setImageWithURL:[NSURL URLWithString:self.album.cover.url]];
+            [bgImgView setImageWithURL:[NSURL URLWithString:self.album.cover.tempDownloadUrl]];
             [self addSubview:bgImgView];
             
             UIImageView *maskImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 160)];

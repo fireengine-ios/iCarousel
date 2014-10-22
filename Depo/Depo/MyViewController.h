@@ -14,6 +14,7 @@
 #import "NewFolderModalController.h"
 #import "CameraCaptureModalController.h"
 #import "PhotoListModalController.h"
+#import "NewAlbumModalController.h"
 
 @protocol MyViewDelegate <NSObject>
 - (void) shouldToggleMenu;
@@ -21,7 +22,7 @@
 - (void) shouldTriggerLogin;
 @end
 
-@interface MyViewController : UIViewController <NewFolderDelegate, CameraCapturaModalDelegate, PhotoModalDelegate> {
+@interface MyViewController : UIViewController <NewFolderDelegate, CameraCapturaModalDelegate, PhotoModalDelegate, NewAlbumDelegate> {
     NSMutableDictionary *filterDictionary;
 }
 

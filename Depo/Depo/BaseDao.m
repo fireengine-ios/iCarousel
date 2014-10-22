@@ -154,6 +154,7 @@
 }
 
 - (MetaFile *) parseFile:(NSDictionary *) dict {
+    NSString *uuid = [dict objectForKey:@"uuid"];
     NSString *hash = [dict objectForKey:@"hash"];
     NSString *subdir = [dict objectForKey:@"subdir"];
     NSString *parent = [dict objectForKey:@"parent"];
@@ -162,12 +163,12 @@
     NSNumber *folder = [dict objectForKey:@"folder"];
     NSNumber *hidden = [dict objectForKey:@"hidden"];
     NSString *path = [dict objectForKey:@"path"];
-    NSString *url = [dict objectForKey:@"url"];
     NSString *tempDownloadURL = [dict objectForKey:@"tempDownloadURL"];
     NSString *last_modified = [dict objectForKey:@"last_modified"];
     NSString *content_type = [dict objectForKey:@"content_type"];
     
     MetaFile *file = [[MetaFile alloc] init];
+    file.uuid = [self strByRawVal:uuid];
     file.hash = [self strByRawVal:hash];
     file.subDir = [self strByRawVal:subdir];
     file.parent = [self strByRawVal:parent];
@@ -176,7 +177,6 @@
     file.folder = [self boolByNumber:folder];
     file.hidden = [self boolByNumber:hidden];
     file.path = [self strByRawVal:path];
-    file.url = [self strByRawVal:url];
     file.tempDownloadUrl = [self strByRawVal:tempDownloadURL];
     file.lastModified = [self dateByRawVal:last_modified];
     file.rawContentType = [self strByRawVal:content_type];

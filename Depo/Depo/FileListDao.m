@@ -12,8 +12,8 @@
 
 @implementation FileListDao
 
-- (void) requestFileListingForParentForOffset:(int) offset andSize:(int) size {
-    NSString *parentListingUrl = [NSString stringWithFormat:FILE_LISTING_MAIN_URL, @"parent", @"", @"name", offset, size];
+- (void) requestFileListingForParentForPage:(int) page andSize:(int) size {
+    NSString *parentListingUrl = [NSString stringWithFormat:FILE_LISTING_MAIN_URL, @"", page, size];
 	NSURL *url = [NSURL URLWithString:parentListingUrl];
 	
 	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
@@ -22,18 +22,8 @@
     [self sendGetRequest:request];
 }
 
-- (void) requestFileListingForFolder:(NSString *) folder andForOffset:(int) offset andSize:(int) size {
-    NSString *parentListingUrl = [NSString stringWithFormat:FILE_LISTING_MAIN_URL, @"parent", [self enrichFileFolderName:folder], @"name", offset, size];
-	NSURL *url = [NSURL URLWithString:parentListingUrl];
-	
-	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setDelegate:self];
-    
-    [self sendGetRequest:request];
-}
-
-- (void) requestPhotosForOffset:(int) offset andSize:(int) size {
-    NSString *parentListingUrl = [NSString stringWithFormat:IMG_LISTING_MAIN_URL, @"content_type", @"image%20OR%20video", @"last_modified", offset*size, size];
+- (void) requestFileListingForFolder:(NSString *) folderUuid andForPage:(int) page andSize:(int) size {
+    NSString *parentListingUrl = [NSString stringWithFormat:FILE_LISTING_MAIN_URL, folderUuid, page, size];
 	NSURL *url = [NSURL URLWithString:parentListingUrl];
 	
 	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
@@ -51,18 +41,22 @@
         NSLog(@"File Listing Response: %@", responseEnc);
         
 		SBJSON *jsonParser = [SBJSON new];
-		NSArray *mainArray = [jsonParser objectWithString:responseEnc];
-        
-        NSMutableArray *result = [[NSMutableArray alloc] init];
-        
-        if(mainArray != nil && ![mainArray isKindOfClass:[NSNull class]]) {
-            for(NSDictionary *fileDict in mainArray) {
-                [result addObject:[self parseFile:fileDict]];
+		NSDictionary *mainDict = [jsonParser objectWithString:responseEnc];
+
+        if(mainDict != nil && ![mainDict isKindOfClass:[NSNull class]]) {
+            NSDictionary *mainArray = [mainDict objectForKey:@"fileList"];
+            
+            NSMutableArray *result = [[NSMutableArray alloc] init];
+            
+            if(mainArray != nil && ![mainArray isKindOfClass:[NSNull class]]) {
+                for(NSDictionary *fileDict in mainArray) {
+                    [result addObject:[self parseFile:fileDict]];
+                }
             }
+            [self shouldReturnSuccessWithObject:result];
+        } else {
+            [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
         }
-        
-        [self shouldReturnSuccessWithObject:result];
-		
 	} else {
         [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
 	}

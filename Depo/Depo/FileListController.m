@@ -74,10 +74,11 @@
         [fileTable addSubview:refreshControl];
 
         if(self.folder) {
-            [fileListDao requestFileListingForFolder:self.folder.name andForOffset:listOffset*NO_OF_FILES_PER_PAGE andSize:NO_OF_FILES_PER_PAGE];
+            [fileListDao requestFileListingForFolder:self.folder.uuid andForPage:listOffset andSize:NO_OF_FILES_PER_PAGE];
         } else {
-            [fileListDao requestFileListingForParentForOffset:listOffset*NO_OF_FILES_PER_PAGE andSize:NO_OF_FILES_PER_PAGE];
+            [fileListDao requestFileListingForParentForPage:listOffset andSize:NO_OF_FILES_PER_PAGE];
         }
+        [self showLoading];
     }
     return self;
 }
@@ -89,22 +90,26 @@
 - (void) triggerRefresh {
     listOffset = 0;
     if(self.folder) {
-        [fileListDao requestFileListingForFolder:self.folder.name andForOffset:listOffset*NO_OF_FILES_PER_PAGE andSize:NO_OF_FILES_PER_PAGE];
+        [fileListDao requestFileListingForFolder:self.folder.uuid andForPage:listOffset andSize:NO_OF_FILES_PER_PAGE];
     } else {
-        [fileListDao requestFileListingForParentForOffset:listOffset*NO_OF_FILES_PER_PAGE andSize:NO_OF_FILES_PER_PAGE];
+        [fileListDao requestFileListingForParentForPage:listOffset andSize:NO_OF_FILES_PER_PAGE];
     }
 }
 
 - (void) fileListSuccessCallback:(NSArray *) files {
+    [self hideLoading];
+
     if(refreshControl) {
         [refreshControl endRefreshing];
     }
-    self.fileList = [[APPDELEGATE.session uploadRefsForFolder:[self.folder name]] arrayByAddingObjectsFromArray:files];
+    self.fileList = [[APPDELEGATE.session uploadRefsForFolder:[self.folder uuid]] arrayByAddingObjectsFromArray:files];
     self.tableUpdateCounter ++;
     [fileTable reloadData];
 }
 
 - (void) fileListFailCallback:(NSString *) errorMessage {
+    [self hideLoading];
+
     if(refreshControl) {
         [refreshControl endRefreshing];
     }
@@ -112,6 +117,8 @@
 }
 
 - (void) loadMoreSuccessCallback:(NSArray *) files {
+    [self hideLoading];
+
     if(refreshControl) {
         [refreshControl endRefreshing];
     }
@@ -122,6 +129,8 @@
 }
 
 - (void) loadMoreFailCallback:(NSString *) errorMessage {
+    [self hideLoading];
+
     if(refreshControl) {
         [refreshControl endRefreshing];
     }
@@ -134,9 +143,9 @@
 
     listOffset = 0;
     if(self.folder) {
-        [fileListDao requestFileListingForFolder:self.folder.name andForOffset:listOffset*NO_OF_FILES_PER_PAGE andSize:NO_OF_FILES_PER_PAGE];
+        [fileListDao requestFileListingForFolder:self.folder.uuid andForPage:listOffset andSize:NO_OF_FILES_PER_PAGE];
     } else {
-        [fileListDao requestFileListingForParentForOffset:listOffset*NO_OF_FILES_PER_PAGE andSize:NO_OF_FILES_PER_PAGE];
+        [fileListDao requestFileListingForParentForPage:listOffset andSize:NO_OF_FILES_PER_PAGE];
     }
 }
 
@@ -244,9 +253,9 @@
 - (void) dynamicallyLoadNextPage {
     listOffset ++;
     if(self.folder) {
-        [loadMoreDao requestFileListingForFolder:self.folder.name andForOffset:listOffset*NO_OF_FILES_PER_PAGE andSize:NO_OF_FILES_PER_PAGE];
+        [loadMoreDao requestFileListingForFolder:self.folder.uuid andForPage:listOffset andSize:NO_OF_FILES_PER_PAGE];
     } else {
-        [loadMoreDao requestFileListingForParentForOffset:listOffset*NO_OF_FILES_PER_PAGE andSize:NO_OF_FILES_PER_PAGE];
+        [loadMoreDao requestFileListingForParentForPage:listOffset andSize:NO_OF_FILES_PER_PAGE];
     }
 }
 
@@ -271,7 +280,7 @@
 }
 
 - (void) newFolderModalDidTriggerNewFolderWithName:(NSString *)folderName {
-    [addFolderDao requestAddFolderAtPath:[self appendNewFileName:folderName]];
+    [addFolderDao requestAddFolderToParent:self.folder.uuid ? self.folder.uuid : @"" withName:folderName];
     [self pushProgressViewWithProcessMessage:NSLocalizedString(@"FolderAddProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"FolderAddSuccessMessage", @"") andFailMessage:NSLocalizedString(@"FolderAddFailMessage", @"")];
 }
 
@@ -294,9 +303,7 @@
 
 - (void) photoModalDidTriggerUploadForUrls:(NSArray *)assetUrls {
     for(UploadRef *ref in assetUrls) {
-        UploadManager *manager = [[UploadManager alloc] init];
-        ref.folderName = [self.folder name];
-        manager.uploadRef = ref;
+        UploadManager *manager = [[UploadManager alloc] initWithUploadReference:ref];
         [manager startUploadingAsset:ref.filePath atFolder:self.folder];
         [APPDELEGATE.session.uploadManagers addObject:manager];
     }

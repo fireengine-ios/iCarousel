@@ -49,3 +49,6 @@
 "AlbumCellSubtitleVideosOnly"="%d Videos";
 "NoAlbumMessage"="No Album";
 "NoAlbumSubmessage"="Tap the \"+\" button to create a new photo album";
+"NewAlbumTitle"="New Album";
+"AlbumAddTitle"="ALBUM NAME";
+"AlbumNamePlaceholder"="Example Album Name";

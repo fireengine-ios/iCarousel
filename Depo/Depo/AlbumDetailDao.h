@@ -10,6 +10,6 @@
 
 @interface AlbumDetailDao : BaseDao
 
-- (void) requestDetailOfAlbum:(long) albumId forStart:(int) start andSize:(int) size;
+- (void) requestDetailOfAlbum:(NSString *) albumUuid forStart:(int) page andSize:(int) size;
 
 @end

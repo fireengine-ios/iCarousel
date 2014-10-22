@@ -10,8 +10,7 @@
 
 @interface FileListDao : BaseDao
 
-- (void) requestFileListingForParentForOffset:(int) offset andSize:(int) size;
-- (void) requestFileListingForFolder:(NSString *) folder andForOffset:(int) offset andSize:(int) size;
-- (void) requestPhotosForOffset:(int) offset andSize:(int) size;
+- (void) requestFileListingForParentForPage:(int) page andSize:(int) size;
+- (void) requestFileListingForFolder:(NSString *) folderUuid andForPage:(int) page andSize:(int) size;
 
 @end

@@ -21,6 +21,7 @@
 @property (nonatomic, strong) AVPlayerItem *mPlayerItem;
 @property (nonatomic, strong) AVPlayer *player;
 @property (nonatomic, strong) AVPlayerLayer *playerLayer;
+@property (nonatomic, strong) AVURLAsset *currentAsset;
 @property (assign) BOOL seekToZeroBeforePlay;
 @property (assign) BOOL controlVisible;
 @property (nonatomic) CGRect initialRect;

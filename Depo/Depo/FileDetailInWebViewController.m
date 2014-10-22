@@ -27,7 +27,7 @@
         self.title = file.visibleName;
         self.view.backgroundColor = [UIColor whiteColor];
     
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:self.file.url]];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:self.file.tempDownloadUrl]];
         [request setValue:APPDELEGATE.session.authToken forHTTPHeaderField:@"X-Auth-Token"];
 
         webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex)];

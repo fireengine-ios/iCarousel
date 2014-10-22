@@ -12,6 +12,7 @@
 
 @interface MetaFile : NSObject
 
+@property (nonatomic, strong) NSString *uuid;
 @property (nonatomic, strong) NSString *hash;
 @property (nonatomic, strong) NSString *subDir;
 @property (nonatomic, strong) NSString *parent;
@@ -21,7 +22,6 @@
 @property (nonatomic) BOOL folder;
 @property (nonatomic) BOOL hidden;
 @property (nonatomic, strong) NSString *path;
-@property (nonatomic, strong) NSString *url;
 @property (nonatomic, strong) NSString *tempDownloadUrl;
 @property (nonatomic, strong) NSString *rawContentType;
 @property (nonatomic) ContentType contentType;

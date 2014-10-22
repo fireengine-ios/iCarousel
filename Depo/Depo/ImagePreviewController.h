@@ -8,9 +8,11 @@
 
 #import "MyViewController.h"
 #import "MetaFile.h"
+#import "FileDetailFooter.h"
 
-@interface ImagePreviewController : MyViewController <UIScrollViewDelegate> {
+@interface ImagePreviewController : MyViewController <UIScrollViewDelegate, FileDetailFooterDelegate> {
     UIImageView *imgView;
+    FileDetailFooter *footer;
 }
 
 @property (nonatomic, strong) MetaFile *file;

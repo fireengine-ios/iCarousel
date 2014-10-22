@@ -11,6 +11,7 @@
 
 @interface PhotoAlbum : NSObject
 
+@property (nonatomic, strong) NSString *uuid;
 @property (nonatomic) long albumId;
 @property (nonatomic, strong) NSString *label;
 @property (nonatomic) int imageCount;

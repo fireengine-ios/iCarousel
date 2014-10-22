@@ -10,8 +10,12 @@
 
 @implementation UploadRef
 
-@synthesize filePath;
 @synthesize fileName;
-@synthesize folderName;
+@synthesize filePath;
+@synthesize folderUuid;
+@synthesize fileUuid;
+@synthesize tempUrl;
+@synthesize urlForUpload;
+@synthesize contentType;
 
 @end

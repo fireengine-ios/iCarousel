@@ -9,18 +9,22 @@
 #import "SquareImageView.h"
 #import "UIImageView+AFNetworking.h"
 #import "CustomLabel.h"
+#import "AppDelegate.h"
+#import "AppSession.h"
+#import "Util.h"
 
 @implementation SquareImageView
 
 @synthesize delegate;
 @synthesize file;
+@synthesize uploadRef;
 
 - (id)initWithFrame:(CGRect)frame withFile:(MetaFile *) _file {
     self = [super initWithFrame:frame];
     if (self) {
         self.file = _file;
 
-        UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+        imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
         [imgView setImageWithURL:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
         [self addSubview:imgView];
         
@@ -37,8 +41,51 @@
     return self;
 }
 
+- (id)initWithFrame:(CGRect)frame withUploadRef:(UploadRef *)ref {
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.uploadRef = ref;
+        
+        imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+        imgView.image = [UIImage imageWithData:[NSData dataWithContentsOfFile:self.uploadRef.tempUrl]];
+        imgView.alpha = 0.5f;
+        [self addSubview:imgView];
+
+        for(UploadManager *manager in APPDELEGATE.session.uploadManagers) {
+            if(!manager.hasFinished && [manager.uploadRef.fileUuid isEqualToString:self.uploadRef.fileUuid]) {
+                manager.delegate = self;
+            }
+        }
+        
+        progressSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height-6, 1, 6)];
+        progressSeparator.backgroundColor = [Util UIColorForHexColor:@"3fb0e8"];
+        progressSeparator.alpha = 0.75f;
+        [self addSubview:progressSeparator];
+
+    }
+    return self;
+}
+
 - (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [delegate squareImageWasSelectedForFile:self.file];
+}
+
+- (void) uploadManagerDidSendData:(long)sentBytes inTotal:(long)totalBytes {
+    int progressWidth = sentBytes*self.frame.size.width/totalBytes;
+    [self performSelectorOnMainThread:@selector(updateProgressByWidth:) withObject:[NSNumber numberWithInt:progressWidth] waitUntilDone:NO];
+}
+
+- (void) updateProgressByWidth:(NSNumber *) newWidth {
+    progressSeparator.frame = CGRectMake(0, self.frame.size.height-6, [newWidth intValue], 6);
+}
+
+- (void) uploadManagerDidFailUploadingForAsset:(ALAsset *)assetToUpload {
+    progressSeparator.backgroundColor = [Util UIColorForHexColor:@"ad3110"];
+}
+
+- (void) uploadManagerDidFinishUploadingForAsset:(ALAsset *)assetToUpload {
+    progressSeparator.backgroundColor = [Util UIColorForHexColor:@"67d74b"];
+    imgView.alpha = 1.0f;
 }
 
 /*

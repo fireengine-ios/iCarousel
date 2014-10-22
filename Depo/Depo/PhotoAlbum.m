@@ -10,6 +10,7 @@
 
 @implementation PhotoAlbum
 
+@synthesize uuid;
 @synthesize albumId;
 @synthesize label;
 @synthesize imageCount;

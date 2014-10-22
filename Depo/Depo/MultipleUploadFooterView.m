@@ -21,6 +21,7 @@
         self.backgroundColor = [Util UIColorForHexColor:@"363e4f"];
         
         checkButton = [[CheckButton alloc] initWithFrame:CGRectMake(20, (self.frame.size.height - 20)/2, 21, 20) isInitiallyChecked:NO];
+        [checkButton addTarget:self action:@selector(triggerCheckAll) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:checkButton];
         
         UIFont *font = [UIFont fontWithName:@"TurkcellSaturaDem" size:18];
@@ -33,6 +34,14 @@
         [self addSubview:uploadButton];
     }
     return self;
+}
+
+- (void) triggerCheckAll {
+    if(checkButton.isChecked) {
+        [delegate multipleUploadFooterDidTriggerSelectAll];
+    } else {
+        [delegate multipleUploadFooterDidTriggerDeselectAll];
+    }
 }
 
 - (void) triggerUpload {

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AppSession.h"
 #import "TokenManager.h"
+#import "MBProgressHUD.h"
 
 @class CustomAlertView;
 @class CustomConfirmView;
@@ -26,6 +27,7 @@
 @property (strong, nonatomic) BaseViewController *base;
 @property (strong, nonatomic) TokenManager *tokenManager;
 @property (strong, nonatomic) MapUtil *mapUtil;
+@property (strong, nonatomic) MBProgressHUD *progress;
 
 - (void) showCustomAlert:(CustomAlertView *) alertView;
 - (void) showCustomConfirm:(CustomConfirmView *) alertView;

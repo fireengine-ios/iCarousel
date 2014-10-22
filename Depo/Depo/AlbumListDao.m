@@ -36,6 +36,7 @@
             for(NSDictionary *albumDict in mainArray) {
                 NSNumber *albumId = [albumDict objectForKey:@"id"];
                 NSString *label = [albumDict objectForKey:@"label"];
+                NSString *uuid = [albumDict objectForKey:@"uuid"];
                 NSNumber *imageCount = [albumDict objectForKey:@"imageCount"];
                 NSNumber *videoCount = [albumDict objectForKey:@"videoCount"];
                 
@@ -44,6 +45,7 @@
                 album.imageCount = [self intByNumber:imageCount];
                 album.videoCount = [self intByNumber:videoCount];
                 album.label = [self strByRawVal:label];
+                album.uuid = [self strByRawVal:uuid];
                 
                 NSDictionary *coverDict = [albumDict objectForKey:@"coverPhoto"];
                 if(coverDict != nil && ![coverDict isKindOfClass:[NSNull class]]) {

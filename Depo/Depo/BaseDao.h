@@ -18,17 +18,19 @@
 
 #define USER_BASE_URL BASE_URL@"/container/baseUrl"
 
-#define FILE_LISTING_MAIN_URL BASE_URL@"/search/byField?fieldName=%@&fieldValue=%@&exactMatch=true&sortBy=%@&sortOrder=ASC&from=%d&size=%d"
+#define FILE_LISTING_MAIN_URL BASE_URL@"/filesystem?parentFolderUuid=%@&sortBy=name&sortOrder=ASC&page=%d&size=%d"
 
-#define IMG_LISTING_MAIN_URL BASE_URL@"/search/byField?fieldName=%@&fieldValue=%@&sortBy=%@&sortOrder=DESC&from=%d&size=%d"
+#define IMG_LISTING_MAIN_URL BASE_URL@"/search/byField?fieldName=%@&fieldValue=%@&sortBy=%@&sortOrder=DESC&page=%d&size=%d"
 
-#define ADD_FOLDER_URL BASE_URL@"/container/createFolder"
+#define ADD_FOLDER_URL BASE_URL@"/filesystem/createFolder?parentFolderUuid=%@"
 
-#define UPLOAD_NOTIFY_URL BASE_URL@"/notification/onFileUpload?fileName=%@"
+#define UPLOAD_NOTIFY_URL BASE_URL@"/notification/onFileUpload?parentFolderUuid=%@&fileName=%@"
 
 #define ALBUM_LIST_URL BASE_URL@"/album?page=%d&size=%d&sortBy=label&sortOrder=ASC"
 
-#define ALBUM_DETAIL_URL BASE_URL@"/album/%d?page=%d&size=%d&sortBy=createdDate&sortOrder=DESC&"
+#define ALBUM_DETAIL_URL BASE_URL@"/album/%@?page=%d&size=%d&sortBy=createdDate&sortOrder=DESC&"
+
+#define ADD_ALBUM_URL BASE_URL@"/album"
 
 #define APN_URL @"http://pushserver.turkcell.com.tr/PushServer/rest/registerdevice/"
 

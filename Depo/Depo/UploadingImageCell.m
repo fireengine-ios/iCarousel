@@ -31,10 +31,8 @@
         detailLabel = [[CustomLabel alloc] initWithFrame:detailFieldRect withFont:detailFont withColor:[self readDetailColor] withText:NSLocalizedString(@"UploadingPlaceholder", @"")];
         [self addSubview:detailLabel];
 
-        NSString *uploadUrl = [NSString stringWithFormat:@"%@%@%@", APPDELEGATE.session.baseUrl, folderName ? [AppUtil enrichFileFolderName:folderName] : @"/", uploadRef.fileName];
-        
         for(UploadManager *manager in APPDELEGATE.session.uploadManagers) {
-            if([manager.urlForUpload isEqualToString:uploadUrl]) {
+            if(!manager.hasFinished && [manager.uploadRef.fileUuid isEqualToString:self.uploadRef.fileUuid]) {
                 manager.delegate = self;
             }
         }
@@ -61,7 +59,17 @@
     detailLabel.text = NSLocalizedString(@"UploadFailedPlaceholder", @"");
 }
 
+- (void) uploadManagerDidFailUploadingAsData {
+    progressSeparator.backgroundColor = [Util UIColorForHexColor:@"ad3110"];
+    detailLabel.text = NSLocalizedString(@"UploadFailedPlaceholder", @"");
+}
+
 - (void) uploadManagerDidFinishUploadingForAsset:(ALAsset *)assetToUpload {
+    progressSeparator.backgroundColor = [Util UIColorForHexColor:@"67d74b"];
+    detailLabel.text = NSLocalizedString(@"UploadFinishedPlaceholder", @"");
+}
+
+- (void) uploadManagerDidFinishUploadingAsData {
     progressSeparator.backgroundColor = [Util UIColorForHexColor:@"67d74b"];
     detailLabel.text = NSLocalizedString(@"UploadFinishedPlaceholder", @"");
 }

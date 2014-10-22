@@ -10,8 +10,8 @@
 
 @implementation AlbumDetailDao
 
-- (void) requestDetailOfAlbum:(long) albumId forStart:(int) page andSize:(int) size {
-    NSString *albumDetailUrl = [NSString stringWithFormat:ALBUM_DETAIL_URL, (int)albumId, page, size];
+- (void) requestDetailOfAlbum:(NSString *) albumUuid forStart:(int) page andSize:(int) size {
+    NSString *albumDetailUrl = [NSString stringWithFormat:ALBUM_DETAIL_URL, albumUuid, page, size];
 	NSURL *url = [NSURL URLWithString:albumDetailUrl];
     
     NSLog(@"Album Detail URL: %@", albumDetailUrl);

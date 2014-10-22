@@ -13,6 +13,8 @@
 #import "MainPhotoAlbumCell.h"
 #import "PhotoAlbumController.h"
 #import "VideoPreviewController.h"
+#import "AppDelegate.h"
+#import "AppSession.h"
 
 @interface PhotoListController ()
 
@@ -32,17 +34,23 @@
     if (self) {
         self.title = NSLocalizedString(@"PhotosTitle", @"");
 
-        fileListDao = [[FileListDao alloc] init];
-        fileListDao.delegate = self;
-        fileListDao.successMethod = @selector(photoListSuccessCallback:);
-        fileListDao.failMethod = @selector(photoListFailCallback:);
+        elasticSearchDao = [[ElasticSearchDao alloc] init];
+        elasticSearchDao.delegate = self;
+        elasticSearchDao.successMethod = @selector(photoListSuccessCallback:);
+        elasticSearchDao.failMethod = @selector(photoListFailCallback:);
         
         albumListDao = [[AlbumListDao alloc] init];
         albumListDao.delegate = self;
         albumListDao.successMethod = @selector(albumListSuccessCallback:);
         albumListDao.failMethod = @selector(albumListFailCallback:);
         
+        addAlbumDao = [[AddAlbumDao alloc] init];
+        addAlbumDao.delegate = self;
+        addAlbumDao.successMethod = @selector(addAlbumSuccessCallback);
+        addAlbumDao.failMethod = @selector(addAlbumFailCallback:);
+        
         photoList = [[NSMutableArray alloc] init];
+        [photoList addObjectsFromArray:[APPDELEGATE.session uploadImageRefs]];
         
         normalizedContentHeight = self.view.frame.size.height - self.bottomIndex - 50;
         maximizedContentHeight = self.view.frame.size.height - self.bottomIndex + 14;
@@ -51,6 +59,8 @@
         photosScroll.delegate = self;
         photosScroll.tag = 111;
         [self.view addSubview:photosScroll];
+        
+        [self addOngoingPhotos];
 
         refreshControl = [[UIRefreshControl alloc] init];
         [refreshControl addTarget:self action:@selector(triggerRefresh) forControlEvents:UIControlEventValueChanged];
@@ -72,8 +82,9 @@
         [self.view addSubview:headerView];
 
         listOffset = 0;
-        [fileListDao requestPhotosForOffset:listOffset andSize:21];
+        [elasticSearchDao requestPhotosForPage:listOffset andSize:21];
         [albumListDao requestAlbumListForStart:0 andSize:50];
+        [self showLoading];
 
     }
     return self;
@@ -81,6 +92,19 @@
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+}
+
+- (void) addOngoingPhotos {
+    if([photoList count] > 0) {
+        int counter = 0;
+        for(UploadRef *row in photoList) {
+            CGRect imgRect = CGRectMake(5 + (counter%3 * 105), 15 + ((int)floor(counter/3)*105), 100, 100);
+            SquareImageView *imgView = [[SquareImageView alloc] initWithFrame:imgRect withUploadRef:row];
+            [photosScroll addSubview:imgView];
+            counter ++;
+        }
+        photosScroll.contentSize = CGSizeMake(photosScroll.frame.size.width, ((int)ceil(counter/3)+1)*105 + 20);
+    }
 }
 
 - (void) triggerRefresh {
@@ -91,11 +115,16 @@
         }
     }
     
+    [photoList addObjectsFromArray:[APPDELEGATE.session uploadImageRefs]];
+    [self addOngoingPhotos];
+
     listOffset = 0;
-    [fileListDao requestPhotosForOffset:listOffset andSize:21];
+    [elasticSearchDao requestPhotosForPage:listOffset andSize:21];
 }
 
 - (void) photoListSuccessCallback:(NSArray *) files {
+    [self hideLoading];
+    
     int counter = [photoList count];
     for(MetaFile *row in files) {
         CGRect imgRect = CGRectMake(5 + (counter%3 * 105), 15 + ((int)floor(counter/3)*105), 100, 100);
@@ -113,6 +142,7 @@
 }
 
 - (void) photoListFailCallback:(NSString *) errorMessage {
+    [self hideLoading];
     [self showErrorAlertWithMessage:errorMessage];
 }
 
@@ -123,6 +153,19 @@
 
 - (void) albumListFailCallback:(NSString *) errorMessage {
     [self showErrorAlertWithMessage:errorMessage];
+}
+
+- (void) addAlbumSuccessCallback {
+    [self proceedSuccessForProgressView];
+    [self performSelector:@selector(popProgressView) withObject:nil afterDelay:1.0f];
+    
+    self.tableUpdateCounter ++;
+    [albumListDao requestAlbumListForStart:0 andSize:50];
+}
+
+- (void) addAlbumFailCallback:(NSString *) errorMessage {
+    [self proceedFailureForProgressView];
+    [self performSelector:@selector(popProgressView) withObject:nil afterDelay:1.0f];
 }
 
 - (void) photoHeaderDidSelectAlbumsSegment {
@@ -177,7 +220,7 @@
 
 - (void) dynamicallyLoadNextPage {
     listOffset ++;
-    [fileListDao requestPhotosForOffset:listOffset andSize:21];
+    [elasticSearchDao requestPhotosForPage:listOffset andSize:21];
 }
 
 - (int) numberOfSectionsInTableView:(UITableView *)tableView {
@@ -215,6 +258,20 @@
     [self.nav showNavigationBar];
     photosScroll.frame = CGRectMake(photosScroll.frame.origin.x, photosScroll.frame.origin.y, photosScroll.frame.size.width, normalizedContentHeight);
     albumTable.frame = CGRectMake(albumTable.frame.origin.x, albumTable.frame.origin.y, albumTable.frame.size.width, normalizedContentHeight);
+}
+
+- (void) newAlbumModalDidTriggerNewAlbumWithName:(NSString *)albumName {
+    [addAlbumDao requestAddAlbumWithName:albumName];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"FolderAddProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"FolderAddSuccessMessage", @"") andFailMessage:NSLocalizedString(@"FolderAddFailMessage", @"")];
+}
+
+- (void) photoModalDidTriggerUploadForUrls:(NSArray *)assetUrls {
+    for(UploadRef *ref in assetUrls) {
+        UploadManager *manager = [[UploadManager alloc] initWithUploadReference:ref];
+        [manager startUploadingAsset:ref.filePath atFolder:nil];
+        [APPDELEGATE.session.uploadManagers addObject:manager];
+    }
+    [self triggerRefresh];
 }
 
 - (void)viewDidLoad {

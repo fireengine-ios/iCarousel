@@ -30,12 +30,12 @@
 @property (nonatomic, strong) id<UploadManagerDelegate> delegate;
 @property (nonatomic, strong) ALAsset *asset;
 @property (nonatomic, strong) ALAssetsLibrary *assetsLibrary;
-@property (nonatomic, strong) NSString *urlForUpload;
 @property (nonatomic, strong) MetaFile *folder;
 @property (nonatomic, strong) UIImage *largeimage;
 @property (nonatomic, strong) UploadRef *uploadRef;
 @property (nonatomic) BOOL hasFinished;
 
+- (id) initWithUploadReference:(UploadRef *) ref;
 - (void) startUploadingAsset:(NSString *) assetUrl atFolder:(MetaFile *) _folder;
 - (void) startUploadingData:(NSData *) _dataToUpload atFolder:(MetaFile *) _folder withFileName:(NSString *) fileName;
 - (void) startUploadingFile:(NSString *) filePath atFolder:(MetaFile *) _folder withFileName:(NSString *) fileName;

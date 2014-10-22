@@ -7,6 +7,7 @@
 
 #import "CustomAVControl.h"
 #import <MediaPlayer/MediaPlayer.h>
+#import "Util.h"
 
 static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationContext;
 
@@ -15,58 +16,40 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
 @synthesize delegate;
 @synthesize playButton;
 @synthesize pauseButton;
+@synthesize volumeButton;
 @synthesize fullScreenButton;
+@synthesize customVolumeView;
 @synthesize airPlayView;
 @synthesize totalDuration;
 @synthesize passedDuration;
 @synthesize slider;
 @synthesize totalTimeInSec;
+@synthesize volumeLevels;
 
 - (id)initWithFrame:(CGRect)frame withTotalDuration:(NSString *) totalDur {
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"video-player-bckgrnd.png"]];
 
-        playButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 44, 40) withImageName:@"bttn-video-play.png"];
-        playButton.hidden = NO;
-        [playButton addTarget:self action:@selector(playClicked) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:playButton];
-
-        pauseButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 44, 40) withImageName:@"bttn-video-pause.png"];
-        pauseButton.hidden = YES;
-        [pauseButton addTarget:self action:@selector(pauseClicked) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:pauseButton];
+        volumeLevels = [[NSMutableArray alloc] init];
         
-        passedDuration = [[UILabel alloc] initWithFrame:CGRectMake(50, 10, 25, 20)];
+        passedDuration = [[UILabel alloc] initWithFrame:CGRectMake(10, 15, 30, 20)];
         passedDuration.backgroundColor = [UIColor clearColor];
-        passedDuration.textColor = [UIColor whiteColor];
-        passedDuration.font = [UIFont fontWithName:@"TurkcellSaturaBol" size:9];
+        passedDuration.textColor = [Util UIColorForHexColor:@"BEBEBE"];
+        passedDuration.font = [UIFont fontWithName:@"TurkcellSaturaBol" size:11];
         passedDuration.adjustsFontSizeToFitWidth = YES;
         passedDuration.text = @"00:00";
         [self addSubview:passedDuration];
 
-        totalDuration = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width-110, 10, 25, 20)];
+        totalDuration = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width-40, 15, 30, 20)];
         totalDuration.backgroundColor = [UIColor clearColor];
-        totalDuration.textColor = [UIColor whiteColor];
-        totalDuration.font = [UIFont fontWithName:@"TurkcellSaturaBol" size:9];
+        totalDuration.textColor = [Util UIColorForHexColor:@"BEBEBE"];
+        totalDuration.font = [UIFont fontWithName:@"TurkcellSaturaBol" size:11];
         totalDuration.adjustsFontSizeToFitWidth = YES;
         totalDuration.text = @"00:00";//totalDur;
         [self addSubview:totalDuration];
 
-        airPlayView = [[UIView alloc] initWithFrame:CGRectMake(self.frame.size.width-88, 0, 44, 40)];
-        MPVolumeView *volumeView = [[MPVolumeView alloc] initWithFrame:CGRectMake(0, 0, airPlayView.frame.size.width, airPlayView.frame.size.height)];
-        volumeView.showsRouteButton = YES;
-        volumeView.showsVolumeSlider = NO;
-        [volumeView routeButtonRectForBounds:self.airPlayView.bounds];
-        [airPlayView addSubview:volumeView];
-
-        [self addSubview:airPlayView];
-        
-        fullScreenButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width-44, 0, 44, 40) withImageName:@"bttn-video-expend.png"];
-        [fullScreenButton addTarget:self action:@selector(fullScreenClicked) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:fullScreenButton];
-
-        slider = [[UISlider alloc] initWithFrame:CGRectMake(80, 10, self.frame.size.width - 200, 20)];
+        slider = [[UISlider alloc] initWithFrame:CGRectMake(50, 15, self.frame.size.width - 100, 20)];
         [slider setThumbImage:[UIImage imageNamed:@"bttn-player-handle.png"] forState:UIControlStateNormal];
         UIImage *sliderMax = [UIImage imageNamed:@"player_track.png"];
         sliderMax=[sliderMax resizableImageWithCapInsets:UIEdgeInsetsMake(0, 3, 0, 3) resizingMode:UIImageResizingModeStretch];
@@ -76,9 +59,74 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
         [slider setMaximumTrackImage:sliderMax forState:UIControlStateNormal];
         [slider addTarget:self action:@selector(sliderChanged:) forControlEvents:UIControlEventValueChanged];
         [self addSubview:slider];
+        
+        UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(0, 50, self.frame.size.width, 1)];
+        separator.backgroundColor = [Util UIColorForHexColor:@"1e1e1e"];
+        [self addSubview:separator];
+
+        volumeButton = [[CustomButton alloc] initWithFrame:CGRectMake(10, 72, 16, 16) withImageName:@"volume_button.png"];
+        volumeButton.hidden = NO;
+        [volumeButton addTarget:self action:@selector(volumeClicked) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:volumeButton];
+        
+        playButton = [[CustomButton alloc] initWithFrame:CGRectMake((self.frame.size.width - 32)/2, 54, 32, 52) withImageName:@"play_icon.png"];
+        playButton.hidden = NO;
+        [playButton addTarget:self action:@selector(playClicked) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:playButton];
+        
+        pauseButton = [[CustomButton alloc] initWithFrame:CGRectMake((self.frame.size.width - 32)/2, 54, 32, 52) withImageName:@"pause_icon.png"];
+        pauseButton.hidden = YES;
+        [pauseButton addTarget:self action:@selector(pauseClicked) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:pauseButton];
+
+        airPlayView = [[UIView alloc] initWithFrame:CGRectMake(self.frame.size.width-54, 60, 44, 40)];
+        MPVolumeView *volumeView = [[MPVolumeView alloc] initWithFrame:CGRectMake(0, 0, airPlayView.frame.size.width, airPlayView.frame.size.height)];
+        volumeView.showsRouteButton = YES;
+        volumeView.showsVolumeSlider = NO;
+        [volumeView routeButtonRectForBounds:self.airPlayView.bounds];
+        [airPlayView addSubview:volumeView];
+
+        [self addSubview:airPlayView];
+        
+        customVolumeView = [[UIView alloc] initWithFrame:CGRectMake(0, 51, self.frame.size.width, 59)];
+        customVolumeView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"video-player-bckgrnd.png"]];
+        customVolumeView.hidden = YES;
+        [self addSubview:customVolumeView];
+
+        CustomButton *volumeMuteButton = [[CustomButton alloc] initWithFrame:CGRectMake(10, 22, 19, 16) withImageName:@"volume_mute.png"];
+        [volumeMuteButton addTarget:self action:@selector(volumeMuteClicked) forControlEvents:UIControlEventTouchUpInside];
+        [customVolumeView addSubview:volumeMuteButton];
+
+        CustomButton *volumeFullButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 29, 22, 19, 16) withImageName:@"volume_full.png"];
+        [volumeFullButton addTarget:self action:@selector(volumeFullClicked) forControlEvents:UIControlEventTouchUpInside];
+        [customVolumeView addSubview:volumeFullButton];
+
+        for(int i=0; i<23; i++) {
+            VolumeLevelIndicator *volIndicator = [[VolumeLevelIndicator alloc] initWithFrame:CGRectMake(50 + (i-1)*10, 26, 8, 8) withLevel:(i+1)];
+            volIndicator.delegate = self;
+            [customVolumeView addSubview:volIndicator];
+            
+            [volumeLevels addObject:volIndicator];
+        }
+        /*
+        fullScreenButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width-44, 0, 44, 40) withImageName:@"bttn-video-expend.png"];
+        [fullScreenButton addTarget:self action:@selector(fullScreenClicked) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:fullScreenButton];
+         */
 
     }
     return self;
+}
+
+- (void) initialVolumeLevel:(float) level {
+    int currentLevel = floor(level / 0.04f);
+    for(VolumeLevelIndicator *level in volumeLevels) {
+        if(level.level <= currentLevel) {
+            [level manuallyActivate];
+        } else {
+            [level manuallyDeactivate];
+        }
+    }
 }
 
 - (void) videoDidStart {
@@ -101,6 +149,43 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
     playButton.hidden = NO;
     pauseButton.hidden = YES;
     [delegate customAVShouldPause];
+}
+
+- (void) volumeClicked {
+    customVolumeView.hidden = NO;
+    [self bringSubviewToFront:customVolumeView];
+    [self performSelector:@selector(hideVolumeView) withObject:nil afterDelay:4.0f];
+}
+
+- (void) hideVolumeView {
+    customVolumeView.hidden = YES;
+}
+
+- (void) volumeFullClicked {
+    for(VolumeLevelIndicator *level in volumeLevels) {
+        [level manuallyActivate];
+    }
+    [delegate customAVShouldChangeVolumeTo:1.0f];
+//    [[MPMusicPlayerController applicationMusicPlayer] setVolume:1.0f];
+}
+
+- (void) volumeMuteClicked {
+    for(VolumeLevelIndicator *level in volumeLevels) {
+        [level manuallyDeactivate];
+    }
+    [delegate customAVShouldChangeVolumeTo:0.0f];
+//    [[MPMusicPlayerController applicationMusicPlayer] setVolume:0.0f];
+}
+
+- (void) volumeLevelIndicatorWasSelected:(int)levelSelected {
+    for(VolumeLevelIndicator *level in volumeLevels) {
+        if(level.level <= levelSelected) {
+            [level manuallyActivate];
+        } else {
+            [level manuallyDeactivate];
+        }
+    }
+    [delegate customAVShouldChangeVolumeTo:0.04*levelSelected];
 }
 
 - (void) fullScreenClicked {

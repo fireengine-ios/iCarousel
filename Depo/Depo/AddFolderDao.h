@@ -10,6 +10,6 @@
 
 @interface AddFolderDao : BaseDao
 
-- (void) requestAddFolderAtPath:(NSString *) path;
+- (void) requestAddFolderToParent:(NSString *) parentUuid withName:(NSString *) folderName;
 
 @end

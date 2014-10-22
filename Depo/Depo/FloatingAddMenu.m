@@ -96,7 +96,7 @@
             [delegate floatingMenuDidTriggerCamera];
             break;
         case AddTypeAlbum:
-            [delegate floatingMenuDidTriggerAddFolder];
+            [delegate floatingMenuDidTriggerAddAlbum];
             break;
         default:
             break;

@@ -9,23 +9,28 @@
 #import "CustomButton.h"
 #import <AVFoundation/AVFoundation.h>
 #import <Foundation/Foundation.h>
+#import "VolumeLevelIndicator.h"
 
 @protocol CustomAVControlDelegate <NSObject>
 - (void) customAVShouldPause;
 - (void) customAVShouldPlay;
 - (void) customAVShouldSeek:(CMTime) timeToSeek;
 - (void) customAVShouldBeFullScreen;
+- (void) customAVShouldChangeVolumeTo:(float) volumeVal;
 @end
 
-@interface CustomAVControl : UIView
+@interface CustomAVControl : UIView <VolumeLevelDelegate>
 
 @property (nonatomic, strong) id<CustomAVControlDelegate> delegate;
 @property (nonatomic, strong) CustomButton *playButton;
 @property (nonatomic, strong) CustomButton *pauseButton;
 @property (nonatomic, strong) CustomButton *fullScreenButton;
+@property (nonatomic, strong) CustomButton *volumeButton;
 @property (nonatomic, strong) UIView *airPlayView;
+@property (nonatomic, strong) UIView *customVolumeView;
 @property (nonatomic, strong) UILabel *totalDuration;
 @property (nonatomic, strong) UILabel *passedDuration;
+@property (nonatomic, strong) NSMutableArray *volumeLevels;
 @property (nonatomic, strong) UISlider *slider;
 @property (nonatomic) int totalTimeInSec;
 
@@ -34,5 +39,6 @@
 - (void) videoDidStart;
 - (void) videoDidStop;
 - (void) updateInnerFrames;
+- (void) initialVolumeLevel:(float) level;
 
 @end
