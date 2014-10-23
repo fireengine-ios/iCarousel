@@ -52,3 +52,9 @@
 "NewAlbumTitle"="Yeni Albüm";
 "AlbumAddTitle"="ALBÜM İSMİ";
 "AlbumNamePlaceholder"="Örnek Albüm İsmi";
+"ConfirmDeleteTitle"="Silme Onay";
+"ConfirmDeleteMessage"="Bu dosya veya herhangi bir dosya silindiğinde dosya buluttan kaldırılacaktır. Silindikten sonra tekrar bu dosyaya erişemeyeceksiniz.";
+"ConfirmDeleteQuestion"="Silmek istediğinizden emin misiniz?";
+"MessageDontShowAgainCheck"="Bu mesajı bir daha gösterme";
+"TitleNo"="Hayır";
+"TitleYes"="Evet";

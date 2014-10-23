@@ -21,6 +21,7 @@
 #import "MusicListModalController.h"
 #import "CameraCaptureModalController.h"
 #import "NewAlbumModalController.h"
+#import "ConfirmDeleteModalController.h"
 
 #define kMenuOpenOriginX 276
 
@@ -320,6 +321,13 @@
 
 - (void) dismissAddButton {
     self.addButton.hidden = YES;
+}
+
+- (void) showConfirmDelete {
+    ConfirmDeleteModalController *confirmDelete = [[ConfirmDeleteModalController alloc] init];
+//    confirmDelete.delegate = [self.nav topViewController];
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:confirmDelete];
+    [self presentViewController:modalNav animated:YES completion:nil];
 }
 
 - (void)viewDidLoad {

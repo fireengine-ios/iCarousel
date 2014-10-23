@@ -52,3 +52,9 @@
 "NewAlbumTitle"="New Album";
 "AlbumAddTitle"="ALBUM NAME";
 "AlbumNamePlaceholder"="Example Album Name";
+"ConfirmDeleteTitle"="Confirm Delete";
+"ConfirmDeleteMessage"="Deleting this file or any file will remove them from cloud. You won't be able to access them once deleted.";
+"ConfirmDeleteQuestion"="Are you sure you want to delete?";
+"MessageDontShowAgainCheck"="Don't show me this message again";
+"TitleNo"="No";
+"TitleYes"="Yes";

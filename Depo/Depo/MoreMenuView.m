@@ -9,6 +9,8 @@
 #import "MoreMenuView.h"
 #import "MoreMenuCell.h"
 #import "Util.h"
+#import "AppDelegate.h"
+#import "BaseViewController.h"
 
 @implementation MoreMenuView
 
@@ -71,6 +73,15 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 //    [self removeFromSuperview];
+    NSNumber *typeAsNumber = [moreList objectAtIndex:indexPath.row];
+    MoreMenuType type = (MoreMenuType)[typeAsNumber intValue];
+    switch (type) {
+        case MoreMenuTypeDelete:
+            [APPDELEGATE.base showConfirmDelete];
+            break;
+        default:
+            break;
+    }
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {

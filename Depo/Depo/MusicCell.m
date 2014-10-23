@@ -34,6 +34,8 @@
         progressSeparator.backgroundColor = [self readPassiveSeparatorColor];
         progressSeparator.alpha = 0.5f;
         [self addSubview:progressSeparator];
+
+        [self initializeSwipeMenu];
     }
     return self;
 }

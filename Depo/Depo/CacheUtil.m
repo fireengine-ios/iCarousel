@@ -39,4 +39,13 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
++ (BOOL) showConfirmDeletePageFlag {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:CONFIRM_DELETE_HIDDEN_KEY];
+}
+
++ (void) setConfirmDeletePageFlag {
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:CONFIRM_DELETE_HIDDEN_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 @end

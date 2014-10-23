@@ -212,6 +212,14 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     MetaFile *fileAtIndex = [fileList objectAtIndex:indexPath.row];
     
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if([cell isKindOfClass:[AbstractFileFolderCell class]]) {
+        AbstractFileFolderCell *fileFolderCell = (AbstractFileFolderCell *) cell;
+        if(fileFolderCell.menuActive) {
+            return;
+        }
+    }
+    
     if(fileAtIndex.contentType == ContentTypeFolder) {
         FileListController *innerList = [[FileListController alloc] initForFolder:fileAtIndex];
         innerList.nav = self.nav;
@@ -310,6 +318,18 @@
     fileList = [assetUrls arrayByAddingObjectsFromArray:fileList];
     self.tableUpdateCounter++;
     [self.fileTable reloadData];
+}
+
+- (BOOL)shouldAutorotate {
+    return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationPortrait | UIInterfaceOrientationPortraitUpsideDown;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
 }
 
 @end

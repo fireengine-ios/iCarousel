@@ -16,5 +16,7 @@
 + (void) writeCachedPassword:(NSString *) newPass;
 + (void) resetCachedMsisdn;
 + (void) resetCachedPassword;
++ (BOOL) showConfirmDeletePageFlag;
++ (void) setConfirmDeletePageFlag;
 
 @end

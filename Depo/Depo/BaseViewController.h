@@ -30,5 +30,6 @@
 - (id)initWithRootViewController:(MyViewController *) rootViewController;
 - (void) presentAddButtonWithList:(NSArray *) _addTypeList;
 - (void) dismissAddButton;
+- (void) showConfirmDelete;
 
 @end
