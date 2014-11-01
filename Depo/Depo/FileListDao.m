@@ -12,8 +12,8 @@
 
 @implementation FileListDao
 
-- (void) requestFileListingForParentForPage:(int) page andSize:(int) size {
-    NSString *parentListingUrl = [NSString stringWithFormat:FILE_LISTING_MAIN_URL, @"", page, size];
+- (void) requestFileListingForParentForPage:(int) page andSize:(int) size sortBy:(SortType) sortType {
+    NSString *parentListingUrl = [NSString stringWithFormat:FILE_LISTING_MAIN_URL, @"", [AppUtil serverSortNameByEnum:sortType], [AppUtil isAscByEnum:sortType] ? @"ASC" : @"DESC", page, size];
 	NSURL *url = [NSURL URLWithString:parentListingUrl];
 	
 	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
@@ -22,8 +22,8 @@
     [self sendGetRequest:request];
 }
 
-- (void) requestFileListingForFolder:(NSString *) folderUuid andForPage:(int) page andSize:(int) size {
-    NSString *parentListingUrl = [NSString stringWithFormat:FILE_LISTING_MAIN_URL, folderUuid, page, size];
+- (void) requestFileListingForFolder:(NSString *) folderUuid andForPage:(int) page andSize:(int) size sortBy:(SortType) sortType {
+    NSString *parentListingUrl = [NSString stringWithFormat:FILE_LISTING_MAIN_URL, folderUuid, [AppUtil serverSortNameByEnum:sortType], [AppUtil isAscByEnum:sortType] ? @"ASC" : @"DESC", page, size];
 	NSURL *url = [NSURL URLWithString:parentListingUrl];
 	
 	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];

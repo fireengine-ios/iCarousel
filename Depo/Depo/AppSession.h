@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "User.h"
+#import "AppConstants.h"
 
 @interface AppSession : NSObject
 
@@ -15,6 +16,7 @@
 @property (nonatomic, strong) NSString *authToken;
 @property (nonatomic, strong) NSString *baseUrl;
 @property (nonatomic, strong) NSMutableArray *uploadManagers;
+@property (nonatomic) SortType sortType;
 
 - (NSArray *) uploadRefsForFolder:(NSString *) folderUuid;
 - (NSArray *) uploadImageRefs;

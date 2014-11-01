@@ -18,5 +18,8 @@
 
 - (id)initWithFrame:(CGRect)frame isInitiallyChecked:(BOOL) isInitiallyChecked;
 - (id)initWithFrame:(CGRect)frame withTitle:(NSString *) title isInitiallyChecked:(BOOL) isInitiallyChecked;
+- (void) toggle;
+- (void) manuallyCheck;
+- (void) manuallyUncheck;
 
 @end

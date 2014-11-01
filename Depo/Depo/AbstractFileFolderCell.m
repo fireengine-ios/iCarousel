@@ -10,18 +10,24 @@
 
 @implementation AbstractFileFolderCell
 
+@synthesize delegate;
 @synthesize fileFolder;
 @synthesize swipeMenu;
 @synthesize shareButton;
 @synthesize favButton;
+@synthesize unfavButton;
 @synthesize moveButton;
 @synthesize deleteButton;
+@synthesize imgView;
 @synthesize menuActive;
+@synthesize isSelectible;
+@synthesize checkButton;
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier  withFileFolder:(MetaFile *) _fileFolder {
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier  withFileFolder:(MetaFile *) _fileFolder isSelectible:(BOOL) _selectible {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.fileFolder = _fileFolder;
+        self.isSelectible = _selectible;
         
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [UIColor whiteColor];
@@ -50,16 +56,33 @@
     [swipeMenu addSubview:shareButton];
 
     favButton = [[CustomButton alloc] initWithFrame:CGRectMake(buttonPlaygroundX + (buttonPlaygroundX - 20)/2, 23, 20, 20) withImageName:@"fav_icon.png"];
+    [favButton addTarget:self action:@selector(triggerFav) forControlEvents:UIControlEventTouchUpInside];
     [swipeMenu addSubview:favButton];
+    
+    unfavButton = [[CustomButton alloc] initWithFrame:CGRectMake(buttonPlaygroundX + (buttonPlaygroundX - 20)/2, 23, 20, 20) withImageName:@"yellow_fav_icon.png"];
+    [unfavButton addTarget:self action:@selector(triggerUnfav) forControlEvents:UIControlEventTouchUpInside];
+    [swipeMenu addSubview:unfavButton];
+    
+    if(self.fileFolder.detail.favoriteFlag) {
+        favButton.hidden = YES;
+        unfavButton.hidden = NO;
+    } else {
+        favButton.hidden = NO;
+        unfavButton.hidden = YES;
+    }
 
     moveButton = [[CustomButton alloc] initWithFrame:CGRectMake(buttonPlaygroundX*2 + (buttonPlaygroundX - 18)/2, 23, 18, 20) withImageName:@"white_move_icon.png"];
     [swipeMenu addSubview:moveButton];
 
     deleteButton = [[CustomButton alloc] initWithFrame:CGRectMake(buttonPlaygroundX*3 + (buttonPlaygroundX - 20)/2, 23, 20, 21) withImageName:@"white_delete_icon.png"];
+    [deleteButton addTarget:self action:@selector(triggerDelete) forControlEvents:UIControlEventTouchUpInside];
     [swipeMenu addSubview:deleteButton];
 }
 
 - (void) swipeLeft {
+    if(isSelectible)
+        return;
+    
     [UIView animateWithDuration:0.5f
                           delay:0.0f
                         options:UIViewAnimationCurveEaseInOut
@@ -67,10 +90,14 @@
                          swipeMenu.frame = CGRectMake(30, 0, self.frame.size.width - 30, 67);
                      } completion:^(BOOL finished) {
                          menuActive = YES;
+                         imgView.hidden = YES;
                      }];
 }
 
 - (void) swipeRight {
+    if(isSelectible)
+        return;
+
     [UIView animateWithDuration:0.5f
                           delay:0.0f
                         options:UIViewAnimationCurveEaseInOut
@@ -78,6 +105,7 @@
                          swipeMenu.frame = CGRectMake(self.frame.size.width, 0, self.frame.size.width - 30, 67);
                      } completion:^(BOOL finished) {
                          menuActive = NO;
+                         imgView.hidden = NO;
                      }];
 }
 
@@ -99,6 +127,39 @@
 
 - (UIColor *) readPassiveSeparatorColor {
     return [Util UIColorForHexColor:@"E1E1E1"];
+}
+
+- (void) triggerFav {
+    favButton.hidden = YES;
+    unfavButton.hidden = NO;
+    [delegate fileFolderCellShouldFavForFile:self.fileFolder];
+}
+
+- (void) triggerUnfav {
+    favButton.hidden = NO;
+    unfavButton.hidden = YES;
+    [delegate fileFolderCellShouldUnfavForFile:self.fileFolder];
+}
+
+- (void) triggerDelete {
+    [delegate fileFolderCellShouldDeleteForFile:self.fileFolder];
+}
+
+- (void) triggerFileSelectDeselect {
+    [self.checkButton toggle];
+    if(self.checkButton.isChecked) {
+        [delegate fileFolderCellDidSelectFile:self.fileFolder];
+    } else {
+        [delegate fileFolderCellDidUnselectFile:self.fileFolder];
+    }
+}
+
+- (void) manuallyCheckButton {
+    [self.checkButton manuallyCheck];
+}
+
+- (void) layoutSubviews {
+    NSLog(@"At layoutsubviews: %@", self.fileFolder.name);
 }
 
 - (void)awakeFromNib

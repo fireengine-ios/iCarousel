@@ -20,7 +20,7 @@
     if (self) {
         self.isChecked = isInitiallyChecked;
         self.checkedImage = [UIImage imageNamed:@"dont_show_blue_tick.png"];
-        self.uncheckedImage = [UIImage imageNamed:@"selectAll_checkbox.png"];
+        self.uncheckedImage = [UIImage imageNamed:@"check_unchecked_icon.png"];
         
         if(self.isChecked) {
             [self setImage:self.checkedImage forState:UIControlStateNormal];
@@ -28,7 +28,7 @@
             [self setImage:self.uncheckedImage forState:UIControlStateNormal];
         }
         
-        [self addTarget:self action:@selector(toggle) forControlEvents:UIControlEventTouchUpInside];
+//        [self addTarget:self action:@selector(toggle) forControlEvents:UIControlEventTouchUpInside];
     }
     return self;
 }
@@ -78,6 +78,16 @@
     } else {
         bgImgView.image = self.uncheckedImage;
     }
+}
+
+- (void) manuallyCheck {
+    isChecked = YES;
+    bgImgView.image = self.checkedImage;
+}
+
+- (void) manuallyUncheck {
+    isChecked = NO;
+    bgImgView.image = self.uncheckedImage;
 }
 
 /*

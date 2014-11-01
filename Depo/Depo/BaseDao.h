@@ -18,9 +18,13 @@
 
 #define USER_BASE_URL BASE_URL@"/container/baseUrl"
 
-#define FILE_LISTING_MAIN_URL BASE_URL@"/filesystem?parentFolderUuid=%@&sortBy=name&sortOrder=ASC&page=%d&size=%d"
+#define FILE_LISTING_MAIN_URL BASE_URL@"/filesystem?parentFolderUuid=%@&sortBy=%@&sortOrder=%@&page=%d&size=%d"
 
 #define IMG_LISTING_MAIN_URL BASE_URL@"/search/byField?fieldName=%@&fieldValue=%@&sortBy=%@&sortOrder=DESC&page=%d&size=%d"
+
+#define DELETE_FILE_URL BASE_URL@"/filesystem/delete"
+
+#define FAVORITE_URL BASE_URL@"/filesystem/metadata"
 
 #define ADD_FOLDER_URL BASE_URL@"/filesystem/createFolder?parentFolderUuid=%@"
 
@@ -69,6 +73,7 @@
 - (void) sendPostRequest:(ASIFormDataRequest *) request;
 - (void) sendGetRequest:(ASIFormDataRequest *) request;
 - (void) sendPutRequest:(ASIFormDataRequest *) request;
+- (void) sendDeleteRequest:(ASIFormDataRequest *) request;
 - (BOOL) boolByNumber:(NSNumber *) numberObj;
 - (int) intByNumber:(NSNumber *) numberObj;
 - (float) floatByNumber:(NSNumber *) numberObj;

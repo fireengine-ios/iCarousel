@@ -25,5 +25,8 @@
 + (BOOL) isMetaFileMusic:(MetaFile *) file;
 + (BOOL) isMetaFileDoc:(MetaFile *) file;
 + (AddType) strToAddType:(NSString *) str;
++ (NSString *) sortTypeTitleByEnum:(SortType) type;
++ (NSString *) serverSortNameByEnum:(SortType) type;
++ (BOOL) isAscByEnum:(SortType) type;
 
 @end

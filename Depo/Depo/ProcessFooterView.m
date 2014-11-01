@@ -58,6 +58,7 @@
 //    indicator.hidden = YES;
     [defaultIndicator stopAnimating];
     defaultIndicator.hidden = YES;
+    [self performSelector:@selector(dismissAfterDelay) withObject:nil afterDelay:1.2f];
 }
 
 - (void) showMessageForFailure {
@@ -66,6 +67,11 @@
 //    indicator.hidden = YES;
     [defaultIndicator stopAnimating];
     defaultIndicator.hidden = YES;
+    [self performSelector:@selector(dismissAfterDelay) withObject:nil afterDelay:1.2f];
+}
+
+- (void) dismissAfterDelay {
+    [self removeFromSuperview];
 }
 
 - (void) stopLoading {

@@ -11,21 +11,33 @@
 #import "MetaFile.h"
 #import "AddFolderDao.h"
 #import "UploadManager.h"
+#import "AbstractFileFolderCell.h"
+#import "DeleteDao.h"
+#import "FavoriteDao.h"
+#import "FooterActionsMenuView.h"
 
-@interface FileListController : MyViewController <UITableViewDelegate, UITableViewDataSource> {
+@interface FileListController : MyViewController <UITableViewDelegate, UITableViewDataSource, AbstractFileFolderDelegate, FooterActionsDelegate> {
     FileListDao *fileListDao;
     FileListDao *loadMoreDao;
     AddFolderDao *addFolderDao;
+    DeleteDao *deleteDao;
+    FavoriteDao *favoriteDao;
     UploadManager *uploadManager;
-
+    CustomButton *moreButton;
+    
+    UIBarButtonItem *previousButtonRef;
+    
     int listOffset;
     BOOL isLoading;
+    BOOL isSelectible;
 }
 
 @property (nonatomic, strong) MetaFile *folder;
 @property (nonatomic, strong) UITableView *fileTable;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, strong) NSArray *fileList;
+@property (nonatomic, strong) NSMutableArray *selectedFileList;
+@property (nonatomic, strong) FooterActionsMenuView *footerActionMenu;
 
 - (id)initForFolder:(MetaFile *) _folder;
 

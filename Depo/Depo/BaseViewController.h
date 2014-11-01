@@ -31,5 +31,9 @@
 - (void) presentAddButtonWithList:(NSArray *) _addTypeList;
 - (void) dismissAddButton;
 - (void) showConfirmDelete;
+- (void) showSort;
+- (void) showSelect;
+- (void) immediateShowAddButton;
+- (void) immediateHideAddButton;
 
 @end

@@ -122,6 +122,15 @@ typedef enum {
     MoreMenuTypeDelete
 } MoreMenuType;
 
+typedef enum {
+    SortTypeAlphaAsc = 0,
+    SortTypeAlphaDesc,
+    SortTypeDateDesc,
+    SortTypeDateAsc,
+    SortTypeSizeDesc,
+    SortTypeSizeAsc
+} SortType;
+
 @interface AppConstants : NSObject
 
 @end

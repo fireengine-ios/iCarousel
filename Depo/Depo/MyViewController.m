@@ -137,7 +137,6 @@
     NSArray *addTypesForController = [APPDELEGATE.mapUtil readAddTypesByController:NSStringFromClass(self.class)];
     if(addTypesForController != nil) {
         [APPDELEGATE.base presentAddButtonWithList:addTypesForController];
-        NSLog(@"DICT: %@", addTypesForController);
     } else {
         [APPDELEGATE.base dismissAddButton];
     }
@@ -180,11 +179,20 @@
     if(processView) {
         [processView showMessageForSuccess];
     }
+    [self performSelector:@selector(showAddButtonImmediately) withObject:nil afterDelay:1.2f];
 }
 
 - (void) proceedFailureForProgressView {
     if(processView) {
         [processView showMessageForFailure];
+    }
+    [self performSelector:@selector(showAddButtonImmediately) withObject:nil afterDelay:1.2f];
+}
+
+- (void) showAddButtonImmediately {
+    NSArray *addTypesForController = [APPDELEGATE.mapUtil readAddTypesByController:NSStringFromClass(self.class)];
+    if(addTypesForController != nil) {
+        [APPDELEGATE.base immediateShowAddButton];
     }
 }
 
@@ -216,6 +224,14 @@
 
 - (void) newAlbumModalDidTriggerNewAlbumWithName:(NSString *)albumName {
     NSLog(@"At MyView newAlbumModalDidTriggerNewAlbumWithName");
+}
+
+- (void) sortDidChange {
+    NSLog(@"At MyView sortDidChange");
+}
+
+- (void) changeToSelectedStatus {
+    NSLog(@"At MyView changeToSelectedStatus");
 }
 
 @end

@@ -10,7 +10,7 @@
 
 @interface FileListDao : BaseDao
 
-- (void) requestFileListingForParentForPage:(int) page andSize:(int) size;
-- (void) requestFileListingForFolder:(NSString *) folderUuid andForPage:(int) page andSize:(int) size;
+- (void) requestFileListingForParentForPage:(int) page andSize:(int) size sortBy:(SortType) sortType;
+- (void) requestFileListingForFolder:(NSString *) folderUuid andForPage:(int) page andSize:(int) size sortBy:(SortType) sortType;
 
 @end

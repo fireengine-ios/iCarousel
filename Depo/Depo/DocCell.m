@@ -10,17 +10,24 @@
 
 @implementation DocCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier  withFileFolder:(MetaFile *) _fileFolder {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier withFileFolder:_fileFolder];
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier  withFileFolder:(MetaFile *) _fileFolder isSelectible:(BOOL)_selectible {
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier withFileFolder:_fileFolder isSelectible:_selectible];
     if (self) {
+        if(self.isSelectible) {
+            self.checkButton = [[CheckButton alloc] initWithFrame:CGRectMake(15, 24, 21, 20) isInitiallyChecked:NO];
+            [self.checkButton addTarget:self action:@selector(triggerFileSelectDeselect) forControlEvents:UIControlEventTouchUpInside];
+            [self addSubview:self.checkButton];
+        }
+        
+        int leftIndex = self.isSelectible ? 50 : 15;
         
         UIImage *iconImg = [UIImage imageNamed:[AppUtil iconNameByContentType:ContentTypeDoc]];
-        UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(15 + (40 - iconImg.size.width)/2, (68 - iconImg.size.height)/2, iconImg.size.width, iconImg.size.height)];
-        iconView.image = iconImg;
-        [self addSubview:iconView];
+        self.imgView = [[UIImageView alloc] initWithFrame:CGRectMake(leftIndex + (40 - iconImg.size.width)/2, (68 - iconImg.size.height)/2, iconImg.size.width, iconImg.size.height)];
+        self.imgView.image = iconImg;
+        [self addSubview:self.imgView];
         
-        CGRect nameFieldRect = CGRectMake(70, 13, self.frame.size.width - 80, 22);
-        CGRect detailFieldRect = CGRectMake(70, 35, self.frame.size.width - 80, 20);
+        CGRect nameFieldRect = CGRectMake(leftIndex + 55, 13, self.frame.size.width - 80, 22);
+        CGRect detailFieldRect = CGRectMake(leftIndex + 55, 35, self.frame.size.width - 80, 20);
         
         UIFont *nameFont = [self readNameFont];
         UIFont *detailFont = [self readDetailFont];

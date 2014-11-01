@@ -67,6 +67,17 @@
     [request startAsynchronous];
 }
 
+- (void) sendDeleteRequest:(ASIFormDataRequest *) request {
+    request.timeOutSeconds = 90;
+    if(APPDELEGATE.session.authToken) {
+        [request addRequestHeader:@"X-Auth-Token" value:APPDELEGATE.session.authToken];
+    }
+    [request addRequestHeader:@"Content-Type" value:@"application/json"];
+    [request buildPostBody];
+    [request setRequestMethod:@"DELETE"];
+    [request startAsynchronous];
+}
+
 - (void)requestFailed:(ASIHTTPRequest *)request {
     if([request.error code] == ASIConnectionFailureErrorType){
         [self shouldReturnFailWithMessage:NO_CONN_ERROR_MESSAGE];

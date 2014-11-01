@@ -22,6 +22,7 @@
 #import "AppDelegate.h"
 #import "AppSession.h"
 #import "VideoPreviewController.h"
+#import "BaseViewController.h"
 
 @interface FileListController ()
 
@@ -33,19 +34,23 @@
 @synthesize fileTable;
 @synthesize refreshControl;
 @synthesize fileList;
+@synthesize selectedFileList;
+@synthesize footerActionMenu;
 
 - (id)initForFolder:(MetaFile *) _folder {
     self = [super init];
     if (self) {
         self.folder = _folder;
         listOffset = 0;
-
+        
         if(self.folder) {
             self.title = self.folder.visibleName;
         } else {
             self.title = NSLocalizedString(@"FilesTitle", @"");
         }
 
+        selectedFileList = [[NSMutableArray alloc] init];
+        
         fileListDao = [[FileListDao alloc] init];
         fileListDao.delegate = self;
         fileListDao.successMethod = @selector(fileListSuccessCallback:);
@@ -61,6 +66,16 @@
         addFolderDao.successMethod = @selector(addFolderSuccessCallback);
         addFolderDao.failMethod = @selector(addFolderFailCallback:);
         
+        deleteDao = [[DeleteDao alloc] init];
+        deleteDao.delegate = self;
+        deleteDao.successMethod = @selector(deleteSuccessCallback);
+        deleteDao.failMethod = @selector(deleteFailCallback:);
+
+        favoriteDao = [[FavoriteDao alloc] init];
+        favoriteDao.delegate = self;
+        favoriteDao.successMethod = @selector(favSuccessCallback);
+        favoriteDao.failMethod = @selector(favFailCallback:);
+
         fileTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex) style:UITableViewStylePlain];
         fileTable.delegate = self;
         fileTable.dataSource = self;
@@ -74,9 +89,9 @@
         [fileTable addSubview:refreshControl];
 
         if(self.folder) {
-            [fileListDao requestFileListingForFolder:self.folder.uuid andForPage:listOffset andSize:NO_OF_FILES_PER_PAGE];
+            [fileListDao requestFileListingForFolder:self.folder.uuid andForPage:listOffset andSize:NO_OF_FILES_PER_PAGE sortBy:APPDELEGATE.session.sortType];
         } else {
-            [fileListDao requestFileListingForParentForPage:listOffset andSize:NO_OF_FILES_PER_PAGE];
+            [fileListDao requestFileListingForParentForPage:listOffset andSize:NO_OF_FILES_PER_PAGE sortBy:APPDELEGATE.session.sortType];
         }
         [self showLoading];
     }
@@ -90,9 +105,9 @@
 - (void) triggerRefresh {
     listOffset = 0;
     if(self.folder) {
-        [fileListDao requestFileListingForFolder:self.folder.uuid andForPage:listOffset andSize:NO_OF_FILES_PER_PAGE];
+        [fileListDao requestFileListingForFolder:self.folder.uuid andForPage:listOffset andSize:NO_OF_FILES_PER_PAGE sortBy:APPDELEGATE.session.sortType];
     } else {
-        [fileListDao requestFileListingForParentForPage:listOffset andSize:NO_OF_FILES_PER_PAGE];
+        [fileListDao requestFileListingForParentForPage:listOffset andSize:NO_OF_FILES_PER_PAGE sortBy:APPDELEGATE.session.sortType];
     }
 }
 
@@ -124,7 +139,7 @@
     }
     self.fileList = [fileList arrayByAddingObjectsFromArray:files];
     isLoading = NO;
-    self.tableUpdateCounter ++;
+//    self.tableUpdateCounter ++;
     [fileTable reloadData];
 }
 
@@ -143,9 +158,9 @@
 
     listOffset = 0;
     if(self.folder) {
-        [fileListDao requestFileListingForFolder:self.folder.uuid andForPage:listOffset andSize:NO_OF_FILES_PER_PAGE];
+        [fileListDao requestFileListingForFolder:self.folder.uuid andForPage:listOffset andSize:NO_OF_FILES_PER_PAGE sortBy:APPDELEGATE.session.sortType];
     } else {
-        [fileListDao requestFileListingForParentForPage:listOffset andSize:NO_OF_FILES_PER_PAGE];
+        [fileListDao requestFileListingForParentForPage:listOffset andSize:NO_OF_FILES_PER_PAGE sortBy:APPDELEGATE.session.sortType];
     }
 }
 
@@ -188,18 +203,19 @@
                 MetaFile *fileAtIndex = (MetaFile *) objAtIndex;
                 switch (fileAtIndex.contentType) {
                     case ContentTypeFolder:
-                        cell = [[FolderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex];
+                        cell = [[FolderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex isSelectible:isSelectible];
                         break;
                     case ContentTypePhoto:
-                        cell = [[ImageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex];
+                        cell = [[ImageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex isSelectible:isSelectible];
                         break;
                     case ContentTypeMusic:
-                        cell = [[MusicCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex];
+                        cell = [[MusicCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex isSelectible:isSelectible];
                         break;
                     default:
-                        cell = [[DocCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex];
+                        cell = [[DocCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex isSelectible:isSelectible];
                         break;
                 }
+                ((AbstractFileFolderCell *) cell).delegate = self;
             } else {
                 UploadRef *refAtIndex = (UploadRef *) objAtIndex;
                 cell = [[UploadingImageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withUploadRef:refAtIndex atFolder:[self.folder name]];
@@ -210,6 +226,9 @@
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(isSelectible)
+        return;
+    
     MetaFile *fileAtIndex = [fileList objectAtIndex:indexPath.row];
     
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
@@ -261,9 +280,9 @@
 - (void) dynamicallyLoadNextPage {
     listOffset ++;
     if(self.folder) {
-        [loadMoreDao requestFileListingForFolder:self.folder.uuid andForPage:listOffset andSize:NO_OF_FILES_PER_PAGE];
+        [loadMoreDao requestFileListingForFolder:self.folder.uuid andForPage:listOffset andSize:NO_OF_FILES_PER_PAGE sortBy:APPDELEGATE.session.sortType];
     } else {
-        [loadMoreDao requestFileListingForParentForPage:listOffset andSize:NO_OF_FILES_PER_PAGE];
+        [loadMoreDao requestFileListingForParentForPage:listOffset andSize:NO_OF_FILES_PER_PAGE sortBy:APPDELEGATE.session.sortType];
     }
 }
 
@@ -275,9 +294,75 @@
     }
 }
 
+#pragma mark AbstractFileFolderDelegate methods
+
+- (void) fileFolderCellShouldFavForFile:(MetaFile *)fileSelected {
+    [favoriteDao requestMetadataForFiles:@[fileSelected.uuid] shouldFavorite:YES];
+//    [self showLoading];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"FavAddProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"FavAddSuccessMessage", @"") andFailMessage:NSLocalizedString(@"FavAddFailMessage", @"")];
+}
+
+- (void) fileFolderCellShouldUnfavForFile:(MetaFile *)fileSelected {
+    [favoriteDao requestMetadataForFiles:@[fileSelected.uuid] shouldFavorite:NO];
+//    [self showLoading];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"UnfavProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"UnfavSuccessMessage", @"") andFailMessage:NSLocalizedString(@"UnfavFailMessage", @"")];
+}
+
+- (void) fileFolderCellShouldDeleteForFile:(MetaFile *)fileSelected {
+    [deleteDao requestDeleteFiles:@[fileSelected.uuid]];
+//    [self showLoading];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+}
+
+- (void) fileFolderCellDidSelectFile:(MetaFile *)fileSelected {
+    if(![selectedFileList containsObject:fileSelected.uuid]) {
+        [selectedFileList addObject:fileSelected.uuid];
+    }
+    if([selectedFileList count] > 0) {
+        [self showFooterMenu];
+    } else {
+        [self hideFooterMenu];
+    }
+}
+
+- (void) fileFolderCellDidUnselectFile:(MetaFile *)fileSelected {
+    if([selectedFileList containsObject:fileSelected.uuid]) {
+        [selectedFileList removeObject:fileSelected.uuid];
+    }
+    if([selectedFileList count] > 0) {
+        [self showFooterMenu];
+    } else {
+        [self hideFooterMenu];
+    }
+}
+
+- (void) deleteSuccessCallback {
+//    [self hideLoading];
+    [self proceedSuccessForProgressView];
+    [self triggerRefresh];
+}
+
+- (void) deleteFailCallback:(NSString *) errorMessage {
+//    [self hideLoading];
+    [self proceedFailureForProgressView];
+    [self showErrorAlertWithMessage:errorMessage];
+}
+
+- (void) favSuccessCallback {
+//    [self hideLoading];
+    [self proceedSuccessForProgressView];
+    [self triggerRefresh];
+}
+
+- (void) favFailCallback:(NSString *) errorMessage {
+//    [self hideLoading];
+    [self proceedFailureForProgressView];
+    [self showErrorAlertWithMessage:errorMessage];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    CustomButton *moreButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 22, 22) withImageName:@"dots_icon.png"];
+    moreButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 22, 22) withImageName:@"dots_icon.png"];
     [moreButton addTarget:self action:@selector(moreClicked) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *moreItem = [[UIBarButtonItem alloc] initWithCustomView:moreButton];
     self.navigationItem.rightBarButtonItem = moreItem;
@@ -330,6 +415,87 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
+}
+
+- (void) sortDidChange {
+    [self triggerRefresh];
+}
+
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if([cell isKindOfClass:[AbstractFileFolderCell class]]){
+        AbstractFileFolderCell *fileCell = (AbstractFileFolderCell *) cell;
+        if([selectedFileList containsObject:fileCell.fileFolder.uuid]) {
+            [fileCell manuallyCheckButton];
+        }
+    }
+}
+
+- (void) changeToSelectedStatus {
+    isSelectible = YES;
+    self.title = NSLocalizedString(@"SelectFilesTitle", @"");
+
+    previousButtonRef = self.navigationItem.leftBarButtonItem;
+    
+    CustomButton *cancelButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 60, 20) withImageName:nil withTitle:NSLocalizedString(@"ButtonCancel", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[UIColor whiteColor]];
+    [cancelButton addTarget:self action:@selector(cancelSelectible) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithCustomView:cancelButton];
+    self.navigationItem.leftBarButtonItem = cancelItem;
+    moreButton.hidden = YES;
+    
+    [APPDELEGATE.base immediateHideAddButton];
+    
+    self.tableUpdateCounter++;
+    [self.fileTable reloadData];
+    
+    if(footerActionMenu) {
+        [footerActionMenu removeFromSuperview];
+    }
+    footerActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60)];
+    footerActionMenu.delegate = self;
+    footerActionMenu.hidden = YES;
+    [self.view addSubview:footerActionMenu];
+}
+
+- (void) cancelSelectible {
+    if(self.folder) {
+        self.title = self.folder.visibleName;
+    } else {
+        self.title = NSLocalizedString(@"FilesTitle", @"");
+    }
+    self.navigationItem.leftBarButtonItem = previousButtonRef;
+    moreButton.hidden = NO;
+
+    isSelectible = NO;
+    [selectedFileList removeAllObjects];
+    
+    [APPDELEGATE.base immediateShowAddButton];
+
+    self.tableUpdateCounter++;
+    [self.fileTable reloadData];
+
+    if(footerActionMenu) {
+        [footerActionMenu removeFromSuperview];
+    }
+}
+
+- (void) showFooterMenu {
+    footerActionMenu.hidden = NO;
+}
+
+- (void) hideFooterMenu {
+    footerActionMenu.hidden = YES;
+}
+
+#pragma mark FooterMenuDelegate methods
+
+- (void) footerActionMenuDidSelectDelete {
+}
+
+- (void) footerActionMenuDidSelectMove {
+}
+
+- (void) footerActionMenuDidSelectShare {
 }
 
 @end

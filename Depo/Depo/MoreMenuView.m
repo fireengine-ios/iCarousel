@@ -79,9 +79,16 @@
         case MoreMenuTypeDelete:
             [APPDELEGATE.base showConfirmDelete];
             break;
+        case MoreMenuTypeSort:
+            [APPDELEGATE.base showSort];
+            break;
+        case MoreMenuTypeSelect:
+            [APPDELEGATE.base showSelect];
+            break;
         default:
             break;
     }
+    [self removeFromSuperview];
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {

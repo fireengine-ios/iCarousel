@@ -22,6 +22,7 @@
 #import "CameraCaptureModalController.h"
 #import "NewAlbumModalController.h"
 #import "ConfirmDeleteModalController.h"
+#import "SortModalController.h"
 
 #define kMenuOpenOriginX 276
 
@@ -323,11 +324,32 @@
     self.addButton.hidden = YES;
 }
 
+- (void) immediateShowAddButton {
+    self.addButton.hidden = NO;
+}
+
+- (void) immediateHideAddButton {
+    self.addButton.hidden = YES;
+}
+
 - (void) showConfirmDelete {
     ConfirmDeleteModalController *confirmDelete = [[ConfirmDeleteModalController alloc] init];
 //    confirmDelete.delegate = [self.nav topViewController];
     MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:confirmDelete];
     [self presentViewController:modalNav animated:YES completion:nil];
+}
+
+- (void) showSort {
+    SortModalController *sort = [[SortModalController alloc] init];
+    sort.delegate = [self.nav topViewController];
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:sort];
+    [self presentViewController:modalNav animated:YES completion:nil];
+}
+
+- (void) showSelect {
+    if([[self.nav topViewController] respondsToSelector:@selector(changeToSelectedStatus)]) {
+        [[self.nav topViewController] performSelector:@selector(changeToSelectedStatus)];
+    }
 }
 
 - (void)viewDidLoad {

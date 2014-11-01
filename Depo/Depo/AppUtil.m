@@ -226,4 +226,44 @@
     return AddTypeFolder;
 }
 
++ (NSString *) sortTypeTitleByEnum:(SortType) type {
+    switch (type) {
+        case SortTypeAlphaAsc:
+            return NSLocalizedString(@"SortTypeAlphaAscTitle", @"");
+        case SortTypeAlphaDesc:
+            return NSLocalizedString(@"SortTypeAlphaDescTitle", @"");
+        case SortTypeDateDesc:
+            return NSLocalizedString(@"SortTypeDateDescTitle", @"");
+        case SortTypeDateAsc:
+            return NSLocalizedString(@"SortTypeDateAscTitle", @"");
+        case SortTypeSizeAsc:
+            return NSLocalizedString(@"SortTypeSizeAscTitle", @"");
+        case SortTypeSizeDesc:
+            return NSLocalizedString(@"SortTypeSizeDescTitle", @"");
+            
+        default:
+            return @"";
+    }
+}
+
++ (NSString *) serverSortNameByEnum:(SortType) type {
+    switch (type) {
+        case SortTypeAlphaAsc:
+        case SortTypeAlphaDesc:
+            return @"name";
+        case SortTypeDateDesc:
+        case SortTypeDateAsc:
+            return @"createdDate";
+        case SortTypeSizeAsc:
+        case SortTypeSizeDesc:
+            return @"size";
+        default:
+            return @"";
+    }
+}
+
++ (BOOL) isAscByEnum:(SortType) type {
+    return (type == SortTypeAlphaAsc || type == SortTypeSizeAsc || type == SortTypeDateAsc);
+}
+
 @end

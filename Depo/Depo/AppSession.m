@@ -15,10 +15,12 @@
 @synthesize authToken;
 @synthesize baseUrl;
 @synthesize uploadManagers;
+@synthesize sortType;
 
 - (id) init {
     if(self = [super init]) {
         self.uploadManagers = [[NSMutableArray alloc] init];
+        self.sortType = SortTypeAlphaDesc;
 
         //TODO
         self.user = [[User alloc] init];
