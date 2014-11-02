@@ -18,6 +18,7 @@
 @synthesize topIndex;
 @synthesize bottomIndex;
 @synthesize processView;
+@synthesize nav;
 
 - (id)init {
     self = [super init];

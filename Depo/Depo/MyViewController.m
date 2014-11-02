@@ -122,6 +122,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSArray *addTypesForController = [APPDELEGATE.mapUtil readAddTypesByController:NSStringFromClass(self.class)];
+    if(addTypesForController != nil) {
+        [APPDELEGATE.base presentAddButtonWithList:addTypesForController];
+    } else {
+        [APPDELEGATE.base dismissAddButton];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -134,12 +140,6 @@
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    NSArray *addTypesForController = [APPDELEGATE.mapUtil readAddTypesByController:NSStringFromClass(self.class)];
-    if(addTypesForController != nil) {
-        [APPDELEGATE.base presentAddButtonWithList:addTypesForController];
-    } else {
-        [APPDELEGATE.base dismissAddButton];
-    }
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
@@ -232,6 +232,10 @@
 
 - (void) changeToSelectedStatus {
     NSLog(@"At MyView changeToSelectedStatus");
+}
+
+- (void) moveListModalDidSelectFolder:(NSString *)folderUuid {
+    NSLog(@"At MyView moveListModalDidSelectFolder");
 }
 
 @end

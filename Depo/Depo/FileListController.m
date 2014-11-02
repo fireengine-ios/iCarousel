@@ -75,6 +75,11 @@
         favoriteDao.delegate = self;
         favoriteDao.successMethod = @selector(favSuccessCallback);
         favoriteDao.failMethod = @selector(favFailCallback:);
+        
+        moveDao = [[MoveDao alloc] init];
+        moveDao.delegate = self;
+        moveDao.successMethod = @selector(moveSuccessCallback);
+        moveDao.failMethod = @selector(moveFailCallback:);
 
         fileTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex) style:UITableViewStylePlain];
         fileTable.delegate = self;
@@ -314,14 +319,25 @@
     [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
 }
 
+- (void) fileFolderCellShouldShareForFile:(MetaFile *)fileSelected {
+}
+
+- (void) fileFolderCellShouldMoveForFile:(MetaFile *)fileSelected {
+    //TESTTT
+    selectedFileList = [[NSMutableArray alloc] initWithObjects:fileSelected.uuid, nil];
+    [APPDELEGATE.base showMoveFolders];
+}
+
 - (void) fileFolderCellDidSelectFile:(MetaFile *)fileSelected {
     if(![selectedFileList containsObject:fileSelected.uuid]) {
         [selectedFileList addObject:fileSelected.uuid];
     }
     if([selectedFileList count] > 0) {
         [self showFooterMenu];
+        self.title = [NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]];
     } else {
         [self hideFooterMenu];
+        self.title = NSLocalizedString(@"SelectFilesTitle", @"");
     }
 }
 
@@ -331,19 +347,66 @@
     }
     if([selectedFileList count] > 0) {
         [self showFooterMenu];
+        self.title = [NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]];
     } else {
         [self hideFooterMenu];
+        self.title = NSLocalizedString(@"SelectFilesTitle", @"");
     }
 }
 
 - (void) deleteSuccessCallback {
 //    [self hideLoading];
+    if(isSelectible) {
+        if(self.folder) {
+            self.title = self.folder.visibleName;
+        } else {
+            self.title = NSLocalizedString(@"FilesTitle", @"");
+        }
+        self.navigationItem.leftBarButtonItem = previousButtonRef;
+        moreButton.hidden = NO;
+        
+        isSelectible = NO;
+        [selectedFileList removeAllObjects];
+        
+        if(footerActionMenu) {
+            [footerActionMenu removeFromSuperview];
+        }
+    }
+
     [self proceedSuccessForProgressView];
     [self triggerRefresh];
 }
 
 - (void) deleteFailCallback:(NSString *) errorMessage {
 //    [self hideLoading];
+    [self proceedFailureForProgressView];
+    [self showErrorAlertWithMessage:errorMessage];
+}
+
+- (void) moveSuccessCallback {
+    if(isSelectible) {
+        if(self.folder) {
+            self.title = self.folder.visibleName;
+        } else {
+            self.title = NSLocalizedString(@"FilesTitle", @"");
+        }
+        self.navigationItem.leftBarButtonItem = previousButtonRef;
+        moreButton.hidden = NO;
+        
+        isSelectible = NO;
+        [selectedFileList removeAllObjects];
+        
+        if(footerActionMenu) {
+            [footerActionMenu removeFromSuperview];
+        }
+    }
+    
+    [self proceedSuccessForProgressView];
+    [self triggerRefresh];
+}
+
+- (void) moveFailCallback:(NSString *) errorMessage {
+    //    [self hideLoading];
     [self proceedFailureForProgressView];
     [self showErrorAlertWithMessage:errorMessage];
 }
@@ -377,9 +440,19 @@
     [self pushProgressViewWithProcessMessage:NSLocalizedString(@"FolderAddProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"FolderAddSuccessMessage", @"") andFailMessage:NSLocalizedString(@"FolderAddFailMessage", @"")];
 }
 
-- (void) cameraCapturaModalDidCaptureAndStoreImageToPath:(NSString *)filepath {
-    uploadManager = [[UploadManager alloc] init];
-    [uploadManager startUploadingFile:filepath atFolder:nil withFileName:@"fromCam.png"];
+- (void) cameraCapturaModalDidCaptureAndStoreImageToPath:(NSString *)filePath withName:(NSString *)fileName {
+    UploadRef *uploadRef = [[UploadRef alloc] init];
+    uploadRef.tempUrl = filePath;
+    uploadRef.fileName = fileName;
+    uploadRef.contentType = ContentTypePhoto;
+    
+    uploadManager = [[UploadManager alloc] initWithUploadReference:uploadRef];
+    [uploadManager startUploadingFile:filePath atFolder:nil withFileName:fileName];
+    [APPDELEGATE.session.uploadManagers addObject:uploadManager];
+    
+    fileList = [@[uploadRef] arrayByAddingObjectsFromArray:fileList];
+    self.tableUpdateCounter++;
+    [self.fileTable reloadData];
 }
 
 - (NSString *) appendNewFileName:(NSString *) newFileName {
@@ -445,6 +518,8 @@
     
     [APPDELEGATE.base immediateHideAddButton];
     
+    [selectedFileList removeAllObjects];
+    
     self.tableUpdateCounter++;
     [self.fileTable reloadData];
     
@@ -490,12 +565,31 @@
 #pragma mark FooterMenuDelegate methods
 
 - (void) footerActionMenuDidSelectDelete {
+    for (NSInteger j = 0; j < [fileTable numberOfSections]; ++j) {
+        for (NSInteger i = 0; i < [fileTable numberOfRowsInSection:j]; ++i) {
+            UITableViewCell *cell = [fileTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]];
+            if([cell isKindOfClass:[AbstractFileFolderCell class]]) {
+                AbstractFileFolderCell *fileCell = (AbstractFileFolderCell *) cell;
+                if([selectedFileList containsObject:fileCell.fileFolder.uuid]) {
+                    [fileCell addMaskLayer];
+                }
+            }
+        }
+    }
+    [deleteDao requestDeleteFiles:selectedFileList];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
 }
 
 - (void) footerActionMenuDidSelectMove {
+    [APPDELEGATE.base showMoveFolders];
 }
 
 - (void) footerActionMenuDidSelectShare {
+}
+
+- (void) moveListModalDidSelectFolder:(NSString *)folderUuid {
+    [moveDao requestMoveFiles:selectedFileList toFolder:folderUuid];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"MoveProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"MoveSuccessMessage", @"") andFailMessage:NSLocalizedString(@"MoveFailMessage", @"")];
 }
 
 @end

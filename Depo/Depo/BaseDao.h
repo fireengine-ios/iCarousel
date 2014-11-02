@@ -20,11 +20,15 @@
 
 #define FILE_LISTING_MAIN_URL BASE_URL@"/filesystem?parentFolderUuid=%@&sortBy=%@&sortOrder=%@&page=%d&size=%d"
 
-#define IMG_LISTING_MAIN_URL BASE_URL@"/search/byField?fieldName=%@&fieldValue=%@&sortBy=%@&sortOrder=DESC&page=%d&size=%d"
+#define FOLDER_LISTING_MAIN_URL BASE_URL@"/filesystem?parentFolderUuid=%@&sortBy=%@&sortOrder=%@&page=%d&size=%d&folderOnly=true"
+
+#define ELASTIC_LISTING_MAIN_URL BASE_URL@"/search/byField?fieldName=%@&fieldValue=%@&sortBy=%@&sortOrder=%@&page=%d&size=%d"
 
 #define DELETE_FILE_URL BASE_URL@"/filesystem/delete"
 
 #define FAVORITE_URL BASE_URL@"/filesystem/metadata"
+
+#define MOVE_URL BASE_URL@"/filesystem/move?targetFolderUuid=%@"
 
 #define ADD_FOLDER_URL BASE_URL@"/filesystem/createFolder?parentFolderUuid=%@"
 

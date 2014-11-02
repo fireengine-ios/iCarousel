@@ -12,11 +12,21 @@
 
 @implementation ElasticSearchDao
 
-- (void) requestPhotosForPage:(int) page andSize:(int) size {
-    NSString *parentListingUrl = [NSString stringWithFormat:IMG_LISTING_MAIN_URL, @"content_type", @"image%20OR%20video", @"metadata.X-Object-Meta-Image-DateTime", page, size];
+- (void) requestPhotosForPage:(int) page andSize:(int) size andSortType:(SortType) sortType {
+    NSString *parentListingUrl = [NSString stringWithFormat:ELASTIC_LISTING_MAIN_URL, @"content_type", @"image%20OR%20video", [AppUtil serverSortNameByEnum:sortType], [AppUtil isAscByEnum:sortType] ? @"ASC":@"DESC", page, size];
 	NSURL *url = [NSURL URLWithString:parentListingUrl];
 	
 	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    [request setDelegate:self];
+    
+    [self sendGetRequest:request];
+}
+
+- (void) requestMusicForPage:(int) page andSize:(int) size andSortType:(SortType) sortType {
+    NSString *parentListingUrl = [NSString stringWithFormat:ELASTIC_LISTING_MAIN_URL, @"content_type", @"audio", [AppUtil sortTypeTitleByEnum:sortType], [AppUtil isAscByEnum:sortType] ? @"ASC":@"DESC", page, size];
+    NSURL *url = [NSURL URLWithString:parentListingUrl];
+    
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setDelegate:self];
     
     [self sendGetRequest:request];

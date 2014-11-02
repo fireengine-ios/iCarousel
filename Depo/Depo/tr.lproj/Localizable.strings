@@ -76,3 +76,9 @@
 "SortTypeSizeDescTitle"="Dosya boyutu (En Büyük)";
 "SortTypeSizeAscTitle"="Dosya boyutu (En Küçük)";
 "SelectFilesTitle"="Dosya Seçiniz";
+"FilesSelectedTitle"="%d Seçili Dosya";
+"MoveProgressMessage"="Dosya Taşınıyor";
+"MoveSuccessMessage"="Dosya başarıyla taşındı";
+"MoveFailMessage"="Dosya taşınırken hata oluştu";
+"MusicTitle"="Müzikler";
+"MoveModalSubTitle"="Hedef klasörü seçin";

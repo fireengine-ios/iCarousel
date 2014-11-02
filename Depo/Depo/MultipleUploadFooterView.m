@@ -37,6 +37,7 @@
 }
 
 - (void) triggerCheckAll {
+    [checkButton toggle];
     if(checkButton.isChecked) {
         [delegate multipleUploadFooterDidTriggerSelectAll];
     } else {

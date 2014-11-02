@@ -49,5 +49,6 @@
 - (void) initializeSwipeMenu;
 - (void) manuallyCheckButton;
 - (void) triggerFileSelectDeselect;
+- (void) addMaskLayer;
 
 @end

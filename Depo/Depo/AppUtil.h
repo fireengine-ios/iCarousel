@@ -28,5 +28,6 @@
 + (NSString *) sortTypeTitleByEnum:(SortType) type;
 + (NSString *) serverSortNameByEnum:(SortType) type;
 + (BOOL) isAscByEnum:(SortType) type;
++ (NSString *) randomCamImgName;
 
 @end

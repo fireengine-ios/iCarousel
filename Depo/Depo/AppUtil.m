@@ -266,4 +266,8 @@
     return (type == SortTypeAlphaAsc || type == SortTypeSizeAsc || type == SortTypeDateAsc);
 }
 
++ (NSString *) randomCamImgName {
+    return [NSString stringWithFormat:@"fromCam%d.png", arc4random_uniform(999)];
+}
+
 @end

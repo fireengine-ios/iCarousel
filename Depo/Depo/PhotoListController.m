@@ -82,7 +82,7 @@
         [self.view addSubview:headerView];
 
         listOffset = 0;
-        [elasticSearchDao requestPhotosForPage:listOffset andSize:21];
+        [elasticSearchDao requestPhotosForPage:listOffset andSize:21 andSortType:APPDELEGATE.session.sortType];
         [albumListDao requestAlbumListForStart:0 andSize:50];
         [self showLoading];
 
@@ -119,13 +119,13 @@
     [self addOngoingPhotos];
 
     listOffset = 0;
-    [elasticSearchDao requestPhotosForPage:listOffset andSize:21];
+    [elasticSearchDao requestPhotosForPage:listOffset andSize:21 andSortType:APPDELEGATE.session.sortType];
 }
 
 - (void) photoListSuccessCallback:(NSArray *) files {
     [self hideLoading];
     
-    int counter = [photoList count];
+    int counter = (int)[photoList count];
     for(MetaFile *row in files) {
         CGRect imgRect = CGRectMake(5 + (counter%3 * 105), 15 + ((int)floor(counter/3)*105), 100, 100);
         SquareImageView *imgView = [[SquareImageView alloc] initWithFrame:imgRect withFile:row];
@@ -220,10 +220,10 @@
 
 - (void) dynamicallyLoadNextPage {
     listOffset ++;
-    [elasticSearchDao requestPhotosForPage:listOffset andSize:21];
+    [elasticSearchDao requestPhotosForPage:listOffset andSize:21 andSortType:APPDELEGATE.session.sortType];
 }
 
-- (int) numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
@@ -231,7 +231,7 @@
     return 160;
 }
 
-- (int) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [albumList count];
 }
 

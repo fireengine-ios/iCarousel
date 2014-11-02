@@ -72,6 +72,7 @@
     }
 
     moveButton = [[CustomButton alloc] initWithFrame:CGRectMake(buttonPlaygroundX*2 + (buttonPlaygroundX - 18)/2, 23, 18, 20) withImageName:@"white_move_icon.png"];
+    [moveButton addTarget:self action:@selector(triggerMove) forControlEvents:UIControlEventTouchUpInside];
     [swipeMenu addSubview:moveButton];
 
     deleteButton = [[CustomButton alloc] initWithFrame:CGRectMake(buttonPlaygroundX*3 + (buttonPlaygroundX - 20)/2, 23, 20, 21) withImageName:@"white_delete_icon.png"];
@@ -145,6 +146,10 @@
     [delegate fileFolderCellShouldDeleteForFile:self.fileFolder];
 }
 
+- (void) triggerMove {
+    [delegate fileFolderCellShouldMoveForFile:self.fileFolder];
+}
+
 - (void) triggerFileSelectDeselect {
     [self.checkButton toggle];
     if(self.checkButton.isChecked) {
@@ -160,6 +165,13 @@
 
 - (void) layoutSubviews {
     NSLog(@"At layoutsubviews: %@", self.fileFolder.name);
+}
+
+- (void) addMaskLayer {
+    UIView *maskView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 67)];
+    maskView.backgroundColor = [UIColor whiteColor];
+    maskView.alpha = 0.6f;
+    [self addSubview:maskView];
 }
 
 - (void)awakeFromNib

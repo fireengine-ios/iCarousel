@@ -7,9 +7,11 @@
 //
 
 #import "BaseDao.h"
+#import "AppConstants.h"
 
 @interface ElasticSearchDao : BaseDao
 
-- (void) requestPhotosForPage:(int) page andSize:(int) size;
+- (void) requestPhotosForPage:(int) page andSize:(int) size andSortType:(SortType) sortType;
+- (void) requestMusicForPage:(int) page andSize:(int) size andSortType:(SortType) sortType;
 
 @end

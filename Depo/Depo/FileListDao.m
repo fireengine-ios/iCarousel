@@ -32,6 +32,18 @@
     [self sendGetRequest:request];
 }
 
+- (void) requestFolderListingForFolder:(NSString *) folderUuid andForPage:(int) page andSize:(int) size sortBy:(SortType) sortType {
+    NSString *parentListingUrl = [NSString stringWithFormat:FOLDER_LISTING_MAIN_URL, folderUuid==nil ? @"" : folderUuid, [AppUtil serverSortNameByEnum:sortType], [AppUtil isAscByEnum:sortType] ? @"ASC" : @"DESC", page, size];
+    NSURL *url = [NSURL URLWithString:parentListingUrl];
+    
+    NSLog(@"FOLDER URL: %@", parentListingUrl);
+    
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    [request setDelegate:self];
+    
+    [self sendGetRequest:request];
+}
+
 - (void)requestFinished:(ASIHTTPRequest *)request {
 	NSError *error = [request error];
 	

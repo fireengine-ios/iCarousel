@@ -23,6 +23,8 @@
 #import "NewAlbumModalController.h"
 #import "ConfirmDeleteModalController.h"
 #import "SortModalController.h"
+#import "MoveListModalController.h"
+#import "MusicListController.h"
 
 #define kMenuOpenOriginX 276
 
@@ -183,6 +185,10 @@
 }
 
 - (void) didTriggerMusic {
+    MusicListController *music = [[MusicListController alloc] init];
+    music.nav = self.nav;
+    music.myDelegate = self;
+    [self.nav setViewControllers:@[music] animated:NO];
 }
 
 - (void) didTriggerDocs {
@@ -350,6 +356,13 @@
     if([[self.nav topViewController] respondsToSelector:@selector(changeToSelectedStatus)]) {
         [[self.nav topViewController] performSelector:@selector(changeToSelectedStatus)];
     }
+}
+
+- (void) showMoveFolders {
+    MoveListModalController *move = [[MoveListModalController alloc] initForFolder:nil];
+    move.delegate = [self.nav topViewController];
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:move];
+    [self presentViewController:modalNav animated:YES completion:nil];
 }
 
 - (void)viewDidLoad {

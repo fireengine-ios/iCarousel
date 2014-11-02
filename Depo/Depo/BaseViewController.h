@@ -33,6 +33,7 @@
 - (void) showConfirmDelete;
 - (void) showSort;
 - (void) showSelect;
+- (void) showMoveFolders;
 - (void) immediateShowAddButton;
 - (void) immediateHideAddButton;
 

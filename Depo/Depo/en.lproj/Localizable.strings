@@ -76,3 +76,9 @@
 "SortTypeSizeDescTitle"="File size (Largest)";
 "SortTypeSizeAscTitle"="File size (Smallest)";
 "SelectFilesTitle"="Select Files";
+"FilesSelectedTitle"="%d Files Selected";
+"MoveProgressMessage"="Moving File(s)";
+"MoveSuccessMessage"="File(s) successfully moved";
+"MoveFailMessage"="Failed moving the file(s)";
+"MusicTitle"="Music";
+"MoveModalSubTitle"="Choose a destination folder";

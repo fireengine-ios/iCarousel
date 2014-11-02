@@ -7,6 +7,7 @@
 //
 
 #import "CameraCaptureModalController.h"
+#import "AppUtil.h"
 
 @interface CameraCaptureModalController ()
 
@@ -29,14 +30,16 @@
 
 - (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
+    NSString *camImgName = [AppUtil randomCamImgName];
+    
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *tempPath = [documentsDirectory stringByAppendingFormat:@"/fromCam.png"];
+    NSString *tempPath = [documentsDirectory stringByAppendingFormat:@"/%@", camImgName];
     
     UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
     [UIImagePNGRepresentation(image) writeToFile:tempPath atomically:NO];
     
-    [modalDelegate cameraCapturaModalDidCaptureAndStoreImageToPath:tempPath];
+    [modalDelegate cameraCapturaModalDidCaptureAndStoreImageToPath:tempPath withName:camImgName];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

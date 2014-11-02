@@ -10,7 +10,7 @@
 
 @protocol CameraCapturaModalDelegate <NSObject>
 - (void) cameraCapturaModalDidCancel;
-- (void) cameraCapturaModalDidCaptureAndStoreImageToPath:(NSString *) filepath;
+- (void) cameraCapturaModalDidCaptureAndStoreImageToPath:(NSString *) filePath withName:(NSString *) fileName;
 @end
 
 @interface CameraCaptureModalController : UIImagePickerController <UINavigationControllerDelegate, UIImagePickerControllerDelegate> {

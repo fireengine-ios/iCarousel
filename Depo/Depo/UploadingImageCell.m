@@ -19,6 +19,11 @@
     if (self) {
         self.uploadRef = ref;
         
+        self.imgView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 16, 35, 35)];
+        self.imgView.image = [UIImage imageWithData:[NSData dataWithContentsOfFile:self.uploadRef.tempUrl]];
+        self.imgView.alpha = 0.5f;
+        [self addSubview:self.imgView];
+
         CGRect nameFieldRect = CGRectMake(70, 13, self.frame.size.width - 80, 22);
         CGRect detailFieldRect = CGRectMake(70, 35, self.frame.size.width - 80, 20);
 
@@ -65,6 +70,7 @@
 }
 
 - (void) uploadManagerDidFinishUploadingForAsset:(ALAsset *)assetToUpload {
+    self.imgView.alpha = 1.0f;
     progressSeparator.backgroundColor = [Util UIColorForHexColor:@"67d74b"];
     detailLabel.text = NSLocalizedString(@"UploadFinishedPlaceholder", @"");
 }
