@@ -9,6 +9,8 @@
 #import "ImagePreviewController.h"
 #import "Util.h"
 #import "UIImageView+AFNetworking.h"
+#import "AppDelegate.h"
+#import "BaseViewController.h"
 
 @interface ImagePreviewController ()
 
@@ -36,6 +38,7 @@
         [mainScroll addSubview:imgView];
         
         footer = [[FileDetailFooter alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60)];
+        footer.delegate = self;
         [self.view addSubview:footer];
 
     }
@@ -44,6 +47,14 @@
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
     return imgView;
+}
+
+- (void) fileDetailFooterDidTriggerDelete {
+    [APPDELEGATE.base showConfirmDelete];
+    
+}
+
+- (void) fileDetailFooterDidTriggerShare {
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -97,15 +108,15 @@
 }
 
 - (BOOL)shouldAutorotate {
-    return NO;
+    return YES;
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
-    return UIInterfaceOrientationPortrait;
+    return UIInterfaceOrientationPortrait | UIInterfaceOrientationPortraitUpsideDown;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
 }
 
 @end

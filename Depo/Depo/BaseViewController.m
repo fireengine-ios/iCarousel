@@ -26,6 +26,7 @@
 #import "MoveListModalController.h"
 #import "MusicListController.h"
 #import "MapUtil.h"
+#import "DocListController.h"
 
 #define kMenuOpenOriginX 276
 
@@ -193,6 +194,10 @@
 }
 
 - (void) didTriggerDocs {
+    DocListController *doc = [[DocListController alloc] init];
+    doc.nav = self.nav;
+    doc.myDelegate = self;
+    [self.nav setViewControllers:@[doc] animated:NO];
 }
 
 - (void) didTriggerSearch {

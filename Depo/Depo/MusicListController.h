@@ -8,9 +8,19 @@
 
 #import "MyViewController.h"
 #import "ElasticSearchDao.h"
+#import "AbstractFileFolderCell.h"
 
-@interface MusicListController : MyViewController {
+@interface MusicListController : MyViewController <UITableViewDataSource, UITableViewDelegate, AbstractFileFolderDelegate> {
     ElasticSearchDao *elasticSearchDao;
+
+    int listOffset;
+    BOOL isLoading;
+    BOOL isSelectible;
 }
+
+@property (nonatomic, strong) UITableView *musicTable;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property (nonatomic, strong) NSMutableArray *musicList;
+@property (nonatomic, strong) NSMutableArray *selectedMusicList;
 
 @end

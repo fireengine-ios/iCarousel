@@ -80,7 +80,8 @@
 "MoveProgressMessage"="Taşınıyor";
 "MoveSuccessMessage"="Başarıyla taşındı";
 "MoveFailMessage"="Dosya taşınırken hata oluştu";
-"MusicTitle"="Müzikler";
+"MusicTitle"="Müziklerim";
+"DocTitle"="Dökümanlarım";
 "MoveModalSubTitle"="Hedef klasörü seçin";
 "AlbumAddProgressMessage"="Albüm Oluşturuluyor";
 "AlbumAddSuccessMessage"="Albüm başarıyla oluşturuldu";

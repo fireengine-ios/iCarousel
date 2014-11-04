@@ -1,54 +1,55 @@
 //
-//  MusicListController.m
+//  DocListController.m
 //  Depo
 //
-//  Created by Mahir on 02/11/14.
+//  Created by Mahir on 4.11.2014.
 //  Copyright (c) 2014 com.igones. All rights reserved.
 //
 
-#import "MusicListController.h"
+#import "DocListController.h"
 #import "AppDelegate.h"
 #import "AppSession.h"
 #import "FolderEmptyCell.h"
-#import "SimpleMusicCell.h"
-#import "MusicPreviewController.h"
+#import "SimpleDocCell.h"
+#import "FileDetailInWebViewController.h"
+#import "PreviewUnavailableController.h"
 
-@interface MusicListController ()
+@interface DocListController ()
 
 @end
 
-@implementation MusicListController
+@implementation DocListController
 
-@synthesize musicTable;
+@synthesize docTable;
 @synthesize refreshControl;
-@synthesize musicList;
-@synthesize selectedMusicList;
+@synthesize docList;
+@synthesize selectedDocList;
 
 - (id) init {
     if(self = [super init]) {
         self.view.backgroundColor = [UIColor whiteColor];
-        self.title = NSLocalizedString(@"MusicTitle", @"");
-
+        self.title = NSLocalizedString(@"DocTitle", @"");
+        
         listOffset = 0;
-
+        
         elasticSearchDao = [[ElasticSearchDao alloc] init];
         elasticSearchDao.delegate = self;
-        elasticSearchDao.successMethod = @selector(musicListSuccessCallback:);
-        elasticSearchDao.failMethod = @selector(musicListFailCallback:);
-
-        musicTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex) style:UITableViewStylePlain];
-        musicTable.delegate = self;
-        musicTable.dataSource = self;
-        musicTable.backgroundColor = [UIColor clearColor];
-        musicTable.backgroundView = nil;
-        musicTable.separatorStyle = UITableViewCellSeparatorStyleNone;
-        [self.view addSubview:musicTable];
+        elasticSearchDao.successMethod = @selector(docListSuccessCallback:);
+        elasticSearchDao.failMethod = @selector(docListFailCallback:);
+        
+        docTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex) style:UITableViewStylePlain];
+        docTable.delegate = self;
+        docTable.dataSource = self;
+        docTable.backgroundColor = [UIColor clearColor];
+        docTable.backgroundView = nil;
+        docTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [self.view addSubview:docTable];
         
         refreshControl = [[UIRefreshControl alloc] init];
         [refreshControl addTarget:self action:@selector(triggerRefresh) forControlEvents:UIControlEventValueChanged];
-        [musicTable addSubview:refreshControl];
+        [docTable addSubview:refreshControl];
         
-        [elasticSearchDao requestMusicForPage:listOffset andSize:21 andSortType:APPDELEGATE.session.sortType];
+        [elasticSearchDao requestDocForPage:listOffset andSize:21 andSortType:APPDELEGATE.session.sortType];
         [self showLoading];
     }
     return self;
@@ -56,39 +57,39 @@
 
 - (void) triggerRefresh {
     listOffset = 0;
-    [musicList removeAllObjects];
-    [elasticSearchDao requestMusicForPage:listOffset andSize:21 andSortType:APPDELEGATE.session.sortType];
+    [docList removeAllObjects];
+    [elasticSearchDao requestDocForPage:listOffset andSize:21 andSortType:APPDELEGATE.session.sortType];
 }
 
-- (void) musicListSuccessCallback:(NSArray *) files {
+- (void) docListSuccessCallback:(NSArray *) files {
     [self hideLoading];
     
     if(refreshControl) {
         [refreshControl endRefreshing];
     }
     isLoading = NO;
-
-    if(musicList == nil) {
-        musicList = [[NSMutableArray alloc] init];
+    
+    if(docList == nil) {
+        docList = [[NSMutableArray alloc] init];
     }
-    [musicList addObjectsFromArray:files];
-
+    [docList addObjectsFromArray:[self filterFilesFromList:files]];
+    
     self.tableUpdateCounter ++;
-    [musicTable reloadData];
+    [docTable reloadData];
 }
 
-- (void) musicListFailCallback:(NSString *) errorMessage {
+- (void) docListFailCallback:(NSString *) errorMessage {
     [self hideLoading];
     [self showErrorAlertWithMessage:errorMessage];
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if(musicList == nil) {
+    if(docList == nil) {
         return 0;
-    } else if([musicList count] == 0) {
+    } else if([docList count] == 0) {
         return 1;
     } else {
-        return [musicList count];
+        return [docList count];
     }
 }
 
@@ -97,7 +98,7 @@
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(musicList == nil || [musicList count] == 0) {
+    if(docList == nil || [docList count] == 0) {
         return 320;
     } else {
         return 68;
@@ -105,14 +106,14 @@
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *cellIdentifier = [NSString stringWithFormat:@"MUSIC_CELL_%d_%d", (int)indexPath.row, self.tableUpdateCounter];
+    NSString *cellIdentifier = [NSString stringWithFormat:@"DOC_CELL_%d_%d", (int)indexPath.row, self.tableUpdateCounter];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if(!cell) {
-        if(musicList == nil || [musicList count] == 0) {
+        if(docList == nil || [docList count] == 0) {
             cell = [[FolderEmptyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFolderTitle:@""];
         } else {
-            MetaFile *fileAtIndex = [musicList objectAtIndex:indexPath.row];
-            cell = [[SimpleMusicCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex isSelectible:isSelectible];
+            MetaFile *fileAtIndex = [docList objectAtIndex:indexPath.row];
+            cell = [[SimpleDocCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex isSelectible:isSelectible];
             ((AbstractFileFolderCell *) cell).delegate = self;
         }
     }
@@ -123,7 +124,7 @@
     if(isSelectible)
         return;
     
-    MetaFile *fileAtIndex = [musicList objectAtIndex:indexPath.row];
+    MetaFile *fileAtIndex = [docList objectAtIndex:indexPath.row];
     
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if([cell isKindOfClass:[AbstractFileFolderCell class]]) {
@@ -133,7 +134,7 @@
         }
     }
     
-    MusicPreviewController *preview = [[MusicPreviewController alloc] initWithFile:fileAtIndex];
+    FileDetailInWebViewController *preview = [[FileDetailInWebViewController alloc] initWithFile:fileAtIndex];
     preview.nav = self.nav;
     [self.nav pushViewController:preview animated:NO];
     
@@ -141,8 +142,8 @@
 
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView {
     if(!isLoading) {
-        CGFloat currentOffset = musicTable.contentOffset.y;
-        CGFloat maximumOffset = musicTable.contentSize.height - musicTable.frame.size.height;
+        CGFloat currentOffset = docTable.contentOffset.y;
+        CGFloat maximumOffset = docTable.contentSize.height - docTable.frame.size.height;
         
         if (currentOffset - maximumOffset >= 0.0) {
             isLoading = YES;
@@ -153,7 +154,7 @@
 
 - (void) dynamicallyLoadNextPage {
     listOffset ++;
-    [elasticSearchDao requestMusicForPage:listOffset andSize:21 andSortType:APPDELEGATE.session.sortType];
+    [elasticSearchDao requestDocForPage:listOffset andSize:21 andSortType:APPDELEGATE.session.sortType];
 }
 
 #pragma mark AbstractFileFolderDelegate methods
@@ -179,6 +180,16 @@
 - (void) fileFolderCellDidUnselectFile:(MetaFile *)fileSelected {
 }
 
+- (NSMutableArray *) filterFilesFromList:(NSArray *) list {
+    NSMutableArray *result = [[NSMutableArray alloc] init];
+    for(MetaFile *row in list) {
+        if(!row.folder) {
+            [result addObject:row];
+        }
+    }
+    return result;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -187,18 +198,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (BOOL)shouldAutorotate {
-    return YES;
-}
-
-- (NSUInteger)supportedInterfaceOrientations {
-    return UIInterfaceOrientationPortrait | UIInterfaceOrientationPortraitUpsideDown;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
 }
 
 /*

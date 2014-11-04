@@ -164,7 +164,6 @@
 }
 
 - (void) layoutSubviews {
-    NSLog(@"At layoutsubviews: %@", self.fileFolder.name);
 }
 
 - (void) addMaskLayer {

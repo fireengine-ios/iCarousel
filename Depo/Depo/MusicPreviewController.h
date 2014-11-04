@@ -6,12 +6,14 @@
 //  Copyright (c) 2014 com.igones. All rights reserved.
 //
 
-#import "MyModalController.h"
+#import "MyViewController.h"
 #import "MetaFile.h"
+#import <AVFoundation/AVFoundation.h>
 
-@interface MusicPreviewController : MyModalController
+@interface MusicPreviewController : MyViewController
 
 @property (nonatomic, strong) MetaFile *file;
+@property (nonatomic, strong) AVAudioPlayer *player;
 
 - (id)initWithFile:(MetaFile *) _file;
 

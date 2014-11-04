@@ -23,6 +23,7 @@
 #import "AppSession.h"
 #import "VideoPreviewController.h"
 #import "BaseViewController.h"
+#import "MusicPreviewController.h"
 
 @interface FileListController ()
 
@@ -253,12 +254,16 @@
             ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFile:fileAtIndex];
             detail.nav = self.nav;
             [self.nav pushViewController:detail animated:NO];
-        } else if([AppUtil isMetaFileDoc:fileAtIndex] || [AppUtil isMetaFileMusic:fileAtIndex]){
+        } else if([AppUtil isMetaFileDoc:fileAtIndex]){
             FileDetailInWebViewController *detail = [[FileDetailInWebViewController alloc] initWithFile:fileAtIndex];
             detail.nav = self.nav;
             [self.nav pushViewController:detail animated:NO];
         } else if([AppUtil isMetaFileVideo:fileAtIndex]) {
             VideoPreviewController *detail = [[VideoPreviewController alloc] initWithFile:fileAtIndex];
+            detail.nav = self.nav;
+            [self.nav pushViewController:detail animated:NO];
+        } else if([AppUtil isMetaFileMusic:fileAtIndex]) {
+            MusicPreviewController *detail = [[MusicPreviewController alloc] initWithFile:fileAtIndex];
             detail.nav = self.nav;
             [self.nav pushViewController:detail animated:NO];
         } else {

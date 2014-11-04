@@ -285,15 +285,15 @@
 }
 
 - (BOOL)shouldAutorotate {
-    return NO;
+    return YES;
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
-    return UIInterfaceOrientationPortrait;
+    return UIInterfaceOrientationPortrait | UIInterfaceOrientationPortraitUpsideDown;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
 }
 
 @end

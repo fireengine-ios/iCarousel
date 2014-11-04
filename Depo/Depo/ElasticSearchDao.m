@@ -23,7 +23,17 @@
 }
 
 - (void) requestMusicForPage:(int) page andSize:(int) size andSortType:(SortType) sortType {
-    NSString *parentListingUrl = [NSString stringWithFormat:ELASTIC_LISTING_MAIN_URL, @"content_type", @"audio", [AppUtil sortTypeTitleByEnum:sortType], [AppUtil isAscByEnum:sortType] ? @"ASC":@"DESC", page, size];
+    NSString *parentListingUrl = [NSString stringWithFormat:ELASTIC_LISTING_MAIN_URL, @"content_type", @"audio", [AppUtil serverSortNameByEnum:sortType], [AppUtil isAscByEnum:sortType] ? @"ASC":@"DESC", page, size];
+    NSURL *url = [NSURL URLWithString:parentListingUrl];
+    
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    [request setDelegate:self];
+    
+    [self sendGetRequest:request];
+}
+
+- (void) requestDocForPage:(int) page andSize:(int) size andSortType:(SortType) sortType {
+    NSString *parentListingUrl = [NSString stringWithFormat:ELASTIC_LISTING_MAIN_URL, @"content_type", @"application%20OR%20text", [AppUtil serverSortNameByEnum:sortType], [AppUtil isAscByEnum:sortType] ? @"ASC":@"DESC", page, size];
     NSURL *url = [NSURL URLWithString:parentListingUrl];
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
