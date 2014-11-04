@@ -25,6 +25,7 @@
 #import "SortModalController.h"
 #import "MoveListModalController.h"
 #import "MusicListController.h"
+#import "MapUtil.h"
 
 #define kMenuOpenOriginX 276
 
@@ -336,6 +337,14 @@
 
 - (void) immediateHideAddButton {
     self.addButton.hidden = YES;
+}
+
+- (void) checkAndShowAddButton {
+    UIViewController *topController = [self.nav topViewController];
+    NSArray *addTypesForController = [APPDELEGATE.mapUtil readAddTypesByController:NSStringFromClass(topController.class)];
+    if(addTypesForController != nil) {
+        [self immediateShowAddButton];
+    }
 }
 
 - (void) showConfirmDelete {

@@ -61,5 +61,6 @@
 - (void) proceedSuccessForProgressView;
 - (void) proceedFailureForProgressView;
 - (void) popProgressView;
+- (void) showAddButtonImmediately;
 
 @end

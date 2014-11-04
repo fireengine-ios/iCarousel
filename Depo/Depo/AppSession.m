@@ -28,6 +28,7 @@
         self.user.fullName = @"Mahir Kemal Tarlan";
         self.user.msisdn = @"5322109094";
         self.user.password = @"5322109094";
+        //5322102103 for ios
     }
     return self;
 }

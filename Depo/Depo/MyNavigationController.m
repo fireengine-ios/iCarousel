@@ -10,6 +10,8 @@
 #import "CustomButton.h"
 #import "AppConstants.h"
 #import "Util.h"
+#import "AppDelegate.h"
+#import "BaseViewController.h"
 
 @interface MyNavigationController ()
 
@@ -69,6 +71,7 @@
 
 - (void) triggerBackByNav {
     [self popViewControllerAnimated:YES];
+    [APPDELEGATE.base checkAndShowAddButton];
 }
 
 - (void) hideNavigationBar {

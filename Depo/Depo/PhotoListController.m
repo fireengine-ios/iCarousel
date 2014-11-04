@@ -262,7 +262,7 @@
 
 - (void) newAlbumModalDidTriggerNewAlbumWithName:(NSString *)albumName {
     [addAlbumDao requestAddAlbumWithName:albumName];
-    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"FolderAddProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"FolderAddSuccessMessage", @"") andFailMessage:NSLocalizedString(@"FolderAddFailMessage", @"")];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"AlbumAddProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"AlbumAddSuccessMessage", @"") andFailMessage:NSLocalizedString(@"AlbumAddFailMessage", @"")];
 }
 
 - (void) photoModalDidTriggerUploadForUrls:(NSArray *)assetUrls {

@@ -41,7 +41,7 @@
     
     for(NSString *buttonType in buttonTypes) {
         AddType addType = [AppUtil strToAddType:buttonType];
-        AddTypeButton *button = [[AddTypeButton alloc] initWithFrame:CGRectMake(0, 0, 100, 90) withAddType:addType];
+        AddTypeButton *button = [[AddTypeButton alloc] initWithFrame:CGRectMake(0, 0, 130, 90) withAddType:addType];
         button.center = initialPoint;
         button.tag = addType;
         [button addTarget:self action:@selector(triggerAddButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -57,7 +57,7 @@
                      animations:^{
                          int counter = 1;
                          for(AddTypeButton *button in buttons) {
-                             button.frame = CGRectMake(110, initialPoint.y - 35 - counter * 90, 100, 90);
+                             button.frame = CGRectMake(95, initialPoint.y - 35 - counter * 90, 130, 90);
                              button.alpha = 1.0f;
                              counter ++;
                          }

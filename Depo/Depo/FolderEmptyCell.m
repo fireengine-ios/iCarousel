@@ -28,7 +28,7 @@
         emptyImgView.image = emptyImg;
         [self addSubview:emptyImgView];
         
-        CustomLabel *titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, topIndex + 170, self.frame.size.width, 24) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:20] withColor:[Util UIColorForHexColor:@"363E4F"] withText:[NSString stringWithFormat:NSLocalizedString(@"FolderEmptyMessage", @""), folderTitle == nil ? @"All Files" : folderTitle]];
+        CustomLabel *titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, topIndex + 170, self.frame.size.width, 24) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:20] withColor:[Util UIColorForHexColor:@"363E4F"] withText:[NSString stringWithFormat:NSLocalizedString(@"FolderEmptyMessage", @""), folderTitle == nil ? NSLocalizedString(@"FilesTitle", @"") : folderTitle]];
         titleLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:titleLabel];
 

@@ -13,6 +13,8 @@
 #import "MetaFile.h"
 #import "ImagePreviewController.h"
 #import "VideoPreviewController.h"
+#import "AppDelegate.h"
+#import "BaseViewController.h"
 
 @interface PhotoAlbumController ()
 
@@ -116,6 +118,7 @@
 
 - (void) triggerBack {
     [self.nav popViewControllerAnimated:YES];
+    [APPDELEGATE.base checkAndShowAddButton];
 }
 
 - (void) triggerMore {

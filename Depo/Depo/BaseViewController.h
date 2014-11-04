@@ -36,5 +36,6 @@
 - (void) showMoveFolders;
 - (void) immediateShowAddButton;
 - (void) immediateHideAddButton;
+- (void) checkAndShowAddButton;
 
 @end
