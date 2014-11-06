@@ -9,11 +9,31 @@
 #import "MyViewController.h"
 #import "MetaFile.h"
 #import <AVFoundation/AVFoundation.h>
+#import "CustomButton.h"
+#import "VolumeLevelIndicator.h"
 
-@interface MusicPreviewController : MyViewController
+@interface MusicPreviewController : MyViewController <VolumeLevelDelegate>
 
 @property (nonatomic, strong) MetaFile *file;
-@property (nonatomic, strong) AVAudioPlayer *player;
+@property (nonatomic, strong) AVPlayer *player;
+@property (nonatomic, strong) AVPlayerItem *mPlayerItem;
+@property (nonatomic, strong) AVPlayerLayer *playerLayer;
+@property (nonatomic, strong) AVURLAsset *currentAsset;
+@property (nonatomic, strong) UIView *controlView;
+@property (nonatomic, strong) CustomButton *prevButton;
+@property (nonatomic, strong) CustomButton *nextButton;
+@property (nonatomic, strong) CustomButton *playButton;
+@property (nonatomic, strong) CustomButton *pauseButton;
+@property (nonatomic, strong) CustomButton *volumeButton;
+@property (nonatomic, strong) UIView *playControlView;
+@property (nonatomic, strong) UIView *customVolumeView;
+@property (nonatomic, strong) UILabel *totalDuration;
+@property (nonatomic, strong) UILabel *passedDuration;
+@property (nonatomic, strong) NSMutableArray *volumeLevels;
+@property (nonatomic, strong) UISlider *slider;
+@property (nonatomic) int totalTimeInSec;
+@property (nonatomic) int yIndex;
+@property (assign) BOOL seekToZeroBeforePlay;
 
 - (id)initWithFile:(MetaFile *) _file;
 
