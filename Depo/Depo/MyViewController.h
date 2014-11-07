@@ -17,6 +17,8 @@
 #import "NewAlbumModalController.h"
 #import "SortModalController.h"
 #import "MoveListModalController.h"
+#import "FolderDetailModalController.h"
+#import "ConfirmDeleteModalController.h"
 
 @protocol MyViewDelegate <NSObject>
 - (void) shouldToggleMenu;
@@ -24,7 +26,7 @@
 - (void) shouldTriggerLogin;
 @end
 
-@interface MyViewController : UIViewController <NewFolderDelegate, CameraCapturaModalDelegate, PhotoModalDelegate, NewAlbumDelegate, SortModalDelegate, MoveListModalProtocol> {
+@interface MyViewController : UIViewController <NewFolderDelegate, CameraCapturaModalDelegate, PhotoModalDelegate, NewAlbumDelegate, SortModalDelegate, MoveListModalProtocol, FolderDetailDelegate, MoreMenuDelegate, ConfirmDeleteDelegate> {
     NSMutableDictionary *filterDictionary;
 }
 
@@ -56,6 +58,7 @@
 - (void) resetPageOffset;
 - (void) triggerMenuLoginWithinPage;
 - (void) presentMoreMenuWithList:(NSArray *) itemList;
+- (void) presentMoreMenuWithList:(NSArray *) itemList withFileFolder:(MetaFile *) fileFolder;
 - (void) dismissMoreMenu;
 - (void) pushProgressViewWithProcessMessage:(NSString *) progressMsg andSuccessMessage:(NSString *) successMsg andFailMessage:(NSString *) failMsg;
 - (void) proceedSuccessForProgressView;

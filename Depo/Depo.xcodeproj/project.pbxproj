@@ -377,6 +377,7 @@
 		05994F9E1A0B572D0081F000 /* music_play_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05994F9C1A0B572D0081F000 /* music_play_icon@2x.png */; };
 		059C9EC71A07DC60000C54D9 /* FolderDetailModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 059C9EC61A07DC60000C54D9 /* FolderDetailModalController.m */; };
 		059C9ECA1A07DCAD000C54D9 /* FileDetailModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 059C9EC91A07DCAD000C54D9 /* FileDetailModalController.m */; };
+		059D97991A0CF12E00BCEDF3 /* RenameDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 059D97981A0CF12E00BCEDF3 /* RenameDao.m */; };
 		05BBE71119E06FB100805215 /* CameraCaptureModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BBE71019E06FB100805215 /* CameraCaptureModalController.m */; };
 		05BBE71419E07D0400805215 /* RefSongCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BBE71319E07D0400805215 /* RefSongCell.m */; };
 		05BBE71619E07DA600805215 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05BBE71519E07DA600805215 /* MediaPlayer.framework */; };
@@ -917,6 +918,8 @@
 		059C9EC61A07DC60000C54D9 /* FolderDetailModalController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderDetailModalController.m; sourceTree = "<group>"; };
 		059C9EC81A07DCAD000C54D9 /* FileDetailModalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileDetailModalController.h; sourceTree = "<group>"; };
 		059C9EC91A07DCAD000C54D9 /* FileDetailModalController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileDetailModalController.m; sourceTree = "<group>"; };
+		059D97971A0CF12E00BCEDF3 /* RenameDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenameDao.h; sourceTree = "<group>"; };
+		059D97981A0CF12E00BCEDF3 /* RenameDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RenameDao.m; sourceTree = "<group>"; };
 		05BBE70F19E06FB100805215 /* CameraCaptureModalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraCaptureModalController.h; sourceTree = "<group>"; };
 		05BBE71019E06FB100805215 /* CameraCaptureModalController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraCaptureModalController.m; sourceTree = "<group>"; };
 		05BBE71219E07D0400805215 /* RefSongCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefSongCell.h; sourceTree = "<group>"; };
@@ -1246,6 +1249,8 @@
 				054730C219FA3D5A00F913FF /* FavoriteDao.m */,
 				05823AF91A066FCD005869F6 /* MoveDao.h */,
 				05823AFA1A066FCD005869F6 /* MoveDao.m */,
+				059D97971A0CF12E00BCEDF3 /* RenameDao.h */,
+				059D97981A0CF12E00BCEDF3 /* RenameDao.m */,
 			);
 			name = http;
 			sourceTree = "<group>";
@@ -2145,6 +2150,7 @@
 				051E1EB119CB20FC00FD1E03 /* MetaMenu.m in Sources */,
 				053D0ED119DAC2BC006A13E0 /* GeneralTextField.m in Sources */,
 				058337DE19ED9C3400DCF0C5 /* CustomAVControl.m in Sources */,
+				059D97991A0CF12E00BCEDF3 /* RenameDao.m in Sources */,
 				051E1E5A19CAC90700FD1E03 /* UIImageView+AFNetworking.m in Sources */,
 				059C9ECA1A07DCAD000C54D9 /* FileDetailModalController.m in Sources */,
 				051CB39219D2DD7C00E5FC88 /* PhotoListController.m in Sources */,

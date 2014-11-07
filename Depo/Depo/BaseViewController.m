@@ -27,6 +27,8 @@
 #import "MusicListController.h"
 #import "MapUtil.h"
 #import "DocListController.h"
+#import "FolderDetailModalController.h"
+#import "FileDetailModalController.h"
 
 #define kMenuOpenOriginX 276
 
@@ -354,7 +356,7 @@
 
 - (void) showConfirmDelete {
     ConfirmDeleteModalController *confirmDelete = [[ConfirmDeleteModalController alloc] init];
-//    confirmDelete.delegate = [self.nav topViewController];
+    confirmDelete.delegate = [self.nav topViewController];
     MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:confirmDelete];
     [self presentViewController:modalNav animated:YES completion:nil];
 }
@@ -370,6 +372,20 @@
     if([[self.nav topViewController] respondsToSelector:@selector(changeToSelectedStatus)]) {
         [[self.nav topViewController] performSelector:@selector(changeToSelectedStatus)];
     }
+}
+
+- (void) showFolderDetailForFolder:(MetaFile *) folder {
+    FolderDetailModalController *folderDetail = [[FolderDetailModalController alloc] initWithFolder:folder];
+    folderDetail.delegate = [self.nav topViewController];
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:folderDetail];
+    [self presentViewController:modalNav animated:YES completion:nil];
+}
+
+- (void) showFileDetailForFile:(MetaFile *) file {
+    FileDetailModalController *fileDetail = [[FileDetailModalController alloc] initWithFile:file];
+    //    folderController.delegate = [self.nav topViewController];
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:fileDetail];
+    [self presentViewController:modalNav animated:YES completion:nil];
 }
 
 - (void) showMoveFolders {

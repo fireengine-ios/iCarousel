@@ -34,6 +34,8 @@
 - (void) showSort;
 - (void) showSelect;
 - (void) showMoveFolders;
+- (void) showFolderDetailForFolder:(MetaFile *) folder;
+- (void) showFileDetailForFile:(MetaFile *) file;
 - (void) immediateShowAddButton;
 - (void) immediateHideAddButton;
 - (void) checkAndShowAddButton;

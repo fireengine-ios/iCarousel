@@ -26,5 +26,6 @@
 @synthesize lastModified;
 @synthesize detail;
 @synthesize contentLengthDisplay;
+@synthesize itemCount;
 
 @end

@@ -72,15 +72,30 @@
         deleteDao.successMethod = @selector(deleteSuccessCallback);
         deleteDao.failMethod = @selector(deleteFailCallback:);
 
+        folderDeleteDao = [[DeleteDao alloc] init];
+        folderDeleteDao.delegate = self;
+        folderDeleteDao.successMethod = @selector(folderDeleteSuccessCallback);
+        folderDeleteDao.failMethod = @selector(folderDeleteFailCallback:);
+        
         favoriteDao = [[FavoriteDao alloc] init];
         favoriteDao.delegate = self;
-        favoriteDao.successMethod = @selector(favSuccessCallback);
+        favoriteDao.successMethod = @selector(favSuccessCallback:);
         favoriteDao.failMethod = @selector(favFailCallback:);
         
+        folderFavDao = [[FavoriteDao alloc] init];
+        folderFavDao.delegate = self;
+        folderFavDao.successMethod = @selector(folderFavSuccessCallback:);
+        folderFavDao.failMethod = @selector(folderFavFailCallback:);
+
         moveDao = [[MoveDao alloc] init];
         moveDao.delegate = self;
         moveDao.successMethod = @selector(moveSuccessCallback);
         moveDao.failMethod = @selector(moveFailCallback:);
+        
+        renameDao = [[RenameDao alloc] init];
+        renameDao.delegate = self;
+        renameDao.successMethod = @selector(renameSuccessCallback:);
+        renameDao.failMethod = @selector(renameFailCallback:);
 
         fileTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex) style:UITableViewStylePlain];
         fileTable.delegate = self;
@@ -298,7 +313,7 @@
 
 - (void) moreClicked {
     if(self.folder) {
-        [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeDetail], [NSNumber numberWithInt:MoreMenuTypeShare], [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDelete], [NSNumber numberWithInt:MoreMenuTypeSort], [NSNumber numberWithInt:MoreMenuTypeSelect]]];
+        [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeFolderDetail], [NSNumber numberWithInt:MoreMenuTypeShare], self.folder.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDelete], [NSNumber numberWithInt:MoreMenuTypeSort], [NSNumber numberWithInt:MoreMenuTypeSelect]] withFileFolder:self.folder];
     } else {
         [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeSort], [NSNumber numberWithInt:MoreMenuTypeSelect]]];
     }
@@ -388,6 +403,16 @@
     [self showErrorAlertWithMessage:errorMessage];
 }
 
+- (void) folderDeleteSuccessCallback {
+    [self proceedSuccessForProgressView];
+    [self.nav performSelector:@selector(popViewControllerAnimated:) withObject:NO afterDelay:1.0f];
+}
+
+- (void) folderDeleteFailCallback:(NSString *) errorMessage {
+    [self proceedFailureForProgressView];
+    [self showErrorAlertWithMessage:errorMessage];
+}
+
 - (void) moveSuccessCallback {
     if(isSelectible) {
         if(self.folder) {
@@ -416,7 +441,20 @@
     [self showErrorAlertWithMessage:errorMessage];
 }
 
-- (void) favSuccessCallback {
+- (void) renameSuccessCallback:(MetaFile *) updatedFileRef {
+    [self proceedSuccessForProgressView];
+    self.folder.visibleName = updatedFileRef.name;
+    self.folder.lastModified = updatedFileRef.lastModified;
+    self.title = self.folder.visibleName;
+}
+
+- (void) renameFailCallback:(NSString *) errorMessage {
+    //    [self hideLoading];
+    [self proceedFailureForProgressView];
+    [self showErrorAlertWithMessage:errorMessage];
+}
+
+- (void) favSuccessCallback:(NSNumber *) favFlag {
 //    [self hideLoading];
     [self proceedSuccessForProgressView];
     [self triggerRefresh];
@@ -424,6 +462,18 @@
 
 - (void) favFailCallback:(NSString *) errorMessage {
 //    [self hideLoading];
+    [self proceedFailureForProgressView];
+    [self showErrorAlertWithMessage:errorMessage];
+}
+
+- (void) folderFavSuccessCallback:(NSNumber *) favFlag {
+    //    [self hideLoading];
+    [[self.folder detail] setFavoriteFlag:[favFlag boolValue]];
+    [self proceedSuccessForProgressView];
+}
+
+- (void) folderFavFailCallback:(NSString *) errorMessage {
+    //    [self hideLoading];
     [self proceedFailureForProgressView];
     [self showErrorAlertWithMessage:errorMessage];
 }
@@ -595,6 +645,42 @@
 - (void) moveListModalDidSelectFolder:(NSString *)folderUuid {
     [moveDao requestMoveFiles:selectedFileList toFolder:folderUuid];
     [self pushProgressViewWithProcessMessage:NSLocalizedString(@"MoveProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"MoveSuccessMessage", @"") andFailMessage:NSLocalizedString(@"MoveFailMessage", @"")];
+}
+
+- (void) folderDetailShouldRename:(NSString *)newNameVal {
+    [renameDao requestRenameForFile:self.folder.uuid withNewName:newNameVal];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"RenameFolderProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"RenameFolderSuccessMessage", @"") andFailMessage:NSLocalizedString(@"RenameFolderFailMessage", @"")];
+}
+
+#pragma mark MoreMenuDelegate
+
+- (void) moreMenuDidSelectDelete {
+    [APPDELEGATE.base showConfirmDelete];
+}
+
+- (void) moreMenuDidSelectFav {
+    [folderFavDao requestMetadataForFiles:@[self.folder.uuid] shouldFavorite:YES];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"FavAddProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"FavAddSuccessMessage", @"") andFailMessage:NSLocalizedString(@"FavAddFailMessage", @"")];
+}
+
+- (void) moreMenuDidSelectUnfav {
+    [folderFavDao requestMetadataForFiles:@[self.folder.uuid] shouldFavorite:NO];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"UnfavProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"UnfavSuccessMessage", @"") andFailMessage:NSLocalizedString(@"UnfavFailMessage", @"")];
+}
+
+- (void) moreMenuDidSelectShare {
+    NSLog(@"At INNER moreMenuDidSelectShare");
+}
+
+#pragma mark ConfirmDeleteModalDelegate methods
+
+- (void) confirmDeleteDidCancel {
+    NSLog(@"At INNER confirmDeleteDidCancel");
+}
+
+- (void) confirmDeleteDidConfirm {
+    [folderDeleteDao requestDeleteFiles:@[self.folder.uuid]];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
 }
 
 @end

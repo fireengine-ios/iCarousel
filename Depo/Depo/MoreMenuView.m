@@ -14,13 +14,20 @@
 
 @implementation MoreMenuView
 
+@synthesize delegate;
 @synthesize moreTable;
 @synthesize moreList;
+@synthesize fileFolder;
 
 - (id)initWithFrame:(CGRect)frame withList:(NSArray *) moreListRef {
+    return [self initWithFrame:frame withList:moreListRef withFileFolder:nil];
+}
+
+- (id)initWithFrame:(CGRect)frame withList:(NSArray *) moreListRef withFileFolder:(MetaFile *) _fileFolder {
     self = [super initWithFrame:frame];
     if (self) {
         self.moreList = moreListRef;
+        self.fileFolder = _fileFolder;
         
         UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
         bgView.backgroundColor = [UIColor blackColor];
@@ -77,13 +84,25 @@
     MoreMenuType type = (MoreMenuType)[typeAsNumber intValue];
     switch (type) {
         case MoreMenuTypeDelete:
-            [APPDELEGATE.base showConfirmDelete];
+            [delegate moreMenuDidSelectDelete];
             break;
         case MoreMenuTypeSort:
             [APPDELEGATE.base showSort];
             break;
         case MoreMenuTypeSelect:
             [APPDELEGATE.base showSelect];
+            break;
+        case MoreMenuTypeFolderDetail:
+            [APPDELEGATE.base showFolderDetailForFolder:self.fileFolder];
+            break;
+        case MoreMenuTypeFav:
+            [delegate moreMenuDidSelectFav];
+            break;
+        case MoreMenuTypeUnfav:
+            [delegate moreMenuDidSelectUnfav];
+            break;
+        case MoreMenuTypeFileDetail:
+            [APPDELEGATE.base showFileDetailForFile:self.fileFolder];
             break;
         default:
             break;

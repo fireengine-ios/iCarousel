@@ -10,7 +10,11 @@
 
 @implementation FavoriteDao
 
+@synthesize newFavFlag;
+
 - (void) requestMetadataForFiles:(NSArray *) uuidList shouldFavorite:(BOOL) favoriteFlag {
+    self.newFavFlag = favoriteFlag;
+    
 	NSURL *url = [NSURL URLWithString:FAVORITE_URL];
 	
     NSDictionary *metadataDict = [NSDictionary dictionaryWithObjectsAndKeys:favoriteFlag?@"true":@"false", @"X-Object-Meta-Favourite", nil];
@@ -37,7 +41,7 @@
 		
         NSLog(@"Favorite Response: %@", responseEnc);
         
-        [self shouldReturnSuccess];
+        [self shouldReturnSuccessWithObject:[NSNumber numberWithBool:self.newFavFlag]];
 	} else {
         [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
 	}

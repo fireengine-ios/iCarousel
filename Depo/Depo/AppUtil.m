@@ -144,7 +144,7 @@
 }
 
 + (NSString *) moreMenuRowImgNameByMoreMenuType:(MoreMenuType) menuType {
-    NSString *iconName = @"blue_add_photo_icon.png";
+    NSString *iconName = @"nav_detail_icon.png";
     switch (menuType) {
         case MoreMenuTypeSort:
             iconName = @"nav_sort_icon.png";
@@ -152,7 +152,8 @@
         case MoreMenuTypeSelect:
             iconName = @"nav_select_icon.png";
             break;
-        case MoreMenuTypeDetail:
+        case MoreMenuTypeFileDetail:
+        case MoreMenuTypeFolderDetail:
             iconName = @"nav_detail_icon.png";
             break;
         case MoreMenuTypeShare:
@@ -160,6 +161,9 @@
             break;
         case MoreMenuTypeFav:
             iconName = @"nav_favourite_icon.png";
+            break;
+        case MoreMenuTypeUnfav:
+            iconName = @"nav_favourite_icon.png";//@"yellow_fav_icon.png";
             break;
         case MoreMenuTypeDelete:
             iconName = @"nav_delete_icon.png";
@@ -179,14 +183,20 @@
         case MoreMenuTypeSelect:
             title = NSLocalizedString(@"MoreMenuSelectTitle", @"");
             break;
-        case MoreMenuTypeDetail:
-            title = NSLocalizedString(@"MoreMenuDetailTitle", @"");
+        case MoreMenuTypeFolderDetail:
+            title = NSLocalizedString(@"MoreMenuDetailFolderTitle", @"");
+            break;
+        case MoreMenuTypeFileDetail:
+            title = NSLocalizedString(@"MoreMenuDetailFileTitle", @"");
             break;
         case MoreMenuTypeShare:
             title = NSLocalizedString(@"MoreMenuShareTitle", @"");
             break;
         case MoreMenuTypeFav:
             title = NSLocalizedString(@"MoreMenuFavTitle", @"");
+            break;
+        case MoreMenuTypeUnfav:
+            title = NSLocalizedString(@"MoreMenuUnfavTitle", @"");
             break;
         case MoreMenuTypeDelete:
             title = NSLocalizedString(@"MoreMenuDeleteTitle", @"");

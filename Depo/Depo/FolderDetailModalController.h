@@ -8,10 +8,17 @@
 
 #import "MyModalController.h"
 #import "MetaFile.h"
+#import "GeneralTextField.h"
 
-@interface FolderDetailModalController : MyModalController
+@protocol FolderDetailDelegate <NSObject>
+- (void) folderDetailShouldRename:(NSString *) newNameVal;
+@end
 
+@interface FolderDetailModalController : MyModalController <UITextFieldDelegate, UIGestureRecognizerDelegate>
+
+@property (nonatomic, strong) id<FolderDetailDelegate> delegate;
 @property (nonatomic, strong) MetaFile *folder;
+@property (nonatomic, strong) GeneralTextField *nameField;
 
 - (id) initWithFolder:(MetaFile *) _folder;
 

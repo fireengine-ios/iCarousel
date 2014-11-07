@@ -152,6 +152,18 @@
     }
 
     moreMenuView = [[MoreMenuView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height) withList:itemList];
+    moreMenuView.delegate = self;
+    [self.view addSubview:moreMenuView];
+    [self.view bringSubviewToFront:moreMenuView];
+}
+
+- (void) presentMoreMenuWithList:(NSArray *) itemList withFileFolder:(MetaFile *) fileFolder {
+    if(moreMenuView) {
+        [moreMenuView removeFromSuperview];
+    }
+    
+    moreMenuView = [[MoreMenuView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height) withList:itemList withFileFolder:fileFolder];
+    moreMenuView.delegate = self;
     [self.view addSubview:moreMenuView];
     [self.view bringSubviewToFront:moreMenuView];
 }
@@ -236,6 +248,38 @@
 
 - (void) moveListModalDidSelectFolder:(NSString *)folderUuid {
     NSLog(@"At MyView moveListModalDidSelectFolder");
+}
+
+- (void) folderDetailShouldRename:(NSString *)newNameVal {
+    NSLog(@"At MyView folderDetailShouldRename");
+}
+
+#pragma mark ConfirmDeleteModalDelegate methods
+
+- (void) confirmDeleteDidCancel {
+    NSLog(@"At MyView confirmDeleteDidCancel");
+}
+
+- (void) confirmDeleteDidConfirm {
+    NSLog(@"At MyView confirmDeleteDidConfirm");
+}
+
+#pragma mark MoreMenuDelegate methods
+
+- (void) moreMenuDidSelectDelete {
+    NSLog(@"At MyView moreMenuDidSelectDelete");
+}
+
+- (void) moreMenuDidSelectFav {
+    NSLog(@"At MyView moreMenuDidSelectFav");
+}
+
+- (void) moreMenuDidSelectUnfav {
+    NSLog(@"At MyView moreMenuDidSelectUnfav");
+}
+
+- (void) moreMenuDidSelectShare {
+    NSLog(@"At MyView moreMenuDidSelectShare");
 }
 
 @end

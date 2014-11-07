@@ -28,6 +28,8 @@
 
 #define FAVORITE_URL BASE_URL@"/filesystem/metadata"
 
+#define RENAME_URL BASE_URL@"/filesystem/rename/%@"
+
 #define MOVE_URL BASE_URL@"/filesystem/move?targetFolderUuid=%@"
 
 #define ADD_FOLDER_URL BASE_URL@"/filesystem/createFolder?parentFolderUuid=%@"

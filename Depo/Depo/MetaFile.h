@@ -28,5 +28,6 @@
 @property (nonatomic, strong) NSDate *lastModified;
 @property (nonatomic, strong) FileDetail *detail;
 @property (nonatomic, strong) NSString *contentLengthDisplay;
+@property (nonatomic) int itemCount;
 
 @end

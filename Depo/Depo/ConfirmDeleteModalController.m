@@ -83,6 +83,7 @@
 }
 
 - (void) cancelClicked {
+    [delegate confirmDeleteDidCancel];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -91,6 +92,7 @@
         [CacheUtil setConfirmDeletePageFlag];
     }
     [delegate confirmDeleteDidConfirm];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)viewDidLoad

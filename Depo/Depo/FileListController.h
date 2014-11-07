@@ -16,14 +16,19 @@
 #import "FavoriteDao.h"
 #import "FooterActionsMenuView.h"
 #import "MoveDao.h"
+#import "RenameDao.h"
 
 @interface FileListController : MyViewController <UITableViewDelegate, UITableViewDataSource, AbstractFileFolderDelegate, FooterActionsDelegate> {
     FileListDao *fileListDao;
     FileListDao *loadMoreDao;
     AddFolderDao *addFolderDao;
     DeleteDao *deleteDao;
+    DeleteDao *folderDeleteDao;
     FavoriteDao *favoriteDao;
+    FavoriteDao *folderFavDao;
     MoveDao *moveDao;
+    RenameDao *renameDao;
+    
     UploadManager *uploadManager;
     CustomButton *moreButton;
     

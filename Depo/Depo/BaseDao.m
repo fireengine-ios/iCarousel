@@ -124,9 +124,10 @@
     if(rawStr == nil || [rawStr isKindOfClass:[NSNull class]])
         return nil;
     
-    NSDateFormatter *df = [[NSDateFormatter alloc] init];
-    [df setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS"];
-    return [df dateFromString:rawStr];
+//    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+//    [df setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS"];
+//    return [df dateFromString:rawStr];
+    return [NSDate dateWithTimeIntervalSince1970:([rawStr longLongValue] / 1000.0)];
 }
 
 - (NSString *) enrichFileFolderName:(NSString *) fileFolderName {
@@ -175,7 +176,7 @@
     NSNumber *hidden = [dict objectForKey:@"hidden"];
     NSString *path = [dict objectForKey:@"path"];
     NSString *tempDownloadURL = [dict objectForKey:@"tempDownloadURL"];
-    NSString *last_modified = [dict objectForKey:@"last_modified"];
+    NSString *last_modified = [dict objectForKey:@"lastModifiedDate"];
     NSString *content_type = [dict objectForKey:@"content_type"];
     
     MetaFile *file = [[MetaFile alloc] init];

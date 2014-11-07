@@ -10,6 +10,8 @@
 
 @interface FavoriteDao : BaseDao
 
+@property (nonatomic) BOOL newFavFlag;
+
 - (void) requestMetadataForFiles:(NSArray *) uuidList shouldFavorite:(BOOL) favoriteFlag;
 
 @end

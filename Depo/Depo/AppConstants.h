@@ -116,9 +116,11 @@ typedef enum {
 typedef enum {
 	MoreMenuTypeSort = 0,
 	MoreMenuTypeSelect,
-	MoreMenuTypeDetail,
+	MoreMenuTypeFileDetail,
+    MoreMenuTypeFolderDetail,
 	MoreMenuTypeShare,
 	MoreMenuTypeFav,
+    MoreMenuTypeUnfav,
     MoreMenuTypeDelete
 } MoreMenuType;
 
