@@ -19,7 +19,7 @@
 + (NSString *) buttonImgNameByAddType:(AddType) addType;
 + (NSString *) buttonTitleByAddType:(AddType) addType;
 + (NSString *) moreMenuRowImgNameByMoreMenuType:(MoreMenuType) menuType;
-+ (NSString *) moreMenuRowTitleByMoreMenuType:(MoreMenuType) menuType;
++ (NSString *) moreMenuRowTitleByMoreMenuType:(MoreMenuType) menuType withContentType:(ContentType) contentType;
 + (BOOL) isMetaFileImage:(MetaFile *) file;
 + (BOOL) isMetaFileVideo:(MetaFile *) file;
 + (BOOL) isMetaFileMusic:(MetaFile *) file;

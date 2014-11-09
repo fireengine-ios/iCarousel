@@ -174,7 +174,7 @@
     return iconName;
 }
 
-+ (NSString *) moreMenuRowTitleByMoreMenuType:(MoreMenuType) menuType {
++ (NSString *) moreMenuRowTitleByMoreMenuType:(MoreMenuType) menuType withContentType:(ContentType) contentType {
     NSString *title = @"";
     switch (menuType) {
         case MoreMenuTypeSort:
@@ -186,21 +186,119 @@
         case MoreMenuTypeFolderDetail:
             title = NSLocalizedString(@"MoreMenuDetailFolderTitle", @"");
             break;
-        case MoreMenuTypeFileDetail:
-            title = NSLocalizedString(@"MoreMenuDetailFileTitle", @"");
+        case MoreMenuTypeFileDetail: {
+            switch (contentType) {
+                case ContentTypeDoc:
+                    title = NSLocalizedString(@"MoreMenuDetailFileTitleDoc", @"");
+                    break;
+                case ContentTypePhoto:
+                    title = NSLocalizedString(@"MoreMenuDetailFileTitleImg", @"");
+                    break;
+                case ContentTypeVideo:
+                    title = NSLocalizedString(@"MoreMenuDetailFileTitleVideo", @"");
+                    break;
+                case ContentTypeMusic:
+                    title = NSLocalizedString(@"MoreMenuDetailFileTitleMusic", @"");
+                    break;
+                    
+                default:
+                    title = NSLocalizedString(@"MoreMenuDetailFileTitle", @"");
+                    break;
+            }
             break;
-        case MoreMenuTypeShare:
-            title = NSLocalizedString(@"MoreMenuShareTitle", @"");
+        }
+        case MoreMenuTypeShare: {
+            switch (contentType) {
+                case ContentTypeDoc:
+                    title = NSLocalizedString(@"MoreMenuShareTitleDoc", @"");
+                    break;
+                case ContentTypePhoto:
+                    title = NSLocalizedString(@"MoreMenuShareTitleImg", @"");
+                    break;
+                case ContentTypeVideo:
+                    title = NSLocalizedString(@"MoreMenuShareTitleVideo", @"");
+                    break;
+                case ContentTypeMusic:
+                    title = NSLocalizedString(@"MoreMenuShareTitleMusic", @"");
+                    break;
+                case ContentTypeFolder:
+                    title = NSLocalizedString(@"MoreMenuShareTitle", @"");
+                    break;
+                default:
+                    title = NSLocalizedString(@"MoreMenuShareTitleOther", @"");
+                    break;
+            }
             break;
-        case MoreMenuTypeFav:
-            title = NSLocalizedString(@"MoreMenuFavTitle", @"");
+        }
+        case MoreMenuTypeFav: {
+            switch (contentType) {
+                case ContentTypeDoc:
+                    title = NSLocalizedString(@"MoreMenuFavTitleDoc", @"");
+                    break;
+                case ContentTypePhoto:
+                    title = NSLocalizedString(@"MoreMenuFavTitleImg", @"");
+                    break;
+                case ContentTypeVideo:
+                    title = NSLocalizedString(@"MoreMenuFavTitleVideo", @"");
+                    break;
+                case ContentTypeMusic:
+                    title = NSLocalizedString(@"MoreMenuFavTitleMusic", @"");
+                    break;
+                case ContentTypeFolder:
+                    title = NSLocalizedString(@"MoreMenuFavTitle", @"");
+                    break;
+                default:
+                    title = NSLocalizedString(@"MoreMenuFavTitleOther", @"");
+                    break;
+            }
             break;
-        case MoreMenuTypeUnfav:
-            title = NSLocalizedString(@"MoreMenuUnfavTitle", @"");
+        }
+        case MoreMenuTypeUnfav: {
+            switch (contentType) {
+                case ContentTypeDoc:
+                    title = NSLocalizedString(@"MoreMenuUnfavTitleDoc", @"");
+                    break;
+                case ContentTypePhoto:
+                    title = NSLocalizedString(@"MoreMenuUnfavTitleImg", @"");
+                    break;
+                case ContentTypeVideo:
+                    title = NSLocalizedString(@"MoreMenuUnfavTitleVideo", @"");
+                    break;
+                case ContentTypeMusic:
+                    title = NSLocalizedString(@"MoreMenuUnfavTitleMusic", @"");
+                    break;
+                case ContentTypeFolder:
+                    title = NSLocalizedString(@"MoreMenuUnfavTitle", @"");
+                    break;
+                default:
+                    title = NSLocalizedString(@"MoreMenuUnfavTitleOther", @"");
+                    break;
+            }
             break;
-        case MoreMenuTypeDelete:
-            title = NSLocalizedString(@"MoreMenuDeleteTitle", @"");
+        }
+        case MoreMenuTypeDelete: {
+            switch (contentType) {
+                case ContentTypeDoc:
+                    title = NSLocalizedString(@"MoreMenuDeleteTitleDoc", @"");
+                    break;
+                case ContentTypePhoto:
+                    title = NSLocalizedString(@"MoreMenuDeleteTitleImg", @"");
+                    break;
+                case ContentTypeVideo:
+                    title = NSLocalizedString(@"MoreMenuDeleteTitleVideo", @"");
+                    break;
+                case ContentTypeMusic:
+                    title = NSLocalizedString(@"MoreMenuDeleteTitleMusic", @"");
+                    break;
+                case ContentTypeFolder:
+                    title = NSLocalizedString(@"MoreMenuDeleteTitle", @"");
+                    break;
+                default:
+                    title = NSLocalizedString(@"MoreMenuDeleteTitleOther", @"");
+                    break;
+            }
             break;
+        }
         default:
             break;
     }

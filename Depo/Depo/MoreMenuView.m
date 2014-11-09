@@ -50,7 +50,7 @@
         [moreTable sizeToFit];
         [self addSubview:moreTable];
         
-        UIImage *dropImg = [UIImage imageNamed:@"menu_drop.png"];
+        UIImage *dropImg = self.fileFolder.folder ? [UIImage imageNamed:@"menu_drop.png"] : [UIImage imageNamed:@"menu_drop_black.png"];
         UIImageView *dropImgView = [[UIImageView alloc] initWithFrame:CGRectMake(290, 0, dropImg.size.width, dropImg.size.height)];
         dropImgView.image = dropImg;
         [self addSubview:dropImgView];
@@ -74,7 +74,12 @@
     NSString *cellIdentifier = [NSString stringWithFormat:@"MORE_MENU_CELL_%d", (int)indexPath.row];
     NSNumber *typeAsNumber = [moreList objectAtIndex:indexPath.row];
     MoreMenuType type = (MoreMenuType)[typeAsNumber intValue];
-    MoreMenuCell *cell = [[MoreMenuCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withMenuType:type];
+    MoreMenuCell *cell = nil;
+    if(self.fileFolder) {
+        cell = [[MoreMenuCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withMenuType:type withFileType:self.fileFolder.contentType];
+    } else {
+        cell = [[MoreMenuCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withMenuType:type];
+    }
     return cell;
 }
 

@@ -275,6 +275,8 @@
 		0546992C19F4E9EA00A87840 /* FileDetailFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0546992B19F4E9EA00A87840 /* FileDetailFooter.m */; };
 		054730C019FA39C300F913FF /* DeleteDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 054730BF19FA39C300F913FF /* DeleteDao.m */; };
 		054730C319FA3D5A00F913FF /* FavoriteDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 054730C219FA3D5A00F913FF /* FavoriteDao.m */; };
+		054B8D3B1A0FEDC500D24420 /* menu_drop_black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 054B8D391A0FEDC500D24420 /* menu_drop_black@2x.png */; };
+		054B8D3C1A0FEDC500D24420 /* menu_drop_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 054B8D3A1A0FEDC500D24420 /* menu_drop_black.png */; };
 		05501F3819EBBB4600CA9F4E /* AlbumDetailDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 05501F3719EBBB4600CA9F4E /* AlbumDetailDao.m */; };
 		0555EF1A19F8F50B0068F4CC /* ConfirmDeleteModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0555EF1919F8F50B0068F4CC /* ConfirmDeleteModalController.m */; };
 		0555EF1D19F91ACA0068F4CC /* SimpleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0555EF1C19F91ACA0068F4CC /* SimpleButton.m */; };
@@ -792,6 +794,8 @@
 		054730BF19FA39C300F913FF /* DeleteDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeleteDao.m; sourceTree = "<group>"; };
 		054730C119FA3D5A00F913FF /* FavoriteDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteDao.h; sourceTree = "<group>"; };
 		054730C219FA3D5A00F913FF /* FavoriteDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteDao.m; sourceTree = "<group>"; };
+		054B8D391A0FEDC500D24420 /* menu_drop_black@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_drop_black@2x.png"; sourceTree = "<group>"; };
+		054B8D3A1A0FEDC500D24420 /* menu_drop_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_drop_black.png; sourceTree = "<group>"; };
 		05501F3619EBBB4600CA9F4E /* AlbumDetailDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumDetailDao.h; sourceTree = "<group>"; };
 		05501F3719EBBB4600CA9F4E /* AlbumDetailDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumDetailDao.m; sourceTree = "<group>"; };
 		0555EF1819F8F50B0068F4CC /* ConfirmDeleteModalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmDeleteModalController.h; sourceTree = "<group>"; };
@@ -1521,6 +1525,8 @@
 				05994F9C1A0B572D0081F000 /* music_play_icon@2x.png */,
 				05994F951A0B57080081F000 /* music_forward.png */,
 				05994F961A0B57080081F000 /* music_forward@2x.png */,
+				054B8D391A0FEDC500D24420 /* menu_drop_black@2x.png */,
+				054B8D3A1A0FEDC500D24420 /* menu_drop_black.png */,
 				050A7B0D19F7CBB600B084B9 /* volume_level.png */,
 				050A7B0E19F7CBB600B084B9 /* volume_current_level.png */,
 				050A7B0F19F7CBB600B084B9 /* volume_mute.png */,
@@ -1913,6 +1919,7 @@
 				052A222C19F6846B000C3C75 /* default_loading_bg.png in Resources */,
 				051CB3F319D2F71200E5FC88 /* empty_state_icon.png in Resources */,
 				053F993B19E1C40900928F22 /* unable_file_icon@2x.png in Resources */,
+				054B8D3B1A0FEDC500D24420 /* menu_drop_black@2x.png in Resources */,
 				051CB3F519D2F71200E5FC88 /* dots_icon.png in Resources */,
 				051CB40C19D2F71200E5FC88 /* white_delete_icon@2x.png in Resources */,
 				051CB40D19D2F71200E5FC88 /* white_move_icon@2x.png in Resources */,
@@ -1930,6 +1937,7 @@
 				051CB3FB19D2F71200E5FC88 /* blue_add_music_icon.png in Resources */,
 				0526445419D5868300B63759 /* menu_drop@2x.png in Resources */,
 				0589062819CC226D00A9E517 /* pause_icon@2x.png in Resources */,
+				054B8D3C1A0FEDC500D24420 /* menu_drop_black.png in Resources */,
 				0589064C19CC2B9500A9E517 /* yellow_file_icon.png in Resources */,
 				051CB41C19D2F71200E5FC88 /* blue_add_new_folder_icon@2x.png in Resources */,
 				05994F9A1A0B57080081F000 /* music_forward@2x.png in Resources */,

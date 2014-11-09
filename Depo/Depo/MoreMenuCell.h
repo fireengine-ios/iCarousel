@@ -12,7 +12,9 @@
 @interface MoreMenuCell : UITableViewCell
 
 @property (nonatomic) MoreMenuType menuType;
+@property (nonatomic) ContentType contentType;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withMenuType:(MoreMenuType) _menuType;
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withMenuType:(MoreMenuType) _menuType withFileType:(ContentType) _contentType;
 
 @end

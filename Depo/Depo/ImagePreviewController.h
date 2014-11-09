@@ -9,10 +9,12 @@
 #import "MyViewController.h"
 #import "MetaFile.h"
 #import "FileDetailFooter.h"
+#import "CustomButton.h"
 
 @interface ImagePreviewController : MyViewController <UIScrollViewDelegate, FileDetailFooterDelegate> {
     UIImageView *imgView;
     FileDetailFooter *footer;
+    CustomButton *moreButton;
 }
 
 @property (nonatomic, strong) MetaFile *file;
