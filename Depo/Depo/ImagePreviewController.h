@@ -11,10 +11,18 @@
 #import "FileDetailFooter.h"
 #import "CustomButton.h"
 
+#import "DeleteDao.h"
+#import "FavoriteDao.h"
+#import "RenameDao.h"
+
 @interface ImagePreviewController : MyViewController <UIScrollViewDelegate, FileDetailFooterDelegate> {
     UIImageView *imgView;
     FileDetailFooter *footer;
     CustomButton *moreButton;
+
+    DeleteDao *deleteDao;
+    FavoriteDao *favDao;
+    RenameDao *renameDao;
 }
 
 @property (nonatomic, strong) MetaFile *file;

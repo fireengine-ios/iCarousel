@@ -50,7 +50,7 @@
         [moreTable sizeToFit];
         [self addSubview:moreTable];
         
-        UIImage *dropImg = self.fileFolder.folder ? [UIImage imageNamed:@"menu_drop.png"] : [UIImage imageNamed:@"menu_drop_black.png"];
+        UIImage *dropImg = self.fileFolder ? self.fileFolder.folder ? [UIImage imageNamed:@"menu_drop.png"] : [UIImage imageNamed:@"menu_drop_black.png"] : [UIImage imageNamed:@"menu_drop.png"];
         UIImageView *dropImgView = [[UIImageView alloc] initWithFrame:CGRectMake(290, 0, dropImg.size.width, dropImg.size.height)];
         dropImgView.image = dropImg;
         [self addSubview:dropImgView];

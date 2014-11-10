@@ -9,7 +9,17 @@
 #import "MyViewController.h"
 #import "MetaFile.h"
 
-@interface PreviewUnavailableController : MyViewController
+#import "DeleteDao.h"
+#import "FavoriteDao.h"
+#import "RenameDao.h"
+
+@interface PreviewUnavailableController : MyViewController {
+    CustomButton *moreButton;
+    
+    DeleteDao *deleteDao;
+    FavoriteDao *favDao;
+    RenameDao *renameDao;
+}
 
 @property (nonatomic, strong) MetaFile *file;
 

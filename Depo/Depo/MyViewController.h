@@ -19,6 +19,7 @@
 #import "MoveListModalController.h"
 #import "FolderDetailModalController.h"
 #import "ConfirmDeleteModalController.h"
+#import "FileDetailModalController.h"
 
 @protocol MyViewDelegate <NSObject>
 - (void) shouldToggleMenu;
@@ -26,7 +27,7 @@
 - (void) shouldTriggerLogin;
 @end
 
-@interface MyViewController : UIViewController <NewFolderDelegate, CameraCapturaModalDelegate, PhotoModalDelegate, NewAlbumDelegate, SortModalDelegate, MoveListModalProtocol, FolderDetailDelegate, MoreMenuDelegate, ConfirmDeleteDelegate> {
+@interface MyViewController : UIViewController <NewFolderDelegate, CameraCapturaModalDelegate, PhotoModalDelegate, NewAlbumDelegate, SortModalDelegate, MoveListModalProtocol, FolderDetailDelegate, FileDetailDelegate, MoreMenuDelegate, ConfirmDeleteDelegate> {
     NSMutableDictionary *filterDictionary;
 }
 

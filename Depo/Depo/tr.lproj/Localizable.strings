@@ -51,6 +51,7 @@
 "FolderEmptySubMessage"="\"+\" butonuna dokunarak dosyalarınızı yüklemeye başlayabilirsiniz.";
 "FolderAddTitle"="KLASÖR İSMİ";
 "FolderNamePlaceholder"="Örnek Klasör İsmi";
+"FileNamePlaceholder"="Dosya İsmi";
 "ButtonCreate"="Oluştur";
 "ButtonCancel"="Vazgeç";
 "NewFolderTitle"="Yeni Klasör";
@@ -118,6 +119,14 @@
 "FolderDetailItems"="Dosya sayısı";
 "FolderDetailSize"="Dosya boyutu";
 "FolderDetailModifyDate"="Son Güncelleme Tarihi";
+"FileDetailTitle"="Dosya Detayları";
+"FileDetailSegmentTitle"="DOSYA BİLGİLERİ";
+"FileDetailNameTitle"="DOSYA ADI";
+"FileDetailSize"="Dosya boyutu";
+"FileDetailModifyDate"="Son Güncelleme Tarihi";
 "RenameFolderProgressMessage"="Klasör yeniden adlandırılıyor";
 "RenameFolderSuccessMessage"="Klasörün ismi başarıyla değiştirildi";
 "RenameFolderFailMessage"="Klasörün ismi değiştirilirken hata alındı";
+"RenameFileProgressMessage"="Dosya yeniden isimlendiriliyor";
+"RenameFileSuccessMessage"="Dosyanın ismi başarıyla değiştirildi";
+"RenameFileFailMessage"="Dosya ismi değiştirilirken hata alındı";

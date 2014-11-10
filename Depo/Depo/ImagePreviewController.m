@@ -27,6 +27,21 @@
         self.title = self.file.visibleName;
         self.view.backgroundColor = [Util UIColorForHexColor:@"191e24"];
 
+        deleteDao = [[DeleteDao alloc] init];
+        deleteDao.delegate = self;
+        deleteDao.successMethod = @selector(deleteSuccessCallback);
+        deleteDao.failMethod = @selector(deleteFailCallback:);
+
+        favDao = [[FavoriteDao alloc] init];
+        favDao.delegate = self;
+        favDao.successMethod = @selector(favSuccessCallback:);
+        favDao.failMethod = @selector(favFailCallback:);
+
+        renameDao = [[RenameDao alloc] init];
+        renameDao.delegate = self;
+        renameDao.successMethod = @selector(renameSuccessCallback:);
+        renameDao.failMethod = @selector(renameFailCallback:);
+
         UIScrollView *mainScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex - 60)];
         mainScroll.delegate = self;
         mainScroll.maximumZoomScale = 5.0f;
@@ -59,6 +74,78 @@
 
 - (void) moreClicked {
     [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeFileDetail], [NSNumber numberWithInt:MoreMenuTypeShare], self.file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDelete]] withFileFolder:self.file];
+}
+
+- (void) deleteSuccessCallback {
+    [self proceedSuccessForProgressView];
+    [self performSelector:@selector(postDelete) withObject:nil afterDelay:1.0f];
+}
+
+- (void) deleteFailCallback:(NSString *) errorMessage {
+    [self proceedFailureForProgressView];
+    [self showErrorAlertWithMessage:errorMessage];
+}
+
+- (void) postDelete {
+    [self.nav popViewControllerAnimated:YES];
+}
+
+- (void) favSuccessCallback:(NSNumber *) favFlag {
+    self.file.detail.favoriteFlag = [favFlag boolValue];
+    [self proceedSuccessForProgressView];
+}
+
+- (void) favFailCallback:(NSString *) errorMessage {
+    [self proceedFailureForProgressView];
+    [self showErrorAlertWithMessage:errorMessage];
+}
+
+- (void) renameSuccessCallback:(MetaFile *) updatedFileRef {
+    [self proceedSuccessForProgressView];
+    self.file.visibleName = updatedFileRef.name;
+    self.file.lastModified = updatedFileRef.lastModified;
+    self.title = self.file.visibleName;
+}
+
+- (void) renameFailCallback:(NSString *) errorMessage {
+    [self proceedFailureForProgressView];
+    [self showErrorAlertWithMessage:errorMessage];
+}
+
+- (void) fileDetailShouldRename:(NSString *)newNameVal {
+    [renameDao requestRenameForFile:self.file.uuid withNewName:newNameVal];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"RenameFileProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"RenameFileSuccessMessage", @"") andFailMessage:NSLocalizedString(@"RenameFileFailMessage", @"")];
+}
+
+#pragma mark MoreMenuDelegate
+
+- (void) moreMenuDidSelectDelete {
+    [APPDELEGATE.base showConfirmDelete];
+}
+
+- (void) moreMenuDidSelectFav {
+    [favDao requestMetadataForFiles:@[self.file.uuid] shouldFavorite:YES];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"FavAddProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"FavAddSuccessMessage", @"") andFailMessage:NSLocalizedString(@"FavAddFailMessage", @"")];
+}
+
+- (void) moreMenuDidSelectUnfav {
+    [favDao requestMetadataForFiles:@[self.file.uuid] shouldFavorite:NO];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"UnfavProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"UnfavSuccessMessage", @"") andFailMessage:NSLocalizedString(@"UnfavFailMessage", @"")];
+}
+
+- (void) moreMenuDidSelectShare {
+    NSLog(@"At INNER moreMenuDidSelectShare");
+}
+
+#pragma mark ConfirmDeleteModalDelegate methods
+
+- (void) confirmDeleteDidCancel {
+    NSLog(@"At INNER confirmDeleteDidCancel");
+}
+
+- (void) confirmDeleteDidConfirm {
+    [deleteDao requestDeleteFiles:@[self.file.uuid]];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
 }
 
 - (void) viewWillAppear:(BOOL)animated {

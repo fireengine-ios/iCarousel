@@ -9,6 +9,8 @@
 #import "PreviewUnavailableController.h"
 #import "Util.h"
 #import "CustomLabel.h"
+#import "AppDelegate.h"
+#import "BaseViewController.h"
 
 @interface PreviewUnavailableController ()
 
@@ -25,6 +27,21 @@
         self.title = self.file.visibleName;
         self.view.backgroundColor = [Util UIColorForHexColor:@"191e24"];
         
+        deleteDao = [[DeleteDao alloc] init];
+        deleteDao.delegate = self;
+        deleteDao.successMethod = @selector(deleteSuccessCallback);
+        deleteDao.failMethod = @selector(deleteFailCallback:);
+        
+        favDao = [[FavoriteDao alloc] init];
+        favDao.delegate = self;
+        favDao.successMethod = @selector(favSuccessCallback:);
+        favDao.failMethod = @selector(favFailCallback:);
+        
+        renameDao = [[RenameDao alloc] init];
+        renameDao.delegate = self;
+        renameDao.successMethod = @selector(renameSuccessCallback:);
+        renameDao.failMethod = @selector(renameFailCallback:);
+
         UIImage *img = [UIImage imageNamed:@"unable_file_icon.png"];
         UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - img.size.width)/2, self.topIndex + 40, img.size.width, img.size.height)];
         imgView.image = img;
@@ -39,6 +56,82 @@
         [self.view addSubview:subTitleLabel];
     }
     return self;
+}
+
+- (void) moreClicked {
+    [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeFileDetail], [NSNumber numberWithInt:MoreMenuTypeShare], self.file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDelete]] withFileFolder:self.file];
+}
+
+- (void) deleteSuccessCallback {
+    [self proceedSuccessForProgressView];
+    [self performSelector:@selector(postDelete) withObject:nil afterDelay:1.0f];
+}
+
+- (void) deleteFailCallback:(NSString *) errorMessage {
+    [self proceedFailureForProgressView];
+    [self showErrorAlertWithMessage:errorMessage];
+}
+
+- (void) postDelete {
+    [self.nav popViewControllerAnimated:YES];
+}
+
+- (void) favSuccessCallback:(NSNumber *) favFlag {
+    self.file.detail.favoriteFlag = [favFlag boolValue];
+    [self proceedSuccessForProgressView];
+}
+
+- (void) favFailCallback:(NSString *) errorMessage {
+    [self proceedFailureForProgressView];
+    [self showErrorAlertWithMessage:errorMessage];
+}
+
+- (void) renameSuccessCallback:(MetaFile *) updatedFileRef {
+    [self proceedSuccessForProgressView];
+    self.file.visibleName = updatedFileRef.name;
+    self.file.lastModified = updatedFileRef.lastModified;
+    self.title = self.file.visibleName;
+}
+
+- (void) renameFailCallback:(NSString *) errorMessage {
+    [self proceedFailureForProgressView];
+    [self showErrorAlertWithMessage:errorMessage];
+}
+
+- (void) fileDetailShouldRename:(NSString *)newNameVal {
+    [renameDao requestRenameForFile:self.file.uuid withNewName:newNameVal];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"RenameFileProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"RenameFileSuccessMessage", @"") andFailMessage:NSLocalizedString(@"RenameFileFailMessage", @"")];
+}
+
+#pragma mark MoreMenuDelegate
+
+- (void) moreMenuDidSelectDelete {
+    [APPDELEGATE.base showConfirmDelete];
+}
+
+- (void) moreMenuDidSelectFav {
+    [favDao requestMetadataForFiles:@[self.file.uuid] shouldFavorite:YES];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"FavAddProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"FavAddSuccessMessage", @"") andFailMessage:NSLocalizedString(@"FavAddFailMessage", @"")];
+}
+
+- (void) moreMenuDidSelectUnfav {
+    [favDao requestMetadataForFiles:@[self.file.uuid] shouldFavorite:NO];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"UnfavProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"UnfavSuccessMessage", @"") andFailMessage:NSLocalizedString(@"UnfavFailMessage", @"")];
+}
+
+- (void) moreMenuDidSelectShare {
+    NSLog(@"At INNER moreMenuDidSelectShare");
+}
+
+#pragma mark ConfirmDeleteModalDelegate methods
+
+- (void) confirmDeleteDidCancel {
+    NSLog(@"At INNER confirmDeleteDidCancel");
+}
+
+- (void) confirmDeleteDidConfirm {
+    [deleteDao requestDeleteFiles:@[self.file.uuid]];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -79,10 +172,12 @@
     }
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    moreButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 22, 22) withImageName:@"dots_icon.png"];
+    [moreButton addTarget:self action:@selector(moreClicked) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *moreItem = [[UIBarButtonItem alloc] initWithCustomView:moreButton];
+    self.navigationItem.rightBarButtonItem = moreItem;
 }
 
 - (void)didReceiveMemoryWarning
@@ -92,15 +187,15 @@
 }
 
 - (BOOL)shouldAutorotate {
-    return NO;
+    return YES;
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
-    return UIInterfaceOrientationPortrait;
+    return UIInterfaceOrientationPortrait | UIInterfaceOrientationPortraitUpsideDown;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
 }
 
 @end

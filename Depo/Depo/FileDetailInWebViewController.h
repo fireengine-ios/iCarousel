@@ -9,7 +9,17 @@
 #import "MyViewController.h"
 #import "MetaFile.h"
 
-@interface FileDetailInWebViewController : MyViewController <UIWebViewDelegate>
+#import "DeleteDao.h"
+#import "FavoriteDao.h"
+#import "RenameDao.h"
+
+@interface FileDetailInWebViewController : MyViewController <UIWebViewDelegate> {
+    CustomButton *moreButton;
+    
+    DeleteDao *deleteDao;
+    FavoriteDao *favDao;
+    RenameDao *renameDao;
+}
 
 @property (nonatomic, strong) MetaFile *file;
 @property (nonatomic, strong) UIWebView *webView;

@@ -254,6 +254,10 @@
     NSLog(@"At MyView folderDetailShouldRename");
 }
 
+- (void) fileDetailShouldRename:(NSString *)newNameVal {
+    NSLog(@"At MyView fileDetailShouldRename");
+}
+
 #pragma mark ConfirmDeleteModalDelegate methods
 
 - (void) confirmDeleteDidCancel {

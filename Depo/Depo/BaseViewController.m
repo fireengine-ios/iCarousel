@@ -206,10 +206,12 @@
 }
 
 - (void) didTriggerProfile {
+    /*
     SettingsController *settings = [[SettingsController alloc] init];
     settings.nav = self.nav;
     settings.myDelegate = self;
     [self.nav setViewControllers:@[settings] animated:NO];
+     */
 }
 
 - (void) showBaseLoading {
@@ -383,7 +385,7 @@
 
 - (void) showFileDetailForFile:(MetaFile *) file {
     FileDetailModalController *fileDetail = [[FileDetailModalController alloc] initWithFile:file];
-    //    folderController.delegate = [self.nav topViewController];
+    fileDetail.delegate = [self.nav topViewController];
     MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:fileDetail];
     [self presentViewController:modalNav animated:YES completion:nil];
 }
