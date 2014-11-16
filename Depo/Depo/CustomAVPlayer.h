@@ -37,5 +37,6 @@
 - (void) updateFrame:(CGRect) newFrame isMax:(BOOL) isMax;
 - (void) mirrorRotation:(UIInterfaceOrientation) orientation;
 - (void) triggerInfo;
+- (void) willDisappear;
 
 @end

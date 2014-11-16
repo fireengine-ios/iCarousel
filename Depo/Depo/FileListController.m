@@ -619,7 +619,7 @@
 
 #pragma mark FooterMenuDelegate methods
 
-- (void) footerActionMenuDidSelectDelete {
+- (void) footerActionMenuDidSelectDelete:(FooterActionsMenuView *) menu {
     for (NSInteger j = 0; j < [fileTable numberOfSections]; ++j) {
         for (NSInteger i = 0; i < [fileTable numberOfRowsInSection:j]; ++i) {
             UITableViewCell *cell = [fileTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]];
@@ -635,11 +635,11 @@
     [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
 }
 
-- (void) footerActionMenuDidSelectMove {
+- (void) footerActionMenuDidSelectMove:(FooterActionsMenuView *) menu {
     [APPDELEGATE.base showMoveFolders];
 }
 
-- (void) footerActionMenuDidSelectShare {
+- (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {
 }
 
 - (void) moveListModalDidSelectFolder:(NSString *)folderUuid {

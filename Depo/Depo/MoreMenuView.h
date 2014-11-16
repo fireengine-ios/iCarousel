@@ -8,12 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "MetaFile.h"
+#import "PhotoAlbum.h"
 
 @protocol MoreMenuDelegate <NSObject>
 - (void) moreMenuDidSelectFav;
 - (void) moreMenuDidSelectUnfav;
 - (void) moreMenuDidSelectShare;
 - (void) moreMenuDidSelectDelete;
+- (void) moreMenuDidSelectAlbumShare;
+- (void) moreMenuDidSelectAlbumDelete;
+- (void) moreMenuDidDismiss;
 @end
 
 @interface MoreMenuView : UIView <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
@@ -22,8 +26,10 @@
 @property (nonatomic, strong) UITableView *moreTable;
 @property (nonatomic, strong) NSArray *moreList;
 @property (nonatomic, strong) MetaFile *fileFolder;
+@property (nonatomic, strong) PhotoAlbum *album;
 
 - (id)initWithFrame:(CGRect)frame withList:(NSArray *) moreListRef;
 - (id)initWithFrame:(CGRect)frame withList:(NSArray *) moreListRef withFileFolder:(MetaFile *) _fileFolder;
+- (id)initWithFrame:(CGRect)frame withList:(NSArray *) moreListRef withFileFolder:(MetaFile *) _fileFolder withAlbum:(PhotoAlbum *) _album;
 
 @end

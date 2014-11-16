@@ -29,6 +29,8 @@
 #import "DocListController.h"
 #import "FolderDetailModalController.h"
 #import "FileDetailModalController.h"
+#import "PhotoAlbumListModalController.h"
+#import "AlbumDetailModalController.h"
 
 #define kMenuOpenOriginX 276
 
@@ -390,10 +392,24 @@
     [self presentViewController:modalNav animated:YES completion:nil];
 }
 
+- (void) showAlbumDetailForAlbum:(PhotoAlbum *) album {
+    AlbumDetailModalController *albumDetail = [[AlbumDetailModalController alloc] initWithAlbum:album];
+    albumDetail.delegate = [self.nav topViewController];
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:albumDetail];
+    [self presentViewController:modalNav animated:YES completion:nil];
+}
+
 - (void) showMoveFolders {
     MoveListModalController *move = [[MoveListModalController alloc] initForFolder:nil];
     move.delegate = [self.nav topViewController];
     MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:move];
+    [self presentViewController:modalNav animated:YES completion:nil];
+}
+
+- (void) showPhotoAlbums {
+    PhotoAlbumListModalController *albumList = [[PhotoAlbumListModalController alloc] init];
+    albumList.delegate = [self.nav topViewController];
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:albumList];
     [self presentViewController:modalNav animated:YES completion:nil];
 }
 

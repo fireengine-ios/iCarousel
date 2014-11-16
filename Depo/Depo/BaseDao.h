@@ -42,6 +42,14 @@
 
 #define ADD_ALBUM_URL BASE_URL@"/album"
 
+#define DELETE_ALBUM_URL BASE_URL@"/album"
+
+#define RENAME_ALBUM_URL BASE_URL@"/album/rename/%@?newLabel=%@"
+
+#define ALBUM_ADD_PHOTOS_URL BASE_URL@"/album/addFiles/%@"
+
+#define ALBUM_REMOVE_PHOTOS_URL BASE_URL@"/album/removeFiles/%@"
+
 #define APN_URL @"http://pushserver.turkcell.com.tr/PushServer/rest/registerdevice/"
 
 #define SHORTEN_URL @"https://www.googleapis.com/urlshortener/v1/url"

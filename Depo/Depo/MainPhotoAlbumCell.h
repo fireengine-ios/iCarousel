@@ -9,10 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "PhotoAlbum.h"
 
-@interface MainPhotoAlbumCell : UITableViewCell
+@interface MainPhotoAlbumCell : UITableViewCell {
+    UIImageView *maskView;
+}
 
 @property (nonatomic, strong) PhotoAlbum *album;
+@property (nonatomic) BOOL isSelectible;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withPhotoAlbum:(PhotoAlbum *) _album;
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withPhotoAlbum:(PhotoAlbum *) _album isSelectible:(BOOL) selectibleFlag;
 
 @end

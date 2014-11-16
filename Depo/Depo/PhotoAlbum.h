@@ -17,5 +17,7 @@
 @property (nonatomic) int imageCount;
 @property (nonatomic) int videoCount;
 @property (nonatomic, strong) MetaFile *cover;
+@property (nonatomic) long bytes;
+@property (nonatomic, strong) NSDate *lastModifiedDate;
 
 @end

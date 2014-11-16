@@ -37,6 +37,11 @@
             durationLabel.textAlignment = NSTextAlignmentRight;
             [self addSubview:durationLabel];
         }
+
+        maskView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+        maskView.image = [UIImage imageNamed:@"selected_mask.png"];
+        maskView.hidden = YES;
+        [self addSubview:maskView];
     }
     return self;
 }
@@ -62,12 +67,38 @@
         progressSeparator.alpha = 0.75f;
         [self addSubview:progressSeparator];
 
+        maskView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+        maskView.image = [UIImage imageNamed:@"selected_mask.png"];
+        maskView.hidden = YES;
+        [self addSubview:maskView];
     }
     return self;
 }
 
+- (void) setNewStatus:(BOOL) newStatus {
+    isSelectible = newStatus;
+    isMarked = NO;
+    maskView.hidden = YES;
+}
+
+- (void) showProgressMask {
+    maskView.hidden = YES;
+    imgView.alpha = 0.25f;
+}
+
 - (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    [delegate squareImageWasSelectedForFile:self.file];
+    if(isSelectible) {
+        isMarked = !isMarked;
+        if(isMarked) {
+            maskView.hidden = NO;
+            [delegate squareImageWasMarkedForFile:self.file];
+        } else {
+            maskView.hidden = YES;
+            [delegate squareImageWasUnmarkedForFile:self.file];
+        }
+    } else {
+        [delegate squareImageWasSelectedForFile:self.file];
+    }
 }
 
 - (void) uploadManagerDidSendData:(long)sentBytes inTotal:(long)totalBytes {

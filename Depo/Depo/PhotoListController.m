@@ -15,6 +15,10 @@
 #import "VideoPreviewController.h"
 #import "AppDelegate.h"
 #import "AppSession.h"
+#import "BaseViewController.h"
+
+#define IMG_FOOTER_TAG 111
+#define ALBUM_FOOTER_TAG 222
 
 @interface PhotoListController ()
 
@@ -28,6 +32,10 @@
 @synthesize refreshControl;
 @synthesize albumList;
 @synthesize albumTable;
+@synthesize selectedFileList;
+@synthesize selectedAlbumList;
+@synthesize imgFooterActionMenu;
+@synthesize albumFooterActionMenu;
 
 - (id)init {
     self = [super init];
@@ -48,7 +56,25 @@
         addAlbumDao.delegate = self;
         addAlbumDao.successMethod = @selector(addAlbumSuccessCallback);
         addAlbumDao.failMethod = @selector(addAlbumFailCallback:);
+
+        deleteDao = [[DeleteDao alloc] init];
+        deleteDao.delegate = self;
+        deleteDao.successMethod = @selector(deleteSuccessCallback);
+        deleteDao.failMethod = @selector(deleteFailCallback:);
         
+        deleteAlbumDao = [[DeleteAlbumsDao alloc] init];
+        deleteAlbumDao.delegate = self;
+        deleteAlbumDao.successMethod = @selector(deleteAlbumSuccessCallback);
+        deleteAlbumDao.failMethod = @selector(deleteAlbumFailCallback:);
+
+        albumAddPhotosDao = [[AlbumAddPhotosDao alloc] init];
+        albumAddPhotosDao.delegate = self;
+        albumAddPhotosDao.successMethod = @selector(photosAddedSuccessCallback);
+        albumAddPhotosDao.failMethod = @selector(photosAddedFailCallback:);
+        
+        selectedFileList = [[NSMutableArray alloc] init];
+        selectedAlbumList = [[NSMutableArray alloc] init];
+
         photoList = [[NSMutableArray alloc] init];
         [photoList addObjectsFromArray:[APPDELEGATE.session uploadImageRefs]];
         
@@ -94,6 +120,11 @@
     [super viewDidAppear:animated];
 }
 
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.nav setNavigationBarHidden:NO animated:NO];
+}
+
 - (void) addOngoingPhotos {
     if([photoList count] > 0) {
         int counter = 0;
@@ -104,6 +135,15 @@
             counter ++;
         }
         photosScroll.contentSize = CGSizeMake(photosScroll.frame.size.width, ((int)ceil(counter/3)+1)*105 + 20);
+    }
+}
+
+- (void) setSelectibleStatusForSquareImages:(BOOL) newStatus {
+    for(UIView *innerView in [photosScroll subviews]) {
+        if([innerView isKindOfClass:[SquareImageView class]]) {
+            SquareImageView *sqView = (SquareImageView *) innerView;
+            [sqView setNewStatus:newStatus];
+        }
     }
 }
 
@@ -168,14 +208,78 @@
     [self performSelector:@selector(popProgressView) withObject:nil afterDelay:1.0f];
 }
 
+- (void) deleteSuccessCallback {
+    if(isSelectible) {
+        [self cancelSelectible];
+    }
+    
+    [self proceedSuccessForProgressView];
+    [self triggerRefresh];
+}
+
+- (void) deleteFailCallback:(NSString *) errorMessage {
+    [self proceedFailureForProgressView];
+    [self showErrorAlertWithMessage:errorMessage];
+}
+
+- (void) deleteAlbumSuccessCallback {
+    if(isSelectible) {
+        [self cancelSelectible];
+    }
+    
+    [self proceedSuccessForProgressView];
+
+    self.tableUpdateCounter ++;
+    [albumListDao requestAlbumListForStart:0 andSize:50];
+}
+
+- (void) deleteAlbumFailCallback:(NSString *) errorMessage {
+    [self proceedFailureForProgressView];
+    [self showErrorAlertWithMessage:errorMessage];
+}
+
+- (void) photosAddedSuccessCallback {
+    if(isSelectible) {
+        [self cancelSelectible];
+    }
+    
+    [self proceedSuccessForProgressView];
+    
+    self.tableUpdateCounter ++;
+    [albumListDao requestAlbumListForStart:0 andSize:50];
+}
+
+- (void) photosAddedFailCallback:(NSString *) errorMessage {
+    [self proceedFailureForProgressView];
+    [self showErrorAlertWithMessage:errorMessage];
+}
+
 - (void) photoHeaderDidSelectAlbumsSegment {
     albumTable.hidden = NO;
     photosScroll.hidden = YES;
+
+    [self hideImgFooterMenu];
+    if([selectedAlbumList count] > 0) {
+        [self showAlbumFooterMenu];
+        self.title = [NSString stringWithFormat:NSLocalizedString(@"AlbumsSelectedTitle", @""), [selectedAlbumList count]];
+    } else {
+        [self hideAlbumFooterMenu];
+        self.title = NSLocalizedString(@"SelectAlbumsTitle", @"");
+    }
 }
 
 - (void) photoHeaderDidSelectPhotosSegment {
     albumTable.hidden = YES;
     photosScroll.hidden = NO;
+
+    [self hideAlbumFooterMenu];
+    if([selectedFileList count] > 0) {
+        [self showImgFooterMenu];
+        self.title = [NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]];
+    } else {
+        [self hideImgFooterMenu];
+        self.title = NSLocalizedString(@"SelectFilesTitle", @"");
+    }
 }
 
 - (void) squareImageWasSelectedForFile:(MetaFile *)fileSelected {
@@ -188,6 +292,62 @@
         detail.nav = self.nav;
         [self.nav pushViewController:detail animated:NO];
     }
+}
+
+- (void) squareImageWasMarkedForFile:(MetaFile *)fileSelected {
+    if(![selectedFileList containsObject:fileSelected.uuid]) {
+        [selectedFileList addObject:fileSelected.uuid];
+    }
+    if([selectedFileList count] > 0) {
+        [self showImgFooterMenu];
+        self.title = [NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]];
+    } else {
+        [self hideImgFooterMenu];
+        self.title = NSLocalizedString(@"SelectFilesTitle", @"");
+    }
+}
+
+- (void) squareImageWasUnmarkedForFile:(MetaFile *)fileSelected {
+    if([selectedFileList containsObject:fileSelected.uuid]) {
+        [selectedFileList removeObject:fileSelected.uuid];
+    }
+    if([selectedFileList count] > 0) {
+        [self showImgFooterMenu];
+        self.title = [NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]];
+    } else {
+        [self hideImgFooterMenu];
+        self.title = NSLocalizedString(@"SelectFilesTitle", @"");
+    }
+}
+
+- (void) showImgFooterMenu {
+    if(imgFooterActionMenu) {
+        imgFooterActionMenu.hidden = NO;
+    } else {
+        imgFooterActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60)];
+        imgFooterActionMenu.tag = IMG_FOOTER_TAG;
+        imgFooterActionMenu.delegate = self;
+        [self.view addSubview:imgFooterActionMenu];
+    }
+}
+
+- (void) hideImgFooterMenu {
+    imgFooterActionMenu.hidden = YES;
+}
+
+- (void) showAlbumFooterMenu {
+    if(albumFooterActionMenu) {
+        albumFooterActionMenu.hidden = NO;
+    } else {
+        albumFooterActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60) shouldShowShare:NO shouldShowMove:NO shouldShowDelete:YES];
+        albumFooterActionMenu.tag = ALBUM_FOOTER_TAG;
+        albumFooterActionMenu.delegate = self;
+        [self.view addSubview:albumFooterActionMenu];
+    }
+}
+
+- (void) hideAlbumFooterMenu {
+    albumFooterActionMenu.hidden = YES;
 }
 
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -216,6 +376,12 @@
         photosScroll.frame = CGRectMake(photosScroll.frame.origin.x, photosScroll.frame.origin.y, photosScroll.frame.size.width, maximizedContentHeight);
         albumTable.frame = CGRectMake(albumTable.frame.origin.x, albumTable.frame.origin.y, albumTable.frame.size.width, maximizedContentHeight);
     }
+    if(imgFooterActionMenu) {
+        imgFooterActionMenu.frame = CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60);
+    }
+    if(albumFooterActionMenu) {
+        albumFooterActionMenu.frame = CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60);
+    }
 }
 
 - (void) dynamicallyLoadNextPage {
@@ -241,16 +407,48 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if(cell == nil) {
         PhotoAlbum *album = [albumList objectAtIndex:indexPath.row];
-        cell = [[MainPhotoAlbumCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withPhotoAlbum:album];
+        cell = [[MainPhotoAlbumCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withPhotoAlbum:album isSelectible:isSelectible];
     }
     return cell;
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     PhotoAlbum *album = [albumList objectAtIndex:indexPath.row];
-    PhotoAlbumController *albumController = [[PhotoAlbumController alloc] initWithAlbum:album];
-    albumController.nav = self.nav;
-    [self.nav pushViewController:albumController animated:NO];
+    if(isSelectible) {
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        if([cell isKindOfClass:[MainPhotoAlbumCell class]]) {
+            if(![selectedAlbumList containsObject:album.uuid]) {
+                [selectedAlbumList addObject:album.uuid];
+            }
+            if([selectedAlbumList count] > 0) {
+                [self showAlbumFooterMenu];
+                self.title = [NSString stringWithFormat:NSLocalizedString(@"AlbumsSelectedTitle", @""), [selectedAlbumList count]];
+            } else {
+                [self hideAlbumFooterMenu];
+                self.title = NSLocalizedString(@"SelectAlbumsTitle", @"");
+            }
+        }
+    } else {
+        PhotoAlbumController *albumController = [[PhotoAlbumController alloc] initWithAlbum:album];
+        albumController.nav = self.nav;
+        [self.nav pushViewController:albumController animated:NO];
+    }
+}
+
+- (void) tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(isSelectible) {
+        PhotoAlbum *album = [albumList objectAtIndex:indexPath.row];
+        if([selectedAlbumList containsObject:album.uuid]) {
+            [selectedAlbumList removeObject:album.uuid];
+        }
+        if([selectedAlbumList count] > 0) {
+            [self showAlbumFooterMenu];
+            self.title = [NSString stringWithFormat:NSLocalizedString(@"AlbumsSelectedTitle", @""), [selectedAlbumList count]];
+        } else {
+            [self hideAlbumFooterMenu];
+            self.title = NSLocalizedString(@"SelectAlbumsTitle", @"");
+        }
+    }
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
@@ -274,8 +472,108 @@
     [self triggerRefresh];
 }
 
+- (void) moreClicked {
+    [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeSort], [NSNumber numberWithInt:MoreMenuTypeSelect]]];
+}
+
+- (void) sortDidChange {
+    [self triggerRefresh];
+}
+
+- (void) changeToSelectedStatus {
+    isSelectible = YES;
+    if(albumTable.isHidden) {
+        self.title = NSLocalizedString(@"SelectFilesTitle", @"");
+    } else {
+        self.title = NSLocalizedString(@"SelectAlbumsTitle", @"");
+    }
+
+    previousButtonRef = self.navigationItem.leftBarButtonItem;
+    
+    CustomButton *cancelButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 60, 20) withImageName:nil withTitle:NSLocalizedString(@"ButtonCancel", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[UIColor whiteColor]];
+    [cancelButton addTarget:self action:@selector(cancelSelectible) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithCustomView:cancelButton];
+    self.navigationItem.leftBarButtonItem = cancelItem;
+    moreButton.hidden = YES;
+    
+    [APPDELEGATE.base immediateHideAddButton];
+    
+    [selectedFileList removeAllObjects];
+    [selectedAlbumList removeAllObjects];
+    
+    [self setSelectibleStatusForSquareImages:YES];
+    
+    albumTable.allowsMultipleSelection = YES;
+    self.tableUpdateCounter ++;
+    [albumTable reloadData];
+}
+
+- (void) cancelSelectible {
+    self.title = NSLocalizedString(@"PhotosTitle", @"");
+    self.navigationItem.leftBarButtonItem = previousButtonRef;
+    moreButton.hidden = NO;
+    
+    isSelectible = NO;
+    [selectedFileList removeAllObjects];
+    [selectedAlbumList removeAllObjects];
+    
+    [APPDELEGATE.base immediateShowAddButton];
+    
+    [self setSelectibleStatusForSquareImages:NO];
+    
+    albumTable.allowsMultipleSelection = NO;
+    self.tableUpdateCounter ++;
+    [albumTable reloadData];
+    
+    if(imgFooterActionMenu) {
+        [imgFooterActionMenu removeFromSuperview];
+    }
+    if(albumFooterActionMenu) {
+        [albumFooterActionMenu removeFromSuperview];
+    }
+}
+
+#pragma mark FooterMenuDelegate methods
+
+- (void) footerActionMenuDidSelectDelete:(FooterActionsMenuView *) menu {
+    if(menu.tag == IMG_FOOTER_TAG) {
+        for(UIView *innerView in [photosScroll subviews]) {
+            if([innerView isKindOfClass:[SquareImageView class]]) {
+                SquareImageView *sqView = (SquareImageView *) innerView;
+                if([selectedFileList containsObject:sqView.file.uuid]) {
+                    [sqView showProgressMask];
+                }
+            }
+        }
+        
+        [deleteDao requestDeleteFiles:selectedFileList];
+        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+    } else {
+        [deleteAlbumDao requestDeleteAlbums:selectedAlbumList];
+        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteAlbumProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteAlbumSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteAlbumFailMessage", @"")];
+    }
+}
+
+- (void) footerActionMenuDidSelectMove:(FooterActionsMenuView *) menu {
+    [APPDELEGATE.base showPhotoAlbums];
+}
+
+- (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {
+}
+
+- (void) albumModalDidSelectAlbum:(NSString *)albumUuid {
+    [albumAddPhotosDao requestAddPhotos:selectedFileList toAlbum:albumUuid];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"AlbumMovePhotoProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"AlbumMovePhotoSuccessMessage", @"") andFailMessage:NSLocalizedString(@"AlbumMovePhotoFailMessage", @"")];
+
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    moreButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 22, 22) withImageName:@"dots_icon.png"];
+    [moreButton addTarget:self action:@selector(moreClicked) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *moreItem = [[UIBarButtonItem alloc] initWithCustomView:moreButton];
+    self.navigationItem.rightBarButtonItem = moreItem;
 }
 
 - (void)didReceiveMemoryWarning

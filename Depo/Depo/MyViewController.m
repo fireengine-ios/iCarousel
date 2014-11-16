@@ -286,4 +286,16 @@
     NSLog(@"At MyView moreMenuDidSelectShare");
 }
 
+#pragma mark AlbumModalDelegate methods
+
+- (void) albumModalDidSelectAlbum:(NSString *)albumUuid {
+    NSLog(@"At MyView albumModalDidSelectAlbum");
+}
+
+#pragma mark AlbumDetailDelegate methods
+
+- (void)albumDetailShouldRenameWithName:(NSString *)newName {
+    NSLog(@"At MyView albumDetailShouldRenameWithName");
+}
+
 @end

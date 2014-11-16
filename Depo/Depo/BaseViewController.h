@@ -13,6 +13,7 @@
 #import "MBProgressHUD.h"
 #import "FloatingAddButton.h"
 #import "FloatingAddMenu.h"
+#import "PhotoAlbum.h"
 
 @interface BaseViewController : UIViewController <SlidingMenuDelegate, SlidingMenuCloseDelegate, MyViewDelegate, FloatingAddButtonDelegate, FloatingAddDelegate>
 
@@ -34,8 +35,10 @@
 - (void) showSort;
 - (void) showSelect;
 - (void) showMoveFolders;
+- (void) showPhotoAlbums;
 - (void) showFolderDetailForFolder:(MetaFile *) folder;
 - (void) showFileDetailForFile:(MetaFile *) file;
+- (void) showAlbumDetailForAlbum:(PhotoAlbum *) album;
 - (void) immediateShowAddButton;
 - (void) immediateHideAddButton;
 - (void) checkAndShowAddButton;

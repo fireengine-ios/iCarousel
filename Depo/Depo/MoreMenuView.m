@@ -18,16 +18,22 @@
 @synthesize moreTable;
 @synthesize moreList;
 @synthesize fileFolder;
+@synthesize album;
 
 - (id)initWithFrame:(CGRect)frame withList:(NSArray *) moreListRef {
     return [self initWithFrame:frame withList:moreListRef withFileFolder:nil];
 }
 
 - (id)initWithFrame:(CGRect)frame withList:(NSArray *) moreListRef withFileFolder:(MetaFile *) _fileFolder {
+    return [self initWithFrame:frame withList:moreListRef withFileFolder:_fileFolder withAlbum:nil];
+}
+
+- (id)initWithFrame:(CGRect)frame withList:(NSArray *) moreListRef withFileFolder:(MetaFile *) _fileFolder withAlbum:(PhotoAlbum *) _album {
     self = [super initWithFrame:frame];
     if (self) {
         self.moreList = moreListRef;
         self.fileFolder = _fileFolder;
+        self.album = _album;
         
         UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
         bgView.backgroundColor = [UIColor blackColor];
@@ -100,6 +106,9 @@
         case MoreMenuTypeFolderDetail:
             [APPDELEGATE.base showFolderDetailForFolder:self.fileFolder];
             break;
+        case MoreMenuTypeAlbumDetail:
+            [APPDELEGATE.base showAlbumDetailForAlbum:self.album];
+            break;
         case MoreMenuTypeFav:
             [delegate moreMenuDidSelectFav];
             break;
@@ -109,8 +118,17 @@
         case MoreMenuTypeFileDetail:
             [APPDELEGATE.base showFileDetailForFile:self.fileFolder];
             break;
+        case MoreMenuTypeAlbumDelete:
+            [delegate moreMenuDidSelectAlbumDelete];
+            break;
+        case MoreMenuTypeAlbumShare:
+            [delegate moreMenuDidSelectAlbumShare];
+            break;
         default:
             break;
+    }
+    if([delegate respondsToSelector:@selector(moreMenuDidDismiss)]) {
+        [delegate moreMenuDidDismiss];
     }
     [self removeFromSuperview];
 }
@@ -123,6 +141,9 @@
 }
 
 - (void) triggerDismiss {
+    if([delegate respondsToSelector:@selector(moreMenuDidDismiss)]) {
+        [delegate moreMenuDidDismiss];
+    }
     [self removeFromSuperview];
 }
 

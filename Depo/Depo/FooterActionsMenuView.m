@@ -17,34 +17,44 @@
 @synthesize deleteButton;
 
 - (id) initWithFrame:(CGRect)frame {
+    return [self initWithFrame:frame shouldShowShare:YES shouldShowMove:YES shouldShowDelete:YES];
+}
+
+- (id) initWithFrame:(CGRect)frame shouldShowShare:(BOOL) shareFlag shouldShowMove:(BOOL) moveFlag shouldShowDelete:(BOOL) deleteFlag {
     if(self = [super initWithFrame:frame]) {
         self.backgroundColor = [Util UIColorForHexColor:@"363e4f"];
-
-        shareButton = [[CustomButton alloc] initWithFrame:CGRectMake(15, 19, 16, 22) withImageName:@"white_share_icon.png"];
-        [shareButton addTarget:self action:@selector(shareClicked) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:shareButton];
         
-        moveButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width/2 - 9, 20, 18, 20) withImageName:@"white_move_icon.png"];
-        [moveButton addTarget:self action:@selector(moveClicked) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:moveButton];
+        if(shareFlag) {
+            shareButton = [[CustomButton alloc] initWithFrame:CGRectMake(15, 19, 16, 22) withImageName:@"white_share_icon.png"];
+            [shareButton addTarget:self action:@selector(shareClicked) forControlEvents:UIControlEventTouchUpInside];
+            [self addSubview:shareButton];
+        }
         
-        deleteButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 35, 19, 20, 21) withImageName:@"white_delete_icon.png"];
-        [deleteButton addTarget:self action:@selector(deleteClicked) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:deleteButton];
+        if(moveFlag) {
+            moveButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width/2 - 9, 20, 18, 20) withImageName:@"white_move_icon.png"];
+            [moveButton addTarget:self action:@selector(moveClicked) forControlEvents:UIControlEventTouchUpInside];
+            [self addSubview:moveButton];
+        }
+        
+        if(deleteFlag) {
+            deleteButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 35, 19, 20, 21) withImageName:@"white_delete_icon.png"];
+            [deleteButton addTarget:self action:@selector(deleteClicked) forControlEvents:UIControlEventTouchUpInside];
+            [self addSubview:deleteButton];
+        }
     }
     return self;
 }
 
 - (void) shareClicked {
-    [delegate footerActionMenuDidSelectShare];
+    [delegate footerActionMenuDidSelectShare:self];
 }
 
 - (void) moveClicked {
-    [delegate footerActionMenuDidSelectMove];
+    [delegate footerActionMenuDidSelectMove:self];
 }
 
 - (void) deleteClicked {
-    [delegate footerActionMenuDidSelectDelete];
+    [delegate footerActionMenuDidSelectDelete:self];
 }
 
 /*

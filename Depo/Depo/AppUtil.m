@@ -154,9 +154,11 @@
             break;
         case MoreMenuTypeFileDetail:
         case MoreMenuTypeFolderDetail:
+        case MoreMenuTypeAlbumDetail:
             iconName = @"nav_detail_icon.png";
             break;
         case MoreMenuTypeShare:
+        case MoreMenuTypeAlbumShare:
             iconName = @"nav_share_icon.png";
             break;
         case MoreMenuTypeFav:
@@ -166,6 +168,7 @@
             iconName = @"nav_favourite_icon.png";//@"yellow_fav_icon.png";
             break;
         case MoreMenuTypeDelete:
+        case MoreMenuTypeAlbumDelete:
             iconName = @"nav_delete_icon.png";
             break;
         default:
@@ -185,6 +188,9 @@
             break;
         case MoreMenuTypeFolderDetail:
             title = NSLocalizedString(@"MoreMenuDetailFolderTitle", @"");
+            break;
+        case MoreMenuTypeAlbumDetail:
+            title = NSLocalizedString(@"MoreMenuDetailAlbumTitle", @"");
             break;
         case MoreMenuTypeFileDetail: {
             switch (contentType) {
@@ -299,6 +305,12 @@
             }
             break;
         }
+        case MoreMenuTypeAlbumShare:
+            title = NSLocalizedString(@"MoreMenuShareTitleAlbum", @"");
+            break;
+        case MoreMenuTypeAlbumDelete:
+            title = NSLocalizedString(@"MoreMenuDeleteTitleAlbum", @"");
+            break;
         default:
             break;
     }

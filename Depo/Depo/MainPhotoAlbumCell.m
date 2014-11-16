@@ -13,12 +13,18 @@
 @implementation MainPhotoAlbumCell
 
 @synthesize album;
+@synthesize isSelectible;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withPhotoAlbum:(PhotoAlbum *) _album {
+    return [self initWithStyle:style reuseIdentifier:reuseIdentifier withPhotoAlbum:_album isSelectible:NO];
+}
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withPhotoAlbum:(PhotoAlbum *) _album isSelectible:(BOOL) selectibleFlag {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.album = _album;
+        self.isSelectible = selectibleFlag;
         
         if(self.album.cover.tempDownloadUrl) {
             UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 160)];
@@ -48,6 +54,11 @@
         CustomLabel *subTitleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 124, self.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withColor:[UIColor whiteColor] withText:subTitleVal];
         [self addSubview:subTitleLabel];
         
+        maskView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 160)];
+        maskView.image = [UIImage imageNamed:@"album_selected_mask.png"];
+        maskView.hidden = YES;
+        [self addSubview:maskView];
+        
     }
     return self;
 }
@@ -57,11 +68,15 @@
     // Initialization code
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+    if(isSelectible) {
+        if(selected) {
+            maskView.hidden = NO;
+        } else {
+            maskView.hidden = YES;
+        }
+    }
 }
 
 @end

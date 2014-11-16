@@ -16,5 +16,7 @@
 @synthesize imageCount;
 @synthesize videoCount;
 @synthesize cover;
+@synthesize bytes;
+@synthesize lastModifiedDate;
 
 @end

@@ -370,6 +370,12 @@
 		0589066919CC524900A9E517 /* TurkcellSaturaBolIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0589066119CC51EC00A9E517 /* TurkcellSaturaBolIta.ttf */; };
 		0589066A19CC524900A9E517 /* TurkcellSaturaBol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0589066219CC51EC00A9E517 /* TurkcellSaturaBol.ttf */; };
 		0589066D19CC560100A9E517 /* CustomLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0589066C19CC560100A9E517 /* CustomLabel.m */; };
+		058911161A139DAF00BF6A52 /* PhotoAlbumListModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 058911151A139DAF00BF6A52 /* PhotoAlbumListModalController.m */; };
+		058B328B1A14ABBE00A291C4 /* DeleteAlbumsDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 058B328A1A14ABBE00A291C4 /* DeleteAlbumsDao.m */; };
+		058B328E1A14ABCB00A291C4 /* RenameAlbumDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 058B328D1A14ABCB00A291C4 /* RenameAlbumDao.m */; };
+		058B32911A14ABE500A291C4 /* AlbumAddPhotosDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 058B32901A14ABE500A291C4 /* AlbumAddPhotosDao.m */; };
+		058B32941A14ABEF00A291C4 /* AlbumRemovePhotosDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 058B32931A14ABEF00A291C4 /* AlbumRemovePhotosDao.m */; };
+		058B32971A15E8A300A291C4 /* AlbumDetailModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 058B32961A15E8A300A291C4 /* AlbumDetailModalController.m */; };
 		059785BD1A0525B600A101EF /* FooterActionsMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 059785BC1A0525B600A101EF /* FooterActionsMenuView.m */; };
 		05994F971A0B57080081F000 /* music_backward.png in Resources */ = {isa = PBXBuildFile; fileRef = 05994F931A0B57080081F000 /* music_backward.png */; };
 		05994F981A0B57080081F000 /* music_backward@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05994F941A0B57080081F000 /* music_backward@2x.png */; };
@@ -910,6 +916,18 @@
 		0589066219CC51EC00A9E517 /* TurkcellSaturaBol.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TurkcellSaturaBol.ttf; sourceTree = "<group>"; };
 		0589066B19CC560100A9E517 /* CustomLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomLabel.h; sourceTree = "<group>"; };
 		0589066C19CC560100A9E517 /* CustomLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomLabel.m; sourceTree = "<group>"; };
+		058911141A139DAF00BF6A52 /* PhotoAlbumListModalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoAlbumListModalController.h; sourceTree = "<group>"; };
+		058911151A139DAF00BF6A52 /* PhotoAlbumListModalController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoAlbumListModalController.m; sourceTree = "<group>"; };
+		058B32891A14ABBE00A291C4 /* DeleteAlbumsDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeleteAlbumsDao.h; sourceTree = "<group>"; };
+		058B328A1A14ABBE00A291C4 /* DeleteAlbumsDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeleteAlbumsDao.m; sourceTree = "<group>"; };
+		058B328C1A14ABCB00A291C4 /* RenameAlbumDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenameAlbumDao.h; sourceTree = "<group>"; };
+		058B328D1A14ABCB00A291C4 /* RenameAlbumDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RenameAlbumDao.m; sourceTree = "<group>"; };
+		058B328F1A14ABE500A291C4 /* AlbumAddPhotosDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumAddPhotosDao.h; sourceTree = "<group>"; };
+		058B32901A14ABE500A291C4 /* AlbumAddPhotosDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumAddPhotosDao.m; sourceTree = "<group>"; };
+		058B32921A14ABEF00A291C4 /* AlbumRemovePhotosDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumRemovePhotosDao.h; sourceTree = "<group>"; };
+		058B32931A14ABEF00A291C4 /* AlbumRemovePhotosDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumRemovePhotosDao.m; sourceTree = "<group>"; };
+		058B32951A15E8A300A291C4 /* AlbumDetailModalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumDetailModalController.h; sourceTree = "<group>"; };
+		058B32961A15E8A300A291C4 /* AlbumDetailModalController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumDetailModalController.m; sourceTree = "<group>"; };
 		059785BB1A0525B600A101EF /* FooterActionsMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FooterActionsMenuView.h; sourceTree = "<group>"; };
 		059785BC1A0525B600A101EF /* FooterActionsMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FooterActionsMenuView.m; sourceTree = "<group>"; };
 		05994F931A0B57080081F000 /* music_backward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_backward.png; sourceTree = "<group>"; };
@@ -1163,6 +1181,10 @@
 				059C9EC61A07DC60000C54D9 /* FolderDetailModalController.m */,
 				059C9EC81A07DCAD000C54D9 /* FileDetailModalController.h */,
 				059C9EC91A07DCAD000C54D9 /* FileDetailModalController.m */,
+				058911141A139DAF00BF6A52 /* PhotoAlbumListModalController.h */,
+				058911151A139DAF00BF6A52 /* PhotoAlbumListModalController.m */,
+				058B32951A15E8A300A291C4 /* AlbumDetailModalController.h */,
+				058B32961A15E8A300A291C4 /* AlbumDetailModalController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -1255,6 +1277,14 @@
 				05823AFA1A066FCD005869F6 /* MoveDao.m */,
 				059D97971A0CF12E00BCEDF3 /* RenameDao.h */,
 				059D97981A0CF12E00BCEDF3 /* RenameDao.m */,
+				058B32891A14ABBE00A291C4 /* DeleteAlbumsDao.h */,
+				058B328A1A14ABBE00A291C4 /* DeleteAlbumsDao.m */,
+				058B328C1A14ABCB00A291C4 /* RenameAlbumDao.h */,
+				058B328D1A14ABCB00A291C4 /* RenameAlbumDao.m */,
+				058B328F1A14ABE500A291C4 /* AlbumAddPhotosDao.h */,
+				058B32901A14ABE500A291C4 /* AlbumAddPhotosDao.m */,
+				058B32921A14ABEF00A291C4 /* AlbumRemovePhotosDao.h */,
+				058B32931A14ABEF00A291C4 /* AlbumRemovePhotosDao.m */,
 			);
 			name = http;
 			sourceTree = "<group>";
@@ -2076,6 +2106,7 @@
 			files = (
 				0557C73819D1C905005E9F6B /* MetaFile.m in Sources */,
 				052644BF19D5A32300B63759 /* TextCell.m in Sources */,
+				058B328E1A14ABCB00A291C4 /* RenameAlbumDao.m in Sources */,
 				05403F1919F5584300AED10A /* ElasticSearchDao.m in Sources */,
 				053D0ED819DAC959006A13E0 /* MyModalController.m in Sources */,
 				058337D919ED9C1600DCF0C5 /* CustomAVPlayer.m in Sources */,
@@ -2098,6 +2129,7 @@
 				051CB39E19D2E41600E5FC88 /* ImageCell.m in Sources */,
 				051E1E8919CAC92700FD1E03 /* ASIDownloadCache.m in Sources */,
 				053EC45119DA99C4000C2B77 /* NewFolderModalController.m in Sources */,
+				058B32941A14ABEF00A291C4 /* AlbumRemovePhotosDao.m in Sources */,
 				05D2B19A19E679E500FC309D /* PhotoAlbum.m in Sources */,
 				052160A919E30D640007B321 /* UploadRef.m in Sources */,
 				051E1EA219CB206500FD1E03 /* SlidingMenu.m in Sources */,
@@ -2156,6 +2188,7 @@
 				051E1E8719CAC92700FD1E03 /* ASIDataCompressor.m in Sources */,
 				051E1E5619CAC90700FD1E03 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				051E1EB119CB20FC00FD1E03 /* MetaMenu.m in Sources */,
+				058911161A139DAF00BF6A52 /* PhotoAlbumListModalController.m in Sources */,
 				053D0ED119DAC2BC006A13E0 /* GeneralTextField.m in Sources */,
 				058337DE19ED9C3400DCF0C5 /* CustomAVControl.m in Sources */,
 				059D97991A0CF12E00BCEDF3 /* RenameDao.m in Sources */,
@@ -2170,6 +2203,7 @@
 				051DE35C19CC128600F27C85 /* MyNavigationController.m in Sources */,
 				051E1E8219CAC92700FD1E03 /* SBJSON.m in Sources */,
 				051DE37219CC140100F27C85 /* CustomAlertView.m in Sources */,
+				058B328B1A14ABBE00A291C4 /* DeleteAlbumsDao.m in Sources */,
 				052644AD19D5A2A600B63759 /* SettingsContactsController.m in Sources */,
 				051E1EA719CB209F00FD1E03 /* MenuCell.m in Sources */,
 				051E1E0319CAC2F900FD1E03 /* main.m in Sources */,
@@ -2195,6 +2229,7 @@
 				053D0EDE19DB01F7006A13E0 /* AddFolderDao.m in Sources */,
 				051E1E7F19CAC92700FD1E03 /* Reachability.m in Sources */,
 				052644B319D5A2A600B63759 /* SettingsStorageController.m in Sources */,
+				058B32971A15E8A300A291C4 /* AlbumDetailModalController.m in Sources */,
 				05144B5B1A0905FA00B2A414 /* SimpleMusicCell.m in Sources */,
 				051CB39B19D2E40B00E5FC88 /* MusicCell.m in Sources */,
 				051DE36919CC12FD00F27C85 /* CheckButton.m in Sources */,
@@ -2206,6 +2241,7 @@
 				051CB39519D2E3F200E5FC88 /* AbstractFileFolderCell.m in Sources */,
 				0589066D19CC560100A9E517 /* CustomLabel.m in Sources */,
 				05144B611A090B8000B2A414 /* SimpleDocCell.m in Sources */,
+				058B32911A14ABE500A291C4 /* AlbumAddPhotosDao.m in Sources */,
 				05501F3819EBBB4600CA9F4E /* AlbumDetailDao.m in Sources */,
 				05C244331A0243BE000D65D0 /* SortTypeCell.m in Sources */,
 				05E8113819DF27690063F99A /* MusicListModalController.m in Sources */,

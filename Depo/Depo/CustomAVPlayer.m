@@ -377,6 +377,12 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
     }
 }
 
+- (void) willDisappear {
+    if(player) {
+        [player pause];
+    }
+}
+
 - (void) dealloc {
     for (UIGestureRecognizer *recognizer in self.gestureRecognizers) {
         [self removeGestureRecognizer:recognizer];
