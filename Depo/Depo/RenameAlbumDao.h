@@ -10,6 +10,8 @@
 
 @interface RenameAlbumDao : BaseDao
 
+@property (nonatomic, strong) NSString *nameRef;
+
 - (void) requestRenameAlbum:(NSString *) albumUuid withNewName:(NSString *) newName;
 
 @end

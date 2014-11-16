@@ -11,7 +11,7 @@
 #import "AlbumDetailDao.h"
 #import "RenameAlbumDao.h"
 #import "DeleteAlbumsDao.h"
-#import "DeleteDao.h"
+#import "AlbumRemovePhotosDao.h"
 #import "SquareImageView.h"
 #import "FooterActionsMenuView.h"
 
@@ -19,11 +19,12 @@
     AlbumDetailDao *detailDao;
     RenameAlbumDao *renameDao;
     DeleteAlbumsDao *deleteDao;
-    DeleteDao *deleteImgDao;
+    AlbumRemovePhotosDao *deleteImgDao;
     
     UIImageView *emptyBgImgView;
     CustomButton *moreButton;
     CustomButton *cancelButton;
+    CustomLabel *titleLabel;
     CustomLabel *subTitleLabel;
     UIView *topBgView;
 

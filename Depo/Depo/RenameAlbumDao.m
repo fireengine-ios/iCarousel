@@ -7,10 +7,15 @@
 //
 
 #import "RenameAlbumDao.h"
+#import "PhotoAlbum.h"
 
 @implementation RenameAlbumDao
 
+@synthesize nameRef;
+
 - (void) requestRenameAlbum:(NSString *) albumUuid withNewName:(NSString *) newName {
+    self.nameRef = newName;
+    
     NSString *urlStr = [NSString stringWithFormat:RENAME_ALBUM_URL, albumUuid, newName];
     NSURL *url = [NSURL URLWithString:urlStr];
     NSLog(@"RENAME ALBUM URL: %@", urlStr);
@@ -26,7 +31,11 @@
     if (!error) {
         NSString *responseEnc = [request responseString];
         NSLog(@"RENAME ALBUM Response: %@", responseEnc);
-        [self shouldReturnSuccessWithObject:nil];
+        
+        PhotoAlbum *finalAlbum = [[PhotoAlbum alloc] init];
+        finalAlbum.label = self.nameRef;
+        finalAlbum.lastModifiedDate = [NSDate date];
+        [self shouldReturnSuccessWithObject:finalAlbum];
     } else {
         [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
     }

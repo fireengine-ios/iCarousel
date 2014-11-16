@@ -50,9 +50,9 @@
         deleteDao.successMethod = @selector(deleteSuccessCallback);
         deleteDao.failMethod = @selector(deleteFailCallback:);
         
-        deleteImgDao = [[DeleteDao alloc] init];
+        deleteImgDao = [[AlbumRemovePhotosDao alloc] init];
         deleteImgDao.delegate = self;
-        deleteImgDao.successMethod = @selector(deleteImgSuccessCallback);
+        deleteImgDao.successMethod = @selector(deleteImgSuccessCallback:);
         deleteImgDao.failMethod = @selector(deleteImgFailCallback:);
         
         selectedFileList = [[NSMutableArray alloc] init];
@@ -82,7 +82,7 @@
         [customBackButton addTarget:self action:@selector(triggerBack) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:customBackButton];
         
-        CustomLabel *titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(40, 35, self.view.frame.size.width - 80, 24) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:20] withColor:[UIColor whiteColor] withText:self.album.label];
+        titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(40, 35, self.view.frame.size.width - 80, 24) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:20] withColor:[UIColor whiteColor] withText:self.album.label];
         titleLabel.textAlignment = NSTextAlignmentCenter;
         [self.view addSubview:titleLabel];
 
@@ -152,7 +152,10 @@
 
 - (void) renameSuccessCallback:(PhotoAlbum *) updatedAlbum {
     [self proceedSuccessForProgressView];
-    self.title = [updatedAlbum label];
+    self.album.label = updatedAlbum.label;
+    self.album.lastModifiedDate = updatedAlbum.lastModifiedDate;
+
+    titleLabel.text = [updatedAlbum label];
 }
 
 - (void) renameFailCallback:(NSString *) errorMessage {
@@ -174,12 +177,18 @@
     [self.nav popViewControllerAnimated:NO];
 }
 
-- (void) deleteImgSuccessCallback {
+- (void) deleteImgSuccessCallback:(PhotoAlbum *) updatedAlbum {
     if(isSelectible) {
         [self cancelSelectible];
     }
     
     [self proceedSuccessForProgressView];
+    
+    self.album.imageCount = updatedAlbum.imageCount;
+    self.album.videoCount = updatedAlbum.videoCount;
+    self.album.lastModifiedDate = updatedAlbum.lastModifiedDate;
+
+    [self initAndSetSubTitle];
     [self triggerRefresh];
 }
 
@@ -321,6 +330,7 @@
 
     if(footerActionMenu) {
         [footerActionMenu removeFromSuperview];
+        footerActionMenu = nil;
     }
 }
 
@@ -335,7 +345,7 @@
             }
         }
     }
-    [deleteImgDao requestDeleteFiles:selectedFileList];
+    [deleteImgDao requestRemovePhotos:selectedFileList fromAlbum:self.album.uuid];
     [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
 }
 

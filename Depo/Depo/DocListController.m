@@ -13,6 +13,7 @@
 #import "SimpleDocCell.h"
 #import "FileDetailInWebViewController.h"
 #import "PreviewUnavailableController.h"
+#import "BaseViewController.h"
 
 @interface DocListController ()
 
@@ -36,6 +37,23 @@
         elasticSearchDao.delegate = self;
         elasticSearchDao.successMethod = @selector(docListSuccessCallback:);
         elasticSearchDao.failMethod = @selector(docListFailCallback:);
+        
+        favoriteDao = [[FavoriteDao alloc] init];
+        favoriteDao.delegate = self;
+        favoriteDao.successMethod = @selector(favSuccessCallback:);
+        favoriteDao.failMethod = @selector(favFailCallback:);
+        
+        moveDao = [[MoveDao alloc] init];
+        moveDao.delegate = self;
+        moveDao.successMethod = @selector(moveSuccessCallback);
+        moveDao.failMethod = @selector(moveFailCallback:);
+        
+        deleteDao = [[DeleteDao alloc] init];
+        deleteDao.delegate = self;
+        deleteDao.successMethod = @selector(deleteSuccessCallback);
+        deleteDao.failMethod = @selector(deleteFailCallback:);
+
+        selectedDocList = [[NSMutableArray alloc] init];
         
         docTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex) style:UITableViewStylePlain];
         docTable.delegate = self;
@@ -160,24 +178,37 @@
 #pragma mark AbstractFileFolderDelegate methods
 
 - (void) fileFolderCellShouldFavForFile:(MetaFile *)fileSelected {
+    [favoriteDao requestMetadataForFiles:@[fileSelected.uuid] shouldFavorite:YES];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"FavAddProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"FavAddSuccessMessage", @"") andFailMessage:NSLocalizedString(@"FavAddFailMessage", @"")];
 }
 
 - (void) fileFolderCellShouldUnfavForFile:(MetaFile *)fileSelected {
+    [favoriteDao requestMetadataForFiles:@[fileSelected.uuid] shouldFavorite:NO];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"UnfavProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"UnfavSuccessMessage", @"") andFailMessage:NSLocalizedString(@"UnfavFailMessage", @"")];
 }
 
 - (void) fileFolderCellShouldDeleteForFile:(MetaFile *)fileSelected {
+    [deleteDao requestDeleteFiles:@[fileSelected.uuid]];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
 }
 
 - (void) fileFolderCellShouldShareForFile:(MetaFile *)fileSelected {
 }
 
 - (void) fileFolderCellShouldMoveForFile:(MetaFile *)fileSelected {
+    selectedDocList = [[NSMutableArray alloc] initWithObjects:fileSelected.uuid, nil];
+    [APPDELEGATE.base showMoveFolders];
 }
 
 - (void) fileFolderCellDidSelectFile:(MetaFile *)fileSelected {
 }
 
 - (void) fileFolderCellDidUnselectFile:(MetaFile *)fileSelected {
+}
+
+- (void) moveListModalDidSelectFolder:(NSString *)folderUuid {
+    [moveDao requestMoveFiles:selectedDocList toFolder:folderUuid];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"MoveProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"MoveSuccessMessage", @"") andFailMessage:NSLocalizedString(@"MoveFailMessage", @"")];
 }
 
 - (NSMutableArray *) filterFilesFromList:(NSArray *) list {
@@ -190,9 +221,50 @@
     return result;
 }
 
+- (void) favSuccessCallback:(NSNumber *) favFlag {
+    [self proceedSuccessForProgressView];
+    [self triggerRefresh];
+}
+
+- (void) favFailCallback:(NSString *) errorMessage {
+    [self proceedFailureForProgressView];
+    [self showErrorAlertWithMessage:errorMessage];
+}
+
+- (void) moveSuccessCallback {
+    [self proceedSuccessForProgressView];
+    [self triggerRefresh];
+}
+
+- (void) moveFailCallback:(NSString *) errorMessage {
+    [self proceedFailureForProgressView];
+    [self showErrorAlertWithMessage:errorMessage];
+}
+
+- (void) deleteSuccessCallback {
+    [self proceedSuccessForProgressView];
+    [self triggerRefresh];
+}
+
+- (void) deleteFailCallback:(NSString *) errorMessage {
+    [self proceedFailureForProgressView];
+    [self showErrorAlertWithMessage:errorMessage];
+}
+
+- (void) sortDidChange {
+    [self triggerRefresh];
+}
+
+- (void) moreClicked {
+    [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeSort]]];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    moreButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 22, 22) withImageName:@"dots_icon.png"];
+    [moreButton addTarget:self action:@selector(moreClicked) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *moreItem = [[UIBarButtonItem alloc] initWithCustomView:moreButton];
+    self.navigationItem.rightBarButtonItem = moreItem;
 }
 
 - (void)didReceiveMemoryWarning {

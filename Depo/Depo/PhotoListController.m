@@ -188,6 +188,7 @@
 
 - (void) albumListSuccessCallback:(NSMutableArray *) list {
     self.albumList = list;
+    self.tableUpdateCounter ++;
     [albumTable reloadData];
 }
 
@@ -199,7 +200,6 @@
     [self proceedSuccessForProgressView];
     [self performSelector:@selector(popProgressView) withObject:nil afterDelay:1.0f];
     
-    self.tableUpdateCounter ++;
     [albumListDao requestAlbumListForStart:0 andSize:50];
 }
 
@@ -258,13 +258,15 @@
     albumTable.hidden = NO;
     photosScroll.hidden = YES;
 
-    [self hideImgFooterMenu];
-    if([selectedAlbumList count] > 0) {
-        [self showAlbumFooterMenu];
-        self.title = [NSString stringWithFormat:NSLocalizedString(@"AlbumsSelectedTitle", @""), [selectedAlbumList count]];
-    } else {
-        [self hideAlbumFooterMenu];
-        self.title = NSLocalizedString(@"SelectAlbumsTitle", @"");
+    if(isSelectible) {
+        [self hideImgFooterMenu];
+        if([selectedAlbumList count] > 0) {
+            [self showAlbumFooterMenu];
+            self.title = [NSString stringWithFormat:NSLocalizedString(@"AlbumsSelectedTitle", @""), [selectedAlbumList count]];
+        } else {
+            [self hideAlbumFooterMenu];
+            self.title = NSLocalizedString(@"SelectAlbumsTitle", @"");
+        }
     }
 }
 
@@ -272,13 +274,15 @@
     albumTable.hidden = YES;
     photosScroll.hidden = NO;
 
-    [self hideAlbumFooterMenu];
-    if([selectedFileList count] > 0) {
-        [self showImgFooterMenu];
-        self.title = [NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]];
-    } else {
-        [self hideImgFooterMenu];
-        self.title = NSLocalizedString(@"SelectFilesTitle", @"");
+    if(isSelectible) {
+        [self hideAlbumFooterMenu];
+        if([selectedFileList count] > 0) {
+            [self showImgFooterMenu];
+            self.title = [NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]];
+        } else {
+            [self hideImgFooterMenu];
+            self.title = NSLocalizedString(@"SelectFilesTitle", @"");
+        }
     }
 }
 
@@ -528,9 +532,11 @@
     
     if(imgFooterActionMenu) {
         [imgFooterActionMenu removeFromSuperview];
+        imgFooterActionMenu = nil;
     }
     if(albumFooterActionMenu) {
         [albumFooterActionMenu removeFromSuperview];
+        albumFooterActionMenu = nil;
     }
 }
 
