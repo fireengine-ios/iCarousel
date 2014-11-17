@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SearchHistory.h"
 
 @interface CacheUtil : NSObject
 
@@ -18,5 +19,7 @@
 + (void) resetCachedPassword;
 + (BOOL) showConfirmDeletePageFlag;
 + (void) setConfirmDeletePageFlag;
++ (void) cacheSearchHistoryItem:(SearchHistory *) historyItem;
++ (NSArray *) readSearchHistoryItems;
 
 @end

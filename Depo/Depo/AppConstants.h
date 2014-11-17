@@ -61,6 +61,8 @@
 
 #define NO_OF_FILES_PER_PAGE 10
 
+#define SEARCH_HISTORY_KEY @"SEARCH_HISTORY_KEY"
+
 #define SuppressPerformSelectorLeakWarning(Stuff) \
 do { \
 _Pragma("clang diagnostic push") \

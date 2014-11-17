@@ -84,7 +84,15 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     self.folder = _folder;
     self.assetsLibrary = [[ALAssetsLibrary alloc] init];
     self.uploadRef.folderUuid = _folder ? _folder.uuid : nil;
-    
+
+    NSString *newUuid = [[NSUUID UUID] UUIDString];
+    self.uploadRef.fileUuid = newUuid;
+
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    tempPath = [documentsDirectory stringByAppendingFormat:@"/%@.png", newUuid];
+    self.uploadRef.tempUrl = tempPath;
+
     [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
         if(group) {
             [group enumerateAssetsUsingBlock:^(ALAsset *_asset, NSUInteger index, BOOL *stop) {
@@ -102,23 +110,16 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 }
 
 - (void) triggerAndStartAssetsTask {
-    NSString *newUuid = [[NSUUID UUID] UUIDString];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    tempPath = [documentsDirectory stringByAppendingFormat:@"/%@", asset.defaultRepresentation.filename];
-    self.uploadRef.tempUrl = tempPath;
-    self.uploadRef.fileUuid = newUuid;
-    
     UIImage *image = [UIImage imageWithCGImage:[asset.defaultRepresentation fullResolutionImage]];
     [UIImagePNGRepresentation(image) writeToFile:tempPath atomically:YES];
 
-    self.uploadRef.urlForUpload = [NSString stringWithFormat:@"%@/%@", APPDELEGATE.session.baseUrl, newUuid];
+    self.uploadRef.urlForUpload = [NSString stringWithFormat:@"%@/%@", APPDELEGATE.session.baseUrl, self.uploadRef.fileUuid];
     
     uploadTask = [session uploadTaskWithRequest:[self prepareRequestWithFileName:asset.defaultRepresentation.filename] fromFile:[NSURL fileURLWithPath:tempPath] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
         if (!error && httpResp.statusCode == 201) {
             [self removeTemporaryFile];
-            [notifyDao requestNotifyUploadForFile:newUuid atParentFolder:self.folder?self.folder.uuid:@""];
+            [notifyDao requestNotifyUploadForFile:self.uploadRef.fileUuid atParentFolder:self.folder?self.folder.uuid:@""];
         } else {
             [self removeTemporaryFile];
             [delegate uploadManagerDidFailUploadingForAsset:self.asset];

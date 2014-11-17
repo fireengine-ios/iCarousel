@@ -280,6 +280,7 @@
 		05501F3819EBBB4600CA9F4E /* AlbumDetailDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 05501F3719EBBB4600CA9F4E /* AlbumDetailDao.m */; };
 		0555EF1A19F8F50B0068F4CC /* ConfirmDeleteModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0555EF1919F8F50B0068F4CC /* ConfirmDeleteModalController.m */; };
 		0555EF1D19F91ACA0068F4CC /* SimpleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0555EF1C19F91ACA0068F4CC /* SimpleButton.m */; };
+		0556EA571A19EA0700123A14 /* SearchHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0556EA561A19EA0700123A14 /* SearchHistory.m */; };
 		0557C73819D1C905005E9F6B /* MetaFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 0557C73719D1C905005E9F6B /* MetaFile.m */; };
 		055A3F4319E7F628004A0121 /* album_mask.png in Resources */ = {isa = PBXBuildFile; fileRef = 055A3F4119E7F628004A0121 /* album_mask.png */; };
 		055A3F4419E7F628004A0121 /* album_mask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 055A3F4219E7F628004A0121 /* album_mask@2x.png */; };
@@ -810,6 +811,8 @@
 		0555EF1C19F91ACA0068F4CC /* SimpleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleButton.m; sourceTree = "<group>"; };
 		0555EF2A19F938DA0068F4CC /* Depo-AppStore-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Depo-AppStore-Info.plist"; sourceTree = "<group>"; };
 		0555EF2B19F938DA0068F4CC /* Depo-Enterprise-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Depo-Enterprise-Info.plist"; sourceTree = "<group>"; };
+		0556EA551A19EA0700123A14 /* SearchHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchHistory.h; sourceTree = "<group>"; };
+		0556EA561A19EA0700123A14 /* SearchHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchHistory.m; sourceTree = "<group>"; };
 		0557C73619D1C905005E9F6B /* MetaFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetaFile.h; sourceTree = "<group>"; };
 		0557C73719D1C905005E9F6B /* MetaFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MetaFile.m; sourceTree = "<group>"; };
 		055A3F4119E7F628004A0121 /* album_mask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = album_mask.png; sourceTree = "<group>"; };
@@ -1308,6 +1311,8 @@
 				052160A819E30D640007B321 /* UploadRef.m */,
 				05D2B19819E679E500FC309D /* PhotoAlbum.h */,
 				05D2B19919E679E500FC309D /* PhotoAlbum.m */,
+				0556EA551A19EA0700123A14 /* SearchHistory.h */,
+				0556EA561A19EA0700123A14 /* SearchHistory.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -2160,6 +2165,7 @@
 				051E1E0719CAC2F900FD1E03 /* AppDelegate.m in Sources */,
 				0555EF1A19F8F50B0068F4CC /* ConfirmDeleteModalController.m in Sources */,
 				05C0E2011A06ABD7005E1E92 /* MoveModalFooterView.m in Sources */,
+				0556EA571A19EA0700123A14 /* SearchHistory.m in Sources */,
 				052160A319E2E56B0007B321 /* DepoUploadTask.m in Sources */,
 				05BBE71119E06FB100805215 /* CameraCaptureModalController.m in Sources */,
 				051DE37319CC140100F27C85 /* CustomConfirmView.m in Sources */,

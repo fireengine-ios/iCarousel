@@ -48,4 +48,20 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
++ (void) cacheSearchHistoryItem:(SearchHistory *) historyItem {
+    NSArray *result = [CacheUtil readSearchHistoryItems];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:result] forKey:SEARCH_HISTORY_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (NSArray *) readSearchHistoryItems {
+    NSArray *result = [[NSArray alloc] init];
+    NSData *arrData = [[NSUserDefaults standardUserDefaults] objectForKey:SEARCH_HISTORY_KEY];
+    if (arrData != nil) {
+        result = [NSKeyedUnarchiver unarchiveObjectWithData:arrData];
+    }
+    //TODO sort
+    return result;
+}
+
 @end
