@@ -72,7 +72,7 @@
 "UploadingPlaceholder"="Yükleniyor";
 "UploadFinishedPlaceholder"="Yükleme tamamlandı";
 "UploadFailedPlaceholder"="Dosya yüklemesi başarısız";
-"PhotoHeaderPhotosButton"="RESİMLER";
+"PhotoHeaderPhotosButton"="FOTOĞRAFLAR";
 "PhotoHeaderAlbumsButton"="ALBÜMLER";
 "AlbumCellSubtitle"="%d Foto, %d Video";
 "AlbumCellSubtitlePhotosOnly"="%d Foto";
