@@ -17,6 +17,7 @@
 @property (nonatomic, strong) NSString *fileUuid;
 @property (nonatomic, strong) NSString *tempUrl;
 @property (nonatomic, strong) NSString *urlForUpload;
+@property (nonatomic, strong) NSString *albumUuid;
 @property (nonatomic) ContentType contentType;
 
 @end

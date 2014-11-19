@@ -31,6 +31,12 @@
 
 #define MENU_CLOSED_NOTIFICATION @"MENU_CLOSED_NOTIFICATION"
 
+#define TEMP_IMG_UPLOAD_NOTIFICATION @"TEMP_IMG_UPLOAD_NOTIFICATION"
+
+#define TEMP_IMG_UPLOAD_NOTIFICATION_UUID_PARAM @"TEMP_IMG_UPLOAD_NOTIFICATION_UUID_PARAM"
+
+#define TEMP_IMG_UPLOAD_NOTIFICATION_URL_PARAM @"TEMP_IMG_UPLOAD_NOTIFICATION_URL_PARAM"
+
 #define MSISDN_STORE_KEY @"MSISDN_STORE_KEY"
 
 #define PASS_STORE_KEY @"PASS_STORE_KEY"
@@ -60,6 +66,8 @@
 #define CONTENT_TYPE_HTML_VALUE @"text/html"
 
 #define NO_OF_FILES_PER_PAGE 10
+
+#define RECENT_ACTIVITY_COUNT 10
 
 #define SEARCH_HISTORY_KEY @"SEARCH_HISTORY_KEY"
 
@@ -137,6 +145,12 @@ typedef enum {
     SortTypeSizeDesc,
     SortTypeSizeAsc
 } SortType;
+
+typedef enum {
+    ActivityTypeFolder = 0,
+    ActivityTypeImage,
+    ActivityTypeTrash
+} ActivityType;
 
 @interface AppConstants : NSObject
 

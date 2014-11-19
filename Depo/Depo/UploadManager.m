@@ -87,12 +87,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 
     NSString *newUuid = [[NSUUID UUID] UUIDString];
     self.uploadRef.fileUuid = newUuid;
-
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    tempPath = [documentsDirectory stringByAppendingFormat:@"/%@.png", newUuid];
-    self.uploadRef.tempUrl = tempPath;
-
+    
     [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
         if(group) {
             [group enumerateAssetsUsingBlock:^(ALAsset *_asset, NSUInteger index, BOOL *stop) {
@@ -110,8 +105,15 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 }
 
 - (void) triggerAndStartAssetsTask {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    tempPath = [documentsDirectory stringByAppendingFormat:@"/%@", asset.defaultRepresentation.filename];
+    self.uploadRef.tempUrl = tempPath;
+    
     UIImage *image = [UIImage imageWithCGImage:[asset.defaultRepresentation fullResolutionImage]];
     [UIImagePNGRepresentation(image) writeToFile:tempPath atomically:YES];
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:TEMP_IMG_UPLOAD_NOTIFICATION object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:self.uploadRef.fileUuid, TEMP_IMG_UPLOAD_NOTIFICATION_UUID_PARAM, tempPath, TEMP_IMG_UPLOAD_NOTIFICATION_URL_PARAM, nil]];
 
     self.uploadRef.urlForUpload = [NSString stringWithFormat:@"%@/%@", APPDELEGATE.session.baseUrl, self.uploadRef.fileUuid];
     
@@ -153,13 +155,13 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 }
 
 - (void) uploadNotifySuccessCallback {
-    [delegate uploadManagerDidFinishUploadingForAsset:self.asset];
     hasFinished = YES;
+    [delegate uploadManagerDidFinishUploadingForAsset:self.asset];
 }
 
 - (void) uploadNotifyFailCallback:(NSString *) errorMessage {
-    [delegate uploadManagerDidFailUploadingForAsset:self.asset];
     hasFinished = YES;
+    [delegate uploadManagerDidFailUploadingForAsset:self.asset];
 }
 
 - (void) URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didSendBodyData:(int64_t)bytesSent totalBytesSent:(int64_t)totalBytesSent totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend {

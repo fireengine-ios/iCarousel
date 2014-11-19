@@ -16,6 +16,7 @@
 @synthesize fileUuid;
 @synthesize tempUrl;
 @synthesize urlForUpload;
+@synthesize albumUuid;
 @synthesize contentType;
 
 @end

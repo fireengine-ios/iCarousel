@@ -71,8 +71,23 @@
         maskView.image = [UIImage imageNamed:@"selected_mask.png"];
         maskView.hidden = YES;
         [self addSubview:maskView];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(managerNotifyReceived:) name:TEMP_IMG_UPLOAD_NOTIFICATION object:nil];
+        
     }
     return self;
+}
+
+- (void) managerNotifyReceived:(NSNotification *) notification {
+    NSDictionary *userInfo = notification.userInfo;
+    NSString *fileUuid = [userInfo objectForKey:TEMP_IMG_UPLOAD_NOTIFICATION_UUID_PARAM];
+    NSString *tempUrl = [userInfo objectForKey:TEMP_IMG_UPLOAD_NOTIFICATION_URL_PARAM];
+    if(fileUuid && self.uploadRef) {
+        if([self.uploadRef.fileUuid isEqualToString:fileUuid]) {
+            self.uploadRef.tempUrl = tempUrl;
+            imgView.image = [UIImage imageWithData:[NSData dataWithContentsOfFile:self.uploadRef.tempUrl]];
+        }
+    }
 }
 
 - (void) setNewStatus:(BOOL) newStatus {
@@ -87,6 +102,10 @@
 }
 
 - (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    if(self.uploadRef != nil) {
+        return;
+    }
+    
     if(isSelectible) {
         isMarked = !isMarked;
         if(isMarked) {
@@ -117,6 +136,13 @@
 - (void) uploadManagerDidFinishUploadingForAsset:(ALAsset *)assetToUpload {
     progressSeparator.backgroundColor = [Util UIColorForHexColor:@"67d74b"];
     imgView.alpha = 1.0f;
+    if([delegate respondsToSelector:@selector(squareImageUploadFinishedForFile:)]) {
+        [delegate squareImageUploadFinishedForFile:self.uploadRef.fileUuid];
+    }
+}
+
+- (void) dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:TEMP_IMG_UPLOAD_NOTIFICATION];
 }
 
 /*

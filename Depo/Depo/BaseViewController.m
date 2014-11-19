@@ -31,6 +31,7 @@
 #import "FileDetailModalController.h"
 #import "PhotoAlbumListModalController.h"
 #import "AlbumDetailModalController.h"
+#import "RecentActivitiesController.h"
 
 #define kMenuOpenOriginX 276
 
@@ -410,6 +411,12 @@
     PhotoAlbumListModalController *albumList = [[PhotoAlbumListModalController alloc] init];
     albumList.delegate = [self.nav topViewController];
     MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:albumList];
+    [self presentViewController:modalNav animated:YES completion:nil];
+}
+
+- (void) showRecentActivities {
+    RecentActivitiesController *recentActivities = [[RecentActivitiesController alloc] init];
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:recentActivities];
     [self presentViewController:modalNav animated:YES completion:nil];
 }
 

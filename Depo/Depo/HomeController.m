@@ -8,6 +8,8 @@
 
 #import "HomeController.h"
 #import "MetaFile.h"
+#import "AppDelegate.h"
+#import "BaseViewController.h"
 
 @interface HomeController ()
 
@@ -15,12 +17,24 @@
 
 @implementation HomeController
 
+@synthesize footer;
+
 - (id)init {
     self = [super init];
     if (self) {
         self.title = NSLocalizedString(@"HomeTitle", @"");
+        
+        footer = [[RecentActivityLinkerFooter alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60)];
+        footer.delegate = self;
+        [self.view addSubview:footer];
     }
     return self;
+}
+
+#pragma mark RecentActivityLinker Method
+
+- (void) recentActivityLinkerDidTriggerPage {
+    [APPDELEGATE.base showRecentActivities];
 }
 
 - (void)viewDidLoad {
@@ -32,15 +46,15 @@
 }
 
 - (BOOL)shouldAutorotate {
-    return NO;
+    return YES;
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
-    return UIInterfaceOrientationPortrait;
+    return UIInterfaceOrientationPortrait | UIInterfaceOrientationPortraitUpsideDown;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
 }
 
 @end

@@ -15,5 +15,10 @@
 		<string>AddTypePhoto</string>
 		<string>AddTypeAlbum</string>
 	</array>
+    <key>PhotoAlbumController</key>
+    <array>
+        <string>AddTypeCamera</string>
+        <string>AddTypePhoto</string>
+    </array>
 </dict>
 </plist>

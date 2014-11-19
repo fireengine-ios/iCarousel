@@ -7,7 +7,10 @@
 //
 
 #import "MyViewController.h"
+#import "RecentActivityLinkerFooter.h"
 
-@interface HomeController : MyViewController
+@interface HomeController : MyViewController <RecentActivityLinkerDelegate>
+
+@property (nonatomic, strong) RecentActivityLinkerFooter *footer;
 
 @end

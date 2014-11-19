@@ -29,5 +29,6 @@
 + (NSString *) serverSortNameByEnum:(SortType) type;
 + (BOOL) isAscByEnum:(SortType) type;
 + (NSString *) randomCamImgName;
++ (NSString *) iconNameByActivityType:(ActivityType) type;
 
 @end

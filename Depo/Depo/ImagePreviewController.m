@@ -150,6 +150,7 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self.nav setNavigationBarHidden:NO animated:NO];
     if(IS_BELOW_7) {
         [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
         [[UINavigationBar appearance] setBackgroundColor:[Util UIColorForHexColor:@"191e24"]];

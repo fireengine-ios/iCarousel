@@ -390,4 +390,18 @@
     return [NSString stringWithFormat:@"fromCam%d.png", arc4random_uniform(999)];
 }
 
++ (NSString *) iconNameByActivityType:(ActivityType) type {
+    switch (type) {
+        case ActivityTypeFolder:
+            return @"circle_folder_icon.png";
+        case ActivityTypeImage:
+            return @"circle_photos_icon.png";
+        case ActivityTypeTrash:
+            return @"circle_delete_icon.png";
+        default:
+            return @"";
+    }
+    return @"";
+}
+
 @end

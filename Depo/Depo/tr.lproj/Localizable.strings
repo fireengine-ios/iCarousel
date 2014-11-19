@@ -155,3 +155,7 @@
 "DeleteAlbumProgressMessage"="Albüm Siliniyor";
 "DeleteAlbumSuccessMessage"="Albim silindi";
 "DeleteAlbumFailMessage"="Albüm silinirken hata oluştu";
+"RecentActivitiesTitle"="En Son Aktiviteler";
+"RecentActivityLinkerTitle"="En Son Aktiviteler";
+"TodayTitle"="BUGÜN";
+"RecentSectionDateFormat"="dd MMM";

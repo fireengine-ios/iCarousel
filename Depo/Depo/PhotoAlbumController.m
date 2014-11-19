@@ -28,6 +28,7 @@
 @synthesize moreMenuView;
 @synthesize selectedFileList;
 @synthesize footerActionMenu;
+@synthesize newlyAddedFileList;
 
 - (id)initWithAlbum:(PhotoAlbum *) _album {
     self = [super init];
@@ -50,14 +51,21 @@
         deleteDao.successMethod = @selector(deleteSuccessCallback);
         deleteDao.failMethod = @selector(deleteFailCallback:);
         
+        albumAddPhotosDao = [[AlbumAddPhotosDao alloc] init];
+        albumAddPhotosDao.delegate = self;
+        albumAddPhotosDao.successMethod = @selector(photosAddedSuccessCallback);
+        albumAddPhotosDao.failMethod = @selector(photosAddedFailCallback:);
+
         deleteImgDao = [[AlbumRemovePhotosDao alloc] init];
         deleteImgDao.delegate = self;
         deleteImgDao.successMethod = @selector(deleteImgSuccessCallback:);
         deleteImgDao.failMethod = @selector(deleteImgFailCallback:);
         
         selectedFileList = [[NSMutableArray alloc] init];
+        newlyAddedFileList = [[NSMutableArray alloc] init];
 
         photoList = [[NSMutableArray alloc] init];
+        [photoList addObjectsFromArray:[APPDELEGATE.session uploadImageRefsForAlbum:self.album.uuid]];
         
         if(self.album.cover.tempDownloadUrl) {
             UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 160)];
@@ -95,6 +103,8 @@
         photosScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 160, self.view.frame.size.width, self.view.frame.size.height - 160)];
         [self.view addSubview:photosScroll];
         
+        [self addOngoingPhotos];
+
         listOffset = 0;
         [detailDao requestDetailOfAlbum:self.album.uuid forStart:0 andSize:20];
         
@@ -111,8 +121,25 @@
         }
     }
     [photoList removeAllObjects];
+    [photoList addObjectsFromArray:[APPDELEGATE.session uploadImageRefsForAlbum:self.album.uuid]];
+    [self addOngoingPhotos];
+
     listOffset = 0;
     [detailDao requestDetailOfAlbum:self.album.uuid forStart:0 andSize:20];
+}
+
+- (void) addOngoingPhotos {
+    if([photoList count] > 0) {
+        int counter = 0;
+        for(UploadRef *row in photoList) {
+            CGRect imgRect = CGRectMake(5 + (counter%3 * 105), 5 + ((int)floor(counter/3)*105), 100, 100);
+            SquareImageView *imgView = [[SquareImageView alloc] initWithFrame:imgRect withUploadRef:row];
+            imgView.delegate = self;
+            [photosScroll addSubview:imgView];
+            counter ++;
+        }
+        photosScroll.contentSize = CGSizeMake(photosScroll.frame.size.width, ((int)ceil(counter/3)+1)*105 + 20);
+    }
 }
 
 - (void) initAndSetSubTitle {
@@ -175,6 +202,20 @@
 
 - (void) postDelete {
     [self.nav popViewControllerAnimated:NO];
+}
+
+- (void) photosAddedSuccessCallback {
+    [newlyAddedFileList removeAllObjects];
+
+    [self proceedSuccessForProgressView];
+    [self triggerRefresh];
+}
+
+- (void) photosAddedFailCallback:(NSString *) errorMessage {
+    [newlyAddedFileList removeAllObjects];
+
+    [self proceedFailureForProgressView];
+    [self showErrorAlertWithMessage:errorMessage];
 }
 
 - (void) deleteImgSuccessCallback:(PhotoAlbum *) updatedAlbum {
@@ -283,6 +324,15 @@
     }
 }
 
+- (void) squareImageUploadFinishedForFile:(NSString *) fileUuid {
+    [newlyAddedFileList addObject:fileUuid];
+    
+    if([[APPDELEGATE.session uploadImageRefsForAlbum:self.album.uuid] count] == 0) {
+        [albumAddPhotosDao requestAddPhotos:newlyAddedFileList toAlbum:self.album.uuid];
+        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"AlbumMovePhotoProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"AlbumMovePhotoSuccessMessage", @"") andFailMessage:NSLocalizedString(@"AlbumMovePhotoFailMessage", @"")];
+    }
+}
+
 - (void) showFooterMenu {
     if(footerActionMenu) {
         footerActionMenu.hidden = NO;
@@ -353,6 +403,16 @@
 }
 
 - (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {
+}
+
+- (void) photoModalDidTriggerUploadForUrls:(NSArray *)assetUrls {
+    for(UploadRef *ref in assetUrls) {
+        ref.albumUuid = self.album.uuid;
+        UploadManager *manager = [[UploadManager alloc] initWithUploadReference:ref];
+        [manager startUploadingAsset:ref.filePath atFolder:nil];
+        [APPDELEGATE.session.uploadManagers addObject:manager];
+    }
+    [self triggerRefresh];
 }
 
 - (void) viewWillAppear:(BOOL)animated {

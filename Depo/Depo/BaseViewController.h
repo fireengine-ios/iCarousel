@@ -36,6 +36,7 @@
 - (void) showSelect;
 - (void) showMoveFolders;
 - (void) showPhotoAlbums;
+- (void) showRecentActivities;
 - (void) showFolderDetailForFolder:(MetaFile *) folder;
 - (void) showFileDetailForFile:(MetaFile *) file;
 - (void) showAlbumDetailForAlbum:(PhotoAlbum *) album;

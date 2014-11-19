@@ -15,6 +15,7 @@
 - (void) squareImageWasSelectedForFile:(MetaFile *) fileSelected;
 - (void) squareImageWasMarkedForFile:(MetaFile *) fileSelected;
 - (void) squareImageWasUnmarkedForFile:(MetaFile *) fileSelected;
+- (void) squareImageUploadFinishedForFile:(NSString *) fileSelectedUuid;
 @end
 
 @interface SquareImageView : UIView <UploadManagerDelegate> {

@@ -20,5 +20,6 @@
 
 - (NSArray *) uploadRefsForFolder:(NSString *) folderUuid;
 - (NSArray *) uploadImageRefs;
+- (NSArray *) uploadImageRefsForAlbum:(NSString *) albumUuid;
 
 @end
