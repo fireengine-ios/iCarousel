@@ -10,6 +10,7 @@
 #import "MetaFile.h"
 #import "AppDelegate.h"
 #import "BaseViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface HomeController ()
 
@@ -35,6 +36,18 @@
 
 - (void) recentActivityLinkerDidTriggerPage {
     [APPDELEGATE.base showRecentActivities];
+}
+
+- (void) tempDraw {
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextAddArc(context, 100, 100, 50, 0, 30, 1);
+    CGContextSetRGBFillColor(context, 1, 0.5, 0.5, 1.0);
+    CGContextDrawPath(context, kCGPathStroke);
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+//    [self performSelector:@selector(tempDraw) withObject:nil afterDelay:2.0f];
 }
 
 - (void)viewDidLoad {

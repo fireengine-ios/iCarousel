@@ -11,8 +11,39 @@
 
 @implementation RecentActivitiesDao
 
-- (void) requestRecentActivitiesForOffset:(int) offset andCount:(int) count {
-    [self performSelector:@selector(tempResponse) withObject:nil afterDelay:1.0f];
+- (void) requestRecentActivitiesForPage:(int) page andCount:(int) count {
+    NSString *parentListingUrl = [NSString stringWithFormat:RECENT_ACTIVITIES_URL, @"name", @"ASC", page, count];
+    NSURL *url = [NSURL URLWithString:parentListingUrl];
+    
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    [request setDelegate:self];
+    [self sendGetRequest:request];
+}
+
+- (void)requestFinished:(ASIHTTPRequest *)request {
+    NSError *error = [request error];
+    
+    if (!error) {
+        NSString *responseEnc = [request responseString];
+        
+        NSLog(@"Recent Activities Response: %@", responseEnc);
+
+        SBJSON *jsonParser = [SBJSON new];
+        NSArray *mainArray = [jsonParser objectWithString:responseEnc];
+        
+        NSMutableArray *result = [[NSMutableArray alloc] init];
+        
+        if(mainArray != nil && ![mainArray isKindOfClass:[NSNull class]]) {
+            for(NSDictionary *activityDict in mainArray) {
+                [result addObject:[self parseActivity:activityDict]];
+            }
+        }
+
+        [self shouldReturnSuccessWithObject:result];
+    } else {
+        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+    }
+    
 }
 
 - (void) tempResponse {

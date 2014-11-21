@@ -14,5 +14,7 @@
 @synthesize thumbLargeUrl;
 @synthesize thumbMediumUrl;
 @synthesize thumbSmallUrl;
+@synthesize width;
+@synthesize height;
 
 @end

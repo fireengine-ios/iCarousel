@@ -11,10 +11,15 @@
 
 @interface Activity : NSObject
 
+@property (nonatomic) long activityId;
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic, strong) NSString *visibleHour;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic) ActivityType activityType;
 @property (nonatomic, strong) NSArray *actionItemList;
+@property (nonatomic, strong) NSString *fileUuid;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *rawActivityType;
+@property (nonatomic, strong) NSString *rawFileType;
 
 @end

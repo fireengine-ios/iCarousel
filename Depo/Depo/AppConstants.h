@@ -67,7 +67,7 @@
 
 #define NO_OF_FILES_PER_PAGE 10
 
-#define RECENT_ACTIVITY_COUNT 10
+#define RECENT_ACTIVITY_COUNT 30
 
 #define SEARCH_HISTORY_KEY @"SEARCH_HISTORY_KEY"
 
@@ -149,7 +149,11 @@ typedef enum {
 typedef enum {
     ActivityTypeFolder = 0,
     ActivityTypeImage,
-    ActivityTypeTrash
+    ActivityTypeTrash,
+    ActivityTypeFile,
+    ActivityTypeMusic,
+    ActivityTypeContact,
+    ActivityTypeFav
 } ActivityType;
 
 @interface AppConstants : NSObject

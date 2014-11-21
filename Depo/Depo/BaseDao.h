@@ -11,12 +11,15 @@
 #import "SBJSON.h"
 #import "AppConstants.h"
 #import "MetaFile.h"
+#import "Activity.h"
 
 #define BASE_URL @"https://tcloudstb.turkcell.com.tr/api"
 
 #define TOKEN_URL BASE_URL@"/auth/token"
 
 #define USER_BASE_URL BASE_URL@"/container/baseUrl"
+
+#define RECENT_ACTIVITIES_URL BASE_URL@"/filesystem/activityFeed?&sortBy=%@&sortOrder=%@&page=%d&size=%d"
 
 #define FILE_LISTING_MAIN_URL BASE_URL@"/filesystem?parentFolderUuid=%@&sortBy=%@&sortOrder=%@&page=%d&size=%d"
 
@@ -100,5 +103,6 @@
 - (void) shouldReturnSuccessWithObject:(id) obj;
 - (void) shouldReturnFailWithMessage:(NSString *) errorMessage;
 - (MetaFile *) parseFile:(NSDictionary *) dict;
+- (Activity *) parseActivity:(NSDictionary *) dict;
 
 @end

@@ -14,5 +14,7 @@
 @property (nonatomic, strong) NSString *thumbLargeUrl;
 @property (nonatomic, strong) NSString *thumbMediumUrl;
 @property (nonatomic, strong) NSString *thumbSmallUrl;
+@property (nonatomic) int width;
+@property (nonatomic) int height;
 
 @end

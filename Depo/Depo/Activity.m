@@ -10,10 +10,15 @@
 
 @implementation Activity
 
+@synthesize activityId;
 @synthesize date;
 @synthesize visibleHour;
 @synthesize title;
 @synthesize activityType;
 @synthesize actionItemList;
+@synthesize fileUuid;
+@synthesize name;
+@synthesize rawActivityType;
+@synthesize rawFileType;
 
 @end

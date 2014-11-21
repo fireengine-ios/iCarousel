@@ -202,16 +202,67 @@
         NSString *thumbLarge = [detailDict objectForKey:@"X-Object-Meta-Thumbnail-Large"];
         NSString *thumbMedium = [detailDict objectForKey:@"X-Object-Meta-Thumbnail-Medium"];
         NSString *thumbSmall = [detailDict objectForKey:@"X-Object-Meta-Thumbnail-Small"];
+        NSNumber *imgHeight = [detailDict objectForKey:@"X-Object-Meta-Image-Height"];
+        NSNumber *imgWidth = [detailDict objectForKey:@"X-Object-Meta-Image-Width"];
         
         FileDetail *detail = [[FileDetail alloc] init];
         detail.favoriteFlag = [self boolByNumber:favFlag];
         detail.thumbLargeUrl = thumbLarge;
         detail.thumbMediumUrl = thumbMedium;
         detail.thumbSmallUrl = thumbSmall;
+        detail.width = [self intByNumber:imgWidth];
+        detail.height = [self intByNumber:imgHeight];
         
         file.detail = detail;
     }
     return file;
+}
+
+- (Activity *) parseActivity:(NSDictionary *) dict {
+    NSNumber *activityId = [dict objectForKey:@"id"];
+    NSString *createdDate = [dict objectForKey:@"createdDate"];
+    NSString *rawActivityType = [dict objectForKey:@"activityType"];
+    NSString *rawFileType = [dict objectForKey:@"fileType"];
+    NSString *fileUuid = [dict objectForKey:@"fileUUID"];
+    NSString *name = [dict objectForKey:@"name"];
+
+    Activity *result = [[Activity alloc] init];
+    result.activityId = [self longByNumber:activityId];
+    result.date = [self dateByRawVal:createdDate];
+    result.rawActivityType = [self strByRawVal:rawActivityType];
+    result.rawFileType = [self strByRawVal:rawFileType];
+    result.fileUuid = [self strByRawVal:fileUuid];
+    result.name = [self strByRawVal:name];
+    
+    if([result.rawActivityType isEqualToString:@"FAVOURITE"]) {
+        result.activityType = ActivityTypeFav;
+    } else if([result.rawActivityType isEqualToString:@"DELETED"]) {
+        result.activityType = ActivityTypeTrash;
+    } else {
+        if([result.rawFileType isEqualToString:@"IMAGE"]) {
+            result.activityType = ActivityTypeImage;
+        } else if([result.rawFileType isEqualToString:@"FOLDER"]) {
+            result.activityType = ActivityTypeFolder;
+        } else if([result.rawFileType isEqualToString:@"AUDIO"]) {
+            result.activityType = ActivityTypeMusic;
+        } else if([result.rawFileType isEqualToString:@"CONTACT"]) {
+            result.activityType = ActivityTypeContact;
+        } else {
+            result.activityType = ActivityTypeFile;
+        }
+    }
+    
+    //TODO düzelt
+    result.title = result.name;
+    
+    NSDictionary *fileInfo = [dict objectForKey:@"fileInfo"];
+    if(fileInfo != nil && ![fileInfo isKindOfClass:[NSNull class]]) {
+        NSMutableArray *files = [[NSMutableArray alloc] init];
+        [files addObject:[self parseFile:fileInfo]];
+        result.actionItemList = files;
+    }
+    
+    return result;
 }
 
 @end

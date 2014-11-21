@@ -153,7 +153,7 @@
 "AlbumRenameSuccessMessage"="Albüm ismi başarıyla değiştirildi";
 "AlbumRenameFailMessage"="Albüm ismi değiştirilirken hata oluştu";
 "DeleteAlbumProgressMessage"="Albüm Siliniyor";
-"DeleteAlbumSuccessMessage"="Albim silindi";
+"DeleteAlbumSuccessMessage"="Albüm silindi";
 "DeleteAlbumFailMessage"="Albüm silinirken hata oluştu";
 "RecentActivitiesTitle"="En Son Aktiviteler";
 "RecentActivityLinkerTitle"="En Son Aktiviteler";

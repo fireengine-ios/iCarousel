@@ -55,7 +55,7 @@
         UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:customBackButton];
         self.navigationItem.leftBarButtonItem = backButton;
 
-        [recentDao requestRecentActivitiesForOffset:listOffset andCount:RECENT_ACTIVITY_COUNT];
+        [recentDao requestRecentActivitiesForPage:listOffset andCount:RECENT_ACTIVITY_COUNT];
     }
     return self;
 }
@@ -69,7 +69,7 @@
     rawItems = nil;
 
     listOffset = 0;
-    [recentDao requestRecentActivitiesForOffset:listOffset andCount:RECENT_ACTIVITY_COUNT];
+    [recentDao requestRecentActivitiesForPage:listOffset andCount:RECENT_ACTIVITY_COUNT];
     tableUpdateCount++;
 }
 
@@ -78,6 +78,9 @@
         [refreshControl endRefreshing];
     }
 
+    if(!recentItems)
+        return;
+    
     if(!rawItems) {
         rawItems = [[NSMutableArray alloc] init];
     }

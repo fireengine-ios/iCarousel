@@ -398,8 +398,14 @@
             return @"circle_photos_icon.png";
         case ActivityTypeTrash:
             return @"circle_delete_icon.png";
+        case ActivityTypeContact:
+            return @"circle_contact_icon.png";
+        case ActivityTypeFav:
+            return @"circle_fav_icon.png";
+        case ActivityTypeMusic:
+            return @"circle_music_icon.png";
         default:
-            return @"";
+            return @"circle_doc_icon.png";
     }
     return @"";
 }

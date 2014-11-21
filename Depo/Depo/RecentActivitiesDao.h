@@ -10,6 +10,6 @@
 
 @interface RecentActivitiesDao : BaseDao
 
-- (void) requestRecentActivitiesForOffset:(int) offset andCount:(int) count;
+- (void) requestRecentActivitiesForPage:(int) page andCount:(int) count;
 
 @end
