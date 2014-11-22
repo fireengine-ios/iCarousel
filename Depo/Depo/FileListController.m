@@ -109,18 +109,23 @@
         [refreshControl addTarget:self action:@selector(triggerRefresh) forControlEvents:UIControlEventValueChanged];
         [fileTable addSubview:refreshControl];
 
+        /* viewDidAppear'e alindi
         if(self.folder) {
             [fileListDao requestFileListingForFolder:self.folder.uuid andForPage:listOffset andSize:NO_OF_FILES_PER_PAGE sortBy:APPDELEGATE.session.sortType];
         } else {
             [fileListDao requestFileListingForParentForPage:listOffset andSize:NO_OF_FILES_PER_PAGE sortBy:APPDELEGATE.session.sortType];
         }
         [self showLoading];
+         */
     }
     return self;
 }
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+
+    [self triggerRefresh];
+    [self showLoading];
 }
 
 - (void) triggerRefresh {
@@ -643,6 +648,10 @@
 }
 
 - (void) moveListModalDidSelectFolder:(NSString *)folderUuid {
+    if([selectedFileList containsObject:folderUuid]) {
+        [self showErrorAlertWithMessage:NSLocalizedString(@"SelfMoveError", @"")];
+        return;
+    }
     [moveDao requestMoveFiles:selectedFileList toFolder:folderUuid];
     [self pushProgressViewWithProcessMessage:NSLocalizedString(@"MoveProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"MoveSuccessMessage", @"") andFailMessage:NSLocalizedString(@"MoveFailMessage", @"")];
 }

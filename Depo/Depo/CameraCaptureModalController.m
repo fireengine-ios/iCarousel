@@ -45,6 +45,7 @@
 
 - (void) imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [modalDelegate cameraCapturaModalDidCancel];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)viewDidLoad

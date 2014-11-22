@@ -86,6 +86,8 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 	BOOL isFinished;
 	CGAffineTransform rotationTransform;
     NSTimer *windowTimer;
+    NSTimer *frameTimer;
+    BOOL frameHiddenFlag;
     MBRoundProgressView *annularIndicator;
     float windowProgress;
     UIImageView *iconView;
@@ -226,7 +228,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
         [annularIndicator setAnnular:YES];
         annularIndicator.progress = windowProgress;
         [customContainer addSubview:annularIndicator];
-        windowTimer = [NSTimer scheduledTimerWithTimeInterval:0.05f target:self selector:@selector(increaseWindowLoading) userInfo:nil repeats:YES];
+        frameTimer = [NSTimer scheduledTimerWithTimeInterval:0.05f target:self selector:@selector(increaseFrameLoading) userInfo:nil repeats:YES];
         
         self.customView = customContainer;
 		[self setupLabels];
@@ -310,6 +312,16 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
     annularIndicator.progress = windowProgress;
 }
 
+- (void) increaseFrameLoading {
+    if(!frameHiddenFlag) {
+        windowProgress = windowProgress + 0.025;
+        if(windowProgress > 1.0f) {
+            windowProgress = 0.0f;
+        }
+        annularIndicator.progress = windowProgress;
+    }
+}
+
 - (void)dealloc {
 	[self unregisterFromNotifications];
 	[self unregisterFromKVO];
@@ -343,7 +355,9 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 
 - (void)show:(BOOL)animated {
 	useAnimation = animated;
-	// If the grace time is set postpone the HUD display
+    frameHiddenFlag = NO;
+
+    // If the grace time is set postpone the HUD display
 	if (self.graceTime > 0.0) {
 		self.graceTimer = [NSTimer scheduledTimerWithTimeInterval:self.graceTime target:self
                                                          selector:@selector(handleGraceTimer:) userInfo:nil repeats:NO];
@@ -369,7 +383,9 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 
 - (void)hide:(BOOL)animated {
 	useAnimation = animated;
-	// If the minShow time is set, calculate how long the hud was shown,
+    frameHiddenFlag = YES;
+
+    // If the minShow time is set, calculate how long the hud was shown,
 	// and pospone the hiding operation if necessary
     
     if(windowTimer) {

@@ -376,7 +376,7 @@
             return @"createdDate";
         case SortTypeSizeAsc:
         case SortTypeSizeDesc:
-            return @"size";
+            return @"bytes";
         default:
             return @"";
     }

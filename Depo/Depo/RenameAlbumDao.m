@@ -17,8 +17,8 @@
     self.nameRef = newName;
     
     NSString *urlStr = [NSString stringWithFormat:RENAME_ALBUM_URL, albumUuid, newName];
-    NSURL *url = [NSURL URLWithString:urlStr];
-    NSLog(@"RENAME ALBUM URL: %@", urlStr);
+    NSURL *url = [NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSLog(@"RENAME ALBUM URL: %@", [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]);
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setDelegate:self];

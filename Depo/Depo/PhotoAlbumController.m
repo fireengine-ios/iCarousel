@@ -159,18 +159,28 @@
     }
 }
 
-- (void) albumDetailSuccessCallback:(NSArray *) contentList {
+- (void) albumDetailSuccessCallback:(PhotoAlbum *) albumWithUpdatedContent {
     int counter = [photoList count];
-    for(MetaFile *row in contentList) {
-        CGRect imgRect = CGRectMake(5 + (counter%3 * 105), 5 + ((int)floor(counter/3)*105), 100, 100);
-        SquareImageView *imgView = [[SquareImageView alloc] initWithFrame:imgRect withFile:row];
-        imgView.delegate = self;
-        [photosScroll addSubview:imgView];
-        counter ++;
+    long totalBytes = 0;
+    if(albumWithUpdatedContent && albumWithUpdatedContent.content) {
+        for(MetaFile *row in albumWithUpdatedContent.content) {
+            CGRect imgRect = CGRectMake(5 + (counter%3 * 105), 5 + ((int)floor(counter/3)*105), 100, 100);
+            SquareImageView *imgView = [[SquareImageView alloc] initWithFrame:imgRect withFile:row];
+            imgView.delegate = self;
+            [photosScroll addSubview:imgView];
+            counter ++;
+            totalBytes += row.bytes;
+        }
+        [photoList addObjectsFromArray:albumWithUpdatedContent.content];
     }
     photosScroll.contentSize = CGSizeMake(photosScroll.frame.size.width, ((int)ceil(counter/3)+1)*105 + 20);
-    [photoList addObjectsFromArray:contentList];
     isLoading = NO;
+    self.album.bytes = totalBytes;
+    self.album.imageCount = albumWithUpdatedContent.imageCount;
+    self.album.videoCount = albumWithUpdatedContent.videoCount;
+    self.album.label = albumWithUpdatedContent.label;
+    self.album.lastModifiedDate = albumWithUpdatedContent.lastModifiedDate;
+    [self initAndSetSubTitle];
 }
 
 - (void) albumDetailFailCallback:(NSString *) errorMessage {
@@ -412,6 +422,20 @@
         [manager startUploadingAsset:ref.filePath atFolder:nil];
         [APPDELEGATE.session.uploadManagers addObject:manager];
     }
+    [self triggerRefresh];
+}
+
+- (void) cameraCapturaModalDidCaptureAndStoreImageToPath:(NSString *)filePath withName:(NSString *)fileName {
+    UploadRef *uploadRef = [[UploadRef alloc] init];
+    uploadRef.tempUrl = filePath;
+    uploadRef.fileName = fileName;
+    uploadRef.contentType = ContentTypePhoto;
+    uploadRef.albumUuid = self.album.uuid;
+    
+    UploadManager *uploadManager = [[UploadManager alloc] initWithUploadReference:uploadRef];
+    [uploadManager startUploadingFile:filePath atFolder:nil withFileName:fileName];
+    [APPDELEGATE.session.uploadManagers addObject:uploadManager];
+    
     [self triggerRefresh];
 }
 

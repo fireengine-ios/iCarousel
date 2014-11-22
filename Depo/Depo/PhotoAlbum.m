@@ -18,5 +18,6 @@
 @synthesize cover;
 @synthesize bytes;
 @synthesize lastModifiedDate;
+@synthesize content;
 
 @end

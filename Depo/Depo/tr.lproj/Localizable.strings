@@ -159,3 +159,4 @@
 "RecentActivityLinkerTitle"="En Son Aktiviteler";
 "TodayTitle"="BUGÜN";
 "RecentSectionDateFormat"="dd MMM";
+"SelfMoveError"="Bir klasörü kendi içine taşıyamazsınız";

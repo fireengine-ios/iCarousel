@@ -107,17 +107,20 @@
         headerView.delegate = self;
         [self.view addSubview:headerView];
 
-        listOffset = 0;
-        [elasticSearchDao requestPhotosForPage:listOffset andSize:21 andSortType:APPDELEGATE.session.sortType];
-        [albumListDao requestAlbumListForStart:0 andSize:50];
-        [self showLoading];
-
     }
     return self;
 }
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
+    [self triggerRefresh];
+    /*
+    listOffset = 0;
+    [elasticSearchDao requestPhotosForPage:listOffset andSize:21 andSortType:APPDELEGATE.session.sortType];
+    [albumListDao requestAlbumListForStart:0 andSize:50];
+    [self showLoading];
+     */
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -131,6 +134,7 @@
         for(UploadRef *row in photoList) {
             CGRect imgRect = CGRectMake(5 + (counter%3 * 105), 15 + ((int)floor(counter/3)*105), 100, 100);
             SquareImageView *imgView = [[SquareImageView alloc] initWithFrame:imgRect withUploadRef:row];
+            imgView.delegate = self;
             [photosScroll addSubview:imgView];
             counter ++;
         }
@@ -159,7 +163,10 @@
     [self addOngoingPhotos];
 
     listOffset = 0;
+    self.tableUpdateCounter ++;
+
     [elasticSearchDao requestPhotosForPage:listOffset andSize:21 andSortType:APPDELEGATE.session.sortType];
+    [albumListDao requestAlbumListForStart:0 andSize:50];
 }
 
 - (void) photoListSuccessCallback:(NSArray *) files {
@@ -324,6 +331,12 @@
     }
 }
 
+- (void) squareImageUploadFinishedForFile:(NSString *) fileUuid {
+    if([[APPDELEGATE.session uploadImageRefs] count] == 0) {
+        [self triggerRefresh];
+    }
+}
+
 - (void) showImgFooterMenu {
     if(imgFooterActionMenu) {
         imgFooterActionMenu.hidden = NO;
@@ -473,6 +486,19 @@
         [manager startUploadingAsset:ref.filePath atFolder:nil];
         [APPDELEGATE.session.uploadManagers addObject:manager];
     }
+    [self triggerRefresh];
+}
+
+- (void) cameraCapturaModalDidCaptureAndStoreImageToPath:(NSString *)filePath withName:(NSString *)fileName {
+    UploadRef *uploadRef = [[UploadRef alloc] init];
+    uploadRef.tempUrl = filePath;
+    uploadRef.fileName = fileName;
+    uploadRef.contentType = ContentTypePhoto;
+    
+    UploadManager *uploadManager = [[UploadManager alloc] initWithUploadReference:uploadRef];
+    [uploadManager startUploadingFile:filePath atFolder:nil withFileName:fileName];
+    [APPDELEGATE.session.uploadManagers addObject:uploadManager];
+    
     [self triggerRefresh];
 }
 

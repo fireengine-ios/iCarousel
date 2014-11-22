@@ -7,6 +7,7 @@
 //
 
 #import "AlbumDetailDao.h"
+#import "PhotoAlbum.h"
 
 @implementation AlbumDetailDao
 
@@ -30,16 +31,31 @@
         
 		SBJSON *jsonParser = [SBJSON new];
 		NSDictionary *mainDict = [jsonParser objectWithString:responseEnc];
-		NSArray *mainArray = [mainDict objectForKey:@"photoList"];
-        
-        NSMutableArray *result = [[NSMutableArray alloc] init];
-        
-        if(mainArray != nil && ![mainArray isKindOfClass:[NSNull class]]) {
-            for(NSDictionary *fileDict in mainArray) {
-                [result addObject:[self parseFile:fileDict]];
-            }
-        }
 
+        PhotoAlbum *result = [[PhotoAlbum alloc] init];
+        if(mainDict != nil && ![mainDict isKindOfClass:[NSNull class]]) {
+            NSString *label = [mainDict objectForKey:@"label"];
+            NSString *uuid = [mainDict objectForKey:@"uuid"];
+            NSNumber *imageCount = [mainDict objectForKey:@"imageCount"];
+            NSNumber *videoCount = [mainDict objectForKey:@"videoCount"];
+            NSString *lastModifiedDate = [mainDict objectForKey:@"lastModifiedDate"];
+            
+            result.imageCount = [self intByNumber:imageCount];
+            result.videoCount = [self intByNumber:videoCount];
+            result.label = [self strByRawVal:label];
+            result.uuid = [self strByRawVal:uuid];
+            result.lastModifiedDate = [self dateByRawVal:lastModifiedDate];
+            
+            NSArray *mainArray = [mainDict objectForKey:@"photoList"];
+            
+            NSMutableArray *content = [[NSMutableArray alloc] init];
+            if(mainArray != nil && ![mainArray isKindOfClass:[NSNull class]]) {
+                for(NSDictionary *fileDict in mainArray) {
+                    [content addObject:[self parseFile:fileDict]];
+                }
+            }
+            result.content = content;
+        }
         [self shouldReturnSuccessWithObject:result];
 	} else {
         [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
