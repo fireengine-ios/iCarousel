@@ -234,6 +234,13 @@
     result.fileUuid = [self strByRawVal:fileUuid];
     result.name = [self strByRawVal:name];
     
+    NSDictionary *fileInfo = [dict objectForKey:@"fileInfo"];
+    if(fileInfo != nil && ![fileInfo isKindOfClass:[NSNull class]]) {
+        NSMutableArray *files = [[NSMutableArray alloc] init];
+        [files addObject:[self parseFile:fileInfo]];
+        result.actionItemList = files;
+    }
+    
     if([result.rawActivityType isEqualToString:@"FAVOURITE"]) {
         result.activityType = ActivityTypeFav;
     } else if([result.rawActivityType isEqualToString:@"DELETED"]) {
@@ -241,8 +248,15 @@
     } else {
         if([result.rawFileType isEqualToString:@"IMAGE"]) {
             result.activityType = ActivityTypeImage;
-        } else if([result.rawFileType isEqualToString:@"FOLDER"]) {
-            result.activityType = ActivityTypeFolder;
+        } else if([result.rawFileType isEqualToString:@"OTHER"]) {
+            if([result.actionItemList count] > 0) {
+                MetaFile *file = [result.actionItemList objectAtIndex:0];
+                if(file.folder) {
+                    result.activityType = ActivityTypeFolder;
+                } else {
+                    result.activityType = ActivityTypeFile;
+                }
+            }
         } else if([result.rawFileType isEqualToString:@"AUDIO"]) {
             result.activityType = ActivityTypeMusic;
         } else if([result.rawFileType isEqualToString:@"CONTACT"]) {
@@ -254,14 +268,7 @@
     
     //TODO düzelt
     result.title = result.name;
-    
-    NSDictionary *fileInfo = [dict objectForKey:@"fileInfo"];
-    if(fileInfo != nil && ![fileInfo isKindOfClass:[NSNull class]]) {
-        NSMutableArray *files = [[NSMutableArray alloc] init];
-        [files addObject:[self parseFile:fileInfo]];
-        result.actionItemList = files;
-    }
-    
+
     return result;
 }
 

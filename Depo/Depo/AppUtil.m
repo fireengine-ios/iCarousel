@@ -171,6 +171,9 @@
         case MoreMenuTypeAlbumDelete:
             iconName = @"nav_delete_icon.png";
             break;
+        case MoreMenuTypeDownloadImage:
+            iconName = @"nav_download_icon.png";
+            break;
         default:
             break;
     }
@@ -310,6 +313,9 @@
             break;
         case MoreMenuTypeAlbumDelete:
             title = NSLocalizedString(@"MoreMenuDeleteTitleAlbum", @"");
+            break;
+        case MoreMenuTypeDownloadImage:
+            title = NSLocalizedString(@"MoreMenuDownloadImageTitle", @"");
             break;
         default:
             break;

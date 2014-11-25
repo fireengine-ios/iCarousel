@@ -18,6 +18,7 @@
 
 @synthesize recentTable;
 @synthesize recentActivities;
+@synthesize recentActivityKeys;
 @synthesize rawItems;
 @synthesize refreshControl;
 @synthesize dateFormat;
@@ -110,6 +111,14 @@
             [result setObject:dateArray forKey:dateForActivity];
         }
     }
+
+    self.recentActivityKeys = [result keysSortedByValueUsingComparator:^(id obj1, id obj2) {
+        NSArray *arr1 = (NSArray *) obj1;
+        NSArray *arr2 = (NSArray *) obj2;
+        Activity *a1 = [arr1 objectAtIndex:0];
+        Activity *a2 = [arr2 objectAtIndex:0];
+        return (NSComparisonResult)[a2.date compare:a1.date];
+    }];
     self.recentActivities = result;
 }
 
@@ -120,12 +129,12 @@
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSString *key = [[recentActivities allKeys] objectAtIndex:section];
+    NSString *key = [recentActivityKeys objectAtIndex:section];
     return [[recentActivities objectForKey:key] count];
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
-    return [[recentActivities allKeys] count];
+    return [recentActivityKeys count];
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -133,7 +142,7 @@
 }
 
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    NSString *sectionKey = [[recentActivities allKeys] objectAtIndex:section];
+    NSString *sectionKey = [recentActivityKeys objectAtIndex:section];
     if(sectionKey) {
         NSDate *sectionDate = [dateFormat dateFromString:sectionKey];
         return [[RecentActivityHeaderView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 30) withDate:sectionDate];
@@ -147,7 +156,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if(!cell) {
-        NSString *key = [[recentActivities allKeys] objectAtIndex:indexPath.section];
+        NSString *key = [recentActivityKeys objectAtIndex:indexPath.section];
         NSMutableArray *objs = [recentActivities objectForKey:key];
         Activity *activity = [objs objectAtIndex:indexPath.row];
         cell = [[RecentActivityCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withActivity:activity];

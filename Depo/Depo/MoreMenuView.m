@@ -124,6 +124,9 @@
         case MoreMenuTypeAlbumShare:
             [delegate moreMenuDidSelectAlbumShare];
             break;
+        case MoreMenuTypeDownloadImage:
+            [delegate moreMenuDidSelectDownloadImage];
+            break;
         default:
             break;
     }

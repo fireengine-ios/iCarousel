@@ -133,6 +133,7 @@ typedef enum {
     MoreMenuTypeAlbumShare,
 	MoreMenuTypeFav,
     MoreMenuTypeUnfav,
+    MoreMenuTypeDownloadImage,
     MoreMenuTypeDelete,
     MoreMenuTypeAlbumDelete
 } MoreMenuType;

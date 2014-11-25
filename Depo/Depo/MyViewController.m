@@ -286,6 +286,10 @@
     NSLog(@"At MyView moreMenuDidSelectShare");
 }
 
+- (void) moreMenuDidSelectDownloadImage {
+    NSLog(@"At MyView moreMenuDidSelectDownloadImage");
+}
+
 #pragma mark AlbumModalDelegate methods
 
 - (void) albumModalDidSelectAlbum:(NSString *)albumUuid {

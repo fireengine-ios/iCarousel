@@ -20,6 +20,7 @@
 
 @property (nonatomic, strong) UITableView *recentTable;
 @property (nonatomic, strong) NSDictionary *recentActivities;
+@property (nonatomic, strong) NSArray *recentActivityKeys;
 @property (nonatomic, strong) NSMutableArray *rawItems;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, strong) NSDateFormatter *dateFormat;

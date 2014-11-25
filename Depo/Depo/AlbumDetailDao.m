@@ -46,7 +46,7 @@
             result.uuid = [self strByRawVal:uuid];
             result.lastModifiedDate = [self dateByRawVal:lastModifiedDate];
             
-            NSArray *mainArray = [mainDict objectForKey:@"photoList"];
+            NSArray *mainArray = [mainDict objectForKey:@"fileList"];
             
             NSMutableArray *content = [[NSMutableArray alloc] init];
             if(mainArray != nil && ![mainArray isKindOfClass:[NSNull class]]) {
