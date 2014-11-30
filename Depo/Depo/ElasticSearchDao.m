@@ -13,6 +13,8 @@
 @implementation ElasticSearchDao
 
 - (void) requestPhotosForPage:(int) page andSize:(int) size andSortType:(SortType) sortType {
+    sortType = [self resetSortType:sortType];
+    
     NSString *parentListingUrl = [NSString stringWithFormat:ELASTIC_LISTING_MAIN_URL, @"content_type", @"image%20OR%20video", [AppUtil serverSortNameByEnum:sortType], [AppUtil isAscByEnum:sortType] ? @"ASC":@"DESC", page, size];
 	NSURL *url = [NSURL URLWithString:parentListingUrl];
 	
@@ -24,6 +26,7 @@
 
 - (void) requestMusicForPage:(int) page andSize:(int) size andSortType:(SortType) sortType {
     NSString *parentListingUrl = [NSString stringWithFormat:ELASTIC_LISTING_MAIN_URL, @"content_type", @"audio", [AppUtil serverSortNameByEnum:sortType], [AppUtil isAscByEnum:sortType] ? @"ASC":@"DESC", page, size];
+    NSLog(@"MUSIC REQ URL: %@", parentListingUrl);
     NSURL *url = [NSURL URLWithString:parentListingUrl];
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
@@ -33,6 +36,8 @@
 }
 
 - (void) requestDocForPage:(int) page andSize:(int) size andSortType:(SortType) sortType {
+    sortType = [self resetSortType:sortType];
+
     NSString *parentListingUrl = [NSString stringWithFormat:ELASTIC_LISTING_MAIN_URL, @"content_type", @"application%20OR%20text", [AppUtil serverSortNameByEnum:sortType], [AppUtil isAscByEnum:sortType] ? @"ASC":@"DESC", page, size];
     NSURL *url = [NSURL URLWithString:parentListingUrl];
     

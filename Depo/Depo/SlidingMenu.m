@@ -20,6 +20,7 @@
 @synthesize closeDelegate;
 @synthesize menuTable;
 @synthesize sectionMetaArray;
+@synthesize audioFooterView;
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -40,6 +41,7 @@
         menuTable.backgroundView = nil;
         menuTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         menuTable.separatorColor = [UIColor clearColor];
+        menuTable.contentInset = UIEdgeInsetsMake(0, 0, 60, 0);
         [self addSubview:menuTable];
 
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -58,8 +60,23 @@
                                                  selector:@selector(forceHomePage)
                                                      name:FORCE_HOMEPAGE_NOTIFICATION object:nil];
 
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playingMusicChanged:) name:MUSIC_CHANGED_NOTIFICATION object:nil];
+
     }
     return self;
+}
+
+- (void) playingMusicChanged:(NSNotification *) notification {
+    NSDictionary *userInfo = notification.userInfo;
+    MetaFile *musicFilePlaying = [userInfo objectForKey:CHANGED_MUSIC_OBJ_KEY];
+
+    if(audioFooterView) {
+        [audioFooterView removeFromSuperview];
+        audioFooterView = nil;
+    }
+    
+    self.audioFooterView = [[AudioMenuFooterView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 60, self.frame.size.width, 60) withFile:musicFilePlaying];
+    [self addSubview:audioFooterView];
 }
 
 - (void) updateMenuByLoginStatus {
@@ -70,7 +87,7 @@
     }
 }
 
-- (int) numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
     return [sectionMetaArray count];
 }
 

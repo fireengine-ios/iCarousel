@@ -16,5 +16,10 @@
 @synthesize thumbSmallUrl;
 @synthesize width;
 @synthesize height;
+@synthesize genre;
+@synthesize artist;
+@synthesize album;
+@synthesize songTitle;
+@synthesize duration;
 
 @end

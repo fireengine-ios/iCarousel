@@ -12,7 +12,11 @@
 
 @implementation FileListDao
 
+@synthesize parentFolderUuid;
+
 - (void) requestFileListingForParentForPage:(int) page andSize:(int) size sortBy:(SortType) sortType {
+    sortType = [self resetSortType:sortType];
+
     NSString *parentListingUrl = [NSString stringWithFormat:FILE_LISTING_MAIN_URL, @"", [AppUtil serverSortNameByEnum:sortType], [AppUtil isAscByEnum:sortType] ? @"ASC" : @"DESC", page, size];
 	NSURL *url = [NSURL URLWithString:parentListingUrl];
 	
@@ -23,6 +27,9 @@
 }
 
 - (void) requestFileListingForFolder:(NSString *) folderUuid andForPage:(int) page andSize:(int) size sortBy:(SortType) sortType {
+    sortType = [self resetSortType:sortType];
+    self.parentFolderUuid = folderUuid;
+
     NSString *parentListingUrl = [NSString stringWithFormat:FILE_LISTING_MAIN_URL, folderUuid, [AppUtil serverSortNameByEnum:sortType], [AppUtil isAscByEnum:sortType] ? @"ASC" : @"DESC", page, size];
 	NSURL *url = [NSURL URLWithString:parentListingUrl];
 	
@@ -33,6 +40,9 @@
 }
 
 - (void) requestFolderListingForFolder:(NSString *) folderUuid andForPage:(int) page andSize:(int) size sortBy:(SortType) sortType {
+    sortType = [self resetSortType:sortType];
+    self.parentFolderUuid = folderUuid;
+
     NSString *parentListingUrl = [NSString stringWithFormat:FOLDER_LISTING_MAIN_URL, folderUuid==nil ? @"" : folderUuid, [AppUtil serverSortNameByEnum:sortType], [AppUtil isAscByEnum:sortType] ? @"ASC" : @"DESC", page, size];
     NSURL *url = [NSURL URLWithString:parentListingUrl];
     
@@ -62,7 +72,9 @@
             
             if(mainArray != nil && ![mainArray isKindOfClass:[NSNull class]]) {
                 for(NSDictionary *fileDict in mainArray) {
-                    [result addObject:[self parseFile:fileDict]];
+                    MetaFile *parsedFile = [self parseFile:fileDict];
+                    parsedFile.parentUuid = self.parentFolderUuid;
+                    [result addObject:parsedFile];
                 }
             }
             [self shouldReturnSuccessWithObject:result];

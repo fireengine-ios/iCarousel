@@ -33,8 +33,10 @@
 - (void) dismissAddButton;
 - (void) showConfirmDelete;
 - (void) showSort;
+- (void) showSortWithList:(NSArray *) sortTypeList;
 - (void) showSelect;
 - (void) showMoveFolders;
+- (void) showMoveFoldersWithExludingFolder:(NSString *) exludingFolderUuid;
 - (void) showPhotoAlbums;
 - (void) showRecentActivities;
 - (void) showFolderDetailForFolder:(MetaFile *) folder;

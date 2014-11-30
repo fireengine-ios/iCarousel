@@ -104,5 +104,6 @@
 - (void) shouldReturnFailWithMessage:(NSString *) errorMessage;
 - (MetaFile *) parseFile:(NSDictionary *) dict;
 - (Activity *) parseActivity:(NSDictionary *) dict;
+- (SortType) resetSortType:(SortType) sortType;
 
 @end

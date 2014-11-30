@@ -22,8 +22,10 @@
 
 @synthesize musicTable;
 @synthesize refreshControl;
-@synthesize musicList;
 @synthesize selectedMusicList;
+@synthesize musicDict;
+@synthesize musicDictKeys;
+@synthesize footerActionMenu;
 
 - (id) init {
     if(self = [super init]) {
@@ -53,6 +55,8 @@
         deleteDao.failMethod = @selector(deleteFailCallback:);
 
         selectedMusicList = [[NSMutableArray alloc] init];
+        musicDict = [[NSMutableDictionary alloc] init];
+        musicDictKeys = [[NSMutableArray alloc] init];
         
         musicTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex) style:UITableViewStylePlain];
         musicTable.delegate = self;
@@ -74,7 +78,8 @@
 
 - (void) triggerRefresh {
     listOffset = 0;
-    [musicList removeAllObjects];
+    [musicDict removeAllObjects];
+    [musicDictKeys removeAllObjects];
     [elasticSearchDao requestMusicForPage:listOffset andSize:21 andSortType:APPDELEGATE.session.sortType];
 }
 
@@ -86,10 +91,26 @@
     }
     isLoading = NO;
 
-    if(musicList == nil) {
-        musicList = [[NSMutableArray alloc] init];
+    for(MetaFile *file in files) {
+        NSString *sortVal = file.name;
+        if(file.detail) {
+            if(APPDELEGATE.session.sortType == SortTypeAlbumAsc || APPDELEGATE.session.sortType == SortTypeAlbumDesc) {
+                sortVal = file.detail.album;
+            } else if(APPDELEGATE.session.sortType == SortTypeArtistAsc || APPDELEGATE.session.sortType == SortTypeArtistDesc) {
+                sortVal = file.detail.artist;
+            }
+        }
+        NSString *sortValKey = [sortVal length] > 0 ? [sortVal substringToIndex:1] : @" ";
+        if(![musicDictKeys containsObject:sortValKey]) {
+            [musicDictKeys addObject:sortValKey];
+            NSMutableArray *filesForKey = [[NSMutableArray alloc] initWithObjects:file, nil];
+            [musicDict setObject:filesForKey forKey:sortValKey];
+        } else {
+            NSMutableArray *filesForKey = [musicDict objectForKey:sortValKey];
+            [filesForKey addObject:file];
+            [musicDict setObject:filesForKey forKey:sortValKey];
+        }
     }
-    [musicList addObjectsFromArray:files];
 
     self.tableUpdateCounter ++;
     [musicTable reloadData];
@@ -101,38 +122,44 @@
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if(musicList == nil) {
-        return 0;
-    } else if([musicList count] == 0) {
-        return 1;
-    } else {
-        return [musicList count];
-    }
+    NSString *sectionKey = [musicDictKeys objectAtIndex:section];
+    NSMutableArray *sectionArray = [musicDict objectForKey:sectionKey];
+    return [sectionArray count];
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return [musicDictKeys count];
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(musicList == nil || [musicList count] == 0) {
-        return 320;
-    } else {
-        return 68;
-    }
+    return 68;
+}
+
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+    return musicDictKeys;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
+    return [musicDictKeys indexOfObject:title];
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *cellIdentifier = [NSString stringWithFormat:@"MUSIC_CELL_%d_%d", (int)indexPath.row, self.tableUpdateCounter];
+
+    //setting color for section indexes
+    for(UIView *view in [tableView subviews]) {
+        if([[[view class] description] isEqualToString:@"UITableViewIndex"]) {
+            [view performSelector:@selector(setIndexColor:) withObject:[Util UIColorForHexColor:@"555555"]];
+        }
+    }
+    
+    NSString *cellIdentifier = [NSString stringWithFormat:@"MUSIC_CELL_%d_%d_%d", (int)indexPath.row, (int)indexPath.section, self.tableUpdateCounter];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if(!cell) {
-        if(musicList == nil || [musicList count] == 0) {
-            cell = [[FolderEmptyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFolderTitle:@""];
-        } else {
-            MetaFile *fileAtIndex = [musicList objectAtIndex:indexPath.row];
-            cell = [[SimpleMusicCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex isSelectible:isSelectible];
-            ((AbstractFileFolderCell *) cell).delegate = self;
-        }
+        NSString *sectionKey = [musicDictKeys objectAtIndex:indexPath.section];
+        NSMutableArray *sectionArray = [musicDict objectForKey:sectionKey];
+        MetaFile *fileAtIndex = [sectionArray objectAtIndex:indexPath.row];
+        cell = [[SimpleMusicCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex isSelectible:isSelectible];
+        ((AbstractFileFolderCell *) cell).delegate = self;
     }
     return cell;
 }
@@ -141,7 +168,9 @@
     if(isSelectible)
         return;
     
-    MetaFile *fileAtIndex = [musicList objectAtIndex:indexPath.row];
+    NSString *sectionKey = [musicDictKeys objectAtIndex:indexPath.section];
+    NSMutableArray *sectionArray = [musicDict objectForKey:sectionKey];
+    MetaFile *fileAtIndex = [sectionArray objectAtIndex:indexPath.row];
     
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if([cell isKindOfClass:[AbstractFileFolderCell class]]) {
@@ -151,10 +180,21 @@
         }
     }
     
-    MusicPreviewController *preview = [[MusicPreviewController alloc] initWithFile:fileAtIndex];
+    MusicPreviewController *preview = [[MusicPreviewController alloc] initWithFile:fileAtIndex.uuid withFileList:[self rawMusicList]];
     preview.nav = self.nav;
     [self.nav pushViewController:preview animated:NO];
     
+}
+
+- (NSMutableArray *) rawMusicList {
+    NSMutableArray *result = [[NSMutableArray alloc] init];
+    for(NSString *key in musicDictKeys) {
+        NSArray *musics = [musicDict objectForKey:key];
+        if(musics != nil) {
+            [result addObjectsFromArray:musics];
+        }
+    }
+    return result;
 }
 
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -200,9 +240,37 @@
 }
 
 - (void) fileFolderCellDidSelectFile:(MetaFile *)fileSelected {
+    if(![selectedMusicList containsObject:fileSelected.uuid]) {
+        [selectedMusicList addObject:fileSelected.uuid];
+    }
+    if([selectedMusicList count] > 0) {
+        [self showFooterMenu];
+        self.title = [NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedMusicList count]];
+    } else {
+        [self hideFooterMenu];
+        self.title = NSLocalizedString(@"SelectFilesTitle", @"");
+    }
 }
 
 - (void) fileFolderCellDidUnselectFile:(MetaFile *)fileSelected {
+    if([selectedMusicList containsObject:fileSelected.uuid]) {
+        [selectedMusicList removeObject:fileSelected.uuid];
+    }
+    if([selectedMusicList count] > 0) {
+        [self showFooterMenu];
+        self.title = [NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedMusicList count]];
+    } else {
+        [self hideFooterMenu];
+        self.title = NSLocalizedString(@"SelectFilesTitle", @"");
+    }
+}
+
+- (void) showFooterMenu {
+    footerActionMenu.hidden = NO;
+}
+
+- (void) hideFooterMenu {
+    footerActionMenu.hidden = YES;
 }
 
 - (void) moveListModalDidSelectFolder:(NSString *)folderUuid {
@@ -210,12 +278,88 @@
     [self pushProgressViewWithProcessMessage:NSLocalizedString(@"MoveProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"MoveSuccessMessage", @"") andFailMessage:NSLocalizedString(@"MoveFailMessage", @"")];
 }
 
+#pragma mark FooterMenuDelegate methods
+
+- (void) footerActionMenuDidSelectDelete:(FooterActionsMenuView *) menu {
+    for (NSInteger j = 0; j < [musicTable numberOfSections]; ++j) {
+        for (NSInteger i = 0; i < [musicTable numberOfRowsInSection:j]; ++i) {
+            UITableViewCell *cell = [musicTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]];
+            if([cell isKindOfClass:[AbstractFileFolderCell class]]) {
+                AbstractFileFolderCell *fileCell = (AbstractFileFolderCell *) cell;
+                if([selectedMusicList containsObject:fileCell.fileFolder.uuid]) {
+                    [fileCell addMaskLayer];
+                }
+            }
+        }
+    }
+    [deleteDao requestDeleteFiles:selectedMusicList];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+}
+
+- (void) footerActionMenuDidSelectMove:(FooterActionsMenuView *) menu {
+}
+
+- (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {
+}
+
+#pragma mark MoreMenuDelegate
+- (void) moreMenuDidSelectSortWithList {
+    [APPDELEGATE.base showSortWithList:[NSArray arrayWithObjects:[NSNumber numberWithInt:SortTypeSongNameAsc], [NSNumber numberWithInt:SortTypeSongNameDesc], [NSNumber numberWithInt:SortTypeArtistAsc], [NSNumber numberWithInt:SortTypeArtistDesc], [NSNumber numberWithInt:SortTypeAlbumAsc], [NSNumber numberWithInt:SortTypeAlbumDesc], nil]];
+}
+
 - (void) moreClicked {
-    [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeSort]]];
+    [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeSortWithList], [NSNumber numberWithInt:MoreMenuTypeSelect]]];
 }
 
 - (void) sortDidChange {
     [self triggerRefresh];
+}
+
+- (void) changeToSelectedStatus {
+    isSelectible = YES;
+    self.title = NSLocalizedString(@"SelectFilesTitle", @"");
+    
+    previousButtonRef = self.navigationItem.leftBarButtonItem;
+    
+    CustomButton *cancelButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 60, 20) withImageName:nil withTitle:NSLocalizedString(@"ButtonCancel", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[UIColor whiteColor]];
+    [cancelButton addTarget:self action:@selector(cancelSelectible) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithCustomView:cancelButton];
+    self.navigationItem.leftBarButtonItem = cancelItem;
+    moreButton.hidden = YES;
+    
+    [APPDELEGATE.base immediateHideAddButton];
+    
+    [selectedMusicList removeAllObjects];
+    
+    self.tableUpdateCounter++;
+    [self.musicTable reloadData];
+    
+    if(footerActionMenu) {
+        [footerActionMenu removeFromSuperview];
+    }
+    footerActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60) shouldShowShare:NO shouldShowMove:NO shouldShowDelete:YES];
+    footerActionMenu.delegate = self;
+    footerActionMenu.hidden = YES;
+    [self.view addSubview:footerActionMenu];
+}
+
+- (void) cancelSelectible {
+    self.title = NSLocalizedString(@"MusicTitle", @"");
+    self.navigationItem.leftBarButtonItem = previousButtonRef;
+    moreButton.hidden = NO;
+    
+    isSelectible = NO;
+    [selectedMusicList removeAllObjects];
+    
+    [APPDELEGATE.base immediateShowAddButton];
+    
+    self.tableUpdateCounter++;
+    [self.musicTable reloadData];
+    
+    if(footerActionMenu) {
+        [footerActionMenu removeFromSuperview];
+    }
 }
 
 - (void) favSuccessCallback:(NSNumber *) favFlag {
@@ -239,6 +383,18 @@
 }
 
 - (void) deleteSuccessCallback {
+    if(isSelectible) {
+        self.title = NSLocalizedString(@"MusicTitle", @"");
+        self.navigationItem.leftBarButtonItem = previousButtonRef;
+        moreButton.hidden = NO;
+        
+        isSelectible = NO;
+        [selectedMusicList removeAllObjects];
+        
+        if(footerActionMenu) {
+            [footerActionMenu removeFromSuperview];
+        }
+    }
     [self proceedSuccessForProgressView];
     [self triggerRefresh];
 }

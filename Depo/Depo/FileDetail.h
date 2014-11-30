@@ -16,5 +16,10 @@
 @property (nonatomic, strong) NSString *thumbSmallUrl;
 @property (nonatomic) int width;
 @property (nonatomic) int height;
+@property (nonatomic, strong) NSString *genre;
+@property (nonatomic, strong) NSString *artist;
+@property (nonatomic, strong) NSString *album;
+@property (nonatomic, strong) NSString *songTitle;
+@property (nonatomic) float duration;
 
 @end

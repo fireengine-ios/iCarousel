@@ -56,6 +56,12 @@
     }
 }
 
+- (void) showLoading {
+}
+
+- (void) hideLoading {
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];

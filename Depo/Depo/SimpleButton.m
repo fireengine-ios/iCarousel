@@ -14,15 +14,19 @@
 @implementation SimpleButton
 
 - (id)initWithFrame:(CGRect)frame withTitle:(NSString *) titleVal withBorderColor:(UIColor *) borderColor withBgColor:(UIColor *) bgColor {
+    return [self initWithFrame:frame withTitle:titleVal withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:borderColor withBgColor:bgColor withCornerRadius:6];
+}
+
+- (id)initWithFrame:(CGRect)frame withTitle:(NSString *) titleVal withTitleColor:(UIColor *) titleColor withTitleFont:(UIFont *) titleFont withBorderColor:(UIColor *) borderColor withBgColor:(UIColor *) bgColor withCornerRadius:(float) cornerRadius {
     self = [super initWithFrame:frame];
     if (self) {
-        self.layer.cornerRadius = 6;
+        self.layer.cornerRadius = cornerRadius;
         self.clipsToBounds = YES;
         self.layer.borderColor = borderColor.CGColor;
         self.layer.borderWidth = 1.0f;
         self.backgroundColor = bgColor;
 
-        CustomLabel *titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, (self.frame.size.height - 20)/2, self.frame.size.width, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[Util UIColorForHexColor:@"363e4f"] withText:titleVal];
+        CustomLabel *titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, (self.frame.size.height - 20)/2, self.frame.size.width, 20) withFont:titleFont withColor:titleColor withText:titleVal];
         titleLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:titleLabel];
     }

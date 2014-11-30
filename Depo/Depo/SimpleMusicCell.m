@@ -27,10 +27,22 @@
         UIFont *nameFont = [self readNameFont];
         UIFont *detailFont = [self readDetailFont];
         
-        CustomLabel *nameLabel = [[CustomLabel alloc] initWithFrame:nameFieldRect withFont:nameFont withColor:[self readNameColor] withText:self.fileFolder.visibleName];
+        NSString *nameVal = self.fileFolder.visibleName;
+        if(self.fileFolder.detail && self.fileFolder.detail.songTitle) {
+            nameVal = self.fileFolder.detail.songTitle;
+        }
+        CustomLabel *nameLabel = [[CustomLabel alloc] initWithFrame:nameFieldRect withFont:nameFont withColor:[self readNameColor] withText:nameVal];
         [self addSubview:nameLabel];
         
-        CustomLabel *detailLabel = [[CustomLabel alloc] initWithFrame:detailFieldRect withFont:detailFont withColor:[self readDetailColor] withText:[Util transformedSizeValue:self.fileFolder.bytes]];
+        NSString *detailVal = @"";
+        if(self.fileFolder.detail && self.fileFolder.detail.artist) {
+            detailVal = self.fileFolder.detail.artist;
+        }
+        if(self.fileFolder.detail && self.fileFolder.detail.album) {
+            detailVal = [NSString stringWithFormat:@"%@ - %@", detailVal, self.fileFolder.detail.album];
+        }
+        
+        CustomLabel *detailLabel = [[CustomLabel alloc] initWithFrame:detailFieldRect withFont:detailFont withColor:[self readDetailColor] withText:detailVal];
         [self addSubview:detailLabel];
         
         UIView *progressSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 67, self.frame.size.width, 1)];

@@ -37,6 +37,14 @@
 
 #define TEMP_IMG_UPLOAD_NOTIFICATION_URL_PARAM @"TEMP_IMG_UPLOAD_NOTIFICATION_URL_PARAM"
 
+#define MUSIC_PAUSED_NOTIFICATION @"MUSIC_PAUSED_NOTIFICATION"
+
+#define MUSIC_RESUMED_NOTIFICATION @"MUSIC_RESUMED_NOTIFICATION"
+
+#define MUSIC_CHANGED_NOTIFICATION @"MUSIC_CHANGED_NOTIFICATION"
+
+#define CHANGED_MUSIC_OBJ_KEY @"CHANGED_MUSIC_OBJ_KEY"
+
 #define MSISDN_STORE_KEY @"MSISDN_STORE_KEY"
 
 #define PASS_STORE_KEY @"PASS_STORE_KEY"
@@ -125,6 +133,7 @@ typedef enum {
 
 typedef enum {
 	MoreMenuTypeSort = 0,
+    MoreMenuTypeSortWithList,
 	MoreMenuTypeSelect,
 	MoreMenuTypeFileDetail,
     MoreMenuTypeFolderDetail,
@@ -141,6 +150,12 @@ typedef enum {
 typedef enum {
     SortTypeAlphaAsc = 0,
     SortTypeAlphaDesc,
+    SortTypeSongNameAsc,
+    SortTypeSongNameDesc,
+    SortTypeArtistAsc,
+    SortTypeArtistDesc,
+    SortTypeAlbumAsc,
+    SortTypeAlbumDesc,
     SortTypeDateDesc,
     SortTypeDateAsc,
     SortTypeSizeDesc,
@@ -156,6 +171,13 @@ typedef enum {
     ActivityTypeContact,
     ActivityTypeFav
 } ActivityType;
+
+typedef enum {
+    UsageTypeImage = 0,
+    UsageTypeMusic,
+    UsageTypeOther,
+    UsageTypeContact
+} UsageType;
 
 @interface AppConstants : NSObject
 

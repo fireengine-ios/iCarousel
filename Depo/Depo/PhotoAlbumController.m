@@ -202,7 +202,7 @@
 
 - (void) deleteSuccessCallback {
     [self proceedSuccessForProgressView];
-    [self.nav performSelector:@selector(postDelete) withObject:nil afterDelay:1.2f];
+    [self performSelector:@selector(postDelete) withObject:nil afterDelay:1.2f];
 }
 
 - (void) deleteFailCallback:(NSString *) errorMessage {

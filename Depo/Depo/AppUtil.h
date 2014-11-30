@@ -30,5 +30,6 @@
 + (BOOL) isAscByEnum:(SortType) type;
 + (NSString *) randomCamImgName;
 + (NSString *) iconNameByActivityType:(ActivityType) type;
++ (NSString *) iconNameByUsageType:(UsageType) type;
 
 @end

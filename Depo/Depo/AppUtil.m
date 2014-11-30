@@ -147,6 +147,7 @@
     NSString *iconName = @"nav_detail_icon.png";
     switch (menuType) {
         case MoreMenuTypeSort:
+        case MoreMenuTypeSortWithList:
             iconName = @"nav_sort_icon.png";
             break;
         case MoreMenuTypeSelect:
@@ -184,6 +185,7 @@
     NSString *title = @"";
     switch (menuType) {
         case MoreMenuTypeSort:
+        case MoreMenuTypeSortWithList:
             title = NSLocalizedString(@"MoreMenuSortTitle", @"");
             break;
         case MoreMenuTypeSelect:
@@ -366,7 +368,18 @@
             return NSLocalizedString(@"SortTypeSizeAscTitle", @"");
         case SortTypeSizeDesc:
             return NSLocalizedString(@"SortTypeSizeDescTitle", @"");
-            
+        case SortTypeSongNameAsc:
+            return NSLocalizedString(@"SortTypeSongNameAscTitle", @"");
+        case SortTypeSongNameDesc:
+            return NSLocalizedString(@"SortTypeSongNameDescTitle", @"");
+        case SortTypeArtistAsc:
+            return NSLocalizedString(@"SortTypeArtistAscTitle", @"");
+        case SortTypeArtistDesc:
+            return NSLocalizedString(@"SortTypeArtistDescTitle", @"");
+        case SortTypeAlbumAsc:
+            return NSLocalizedString(@"SortTypeAlbumAscTitle", @"");
+        case SortTypeAlbumDesc:
+            return NSLocalizedString(@"SortTypeAlbumDescTitle", @"");
         default:
             return @"";
     }
@@ -383,13 +396,22 @@
         case SortTypeSizeAsc:
         case SortTypeSizeDesc:
             return @"bytes";
+        case SortTypeSongNameAsc:
+        case SortTypeSongNameDesc:
+            return @"name";
+        case SortTypeArtistAsc:
+        case SortTypeArtistDesc:
+            return @"Artist";
+        case SortTypeAlbumAsc:
+        case SortTypeAlbumDesc:
+            return @"Album";
         default:
             return @"";
     }
 }
 
 + (BOOL) isAscByEnum:(SortType) type {
-    return (type == SortTypeAlphaAsc || type == SortTypeSizeAsc || type == SortTypeDateAsc);
+    return (type == SortTypeAlphaAsc || type == SortTypeSizeAsc || type == SortTypeDateAsc || type == SortTypeSongNameAsc || type == SortTypeArtistAsc || type == SortTypeAlbumAsc);
 }
 
 + (NSString *) randomCamImgName {
@@ -416,4 +438,17 @@
     return @"";
 }
 
++ (NSString *) iconNameByUsageType:(UsageType) type {
+    switch (type) {
+        case UsageTypeImage:
+            return @"usage_photos_icon.png";
+        case UsageTypeMusic:
+            return @"musics_icon.png";
+        case UsageTypeOther:
+            return @"docs_icon.png";
+        case UsageTypeContact:
+            return @"contacts_icon.png";
+    }
+    return @"";
+}
 @end

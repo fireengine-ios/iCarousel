@@ -8,9 +8,9 @@
 
 #import "MusicPreviewController.h"
 #import "Util.h"
-#import "CustomLabel.h"
 #import "VolumeLevelIndicator.h"
 #import "AppDelegate.h"
+#import "AppSession.h"
 #import "BaseViewController.h"
 
 static void *AVPlayerPlaybackViewControllerRateObservationContext = &AVPlayerPlaybackViewControllerRateObservationContext;
@@ -23,11 +23,8 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 
 @implementation MusicPreviewController
 
-@synthesize file;
-@synthesize player;
-@synthesize mPlayerItem;
-@synthesize playerLayer;
-@synthesize currentAsset;
+@synthesize fileUuid;
+@synthesize files;
 @synthesize prevButton;
 @synthesize nextButton;
 @synthesize playButton;
@@ -44,10 +41,11 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 @synthesize yIndex;
 @synthesize seekToZeroBeforePlay;
 
-- (id)initWithFile:(MetaFile *) _file {
+- (id)initWithFile:(NSString *) _fileUuid withFileList:(NSArray *) _files {
     self = [super init];
     if (self) {
-        self.file = _file;
+        self.fileUuid = _fileUuid;
+        self.files = _files;
         self.view.backgroundColor = [UIColor blackColor];
         
         deleteDao = [[DeleteDao alloc] init];
@@ -72,30 +70,74 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
         albumImgView.image = albumImg;
         [self.view addSubview:albumImgView];
         
-        CustomLabel *titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, albumImgView.frame.origin.y + albumImgView.frame.size.height + 50, self.view.frame.size.width, 22) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[UIColor whiteColor] withText:self.file.name];
+        MetaFile *file = [self currentFile];
+        NSString *nameVal = file.visibleName;
+        if(file.detail && file.detail.songTitle) {
+            nameVal = file.detail.songTitle;
+        }
+
+        titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, albumImgView.frame.origin.y + albumImgView.frame.size.height + 50, self.view.frame.size.width, 22) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[UIColor whiteColor] withText:nameVal];
         titleLabel.textAlignment = NSTextAlignmentCenter;
         [self.view addSubview:titleLabel];
 
-        yIndex = titleLabel.frame.origin.y + titleLabel.frame.size.height + (IS_IPHONE_5 ? 70 : 30);
+        NSString *detailVal = @"";
+        if(file.detail && file.detail.artist) {
+            detailVal = file.detail.artist;
+        }
+        if(file.detail && file.detail.album) {
+            detailVal = [NSString stringWithFormat:@"%@ • %@", detailVal, file.detail.album];
+        }
+        
+        detailLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, titleLabel.frame.origin.y + titleLabel.frame.size.height, self.view.frame.size.width, 22) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[Util UIColorForHexColor:@"888888"] withText:detailVal];
+        detailLabel.textAlignment = NSTextAlignmentCenter;
+        [self.view addSubview:detailLabel];
+
+        yIndex = detailLabel.frame.origin.y + detailLabel.frame.size.height + (IS_IPHONE_5 ? 90 : 14);
+
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resumeNotified) name:MUSIC_RESUMED_NOTIFICATION object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pauseNotified) name:MUSIC_PAUSED_NOTIFICATION object:nil];
+
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playingMusicChanged:) name:MUSIC_CHANGED_NOTIFICATION object:nil];
+
+        [self initializePlayer];
     }
     return self;
 }
 
 - (void) initializePlayer {
-    self.currentAsset = [AVURLAsset URLAssetWithURL:[NSURL URLWithString:self.file.tempDownloadUrl] options:nil];
+    [self initializeControls];
 
-    NSArray *requestedKeys = [NSArray arrayWithObjects:@"tracks", @"playable", nil];
+    NSMutableArray *items = [[NSMutableArray alloc] init];
     
-    [currentAsset loadValuesAsynchronouslyForKeys:requestedKeys completionHandler:
-     ^{
-         dispatch_async( dispatch_get_main_queue(),
-                        ^{
-                            [self prepareToPlayAsset:currentAsset withKeys:requestedKeys];
-                            [self initializeControls];
-                        });
-     }];
+    currentItemPlace = 0;
+    for(int i=0; i< [self.files count]; i++) {
+        MetaFile *row = [self.files objectAtIndex:i];
+        AVPlayerItem *rowPlayerItem = [AVPlayerItem playerItemWithURL:[NSURL URLWithString:row.tempDownloadUrl]];
+        [items addObject:rowPlayerItem];
+        
+        if([row.uuid isEqualToString:self.fileUuid]) {
+            currentItemPlace = i;
+        }
+    }
 
-//    self.player = [[AVPlayer alloc] initWithURL:[NSURL URLWithString:self.file.tempDownloadUrl]];
+    self.title = [NSString stringWithFormat:@"%d/%d", currentItemPlace + 1, (int)[items count]];
+    
+    APPDELEGATE.session.playerItems = items;
+    APPDELEGATE.session.playerItemFilesRef = self.files;
+    [APPDELEGATE.session playAudioItemAtIndex:currentItemPlace];
+
+    __weak MusicPreviewController *weakSelf = self;
+    [APPDELEGATE.session.audioPlayer addPeriodicTimeObserverForInterval:CMTimeMakeWithSeconds(0.1f, NSEC_PER_SEC)  queue:NULL usingBlock:^(CMTime time) {
+        [weakSelf syncSlider];
+    }];
+
+    float currentVolumeVal = [APPDELEGATE.session.audioPlayer volume];
+    [self initialVolumeLevel:currentVolumeVal];
+
+    playButton.hidden = YES;
+    pauseButton.hidden = NO;
+
 }
 
 - (void) initializeControls {
@@ -143,9 +185,11 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
     [playControlView addSubview:volumeButton];
     
     prevButton = [[CustomButton alloc] initWithFrame:CGRectMake(controlView.frame.size.width/2 - 60, 21, 26, 18) withImageName:@"music_backward.png"];
+    [prevButton addTarget:self action:@selector(prevClicked) forControlEvents:UIControlEventTouchUpInside];
     [playControlView addSubview:prevButton];
 
     nextButton = [[CustomButton alloc] initWithFrame:CGRectMake(controlView.frame.size.width/2 + 34, 21, 26, 18) withImageName:@"music_forward.png"];
+    [nextButton addTarget:self action:@selector(nextClicked) forControlEvents:UIControlEventTouchUpInside];
     [playControlView addSubview:nextButton];
 
     playButton = [[CustomButton alloc] initWithFrame:CGRectMake((controlView.frame.size.width - 32)/2, 9, 32, 42) withImageName:@"music_play_icon.png"];
@@ -180,44 +224,9 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
     }
 }
 
+/*
 - (void)prepareToPlayAsset:(AVURLAsset *)asset withKeys:(NSArray *)requestedKeys {
-    for (NSString *thisKey in requestedKeys) {
-        NSError *error = nil;
-        AVKeyValueStatus keyStatus = [asset statusOfValueForKey:thisKey error:&error];
-        if (keyStatus == AVKeyValueStatusFailed) {
-            [self assetFailedToPrepareForPlayback:error];
-            return;
-        }
-    }
-    
-    if (!asset.playable) {
-        NSString *localizedDescription = @"Şarkı oynatılamıyor.";
-        NSString *localizedFailureReason = @"Şarkı oynatılabilir formatta değil.";
-        NSDictionary *errorDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                                   localizedDescription, NSLocalizedDescriptionKey,
-                                   localizedFailureReason, NSLocalizedFailureReasonErrorKey,
-                                   nil];
-        NSError *assetCannotBePlayedError = [NSError errorWithDomain:@"StitchedStreamPlayer" code:0 userInfo:errorDict];
-        
-        [self assetFailedToPrepareForPlayback:assetCannotBePlayedError];
-        return;
-    }
-    
-    if (self.mPlayerItem) {
-        [self.mPlayerItem removeObserver:self forKeyPath:@"status"];
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:self.mPlayerItem];
-    }
-    
-    self.mPlayerItem = [AVPlayerItem playerItemWithAsset:asset];
-    
     [self.mPlayerItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:AVPlayerPlaybackViewControllerStatusObservationContext];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(playerItemDidReachEnd:)
-                                                 name:AVPlayerItemDidPlayToEndTimeNotification
-                                               object:self.mPlayerItem];
-    
-    self.seekToZeroBeforePlay = NO;
     
     if (!player) {
         self.player = [AVPlayer playerWithPlayerItem:self.mPlayerItem];
@@ -236,6 +245,7 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
         [self.player replaceCurrentItemWithPlayerItem:self.mPlayerItem];
     }
 }
+*/
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -259,13 +269,11 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 - (void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MUSIC_RESUMED_NOTIFICATION object:nil];
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MUSIC_PAUSED_NOTIFICATION object:nil];
     
-    if(player) {
-        [playerLayer.player pause];
-        [playerLayer removeFromSuperlayer];
-        player = nil;
-    }
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     
     if(IS_BELOW_7) {
         [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
@@ -308,17 +316,46 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 - (void) playClicked {
     playButton.hidden = YES;
     pauseButton.hidden = NO;
-    if(player) {
-        [player play];
-    }
+    [APPDELEGATE.session playAudioItem];
 }
 
 - (void) pauseClicked {
     playButton.hidden = NO;
     pauseButton.hidden = YES;
-    if(player) {
-        [player pause];
+    [APPDELEGATE.session pauseAudioItem];
+}
+
+- (void) resumeNotified {
+    playButton.hidden = YES;
+    pauseButton.hidden = NO;
+}
+
+- (void) pauseNotified {
+    playButton.hidden = NO;
+    pauseButton.hidden = YES;
+}
+
+- (void) playingMusicChanged:(NSNotification *) notification {
+    NSDictionary *userInfo = notification.userInfo;
+    MetaFile *musicFilePlaying = [userInfo objectForKey:CHANGED_MUSIC_OBJ_KEY];
+    
+    self.fileUuid = musicFilePlaying.uuid;
+    NSString *nameVal = musicFilePlaying.visibleName;
+    if(musicFilePlaying.detail && musicFilePlaying.detail.songTitle) {
+        nameVal = musicFilePlaying.detail.songTitle;
     }
+    titleLabel.text = nameVal;
+
+    NSString *detailVal = @"";
+    if(musicFilePlaying.detail && musicFilePlaying.detail.artist) {
+        detailVal = musicFilePlaying.detail.artist;
+    }
+    if(musicFilePlaying.detail && musicFilePlaying.detail.album) {
+        detailVal = [NSString stringWithFormat:@"%@ • %@", detailVal, musicFilePlaying.detail.album];
+    }
+    detailLabel.text = detailVal;
+
+    self.title = [NSString stringWithFormat:@"%d/%d", APPDELEGATE.session.currentAudioItemIndex + 1, (int)[APPDELEGATE.session.playerItemFilesRef count]];
 }
 
 - (void) volumeClicked {
@@ -326,6 +363,14 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
     customVolumeView.hidden = NO;
     [controlView bringSubviewToFront:customVolumeView];
     [self performSelector:@selector(hideVolumeView) withObject:nil afterDelay:4.0f];
+}
+
+- (void) prevClicked {
+    [APPDELEGATE.session playPreviousAudioItem];
+}
+
+- (void) nextClicked {
+    [APPDELEGATE.session playNextAudioItem];
 }
 
 - (void) hideVolumeView {
@@ -396,12 +441,12 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 }
 
 - (void) triggerSeek:(CMTime)timeToSeek {
-//    [player seekToTime:timeToSeek];
+    [APPDELEGATE.session.audioPlayer seekToTime:timeToSeek];
 }
 
 - (void) changeVolumeTo:(float)volumeVal {
-    if(player) {
-        NSArray *audioTracks = [currentAsset tracksWithMediaType:AVMediaTypeAudio];
+    if(APPDELEGATE.session.playerItem) {
+        NSArray *audioTracks = [APPDELEGATE.session.playerItem tracks];
         
         NSMutableArray *allAudioParams = [NSMutableArray array];
         for (AVAssetTrack *track in audioTracks) {
@@ -415,7 +460,7 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
         AVMutableAudioMix *audioMix = [AVMutableAudioMix audioMix];
         [audioMix setInputParameters:allAudioParams];
         
-        [mPlayerItem setAudioMix:audioMix];
+        [APPDELEGATE.session.playerItem setAudioMix:audioMix];
     }
 }
 
@@ -436,33 +481,20 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 }
 
 - (CMTime) readItemDuration {
-    AVPlayerItem *playerItem = [self.player currentItem];
-    if (playerItem.status == AVPlayerItemStatusReadyToPlay) {
-        return([playerItem duration]);
+    if (APPDELEGATE.session.playerItem.status == AVPlayerItemStatusReadyToPlay) {
+        return([APPDELEGATE.session.playerItem duration]);
     }
     
     return(kCMTimeInvalid);
 }
 
 - (CMTime) readCurrentTime {
-    return [self.player currentTime];
+    return [APPDELEGATE.session.playerItem currentTime];
 }
 
-- (void)playerItemDidReachEnd:(NSNotification *)notification {
-    self.seekToZeroBeforePlay = YES;
-    [self.player seekToTime:kCMTimeZero];
-    [self videoDidStop];
-}
-
-- (void)assetFailedToPrepareForPlayback:(NSError *)error {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Şarkı Oynatılamadı" message:@"Bu şarkı oynatılamıyor. Lütfen başka bir şarkı deneyin." delegate:nil cancelButtonTitle:@"Tamam" otherButtonTitles:nil];
-    [alertView show];
-}
-
+/*
 - (void)observeValueForKeyPath:(NSString*) path ofObject:(id)object change:(NSDictionary*)change context:(void*)context {
     if (context == AVPlayerPlaybackViewControllerStatusObservationContext) {
-        //		[self syncPlayPauseButtons];
-        
         AVPlayerStatus status = [[change objectForKey:NSKeyValueChangeNewKey] integerValue];
         switch (status) {
             case AVPlayerStatusUnknown: {
@@ -495,9 +527,20 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
         [super observeValueForKeyPath:path ofObject:object change:change context:context];
     }
 }
+*/
+
+- (MetaFile *) currentFile {
+    for(MetaFile *row in self.files) {
+        if([row.uuid isEqualToString:self.fileUuid]) {
+            return row;
+        }
+    }
+    return nil;
+}
 
 - (void) moreClicked {
-    [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeFileDetail], [NSNumber numberWithInt:MoreMenuTypeShare], self.file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDelete]] withFileFolder:self.file];
+    MetaFile *file = [APPDELEGATE.session.playerItemFilesRef objectAtIndex:APPDELEGATE.session.currentAudioItemIndex];
+    [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeFileDetail], [NSNumber numberWithInt:MoreMenuTypeShare], file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDelete]] withFileFolder:file];
 }
 
 - (void) deleteSuccessCallback {
@@ -515,7 +558,8 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 }
 
 - (void) favSuccessCallback:(NSNumber *) favFlag {
-    self.file.detail.favoriteFlag = [favFlag boolValue];
+    MetaFile *file = [APPDELEGATE.session.playerItemFilesRef objectAtIndex:APPDELEGATE.session.currentAudioItemIndex];
+    file.detail.favoriteFlag = [favFlag boolValue];
     [self proceedSuccessForProgressView];
 }
 
@@ -526,9 +570,11 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 
 - (void) renameSuccessCallback:(MetaFile *) updatedFileRef {
     [self proceedSuccessForProgressView];
-    self.file.visibleName = updatedFileRef.name;
-    self.file.lastModified = updatedFileRef.lastModified;
-    self.title = self.file.visibleName;
+
+    MetaFile *file = [APPDELEGATE.session.playerItemFilesRef objectAtIndex:APPDELEGATE.session.currentAudioItemIndex];
+    file.visibleName = updatedFileRef.name;
+    file.lastModified = updatedFileRef.lastModified;
+//    self.title = file.visibleName;
 }
 
 - (void) renameFailCallback:(NSString *) errorMessage {
@@ -537,7 +583,7 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 }
 
 - (void) fileDetailShouldRename:(NSString *)newNameVal {
-    [renameDao requestRenameForFile:self.file.uuid withNewName:newNameVal];
+    [renameDao requestRenameForFile:self.fileUuid withNewName:newNameVal];
     [self pushProgressViewWithProcessMessage:NSLocalizedString(@"RenameFileProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"RenameFileSuccessMessage", @"") andFailMessage:NSLocalizedString(@"RenameFileFailMessage", @"")];
 }
 
@@ -548,12 +594,12 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 }
 
 - (void) moreMenuDidSelectFav {
-    [favDao requestMetadataForFiles:@[self.file.uuid] shouldFavorite:YES];
+    [favDao requestMetadataForFiles:@[self.fileUuid] shouldFavorite:YES];
     [self pushProgressViewWithProcessMessage:NSLocalizedString(@"FavAddProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"FavAddSuccessMessage", @"") andFailMessage:NSLocalizedString(@"FavAddFailMessage", @"")];
 }
 
 - (void) moreMenuDidSelectUnfav {
-    [favDao requestMetadataForFiles:@[self.file.uuid] shouldFavorite:NO];
+    [favDao requestMetadataForFiles:@[self.fileUuid] shouldFavorite:NO];
     [self pushProgressViewWithProcessMessage:NSLocalizedString(@"UnfavProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"UnfavSuccessMessage", @"") andFailMessage:NSLocalizedString(@"UnfavFailMessage", @"")];
 }
 
@@ -568,12 +614,13 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 }
 
 - (void) confirmDeleteDidConfirm {
-    [deleteDao requestDeleteFiles:@[self.file.uuid]];
+    [deleteDao requestDeleteFiles:@[self.fileUuid]];
     [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     moreButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 22, 22) withImageName:@"dots_icon.png"];
     [moreButton addTarget:self action:@selector(moreClicked) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *moreItem = [[UIBarButtonItem alloc] initWithCustomView:moreButton];
@@ -582,7 +629,6 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self initializePlayer];
 }
 
 - (void)didReceiveMemoryWarning

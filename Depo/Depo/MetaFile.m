@@ -14,6 +14,7 @@
 @synthesize hash;
 @synthesize subDir;
 @synthesize parent;
+@synthesize parentUuid;
 @synthesize name;
 @synthesize visibleName;
 @synthesize bytes;

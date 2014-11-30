@@ -283,7 +283,7 @@
             detail.nav = self.nav;
             [self.nav pushViewController:detail animated:NO];
         } else if([AppUtil isMetaFileMusic:fileAtIndex]) {
-            MusicPreviewController *detail = [[MusicPreviewController alloc] initWithFile:fileAtIndex];
+            MusicPreviewController *detail = [[MusicPreviewController alloc] initWithFile:fileAtIndex.uuid withFileList:@[fileAtIndex]];
             detail.nav = self.nav;
             [self.nav pushViewController:detail animated:NO];
         } else {
@@ -350,7 +350,7 @@
 - (void) fileFolderCellShouldMoveForFile:(MetaFile *)fileSelected {
     //TESTTT
     selectedFileList = [[NSMutableArray alloc] initWithObjects:fileSelected.uuid, nil];
-    [APPDELEGATE.base showMoveFolders];
+    [APPDELEGATE.base showMoveFoldersWithExludingFolder:self.folder.uuid];
 }
 
 - (void) fileFolderCellDidSelectFile:(MetaFile *)fileSelected {
@@ -641,7 +641,7 @@
 }
 
 - (void) footerActionMenuDidSelectMove:(FooterActionsMenuView *) menu {
-    [APPDELEGATE.base showMoveFolders];
+    [APPDELEGATE.base showMoveFoldersWithExludingFolder:self.folder.uuid];
 }
 
 - (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {

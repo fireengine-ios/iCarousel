@@ -290,6 +290,10 @@
     NSLog(@"At MyView moreMenuDidSelectDownloadImage");
 }
 
+- (void) moreMenuDidSelectSortWithList {
+    NSLog(@"At MyView moreMenuDidSelectSortWithList");
+}
+
 #pragma mark AlbumModalDelegate methods
 
 - (void) albumModalDidSelectAlbum:(NSString *)albumUuid {

@@ -11,6 +11,7 @@
 #import "MenuCell.h"
 #import "MenuSearchCell.h"
 #import "MenuProfileCell.h"
+#import "AudioMenuFooterView.h"
 
 @protocol SlidingMenuDelegate <NSObject>
 - (void) didTriggerProfile;
@@ -35,6 +36,7 @@
 @property (nonatomic, strong) id<SlidingMenuCloseDelegate> closeDelegate;
 @property (nonatomic, strong) UITableView *menuTable;
 @property (nonatomic, strong) NSArray *sectionMetaArray;
+@property (nonatomic, strong) AudioMenuFooterView *audioFooterView;
 
 - (void) updateMenuByLoginStatus;
 

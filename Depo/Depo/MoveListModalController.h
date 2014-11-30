@@ -24,7 +24,9 @@
 @property (nonatomic, strong) UITableView *folderTable;
 @property (nonatomic, strong) NSArray *folderList;
 @property (nonatomic, strong) MoveModalFooterView *footerView;
+@property (nonatomic, strong) NSString *exludingFolderUuid;
 
 - (id)initForFolder:(MetaFile *) _folder;
+- (id)initForFolder:(MetaFile *) _folder withExludingFolder:(NSString *) _exludingFolderUuid;
 
 @end

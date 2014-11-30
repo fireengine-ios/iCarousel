@@ -164,3 +164,17 @@
 "DownloadImageProgressMessage"="Resim kaydediliyor";
 "DownloadImageSuccessMessage"="Resim başarıyla kaydedildi";
 "DownloadImageFailMessage"="Resim kaydedilirken hata oluştu";
+"SortTypeSongNameAscTitle"="Şarkı İsmi (A-Z)";
+"SortTypeSongNameDescTitle"="Şarkı İsmi (Z-A)";
+"SortTypeArtistAscTitle"="Artist İsmi (A-Z)";
+"SortTypeArtistDescTitle"="Artist İsmi (Z-A)";
+"SortTypeAlbumAscTitle"="Albüm İsmi (A-Z)";
+"SortTypeAlbumDescTitle"="Albüm İsmi (Z-A)";
+"HomeUsageTotalStorage"="Toplam %@";
+"LastSyncFormat"="EN SON SENK: %@ ÖNCE";
+"GetMoreStorageButtonTitle"="Alan Satın Al";
+"SongTitleFieldTitle"="BAŞLIK";
+"ArtistFieldTitle"="ARTIST";
+"AlbumFieldTitle"="ALBÜM";
+"TrackDetailSegmentTitle"="ŞARKI BİLGİLERİ";
+"DurationTitle"="Süre";

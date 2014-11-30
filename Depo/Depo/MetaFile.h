@@ -16,6 +16,7 @@
 @property (nonatomic, strong) NSString *hash;
 @property (nonatomic, strong) NSString *subDir;
 @property (nonatomic, strong) NSString *parent;
+@property (nonatomic, strong) NSString *parentUuid;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *visibleName;
 @property (nonatomic) long bytes;

@@ -18,4 +18,6 @@
 @property(nonatomic, strong) UITableView *sortTable;
 @property(nonatomic, strong) NSArray *sortTypes;
 
+- (id) initWithList:(NSArray *) typeList;
+
 @end

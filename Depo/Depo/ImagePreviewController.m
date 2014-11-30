@@ -49,7 +49,11 @@
         
         imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, mainScroll.frame.size.width, mainScroll.frame.size.height)];
         imgView.contentMode = UIViewContentModeScaleAspectFit;
-        [imgView setImageWithURL:[NSURL URLWithString:[self.file.tempDownloadUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding ]]];
+        NSString *imgUrlStr = [self.file.tempDownloadUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        if(self.file.detail && self.file.detail.thumbLargeUrl) {
+            imgUrlStr = [self.file.detail.thumbLargeUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        }
+        [imgView setImageWithURL:[NSURL URLWithString:imgUrlStr]];
         [mainScroll addSubview:imgView];
         
         footer = [[FileDetailFooter alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60)];

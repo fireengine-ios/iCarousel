@@ -100,6 +100,9 @@
         case MoreMenuTypeSort:
             [APPDELEGATE.base showSort];
             break;
+        case MoreMenuTypeSortWithList:
+            [delegate moreMenuDidSelectSortWithList];
+            break;
         case MoreMenuTypeSelect:
             [APPDELEGATE.base showSelect];
             break;

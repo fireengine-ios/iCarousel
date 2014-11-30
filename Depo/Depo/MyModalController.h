@@ -20,5 +20,7 @@
 
 - (void) triggerDismiss;
 - (void) pushProgressViewWithProcessMessage:(NSString *) progressMsg andSuccessMessage:(NSString *) successMsg andFailMessage:(NSString *) failMsg;
+- (void) showLoading;
+- (void) hideLoading;
 
 @end

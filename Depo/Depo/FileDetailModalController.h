@@ -18,7 +18,11 @@
 
 @property (nonatomic, strong) id<FileDetailDelegate> delegate;
 @property (nonatomic, strong) MetaFile *file;
+@property (nonatomic, strong) UIScrollView *mainScroll;
 @property (nonatomic, strong) GeneralTextField *nameField;
+@property (nonatomic, strong) GeneralTextField *titleField;
+@property (nonatomic, strong) GeneralTextField *artistField;
+@property (nonatomic, strong) GeneralTextField *albumField;
 
 - (id) initWithFile:(MetaFile *) _file;
 

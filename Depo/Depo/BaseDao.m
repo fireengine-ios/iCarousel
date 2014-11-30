@@ -204,7 +204,12 @@
         NSString *thumbSmall = [detailDict objectForKey:@"X-Object-Meta-Thumbnail-Small"];
         NSNumber *imgHeight = [detailDict objectForKey:@"X-Object-Meta-Image-Height"];
         NSNumber *imgWidth = [detailDict objectForKey:@"X-Object-Meta-Image-Width"];
-        
+        NSString *genre = [detailDict objectForKey:@"Genre"];
+        NSString *artist = [detailDict objectForKey:@"Artist"];
+        NSString *album = [detailDict objectForKey:@"Album"];
+        NSString *songTitle = [detailDict objectForKey:@"Title"];
+        NSNumber *duration = [detailDict objectForKey:@"Duration"];
+
         FileDetail *detail = [[FileDetail alloc] init];
         detail.favoriteFlag = [self boolByNumber:favFlag];
         detail.thumbLargeUrl = thumbLarge;
@@ -212,6 +217,11 @@
         detail.thumbSmallUrl = thumbSmall;
         detail.width = [self intByNumber:imgWidth];
         detail.height = [self intByNumber:imgHeight];
+        detail.genre = [self strByRawVal:genre];
+        detail.artist = [self strByRawVal:artist];
+        detail.album = [self strByRawVal:album];
+        detail.songTitle = [self strByRawVal:songTitle];
+        detail.duration = [self floatByNumber:duration];
         
         file.detail = detail;
     }
@@ -270,6 +280,14 @@
     result.title = result.name;
 
     return result;
+}
+
+- (SortType) resetSortType:(SortType) sortType {
+    if(sortType == SortTypeSongNameAsc || sortType == SortTypeSongNameDesc || sortType == SortTypeArtistAsc || sortType == SortTypeArtistDesc || sortType == SortTypeAlbumAsc || sortType == SortTypeAlbumDesc) {
+        APPDELEGATE.session.sortType = SortTypeAlphaAsc;
+        return APPDELEGATE.session.sortType;
+    }
+    return sortType;
 }
 
 @end

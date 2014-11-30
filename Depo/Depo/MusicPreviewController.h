@@ -10,6 +10,7 @@
 #import "MetaFile.h"
 #import <AVFoundation/AVFoundation.h>
 #import "CustomButton.h"
+#import "CustomLabel.h"
 #import "VolumeLevelIndicator.h"
 
 #import "DeleteDao.h"
@@ -18,18 +19,19 @@
 
 @interface MusicPreviewController : MyViewController <VolumeLevelDelegate> {
     CustomButton *moreButton;
+    CustomLabel *titleLabel;
+    CustomLabel *detailLabel;
     
     DeleteDao *deleteDao;
     FavoriteDao *favDao;
     RenameDao *renameDao;
+    
+    int currentItemPlace;
 }
 
 
-@property (nonatomic, strong) MetaFile *file;
-@property (nonatomic, strong) AVPlayer *player;
-@property (nonatomic, strong) AVPlayerItem *mPlayerItem;
-@property (nonatomic, strong) AVPlayerLayer *playerLayer;
-@property (nonatomic, strong) AVURLAsset *currentAsset;
+@property (nonatomic, strong) NSString *fileUuid;
+@property (nonatomic, strong) NSArray *files;
 @property (nonatomic, strong) UIView *controlView;
 @property (nonatomic, strong) CustomButton *prevButton;
 @property (nonatomic, strong) CustomButton *nextButton;
@@ -46,6 +48,6 @@
 @property (nonatomic) int yIndex;
 @property (assign) BOOL seekToZeroBeforePlay;
 
-- (id)initWithFile:(MetaFile *) _file;
+- (id)initWithFile:(NSString *) _fileUuid withFileList:(NSArray *) _files;
 
 @end

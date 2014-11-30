@@ -373,6 +373,13 @@
     [self presentViewController:modalNav animated:YES completion:nil];
 }
 
+- (void) showSortWithList:(NSArray *) sortTypeList {
+    SortModalController *sort = [[SortModalController alloc] initWithList:sortTypeList];
+    sort.delegate = [self.nav topViewController];
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:sort];
+    [self presentViewController:modalNav animated:YES completion:nil];
+}
+
 - (void) showSelect {
     if([[self.nav topViewController] respondsToSelector:@selector(changeToSelectedStatus)]) {
         [[self.nav topViewController] performSelector:@selector(changeToSelectedStatus)];
@@ -402,6 +409,13 @@
 
 - (void) showMoveFolders {
     MoveListModalController *move = [[MoveListModalController alloc] initForFolder:nil];
+    move.delegate = [self.nav topViewController];
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:move];
+    [self presentViewController:modalNav animated:YES completion:nil];
+}
+
+- (void) showMoveFoldersWithExludingFolder:(NSString *) exludingFolderUuid {
+    MoveListModalController *move = [[MoveListModalController alloc] initForFolder:nil withExludingFolder:exludingFolderUuid];
     move.delegate = [self.nav topViewController];
     MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:move];
     [self presentViewController:modalNav animated:YES completion:nil];

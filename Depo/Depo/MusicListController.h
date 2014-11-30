@@ -12,15 +12,18 @@
 #import "DeleteDao.h"
 #import "MoveDao.h"
 #import "AbstractFileFolderCell.h"
+#import "FooterActionsMenuView.h"
 
-@interface MusicListController : MyViewController <UITableViewDataSource, UITableViewDelegate, AbstractFileFolderDelegate> {
+@interface MusicListController : MyViewController <UITableViewDataSource, UITableViewDelegate, AbstractFileFolderDelegate, FooterActionsDelegate> {
     ElasticSearchDao *elasticSearchDao;
     FavoriteDao *favoriteDao;
     DeleteDao *deleteDao;
     MoveDao *moveDao;
 
     CustomButton *moreButton;
-    
+
+    UIBarButtonItem *previousButtonRef;
+
     int listOffset;
     BOOL isLoading;
     BOOL isSelectible;
@@ -28,7 +31,9 @@
 
 @property (nonatomic, strong) UITableView *musicTable;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
-@property (nonatomic, strong) NSMutableArray *musicList;
 @property (nonatomic, strong) NSMutableArray *selectedMusicList;
+@property (nonatomic, strong) NSMutableDictionary *musicDict;
+@property (nonatomic, strong) NSMutableArray *musicDictKeys;
+@property (nonatomic, strong) FooterActionsMenuView *footerActionMenu;
 
 @end

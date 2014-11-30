@@ -23,6 +23,10 @@
 @synthesize sortTypes;
 
 - (id) init {
+    return [self initWithList:[NSArray arrayWithObjects:[NSNumber numberWithInt:SortTypeAlphaAsc], [NSNumber numberWithInt:SortTypeAlphaDesc], [NSNumber numberWithInt:SortTypeDateDesc], [NSNumber numberWithInt:SortTypeDateAsc], [NSNumber numberWithInt:SortTypeSizeDesc], [NSNumber numberWithInt:SortTypeSizeAsc], nil]];
+}
+
+- (id) initWithList:(NSArray *) typeList {
     if(self = [super init]) {
         self.title = NSLocalizedString(@"SortTitle", @"");
         self.view.backgroundColor = [UIColor whiteColor];
@@ -40,7 +44,7 @@
         self.navigationItem.rightBarButtonItem = applyItem;
 
         
-        self.sortTypes = [NSArray arrayWithObjects:[NSNumber numberWithInt:SortTypeAlphaAsc], [NSNumber numberWithInt:SortTypeAlphaDesc], [NSNumber numberWithInt:SortTypeDateDesc], [NSNumber numberWithInt:SortTypeDateAsc], [NSNumber numberWithInt:SortTypeSizeDesc], [NSNumber numberWithInt:SortTypeSizeAsc], nil];
+        self.sortTypes = typeList;
         
         UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
         bgView.backgroundColor = [UIColor blackColor];

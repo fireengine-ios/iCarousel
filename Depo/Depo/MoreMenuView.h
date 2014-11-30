@@ -11,6 +11,7 @@
 #import "PhotoAlbum.h"
 
 @protocol MoreMenuDelegate <NSObject>
+- (void) moreMenuDidSelectSortWithList;
 - (void) moreMenuDidSelectFav;
 - (void) moreMenuDidSelectUnfav;
 - (void) moreMenuDidSelectShare;
