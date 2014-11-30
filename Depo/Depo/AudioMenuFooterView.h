@@ -15,6 +15,7 @@
 
 @property (nonatomic, strong) MetaFile *file;
 @property (nonatomic, strong) CustomLabel *titleLabel;
+@property (nonatomic, strong) CustomLabel *detailLabel;
 @property (nonatomic, strong) UIImageView *albumImgView;
 @property (nonatomic, strong) CustomButton *playButton;
 @property (nonatomic, strong) CustomButton *pauseButton;

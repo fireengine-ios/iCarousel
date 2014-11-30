@@ -40,6 +40,7 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 @synthesize controlView;
 @synthesize yIndex;
 @synthesize seekToZeroBeforePlay;
+@synthesize shuffleButton;
 
 - (id)initWithFile:(NSString *) _fileUuid withFileList:(NSArray *) _files {
     self = [super init];
@@ -184,11 +185,11 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
     [volumeButton addTarget:self action:@selector(volumeClicked) forControlEvents:UIControlEventTouchUpInside];
     [playControlView addSubview:volumeButton];
     
-    prevButton = [[CustomButton alloc] initWithFrame:CGRectMake(controlView.frame.size.width/2 - 60, 21, 26, 18) withImageName:@"music_backward.png"];
+    prevButton = [[CustomButton alloc] initWithFrame:CGRectMake(controlView.frame.size.width/2 - 60, 18, 18, 23) withImageName:@"music_prev.png"];
     [prevButton addTarget:self action:@selector(prevClicked) forControlEvents:UIControlEventTouchUpInside];
     [playControlView addSubview:prevButton];
 
-    nextButton = [[CustomButton alloc] initWithFrame:CGRectMake(controlView.frame.size.width/2 + 34, 21, 26, 18) withImageName:@"music_forward.png"];
+    nextButton = [[CustomButton alloc] initWithFrame:CGRectMake(controlView.frame.size.width/2 + 42, 18, 18, 23) withImageName:@"music_next.png"];
     [nextButton addTarget:self action:@selector(nextClicked) forControlEvents:UIControlEventTouchUpInside];
     [playControlView addSubview:nextButton];
 
@@ -201,6 +202,10 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
     pauseButton.hidden = YES;
     [pauseButton addTarget:self action:@selector(pauseClicked) forControlEvents:UIControlEventTouchUpInside];
     [playControlView addSubview:pauseButton];
+    
+    shuffleButton = [[CustomButton alloc] initWithFrame:CGRectMake(controlView.frame.size.width - 30, 20, 20, 20) withImageName:@"shuffle.png"];
+    [shuffleButton addTarget:self action:@selector(shuffleClicked) forControlEvents:UIControlEventTouchUpInside];
+    [playControlView addSubview:shuffleButton];
     
     customVolumeView = [[UIView alloc] initWithFrame:CGRectMake(0, 51, controlView.frame.size.width, controlView.frame.size.height - 51)];
     customVolumeView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"video-player-bckgrnd.png"]];
@@ -323,6 +328,11 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
     playButton.hidden = NO;
     pauseButton.hidden = YES;
     [APPDELEGATE.session pauseAudioItem];
+}
+
+- (void) shuffleClicked {
+    [APPDELEGATE.session shuffleItems];
+    self.title = [NSString stringWithFormat:@"%d/%d", APPDELEGATE.session.currentAudioItemIndex + 1, (int)[APPDELEGATE.session.playerItemFilesRef count]];
 }
 
 - (void) resumeNotified {
@@ -539,7 +549,7 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 }
 
 - (void) moreClicked {
-    MetaFile *file = [APPDELEGATE.session.playerItemFilesRef objectAtIndex:APPDELEGATE.session.currentAudioItemIndex];
+    MetaFile *file = [APPDELEGATE.session itemRefForCurrentAsset];
     [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeFileDetail], [NSNumber numberWithInt:MoreMenuTypeShare], file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDelete]] withFileFolder:file];
 }
 
@@ -558,7 +568,7 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 }
 
 - (void) favSuccessCallback:(NSNumber *) favFlag {
-    MetaFile *file = [APPDELEGATE.session.playerItemFilesRef objectAtIndex:APPDELEGATE.session.currentAudioItemIndex];
+    MetaFile *file = [APPDELEGATE.session itemRefForCurrentAsset];
     file.detail.favoriteFlag = [favFlag boolValue];
     [self proceedSuccessForProgressView];
 }
@@ -571,7 +581,7 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 - (void) renameSuccessCallback:(MetaFile *) updatedFileRef {
     [self proceedSuccessForProgressView];
 
-    MetaFile *file = [APPDELEGATE.session.playerItemFilesRef objectAtIndex:APPDELEGATE.session.currentAudioItemIndex];
+    MetaFile *file = [APPDELEGATE.session itemRefForCurrentAsset];
     file.visibleName = updatedFileRef.name;
     file.lastModified = updatedFileRef.lastModified;
 //    self.title = file.visibleName;

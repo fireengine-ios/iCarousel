@@ -15,6 +15,7 @@
 
 @synthesize file;
 @synthesize titleLabel;
+@synthesize detailLabel;
 @synthesize albumImgView;
 @synthesize playButton;
 @synthesize pauseButton;
@@ -30,8 +31,24 @@
         albumImgView.image = albumImg;
         [self addSubview:albumImgView];
 
-        titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(65, 20, self.frame.size.width - 122, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"e1e1e1"] withText:self.file.name];
+        NSString *nameVal = file.visibleName;
+        if(file.detail && file.detail.songTitle) {
+            nameVal = file.detail.songTitle;
+        }
+
+        titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(65, 10, self.frame.size.width - 122, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"e1e1e1"] withText:nameVal];
         [self addSubview:titleLabel];
+
+        NSString *detailVal = @"";
+        if(file.detail && file.detail.artist) {
+            detailVal = file.detail.artist;
+        }
+        if(file.detail && file.detail.album) {
+            detailVal = [NSString stringWithFormat:@"%@ • %@", detailVal, file.detail.album];
+        }
+
+        detailLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(65, 30, self.frame.size.width - 122, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:14] withColor:[Util UIColorForHexColor:@"888888"] withText:detailVal];
+        [self addSubview:detailLabel];
 
         playButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 42, 9, 32, 42) withImageName:@"music_play_icon.png"];
         playButton.hidden = YES;

@@ -311,6 +311,13 @@
 		057C9D771A2B494E001DDDEC /* docs_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 057C9D751A2B494E001DDDEC /* docs_icon@2x.png */; };
 		057C9D7A1A2B4993001DDDEC /* UsageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 057C9D791A2B4993001DDDEC /* UsageButton.m */; };
 		057C9D7D1A2B5611001DDDEC /* MusicDetailModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 057C9D7C1A2B5611001DDDEC /* MusicDetailModalController.m */; };
+		057C9D801A2B89BD001DDDEC /* shuffle.png in Resources */ = {isa = PBXBuildFile; fileRef = 057C9D7E1A2B89BD001DDDEC /* shuffle.png */; };
+		057C9D811A2B89BD001DDDEC /* shuffle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 057C9D7F1A2B89BD001DDDEC /* shuffle@2x.png */; };
+		057C9D861A2B8D68001DDDEC /* music_next@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 057C9D821A2B8D68001DDDEC /* music_next@2x.png */; };
+		057C9D871A2B8D68001DDDEC /* music_prev.png in Resources */ = {isa = PBXBuildFile; fileRef = 057C9D831A2B8D68001DDDEC /* music_prev.png */; };
+		057C9D881A2B8D68001DDDEC /* music_next.png in Resources */ = {isa = PBXBuildFile; fileRef = 057C9D841A2B8D68001DDDEC /* music_next.png */; };
+		057C9D891A2B8D68001DDDEC /* music_prev@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 057C9D851A2B8D68001DDDEC /* music_prev@2x.png */; };
+		057C9D8C1A2B903E001DDDEC /* NSMutableArray_Shuffling.m in Sources */ = {isa = PBXBuildFile; fileRef = 057C9D8B1A2B903E001DDDEC /* NSMutableArray_Shuffling.m */; };
 		057DF50519D02E100005A389 /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 057DF50419D02E100005A389 /* SettingsController.m */; };
 		057DF50819D038080005A389 /* RequestTokenDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 057DF50719D038080005A389 /* RequestTokenDao.m */; };
 		057DF50B19D04EDF0005A389 /* RequestBaseUrlDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 057DF50A19D04EDF0005A389 /* RequestBaseUrlDao.m */; };
@@ -899,6 +906,14 @@
 		057C9D791A2B4993001DDDEC /* UsageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsageButton.m; sourceTree = "<group>"; };
 		057C9D7B1A2B5611001DDDEC /* MusicDetailModalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicDetailModalController.h; sourceTree = "<group>"; };
 		057C9D7C1A2B5611001DDDEC /* MusicDetailModalController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicDetailModalController.m; sourceTree = "<group>"; };
+		057C9D7E1A2B89BD001DDDEC /* shuffle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shuffle.png; sourceTree = "<group>"; };
+		057C9D7F1A2B89BD001DDDEC /* shuffle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shuffle@2x.png"; sourceTree = "<group>"; };
+		057C9D821A2B8D68001DDDEC /* music_next@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "music_next@2x.png"; sourceTree = "<group>"; };
+		057C9D831A2B8D68001DDDEC /* music_prev.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_prev.png; sourceTree = "<group>"; };
+		057C9D841A2B8D68001DDDEC /* music_next.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_next.png; sourceTree = "<group>"; };
+		057C9D851A2B8D68001DDDEC /* music_prev@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "music_prev@2x.png"; sourceTree = "<group>"; };
+		057C9D8A1A2B903E001DDDEC /* NSMutableArray_Shuffling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSMutableArray_Shuffling.h; sourceTree = "<group>"; };
+		057C9D8B1A2B903E001DDDEC /* NSMutableArray_Shuffling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSMutableArray_Shuffling.m; sourceTree = "<group>"; };
 		057DF50319D02E100005A389 /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
 		057DF50419D02E100005A389 /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
 		057DF50619D038080005A389 /* RequestTokenDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestTokenDao.h; sourceTree = "<group>"; };
@@ -1359,6 +1374,8 @@
 				056AC8FD19D15EA200AC96C3 /* CacheUtil.m */,
 				0526444619D546BB00B63759 /* MapUtil.h */,
 				0526444719D546BB00B63759 /* MapUtil.m */,
+				057C9D8A1A2B903E001DDDEC /* NSMutableArray_Shuffling.h */,
+				057C9D8B1A2B903E001DDDEC /* NSMutableArray_Shuffling.m */,
 			);
 			name = util;
 			sourceTree = "<group>";
@@ -1702,6 +1719,12 @@
 				059AD3741A1E26A000AA41BD /* circle_contact_icon.png */,
 				059AD3751A1E26A000AA41BD /* circle_music_icon@2x.png */,
 				059AD3761A1E26A000AA41BD /* circle_doc_icon.png */,
+				057C9D821A2B8D68001DDDEC /* music_next@2x.png */,
+				057C9D831A2B8D68001DDDEC /* music_prev.png */,
+				057C9D841A2B8D68001DDDEC /* music_next.png */,
+				057C9D851A2B8D68001DDDEC /* music_prev@2x.png */,
+				057C9D7E1A2B89BD001DDDEC /* shuffle.png */,
+				057C9D7F1A2B89BD001DDDEC /* shuffle@2x.png */,
 				052AE42A1A1D08260039DD7F /* cloud_icon.png */,
 				052AE42B1A1D08260039DD7F /* cloud_icon@2x.png */,
 				057C9D6C1A2B48F8001DDDEC /* musics_icon.png */,
@@ -2060,6 +2083,7 @@
 				05440ADD19D4363D009803D7 /* green_music_icon@2x.png in Resources */,
 				0526448B19D5A26400B63759 /* camera_icon@2x.png in Resources */,
 				051CB3F619D2F71200E5FC88 /* document_icon.png in Resources */,
+				057C9D881A2B8D68001DDDEC /* music_next.png in Resources */,
 				050A7B2019F7CBB600B084B9 /* volume_level@2x.png in Resources */,
 				0526448E19D5A26400B63759 /* notifications_icon.png in Resources */,
 				0526448819D5A26400B63759 /* upload_icon.png in Resources */,
@@ -2067,10 +2091,12 @@
 				0526449519D5A26400B63759 /* stroge_icon@2x.png in Resources */,
 				05224AB319DC4A2D00214767 /* added_tick.png in Resources */,
 				052A222D19F6846B000C3C75 /* default_loading_bg@2x.png in Resources */,
+				057C9D861A2B8D68001DDDEC /* music_next@2x.png in Resources */,
 				057C9D731A2B4937001DDDEC /* usage_photos_icon@2x.png in Resources */,
 				051CB41619D2F71200E5FC88 /* grey_bg.png in Resources */,
 				059AD37B1A1E26A000AA41BD /* circle_fav_icon.png in Resources */,
 				055A3F4A19E7F9D6004A0121 /* photo_header_with_flap_first.png in Resources */,
+				057C9D871A2B8D68001DDDEC /* music_prev.png in Resources */,
 				05224AB919DC4A2D00214767 /* selectAll_checkbox@2x.png in Resources */,
 				0589066619CC524900A9E517 /* TurkcellSaturaIta.ttf in Resources */,
 				0589066719CC524900A9E517 /* TurkcellSaturaDemIta.ttf in Resources */,
@@ -2102,6 +2128,7 @@
 				0589063919CC2A5600A9E517 /* file_icon.png in Resources */,
 				0589064F19CC2B9500A9E517 /* yellow_logout_icon.png in Resources */,
 				0589062419CC226D00A9E517 /* documents_icon@2x.png in Resources */,
+				057C9D891A2B8D68001DDDEC /* music_prev@2x.png in Resources */,
 				05AF7C901A1C9FE800F5011A /* recent_activity_icon.png in Resources */,
 				059AD3771A1E26A000AA41BD /* circle_doc_icon@2x.png in Resources */,
 				05224ABB19DC4A2D00214767 /* menu_select_blue_flap@2x.png in Resources */,
@@ -2140,6 +2167,7 @@
 				0589062F19CC226D00A9E517 /* nav_favourite_icon@2x.png in Resources */,
 				05AF7C911A1C9FE800F5011A /* recent_activity_icon@2x.png in Resources */,
 				05224AAC19DC4A2D00214767 /* selected_mask.png in Resources */,
+				057C9D811A2B89BD001DDDEC /* shuffle@2x.png in Resources */,
 				052A222C19F6846B000C3C75 /* default_loading_bg.png in Resources */,
 				051CB3F319D2F71200E5FC88 /* empty_state_icon.png in Resources */,
 				053F993B19E1C40900928F22 /* unable_file_icon@2x.png in Resources */,
@@ -2191,6 +2219,7 @@
 				05144B651A091CA800B2A414 /* no_music_icon@2x.png in Resources */,
 				055A3F4919E7F9D6004A0121 /* photo_header_with_flap_second.png in Resources */,
 				05224AB219DC4A2D00214767 /* dont_show_blue_tick.png in Resources */,
+				057C9D801A2B89BD001DDDEC /* shuffle.png in Resources */,
 				051CB40E19D2F71200E5FC88 /* white_share_icon@2x.png in Resources */,
 				058337FF19EDA08200DCF0C5 /* player_progress@2x.png in Resources */,
 				058337F719EDA04A00DCF0C5 /* bttn-player-handle@2x.png in Resources */,
@@ -2322,6 +2351,7 @@
 				0526444819D546BB00B63759 /* MapUtil.m in Sources */,
 				052644AF19D5A2A600B63759 /* SettingsDocumentsController.m in Sources */,
 				051E1E5819CAC90700FD1E03 /* AFURLConnectionOperation.m in Sources */,
+				057C9D8C1A2B903E001DDDEC /* NSMutableArray_Shuffling.m in Sources */,
 				05AF7C8A1A1C8F4200F5011A /* RecentActivityCell.m in Sources */,
 				051E1E8619CAC92700FD1E03 /* ASIAuthenticationDialog.m in Sources */,
 				051E1E8519CAC92700FD1E03 /* SBJsonWriter.m in Sources */,

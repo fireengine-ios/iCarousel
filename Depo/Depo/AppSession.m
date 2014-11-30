@@ -105,7 +105,7 @@
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(queueItemDidReachEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:self.playerItem];
 
-    [[NSNotificationCenter defaultCenter] postNotificationName:MUSIC_CHANGED_NOTIFICATION object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[self.playerItemFilesRef objectAtIndex:currentAudioItemIndex], CHANGED_MUSIC_OBJ_KEY, nil]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:MUSIC_CHANGED_NOTIFICATION object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[self itemRefForCurrentAsset], CHANGED_MUSIC_OBJ_KEY, nil]];
 }
 
 - (void) playNextAudioItem {
@@ -118,6 +118,32 @@
     if(self.currentAudioItemIndex - 1 >= 0) {
         [self playAudioItemAtIndex:self.currentAudioItemIndex - 1];
     }
+}
+
+- (void) shuffleItems {
+    [playerItems shuffle];
+    int newIndex = 0;
+    for(AVPlayerItem *item in self.playerItems) {
+        if([item isEqual:self.playerItem]) {
+            break;
+        }
+        newIndex ++;
+    }
+    self.currentAudioItemIndex = newIndex;
+}
+
+- (MetaFile *) itemRefForCurrentAsset {
+    AVAsset *currentAsset = self.playerItem.asset;
+    if ([currentAsset isKindOfClass:AVURLAsset.class]) {
+        NSString *urlStr = [[(AVURLAsset *)currentAsset URL] absoluteString];
+        for(MetaFile *file in self.playerItemFilesRef) {
+            if([file.tempDownloadUrl isEqualToString:urlStr]) {
+                return file;
+            }
+        }
+    }
+    
+    return nil;
 }
 
 - (void) queueItemDidReachEnd:(NSNotification *)notification {

@@ -10,6 +10,8 @@
 #import "User.h"
 #import "AppConstants.h"
 #import <AVFoundation/AVFoundation.h>
+#import "NSMutableArray_Shuffling.h"
+#import "MetaFile.h"
 
 @interface AppSession : NSObject
 
@@ -33,5 +35,7 @@
 - (void) playPreviousAudioItem;
 - (void) playAudioItem;
 - (void) pauseAudioItem;
+- (void) shuffleItems;
+- (MetaFile *) itemRefForCurrentAsset;
 
 @end

@@ -38,6 +38,7 @@
 @property (nonatomic, strong) CustomButton *playButton;
 @property (nonatomic, strong) CustomButton *pauseButton;
 @property (nonatomic, strong) CustomButton *volumeButton;
+@property (nonatomic, strong) CustomButton *shuffleButton;
 @property (nonatomic, strong) UIView *playControlView;
 @property (nonatomic, strong) UIView *customVolumeView;
 @property (nonatomic, strong) UILabel *totalDuration;
