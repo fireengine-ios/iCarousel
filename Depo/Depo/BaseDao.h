@@ -27,6 +27,8 @@
 
 #define ELASTIC_LISTING_MAIN_URL BASE_URL@"/search/byField?fieldName=%@&fieldValue=%@&sortBy=%@&sortOrder=%@&page=%d&size=%d"
 
+#define AUTH_TOKEN_URL BASE_URL@"/auth/token"
+
 #define DELETE_FILE_URL BASE_URL@"/filesystem/delete"
 
 #define FAVORITE_URL BASE_URL@"/filesystem/metadata"

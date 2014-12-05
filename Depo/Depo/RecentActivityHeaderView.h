@@ -10,6 +10,6 @@
 
 @interface RecentActivityHeaderView : UIView
 
-- (id) initWithFrame:(CGRect)frame withDate:(NSDate *) _date;
+- (id) initWithFrame:(CGRect)frame withDate:(NSDate *) _date withIndex:(int) indexOfSection;
 
 @end

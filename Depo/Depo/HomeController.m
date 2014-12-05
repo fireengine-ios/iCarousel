@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "BaseViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "AppUtil.h"
 
 @interface HomeController ()
 
@@ -63,7 +64,11 @@
                            [Util UIColorForHexColor:@"ec6453"],
                            [Util UIColorForHexColor:@"f8f9f8"], nil];
 
-        lastSyncLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(60, IS_IPHONE_5 ? 18 : 8, self.view.frame.size.width - 120, 18) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:15] withColor:[Util UIColorForHexColor:@"7b8497"] withText:[NSString stringWithFormat:NSLocalizedString(@"LastSyncFormat", @""), @"1 SAAT"] withAlignment:NSTextAlignmentCenter];
+        NSString *lastSyncTitle = NSLocalizedString(@"LastSyncNone", @"");
+        if([AppUtil readLastSyncDate] != nil) {
+            lastSyncTitle = [NSString stringWithFormat:NSLocalizedString(@"LastSyncFormat", @""), [AppUtil readDueDateInReadableFormat:[AppUtil readLastSyncDate]]];
+        }
+        lastSyncLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(60, IS_IPHONE_5 ? 18 : 8, self.view.frame.size.width - 120, 18) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:15] withColor:[Util UIColorForHexColor:@"7b8497"] withText:lastSyncTitle withAlignment:NSTextAlignmentCenter];
         [self.view addSubview:lastSyncLabel];
         
         usageChart = [[XYPieChart alloc] initWithFrame:CGRectMake(60, IS_IPHONE_5 ? 40 : 26, 200, 200)];

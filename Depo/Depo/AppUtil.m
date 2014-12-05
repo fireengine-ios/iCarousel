@@ -451,4 +451,53 @@
     }
     return @"";
 }
+
++ (NSDate *) readLastSyncDate {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:LAST_SYNC_DATE];
+}
+
++ (void) writeLastSyncDate:(NSDate *) syncDate {
+    [[NSUserDefaults standardUserDefaults] setObject:syncDate forKey:LAST_SYNC_DATE];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (void) updateLastSyncDate {
+    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:LAST_SYNC_DATE];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (BOOL) readFirstVisitOverFlag {
+    //TODO sil ve son satırı aç
+    return YES;
+//    return [[NSUserDefaults standardUserDefaults] boolForKey:FIRST_VISIT_OVER];
+}
+
++ (void) writeFirstVisitOverFlag {
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:FIRST_VISIT_OVER];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (NSString *) readDueDateInReadableFormat:(NSDate *) date {
+    if(date == nil)
+        return @"";
+    
+    NSDate *today = [NSDate date];
+    double diffInSec = [today timeIntervalSinceReferenceDate] - [date timeIntervalSinceReferenceDate];
+
+    int days = floor(diffInSec/86400);
+    int hours = floor((diffInSec - days*86400)/3600);
+    int minutes = floor((diffInSec - days*86400 - hours*3600)/60);
+    int secs = diffInSec - days*86400 - hours*3600 - minutes*60;
+    
+    if(days > 0) {
+        return [NSString stringWithFormat:@"%d %@, %d %@", days, days > 1 ? NSLocalizedString(@"Days", @"") : NSLocalizedString(@"Day", @""), hours, hours > 1 ? NSLocalizedString(@"Hours", @"") : NSLocalizedString(@"Hour", @"")];
+    } else if(hours > 0) {
+        return [NSString stringWithFormat:@"%d %@, %d %@", hours, hours > 1 ? NSLocalizedString(@"Hours", @"") : NSLocalizedString(@"Hour", @""), minutes, minutes > 1 ? NSLocalizedString(@"Minutes", @"") : NSLocalizedString(@"Minute", @"")];
+    } else if(minutes > 0) {
+        return [NSString stringWithFormat:@"%d %@, %d %@", minutes, minutes > 1 ? NSLocalizedString(@"Minutes", @"") : NSLocalizedString(@"Minute", @""), secs, secs > 1 ? NSLocalizedString(@"Seconds", @"") : NSLocalizedString(@"Second", @"")];
+    } else {
+        return [NSString stringWithFormat:@"%d %@", secs, secs > 1 ? NSLocalizedString(@"Seconds", @"") : NSLocalizedString(@"Second", @"")];
+    }
+}
+
 @end

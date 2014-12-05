@@ -14,6 +14,10 @@
 #import "BaseViewController.h"
 #import "HomeController.h"
 #import "MapUtil.h"
+#import "AppUtil.h"
+#import "PreLoginController.h"
+#import "LoginController.h"
+#import "PostLoginSyncPhotoController.h"
 
 @implementation AppDelegate
 
@@ -29,6 +33,12 @@
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
         [application setStatusBarStyle:UIStatusBarStyleLightContent];
     }
+    
+    //TODO sil
+    if([AppUtil readLastSyncDate] == nil) {
+        [AppUtil updateLastSyncDate];
+    }
+    
     session = [[AppSession alloc] init];
     
     mapUtil = [[MapUtil alloc] init];
@@ -41,11 +51,45 @@
 
     tokenManager = [[TokenManager alloc] init];
     tokenManager.delegate = self;
+
+    if(![AppUtil readFirstVisitOverFlag]) {
+        [self triggerPreLogin];
+    } else {
+        [self triggerLogin];
+    }
+
+    /*
     [tokenManager requestToken];
     [self showMainLoading];
-
+     */
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (void) triggerPreLogin {
+    PreLoginController *preLogin = [[PreLoginController alloc] init];
+    self.window.rootViewController = preLogin;
+}
+
+- (void) triggerLogin {
+    LoginController *login = [[LoginController alloc] init];
+    MyNavigationController *loginNav = [[MyNavigationController alloc] initWithRootViewController:login];
+    self.window.rootViewController = loginNav;
+}
+
+- (void) triggerPostLogin {
+    [tokenManager requestBaseUrl];
+}
+
+- (void) triggerHome {
+    MyViewController *homeController = [[HomeController alloc] init];
+    base = [[BaseViewController alloc] initWithRootViewController:homeController];
+    [self.window setRootViewController:base];
+}
+
+- (void) triggerLogout {
+    self.session.user = nil;
+    [self triggerLogin];
 }
 
 - (void) tokenManagerInadequateInfo {
@@ -57,9 +101,13 @@
 - (void) tokenManagerDidReceiveBaseUrl {
     [self hideMainLoading];
     
-    MyViewController *homeController = [[HomeController alloc] init];
-    base = [[BaseViewController alloc] initWithRootViewController:homeController];
-    [self.window setRootViewController:base];
+    if(![AppUtil readFirstVisitOverFlag]) {
+        PostLoginSyncPhotoController *imgSync = [[PostLoginSyncPhotoController alloc] init];
+        MyNavigationController *imgSyncNav = [[MyNavigationController alloc] initWithRootViewController:imgSync];
+        self.window.rootViewController = imgSyncNav;
+    } else {
+        [self triggerHome];
+    }
 }
 
 - (void) tokenManagerDidFailReceivingBaseUrl {

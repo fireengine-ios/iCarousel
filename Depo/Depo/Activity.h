@@ -16,7 +16,7 @@
 @property (nonatomic, strong) NSString *visibleHour;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic) ActivityType activityType;
-@property (nonatomic, strong) NSArray *actionItemList;
+@property (nonatomic, strong) NSMutableArray *actionItemList;
 @property (nonatomic, strong) NSString *fileUuid;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *rawActivityType;

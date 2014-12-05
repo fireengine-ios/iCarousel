@@ -15,12 +15,12 @@
 - (id)initWithFrame:(CGRect)frame withPlaceholder:(NSString *) placeholderText {
     self = [super initWithFrame:frame];
     if (self) {
-        self.background = [UIImage imageNamed:@"metin.png"];
+        self.background = [UIImage imageNamed:@"textfield_bg.png"];
         self.autocorrectionType = UITextAutocorrectionTypeNo;
         self.borderStyle = UITextBorderStyleNone;
-        self.textAlignment = NSTextAlignmentCenter;
+        self.textAlignment = NSTextAlignmentLeft;
         
-        UIFont *currentFont = [UIFont fontWithName:@"Helvetica-Bold" size:16];
+        UIFont *currentFont = [UIFont fontWithName:@"TurkcellSaturaBol" size:15];
         UIColor *color = [Util UIColorForHexColor:@"8C8C8C"];
         self.textColor = color;
         self.font = currentFont;
@@ -38,12 +38,12 @@
 - (id)initSecureWithFrame:(CGRect)frame withPlaceholder:(NSString *) placeholderText {
     self = [super initWithFrame:frame];
     if (self) {
-        self.background = [UIImage imageNamed:@"metin.png"];
+        self.background = [UIImage imageNamed:@"textfield_bg.png"];
         self.borderStyle = UITextBorderStyleNone;
-        self.textAlignment = NSTextAlignmentCenter;
+        self.textAlignment = NSTextAlignmentLeft;
         self.secureTextEntry = YES;
         
-        UIFont *currentFont = [UIFont fontWithName:@"Helvetica-Bold" size:16];
+        UIFont *currentFont = [UIFont fontWithName:@"TurkcellSaturaBol" size:15];
         UIColor *color = [Util UIColorForHexColor:@"8C8C8C"];
         self.textColor = color;
         self.font = currentFont;
@@ -59,21 +59,19 @@
 }
 
 - (CGRect)placeholderRectForBounds:(CGRect)bounds {
-    if(IS_BELOW_6) {
-        CGSize size = [[self placeholder] sizeWithFont:[UIFont fontWithName:@"Helvetica-Bold" size:16]];
-        return CGRectMake( (bounds.size.width - size.width)/2 , bounds.origin.y , bounds.size.width , bounds.size.height);
-    } else {
-        return [super placeholderRectForBounds:bounds];
-    }
+    return [super placeholderRectForBounds:CGRectMake(20, bounds.origin.y , bounds.size.width - 40 , bounds.size.height)];
 }
 
 - (void) drawPlaceholderInRect:(CGRect)rect {
-    if(IS_BELOW_6) {
-        [[Util UIColorForHexColor:@"8C8C8C"] setFill];
-        [[self placeholder] drawInRect:rect withFont:[UIFont fontWithName:@"Helvetica-Bold" size:16]];
-    } else {
-        [super drawPlaceholderInRect:rect];
-    }
+    [super drawPlaceholderInRect:rect];
+}
+
+- (CGRect)textRectForBounds:(CGRect)bounds {
+    return [super textRectForBounds:CGRectMake(20, bounds.origin.y , bounds.size.width - 40 , bounds.size.height)];
+}
+
+- (CGRect)editingRectForBounds:(CGRect)bounds {
+    return [super textRectForBounds:CGRectMake(20, bounds.origin.y , bounds.size.width - 40 , bounds.size.height)];
 }
 
 /*

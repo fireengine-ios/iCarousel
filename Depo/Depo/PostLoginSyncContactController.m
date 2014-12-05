@@ -1,0 +1,72 @@
+//
+//  PostLoginSyncContactController.m
+//  Depo
+//
+//  Created by Mahir on 5.12.2014.
+//  Copyright (c) 2014 com.igones. All rights reserved.
+//
+
+#import "PostLoginSyncContactController.h"
+#import "Util.h"
+#import "CustomLabel.h"
+#import "PostLoginSyncPrefController.h"
+
+@interface PostLoginSyncContactController ()
+
+@end
+
+@implementation PostLoginSyncContactController
+
+- (id) init {
+    if(self = [super init]) {
+        self.view.backgroundColor = [Util UIColorForHexColor:@"3fb0e8"];
+        
+        UIImage *contactImg = [UIImage imageNamed:@"contacts_backup.png"];
+        
+        UIImageView *contactImgView = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - contactImg.size.width)/2, 50, contactImg.size.width, contactImg.size.height)];
+        contactImgView.image = contactImg;
+        [self.view addSubview:contactImgView];
+        
+        NSString *descStr = NSLocalizedString(@"PostLoginContactPrefInfo", @"");
+        UIFont *descFont = [UIFont fontWithName:@"TurkcellSaturaBol" size:18];
+        
+        int descHeight = [Util calculateHeightForText:descStr forWidth:self.view.frame.size.width-40 forFont:descFont] + 5;
+        
+        CustomLabel *descLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, contactImgView.frame.origin.y + contactImgView.frame.size.height + 20, self.view.frame.size.width - 40, descHeight) withFont:descFont withColor:[Util UIColorForHexColor:@"FFFFFF"] withText:descStr withAlignment:NSTextAlignmentCenter];
+        descLabel.numberOfLines = 0;
+        [self.view addSubview:descLabel];
+        
+        SimpleButton *continueButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, self.view.frame.size.height - 70, self.view.frame.size.width - 40, 50) withTitle:NSLocalizedString(@"Continue", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
+        [continueButton addTarget:self action:@selector(continueClicked) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:continueButton];
+        
+    }
+    return self;
+}
+
+- (void) continueClicked {
+    PostLoginSyncPrefController *syncPref = [[PostLoginSyncPrefController alloc] init];
+    [self.navigationController pushViewController:syncPref animated:YES];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

@@ -1,0 +1,125 @@
+//
+//  LoginController.m
+//  Depo
+//
+//  Created by Mahir on 4.12.2014.
+//  Copyright (c) 2014 com.igones. All rights reserved.
+//
+
+#import "LoginController.h"
+#import "CustomLabel.h"
+#import "Util.h"
+#import "SimpleButton.h"
+#import "AppDelegate.h"
+#import "AppSession.h"
+#import "User.h"
+
+@interface LoginController ()
+
+@end
+
+@implementation LoginController
+
+@synthesize msisdnField;
+@synthesize passField;
+
+- (id) init {
+    if(self = [super init]) {
+        self.title = NSLocalizedString(@"SignIn", @"");
+        self.view.backgroundColor = [Util UIColorForHexColor:@"FFFFFF"];
+        
+        self.navigationItem.leftBarButtonItem = nil;
+
+        tokenDao = [[RequestTokenDao alloc] init];
+        tokenDao.delegate = self;
+        tokenDao.successMethod = @selector(tokenDaoSuccessCallback);
+        tokenDao.failMethod = @selector(tokenDaoFailCallback:);
+
+        CustomLabel *msisdnLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 50, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"MsisdnTitle", @"")];
+        [self.view addSubview:msisdnLabel];
+        
+        msisdnField = [[LoginTextfield alloc] initWithFrame:CGRectMake(20, 75, self.view.frame.size.width - 40, 43) withPlaceholder:NSLocalizedString(@"MsisdnPlaceholder", @"")];
+        msisdnField.delegate = self;
+        [self.view addSubview:msisdnField];
+
+        CustomLabel *passLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 130, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"PasswordTitle", @"")];
+        [self.view addSubview:passLabel];
+        
+        passField = [[LoginTextfield alloc] initSecureWithFrame:CGRectMake(20, 155, self.view.frame.size.width - 40, 43) withPlaceholder:NSLocalizedString(@"PasswordPlaceholder", @"")];
+        passField.delegate = self;
+        [self.view addSubview:passField];
+
+        SimpleButton *loginButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, self.view.frame.size.height - 134, self.view.frame.size.width - 40, 50) withTitle:NSLocalizedString(@"SignIn", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
+        [loginButton addTarget:self action:@selector(loginClicked) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:loginButton];
+    }
+    return self;
+}
+
+- (void) tokenDaoSuccessCallback {
+    [self hideLoading];
+    
+    User *user = [[User alloc] init];
+    user.msisdn = msisdnValue;
+    user.password = passValue;
+    APPDELEGATE.session.user = user;
+    user.profileImgUrl = @"http://s.turkcell.com.tr/profile_img/532/225/cjXlJsupflKCNP2jmf23A.jpg?wruN55vtoNoCItHngeSqW9QN4XM1Y9qgZHRnZnp8bGOut1pQZOk1!207944990!1411130039277";
+    user.fullName = @"Mahir Kemal Tarlan";
+
+    [APPDELEGATE triggerPostLogin];
+}
+
+- (void) tokenDaoFailCallback:(NSString *) errorMessage {
+    [self hideLoading];
+    [self showErrorAlertWithMessage:NSLocalizedString(@"LoginError", @"")];
+}
+
+- (void) textFieldDidEndEditing:(UITextField *)textField {
+    [msisdnField resignFirstResponder];
+    [passField resignFirstResponder];
+}
+
+- (BOOL) textFieldShouldReturn:(UITextField *)textField {
+    [msisdnField resignFirstResponder];
+    [passField resignFirstResponder];
+    return YES;
+}
+
+- (void) loginClicked {
+    msisdnValue = msisdnField.text;
+    passValue = passField.text;
+    
+    if([msisdnValue length] < 10) {
+        [self showErrorAlertWithMessage:NSLocalizedString(@"MsisdnFormatErrorMessage", @"")];
+        return;
+    }
+    if([passValue length] == 0) {
+        [self showErrorAlertWithMessage:NSLocalizedString(@"PassFormatErrorMessage", @"")];
+        return;
+    }
+    
+    [tokenDao requestTokenForMsisdn:msisdnValue andPassword:passValue];
+    [self showLoading];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

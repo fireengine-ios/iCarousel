@@ -276,9 +276,6 @@
         }
     }
     
-    //TODO düzelt
-    result.title = result.name;
-
     return result;
 }
 

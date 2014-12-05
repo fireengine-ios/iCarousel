@@ -31,5 +31,9 @@
 
 - (void) showCustomAlert:(CustomAlertView *) alertView;
 - (void) showCustomConfirm:(CustomConfirmView *) alertView;
+- (void) triggerLogin;
+- (void) triggerPostLogin;
+- (void) triggerHome;
+- (void) triggerLogout;
 
 @end

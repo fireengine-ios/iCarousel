@@ -83,6 +83,10 @@
 
 #define SEARCH_HISTORY_KEY @"SEARCH_HISTORY_KEY"
 
+#define FIRST_VISIT_OVER @"FIRST_VISIT_OVER"
+
+#define LAST_SYNC_DATE @"LAST_SYNC_DATE"
+
 #define SuppressPerformSelectorLeakWarning(Stuff) \
 do { \
 _Pragma("clang diagnostic push") \

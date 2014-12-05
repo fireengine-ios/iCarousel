@@ -31,5 +31,11 @@
 + (NSString *) randomCamImgName;
 + (NSString *) iconNameByActivityType:(ActivityType) type;
 + (NSString *) iconNameByUsageType:(UsageType) type;
++ (NSDate *) readLastSyncDate;
++ (void) writeLastSyncDate:(NSDate *) syncDate;
++ (void) updateLastSyncDate;
++ (BOOL) readFirstVisitOverFlag;
++ (void) writeFirstVisitOverFlag;
++ (NSString *) readDueDateInReadableFormat:(NSDate *) date;
 
 @end

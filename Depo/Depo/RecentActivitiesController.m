@@ -9,6 +9,7 @@
 #import "RecentActivitiesController.h"
 #import "RecentActivityCell.h"
 #import "RecentActivityHeaderView.h"
+#import "ActivityUtil.h"
 
 @interface RecentActivitiesController ()
 
@@ -39,7 +40,7 @@
         self.dateFormat = [[NSDateFormatter alloc] init];
         [dateFormat setDateFormat:@"dd.MM.yyyy"];
 
-        recentTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topIndex + 20, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex - 20) style:UITableViewStylePlain];
+        recentTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topIndex , self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex) style:UITableViewStylePlain];
         recentTable.delegate = self;
         recentTable.dataSource = self;
         recentTable.backgroundColor = [UIColor clearColor];
@@ -78,14 +79,19 @@
     if(refreshControl) {
         [refreshControl endRefreshing];
     }
+    isLoading = NO;
 
     if(!recentItems)
         return;
     
     if(!rawItems) {
-        rawItems = [[NSMutableArray alloc] init];
+        rawItems = [ActivityUtil mergedActivityList:[[NSMutableArray alloc] init] withAdditionalList:recentItems];
+    } else {
+        rawItems = [ActivityUtil mergedActivityList:rawItems withAdditionalList:recentItems];
     }
-    [rawItems addObjectsFromArray:recentItems];
+    for(Activity *activity in rawItems) {
+        [ActivityUtil enrichTitleForActivity:activity];
+    }
     [self reorganiseActivities:rawItems];
 
     [self.recentTable reloadData];
@@ -95,6 +101,7 @@
     if(refreshControl) {
         [refreshControl endRefreshing];
     }
+    isLoading = NO;
 }
 
 - (void) reorganiseActivities:(NSArray *) activities {
@@ -125,7 +132,18 @@
 #pragma mark Table methods
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 70;
+    NSString *key = [recentActivityKeys objectAtIndex:indexPath.section];
+    NSMutableArray *objs = [recentActivities objectForKey:key];
+    Activity *activity = [objs objectAtIndex:indexPath.row];
+    if([activity.rawFileType isEqualToString:@"IMAGE"]) {
+        if([activity.actionItemList count] > 0) {
+            return 100;
+        } else {
+            return 70;
+        }
+    } else {
+        return 70 + [activity.actionItemList count] * 18;
+    }
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -145,7 +163,7 @@
     NSString *sectionKey = [recentActivityKeys objectAtIndex:section];
     if(sectionKey) {
         NSDate *sectionDate = [dateFormat dateFromString:sectionKey];
-        return [[RecentActivityHeaderView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 30) withDate:sectionDate];
+        return [[RecentActivityHeaderView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 30) withDate:sectionDate withIndex:section];
     } else {
         return nil;
     }
@@ -162,6 +180,24 @@
         cell = [[RecentActivityCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withActivity:activity];
     }
     return cell;
+}
+
+- (void) scrollViewDidScroll:(UIScrollView *)scrollView {
+    if(!isLoading) {
+        CGFloat currentOffset = recentTable.contentOffset.y;
+        CGFloat maximumOffset = recentTable.contentSize.height - recentTable.frame.size.height;
+        
+        if (currentOffset - maximumOffset >= 0.0) {
+            isLoading = YES;
+            [self dynamicallyLoadNextPage];
+        }
+    }
+}
+
+- (void) dynamicallyLoadNextPage {
+    listOffset ++;
+    [recentDao requestRecentActivitiesForPage:listOffset andCount:RECENT_ACTIVITY_COUNT];
+    tableUpdateCount++;
 }
 
 - (void)viewDidLoad {

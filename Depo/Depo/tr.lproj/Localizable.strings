@@ -172,9 +172,91 @@
 "SortTypeAlbumDescTitle"="Albüm İsmi (Z-A)";
 "HomeUsageTotalStorage"="Toplam %@";
 "LastSyncFormat"="EN SON SENK: %@ ÖNCE";
+"LastSyncNone"="EN SON SENK: HİÇ";
 "GetMoreStorageButtonTitle"="Alan Satın Al";
 "SongTitleFieldTitle"="BAŞLIK";
 "ArtistFieldTitle"="ARTIST";
 "AlbumFieldTitle"="ALBÜM";
 "TrackDetailSegmentTitle"="ŞARKI BİLGİLERİ";
 "DurationTitle"="Süre";
+
+"RecentActivitySingleFileFavorited"="%d dosya favorilere eklendi";
+"RecentActivityMultipleFilesFavorited"="%d dosya favorilere eklendi";
+"RecentActivitySingleImageFavorited"="%d resim favorilere eklendi";
+"RecentActivityMultipleImagesFavorited"="%d resim favorilere eklendi";
+"RecentActivitySingleMusicFavorited"="%d şarkı favorilere eklendi";
+"RecentActivityMultipleMusicsFavorited"="%d şarkı favorilere eklendi";
+"RecentActivitySingleFolderFavorited"="%d klasör favorilere eklendi";
+"RecentActivityMultipleFoldersFavorited"="%d klasör favorilere eklendi";
+
+"RecentActivitySingleFolderAdded"="%d klasör oluşturuldu";
+"RecentActivityMultipleFoldersAdded"="%d klasör oluşturuldu";
+"RecentActivitySingleImageAdded"="%d resim oluşturuldu";
+"RecentActivityMultipleImagesAdded"="%d resim oluşturuldu";
+"RecentActivitySingleFileAdded"="%d dosya oluşturuldu";
+"RecentActivityMultipleFilesAdded"="%d dosya oluşturuldu";
+"RecentActivitySingleMusicAdded"="%d şarkı oluşturuldu";
+"RecentActivityMultipleMusicsAdded"="%d şarkı oluşturuldu";
+
+"RecentActivitySingleFolderMoved"="%d klasör taşındı";
+"RecentActivityMultipleFoldersMoved"="%d klasör taşındı";
+"RecentActivitySingleImageMoved"="%d resim taşındı";
+"RecentActivityMultipleImagesMoved"="%d resim taşındı";
+"RecentActivitySingleFileMoved"="%d dosya taşındı";
+"RecentActivityMultipleFilesMoved"="%d dosya taşındı";
+"RecentActivitySingleMusicMoved"="%d şarkı taşındı";
+"RecentActivityMultipleMusicsMoved"="%d şarkı taşındı";
+"RecentActivitySingleImageMovedToAlbum"="%d resim %@ isimli albüme taşındı";
+"RecentActivityMultipleImagesMovedToAlbum"="%d resim %@ isimli albüme taşındı";
+
+"RecentActivitySingleFolderRenamed"="%d klasör yeniden adlandırıldı";
+"RecentActivityMultipleFoldersRenamed"="%d klasör yeniden adlandırıldı";
+"RecentActivitySingleImageRenamed"="%d resim yeniden adlandırıldı";
+"RecentActivityMultipleImagesRenamed"="%d resim yeniden adlandırıldı";
+"RecentActivitySingleFileRenamed"="%d dosya yeniden adlandırıldı";
+"RecentActivityMultipleFilesRenamed"="%d dosya yeniden adlandırıldı";
+"RecentActivitySingleMusicRenamed"="%d şarkı yeniden adlandırıldı";
+"RecentActivityMultipleMusicsRenamed"="%d şarkı yeniden adlandırıldı";
+
+"RecentActivitySingleFolderDeleted"="%d klasör silindi";
+"RecentActivityMultipleFoldersDeleted"="%d klasör silindi";
+"RecentActivitySingleImageDeleted"="%d resim silindi";
+"RecentActivityMultipleImagesDeleted"="%d resim silindi";
+"RecentActivitySingleFileDeleted"="%d dosya silindi";
+"RecentActivityMultipleFilesDeleted"="%d dosya silindi";
+"RecentActivitySingleMusicDeleted"="%d şarkı silindi";
+"RecentActivityMultipleMusicsDeleted"="%d şarkı silindi";
+
+"Day"="gün";
+"Days"="gün";
+"Hour"="saat";
+"Hours"="saat";
+"Minute"="dk";
+"Minutes"="dk";
+"Second"="sn";
+"Seconds"="sn";
+"None"="Hiç";
+
+"AppTitleRef"="Turkcell Akıllı Depo";
+"AppPreLoginInfo"="Tüm fotoğraf, şarkı, döküman ve adres bilgilerinizi güvenle Akıllı Depo'da saklayın. Dosyalarınızı direk telefondan ya da bilgisayarınızdan düzenleyin.";
+
+"Login"="Giriş yap";
+"SignIn"="Giriş yap";
+"Continue"="Devam";
+
+"PostLoginImgPrefInfo"="Fotoğraf & Videolarınızı iPhone'unuzdan Akıllı Depo uygulamasına otomatik olarak yedekleyin";
+"PostLoginContactPrefInfo"="Adres Defteri ve Sosyal Ağ kişilerinizi Akıllı Depo uygulamasına otomatik olarak yedekleyin";
+
+"PostLoginSyncPrefTitle"="SENKRONİZASYON TERCİHİ";
+"PostLoginRoamingTitle"="Yurtdışı Dolaşım";
+"PostLoginRoamingDesc"="Yurtdışındayken otomatik yükle";
+
+"MsisdnPlaceholder"="GSM Numarasını Girin";
+"PasswordPlaceholder"="Şifre";
+"MsisdnTitle"="GSM NUMARASI";
+"PasswordTitle"="ŞİFRE";
+
+"MsisdnFormatErrorMessage"="GSM numarasını kontrol ediniz";
+"PassFormatErrorMessage"="Şifre alanını doldurunuz";
+
+"LoginError"="Giriş yapılamadı. Lütfen bilgilerinizi kontrol ediniz";

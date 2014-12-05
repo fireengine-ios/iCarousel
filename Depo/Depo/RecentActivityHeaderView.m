@@ -12,14 +12,17 @@
 
 @implementation RecentActivityHeaderView
 
-- (id) initWithFrame:(CGRect)frame withDate:(NSDate *) _date {
+- (id) initWithFrame:(CGRect)frame withDate:(NSDate *) _date withIndex:(int) indexOfSection {
     if(self = [super initWithFrame:frame]) {
         self.backgroundColor = [Util UIColorForHexColor:@"FFFFFF"];
-        
+
         CustomLabel *titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(45, (self.frame.size.height - 16)/2, self.frame.size.width - 55, 16) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:11] withColor:[Util UIColorForHexColor:@"3fb0e8"] withText:@""];
         [self addSubview:titleLabel];
         
         UIView *timeline = [[UIView alloc] initWithFrame:CGRectMake(25, 0, 2, self.frame.size.height)];
+        if(indexOfSection == 0) {
+            timeline.frame = CGRectMake(25, self.frame.size.height/2, 2, self.frame.size.height/2);
+        }
         timeline.backgroundColor = [Util UIColorForHexColor:@"3fb0e8"];
         [self addSubview:timeline];
         
@@ -34,7 +37,6 @@
         BOOL isToday = [[dateFormat stringFromDate:[NSDate date]] isEqualToString:[dateFormat stringFromDate:_date]];
         if(isToday) {
             titleLabel.text = NSLocalizedString(@"TodayTitle", @"");
-            timeline.frame = CGRectMake(25, self.frame.size.height/2, 2, self.frame.size.height/2);
         } else {
             NSDateFormatter *shortDateFormat = [[NSDateFormatter alloc] init];
             [shortDateFormat setDateFormat:NSLocalizedString(@"RecentSectionDateFormat", @"")];

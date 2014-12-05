@@ -172,6 +172,7 @@
 }
 
 - (void) didTriggerLogout {
+    [APPDELEGATE triggerLogout];
 }
 
 - (void) didTriggerFavorites {
