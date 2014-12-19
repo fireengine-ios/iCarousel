@@ -131,14 +131,14 @@
 }
 
 - (void) triggerFav {
-    favButton.hidden = YES;
     unfavButton.hidden = NO;
+    [UIView transitionFromView:favButton toView:unfavButton duration:0.5 options:UIViewAnimationOptionTransitionCrossDissolve completion:nil];
     [delegate fileFolderCellShouldFavForFile:self.fileFolder];
 }
 
 - (void) triggerUnfav {
     favButton.hidden = NO;
-    unfavButton.hidden = YES;
+    [UIView transitionFromView:unfavButton toView:favButton duration:0.5 options:UIViewAnimationOptionTransitionCrossDissolve completion:nil];
     [delegate fileFolderCellShouldUnfavForFile:self.fileFolder];
 }
 

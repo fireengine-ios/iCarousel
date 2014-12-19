@@ -2,7 +2,7 @@
 //  SettingsUploadController.m
 //  Depo
 //
-//  Created by Mustafa Talha Celik on 23.09.2014.
+//  Created by Salih Topcu on 23.09.2014.
 //  Copyright (c) 2014 com.igones. All rights reserved.
 //
 
@@ -22,15 +22,28 @@
 {
     self = [super init];
     if (self) {
-        self.title = @"Upload & Syncing";
+        self.title = NSLocalizedString(@"Upload&Syncing", @"");
     }
     return self;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+- (void)viewWillAppear:(BOOL)animated {
+    currentSyncPhotosVideosSetting = [CacheUtil readCachedSettingSyncPhotosVideos];
+    currentSyncMusicSetting = [CacheUtil readCachedSettingSyncMusic];
+    currentSyncDocumentsSetting = [CacheUtil readCachedSettingSyncDocuments];
+    currentSyncContactsSetting = [CacheUtil readCachedSettingSyncContacts];
+    currentConnectionSetting = [CacheUtil readCachedSettingSyncingConnectionType];
+    oldConnectionSetting = currentConnectionSetting;
+    currentDataRoamingSetting = [CacheUtil readCachedSettingDataRaming];
+    oldDataRoamingSetting = currentDataRoamingSetting;
+    [super viewWillAppear:animated];
+}
+
+- (void) viewWillDisappear:(BOOL)animated {
+    if (currentConnectionSetting != oldConnectionSetting)
+        [CacheUtil writeCachedSettingSyncingConnectionType:currentConnectionSetting];
+    if (currentDataRoamingSetting != oldDataRoamingSetting)
+        [CacheUtil writeCachedSettingDataRoaming:currentDataRoamingSetting];
 }
 
 - (void)didReceiveMemoryWarning
@@ -39,53 +52,54 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (int) numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 10;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.section == 0 || indexPath.section == 8)
+    if(indexPath.row == 0 || indexPath.row == 8)
         return 31;
-    else if(indexPath.section == 6 || indexPath.section == 7)
+    else if(indexPath.row == 6 || indexPath.row == 7)
         return 44;
-    else if(indexPath.section == 9)
+    else if(indexPath.row == 9)
         return 69;
     else
         return 54;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *cellIdentifier = [NSString stringWithFormat:@"MenuCell%d-%d", indexPath.section, indexPath.row];
+    NSString *cellIdentifier = [NSString stringWithFormat:@"MenuCell%d-%d", (int)indexPath.section, (int)indexPath.row];
     
-    if(indexPath.section == 0) {
+    if(indexPath.row == 0) {
         HeaderCell *cell = [[HeaderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier headerText:@""];
         return cell;
-    } else if(indexPath.section == 1) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"Photos & Videos" titleColor:nil subTitleText:@"" iconName:@"" hasSeparator:YES isLink:YES linkText:@"Auto" cellHeight:54];
+    } else if(indexPath.row == 1) {
+        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"Photos&Videos", @"") titleColor:nil subTitleText:@"" iconName:@"" hasSeparator:YES isLink:YES linkText:[super getEnableOptionName:currentSyncPhotosVideosSetting] cellHeight:54];
         return cell;
-    } else if(indexPath.section == 2) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"Music" titleColor:nil subTitleText:@"" iconName:@"" hasSeparator:YES isLink:YES linkText:@"On" cellHeight:54];
+    } else if(indexPath.row == 2) {
+        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"Music", @"") titleColor:nil subTitleText:@"" iconName:@"" hasSeparator:YES isLink:YES linkText:[super getEnableOptionName:currentSyncMusicSetting] cellHeight:54];
         return cell;
-    } else if(indexPath.section == 3) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"Documents" titleColor:nil subTitleText:@"" iconName:@"" hasSeparator:YES isLink:YES linkText:@"On" cellHeight:54];
+    } else if(indexPath.row == 3) {
+        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"Documents", @"") titleColor:nil subTitleText:@"" iconName:@"" hasSeparator:YES isLink:YES linkText:[super getEnableOptionName:currentSyncDocumentsSetting] cellHeight:54];
         return cell;
-    } else if(indexPath.section == 4) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"Contacts" titleColor:nil subTitleText:@"" iconName:@"" hasSeparator:YES isLink:YES linkText:@"Auto" cellHeight:54];
+    } else if(indexPath.row == 4) {
+        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"Contacts", @"") titleColor:nil subTitleText:@"" iconName:@"" hasSeparator:YES isLink:YES linkText:[super getEnableOptionName:currentSyncContactsSetting] cellHeight:54];
         return cell;
-    } else if(indexPath.section == 5) {
-        HeaderCell *cell = [[HeaderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier headerText:@"SYNCHRONISATION PREFERENCES"];
+    } else if(indexPath.row == 5) {
+        HeaderCell *cell = [[HeaderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier headerText:NSLocalizedString(@"SynchronisationPreferencesTitle", @"")];
         return cell;
-    } else if(indexPath.section == 6) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier iconName:@"" titleText:@"Wifi + 3G" checkStatus:YES];
-        return cell;
-    } else if(indexPath.section == 7) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier iconName:@"" titleText:@"Wifi" checkStatus:NO];
-        return cell;
-    } else if(indexPath.section == 8) {
+    } else if(indexPath.row == 6) {
+        wifi3GCell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier iconName:@"" titleText:NSLocalizedString(@"Wifi3G", @"") checkStatus:(currentConnectionSetting == ConnectionOptionWifi3G)];
+        return wifi3GCell;
+    } else if(indexPath.row == 7) {
+        wifiCell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier iconName:@"" titleText:NSLocalizedString(@"Wifi", @"") checkStatus:(currentConnectionSetting == ConnectionOptionWifi)];
+        return wifiCell;
+    } else if(indexPath.row == 8) {
         HeaderCell *cell = [[HeaderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier headerText:@""];
         return cell;
-    } else if(indexPath.section == 9) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"Data Roaming" subTitletext:@"Auto upload whilst abroad" toggleStatus:YES];
+    } else if(indexPath.row == 9) {
+        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"DataRoaming", @"") subTitletext:NSLocalizedString(@"DataRoamingInfo", @"") SwitchButtonStatus:currentDataRoamingSetting];
+        [cell.switchButton addTarget:self action:@selector(setDataRoaming:) forControlEvents:UIControlEventValueChanged];
         return cell;
     } else {
         return nil;
@@ -93,7 +107,7 @@
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch ([indexPath section]) {
+    switch ([indexPath row]) {
         case 1:
             [self didTriggerPhotosVideos];
             break;
@@ -107,10 +121,11 @@
             [self didTriggerContacts];
             break;
         case 6:
-            
+            [self setWifi3G];
             break;
         case 7:
-            
+            [self setWifi];
+            break;
         default:
             break;
     }
@@ -137,16 +152,32 @@
     [self.nav pushViewController:contactsController animated:YES];
 }
 
+- (void)setWifi3G {
+    currentConnectionSetting = ConnectionOptionWifi3G;
+    [wifiCell hideTick];
+    [wifi3GCell showTick];
+}
+
+- (void)setWifi {
+    currentConnectionSetting = ConnectionOptionWifi;
+    [wifi3GCell hideTick];
+    [wifiCell showTick];
+}
+
+- (void)setDataRoaming:(id) sender {
+    currentDataRoamingSetting = ((UISwitch *)sender).isOn;
+}
+
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+ {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

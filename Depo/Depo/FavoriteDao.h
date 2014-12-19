@@ -8,10 +8,13 @@
 
 #import "BaseDao.h"
 
-@interface FavoriteDao : BaseDao
+@interface FavoriteDao : BaseDao {
+    BOOL returnsList;
+}
 
 @property (nonatomic) BOOL newFavFlag;
 
 - (void) requestMetadataForFiles:(NSArray *) uuidList shouldFavorite:(BOOL) favoriteFlag;
+- (void) requestMetadata:(int) page andSize:(int) size andSortType:(SortType) sortType;
 
 @end

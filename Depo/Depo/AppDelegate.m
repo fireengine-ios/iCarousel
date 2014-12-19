@@ -15,6 +15,7 @@
 #import "HomeController.h"
 #import "MapUtil.h"
 #import "AppUtil.h"
+#import "CacheUtil.h"
 #import "PreLoginController.h"
 #import "LoginController.h"
 #import "PostLoginSyncPhotoController.h"
@@ -52,16 +53,17 @@
     tokenManager = [[TokenManager alloc] init];
     tokenManager.delegate = self;
 
-    if(![AppUtil readFirstVisitOverFlag]) {
-        [self triggerPreLogin];
+    if([CacheUtil readRememberMeToken] != nil) {
+        [tokenManager requestToken];
+        [self showMainLoading];
     } else {
-        [self triggerLogin];
+        if(![AppUtil readFirstVisitOverFlag]) {
+            [self triggerPreLogin];
+        } else {
+            [self triggerLogin];
+        }
     }
 
-    /*
-    [tokenManager requestToken];
-    [self showMainLoading];
-     */
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -89,6 +91,7 @@
 
 - (void) triggerLogout {
     self.session.user = nil;
+    [CacheUtil resetRememberMeToken];
     [self triggerLogin];
 }
 

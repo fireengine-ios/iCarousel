@@ -10,4 +10,6 @@
 
 @interface PostLoginSyncPhotoController : MyViewController
 
+@property (nonatomic, strong) UISwitch *onOff;
+
 @end

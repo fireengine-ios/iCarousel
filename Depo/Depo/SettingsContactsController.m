@@ -2,7 +2,7 @@
 //  SettingsContactsController.m
 //  Depo
 //
-//  Created by Mustafa Talha Celik on 26.09.2014.
+//  Created by Salih Topcu on 26.09.2014.
 //  Copyright (c) 2014 com.igones. All rights reserved.
 //
 
@@ -16,18 +16,20 @@
 
 - (id)init
 {
-    infoTextAuto = @"Your Address Book will be automaticially backed up to the cloud when you open the app.)";
+    infoTextAuto = NSLocalizedString(@"ContactsAutoInfo", @"");
     infoTextAutoHeight = [Util calculateHeightForText:infoTextAuto forWidth:280 forFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:14]];
     
-    infoTextOff = @"Your Music won't be visible within the app & you can't upload anything new.";
+    infoTextOff = NSLocalizedString(@"ContactsOffInfo", @"");
     infoTextOffHeight = [Util calculateHeightForText:infoTextOff forWidth:280 forFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:14]];
     
-    infoTextBackUp = @"Facebook, Twitter & Exchange Server contacts can't be backed up to Turkcell Cloud Storage.";
+    infoTextBackUp = NSLocalizedString(@"ContactsAutoDescriptionBody", @"");
     infoTextBackUpHeight = [Util calculateHeightForText:infoTextOff forWidth:280 forFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:14]];
     
     self = [super init];
     if (self) {
-        self.title = @"Contacts";
+        self.title = NSLocalizedString(@"Contacts", @"");
+        currentSetting = [CacheUtil readCachedSettingSyncContacts];
+        oldSetting = currentSetting;
     }
     return self;
 }
@@ -38,46 +40,75 @@
     // Do any additional setup after loading the view.
 }
 
+- (void) viewWillDisappear:(BOOL)animated {
+    if (currentSetting != oldSetting)
+        [CacheUtil writeCachedSettingSyncContacts:currentSetting];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (int) numberOfSectionsInTableView:(UITableView *)tableView {
-    return 5;
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 9;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.section == 0)
+    if(indexPath.row == 0)
         return 31;
-    else if(indexPath.section == 3)
-        return infoTextAutoHeight + 48;
-    else if(indexPath.section == 7)
-        return infoTextBackUpHeight + 48;
-    else if(indexPath.section == 8)
-        return infoTextOffHeight + 48;
+    else if(indexPath.row == 3)
+        return (currentSetting == EnableOptionAuto) ? infoTextAutoHeight + 48 : 0;
+    else if(indexPath.row == 4 || indexPath.row == 5 || indexPath.row == 6)
+        return (currentSetting == EnableOptionAuto) ? 69 : 0;
+    else if(indexPath.row == 7)
+        return (currentSetting == EnableOptionAuto) ? infoTextBackUpHeight + 48 : 0;
+    else if(indexPath.row == 8)
+        return (currentSetting == EnableOptionOff) ? infoTextOffHeight + 48 : 0;
     else
         return 44;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *cellIdentifier = [NSString stringWithFormat:@"MenuCell%d-%d", indexPath.section, indexPath.row];
+    NSString *cellIdentifier = [NSString stringWithFormat:@"MenuCell%d-%d", (int)indexPath.section, (int)indexPath.row];
     
-    if(indexPath.section == 0) {
+    if(indexPath.row == 0) {
         HeaderCell *cell = [[HeaderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier headerText:@""];
         return cell;
-    } else if(indexPath.section == 1) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier iconName:@"" titleText:@"On" checkStatus:NO];
+    } else if(indexPath.row == 1) {
+        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier iconName:@"" titleText:[self getEnableOptionName:EnableOptionAuto] checkStatus:(currentSetting == EnableOptionAuto)];
         return cell;
-    } else if(indexPath.section == 2) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier iconName:@"" titleText:@"Off" checkStatus:NO];
+    } else if(indexPath.row == 2) {
+        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier iconName:@"" titleText:[self getEnableOptionName:EnableOptionOff] checkStatus:(currentSetting == EnableOptionOff)];
         return cell;
-    } else if(indexPath.section == 3) {
+    } else if(indexPath.row == 3) {
         TextCell *cell = [[TextCell alloc]initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"" titleColor:nil contentText:infoTextAuto contentTextColor:nil backgroundColor:nil hasSeparator:NO];
+        cell.hidden = (currentSetting != EnableOptionAuto);
         return cell;
-    } else if(indexPath.section == 4) {
+    } else if(indexPath.row == 4) {
+        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"PhoneContacts", @"") subTitletext:@"185" SwitchButtonStatus:YES];
+        //[cell.switchButton addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
+        cell.hidden = (currentSetting != EnableOptionAuto);
+        return cell;
+    } else if(indexPath.row == 5) {
+        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"Google" subTitletext:@"20" SwitchButtonStatus:YES];
+        //[cell.switchButton addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
+        cell.hidden = (currentSetting != EnableOptionAuto);
+        return cell;
+    } else if(indexPath.row == 6) {
+        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"Yahoo" subTitletext:@"15" SwitchButtonStatus:YES];
+        //[cell.switchButton addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
+        cell.hidden = (currentSetting != EnableOptionAuto);
+        return cell;
+    } else if(indexPath.row == 7) {
+        NSString *autoInfoHeader = [NSString stringWithFormat:NSLocalizedString(@"ContactsAutoDescriptionHeader", @""), 165];
+        TextCell *cell = [[TextCell alloc]initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:autoInfoHeader titleColor:[Util UIColorForHexColor:@"555748"] contentText:infoTextBackUp contentTextColor:[Util UIColorForHexColor:@"82866D"] backgroundColor:[Util UIColorForHexColor:@"FFF6B2"] hasSeparator:NO];
+        cell.hidden = (currentSetting != EnableOptionAuto);
+        return cell;
+    } else if(indexPath.row == 8) {
         TextCell *cell = [[TextCell alloc]initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"" titleColor:nil contentText:infoTextOff contentTextColor:nil backgroundColor:nil hasSeparator:NO];
+        cell.hidden = (currentSetting != EnableOptionOff);
         return cell;
     } else {
         return nil;
@@ -85,20 +116,14 @@
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch ([indexPath section]) {
-        case 0:
-            break;
+    switch ([indexPath row]) {
         case 1:
-            
+            [self setAuto];
+            currentSetting = EnableOptionAuto;
             break;
         case 2:
-            
-            break;
-        case 3:
-            
-            break;
-        case 4:
-            
+            [self setOff];
+            currentSetting = EnableOptionOff;
             break;
         default:
             break;
@@ -106,14 +131,14 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+ {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

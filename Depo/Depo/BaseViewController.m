@@ -32,6 +32,8 @@
 #import "PhotoAlbumListModalController.h"
 #import "AlbumDetailModalController.h"
 #import "RecentActivitiesController.h"
+#import "SearchModalController.h"
+#import "FavouriteListController.h"
 
 #define kMenuOpenOriginX 276
 
@@ -176,6 +178,10 @@
 }
 
 - (void) didTriggerFavorites {
+    FavouriteListController *favourites = [[FavouriteListController alloc] init];
+    favourites.nav = self.nav;
+    favourites.myDelegate = self;
+    [self.nav setViewControllers:@[favourites] animated:NO];
 }
 
 - (void) didTriggerFiles {
@@ -207,15 +213,18 @@
 }
 
 - (void) didTriggerSearch {
+    SearchModalController *searchController = [[SearchModalController alloc] init];
+    searchController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:searchController];
+    searchController.nav = modalNav;
+    [self presentViewController:modalNav animated:YES completion:nil];
 }
 
 - (void) didTriggerProfile {
-    /*
     SettingsController *settings = [[SettingsController alloc] init];
     settings.nav = self.nav;
     settings.myDelegate = self;
     [self.nav setViewControllers:@[settings] animated:NO];
-     */
 }
 
 - (void) showBaseLoading {
@@ -338,6 +347,10 @@
     [self.addMenu loadButtons:addTypeList];
     self.addButton.hidden = NO;
     [scroll bringSubviewToFront:self.addButton];
+}
+
+- (void) modifyAddButtonWithList:(NSArray *) addTypeList {
+    [self.addMenu loadButtons:addTypeList];
 }
 
 - (void) dismissAddButton {

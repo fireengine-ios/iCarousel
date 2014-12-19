@@ -8,6 +8,10 @@
 
 #import "MyViewController.h"
 
-@interface PostLoginSyncPrefController : MyViewController
+@interface PostLoginSyncPrefController : MyViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, strong) UISwitch *onOff;
+@property (nonatomic, strong) UITableView *choiceTable;
+@property (nonatomic, strong) NSMutableArray *choices;
 
 @end

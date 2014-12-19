@@ -258,6 +258,9 @@
     MetaFile *fileAtIndex = [fileList objectAtIndex:indexPath.row];
     
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if([cell isKindOfClass:[UploadingImageCell class]]) {
+        return;
+    }
     if([cell isKindOfClass:[AbstractFileFolderCell class]]) {
         AbstractFileFolderCell *fileFolderCell = (AbstractFileFolderCell *) cell;
         if(fileFolderCell.menuActive) {

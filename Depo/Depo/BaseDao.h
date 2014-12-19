@@ -15,7 +15,9 @@
 
 #define BASE_URL @"https://tcloudstb.turkcell.com.tr/api"
 
-#define TOKEN_URL BASE_URL@"/auth/token"
+#define TOKEN_URL BASE_URL@"/auth/token?rememberMe=%@"
+
+#define REMEMBER_ME_URL BASE_URL@"/auth/rememberMe"
 
 #define USER_BASE_URL BASE_URL@"/container/baseUrl"
 
@@ -32,6 +34,10 @@
 #define DELETE_FILE_URL BASE_URL@"/filesystem/delete"
 
 #define FAVORITE_URL BASE_URL@"/filesystem/metadata"
+
+#define ADVANCED_SEARCH_URL BASE_URL@"/search/advancedSearch?name=%@&sortBy=%@&sortOrder=%@&page=%d&size=%d"
+
+#define ADVANCED_SEARCH_URL_WITH_CATEGORY BASE_URL@"/search/advancedSearch?name=%@&sortBy=%@&sortOrder=%@&page=%d&size=%d&category=%@"
 
 #define RENAME_URL BASE_URL@"/filesystem/rename/%@"
 

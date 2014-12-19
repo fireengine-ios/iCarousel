@@ -260,3 +260,83 @@
 "PassFormatErrorMessage"="Şifre alanını doldurunuz";
 
 "LoginError"="Giriş yapılamadı. Lütfen bilgilerinizi kontrol ediniz";
+
+"RememberMe"="BENİ HATIRLA";
+"PassSmsTitle"="ŞİFRE ALMAK İÇİN";
+
+"FavouritesTitle"="Favoriler";
+"ConnectionErrorWarning"="Bir bağlantı sorunu oluştu. Lütfen internet bağlantınızı kontrol edin.";
+"NoFavouriteFound"="Favori olarak işaretlenmiş öğe bulunamadı.";
+
+"Auto"="Otomatik";
+"On"="Açık";
+"Off"="Kapalı";
+"SettingsTitle"="Ayarlar";
+"EditProfilePicture"="Profil Resmini Düzenle";
+"Camera"="Kamera";
+"Upload"="Yükle";
+"Remove"="Kaldır";
+
+"Storage"="Depolama";
+"StorageUsageInfo"="%@%% / %@GB";
+"CurrentPackageTitle"="MEVCUT PAKET";
+"RenewalDateInfo"="Yenileme tarihi: %@";
+"CancelSubscription"="Üyelikten Vazgeç";
+"UpgradeOptionsTitle"="GELİŞTİRME SEÇENEKLERİ";
+
+"Upload&Syncing"="Yükleme ve Eşitleme";
+"Photos&Videos"="Fotoğraf ve Videolar";
+"Photos&VideosAutoInfo"="Akıllı Depo'daki fotoğraf ve videolarınıza erişebilir ve istediğinizde albümünüzdeki fotoğraf ve videoları Akıllı Depo'ya yükleyebilirsiniz.\n\n(Fotoğraf ve videoları Akıllı Depo'ya yüklemek için uygulamadaki \"+\" butonunu kullanın.)\n\nOtomatik yükleme etkin durumda, albümünüzdeki fotoğraf ve videolar otomatik olarak bulutta yedeklenecek.";
+"Photos&VideosOnInfo"="Akıllı Depo'daki fotoğraf ve videolarınıza erişebilir ve istediğinizde albümünüzdeki fotoğraf ve videoları Akıllı Depo'ya yükleyebilirsiniz.\n\n(Fotoğraf ve videoları Akıllı Depo'ya yüklemek için uygulamadaki \"+\" butonunu kullanın.)";
+"Photos&VideosOffInfo"="Akıllı Depo'daki fotoğraf ve videolarınıza erişemez ve Akıllı Depo'ya yeni fotoğraf veya video yükleyemezsiniz.";
+"Music"="Müzik";
+"MusicOnInfo"="Akıllı Depo'daki müziklerinize erişebilir ve istediğinizde iPhone'ununuzdaki müzikleri Akıllı Depo'ya yükleyebilirsiniz.\n\n(iTunes kütüphanenizdeki parçaları Akıllı Depo'ya yüklemek için uygulamadaki \"+\" butonunu kullanın.)";
+"MusicOffInfo"="Akıllı Depo'daki müziklerinize erişemez ve Akıllı Depo'ya yeni müzik yükleyemezsiniz.";
+"Documents"="Dokümanlar";
+"DocumentsOnInfo"="Akıllı Depo'daki dokümanlarınıza erişebilir ve istediğinizde dokümanlarınızı Akıllı Depo'ya yükleyebilirsiniz. Diğer uygulamalar üzerinden (e-posta uygulamaları gibi) \"Akıllı Depo ile aç\" seçeneği ile dokümanlarınızı yükleyebilirsiniz.";
+"DocumentsOffInfo"="Akıllı Depo'daki dokümanlarınıza erişemez ve Akıllı Depo'ya yeni doküman yükleyemezsiniz.";
+"Contacts"="Rehber";
+"ContactsAutoInfo"="Akıllı Depo'yu açtığınızda telefon rehberiniz otomatik olarak buluta yedeklenecek.";
+"ContactsOffInfo"="Telefon rehberiniz otomatik olarak buluta yedeklenmeyecek.";
+"ContactsAutoDescriptionHeader"="%d KİŞİ HENÜZ EŞİTLENMEDİ";
+"ContactsAutoDescriptionBody"="Facebook, Twitter ve Exchange Server bağlantılarınız Turkcell Bulut'a yedeklenemezler.";
+"PhoneContacts"="Telefon Rehberi Kişileri";
+"SynchronisationPreferencesTitle"="EŞİTLEME SEÇENEKLERİ";
+"Wifi3G"="Wifi + 3G";
+"Wifi"="Wifi";
+"DataRoaming"="Veri Dolaşımı";
+"DataRoamingInfo"="Yurt dışındayken otomatik yükleme";
+
+"ConnectedDevices"="Bağlı Cihazlar";
+"ConnectedDevicesTitle"="%d AYGIT BAĞLI";
+"ConnectedDevicesInfo"="Bağlı cihazlarınızı bilgisayarınızdan yönetebilirsiniz.";
+
+"Notifications"="Bildirimler";
+"Anytime"="Her zaman";
+"OnceADay"="Günde bir kez";
+"OnceAWeek"="Haftada bir kez";
+"OnceAMonth"="Ayda bir kez";
+"Never"="Hiçbir zaman";
+"NotificationsInfo"="Cihazınızı bulutla eşitleme hatırlatmasının ne kadar sıkılıkla yapılacağını belirleyin.";
+
+"Help"="Yardım";
+"VideoHelpGuides"="Video Yardım Rehberleri";
+"Troubleshooting"="Sorun Giderme";
+"AboutAkilliDepo"="Akıllı Depo Hakkında";
+"SupportWebsite"="Bize destek olun";
+
+"SearchTitle"="Arama";
+"RecentSearchesHeader"="SON ARANANLAR";
+"Clear"="Temizle";
+"NoSearchResultFound"="Arama kriterinize uygun sonuç bulunamadı.";
+"ShowMore"="Devamı...";
+"AllFilesHeader"="TÜM DOSYALAR (%d)";
+"PhotosVideosHeader"="FOTOĞRAF VE VİDEOLAR (%d)";
+"MusicHeader"="MÜZİK (%d)";
+"DocumentsHeader"="DOKÜMANLAR (%d)";
+"AllSearchResultsHeader"="TÜM SONUÇLAR (%d)";
+
+"SyncPhotoVideoTitle"="Resimleri Senkronize Et";
+"SyncContactsTitle"="Kontakları Senkronize Et";
+"DataRoamingTitle"="Data Roaming";
+"DataRoamingSubTitle"="Yurtdışında oto yükleme";

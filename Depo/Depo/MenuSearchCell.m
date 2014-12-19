@@ -17,6 +17,7 @@
         
         textField = [[SearchTextField alloc] initWithFrame:CGRectMake(12, 5, 252, 50)];
         textField.delegate = self;
+        textField.userInteractionEnabled = NO;
         [self addSubview:textField];
     }
     return self;

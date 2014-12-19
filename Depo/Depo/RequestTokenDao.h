@@ -10,6 +10,7 @@
 
 @interface RequestTokenDao : BaseDao
 
-- (void) requestTokenForMsisdn:(NSString *) msisdnVal andPassword:(NSString *) passVal;
+- (void) requestTokenForMsisdn:(NSString *) msisdnVal andPassword:(NSString *) passVal shouldRememberMe:(BOOL) rememberMeFlag;
+- (void) requestTokenByRememberMe;
 
 @end

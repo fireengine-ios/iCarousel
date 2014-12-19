@@ -30,6 +30,7 @@
 - (void) hideBaseLoading;
 - (id)initWithRootViewController:(MyViewController *) rootViewController;
 - (void) presentAddButtonWithList:(NSArray *) _addTypeList;
+- (void) modifyAddButtonWithList:(NSArray *) addTypeList;
 - (void) dismissAddButton;
 - (void) showConfirmDelete;
 - (void) showSort;

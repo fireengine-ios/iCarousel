@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "AppSession.h"
 #import "User.h"
+#import "CacheUtil.h"
 
 @implementation TokenManager
 
@@ -31,12 +32,7 @@
 }
 
 - (void) requestToken {
-    if(APPDELEGATE.session.user) {
-        if(APPDELEGATE.session.user.msisdn && APPDELEGATE.session.user.password) {
-            [tokenDao requestTokenForMsisdn:APPDELEGATE.session.user.msisdn andPassword:APPDELEGATE.session.user.password];
-        }
-    }
-    [delegate tokenManagerInadequateInfo];
+    [tokenDao requestTokenByRememberMe];
 }
 
 - (void) requestBaseUrl {

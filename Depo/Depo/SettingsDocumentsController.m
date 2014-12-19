@@ -2,7 +2,7 @@
 //  SettingsDocumentsController.m
 //  Depo
 //
-//  Created by Mustafa Talha Celik on 26.09.2014.
+//  Created by Salih Topcu on 26.09.2014.
 //  Copyright (c) 2014 com.igones. All rights reserved.
 //
 
@@ -16,15 +16,17 @@
 
 - (id)init
 {
-    infoTextOn = @"Your Documents are visible within the app. You can upload new documents by upload new documents by selecting \"Open in Turkcell Cloud\" from other apps, e.g. Mail. ";
+    infoTextOn = NSLocalizedString(@"DocumentsOnInfo", @"");
     infoTextOnHeight = [Util calculateHeightForText:infoTextOn forWidth:280 forFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:14]];
     
-    infoTextOff = @"Your documents won't be visible within the app & you can't upload anything new.";
+    infoTextOff = NSLocalizedString(@"DocumentsOnInfo", @"");
     infoTextOffHeight = [Util calculateHeightForText:infoTextOff forWidth:280 forFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:14]];
     
     self = [super init];
     if (self) {
-        self.title = @"Documents";
+        self.title = NSLocalizedString(@"Documents", @"");
+        currentSetting = [CacheUtil readCachedSettingSyncDocuments];
+        oldSetting = currentSetting;
     }
     return self;
 }
@@ -35,44 +37,51 @@
     // Do any additional setup after loading the view.
 }
 
+- (void) viewWillDisappear:(BOOL)animated {
+    if (currentSetting != oldSetting)
+        [CacheUtil writeCachedSettingSyncDocuments:currentSetting];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (int) numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 5;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.section == 0)
+    if(indexPath.row == 0)
         return 31;
-    else if(indexPath.section == 3)
-        return infoTextOnHeight + 48;
-    else if(indexPath.section == 4)
-        return infoTextOffHeight + 48;
+    else if(indexPath.row == 3)
+        return (currentSetting == EnableOptionOn) ? infoTextOnHeight + 48 : 0;
+    else if(indexPath.row == 4)
+        return (currentSetting == EnableOptionOff) ? infoTextOnHeight + 48 : 0;
     else
         return 44;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *cellIdentifier = [NSString stringWithFormat:@"MenuCell%d-%d", indexPath.section, indexPath.row];
+    NSString *cellIdentifier = [NSString stringWithFormat:@"MenuCell%d-%d", (int)indexPath.section, (int)indexPath.row];
     
-    if(indexPath.section == 0) {
+    if(indexPath.row == 0) {
         HeaderCell *cell = [[HeaderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier headerText:@""];
         return cell;
-    } else if(indexPath.section == 1) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier iconName:@"" titleText:@"On" checkStatus:NO];
+    } else if(indexPath.row == 1) {
+        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier iconName:@"" titleText:[self getEnableOptionName:EnableOptionOn] checkStatus:(currentSetting == EnableOptionOn)];
         return cell;
-    } else if(indexPath.section == 2) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier iconName:@"" titleText:@"Off" checkStatus:NO];
+    } else if(indexPath.row == 2) {
+        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier iconName:@"" titleText:[self getEnableOptionName:EnableOptionOff] checkStatus:(currentSetting == EnableOptionOff)];
         return cell;
-    } else if(indexPath.section == 3) {
+    } else if(indexPath.row == 3) {
         TextCell *cell = [[TextCell alloc]initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"" titleColor:nil contentText:infoTextOn contentTextColor:nil backgroundColor:nil hasSeparator:NO];
+        cell.hidden = (currentSetting != EnableOptionOn);
         return cell;
-    } else if(indexPath.section == 4) {
+    } else if(indexPath.row == 4) {
         TextCell *cell = [[TextCell alloc]initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"" titleColor:nil contentText:infoTextOff contentTextColor:nil backgroundColor:nil hasSeparator:NO];
+        cell.hidden = (currentSetting != EnableOptionOff);
         return cell;
     } else {
         return nil;
@@ -80,20 +89,14 @@
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch ([indexPath section]) {
-        case 0:
-            break;
+    switch ([indexPath row]) {
         case 1:
-            
+            [self setOn];
+            currentSetting = EnableOptionOn;
             break;
         case 2:
-            
-            break;
-        case 3:
-            
-            break;
-        case 4:
-            
+            [self setOff];
+            currentSetting = EnableOptionOff;
             break;
         default:
             break;
@@ -101,14 +104,14 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+ {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

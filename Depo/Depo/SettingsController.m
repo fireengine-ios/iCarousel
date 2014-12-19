@@ -27,7 +27,20 @@
     self = [super init];
     
     if (self) {
-        self.title = @"Settings";
+        self.title = NSLocalizedString(@"SettingsTitle", @"");
+        self.view.backgroundColor = [Util UIColorForHexColor:@"F1F2F6"];
+        profileImage = [CacheUtil readCachedProfileImage];
+        newProfileImage = profileImage;
+        profileName = [CacheUtil readCachedProfileName];
+        profilePhoneNumber = [CacheUtil readCachedPhoneNumber];
+        
+        //temp
+        if (profileName == nil)
+            profileName = @"Mahir Kemal Tarlan";
+        if (profilePhoneNumber == nil)
+            profilePhoneNumber = @"05555022467";
+        //temp
+        
         [self drawProfileInfoArea];
         [self drawSettingsCategories];
         [self drawImageOptionsArea];
@@ -36,40 +49,55 @@
     return self;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)viewWillDisappear:(BOOL)animated {
+    if (profileImage != newProfileImage)
+        [CacheUtil writeCachedProfileImage:newProfileImage];
 }
 
 - (void) drawProfileInfoArea {
-    UIView *profileInfoArea = [[UIView alloc] initWithFrame:CGRectMake(0, self.topIndex, 320, 203)];
+    UIView *profileInfoArea = [[UIView alloc] initWithFrame:CGRectMake(0, self.topIndex, 320, 159)];
     profileInfoArea.backgroundColor = [Util UIColorForHexColor:@"3FB0E8"];
     
-    CustomButton *profileImage = [[CustomButton alloc]initWithFrame:CGRectMake(120, 50, 80, 80) withImageName:@"profile_icon@2x"];
-    [profileImage addTarget:self action:@selector(ShowImageOptionsArea:) forControlEvents:UIControlEventTouchUpInside];
-    [profileInfoArea addSubview:profileImage];
+    profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(116, 0, 88, 88)];
+    //profileImage = [UIImage imageNamed:@"profile_icon@2x"];
+    if (profileImage != nil)
+        [profileImageView setImage:profileImage];
+    [profileImageView setImage:profileImage];
+    [profileInfoArea addSubview:profileImageView];
     
-    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 140, 300, 20)];
-    [nameLabel setText:@"Memet Emanetoğlu"];
+    UIImageView *profileFrameImageView = [[UIImageView alloc] initWithFrame:CGRectMake(116, 0, 88, 88)];
+    UIImage *profileFrameImage = [UIImage imageNamed:@"profile_frame@2x"];
+    [profileFrameImageView setImage:profileFrameImage];
+    [profileInfoArea addSubview:profileFrameImageView];
+    
+    CustomButton *profileButton = [[CustomButton alloc]initWithFrame:CGRectMake(116, 0, 88, 88) withImageName:@"profile_image_button@2x"];
+    [profileButton addTarget:self action:@selector(ShowImageOptionsArea) forControlEvents:UIControlEventTouchUpInside];
+    [profileInfoArea addSubview:profileButton];
+    
+    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 98, 300, 20)];
+    [nameLabel setText:profileName];
     nameLabel.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:20];
     nameLabel.textAlignment = UITextAlignmentCenter;
     nameLabel.textColor = [Util UIColorForHexColor:@"FFFFFF"];
+    nameLabel.backgroundColor= [UIColor clearColor];
     [profileInfoArea addSubview:nameLabel];
     
-    UIImageView *cellPhoneIcon = [[UIImageView alloc]initWithFrame:CGRectMake(111, 165.5, 7, 11)];
+    UIImageView *cellPhoneIcon = [[UIImageView alloc]initWithFrame:CGRectMake(111, 123, 7, 11)];
     cellPhoneIcon.image = [UIImage imageNamed:@"cellphone_icon@2x"];
     [profileInfoArea addSubview:cellPhoneIcon];
     
-    UILabel *phoneNumberLabel = [[UILabel alloc] initWithFrame:CGRectMake(122.5, 161, 190, 20)];
-    [phoneNumberLabel setText:@"05555022460"];
+    UILabel *phoneNumberLabel = [[UILabel alloc] initWithFrame:CGRectMake(122.5, 119, 190, 20)];
+    [phoneNumberLabel setText:profilePhoneNumber];
     phoneNumberLabel.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:17];
     phoneNumberLabel.textColor = [Util UIColorForHexColor:@"AFDCF5"];
+    phoneNumberLabel.backgroundColor= [UIColor clearColor];
     [profileInfoArea addSubview:phoneNumberLabel];
     
     [self.view addSubview:profileInfoArea];
 }
 
 - (void) drawSettingsCategories {
-    pageContentTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topIndex + 203, 325, self.view.frame.size.height-self.bottomIndex-203) style:UITableViewStylePlain];
+    pageContentTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topIndex + 159, 325, self.view.frame.size.height-self.bottomIndex-159) style:UITableViewStylePlain];
     pageContentTable.delegate = self;
     pageContentTable.dataSource = self;
     pageContentTable.backgroundColor = [UIColor clearColor];
@@ -79,82 +107,146 @@
 }
 
 - (void) drawImageOptionsArea {
-    popupContainer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
+    popupContainer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height - self.bottomIndex)];
     popupContainer.hidden = YES;
     popupContainer.userInteractionEnabled = YES;
     [self.view addSubview:popupContainer];
     
     darkArea = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, popupContainer.frame.size.height)];
     darkArea.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.85];
+    //darkArea.userInteractionEnabled = YES;
     [popupContainer addSubview:darkArea];
+    
+    UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(HideImageOptionsArea)];
+    [darkArea addGestureRecognizer:singleFingerTap];
+    
+    
+    UISwipeGestureRecognizer *recognizerDown = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeDown:)];
+    recognizerDown.direction = UISwipeGestureRecognizerDirectionDown;
     
     imageOptionsArea = [[UIView alloc]initWithFrame:CGRectMake(0, popupContainer.frame.size.height, 320, 205)];
     imageOptionsArea.backgroundColor = [Util UIColorForHexColor:@"3FB0E8"];
+    [imageOptionsArea addGestureRecognizer:recognizerDown];
     [popupContainer addSubview:imageOptionsArea];
     
     UIButton *swipeDownButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
     [imageOptionsArea addSubview:swipeDownButton];
-    UISwipeGestureRecognizer *recognizerDown = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeDown:)];
-    recognizerDown.direction = UISwipeGestureRecognizerDirectionDown;
-    [self.view addGestureRecognizer:recognizerDown];
-    [imageOptionsArea addSubview:swipeDownButton];
+    //[swipeDownButton addGestureRecognizer:recognizerDown];
     
-    UIImageView *swipeIcon = [[UIImageView alloc]initWithFrame:CGRectMake(143, 7, 34, 7)];
-    swipeIcon.image = [UIImage imageNamed:@"menu_icon@2x"];
+    UIImageView *swipeIcon = [[UIImageView alloc]initWithFrame:CGRectMake(128, 0, 64, 16)];
+    swipeIcon.image = [UIImage imageNamed:@"slide_icon@2x"];
     [imageOptionsArea addSubview:swipeIcon];
     
     UILabel *infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 29, 300, 20)];
-    [infoLabel setText:@"Edit Profile Picture"];
+    [infoLabel setText:NSLocalizedString(@"EditProfilePicture", @"")];
     infoLabel.font = [UIFont fontWithName:@"TurkcellSaturaBol" size:18];
     infoLabel.textAlignment = UITextAlignmentCenter;
     infoLabel.textColor = [Util UIColorForHexColor:@"FFFFFF"];
+    infoLabel.backgroundColor= [UIColor clearColor];
     [imageOptionsArea addSubview:infoLabel];
     
-    CustomButton *cameraButton = [[CustomButton alloc]initWithFrame:CGRectMake(29, 69, 75, 75) withImageName:@"camera_icon@2x"];
-    [cameraButton addTarget:self action:@selector(HideImageOptionsArea:) forControlEvents:UIControlEventTouchUpInside];
+    cameraButton = [[CustomButton alloc]initWithFrame:CGRectMake(29, 69, 75, 75) withImageName:@"camera_icon@2x"];
+    [cameraButton addTarget:self action:@selector(CameraButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [imageOptionsArea addSubview:cameraButton];
     
-    UILabel *cameraLabel = [[UILabel alloc] initWithFrame:CGRectMake(29, 153, 75, 20)];
-    [cameraLabel setText:@"Camera"];
+    cameraLabel = [[UILabel alloc] initWithFrame:CGRectMake(29, 153, 75, 20)];
+    [cameraLabel setText:NSLocalizedString(@"Camera", @"")];
     cameraLabel.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:17];
     cameraLabel.textAlignment = UITextAlignmentCenter;
     cameraLabel.textColor = [Util UIColorForHexColor:@"FFFFFF"];
+    cameraLabel.backgroundColor= [UIColor clearColor];
     [imageOptionsArea addSubview:cameraLabel];
     
-    CustomButton *uploadButton = [[CustomButton alloc]initWithFrame:CGRectMake(122, 69, 75, 75) withImageName:@"upload_icon@2x"];
-    [uploadButton addTarget:self action:@selector(HideImageOptionsArea:) forControlEvents:UIControlEventTouchUpInside];
+    uploadButton = [[CustomButton alloc]initWithFrame:CGRectMake(122, 69, 75, 75) withImageName:@"upload_icon@2x"];
+    [uploadButton addTarget:self action:@selector(UploadButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [imageOptionsArea addSubview:uploadButton];
     
-    UILabel *uploadLabel = [[UILabel alloc] initWithFrame:CGRectMake(122, 153, 75, 20)];
-    [uploadLabel setText:@"Upload"];
+    uploadLabel = [[UILabel alloc] initWithFrame:CGRectMake(122, 153, 75, 20)];
+    [uploadLabel setText:NSLocalizedString(@"Upload", @"")];
     uploadLabel.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:17];
     uploadLabel.textAlignment = UITextAlignmentCenter;
     uploadLabel.textColor = [Util UIColorForHexColor:@"FFFFFF"];
+    uploadLabel.backgroundColor= [UIColor clearColor];
     [imageOptionsArea addSubview:uploadLabel];
     
-    CustomButton *removeButton = [[CustomButton alloc]initWithFrame:CGRectMake(215, 69, 75, 75) withImageName:@"remove_icon@2x"];
-    [removeButton addTarget:self action:@selector(HideImageOptionsArea:) forControlEvents:UIControlEventTouchUpInside];
+    removeButton = [[CustomButton alloc]initWithFrame:CGRectMake(215, 69, 75, 75) withImageName:@"remove_icon@2x"];
+    [removeButton addTarget:self action:@selector(RemoveButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [imageOptionsArea addSubview:removeButton];
     
-    UILabel *removeLabel = [[UILabel alloc] initWithFrame:CGRectMake(215, 153, 75, 20)];
-    [removeLabel setText:@"Remove"];
+    removeLabel = [[UILabel alloc] initWithFrame:CGRectMake(215, 153, 75, 20)];
+    [removeLabel setText:NSLocalizedString(@"Remove", @"")];
     removeLabel.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:17];
     removeLabel.textAlignment = UITextAlignmentCenter;
     removeLabel.textColor = [Util UIColorForHexColor:@"FFFFFF"];
+    removeLabel.backgroundColor= [UIColor clearColor];
     [imageOptionsArea addSubview:removeLabel];
 }
 
 - (void)swipeDown:(UISwipeGestureRecognizer*)recognizer {
-    [self HideImageOptionsArea: imageOptionsArea];
+    [self HideImageOptionsArea];
 }
 
+- (void)CameraButtonAction: (id)sender {
+    imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    imagePicker.delegate = self;
+    imagePicker.allowsEditing = YES;
+    imagePicker.showsCameraControls = YES;
+    imagePicker.wantsFullScreenLayout = YES;
+    [self presentViewController:imagePicker animated:YES completion:nil];
+    [self HideImageOptionsArea];
+}
 
+- (void)UploadButtonAction: (id)sender {
+    if (imagePicker == nil)
+        imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePicker.delegate = self;
+    [self presentViewController:imagePicker animated:YES completion:nil];
+    [self HideImageOptionsArea];
+}
+
+- (void)RemoveButtonAction: (id)sender {
+    newProfileImage = nil;
+    profileImageView.image = newProfileImage;
+    [self HideImageOptionsArea];
+}
+
+- (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    //UIImage *choosenImage = info[UIImagePickerControllerOriginalImage];
+    UIImage *choosenImage = info[UIImagePickerControllerEditedImage];
+    
+    // Resize Image
+    //CGSize newSize = choosenImage.size.width > choosenImage.size.height ? CGSizeMake(640, 480) : CGSizeMake(480, 640);
+    CGSize newSize = CGSizeMake(480, 480);
+    UIGraphicsBeginImageContext(newSize);
+    [choosenImage drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    //NSData *data = [NSData dataWithData:UIImagePNGRepresentation(resizedImage)];
+    
+    newProfileImage = resizedImage;
+    profileImageView.image = newProfileImage;
+    //[profileImageView setImage:newProfileImage];
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void) imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
-- (int) numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 5;
 }
 
@@ -165,30 +257,27 @@
         return 69;
 }
 
-- (int) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *cellIdentifier = [NSString stringWithFormat:@"MenuCell%d-%d", indexPath.section, indexPath.row];
+    NSString *cellIdentifier = [NSString stringWithFormat:@"MenuCell%d-%d", (int)indexPath.section, (int)indexPath.row];
     
     BOOL drawSeparator = indexPath.section == 4 ? false : true;
     double cellHeight = 69;
     
-    if(indexPath.section == 0) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"Storage" titleColor:nil subTitleText:@"20% of 5GB" iconName:@"stroge_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
+    if(indexPath.row == 0) {
+        NSString *subTitle = [NSString stringWithFormat: NSLocalizedString(@"StorageUsageInfo", @""), @"20", @"5"];
+        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"Storage", @"") titleColor:nil subTitleText:subTitle iconName:@"stroge_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         return cell;
-    } else if(indexPath.section == 1) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"Upload & Syncing" titleColor:nil subTitleText:@"" iconName:@"syncing_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
+    } else if(indexPath.row == 1) {
+        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"Upload&Syncing", @"") titleColor:nil subTitleText:@"" iconName:@"syncing_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         return cell;
-    } else if(indexPath.section == 2) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"Connected Devices" titleColor:nil subTitleText:@"" iconName:@"device_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
+    } else if(indexPath.row == 2) {
+        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"ConnectedDevices", @"") titleColor:nil subTitleText:@"" iconName:@"device_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         return cell;
-    } else if(indexPath.section == 3) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"Notifications" titleColor:nil subTitleText:@"" iconName:@"notifications_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
+    } else if(indexPath.row == 3) {
+        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"Notifications", @"") titleColor:nil subTitleText:@"" iconName:@"notifications_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         return cell;
-    } else if(indexPath.section == 4) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"Help" titleColor:nil subTitleText:@"" iconName:@"help_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
+    } else if(indexPath.row == 4) {
+        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"Help", @"") titleColor:nil subTitleText:@"" iconName:@"help_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         return cell;
     } else {
         return nil;
@@ -196,7 +285,7 @@
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch ([indexPath section]) {
+    switch ([indexPath row]) {
         case 0:
             [self didTriggerStorage];
             break;
@@ -217,9 +306,25 @@
     }
 }
 
-
-
-- (void) ShowImageOptionsArea: (id)sender {
+- (void) ShowImageOptionsArea {
+    int buttonCount = newProfileImage == nil ? 2 : 3;
+    float leftIndex = (320 - (buttonCount * 75 + (buttonCount - 1) * 18)) / 2;
+    
+    cameraButton.frame = CGRectMake(leftIndex, cameraButton.frame.origin.y, 75, 75);
+    cameraLabel.frame = CGRectMake(leftIndex, cameraLabel.frame.origin.y, 75, 20);
+    uploadButton.frame = CGRectMake(leftIndex + 93, uploadButton.frame.origin.y, 75, 75);
+    uploadLabel.frame = CGRectMake(leftIndex + 93, uploadLabel.frame.origin.y, 75, 20);
+    if (buttonCount > 2) {
+        removeButton.frame = CGRectMake(leftIndex + 186, removeButton.frame.origin.y, 75, 75);
+        removeLabel.frame = CGRectMake(leftIndex + 186, removeLabel.frame.origin.y, 75, 20);
+        removeButton.hidden = NO;
+        removeLabel.hidden = NO;
+    }
+    else {
+        removeButton.hidden = YES;
+        removeLabel.hidden = YES;
+    }
+    
     popupContainer.hidden = NO;
     darkArea.alpha = 0;
     [UIView animateWithDuration:0.3 animations:^{
@@ -229,9 +334,9 @@
     }];
 }
 
-- (void) HideImageOptionsArea: (id)sender {
+- (void) HideImageOptionsArea {
     [UIView animateWithDuration:0.3 animations:^{
-        imageOptionsArea.frame = CGRectMake(0, 568, imageOptionsArea.frame.size.width, imageOptionsArea.frame.size.height);
+        imageOptionsArea.frame = CGRectMake(0, popupContainer.frame.size.height, imageOptionsArea.frame.size.width, imageOptionsArea.frame.size.height);
         darkArea.alpha = 0.0;
     } completion:^(BOOL finished) {
         popupContainer.hidden = YES;

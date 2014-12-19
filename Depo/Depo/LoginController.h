@@ -9,11 +9,14 @@
 #import "MyViewController.h"
 #import "LoginTextfield.h"
 #import "RequestTokenDao.h"
+#import <MessageUI/MessageUI.h>
+#import "CheckButton.h"
 
-@interface LoginController : MyViewController <UITextFieldDelegate> {
+@interface LoginController : MyViewController <UITextFieldDelegate, MFMessageComposeViewControllerDelegate> {
     RequestTokenDao *tokenDao;
     NSString *msisdnValue;
     NSString *passValue;
+    CheckButton *rememberMe;
 }
 
 @property (nonatomic, strong) LoginTextfield *msisdnField;

@@ -51,6 +51,8 @@
 
 #define MSISDN_STORE_KEY @"MSISDN_STORE_KEY"
 
+#define REMEMBER_ME_TOKEN_KEY @"REMEMBER_ME_TOKEN_KEY"
+
 #define PASS_STORE_KEY @"PASS_STORE_KEY"
 
 #define CONFIRM_DELETE_HIDDEN_KEY @"CONFIRM_DELETE_HIDDEN_KEY"
@@ -86,6 +88,30 @@
 #define FIRST_VISIT_OVER @"FIRST_VISIT_OVER"
 
 #define LAST_SYNC_DATE @"LAST_SYNC_DATE"
+
+#define SETTINGS_PROFILE_IMAGE @"SETTINGS_PROFILE_IMAGE"
+
+#define SETTINGS_PROFILE_NAME @"SETTINGS_PROFILE_NAME"
+
+#define SETTINGS_PROFILE_PHONENUMBER @"SETTINGS_PROFILE_PHONENUMBER"
+
+#define SETTINGS_STORAGE_CURRENTPACKAGE_NAME @"SETTINGS_STORAGE_CURRENTPACKAGE_NAME"
+
+#define SETTINGS_STORAGE_CURRENTPACKAGE_RENEWALDATE @"SETTINGS_STORAGE_CURRENTPACKAGE_RENEWALDATE"
+
+#define SETTINGS_UPLOAD_SYNCINGCONNECTION @"SETTINGS_UPLOAD_SYNCINGCONNECTION"
+
+#define SETTINGS_UPLOAD_DATAROAMING @"SETTINGS_UPLOAD_DATAROAMING"
+
+#define SETTINGS_UPLOAD_PHOTOSVIDEOS @"SETTINGS_UPLOAD_PHOTOSVIDEOS"
+
+#define SETTINGS_UPLOAD_MUSIC @"SETTINGS_UPLOAD_MUSIC"
+
+#define SETTINGS_UPLOAD_DOCUMENTS @"SETTINGS_UPLOAD_DOCUMENTS"
+
+#define SETTINGS_UPLOAD_CONTACTS @"SETTINGS_UPLOAD_CONTACTS"
+
+#define SETTINGS_NOTIFICATIONS @"SETTINGS_NOTIFICATIONS"
 
 #define SuppressPerformSelectorLeakWarning(Stuff) \
 do { \
@@ -186,6 +212,32 @@ typedef enum {
     UsageTypeOther,
     UsageTypeContact
 } UsageType;
+
+typedef enum {
+    EnableOptionOff = 1,
+    EnableOptionOn,
+    EnableOptionAuto
+} EnableOption;
+
+typedef enum {
+    ConnectionOptionWifi3G = 1,
+    ConnectionOptionWifi
+} ConnectionOption;
+
+typedef enum {
+    NotificationOptionAnytime = 1,
+    NotificationOptionOnceADay,
+    NotificationOptionOnceAWeek,
+    NotificationOptionOnceAMonth,
+    NotificationOptionNever
+} NotificationOption;
+
+typedef enum {
+    SearchListTypeAllFiles = 0,
+    SearchListTypePhotosAndVides,
+    SearchListTypeMusics,
+    SearchListTypeDocumnets
+} SearchListType;
 
 @interface AppConstants : NSObject
 

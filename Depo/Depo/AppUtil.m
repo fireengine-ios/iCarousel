@@ -468,7 +468,7 @@
 
 + (BOOL) readFirstVisitOverFlag {
     //TODO sil ve son satırı aç
-    return YES;
+    return NO;
 //    return [[NSUserDefaults standardUserDefaults] boolForKey:FIRST_VISIT_OVER];
 }
 

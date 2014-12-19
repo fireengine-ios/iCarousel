@@ -37,8 +37,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.isChecked = isInitiallyChecked;
-        self.checkedImage = [UIImage imageNamed:@"cekBox2.png"];
-        self.uncheckedImage = [UIImage imageNamed:@"cekBox.png"];
+        self.checkedImage = [UIImage imageNamed:@"dont_show_blue_tick.png"];
+        self.uncheckedImage = [UIImage imageNamed:@"check_unchecked_icon.png"];
         
         bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, (self.frame.size.height - checkedImage.size.height)/2, checkedImage.size.width, checkedImage.size.height)];
         [self addSubview:bgImgView];

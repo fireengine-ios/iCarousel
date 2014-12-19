@@ -47,6 +47,81 @@
     return self;
 }
 
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier  withFileFolder:(MetaFile *) _fileFolder highlightedText:(NSString *)highlightedText {
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier withFileFolder:_fileFolder isSelectible:NO];
+    if (self) {
+        UIImage *iconImg = [UIImage imageNamed:[AppUtil iconNameByContentType:ContentTypeFolder]];
+        self.imgView = [[UIImageView alloc] initWithFrame:CGRectMake(15 + (40 - iconImg.size.width)/2, (68 - iconImg.size.height)/2, iconImg.size.width, iconImg.size.height)];
+        self.imgView.image = iconImg;
+        [self addSubview:self.imgView];
+        
+        CGRect nameFieldRect = CGRectMake(70, 13, self.frame.size.width - 120, 22);
+        CGRect detailFieldRect = CGRectMake(70, 35, self.frame.size.width - 120, 20);
+        
+        UIFont *nameFont = [self readNameFont];
+        UIFont *detailFont = [self readDetailFont];
+        
+        CustomLabel *nameLabel = [[CustomLabel alloc] initWithFrame:nameFieldRect withFont:nameFont withColor:[self readNameColor] withText:self.fileFolder.visibleName];
+        [self addSubview:nameLabel];
+        
+        NSRange highlightingRange = [self.fileFolder.visibleName rangeOfString:highlightedText options:NSCaseInsensitiveSearch];
+        if ((int)highlightingRange.location >= 0) {
+            NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithAttributedString: nameLabel.attributedText];
+            [text addAttribute:NSForegroundColorAttributeName value:[Util UIColorForHexColor:@"3FB0E8"] range:highlightingRange];
+            [nameLabel setAttributedText: text];
+        }
+        
+        CustomLabel *detailLabel = [[CustomLabel alloc] initWithFrame:detailFieldRect withFont:detailFont withColor:[self readDetailColor] withText:[NSString stringWithFormat:NSLocalizedString(@"FolderSubTitle", @""), 1]];
+        [self addSubview:detailLabel];
+        
+        UIView *progressSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 67, self.frame.size.width, 1)];
+        progressSeparator.backgroundColor = [self readPassiveSeparatorColor];
+        progressSeparator.alpha = 0.5f;
+        [self addSubview:progressSeparator];
+        
+        [self initializeSwipeMenu];
+    }
+    return self;
+}
+
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier  withFileFolder:(MetaFile *) _fileFolder {
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier withFileFolder:_fileFolder isSelectible:NO];
+    if (self) {
+        UIImage *iconImg = [UIImage imageNamed:[AppUtil iconNameByContentType:ContentTypeFolder]];
+        self.imgView = [[UIImageView alloc] initWithFrame:CGRectMake(15 + (40 - iconImg.size.width)/2, (68 - iconImg.size.height)/2, iconImg.size.width, iconImg.size.height)];
+        self.imgView.image = iconImg;
+        [self addSubview:self.imgView];
+        
+        CGRect nameFieldRect = CGRectMake(70, 13, self.frame.size.width - 80, 22);
+        CGRect detailFieldRect = CGRectMake(70, 35, self.frame.size.width - 80, 20);
+        
+        UIFont *nameFont = [self readNameFont];
+        UIFont *detailFont = [self readDetailFont];
+        
+        CustomLabel *nameLabel = [[CustomLabel alloc] initWithFrame:nameFieldRect withFont:nameFont withColor:[self readNameColor] withText:self.fileFolder.visibleName];
+        [self addSubview:nameLabel];
+        
+        CustomLabel *detailLabel = [[CustomLabel alloc] initWithFrame:detailFieldRect withFont:detailFont withColor:[self readDetailColor] withText:[NSString stringWithFormat:NSLocalizedString(@"FolderSubTitle", @""), 1]];
+        [self addSubview:detailLabel];
+        
+        UIView *progressSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 67, self.frame.size.width, 1)];
+        progressSeparator.backgroundColor = [self readPassiveSeparatorColor];
+        progressSeparator.alpha = 0.5f;
+        [self addSubview:progressSeparator];
+        
+        self.favButton = [[CustomButton alloc] initWithFrame:CGRectMake(270, 14, 40, 40) withImageName:@"nav_favourite_inactive_icon"];
+        [self.favButton addTarget:self action:@selector(triggerFav) forControlEvents:UIControlEventTouchUpInside];
+        self.favButton.hidden = YES;
+        [self addSubview:self.favButton];
+        
+        self.unfavButton = [[CustomButton alloc] initWithFrame:CGRectMake(270, 14, 40, 40) withImageName:@"nav_favourite_active_icon"];
+        [self.unfavButton addTarget:self action:@selector(triggerUnfav) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:self.unfavButton];
+    }
+    return self;
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

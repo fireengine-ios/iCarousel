@@ -7,19 +7,14 @@
 //
 
 #import "User.h"
-#import "CacheUtil.h"
 
 @implementation User
 
 @synthesize profileImgUrl;
 @synthesize fullName;
-@synthesize msisdn;
-@synthesize password;
 
 - (id) init {
     if(self = [super init]) {
-        self.msisdn = [CacheUtil readCachedMsisdn];
-        self.password = [CacheUtil readCachedPassword];
     }
     return self;
 }

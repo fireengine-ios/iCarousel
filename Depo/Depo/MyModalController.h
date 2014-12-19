@@ -10,6 +10,7 @@
 #import "ProcessFooterView.h"
 #import "CustomButton.h"
 #import "MyNavigationController.h"
+#import "MBProgressHUD.h"
 
 @interface MyModalController : UIViewController
 
@@ -17,10 +18,14 @@
 @property (nonatomic) int bottomIndex;
 @property (nonatomic, strong) ProcessFooterView *processView;
 @property (nonatomic, strong) MyNavigationController *nav;
+@property (nonatomic, strong) MBProgressHUD *progress;
 
 - (void) triggerDismiss;
 - (void) pushProgressViewWithProcessMessage:(NSString *) progressMsg andSuccessMessage:(NSString *) successMsg andFailMessage:(NSString *) failMsg;
 - (void) showLoading;
 - (void) hideLoading;
+- (void)fadeIn:(UIView *)view duration:(float)duration;
+- (void)fadeOut:(UIView *)view duration:(float)duration;
+- (void) showErrorAlertWithMessage:(NSString *) errMessage;
 
 @end

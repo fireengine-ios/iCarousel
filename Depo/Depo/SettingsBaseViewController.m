@@ -2,7 +2,7 @@
 //  SettingsBaseViewController.m
 //  Depo
 //
-//  Created by Mustafa Talha Celik on 26.09.2014.
+//  Created by Salih Topcu on 26.09.2014.
 //  Copyright (c) 2014 com.igones. All rights reserved.
 //
 
@@ -18,17 +18,7 @@
 {
     self = [super init];
     if (self) {
-        //topIndex = IS_BELOW_7 ? 0 : 20;
-        
         self.view.backgroundColor = [Util UIColorForHexColor:@"F1F2F6"];
-        
-        pageContentTable = [[UITableView alloc] initWithFrame:CGRectMake(0, topIndex, 320, self.view.frame.size.height - topIndex) style:UITableViewStylePlain];
-        pageContentTable.delegate = self;
-        pageContentTable.dataSource = self;
-        pageContentTable.backgroundColor = [UIColor clearColor];
-        pageContentTable.backgroundView = nil;
-        [pageContentTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-        [self.view addSubview:pageContentTable];
     }
     return self;
 }
@@ -39,25 +29,66 @@
     // Do any additional setup after loading the view.
 }
 
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self drawPageContentTable];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (int) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)drawPageContentTable {
+    if (pageContentTable != nil)
+        [pageContentTable removeFromSuperview];
+    pageContentTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topIndex, 320, self.view.frame.size.height - self.topIndex) style:UITableViewStylePlain];
+    pageContentTable.delegate = self;
+    pageContentTable.dataSource = self;
+    pageContentTable.backgroundColor = [UIColor clearColor];
+    pageContentTable.backgroundView = nil;
+    [pageContentTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    [self.view addSubview:pageContentTable];
 }
-*/
+
+- (void) setAuto {
+    currentSetting = EnableOptionAuto;
+    [self drawPageContentTable];
+}
+
+- (void) setOn {
+    currentSetting = EnableOptionOn;
+    [self drawPageContentTable];
+}
+
+- (void) setOff {
+    currentSetting = EnableOptionOff;
+    [self drawPageContentTable];
+}
+
+- (NSString *) getEnableOptionName:(int)value {
+    switch (value) {
+        case EnableOptionAuto: return NSLocalizedString(@"Auto", @"");
+        case EnableOptionOn: return NSLocalizedString(@"On", @"");
+        case EnableOptionOff: return NSLocalizedString(@"Off", @"");
+        default : return @"";
+    }
+}
+
+/*
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+ {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

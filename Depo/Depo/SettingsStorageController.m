@@ -2,7 +2,7 @@
 //  SettingsStorageController.m
 //  Depo
 //
-//  Created by Mustafa Talha Celik on 23.09.2014.
+//  Created by Salih Topcu on 23.09.2014.
 //  Copyright (c) 2014 com.igones. All rights reserved.
 //
 
@@ -18,7 +18,16 @@
 {
     self = [super init];
     if (self) {
-        self.title = @"Storage";
+        self.title = NSLocalizedString(@"Storage", @"");
+        currentPackageName = [CacheUtil readCachedSettingCurrentPackageName];
+        currentPackageRenewalDate = [CacheUtil readCachedSettingCurrentPackageRenewalDate];
+        
+        //temp
+        if (currentPackageName == nil)
+            currentPackageName = @"Mini Paket (5GB) 3.9 TL/Ay";
+        if (currentPackageRenewalDate == nil)
+            currentPackageRenewalDate = @"7 Jun 2014";
+        //temp
     }
     return self;
 }
@@ -34,35 +43,36 @@
     [super didReceiveMemoryWarning];
 }
 
-- (int) numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 5;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.section == 1)
+    if(indexPath.row == 1)
         return 69;
-    else if(indexPath.section == 4)
+    else if(indexPath.row == 4)
         return 151;
     else
         return 54;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *cellIdentifier = [NSString stringWithFormat:@"MenuCell%d-%d", indexPath.section, indexPath.row];
+    NSString *cellIdentifier = [NSString stringWithFormat:@"MenuCell%d-%d", (int)indexPath.section, (int)indexPath.row];
     
-    if(indexPath.section == 0) {
-        HeaderCell *cell = [[HeaderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier headerText:@"CURRENT PACKAGE"];
+    if(indexPath.row == 0) {
+        HeaderCell *cell = [[HeaderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier headerText:NSLocalizedString(@"CurrentPackageTitle", @"")];
         return cell;
-    } else if(indexPath.section == 1) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"Mini Paket (5GB) 3.9 TL/Ay" titleColor:nil subTitleText:@"Renewal date: 7 Jun 2014" iconName:@"" hasSeparator:YES isLink:NO linkText:@"" cellHeight:69];
+    } else if(indexPath.row == 1) {
+        NSString *renewalDateInfo = [NSString stringWithFormat:NSLocalizedString(@"RenewalDateInfo", @""), currentPackageRenewalDate];
+        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:currentPackageName titleColor:nil subTitleText:renewalDateInfo iconName:@"" hasSeparator:YES isLink:NO linkText:@"" cellHeight:69];
         return cell;
-    } else if(indexPath.section == 2) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"Cancel Subscription" titleColor:[Util UIColorForHexColor:@"3FB0E8"] subTitleText:@"" iconName:@"" hasSeparator:YES isLink:NO linkText:@"" cellHeight:54];
+    } else if(indexPath.row == 2) {
+        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"CancelSubscription", @"") titleColor:[Util UIColorForHexColor:@"3FB0E8"] subTitleText:@"" iconName:@"" hasSeparator:YES isLink:NO linkText:@"" cellHeight:54];
         return cell;
-    } else if(indexPath.section == 3) {
-        HeaderCell *cell = [[HeaderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier headerText:@"UPGRADE OPTIONS"];
+    } else if(indexPath.row == 3) {
+        HeaderCell *cell = [[HeaderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier headerText:NSLocalizedString(@"UpgradeOptionsTitle", @"")];
         return cell;
-    } else if(indexPath.section == 4) {
+    } else if(indexPath.row == 4) {
         UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         [self drawUpgradeOptionsCell:cell];
         return cell;
@@ -72,7 +82,7 @@
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch ([indexPath section]) {
+    switch ([indexPath row]) {
         case 0:
             
             break;
@@ -118,14 +128,14 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+ {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

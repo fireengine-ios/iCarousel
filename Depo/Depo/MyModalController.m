@@ -19,6 +19,7 @@
 @synthesize bottomIndex;
 @synthesize processView;
 @synthesize nav;
+@synthesize progress;
 
 - (id)init {
     self = [super init];
@@ -30,6 +31,9 @@
             topIndex = 0;
             bottomIndex = 64;
         }
+        progress = [[MBProgressHUD alloc] initWithFrame:self.view.frame];
+        progress.opacity = 0.4f;
+        [self.view addSubview:progress];
     }
     return self;
 }
@@ -57,9 +61,12 @@
 }
 
 - (void) showLoading {
+    [progress show:YES];
+    [self.view bringSubviewToFront:progress];
 }
 
 - (void) hideLoading {
+    [progress hide:YES];
 }
 
 - (void)viewDidLoad
@@ -84,6 +91,24 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)fadeIn:(UIView *)view duration:(float)duration {
+    view.alpha = 0;
+    view.hidden = NO;
+    [UIView animateWithDuration:duration animations:^{
+        view.alpha = 1;
+    } completion:^(BOOL finished) { }];
+}
+
+- (void)fadeOut:(UIView *)view duration:(float)duration {
+    view.alpha = 1;
+    view.hidden = NO;
+    [UIView animateWithDuration:duration animations:^{
+        view.alpha = 0;
+    } completion:^(BOOL finished) {
+        view.hidden = YES;
+    }];
 }
 
 @end

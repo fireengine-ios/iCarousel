@@ -110,8 +110,16 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     tempPath = [documentsDirectory stringByAppendingFormat:@"/%@", asset.defaultRepresentation.filename];
     self.uploadRef.tempUrl = tempPath;
     
-    UIImage *image = [UIImage imageWithCGImage:[asset.defaultRepresentation fullResolutionImage]];
-    [UIImagePNGRepresentation(image) writeToFile:tempPath atomically:YES];
+    if ([[self.asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
+        ALAssetRepresentation *rep = [self.asset defaultRepresentation];
+        Byte *buffer = (Byte*)malloc(rep.size);
+        NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:rep.size error:nil];
+        NSData *videoData = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
+        [videoData writeToFile:tempPath atomically:YES];
+    } else {
+        UIImage *image = [UIImage imageWithCGImage:[asset.defaultRepresentation fullResolutionImage]];
+        [UIImagePNGRepresentation(image) writeToFile:tempPath atomically:YES];
+    }
 
     [[NSNotificationCenter defaultCenter] postNotificationName:TEMP_IMG_UPLOAD_NOTIFICATION object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:self.uploadRef.fileUuid, TEMP_IMG_UPLOAD_NOTIFICATION_UUID_PARAM, tempPath, TEMP_IMG_UPLOAD_NOTIFICATION_URL_PARAM, nil]];
 
@@ -150,7 +158,11 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         [request setValue:@"" forHTTPHeaderField:@"X-Object-Meta-Parent-Uuid"];
     }
     [request setValue:fileName forHTTPHeaderField:@"X-Object-Meta-File-Name"];
-    [request addValue:@"image/png" forHTTPHeaderField:@"Content-Type"];
+    if ([[self.asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
+        [request addValue:@"video/mp4" forHTTPHeaderField:@"Content-Type"];
+    } else {
+        [request addValue:@"image/png" forHTTPHeaderField:@"Content-Type"];
+    }
     return request;
 }
 

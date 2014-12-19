@@ -1,8 +1,8 @@
 //
-//  SettingsCategoryCell.m
+//  TitleCell.m
 //  Depo
 //
-//  Created by Mustafa Talha Celik on 22.09.2014.
+//  Created by Salih on 22.09.2014.
 //  Copyright (c) 2014 com.igones. All rights reserved.
 //
 
@@ -10,6 +10,8 @@
 #import "ToggleButton.h"
 
 @implementation TitleCell
+
+@synthesize switchButton;
 
 - (id)initWithCellStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier titleText:(NSString *)_titleText titleColor:(UIColor *)_titleColor subTitleText:(NSString *)_subTitleText iconName:(NSString *)_iconName hasSeparator:(BOOL)_hasSeparator isLink:(BOOL)_isLink linkText:(NSString *)_linkText cellHeight:(double)_cellHeight {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -65,11 +67,11 @@
     }
     return self;
 }
-- (id)initWithCellStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier titleText:(NSString *)_titleText subTitletext:(NSString *)_subTitleText toggleStatus:(BOOL)_toggleStatus {
+
+- (id)initWithCellStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier titleText:(NSString *)_titleText subTitletext:(NSString *)_subTitleText SwitchButtonStatus:(BOOL)_switchButtonStatus {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        hasToggle = YES;
-        toggleStatus = _toggleStatus;
+        switchButtonStatus = _switchButtonStatus;
         cellHeight = [subTitleText isEqualToString:@""] ? 54 : 69;
         titleText = _titleText;
         titleColor = [Util UIColorForHexColor:@"292F3E"];
@@ -86,7 +88,7 @@
         [self drawTitle];
         if (hasSubTitle)
             [self drawSubTitle];
-        [self drawToggleArea];
+        [self drawSwitchArea];
         [self drawSeparator];
     }
     return self;
@@ -97,6 +99,7 @@
     [titleLabel setText:titleText];
     titleLabel.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:titleFontSize];
     titleLabel.textColor = titleColor;
+    titleLabel.backgroundColor= [UIColor clearColor];
     [self addSubview:titleLabel];
 }
 
@@ -105,6 +108,7 @@
     [subTitleLabel setText:subTitleText];
     subTitleLabel.font = [UIFont fontWithName:@"TurkcellSaturaMed" size:16];
     subTitleLabel.textColor = [Util UIColorForHexColor:@"5D667C"];
+    subTitleLabel.backgroundColor= [UIColor clearColor];
     [self addSubview:subTitleLabel];
 }
 
@@ -125,21 +129,22 @@
         linkLabel.font = [UIFont fontWithName:@"TurkcellSaturaMed" size:17];
         linkLabel.textColor = [Util UIColorForHexColor:@"5D667C"];
         linkLabel.textAlignment = NSTextAlignmentRight;
+        linkLabel.backgroundColor= [UIColor clearColor];
         [self addSubview:linkLabel];
     }
 }
 
 - (void)drawTickArea {
-    if(checkStatus) {
-        UIImageView *tickIcon = [[UIImageView alloc]initWithFrame:CGRectMake(287, cellHeight/2-5.5, 14, 11)];
-        tickIcon.image = [UIImage imageNamed:@"tick_icon"];
-        [self addSubview:tickIcon];
-    }
+    tickIcon = [[UIImageView alloc]initWithFrame:CGRectMake(287, cellHeight/2-5.5, 14, 11)];
+    tickIcon.image = [UIImage imageNamed:@"tick_icon"];
+    tickIcon.hidden = !checkStatus;
+    [self addSubview:tickIcon];
 }
 
-- (void)drawToggleArea {
-    ToggleButton *toggleButton = [[ToggleButton alloc]initWithFrame:CGRectMake(249, cellHeight/2-16.5, 53, 32) withActiveImageName:@"toggle_on@2x" withDeactiveImageName:@"toggle_off@2x" isInitiallyActive:toggleStatus];
-    [self addSubview:toggleButton];
+- (void)drawSwitchArea {
+    self.switchButton = [[UISwitch alloc] initWithFrame:CGRectZero];
+    [self.switchButton setOn:switchButtonStatus animated:NO];
+    self.accessoryView = self.switchButton;
 }
 
 - (void)drawSeparator {
@@ -148,10 +153,16 @@
     [self addSubview:greyLine];
 }
 
+- (void)showTick {
+    tickIcon.hidden = NO;
+}
+
+- (void)hideTick {
+    tickIcon.hidden = YES;
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-    // Configure the view for the selected state
 }
 
 @end

@@ -8,13 +8,25 @@
 
 #import "MyViewController.h"
 #import "TitleCell.h"
+#import "CacheUtil.h"
 
-@interface SettingsController : MyViewController <UITableViewDataSource, UITableViewDelegate> {
+@interface SettingsController : MyViewController <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
+    UIImageView *profileImageView;
     UITableView *pageContentTable;
-    int topIndex;
     UIView *imageOptionsArea;
     UIView *darkArea;
     UIView *popupContainer;
+    UIImagePickerController *imagePicker;
+    UIImage *profileImage;
+    UIImage *newProfileImage;
+    NSString *profileName;
+    NSString *profilePhoneNumber;
+    CustomButton *cameraButton;
+    UILabel *cameraLabel;
+    CustomButton *uploadButton;
+    UILabel *uploadLabel;
+    CustomButton *removeButton;
+    UILabel *removeLabel;
 }
 
 @end

@@ -13,6 +13,9 @@
 #import "AppDelegate.h"
 #import "AppSession.h"
 #import "User.h"
+#import "SmsForPassButton.h"
+#import "MyMessageComposeViewController.h"
+#import "CacheUtil.h"
 
 @interface LoginController ()
 
@@ -35,19 +38,26 @@
         tokenDao.successMethod = @selector(tokenDaoSuccessCallback);
         tokenDao.failMethod = @selector(tokenDaoFailCallback:);
 
-        CustomLabel *msisdnLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 50, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"MsisdnTitle", @"")];
+        CustomLabel *msisdnLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(25, 50, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"MsisdnTitle", @"")];
         [self.view addSubview:msisdnLabel];
         
         msisdnField = [[LoginTextfield alloc] initWithFrame:CGRectMake(20, 75, self.view.frame.size.width - 40, 43) withPlaceholder:NSLocalizedString(@"MsisdnPlaceholder", @"")];
         msisdnField.delegate = self;
         [self.view addSubview:msisdnField];
 
-        CustomLabel *passLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 130, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"PasswordTitle", @"")];
+        CustomLabel *passLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(25, 130, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"PasswordTitle", @"")];
         [self.view addSubview:passLabel];
         
         passField = [[LoginTextfield alloc] initSecureWithFrame:CGRectMake(20, 155, self.view.frame.size.width - 40, 43) withPlaceholder:NSLocalizedString(@"PasswordPlaceholder", @"")];
         passField.delegate = self;
         [self.view addSubview:passField];
+
+        rememberMe = [[CheckButton alloc] initWithFrame:CGRectMake(25, 220, 120, 25) withTitle:NSLocalizedString(@"RememberMe", @"") isInitiallyChecked:NO];
+        [self.view addSubview:rememberMe];
+        
+        SmsForPassButton *smsButton = [[SmsForPassButton alloc] initWithFrame:CGRectMake(20, 280, 280, 40)];
+        [smsButton addTarget:self action:@selector(triggerSms) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:smsButton];
 
         SimpleButton *loginButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, self.view.frame.size.height - 134, self.view.frame.size.width - 40, 50) withTitle:NSLocalizedString(@"SignIn", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
         [loginButton addTarget:self action:@selector(loginClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -60,11 +70,9 @@
     [self hideLoading];
     
     User *user = [[User alloc] init];
-    user.msisdn = msisdnValue;
-    user.password = passValue;
-    APPDELEGATE.session.user = user;
     user.profileImgUrl = @"http://s.turkcell.com.tr/profile_img/532/225/cjXlJsupflKCNP2jmf23A.jpg?wruN55vtoNoCItHngeSqW9QN4XM1Y9qgZHRnZnp8bGOut1pQZOk1!207944990!1411130039277";
     user.fullName = @"Mahir Kemal Tarlan";
+    APPDELEGATE.session.user = user;
 
     [APPDELEGATE triggerPostLogin];
 }
@@ -85,6 +93,18 @@
     return YES;
 }
 
+- (void) triggerSms {
+    MyMessageComposeViewController *picker = [[MyMessageComposeViewController alloc] init];
+    picker.messageComposeDelegate = self;
+    picker.body = @"SIFRE";
+    picker.recipients = [NSArray arrayWithObjects:@"2222", nil];
+    [self presentViewController:picker animated:YES completion:nil];
+}
+
+-(void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result {
+    [controller dismissModalViewControllerAnimated:YES];
+}
+
 - (void) loginClicked {
     msisdnValue = msisdnField.text;
     passValue = passField.text;
@@ -98,7 +118,7 @@
         return;
     }
     
-    [tokenDao requestTokenForMsisdn:msisdnValue andPassword:passValue];
+    [tokenDao requestTokenForMsisdn:msisdnValue andPassword:passValue shouldRememberMe:rememberMe.isChecked];
     [self showLoading];
 }
 

@@ -16,6 +16,7 @@
 #import "AppDelegate.h"
 #import "AppSession.h"
 #import "BaseViewController.h"
+#import "MapUtil.h"
 
 #define IMG_FOOTER_TAG 111
 #define ALBUM_FOOTER_TAG 222
@@ -115,6 +116,13 @@
     [super viewDidAppear:animated];
     
     [self triggerRefresh];
+    
+    NSArray *addTypesForController = [APPDELEGATE.mapUtil readAddTypesByController:@"PhotoTab"];
+    if(!albumTable.hidden) {
+        addTypesForController = [APPDELEGATE.mapUtil readAddTypesByController:@"AlbumTab"];
+    }
+    [APPDELEGATE.base modifyAddButtonWithList:addTypesForController];
+
     /*
     listOffset = 0;
     [elasticSearchDao requestPhotosForPage:listOffset andSize:21 andSortType:APPDELEGATE.session.sortType];
@@ -262,6 +270,9 @@
 }
 
 - (void) photoHeaderDidSelectAlbumsSegment {
+    NSArray *addTypesForController = [APPDELEGATE.mapUtil readAddTypesByController:@"AlbumTab"];
+    [APPDELEGATE.base modifyAddButtonWithList:addTypesForController];
+
     albumTable.hidden = NO;
     photosScroll.hidden = YES;
 
@@ -278,6 +289,9 @@
 }
 
 - (void) photoHeaderDidSelectPhotosSegment {
+    NSArray *addTypesForController = [APPDELEGATE.mapUtil readAddTypesByController:@"PhotoTab"];
+    [APPDELEGATE.base modifyAddButtonWithList:addTypesForController];
+
     albumTable.hidden = YES;
     photosScroll.hidden = NO;
 

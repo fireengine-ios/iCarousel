@@ -42,9 +42,9 @@
     greyLine.backgroundColor = [Util UIColorForHexColor:@"E0E2E0"];
     [self addSubview:greyLine];
     
-//    UIView *tempLine = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 1)];
-//    tempLine.backgroundColor = [Util UIColorForHexColor:@"FF0000"];
-//    [self addSubview:tempLine];
+    //    UIView *tempLine = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 1)];
+    //    tempLine.backgroundColor = [Util UIColorForHexColor:@"FF0000"];
+    //    [self addSubview:tempLine];
 }
 
 - (void)awakeFromNib
@@ -55,7 +55,7 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 

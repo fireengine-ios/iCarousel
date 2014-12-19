@@ -12,7 +12,5 @@
 
 @property (nonatomic, strong) NSString *profileImgUrl;
 @property (nonatomic, strong) NSString *fullName;
-@property (nonatomic, strong) NSString *msisdn;
-@property (nonatomic, strong) NSString *password;
 
 @end
