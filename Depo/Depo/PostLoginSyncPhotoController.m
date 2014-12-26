@@ -17,6 +17,7 @@
 @implementation PostLoginSyncPhotoController
 
 @synthesize onOff;
+@synthesize assetsLibrary;
 
 - (id) init {
     if(self = [super init]) {
@@ -58,6 +59,31 @@
 }
 
 - (void) continueClicked {
+    if(onOff.isOn) {
+        self.assetsLibrary = [[ALAssetsLibrary alloc] init];
+        [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+            if(group == nil) {
+                [self postAssetPermission];
+            }
+        } failureBlock:^(NSError *error) {
+            [self showErrorAlertWithMessage:NSLocalizedString(@"ALAssetsAccessError", @"")];
+            /*
+            if (error.code == ALAssetsLibraryAccessGloballyDeniedError) {
+                [self showErrorAlertWithMessage:NSLocalizedString(@"", @"ALAssetsAccessError")];
+            } else if (error.code == ALAssetsLibraryAccessUserDeniedError) {
+                [self showErrorAlertWithMessage:NSLocalizedString(@"", @"ALAssetsAccessError")];
+            } else {
+                [self showErrorAlertWithMessage:NSLocalizedString(@"", @"ALAssetsAccessError")];
+            }
+             */
+        }];
+    } else {
+        PostLoginSyncContactController *contactPref = [[PostLoginSyncContactController alloc] init];
+        [self.navigationController pushViewController:contactPref animated:YES];
+    }
+}
+
+- (void) postAssetPermission {
     PostLoginSyncContactController *contactPref = [[PostLoginSyncContactController alloc] init];
     [self.navigationController pushViewController:contactPref animated:YES];
 }

@@ -142,7 +142,7 @@
 }
 
 - (void) dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:TEMP_IMG_UPLOAD_NOTIFICATION];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:TEMP_IMG_UPLOAD_NOTIFICATION object:nil];
 }
 
 /*

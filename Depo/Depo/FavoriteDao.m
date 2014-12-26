@@ -63,7 +63,7 @@
             }
             [self shouldReturnSuccessWithObject:result];
         } else {
-            [self shouldReturnSuccess];
+            [self shouldReturnSuccessWithObject:[NSNumber numberWithBool:self.newFavFlag]];
         }
 	} else {
         [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];

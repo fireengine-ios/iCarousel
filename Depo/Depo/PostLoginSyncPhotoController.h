@@ -7,9 +7,11 @@
 //
 
 #import "MyViewController.h"
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface PostLoginSyncPhotoController : MyViewController
 
 @property (nonatomic, strong) UISwitch *onOff;
+@property (nonatomic, strong) ALAssetsLibrary *assetsLibrary;
 
 @end

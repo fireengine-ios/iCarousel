@@ -65,7 +65,9 @@
 - (void) dismissMoreMenu;
 - (void) pushProgressViewWithProcessMessage:(NSString *) progressMsg andSuccessMessage:(NSString *) successMsg andFailMessage:(NSString *) failMsg;
 - (void) proceedSuccessForProgressView;
+- (void) proceedSuccessForProgressViewWithAddButtonKey:(NSString *) buttonKey;
 - (void) proceedFailureForProgressView;
+- (void) proceedFailureForProgressViewWithAddButtonKey:(NSString *) buttonKey;
 - (void) popProgressView;
 - (void) showAddButtonImmediately;
 

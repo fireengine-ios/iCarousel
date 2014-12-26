@@ -11,6 +11,7 @@
 #import "CustomLabel.h"
 #import "AppDelegate.h"
 #import "PostLoginPrefCell.h"
+#import "CacheUtil.h"
 
 @interface PostLoginSyncPrefController ()
 
@@ -21,6 +22,7 @@
 @synthesize onOff;
 @synthesize choiceTable;
 @synthesize choices;
+@synthesize selectedOption;
 
 - (id) init {
     if(self = [super init]) {
@@ -66,6 +68,8 @@
 }
 
 - (void) continueClicked {
+    [CacheUtil writeCachedSettingSyncingConnectionType:selectedOption];
+    [CacheUtil writeCachedSettingDataRoaming:onOff.isOn];
     [APPDELEGATE triggerHome];
 }
 
@@ -85,6 +89,14 @@
     NSString *cellIdentifier = [NSString stringWithFormat:@"PREF_CELL_%d", (int) indexPath.row];
     PostLoginPrefCell *cell = [[PostLoginPrefCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withTitle:[choices objectAtIndex:indexPath.row]];
     return cell;
+}
+
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(indexPath.row == 0) {
+        selectedOption = ConnectionOptionWifi3G;
+    } else {
+        selectedOption = ConnectionOptionWifi;
+    }
 }
 
 - (void)viewDidLoad {

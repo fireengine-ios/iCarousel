@@ -10,6 +10,7 @@
 #import "AppSession.h"
 #import "TokenManager.h"
 #import "MBProgressHUD.h"
+#import "SyncManager.h"
 
 @class CustomAlertView;
 @class CustomConfirmView;
@@ -28,6 +29,7 @@
 @property (strong, nonatomic) TokenManager *tokenManager;
 @property (strong, nonatomic) MapUtil *mapUtil;
 @property (strong, nonatomic) MBProgressHUD *progress;
+@property (strong, nonatomic) SyncManager *syncManager;
 
 - (void) showCustomAlert:(CustomAlertView *) alertView;
 - (void) showCustomConfirm:(CustomConfirmView *) alertView;

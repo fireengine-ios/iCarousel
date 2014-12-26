@@ -452,20 +452,6 @@
     return @"";
 }
 
-+ (NSDate *) readLastSyncDate {
-    return [[NSUserDefaults standardUserDefaults] objectForKey:LAST_SYNC_DATE];
-}
-
-+ (void) writeLastSyncDate:(NSDate *) syncDate {
-    [[NSUserDefaults standardUserDefaults] setObject:syncDate forKey:LAST_SYNC_DATE];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-+ (void) updateLastSyncDate {
-    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:LAST_SYNC_DATE];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
 + (BOOL) readFirstVisitOverFlag {
     //TODO sil ve son satırı aç
     return NO;

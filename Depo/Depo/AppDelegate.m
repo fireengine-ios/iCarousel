@@ -16,6 +16,7 @@
 #import "MapUtil.h"
 #import "AppUtil.h"
 #import "CacheUtil.h"
+#import "SyncUtil.h"
 #import "PreLoginController.h"
 #import "LoginController.h"
 #import "PostLoginSyncPhotoController.h"
@@ -27,6 +28,7 @@
 @synthesize tokenManager;
 @synthesize mapUtil;
 @synthesize progress;
+@synthesize syncManager;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -36,8 +38,8 @@
     }
     
     //TODO sil
-    if([AppUtil readLastSyncDate] == nil) {
-        [AppUtil updateLastSyncDate];
+    if([SyncUtil readLastSyncDate] == nil) {
+        [SyncUtil updateLastSyncDate];
     }
     
     session = [[AppSession alloc] init];
@@ -52,6 +54,8 @@
 
     tokenManager = [[TokenManager alloc] init];
     tokenManager.delegate = self;
+    
+    self.syncManager = [[SyncManager alloc] init];
 
     if([CacheUtil readRememberMeToken] != nil) {
         [tokenManager requestToken];

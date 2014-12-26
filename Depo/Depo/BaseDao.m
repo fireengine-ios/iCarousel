@@ -174,6 +174,7 @@
     NSNumber *bytes = [dict objectForKey:@"bytes"];
     NSNumber *folder = [dict objectForKey:@"folder"];
     NSNumber *hidden = [dict objectForKey:@"hidden"];
+    NSNumber *childCount = [dict objectForKey:@"childCount"];
     NSString *path = [dict objectForKey:@"path"];
     NSString *tempDownloadURL = [dict objectForKey:@"tempDownloadURL"];
     NSString *last_modified = [dict objectForKey:@"lastModifiedDate"];
@@ -195,6 +196,7 @@
     file.contentType = [self contentTypeByRawValue:file];
     file.visibleName = [AppUtil nakedFileFolderName:file.name];
     file.contentLengthDisplay = @"02:04";
+    file.itemCount = [self intByNumber:childCount];
     
     NSDictionary *detailDict = [dict objectForKey:@"metadata"];
     if(detailDict != nil && ![detailDict isKindOfClass:[NSNull class]]) {

@@ -47,7 +47,7 @@
 
 #define UPLOAD_NOTIFY_URL BASE_URL@"/notification/onFileUpload?parentFolderUuid=%@&fileName=%@"
 
-#define ALBUM_LIST_URL BASE_URL@"/album?contentType=application/photo&page=%d&size=%d&sortBy=label&sortOrder=ASC"
+#define ALBUM_LIST_URL BASE_URL@"/album?contentType=album/photo&page=%d&size=%d&sortBy=label&sortOrder=ASC"
 
 #define ALBUM_DETAIL_URL BASE_URL@"/album/%@?page=%d&size=%d&sortBy=createdDate&sortOrder=DESC&"
 

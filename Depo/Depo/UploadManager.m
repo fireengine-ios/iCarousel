@@ -61,10 +61,11 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 }
 
 - (void) startUploadingData:(NSData *) _dataToUpload atFolder:(MetaFile *) _folder withFileName:(NSString *) fileName {
-    NSString *newUuid = [[NSUUID UUID] UUIDString];
     self.folder = _folder;
     
+    NSString *newUuid = [[NSUUID UUID] UUIDString];
     self.uploadRef.fileUuid = newUuid;
+
     self.uploadRef.urlForUpload = [NSString stringWithFormat:@"%@/%@", APPDELEGATE.session.baseUrl, newUuid];
     self.uploadRef.folderUuid = _folder ? _folder.uuid : nil;
     

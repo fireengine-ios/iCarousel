@@ -13,5 +13,6 @@
 @property (nonatomic, strong) UISwitch *onOff;
 @property (nonatomic, strong) UITableView *choiceTable;
 @property (nonatomic, strong) NSMutableArray *choices;
+@property (nonatomic) ConnectionOption selectedOption;
 
 @end

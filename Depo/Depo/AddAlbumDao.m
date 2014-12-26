@@ -13,7 +13,7 @@
 - (void) requestAddAlbumWithName:(NSString *) name {
 	NSURL *url = [NSURL URLWithString:ADD_ALBUM_URL];
 	
-    NSDictionary *payload = [NSDictionary dictionaryWithObjectsAndKeys:name, @"label", @"application/photo", @"contentType", nil];
+    NSDictionary *payload = [NSDictionary dictionaryWithObjectsAndKeys:name, @"label", @"album/photo", @"contentType", nil];
     
     SBJSON *json = [SBJSON new];
     NSString *jsonStr = [json stringWithObject:payload];

@@ -12,6 +12,7 @@
 #import "BaseViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "AppUtil.h"
+#import "SyncUtil.h"
 
 @interface HomeController ()
 
@@ -65,8 +66,8 @@
                            [Util UIColorForHexColor:@"f8f9f8"], nil];
 
         NSString *lastSyncTitle = NSLocalizedString(@"LastSyncNone", @"");
-        if([AppUtil readLastSyncDate] != nil) {
-            lastSyncTitle = [NSString stringWithFormat:NSLocalizedString(@"LastSyncFormat", @""), [AppUtil readDueDateInReadableFormat:[AppUtil readLastSyncDate]]];
+        if([SyncUtil readLastSyncDate] != nil) {
+            lastSyncTitle = [NSString stringWithFormat:NSLocalizedString(@"LastSyncFormat", @""), [AppUtil readDueDateInReadableFormat:[SyncUtil readLastSyncDate]]];
         }
         lastSyncLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, IS_IPHONE_5 ? 18 : 8, self.view.frame.size.width - 40, 18) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:15] withColor:[Util UIColorForHexColor:@"7b8497"] withText:lastSyncTitle withAlignment:NSTextAlignmentCenter];
         [self.view addSubview:lastSyncLabel];

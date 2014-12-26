@@ -194,6 +194,13 @@
     [self performSelector:@selector(showAddButtonImmediately) withObject:nil afterDelay:1.2f];
 }
 
+- (void) proceedSuccessForProgressViewWithAddButtonKey:(NSString *) buttonKey {
+    if(processView) {
+        [processView showMessageForSuccess];
+    }
+    [self performSelector:@selector(showAddButtonImmediately:) withObject:buttonKey afterDelay:1.2f];
+}
+
 - (void) proceedFailureForProgressView {
     if(processView) {
         [processView showMessageForFailure];
@@ -201,10 +208,25 @@
     [self performSelector:@selector(showAddButtonImmediately) withObject:nil afterDelay:1.2f];
 }
 
+- (void) proceedFailureForProgressViewWithAddButtonKey:(NSString *) buttonKey {
+    if(processView) {
+        [processView showMessageForFailure];
+    }
+    [self performSelector:@selector(showAddButtonImmediately:) withObject:buttonKey afterDelay:1.2f];
+}
+
 - (void) showAddButtonImmediately {
     NSArray *addTypesForController = [APPDELEGATE.mapUtil readAddTypesByController:NSStringFromClass(self.class)];
     if(addTypesForController != nil) {
         [APPDELEGATE.base immediateShowAddButton];
+    }
+}
+
+- (void) showAddButtonImmediately:(NSString *) key {
+    NSArray *addTypesForKey = [APPDELEGATE.mapUtil readAddTypesByController:key];
+    if(addTypesForKey != nil) {
+        [APPDELEGATE.base immediateShowAddButton];
+        [APPDELEGATE.base modifyAddButtonWithList:addTypesForKey];
     }
 }
 

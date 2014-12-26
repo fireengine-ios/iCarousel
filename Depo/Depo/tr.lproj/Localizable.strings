@@ -340,3 +340,5 @@
 "SyncContactsTitle"="Kontakları Senkronize Et";
 "DataRoamingTitle"="Data Roaming";
 "DataRoamingSubTitle"="Yurtdışında oto yükleme";
+
+"ALAssetsAccessError"="Resimlere erişilemiyor. Lütfen telefon ayarlarınızı kontrol ediniz.";

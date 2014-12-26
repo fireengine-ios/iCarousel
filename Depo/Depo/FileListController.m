@@ -232,6 +232,7 @@
                         cell = [[FolderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex isSelectible:isSelectible];
                         break;
                     case ContentTypePhoto:
+                    case ContentTypeVideo:
                         cell = [[ImageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex isSelectible:isSelectible];
                         break;
                     case ContentTypeMusic:
@@ -510,7 +511,7 @@
     uploadRef.contentType = ContentTypePhoto;
     
     uploadManager = [[UploadManager alloc] initWithUploadReference:uploadRef];
-    [uploadManager startUploadingFile:filePath atFolder:nil withFileName:fileName];
+    [uploadManager startUploadingFile:filePath atFolder:self.folder withFileName:fileName];
     [APPDELEGATE.session.uploadManagers addObject:uploadManager];
     
     fileList = [@[uploadRef] arrayByAddingObjectsFromArray:fileList];

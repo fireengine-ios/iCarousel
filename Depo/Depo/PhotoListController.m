@@ -212,14 +212,14 @@
 }
 
 - (void) addAlbumSuccessCallback {
-    [self proceedSuccessForProgressView];
+    [self proceedSuccessForProgressViewWithAddButtonKey:albumTable.hidden ? @"PhotoTab" : @"AlbumTab"];
     [self performSelector:@selector(popProgressView) withObject:nil afterDelay:1.0f];
     
     [albumListDao requestAlbumListForStart:0 andSize:50];
 }
 
 - (void) addAlbumFailCallback:(NSString *) errorMessage {
-    [self proceedFailureForProgressView];
+    [self proceedFailureForProgressViewWithAddButtonKey:albumTable.hidden ? @"PhotoTab" : @"AlbumTab"];
     [self performSelector:@selector(popProgressView) withObject:nil afterDelay:1.0f];
 }
 
@@ -228,12 +228,12 @@
         [self cancelSelectible];
     }
     
-    [self proceedSuccessForProgressView];
+    [self proceedSuccessForProgressViewWithAddButtonKey:albumTable.hidden ? @"PhotoTab" : @"AlbumTab"];
     [self triggerRefresh];
 }
 
 - (void) deleteFailCallback:(NSString *) errorMessage {
-    [self proceedFailureForProgressView];
+    [self proceedFailureForProgressViewWithAddButtonKey:albumTable.hidden ? @"PhotoTab" : @"AlbumTab"];
     [self showErrorAlertWithMessage:errorMessage];
 }
 
@@ -242,14 +242,14 @@
         [self cancelSelectible];
     }
     
-    [self proceedSuccessForProgressView];
+    [self proceedSuccessForProgressViewWithAddButtonKey:albumTable.hidden ? @"PhotoTab" : @"AlbumTab"];
 
     self.tableUpdateCounter ++;
     [albumListDao requestAlbumListForStart:0 andSize:50];
 }
 
 - (void) deleteAlbumFailCallback:(NSString *) errorMessage {
-    [self proceedFailureForProgressView];
+    [self proceedFailureForProgressViewWithAddButtonKey:albumTable.hidden ? @"PhotoTab" : @"AlbumTab"];
     [self showErrorAlertWithMessage:errorMessage];
 }
 
@@ -258,14 +258,14 @@
         [self cancelSelectible];
     }
     
-    [self proceedSuccessForProgressView];
+    [self proceedSuccessForProgressViewWithAddButtonKey:albumTable.hidden ? @"PhotoTab" : @"AlbumTab"];
     
     self.tableUpdateCounter ++;
     [albumListDao requestAlbumListForStart:0 andSize:50];
 }
 
 - (void) photosAddedFailCallback:(NSString *) errorMessage {
-    [self proceedFailureForProgressView];
+    [self proceedFailureForProgressViewWithAddButtonKey:albumTable.hidden ? @"PhotoTab" : @"AlbumTab"];
     [self showErrorAlertWithMessage:errorMessage];
 }
 

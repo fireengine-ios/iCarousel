@@ -147,6 +147,20 @@
 }
 
 - (void) multipleUploadFooterDidTriggerDeselectAll {
+    if(mainScroll) {
+        for(UIView *innerView in mainScroll.subviews) {
+            if([innerView isKindOfClass:[SelectibleAssetView class]]) {
+                SelectibleAssetView *assetView = (SelectibleAssetView *) innerView;
+                if(assetView.isSelected) {
+                    [assetView manuallyDeselect];
+                    if([selectedAssets containsObject:assetView.asset]) {
+                        [selectedAssets removeObject:assetView.asset];
+                    }
+                }
+            }
+        }
+        self.title = [NSString stringWithFormat:NSLocalizedString(@"AddPhotosTitle", @""), [selectedAssets count], [assets count]];
+    }
 }
 
 - (void)viewDidLoad
