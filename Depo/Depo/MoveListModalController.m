@@ -21,6 +21,7 @@
 @synthesize folder;
 @synthesize folderTable;
 @synthesize folderList;
+@synthesize prohibitedList;
 @synthesize footerView;
 @synthesize exludingFolderUuid;
 
@@ -29,10 +30,15 @@
 }
 
 - (id)initForFolder:(MetaFile *) _folder withExludingFolder:(NSString *) _exludingFolderUuid {
+    return [self initForFolder:_folder withExludingFolder:_exludingFolderUuid withProhibitedFolders:nil];
+}
+
+- (id)initForFolder:(MetaFile *) _folder withExludingFolder:(NSString *) _exludingFolderUuid withProhibitedFolders:(NSArray *) prohibitedFolderList {
     if(self = [super init]) {
         self.view.backgroundColor = [UIColor whiteColor];
         self.folder = _folder;
         self.exludingFolderUuid = _exludingFolderUuid;
+        self.prohibitedList = prohibitedFolderList;
         self.title = @" ";
 
         CustomButton *cancelButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 60, 20) withImageName:nil withTitle:NSLocalizedString(@"ButtonCancel", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[UIColor whiteColor]];
@@ -64,17 +70,23 @@
 }
 
 - (void) fileListSuccessCallback:(NSArray *) files {
-    if(self.exludingFolderUuid) {
-        NSMutableArray *filteredList = [[NSMutableArray alloc] init];
-        for(MetaFile *row in files) {
-            if(![row.uuid isEqualToString:self.exludingFolderUuid]) {
-                [filteredList addObject:row];
+    NSMutableArray *filteredList = [[NSMutableArray alloc] init];
+    for(MetaFile *row in files) {
+        if(self.exludingFolderUuid != nil) {
+            if([row.uuid isEqualToString:self.exludingFolderUuid]) {
+                continue;
+            }
+        
+        }
+        if(self.prohibitedList != nil) {
+            if([self.prohibitedList containsObject:row.uuid]) {
+                continue;
             }
         }
-        self.folderList = filteredList;
-    } else {
-        self.folderList = files;
+        [filteredList addObject:row];
     }
+    self.folderList = filteredList;
+
     [folderTable reloadData];
 }
 

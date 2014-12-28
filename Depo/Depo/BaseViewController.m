@@ -435,6 +435,13 @@
     [self presentViewController:modalNav animated:YES completion:nil];
 }
 
+- (void) showMoveFoldersWithExludingFolder:(NSString *) exludingFolderUuid withProhibitedFolderList:(NSArray *) prohibitedList {
+    MoveListModalController *move = [[MoveListModalController alloc] initForFolder:nil withExludingFolder:exludingFolderUuid withProhibitedFolders:prohibitedList];
+    move.delegate = [self.nav topViewController];
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:move];
+    [self presentViewController:modalNav animated:YES completion:nil];
+}
+
 - (void) showPhotoAlbums {
     PhotoAlbumListModalController *albumList = [[PhotoAlbumListModalController alloc] init];
     albumList.delegate = [self.nav topViewController];

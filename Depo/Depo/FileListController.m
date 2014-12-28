@@ -352,9 +352,8 @@
 }
 
 - (void) fileFolderCellShouldMoveForFile:(MetaFile *)fileSelected {
-    //TESTTT
     selectedFileList = [[NSMutableArray alloc] initWithObjects:fileSelected.uuid, nil];
-    [APPDELEGATE.base showMoveFoldersWithExludingFolder:self.folder.uuid];
+    [APPDELEGATE.base showMoveFoldersWithExludingFolder:self.folder.uuid withProhibitedFolderList:selectedFileList];
 }
 
 - (void) fileFolderCellDidSelectFile:(MetaFile *)fileSelected {
@@ -645,7 +644,7 @@
 }
 
 - (void) footerActionMenuDidSelectMove:(FooterActionsMenuView *) menu {
-    [APPDELEGATE.base showMoveFoldersWithExludingFolder:self.folder.uuid];
+    [APPDELEGATE.base showMoveFoldersWithExludingFolder:self.folder.uuid withProhibitedFolderList:selectedFileList];
 }
 
 - (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {

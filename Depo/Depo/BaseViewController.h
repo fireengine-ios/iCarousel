@@ -38,6 +38,7 @@
 - (void) showSelect;
 - (void) showMoveFolders;
 - (void) showMoveFoldersWithExludingFolder:(NSString *) exludingFolderUuid;
+- (void) showMoveFoldersWithExludingFolder:(NSString *) exludingFolderUuid withProhibitedFolderList:(NSArray *) prohibitedList;
 - (void) showPhotoAlbums;
 - (void) showRecentActivities;
 - (void) showFolderDetailForFolder:(MetaFile *) folder;
