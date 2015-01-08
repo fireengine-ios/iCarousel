@@ -41,6 +41,7 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
         self.clipsToBounds = YES;
         self.maxLandscapeRect = CGRectMake(frame.origin.x, frame.origin.y, APPDELEGATE.window.frame.size.height-frame.origin.x, APPDELEGATE.window.frame.size.width-frame.origin.y);
 
+        [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(orientationChanged:)    name:UIDeviceOrientationDidChangeNotification  object:nil];
     }
     return self;
 }
@@ -133,6 +134,7 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
 	
     if (!player) {
         self.player = [AVPlayer playerWithPlayerItem:self.mPlayerItem];
+
         playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
         playerLayer.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
         [self.layer addSublayer:playerLayer];
@@ -365,7 +367,7 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
 - (void) updateFrame:(CGRect) newFrame isMax:(BOOL) isMax {
     self.frame = newFrame;
     playerLayer.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
-    controlView.frame = CGRectMake(0, self.frame.size.height-40, self.frame.size.width, 40);
+    controlView.frame = CGRectMake(0, self.frame.size.height-110, self.frame.size.width, 110);
     [controlView updateInnerFrames];
 }
 
@@ -389,6 +391,12 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
     }
 }
 
+- (void)orientationChanged:(NSNotification *)notification {
+    if (self.player.rate > 0 && !self.player.error) {
+        [self mirrorRotation:[[UIApplication sharedApplication] statusBarOrientation]];
+    }
+}
+
 - (void) mirrorRotation:(UIInterfaceOrientation) orientation {
     if(IS_IPAD)
         return;
@@ -399,12 +407,19 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
     }
 
     if(orientation == UIInterfaceOrientationLandscapeLeft ) {
-        [self updateFrame:self.maxLandscapeRect isMax:YES];
+        playerLayer.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+        controlView.frame = CGRectMake(0, maxLandscapeRect.size.height-130, maxLandscapeRect.size.width, 110);
+        [controlView updateInnerFrames];
     } else if(orientation == UIInterfaceOrientationLandscapeRight) {
-        [self updateFrame:self.maxLandscapeRect isMax:YES];
+        playerLayer.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+        controlView.frame = CGRectMake(0, maxLandscapeRect.size.height-130, maxLandscapeRect.size.width, 110);
+        [controlView updateInnerFrames];
     } else {
-        [self updateFrame:initialRect isMax:NO];
+        playerLayer.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+        controlView.frame = CGRectMake(0, self.frame.size.height-110, self.frame.size.width, 110);
+        [controlView updateInnerFrames];
     }
 }
+
 
 @end

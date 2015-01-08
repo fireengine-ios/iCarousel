@@ -29,6 +29,7 @@
 @synthesize mapUtil;
 @synthesize progress;
 @synthesize syncManager;
+@synthesize uploadQueue;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -43,6 +44,8 @@
     }
     
     session = [[AppSession alloc] init];
+    
+    uploadQueue = [[UploadQueue alloc] init];
     
     mapUtil = [[MapUtil alloc] init];
     

@@ -31,7 +31,10 @@
 @property (nonatomic, strong) UILabel *totalDuration;
 @property (nonatomic, strong) UILabel *passedDuration;
 @property (nonatomic, strong) NSMutableArray *volumeLevels;
+@property (nonatomic, strong) UIView *separator;
 @property (nonatomic, strong) UISlider *slider;
+@property (nonatomic, strong) CustomButton *volumeMuteButton;
+@property (nonatomic, strong) CustomButton *volumeFullButton;
 @property (nonatomic) int totalTimeInSec;
 
 - (id)initWithFrame:(CGRect)frame withTotalDuration:(NSString *) totalDur;

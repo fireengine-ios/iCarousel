@@ -36,7 +36,7 @@
         detailLabel = [[CustomLabel alloc] initWithFrame:detailFieldRect withFont:detailFont withColor:[self readDetailColor] withText:NSLocalizedString(@"UploadingPlaceholder", @"")];
         [self addSubview:detailLabel];
 
-        for(UploadManager *manager in APPDELEGATE.session.uploadManagers) {
+        for(UploadManager *manager in APPDELEGATE.uploadQueue.uploadManagers) {
             if(!manager.hasFinished && [manager.uploadRef.fileUuid isEqualToString:self.uploadRef.fileUuid]) {
                 manager.delegate = self;
             }

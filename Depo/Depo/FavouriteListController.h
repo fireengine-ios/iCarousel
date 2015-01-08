@@ -10,8 +10,8 @@
 #import "FavoriteDao.h"
 
 
-@interface FavouriteListController : MyViewController <UITableViewDelegate, UITableViewDataSource>
-{
+@interface FavouriteListController : MyViewController <UITableViewDelegate, UITableViewDataSource> {
+    FavoriteDao *listDao;
     FavoriteDao *favoriteDao;
     int listOffset;
     BOOL isLoading;

@@ -15,17 +15,16 @@
 @synthesize user;
 @synthesize authToken;
 @synthesize baseUrl;
-@synthesize uploadManagers;
 @synthesize sortType;
 @synthesize playerItemFilesRef;
 @synthesize playerItems;
 @synthesize playerItem;
 @synthesize audioPlayer;
 @synthesize currentAudioItemIndex;
+@synthesize usage;
 
 - (id) init {
     if(self = [super init]) {
-        self.uploadManagers = [[NSMutableArray alloc] init];
         self.sortType = SortTypeAlphaDesc;
 
         if([CacheUtil readRememberMeToken] != nil) {
@@ -38,44 +37,6 @@
         //5322109094 for presentation
     }
     return self;
-}
-
-- (NSArray *) uploadRefsForFolder:(NSString *) folderUuid {
-    NSMutableArray *result = [[NSMutableArray alloc] init];
-    for(UploadManager *manager in self.uploadManagers) {
-        if(!manager.hasFinished) {
-            if(manager.uploadRef.folderUuid == nil && folderUuid == nil) {
-                [result addObject:manager.uploadRef];
-            } else if([folderUuid isEqualToString:manager.uploadRef.folderUuid]){
-                [result addObject:manager.uploadRef];
-            }
-        }
-    }
-    return result;
-}
-
-- (NSArray *) uploadImageRefs {
-    NSMutableArray *result = [[NSMutableArray alloc] init];
-    for(UploadManager *manager in self.uploadManagers) {
-        if(!manager.hasFinished) {
-            if(manager.uploadRef.contentType == ContentTypePhoto || manager.uploadRef.contentType == ContentTypeVideo) {
-                [result addObject:manager.uploadRef];
-            }
-        }
-    }
-    return result;
-}
-
-- (NSArray *) uploadImageRefsForAlbum:(NSString *) albumUuid {
-    NSMutableArray *result = [[NSMutableArray alloc] init];
-    for(UploadManager *manager in self.uploadManagers) {
-        if(!manager.hasFinished && [manager.uploadRef.albumUuid isEqualToString:albumUuid]) {
-            if(manager.uploadRef.contentType == ContentTypePhoto || manager.uploadRef.contentType == ContentTypeVideo) {
-                [result addObject:manager.uploadRef];
-            }
-        }
-    }
-    return result;
 }
 
 - (void) playAudioItem {

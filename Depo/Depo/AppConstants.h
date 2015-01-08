@@ -57,6 +57,10 @@
 
 #define CONFIRM_DELETE_HIDDEN_KEY @"CONFIRM_DELETE_HIDDEN_KEY"
 
+#define SYNCED_REMOTE_HASHES_KEY @"SYNCED_REMOTE_HASHES_KEY"
+
+#define SYNCED_LOCAL_HASHES_KEY @"SYNCED_LOCAL_HASHES_KEY"
+
 #define CONTENT_TYPE_JPEG_VALUE @"image/jpeg"
 
 #define CONTENT_TYPE_JPG_VALUE @"image/jpg"
@@ -114,6 +118,8 @@
 #define SETTINGS_UPLOAD_CONTACTS @"SETTINGS_UPLOAD_CONTACTS"
 
 #define SETTINGS_NOTIFICATIONS @"SETTINGS_NOTIFICATIONS"
+
+#define MAX_CONCURRENT_UPLOAD_TASKS 6
 
 #define SuppressPerformSelectorLeakWarning(Stuff) \
 do { \
@@ -174,6 +180,7 @@ typedef enum {
 	MoreMenuTypeFileDetail,
     MoreMenuTypeFolderDetail,
     MoreMenuTypeAlbumDetail,
+    MoreMenuTypeVideoDetail,
 	MoreMenuTypeShare,
     MoreMenuTypeAlbumShare,
 	MoreMenuTypeFav,
@@ -212,6 +219,7 @@ typedef enum {
     UsageTypeImage = 0,
     UsageTypeMusic,
     UsageTypeOther,
+    UsageTypeVideo,
     UsageTypeContact
 } UsageType;
 
@@ -240,6 +248,12 @@ typedef enum {
     SearchListTypeMusics,
     SearchListTypeDocumnets
 } SearchListType;
+
+typedef enum {
+    UploadTaskTypeAsset = 0,
+    UploadTaskTypeData,
+    UploadTaskTypeFile
+} UploadTaskType;
 
 @interface AppConstants : NSObject
 

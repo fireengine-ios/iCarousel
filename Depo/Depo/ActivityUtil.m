@@ -55,7 +55,7 @@
             }
         }
         
-        if([activity.rawActivityType isEqualToString:@"FAVOURITE"]) {
+        if([activity.rawActivityType isEqualToString:@"FAVOURITE"] || [activity.rawActivityType isEqualToString:@"FAVOURITED"]) {
             [keyVal appendString:@"Favorited"];
         } else if([activity.rawActivityType isEqualToString:@"DELETED"]) {
             [keyVal appendString:@"Deleted"];
@@ -63,8 +63,12 @@
             [keyVal appendString:@"Moved"];
         } else if([activity.rawActivityType isEqualToString:@"RENAMED"]) {
             [keyVal appendString:@"Renamed"];
-        } else if([activity.rawActivityType isEqualToString:@"ADDED"]) {
+        } else if([activity.rawActivityType isEqualToString:@"ADDED"] || [activity.rawActivityType isEqualToString:@"CREATED"]) {
             [keyVal appendString:@"Added"];
+        } else if([activity.rawActivityType isEqualToString:@"COPIED"]) {
+            [keyVal appendString:@"Copied"];
+        } else if([activity.rawActivityType isEqualToString:@"UPDATED"]) {
+            [keyVal appendString:@"Updated"];
         }
         
         activity.title = [NSString stringWithFormat:NSLocalizedString(keyVal, @""), [activity.actionItemList count] == 0 ? 1 : [activity.actionItemList count]];

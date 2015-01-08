@@ -13,6 +13,12 @@
 #import <QuartzCore/QuartzCore.h>
 #import "AppUtil.h"
 #import "SyncUtil.h"
+#import "Usage.h"
+#import "SettingsStorageController.h"
+#import "FileListController.h"
+#import "PhotoListController.h"
+#import "DocListController.h"
+#import "MusicListController.h"
 
 @interface HomeController ()
 
@@ -32,7 +38,7 @@
 @synthesize imageButton;
 @synthesize musicButton;
 @synthesize otherButton;
-@synthesize contactButton;
+@synthesize videoButton;
 
 - (id)init {
     self = [super init];
@@ -42,35 +48,10 @@
         
         self.navigationItem.titleView = imgForTitle;
         
-        //TODO temizle
-        self.usage = [[Usage alloc] init];
-        usage.totalStorage = 10485760;
-        usage.musicUsage = 2097152;
-        usage.imageUsage = 3145728;
-        usage.contactUsage = 1048576;
-        usage.otherUsage = 1572864;
-        usage.remainingStorage = 2621440;
-        
-        self.usages = [NSMutableArray arrayWithCapacity:5];
-        [usages addObject:[NSNumber numberWithFloat:usage.imageUsage]];
-        [usages addObject:[NSNumber numberWithFloat:usage.musicUsage]];
-        [usages addObject:[NSNumber numberWithFloat:usage.otherUsage]];
-        [usages addObject:[NSNumber numberWithFloat:usage.contactUsage]];
-        [usages addObject:[NSNumber numberWithFloat:usage.remainingStorage]];
-        
-        self.usageColors =[NSArray arrayWithObjects:
-                           [Util UIColorForHexColor:@"fcd02b"],
-                           [Util UIColorForHexColor:@"84c9b7"],
-                           [Util UIColorForHexColor:@"579fb2"],
-                           [Util UIColorForHexColor:@"ec6453"],
-                           [Util UIColorForHexColor:@"f8f9f8"], nil];
-
-        NSString *lastSyncTitle = NSLocalizedString(@"LastSyncNone", @"");
-        if([SyncUtil readLastSyncDate] != nil) {
-            lastSyncTitle = [NSString stringWithFormat:NSLocalizedString(@"LastSyncFormat", @""), [AppUtil readDueDateInReadableFormat:[SyncUtil readLastSyncDate]]];
-        }
-        lastSyncLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, IS_IPHONE_5 ? 18 : 8, self.view.frame.size.width - 40, 18) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:15] withColor:[Util UIColorForHexColor:@"7b8497"] withText:lastSyncTitle withAlignment:NSTextAlignmentCenter];
-        [self.view addSubview:lastSyncLabel];
+        usageDao = [[UsageInfoDao alloc] init];
+        usageDao.delegate = self;
+        usageDao.successMethod = @selector(usageSuccessCallback:);
+        usageDao.failMethod = @selector(usageFailCallback:);
         
         usageChart = [[XYPieChart alloc] initWithFrame:CGRectMake(60, IS_IPHONE_5 ? 40 : 26, 200, 200)];
         usageChart.dataSource = self;
@@ -85,32 +66,24 @@
         usageChart.userInteractionEnabled = NO;
         usageChart.labelShadowColor = [UIColor blackColor];
         [self.view addSubview:usageChart];
-        
-        usageSummaryView = [[HomeUsageView alloc] initWithFrame:CGRectMake((usageChart.frame.size.width - 130)/2, (usageChart.frame.size.height - 130)/2, 130, 130) withUsage:self.usage];
-        [usageChart addSubview:usageSummaryView];
+
+        NSString *lastSyncTitle = NSLocalizedString(@"LastSyncNone", @"");
+        if([SyncUtil readLastSyncDate] != nil) {
+            lastSyncTitle = [NSString stringWithFormat:NSLocalizedString(@"LastSyncFormat", @""), [AppUtil readDueDateInReadableFormat:[SyncUtil readLastSyncDate]]];
+        }
+        lastSyncLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, IS_IPHONE_5 ? 18 : 8, self.view.frame.size.width - 40, 18) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:15] withColor:[Util UIColorForHexColor:@"7b8497"] withText:lastSyncTitle withAlignment:NSTextAlignmentCenter];
+        [self.view addSubview:lastSyncLabel];
         
         moreStorageButton = [[SimpleButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 150)/2, usageChart.frame.origin.y + usageChart.frame.size.height + (IS_IPHONE_5 ? 20 : 0), 150, 44) withTitle:NSLocalizedString(@"GetMoreStorageButtonTitle", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:22];
+        [moreStorageButton addTarget:self action:@selector(triggerStoragePage) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:moreStorageButton];
         
-        UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(20, moreStorageButton.frame.origin.y + moreStorageButton.frame.size.height + (IS_IPHONE_5 ? 20: 5), self.view.frame.size.width - 40, 1)];
-        separator.backgroundColor = [Util UIColorForHexColor:@"ebebed"];
-        [self.view addSubview:separator];
-        
-        imageButton = [[UsageButton alloc] initWithFrame:CGRectMake(20, separator.frame.origin.y + (IS_IPHONE_5 ? 41 : 11), 70, 60) withUsage:UsageTypeImage withStorage:self.usage.imageUsage];
-        [self.view addSubview:imageButton];
-
-        musicButton = [[UsageButton alloc] initWithFrame:CGRectMake(90, separator.frame.origin.y + (IS_IPHONE_5 ? 41 : 11), 70, 60) withUsage:UsageTypeMusic withStorage:self.usage.musicUsage];
-        [self.view addSubview:musicButton];
-
-        otherButton = [[UsageButton alloc] initWithFrame:CGRectMake(160, separator.frame.origin.y + (IS_IPHONE_5 ? 41 : 11), 70, 60) withUsage:UsageTypeOther withStorage:self.usage.otherUsage];
-        [self.view addSubview:otherButton];
-        
-        contactButton = [[UsageButton alloc] initWithFrame:CGRectMake(230, separator.frame.origin.y + (IS_IPHONE_5 ? 41 : 11), 70, 60) withUsage:UsageTypeContact withStorage:self.usage.contactUsage];
-        [self.view addSubview:contactButton];
-
         footer = [[RecentActivityLinkerFooter alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60)];
         footer.delegate = self;
         [self.view addSubview:footer];
+        
+        [usageDao requestUsageInfo];
+        [self showLoading];
     }
     return self;
 }
@@ -159,10 +132,92 @@
     NSLog(@"did select slice at index %d",index);
 }
 
+- (void) usageSuccessCallback:(Usage *) _usage {
+    [self hideLoading];
+    APPDELEGATE.session.usage = _usage;
+    
+    self.usages = [NSMutableArray arrayWithCapacity:5];
+    [usages addObject:[NSNumber numberWithFloat:APPDELEGATE.session.usage.imageUsage]];
+    [usages addObject:[NSNumber numberWithFloat:APPDELEGATE.session.usage.musicUsage]];
+    [usages addObject:[NSNumber numberWithFloat:APPDELEGATE.session.usage.otherUsage]];
+    [usages addObject:[NSNumber numberWithFloat:APPDELEGATE.session.usage.videoUsage]];
+    [usages addObject:[NSNumber numberWithFloat:APPDELEGATE.session.usage.remainingStorage]];
+    
+    self.usageColors =[NSArray arrayWithObjects:
+                       [Util UIColorForHexColor:@"fcd02b"],
+                       [Util UIColorForHexColor:@"84c9b7"],
+                       [Util UIColorForHexColor:@"579fb2"],
+                       [Util UIColorForHexColor:@"ec6453"],
+                       [Util UIColorForHexColor:@"e8e9e8"], nil];
+
+    [usageChart reloadData];
+    
+    usageSummaryView = [[HomeUsageView alloc] initWithFrame:CGRectMake((usageChart.frame.size.width - 130)/2, (usageChart.frame.size.height - 130)/2, 130, 130) withUsage:APPDELEGATE.session.usage];
+    [usageChart addSubview:usageSummaryView];
+
+    UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(20, moreStorageButton.frame.origin.y + moreStorageButton.frame.size.height + (IS_IPHONE_5 ? 20: 5), self.view.frame.size.width - 40, 1)];
+    separator.backgroundColor = [Util UIColorForHexColor:@"ebebed"];
+    [self.view addSubview:separator];
+    
+    imageButton = [[UsageButton alloc] initWithFrame:CGRectMake(20, separator.frame.origin.y + (IS_IPHONE_5 ? 41 : 11), 70, 60) withUsage:UsageTypeImage withStorage:APPDELEGATE.session.usage.imageUsage];
+    [imageButton addTarget:self action:@selector(triggerPhotosPage) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:imageButton];
+    
+    musicButton = [[UsageButton alloc] initWithFrame:CGRectMake(90, separator.frame.origin.y + (IS_IPHONE_5 ? 41 : 11), 70, 60) withUsage:UsageTypeMusic withStorage:APPDELEGATE.session.usage.musicUsage];
+    [musicButton addTarget:self action:@selector(triggerMusicPage) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:musicButton];
+    
+    otherButton = [[UsageButton alloc] initWithFrame:CGRectMake(160, separator.frame.origin.y + (IS_IPHONE_5 ? 41 : 11), 70, 60) withUsage:UsageTypeOther withStorage:APPDELEGATE.session.usage.otherUsage];
+    [otherButton addTarget:self action:@selector(triggerDocsPage) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:otherButton];
+    
+    videoButton = [[UsageButton alloc] initWithFrame:CGRectMake(230, separator.frame.origin.y + (IS_IPHONE_5 ? 41 : 11), 70, 60) withUsage:UsageTypeVideo withStorage:APPDELEGATE.session.usage.videoUsage];
+    [videoButton addTarget:self action:@selector(triggerPhotosPage) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:videoButton];
+
+}
+
+- (void) usageFailCallback:(NSString *) errorMessage {
+    [self hideLoading];
+    [self showErrorAlertWithMessage:errorMessage];
+}
+
+- (void) triggerStoragePage {
+    SettingsStorageController *storageController = [[SettingsStorageController alloc] init];
+    storageController.nav = self.nav;
+    [self.nav pushViewController:storageController animated:NO];
+}
+
+- (void) triggerFilesPage {
+    FileListController *file = [[FileListController alloc] initForFolder:nil];
+    file.nav = self.nav;
+    [self.nav pushViewController:file animated:NO];
+}
+
+- (void) triggerPhotosPage {
+    PhotoListController *photo = [[PhotoListController alloc] init];
+    photo.nav = self.nav;
+    [self.nav pushViewController:photo animated:NO];
+}
+
+- (void) triggerMusicPage {
+    MusicListController *music = [[MusicListController alloc] init];
+    music.nav = self.nav;
+    [self.nav pushViewController:music animated:NO];
+}
+
+- (void) triggerDocsPage {
+    DocListController *doc = [[DocListController alloc] init];
+    doc.nav = self.nav;
+    [self.nav pushViewController:doc animated:NO];
+}
+
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [usageChart reloadData];
-
+    [APPDELEGATE.base dismissAddButton];
+    if(usageChart) {
+        [usageChart reloadData];
+    }
 //    [self performSelector:@selector(tempDraw) withObject:nil afterDelay:2.0f];
 }
 

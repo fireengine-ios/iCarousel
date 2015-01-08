@@ -39,8 +39,11 @@
 
 @property (nonatomic) BOOL menuActive;
 @property (nonatomic) BOOL isSelectible;
+@property (nonatomic) BOOL isSwipeable;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier  withFileFolder:(MetaFile *) _fileFolder isSelectible:(BOOL) _selectible;
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier  withFileFolder:(MetaFile *) _fileFolder isSelectible:(BOOL) _selectible isSwipeable:(BOOL) _swipeable;
+
 - (UIFont *) readNameFont;
 - (UIFont *) readDetailFont;
 - (UIColor *) readNameColor;

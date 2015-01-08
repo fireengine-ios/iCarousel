@@ -65,7 +65,7 @@
         newlyAddedFileList = [[NSMutableArray alloc] init];
 
         photoList = [[NSMutableArray alloc] init];
-        [photoList addObjectsFromArray:[APPDELEGATE.session uploadImageRefsForAlbum:self.album.uuid]];
+        [photoList addObjectsFromArray:[APPDELEGATE.uploadQueue uploadImageRefsForAlbum:self.album.uuid]];
         
         if(self.album.cover.tempDownloadUrl) {
             UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 160)];
@@ -103,11 +103,6 @@
         photosScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 160, self.view.frame.size.width, self.view.frame.size.height - 160)];
         [self.view addSubview:photosScroll];
         
-        [self addOngoingPhotos];
-
-        listOffset = 0;
-        [detailDao requestDetailOfAlbum:self.album.uuid forStart:0 andSize:20];
-        
         NSLog(@"FRAME: %@", NSStringFromCGRect(self.view.frame));
 
     }
@@ -121,7 +116,7 @@
         }
     }
     [photoList removeAllObjects];
-    [photoList addObjectsFromArray:[APPDELEGATE.session uploadImageRefsForAlbum:self.album.uuid]];
+    [photoList addObjectsFromArray:[APPDELEGATE.uploadQueue uploadImageRefsForAlbum:self.album.uuid]];
     [self addOngoingPhotos];
 
     listOffset = 0;
@@ -272,12 +267,13 @@
     topBgView.hidden = NO;
     if(moreMenuView) {
         [moreMenuView removeFromSuperview];
+        moreMenuView = nil;
+    } else {
+        moreMenuView = [[MoreMenuView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height-64) withList:@[[NSNumber numberWithInt:MoreMenuTypeAlbumDetail], [NSNumber numberWithInt:MoreMenuTypeAlbumShare], [NSNumber numberWithInt:MoreMenuTypeAlbumDelete], [NSNumber numberWithInt:MoreMenuTypeSelect]] withFileFolder:nil withAlbum:self.album];
+        moreMenuView.delegate = self;
+        [self.view addSubview:moreMenuView];
+        [self.view bringSubviewToFront:moreMenuView];
     }
-    
-    moreMenuView = [[MoreMenuView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height-64) withList:@[[NSNumber numberWithInt:MoreMenuTypeAlbumDetail], [NSNumber numberWithInt:MoreMenuTypeAlbumShare], [NSNumber numberWithInt:MoreMenuTypeAlbumDelete], [NSNumber numberWithInt:MoreMenuTypeSelect]] withFileFolder:nil withAlbum:self.album];
-    moreMenuView.delegate = self;
-    [self.view addSubview:moreMenuView];
-    [self.view bringSubviewToFront:moreMenuView];
 }
 
 #pragma mark MoreMenuDelegate
@@ -292,6 +288,11 @@
 
 - (void) moreMenuDidDismiss {
     topBgView.hidden = YES;
+    [self performSelector:@selector(postMoreMenuDismiss) withObject:nil afterDelay:0.1f];
+}
+
+- (void) postMoreMenuDismiss {
+    moreMenuView = nil;
 }
 
 #pragma mark AlbumDetailDelegate methods
@@ -337,7 +338,7 @@
 - (void) squareImageUploadFinishedForFile:(NSString *) fileUuid {
     [newlyAddedFileList addObject:fileUuid];
     
-    if([[APPDELEGATE.session uploadImageRefsForAlbum:self.album.uuid] count] == 0) {
+    if([[APPDELEGATE.uploadQueue uploadImageRefsForAlbum:self.album.uuid] count] == 0) {
         [albumAddPhotosDao requestAddPhotos:newlyAddedFileList toAlbum:self.album.uuid];
         [self pushProgressViewWithProcessMessage:NSLocalizedString(@"AlbumMovePhotoProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"AlbumMovePhotoSuccessMessage", @"") andFailMessage:NSLocalizedString(@"AlbumMovePhotoFailMessage", @"")];
     }
@@ -420,7 +421,7 @@
         ref.albumUuid = self.album.uuid;
         UploadManager *manager = [[UploadManager alloc] initWithUploadReference:ref];
         [manager startUploadingAsset:ref.filePath atFolder:nil];
-        [APPDELEGATE.session.uploadManagers addObject:manager];
+        [APPDELEGATE.uploadQueue addNewUploadTask:manager];
     }
     [self triggerRefresh];
 }
@@ -434,7 +435,7 @@
     
     UploadManager *uploadManager = [[UploadManager alloc] initWithUploadReference:uploadRef];
     [uploadManager startUploadingFile:filePath atFolder:nil withFileName:fileName];
-    [APPDELEGATE.session.uploadManagers addObject:uploadManager];
+    [APPDELEGATE.uploadQueue addNewUploadTask:uploadManager];
     
     [self triggerRefresh];
 }
@@ -450,6 +451,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self triggerRefresh];
 }
 
 - (void)didReceiveMemoryWarning

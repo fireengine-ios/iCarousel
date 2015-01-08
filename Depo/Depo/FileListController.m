@@ -103,6 +103,7 @@
         fileTable.backgroundColor = [UIColor clearColor];
         fileTable.backgroundView = nil;
         fileTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+        fileTable.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
         [self.view addSubview:fileTable];
 
         refreshControl = [[UIRefreshControl alloc] init];
@@ -143,7 +144,7 @@
     if(refreshControl) {
         [refreshControl endRefreshing];
     }
-    self.fileList = [[APPDELEGATE.session uploadRefsForFolder:[self.folder uuid]] arrayByAddingObjectsFromArray:files];
+    self.fileList = [[APPDELEGATE.uploadQueue uploadRefsForFolder:[self.folder uuid]] arrayByAddingObjectsFromArray:files];
     self.tableUpdateCounter ++;
     [fileTable reloadData];
 }
@@ -284,8 +285,9 @@
             [self.nav pushViewController:detail animated:NO];
         } else if([AppUtil isMetaFileVideo:fileAtIndex]) {
             VideoPreviewController *detail = [[VideoPreviewController alloc] initWithFile:fileAtIndex];
-            detail.nav = self.nav;
-            [self.nav pushViewController:detail animated:NO];
+            MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
+            detail.nav = modalNav;
+            [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
         } else if([AppUtil isMetaFileMusic:fileAtIndex]) {
             MusicPreviewController *detail = [[MusicPreviewController alloc] initWithFile:fileAtIndex.uuid withFileList:@[fileAtIndex]];
             detail.nav = self.nav;
@@ -511,7 +513,7 @@
     
     uploadManager = [[UploadManager alloc] initWithUploadReference:uploadRef];
     [uploadManager startUploadingFile:filePath atFolder:self.folder withFileName:fileName];
-    [APPDELEGATE.session.uploadManagers addObject:uploadManager];
+    [APPDELEGATE.uploadQueue addNewUploadTask:uploadManager];
     
     fileList = [@[uploadRef] arrayByAddingObjectsFromArray:fileList];
     self.tableUpdateCounter++;
@@ -531,14 +533,22 @@
 }
 
 - (void) photoModalDidTriggerUploadForUrls:(NSArray *)assetUrls {
-    for(UploadRef *ref in assetUrls) {
-        UploadManager *manager = [[UploadManager alloc] initWithUploadReference:ref];
-        [manager startUploadingAsset:ref.filePath atFolder:self.folder];
-        [APPDELEGATE.session.uploadManagers addObject:manager];
+    
+    if([assetUrls count] > 0) {
+        [APPDELEGATE.base showBaseLoading];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            for(UploadRef *ref in assetUrls) {
+                UploadManager *manager = [[UploadManager alloc] initWithUploadReference:ref];
+                [manager startUploadingAsset:ref.filePath atFolder:self.folder];
+                [APPDELEGATE.uploadQueue addNewUploadTask:manager];
+            }
+            fileList = [assetUrls arrayByAddingObjectsFromArray:fileList];
+            self.tableUpdateCounter++;
+            [self.fileTable reloadData];
+
+            [APPDELEGATE.base hideBaseLoading];
+        });
     }
-    fileList = [assetUrls arrayByAddingObjectsFromArray:fileList];
-    self.tableUpdateCounter++;
-    [self.fileTable reloadData];
 }
 
 - (BOOL)shouldAutorotate {

@@ -87,6 +87,8 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier  withFileFolder:(MetaFile *) _fileFolder {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier withFileFolder:_fileFolder isSelectible:NO];
     if (self) {
+        self.isSwipeable = NO;
+
         self.imgView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 16, 35, 35)];
         [self.imgView setImageWithURL:[NSURL URLWithString:self.fileFolder.detail.thumbSmallUrl]];
         [self addSubview:self.imgView];

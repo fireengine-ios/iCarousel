@@ -22,9 +22,12 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
 @synthesize airPlayView;
 @synthesize totalDuration;
 @synthesize passedDuration;
+@synthesize separator;
 @synthesize slider;
 @synthesize totalTimeInSec;
 @synthesize volumeLevels;
+@synthesize volumeFullButton;
+@synthesize volumeMuteButton;
 
 - (id)initWithFrame:(CGRect)frame withTotalDuration:(NSString *) totalDur {
     self = [super initWithFrame:frame];
@@ -60,7 +63,7 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
         [slider addTarget:self action:@selector(sliderChanged:) forControlEvents:UIControlEventValueChanged];
         [self addSubview:slider];
         
-        UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(0, 50, self.frame.size.width, 1)];
+        separator = [[UIView alloc] initWithFrame:CGRectMake(0, 50, self.frame.size.width, 1)];
         separator.backgroundColor = [Util UIColorForHexColor:@"1e1e1e"];
         [self addSubview:separator];
 
@@ -93,11 +96,11 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
         customVolumeView.hidden = YES;
         [self addSubview:customVolumeView];
 
-        CustomButton *volumeMuteButton = [[CustomButton alloc] initWithFrame:CGRectMake(10, 22, 19, 16) withImageName:@"volume_mute.png"];
+        volumeMuteButton = [[CustomButton alloc] initWithFrame:CGRectMake(10, 22, 19, 16) withImageName:@"volume_mute.png"];
         [volumeMuteButton addTarget:self action:@selector(volumeMuteClicked) forControlEvents:UIControlEventTouchUpInside];
         [customVolumeView addSubview:volumeMuteButton];
 
-        CustomButton *volumeFullButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 29, 22, 19, 16) withImageName:@"volume_full.png"];
+        volumeFullButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 29, 22, 19, 16) withImageName:@"volume_full.png"];
         [volumeFullButton addTarget:self action:@selector(volumeFullClicked) forControlEvents:UIControlEventTouchUpInside];
         [customVolumeView addSubview:volumeFullButton];
 
@@ -185,7 +188,10 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
             [level manuallyDeactivate];
         }
     }
-    [delegate customAVShouldChangeVolumeTo:0.04*levelSelected];
+
+    UIInterfaceOrientation currentOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+
+    [delegate customAVShouldChangeVolumeTo:(UIInterfaceOrientationIsLandscape(currentOrientation) ? 0.02 : 0.04)*levelSelected];
 }
 
 - (void) fullScreenClicked {
@@ -235,10 +241,37 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
 }
 
 - (void) updateInnerFrames {
-    totalDuration.frame = CGRectMake(self.frame.size.width-110, 10, 25, 20);
-    fullScreenButton.frame = CGRectMake(self.frame.size.width-44, 0, 44, 40);
-    slider.frame = CGRectMake(80, 10, self.frame.size.width - 200, 20);
-    airPlayView.frame = CGRectMake(self.frame.size.width-88, 0, 44, 40);
+    UIInterfaceOrientation currentOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    
+    passedDuration.frame = CGRectMake(10, 15, 30, 20);
+    totalDuration.frame = CGRectMake(self.frame.size.width-40, 15, 30, 20);
+    slider.frame = CGRectMake(50, 15, self.frame.size.width - 100, 20);
+    volumeButton.frame = CGRectMake(10, 72, 16, 16);
+    playButton.frame = CGRectMake((self.frame.size.width - 32)/2, 54, 32, 52);
+    pauseButton.frame = CGRectMake((self.frame.size.width - 32)/2, 54, 32, 52);
+    airPlayView.frame = CGRectMake(self.frame.size.width-54, 60, 44, 40);
+    customVolumeView.frame = CGRectMake(0, 51, self.frame.size.width, 59);
+    separator.frame = CGRectMake(0, 50, self.frame.size.width, 1);
+    volumeMuteButton.frame = CGRectMake(10, 22, 19, 16);
+    volumeFullButton.frame = CGRectMake(self.frame.size.width - 29, 22, 19, 16);
+    
+    for(int i=0; i<[volumeLevels count]; i++) {
+        VolumeLevelIndicator *volIndicator = [volumeLevels objectAtIndex:i];
+        [volIndicator removeFromSuperview];
+    }
+
+    [volumeLevels removeAllObjects];
+    
+    int newLevelCount = UIInterfaceOrientationIsLandscape(currentOrientation) ? 48 : 23;
+    
+    for(int i=0; i<newLevelCount; i++) {
+        VolumeLevelIndicator *volIndicator = [[VolumeLevelIndicator alloc] initWithFrame:CGRectMake(50 + (i-1)*10, 26, 8, 8) withLevel:(i+1)];
+        volIndicator.delegate = self;
+        [customVolumeView addSubview:volIndicator];
+        
+        [volumeLevels addObject:volIndicator];
+    }
+
 }
 
 /*

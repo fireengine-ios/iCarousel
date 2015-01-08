@@ -10,6 +10,9 @@
 #import "CustomLabel.h"
 #import "Util.h"
 #import "UploadRef.h"
+#import "SyncUtil.h"
+#import <CommonCrypto/CommonDigest.h>
+#import "ALAssetRepresentation+MD5.h"
 
 @interface PhotoListModalController ()
 
@@ -48,7 +51,7 @@
         [al enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
             if(group) {
                 [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
-                     NSString *albumName = [group valueForProperty:ALAssetsGroupPropertyName];
+                    NSString *albumName = [group valueForProperty:ALAssetsGroupPropertyName];
                     if(asset && [albumName isEqualToString:self.album.albumName]) {
                         [assets addObject:asset];
                     }

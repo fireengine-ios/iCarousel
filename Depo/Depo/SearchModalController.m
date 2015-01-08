@@ -37,6 +37,11 @@
         self.view.backgroundColor = [UIColor whiteColor];
         self.title = @"Search";
         
+        searchDao = [[SearchDao alloc] init];
+        searchDao.delegate = self;
+        searchDao.successMethod = @selector(searchListSuccessCallback:);
+        searchDao.failMethod = @selector(searchListFailCallback:);
+
         CustomButton *crossButton = [[CustomButton alloc]initWithFrame:CGRectMake(40, 15, 30, 30) withImageName:@"multiply"];
         [crossButton addTarget:self action:@selector(triggerDismiss) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithCustomView:crossButton];
@@ -88,10 +93,6 @@
     [super fadeOut:searchResultsTable duration:0.01];
     [recentSearchesTableView addTextToSearchHistory:searchText];
     [searchField resignFirstResponder];
-    searchDao = [[SearchDao alloc]init];
-    searchDao.delegate = self;
-    searchDao.successMethod = @selector(searchListSuccessCallback:);
-    searchDao.failMethod = @selector(searchListFailCallback:);
     tableUpdateCounter++;
     [searchDao requestMetadata:searchText andPage:0 andSize:1000000 andSortType:APPDELEGATE.session.sortType andSearchListType:SearchListTypeAllFiles];
 }
@@ -205,7 +206,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     NSString *searchText = [textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    if (searchText.length > 2)
+    if (searchText.length > 0)
         [self startSearch:searchText];
     return YES;
 }

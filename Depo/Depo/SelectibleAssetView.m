@@ -7,6 +7,8 @@
 //
 
 #import "SelectibleAssetView.h"
+#import "SyncUtil.h"
+#import "ALAssetRepresentation+MD5.h"
 
 @implementation SelectibleAssetView
 

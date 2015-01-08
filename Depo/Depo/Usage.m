@@ -16,9 +16,7 @@
 @synthesize otherUsage;
 @synthesize remainingStorage;
 @synthesize totalStorage;
-
-- (float) totalUsage {
-    return imageUsage + musicUsage + contactUsage + otherUsage;
-}
+@synthesize videoUsage;
+@synthesize usedStorage;
 
 @end

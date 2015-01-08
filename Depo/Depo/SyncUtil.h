@@ -16,5 +16,12 @@
 + (void) updateLastSyncDate;
 + (void) cacheSyncReference:(SyncReference *) ref;
 + (NSArray *) readSyncReferences;
++ (NSString *) md5String:(NSData *) data;
++ (NSString *) md5StringFromPath:(NSString *) path;
+
++ (void) cacheSyncHashLocally:(NSString *) hash;
++ (NSArray *) readSyncHashLocally;
++ (void) cacheSyncHashRemotely:(NSString *) hash;
++ (NSArray *) readSyncHashRemotely;
 
 @end

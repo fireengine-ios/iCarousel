@@ -88,6 +88,8 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier  withFileFolder:(MetaFile *) _fileFolder {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier withFileFolder:_fileFolder isSelectible:NO];
     if (self) {
+        self.isSwipeable = NO;
+
         UIImage *iconImg = [UIImage imageNamed:[AppUtil iconNameByContentType:ContentTypeDoc]];
         self.imgView = [[UIImageView alloc] initWithFrame:CGRectMake(15 + (40 - iconImg.size.width)/2, (68 - iconImg.size.height)/2, iconImg.size.width, iconImg.size.height)];
         self.imgView.image = iconImg;

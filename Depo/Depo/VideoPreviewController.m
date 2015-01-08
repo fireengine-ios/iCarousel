@@ -23,6 +23,11 @@
 - (id)initWithFile:(MetaFile *) _file {
     self = [super init];
     if (self) {
+        self.view.backgroundColor = [UIColor greenColor];
+        
+        self.view.autoresizesSubviews = YES;
+        self.view.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
+
         self.file = _file;
         self.title = self.file.visibleName;
         
@@ -41,15 +46,18 @@
         renameDao.successMethod = @selector(renameSuccessCallback:);
         renameDao.failMethod = @selector(renameFailCallback:);
 
-        avPlayer = [[CustomAVPlayer alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex) withVideo:self.file];
+        avPlayer = [[CustomAVPlayer alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.topIndex) withVideo:self.file];
         avPlayer.delegate = self;
         [self.view addSubview:avPlayer];
+        avPlayer.autoresizesSubviews = YES;
+        avPlayer.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
+
     }
     return self;
 }
 
 - (void) moreClicked {
-    [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeFileDetail], [NSNumber numberWithInt:MoreMenuTypeShare], self.file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDelete]] withFileFolder:self.file];
+    [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeVideoDetail], [NSNumber numberWithInt:MoreMenuTypeShare], self.file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDelete]] withFileFolder:self.file];
 }
 
 - (void) deleteSuccessCallback {
@@ -94,6 +102,13 @@
 }
 
 #pragma mark MoreMenuDelegate
+
+- (void) moreMenuDidSelectVideoDetail {
+    FileDetailModalController *fileDetail = [[FileDetailModalController alloc] initWithFile:file];
+    fileDetail.delegate = self;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:fileDetail];
+    [self presentViewController:modalNav animated:YES completion:nil];
+}
 
 - (void) moreMenuDidSelectDelete {
     [APPDELEGATE.base showConfirmDelete];
@@ -155,6 +170,11 @@
             [avPlayer initializePlayer];
         }
     }
+
+    CustomButton *customBackButton = [[CustomButton alloc] initWithFrame:CGRectMake(10, 0, 20, 34) withImageName:@"white_left_arrow.png"];
+    [customBackButton addTarget:self action:@selector(triggerDismiss) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:customBackButton];
+    self.navigationItem.leftBarButtonItem = backButton;
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
@@ -192,6 +212,10 @@
     [self.nav setNavigationBarHidden:YES animated:YES];
 }
 
+- (void) triggerDismiss {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     moreButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 22, 22) withImageName:@"dots_icon.png"];
@@ -206,15 +230,19 @@
 }
 
 - (BOOL)shouldAutorotate {
-    return YES;
+    if (self.avPlayer.player.rate > 0 && !self.avPlayer.player.error) {
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
-    return UIInterfaceOrientationPortrait | UIInterfaceOrientationPortraitUpsideDown;
+    return UIInterfaceOrientationMaskAll;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
+    return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown || interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight);
 }
 
 @end

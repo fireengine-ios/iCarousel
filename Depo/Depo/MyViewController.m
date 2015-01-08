@@ -148,30 +148,40 @@
 
 - (void) presentMoreMenuWithList:(NSArray *) itemList {
     if(moreMenuView) {
-        [moreMenuView removeFromSuperview];
+        [self dismissMoreMenu];
+    } else {
+        moreMenuView = [[MoreMenuView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height) withList:itemList];
+        moreMenuView.delegate = self;
+        [self.view addSubview:moreMenuView];
+        [self.view bringSubviewToFront:moreMenuView];
     }
-
-    moreMenuView = [[MoreMenuView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height) withList:itemList];
-    moreMenuView.delegate = self;
-    [self.view addSubview:moreMenuView];
-    [self.view bringSubviewToFront:moreMenuView];
 }
 
 - (void) presentMoreMenuWithList:(NSArray *) itemList withFileFolder:(MetaFile *) fileFolder {
     if(moreMenuView) {
-        [moreMenuView removeFromSuperview];
+        [self dismissMoreMenu];
+    } else {
+        moreMenuView = [[MoreMenuView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height) withList:itemList withFileFolder:fileFolder];
+        moreMenuView.delegate = self;
+        [self.view addSubview:moreMenuView];
+        [self.view bringSubviewToFront:moreMenuView];
     }
-    
-    moreMenuView = [[MoreMenuView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height) withList:itemList withFileFolder:fileFolder];
-    moreMenuView.delegate = self;
-    [self.view addSubview:moreMenuView];
-    [self.view bringSubviewToFront:moreMenuView];
 }
 
 - (void) dismissMoreMenu {
     if(moreMenuView) {
         [moreMenuView removeFromSuperview];
+        moreMenuView = nil;
     }
+}
+
+- (void) moreMenuDidDismiss {
+    NSLog(@"AT moreMenuDidDismiss !!!!****");
+    [self performSelector:@selector(postMoreMenuDismiss) withObject:nil afterDelay:0.1f];
+}
+
+- (void) postMoreMenuDismiss {
+    moreMenuView = nil;
 }
 
 - (void) pushProgressViewWithProcessMessage:(NSString *) progressMsg andSuccessMessage:(NSString *) successMsg andFailMessage:(NSString *) failMsg {

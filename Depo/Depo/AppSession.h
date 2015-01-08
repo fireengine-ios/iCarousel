@@ -12,13 +12,13 @@
 #import <AVFoundation/AVFoundation.h>
 #import "NSMutableArray_Shuffling.h"
 #import "MetaFile.h"
+#import "Usage.h"
 
 @interface AppSession : NSObject
 
 @property (nonatomic, strong) User *user;
 @property (nonatomic, strong) NSString *authToken;
 @property (nonatomic, strong) NSString *baseUrl;
-@property (nonatomic, strong) NSMutableArray *uploadManagers;
 @property (nonatomic) SortType sortType;
 
 @property (nonatomic, strong) NSArray *playerItemFilesRef;
@@ -27,9 +27,8 @@
 @property (nonatomic, strong) AVPlayer *audioPlayer;
 @property (nonatomic) int currentAudioItemIndex;
 
-- (NSArray *) uploadRefsForFolder:(NSString *) folderUuid;
-- (NSArray *) uploadImageRefs;
-- (NSArray *) uploadImageRefsForAlbum:(NSString *) albumUuid;
+@property (nonatomic, strong) Usage *usage;
+
 - (void) playAudioItemAtIndex:(int) itemIndex;
 - (void) playNextAudioItem;
 - (void) playPreviousAudioItem;

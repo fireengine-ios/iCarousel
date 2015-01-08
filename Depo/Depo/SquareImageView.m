@@ -56,7 +56,7 @@
         imgView.alpha = 0.5f;
         [self addSubview:imgView];
 
-        for(UploadManager *manager in APPDELEGATE.session.uploadManagers) {
+        for(UploadManager *manager in APPDELEGATE.uploadQueue.uploadManagers) {
             if(!manager.hasFinished && [manager.uploadRef.fileUuid isEqualToString:self.uploadRef.fileUuid]) {
                 manager.delegate = self;
             }

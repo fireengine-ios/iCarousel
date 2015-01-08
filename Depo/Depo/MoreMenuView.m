@@ -121,6 +121,9 @@
         case MoreMenuTypeFileDetail:
             [APPDELEGATE.base showFileDetailForFile:self.fileFolder];
             break;
+        case MoreMenuTypeVideoDetail:
+            [delegate moreMenuDidSelectVideoDetail];
+            break;
         case MoreMenuTypeAlbumDelete:
             [delegate moreMenuDidSelectAlbumDelete];
             break;

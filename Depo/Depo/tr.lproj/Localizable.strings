@@ -1,6 +1,6 @@
 "HomeTitle"="Anasayfa";
 "FilesTitle"="Tüm Dosyalar";
-"PhotosTitle"="Fotoğraflar";
+"PhotosTitle"="Fotoğraflar ve Videolar";
 "MenuSearch"="Arama";
 "MenuHome"="Anasayfa";
 "MenuFav"="Favoriler";
@@ -292,9 +292,9 @@
 "Music"="Müzik";
 "MusicOnInfo"="Akıllı Depo'daki müziklerinize erişebilir ve istediğinizde iPhone'ununuzdaki müzikleri Akıllı Depo'ya yükleyebilirsiniz.\n\n(iTunes kütüphanenizdeki parçaları Akıllı Depo'ya yüklemek için uygulamadaki \"+\" butonunu kullanın.)";
 "MusicOffInfo"="Akıllı Depo'daki müziklerinize erişemez ve Akıllı Depo'ya yeni müzik yükleyemezsiniz.";
-"Documents"="Dokümanlar";
-"DocumentsOnInfo"="Akıllı Depo'daki dokümanlarınıza erişebilir ve istediğinizde dokümanlarınızı Akıllı Depo'ya yükleyebilirsiniz. Diğer uygulamalar üzerinden (e-posta uygulamaları gibi) \"Akıllı Depo ile aç\" seçeneği ile dokümanlarınızı yükleyebilirsiniz.";
-"DocumentsOffInfo"="Akıllı Depo'daki dokümanlarınıza erişemez ve Akıllı Depo'ya yeni doküman yükleyemezsiniz.";
+"Documents"="Dökümanlar";
+"DocumentsOnInfo"="Akıllı Depo'daki dökümanlarınıza erişebilir ve istediğinizde dökümanlarınızı Akıllı Depo'ya yükleyebilirsiniz. Diğer uygulamalar üzerinden (e-posta uygulamaları gibi) \"Akıllı Depo ile aç\" seçeneği ile dökümanlarınızı yükleyebilirsiniz.";
+"DocumentsOffInfo"="Akıllı Depo'daki dökümanlarınıza erişemez ve Akıllı Depo'ya yeni doküman yükleyemezsiniz.";
 "Contacts"="Rehber";
 "ContactsAutoInfo"="Akıllı Depo'yu açtığınızda telefon rehberiniz otomatik olarak buluta yedeklenecek.";
 "ContactsOffInfo"="Telefon rehberiniz otomatik olarak buluta yedeklenmeyecek.";
@@ -333,7 +333,7 @@
 "AllFilesHeader"="TÜM DOSYALAR (%d)";
 "PhotosVideosHeader"="FOTOĞRAF VE VİDEOLAR (%d)";
 "MusicHeader"="MÜZİK (%d)";
-"DocumentsHeader"="DOKÜMANLAR (%d)";
+"DocumentsHeader"="DÖKÜMANLAR (%d)";
 "AllSearchResultsHeader"="TÜM SONUÇLAR (%d)";
 
 "SyncPhotoVideoTitle"="Resimleri Senkronize Et";
@@ -342,3 +342,21 @@
 "DataRoamingSubTitle"="Yurtdışında oto yükleme";
 
 "ALAssetsAccessError"="Resimlere erişilemiyor. Lütfen telefon ayarlarınızı kontrol ediniz.";
+
+"RecentActivityMultipleImagesCopied"="%d resim kopyalandı";
+"RecentActivityMultipleFoldersCopied"="%d klasör kopyalandı";
+"RecentActivityMultipleMusicsCopied"="%d şarkı kopyalandı";
+"RecentActivityMultipleFilesCopied"="%d dosya kopyalandı";
+"RecentActivitySingleImageCopied"="%d resim kopyalandı";
+"RecentActivitySingleFolderCopied"="%d klasör kopyalandı";
+"RecentActivitySingleFileCopied"="%d dosya kopyalandı";
+"RecentActivitySingleMusicCopied"="%d şarkı kopyalandı";
+
+"RecentActivityMultipleImagesUpdated"="%d resim güncellendi";
+"RecentActivityMultipleFoldersUpdated"="%d klasör güncellendi";
+"RecentActivityMultipleMusicsUpdated"="%d şarkı güncellendi";
+"RecentActivityMultipleFilesUpdated"="%d dosya güncellendi";
+"RecentActivitySingleImageUpdated"="%d resim güncellendi";
+"RecentActivitySingleFolderUpdated"="%d klasör güncellendi";
+"RecentActivitySingleFileUpdated"="%d dosya güncellendi";
+"RecentActivitySingleMusicUpdated"="%d şarkı güncellendi";

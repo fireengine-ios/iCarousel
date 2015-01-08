@@ -49,10 +49,15 @@
         [refreshControl addTarget:self action:@selector(triggerRefresh) forControlEvents:UIControlEventValueChanged];
         [fileTable addSubview:refreshControl];
         
+        listDao = [[FavoriteDao alloc] init];
+        listDao.delegate = self;
+        listDao.successMethod = @selector(favListSuccessCallback:);
+        listDao.failMethod = @selector(favListFailCallback:);
+        
         favoriteDao = [[FavoriteDao alloc] init];
         favoriteDao.delegate = self;
-        favoriteDao.successMethod = @selector(favListSuccessCallback:);
-        favoriteDao.failMethod = @selector(favListFailCallback:);
+        favoriteDao.successMethod = @selector(favSuccessCallback);
+        favoriteDao.failMethod = @selector(favFailCallback:);
         
         [self triggerRefresh];
         [self showLoading];
@@ -66,7 +71,7 @@
     isFirstLoad = YES;
     [fileList removeAllObjects];
     self.tableUpdateCounter++;
-    [favoriteDao requestMetadata:listOffset andSize:NO_OF_FILES_PER_PAGE andSortType:APPDELEGATE.session.sortType];
+    [listDao requestMetadata:listOffset andSize:NO_OF_FILES_PER_PAGE andSortType:APPDELEGATE.session.sortType];
 }
 
 - (void) favListSuccessCallback:(NSArray *) files {
@@ -93,6 +98,7 @@
 
 - (void) favSuccessCallback {
     [self proceedSuccessForProgressView];
+    [self triggerRefresh];
 }
 
 - (void) favFailCallback:(NSString *) errorMessage {
@@ -210,20 +216,16 @@
 
 - (void) dynamicallyLoadNextPage {
     listOffset ++;
-    [favoriteDao requestMetadata:listOffset andSize:NO_OF_FILES_PER_PAGE andSortType:APPDELEGATE.session.sortType];
+    [listDao requestMetadata:listOffset andSize:NO_OF_FILES_PER_PAGE andSortType:APPDELEGATE.session.sortType];
 }
 
 - (void) fileFolderCellShouldFavForFile:(MetaFile *)fileSelected {
-    favoriteDao.successMethod = @selector(favSuccessCallback);
-    favoriteDao.failMethod = @selector(favFailCallback);
     [favoriteDao requestMetadataForFiles:@[fileSelected.uuid] shouldFavorite:YES];
     //    [self showLoading];
     [self pushProgressViewWithProcessMessage:NSLocalizedString(@"FavAddProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"FavAddSuccessMessage", @"") andFailMessage:NSLocalizedString(@"FavAddFailMessage", @"")];
 }
 
 - (void) fileFolderCellShouldUnfavForFile:(MetaFile *)fileSelected {
-    favoriteDao.successMethod = @selector(favSuccessCallback);
-    favoriteDao.failMethod = @selector(favFailCallback);
     [favoriteDao requestMetadataForFiles:@[fileSelected.uuid] shouldFavorite:NO];
     //    [self showLoading];
     [self pushProgressViewWithProcessMessage:NSLocalizedString(@"UnfavProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"UnfavSuccessMessage", @"") andFailMessage:NSLocalizedString(@"UnfavFailMessage", @"")];

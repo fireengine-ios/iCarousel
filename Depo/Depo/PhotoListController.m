@@ -77,7 +77,7 @@
         selectedAlbumList = [[NSMutableArray alloc] init];
 
         photoList = [[NSMutableArray alloc] init];
-        [photoList addObjectsFromArray:[APPDELEGATE.session uploadImageRefs]];
+        [photoList addObjectsFromArray:[APPDELEGATE.uploadQueue uploadImageRefs]];
         
         normalizedContentHeight = self.view.frame.size.height - self.bottomIndex - 50;
         maximizedContentHeight = self.view.frame.size.height - self.bottomIndex + 14;
@@ -167,7 +167,7 @@
         }
     }
     
-    [photoList addObjectsFromArray:[APPDELEGATE.session uploadImageRefs]];
+    [photoList addObjectsFromArray:[APPDELEGATE.uploadQueue uploadImageRefs]];
     [self addOngoingPhotos];
 
     listOffset = 0;
@@ -346,7 +346,7 @@
 }
 
 - (void) squareImageUploadFinishedForFile:(NSString *) fileUuid {
-    if([[APPDELEGATE.session uploadImageRefs] count] == 0) {
+    if([[APPDELEGATE.uploadQueue uploadImageRefs] count] == 0) {
         [self triggerRefresh];
     }
 }
@@ -498,7 +498,7 @@
     for(UploadRef *ref in assetUrls) {
         UploadManager *manager = [[UploadManager alloc] initWithUploadReference:ref];
         [manager startUploadingAsset:ref.filePath atFolder:nil];
-        [APPDELEGATE.session.uploadManagers addObject:manager];
+        [APPDELEGATE.uploadQueue addNewUploadTask:manager];
     }
     [self triggerRefresh];
 }
@@ -511,13 +511,17 @@
     
     UploadManager *uploadManager = [[UploadManager alloc] initWithUploadReference:uploadRef];
     [uploadManager startUploadingFile:filePath atFolder:nil withFileName:fileName];
-    [APPDELEGATE.session.uploadManagers addObject:uploadManager];
+    [APPDELEGATE.uploadQueue addNewUploadTask:uploadManager];
     
     [self triggerRefresh];
 }
 
 - (void) moreClicked {
-    [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeSort], [NSNumber numberWithInt:MoreMenuTypeSelect]]];
+    if(albumTable.isHidden) {
+        [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeSort], [NSNumber numberWithInt:MoreMenuTypeSelect]]];
+    } else {
+        [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeSelect]]];
+    }
 }
 
 - (void) sortDidChange {

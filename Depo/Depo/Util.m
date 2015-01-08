@@ -70,7 +70,7 @@
     
     NSArray *tokens = [NSArray arrayWithObjects:@"bytes", @"KB", @"MB", @"GB", @"TB", nil];
     
-    while (convertedValue > 1024) {
+    while (convertedValue >= 1024) {
         convertedValue /= 1024;
         multiplyFactor++;
     }

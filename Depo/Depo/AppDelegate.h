@@ -11,6 +11,7 @@
 #import "TokenManager.h"
 #import "MBProgressHUD.h"
 #import "SyncManager.h"
+#import "UploadQueue.h"
 
 @class CustomAlertView;
 @class CustomConfirmView;
@@ -30,6 +31,7 @@
 @property (strong, nonatomic) MapUtil *mapUtil;
 @property (strong, nonatomic) MBProgressHUD *progress;
 @property (strong, nonatomic) SyncManager *syncManager;
+@property (strong, nonatomic) UploadQueue *uploadQueue;
 
 - (void) showCustomAlert:(CustomAlertView *) alertView;
 - (void) showCustomConfirm:(CustomConfirmView *) alertView;

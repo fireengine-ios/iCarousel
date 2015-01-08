@@ -21,13 +21,19 @@
 @synthesize imgView;
 @synthesize menuActive;
 @synthesize isSelectible;
+@synthesize isSwipeable;
 @synthesize checkButton;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier  withFileFolder:(MetaFile *) _fileFolder isSelectible:(BOOL) _selectible {
+    return [self initWithStyle:style reuseIdentifier:reuseIdentifier withFileFolder:_fileFolder isSelectible:_selectible isSwipeable:YES];
+}
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier  withFileFolder:(MetaFile *) _fileFolder isSelectible:(BOOL) _selectible isSwipeable:(BOOL) _swipeable {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.fileFolder = _fileFolder;
         self.isSelectible = _selectible;
+        self.isSwipeable = _swipeable;
         
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [UIColor whiteColor];
@@ -81,7 +87,7 @@
 }
 
 - (void) swipeLeft {
-    if(isSelectible)
+    if(isSelectible || !isSwipeable)
         return;
     
     [UIView animateWithDuration:0.5f
@@ -96,7 +102,7 @@
 }
 
 - (void) swipeRight {
-    if(isSelectible)
+    if(isSelectible || !isSwipeable)
         return;
 
     [UIView animateWithDuration:0.5f

@@ -156,6 +156,7 @@
         case MoreMenuTypeFileDetail:
         case MoreMenuTypeFolderDetail:
         case MoreMenuTypeAlbumDetail:
+        case MoreMenuTypeVideoDetail:
             iconName = @"nav_detail_icon.png";
             break;
         case MoreMenuTypeShare:
@@ -196,6 +197,10 @@
             break;
         case MoreMenuTypeAlbumDetail:
             title = NSLocalizedString(@"MoreMenuDetailAlbumTitle", @"");
+            break;
+        case MoreMenuTypeVideoDetail:
+            title = NSLocalizedString(@"MoreMenuDetailFileTitleVideo", @"");
+            break;
             break;
         case MoreMenuTypeFileDetail: {
             switch (contentType) {
@@ -448,6 +453,8 @@
             return @"docs_icon.png";
         case UsageTypeContact:
             return @"contacts_icon.png";
+        case UsageTypeVideo:
+            return @"video_main_icon.png";
     }
     return @"";
 }
