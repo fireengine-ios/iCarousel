@@ -34,6 +34,12 @@
         defaultIndicator.center = indicator.center;
         [self addSubview:defaultIndicator];
         
+        successImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"check_icon.png"]];
+        successImgView.frame = CGRectMake(20, (self.frame.size.height - 11)/2, 14, 11);
+        successImgView.center = indicator.center;
+        successImgView.hidden = YES;
+        [self addSubview:successImgView];
+        
         messageLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(60, (self.frame.size.height - 20)/2, self.frame.size.width - 70, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:17] withColor:[UIColor whiteColor] withText:@""];
         [self addSubview:messageLabel];
     }
@@ -58,6 +64,7 @@
 //    indicator.hidden = YES;
     [defaultIndicator stopAnimating];
     defaultIndicator.hidden = YES;
+    successImgView.hidden = NO;
     [self performSelector:@selector(dismissAfterDelay) withObject:nil afterDelay:1.2f];
 }
 

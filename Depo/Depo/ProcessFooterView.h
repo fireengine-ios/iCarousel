@@ -11,6 +11,7 @@
 
 @interface ProcessFooterView : UIView {
     UIImageView *indicator;
+    UIImageView *successImgView;
     UIActivityIndicatorView *defaultIndicator;
     CustomLabel *messageLabel;
     BOOL isAnimating;

@@ -25,6 +25,8 @@
 #import "VideoPreviewController.h"
 #import "FileDetailInWebViewController.h"
 #import "PreviewUnavailableController.h"
+#import "AppDelegate.h"
+#import "BaseViewController.h"
 
 @interface SearchModalController ()
 
@@ -342,8 +344,9 @@
                 [self.nav pushViewController:detail animated:NO];
             } else if([AppUtil isMetaFileVideo:fileAtIndex]) {
                 VideoPreviewController *detail = [[VideoPreviewController alloc] initWithFile:fileAtIndex];
-                detail.nav = self.nav;
-                [self.nav pushViewController:detail animated:NO];
+                MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
+                detail.nav = modalNav;
+                [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
             } else if([AppUtil isMetaFileMusic:fileAtIndex]) {
                 MusicPreviewController *detail = [[MusicPreviewController alloc] initWithFile:fileAtIndex.uuid withFileList:@[fileAtIndex]];
                 detail.nav = self.nav;

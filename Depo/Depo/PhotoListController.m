@@ -314,8 +314,9 @@
         [self.nav pushViewController:detail animated:NO];
     } else if(fileSelected.contentType == ContentTypeVideo) {
         VideoPreviewController *detail = [[VideoPreviewController alloc] initWithFile:fileSelected];
-        detail.nav = self.nav;
-        [self.nav pushViewController:detail animated:NO];
+        MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
+        detail.nav = modalNav;
+        [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
     }
 }
 
