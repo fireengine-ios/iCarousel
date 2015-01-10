@@ -107,7 +107,10 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 - (void) triggerAndStartAssetsTask {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
-    tempPath = [documentsDirectory stringByAppendingFormat:@"/%@", asset.defaultRepresentation.filename];
+    
+    NSString *randomVal = [NSString stringWithFormat:@"%.0f%d", [[NSDate date] timeIntervalSince1970], arc4random_uniform(99)];
+    tempPath = [documentsDirectory stringByAppendingFormat:@"/%@_%@", randomVal, asset.defaultRepresentation.filename];
+    NSLog(@"TEMP PATH: %@", tempPath);
     self.uploadRef.tempUrl = tempPath;
     
     if ([[self.asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
