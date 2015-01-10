@@ -20,6 +20,8 @@
     DeleteDao *deleteDao;
     MoveDao *moveDao;
 
+    MetaFile *fileSelectedRef;
+    
     CustomButton *moreButton;
 
     UIBarButtonItem *previousButtonRef;

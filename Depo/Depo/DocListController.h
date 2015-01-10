@@ -19,6 +19,8 @@
     DeleteDao *deleteDao;
     MoveDao *moveDao;
     
+    MetaFile *fileSelectedRef;
+    
     CustomButton *moreButton;
 
     int listOffset;

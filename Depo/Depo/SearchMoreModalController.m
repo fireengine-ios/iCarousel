@@ -232,8 +232,9 @@
     } else {
         if([AppUtil isMetaFileImage:fileAtIndex]) {
             ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFile:fileAtIndex];
-            detail.nav = self.nav;
-            [self.nav pushViewController:detail animated:NO];
+            MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
+            detail.nav = modalNav;
+            [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
         } else if([AppUtil isMetaFileDoc:fileAtIndex]){
             FileDetailInWebViewController *detail = [[FileDetailInWebViewController alloc] initWithFile:fileAtIndex];
             detail.nav = self.nav;

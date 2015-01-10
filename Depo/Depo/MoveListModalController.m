@@ -58,6 +58,7 @@
         folderTable.backgroundColor = [UIColor clearColor];
         folderTable.backgroundView = nil;
         folderTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+        folderTable.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
         [self.view addSubview:folderTable];
 
         [fileListDao requestFolderListingForFolder:self.folder?self.folder.uuid:nil andForPage:0 andSize:NO_OF_FILES_PER_PAGE sortBy:APPDELEGATE.session.sortType];
@@ -72,12 +73,6 @@
 - (void) fileListSuccessCallback:(NSArray *) files {
     NSMutableArray *filteredList = [[NSMutableArray alloc] init];
     for(MetaFile *row in files) {
-        if(self.exludingFolderUuid != nil) {
-            if([row.uuid isEqualToString:self.exludingFolderUuid]) {
-                continue;
-            }
-        
-        }
         if(self.prohibitedList != nil) {
             if([self.prohibitedList containsObject:row.uuid]) {
                 continue;
@@ -117,7 +112,7 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     MetaFile *fileAtIndex = [folderList objectAtIndex:indexPath.row];
-    MoveListModalController *subList = [[MoveListModalController alloc] initForFolder:fileAtIndex];
+    MoveListModalController *subList = [[MoveListModalController alloc] initForFolder:fileAtIndex withExludingFolder:self.exludingFolderUuid withProhibitedFolders:self.prohibitedList];
     subList.delegate = self.delegate;
     [self.navigationController pushViewController:subList animated:NO];
 }
@@ -136,8 +131,12 @@
 #pragma mark MoveModalFooterDelegate
 
 - (void) moveModalFooterDidSelectMove {
-    [delegate moveListModalDidSelectFolder:self.folder?self.folder.uuid:nil];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if([exludingFolderUuid isEqualToString:self.folder.uuid]) {
+        [self showErrorAlertWithMessage:NSLocalizedString(@"SameMoveError", @"")];
+    } else {
+        [delegate moveListModalDidSelectFolder:self.folder?self.folder.uuid:nil];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 - (void)viewDidLoad {

@@ -61,6 +61,7 @@
         docTable.backgroundColor = [UIColor clearColor];
         docTable.backgroundView = nil;
         docTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+        docTable.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
         [self.view addSubview:docTable];
         
         refreshControl = [[UIRefreshControl alloc] init];
@@ -188,8 +189,13 @@
 }
 
 - (void) fileFolderCellShouldDeleteForFile:(MetaFile *)fileSelected {
-    [deleteDao requestDeleteFiles:@[fileSelected.uuid]];
-    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+    if([CacheUtil showConfirmDeletePageFlag]) {
+        [deleteDao requestDeleteFiles:@[fileSelected.uuid]];
+        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+    } else {
+        fileSelectedRef = fileSelected;
+        [APPDELEGATE.base showConfirmDelete];
+    }
 }
 
 - (void) fileFolderCellShouldShareForFile:(MetaFile *)fileSelected {
@@ -270,6 +276,17 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark ConfirmDeleteModalDelegate methods
+
+- (void) confirmDeleteDidCancel {
+    NSLog(@"At INNER confirmDeleteDidCancel");
+}
+
+- (void) confirmDeleteDidConfirm {
+    [deleteDao requestDeleteFiles:@[fileSelectedRef.uuid]];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
 }
 
 /*

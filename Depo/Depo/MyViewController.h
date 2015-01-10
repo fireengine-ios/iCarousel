@@ -22,6 +22,7 @@
 #import "FileDetailModalController.h"
 #import "PhotoAlbumListModalController.h"
 #import "AlbumDetailModalController.h"
+#import "CacheUtil.h"
 
 @protocol MyViewDelegate <NSObject>
 - (void) shouldToggleMenu;
@@ -50,6 +51,7 @@
 @property (nonatomic) BOOL isLoadingMore;
 @property (nonatomic) BOOL isLoadingEnabled;
 @property (nonatomic) BOOL resetResultTable;
+@property (nonatomic) DeleteType deleteType;
 @property (nonatomic, assign) CGFloat scrollingLastContentOffset;
 
 - (void) showLoading;

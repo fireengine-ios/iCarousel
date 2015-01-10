@@ -37,22 +37,22 @@
         int yIndex = 30;
         
         UIImage *deleteImg = [UIImage imageNamed:@"big_delete_icon.png"];
-        UIImageView *deleteImgView = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - deleteImg.size.width)/2, yIndex, deleteImg.size.width, deleteImg.size.height)];
+        UIImageView *deleteImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, yIndex, deleteImg.size.width, deleteImg.size.height)];
         deleteImgView.image = deleteImg;
         [self.view addSubview:deleteImgView];
         
         yIndex += deleteImg.size.height + 20;
         
-        int messageHeight = [Util calculateHeightForText:NSLocalizedString(@"ConfirmDeleteMessage", @"") forWidth:self.view.frame.size.width-40 forFont:messageFont] + 10;
+        int messageHeight = [Util calculateHeightForText:NSLocalizedString(@"ConfirmDeleteMessage", @"") forWidth:deleteImgView.frame.size.width-40 forFont:messageFont] + 10;
         
-        CustomLabel *messageLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, yIndex, self.view.frame.size.width - 40, messageHeight) withFont:messageFont withColor:[Util UIColorForHexColor:@"888888"] withText:NSLocalizedString(@"ConfirmDeleteMessage", @"")];
+        CustomLabel *messageLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, yIndex, deleteImgView.frame.size.width - 40, messageHeight) withFont:messageFont withColor:[Util UIColorForHexColor:@"888888"] withText:NSLocalizedString(@"ConfirmDeleteMessage", @"")];
         messageLabel.textAlignment = NSTextAlignmentCenter;
         messageLabel.numberOfLines = 0;
         [self.view addSubview:messageLabel];
 
         yIndex += messageHeight + 10;
 
-        CustomLabel *confirmLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, yIndex, self.view.frame.size.width - 40, 24) withFont:confirmFont withColor:[Util UIColorForHexColor:@"555555"] withText:NSLocalizedString(@"ConfirmDeleteQuestion", @"")];
+        CustomLabel *confirmLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, yIndex, deleteImgView.frame.size.width - 40, 24) withFont:confirmFont withColor:[Util UIColorForHexColor:@"555555"] withText:NSLocalizedString(@"ConfirmDeleteQuestion", @"")];
         confirmLabel.textAlignment = NSTextAlignmentCenter;
         [self.view addSubview:confirmLabel];
 
@@ -68,7 +68,7 @@
 
         yIndex += 68;
 
-        checkButton = [[CheckButton alloc] initWithFrame:CGRectMake(70, yIndex, 21, 20) isInitiallyChecked:YES];
+        checkButton = [[CheckButton alloc] initWithFrame:CGRectMake(70, yIndex, 21, 20) isInitiallyChecked:NO];
         [checkButton addTarget:self action:@selector(toggleCheck) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:checkButton];
 
@@ -105,6 +105,18 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (BOOL)shouldAutorotate {
+    return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationPortrait | UIInterfaceOrientationPortraitUpsideDown;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
 }
 
 /*

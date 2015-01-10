@@ -246,8 +246,9 @@
 - (void) squareImageWasSelectedForFile:(MetaFile *)fileSelected {
     if(fileSelected.contentType == ContentTypePhoto) {
         ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFile:fileSelected];
-        detail.nav = self.nav;
-        [self.nav pushViewController:detail animated:NO];
+        MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
+        detail.nav = modalNav;
+        [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
     } else if(fileSelected.contentType == ContentTypeVideo) {
         VideoPreviewController *detail = [[VideoPreviewController alloc] initWithFile:fileSelected];
         MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
@@ -283,8 +284,13 @@
 }
 
 - (void) moreMenuDidSelectAlbumDelete {
-    [deleteDao requestDeleteAlbums:@[self.album.uuid]];
-    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteAlbumProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteAlbumSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteAlbumFailMessage", @"")];
+    if([CacheUtil showConfirmDeletePageFlag]) {
+        [deleteDao requestDeleteAlbums:@[self.album.uuid]];
+        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteAlbumProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteAlbumSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteAlbumFailMessage", @"")];
+    } else {
+        self.deleteType = DeleteTypeMoreMenu;
+        [APPDELEGATE.base showConfirmDelete];
+    }
 }
 
 - (void) moreMenuDidDismiss {
@@ -399,22 +405,51 @@
 #pragma mark FooterMenuDelegate methods
 
 - (void) footerActionMenuDidSelectDelete:(FooterActionsMenuView *) menu {
-    for(UIView *innerView in [photosScroll subviews]) {
-        if([innerView isKindOfClass:[SquareImageView class]]) {
-            SquareImageView *sqView = (SquareImageView *) innerView;
-            if([selectedFileList containsObject:sqView.file.uuid]) {
-                [sqView showProgressMask];
+    if([CacheUtil showConfirmDeletePageFlag]) {
+        for(UIView *innerView in [photosScroll subviews]) {
+            if([innerView isKindOfClass:[SquareImageView class]]) {
+                SquareImageView *sqView = (SquareImageView *) innerView;
+                if([selectedFileList containsObject:sqView.file.uuid]) {
+                    [sqView showProgressMask];
+                }
             }
         }
+        [deleteImgDao requestRemovePhotos:selectedFileList fromAlbum:self.album.uuid];
+        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+    } else {
+        self.deleteType = DeleteTypeFooterMenu;
+        [APPDELEGATE.base showConfirmDelete];
     }
-    [deleteImgDao requestRemovePhotos:selectedFileList fromAlbum:self.album.uuid];
-    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
 }
 
 - (void) footerActionMenuDidSelectMove:(FooterActionsMenuView *) menu {
 }
 
 - (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {
+}
+
+#pragma mark ConfirmDeleteModalDelegate methods
+
+- (void) confirmDeleteDidCancel {
+    NSLog(@"At INNER confirmDeleteDidCancel");
+}
+
+- (void) confirmDeleteDidConfirm {
+    if(self.deleteType == DeleteTypeFooterMenu) {
+        for(UIView *innerView in [photosScroll subviews]) {
+            if([innerView isKindOfClass:[SquareImageView class]]) {
+                SquareImageView *sqView = (SquareImageView *) innerView;
+                if([selectedFileList containsObject:sqView.file.uuid]) {
+                    [sqView showProgressMask];
+                }
+            }
+        }
+        [deleteImgDao requestRemovePhotos:selectedFileList fromAlbum:self.album.uuid];
+        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+    } else if(self.deleteType == DeleteTypeMoreMenu) {
+        [deleteDao requestDeleteAlbums:@[self.album.uuid]];
+        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteAlbumProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteAlbumSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteAlbumFailMessage", @"")];
+    }
 }
 
 - (void) photoModalDidTriggerUploadForUrls:(NSArray *)assetUrls {

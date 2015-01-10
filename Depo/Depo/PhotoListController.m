@@ -310,8 +310,9 @@
 - (void) squareImageWasSelectedForFile:(MetaFile *)fileSelected {
     if(fileSelected.contentType == ContentTypePhoto) {
         ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFile:fileSelected];
-        detail.nav = self.nav;
-        [self.nav pushViewController:detail animated:NO];
+        MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
+        detail.nav = modalNav;
+        [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
     } else if(fileSelected.contentType == ContentTypeVideo) {
         VideoPreviewController *detail = [[VideoPreviewController alloc] initWithFile:fileSelected];
         MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
@@ -588,21 +589,30 @@
 #pragma mark FooterMenuDelegate methods
 
 - (void) footerActionMenuDidSelectDelete:(FooterActionsMenuView *) menu {
-    if(menu.tag == IMG_FOOTER_TAG) {
-        for(UIView *innerView in [photosScroll subviews]) {
-            if([innerView isKindOfClass:[SquareImageView class]]) {
-                SquareImageView *sqView = (SquareImageView *) innerView;
-                if([selectedFileList containsObject:sqView.file.uuid]) {
-                    [sqView showProgressMask];
+    if([CacheUtil showConfirmDeletePageFlag]) {
+        if(menu.tag == IMG_FOOTER_TAG) {
+            for(UIView *innerView in [photosScroll subviews]) {
+                if([innerView isKindOfClass:[SquareImageView class]]) {
+                    SquareImageView *sqView = (SquareImageView *) innerView;
+                    if([selectedFileList containsObject:sqView.file.uuid]) {
+                        [sqView showProgressMask];
+                    }
                 }
             }
+            
+            [deleteDao requestDeleteFiles:selectedFileList];
+            [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+        } else {
+            [deleteAlbumDao requestDeleteAlbums:selectedAlbumList];
+            [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteAlbumProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteAlbumSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteAlbumFailMessage", @"")];
         }
-        
-        [deleteDao requestDeleteFiles:selectedFileList];
-        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
     } else {
-        [deleteAlbumDao requestDeleteAlbums:selectedAlbumList];
-        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteAlbumProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteAlbumSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteAlbumFailMessage", @"")];
+        if(menu.tag == IMG_FOOTER_TAG) {
+            self.deleteType = DeleteTypePhotos;
+        } else {
+            self.deleteType = DeleteTypeAlbums;
+        }
+        [APPDELEGATE.base showConfirmDelete];
     }
 }
 
@@ -617,6 +627,31 @@
     [albumAddPhotosDao requestAddPhotos:selectedFileList toAlbum:albumUuid];
     [self pushProgressViewWithProcessMessage:NSLocalizedString(@"AlbumMovePhotoProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"AlbumMovePhotoSuccessMessage", @"") andFailMessage:NSLocalizedString(@"AlbumMovePhotoFailMessage", @"")];
 
+}
+
+#pragma mark ConfirmDeleteModalDelegate methods
+
+- (void) confirmDeleteDidCancel {
+    NSLog(@"At INNER confirmDeleteDidCancel");
+}
+
+- (void) confirmDeleteDidConfirm {
+    if(self.deleteType == DeleteTypePhotos) {
+        for(UIView *innerView in [photosScroll subviews]) {
+            if([innerView isKindOfClass:[SquareImageView class]]) {
+                SquareImageView *sqView = (SquareImageView *) innerView;
+                if([selectedFileList containsObject:sqView.file.uuid]) {
+                    [sqView showProgressMask];
+                }
+            }
+        }
+        
+        [deleteDao requestDeleteFiles:selectedFileList];
+        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+    } else if(self.deleteType == DeleteTypeAlbums) {
+        [deleteAlbumDao requestDeleteAlbums:selectedAlbumList];
+        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteAlbumProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteAlbumSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteAlbumFailMessage", @"")];
+    }
 }
 
 - (void)viewDidLoad {

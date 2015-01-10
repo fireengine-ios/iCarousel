@@ -181,6 +181,7 @@ typedef enum {
     MoreMenuTypeFolderDetail,
     MoreMenuTypeAlbumDetail,
     MoreMenuTypeVideoDetail,
+    MoreMenuTypeImageDetail,
 	MoreMenuTypeShare,
     MoreMenuTypeAlbumShare,
 	MoreMenuTypeFav,
@@ -254,6 +255,14 @@ typedef enum {
     UploadTaskTypeData,
     UploadTaskTypeFile
 } UploadTaskType;
+
+typedef enum {
+    DeleteTypeFooterMenu = 0,
+    DeleteTypeMoreMenu,
+    DeleteTypeSwipeMenu,
+    DeleteTypePhotos,
+    DeleteTypeAlbums
+} DeleteType;
 
 @interface AppConstants : NSObject
 

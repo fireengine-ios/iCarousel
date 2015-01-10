@@ -40,6 +40,7 @@
 @synthesize totalPageCount;
 @synthesize searchQueryRef;
 @synthesize scrollingLastContentOffset;
+@synthesize deleteType;
 
 - (id)init {
     self = [super init];
@@ -176,7 +177,6 @@
 }
 
 - (void) moreMenuDidDismiss {
-    NSLog(@"AT moreMenuDidDismiss !!!!****");
     [self performSelector:@selector(postMoreMenuDismiss) withObject:nil afterDelay:0.1f];
 }
 

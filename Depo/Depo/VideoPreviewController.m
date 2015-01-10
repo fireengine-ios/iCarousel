@@ -23,7 +23,7 @@
 - (id)initWithFile:(MetaFile *) _file {
     self = [super init];
     if (self) {
-        self.view.backgroundColor = [UIColor greenColor];
+        self.view.backgroundColor = [UIColor blackColor];
         
         self.view.autoresizesSubviews = YES;
         self.view.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;

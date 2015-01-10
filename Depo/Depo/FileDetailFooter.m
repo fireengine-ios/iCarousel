@@ -14,13 +14,14 @@
 @synthesize delegate;
 @synthesize shareButton;
 @synthesize deleteButton;
+@synthesize separatorView;
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [Util UIColorForHexColor:@"191e24"];
         
-        UIView *separatorView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 1)];
+        separatorView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 1)];
         separatorView.backgroundColor = [Util UIColorForHexColor:@"05070b"];
         [self addSubview:separatorView];
         
@@ -33,6 +34,12 @@
         [self addSubview:deleteButton];
     }
     return self;
+}
+
+- (void) updateInnerViews {
+    separatorView.frame = CGRectMake(0, 0, self.frame.size.width, 1);
+    shareButton.frame = CGRectMake(20, (self.frame.size.height - 22)/2, 16, 22);
+    deleteButton.frame = CGRectMake(self.frame.size.width - 40, (self.frame.size.height - 21)/2, 20, 21);
 }
 
 - (void) shareClicked {

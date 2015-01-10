@@ -11,7 +11,7 @@
 "MenuLogout"="Çıkış Yap";
 "AddTypeMusicTitle"="Müzik Yükle";
 "AddTypeFolderTitle"="Yeni Klasör";
-"AddTypePhotoTitle"="Fotoğraf Yükle";
+"AddTypePhotoTitle"="Fotoğraf/Video Yükle";
 "AddTypeCameraTitle"="Kameradan Yükle";
 "AddTypeAlbumTitle"="Albüm Ekle";
 "MoreMenuSortTitle"="Sırala";
@@ -161,6 +161,7 @@
 "TodayTitle"="BUGÜN";
 "RecentSectionDateFormat"="dd MMM";
 "SelfMoveError"="Bir klasörü kendi içine taşıyamazsınız";
+"SameMoveError"="Bir dosyayı aynı klasör içine taşıyamazsınız";
 "DownloadImageProgressMessage"="Resim kaydediliyor";
 "DownloadImageSuccessMessage"="Resim başarıyla kaydedildi";
 "DownloadImageFailMessage"="Resim kaydedilirken hata oluştu";

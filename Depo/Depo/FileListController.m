@@ -277,8 +277,9 @@
     } else {
         if([AppUtil isMetaFileImage:fileAtIndex]) {
             ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFile:fileAtIndex];
-            detail.nav = self.nav;
-            [self.nav pushViewController:detail animated:NO];
+            MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
+            detail.nav = modalNav;
+            [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
         } else if([AppUtil isMetaFileDoc:fileAtIndex]){
             FileDetailInWebViewController *detail = [[FileDetailInWebViewController alloc] initWithFile:fileAtIndex];
             detail.nav = self.nav;
@@ -345,9 +346,14 @@
 }
 
 - (void) fileFolderCellShouldDeleteForFile:(MetaFile *)fileSelected {
-    [deleteDao requestDeleteFiles:@[fileSelected.uuid]];
-//    [self showLoading];
-    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+    if([CacheUtil showConfirmDeletePageFlag]) {
+        [deleteDao requestDeleteFiles:@[fileSelectedRef.uuid]];
+        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+    } else {
+        fileSelectedRef = fileSelected;
+        self.deleteType = DeleteTypeSwipeMenu;
+        [APPDELEGATE.base showConfirmDelete];
+    }
 }
 
 - (void) fileFolderCellShouldShareForFile:(MetaFile *)fileSelected {
@@ -638,19 +644,24 @@
 #pragma mark FooterMenuDelegate methods
 
 - (void) footerActionMenuDidSelectDelete:(FooterActionsMenuView *) menu {
-    for (NSInteger j = 0; j < [fileTable numberOfSections]; ++j) {
-        for (NSInteger i = 0; i < [fileTable numberOfRowsInSection:j]; ++i) {
-            UITableViewCell *cell = [fileTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]];
-            if([cell isKindOfClass:[AbstractFileFolderCell class]]) {
-                AbstractFileFolderCell *fileCell = (AbstractFileFolderCell *) cell;
-                if([selectedFileList containsObject:fileCell.fileFolder.uuid]) {
-                    [fileCell addMaskLayer];
+    if([CacheUtil showConfirmDeletePageFlag]) {
+        for (NSInteger j = 0; j < [fileTable numberOfSections]; ++j) {
+            for (NSInteger i = 0; i < [fileTable numberOfRowsInSection:j]; ++i) {
+                UITableViewCell *cell = [fileTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]];
+                if([cell isKindOfClass:[AbstractFileFolderCell class]]) {
+                    AbstractFileFolderCell *fileCell = (AbstractFileFolderCell *) cell;
+                    if([selectedFileList containsObject:fileCell.fileFolder.uuid]) {
+                        [fileCell addMaskLayer];
+                    }
                 }
             }
         }
+        [deleteDao requestDeleteFiles:selectedFileList];
+        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+    } else {
+        self.deleteType = DeleteTypeFooterMenu;
+        [APPDELEGATE.base showConfirmDelete];
     }
-    [deleteDao requestDeleteFiles:selectedFileList];
-    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
 }
 
 - (void) footerActionMenuDidSelectMove:(FooterActionsMenuView *) menu {
@@ -677,7 +688,13 @@
 #pragma mark MoreMenuDelegate
 
 - (void) moreMenuDidSelectDelete {
-    [APPDELEGATE.base showConfirmDelete];
+    if([CacheUtil showConfirmDeletePageFlag]) {
+        [folderDeleteDao requestDeleteFiles:@[self.folder.uuid]];
+        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+    } else {
+        self.deleteType = DeleteTypeMoreMenu;
+        [APPDELEGATE.base showConfirmDelete];
+    }
 }
 
 - (void) moreMenuDidSelectFav {
@@ -701,7 +718,24 @@
 }
 
 - (void) confirmDeleteDidConfirm {
-    [folderDeleteDao requestDeleteFiles:@[self.folder.uuid]];
+    if(self.deleteType == DeleteTypeFooterMenu) {
+        for (NSInteger j = 0; j < [fileTable numberOfSections]; ++j) {
+            for (NSInteger i = 0; i < [fileTable numberOfRowsInSection:j]; ++i) {
+                UITableViewCell *cell = [fileTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]];
+                if([cell isKindOfClass:[AbstractFileFolderCell class]]) {
+                    AbstractFileFolderCell *fileCell = (AbstractFileFolderCell *) cell;
+                    if([selectedFileList containsObject:fileCell.fileFolder.uuid]) {
+                        [fileCell addMaskLayer];
+                    }
+                }
+            }
+        }
+        [deleteDao requestDeleteFiles:selectedFileList];
+    } else if(self.deleteType == DeleteTypeMoreMenu) {
+        [folderDeleteDao requestDeleteFiles:@[self.folder.uuid]];
+    } else if(self.deleteType == DeleteTypeSwipeMenu) {
+        [deleteDao requestDeleteFiles:@[fileSelectedRef.uuid]];
+    }
     [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
 }
 

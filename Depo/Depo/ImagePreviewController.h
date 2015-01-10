@@ -19,6 +19,7 @@
     UIImageView *imgView;
     FileDetailFooter *footer;
     CustomButton *moreButton;
+    UIScrollView *mainScroll;
 
     DeleteDao *deleteDao;
     FavoriteDao *favDao;

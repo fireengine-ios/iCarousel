@@ -157,6 +157,7 @@
         case MoreMenuTypeFolderDetail:
         case MoreMenuTypeAlbumDetail:
         case MoreMenuTypeVideoDetail:
+        case MoreMenuTypeImageDetail:
             iconName = @"nav_detail_icon.png";
             break;
         case MoreMenuTypeShare:
@@ -201,6 +202,8 @@
         case MoreMenuTypeVideoDetail:
             title = NSLocalizedString(@"MoreMenuDetailFileTitleVideo", @"");
             break;
+        case MoreMenuTypeImageDetail:
+            title = NSLocalizedString(@"MoreMenuDetailFileTitleImg", @"");
             break;
         case MoreMenuTypeFileDetail: {
             switch (contentType) {
@@ -335,7 +338,7 @@
 }
 
 + (BOOL) isMetaFileVideo:(MetaFile *) file {
-    return ([file.rawContentType isEqualToString:CONTENT_TYPE_QUICKTIME_VALUE] || [file.rawContentType isEqualToString:CONTENT_TYPE_MP4_VALUE]);
+    return ([file.rawContentType hasPrefix:@"video/"]);
 }
 
 + (BOOL) isMetaFileMusic:(MetaFile *) file {

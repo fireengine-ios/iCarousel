@@ -64,6 +64,7 @@
         musicTable.backgroundColor = [UIColor clearColor];
         musicTable.backgroundView = nil;
         musicTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+        musicTable.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
         [self.view addSubview:musicTable];
         
         refreshControl = [[UIRefreshControl alloc] init];
@@ -227,8 +228,14 @@
 }
 
 - (void) fileFolderCellShouldDeleteForFile:(MetaFile *)fileSelected {
-    [deleteDao requestDeleteFiles:@[fileSelected.uuid]];
-    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+    if([CacheUtil showConfirmDeletePageFlag]) {
+        [deleteDao requestDeleteFiles:@[fileSelected.uuid]];
+        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+    } else {
+        fileSelectedRef = fileSelected;
+        self.deleteType = DeleteTypeSwipeMenu;
+        [APPDELEGATE.base showConfirmDelete];
+    }
 }
 
 - (void) fileFolderCellShouldShareForFile:(MetaFile *)fileSelected {
@@ -281,19 +288,24 @@
 #pragma mark FooterMenuDelegate methods
 
 - (void) footerActionMenuDidSelectDelete:(FooterActionsMenuView *) menu {
-    for (NSInteger j = 0; j < [musicTable numberOfSections]; ++j) {
-        for (NSInteger i = 0; i < [musicTable numberOfRowsInSection:j]; ++i) {
-            UITableViewCell *cell = [musicTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]];
-            if([cell isKindOfClass:[AbstractFileFolderCell class]]) {
-                AbstractFileFolderCell *fileCell = (AbstractFileFolderCell *) cell;
-                if([selectedMusicList containsObject:fileCell.fileFolder.uuid]) {
-                    [fileCell addMaskLayer];
+    if([CacheUtil showConfirmDeletePageFlag]) {
+        for (NSInteger j = 0; j < [musicTable numberOfSections]; ++j) {
+            for (NSInteger i = 0; i < [musicTable numberOfRowsInSection:j]; ++i) {
+                UITableViewCell *cell = [musicTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]];
+                if([cell isKindOfClass:[AbstractFileFolderCell class]]) {
+                    AbstractFileFolderCell *fileCell = (AbstractFileFolderCell *) cell;
+                    if([selectedMusicList containsObject:fileCell.fileFolder.uuid]) {
+                        [fileCell addMaskLayer];
+                    }
                 }
             }
         }
+        [deleteDao requestDeleteFiles:selectedMusicList];
+        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+    } else {
+        self.deleteType = DeleteTypeFooterMenu;
+        [APPDELEGATE.base showConfirmDelete];
     }
-    [deleteDao requestDeleteFiles:selectedMusicList];
-    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
 }
 
 - (void) footerActionMenuDidSelectMove:(FooterActionsMenuView *) menu {
@@ -309,6 +321,33 @@
 
 - (void) moreClicked {
     [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeSortWithList], [NSNumber numberWithInt:MoreMenuTypeSelect]]];
+}
+
+#pragma mark ConfirmDeleteModalDelegate methods
+
+- (void) confirmDeleteDidCancel {
+    NSLog(@"At INNER confirmDeleteDidCancel");
+}
+
+- (void) confirmDeleteDidConfirm {
+    if(self.deleteType == DeleteTypeFooterMenu) {
+        for (NSInteger j = 0; j < [musicTable numberOfSections]; ++j) {
+            for (NSInteger i = 0; i < [musicTable numberOfRowsInSection:j]; ++i) {
+                UITableViewCell *cell = [musicTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]];
+                if([cell isKindOfClass:[AbstractFileFolderCell class]]) {
+                    AbstractFileFolderCell *fileCell = (AbstractFileFolderCell *) cell;
+                    if([selectedMusicList containsObject:fileCell.fileFolder.uuid]) {
+                        [fileCell addMaskLayer];
+                    }
+                }
+            }
+        }
+        [deleteDao requestDeleteFiles:selectedMusicList];
+        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+    } else if(self.deleteType == DeleteTypeSwipeMenu) {
+        [deleteDao requestDeleteFiles:@[fileSelectedRef.uuid]];
+        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+    }
 }
 
 - (void) sortDidChange {

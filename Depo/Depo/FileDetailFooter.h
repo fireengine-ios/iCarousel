@@ -19,5 +19,8 @@
 @property (nonatomic, strong) id<FileDetailFooterDelegate> delegate;
 @property (nonatomic, strong) CustomButton *shareButton;
 @property (nonatomic, strong) CustomButton *deleteButton;
+@property (nonatomic, strong) UIView *separatorView;
+
+- (void) updateInnerViews;
 
 @end

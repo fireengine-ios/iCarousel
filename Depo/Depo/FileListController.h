@@ -29,6 +29,8 @@
     MoveDao *moveDao;
     RenameDao *renameDao;
     
+    MetaFile *fileSelectedRef;
+    
     UploadManager *uploadManager;
     CustomButton *moreButton;
     

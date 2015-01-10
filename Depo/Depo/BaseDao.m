@@ -145,7 +145,7 @@
         return ContentTypePhoto;
     } else if([metaFile.rawContentType isEqualToString:CONTENT_TYPE_AUDIO_MP3_VALUE] || [metaFile.rawContentType isEqualToString:CONTENT_TYPE_AUDIO_MPEG_VALUE]) {
             return ContentTypeMusic;
-    } else if([metaFile.rawContentType isEqualToString:CONTENT_TYPE_QUICKTIME_VALUE] || [metaFile.rawContentType isEqualToString:CONTENT_TYPE_MP4_VALUE]) {
+    } else if([metaFile.rawContentType hasPrefix:@"video/"]) {
         return ContentTypeVideo;
     } else if([metaFile.rawContentType isEqualToString:CONTENT_TYPE_PDF_VALUE] || [metaFile.rawContentType isEqualToString:CONTENT_TYPE_DOC_VALUE] || [metaFile.rawContentType isEqualToString:CONTENT_TYPE_TXT_VALUE] || [metaFile.rawContentType isEqualToString:CONTENT_TYPE_HTML_VALUE]) {
         return ContentTypeDoc;

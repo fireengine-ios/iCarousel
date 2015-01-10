@@ -17,6 +17,7 @@
 - (void) moreMenuDidSelectShare;
 - (void) moreMenuDidSelectDelete;
 - (void) moreMenuDidSelectVideoDetail;
+- (void) moreMenuDidSelectImageDetail;
 - (void) moreMenuDidSelectAlbumShare;
 - (void) moreMenuDidSelectAlbumDelete;
 - (void) moreMenuDidSelectDownloadImage;
