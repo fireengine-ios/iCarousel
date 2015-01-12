@@ -347,7 +347,7 @@
 
 - (void) fileFolderCellShouldDeleteForFile:(MetaFile *)fileSelected {
     if([CacheUtil showConfirmDeletePageFlag]) {
-        [deleteDao requestDeleteFiles:@[fileSelectedRef.uuid]];
+        [deleteDao requestDeleteFiles:@[fileSelected.uuid]];
         [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
     } else {
         fileSelectedRef = fileSelected;

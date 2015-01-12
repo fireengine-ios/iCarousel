@@ -37,7 +37,12 @@
     NSString *tempPath = [documentsDirectory stringByAppendingFormat:@"/%@", camImgName];
     
     UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
-    [UIImagePNGRepresentation(image) writeToFile:tempPath atomically:NO];
+    NSData *imgData = UIImagePNGRepresentation(image);
+    
+    UIImage *tempImage = [UIImage imageWithData:imgData];
+    UIImage *fixedOrientationImage = [UIImage imageWithCGImage:tempImage.CGImage scale:image.scale orientation:image.imageOrientation];
+    
+    [UIImagePNGRepresentation(fixedOrientationImage) writeToFile:tempPath atomically:NO];
     
     [modalDelegate cameraCapturaModalDidCaptureAndStoreImageToPath:tempPath withName:camImgName];
     [self dismissViewControllerAnimated:YES completion:nil];

@@ -120,7 +120,8 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         NSData *videoData = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
         [videoData writeToFile:tempPath atomically:YES];
     } else {
-        UIImage *image = [UIImage imageWithCGImage:[asset.defaultRepresentation fullResolutionImage]];
+        ALAssetOrientation imgOrientation = [[self.asset valueForProperty:@"ALAssetPropertyOrientation"] intValue];
+        UIImage *image = [UIImage imageWithCGImage:[asset.defaultRepresentation fullResolutionImage] scale:1.0 orientation:imgOrientation];
         [UIImagePNGRepresentation(image) writeToFile:tempPath atomically:YES];
     }
 

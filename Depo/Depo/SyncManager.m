@@ -61,7 +61,8 @@
                         NSData *videoData = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
                         remoteCalcHash = [SyncUtil md5String:videoData];
                     } else {
-                        UIImage *image = [UIImage imageWithCGImage:[asset.defaultRepresentation fullResolutionImage]];
+                        ALAssetOrientation imgOrientation = [[asset valueForProperty:@"ALAssetPropertyOrientation"] intValue];
+                        UIImage *image = [UIImage imageWithCGImage:[asset.defaultRepresentation fullResolutionImage] scale:1.0 orientation:imgOrientation];
                         remoteCalcHash = [SyncUtil md5String:UIImagePNGRepresentation(image)];
                     }
                     if(![remoteHashList containsObject:remoteCalcHash]) {
