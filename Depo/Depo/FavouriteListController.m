@@ -60,8 +60,6 @@
         favoriteDao.successMethod = @selector(favSuccessCallback);
         favoriteDao.failMethod = @selector(favFailCallback:);
         
-        [self triggerRefresh];
-        [self showLoading];
     }
     
     return self;
@@ -233,6 +231,12 @@
     [favoriteDao requestMetadataForFiles:@[fileSelected.uuid] shouldFavorite:NO];
     //    [self showLoading];
     [self pushProgressViewWithProcessMessage:NSLocalizedString(@"UnfavProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"UnfavSuccessMessage", @"") andFailMessage:NSLocalizedString(@"UnfavFailMessage", @"")];
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self triggerRefresh];
+    [self showLoading];
 }
 
 - (BOOL)shouldAutorotate {

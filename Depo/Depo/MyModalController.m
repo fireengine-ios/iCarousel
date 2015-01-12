@@ -8,6 +8,8 @@
 
 #import "MyModalController.h"
 #import "AppConstants.h"
+#import "CustomAlertView.h"
+#import "AppDelegate.h"
 
 @interface MyModalController ()
 
@@ -40,6 +42,16 @@
 
 - (void) triggerDismiss {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void) showErrorAlertWithMessage:(NSString *) errMessage {
+    CustomAlertView *alert = [[CustomAlertView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:@"Hata" withMessage:errMessage withModalType:ModalTypeError];
+    [APPDELEGATE showCustomAlert:alert];
+}
+
+- (void) showInfoAlertWithMessage:(NSString *) infoMessage {
+    CustomAlertView *alert = [[CustomAlertView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:@"Bilgi" withMessage:infoMessage withModalType:ModalTypeSuccess];
+    [APPDELEGATE showCustomAlert:alert];
 }
 
 - (void) pushProgressViewWithProcessMessage:(NSString *) progressMsg andSuccessMessage:(NSString *) successMsg andFailMessage:(NSString *) failMsg {

@@ -40,6 +40,8 @@
                         [keyVal appendString:@"SingleFile"];
                     }
                 }
+            } else {
+                [keyVal appendString:@"SingleFile"];
             }
         } else if([activity.rawFileType isEqualToString:@"AUDIO"]) {
             if([activity.actionItemList count] > 1) {

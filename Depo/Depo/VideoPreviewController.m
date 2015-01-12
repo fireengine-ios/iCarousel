@@ -71,7 +71,7 @@
 }
 
 - (void) postDelete {
-    [self.nav popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void) favSuccessCallback:(NSNumber *) favFlag {
