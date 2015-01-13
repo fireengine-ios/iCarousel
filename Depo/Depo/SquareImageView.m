@@ -20,9 +20,14 @@
 @synthesize uploadRef;
 
 - (id)initWithFrame:(CGRect)frame withFile:(MetaFile *) _file {
+    return [self initWithFrame:frame withFile:_file withSelectibleStatus:NO];
+}
+
+- (id)initWithFrame:(CGRect)frame withFile:(MetaFile *) _file withSelectibleStatus:(BOOL) selectibleStatus {
     self = [super initWithFrame:frame];
     if (self) {
         self.file = _file;
+        isSelectible = selectibleStatus;
 
         imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
         [imgView setImageWithURL:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];

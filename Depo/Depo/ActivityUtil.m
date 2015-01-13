@@ -72,8 +72,8 @@
         } else if([activity.rawActivityType isEqualToString:@"UPDATED"]) {
             [keyVal appendString:@"Updated"];
         }
-        
-        activity.title = [NSString stringWithFormat:NSLocalizedString(keyVal, @""), [activity.actionItemList count] == 0 ? 1 : [activity.actionItemList count]];
+
+        activity.title = [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(keyVal, @"", [NSBundle mainBundle], nil, @""), [activity.actionItemList count] == 0 ? 1 : [activity.actionItemList count]];
     }
     @catch (NSException *exception) {
     }

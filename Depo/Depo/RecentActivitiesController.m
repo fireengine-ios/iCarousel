@@ -89,9 +89,16 @@
     } else {
         rawItems = [ActivityUtil mergedActivityList:rawItems withAdditionalList:recentItems];
     }
+    
+    NSMutableArray *filteredRawFiles = [[NSMutableArray alloc] init];
     for(Activity *activity in rawItems) {
         [ActivityUtil enrichTitleForActivity:activity];
+        if(activity.title != nil) {
+            [filteredRawFiles addObject:activity];
+        }
     }
+    self.rawItems = filteredRawFiles;
+    
     [self reorganiseActivities:rawItems];
 
     [self.recentTable reloadData];

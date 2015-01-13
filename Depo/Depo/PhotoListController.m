@@ -183,7 +183,7 @@
     int counter = (int)[photoList count];
     for(MetaFile *row in files) {
         CGRect imgRect = CGRectMake(5 + (counter%3 * 105), 15 + ((int)floor(counter/3)*105), 100, 100);
-        SquareImageView *imgView = [[SquareImageView alloc] initWithFrame:imgRect withFile:row];
+        SquareImageView *imgView = [[SquareImageView alloc] initWithFrame:imgRect withFile:row withSelectibleStatus:isSelectible];
         imgView.delegate = self;
         [photosScroll addSubview:imgView];
         counter ++;

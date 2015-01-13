@@ -9,6 +9,7 @@
 #import "CustomAlertView.h"
 #import "Util.h"
 #import "CustomButton.h"
+#import "SimpleButton.h"
 
 @implementation CustomAlertView
 
@@ -71,7 +72,8 @@
         messageLabel.numberOfLines = 0;
         [modalView addSubview:messageLabel];
         
-        CustomButton *dismissButton = [[CustomButton alloc] initWithFrame:CGRectMake(19, modalView.frame.size.height - 66, 242, 52) withImageName:@"modal_tamam.png" withTitle:@"Tamam" withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:22]];
+        SimpleButton *dismissButton = [[SimpleButton alloc] initWithFrame:CGRectMake(19, modalView.frame.size.height - 66, 242, 52) withTitle:@"Tamam" withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:22] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
+
         [dismissButton addTarget:self action:@selector(triggerDismiss) forControlEvents:UIControlEventTouchUpInside];
         [modalView addSubview:dismissButton];
 

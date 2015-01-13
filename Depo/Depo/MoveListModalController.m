@@ -131,7 +131,9 @@
 #pragma mark MoveModalFooterDelegate
 
 - (void) moveModalFooterDidSelectMove {
-    if([exludingFolderUuid isEqualToString:self.folder.uuid]) {
+    if(exludingFolderUuid == nil && (self.folder == nil || self.folder.uuid == nil)) {
+        [self showErrorAlertWithMessage:NSLocalizedString(@"SameMoveError", @"")];
+    } else if([exludingFolderUuid isEqualToString:self.folder.uuid]) {
         [self showErrorAlertWithMessage:NSLocalizedString(@"SameMoveError", @"")];
     } else {
         [delegate moveListModalDidSelectFolder:self.folder?self.folder.uuid:nil];

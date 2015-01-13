@@ -43,6 +43,7 @@
         
         msisdnField = [[LoginTextfield alloc] initWithFrame:CGRectMake(20, 75, self.view.frame.size.width - 40, 43) withPlaceholder:NSLocalizedString(@"MsisdnPlaceholder", @"")];
         msisdnField.delegate = self;
+        msisdnField.placeholder = @"5xxxxxxxxx";
         [self.view addSubview:msisdnField];
 
         CustomLabel *passLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(25, 130, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"PasswordTitle", @"")];
@@ -109,7 +110,7 @@
     msisdnValue = msisdnField.text;
     passValue = passField.text;
     
-    if([msisdnValue length] < 10) {
+    if([msisdnValue length] != 10) {
         [self showErrorAlertWithMessage:NSLocalizedString(@"MsisdnFormatErrorMessage", @"")];
         return;
     }
