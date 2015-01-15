@@ -463,9 +463,7 @@
 }
 
 + (BOOL) readFirstVisitOverFlag {
-    //TODO sil ve son satırı aç
-    return NO;
-//    return [[NSUserDefaults standardUserDefaults] boolForKey:FIRST_VISIT_OVER];
+    return [[NSUserDefaults standardUserDefaults] boolForKey:FIRST_VISIT_OVER];
 }
 
 + (void) writeFirstVisitOverFlag {

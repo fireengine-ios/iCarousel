@@ -125,6 +125,8 @@
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 
+    [APPDELEGATE.base immediateShowAddButton];
+
     [self triggerRefresh];
     [self showLoading];
 }

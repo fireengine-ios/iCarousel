@@ -12,6 +12,7 @@
 #import "AppDelegate.h"
 #import "PostLoginPrefCell.h"
 #import "CacheUtil.h"
+#import "AppUtil.h"
 
 @interface PostLoginSyncPrefController ()
 
@@ -70,6 +71,8 @@
 - (void) continueClicked {
     [CacheUtil writeCachedSettingSyncingConnectionType:selectedOption];
     [CacheUtil writeCachedSettingDataRoaming:onOff.isOn];
+
+    [AppUtil writeFirstVisitOverFlag];
     [APPDELEGATE triggerHome];
 }
 
