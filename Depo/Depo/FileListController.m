@@ -544,19 +544,24 @@
     
     if([assetUrls count] > 0) {
         [APPDELEGATE.base showBaseLoading];
-        dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_queue_t queue = dispatch_queue_create("write_to_file_queue", NULL);
+        dispatch_async(queue, ^{
             for(UploadRef *ref in assetUrls) {
                 UploadManager *manager = [[UploadManager alloc] initWithUploadReference:ref];
                 [manager startUploadingAsset:ref.filePath atFolder:self.folder];
                 [APPDELEGATE.uploadQueue addNewUploadTask:manager];
             }
             fileList = [assetUrls arrayByAddingObjectsFromArray:fileList];
-            self.tableUpdateCounter++;
-            [self.fileTable reloadData];
-
-            [APPDELEGATE.base hideBaseLoading];
+            [self performSelectorOnMainThread:@selector(postUploadTrigger) withObject:nil waitUntilDone:NO];
         });
     }
+}
+
+- (void) postUploadTrigger {
+    self.tableUpdateCounter++;
+    [self.fileTable reloadData];
+    
+    [APPDELEGATE.base hideBaseLoading];
 }
 
 - (BOOL)shouldAutorotate {
