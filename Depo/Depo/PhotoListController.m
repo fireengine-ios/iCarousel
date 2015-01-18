@@ -497,11 +497,21 @@
 }
 
 - (void) photoModalDidTriggerUploadForUrls:(NSArray *)assetUrls {
-    for(UploadRef *ref in assetUrls) {
-        UploadManager *manager = [[UploadManager alloc] initWithUploadReference:ref];
-        [manager startUploadingAsset:ref.filePath atFolder:nil];
-        [APPDELEGATE.uploadQueue addNewUploadTask:manager];
-    }
+    [APPDELEGATE.base showBaseLoading];
+    dispatch_queue_t queue = dispatch_queue_create("write_to_file_queue", NULL);
+    dispatch_async(queue, ^{
+        for(UploadRef *ref in assetUrls) {
+            UploadManager *manager = [[UploadManager alloc] initWithUploadReference:ref];
+            [manager startUploadingAsset:ref.filePath atFolder:nil];
+            [APPDELEGATE.uploadQueue addNewUploadTask:manager];
+        }
+        [self performSelectorOnMainThread:@selector(postUploadTrigger) withObject:nil waitUntilDone:NO];
+    });
+    
+}
+
+- (void) postUploadTrigger {
+    [APPDELEGATE.base hideBaseLoading];
     [self triggerRefresh];
 }
 

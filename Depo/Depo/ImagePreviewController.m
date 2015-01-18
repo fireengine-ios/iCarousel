@@ -99,6 +99,7 @@
 
 - (void) postDelete {
     [self dismissViewControllerAnimated:YES completion:nil];
+    [APPDELEGATE.base checkAndShowAddButton];
 }
 
 - (void) favSuccessCallback:(NSNumber *) favFlag {
@@ -240,6 +241,7 @@
 
 - (void) triggerDismiss {
     [self dismissViewControllerAnimated:YES completion:nil];
+    [APPDELEGATE.base checkAndShowAddButton];
 }
 
 - (void)orientationChanged:(NSNotification *)notification {

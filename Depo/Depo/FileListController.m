@@ -125,13 +125,18 @@
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 
-    [APPDELEGATE.base immediateShowAddButton];
-
-    [self triggerRefresh];
-    [self showLoading];
+    if(!isSelectible) {
+        [self triggerRefresh];
+        [self showLoading];
+    }
 }
 
 - (void) triggerRefresh {
+    if(isSelectible) {
+        [refreshControl endRefreshing];
+        return;
+    }
+    
     listOffset = 0;
     if(self.folder) {
         [fileListDao requestFileListingForFolder:self.folder.uuid andForPage:listOffset andSize:NO_OF_FILES_PER_PAGE sortBy:APPDELEGATE.session.sortType];

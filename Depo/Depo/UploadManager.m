@@ -37,6 +37,8 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         self.initializationDate = [NSDate date];
         
         NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration  defaultSessionConfiguration];
+//        sessionConfig.HTTPAdditionalHeaders = @{@"Keep-Alive": @"timeout=600, max=6"};
+        
         session = [NSURLSession sessionWithConfiguration:sessionConfig delegate:self delegateQueue:nil];
         
         notifyDao = [[UploadNotifyDao alloc] init];
@@ -120,8 +122,13 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         NSData *videoData = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
         [videoData writeToFile:tempPath atomically:YES];
     } else {
-        ALAssetOrientation imgOrientation = [[self.asset valueForProperty:@"ALAssetPropertyOrientation"] intValue];
-        UIImage *image = [UIImage imageWithCGImage:[asset.defaultRepresentation fullResolutionImage] scale:1.0 orientation:imgOrientation];
+        UIImageOrientation orientation = UIImageOrientationUp;
+        NSNumber* orientationValue = [asset valueForProperty:@"ALAssetPropertyOrientation"];
+        if (orientationValue != nil) {
+            orientation = [orientationValue intValue];
+        }
+        
+        UIImage *image = [UIImage imageWithCGImage:[asset.defaultRepresentation fullResolutionImage] scale:1.0 orientation:orientationValue];
         [UIImagePNGRepresentation(image) writeToFile:tempPath atomically:YES];
     }
 
@@ -136,17 +143,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 
 - (void) startTask {
     if(self.taskType == UploadTaskTypeAsset) {
-        uploadTask = [session uploadTaskWithRequest:[self prepareRequestWithFileName:self.fileNameRef] fromFile:[NSURL fileURLWithPath:self.uploadRef.tempUrl] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-            NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
-            if (!error && httpResp.statusCode == 201) {
-                [self removeTemporaryFile];
-                [notifyDao requestNotifyUploadForFile:self.uploadRef.fileUuid atParentFolder:self.folder?self.folder.uuid:@""];
-            } else {
-                [self removeTemporaryFile];
-                [delegate uploadManagerDidFailUploadingForAsset:self.asset];
-                hasFinished = YES;
-            }
-        }];
+        uploadTask = [session uploadTaskWithRequest:[self prepareRequestWithFileName:self.fileNameRef] fromFile:[NSURL fileURLWithPath:self.uploadRef.tempUrl]];
         [uploadTask resume];
     } else if(self.taskType == UploadTaskTypeFile) {
         uploadTask = [session uploadTaskWithRequest:[self prepareRequestWithFileName:self.fileNameRef] fromFile:[NSURL fileURLWithPath:self.filePathRef] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -222,6 +219,24 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 
 - (void) URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didSendBodyData:(int64_t)bytesSent totalBytesSent:(int64_t)totalBytesSent totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend {
     [delegate uploadManagerDidSendData:(long)totalBytesSent inTotal:(long)totalBytesExpectedToSend];
+}
+
+- (void) URLSession:(NSURLSession *) _session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error {
+    NSLog(@"didCompleteWithError: %@", error);
+
+    NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) task.response;
+    if (!error && httpResp.statusCode == 201) {
+        [self removeTemporaryFile];
+        [notifyDao requestNotifyUploadForFile:self.uploadRef.fileUuid atParentFolder:self.folder?self.folder.uuid:@""];
+    } else {
+        [self removeTemporaryFile];
+        [delegate uploadManagerDidFailUploadingForAsset:self.asset];
+        hasFinished = YES;
+    }
+}
+
+- (void) URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession *) _session {
+    NSLog(@"URLSessionDidFinishEventsForBackgroundURLSession");
 }
 
 @end

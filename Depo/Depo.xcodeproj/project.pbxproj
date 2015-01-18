@@ -460,6 +460,9 @@
 		059E9A051A35DBB300922A77 /* sms_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 059E9A031A35DBB300922A77 /* sms_icon.png */; };
 		059E9A061A35DBB300922A77 /* sms_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 059E9A041A35DBB300922A77 /* sms_icon@2x.png */; };
 		059E9A091A35DC2500922A77 /* MyMessageComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 059E9A081A35DC2500922A77 /* MyMessageComposeViewController.m */; };
+		05A484591A6C610400793A90 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A484581A6C610400793A90 /* UIImage+Resize.m */; };
+		05A4845E1A6C614300793A90 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A4845A1A6C614300793A90 /* UIImage+Alpha.m */; };
+		05A4845F1A6C614300793A90 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A4845B1A6C614300793A90 /* UIImage+RoundedCorner.m */; };
 		05A8ADA51A5ABCD8007566BF /* UploadQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A8ADA41A5ABCD8007566BF /* UploadQueue.m */; };
 		05AF7C811A1C8CD100F5011A /* RecentActivitiesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AF7C801A1C8CD100F5011A /* RecentActivitiesController.m */; };
 		05AF7C841A1C8D6D00F5011A /* Activity.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AF7C831A1C8D6D00F5011A /* Activity.m */; };
@@ -1151,6 +1154,12 @@
 		059E9A041A35DBB300922A77 /* sms_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sms_icon@2x.png"; sourceTree = "<group>"; };
 		059E9A071A35DC2500922A77 /* MyMessageComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMessageComposeViewController.h; sourceTree = "<group>"; };
 		059E9A081A35DC2500922A77 /* MyMessageComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMessageComposeViewController.m; sourceTree = "<group>"; };
+		05A484571A6C610400793A90 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		05A484581A6C610400793A90 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
+		05A4845A1A6C614300793A90 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
+		05A4845B1A6C614300793A90 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
+		05A4845C1A6C614300793A90 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
+		05A4845D1A6C614300793A90 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
 		05A8ADA31A5ABCD8007566BF /* UploadQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadQueue.h; sourceTree = "<group>"; };
 		05A8ADA41A5ABCD8007566BF /* UploadQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadQueue.m; sourceTree = "<group>"; };
 		05AF7C7F1A1C8CD100F5011A /* RecentActivitiesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentActivitiesController.h; sourceTree = "<group>"; };
@@ -1723,6 +1732,12 @@
 		051E1E3A19CAC8EA00FD1E03 /* out */ = {
 			isa = PBXGroup;
 			children = (
+				05A484571A6C610400793A90 /* UIImage+Resize.h */,
+				05A484581A6C610400793A90 /* UIImage+Resize.m */,
+				05A4845A1A6C614300793A90 /* UIImage+Alpha.m */,
+				05A4845B1A6C614300793A90 /* UIImage+RoundedCorner.m */,
+				05A4845C1A6C614300793A90 /* UIImage+Alpha.h */,
+				05A4845D1A6C614300793A90 /* UIImage+RoundedCorner.h */,
 				05DA564A1A56D5B3007D2B1D /* ALAssetRepresentation+MD5.h */,
 				05DA564B1A56D5B3007D2B1D /* ALAssetRepresentation+MD5.m */,
 				056E2A121A28BC1E00C24904 /* XYPieChart */,
@@ -2644,6 +2659,7 @@
 				05AF7C8D1A1C9C5800F5011A /* RecentActivityLinkerFooter.m in Sources */,
 				05224A9519DC1CBC00214767 /* PhotoListModalController.m in Sources */,
 				0546992C19F4E9EA00A87840 /* FileDetailFooter.m in Sources */,
+				05A4845F1A6C614300793A90 /* UIImage+RoundedCorner.m in Sources */,
 				051E1E0719CAC2F900FD1E03 /* AppDelegate.m in Sources */,
 				0555EF1A19F8F50B0068F4CC /* ConfirmDeleteModalController.m in Sources */,
 				05C0E2011A06ABD7005E1E92 /* MoveModalFooterView.m in Sources */,
@@ -2761,12 +2777,14 @@
 				05E8113819DF27690063F99A /* MusicListModalController.m in Sources */,
 				059C9EC71A07DC60000C54D9 /* FolderDetailModalController.m in Sources */,
 				05D2B19D19E67C6900FC309D /* MainPhotoAlbumCell.m in Sources */,
+				05A484591A6C610400793A90 /* UIImage+Resize.m in Sources */,
 				05D2B19719E676BF00FC309D /* AlbumListDao.m in Sources */,
 				0524E32919D955FA00E2698E /* FileDetail.m in Sources */,
 				05EA75B519DC6C2400AC77AB /* MultipleUploadFooterView.m in Sources */,
 				05B73E7F1A5EC04B005D24BE /* UsageInfoDao.m in Sources */,
 				052644B619D5A2A600B63759 /* SettingsHelpController.m in Sources */,
 				058219CB1A384D50001FA679 /* RecentSearchCell.m in Sources */,
+				05A4845E1A6C614300793A90 /* UIImage+Alpha.m in Sources */,
 				0515706719E5B34100C62B98 /* SquareImageView.m in Sources */,
 				05E8113519DF10340063F99A /* RefAlbumCell.m in Sources */,
 				050D4C2F1A31E12F00809A01 /* PostLoginSyncPrefController.m in Sources */,
@@ -2897,6 +2915,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mahir Kemal Tarlan (R2478SCTN5)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/Depo-Prefix.pch";
 				INFOPLIST_FILE = "Depo/Depo-Info.plist";
@@ -2912,6 +2931,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mahir Kemal Tarlan (R2478SCTN5)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/Depo-Prefix.pch";
 				INFOPLIST_FILE = "Depo/Depo-Info.plist";

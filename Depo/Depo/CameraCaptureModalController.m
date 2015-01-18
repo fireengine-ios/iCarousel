@@ -8,6 +8,7 @@
 
 #import "CameraCaptureModalController.h"
 #import "AppUtil.h"
+#import "UIImage+Resize.h"
 
 @interface CameraCaptureModalController ()
 
@@ -36,13 +37,11 @@
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *tempPath = [documentsDirectory stringByAppendingFormat:@"/%@", camImgName];
     
-    UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
-    NSData *imgData = UIImagePNGRepresentation(image);
+    UIImage *pickedImage = [info objectForKey:UIImagePickerControllerEditedImage];
+    UIImage *resized = [pickedImage resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:pickedImage.size interpolationQuality:kCGInterpolationHigh];
+
     
-    UIImage *tempImage = [UIImage imageWithData:imgData];
-    UIImage *fixedOrientationImage = [UIImage imageWithCGImage:tempImage.CGImage scale:image.scale orientation:image.imageOrientation];
-    
-    [UIImagePNGRepresentation(fixedOrientationImage) writeToFile:tempPath atomically:NO];
+    [UIImagePNGRepresentation(resized) writeToFile:tempPath atomically:NO];
     
     [modalDelegate cameraCapturaModalDidCaptureAndStoreImageToPath:tempPath withName:camImgName];
     [self dismissViewControllerAnimated:YES completion:nil];
