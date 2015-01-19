@@ -56,7 +56,8 @@
 
         selectedMusicList = [[NSMutableArray alloc] init];
         musicDict = [[NSMutableDictionary alloc] init];
-        musicDictKeys = [[NSMutableArray alloc] init];
+        //musicDictKeys = [[NSMutableArray alloc] init];
+        self.musicDictKeys = @[@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"R", @"S", @"T", @"U", @"V", @"Y", @"Z", @"#"];
         
         musicTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex) style:UITableViewStylePlain];
         musicTable.delegate = self;
@@ -80,7 +81,6 @@
 - (void) triggerRefresh {
     listOffset = 0;
     [musicDict removeAllObjects];
-    [musicDictKeys removeAllObjects];
     [elasticSearchDao requestMusicForPage:listOffset andSize:21 andSortType:APPDELEGATE.session.sortType];
 }
 
@@ -101,9 +101,11 @@
                 sortVal = file.detail.artist;
             }
         }
-        NSString *sortValKey = [sortVal length] > 0 ? [sortVal substringToIndex:1] : @" ";
+        NSString *sortValKey = [[sortVal length] > 0 ? [sortVal substringToIndex:1] : @" " uppercaseString];
         if(![musicDictKeys containsObject:sortValKey]) {
-            [musicDictKeys addObject:sortValKey];
+            sortValKey = @"#";
+        }
+        if([musicDict objectForKey:sortValKey] == nil) {
             NSMutableArray *filesForKey = [[NSMutableArray alloc] initWithObjects:file, nil];
             [musicDict setObject:filesForKey forKey:sortValKey];
         } else {
@@ -125,7 +127,11 @@
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSString *sectionKey = [musicDictKeys objectAtIndex:section];
     NSMutableArray *sectionArray = [musicDict objectForKey:sectionKey];
-    return [sectionArray count];
+    if(sectionArray == nil) {
+        return 0;
+    } else {
+        return [sectionArray count];
+    }
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {

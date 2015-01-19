@@ -52,19 +52,19 @@
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 7;
+    return 6;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.row == 0)
         return 31;
-    else if(indexPath.row == 4) {
+    else if(indexPath.row == 3) {
         return (currentSetting == EnableOptionAuto) ? infoTextAutoHeight + 48 : 0;
     }
-    else if(indexPath.row == 5) {
+    else if(indexPath.row == 4) {
         return (currentSetting == EnableOptionOn) ? infoTextAutoHeight + 48 : 0;
     }
-    else if(indexPath.row == 6) {
+    else if(indexPath.row == 5) {
         return (currentSetting == EnableOptionOff) ? infoTextAutoHeight + 48 : 0;
     }
     else
@@ -78,23 +78,20 @@
         HeaderCell *cell = [[HeaderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier headerText:@""];
         return cell;
     } else if(indexPath.row == 1) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier iconName:@"" titleText:[self getEnableOptionName:EnableOptionAuto] checkStatus:(currentSetting == EnableOptionAuto)];
-        return cell;
-    } else if(indexPath.row == 2) {
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier iconName:@"" titleText:[self getEnableOptionName:EnableOptionOn] checkStatus:(currentSetting == EnableOptionOn)];
         return cell;
-    } else if(indexPath.row == 3) {
+    } else if(indexPath.row == 2) {
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier iconName:@"" titleText:[self getEnableOptionName:EnableOptionOff] checkStatus:(currentSetting == EnableOptionOff)];
         return cell;
-    } else if(indexPath.row == 4) {
+    } else if(indexPath.row == 3) {
         TextCell *cell = [[TextCell alloc]initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"" titleColor:nil contentText:infoTextAuto contentTextColor:nil backgroundColor:nil hasSeparator:NO];
         cell.hidden = (currentSetting != EnableOptionAuto);
         return cell;
-    } else if(indexPath.row == 5) {
+    } else if(indexPath.row == 4) {
         TextCell *cell = [[TextCell alloc]initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"" titleColor:nil contentText:infoTextOn contentTextColor:nil backgroundColor:nil hasSeparator:NO];
         cell.hidden = (currentSetting != EnableOptionOn);
         return cell;
-    } else if(indexPath.row == 6) {
+    } else if(indexPath.row == 5) {
         TextCell *cell = [[TextCell alloc]initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"" titleColor:nil contentText:infoTextOff contentTextColor:nil backgroundColor:nil hasSeparator:NO];
         cell.hidden = (currentSetting != EnableOptionOff);
         return cell;
@@ -106,12 +103,9 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch ([indexPath row]) {
         case 1:
-            [super setAuto];
-            break;
-        case 2:
             [super setOn];
             break;
-        case 3:
+        case 2:
             [super setOff];
             break;
         default:

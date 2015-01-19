@@ -1,0 +1,28 @@
+//
+//  AccountDao.h
+//  Depo
+//
+//  Created by Salih Topcu on 05.01.2015.
+//  Copyright (c) 2015 com.igones. All rights reserved.
+//
+
+#import "BaseDao.h"
+#import "Offer.h"
+
+typedef enum {
+    RequestMethodGetCurrentSubscription = 0,
+    RequestMethodGetOffers,
+    RequestMethodActivateOffer,
+    RequestMethodCancelSubscription
+} RequestMethod;
+
+@interface AccountDao : BaseDao {
+    int requestMethod;
+}
+
+- (void) requestCurrentAccount;
+- (void) requestOffers;
+- (void) requestActivateOffer: (Offer *)offer;
+- (void) requestCancelSubscription: (Subscription *)subscription;
+
+@end

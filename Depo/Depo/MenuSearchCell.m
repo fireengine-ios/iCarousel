@@ -15,7 +15,7 @@
     if (self) {
         self.metaData = _metaData;
         
-        textField = [[SearchTextField alloc] initWithFrame:CGRectMake(12, 5, 252, 50)];
+        textField = [[SearchTextField alloc] initWithFrame:CGRectMake(12, 5, 252, 40)];
         textField.delegate = self;
         textField.userInteractionEnabled = NO;
         [self addSubview:textField];

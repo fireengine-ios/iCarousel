@@ -301,8 +301,13 @@
 "ContactsOffInfo"="Telefon rehberiniz otomatik olarak buluta yedeklenmeyecek.";
 "ContactsAutoDescriptionHeader"="%d KİŞİ HENÜZ EŞİTLENMEDİ";
 "ContactsAutoDescriptionBody"="Facebook, Twitter ve Exchange Server bağlantılarınız Turkcell Bulut'a yedeklenemezler.";
+"ContactsOnInfo"="Akıllı Depo'yu açtığınızda telefon rehberiniz otomatik olarak buluta yedeklenecek.";
+"ContactsOffInfo"="Telefon rehberiniz otomatik olarak buluta yedeklenmeyecek.";
+"ContactsOnDescriptionHeader"="%d KİŞİ HENÜZ EŞİTLENMEDİ";
+"ContactsOnDescriptionBody"="Facebook, Twitter ve Exchange Server bağlantılarınız Turkcell Bulut'a yedeklenemezler.";
 "PhoneContacts"="Telefon Rehberi Kişileri";
 "SynchronisationPreferencesTitle"="EŞİTLEME SEÇENEKLERİ";
+"AutoSynchronisation"="OTOMATİK YEDEKLEME";
 "Wifi3G"="Wifi + 3G";
 "Wifi"="Wifi";
 "DataRoaming"="Veri Dolaşımı";
@@ -361,3 +366,5 @@
 "RecentActivitySingleFolderUpdated"="%d klasör güncellendi";
 "RecentActivitySingleFileUpdated"="%d dosya güncellendi";
 "RecentActivitySingleMusicUpdated"="%d şarkı güncellendi";
+
+"AboutUs"="Hakkında";

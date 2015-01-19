@@ -7,10 +7,15 @@
 //
 
 #import "SettingsBaseViewController.h"
+#import "AccountDao.h"
 
 @interface SettingsStorageController : SettingsBaseViewController {
-    NSString *currentPackageName;
-    NSString *currentPackageRenewalDate;
+    AccountDao *accountDaoToGetCurrentSubscription;
+    AccountDao *accountDaoToGetOffers;
+    AccountDao *accountDaoToCancelSubscription;
+    
+    Subscription *currentSubscription;
+    NSMutableArray *offers;
 }
 
 @end

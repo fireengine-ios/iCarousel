@@ -445,6 +445,13 @@
 		05994F9A1A0B57080081F000 /* music_forward@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05994F961A0B57080081F000 /* music_forward@2x.png */; };
 		05994F9D1A0B572D0081F000 /* music_play_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 05994F9B1A0B572D0081F000 /* music_play_icon.png */; };
 		05994F9E1A0B572D0081F000 /* music_play_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05994F9C1A0B572D0081F000 /* music_play_icon@2x.png */; };
+		059A46DA1A6D3E2000935023 /* SubscriptionPlan.m in Sources */ = {isa = PBXBuildFile; fileRef = 059A46D31A6D3E2000935023 /* SubscriptionPlan.m */; };
+		059A46DB1A6D3E2000935023 /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 059A46D51A6D3E2000935023 /* Device.m */; };
+		059A46DC1A6D3E2000935023 /* Offer.m in Sources */ = {isa = PBXBuildFile; fileRef = 059A46D71A6D3E2000935023 /* Offer.m */; };
+		059A46DD1A6D3E2000935023 /* Subscription.m in Sources */ = {isa = PBXBuildFile; fileRef = 059A46D91A6D3E2000935023 /* Subscription.m */; };
+		059A46E21A6D3E3F00935023 /* DeviceDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 059A46DF1A6D3E3F00935023 /* DeviceDao.m */; };
+		059A46E31A6D3E3F00935023 /* AccountDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 059A46E11A6D3E3F00935023 /* AccountDao.m */; };
+		059A46E61A6D3F4800935023 /* SettingsAboutUsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 059A46E51A6D3F4800935023 /* SettingsAboutUsController.m */; };
 		059AD3771A1E26A000AA41BD /* circle_doc_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 059AD36F1A1E26A000AA41BD /* circle_doc_icon@2x.png */; };
 		059AD3781A1E26A000AA41BD /* circle_music_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 059AD3701A1E26A000AA41BD /* circle_music_icon.png */; };
 		059AD3791A1E26A000AA41BD /* circle_fav_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 059AD3711A1E26A000AA41BD /* circle_fav_icon@2x.png */; };
@@ -1134,6 +1141,20 @@
 		05994F961A0B57080081F000 /* music_forward@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "music_forward@2x.png"; sourceTree = "<group>"; };
 		05994F9B1A0B572D0081F000 /* music_play_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_play_icon.png; sourceTree = "<group>"; };
 		05994F9C1A0B572D0081F000 /* music_play_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "music_play_icon@2x.png"; sourceTree = "<group>"; };
+		059A46D21A6D3E2000935023 /* SubscriptionPlan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscriptionPlan.h; sourceTree = "<group>"; };
+		059A46D31A6D3E2000935023 /* SubscriptionPlan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionPlan.m; sourceTree = "<group>"; };
+		059A46D41A6D3E2000935023 /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
+		059A46D51A6D3E2000935023 /* Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Device.m; sourceTree = "<group>"; };
+		059A46D61A6D3E2000935023 /* Offer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Offer.h; sourceTree = "<group>"; };
+		059A46D71A6D3E2000935023 /* Offer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Offer.m; sourceTree = "<group>"; };
+		059A46D81A6D3E2000935023 /* Subscription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Subscription.h; sourceTree = "<group>"; };
+		059A46D91A6D3E2000935023 /* Subscription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Subscription.m; sourceTree = "<group>"; };
+		059A46DE1A6D3E3F00935023 /* DeviceDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceDao.h; sourceTree = "<group>"; };
+		059A46DF1A6D3E3F00935023 /* DeviceDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceDao.m; sourceTree = "<group>"; };
+		059A46E01A6D3E3F00935023 /* AccountDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountDao.h; sourceTree = "<group>"; };
+		059A46E11A6D3E3F00935023 /* AccountDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountDao.m; sourceTree = "<group>"; };
+		059A46E41A6D3F4800935023 /* SettingsAboutUsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsAboutUsController.h; sourceTree = "<group>"; };
+		059A46E51A6D3F4800935023 /* SettingsAboutUsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsAboutUsController.m; sourceTree = "<group>"; };
 		059AD36F1A1E26A000AA41BD /* circle_doc_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle_doc_icon@2x.png"; sourceTree = "<group>"; };
 		059AD3701A1E26A000AA41BD /* circle_music_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle_music_icon.png; sourceTree = "<group>"; };
 		059AD3711A1E26A000AA41BD /* circle_fav_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle_fav_icon@2x.png"; sourceTree = "<group>"; };
@@ -1553,6 +1574,10 @@
 			children = (
 				051E1E3719CAC85100FD1E03 /* BaseDao.h */,
 				051E1E3819CAC85100FD1E03 /* BaseDao.m */,
+				059A46DE1A6D3E3F00935023 /* DeviceDao.h */,
+				059A46DF1A6D3E3F00935023 /* DeviceDao.m */,
+				059A46E01A6D3E3F00935023 /* AccountDao.h */,
+				059A46E11A6D3E3F00935023 /* AccountDao.m */,
 				057DF50619D038080005A389 /* RequestTokenDao.h */,
 				057DF50719D038080005A389 /* RequestTokenDao.m */,
 				057DF50919D04EDF0005A389 /* RequestBaseUrlDao.h */,
@@ -1622,6 +1647,14 @@
 				052160A819E30D640007B321 /* UploadRef.m */,
 				05D2B19819E679E500FC309D /* PhotoAlbum.h */,
 				05D2B19919E679E500FC309D /* PhotoAlbum.m */,
+				059A46D21A6D3E2000935023 /* SubscriptionPlan.h */,
+				059A46D31A6D3E2000935023 /* SubscriptionPlan.m */,
+				059A46D41A6D3E2000935023 /* Device.h */,
+				059A46D51A6D3E2000935023 /* Device.m */,
+				059A46D61A6D3E2000935023 /* Offer.h */,
+				059A46D71A6D3E2000935023 /* Offer.m */,
+				059A46D81A6D3E2000935023 /* Subscription.h */,
+				059A46D91A6D3E2000935023 /* Subscription.m */,
 				0556EA551A19EA0700123A14 /* SearchHistory.h */,
 				0556EA561A19EA0700123A14 /* SearchHistory.m */,
 				05AF7C821A1C8D6D00F5011A /* Activity.h */,
@@ -1831,6 +1864,8 @@
 		052160AA19E31AA70007B321 /* profile */ = {
 			isa = PBXGroup;
 			children = (
+				059A46E41A6D3F4800935023 /* SettingsAboutUsController.h */,
+				059A46E51A6D3F4800935023 /* SettingsAboutUsController.m */,
 				052644A119D5A2A600B63759 /* SettingsBaseViewController.h */,
 				052644A019D5A2A600B63759 /* SettingsBaseViewController.m */,
 				052644A619D5A2A600B63759 /* SettingsConnectedDevicesController.h */,
@@ -2597,6 +2632,7 @@
 			files = (
 				0557C73819D1C905005E9F6B /* MetaFile.m in Sources */,
 				052644BF19D5A32300B63759 /* TextCell.m in Sources */,
+				059A46DD1A6D3E2000935023 /* Subscription.m in Sources */,
 				058B328E1A14ABCB00A291C4 /* RenameAlbumDao.m in Sources */,
 				058219BF1A384AF0001FA679 /* MessageCell.m in Sources */,
 				05403F1919F5584300AED10A /* ElasticSearchDao.m in Sources */,
@@ -2614,6 +2650,7 @@
 				05144B5E1A090A5900B2A414 /* DocListController.m in Sources */,
 				051E1E8B19CAC92700FD1E03 /* ASIHTTPRequest.m in Sources */,
 				058337D619ED9AF300DCF0C5 /* VideoPreviewController.m in Sources */,
+				059A46E21A6D3E3F00935023 /* DeviceDao.m in Sources */,
 				051CB3A119D2E42300E5FC88 /* DocCell.m in Sources */,
 				057DF50B19D04EDF0005A389 /* RequestBaseUrlDao.m in Sources */,
 				0555EF1D19F91ACA0068F4CC /* SimpleButton.m in Sources */,
@@ -2643,6 +2680,7 @@
 				057C9D7D1A2B5611001DDDEC /* MusicDetailModalController.m in Sources */,
 				05127EC319E19775002C2228 /* FileDetailInWebViewController.m in Sources */,
 				05EA75B819DC78C800AC77AB /* UploadDao.m in Sources */,
+				059A46DC1A6D3E2000935023 /* Offer.m in Sources */,
 				052644AE19D5A2A600B63759 /* SettingsPhotosVideosController.m in Sources */,
 				051E1E3919CAC85100FD1E03 /* BaseDao.m in Sources */,
 				056AC8FE19D15EA200AC96C3 /* CacheUtil.m in Sources */,
@@ -2654,6 +2692,7 @@
 				051E1E5119CAC90700FD1E03 /* UIButton+AFNetworking.m in Sources */,
 				05823AFB1A066FCD005869F6 /* MoveDao.m in Sources */,
 				051E1EB419CB2D1300FD1E03 /* AppSession.m in Sources */,
+				059A46E61A6D3F4800935023 /* SettingsAboutUsController.m in Sources */,
 				05AF7C841A1C8D6D00F5011A /* Activity.m in Sources */,
 				052644BE19D5A32300B63759 /* HeaderCell.m in Sources */,
 				05AF7C8D1A1C9C5800F5011A /* RecentActivityLinkerFooter.m in Sources */,
@@ -2668,6 +2707,7 @@
 				052160A319E2E56B0007B321 /* DepoUploadTask.m in Sources */,
 				05BBE71119E06FB100805215 /* CameraCaptureModalController.m in Sources */,
 				051DE37319CC140100F27C85 /* CustomConfirmView.m in Sources */,
+				059A46DA1A6D3E2000935023 /* SubscriptionPlan.m in Sources */,
 				0515706419E5AC2600C62B98 /* PhotoHeaderSegmentView.m in Sources */,
 				05BCA2F819EE64EB00AF2FE2 /* AddAlbumDao.m in Sources */,
 				058BC22B1A30893C0007F4DE /* PreLoginController.m in Sources */,
@@ -2743,10 +2783,12 @@
 				05BBE71419E07D0400805215 /* RefSongCell.m in Sources */,
 				053D0EDB19DAEA29006A13E0 /* ProcessFooterView.m in Sources */,
 				051E1E5719CAC90700FD1E03 /* AFPropertyListRequestOperation.m in Sources */,
+				059A46E31A6D3E3F00935023 /* AccountDao.m in Sources */,
 				058BC23F1A30E6B10007F4DE /* ServiceLoginDao.m in Sources */,
 				053D0EDE19DB01F7006A13E0 /* AddFolderDao.m in Sources */,
 				051E1E7F19CAC92700FD1E03 /* Reachability.m in Sources */,
 				05C3F6071A3900A8001954E8 /* PostLoginPrefCell.m in Sources */,
+				059A46DB1A6D3E2000935023 /* Device.m in Sources */,
 				052644B319D5A2A600B63759 /* SettingsStorageController.m in Sources */,
 				058B32971A15E8A300A291C4 /* AlbumDetailModalController.m in Sources */,
 				059E9A091A35DC2500922A77 /* MyMessageComposeViewController.m in Sources */,

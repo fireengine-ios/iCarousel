@@ -15,6 +15,7 @@
 #import "SettingsConnectedDevicesController.h"
 #import "SettingsNotificationsController.h"
 #import "SettingsHelpController.h"
+#import "SettingsAboutUsController.h"
 #import "CustomButton.h"
 
 @interface SettingsController ()
@@ -43,7 +44,7 @@
         
         [self drawProfileInfoArea];
         [self drawSettingsCategories];
-        [self drawImageOptionsArea];
+        //[self drawImageOptionsArea];
     }
     
     return self;
@@ -71,7 +72,8 @@
     [profileInfoArea addSubview:profileFrameImageView];
     
     CustomButton *profileButton = [[CustomButton alloc]initWithFrame:CGRectMake(116, 0, 88, 88) withImageName:@"profile_image_button@2x"];
-    [profileButton addTarget:self action:@selector(ShowImageOptionsArea) forControlEvents:UIControlEventTouchUpInside];
+    //[profileButton addTarget:self action:@selector(ShowImageOptionsArea) forControlEvents:UIControlEventTouchUpInside];
+    profileButton.userInteractionEnabled = NO;
     [profileInfoArea addSubview:profileButton];
     
     UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 98, 300, 20)];
@@ -114,7 +116,6 @@
     
     darkArea = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, popupContainer.frame.size.height)];
     darkArea.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.85];
-    //darkArea.userInteractionEnabled = YES;
     [popupContainer addSubview:darkArea];
     
     UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(HideImageOptionsArea)];
@@ -131,7 +132,6 @@
     
     UIButton *swipeDownButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
     [imageOptionsArea addSubview:swipeDownButton];
-    //[swipeDownButton addGestureRecognizer:recognizerDown];
     
     UIImageView *swipeIcon = [[UIImageView alloc]initWithFrame:CGRectMake(128, 0, 64, 16)];
     swipeIcon.image = [UIImage imageNamed:@"slide_icon@2x"];
@@ -214,22 +214,17 @@
 }
 
 - (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    //UIImage *choosenImage = info[UIImagePickerControllerOriginalImage];
     UIImage *choosenImage = info[UIImagePickerControllerEditedImage];
     
     // Resize Image
-    //CGSize newSize = choosenImage.size.width > choosenImage.size.height ? CGSizeMake(640, 480) : CGSizeMake(480, 640);
     CGSize newSize = CGSizeMake(480, 480);
     UIGraphicsBeginImageContext(newSize);
     [choosenImage drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
     UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
-    //NSData *data = [NSData dataWithData:UIImagePNGRepresentation(resizedImage)];
-    
     newProfileImage = resizedImage;
     profileImageView.image = newProfileImage;
-    //[profileImageView setImage:newProfileImage];
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
@@ -251,10 +246,7 @@
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.section == -1)
-        return 203;
-    else
-        return 69;
+    return 69;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -267,17 +259,17 @@
         NSString *subTitle = [NSString stringWithFormat: NSLocalizedString(@"StorageUsageInfo", @""), @"20", @"5"];
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"Storage", @"") titleColor:nil subTitleText:subTitle iconName:@"stroge_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         return cell;
-    } else if(indexPath.row == 1) {
+    } else if (indexPath.row == 1) {
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"Upload&Syncing", @"") titleColor:nil subTitleText:@"" iconName:@"syncing_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         return cell;
-    } else if(indexPath.row == 2) {
+    } else if (indexPath.row == 2) {
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"ConnectedDevices", @"") titleColor:nil subTitleText:@"" iconName:@"device_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         return cell;
-    } else if(indexPath.row == 3) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"Notifications", @"") titleColor:nil subTitleText:@"" iconName:@"notifications_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
-        return cell;
-    } else if(indexPath.row == 4) {
+    } else if (indexPath.row == 3) {
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"Help", @"") titleColor:nil subTitleText:@"" iconName:@"help_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
+        return cell;
+    } else if (indexPath.row == 4) {
+        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"AboutUs", @"") titleColor:nil subTitleText:@"" iconName:@"help_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         return cell;
     } else {
         return nil;
@@ -296,10 +288,10 @@
             [self didTriggerConnectedDevices];
             break;
         case 3:
-            [self didTriggerNotifications];
+            [self didTriggerHelp];
             break;
         case 4:
-            [self didTriggerHelp];
+            [self didTriggerAboutUs];
             break;
         default:
             break;
@@ -327,7 +319,11 @@
     
     popupContainer.hidden = NO;
     darkArea.alpha = 0;
-    [UIView animateWithDuration:0.3 animations:^{
+    
+    [UIView animateWithDuration:0.3
+                          delay:0
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^{
         imageOptionsArea.frame = CGRectMake(0, popupContainer.frame.size.height - 205, imageOptionsArea.frame.size.width, imageOptionsArea.frame.size.height);
         darkArea.alpha = 0.85;
     } completion:^(BOOL finished) {
@@ -335,7 +331,10 @@
 }
 
 - (void) HideImageOptionsArea {
-    [UIView animateWithDuration:0.3 animations:^{
+    [UIView animateWithDuration:0.3
+                          delay:0
+    options:UIViewAnimationOptionCurveEaseIn
+                     animations:^{
         imageOptionsArea.frame = CGRectMake(0, popupContainer.frame.size.height, imageOptionsArea.frame.size.width, imageOptionsArea.frame.size.height);
         darkArea.alpha = 0.0;
     } completion:^(BOOL finished) {
@@ -345,7 +344,7 @@
 }
 
 - (void) didTriggerStorage {
-    SettingsStorageController  *storageController = [[SettingsStorageController alloc] init];
+    SettingsStorageController *storageController = [[SettingsStorageController alloc] init];
     storageController.nav = self.nav;
     [self.nav pushViewController:storageController animated:YES];
 }
@@ -361,17 +360,23 @@
     connectedDevicesController.nav = self.nav;
     [self.nav pushViewController:connectedDevicesController animated:YES];
 }
-
+/*
 - (void) didTriggerNotifications {
     SettingsNotificationsController *notificationsController = [[SettingsNotificationsController alloc] init];
     notificationsController.nav = self.nav;
     [self.nav pushViewController:notificationsController animated:YES];
 }
-
+*/
 - (void) didTriggerHelp {
     SettingsHelpController *helpController = [[SettingsHelpController alloc] init];
     helpController.nav = self.nav;
     [self.nav pushViewController:helpController animated:YES];
+}
+
+- (void) didTriggerAboutUs {
+    SettingsAboutUsController *aboutUsController = [[SettingsAboutUsController alloc] init];
+    aboutUsController.nav = self.nav;
+    [self.nav pushViewController:aboutUsController animated:YES];
 }
 
 @end

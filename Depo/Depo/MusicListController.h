@@ -35,7 +35,7 @@
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, strong) NSMutableArray *selectedMusicList;
 @property (nonatomic, strong) NSMutableDictionary *musicDict;
-@property (nonatomic, strong) NSMutableArray *musicDictKeys;
+@property (nonatomic, strong) NSArray *musicDictKeys;
 @property (nonatomic, strong) FooterActionsMenuView *footerActionMenu;
 
 @end

@@ -112,7 +112,7 @@
     if(indexPath.section == 0)
         return 60;
     else if(indexPath.section == 1)
-        return 60;
+        return 50;
     else
         return 50;
 }

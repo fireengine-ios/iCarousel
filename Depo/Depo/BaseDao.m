@@ -289,4 +289,108 @@
     return sortType;
 }
 
+- (Subscription *) parseSubscription:(NSDictionary *) dict {
+    Subscription *subscription = [[Subscription alloc] init];
+    
+    NSString *createdDate = [dict objectForKey:@"createdDate"];
+    NSString *lastModifiedDate = [dict objectForKey:@"lastModifiedDate"];
+    NSString *createdBy = [dict objectForKey:@"createdBy"];
+    NSString *lastModifiedBy = [dict objectForKey:@"lastModifiedBy"];
+    NSNumber *isCurrentSubscription = [dict objectForKey:@"isCurrentSubscription"];
+    NSString *status = [dict objectForKey:@"status"];
+    
+    subscription.createdDate = [self strByRawVal:createdDate];
+    subscription.lastModifiedDate = [self strByRawVal:lastModifiedDate];
+    subscription.createdBy = [self strByRawVal:createdBy];
+    subscription.lastModifiedBy = [self strByRawVal:lastModifiedBy];
+    subscription.isCurrentSubscription = [self boolByNumber:isCurrentSubscription];
+    subscription.status = [self strByRawVal:status];
+    
+    NSDictionary *detailDict = [dict objectForKey:@"subscriptionPlan"];
+    if(detailDict != nil && ![detailDict isKindOfClass:[NSNull class]]) {
+        NSString *name = [detailDict objectForKey:@"name"];
+        NSString *displayName = [detailDict objectForKey:@"displayName"];
+        NSString *description = [detailDict objectForKey:@"description"];
+        NSString *price = [detailDict objectForKey:@"price"];
+        NSNumber *isDefault = [detailDict objectForKey:@"isDefault"];
+        NSString *role = [detailDict objectForKey:@"role"];
+        NSString *slcmOfferId = [detailDict objectForKey:@"slcmOfferId"];
+        NSString *cometOfferId = [detailDict objectForKey:@"cometOfferId"];
+        NSString *quota = [detailDict objectForKey:@"quota"];
+        
+        subscription.plan = [[SubscriptionPlan alloc] init];
+        subscription.plan.name = [self strByRawVal:name];
+        subscription.plan.displayName = [self strByRawVal:displayName];
+        subscription.plan.accountDescription = [self strByRawVal:description];
+        subscription.plan.price = [self strByRawVal:price];
+        subscription.plan.isDefault = [self boolByNumber:isDefault];
+        subscription.plan.role = [self strByRawVal:role];
+        subscription.plan.slcmOfferId = [self strByRawVal:slcmOfferId];
+        subscription.plan.cometOfferId = [self strByRawVal:cometOfferId];
+        subscription.plan.quota = [self strByRawVal:quota];
+    }
+    
+    return subscription;
+}
+
+- (Offer *) parseOffer:(NSDictionary *) dict {
+    Offer *offer = [[Offer alloc] init];
+    
+    if(dict != nil && ![dict isKindOfClass:[NSNull class]]) {
+        NSString *offerId = [dict objectForKey:@"aeOfferId"];
+        NSString *name = [dict objectForKey:@"aeOfferName"];
+        NSString *campaignChannel = [dict objectForKey:@"campaignChannel"];
+        NSString *campaignCode = [dict objectForKey:@"campaignCode"];
+        NSString *campaignId = [dict objectForKey:@"campaignId"];
+        NSString *campaignUserCode = [dict objectForKey:@"campaignUserCode"];
+        NSString *cometParameters = [dict objectForKey:@"cometParameters"];
+        NSString *responseApi = [dict objectForKey:@"responseApi"];
+        NSString *validationKey = [dict objectForKey:@"validationKey"];
+        NSString *price = [dict objectForKey:@"price"];
+        NSString *role = [dict objectForKey:@"role"];
+        NSString *quota = [dict objectForKey:@"quota"];
+        
+        offer.offerId = [self strByRawVal:offerId];
+        offer.name = [self strByRawVal:name];
+        offer.campaignChannel = [self strByRawVal:campaignChannel];
+        offer.campaignCode = [self strByRawVal:campaignCode];
+        offer.campaignId = [self strByRawVal:campaignId];
+        offer.campaignUserCode = [self strByRawVal:campaignUserCode];
+        offer.cometParameters = [self strByRawVal:cometParameters];
+        offer.responseApi = [self strByRawVal:responseApi];
+        offer.validationKey = [self strByRawVal:validationKey];
+        offer.price = [self strByRawVal:price];
+        offer.role = [self strByRawVal:role];
+        offer.quota = [self strByRawVal:quota];
+    }
+    
+    return offer;
+}
+
+- (Device *) parseDevice:(NSDictionary *) dict {
+    Device *device = [[Device alloc] init];
+    
+    if(dict != nil && ![dict isKindOfClass:[NSNull class]]) {
+        NSString *name = [dict objectForKey:@"name"];
+        NSString *deviceTypeText = [dict objectForKey:@"deviceType"];
+        
+        device.name = [self strByRawVal:name];
+        
+        if ([deviceTypeText isEqualToString:@"IPHONE"])
+            device.type = DeviceTypeIphone;
+        else if ([deviceTypeText isEqualToString:@"IPAD"])
+            device.type = DeviceTypeIpad;
+        else if ([deviceTypeText isEqualToString:@"MAC"])
+            device.type = DeviceTypeMac;
+        else if ([deviceTypeText isEqualToString:@"WINDOWS"])
+            device.type = DeviceTypeWindows;
+        else if ([deviceTypeText isEqualToString:@"ANDROID"])
+            device.type = DeviceTypeAndroid;
+        else
+            device.type = DeviceTypeOther;
+    }
+    
+    return device;
+}
+
 @end

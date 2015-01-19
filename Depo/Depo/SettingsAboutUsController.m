@@ -1,24 +1,24 @@
 //
-//  SettingsHelpController.m
+//  SettingsAboutUsController.m
 //  Depo
 //
-//  Created by Salih Topcu on 23.09.2014.
-//  Copyright (c) 2014 com.igones. All rights reserved.
+//  Created by Salih Topcu on 05.01.2015.
+//  Copyright (c) 2015 com.igones. All rights reserved.
 //
 
-#import "SettingsHelpController.h"
+#import "SettingsAboutUsController.h"
 
-@interface SettingsHelpController ()
+@interface SettingsAboutUsController ()
 
 @end
 
-@implementation SettingsHelpController
+@implementation SettingsAboutUsController
 
 - (id)init
 {
     self = [super init];
     if (self) {
-        self.title = NSLocalizedString(@"Help", @"");
+        self.title = NSLocalizedString(@"AboutUs", @"");
     }
     
     return self;
@@ -31,7 +31,7 @@
     webView.autoresizesSubviews = YES;
     webView.delegate = self;
     [self.view addSubview:webView];
-    NSURL *url = [NSURL URLWithString:@"http://m.turkcell.com.tr"];
+    NSURL *url = [NSURL URLWithString:@"http://m.turkcell.com.tr/tr/hakkimizda"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];
 }
@@ -50,22 +50,10 @@
     [self hideLoading];
 }
 
-- (void) webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     [self hideLoading];
     //error message
 }
-
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
- {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

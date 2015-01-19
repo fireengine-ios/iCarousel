@@ -17,11 +17,7 @@
 
 @implementation SettingsConnectedDevicesController
 
-- (id)init
-{
-    infoText1 = NSLocalizedString(@"ConnectedDevicesInfo", @"");
-    infoText1Height = [Util calculateHeightForText:infoText1 forWidth:290 forFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:14]];
-    
+- (id)init {
     self = [super init];
     if (self) {
         self.title = NSLocalizedString(@"ConnectedDevices", @"");
@@ -29,88 +25,69 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+- (void) viewWillAppear:(BOOL)animated {
+    [super showLoading];
+    deviceDao = [[DeviceDao alloc]init];
+    deviceDao.delegate = self;
+    deviceDao.successMethod = @selector(loadDevicesCallback:);
+    deviceDao.failMethod = @selector(loadDevicesFailCallback:);
+    [deviceDao requestConnectedDevices];
+    
+    [super viewWillAppear:animated];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void) loadDevicesCallback:(NSArray *) files {
+    [super hideLoading];
+    devicesArray = [[NSMutableArray alloc] initWithArray:files];
+    [super drawPageContentTable];
+}
+
+- (void) loadDevicesFailCallback:(NSString *) errorMessage {
+    [super hideLoading];
+    [super showErrorAlertWithMessage:errorMessage];
+}
+
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 6;
+    return devicesArray.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 54;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.row == 5)
-        return infoText1Height + 48;
-    else
-        return 54;
+    return 54;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return [[HeaderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"" headerText:[NSString stringWithFormat:NSLocalizedString(@"ConnectedDevicesTitle", @""), [devicesArray count]]];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *cellIdentifier = [NSString stringWithFormat:@"MenuCell%d-%d", (int)indexPath.section, (int)indexPath.row];
     
-    if(indexPath.row == 0) {
-        NSString *connectedDevicesCountInfo = [NSString stringWithFormat:NSLocalizedString(@"ConnectedDevicesTitle", @""), 4];
-        HeaderCell *cell = [[HeaderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier headerText:connectedDevicesCountInfo];
-        return cell;
-    } else if(indexPath.row == 1) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"Mehmet's Macbook" titleColor:nil subTitleText:@"" iconName:@"macbook_icon@2x" hasSeparator:YES isLink:NO linkText:@"" cellHeight:54];
-        return cell;
-    } else if(indexPath.row == 2) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"iPhone" titleColor:nil subTitleText:@"" iconName:@"iphone_icon@2x" hasSeparator:YES isLink:NO linkText:@"" cellHeight:54];
-        return cell;
-    } else if(indexPath.row == 3) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"Android" titleColor:nil subTitleText:@"" iconName:@"android_icon@2x" hasSeparator:YES isLink:NO linkText:@"" cellHeight:54];
-        return cell;
-    } else if(indexPath.row == 4) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"iPad" titleColor:nil subTitleText:@"" iconName:@"ipad_icon@2x" hasSeparator:YES isLink:NO linkText:@"" cellHeight:54];
-        return cell;
-    } else if(indexPath.row == 5) {
-        TextCell *cell = [[TextCell alloc]initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"" titleColor:nil contentText:infoText1 contentTextColor:nil backgroundColor:nil hasSeparator:NO];
-        return cell;
-    } else {
-        return nil;
-    }
+    Device *device = [devicesArray objectAtIndex:indexPath.row];
+    NSString *iconName;
+    if (device.type == DeviceTypeIphone)
+        iconName = @"iphone_icon";
+    else if (device.type == DeviceTypeIpad)
+        iconName = @"ipad_icon";
+    else if (device.type == DeviceTypeMac)
+        iconName = @"macbook_icon";
+    else if (device.type == DeviceTypeWindows)
+        iconName = @"macbook_icon";
+    else if (device.type == DeviceTypeAndroid)
+        iconName = @"android_icon";
+    else
+        iconName = @"default_loading_bg";
+    
+    TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:device.name titleColor:nil subTitleText:@"" iconName:iconName hasSeparator:YES isLink:NO linkText:@"" cellHeight:54];
+    return cell;
 }
-
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch ([indexPath row]) {
-        case 0:
-            
-            break;
-        case 1:
-            
-            break;
-        case 2:
-            
-            break;
-        case 3:
-            
-            break;
-        case 4:
-            
-            break;
-        default:
-            break;
-    }
-}
-
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
- {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

@@ -7,10 +7,11 @@
 //
 
 #import "SettingsBaseViewController.h"
+#import "DeviceDao.h"
 
 @interface SettingsConnectedDevicesController : SettingsBaseViewController {
-    NSString *infoText1;
-    double infoText1Height;
+    DeviceDao *deviceDao;
+    NSMutableArray *devicesArray;
 }
 
 @end

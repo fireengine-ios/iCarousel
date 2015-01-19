@@ -12,6 +12,9 @@
 #import "AppConstants.h"
 #import "MetaFile.h"
 #import "Activity.h"
+#import "Subscription.h"
+#import "Offer.h"
+#import "Device.h"
 
 #define BASE_URL @"https://tcloudstb.turkcell.com.tr/api"
 
@@ -62,6 +65,16 @@
 #define ALBUM_ADD_PHOTOS_URL BASE_URL@"/album/addFiles/%@"
 
 #define ALBUM_REMOVE_PHOTOS_URL BASE_URL@"/album/removeFiles/%@"
+
+#define GET_CURRENT_SUBSCRIPTION_URL BASE_URL@"/account/currentSubscription"
+
+#define GET_SUBSCRIPTION_OFFERS_URL BASE_URL@"/account/offers"
+
+#define REQUEST_ACTIVATE_OFFER_URL BASE_URL@"/account/activateOffer"
+
+#define REQUEST_CANCEL_SUBSCRIPTION_URL BASE_URL@"/account/cancelSubscription"
+
+#define GET_CONNECTED_DEVICES BASE_URL@"/devices"
 
 #define APN_URL @"http://pushserver.turkcell.com.tr/PushServer/rest/registerdevice/"
 
@@ -115,5 +128,8 @@
 - (MetaFile *) parseFile:(NSDictionary *) dict;
 - (Activity *) parseActivity:(NSDictionary *) dict;
 - (SortType) resetSortType:(SortType) sortType;
+- (Subscription *) parseSubscription:(NSDictionary *) dict;
+- (Offer *) parseOffer:(NSDictionary *) dict;
+- (Device *) parseDevice:(NSDictionary *) dict;
 
 @end

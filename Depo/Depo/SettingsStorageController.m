@@ -19,92 +19,139 @@
     self = [super init];
     if (self) {
         self.title = NSLocalizedString(@"Storage", @"");
-        currentPackageName = [CacheUtil readCachedSettingCurrentPackageName];
-        currentPackageRenewalDate = [CacheUtil readCachedSettingCurrentPackageRenewalDate];
-        
-        //temp
-        if (currentPackageName == nil)
-            currentPackageName = @"Mini Paket (5GB) 3.9 TL/Ay";
-        if (currentPackageRenewalDate == nil)
-            currentPackageRenewalDate = @"7 Jun 2014";
-        //temp
     }
     return self;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+- (void) viewWillAppear:(BOOL)animated {
+    [super showLoading];
+    accountDaoToGetCurrentSubscription = [[AccountDao alloc]init];
+    accountDaoToGetCurrentSubscription.delegate = self;
+    accountDaoToGetCurrentSubscription.successMethod = @selector(loadCurrentSubscriptionCallback:);
+    accountDaoToGetCurrentSubscription.failMethod = @selector(loadCurrentSubscriptionFailCallback:);
+    [accountDaoToGetCurrentSubscription requestCurrentAccount];
+    
+    accountDaoToGetOffers = [[AccountDao alloc]init];
+    accountDaoToGetOffers.delegate = self;
+    accountDaoToGetOffers.successMethod = @selector(loadOffersCallback:);
+    accountDaoToGetOffers.failMethod = @selector(loadOffersFailCallback:);
+    [accountDaoToGetOffers requestOffers];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
+- (void) loadCurrentSubscriptionCallback:(Subscription *) file {
+    currentSubscription = file;
+    [super drawPageContentTable];
+    [super hideLoading];
+}
+
+- (void) loadCurrentSubscriptionFailCallback:(NSString *) errorMessage {
+    [super hideLoading];
+    [super showErrorAlertWithMessage:errorMessage];
+}
+
+- (void) loadOffersCallback:(NSArray *) files {
+    offers = [[NSMutableArray alloc] initWithArray:files];
+    if (offers.count > 0 && currentSubscription != nil) {
+        [super drawPageContentTable];
+        [super hideLoading];
+    }
+}
+
+- (void) loadOffersFailCallback:(NSString *) errorMessage {
+    [super hideLoading];
+    [super showErrorAlertWithMessage:errorMessage];
+}
+
+- (void) cancelSubscriptionCallback {
+    [super hideLoading];
+}
+
+- (void) cancelSubscriptionFailCallback:(NSString *) errorMessage {
+    [super hideLoading];
+    [super showErrorAlertWithMessage:errorMessage];
+}
+
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
+    if (offers.count > 0)
+        return 2;
+    else
+        return 1;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    if (section == 0)
+        return 2;
+    else
+        return offers.count + 2;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 54;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.row == 1)
-        return 69;
-    else if(indexPath.row == 4)
-        return 151;
-    else
-        return 54;
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0)
+            return 69;
+        else
+            return 54;
+    }
+    else {
+        if (indexPath.row == 0 || indexPath.row == offers.count + 1)
+            return 15;
+        else
+            return 60;
+    }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    NSString *titleText;
+    switch (section) {
+        case 0: titleText = NSLocalizedString(@"CurrentPackageTitle", @""); break;
+        case 1: titleText = NSLocalizedString(@"UpgradeOptionsTitle", @""); break;
+        default: titleText = @""; break;
+    }
+    return [[HeaderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"" headerText:titleText];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *cellIdentifier = [NSString stringWithFormat:@"MenuCell%d-%d", (int)indexPath.section, (int)indexPath.row];
     
-    if(indexPath.row == 0) {
-        HeaderCell *cell = [[HeaderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier headerText:NSLocalizedString(@"CurrentPackageTitle", @"")];
-        return cell;
-    } else if(indexPath.row == 1) {
-        NSString *renewalDateInfo = [NSString stringWithFormat:NSLocalizedString(@"RenewalDateInfo", @""), currentPackageRenewalDate];
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:currentPackageName titleColor:nil subTitleText:renewalDateInfo iconName:@"" hasSeparator:YES isLink:NO linkText:@"" cellHeight:69];
-        return cell;
-    } else if(indexPath.row == 2) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"CancelSubscription", @"") titleColor:[Util UIColorForHexColor:@"3FB0E8"] subTitleText:@"" iconName:@"" hasSeparator:YES isLink:NO linkText:@"" cellHeight:54];
-        return cell;
-    } else if(indexPath.row == 3) {
-        HeaderCell *cell = [[HeaderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier headerText:NSLocalizedString(@"UpgradeOptionsTitle", @"")];
-        return cell;
-    } else if(indexPath.row == 4) {
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            NSString *renewalDateInfo = [NSString stringWithFormat:NSLocalizedString(@"RenewalDateInfo", @""), @"No Date"];
+            TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:currentSubscription.plan.displayName titleColor:nil subTitleText:renewalDateInfo iconName:@"" hasSeparator:YES isLink:NO linkText:@"" cellHeight:69];
+            return cell;
+        }
+        else {
+            TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"CancelSubscription", @"") titleColor:[Util UIColorForHexColor:@"3FB0E8"] subTitleText:@"" iconName:@"" hasSeparator:YES isLink:NO linkText:@"" cellHeight:54];
+            return cell;
+        }
+    }
+    else {
+        
         UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-        [self drawUpgradeOptionsCell:cell];
+        //[self drawUpgradeOptionsCell:cell];
         return cell;
-    } else {
-        return nil;
+        
     }
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch ([indexPath row]) {
-        case 0:
-            
-            break;
-        case 1:
-            
-            break;
-        case 2:
-            
-            break;
-        case 3:
-            
-            break;
-        case 4:
-            
-            break;
-        default:
-            break;
+    if (indexPath.section == 0) {
+        if (indexPath.row == 1) { // cancel subscription
+            accountDaoToCancelSubscription = [[AccountDao alloc]init];
+            accountDaoToCancelSubscription.delegate = self;
+            accountDaoToCancelSubscription.successMethod = @selector(cancelSubscriptionCallback);
+            accountDaoToCancelSubscription.failMethod = @selector(cancelSubscriptionFailCallback:);
+            [accountDaoToCancelSubscription requestCancelSubscription:currentSubscription];
+        }
     }
 }
 
 - (void) drawUpgradeOptionsCell:(UITableViewCell *)cell {
-    cell.backgroundColor = [Util UIColorForHexColor:@"FFFFFF"];
+    //cell.backgroundColor = [Util UIColorForHexColor:@"FFFFFF"];
     
     UIButton *button1 = [[UIButton alloc]initWithFrame:CGRectMake(20, 20, 280, 50)];
     [button1 setTitle:@"Standard Paket (50GB) 9.9 TL/Ay" forState:UIControlStateNormal];
