@@ -57,7 +57,7 @@
 }
 
 - (void) moreClicked {
-    [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeVideoDetail], [NSNumber numberWithInt:MoreMenuTypeShare], self.file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDelete]] withFileFolder:self.file];
+    [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeVideoDetail], [NSNumber numberWithInt:MoreMenuTypeShare], self.file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDownloadImage], [NSNumber numberWithInt:MoreMenuTypeDelete]] withFileFolder:self.file];
 }
 
 - (void) deleteSuccessCallback {
@@ -71,6 +71,9 @@
 }
 
 - (void) postDelete {
+    if(avPlayer) {
+        [avPlayer willDismiss];
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
     [APPDELEGATE.base checkAndShowAddButton];
 }
@@ -128,6 +131,45 @@
     [self pushProgressViewWithProcessMessage:NSLocalizedString(@"UnfavProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"UnfavSuccessMessage", @"") andFailMessage:NSLocalizedString(@"UnfavFailMessage", @"")];
 }
 
+- (void) moreMenuDidSelectDownloadImage {
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DownloadVideoProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DownloadVideoSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DownloadVideoFailMessage", @"")];
+
+    NSURL *sourceURL = [NSURL URLWithString:self.file.tempDownloadUrl];
+    
+    NSString *contentType = @"mp4";
+    NSArray *contentTypeComponents = [self.file.rawContentType componentsSeparatedByString:@"/"];
+    if(contentTypeComponents != nil && [contentTypeComponents count] > 0) {
+        contentType = [contentTypeComponents objectAtIndex:[contentTypeComponents count]-1];
+    }
+    
+    NSURLSessionTask *downloadTask = [[NSURLSession sharedSession] downloadTaskWithURL:sourceURL completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
+        NSURL *documentsURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] firstObject];
+        NSURL *tempURL = [documentsURL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", [sourceURL lastPathComponent], contentType]];
+
+        [[NSFileManager defaultManager] moveItemAtURL:location toURL:tempURL error:nil];
+        UISaveVideoAtPathToSavedPhotosAlbum(tempURL.path, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+    }];
+    [downloadTask resume];
+}
+
+- (void) video:(NSString *) videoPath didFinishSavingWithError:(NSError *)error contextInfo: (void *) contextInfo {
+
+    @try {
+        NSError *error = nil;
+        [[NSFileManager defaultManager] removeItemAtPath:videoPath error:&error];
+    }
+    @catch (NSException *exception) {
+    }
+    @finally {
+    }
+    
+    if(!error) {
+        [self proceedSuccessForProgressView];
+    } else {
+        [self proceedFailureForProgressView];
+    }
+}
+
 - (void) moreMenuDidSelectShare {
     NSLog(@"At INNER moreMenuDidSelectShare");
 }
@@ -167,6 +209,8 @@
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
+    [APPDELEGATE.session pauseAudioItem];
+
     if(avPlayer) {
         if(avPlayer.currentAsset) {
             [avPlayer.player play];
@@ -217,6 +261,9 @@
 }
 
 - (void) triggerDismiss {
+    if(avPlayer) {
+        [avPlayer willDismiss];
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
     [APPDELEGATE.base checkAndShowAddButton];
 }

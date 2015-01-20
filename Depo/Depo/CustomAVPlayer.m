@@ -30,10 +30,12 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
 @synthesize maxRect;
 @synthesize maxLandscapeRect;
 @synthesize lastContact;
+@synthesize isPlayable;
 
 - (id)initWithFrame:(CGRect)frame withVideo:(MetaFile *) _video {
     self = [super initWithFrame:frame];
     if (self) {
+        self.isPlayable = YES;
         self.backgroundColor = [UIColor blackColor];
         self.video = _video;
         self.initialRect = frame;
@@ -56,9 +58,11 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
      ^{
          dispatch_async( dispatch_get_main_queue(),
                         ^{
-                            /* IMPORTANT: Must dispatch to main queue in order to operate on the AVPlayer and AVPlayerItem. */
-                            [self prepareToPlayAsset:currentAsset withKeys:requestedKeys];
-                            [self initializeControlAndInfo];
+                            if(isPlayable) {
+                                /* IMPORTANT: Must dispatch to main queue in order to operate on the AVPlayer and AVPlayerItem. */
+                                [self prepareToPlayAsset:currentAsset withKeys:requestedKeys];
+                                [self initializeControlAndInfo];
+                            }
                         });
      }];
 }
@@ -372,6 +376,7 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
 }
 
 - (void) willDismiss {
+    self.isPlayable = NO;
     if(player) {
         [player pause];
         [playerLayer removeFromSuperlayer];

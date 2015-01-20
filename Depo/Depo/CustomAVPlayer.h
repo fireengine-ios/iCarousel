@@ -24,6 +24,7 @@
 @property (nonatomic, strong) AVURLAsset *currentAsset;
 @property (assign) BOOL seekToZeroBeforePlay;
 @property (assign) BOOL controlVisible;
+@property (assign) BOOL isPlayable;
 @property (nonatomic) CGRect initialRect;
 @property (nonatomic) CGRect maxRect;
 @property (nonatomic) CGRect maxLandscapeRect;
