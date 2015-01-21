@@ -7,6 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "UploadNotifyDao.h"
+#import "MetaFile.h"
+#import "UploadRef.h"
+#import "AppConstants.h"
 
 @protocol DepoUploadTaskDelegate <NSObject>
 - (void) uploadTaskDidSendData:(long) dataSent ofTotalData:(long) totalData;
@@ -16,6 +20,10 @@
 @interface DepoUploadTask : NSURLSessionUploadTask
 
 @property (nonatomic, strong) id<DepoUploadTaskDelegate> uploadDelegate;
+@property (nonatomic, strong) UploadNotifyDao *notifyDao;
+@property (nonatomic, strong) UploadRef *uploadRef;
+@property (nonatomic, strong) NSDate *initializationDate;
+@property (nonatomic) UploadTaskType taskType;
 
 - (void) didFinishSendingData:(long) dataSent ofTotalData:(long) totalData;
 - (void) didComplete;

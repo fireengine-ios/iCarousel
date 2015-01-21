@@ -125,6 +125,7 @@
 - (void) shouldReturnSuccess;
 - (void) shouldReturnSuccessWithObject:(id) obj;
 - (void) shouldReturnFailWithMessage:(NSString *) errorMessage;
+- (void) shouldReturnFailWithParam:(id) param;
 - (MetaFile *) parseFile:(NSDictionary *) dict;
 - (Activity *) parseActivity:(NSDictionary *) dict;
 - (SortType) resetSortType:(SortType) sortType;

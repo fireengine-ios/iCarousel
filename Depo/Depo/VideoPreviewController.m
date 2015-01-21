@@ -137,7 +137,7 @@
     NSURL *sourceURL = [NSURL URLWithString:self.file.tempDownloadUrl];
     
     NSString *contentType = @"mp4";
-    NSArray *contentTypeComponents = [self.file.rawContentType componentsSeparatedByString:@"/"];
+    NSArray *contentTypeComponents = [self.file.name componentsSeparatedByString:@"."];
     if(contentTypeComponents != nil && [contentTypeComponents count] > 0) {
         contentType = [contentTypeComponents objectAtIndex:[contentTypeComponents count]-1];
     }

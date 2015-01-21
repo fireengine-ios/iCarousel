@@ -11,6 +11,10 @@
 @implementation DepoUploadTask
 
 @synthesize uploadDelegate;
+@synthesize notifyDao;
+@synthesize uploadRef;
+@synthesize initializationDate;
+@synthesize taskType;
 
 - (void) didFinishSendingData:(long) dataSent ofTotalData:(long) totalData {
     [uploadDelegate uploadTaskDidSendData:dataSent ofTotalData:totalData];

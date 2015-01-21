@@ -165,6 +165,10 @@
     SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:errorMessage]);
 }
 
+- (void) shouldReturnFailWithParam:(id) param {
+    SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:param]);
+}
+
 - (MetaFile *) parseFile:(NSDictionary *) dict {
     NSString *uuid = [dict objectForKey:@"uuid"];
     NSString *hash = [dict objectForKey:@"hash"];

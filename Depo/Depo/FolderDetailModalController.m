@@ -66,6 +66,7 @@
         itemsSeparator.backgroundColor = [Util UIColorForHexColor:@"DEDEDE"];
         [self.view addSubview:itemsSeparator];
 
+        /*
         //size segment
         CustomLabel *sizeLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(25, itemsSeparator.frame.origin.y + itemsSeparator.frame.size.height + 15, 175, 25) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:20] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"FolderDetailSize", @"")];
         [self.view addSubview:sizeLabel];
@@ -77,15 +78,16 @@
         UIView *sizeSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, sizeLabel.frame.origin.y + sizeLabel.frame.size.height + 15, self.view.frame.size.width, 1)];
         sizeSeparator.backgroundColor = [Util UIColorForHexColor:@"DEDEDE"];
         [self.view addSubview:sizeSeparator];
-
+         */
+        
         //modify date segment
-        CustomLabel *dateLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(25, sizeSeparator.frame.origin.y + sizeSeparator.frame.size.height + 15, 175, 25) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:20] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"FolderDetailModifyDate", @"")];
+        CustomLabel *dateLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(25, itemsSeparator.frame.origin.y + itemsSeparator.frame.size.height + 15, 175, 25) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:20] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"FolderDetailModifyDate", @"")];
         [self.view addSubview:dateLabel];
         
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
         [dateFormat setDateFormat:@"dd MMM yyyy"];
         
-        CustomLabel *dateValueLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(200, sizeSeparator.frame.origin.y + sizeSeparator.frame.size.height + 15, 95, 25) withFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:20] withColor:[Util UIColorForHexColor:@"707a8f"] withText:[dateFormat stringFromDate:self.folder.lastModified]];
+        CustomLabel *dateValueLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(200, itemsSeparator.frame.origin.y + itemsSeparator.frame.size.height + 15, 95, 25) withFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:20] withColor:[Util UIColorForHexColor:@"707a8f"] withText:[dateFormat stringFromDate:self.folder.lastModified]];
         dateValueLabel.textAlignment = NSTextAlignmentRight;
         [self.view addSubview:dateValueLabel];
 

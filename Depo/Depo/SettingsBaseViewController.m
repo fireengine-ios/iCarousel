@@ -52,6 +52,7 @@
     pageContentTable.dataSource = self;
     pageContentTable.backgroundColor = [UIColor clearColor];
     pageContentTable.backgroundView = nil;
+    pageContentTable.bounces = NO;
     [pageContentTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.view addSubview:pageContentTable];
 }

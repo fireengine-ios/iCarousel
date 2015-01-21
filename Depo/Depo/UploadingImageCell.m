@@ -37,7 +37,7 @@
         [self addSubview:detailLabel];
 
         for(UploadManager *manager in APPDELEGATE.uploadQueue.uploadManagers) {
-            if(!manager.hasFinished && [manager.uploadRef.fileUuid isEqualToString:self.uploadRef.fileUuid]) {
+            if(!manager.uploadRef.hasFinished && [manager.uploadRef.fileUuid isEqualToString:self.uploadRef.fileUuid]) {
                 manager.delegate = self;
             }
         }
@@ -59,7 +59,7 @@
     progressSeparator.frame = CGRectMake(0, 66, [newWidth intValue], 2);
 }
 
-- (void) uploadManagerDidFailUploadingForAsset:(ALAsset *)assetToUpload {
+- (void) uploadManagerDidFailUploadingForAsset:(NSString *)assetToUpload {
     progressSeparator.backgroundColor = [Util UIColorForHexColor:@"ad3110"];
     detailLabel.text = NSLocalizedString(@"UploadFailedPlaceholder", @"");
 }
@@ -69,8 +69,9 @@
     detailLabel.text = NSLocalizedString(@"UploadFailedPlaceholder", @"");
 }
 
-- (void) uploadManagerDidFinishUploadingForAsset:(ALAsset *)assetToUpload {
+- (void) uploadManagerDidFinishUploadingForAsset:(NSString *)assetToUpload {
     self.imgView.alpha = 1.0f;
+    [self updateProgressByWidth:[NSNumber numberWithInt:self.frame.size.width]];
     progressSeparator.backgroundColor = [Util UIColorForHexColor:@"67d74b"];
     detailLabel.text = NSLocalizedString(@"UploadFinishedPlaceholder", @"");
 }

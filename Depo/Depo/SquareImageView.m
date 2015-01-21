@@ -62,7 +62,7 @@
         [self addSubview:imgView];
 
         for(UploadManager *manager in APPDELEGATE.uploadQueue.uploadManagers) {
-            if(!manager.hasFinished && [manager.uploadRef.fileUuid isEqualToString:self.uploadRef.fileUuid]) {
+            if(!manager.uploadRef.hasFinished && [manager.uploadRef.fileUuid isEqualToString:self.uploadRef.fileUuid]) {
                 manager.delegate = self;
             }
         }
@@ -134,11 +134,12 @@
     progressSeparator.frame = CGRectMake(0, self.frame.size.height-6, [newWidth intValue], 6);
 }
 
-- (void) uploadManagerDidFailUploadingForAsset:(ALAsset *)assetToUpload {
+- (void) uploadManagerDidFailUploadingForAsset:(NSString *) assetToUpload {
     progressSeparator.backgroundColor = [Util UIColorForHexColor:@"ad3110"];
 }
 
-- (void) uploadManagerDidFinishUploadingForAsset:(ALAsset *)assetToUpload {
+- (void) uploadManagerDidFinishUploadingForAsset:(NSString *)assetToUpload {
+    [self updateProgressByWidth:[NSNumber numberWithLong:self.frame.size.width]];
     progressSeparator.backgroundColor = [Util UIColorForHexColor:@"67d74b"];
     imgView.alpha = 1.0f;
     if([delegate respondsToSelector:@selector(squareImageUploadFinishedForFile:)]) {

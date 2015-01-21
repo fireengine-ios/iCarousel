@@ -453,18 +453,13 @@
 }
 
 - (void) photoModalDidTriggerUploadForUrls:(NSArray *)assetUrls {
-    [APPDELEGATE.base showBaseLoading];
-    dispatch_queue_t queue = dispatch_queue_create("write_to_file_queue", NULL);
-    dispatch_async(queue, ^{
-        for(UploadRef *ref in assetUrls) {
-            ref.albumUuid = self.album.uuid;
-            UploadManager *manager = [[UploadManager alloc] initWithUploadReference:ref];
-            [manager startUploadingAsset:ref.filePath atFolder:nil];
-            [APPDELEGATE.uploadQueue addNewUploadTask:manager];
-        }
-        [self performSelectorOnMainThread:@selector(postUploadTrigger) withObject:nil waitUntilDone:NO];
-    });
-    
+    for(UploadRef *ref in assetUrls) {
+        ref.albumUuid = self.album.uuid;
+        UploadManager *manager = [[UploadManager alloc] initWithUploadInfo:ref];
+        [manager configureUploadAsset:ref.filePath atFolder:nil];
+        [APPDELEGATE.uploadQueue addNewUploadTask:manager];
+    }
+    [self triggerRefresh];
 }
 
 - (void) postUploadTrigger {
@@ -479,8 +474,8 @@
     uploadRef.contentType = ContentTypePhoto;
     uploadRef.albumUuid = self.album.uuid;
     
-    UploadManager *uploadManager = [[UploadManager alloc] initWithUploadReference:uploadRef];
-    [uploadManager startUploadingFile:filePath atFolder:nil withFileName:fileName];
+    UploadManager *uploadManager = [[UploadManager alloc] initWithUploadInfo:uploadRef];
+    [uploadManager configureUploadFileForPath:filePath atFolder:nil withFileName:fileName];
     [APPDELEGATE.uploadQueue addNewUploadTask:uploadManager];
     
     [self triggerRefresh];

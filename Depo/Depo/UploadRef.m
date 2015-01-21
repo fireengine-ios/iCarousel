@@ -7,6 +7,9 @@
 //
 
 #import "UploadRef.h"
+#import "MetaFile.h"
+#import "AppDelegate.h"
+#import "AppSession.h"
 
 @implementation UploadRef
 
@@ -15,8 +18,56 @@
 @synthesize folderUuid;
 @synthesize fileUuid;
 @synthesize tempUrl;
+@synthesize assetUrl;
 @synthesize urlForUpload;
 @synthesize albumUuid;
+@synthesize fileData;
 @synthesize contentType;
+@synthesize hasFinished;
+@synthesize isReady;
+@synthesize taskType;
+@synthesize folder;
+@synthesize initializationDate;
+
+- (void) configureUploadFileForPath:(NSString *) _filePath atFolder:(MetaFile *) _folder withFileName:(NSString *) fileName {
+
+    self.taskType = UploadTaskTypeFile;
+    self.filePath = _filePath;
+    self.folder = _folder;
+    self.isReady = YES;
+
+    NSString *newUuid = [[NSUUID UUID] UUIDString];
+    self.urlForUpload = [NSString stringWithFormat:@"%@/%@", APPDELEGATE.session.baseUrl, newUuid];
+    self.fileUuid = newUuid;
+    self.folderUuid = _folder ? _folder.uuid : nil;
+}
+
+- (void) configureUploadData:(NSData *) _dataToUpload atFolder:(MetaFile *) _folder withFileName:(NSString *) fileName {
+    
+    self.taskType = UploadTaskTypeData;
+    self.isReady = YES;
+    
+    self.folder = _folder;
+    self.fileData = _dataToUpload;
+    
+    NSString *newUuid = [[NSUUID UUID] UUIDString];
+    self.fileUuid = newUuid;
+    
+    self.urlForUpload = [NSString stringWithFormat:@"%@/%@", APPDELEGATE.session.baseUrl, newUuid];
+    self.folderUuid = _folder ? _folder.uuid : nil;
+}
+
+- (void) configureUploadAsset:(NSString *) _assetUrl atFolder:(MetaFile *) _folder {
+    
+    self.taskType = UploadTaskTypeAsset;
+    self.isReady = YES;
+    
+    self.folder = _folder;
+    self.folderUuid = _folder ? _folder.uuid : nil;
+    self.assetUrl = _assetUrl;
+    
+    NSString *newUuid = [[NSUUID UUID] UUIDString];
+    self.fileUuid = newUuid;
+}
 
 @end

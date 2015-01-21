@@ -11,6 +11,7 @@
 #import "AppSession.h"
 #import "Util.h"
 #import "AppUtil.h"
+#import "UploadQueue.h"
 
 typedef void (^ALAssetsLibraryAssetForURLResultBlock)(ALAsset *asset);
 typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
@@ -19,85 +20,63 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 
 @synthesize delegate;
 @synthesize queueDelegate;
-
-@synthesize asset;
-@synthesize assetsLibrary;
-@synthesize folder;
-@synthesize largeimage;
-@synthesize uploadRef;
-@synthesize initializationDate;
-@synthesize taskType;
-@synthesize hasFinished;
-@synthesize isReady;
 @synthesize uploadTask;
+@synthesize uploadRef;
+@synthesize assetsLibrary;
+@synthesize asset;
+@synthesize notifyDao;
 
-- (id) initWithUploadReference:(UploadRef *) ref {
+- (id) initWithUploadInfo:(UploadRef *) ref {
     if(self = [super init]) {
         self.uploadRef = ref;
-        self.initializationDate = [NSDate date];
-        
-        NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration  defaultSessionConfiguration];
-//        sessionConfig.HTTPAdditionalHeaders = @{@"Keep-Alive": @"timeout=600, max=6"};
-        
-        session = [NSURLSession sessionWithConfiguration:sessionConfig delegate:self delegateQueue:nil];
-        
-        notifyDao = [[UploadNotifyDao alloc] init];
-        notifyDao.delegate = self;
-        notifyDao.successMethod = @selector(uploadNotifySuccessCallback);
-        notifyDao.failMethod = @selector(uploadNotifyFailCallback:);
+        self.uploadRef.initializationDate = [NSDate date];
     }
     return self;
 }
 
-- (void) startUploadingFile:(NSString *) filePath atFolder:(MetaFile *) _folder withFileName:(NSString *) fileName {
-    self.taskType = UploadTaskTypeFile;
-    self.isReady = YES;
-
-    NSString *newUuid = [[NSUUID UUID] UUIDString];
-    self.folder = _folder;
-    
-    self.uploadRef.urlForUpload = [NSString stringWithFormat:@"%@/%@", APPDELEGATE.session.baseUrl, newUuid];
-    self.uploadRef.fileUuid = newUuid;
-    self.uploadRef.folderUuid = _folder ? _folder.uuid : nil;
-    
-    self.fileNameRef = fileName;
-    self.filePathRef = filePath;
+- (void) configureUploadFileForPath:(NSString *) filePath atFolder:(MetaFile *) _folder withFileName:(NSString *) fileName {
+    [self.uploadRef configureUploadFileForPath:filePath atFolder:_folder withFileName:fileName];
 }
 
-- (void) startUploadingData:(NSData *) _dataToUpload atFolder:(MetaFile *) _folder withFileName:(NSString *) fileName {
-    self.taskType = UploadTaskTypeData;
-    self.isReady = YES;
-
-    self.folder = _folder;
-    
-    NSString *newUuid = [[NSUUID UUID] UUIDString];
-    self.uploadRef.fileUuid = newUuid;
-
-    self.uploadRef.urlForUpload = [NSString stringWithFormat:@"%@/%@", APPDELEGATE.session.baseUrl, newUuid];
-    self.uploadRef.folderUuid = _folder ? _folder.uuid : nil;
-    
-    self.fileNameRef = fileName;
-    self.fileDataRef = _dataToUpload;
+- (void) configureUploadData:(NSData *) _dataToUpload atFolder:(MetaFile *) _folder withFileName:(NSString *) fileName {
+    [self.uploadRef configureUploadData:_dataToUpload atFolder:_folder withFileName:fileName];
 }
 
-- (void) startUploadingAsset:(NSString *) assetUrl atFolder:(MetaFile *) _folder {
-    self.taskType = UploadTaskTypeAsset;
+- (void) configureUploadAsset:(NSString *) assetUrl atFolder:(MetaFile *) _folder {
+    [self.uploadRef configureUploadAsset:assetUrl atFolder:_folder];
+    [queueDelegate uploadManagerIsReadToStartTask:self];
+}
 
-    self.folder = _folder;
+- (void) startTask {
+    dispatch_queue_t uploadQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
+    dispatch_async(uploadQueue, ^{
+        if(self.uploadRef.taskType == UploadTaskTypeAsset) {
+            [self triggerAndStartAssetsTask];
+        } else if(self.uploadRef.taskType == UploadTaskTypeFile) {
+            self.uploadTask = [APPDELEGATE.uploadQueue.session uploadTaskWithRequest:[self prepareRequestSetVideo:NO] fromFile:[NSURL fileURLWithPath:self.uploadRef.filePath]];
+            [uploadTask resume];
+//            [queueDelegate uploadManagerTaskIsInitialized:self];
+        } else {
+            self.uploadTask = [APPDELEGATE.uploadQueue.session uploadTaskWithRequest:[self prepareRequestSetVideo:NO] fromData:self.uploadRef.fileData];
+            [uploadTask resume];
+//            [queueDelegate uploadManagerTaskIsInitialized:self];
+        }
+    });
+    
+}
+
+- (void) triggerAndStartAssetsTask {
+    self.asset = nil;
+    
     self.assetsLibrary = [[ALAssetsLibrary alloc] init];
-    self.uploadRef.folderUuid = _folder ? _folder.uuid : nil;
-
-    NSString *newUuid = [[NSUUID UUID] UUIDString];
-    self.uploadRef.fileUuid = newUuid;
-    
     [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
         if(group) {
             [group enumerateAssetsUsingBlock:^(ALAsset *_asset, NSUInteger index, BOOL *stop) {
-                if(_asset && !asset) {
+                if(_asset && !self.asset) {
                     NSURL *_assetUrl = _asset.defaultRepresentation.url;
-                    if([[_assetUrl absoluteString] isEqualToString:assetUrl]) {
+                    if([[_assetUrl absoluteString] isEqualToString:self.uploadRef.assetUrl]) {
                         self.asset = _asset;
-                        [self triggerAndStartAssetsTask];
+                        [self continueAssetUpload];
                     }
                 }
             }];
@@ -106,13 +85,12 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     }];
 }
 
-- (void) triggerAndStartAssetsTask {
+- (void) continueAssetUpload {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     
     NSString *randomVal = [NSString stringWithFormat:@"%.0f%d", [[NSDate date] timeIntervalSince1970], arc4random_uniform(99)];
-    tempPath = [documentsDirectory stringByAppendingFormat:@"/%@_%@", randomVal, asset.defaultRepresentation.filename];
-    NSLog(@"TEMP PATH: %@", tempPath);
+    NSString *tempPath = [documentsDirectory stringByAppendingFormat:@"/%@_%@", randomVal, self.asset.defaultRepresentation.filename];
     self.uploadRef.tempUrl = tempPath;
     
     if ([[self.asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
@@ -123,73 +101,46 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         [videoData writeToFile:tempPath atomically:YES];
     } else {
         UIImageOrientation orientation = UIImageOrientationUp;
-        NSNumber* orientationValue = [asset valueForProperty:@"ALAssetPropertyOrientation"];
+        NSNumber* orientationValue = [self.asset valueForProperty:@"ALAssetPropertyOrientation"];
         if (orientationValue != nil) {
             orientation = [orientationValue intValue];
         }
         
-        UIImage *image = [UIImage imageWithCGImage:[asset.defaultRepresentation fullResolutionImage] scale:1.0 orientation:orientationValue];
+        UIImage *image = [UIImage imageWithCGImage:[self.asset.defaultRepresentation fullResolutionImage] scale:1.0 orientation:orientationValue];
         [UIImagePNGRepresentation(image) writeToFile:tempPath atomically:YES];
     }
-
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:TEMP_IMG_UPLOAD_NOTIFICATION object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:self.uploadRef.fileUuid, TEMP_IMG_UPLOAD_NOTIFICATION_UUID_PARAM, tempPath, TEMP_IMG_UPLOAD_NOTIFICATION_URL_PARAM, nil]];
-
-    self.fileNameRef = asset.defaultRepresentation.filename;
+    
+    self.uploadRef.fileName = self.asset.defaultRepresentation.filename;
     self.uploadRef.urlForUpload = [NSString stringWithFormat:@"%@/%@", APPDELEGATE.session.baseUrl, self.uploadRef.fileUuid];
     
-    self.isReady = YES;
-    [queueDelegate uploadManagerIsReadToStartTask:self];
-}
-
-- (void) startTask {
-    if(self.taskType == UploadTaskTypeAsset) {
-        uploadTask = [session uploadTaskWithRequest:[self prepareRequestWithFileName:self.fileNameRef] fromFile:[NSURL fileURLWithPath:self.uploadRef.tempUrl]];
-        [uploadTask resume];
-    } else if(self.taskType == UploadTaskTypeFile) {
-        uploadTask = [session uploadTaskWithRequest:[self prepareRequestWithFileName:self.fileNameRef] fromFile:[NSURL fileURLWithPath:self.filePathRef] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-            NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
-            if (!error && httpResp.statusCode == 201) {
-                [notifyDao requestNotifyUploadForFile:self.uploadRef.fileUuid atParentFolder:self.folder?self.folder.uuid : @""];
-            } else {
-                [delegate uploadManagerDidFailUploadingAsData];
-                hasFinished = YES;
-            }
-        }];
-        [uploadTask resume];
-    } else {
-        uploadTask = [session uploadTaskWithRequest:[self prepareRequestWithFileName:self.fileNameRef] fromData:self.fileDataRef completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-            NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
-            if (!error && httpResp.statusCode == 201) {
-                [notifyDao requestNotifyUploadForFile:self.uploadRef.fileUuid atParentFolder:self.folder?self.folder.uuid:@""];
-            } else {
-                [delegate uploadManagerDidFailUploadingAsData];
-                hasFinished = YES;
-            }
-        }];
-        [uploadTask resume];
-    }
+    self.uploadTask = [APPDELEGATE.uploadQueue.session uploadTaskWithRequest:[self prepareRequestSetVideo:[[self.asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]] fromFile:[NSURL fileURLWithPath:self.uploadRef.tempUrl]];
+    [uploadTask resume];
+    //    [queueDelegate uploadManagerTaskIsInitialized:self];
+    
 }
 
 - (void) removeTemporaryFile {
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    [fileManager removeItemAtPath:tempPath error:nil];
-    [delegate uploadManagerDidFailUploadingForAsset:self.asset];
+    [fileManager removeItemAtPath:self.uploadRef.tempUrl error:nil];
+    [delegate uploadManagerDidFailUploadingForAsset:self.uploadRef.assetUrl];
 }
 
-- (NSMutableURLRequest *) prepareRequestWithFileName:(NSString *) fileName {
+- (NSMutableURLRequest *) prepareRequestSetVideo:(BOOL) isVideo {
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:self.uploadRef.urlForUpload]];
     
     [request setHTTPMethod:@"PUT"];
     [request setValue:APPDELEGATE.session.authToken forHTTPHeaderField:@"X-Auth-Token"];
     [request setValue:@"false" forHTTPHeaderField:@"X-Object-Meta-Favourite"];
     [request setValue:@"1" forHTTPHeaderField:@"x-meta-strategy"];
-    if(self.folder) {
-        [request setValue:self.folder.uuid forHTTPHeaderField:@"X-Object-Meta-Parent-Uuid"];
+    if(self.uploadRef.folder) {
+        [request setValue:self.uploadRef.folder.uuid forHTTPHeaderField:@"X-Object-Meta-Parent-Uuid"];
     } else {
         [request setValue:@"" forHTTPHeaderField:@"X-Object-Meta-Parent-Uuid"];
     }
-    [request setValue:fileName forHTTPHeaderField:@"X-Object-Meta-File-Name"];
-    if ([[self.asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
+    [request setValue:self.uploadRef.fileName forHTTPHeaderField:@"X-Object-Meta-File-Name"];
+    if (isVideo) {
         [request addValue:@"video/mp4" forHTTPHeaderField:@"Content-Type"];
     } else {
         [request addValue:@"image/png" forHTTPHeaderField:@"Content-Type"];
@@ -197,46 +148,34 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     return request;
 }
 
-- (void) uploadNotifySuccessCallback {
-    hasFinished = YES;
-    [delegate uploadManagerDidFinishUploadingForAsset:self.asset];
-    [queueDelegate uploadManager:self didFinishUploadingWithSuccess:YES];
+- (NSString *) uniqueUrl {
+    if(self.uploadRef.assetUrl != nil) {
+        return self.uploadRef.assetUrl;
+    }
+    return self.uploadRef.tempUrl;
+}
 
-    self.fileDataRef = nil;
-    self.fileNameRef = nil;
-    self.filePathRef = nil;
+- (void) notifyUpload {
+    notifyDao = [[UploadNotifyDao alloc] init];
+    notifyDao.delegate = self;
+    notifyDao.successMethod = @selector(uploadNotifySuccessCallback);
+    notifyDao.failMethod = @selector(uploadNotifyFailCallback:);
+
+    [notifyDao requestNotifyUploadForFile:self.uploadRef.fileUuid atParentFolder:self.uploadRef.folder?self.uploadRef.folder.uuid:@""];
+}
+
+- (void) uploadNotifySuccessCallback {
+    NSLog(@"uploadNotifySuccessCallback");
+    self.uploadRef.hasFinished = YES;
+    [delegate uploadManagerDidFinishUploadingForAsset:self.uploadRef.assetUrl];
+    [queueDelegate uploadManager:self didFinishUploadingWithSuccess:NO];
 }
 
 - (void) uploadNotifyFailCallback:(NSString *) errorMessage {
-    hasFinished = YES;
-    [delegate uploadManagerDidFailUploadingForAsset:self.asset];
+    NSLog(@"uploadNotifyFailCallback");
+    self.uploadRef.hasFinished = YES;
+    [delegate uploadManagerDidFailUploadingForAsset:self.uploadRef.assetUrl];
     [queueDelegate uploadManager:self didFinishUploadingWithSuccess:NO];
-
-    self.fileDataRef = nil;
-    self.fileNameRef = nil;
-    self.filePathRef = nil;
-}
-
-- (void) URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didSendBodyData:(int64_t)bytesSent totalBytesSent:(int64_t)totalBytesSent totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend {
-    [delegate uploadManagerDidSendData:(long)totalBytesSent inTotal:(long)totalBytesExpectedToSend];
-}
-
-- (void) URLSession:(NSURLSession *) _session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error {
-    NSLog(@"didCompleteWithError: %@", error);
-
-    NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) task.response;
-    if (!error && httpResp.statusCode == 201) {
-        [self removeTemporaryFile];
-        [notifyDao requestNotifyUploadForFile:self.uploadRef.fileUuid atParentFolder:self.folder?self.folder.uuid:@""];
-    } else {
-        [self removeTemporaryFile];
-        [delegate uploadManagerDidFailUploadingForAsset:self.asset];
-        hasFinished = YES;
-    }
-}
-
-- (void) URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession *) _session {
-    NSLog(@"URLSessionDidFinishEventsForBackgroundURLSession");
 }
 
 @end

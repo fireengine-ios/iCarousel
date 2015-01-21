@@ -524,8 +524,8 @@
     uploadRef.fileName = fileName;
     uploadRef.contentType = ContentTypePhoto;
     
-    uploadManager = [[UploadManager alloc] initWithUploadReference:uploadRef];
-    [uploadManager startUploadingFile:filePath atFolder:self.folder withFileName:fileName];
+    uploadManager = [[UploadManager alloc] initWithUploadInfo:uploadRef];
+    [uploadManager configureUploadFileForPath:filePath atFolder:self.folder withFileName:fileName];
     [APPDELEGATE.uploadQueue addNewUploadTask:uploadManager];
     
     fileList = [@[uploadRef] arrayByAddingObjectsFromArray:fileList];
@@ -548,17 +548,14 @@
 - (void) photoModalDidTriggerUploadForUrls:(NSArray *)assetUrls {
     
     if([assetUrls count] > 0) {
-        [APPDELEGATE.base showBaseLoading];
-        dispatch_queue_t queue = dispatch_queue_create("write_to_file_queue", NULL);
-        dispatch_async(queue, ^{
-            for(UploadRef *ref in assetUrls) {
-                UploadManager *manager = [[UploadManager alloc] initWithUploadReference:ref];
-                [manager startUploadingAsset:ref.filePath atFolder:self.folder];
-                [APPDELEGATE.uploadQueue addNewUploadTask:manager];
-            }
-            fileList = [assetUrls arrayByAddingObjectsFromArray:fileList];
-            [self performSelectorOnMainThread:@selector(postUploadTrigger) withObject:nil waitUntilDone:NO];
-        });
+        for(UploadRef *ref in assetUrls) {
+            UploadManager *manager = [[UploadManager alloc] initWithUploadInfo:ref];
+            [manager configureUploadAsset:ref.filePath atFolder:self.folder];
+            [APPDELEGATE.uploadQueue addNewUploadTask:manager];
+        }
+        fileList = [assetUrls arrayByAddingObjectsFromArray:fileList];
+        self.tableUpdateCounter++;
+        [self.fileTable reloadData];
     }
 }
 

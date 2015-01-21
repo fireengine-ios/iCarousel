@@ -119,7 +119,7 @@
 
 #define SETTINGS_NOTIFICATIONS @"SETTINGS_NOTIFICATIONS"
 
-#define MAX_CONCURRENT_UPLOAD_TASKS 6
+#define MAX_CONCURRENT_UPLOAD_TASKS 5
 
 #define SuppressPerformSelectorLeakWarning(Stuff) \
 do { \

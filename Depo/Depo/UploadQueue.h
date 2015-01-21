@@ -9,10 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "UploadManager.h"
 
-@interface UploadQueue : NSObject <UploadManagerQueueDelegate>
+@interface UploadQueue : NSObject <UploadManagerQueueDelegate, NSURLSessionDelegate, NSURLSessionTaskDelegate>
 
 @property (nonatomic, strong) NSMutableSet *activeTaskIds;
 @property (nonatomic, strong) NSMutableArray *uploadManagers;
+@property (nonatomic, strong) NSURLSession *session;
 
 - (NSArray *) uploadRefsForFolder:(NSString *) folderUuid;
 - (NSArray *) uploadImageRefs;
