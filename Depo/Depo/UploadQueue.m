@@ -28,7 +28,7 @@
         
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
-            NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"com.igones.depo.BackgroundSession"];
+            NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration backgroundSessionConfiguration:@"com.igones.depo.BackgroundSession"];
             self.session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
         });
     }
