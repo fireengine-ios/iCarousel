@@ -438,6 +438,7 @@
 		058BC23C1A30E5370007F4DE /* ValidateAuthTokenDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 058BC23B1A30E5370007F4DE /* ValidateAuthTokenDao.m */; };
 		058BC23F1A30E6B10007F4DE /* ServiceLoginDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 058BC23E1A30E6B10007F4DE /* ServiceLoginDao.m */; };
 		058BC2421A30E7100007F4DE /* AuthResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 058BC2411A30E7100007F4DE /* AuthResponse.m */; };
+		0590B3231A70EF4300A94AAB /* ShareLinkDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 0590B3221A70EF4300A94AAB /* ShareLinkDao.m */; };
 		059785BD1A0525B600A101EF /* FooterActionsMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 059785BC1A0525B600A101EF /* FooterActionsMenuView.m */; };
 		05994F971A0B57080081F000 /* music_backward.png in Resources */ = {isa = PBXBuildFile; fileRef = 05994F931A0B57080081F000 /* music_backward.png */; };
 		05994F981A0B57080081F000 /* music_backward@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05994F941A0B57080081F000 /* music_backward@2x.png */; };
@@ -1133,6 +1134,8 @@
 		058BC23E1A30E6B10007F4DE /* ServiceLoginDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceLoginDao.m; sourceTree = "<group>"; };
 		058BC2401A30E7100007F4DE /* AuthResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthResponse.h; sourceTree = "<group>"; };
 		058BC2411A30E7100007F4DE /* AuthResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthResponse.m; sourceTree = "<group>"; };
+		0590B3211A70EF4300A94AAB /* ShareLinkDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareLinkDao.h; sourceTree = "<group>"; };
+		0590B3221A70EF4300A94AAB /* ShareLinkDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareLinkDao.m; sourceTree = "<group>"; };
 		059785BB1A0525B600A101EF /* FooterActionsMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FooterActionsMenuView.h; sourceTree = "<group>"; };
 		059785BC1A0525B600A101EF /* FooterActionsMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FooterActionsMenuView.m; sourceTree = "<group>"; };
 		05994F931A0B57080081F000 /* music_backward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music_backward.png; sourceTree = "<group>"; };
@@ -1624,6 +1627,8 @@
 				058BC23B1A30E5370007F4DE /* ValidateAuthTokenDao.m */,
 				05B73E7D1A5EC04B005D24BE /* UsageInfoDao.h */,
 				05B73E7E1A5EC04B005D24BE /* UsageInfoDao.m */,
+				0590B3211A70EF4300A94AAB /* ShareLinkDao.h */,
+				0590B3221A70EF4300A94AAB /* ShareLinkDao.m */,
 			);
 			name = http;
 			sourceTree = "<group>";
@@ -2658,6 +2663,7 @@
 				058219CE1A384D75001FA679 /* TableHeaderView.m in Sources */,
 				052160A619E308380007B321 /* UploadingImageCell.m in Sources */,
 				051E1E5519CAC90700FD1E03 /* AFJSONRequestOperation.m in Sources */,
+				0590B3231A70EF4300A94AAB /* ShareLinkDao.m in Sources */,
 				05224A9A19DC3FDA00214767 /* SelectibleAssetView.m in Sources */,
 				051CB39E19D2E41600E5FC88 /* ImageCell.m in Sources */,
 				057C9D7A1A2B4993001DDDEC /* UsageButton.m in Sources */,

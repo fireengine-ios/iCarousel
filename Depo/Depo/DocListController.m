@@ -199,6 +199,7 @@
 }
 
 - (void) fileFolderCellShouldShareForFile:(MetaFile *)fileSelected {
+    [APPDELEGATE.base triggerShareForFiles:@[fileSelected]];
 }
 
 - (void) fileFolderCellShouldMoveForFile:(MetaFile *)fileSelected {

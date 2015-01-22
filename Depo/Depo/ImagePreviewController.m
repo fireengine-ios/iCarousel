@@ -45,6 +45,11 @@
         renameDao.successMethod = @selector(renameSuccessCallback:);
         renameDao.failMethod = @selector(renameFailCallback:);
 
+        shareDao = [[ShareLinkDao alloc] init];
+        shareDao.delegate = self;
+        shareDao.successMethod = @selector(shareSuccessCallback:);
+        shareDao.failMethod = @selector(shareFailCallback:);
+
         mainScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex - 60)];
         mainScroll.delegate = self;
         mainScroll.maximumZoomScale = 5.0f;
@@ -81,6 +86,7 @@
 }
 
 - (void) fileDetailFooterDidTriggerShare {
+    [self triggerShareForFiles:@[self.file.uuid]];
 }
 
 - (void) moreClicked {
@@ -157,6 +163,7 @@
 
 - (void) moreMenuDidSelectShare {
     NSLog(@"At INNER moreMenuDidSelectShare");
+    [self triggerShareForFiles:@[self.file.uuid]];
 }
 
 - (void) moreMenuDidSelectDownloadImage {
@@ -242,6 +249,29 @@
 - (void) triggerDismiss {
     [self dismissViewControllerAnimated:YES completion:nil];
     [APPDELEGATE.base checkAndShowAddButton];
+}
+
+- (void) triggerShareForFiles:(NSArray *) fileUuidList {
+    [shareDao requestLinkForFiles:fileUuidList];
+    [self showLoading];
+}
+
+#pragma mark ShareLinkDao Delegate Methods
+- (void) shareSuccessCallback:(NSString *) linkToShare {
+    [self hideLoading];
+    NSArray *activityItems = [NSArray arrayWithObjects:linkToShare, nil];
+    
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+    [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
+    activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    
+    activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll];
+    
+    [self presentViewController:activityViewController animated:YES completion:nil];
+}
+
+- (void) shareFailCallback:(NSString *) errorMessage {
+    [self hideLoading];
 }
 
 - (void)orientationChanged:(NSNotification *)notification {

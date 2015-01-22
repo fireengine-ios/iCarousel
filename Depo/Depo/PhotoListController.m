@@ -626,6 +626,7 @@
 }
 
 - (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {
+    [APPDELEGATE.base triggerShareForFiles:selectedFileList];
 }
 
 - (void) albumModalDidSelectAlbum:(NSString *)albumUuid {

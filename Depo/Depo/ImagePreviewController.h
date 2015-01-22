@@ -14,6 +14,7 @@
 #import "DeleteDao.h"
 #import "FavoriteDao.h"
 #import "RenameDao.h"
+#import "ShareLinkDao.h"
 
 @interface ImagePreviewController : MyViewController <UIScrollViewDelegate, FileDetailFooterDelegate> {
     UIImageView *imgView;
@@ -24,6 +25,7 @@
     DeleteDao *deleteDao;
     FavoriteDao *favDao;
     RenameDao *renameDao;
+    ShareLinkDao *shareDao;
 }
 
 @property (nonatomic, strong) MetaFile *file;

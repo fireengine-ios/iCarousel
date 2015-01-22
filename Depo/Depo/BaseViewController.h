@@ -14,6 +14,7 @@
 #import "FloatingAddButton.h"
 #import "FloatingAddMenu.h"
 #import "PhotoAlbum.h"
+#import "ShareLinkDao.h"
 
 @interface BaseViewController : UIViewController <SlidingMenuDelegate, SlidingMenuCloseDelegate, MyViewDelegate, FloatingAddButtonDelegate, FloatingAddDelegate>
 
@@ -24,6 +25,7 @@
 @property (nonatomic, strong) MBProgressHUD *baseProgress;
 @property (nonatomic, strong) FloatingAddButton *addButton;
 @property (nonatomic, strong) FloatingAddMenu *addMenu;
+@property (nonatomic, strong) ShareLinkDao *shareDao;
 @property (nonatomic) BOOL menuOpen;
 
 - (void) showBaseLoading;
@@ -47,5 +49,7 @@
 - (void) immediateShowAddButton;
 - (void) immediateHideAddButton;
 - (void) checkAndShowAddButton;
+
+- (void) triggerShareForFiles:(NSArray *) fileUuidList;
 
 @end

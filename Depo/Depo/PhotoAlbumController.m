@@ -426,6 +426,7 @@
 }
 
 - (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {
+    [APPDELEGATE.base triggerShareForFiles:selectedFileList];
 }
 
 #pragma mark ConfirmDeleteModalDelegate methods

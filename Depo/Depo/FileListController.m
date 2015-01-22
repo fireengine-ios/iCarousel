@@ -364,6 +364,7 @@
 }
 
 - (void) fileFolderCellShouldShareForFile:(MetaFile *)fileSelected {
+    [APPDELEGATE.base triggerShareForFiles:@[fileSelected]];
 }
 
 - (void) fileFolderCellShouldMoveForFile:(MetaFile *)fileSelected {
@@ -678,6 +679,7 @@
 }
 
 - (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {
+    [APPDELEGATE.base triggerShareForFiles:selectedFileList];
 }
 
 - (void) moveListModalDidSelectFolder:(NSString *)folderUuid {
@@ -718,6 +720,9 @@
 
 - (void) moreMenuDidSelectShare {
     NSLog(@"At INNER moreMenuDidSelectShare");
+    if(self.folder != nil && self.folder.uuid != nil) {
+        [APPDELEGATE.base triggerShareForFiles:@[self.folder.uuid]];
+    }
 }
 
 #pragma mark ConfirmDeleteModalDelegate methods

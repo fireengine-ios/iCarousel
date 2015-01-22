@@ -40,6 +40,8 @@
 
 #define FAVORITE_URL BASE_URL@"/filesystem/metadata"
 
+#define SHARE_LINK_URL BASE_URL@"/share/public"
+
 #define ADVANCED_SEARCH_URL BASE_URL@"/search/advancedSearch?name=%@&sortBy=%@&sortOrder=%@&page=%d&size=%d"
 
 #define ADVANCED_SEARCH_URL_WITH_CATEGORY BASE_URL@"/search/advancedSearch?name=%@&sortBy=%@&sortOrder=%@&page=%d&size=%d&category=%@"

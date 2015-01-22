@@ -59,6 +59,7 @@
     int buttonPlaygroundX = swipeMenu.frame.size.width / 4;
 
     shareButton = [[CustomButton alloc] initWithFrame:CGRectMake((buttonPlaygroundX - 16)/2, 22, 16, 22) withImageName:@"white_share_icon.png"];
+    [shareButton addTarget:self action:@selector(triggerShare) forControlEvents:UIControlEventTouchUpInside];
     [swipeMenu addSubview:shareButton];
 
     favButton = [[CustomButton alloc] initWithFrame:CGRectMake(buttonPlaygroundX + (buttonPlaygroundX - 20)/2, 23, 20, 20) withImageName:@"fav_icon.png"];
@@ -146,6 +147,10 @@
     favButton.hidden = NO;
     [UIView transitionFromView:unfavButton toView:favButton duration:0.5 options:UIViewAnimationOptionTransitionCrossDissolve completion:nil];
     [delegate fileFolderCellShouldUnfavForFile:self.fileFolder];
+}
+
+- (void) triggerShare {
+    [delegate fileFolderCellShouldShareForFile:self.fileFolder];
 }
 
 - (void) triggerDelete {

@@ -51,10 +51,16 @@
 @synthesize transparentView;
 @synthesize addButton;
 @synthesize addMenu;
+@synthesize shareDao;
 
 - (id)initWithRootViewController:(MyViewController *) rootViewController {
     self = [super init];
     if (self) {
+
+        shareDao = [[ShareLinkDao alloc] init];
+        shareDao.delegate = self;
+        shareDao.successMethod = @selector(shareSuccessCallback:);
+        shareDao.failMethod = @selector(shareFailCallback:);
 
         scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
         scroll.scrollEnabled = NO;
@@ -453,6 +459,29 @@
     RecentActivitiesController *recentActivities = [[RecentActivitiesController alloc] init];
     MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:recentActivities];
     [self presentViewController:modalNav animated:YES completion:nil];
+}
+
+- (void) triggerShareForFiles:(NSArray *) fileUuidList {
+    [shareDao requestLinkForFiles:fileUuidList];
+    [self showBaseLoading];
+}
+
+#pragma mark ShareLinkDao Delegate Methods
+- (void) shareSuccessCallback:(NSString *) linkToShare {
+    [self hideBaseLoading];
+    NSArray *activityItems = [NSArray arrayWithObjects:linkToShare, nil];
+    
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+    [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
+    activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    
+    activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll];
+    
+    [self presentViewController:activityViewController animated:YES completion:nil];
+}
+
+- (void) shareFailCallback:(NSString *) errorMessage {
+    [self hideBaseLoading];
 }
 
 - (void)viewDidLoad {
