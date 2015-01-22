@@ -17,7 +17,7 @@
     if (self) {
         self.backgroundColor = [Util UIColorForHexColor:@"2c3037"];
         self.layer.cornerRadius = 6;
-        self.placeholder = @"Search";
+        self.placeholder = NSLocalizedString(@"MenuSearch", @"");
         self.textColor = [UIColor whiteColor];
         self.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:18];
     }

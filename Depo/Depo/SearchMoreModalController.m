@@ -41,7 +41,7 @@
     
     if (self = [super init]) {
         self.view.backgroundColor = [UIColor whiteColor];
-        self.title = NSLocalizedString(@"Search", @"");
+        self.title = NSLocalizedString(@"SearchTitle", @"");
         
         CustomButton *cancelButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 60, 20) withImageName:nil withTitle:NSLocalizedString(@"ButtonCancel", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[UIColor whiteColor]];
         [cancelButton addTarget:self action:@selector(triggerDismiss) forControlEvents:UIControlEventTouchUpInside];

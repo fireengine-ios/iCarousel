@@ -264,10 +264,11 @@
     if(isSelectible)
         return;
     
-    MetaFile *fileAtIndex = [fileList objectAtIndex:indexPath.row];
-    
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if([cell isKindOfClass:[UploadingImageCell class]]) {
+        return;
+    }
+    if([cell isKindOfClass:[FolderEmptyCell class]]) {
         return;
     }
     if([cell isKindOfClass:[AbstractFileFolderCell class]]) {
@@ -276,6 +277,9 @@
             return;
         }
     }
+
+    MetaFile *fileAtIndex = [fileList objectAtIndex:indexPath.row];
+    
     
     if(fileAtIndex.contentType == ContentTypeFolder) {
         FileListController *innerList = [[FileListController alloc] initForFolder:fileAtIndex];

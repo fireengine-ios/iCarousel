@@ -143,9 +143,10 @@
     if(isSelectible)
         return;
     
-    MetaFile *fileAtIndex = [docList objectAtIndex:indexPath.row];
-    
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if([cell isKindOfClass:[FolderEmptyCell class]]) {
+        return;
+    }
     if([cell isKindOfClass:[AbstractFileFolderCell class]]) {
         AbstractFileFolderCell *fileFolderCell = (AbstractFileFolderCell *) cell;
         if(fileFolderCell.menuActive) {
@@ -153,6 +154,7 @@
         }
     }
     
+    MetaFile *fileAtIndex = [docList objectAtIndex:indexPath.row];
     FileDetailInWebViewController *preview = [[FileDetailInWebViewController alloc] initWithFile:fileAtIndex];
     preview.nav = self.nav;
     [self.nav pushViewController:preview animated:NO];

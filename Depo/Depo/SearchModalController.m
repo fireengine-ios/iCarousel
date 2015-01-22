@@ -37,7 +37,7 @@
 - (id) init {
     if (self = [super init]) {
         self.view.backgroundColor = [UIColor whiteColor];
-        self.title = @"Search";
+        self.title = NSLocalizedString(@"SearchTitle", @"");
         
         searchDao = [[SearchDao alloc] init];
         searchDao.delegate = self;
