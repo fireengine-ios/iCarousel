@@ -17,6 +17,10 @@
 #import "ShareLinkDao.h"
 #import "ImagePreviewController.h"
 
+@protocol PhotoAlbumDelegate <NSObject>
+- (void) photoAlbumDidChange:(NSString *) albumUuid;
+@end
+
 @interface PhotoAlbumController : MyViewController <SquareImageDelegate, FooterActionsDelegate, ImagePreviewDelegate> {
     AlbumDetailDao *detailDao;
     RenameAlbumDao *renameDao;
@@ -34,8 +38,10 @@
     int listOffset;
     BOOL isLoading;
     BOOL isSelectible;
+    BOOL contentModified;
 }
 
+@property (nonatomic, strong) id<PhotoAlbumDelegate> delegate;
 @property (nonatomic, strong) PhotoAlbum *album;
 @property (nonatomic, strong) UIScrollView *photosScroll;
 @property (nonatomic, strong) NSMutableArray *photoList;

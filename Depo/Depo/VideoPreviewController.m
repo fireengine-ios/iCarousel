@@ -17,6 +17,7 @@
 
 @implementation VideoPreviewController
 
+@synthesize delegate;
 @synthesize file;
 @synthesize avPlayer;
 
@@ -67,6 +68,7 @@
 
 - (void) deleteSuccessCallback {
     [self proceedSuccessForProgressView];
+    [delegate previewedVideoWasDeleted:self.file];
     [self performSelector:@selector(postDelete) withObject:nil afterDelay:1.0f];
 }
 
@@ -288,7 +290,7 @@
     [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
     activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     
-    activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll];
+//    activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll];
     
     [self presentViewController:activityViewController animated:YES completion:nil];
 }

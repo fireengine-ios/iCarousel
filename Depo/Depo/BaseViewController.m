@@ -371,6 +371,10 @@
     self.addButton.hidden = YES;
 }
 
+- (BOOL) isAddButtonHidden {
+    return [self.addButton isHidden];
+}
+
 - (void) checkAndShowAddButton {
     UIViewController *topController = [self.nav topViewController];
     NSArray *addTypesForController = [APPDELEGATE.mapUtil readAddTypesByController:NSStringFromClass(topController.class)];
@@ -475,7 +479,7 @@
     [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
     activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     
-    activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll];
+//    activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll];
     
     [self presentViewController:activityViewController animated:YES completion:nil];
 }

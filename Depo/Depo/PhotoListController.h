@@ -18,8 +18,11 @@
 #import "AlbumAddPhotosDao.h"
 #import "CustomButton.h"
 #import "FooterActionsMenuView.h"
+#import "ImagePreviewController.h"
+#import "VideoPreviewController.h"
+#import "PhotoAlbumController.h"
 
-@interface PhotoListController : MyViewController <PhotoHeaderSegmentDelegate, SquareImageDelegate, UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate, FooterActionsDelegate> {
+@interface PhotoListController : MyViewController <PhotoHeaderSegmentDelegate, SquareImageDelegate, UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate, FooterActionsDelegate, ImagePreviewDelegate, VideoPreviewDelegate, PhotoAlbumDelegate> {
     
     ElasticSearchDao *elasticSearchDao;
     AlbumListDao *albumListDao;

@@ -48,6 +48,7 @@
 - (void) showAlbumDetailForAlbum:(PhotoAlbum *) album;
 - (void) immediateShowAddButton;
 - (void) immediateHideAddButton;
+- (BOOL) isAddButtonHidden;
 - (void) checkAndShowAddButton;
 
 - (void) triggerShareForFiles:(NSArray *) fileUuidList;

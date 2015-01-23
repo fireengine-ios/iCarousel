@@ -21,6 +21,7 @@
 
 @implementation PhotoAlbumController
 
+@synthesize delegate;
 @synthesize album;
 @synthesize photosScroll;
 @synthesize photoList;
@@ -204,17 +205,20 @@
 }
 
 - (void) postDelete {
+    [delegate photoAlbumDidChange:self.album.uuid];
     [self.nav popViewControllerAnimated:NO];
 }
 
 - (void) photosAddedSuccessCallback {
     if([[APPDELEGATE.uploadQueue uploadImageRefsForAlbum:self.album.uuid] count] == 0) {
+        contentModified = YES;
         [self triggerRefresh];
     }
 }
 
 - (void) photosAddedFailCallback:(NSString *) errorMessage {
     if([[APPDELEGATE.uploadQueue uploadImageRefsForAlbum:self.album.uuid] count] == 0) {
+        contentModified = YES;
         [self triggerRefresh];
     }
 //    [self showErrorAlertWithMessage:errorMessage];
@@ -232,6 +236,7 @@
     self.album.lastModifiedDate = updatedAlbum.lastModifiedDate;
 
     [self initAndSetSubTitle];
+    contentModified = YES;
     [self triggerRefresh];
 }
 
@@ -256,6 +261,9 @@
 }
 
 - (void) triggerBack {
+    if(contentModified) {
+        [delegate photoAlbumDidChange:self.album.uuid];
+    }
     [self.nav popViewControllerAnimated:YES];
     [APPDELEGATE.base checkAndShowAddButton];
 }
@@ -343,6 +351,7 @@
 
 - (void) squareImageUploadFinishedForFile:(NSString *) fileUuid {
     if([[APPDELEGATE.uploadQueue uploadImageRefsForAlbum:self.album.uuid] count] == 0) {
+        contentModified = YES;
         [self triggerRefresh];
     }
 }
@@ -456,11 +465,13 @@
         [manager configureUploadAsset:ref.filePath atFolder:nil];
         [APPDELEGATE.uploadQueue addNewUploadTask:manager];
     }
+    contentModified = YES;
     [self triggerRefresh];
 }
 
 - (void) postUploadTrigger {
     [APPDELEGATE.base hideBaseLoading];
+    contentModified = YES;
     [self triggerRefresh];
 }
 
@@ -475,6 +486,7 @@
     [uploadManager configureUploadFileForPath:filePath atFolder:nil withFileName:fileName];
     [APPDELEGATE.uploadQueue addNewUploadTask:uploadManager];
     
+    contentModified = YES;
     [self triggerRefresh];
 }
 
@@ -492,7 +504,7 @@
     [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
     activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     
-    activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll];
+//    activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll];
     
     [self presentViewController:activityViewController animated:YES completion:nil];
 }
@@ -503,6 +515,7 @@
 
 #pragma mark ImagePreviewDelegate methods
 - (void) previewedImageWasDeleted:(MetaFile *)deletedFile {
+    contentModified = YES;
     [self triggerRefresh];
 }
 

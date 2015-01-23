@@ -7,12 +7,9 @@
 //
 
 #import "PhotoListController.h"
-#import "ImagePreviewController.h"
 #import "PreviewUnavailableController.h"
 #import "PhotoAlbum.h"
 #import "MainPhotoAlbumCell.h"
-#import "PhotoAlbumController.h"
-#import "VideoPreviewController.h"
 #import "AppDelegate.h"
 #import "AppSession.h"
 #import "BaseViewController.h"
@@ -108,14 +105,13 @@
         headerView.delegate = self;
         [self.view addSubview:headerView];
 
+        [self triggerRefresh];
     }
     return self;
 }
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    [self triggerRefresh];
     
     NSArray *addTypesForController = [APPDELEGATE.mapUtil readAddTypesByController:@"PhotoTab"];
     if(!albumTable.hidden) {
@@ -310,11 +306,13 @@
 - (void) squareImageWasSelectedForFile:(MetaFile *)fileSelected {
     if(fileSelected.contentType == ContentTypePhoto) {
         ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFile:fileSelected];
+        detail.delegate = self;
         MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
         detail.nav = modalNav;
         [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
     } else if(fileSelected.contentType == ContentTypeVideo) {
         VideoPreviewController *detail = [[VideoPreviewController alloc] initWithFile:fileSelected];
+        detail.delegate = self;
         MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
         detail.nav = modalNav;
         [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
@@ -463,6 +461,7 @@
         }
     } else {
         PhotoAlbumController *albumController = [[PhotoAlbumController alloc] initWithAlbum:album];
+        albumController.delegate = self;
         albumController.nav = self.nav;
         [self.nav pushViewController:albumController animated:NO];
     }
@@ -589,6 +588,21 @@
         [albumFooterActionMenu removeFromSuperview];
         albumFooterActionMenu = nil;
     }
+}
+
+#pragma mark ImagePreviewDelegate methods
+- (void) previewedImageWasDeleted:(MetaFile *)deletedFile {
+    [self triggerRefresh];
+}
+
+#pragma mark VideoPreviewDelegate methods
+- (void) previewedVideoWasDeleted:(MetaFile *)deletedFile {
+    [self triggerRefresh];
+}
+
+#pragma mark PhotoAlbumDelegate methods
+- (void) photoAlbumDidChange:(NSString *)albumUuid {
+    [self triggerRefresh];
 }
 
 #pragma mark FooterMenuDelegate methods

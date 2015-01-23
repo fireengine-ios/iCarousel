@@ -15,6 +15,10 @@
 #import "RenameDao.h"
 #import "ShareLinkDao.h"
 
+@protocol VideoPreviewDelegate <NSObject>
+- (void) previewedVideoWasDeleted:(MetaFile *) deletedFile;
+@end
+
 @interface VideoPreviewController : MyViewController <CustomAVPlayerDelegate> {
     CustomButton *moreButton;
     
@@ -24,6 +28,7 @@
     ShareLinkDao *shareDao;
 }
 
+@property (nonatomic, strong) id<VideoPreviewDelegate> delegate;
 @property (nonatomic, strong) MetaFile *file;
 @property (nonatomic, strong) CustomAVPlayer *avPlayer;
 
