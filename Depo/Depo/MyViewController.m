@@ -233,10 +233,12 @@
 }
 
 - (void) showAddButtonImmediately:(NSString *) key {
-    NSArray *addTypesForKey = [APPDELEGATE.mapUtil readAddTypesByController:key];
-    if(addTypesForKey != nil) {
-        [APPDELEGATE.base immediateShowAddButton];
-        [APPDELEGATE.base modifyAddButtonWithList:addTypesForKey];
+    if([NSStringFromClass([[self.nav topViewController] class]) isEqualToString:@"PhotoListController"]) {
+        NSArray *addTypesForKey = [APPDELEGATE.mapUtil readAddTypesByController:key];
+        if(addTypesForKey != nil) {
+            [APPDELEGATE.base immediateShowAddButton];
+            [APPDELEGATE.base modifyAddButtonWithList:addTypesForKey];
+        }
     }
 }
 
@@ -244,7 +246,7 @@
     if(processView) {
         [processView removeFromSuperview];
     }
-    NSArray *addTypesForController = [APPDELEGATE.mapUtil readAddTypesByController:NSStringFromClass(self.class)];
+    NSArray *addTypesForController = [APPDELEGATE.mapUtil readAddTypesByController:NSStringFromClass([[self.nav topViewController] class])];
     if(addTypesForController != nil) {
         [APPDELEGATE.base presentAddButtonWithList:addTypesForController];
     }
