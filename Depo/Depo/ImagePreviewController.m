@@ -18,6 +18,7 @@
 
 @implementation ImagePreviewController
 
+@synthesize delegate;
 @synthesize file;
 
 - (id)initWithFile:(MetaFile *) _file {
@@ -95,6 +96,7 @@
 
 - (void) deleteSuccessCallback {
     [self proceedSuccessForProgressView];
+    [delegate previewedImageWasDeleted:self.file];
     [self performSelector:@selector(postDelete) withObject:nil afterDelay:1.0f];
 }
 

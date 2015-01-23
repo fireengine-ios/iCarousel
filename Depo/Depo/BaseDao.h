@@ -97,6 +97,8 @@
 
 #define NO_CONN_ERROR_MESSAGE @"Lütfen internet bağlantınızı kontrol ediniz."
 
+#define FORBIDDEN_ERROR_MESSAGE @"Bu işlem için yetkiniz bulunmamaktadır."
+
 #define OSP_USER @"proxyuser"
 
 #define OSP_PASS @"proxyuser2013"

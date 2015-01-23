@@ -172,14 +172,19 @@
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(isSelectible)
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if(isSelectible) {
+        if([cell isKindOfClass:[AbstractFileFolderCell class]]) {
+            AbstractFileFolderCell *fileFolderCell = (AbstractFileFolderCell *) cell;
+            [fileFolderCell triggerFileSelectDeselect];
+        }
         return;
+    }
     
     NSString *sectionKey = [musicDictKeys objectAtIndex:indexPath.section];
     NSMutableArray *sectionArray = [musicDict objectForKey:sectionKey];
     MetaFile *fileAtIndex = [sectionArray objectAtIndex:indexPath.row];
     
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if([cell isKindOfClass:[AbstractFileFolderCell class]]) {
         AbstractFileFolderCell *fileFolderCell = (AbstractFileFolderCell *) cell;
         if(fileFolderCell.menuActive) {

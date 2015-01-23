@@ -7,7 +7,7 @@
 "MenuFiles"="Tüm Dosyalar";
 "MenuPhoto"="Fotoğraf ve Videolar";
 "MenuMusic"="Müzikler";
-"MenuDoc"="Belgeler";
+"MenuDoc"="Dökümanlar";
 "MenuLogout"="Çıkış Yap";
 "AddTypeMusicTitle"="Müzik Yükle";
 "AddTypeFolderTitle"="Yeni Klasör";
@@ -53,6 +53,7 @@
 "FolderSubTitle"="%d dosya";
 "FolderEmptyMessage"="%@ boş";
 "FolderEmptySubMessage"="\"+\" butonuna dokunarak dosyalarınızı yüklemeye başlayabilirsiniz.";
+"DocEmptySubMessage"="Görüntülenecek döküman bulunamadı.";
 "FolderAddTitle"="KLASÖR İSMİ";
 "FolderNamePlaceholder"="Örnek Klasör İsmi";
 "FileNamePlaceholder"="Dosya İsmi";
@@ -114,7 +115,7 @@
 "MoveSuccessMessage"="Başarıyla taşındı";
 "MoveFailMessage"="Dosya taşınırken hata oluştu";
 "MusicTitle"="Müziklerim";
-"DocTitle"="Dökümanlarım";
+"DocTitle"="Dökümanlar";
 "MoveModalSubTitle"="Dosyaların taşınacağı klasörü seç";
 "MoveModalSubTitleForAlbum"="Dosyaların taşınacağı albümü seç";
 "AlbumAddProgressMessage"="Albüm Oluşturuluyor";

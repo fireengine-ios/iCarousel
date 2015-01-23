@@ -25,6 +25,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 @synthesize assetsLibrary;
 @synthesize asset;
 @synthesize notifyDao;
+@synthesize albumAddPhotosDao;
 
 - (id) initWithUploadInfo:(UploadRef *) ref {
     if(self = [super init]) {
@@ -165,16 +166,39 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 }
 
 - (void) uploadNotifySuccessCallback {
-    NSLog(@"uploadNotifySuccessCallback");
-    self.uploadRef.hasFinished = YES;
-    [delegate uploadManagerDidFinishUploadingForAsset:self.uploadRef.assetUrl];
-    [queueDelegate uploadManager:self didFinishUploadingWithSuccess:NO];
+    if(self.uploadRef.albumUuid != nil) {
+        [self notifyAlbum];
+    } else {
+        self.uploadRef.hasFinished = YES;
+        [delegate uploadManagerDidFinishUploadingForAsset:self.uploadRef.assetUrl];
+        [queueDelegate uploadManager:self didFinishUploadingWithSuccess:YES];
+    }
 }
 
 - (void) uploadNotifyFailCallback:(NSString *) errorMessage {
-    NSLog(@"uploadNotifyFailCallback");
     self.uploadRef.hasFinished = YES;
     [delegate uploadManagerDidFailUploadingForAsset:self.uploadRef.assetUrl];
+    [queueDelegate uploadManager:self didFinishUploadingWithSuccess:NO];
+}
+
+- (void) notifyAlbum {
+    albumAddPhotosDao = [[AlbumAddPhotosDao alloc] init];
+    albumAddPhotosDao.delegate = self;
+    albumAddPhotosDao.successMethod = @selector(notifyAlbumSuccessCallback);
+    albumAddPhotosDao.failMethod = @selector(notifyAlbumFailCallback:);
+
+    [albumAddPhotosDao requestAddPhotos:@[self.uploadRef.fileUuid] toAlbum:self.uploadRef.albumUuid];
+}
+
+- (void) notifyAlbumSuccessCallback {
+    self.uploadRef.hasFinished = YES;
+    [delegate uploadManagerDidFinishUploadingForAsset:self.uploadRef.assetUrl];
+    [queueDelegate uploadManager:self didFinishUploadingWithSuccess:YES];
+}
+
+- (void) notifyAlbumFailCallback:(NSString *) errorMessage {
+    self.uploadRef.hasFinished = YES;
+    [delegate uploadManagerDidFinishUploadingForAsset:self.uploadRef.assetUrl];
     [queueDelegate uploadManager:self didFinishUploadingWithSuccess:NO];
 }
 

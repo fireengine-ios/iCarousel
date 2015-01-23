@@ -11,5 +11,6 @@
 @interface FolderEmptyCell : UITableViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withFolderTitle:(NSString *) folderTitle;
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withFolderTitle:(NSString *) folderTitle withDescMessage:(NSString *) msgKey;
 
 @end

@@ -12,16 +12,17 @@
 #import "RenameAlbumDao.h"
 #import "DeleteAlbumsDao.h"
 #import "AlbumRemovePhotosDao.h"
-#import "AlbumAddPhotosDao.h"
 #import "SquareImageView.h"
 #import "FooterActionsMenuView.h"
+#import "ShareLinkDao.h"
+#import "ImagePreviewController.h"
 
-@interface PhotoAlbumController : MyViewController <SquareImageDelegate, FooterActionsDelegate> {
+@interface PhotoAlbumController : MyViewController <SquareImageDelegate, FooterActionsDelegate, ImagePreviewDelegate> {
     AlbumDetailDao *detailDao;
     RenameAlbumDao *renameDao;
     DeleteAlbumsDao *deleteDao;
-    AlbumAddPhotosDao *albumAddPhotosDao;
     AlbumRemovePhotosDao *deleteImgDao;
+    ShareLinkDao *shareDao;
     
     UIImageView *emptyBgImgView;
     CustomButton *moreButton;
@@ -41,7 +42,6 @@
 @property (nonatomic, strong) MoreMenuView *moreMenuView;
 
 @property (nonatomic, strong) NSMutableArray *selectedFileList;
-@property (nonatomic, strong) NSMutableArray *newlyAddedFileList;
 @property (nonatomic, strong) FooterActionsMenuView *footerActionMenu;
 
 - (id)initWithAlbum:(PhotoAlbum *) _album;

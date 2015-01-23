@@ -11,7 +11,6 @@
 #import "CustomButton.h"
 #import "CustomLabel.h"
 #import "MetaFile.h"
-#import "ImagePreviewController.h"
 #import "VideoPreviewController.h"
 #import "AppDelegate.h"
 #import "BaseViewController.h"
@@ -28,7 +27,6 @@
 @synthesize moreMenuView;
 @synthesize selectedFileList;
 @synthesize footerActionMenu;
-@synthesize newlyAddedFileList;
 
 - (id)initWithAlbum:(PhotoAlbum *) _album {
     self = [super init];
@@ -51,18 +49,17 @@
         deleteDao.successMethod = @selector(deleteSuccessCallback);
         deleteDao.failMethod = @selector(deleteFailCallback:);
         
-        albumAddPhotosDao = [[AlbumAddPhotosDao alloc] init];
-        albumAddPhotosDao.delegate = self;
-        albumAddPhotosDao.successMethod = @selector(photosAddedSuccessCallback);
-        albumAddPhotosDao.failMethod = @selector(photosAddedFailCallback:);
-
         deleteImgDao = [[AlbumRemovePhotosDao alloc] init];
         deleteImgDao.delegate = self;
         deleteImgDao.successMethod = @selector(deleteImgSuccessCallback:);
         deleteImgDao.failMethod = @selector(deleteImgFailCallback:);
         
+        shareDao = [[ShareLinkDao alloc] init];
+        shareDao.delegate = self;
+        shareDao.successMethod = @selector(shareSuccessCallback:);
+        shareDao.failMethod = @selector(shareFailCallback:);
+
         selectedFileList = [[NSMutableArray alloc] init];
-        newlyAddedFileList = [[NSMutableArray alloc] init];
 
         photoList = [[NSMutableArray alloc] init];
         [photoList addObjectsFromArray:[APPDELEGATE.uploadQueue uploadImageRefsForAlbum:self.album.uuid]];
@@ -103,8 +100,7 @@
         photosScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 160, self.view.frame.size.width, self.view.frame.size.height - 160)];
         [self.view addSubview:photosScroll];
         
-        NSLog(@"FRAME: %@", NSStringFromCGRect(self.view.frame));
-
+        [self triggerRefresh];
     }
     return self;
 }
@@ -120,7 +116,7 @@
     [self addOngoingPhotos];
 
     listOffset = 0;
-    [detailDao requestDetailOfAlbum:self.album.uuid forStart:0 andSize:20];
+    [detailDao requestDetailOfAlbum:self.album.uuid forStart:listOffset andSize:20];
 }
 
 - (void) addOngoingPhotos {
@@ -155,7 +151,7 @@
 }
 
 - (void) albumDetailSuccessCallback:(PhotoAlbum *) albumWithUpdatedContent {
-    int counter = [photoList count];
+    int counter = (int)[photoList count];
     long totalBytes = 0;
     if(albumWithUpdatedContent && albumWithUpdatedContent.content) {
         for(MetaFile *row in albumWithUpdatedContent.content) {
@@ -168,6 +164,8 @@
         }
         [photoList addObjectsFromArray:albumWithUpdatedContent.content];
     }
+    NSLog(@"List size: %d", (int)[photoList count]);
+
     photosScroll.contentSize = CGSizeMake(photosScroll.frame.size.width, ((int)ceil(counter/3)+1)*105 + 20);
     isLoading = NO;
     self.album.bytes = totalBytes;
@@ -210,17 +208,16 @@
 }
 
 - (void) photosAddedSuccessCallback {
-    [newlyAddedFileList removeAllObjects];
-
-    [self proceedSuccessForProgressView];
-    [self triggerRefresh];
+    if([[APPDELEGATE.uploadQueue uploadImageRefsForAlbum:self.album.uuid] count] == 0) {
+        [self triggerRefresh];
+    }
 }
 
 - (void) photosAddedFailCallback:(NSString *) errorMessage {
-    [newlyAddedFileList removeAllObjects];
-
-    [self proceedFailureForProgressView];
-    [self showErrorAlertWithMessage:errorMessage];
+    if([[APPDELEGATE.uploadQueue uploadImageRefsForAlbum:self.album.uuid] count] == 0) {
+        [self triggerRefresh];
+    }
+//    [self showErrorAlertWithMessage:errorMessage];
 }
 
 - (void) deleteImgSuccessCallback:(PhotoAlbum *) updatedAlbum {
@@ -246,6 +243,7 @@
 - (void) squareImageWasSelectedForFile:(MetaFile *)fileSelected {
     if(fileSelected.contentType == ContentTypePhoto) {
         ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFile:fileSelected];
+        detail.delegate = self;
         MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
         detail.nav = modalNav;
         [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
@@ -281,6 +279,7 @@
 #pragma mark MoreMenuDelegate
 
 - (void) moreMenuDidSelectAlbumShare {
+    [self triggerShareForFiles:@[self.album.uuid]];
 }
 
 - (void) moreMenuDidSelectAlbumDelete {
@@ -343,11 +342,8 @@
 }
 
 - (void) squareImageUploadFinishedForFile:(NSString *) fileUuid {
-    [newlyAddedFileList addObject:fileUuid];
-    
     if([[APPDELEGATE.uploadQueue uploadImageRefsForAlbum:self.album.uuid] count] == 0) {
-        [albumAddPhotosDao requestAddPhotos:newlyAddedFileList toAlbum:self.album.uuid];
-        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"AlbumMovePhotoProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"AlbumMovePhotoSuccessMessage", @"") andFailMessage:NSLocalizedString(@"AlbumMovePhotoFailMessage", @"")];
+        [self triggerRefresh];
     }
 }
 
@@ -482,6 +478,34 @@
     [self triggerRefresh];
 }
 
+- (void) triggerShareForFiles:(NSArray *) fileUuidList {
+    [shareDao requestLinkForFiles:fileUuidList];
+    [self showLoading];
+}
+
+#pragma mark ShareLinkDao Delegate Methods
+- (void) shareSuccessCallback:(NSString *) linkToShare {
+    [self hideLoading];
+    NSArray *activityItems = [NSArray arrayWithObjects:linkToShare, nil];
+    
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+    [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
+    activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    
+    activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll];
+    
+    [self presentViewController:activityViewController animated:YES completion:nil];
+}
+
+- (void) shareFailCallback:(NSString *) errorMessage {
+    [self hideLoading];
+}
+
+#pragma mark ImagePreviewDelegate methods
+- (void) previewedImageWasDeleted:(MetaFile *)deletedFile {
+    [self triggerRefresh];
+}
+
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.nav setNavigationBarHidden:YES animated:NO];
@@ -497,7 +521,6 @@
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self triggerRefresh];
 }
 
 - (void)didReceiveMemoryWarning

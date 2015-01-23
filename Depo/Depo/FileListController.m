@@ -261,10 +261,15 @@
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(isSelectible)
-        return;
-    
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if(isSelectible) {
+        if([cell isKindOfClass:[AbstractFileFolderCell class]]) {
+            AbstractFileFolderCell *fileFolderCell = (AbstractFileFolderCell *) cell;
+            [fileFolderCell triggerFileSelectDeselect];
+        }
+        return;
+    }
+    
     if([cell isKindOfClass:[UploadingImageCell class]]) {
         return;
     }

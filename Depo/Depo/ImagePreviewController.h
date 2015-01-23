@@ -16,6 +16,10 @@
 #import "RenameDao.h"
 #import "ShareLinkDao.h"
 
+@protocol ImagePreviewDelegate <NSObject>
+- (void) previewedImageWasDeleted:(MetaFile *) deletedFile;
+@end
+
 @interface ImagePreviewController : MyViewController <UIScrollViewDelegate, FileDetailFooterDelegate> {
     UIImageView *imgView;
     FileDetailFooter *footer;
@@ -28,6 +32,7 @@
     ShareLinkDao *shareDao;
 }
 
+@property (nonatomic, strong) id<ImagePreviewDelegate> delegate;
 @property (nonatomic, strong) MetaFile *file;
 
 - (id)initWithFile:(MetaFile *) _file;

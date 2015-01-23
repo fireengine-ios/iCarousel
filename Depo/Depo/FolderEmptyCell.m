@@ -14,6 +14,10 @@
 @implementation FolderEmptyCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withFolderTitle:(NSString *) folderTitle {
+    return [self initWithStyle:style reuseIdentifier:reuseIdentifier withFolderTitle:folderTitle withDescMessage:@"FolderEmptySubMessage"];
+}
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withFolderTitle:(NSString *) folderTitle withDescMessage:(NSString *) msgKey {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
@@ -33,7 +37,7 @@
         titleLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:titleLabel];
 
-        CustomLabel *descLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(30, topIndex + 196, self.frame.size.width - 60, 44) withFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:18] withColor:[Util UIColorForHexColor:@"707A8F"] withText:NSLocalizedString(@"FolderEmptySubMessage", @"")];
+        CustomLabel *descLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(30, topIndex + 196, self.frame.size.width - 60, 44) withFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:18] withColor:[Util UIColorForHexColor:@"707A8F"] withText:NSLocalizedString(msgKey, @"")];
         descLabel.textAlignment = NSTextAlignmentCenter;
         descLabel.numberOfLines = 2;
         [self addSubview:descLabel];

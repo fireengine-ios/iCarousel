@@ -25,6 +25,7 @@
 @synthesize refreshControl;
 @synthesize docList;
 @synthesize selectedDocList;
+@synthesize footerActionMenu;
 
 - (id) init {
     if(self = [super init]) {
@@ -129,7 +130,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if(!cell) {
         if(docList == nil || [docList count] == 0) {
-            cell = [[FolderEmptyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFolderTitle:@""];
+            cell = [[FolderEmptyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFolderTitle:@"" withDescMessage:@"DocEmptySubMessage"];
         } else {
             MetaFile *fileAtIndex = [docList objectAtIndex:indexPath.row];
             cell = [[SimpleDocCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex isSelectible:isSelectible];
@@ -140,10 +141,15 @@
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(isSelectible)
-        return;
-    
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if(isSelectible) {
+        if([cell isKindOfClass:[AbstractFileFolderCell class]]) {
+            AbstractFileFolderCell *fileFolderCell = (AbstractFileFolderCell *) cell;
+            [fileFolderCell triggerFileSelectDeselect];
+        }
+        return;
+    }
+    
     if([cell isKindOfClass:[FolderEmptyCell class]]) {
         return;
     }
@@ -210,6 +216,16 @@
 }
 
 - (void) fileFolderCellDidSelectFile:(MetaFile *)fileSelected {
+    if(![selectedDocList containsObject:fileSelected.uuid]) {
+        [selectedDocList addObject:fileSelected.uuid];
+    }
+    if([selectedDocList count] > 0) {
+        [self showFooterMenu];
+        self.title = [NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedDocList count]];
+    } else {
+        [self hideFooterMenu];
+        self.title = NSLocalizedString(@"SelectFilesTitle", @"");
+    }
 }
 
 - (void) fileFolderCellDidUnselectFile:(MetaFile *)fileSelected {
@@ -264,8 +280,92 @@
     [self triggerRefresh];
 }
 
+- (void) changeToSelectedStatus {
+    isSelectible = YES;
+    self.title = NSLocalizedString(@"SelectFilesTitle", @"");
+    
+    previousButtonRef = self.navigationItem.leftBarButtonItem;
+    
+    CustomButton *cancelButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 60, 20) withImageName:nil withTitle:NSLocalizedString(@"ButtonCancel", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[UIColor whiteColor]];
+    [cancelButton addTarget:self action:@selector(cancelSelectible) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithCustomView:cancelButton];
+    self.navigationItem.leftBarButtonItem = cancelItem;
+    moreButton.hidden = YES;
+    
+    [APPDELEGATE.base immediateHideAddButton];
+    
+    [selectedDocList removeAllObjects];
+    
+    self.tableUpdateCounter++;
+    [self.docTable reloadData];
+    
+    if(footerActionMenu) {
+        [footerActionMenu removeFromSuperview];
+    }
+    footerActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60) shouldShowShare:NO shouldShowMove:NO shouldShowDelete:YES];
+    footerActionMenu.delegate = self;
+    footerActionMenu.hidden = YES;
+    [self.view addSubview:footerActionMenu];
+}
+
+- (void) cancelSelectible {
+    self.title = NSLocalizedString(@"DocTitle", @"");
+    self.navigationItem.leftBarButtonItem = previousButtonRef;
+    moreButton.hidden = NO;
+    
+    isSelectible = NO;
+    [selectedDocList removeAllObjects];
+    
+    [APPDELEGATE.base immediateShowAddButton];
+    
+    self.tableUpdateCounter++;
+    [self.docTable reloadData];
+    
+    if(footerActionMenu) {
+        [footerActionMenu removeFromSuperview];
+    }
+}
+
+- (void) showFooterMenu {
+    footerActionMenu.hidden = NO;
+}
+
+- (void) hideFooterMenu {
+    footerActionMenu.hidden = YES;
+}
+
+#pragma mark FooterMenuDelegate methods
+
+- (void) footerActionMenuDidSelectDelete:(FooterActionsMenuView *) menu {
+    if([CacheUtil showConfirmDeletePageFlag]) {
+        for (NSInteger j = 0; j < [docTable numberOfSections]; ++j) {
+            for (NSInteger i = 0; i < [docTable numberOfRowsInSection:j]; ++i) {
+                UITableViewCell *cell = [docTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]];
+                if([cell isKindOfClass:[AbstractFileFolderCell class]]) {
+                    AbstractFileFolderCell *fileCell = (AbstractFileFolderCell *) cell;
+                    if([selectedDocList containsObject:fileCell.fileFolder.uuid]) {
+                        [fileCell addMaskLayer];
+                    }
+                }
+            }
+        }
+        [deleteDao requestDeleteFiles:selectedDocList];
+        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+    } else {
+        self.deleteType = DeleteTypeFooterMenu;
+        [APPDELEGATE.base showConfirmDelete];
+    }
+}
+
+- (void) footerActionMenuDidSelectMove:(FooterActionsMenuView *) menu {
+}
+
+- (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {
+}
+
 - (void) moreClicked {
-    [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeSort]]];
+    [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeSort], [NSNumber numberWithInt:MoreMenuTypeSelect]]];
 }
 
 - (void)viewDidLoad {
@@ -288,8 +388,36 @@
 }
 
 - (void) confirmDeleteDidConfirm {
-    [deleteDao requestDeleteFiles:@[fileSelectedRef.uuid]];
-    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+    if(self.deleteType == DeleteTypeFooterMenu) {
+        for (NSInteger j = 0; j < [docTable numberOfSections]; ++j) {
+            for (NSInteger i = 0; i < [docTable numberOfRowsInSection:j]; ++i) {
+                UITableViewCell *cell = [docTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]];
+                if([cell isKindOfClass:[AbstractFileFolderCell class]]) {
+                    AbstractFileFolderCell *fileCell = (AbstractFileFolderCell *) cell;
+                    if([selectedDocList containsObject:fileCell.fileFolder.uuid]) {
+                        [fileCell addMaskLayer];
+                    }
+                }
+            }
+        }
+        [deleteDao requestDeleteFiles:selectedDocList];
+        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+    } else if(self.deleteType == DeleteTypeSwipeMenu) {
+        [deleteDao requestDeleteFiles:@[fileSelectedRef.uuid]];
+        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+    }
+}
+
+- (BOOL)shouldAutorotate {
+    return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationPortrait | UIInterfaceOrientationPortraitUpsideDown;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
 }
 
 /*

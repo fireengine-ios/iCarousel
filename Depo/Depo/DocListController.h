@@ -12,8 +12,9 @@
 #import "DeleteDao.h"
 #import "MoveDao.h"
 #import "AbstractFileFolderCell.h"
+#import "FooterActionsMenuView.h"
 
-@interface DocListController : MyViewController <UITableViewDataSource, UITableViewDelegate, AbstractFileFolderDelegate> {
+@interface DocListController : MyViewController <UITableViewDataSource, UITableViewDelegate, AbstractFileFolderDelegate, FooterActionsDelegate> {
     ElasticSearchDao *elasticSearchDao;
     FavoriteDao *favoriteDao;
     DeleteDao *deleteDao;
@@ -22,6 +23,8 @@
     MetaFile *fileSelectedRef;
     
     CustomButton *moreButton;
+
+    UIBarButtonItem *previousButtonRef;
 
     int listOffset;
     BOOL isLoading;
@@ -32,5 +35,6 @@
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, strong) NSMutableArray *docList;
 @property (nonatomic, strong) NSMutableArray *selectedDocList;
+@property (nonatomic, strong) FooterActionsMenuView *footerActionMenu;
 
 @end

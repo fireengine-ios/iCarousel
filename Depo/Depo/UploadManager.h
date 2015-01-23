@@ -11,6 +11,7 @@
 #import "MetaFile.h"
 #import "UploadRef.h"
 #import "UploadNotifyDao.h"
+#import "AlbumAddPhotosDao.h"
 
 @protocol UploadManagerDelegate <NSObject>
 - (void) uploadManagerDidSendData:(long) sentBytes inTotal:(long) totalBytes;
@@ -40,6 +41,8 @@
 @property (nonatomic, strong) ALAsset *asset;
 
 @property (nonatomic, strong) UploadNotifyDao *notifyDao;
+@property (nonatomic, strong) AlbumAddPhotosDao *albumAddPhotosDao;
+
 
 - (id) initWithUploadInfo:(UploadRef *) ref;
 
