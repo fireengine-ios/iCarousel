@@ -87,7 +87,7 @@
 }
 
 - (void) triggerPostLogin {
-    [tokenManager requestBaseUrl];
+    [tokenManager requestUserInfo];
 }
 
 - (void) triggerHome {
@@ -129,6 +129,14 @@
 }
 
 - (void) tokenManagerDidReceiveToken {
+    [tokenManager requestUserInfo];
+}
+
+- (void) tokenManagerDidReceiveUserInfo {
+    [tokenManager requestBaseUrl];
+}
+
+- (void) tokenManagerDidFailReceivingUserInfo {
     [tokenManager requestBaseUrl];
 }
 

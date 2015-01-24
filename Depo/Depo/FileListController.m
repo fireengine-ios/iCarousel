@@ -373,7 +373,7 @@
 }
 
 - (void) fileFolderCellShouldShareForFile:(MetaFile *)fileSelected {
-    [APPDELEGATE.base triggerShareForFiles:@[fileSelected]];
+    [APPDELEGATE.base triggerShareForFiles:@[fileSelected.uuid]];
 }
 
 - (void) fileFolderCellShouldMoveForFile:(MetaFile *)fileSelected {

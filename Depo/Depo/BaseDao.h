@@ -26,6 +26,8 @@
 
 #define USAGE_INFO_URL BASE_URL@"/account/usageInfo"
 
+#define ACCOUNT_INFO_URL BASE_URL@"/account/info"
+
 #define RECENT_ACTIVITIES_URL BASE_URL@"/filesystem/activityFeed?&sortBy=%@&sortOrder=%@&page=%d&size=%d"
 
 #define FILE_LISTING_MAIN_URL BASE_URL@"/filesystem?parentFolderUuid=%@&sortBy=%@&sortOrder=%@&page=%d&size=%d"

@@ -27,6 +27,11 @@
         baseUrlDao.delegate = self;
         baseUrlDao.successMethod = @selector(baseUrlDaoSuccessCallback);
         baseUrlDao.failMethod = @selector(baseUrlDaoFailCallback:);
+        
+        userInfoDao = [[AccountInfoDao alloc] init];
+        userInfoDao.delegate = self;
+        userInfoDao.successMethod = @selector(userInfoSuccessCallback:);
+        userInfoDao.failMethod = @selector(userInfoFailCallback:);
     }
     return self;
 }
@@ -37,6 +42,10 @@
 
 - (void) requestBaseUrl {
     [baseUrlDao requestBaseUrl];
+}
+
+- (void) requestUserInfo {
+    [userInfoDao requestAccountInfo];
 }
 
 - (void) tokenDaoSuccessCallback {
@@ -53,6 +62,15 @@
 
 - (void) baseUrlDaoFailCallback:(NSString *) errorMessage {
     [delegate tokenManagerDidFailReceivingBaseUrl];
+}
+
+- (void) userInfoSuccessCallback:(User *) enrichedUser {
+    APPDELEGATE.session.user = enrichedUser;
+    [delegate tokenManagerDidReceiveUserInfo];
+}
+
+- (void) userInfoFailCallback:(NSString *) errorMessage {
+    [delegate tokenManagerDidFailReceivingUserInfo];
 }
 
 @end

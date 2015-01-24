@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "RequestTokenDao.h"
 #import "RequestBaseUrlDao.h"
+#import "AccountInfoDao.h"
 
 @protocol TokenManagerDelegate <NSObject>
 - (void) tokenManagerDidReceiveToken;
@@ -16,16 +17,20 @@
 - (void) tokenManagerInadequateInfo;
 - (void) tokenManagerDidReceiveBaseUrl;
 - (void) tokenManagerDidFailReceivingBaseUrl;
+- (void) tokenManagerDidReceiveUserInfo;
+- (void) tokenManagerDidFailReceivingUserInfo;
 @end
 
 @interface TokenManager : NSObject {
     RequestTokenDao *tokenDao;
     RequestBaseUrlDao *baseUrlDao;
+    AccountInfoDao *userInfoDao;
 }
 
 @property (nonatomic, strong) id<TokenManagerDelegate> delegate;
 
 - (void) requestToken;
 - (void) requestBaseUrl;
+- (void) requestUserInfo;
 
 @end

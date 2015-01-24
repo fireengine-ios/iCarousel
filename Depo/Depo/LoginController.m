@@ -70,11 +70,6 @@
 - (void) tokenDaoSuccessCallback {
     [self hideLoading];
     
-    User *user = [[User alloc] init];
-    user.profileImgUrl = @"http://s.turkcell.com.tr/profile_img/532/225/cjXlJsupflKCNP2jmf23A.jpg?wruN55vtoNoCItHngeSqW9QN4XM1Y9qgZHRnZnp8bGOut1pQZOk1!207944990!1411130039277";
-    user.fullName = @"Mahir Kemal Tarlan";
-    APPDELEGATE.session.user = user;
-
     [APPDELEGATE triggerPostLogin];
 }
 

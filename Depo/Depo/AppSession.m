@@ -29,8 +29,8 @@
 
         if([CacheUtil readRememberMeToken] != nil) {
             self.user = [[User alloc] init];
-            self.user.profileImgUrl = @"http://s.turkcell.com.tr/profile_img/532/225/cjXlJsupflKCNP2jmf23A.jpg?wruN55vtoNoCItHngeSqW9QN4XM1Y9qgZHRnZnp8bGOut1pQZOk1!207944990!1411130039277";
-            self.user.fullName = @"Mahir Kemal Tarlan";
+//            self.user.profileImgUrl = @"http://s.turkcell.com.tr/profile_img/532/225/cjXlJsupflKCNP2jmf23A.jpg?wruN55vtoNoCItHngeSqW9QN4XM1Y9qgZHRnZnp8bGOut1pQZOk1!207944990!1411130039277";
+//            self.user.fullName = @"Mahir Kemal Tarlan";
         }
         
         //5322102103 for ios
