@@ -99,6 +99,8 @@
         [self.view addSubview:moreButton];
 
         photosScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 160, self.view.frame.size.width, self.view.frame.size.height - 160)];
+        photosScroll.delegate = self;
+        photosScroll.tag = 111;
         [self.view addSubview:photosScroll];
         
         [self triggerRefresh];
@@ -517,6 +519,26 @@
 - (void) previewedImageWasDeleted:(MetaFile *)deletedFile {
     contentModified = YES;
     [self triggerRefresh];
+}
+
+#pragma mark ScrollViewDelegate methods
+- (void) scrollViewDidScroll:(UIScrollView *)scrollView {
+    if(scrollView.tag == 111) {
+        if(!isLoading) {
+            CGFloat currentOffset = photosScroll.contentOffset.y;
+            CGFloat maximumOffset = photosScroll.contentSize.height - photosScroll.frame.size.height;
+            
+            if (currentOffset - maximumOffset >= 0.0) {
+                isLoading = YES;
+                [self dynamicallyLoadNextPage];
+            }
+        }
+    }
+}
+
+- (void) dynamicallyLoadNextPage {
+    listOffset ++;
+    [detailDao requestDetailOfAlbum:self.album.uuid forStart:listOffset andSize:20];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
