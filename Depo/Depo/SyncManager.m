@@ -72,6 +72,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:ALAssetsLibraryChangedNotification object:nil];
 }
 
+/*
 - (void) startLocationManagerIfNecessary {
     if(!locManager) {
         self.locManager = [[CLLocationManager alloc] init];
@@ -83,7 +84,8 @@
     }
     [locManager startUpdatingLocation];
 }
-
+*/
+ 
 - (void) photoListSuccessCallback:(NSArray *) files {
     for(MetaFile *row in files) {
         [SyncUtil cacheSyncHashRemotely:row.hash];
