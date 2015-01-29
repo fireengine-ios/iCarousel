@@ -205,22 +205,22 @@
     
     
     // If iOS version is 8.0
-    if ([app respondsToSelector:@selector(isRegisteredForRemoteNotifications)])
-    {
+//    if ([app respondsToSelector:@selector(isRegisteredForRemoteNotifications)])
+//    {
         
-        UIUserNotificationType notificationType = ((hasSound ? UIUserNotificationTypeSound : 0) |
-                                          (hasAlert ? UIUserNotificationTypeAlert : 0) |
-                                          (hasBadge ? UIUserNotificationTypeBadge : 0));
+//        UIUserNotificationType notificationType = ((hasSound ? UIUserNotificationTypeSound : 0) |
+//                                          (hasAlert ? UIUserNotificationTypeAlert : 0) |
+//                                          (hasBadge ? UIUserNotificationTypeBadge : 0));
         
-        CS_Log_Info(@"Registering for >= 8.0 notifications");
+//        CS_Log_Info(@"Registering for >= 8.0 notifications");
         
-        [app registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:notificationType categories:nil]];
+//        [app registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:notificationType categories:nil]];
         
-        [app registerForRemoteNotifications];
-    }
-    else
+//        [app registerForRemoteNotifications];
+//    }
+//    else
         // If iOS version is less than 8.0
-    {
+//    {
         UIRemoteNotificationType notificationType = ((hasSound ? UIRemoteNotificationTypeSound : 0) |
                                             (hasAlert ? UIRemoteNotificationTypeAlert : 0) |
                                             (hasBadge ? UIRemoteNotificationTypeBadge : 0));
@@ -228,7 +228,7 @@
         CS_Log_Info(@"Registering for 8.0 < notifications");
         
         [app registerForRemoteNotificationTypes:notificationType];
-    }
+//    }
 }
 
 - (void) didRegisteredForNotifications:(NSData *)deviceToken {
