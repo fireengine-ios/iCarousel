@@ -266,6 +266,7 @@
 		052D415819EC1A25001B4088 /* empty_album_header_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 052D415619EC1A25001B4088 /* empty_album_header_bg.png */; };
 		052D415919EC1A25001B4088 /* empty_album_header_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 052D415719EC1A25001B4088 /* empty_album_header_bg@2x.png */; };
 		05368B471A4AD29C00B79403 /* SyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 05368B461A4AD29C00B79403 /* SyncManager.m */; };
+		053B8E8B1A7AE7DE004E6456 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 053B8E8A1A7AE7DE004E6456 /* Metal.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		053D0ED119DAC2BC006A13E0 /* GeneralTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 053D0ED019DAC2BC006A13E0 /* GeneralTextField.m */; };
 		053D0ED419DAC83B006A13E0 /* general_textfield_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 053D0ED219DAC83B006A13E0 /* general_textfield_bg.png */; };
 		053D0ED519DAC83B006A13E0 /* general_textfield_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 053D0ED319DAC83B006A13E0 /* general_textfield_bg@2x.png */; };
@@ -932,6 +933,7 @@
 		052D415719EC1A25001B4088 /* empty_album_header_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "empty_album_header_bg@2x.png"; sourceTree = "<group>"; };
 		05368B451A4AD29C00B79403 /* SyncManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncManager.h; sourceTree = "<group>"; };
 		05368B461A4AD29C00B79403 /* SyncManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncManager.m; sourceTree = "<group>"; };
+		053B8E8A1A7AE7DE004E6456 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		053D0ECF19DAC2BC006A13E0 /* GeneralTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralTextField.h; sourceTree = "<group>"; };
 		053D0ED019DAC2BC006A13E0 /* GeneralTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralTextField.m; sourceTree = "<group>"; };
 		053D0ED219DAC83B006A13E0 /* general_textfield_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = general_textfield_bg.png; sourceTree = "<group>"; };
@@ -1383,6 +1385,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				053B8E8B1A7AE7DE004E6456 /* Metal.framework in Frameworks */,
 				05C2A0491A7989CD00EE4D78 /* CoreTelephony.framework in Frameworks */,
 				05C2A0471A7989AD00EE4D78 /* SplunkMint-iOS.framework in Frameworks */,
 				05C2A0441A79882100EE4D78 /* libGoogleConversionTracking.a in Frameworks */,
@@ -1450,6 +1453,7 @@
 		051E1DF519CAC2F900FD1E03 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				053B8E8A1A7AE7DE004E6456 /* Metal.framework */,
 				05C2A0481A7989CD00EE4D78 /* CoreTelephony.framework */,
 				05C2A0461A7989AD00EE4D78 /* SplunkMint-iOS.framework */,
 				05C2A03A1A79832600EE4D78 /* iAd.framework */,
@@ -3248,7 +3252,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Depo/GoogleConversionTrackingSDK",
+					"$(PROJECT_DIR)/Depo/**",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -3276,7 +3280,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Depo/GoogleConversionTrackingSDK",
+					"$(PROJECT_DIR)/Depo/**",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -3376,7 +3380,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Depo/GoogleConversionTrackingSDK",
+					"$(PROJECT_DIR)/Depo/**",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -3454,7 +3458,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Depo/GoogleConversionTrackingSDK",
+					"$(PROJECT_DIR)/Depo/**",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",

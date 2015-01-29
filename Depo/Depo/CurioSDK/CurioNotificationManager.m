@@ -203,7 +203,7 @@
                 (hasBadge ? @"Badge" : @""))
     
     
-    
+    //TODO CHECK
     // If iOS version is 8.0
 //    if ([app respondsToSelector:@selector(isRegisteredForRemoteNotifications)])
 //    {
