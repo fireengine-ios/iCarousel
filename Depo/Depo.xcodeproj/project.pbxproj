@@ -508,9 +508,46 @@
 		05C0E2011A06ABD7005E1E92 /* MoveModalFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C0E2001A06ABD7005E1E92 /* MoveModalFooterView.m */; };
 		05C244301A023F5C000D65D0 /* SortModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C2442F1A023F5C000D65D0 /* SortModalController.m */; };
 		05C244331A0243BE000D65D0 /* SortTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C244321A0243BE000D65D0 /* SortTypeCell.m */; };
+		05C2A0251A79830500EE4D78 /* ADJActivityHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C29FFF1A79830500EE4D78 /* ADJActivityHandler.m */; };
+		05C2A0261A79830500EE4D78 /* ADJActivityKind.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C2A0011A79830500EE4D78 /* ADJActivityKind.m */; };
+		05C2A0271A79830500EE4D78 /* ADJActivityPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C2A0031A79830500EE4D78 /* ADJActivityPackage.m */; };
+		05C2A0281A79830500EE4D78 /* ADJActivityState.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C2A0051A79830500EE4D78 /* ADJActivityState.m */; };
+		05C2A0291A79830500EE4D78 /* NSString+ADJAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C2A0081A79830500EE4D78 /* NSString+ADJAdditions.m */; };
+		05C2A02A1A79830500EE4D78 /* UIDevice+ADJAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C2A00A1A79830500EE4D78 /* UIDevice+ADJAdditions.m */; };
+		05C2A02B1A79830500EE4D78 /* ADJAdjustFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C2A00C1A79830500EE4D78 /* ADJAdjustFactory.m */; };
+		05C2A02C1A79830500EE4D78 /* ADJAttribution.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C2A00E1A79830500EE4D78 /* ADJAttribution.m */; };
+		05C2A02D1A79830500EE4D78 /* ADJAttributionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C2A0101A79830500EE4D78 /* ADJAttributionHandler.m */; };
+		05C2A02E1A79830500EE4D78 /* ADJConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C2A0121A79830500EE4D78 /* ADJConfig.m */; };
+		05C2A02F1A79830500EE4D78 /* ADJDeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C2A0141A79830500EE4D78 /* ADJDeviceInfo.m */; };
+		05C2A0301A79830500EE4D78 /* ADJEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C2A0161A79830500EE4D78 /* ADJEvent.m */; };
+		05C2A0311A79830500EE4D78 /* ADJLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C2A0181A79830500EE4D78 /* ADJLogger.m */; };
+		05C2A0321A79830500EE4D78 /* ADJPackageBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C2A01A1A79830500EE4D78 /* ADJPackageBuilder.m */; };
+		05C2A0331A79830500EE4D78 /* ADJPackageHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C2A01C1A79830500EE4D78 /* ADJPackageHandler.m */; };
+		05C2A0341A79830500EE4D78 /* ADJRequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C2A01E1A79830500EE4D78 /* ADJRequestHandler.m */; };
+		05C2A0351A79830500EE4D78 /* ADJTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C2A0201A79830500EE4D78 /* ADJTimer.m */; };
+		05C2A0361A79830500EE4D78 /* Adjust.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C2A0221A79830500EE4D78 /* Adjust.m */; };
+		05C2A0371A79830500EE4D78 /* ADJUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C2A0241A79830500EE4D78 /* ADJUtil.m */; };
+		05C2A0391A79832200EE4D78 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C2A0381A79832200EE4D78 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		05C2A03B1A79832600EE4D78 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C2A03A1A79832600EE4D78 /* iAd.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		05C2A0441A79882100EE4D78 /* libGoogleConversionTracking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C2A0421A79882100EE4D78 /* libGoogleConversionTracking.a */; };
+		05C2A0471A7989AD00EE4D78 /* SplunkMint-iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C2A0461A7989AD00EE4D78 /* SplunkMint-iOS.framework */; };
+		05C2A0491A7989CD00EE4D78 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C2A0481A7989CD00EE4D78 /* CoreTelephony.framework */; };
+		05C2A0641A798BBE00EE4D78 /* CurioAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C2A04C1A798BBE00EE4D78 /* CurioAction.m */; };
+		05C2A0651A798BBE00EE4D78 /* CurioActionToolkit.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C2A04E1A798BBE00EE4D78 /* CurioActionToolkit.m */; };
+		05C2A0661A798BBE00EE4D78 /* CurioDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C2A0501A798BBE00EE4D78 /* CurioDB.m */; };
+		05C2A0671A798BBE00EE4D78 /* CurioDBToolkit.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C2A0521A798BBE00EE4D78 /* CurioDBToolkit.m */; };
+		05C2A0681A798BBE00EE4D78 /* CurioNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C2A0541A798BBE00EE4D78 /* CurioNetwork.m */; };
+		05C2A0691A798BBE00EE4D78 /* CurioNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C2A0561A798BBE00EE4D78 /* CurioNotification.m */; };
+		05C2A06A1A798BBE00EE4D78 /* CurioNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C2A0581A798BBE00EE4D78 /* CurioNotificationManager.m */; };
+		05C2A06B1A798BBE00EE4D78 /* CurioPostOffice.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C2A05A1A798BBE00EE4D78 /* CurioPostOffice.m */; };
+		05C2A06C1A798BBE00EE4D78 /* CurioReachabilityEx.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C2A05C1A798BBE00EE4D78 /* CurioReachabilityEx.m */; };
+		05C2A06D1A798BBE00EE4D78 /* CurioSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C2A05F1A798BBE00EE4D78 /* CurioSDK.m */; };
+		05C2A06E1A798BBE00EE4D78 /* CurioSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C2A0611A798BBE00EE4D78 /* CurioSettings.m */; };
+		05C2A06F1A798BBE00EE4D78 /* CurioUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C2A0631A798BBE00EE4D78 /* CurioUtil.m */; };
 		05C3F6071A3900A8001954E8 /* PostLoginPrefCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C3F6061A3900A8001954E8 /* PostLoginPrefCell.m */; };
 		05C3F60A1A3902E0001954E8 /* check_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C3F6081A3902E0001954E8 /* check_icon.png */; };
 		05C3F60B1A3902E0001954E8 /* check_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C3F6091A3902E0001954E8 /* check_icon@2x.png */; };
+		05C7145C1A7823C400C467D9 /* RadiusDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C7145B1A7823C400C467D9 /* RadiusDao.m */; };
 		05D2B19719E676BF00FC309D /* AlbumListDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D2B19619E676BF00FC309D /* AlbumListDao.m */; };
 		05D2B19A19E679E500FC309D /* PhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D2B19919E679E500FC309D /* PhotoAlbum.m */; };
 		05D2B19D19E67C6900FC309D /* MainPhotoAlbumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D2B19C19E67C6900FC309D /* MainPhotoAlbumCell.m */; };
@@ -1240,10 +1277,83 @@
 		05C2442F1A023F5C000D65D0 /* SortModalController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SortModalController.m; sourceTree = "<group>"; };
 		05C244311A0243BE000D65D0 /* SortTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SortTypeCell.h; sourceTree = "<group>"; };
 		05C244321A0243BE000D65D0 /* SortTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SortTypeCell.m; sourceTree = "<group>"; };
+		05C29FFE1A79830500EE4D78 /* ADJActivityHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJActivityHandler.h; sourceTree = "<group>"; };
+		05C29FFF1A79830500EE4D78 /* ADJActivityHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJActivityHandler.m; sourceTree = "<group>"; };
+		05C2A0001A79830500EE4D78 /* ADJActivityKind.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJActivityKind.h; sourceTree = "<group>"; };
+		05C2A0011A79830500EE4D78 /* ADJActivityKind.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJActivityKind.m; sourceTree = "<group>"; };
+		05C2A0021A79830500EE4D78 /* ADJActivityPackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJActivityPackage.h; sourceTree = "<group>"; };
+		05C2A0031A79830500EE4D78 /* ADJActivityPackage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJActivityPackage.m; sourceTree = "<group>"; };
+		05C2A0041A79830500EE4D78 /* ADJActivityState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJActivityState.h; sourceTree = "<group>"; };
+		05C2A0051A79830500EE4D78 /* ADJActivityState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJActivityState.m; sourceTree = "<group>"; };
+		05C2A0071A79830500EE4D78 /* NSString+ADJAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ADJAdditions.h"; sourceTree = "<group>"; };
+		05C2A0081A79830500EE4D78 /* NSString+ADJAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ADJAdditions.m"; sourceTree = "<group>"; };
+		05C2A0091A79830500EE4D78 /* UIDevice+ADJAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+ADJAdditions.h"; sourceTree = "<group>"; };
+		05C2A00A1A79830500EE4D78 /* UIDevice+ADJAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+ADJAdditions.m"; sourceTree = "<group>"; };
+		05C2A00B1A79830500EE4D78 /* ADJAdjustFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJAdjustFactory.h; sourceTree = "<group>"; };
+		05C2A00C1A79830500EE4D78 /* ADJAdjustFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJAdjustFactory.m; sourceTree = "<group>"; };
+		05C2A00D1A79830500EE4D78 /* ADJAttribution.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJAttribution.h; sourceTree = "<group>"; };
+		05C2A00E1A79830500EE4D78 /* ADJAttribution.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJAttribution.m; sourceTree = "<group>"; };
+		05C2A00F1A79830500EE4D78 /* ADJAttributionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJAttributionHandler.h; sourceTree = "<group>"; };
+		05C2A0101A79830500EE4D78 /* ADJAttributionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJAttributionHandler.m; sourceTree = "<group>"; };
+		05C2A0111A79830500EE4D78 /* ADJConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJConfig.h; sourceTree = "<group>"; };
+		05C2A0121A79830500EE4D78 /* ADJConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJConfig.m; sourceTree = "<group>"; };
+		05C2A0131A79830500EE4D78 /* ADJDeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJDeviceInfo.h; sourceTree = "<group>"; };
+		05C2A0141A79830500EE4D78 /* ADJDeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJDeviceInfo.m; sourceTree = "<group>"; };
+		05C2A0151A79830500EE4D78 /* ADJEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJEvent.h; sourceTree = "<group>"; };
+		05C2A0161A79830500EE4D78 /* ADJEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJEvent.m; sourceTree = "<group>"; };
+		05C2A0171A79830500EE4D78 /* ADJLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJLogger.h; sourceTree = "<group>"; };
+		05C2A0181A79830500EE4D78 /* ADJLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJLogger.m; sourceTree = "<group>"; };
+		05C2A0191A79830500EE4D78 /* ADJPackageBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJPackageBuilder.h; sourceTree = "<group>"; };
+		05C2A01A1A79830500EE4D78 /* ADJPackageBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJPackageBuilder.m; sourceTree = "<group>"; };
+		05C2A01B1A79830500EE4D78 /* ADJPackageHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJPackageHandler.h; sourceTree = "<group>"; };
+		05C2A01C1A79830500EE4D78 /* ADJPackageHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJPackageHandler.m; sourceTree = "<group>"; };
+		05C2A01D1A79830500EE4D78 /* ADJRequestHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJRequestHandler.h; sourceTree = "<group>"; };
+		05C2A01E1A79830500EE4D78 /* ADJRequestHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJRequestHandler.m; sourceTree = "<group>"; };
+		05C2A01F1A79830500EE4D78 /* ADJTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJTimer.h; sourceTree = "<group>"; };
+		05C2A0201A79830500EE4D78 /* ADJTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJTimer.m; sourceTree = "<group>"; };
+		05C2A0211A79830500EE4D78 /* Adjust.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Adjust.h; sourceTree = "<group>"; };
+		05C2A0221A79830500EE4D78 /* Adjust.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Adjust.m; sourceTree = "<group>"; };
+		05C2A0231A79830500EE4D78 /* ADJUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJUtil.h; sourceTree = "<group>"; };
+		05C2A0241A79830500EE4D78 /* ADJUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJUtil.m; sourceTree = "<group>"; };
+		05C2A0381A79832200EE4D78 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		05C2A03A1A79832600EE4D78 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		05C2A03D1A79882100EE4D78 /* ACTReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACTReporter.h; sourceTree = "<group>"; };
+		05C2A03F1A79882100EE4D78 /* GoogleConversionPing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleConversionPing.h; sourceTree = "<group>"; };
+		05C2A0411A79882100EE4D78 /* DCTReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCTReporter.h; sourceTree = "<group>"; };
+		05C2A0421A79882100EE4D78 /* libGoogleConversionTracking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleConversionTracking.a; sourceTree = "<group>"; };
+		05C2A0461A7989AD00EE4D78 /* SplunkMint-iOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "SplunkMint-iOS.framework"; path = "Depo/SplunkMint-iOS.framework"; sourceTree = "<group>"; };
+		05C2A0481A7989CD00EE4D78 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		05C2A04B1A798BBE00EE4D78 /* CurioAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioAction.h; sourceTree = "<group>"; };
+		05C2A04C1A798BBE00EE4D78 /* CurioAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioAction.m; sourceTree = "<group>"; };
+		05C2A04D1A798BBE00EE4D78 /* CurioActionToolkit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioActionToolkit.h; sourceTree = "<group>"; };
+		05C2A04E1A798BBE00EE4D78 /* CurioActionToolkit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioActionToolkit.m; sourceTree = "<group>"; };
+		05C2A04F1A798BBE00EE4D78 /* CurioDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioDB.h; sourceTree = "<group>"; };
+		05C2A0501A798BBE00EE4D78 /* CurioDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioDB.m; sourceTree = "<group>"; };
+		05C2A0511A798BBE00EE4D78 /* CurioDBToolkit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioDBToolkit.h; sourceTree = "<group>"; };
+		05C2A0521A798BBE00EE4D78 /* CurioDBToolkit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioDBToolkit.m; sourceTree = "<group>"; };
+		05C2A0531A798BBE00EE4D78 /* CurioNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioNetwork.h; sourceTree = "<group>"; };
+		05C2A0541A798BBE00EE4D78 /* CurioNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioNetwork.m; sourceTree = "<group>"; };
+		05C2A0551A798BBE00EE4D78 /* CurioNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioNotification.h; sourceTree = "<group>"; };
+		05C2A0561A798BBE00EE4D78 /* CurioNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioNotification.m; sourceTree = "<group>"; };
+		05C2A0571A798BBE00EE4D78 /* CurioNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioNotificationManager.h; sourceTree = "<group>"; };
+		05C2A0581A798BBE00EE4D78 /* CurioNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioNotificationManager.m; sourceTree = "<group>"; };
+		05C2A0591A798BBE00EE4D78 /* CurioPostOffice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioPostOffice.h; sourceTree = "<group>"; };
+		05C2A05A1A798BBE00EE4D78 /* CurioPostOffice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioPostOffice.m; sourceTree = "<group>"; };
+		05C2A05B1A798BBE00EE4D78 /* CurioReachabilityEx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioReachabilityEx.h; sourceTree = "<group>"; };
+		05C2A05C1A798BBE00EE4D78 /* CurioReachabilityEx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioReachabilityEx.m; sourceTree = "<group>"; };
+		05C2A05D1A798BBE00EE4D78 /* CurioSDK-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CurioSDK-Prefix.pch"; sourceTree = "<group>"; };
+		05C2A05E1A798BBE00EE4D78 /* CurioSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioSDK.h; sourceTree = "<group>"; };
+		05C2A05F1A798BBE00EE4D78 /* CurioSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioSDK.m; sourceTree = "<group>"; };
+		05C2A0601A798BBE00EE4D78 /* CurioSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioSettings.h; sourceTree = "<group>"; };
+		05C2A0611A798BBE00EE4D78 /* CurioSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioSettings.m; sourceTree = "<group>"; };
+		05C2A0621A798BBE00EE4D78 /* CurioUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioUtil.h; sourceTree = "<group>"; };
+		05C2A0631A798BBE00EE4D78 /* CurioUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioUtil.m; sourceTree = "<group>"; };
 		05C3F6051A3900A8001954E8 /* PostLoginPrefCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostLoginPrefCell.h; sourceTree = "<group>"; };
 		05C3F6061A3900A8001954E8 /* PostLoginPrefCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostLoginPrefCell.m; sourceTree = "<group>"; };
 		05C3F6081A3902E0001954E8 /* check_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check_icon.png; sourceTree = "<group>"; };
 		05C3F6091A3902E0001954E8 /* check_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "check_icon@2x.png"; sourceTree = "<group>"; };
+		05C7145A1A7823C400C467D9 /* RadiusDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadiusDao.h; sourceTree = "<group>"; };
+		05C7145B1A7823C400C467D9 /* RadiusDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadiusDao.m; sourceTree = "<group>"; };
 		05D2B19519E676BF00FC309D /* AlbumListDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumListDao.h; sourceTree = "<group>"; };
 		05D2B19619E676BF00FC309D /* AlbumListDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumListDao.m; sourceTree = "<group>"; };
 		05D2B19819E679E500FC309D /* PhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoAlbum.h; sourceTree = "<group>"; };
@@ -1273,6 +1383,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05C2A0491A7989CD00EE4D78 /* CoreTelephony.framework in Frameworks */,
+				05C2A0471A7989AD00EE4D78 /* SplunkMint-iOS.framework in Frameworks */,
+				05C2A0441A79882100EE4D78 /* libGoogleConversionTracking.a in Frameworks */,
+				05C2A03B1A79832600EE4D78 /* iAd.framework in Frameworks */,
+				05C2A0391A79832200EE4D78 /* AdSupport.framework in Frameworks */,
 				05BBE71619E07DA600805215 /* MediaPlayer.framework in Frameworks */,
 				05224A9719DC345B00214767 /* AssetsLibrary.framework in Frameworks */,
 				051E1E9919CACA5300FD1E03 /* CFNetwork.framework in Frameworks */,
@@ -1335,6 +1450,10 @@
 		051E1DF519CAC2F900FD1E03 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				05C2A0481A7989CD00EE4D78 /* CoreTelephony.framework */,
+				05C2A0461A7989AD00EE4D78 /* SplunkMint-iOS.framework */,
+				05C2A03A1A79832600EE4D78 /* iAd.framework */,
+				05C2A0381A79832200EE4D78 /* AdSupport.framework */,
 				05BBE71519E07DA600805215 /* MediaPlayer.framework */,
 				05224A9619DC345B00214767 /* AssetsLibrary.framework */,
 				051E1E9819CACA5300FD1E03 /* CFNetwork.framework */,
@@ -1584,6 +1703,8 @@
 				059A46DF1A6D3E3F00935023 /* DeviceDao.m */,
 				059A46E01A6D3E3F00935023 /* AccountDao.h */,
 				059A46E11A6D3E3F00935023 /* AccountDao.m */,
+				05C7145A1A7823C400C467D9 /* RadiusDao.h */,
+				05C7145B1A7823C400C467D9 /* RadiusDao.m */,
 				057DF50619D038080005A389 /* RequestTokenDao.h */,
 				057DF50719D038080005A389 /* RequestTokenDao.m */,
 				057DF50919D04EDF0005A389 /* RequestBaseUrlDao.h */,
@@ -1775,6 +1896,9 @@
 		051E1E3A19CAC8EA00FD1E03 /* out */ = {
 			isa = PBXGroup;
 			children = (
+				05C2A04A1A798BBE00EE4D78 /* CurioSDK */,
+				05C2A03C1A79882100EE4D78 /* GoogleConversionTrackingSDK */,
+				05C29FFD1A79830500EE4D78 /* Adjust */,
 				05A484571A6C610400793A90 /* UIImage+Resize.h */,
 				05A484581A6C610400793A90 /* UIImage+Resize.m */,
 				05A4845A1A6C614300793A90 /* UIImage+Alpha.m */,
@@ -2242,6 +2366,118 @@
 			name = fonts;
 			sourceTree = "<group>";
 		};
+		05C29FFD1A79830500EE4D78 /* Adjust */ = {
+			isa = PBXGroup;
+			children = (
+				05C29FFE1A79830500EE4D78 /* ADJActivityHandler.h */,
+				05C29FFF1A79830500EE4D78 /* ADJActivityHandler.m */,
+				05C2A0001A79830500EE4D78 /* ADJActivityKind.h */,
+				05C2A0011A79830500EE4D78 /* ADJActivityKind.m */,
+				05C2A0021A79830500EE4D78 /* ADJActivityPackage.h */,
+				05C2A0031A79830500EE4D78 /* ADJActivityPackage.m */,
+				05C2A0041A79830500EE4D78 /* ADJActivityState.h */,
+				05C2A0051A79830500EE4D78 /* ADJActivityState.m */,
+				05C2A0061A79830500EE4D78 /* ADJAdditions */,
+				05C2A00B1A79830500EE4D78 /* ADJAdjustFactory.h */,
+				05C2A00C1A79830500EE4D78 /* ADJAdjustFactory.m */,
+				05C2A00D1A79830500EE4D78 /* ADJAttribution.h */,
+				05C2A00E1A79830500EE4D78 /* ADJAttribution.m */,
+				05C2A00F1A79830500EE4D78 /* ADJAttributionHandler.h */,
+				05C2A0101A79830500EE4D78 /* ADJAttributionHandler.m */,
+				05C2A0111A79830500EE4D78 /* ADJConfig.h */,
+				05C2A0121A79830500EE4D78 /* ADJConfig.m */,
+				05C2A0131A79830500EE4D78 /* ADJDeviceInfo.h */,
+				05C2A0141A79830500EE4D78 /* ADJDeviceInfo.m */,
+				05C2A0151A79830500EE4D78 /* ADJEvent.h */,
+				05C2A0161A79830500EE4D78 /* ADJEvent.m */,
+				05C2A0171A79830500EE4D78 /* ADJLogger.h */,
+				05C2A0181A79830500EE4D78 /* ADJLogger.m */,
+				05C2A0191A79830500EE4D78 /* ADJPackageBuilder.h */,
+				05C2A01A1A79830500EE4D78 /* ADJPackageBuilder.m */,
+				05C2A01B1A79830500EE4D78 /* ADJPackageHandler.h */,
+				05C2A01C1A79830500EE4D78 /* ADJPackageHandler.m */,
+				05C2A01D1A79830500EE4D78 /* ADJRequestHandler.h */,
+				05C2A01E1A79830500EE4D78 /* ADJRequestHandler.m */,
+				05C2A01F1A79830500EE4D78 /* ADJTimer.h */,
+				05C2A0201A79830500EE4D78 /* ADJTimer.m */,
+				05C2A0211A79830500EE4D78 /* Adjust.h */,
+				05C2A0221A79830500EE4D78 /* Adjust.m */,
+				05C2A0231A79830500EE4D78 /* ADJUtil.h */,
+				05C2A0241A79830500EE4D78 /* ADJUtil.m */,
+			);
+			path = Adjust;
+			sourceTree = "<group>";
+		};
+		05C2A0061A79830500EE4D78 /* ADJAdditions */ = {
+			isa = PBXGroup;
+			children = (
+				05C2A0071A79830500EE4D78 /* NSString+ADJAdditions.h */,
+				05C2A0081A79830500EE4D78 /* NSString+ADJAdditions.m */,
+				05C2A0091A79830500EE4D78 /* UIDevice+ADJAdditions.h */,
+				05C2A00A1A79830500EE4D78 /* UIDevice+ADJAdditions.m */,
+			);
+			path = ADJAdditions;
+			sourceTree = "<group>";
+		};
+		05C2A03C1A79882100EE4D78 /* GoogleConversionTrackingSDK */ = {
+			isa = PBXGroup;
+			children = (
+				05C2A03D1A79882100EE4D78 /* ACTReporter.h */,
+				05C2A03E1A79882100EE4D78 /* Deprecated */,
+				05C2A0401A79882100EE4D78 /* DoubleClick */,
+				05C2A0421A79882100EE4D78 /* libGoogleConversionTracking.a */,
+			);
+			path = GoogleConversionTrackingSDK;
+			sourceTree = "<group>";
+		};
+		05C2A03E1A79882100EE4D78 /* Deprecated */ = {
+			isa = PBXGroup;
+			children = (
+				05C2A03F1A79882100EE4D78 /* GoogleConversionPing.h */,
+			);
+			path = Deprecated;
+			sourceTree = "<group>";
+		};
+		05C2A0401A79882100EE4D78 /* DoubleClick */ = {
+			isa = PBXGroup;
+			children = (
+				05C2A0411A79882100EE4D78 /* DCTReporter.h */,
+			);
+			path = DoubleClick;
+			sourceTree = "<group>";
+		};
+		05C2A04A1A798BBE00EE4D78 /* CurioSDK */ = {
+			isa = PBXGroup;
+			children = (
+				05C2A04B1A798BBE00EE4D78 /* CurioAction.h */,
+				05C2A04C1A798BBE00EE4D78 /* CurioAction.m */,
+				05C2A04D1A798BBE00EE4D78 /* CurioActionToolkit.h */,
+				05C2A04E1A798BBE00EE4D78 /* CurioActionToolkit.m */,
+				05C2A04F1A798BBE00EE4D78 /* CurioDB.h */,
+				05C2A0501A798BBE00EE4D78 /* CurioDB.m */,
+				05C2A0511A798BBE00EE4D78 /* CurioDBToolkit.h */,
+				05C2A0521A798BBE00EE4D78 /* CurioDBToolkit.m */,
+				05C2A0531A798BBE00EE4D78 /* CurioNetwork.h */,
+				05C2A0541A798BBE00EE4D78 /* CurioNetwork.m */,
+				05C2A0551A798BBE00EE4D78 /* CurioNotification.h */,
+				05C2A0561A798BBE00EE4D78 /* CurioNotification.m */,
+				05C2A0571A798BBE00EE4D78 /* CurioNotificationManager.h */,
+				05C2A0581A798BBE00EE4D78 /* CurioNotificationManager.m */,
+				05C2A0591A798BBE00EE4D78 /* CurioPostOffice.h */,
+				05C2A05A1A798BBE00EE4D78 /* CurioPostOffice.m */,
+				05C2A05B1A798BBE00EE4D78 /* CurioReachabilityEx.h */,
+				05C2A05C1A798BBE00EE4D78 /* CurioReachabilityEx.m */,
+				05C2A05D1A798BBE00EE4D78 /* CurioSDK-Prefix.pch */,
+				05C2A05E1A798BBE00EE4D78 /* CurioSDK.h */,
+				05C2A05F1A798BBE00EE4D78 /* CurioSDK.m */,
+				05C2A0601A798BBE00EE4D78 /* CurioSettings.h */,
+				05C2A0611A798BBE00EE4D78 /* CurioSettings.m */,
+				05C2A0621A798BBE00EE4D78 /* CurioUtil.h */,
+				05C2A0631A798BBE00EE4D78 /* CurioUtil.m */,
+			);
+			path = CurioSDK;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2292,7 +2528,7 @@
 					051E1DF219CAC2F900FD1E03 = {
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -2649,9 +2885,12 @@
 				053D0ED819DAC959006A13E0 /* MyModalController.m in Sources */,
 				058337D919ED9C1600DCF0C5 /* CustomAVPlayer.m in Sources */,
 				0526444819D546BB00B63759 /* MapUtil.m in Sources */,
+				05C2A0351A79830500EE4D78 /* ADJTimer.m in Sources */,
 				052644AF19D5A2A600B63759 /* SettingsDocumentsController.m in Sources */,
 				05368B471A4AD29C00B79403 /* SyncManager.m in Sources */,
+				05C2A06E1A798BBE00EE4D78 /* CurioSettings.m in Sources */,
 				051E1E5819CAC90700FD1E03 /* AFURLConnectionOperation.m in Sources */,
+				05C2A0371A79830500EE4D78 /* ADJUtil.m in Sources */,
 				057C9D8C1A2B903E001DDDEC /* NSMutableArray_Shuffling.m in Sources */,
 				05AF7C8A1A1C8F4200F5011A /* RecentActivityCell.m in Sources */,
 				051E1E8619CAC92700FD1E03 /* ASIAuthenticationDialog.m in Sources */,
@@ -2685,8 +2924,12 @@
 				05868DEC1A275FA000CFE360 /* AudioMenuFooterView.m in Sources */,
 				05836FCB1A05703A001D7346 /* MoveListModalController.m in Sources */,
 				051412A519D46748000EAE63 /* FloatingAddMenu.m in Sources */,
+				05C2A0311A79830500EE4D78 /* ADJLogger.m in Sources */,
+				05C2A02F1A79830500EE4D78 /* ADJDeviceInfo.m in Sources */,
 				058B44DB1A4C0D89005B1590 /* SyncUtil.m in Sources */,
+				05C2A02A1A79830500EE4D78 /* UIDevice+ADJAdditions.m in Sources */,
 				056AC8FB19D15DBB00AC96C3 /* TokenManager.m in Sources */,
+				05C2A0301A79830500EE4D78 /* ADJEvent.m in Sources */,
 				051E1E2F19CAC56A00FD1E03 /* AppUtil.m in Sources */,
 				057C9D7D1A2B5611001DDDEC /* MusicDetailModalController.m in Sources */,
 				05127EC319E19775002C2228 /* FileDetailInWebViewController.m in Sources */,
@@ -2707,8 +2950,11 @@
 				059A46E61A6D3F4800935023 /* SettingsAboutUsController.m in Sources */,
 				05AF7C841A1C8D6D00F5011A /* Activity.m in Sources */,
 				052644BE19D5A32300B63759 /* HeaderCell.m in Sources */,
+				05C2A0291A79830500EE4D78 /* NSString+ADJAdditions.m in Sources */,
+				05C2A06A1A798BBE00EE4D78 /* CurioNotificationManager.m in Sources */,
 				05AF7C8D1A1C9C5800F5011A /* RecentActivityLinkerFooter.m in Sources */,
 				05224A9519DC1CBC00214767 /* PhotoListModalController.m in Sources */,
+				05C2A02C1A79830500EE4D78 /* ADJAttribution.m in Sources */,
 				0546992C19F4E9EA00A87840 /* FileDetailFooter.m in Sources */,
 				05A4845F1A6C614300793A90 /* UIImage+RoundedCorner.m in Sources */,
 				051E1E0719CAC2F900FD1E03 /* AppDelegate.m in Sources */,
@@ -2716,13 +2962,16 @@
 				05C0E2011A06ABD7005E1E92 /* MoveModalFooterView.m in Sources */,
 				05620F211A4C62B30089DFB5 /* SyncReference.m in Sources */,
 				0556EA571A19EA0700123A14 /* SearchHistory.m in Sources */,
+				05C2A06F1A798BBE00EE4D78 /* CurioUtil.m in Sources */,
 				052160A319E2E56B0007B321 /* DepoUploadTask.m in Sources */,
 				05BBE71119E06FB100805215 /* CameraCaptureModalController.m in Sources */,
 				051DE37319CC140100F27C85 /* CustomConfirmView.m in Sources */,
+				05C2A0671A798BBE00EE4D78 /* CurioDBToolkit.m in Sources */,
 				059A46DA1A6D3E2000935023 /* SubscriptionPlan.m in Sources */,
 				0515706419E5AC2600C62B98 /* PhotoHeaderSegmentView.m in Sources */,
 				05BCA2F819EE64EB00AF2FE2 /* AddAlbumDao.m in Sources */,
 				058BC22B1A30893C0007F4DE /* PreLoginController.m in Sources */,
+				05C2A0321A79830500EE4D78 /* ADJPackageBuilder.m in Sources */,
 				051E1EAB19CB20AD00FD1E03 /* MenuProfileCell.m in Sources */,
 				051DE35E19CC128600F27C85 /* BaseViewController.m in Sources */,
 				051412A819D46A84000EAE63 /* AddTypeButton.m in Sources */,
@@ -2730,19 +2979,25 @@
 				053F993419E1B88100928F22 /* ImagePreviewController.m in Sources */,
 				052644B119D5A2A600B63759 /* SettingsBaseViewController.m in Sources */,
 				054730C319FA3D5A00F913FF /* FavoriteDao.m in Sources */,
+				05C2A0331A79830500EE4D78 /* ADJPackageHandler.m in Sources */,
 				057DF50819D038080005A389 /* RequestTokenDao.m in Sources */,
 				052644BD19D5A32300B63759 /* TitleCell.m in Sources */,
 				054206DE19DD6DCD0026771C /* UploadManager.m in Sources */,
+				05C2A0251A79830500EE4D78 /* ADJActivityHandler.m in Sources */,
 				0526445119D5627900B63759 /* MoreMenuCell.m in Sources */,
 				051E1E8D19CAC92700FD1E03 /* ASINetworkQueue.m in Sources */,
 				051DE35D19CC128600F27C85 /* MyViewController.m in Sources */,
+				05C2A02D1A79830500EE4D78 /* ADJAttributionHandler.m in Sources */,
 				057DF50E19D050F00005A389 /* FileListDao.m in Sources */,
 				05E8112F19DF09DB0063F99A /* AlbumListModalController.m in Sources */,
+				05C2A0281A79830500EE4D78 /* ADJActivityState.m in Sources */,
 				051E1E5419CAC90700FD1E03 /* AFImageRequestOperation.m in Sources */,
 				052644B419D5A2A600B63759 /* SettingsConnectedDevicesController.m in Sources */,
 				052A221F19F67FB5000C3C75 /* MBProgressHUD.m in Sources */,
 				051E1E8819CAC92700FD1E03 /* ASIDataDecompressor.m in Sources */,
+				05C2A0661A798BBE00EE4D78 /* CurioDB.m in Sources */,
 				052644B019D5A2A600B63759 /* SettingsMusicController.m in Sources */,
+				05C2A02E1A79830500EE4D78 /* ADJConfig.m in Sources */,
 				051E1E8719CAC92700FD1E03 /* ASIDataCompressor.m in Sources */,
 				051E1E5619CAC90700FD1E03 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				051E1EB119CB20FC00FD1E03 /* MetaMenu.m in Sources */,
@@ -2752,18 +3007,23 @@
 				059D97991A0CF12E00BCEDF3 /* RenameDao.m in Sources */,
 				05F4AA281A2F7692000F41B8 /* ActivityUtil.m in Sources */,
 				051E1E5A19CAC90700FD1E03 /* UIImageView+AFNetworking.m in Sources */,
+				05C2A06D1A798BBE00EE4D78 /* CurioSDK.m in Sources */,
 				059C9ECA1A07DCAD000C54D9 /* FileDetailModalController.m in Sources */,
 				051CB39219D2DD7C00E5FC88 /* PhotoListController.m in Sources */,
 				05AF7C981A1CA22200F5011A /* RecentActivityHeaderView.m in Sources */,
 				052644B219D5A2A600B63759 /* SettingsUploadController.m in Sources */,
 				05440AE019D4445D009803D7 /* FloatingAddButton.m in Sources */,
+				05C2A06B1A798BBE00EE4D78 /* CurioPostOffice.m in Sources */,
 				058219C41A384CC6001FA679 /* SearchModalController.m in Sources */,
 				051CB38F19D2DD7100E5FC88 /* FileListController.m in Sources */,
+				05C2A0641A798BBE00EE4D78 /* CurioAction.m in Sources */,
 				05E8113219DF0ACB0063F99A /* MetaAlbum.m in Sources */,
 				05AF7C871A1C8EEB00F5011A /* RecentActivitiesDao.m in Sources */,
+				05C2A02B1A79830500EE4D78 /* ADJAdjustFactory.m in Sources */,
 				051E1E8419CAC92700FD1E03 /* SBJsonParser.m in Sources */,
 				050D4C351A31E17F00809A01 /* PostLoginSyncContactController.m in Sources */,
 				051DE35C19CC128600F27C85 /* MyNavigationController.m in Sources */,
+				05C2A0261A79830500EE4D78 /* ADJActivityKind.m in Sources */,
 				051E1E8219CAC92700FD1E03 /* SBJSON.m in Sources */,
 				051DE37219CC140100F27C85 /* CustomAlertView.m in Sources */,
 				059E9A021A35DB5F00922A77 /* SmsForPassButton.m in Sources */,
@@ -2775,6 +3035,7 @@
 				051DE36C19CC130A00F27C85 /* LoginTextfield.m in Sources */,
 				0551CE161A2B3E9700DB117D /* HomeUsageView.m in Sources */,
 				051CB39819D2E3FF00E5FC88 /* FolderCell.m in Sources */,
+				05C2A0271A79830500EE4D78 /* ADJActivityPackage.m in Sources */,
 				0526444E19D5625E00B63759 /* MoreMenuView.m in Sources */,
 				05BCA2FB19EE89EE00AF2FE2 /* MusicPreviewController.m in Sources */,
 				052644B519D5A2A600B63759 /* SettingsNotificationsController.m in Sources */,
@@ -2789,6 +3050,7 @@
 				05C0E1FE1A0698C5005E1E92 /* MusicListController.m in Sources */,
 				0526444B19D5578C00B63759 /* FolderEmptyCell.m in Sources */,
 				051E1EB719CB2DAC00FD1E03 /* User.m in Sources */,
+				05C2A06C1A798BBE00EE4D78 /* CurioReachabilityEx.m in Sources */,
 				051E1E5219CAC90700FD1E03 /* AFHTTPClient.m in Sources */,
 				055A3F5D19E82B2C004A0121 /* PhotoAlbumController.m in Sources */,
 				051DE36719CC12FD00F27C85 /* CustomButton.m in Sources */,
@@ -2799,9 +3061,11 @@
 				058BC23F1A30E6B10007F4DE /* ServiceLoginDao.m in Sources */,
 				053D0EDE19DB01F7006A13E0 /* AddFolderDao.m in Sources */,
 				051E1E7F19CAC92700FD1E03 /* Reachability.m in Sources */,
+				05C2A0361A79830500EE4D78 /* Adjust.m in Sources */,
 				05C3F6071A3900A8001954E8 /* PostLoginPrefCell.m in Sources */,
 				059A46DB1A6D3E2000935023 /* Device.m in Sources */,
 				052644B319D5A2A600B63759 /* SettingsStorageController.m in Sources */,
+				05C2A0651A798BBE00EE4D78 /* CurioActionToolkit.m in Sources */,
 				058B32971A15E8A300A291C4 /* AlbumDetailModalController.m in Sources */,
 				059E9A091A35DC2500922A77 /* MyMessageComposeViewController.m in Sources */,
 				05144B5B1A0905FA00B2A414 /* SimpleMusicCell.m in Sources */,
@@ -2822,16 +3086,20 @@
 				058BC2421A30E7100007F4DE /* AuthResponse.m in Sources */,
 				050D4C321A31E17200809A01 /* PostLoginSyncPhotoController.m in Sources */,
 				05144B611A090B8000B2A414 /* SimpleDocCell.m in Sources */,
+				05C2A0681A798BBE00EE4D78 /* CurioNetwork.m in Sources */,
 				056E2A151A28BC2700C24904 /* XYPieChart.m in Sources */,
 				058B32911A14ABE500A291C4 /* AlbumAddPhotosDao.m in Sources */,
 				05AF7C811A1C8CD100F5011A /* RecentActivitiesController.m in Sources */,
 				05501F3819EBBB4600CA9F4E /* AlbumDetailDao.m in Sources */,
 				05DA564C1A56D5B3007D2B1D /* ALAssetRepresentation+MD5.m in Sources */,
 				05C244331A0243BE000D65D0 /* SortTypeCell.m in Sources */,
+				05C2A0691A798BBE00EE4D78 /* CurioNotification.m in Sources */,
 				05E8113819DF27690063F99A /* MusicListModalController.m in Sources */,
 				059C9EC71A07DC60000C54D9 /* FolderDetailModalController.m in Sources */,
 				05D2B19D19E67C6900FC309D /* MainPhotoAlbumCell.m in Sources */,
 				05A484591A6C610400793A90 /* UIImage+Resize.m in Sources */,
+				05C7145C1A7823C400C467D9 /* RadiusDao.m in Sources */,
+				05C2A0341A79830500EE4D78 /* ADJRequestHandler.m in Sources */,
 				05D2B19719E676BF00FC309D /* AlbumListDao.m in Sources */,
 				0524E32919D955FA00E2698E /* FileDetail.m in Sources */,
 				05EA75B519DC6C2400AC77AB /* MultipleUploadFooterView.m in Sources */,
@@ -2970,10 +3238,22 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Mahir Kemal Tarlan (R2478SCTN5)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Depo",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/Depo-Prefix.pch";
 				INFOPLIST_FILE = "Depo/Depo-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Depo/GoogleConversionTrackingSDK",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "f3d07236-b9ab-4c3e-8cd7-a40a0591e27e";
 				WRAPPER_EXTENSION = app;
@@ -2986,10 +3266,22 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Mahir Kemal Tarlan (R2478SCTN5)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Depo",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/Depo-Prefix.pch";
 				INFOPLIST_FILE = "Depo/Depo-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Depo/GoogleConversionTrackingSDK",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "f3d07236-b9ab-4c3e-8cd7-a40a0591e27e";
 				WRAPPER_EXTENSION = app;
@@ -3074,10 +3366,22 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Depo",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/Depo-Prefix.pch";
 				INFOPLIST_FILE = "Depo/Depo-AppStore-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Depo/GoogleConversionTrackingSDK",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -3140,10 +3444,22 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Depo",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/Depo-Prefix.pch";
 				INFOPLIST_FILE = "Depo/Depo-Enterprise-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Depo/GoogleConversionTrackingSDK",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;

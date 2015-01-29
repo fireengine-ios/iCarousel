@@ -28,6 +28,8 @@
 @synthesize taskType;
 @synthesize folder;
 @synthesize initializationDate;
+@synthesize localHash;
+@synthesize remoteHash;
 
 - (void) configureUploadFileForPath:(NSString *) _filePath atFolder:(MetaFile *) _folder withFileName:(NSString *) fileName {
 

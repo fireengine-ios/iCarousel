@@ -26,6 +26,8 @@
 	<string>UIStatusBarStyleLightContent</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>Arka planda dosyalarının güncellenmesi için lokasyonunuz kullanılacaktır.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>TurkcellSaturaReg.ttf</string>
@@ -37,6 +39,11 @@
 		<string>TurkcellSaturaBol.ttf</string>
 		<string>TurkcellSaturaBolIta.ttf</string>
 	</array>
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>fetch</string>
+        <string>location</string>
+    </array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

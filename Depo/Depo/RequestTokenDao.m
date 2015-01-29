@@ -21,7 +21,7 @@
                                 [[UIDevice currentDevice] identifierForVendor].UUIDString, @"uuid",
                                 [[UIDevice currentDevice] name], @"name",
                                 (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? @"IPAD" : @"IPHONE"), @"deviceType",
-                                ([AppUtil readFirstVisitOverFlag] ? @"false" : @"true"), @"newDevice",
+//                                ([AppUtil readFirstVisitOverFlag] ? @"false" : @"true"), @"newDevice",
                                 nil];
 
     NSLog(@"Device Info: %@", deviceInfo);
@@ -52,7 +52,7 @@
                                 [[UIDevice currentDevice] identifierForVendor].UUIDString, @"uuid",
                                 [[UIDevice currentDevice] name], @"name",
                                 (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? @"IPAD" : @"IPHONE"), @"deviceType",
-                                ([AppUtil readFirstVisitOverFlag] ? @"false" : @"true"), @"newDevice",
+//                                ([AppUtil readFirstVisitOverFlag] ? @"false" : @"true"), @"newDevice",
                                 nil];
     
     SBJSON *json = [SBJSON new];

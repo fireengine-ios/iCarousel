@@ -9,10 +9,18 @@
 #import <Foundation/Foundation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "ElasticSearchDao.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface SyncManager : NSObject
+@interface SyncManager : NSObject <CLLocationManagerDelegate>
 
 @property (nonatomic, strong) ALAssetsLibrary *assetsLibrary;
 @property (nonatomic, strong) ElasticSearchDao *elasticSearchDao;
+@property (nonatomic, strong) CLLocationManager *locManager;
+
+- (void) startFirstTimeSync;
+- (void) startAutoSync;
+- (void) stopAutoSync;
+- (void) manuallyCheckIfAlbumChanged;
+- (void) startLocationManagerIfNecessary;
 
 @end

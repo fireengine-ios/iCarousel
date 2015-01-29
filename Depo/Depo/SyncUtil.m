@@ -129,4 +129,29 @@
     return result;
 }
 
++ (void) writeFirstTimeSyncFlag {
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:FIRST_SYNC_DONE_FLAG_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (BOOL) readFirstTimeSyncFlag {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:FIRST_SYNC_DONE_FLAG_KEY];
+}
+
++ (void) increaseBadgeCount {
+    int newBadgeCount = [SyncUtil readBadgeCount] + 1;
+    [[NSUserDefaults standardUserDefaults] setInteger:newBadgeCount forKey:UPLOAD_FILE_BADGE_COUNT_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:newBadgeCount];
+}
+
++ (void) resetBadgeCount {
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:UPLOAD_FILE_BADGE_COUNT_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (int) readBadgeCount {
+    return (int)[[NSUserDefaults standardUserDefaults] integerForKey:UPLOAD_FILE_BADGE_COUNT_KEY];
+}
+
 @end

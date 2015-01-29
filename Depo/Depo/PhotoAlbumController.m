@@ -159,7 +159,7 @@
     if(albumWithUpdatedContent && albumWithUpdatedContent.content) {
         for(MetaFile *row in albumWithUpdatedContent.content) {
             CGRect imgRect = CGRectMake(5 + (counter%3 * 105), 5 + ((int)floor(counter/3)*105), 100, 100);
-            SquareImageView *imgView = [[SquareImageView alloc] initWithFrame:imgRect withFile:row];
+            SquareImageView *imgView = [[SquareImageView alloc] initWithFrame:imgRect withFile:row withSelectibleStatus:isSelectible];
             imgView.delegate = self;
             [photosScroll addSubview:imgView];
             counter ++;
@@ -279,7 +279,7 @@
         [moreMenuView removeFromSuperview];
         moreMenuView = nil;
     } else {
-        moreMenuView = [[MoreMenuView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height-64) withList:@[[NSNumber numberWithInt:MoreMenuTypeAlbumDetail], [NSNumber numberWithInt:MoreMenuTypeAlbumShare], [NSNumber numberWithInt:MoreMenuTypeAlbumDelete], [NSNumber numberWithInt:MoreMenuTypeSelect]] withFileFolder:nil withAlbum:self.album];
+        moreMenuView = [[MoreMenuView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height-64) withList:@[[NSNumber numberWithInt:MoreMenuTypeAlbumDetail], [NSNumber numberWithInt:MoreMenuTypeAlbumDelete], [NSNumber numberWithInt:MoreMenuTypeSelect]] withFileFolder:nil withAlbum:self.album];
         moreMenuView.delegate = self;
         [self.view addSubview:moreMenuView];
         [self.view bringSubviewToFront:moreMenuView];

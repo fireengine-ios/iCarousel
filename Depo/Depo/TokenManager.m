@@ -32,8 +32,17 @@
         userInfoDao.delegate = self;
         userInfoDao.successMethod = @selector(userInfoSuccessCallback:);
         userInfoDao.failMethod = @selector(userInfoFailCallback:);
+        
+        radiusDao = [[RadiusDao alloc] init];
+        radiusDao.delegate = self;
+        radiusDao.successMethod = @selector(tokenDaoSuccessCallback);
+        radiusDao.failMethod = @selector(tokenDaoFailCallback:);
     }
     return self;
+}
+
+- (void) requestRadiusLogin {
+    [radiusDao requestRadiusLogin];
 }
 
 - (void) requestToken {

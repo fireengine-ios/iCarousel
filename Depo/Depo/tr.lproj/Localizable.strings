@@ -49,7 +49,7 @@
 "MoreMenuDeleteTitleMusic"="Müziği Sil";
 "MoreMenuDeleteTitleOther"="Dosyayı Sil";
 "MoreMenuDeleteTitleAlbum"="Albümü Sil";
-"MoreMenuDownloadImageTitle"="Albüme Kaydet";
+"MoreMenuDownloadImageTitle"="Telefona İndir";
 "FolderSubTitle"="%d dosya";
 "FolderEmptyMessage"="%@ boş";
 "FolderEmptySubMessage"="\"+\" butonuna dokunarak dosyalarınızı yüklemeye başlayabilirsiniz.";
@@ -372,3 +372,6 @@
 "RecentActivitySingleMusicUpdated"="%d şarkı güncellendi";
 
 "AboutUs"="Hakkında";
+
+"Warning"="Uyarı";
+"SubmitButtonTitle"="Tamam";

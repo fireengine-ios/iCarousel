@@ -10,6 +10,7 @@
 #import "RequestTokenDao.h"
 #import "RequestBaseUrlDao.h"
 #import "AccountInfoDao.h"
+#import "RadiusDao.h"
 
 @protocol TokenManagerDelegate <NSObject>
 - (void) tokenManagerDidReceiveToken;
@@ -25,10 +26,12 @@
     RequestTokenDao *tokenDao;
     RequestBaseUrlDao *baseUrlDao;
     AccountInfoDao *userInfoDao;
+    RadiusDao *radiusDao;
 }
 
 @property (nonatomic, strong) id<TokenManagerDelegate> delegate;
 
+- (void) requestRadiusLogin;
 - (void) requestToken;
 - (void) requestBaseUrl;
 - (void) requestUserInfo;

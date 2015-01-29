@@ -9,6 +9,7 @@
 #import "PostLoginSyncPhotoController.h"
 #import "Util.h"
 #import "PostLoginSyncContactController.h"
+#import "AppDelegate.h"
 
 @interface PostLoginSyncPhotoController ()
 
@@ -78,12 +79,14 @@
              */
         }];
     } else {
+        [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOff];
         PostLoginSyncContactController *contactPref = [[PostLoginSyncContactController alloc] init];
         [self.navigationController pushViewController:contactPref animated:YES];
     }
 }
 
 - (void) postAssetPermission {
+    [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionAuto];
     PostLoginSyncContactController *contactPref = [[PostLoginSyncContactController alloc] init];
     [self.navigationController pushViewController:contactPref animated:YES];
 }

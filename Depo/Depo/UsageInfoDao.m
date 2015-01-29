@@ -33,8 +33,8 @@
         Usage *result = [[Usage alloc] init];
         
         if(mainDict != nil && ![mainDict isKindOfClass:[NSNull class]]) {
-            NSString *totalStorage = [mainDict objectForKey:@"X-Account-Meta-Quota-Bytes"];
-            NSString *usedStorage = [mainDict objectForKey:@"X-Container-Bytes-Used"];
+            NSString *totalStorage = [mainDict objectForKey:@"Quota-Bytes"];
+            NSString *usedStorage = [mainDict objectForKey:@"Bytes-Used"];
             NSNumber *imageUsage = [mainDict objectForKey:@"imageUsage"];
             NSNumber *othersUsage = [mainDict objectForKey:@"othersUsage"];
             NSNumber *audioUsage = [mainDict objectForKey:@"audioUsage"];

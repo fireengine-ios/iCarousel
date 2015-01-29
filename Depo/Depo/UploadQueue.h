@@ -16,6 +16,7 @@
 @property (nonatomic, strong) NSURLSession *session;
 
 - (NSArray *) uploadRefsForFolder:(NSString *) folderUuid;
+- (UploadRef *) uploadRefForAsset:(NSString *) assetUrl;
 - (NSArray *) uploadImageRefs;
 - (NSArray *) uploadImageRefsForAlbum:(NSString *) albumUuid;
 - (void) addNewUploadTask:(UploadManager *) newManager;

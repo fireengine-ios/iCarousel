@@ -28,6 +28,8 @@
 @property (nonatomic) UploadTaskType taskType;
 @property (nonatomic, strong) MetaFile *folder;
 @property (nonatomic, strong) NSDate *initializationDate;
+@property (nonatomic, strong) NSString *localHash;
+@property (nonatomic, strong) NSString *remoteHash;
 
 - (void) configureUploadFileForPath:(NSString *) _filePath atFolder:(MetaFile *) _folder withFileName:(NSString *) fileName;
 - (void) configureUploadData:(NSData *) _dataToUpload atFolder:(MetaFile *) _folder withFileName:(NSString *) fileName;

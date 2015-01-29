@@ -20,6 +20,12 @@
 #import "PreLoginController.h"
 #import "LoginController.h"
 #import "PostLoginSyncPhotoController.h"
+#import "Reachability.h"
+
+#import "Adjust.h"
+#import "ACTReporter.h"
+#import <SplunkMint-iOS/SplunkMint-iOS.h>
+#import "CurioSDK.h"
 
 @implementation AppDelegate
 
@@ -38,17 +44,27 @@
         [application setStatusBarStyle:UIStatusBarStyleLightContent];
     }
     
-    //TODO sil
-    if([SyncUtil readLastSyncDate] == nil) {
-        [SyncUtil updateLastSyncDate];
-    }
-    
     session = [[AppSession alloc] init];
     
     uploadQueue = [[UploadQueue alloc] init];
     
     mapUtil = [[MapUtil alloc] init];
     
+    [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
+
+    //Adjust initialization
+    ADJConfig *adjustConfig = [ADJConfig configWithAppToken:@"hlqdgtbmrdb9" environment:ADJEnvironmentProduction];
+    [Adjust appDidLaunch:adjustConfig];
+    
+    //Google Conversion initialization
+    [ACTConversionReporter reportWithConversionID:@"946883454" label:@"gJYdCOLv4wcQ_pbBwwM" value:@"0.00" isRepeatable:NO];
+    
+    //BugSense integration
+    [[Mint sharedInstance] initAndStartSession:@"13ceffcf"];
+
+    //Curio integration
+    [[CurioSDK shared] startSession:@"http://curio.turkcell.com.tr/api/v2/" apiKey:@"cab314f33df2514764664e5544def586" trackingCode:@"KL2XNFIE" sessionTimeout:4 periodicDispatchEnabled:YES dispatchPeriod:1 maxCachedActivitiyCount:1000 loggingEnabled:YES logLevel:0 registerForRemoteNotifications:YES notificationTypes:@"Sound,Badge,Alert" appLaunchOptions:launchOptions];
+
     [self addInitialBgImage];
 
     progress = [[MBProgressHUD alloc] initWithWindow:self.window];
@@ -58,17 +74,27 @@
     tokenManager = [[TokenManager alloc] init];
     tokenManager.delegate = self;
     
-    self.syncManager = [[SyncManager alloc] init];
-
-    if([CacheUtil readRememberMeToken] != nil) {
-        [tokenManager requestToken];
-        [self showMainLoading];
-    } else {
+    NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
+    if(networkStatus == kReachableViaWiFi) {
+        if([CacheUtil readRememberMeToken] != nil) {
+            [tokenManager requestToken];
+            [self showMainLoading];
+        } else {
+            if(![AppUtil readFirstVisitOverFlag]) {
+                [self triggerPreLogin];
+            } else {
+                [self triggerLogin];
+            }
+        }
+    } else if(networkStatus == kReachableViaWWAN) {
         if(![AppUtil readFirstVisitOverFlag]) {
             [self triggerPreLogin];
         } else {
             [self triggerLogin];
         }
+    } else {
+        UIAlertView *noConnAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", @"") message:NSLocalizedString(@"ConnectionErrorWarning", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"SubmitButtonTitle", @"") otherButtonTitles:nil];
+        [noConnAlert show];
     }
 
     [self.window makeKeyAndVisible];
@@ -81,9 +107,16 @@
 }
 
 - (void) triggerLogin {
-    LoginController *login = [[LoginController alloc] init];
-    MyNavigationController *loginNav = [[MyNavigationController alloc] initWithRootViewController:login];
-    self.window.rootViewController = loginNav;
+    NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
+    if(networkStatus == kReachableViaWiFi) {
+        LoginController *login = [[LoginController alloc] init];
+        MyNavigationController *loginNav = [[MyNavigationController alloc] initWithRootViewController:login];
+        self.window.rootViewController = loginNav;
+    } else if(networkStatus == kReachableViaWWAN) {
+        [self.window.rootViewController.view removeFromSuperview];
+        [tokenManager requestRadiusLogin];
+        [self showMainLoading];
+    }
 }
 
 - (void) triggerPostLogin {
@@ -91,6 +124,11 @@
 }
 
 - (void) triggerHome {
+    EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
+    if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
+        [self startAutoSync];
+    }
+    
     MyViewController *homeController = [[HomeController alloc] init];
     base = [[BaseViewController alloc] initWithRootViewController:homeController];
     [self.window setRootViewController:base];
@@ -122,10 +160,7 @@
 
 - (void) tokenManagerDidFailReceivingBaseUrl {
     [self hideMainLoading];
-
-    MyViewController *homeController = [[HomeController alloc] init];
-    base = [[BaseViewController alloc] initWithRootViewController:homeController];
-    [self.window setRootViewController:base];
+    [self triggerHome];
 }
 
 - (void) tokenManagerDidReceiveToken {
@@ -138,6 +173,22 @@
 
 - (void) tokenManagerDidFailReceivingUserInfo {
     [tokenManager requestBaseUrl];
+}
+
+- (void) startAutoSync {
+    if(!syncManager) {
+        self.syncManager = [[SyncManager alloc] init];
+        if(![SyncUtil readFirstTimeSyncFlag]) {
+            [syncManager startFirstTimeSync];
+        } else {
+            [syncManager startAutoSync];
+            [syncManager manuallyCheckIfAlbumChanged];
+        }
+    }
+}
+
+- (void) stopAutoSync {
+    [syncManager stopAutoSync];
 }
 
 - (void) addInitialBgImage {
@@ -169,8 +220,25 @@
     [progress hide:YES];
 }
 
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    [[CurioNotificationManager shared] didReceiveNotification:userInfo];
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    [[CurioNotificationManager shared] didRegisteredForNotifications:deviceToken];
+}
+
 - (NSUInteger) application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
     return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
+}
+
+- (void) application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
+    if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
+        [self.syncManager manuallyCheckIfAlbumChanged];
+    }
+
+    completionHandler(UIBackgroundFetchResultNewData);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -190,14 +258,15 @@
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    [SyncUtil resetBadgeCount];
+    application.applicationIconBadgeNumber = 0;
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [[CurioSDK shared] endSession];
 }
 
 @end

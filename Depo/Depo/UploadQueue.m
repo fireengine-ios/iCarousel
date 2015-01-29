@@ -9,6 +9,7 @@
 #import "UploadQueue.h"
 #import "AppConstants.h"
 #import "UploadManager.h"
+#import "SyncUtil.h"
 
 @implementation UploadQueue
 
@@ -29,6 +30,7 @@
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
             NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration backgroundSessionConfiguration:@"com.igones.depo.BackgroundSession"];
+            configuration.sessionSendsLaunchEvents = YES;
             self.session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
         });
     }
@@ -59,6 +61,15 @@
         }
     }
     return result;
+}
+
+- (UploadRef *) uploadRefForAsset:(NSString *) assetUrl {
+    for(UploadManager *manager in self.uploadManagers) {
+        if([manager.uploadRef.assetUrl isEqualToString:assetUrl]) {
+            return manager.uploadRef;
+        }
+    }
+    return nil;
 }
 
 - (NSArray *) uploadImageRefsForAlbum:(NSString *) albumUuid {
@@ -102,13 +113,14 @@
 
 #pragma mark UploadManagerQueueDelegate
 - (void) uploadManager:(UploadManager *)manRef didFinishUploadingWithSuccess:(BOOL)success {
-    NSLog(@"uploadManager:didFinishUploadingWithSuccess");
-    
-    NSLog(@"activeTaskIds pre count: %d", (int)[activeTaskIds count]);
-    NSLog(@"array of active tasks: %@", activeTaskIds);
-    NSLog(@"man ref: %@", [manRef uniqueUrl]);
     [activeTaskIds removeObject:[manRef uniqueUrl]];
-    NSLog(@"activeTaskIds post count: %d", (int)[activeTaskIds count]);
+    
+    if(success && manRef.uploadRef.localHash != nil) {
+        [SyncUtil cacheSyncHashLocally:manRef.uploadRef.localHash];
+    }
+    if(success && manRef.uploadRef.remoteHash != nil) {
+        [SyncUtil cacheSyncHashRemotely:manRef.uploadRef.remoteHash];
+    }
     
     if([activeTaskIds count] < MAX_CONCURRENT_UPLOAD_TASKS) {
         UploadManager *nextManager = [self findNextTask];
@@ -117,7 +129,6 @@
             [activeTaskIds addObject:[nextManager uniqueUrl]];
         }
     }
-    NSLog(@"activeTaskIds final count: %d", (int)[activeTaskIds count]);
 }
 
 - (void) uploadManagerIsReadToStartTask:(UploadManager *)manRef {
@@ -159,6 +170,7 @@
     UploadManager *currentManager = [self findByTaskId:task.taskIdentifier];
     if(currentManager != nil) {
         NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) task.response;
+        NSLog(@"STATUS CODE: %d", (int)httpResp.statusCode);
         if (!error && httpResp.statusCode == 201) {
             [currentManager removeTemporaryFile];
             [currentManager notifyUpload];

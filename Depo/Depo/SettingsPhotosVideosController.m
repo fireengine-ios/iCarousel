@@ -7,6 +7,7 @@
 //
 
 #import "SettingsPhotosVideosController.h"
+#import "AppDelegate.h"
 
 @interface SettingsPhotosVideosController ()
 
@@ -41,8 +42,15 @@
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
-    if (currentSetting != oldSetting)
+    if (currentSetting != oldSetting) {
         [CacheUtil writeCachedSettingSyncPhotosVideos:currentSetting];
+        if(currentSetting == EnableOptionOn || currentSetting == EnableOptionAuto) {
+            [APPDELEGATE startAutoSync];
+        } else {
+            [APPDELEGATE stopAutoSync];
+        }
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning

@@ -23,5 +23,10 @@
 + (NSArray *) readSyncHashLocally;
 + (void) cacheSyncHashRemotely:(NSString *) hash;
 + (NSArray *) readSyncHashRemotely;
++ (void) writeFirstTimeSyncFlag;
++ (BOOL) readFirstTimeSyncFlag;
++ (void) increaseBadgeCount;
++ (void) resetBadgeCount;
++ (int) readBadgeCount;
 
 @end

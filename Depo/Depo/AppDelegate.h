@@ -39,5 +39,7 @@
 - (void) triggerPostLogin;
 - (void) triggerHome;
 - (void) triggerLogout;
+- (void) startAutoSync;
+- (void) stopAutoSync;
 
 @end
