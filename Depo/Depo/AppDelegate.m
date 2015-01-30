@@ -75,7 +75,7 @@
     tokenManager.delegate = self;
     
     NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
-    if(networkStatus == kReachableViaWiFi) {
+    if(networkStatus == kReachableViaWWAN/* TODO kReachableViaWiFi*/) {
         if([CacheUtil readRememberMeToken] != nil) {
             [tokenManager requestToken];
             [self showMainLoading];
@@ -108,7 +108,7 @@
 
 - (void) triggerLogin {
     NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
-    if(networkStatus == kReachableViaWiFi) {
+    if(networkStatus == kReachableViaWWAN/* TODO kReachableViaWiFi*/) {
         LoginController *login = [[LoginController alloc] init];
         MyNavigationController *loginNav = [[MyNavigationController alloc] initWithRootViewController:login];
         self.window.rootViewController = loginNav;

@@ -42,7 +42,8 @@
     NSArray *localHashList = [SyncUtil readSyncHashLocally];
     
     [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-        if(group) {
+        //TODO Test sil
+        if(group && [[group valueForProperty:ALAssetsGroupPropertyName] isEqualToString:@"Test"]) {
             [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
                 if(asset) {
                     NSString *localHash = [asset.defaultRepresentation MD5];
@@ -98,7 +99,8 @@
 
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-            if(group) {
+            //TODO Test sil
+            if(group && [[group valueForProperty:ALAssetsGroupPropertyName] isEqualToString:@"Test"]) {
                 [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
                     if(asset) {
                         NSString *localHash = [asset.defaultRepresentation MD5];
@@ -168,7 +170,8 @@
         NSArray *localHashList = [SyncUtil readSyncHashLocally];
         
         [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-            if(group) {
+            //TODO Test sil
+            if(group && [[group valueForProperty:ALAssetsGroupPropertyName] isEqualToString:@"Test"]) {
                 [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
                     if(asset) {
                         NSString *localHash = [asset.defaultRepresentation MD5];
