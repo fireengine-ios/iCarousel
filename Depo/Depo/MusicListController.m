@@ -55,7 +55,6 @@
         deleteDao.failMethod = @selector(deleteFailCallback:);
 
         selectedMusicList = [[NSMutableArray alloc] init];
-        musicDict = [[NSMutableDictionary alloc] init];
         //musicDictKeys = [[NSMutableArray alloc] init];
         self.musicDictKeys = @[@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"R", @"S", @"T", @"U", @"V", @"Y", @"Z", @"#"];
         
@@ -80,7 +79,9 @@
 
 - (void) triggerRefresh {
     listOffset = 0;
-    [musicDict removeAllObjects];
+    if(musicDict) {
+        [musicDict removeAllObjects];
+    }
     [elasticSearchDao requestMusicForPage:listOffset andSize:21 andSortType:APPDELEGATE.session.sortType];
 }
 
@@ -91,6 +92,10 @@
         [refreshControl endRefreshing];
     }
     isLoading = NO;
+
+    if(!musicDict) {
+        musicDict = [[NSMutableDictionary alloc] init];
+    }
 
     for(MetaFile *file in files) {
         NSString *sortVal = file.name;
@@ -125,6 +130,9 @@
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if(musicDict == nil)
+        return 0;
+    
     if([[musicDict allKeys] count] == 0 && section == 0)
         return 1;
     

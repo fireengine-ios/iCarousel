@@ -52,7 +52,7 @@
                     if(asset) {
                         NSString *localHash = [asset.defaultRepresentation MD5];
                         if(![localHashList containsObject:localHash]) {
-                            [self startUploadForAsset:asset andRemoteHash:nil andLocalHash:localHash];
+//TODO aç                            [self startUploadForAsset:asset andRemoteHash:nil andLocalHash:localHash];
                             [SyncUtil updateLastSyncDate];
                         }
                     }
@@ -176,22 +176,25 @@
         }
         NSArray *localHashList = [SyncUtil readSyncHashLocally];
         
-        [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-            //TODO Test sil
-            if(group) {
-                [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
-                    if(asset) {
-                        NSString *localHash = [asset.defaultRepresentation MD5];
-                        if(![localHashList containsObject:localHash] && [APPDELEGATE.uploadQueue uploadRefForAsset:[asset.defaultRepresentation.url absoluteString]] == nil) {
-                            [self startUploadForAsset:asset andRemoteHash:nil andLocalHash:localHash];
-                            [SyncUtil updateLastSyncDate];
-                            [SyncUtil increaseBadgeCount];
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+            [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+                //TODO Test sil
+                if(group) {
+                    [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
+                        if(asset) {
+                            NSString *localHash = [asset.defaultRepresentation MD5];
+                            if(![localHashList containsObject:localHash] && [APPDELEGATE.uploadQueue uploadRefForAsset:[asset.defaultRepresentation.url absoluteString]] == nil) {
+//TODO aç                                [self startUploadForAsset:asset andRemoteHash:nil andLocalHash:localHash];
+                                [SyncUtil updateLastSyncDate];
+//                                [SyncUtil increaseBadgeCount];
+                            }
                         }
-                    }
-                }];
-            }
-        } failureBlock:^(NSError *error) {
-        }];
+                    }];
+                }
+            } failureBlock:^(NSError *error) {
+            }];
+        });
+        
     }
 }
 
