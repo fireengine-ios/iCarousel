@@ -39,23 +39,30 @@
     //TODO şimdilik sıfırdan silip yüklemelerde eski dosyalar için kontrol yok çünkü datayı hash'lemek gerekiyor ve bu uzun sürüyor.
 //    [elasticSearchDao requestPhotosForPage:0 andSize:10000 andSortType:SortTypeAlphaAsc];
     
+    NSTimeInterval timeInMiliseconds1 = [[NSDate date] timeIntervalSince1970];
+    NSLog(@"startFirstTimeSync Start: %f", timeInMiliseconds1);
+
     NSArray *localHashList = [SyncUtil readSyncHashLocally];
     
-    [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-        //TODO Test sil
-        if(group && [[group valueForProperty:ALAssetsGroupPropertyName] isEqualToString:@"Test"]) {
-            [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
-                if(asset) {
-                    NSString *localHash = [asset.defaultRepresentation MD5];
-                    if(![localHashList containsObject:localHash]) {
-                        [self startUploadForAsset:asset andRemoteHash:nil andLocalHash:localHash];
-                        [SyncUtil updateLastSyncDate];
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+            //TODO Test sil
+            if(group) {
+                [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
+                    if(asset) {
+                        NSString *localHash = [asset.defaultRepresentation MD5];
+                        if(![localHashList containsObject:localHash]) {
+                            [self startUploadForAsset:asset andRemoteHash:nil andLocalHash:localHash];
+                            [SyncUtil updateLastSyncDate];
+                        }
                     }
-                }
-            }];
-        }
-    } failureBlock:^(NSError *error) {
-    }];
+                }];
+            } else {
+                [self firstTimeSyncStartFinalized];
+            }
+        } failureBlock:^(NSError *error) {
+        }];
+    });
 }
 
 - (void) startAutoSync {
@@ -100,7 +107,7 @@
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
             //TODO Test sil
-            if(group && [[group valueForProperty:ALAssetsGroupPropertyName] isEqualToString:@"Test"]) {
+            if(group) {
                 [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
                     if(asset) {
                         NSString *localHash = [asset.defaultRepresentation MD5];
@@ -171,7 +178,7 @@
         
         [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
             //TODO Test sil
-            if(group && [[group valueForProperty:ALAssetsGroupPropertyName] isEqualToString:@"Test"]) {
+            if(group) {
                 [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
                     if(asset) {
                         NSString *localHash = [asset.defaultRepresentation MD5];
