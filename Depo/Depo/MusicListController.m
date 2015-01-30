@@ -125,6 +125,9 @@
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if([[musicDict allKeys] count] == 0 && section == 0)
+        return 1;
+    
     NSString *sectionKey = [musicDictKeys objectAtIndex:section];
     NSMutableArray *sectionArray = [musicDict objectForKey:sectionKey];
     if(sectionArray == nil) {
@@ -162,11 +165,15 @@
     NSString *cellIdentifier = [NSString stringWithFormat:@"MUSIC_CELL_%d_%d_%d", (int)indexPath.row, (int)indexPath.section, self.tableUpdateCounter];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if(!cell) {
-        NSString *sectionKey = [musicDictKeys objectAtIndex:indexPath.section];
-        NSMutableArray *sectionArray = [musicDict objectForKey:sectionKey];
-        MetaFile *fileAtIndex = [sectionArray objectAtIndex:indexPath.row];
-        cell = [[SimpleMusicCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex isSelectible:isSelectible];
-        ((AbstractFileFolderCell *) cell).delegate = self;
+        if([[musicDict allKeys] count] == 0) {
+            cell = [[FolderEmptyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFolderTitle:@"" withDescMessage:@"MusicEmptySubMessage"];
+        } else {
+            NSString *sectionKey = [musicDictKeys objectAtIndex:indexPath.section];
+            NSMutableArray *sectionArray = [musicDict objectForKey:sectionKey];
+            MetaFile *fileAtIndex = [sectionArray objectAtIndex:indexPath.row];
+            cell = [[SimpleMusicCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex isSelectible:isSelectible];
+            ((AbstractFileFolderCell *) cell).delegate = self;
+        }
     }
     return cell;
 }
@@ -178,6 +185,10 @@
             AbstractFileFolderCell *fileFolderCell = (AbstractFileFolderCell *) cell;
             [fileFolderCell triggerFileSelectDeselect];
         }
+        return;
+    }
+
+    if([cell isKindOfClass:[FolderEmptyCell class]]) {
         return;
     }
     

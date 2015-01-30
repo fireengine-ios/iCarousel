@@ -46,7 +46,8 @@
 @property (nonatomic, strong) PhotoHeaderSegmentView *headerView;
 @property (nonatomic, strong) UIScrollView *photosScroll;
 @property (nonatomic, strong) NSMutableArray *photoList;
-@property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property (nonatomic, strong) UIRefreshControl *refreshControlPhotos;
+@property (nonatomic, strong) UIRefreshControl *refreshControlAlbums;
 
 @property (nonatomic, strong) NSMutableArray *albumList;
 @property (nonatomic, strong) UITableView *albumTable;

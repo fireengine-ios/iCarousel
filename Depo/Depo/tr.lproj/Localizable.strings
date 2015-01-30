@@ -54,6 +54,7 @@
 "FolderEmptyMessage"="%@ boş";
 "FolderEmptySubMessage"="\"+\" butonuna dokunarak dosyalarınızı yüklemeye başlayabilirsiniz.";
 "DocEmptySubMessage"="Görüntülenecek döküman bulunamadı.";
+"MusicEmptySubMessage"="Görüntülenecek şarkı bulunamadı.";
 "FolderAddTitle"="KLASÖR İSMİ";
 "FolderNamePlaceholder"="Örnek Klasör İsmi";
 "FileNamePlaceholder"="Dosya İsmi";

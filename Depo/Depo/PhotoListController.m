@@ -27,7 +27,8 @@
 @synthesize headerView;
 @synthesize photosScroll;
 @synthesize photoList;
-@synthesize refreshControl;
+@synthesize refreshControlPhotos;
+@synthesize refreshControlAlbums;
 @synthesize albumList;
 @synthesize albumTable;
 @synthesize selectedFileList;
@@ -86,9 +87,9 @@
         
         [self addOngoingPhotos];
 
-        refreshControl = [[UIRefreshControl alloc] init];
-        [refreshControl addTarget:self action:@selector(triggerRefresh) forControlEvents:UIControlEventValueChanged];
-        [photosScroll addSubview:refreshControl];
+        refreshControlPhotos = [[UIRefreshControl alloc] init];
+        [refreshControlPhotos addTarget:self action:@selector(triggerRefresh) forControlEvents:UIControlEventValueChanged];
+        [photosScroll addSubview:refreshControlPhotos];
         
         albumTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topIndex + 50, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex - 50) style:UITableViewStylePlain];
         albumTable.backgroundColor = [UIColor clearColor];
@@ -100,6 +101,10 @@
         albumTable.tag = 222;
         albumTable.hidden = YES;
         [self.view addSubview:albumTable];
+
+        refreshControlAlbums = [[UIRefreshControl alloc] init];
+        [refreshControlAlbums addTarget:self action:@selector(triggerRefresh) forControlEvents:UIControlEventValueChanged];
+        [albumTable addSubview:refreshControlAlbums];
 
         headerView = [[PhotoHeaderSegmentView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, 60)];
         headerView.delegate = self;
@@ -186,8 +191,11 @@
     }
     photosScroll.contentSize = CGSizeMake(photosScroll.frame.size.width, ((int)ceil(counter/3)+1)*105 + 20);
     [photoList addObjectsFromArray:files];
-    if(refreshControl) {
-        [refreshControl endRefreshing];
+    if(refreshControlPhotos) {
+        [refreshControlPhotos endRefreshing];
+    }
+    if(refreshControlAlbums) {
+        [refreshControlAlbums endRefreshing];
     }
     isLoading = NO;
 }
