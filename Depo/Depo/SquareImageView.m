@@ -57,9 +57,17 @@
         self.uploadRef = ref;
         
         imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-        imgView.image = [UIImage imageWithData:[NSData dataWithContentsOfFile:self.uploadRef.tempUrl]];
         imgView.alpha = 0.5f;
         [self addSubview:imgView];
+
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul), ^(void) {
+            @autoreleasepool {
+                UIImage *image = [[UIImage alloc] initWithContentsOfFile:self.uploadRef.tempThumbnailUrl];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    imgView.image = image;
+                });
+            }
+        });
 
         for(UploadManager *manager in APPDELEGATE.uploadQueue.uploadManagers) {
             if(!manager.uploadRef.hasFinished && [manager.uploadRef.fileUuid isEqualToString:self.uploadRef.fileUuid]) {
@@ -86,11 +94,18 @@
 - (void) managerNotifyReceived:(NSNotification *) notification {
     NSDictionary *userInfo = notification.userInfo;
     NSString *fileUuid = [userInfo objectForKey:TEMP_IMG_UPLOAD_NOTIFICATION_UUID_PARAM];
-    NSString *tempUrl = [userInfo objectForKey:TEMP_IMG_UPLOAD_NOTIFICATION_URL_PARAM];
+    NSString *tempThumbnailPath = [userInfo objectForKey:TEMP_IMG_UPLOAD_NOTIFICATION_URL_PARAM];
     if(fileUuid && self.uploadRef) {
         if([self.uploadRef.fileUuid isEqualToString:fileUuid]) {
-            self.uploadRef.tempUrl = tempUrl;
-            imgView.image = [UIImage imageWithData:[NSData dataWithContentsOfFile:self.uploadRef.tempUrl]];
+            self.uploadRef.tempThumbnailUrl = tempThumbnailPath;
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul), ^(void) {
+                @autoreleasepool {
+                    UIImage *image = [[UIImage alloc] initWithContentsOfFile:self.uploadRef.tempThumbnailUrl];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        imgView.image = image;
+                    });
+                }
+            });
         }
     }
 }

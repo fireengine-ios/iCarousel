@@ -13,16 +13,25 @@
 @implementation UploadingImageCell
 
 @synthesize uploadRef;
+@synthesize imgView;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier  withUploadRef:(UploadRef *) ref atFolder:(NSString *) folderName {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.uploadRef = ref;
         
-        self.imgView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 16, 35, 35)];
-        self.imgView.image = [UIImage imageWithData:[NSData dataWithContentsOfFile:self.uploadRef.tempUrl]];
-        self.imgView.alpha = 0.5f;
-        [self addSubview:self.imgView];
+        imgView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 16, 35, 35)];
+        imgView.alpha = 0.5f;
+        [self addSubview:imgView];
+
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul), ^(void) {
+            @autoreleasepool {
+                UIImage *image = [[UIImage alloc] initWithContentsOfFile:self.uploadRef.tempThumbnailUrl];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    imgView.image = image;
+                });
+            }
+        });
 
         CGRect nameFieldRect = CGRectMake(70, 13, self.frame.size.width - 80, 22);
         CGRect detailFieldRect = CGRectMake(70, 35, self.frame.size.width - 80, 20);

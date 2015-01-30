@@ -115,13 +115,6 @@
 - (void) uploadManager:(UploadManager *)manRef didFinishUploadingWithSuccess:(BOOL)success {
     [activeTaskIds removeObject:[manRef uniqueUrl]];
     
-    if(success && manRef.uploadRef.localHash != nil) {
-        [SyncUtil cacheSyncHashLocally:manRef.uploadRef.localHash];
-    }
-    if(success && manRef.uploadRef.remoteHash != nil) {
-        [SyncUtil cacheSyncHashRemotely:manRef.uploadRef.remoteHash];
-    }
-    
     if([activeTaskIds count] < MAX_CONCURRENT_UPLOAD_TASKS) {
         UploadManager *nextManager = [self findNextTask];
         if(nextManager != nil) {
@@ -169,9 +162,19 @@
     
     UploadManager *currentManager = [self findByTaskId:task.taskIdentifier];
     if(currentManager != nil) {
+
         NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) task.response;
         NSLog(@"STATUS CODE: %d", (int)httpResp.statusCode);
         if (!error && httpResp.statusCode == 201) {
+
+            //TODO burası doğru yer mi kontrol et, didFinishUploadingWithSuccess içine de konabilir
+            if(currentManager.uploadRef.localHash != nil) {
+                [SyncUtil cacheSyncHashLocally:currentManager.uploadRef.localHash];
+            }
+            if(currentManager.uploadRef.remoteHash != nil) {
+                [SyncUtil cacheSyncHashRemotely:currentManager.uploadRef.remoteHash];
+            }
+            
             [currentManager removeTemporaryFile];
             [currentManager notifyUpload];
         } else {

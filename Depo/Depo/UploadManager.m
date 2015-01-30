@@ -92,7 +92,10 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     
     NSString *randomVal = [NSString stringWithFormat:@"%.0f%d", [[NSDate date] timeIntervalSince1970], arc4random_uniform(99)];
     NSString *tempPath = [documentsDirectory stringByAppendingFormat:@"/%@_%@", randomVal, self.asset.defaultRepresentation.filename];
+    NSString *tempThumbnailPath = [documentsDirectory stringByAppendingFormat:@"/thumb_%@_%@", randomVal, self.asset.defaultRepresentation.filename];
+
     self.uploadRef.tempUrl = tempPath;
+    self.uploadRef.tempThumbnailUrl = tempThumbnailPath;
     
     if ([[self.asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
         ALAssetRepresentation *rep = [self.asset defaultRepresentation];
@@ -100,6 +103,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:rep.size error:nil];
         NSData *videoData = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
         [videoData writeToFile:tempPath atomically:YES];
+        free(buffer);
     } else {
         UIImageOrientation orientation = UIImageOrientationUp;
         NSNumber* orientationValue = [self.asset valueForProperty:@"ALAssetPropertyOrientation"];
@@ -107,11 +111,18 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             orientation = [orientationValue intValue];
         }
         
-        UIImage *image = [UIImage imageWithCGImage:[self.asset.defaultRepresentation fullResolutionImage] scale:1.0 orientation:orientationValue];
-        [UIImagePNGRepresentation(image) writeToFile:tempPath atomically:YES];
+        @autoreleasepool {
+            UIImage *image = [UIImage imageWithCGImage:[self.asset.defaultRepresentation fullResolutionImage] scale:1.0 orientation:orientationValue];
+            [UIImagePNGRepresentation(image) writeToFile:tempPath atomically:YES];
+        }
+
+        @autoreleasepool {
+            UIImage *image = [UIImage imageWithCGImage:self.asset.thumbnail];
+            [UIImagePNGRepresentation(image) writeToFile:tempThumbnailPath atomically:YES];
+        }
     }
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:TEMP_IMG_UPLOAD_NOTIFICATION object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:self.uploadRef.fileUuid, TEMP_IMG_UPLOAD_NOTIFICATION_UUID_PARAM, tempPath, TEMP_IMG_UPLOAD_NOTIFICATION_URL_PARAM, nil]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:TEMP_IMG_UPLOAD_NOTIFICATION object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:self.uploadRef.fileUuid, TEMP_IMG_UPLOAD_NOTIFICATION_UUID_PARAM, tempThumbnailPath, TEMP_IMG_UPLOAD_NOTIFICATION_URL_PARAM, nil]];
     
     self.uploadRef.fileName = self.asset.defaultRepresentation.filename;
     self.uploadRef.urlForUpload = [NSString stringWithFormat:@"%@/%@", APPDELEGATE.session.baseUrl, self.uploadRef.fileUuid];
@@ -125,6 +136,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 - (void) removeTemporaryFile {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     [fileManager removeItemAtPath:self.uploadRef.tempUrl error:nil];
+    [fileManager removeItemAtPath:self.uploadRef.tempThumbnailUrl error:nil];
     [delegate uploadManagerDidFailUploadingForAsset:self.uploadRef.assetUrl];
 }
 

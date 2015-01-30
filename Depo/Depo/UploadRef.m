@@ -18,6 +18,7 @@
 @synthesize folderUuid;
 @synthesize fileUuid;
 @synthesize tempUrl;
+@synthesize tempThumbnailUrl;
 @synthesize assetUrl;
 @synthesize urlForUpload;
 @synthesize albumUuid;
