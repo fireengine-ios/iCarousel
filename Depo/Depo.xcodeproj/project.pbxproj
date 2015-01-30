@@ -266,7 +266,6 @@
 		052D415819EC1A25001B4088 /* empty_album_header_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 052D415619EC1A25001B4088 /* empty_album_header_bg.png */; };
 		052D415919EC1A25001B4088 /* empty_album_header_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 052D415719EC1A25001B4088 /* empty_album_header_bg@2x.png */; };
 		05368B471A4AD29C00B79403 /* SyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 05368B461A4AD29C00B79403 /* SyncManager.m */; };
-		053B8E8B1A7AE7DE004E6456 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 053B8E8A1A7AE7DE004E6456 /* Metal.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		053D0ED119DAC2BC006A13E0 /* GeneralTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 053D0ED019DAC2BC006A13E0 /* GeneralTextField.m */; };
 		053D0ED419DAC83B006A13E0 /* general_textfield_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 053D0ED219DAC83B006A13E0 /* general_textfield_bg.png */; };
 		053D0ED519DAC83B006A13E0 /* general_textfield_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 053D0ED319DAC83B006A13E0 /* general_textfield_bg@2x.png */; };
@@ -1385,7 +1384,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				053B8E8B1A7AE7DE004E6456 /* Metal.framework in Frameworks */,
 				05C2A0491A7989CD00EE4D78 /* CoreTelephony.framework in Frameworks */,
 				05C2A0471A7989AD00EE4D78 /* SplunkMint-iOS.framework in Frameworks */,
 				05C2A0441A79882100EE4D78 /* libGoogleConversionTracking.a in Frameworks */,
@@ -3242,6 +3240,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Mahir Kemal Tarlan (R2478SCTN5)";
+				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo",
@@ -3259,7 +3258,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f3d07236-b9ab-4c3e-8cd7-a40a0591e27e";
+				PROVISIONING_PROFILE = "dbf62cd4-df32-49b5-9a9c-922c6462d09a";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -3269,7 +3268,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Mahir Kemal Tarlan (R2478SCTN5)";
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo",
@@ -3287,7 +3287,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f3d07236-b9ab-4c3e-8cd7-a40a0591e27e";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -3370,6 +3370,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo",
@@ -3448,6 +3449,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo",
