@@ -28,11 +28,19 @@
 
 #define REMEMBER_ME_URL BASE_URL@"/auth/rememberMe"
 
+#define LOGOUT_URL BASE_URL@"/auth/logout"
+
 #define USER_BASE_URL BASE_URL@"/container/baseUrl"
 
 #define USAGE_INFO_URL BASE_URL@"/account/usageInfo"
 
 #define ACCOUNT_INFO_URL BASE_URL@"/account/info"
+
+#define PROVISION_URL BASE_URL@"/account/provision"
+
+#define MIGRATION_URL BASE_URL@"/account/migrate"
+
+#define MIGRATION_STATUS_URL BASE_URL@"/account/migrationStatus"
 
 #define RECENT_ACTIVITIES_URL BASE_URL@"/filesystem/activityFeed?&sortBy=%@&sortOrder=%@&page=%d&size=%d"
 

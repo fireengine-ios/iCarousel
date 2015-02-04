@@ -59,6 +59,11 @@
 }
 
 - (void) continueClicked {
+    if(onOff.isOn) {
+        [CacheUtil writeCachedSettingSyncContacts:EnableOptionAuto];
+    } else {
+        [CacheUtil writeCachedSettingSyncContacts:EnableOptionOff];
+    }
     PostLoginSyncPrefController *syncPref = [[PostLoginSyncPrefController alloc] init];
     [self.navigationController pushViewController:syncPref animated:YES];
 }

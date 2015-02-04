@@ -16,6 +16,7 @@
 }
 
 @property (nonatomic, strong) UploadRef *uploadRef;
+@property (nonatomic, strong) MetaFile *postFile;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier  withUploadRef:(UploadRef *) ref atFolder:(NSString *) folderName;
 

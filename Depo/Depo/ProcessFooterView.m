@@ -12,9 +12,11 @@
 
 @implementation ProcessFooterView
 
+@synthesize delegate;
 @synthesize processMsg;
 @synthesize successMsg;
 @synthesize failMsg;
+@synthesize postButtonKey;
 
 - (id)initWithFrame:(CGRect)frame withProcessMessage:(NSString *) _processMsg withFinalMessage:(NSString *) _successMsg withFailMessage:(NSString *) _failMsg {
     self = [super initWithFrame:frame];
@@ -42,6 +44,9 @@
         
         messageLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(60, (self.frame.size.height - 20)/2, self.frame.size.width - 70, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:17] withColor:[UIColor whiteColor] withText:@""];
         [self addSubview:messageLabel];
+        
+        UITapGestureRecognizer * singleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(messageClicked)];
+        [self addGestureRecognizer:singleTapGesture];
     }
     return self;
 }
@@ -58,23 +63,42 @@
      */
 }
 
+- (void) messageClicked {
+    if(processConcluded) {
+        [delegate processFooterShouldDismissWithButtonKey:self.postButtonKey];
+        [self removeFromSuperview];
+    }
+}
+
 - (void) showMessageForSuccess {
+    [self showMessageForSuccessWithPostButtonKey:nil];
+}
+
+- (void) showMessageForSuccessWithPostButtonKey:(NSString *) buttonKey {
+    self.postButtonKey = buttonKey;
+    processConcluded = YES;
     messageLabel.text = self.successMsg;
 //    isAnimating = NO;
 //    indicator.hidden = YES;
     [defaultIndicator stopAnimating];
     defaultIndicator.hidden = YES;
     successImgView.hidden = NO;
-    [self performSelector:@selector(dismissAfterDelay) withObject:nil afterDelay:1.2f];
+//    [self performSelector:@selector(dismissAfterDelay) withObject:nil afterDelay:1.2f];
 }
 
 - (void) showMessageForFailure {
+    [self showMessageForFailureWithPostButtonKey:nil];
+}
+
+- (void) showMessageForFailureWithPostButtonKey:(NSString *) buttonKey {
+    self.postButtonKey = buttonKey;
+    processConcluded = YES;
     messageLabel.text = self.failMsg;
 //    isAnimating = NO;
 //    indicator.hidden = YES;
     [defaultIndicator stopAnimating];
     defaultIndicator.hidden = YES;
-    [self performSelector:@selector(dismissAfterDelay) withObject:nil afterDelay:1.2f];
+//    [self performSelector:@selector(dismissAfterDelay) withObject:nil afterDelay:1.2f];
 }
 
 - (void) dismissAfterDelay {

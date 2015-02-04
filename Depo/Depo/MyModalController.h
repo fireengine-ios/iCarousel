@@ -12,7 +12,7 @@
 #import "MyNavigationController.h"
 #import "MBProgressHUD.h"
 
-@interface MyModalController : UIViewController
+@interface MyModalController : UIViewController <ProcessFooterDelegate>
 
 @property (nonatomic) int topIndex;
 @property (nonatomic) int bottomIndex;

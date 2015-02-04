@@ -28,6 +28,7 @@
 @property (nonatomic) BOOL isReady;
 @property (nonatomic) UploadTaskType taskType;
 @property (nonatomic, strong) MetaFile *folder;
+@property (nonatomic, strong) MetaFile *finalFile;
 @property (nonatomic, strong) NSDate *initializationDate;
 @property (nonatomic, strong) NSString *localHash;
 @property (nonatomic, strong) NSString *remoteHash;

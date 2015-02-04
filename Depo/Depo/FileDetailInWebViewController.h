@@ -13,6 +13,10 @@
 #import "FavoriteDao.h"
 #import "RenameDao.h"
 
+@protocol FileDetailInWebViewDelegate <NSObject>
+- (void) previewedFileWasDeleted:(MetaFile *) fileDeleted;
+@end
+
 @interface FileDetailInWebViewController : MyViewController <UIWebViewDelegate> {
     CustomButton *moreButton;
     
@@ -21,6 +25,7 @@
     RenameDao *renameDao;
 }
 
+@property (nonatomic, strong) id<FileDetailInWebViewDelegate> delegate;
 @property (nonatomic, strong) MetaFile *file;
 @property (nonatomic, strong) UIWebView *webView;
 

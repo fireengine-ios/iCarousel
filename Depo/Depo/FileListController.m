@@ -13,17 +13,13 @@
 #import "DocCell.h"
 #import "CustomButton.h"
 #import "FolderEmptyCell.h"
-#import "FileDetailInWebViewController.h"
 #import "AppUtil.h"
-#import "ImagePreviewController.h"
 #import "PreviewUnavailableController.h"
 #import "UploadRef.h"
 #import "UploadingImageCell.h"
 #import "AppDelegate.h"
 #import "AppSession.h"
-#import "VideoPreviewController.h"
 #import "BaseViewController.h"
-#import "MusicPreviewController.h"
 
 @interface FileListController ()
 
@@ -31,12 +27,14 @@
 
 @implementation FileListController
 
+@synthesize delegate;
 @synthesize folder;
 @synthesize fileTable;
 @synthesize refreshControl;
 @synthesize fileList;
 @synthesize selectedFileList;
 @synthesize footerActionMenu;
+@synthesize folderModificationFlag;
 
 - (id)initForFolder:(MetaFile *) _folder {
     self = [super init];
@@ -110,14 +108,8 @@
         [refreshControl addTarget:self action:@selector(triggerRefresh) forControlEvents:UIControlEventValueChanged];
         [fileTable addSubview:refreshControl];
 
-        /* viewDidAppear'e alindi
-        if(self.folder) {
-            [fileListDao requestFileListingForFolder:self.folder.uuid andForPage:listOffset andSize:NO_OF_FILES_PER_PAGE sortBy:APPDELEGATE.session.sortType];
-        } else {
-            [fileListDao requestFileListingForParentForPage:listOffset andSize:NO_OF_FILES_PER_PAGE sortBy:APPDELEGATE.session.sortType];
-        }
+        [self triggerRefresh];
         [self showLoading];
-         */
     }
     return self;
 }
@@ -125,10 +117,12 @@
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 
+    /*
     if(!isSelectible) {
         [self triggerRefresh];
         [self showLoading];
     }
+     */
 }
 
 - (void) triggerRefresh {
@@ -188,7 +182,7 @@
 
 - (void) addFolderSuccessCallback {
     [self proceedSuccessForProgressView];
-    [self performSelector:@selector(popProgressView) withObject:nil afterDelay:1.0f];
+//    [self performSelector:@selector(popProgressView) withObject:nil afterDelay:1.0f];
 
     listOffset = 0;
     if(self.folder) {
@@ -200,7 +194,7 @@
 
 - (void) addFolderFailCallback:(NSString *) errorMessage {
     [self proceedFailureForProgressView];
-    [self performSelector:@selector(popProgressView) withObject:nil afterDelay:1.0f];
+//    [self performSelector:@selector(popProgressView) withObject:nil afterDelay:1.0f];
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -271,6 +265,10 @@
     }
     
     if([cell isKindOfClass:[UploadingImageCell class]]) {
+        UploadingImageCell *uploadingCell = (UploadingImageCell *) cell;
+        if(uploadingCell.postFile != nil) {
+            [self navigateToFileDetail:uploadingCell.postFile];
+        }
         return;
     }
     if([cell isKindOfClass:[FolderEmptyCell class]]) {
@@ -284,38 +282,44 @@
     }
 
     MetaFile *fileAtIndex = [fileList objectAtIndex:indexPath.row];
-    
-    
-    if(fileAtIndex.contentType == ContentTypeFolder) {
-        FileListController *innerList = [[FileListController alloc] initForFolder:fileAtIndex];
+    [self navigateToFileDetail:fileAtIndex];
+}
+
+- (void) navigateToFileDetail:(MetaFile *) fileSelected {
+    if(fileSelected.contentType == ContentTypeFolder) {
+        FileListController *innerList = [[FileListController alloc] initForFolder:fileSelected];
+        innerList.delegate = self;
         innerList.nav = self.nav;
         [self.nav pushViewController:innerList animated:NO];
     } else {
-        if([AppUtil isMetaFileImage:fileAtIndex]) {
-            ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFile:fileAtIndex];
+        if([AppUtil isMetaFileImage:fileSelected]) {
+            ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFile:fileSelected];
+            detail.delegate = self;
             MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
             detail.nav = modalNav;
             [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
-        } else if([AppUtil isMetaFileDoc:fileAtIndex]){
-            FileDetailInWebViewController *detail = [[FileDetailInWebViewController alloc] initWithFile:fileAtIndex];
+        } else if([AppUtil isMetaFileDoc:fileSelected]){
+            FileDetailInWebViewController *detail = [[FileDetailInWebViewController alloc] initWithFile:fileSelected];
+            detail.delegate = self;
             detail.nav = self.nav;
             [self.nav pushViewController:detail animated:NO];
-        } else if([AppUtil isMetaFileVideo:fileAtIndex]) {
-            VideoPreviewController *detail = [[VideoPreviewController alloc] initWithFile:fileAtIndex];
+        } else if([AppUtil isMetaFileVideo:fileSelected]) {
+            VideoPreviewController *detail = [[VideoPreviewController alloc] initWithFile:fileSelected];
+            detail.delegate = self;
             MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
             detail.nav = modalNav;
             [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
-        } else if([AppUtil isMetaFileMusic:fileAtIndex]) {
-            MusicPreviewController *detail = [[MusicPreviewController alloc] initWithFile:fileAtIndex.uuid withFileList:@[fileAtIndex]];
+        } else if([AppUtil isMetaFileMusic:fileSelected]) {
+            MusicPreviewController *detail = [[MusicPreviewController alloc] initWithFile:fileSelected.uuid withFileList:@[fileSelected]];
+            detail.delegate = self;
             detail.nav = self.nav;
             [self.nav pushViewController:detail animated:NO];
         } else {
-            PreviewUnavailableController *detail = [[PreviewUnavailableController alloc] initWithFile:fileAtIndex];
+            PreviewUnavailableController *detail = [[PreviewUnavailableController alloc] initWithFile:fileSelected];
             detail.nav = self.nav;
             [self.nav pushViewController:detail animated:NO];
         }
     }
-    
 }
 
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -428,6 +432,8 @@
 
     [self proceedSuccessForProgressView];
     [self triggerRefresh];
+
+    self.folderModificationFlag = YES;
 }
 
 - (void) deleteFailCallback:(NSString *) errorMessage {
@@ -438,6 +444,9 @@
 
 - (void) folderDeleteSuccessCallback {
     [self proceedSuccessForProgressView];
+    if(folderModificationFlag) {
+        [delegate folderWasModified];
+    }
     [self.nav performSelector:@selector(popViewControllerAnimated:) withObject:NO afterDelay:1.0f];
 }
 
@@ -466,6 +475,8 @@
     
     [self proceedSuccessForProgressView];
     [self triggerRefresh];
+
+    self.folderModificationFlag = YES;
 }
 
 - (void) moveFailCallback:(NSString *) errorMessage {
@@ -479,6 +490,8 @@
     self.folder.visibleName = updatedFileRef.name;
     self.folder.lastModified = updatedFileRef.lastModified;
     self.title = self.folder.visibleName;
+
+    self.folderModificationFlag = YES;
 }
 
 - (void) renameFailCallback:(NSString *) errorMessage {
@@ -491,6 +504,8 @@
 //    [self hideLoading];
     [self proceedSuccessForProgressView];
     [self triggerRefresh];
+
+    self.folderModificationFlag = YES;
 }
 
 - (void) favFailCallback:(NSString *) errorMessage {
@@ -541,6 +556,8 @@
     fileList = [@[uploadRef] arrayByAddingObjectsFromArray:fileList];
     self.tableUpdateCounter++;
     [self.fileTable reloadData];
+
+    self.folderModificationFlag = YES;
 }
 
 - (NSString *) appendNewFileName:(NSString *) newFileName {
@@ -566,6 +583,8 @@
         fileList = [assetUrls arrayByAddingObjectsFromArray:fileList];
         self.tableUpdateCounter++;
         [self.fileTable reloadData];
+
+        self.folderModificationFlag = YES;
     }
 }
 
@@ -760,6 +779,37 @@
         [deleteDao requestDeleteFiles:@[fileSelectedRef.uuid]];
     }
     [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+}
+
+#pragma mark FileListDelegate
+
+- (void) folderWasModified {
+    [self triggerRefresh];
+    [self showLoading];
+}
+
+#pragma mark ImagePreviewDelegate methods
+- (void) previewedImageWasDeleted:(MetaFile *)deletedFile {
+    [self triggerRefresh];
+    [self showLoading];
+}
+
+#pragma mark VideoPreviewDelegate methods
+- (void) previewedVideoWasDeleted:(MetaFile *)deletedFile {
+    [self triggerRefresh];
+    [self showLoading];
+}
+
+#pragma mark MusicPreviewDelegate methods
+- (void) previewedMusicWasDeleted {
+    [self triggerRefresh];
+    [self showLoading];
+}
+
+#pragma mark FileDetailInWebViewDelegate methods
+- (void) previewedFileWasDeleted:(MetaFile *)fileDeleted {
+    [self triggerRefresh];
+    [self showLoading];
 }
 
 @end

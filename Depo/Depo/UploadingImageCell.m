@@ -14,11 +14,13 @@
 
 @synthesize uploadRef;
 @synthesize imgView;
+@synthesize postFile;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier  withUploadRef:(UploadRef *) ref atFolder:(NSString *) folderName {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.uploadRef = ref;
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         
         imgView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 16, 35, 35)];
         imgView.alpha = 0.5f;
@@ -73,12 +75,25 @@
     detailLabel.text = NSLocalizedString(@"UploadFailedPlaceholder", @"");
 }
 
+- (void) uploadManagerQuotaExceedForAsset:(NSString *) assetToUpload {
+    [self updateProgressByWidth:[NSNumber numberWithLong:self.frame.size.width]];
+    progressSeparator.backgroundColor = [Util UIColorForHexColor:@"ad3110"];
+    detailLabel.text = NSLocalizedString(@"QuotaExceedMessageShort", @"");
+}
+
+- (void) uploadManagerLoginRequiredForAsset:(NSString *) assetToUpload {
+    [self updateProgressByWidth:[NSNumber numberWithLong:self.frame.size.width]];
+    progressSeparator.backgroundColor = [Util UIColorForHexColor:@"ad3110"];
+    detailLabel.text = NSLocalizedString(@"LoginRequiredMessage", @"");
+}
+
 - (void) uploadManagerDidFailUploadingAsData {
     progressSeparator.backgroundColor = [Util UIColorForHexColor:@"ad3110"];
     detailLabel.text = NSLocalizedString(@"UploadFailedPlaceholder", @"");
 }
 
-- (void) uploadManagerDidFinishUploadingForAsset:(NSString *)assetToUpload {
+- (void) uploadManagerDidFinishUploadingForAsset:(NSString *)assetToUpload withFinalFile:(MetaFile *) finalFile {
+    self.postFile = finalFile;
     self.imgView.alpha = 1.0f;
     [self updateProgressByWidth:[NSNumber numberWithInt:self.frame.size.width]];
     progressSeparator.backgroundColor = [Util UIColorForHexColor:@"67d74b"];

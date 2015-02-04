@@ -11,16 +11,22 @@
 @implementation MapUtil
 
 @synthesize floatingMappingDict;
+@synthesize curioMappingDict;
 
 - (id) init {
     if(self = [super init]) {
         self.floatingMappingDict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"FloatingMapping" ofType:@"plist"]];
+        self.curioMappingDict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"CurioMapping" ofType:@"plist"]];
     }
     return self;
 }
 
 - (NSArray *) readAddTypesByController:(NSString *) controllerName {
     return [floatingMappingDict objectForKey:controllerName];
+}
+
+- (NSString *) readCurioValueByController:(NSString *) controllerName {
+    return [curioMappingDict objectForKey:controllerName];
 }
 
 @end

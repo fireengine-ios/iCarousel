@@ -27,6 +27,9 @@
 @property (nonatomic, strong) AVPlayer *audioPlayer;
 @property (nonatomic) int currentAudioItemIndex;
 
+@property (nonatomic) BOOL newUserFlag;
+@property (nonatomic) BOOL migrationUserFlag;
+
 @property (nonatomic, strong) Usage *usage;
 
 - (void) playAudioItemAtIndex:(int) itemIndex;

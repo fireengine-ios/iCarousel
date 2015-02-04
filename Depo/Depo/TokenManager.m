@@ -37,6 +37,11 @@
         radiusDao.delegate = self;
         radiusDao.successMethod = @selector(tokenDaoSuccessCallback);
         radiusDao.failMethod = @selector(tokenDaoFailCallback:);
+        
+        logoutDao = [[LogoutDao alloc] init];
+//        logoutDao.delegate = self;
+//        logoutDao.successMethod = @selector(logoutSuccessCallback);
+//        logoutDao.failMethod = @selector(logoutFailCallback:);
     }
     return self;
 }
@@ -57,8 +62,18 @@
     [userInfoDao requestAccountInfo];
 }
 
+- (void) requestLogout {
+    [logoutDao requestLogout];
+}
+
 - (void) tokenDaoSuccessCallback {
-    [delegate tokenManagerDidReceiveToken];
+    if(APPDELEGATE.session.newUserFlag) {
+        [delegate tokenManagerProvisionNeeded];
+    } else if(APPDELEGATE.session.migrationUserFlag) {
+        [delegate tokenManagerMigrationInProgress];
+    } else {
+        [delegate tokenManagerDidReceiveToken];
+    }
 }
 
 - (void) tokenDaoFailCallback:(NSString *) errorMessage {

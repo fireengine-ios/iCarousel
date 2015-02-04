@@ -22,6 +22,8 @@
 @synthesize audioPlayer;
 @synthesize currentAudioItemIndex;
 @synthesize usage;
+@synthesize newUserFlag;
+@synthesize migrationUserFlag;
 
 - (id) init {
     if(self = [super init]) {

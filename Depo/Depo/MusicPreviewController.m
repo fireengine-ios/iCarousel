@@ -23,6 +23,7 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 
 @implementation MusicPreviewController
 
+@synthesize delegate;
 @synthesize fileUuid;
 @synthesize files;
 @synthesize prevButton;
@@ -106,6 +107,73 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
     return self;
 }
 
+- (id)initForContinuingPlaylist {
+    self = [super init];
+    if (self) {
+        self.view.backgroundColor = [UIColor blackColor];
+        
+        deleteDao = [[DeleteDao alloc] init];
+        deleteDao.delegate = self;
+        deleteDao.successMethod = @selector(deleteSuccessCallback);
+        deleteDao.failMethod = @selector(deleteFailCallback:);
+        
+        favDao = [[FavoriteDao alloc] init];
+        favDao.delegate = self;
+        favDao.successMethod = @selector(favSuccessCallback:);
+        favDao.failMethod = @selector(favFailCallback:);
+        
+        renameDao = [[RenameDao alloc] init];
+        renameDao.delegate = self;
+        renameDao.successMethod = @selector(renameSuccessCallback:);
+        renameDao.failMethod = @selector(renameFailCallback:);
+        
+        volumeLevels = [[NSMutableArray alloc] init];
+        
+        UIImage *albumImg = [UIImage imageNamed:@"no_music_icon.png"];
+        UIImageView *albumImgView = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - albumImg.size.width)/2, 60, albumImg.size.width, albumImg.size.height)];
+        albumImgView.image = albumImg;
+        [self.view addSubview:albumImgView];
+        
+        MetaFile *file = [APPDELEGATE.session itemRefForCurrentAsset];
+        NSString *nameVal = file.visibleName;
+        if(file.detail && file.detail.songTitle) {
+            nameVal = file.detail.songTitle;
+        }
+        
+        titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, albumImgView.frame.origin.y + albumImgView.frame.size.height + 50, self.view.frame.size.width, 22) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[UIColor whiteColor] withText:nameVal];
+        titleLabel.textAlignment = NSTextAlignmentCenter;
+        [self.view addSubview:titleLabel];
+        
+        NSString *detailVal = @"";
+        if(file.detail && file.detail.artist) {
+            detailVal = file.detail.artist;
+        }
+        if(file.detail && file.detail.album) {
+            detailVal = [NSString stringWithFormat:@"%@ • %@", detailVal, file.detail.album];
+        }
+        
+        detailLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, titleLabel.frame.origin.y + titleLabel.frame.size.height, self.view.frame.size.width, 22) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[Util UIColorForHexColor:@"888888"] withText:detailVal];
+        detailLabel.textAlignment = NSTextAlignmentCenter;
+        [self.view addSubview:detailLabel];
+        
+        yIndex = detailLabel.frame.origin.y + detailLabel.frame.size.height + (IS_IPHONE_5 ? 90 : 14);
+        
+        CustomButton *customBackButton = [[CustomButton alloc] initWithFrame:CGRectMake(10, 0, 20, 34) withImageName:@"white_left_arrow.png"];
+        [customBackButton addTarget:self action:@selector(triggerDismiss) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:customBackButton];
+        self.navigationItem.leftBarButtonItem = backButton;
+
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resumeNotified) name:MUSIC_RESUMED_NOTIFICATION object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pauseNotified) name:MUSIC_PAUSED_NOTIFICATION object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playingMusicChanged:) name:MUSIC_CHANGED_NOTIFICATION object:nil];
+        
+        [self initializeOngoingPlayer];
+    }
+    return self;
+}
+
 - (void) initializePlayer {
     [self initializeControls];
 
@@ -139,6 +207,24 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
     playButton.hidden = YES;
     pauseButton.hidden = NO;
 
+}
+
+- (void) initializeOngoingPlayer {
+    [self initializeControls];
+    
+    self.title = [NSString stringWithFormat:@"%d/%d", APPDELEGATE.session.currentAudioItemIndex + 1, (int)[APPDELEGATE.session.playerItems count]];
+    
+    __weak MusicPreviewController *weakSelf = self;
+    [APPDELEGATE.session.audioPlayer addPeriodicTimeObserverForInterval:CMTimeMakeWithSeconds(0.1f, NSEC_PER_SEC)  queue:NULL usingBlock:^(CMTime time) {
+        [weakSelf syncSlider];
+    }];
+    
+    float currentVolumeVal = [APPDELEGATE.session.audioPlayer volume];
+    [self initialVolumeLevel:currentVolumeVal];
+    
+    playButton.hidden = YES;
+    pauseButton.hidden = NO;
+    
 }
 
 - (void) initializeControls {
@@ -227,6 +313,11 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
         
         [volumeLevels addObject:volIndicator];
     }
+}
+
+- (void) triggerDismiss {
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [APPDELEGATE.base checkAndShowAddButton];
 }
 
 /*
@@ -564,6 +655,7 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 }
 
 - (void) postDelete {
+    [delegate previewedMusicWasDeleted];
     [self.nav popViewControllerAnimated:YES];
 }
 

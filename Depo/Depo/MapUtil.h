@@ -11,7 +11,9 @@
 @interface MapUtil : NSObject
 
 @property (nonatomic, strong) NSDictionary *floatingMappingDict;
+@property (nonatomic, strong) NSDictionary *curioMappingDict;
 
 - (NSArray *) readAddTypesByController:(NSString *) controllerName;
+- (NSString *) readCurioValueByController:(NSString *) controllerName;
 
 @end

@@ -17,8 +17,16 @@
 #import "FooterActionsMenuView.h"
 #import "MoveDao.h"
 #import "RenameDao.h"
+#import "ImagePreviewController.h"
+#import "VideoPreviewController.h"
+#import "MusicPreviewController.h"
+#import "FileDetailInWebViewController.h"
 
-@interface FileListController : MyViewController <UITableViewDelegate, UITableViewDataSource, AbstractFileFolderDelegate, FooterActionsDelegate> {
+@protocol FileListDelegate <NSObject>
+- (void) folderWasModified;
+@end
+
+@interface FileListController : MyViewController <UITableViewDelegate, UITableViewDataSource, AbstractFileFolderDelegate, FooterActionsDelegate, FileListDelegate, ImagePreviewDelegate, VideoPreviewDelegate, MusicPreviewDelegate, FileDetailInWebViewDelegate> {
     FileListDao *fileListDao;
     FileListDao *loadMoreDao;
     AddFolderDao *addFolderDao;
@@ -41,12 +49,15 @@
     BOOL isSelectible;
 }
 
+@property (nonatomic, strong) id<FileListDelegate> delegate;
 @property (nonatomic, strong) MetaFile *folder;
 @property (nonatomic, strong) UITableView *fileTable;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, strong) NSArray *fileList;
 @property (nonatomic, strong) NSMutableArray *selectedFileList;
 @property (nonatomic, strong) FooterActionsMenuView *footerActionMenu;
+@property (nonatomic) BOOL folderModificationFlag;
+
 
 - (id)initForFolder:(MetaFile *) _folder;
 

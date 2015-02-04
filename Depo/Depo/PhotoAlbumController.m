@@ -262,6 +262,10 @@
     }
 }
 
+- (void) squareImageWasLongPressedForFile:(MetaFile *)fileSelected {
+    [self changeToSelectedStatus];
+}
+
 - (void) triggerBack {
     if(contentModified) {
         [delegate photoAlbumDidChange:self.album.uuid];
@@ -356,6 +360,14 @@
         contentModified = YES;
         [self triggerRefresh];
     }
+}
+
+- (void) squareImageUploadQuotaError:(MetaFile *) fileSelected {
+    [self showErrorAlertWithMessage:NSLocalizedString(@"QuotaExceedMessage", @"")];
+}
+
+- (void) squareImageUploadLoginError:(MetaFile *)fileSelected {
+    [self showErrorAlertWithMessage:NSLocalizedString(@"LoginRequiredMessage", @"")];
 }
 
 - (void) showFooterMenu {

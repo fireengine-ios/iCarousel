@@ -18,6 +18,7 @@
 
 @implementation FileDetailInWebViewController
 
+@synthesize delegate;
 @synthesize file;
 @synthesize webView;
 
@@ -70,6 +71,7 @@
 }
 
 - (void) postDelete {
+    [delegate previewedFileWasDeleted:self.file];
     [self.nav popViewControllerAnimated:YES];
 }
 

@@ -13,8 +13,9 @@
 #import "MoveDao.h"
 #import "AbstractFileFolderCell.h"
 #import "FooterActionsMenuView.h"
+#import "MusicPreviewController.h"
 
-@interface MusicListController : MyViewController <UITableViewDataSource, UITableViewDelegate, AbstractFileFolderDelegate, FooterActionsDelegate> {
+@interface MusicListController : MyViewController <UITableViewDataSource, UITableViewDelegate, AbstractFileFolderDelegate, FooterActionsDelegate, MusicPreviewDelegate> {
     ElasticSearchDao *elasticSearchDao;
     FavoriteDao *favoriteDao;
     DeleteDao *deleteDao;

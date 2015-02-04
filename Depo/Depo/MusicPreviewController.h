@@ -17,6 +17,10 @@
 #import "FavoriteDao.h"
 #import "RenameDao.h"
 
+@protocol MusicPreviewDelegate <NSObject>
+- (void) previewedMusicWasDeleted;
+@end
+
 @interface MusicPreviewController : MyViewController <VolumeLevelDelegate> {
     CustomButton *moreButton;
     CustomLabel *titleLabel;
@@ -30,6 +34,7 @@
 }
 
 
+@property (nonatomic, strong) id<MusicPreviewDelegate> delegate;
 @property (nonatomic, strong) NSString *fileUuid;
 @property (nonatomic, strong) NSArray *files;
 @property (nonatomic, strong) UIView *controlView;
@@ -50,5 +55,6 @@
 @property (assign) BOOL seekToZeroBeforePlay;
 
 - (id)initWithFile:(NSString *) _fileUuid withFileList:(NSArray *) _files;
+- (id)initForContinuingPlaylist;
 
 @end

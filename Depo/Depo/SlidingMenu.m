@@ -76,6 +76,7 @@
     }
     
     self.audioFooterView = [[AudioMenuFooterView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 60, self.frame.size.width, 60) withFile:musicFilePlaying];
+    audioFooterView.delegate = self;
     [self addSubview:audioFooterView];
 }
 
@@ -242,6 +243,14 @@
 - (void) forceHomePage {
     [menuTable selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] animated:NO scrollPosition:UITableViewScrollPositionNone];
     [delegate didTriggerHome];
+}
+
+#pragma mark AudioFooterDelegate methods
+
+- (void) audioMenuFooterWasClicked {
+    NSLog(@"audioMenuFooterWasClicked");
+    [delegate didTriggerCurrentMusic];
+    [self close];
 }
 
 @end

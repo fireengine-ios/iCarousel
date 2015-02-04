@@ -30,7 +30,7 @@
 - (void) shouldTriggerLogin;
 @end
 
-@interface MyViewController : UIViewController <NewFolderDelegate, CameraCapturaModalDelegate, PhotoModalDelegate, NewAlbumDelegate, SortModalDelegate, MoveListModalProtocol, FolderDetailDelegate, FileDetailDelegate, MoreMenuDelegate, ConfirmDeleteDelegate, AlbumModalDelete, AlbumDetailDelegate> {
+@interface MyViewController : UIViewController <NewFolderDelegate, CameraCapturaModalDelegate, PhotoModalDelegate, NewAlbumDelegate, SortModalDelegate, MoveListModalProtocol, FolderDetailDelegate, FileDetailDelegate, MoreMenuDelegate, ConfirmDeleteDelegate, AlbumModalDelete, AlbumDetailDelegate, ProcessFooterDelegate> {
     NSMutableDictionary *filterDictionary;
 }
 
@@ -71,6 +71,7 @@
 - (void) proceedFailureForProgressView;
 - (void) proceedFailureForProgressViewWithAddButtonKey:(NSString *) buttonKey;
 - (void) popProgressView;
+- (void) popProgressViewSimply;
 - (void) showAddButtonImmediately;
 
 @end

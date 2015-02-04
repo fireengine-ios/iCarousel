@@ -376,3 +376,12 @@
 
 "Warning"="Uyarı";
 "SubmitButtonTitle"="Tamam";
+
+"MigrationTitle"="AKILLI DEPO KURULUMU";
+"MigrationSubTitle"="Akıllı Depo kurulumunuz yapılıyor. Lütfen tamamlanana kadar uygulamadan çıkmayın.";
+
+"AcceptTerms"="Kullanım koşullarını kabul ediyorum";
+
+"QuotaExceedMessage"="Yeterli alanınız bulunmadığından yükleme yapılamadı.";
+"QuotaExceedMessageShort"="Yeterli alanınız bulunmamaktadır.";
+"LoginRequiredMessage"="Giriş yapmanız gerekmektedir.";

@@ -10,6 +10,8 @@
 #import "AppConstants.h"
 #import "CustomAlertView.h"
 #import "AppDelegate.h"
+#import "CurioSDK.h"
+#import "MapUtil.h"
 
 @interface MyModalController ()
 
@@ -60,10 +62,16 @@
     }
     
     processView = [[ProcessFooterView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60) withProcessMessage:progressMsg withFinalMessage:successMsg withFailMessage:failMsg];
+    processView.delegate = self;
     [self.view addSubview:processView];
     [self.view bringSubviewToFront:processView];
     
     [processView startLoading];
+}
+
+#pragma mark ProcessFooterDelegate
+
+- (void) processFooterShouldDismiss {
 }
 
 - (void) popProgressView {
@@ -79,6 +87,19 @@
 
 - (void) hideLoading {
     [progress hide:YES];
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    NSString *curioValForController = [APPDELEGATE.mapUtil readCurioValueByController:NSStringFromClass(self.class)];
+    if(curioValForController != nil) {
+        [[CurioSDK shared] startScreen:[self class] title:curioValForController path:curioValForController];
+    }
+}
+
+- (void) viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[CurioSDK shared] endScreen:[self class]];
 }
 
 - (void)viewDidLoad

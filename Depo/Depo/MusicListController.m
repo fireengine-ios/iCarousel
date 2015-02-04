@@ -11,7 +11,6 @@
 #import "AppSession.h"
 #import "FolderEmptyCell.h"
 #import "SimpleMusicCell.h"
-#import "MusicPreviewController.h"
 #import "BaseViewController.h"
 
 @interface MusicListController ()
@@ -212,6 +211,7 @@
     }
     
     MusicPreviewController *preview = [[MusicPreviewController alloc] initWithFile:fileAtIndex.uuid withFileList:[self rawMusicList]];
+    preview.delegate = self;
     preview.nav = self.nav;
     [self.nav pushViewController:preview animated:NO];
     
@@ -472,6 +472,12 @@
 - (void) deleteFailCallback:(NSString *) errorMessage {
     [self proceedFailureForProgressView];
     [self showErrorAlertWithMessage:errorMessage];
+}
+
+#pragma mark MusicPreviewDelegate methods
+
+- (void) previewedMusicWasDeleted {
+    [self triggerRefresh];
 }
 
 - (void)viewDidLoad {

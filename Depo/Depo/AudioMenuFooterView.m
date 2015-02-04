@@ -13,6 +13,7 @@
 
 @implementation AudioMenuFooterView
 
+@synthesize delegate;
 @synthesize file;
 @synthesize titleLabel;
 @synthesize detailLabel;
@@ -60,11 +61,25 @@
         [pauseButton addTarget:self action:@selector(pauseClicked) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:pauseButton];
 
+        UITapGestureRecognizer * singleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(audioClicked)];
+        [self addGestureRecognizer:singleTapGesture];
+        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resumeNotified) name:MUSIC_RESUMED_NOTIFICATION object:nil];
 
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pauseNotified) name:MUSIC_PAUSED_NOTIFICATION object:nil];
     }
     return self;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if ([touch.view isKindOfClass:[UIControl class]]) {
+        return NO;
+    }
+    return YES;
+}
+
+- (void) audioClicked {
+    [delegate audioMenuFooterWasClicked];
 }
 
 - (void) playClicked {

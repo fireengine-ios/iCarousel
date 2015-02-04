@@ -180,7 +180,13 @@
         } else {
             currentManager.uploadRef.hasFinished = YES;
             [currentManager removeTemporaryFile];
-            [currentManager.delegate uploadManagerDidFailUploadingForAsset:currentManager.uploadRef.assetUrl];
+            if(httpResp.statusCode == 403) {
+                [currentManager.delegate uploadManagerLoginRequiredForAsset:currentManager.uploadRef.assetUrl];
+            } else if(httpResp.statusCode == 413) {
+                [currentManager.delegate uploadManagerQuotaExceedForAsset:currentManager.uploadRef.assetUrl];
+            } else {
+                [currentManager.delegate uploadManagerDidFailUploadingForAsset:currentManager.uploadRef.assetUrl];
+            }
             [self uploadManager:currentManager didFinishUploadingWithSuccess:NO];
         }
     }

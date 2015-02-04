@@ -25,11 +25,12 @@
 	NSError *error = [request error];
 	
 	if (!error) {
-		NSString *responseEnc = [request responseString];
-		
+        NSString *responseEnc = [request responseString];
         NSLog(@"Upload Notify Response: %@", responseEnc);
-        
-        [self shouldReturnSuccess];
+        SBJSON *jsonParser = [SBJSON new];
+        NSDictionary *mainDict = [jsonParser objectWithString:responseEnc];
+        MetaFile *finalFile = [self parseFile:mainDict];
+        [self shouldReturnSuccessWithObject:finalFile];
 	} else {
         [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
 	}

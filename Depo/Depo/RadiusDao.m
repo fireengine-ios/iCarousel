@@ -45,8 +45,21 @@
         NSDictionary *headerParams = [request responseHeaders];
         NSString *authToken = [headerParams objectForKey:@"X-Auth-Token"];
         NSString *rememberMeToken = [headerParams objectForKey:@"X-Remember-Me-Token"];
+        NSNumber *newUserFlag = [headerParams objectForKey:@"X-New-User"];
+        NSNumber *migrationUserFlag = [headerParams objectForKey:@"X-Migration-User"];
         
         NSLog(@"Radius Login Response Headers: %@", headerParams);
+        
+        if(newUserFlag != nil && ![newUserFlag isKindOfClass:[NSNull class]]) {
+            APPDELEGATE.session.newUserFlag = [newUserFlag boolValue];
+        } else {
+            APPDELEGATE.session.newUserFlag = NO;
+        }
+        if(migrationUserFlag != nil && ![migrationUserFlag isKindOfClass:[NSNull class]]) {
+            APPDELEGATE.session.migrationUserFlag = [migrationUserFlag boolValue];
+        } else {
+            APPDELEGATE.session.migrationUserFlag = NO;
+        }
         
         if(rememberMeToken != nil && ![rememberMeToken isKindOfClass:[NSNull class]]) {
             [CacheUtil writeRememberMeToken:rememberMeToken];

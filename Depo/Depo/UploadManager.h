@@ -15,8 +15,10 @@
 
 @protocol UploadManagerDelegate <NSObject>
 - (void) uploadManagerDidSendData:(long) sentBytes inTotal:(long) totalBytes;
-- (void) uploadManagerDidFinishUploadingForAsset:(NSString *) assetUrl;
+- (void) uploadManagerDidFinishUploadingForAsset:(NSString *) assetUrl withFinalFile:(MetaFile *) finalFile;
 - (void) uploadManagerDidFailUploadingForAsset:(NSString *) assetUrl;
+- (void) uploadManagerQuotaExceedForAsset:(NSString *) assetUrl;
+- (void) uploadManagerLoginRequiredForAsset:(NSString *) assetUrl;
 - (void) uploadManagerDidFinishUploadingAsData;
 - (void) uploadManagerDidFailUploadingAsData;
 @end

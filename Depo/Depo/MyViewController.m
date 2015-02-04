@@ -15,6 +15,7 @@
 #import "CustomConfirmView.h"
 #import "BaseViewController.h"
 #import "MapUtil.h"
+#import "CurioSDK.h"
 
 @interface MyViewController ()
 
@@ -141,10 +142,16 @@
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    NSString *curioValForController = [APPDELEGATE.mapUtil readCurioValueByController:NSStringFromClass(self.class)];
+    if(curioValForController != nil) {
+        [[CurioSDK shared] startScreen:[self class] title:curioValForController path:curioValForController];
+    }
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    [self popProgressViewSimply];
+    [[CurioSDK shared] endScreen:[self class]];
 }
 
 - (void) presentMoreMenuWithList:(NSArray *) itemList {
@@ -190,6 +197,7 @@
     }
     
     processView = [[ProcessFooterView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60) withProcessMessage:progressMsg withFinalMessage:successMsg withFailMessage:failMsg];
+    processView.delegate = self;
     [self.view addSubview:processView];
     [self.view bringSubviewToFront:processView];
 
@@ -201,28 +209,34 @@
     if(processView) {
         [processView showMessageForSuccess];
     }
-    [self performSelector:@selector(showAddButtonImmediately) withObject:nil afterDelay:1.2f];
 }
 
 - (void) proceedSuccessForProgressViewWithAddButtonKey:(NSString *) buttonKey {
     if(processView) {
-        [processView showMessageForSuccess];
+        [processView showMessageForSuccessWithPostButtonKey:buttonKey];
     }
-    [self performSelector:@selector(showAddButtonImmediately:) withObject:buttonKey afterDelay:1.2f];
 }
 
 - (void) proceedFailureForProgressView {
     if(processView) {
         [processView showMessageForFailure];
     }
-    [self performSelector:@selector(showAddButtonImmediately) withObject:nil afterDelay:1.2f];
 }
 
 - (void) proceedFailureForProgressViewWithAddButtonKey:(NSString *) buttonKey {
     if(processView) {
-        [processView showMessageForFailure];
+        [processView showMessageForFailureWithPostButtonKey:buttonKey];
     }
-    [self performSelector:@selector(showAddButtonImmediately:) withObject:buttonKey afterDelay:1.2f];
+}
+
+#pragma mark ProcessFooterDelegate methods
+
+- (void) processFooterShouldDismissWithButtonKey:(NSString *)postButtonKeyVal {
+    if(postButtonKeyVal == nil) {
+        [self performSelector:@selector(showAddButtonImmediately) withObject:nil];
+    } else {
+        [self performSelector:@selector(showAddButtonImmediately:) withObject:postButtonKeyVal];
+    }
 }
 
 - (void) showAddButtonImmediately {
@@ -239,6 +253,12 @@
             [APPDELEGATE.base immediateShowAddButton];
             [APPDELEGATE.base modifyAddButtonWithList:addTypesForKey];
         }
+    }
+}
+
+- (void) popProgressViewSimply {
+    if(processView) {
+        [processView removeFromSuperview];
     }
 }
 

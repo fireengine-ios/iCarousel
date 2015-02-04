@@ -28,6 +28,7 @@
 @synthesize isReady;
 @synthesize taskType;
 @synthesize folder;
+@synthesize finalFile;
 @synthesize initializationDate;
 @synthesize localHash;
 @synthesize remoteHash;

@@ -18,6 +18,8 @@
 @synthesize delegate;
 @synthesize file;
 @synthesize uploadRef;
+@synthesize longPressGesture;
+@synthesize tapGesture;
 
 - (id)initWithFrame:(CGRect)frame withFile:(MetaFile *) _file {
     return [self initWithFrame:frame withFile:_file withSelectibleStatus:NO];
@@ -47,6 +49,15 @@
         maskView.image = [UIImage imageNamed:@"selected_mask.png"];
         maskView.hidden = YES;
         [self addSubview:maskView];
+
+        longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressed)];
+        longPressGesture.minimumPressDuration = 1.0f;
+        longPressGesture.allowableMovement = 10.0f;
+        [self addGestureRecognizer:longPressGesture];
+        
+        tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapped)];
+        tapGesture.numberOfTapsRequired = 1;
+        [self addGestureRecognizer:tapGesture];
     }
     return self;
 }
@@ -85,6 +96,10 @@
         maskView.hidden = YES;
         [self addSubview:maskView];
         
+        tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapped)];
+        tapGesture.numberOfTapsRequired = 1;
+        [self addGestureRecognizer:tapGesture];
+
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(managerNotifyReceived:) name:TEMP_IMG_UPLOAD_NOTIFICATION object:nil];
         
     }
@@ -121,8 +136,40 @@
     imgView.alpha = 0.25f;
 }
 
-- (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void) old_touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     if(self.uploadRef != nil) {
+        return;
+    }
+    
+    if(isSelectible) {
+        isMarked = !isMarked;
+        if(isMarked) {
+            maskView.hidden = NO;
+            [delegate squareImageWasMarkedForFile:self.file];
+        } else {
+            maskView.hidden = YES;
+            [delegate squareImageWasUnmarkedForFile:self.file];
+        }
+    } else {
+        [delegate squareImageWasSelectedForFile:self.file];
+    }
+}
+
+- (void) longPressed {
+    if(isSelectible) {
+        [self imageTapped];
+    } else {
+        [delegate squareImageWasLongPressedForFile:self.file];
+    }
+}
+
+- (void) imageTapped {
+    if(self.uploadRef != nil && self.file == nil) {
+        if(uploadErrorType == UploadErrorTypeQuota) {
+            [delegate squareImageUploadQuotaError:self.file];
+        } else if(uploadErrorType == UploadErrorTypeLogin) {
+            [delegate squareImageUploadLoginError:self.file];
+        }
         return;
     }
     
@@ -153,7 +200,22 @@
     progressSeparator.backgroundColor = [Util UIColorForHexColor:@"ad3110"];
 }
 
-- (void) uploadManagerDidFinishUploadingForAsset:(NSString *)assetToUpload {
+- (void) uploadManagerQuotaExceedForAsset:(NSString *) assetToUpload {
+    uploadErrorType = UploadErrorTypeQuota;
+
+    [self updateProgressByWidth:[NSNumber numberWithLong:self.frame.size.width]];
+    progressSeparator.backgroundColor = [Util UIColorForHexColor:@"ad3110"];
+}
+
+- (void) uploadManagerLoginRequiredForAsset:(NSString *) assetToUpload {
+    uploadErrorType = UploadErrorTypeLogin;
+
+    [self updateProgressByWidth:[NSNumber numberWithLong:self.frame.size.width]];
+    progressSeparator.backgroundColor = [Util UIColorForHexColor:@"ad3110"];
+}
+
+- (void) uploadManagerDidFinishUploadingForAsset:(NSString *)assetToUpload withFinalFile:(MetaFile *) finalFile {
+    self.file = finalFile;
     [self updateProgressByWidth:[NSNumber numberWithLong:self.frame.size.width]];
     progressSeparator.backgroundColor = [Util UIColorForHexColor:@"67d74b"];
     imgView.alpha = 1.0f;

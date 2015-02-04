@@ -137,7 +137,6 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     NSFileManager *fileManager = [NSFileManager defaultManager];
     [fileManager removeItemAtPath:self.uploadRef.tempUrl error:nil];
     [fileManager removeItemAtPath:self.uploadRef.tempThumbnailUrl error:nil];
-    [delegate uploadManagerDidFailUploadingForAsset:self.uploadRef.assetUrl];
 }
 
 - (NSMutableURLRequest *) prepareRequestSetVideo:(BOOL) isVideo {
@@ -147,6 +146,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     [request setValue:APPDELEGATE.session.authToken forHTTPHeaderField:@"X-Auth-Token"];
     [request setValue:@"false" forHTTPHeaderField:@"X-Object-Meta-Favourite"];
     [request setValue:@"1" forHTTPHeaderField:@"x-meta-strategy"];
+    [request setValue:@"100-continue" forHTTPHeaderField:@"Expect"];
     if(self.uploadRef.folder) {
         [request setValue:self.uploadRef.folder.uuid forHTTPHeaderField:@"X-Object-Meta-Parent-Uuid"];
     } else {
@@ -158,6 +158,13 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     } else {
         [request addValue:@"image/png" forHTTPHeaderField:@"Content-Type"];
     }
+
+    NSFileManager *fileManager=[NSFileManager defaultManager];
+    NSDictionary *attributesDict=[fileManager attributesOfItemAtPath:self.uploadRef.tempUrl error:NULL];
+    NSInteger fileSize = [attributesDict fileSize];
+    NSString *postLength = [NSString stringWithFormat:@"%ld", (long)fileSize];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    
     return request;
 }
 
@@ -171,18 +178,20 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 - (void) notifyUpload {
     notifyDao = [[UploadNotifyDao alloc] init];
     notifyDao.delegate = self;
-    notifyDao.successMethod = @selector(uploadNotifySuccessCallback);
+    notifyDao.successMethod = @selector(uploadNotifySuccessCallback:);
     notifyDao.failMethod = @selector(uploadNotifyFailCallback:);
 
     [notifyDao requestNotifyUploadForFile:self.uploadRef.fileUuid atParentFolder:self.uploadRef.folder?self.uploadRef.folder.uuid:@""];
 }
 
-- (void) uploadNotifySuccessCallback {
+- (void) uploadNotifySuccessCallback:(MetaFile *) finalFile {
+    self.uploadRef.finalFile = finalFile;
+    
     if(self.uploadRef.albumUuid != nil) {
         [self notifyAlbum];
     } else {
         self.uploadRef.hasFinished = YES;
-        [delegate uploadManagerDidFinishUploadingForAsset:self.uploadRef.assetUrl];
+        [delegate uploadManagerDidFinishUploadingForAsset:self.uploadRef.assetUrl withFinalFile:self.uploadRef.finalFile];
         [queueDelegate uploadManager:self didFinishUploadingWithSuccess:YES];
     }
 }
@@ -204,13 +213,13 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 
 - (void) notifyAlbumSuccessCallback {
     self.uploadRef.hasFinished = YES;
-    [delegate uploadManagerDidFinishUploadingForAsset:self.uploadRef.assetUrl];
+    [delegate uploadManagerDidFinishUploadingForAsset:self.uploadRef.assetUrl withFinalFile:self.uploadRef.finalFile];
     [queueDelegate uploadManager:self didFinishUploadingWithSuccess:YES];
 }
 
 - (void) notifyAlbumFailCallback:(NSString *) errorMessage {
     self.uploadRef.hasFinished = YES;
-    [delegate uploadManagerDidFinishUploadingForAsset:self.uploadRef.assetUrl];
+    [delegate uploadManagerDidFinishUploadingForAsset:self.uploadRef.assetUrl withFinalFile:self.uploadRef.finalFile];
     [queueDelegate uploadManager:self didFinishUploadingWithSuccess:NO];
 }
 

@@ -34,6 +34,7 @@
 #import "RecentActivitiesController.h"
 #import "SearchModalController.h"
 #import "FavouriteListController.h"
+#import "MusicPreviewController.h"
 
 #define kMenuOpenOriginX 276
 
@@ -223,6 +224,14 @@
     searchController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:searchController];
     searchController.nav = modalNav;
+    [self presentViewController:modalNav animated:YES completion:nil];
+}
+
+- (void) didTriggerCurrentMusic {
+    MusicPreviewController *musicPreview = [[MusicPreviewController alloc] initForContinuingPlaylist];
+    musicPreview.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:musicPreview];
+    musicPreview.nav = modalNav;
     [self presentViewController:modalNav animated:YES completion:nil];
 }
 

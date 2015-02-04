@@ -11,6 +11,7 @@
 #import "RequestBaseUrlDao.h"
 #import "AccountInfoDao.h"
 #import "RadiusDao.h"
+#import "LogoutDao.h"
 
 @protocol TokenManagerDelegate <NSObject>
 - (void) tokenManagerDidReceiveToken;
@@ -20,6 +21,8 @@
 - (void) tokenManagerDidFailReceivingBaseUrl;
 - (void) tokenManagerDidReceiveUserInfo;
 - (void) tokenManagerDidFailReceivingUserInfo;
+- (void) tokenManagerProvisionNeeded;
+- (void) tokenManagerMigrationInProgress;
 @end
 
 @interface TokenManager : NSObject {
@@ -27,6 +30,7 @@
     RequestBaseUrlDao *baseUrlDao;
     AccountInfoDao *userInfoDao;
     RadiusDao *radiusDao;
+    LogoutDao *logoutDao;
 }
 
 @property (nonatomic, strong) id<TokenManagerDelegate> delegate;
@@ -35,5 +39,6 @@
 - (void) requestToken;
 - (void) requestBaseUrl;
 - (void) requestUserInfo;
+- (void) requestLogout;
 
 @end

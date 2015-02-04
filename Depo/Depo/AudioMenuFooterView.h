@@ -11,8 +11,13 @@
 #import "CustomLabel.h"
 #import "CustomButton.h"
 
+@protocol AudioMenuFooterDelegate <NSObject>
+- (void) audioMenuFooterWasClicked;
+@end
+
 @interface AudioMenuFooterView : UIView
 
+@property (nonatomic, strong) id<AudioMenuFooterDelegate> delegate;
 @property (nonatomic, strong) MetaFile *file;
 @property (nonatomic, strong) CustomLabel *titleLabel;
 @property (nonatomic, strong) CustomLabel *detailLabel;

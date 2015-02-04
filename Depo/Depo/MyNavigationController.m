@@ -12,6 +12,7 @@
 #import "Util.h"
 #import "AppDelegate.h"
 #import "BaseViewController.h"
+#import "FileListController.h"
 
 @interface MyNavigationController ()
 
@@ -70,6 +71,13 @@
 }
 
 - (void) triggerBackByNav {
+    id lastController = [self.viewControllers objectAtIndex:[self.viewControllers count]-1];
+    if([lastController isKindOfClass:[FileListController class]]) {
+        FileListController *fileController = (FileListController *) lastController;
+        if(fileController.folderModificationFlag) {
+            [fileController.delegate folderWasModified];
+        }
+    }
     [self popViewControllerAnimated:YES];
     [APPDELEGATE.base checkAndShowAddButton];
 }

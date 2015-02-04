@@ -268,6 +268,11 @@ typedef enum {
     DeleteTypeAlbums
 } DeleteType;
 
+typedef enum {
+    UploadErrorTypeQuota = 1,
+    UploadErrorTypeLogin
+} UploadErrorType;
+
 @interface AppConstants : NSObject
 
 @end

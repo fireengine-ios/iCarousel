@@ -111,6 +111,11 @@
         [self.view addSubview:headerView];
 
         [self triggerRefresh];
+
+        UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(selectionStateForAlbums:)];
+        longPressGesture.minimumPressDuration = 1.0;
+        [albumTable addGestureRecognizer:longPressGesture];
+    
     }
     return self;
 }
@@ -156,6 +161,19 @@
         if([innerView isKindOfClass:[SquareImageView class]]) {
             SquareImageView *sqView = (SquareImageView *) innerView;
             [sqView setNewStatus:newStatus];
+        }
+    }
+}
+
+- (void) selectionStateForAlbums:(UILongPressGestureRecognizer *)gestureRecognizer {
+    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+        CGPoint p = [gestureRecognizer locationInView:albumTable];
+        NSIndexPath *indexPath = [albumTable indexPathForRowAtPoint:p];
+        if (indexPath != nil) {
+            UITableViewCell *cell = [albumTable cellForRowAtIndexPath:indexPath];
+            if (cell.isHighlighted) {
+                [self changeToSelectedStatus];
+            }
         }
     }
 }
@@ -217,14 +235,14 @@
 
 - (void) addAlbumSuccessCallback {
     [self proceedSuccessForProgressViewWithAddButtonKey:albumTable.hidden ? @"PhotoTab" : @"AlbumTab"];
-    [self performSelector:@selector(popProgressView) withObject:nil afterDelay:1.0f];
+//    [self performSelector:@selector(popProgressView) withObject:nil afterDelay:1.0f];
     
     [albumListDao requestAlbumListForStart:0 andSize:50];
 }
 
 - (void) addAlbumFailCallback:(NSString *) errorMessage {
     [self proceedFailureForProgressViewWithAddButtonKey:albumTable.hidden ? @"PhotoTab" : @"AlbumTab"];
-    [self performSelector:@selector(popProgressView) withObject:nil afterDelay:1.0f];
+//    [self performSelector:@selector(popProgressView) withObject:nil afterDelay:1.0f];
 }
 
 - (void) deleteSuccessCallback {
@@ -359,6 +377,18 @@
     }
 }
 
+- (void) squareImageWasLongPressedForFile:(MetaFile *)fileSelected {
+    [self changeToSelectedStatus];
+}
+
+- (void) squareImageUploadQuotaError:(MetaFile *) fileSelected {
+    [self showErrorAlertWithMessage:NSLocalizedString(@"QuotaExceedMessage", @"")];
+}
+
+- (void) squareImageUploadLoginError:(MetaFile *)fileSelected {
+    [self showErrorAlertWithMessage:NSLocalizedString(@"LoginRequiredMessage", @"")];
+}
+
 - (void) showImgFooterMenu {
     if(imgFooterActionMenu) {
         imgFooterActionMenu.hidden = NO;
@@ -420,6 +450,9 @@
     }
     if(albumFooterActionMenu) {
         albumFooterActionMenu.frame = CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60);
+    }
+    if(self.processView) {
+        self.processView.frame = CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60);
     }
 }
 
@@ -494,6 +527,7 @@
 - (void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.nav showNavigationBar];
+
     photosScroll.frame = CGRectMake(photosScroll.frame.origin.x, photosScroll.frame.origin.y, photosScroll.frame.size.width, normalizedContentHeight);
     albumTable.frame = CGRectMake(albumTable.frame.origin.x, albumTable.frame.origin.y, albumTable.frame.size.width, normalizedContentHeight);
 }
@@ -553,7 +587,7 @@
     previousButtonRef = self.navigationItem.leftBarButtonItem;
     
     CustomButton *cancelButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 60, 20) withImageName:nil withTitle:NSLocalizedString(@"ButtonCancel", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[UIColor whiteColor]];
-    [cancelButton addTarget:self action:@selector(cancelSelectible) forControlEvents:UIControlEventTouchUpInside];
+    [cancelButton addTarget:self action:@selector(cancelClicked) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithCustomView:cancelButton];
     self.navigationItem.leftBarButtonItem = cancelItem;
@@ -571,6 +605,11 @@
     [albumTable reloadData];
 }
 
+- (void) cancelClicked {
+    [self cancelSelectible];
+    [APPDELEGATE.base immediateShowAddButton];
+}
+
 - (void) cancelSelectible {
     self.title = NSLocalizedString(@"PhotosTitle", @"");
     self.navigationItem.leftBarButtonItem = previousButtonRef;
@@ -579,8 +618,6 @@
     isSelectible = NO;
     [selectedFileList removeAllObjects];
     [selectedAlbumList removeAllObjects];
-    
-    [APPDELEGATE.base immediateShowAddButton];
     
     [self setSelectibleStatusForSquareImages:NO];
     

@@ -16,6 +16,9 @@
 - (void) squareImageWasMarkedForFile:(MetaFile *) fileSelected;
 - (void) squareImageWasUnmarkedForFile:(MetaFile *) fileSelected;
 - (void) squareImageUploadFinishedForFile:(NSString *) fileSelectedUuid;
+- (void) squareImageWasLongPressedForFile:(MetaFile *) fileSelected;
+- (void) squareImageUploadQuotaError:(MetaFile *) fileSelected;
+- (void) squareImageUploadLoginError:(MetaFile *) fileSelected;
 @end
 
 @interface SquareImageView : UIView <UploadManagerDelegate> {
@@ -24,11 +27,14 @@
     UIImageView *maskView;
     BOOL isSelectible;
     BOOL isMarked;
+    UploadErrorType uploadErrorType;
 }
 
 @property (nonatomic, strong) id<SquareImageDelegate> delegate;
 @property (nonatomic, strong) MetaFile *file;
 @property (nonatomic, strong) UploadRef *uploadRef;
+@property (nonatomic, strong) UILongPressGestureRecognizer *longPressGesture;
+@property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
 
 - (id)initWithFrame:(CGRect)frame withFile:(MetaFile *) _file;
 - (id)initWithFrame:(CGRect)frame withUploadRef:(UploadRef *) ref;

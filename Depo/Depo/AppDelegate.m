@@ -22,10 +22,14 @@
 #import "PostLoginSyncPhotoController.h"
 #import "Reachability.h"
 
+#import "MigrateStatusController.h"
+#import "TermsController.h"
+
 #import "Adjust.h"
 #import "ACTReporter.h"
 #import <SplunkMint-iOS/SplunkMint-iOS.h>
 #import "CurioSDK.h"
+#import "ContactSyncSDK.h"
 
 @implementation AppDelegate
 
@@ -75,7 +79,7 @@
     tokenManager.delegate = self;
     
     NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
-    if(networkStatus == kReachableViaWWAN/* TODO kReachableViaWiFi*/) {
+    if(networkStatus == kReachableViaWiFi) {
         if([CacheUtil readRememberMeToken] != nil) {
             [tokenManager requestToken];
             [self showMainLoading];
@@ -96,7 +100,7 @@
         UIAlertView *noConnAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", @"") message:NSLocalizedString(@"ConnectionErrorWarning", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"SubmitButtonTitle", @"") otherButtonTitles:nil];
         [noConnAlert show];
     }
-
+    
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -108,7 +112,7 @@
 
 - (void) triggerLogin {
     NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
-    if(networkStatus == kReachableViaWWAN/* TODO kReachableViaWiFi*/) {
+    if(networkStatus == kReachableViaWiFi) {
         LoginController *login = [[LoginController alloc] init];
         MyNavigationController *loginNav = [[MyNavigationController alloc] initWithRootViewController:login];
         self.window.rootViewController = loginNav;
@@ -135,9 +139,14 @@
 }
 
 - (void) triggerLogout {
+    [tokenManager requestLogout];
+
     self.session.user = nil;
     [CacheUtil resetRememberMeToken];
-    [self triggerLogin];
+//    [self triggerLogin];
+    LoginController *login = [[LoginController alloc] init];
+    MyNavigationController *loginNav = [[MyNavigationController alloc] initWithRootViewController:login];
+    self.window.rootViewController = loginNav;
 }
 
 - (void) tokenManagerInadequateInfo {
@@ -173,6 +182,16 @@
 
 - (void) tokenManagerDidFailReceivingUserInfo {
     [tokenManager requestBaseUrl];
+}
+
+- (void) tokenManagerProvisionNeeded {
+    TermsController *termsPage = [[TermsController alloc] init];
+    [self.window setRootViewController:termsPage];
+}
+
+- (void) tokenManagerMigrationInProgress {
+    MigrateStatusController *migrationPage = [[MigrateStatusController alloc] init];
+    [self.window setRootViewController:migrationPage];
 }
 
 - (void) startAutoSync {
@@ -234,8 +253,15 @@
 
 - (void) application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
+    EnableOption contactSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncContacts];
+
     if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
         [self.syncManager manuallyCheckIfAlbumChanged];
+    }
+
+    if(contactSyncFlag == EnableOptionAuto || contactSyncFlag == EnableOptionOn) {
+        //TODO uncomment and test
+//        [ContactSyncSDK runInBackground];
     }
 
     completionHandler(UIBackgroundFetchResultNewData);

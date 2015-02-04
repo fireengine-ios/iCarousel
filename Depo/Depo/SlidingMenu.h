@@ -24,13 +24,14 @@
 - (void) didTriggerDocs;
 - (void) didTriggerLogout;
 - (void) didTriggerLogin;
+- (void) didTriggerCurrentMusic;
 @end
 
 @protocol SlidingMenuCloseDelegate <NSObject>
 - (void) shouldClose;
 @end
 
-@interface SlidingMenu : UIView <UITableViewDataSource, UITableViewDelegate>
+@interface SlidingMenu : UIView <UITableViewDataSource, UITableViewDelegate, AudioMenuFooterDelegate>
 
 @property (nonatomic, strong) id<SlidingMenuDelegate> delegate;
 @property (nonatomic, strong) id<SlidingMenuCloseDelegate> closeDelegate;
