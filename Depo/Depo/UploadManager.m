@@ -69,21 +69,28 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 - (void) triggerAndStartAssetsTask {
     self.asset = nil;
     
-    self.assetsLibrary = [[ALAssetsLibrary alloc] init];
-    [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-        if(group) {
-            [group enumerateAssetsUsingBlock:^(ALAsset *_asset, NSUInteger index, BOOL *stop) {
-                if(_asset && !self.asset) {
-                    NSURL *_assetUrl = _asset.defaultRepresentation.url;
-                    if([[_assetUrl absoluteString] isEqualToString:self.uploadRef.assetUrl]) {
-                        self.asset = _asset;
-                        [self continueAssetUpload];
+    @try {
+        self.assetsLibrary = [[ALAssetsLibrary alloc] init];
+        [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *outerStop) {
+            if(group) {
+                [group enumerateAssetsUsingBlock:^(ALAsset *_asset, NSUInteger index, BOOL *innerStop) {
+                    if(_asset && !self.asset) {
+                        NSURL *_assetUrl = _asset.defaultRepresentation.url;
+                        if([[_assetUrl absoluteString] isEqualToString:self.uploadRef.assetUrl]) {
+                            self.asset = _asset;
+                            [self continueAssetUpload];
+                            return;
+                        }
                     }
-                }
-            }];
-        }
-    } failureBlock:^(NSError *error) {
-    }];
+                }];
+            }
+        } failureBlock:^(NSError *error) {
+        }];
+    }
+    @catch (NSException *exception) {
+    }
+    @finally {
+    }
 }
 
 - (void) continueAssetUpload {
@@ -98,12 +105,13 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     self.uploadRef.tempThumbnailUrl = tempThumbnailPath;
     
     if ([[self.asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
-        ALAssetRepresentation *rep = [self.asset defaultRepresentation];
-        Byte *buffer = (Byte*)malloc(rep.size);
-        NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:rep.size error:nil];
-        NSData *videoData = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
-        [videoData writeToFile:tempPath atomically:YES];
-        free(buffer);
+        @autoreleasepool {
+            ALAssetRepresentation *rep = [self.asset defaultRepresentation];
+            Byte *buffer = (Byte*)malloc(rep.size);
+            NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:rep.size error:nil];
+            NSData *videoData = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
+            [videoData writeToFile:tempPath atomically:YES];
+        }
     } else {
         UIImageOrientation orientation = UIImageOrientationUp;
         NSNumber* orientationValue = [self.asset valueForProperty:@"ALAssetPropertyOrientation"];

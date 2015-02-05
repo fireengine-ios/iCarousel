@@ -124,7 +124,13 @@
 }
 
 - (void) triggerPostLogin {
-    [tokenManager requestUserInfo];
+    if(APPDELEGATE.session.newUserFlag) {
+        [self tokenManagerProvisionNeeded];
+    } else if(APPDELEGATE.session.migrationUserFlag) {
+        [self tokenManagerMigrationInProgress];
+    } else {
+        [tokenManager requestUserInfo];
+    }
 }
 
 - (void) triggerHome {

@@ -64,7 +64,11 @@
         docTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         docTable.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
         [self.view addSubview:docTable];
-        
+
+        UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(shouldMoveToSelectionState:)];
+        longPressGesture.minimumPressDuration = 1.0;
+        [docTable addGestureRecognizer:longPressGesture];
+
         refreshControl = [[UIRefreshControl alloc] init];
         [refreshControl addTarget:self action:@selector(triggerRefresh) forControlEvents:UIControlEventValueChanged];
         [docTable addSubview:refreshControl];
@@ -73,6 +77,18 @@
         [self showLoading];
     }
     return self;
+}
+
+- (void) shouldMoveToSelectionState:(UILongPressGestureRecognizer *)gestureRecognizer {
+    if(!isSelectible) {
+        if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+            CGPoint p = [gestureRecognizer locationInView:docTable];
+            NSIndexPath *indexPath = [docTable indexPathForRowAtPoint:p];
+            if (indexPath != nil) {
+                [self changeToSelectedStatus];
+            }
+        }
+    }
 }
 
 - (void) triggerRefresh {

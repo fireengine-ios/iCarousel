@@ -61,6 +61,9 @@
                                                      name:FORCE_HOMEPAGE_NOTIFICATION object:nil];
 
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playingMusicChanged:) name:MUSIC_CHANGED_NOTIFICATION object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shouldRemoveMusic) name:MUSIC_SHOULD_BE_REMOVED_NOTIFICATION object:nil];
+        
 
     }
     return self;
@@ -78,6 +81,13 @@
     self.audioFooterView = [[AudioMenuFooterView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 60, self.frame.size.width, 60) withFile:musicFilePlaying];
     audioFooterView.delegate = self;
     [self addSubview:audioFooterView];
+}
+
+- (void) shouldRemoveMusic {
+    if(audioFooterView) {
+        [audioFooterView removeFromSuperview];
+        audioFooterView = nil;
+    }
 }
 
 - (void) updateMenuByLoginStatus {

@@ -646,6 +646,7 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 
 - (void) deleteSuccessCallback {
     [self proceedSuccessForProgressView];
+    [APPDELEGATE.session stopAudioItem];
     [self performSelector:@selector(postDelete) withObject:nil afterDelay:1.0f];
 }
 

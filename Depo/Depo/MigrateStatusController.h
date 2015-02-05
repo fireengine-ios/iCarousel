@@ -9,9 +9,13 @@
 #import "MyModalController.h"
 #import "CustomLabel.h"
 #import "XYPieChart.h"
+#import "MigrateStatusDao.h"
+#import "MigrateDao.h"
 
 @interface MigrateStatusController : MyModalController <XYPieChartDelegate, XYPieChartDataSource>
 
+@property (nonatomic, strong) MigrateStatusDao *statusDao;
+@property (nonatomic, strong) MigrateDao *migrateDao;
 @property (nonatomic, strong) UIImageView *circleView;
 @property (nonatomic, strong) CustomLabel *percentLabel;
 @property (nonatomic, strong) XYPieChart *statusChart;

@@ -311,6 +311,7 @@
 		05620F211A4C62B30089DFB5 /* SyncReference.m in Sources */ = {isa = PBXBuildFile; fileRef = 05620F201A4C62B30089DFB5 /* SyncReference.m */; };
 		056AC8FB19D15DBB00AC96C3 /* TokenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 056AC8FA19D15DBB00AC96C3 /* TokenManager.m */; };
 		056AC8FE19D15EA200AC96C3 /* CacheUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 056AC8FD19D15EA200AC96C3 /* CacheUtil.m */; };
+		056B38551A841866009292BA /* terms.htm in Resources */ = {isa = PBXBuildFile; fileRef = 056B38541A841866009292BA /* terms.htm */; };
 		056E2A151A28BC2700C24904 /* XYPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 056E2A141A28BC2700C24904 /* XYPieChart.m */; };
 		057C9D6A1A2B48E6001DDDEC /* contacts_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 057C9D681A2B48E6001DDDEC /* contacts_icon.png */; };
 		057C9D6B1A2B48E6001DDDEC /* contacts_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 057C9D691A2B48E6001DDDEC /* contacts_icon@2x.png */; };
@@ -1044,6 +1045,7 @@
 		056AC8FA19D15DBB00AC96C3 /* TokenManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TokenManager.m; sourceTree = "<group>"; };
 		056AC8FC19D15EA200AC96C3 /* CacheUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CacheUtil.h; sourceTree = "<group>"; };
 		056AC8FD19D15EA200AC96C3 /* CacheUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CacheUtil.m; sourceTree = "<group>"; };
+		056B38541A841866009292BA /* terms.htm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = terms.htm; sourceTree = "<group>"; };
 		056E2A131A28BC2700C24904 /* XYPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYPieChart.h; sourceTree = "<group>"; };
 		056E2A141A28BC2700C24904 /* XYPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPieChart.m; sourceTree = "<group>"; };
 		057C9D681A2B48E6001DDDEC /* contacts_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = contacts_icon.png; sourceTree = "<group>"; };
@@ -1583,6 +1585,7 @@
 			children = (
 				05DEB1CF1A80EBA6007793DD /* terms.txt */,
 				05DEB1CD1A80EA28007793DD /* terms.html */,
+				056B38541A841866009292BA /* terms.htm */,
 				0555EF2A19F938DA0068F4CC /* Depo-AppStore-Info.plist */,
 				0555EF2B19F938DA0068F4CC /* Depo-Enterprise-Info.plist */,
 				053EC45219DAA207000C2B77 /* string */,
@@ -2847,6 +2850,7 @@
 				0589062F19CC226D00A9E517 /* nav_favourite_icon@2x.png in Resources */,
 				05A7CE5A1A7FBD3E00020B6F /* percent@3x.png in Resources */,
 				05AF7C911A1C9FE800F5011A /* recent_activity_icon@2x.png in Resources */,
+				056B38551A841866009292BA /* terms.htm in Resources */,
 				05224AAC19DC4A2D00214767 /* selected_mask.png in Resources */,
 				057C9D811A2B89BD001DDDEC /* shuffle@2x.png in Resources */,
 				052A222C19F6846B000C3C75 /* default_loading_bg.png in Resources */,

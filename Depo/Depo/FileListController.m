@@ -35,6 +35,7 @@
 @synthesize selectedFileList;
 @synthesize footerActionMenu;
 @synthesize folderModificationFlag;
+@synthesize longSelectFileUuid;
 
 - (id)initForFolder:(MetaFile *) _folder {
     self = [super init];
@@ -104,6 +105,10 @@
         fileTable.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
         [self.view addSubview:fileTable];
 
+        UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(shouldMoveToSelectionState:)];
+        longPressGesture.minimumPressDuration = 1.0;
+        [fileTable addGestureRecognizer:longPressGesture];
+
         refreshControl = [[UIRefreshControl alloc] init];
         [refreshControl addTarget:self action:@selector(triggerRefresh) forControlEvents:UIControlEventValueChanged];
         [fileTable addSubview:refreshControl];
@@ -112,6 +117,27 @@
         [self showLoading];
     }
     return self;
+}
+
+- (void) shouldMoveToSelectionState:(UILongPressGestureRecognizer *)gestureRecognizer {
+    if(!isSelectible) {
+        if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+            CGPoint p = [gestureRecognizer locationInView:fileTable];
+            NSIndexPath *indexPath = [fileTable indexPathForRowAtPoint:p];
+            if (indexPath != nil) {
+                /*
+                UITableViewCell *cell = [fileTable cellForRowAtIndexPath:indexPath];
+                if (cell.isHighlighted) {
+                    if([cell isKindOfClass:[AbstractFileFolderCell class]]) {
+                        AbstractFileFolderCell *fileFolderCell = (AbstractFileFolderCell *) cell;
+                        self.longSelectFileUuid = fileFolderCell.fileFolder.uuid;
+                    }
+                }
+                 */
+                [self changeToSelectedStatus];
+            }
+        }
+    }
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -637,6 +663,11 @@
     
     [selectedFileList removeAllObjects];
     
+    if(longSelectFileUuid != nil) {
+//TODO aç        [selectedFileList addObject:longSelectFileUuid];
+        longSelectFileUuid = nil;
+    }
+
     self.tableUpdateCounter++;
     [self.fileTable reloadData];
     

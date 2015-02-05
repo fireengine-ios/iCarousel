@@ -246,6 +246,8 @@
     [customBackButton addTarget:self action:@selector(triggerDismiss) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:customBackButton];
     self.navigationItem.leftBarButtonItem = backButton;
+
+    [self mirrorRotation:[[UIApplication sharedApplication] statusBarOrientation]];
 }
 
 - (void) triggerDismiss {

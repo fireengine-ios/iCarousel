@@ -10,4 +10,6 @@
 
 @interface MigrateStatusDao : BaseDao
 
+- (void) requestMigrationStatus;
+
 @end

@@ -37,6 +37,7 @@
 - (void) playPreviousAudioItem;
 - (void) playAudioItem;
 - (void) pauseAudioItem;
+- (void) stopAudioItem;
 - (void) shuffleItems;
 - (MetaFile *) itemRefForCurrentAsset;
 

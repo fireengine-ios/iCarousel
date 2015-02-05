@@ -72,6 +72,11 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:MUSIC_CHANGED_NOTIFICATION object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[self itemRefForCurrentAsset], CHANGED_MUSIC_OBJ_KEY, nil]];
 }
 
+- (void) stopAudioItem {
+    [self.audioPlayer pause];
+    [[NSNotificationCenter defaultCenter] postNotificationName:MUSIC_SHOULD_BE_REMOVED_NOTIFICATION object:nil userInfo:nil];
+}
+
 - (void) playNextAudioItem {
     if(self.currentAudioItemIndex + 1 < [self.playerItems count]) {
         [self playAudioItemAtIndex:self.currentAudioItemIndex + 1];

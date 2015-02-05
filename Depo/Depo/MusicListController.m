@@ -66,6 +66,10 @@
         musicTable.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
         [self.view addSubview:musicTable];
         
+        UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(shouldMoveToSelectionState:)];
+        longPressGesture.minimumPressDuration = 1.0;
+        [musicTable addGestureRecognizer:longPressGesture];
+
         refreshControl = [[UIRefreshControl alloc] init];
         [refreshControl addTarget:self action:@selector(triggerRefresh) forControlEvents:UIControlEventValueChanged];
         [musicTable addSubview:refreshControl];
@@ -74,6 +78,18 @@
         [self showLoading];
     }
     return self;
+}
+
+- (void) shouldMoveToSelectionState:(UILongPressGestureRecognizer *)gestureRecognizer {
+    if(!isSelectible) {
+        if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+            CGPoint p = [gestureRecognizer locationInView:musicTable];
+            NSIndexPath *indexPath = [musicTable indexPathForRowAtPoint:p];
+            if (indexPath != nil) {
+                [self changeToSelectedStatus];
+            }
+        }
+    }
 }
 
 - (void) triggerRefresh {

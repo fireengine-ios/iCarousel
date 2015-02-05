@@ -7,7 +7,6 @@
 //
 
 #import "TermsController.h"
-#import "SimpleButton.h"
 #import "Util.h"
 #import "AppDelegate.h"
 
@@ -20,6 +19,7 @@
 @synthesize webView;
 @synthesize checkButton;
 @synthesize provisionDao;
+@synthesize acceptButton;
 
 - (id) init {
     if(self = [super init]) {
@@ -40,13 +40,14 @@
         [self.view addSubview:webView];
 
         checkButton = [[CheckButton alloc] initWithFrame:CGRectMake(15, webView.frame.origin.y + webView.frame.size.height + 10, self.view.frame.size.width - 30, 25) withTitle:NSLocalizedString(@"AcceptTerms", @"") isInitiallyChecked:YES];
+        checkButton.checkDelegate = self;
         [self.view addSubview:checkButton];
 
-        SimpleButton *acceptButton = [[SimpleButton alloc] initWithFrame:CGRectMake(15, checkButton.frame.origin.y + checkButton.frame.size.height + 5, self.view.frame.size.width - 30, 52) withTitle:@"Tamam" withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:22] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
+        acceptButton = [[SimpleButton alloc] initWithFrame:CGRectMake(15, checkButton.frame.origin.y + checkButton.frame.size.height + 5, self.view.frame.size.width - 30, 52) withTitle:@"Tamam" withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:22] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
         [acceptButton addTarget:self action:@selector(triggerNext) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:acceptButton];
 
-        NSURL *url = [[NSBundle mainBundle] URLForResource:@"terms" withExtension:@"html"];
+        NSURL *url = [[NSBundle mainBundle] URLForResource:@"terms" withExtension:@"htm"];
         [webView loadRequest:[NSURLRequest requestWithURL:url]];
     }
     return self;
@@ -67,6 +68,16 @@
 - (void) provisionFailCallback:(NSString *) errorMessage {
     [self hideLoading];
     [self showErrorAlertWithMessage:errorMessage];
+}
+
+#pragma mark CheckButtonDelegate methods
+
+- (void) checkButtonWasChecked {
+    acceptButton.enabled = YES;
+}
+
+- (void) checkButtonWasUnchecked {
+    acceptButton.enabled = NO;
 }
 
 - (BOOL)shouldAutorotate {

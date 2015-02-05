@@ -13,14 +13,15 @@
 - (void) requestSendProvision {
     NSURL *url = [NSURL URLWithString:PROVISION_URL];
     
-    NSDictionary *dict = [[NSDictionary alloc] init];
+    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:@"true", @"isFirst", nil];
     
     SBJSON *json = [SBJSON new];
     NSString *jsonStr = [json stringWithObject:dict];
     NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
+    NSLog(@"Provision Load: %@", jsonStr);
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setPostBody:[NSNull null]];
+    [request setPostBody:postData];
     [request setDelegate:self];
     
     [self sendPostRequest:request];

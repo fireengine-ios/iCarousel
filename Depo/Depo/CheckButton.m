@@ -12,6 +12,7 @@
 @implementation CheckButton
 
 @synthesize isChecked;
+@synthesize checkDelegate;
 @synthesize checkedImage;
 @synthesize uncheckedImage;
 
@@ -65,8 +66,10 @@
 - (void) toggle {
     isChecked = !isChecked;
     if(isChecked) {
+        [checkDelegate checkButtonWasChecked];
         [self setImage:self.checkedImage forState:UIControlStateNormal];
     } else {
+        [checkDelegate checkButtonWasUnchecked];
         [self setImage:self.uncheckedImage forState:UIControlStateNormal];
     }
 }

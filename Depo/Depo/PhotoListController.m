@@ -166,13 +166,15 @@
 }
 
 - (void) selectionStateForAlbums:(UILongPressGestureRecognizer *)gestureRecognizer {
-    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
-        CGPoint p = [gestureRecognizer locationInView:albumTable];
-        NSIndexPath *indexPath = [albumTable indexPathForRowAtPoint:p];
-        if (indexPath != nil) {
-            UITableViewCell *cell = [albumTable cellForRowAtIndexPath:indexPath];
-            if (cell.isHighlighted) {
-                [self changeToSelectedStatus];
+    if(!isSelectible) {
+        if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+            CGPoint p = [gestureRecognizer locationInView:albumTable];
+            NSIndexPath *indexPath = [albumTable indexPathForRowAtPoint:p];
+            if (indexPath != nil) {
+                UITableViewCell *cell = [albumTable cellForRowAtIndexPath:indexPath];
+                if (cell.isHighlighted) {
+                    [self changeToSelectedStatus];
+                }
             }
         }
     }

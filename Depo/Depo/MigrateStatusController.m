@@ -9,6 +9,7 @@
 #import "MigrateStatusController.h"
 #import "Util.h"
 #import "MigrationStatus.h"
+#import "AppDelegate.h"
 
 @interface MigrateStatusController ()
 
@@ -16,6 +17,8 @@
 
 @implementation MigrateStatusController
 
+@synthesize statusDao;
+@synthesize migrateDao;
 @synthesize circleView;
 @synthesize percentLabel;
 @synthesize statusChart;
@@ -25,6 +28,16 @@
 - (id) init {
     if(self = [super init]) {
         self.view.backgroundColor = [UIColor whiteColor];
+        
+        statusDao = [[MigrateStatusDao alloc] init];
+        statusDao.delegate = self;
+        statusDao.successMethod = @selector(statusSuccessCallback:);
+        statusDao.failMethod = @selector(statusFailCallback:);
+        
+        migrateDao = [[MigrateDao alloc] init];
+        migrateDao.delegate = self;
+        migrateDao.successMethod = @selector(migrateSuccessCallback);
+        migrateDao.failMethod = @selector(migrateFailCallback:);
         
         UIImage *topImg = [UIImage imageNamed:@"bulutheader.png"];
         UIImageView *topImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, topImg.size.width, topImg.size.height)];
@@ -56,20 +69,21 @@
         circleView.image = circleImg;
         [self.view addSubview:circleView];
         
-        percentLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(150, titleLabel.frame.origin.y + titleLabel.frame.size.height + 30, 140, 70) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:60] withColor:[Util UIColorForHexColor:@"555555"] withText:@"%88"];
+        percentLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(150, titleLabel.frame.origin.y + titleLabel.frame.size.height + 30, 140, 70) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:60] withColor:[Util UIColorForHexColor:@"555555"] withText:@""];
         [self.view addSubview:percentLabel];
         
         CustomLabel *subTitleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(infoBgImgView.frame.origin.x + 10, infoBgImgView.frame.origin.y + infoBgImgView.frame.size.height - 80, infoBgImgView.frame.size.width - 20, 60) withFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:17] withColor:[Util UIColorForHexColor:@"555555"] withText:NSLocalizedString(@"MigrationSubTitle", @"") withAlignment:NSTextAlignmentLeft];
         subTitleLabel.numberOfLines = 3;
         [self.view addSubview:subTitleLabel];
-
+        
     }
     return self;
 }
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self performSelector:@selector(tempFillChart) withObject:nil afterDelay:2.0f];
+    [migrateDao requestSendMigrate];
+    [self showLoading];
 }
 
 - (void) tempFillChart {
@@ -134,18 +148,36 @@
 }
 
 - (void) statusSuccessCallback:(MigrationStatus *) status {
-    self.statusList = [NSMutableArray arrayWithCapacity:2];
-    [statusList addObject:[NSNumber numberWithFloat:status.progress]];
-    [statusList addObject:[NSNumber numberWithFloat:(100 - status.progress)]];
-    
-    self.statusColors =[NSArray arrayWithObjects:
-                       [Util UIColorForHexColor:@"3fb0e8"],
-                       [Util UIColorForHexColor:@"FFFFFF"], nil];
-    
-    [statusChart reloadData];
+    [self hideLoading];
+    if([status.status isEqualToString:@"FINISHED"]) {
+        [APPDELEGATE triggerLogin];
+    } else {
+        percentLabel.text = [NSString stringWithFormat:@"%%%d", (int)status.progress];
+        self.statusList = [NSMutableArray arrayWithCapacity:2];
+        [statusList addObject:[NSNumber numberWithFloat:status.progress]];
+        [statusList addObject:[NSNumber numberWithFloat:(100 - status.progress)]];
+        
+        self.statusColors =[NSArray arrayWithObjects:
+                            [Util UIColorForHexColor:@"3fb0e8"],
+                            [Util UIColorForHexColor:@"FFFFFF"], nil];
+        
+        [statusChart reloadData];
+        
+        [statusDao performSelector:@selector(requestMigrationStatus) withObject:nil afterDelay:3.0f];
+    }
 }
 
 - (void) statusFailCallback:(NSString *) errorMessage {
+    [self hideLoading];
+}
+
+- (void) migrateSuccessCallback {
+    [statusDao requestMigrationStatus];
+}
+
+- (void) migrateFailCallback:(NSString *) errorMessage {
+    [self hideLoading];
+    [self showErrorAlertWithMessage:errorMessage];
 }
 
 - (BOOL)shouldAutorotate {

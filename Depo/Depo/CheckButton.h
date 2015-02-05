@@ -8,11 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol CheckButtonDelegate <NSObject>
+- (void) checkButtonWasChecked;
+- (void) checkButtonWasUnchecked;
+@end
+
 @interface CheckButton : UIButton {
     UIImageView *bgImgView;
 }
 
 @property (nonatomic) BOOL isChecked;
+@property (nonatomic, strong) id<CheckButtonDelegate> checkDelegate;
 @property (nonatomic, strong) UIImage *checkedImage;
 @property (nonatomic, strong) UIImage *uncheckedImage;
 
