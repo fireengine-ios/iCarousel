@@ -46,4 +46,11 @@
 + (void) writeCachedSettingNotification: (NSInteger) setting;
 + (NSInteger) readCachedSettingNotification;
 
++ (void) writeCachedMsisdnForPostMigration:(NSString *) msisdn;
++ (void) writeCachedPassForPostMigration:(NSString *) pass;
++ (void) writeCachedRememberMeForPostMigration:(BOOL) flag;
++ (NSString *) readCachedMsisdnForPostMigration;
++ (NSString *) readCachedPassForPostMigration;
++ (BOOL) readCachedRememberMeForPostMigration;
+
 @end

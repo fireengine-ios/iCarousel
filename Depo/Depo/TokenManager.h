@@ -40,5 +40,6 @@
 - (void) requestBaseUrl;
 - (void) requestUserInfo;
 - (void) requestLogout;
+- (void) requestTokenByMsisdn:(NSString *) msisdn andPass:(NSString *) pass shouldRememberMe:(BOOL) rememberMeFlag;
 
 @end

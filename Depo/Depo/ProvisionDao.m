@@ -13,7 +13,7 @@
 - (void) requestSendProvision {
     NSURL *url = [NSURL URLWithString:PROVISION_URL];
     
-    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:@"true", @"isFirst", nil];
+    NSDictionary *dict = [[NSDictionary alloc] init];
     
     SBJSON *json = [SBJSON new];
     NSString *jsonStr = [json stringWithObject:dict];

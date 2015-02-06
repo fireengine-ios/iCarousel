@@ -54,6 +54,10 @@
     [tokenDao requestTokenByRememberMe];
 }
 
+- (void) requestTokenByMsisdn:(NSString *) msisdn andPass:(NSString *) pass shouldRememberMe:(BOOL) rememberMeFlag {
+    [tokenDao requestTokenForMsisdn:msisdn andPassword:pass shouldRememberMe:rememberMeFlag];
+}
+
 - (void) requestBaseUrl {
     [baseUrlDao requestBaseUrl];
 }

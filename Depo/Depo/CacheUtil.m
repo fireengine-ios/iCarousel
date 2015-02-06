@@ -178,4 +178,31 @@
     return [[NSUserDefaults standardUserDefaults] integerForKey:SETTINGS_NOTIFICATIONS];
 }
 
++ (void) writeCachedMsisdnForPostMigration:(NSString *) msisdn {
+    [[NSUserDefaults standardUserDefaults] setValue:msisdn forKey:MSISDN_STORE_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (void) writeCachedPassForPostMigration:(NSString *) pass {
+    [[NSUserDefaults standardUserDefaults] setValue:pass forKey:PASS_STORE_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (void) writeCachedRememberMeForPostMigration:(BOOL) flag {
+    [[NSUserDefaults standardUserDefaults] setBool:flag forKey:REMEMBER_ME_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (NSString *) readCachedMsisdnForPostMigration {
+    return [[NSUserDefaults standardUserDefaults] valueForKey:MSISDN_STORE_KEY];
+}
+
++ (NSString *) readCachedPassForPostMigration {
+    return [[NSUserDefaults standardUserDefaults] valueForKey:PASS_STORE_KEY];
+}
+
++ (BOOL) readCachedRememberMeForPostMigration {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:REMEMBER_ME_KEY];
+}
+
 @end

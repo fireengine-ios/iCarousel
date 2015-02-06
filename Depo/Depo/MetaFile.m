@@ -12,6 +12,7 @@
 
 @synthesize uuid;
 @synthesize hash;
+@synthesize metaHash;
 @synthesize subDir;
 @synthesize parent;
 @synthesize parentUuid;

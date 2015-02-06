@@ -35,6 +35,7 @@
 #import "SearchModalController.h"
 #import "FavouriteListController.h"
 #import "MusicPreviewController.h"
+#import "ContactSyncController.h"
 
 #define kMenuOpenOriginX 276
 
@@ -217,6 +218,13 @@
     doc.nav = self.nav;
     doc.myDelegate = self;
     [self.nav setViewControllers:@[doc] animated:NO];
+}
+
+- (void) didTriggerContactSync {
+    ContactSyncController *contactSync = [[ContactSyncController alloc] init];
+    contactSync.nav = self.nav;
+    contactSync.myDelegate = self;
+    [self.nav setViewControllers:@[contactSync] animated:NO];
 }
 
 - (void) didTriggerSearch {

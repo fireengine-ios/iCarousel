@@ -39,7 +39,7 @@
 
 - (NSArray *) uploadRefsForFolder:(NSString *) folderUuid {
     NSMutableArray *result = [[NSMutableArray alloc] init];
-    for(UploadManager *manager in self.uploadManagers) {
+    for(UploadManager *manager in [self.uploadManagers copy]) {
         if(!manager.uploadRef.hasFinished) {
             if(manager.uploadRef.folderUuid == nil && folderUuid == nil) {
                 [result addObject:manager.uploadRef];
@@ -53,7 +53,7 @@
 
 - (NSArray *) uploadImageRefs {
     NSMutableArray *result = [[NSMutableArray alloc] init];
-    for(UploadManager *manager in self.uploadManagers) {
+    for(UploadManager *manager in [self.uploadManagers copy]) {
         if(!manager.uploadRef.hasFinished) {
             if(manager.uploadRef.contentType == ContentTypePhoto || manager.uploadRef.contentType == ContentTypeVideo) {
                 [result addObject:manager.uploadRef];
@@ -64,7 +64,7 @@
 }
 
 - (UploadRef *) uploadRefForAsset:(NSString *) assetUrl {
-    for(UploadManager *manager in self.uploadManagers) {
+    for(UploadManager *manager in [self.uploadManagers copy]) {
         if([manager.uploadRef.assetUrl isEqualToString:assetUrl]) {
             return manager.uploadRef;
         }
@@ -74,7 +74,7 @@
 
 - (NSArray *) uploadImageRefsForAlbum:(NSString *) albumUuid {
     NSMutableArray *result = [[NSMutableArray alloc] init];
-    for(UploadManager *manager in self.uploadManagers) {
+    for(UploadManager *manager in [self.uploadManagers copy]) {
         if(!manager.uploadRef.hasFinished && [manager.uploadRef.albumUuid isEqualToString:albumUuid]) {
             if(manager.uploadRef.contentType == ContentTypePhoto || manager.uploadRef.contentType == ContentTypeVideo) {
                 [result addObject:manager.uploadRef];
@@ -86,18 +86,39 @@
 
 - (UploadManager *) findNextTask {
     UploadManager *nextTask = nil;
-    for(UploadManager *row in uploadManagers) {
-        if(!row.uploadRef.hasFinished && row.uploadRef.isReady && ![activeTaskIds containsObject:[row uniqueUrl]]) {
-            if(nextTask == nil) {
-                nextTask = row;
-            } else {
-                if([row.uploadRef.initializationDate compare:nextTask.uploadRef.initializationDate] == NSOrderedAscending) {
+    @try {
+        for(UploadManager *row in [uploadManagers copy]) {
+            if(!row.uploadRef.hasFinished && row.uploadRef.isReady && ![activeTaskIds containsObject:[row uniqueUrl]]) {
+                if(nextTask == nil) {
                     nextTask = row;
+                } else {
+                    if([row.uploadRef.initializationDate compare:nextTask.uploadRef.initializationDate] == NSOrderedAscending) {
+                        nextTask = row;
+                    }
                 }
             }
         }
     }
+    @catch (NSException *exception) {
+    }
+    @finally {
+    }
     return nextTask;
+}
+
+- (void) addOnlyNewUploadTask:(UploadManager *) newManager {
+    [uploadManagers addObject:newManager];
+}
+
+- (void) startReadyTasks {
+    while([activeTaskIds count] < MAX_CONCURRENT_UPLOAD_TASKS) {
+        UploadManager *nextManager = [self findNextTask];
+        nextManager.queueDelegate = self;
+        if(nextManager != nil) {
+            [nextManager startTask];
+            [activeTaskIds addObject:[nextManager uniqueUrl]];
+        }
+    }
 }
 
 - (void) addNewUploadTask:(UploadManager *) newManager {
@@ -117,6 +138,7 @@
     
     if([activeTaskIds count] < MAX_CONCURRENT_UPLOAD_TASKS) {
         UploadManager *nextManager = [self findNextTask];
+        nextManager.queueDelegate = self;
         if(nextManager != nil) {
             [nextManager startTask];
             [activeTaskIds addObject:[nextManager uniqueUrl]];
@@ -126,7 +148,7 @@
 
 - (void) uploadManagerIsReadToStartTask:(UploadManager *)manRef {
     if([activeTaskIds count] < MAX_CONCURRENT_UPLOAD_TASKS) {
-        for(UploadManager *row in self.uploadManagers) {
+        for(UploadManager *row in [self.uploadManagers copy]) {
             if([[row uniqueUrl] isEqualToString:[manRef uniqueUrl]]) {
                 [row startTask];
                 [activeTaskIds addObject:[row uniqueUrl]];
@@ -139,7 +161,7 @@
 - (void) uploadManagerTaskIsInitialized:(UploadManager *)manRef {
     if([activeTaskIds containsObject:[manRef uniqueUrl]]) {
         UploadManager *oldMan = nil;
-        for(UploadManager *row in self.uploadManagers) {
+        for(UploadManager *row in [self.uploadManagers copy]) {
             if([[row uniqueUrl] isEqualToString:[manRef uniqueUrl]]) {
                 oldMan = row;
                 break;
@@ -198,7 +220,7 @@
 
 - (UploadManager *) findByTaskId:(long) taskId {
     if(self.uploadManagers != nil) {
-        for(UploadManager *row in self.uploadManagers) {
+        for(UploadManager *row in [self.uploadManagers copy]) {
             if(row.uploadTask.taskIdentifier == taskId) {
                 return row;
             }

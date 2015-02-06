@@ -105,13 +105,13 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     self.uploadRef.tempThumbnailUrl = tempThumbnailPath;
     
     if ([[self.asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
-        @autoreleasepool {
+//        @autoreleasepool {
             ALAssetRepresentation *rep = [self.asset defaultRepresentation];
             Byte *buffer = (Byte*)malloc(rep.size);
             NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:rep.size error:nil];
             NSData *videoData = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
             [videoData writeToFile:tempPath atomically:YES];
-        }
+//        }
     } else {
         UIImageOrientation orientation = UIImageOrientationUp;
         NSNumber* orientationValue = [self.asset valueForProperty:@"ALAssetPropertyOrientation"];
@@ -125,8 +125,8 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         }
 
         @autoreleasepool {
-            UIImage *image = [UIImage imageWithCGImage:self.asset.thumbnail];
-            [UIImagePNGRepresentation(image) writeToFile:tempThumbnailPath atomically:YES];
+            UIImage *thumbImage = [UIImage imageWithCGImage:self.asset.thumbnail];
+            [UIImagePNGRepresentation(thumbImage) writeToFile:tempThumbnailPath atomically:YES];
         }
     }
     
@@ -165,6 +165,9 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         [request addValue:@"video/mp4" forHTTPHeaderField:@"Content-Type"];
     } else {
         [request addValue:@"image/png" forHTTPHeaderField:@"Content-Type"];
+    }
+    if(self.uploadRef.localHash != nil) {
+        [request setValue:self.uploadRef.localHash forHTTPHeaderField:@"X-Object-Meta-Ios-Metadata-Hash"];
     }
 
     NSFileManager *fileManager=[NSFileManager defaultManager];

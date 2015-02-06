@@ -57,6 +57,8 @@
 
 #define PASS_STORE_KEY @"PASS_STORE_KEY"
 
+#define REMEMBER_ME_KEY @"REMEMBER_ME_KEY"
+
 #define CONFIRM_DELETE_HIDDEN_KEY @"CONFIRM_DELETE_HIDDEN_KEY"
 
 #define SYNCED_REMOTE_HASHES_KEY @"SYNCED_REMOTE_HASHES_KEY"
@@ -149,6 +151,7 @@ typedef enum {
 	MenuTypePhoto,
 	MenuTypeMusic,
 	MenuTypeDoc,
+    MenuTypeContactSync,
 	MenuTypeLogin,
 	MenuTypeLogout
 } MenuType;

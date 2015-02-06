@@ -117,6 +117,7 @@
 "MoveFailMessage"="Dosya taşınırken hata oluştu";
 "MusicTitle"="Müziklerim";
 "DocTitle"="Dökümanlar";
+"ContactSyncTitle"="Rehber Yedekleme";
 "MoveModalSubTitle"="Dosyaların taşınacağı klasörü seç";
 "MoveModalSubTitleForAlbum"="Dosyaların taşınacağı albümü seç";
 "AlbumAddProgressMessage"="Albüm Oluşturuluyor";
@@ -385,3 +386,5 @@
 "QuotaExceedMessage"="Yeterli alanınız bulunmadığından yükleme yapılamadı.";
 "QuotaExceedMessageShort"="Yeterli alanınız bulunmamaktadır.";
 "LoginRequiredMessage"="Giriş yapmanız gerekmektedir.";
+
+"MenuContactSync"="Rehber Yedekleme";

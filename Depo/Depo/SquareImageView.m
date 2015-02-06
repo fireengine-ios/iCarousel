@@ -80,7 +80,7 @@
             }
         });
 
-        for(UploadManager *manager in APPDELEGATE.uploadQueue.uploadManagers) {
+        for(UploadManager *manager in [APPDELEGATE.uploadQueue.uploadManagers copy]) {
             if(!manager.uploadRef.hasFinished && [manager.uploadRef.fileUuid isEqualToString:self.uploadRef.fileUuid]) {
                 manager.delegate = self;
             }

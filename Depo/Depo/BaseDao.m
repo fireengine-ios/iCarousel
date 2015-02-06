@@ -215,6 +215,7 @@
         NSString *thumbLarge = [detailDict objectForKey:@"X-Object-Meta-Thumbnail-Large"];
         NSString *thumbMedium = [detailDict objectForKey:@"X-Object-Meta-Thumbnail-Medium"];
         NSString *thumbSmall = [detailDict objectForKey:@"X-Object-Meta-Thumbnail-Small"];
+        NSString *metaHash = [detailDict objectForKey:@"X-Object-Meta-Ios-Metadata-Hash"];
         NSNumber *imgHeight = [detailDict objectForKey:@"X-Object-Meta-Image-Height"];
         NSNumber *imgWidth = [detailDict objectForKey:@"X-Object-Meta-Image-Width"];
         NSString *genre = [detailDict objectForKey:@"Genre"];
@@ -237,6 +238,7 @@
         detail.duration = [self floatByNumber:duration];
         
         file.detail = detail;
+        file.metaHash = [self strByRawVal:metaHash];
     }
     return file;
 }

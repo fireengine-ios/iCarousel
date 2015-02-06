@@ -62,7 +62,8 @@
 
 - (void) provisionSuccessCallback {
     [self hideLoading];
-    [APPDELEGATE triggerLogin];
+    [APPDELEGATE triggerPostTermsAndMigration];
+    [self.view removeFromSuperview];
 }
 
 - (void) provisionFailCallback:(NSString *) errorMessage {

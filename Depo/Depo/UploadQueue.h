@@ -20,5 +20,7 @@
 - (NSArray *) uploadImageRefs;
 - (NSArray *) uploadImageRefsForAlbum:(NSString *) albumUuid;
 - (void) addNewUploadTask:(UploadManager *) newManager;
+- (void) addOnlyNewUploadTask:(UploadManager *) newManager;
+- (void) startReadyTasks;
 
 @end

@@ -79,7 +79,10 @@
     tokenManager.delegate = self;
     
     NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
-    if(networkStatus == kReachableViaWiFi) {
+    if(networkStatus == kNotReachable) {
+        UIAlertView *noConnAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", @"") message:NSLocalizedString(@"ConnectionErrorWarning", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"SubmitButtonTitle", @"") otherButtonTitles:nil];
+        [noConnAlert show];
+    } else {
         if([CacheUtil readRememberMeToken] != nil) {
             [tokenManager requestToken];
             [self showMainLoading];
@@ -90,15 +93,6 @@
                 [self triggerLogin];
             }
         }
-    } else if(networkStatus == kReachableViaWWAN) {
-        if(![AppUtil readFirstVisitOverFlag]) {
-            [self triggerPreLogin];
-        } else {
-            [self triggerLogin];
-        }
-    } else {
-        UIAlertView *noConnAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", @"") message:NSLocalizedString(@"ConnectionErrorWarning", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"SubmitButtonTitle", @"") otherButtonTitles:nil];
-        [noConnAlert show];
     }
     
     [self.window makeKeyAndVisible];
@@ -108,6 +102,26 @@
 - (void) triggerPreLogin {
     PreLoginController *preLogin = [[PreLoginController alloc] init];
     self.window.rootViewController = preLogin;
+}
+
+- (void) triggerPostTermsAndMigration {
+    NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
+    if(networkStatus == kReachableViaWiFi) {
+        NSString *cachedMsisdn = [CacheUtil readCachedMsisdnForPostMigration];
+        NSString *cachedPass = [CacheUtil readCachedPassForPostMigration];
+        if(cachedMsisdn != nil && cachedPass != nil) {
+            [tokenManager requestTokenByMsisdn:cachedMsisdn andPass:cachedPass shouldRememberMe:[CacheUtil readCachedRememberMeForPostMigration]];
+            [self showMainLoading];
+        } else {
+            LoginController *login = [[LoginController alloc] init];
+            MyNavigationController *loginNav = [[MyNavigationController alloc] initWithRootViewController:login];
+            self.window.rootViewController = loginNav;
+        }
+    } else if(networkStatus == kReachableViaWWAN) {
+        [self.window.rootViewController.view removeFromSuperview];
+        [tokenManager requestRadiusLogin];
+        [self showMainLoading];
+    }
 }
 
 - (void) triggerLogin {

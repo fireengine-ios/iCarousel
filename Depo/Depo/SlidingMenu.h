@@ -25,6 +25,7 @@
 - (void) didTriggerLogout;
 - (void) didTriggerLogin;
 - (void) didTriggerCurrentMusic;
+- (void) didTriggerContactSync;
 @end
 
 @protocol SlidingMenuCloseDelegate <NSObject>

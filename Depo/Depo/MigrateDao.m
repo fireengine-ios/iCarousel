@@ -14,7 +14,7 @@
     NSURL *url = [NSURL URLWithString:MIGRATION_URL];
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setDelegate:self];
-    [self sendGetRequest:request];
+    [self sendPostRequest:request];
 }
 
 - (void)requestFinished:(ASIHTTPRequest *)request {

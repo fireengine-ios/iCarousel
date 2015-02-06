@@ -51,13 +51,18 @@
     docMenu.title = NSLocalizedString(@"MenuDoc", @"");
     docMenu.iconName = @"documents_icon.png";
     docMenu.selectedIconName = @"yellow_documents_icon.png";
-    
+
+    MetaMenu *contactMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeContactSync];
+    contactMenu.title = NSLocalizedString(@"MenuContactSync", @"");
+    contactMenu.iconName = @"contact_sync_icon.png";
+    contactMenu.selectedIconName = @"yellow_contact_sync_icon.png";
+
     MetaMenu *logoutMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeLogout];
     logoutMenu.title = NSLocalizedString(@"MenuLogout", @"");
     logoutMenu.iconName = @"logout_icon.png";
     logoutMenu.selectedIconName = @"yellow_logout_icon.png";
 
-    return @[profileMenu, searchMenu, homeMenu, favMenu, fileMenu, photoMenu, musicMenu, docMenu, logoutMenu];
+    return @[profileMenu, searchMenu, homeMenu, favMenu, fileMenu, photoMenu, musicMenu, docMenu, contactMenu, logoutMenu];
 }
 
 + (NSString *) iconNameByContentType:(ContentType) contentType {

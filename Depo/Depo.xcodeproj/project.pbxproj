@@ -462,6 +462,11 @@
 		059AD37C1A1E26A000AA41BD /* circle_contact_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 059AD3741A1E26A000AA41BD /* circle_contact_icon.png */; };
 		059AD37D1A1E26A000AA41BD /* circle_music_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 059AD3751A1E26A000AA41BD /* circle_music_icon@2x.png */; };
 		059AD37E1A1E26A000AA41BD /* circle_doc_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 059AD3761A1E26A000AA41BD /* circle_doc_icon.png */; };
+		059C04661A8521C5007B18BE /* yellow_contact_sync_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 059C04621A8521C5007B18BE /* yellow_contact_sync_icon@2x.png */; };
+		059C04671A8521C5007B18BE /* yellow_contact_sync_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 059C04631A8521C5007B18BE /* yellow_contact_sync_icon.png */; };
+		059C04681A8521C5007B18BE /* contact_sync_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 059C04641A8521C5007B18BE /* contact_sync_icon.png */; };
+		059C04691A8521C5007B18BE /* contact_sync_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 059C04651A8521C5007B18BE /* contact_sync_icon@2x.png */; };
+		059C046C1A85256B007B18BE /* ContactSyncController.m in Sources */ = {isa = PBXBuildFile; fileRef = 059C046B1A85256B007B18BE /* ContactSyncController.m */; };
 		059C9EC71A07DC60000C54D9 /* FolderDetailModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 059C9EC61A07DC60000C54D9 /* FolderDetailModalController.m */; };
 		059C9ECA1A07DCAD000C54D9 /* FileDetailModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 059C9EC91A07DCAD000C54D9 /* FileDetailModalController.m */; };
 		059D97991A0CF12E00BCEDF3 /* RenameDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 059D97981A0CF12E00BCEDF3 /* RenameDao.m */; };
@@ -1242,6 +1247,12 @@
 		059AD3741A1E26A000AA41BD /* circle_contact_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle_contact_icon.png; sourceTree = "<group>"; };
 		059AD3751A1E26A000AA41BD /* circle_music_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle_music_icon@2x.png"; sourceTree = "<group>"; };
 		059AD3761A1E26A000AA41BD /* circle_doc_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle_doc_icon.png; sourceTree = "<group>"; };
+		059C04621A8521C5007B18BE /* yellow_contact_sync_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yellow_contact_sync_icon@2x.png"; sourceTree = "<group>"; };
+		059C04631A8521C5007B18BE /* yellow_contact_sync_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellow_contact_sync_icon.png; sourceTree = "<group>"; };
+		059C04641A8521C5007B18BE /* contact_sync_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = contact_sync_icon.png; sourceTree = "<group>"; };
+		059C04651A8521C5007B18BE /* contact_sync_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "contact_sync_icon@2x.png"; sourceTree = "<group>"; };
+		059C046A1A85256B007B18BE /* ContactSyncController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactSyncController.h; sourceTree = "<group>"; };
+		059C046B1A85256B007B18BE /* ContactSyncController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactSyncController.m; sourceTree = "<group>"; };
 		059C9EC51A07DC60000C54D9 /* FolderDetailModalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderDetailModalController.h; sourceTree = "<group>"; };
 		059C9EC61A07DC60000C54D9 /* FolderDetailModalController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderDetailModalController.m; sourceTree = "<group>"; };
 		059C9EC81A07DCAD000C54D9 /* FileDetailModalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileDetailModalController.h; sourceTree = "<group>"; };
@@ -1652,6 +1663,8 @@
 				05C0E1FD1A0698C5005E1E92 /* MusicListController.m */,
 				05144B5C1A090A5900B2A414 /* DocListController.h */,
 				05144B5D1A090A5900B2A414 /* DocListController.m */,
+				059C046A1A85256B007B18BE /* ContactSyncController.h */,
+				059C046B1A85256B007B18BE /* ContactSyncController.m */,
 				053D0ED619DAC959006A13E0 /* MyModalController.h */,
 				053D0ED719DAC959006A13E0 /* MyModalController.m */,
 				053EC44F19DA99C4000C2B77 /* NewFolderModalController.h */,
@@ -2242,6 +2255,10 @@
 				057C9D7F1A2B89BD001DDDEC /* shuffle@2x.png */,
 				052AE42A1A1D08260039DD7F /* cloud_icon.png */,
 				052AE42B1A1D08260039DD7F /* cloud_icon@2x.png */,
+				059C04621A8521C5007B18BE /* yellow_contact_sync_icon@2x.png */,
+				059C04631A8521C5007B18BE /* yellow_contact_sync_icon.png */,
+				059C04641A8521C5007B18BE /* contact_sync_icon.png */,
+				059C04651A8521C5007B18BE /* contact_sync_icon@2x.png */,
 				057C9D6C1A2B48F8001DDDEC /* musics_icon.png */,
 				057C9D6D1A2B48F8001DDDEC /* musics_icon@2x.png */,
 				057C9D701A2B4937001DDDEC /* usage_photos_icon.png */,
@@ -2720,6 +2737,7 @@
 				0526448F19D5A26400B63759 /* notifications_icon@2x.png in Resources */,
 				051412A119D46393000EAE63 /* Default_old@2x.png in Resources */,
 				058337FE19EDA08200DCF0C5 /* player_progress.png in Resources */,
+				059C04691A8521C5007B18BE /* contact_sync_icon@2x.png in Resources */,
 				058337F319EDA02C00DCF0C5 /* bttn-video-expend@2x.png in Resources */,
 				050A7B1919F7CBB600B084B9 /* volume_mute.png in Resources */,
 				0589066319CC524900A9E517 /* TurkcellSaturaReg.ttf in Resources */,
@@ -2813,6 +2831,7 @@
 				059AD3771A1E26A000AA41BD /* circle_doc_icon@2x.png in Resources */,
 				05224ABB19DC4A2D00214767 /* menu_select_blue_flap@2x.png in Resources */,
 				053EC45719DAA2BF000C2B77 /* Localizable.strings in Resources */,
+				059C04681A8521C5007B18BE /* contact_sync_icon.png in Resources */,
 				0589062D19CC226D00A9E517 /* dark_blue_bg.png in Resources */,
 				05224AB119DC4A2D00214767 /* menu_select_blue_flap.png in Resources */,
 				058337EF19EDA01300DCF0C5 /* bttn-video-pause@2x.png in Resources */,
@@ -2886,6 +2905,7 @@
 				051CB41C19D2F71200E5FC88 /* blue_add_new_folder_icon@2x.png in Resources */,
 				05994F9A1A0B57080081F000 /* music_forward@2x.png in Resources */,
 				051E1E0919CAC2F900FD1E03 /* Images.xcassets in Resources */,
+				059C04661A8521C5007B18BE /* yellow_contact_sync_icon@2x.png in Resources */,
 				0526447819D5A26400B63759 /* toggle_off.png in Resources */,
 				051CB3EF19D2F71200E5FC88 /* nav_blue_tick.png in Resources */,
 				051CB3B619D2F6F700E5FC88 /* nav_share_icon.png in Resources */,
@@ -2912,6 +2932,7 @@
 				05224AB219DC4A2D00214767 /* dont_show_blue_tick.png in Resources */,
 				059E9A061A35DBB300922A77 /* sms_icon@2x.png in Resources */,
 				057C9D801A2B89BD001DDDEC /* shuffle.png in Resources */,
+				059C04671A8521C5007B18BE /* yellow_contact_sync_icon.png in Resources */,
 				051CB40E19D2F71200E5FC88 /* white_share_icon@2x.png in Resources */,
 				058337FF19EDA08200DCF0C5 /* player_progress@2x.png in Resources */,
 				058337F719EDA04A00DCF0C5 /* bttn-player-handle@2x.png in Resources */,
@@ -3240,6 +3261,7 @@
 				055A3F5D19E82B2C004A0121 /* PhotoAlbumController.m in Sources */,
 				051DE36719CC12FD00F27C85 /* CustomButton.m in Sources */,
 				05BBE71419E07D0400805215 /* RefSongCell.m in Sources */,
+				059C046C1A85256B007B18BE /* ContactSyncController.m in Sources */,
 				053D0EDB19DAEA29006A13E0 /* ProcessFooterView.m in Sources */,
 				051E1E5719CAC90700FD1E03 /* AFPropertyListRequestOperation.m in Sources */,
 				059A46E31A6D3E3F00935023 /* AccountDao.m in Sources */,

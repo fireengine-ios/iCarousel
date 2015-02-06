@@ -150,7 +150,8 @@
 - (void) statusSuccessCallback:(MigrationStatus *) status {
     [self hideLoading];
     if([status.status isEqualToString:@"FINISHED"]) {
-        [APPDELEGATE triggerLogin];
+        [APPDELEGATE triggerPostTermsAndMigration];
+        [self.view removeFromSuperview];
     } else {
         percentLabel.text = [NSString stringWithFormat:@"%%%d", (int)status.progress];
         self.statusList = [NSMutableArray arrayWithCapacity:2];
@@ -163,7 +164,7 @@
         
         [statusChart reloadData];
         
-        [statusDao performSelector:@selector(requestMigrationStatus) withObject:nil afterDelay:3.0f];
+        [statusDao performSelector:@selector(requestMigrationStatus) withObject:nil afterDelay:2.0f];
     }
 }
 

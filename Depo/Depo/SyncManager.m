@@ -36,32 +36,7 @@
 }
 
 - (void) startFirstTimeSync {
-    //TODO şimdilik sıfırdan silip yüklemelerde eski dosyalar için kontrol yok çünkü datayı hash'lemek gerekiyor ve bu uzun sürüyor.
-//    [elasticSearchDao requestPhotosForPage:0 andSize:10000 andSortType:SortTypeAlphaAsc];
-    
-    NSTimeInterval timeInMiliseconds1 = [[NSDate date] timeIntervalSince1970];
-    NSLog(@"startFirstTimeSync Start: %f", timeInMiliseconds1);
-
-    NSArray *localHashList = [SyncUtil readSyncHashLocally];
-    
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-        [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-            if(group) {
-                [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
-                    if(asset) {
-                        NSString *localHash = [asset.defaultRepresentation MD5];
-                        if(![localHashList containsObject:localHash]) {
-                            [self startUploadForAsset:asset andRemoteHash:nil andLocalHash:localHash];
-                            [SyncUtil updateLastSyncDate];
-                        }
-                    }
-                }];
-            } else {
-                [self firstTimeSyncStartFinalized];
-            }
-        } failureBlock:^(NSError *error) {
-        }];
-    });
+    [elasticSearchDao requestPhotosForPage:0 andSize:10000 andSortType:SortTypeAlphaAsc];
 }
 
 - (void) startAutoSync {
@@ -95,9 +70,36 @@
  
 - (void) photoListSuccessCallback:(NSArray *) files {
     for(MetaFile *row in files) {
-        [SyncUtil cacheSyncHashRemotely:row.hash];
+        if(row.metaHash != nil) {
+            [SyncUtil cacheSyncHashRemotely:row.metaHash];
+        }
     }
+    
+    NSArray *remoteHashList = [SyncUtil readSyncHashRemotely];
 
+    NSTimeInterval timeInMiliseconds1 = [[NSDate date] timeIntervalSince1970];
+    NSLog(@"startFirstTimeSync Start: %f", timeInMiliseconds1);
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+            if(group) {
+                [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
+                    if(asset) {
+                        NSString *localHash = [asset.defaultRepresentation MD5];
+                        if(![remoteHashList containsObject:localHash]) {
+                            [self startUploadForAsset:asset andRemoteHash:nil andLocalHash:localHash];
+                            [SyncUtil updateLastSyncDate];
+                        }
+                    }
+                }];
+            } else {
+                [self firstTimeSyncStartFinalized];
+            }
+        } failureBlock:^(NSError *error) {
+        }];
+    });
+
+    /*
     NSArray *remoteHashList = [SyncUtil readSyncHashRemotely];
     
     NSTimeInterval timeInMiliseconds1 = [[NSDate date] timeIntervalSince1970];
@@ -135,6 +137,7 @@
         } failureBlock:^(NSError *error) {
         }];
     });
+     */
 }
 
 - (void) photoListFailCallback:(NSString *) errorMessage {
@@ -145,6 +148,7 @@
     NSLog(@"End: %f", timeInMiliseconds2);
     [SyncUtil writeFirstTimeSyncFlag];
     [SyncUtil writeLastSyncDate:[NSDate date]];
+//    [APPDELEGATE.uploadQueue startReadyTasks];
 }
 
 - (void) manuallyCheckIfAlbumChanged {
@@ -182,11 +186,16 @@
                             NSString *localHash = [asset.defaultRepresentation MD5];
                             if(![localHashList containsObject:localHash] && [APPDELEGATE.uploadQueue uploadRefForAsset:[asset.defaultRepresentation.url absoluteString]] == nil) {
                                 [self startUploadForAsset:asset andRemoteHash:nil andLocalHash:localHash];
-                                [SyncUtil updateLastSyncDate];
+//                                [SyncUtil updateLastSyncDate];
 //                                [SyncUtil increaseBadgeCount];
                             }
                         }
                     }];
+                } else {
+                    NSTimeInterval timeInMiliseconds2 = [[NSDate date] timeIntervalSince1970];
+                    NSLog(@"End: %f", timeInMiliseconds2);
+                    [SyncUtil writeLastSyncDate:[NSDate date]];
+//                    [APPDELEGATE.uploadQueue startReadyTasks];
                 }
             } failureBlock:^(NSError *error) {
             }];
