@@ -280,8 +280,7 @@
     }
 
     if(contactSyncFlag == EnableOptionAuto || contactSyncFlag == EnableOptionOn) {
-        //TODO uncomment and test
-//        [ContactSyncSDK runInBackground];
+        [ContactSyncSDK runInBackground];
     }
 
     completionHandler(UIBackgroundFetchResultNewData);
@@ -293,10 +292,10 @@
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+    if ([ContactSyncSDK automated]){
+        [ContactSyncSDK sleep];
+    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -307,6 +306,10 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     [SyncUtil resetBadgeCount];
     application.applicationIconBadgeNumber = 0;
+    [ContactSyncSDK awake];
+    if(session != nil) {
+        [session checkLatestContactSyncStatus];
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

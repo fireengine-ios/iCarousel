@@ -17,11 +17,11 @@
 }
 + (void)getContacts:(NSNumber*)currentPage pageSize:(NSNumber*)pageSize totalRecords:(NSNumber*)totalRecords callback:(void (^)(id, BOOL))callback
 {
-    NSMutableDictionary *params = [@{
-                             @"currentPage":currentPage,
-                             @"maxResult":pageSize
-                             } mutableCopy];
-    if (!SYNC_IS_NULL(totalRecords) && [totalRecords integerValue]>0){
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    SYNC_SET_DICT_IF_NOT_NIL(params, currentPage, @"currentPage");
+    SYNC_SET_DICT_IF_NOT_NIL(params, pageSize, @"maxResult");
+
+    if (!SYNC_NUMBER_IS_NULL_OR_ZERO(totalRecords)){
         [params setObject:totalRecords forKey:@"totalCount"];
     }
     [SyncAdapter request:[self buildURL:@"contact"] params:[params copy] headers:nil method:GET callback:callback];
@@ -37,6 +37,10 @@
 + (void)deleteContact:(NSNumber*)contactId callback:(void (^)(id, BOOL))callback
 {
     [SyncAdapter request:[self buildURL:[NSString stringWithFormat:@"contact/%@",contactId]] params:nil headers:nil method:DELETE callback:callback];
+}
++ (void)deleteContact:(NSNumber*)contactId permanent:(BOOL)permanent callback:(void (^)(id, BOOL))callback
+{
+    [SyncAdapter request:[self buildURL:[NSString stringWithFormat:@"contact/%@?permanent=%@",contactId, permanent?@"true":@"false"]] params:nil headers:nil method:DELETE callback:callback];
 }
 + (void)getServerTime:(void (^)(id, BOOL))callback
 {
@@ -124,7 +128,12 @@
     [self addHeader:@"Content-Type" value:@"application/json" request:request];
     [self addHeader:@"Cache-Control" value:@"no-cache" request:request];
     [self addHeader:@"User-Agent" value:SYNC_USER_AGENT request:request];
-    [self addHeader:SYNC_HEADER_MSISDN value:[SyncSettings shared].msisdn request:request];
+    if (SYNC_STRING_IS_NULL_OR_EMPTY([SyncSettings shared].msisdn)){
+        [self addHeader:SYNC_HEADER_AUTH_TOKEN value:[SyncSettings shared].token request:request];
+    } else {
+        [self addHeader:SYNC_HEADER_MSISDN value:[SyncSettings shared].msisdn request:request];
+    }
+    
     [self addHeader:SYNC_HEADER_CLIENT_VERSION value:SYNC_VERSION request:request];
     
     void (^success)(id responseObject) = ^(id responseObject){

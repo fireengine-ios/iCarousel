@@ -469,6 +469,9 @@
 		059C046C1A85256B007B18BE /* ContactSyncController.m in Sources */ = {isa = PBXBuildFile; fileRef = 059C046B1A85256B007B18BE /* ContactSyncController.m */; };
 		059C9EC71A07DC60000C54D9 /* FolderDetailModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 059C9EC61A07DC60000C54D9 /* FolderDetailModalController.m */; };
 		059C9ECA1A07DCAD000C54D9 /* FileDetailModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 059C9EC91A07DCAD000C54D9 /* FileDetailModalController.m */; };
+		059CE5471A87D45100F6CFAE /* ContactSyncResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 059CE5461A87D45100F6CFAE /* ContactSyncResult.m */; };
+		059CE54A1A87DC5300F6CFAE /* ContactSyncResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 059CE5491A87DC5300F6CFAE /* ContactSyncResultCell.m */; };
+		059CE54D1A87E7BA00F6CFAE /* ContactSyncResultTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 059CE54C1A87E7BA00F6CFAE /* ContactSyncResultTitleCell.m */; };
 		059D97991A0CF12E00BCEDF3 /* RenameDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 059D97981A0CF12E00BCEDF3 /* RenameDao.m */; };
 		059E9A021A35DB5F00922A77 /* SmsForPassButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 059E9A011A35DB5F00922A77 /* SmsForPassButton.m */; };
 		059E9A051A35DBB300922A77 /* sms_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 059E9A031A35DBB300922A77 /* sms_icon.png */; };
@@ -1257,6 +1260,12 @@
 		059C9EC61A07DC60000C54D9 /* FolderDetailModalController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderDetailModalController.m; sourceTree = "<group>"; };
 		059C9EC81A07DCAD000C54D9 /* FileDetailModalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileDetailModalController.h; sourceTree = "<group>"; };
 		059C9EC91A07DCAD000C54D9 /* FileDetailModalController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileDetailModalController.m; sourceTree = "<group>"; };
+		059CE5451A87D45100F6CFAE /* ContactSyncResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactSyncResult.h; sourceTree = "<group>"; };
+		059CE5461A87D45100F6CFAE /* ContactSyncResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactSyncResult.m; sourceTree = "<group>"; };
+		059CE5481A87DC5300F6CFAE /* ContactSyncResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactSyncResultCell.h; sourceTree = "<group>"; };
+		059CE5491A87DC5300F6CFAE /* ContactSyncResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactSyncResultCell.m; sourceTree = "<group>"; };
+		059CE54B1A87E7BA00F6CFAE /* ContactSyncResultTitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactSyncResultTitleCell.h; sourceTree = "<group>"; };
+		059CE54C1A87E7BA00F6CFAE /* ContactSyncResultTitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactSyncResultTitleCell.m; sourceTree = "<group>"; };
 		059D97971A0CF12E00BCEDF3 /* RenameDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenameDao.h; sourceTree = "<group>"; };
 		059D97981A0CF12E00BCEDF3 /* RenameDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RenameDao.m; sourceTree = "<group>"; };
 		059E9A001A35DB5F00922A77 /* SmsForPassButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmsForPassButton.h; sourceTree = "<group>"; };
@@ -1918,6 +1927,8 @@
 				05620F201A4C62B30089DFB5 /* SyncReference.m */,
 				05DEB1C11A80B8FE007793DD /* MigrationStatus.h */,
 				05DEB1C21A80B8FE007793DD /* MigrationStatus.m */,
+				059CE5451A87D45100F6CFAE /* ContactSyncResult.h */,
+				059CE5461A87D45100F6CFAE /* ContactSyncResult.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -1977,6 +1988,10 @@
 				052160A519E308380007B321 /* UploadingImageCell.m */,
 				05C3F6051A3900A8001954E8 /* PostLoginPrefCell.h */,
 				05C3F6061A3900A8001954E8 /* PostLoginPrefCell.m */,
+				059CE5481A87DC5300F6CFAE /* ContactSyncResultCell.h */,
+				059CE5491A87DC5300F6CFAE /* ContactSyncResultCell.m */,
+				059CE54B1A87E7BA00F6CFAE /* ContactSyncResultTitleCell.h */,
+				059CE54C1A87E7BA00F6CFAE /* ContactSyncResultTitleCell.m */,
 			);
 			name = cell;
 			sourceTree = "<group>";
@@ -3136,6 +3151,7 @@
 				05127EC319E19775002C2228 /* FileDetailInWebViewController.m in Sources */,
 				05EA75B819DC78C800AC77AB /* UploadDao.m in Sources */,
 				059A46DC1A6D3E2000935023 /* Offer.m in Sources */,
+				059CE54A1A87DC5300F6CFAE /* ContactSyncResultCell.m in Sources */,
 				052644AE19D5A2A600B63759 /* SettingsPhotosVideosController.m in Sources */,
 				051E1E3919CAC85100FD1E03 /* BaseDao.m in Sources */,
 				056AC8FE19D15EA200AC96C3 /* CacheUtil.m in Sources */,
@@ -3280,6 +3296,7 @@
 				051DE36919CC12FD00F27C85 /* CheckButton.m in Sources */,
 				050A7B2319F7DFBD00B084B9 /* VolumeLevelIndicator.m in Sources */,
 				05DEB1EE1A81775F007793DD /* SyncDB.m in Sources */,
+				059CE5471A87D45100F6CFAE /* ContactSyncResult.m in Sources */,
 				058BC23C1A30E5370007F4DE /* ValidateAuthTokenDao.m in Sources */,
 				055A3F5219E819B6004A0121 /* EmptyPhotoAlbumCell.m in Sources */,
 				057DF50519D02E100005A389 /* SettingsController.m in Sources */,
@@ -3309,6 +3326,7 @@
 				05A484591A6C610400793A90 /* UIImage+Resize.m in Sources */,
 				05C7145C1A7823C400C467D9 /* RadiusDao.m in Sources */,
 				05DEB1C91A80C16B007793DD /* MigrateDao.m in Sources */,
+				059CE54D1A87E7BA00F6CFAE /* ContactSyncResultTitleCell.m in Sources */,
 				05C2A0341A79830500EE4D78 /* ADJRequestHandler.m in Sources */,
 				05D2B19719E676BF00FC309D /* AlbumListDao.m in Sources */,
 				0524E32919D955FA00E2698E /* FileDetail.m in Sources */,

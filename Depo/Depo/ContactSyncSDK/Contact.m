@@ -162,6 +162,16 @@
     return YES;
 }
 
+- (NSString*)displayName
+{
+    if (SYNC_STRING_IS_NULL_OR_EMPTY(self.middleName)){
+        return [NSString stringWithFormat:@"%@ %@",(SYNC_IS_NULL(self.firstName)?@"":self.firstName), (SYNC_IS_NULL(self.lastName)?@"":self.lastName)];
+    } else {
+        return [NSString stringWithFormat:@"%@ %@ %@",(SYNC_IS_NULL(self.firstName)?@"":self.firstName), self.middleName, (SYNC_IS_NULL(self.lastName)?@"":self.lastName)];
+    }
+    
+}
+
 - (void) copyContact:(Contact *)contact
 {
     _firstName = contact.firstName;

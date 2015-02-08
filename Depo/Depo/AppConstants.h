@@ -101,6 +101,10 @@
 
 #define LAST_SYNC_DATE @"LAST_SYNC_DATE"
 
+#define LAST_CONTACT_SYNC_DATE @"LAST_CONTACT_SYNC_DATE"
+
+#define LAST_CONTACT_SYNC_RESULT @"LAST_CONTACT_SYNC_RESULT"
+
 #define SYNC_REF_KEY @"SYNC_REF_KEY"
 
 #define SETTINGS_PROFILE_IMAGE @"SETTINGS_PROFILE_IMAGE"
@@ -128,6 +132,8 @@
 #define SETTINGS_NOTIFICATIONS @"SETTINGS_NOTIFICATIONS"
 
 #define MAX_CONCURRENT_UPLOAD_TASKS 5
+
+#define CONTACT_SYNC_SERVER_URL @"http://contactsync.test.valven.com/ttyapi/"
 
 #define SuppressPerformSelectorLeakWarning(Stuff) \
 do { \

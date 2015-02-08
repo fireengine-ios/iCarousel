@@ -154,9 +154,10 @@ static bool syncing = false;
             // this is a new record, clear IDs
             remoteContact.recordRef = nil;
             remoteContact.objectId = nil;
-            [SyncStatus shared].newContactsReceived++;
             
             [[ContactUtil shared] save:remoteContact];
+            
+            [[SyncStatus shared] addContact:remoteContact state:SYNC_INFO_NEW_CONTACT_ON_DEVICE];
         } else {
             remoteContact.objectId = duplicate.objectId;
             remoteContact.localUpdateDate = duplicate.localUpdateDate;
@@ -200,7 +201,7 @@ static bool syncing = false;
             [localContact copyContact:remoteContact];
             
             [[ContactUtil shared] save:localContact];
-            [SyncStatus shared].updatedContactsReceived++;
+            [[SyncStatus shared] addContact:remoteContact state:SYNC_INFO_UPDATED_ON_DEVICE];
         }
         [_dirtyContacts removeObjectForKey:remoteContact.objectId];
         
@@ -228,7 +229,8 @@ static bool syncing = false;
         SYNC_Log(@"Deleting row : %@", record.localId);
         if ([[ContactUtil shared] deleteContact:record.localId]){
             [toBeDeleted addObject:record.localId];
-            [SyncStatus shared].deletedContactsOnDevice++;
+            
+            [[SyncStatus shared] addRecord:record state:SYNC_INFO_DELETED_ON_DEVICE];
         }
     }
     if ([toBeDeleted count]>0){
@@ -241,7 +243,8 @@ static bool syncing = false;
     for (SyncRecord *record in records){
         [SyncAdapter deleteContact:record.remoteId callback:nil];
         [toBeDeleted addObject:record.localId];
-        [SyncStatus shared].deletedContactsOnServer++;
+        
+        [[SyncStatus shared] addRecord:record state:SYNC_INFO_DELETED_ON_SERVER];
     }
     if ([toBeDeleted count]>0){
         [_db deleteRecords:toBeDeleted];
@@ -263,12 +266,15 @@ static bool syncing = false;
                     NSNumber *item = data[i];
                     if (!SYNC_NUMBER_IS_NULL_OR_ZERO(item)){
                         Contact *c = contacts[i];
+                        SYNCInfoStateType state;
                         if (SYNC_IS_NULL(c.remoteId)){
-                            [SyncStatus shared].newContactsSent++;
+                            state = SYNC_INFO_NEW_CONTACT_ON_SERVER;
                         } else {
-                            [SyncStatus shared].updatedContactsSent++;
+                            state = SYNC_INFO_UPDATED_ON_SERVER;
                         }
                         c.remoteId = item;
+                        
+                        [[SyncStatus shared] addContact:c state:state];
                         
                         SyncRecord *record = [SyncRecord new];
                         record.localId = c.objectId;

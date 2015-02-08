@@ -186,6 +186,7 @@
 "AlbumFieldTitle"="ALBÜM";
 "TrackDetailSegmentTitle"="ŞARKI BİLGİLERİ";
 "DurationTitle"="Süre";
+"NoneTitle"="Hiç";
 
 "RecentActivitySingleFileFavorited"="%d dosya favorilere eklendi";
 "RecentActivityMultipleFilesFavorited"="%d dosya favorilere eklendi";
@@ -388,3 +389,18 @@
 "LoginRequiredMessage"="Giriş yapmanız gerekmektedir.";
 
 "MenuContactSync"="Rehber Yedekleme";
+
+"ContactSyncFlagTitle"="Otomatik Senkronizasyon";
+"ContactLastSyncDateTitle"="Son Senkronizasyon Tarihi: %@";
+"ContactLastSyncDetailTitle"="SON SENKRONİZASYON DETAYI";
+"ContactLastSyncDetailClientTitle"="Cihaz";
+"ContactLastSyncDetailServerTitle"="Sunucu";
+"ContactLastSyncDetailUpdateTitle"="Güncellenen";
+"ContactLastSyncDetailNewTitle"="Oluşturulan";
+"ContactLastSyncDetailDeleteTitle"="Silinen";
+"ManualSyncTitle"="Yedeklemeyi Başlat";
+
+"AddressBookGrantError"="Rehber kullanımına izin vermeniz gerekmektedir.";
+"ContactSyncApiError"="Yedekleme esnasında genel bir hata oluştu.";
+"ContactSyncNetworkError"="Yedekleme esnasında genel bir hata oluştu.";
+"ContactSyncGeneralError"="Yedekleme esnasında genel bir hata oluştu.";

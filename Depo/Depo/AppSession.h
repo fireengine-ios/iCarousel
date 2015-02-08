@@ -13,6 +13,7 @@
 #import "NSMutableArray_Shuffling.h"
 #import "MetaFile.h"
 #import "Usage.h"
+#import "ContactSyncResult.h"
 
 @interface AppSession : NSObject
 
@@ -31,6 +32,7 @@
 @property (nonatomic) BOOL migrationUserFlag;
 
 @property (nonatomic, strong) Usage *usage;
+@property (nonatomic, strong) ContactSyncResult *syncResult;
 
 - (void) playAudioItemAtIndex:(int) itemIndex;
 - (void) playNextAudioItem;
@@ -40,5 +42,6 @@
 - (void) stopAudioItem;
 - (void) shuffleItems;
 - (MetaFile *) itemRefForCurrentAsset;
+- (void) checkLatestContactSyncStatus;
 
 @end

@@ -21,6 +21,7 @@ typedef enum {
 + (void)getContacts:(NSNumber*)currentPage pageSize:(NSNumber*)pageSize totalRecords:(NSNumber*)totalRecords callback:(void (^)(id, BOOL))callback;
 + (void)updateContacts:(NSArray*)contacts callback:(void (^)(id, BOOL))callback;
 + (void)deleteContact:(NSNumber*)contactId callback:(void (^)(id, BOOL))callback;
++ (void)deleteContact:(NSNumber*)contactId permanent:(BOOL)permanent callback:(void (^)(id, BOOL))callback;
 + (void)getServerTime:(void (^)(id, BOOL))callback;
 
 @end

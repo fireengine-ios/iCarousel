@@ -8,12 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import "SyncReference.h"
+#import "ContactSyncResult.h"
 
 @interface SyncUtil : NSObject
 
 + (NSDate *) readLastSyncDate;
++ (NSDate *) readLastContactSyncDate;
 + (void) writeLastSyncDate:(NSDate *) syncDate;
 + (void) updateLastSyncDate;
++ (void) updateLastContactSyncDate;
 + (void) cacheSyncReference:(SyncReference *) ref;
 + (NSArray *) readSyncReferences;
 + (NSString *) md5String:(NSData *) data;
@@ -28,5 +31,10 @@
 + (void) increaseBadgeCount;
 + (void) resetBadgeCount;
 + (int) readBadgeCount;
+
++ (void) startContactAutoSync;
++ (void) stopContactAutoSync;
++ (void) writeLastContactSyncResult:(ContactSyncResult *) syncResult;
++ (ContactSyncResult *) readLastContactSyncResult;
 
 @end

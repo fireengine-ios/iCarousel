@@ -9,6 +9,8 @@
 #import "AppSession.h"
 #import "UploadManager.h"
 #import "CacheUtil.h"
+#import "ContactSyncSDK.h"
+#import "SyncUtil.h"
 
 @implementation AppSession
 
@@ -24,6 +26,7 @@
 @synthesize usage;
 @synthesize newUserFlag;
 @synthesize migrationUserFlag;
+@synthesize syncResult;
 
 - (id) init {
     if(self = [super init]) {
@@ -37,6 +40,8 @@
         
         //5322102103 for ios
         //5322109094 for presentation
+
+        [self checkLatestContactSyncStatus];
     }
     return self;
 }
@@ -121,6 +126,26 @@
     
     if(self.currentAudioItemIndex + 1 < [self.playerItems count]) {
         [self playAudioItemAtIndex:self.currentAudioItemIndex + 1];
+    }
+}
+
+- (void) checkLatestContactSyncStatus {
+    SyncStatus *status = [SyncStatus shared];
+    if(status != nil) {
+        if(status.status == SYNC_RESULT_SUCCESS) {
+            ContactSyncResult *currentSyncResult = [[ContactSyncResult alloc] init];
+            currentSyncResult.clientUpdateCount = status.updatedContactsSent.count;
+            currentSyncResult.serverUpdateCount = status.updatedContactsReceived.count;
+            currentSyncResult.clientNewCount = status.createdContactsSent.count;
+            currentSyncResult.serverNewCount = status.createdContactsReceived.count;
+            currentSyncResult.clientDeleteCount = status.deletedContactsOnDevice.count;
+            currentSyncResult.serverDeleteCount = status.deletedContactsOnServer.count;
+            self.syncResult = currentSyncResult;
+            [SyncUtil writeLastContactSyncResult:currentSyncResult];
+        }
+    }
+    if(self.syncResult == nil) {
+        self.syncResult = [SyncUtil readLastContactSyncResult];
     }
 }
 

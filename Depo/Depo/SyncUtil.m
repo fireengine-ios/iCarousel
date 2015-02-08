@@ -9,6 +9,9 @@
 #import "SyncUtil.h"
 #import "AppConstants.h"
 #import <CommonCrypto/CommonDigest.h>
+#import "ContactSyncSDK.h"
+#import "AppDelegate.h"
+#import "AppSession.h"
 
 @implementation SyncUtil
 
@@ -23,6 +26,15 @@
 
 + (void) updateLastSyncDate {
     [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:LAST_SYNC_DATE];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (NSDate *) readLastContactSyncDate {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:LAST_CONTACT_SYNC_DATE];
+}
+
++ (void) updateLastContactSyncDate {
+    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:LAST_CONTACT_SYNC_DATE];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -152,6 +164,33 @@
 
 + (int) readBadgeCount {
     return (int)[[NSUserDefaults standardUserDefaults] integerForKey:UPLOAD_FILE_BADGE_COUNT_KEY];
+}
+
++ (void) startContactAutoSync {
+    [SyncSettings shared].token = APPDELEGATE.session.authToken;
+    [SyncSettings shared].url = CONTACT_SYNC_SERVER_URL;
+    [ContactSyncSDK doSync:YES];
+}
+
++ (void) stopContactAutoSync {
+    if ([ContactSyncSDK automated]){
+        [ContactSyncSDK cancel];
+    }
+    
+}
+
++ (void) writeLastContactSyncResult:(ContactSyncResult *) syncResult {
+    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:syncResult] forKey:LAST_CONTACT_SYNC_RESULT];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (ContactSyncResult *) readLastContactSyncResult {
+    ContactSyncResult *result = nil;
+    NSData *resultData = [[NSUserDefaults standardUserDefaults] objectForKey:LAST_CONTACT_SYNC_RESULT];
+    if (resultData != nil) {
+        result = [NSKeyedUnarchiver unarchiveObjectWithData:resultData];
+    }
+    return result;
 }
 
 @end

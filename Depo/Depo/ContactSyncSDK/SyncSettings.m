@@ -24,7 +24,7 @@
     if (self){
         _debug = YES;
         _environment = SYNCDevelopmentEnvironment;
-        _syncInterval = SYNC_DEFAULT_INTERVAL*60;
+        _syncInterval = SYNC_DEFAULT_INTERVAL;
     }
     return self;
 }

@@ -29,5 +29,6 @@
 - (instancetype)initWithDictionary:(NSDictionary*)json;
 - (NSDictionary*) toJSON;
 - (void)copyContact:(Contact*)contact;
+- (NSString*)displayName;
 
 @end

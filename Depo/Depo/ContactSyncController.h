@@ -7,7 +7,12 @@
 //
 
 #import "MyViewController.h"
+#import "CustomLabel.h"
 
-@interface ContactSyncController : MyViewController
+@interface ContactSyncController : MyViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, strong) UISwitch *autoSyncSwitch;
+@property (nonatomic, strong) CustomLabel *lastSyncDateLabel;
+@property (nonatomic, strong) UITableView *lastSyncDetailTable;
 
 @end

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "SearchHistory.h"
+#import "ContactSyncResult.h"
 
 @interface CacheUtil : NSObject
 

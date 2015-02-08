@@ -29,9 +29,13 @@ typedef NS_ENUM(NSUInteger, SYNCEnvironment) {
 @property (strong) NSString *url;
 @property SYNCEnvironment environment;
 /**
- * MSISDN of user
+ * MSISDN of user. Either this value or token is required
  */
 @property NSString *msisdn;
+/**
+ * Auth token. Either this value or msisdn is required
+ */
+@property NSString *token;
 /**
  * Sync interval in minutes.
  */

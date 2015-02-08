@@ -7,6 +7,33 @@
 
 #import "SyncStatus.h"
 
+@implementation SyncInfo
+
+- (instancetype)initWithContact:(Contact*)contact andState:(SYNCInfoStateType)state
+{
+    self = [super init];
+    if (self){
+        _localId = contact.objectId;
+        _remoteId = contact.remoteId;
+        _name = [contact displayName];
+        _state = state;
+    }
+    return self;
+}
+
+- (instancetype)initWithRecord:(SyncRecord*)record andState:(SYNCInfoStateType)state
+{
+    self = [super init];
+    if (self){
+        _localId = record.localId;
+        _remoteId = record.remoteId;
+        _state = state;
+    }
+    return self;
+}
+
+@end
+
 @implementation SyncStatus
 
 + (void)handleNSError:(NSError*)error
@@ -25,15 +52,49 @@
     }
 }
 
+- (void)addContact:(Contact*)contact state:(SYNCInfoStateType)state
+{
+    SyncInfo *info = [[SyncInfo alloc] initWithContact:contact andState:state];
+    [self addItem:info];
+}
+- (void)addRecord:(SyncRecord*)record state:(SYNCInfoStateType)state
+{
+    SyncInfo *info = [[SyncInfo alloc] initWithRecord:record andState:state];
+    [self addItem:info];
+}
+- (void)addItem:(SyncInfo*)object
+{
+    switch (object.state) {
+        case SYNC_INFO_DELETED_ON_DEVICE:
+           [_deletedContactsOnDevice addObject:object];
+            break;
+        case SYNC_INFO_DELETED_ON_SERVER:
+            [_deletedContactsOnServer addObject:object];
+            break;
+        case SYNC_INFO_NEW_CONTACT_ON_DEVICE:
+            [_createdContactsReceived addObject:object];
+            break;
+        case SYNC_INFO_NEW_CONTACT_ON_SERVER:
+            [_createdContactsSent addObject:object];
+            break;
+        case SYNC_INFO_UPDATED_ON_DEVICE:
+            [_updatedContactsReceived addObject:object];
+            break;
+        case SYNC_INFO_UPDATED_ON_SERVER:
+            [_updatedContactsSent addObject:object];
+            break;
+    }
+}
+
 - (void)reset
 {
-    _newContactsReceived = 0;
-    _updatedContactsReceived = 0;
-    _newContactsSent = 0;
-    _updatedContactsSent = 0;
+    _createdContactsReceived = [NSMutableArray new];
+    _updatedContactsReceived = [NSMutableArray new];
+    _createdContactsSent = [NSMutableArray new];
+    _updatedContactsSent = [NSMutableArray new];
     
-    _deletedContactsOnDevice = 0;
-    _deletedContactsOnServer = 0;
+    _deletedContactsOnDevice = [NSMutableArray new];
+    _deletedContactsOnServer = [NSMutableArray new];
     
     _status = SYNC_RESULT_INITIAL;
     _lastError = nil;
