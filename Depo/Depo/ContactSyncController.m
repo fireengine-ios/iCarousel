@@ -114,6 +114,7 @@
 }
 
 - (void) syncClicked {
+//    [SyncSettings shared].debug = YES;
     [SyncSettings shared].token = APPDELEGATE.session.authToken;
     [SyncSettings shared].url = CONTACT_SYNC_SERVER_URL;
     [ContactSyncSDK doSync];

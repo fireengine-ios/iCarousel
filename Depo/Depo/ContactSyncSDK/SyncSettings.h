@@ -2,7 +2,7 @@
 //  SyncSettings.h
 //  ContactSyncExample
 //
-//  Copyright (c) 2015 Turkcell. All rights reserved.
+//  Copyright (c) 2015 Valven. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -29,17 +29,22 @@ typedef NS_ENUM(NSUInteger, SYNCEnvironment) {
 @property (strong) NSString *url;
 @property SYNCEnvironment environment;
 /**
- * MSISDN of user. Either this value or token is required
- */
-@property NSString *msisdn;
-/**
- * Auth token. Either this value or msisdn is required
+ * Auth token.
  */
 @property NSString *token;
+/**
+ * For internal use only
+ */
+@property NSString *msisdn;
 /**
  * Sync interval in minutes.
  */
 @property NSTimeInterval syncInterval;
+/**
+ * Sync periodically. Period can be adjusted using syncInterval
+ */
+@property (nonatomic) BOOL periodicSync;
+
 @property (nonatomic, copy) void (^callback)(void);
 
 + (SYNC_INSTANCETYPE) shared;

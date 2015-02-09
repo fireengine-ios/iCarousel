@@ -2,10 +2,11 @@
 //  ContactDevice.m
 //  ContactSyncExample
 //
-//  Copyright (c) 2015 Turkcell. All rights reserved.
+//  Copyright (c) 2015 Valven. All rights reserved.
 //
 
 #import "ContactDevice.h"
+#import "ContactUtil.h"
 #import <AddressBook/ABPerson.h>
 
 @implementation ContactDevice
@@ -25,12 +26,23 @@
     return nil;
 }
 
+- (NSString*)deviceKey
+{
+    NSString *value = self.value;
+    if ([self isKindOfClass:[ContactPhone class]]){
+        value = [ContactUtil clearMsisdn:self.value];
+    }
+    NSString *key = [NSString stringWithFormat:@"%@-%@",value, [self deviceTypeLabel]];
+    return key;
+}
+
 - (CFStringRef)deviceTypeLabel
 {
     switch (_type) {
         case CDEVICE_HOME:
             return kABHomeLabel;
         case CDEVICE_MOBILE:
+        case CDEVICE_WORK_MOBILE:
             return kABPersonPhoneMobileLabel;
         case CDEVICE_WORK:
             return kABWorkLabel;
@@ -116,13 +128,22 @@
     if (self){
         self.remoteId = SYNC_IS_NULL(json[@"id"])?[NSNumber numberWithInt:0] : json[@"id"];
         self.value = SYNC_IS_NULL(json[@"value"]) ? nil : json[@"value"];
+        NSString *subType = json[@"subtype"];
         NSString *infoType = json[@"infoType"];
-        if ([@"pro" isEqualToString:infoType]){
-            self.type = CDEVICE_WORK;
-        } else if ([@"perso" isEqualToString:infoType]){
-            self.type = CDEVICE_HOME;
-        } else {
-            self.type = CDEVICE_OTHER;
+        if ([@"cell" isEqualToString:subType]){
+            if ([@"pro" isEqualToString:infoType]){
+                self.type = CDEVICE_WORK_MOBILE;
+            } else {
+                self.type = CDEVICE_MOBILE;
+            }
+        } else if ([@"voice" isEqualToString:subType]){
+            if ([@"pro" isEqualToString:infoType]){
+                self.type = CDEVICE_WORK;
+            } else if ([@"perso" isEqualToString:infoType]){
+                self.type = CDEVICE_HOME;
+            } else {
+                self.type = CDEVICE_OTHER;
+            }
         }
     }
     return self;
@@ -148,12 +169,12 @@
             break;
         }
         case CDEVICE_WORK_MOBILE:{
-            dict[@"infoType"] = @"perso";
+            dict[@"infoType"] = @"pro";
             dict[@"subtype"] = @"cell";
             break;
         }
         case CDEVICE_MOBILE:{
-            dict[@"infoType"] = @"pro";
+            dict[@"infoType"] = @"perso";
             dict[@"subtype"] = @"cell";
             break;
         }
@@ -194,24 +215,15 @@
 {
     self = [super init];
     if (self){
-        self.remoteId = json[@"id"];
+        self.remoteId = SYNC_IS_NULL(json[@"id"])?[NSNumber numberWithInt:0] : json[@"id"];
         self.value = SYNC_IS_NULL(json[@"value"]) ? nil : json[@"value"];
-        NSString *subType = json[@"subtype"];
         NSString *infoType = json[@"infoType"];
-        if ([@"cell" isEqualToString:subType]){
-            if ([@"pro" isEqualToString:infoType]){
-                self.type = CDEVICE_WORK_MOBILE;
-            } else {
-                self.type = CDEVICE_MOBILE;
-            }
-        } else if ([@"voice" isEqualToString:subType]){
-            if ([@"pro" isEqualToString:infoType]){
-                self.type = CDEVICE_WORK;
-            } else if ([@"perso" isEqualToString:infoType]){
-                self.type = CDEVICE_HOME;
-            } else {
-                self.type = CDEVICE_OTHER;
-            }
+        if ([@"pro" isEqualToString:infoType]){
+            self.type = CDEVICE_WORK;
+        } else if ([@"perso" isEqualToString:infoType]){
+            self.type = CDEVICE_HOME;
+        } else {
+            self.type = CDEVICE_OTHER;
         }
     }
     return self;

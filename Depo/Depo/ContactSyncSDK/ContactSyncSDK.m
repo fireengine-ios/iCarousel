@@ -2,7 +2,7 @@
 //  ContactSyncSDK.m
 //  ContactSyncExample
 //
-//  Copyright (c) 2015 Turkcell. All rights reserved.
+//  Copyright (c) 2015 Valven. All rights reserved.
 //
 
 #import "ContactSyncSDK.h"
@@ -69,28 +69,7 @@ static bool syncing = false;
     self.localContactIds = [NSMutableSet new];
     self.remoteContacts = [NSMutableArray new];
     
-    [self fetchLocalContacts];
     [self fetchRemoteContacts];
-}
-
-- (void)fetchLocalContacts
-{
-    self.dirtyContacts = [NSMutableDictionary new];
-    NSMutableArray *contacts = [[ContactUtil shared] fetchContacts];
-    if (!SYNC_IS_NULL(contacts) && [contacts count]>0){
-        for (Contact *contact in contacts){
-            if (!SYNC_IS_NULL(contact) && ![_localContactIds containsObject:[contact objectId]]){
-                [_localContactIds addObject:[contact objectId]];
-                if ([_db isDirty:contact]){
-                    // we can have its details, otherwise not interested
-                    [[ContactUtil shared] fetchNumbers:contact];
-                    [[ContactUtil shared] fetchEmails:contact];
-                    
-                    [_dirtyContacts setObject:contact forKey:[contact objectId]];
-                }
-            }
-        }
-    }
 }
 
 - (void)fetchRemoteContacts
@@ -121,12 +100,33 @@ static bool syncing = false;
                 [self fetchRemoteContacts];
             } else {
                 // we got all records
-                [self allRecordsAreFetched];
+                [self fetchLocalContacts];
             }
         } else {
             [self endOfSyncCycle:response==nil?SYNC_RESULT_ERROR_REMOTE_SERVER:SYNC_RESULT_ERROR_NETWORK];
         }
     }];
+}
+
+- (void)fetchLocalContacts
+{
+    self.dirtyContacts = [NSMutableDictionary new];
+    NSMutableArray *contacts = [[ContactUtil shared] fetchContacts];
+    if (!SYNC_IS_NULL(contacts) && [contacts count]>0){
+        for (Contact *contact in contacts){
+            if (!SYNC_IS_NULL(contact) && ![_localContactIds containsObject:[contact objectId]]){
+                [_localContactIds addObject:[contact objectId]];
+                if ([_db isDirty:contact]){
+                    // we can have its details, otherwise not interested
+                    [[ContactUtil shared] fetchNumbers:contact];
+                    [[ContactUtil shared] fetchEmails:contact];
+                    
+                    [_dirtyContacts setObject:contact forKey:[contact objectId]];
+                }
+            }
+        }
+    }
+    [self allRecordsAreFetched];
 }
 
 - (void)allRecordsAreFetched
@@ -146,9 +146,9 @@ static bool syncing = false;
     SyncRecord *record = nil;
     if (SYNC_ARRAY_IS_NULL_OR_EMPTY(records)){
         // remote contact is not in local db
-        SYNC_Log(@"remote contact is not in local db");
+        SYNC_Log(@"remote contact is not in local db : %@",[remoteContact displayName]);
         
-        //TODO check for duplicates
+        //check for duplicates
         Contact *duplicate = [[ContactUtil shared] findDuplicate:remoteContact];
         if (duplicate==nil){
             // this is a new record, clear IDs
@@ -328,16 +328,11 @@ static bool syncing = false;
 {
     SYNC_Log(@"%@",[[SyncSettings shared] endpointUrl]);
     
-    [self doSync:NO];
-}
-
-+ (void)doSync:(BOOL)periodic
-{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [[ContactUtil shared] checkAddressbookAccess:^(BOOL hasAccess) {
             if (hasAccess){
                 ContactSyncSDK *sdk = [ContactSyncSDK shared];
-                if (periodic){
+                if ([SyncSettings shared].periodicSync){
                     [sdk setupTimer];
                 }
                 [sdk fireSynch];
@@ -360,10 +355,6 @@ static bool syncing = false;
     if (self.timer && [self.timer isValid]){
         return;
     }
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:[NSNumber numberWithBool:YES] forKey:SYNC_KEY_AUTOMATED];
-    [defaults synchronize];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         NSTimeInterval interval = [SyncSettings shared].syncInterval*60;
@@ -388,13 +379,8 @@ static bool syncing = false;
 }
 
 + (BOOL) automated{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSNumber *automated = [defaults objectForKey:SYNC_KEY_AUTOMATED];
-    if (SYNC_IS_NULL(automated) || ![automated boolValue]){
-        return NO;
-    } else {
-        return YES;
-    }
+    BOOL automated = [SyncSettings shared].periodicSync;
+    return automated;
 }
 
 + (void)sleep
@@ -417,9 +403,7 @@ static bool syncing = false;
 {
     [ContactSyncSDK sleep];
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:[NSNumber numberWithBool:NO] forKey:SYNC_KEY_AUTOMATED];
-    [defaults synchronize];
+    [SyncSettings shared].periodicSync = NO;
 }
 
 + (NSNumber*)lastSyncTime

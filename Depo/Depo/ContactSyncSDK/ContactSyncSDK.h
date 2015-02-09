@@ -2,7 +2,7 @@
 //  ContactSyncSDK.h
 //  ContactSyncExample
 //
-//  Copyright (c) 2015 Turkcell. All rights reserved.
+//  Copyright (c) 2015 Valven. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -21,14 +21,9 @@
 + (NSNumber*)lastSyncTime;
 
 /**
- * Starts synchronization operation for one time
+ * Starts synchronization process
  */
 + (void)doSync;
-/**
- * Starts synchronization process.
- * @param periodic If true, application will synchronize periodically. Otherwise it will be executed only once. Synchronization interval can be adjusted using syncInterval in SyncSettings class.
- */
-+ (void)doSync:(BOOL)periodic;
 /**
  * Cancels synchronization timer. Ongoing operation won't be interrupted
  */

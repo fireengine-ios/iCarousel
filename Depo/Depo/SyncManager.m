@@ -88,6 +88,7 @@
                         NSString *localHash = [asset.defaultRepresentation MD5];
                         if(![remoteHashList containsObject:localHash]) {
                             [self startUploadForAsset:asset andRemoteHash:nil andLocalHash:localHash];
+                            [SyncUtil writeFirstTimeSyncFlag];
                             [SyncUtil updateLastSyncDate];
                         }
                     }
@@ -146,7 +147,6 @@
 - (void) firstTimeSyncStartFinalized {
     NSTimeInterval timeInMiliseconds2 = [[NSDate date] timeIntervalSince1970];
     NSLog(@"End: %f", timeInMiliseconds2);
-    [SyncUtil writeFirstTimeSyncFlag];
     [SyncUtil writeLastSyncDate:[NSDate date]];
 //    [APPDELEGATE.uploadQueue startReadyTasks];
 }

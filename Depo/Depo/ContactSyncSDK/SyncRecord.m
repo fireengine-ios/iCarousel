@@ -2,7 +2,7 @@
 //  SyncRecord.m
 //  ContactSyncExample
 //
-//  Copyright (c) 2015 Turkcell. All rights reserved.
+//  Copyright (c) 2015 Valven. All rights reserved.
 //
 
 #import "SyncRecord.h"

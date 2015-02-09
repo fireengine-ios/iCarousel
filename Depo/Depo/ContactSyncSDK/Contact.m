@@ -2,7 +2,7 @@
 //  Contact.m
 //  ContactSyncExample
 //
-//  Copyright (c) 2015 Turkcell. All rights reserved.
+//  Copyright (c) 2015 Valven. All rights reserved.
 //
 
 #import "Contact.h"
@@ -137,7 +137,7 @@
         NSMutableSet *phoneIdSet = [NSMutableSet new];
         NSMutableSet *emailIdSet = [NSMutableSet new];
         for (ContactDevice *device in _devices){
-            NSString *key = [NSString stringWithFormat:@"%@-%@",device.value, [device deviceTypeLabel]];
+            NSString *key = [device deviceKey];
             if ([device isKindOfClass:[ContactPhone class]]){
                 [phoneIdSet addObject:key];
             } else {
@@ -147,7 +147,7 @@
         
         for (int i=0;i<[other.devices count];i++){
             ContactDevice *device = other.devices[i];
-            NSString *key = [NSString stringWithFormat:@"%@-%@",device.value, [device deviceTypeLabel]];
+            NSString *key = [device deviceKey];
             if ([device isKindOfClass:[ContactEmail class]]){
                 if (![emailIdSet containsObject:key]){
                     return NO;

@@ -169,7 +169,8 @@
 + (void) startContactAutoSync {
     [SyncSettings shared].token = APPDELEGATE.session.authToken;
     [SyncSettings shared].url = CONTACT_SYNC_SERVER_URL;
-    [ContactSyncSDK doSync:YES];
+    [SyncSettings shared].periodicSync = YES;
+    [ContactSyncSDK doSync];
 }
 
 + (void) stopContactAutoSync {

@@ -2,7 +2,7 @@
 //  SyncSettings.m
 //  ContactSyncExample
 //
-//  Copyright (c) 2015 Turkcell. All rights reserved.
+//  Copyright (c) 2015 Valven. All rights reserved.
 //
 
 #import "SyncSettings.h"
@@ -13,6 +13,7 @@
 
 @implementation SyncSettings
 
+@synthesize periodicSync = _periodicSync;
 
 #define CONTACT_SYNC_BASE_DEV_URL @"http://127.0.0.1:8002/sync/ttyapi/";
 #define CONTACT_SYNC_BASE_TEST_URL @"http://contactsync.test.valven.com/ttyapi/";
@@ -25,6 +26,14 @@
         _debug = YES;
         _environment = SYNCDevelopmentEnvironment;
         _syncInterval = SYNC_DEFAULT_INTERVAL;
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSNumber *automated = [defaults objectForKey:SYNC_KEY_AUTOMATED];
+        if (SYNC_IS_NULL(automated) || ![automated boolValue]){
+            _periodicSync = NO;
+        } else {
+            _periodicSync = YES;
+        }
     }
     return self;
 }
@@ -43,6 +52,21 @@
     return instance;
 }
 
+- (void)setPeriodicSync:(BOOL)periodicSync
+{
+    _periodicSync = periodicSync;
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[NSNumber numberWithBool:periodicSync] forKey:SYNC_KEY_AUTOMATED];
+    [defaults synchronize];
+    
+}
+
+- (BOOL)getPeriodicSync
+{
+    return _periodicSync;
+}
+
 - (NSString*)endpointUrl
 {
     if (self.url){
@@ -57,7 +81,5 @@
             return CONTACT_SYNC_BASE_DEV_URL;
     }
 }
-
-
 
 @end

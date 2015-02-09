@@ -2,7 +2,7 @@
 //  SyncConstants.h
 //  ContactSyncExample
 //
-//  Copyright (c) 2015 Turkcell. All rights reserved.
+//  Copyright (c) 2015 Valven. All rights reserved.
 //
 
 #ifndef ContactSyncExample_SyncConstants_h
@@ -16,12 +16,12 @@
 #endif
 #endif
 
-#define SYNC_VERSION @"0.3"
+#define SYNC_VERSION @"0.4"
 #define SYNC_USER_AGENT @"iOS ContactSync SDK"
 
-#define SYNC_HEADER_MSISDN @"X-Msisdn"
 #define SYNC_HEADER_AUTH_TOKEN @"X-Auth-Token"
 #define SYNC_HEADER_CLIENT_VERSION @"X-Client-Version"
+#define SYNC_HEADER_MSISDN @"X-Msisdn"
 
 #define SYNC_KEY_LAST_SYNC_TIME @"ContactSyncLastTime"
 #define SYNC_KEY_AUTOMATED @"ContactSyncAutomated"

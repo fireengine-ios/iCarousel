@@ -2,7 +2,7 @@
 //  ContactUtil.m
 //  ContactSyncExample
 //
-//  Copyright (c) 2015 Turkcell. All rights reserved.
+//  Copyright (c) 2015 Valven. All rights reserved.
 //
 
 #import "ContactUtil.h"
@@ -315,6 +315,22 @@
         [contact.devices addObject:[[ContactEmail alloc] initWithValue:mailAddress andType:type]];
     }
     CFRelease(multiEmails);
+}
+
++ (NSString*)clearMsisdn:(NSString*)input
+{
+    NSError *error = nil;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[ ()-]" options:NSRegularExpressionCaseInsensitive error:&error];
+    NSString *str = regex == nil ? input : [regex stringByReplacingMatchesInString:input options:0 range:NSMakeRange(0, [input length]) withTemplate:@""];
+    if ([str hasPrefix:@"+"]){
+        return str;
+    } else if ([str hasPrefix:@"00"]){
+        return [NSString stringWithFormat:@"+%@", [str substringFromIndex:2]];
+    } else if ([str hasPrefix:@"0"]){
+        return [NSString stringWithFormat:@"+9%@", str];
+    } else {
+        return [NSString stringWithFormat:@"+90%@", str];
+    }
 }
 
 @end

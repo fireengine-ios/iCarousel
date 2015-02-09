@@ -2,7 +2,7 @@
 //  ContactUtil.h
 //  ContactSyncExample
 //
-//  Copyright (c) 2015 Turkcell. All rights reserved.
+//  Copyright (c) 2015 Valven. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -12,6 +12,8 @@
 @interface ContactUtil : NSObject
 
 + (SYNC_INSTANCETYPE) shared;
++ (NSString*)clearMsisdn:(NSString*)input;
+
 - (void)checkAddressbookAccess:(void(^)(BOOL))callback;
 - (BOOL)deleteContact:(NSNumber*)objectId;
 - (void)deleteContact:(NSNumber*)contactId devices:(NSArray*)devices;

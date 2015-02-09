@@ -2,7 +2,7 @@
 //  ApiAdapter.m
 //  ContactSyncExample
 //
-//  Copyright (c) 2015 Turkcell. All rights reserved.
+//  Copyright (c) 2015 Valven. All rights reserved.
 //
 
 #import "SyncAdapter.h"
@@ -94,7 +94,7 @@
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:urlAddress];
     [request setHTTPShouldHandleCookies:NO];
-    [request setTimeoutInterval:30.0];
+    [request setTimeoutInterval:300.0];
     
     switch (method) {
         case GET:
@@ -128,11 +128,7 @@
     [self addHeader:@"Content-Type" value:@"application/json" request:request];
     [self addHeader:@"Cache-Control" value:@"no-cache" request:request];
     [self addHeader:@"User-Agent" value:SYNC_USER_AGENT request:request];
-    if (SYNC_STRING_IS_NULL_OR_EMPTY([SyncSettings shared].msisdn)){
-        [self addHeader:SYNC_HEADER_AUTH_TOKEN value:[SyncSettings shared].token request:request];
-    } else {
-        [self addHeader:SYNC_HEADER_MSISDN value:[SyncSettings shared].msisdn request:request];
-    }
+    [self addHeader:SYNC_HEADER_AUTH_TOKEN value:[SyncSettings shared].token request:request];
     
     [self addHeader:SYNC_HEADER_CLIENT_VERSION value:SYNC_VERSION request:request];
     
@@ -162,6 +158,16 @@
                 NSString *responseBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                 responseObject = [NSJSONSerialization JSONObjectWithData: [responseBody dataUsingEncoding:NSUTF8StringEncoding] options: NSJSONReadingMutableContainers error: &error];
             }
+            
+            NSDictionary *responseHeaders = nil;
+            if ([response respondsToSelector:@selector(allHeaderFields)]) {
+                responseHeaders = [(NSHTTPURLResponse *)response allHeaderFields];
+            }
+            if (!SYNC_IS_NULL(responseHeaders)){
+                if (!SYNC_IS_NULL(responseHeaders[SYNC_HEADER_MSISDN])){
+                    [SyncSettings shared].msisdn = responseHeaders[SYNC_HEADER_MSISDN];
+                }
+            }
         } else {
             fail(nil, error);
         }
@@ -186,7 +192,9 @@
 }
 
 +(void) addHeader:(NSString *)key value:(NSString *)value request:(NSMutableURLRequest *) request{
-    [request setValue:value forHTTPHeaderField:key];
+    if (!SYNC_IS_NULL(value)){
+        [request setValue:value forHTTPHeaderField:key];
+    }
 }
 
 + (NSString *)buildURL:(NSString *)part

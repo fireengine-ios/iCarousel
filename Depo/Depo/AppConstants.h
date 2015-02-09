@@ -133,7 +133,7 @@
 
 #define MAX_CONCURRENT_UPLOAD_TASKS 5
 
-#define CONTACT_SYNC_SERVER_URL @"http://contactsync.test.valven.com/ttyapi/"
+#define CONTACT_SYNC_SERVER_URL @"https://tcloudstb.turkcell.com.tr/ttyapi/"
 
 #define SuppressPerformSelectorLeakWarning(Stuff) \
 do { \

@@ -2,7 +2,7 @@
 //  ContactDevice.h
 //  ContactSyncExample
 //
-//  Copyright (c) 2015 Turkcell. All rights reserved.
+//  Copyright (c) 2015 Valven. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -36,6 +36,7 @@ typedef NS_ENUM(NSUInteger, SYNCDeviceType) {
 + (ContactDevice*)createFromJSON:(NSDictionary*)json;
 
 - (CFStringRef)deviceTypeLabel;
+- (NSString*)deviceKey;
 
 @end
 
