@@ -17,14 +17,14 @@
 #import "Device.h"
 
 //TODO
-#define BASE_URL @"https://adepo.turkcell.com.tr/api"
-//#define BASE_URL @"https://tcloudstb.turkcell.com.tr/api"
+//#define BASE_URL @"https://adepo.turkcell.com.tr/api"
+#define BASE_URL @"https://tcloudstb.turkcell.com.tr/api"
 
 #define TOKEN_URL BASE_URL@"/auth/token?rememberMe=%@"
 
 //TODO
-#define RADIUS_URL @"http://adepo.turkcell.com.tr/api/auth/gsm/login?rememberMe=on"
-//#define RADIUS_URL @"http://tcloudstb.turkcell.com.tr/api/auth/gsm/login?rememberMe=on"
+//#define RADIUS_URL @"http://adepo.turkcell.com.tr/api/auth/gsm/login?rememberMe=on"
+#define RADIUS_URL @"http://tcloudstb.turkcell.com.tr/api/auth/gsm/login?rememberMe=on"
 
 #define REMEMBER_ME_URL BASE_URL@"/auth/rememberMe"
 

@@ -90,6 +90,7 @@
     if (!error) {
         @try {
             NSString *responseStr = [request responseString];
+            NSLog(@"RESULT: %@", responseStr);
             SBJSON *jsonParser = [SBJSON new];
             if (requestMethod == RequestMethodGetCurrentSubscription) {
                 NSDictionary *responseDict = [jsonParser objectWithString:responseStr];
