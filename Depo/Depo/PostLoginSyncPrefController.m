@@ -57,7 +57,7 @@
         [self.view addSubview:switchSubLabel];
         
         onOff = [[UISwitch alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 60, choiceTable.frame.origin.y + choiceTable.frame.size.height + (IS_IPHONE_5 ? 30 : 10), 40, 20)];
-        [onOff setOn:YES];
+        [onOff setOn:NO];
         [self.view addSubview:onOff];
 
         SimpleButton *continueButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, self.view.frame.size.height - 70, self.view.frame.size.width - 40, 50) withTitle:NSLocalizedString(@"Continue", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
