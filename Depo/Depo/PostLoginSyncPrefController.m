@@ -50,15 +50,15 @@
 
         CustomLabel *switchLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, choiceTable.frame.origin.y + choiceTable.frame.size.height + (IS_IPHONE_5 ? 30 : 10), 230, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:16] withColor:[Util UIColorForHexColor:@"FFFFFF"] withText:NSLocalizedString(@"DataRoamingTitle", @"") withAlignment:NSTextAlignmentLeft];
         switchLabel.adjustsFontSizeToFitWidth = YES;
-        [self.view addSubview:switchLabel];
+//        [self.view addSubview:switchLabel];
         
         CustomLabel *switchSubLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, switchLabel.frame.origin.y + switchLabel.frame.size.height, 230, 15) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:12] withColor:[Util UIColorForHexColor:@"b7ddef"] withText:NSLocalizedString(@"DataRoamingSubTitle", @"") withAlignment:NSTextAlignmentLeft];
         switchSubLabel.adjustsFontSizeToFitWidth = YES;
-        [self.view addSubview:switchSubLabel];
+//        [self.view addSubview:switchSubLabel];
         
         onOff = [[UISwitch alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 60, choiceTable.frame.origin.y + choiceTable.frame.size.height + (IS_IPHONE_5 ? 30 : 10), 40, 20)];
         [onOff setOn:NO];
-        [self.view addSubview:onOff];
+//        [self.view addSubview:onOff];
 
         SimpleButton *continueButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, self.view.frame.size.height - 70, self.view.frame.size.width - 40, 50) withTitle:NSLocalizedString(@"Continue", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
         [continueButton addTarget:self action:@selector(continueClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -70,13 +70,13 @@
 
 - (void) continueClicked {
     [CacheUtil writeCachedSettingSyncingConnectionType:selectedOption];
-    [CacheUtil writeCachedSettingDataRoaming:onOff.isOn];
+    [CacheUtil writeCachedSettingDataRoaming:NO];
 
     [AppUtil writeFirstVisitOverFlag];
     [APPDELEGATE triggerHome];
 }
 
-- (int) numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
@@ -99,6 +99,12 @@
         selectedOption = ConnectionOptionWifi3G;
     } else {
         selectedOption = ConnectionOptionWifi;
+    }
+}
+
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if([indexPath row] == ((NSIndexPath*)[[tableView indexPathsForVisibleRows] lastObject]).row){
+        [tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
     }
 }
 
