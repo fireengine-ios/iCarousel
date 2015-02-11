@@ -17,10 +17,6 @@
     UIView *darkArea;
     UIView *popupContainer;
     UIImagePickerController *imagePicker;
-    UIImage *profileImage;
-    UIImage *newProfileImage;
-    NSString *profileName;
-    NSString *profilePhoneNumber;
     CustomButton *cameraButton;
     UILabel *cameraLabel;
     CustomButton *uploadButton;

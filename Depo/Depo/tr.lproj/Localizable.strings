@@ -286,7 +286,7 @@
 "Remove"="Kaldır";
 
 "Storage"="Depolama";
-"StorageUsageInfo"="%@%% / %@GB";
+"StorageUsageInfo"="%@%% / %@";
 "CurrentPackageTitle"="MEVCUT PAKET";
 "RenewalDateInfo"="Yenileme tarihi: %@";
 "CancelSubscription"="Üyelikten Vazgeç";

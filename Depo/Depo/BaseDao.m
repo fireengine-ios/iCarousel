@@ -212,12 +212,12 @@
     NSDictionary *detailDict = [dict objectForKey:@"metadata"];
     if(detailDict != nil && ![detailDict isKindOfClass:[NSNull class]]) {
         NSNumber *favFlag = [detailDict objectForKey:@"X-Object-Meta-Favourite"];
-        NSString *thumbLarge = [detailDict objectForKey:@"X-Object-Meta-Thumbnail-Large"];
-        NSString *thumbMedium = [detailDict objectForKey:@"X-Object-Meta-Thumbnail-Medium"];
-        NSString *thumbSmall = [detailDict objectForKey:@"X-Object-Meta-Thumbnail-Small"];
+        NSString *thumbLarge = [detailDict objectForKey:@"Thumbnail-Large"];
+        NSString *thumbMedium = [detailDict objectForKey:@"Thumbnail-Medium"];
+        NSString *thumbSmall = [detailDict objectForKey:@"Thumbnail-Small"];
         NSString *metaHash = [detailDict objectForKey:@"X-Object-Meta-Ios-Metadata-Hash"];
-        NSNumber *imgHeight = [detailDict objectForKey:@"X-Object-Meta-Image-Height"];
-        NSNumber *imgWidth = [detailDict objectForKey:@"X-Object-Meta-Image-Width"];
+        NSNumber *imgHeight = [detailDict objectForKey:@"Image-Height"];
+        NSNumber *imgWidth = [detailDict objectForKey:@"Image-Width"];
         NSString *genre = [detailDict objectForKey:@"Genre"];
         NSString *artist = [detailDict objectForKey:@"Artist"];
         NSString *album = [detailDict objectForKey:@"Album"];

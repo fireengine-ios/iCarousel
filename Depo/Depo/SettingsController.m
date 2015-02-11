@@ -8,6 +8,7 @@
 
 #import "SettingsController.h"
 #import "AppDelegate.h"
+#import "AppSession.h"
 #import "AppConstants.h"
 #import "TitleCell.h"
 #import "SettingsStorageController.h"
@@ -17,6 +18,7 @@
 #import "SettingsHelpController.h"
 #import "SettingsAboutUsController.h"
 #import "CustomButton.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface SettingsController ()
 
@@ -30,17 +32,6 @@
     if (self) {
         self.title = NSLocalizedString(@"SettingsTitle", @"");
         self.view.backgroundColor = [Util UIColorForHexColor:@"F1F2F6"];
-        profileImage = [CacheUtil readCachedProfileImage];
-        newProfileImage = profileImage;
-        profileName = [CacheUtil readCachedProfileName];
-        profilePhoneNumber = [CacheUtil readCachedPhoneNumber];
-        
-        //temp
-        if (profileName == nil)
-            profileName = @"Mahir Kemal Tarlan";
-        if (profilePhoneNumber == nil)
-            profilePhoneNumber = @"05555022467";
-        //temp
         
         [self drawProfileInfoArea];
         [self drawSettingsCategories];
@@ -51,49 +42,56 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    if (profileImage != newProfileImage)
-        [CacheUtil writeCachedProfileImage:newProfileImage];
+    [super viewWillDisappear:animated];
 }
 
 - (void) drawProfileInfoArea {
     UIView *profileInfoArea = [[UIView alloc] initWithFrame:CGRectMake(0, self.topIndex, 320, 159)];
     profileInfoArea.backgroundColor = [Util UIColorForHexColor:@"3FB0E8"];
     
-    profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(116, 0, 88, 88)];
-    //profileImage = [UIImage imageNamed:@"profile_icon@2x"];
-    if (profileImage != nil)
-        [profileImageView setImage:profileImage];
-    [profileImageView setImage:profileImage];
+    UIImage *profileBgImg = [UIImage imageNamed:@"profile_bg.png"];
+    profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(116, 15, 88, 88)];
+    profileImageView.image = profileBgImg;
     [profileInfoArea addSubview:profileImageView];
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul), ^(void) {
+        UIImage *profileImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:APPDELEGATE.session.user.profileImgUrl]]];
+        UIImageView *profileImgView = [[UIImageView alloc] initWithFrame:CGRectMake(17, (60 - profileBgImg.size.height - 2)/2, profileImageView.frame.size.width - 4, profileImageView.frame.size.height - 4)];
+        profileImgView.image = [Util circularScaleNCrop:profileImage forRect:CGRectMake(0, 0, 88, 88)];
+        profileImgView.center = profileImageView.center;
+        [profileInfoArea addSubview:profileImgView];
+    });
     
     UIImageView *profileFrameImageView = [[UIImageView alloc] initWithFrame:CGRectMake(116, 0, 88, 88)];
     UIImage *profileFrameImage = [UIImage imageNamed:@"profile_frame@2x"];
     [profileFrameImageView setImage:profileFrameImage];
-    [profileInfoArea addSubview:profileFrameImageView];
+//    [profileInfoArea addSubview:profileFrameImageView];
     
     CustomButton *profileButton = [[CustomButton alloc]initWithFrame:CGRectMake(116, 0, 88, 88) withImageName:@"profile_image_button@2x"];
     //[profileButton addTarget:self action:@selector(ShowImageOptionsArea) forControlEvents:UIControlEventTouchUpInside];
     profileButton.userInteractionEnabled = NO;
-    [profileInfoArea addSubview:profileButton];
+//    [profileInfoArea addSubview:profileButton];
     
-    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 98, 300, 20)];
-    [nameLabel setText:profileName];
+    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 118, 300, 20)];
+    [nameLabel setText:APPDELEGATE.session.user.fullName];
     nameLabel.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:20];
-    nameLabel.textAlignment = UITextAlignmentCenter;
+    nameLabel.textAlignment = NSTextAlignmentCenter;
     nameLabel.textColor = [Util UIColorForHexColor:@"FFFFFF"];
     nameLabel.backgroundColor= [UIColor clearColor];
     [profileInfoArea addSubview:nameLabel];
     
+    /*
     UIImageView *cellPhoneIcon = [[UIImageView alloc]initWithFrame:CGRectMake(111, 123, 7, 11)];
     cellPhoneIcon.image = [UIImage imageNamed:@"cellphone_icon@2x"];
     [profileInfoArea addSubview:cellPhoneIcon];
     
     UILabel *phoneNumberLabel = [[UILabel alloc] initWithFrame:CGRectMake(122.5, 119, 190, 20)];
-    [phoneNumberLabel setText:profilePhoneNumber];
+//    [phoneNumberLabel setText:APPDELEGATE.session.user.msisdn];
     phoneNumberLabel.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:17];
     phoneNumberLabel.textColor = [Util UIColorForHexColor:@"AFDCF5"];
     phoneNumberLabel.backgroundColor= [UIColor clearColor];
     [profileInfoArea addSubview:phoneNumberLabel];
+     */
     
     [self.view addSubview:profileInfoArea];
 }
@@ -208,8 +206,6 @@
 }
 
 - (void)RemoveButtonAction: (id)sender {
-    newProfileImage = nil;
-    profileImageView.image = newProfileImage;
     [self HideImageOptionsArea];
 }
 
@@ -222,9 +218,6 @@
     [choosenImage drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
     UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    
-    newProfileImage = resizedImage;
-    profileImageView.image = newProfileImage;
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
@@ -256,7 +249,7 @@
     double cellHeight = 69;
     
     if(indexPath.row == 0) {
-        NSString *subTitle = [NSString stringWithFormat: NSLocalizedString(@"StorageUsageInfo", @""), @"20", @"5"];
+        NSString *subTitle = [NSString stringWithFormat: NSLocalizedString(@"StorageUsageInfo", @""), [NSString stringWithFormat:@"%.0ld", (100 * APPDELEGATE.session.usage.usedStorage/APPDELEGATE.session.usage.totalStorage)], [Util transformedSizeValue:APPDELEGATE.session.usage.totalStorage]];
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"Storage", @"") titleColor:nil subTitleText:subTitle iconName:@"stroge_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         return cell;
     } else if (indexPath.row == 1) {
@@ -299,7 +292,7 @@
 }
 
 - (void) ShowImageOptionsArea {
-    int buttonCount = newProfileImage == nil ? 2 : 3;
+    int buttonCount = 2;//newProfileImage == nil ? 2 : 3;
     float leftIndex = (320 - (buttonCount * 75 + (buttonCount - 1) * 18)) / 2;
     
     cameraButton.frame = CGRectMake(leftIndex, cameraButton.frame.origin.y, 75, 75);
