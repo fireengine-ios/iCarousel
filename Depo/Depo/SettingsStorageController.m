@@ -120,8 +120,13 @@
     
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            NSString *renewalDateInfo = [NSString stringWithFormat:NSLocalizedString(@"RenewalDateInfo", @""), @"No Date"];
-            TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:currentSubscription.plan.displayName titleColor:nil subTitleText:renewalDateInfo iconName:@"" hasSeparator:YES isLink:NO linkText:@"" cellHeight:69];
+            NSString *descriptionText = currentSubscription.plan.accountDescription;
+            descriptionText = [descriptionText stringByReplacingOccurrencesOfString:@"${NAME}" withString:currentSubscription.plan.name];
+            descriptionText = [descriptionText stringByReplacingOccurrencesOfString:@"${QUOTA}B" withString:@"${QUOTA}"];
+            descriptionText = [descriptionText stringByReplacingOccurrencesOfString:@"${QUOTA}" withString:[NSString stringWithFormat:@"%gGB", currentSubscription.plan.quota/(1024*1024*1024)]];
+            descriptionText = [descriptionText stringByReplacingOccurrencesOfString:@"${PRICE}" withString:[NSString stringWithFormat:@"%g", currentSubscription.plan.price]];
+            descriptionText = [descriptionText stringByReplacingOccurrencesOfString:@"${CURRENCY}" withString:@"TL"];
+            TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:currentSubscription.plan.displayName titleColor:nil subTitleText:descriptionText iconName:@"" hasSeparator:YES isLink:NO linkText:@"" cellHeight:69];
             return cell;
         }
         else {
@@ -130,11 +135,9 @@
         }
     }
     else {
-        
         UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         //[self drawUpgradeOptionsCell:cell];
         return cell;
-        
     }
 }
 

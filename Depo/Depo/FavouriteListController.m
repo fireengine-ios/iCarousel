@@ -239,6 +239,11 @@
     [self showLoading];
 }
 
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [APPDELEGATE.base immediateHideAddButton];
+}
+
 - (BOOL)shouldAutorotate {
     return YES;
 }

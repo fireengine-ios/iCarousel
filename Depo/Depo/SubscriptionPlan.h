@@ -13,11 +13,11 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *displayName;
 @property (nonatomic, strong) NSString *accountDescription;
-@property (nonatomic, strong) NSString *price;
+@property (nonatomic) float price;
 @property (nonatomic) BOOL isDefault;
 @property (nonatomic, strong) NSString *role;
 @property (nonatomic, strong) NSString *slcmOfferId;
 @property (nonatomic, strong) NSString *cometOfferId;
-@property (nonatomic, strong) NSString *quota;
+@property (nonatomic) float quota;
 
 @end

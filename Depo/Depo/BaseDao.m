@@ -324,23 +324,23 @@
         NSString *name = [detailDict objectForKey:@"name"];
         NSString *displayName = [detailDict objectForKey:@"displayName"];
         NSString *description = [detailDict objectForKey:@"description"];
-        NSString *price = [detailDict objectForKey:@"price"];
+        NSNumber *price = [detailDict objectForKey:@"price"];
         NSNumber *isDefault = [detailDict objectForKey:@"isDefault"];
         NSString *role = [detailDict objectForKey:@"role"];
         NSString *slcmOfferId = [detailDict objectForKey:@"slcmOfferId"];
         NSString *cometOfferId = [detailDict objectForKey:@"cometOfferId"];
-        NSString *quota = [detailDict objectForKey:@"quota"];
+        NSNumber *quota = [detailDict objectForKey:@"quota"];
         
         subscription.plan = [[SubscriptionPlan alloc] init];
         subscription.plan.name = [self strByRawVal:name];
         subscription.plan.displayName = [self strByRawVal:displayName];
         subscription.plan.accountDescription = [self strByRawVal:description];
-        subscription.plan.price = [self strByRawVal:price];
+        subscription.plan.price = [self floatByNumber:price];
         subscription.plan.isDefault = [self boolByNumber:isDefault];
         subscription.plan.role = [self strByRawVal:role];
         subscription.plan.slcmOfferId = [self strByRawVal:slcmOfferId];
         subscription.plan.cometOfferId = [self strByRawVal:cometOfferId];
-        subscription.plan.quota = [self strByRawVal:quota];
+        subscription.plan.quota = [self floatByNumber:quota];
     }
     
     return subscription;

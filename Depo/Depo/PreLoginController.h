@@ -8,6 +8,9 @@
 
 #import "MyViewController.h"
 
-@interface PreLoginController : MyViewController
+@interface PreLoginController : MyViewController <UIScrollViewDelegate>
+
+@property (nonatomic, strong) UIScrollView *infoScroll;
+@property (nonatomic, strong) UIPageControl *pageControl;
 
 @end

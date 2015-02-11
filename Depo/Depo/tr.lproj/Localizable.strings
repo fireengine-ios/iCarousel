@@ -404,3 +404,16 @@
 "ContactSyncApiError"="Yedekleme esnasında genel bir hata oluştu.";
 "ContactSyncNetworkError"="Yedekleme esnasında genel bir hata oluştu.";
 "ContactSyncGeneralError"="Yedekleme esnasında genel bir hata oluştu.";
+
+"PreLoginInfo1"="Fotoğraflarınız, hatıralarınız hep yanınızda, hep güvende";
+"PreLoginInfo2"="Akıllı Depo'nuzdaki saklama alanınız ile daha çok fotoğraf ve video çekebilirsiniz, hiçbir hatıranızı silmek zorunda kalmazsınız.";
+"PreLoginInfo3"="Akıllı Depo'nuzdaki tüm fotoğraf ve videolarınıza, akıllı telefonunuzdan, bilgisayar ya da tabletinizden de ulaşabilirsiniz.";
+"PreLoginInfo4"="Fotoğraflarınızı ya da diğer tüm dosyalarınızı sevdiklerinizle kolayca paylaşabilirsiniz.";
+"PreLoginInfo5"="Akıllı Depo tüm dosyalarınızı şifreleyerek saklar, dosyalarınıza sadece siz ulaşırsınız.";
+"PreLoginTitle1"="Turkcell Akıllı Depo";
+"PreLoginTitle2"="Telefonunuza Ek Hafıza";
+"PreLoginTitle3"="Fotoğraflarınız anında bilgisayarınızda, tabletinizde";
+"PreLoginTitle4"="Kolayca paylaşın";
+"PreLoginTitle5"="Herşey Güvende";
+
+"StartUsingTitle"="Kullanmaya başla";
