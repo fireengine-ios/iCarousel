@@ -40,18 +40,26 @@
 }
 
 - (void) startAutoSync {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(albumChanged:) name:ALAssetsLibraryChangedNotification object:nil];
+    /*
+     notification'ın backgrounddan dönünce gelmesi dolayısıyla background fetch sorgusunda tüm photo albüm kontrol ediliyor. O nedenle notification commentlendi
+     */
+    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(albumChanged:) name:ALAssetsLibraryChangedNotification object:nil];
 //    [self startLocationManagerIfNecessary];
 }
 
 - (void) stopAutoSync {
+    /*
+     notification'ın backgrounddan dönünce gelmesi dolayısıyla background fetch sorgusunda tüm photo albüm kontrol ediliyor. O nedenle notification commentlendi. Background fetch nedeniyle location kullanımından vazgeçildi
+     */
+    
     /*
     if(locManager) {
         [locManager stopUpdatingLocation];
         locManager = nil;
     }
      */
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:ALAssetsLibraryChangedNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:ALAssetsLibraryChangedNotification object:nil];
 }
 
 /*
@@ -177,6 +185,7 @@
             NSLog(@"NOT USERINFO: %@", [not userInfo]);
         }
         NSArray *localHashList = [SyncUtil readSyncHashLocally];
+        NSArray *remoteHashList = [SyncUtil readSyncHashRemotely];
         
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
             [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
@@ -184,7 +193,7 @@
                     [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
                         if(asset) {
                             NSString *localHash = [asset.defaultRepresentation MD5];
-                            if(![localHashList containsObject:localHash] && [APPDELEGATE.uploadQueue uploadRefForAsset:[asset.defaultRepresentation.url absoluteString]] == nil) {
+                            if(![localHashList containsObject:localHash] && ![remoteHashList containsObject:localHash] && [APPDELEGATE.uploadQueue uploadRefForAsset:[asset.defaultRepresentation.url absoluteString]] == nil) {
                                 [self startUploadForAsset:asset andRemoteHash:nil andLocalHash:localHash];
 //                                [SyncUtil updateLastSyncDate];
 //                                [SyncUtil increaseBadgeCount];
@@ -221,6 +230,7 @@
     [APPDELEGATE.uploadQueue addNewUploadTask:manager];
 }
 
+/*
 - (void) locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     
     CLLocationCoordinate2D currentCoordinates = newLocation.coordinate;
@@ -236,5 +246,6 @@
 - (void) locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
     NSLog(@"location manager auth status changed");
 }
+*/
 
 @end
