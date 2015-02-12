@@ -31,7 +31,7 @@
     webView.autoresizesSubviews = YES;
     webView.delegate = self;
     [self.view addSubview:webView];
-    NSURL *url = [NSURL URLWithString:@"http://m.turkcell.com.tr/tr/hakkimizda"];
+    NSURL *url = [NSURL URLWithString:@"http://trcll.im/ipb4X"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];
 }

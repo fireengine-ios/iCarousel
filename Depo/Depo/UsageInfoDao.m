@@ -44,16 +44,16 @@
                 result.totalStorage = [totalStorage longLongValue];
             }
             if(imageUsage != nil && ![imageUsage isKindOfClass:[NSNull class]]) {
-                result.imageUsage = [imageUsage longValue];
+                result.imageUsage = [imageUsage longLongValue];
             }
             if(othersUsage != nil && ![othersUsage isKindOfClass:[NSNull class]]) {
-                result.otherUsage = [othersUsage longValue];
+                result.otherUsage = [othersUsage longLongValue];
             }
             if(audioUsage != nil && ![audioUsage isKindOfClass:[NSNull class]]) {
-                result.musicUsage = [audioUsage longValue];
+                result.musicUsage = [audioUsage longLongValue];
             }
             if(videoUsage != nil && ![videoUsage isKindOfClass:[NSNull class]]) {
-                result.videoUsage = [videoUsage longValue];
+                result.videoUsage = [videoUsage longLongValue];
             }
             if(usedStorage != nil && ![usedStorage isKindOfClass:[NSNull class]]) {
                 result.usedStorage = [usedStorage longLongValue];

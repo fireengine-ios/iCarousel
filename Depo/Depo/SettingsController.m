@@ -249,7 +249,7 @@
     double cellHeight = 69;
     
     if(indexPath.row == 0) {
-        NSString *subTitle = [NSString stringWithFormat: NSLocalizedString(@"StorageUsageInfo", @""), [NSString stringWithFormat:@"%.0ld", (100 * APPDELEGATE.session.usage.usedStorage/APPDELEGATE.session.usage.totalStorage)], [Util transformedSizeValue:APPDELEGATE.session.usage.totalStorage]];
+        NSString *subTitle = [NSString stringWithFormat: NSLocalizedString(@"StorageUsageInfo", @""), [NSString stringWithFormat:@"%.0lld", (100 * APPDELEGATE.session.usage.usedStorage/APPDELEGATE.session.usage.totalStorage)], [Util transformedHugeSizeValue:APPDELEGATE.session.usage.totalStorage]];
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"Storage", @"") titleColor:nil subTitleText:subTitle iconName:@"stroge_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         return cell;
     } else if (indexPath.row == 1) {

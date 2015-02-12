@@ -338,7 +338,7 @@
                 ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFile:fileAtIndex];
                 MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
                 detail.nav = modalNav;
-                [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
+                [self presentViewController:modalNav animated:YES completion:nil];
             } else if([AppUtil isMetaFileDoc:fileAtIndex]){
                 FileDetailInWebViewController *detail = [[FileDetailInWebViewController alloc] initWithFile:fileAtIndex];
                 detail.nav = self.nav;
@@ -382,6 +382,18 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (BOOL)shouldAutorotate {
+    return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskAll;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown || interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight);
 }
 
 @end

@@ -10,13 +10,13 @@
 
 @interface Usage : NSObject
 
-@property (nonatomic) long imageUsage;
-@property (nonatomic) long musicUsage;
-@property (nonatomic) long contactUsage;
-@property (nonatomic) long otherUsage;
-@property (nonatomic) long videoUsage;
-@property (nonatomic) long remainingStorage;
-@property (nonatomic) long usedStorage;
-@property (nonatomic) long totalStorage;
+@property (nonatomic) long long imageUsage;
+@property (nonatomic) long long musicUsage;
+@property (nonatomic) long long contactUsage;
+@property (nonatomic) long long otherUsage;
+@property (nonatomic) long long videoUsage;
+@property (nonatomic) long long remainingStorage;
+@property (nonatomic) long long usedStorage;
+@property (nonatomic) long long totalStorage;
 
 @end

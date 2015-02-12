@@ -19,10 +19,10 @@
         self.clipsToBounds = YES;
         [self.layer setCornerRadius:65];
         
-        CustomLabel *totalUsageLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, 30, self.frame.size.width, 40) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:36] withColor:[Util UIColorForHexColor:@"363e4f"] withText:[Util transformedSizeValue:[usage usedStorage]] withAlignment:NSTextAlignmentCenter];
+        CustomLabel *totalUsageLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, 30, self.frame.size.width, 40) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:36] withColor:[Util UIColorForHexColor:@"363e4f"] withText:[Util transformedHugeSizeValue:[usage usedStorage]] withAlignment:NSTextAlignmentCenter];
         [self addSubview:totalUsageLabel];
         
-        NSString *totalStorageVal = [NSString stringWithFormat:NSLocalizedString(@"HomeUsageTotalStorage", @""), [Util transformedSizeValue:usage.totalStorage]];
+        NSString *totalStorageVal = [NSString stringWithFormat:NSLocalizedString(@"HomeUsageTotalStorage", @""), [Util transformedHugeSizeValue:usage.totalStorage]];
         
         CustomLabel *totalStorageLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, 75, self.frame.size.width, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withColor:[Util UIColorForHexColor:@"7b8497"] withText:totalStorageVal withAlignment:NSTextAlignmentCenter];
         [self addSubview:totalStorageLabel];

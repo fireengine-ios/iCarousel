@@ -56,6 +56,18 @@
     return self;
 }
 
+- (void) webViewDidStartLoad:(UIWebView *)webView {
+    [self showLoading];
+}
+
+- (void) webViewDidFinishLoad:(UIWebView *)webView {
+    [self hideLoading];
+}
+
+- (void) webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    [self hideLoading];
+}
+
 - (void) moreClicked {
     [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeFileDetail], [NSNumber numberWithInt:MoreMenuTypeShare], self.file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDelete]] withFileFolder:self.file];
 }

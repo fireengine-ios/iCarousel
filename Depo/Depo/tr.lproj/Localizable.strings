@@ -274,7 +274,7 @@
 
 "FavouritesTitle"="Favoriler";
 "ConnectionErrorWarning"="Bir bağlantı sorunu oluştu. Lütfen internet bağlantınızı kontrol edin.";
-"NoFavouriteFound"="Favori olarak işaretlenmiş öğe bulunamadı.";
+"NoFavouriteFound"="Favori olarak işaretlenmiş dosyanız yok.";
 
 "Auto"="Otomatik";
 "On"="Açık";
@@ -290,7 +290,7 @@
 "CurrentPackageTitle"="MEVCUT PAKET";
 "RenewalDateInfo"="Yenileme tarihi: %@";
 "CancelSubscription"="Üyelikten Vazgeç";
-"UpgradeOptionsTitle"="GELİŞTİRME SEÇENEKLERİ";
+"UpgradeOptionsTitle"="PAKET SEÇİMİ";
 
 "Upload&Syncing"="Yükleme ve Eşitleme";
 "Photos&Videos"="Fotoğraf ve Videolar";

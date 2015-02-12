@@ -137,11 +137,11 @@
     APPDELEGATE.session.usage = _usage;
     
     self.usages = [NSMutableArray arrayWithCapacity:5];
-    [usages addObject:[NSNumber numberWithFloat:APPDELEGATE.session.usage.imageUsage]];
-    [usages addObject:[NSNumber numberWithFloat:APPDELEGATE.session.usage.musicUsage]];
-    [usages addObject:[NSNumber numberWithFloat:APPDELEGATE.session.usage.otherUsage]];
-    [usages addObject:[NSNumber numberWithFloat:APPDELEGATE.session.usage.videoUsage]];
-    [usages addObject:[NSNumber numberWithFloat:APPDELEGATE.session.usage.remainingStorage]];
+    [usages addObject:[NSNumber numberWithLongLong:APPDELEGATE.session.usage.imageUsage]];
+    [usages addObject:[NSNumber numberWithLongLong:APPDELEGATE.session.usage.musicUsage]];
+    [usages addObject:[NSNumber numberWithLongLong:APPDELEGATE.session.usage.otherUsage]];
+    [usages addObject:[NSNumber numberWithLongLong:APPDELEGATE.session.usage.videoUsage]];
+    [usages addObject:[NSNumber numberWithLongLong:APPDELEGATE.session.usage.remainingStorage]];
     
     self.usageColors =[NSArray arrayWithObjects:
                        [Util UIColorForHexColor:@"fcd02b"],

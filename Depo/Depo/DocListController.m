@@ -177,10 +177,15 @@
     }
     
     MetaFile *fileAtIndex = [docList objectAtIndex:indexPath.row];
-    FileDetailInWebViewController *preview = [[FileDetailInWebViewController alloc] initWithFile:fileAtIndex];
-    preview.nav = self.nav;
-    [self.nav pushViewController:preview animated:NO];
-    
+    if([AppUtil isMetaFileDoc:fileAtIndex]){
+        FileDetailInWebViewController *detail = [[FileDetailInWebViewController alloc] initWithFile:fileAtIndex];
+        detail.nav = self.nav;
+        [self.nav pushViewController:detail animated:NO];
+    } else {
+        PreviewUnavailableController *detail = [[PreviewUnavailableController alloc] initWithFile:fileAtIndex];
+        detail.nav = self.nav;
+        [self.nav pushViewController:detail animated:NO];
+    }
 }
 
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView {
