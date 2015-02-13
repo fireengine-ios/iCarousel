@@ -134,7 +134,8 @@
 #define MAX_CONCURRENT_UPLOAD_TASKS 5
 
 //TODO
-#define CONTACT_SYNC_SERVER_URL @"https://tcloudstb.turkcell.com.tr/sync/ttyapi/"
+//#define CONTACT_SYNC_SERVER_URL @"https://tcloudstb.turkcell.com.tr/sync/ttyapi/"
+#define CONTACT_SYNC_SERVER_URL @"https://adepo.turkcell.com.tr/ttyapi/"
 
 #define SuppressPerformSelectorLeakWarning(Stuff) \
 do { \
