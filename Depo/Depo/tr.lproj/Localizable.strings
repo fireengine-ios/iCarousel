@@ -124,6 +124,8 @@
 "AlbumAddSuccessMessage"="Albüm başarıyla oluşturuldu";
 "AlbumAddFailMessage"="Albüm oluştururken hata alındı";
 "DoneButtonTitle"="Tamam";
+"ApplyButtonTitle"="Uygula";
+"BackButtonTitle"="Geri";
 "FolderDetailTitle"="Klasör Detayları";
 "FolderDetailSegmentTitle"="KLASÖR DETAYI";
 "FolderDetailItems"="Dosya sayısı";
@@ -180,7 +182,7 @@
 "HomeUsageTotalStorage"="Toplam %@";
 "LastSyncFormat"="EN SON SENK: %@ ÖNCE";
 "LastSyncNone"="EN SON SENK: HİÇ";
-"GetMoreStorageButtonTitle"="Alan Satın Al";
+"GetMoreStorageButtonTitle"="Daha Fazla Hafıza";
 "SongTitleFieldTitle"="BAŞLIK";
 "ArtistFieldTitle"="ARTIST";
 "AlbumFieldTitle"="ALBÜM";
@@ -283,7 +285,7 @@
 "EditProfilePicture"="Profil Resmini Düzenle";
 "Camera"="Kamera";
 "Upload"="Yükle";
-"Remove"="Kaldır";
+"Remove"="Çıkar";
 
 "Storage"="Depolama";
 "StorageUsageInfo"="%@%% / %@";
@@ -379,7 +381,7 @@
 "Warning"="Uyarı";
 "SubmitButtonTitle"="Tamam";
 
-"MigrationTitle"="AKILLI DEPO KURULUMU";
+"MigrationTitle"="TURKCELL AKILLI DEPO KURULUMU";
 "MigrationSubTitle"="Akıllı Depo kurulumunuz yapılıyor. Lütfen tamamlanana kadar uygulamadan çıkmayın.";
 
 "AcceptTerms"="Kullanım koşullarını kabul ediyorum";
@@ -417,3 +419,5 @@
 "PreLoginTitle5"="Herşey Güvende";
 
 "StartUsingTitle"="Kullanmaya başla";
+
+"EmptyMusicTitle"="Müzikler boş"

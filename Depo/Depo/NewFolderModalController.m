@@ -80,6 +80,7 @@
 }
 
 - (void) textFieldDidBeginEditing:(UITextField *)textField {
+    [textField setSelectedTextRange:[textField textRangeFromPosition:textField.beginningOfDocument toPosition:textField.endOfDocument]];
 }
 
 - (void) textFieldDidEndEditing:(UITextField *)textField {

@@ -31,7 +31,7 @@
     webView.autoresizesSubviews = YES;
     webView.delegate = self;
     [self.view addSubview:webView];
-    NSURL *url = [NSURL URLWithString:@"http://trcll.im/4KYuJ"];
+    NSURL *url = [NSURL URLWithString:@"http://trcll.im/zbQxU"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];
 }

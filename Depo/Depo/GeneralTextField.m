@@ -22,12 +22,13 @@
         
         UIFont *currentFont = [UIFont fontWithName:@"TurkcellSaturaDem" size:15];
         UIColor *color = [Util UIColorForHexColor:@"363e4f"];
+        UIColor *placeHolderColor = [Util UIColorForHexColor:@"cccccc"];
         self.textColor = color;
         self.font = currentFont;
         self.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         
         if(!IS_BELOW_6) {
-            self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholderVal attributes:@{NSForegroundColorAttributeName: color, NSFontAttributeName: currentFont}];
+            self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholderVal attributes:@{NSForegroundColorAttributeName: placeHolderColor, NSFontAttributeName: currentFont}];
         } else {
             self.placeholder = placeholderVal;
         }

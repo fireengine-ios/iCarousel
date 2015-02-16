@@ -103,6 +103,9 @@
 
 - (void) loginClicked {
     msisdnValue = msisdnField.text;
+    if ([msisdnValue length] > 0)
+        msisdnValue = [[msisdnValue substringToIndex:1] isEqualToString:@"0"] ? [msisdnValue substringFromIndex:1] : msisdnValue;
+    
     passValue = passField.text;
     
     if([msisdnValue length] != 10) {
