@@ -181,7 +181,7 @@
 "SortTypeAlbumDescTitle"="Albüm İsmi (Z-A)";
 "HomeUsageTotalStorage"="Toplam %@";
 "LastSyncFormat"="EN SON SENK: %@ ÖNCE";
-"LastSyncNone"="EN SON SENK: HİÇ";
+"LastSyncNone"="Henüz senkronize edilmedi";
 "GetMoreStorageButtonTitle"="Daha Fazla Hafıza";
 "SongTitleFieldTitle"="BAŞLIK";
 "ArtistFieldTitle"="ARTIST";
@@ -420,4 +420,9 @@
 
 "StartUsingTitle"="Kullanmaya başla";
 
-"EmptyMusicTitle"="Müzikler boş"
+"EmptyMusicTitle"="Müzikler boş";
+"EmptyDocumentsTitle"="Dokümanlar boş";
+"EmptyPhotosVideosTitle"="Fotoğraf ve videolar boş";
+"EmptyPhotosVideosDescription"="iPhone'ununzdan fotoğraf ve video yüklemek için \"+\" butonuna basın";
+"EmptyAlbumsTitle"="Albümler boş";
+"EmptyAlbumsDescription"="Yeni klasör oluşturmak için \"+\" butonuna basın";
