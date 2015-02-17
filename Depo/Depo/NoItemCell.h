@@ -1,13 +1,15 @@
 //
-//  EmptyPhotoAlbumCell.h
+//  NoItemCell.h
 //  Depo
 //
-//  Created by Mahir on 10/10/14.
-//  Copyright (c) 2014 com.igones. All rights reserved.
+//  Created by Salıh Topcu on 16.02.2015.
+//  Copyright (c) 2015 com.igones. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface EmptyPhotoAlbumCell : UITableViewCell
+@interface NoItemCell : UITableViewCell
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier imageName:(NSString *)imageName titleText:(NSString *)titleText descriptionText:(NSString *)descriptionText;
 
 @end

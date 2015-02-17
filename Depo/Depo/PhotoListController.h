@@ -21,6 +21,7 @@
 #import "ImagePreviewController.h"
 #import "VideoPreviewController.h"
 #import "PhotoAlbumController.h"
+#import "NoItemCell.h"
 
 @interface PhotoListController : MyViewController <PhotoHeaderSegmentDelegate, SquareImageDelegate, UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate, FooterActionsDelegate, ImagePreviewDelegate, VideoPreviewDelegate, PhotoAlbumDelegate> {
     
@@ -41,6 +42,8 @@
     int listOffset;
     BOOL isLoading;
     BOOL isSelectible;
+    
+    NoItemCell *noItemCell;
 }
 
 @property (nonatomic, strong) PhotoHeaderSegmentView *headerView;

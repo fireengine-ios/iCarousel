@@ -143,6 +143,8 @@
 }
 
 - (void) addOngoingPhotos {
+    if (noItemCell != nil)
+        [noItemCell removeFromSuperview];
     if([photoList count] > 0) {
         int counter = 0;
         for(UploadRef *row in photoList) {
@@ -211,6 +213,13 @@
     }
     photosScroll.contentSize = CGSizeMake(photosScroll.frame.size.width, ((int)ceil(counter/3)+1)*105 + 20);
     [photoList addObjectsFromArray:files];
+    if (photoList.count == 0) {
+        if (noItemCell == nil)
+            noItemCell = [[NoItemCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"" imageName:@"no_photo_icon" titleText:NSLocalizedString(@"EmptyPhotosVideosTitle", @"") descriptionText:NSLocalizedString(@"EmptyPhotosVideosDescription", @"")];
+        [photosScroll addSubview:noItemCell];
+    }
+    else if (noItemCell != nil)
+        [noItemCell removeFromSuperview];
     if(refreshControlPhotos) {
         [refreshControlPhotos endRefreshing];
     }
@@ -472,6 +481,8 @@
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (albumList.count == 0)
+        return 1;
     return [albumList count];
 }
 
@@ -480,8 +491,12 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if(cell == nil) {
-        PhotoAlbum *album = [albumList objectAtIndex:indexPath.row];
-        cell = [[MainPhotoAlbumCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withPhotoAlbum:album isSelectible:isSelectible];
+        if (albumList.count > 0) {
+            PhotoAlbum *album = [albumList objectAtIndex:indexPath.row];
+            cell = [[MainPhotoAlbumCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withPhotoAlbum:album isSelectible:isSelectible];
+        }
+        else
+            cell = [[NoItemCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier imageName:@"no_album_icon" titleText:NSLocalizedString(@"EmptyAlbumsTitle", @"") descriptionText:NSLocalizedString(@"EmptyAlbumsDescription", @"")];
     }
     return cell;
 }

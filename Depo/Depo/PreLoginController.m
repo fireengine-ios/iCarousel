@@ -33,19 +33,19 @@
         infoScroll.delegate = self;
         [self.view addSubview:infoScroll];
         
-        PreLoginInfoView *firstInfoView = [[PreLoginInfoView alloc] initWithFrame:CGRectMake(0, 0, infoScroll.frame.size.width, infoScroll.frame.size.height) withImageName:@"pre_login_info1.png" withTitleKey:@"PreLoginTitle1" withInfoKey:@"PreLoginInfo1"];
+        PreLoginInfoView *firstInfoView = [[PreLoginInfoView alloc] initWithFrame:CGRectMake(10, 0, infoScroll.frame.size.width - 20, infoScroll.frame.size.height) withImageName:@"pre_login_info1.png" withTitleKey:@"PreLoginTitle1" withInfoKey:@"PreLoginInfo1"];
         [infoScroll addSubview:firstInfoView];
         
-        PreLoginInfoView *secondInfoView = [[PreLoginInfoView alloc] initWithFrame:CGRectMake(infoScroll.frame.size.width, 0, infoScroll.frame.size.width, infoScroll.frame.size.height) withImageName:@"pre_login_info2.png" withTitleKey:@"PreLoginTitle2" withInfoKey:@"PreLoginInfo2"];
+        PreLoginInfoView *secondInfoView = [[PreLoginInfoView alloc] initWithFrame:CGRectMake(infoScroll.frame.size.width + 10, 0, infoScroll.frame.size.width - 20, infoScroll.frame.size.height) withImageName:@"pre_login_info2.png" withTitleKey:@"PreLoginTitle2" withInfoKey:@"PreLoginInfo2"];
         [infoScroll addSubview:secondInfoView];
 
-        PreLoginInfoView *thirdInfoView = [[PreLoginInfoView alloc] initWithFrame:CGRectMake(infoScroll.frame.size.width*2, 0, infoScroll.frame.size.width, infoScroll.frame.size.height) withImageName:@"pre_login_info3.png" withTitleKey:@"PreLoginTitle3" withInfoKey:@"PreLoginInfo3"];
+        PreLoginInfoView *thirdInfoView = [[PreLoginInfoView alloc] initWithFrame:CGRectMake(infoScroll.frame.size.width * 2 + 10, 0, infoScroll.frame.size.width - 20, infoScroll.frame.size.height) withImageName:@"pre_login_info3.png" withTitleKey:@"PreLoginTitle3" withInfoKey:@"PreLoginInfo3"];
         [infoScroll addSubview:thirdInfoView];
 
-        PreLoginInfoView *fourthInfoView = [[PreLoginInfoView alloc] initWithFrame:CGRectMake(infoScroll.frame.size.width*3, 0, infoScroll.frame.size.width, infoScroll.frame.size.height) withImageName:@"pre_login_info4.png" withTitleKey:@"PreLoginTitle4" withInfoKey:@"PreLoginInfo4"];
+        PreLoginInfoView *fourthInfoView = [[PreLoginInfoView alloc] initWithFrame:CGRectMake(infoScroll.frame.size.width * 3 + 10, 0, infoScroll.frame.size.width - 20, infoScroll.frame.size.height) withImageName:@"pre_login_info4.png" withTitleKey:@"PreLoginTitle4" withInfoKey:@"PreLoginInfo4"];
         [infoScroll addSubview:fourthInfoView];
 
-        PreLoginInfoView *fifthInfoView = [[PreLoginInfoView alloc] initWithFrame:CGRectMake(infoScroll.frame.size.width*4, 0, infoScroll.frame.size.width, infoScroll.frame.size.height) withImageName:@"pre_login_info5.png" withTitleKey:@"PreLoginTitle5" withInfoKey:@"PreLoginInfo5"];
+        PreLoginInfoView *fifthInfoView = [[PreLoginInfoView alloc] initWithFrame:CGRectMake(infoScroll.frame.size.width * 4 + 10, 0, infoScroll.frame.size.width - 20, infoScroll.frame.size.height) withImageName:@"pre_login_info5.png" withTitleKey:@"PreLoginTitle5" withInfoKey:@"PreLoginInfo5"];
         [infoScroll addSubview:fifthInfoView];
         
         infoScroll.contentSize = CGSizeMake(infoScroll.frame.size.width * 5, infoScroll.frame.size.height);

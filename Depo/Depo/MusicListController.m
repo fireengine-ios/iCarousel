@@ -9,7 +9,7 @@
 #import "MusicListController.h"
 #import "AppDelegate.h"
 #import "AppSession.h"
-#import "FolderEmptyCell.h"
+#import "NoItemCell.h"
 #import "SimpleMusicCell.h"
 #import "BaseViewController.h"
 
@@ -189,7 +189,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if(!cell) {
         if([[musicDict allKeys] count] == 0) {
-            cell = [[FolderEmptyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFolderTitle:@"" withDescMessage:@"MusicEmptySubMessage"];
+            cell = [[NoItemCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier imageName:@"no_music_icon" titleText:NSLocalizedString(@"EmptyMusicTitle", @"") descriptionText:@""];
         } else {
             NSString *sectionKey = [musicDictKeys objectAtIndex:indexPath.section];
             NSMutableArray *sectionArray = [musicDict objectForKey:sectionKey];
@@ -211,7 +211,7 @@
         return;
     }
 
-    if([cell isKindOfClass:[FolderEmptyCell class]]) {
+    if([cell isKindOfClass:[NoItemCell class]]) {
         return;
     }
     
