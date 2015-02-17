@@ -60,7 +60,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    TableHeaderView *tableHeaderView = [[TableHeaderView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 35) andTitleText:NSLocalizedString(@"RECENT SEARCHES", @"")];
+    TableHeaderView *tableHeaderView = [[TableHeaderView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 35) andTitleText:NSLocalizedString(@"RecentSearchesHeader", @"")];
     tableHeaderView.userInteractionEnabled = YES;
     UITapGestureRecognizer *touchOnView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(crossButtonOutAction)];
     [tableHeaderView addGestureRecognizer:touchOnView];

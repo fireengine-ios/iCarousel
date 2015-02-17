@@ -49,7 +49,7 @@
     UIView *profileInfoArea = [[UIView alloc] initWithFrame:CGRectMake(0, self.topIndex, 320, 159)];
     profileInfoArea.backgroundColor = [Util UIColorForHexColor:@"3FB0E8"];
     
-    UIImage *profileBgImg = [UIImage imageNamed:@"profile_bg.png"];
+    UIImage *profileBgImg = [UIImage imageNamed:@"profile_icon"];
     profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(116, 15, 88, 88)];
     profileImageView.image = profileBgImg;
     [profileInfoArea addSubview:profileImageView];
@@ -63,11 +63,11 @@
     });
     
     UIImageView *profileFrameImageView = [[UIImageView alloc] initWithFrame:CGRectMake(116, 0, 88, 88)];
-    UIImage *profileFrameImage = [UIImage imageNamed:@"profile_frame@2x"];
+    UIImage *profileFrameImage = [UIImage imageNamed:@"profile_frame"];
     [profileFrameImageView setImage:profileFrameImage];
 //    [profileInfoArea addSubview:profileFrameImageView];
     
-    CustomButton *profileButton = [[CustomButton alloc]initWithFrame:CGRectMake(116, 0, 88, 88) withImageName:@"profile_image_button@2x"];
+    CustomButton *profileButton = [[CustomButton alloc]initWithFrame:CGRectMake(116, 0, 88, 88) withImageName:@"profile_image_button"];
     //[profileButton addTarget:self action:@selector(ShowImageOptionsArea) forControlEvents:UIControlEventTouchUpInside];
     profileButton.userInteractionEnabled = NO;
 //    [profileInfoArea addSubview:profileButton];

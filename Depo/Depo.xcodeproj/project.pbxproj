@@ -238,8 +238,6 @@
 		0526449519D5A26400B63759 /* stroge_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0526447319D5A26400B63759 /* stroge_icon@2x.png */; };
 		0526449619D5A26400B63759 /* cellphone_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0526447419D5A26400B63759 /* cellphone_icon.png */; };
 		0526449719D5A26400B63759 /* cellphone_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0526447519D5A26400B63759 /* cellphone_icon@2x.png */; };
-		0526449819D5A26400B63759 /* profile_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0526447619D5A26400B63759 /* profile_icon.png */; };
-		0526449919D5A26400B63759 /* profile_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0526447719D5A26400B63759 /* profile_icon@2x.png */; };
 		052644AD19D5A2A600B63759 /* SettingsContactsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0526449A19D5A2A600B63759 /* SettingsContactsController.m */; };
 		052644AE19D5A2A600B63759 /* SettingsPhotosVideosController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0526449B19D5A2A600B63759 /* SettingsPhotosVideosController.m */; };
 		052644AF19D5A2A600B63759 /* SettingsDocumentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0526449D19D5A2A600B63759 /* SettingsDocumentsController.m */; };
@@ -620,6 +618,8 @@
 		05F4AA281A2F7692000F41B8 /* ActivityUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F4AA271A2F7692000F41B8 /* ActivityUtil.m */; };
 		564A318A1A9288A400C5B755 /* no_photo_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 564A31881A9288A300C5B755 /* no_photo_icon.png */; };
 		564A318B1A9288A400C5B755 /* no_photo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 564A31891A9288A300C5B755 /* no_photo_icon@2x.png */; };
+		564A318D1A933FE300C5B755 /* profile_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 564A318C1A933FE300C5B755 /* profile_icon.png */; };
+		564A318F1A93419D00C5B755 /* profile_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 564A318E1A93419D00C5B755 /* profile_icon@2x.png */; };
 		56BDE2501A8DEA8B0082F8B8 /* OfferCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 56BDE24F1A8DEA8B0082F8B8 /* OfferCell.m */; };
 /* End PBXBuildFile section */
 
@@ -951,8 +951,6 @@
 		0526447319D5A26400B63759 /* stroge_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stroge_icon@2x.png"; sourceTree = "<group>"; };
 		0526447419D5A26400B63759 /* cellphone_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cellphone_icon.png; sourceTree = "<group>"; };
 		0526447519D5A26400B63759 /* cellphone_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cellphone_icon@2x.png"; sourceTree = "<group>"; };
-		0526447619D5A26400B63759 /* profile_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile_icon.png; sourceTree = "<group>"; };
-		0526447719D5A26400B63759 /* profile_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile_icon@2x.png"; sourceTree = "<group>"; };
 		0526449A19D5A2A600B63759 /* SettingsContactsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsContactsController.m; sourceTree = "<group>"; };
 		0526449B19D5A2A600B63759 /* SettingsPhotosVideosController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsPhotosVideosController.m; sourceTree = "<group>"; };
 		0526449C19D5A2A600B63759 /* SettingsContactsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsContactsController.h; sourceTree = "<group>"; };
@@ -1523,6 +1521,8 @@
 		05F4AA271A2F7692000F41B8 /* ActivityUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityUtil.m; sourceTree = "<group>"; };
 		564A31881A9288A300C5B755 /* no_photo_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = no_photo_icon.png; sourceTree = "<group>"; };
 		564A31891A9288A300C5B755 /* no_photo_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no_photo_icon@2x.png"; sourceTree = "<group>"; };
+		564A318C1A933FE300C5B755 /* profile_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile_icon.png; sourceTree = "<group>"; };
+		564A318E1A93419D00C5B755 /* profile_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile_icon@2x.png"; sourceTree = "<group>"; };
 		56BDE24E1A8DEA8B0082F8B8 /* OfferCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfferCell.h; sourceTree = "<group>"; };
 		56BDE24F1A8DEA8B0082F8B8 /* OfferCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfferCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -2251,6 +2251,8 @@
 		0589060219CC226500A9E517 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				564A318E1A93419D00C5B755 /* profile_icon@2x.png */,
+				564A318C1A933FE300C5B755 /* profile_icon.png */,
 				564A31881A9288A300C5B755 /* no_photo_icon.png */,
 				564A31891A9288A300C5B755 /* no_photo_icon@2x.png */,
 				056BEC791A8AA7CF00BA0805 /* pre_login_info1.png */,
@@ -2458,8 +2460,6 @@
 				0526447319D5A26400B63759 /* stroge_icon@2x.png */,
 				0526447419D5A26400B63759 /* cellphone_icon.png */,
 				0526447519D5A26400B63759 /* cellphone_icon@2x.png */,
-				0526447619D5A26400B63759 /* profile_icon.png */,
-				0526447719D5A26400B63759 /* profile_icon@2x.png */,
 				051CB3B819D2F71200E5FC88 /* nav_detail_icon.png */,
 				051CB3B919D2F71200E5FC88 /* nav_delete_icon.png */,
 				051CB3BA19D2F71200E5FC88 /* nav_blue_tick.png */,
@@ -2818,7 +2818,6 @@
 				05994F971A0B57080081F000 /* music_backward.png in Resources */,
 				051CB3F419D2F71200E5FC88 /* dummy_profilePhoto.png in Resources */,
 				0589066419CC524900A9E517 /* TurkcellSaturaMedIta.ttf in Resources */,
-				0526449919D5A26400B63759 /* profile_icon@2x.png in Resources */,
 				051CB41119D2F71200E5FC88 /* check_unchecked_icon@2x.png in Resources */,
 				0526447A19D5A26400B63759 /* toggle_on@2x.png in Resources */,
 				05A7CE711A7FC27300020B6F /* karebg@2x.png in Resources */,
@@ -2848,6 +2847,7 @@
 				050A7B2019F7CBB600B084B9 /* volume_level@2x.png in Resources */,
 				058BC22F1A308ACB0007F4DE /* video_tour@2x.png in Resources */,
 				0526448E19D5A26400B63759 /* notifications_icon.png in Resources */,
+				564A318F1A93419D00C5B755 /* profile_icon@2x.png in Resources */,
 				0569C8341A8A2B61000E0486 /* Icon.png in Resources */,
 				050D4C411A31E77F00809A01 /* sync_prefs@2x.png in Resources */,
 				0526448819D5A26400B63759 /* upload_icon.png in Resources */,
@@ -2882,7 +2882,6 @@
 				057C9D6F1A2B48F8001DDDEC /* musics_icon@2x.png in Resources */,
 				050A7B1D19F7CBB600B084B9 /* volume_full@2x.png in Resources */,
 				0569C8381A8A324A000E0486 /* Icon_120.png in Resources */,
-				0526449819D5A26400B63759 /* profile_icon.png in Resources */,
 				050A7B1819F7CBB600B084B9 /* volume_current_level.png in Resources */,
 				056BEC871A8AA7CF00BA0805 /* pre_login_info3.png in Resources */,
 				0589066819CC524900A9E517 /* TurkcellSaturaDem.ttf in Resources */,
@@ -2971,6 +2970,7 @@
 				05DEB1D21A8169D1007793DD /* CurioMapping.plist in Resources */,
 				05B73E821A5EEF05005D24BE /* video_main_icon@2x.png in Resources */,
 				050A7B1719F7CBB600B084B9 /* volume_level.png in Resources */,
+				564A318D1A933FE300C5B755 /* profile_icon.png in Resources */,
 				057C9D771A2B494E001DDDEC /* docs_icon@2x.png in Resources */,
 				0526448419D5A26400B63759 /* tick_icon.png in Resources */,
 				051CB40519D2F71200E5FC88 /* nav_delete_icon@2x.png in Resources */,

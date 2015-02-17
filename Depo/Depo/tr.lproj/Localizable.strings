@@ -64,7 +64,7 @@
 "FolderAddProgressMessage"="Klasör Oluşturuluyor";
 "FolderAddSuccessMessage"="Klasör başarıyla oluşturuldu";
 "FolderAddFailMessage"="Klasör oluştururken hata alındı";
-"AddPhotosTitle"="%d of %d";
+"AddPhotosTitle"="%d / %d";
 "SelectAllCheckTitle"="Tümünü Seç";
 "UploadButtonTitle"="Yükle";
 "PhotoListContentFooterTitle"="%d Fotoğraf, %d Video";
@@ -425,4 +425,4 @@
 "EmptyPhotosVideosTitle"="Fotoğraf ve videolar boş";
 "EmptyPhotosVideosDescription"="iPhone'ununzdan fotoğraf ve video yüklemek için \"+\" butonuna basın";
 "EmptyAlbumsTitle"="Albümler boş";
-"EmptyAlbumsDescription"="Yeni klasör oluşturmak için \"+\" butonuna basın";
+"EmptyAlbumsDescription"="Yeni albüm oluşturmak için \"+\" butonuna basın";

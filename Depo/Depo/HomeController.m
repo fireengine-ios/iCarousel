@@ -67,7 +67,7 @@
         usageChart.labelShadowColor = [UIColor blackColor];
         [self.view addSubview:usageChart];
 
-        NSString *lastSyncTitle = NSLocalizedString(@"LastSyncNone", @"");
+        NSString *lastSyncTitle = @"";
         if([SyncUtil readLastSyncDate] != nil) {
             lastSyncTitle = [NSString stringWithFormat:NSLocalizedString(@"LastSyncFormat", @""), [AppUtil readDueDateInReadableFormat:[SyncUtil readLastSyncDate]]];
         }

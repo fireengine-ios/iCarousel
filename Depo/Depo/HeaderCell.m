@@ -23,7 +23,7 @@
             [self drawHeader];
         [self drawSeparator];
         
-        self.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = [Util UIColorForHexColor:@"F1F2F6"];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return self;

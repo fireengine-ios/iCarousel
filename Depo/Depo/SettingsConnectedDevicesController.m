@@ -48,7 +48,10 @@
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
+    if (devicesArray == nil)
+        return 0;
     return 1;
+    
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

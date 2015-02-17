@@ -21,7 +21,7 @@
     if (self) {
         self.metaData = _metaData;
 
-        UIImage *profileBgImg = [UIImage imageNamed:@"profile_bg.png"];
+        UIImage *profileBgImg = [UIImage imageNamed:@"profile_icon.png"];
 
         UIImageView *profileBgView = [[UIImageView alloc] initWithFrame:CGRectMake(15, (60 - profileBgImg.size.height)/2, profileBgImg.size.width, profileBgImg.size.height)];
         profileBgView.image = profileBgImg;
