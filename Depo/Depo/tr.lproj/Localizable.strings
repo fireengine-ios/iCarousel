@@ -179,7 +179,7 @@
 "SortTypeAlbumDescTitle"="Albüm İsmi (Z-A)";
 "HomeUsageTotalStorage"="Toplam %@";
 "LastSyncFormat"="EN SON SENK: %@ ÖNCE";
-"LastSyncNone"="Henüz senkronize edilmedi";
+
 "GetMoreStorageButtonTitle"="Daha Fazla Hafıza";
 "SongTitleFieldTitle"="BAŞLIK";
 "ArtistFieldTitle"="ARTIST";
@@ -255,7 +255,7 @@
 "PostLoginImgPrefInfo"="Fotoğraf & Videolarınızı iPhone'unuzdan Akıllı Depo uygulamasına otomatik olarak yedekleyin";
 "PostLoginContactPrefInfo"="Adres Defteri ve Sosyal Ağ kişilerinizi Akıllı Depo uygulamasına otomatik olarak yedekleyin";
 
-"PostLoginSyncPrefTitle"="SENKRONİZASYON TERCİHİ";
+"PostLoginSyncPrefTitle"="YEDEKLEME AYARLARI";
 "PostLoginRoamingTitle"="Yurtdışı Dolaşım";
 "PostLoginRoamingDesc"="Yurtdışındayken otomatik yükle";
 
@@ -285,14 +285,15 @@
 "Upload"="Yükle";
 "Remove"="Çıkar";
 
-"Storage"="Depolama";
+"Memory"="Hafıza";
 "StorageUsageInfo"="%@%% / %@";
 "CurrentPackageTitle"="MEVCUT PAKET";
 "RenewalDateInfo"="Yenileme tarihi: %@";
 "CancelSubscription"="Üyelikten Vazgeç";
+"CancelSubscriptionInfo"="İptal etmek için \"Iptal %@\" yazıp 2222'ye kısa mesaj gönderebilirsiniz.";
 "UpgradeOptionsTitle"="PAKET SEÇİMİ";
 
-"Upload&Syncing"="Yükleme ve Eşitleme";
+"AutomaticSynchronization"="Otomatik Yedekleme";
 "Photos&Videos"="Fotoğraf ve Videolar";
 "Photos&VideosAutoInfo"="Akıllı Depo'daki fotoğraf ve videolarınıza erişebilir ve istediğinizde albümünüzdeki fotoğraf ve videoları Akıllı Depo'ya yükleyebilirsiniz.\n\n(Fotoğraf ve videoları Akıllı Depo'ya yüklemek için uygulamadaki \"+\" butonunu kullanın.)\n\nOtomatik yükleme etkin durumda, albümünüzdeki fotoğraf ve videolar otomatik olarak bulutta yedeklenecek.";
 "Photos&VideosOnInfo"="Akıllı Depo'daki fotoğraf ve videolarınıza erişebilir ve istediğinizde albümünüzdeki fotoğraf ve videoları Akıllı Depo'ya yükleyebilirsiniz.\n\n(Fotoğraf ve videoları Akıllı Depo'ya yüklemek için uygulamadaki \"+\" butonunu kullanın.)";
@@ -313,8 +314,8 @@
 "ContactsOnDescriptionHeader"="%d KİŞİ HENÜZ EŞİTLENMEDİ";
 "ContactsOnDescriptionBody"="Facebook, Twitter ve Exchange Server bağlantılarınız Turkcell Bulut'a yedeklenemezler.";
 "PhoneContacts"="Telefon Rehberi Kişileri";
-"SynchronisationPreferencesTitle"="EŞİTLEME SEÇENEKLERİ";
-"AutoSynchronisation"="OTOMATİK YEDEKLEME";
+"SynchronizationPreferencesTitle"="YEDEKLEME SEÇENEKLERİ";
+"AutoSynchronization"="OTOMATİK YEDEKLEME";
 "Wifi3G"="Wifi + 3G";
 "Wifi"="Wifi";
 "DataRoaming"="Veri Dolaşımı";
@@ -332,7 +333,7 @@
 "Never"="Hiçbir zaman";
 "NotificationsInfo"="Cihazınızı bulutla eşitleme hatırlatmasının ne kadar sıkılıkla yapılacağını belirleyin.";
 
-"Help"="Yardım";
+"FAQ"="Sıkça Sorulan Sorular";
 "VideoHelpGuides"="Video Yardım Rehberleri";
 "Troubleshooting"="Sorun Giderme";
 "AboutAkilliDepo"="Akıllı Depo Hakkında";
@@ -349,8 +350,8 @@
 "DocumentsHeader"="DÖKÜMANLAR (%d)";
 "AllSearchResultsHeader"="TÜM SONUÇLAR (%d)";
 
-"SyncPhotoVideoTitle"="Resimleri Senkronize Et";
-"SyncContactsTitle"="Kontakları Senkronize Et";
+"SyncPhotoVideoTitle"="Resimleri Yedekle";
+"SyncContactsTitle"="Rehberi Yedekle";
 "DataRoamingTitle"="Data Roaming";
 "DataRoamingSubTitle"="Yurtdışında oto yükleme";
 
@@ -374,7 +375,7 @@
 "RecentActivitySingleFileUpdated"="%d dosya güncellendi";
 "RecentActivitySingleMusicUpdated"="%d şarkı güncellendi";
 
-"AboutUs"="Hakkında";
+"HowTo"="Nasıl Kullanırım?";
 
 "Warning"="Uyarı";
 "SubmitButtonTitle"="Tamam";
@@ -390,9 +391,9 @@
 
 "MenuContactSync"="Rehber Yedekleme";
 
-"ContactSyncFlagTitle"="Otomatik Senkronizasyon";
-"ContactLastSyncDateTitle"="Son Senkronizasyon Tarihi: %@";
-"ContactLastSyncDetailTitle"="SON SENKRONİZASYON DETAYI";
+"ContactSyncFlagTitle"="Otomatik Yedekleme";
+"ContactLastSyncDateTitle"="Son Yedekleme Tarihi: %@";
+"ContactLastSyncDetailTitle"="SON YEDEKLEME DETAYI";
 "ContactLastSyncDetailClientTitle"="Cihaz";
 "ContactLastSyncDetailServerTitle"="Sunucu";
 "ContactLastSyncDetailUpdateTitle"="Güncellenen";

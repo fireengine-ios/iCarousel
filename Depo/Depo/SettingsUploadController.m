@@ -22,7 +22,7 @@
 {
     self = [super init];
     if (self) {
-        self.title = NSLocalizedString(@"Upload&Syncing", @"");
+        self.title = NSLocalizedString(@"AutomaticSynchronization", @"");
     }
     return self;
 }
@@ -47,7 +47,8 @@
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
-    return (currentSyncPhotosVideosSetting == EnableOptionOn || currentSyncContactsSetting == EnableOptionOn) ? 3 : 1;
+    return (currentSyncPhotosVideosSetting == EnableOptionOn || currentSyncContactsSetting == EnableOptionOn) ? 2 : 1;
+    // 3 olduğunda Data Roaming alanı da görünür
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -55,7 +56,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return section == 2 ? 31 : 54;
+    return section == 1 ? 54 : 31;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -70,11 +71,10 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     NSString *titleText;
-    switch (section) {
-        case 0: titleText = NSLocalizedString(@"AutoSynchronisation", @""); break;
-        case 1: titleText = NSLocalizedString(@"SynchronisationPreferencesTitle", @""); break;
-        default: titleText = @""; break;
-    }
+    if (section == 1)
+        titleText = NSLocalizedString(@"SynchronizationPreferencesTitle", @"");
+    else
+        titleText = @"";
     return [[HeaderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"" headerText:titleText];
 }
 
@@ -136,17 +136,7 @@
     [self.nav pushViewController:photosVideosController animated:YES];
     
 }
-/*
-- (void) didTriggerMusic {
-    SettingsMusicController *musicController = [[SettingsMusicController alloc] init];
-    [self.nav pushViewController:musicController animated:YES];
-}
 
-- (void) didTriggerDocuments {
-    SettingsDocumentsController *documentsController = [[SettingsDocumentsController alloc] init];
-    [self.nav pushViewController:documentsController animated:YES];
-}
-*/
 - (void) didTriggerContacts {
     SettingsContactsController *contactsController = [[SettingsContactsController alloc] init];
     [self.nav pushViewController:contactsController animated:YES];

@@ -18,7 +18,7 @@
 {
     self = [super init];
     if (self) {
-        self.title = NSLocalizedString(@"AboutUs", @"");
+        self.title = NSLocalizedString(@"HowTo", @"");
     }
     
     return self;
@@ -31,7 +31,8 @@
     webView.autoresizesSubviews = YES;
     webView.delegate = self;
     [self.view addSubview:webView];
-    NSURL *url = [NSURL URLWithString:@"http://trcll.im/ipb4X"];
+//    NSURL *url = [NSURL URLWithString:@"http://trcll.im/ipb4X"]; // Akilli Depo sayfasi
+    NSURL *url = [NSURL URLWithString:@"http://trcll.im/qEPFv"]; // How to
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];
 }

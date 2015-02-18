@@ -34,6 +34,8 @@
 
 @implementation SearchModalController
 
+@synthesize deleteType;
+
 - (id) init {
     if (self = [super init]) {
         self.view.backgroundColor = [UIColor whiteColor];
@@ -43,6 +45,31 @@
         searchDao.delegate = self;
         searchDao.successMethod = @selector(searchListSuccessCallback:);
         searchDao.failMethod = @selector(searchListFailCallback:);
+        
+        deleteDao = [[DeleteDao alloc] init];
+        deleteDao.delegate = self;
+        deleteDao.successMethod = @selector(deleteSuccessCallback);
+        deleteDao.failMethod = @selector(deleteFailCallback:);
+        
+        folderDeleteDao = [[DeleteDao alloc] init];
+        folderDeleteDao.delegate = self;
+        folderDeleteDao.successMethod = @selector(folderDeleteSuccessCallback);
+        folderDeleteDao.failMethod = @selector(folderDeleteFailCallback:);
+        
+        favoriteDao = [[FavoriteDao alloc] init];
+        favoriteDao.delegate = self;
+        favoriteDao.successMethod = @selector(favSuccessCallback:);
+        favoriteDao.failMethod = @selector(favFailCallback:);
+        
+        folderFavDao = [[FavoriteDao alloc] init];
+        folderFavDao.delegate = self;
+        folderFavDao.successMethod = @selector(folderFavSuccessCallback:);
+        folderFavDao.failMethod = @selector(folderFavFailCallback:);
+        
+        moveDao = [[MoveDao alloc] init];
+        moveDao.delegate = self;
+        moveDao.successMethod = @selector(moveSuccessCallback);
+        moveDao.failMethod = @selector(moveFailCallback:);
 
         CustomButton *crossButton = [[CustomButton alloc]initWithFrame:CGRectMake(40, 15, 30, 30) withImageName:@"multiply"];
         [crossButton addTarget:self action:@selector(triggerDismiss) forControlEvents:UIControlEventTouchUpInside];
@@ -389,11 +416,56 @@
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskAll;
+    return UIInterfaceOrientationPortrait | UIInterfaceOrientationPortraitUpsideDown;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown || interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight);
+    return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
 }
+
+
+
+#pragma mark AbstractFileFolderDelegate methods
+
+- (void) fileFolderCellShouldFavForFile:(MetaFile *)fileSelected {
+    [favoriteDao requestMetadataForFiles:@[fileSelected.uuid] shouldFavorite:YES];
+    //    [self showLoading];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"FavAddProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"FavAddSuccessMessage", @"") andFailMessage:NSLocalizedString(@"FavAddFailMessage", @"")];
+}
+
+- (void) fileFolderCellShouldUnfavForFile:(MetaFile *)fileSelected {
+    [favoriteDao requestMetadataForFiles:@[fileSelected.uuid] shouldFavorite:NO];
+    //    [self showLoading];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"UnfavProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"UnfavSuccessMessage", @"") andFailMessage:NSLocalizedString(@"UnfavFailMessage", @"")];
+}
+
+- (void) fileFolderCellShouldDeleteForFile:(MetaFile *)fileSelected {
+    if([CacheUtil showConfirmDeletePageFlag]) {
+        [deleteDao requestDeleteFiles:@[fileSelected.uuid]];
+        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+    } else {
+        fileSelectedRef = fileSelected;
+        self.deleteType = DeleteTypeSwipeMenu;
+        [APPDELEGATE.base showConfirmDelete];
+    }
+}
+
+- (void) fileFolderCellShouldShareForFile:(MetaFile *)fileSelected {
+    [APPDELEGATE.base triggerShareForFiles:@[fileSelected.uuid]];
+}
+
+
+
+- (void) favSuccessCallback:(NSNumber *) favFlag {
+    
+}
+
+- (void) favFailCallback:(NSString *) errorMessage {
+    [self showErrorAlertWithMessage:errorMessage];
+}
+
+
+
+
 
 @end

@@ -18,7 +18,7 @@
 {
     self = [super init];
     if (self) {
-        self.title = NSLocalizedString(@"Help", @"");
+        self.title = NSLocalizedString(@"FAQ", @"");
     }
     
     return self;

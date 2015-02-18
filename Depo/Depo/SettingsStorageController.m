@@ -18,7 +18,7 @@
 {
     self = [super init];
     if (self) {
-        self.title = NSLocalizedString(@"Storage", @"");
+        self.title = NSLocalizedString(@"Memory", @"");
     }
     return self;
 }
@@ -130,9 +130,10 @@
             return cell;
         }
         else {
+            TextCell *cell = [[TextCell alloc]initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"" titleColor:nil contentText:[NSString stringWithFormat:NSLocalizedString(@"CancelSubscriptionInfo", @""), currentSubscription.plan.name] contentTextColor:nil backgroundColor:nil hasSeparator:NO];
+            return cell;
             
-            
-            TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"CancelSubscription", @"") titleColor:[Util UIColorForHexColor:@"3FB0E8"] subTitleText:@"" iconName:@"" hasSeparator:YES isLink:NO linkText:@"" cellHeight:54];
+//            TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"CancelSubscription", @"") titleColor:[Util UIColorForHexColor:@"3FB0E8"] subTitleText:@"" iconName:@"" hasSeparator:YES isLink:NO linkText:@"" cellHeight:54];
             return cell;
         }
     }
