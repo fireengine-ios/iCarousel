@@ -14,6 +14,7 @@
 #import "FileDetailInWebViewController.h"
 #import "PreviewUnavailableController.h"
 #import "BaseViewController.h"
+#import "NoItemCell.h"
 
 @interface DocListController ()
 
@@ -146,7 +147,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if(!cell) {
         if(docList == nil || [docList count] == 0) {
-            cell = [[FolderEmptyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFolderTitle:@"" withDescMessage:@"DocEmptySubMessage"];
+            cell = [[NoItemCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier imageName:@"empty_state_icon" titleText:NSLocalizedString(@"EmptyDocumentsTitle", @"") descriptionText:@""];
         } else {
             MetaFile *fileAtIndex = [docList objectAtIndex:indexPath.row];
             cell = [[SimpleDocCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex isSelectible:isSelectible];

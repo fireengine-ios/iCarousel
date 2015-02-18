@@ -10,6 +10,7 @@
 #import "Util.h"
 #import "CustomLabel.h"
 #import "PostLoginSyncPrefController.h"
+#import <AddressBookUI/AddressBookUI.h>
 
 @interface PostLoginSyncContactController ()
 
@@ -60,6 +61,21 @@
 
 - (void) continueClicked {
     if(onOff.isOn) {
+        
+        ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(nil, nil);
+        
+        if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined) {
+            ABAddressBookRequestAccessWithCompletion(addressBookRef, ^(bool granted, CFErrorRef error) {
+                if (granted) {
+                } else {
+                }
+            });
+        }
+        else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
+        }
+        else {
+        }
+        
         [CacheUtil writeCachedSettingSyncContacts:EnableOptionAuto];
     } else {
         [CacheUtil writeCachedSettingSyncContacts:EnableOptionOff];

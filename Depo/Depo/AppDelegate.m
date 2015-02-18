@@ -19,7 +19,7 @@
 #import "SyncUtil.h"
 #import "PreLoginController.h"
 #import "LoginController.h"
-#import "PostLoginSyncPhotoController.h"
+#import "PostLoginSyncPrefController.h"
 #import "Reachability.h"
 
 #import "MigrateStatusController.h"
@@ -184,7 +184,7 @@
     [self hideMainLoading];
     
     if(![AppUtil readFirstVisitOverFlag]) {
-        PostLoginSyncPhotoController *imgSync = [[PostLoginSyncPhotoController alloc] init];
+        PostLoginSyncPrefController *imgSync = [[PostLoginSyncPrefController alloc] init];
         MyNavigationController *imgSyncNav = [[MyNavigationController alloc] initWithRootViewController:imgSync];
         self.window.rootViewController = imgSyncNav;
     } else {

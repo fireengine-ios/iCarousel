@@ -53,8 +53,6 @@
 "FolderSubTitle"="%d dosya";
 "FolderEmptyMessage"="%@ boş";
 "FolderEmptySubMessage"="\"+\" butonuna dokunarak dosyalarınızı yüklemeye başlayabilirsiniz.";
-"DocEmptySubMessage"="Görüntülenecek döküman bulunamadı.";
-"MusicEmptySubMessage"="Görüntülenecek şarkı bulunamadı.";
 "FolderAddTitle"="KLASÖR İSMİ";
 "FolderNamePlaceholder"="Örnek Klasör İsmi";
 "FileNamePlaceholder"="Dosya İsmi";
@@ -420,9 +418,9 @@
 
 "StartUsingTitle"="Kullanmaya başla";
 
-"EmptyMusicTitle"="Müzikler boş";
-"EmptyDocumentsTitle"="Dokümanlar boş";
-"EmptyPhotosVideosTitle"="Fotoğraf ve videolar boş";
+"EmptyMusicTitle"="Hiç müziğiniz bulunmuyor.";
+"EmptyDocumentsTitle"="Hiç dokümanınız bulunmuyor.";
+"EmptyPhotosVideosTitle"="Fotoğraf veya videonuz bulunmuyor.";
 "EmptyPhotosVideosDescription"="iPhone'ununzdan fotoğraf ve video yüklemek için \"+\" butonuna basın";
-"EmptyAlbumsTitle"="Albümler boş";
+"EmptyAlbumsTitle"="Hiç albümünüz bulunmuyor.";
 "EmptyAlbumsDescription"="Yeni albüm oluşturmak için \"+\" butonuna basın";

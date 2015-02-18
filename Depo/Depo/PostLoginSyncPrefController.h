@@ -7,12 +7,15 @@
 //
 
 #import "MyViewController.h"
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface PostLoginSyncPrefController : MyViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, strong) UISwitch *onOff;
+@property (nonatomic, strong) UISwitch *onOff1;
+@property (nonatomic, strong) UISwitch *onOff2;
 @property (nonatomic, strong) UITableView *choiceTable;
 @property (nonatomic, strong) NSMutableArray *choices;
 @property (nonatomic) ConnectionOption selectedOption;
+@property (nonatomic, strong) ALAssetsLibrary *assetsLibrary;
 
 @end

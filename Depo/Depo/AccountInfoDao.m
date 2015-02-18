@@ -36,7 +36,8 @@
             NSString *surname = [mainDict objectForKey:@"surname"];
             NSString *url = [mainDict objectForKey:@"url"];
             
-            user.fullName = [NSString stringWithFormat:@"%@ %@", [self strByRawVal:name], [self strByRawVal:surname]];
+//            user.fullName = [NSString stringWithFormat:@"%@ %@", [self strByRawVal:name], [self strByRawVal:surname]];
+            user.fullName = [NSString stringWithFormat:@"%@", [self strByRawVal:name]];
             user.profileImgUrl = [self strByRawVal:url];
             
         }
