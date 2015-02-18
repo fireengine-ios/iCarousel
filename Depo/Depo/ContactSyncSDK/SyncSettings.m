@@ -16,7 +16,7 @@
 @synthesize periodicSync = _periodicSync;
 
 #define CONTACT_SYNC_BASE_DEV_URL @"http://127.0.0.1:8002/sync/ttyapi/";
-#define CONTACT_SYNC_BASE_TEST_URL @"http://contactsync.test.valven.com/ttyapi/";
+#define CONTACT_SYNC_BASE_TEST_URL @"https://tcloudstb.turkcell.com.tr/ttyapi/";
 #define CONTACT_SYNC_BASE_PROD_URL @"";
 
 - (instancetype)init

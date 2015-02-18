@@ -18,7 +18,7 @@ typedef enum {
 @interface SyncAdapter : NSObject
 
 + (void)getContact:(NSNumber*)contactId callback:(void (^)(id, BOOL))callback;
-+ (void)getContacts:(NSNumber*)currentPage pageSize:(NSNumber*)pageSize totalRecords:(NSNumber*)totalRecords callback:(void (^)(id, BOOL))callback;
++ (void)getContacts:(void (^)(id, BOOL))callback;
 + (void)updateContacts:(NSArray*)contacts callback:(void (^)(id, BOOL))callback;
 + (void)deleteContact:(NSNumber*)contactId callback:(void (^)(id, BOOL))callback;
 + (void)deleteContact:(NSNumber*)contactId permanent:(BOOL)permanent callback:(void (^)(id, BOOL))callback;

@@ -17,11 +17,6 @@
 
 @property (strong) SyncDBUtils *db;
 
-@property NSInteger pageSize;
-@property NSInteger currentPage;
-@property NSInteger totalRecords;
-@property NSInteger numOfPages;
-
 @property long long lastSync;
 
 - (void) startSyncing;
@@ -47,10 +42,6 @@ static bool syncing = false;
     self = [super init];
     if (self){
         _db = [SyncDBUtils shared];
-        _pageSize = 30;
-        _currentPage = 1;
-        _totalRecords = 0;
-        _numOfPages = 0;
     }
     return self;
 }
@@ -74,13 +65,10 @@ static bool syncing = false;
 
 - (void)fetchRemoteContacts
 {
-    [SyncAdapter getContacts:[NSNumber numberWithInteger:_currentPage] pageSize:[NSNumber numberWithInteger:_pageSize] totalRecords:[NSNumber numberWithInteger:_totalRecords] callback:^(id response, BOOL success) {
+    [SyncAdapter getContacts:^(id response, BOOL success) {
         if (success){
             NSDictionary *data = response[SYNC_JSON_PARAM_DATA];
             NSArray *items = data[SYNC_JSON_PARAM_ITEMS];
-            _currentPage = [data[SYNC_JSON_PARAM_CURRENT_PAGE] integerValue];
-            _totalRecords = [data[SYNC_JSON_PARAM_TOTAL_COUNT] integerValue];
-            _numOfPages = [data[SYNC_JSON_PARAM_PAGE_COUNT] integerValue];
             
             for (NSDictionary *item in items){
                 Contact *contact = [[Contact alloc] initWithDictionary:item];
@@ -94,14 +82,8 @@ static bool syncing = false;
                 }
             }
             
-            if (_currentPage < _numOfPages){
-                _currentPage++;
-                // we didn't reached to end of the data
-                [self fetchRemoteContacts];
-            } else {
-                // we got all records
-                [self fetchLocalContacts];
-            }
+            // we got all records
+            [self fetchLocalContacts];
         } else {
             [self endOfSyncCycle:response==nil?SYNC_RESULT_ERROR_REMOTE_SERVER:SYNC_RESULT_ERROR_NETWORK];
         }
@@ -301,7 +283,7 @@ static bool syncing = false;
     [SyncAdapter getServerTime:^(id response, BOOL isSuccess) {
         syncing = false;
         void (^callback)(void) = [SyncSettings shared].callback;
-        if (isSuccess){
+        if (isSuccess && !SYNC_IS_NULL(response)){
             NSNumber *time = response[SYNC_JSON_PARAM_DATA];
             if (!SYNC_NUMBER_IS_NULL_OR_ZERO(time)){
                 [ContactSyncSDK setLastSyncTime:time];
@@ -312,7 +294,7 @@ static bool syncing = false;
                 callback();
             }
         } else {
-            [SyncStatus shared].status = response!=nil?SYNC_RESULT_ERROR_REMOTE_SERVER:SYNC_RESULT_ERROR_NETWORK;
+            [SyncStatus shared].status = SYNC_IS_NULL(response)?SYNC_RESULT_ERROR_NETWORK:SYNC_RESULT_ERROR_REMOTE_SERVER;
             if (callback){
                 callback();
             }

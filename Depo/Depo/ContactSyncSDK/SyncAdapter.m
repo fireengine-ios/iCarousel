@@ -15,16 +15,9 @@
 {
     [SyncAdapter request:[self buildURL:[NSString stringWithFormat:@"contact/%@",contactId]] params:nil headers:nil method:GET callback:callback];
 }
-+ (void)getContacts:(NSNumber*)currentPage pageSize:(NSNumber*)pageSize totalRecords:(NSNumber*)totalRecords callback:(void (^)(id, BOOL))callback
++ (void)getContacts:(void (^)(id, BOOL))callback
 {
-    NSMutableDictionary *params = [NSMutableDictionary new];
-    SYNC_SET_DICT_IF_NOT_NIL(params, currentPage, @"currentPage");
-    SYNC_SET_DICT_IF_NOT_NIL(params, pageSize, @"maxResult");
-
-    if (!SYNC_NUMBER_IS_NULL_OR_ZERO(totalRecords)){
-        [params setObject:totalRecords forKey:@"totalCount"];
-    }
-    [SyncAdapter request:[self buildURL:@"contact"] params:[params copy] headers:nil method:GET callback:callback];
+    [SyncAdapter request:[self buildURL:@"contact"] params:nil headers:nil method:GET callback:callback];
 }
 + (void)updateContacts:(NSArray*)contacts callback:(void (^)(id, BOOL))callback
 {
@@ -94,7 +87,7 @@
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:urlAddress];
     [request setHTTPShouldHandleCookies:NO];
-    [request setTimeoutInterval:300.0];
+    [request setTimeoutInterval:1200.0];
     
     switch (method) {
         case GET:

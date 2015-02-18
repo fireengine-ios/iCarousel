@@ -102,21 +102,21 @@
     }
     Contact *other = object;
     if (SYNC_IS_NULL(_firstName)){
-        if (!SYNC_IS_NULL(other.firstName)){
+        if (!SYNC_IS_NULL(other.firstName) && other.firstName.length!=0){
             return NO;
         }
     } else if (![_firstName isEqualToString:other.firstName]){
         return NO;
     }
     if (SYNC_IS_NULL(_middleName)){
-        if (!SYNC_IS_NULL(other.middleName)){
+        if (!SYNC_IS_NULL(other.middleName) && other.middleName.length!=0){
             return NO;
         }
     } else if (![_middleName isEqualToString:other.middleName]){
         return NO;
     }
     if (SYNC_IS_NULL(_lastName)){
-        if (!SYNC_IS_NULL(other.lastName)){
+        if (!SYNC_IS_NULL(other.lastName) && other.lastName.length!=0){
             return NO;
         }
     } else if (![_lastName isEqualToString:other.lastName]){
