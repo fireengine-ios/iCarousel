@@ -18,7 +18,7 @@
 - (BOOL)deleteContact:(NSNumber*)objectId;
 - (void)deleteContact:(NSNumber*)contactId devices:(NSArray*)devices;
 - (void)save:(Contact*)contact;
-- (Contact*)findDuplicate:(Contact*)contact;
+- (Contact*)findDuplicate:(Contact*)contact cache:(NSMutableArray*)localContacts;
 - (NSMutableArray*)fetchContacts;
 - (Contact*)findContactById:(NSNumber*)objectId;
 - (NSNumber*)localUpdateDate:(NSNumber*)objectId;

@@ -87,7 +87,7 @@
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:urlAddress];
     [request setHTTPShouldHandleCookies:NO];
-    [request setTimeoutInterval:1200.0];
+    [request setTimeoutInterval:1800.0];
     
     switch (method) {
         case GET:

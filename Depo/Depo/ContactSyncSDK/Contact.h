@@ -31,4 +31,6 @@
 - (void)copyContact:(Contact*)contact;
 - (NSString*)displayName;
 
+- (BOOL)preEqualCheck:(id)object;
+
 @end

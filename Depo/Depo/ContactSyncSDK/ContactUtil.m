@@ -59,23 +59,22 @@
         callback(NO);
     }
 }
-- (Contact*)findDuplicate:(Contact*)contact
+- (Contact*)findDuplicate:(Contact*)contact cache:(NSMutableArray*)localContacts
 {
-    CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople( _addressBook );
-    CFIndex nPeople = ABAddressBookGetPersonCount( _addressBook );
-    for ( int i = 0; i < nPeople; i++ )
+    NSUInteger size = [localContacts count];
+    for ( int i = 0; i < size; i++ )
     {
-        ABRecordRef ref = CFArrayGetValueAtIndex( allPeople, i );
-        Contact *c = [[Contact alloc] initWithRecordRef:ref];
-        //we must have either firstname or lastname, otherwise contact cannot be saved on server
-        [self fetchNumbers:c];
-        [self fetchEmails:c];
-        if ([c isEqual:contact]){
-            CFRelease(allPeople);
-            return c;
+        Contact *c = [localContacts objectAtIndex:i];
+        if ([c preEqualCheck:contact]){
+            //pre check passed, continue further investigation
+            [self fetchNumbers:c];
+            [self fetchEmails:c];
+            if ([c isEqual:contact]){
+                return c;
+            }
         }
     }
-    CFRelease(allPeople);
+//    CFRelease(allPeople);
     return nil;
 }
 - (BOOL)deleteContact:(NSNumber*)objectId

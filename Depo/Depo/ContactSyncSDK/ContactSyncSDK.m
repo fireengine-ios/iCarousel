@@ -14,6 +14,7 @@
 @property (strong) NSMutableSet *localContactIds;
 @property (strong) NSMutableSet *remoteContactIds;
 @property (strong) NSMutableArray *remoteContacts;
+@property (strong) NSMutableArray *localContacts;
 
 @property (strong) SyncDBUtils *db;
 
@@ -93,6 +94,7 @@ static bool syncing = false;
 - (void)fetchLocalContacts
 {
     self.dirtyContacts = [NSMutableDictionary new];
+    self.localContacts = [NSMutableArray new];
     NSMutableArray *contacts = [[ContactUtil shared] fetchContacts];
     if (!SYNC_IS_NULL(contacts) && [contacts count]>0){
         for (Contact *contact in contacts){
@@ -105,6 +107,7 @@ static bool syncing = false;
                     
                     [_dirtyContacts setObject:contact forKey:[contact objectId]];
                 }
+                [_localContacts addObject:contact];
             }
         }
     }
@@ -113,8 +116,14 @@ static bool syncing = false;
 
 - (void)allRecordsAreFetched
 {
+    NSArray *records = [_db fetch];
+    NSMutableSet *existingRemote = [[NSMutableSet alloc] initWithCapacity:records.count];
+    for (SyncRecord *rec in records){
+        [existingRemote addObject:rec.remoteId];
+    }
+    
     for (Contact *remoteContact in _remoteContacts){
-        [self checkContactExists:remoteContact];
+        [self checkContactExists:remoteContact cache:existingRemote];
     }
     
     [self findDeletedRecords];
@@ -122,16 +131,15 @@ static bool syncing = false;
     
 }
 
-- (void)checkContactExists:(Contact*)remoteContact
+- (void)checkContactExists:(Contact*)remoteContact cache:(NSMutableSet*)existing
 {
-    NSArray *records = [_db fetch:[NSString stringWithFormat:@"%@=%@",COLUMN_REMOTE_ID,remoteContact.remoteId]];
     SyncRecord *record = nil;
-    if (SYNC_ARRAY_IS_NULL_OR_EMPTY(records)){
+    if (![existing containsObject:remoteContact.remoteId]){
         // remote contact is not in local db
         SYNC_Log(@"remote contact is not in local db : %@",[remoteContact displayName]);
         
         //check for duplicates
-        Contact *duplicate = [[ContactUtil shared] findDuplicate:remoteContact];
+        Contact *duplicate = [[ContactUtil shared] findDuplicate:remoteContact cache:_localContacts];
         if (duplicate==nil){
             // this is a new record, clear IDs
             remoteContact.recordRef = nil;
@@ -151,6 +159,7 @@ static bool syncing = false;
         record.remoteId = remoteContact.remoteId;
         record.localUpdateDate = SYNC_DATE_AS_NUMBER([NSDate date]);
     } else {
+        NSArray *records = [_db fetch:[NSString stringWithFormat:@"%@=%@",COLUMN_REMOTE_ID,remoteContact.remoteId]];
         record = records[0];
         
         remoteContact.objectId = record.localId;
