@@ -347,7 +347,8 @@
 }
 
 + (BOOL) isMetaFileMusic:(MetaFile *) file {
-    return ([file.rawContentType isEqualToString:CONTENT_TYPE_AUDIO_MP3_VALUE] || [file.rawContentType isEqualToString:CONTENT_TYPE_AUDIO_MPEG_VALUE]);
+//    return ([file.rawContentType isEqualToString:CONTENT_TYPE_AUDIO_MP3_VALUE] || [file.rawContentType isEqualToString:CONTENT_TYPE_AUDIO_MPEG_VALUE]);
+    return ([file.rawContentType hasPrefix:@"audio/"]);
 }
 
 + (BOOL) isMetaFileDoc:(MetaFile *) file {
