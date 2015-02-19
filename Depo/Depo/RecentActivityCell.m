@@ -35,6 +35,8 @@
         [self addSubview:iconView];
         
         titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(95, 5, self.frame.size.width - 110, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"7f828b"] withText:self.activity.title];
+        if (self.activity.activityType == ActivityTypeWelcome)
+            titleLabel.text = NSLocalizedString(@"Welcome", @"");
         [self addSubview:titleLabel];
         
         dateLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(95, self.frame.size.height-40, self.frame.size.width - 110, 15) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:12] withColor:[Util UIColorForHexColor:@"7f828b"] withText:self.activity.visibleHour];
@@ -59,9 +61,11 @@
             }
         }
         
-        separator = [[UIView alloc] initWithFrame:CGRectMake(95, self.frame.size.height-10, self.frame.size.width-95, 1)];
-        separator.backgroundColor = [Util UIColorForHexColor:@"e9ebef"];
-        [self addSubview:separator];
+        if (self.activity.activityType != ActivityTypeWelcome) {
+            separator = [[UIView alloc] initWithFrame:CGRectMake(95, self.frame.size.height-10, self.frame.size.width-95, 1)];
+            separator.backgroundColor = [Util UIColorForHexColor:@"e9ebef"];
+            [self addSubview:separator];
+        }
 
     }
     return self;

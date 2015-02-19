@@ -272,6 +272,8 @@
         result.activityType = ActivityTypeFav;
     } else if([result.rawActivityType isEqualToString:@"DELETED"]) {
         result.activityType = ActivityTypeTrash;
+    } else if ([result.rawActivityType isEqualToString:@"WELCOME"]) {
+        result.activityType = ActivityTypeWelcome;
     } else {
         if([result.rawFileType isEqualToString:@"IMAGE"]) {
             result.activityType = ActivityTypeImage;

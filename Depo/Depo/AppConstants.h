@@ -230,7 +230,8 @@ typedef enum {
     ActivityTypeFile,
     ActivityTypeMusic,
     ActivityTypeContact,
-    ActivityTypeFav
+    ActivityTypeFav,
+    ActivityTypeWelcome
 } ActivityType;
 
 typedef enum {

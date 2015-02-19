@@ -39,10 +39,10 @@
         if(mainArray != nil && ![mainArray isKindOfClass:[NSNull class]]) {
             for(NSDictionary *activityDict in mainArray) {
                 Activity *activity = [self parseActivity:activityDict];
-                if(![activity.rawActivityType isEqualToString:@"WELCOME"]) {
+//                if(![activity.rawActivityType isEqualToString:@"WELCOME"]) {
                     activity.visibleHour = [hourFormat stringFromDate:activity.date];
                     [result addObject:activity];
-                }
+//                }
             }
         }
 
