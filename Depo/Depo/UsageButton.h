@@ -11,6 +11,6 @@
 
 @interface UsageButton : UIButton
 
-- (id) initWithFrame:(CGRect)frame withUsage:(UsageType) type withStorage:(float) storage;
+- (id) initWithFrame:(CGRect)frame withUsage:(UsageType) type withStorage:(long long) storage;
 
 @end

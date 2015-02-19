@@ -108,7 +108,15 @@
 }
 
 - (CGFloat)pieChart:(XYPieChart *)pieChart valueForSliceAtIndex:(NSUInteger)index {
-    return [[self.usages objectAtIndex:index] intValue];
+    long long sliceUsage = [[self.usages objectAtIndex:index] longLongValue];
+    
+    if(sliceUsage > 0.0l) {
+        float totalStorage5Percent = APPDELEGATE.session.usage.totalStorage/20;
+        if(sliceUsage < totalStorage5Percent) {
+            sliceUsage = totalStorage5Percent;
+        }
+    }
+    return sliceUsage;
 }
 
 - (UIColor *)pieChart:(XYPieChart *)pieChart colorForSliceAtIndex:(NSUInteger)index {
