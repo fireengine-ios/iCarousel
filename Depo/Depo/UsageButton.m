@@ -13,7 +13,7 @@
 
 @implementation UsageButton
 
-- (id) initWithFrame:(CGRect)frame withUsage:(UsageType) type withStorage:(float) storage {
+- (id) initWithFrame:(CGRect)frame withUsage:(UsageType) type withStorage:(long long) storage {
     if(self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor clearColor];
         
@@ -22,7 +22,7 @@
         bgImgView.image = iconImg;
         [self addSubview:bgImgView];
         
-        CustomLabel *titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 20, self.frame.size.width, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:[Util transformedSizeValue:storage] withAlignment:NSTextAlignmentCenter];
+        CustomLabel *titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 20, self.frame.size.width, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:[Util transformedHugeSizeValue:storage] withAlignment:NSTextAlignmentCenter];
         [self addSubview:titleLabel];
     }
     return self;
