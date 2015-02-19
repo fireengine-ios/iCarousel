@@ -21,6 +21,7 @@
 @property (nonatomic, strong) NSString *validationKey;
 @property (nonatomic, strong) NSString *price;
 @property (nonatomic, strong) NSString *role;
-@property (nonatomic, strong) NSString *quota;
+@property (nonatomic, strong) NSString *quotaString;
+@property (nonatomic) float quota;
 
 @end

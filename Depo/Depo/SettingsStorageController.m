@@ -7,6 +7,7 @@
 //
 
 #import "SettingsStorageController.h"
+#import "OfferCell.h"
 
 @interface SettingsStorageController ()
 
@@ -62,11 +63,12 @@
     [super showErrorAlertWithMessage:errorMessage];
 }
 
-- (void) cancelSubscriptionCallback {
+- (void) activateOfferCallback {
     [super hideLoading];
+    [super drawPageContentTable];
 }
 
-- (void) cancelSubscriptionFailCallback:(NSString *) errorMessage {
+- (void) activateOfferFailCallback:(NSString *) errorMessage {
     [super hideLoading];
     [super showErrorAlertWithMessage:errorMessage];
 }
@@ -82,7 +84,7 @@
     if (section == 0)
         return 2;
     else
-        return offers.count + 2;
+        return offers.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -97,8 +99,8 @@
             return 54;
     }
     else {
-        if (indexPath.row == 0 || indexPath.row == offers.count + 1)
-            return 15;
+        if (indexPath.row == 0 || indexPath.row == offers.count - 1)
+            return 75;
         else
             return 60;
     }
@@ -132,39 +134,33 @@
         else {
             TextCell *cell = [[TextCell alloc]initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"" titleColor:nil contentText:[NSString stringWithFormat:NSLocalizedString(@"CancelSubscriptionInfo", @""), currentSubscription.plan.name] contentTextColor:nil backgroundColor:nil hasSeparator:NO];
             return cell;
-            
-//            TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"CancelSubscription", @"") titleColor:[Util UIColorForHexColor:@"3FB0E8"] subTitleText:@"" iconName:@"" hasSeparator:YES isLink:NO linkText:@"" cellHeight:54];
-            return cell;
         }
     }
     else {
-        UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-        //[self drawUpgradeOptionsCell:cell];
+        OfferCell *cell;
+        Offer *offer = [offers objectAtIndex:indexPath.row];
+        NSString *packageName = @"%@ (%gGB) %@ TL/%@";
+        packageName = [NSString stringWithFormat:packageName, offer.name, offer.quota/(1024*1024*1024), offer.price, NSLocalizedString(@"Month", @"")];
+        packageName = [packageName stringByReplacingOccurrencesOfString:@"Akıllı Depo " withString:@""];
+        if (indexPath.row == 0)
+            cell = [[OfferCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:packageName hasSeparator:NO topIndex:15 bottomIndex:0];
+        else if (indexPath.row == offers.count - 1)
+            cell = [[OfferCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:packageName hasSeparator:YES topIndex:0 bottomIndex:15];
+        else
+            cell = [[OfferCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:packageName hasSeparator:NO];
         return cell;
     }
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        if (indexPath.row == 1) { // cancel subscription
-            accountDaoToCancelSubscription = [[AccountDao alloc]init];
-            accountDaoToCancelSubscription.delegate = self;
-            accountDaoToCancelSubscription.successMethod = @selector(cancelSubscriptionCallback);
-            accountDaoToCancelSubscription.failMethod = @selector(cancelSubscriptionFailCallback:);
-            [accountDaoToCancelSubscription requestCancelSubscription:currentSubscription];
-        }
+    if (indexPath.section == 1) {
+        Offer *offer = [offers objectAtIndex:indexPath.row];
+        accountDaoToActivateOffer = [[AccountDao alloc]init];
+        accountDaoToGetOffers.delegate = self;
+        accountDaoToGetOffers.successMethod = @selector(activateOfferCallback);
+        accountDaoToGetOffers.failMethod = @selector(activateOfferFailCallback:);
+        [accountDaoToGetOffers requestActivateOffer:offer];
     }
 }
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
- {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

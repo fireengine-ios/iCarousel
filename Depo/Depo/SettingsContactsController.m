@@ -34,25 +34,14 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-}
-
 - (void) viewWillDisappear:(BOOL)animated {
     if (currentSetting != oldSetting)
         [CacheUtil writeCachedSettingSyncContacts:currentSetting];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 9;
+//    return 9;
+    return 5;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -60,11 +49,11 @@
         return 31;
     else if(indexPath.row == 3)
         return (currentSetting == EnableOptionOn) ? infoTextOnHeight + 48 : 0;
-    else if(indexPath.row == 4 || indexPath.row == 5 || indexPath.row == 6)
-        return (currentSetting == EnableOptionOn) ? 69 : 0;
-    else if(indexPath.row == 7)
-        return (currentSetting == EnableOptionOn) ? infoTextBackUpHeight + 48 : 0;
-    else if(indexPath.row == 8)
+//    else if(indexPath.row == 4 || indexPath.row == 5 || indexPath.row == 6)
+//        return (currentSetting == EnableOptionOn) ? 69 : 0;
+//    else if(indexPath.row == 7)
+//        return (currentSetting == EnableOptionOn) ? infoTextBackUpHeight + 48 : 0;
+    else if(indexPath.row == 4)
         return (currentSetting == EnableOptionOff) ? infoTextOffHeight + 48 : 0;
     else
         return 44;
@@ -86,33 +75,33 @@
         TextCell *cell = [[TextCell alloc]initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"" titleColor:nil contentText:infoTextOn contentTextColor:nil backgroundColor:nil hasSeparator:NO];
         cell.hidden = (currentSetting != EnableOptionOn);
         return cell;
-    } else if(indexPath.row == 4) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"PhoneContacts", @"") subTitletext:@"185" SwitchButtonStatus:YES];
-        //[cell.switchButton addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
-        cell.hidden = (currentSetting != EnableOptionOn);
-        return cell;
-    } else if(indexPath.row == 5) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"Google" subTitletext:@"20" SwitchButtonStatus:YES];
-        //[cell.switchButton addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
-        cell.hidden = (currentSetting != EnableOptionOn);
-        return cell;
-    } else if(indexPath.row == 6) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"Yahoo" subTitletext:@"15" SwitchButtonStatus:YES];
-        //[cell.switchButton addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
-        cell.hidden = (currentSetting != EnableOptionOn);
-        return cell;
-    } else if(indexPath.row == 7) {
-        NSString *onInfoHeader = [NSString stringWithFormat:NSLocalizedString(@"ContactsOnDescriptionHeader", @""), 165];
-        TextCell *cell = [[TextCell alloc]initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:onInfoHeader titleColor:[Util UIColorForHexColor:@"555748"] contentText:infoTextBackUp contentTextColor:[Util UIColorForHexColor:@"82866D"] backgroundColor:[Util UIColorForHexColor:@"FFF6B2"] hasSeparator:NO];
-        cell.hidden = (currentSetting != EnableOptionOn);
-        return cell;
-    } else if(indexPath.row == 8) {
+    }
+//  else if(indexPath.row == 4) {
+//        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"PhoneContacts", @"") subTitletext:@"185" SwitchButtonStatus:YES];
+//        //[cell.switchButton addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
+//        cell.hidden = (currentSetting != EnableOptionOn);
+//        return cell;
+//    } else if(indexPath.row == 5) {
+//        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"Google" subTitletext:@"20" SwitchButtonStatus:YES];
+//        //[cell.switchButton addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
+//        cell.hidden = (currentSetting != EnableOptionOn);
+//        return cell;
+//    } else if(indexPath.row == 6) {
+//        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"Yahoo" subTitletext:@"15" SwitchButtonStatus:YES];
+//        //[cell.switchButton addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
+//        cell.hidden = (currentSetting != EnableOptionOn);
+//        return cell;
+//    } else if(indexPath.row == 7) {
+//        NSString *onInfoHeader = [NSString stringWithFormat:NSLocalizedString(@"ContactsOnDescriptionHeader", @""), 165];
+//        TextCell *cell = [[TextCell alloc]initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:onInfoHeader titleColor:[Util UIColorForHexColor:@"555748"] contentText:infoTextBackUp contentTextColor:[Util UIColorForHexColor:@"82866D"] backgroundColor:[Util UIColorForHexColor:@"FFF6B2"] hasSeparator:NO];
+//        cell.hidden = (currentSetting != EnableOptionOn);
+//        return cell;
+    else if(indexPath.row == 4) {
         TextCell *cell = [[TextCell alloc]initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"" titleColor:nil contentText:infoTextOff contentTextColor:nil backgroundColor:nil hasSeparator:NO];
         cell.hidden = (currentSetting != EnableOptionOff);
         return cell;
-    } else {
+    } else
         return nil;
-    }
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

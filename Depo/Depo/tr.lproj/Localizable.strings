@@ -292,6 +292,7 @@
 "CancelSubscription"="Üyelikten Vazgeç";
 "CancelSubscriptionInfo"="İptal etmek için \"Iptal %@\" yazıp 2222'ye kısa mesaj gönderebilirsiniz.";
 "UpgradeOptionsTitle"="PAKET SEÇİMİ";
+"Month"="Ay";
 
 "AutomaticSynchronization"="Otomatik Yedekleme";
 "Photos&Videos"="Fotoğraf ve Videolar";

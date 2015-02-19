@@ -361,7 +361,8 @@
         NSString *validationKey = [dict objectForKey:@"validationKey"];
         NSString *price = [dict objectForKey:@"price"];
         NSString *role = [dict objectForKey:@"role"];
-        NSString *quota = [dict objectForKey:@"quota"];
+        NSString *quotaString = [dict objectForKey:@"quota"];
+        NSNumber *quota = [dict objectForKey:@"quota"];
         
         offer.offerId = [self strByRawVal:offerId];
         offer.name = [self strByRawVal:name];
@@ -374,7 +375,8 @@
         offer.validationKey = [self strByRawVal:validationKey];
         offer.price = [self strByRawVal:price];
         offer.role = [self strByRawVal:role];
-        offer.quota = [self strByRawVal:quota];
+        offer.quotaString = [self strByRawVal:quotaString];
+        offer.quota = [self floatByNumber:quota];
     }
     
     return offer;

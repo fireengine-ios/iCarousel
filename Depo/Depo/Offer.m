@@ -21,6 +21,7 @@
 @synthesize validationKey;
 @synthesize price;
 @synthesize role;
+@synthesize quotaString;
 @synthesize quota;
 
 @end

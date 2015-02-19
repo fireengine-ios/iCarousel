@@ -12,8 +12,7 @@
 @interface SettingsStorageController : SettingsBaseViewController {
     AccountDao *accountDaoToGetCurrentSubscription;
     AccountDao *accountDaoToGetOffers;
-    AccountDao *accountDaoToCancelSubscription;
-    
+    AccountDao *accountDaoToActivateOffer;
     Subscription *currentSubscription;
     NSMutableArray *offers;
 }
