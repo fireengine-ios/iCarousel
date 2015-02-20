@@ -71,6 +71,7 @@
 
 - (void) activateOfferCallback {
     [self loadPageContent];
+    [pageContentTable reloadData];
 }
 
 - (void) activateOfferFailCallback:(NSString *) errorMessage {
