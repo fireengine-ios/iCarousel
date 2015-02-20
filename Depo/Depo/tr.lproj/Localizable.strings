@@ -288,6 +288,7 @@
 "Memory"="Hafıza";
 "StorageUsageInfo"="%@%% / %@";
 "CurrentPackageTitle"="MEVCUT PAKET";
+"SubscriptionInfo"="%@ (%gGB) %g TL/Ay";
 "RenewalDateInfo"="Yenileme tarihi: %@";
 "CancelSubscription"="Üyelikten Vazgeç";
 "CancelSubscriptionInfo"="İptal etmek için \"Iptal %@\" yazıp 2222'ye kısa mesaj gönderebilirsiniz.";
@@ -296,6 +297,7 @@
 
 "AutomaticSynchronization"="Otomatik Yedekleme";
 "Photos&Videos"="Fotoğraf ve Videolar";
+"Photos&VideosInfo"="Fotoğraf ve videolarınızın Akıllı Depo'nuzda otomatik olarak yedeklenmesi için açık konuma getirin.";
 "Photos&VideosAutoInfo"="Akıllı Depo'daki fotoğraf ve videolarınıza erişebilir ve istediğinizde albümünüzdeki fotoğraf ve videoları Akıllı Depo'ya yükleyebilirsiniz.\n\n(Fotoğraf ve videoları Akıllı Depo'ya yüklemek için uygulamadaki \"+\" butonunu kullanın.)\n\nOtomatik yükleme etkin durumda, albümünüzdeki fotoğraf ve videolar otomatik olarak bulutta yedeklenecek.";
 "Photos&VideosOnInfo"="Akıllı Depo'daki fotoğraf ve videolarınıza erişebilir ve istediğinizde albümünüzdeki fotoğraf ve videoları Akıllı Depo'ya yükleyebilirsiniz.\n\n(Fotoğraf ve videoları Akıllı Depo'ya yüklemek için uygulamadaki \"+\" butonunu kullanın.)";
 "Photos&VideosOffInfo"="Akıllı Depo'daki fotoğraf ve videolarınıza erişemez ve Akıllı Depo'ya yeni fotoğraf veya video yükleyemezsiniz.";
@@ -306,6 +308,7 @@
 "DocumentsOnInfo"="Akıllı Depo'daki dökümanlarınıza erişebilir ve istediğinizde dökümanlarınızı Akıllı Depo'ya yükleyebilirsiniz. Diğer uygulamalar üzerinden (e-posta uygulamaları gibi) \"Akıllı Depo ile aç\" seçeneği ile dökümanlarınızı yükleyebilirsiniz.";
 "DocumentsOffInfo"="Akıllı Depo'daki dökümanlarınıza erişemez ve Akıllı Depo'ya yeni doküman yükleyemezsiniz.";
 "Contacts"="Rehber";
+"ContactsInfo"="Telefon rehberinizin Akıllı Depo'nuzda otomatik olarak yedeklenmesi için açık konuma getirin.";
 "ContactsAutoInfo"="Akıllı Depo'yu açtığınızda telefon rehberiniz otomatik olarak buluta yedeklenecek.";
 "ContactsOffInfo"="Telefon rehberiniz otomatik olarak buluta yedeklenmeyecek.";
 "ContactsAutoDescriptionHeader"="%d KİŞİ HENÜZ EŞİTLENMEDİ";

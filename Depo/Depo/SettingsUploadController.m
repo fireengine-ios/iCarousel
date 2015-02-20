@@ -11,6 +11,7 @@
 #import "SettingsMusicController.h"
 #import "SettingsDocumentsController.h"
 #import "SettingsContactsController.h"
+#import "Util.h"
 
 @interface SettingsUploadController ()
 
@@ -23,49 +24,66 @@
     self = [super init];
     if (self) {
         self.title = NSLocalizedString(@"AutomaticSynchronization", @"");
+        photosVideosInfo = NSLocalizedString(@"Photos&VideosInfo", @"");
+        photosVideosInfoHeight = [Util calculateHeightForText:photosVideosInfo forWidth:280 forFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:14]];
+        contactsInfo = NSLocalizedString(@"ContactsInfo", @"");
+        contactsInfoHeight = [Util calculateHeightForText:contactsInfo forWidth:280 forFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:14]];
     }
     return self;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     currentSyncPhotosVideosSetting = [CacheUtil readCachedSettingSyncPhotosVideos];
-    currentSyncMusicSetting = [CacheUtil readCachedSettingSyncMusic];
-    currentSyncDocumentsSetting = [CacheUtil readCachedSettingSyncDocuments];
+    oldSyncPhotosVideosSetting = currentSyncPhotosVideosSetting;
     currentSyncContactsSetting = [CacheUtil readCachedSettingSyncContacts];
+    oldSyncContactsSetting = currentSyncContactsSetting;
     currentConnectionSetting = [CacheUtil readCachedSettingSyncingConnectionType];
     oldConnectionSetting = currentConnectionSetting;
-    currentDataRoamingSetting = [CacheUtil readCachedSettingDataRaming];
-    oldDataRoamingSetting = currentDataRoamingSetting;
     [super viewWillAppear:animated];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
+    if (currentSyncPhotosVideosSetting != oldSyncPhotosVideosSetting)
+        [CacheUtil writeCachedSettingSyncPhotosVideos:currentSyncPhotosVideosSetting];
+    if (currentSyncContactsSetting != oldSyncContactsSetting)
+        [CacheUtil writeCachedSettingSyncContacts:currentSyncContactsSetting];
     if (currentConnectionSetting != oldConnectionSetting)
         [CacheUtil writeCachedSettingSyncingConnectionType:currentConnectionSetting];
-    if (currentDataRoamingSetting != oldDataRoamingSetting)
-        [CacheUtil writeCachedSettingDataRoaming:currentDataRoamingSetting];
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
     return (currentSyncPhotosVideosSetting == EnableOptionOn || currentSyncContactsSetting == EnableOptionOn) ? 2 : 1;
-    // 3 olduğunda Data Roaming alanı da görünür
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return section == 2 ? 1 : 2;
+    if (section == 0) {
+        return 4;
+    } else if (section == 1) {
+        return 2;
+    } else {
+        return 0;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return section == 1 ? 54 : 31;
+    return section == 0 ? 31 : 54;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch (indexPath.section) {
-        case 0: return 54; break;
-        case 1: return 44; break;
-        case 2: return 69; break;
+    if (indexPath.section == 0) {
+        switch (indexPath.row) {
+            case 0: return 50; break;
+            case 1: return photosVideosInfoHeight + 43; break;
+            case 2: return 50; break;
+            case 3: return contactsInfoHeight + 43; break;
+            default: return 0;
+                break;
+        }
+    } else if (indexPath.section == 1) {
+        return 44;
+    } else {
+        return 0;
     }
-    return 0;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -83,10 +101,18 @@
     
     if (indexPath.section == 0) {
         if(indexPath.row == 0) {
-            TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"Photos&Videos", @"") titleColor:nil subTitleText:@"" iconName:@"" hasSeparator:YES isLink:YES linkText:[super getEnableOptionName:currentSyncPhotosVideosSetting] cellHeight:54];
+            TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"Photos&Videos", @"") subTitletext: @"" SwitchButtonStatus:currentSyncPhotosVideosSetting == EnableOptionOn hasSeparator:NO];
+            [cell.switchButton addTarget:self action:@selector(setSyncPhotosVideosSetting:) forControlEvents:UIControlEventValueChanged];
             return cell;
-        } else if(indexPath.row == 1) {
-            TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"Contacts", @"") titleColor:nil subTitleText:@"" iconName:@"" hasSeparator:YES isLink:YES linkText:[super getEnableOptionName:currentSyncContactsSetting] cellHeight:54];
+        } else if (indexPath.row == 1) {
+            TextCell *cell = [[TextCell alloc]initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"" titleColor:nil contentText:photosVideosInfo contentTextColor:nil backgroundColor:[UIColor whiteColor] hasSeparator:YES];
+            return cell;
+        } else if(indexPath.row == 2) {
+            TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"Contacts", @"") subTitletext: @"" SwitchButtonStatus:currentSyncContactsSetting == EnableOptionOn hasSeparator:NO];
+            [cell.switchButton addTarget:self action:@selector(setSyncContactsSetting:) forControlEvents:UIControlEventValueChanged];
+            return cell;
+        } else if (indexPath.row == 3) {
+            TextCell *cell = [[TextCell alloc]initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"" titleColor:nil contentText:contactsInfo contentTextColor:nil backgroundColor:[UIColor whiteColor] hasSeparator:YES];
             return cell;
         }
     }
@@ -99,27 +125,11 @@
             return wifiCell;
         }
     }
-    else if (indexPath.section == 2) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"DataRoaming", @"") subTitletext:NSLocalizedString(@"DataRoamingInfo", @"") SwitchButtonStatus:currentDataRoamingSetting];
-        [cell.switchButton addTarget:self action:@selector(setDataRoaming:) forControlEvents:UIControlEventValueChanged];
-        return cell;
-    }
-    
     return nil;
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        switch ([indexPath row]) {
-            case 0:
-                [self didTriggerPhotosVideos];
-                break;
-            case 1:
-                [self didTriggerContacts];
-                break;
-        }
-    }
-    else if (indexPath.section == 1) {
+    if (indexPath.section == 1) {
         switch ([indexPath row]) {
             case 0:
                 [self setWifi3G];
@@ -131,15 +141,14 @@
     }
 }
 
-- (void) didTriggerPhotosVideos {
-    SettingsPhotosVideosController *photosVideosController = [[SettingsPhotosVideosController alloc] init];
-    [self.nav pushViewController:photosVideosController animated:YES];
-    
+- (void)setSyncPhotosVideosSetting:(id) sender {
+    currentSyncPhotosVideosSetting = ((UISwitch *)sender).isOn ? EnableOptionOn : EnableOptionOff;
+    [super drawPageContentTable];
 }
 
-- (void) didTriggerContacts {
-    SettingsContactsController *contactsController = [[SettingsContactsController alloc] init];
-    [self.nav pushViewController:contactsController animated:YES];
+- (void)setSyncContactsSetting:(id) sender {
+    currentSyncContactsSetting = ((UISwitch *)sender).isOn ? EnableOptionOn : EnableOptionOff;
+    [super drawPageContentTable];
 }
 
 - (void)setWifi3G {
@@ -152,10 +161,6 @@
     currentConnectionSetting = ConnectionOptionWifi;
     [wifi3GCell hideTick];
     [wifiCell showTick];
-}
-
-- (void)setDataRoaming:(id) sender {
-    currentDataRoamingSetting = ((UISwitch *)sender).isOn;
 }
 
 @end

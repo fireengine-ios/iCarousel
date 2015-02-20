@@ -25,7 +25,13 @@
 }
 
 - (void) viewWillAppear:(BOOL)animated {
+    [self loadPageContent];
+}
+
+- (void) loadPageContent {
     [super showLoading];
+    tableUpdateCounter++;
+    
     accountDaoToGetCurrentSubscription = [[AccountDao alloc]init];
     accountDaoToGetCurrentSubscription.delegate = self;
     accountDaoToGetCurrentSubscription.successMethod = @selector(loadCurrentSubscriptionCallback:);
@@ -64,8 +70,7 @@
 }
 
 - (void) activateOfferCallback {
-    [super hideLoading];
-    [super drawPageContentTable];
+    [self loadPageContent];
 }
 
 - (void) activateOfferFailCallback:(NSString *) errorMessage {
@@ -118,20 +123,25 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *cellIdentifier = [NSString stringWithFormat:@"MenuCell%d-%d", (int)indexPath.section, (int)indexPath.row];
+    NSString *cellIdentifier = [NSString stringWithFormat:@"MenuCell-%d-%d-%d", tableUpdateCounter, (int)indexPath.section, (int)indexPath.row];
     
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            NSString *descriptionText = currentSubscription.plan.accountDescription;
-            descriptionText = [descriptionText stringByReplacingOccurrencesOfString:@"${NAME}" withString:currentSubscription.plan.name];
-            descriptionText = [descriptionText stringByReplacingOccurrencesOfString:@"${QUOTA}B" withString:@"${QUOTA}"];
-            descriptionText = [descriptionText stringByReplacingOccurrencesOfString:@"${QUOTA}" withString:[NSString stringWithFormat:@"%gGB", currentSubscription.plan.quota/(1024*1024*1024)]];
-            descriptionText = [descriptionText stringByReplacingOccurrencesOfString:@"${PRICE}" withString:[NSString stringWithFormat:@"%g", currentSubscription.plan.price]];
-            descriptionText = [descriptionText stringByReplacingOccurrencesOfString:@"${CURRENCY}" withString:@"TL"];
-            TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:currentSubscription.plan.displayName titleColor:nil subTitleText:descriptionText iconName:@"" hasSeparator:YES isLink:NO linkText:@"" cellHeight:69];
+//            NSString *descriptionText = currentSubscription.plan.accountDescription;
+//            descriptionText = [descriptionText stringByReplacingOccurrencesOfString:@"${NAME}" withString:currentSubscription.plan.name];
+//            descriptionText = [descriptionText stringByReplacingOccurrencesOfString:@"${QUOTA}B" withString:@"${QUOTA}"];
+//            descriptionText = [descriptionText stringByReplacingOccurrencesOfString:@"${QUOTA}" withString:[NSString stringWithFormat:@"%gGB", currentSubscription.plan.quota/(1024*1024*1024)]];
+//            descriptionText = [descriptionText stringByReplacingOccurrencesOfString:@"${PRICE}" withString:[NSString stringWithFormat:@"%g", currentSubscription.plan.price]];
+//            descriptionText = [descriptionText stringByReplacingOccurrencesOfString:@"${CURRENCY}" withString:@"TL"];
+            
+            NSString *title = [NSString stringWithFormat:NSLocalizedString(@"SubscriptionInfo", @""), currentSubscription.plan.displayName, currentSubscription.plan.quota/(1024*1024*1024), currentSubscription.plan.price];
+            
+            TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:title titleColor:nil subTitleText:@"" iconName:@"" hasSeparator:YES isLink:NO linkText:@"" cellHeight:69];
             return cell;
         }
         else {
+            NSString *nameForSms = @"";
+            
             TextCell *cell = [[TextCell alloc]initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"" titleColor:nil contentText:[NSString stringWithFormat:NSLocalizedString(@"CancelSubscriptionInfo", @""), currentSubscription.plan.name] contentTextColor:nil backgroundColor:nil hasSeparator:NO];
             return cell;
         }
@@ -154,6 +164,7 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
+        [super showLoading];
         Offer *offer = [offers objectAtIndex:indexPath.row];
         accountDaoToActivateOffer = [[AccountDao alloc]init];
         accountDaoToGetOffers.delegate = self;

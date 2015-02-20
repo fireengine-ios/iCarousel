@@ -69,17 +69,23 @@
 }
 
 - (id)initWithCellStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier titleText:(NSString *)_titleText subTitletext:(NSString *)_subTitleText SwitchButtonStatus:(BOOL)_switchButtonStatus {
+    self = [self initWithCellStyle:style reuseIdentifier:reuseIdentifier titleText:_titleText subTitletext:_subTitleText SwitchButtonStatus:_switchButtonStatus hasSeparator:YES];
+    return self;
+}
+
+- (id)initWithCellStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier titleText:(NSString *)_titleText subTitletext:(NSString *)_subTitleText SwitchButtonStatus:(BOOL)_switchButtonStatus hasSeparator:(BOOL)_hasSeparator {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         switchButtonStatus = _switchButtonStatus;
-        cellHeight = [subTitleText isEqualToString:@""] ? 54 : 69;
+        subTitleText = _subTitleText;
         titleText = _titleText;
+        
+        cellHeight = [subTitleText isEqualToString:@""] ? 54 : 69;
         titleColor = [Util UIColorForHexColor:@"292F3E"];
         titleLeft = 20;
-        titleTop = 14;
+        titleTop = [subTitleText isEqualToString:@""] ? 17 : 14;
         titleFontSize = 18;
-        
-        subTitleText = _subTitleText;
+        hasSeparator = _hasSeparator;
         hasSubTitle = [subTitleText isEqualToString:@""] ? NO : YES;
         
         self.backgroundColor = [Util UIColorForHexColor:@"FFFFFF"];
@@ -89,7 +95,8 @@
         if (hasSubTitle)
             [self drawSubTitle];
         [self drawSwitchArea];
-        [self drawSeparator];
+        if (hasSeparator)
+            [self drawSeparator];
     }
     return self;
 }

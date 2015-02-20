@@ -15,6 +15,7 @@
     AccountDao *accountDaoToActivateOffer;
     Subscription *currentSubscription;
     NSMutableArray *offers;
+    int tableUpdateCounter;
 }
 
 @end

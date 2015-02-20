@@ -32,6 +32,7 @@
 
 @property (nonatomic, retain) UISwitch *switchButton;
 
+- (id)initWithCellStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier titleText:(NSString *)_titleText subTitletext:(NSString *)_subTitleText SwitchButtonStatus:(BOOL)_switchButtonStatus hasSeparator:(BOOL)_hasSeparator;
 - (id)initWithCellStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier titleText:(NSString *)_titleText titleColor:(UIColor *)_titleColor subTitleText:(NSString *)_subTitleText iconName:(NSString *)_iconName hasSeparator:(BOOL)_hasSeparator isLink:(BOOL)_isLink linkText:(NSString *)_linkText cellHeight:(double)_cellHeight;
 - (id)initWithCellStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier iconName:(NSString *)_iconName titleText:(NSString *)_titleText checkStatus:(BOOL)_checkStatus;
 - (id)initWithCellStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier titleText:(NSString *)_titleText subTitletext:(NSString *)_subTitleText SwitchButtonStatus:(BOOL)_switchButtonStatus;

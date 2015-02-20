@@ -14,11 +14,13 @@
     int currentConnectionSetting;
     int oldConnectionSetting;
     int currentSyncPhotosVideosSetting;
-    int currentSyncMusicSetting;
-    int currentSyncDocumentsSetting;
+    int oldSyncPhotosVideosSetting;
     int currentSyncContactsSetting;
-    BOOL currentDataRoamingSetting;
-    BOOL oldDataRoamingSetting;
+    int oldSyncContactsSetting;
+    NSString *photosVideosInfo;
+    NSString *contactsInfo;
+    float photosVideosInfoHeight;
+    float contactsInfoHeight;
 }
 
 @end
