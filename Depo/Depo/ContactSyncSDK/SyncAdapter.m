@@ -39,6 +39,10 @@
 {
     [SyncAdapter request:[self buildURL:@"timestamp"] params:nil headers:nil method:GET callback:callback];
 }
++ (void)checkStatus:(NSString*)syncId callback:(void (^)(id, BOOL))callback
+{
+    [SyncAdapter request:[self buildURL:[NSString stringWithFormat:@"sync/status/%@",syncId]] params:nil headers:nil method:GET callback:callback];
+}
 
 + (NSData*)postBody:(NSDictionary*)dict
 {

@@ -23,5 +23,6 @@ typedef enum {
 + (void)deleteContact:(NSNumber*)contactId callback:(void (^)(id, BOOL))callback;
 + (void)deleteContact:(NSNumber*)contactId permanent:(BOOL)permanent callback:(void (^)(id, BOOL))callback;
 + (void)getServerTime:(void (^)(id, BOOL))callback;
++ (void)checkStatus:(NSString*)contactId callback:(void (^)(id, BOOL))callback;
 
 @end

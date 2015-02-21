@@ -16,7 +16,7 @@
 #endif
 #endif
 
-#define SYNC_VERSION @"0.5.1"
+#define SYNC_VERSION @"0.6"
 #define SYNC_USER_AGENT @"iOS ContactSync SDK"
 
 #define SYNC_HEADER_AUTH_TOKEN @"X-Auth-Token"
@@ -25,6 +25,8 @@
 
 #define SYNC_KEY_LAST_SYNC_TIME @"ContactSyncLastTime"
 #define SYNC_KEY_AUTOMATED @"ContactSyncAutomated"
+#define SYNC_KEY_CHECK_UPDATE @"ContactSyncUpdateKey"
+#define SYNC_KEY_CONTACT_STORE @"ContactSyncContactStore"
 
 #define SYNC_DEFAULT_INTERVAL 30
 

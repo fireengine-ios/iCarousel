@@ -90,7 +90,11 @@
         multiplyFactor++;
     }
     
-    return [NSString stringWithFormat:@"%4.1f %@", convertedValue, [tokens objectAtIndex:multiplyFactor]];
+    if (multiplyFactor == 0 || multiplyFactor == 1 || multiplyFactor == 2)
+        return [NSString stringWithFormat:@"%4.0f %@", convertedValue, [tokens objectAtIndex:multiplyFactor]];
+    else
+        return [NSString stringWithFormat:@"%4.1f %@", convertedValue, [tokens objectAtIndex:multiplyFactor]];
+    
 }
 
 @end

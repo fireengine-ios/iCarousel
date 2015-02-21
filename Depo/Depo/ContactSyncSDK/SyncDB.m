@@ -86,7 +86,7 @@ static pthread_mutex_t mutexInvoke;
 - (void) createDefaultTable {
     
     NSString *sql = [NSString stringWithFormat:@"CREATE TABLE %@ ( %@ STRING, \
-                     %@ INTEGER PRIMARY KEY, \
+                     %@ INTEGER, \
                      %@ INTEGER, \
                      %@ INTEGER, \
                      %@ INTEGER);", TABLE_CONTACT_SYNC, COLUMN_MSISDN, COLUMN_LOCAL_ID, COLUMN_REMOTE_ID, COLUMN_LOCAL_UPDATE_DATE, COLUMN_REMOTE_UPDATE_DATE] ;

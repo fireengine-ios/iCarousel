@@ -312,13 +312,13 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (BOOL)shouldAutorotate {
-    if (self.avPlayer.player.rate > 0 && !self.avPlayer.player.error) {
-        return YES;
-    } else {
-        return NO;
-    }
-}
+//- (BOOL)shouldAutorotate {
+//    if (self.avPlayer.player.rate > 0 && !self.avPlayer.player.error) {
+//        return YES;
+//    } else {
+//        return NO;
+//    }
+//}
 
 - (NSUInteger)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskAll;
