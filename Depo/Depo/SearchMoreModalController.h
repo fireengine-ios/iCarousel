@@ -8,6 +8,9 @@
 
 #import "MyModalController.h"
 #import "SearchDao.h"
+#import "DeleteDao.h"
+#import "FavoriteDao.h"
+#import "MoveDao.h"
 
 @interface SearchMoreModalController : MyModalController <UITableViewDelegate, UITableViewDataSource> {
     UITableView *searchResultsTable;
@@ -20,6 +23,11 @@
     int fileCount;
     BOOL isLoading;
     SearchDao *loadMoreDao;
+    DeleteDao *deleteDao;
+    DeleteDao *folderDeleteDao;
+    FavoriteDao *favoriteDao;
+    FavoriteDao *folderFavDao;
+    MoveDao *moveDao;
 }
 
 @property (nonatomic, strong) UIRefreshControl *refreshControl;

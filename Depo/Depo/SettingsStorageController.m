@@ -87,8 +87,13 @@
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0)
-        return 2;
+    if (section == 0) {
+        if ([currentSubscription.plan.role isEqualToString:@"demo"]) {
+            return 1;
+        } else {
+            return 2;
+        }
+    }
     else
         return offers.count;
 }
@@ -142,8 +147,14 @@
         }
         else {
             NSString *nameForSms = @"";
-            
-            TextCell *cell = [[TextCell alloc]initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"" titleColor:nil contentText:[NSString stringWithFormat:NSLocalizedString(@"CancelSubscriptionInfo", @""), currentSubscription.plan.name] contentTextColor:nil backgroundColor:nil hasSeparator:NO];
+            if ([currentSubscription.plan.role isEqualToString:@"standart"]) {
+                nameForSms = @"MINIDEPO";
+            } else if ([currentSubscription.plan.role isEqualToString:@"premium"]) {
+                nameForSms = @"STANDARTDEPO";
+            } else if ([currentSubscription.plan.role isEqualToString:@"ultimate"]) {
+                nameForSms = @"MEGADEPO";
+            }
+            TextCell *cell = [[TextCell alloc]initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"" titleColor:nil contentText:[NSString stringWithFormat:NSLocalizedString(@"CancelSubscriptionInfo", @""), nameForSms] contentTextColor:nil backgroundColor:nil hasSeparator:NO];
             return cell;
         }
     }

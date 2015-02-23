@@ -13,6 +13,7 @@
 #import "MyNavigationController.h"
 #import "BaseViewController.h"
 #import "HomeController.h"
+#import "SettingsController.h"
 #import "MapUtil.h"
 #import "AppUtil.h"
 #import "CacheUtil.h"
@@ -65,7 +66,7 @@
     
     //BugSense integration
     //TODO aç
-//    [[Mint sharedInstance] initAndStartSession:@"13ceffcf"];
+    [[Mint sharedInstance] initAndStartSession:@"13ceffcf"];
 
     //Curio integration
     [[CurioSDK shared] startSession:@"http://curio.turkcell.com.tr/api/v2/" apiKey:@"cab314f33df2514764664e5544def586" trackingCode:@"KL2XNFIE" sessionTimeout:4 periodicDispatchEnabled:YES dispatchPeriod:1 maxCachedActivitiyCount:1000 loggingEnabled:YES logLevel:0 registerForRemoteNotifications:YES notificationTypes:@"Sound,Badge,Alert" appLaunchOptions:launchOptions];
@@ -78,6 +79,20 @@
 
     tokenManager = [[TokenManager alloc] init];
     tokenManager.delegate = self;
+    
+    if (launchOptions != nil && launchOptions[@"action"] != nil) {
+        NSString *actionString = launchOptions[@"action"];
+        
+        if ([actionString isEqualToString:@"main"]) {
+            self.notifitacionAction = NotificationActionMain;
+        } else if ([actionString isEqualToString:@"sync_settings"]) {
+            self.notifitacionAction = NotificationActionSyncSettings;
+        } else if ([actionString isEqualToString:@"floating_menu"]) {
+            self.notifitacionAction = NotificationActionFloatingMenu;
+        } else if ([actionString isEqualToString:@"packages"]) {
+            self.notifitacionAction = NotificationActionPackages;
+        }
+    }
     
     NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
     if(networkStatus == kNotReachable) {
@@ -148,6 +163,22 @@
     }
 }
 
+- (void) startOpeningPage {
+    if (self.notifitacionAction > 0) {
+        if (self.notifitacionAction == NotificationActionSyncSettings) {
+            [self triggerSyncSettings];
+        } else if (self.notifitacionAction == NotificationActionPackages) {
+        
+        } else if (self.notifitacionAction == NotificationActionSyncSettings) {
+        
+        } else {
+            [self triggerHome];
+        }
+    } else {
+        [self triggerHome];
+    }
+}
+
 - (void) triggerHome {
     EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
     if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
@@ -159,6 +190,14 @@
     [self.window setRootViewController:base];
 }
 
+- (void) triggerSyncSettings {
+    MyViewController *settingsController = [[SettingsController alloc] init];
+    base = [[BaseViewController alloc] initWithRootViewController:settingsController];
+    [self.window setRootViewController:base];
+    
+    // Sync Settings sayfasini push et
+}
+
 - (void) triggerLogout {
     [tokenManager requestLogout];
 
@@ -168,6 +207,9 @@
     LoginController *login = [[LoginController alloc] init];
     MyNavigationController *loginNav = [[MyNavigationController alloc] initWithRootViewController:login];
     self.window.rootViewController = loginNav;
+    
+//    self.uploadQueue.uploadManagers = nil;
+//    self.uploadQueue = nil;
 }
 
 - (void) tokenManagerInadequateInfo {
@@ -188,13 +230,15 @@
         MyNavigationController *imgSyncNav = [[MyNavigationController alloc] initWithRootViewController:imgSync];
         self.window.rootViewController = imgSyncNav;
     } else {
-        [self triggerHome];
+//        [self triggerHome];
+        [self startOpeningPage];
     }
 }
 
 - (void) tokenManagerDidFailReceivingBaseUrl {
     [self hideMainLoading];
-    [self triggerHome];
+//    [self triggerHome];
+    [self startOpeningPage];
 }
 
 - (void) tokenManagerDidReceiveToken {
@@ -266,6 +310,7 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [[CurioNotificationManager shared] didReceiveNotification:userInfo];
+    [self application:application didFinishLaunchingWithOptions:userInfo];
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
@@ -277,6 +322,7 @@
 }
 
 - (void) application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    NSLog(@"AutoSyncControl");
     EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
     EnableOption contactSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncContacts];
 
@@ -285,6 +331,9 @@
     }
 
     if(contactSyncFlag == EnableOptionAuto || contactSyncFlag == EnableOptionOn) {
+        [SyncSettings shared].token = APPDELEGATE.session.authToken;
+        [SyncSettings shared].url = CONTACT_SYNC_SERVER_URL;
+        [SyncSettings shared].periodicSync = YES;
         [ContactSyncSDK runInBackground];
     }
 

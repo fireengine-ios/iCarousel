@@ -27,5 +27,10 @@
 - (void)fadeIn:(UIView *)view duration:(float)duration;
 - (void)fadeOut:(UIView *)view duration:(float)duration;
 - (void) showErrorAlertWithMessage:(NSString *) errMessage;
+- (void) proceedSuccessForProgressView;
+- (void) proceedSuccessForProgressViewWithAddButtonKey:(NSString *) buttonKey;
+- (void) proceedFailureForProgressView;
+- (void) proceedFailureForProgressViewWithAddButtonKey:(NSString *) buttonKey;
+
 
 @end

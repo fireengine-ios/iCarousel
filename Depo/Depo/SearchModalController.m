@@ -429,15 +429,29 @@
 
 - (void) fileFolderCellShouldFavForFile:(MetaFile *)fileSelected {
     [favoriteDao requestMetadataForFiles:@[fileSelected.uuid] shouldFavorite:YES];
-    //    [self showLoading];
     [self pushProgressViewWithProcessMessage:NSLocalizedString(@"FavAddProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"FavAddSuccessMessage", @"") andFailMessage:NSLocalizedString(@"FavAddFailMessage", @"")];
 }
 
 - (void) fileFolderCellShouldUnfavForFile:(MetaFile *)fileSelected {
     [favoriteDao requestMetadataForFiles:@[fileSelected.uuid] shouldFavorite:NO];
-    //    [self showLoading];
     [self pushProgressViewWithProcessMessage:NSLocalizedString(@"UnfavProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"UnfavSuccessMessage", @"") andFailMessage:NSLocalizedString(@"UnfavFailMessage", @"")];
 }
+
+- (void) favSuccessCallback:(NSNumber *) favFlag {
+    [self proceedSuccessForProgressView];
+}
+
+- (void) favFailCallback:(NSString *) errorMessage {
+    [self showErrorAlertWithMessage:errorMessage];
+}
+
+
+- (void) fileFolderCellShouldShareForFile:(MetaFile *)fileSelected {
+    [APPDELEGATE.base triggerShareForFiles:@[fileSelected.uuid]];
+}
+
+
+
 
 - (void) fileFolderCellShouldDeleteForFile:(MetaFile *)fileSelected {
     if([CacheUtil showConfirmDeletePageFlag]) {
@@ -450,22 +464,15 @@
     }
 }
 
-- (void) fileFolderCellShouldShareForFile:(MetaFile *)fileSelected {
-    [APPDELEGATE.base triggerShareForFiles:@[fileSelected.uuid]];
+- (void) deleteSuccessCallback {
+    [self proceedSuccessForProgressView];
+    [self performSelector:@selector(postDelete) withObject:nil afterDelay:1.2f];
 }
 
-
-
-- (void) favSuccessCallback:(NSNumber *) favFlag {
-    
-}
-
-- (void) favFailCallback:(NSString *) errorMessage {
+- (void) deleteFailCallback:(NSString *) errorMessage {
+    [self proceedFailureForProgressView];
     [self showErrorAlertWithMessage:errorMessage];
 }
-
-
-
 
 
 @end

@@ -192,13 +192,9 @@
     
     ABMutableMultiValueRef phoneNumbers = nil;
     ABMutableMultiValueRef emails = nil;
-    if (isNew){
-        phoneNumbers = ABMultiValueCreateMutable(kABMultiStringPropertyType);
-        emails = ABMultiValueCreateMutable(kABMultiStringPropertyType);
-    } else {
-        phoneNumbers = ABMultiValueCreateMutableCopy(ABRecordCopyValue(contact.recordRef, kABPersonPhoneProperty));
-        emails = ABMultiValueCreateMutableCopy(ABRecordCopyValue(contact.recordRef, kABPersonEmailProperty));
-    }
+    phoneNumbers = ABMultiValueCreateMutable(kABMultiStringPropertyType);
+    emails = ABMultiValueCreateMutable(kABMultiStringPropertyType);
+
     
     if (!SYNC_ARRAY_IS_NULL_OR_EMPTY(contact.devices)){
         for (ContactDevice *device in contact.devices){
@@ -286,11 +282,18 @@
         NSString *type = (__bridge NSString *) phoneTypeRef;
         
         CFRelease(phoneNumberRef);
-        CFRelease(phoneTypeRef);
+        BOOL shouldAdd = YES;
+        if (phoneTypeRef==NULL || type==nil){
+            shouldAdd = NO;
+        } else {
+            CFRelease(phoneTypeRef);
+        }
 
-        SYNC_Log(@"%@ %@ phone :%@ %@", contact.firstName, contact.lastName, phoneNumber, type);
-        
-        [contact.devices addObject:[[ContactPhone alloc] initWithValue:phoneNumber andType:type]];
+        if (shouldAdd){
+            SYNC_Log(@"%@ %@ phone :%@ %@", contact.firstName, contact.lastName, phoneNumber, type);
+
+            [contact.devices addObject:[[ContactPhone alloc] initWithValue:phoneNumber andType:type]];
+        }
         
     }
     CFRelease(multiPhones);
@@ -307,11 +310,18 @@
         NSString *type = (__bridge NSString *) emailTypeRef;
         
         CFRelease(emailRef);
-        CFRelease(emailTypeRef);
+        BOOL shouldAdd = YES;
+        if (emailTypeRef==NULL || type==nil){
+            shouldAdd = NO;
+        } else {
+            CFRelease(emailTypeRef);
+        }
         
-        SYNC_Log(@"%@ %@ email :%@ %@", contact.firstName, contact.lastName, mailAddress, type);
+        if (shouldAdd){
+            SYNC_Log(@"%@ %@ email :%@ %@", contact.firstName, contact.lastName, mailAddress, type);
         
-        [contact.devices addObject:[[ContactEmail alloc] initWithValue:mailAddress andType:type]];
+            [contact.devices addObject:[[ContactEmail alloc] initWithValue:mailAddress andType:type]];
+        }
     }
     CFRelease(multiEmails);
 }

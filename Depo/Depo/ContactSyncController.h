@@ -9,7 +9,11 @@
 #import "MyViewController.h"
 #import "CustomLabel.h"
 
-@interface ContactSyncController : MyViewController <UITableViewDataSource, UITableViewDelegate>
+@interface ContactSyncController : MyViewController <UITableViewDataSource, UITableViewDelegate> {
+    EnableOption oldSyncOption;
+    SimpleButton *manuelSyncButton;
+    SimpleButton *manuelSyncButtonOnSync;
+}
 
 @property (nonatomic, strong) UISwitch *autoSyncSwitch;
 @property (nonatomic, strong) CustomLabel *lastSyncDateLabel;

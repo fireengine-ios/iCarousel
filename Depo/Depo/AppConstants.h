@@ -287,6 +287,13 @@ typedef enum {
     UploadErrorTypeLogin
 } UploadErrorType;
 
+typedef enum {
+    NotificationActionMain = 1,
+    NotificationActionSyncSettings,
+    NotificationActionFloatingMenu,
+    NotificationActionPackages
+} NotificationAction;
+
 @interface AppConstants : NSObject
 
 @end

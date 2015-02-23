@@ -360,4 +360,24 @@
     NSLog(@"At MyView albumDetailShouldRenameWithName");
 }
 
+
+
+- (void)fadeIn:(UIView *)view duration:(float)duration {
+    view.alpha = 0;
+    view.hidden = NO;
+    [UIView animateWithDuration:duration animations:^{
+        view.alpha = 1;
+    } completion:^(BOOL finished) { }];
+}
+
+- (void)fadeOut:(UIView *)view duration:(float)duration {
+    view.alpha = 1;
+    view.hidden = NO;
+    [UIView animateWithDuration:duration animations:^{
+        view.alpha = 0;
+    } completion:^(BOOL finished) {
+        view.hidden = YES;
+    }];
+}
+
 @end

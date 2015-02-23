@@ -69,6 +69,11 @@
         loadMoreDao.successMethod = @selector(loadMoreSuccessCallback:);
         loadMoreDao.failMethod = @selector(searchListFailCallback:);
         
+        favoriteDao = [[FavoriteDao alloc] init];
+        favoriteDao.delegate = self;
+        favoriteDao.successMethod = @selector(favSuccessCallback:);
+        favoriteDao.failMethod = @selector(favFailCallback:);
+        
         [self.view addSubview:searchResultsTable];
     }
     return self;
@@ -256,8 +261,25 @@
     }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+#pragma mark AbstractFileFolderDelegate methods
+
+- (void) fileFolderCellShouldFavForFile:(MetaFile *)fileSelected {
+    [favoriteDao requestMetadataForFiles:@[fileSelected.uuid] shouldFavorite:YES];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"FavAddProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"FavAddSuccessMessage", @"") andFailMessage:NSLocalizedString(@"FavAddFailMessage", @"")];
 }
+
+- (void) fileFolderCellShouldUnfavForFile:(MetaFile *)fileSelected {
+    [favoriteDao requestMetadataForFiles:@[fileSelected.uuid] shouldFavorite:NO];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"UnfavProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"UnfavSuccessMessage", @"") andFailMessage:NSLocalizedString(@"UnfavFailMessage", @"")];
+}
+
+- (void) favSuccessCallback:(NSNumber *) favFlag {
+    [self proceedSuccessForProgressView];
+}
+
+- (void) favFailCallback:(NSString *) errorMessage {
+    [self showErrorAlertWithMessage:errorMessage];
+}
+
 
 @end

@@ -39,11 +39,14 @@
         [self.view addSubview:switchLabel];
         
         autoSyncSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 60, 25, 40, 20)];
-        [autoSyncSwitch setOn:([CacheUtil readCachedSettingSyncContacts] == EnableOptionAuto || [CacheUtil readCachedSettingSyncContacts] == EnableOptionOn)];
+        [autoSyncSwitch addTarget:self action:@selector(autoSyncSwitchChanged:) forControlEvents:UIControlEventValueChanged];
         [self.view addSubview:autoSyncSwitch];
-
-        SimpleButton *manuelSyncButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, 75, self.view.frame.size.width - 40, 50) withTitle:NSLocalizedString(@"ManualSyncTitle", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
+        
+        manuelSyncButtonOnSync = [[SimpleButton alloc] initWithFrame:CGRectMake(20, 75, self.view.frame.size.width - 40, 50) withTitle:NSLocalizedString(@"ManualSyncTitleOnSync", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
+        
+        manuelSyncButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, 75, self.view.frame.size.width - 40, 50) withTitle:NSLocalizedString(@"ManualSyncTitle", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
         [manuelSyncButton addTarget:self action:@selector(syncClicked) forControlEvents:UIControlEventTouchUpInside];
+        
         [self.view addSubview:manuelSyncButton];
 
         NSString *lastSyncTitle = [NSString stringWithFormat:NSLocalizedString(@"ContactLastSyncDateTitle", @""), NSLocalizedString(@"NoneTitle", @"")];
@@ -99,6 +102,15 @@
     return self;
 }
 
+- (void)autoSyncSwitchChanged:(id)sender
+{
+    if ([autoSyncSwitch isOn]) {
+        [super fadeOut:manuelSyncButton duration:0.3];
+    } else {
+        [super fadeIn:manuelSyncButton duration:0.3];
+    }
+}
+
 - (void) manualSyncFinalized {
     [self hideLoading];
     
@@ -111,6 +123,7 @@
     }
     lastSyncDateLabel.text = lastSyncTitle;
     [lastSyncDetailTable reloadData];
+    [UIView transitionFromView:manuelSyncButtonOnSync toView:manuelSyncButton duration:0.5 options:UIViewAnimationOptionTransitionCrossDissolve completion:nil];
 }
 
 - (void) syncClicked {
@@ -119,6 +132,7 @@
     [SyncSettings shared].url = CONTACT_SYNC_SERVER_URL;
     [ContactSyncSDK doSync];
     [self showLoading];
+    [UIView transitionFromView:manuelSyncButton toView:manuelSyncButtonOnSync duration:0.5 options:UIViewAnimationOptionTransitionCrossDissolve completion:nil];
 }
 
 #pragma mark UITableView methods
@@ -166,11 +180,25 @@
     }
 }
 
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    oldSyncOption = (EnableOption)[CacheUtil readCachedSettingSyncContacts];
+    [autoSyncSwitch setOn:(oldSyncOption == EnableOptionAuto || oldSyncOption == EnableOptionOn)];
+    if (oldSyncOption == EnableOptionAuto || oldSyncOption == EnableOptionOn) {
+        manuelSyncButton.hidden = YES;
+    }
+    if ([ContactSyncSDK isRunning]) {
+        [UIView transitionFromView:manuelSyncButton toView:manuelSyncButtonOnSync duration:0.5 options:UIViewAnimationOptionTransitionNone completion:nil];
+    }
+}
+
 - (void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    if(autoSyncSwitch.isOn) {
+    if (autoSyncSwitch.isOn) {
         [CacheUtil writeCachedSettingSyncContacts:EnableOptionAuto];
-        [SyncUtil startContactAutoSync];
+        if (oldSyncOption == EnableOptionOff) {
+            [SyncUtil startContactAutoSync];
+        }
     } else {
         [CacheUtil writeCachedSettingSyncContacts:EnableOptionOff];
         [SyncUtil stopContactAutoSync];

@@ -24,6 +24,7 @@
 @property BOOL startNewSync;
 
 - (void) startSyncing;
+- (BOOL)isRunning;
 
 @end
 
@@ -74,6 +75,11 @@ static bool syncing = false;
     }
     
     [self fetchRemoteContacts];
+}
+
+- (BOOL)isRunning
+{
+    return syncing;
 }
 
 - (void)fetchRemoteContacts
@@ -208,9 +214,7 @@ static bool syncing = false;
                 // delete devices that are not in remote
                 [[ContactUtil shared] deleteContact:localContact.objectId devices:toBeDeleted];
             }
-            
             [localContact copyContact:remoteContact];
-            
             [[ContactUtil shared] save:localContact];
             [[SyncStatus shared] addContact:remoteContact state:SYNC_INFO_UPDATED_ON_DEVICE];
         }
@@ -422,6 +426,11 @@ static bool syncing = false;
             }
         }];
     });
+}
+
++ (BOOL)isRunning
+{
+    return [[SyncHelper new] isRunning];
 }
 
 + (void)runInBackground

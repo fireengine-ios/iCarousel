@@ -95,7 +95,7 @@
 "UnfavProgressMessage"="Favorilerden Çıkarılıyor";
 "UnfavSuccessMessage"="Favorilerden başarıyla çıkarıldı";
 "UnfavFailMessage"="Favorilerden çıkarırken hata oluştu";
-"DeleteProgressMessage"="Dosya(lar) Siliniyor";
+"DeleteProgressMessage"="Dosya(lar) siliniyor";
 "DeleteSuccessMessage"="Dosya(lar) silindi";
 "DeleteFailMessage"="Dosya(lar) silinirken hata oluştu";
 "SortTitle"="Sırala";
@@ -178,7 +178,7 @@
 "SortTypeAlbumAscTitle"="Albüm İsmi (A-Z)";
 "SortTypeAlbumDescTitle"="Albüm İsmi (Z-A)";
 "HomeUsageTotalStorage"="Toplam %@";
-"LastSyncFormat"="EN SON SENK: %@ ÖNCE";
+"LastSyncFormat"="SON YEDEKLEME: %@ ÖNCE";
 
 "GetMoreStorageButtonTitle"="Daha Fazla Hafıza";
 "SongTitleFieldTitle"="BAŞLIK";
@@ -404,6 +404,7 @@
 "ContactLastSyncDetailNewTitle"="Oluşturulan";
 "ContactLastSyncDetailDeleteTitle"="Silinen";
 "ManualSyncTitle"="Yedeklemeyi Başlat";
+"ManualSyncTitleOnSync"="Yedekleme devam ediyor...";
 
 "AddressBookGrantError"="Rehber kullanımına izin vermeniz gerekmektedir.";
 "ContactSyncApiError"="Yedekleme esnasında genel bir hata oluştu.";

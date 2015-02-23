@@ -29,6 +29,11 @@
  */
 + (void)cancel;
 /**
+ *
+ * @return true, if synchronization is still running
+ */
++ (BOOL)isRunning;
+/**
  * @return YES, if has automated synchronization
  */
 + (BOOL) automated;

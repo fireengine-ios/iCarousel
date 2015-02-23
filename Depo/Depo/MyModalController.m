@@ -144,4 +144,29 @@
     }];
 }
 
+
+- (void) proceedSuccessForProgressView {
+    if(processView) {
+        [processView showMessageForSuccess];
+    }
+}
+
+- (void) proceedSuccessForProgressViewWithAddButtonKey:(NSString *) buttonKey {
+    if(processView) {
+        [processView showMessageForSuccessWithPostButtonKey:buttonKey];
+    }
+}
+
+- (void) proceedFailureForProgressView {
+    if(processView) {
+        [processView showMessageForFailure];
+    }
+}
+
+- (void) proceedFailureForProgressViewWithAddButtonKey:(NSString *) buttonKey {
+    if(processView) {
+        [processView showMessageForFailureWithPostButtonKey:buttonKey];
+    }
+}
+
 @end

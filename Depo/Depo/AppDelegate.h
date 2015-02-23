@@ -32,6 +32,7 @@
 @property (strong, nonatomic) MBProgressHUD *progress;
 @property (strong, nonatomic) SyncManager *syncManager;
 @property (strong, nonatomic) UploadQueue *uploadQueue;
+@property (nonatomic) NotificationAction notifitacionAction;
 
 - (void) showCustomAlert:(CustomAlertView *) alertView;
 - (void) showCustomConfirm:(CustomConfirmView *) alertView;
