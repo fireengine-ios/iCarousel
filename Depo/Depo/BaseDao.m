@@ -300,7 +300,7 @@
 
 - (SortType) resetSortType:(SortType) sortType {
     if(sortType == SortTypeSongNameAsc || sortType == SortTypeSongNameDesc || sortType == SortTypeArtistAsc || sortType == SortTypeArtistDesc || sortType == SortTypeAlbumAsc || sortType == SortTypeAlbumDesc) {
-        APPDELEGATE.session.sortType = SortTypeAlphaAsc;
+        APPDELEGATE.session.sortType = SortTypeDateDesc;
         return APPDELEGATE.session.sortType;
     }
     return sortType;

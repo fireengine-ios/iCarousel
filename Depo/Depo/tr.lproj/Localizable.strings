@@ -385,9 +385,10 @@
 "SubmitButtonTitle"="Tamam";
 
 "MigrationTitle"="TURKCELL AKILLI DEPO KURULUMU";
-"MigrationSubTitle"="Akıllı Depo kurulumunuz yapılıyor. Lütfen tamamlanana kadar uygulamadan çıkmayın.";
+"MigrationSubTitle"="Turkcell Akıllı Depo kurulumunuz yapılıyor...";
 
-"AcceptTerms"="Kullanım koşullarını kabul ediyorum";
+"AcceptTerms"="Kullanım koşullarını kabul ediyorum.";
+"AcceptTermsWarning"="Kullanım koşullarını kabul etmeniz gerekiyor.";
 
 "QuotaExceedMessage"="Yeterli alanınız bulunmadığından yükleme yapılamadı.";
 "QuotaExceedMessageShort"="Yeterli alanınız bulunmamaktadır.";
@@ -432,3 +433,6 @@
 "EmptyAlbumsDescription"="Yeni albüm oluşturmak için \"+\" butonuna basın";
 
 "Welcome"="Hoşgeldiniz";
+"Error"="Hata";
+"Info"="Bilgi";
+"OK"="Tamam";

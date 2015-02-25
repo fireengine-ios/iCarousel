@@ -19,6 +19,7 @@
 #import "PhotoListController.h"
 #import "DocListController.h"
 #import "MusicListController.h"
+#import "SettingsController.h"
 
 @interface HomeController ()
 
@@ -45,8 +46,12 @@
     if (self) {
         UIImageView *imgForTitle = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 29, 20)];
         imgForTitle.image = [UIImage imageNamed:@"cloud_icon.png"];
-        
         self.navigationItem.titleView = imgForTitle;
+        
+        CustomButton *customSettingsButton = [[CustomButton alloc] initWithFrame:CGRectMake(10, 0, 20, 34) withImageName:@"settings_icon"];
+        [customSettingsButton addTarget:self action:@selector(triggerSettingsPage) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc] initWithCustomView:customSettingsButton];
+        self.navigationItem.rightBarButtonItem = settingsButton;
         
         usageDao = [[UsageInfoDao alloc] init];
         usageDao.delegate = self;
@@ -188,6 +193,12 @@
 - (void) usageFailCallback:(NSString *) errorMessage {
     [self hideLoading];
     [self showErrorAlertWithMessage:errorMessage];
+}
+
+- (void) triggerSettingsPage {
+    SettingsController *settings = [[SettingsController alloc] init];
+    settings.nav = self.nav;
+    [self.nav pushViewController:settings animated:NO];
 }
 
 - (void) triggerStoragePage {

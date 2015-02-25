@@ -30,7 +30,7 @@
 
 - (id) init {
     if(self = [super init]) {
-        self.sortType = SortTypeAlphaDesc;
+        self.sortType = SortTypeDateDesc;
 
         if([CacheUtil readRememberMeToken] != nil) {
             self.user = [[User alloc] init];
