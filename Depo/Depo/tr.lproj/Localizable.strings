@@ -252,10 +252,11 @@
 "SignIn"="Giriş yap";
 "Continue"="Devam";
 
+"PostLoginSyncInfo"="Fotoğraflarınızı, videolarınızı ve rehberinizi iPhone'unuzdan Turkcell Akıllı Depo uygulamasına otomatik olarak yedekleyin";
 "PostLoginImgPrefInfo"="Fotoğraf & Videolarınızı iPhone'unuzdan Akıllı Depo uygulamasına otomatik olarak yedekleyin";
 "PostLoginContactPrefInfo"="Adres Defteri ve Sosyal Ağ kişilerinizi Akıllı Depo uygulamasına otomatik olarak yedekleyin";
 
-"PostLoginSyncPrefTitle"="YEDEKLEME AYARLARI";
+"PostLoginSyncPrefTitle"="BAĞLANTI TERCİHİ";
 "PostLoginRoamingTitle"="Yurtdışı Dolaşım";
 "PostLoginRoamingDesc"="Yurtdışındayken otomatik yükle";
 
@@ -354,6 +355,7 @@
 "DocumentsHeader"="DÖKÜMANLAR (%d)";
 "AllSearchResultsHeader"="TÜM SONUÇLAR (%d)";
 
+"AutoSyncTitle"="Otomatik Yedekleme";
 "SyncPhotoVideoTitle"="Resimleri Yedekle";
 "SyncContactsTitle"="Rehberi Yedekle";
 "DataRoamingTitle"="Data Roaming";

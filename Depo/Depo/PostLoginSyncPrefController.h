@@ -11,8 +11,8 @@
 
 @interface PostLoginSyncPrefController : MyViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, strong) UISwitch *onOff1;
-@property (nonatomic, strong) UISwitch *onOff2;
+@property (nonatomic, strong) UISwitch *autoSyncSwitch;
+@property (nonatomic, strong) CustomLabel *choiceTitleLabel;
 @property (nonatomic, strong) UITableView *choiceTable;
 @property (nonatomic, strong) NSMutableArray *choices;
 @property (nonatomic) ConnectionOption selectedOption;
