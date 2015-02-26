@@ -65,7 +65,6 @@
     [ACTConversionReporter reportWithConversionID:@"946883454" label:@"gJYdCOLv4wcQ_pbBwwM" value:@"0.00" isRepeatable:NO];
     
     //BugSense integration
-    //TODO aç
     [[Mint sharedInstance] initAndStartSession:@"13ceffcf"];
 
     //Curio integration
