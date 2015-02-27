@@ -47,12 +47,12 @@
 }
 
 - (void) showErrorAlertWithMessage:(NSString *) errMessage {
-    CustomAlertView *alert = [[CustomAlertView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:@"Hata" withMessage:errMessage withModalType:ModalTypeError];
+    CustomAlertView *alert = [[CustomAlertView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Error", @"") withMessage:errMessage withModalType:ModalTypeError];
     [APPDELEGATE showCustomAlert:alert];
 }
 
 - (void) showInfoAlertWithMessage:(NSString *) infoMessage {
-    CustomAlertView *alert = [[CustomAlertView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:@"Bilgi" withMessage:infoMessage withModalType:ModalTypeSuccess];
+    CustomAlertView *alert = [[CustomAlertView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withMessage:infoMessage withModalType:ModalTypeSuccess];
     [APPDELEGATE showCustomAlert:alert];
 }
 

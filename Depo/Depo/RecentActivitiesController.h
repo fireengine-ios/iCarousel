@@ -16,6 +16,7 @@
     int tableUpdateCount;
     int listOffset;
     BOOL isLoading;
+    BOOL endOfList;
 }
 
 @property (nonatomic, strong) UITableView *recentTable;

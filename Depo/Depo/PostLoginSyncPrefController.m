@@ -21,7 +21,8 @@
 
 @implementation PostLoginSyncPrefController
 
-@synthesize onOff1, onOff2;
+@synthesize autoSyncSwitch;
+@synthesize choiceTitleLabel;
 @synthesize choiceTable;
 @synthesize choices;
 @synthesize selectedOption;
@@ -36,7 +37,7 @@
         [choices addObject:@"Wifi"];
         selectedOption = ConnectionOptionWifi3G;
         
-        UIFont *descFont = [UIFont fontWithName:@"TurkcellSaturaBol" size:18];
+        UIFont *descFont = [UIFont fontWithName:@"TurkcellSaturaBol" size:16];
         
         UIImage *syncImg = [UIImage imageNamed:@"sync_prefs.png"];
         
@@ -44,33 +45,30 @@
         if (IS_IPHONE_5)
             syncImgView.frame = CGRectMake((self.view.frame.size.width - syncImg.size.width)/2, 50, syncImg.size.width, syncImg.size.height);
         else
-            syncImgView.frame = CGRectMake((self.view.frame.size.width - (syncImg.size.width - 120))/2, 50, syncImg.size.width - 120, syncImg.size.height - 75);
+            syncImgView.frame = CGRectMake((self.view.frame.size.width - (syncImg.size.width - 120))/2, 40, syncImg.size.width - 120, syncImg.size.height - 75);
         
         syncImgView.image = syncImg;
         [self.view addSubview:syncImgView];
         
-        CustomLabel *mainTitleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, syncImgView.frame.origin.y + syncImgView.frame.size.height + 15, self.view.frame.size.width - 40, 15) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:13] withColor:[Util UIColorForHexColor:@"FFFFFF"] withText:NSLocalizedString(@"PostLoginSyncPrefTitle", @"")];
-        [self.view addSubview:mainTitleLabel];
+        NSString *descStr = NSLocalizedString(@"PostLoginSyncInfo", @"");
+        int descHeight = [Util calculateHeightForText:descStr forWidth:self.view.frame.size.width-40 forFont:descFont] + 5;
+        CustomLabel *descLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, syncImgView.frame.origin.y + syncImgView.frame.size.height + 10, self.view.frame.size.width - 40, descHeight) withFont:descFont withColor:[Util UIColorForHexColor:@"FFFFFF"] withText:descStr withAlignment:NSTextAlignmentCenter];
+        descLabel.numberOfLines = 0;
+        [self.view addSubview:descLabel];
         
-        CustomLabel *switchLabel1 = [[CustomLabel alloc] initWithFrame:CGRectMake(20, syncImgView.frame.origin.y + syncImgView.frame.size.height + 40, 230, 40) withFont:descFont withColor:[Util UIColorForHexColor:@"FFFFFF"] withText:NSLocalizedString(@"SyncPhotoVideoTitle", @"") withAlignment:NSTextAlignmentLeft];
-        switchLabel1.adjustsFontSizeToFitWidth = YES;
-        [self.view addSubview:switchLabel1];
+        CustomLabel *switchLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, syncImgView.frame.origin.y + syncImgView.frame.size.height + 75, 230, 40) withFont:descFont withColor:[Util UIColorForHexColor:@"FFFFFF"] withText:NSLocalizedString(@"AutoSyncTitle", @"") withAlignment:NSTextAlignmentLeft];
+        switchLabel.adjustsFontSizeToFitWidth = YES;
+        [self.view addSubview:switchLabel];
         
-        onOff1 = [[UISwitch alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 60, syncImgView.frame.origin.y + syncImgView.frame.size.height + 45, 40, 40)];
-        [onOff1 setOn:YES];
-        [onOff1 addTarget:self action:@selector(onOffChanged:) forControlEvents:UIControlEventValueChanged];
-        [self.view addSubview:onOff1];
+        autoSyncSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 60, syncImgView.frame.origin.y + syncImgView.frame.size.height + 80, 40, 40)];
+        [autoSyncSwitch setOn:YES];
+        [autoSyncSwitch addTarget:self action:@selector(autoSyncSwitchChanged:) forControlEvents:UIControlEventValueChanged];
+        [self.view addSubview:autoSyncSwitch];
         
-        CustomLabel *switchLabel2 = [[CustomLabel alloc] initWithFrame:CGRectMake(20, syncImgView.frame.origin.y + syncImgView.frame.size.height + 85, 230, 40) withFont:descFont withColor:[Util UIColorForHexColor:@"FFFFFF"] withText:NSLocalizedString(@"SyncContactsTitle", @"") withAlignment:NSTextAlignmentLeft];
-        switchLabel2.adjustsFontSizeToFitWidth = YES;
-        [self.view addSubview:switchLabel2];
+        choiceTitleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, syncImgView.frame.origin.y + syncImgView.frame.size.height + 120, self.view.frame.size.width - 40, 15) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:13] withColor:[Util UIColorForHexColor:@"FFFFFF"] withText:NSLocalizedString(@"PostLoginSyncPrefTitle", @"")];
+        [self.view addSubview:choiceTitleLabel];
         
-        onOff2 = [[UISwitch alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 60, syncImgView.frame.origin.y + syncImgView.frame.size.height + 90, 40, 40)];
-        [onOff2 setOn:YES];
-        [onOff2 addTarget:self action:@selector(onOffChanged:) forControlEvents:UIControlEventValueChanged];
-        [self.view addSubview:onOff2];
-        
-        choiceTable = [[UITableView alloc] initWithFrame:CGRectMake(0, syncImgView.frame.origin.y + syncImgView.frame.size.height + 140, self.view.frame.size.width, 80) style:UITableViewStylePlain];
+        choiceTable = [[UITableView alloc] initWithFrame:CGRectMake(0, syncImgView.frame.origin.y + syncImgView.frame.size.height + 145, self.view.frame.size.width, 80) style:UITableViewStylePlain];
         choiceTable.delegate = self;
         choiceTable.dataSource = self;
         choiceTable.bounces = NO;
@@ -83,16 +81,19 @@
     return self;
 }
 
-- (void)onOffChanged:(id)sender
+- (void)autoSyncSwitchChanged:(id)sender
 {
-    if (![onOff1 isOn] && ![onOff2 isOn])
-        choiceTable.hidden = YES;
-    else
-        choiceTable.hidden = NO;
+    if (![autoSyncSwitch isOn]) {
+        [self fadeOut:choiceTable duration:0.3];
+        [self fadeOut:choiceTitleLabel duration:0.3];
+    } else {
+        [self fadeIn:choiceTable duration:0.3];
+        [self fadeIn:choiceTitleLabel duration:0.3];
+    }
 }
 
 - (void) continueClicked {
-    if(onOff1.isOn) {
+    if(autoSyncSwitch.isOn) {
         self.assetsLibrary = [[ALAssetsLibrary alloc] init];
         [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
             if(group == nil) {
@@ -101,11 +102,7 @@
         } failureBlock:^(NSError *error) {
             [self showErrorAlertWithMessage:NSLocalizedString(@"ALAssetsAccessError", @"")];
         }];
-    } else {
-        [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOff];
-    }
-    
-    if(onOff2.isOn) {
+        
         ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(nil, nil);
         if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined) {
             ABAddressBookRequestAccessWithCompletion(addressBookRef, ^(bool granted, CFErrorRef error) {
@@ -116,6 +113,7 @@
         else { }
         [CacheUtil writeCachedSettingSyncContacts:EnableOptionOn];
     } else {
+        [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOff];
         [CacheUtil writeCachedSettingSyncContacts:EnableOptionOff];
     }
     

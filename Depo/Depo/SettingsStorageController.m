@@ -154,7 +154,11 @@
             } else if ([currentSubscription.plan.role isEqualToString:@"ultimate"]) {
                 nameForSms = @"MEGADEPO";
             }
-            TextCell *cell = [[TextCell alloc]initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"" titleColor:nil contentText:[NSString stringWithFormat:NSLocalizedString(@"CancelSubscriptionInfo", @""), nameForSms] contentTextColor:nil backgroundColor:nil hasSeparator:NO];
+            NSString *contentText = @"";
+            if (![nameForSms isEqualToString:@""]) {
+                contentText = [NSString stringWithFormat:NSLocalizedString(@"CancelSubscriptionInfo", @""), nameForSms];
+            }
+            TextCell *cell = [[TextCell alloc]initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"" titleColor:nil contentText:contentText contentTextColor:nil backgroundColor:nil hasSeparator:NO];
             return cell;
         }
     }

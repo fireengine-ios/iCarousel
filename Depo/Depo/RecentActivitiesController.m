@@ -36,6 +36,7 @@
         
         tableUpdateCount = 0;
         listOffset = 0;
+        endOfList = NO;
         
         self.dateFormat = [[NSDateFormatter alloc] init];
         [dateFormat setDateFormat:@"dd.MM.yyyy"];
@@ -102,6 +103,10 @@
     [self reorganiseActivities:rawItems];
 
     [self.recentTable reloadData];
+    Activity *lastItem = [recentItems objectAtIndex:recentItems.count - 1];
+    if ([lastItem.rawActivityType isEqualToString:@"WELCOME"]) {
+        endOfList = YES;
+    }
 }
 
 - (void) recentFailCallback:(NSString *) errorMessage {
@@ -202,9 +207,11 @@
 }
 
 - (void) dynamicallyLoadNextPage {
-    listOffset ++;
-    [recentDao requestRecentActivitiesForPage:listOffset andCount:RECENT_ACTIVITY_COUNT];
-    tableUpdateCount++;
+    if (!endOfList) {
+        listOffset ++;
+        [recentDao requestRecentActivitiesForPage:listOffset andCount:RECENT_ACTIVITY_COUNT];
+        tableUpdateCount++;
+    }
 }
 
 - (void)viewDidLoad {

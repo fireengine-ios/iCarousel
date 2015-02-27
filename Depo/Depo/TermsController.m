@@ -37,13 +37,14 @@
         
         webView = [[UIWebView alloc] initWithFrame:CGRectMake(10, topImgView.frame.size.height + 10, self.view.frame.size.width - 20, self.view.frame.size.height - topImgView.frame.size.height - 110)];
         webView.delegate = self;
+        webView.backgroundColor = [UIColor whiteColor];
         [self.view addSubview:webView];
 
-        checkButton = [[CheckButton alloc] initWithFrame:CGRectMake(15, webView.frame.origin.y + webView.frame.size.height + 10, self.view.frame.size.width - 30, 25) withTitle:NSLocalizedString(@"AcceptTerms", @"") isInitiallyChecked:YES];
+        checkButton = [[CheckButton alloc] initWithFrame:CGRectMake(15, webView.frame.origin.y + webView.frame.size.height + 10, self.view.frame.size.width - 30, 25) withTitle:NSLocalizedString(@"AcceptTerms", @"") isInitiallyChecked:NO];
         checkButton.checkDelegate = self;
         [self.view addSubview:checkButton];
 
-        acceptButton = [[SimpleButton alloc] initWithFrame:CGRectMake(15, checkButton.frame.origin.y + checkButton.frame.size.height + 5, self.view.frame.size.width - 30, 52) withTitle:@"Tamam" withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:22] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
+        acceptButton = [[SimpleButton alloc] initWithFrame:CGRectMake(15, checkButton.frame.origin.y + checkButton.frame.size.height + 5, self.view.frame.size.width - 30, 52) withTitle:NSLocalizedString(@"OK", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:22] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
         [acceptButton addTarget:self action:@selector(triggerNext) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:acceptButton];
 
@@ -57,6 +58,8 @@
     if(checkButton.isChecked) {
         [provisionDao requestSendProvision];
         [self showLoading];
+    } else {
+        [self showInfoAlertWithMessage:NSLocalizedString(@"AcceptTermsWarning", @"")];
     }
 }
 
