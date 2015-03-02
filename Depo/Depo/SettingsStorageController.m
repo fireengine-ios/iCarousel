@@ -72,6 +72,7 @@
 - (void) activateOfferCallback {
     [self loadPageContent];
     [pageContentTable reloadData];
+    [super showInfoAlertWithMessage:NSLocalizedString(@"ActivateOfferSuccess", @"")];
 }
 
 - (void) activateOfferFailCallback:(NSString *) errorMessage {
@@ -133,13 +134,6 @@
     
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-//            NSString *descriptionText = currentSubscription.plan.accountDescription;
-//            descriptionText = [descriptionText stringByReplacingOccurrencesOfString:@"${NAME}" withString:currentSubscription.plan.name];
-//            descriptionText = [descriptionText stringByReplacingOccurrencesOfString:@"${QUOTA}B" withString:@"${QUOTA}"];
-//            descriptionText = [descriptionText stringByReplacingOccurrencesOfString:@"${QUOTA}" withString:[NSString stringWithFormat:@"%gGB", currentSubscription.plan.quota/(1024*1024*1024)]];
-//            descriptionText = [descriptionText stringByReplacingOccurrencesOfString:@"${PRICE}" withString:[NSString stringWithFormat:@"%g", currentSubscription.plan.price]];
-//            descriptionText = [descriptionText stringByReplacingOccurrencesOfString:@"${CURRENCY}" withString:@"TL"];
-            
             NSString *title = [NSString stringWithFormat:NSLocalizedString(@"SubscriptionInfo", @""), currentSubscription.plan.displayName, currentSubscription.plan.quota/(1024*1024*1024), currentSubscription.plan.price];
             
             TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:title titleColor:nil subTitleText:@"" iconName:@"" hasSeparator:YES isLink:NO linkText:@"" cellHeight:69];
