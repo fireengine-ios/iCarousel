@@ -2,13 +2,14 @@
 //  CurioDBToolkit.h
 //  CurioSDK
 //
+//  Changed by Can Ciloglu on 30/01/15.
 //  Created by Harun Esur on 18/09/14.
 //  Copyright (c) 2014 Turkcell. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "CurioAction.h"
-#import "CurioNotification.h"
+#import "CurioPushData.h"
+#import "CurioLocationData.h"
 #import "CurioUtil.h"
 #import <sqlite3.h>
 
@@ -54,10 +55,16 @@
 - (void) deleteRecords:(NSArray *) actions;
 
 
-- (void) deleteNotifications:(NSArray *) notifications;
+- (void) deleteStoredPushData:(NSArray *) pushDataArray;
 
-- (BOOL) addNotification:(CurioNotification *) notification;
+- (BOOL) addPushData:(CurioPushData *) pushData;
 
-- (NSArray *) getNotifications;
+- (NSArray *) getStoredPushData;
+
+- (void) deleteStoredLocationData:(NSArray *) locationDataArray;
+
+- (BOOL) addLocationData:(CurioLocationData *) locationData;
+
+- (NSArray *) getStoredLocationData;
 
 @end

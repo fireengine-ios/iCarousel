@@ -2,6 +2,7 @@
 //  CurioPostOffice.m
 //  CurioSDK
 //
+//  Changed by Can Ciloglu on 30/01/15.
 //  Created by Harun Esur on 19/09/14.
 //  Copyright (c) 2014 Turkcell. All rights reserved.
 //
@@ -41,10 +42,10 @@ static pthread_mutex_t mutex;
             [[NSNotificationCenter defaultCenter] postNotificationName:CS_NOTIF_REGISTERED_NEW_SESSION_CODE object:nil];
         }
     }
-
+    
 }
 
-- (BOOL) checkResponse:(NSHTTPURLResponse *) response data:(NSData *) data
+- (BOOL) checkResponse:(NSHTTPURLResponse *) response url:(NSString *) url data:(NSData *) data
       postedParameters:(NSDictionary *) postedParameters
                 action:(CurioAction *) action{
     
@@ -53,7 +54,7 @@ static pthread_mutex_t mutex;
     
     last_responseCode = (int)response.statusCode;
     
-    CS_Log_Info(@"Status code: %ld %@",(long)[((NSHTTPURLResponse *)response) statusCode],[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+    CS_Log_Info(@"\r\rRESPONSE for URL: %@,\rStatus code: %ld,\rResponse string: %@\r\r",url,(long)[((NSHTTPURLResponse *)response) statusCode],[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
 
     if (response.statusCode == 200) {
         // Everything went well
@@ -62,7 +63,7 @@ static pthread_mutex_t mutex;
             NSString *screenClass = [action.properties objectForKey:CS_CUSTOM_VAR_SCREENCLASS];
             
             if (screenClass) {
-             
+                
                 NSDictionary *ret =  [[CurioUtil shared] fromJson:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] percentEncoded:FALSE];
                 
                 NSString *hitCode = [NSString stringWithFormat:@"%@",[ret objectForKey:CS_HTTP_JSON_VARNAME_HITCODE]];
@@ -75,12 +76,10 @@ static pthread_mutex_t mutex;
             
             
         }
-  
+        
         // Means we are successfully posted online post request
         if (action != nil) {
-            
-
-            CS_Log_Debug(@"%@",action.properties);
+            //CS_Log_Debug(@"%@",action.properties);
             
             NSObject *sessionCode = [[action properties] objectForKey:CS_HTTP_PARAM_SESSION_CODE];
             if (sessionCode != nil) {
@@ -92,10 +91,9 @@ static pthread_mutex_t mutex;
         // Means we have successfully posted OCR or PDR request
         {
             
-            
             if (postedParameters != nil) {
                 
-                NSObject *data = [postedParameters objectForKey:@"data"];
+                NSObject *data = [postedParameters objectForKey: CURKeyData];
                 BOOL activated = FALSE;
                 
                 
@@ -129,18 +127,11 @@ static pthread_mutex_t mutex;
                     
                     if (sessionCode != nil) {
                         
-                        
-                        
                         [self checkForSuccessfullyPostedSessionCode:(NSString *) sessionCode];
-                        
-                        activated = TRUE;
                         
                     }
                     
                 }
-                
-                
-                
             }
         }
         
@@ -179,23 +170,26 @@ static pthread_mutex_t mutex;
         postType == CPostTypeEndSession ? CS_SERVER_URL_SUFFIX_SESSION_END :
         postType == CPostTypeEndScreen ? CS_SERVER_URL_SUFFIX_SCREEN_END : @"";
 
-        NSString *sUrl = [NSString stringWithFormat:@"%@/%@",[[CurioSettings shared] serverUrl],suffix];
+        NSString *sUrl = [NSString stringWithFormat:@"%@%@",[[CurioSettings shared] serverUrl],suffix];
     
-        CS_Log_Info(@"URL: %@ %@",sUrl,CS_RM_STR_NEWLINE(parameters));
+        //CS_Log_Info(@"URL: %@ %@",sUrl,CS_RM_STR_NEWLINE(parameters));
+        NSString *postBody = [[CurioUtil shared] dictToPostBody:parameters];
 
         NSURL *url = [NSURL URLWithString:sUrl];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
         [request setHTTPMethod:@"POST"];
         [request setHTTPShouldHandleCookies:NO];
         [request setValue:CS_OPT_USER_AGENT forHTTPHeaderField:@"User-Agent"];
-        [request setHTTPBody:[[[CurioUtil shared] dictToPostBody:parameters] dataUsingEncoding:NSUTF8StringEncoding]];
+        [request setHTTPBody:[postBody dataUsingEncoding:NSUTF8StringEncoding]];
         [request setTimeoutInterval:30.0];
+        
+        CS_Log_Debug(@"\r\rPOST REQUEST;\rURL: %@,\rPost body:\r%@\r\r",sUrl,[postBody stringByReplacingOccurrencesOfString:@"&" withString:@"\r"]);
     
         NSURLResponse * response = nil;
         NSError * error = nil;
         NSData * data  = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
 
-        BOOL responseOk = [self checkResponse:(NSHTTPURLResponse *)response data:data postedParameters:parameters action:action];
+        BOOL responseOk = [self checkResponse:(NSHTTPURLResponse *)response url:sUrl data:data postedParameters:parameters action:action];
         
         if (error != nil) {
             CS_Log_Warning(@"Warning: %ld , %@",(long)error.code, error.localizedDescription);
@@ -208,8 +202,44 @@ static pthread_mutex_t mutex;
         return error == nil && responseOk;
         
     }
+}
+
+- (void) postRequestWithParameters:(NSDictionary *)parameters
+                            suffix:(NSString *)suffix
+                           success:(void(^)(id responseObject))success
+                           failure:(void(^)(NSError *error))failure {
     
-    
+    @synchronized(self) {
+        
+        NSString *sUrl = [NSString stringWithFormat:@"%@%@",[[CurioSettings shared] serverUrl],suffix];
+        
+        CS_Log_Info(@"URL: %@ %@",sUrl,CS_RM_STR_NEWLINE(parameters));
+        
+        NSURL *url = [NSURL URLWithString:sUrl];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+        [request setHTTPMethod:@"POST"];
+        [request setHTTPShouldHandleCookies:NO];
+        [request setValue:CS_OPT_USER_AGENT forHTTPHeaderField:@"User-Agent"];
+        [request setHTTPBody:[[[CurioUtil shared] dictToPostBody:parameters] dataUsingEncoding:NSUTF8StringEncoding]];
+        [request setTimeoutInterval:30.0];
+        
+        NSURLResponse * response = nil;
+        NSError * error = nil;
+        NSData * data  = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        
+        if (error != nil) {
+            CS_Log_Warning(@"Warning: %ld , %@",(long)error.code, error.localizedDescription);
+            failure(error);
+        } else {
+            NSDictionary *ret =  [[CurioUtil shared] fromJson:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] percentEncoded:FALSE error:&error];
+            if (error != nil) {
+                CS_Log_Warning(@"Error: %ld , %@",(long)error.code, error.localizedDescription);
+                failure(error);
+            } else {
+                success(ret);
+            }
+        }
+    }
 }
 
 
@@ -255,7 +285,7 @@ static pthread_mutex_t mutex;
     
     BOOL fixed =false;
     for (int i=0;i<CS_OPT_MAX_POST_OFFICE_RETRY_COUNT;i++) {
-
+        
         
         CS_Log_Info(@"Re-trying to fix problem.. attempt no: %d last response code: %d",i+1,last_responseCode);
         // It is UNAUTHORIZED.
@@ -270,7 +300,7 @@ static pthread_mutex_t mutex;
             if ([self postAction:startSession]) {
                 if (retryBlock()) {
                     
-                    CS_Log_Info(@"Problem fixed by creating new session");
+                    CS_Log_Info(@"Session Re-Created on server.");
                     fixed = true;
                     [[NSNotificationCenter defaultCenter] postNotificationName:CS_NOTIF_REGISTERED_NEW_SESSION_CODE object:nil];
                     break;
@@ -319,7 +349,7 @@ static pthread_mutex_t mutex;
             }];
         }
     }
-
+    
 }
 
 - (void) flushAwaitingPDRActions:(NSMutableArray *)pactions {
@@ -342,12 +372,12 @@ static pthread_mutex_t mutex;
             }];
         }
     }
-
+    
 }
 
 - (void) tryToPostAwaitingActions:(BOOL) canRunOnMainThread {
     
-
+    
     
     if (pthread_mutex_trylock(&mutex) != 0)
     {
@@ -360,7 +390,7 @@ static pthread_mutex_t mutex;
     if ([NSThread isMainThread] && canRunOnMainThread) {
         
         pthread_mutex_unlock(&mutex);
-
+        
         [opQueue addOperationWithBlock:^{
             [self tryToPostAwaitingActions:canRunOnMainThread];
         }];
@@ -378,9 +408,7 @@ static pthread_mutex_t mutex;
         
         [[CurioDBToolkit shared] markAsOfflineRecords:actions];
     } else {
-    // We are online... it is good to go
-        
-        
+        // We are online... it is good to go
         NSMutableArray *offlineActions = [NSMutableArray new];
         NSMutableArray *pdrActions = [NSMutableArray new];
         
@@ -409,7 +437,7 @@ static pthread_mutex_t mutex;
                         [[CurioDBToolkit shared] deleteRecords:[NSArray arrayWithObject:action]];
                     } else  {
                         
-
+                        
                         // A Problem with online post
                         BOOL fixed = (action.actionType == CActionTypeEndSession) ? FALSE :
                         [self tryToFixResponseProblems:^BOOL{
@@ -428,13 +456,7 @@ static pthread_mutex_t mutex;
                         }
                     }
                 }
-                
-              
-                
             } else {
-                
-
-                
                 [self flushAwaitingPDRActions:pdrActions];
                 
                 [offlineActions addObject:action];
@@ -444,12 +466,9 @@ static pthread_mutex_t mutex;
         
         [self flushAwaitingOfflineActions:offlineActions];
         [self flushAwaitingPDRActions:pdrActions];
-        
-        
-        
     }
     
-     pthread_mutex_unlock(&mutex);
+    pthread_mutex_unlock(&mutex);
     
     
     // If we read as max as we could that means
@@ -460,23 +479,20 @@ static pthread_mutex_t mutex;
         [self tryToPostAwaitingActions:canRunOnMainThread];
     }
     
-   
+    
     
 }
 
 - (void) newActionNotified_background:(id) sender {
     
     if (!CS_NSN_IS_TRUE([[CurioSettings shared] periodicDispatchEnabled])) {
-        
-        
         [self tryToPostAwaitingActions:FALSE];
-        
     }
 }
 
 - (void) newActionNotified:(id) sender {
     
-
+    
     [self performSelectorInBackground:@selector(newActionNotified_background:) withObject:sender];
     
 }
@@ -488,14 +504,14 @@ static pthread_mutex_t mutex;
         if (opQueue == nil) {
             
             pthread_mutex_init(&mutex, NULL);
-
+            
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newActionNotified:) name:CS_NOTIF_NEW_ACTION object:nil];
             
             opQueue = [NSOperationQueue new];
             [opQueue setMaxConcurrentOperationCount:2];
             
             [opQueue addOperationWithBlock:^{
-               
+                
                 while (1) {
                     
                     if (CS_NSN_IS_TRUE([[CurioSettings shared] periodicDispatchEnabled])) {

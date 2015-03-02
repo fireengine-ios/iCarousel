@@ -2,6 +2,7 @@
 //  CurioAction.m
 //  CurioSDK
 //
+//  Changed by Can Ciloglu on 30/01/15.
 //  Created by Harun Esur on 18/09/14.
 //  Copyright (c) 2014 Turkcell. All rights reserved.
 //
@@ -41,19 +42,17 @@
  eventValue:(NSString *) eventValue {
     self = [self init];
     if (self) {
-        
+        _aId = aId;
+        _actionType = (int)type;
+        _stamp = stamp;
+        _title = title;
+        _path = path;
+        _hitCode = hitCode;
+        _eventKey = eventKey;
+        _eventValue = eventValue;
+        _isOnline = [[CurioNetwork shared] isOnline] ? CS_NSN_TRUE : CS_NSN_FALSE;
+        _properties = [NSMutableDictionary new];
     }
-    
-    _aId = aId;
-    _actionType = (int)type;
-    _stamp = stamp;
-    _title = title;
-    _path = path;
-    _hitCode = hitCode;
-    _eventKey = eventKey;
-    _eventValue = eventValue;
-    _isOnline = [[CurioNetwork shared] isOnline] ? CS_NSN_TRUE : CS_NSN_FALSE;
-    _properties = [NSMutableDictionary new];
     
     return self;
 }
@@ -63,16 +62,16 @@
     
     NSMutableDictionary *dict = [NSMutableDictionary new];
     
-    CS_SET_DICT_IF_NOT_NIL(dict, _aId, @"aId");
-    CS_SET_DICT_IF_NOT_NIL(dict, [NSNumber numberWithInt:_actionType], @"actionType");
-    CS_SET_DICT_IF_NOT_NIL(dict, _stamp, @"stamp");
-    CS_SET_DICT_IF_NOT_NIL(dict, _title, @"title");
-    CS_SET_DICT_IF_NOT_NIL(dict, _path, @"path");
-    CS_SET_DICT_IF_NOT_NIL(dict, _hitCode, @"hitCode");
-    CS_SET_DICT_IF_NOT_NIL(dict, _eventKey, @"eventKey");
-    CS_SET_DICT_IF_NOT_NIL(dict, _eventValue, @"eventValue");
-    CS_SET_DICT_IF_NOT_NIL(dict, _isOnline, @"isOnline");
-    CS_SET_DICT_IF_NOT_NIL(dict, _properties, @"properties");
+    CS_SET_DICT_IF_NOT_NIL(dict, _aId, CURKeyActionId);
+    CS_SET_DICT_IF_NOT_NIL(dict, [NSNumber numberWithInt:_actionType], CURKeyActionType);
+    CS_SET_DICT_IF_NOT_NIL(dict, _stamp, CURKeyTimeStamp);
+    CS_SET_DICT_IF_NOT_NIL(dict, _title, CURKeyScreenDataTitle);
+    CS_SET_DICT_IF_NOT_NIL(dict, _path, CURKeyScreenDataPath);
+    CS_SET_DICT_IF_NOT_NIL(dict, _hitCode, CURKeyHitCode);
+    CS_SET_DICT_IF_NOT_NIL(dict, _eventKey, CURKeyEventKey);
+    CS_SET_DICT_IF_NOT_NIL(dict, _eventValue, CURKeyEventValue);
+    CS_SET_DICT_IF_NOT_NIL(dict, _isOnline, CURKeyIsOnline);
+    CS_SET_DICT_IF_NOT_NIL(dict, _properties, CURKeyProperties);
     
     return dict;
 }
@@ -94,7 +93,7 @@
     CS_SET_DICT_IF_NOT_NIL(ret, [[CurioNetwork shared] carrierCountryCode],CS_HTTP_PARAM_SIM_COUNTRY_ISO);
     CS_SET_DICT_IF_NOT_NIL(ret, [[CurioNetwork shared] carrierName],CS_HTTP_PARAM_NETWORK_OPERATOR_NAME);
     CS_SET_DICT_IF_NOT_NIL(ret, [[CurioNetwork shared] connType],CS_HTTP_PARAM_INTERNET_CONN_TYPE);
-    CS_SET_DICT_IF_NOT_NIL(ret, @"Apple",CS_HTTP_PARAM_BRAND);
+    CS_SET_DICT_IF_NOT_NIL(ret, CURDeviceBrandName,CS_HTTP_PARAM_BRAND);
     CS_SET_DICT_IF_NOT_NIL(ret, [[CurioUtil shared] deviceModel],CS_HTTP_PARAM_MODEL);
     CS_SET_DICT_IF_NOT_NIL(ret, [[CurioUtil shared] osName],CS_HTTP_PARAM_OS_TYPE);
     CS_SET_DICT_IF_NOT_NIL(ret, [[CurioUtil shared] osVersion] ,CS_HTTP_PARAM_OS_VERSION);

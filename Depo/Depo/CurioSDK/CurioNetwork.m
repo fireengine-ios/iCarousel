@@ -2,6 +2,7 @@
 //  CurioNetwork.m
 //  CurioSDK
 //
+//  Changed by Can Ciloglu on 30/01/15.
 //  Created by Harun Esur on 19/09/14.
 //  Copyright (c) 2014 Turkcell. All rights reserved.
 //
@@ -64,25 +65,21 @@
             // Sometimes unreachable block runs even if we have a connection
             // that's why we are passing reach variable to reachable block
             weakReachability.reachableBlock(reach);
-            
-            
         };
         
         
         [_reachability startNotifier];
         
-
+        _previouslyOnline = _reachability.isReachable;
+        _isOnline = _reachability.isReachable;
     }
-    
-    _previouslyOnline = _reachability.isReachable;
-    _isOnline = _reachability.isReachable;
 
     return self;
 }
 
 - (NSString *) connType {
     
-    return _reachability.isReachableViaWiFi ? @"wifi" : _reachability.isReachableViaWWAN ? @"mobile" : @"Offline";
+    return _reachability.isReachableViaWiFi ? CURNetworkTypeWifi : _reachability.isReachableViaWWAN ? CURNetworkTypeMobile : CURNetworkTypeOffline;
     
 }
 
@@ -92,7 +89,7 @@
     CTTelephonyNetworkInfo *networkInfo = [[CTTelephonyNetworkInfo alloc] init];
     CTCarrier *carrier = networkInfo.subscriberCellularProvider;
     
-    return carrier.mobileCountryCode != nil ? [carrier.mobileCountryCode uppercaseString] : @"UNKNOWN";
+    return carrier.mobileCountryCode != nil ? [carrier.mobileCountryCode uppercaseString] : CURNetworkCarrierUnknown;
     
 }
 
@@ -102,7 +99,7 @@
     CTTelephonyNetworkInfo *networkInfo = [[CTTelephonyNetworkInfo alloc] init];
     CTCarrier *carrier = networkInfo.subscriberCellularProvider;
     
-    return carrier.carrierName != nil ? [carrier.carrierName uppercaseString] : @"UNKNOWN";
+    return carrier.carrierName != nil ? [carrier.carrierName uppercaseString] : CURNetworkCarrierUnknown;
     
 }
 @end

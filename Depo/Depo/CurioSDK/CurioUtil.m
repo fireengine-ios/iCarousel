@@ -2,6 +2,7 @@
 //  CurioUtil.m
 //  CurioSDK
 //
+//  Changed by Can Ciloglu on 30/01/15.
 //  Created by Harun Esur on 18/09/14.
 //  Copyright (c) 2014 Turkcell. All rights reserved.
 //
@@ -145,8 +146,19 @@
     return [NSJSONSerialization JSONObjectWithData:pData
                                                      options:kNilOptions
                                                        error:&error];
-    
 
+}
+
+- (id) fromJson:(NSString *) json percentEncoded:(BOOL) percentEncoded error:(NSError **)error{
+    
+    NSString *js = !percentEncoded ? json  : [json stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    NSData *pData = [js dataUsingEncoding:NSUTF8StringEncoding];
+    
+    return [NSJSONSerialization JSONObjectWithData:pData
+                                           options:kNilOptions
+                                             error:error];
+    
 }
 
 - (NSString *) dictToPostBody:(NSDictionary *) dict {

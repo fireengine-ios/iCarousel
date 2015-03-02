@@ -2,11 +2,10 @@
 //  CSSettings.h
 //  CurioSDK
 //
+//  Changed by Can Ciloglu on 30/01/15.
 //  Created by Harun Esur on 17/09/14.
 //  Copyright (c) 2014 Turkcell. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSUInteger, CSLogLevel) {
     CSLogLevelError = 0,
@@ -103,6 +102,21 @@ typedef NS_ENUM(NSUInteger, CSLogLevel) {
  */
 @property (strong ,nonatomic) NSString *notificationTypes;
 
+
+/**
+ If enabled, then Curio SDK will automatically send your location
+ 
+ Default is true.
+ */
+@property (strong, nonatomic) NSNumber *fetchLocationEnabled;
+
+/**
+ Curio SDK will use this for the desired accuracy of the location data
+ 
+ Default is 600 seconds/10 minutes.
+ */
+@property (strong, nonatomic) NSNumber *maxValidLocationTimeInterval;
+
 /**
  Returns shared instance of CSSettings
  
@@ -142,14 +156,16 @@ typedef NS_ENUM(NSUInteger, CSLogLevel) {
              loggingEnabled:(NSNumber *)logginEnabled
                    logLevel:(NSNumber *)logLevel
 registerForRemoteNotifications:(NSNumber *)registerForRemoteNotifications
-    notificationTypes:(NSString *) notificationTypes;
+    notificationTypes:(NSString *) notificationTypes
+fetchLocationEnabled:(NSNumber *)fetchLocationEnabled
+maxValidLocationTimeInterval:(NSNumber *)maxValidLocationTimeInterval;
 
 /**
  Reads settings values from *-Info.plist file
  
  @return If everything goes fine then TRUE otherwise FALSE
  */
-- (BOOL) readBundleSettings;
+- (void) readBundleSettings;
 
 
 @end

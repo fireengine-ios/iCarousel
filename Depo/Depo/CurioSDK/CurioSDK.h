@@ -2,6 +2,7 @@
 //  CurioSDK.h
 //  CurioSDK
 //
+//  Changed by Can Ciloglu on 30/01/15.
 //  Created by Harun Esur on 16/09/14.
 //  Copyright (c) 2014 Turkcell. All rights reserved.
 //
@@ -16,7 +17,7 @@
 #endif
 
 
-#define CURIO_SDK_VERSION @"1.03"
+#define CURIO_SDK_VERSION @"1.04"
 
 // Notification names
 
@@ -45,6 +46,8 @@
 #define CS_OPT_SKEY_LOGGING_LEVEL @"LogLevel"
 #define CS_OPT_SKEY_REGISTER_FOR_REMOTE_NOTIFICATIONS @"RegisterForRemoteNotifications"
 #define CS_OPT_SKEY_NOTIFICATION_TYPES @"NotificationTypes"
+#define CS_OPT_SKEY_FETCH_LOCATION_ENABLED @"FetchLocationEnabled"
+#define CS_OPT_SKEY_MAX_VALID_LOCATION_TIME_INTERVAL @"MaxValidLocationTimeInterval"
 #define CS_OPT_DB_FILE_NAME @"curio.db"
 
 #define CS_SERVER_URL_SUFFIX_SESSION_START  @"/visit/create"
@@ -55,6 +58,9 @@
 #define CS_SERVER_URL_SUFFIX_PERIODIC_BATCH @"/batch/create"
 #define CS_SERVER_URL_SUFFIX_OFFLINE_CACHE  @"/offline/create"
 #define CS_SERVER_URL_SUFFIX_PUSH_DATA @"/visitor/setPushData"
+#define CS_SERVER_URL_SUFFIX_LOCATION_DATA @"/location/set"
+#define CS_SERVER_URL_SUFFIX_UNREGISTER @"/visitor/unregister"
+#define CS_SERVER_URL_SUFFIX_PUSH_HISTORY @"/pushHistory/get"
 
 #define CS_HTTP_PARAM_HIT_CODE @"hitCode"
 #define CS_HTTP_PARAM_TRACKING_CODE @"trackingCode"
@@ -113,7 +119,7 @@
 #define CS_NULL_IF_NIL(var) CS_SET_IF_NOT_NIL(var,@"NULL")
 #define CS_ZERO_IF_NIL(var) CS_SET_IF_NOT_NIL(var,[NSNumber numberWithInt:0])
 
-#define CS_RM_STR_NEWLINE(obj) [[NSString stringWithFormat:@"%@", obj] stringByReplacingOccurrencesOfString:@"\n" withString:@" "]
+#define CS_RM_STR_NEWLINE(obj) [[NSString stringWithFormat:@"%@", obj] stringByReplacingOccurrencesOfString:@"\n" withString:@"\r"]
 
 #define CS_Log_Level [[[CurioSettings shared] logLevel] intValue]
 #define CS_Log_Enabled CS_NSN_IS_TRUE([[CurioSettings shared] loggingEnabled])
@@ -129,8 +135,8 @@
 #define CS_SET_DICT_IF_NOT_NIL(dict,val,key) if (val != nil) [dict setObject:val forKey:key];
 
 
-#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "CurioConstants.h"
 #import "CurioReachabilityEx.h"
 #import "CurioSettings.h"
 #import "CurioAction.h"
@@ -140,8 +146,10 @@
 #import "CurioNetwork.h"
 #import "CurioPostOffice.h"
 #import "CurioActionToolkit.h"
-#import "CurioNotification.h"
+#import "CurioPushData.h"
 #import "CurioNotificationManager.h"
+#import "CurioLocationManager.h"
+#import "CurioLocationData.h"
 
 
 
@@ -157,8 +165,13 @@
 @property (nonatomic) BOOL sessionCodeRegisteredOnServer;
 @property (strong, nonatomic) NSMutableDictionary *memoryStore;
 @property (strong, nonatomic) NSMutableArray *aliveScreens;
-
 @property (strong, nonatomic) NSDictionary *appLaunchOptions;
+
+//Custom Id parameter.
+@property (strong, nonatomic) NSString *customId;
+
+
+
 
 /**
     Returns shared instance of CurioSDK
@@ -238,6 +251,8 @@ maxCachedActivitiyCount:(int)maxCachedActivityCount
              logLevel:(int)logLevel
 registerForRemoteNotifications:(BOOL)registerForRemoteNotifications
     notificationTypes:(NSString *) notificationTypes
+ fetchLocationEnabled:(BOOL)fetchLocationEnabled
+maxValidLocationTimeInterval:(double)maxValidLocationTimeInterval
      appLaunchOptions:(NSDictionary *)appLaunchOptions;
 
 /**
@@ -255,5 +270,23 @@ registerForRemoteNotifications:(BOOL)registerForRemoteNotifications
  *  Re-generates session code for further actions
  */
 - (void) reGenerateSessionCode;
+
+
+/**
+ * Unregisters this device from push notification server.
+ */
+- (void) unregisterFromNotificationServer;
+
+/**
+ * Sends custom id to push notification server manually.
+ */
+- (void) sendCustomId:(NSString *)theCustomId;
+
+- (void) sendLocation;
+
+- (void)getNotificationHistoryWithPageStart:(NSInteger)pageStart
+                               rows:(NSInteger)rows
+                                 success:(void(^)(NSDictionary *responseObject))success
+                                 failure:(void(^)(NSError *error))failure;
 
 @end

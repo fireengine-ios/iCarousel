@@ -2,6 +2,7 @@
 //  CurioDBToolkit.m
 //  CurioSDK
 //
+//  Changed by Can Ciloglu on 30/01/15.
 //  Created by Harun Esur on 18/09/14.
 //  Copyright (c) 2014 Turkcell. All rights reserved.
 //
@@ -53,26 +54,26 @@
     
 }
 
-- (BOOL) addNotification:(CurioNotification *) notification {
+- (BOOL) addPushData:(CurioPushData *) pushData {
     
     NSString *sql = [NSString stringWithFormat:@"INSERT INTO NOTIFICATIONS  VALUES('%@', '%@' ,'%@')",
-                     notification.nId,
-                     notification.deviceToken,
-                     notification.pushId == nil ? @"" : notification.pushId
+                     pushData.nId,
+                     pushData.deviceToken,
+                     pushData.pushId == nil ? @"" : pushData.pushId
                      ];
     
-    CS_Log_Debug("Notification (%@)",[notification asDict]);
+    CS_Log_Debug("Notification (%@)",[pushData asDict]);
     
     BOOL ret = [[CurioDB shared] executeSafe:sql];
     
     return ret;
 }
 
-- (void) deleteNotifications:(NSArray *) notifications {
+- (void) deleteStoredPushData:(NSArray *) pushDataArray {
     
-    for (CurioNotification *notification in notifications) {
+    for (CurioPushData *pushData in pushDataArray) {
         
-        NSString *sql = [NSString stringWithFormat:@"DELETE FROM NOTIFICATIONS WHERE NID = '%@'",  notification.nId ];
+        NSString *sql = [NSString stringWithFormat:@"DELETE FROM NOTIFICATIONS WHERE NID = '%@'",  pushData.nId ];
         
         
         [[CurioDB shared] executeSafe:sql];
@@ -80,7 +81,7 @@
     
 }
 
-- (NSArray *) getNotifications {
+- (NSArray *) getStoredPushData {
     
     NSMutableArray *ret = [NSMutableArray new];
     
@@ -96,9 +97,72 @@
             while (sqlite3_step(statement) == SQLITE_ROW)
             {
                 
-                CurioNotification *act = [[CurioNotification alloc] init:CS_AS_STRING(sqlite3_column_text(statement, 0))
+                CurioPushData *act = [[CurioPushData alloc] init:CS_AS_STRING(sqlite3_column_text(statement, 0))
                                                        deviceToken:CS_AS_STRING(sqlite3_column_text(statement, 1))
                                                                pushId:CS_AS_STRING(sqlite3_column_text(statement, 2))];
+                
+                
+                
+                [ret addObject:act];
+                
+            }
+        } else {
+            CS_Log_Debug(@"Failed in statement: %s",sqlite3_errmsg(db));
+        }
+        
+        sqlite3_reset(statement);
+        
+    }];
+    
+    return ret;
+    
+}
+
+- (BOOL) addLocationData:(CurioLocationData *) locationData {
+    
+    NSString *sql = [NSString stringWithFormat:@"INSERT INTO LOCATIONS  VALUES('%@', '%@' ,'%@')",
+                     locationData.lId,
+                     locationData.latitude,
+                     locationData.longitude
+                     ];
+    
+    CS_Log_Debug("Location (%@)",[locationData asDict]);
+    
+    BOOL ret = [[CurioDB shared] executeSafe:sql];
+    
+    return ret;
+}
+
+- (void) deleteStoredLocationData:(NSArray *) locationDataArray {
+    
+    for (CurioLocationData *locationData in locationDataArray) {
+        
+        NSString *sql = [NSString stringWithFormat:@"DELETE FROM LOCATIONS WHERE LID = '%@'",  locationData.lId ];
+        
+        
+        [[CurioDB shared] executeSafe:sql];
+    }
+}
+
+- (NSArray *) getStoredLocationData {
+    
+    NSMutableArray *ret = [NSMutableArray new];
+    
+    [[CurioDB shared] invokeBlockSafe:^(sqlite3 *db) {
+        
+        
+        const char *sql = [@"SELECT * FROM LOCATIONS ORDER BY LID DESC" UTF8String];
+        
+        sqlite3_stmt *statement;
+        
+        if (sqlite3_prepare_v2(db, sql, -1, &statement, NULL) == SQLITE_OK)
+        {
+            while (sqlite3_step(statement) == SQLITE_ROW)
+            {
+                
+                CurioLocationData *act = [[CurioLocationData alloc] init:CS_AS_STRING(sqlite3_column_text(statement, 0))
+                                                     latitude:CS_AS_STRING(sqlite3_column_text(statement, 1))
+                                                          longitude:CS_AS_STRING(sqlite3_column_text(statement, 2))];
                 
                 
                 
@@ -134,8 +198,7 @@
                      [[CurioUtil shared] toJson:action.properties enablePercentEncoding:TRUE]
                      ];
     
-    CS_Log_Debug(@"Action (%@) => %@",CS_ACTION_TYPE_TO_STR(action.actionType),CS_RM_STR_NEWLINE(
-                                                                                                 [[CurioActionToolkit shared] actionToOnlinePostParameters:action]));
+    CS_Log_Debug(@"Action (%@) => %@",CS_ACTION_TYPE_TO_STR(action.actionType),CS_RM_STR_NEWLINE([[CurioActionToolkit shared] actionToOnlinePostParameters:action]));
     
     BOOL ret = [[CurioDB shared] executeSafe:sql];
     

@@ -2,6 +2,7 @@
 //  CurioSDK.m
 //  CurioSDK
 //
+//  Changed by Can Ciloglu on 30/01/15.
 //  Created by Harun Esur on 16/09/14.
 //  Copyright (c) 2014 Turkcell. All rights reserved.
 //
@@ -26,9 +27,9 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if (self = [super init]) {
-        self.title = [decoder decodeObjectForKey:@"title"];
-        self.className = [decoder decodeObjectForKey:@"className"];
-        self.path = [decoder decodeObjectForKey:@"path"];
+        self.title = [decoder decodeObjectForKey:CURKeyScreenDataTitle];
+        self.className = [decoder decodeObjectForKey:CURKeyScreenDataClassName];
+        self.path = [decoder decodeObjectForKey:CURKeyScreenDataPath];
         
         
     }
@@ -36,9 +37,9 @@
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
-    [encoder encodeObject:_title forKey:@"title"];
-    [encoder encodeObject:_className forKey:@"className"];
-    [encoder encodeObject:_path forKey:@"path"];
+    [encoder encodeObject:_title forKey:CURKeyScreenDataTitle];
+    [encoder encodeObject:_className forKey:CURKeyScreenDataClassName];
+    [encoder encodeObject:_path forKey:CURKeyScreenDataPath];
 }
 
 - (BOOL)isEqual:(id)object {
@@ -109,7 +110,7 @@
         // Invoke post office initialization
         [CurioPostOffice shared];
         
-        CS_Log_Info(@"Read values from bundle: %@ = %@ , %@ = %@, %@ = %@, %@ = %@ , %@ = %@, %@ = %@, %@ = %@, %@ = %@, %@ = %@, %@ = %@, %@ = %@",
+        CS_Log_Info(@"\r\rValues fetched from bundle:\r%@ = %@\r%@ = %@\r%@ = %@\r%@ = %@\r%@ = %@\r%@ = %@\r%@ = %@\r%@ = %@\r%@ = %@\r%@ = %@\r%@ = %@\r%@ = %@\r%@ = %@\r\r",
                     CS_OPT_SKEY_SERVER_URL, [[CurioSettings shared] serverUrl],
                     CS_OPT_SKEY_API_KEY, [[CurioSettings shared] apiKey],
                     CS_OPT_SKEY_TRACKING_CODE, [[CurioSettings shared] trackingCode],
@@ -119,8 +120,11 @@
                     CS_OPT_SKEY_MAX_CACHED_ACTIVITY_COUNT, [[CurioSettings shared] maxCachedActivityCount],
                     CS_OPT_SKEY_LOGGING_ENABLED, [[CurioSettings shared] loggingEnabled],
                     CS_OPT_SKEY_LOGGING_LEVEL, [[CurioSettings shared] logLevel],
-                                        CS_OPT_SKEY_REGISTER_FOR_REMOTE_NOTIFICATIONS, [[CurioSettings shared] registerForRemoteNotifications],
-                                        CS_OPT_SKEY_NOTIFICATION_TYPES, [[CurioSettings shared] notificationTypes]
+                    CS_OPT_SKEY_REGISTER_FOR_REMOTE_NOTIFICATIONS, [[CurioSettings shared] registerForRemoteNotifications],
+                    CS_OPT_SKEY_NOTIFICATION_TYPES, [[CurioSettings shared] notificationTypes],
+                    CS_OPT_SKEY_FETCH_LOCATION_ENABLED, [[CurioSettings shared] fetchLocationEnabled],
+                    CS_OPT_SKEY_MAX_VALID_LOCATION_TIME_INTERVAL, [[CurioSettings shared] maxValidLocationTimeInterval]
+                    
           );
 
         
@@ -174,8 +178,6 @@
 
 - (void) applicationWillGoBackground {
 
-    CS_Log_Error(@".");
-    
     // Uniquize screens
     [_aliveScreens setArray:[[NSSet setWithArray:_aliveScreens] allObjects]];
     
@@ -190,8 +192,6 @@
 
 - (void) applicationWillTerminate {
 
-    CS_Log_Error(@".");
-    
     [self endSession];
     
     [self enterDeactiveMode];
@@ -228,21 +228,19 @@
 }
 
 - (void) reGenerateSessionCode {
-    
-        [_memoryStore setObject:[[CurioUtil shared] uuidV1] forKey:@"sessionCode"];
-
+        [_memoryStore setObject:[[CurioUtil shared] uuidV1] forKey:CURKeySessionCode];
 }
 
 
 - (NSString *) sessionCode {
     
-    NSString *ret = [_memoryStore objectForKey:@"sessionCode"];
+    NSString *ret = [_memoryStore objectForKey:CURKeySessionCode];
     
     if (ret == nil) {
         
         ret = [[CurioUtil shared] uuidV1];
         
-        [_memoryStore setObject:ret forKey:@"sessionCode"];
+        [_memoryStore setObject:ret forKey:CURKeySessionCode];
         
     }
     
@@ -293,10 +291,7 @@
 }
 
 - (void) endScreen:(Class) screenClass  {
-    
     [self endScreenWithClassName:(NSStringFromClass(screenClass))];
-    
-   
 }
 
 - (void) startScreenWithName:(NSString *) screenClassName title:(NSString *) title path:(NSString *) path {
@@ -340,7 +335,7 @@
     [curioActionQueue addOperationWithBlock:^{
         CurioAction *actionEndSession = [CurioAction actionEndSession];
         
-        [_memoryStore removeObjectForKey:@"sessionCode"];
+        [_memoryStore removeObjectForKey:CURKeySessionCode];
         
         [[CurioDBToolkit shared] addAction:actionEndSession];
     }];
@@ -377,6 +372,8 @@ maxCachedActivitiyCount:(int)maxCachedActivityCount
              logLevel:(int)logLevel
 registerForRemoteNotifications:(BOOL)registerForRemoteNotifications
     notificationTypes:(NSString *) notificationTypes
+ fetchLocationEnabled:(BOOL)fetchLocationEnabled
+maxValidLocationTimeInterval:(double)maxValidLocationTimeInterval
      appLaunchOptions:(NSDictionary *)appLaunchOptions
 {
     
@@ -393,6 +390,8 @@ registerForRemoteNotifications:(BOOL)registerForRemoteNotifications
                        logLevel:[NSNumber numberWithInt:logLevel]
  registerForRemoteNotifications:registerForRemoteNotifications ? CS_NSN_TRUE : CS_NSN_FALSE
               notificationTypes:notificationTypes
+           fetchLocationEnabled:fetchLocationEnabled ? CS_NSN_TRUE : CS_NSN_FALSE
+        maxValidLocationTimeInterval:[NSNumber numberWithDouble:maxValidLocationTimeInterval]
      ];
     [self startSession:appLaunchOptions];
 
@@ -407,12 +406,15 @@ registerForRemoteNotifications:(BOOL)registerForRemoteNotifications
         
         CurioAction *actionStartSession = [CurioAction actionStartSession];
         
-        CS_Log_Info(@"Session start action: %@",CS_RM_STR_NEWLINE(actionStartSession.asDict));
+        CS_Log_Info(@"Start Session action: %@",CS_RM_STR_NEWLINE(actionStartSession.asDict));
         
         [[CurioDBToolkit shared] addAction:actionStartSession];
         
         if (CS_NSN_IS_TRUE([[CurioSettings shared] registerForRemoteNotifications]))
             [[CurioNotificationManager shared] registerForNotifications];
+                
+        if (CS_NSN_IS_TRUE([[CurioSettings shared] fetchLocationEnabled]))
+            [[CurioLocationManager shared] sendLocation];
         
     }];
     
@@ -425,9 +427,61 @@ registerForRemoteNotifications:(BOOL)registerForRemoteNotifications
         [[CurioPostOffice shared] tryToPostAwaitingActions:NO];
         
     }];
-    
 }
 
 
+- (void) unregisterFromNotificationServer{
+    [[CurioNotificationManager shared] unregister];
+}
+
+- (void) sendCustomId:(NSString *)theCustomId{
+    CS_Log_Debug(@"Sending custom id: %@",theCustomId);
+    [self setCustomId:theCustomId];
+    [[CurioNotificationManager shared] sendPushData:nil];
+}
+    
+- (void) sendLocation{
+    [[CurioLocationManager shared] sendLocation];
+}
+
+- (void)getNotificationHistoryWithPageStart:(NSInteger)pageStart
+                                       rows:(NSInteger)rows
+                                 success:(void(^)(NSDictionary *responseObject))success
+                                 failure:(void(^)(NSError *error))failure {
+    
+    if (![[CurioSDK shared] sessionCodeRegisteredOnServer]) {
+        NSError *error = [[NSError alloc] initWithDomain:@"Curio SDK" code:-1 userInfo:@{@"error": @"Session code has not yet been registered on remote."}];
+        failure(error);
+        return;
+    } else if ([[CurioNotificationManager shared] deviceToken] == nil) {
+        NSError *error = [[NSError alloc] initWithDomain:@"Curio SDK" code:-1 userInfo:@{@"error": @"Device token can not be nil."}];
+        failure(error);
+        return;
+    }
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        
+        NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    [[CurioUtil shared] vendorIdentifier], CURHttpParamVisitorCode,
+                                    [[CurioSettings shared] trackingCode], CURHttpParamTrackingCode,
+                                    [[CurioNotificationManager shared] deviceToken], CURHttpParamPushToken,
+                                    [[CurioSDK shared] sessionCode], CURKeySessionCode,
+                                    nil];
+        
+        NSString *suffix = [NSString stringWithFormat:@"%@/%ld/%ld", CS_SERVER_URL_SUFFIX_PUSH_HISTORY, (long)pageStart, (long)rows];
+        
+        [[CurioPostOffice shared] postRequestWithParameters:parameters suffix:suffix success:^(id responseObject) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                success(responseObject);
+                
+            });
+        } failure:^(NSError *error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                failure(error);
+                
+            });
+        }];
+    });
+}
 
 @end

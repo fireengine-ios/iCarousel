@@ -2,11 +2,10 @@
 //  CurioUtil.h
 //  CurioSDK
 //
+//  Changed by Can Ciloglu on 30/01/15.
 //  Created by Harun Esur on 18/09/14.
 //  Copyright (c) 2014 Turkcell. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
 
 #import <uuid/uuid.h>
 
@@ -78,6 +77,13 @@
     @return De-serialized object from JSON string
  */
 - (id) fromJson:(NSString *) json percentEncoded:(BOOL) percentEncoded;
+
+/**
+ De-serializes JSON string to object
+ 
+ @return De-serialized object from JSON string
+ */
+- (id) fromJson:(NSString *) json percentEncoded:(BOOL) percentEncoded error:(NSError **)error;
 
 /**
     Returns device identifier for Vendor

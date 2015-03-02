@@ -2,6 +2,7 @@
 //  CurioPostOffice.h
 //  CurioSDK
 //
+//  Changed by Can Ciloglu on 30/01/15.
 //  Created by Harun Esur on 19/09/14.
 //  Copyright (c) 2014 Turkcell. All rights reserved.
 //
@@ -41,4 +42,9 @@ typedef BOOL(^CurioPostOfficeRetryBlock)(void);
  *  @param canRunOnMainThread If true, it will block process if you are calling on main thread.
  */
 - (void) tryToPostAwaitingActions:(BOOL) canRunOnMainThread;
+
+- (void) postRequestWithParameters:(NSDictionary *)parameters
+                            suffix:(NSString *)suffix
+                           success:(void(^)(id responseObject))success
+                           failure:(void(^)(NSError *error))failure;
 @end

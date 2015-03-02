@@ -2,6 +2,7 @@
 //  CSSettings.m
 //  CurioSDK
 //
+//  Changed by Can Ciloglu on 30/01/15.
 //  Created by Harun Esur on 17/09/14.
 //  Copyright (c) 2014 Turkcell. All rights reserved.
 //
@@ -52,10 +53,9 @@ trackingCode:(NSString *)trackingCode {
                  logLevel:(NSNumber *)logLevel
 registerForRemoteNotifications:(NSNumber *)registerForRemoteNotifications
     notificationTypes:(NSString *)notificationTypes
-
+fetchLocationEnabled:(NSNumber *)fetchLocationEnabled
+maxValidLocationTimeInterval:(NSNumber *)maxValidLocationTimeInterval
 {
-   
-    
     _sessionTimeout = CS_SET_IF_NOT_NIL(sessionTimeout, _sessionTimeout);
     _periodicDispatchEnabled = CS_SET_IF_NOT_NIL(periodicDispatchEnabled, _periodicDispatchEnabled);
     _dispatchPeriod = CS_SET_IF_NOT_NIL(dispatchPeriod, _dispatchPeriod);
@@ -64,40 +64,38 @@ registerForRemoteNotifications:(NSNumber *)registerForRemoteNotifications
     _logLevel = CS_SET_IF_NOT_NIL(logLevel, _logLevel);
     _registerForRemoteNotifications = CS_SET_IF_NOT_NIL(registerForRemoteNotifications, _registerForRemoteNotifications);
     _notificationTypes = CS_SET_IF_NOT_NIL(notificationTypes, _notificationTypes);
+    _fetchLocationEnabled =  CS_SET_IF_NOT_NIL(fetchLocationEnabled, _fetchLocationEnabled);
+    _maxValidLocationTimeInterval =  CS_SET_IF_NOT_NIL(maxValidLocationTimeInterval, _maxValidLocationTimeInterval);
     
     return [self set:serverUrl apiKey:apiKey trackingCode:trackingCode];
 }
 
 
-- (BOOL) readBundleSettings {
+- (void) readBundleSettings {
     
     NSDictionary *settings = nil;
     
     for (NSBundle *bundle in [NSBundle allBundles]) {
-    
+        
         settings = [[bundle infoDictionary] objectForKey:CS_OPT_SETTINGS_DICT_HEADER];
-        if (settings != nil)
+        if (settings != nil){
+            [self set:[settings objectForKey:CS_OPT_SKEY_SERVER_URL]
+               apiKey:[settings objectForKey:CS_OPT_SKEY_API_KEY]
+         trackingCode:[settings objectForKey:CS_OPT_SKEY_TRACKING_CODE]
+       sessionTimeout:[settings objectForKey:CS_OPT_SKEY_SESSION_TIMEOUT]
+periodicDispatchEnabled:[settings objectForKey:CS_OPT_SKEY_PERIODIC_DISPATCH_ENABLED]
+       dispatchPeriod:[settings objectForKey:CS_OPT_SKEY_DISPATCH_PERIOD]
+maxCachedActivitiyCount:[settings objectForKey:CS_OPT_SKEY_MAX_CACHED_ACTIVITY_COUNT]
+       loggingEnabled:[settings objectForKey:CS_OPT_SKEY_LOGGING_ENABLED]
+             logLevel:[settings objectForKey:CS_OPT_SKEY_LOGGING_LEVEL]
+registerForRemoteNotifications:[settings objectForKey:CS_OPT_SKEY_REGISTER_FOR_REMOTE_NOTIFICATIONS]
+    notificationTypes:[settings objectForKey:CS_OPT_SKEY_NOTIFICATION_TYPES]
+ fetchLocationEnabled:[settings objectForKey:CS_OPT_SKEY_FETCH_LOCATION_ENABLED]
+maxValidLocationTimeInterval:[settings objectForKey:CS_OPT_SKEY_MAX_VALID_LOCATION_TIME_INTERVAL]
+             ];
             break;
+        }
     }
-    
-    
-    if (settings == nil) {
-         NSLog(@"There is no %@ element found in any bundle info.plist",CS_OPT_SETTINGS_DICT_HEADER);
-        return FALSE;
-    }
-    
-    return [self set:[settings objectForKey:CS_OPT_SKEY_SERVER_URL]
-                           apiKey:[settings objectForKey:CS_OPT_SKEY_API_KEY]
-                     trackingCode:[settings objectForKey:CS_OPT_SKEY_TRACKING_CODE]
-                   sessionTimeout:[settings objectForKey:CS_OPT_SKEY_SESSION_TIMEOUT]
-          periodicDispatchEnabled:[settings objectForKey:CS_OPT_SKEY_PERIODIC_DISPATCH_ENABLED]
-                   dispatchPeriod:[settings objectForKey:CS_OPT_SKEY_DISPATCH_PERIOD]
-          maxCachedActivitiyCount:[settings objectForKey:CS_OPT_SKEY_MAX_CACHED_ACTIVITY_COUNT]
-                   loggingEnabled:[settings objectForKey:CS_OPT_SKEY_LOGGING_ENABLED]
-                         logLevel:[settings objectForKey:CS_OPT_SKEY_LOGGING_LEVEL]
-   registerForRemoteNotifications:[settings objectForKey:CS_OPT_SKEY_REGISTER_FOR_REMOTE_NOTIFICATIONS]
-                notificationTypes:[settings objectForKey:CS_OPT_SKEY_NOTIFICATION_TYPES]
-            ];
 }
 
 - (id) init {
@@ -112,13 +110,11 @@ registerForRemoteNotifications:(NSNumber *)registerForRemoteNotifications
         _loggingEnabled = CS_NSN_TRUE;
         _logLevel = [NSNumber numberWithInt:CSLogLevelError];
         _registerForRemoteNotifications = CS_NSN_TRUE;
-        _notificationTypes = @"Sound,Badge,Alert";
+        _notificationTypes = CURNotificationTypes;
+        _fetchLocationEnabled = CS_NSN_TRUE;
+        _maxValidLocationTimeInterval = [NSNumber numberWithDouble:600];
         
-        
-        
-        if ([self readBundleSettings]) {
-        }
-        
+        [self readBundleSettings];
     }
     return self;
 }

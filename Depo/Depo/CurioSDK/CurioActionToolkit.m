@@ -2,6 +2,7 @@
 //  CurioActionToolkit.m
 //  CurioSDK
 //
+//  Changed by Can Ciloglu on 30/01/15.
 //  Created by Harun Esur on 19/09/14.
 //  Copyright (c) 2014 Turkcell. All rights reserved.
 //
@@ -108,7 +109,7 @@
         
     }
     
-    [ret setObject:[[CurioUtil shared] toJson:dataArray enablePercentEncoding:FALSE] forKey:@"data"];
+    [ret setObject:[[CurioUtil shared] toJson:dataArray enablePercentEncoding:FALSE] forKey: CURKeyData];
     
     return ret;
 
@@ -156,7 +157,7 @@
         [dataArray addObject:actDict];
     }
     
-    [ret setObject:[[CurioUtil shared] toJson:dataArray enablePercentEncoding:FALSE] forKey:@"data"];
+    [ret setObject:[[CurioUtil shared] toJson:dataArray enablePercentEncoding:FALSE] forKey: CURKeyData];
     
     return ret;
 }

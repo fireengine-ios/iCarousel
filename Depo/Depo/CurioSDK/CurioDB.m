@@ -2,6 +2,7 @@
 //  CurioDB.m
 //  CurioSDK
 //
+//  Changed by Can Ciloglu on 30/01/15.
 //  Created by Harun Esur on 17/09/14.
 //  Copyright (c) 2014 Turkcell. All rights reserved.
 //
@@ -100,9 +101,9 @@ static pthread_mutex_t mutexInvoke;
     
 }
 
-- (void) createNotificationHistoryTable {
+- (void) createNotificationHistoryTableIfNotExists {
     
-    NSString *sql = @"CREATE TABLE NOTIFICATIONS (  NID INTEGER, \
+    NSString *sql = @"CREATE TABLE IF NOT EXISTS NOTIFICATIONS (  NID INTEGER, \
     DEVICETOKEN TEXT, \
     PUSHID  TEXT \
     );";
@@ -111,9 +112,20 @@ static pthread_mutex_t mutexInvoke;
     
 }
 
-- (void) createDefaultTable {
+- (void) createLocationHistoryTableIfNotExists {
     
-    NSString *sql = @"CREATE TABLE ACTIONS ( AID INTEGER, \
+    NSString *sql = @"CREATE TABLE IF NOT EXISTS LOCATIONS (  LID INTEGER, \
+    LATITUDE TEXT, \
+    LONGITUDE  TEXT \
+    );";
+    
+    [self executeSafe:sql];
+    
+}
+
+- (void) createDefaultTableIfNotExists {
+    
+    NSString *sql = @"CREATE TABLE IF NOT EXISTS ACTIONS ( AID INTEGER, \
     TYPE INTEGER, \
     STAMP INTEGER, \
     TITLE TEXT, \
@@ -142,7 +154,7 @@ static pthread_mutex_t mutexInvoke;
     NSString *documentDirectoryPath =  [pathList objectAtIndex:0];
     NSString *dbPath = [[NSString alloc] initWithString:[documentDirectoryPath stringByAppendingPathComponent:CS_OPT_DB_FILE_NAME]];
     
-    BOOL exists = [[NSFileManager defaultManager] fileExistsAtPath:dbPath];
+    //BOOL exists = [[NSFileManager defaultManager] fileExistsAtPath:dbPath];
     
     CS_Log_Debug(@"Db path: %@",dbPath);
     
@@ -150,13 +162,13 @@ static pthread_mutex_t mutexInvoke;
     {
         
         _isDbOpen = TRUE;
-        
-        if (!exists)
-        {
-            [self createDefaultTable];
+
+        [self createDefaultTableIfNotExists];
             
-            [self createNotificationHistoryTable];
-        }
+        [self createNotificationHistoryTableIfNotExists];
+            
+        [self createLocationHistoryTableIfNotExists];
+        
     } else {
         CS_Log_Error(@"Could not open database");
     }

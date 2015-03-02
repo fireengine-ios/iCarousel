@@ -67,8 +67,10 @@
     //BugSense integration
     [[Mint sharedInstance] initAndStartSession:@"13ceffcf"];
 
+    // TODO
     //Curio integration
-    [[CurioSDK shared] startSession:@"http://curio.turkcell.com.tr/api/v2/" apiKey:@"cab314f33df2514764664e5544def586" trackingCode:@"KL2XNFIE" sessionTimeout:4 periodicDispatchEnabled:YES dispatchPeriod:1 maxCachedActivitiyCount:1000 loggingEnabled:YES logLevel:0 registerForRemoteNotifications:YES notificationTypes:@"Sound,Badge,Alert" appLaunchOptions:launchOptions];
+    [[CurioSDK shared] startSession:@"http://curio.turkcell.com.tr/api/v2/" apiKey:@"cab314f33df2514764664e5544def586" trackingCode:@"KL2XNFIE" sessionTimeout:4 periodicDispatchEnabled:YES dispatchPeriod:1 maxCachedActivitiyCount:1000 loggingEnabled:YES logLevel:0 registerForRemoteNotifications:YES notificationTypes:@"Sound,Badge,Alert" fetchLocationEnabled:NO maxValidLocationTimeInterval:0 appLaunchOptions:launchOptions]; // Live
+//    [[CurioSDK shared] startSession:@"https://curiotest.turkcell.com.tr/api/v2/" apiKey:@"7dfb5740be8111e4a44b63ca635716aa" trackingCode:@"OO5CO5YS" sessionTimeout:4 periodicDispatchEnabled:NO dispatchPeriod:1 maxCachedActivitiyCount:1000 loggingEnabled:YES logLevel:3 registerForRemoteNotifications:YES notificationTypes:@"Sound,Badge,Alert" fetchLocationEnabled:NO maxValidLocationTimeInterval:0 appLaunchOptions:launchOptions]; // NewTest
 
     [self addInitialBgImage];
 
@@ -81,6 +83,7 @@
     
     if (launchOptions != nil && launchOptions[@"action"] != nil) {
         NSString *actionString = launchOptions[@"action"];
+        NSLog(@"Notification Action: %@", actionString);
         
         if ([actionString isEqualToString:@"main"]) {
             self.notifitacionAction = NotificationActionMain;
@@ -310,6 +313,22 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [[CurioNotificationManager shared] didReceiveNotification:userInfo];
     [self application:application didFinishLaunchingWithOptions:userInfo];
+    
+    NSLog(@"didReceiveRemoteNotification CALLED.");
+    if (userInfo != nil) {
+        NSLog(@"didReceiveRemoteNotification user info received.");
+    }
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    completionHandler(UIBackgroundFetchResultNewData);
+    [[CurioNotificationManager shared] didReceiveNotification:userInfo];
+    [self application:application didFinishLaunchingWithOptions:userInfo];
+    
+    NSLog(@"didReceiveRemoteNotification:fetchCompletionHandler CALLED");
+    if (userInfo != nil) {
+        NSLog(@"didReceiveRemoteNotification:fetchCompletionHandler user info received.");
+    }
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
