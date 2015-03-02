@@ -28,12 +28,11 @@
 
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul), ^(void) {
             @autoreleasepool {
-                /*
                 UIImage *image = [[UIImage alloc] initWithContentsOfFile:self.uploadRef.tempThumbnailUrl];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     imgView.image = image;
                 });
-                 */
+                /*
                 //ALAssetsLibrary'den alir hale getirildi mahir-26.02.15
                 if(self.uploadRef.assetUrl) {
                     NSURL *assetUrl = [NSURL URLWithString:self.uploadRef.assetUrl];
@@ -45,6 +44,7 @@
                          }
                      } failureBlock:nil];
                 }
+                */
             }
         });
 
