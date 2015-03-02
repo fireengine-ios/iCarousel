@@ -27,6 +27,7 @@
 @synthesize choices;
 @synthesize selectedOption;
 @synthesize assetsLibrary;
+@synthesize wifi3gCell;
 
 - (id) init {
     if(self = [super init]) {
@@ -139,6 +140,9 @@
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *cellIdentifier = [NSString stringWithFormat:@"PREF_CELL_%d", (int) indexPath.row];
     PostLoginPrefCell *cell = [[PostLoginPrefCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withTitle:[choices objectAtIndex:indexPath.row]];
+    if (indexPath.row == 0) {
+        wifi3gCell = cell;
+    }
     return cell;
 }
 
@@ -159,6 +163,12 @@
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    // ios7'de ilk seçeneğin seçili olarak gelmesi için eklendi
+    [wifi3gCell setSelected:YES animated:NO];
 }
 
 - (BOOL)shouldAutorotate {

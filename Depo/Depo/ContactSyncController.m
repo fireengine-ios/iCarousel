@@ -66,6 +66,11 @@
         lastSyncDetailTable.separatorColor = UITableViewCellSeparatorStyleNone;
         lastSyncDetailTable.bounces = NO;
         [self.view addSubview:lastSyncDetailTable];
+        
+        if([SyncUtil readLastContactSyncDate] == nil) {
+            lastSyncDateLabel.hidden = YES;
+            lastSyncDetailTable.hidden = YES;
+        }
 
         [SyncSettings shared].callback = ^void(void) {
             SyncStatus *status = [SyncStatus shared];
@@ -122,7 +127,9 @@
         lastSyncTitle = [NSString stringWithFormat:NSLocalizedString(@"ContactLastSyncDateTitle", @""), [dateFormat stringFromDate:[SyncUtil readLastContactSyncDate]]];
     }
     lastSyncDateLabel.text = lastSyncTitle;
+    lastSyncDateLabel.hidden = NO;
     [lastSyncDetailTable reloadData];
+    lastSyncDetailTable.hidden = NO;
     [UIView transitionFromView:manuelSyncButtonOnSync toView:manuelSyncButton duration:0.5 options:UIViewAnimationOptionTransitionCrossDissolve completion:nil];
 }
 
@@ -205,16 +212,6 @@
     }
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (BOOL)shouldAutorotate {
     return YES;
 }
@@ -226,15 +223,5 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

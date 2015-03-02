@@ -295,6 +295,7 @@
 "CancelSubscriptionInfo"="İptal etmek için \"Iptal %@\" yazıp 2222'ye kısa mesaj gönderebilirsiniz.";
 "UpgradeOptionsTitle"="PAKET SEÇİMİ";
 "Month"="Ay";
+"ActivateOfferSuccess"="Paket talebiniz alınmıştır, paketiniz aktiflendiğinde SMS ile bilgilendirileceksiniz.";
 
 "AutomaticSynchronization"="Otomatik Yedekleme";
 "Photos&Videos"="Fotoğraf ve Videolar";

@@ -8,6 +8,7 @@
 
 #import "MyViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "PostLoginPrefCell.h"
 
 @interface PostLoginSyncPrefController : MyViewController <UITableViewDataSource, UITableViewDelegate>
 
@@ -17,5 +18,6 @@
 @property (nonatomic, strong) NSMutableArray *choices;
 @property (nonatomic) ConnectionOption selectedOption;
 @property (nonatomic, strong) ALAssetsLibrary *assetsLibrary;
+@property (nonatomic, strong) PostLoginPrefCell *wifi3gCell;
 
 @end
