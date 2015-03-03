@@ -14,6 +14,9 @@
 #import "BaseViewController.h"
 #import "HomeController.h"
 #import "SettingsController.h"
+#import "SettingsUploadController.h"
+#import "SettingsStorageController.h"
+#import "FileListController.h"
 #import "MapUtil.h"
 #import "AppUtil.h"
 #import "CacheUtil.h"
@@ -166,13 +169,14 @@
 }
 
 - (void) startOpeningPage {
+    [self triggerAutoSynchronization];
     if (self.notifitacionAction > 0) {
         if (self.notifitacionAction == NotificationActionSyncSettings) {
             [self triggerSyncSettings];
         } else if (self.notifitacionAction == NotificationActionPackages) {
-        
-        } else if (self.notifitacionAction == NotificationActionSyncSettings) {
-        
+            [self triggerStorageSettings];
+        } else if (self.notifitacionAction == NotificationActionFloatingMenu) {
+            [self triggerFloatingMenu];
         } else {
             [self triggerHome];
         }
@@ -182,11 +186,6 @@
 }
 
 - (void) triggerHome {
-    EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
-    if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
-        [self startAutoSync];
-    }
-    
     MyViewController *homeController = [[HomeController alloc] init];
     base = [[BaseViewController alloc] initWithRootViewController:homeController];
     [self.window setRootViewController:base];
@@ -197,7 +196,33 @@
     base = [[BaseViewController alloc] initWithRootViewController:settingsController];
     [self.window setRootViewController:base];
     
-    // Sync Settings sayfasini push et
+    SettingsUploadController *uploadController = [[SettingsUploadController alloc] init];
+    uploadController.nav = settingsController.nav;
+    [settingsController.nav pushViewController:uploadController animated:NO];
+}
+
+- (void) triggerStorageSettings {
+    MyViewController *settingsController = [[SettingsController alloc] init];
+    base = [[BaseViewController alloc] initWithRootViewController:settingsController];
+    [self.window setRootViewController:base];
+    
+    SettingsStorageController *storageController = [[SettingsStorageController alloc] init];
+    storageController.nav = settingsController.nav;
+    [settingsController.nav pushViewController:storageController animated:NO];
+}
+
+- (void) triggerFloatingMenu {
+    MyViewController *fileListController = [[FileListController alloc] init];
+    base = [[BaseViewController alloc] initWithRootViewController:fileListController];
+    [self.window setRootViewController:base];
+    [base floatingAddButtonDidOpenMenu];
+}
+
+- (void) triggerAutoSynchronization {
+    EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
+    if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
+        [self startAutoSync];
+    }
 }
 
 - (void) triggerLogout {
@@ -209,9 +234,6 @@
     LoginController *login = [[LoginController alloc] init];
     MyNavigationController *loginNav = [[MyNavigationController alloc] initWithRootViewController:login];
     self.window.rootViewController = loginNav;
-    
-//    self.uploadQueue.uploadManagers = nil;
-//    self.uploadQueue = nil;
 }
 
 - (void) tokenManagerInadequateInfo {

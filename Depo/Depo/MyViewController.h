@@ -73,7 +73,7 @@
 - (void) popProgressView;
 - (void) popProgressViewSimply;
 - (void) showAddButtonImmediately;
-- (void)fadeIn:(UIView *)view duration:(float)duration;
-- (void)fadeOut:(UIView *)view duration:(float)duration;
+- (void) fadeIn:(UIView *)view duration:(float)duration;
+- (void) fadeOut:(UIView *)view duration:(float)duration;
 
 @end
