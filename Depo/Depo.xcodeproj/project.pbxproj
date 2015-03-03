@@ -619,6 +619,10 @@
 		562FB4031AA48C4400F9EFBD /* CurioSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 562FB3F21AA48C4400F9EFBD /* CurioSDK.m */; };
 		562FB4041AA48C4400F9EFBD /* CurioSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 562FB3F41AA48C4400F9EFBD /* CurioSettings.m */; };
 		562FB4051AA48C4400F9EFBD /* CurioUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 562FB3F61AA48C4400F9EFBD /* CurioUtil.m */; };
+		563FB1BD1AA5EB030066F8E6 /* settings_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 563FB1BB1AA5EB030066F8E6 /* settings_icon.png */; };
+		563FB1BE1AA5EB030066F8E6 /* settings_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 563FB1BC1AA5EB030066F8E6 /* settings_icon@2x.png */; };
+		563FB1C11AA5EC990066F8E6 /* circle_welcome_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 563FB1BF1AA5EC990066F8E6 /* circle_welcome_icon.png */; };
+		563FB1C21AA5EC990066F8E6 /* circle_welcome_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 563FB1C01AA5EC990066F8E6 /* circle_welcome_icon@2x.png */; };
 		564A318A1A9288A400C5B755 /* no_photo_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 564A31881A9288A300C5B755 /* no_photo_icon.png */; };
 		564A318B1A9288A400C5B755 /* no_photo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 564A31891A9288A300C5B755 /* no_photo_icon@2x.png */; };
 		564A318D1A933FE300C5B755 /* profile_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 564A318C1A933FE300C5B755 /* profile_icon.png */; };
@@ -1530,6 +1534,10 @@
 		562FB3F41AA48C4400F9EFBD /* CurioSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioSettings.m; sourceTree = "<group>"; };
 		562FB3F51AA48C4400F9EFBD /* CurioUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioUtil.h; sourceTree = "<group>"; };
 		562FB3F61AA48C4400F9EFBD /* CurioUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioUtil.m; sourceTree = "<group>"; };
+		563FB1BB1AA5EB030066F8E6 /* settings_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings_icon.png; sourceTree = "<group>"; };
+		563FB1BC1AA5EB030066F8E6 /* settings_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings_icon@2x.png"; sourceTree = "<group>"; };
+		563FB1BF1AA5EC990066F8E6 /* circle_welcome_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle_welcome_icon.png; sourceTree = "<group>"; };
+		563FB1C01AA5EC990066F8E6 /* circle_welcome_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle_welcome_icon@2x.png"; sourceTree = "<group>"; };
 		564A31881A9288A300C5B755 /* no_photo_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = no_photo_icon.png; sourceTree = "<group>"; };
 		564A31891A9288A300C5B755 /* no_photo_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no_photo_icon@2x.png"; sourceTree = "<group>"; };
 		564A318C1A933FE300C5B755 /* profile_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile_icon.png; sourceTree = "<group>"; };
@@ -2264,6 +2272,10 @@
 		0589060219CC226500A9E517 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				563FB1BF1AA5EC990066F8E6 /* circle_welcome_icon.png */,
+				563FB1C01AA5EC990066F8E6 /* circle_welcome_icon@2x.png */,
+				563FB1BB1AA5EB030066F8E6 /* settings_icon.png */,
+				563FB1BC1AA5EB030066F8E6 /* settings_icon@2x.png */,
 				56FCFDD31A9C7DDA00AC041C /* info_icon.png */,
 				56FCFDD41A9C7DDA00AC041C /* info_icon@2x.png */,
 				564A318E1A93419D00C5B755 /* profile_icon@2x.png */,
@@ -3085,9 +3097,11 @@
 				051CB41819D2F71200E5FC88 /* yellow_close_button@2x.png in Resources */,
 				058BC2391A30D46C0007F4DE /* textfield_bg.png in Resources */,
 				0589063A19CC2A5600A9E517 /* file_icon@2x.png in Resources */,
+				563FB1C21AA5EC990066F8E6 /* circle_welcome_icon@2x.png in Resources */,
 				0526448D19D5A26400B63759 /* help_icon@2x.png in Resources */,
 				0589065319CC2B9500A9E517 /* yellow_file_icon@2x.png in Resources */,
 				051CB41F19D2F71200E5FC88 /* document_icon@2x.png in Resources */,
+				563FB1C11AA5EC990066F8E6 /* circle_welcome_icon.png in Resources */,
 				0589062119CC226D00A9E517 /* music_icon.png in Resources */,
 				059E9A051A35DBB300922A77 /* sms_icon.png in Resources */,
 				56FCFDD61A9C7DDA00AC041C /* info_icon@2x.png in Resources */,
@@ -3117,6 +3131,7 @@
 				05A7CE591A7FBD3E00020B6F /* percent@2x.png in Resources */,
 				05224AB719DC4A2D00214767 /* actionBar_preloader@2x.png in Resources */,
 				0526448A19D5A26400B63759 /* camera_icon.png in Resources */,
+				563FB1BE1AA5EB030066F8E6 /* settings_icon@2x.png in Resources */,
 				0526449319D5A26400B63759 /* syncing_icon@2x.png in Resources */,
 				058219DE1A386829001FA679 /* nav_favourite_active_icon.png in Resources */,
 				05AF7C951A1CA04E00F5011A /* white_right_arrow_icon@2x.png in Resources */,
@@ -3152,6 +3167,7 @@
 				05994F9E1A0B572D0081F000 /* music_play_icon@2x.png in Resources */,
 				051CB41219D2F71200E5FC88 /* check_checked_icon@2x.png in Resources */,
 				0589064B19CC2B9500A9E517 /* yellow_photos_icon.png in Resources */,
+				563FB1BD1AA5EB030066F8E6 /* settings_icon.png in Resources */,
 				057C9D6E1A2B48F8001DDDEC /* musics_icon.png in Resources */,
 				056BEC8B1A8AA7CF00BA0805 /* pre_login_info5.png in Resources */,
 				059AD3791A1E26A000AA41BD /* circle_fav_icon@2x.png in Resources */,
@@ -3570,8 +3586,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Necdet Oncegil (344355U88J)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Necdet Oncegil (344355U88J)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3590,7 +3606,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "79244b75-7d4c-45af-b931-36572aa7e063";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -3600,8 +3616,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3620,7 +3636,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "79244b75-7d4c-45af-b931-36572aa7e063";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -3702,8 +3718,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3722,7 +3738,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "79244b75-7d4c-45af-b931-36572aa7e063";
 				WRAPPER_EXTENSION = app;
 			};
 			name = AppStore;
@@ -3782,8 +3798,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3802,7 +3818,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "79244b75-7d4c-45af-b931-36572aa7e063";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Enterprise;

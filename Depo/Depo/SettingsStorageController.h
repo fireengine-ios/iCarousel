@@ -13,9 +13,11 @@
     AccountDao *accountDaoToGetCurrentSubscription;
     AccountDao *accountDaoToGetOffers;
     AccountDao *accountDaoToActivateOffer;
+    AccountDao *accountDaoToLearnIsJobExists;
     Subscription *currentSubscription;
     NSMutableArray *offers;
     int tableUpdateCounter;
+    BOOL isJobExists;
 }
 
 @end

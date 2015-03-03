@@ -13,7 +13,8 @@ typedef enum {
     RequestMethodGetCurrentSubscription = 0,
     RequestMethodGetOffers,
     RequestMethodActivateOffer,
-    RequestMethodCancelSubscription
+    RequestMethodCancelSubscription,
+    RequestMethodIsJobExists
 } RequestMethod;
 
 @interface AccountDao : BaseDao {
@@ -24,5 +25,6 @@ typedef enum {
 - (void) requestOffers;
 - (void) requestActivateOffer: (Offer *)offer;
 - (void) requestCancelSubscription: (Subscription *)subscription;
+- (void) requestIsJobExists;
 
 @end

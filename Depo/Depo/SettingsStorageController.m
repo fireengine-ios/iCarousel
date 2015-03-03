@@ -25,6 +25,7 @@
 }
 
 - (void) viewWillAppear:(BOOL)animated {
+    isJobExists = YES;
     [self loadPageContent];
 }
 
@@ -38,11 +39,21 @@
     accountDaoToGetCurrentSubscription.failMethod = @selector(loadCurrentSubscriptionFailCallback:);
     [accountDaoToGetCurrentSubscription requestCurrentAccount];
     
-    accountDaoToGetOffers = [[AccountDao alloc]init];
-    accountDaoToGetOffers.delegate = self;
-    accountDaoToGetOffers.successMethod = @selector(loadOffersCallback:);
-    accountDaoToGetOffers.failMethod = @selector(loadOffersFailCallback:);
-    [accountDaoToGetOffers requestOffers];
+    if (currentSubscription == nil) {
+        accountDaoToLearnIsJobExists = [[AccountDao alloc]init];
+        accountDaoToLearnIsJobExists.delegate = self;
+        accountDaoToLearnIsJobExists.successMethod = @selector(isJobExistsCallback:);
+        accountDaoToLearnIsJobExists.failMethod = @selector(isJobExistsFailCallback:);
+        [accountDaoToLearnIsJobExists requestIsJobExists];
+    }
+    
+    if (!isJobExists) {
+        accountDaoToGetOffers = [[AccountDao alloc]init];
+        accountDaoToGetOffers.delegate = self;
+        accountDaoToGetOffers.successMethod = @selector(loadOffersCallback:);
+        accountDaoToGetOffers.failMethod = @selector(loadOffersFailCallback:);
+        [accountDaoToGetOffers requestOffers];
+    }
 }
 
 - (void) loadCurrentSubscriptionCallback:(Subscription *) file {
@@ -52,6 +63,22 @@
 }
 
 - (void) loadCurrentSubscriptionFailCallback:(NSString *) errorMessage {
+    [super hideLoading];
+    [super showErrorAlertWithMessage:errorMessage];
+}
+
+- (void) isJobExistsCallback:(NSNumber *) result {
+    int resultInt = [result intValue];
+    if (resultInt == 1) {
+        isJobExists = YES;
+    } else {
+        isJobExists = NO;
+        [self loadPageContent];
+    }
+    [super hideLoading];
+}
+
+- (void) isJobExistsFailCallback:(NSString *) errorMessage {
     [super hideLoading];
     [super showErrorAlertWithMessage:errorMessage];
 }
@@ -70,6 +97,9 @@
 }
 
 - (void) activateOfferCallback {
+    currentSubscription = nil;
+    isJobExists = YES;
+    [offers removeAllObjects];
     [self loadPageContent];
     [pageContentTable reloadData];
     [super showInfoAlertWithMessage:NSLocalizedString(@"ActivateOfferSuccess", @"")];
@@ -134,20 +164,14 @@
     
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            NSString *title = [NSString stringWithFormat:NSLocalizedString(@"SubscriptionInfo", @""), currentSubscription.plan.displayName, currentSubscription.plan.quota/(1024*1024*1024), currentSubscription.plan.price];
+            NSString *subscriptionDisplayName = [self getPackageDisplayName:currentSubscription.plan.role];
+            NSString *title = [NSString stringWithFormat:NSLocalizedString(@"SubscriptionInfo", @""), subscriptionDisplayName, currentSubscription.plan.quota/(1024*1024*1024), currentSubscription.plan.price];
             
             TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:title titleColor:nil subTitleText:@"" iconName:@"" hasSeparator:YES isLink:NO linkText:@"" cellHeight:69];
             return cell;
         }
         else {
-            NSString *nameForSms = @"";
-            if ([currentSubscription.plan.role isEqualToString:@"standart"]) {
-                nameForSms = @"MINIDEPO";
-            } else if ([currentSubscription.plan.role isEqualToString:@"premium"]) {
-                nameForSms = @"STANDARTDEPO";
-            } else if ([currentSubscription.plan.role isEqualToString:@"ultimate"]) {
-                nameForSms = @"MEGADEPO";
-            }
+            NSString *nameForSms = [self getNameForSms:currentSubscription.plan.role];
             NSString *contentText = @"";
             if (![nameForSms isEqualToString:@""]) {
                 contentText = [NSString stringWithFormat:NSLocalizedString(@"CancelSubscriptionInfo", @""), nameForSms];
@@ -159,8 +183,9 @@
     else {
         OfferCell *cell;
         Offer *offer = [offers objectAtIndex:indexPath.row];
+        NSString *offerDisplayName = [self getPackageDisplayName:offer.role];
         NSString *packageName = @"%@ (%gGB) %@ TL/%@";
-        packageName = [NSString stringWithFormat:packageName, offer.name, offer.quota/(1024*1024*1024), offer.price, NSLocalizedString(@"Month", @"")];
+        packageName = [NSString stringWithFormat:packageName, offerDisplayName, offer.quota/(1024*1024*1024), offer.price, NSLocalizedString(@"Month", @"")];
         packageName = [packageName stringByReplacingOccurrencesOfString:@"Akıllı Depo " withString:@""];
         if (indexPath.row == 0)
             cell = [[OfferCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:packageName hasSeparator:NO topIndex:15 bottomIndex:0];
@@ -182,6 +207,32 @@
         accountDaoToGetOffers.failMethod = @selector(activateOfferFailCallback:);
         [accountDaoToGetOffers requestActivateOffer:offer];
     }
+}
+
+- (NSString *)getPackageDisplayName: (NSString *)roleName {
+    NSString *name = @"";
+    if ([roleName isEqualToString:@"demo"]) {
+        name = NSLocalizedString(@"Welcome", @"");
+    } else if ([roleName isEqualToString:@"standard"]) {
+        name = @"Mini Paket";
+    } else if ([roleName isEqualToString:@"premium"]) {
+        name = @"Standart Paket";
+    } else if ([roleName isEqualToString:@"ultimate"]) {
+        name = @"Mega Paket";
+    }
+    return name;
+}
+
+- (NSString *)getNameForSms: (NSString *)roleName {
+    NSString *name = @"";
+    if ([currentSubscription.plan.role isEqualToString:@"standart"]) {
+        name = @"MINIDEPO";
+    } else if ([currentSubscription.plan.role isEqualToString:@"premium"]) {
+        name = @"STANDARTDEPO";
+    } else if ([currentSubscription.plan.role isEqualToString:@"ultimate"]) {
+        name = @"MEGADEPO";
+    }
+    return name;
 }
 
 @end

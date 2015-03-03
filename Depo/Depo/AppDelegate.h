@@ -43,5 +43,6 @@
 - (void) triggerLogout;
 - (void) startAutoSync;
 - (void) stopAutoSync;
+- (void) startOpeningPage;
 
 @end

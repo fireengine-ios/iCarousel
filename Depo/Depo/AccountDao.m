@@ -47,6 +47,14 @@
     [self sendPostRequest:request];
 }
 
+- (void) requestIsJobExists {
+    requestMethod = RequestMethodIsJobExists;
+    NSURL *url = [NSURL URLWithString:REQUEST_IS_JOB_EXISTS];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    [request setDelegate:self];
+    [self sendGetRequest:request];
+}
+
 //- (void) requestCancelSubscription: (Subscription *)subscription {
 //    requestMethod = RequestMethodCancelSubscription;
 //    NSURL *url = [NSURL URLWithString:REQUEST_CANCEL_SUBSCRIPTION_URL];
@@ -86,27 +94,40 @@
             if (requestMethod == RequestMethodGetCurrentSubscription) {
                 NSDictionary *responseDict = [jsonParser objectWithString:responseStr];
                 Subscription *subscription = [self parseSubscription:responseDict];
-                if (subscription != nil && subscription.plan != nil && subscription.plan.name != nil)
+                if (subscription != nil && subscription.plan != nil && subscription.plan.name != nil) {
                     [self shouldReturnSuccessWithObject:subscription];
-                else
+                } else {
                     [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                }
             } else if (requestMethod == RequestMethodGetOffers) {
                 NSMutableArray *result = [[NSMutableArray alloc] init];
                 NSArray *mainArray = [jsonParser objectWithString:responseStr];
                 if (mainArray != nil && ![mainArray isKindOfClass:[NSNull class]]) {
-                    for(NSDictionary *offerDict in mainArray) {
+                    for (NSDictionary *offerDict in mainArray) {
                         Offer *offer = [self parseOffer:offerDict];
-                        if (offer != nil)
+                        if (offer != nil) {
                             [result addObject:offer];
+                        }
                     }
                     [self shouldReturnSuccessWithObject:result];
-                } else
+                } else {
                     [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                }
             } else if (requestMethod == RequestMethodActivateOffer) {
-                if ([responseStr isEqualToString:@""])
+                if ([responseStr isEqualToString:@""]) {
                     [self shouldReturnSuccess];
-                else
-                [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                } else {
+                    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                }
+            } else if (requestMethod == RequestMethodIsJobExists) {
+                NSDictionary *responseDict = [jsonParser objectWithString:responseStr];
+                NSNumber *result = [responseDict objectForKey:@"isJobExists"];
+                int resultInt = [self intByNumber:result];
+                if (resultInt == 0 || resultInt == 1) {
+                    [self shouldReturnSuccessWithObject:result];
+                } else {
+                    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                }
             }
         }
         @catch (NSException *e) {

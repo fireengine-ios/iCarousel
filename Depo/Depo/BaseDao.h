@@ -92,6 +92,8 @@
 
 #define REQUEST_CANCEL_SUBSCRIPTION_URL BASE_URL@"/account/cancelSubscription"
 
+#define REQUEST_IS_JOB_EXISTS BASE_URL@"/account/isSubscriptionJobExists"
+
 #define GET_CONNECTED_DEVICES BASE_URL@"/devices"
 
 #define APN_URL @"http://pushserver.turkcell.com.tr/PushServer/rest/registerdevice/"

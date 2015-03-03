@@ -446,8 +446,10 @@
             return @"circle_fav_icon.png";
         case ActivityTypeMusic:
             return @"circle_music_icon.png";
-        default:
+        case ActivityTypeFile:
             return @"circle_doc_icon.png";
+        default:
+            return @"circle_welcome_icon.png";
     }
     return @"";
 }
