@@ -131,7 +131,7 @@
 
 #define SETTINGS_NOTIFICATIONS @"SETTINGS_NOTIFICATIONS"
 
-#define MAX_CONCURRENT_UPLOAD_TASKS 5
+#define MAX_CONCURRENT_UPLOAD_TASKS 1
 
 //TODO
 //#define CONTACT_SYNC_SERVER_URL @"https://tcloudstb.turkcell.com.tr/sync/ttyapi/"

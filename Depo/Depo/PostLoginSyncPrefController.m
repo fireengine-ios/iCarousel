@@ -97,9 +97,6 @@
     if(autoSyncSwitch.isOn) {
         self.assetsLibrary = [[ALAssetsLibrary alloc] init];
         [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-            if(group == nil) {
-                [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOn];
-            }
         } failureBlock:^(NSError *error) {
             [self showErrorAlertWithMessage:NSLocalizedString(@"ALAssetsAccessError", @"")];
         }];
@@ -112,7 +109,10 @@
         }
         else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) { }
         else { }
+
         [CacheUtil writeCachedSettingSyncContacts:EnableOptionOn];
+        [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOn];
+    
     } else {
         [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOff];
         [CacheUtil writeCachedSettingSyncContacts:EnableOptionOff];
@@ -122,7 +122,8 @@
     [CacheUtil writeCachedSettingDataRoaming:NO];
 
     [AppUtil writeFirstVisitOverFlag];
-    [APPDELEGATE triggerHome];
+//    [APPDELEGATE triggerHome];
+    [APPDELEGATE startOpeningPage];
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
