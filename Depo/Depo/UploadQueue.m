@@ -29,7 +29,13 @@
         
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
-            NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration backgroundSessionConfiguration:@"com.igones.depo.BackgroundSession"];
+            NSURLSessionConfiguration *configuration;
+            if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+                configuration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"com.igones.depo.BackgroundSession"];
+            } else {
+                configuration = [NSURLSessionConfiguration backgroundSessionConfiguration:@"com.igones.depo.BackgroundSession"];
+            }
+            
             configuration.sessionSendsLaunchEvents = YES;
             self.session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
         });
@@ -135,11 +141,13 @@
 #pragma mark UploadManagerQueueDelegate
 - (void) uploadManager:(UploadManager *)manRef didFinishUploadingWithSuccess:(BOOL)success {
     [activeTaskIds removeObject:[manRef uniqueUrl]];
+    NSLog(@"!!!!!!!! AT didFinishUploadingWithSuccess. Remaining list count: %d", [uploadManagers count]);
     
     if([activeTaskIds count] < MAX_CONCURRENT_UPLOAD_TASKS) {
         UploadManager *nextManager = [self findNextTask];
         nextManager.queueDelegate = self;
         if(nextManager != nil) {
+            NSLog(@"!!!!!!!! Next manager started");
             [nextManager startTask];
             [activeTaskIds addObject:[nextManager uniqueUrl]];
         }

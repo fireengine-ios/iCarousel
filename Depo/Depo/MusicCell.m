@@ -7,6 +7,7 @@
 //
 
 #import "MusicCell.h"
+#import "UIImageView+AFNetworking.h"
 
 @implementation MusicCell
 
@@ -24,6 +25,10 @@
         UIImage *iconImg = [UIImage imageNamed:[AppUtil iconNameByContentType:ContentTypeMusic]];
         self.imgView = [[UIImageView alloc] initWithFrame:CGRectMake(leftIndex + (40 - iconImg.size.width)/2, (68 - iconImg.size.height)/2, iconImg.size.width, iconImg.size.height)];
         self.imgView.image = iconImg;
+        if(self.fileFolder.detail && self.fileFolder.detail.thumbMediumUrl && [self.fileFolder.detail.thumbMediumUrl length] > 0) {
+            self.imgView.frame = CGRectMake(leftIndex + 2, 16, 35, 35);
+            [self.imgView setImageWithURL:[NSURL URLWithString:self.fileFolder.detail.thumbMediumUrl]];
+        }
         [self addSubview:self.imgView];
         
         CGRect nameFieldRect = CGRectMake(leftIndex + 55, 13, self.frame.size.width - 80, 22);
@@ -54,6 +59,10 @@
         UIImage *iconImg = [UIImage imageNamed:[AppUtil iconNameByContentType:ContentTypeMusic]];
         self.imgView = [[UIImageView alloc] initWithFrame:CGRectMake(15 + (40 - iconImg.size.width)/2, (68 - iconImg.size.height)/2, iconImg.size.width, iconImg.size.height)];
         self.imgView.image = iconImg;
+        if(self.fileFolder.detail && self.fileFolder.detail.thumbMediumUrl && [self.fileFolder.detail.thumbMediumUrl length] > 0) {
+            self.imgView.frame = CGRectMake(17, 16, 35, 35);
+            [self.imgView setImageWithURL:[NSURL URLWithString:self.fileFolder.detail.thumbMediumUrl]];
+        }
         [self addSubview:self.imgView];
         
         CGRect nameFieldRect = CGRectMake(70, 13, self.frame.size.width - 80, 22);
@@ -94,6 +103,10 @@
         UIImage *iconImg = [UIImage imageNamed:[AppUtil iconNameByContentType:ContentTypeMusic]];
         self.imgView = [[UIImageView alloc] initWithFrame:CGRectMake(15 + (40 - iconImg.size.width)/2, (68 - iconImg.size.height)/2, iconImg.size.width, iconImg.size.height)];
         self.imgView.image = iconImg;
+        if(self.fileFolder.detail && self.fileFolder.detail.thumbMediumUrl && [self.fileFolder.detail.thumbMediumUrl length] > 0) {
+            self.imgView.frame = CGRectMake(17, 16, 35, 35);
+            [self.imgView setImageWithURL:[NSURL URLWithString:self.fileFolder.detail.thumbMediumUrl]];
+        }
         [self addSubview:self.imgView];
         
         CGRect nameFieldRect = CGRectMake(70, 13, self.frame.size.width - 120, 22);
