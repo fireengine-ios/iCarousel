@@ -26,6 +26,7 @@
 @synthesize contentType;
 @synthesize hasFinished;
 @synthesize isReady;
+@synthesize autoSyncFlag;
 @synthesize taskType;
 @synthesize folder;
 @synthesize finalFile;

@@ -93,11 +93,18 @@
             if(group) {
                 [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
                     if(asset) {
-                        NSString *localHash = [asset.defaultRepresentation MD5];
-                        if(![remoteHashList containsObject:localHash]) {
-                            [self startUploadForAsset:asset andRemoteHash:nil andLocalHash:localHash];
-                            [SyncUtil writeFirstTimeSyncFlag];
-                            [SyncUtil updateLastSyncDate];
+                        EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
+                        if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
+                            NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
+                            ConnectionOption connectionOption = (ConnectionOption)[CacheUtil readCachedSettingSyncingConnectionType];
+                            if(networkStatus == kReachableViaWiFi || (networkStatus == kReachableViaWWAN && connectionOption == ConnectionOptionWifi3G)) {
+                                NSString *localHash = [asset.defaultRepresentation MD5];
+                                if(![remoteHashList containsObject:localHash]) {
+                                    [self startUploadForAsset:asset andRemoteHash:nil andLocalHash:localHash];
+                                    [SyncUtil writeFirstTimeSyncFlag];
+                                    [SyncUtil updateLastSyncDate];
+                                }
+                            }
                         }
                     }
                 }];
@@ -192,11 +199,18 @@
                 if(group) {
                     [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
                         if(asset) {
-                            NSString *localHash = [asset.defaultRepresentation MD5];
-                            if(![localHashList containsObject:localHash] && ![remoteHashList containsObject:localHash] && [APPDELEGATE.uploadQueue uploadRefForAsset:[asset.defaultRepresentation.url absoluteString]] == nil) {
-                                [self startUploadForAsset:asset andRemoteHash:nil andLocalHash:localHash];
-//                                [SyncUtil updateLastSyncDate];
-//                                [SyncUtil increaseBadgeCount];
+                            EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
+                            if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
+                                NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
+                                ConnectionOption connectionOption = (ConnectionOption)[CacheUtil readCachedSettingSyncingConnectionType];
+                                if(networkStatus == kReachableViaWiFi || (networkStatus == kReachableViaWWAN && connectionOption == ConnectionOptionWifi3G)) {
+                                    NSString *localHash = [asset.defaultRepresentation MD5];
+                                    if(![localHashList containsObject:localHash] && ![remoteHashList containsObject:localHash] && [APPDELEGATE.uploadQueue uploadRefForAsset:[asset.defaultRepresentation.url absoluteString]] == nil) {
+                                        [self startUploadForAsset:asset andRemoteHash:nil andLocalHash:localHash];
+                                        //                                [SyncUtil updateLastSyncDate];
+                                        //                                [SyncUtil increaseBadgeCount];
+                                    }
+                                }
                             }
                         }
                     }];
@@ -219,6 +233,7 @@
     ref.localHash = localHash;
     ref.fileName = asset.defaultRepresentation.filename;
     ref.filePath = [asset.defaultRepresentation.url absoluteString];
+    ref.autoSyncFlag = YES;
     if ([[asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
         ref.contentType = ContentTypeVideo;
     } else {

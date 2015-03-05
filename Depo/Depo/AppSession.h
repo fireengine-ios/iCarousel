@@ -20,6 +20,7 @@
 @property (nonatomic, strong) User *user;
 @property (nonatomic, strong) NSString *authToken;
 @property (nonatomic, strong) NSString *baseUrl;
+@property (nonatomic, strong) NSString *baseUrlConstant;
 @property (nonatomic) SortType sortType;
 
 @property (nonatomic, strong) NSArray *playerItemFilesRef;

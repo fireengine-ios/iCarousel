@@ -22,5 +22,6 @@
 - (void) addNewUploadTask:(UploadManager *) newManager;
 - (void) addOnlyNewUploadTask:(UploadManager *) newManager;
 - (void) startReadyTasks;
+- (void) cancelRemainingUploads;
 
 @end

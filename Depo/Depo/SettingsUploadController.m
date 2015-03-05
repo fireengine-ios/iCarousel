@@ -12,6 +12,7 @@
 #import "SettingsDocumentsController.h"
 #import "SettingsContactsController.h"
 #import "Util.h"
+#import "AppDelegate.h"
 
 @interface SettingsUploadController ()
 
@@ -43,8 +44,15 @@
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
-    if (currentSyncPhotosVideosSetting != oldSyncPhotosVideosSetting)
+    if (currentSyncPhotosVideosSetting != oldSyncPhotosVideosSetting) {
         [CacheUtil writeCachedSettingSyncPhotosVideos:currentSyncPhotosVideosSetting];
+    
+        if(currentSyncPhotosVideosSetting == EnableOptionOff) {
+            [APPDELEGATE.uploadQueue cancelRemainingUploads];
+        } else {
+            [APPDELEGATE.syncManager manuallyCheckIfAlbumChanged];
+        }
+    }
     if (currentSyncContactsSetting != oldSyncContactsSetting)
         [CacheUtil writeCachedSettingSyncContacts:currentSyncContactsSetting];
     if (currentConnectionSetting != oldConnectionSetting)

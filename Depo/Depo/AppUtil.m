@@ -502,4 +502,17 @@
     }
 }
 
++ (NSString *) userUniqueValueByBaseUrl:(NSString *) baseUrl {
+    NSArray *baseUrlComponents = [baseUrl componentsSeparatedByString:@"/"];
+    if([baseUrlComponents count] > 0) {
+        for(NSString *component in baseUrlComponents) {
+            if([component hasPrefix:@"AUTH_"]) {
+                return component;
+            }
+        }
+    }
+    return @"";
+    
+}
+
 @end

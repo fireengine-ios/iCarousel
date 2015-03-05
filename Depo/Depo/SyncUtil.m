@@ -109,14 +109,14 @@
     NSArray *result = [SyncUtil readSyncHashLocally];
     if(![result containsObject:hash]) {
         NSArray *updatedArray = [result arrayByAddingObject:hash];
-        [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray] forKey:SYNCED_LOCAL_HASHES_KEY];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray] forKey:[NSString stringWithFormat:SYNCED_LOCAL_HASHES_KEY, APPDELEGATE.session.baseUrlConstant]];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
 
 + (NSArray *) readSyncHashLocally {
     NSArray *result = [[NSArray alloc] init];
-    NSData *arrData = [[NSUserDefaults standardUserDefaults] objectForKey:SYNCED_LOCAL_HASHES_KEY];
+    NSData *arrData = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:SYNCED_LOCAL_HASHES_KEY, APPDELEGATE.session.baseUrlConstant]];
     if (arrData != nil) {
         result = [NSKeyedUnarchiver unarchiveObjectWithData:arrData];
     }
@@ -127,14 +127,14 @@
     NSArray *result = [SyncUtil readSyncHashRemotely];
     if(![result containsObject:hash]) {
         NSArray *updatedArray = [result arrayByAddingObject:hash];
-        [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray] forKey:SYNCED_REMOTE_HASHES_KEY];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray] forKey:[NSString stringWithFormat:SYNCED_REMOTE_HASHES_KEY, APPDELEGATE.session.baseUrlConstant]];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
 
 + (NSArray *) readSyncHashRemotely {
     NSArray *result = [[NSArray alloc] init];
-    NSData *arrData = [[NSUserDefaults standardUserDefaults] objectForKey:SYNCED_REMOTE_HASHES_KEY];
+    NSData *arrData = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:SYNCED_REMOTE_HASHES_KEY, APPDELEGATE.session.baseUrlConstant]];
     if (arrData != nil) {
         result = [NSKeyedUnarchiver unarchiveObjectWithData:arrData];
     }

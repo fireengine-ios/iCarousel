@@ -45,7 +45,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 
 - (void) configureUploadAsset:(NSString *) assetUrl atFolder:(MetaFile *) _folder {
     [self.uploadRef configureUploadAsset:assetUrl atFolder:_folder];
-    [queueDelegate uploadManagerIsReadToStartTask:self];
+//    [queueDelegate uploadManagerIsReadToStartTask:self];
 }
 
 - (void) startTask {
@@ -120,7 +120,8 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         }
         
         @autoreleasepool {
-            UIImage *image = [UIImage imageWithCGImage:[self.asset.defaultRepresentation fullResolutionImage] scale:1.0 orientation:orientationValue];
+            UIImage *image = [UIImage imageWithCGImage:[self.asset.defaultRepresentation fullResolutionImage] scale:1.0 orientation:orientation];
+//            UIImage *image = [UIImage imageWithCGImage:[self.asset.defaultRepresentation fullResolutionImage]];
             [UIImagePNGRepresentation(image) writeToFile:tempPath atomically:YES];
         }
 
@@ -154,7 +155,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     [request setValue:APPDELEGATE.session.authToken forHTTPHeaderField:@"X-Auth-Token"];
     [request setValue:@"false" forHTTPHeaderField:@"X-Object-Meta-Favourite"];
     [request setValue:@"1" forHTTPHeaderField:@"x-meta-strategy"];
-//    [request setValue:@"100-continue" forHTTPHeaderField:@"Expect"];
+    [request setValue:@"100-continue" forHTTPHeaderField:@"Expect"];
     if(self.uploadRef.folder) {
         [request setValue:self.uploadRef.folder.uuid forHTTPHeaderField:@"X-Object-Meta-Parent-Uuid"];
     } else {
