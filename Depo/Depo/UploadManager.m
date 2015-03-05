@@ -154,7 +154,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     [request setValue:APPDELEGATE.session.authToken forHTTPHeaderField:@"X-Auth-Token"];
     [request setValue:@"false" forHTTPHeaderField:@"X-Object-Meta-Favourite"];
     [request setValue:@"1" forHTTPHeaderField:@"x-meta-strategy"];
-    [request setValue:@"100-continue" forHTTPHeaderField:@"Expect"];
+//    [request setValue:@"100-continue" forHTTPHeaderField:@"Expect"];
     if(self.uploadRef.folder) {
         [request setValue:self.uploadRef.folder.uuid forHTTPHeaderField:@"X-Object-Meta-Parent-Uuid"];
     } else {
