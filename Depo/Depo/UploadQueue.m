@@ -29,7 +29,13 @@
         
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
-            NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration backgroundSessionConfiguration:@"com.igones.depo.BackgroundSession"];
+            NSURLSessionConfiguration *configuration;
+            if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+                configuration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"com.igones.depo.BackgroundSession"];
+            } else {
+                configuration = [NSURLSessionConfiguration backgroundSessionConfiguration:@"com.igones.depo.BackgroundSession"];
+            }
+            
             configuration.sessionSendsLaunchEvents = YES;
             self.session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
         });
@@ -106,6 +112,39 @@
     return nextTask;
 }
 
+- (int) remainingCount {
+    int count = 0;
+    @try {
+        for(UploadManager *row in [uploadManagers copy]) {
+            if(!row.uploadRef.hasFinished && row.uploadRef.isReady) {
+                count++;
+            }
+        }
+    }
+    @catch (NSException *exception) {
+    }
+    @finally {
+    }
+    return count;
+}
+
+- (void) cancelRemainingUploads {
+    //TODO kontrol et
+    NSMutableArray *cleanArray = [[NSMutableArray alloc] init];
+    @try {
+        for(UploadManager *row in [uploadManagers copy]) {
+            if(!row.uploadRef.autoSyncFlag || [activeTaskIds containsObject:[row uniqueUrl]]) {
+                [cleanArray addObject:row];
+            }
+        }
+    }
+    @catch (NSException *exception) {
+    }
+    @finally {
+    }
+    self.uploadManagers = cleanArray;
+}
+
 - (void) addOnlyNewUploadTask:(UploadManager *) newManager {
     [uploadManagers addObject:newManager];
 }
@@ -115,8 +154,8 @@
         UploadManager *nextManager = [self findNextTask];
         nextManager.queueDelegate = self;
         if(nextManager != nil) {
-            [nextManager startTask];
             [activeTaskIds addObject:[nextManager uniqueUrl]];
+            [nextManager startTask];
         }
     }
 }
@@ -135,13 +174,16 @@
 #pragma mark UploadManagerQueueDelegate
 - (void) uploadManager:(UploadManager *)manRef didFinishUploadingWithSuccess:(BOOL)success {
     [activeTaskIds removeObject:[manRef uniqueUrl]];
+    NSLog(@"!!!!!!!! AT didFinishUploadingWithSuccess. Remaining list count: %d", [self remainingCount]);
     
     if([activeTaskIds count] < MAX_CONCURRENT_UPLOAD_TASKS) {
+        NSLog(@"!!!!!!!! empty slot present");
         UploadManager *nextManager = [self findNextTask];
         nextManager.queueDelegate = self;
         if(nextManager != nil) {
-            [nextManager startTask];
+            NSLog(@"!!!!!!!! Next manager started");
             [activeTaskIds addObject:[nextManager uniqueUrl]];
+            [nextManager startTask];
         }
     }
 }
@@ -150,8 +192,8 @@
     if([activeTaskIds count] < MAX_CONCURRENT_UPLOAD_TASKS) {
         for(UploadManager *row in [self.uploadManagers copy]) {
             if([[row uniqueUrl] isEqualToString:[manRef uniqueUrl]]) {
-                [row startTask];
                 [activeTaskIds addObject:[row uniqueUrl]];
+                [row startTask];
                 break;
             }
         }
@@ -174,6 +216,7 @@
 }
 
 - (void) URLSession:(NSURLSession *) _session task:(NSURLSessionTask *)task didSendBodyData:(int64_t)bytesSent totalBytesSent:(int64_t)totalBytesSent totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend {
+    NSLog(@"BYTES SENT: %lld, total bytes sent: %lld", bytesSent, totalBytesSent);
     UploadManager *currentManager = [self findByTaskId:task.taskIdentifier];
     if(currentManager != nil) {
         [currentManager.delegate uploadManagerDidSendData:(long)totalBytesSent inTotal:(long)totalBytesExpectedToSend];

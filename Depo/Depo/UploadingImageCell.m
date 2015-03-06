@@ -26,13 +26,14 @@
         imgView.alpha = 0.5f;
         [self addSubview:imgView];
 
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul), ^(void) {
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul), ^(void) {
             @autoreleasepool {
+                /*
                 UIImage *image = [[UIImage alloc] initWithContentsOfFile:self.uploadRef.tempThumbnailUrl];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     imgView.image = image;
                 });
-                /*
+                 */
                 //ALAssetsLibrary'den alir hale getirildi mahir-26.02.15
                 if(self.uploadRef.assetUrl) {
                     NSURL *assetUrl = [NSURL URLWithString:self.uploadRef.assetUrl];
@@ -44,9 +45,8 @@
                          }
                      } failureBlock:nil];
                 }
-                */
             }
-        });
+//        });
 
         CGRect nameFieldRect = CGRectMake(70, 13, self.frame.size.width - 80, 22);
         CGRect detailFieldRect = CGRectMake(70, 35, self.frame.size.width - 80, 20);

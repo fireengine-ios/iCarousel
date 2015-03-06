@@ -17,6 +17,7 @@
 @synthesize user;
 @synthesize authToken;
 @synthesize baseUrl;
+@synthesize baseUrlConstant;
 @synthesize sortType;
 @synthesize playerItemFilesRef;
 @synthesize playerItems;

@@ -34,5 +34,6 @@
 + (BOOL) readFirstVisitOverFlag;
 + (void) writeFirstVisitOverFlag;
 + (NSString *) readDueDateInReadableFormat:(NSDate *) date;
++ (NSString *) userUniqueValueByBaseUrl:(NSString *) baseUrl;
 
 @end

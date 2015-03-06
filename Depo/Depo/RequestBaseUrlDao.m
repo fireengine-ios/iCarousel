@@ -9,6 +9,7 @@
 #import "RequestBaseUrlDao.h"
 #import "AppDelegate.h"
 #import "AppSession.h"
+#import "AppUtil.h"
 
 @implementation RequestBaseUrlDao
 
@@ -34,6 +35,7 @@
         if(mainDict != nil && ![mainDict isKindOfClass:[NSNull class]]) {
             NSString *baseUrlValue = [mainDict objectForKey:@"value"];
             APPDELEGATE.session.baseUrl = [self strByRawVal:baseUrlValue];
+            APPDELEGATE.session.baseUrlConstant = [AppUtil userUniqueValueByBaseUrl:[self strByRawVal:baseUrlValue]];
         }
         
         [self shouldReturnSuccess];

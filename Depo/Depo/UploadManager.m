@@ -45,7 +45,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 
 - (void) configureUploadAsset:(NSString *) assetUrl atFolder:(MetaFile *) _folder {
     [self.uploadRef configureUploadAsset:assetUrl atFolder:_folder];
-    [queueDelegate uploadManagerIsReadToStartTask:self];
+//    [queueDelegate uploadManagerIsReadToStartTask:self];
 }
 
 - (void) startTask {
@@ -71,7 +71,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     
     @try {
         self.assetsLibrary = [[ALAssetsLibrary alloc] init];
-        [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *outerStop) {
+        [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *outerStop) {
             if(group) {
                 [group enumerateAssetsUsingBlock:^(ALAsset *_asset, NSUInteger index, BOOL *innerStop) {
                     if(_asset && !self.asset) {
@@ -120,7 +120,8 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         }
         
         @autoreleasepool {
-            UIImage *image = [UIImage imageWithCGImage:[self.asset.defaultRepresentation fullResolutionImage] scale:1.0 orientation:orientationValue];
+            UIImage *image = [UIImage imageWithCGImage:[self.asset.defaultRepresentation fullResolutionImage] scale:1.0 orientation:orientation];
+//            UIImage *image = [UIImage imageWithCGImage:[self.asset.defaultRepresentation fullResolutionImage]];
             [UIImagePNGRepresentation(image) writeToFile:tempPath atomically:YES];
         }
 
