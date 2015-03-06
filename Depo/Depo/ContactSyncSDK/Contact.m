@@ -63,7 +63,7 @@
             for (NSDictionary *item in data){
                 ContactDevice *device = [ContactDevice createFromJSON:item];
                 if (device!=nil){
-                    [devices containsObject:device];
+                    [devices addObject:device];
                 }
             }
             [_devices addObjectsFromArray:[devices allObjects]];
