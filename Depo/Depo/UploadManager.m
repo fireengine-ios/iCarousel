@@ -125,7 +125,6 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             
             NSMutableData *imgData = [NSMutableData data];
             
-            // now loop, reading data into buffer and writing that to our data strea
             NSError *error;
             long long bufferOffset = 0ll;
             NSInteger bufferSize = 10000;

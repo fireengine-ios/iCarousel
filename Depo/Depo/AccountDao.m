@@ -117,6 +117,16 @@
                 if ([responseStr isEqualToString:@""]) {
                     [self shouldReturnSuccess];
                 } else {
+                    NSDictionary *responseDict = [jsonParser objectWithString:responseStr];
+                    if(responseDict != nil && ![responseDict isKindOfClass:[NSNull class]]) {
+                        NSNumber *errorCode = [responseDict objectForKey:@"errorCode"];
+                        if(errorCode != nil && ![errorCode isKindOfClass:[NSNull class]]) {
+                            if([errorCode intValue] == 1004) {
+                                [self shouldReturnFailWithMessage:NSLocalizedString(@"PackageSubscriptionQuotaErrorMessage", @"")];
+                                return;
+                            }
+                        }
+                    }
                     [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
                 }
             } else if (requestMethod == RequestMethodIsJobExists) {

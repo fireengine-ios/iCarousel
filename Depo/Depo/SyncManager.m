@@ -171,13 +171,10 @@
 }
 
 - (void) albumChanged:(NSNotification *) not {
-    NSLog(@"At albumChanged");
-    
     EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
 
     BOOL triggerSyncing = NO;
     if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
-        NSLog(@"Album is changed and flag is on");
         NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
         ConnectionOption connectionOption = (ConnectionOption)[CacheUtil readCachedSettingSyncingConnectionType];
         if(networkStatus == kReachableViaWiFi) {
@@ -188,9 +185,6 @@
     }
     
     if(triggerSyncing) {
-        if ([not userInfo]) {
-            NSLog(@"NOT USERINFO: %@", [not userInfo]);
-        }
         NSArray *localHashList = [SyncUtil readSyncHashLocally];
         NSArray *remoteHashList = [SyncUtil readSyncHashRemotely];
         

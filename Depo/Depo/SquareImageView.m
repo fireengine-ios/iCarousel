@@ -85,15 +85,20 @@
                  */
 
                 //ALAssetsLibrary'den alir hale getirildi mahir-26.02.15
-                if(self.uploadRef.assetUrl) {
-                    NSURL *assetUrl = [NSURL URLWithString:self.uploadRef.assetUrl];
-                    ALAssetsLibrary *assetsLibraryForSingle = [[ALAssetsLibrary alloc] init];
-                    [assetsLibraryForSingle assetForURL:assetUrl resultBlock:^(ALAsset *myAsset) {
-                         CGImageRef thumbnailRef = [myAsset thumbnail];
-                         if (thumbnailRef) {
-                             imgView.image = [UIImage imageWithCGImage:thumbnailRef];
-                         }
-                     } failureBlock:nil];
+                if(self.uploadRef.taskType == UploadTaskTypeAsset) {
+                    if(self.uploadRef.assetUrl) {
+                        NSURL *assetUrl = [NSURL URLWithString:self.uploadRef.assetUrl];
+                        ALAssetsLibrary *assetsLibraryForSingle = [[ALAssetsLibrary alloc] init];
+                        [assetsLibraryForSingle assetForURL:assetUrl resultBlock:^(ALAsset *myAsset) {
+                            CGImageRef thumbnailRef = [myAsset thumbnail];
+                            if (thumbnailRef) {
+                                imgView.image = [UIImage imageWithCGImage:thumbnailRef];
+                            }
+                        } failureBlock:nil];
+                    }
+                } else if(self.uploadRef.taskType == UploadTaskTypeFile) {
+                    UIImage *thumbImageFromCam = [UIImage imageWithContentsOfFile:self.uploadRef.tempUrl];
+                    imgView.image = [Util imageWithImage:thumbImageFromCam scaledToFillSize:CGSizeMake(40, 40)];
                 }
             }
 //        });
