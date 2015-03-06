@@ -16,10 +16,10 @@
 #endif
 #endif
 
-#define SYNC_VERSION @"0.8.2"
+#define SYNC_VERSION @"0.8.3"
 #define SYNC_USER_AGENT @"iOS ContactSync SDK"
 
-#define SYNC_HEADER_AUTH_TOKEN @"X-Auth-Token"
+#define SYNC_HEADER_AUTH_TOKEN @"X-Msisdn"
 #define SYNC_HEADER_CLIENT_VERSION @"X-Client-Version"
 #define SYNC_HEADER_MSISDN @"X-Msisdn"
 

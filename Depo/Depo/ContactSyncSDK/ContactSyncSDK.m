@@ -343,6 +343,14 @@ static bool syncing = false;
     [SyncAdapter checkStatus:key callback:^(id response, BOOL isSuccess) {
         if (isSuccess && !SYNC_IS_NULL(response)){
             NSDictionary *data = response[SYNC_JSON_PARAM_DATA];
+            if (SYNC_IS_NULL(data[@"status"])){
+                [defaults removeObjectForKey:SYNC_KEY_CONTACT_STORE];
+                [defaults removeObjectForKey:SYNC_KEY_CHECK_UPDATE];
+                [defaults synchronize];
+                
+                [self endOfSyncCycle:SYNC_RESULT_ERROR_NETWORK];
+                return;
+            }
             NSString *status = data[@"status"];
             if ([@"COMPLETED" isEqualToString:status]){
                 NSArray *contacts = [self restoreRecords];
