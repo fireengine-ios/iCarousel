@@ -162,6 +162,7 @@
             if (!SYNC_IS_NULL(responseHeaders)){
                 if (!SYNC_IS_NULL(responseHeaders[SYNC_HEADER_MSISDN])){
                     [SyncSettings shared].msisdn = responseHeaders[SYNC_HEADER_MSISDN];
+                    SYNC_Log(@"msisdn: %@", [SyncSettings shared].msisdn);
                 }
             }
         } else {

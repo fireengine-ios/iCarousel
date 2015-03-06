@@ -135,10 +135,10 @@
     if(status != nil) {
         if(status.status == SYNC_RESULT_SUCCESS) {
             ContactSyncResult *currentSyncResult = [[ContactSyncResult alloc] init];
-            currentSyncResult.clientUpdateCount = status.updatedContactsSent.count;
-            currentSyncResult.serverUpdateCount = status.updatedContactsReceived.count;
-            currentSyncResult.clientNewCount = status.createdContactsSent.count;
-            currentSyncResult.serverNewCount = status.createdContactsReceived.count;
+            currentSyncResult.clientUpdateCount = status.updatedContactsReceived.count;
+            currentSyncResult.serverUpdateCount = status.updatedContactsSent.count;
+            currentSyncResult.clientNewCount = status.createdContactsReceived.count;
+            currentSyncResult.serverNewCount = status.createdContactsSent.count;
             currentSyncResult.clientDeleteCount = status.deletedContactsOnDevice.count;
             currentSyncResult.serverDeleteCount = status.deletedContactsOnServer.count;
             self.syncResult = currentSyncResult;
