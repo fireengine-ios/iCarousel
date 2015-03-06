@@ -59,12 +59,14 @@
         _devices = [NSMutableArray new];
         if (!SYNC_IS_NULL(json[@"devices"])){
             NSArray *data = json[@"devices"];
+            NSMutableSet *devices = [NSMutableSet new];
             for (NSDictionary *item in data){
                 ContactDevice *device = [ContactDevice createFromJSON:item];
                 if (device!=nil){
-                    [_devices addObject:device];
+                    [devices containsObject:device];
                 }
             }
+            [_devices addObjectsFromArray:[devices allObjects]];
         }
 
     }
