@@ -12,6 +12,7 @@
 #import "Util.h"
 #import "AppUtil.h"
 #import "UploadQueue.h"
+#import <MobileCoreServices/MobileCoreServices.h>
 
 typedef void (^ALAssetsLibraryAssetForURLResultBlock)(ALAsset *asset);
 typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
@@ -120,9 +121,18 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         }
         
         @autoreleasepool {
+            ALAssetRepresentation *rep = [asset defaultRepresentation];
+            NSString *mimeType = (__bridge_transfer NSString*) UTTypeCopyPreferredTagWithClass
+            ((__bridge CFStringRef)[rep UTI], kUTTagClassMIMEType);
+            NSLog(@"MIME TYPE: %@", mimeType);
+            
             UIImage *image = [UIImage imageWithCGImage:[self.asset.defaultRepresentation fullResolutionImage] scale:1.0 orientation:orientation];
-//            UIImage *image = [UIImage imageWithCGImage:[self.asset.defaultRepresentation fullResolutionImage]];
-            [UIImagePNGRepresentation(image) writeToFile:tempPath atomically:YES];
+            //            UIImage *image = [UIImage imageWithCGImage:[self.asset.defaultRepresentation fullResolutionImage]];
+            if([[mimeType lowercaseString] isEqualToString:CONTENT_TYPE_JPEG_VALUE] || [[mimeType lowercaseString] isEqualToString:CONTENT_TYPE_JPG_VALUE]) {
+                [UIImageJPEGRepresentation(image, 1.0) writeToFile:tempPath atomically:YES];
+            } else {
+                [UIImagePNGRepresentation(image) writeToFile:tempPath atomically:YES];
+            }
         }
 
         @autoreleasepool {
