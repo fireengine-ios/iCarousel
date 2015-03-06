@@ -16,5 +16,6 @@
 + (UIImage*) circularScaleNCrop:(UIImage*)image forRect:(CGRect) rect;
 + (NSString *) transformedSizeValue:(long) byteCount;
 + (NSString *) transformedHugeSizeValue:(long long) byteCount;
++ (UIImage *)imageWithImage:(UIImage *)image scaledToFillSize:(CGSize)size;
 
 @end

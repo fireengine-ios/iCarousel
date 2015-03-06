@@ -441,3 +441,5 @@
 "Info"="Bilgi";
 "OK"="Tamam";
 "Approve"="Onay";
+
+"PackageSubscriptionQuotaErrorMessage"="Mevcut kullanımınız kotayı aşmaktadır. Paket değişikliği yapılamaz.";
