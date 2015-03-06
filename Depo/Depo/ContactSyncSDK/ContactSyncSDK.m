@@ -31,6 +31,7 @@
 @interface ContactSyncSDK ()
 
 @property (strong) NSTimer *timer;
+@property (strong) NSTimer *firstTimer;
 @property BOOL periodic;
 
 + (SYNC_INSTANCETYPE) shared;
@@ -172,7 +173,8 @@ static bool syncing = false;
             remoteContact.objectId = nil;
             
             [[ContactUtil shared] save:remoteContact];
-            
+            [_preCheckCache addObject:remoteContact.displayName];
+            [_localContacts addObject:remoteContact];
             [[SyncStatus shared] addContact:remoteContact state:SYNC_INFO_NEW_CONTACT_ON_DEVICE];
         } else {
             remoteContact.objectId = duplicate.objectId;
@@ -216,6 +218,8 @@ static bool syncing = false;
             }
             [localContact copyContact:remoteContact];
             [[ContactUtil shared] save:localContact];
+            [_preCheckCache addObject:remoteContact.displayName];
+            [_localContacts addObject:remoteContact];
             [[SyncStatus shared] addContact:remoteContact state:SYNC_INFO_UPDATED_ON_DEVICE];
         }
         [_dirtyContacts removeObjectForKey:remoteContact.objectId];
@@ -417,9 +421,16 @@ static bool syncing = false;
             if (hasAccess){
                 ContactSyncSDK *sdk = [ContactSyncSDK shared];
                 if ([SyncSettings shared].periodicSync){
-                    [sdk setupTimer];
+                    
+                    if([SyncSettings shared].delayInterval == SYNC_DEFAULT_DELAY){
+                        [sdk setupTimer];
+                        [sdk fireSynch];
+                    }else{
+                        [sdk firstFire];
+                    }
+                }else{
+                    [sdk fireSynch];
                 }
-                [sdk fireSynch];
             } else {
                 SYNC_Log(@"Sorry, user did not grant access to address book");
                 [[SyncHelper new] endOfSyncCycle:SYNC_RESULT_ERROR_PERMISSION_ADDRESS_BOOK];
@@ -437,23 +448,36 @@ static bool syncing = false;
 {
     [[ContactSyncSDK shared] fireSynch];
 }
-
+- (void)firstFire{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSTimeInterval delay = [SyncSettings shared].delayInterval;
+        _firstTimer=[NSTimer scheduledTimerWithTimeInterval:delay*60 target:self selector:@selector(fireSynch) userInfo:nil repeats:NO];
+    });
+}
 - (void)setupTimer
 {
     //do nothing if already has a timer
     if (self.timer && [self.timer isValid]){
         return;
     }
-    
+
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSTimeInterval interval = [SyncSettings shared].syncInterval*60;
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(fireSynch) userInfo:nil repeats:YES];
+        NSInteger interval = [SyncSettings shared].syncInterval;
+        NSInteger delay =[SyncSettings shared].delayInterval;
+        NSLog(@"Timer is running");
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:(interval+delay)*60 target:self selector:@selector(fireSynch) userInfo:nil repeats:YES];
+
     });
     
 }
 
 - (void)fireSynch
 {
+    if (_firstTimer && [self.firstTimer isValid]) {
+        [self setupTimer];
+        [self.firstTimer invalidate];
+        self.firstTimer =nil;
+    }
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [[ContactUtil shared] checkAddressbookAccess:^(BOOL hasAccess) {
             SyncHelper *helper = [SyncHelper new];
@@ -475,7 +499,11 @@ static bool syncing = false;
 + (void)sleep
 {
     ContactSyncSDK *sdk = [ContactSyncSDK shared];
-    if (sdk.timer && [sdk.timer isValid]){
+    if ((sdk.firstTimer && [sdk.firstTimer isValid])) {
+        [sdk.firstTimer invalidate];
+        sdk.firstTimer =nil;
+    }
+    if ((sdk.timer && [sdk.timer isValid])){
         [sdk.timer invalidate];
         sdk.timer = nil;
     }

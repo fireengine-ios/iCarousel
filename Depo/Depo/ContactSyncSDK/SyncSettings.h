@@ -41,6 +41,10 @@ typedef NS_ENUM(NSUInteger, SYNCEnvironment) {
  */
 @property NSTimeInterval syncInterval;
 /**
+ * Sync delay in minutes.
+ */
+@property (nonatomic) NSTimeInterval delayInterval;
+/**
  * Sync periodically. Period can be adjusted using syncInterval
  */
 @property (nonatomic) BOOL periodicSync;
@@ -54,5 +58,6 @@ typedef NS_ENUM(NSUInteger, SYNCEnvironment) {
  * selects a suitable url among predefined urls based on environment value
  */
 - (NSString*) endpointUrl;
+
 
 @end

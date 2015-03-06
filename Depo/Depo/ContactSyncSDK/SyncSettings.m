@@ -14,6 +14,7 @@
 @implementation SyncSettings
 
 @synthesize periodicSync = _periodicSync;
+@synthesize delayInterval = _delayInterval;
 
 #define CONTACT_SYNC_BASE_DEV_URL @"http://127.0.0.1:8002/sync/ttyapi/";
 #define CONTACT_SYNC_BASE_TEST_URL @"https://tcloudstb.turkcell.com.tr/ttyapi/";
@@ -26,7 +27,7 @@
         _debug = YES;
         _environment = SYNCDevelopmentEnvironment;
         _syncInterval = SYNC_DEFAULT_INTERVAL;
-        
+        _delayInterval = SYNC_DEFAULT_DELAY;
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSNumber *automated = [defaults objectForKey:SYNC_KEY_AUTOMATED];
         if (SYNC_IS_NULL(automated) || ![automated boolValue]){
@@ -66,7 +67,17 @@
 {
     return _periodicSync;
 }
-
+-(void)setDelayInterval:(NSTimeInterval)delayInterval{
+    _delayInterval=delayInterval;
+    NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
+    [defaults setObject:[NSNumber numberWithDouble:delayInterval] forKey:SYNC_KEY_DELAY];
+    [defaults synchronize];
+    
+}
+-(NSTimeInterval)delayInterval {
+    NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
+    return [defaults valueForKey:SYNC_KEY_DELAY]?[[defaults valueForKey:SYNC_KEY_DELAY] doubleValue]:SYNC_DEFAULT_DELAY;
+}
 - (NSString*)endpointUrl
 {
     if (self.url){

@@ -16,7 +16,7 @@
 #endif
 #endif
 
-#define SYNC_VERSION @"0.7.1"
+#define SYNC_VERSION @"0.8"
 #define SYNC_USER_AGENT @"iOS ContactSync SDK"
 
 #define SYNC_HEADER_AUTH_TOKEN @"X-Auth-Token"
@@ -27,8 +27,10 @@
 #define SYNC_KEY_AUTOMATED @"ContactSyncAutomated"
 #define SYNC_KEY_CHECK_UPDATE @"ContactSyncUpdateKey"
 #define SYNC_KEY_CONTACT_STORE @"ContactSyncContactStore"
+#define SYNC_KEY_DELAY @"ContactSyncDelay"
 
 #define SYNC_DEFAULT_INTERVAL 30
+#define SYNC_DEFAULT_DELAY 0
 
 #define SYNC_IS_NULL(obj) (obj==nil || [obj isKindOfClass:[NSNull class]])
 #define SYNC_STRING_IS_NULL_OR_EMPTY(obj) (obj==nil || [obj isKindOfClass:[NSNull class]] || [obj isEqualToString:@""])

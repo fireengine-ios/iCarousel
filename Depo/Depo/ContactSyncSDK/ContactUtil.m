@@ -65,7 +65,7 @@
     for ( int i = 0; i < size; i++ )
     {
         Contact *c = [localContacts objectAtIndex:i];
-        if ([c preEqualCheck:contact]){
+        if ([[c displayName] isEqualToString:[contact displayName]]){
             //pre check passed, continue further investigation
             [self fetchNumbers:c];
             [self fetchEmails:c];
@@ -280,23 +280,26 @@
         
         NSString *phoneNumber = (__bridge NSString *) phoneNumberRef;
         NSString *type = (__bridge NSString *) phoneTypeRef;
-        
+        NSString *clearMsisdn= [ContactUtil clearMsisdn:phoneNumber];
         CFRelease(phoneNumberRef);
+        
         BOOL shouldAdd = YES;
         if (phoneTypeRef==NULL || type==nil){
             shouldAdd = NO;
         } else {
             CFRelease(phoneTypeRef);
         }
-
-        if (shouldAdd){
-            SYNC_Log(@"%@ %@ phone :%@ %@", contact.firstName, contact.lastName, phoneNumber, type);
-
-            [contact.devices addObject:[[ContactPhone alloc] initWithValue:phoneNumber andType:type]];
-        }
         
+        ContactPhone *phone = (ContactPhone *)[[ContactPhone alloc] initWithValue:clearMsisdn andType:type];
+        if (![self isAdded:contact value:phone] && shouldAdd) {
+            SYNC_Log(@"%@ %@ phone :%@ %@", contact.firstName, contact.lastName, phoneNumber, type);
+            [contact.devices addObject:phone];
+        }
+
     }
-    CFRelease(multiPhones);
+    if (multiPhones!=NULL) {
+        CFRelease(multiPhones);
+    }
 }
 - (void)fetchEmails:(Contact*)contact
 {
@@ -317,20 +320,40 @@
             CFRelease(emailTypeRef);
         }
         
-        if (shouldAdd){
-            SYNC_Log(@"%@ %@ email :%@ %@", contact.firstName, contact.lastName, mailAddress, type);
-        
-            [contact.devices addObject:[[ContactEmail alloc] initWithValue:mailAddress andType:type]];
+        ContactEmail *newMail = [[ContactEmail alloc] initWithValue:mailAddress andType:type];
+        if (![self isAdded:contact value:newMail] && shouldAdd) {
+            SYNC_Log(@"%@ %@ phone :%@ %@", contact.firstName, contact.lastName, mailAddress, type);
+            [contact.devices addObject:newMail];
         }
     }
-    CFRelease(multiEmails);
+    if (multiEmails!=NULL) {
+        CFRelease(multiEmails);
+    }
 }
-
+-(BOOL)isAdded:(Contact*)contact value:(ContactDevice*)newValue{
+    if (contact.devices.count==0) {
+        return NO;
+    }
+    
+    if ([contact.devices containsObject:newValue]) {
+        return YES;
+    }else{
+        return NO;
+    }
+}
 + (NSString*)clearMsisdn:(NSString*)input
 {
     NSError *error = nil;
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[ ()-]" options:NSRegularExpressionCaseInsensitive error:&error];
     NSString *str = regex == nil ? input : [regex stringByReplacingMatchesInString:input options:0 range:NSMakeRange(0, [input length]) withTemplate:@""];
+     NSMutableString *ptr=[[NSMutableString alloc ]init];
+    for (int i=0; i< [str length]; i++) {
+       
+        if ([str characterAtIndex:i]<127) {
+            [ptr appendFormat:@"%c",[str characterAtIndex:i]];
+        }
+    }
+    str = [ptr copy];
     if ([str hasPrefix:@"+"]){
         return str;
     } else if ([str hasPrefix:@"00"]){

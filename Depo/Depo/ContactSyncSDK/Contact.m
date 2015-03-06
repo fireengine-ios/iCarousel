@@ -81,6 +81,54 @@
     SYNC_SET_DICT_IF_NOT_NIL(dict, self.middleName, @"middlename");
     SYNC_SET_DICT_IF_NOT_NIL(dict, self.lastName, @"lastname");
 
+    NSMutableSet *emailTypes= [[NSMutableSet alloc]initWithArray:@[
+                                 [NSNumber numberWithInteger:CDEVICE_HOME],
+                                 [NSNumber numberWithInteger:CDEVICE_WORK],
+                                 [NSNumber numberWithInteger:CDEVICE_OTHER],
+                                 ]];
+    
+    NSMutableSet *phoneTypes =[[NSMutableSet alloc]initWithArray:@[
+                                 [NSNumber numberWithInteger:CDEVICE_HOME],
+                                 [NSNumber numberWithInteger:CDEVICE_MOBILE],
+                                 [NSNumber numberWithInteger:CDEVICE_WORK],
+                                 [NSNumber numberWithInteger:CDEVICE_WORK_MOBILE],
+                                 [NSNumber numberWithInteger:CDEVICE_OTHER]
+                                 ,]];
+    NSMutableArray *duplicated=[[NSMutableArray alloc] init];
+    
+    for (ContactDevice *device in _devices) {
+        if ([device isKindOfClass:[ContactPhone class]]) {
+            if ([phoneTypes containsObject:[NSNumber numberWithInteger:device.type]]) {
+                [phoneTypes removeObject:[NSNumber numberWithInteger:device.type]];
+            }else{
+                [duplicated addObject:device];
+            }
+        }else{
+            if ([emailTypes containsObject:[NSNumber numberWithInteger:device.type]]) {
+                [emailTypes removeObject:[NSNumber numberWithInteger:device.type]];
+            }else{
+                [duplicated addObject:device];
+            }
+        }
+    }
+    
+    NSMutableArray *remainingPhone = [[NSMutableArray alloc] initWithArray: [phoneTypes allObjects]];
+    NSMutableArray *remainingEmail = [[NSMutableArray alloc] initWithArray: [emailTypes allObjects]];
+    if (duplicated.count>0) {
+        for (ContactDevice *device in duplicated) {
+            if ([device isKindOfClass:[ContactPhone class]]) {
+                if (remainingPhone.count>0) {
+                    device.type=(SYNCDeviceType)[[remainingPhone firstObject] integerValue];
+                    [remainingPhone removeObjectAtIndex:0];
+                }
+            }else{
+                if (remainingEmail.count>0) {
+                    device.type=(SYNCDeviceType)[[remainingEmail firstObject] integerValue];
+                    [remainingEmail removeObjectAtIndex:0];
+                }
+            }
+        }
+    }
     
     NSMutableArray *array = [NSMutableArray new];
     for (ContactDevice *device in _devices){
@@ -134,25 +182,7 @@
         return NO;
     }
     Contact *other = object;
-    if (SYNC_IS_NULL(_firstName)){
-        if (!SYNC_IS_NULL(other.firstName) && other.firstName.length!=0){
-            return NO;
-        }
-    } else if (![_firstName isEqualToString:other.firstName]){
-        return NO;
-    }
-    if (SYNC_IS_NULL(_middleName)){
-        if (!SYNC_IS_NULL(other.middleName) && other.middleName.length!=0){
-            return NO;
-        }
-    } else if (![_middleName isEqualToString:other.middleName]){
-        return NO;
-    }
-    if (SYNC_IS_NULL(_lastName)){
-        if (!SYNC_IS_NULL(other.lastName) && other.lastName.length!=0){
-            return NO;
-        }
-    } else if (![_lastName isEqualToString:other.lastName]){
+    if (![[self displayName] isEqualToString:[other displayName]]) {
         return NO;
     }
     if (SYNC_IS_NULL(_devices)){
@@ -197,12 +227,14 @@
 
 - (NSString*)displayName
 {
+    NSMutableString *displayName=[[NSMutableString alloc]init];
     if (SYNC_STRING_IS_NULL_OR_EMPTY(self.middleName)){
-        return [NSString stringWithFormat:@"%@ %@",(SYNC_IS_NULL(self.firstName)?@"":self.firstName), (SYNC_IS_NULL(self.lastName)?@"":self.lastName)];
+        [displayName appendString:[NSString stringWithFormat:@"%@ %@",(SYNC_IS_NULL(self.firstName)?@"":self.firstName), (SYNC_IS_NULL(self.lastName)?@"":self.lastName)]];
     } else {
-        return [NSString stringWithFormat:@"%@ %@ %@",(SYNC_IS_NULL(self.firstName)?@"":self.firstName), self.middleName, (SYNC_IS_NULL(self.lastName)?@"":self.lastName)];
+        [displayName appendString:[NSString stringWithFormat:@"%@ %@ %@",(SYNC_IS_NULL(self.firstName)?@"":self.firstName), self.middleName, (SYNC_IS_NULL(self.lastName)?@"":self.lastName)]];
     }
     
+    return [displayName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 }
 
 - (void) copyContact:(Contact *)contact

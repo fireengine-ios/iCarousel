@@ -32,8 +32,7 @@
     if ([self isKindOfClass:[ContactPhone class]]){
         value = [ContactUtil clearMsisdn:self.value];
     }
-    NSString *key = [NSString stringWithFormat:@"%@-%@",value, [self deviceTypeLabel]];
-    return key;
+    return value;
 }
 
 - (CFStringRef)deviceTypeLabel
