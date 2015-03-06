@@ -218,7 +218,6 @@
 }
 
 - (void) didApproveCustomAlert:(CustomConfirmView *)alertView {
-    [alertView removeFromSuperview];
     [self activateOffer:selectedOffer];
 }
 
