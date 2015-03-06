@@ -12,6 +12,7 @@
 #import "SettingsDocumentsController.h"
 #import "SettingsContactsController.h"
 #import "Util.h"
+#import "AppDelegate.h"
 
 @interface SettingsUploadController ()
 
@@ -44,14 +45,20 @@
 
 - (void) viewWillDisappear:(BOOL)animated {
     if (currentSyncPhotosVideosSetting != oldSyncPhotosVideosSetting) {
-        ALAssetsLibrary *assetsLibrary = [[ALAssetsLibrary alloc] init];
-        [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-            if(group == nil) {
-                [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOn];
-            }
-        } failureBlock:^(NSError *error) {
-            [self showErrorAlertWithMessage:NSLocalizedString(@"ALAssetsAccessError", @"")];
-        }];
+        if(currentSyncPhotosVideosSetting == EnableOptionOn) {
+            ALAssetsLibrary *assetsLibrary = [[ALAssetsLibrary alloc] init];
+            [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+                if(group == nil) {
+                    [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOn];
+                    [APPDELEGATE.syncManager manuallyCheckIfAlbumChanged];
+                }
+            } failureBlock:^(NSError *error) {
+                [self showErrorAlertWithMessage:NSLocalizedString(@"ALAssetsAccessError", @"")];
+            }];
+        } else {
+            [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOff];
+            [APPDELEGATE.uploadQueue cancelRemainingUploads];
+        }
     }
     if (currentSyncContactsSetting != oldSyncContactsSetting)
         [CacheUtil writeCachedSettingSyncContacts:currentSyncContactsSetting];

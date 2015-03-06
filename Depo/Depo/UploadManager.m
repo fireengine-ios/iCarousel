@@ -12,6 +12,7 @@
 #import "Util.h"
 #import "AppUtil.h"
 #import "UploadQueue.h"
+#import <MobileCoreServices/MobileCoreServices.h>
 
 typedef void (^ALAssetsLibraryAssetForURLResultBlock)(ALAsset *asset);
 typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
@@ -120,9 +121,42 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         }
         
         @autoreleasepool {
+            ALAssetRepresentation *rep = [asset defaultRepresentation];
+            
+            NSMutableData *imgData = [NSMutableData data];
+            
+            // now loop, reading data into buffer and writing that to our data strea
+            NSError *error;
+            long long bufferOffset = 0ll;
+            NSInteger bufferSize = 10000;
+            long long bytesRemaining = [rep size];
+            uint8_t buffer[bufferSize];
+            NSUInteger bytesRead;
+            while (bytesRemaining > 0) {
+                bytesRead = [rep getBytes:buffer fromOffset:bufferOffset length:bufferSize error:&error];
+                if (bytesRead == 0) {
+                    NSLog(@"error reading asset representation: %@", error);
+                    return;
+                }
+                bytesRemaining -= bytesRead;
+                bufferOffset   += bytesRead;
+                [imgData appendBytes:buffer length:bytesRead];
+            }
+            [imgData writeToFile:tempPath atomically:YES];
+            
+            /*
+            NSString *mimeType = (__bridge_transfer NSString*) UTTypeCopyPreferredTagWithClass
+            ((__bridge CFStringRef)[rep UTI], kUTTagClassMIMEType);
+            NSLog(@"MIME TYPE: %@", mimeType);
+            
             UIImage *image = [UIImage imageWithCGImage:[self.asset.defaultRepresentation fullResolutionImage] scale:1.0 orientation:orientation];
-//            UIImage *image = [UIImage imageWithCGImage:[self.asset.defaultRepresentation fullResolutionImage]];
-            [UIImagePNGRepresentation(image) writeToFile:tempPath atomically:YES];
+            //            UIImage *image = [UIImage imageWithCGImage:[self.asset.defaultRepresentation fullResolutionImage]];
+            if([[mimeType lowercaseString] isEqualToString:CONTENT_TYPE_JPEG_VALUE] || [[mimeType lowercaseString] isEqualToString:CONTENT_TYPE_JPG_VALUE]) {
+                [UIImageJPEGRepresentation(image, 1.0) writeToFile:tempPath atomically:YES];
+            } else {
+                [UIImagePNGRepresentation(image) writeToFile:tempPath atomically:YES];
+            }
+             */
         }
 
         @autoreleasepool {
