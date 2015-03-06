@@ -72,11 +72,23 @@
         messageLabel.numberOfLines = 0;
         [modalView addSubview:messageLabel];
         
-        CustomButton *rejectButton = [[CustomButton alloc] initWithFrame:CGRectMake(19, modalView.frame.size.height - 66, 116, 52) withImageName:@"filter_gributon.png" withTitle:cancelTitle withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[UIColor whiteColor]];
+        CustomButton *rejectButton = [[CustomButton alloc] initWithFrame:CGRectMake(19, modalView.frame.size.height - 66, 116, 52)];
+        [rejectButton setTitle:cancelTitle forState:UIControlStateNormal];
+        rejectButton.backgroundColor = [UIColor whiteColor];
+        rejectButton.layer.borderColor = [Util UIColorForHexColor:@"e9ebef"].CGColor;
+        rejectButton.layer.borderWidth = 1.0f;
+        rejectButton.layer.cornerRadius = 5.0f;
+        [rejectButton setTitleColor:[Util UIColorForHexColor:@"292F3E"] forState:UIControlStateNormal];
+        rejectButton.titleLabel.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:18];
         [rejectButton addTarget:self action:@selector(triggerCancel) forControlEvents:UIControlEventTouchUpInside];
         [modalView addSubview:rejectButton];
         
-        CustomButton *approveButton = [[CustomButton alloc] initWithFrame:CGRectMake(145, modalView.frame.size.height - 66, 116, 52) withImageName:@"filter_saributon.png" withTitle:approveTitle withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[Util UIColorForHexColor:@"454545"]];
+        CustomButton *approveButton = [[CustomButton alloc] initWithFrame:CGRectMake(145, modalView.frame.size.height - 66, 116, 52)];
+        [approveButton setTitle:approveTitle forState:UIControlStateNormal];
+        approveButton.backgroundColor = [Util UIColorForHexColor:@"FEDB13"];
+        approveButton.layer.cornerRadius = 5.0f;
+        [approveButton setTitleColor:[Util UIColorForHexColor:@"292F3E"] forState:UIControlStateNormal];
+        approveButton.titleLabel.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:18];
         [approveButton addTarget:self action:@selector(triggerApprove) forControlEvents:UIControlEventTouchUpInside];
         [modalView addSubview:approveButton];
 

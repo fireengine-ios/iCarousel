@@ -43,8 +43,16 @@
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
-    if (currentSyncPhotosVideosSetting != oldSyncPhotosVideosSetting)
-        [CacheUtil writeCachedSettingSyncPhotosVideos:currentSyncPhotosVideosSetting];
+    if (currentSyncPhotosVideosSetting != oldSyncPhotosVideosSetting) {
+        ALAssetsLibrary *assetsLibrary = [[ALAssetsLibrary alloc] init];
+        [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+            if(group == nil) {
+                [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOn];
+            }
+        } failureBlock:^(NSError *error) {
+            [self showErrorAlertWithMessage:NSLocalizedString(@"ALAssetsAccessError", @"")];
+        }];
+    }
     if (currentSyncContactsSetting != oldSyncContactsSetting)
         [CacheUtil writeCachedSettingSyncContacts:currentSyncContactsSetting];
     if (currentConnectionSetting != oldConnectionSetting)

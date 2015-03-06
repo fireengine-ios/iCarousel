@@ -24,7 +24,7 @@ typedef enum {
 - (void) requestCurrentAccount;
 - (void) requestOffers;
 - (void) requestActivateOffer: (Offer *)offer;
-- (void) requestCancelSubscription: (Subscription *)subscription;
+//- (void) requestCancelSubscription: (Subscription *)subscription;
 - (void) requestIsJobExists;
 
 @end

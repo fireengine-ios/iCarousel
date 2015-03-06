@@ -8,8 +8,9 @@
 
 #import "SettingsBaseViewController.h"
 #import "AccountDao.h"
+#import "CustomConfirmView.h"
 
-@interface SettingsStorageController : SettingsBaseViewController {
+@interface SettingsStorageController : SettingsBaseViewController <CustomConfirmDelegate> {
     AccountDao *accountDaoToGetCurrentSubscription;
     AccountDao *accountDaoToGetOffers;
     AccountDao *accountDaoToActivateOffer;
@@ -18,6 +19,7 @@
     NSMutableArray *offers;
     int tableUpdateCounter;
     BOOL isJobExists;
+    Offer *selectedOffer;
 }
 
 @end

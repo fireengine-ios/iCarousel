@@ -296,6 +296,7 @@
 "UpgradeOptionsTitle"="PAKET SEÇİMİ";
 "Month"="Ay";
 "ActivateOfferSuccess"="Paket talebiniz alınmıştır, paketiniz aktiflendiğinde SMS ile bilgilendirileceksiniz.";
+"ActivateOfferApprove"="Paket değişikliği yapmak istediğinize emin misiniz?";
 
 "AutomaticSynchronization"="Otomatik Yedekleme";
 "Photos&Videos"="Fotoğraf ve Videolar";
@@ -439,3 +440,4 @@
 "Error"="Hata";
 "Info"="Bilgi";
 "OK"="Tamam";
+"Approve"="Onay";

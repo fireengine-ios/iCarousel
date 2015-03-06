@@ -94,7 +94,7 @@
             if (requestMethod == RequestMethodGetCurrentSubscription) {
                 NSDictionary *responseDict = [jsonParser objectWithString:responseStr];
                 Subscription *subscription = [self parseSubscription:responseDict];
-                if (subscription != nil && subscription.plan != nil && subscription.plan.name != nil) {
+                if (subscription != nil) {
                     [self shouldReturnSuccessWithObject:subscription];
                 } else {
                     [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];

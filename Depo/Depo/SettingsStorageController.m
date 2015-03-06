@@ -8,6 +8,8 @@
 
 #import "SettingsStorageController.h"
 #import "OfferCell.h"
+#import "CustomConfirmView.h"
+#import "AppDelegate.h"
 
 @interface SettingsStorageController ()
 
@@ -33,13 +35,15 @@
     [super showLoading];
     tableUpdateCounter++;
     
-    accountDaoToGetCurrentSubscription = [[AccountDao alloc]init];
-    accountDaoToGetCurrentSubscription.delegate = self;
-    accountDaoToGetCurrentSubscription.successMethod = @selector(loadCurrentSubscriptionCallback:);
-    accountDaoToGetCurrentSubscription.failMethod = @selector(loadCurrentSubscriptionFailCallback:);
-    [accountDaoToGetCurrentSubscription requestCurrentAccount];
+    if (accountDaoToGetCurrentSubscription == nil) {
+        accountDaoToGetCurrentSubscription = [[AccountDao alloc]init];
+        accountDaoToGetCurrentSubscription.delegate = self;
+        accountDaoToGetCurrentSubscription.successMethod = @selector(loadCurrentSubscriptionCallback:);
+        accountDaoToGetCurrentSubscription.failMethod = @selector(loadCurrentSubscriptionFailCallback:);
+        [accountDaoToGetCurrentSubscription requestCurrentAccount];
+    }
     
-    if (currentSubscription == nil) {
+    if (currentSubscription == nil && accountDaoToLearnIsJobExists == nil) {
         accountDaoToLearnIsJobExists = [[AccountDao alloc]init];
         accountDaoToLearnIsJobExists.delegate = self;
         accountDaoToLearnIsJobExists.successMethod = @selector(isJobExistsCallback:);
@@ -85,7 +89,7 @@
 
 - (void) loadOffersCallback:(NSArray *) files {
     offers = [[NSMutableArray alloc] initWithArray:files];
-    if (offers.count > 0 && currentSubscription != nil) {
+    if (offers.count > 0) {
         [super drawPageContentTable];
         [super hideLoading];
     }
@@ -102,6 +106,7 @@
     [offers removeAllObjects];
     [self loadPageContent];
     [pageContentTable reloadData];
+    [self.navigationController popViewControllerAnimated:YES];
     [super showInfoAlertWithMessage:NSLocalizedString(@"ActivateOfferSuccess", @"")];
 }
 
@@ -119,7 +124,9 @@
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        if ([currentSubscription.plan.role isEqualToString:@"demo"]) {
+        if (currentSubscription.plan == nil) {
+            return 0;
+        } else if ([currentSubscription.plan.role isEqualToString:@"demo"]) {
             return 1;
         } else {
             return 2;
@@ -130,12 +137,16 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (section == 0 && currentSubscription.plan == nil)
+        return 0;
     return 54;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        if (indexPath.row == 0)
+        if (currentSubscription.plan == nil)
+            return 0;
+        else if (indexPath.row == 0)
             return 69;
         else
             return 54;
@@ -199,14 +210,29 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
-        [super showLoading];
-        Offer *offer = [offers objectAtIndex:indexPath.row];
-        accountDaoToActivateOffer = [[AccountDao alloc]init];
-        accountDaoToGetOffers.delegate = self;
-        accountDaoToGetOffers.successMethod = @selector(activateOfferCallback);
-        accountDaoToGetOffers.failMethod = @selector(activateOfferFailCallback:);
-        [accountDaoToGetOffers requestActivateOffer:offer];
+        selectedOffer = [offers objectAtIndex:indexPath.row];
+        CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Approve", @"") withCancelTitle:NSLocalizedString(@"TitleNo", @"") withApproveTitle:NSLocalizedString(@"TitleYes", @"") withMessage:NSLocalizedString(@"ActivateOfferApprove", @"") withModalType:ModalTypeApprove];
+        confirm.delegate = self;
+        [APPDELEGATE showCustomConfirm:confirm];
     }
+}
+
+- (void) didApproveCustomAlert:(CustomConfirmView *)alertView {
+    [alertView removeFromSuperview];
+    [self activateOffer:selectedOffer];
+}
+
+- (void) didRejectCustomAlert:(CustomConfirmView *)alertView {
+    [alertView removeFromSuperview];
+}
+
+- (void) activateOffer:(Offer *)offer {
+    [super showLoading];
+    accountDaoToActivateOffer = [[AccountDao alloc]init];
+    accountDaoToGetOffers.delegate = self;
+    accountDaoToGetOffers.successMethod = @selector(activateOfferCallback);
+    accountDaoToGetOffers.failMethod = @selector(activateOfferFailCallback:);
+    [accountDaoToGetOffers requestActivateOffer:offer];
 }
 
 - (NSString *)getPackageDisplayName: (NSString *)roleName {
