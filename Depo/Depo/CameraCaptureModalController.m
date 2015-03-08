@@ -40,7 +40,7 @@
     UIImage *pickedImage = [info objectForKey:UIImagePickerControllerEditedImage];
     UIImage *resized = [pickedImage resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:pickedImage.size interpolationQuality:kCGInterpolationHigh];
 
-    [UIImagePNGRepresentation(resized) writeToFile:tempPath atomically:NO];
+    [UIImageJPEGRepresentation(resized, 1.0) writeToFile:tempPath atomically:NO];
     
     [modalDelegate cameraCapturaModalDidCaptureAndStoreImageToPath:tempPath withName:camImgName];
     [self dismissViewControllerAnimated:YES completion:nil];

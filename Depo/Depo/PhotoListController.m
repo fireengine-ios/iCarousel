@@ -446,6 +446,7 @@
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     CGPoint velocity = [scrollView.panGestureRecognizer velocityInView:scrollView.superview];
+    NSLog(@"AT scrollViewWillBeginDragging: %.2f", velocity.y);
     
     if(velocity.y > 0) {
         [self.nav showNavigationBar];
