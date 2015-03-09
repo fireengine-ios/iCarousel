@@ -85,10 +85,14 @@
 }
 
 - (void) fileDetailFooterDidTriggerDelete {
-    ConfirmDeleteModalController *confirmDelete = [[ConfirmDeleteModalController alloc] init];
-    confirmDelete.delegate = self;
-    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:confirmDelete];
-    [self presentViewController:modalNav animated:YES completion:nil];
+    if([CacheUtil showConfirmDeletePageFlag]) {
+        [self confirmDeleteDidConfirm];
+    } else {
+        ConfirmDeleteModalController *confirmDelete = [[ConfirmDeleteModalController alloc] init];
+        confirmDelete.delegate = self;
+        MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:confirmDelete];
+        [self presentViewController:modalNav animated:YES completion:nil];
+    }
 }
 
 - (void) fileDetailFooterDidTriggerShare {
@@ -152,10 +156,14 @@
 }
 
 - (void) moreMenuDidSelectDelete {
-    ConfirmDeleteModalController *confirmDelete = [[ConfirmDeleteModalController alloc] init];
-    confirmDelete.delegate = self;
-    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:confirmDelete];
-    [self presentViewController:modalNav animated:YES completion:nil];
+    if([CacheUtil showConfirmDeletePageFlag]) {
+        [self confirmDeleteDidConfirm];
+    } else {
+        ConfirmDeleteModalController *confirmDelete = [[ConfirmDeleteModalController alloc] init];
+        confirmDelete.delegate = self;
+        MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:confirmDelete];
+        [self presentViewController:modalNav animated:YES completion:nil];
+    }
 }
 
 - (void) moreMenuDidSelectFav {

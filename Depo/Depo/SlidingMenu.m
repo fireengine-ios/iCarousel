@@ -21,6 +21,7 @@
 @synthesize menuTable;
 @synthesize sectionMetaArray;
 @synthesize audioFooterView;
+@synthesize tableUpdateCounter;
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -32,6 +33,7 @@
             topIndex = 30;
         }
         
+        tableUpdateCounter = 1;
         [self updateMenuByLoginStatus];
         
         menuTable = [[UITableView alloc] initWithFrame:CGRectMake(0, topIndex, 276, self.frame.size.height-topIndex) style:UITableViewStylePlain];
@@ -148,13 +150,16 @@
 */
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	NSString *cellIdentifier = [NSString stringWithFormat:@"MenuCell%d-%d", indexPath.section, indexPath.row];
+	NSString *cellIdentifier = [NSString stringWithFormat:@"MenuCell%d-%d-%d", (int)indexPath.section, (int)indexPath.row, tableUpdateCounter];
     
     MetaMenu *metaData = [sectionMetaArray objectAtIndex:indexPath.section];
     
     if(APPDELEGATE.session.user) {
         if(indexPath.section == 0) {
-            MenuProfileCell *cell = [[MenuProfileCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withMetaData:metaData];
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+            if(!cell) {
+                cell = [[MenuProfileCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withMetaData:metaData];
+            }
             return cell;
         } else if(indexPath.section == 1) {
             MenuSearchCell *cell = [[MenuSearchCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withMetaData:metaData];
@@ -239,17 +244,20 @@
 
 - (void) loginSuccessful {
     [self updateMenuByLoginStatus];
+    tableUpdateCounter ++;
     [menuTable reloadData];
     [delegate didTriggerHome];
 }
 
 - (void) silentLoginSuccessful {
     [self updateMenuByLoginStatus];
+    tableUpdateCounter ++;
     [menuTable reloadData];
 }
 
 - (void) logoutSuccessful {
     [self updateMenuByLoginStatus];
+    tableUpdateCounter ++;
     [menuTable reloadData];
 }
 

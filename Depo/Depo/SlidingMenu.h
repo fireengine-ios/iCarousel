@@ -39,6 +39,7 @@
 @property (nonatomic, strong) UITableView *menuTable;
 @property (nonatomic, strong) NSArray *sectionMetaArray;
 @property (nonatomic, strong) AudioMenuFooterView *audioFooterView;
+@property (nonatomic) int tableUpdateCounter;
 
 - (void) updateMenuByLoginStatus;
 
