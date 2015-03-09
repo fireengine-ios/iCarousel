@@ -246,11 +246,11 @@ static bool syncing = false;
     for (SyncRecord *record in records){
         [_dirtyContacts removeObjectForKey:record.localId];
         SYNC_Log(@"Deleting row : %@", record.localId);
+        
         if ([[ContactUtil shared] deleteContact:record.localId]){
-            [toBeDeleted addObject:record.localId];
-            
             [[SyncStatus shared] addRecord:record state:SYNC_INFO_DELETED_ON_DEVICE];
         }
+        [toBeDeleted addObject:record.localId];
     }
     if ([toBeDeleted count]>0){
         [_db deleteRecords:toBeDeleted];

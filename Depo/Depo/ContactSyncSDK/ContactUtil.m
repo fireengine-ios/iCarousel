@@ -83,7 +83,7 @@
     if (record == NULL){
         //it does not exist
         SYNC_Log(@"Record already does not exist : %@", objectId);
-        return YES;
+        return NO;
     }
     CFErrorRef error;
     BOOL result = ABAddressBookRemoveRecord (_addressBook,record,&error); //remove it

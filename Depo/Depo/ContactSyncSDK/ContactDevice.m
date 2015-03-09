@@ -173,7 +173,7 @@
             break;
         }
         case CDEVICE_MOBILE:{
-            dict[@"infoType"] = @"perso";
+            dict[@"infoType"] = @"unknown";
             dict[@"subtype"] = @"cell";
             break;
         }
