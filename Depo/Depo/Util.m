@@ -98,6 +98,25 @@
     
 }
 
++ (NSString *) transformedHugeSizeValueNoDecimal:(long long) byteCount {
+    
+    double convertedValue = (double) byteCount;
+    int multiplyFactor = 0;
+    
+    NSArray *tokens = [NSArray arrayWithObjects:@"bytes", @"KB", @"MB", @"GB", @"TB", nil];
+    
+    while (convertedValue >= 1024) {
+        convertedValue /= 1024;
+        multiplyFactor++;
+    }
+    
+    if (multiplyFactor == 0 || multiplyFactor == 1 || multiplyFactor == 2)
+        return [NSString stringWithFormat:@"%d %@", (int)convertedValue, [tokens objectAtIndex:multiplyFactor]];
+    else
+        return [NSString stringWithFormat:@"%d %@", (int)convertedValue, [tokens objectAtIndex:multiplyFactor]];
+    
+}
+
 + (UIImage *)imageWithImage:(UIImage *)image scaledToFillSize:(CGSize)size {
     CGFloat scale = MAX(size.width/image.size.width, size.height/image.size.height);
     CGFloat width = image.size.width * scale;

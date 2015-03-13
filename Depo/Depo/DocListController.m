@@ -339,7 +339,7 @@
     isSelectible = NO;
     [selectedDocList removeAllObjects];
     
-    [APPDELEGATE.base immediateShowAddButton];
+//    [APPDELEGATE.base immediateShowAddButton];
     
     self.tableUpdateCounter++;
     [self.docTable reloadData];

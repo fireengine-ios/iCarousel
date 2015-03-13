@@ -80,6 +80,7 @@
         [self.view addSubview:lastSyncLabel];
         
         moreStorageButton = [[SimpleButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 150)/2, usageChart.frame.origin.y + usageChart.frame.size.height + (IS_IPHONE_5 ? 20 : 0), 150, 44) withTitle:NSLocalizedString(@"GetMoreStorageButtonTitle", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:22];
+        moreStorageButton.hidden = YES;
         [moreStorageButton addTarget:self action:@selector(triggerStoragePage) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:moreStorageButton];
         
@@ -188,6 +189,10 @@
     [videoButton addTarget:self action:@selector(triggerPhotosPage) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:videoButton];
 
+    double percentUsageVal = 100 * ((double)APPDELEGATE.session.usage.usedStorage/(double)APPDELEGATE.session.usage.totalStorage);
+    if(percentUsageVal >= 80) {
+        moreStorageButton.hidden = NO;
+    }
 }
 
 - (void) usageFailCallback:(NSString *) errorMessage {

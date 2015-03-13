@@ -438,7 +438,7 @@
     isSelectible = NO;
     [selectedMusicList removeAllObjects];
     
-    [APPDELEGATE.base immediateShowAddButton];
+//    [APPDELEGATE.base immediateShowAddButton];
     
     self.tableUpdateCounter++;
     [self.musicTable reloadData];

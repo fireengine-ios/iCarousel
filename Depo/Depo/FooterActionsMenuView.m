@@ -25,13 +25,13 @@
         self.backgroundColor = [Util UIColorForHexColor:@"363e4f"];
         
         if(shareFlag) {
-            shareButton = [[CustomButton alloc] initWithFrame:CGRectMake(15, 19, 16, 22) withImageName:@"white_share_icon.png"];
+            shareButton = [[CustomButton alloc] initWithFrame:CGRectMake(15, 19, 106, 22) withImageName:@"white_share_icon.png" withSideTitle:NSLocalizedString(@"ShareTitle", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[UIColor whiteColor]];
             [shareButton addTarget:self action:@selector(shareClicked) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:shareButton];
         }
         
         if(moveFlag) {
-            moveButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width/2 - 9, 20, 18, 20) withImageName:@"white_move_icon.png"];
+            moveButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width/2 - 28, 20, 56, 20) withImageName:@"white_move_icon.png" withSideTitle:NSLocalizedString(@"MoveTitle", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[UIColor whiteColor]];
             [moveButton addTarget:self action:@selector(moveClicked) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:moveButton];
         }

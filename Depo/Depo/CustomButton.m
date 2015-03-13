@@ -79,6 +79,27 @@
     return self;
 }
 
+- (id)initWithFrame:(CGRect)frame withImageName:(NSString *) imageName withSideTitle:(NSString *) title withFont:(UIFont *) font withColor:(UIColor *) textColor {
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.backgroundColor = [UIColor clearColor];
+        
+        UIImage *bgImg = [UIImage imageNamed:imageName];
+        UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, (self.frame.size.height - bgImg.size.height)/2, bgImg.size.width, bgImg.size.height)];
+        bgImgView.image = bgImg;
+        [self addSubview:bgImgView];
+        
+        titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(bgImg.size.width + 10, (self.frame.size.height - (font.lineHeight  + 5))/2, self.frame.size.width - bgImg.size.width - 10, font.lineHeight  + 5)];
+        titleLabel.text = title;
+        titleLabel.backgroundColor = [UIColor clearColor];
+        titleLabel.font = font;
+        titleLabel.textAlignment = NSTextAlignmentLeft;
+        titleLabel.textColor = textColor;
+        [self addSubview:titleLabel];
+    }
+    return self;
+}
+
 - (void) changeTextColor:(UIColor *) newColor {
     titleLabel.textColor = newColor;
 }

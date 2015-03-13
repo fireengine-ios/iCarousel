@@ -204,6 +204,7 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
                 [player addPeriodicTimeObserverForInterval:CMTimeMakeWithSeconds(0.1f, NSEC_PER_SEC)  queue:NULL usingBlock:^(CMTime time) {
                     [weakSelf syncSlider];
                 }];
+                [self performSelector:@selector(autoHideControls) withObject:nil afterDelay:3.0f];
             }
                 break;
                 
@@ -219,6 +220,16 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
     } else {
 		[super observeValueForKeyPath:path ofObject:object change:change context:context];
 	}
+}
+
+- (void) autoHideControls {
+    if(controlVisible) {
+        controlVisible = NO;
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:0.3f];
+        controlView.alpha = 0.0f;
+        [UIView commitAnimations];
+    }
 }
 
 - (void) videoTapped {
