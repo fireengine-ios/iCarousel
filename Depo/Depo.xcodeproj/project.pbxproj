@@ -27,6 +27,7 @@
 		050D4C3D1A31E58100809A01 /* contacts_backup@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 050D4C3B1A31E58100809A01 /* contacts_backup@2x.png */; };
 		050D4C401A31E77F00809A01 /* sync_prefs.png in Resources */ = {isa = PBXBuildFile; fileRef = 050D4C3E1A31E77F00809A01 /* sync_prefs.png */; };
 		050D4C411A31E77F00809A01 /* sync_prefs@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 050D4C3F1A31E77F00809A01 /* sync_prefs@2x.png */; };
+		050F4CCC1AB3267F008B0B96 /* VolumeSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050F4CCB1AB3267F008B0B96 /* VolumeSliderView.m */; };
 		05127EC319E19775002C2228 /* FileDetailInWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05127EC219E19775002C2228 /* FileDetailInWebViewController.m */; };
 		051412A019D46393000EAE63 /* Default_old.png in Resources */ = {isa = PBXBuildFile; fileRef = 0514129D19D46393000EAE63 /* Default_old.png */; };
 		051412A119D46393000EAE63 /* Default_old@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0514129E19D46393000EAE63 /* Default_old@2x.png */; };
@@ -668,6 +669,8 @@
 		050D4C3B1A31E58100809A01 /* contacts_backup@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "contacts_backup@2x.png"; sourceTree = "<group>"; };
 		050D4C3E1A31E77F00809A01 /* sync_prefs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sync_prefs.png; sourceTree = "<group>"; };
 		050D4C3F1A31E77F00809A01 /* sync_prefs@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sync_prefs@2x.png"; sourceTree = "<group>"; };
+		050F4CCA1AB3267F008B0B96 /* VolumeSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VolumeSliderView.h; sourceTree = "<group>"; };
+		050F4CCB1AB3267F008B0B96 /* VolumeSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VolumeSliderView.m; sourceTree = "<group>"; };
 		05127EC119E19775002C2228 /* FileDetailInWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileDetailInWebViewController.h; sourceTree = "<group>"; };
 		05127EC219E19775002C2228 /* FileDetailInWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileDetailInWebViewController.m; sourceTree = "<group>"; };
 		0514129D19D46393000EAE63 /* Default_old.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default_old.png; sourceTree = "<group>"; };
@@ -1854,6 +1857,8 @@
 				0551CE151A2B3E9700DB117D /* HomeUsageView.m */,
 				056BEC761A8AA55000BA0805 /* PreLoginInfoView.h */,
 				056BEC771A8AA55000BA0805 /* PreLoginInfoView.m */,
+				050F4CCA1AB3267F008B0B96 /* VolumeSliderView.h */,
+				050F4CCB1AB3267F008B0B96 /* VolumeSliderView.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -3276,6 +3281,7 @@
 				056AC8FE19D15EA200AC96C3 /* CacheUtil.m in Sources */,
 				051E1E8119CAC92700FD1E03 /* NSString+SBJSON.m in Sources */,
 				05B4F4E51A74524100F3A7EC /* AccountInfoDao.m in Sources */,
+				050F4CCC1AB3267F008B0B96 /* VolumeSliderView.m in Sources */,
 				562FB3FD1AA48C4400F9EFBD /* CurioLocationManager.m in Sources */,
 				059785BD1A0525B600A101EF /* FooterActionsMenuView.m in Sources */,
 				053F993719E1BE6F00928F22 /* PreviewUnavailableController.m in Sources */,

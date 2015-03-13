@@ -117,7 +117,11 @@
 #pragma mark MoreMenuDelegate
 
 - (void) moreMenuDidSelectDelete {
-    [APPDELEGATE.base showConfirmDelete];
+    if([CacheUtil showConfirmDeletePageFlag]) {
+        [self confirmDeleteDidConfirm];
+    } else {
+        [APPDELEGATE.base showConfirmDelete];
+    }
 }
 
 - (void) moreMenuDidSelectFav {

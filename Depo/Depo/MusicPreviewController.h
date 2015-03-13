@@ -11,7 +11,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "CustomButton.h"
 #import "CustomLabel.h"
-#import "VolumeLevelIndicator.h"
+#import "VolumeSliderView.h"
 
 #import "DeleteDao.h"
 #import "FavoriteDao.h"
@@ -21,7 +21,7 @@
 - (void) previewedMusicWasDeleted;
 @end
 
-@interface MusicPreviewController : MyViewController <VolumeLevelDelegate> {
+@interface MusicPreviewController : MyViewController <VolumeSliderDelegate> {
     CustomButton *moreButton;
     CustomLabel *titleLabel;
     CustomLabel *detailLabel;
@@ -45,10 +45,9 @@
 @property (nonatomic, strong) CustomButton *volumeButton;
 @property (nonatomic, strong) CustomButton *shuffleButton;
 @property (nonatomic, strong) UIView *playControlView;
-@property (nonatomic, strong) UIView *customVolumeView;
+@property (nonatomic, strong) VolumeSliderView *customVolumeView;
 @property (nonatomic, strong) UILabel *totalDuration;
 @property (nonatomic, strong) UILabel *passedDuration;
-@property (nonatomic, strong) NSMutableArray *volumeLevels;
 @property (nonatomic, strong) UISlider *slider;
 @property (nonatomic) int totalTimeInSec;
 @property (nonatomic) int yIndex;

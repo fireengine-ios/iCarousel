@@ -37,7 +37,6 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 @synthesize passedDuration;
 @synthesize slider;
 @synthesize totalTimeInSec;
-@synthesize volumeLevels;
 @synthesize controlView;
 @synthesize yIndex;
 @synthesize seekToZeroBeforePlay;
@@ -64,8 +63,6 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
         renameDao.delegate = self;
         renameDao.successMethod = @selector(renameSuccessCallback:);
         renameDao.failMethod = @selector(renameFailCallback:);
-
-        volumeLevels = [[NSMutableArray alloc] init];
 
         UIImage *albumImg = [UIImage imageNamed:@"no_music_icon.png"];
         UIImageView *albumImgView = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - albumImg.size.width)/2, 60, albumImg.size.width, albumImg.size.height)];
@@ -126,8 +123,6 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
         renameDao.delegate = self;
         renameDao.successMethod = @selector(renameSuccessCallback:);
         renameDao.failMethod = @selector(renameFailCallback:);
-        
-        volumeLevels = [[NSMutableArray alloc] init];
         
         UIImage *albumImg = [UIImage imageNamed:@"no_music_icon.png"];
         UIImageView *albumImgView = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - albumImg.size.width)/2, 60, albumImg.size.width, albumImg.size.height)];
@@ -202,7 +197,7 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
     }];
 
     float currentVolumeVal = [APPDELEGATE.session.audioPlayer volume];
-    [self initialVolumeLevel:currentVolumeVal];
+    [customVolumeView setInitialVolumeLevels:currentVolumeVal];
 
     playButton.hidden = YES;
     pauseButton.hidden = NO;
@@ -220,7 +215,7 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
     }];
     
     float currentVolumeVal = [APPDELEGATE.session.audioPlayer volume];
-    [self initialVolumeLevel:currentVolumeVal];
+    [customVolumeView setInitialVolumeLevels:currentVolumeVal];
     
     playButton.hidden = YES;
     pauseButton.hidden = NO;
@@ -293,26 +288,11 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
     [shuffleButton addTarget:self action:@selector(shuffleClicked) forControlEvents:UIControlEventTouchUpInside];
     [playControlView addSubview:shuffleButton];
     
-    customVolumeView = [[UIView alloc] initWithFrame:CGRectMake(0, 51, controlView.frame.size.width, controlView.frame.size.height - 51)];
+    customVolumeView = [[VolumeSliderView alloc] initWithFrame:CGRectMake(0, 51, controlView.frame.size.width, controlView.frame.size.height - 51)];
     customVolumeView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"video-player-bckgrnd.png"]];
     customVolumeView.hidden = YES;
+    customVolumeView.delegate = self;
     [controlView addSubview:customVolumeView];
-    
-    CustomButton *volumeMuteButton = [[CustomButton alloc] initWithFrame:CGRectMake(3, 15, 30, 30) withImageName:@"volume_mute.png"];
-    [volumeMuteButton addTarget:self action:@selector(volumeMuteClicked) forControlEvents:UIControlEventTouchUpInside];
-    [customVolumeView addSubview:volumeMuteButton];
-    
-    CustomButton *volumeFullButton = [[CustomButton alloc] initWithFrame:CGRectMake(controlView.frame.size.width - 36, 15, 30, 30) withImageName:@"volume_full.png"];
-    [volumeFullButton addTarget:self action:@selector(volumeFullClicked) forControlEvents:UIControlEventTouchUpInside];
-    [customVolumeView addSubview:volumeFullButton];
-    
-    for(int i=0; i<23; i++) {
-        VolumeLevelIndicator *volIndicator = [[VolumeLevelIndicator alloc] initWithFrame:CGRectMake(50 + (i-1)*10, 26, 8, 8) withLevel:(i+1)];
-        volIndicator.delegate = self;
-        [customVolumeView addSubview:volIndicator];
-        
-        [volumeLevels addObject:volIndicator];
-    }
 }
 
 - (void) triggerDismiss {
@@ -385,17 +365,6 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
         [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0], NSForegroundColorAttributeName, nil]];
         
         [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys: [UIColor whiteColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"TurkcellSaturaDem" size:18], NSFontAttributeName, nil]];
-    }
-}
-
-- (void) initialVolumeLevel:(float) level {
-    int currentLevel = floor(level / 0.04f);
-    for(VolumeLevelIndicator *level in volumeLevels) {
-        if(level.level <= currentLevel) {
-            [level manuallyActivate];
-        } else {
-            [level manuallyDeactivate];
-        }
     }
 }
 
@@ -479,29 +448,16 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
     playControlView.hidden = NO;
 }
 
-- (void) volumeFullClicked {
-    for(VolumeLevelIndicator *level in volumeLevels) {
-        [level manuallyActivate];
-    }
-    [self changeVolumeTo:1.0f];
-}
-
-- (void) volumeMuteClicked {
-    for(VolumeLevelIndicator *level in volumeLevels) {
-        [level manuallyDeactivate];
-    }
+- (void) volumeSliderDidSelectMute {
     [self changeVolumeTo:0.0f];
 }
 
-- (void) volumeLevelIndicatorWasSelected:(int)levelSelected {
-    for(VolumeLevelIndicator *level in volumeLevels) {
-        if(level.level <= levelSelected) {
-            [level manuallyActivate];
-        } else {
-            [level manuallyDeactivate];
-        }
-    }
-    [self changeVolumeTo:0.04*levelSelected];
+- (void) volumeSliderDidSelectMax {
+    [self changeVolumeTo:1.0f];
+}
+
+- (void) volumeSliderDidChangeTo:(float)newVolumeVal {
+    [self changeVolumeTo:newVolumeVal];
 }
 
 - (void) updateTime:(int) time withTotalDuration:(int) totalDur {
@@ -693,7 +649,11 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 #pragma mark MoreMenuDelegate
 
 - (void) moreMenuDidSelectDelete {
-    [APPDELEGATE.base showConfirmDelete];
+    if([CacheUtil showConfirmDeletePageFlag]) {
+        [self confirmDeleteDidConfirm];
+    } else {
+        [APPDELEGATE.base showConfirmDelete];
+    }
 }
 
 - (void) moreMenuDidSelectFav {

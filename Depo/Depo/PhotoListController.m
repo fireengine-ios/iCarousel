@@ -442,9 +442,29 @@
             }
         }
     }
+
+    CGPoint translation = [scrollView.panGestureRecognizer translationInView:scrollView];
+    if(translation.y > 0) {
+        [self.nav showNavigationBar];
+        photosScroll.frame = CGRectMake(photosScroll.frame.origin.x, photosScroll.frame.origin.y, photosScroll.frame.size.width, normalizedContentHeight);
+        albumTable.frame = CGRectMake(albumTable.frame.origin.x, albumTable.frame.origin.y, albumTable.frame.size.width, normalizedContentHeight);
+    } else {
+        [self.nav hideNavigationBar];
+        photosScroll.frame = CGRectMake(photosScroll.frame.origin.x, photosScroll.frame.origin.y, photosScroll.frame.size.width, maximizedContentHeight);
+        albumTable.frame = CGRectMake(albumTable.frame.origin.x, albumTable.frame.origin.y, albumTable.frame.size.width, maximizedContentHeight);
+    }
+    if(imgFooterActionMenu) {
+        imgFooterActionMenu.frame = CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60);
+    }
+    if(albumFooterActionMenu) {
+        albumFooterActionMenu.frame = CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60);
+    }
+    if(self.processView) {
+        self.processView.frame = CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60);
+    }
 }
 
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+- (void)sscrollViewWillBeginDragging:(UIScrollView *)scrollView {
     CGPoint velocity = [scrollView.panGestureRecognizer velocityInView:scrollView.superview];
     NSLog(@"AT scrollViewWillBeginDragging: %.2f", velocity.y);
     
