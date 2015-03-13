@@ -85,11 +85,11 @@
 - (void)autoSyncSwitchChanged:(id)sender
 {
     if (![autoSyncSwitch isOn]) {
-        [self fadeOut:choiceTable duration:0.3];
-        [self fadeOut:choiceTitleLabel duration:0.3];
+        [self fadeOut:choiceTable duration:0.1];
+        [self fadeOut:choiceTitleLabel duration:0.1];
     } else {
-        [self fadeIn:choiceTable duration:0.3];
-        [self fadeIn:choiceTitleLabel duration:0.3];
+        [self fadeIn:choiceTable duration:0.1];
+        [self fadeIn:choiceTitleLabel duration:0.1];
     }
 }
 

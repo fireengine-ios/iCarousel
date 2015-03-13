@@ -17,5 +17,7 @@
 + (NSString *) transformedSizeValue:(long) byteCount;
 + (NSString *) transformedHugeSizeValue:(long long) byteCount;
 + (UIImage *)imageWithImage:(UIImage *)image scaledToFillSize:(CGSize)size;
++ (NSString *) uniqueGlobalDeviceIdentifier;
++ (NSString *) getWorkaroundUUID;
 
 @end

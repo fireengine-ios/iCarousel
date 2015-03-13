@@ -222,7 +222,7 @@
 }
 
 - (void) didRejectCustomAlert:(CustomConfirmView *)alertView {
-    [alertView removeFromSuperview];
+//    [alertView removeFromSuperview];
 }
 
 - (void) activateOffer:(Offer *)offer {

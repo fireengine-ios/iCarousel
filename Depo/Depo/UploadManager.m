@@ -187,6 +187,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     [request setHTTPMethod:@"PUT"];
     [request setValue:APPDELEGATE.session.authToken forHTTPHeaderField:@"X-Auth-Token"];
     [request setValue:@"false" forHTTPHeaderField:@"X-Object-Meta-Favourite"];
+    [request setValue:[Util getWorkaroundUUID] forHTTPHeaderField:@"X-Object-Meta-Device-UUID"];
     [request setValue:@"1" forHTTPHeaderField:@"x-meta-strategy"];
     [request setValue:@"100-continue" forHTTPHeaderField:@"Expect"];
     if(self.uploadRef.folder) {

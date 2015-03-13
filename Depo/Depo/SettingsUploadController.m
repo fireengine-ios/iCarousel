@@ -45,7 +45,7 @@
 
 - (void) viewWillDisappear:(BOOL)animated {
     if (currentSyncPhotosVideosSetting != oldSyncPhotosVideosSetting) {
-        if(currentSyncPhotosVideosSetting == EnableOptionOn) {
+        if(currentSyncPhotosVideosSetting == EnableOptionOn || currentSyncPhotosVideosSetting == EnableOptionAuto) {
             ALAssetsLibrary *assetsLibrary = [[ALAssetsLibrary alloc] init];
             [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
                 if(group == nil) {
@@ -67,7 +67,7 @@
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
-    return (currentSyncPhotosVideosSetting == EnableOptionOn || currentSyncContactsSetting == EnableOptionOn) ? 2 : 1;
+    return (currentSyncPhotosVideosSetting == EnableOptionOn || currentSyncPhotosVideosSetting == EnableOptionAuto || currentSyncContactsSetting == EnableOptionOn || currentSyncContactsSetting == EnableOptionAuto) ? 2 : 1;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -116,14 +116,14 @@
     
     if (indexPath.section == 0) {
         if(indexPath.row == 0) {
-            TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"Photos&Videos", @"") subTitletext: @"" SwitchButtonStatus:currentSyncPhotosVideosSetting == EnableOptionOn hasSeparator:NO];
+            TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"Photos&Videos", @"") subTitletext: @"" SwitchButtonStatus:(currentSyncPhotosVideosSetting == EnableOptionOn || currentSyncPhotosVideosSetting == EnableOptionAuto) hasSeparator:NO];
             [cell.switchButton addTarget:self action:@selector(setSyncPhotosVideosSetting:) forControlEvents:UIControlEventValueChanged];
             return cell;
         } else if (indexPath.row == 1) {
             TextCell *cell = [[TextCell alloc]initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"" titleColor:nil contentText:photosVideosInfo contentTextColor:nil backgroundColor:[UIColor whiteColor] hasSeparator:YES];
             return cell;
         } else if(indexPath.row == 2) {
-            TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"Contacts", @"") subTitletext: @"" SwitchButtonStatus:currentSyncContactsSetting == EnableOptionOn hasSeparator:NO];
+            TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"Contacts", @"") subTitletext: @"" SwitchButtonStatus:(currentSyncContactsSetting == EnableOptionOn || currentSyncContactsSetting == EnableOptionAuto) hasSeparator:NO];
             [cell.switchButton addTarget:self action:@selector(setSyncContactsSetting:) forControlEvents:UIControlEventValueChanged];
             return cell;
         } else if (indexPath.row == 3) {

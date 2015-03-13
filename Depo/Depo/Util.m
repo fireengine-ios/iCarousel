@@ -7,6 +7,7 @@
 //
 
 #import "Util.h"
+#import "AppConstants.h"
 
 @implementation Util
 
@@ -111,6 +112,27 @@
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return newImage;
+}
+
++ (NSString *) uniqueGlobalDeviceIdentifier {
+    if (SYSTEM_VERSION_LESS_THAN(@"6.0")) {
+        return [Util getWorkaroundUUID];
+    } else {
+        NSString *uniqueIdentifier = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+        return uniqueIdentifier;
+    }
+}
+
++ (NSString *) getWorkaroundUUID {
+    NSString *UUID = [[NSUserDefaults standardUserDefaults] objectForKey:@"tsdk_unique_id"];
+    if (!UUID) {
+        CFUUIDRef theUUID = CFUUIDCreate(NULL);
+        CFStringRef string = CFUUIDCreateString(NULL, theUUID);
+        CFRelease(theUUID);
+        UUID = [(__bridge NSString*)string stringByReplacingOccurrencesOfString:@"-"withString:@""];
+        [[NSUserDefaults standardUserDefaults] setValue:UUID forKey:@"tsdk_unique_id"];
+    }
+    return UUID;
 }
 
 @end

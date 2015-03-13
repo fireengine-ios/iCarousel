@@ -7,7 +7,7 @@
 "MenuFiles"="Tüm Dosyalar";
 "MenuPhoto"="Fotoğraf ve Videolar";
 "MenuMusic"="Müzikler";
-"MenuDoc"="Dökümanlar";
+"MenuDoc"="Belgeler";
 "MenuLogout"="Çıkış Yap";
 "AddTypeMusicTitle"="Müzik Yükle";
 "AddTypeFolderTitle"="Yeni Klasör";
@@ -114,8 +114,8 @@
 "MoveSuccessMessage"="Başarıyla taşındı";
 "MoveFailMessage"="Dosya taşınırken hata oluştu";
 "MusicTitle"="Müziklerim";
-"DocTitle"="Dökümanlar";
-"ContactSyncTitle"="Rehber Yedekleme";
+"DocTitle"="Belgeler";
+"ContactSyncTitle"="Telefon Rehberi";
 "MoveModalSubTitle"="Dosyaların taşınacağı klasörü seç";
 "MoveModalSubTitleForAlbum"="Dosyaların taşınacağı albümü seç";
 "AlbumAddProgressMessage"="Albüm Oluşturuluyor";
@@ -159,8 +159,8 @@
 "DeleteAlbumProgressMessage"="Albüm Siliniyor";
 "DeleteAlbumSuccessMessage"="Albüm silindi";
 "DeleteAlbumFailMessage"="Albüm silinirken hata oluştu";
-"RecentActivitiesTitle"="En Son Aktiviteler";
-"RecentActivityLinkerTitle"="En Son Aktiviteler";
+"RecentActivitiesTitle"="En Son İşlemler";
+"RecentActivityLinkerTitle"="En Son İşlemler";
 "TodayTitle"="BUGÜN";
 "RecentSectionDateFormat"="dd MMM";
 "SelfMoveError"="Bir klasörü kendi içine taşıyamazsınız";
@@ -298,7 +298,7 @@
 "ActivateOfferSuccess"="Paket talebiniz alınmıştır, paketiniz aktiflendiğinde SMS ile bilgilendirileceksiniz.";
 "ActivateOfferApprove"="Paket değişikliği yapmak istediğinize emin misiniz?";
 
-"AutomaticSynchronization"="Otomatik Yedekleme";
+"AutomaticSynchronization"="Otomatik Yükleme";
 "Photos&Videos"="Fotoğraf ve Videolar";
 "Photos&VideosInfo"="Fotoğraf ve videolarınızın Akıllı Depo'nuzda otomatik olarak yedeklenmesi için açık konuma getirin.";
 "Photos&VideosAutoInfo"="Akıllı Depo'daki fotoğraf ve videolarınıza erişebilir ve istediğinizde albümünüzdeki fotoğraf ve videoları Akıllı Depo'ya yükleyebilirsiniz.\n\n(Fotoğraf ve videoları Akıllı Depo'ya yüklemek için uygulamadaki \"+\" butonunu kullanın.)\n\nOtomatik yükleme etkin durumda, albümünüzdeki fotoğraf ve videolar otomatik olarak bulutta yedeklenecek.";
@@ -307,7 +307,7 @@
 "Music"="Müzik";
 "MusicOnInfo"="Akıllı Depo'daki müziklerinize erişebilir ve istediğinizde iPhone'ununuzdaki müzikleri Akıllı Depo'ya yükleyebilirsiniz.\n\n(iTunes kütüphanenizdeki parçaları Akıllı Depo'ya yüklemek için uygulamadaki \"+\" butonunu kullanın.)";
 "MusicOffInfo"="Akıllı Depo'daki müziklerinize erişemez ve Akıllı Depo'ya yeni müzik yükleyemezsiniz.";
-"Documents"="Dökümanlar";
+"Documents"="Belgeler";
 "DocumentsOnInfo"="Akıllı Depo'daki dökümanlarınıza erişebilir ve istediğinizde dökümanlarınızı Akıllı Depo'ya yükleyebilirsiniz. Diğer uygulamalar üzerinden (e-posta uygulamaları gibi) \"Akıllı Depo ile aç\" seçeneği ile dökümanlarınızı yükleyebilirsiniz.";
 "DocumentsOffInfo"="Akıllı Depo'daki dökümanlarınıza erişemez ve Akıllı Depo'ya yeni doküman yükleyemezsiniz.";
 "Contacts"="Rehber";
@@ -354,10 +354,10 @@
 "AllFilesHeader"="TÜM DOSYALAR (%d)";
 "PhotosVideosHeader"="FOTOĞRAF VE VİDEOLAR (%d)";
 "MusicHeader"="MÜZİK (%d)";
-"DocumentsHeader"="DÖKÜMANLAR (%d)";
+"DocumentsHeader"="BELGELER (%d)";
 "AllSearchResultsHeader"="TÜM SONUÇLAR (%d)";
 
-"AutoSyncTitle"="Otomatik Yedekleme";
+"AutoSyncTitle"="Otomatik Yükleme";
 "SyncPhotoVideoTitle"="Resimleri Yedekle";
 "SyncContactsTitle"="Rehberi Yedekle";
 "DataRoamingTitle"="Data Roaming";
@@ -398,9 +398,9 @@
 "QuotaExceedMessageShort"="Yeterli alanınız bulunmamaktadır.";
 "LoginRequiredMessage"="Giriş yapmanız gerekmektedir.";
 
-"MenuContactSync"="Rehber Yedekleme";
+"MenuContactSync"="Telefon Rehberi";
 
-"ContactSyncFlagTitle"="Otomatik Yedekleme";
+"ContactSyncFlagTitle"="Otomatik Yükleme";
 "ContactLastSyncDateTitle"="Son Yedekleme Tarihi: %@";
 "ContactLastSyncDetailTitle"="SON YEDEKLEME DETAYI";
 "ContactLastSyncDetailClientTitle"="Cihaz";

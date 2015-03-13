@@ -208,7 +208,7 @@
     file.rawContentType = [self strByRawVal:content_type];
     file.contentType = [self contentTypeByRawValue:file];
     file.visibleName = [AppUtil nakedFileFolderName:file.name];
-    file.contentLengthDisplay = @"02:04";
+    file.contentLengthDisplay = @"";
     file.itemCount = [self intByNumber:childCount];
     
     NSDictionary *detailDict = [dict objectForKey:@"metadata"];
@@ -238,6 +238,15 @@
         detail.album = [self strByRawVal:album];
         detail.songTitle = [self strByRawVal:songTitle];
         detail.duration = [self floatByNumber:duration];
+        
+        NSString *durationVal = @"";
+        if(detail.duration) {
+            int durationInSec = floor(detail.duration/1000);
+            int durationInMin = floor(durationInSec/60);
+            int remainingSec = durationInSec - durationInMin*60;
+            durationVal = [NSString stringWithFormat:@"%d:%@%d", durationInMin, remainingSec <=9 ? @"0": @"", remainingSec];
+        }
+        file.contentLengthDisplay = durationVal;
         
         file.detail = detail;
         file.metaHash = [self strByRawVal:metaHash];

@@ -266,7 +266,7 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
     playControlView = [[UIView alloc] initWithFrame:CGRectMake(0, 51, controlView.frame.size.width, controlView.frame.size.height - 51)];
     [controlView addSubview:playControlView];
     
-    volumeButton = [[CustomButton alloc] initWithFrame:CGRectMake(10, 22, 16, 16) withImageName:@"volume_button.png"];
+    volumeButton = [[CustomButton alloc] initWithFrame:CGRectMake(3, 15, 30, 30) withImageName:@"volume_button.png"];
     volumeButton.hidden = NO;
     [volumeButton addTarget:self action:@selector(volumeClicked) forControlEvents:UIControlEventTouchUpInside];
     [playControlView addSubview:volumeButton];
@@ -289,7 +289,7 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
     [pauseButton addTarget:self action:@selector(pauseClicked) forControlEvents:UIControlEventTouchUpInside];
     [playControlView addSubview:pauseButton];
     
-    shuffleButton = [[CustomButton alloc] initWithFrame:CGRectMake(controlView.frame.size.width - 30, 20, 20, 20) withImageName:@"shuffle.png"];
+    shuffleButton = [[CustomButton alloc] initWithFrame:CGRectMake(controlView.frame.size.width - 40, 10, 40, 40) withImageName:@"shuffle.png"];
     [shuffleButton addTarget:self action:@selector(shuffleClicked) forControlEvents:UIControlEventTouchUpInside];
     [playControlView addSubview:shuffleButton];
     
@@ -298,11 +298,11 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
     customVolumeView.hidden = YES;
     [controlView addSubview:customVolumeView];
     
-    CustomButton *volumeMuteButton = [[CustomButton alloc] initWithFrame:CGRectMake(10, 22, 19, 16) withImageName:@"volume_mute.png"];
+    CustomButton *volumeMuteButton = [[CustomButton alloc] initWithFrame:CGRectMake(3, 15, 30, 30) withImageName:@"volume_mute.png"];
     [volumeMuteButton addTarget:self action:@selector(volumeMuteClicked) forControlEvents:UIControlEventTouchUpInside];
     [customVolumeView addSubview:volumeMuteButton];
     
-    CustomButton *volumeFullButton = [[CustomButton alloc] initWithFrame:CGRectMake(controlView.frame.size.width - 29, 22, 19, 16) withImageName:@"volume_full.png"];
+    CustomButton *volumeFullButton = [[CustomButton alloc] initWithFrame:CGRectMake(controlView.frame.size.width - 36, 15, 30, 30) withImageName:@"volume_full.png"];
     [volumeFullButton addTarget:self action:@selector(volumeFullClicked) forControlEvents:UIControlEventTouchUpInside];
     [customVolumeView addSubview:volumeFullButton];
     
