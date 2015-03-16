@@ -54,6 +54,14 @@
     profileImageView.image = profileBgImg;
     [profileInfoArea addSubview:profileImageView];
 
+    if(APPDELEGATE.session.profileImageRef) {
+        UIImageView *profileImgView = [[UIImageView alloc] initWithFrame:CGRectMake(17, (60 - profileBgImg.size.height - 2)/2, profileImageView.frame.size.width - 4, profileImageView.frame.size.height - 4)];
+        profileImgView.image = [Util circularScaleNCrop:APPDELEGATE.session.profileImageRef forRect:CGRectMake(0, 0, 88, 88)];
+        profileImgView.center = profileImageView.center;
+        [profileInfoArea addSubview:profileImgView];
+    }
+    
+    /*
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul), ^(void) {
         UIImage *profileImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:APPDELEGATE.session.user.profileImgUrl]]];
         UIImageView *profileImgView = [[UIImageView alloc] initWithFrame:CGRectMake(17, (60 - profileBgImg.size.height - 2)/2, profileImageView.frame.size.width - 4, profileImageView.frame.size.height - 4)];
@@ -61,6 +69,7 @@
         profileImgView.center = profileImageView.center;
         [profileInfoArea addSubview:profileImgView];
     });
+     */
     
     UIImageView *profileFrameImageView = [[UIImageView alloc] initWithFrame:CGRectMake(116, 0, 88, 88)];
     UIImage *profileFrameImage = [UIImage imageNamed:@"profile_frame"];
@@ -138,7 +147,7 @@
     UILabel *infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 29, 300, 20)];
     [infoLabel setText:NSLocalizedString(@"EditProfilePicture", @"")];
     infoLabel.font = [UIFont fontWithName:@"TurkcellSaturaBol" size:18];
-    infoLabel.textAlignment = UITextAlignmentCenter;
+    infoLabel.textAlignment = NSTextAlignmentCenter;
     infoLabel.textColor = [Util UIColorForHexColor:@"FFFFFF"];
     infoLabel.backgroundColor= [UIColor clearColor];
     [imageOptionsArea addSubview:infoLabel];
@@ -150,7 +159,7 @@
     cameraLabel = [[UILabel alloc] initWithFrame:CGRectMake(29, 153, 75, 20)];
     [cameraLabel setText:NSLocalizedString(@"Camera", @"")];
     cameraLabel.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:17];
-    cameraLabel.textAlignment = UITextAlignmentCenter;
+    cameraLabel.textAlignment = NSTextAlignmentCenter;
     cameraLabel.textColor = [Util UIColorForHexColor:@"FFFFFF"];
     cameraLabel.backgroundColor= [UIColor clearColor];
     [imageOptionsArea addSubview:cameraLabel];
@@ -162,7 +171,7 @@
     uploadLabel = [[UILabel alloc] initWithFrame:CGRectMake(122, 153, 75, 20)];
     [uploadLabel setText:NSLocalizedString(@"Upload", @"")];
     uploadLabel.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:17];
-    uploadLabel.textAlignment = UITextAlignmentCenter;
+    uploadLabel.textAlignment = NSTextAlignmentCenter;
     uploadLabel.textColor = [Util UIColorForHexColor:@"FFFFFF"];
     uploadLabel.backgroundColor= [UIColor clearColor];
     [imageOptionsArea addSubview:uploadLabel];
@@ -174,7 +183,7 @@
     removeLabel = [[UILabel alloc] initWithFrame:CGRectMake(215, 153, 75, 20)];
     [removeLabel setText:NSLocalizedString(@"Remove", @"")];
     removeLabel.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:17];
-    removeLabel.textAlignment = UITextAlignmentCenter;
+    removeLabel.textAlignment = NSTextAlignmentCenter;
     removeLabel.textColor = [Util UIColorForHexColor:@"FFFFFF"];
     removeLabel.backgroundColor= [UIColor clearColor];
     [imageOptionsArea addSubview:removeLabel];

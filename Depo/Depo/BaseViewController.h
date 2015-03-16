@@ -16,7 +16,7 @@
 #import "PhotoAlbum.h"
 #import "ShareLinkDao.h"
 
-@interface BaseViewController : UIViewController <SlidingMenuDelegate, SlidingMenuCloseDelegate, MyViewDelegate, FloatingAddButtonDelegate, FloatingAddDelegate>
+@interface BaseViewController : UIViewController <SlidingMenuDelegate, SlidingMenuCloseDelegate, MyViewDelegate, FloatingAddButtonDelegate, FloatingAddDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UIScrollView *scroll;
 @property (nonatomic, strong) UIView *transparentView;
@@ -27,6 +27,7 @@
 @property (nonatomic, strong) FloatingAddMenu *addMenu;
 @property (nonatomic, strong) ShareLinkDao *shareDao;
 @property (nonatomic) BOOL menuOpen;
+@property (nonatomic) BOOL menuLocked;
 
 - (void) showBaseLoading;
 - (void) hideBaseLoading;
@@ -52,5 +53,8 @@
 - (void) checkAndShowAddButton;
 
 - (void) triggerShareForFiles:(NSArray *) fileUuidList;
+
+- (void) lockMenu;
+- (void) unlockMenu;
 
 @end

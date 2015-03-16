@@ -32,8 +32,6 @@
 + (void) resetBadgeCount;
 + (int) readBadgeCount;
 
-+ (void) startContactAutoSync;
-+ (void) stopContactAutoSync;
 + (void) writeLastContactSyncResult:(ContactSyncResult *) syncResult;
 + (ContactSyncResult *) readLastContactSyncResult;
 

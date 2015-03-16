@@ -15,6 +15,8 @@
 #import "Subscription.h"
 #import "Offer.h"
 #import "Device.h"
+#import "RadiusDao.h"
+#import "RequestTokenDao.h"
 
 //TODO
 #define BASE_URL @"https://adepo.turkcell.com.tr/api"
@@ -35,6 +37,8 @@
 #define USAGE_INFO_URL BASE_URL@"/account/usageInfo"
 
 #define ACCOUNT_INFO_URL BASE_URL@"/account/info"
+
+#define TTY_CONTACT_COUNT_URL @"https://adepo.turkcell.com.tr/ttyapi/contact/count"
 
 #define PROVISION_URL BASE_URL@"/account/provision"
 
@@ -117,6 +121,8 @@
 
 #define FORBIDDEN_ERROR_MESSAGE @"Bu işlem için yetkiniz bulunmamaktadır."
 
+#define LOGIN_REQ_ERROR_MESSAGE @"Oturumunuz zaman aşımına uğradı. Lütfen tekrar giriş yapınız."
+
 #define OSP_USER @"proxyuser"
 
 #define OSP_PASS @"proxyuser2013"
@@ -125,11 +131,16 @@
 	id delegate;
 	SEL successMethod;
 	SEL failMethod;
+    
+    RadiusDao *radiusDao;
+    RequestTokenDao *tokenDao;
 }
 
 @property (nonatomic, strong) id delegate;
 @property (nonatomic) SEL successMethod;
 @property (nonatomic) SEL failMethod;
+@property (nonatomic, strong) ASIFormDataRequest *currentRequest;
+@property (nonatomic) BOOL tokenAlreadyRevisitedFlag;
 
 - (NSString *) hasFinishedSuccessfully:(NSDictionary *) mainDict;
 - (void) sendPostRequest:(ASIFormDataRequest *) request;

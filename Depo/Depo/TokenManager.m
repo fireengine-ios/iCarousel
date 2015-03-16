@@ -11,10 +11,19 @@
 #import "AppSession.h"
 #import "User.h"
 #import "CacheUtil.h"
+#import "Reachability.h"
+
+#import "RequestTokenDao.h"
+#import "RequestBaseUrlDao.h"
+#import "AccountInfoDao.h"
+#import "RadiusDao.h"
+#import "LogoutDao.h"
 
 @implementation TokenManager
 
 @synthesize delegate;
+@synthesize processDelegate;
+@synthesize processDelegateTaskId;
 
 - (id) init {
     if(self = [super init]) {
@@ -22,6 +31,11 @@
         tokenDao.delegate = self;
         tokenDao.successMethod = @selector(tokenDaoSuccessCallback);
         tokenDao.failMethod = @selector(tokenDaoFailCallback:);
+        
+        tokenWithinProcessDao = [[RequestTokenDao alloc] init];
+        tokenWithinProcessDao.delegate = self;
+        tokenWithinProcessDao.successMethod = @selector(tokenWithinProcessDaoSuccessCallback);
+        tokenWithinProcessDao.failMethod = @selector(tokenWithinProcessDaoFailCallback:);
         
         baseUrlDao = [[RequestBaseUrlDao alloc] init];
         baseUrlDao.delegate = self;
@@ -37,7 +51,12 @@
         radiusDao.delegate = self;
         radiusDao.successMethod = @selector(tokenDaoSuccessCallback);
         radiusDao.failMethod = @selector(tokenDaoFailCallback:);
-        
+
+        radiusWithinProcessDao = [[RadiusDao alloc] init];
+        radiusWithinProcessDao.delegate = self;
+        radiusWithinProcessDao.successMethod = @selector(tokenWithinProcessDaoSuccessCallback);
+        radiusWithinProcessDao.failMethod = @selector(tokenWithinProcessDaoFailCallback:);
+
         logoutDao = [[LogoutDao alloc] init];
 //        logoutDao.delegate = self;
 //        logoutDao.successMethod = @selector(logoutSuccessCallback);
@@ -84,6 +103,14 @@
     [delegate tokenManagerDidFailReceivingToken];
 }
 
+- (void) tokenWithinProcessDaoSuccessCallback {
+    [processDelegate tokenManagerWithinProcessDidReceiveTokenFor:self.processDelegateTaskId];
+}
+
+- (void) tokenWithinProcessDaoFailCallback:(NSString *) errorMessage {
+    [processDelegate tokenManagerWithinProcessDidFailReceivingTokenFor:self.processDelegateTaskId];
+}
+
 - (void) baseUrlDaoSuccessCallback {
     [delegate tokenManagerDidReceiveBaseUrl];
 }
@@ -99,6 +126,19 @@
 
 - (void) userInfoFailCallback:(NSString *) errorMessage {
     [delegate tokenManagerDidFailReceivingUserInfo];
+}
+
+- (void) requestTokenWithinProcess:(int) taskId {
+    self.processDelegateTaskId = taskId;
+    
+    NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
+    if(networkStatus == kReachableViaWiFi) {
+        if([CacheUtil readRememberMeToken] != nil) {
+            [tokenWithinProcessDao requestTokenByRememberMe];
+        }
+    } else if(networkStatus == kReachableViaWWAN) {
+        [radiusWithinProcessDao requestRadiusLogin];
+    }
 }
 
 @end

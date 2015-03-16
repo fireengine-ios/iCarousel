@@ -20,6 +20,7 @@
 #import "DocListController.h"
 #import "MusicListController.h"
 #import "SettingsController.h"
+#import "ContactSyncController.h"
 
 @interface HomeController ()
 
@@ -39,7 +40,7 @@
 @synthesize imageButton;
 @synthesize musicButton;
 @synthesize otherButton;
-@synthesize videoButton;
+@synthesize contactButton;
 
 - (id)init {
     self = [super init];
@@ -57,6 +58,11 @@
         usageDao.delegate = self;
         usageDao.successMethod = @selector(usageSuccessCallback:);
         usageDao.failMethod = @selector(usageFailCallback:);
+        
+        contactCountDao = [[ContactCountDao alloc] init];
+        contactCountDao.delegate = self;
+        contactCountDao.successMethod = @selector(contactCountSuccessCallback:);
+        contactCountDao.failMethod = @selector(contactCountFailCallback:);
         
         usageChart = [[XYPieChart alloc] initWithFrame:CGRectMake(60, IS_IPHONE_5 ? 40 : 26, 200, 200)];
         usageChart.dataSource = self;
@@ -173,26 +179,28 @@
     separator.backgroundColor = [Util UIColorForHexColor:@"ebebed"];
     [self.view addSubview:separator];
     
-    imageButton = [[UsageButton alloc] initWithFrame:CGRectMake(20, separator.frame.origin.y + (IS_IPHONE_5 ? 41 : 11), 70, 60) withUsage:UsageTypeImage withStorage:APPDELEGATE.session.usage.imageUsage];
+    imageButton = [[UsageButton alloc] initWithFrame:CGRectMake(20, separator.frame.origin.y + (IS_IPHONE_5 ? 41 : 11), 75, 60) withUsage:UsageTypeImage withStorage:APPDELEGATE.session.usage.imageUsage withFileCount:APPDELEGATE.session.usage.imageCount];
     [imageButton addTarget:self action:@selector(triggerPhotosPage) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:imageButton];
     
-    musicButton = [[UsageButton alloc] initWithFrame:CGRectMake(90, separator.frame.origin.y + (IS_IPHONE_5 ? 41 : 11), 70, 60) withUsage:UsageTypeMusic withStorage:APPDELEGATE.session.usage.musicUsage];
+    musicButton = [[UsageButton alloc] initWithFrame:CGRectMake(90, separator.frame.origin.y + (IS_IPHONE_5 ? 41 : 11), 75, 60) withUsage:UsageTypeMusic withStorage:APPDELEGATE.session.usage.musicUsage withFileCount:APPDELEGATE.session.usage.audioCount];
     [musicButton addTarget:self action:@selector(triggerMusicPage) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:musicButton];
     
-    otherButton = [[UsageButton alloc] initWithFrame:CGRectMake(160, separator.frame.origin.y + (IS_IPHONE_5 ? 41 : 11), 70, 60) withUsage:UsageTypeOther withStorage:APPDELEGATE.session.usage.otherUsage];
+    otherButton = [[UsageButton alloc] initWithFrame:CGRectMake(160, separator.frame.origin.y + (IS_IPHONE_5 ? 41 : 11), 75, 60) withUsage:UsageTypeOther withStorage:APPDELEGATE.session.usage.otherUsage withFileCount:APPDELEGATE.session.usage.othersCount];
     [otherButton addTarget:self action:@selector(triggerDocsPage) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:otherButton];
     
-    videoButton = [[UsageButton alloc] initWithFrame:CGRectMake(230, separator.frame.origin.y + (IS_IPHONE_5 ? 41 : 11), 70, 60) withUsage:UsageTypeVideo withStorage:APPDELEGATE.session.usage.videoUsage];
-    [videoButton addTarget:self action:@selector(triggerPhotosPage) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:videoButton];
+    contactButton = [[UsageButton alloc] initWithFrame:CGRectMake(230, separator.frame.origin.y + (IS_IPHONE_5 ? 41 : 11), 75, 60) withUsage:UsageTypeContact withCountValue:@""];
+    [contactButton addTarget:self action:@selector(triggerContactsPage) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:contactButton];
 
     double percentUsageVal = 100 * ((double)APPDELEGATE.session.usage.usedStorage/(double)APPDELEGATE.session.usage.totalStorage);
     if(percentUsageVal >= 80) {
         moreStorageButton.hidden = NO;
     }
+    
+    [contactCountDao requestContactCount];
 }
 
 - (void) usageFailCallback:(NSString *) errorMessage {
@@ -224,6 +232,12 @@
     [self.nav pushViewController:photo animated:NO];
 }
 
+- (void) triggerContactsPage {
+    ContactSyncController *contact = [[ContactSyncController alloc] init];
+    contact.nav = self.nav;
+    [self.nav pushViewController:contact animated:NO];
+}
+
 - (void) triggerMusicPage {
     MusicListController *music = [[MusicListController alloc] init];
     music.nav = self.nav;
@@ -243,6 +257,14 @@
         [usageChart reloadData];
     }
 //    [self performSelector:@selector(tempDraw) withObject:nil afterDelay:2.0f];
+}
+
+- (void) contactCountSuccessCallback:(NSString *) contactVal {
+    [contactButton updateCountValue:contactVal];
+}
+
+- (void) contactCountFailCallback:(NSString *) errorMessage {
+    [contactButton updateCountValue:[NSString stringWithFormat:@"%d", 0]];
 }
 
 - (void)viewDidLoad {

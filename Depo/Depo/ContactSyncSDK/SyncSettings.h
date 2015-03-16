@@ -14,7 +14,10 @@ typedef NS_ENUM(NSUInteger, SYNCEnvironment) {
     SYNCTestEnvironment,
     SYNCProductionEnvironment
 };
-
+typedef NS_ENUM(NSUInteger, SYNCMode) {
+    SYNCBackup,
+    SYNCRestore
+};
 @interface SyncSettings : NSObject
 
 /**
@@ -28,6 +31,10 @@ typedef NS_ENUM(NSUInteger, SYNCEnvironment) {
  */
 @property (strong) NSString *url;
 @property SYNCEnvironment environment;
+/**
+ * Sync mode. It has possible two value: BACKUP and RESTORE
+ */
+@property (nonatomic) SYNCMode mode;
 /**
  * Auth token.
  */

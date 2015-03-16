@@ -27,8 +27,6 @@
         self.title = NSLocalizedString(@"AutomaticSynchronization", @"");
         photosVideosInfo = NSLocalizedString(@"Photos&VideosInfo", @"");
         photosVideosInfoHeight = [Util calculateHeightForText:photosVideosInfo forWidth:280 forFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:14]];
-        contactsInfo = NSLocalizedString(@"ContactsInfo", @"");
-        contactsInfoHeight = [Util calculateHeightForText:contactsInfo forWidth:280 forFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:14]];
     }
     return self;
 }
@@ -36,8 +34,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     currentSyncPhotosVideosSetting = [CacheUtil readCachedSettingSyncPhotosVideos];
     oldSyncPhotosVideosSetting = currentSyncPhotosVideosSetting;
-    currentSyncContactsSetting = [CacheUtil readCachedSettingSyncContacts];
-    oldSyncContactsSetting = currentSyncContactsSetting;
     currentConnectionSetting = [CacheUtil readCachedSettingSyncingConnectionType];
     oldConnectionSetting = currentConnectionSetting;
     [super viewWillAppear:animated];
@@ -50,7 +46,7 @@
             [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
                 if(group == nil) {
                     [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOn];
-                    [APPDELEGATE.syncManager manuallyCheckIfAlbumChanged];
+                    [APPDELEGATE startAutoSync];
                 }
             } failureBlock:^(NSError *error) {
                 [self showErrorAlertWithMessage:NSLocalizedString(@"ALAssetsAccessError", @"")];
@@ -60,19 +56,17 @@
             [APPDELEGATE.uploadQueue cancelRemainingUploads];
         }
     }
-    if (currentSyncContactsSetting != oldSyncContactsSetting)
-        [CacheUtil writeCachedSettingSyncContacts:currentSyncContactsSetting];
     if (currentConnectionSetting != oldConnectionSetting)
         [CacheUtil writeCachedSettingSyncingConnectionType:currentConnectionSetting];
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
-    return (currentSyncPhotosVideosSetting == EnableOptionOn || currentSyncPhotosVideosSetting == EnableOptionAuto || currentSyncContactsSetting == EnableOptionOn || currentSyncContactsSetting == EnableOptionAuto) ? 2 : 1;
+    return (currentSyncPhotosVideosSetting == EnableOptionOn || currentSyncPhotosVideosSetting == EnableOptionAuto) ? 2 : 1;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return 4;
+        return 2;
     } else if (section == 1) {
         return 2;
     } else {
@@ -89,8 +83,6 @@
         switch (indexPath.row) {
             case 0: return 50; break;
             case 1: return photosVideosInfoHeight + 43; break;
-            case 2: return 50; break;
-            case 3: return contactsInfoHeight + 43; break;
             default: return 0;
                 break;
         }
@@ -122,13 +114,6 @@
         } else if (indexPath.row == 1) {
             TextCell *cell = [[TextCell alloc]initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"" titleColor:nil contentText:photosVideosInfo contentTextColor:nil backgroundColor:[UIColor whiteColor] hasSeparator:YES];
             return cell;
-        } else if(indexPath.row == 2) {
-            TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"Contacts", @"") subTitletext: @"" SwitchButtonStatus:(currentSyncContactsSetting == EnableOptionOn || currentSyncContactsSetting == EnableOptionAuto) hasSeparator:NO];
-            [cell.switchButton addTarget:self action:@selector(setSyncContactsSetting:) forControlEvents:UIControlEventValueChanged];
-            return cell;
-        } else if (indexPath.row == 3) {
-            TextCell *cell = [[TextCell alloc]initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"" titleColor:nil contentText:contactsInfo contentTextColor:nil backgroundColor:[UIColor whiteColor] hasSeparator:YES];
-            return cell;
         }
     }
     else if (indexPath.section == 1) {
@@ -158,11 +143,6 @@
 
 - (void)setSyncPhotosVideosSetting:(id) sender {
     currentSyncPhotosVideosSetting = ((UISwitch *)sender).isOn ? EnableOptionOn : EnableOptionOff;
-    [super drawPageContentTable];
-}
-
-- (void)setSyncContactsSetting:(id) sender {
-    currentSyncContactsSetting = ((UISwitch *)sender).isOn ? EnableOptionOn : EnableOptionOff;
     [super drawPageContentTable];
 }
 

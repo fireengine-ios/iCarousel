@@ -27,6 +27,7 @@
 @synthesize hasFinished;
 @synthesize isReady;
 @synthesize autoSyncFlag;
+@synthesize retryDoneForTokenFlag;
 @synthesize taskType;
 @synthesize folder;
 @synthesize finalFile;

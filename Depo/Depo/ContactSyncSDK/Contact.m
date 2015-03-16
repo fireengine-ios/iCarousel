@@ -195,7 +195,7 @@
         if (SYNC_IS_NULL(other.devices)){
             return NO;
         }
-        if ([_devices count] != [other.devices count]){
+        if ([_devices count] < [other.devices count]){
             return NO;
         }
         
@@ -251,4 +251,32 @@
     }
 }
 
+-(BOOL)isDeviceSizeEqual:(Contact*)other{
+    if(SYNC_IS_NULL(self.devices)){
+        if (!SYNC_IS_NULL(other.devices)) {
+            return NO;
+        }
+    }else{
+        if (SYNC_IS_NULL(other.devices)) {
+            return NO;
+        }
+        
+        NSMutableSet *thisSet = [NSMutableSet new];
+        NSMutableSet *otherSet = [NSMutableSet new];
+        for (ContactDevice *device in _devices){
+            NSString *key = [device deviceKey];
+            [thisSet addObject:key];
+        }
+        for (ContactDevice *device in other.devices){
+            NSString *key = [device deviceKey];
+            [otherSet addObject:key];
+        }
+        
+        if ([thisSet count] != [otherSet count]){
+            return NO;
+        }
+    }
+    
+    return YES;
+}
 @end

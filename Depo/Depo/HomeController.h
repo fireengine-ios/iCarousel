@@ -14,9 +14,11 @@
 #import "UsageButton.h"
 #import "SimpleButton.h"
 #import "UsageInfoDao.h"
+#import "ContactCountDao.h"
 
 @interface HomeController : MyViewController <RecentActivityLinkerDelegate, XYPieChartDelegate, XYPieChartDataSource> {
     UsageInfoDao *usageDao;
+    ContactCountDao *contactCountDao;
 }
 
 @property (nonatomic, strong) RecentActivityLinkerFooter *footer;
@@ -31,6 +33,6 @@
 @property (nonatomic, strong) UsageButton *imageButton;
 @property (nonatomic, strong) UsageButton *musicButton;
 @property (nonatomic, strong) UsageButton *otherButton;
-@property (nonatomic, strong) UsageButton *videoButton;
+@property (nonatomic, strong) UsageButton *contactButton;
 
 @end

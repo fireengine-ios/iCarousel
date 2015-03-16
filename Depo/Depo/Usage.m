@@ -18,5 +18,11 @@
 @synthesize totalStorage;
 @synthesize videoUsage;
 @synthesize usedStorage;
+@synthesize totalFileCount;
+@synthesize folderCount;
+@synthesize imageCount;
+@synthesize videoCount;
+@synthesize audioCount;
+@synthesize othersCount;
 
 @end

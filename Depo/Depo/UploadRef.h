@@ -27,6 +27,7 @@
 @property (nonatomic) BOOL hasFinished;
 @property (nonatomic) BOOL isReady;
 @property (nonatomic) BOOL autoSyncFlag;
+@property (nonatomic) BOOL retryDoneForTokenFlag;
 @property (nonatomic) UploadTaskType taskType;
 @property (nonatomic, strong) MetaFile *folder;
 @property (nonatomic, strong) MetaFile *finalFile;

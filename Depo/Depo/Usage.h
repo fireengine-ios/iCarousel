@@ -18,5 +18,11 @@
 @property (nonatomic) long long remainingStorage;
 @property (nonatomic) long long usedStorage;
 @property (nonatomic) long long totalStorage;
+@property (nonatomic) int totalFileCount;
+@property (nonatomic) int folderCount;
+@property (nonatomic) int imageCount;
+@property (nonatomic) int videoCount;
+@property (nonatomic) int audioCount;
+@property (nonatomic) int othersCount;
 
 @end

@@ -6,9 +6,16 @@
 //  Copyright (c) 2015 com.igones. All rights reserved.
 //
 
-#import "BaseDao.h"
+#import <Foundation/Foundation.h>
+#import "ASIFormDataRequest.h"
+#import "SBJSON.h"
+#import "AppConstants.h"
 
-@interface RadiusDao : BaseDao
+@interface RadiusDao : NSObject
+
+@property (nonatomic, strong) id delegate;
+@property (nonatomic) SEL successMethod;
+@property (nonatomic) SEL failMethod;
 
 - (void) requestRadiusLogin;
 

@@ -13,6 +13,7 @@
 #import "CustomLabel.h"
 #import "Util.h"
 #import "UIImageView+AFNetworking.h"
+#import "AppUtil.h"
 
 @implementation MenuProfileCell
 
@@ -29,6 +30,12 @@
 
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul), ^(void) {
             UIImage *profileImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:APPDELEGATE.session.user.profileImgUrl]]];
+            APPDELEGATE.session.profileImageRef = profileImage;
+            /*
+            NSString *imagePath = [AppUtil readDocumentsPathForFileName:AKILLI_DEPO_PROFILE_IMG_NAME];
+            NSData *imageData = UIImageJPEGRepresentation(profileImage, 1);
+            [imageData writeToFile:imagePath atomically:YES];
+             */
             UIImageView *profileImgView = [[UIImageView alloc] initWithFrame:CGRectMake(17, (60 - profileBgImg.size.height - 2)/2, profileBgImg.size.width - 4, profileBgImg.size.height - 4)];
             profileImgView.image = [Util circularScaleNCrop:profileImage forRect:CGRectMake(0, 0, 44, 44)];
             profileImgView.center = profileBgView.center;

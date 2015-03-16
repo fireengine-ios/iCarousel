@@ -11,8 +11,13 @@
 #import "AppSession.h"
 #import "AppUtil.h"
 #import "CacheUtil.h"
+#import "BaseDao.h"
 
 @implementation RequestTokenDao
+
+@synthesize delegate;
+@synthesize successMethod;
+@synthesize failMethod;
 
 - (void) requestTokenForMsisdn:(NSString *) msisdnVal andPassword:(NSString *) passVal shouldRememberMe:(BOOL) rememberMeFlag {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:TOKEN_URL, rememberMeFlag ? @"on" : @"off"]];
@@ -45,7 +50,14 @@
     [request setPostBody:[postData mutableCopy]];
     [request setDelegate:self];
     
-    [self sendPostRequest:request];
+    [request setRequestMethod:@"POST"];
+    request.timeOutSeconds = 30;
+    [request addRequestHeader:@"Accept" value:@"application/json"];
+    [request addRequestHeader:@"Content-Type" value:@"application/json; encoding=utf-8"];
+    if(APPDELEGATE.session.authToken) {
+        [request addRequestHeader:@"X-Auth-Token" value:APPDELEGATE.session.authToken];
+    }
+    [request startAsynchronous];
 }
 
 - (void) requestTokenByRememberMe {
@@ -69,7 +81,14 @@
     [request setPostBody:[postData mutableCopy]];
     [request setDelegate:self];
     
-    [self sendPostRequest:request];
+    [request setRequestMethod:@"POST"];
+    request.timeOutSeconds = 30;
+    [request addRequestHeader:@"Accept" value:@"application/json"];
+    [request addRequestHeader:@"Content-Type" value:@"application/json; encoding=utf-8"];
+    if(APPDELEGATE.session.authToken) {
+        [request addRequestHeader:@"X-Auth-Token" value:APPDELEGATE.session.authToken];
+    }
+    [request startAsynchronous];
 }
 
 - (void)requestFinished:(ASIHTTPRequest *)request {
@@ -100,14 +119,28 @@
 
         if(authToken != nil && ![authToken isKindOfClass:[NSNull class]]) {
             APPDELEGATE.session.authToken = authToken;
-            [self shouldReturnSuccess];
+            SuppressPerformSelectorLeakWarning([delegate performSelector:successMethod]);
         } else {
-            [self shouldReturnFailWithMessage:TOKEN_ERROR_MESSAGE];
+            SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:TOKEN_ERROR_MESSAGE]);
         }
 	} else {
-        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+        SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:GENERAL_ERROR_MESSAGE]);
 	}
     
+}
+
+- (void)requestFailed:(ASIHTTPRequest *)request {
+    if([request responseStatusCode] == 401) {
+        SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:GENERAL_ERROR_MESSAGE]);
+    } else if([request responseStatusCode] == 403) {
+        SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:FORBIDDEN_ERROR_MESSAGE]);
+    } else {
+        if([request.error code] == ASIConnectionFailureErrorType){
+            SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:NO_CONN_ERROR_MESSAGE]);
+        } else {
+            SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:GENERAL_ERROR_MESSAGE]);
+        }
+    }
 }
 
 @end

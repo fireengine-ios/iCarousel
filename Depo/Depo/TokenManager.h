@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RequestTokenDao.h"
-#import "RequestBaseUrlDao.h"
-#import "AccountInfoDao.h"
-#import "RadiusDao.h"
-#import "LogoutDao.h"
+
+@class RequestTokenDao;
+@class RequestBaseUrlDao;
+@class AccountInfoDao;
+@class RadiusDao;
+@class LogoutDao;
 
 @protocol TokenManagerDelegate <NSObject>
 - (void) tokenManagerDidReceiveToken;
@@ -25,15 +26,25 @@
 - (void) tokenManagerMigrationInProgress;
 @end
 
+@protocol TokenManagerWithinProcessDelegate <NSObject>
+- (void) tokenManagerWithinProcessDidReceiveTokenFor:(int) taskId;
+- (void) tokenManagerWithinProcessDidFailReceivingTokenFor:(int) taskId;
+@end
+
 @interface TokenManager : NSObject {
     RequestTokenDao *tokenDao;
+    RequestTokenDao *tokenWithinProcessDao;
     RequestBaseUrlDao *baseUrlDao;
     AccountInfoDao *userInfoDao;
     RadiusDao *radiusDao;
+    RadiusDao *radiusWithinProcessDao;
     LogoutDao *logoutDao;
 }
 
 @property (nonatomic, strong) id<TokenManagerDelegate> delegate;
+@property (nonatomic, strong) id<TokenManagerWithinProcessDelegate> processDelegate;
+
+@property (nonatomic) int processDelegateTaskId;
 
 - (void) requestRadiusLogin;
 - (void) requestToken;
@@ -41,5 +52,6 @@
 - (void) requestUserInfo;
 - (void) requestLogout;
 - (void) requestTokenByMsisdn:(NSString *) msisdn andPass:(NSString *) pass shouldRememberMe:(BOOL) rememberMeFlag;
+- (void) requestTokenWithinProcess:(int) taskId;
 
 @end

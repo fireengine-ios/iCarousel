@@ -21,35 +21,15 @@
 + (NSNumber*)lastSyncTime;
 
 /**
- * Starts synchronization process
+ * Starts either backup or restore process
  */
-+ (void)doSync;
-/**
- * Cancels synchronization timer. Ongoing operation won't be interrupted
- */
-+ (void)cancel;
++ (void)doSync:(SYNCMode)mode;
+
 /**
  *
  * @return true, if synchronization is still running
  */
 + (BOOL)isRunning;
-/**
- * @return YES, if has automated synchronization
- */
-+ (BOOL) automated;
-#pragma mark Background mode operations
-/**
- * Can be called in performFetchWithCompletionHandler of UIApplicationDelegate
- */
-+ (void)runInBackground;
-/**
- * Puts auto synchronization on hold. Can be called when application enters background.
- */
-+ (void)sleep;
-/**
- * Awake auto synchronization if it's enabled before. Can be called when application enters foreground.
- */
-+ (void)awake;
 #pragma mark -
 
 @end

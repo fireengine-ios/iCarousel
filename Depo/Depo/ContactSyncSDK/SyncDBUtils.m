@@ -26,7 +26,7 @@
 - (BOOL) save:(SyncRecord *) record
 {
     NSString *sql = nil;
-    NSArray *result = [self fetch:[NSString stringWithFormat:@"%@=%lld",COLUMN_LOCAL_ID,[record.localId longLongValue]]];
+    NSArray *result = [self fetch:[NSString stringWithFormat:@"%@=%lld AND %@=%lld",COLUMN_LOCAL_ID,[record.localId longLongValue],COLUMN_REMOTE_ID,[record.remoteId longLongValue]]];
     BOOL isNew = NO;
     if (SYNC_ARRAY_IS_NULL_OR_EMPTY(result)){
         sql = [NSString stringWithFormat:@"INSERT INTO %@ VALUES('%@', %lld, %lld ,%lld,%lld)",

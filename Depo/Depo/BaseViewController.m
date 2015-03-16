@@ -54,6 +54,7 @@
 @synthesize addButton;
 @synthesize addMenu;
 @synthesize shareDao;
+@synthesize menuLocked;
 
 - (id)initWithRootViewController:(MyViewController *) rootViewController {
     self = [super init];
@@ -109,15 +110,25 @@
         UISwipeGestureRecognizer *recognizerLeft = [[UISwipeGestureRecognizer alloc]
                                                     initWithTarget:self action:@selector(swipeLeft:)];
         recognizerLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+        recognizerLeft.delegate = self;
         [self.view addGestureRecognizer:recognizerLeft];
         
         UISwipeGestureRecognizer *recognizerRight = [[UISwipeGestureRecognizer alloc]
                                                      initWithTarget:self action:@selector(swipeRight:)];
         recognizerRight.direction = UISwipeGestureRecognizerDirectionRight;
+        recognizerRight.delegate = self;
         [self.view addGestureRecognizer:recognizerRight];
         
     }
     return self;
+}
+
+- (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    UIView *view = touch.view;
+    if([view isKindOfClass:[VolumeSliderView class]]) {
+        return NO;
+    }
+    return YES;
 }
 
 - (void) singleTap:(UITapGestureRecognizer *) tapRecognizer {
@@ -127,6 +138,10 @@
 }
 
 - (void)swipeLeft:(UISwipeGestureRecognizer*)recognizer {
+    if(menuLocked) {
+        return;
+    }
+    
     CGPoint p = [recognizer locationInView:self.view];
     
     if (menuOpen && p.x > kMenuOpenOriginX) {
@@ -135,6 +150,10 @@
 }
 
 - (void)swipeRight:(UISwipeGestureRecognizer*)recognizer {
+    if(menuLocked) {
+        return;
+    }
+    
     if (!menuOpen)
         [self showMenu];
 }
@@ -533,6 +552,14 @@
         return [[self nav] shouldAutorotateToInterfaceOrientation:interfaceOrientation];
     else
         return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void) lockMenu {
+    self.menuLocked = YES;
+}
+
+- (void) unlockMenu {
+    self.menuLocked = NO;
 }
 
 @end

@@ -35,5 +35,6 @@
 + (void) writeFirstVisitOverFlag;
 + (NSString *) readDueDateInReadableFormat:(NSDate *) date;
 + (NSString *) userUniqueValueByBaseUrl:(NSString *) baseUrl;
++ (NSString *) readDocumentsPathForFileName:(NSString *)name;
 
 @end

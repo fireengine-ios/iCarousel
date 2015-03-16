@@ -605,6 +605,7 @@
 		05E8113819DF27690063F99A /* MusicListModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8113719DF27690063F99A /* MusicListModalController.m */; };
 		05EA75B519DC6C2400AC77AB /* MultipleUploadFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EA75B419DC6C2400AC77AB /* MultipleUploadFooterView.m */; };
 		05EA75B819DC78C800AC77AB /* UploadDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EA75B719DC78C800AC77AB /* UploadDao.m */; };
+		05EAB3D21AB6E350009A1543 /* ContactCountDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EAB3D11AB6E350009A1543 /* ContactCountDao.m */; };
 		05F4AA281A2F7692000F41B8 /* ActivityUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F4AA271A2F7692000F41B8 /* ActivityUtil.m */; };
 		562FB3F71AA48C4400F9EFBD /* CurioAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 562FB3D91AA48C4400F9EFBD /* CurioAction.m */; };
 		562FB3F81AA48C4400F9EFBD /* CurioActionToolkit.m in Sources */ = {isa = PBXBuildFile; fileRef = 562FB3DB1AA48C4400F9EFBD /* CurioActionToolkit.m */; };
@@ -1506,6 +1507,8 @@
 		05EA75B419DC6C2400AC77AB /* MultipleUploadFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultipleUploadFooterView.m; sourceTree = "<group>"; };
 		05EA75B619DC78C800AC77AB /* UploadDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadDao.h; sourceTree = "<group>"; };
 		05EA75B719DC78C800AC77AB /* UploadDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadDao.m; sourceTree = "<group>"; };
+		05EAB3D01AB6E350009A1543 /* ContactCountDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactCountDao.h; sourceTree = "<group>"; };
+		05EAB3D11AB6E350009A1543 /* ContactCountDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactCountDao.m; sourceTree = "<group>"; };
 		05F4AA261A2F7692000F41B8 /* ActivityUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityUtil.h; sourceTree = "<group>"; };
 		05F4AA271A2F7692000F41B8 /* ActivityUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityUtil.m; sourceTree = "<group>"; };
 		562FB3D81AA48C4400F9EFBD /* CurioAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioAction.h; sourceTree = "<group>"; };
@@ -1954,6 +1957,8 @@
 				05DEB1C81A80C16B007793DD /* MigrateDao.m */,
 				05DEB1CA1A80C175007793DD /* MigrateStatusDao.h */,
 				05DEB1CB1A80C175007793DD /* MigrateStatusDao.m */,
+				05EAB3D01AB6E350009A1543 /* ContactCountDao.h */,
+				05EAB3D11AB6E350009A1543 /* ContactCountDao.m */,
 			);
 			name = http;
 			sourceTree = "<group>";
@@ -3275,6 +3280,7 @@
 				05127EC319E19775002C2228 /* FileDetailInWebViewController.m in Sources */,
 				05EA75B819DC78C800AC77AB /* UploadDao.m in Sources */,
 				059A46DC1A6D3E2000935023 /* Offer.m in Sources */,
+				05EAB3D21AB6E350009A1543 /* ContactCountDao.m in Sources */,
 				059CE54A1A87DC5300F6CFAE /* ContactSyncResultCell.m in Sources */,
 				052644AE19D5A2A600B63759 /* SettingsPhotosVideosController.m in Sources */,
 				051E1E3919CAC85100FD1E03 /* BaseDao.m in Sources */,

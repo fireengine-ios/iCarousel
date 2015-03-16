@@ -44,6 +44,7 @@
 @synthesize progress;
 @synthesize syncManager;
 @synthesize uploadQueue;
+@synthesize activatedFromBackground;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -370,13 +371,6 @@
         [self.syncManager manuallyCheckIfAlbumChanged];
     }
 
-    if(contactSyncFlag == EnableOptionAuto || contactSyncFlag == EnableOptionOn) {
-        [SyncSettings shared].token = APPDELEGATE.session.authToken;
-        [SyncSettings shared].url = CONTACT_SYNC_SERVER_URL;
-        [SyncSettings shared].periodicSync = YES;
-        [ContactSyncSDK runInBackground];
-    }
-
     completionHandler(UIBackgroundFetchResultNewData);
 }
 
@@ -387,22 +381,26 @@
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
+    /* auto contact sync kaldirildi
     if ([ContactSyncSDK automated]){
         [ContactSyncSDK sleep];
     }
+     */
 }
 
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+    activatedFromBackground = YES;
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     [SyncUtil resetBadgeCount];
     application.applicationIconBadgeNumber = 0;
-    [ContactSyncSDK awake];
+//auto contact sync kaldirildi    [ContactSyncSDK awake];
     if(session != nil) {
         [session checkLatestContactSyncStatus];
+    }
+    if(activatedFromBackground) {
+        [self triggerAutoSynchronization];
     }
 }
 

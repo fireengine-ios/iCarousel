@@ -70,7 +70,7 @@
 {
     static int prime = 31;
     unsigned long result = 1;
-    result = prime * result + ((_value == nil) ? 0 : [_value hash]);
+    result = prime * result + ((_value == nil) ? 0 : [[self deviceKey] hash]);
 //    result = prime * result + ((_type == 0) ? 0 : _type);
     return result;
 }
@@ -88,7 +88,9 @@
         if (!SYNC_IS_NULL(other.value)){
             return NO;
         }
-    } else if (![_value isEqualToString:other.value]){
+    } else if (SYNC_IS_NULL(other.value)){
+        return NO;
+    } else if (![[self deviceKey] isEqualToString:[other deviceKey]]){
         return NO;
     }
 //    if (_type != other.type){

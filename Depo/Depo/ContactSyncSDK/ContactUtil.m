@@ -59,45 +59,7 @@
         callback(NO);
     }
 }
-- (Contact*)findDuplicate:(Contact*)contact cache:(NSMutableArray*)localContacts
-{
-    NSUInteger size = [localContacts count];
-    for ( int i = 0; i < size; i++ )
-    {
-        Contact *c = [localContacts objectAtIndex:i];
-        if ([[c displayName] isEqualToString:[contact displayName]]){
-            //pre check passed, continue further investigation
-            [self fetchNumbers:c];
-            [self fetchEmails:c];
-            if ([c isEqual:contact]){
-                return c;
-            }
-        }
-    }
-//    CFRelease(allPeople);
-    return nil;
-}
-- (BOOL)deleteContact:(NSNumber*)objectId
-{
-    ABRecordRef record = ABAddressBookGetPersonWithRecordID(_addressBook, [objectId intValue]);
-    if (record == NULL){
-        //it does not exist
-        SYNC_Log(@"Record already does not exist : %@", objectId);
-        return NO;
-    }
-    CFErrorRef error;
-    BOOL result = ABAddressBookRemoveRecord (_addressBook,record,&error); //remove it
-    if(result) { //if successful removal
-        result = ABAddressBookSave(_addressBook, &error); //save address book state
-        if(!result) {
-            SYNC_Log(@"Couldn't save after delete : %@ %@", objectId, error);
-        }
-    } else {
-        SYNC_Log(@"Couldn't delete : %@ %@", objectId, error);
-    }
-    
-    return result;
-}
+
 - (void)deleteContact:(NSNumber*)contactId devices:(NSArray*)devices
 {
     if (SYNC_NUMBER_IS_NULL_OR_ZERO(contactId)){
@@ -280,18 +242,17 @@
         
         NSString *phoneNumber = (__bridge NSString *) phoneNumberRef;
         NSString *type = (__bridge NSString *) phoneTypeRef;
-        NSString *clearMsisdn= [ContactUtil clearMsisdn:phoneNumber];
-        CFRelease(phoneNumberRef);
         
-        BOOL shouldAdd = YES;
+        CFRelease(phoneNumberRef);
+
         if (phoneTypeRef==NULL || type==nil){
-            shouldAdd = NO;
+            type = (__bridge NSString *)kABOtherLabel;
         } else {
             CFRelease(phoneTypeRef);
         }
         
-        ContactPhone *phone = (ContactPhone *)[[ContactPhone alloc] initWithValue:clearMsisdn andType:type];
-        if (![self isAdded:contact value:phone] && shouldAdd) {
+        ContactPhone *phone = (ContactPhone *)[[ContactPhone alloc] initWithValue:phoneNumber andType:type];
+        if (![self isAdded:contact value:phone]) {
             SYNC_Log(@"%@ %@ phone :%@ %@", contact.firstName, contact.lastName, phoneNumber, type);
             [contact.devices addObject:phone];
         }
@@ -313,15 +274,14 @@
         NSString *type = (__bridge NSString *) emailTypeRef;
         
         CFRelease(emailRef);
-        BOOL shouldAdd = YES;
         if (emailTypeRef==NULL || type==nil){
-            shouldAdd = NO;
+            type = (__bridge NSString *)kABOtherLabel;
         } else {
             CFRelease(emailTypeRef);
         }
         
         ContactEmail *newMail = [[ContactEmail alloc] initWithValue:mailAddress andType:type];
-        if (![self isAdded:contact value:newMail] && shouldAdd) {
+        if (![self isAdded:contact value:newMail]) {
             SYNC_Log(@"%@ %@ phone :%@ %@", contact.firstName, contact.lastName, mailAddress, type);
             [contact.devices addObject:newMail];
         }

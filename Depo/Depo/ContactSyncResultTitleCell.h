@@ -10,4 +10,6 @@
 
 @interface ContactSyncResultTitleCell : UITableViewCell
 
+- (id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withTitle:(NSString *) titleVal;
+
 @end

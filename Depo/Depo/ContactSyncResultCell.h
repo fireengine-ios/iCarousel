@@ -11,5 +11,6 @@
 @interface ContactSyncResultCell : UITableViewCell
 
 - (id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withTitle:(NSString *) titleVal withClientVal:(int) clientVal withServerVal:(int) serverVal;
+- (id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withTitle:(NSString *) titleVal withVal:(int) val;
 
 @end

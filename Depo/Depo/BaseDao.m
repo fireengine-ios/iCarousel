@@ -9,10 +9,16 @@
 #import "BaseDao.h"
 #import "AppDelegate.h"
 #import "AppUtil.h"
+#import "Reachability.h"
+#import "CacheUtil.h"
 
 @implementation BaseDao
 
-@synthesize delegate, successMethod, failMethod;
+@synthesize delegate;
+@synthesize successMethod;
+@synthesize failMethod;
+@synthesize currentRequest;
+@synthesize tokenAlreadyRevisitedFlag;
 
 - (NSString *) hasFinishedSuccessfully:(NSDictionary *) mainDict {
     if(mainDict == nil) {
@@ -44,7 +50,8 @@
     if(APPDELEGATE.session.authToken) {
         [request addRequestHeader:@"X-Auth-Token" value:APPDELEGATE.session.authToken];
     }
-    [request startAsynchronous];
+    self.currentRequest = request;
+    [self.currentRequest startAsynchronous];
 }
 
 - (void) sendGetRequest:(ASIFormDataRequest *) request {
@@ -55,7 +62,8 @@
     if(APPDELEGATE.session.authToken) {
         [request addRequestHeader:@"X-Auth-Token" value:APPDELEGATE.session.authToken];
     }
-    [request startAsynchronous];
+    self.currentRequest = request;
+    [self.currentRequest startAsynchronous];
 }
 
 - (void) sendPutRequest:(ASIFormDataRequest *) request {
@@ -64,7 +72,8 @@
     if(APPDELEGATE.session.authToken) {
         [request addRequestHeader:@"X-Auth-Token" value:APPDELEGATE.session.authToken];
     }
-    [request startAsynchronous];
+    self.currentRequest = request;
+    [self.currentRequest startAsynchronous];
 }
 
 - (void) sendDeleteRequest:(ASIFormDataRequest *) request {
@@ -75,13 +84,18 @@
     [request addRequestHeader:@"Content-Type" value:@"application/json"];
     [request buildPostBody];
     [request setRequestMethod:@"DELETE"];
-    [request startAsynchronous];
+    self.currentRequest = request;
+    [self.currentRequest startAsynchronous];
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request {
     if([request responseStatusCode] == 401) {
-        //TODO token tekrar alınacak
-        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+        if(!self.tokenAlreadyRevisitedFlag) {
+            self.tokenAlreadyRevisitedFlag = YES;
+            [self triggerNewToken];
+        } else {
+            [self shouldReturnFailWithMessage:LOGIN_REQ_ERROR_MESSAGE];
+        }
     } else if([request responseStatusCode] == 403) {
         [self shouldReturnFailWithMessage:FORBIDDEN_ERROR_MESSAGE];
     } else {
@@ -419,6 +433,35 @@
     }
     
     return device;
+}
+
+- (void) triggerNewToken {
+    NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
+    if(networkStatus == kReachableViaWiFi) {
+        if([CacheUtil readRememberMeToken] != nil) {
+            tokenDao = [[RequestTokenDao alloc] init];
+            tokenDao.delegate = self;
+            tokenDao.successMethod = @selector(tokenRevisitedSuccessCallback);
+            tokenDao.failMethod = @selector(tokenRevisitedFailCallback:);
+            [tokenDao requestTokenByRememberMe];
+        } else {
+            [self shouldReturnFailWithMessage:LOGIN_REQ_ERROR_MESSAGE];
+        }
+    } else if(networkStatus == kReachableViaWWAN) {
+        radiusDao = [[RadiusDao alloc] init];
+        radiusDao.delegate = self;
+        radiusDao.successMethod = @selector(tokenRevisitedSuccessCallback);
+        radiusDao.failMethod = @selector(tokenRevisitedFailCallback:);
+        [radiusDao requestRadiusLogin];
+    }
+}
+
+- (void) tokenRevisitedSuccessCallback {
+    [self.currentRequest startAsynchronous];
+}
+
+- (void) tokenRevisitedFailCallback:(NSString *) errorMessage {
+    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
 }
 
 @end

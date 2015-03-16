@@ -16,6 +16,7 @@
 @synthesize serverNewCount;
 @synthesize clientDeleteCount;
 @synthesize serverDeleteCount;
+@synthesize syncType;
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
     [encoder encodeInt:clientUpdateCount forKey:@"clientUpdateCount"];
@@ -24,6 +25,7 @@
     [encoder encodeInt:serverNewCount forKey:@"serverNewCount"];
     [encoder encodeInt:clientDeleteCount forKey:@"clientDeleteCount"];
     [encoder encodeInt:serverDeleteCount forKey:@"serverDeleteCount"];
+    [encoder encodeInt:syncType forKey:@"syncType"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -34,6 +36,7 @@
         self.serverNewCount = [decoder decodeIntForKey:@"serverNewCount"];
         self.clientDeleteCount = [decoder decodeIntForKey:@"clientDeleteCount"];
         self.serverDeleteCount = [decoder decodeIntForKey:@"serverDeleteCount"];
+        self.syncType = [decoder decodeIntForKey:@"syncType"];
     }
     return self;
 }

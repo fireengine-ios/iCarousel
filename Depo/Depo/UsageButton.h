@@ -8,9 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "AppConstants.h"
+#import "CustomLabel.h"
 
 @interface UsageButton : UIButton
 
-- (id) initWithFrame:(CGRect)frame withUsage:(UsageType) type withStorage:(long long) storage;
+@property (nonatomic, strong) CustomLabel *countLabel;
+
+- (id) initWithFrame:(CGRect)frame withUsage:(UsageType) type withStorage:(long long) storage withFileCount:(int) fileCount;
+- (id) initWithFrame:(CGRect)frame withUsage:(UsageType) type withCountValue:(NSString *) countVal;
+- (void) updateCountValue:(NSString *) newVal;
 
 @end

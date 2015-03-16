@@ -25,7 +25,9 @@
 
 @implementation ContactSyncController
 
-@synthesize autoSyncSwitch;
+@synthesize oldSyncOption;
+@synthesize backupButton;
+@synthesize restoreButton;
 @synthesize lastSyncDateLabel;
 @synthesize lastSyncDetailTable;
 
@@ -34,20 +36,21 @@
         self.view.backgroundColor = [UIColor whiteColor];
         self.title = NSLocalizedString(@"ContactSyncTitle", @"");
         
-        CustomLabel *switchLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 25, 230, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"ContactSyncFlagTitle", @"") withAlignment:NSTextAlignmentLeft];
-        switchLabel.adjustsFontSizeToFitWidth = YES;
-        [self.view addSubview:switchLabel];
+        backupButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, 10, self.view.frame.size.width - 40, 50) withTitle:NSLocalizedString(@"ContactBackupButtonTitle", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
+        [backupButton addTarget:self action:@selector(backupClicked) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:backupButton];
+
+        CustomLabel *backupLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(10, 60, 300, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"888888"] withText:NSLocalizedString(@"ContactBackupInfo", @"") withAlignment:NSTextAlignmentCenter];
+        backupLabel.adjustsFontSizeToFitWidth = YES;
+        [self.view addSubview:backupLabel];
+
+        restoreButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, 90, self.view.frame.size.width - 40, 50) withTitle:NSLocalizedString(@"ContactRestoreButtonTitle", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
+        [restoreButton addTarget:self action:@selector(restoreClicked) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:restoreButton];
         
-        autoSyncSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 60, 25, 40, 20)];
-        [autoSyncSwitch addTarget:self action:@selector(autoSyncSwitchChanged:) forControlEvents:UIControlEventValueChanged];
-        [self.view addSubview:autoSyncSwitch];
-        
-        manuelSyncButtonOnSync = [[SimpleButton alloc] initWithFrame:CGRectMake(20, 75, self.view.frame.size.width - 40, 50) withTitle:NSLocalizedString(@"ManualSyncTitleOnSync", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
-        
-        manuelSyncButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, 75, self.view.frame.size.width - 40, 50) withTitle:NSLocalizedString(@"ManualSyncTitle", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
-        [manuelSyncButton addTarget:self action:@selector(syncClicked) forControlEvents:UIControlEventTouchUpInside];
-        
-        [self.view addSubview:manuelSyncButton];
+        CustomLabel *restoreLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 140, 280, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"888888"] withText:NSLocalizedString(@"ContactRestoreInfo", @"") withAlignment:NSTextAlignmentCenter];
+        restoreLabel.adjustsFontSizeToFitWidth = YES;
+        [self.view addSubview:restoreLabel];
 
         NSString *lastSyncTitle = [NSString stringWithFormat:NSLocalizedString(@"ContactLastSyncDateTitle", @""), NSLocalizedString(@"NoneTitle", @"")];
         if([SyncUtil readLastContactSyncDate] != nil) {
@@ -55,10 +58,10 @@
             [dateFormat setDateFormat:@"dd.MM.yyyy HH:mm"];
             lastSyncTitle = [NSString stringWithFormat:NSLocalizedString(@"ContactLastSyncDateTitle", @""), [dateFormat stringFromDate:[SyncUtil readLastContactSyncDate]]];
         }
-        lastSyncDateLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 145, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:16] withColor:[Util UIColorForHexColor:@"363e4f"] withText:lastSyncTitle withAlignment:NSTextAlignmentLeft];
+        lastSyncDateLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 180, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:16] withColor:[Util UIColorForHexColor:@"363e4f"] withText:lastSyncTitle withAlignment:NSTextAlignmentLeft];
         [self.view addSubview:lastSyncDateLabel];
         
-        lastSyncDetailTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 185, self.view.frame.size.width, 230) style:UITableViewStylePlain];
+        lastSyncDetailTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 210, self.view.frame.size.width, 230) style:UITableViewStylePlain];
         lastSyncDetailTable.backgroundColor = [UIColor clearColor];
         lastSyncDetailTable.backgroundView = nil;
         lastSyncDetailTable.delegate = self;
@@ -72,6 +75,9 @@
             lastSyncDetailTable.hidden = YES;
         }
 
+        [SyncSettings shared].token = APPDELEGATE.session.authToken;
+        [SyncSettings shared].url = CONTACT_SYNC_SERVER_URL;
+        [SyncSettings shared].debug = YES;
         [SyncSettings shared].callback = ^void(void) {
             SyncStatus *status = [SyncStatus shared];
             switch (status.status) {
@@ -83,6 +89,7 @@
                     currentSyncResult.serverNewCount = status.createdContactsSent.count;
                     currentSyncResult.clientDeleteCount = status.deletedContactsOnDevice.count;
                     currentSyncResult.serverDeleteCount = status.deletedContactsOnServer.count;
+                    currentSyncResult.syncType = ([[SyncSettings shared] mode] == SYNCBackup) ? ContactSyncTypeBackup : ContactSyncTypeRestore;
                     APPDELEGATE.session.syncResult = currentSyncResult;
                     [SyncUtil writeLastContactSyncResult:currentSyncResult];
                 }
@@ -107,13 +114,14 @@
     return self;
 }
 
-- (void)autoSyncSwitchChanged:(id)sender
-{
-    if ([autoSyncSwitch isOn]) {
-        [super fadeOut:manuelSyncButton duration:0.3];
-    } else {
-        [super fadeIn:manuelSyncButton duration:0.3];
-    }
+- (void) backupClicked {
+    [ContactSyncSDK doSync:SYNCBackup];
+    [self showLoading];
+}
+
+- (void) restoreClicked {
+    [ContactSyncSDK doSync:SYNCRestore];
+    [self showLoading];
 }
 
 - (void) manualSyncFinalized {
@@ -130,16 +138,6 @@
     lastSyncDateLabel.hidden = NO;
     [lastSyncDetailTable reloadData];
     lastSyncDetailTable.hidden = NO;
-    [UIView transitionFromView:manuelSyncButtonOnSync toView:manuelSyncButton duration:0.5 options:UIViewAnimationOptionTransitionCrossDissolve completion:nil];
-}
-
-- (void) syncClicked {
-//    [SyncSettings shared].debug = YES;
-    [SyncSettings shared].token = APPDELEGATE.session.authToken;
-    [SyncSettings shared].url = CONTACT_SYNC_SERVER_URL;
-    [ContactSyncSDK doSync];
-    [self showLoading];
-    [UIView transitionFromView:manuelSyncButton toView:manuelSyncButtonOnSync duration:0.5 options:UIViewAnimationOptionTransitionCrossDissolve completion:nil];
 }
 
 #pragma mark UITableView methods
@@ -156,7 +154,7 @@
     if(indexPath.row == 0) {
         return 40;
     } else {
-        return 50;
+        return 40;
     }
 }
 
@@ -177,30 +175,30 @@
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *cellIdentifier = @"ContactSyncResultCellIdentifier";
     if(indexPath.row == 0) {
-        return [[ContactSyncResultTitleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        NSString *sectionTitle = [APPDELEGATE.session.syncResult syncType] == ContactSyncTypeBackup ? NSLocalizedString(@"ContactResultBackupSectionTitle", @"") : NSLocalizedString(@"ContactResultRestoreSectionTitle", @"");
+        return [[ContactSyncResultTitleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withTitle:sectionTitle];
     } else if(indexPath.row == 1) {
-        return [[ContactSyncResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withTitle:NSLocalizedString(@"ContactLastSyncDetailUpdateTitle", @"") withClientVal:[APPDELEGATE.session.syncResult clientUpdateCount] withServerVal:[APPDELEGATE.session.syncResult serverUpdateCount]];
+        int syncVal = [APPDELEGATE.session.syncResult syncType] == ContactSyncTypeBackup ? [APPDELEGATE.session.syncResult serverUpdateCount] : [APPDELEGATE.session.syncResult clientUpdateCount];
+//        return [[ContactSyncResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withTitle:NSLocalizedString(@"ContactLastSyncDetailUpdateTitle", @"") withClientVal:[APPDELEGATE.session.syncResult clientUpdateCount] withServerVal:[APPDELEGATE.session.syncResult serverUpdateCount]];
+        return [[ContactSyncResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withTitle:NSLocalizedString(@"ContactLastSyncDetailUpdateTitle", @"") withVal:syncVal];
     } else if(indexPath.row == 2) {
-        return [[ContactSyncResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withTitle:NSLocalizedString(@"ContactLastSyncDetailNewTitle", @"") withClientVal:[APPDELEGATE.session.syncResult clientNewCount] withServerVal:[APPDELEGATE.session.syncResult serverNewCount]];
+        int syncVal = [APPDELEGATE.session.syncResult syncType] == ContactSyncTypeBackup ? [APPDELEGATE.session.syncResult serverNewCount] : [APPDELEGATE.session.syncResult clientNewCount];
+//        return [[ContactSyncResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withTitle:NSLocalizedString(@"ContactLastSyncDetailNewTitle", @"") withClientVal:[APPDELEGATE.session.syncResult clientNewCount] withServerVal:[APPDELEGATE.session.syncResult serverNewCount]];
+        return [[ContactSyncResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withTitle:NSLocalizedString(@"ContactLastSyncDetailNewTitle", @"") withVal:syncVal];
     } else {
-        return [[ContactSyncResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withTitle:NSLocalizedString(@"ContactLastSyncDetailDeleteTitle", @"") withClientVal:[APPDELEGATE.session.syncResult clientDeleteCount] withServerVal:[APPDELEGATE.session.syncResult serverDeleteCount]];
+        int syncVal = [APPDELEGATE.session.syncResult syncType] == ContactSyncTypeBackup ? [APPDELEGATE.session.syncResult serverDeleteCount] : [APPDELEGATE.session.syncResult clientDeleteCount];
+//        return [[ContactSyncResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withTitle:NSLocalizedString(@"ContactLastSyncDetailDeleteTitle", @"") withClientVal:[APPDELEGATE.session.syncResult clientDeleteCount] withServerVal:[APPDELEGATE.session.syncResult serverDeleteCount]];
+        return [[ContactSyncResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withTitle:NSLocalizedString(@"ContactLastSyncDetailDeleteTitle", @"") withVal:syncVal];
     }
 }
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    oldSyncOption = (EnableOption)[CacheUtil readCachedSettingSyncContacts];
-    [autoSyncSwitch setOn:(oldSyncOption == EnableOptionAuto || oldSyncOption == EnableOptionOn)];
-    if (oldSyncOption == EnableOptionAuto || oldSyncOption == EnableOptionOn) {
-        manuelSyncButton.hidden = YES;
-    }
-    if ([ContactSyncSDK isRunning]) {
-        [UIView transitionFromView:manuelSyncButton toView:manuelSyncButtonOnSync duration:0.5 options:UIViewAnimationOptionTransitionNone completion:nil];
-    }
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    /*
     if (autoSyncSwitch.isOn) {
         [CacheUtil writeCachedSettingSyncContacts:EnableOptionAuto];
         if (oldSyncOption == EnableOptionOff) {
@@ -210,6 +208,7 @@
         [CacheUtil writeCachedSettingSyncContacts:EnableOptionOff];
         [SyncUtil stopContactAutoSync];
     }
+     */
 }
 
 - (BOOL)shouldAutorotate {

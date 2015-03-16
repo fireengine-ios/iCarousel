@@ -252,7 +252,7 @@
 "SignIn"="Giriş yap";
 "Continue"="Devam";
 
-"PostLoginSyncInfo"="Fotoğraflarınızı, videolarınızı ve rehberinizi iPhone'unuzdan Turkcell Akıllı Depo uygulamasına otomatik olarak yedekleyin";
+"PostLoginSyncInfo"="Fotoğraflarınızı ve videolarınızı iPhone'unuzdan Turkcell Akıllı Depo uygulamasına otomatik olarak yedekleyin";
 "PostLoginImgPrefInfo"="Fotoğraf & Videolarınızı iPhone'unuzdan Akıllı Depo uygulamasına otomatik olarak yedekleyin";
 "PostLoginContactPrefInfo"="Adres Defteri ve Sosyal Ağ kişilerinizi Akıllı Depo uygulamasına otomatik olarak yedekleyin";
 
@@ -446,3 +446,12 @@
 
 "ShareTitle"="Paylaş";
 "MoveTitle"="Taşı";
+
+"ContactBackupInfo"="Telefon rehberinizdeki kayıtları Akıllı Depo'ya yükleyebilirsiniz";
+"ContactRestoreInfo"="Akıllı Depo'daki rehber kayıtlarınızı telefonunuza indirebilirsiniz";
+
+"ContactBackupButtonTitle"="Akıllı Depo'ya Yükle";
+"ContactRestoreButtonTitle"="Telefonuma İndir";
+
+"ContactResultBackupSectionTitle"="Akıll Depo'da";
+"ContactResultRestoreSectionTitle"="Telefonda";

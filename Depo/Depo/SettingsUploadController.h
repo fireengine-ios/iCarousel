@@ -15,12 +15,8 @@
     int oldConnectionSetting;
     int currentSyncPhotosVideosSetting;
     int oldSyncPhotosVideosSetting;
-    int currentSyncContactsSetting;
-    int oldSyncContactsSetting;
     NSString *photosVideosInfo;
-    NSString *contactsInfo;
     float photosVideosInfoHeight;
-    float contactsInfoHeight;
 }
 
 @end

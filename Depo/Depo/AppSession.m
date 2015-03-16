@@ -28,6 +28,7 @@
 @synthesize newUserFlag;
 @synthesize migrationUserFlag;
 @synthesize syncResult;
+@synthesize profileImageRef;
 
 - (id) init {
     if(self = [super init]) {

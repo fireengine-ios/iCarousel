@@ -166,6 +166,7 @@
     return (int)[[NSUserDefaults standardUserDefaults] integerForKey:UPLOAD_FILE_BADGE_COUNT_KEY];
 }
 
+/*
 + (void) startContactAutoSync {
     [SyncSettings shared].token = APPDELEGATE.session.authToken;
     [SyncSettings shared].url = CONTACT_SYNC_SERVER_URL;
@@ -177,8 +178,8 @@
     if ([ContactSyncSDK automated]){
         [ContactSyncSDK cancel];
     }
-    
 }
+ */
 
 + (void) writeLastContactSyncResult:(ContactSyncResult *) syncResult {
     [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:syncResult] forKey:LAST_CONTACT_SYNC_RESULT];

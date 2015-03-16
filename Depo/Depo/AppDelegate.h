@@ -33,6 +33,7 @@
 @property (strong, nonatomic) SyncManager *syncManager;
 @property (strong, nonatomic) UploadQueue *uploadQueue;
 @property (nonatomic) NotificationAction notifitacionAction;
+@property (nonatomic) BOOL activatedFromBackground;
 
 - (void) showCustomAlert:(CustomAlertView *) alertView;
 - (void) showCustomConfirm:(CustomConfirmView *) alertView;

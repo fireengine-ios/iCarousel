@@ -30,7 +30,7 @@
 - (NSDictionary*) toJSON;
 - (void)copyContact:(Contact*)contact;
 - (NSString*)displayName;
-
+- (BOOL)isDeviceSizeEqual:(Contact*)other;
 - (BOOL)preEqualCheck:(id)object;
 
 @end

@@ -90,13 +90,16 @@
 - (void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch * touch = [[event allTouches] anyObject];
     CGPoint point = [touch locationInView:touch.view];
+    int activeLevelCount = 0;
     for(VolumeLevelIndicator *level in volumeLevels) {
         if(level.frame.origin.x <= point.x) {
+            activeLevelCount ++;
             [level manuallyActivate];
         } else {
             [level manuallyDeactivate];
         }
     }
+    [delegate volumeSliderDidChangeTo:0.04*activeLevelCount];
 }
 
 - (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {

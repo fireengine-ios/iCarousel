@@ -34,6 +34,7 @@
 
 @property (nonatomic, strong) Usage *usage;
 @property (nonatomic, strong) ContactSyncResult *syncResult;
+@property (nonatomic, strong) UIImage *profileImageRef;
 
 - (void) playAudioItemAtIndex:(int) itemIndex;
 - (void) playNextAudioItem;

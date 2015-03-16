@@ -141,6 +141,10 @@
 
 #define SETTINGS_NOTIFICATIONS @"SETTINGS_NOTIFICATIONS"
 
+#define PROFILE_IMAGE_WAS_LOADED_NOTIFICATION @"PROFILE_IMAGE_WAS_LOADED_NOTIFICATION"
+
+#define AKILLI_DEPO_PROFILE_IMG_NAME @"akilli_depo_profile_img.jpg"
+
 #define MAX_CONCURRENT_UPLOAD_TASKS 1
 
 //TODO
@@ -303,6 +307,11 @@ typedef enum {
     NotificationActionFloatingMenu,
     NotificationActionPackages
 } NotificationAction;
+
+typedef enum {
+    ContactSyncTypeBackup = 1,
+    ContactSyncTypeRestore
+} ContactSyncType;
 
 @interface AppConstants : NSObject
 

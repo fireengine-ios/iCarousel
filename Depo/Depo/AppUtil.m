@@ -515,4 +515,10 @@
     
 }
 
++ (NSString *) readDocumentsPathForFileName:(NSString *)name {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsPath = [paths objectAtIndex:0];
+    return [documentsPath stringByAppendingPathComponent:name];
+}
+
 @end

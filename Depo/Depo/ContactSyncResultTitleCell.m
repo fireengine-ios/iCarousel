@@ -27,6 +27,17 @@
     return self;
 }
 
+- (id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withTitle:(NSString *) titleVal {
+    if(self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.backgroundColor = [UIColor whiteColor];
+        
+        CustomLabel *titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(160, 10, 160, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[Util UIColorForHexColor:@"363e4f"] withText:titleVal withAlignment:NSTextAlignmentCenter];
+        [self addSubview:titleLabel];
+    }
+    return self;
+}
+
 - (void)awakeFromNib {
     // Initialization code
 }

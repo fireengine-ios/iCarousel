@@ -10,6 +10,7 @@
 #import "AppConstants.h"
 #import "UploadManager.h"
 #import "SyncUtil.h"
+#import "AppDelegate.h"
 
 @implementation UploadQueue
 
@@ -227,11 +228,8 @@
     
     UploadManager *currentManager = [self findByTaskId:task.taskIdentifier];
     if(currentManager != nil) {
-
         NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) task.response;
-        NSLog(@"STATUS CODE: %d", (int)httpResp.statusCode);
         if (!error && httpResp.statusCode == 201) {
-
             //TODO burası doğru yer mi kontrol et, didFinishUploadingWithSuccess içine de konabilir
             if(currentManager.uploadRef.localHash != nil) {
                 [SyncUtil cacheSyncHashLocally:currentManager.uploadRef.localHash];
@@ -239,20 +237,33 @@
             if(currentManager.uploadRef.remoteHash != nil) {
                 [SyncUtil cacheSyncHashRemotely:currentManager.uploadRef.remoteHash];
             }
-            
             [currentManager removeTemporaryFile];
             [currentManager notifyUpload];
         } else {
-            currentManager.uploadRef.hasFinished = YES;
-            [currentManager removeTemporaryFile];
             if(httpResp.statusCode == 403) {
-                [currentManager.delegate uploadManagerLoginRequiredForAsset:currentManager.uploadRef.assetUrl];
+                if(!currentManager.uploadRef.retryDoneForTokenFlag) {
+                    //TODO aynı anda tek upload işlemine göre tasarlandı. Eğer aynı anda birden fazla upload yapılacaksa
+                    //token requesti tek yapılacak şekilde (synchronized) düzenleme yapmak gerekir.
+                    currentManager.uploadRef.retryDoneForTokenFlag = YES;
+                    APPDELEGATE.tokenManager.processDelegate = self;
+                    [APPDELEGATE.tokenManager requestTokenWithinProcess:task.taskIdentifier];
+                } else {
+                    currentManager.uploadRef.hasFinished = YES;
+                    [currentManager removeTemporaryFile];
+                    [currentManager.delegate uploadManagerLoginRequiredForAsset:currentManager.uploadRef.assetUrl];
+                    [self uploadManager:currentManager didFinishUploadingWithSuccess:NO];
+                }
             } else if(httpResp.statusCode == 413) {
+                currentManager.uploadRef.hasFinished = YES;
+                [currentManager removeTemporaryFile];
                 [currentManager.delegate uploadManagerQuotaExceedForAsset:currentManager.uploadRef.assetUrl];
+                [self uploadManager:currentManager didFinishUploadingWithSuccess:NO];
             } else {
+                currentManager.uploadRef.hasFinished = YES;
+                [currentManager removeTemporaryFile];
                 [currentManager.delegate uploadManagerDidFailUploadingForAsset:currentManager.uploadRef.assetUrl];
+                [self uploadManager:currentManager didFinishUploadingWithSuccess:NO];
             }
-            [self uploadManager:currentManager didFinishUploadingWithSuccess:NO];
         }
     }
 }
@@ -270,6 +281,26 @@
         }
     }
     return nil;
+}
+
+#pragma mark TokenManagerWithinProcessDelegate methods
+
+- (void) tokenManagerWithinProcessDidFailReceivingTokenFor:(int) taskId {
+    UploadManager *currentManager = [self findByTaskId:taskId];
+    if(currentManager != nil) {
+        currentManager.uploadRef.hasFinished = YES;
+        [currentManager removeTemporaryFile];
+        [currentManager.delegate uploadManagerLoginRequiredForAsset:currentManager.uploadRef.assetUrl];
+        [self uploadManager:currentManager didFinishUploadingWithSuccess:NO];
+    }
+}
+
+- (void) tokenManagerWithinProcessDidReceiveTokenFor:(int) taskId {
+    UploadManager *currentManager = [self findByTaskId:taskId];
+    if(currentManager != nil) {
+        //TODO check
+        [currentManager startTask];
+    }
 }
 
 @end

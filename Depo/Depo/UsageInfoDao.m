@@ -39,7 +39,14 @@
             NSNumber *othersUsage = [mainDict objectForKey:@"othersUsage"];
             NSNumber *audioUsage = [mainDict objectForKey:@"audioUsage"];
             NSNumber *videoUsage = [mainDict objectForKey:@"videoUsage"];
-            
+
+            NSNumber *totalFileCount = [mainDict objectForKey:@"totalFileCount"];
+            NSNumber *folderCount = [mainDict objectForKey:@"folderCount"];
+            NSNumber *imageCount = [mainDict objectForKey:@"imageCount"];
+            NSNumber *videoCount = [mainDict objectForKey:@"videoCount"];
+            NSNumber *audioCount = [mainDict objectForKey:@"audioCount"];
+            NSNumber *othersCount = [mainDict objectForKey:@"othersCount"];
+
             if(totalStorage != nil && ![totalStorage isKindOfClass:[NSNull class]]) {
                 result.totalStorage = [totalStorage longLongValue];
             }
@@ -60,6 +67,25 @@
             }
             if(result.totalStorage > 0) {
                 result.remainingStorage = result.totalStorage - result.usedStorage;
+            }
+
+            if(totalFileCount != nil && ![totalFileCount isKindOfClass:[NSNull class]]) {
+                result.totalFileCount = [totalFileCount intValue];
+            }
+            if(folderCount != nil && ![folderCount isKindOfClass:[NSNull class]]) {
+                result.folderCount = [folderCount intValue];
+            }
+            if(imageCount != nil && ![imageCount isKindOfClass:[NSNull class]]) {
+                result.imageCount = [imageCount intValue];
+            }
+            if(videoCount != nil && ![videoCount isKindOfClass:[NSNull class]]) {
+                result.videoCount = [videoCount intValue];
+            }
+            if(audioCount != nil && ![audioCount isKindOfClass:[NSNull class]]) {
+                result.audioCount = [audioCount intValue];
+            }
+            if(othersCount != nil && ![othersCount isKindOfClass:[NSNull class]]) {
+                result.othersCount = [othersCount intValue];
             }
         }
         
