@@ -27,7 +27,7 @@
         CustomLabel *titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 32, self.frame.size.width, 16) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:[Util transformedHugeSizeValue:storage] withAlignment:NSTextAlignmentCenter];
         [self addSubview:titleLabel];
 
-        countLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 16, self.frame.size.width, 16) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:[NSString stringWithFormat:@"(%d)", fileCount] withAlignment:NSTextAlignmentCenter];
+        countLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 16, self.frame.size.width, 16) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:[NSString stringWithFormat:@"(%d adet)", fileCount] withAlignment:NSTextAlignmentCenter];
         [self addSubview:countLabel];
     }
     return self;

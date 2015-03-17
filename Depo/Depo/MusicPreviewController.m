@@ -41,6 +41,7 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 @synthesize yIndex;
 @synthesize seekToZeroBeforePlay;
 @synthesize shuffleButton;
+@synthesize shuffleFlag;
 
 - (id)initWithFile:(NSString *) _fileUuid withFileList:(NSArray *) _files {
     self = [super init];
@@ -285,7 +286,8 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
     [playControlView addSubview:pauseButton];
     
     shuffleButton = [[CustomButton alloc] initWithFrame:CGRectMake(controlView.frame.size.width - 40, 10, 40, 40) withImageName:@"shuffle.png"];
-    [shuffleButton addTarget:self action:@selector(shuffleClicked) forControlEvents:UIControlEventTouchUpInside];
+    [shuffleButton addTarget:self action:@selector(setShuffleOn) forControlEvents:UIControlEventTouchUpInside];
+    shuffleButton.alpha = 0.5f;
     [playControlView addSubview:shuffleButton];
     
     customVolumeView = [[VolumeSliderView alloc] initWithFrame:CGRectMake(0, 51, controlView.frame.size.width, controlView.frame.size.height - 51)];
@@ -393,6 +395,20 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 - (void) shuffleClicked {
     [APPDELEGATE.session shuffleItems];
     self.title = [NSString stringWithFormat:@"%d/%d", APPDELEGATE.session.currentAudioItemIndex + 1, (int)[APPDELEGATE.session.playerItemFilesRef count]];
+}
+
+- (void) setShuffleOn {
+    self.shuffleFlag = YES;
+    shuffleButton.alpha = 1.0f;
+    [shuffleButton removeTarget:self action:@selector(setShuffleOn) forControlEvents:UIControlEventTouchUpInside];
+    [shuffleButton addTarget:self action:@selector(setShuffleOff) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void) setShuffleOff {
+    self.shuffleFlag = NO;
+    shuffleButton.alpha = 0.5f;
+    [shuffleButton removeTarget:self action:@selector(setShuffleOff) forControlEvents:UIControlEventTouchUpInside];
+    [shuffleButton addTarget:self action:@selector(setShuffleOn) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void) resumeNotified {

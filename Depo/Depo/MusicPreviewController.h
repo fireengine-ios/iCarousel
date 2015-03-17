@@ -52,6 +52,7 @@
 @property (nonatomic) int totalTimeInSec;
 @property (nonatomic) int yIndex;
 @property (assign) BOOL seekToZeroBeforePlay;
+@property (assign) BOOL shuffleFlag;
 
 - (id)initWithFile:(NSString *) _fileUuid withFileList:(NSArray *) _files;
 - (id)initForContinuingPlaylist;

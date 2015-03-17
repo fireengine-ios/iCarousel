@@ -291,12 +291,12 @@
 - (void) startAutoSync {
     if(!syncManager) {
         self.syncManager = [[SyncManager alloc] init];
-        if(![SyncUtil readFirstTimeSyncFlag]) {
-            [syncManager startFirstTimeSync];
-        } else {
-            [syncManager startAutoSync];
-            [syncManager manuallyCheckIfAlbumChanged];
-        }
+    }
+    if(![SyncUtil readFirstTimeSyncFlag]) {
+        [syncManager startFirstTimeSync];
+    } else {
+        [syncManager startAutoSync];
+        [syncManager manuallyCheckIfAlbumChanged];
     }
 }
 

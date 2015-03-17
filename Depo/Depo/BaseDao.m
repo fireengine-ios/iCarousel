@@ -457,7 +457,11 @@
 }
 
 - (void) tokenRevisitedSuccessCallback {
-    [self.currentRequest startAsynchronous];
+    ASIFormDataRequest *newRequest = [self.currentRequest copy];
+    if(APPDELEGATE.session.authToken) {
+        [newRequest addRequestHeader:@"X-Auth-Token" value:APPDELEGATE.session.authToken];
+    }
+    [newRequest startAsynchronous];
 }
 
 - (void) tokenRevisitedFailCallback:(NSString *) errorMessage {
