@@ -16,5 +16,6 @@
 @property (nonatomic, strong) SimpleButton *restoreButton;
 @property (nonatomic, strong) CustomLabel *lastSyncDateLabel;
 @property (nonatomic, strong) UITableView *lastSyncDetailTable;
+@property (nonatomic) ContactSyncType syncType;
 
 @end

@@ -30,6 +30,7 @@
 @synthesize restoreButton;
 @synthesize lastSyncDateLabel;
 @synthesize lastSyncDetailTable;
+@synthesize syncType;
 
 - (id) init {
     if(self = [super init]) {
@@ -89,7 +90,7 @@
                     currentSyncResult.serverNewCount = status.createdContactsSent.count;
                     currentSyncResult.clientDeleteCount = status.deletedContactsOnDevice.count;
                     currentSyncResult.serverDeleteCount = status.deletedContactsOnServer.count;
-                    currentSyncResult.syncType = ([[SyncSettings shared] mode] == SYNCBackup) ? ContactSyncTypeBackup : ContactSyncTypeRestore;
+                    currentSyncResult.syncType = syncType;
                     APPDELEGATE.session.syncResult = currentSyncResult;
                     [SyncUtil writeLastContactSyncResult:currentSyncResult];
                 }
@@ -115,11 +116,13 @@
 }
 
 - (void) backupClicked {
+    self.syncType = ContactSyncTypeBackup;
     [ContactSyncSDK doSync:SYNCBackup];
     [self showLoading];
 }
 
 - (void) restoreClicked {
+    self.syncType = ContactSyncTypeRestore;
     [ContactSyncSDK doSync:SYNCRestore];
     [self showLoading];
 }
