@@ -130,7 +130,6 @@
 }
 
 - (void) cancelRemainingUploads {
-    //TODO kontrol et
     NSMutableArray *cleanArray = [[NSMutableArray alloc] init];
     @try {
         for(UploadManager *row in [uploadManagers copy]) {
@@ -230,7 +229,6 @@
     if(currentManager != nil) {
         NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) task.response;
         if (!error && httpResp.statusCode == 201) {
-            //TODO burası doğru yer mi kontrol et, didFinishUploadingWithSuccess içine de konabilir
             if(currentManager.uploadRef.localHash != nil) {
                 [SyncUtil cacheSyncHashLocally:currentManager.uploadRef.localHash];
             }

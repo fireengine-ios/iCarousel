@@ -91,11 +91,12 @@
     
     NSString *contentStr = [NSString stringWithFormat:NSLocalizedString(@"PhotoListContentFooterTitle", @""), imgCount, videoCount];
     
-    CustomLabel *contentLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, (int)ceil(counter/4)*79 + 100, mainScroll.frame.size.width, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:18] withColor:[Util UIColorForHexColor:@"1b1b1b"] withText:contentStr];
+    CustomLabel *contentLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, (int)ceil((float)counter/4.0)*79 + 20, mainScroll.frame.size.width, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:18] withColor:[Util UIColorForHexColor:@"1b1b1b"] withText:contentStr];
     contentLabel.textAlignment = NSTextAlignmentCenter;
     [mainScroll addSubview:contentLabel];
     
-    mainScroll.contentSize = CGSizeMake(mainScroll.frame.size.width, (int)ceil(counter/4)*79 + 140);
+    mainScroll.contentSize = CGSizeMake(mainScroll.frame.size.width, (int)ceil((float)counter/4.0)*79 + 120);
+    mainScroll.contentOffset = CGPointMake(0, mainScroll.contentSize.height - mainScroll.frame.size.height);
     self.title = [NSString stringWithFormat:NSLocalizedString(@"AddPhotosTitle", @""), [selectedAssets count], [assets count]];
 }
 

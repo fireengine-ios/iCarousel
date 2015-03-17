@@ -36,9 +36,13 @@
 @property (nonatomic, strong) ContactSyncResult *syncResult;
 @property (nonatomic, strong) UIImage *profileImageRef;
 
+@property (assign) BOOL shuffleFlag;
+
 - (void) playAudioItemAtIndex:(int) itemIndex;
 - (void) playNextAudioItem;
 - (void) playPreviousAudioItem;
+- (void) playNextShuffledAudioItem;
+- (void) playPreviousShuffleAudioItem;
 - (void) playAudioItem;
 - (void) pauseAudioItem;
 - (void) stopAudioItem;

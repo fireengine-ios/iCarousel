@@ -41,7 +41,6 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 @synthesize yIndex;
 @synthesize seekToZeroBeforePlay;
 @synthesize shuffleButton;
-@synthesize shuffleFlag;
 
 - (id)initWithFile:(NSString *) _fileUuid withFileList:(NSArray *) _files {
     self = [super init];
@@ -398,14 +397,14 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 }
 
 - (void) setShuffleOn {
-    self.shuffleFlag = YES;
+    APPDELEGATE.session.shuffleFlag = YES;
     shuffleButton.alpha = 1.0f;
     [shuffleButton removeTarget:self action:@selector(setShuffleOn) forControlEvents:UIControlEventTouchUpInside];
     [shuffleButton addTarget:self action:@selector(setShuffleOff) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void) setShuffleOff {
-    self.shuffleFlag = NO;
+    APPDELEGATE.session.shuffleFlag = NO;
     shuffleButton.alpha = 0.5f;
     [shuffleButton removeTarget:self action:@selector(setShuffleOff) forControlEvents:UIControlEventTouchUpInside];
     [shuffleButton addTarget:self action:@selector(setShuffleOn) forControlEvents:UIControlEventTouchUpInside];
@@ -452,11 +451,19 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 }
 
 - (void) prevClicked {
-    [APPDELEGATE.session playPreviousAudioItem];
+    if(APPDELEGATE.session.shuffleFlag) {
+        [APPDELEGATE.session playPreviousShuffleAudioItem];
+    } else {
+        [APPDELEGATE.session playPreviousAudioItem];
+    }
 }
 
 - (void) nextClicked {
-    [APPDELEGATE.session playNextAudioItem];
+    if(APPDELEGATE.session.shuffleFlag) {
+        [APPDELEGATE.session playNextShuffledAudioItem];
+    } else {
+        [APPDELEGATE.session playNextAudioItem];
+    }
 }
 
 - (void) hideVolumeView {

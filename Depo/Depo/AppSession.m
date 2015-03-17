@@ -29,6 +29,7 @@
 @synthesize migrationUserFlag;
 @synthesize syncResult;
 @synthesize profileImageRef;
+@synthesize shuffleFlag;
 
 - (id) init {
     if(self = [super init]) {
@@ -96,6 +97,22 @@
     }
 }
 
+- (void) playNextShuffledAudioItem {
+    int nextRandom = arc4random_uniform([self.playerItems count]);
+    while(nextRandom == self.currentAudioItemIndex) {
+        nextRandom = arc4random_uniform([self.playerItems count]);
+    }
+    [self playAudioItemAtIndex:nextRandom];
+}
+
+- (void) playPreviousShuffleAudioItem {
+    int prevRandom = arc4random_uniform([self.playerItems count]);
+    while(prevRandom == self.currentAudioItemIndex) {
+        prevRandom = arc4random_uniform([self.playerItems count]);
+    }
+    [self playAudioItemAtIndex:prevRandom];
+}
+
 - (void) shuffleItems {
     [playerItems shuffle];
     int newIndex = 0;
@@ -126,8 +143,10 @@
     AVPlayerItem *lastItem = [notification object];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:lastItem];
     
-    if(self.currentAudioItemIndex + 1 < [self.playerItems count]) {
-        [self playAudioItemAtIndex:self.currentAudioItemIndex + 1];
+    if(self.shuffleFlag) {
+        [self playNextShuffledAudioItem];
+    } else {
+        [self playNextAudioItem];
     }
 }
 

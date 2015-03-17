@@ -160,7 +160,7 @@
     [usages addObject:[NSNumber numberWithLongLong:APPDELEGATE.session.usage.imageUsage]];
     [usages addObject:[NSNumber numberWithLongLong:APPDELEGATE.session.usage.musicUsage]];
     [usages addObject:[NSNumber numberWithLongLong:APPDELEGATE.session.usage.otherUsage]];
-    [usages addObject:[NSNumber numberWithLongLong:APPDELEGATE.session.usage.videoUsage]];
+    [usages addObject:[NSNumber numberWithLongLong:0ll]];
     [usages addObject:[NSNumber numberWithLongLong:APPDELEGATE.session.usage.remainingStorage]];
     
     self.usageColors =[NSArray arrayWithObjects:

@@ -25,6 +25,12 @@
         imgView.image = [UIImage imageWithCGImage:[asset thumbnail]];
         [self addSubview:imgView];
         
+        if ([[asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
+            UIImageView *playIconView = [[UIImageView alloc] initWithFrame:CGRectMake(4, self.frame.size.height - 22, 18, 18)];
+            playIconView.image = [UIImage imageNamed:@"mini_play_icon.png"];
+            [self addSubview:playIconView];
+        }
+
         maskView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
         maskView.image = [UIImage imageNamed:@"selected_mask.png"];
         maskView.hidden = YES;
