@@ -46,7 +46,7 @@
     NSString *newUuid = [[NSUUID UUID] UUIDString];
     self.urlForUpload = [NSString stringWithFormat:@"%@/%@", APPDELEGATE.session.baseUrl, newUuid];
     self.fileUuid = newUuid;
-    self.folderUuid = _folder ? _folder.uuid : nil;
+    self.folderUuid = _folder ? _folder.uuid : folderUuid ? folderUuid : nil;
 }
 
 - (void) configureUploadData:(NSData *) _dataToUpload atFolder:(MetaFile *) _folder withFileName:(NSString *) fileName {
@@ -61,7 +61,7 @@
     self.fileUuid = newUuid;
     
     self.urlForUpload = [NSString stringWithFormat:@"%@/%@", APPDELEGATE.session.baseUrl, newUuid];
-    self.folderUuid = _folder ? _folder.uuid : nil;
+    self.folderUuid = _folder ? _folder.uuid : folderUuid ? folderUuid : nil;
 }
 
 - (void) configureUploadAsset:(NSString *) _assetUrl atFolder:(MetaFile *) _folder {
@@ -70,7 +70,7 @@
     self.isReady = YES;
     
     self.folder = _folder;
-    self.folderUuid = _folder ? _folder.uuid : nil;
+    self.folderUuid = _folder ? _folder.uuid : folderUuid ? folderUuid : nil;
     self.assetUrl = _assetUrl;
     
     NSString *newUuid = [[NSUUID UUID] UUIDString];
