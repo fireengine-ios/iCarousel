@@ -271,11 +271,11 @@
 }
 
 - (void) tokenManagerDidReceiveUserInfo {
-    [tokenManager requestConstants];
+    [tokenManager requestBaseUrl];
 }
 
 - (void) tokenManagerDidFailReceivingUserInfo {
-    [tokenManager requestConstants];
+    [tokenManager requestBaseUrl];
 }
 
 - (void) tokenManagerDidReceiveConstants {

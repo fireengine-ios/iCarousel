@@ -144,9 +144,10 @@ static bool syncing = false;
                 Contact *contact = [[Contact alloc] initWithDictionary:item];
                 if (![_remoteContactIds containsObject:[contact remoteId]]){
                     [_remoteContactIds addObject:[contact remoteId]];
-                    if ([contact.remoteUpdateDate longLongValue] > _lastSync
+                    if ((_mode==SYNCRestore && [_dirtyRemoteContactIds containsObject:contact.remoteId])
+                        || [contact.remoteUpdateDate longLongValue] > _lastSync
                         || ![_db hasRemoteId:contact.remoteId]
-                        || (_mode==SYNCRestore && [_dirtyRemoteContactIds containsObject:contact.remoteId])){
+                        ){
                         // we are only interested with updated contacts
                         [_remoteContacts addObject:contact];
                     }
@@ -412,7 +413,8 @@ static bool syncing = false;
                 record.localId = contact.objectId;
                 record.localUpdateDate = SYNC_DATE_AS_NUMBER([NSDate date]);
                 
-                if (_mode==SYNCBackup && ![c isDeviceSizeEqual:contact]) {
+                if (_mode==SYNCBackup && ![c isDeviceSizeEqual:contact]
+                    && (SYNC_IS_NULL(c.remoteId) || [c.remoteId isEqualToNumber:contact.remoteId])) {
                     c.remoteId = contact.remoteId;
                     [_dirtyContacts setObject:c forKey:c.objectId];
                 }else{

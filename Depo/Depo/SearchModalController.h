@@ -13,20 +13,27 @@
 #import "DeleteDao.h"
 #import "FavoriteDao.h"
 #import "MoveDao.h"
+#import "ShareLinkDao.h"
+#import "ConfirmDeleteModalController.h"
+#import "MoveListModalController.h"
 
-@interface SearchModalController : MyModalController <UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource> {
+@interface SearchModalController : MyModalController <UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, ConfirmDeleteDelegate, MoveListModalProtocol> {
     UIView *searchFieldContainer;
     SearchTextField *searchField;
     RecentSearchesTableView *recentSearchesTableView;
     UITableView *searchResultsTable;
+    
     SearchDao *searchDao;
     DeleteDao *deleteDao;
     DeleteDao *folderDeleteDao;
     FavoriteDao *favoriteDao;
     FavoriteDao *folderFavDao;
     MoveDao *moveDao;
+    ShareLinkDao *shareDao;
+    
     int listOffset;
     int tableUpdateCounter;
+    
     NSMutableArray *fileList;
     NSMutableArray *docList;
     NSMutableArray *photoVideoList;

@@ -73,7 +73,22 @@
         favoriteDao.delegate = self;
         favoriteDao.successMethod = @selector(favSuccessCallback:);
         favoriteDao.failMethod = @selector(favFailCallback:);
-        
+
+        shareDao = [[ShareLinkDao alloc] init];
+        shareDao.delegate = self;
+        shareDao.successMethod = @selector(shareSuccessCallback:);
+        shareDao.failMethod = @selector(shareFailCallback:);
+
+        moveDao = [[MoveDao alloc] init];
+        moveDao.delegate = self;
+        moveDao.successMethod = @selector(moveSuccessCallback);
+        moveDao.failMethod = @selector(moveFailCallback:);
+
+        deleteDao = [[DeleteDao alloc] init];
+        deleteDao.delegate = self;
+        deleteDao.successMethod = @selector(deleteSuccessCallback);
+        deleteDao.failMethod = @selector(deleteFailCallback:);
+
         [self.view addSubview:searchResultsTable];
     }
     return self;
@@ -115,7 +130,7 @@
         [refreshControl endRefreshing];
         [super fadeIn:searchResultsTable duration:0.1];
     }
-        [super hideLoading];
+    [super hideLoading];
 }
 
 - (void) searchListFailCallback:(NSString *) errorMessage {
@@ -273,6 +288,32 @@
     [self pushProgressViewWithProcessMessage:NSLocalizedString(@"UnfavProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"UnfavSuccessMessage", @"") andFailMessage:NSLocalizedString(@"UnfavFailMessage", @"")];
 }
 
+- (void) fileFolderCellShouldShareForFile:(MetaFile *)fileSelected {
+    [shareDao requestLinkForFiles:@[fileSelected.uuid]];
+    [self showLoading];
+}
+
+- (void) fileFolderCellShouldDeleteForFile:(MetaFile *)fileSelected {
+    if([CacheUtil showConfirmDeletePageFlag]) {
+        [deleteDao requestDeleteFiles:@[fileSelected.uuid]];
+        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+    } else {
+        fileSelectedRef = fileSelected;
+        ConfirmDeleteModalController *confirmDelete = [[ConfirmDeleteModalController alloc] init];
+        confirmDelete.delegate = self;
+        MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:confirmDelete];
+        [self presentViewController:modalNav animated:YES completion:nil];
+    }
+}
+
+- (void) fileFolderCellShouldMoveForFile:(MetaFile *)fileSelected {
+    fileSelectedRef = fileSelected;
+    MoveListModalController *move = [[MoveListModalController alloc] initForFolder:nil withExludingFolder:fileSelected.uuid withProhibitedFolders:nil];
+    move.delegate = self;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:move];
+    [self presentViewController:modalNav animated:YES completion:nil];
+}
+
 - (void) favSuccessCallback:(NSNumber *) favFlag {
     [self proceedSuccessForProgressView];
 }
@@ -281,5 +322,65 @@
     [self showErrorAlertWithMessage:errorMessage];
 }
 
+#pragma mark ShareLinkDao Delegate Methods
+
+- (void) shareSuccessCallback:(NSString *) linkToShare {
+    [self hideLoading];
+    NSArray *activityItems = [NSArray arrayWithObjects:linkToShare, nil];
+    
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+    [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
+    activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    
+    //    activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll];
+    
+    [self presentViewController:activityViewController animated:YES completion:nil];
+}
+
+- (void) shareFailCallback:(NSString *) errorMessage {
+    [self hideLoading];
+}
+
+- (void) deleteSuccessCallback {
+    [self proceedSuccessForProgressView];
+    
+    [super showLoading];
+    [searchDao requestMetadata:searchText andPage:0 andSize:NO_OF_FILES_PER_PAGE andSortType:APPDELEGATE.session.sortType andSearchListType:searchListType];
+}
+
+- (void) deleteFailCallback:(NSString *) errorMessage {
+    [self proceedFailureForProgressView];
+    [self showErrorAlertWithMessage:errorMessage];
+}
+
+#pragma mark ConfirmDeleteModalDelegate methods
+
+- (void) confirmDeleteDidCancel {
+    NSLog(@"At INNER confirmDeleteDidCancel");
+}
+
+- (void) confirmDeleteDidConfirm {
+    [deleteDao requestDeleteFiles:@[fileSelectedRef.uuid]];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+}
+
+- (void) moveListModalDidSelectFolder:(NSString *)folderUuid {
+    [moveDao requestMoveFiles:@[fileSelectedRef.uuid] toFolder:folderUuid];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"MoveProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"MoveSuccessMessage", @"") andFailMessage:NSLocalizedString(@"MoveFailMessage", @"")];
+}
+
+#pragma mark ProcessFooterDelegate methods
+
+- (void) processFooterShouldDismissWithButtonKey:(NSString *)postButtonKeyVal {
+}
+
+- (void) moveSuccessCallback {
+    [self proceedSuccessForProgressView];
+}
+
+- (void) moveFailCallback:(NSString *) errorMessage {
+    [self proceedFailureForProgressView];
+    [self showErrorAlertWithMessage:errorMessage];
+}
 
 @end
