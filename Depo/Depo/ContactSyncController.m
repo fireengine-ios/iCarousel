@@ -30,7 +30,6 @@
 @synthesize restoreButton;
 @synthesize lastSyncDateLabel;
 @synthesize lastSyncDetailTable;
-@synthesize syncType;
 
 - (id) init {
     if(self = [super init]) {
@@ -90,7 +89,7 @@
                     currentSyncResult.serverNewCount = status.createdContactsSent.count;
                     currentSyncResult.clientDeleteCount = status.deletedContactsOnDevice.count;
                     currentSyncResult.serverDeleteCount = status.deletedContactsOnServer.count;
-                    currentSyncResult.syncType = syncType;
+                    currentSyncResult.syncType = APPDELEGATE.session.syncType;
                     APPDELEGATE.session.syncResult = currentSyncResult;
                     [SyncUtil writeLastContactSyncResult:currentSyncResult];
                 }
@@ -116,13 +115,13 @@
 }
 
 - (void) backupClicked {
-    self.syncType = ContactSyncTypeBackup;
+    APPDELEGATE.session.syncType = ContactSyncTypeBackup;
     [ContactSyncSDK doSync:SYNCBackup];
     [self showLoading];
 }
 
 - (void) restoreClicked {
-    self.syncType = ContactSyncTypeRestore;
+    APPDELEGATE.session.syncType = ContactSyncTypeRestore;
     [ContactSyncSDK doSync:SYNCRestore];
     [self showLoading];
 }
@@ -192,6 +191,13 @@
         int syncVal = [APPDELEGATE.session.syncResult syncType] == ContactSyncTypeBackup ? [APPDELEGATE.session.syncResult serverDeleteCount] : [APPDELEGATE.session.syncResult clientDeleteCount];
 //        return [[ContactSyncResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withTitle:NSLocalizedString(@"ContactLastSyncDetailDeleteTitle", @"") withClientVal:[APPDELEGATE.session.syncResult clientDeleteCount] withServerVal:[APPDELEGATE.session.syncResult serverDeleteCount]];
         return [[ContactSyncResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withTitle:NSLocalizedString(@"ContactLastSyncDetailDeleteTitle", @"") withVal:syncVal];
+    }
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if([ContactSyncSDK isRunning]) {
+        [self showLoading];
     }
 }
 

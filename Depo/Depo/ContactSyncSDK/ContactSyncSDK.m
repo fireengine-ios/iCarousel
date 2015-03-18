@@ -118,17 +118,17 @@ static bool syncing = false;
                 [self addLocalContactCache:contact];
             }
         }
-        
-        if (_mode==SYNCRestore) {
-            //In Restore mode, find deleted contact from address book and delete records about them in db. Delete contact completely
-            NSString *idList = [[_localContactIds allObjects] componentsJoinedByString:@","];
-            NSArray *records = [_db fetch:[NSString stringWithFormat:@"%@ NOT IN (%@)", COLUMN_LOCAL_ID, idList]];
-            NSMutableArray *deletedLocalsContact=[[NSMutableArray alloc]init];
-            for (SyncRecord *rec in records) {
-                [deletedLocalsContact addObject:rec.localId];
-            }
-            [_db deleteRecords:deletedLocalsContact];
+    }
+    
+    if (_mode==SYNCRestore) {
+        //In Restore mode, find deleted contact from address book and delete records about them in db. Delete contact completely
+        NSString *idList = [[_localContactIds allObjects] componentsJoinedByString:@","];
+        NSArray *records = [_db fetch:[NSString stringWithFormat:@"%@ NOT IN (%@)", COLUMN_LOCAL_ID, idList]];
+        NSMutableArray *deletedLocalsContact=[[NSMutableArray alloc]init];
+        for (SyncRecord *rec in records) {
+            [deletedLocalsContact addObject:rec.localId];
         }
+        [_db deleteRecords:deletedLocalsContact];
     }
     
 }
@@ -329,7 +329,7 @@ static bool syncing = false;
             dirty.remoteId=nil;
             dirty.remoteUpdateDate=nil;
             [_dirtyContacts setObject:dirty forKey:dirty.objectId];
-        }else{
+        }else if (!SYNC_IS_NULL(dirty) && !SYNC_IS_NULL(dirty.objectId)){
             [_dirtyContacts removeObjectForKey:dirty.objectId];
         }
         SYNC_Log(@"Deleting row : %@", record.localId);

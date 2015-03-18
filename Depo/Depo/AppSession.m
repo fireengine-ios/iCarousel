@@ -29,6 +29,8 @@
 @synthesize migrationUserFlag;
 @synthesize syncResult;
 @synthesize profileImageRef;
+@synthesize mobileUploadsFolderName;
+@synthesize syncType;
 @synthesize shuffleFlag;
 
 - (id) init {
@@ -83,6 +85,10 @@
 - (void) stopAudioItem {
     [self.audioPlayer pause];
     [[NSNotificationCenter defaultCenter] postNotificationName:MUSIC_SHOULD_BE_REMOVED_NOTIFICATION object:nil userInfo:nil];
+}
+
+- (BOOL) isPrevNextAvailable {
+    return ([self.playerItems count] > 1);
 }
 
 - (void) playNextAudioItem {

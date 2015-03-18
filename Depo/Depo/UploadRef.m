@@ -34,6 +34,7 @@
 @synthesize initializationDate;
 @synthesize localHash;
 @synthesize remoteHash;
+@synthesize ownerPage;
 
 - (void) configureUploadFileForPath:(NSString *) _filePath atFolder:(MetaFile *) _folder withFileName:(NSString *) fileName {
 

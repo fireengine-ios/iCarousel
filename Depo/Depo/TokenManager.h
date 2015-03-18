@@ -13,6 +13,7 @@
 @class AccountInfoDao;
 @class RadiusDao;
 @class LogoutDao;
+@class ConstantsDao;
 
 @protocol TokenManagerDelegate <NSObject>
 - (void) tokenManagerDidReceiveToken;
@@ -20,6 +21,8 @@
 - (void) tokenManagerInadequateInfo;
 - (void) tokenManagerDidReceiveBaseUrl;
 - (void) tokenManagerDidFailReceivingBaseUrl;
+- (void) tokenManagerDidReceiveConstants;
+- (void) tokenManagerDidFailReceivingConstants;
 - (void) tokenManagerDidReceiveUserInfo;
 - (void) tokenManagerDidFailReceivingUserInfo;
 - (void) tokenManagerProvisionNeeded;
@@ -39,6 +42,7 @@
     RadiusDao *radiusDao;
     RadiusDao *radiusWithinProcessDao;
     LogoutDao *logoutDao;
+    ConstantsDao *constantsDao;
 }
 
 @property (nonatomic, strong) id<TokenManagerDelegate> delegate;
@@ -53,5 +57,6 @@
 - (void) requestLogout;
 - (void) requestTokenByMsisdn:(NSString *) msisdn andPass:(NSString *) pass shouldRememberMe:(BOOL) rememberMeFlag;
 - (void) requestTokenWithinProcess:(int) taskId;
+- (void) requestConstants;
 
 @end

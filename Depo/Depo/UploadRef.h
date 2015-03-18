@@ -34,6 +34,7 @@
 @property (nonatomic, strong) NSDate *initializationDate;
 @property (nonatomic, strong) NSString *localHash;
 @property (nonatomic, strong) NSString *remoteHash;
+@property (nonatomic) UploadStarterPage ownerPage;
 
 - (void) configureUploadFileForPath:(NSString *) _filePath atFolder:(MetaFile *) _folder withFileName:(NSString *) fileName;
 - (void) configureUploadData:(NSData *) _dataToUpload atFolder:(MetaFile *) _folder withFileName:(NSString *) fileName;

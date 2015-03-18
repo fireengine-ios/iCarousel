@@ -18,6 +18,7 @@
 #import "AccountInfoDao.h"
 #import "RadiusDao.h"
 #import "LogoutDao.h"
+#import "ConstantsDao.h"
 
 @implementation TokenManager
 
@@ -57,6 +58,11 @@
         radiusWithinProcessDao.successMethod = @selector(tokenWithinProcessDaoSuccessCallback);
         radiusWithinProcessDao.failMethod = @selector(tokenWithinProcessDaoFailCallback:);
 
+        constantsDao = [[ConstantsDao alloc] init];
+        constantsDao.delegate = self;
+        constantsDao.successMethod = @selector(constantsSuccessCallback);
+        constantsDao.failMethod = @selector(constantsFailCallback:);
+        
         logoutDao = [[LogoutDao alloc] init];
 //        logoutDao.delegate = self;
 //        logoutDao.successMethod = @selector(logoutSuccessCallback);
@@ -139,6 +145,18 @@
     } else if(networkStatus == kReachableViaWWAN) {
         [radiusWithinProcessDao requestRadiusLogin];
     }
+}
+
+- (void) requestConstants {
+    [constantsDao requestConstants];
+}
+
+- (void) constantsSuccessCallback {
+    [delegate tokenManagerDidReceiveConstants];
+}
+
+- (void) constantsFailCallback:(NSString *) errorMessage {
+    [delegate tokenManagerDidFailReceivingConstants];
 }
 
 @end

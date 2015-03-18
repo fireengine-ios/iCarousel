@@ -451,18 +451,22 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 }
 
 - (void) prevClicked {
-    if(APPDELEGATE.session.shuffleFlag) {
-        [APPDELEGATE.session playPreviousShuffleAudioItem];
-    } else {
-        [APPDELEGATE.session playPreviousAudioItem];
+    if([APPDELEGATE.session isPrevNextAvailable]) {
+        if(APPDELEGATE.session.shuffleFlag) {
+            [APPDELEGATE.session playPreviousShuffleAudioItem];
+        } else {
+            [APPDELEGATE.session playPreviousAudioItem];
+        }
     }
 }
 
 - (void) nextClicked {
-    if(APPDELEGATE.session.shuffleFlag) {
-        [APPDELEGATE.session playNextShuffledAudioItem];
-    } else {
-        [APPDELEGATE.session playNextAudioItem];
+    if([APPDELEGATE.session isPrevNextAvailable]) {
+        if(APPDELEGATE.session.shuffleFlag) {
+            [APPDELEGATE.session playNextShuffledAudioItem];
+        } else {
+            [APPDELEGATE.session playNextAudioItem];
+        }
     }
 }
 

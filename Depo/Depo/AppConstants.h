@@ -313,6 +313,12 @@ typedef enum {
     ContactSyncTypeRestore
 } ContactSyncType;
 
+typedef enum {
+    UploadStarterPagePhotos = 1,
+    UploadStarterPageList,
+    UploadStarterPageAuto
+} UploadStarterPage;
+
 @interface AppConstants : NSObject
 
 @end

@@ -204,6 +204,9 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     if(self.uploadRef.localHash != nil) {
         [request setValue:self.uploadRef.localHash forHTTPHeaderField:@"X-Object-Meta-Ios-Metadata-Hash"];
     }
+    if(self.uploadRef.autoSyncFlag || self.uploadRef.ownerPage == UploadStarterPagePhotos) {
+        [request setValue:@"MOBILE_UPLOAD" forKey:@"X-Object-Meta-Special-Folder"];
+    }
 
     NSFileManager *fileManager=[NSFileManager defaultManager];
     NSDictionary *attributesDict=[fileManager attributesOfItemAtPath:self.uploadRef.tempUrl error:NULL];

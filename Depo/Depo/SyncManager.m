@@ -228,6 +228,8 @@
     ref.fileName = asset.defaultRepresentation.filename;
     ref.filePath = [asset.defaultRepresentation.url absoluteString];
     ref.autoSyncFlag = YES;
+    ref.ownerPage = UploadStarterPageAuto;
+
     if ([[asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
         ref.contentType = ContentTypeVideo;
     } else {

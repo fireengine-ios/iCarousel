@@ -574,6 +574,7 @@
     uploadRef.tempUrl = filePath;
     uploadRef.fileName = fileName;
     uploadRef.contentType = ContentTypePhoto;
+    uploadRef.ownerPage = UploadStarterPageList;
     
     uploadManager = [[UploadManager alloc] initWithUploadInfo:uploadRef];
     [uploadManager configureUploadFileForPath:filePath atFolder:self.folder withFileName:fileName];
@@ -602,6 +603,8 @@
     
     if([assetUrls count] > 0) {
         for(UploadRef *ref in assetUrls) {
+            ref.ownerPage = UploadStarterPageList;
+
             UploadManager *manager = [[UploadManager alloc] initWithUploadInfo:ref];
             [manager configureUploadAsset:ref.filePath atFolder:self.folder];
             [APPDELEGATE.uploadQueue addNewUploadTask:manager];

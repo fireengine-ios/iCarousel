@@ -599,6 +599,7 @@
 		05DEB1F01A81775F007793DD /* SyncRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DEB1E41A81775F007793DD /* SyncRecord.m */; };
 		05DEB1F11A81775F007793DD /* SyncSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DEB1E61A81775F007793DD /* SyncSettings.m */; };
 		05DEB1F21A81775F007793DD /* SyncStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DEB1E81A81775F007793DD /* SyncStatus.m */; };
+		05E0705F1AB977850038BE68 /* ConstantsDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E0705E1AB977850038BE68 /* ConstantsDao.m */; };
 		05E8112F19DF09DB0063F99A /* AlbumListModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8112E19DF09DB0063F99A /* AlbumListModalController.m */; };
 		05E8113219DF0ACB0063F99A /* MetaAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8113119DF0ACB0063F99A /* MetaAlbum.m */; };
 		05E8113519DF10340063F99A /* RefAlbumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8113419DF10340063F99A /* RefAlbumCell.m */; };
@@ -1495,6 +1496,8 @@
 		05DEB1E61A81775F007793DD /* SyncSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncSettings.m; sourceTree = "<group>"; };
 		05DEB1E71A81775F007793DD /* SyncStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncStatus.h; sourceTree = "<group>"; };
 		05DEB1E81A81775F007793DD /* SyncStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncStatus.m; sourceTree = "<group>"; };
+		05E0705D1AB977850038BE68 /* ConstantsDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstantsDao.h; sourceTree = "<group>"; };
+		05E0705E1AB977850038BE68 /* ConstantsDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstantsDao.m; sourceTree = "<group>"; };
 		05E8112D19DF09DB0063F99A /* AlbumListModalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumListModalController.h; sourceTree = "<group>"; };
 		05E8112E19DF09DB0063F99A /* AlbumListModalController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumListModalController.m; sourceTree = "<group>"; };
 		05E8113019DF0ACB0063F99A /* MetaAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetaAlbum.h; sourceTree = "<group>"; };
@@ -1959,6 +1962,8 @@
 				05DEB1CB1A80C175007793DD /* MigrateStatusDao.m */,
 				05EAB3D01AB6E350009A1543 /* ContactCountDao.h */,
 				05EAB3D11AB6E350009A1543 /* ContactCountDao.m */,
+				05E0705D1AB977850038BE68 /* ConstantsDao.h */,
+				05E0705E1AB977850038BE68 /* ConstantsDao.m */,
 			);
 			name = http;
 			sourceTree = "<group>";
@@ -3362,6 +3367,7 @@
 				059C9ECA1A07DCAD000C54D9 /* FileDetailModalController.m in Sources */,
 				562FB4021AA48C4400F9EFBD /* CurioReachabilityEx.m in Sources */,
 				051CB39219D2DD7C00E5FC88 /* PhotoListController.m in Sources */,
+				05E0705F1AB977850038BE68 /* ConstantsDao.m in Sources */,
 				05AF7C981A1CA22200F5011A /* RecentActivityHeaderView.m in Sources */,
 				052644B219D5A2A600B63759 /* SettingsUploadController.m in Sources */,
 				05440AE019D4445D009803D7 /* FloatingAddButton.m in Sources */,
