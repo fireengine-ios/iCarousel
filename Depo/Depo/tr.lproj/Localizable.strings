@@ -288,7 +288,7 @@
 
 "Memory"="Hafıza";
 "StorageUsageInfo"="%@%% / %@";
-"CurrentPackageTitle"="MEVCUT PAKET";
+"CurrentPackageTitle"="SAHİP OLDUĞUNUZ PAKET";
 "SubscriptionInfo"="%@ (%gGB) %g TL/Ay";
 "RenewalDateInfo"="Yenileme tarihi: %@";
 "CancelSubscription"="Üyelikten Vazgeç";
