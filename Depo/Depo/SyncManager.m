@@ -229,6 +229,7 @@
     ref.filePath = [asset.defaultRepresentation.url absoluteString];
     ref.autoSyncFlag = YES;
     ref.ownerPage = UploadStarterPageAuto;
+    ref.folderUuid = APPDELEGATE.session.user.mobileUploadFolderUuid;
 
     if ([[asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
         ref.contentType = ContentTypeVideo;

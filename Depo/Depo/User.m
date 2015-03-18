@@ -12,6 +12,7 @@
 
 @synthesize profileImgUrl;
 @synthesize fullName;
+@synthesize mobileUploadFolderUuid;
 
 - (id) init {
     if(self = [super init]) {

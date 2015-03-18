@@ -476,6 +476,7 @@
     for(UploadRef *ref in assetUrls) {
         ref.ownerPage = UploadStarterPagePhotos;
         ref.albumUuid = self.album.uuid;
+        ref.folderUuid = APPDELEGATE.session.user.mobileUploadFolderUuid;
 
         UploadManager *manager = [[UploadManager alloc] initWithUploadInfo:ref];
         [manager configureUploadAsset:ref.filePath atFolder:nil];
@@ -498,6 +499,7 @@
     uploadRef.contentType = ContentTypePhoto;
     uploadRef.albumUuid = self.album.uuid;
     uploadRef.ownerPage = UploadStarterPagePhotos;
+    uploadRef.folderUuid = APPDELEGATE.session.user.mobileUploadFolderUuid;
     
     UploadManager *uploadManager = [[UploadManager alloc] initWithUploadInfo:uploadRef];
     [uploadManager configureUploadFileForPath:filePath atFolder:nil withFileName:fileName];

@@ -12,5 +12,6 @@
 
 @property (nonatomic, strong) NSString *profileImgUrl;
 @property (nonatomic, strong) NSString *fullName;
+@property (nonatomic, strong) NSString *mobileUploadFolderUuid;
 
 @end

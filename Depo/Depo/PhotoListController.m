@@ -578,6 +578,7 @@
 - (void) photoModalDidTriggerUploadForUrls:(NSArray *)assetUrls {
     for(UploadRef *ref in assetUrls) {
         ref.ownerPage = UploadStarterPagePhotos;
+        ref.folderUuid = APPDELEGATE.session.user.mobileUploadFolderUuid;
 
         UploadManager *manager = [[UploadManager alloc] initWithUploadInfo:ref];
         [manager configureUploadAsset:ref.filePath atFolder:nil];
@@ -597,6 +598,7 @@
     uploadRef.fileName = fileName;
     uploadRef.contentType = ContentTypePhoto;
     uploadRef.ownerPage = UploadStarterPagePhotos;
+    uploadRef.folderUuid = APPDELEGATE.session.user.mobileUploadFolderUuid;
     
     UploadManager *uploadManager = [[UploadManager alloc] initWithUploadInfo:uploadRef];
     [uploadManager configureUploadFileForPath:filePath atFolder:nil withFileName:fileName];

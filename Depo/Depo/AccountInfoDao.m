@@ -34,11 +34,15 @@
         if(mainDict != nil && ![mainDict isKindOfClass:[NSNull class]]) {
             NSString *name = [mainDict objectForKey:@"name"];
             NSString *surname = [mainDict objectForKey:@"surname"];
+            NSString *mobileUploadsSpecialFolderUuid = [mainDict objectForKey:@"mobileUploadsSpecialFolderUuid"];
             NSString *url = [mainDict objectForKey:@"url"];
             
 //            user.fullName = [NSString stringWithFormat:@"%@ %@", [self strByRawVal:name], [self strByRawVal:surname]];
             user.fullName = [NSString stringWithFormat:@"%@", [self strByRawVal:name]];
             user.profileImgUrl = [self strByRawVal:url];
+            if(mobileUploadsSpecialFolderUuid != nil && ![mobileUploadsSpecialFolderUuid isKindOfClass:[NSNull class]]) {
+                user.mobileUploadFolderUuid = mobileUploadsSpecialFolderUuid;
+            }
             
         }
         [self shouldReturnSuccessWithObject:user];
