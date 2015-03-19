@@ -244,7 +244,7 @@
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return 4;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -271,9 +271,7 @@
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"ConnectedDevices", @"") titleColor:nil subTitleText:@"" iconName:@"device_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         return cell;
     } else if (indexPath.row == 3) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"HowTo", @"") titleColor:nil subTitleText:@"" iconName:@"info_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
-        return cell;
-    } else if (indexPath.row == 4) {
+//        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"HowTo", @"") titleColor:nil subTitleText:@"" iconName:@"info_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"FAQ", @"") titleColor:nil subTitleText:@"" iconName:@"help_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         return cell;
     } else {
@@ -293,9 +291,7 @@
             [self didTriggerConnectedDevices];
             break;
         case 3:
-            [self didTriggerAboutUs];
-            break;
-        case 4:
+//            [self didTriggerAboutUs];
             [self didTriggerHelp];
             break;
         default:

@@ -20,11 +20,11 @@
 "MoreMenuDetailFileTitle"="Dosya Detayları";
 "MoreMenuDetailAlbumTitle"="Albüm Detayları";
 "MoreMenuDetailFileTitleImg"="Fotoğraf Detayları";
-"MoreMenuDetailFileTitleDoc"="Döküman Detayları";
+"MoreMenuDetailFileTitleDoc"="Belge Detayları";
 "MoreMenuDetailFileTitleMusic"="Müzik Detayları";
 "MoreMenuDetailFileTitleVideo"="Video Detayları";
 "MoreMenuShareTitle"="Klasörü Paylaş";
-"MoreMenuShareTitleDoc"="Dökümanı Paylaş";
+"MoreMenuShareTitleDoc"="Belgeyi Paylaş";
 "MoreMenuShareTitleImg"="Fotoğrafı Paylaş";
 "MoreMenuShareTitleVideo"="Videoyu Paylaş";
 "MoreMenuShareTitleMusic"="Müziği Paylaş";
@@ -43,7 +43,7 @@
 "MoreMenuUnfavTitleMusic"="Favorilerden Çıkar";
 "MoreMenuUnfavTitleOther"="Favorilerden Çıkar";
 "MoreMenuDeleteTitle"="Klasörü Sil";
-"MoreMenuDeleteTitleDoc"="Dökümanı Sil";
+"MoreMenuDeleteTitleDoc"="Belgeyi Sil";
 "MoreMenuDeleteTitleImg"="Fotoğrafı Sil";
 "MoreMenuDeleteTitleVideo"="Videoyu Sil";
 "MoreMenuDeleteTitleMusic"="Müziği Sil";
@@ -178,7 +178,7 @@
 "SortTypeAlbumAscTitle"="Albüm İsmi (A-Z)";
 "SortTypeAlbumDescTitle"="Albüm İsmi (Z-A)";
 "HomeUsageTotalStorage"="Toplam %@";
-"LastSyncFormat"="SON YEDEKLEME: %@ ÖNCE";
+"LastSyncFormat"="SON YÜKLEME: %@ ÖNCE";
 
 "GetMoreStorageButtonTitle"="Daha Fazla Hafıza";
 "SongTitleFieldTitle"="BAŞLIK";
@@ -246,15 +246,15 @@
 "None"="Hiç";
 
 "AppTitleRef"="Turkcell Akıllı Depo";
-"AppPreLoginInfo"="Tüm fotoğraf, şarkı, döküman ve adres bilgilerinizi güvenle Akıllı Depo'da saklayın. Dosyalarınızı direk telefondan ya da bilgisayarınızdan düzenleyin.";
+"AppPreLoginInfo"="Tüm fotoğraf, şarkı, belge ve rehber bilgilerinizi güvenle Akıllı Depo'da saklayın. Dosyalarınızı direk telefondan ya da bilgisayarınızdan düzenleyin.";
 
 "Login"="Giriş yap";
 "SignIn"="Giriş yap";
 "Continue"="Devam";
 
-"PostLoginSyncInfo"="Fotoğraflarınızı ve videolarınızı iPhone'unuzdan Turkcell Akıllı Depo uygulamasına otomatik olarak yedekleyin";
-"PostLoginImgPrefInfo"="Fotoğraf & Videolarınızı iPhone'unuzdan Akıllı Depo uygulamasına otomatik olarak yedekleyin";
-"PostLoginContactPrefInfo"="Adres Defteri ve Sosyal Ağ kişilerinizi Akıllı Depo uygulamasına otomatik olarak yedekleyin";
+"PostLoginSyncInfo"="Fotoğraflarınızı ve videolarınızı iPhone'unuzdan Turkcell Akıllı Depo uygulamasına otomatik olarak yükleyin";
+"PostLoginImgPrefInfo"="Fotoğraf & Videolarınızı iPhone'unuzdan Turkcell Akıllı Depo uygulamasına otomatik olarak yükleyin";
+"PostLoginContactPrefInfo"="Rehberinizi ve Sosyal Ağ kişilerinizi Akıllı Depo uygulamasına otomatik olarak yükleyin";
 
 "PostLoginSyncPrefTitle"="BAĞLANTI TERCİHİ";
 "PostLoginRoamingTitle"="Yurtdışı Dolaşım";
@@ -300,7 +300,7 @@
 
 "AutomaticSynchronization"="Otomatik Yükleme";
 "Photos&Videos"="Fotoğraf ve Videolar";
-"Photos&VideosInfo"="Fotoğraf ve videolarınızın Akıllı Depo'nuzda otomatik olarak yedeklenmesi için açık konuma getirin.";
+"Photos&VideosInfo"="Fotoğraf ve videolarınızın Akıllı Depo'nuza otomatik olarak yüklenmesi için açık konuma getirin.";
 "Photos&VideosAutoInfo"="Akıllı Depo'daki fotoğraf ve videolarınıza erişebilir ve istediğinizde albümünüzdeki fotoğraf ve videoları Akıllı Depo'ya yükleyebilirsiniz.\n\n(Fotoğraf ve videoları Akıllı Depo'ya yüklemek için uygulamadaki \"+\" butonunu kullanın.)\n\nOtomatik yükleme etkin durumda, albümünüzdeki fotoğraf ve videolar otomatik olarak bulutta yedeklenecek.";
 "Photos&VideosOnInfo"="Akıllı Depo'daki fotoğraf ve videolarınıza erişebilir ve istediğinizde albümünüzdeki fotoğraf ve videoları Akıllı Depo'ya yükleyebilirsiniz.\n\n(Fotoğraf ve videoları Akıllı Depo'ya yüklemek için uygulamadaki \"+\" butonunu kullanın.)";
 "Photos&VideosOffInfo"="Akıllı Depo'daki fotoğraf ve videolarınıza erişemez ve Akıllı Depo'ya yeni fotoğraf veya video yükleyemezsiniz.";
@@ -311,18 +311,18 @@
 "DocumentsOnInfo"="Akıllı Depo'daki dökümanlarınıza erişebilir ve istediğinizde dökümanlarınızı Akıllı Depo'ya yükleyebilirsiniz. Diğer uygulamalar üzerinden (e-posta uygulamaları gibi) \"Akıllı Depo ile aç\" seçeneği ile dökümanlarınızı yükleyebilirsiniz.";
 "DocumentsOffInfo"="Akıllı Depo'daki dökümanlarınıza erişemez ve Akıllı Depo'ya yeni doküman yükleyemezsiniz.";
 "Contacts"="Rehber";
-"ContactsInfo"="Telefon rehberinizin Akıllı Depo'nuzda otomatik olarak yedeklenmesi için açık konuma getirin.";
-"ContactsAutoInfo"="Akıllı Depo'yu açtığınızda telefon rehberiniz otomatik olarak buluta yedeklenecek.";
-"ContactsOffInfo"="Telefon rehberiniz otomatik olarak buluta yedeklenmeyecek.";
+"ContactsInfo"="Telefon rehberinizin Akıllı Depo'nuza otomatik olarak yüklenmesi için açık konuma getirin.";
+"ContactsAutoInfo"="Akıllı Depo'yu açtığınızda telefon rehberiniz otomatik olarak buluta yüklenecek.";
+"ContactsOffInfo"="Telefon rehberiniz otomatik olarak buluta yüklenmeyecek.";
 "ContactsAutoDescriptionHeader"="%d KİŞİ HENÜZ EŞİTLENMEDİ";
 "ContactsAutoDescriptionBody"="Facebook, Twitter ve Exchange Server bağlantılarınız Turkcell Bulut'a yedeklenemezler.";
-"ContactsOnInfo"="Akıllı Depo'yu açtığınızda telefon rehberiniz otomatik olarak buluta yedeklenecek.";
-"ContactsOffInfo"="Telefon rehberiniz otomatik olarak buluta yedeklenmeyecek.";
+"ContactsOnInfo"="Akıllı Depo'yu açtığınızda telefon rehberiniz otomatik olarak buluta yüklenecek.";
+"ContactsOffInfo"="Telefon rehberiniz otomatik olarak buluta yüklenmeyecek.";
 "ContactsOnDescriptionHeader"="%d KİŞİ HENÜZ EŞİTLENMEDİ";
 "ContactsOnDescriptionBody"="Facebook, Twitter ve Exchange Server bağlantılarınız Turkcell Bulut'a yedeklenemezler.";
 "PhoneContacts"="Telefon Rehberi Kişileri";
-"SynchronizationPreferencesTitle"="YEDEKLEME SEÇENEKLERİ";
-"AutoSynchronization"="OTOMATİK YEDEKLEME";
+"SynchronizationPreferencesTitle"="YÜKLEME SEÇENEKLERİ";
+"AutoSynchronization"="OTOMATİK YÜKLEME";
 "Wifi3G"="Wifi + 3G";
 "Wifi"="Wifi";
 "DataRoaming"="Veri Dolaşımı";
@@ -401,8 +401,8 @@
 "MenuContactSync"="Telefon Rehberi";
 
 "ContactSyncFlagTitle"="Otomatik Yükleme";
-"ContactLastSyncDateTitle"="Son Yedekleme Tarihi: %@";
-"ContactLastSyncDetailTitle"="SON YEDEKLEME DETAYI";
+"ContactLastSyncDateTitle"="Son İşlem Tarihi: %@";
+"ContactLastSyncDetailTitle"="SON İŞLEM DETAYI";
 "ContactLastSyncDetailClientTitle"="Cihaz";
 "ContactLastSyncDetailServerTitle"="Sunucu";
 "ContactLastSyncDetailUpdateTitle"="Güncellenen";
@@ -430,7 +430,7 @@
 "StartUsingTitle"="Kullanmaya başla";
 
 "EmptyMusicTitle"="Hiç müziğiniz bulunmuyor.";
-"EmptyDocumentsTitle"="Hiç dokümanınız bulunmuyor.";
+"EmptyDocumentsTitle"="Hiç belgeniz bulunmuyor.";
 "EmptyPhotosVideosTitle"="Fotoğraf veya videonuz bulunmuyor.";
 "EmptyPhotosVideosDescription"="iPhone'ununzdan fotoğraf ve video yüklemek için \"+\" butonuna basın";
 "EmptyAlbumsTitle"="Hiç albümünüz bulunmuyor.";
@@ -446,12 +446,3 @@
 
 "ShareTitle"="Paylaş";
 "MoveTitle"="Taşı";
-
-"ContactBackupInfo"="Telefon rehberinizdeki kayıtları Akıllı Depo'ya yükleyebilirsiniz";
-"ContactRestoreInfo"="Akıllı Depo'daki rehber kayıtlarınızı telefonunuza indirebilirsiniz";
-
-"ContactBackupButtonTitle"="Akıllı Depo'ya Yükle";
-"ContactRestoreButtonTitle"="Telefonuma İndir";
-
-"ContactResultBackupSectionTitle"="Akıllı Depo'da";
-"ContactResultRestoreSectionTitle"="Telefonda";
