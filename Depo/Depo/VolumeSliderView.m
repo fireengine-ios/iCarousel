@@ -8,26 +8,33 @@
 
 #import "VolumeSliderView.h"
 
+#define PORTRAIT_INDICATOR_COUNT 23
+#define LANDSCAPE_INDICATOR_COUNT 40
+
 @implementation VolumeSliderView
 
 @synthesize delegate;
 @synthesize volumeLevels;
+@synthesize volumeMuteButton;
+@synthesize volumeFullButton;
 
 - (id) initWithFrame:(CGRect)frame {
     if(self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"video-player-bckgrnd.png"]];
         
-        CustomButton *volumeMuteButton = [[CustomButton alloc] initWithFrame:CGRectMake(3, 15, 30, 30) withImageName:@"volume_mute.png"];
+        volumeMuteButton = [[CustomButton alloc] initWithFrame:CGRectMake(3, 15, 30, 30) withImageName:@"volume_mute.png"];
         [volumeMuteButton addTarget:self action:@selector(volumeMuteClicked) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:volumeMuteButton];
         
-        CustomButton *volumeFullButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 36, 15, 30, 30) withImageName:@"volume_full.png"];
+        volumeFullButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 36, 15, 30, 30) withImageName:@"volume_full.png"];
         [volumeFullButton addTarget:self action:@selector(volumeFullClicked) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:volumeFullButton];
         
         volumeLevels = [[NSMutableArray alloc] init];
         
-        for(int i=0; i<23; i++) {
+        UIInterfaceOrientation currentOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+        int levelCount = UIInterfaceOrientationIsLandscape(currentOrientation) ? LANDSCAPE_INDICATOR_COUNT : PORTRAIT_INDICATOR_COUNT;
+        for(int i=0; i<levelCount; i++) {
             VolumeLevelIndicator *volIndicator = [[VolumeLevelIndicator alloc] initWithFrame:CGRectMake(50 + (i-1)*10, 26, 8, 8) withLevel:(i+1)];
             volIndicator.userInteractionEnabled = NO;
             volIndicator.delegate = self;
@@ -47,7 +54,7 @@
             [level manuallyDeactivate];
         }
     }
-    [delegate volumeSliderDidChangeTo:0.04*levelSelected];
+    [delegate volumeSliderDidChangeTo:((1.0/[volumeLevels count]) *levelSelected)];
 }
 
 - (void) volumeMuteClicked {
@@ -65,7 +72,7 @@
 }
 
 - (void) setInitialVolumeLevels:(float) level {
-    int currentLevel = floor(level / 0.04f);
+    int currentLevel = floor(level / (1.0/[volumeLevels count]));
     for(VolumeLevelIndicator *level in volumeLevels) {
         if(level.level <= currentLevel) {
             [level manuallyActivate];
@@ -99,7 +106,7 @@
             [level manuallyDeactivate];
         }
     }
-    [delegate volumeSliderDidChangeTo:0.04*activeLevelCount];
+    [delegate volumeSliderDidChangeTo:(1.0/[volumeLevels count])*activeLevelCount];
 }
 
 - (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -111,7 +118,31 @@
             break;
         }
     }
-    [delegate volumeSliderDidChangeTo:0.04*activeLevelCount];
+    [delegate volumeSliderDidChangeTo:(1.0/[volumeLevels count])*activeLevelCount];
+}
+
+- (void) updateInnerItems {
+    UIInterfaceOrientation currentOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    
+    volumeMuteButton.frame = CGRectMake(10, 22, 19, 16);
+    volumeFullButton.frame = CGRectMake(self.frame.size.width - 29, 22, 19, 16);
+    
+    for(int i=0; i<[volumeLevels count]; i++) {
+        VolumeLevelIndicator *volIndicator = [volumeLevels objectAtIndex:i];
+        [volIndicator removeFromSuperview];
+    }
+    [volumeLevels removeAllObjects];
+    
+    int newLevelCount = UIInterfaceOrientationIsLandscape(currentOrientation) ? LANDSCAPE_INDICATOR_COUNT : PORTRAIT_INDICATOR_COUNT;
+    
+    for(int i=0; i<newLevelCount; i++) {
+        VolumeLevelIndicator *volIndicator = [[VolumeLevelIndicator alloc] initWithFrame:CGRectMake(50 + (i-1)*10, 26, 8, 8) withLevel:(i+1)];
+        volIndicator.userInteractionEnabled = NO;
+        volIndicator.delegate = self;
+        [self addSubview:volIndicator];
+        
+        [volumeLevels addObject:volIndicator];
+    }
 }
 
 /*

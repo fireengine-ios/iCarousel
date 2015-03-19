@@ -8,6 +8,7 @@
 #import "CustomAVPlayer.h"
 #import "AppDelegate.h"
 #import <MediaPlayer/MediaPlayer.h>
+#import "VolumeSliderView.h"
 
 static void *AVPlayerPlaybackViewControllerRateObservationContext = &AVPlayerPlaybackViewControllerRateObservationContext;
 static void *AVPlayerPlaybackViewControllerStatusObservationContext = &AVPlayerPlaybackViewControllerStatusObservationContext;
@@ -31,6 +32,7 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
 @synthesize maxLandscapeRect;
 @synthesize lastContact;
 @synthesize isPlayable;
+@synthesize currentVolume;
 
 - (id)initWithFrame:(CGRect)frame withVideo:(MetaFile *) _video {
     self = [super initWithFrame:frame];
@@ -42,6 +44,8 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
         self.maxRect = CGRectMake(frame.origin.x, frame.origin.y, APPDELEGATE.window.frame.size.width-frame.origin.x, APPDELEGATE.window.frame.size.height-frame.origin.y);
         self.clipsToBounds = YES;
         self.maxLandscapeRect = CGRectMake(frame.origin.x, frame.origin.y, APPDELEGATE.window.frame.size.height-frame.origin.x, APPDELEGATE.window.frame.size.width-frame.origin.y);
+        
+        self.currentVolume = 1.0f;
 
         [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(orientationChanged:)    name:UIDeviceOrientationDidChangeNotification  object:nil];
     }
@@ -80,7 +84,17 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
 
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(videoTapped)];
     singleTap.numberOfTapsRequired = 1;
+    singleTap.delegate = self;
     [self addGestureRecognizer:singleTap];
+}
+
+- (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    UIView *view = touch.view;
+    NSLog(@"Is of type: %@", [view class]);
+    if([view isKindOfClass:[CustomAVControl class]] || [view isKindOfClass:[VolumeSliderView class]]) {
+        return NO;
+    }
+    return YES;
 }
 
 - (void)prepareToPlayAsset:(AVURLAsset *)asset withKeys:(NSArray *)requestedKeys {
@@ -192,13 +206,15 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
                 [self.player play];
                 [self.controlView videoDidStart];
                 
-                float currentVolumeVal = [self.player volume];
+                float currentVolumeVal = 1.0f;
                 [self.controlView initialVolumeLevel:currentVolumeVal];
                 
+                /*
                 UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(move:)];
                 [panRecognizer setMinimumNumberOfTouches:1];
                 [panRecognizer setMaximumNumberOfTouches:1];
                 [self addGestureRecognizer:panRecognizer];
+                 */
 
                 __weak CustomAVPlayer *weakSelf = self;
                 [player addPeriodicTimeObserverForInterval:CMTimeMakeWithSeconds(0.1f, NSEC_PER_SEC)  queue:NULL usingBlock:^(CMTime time) {
@@ -295,7 +311,22 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
         [audioMix setInputParameters:allAudioParams];
         
         [mPlayerItem setAudioMix:audioMix];
+        self.currentVolume = volumeVal;
     }
+}
+
+- (float) readCurrentVolume {
+    if(player) {
+        float startVolume;
+        float endVolume;
+        CMTimeRange timeRange;
+        
+        AVAssetTrack *audioTrack = [[player.currentItem.asset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0];
+        AVMutableAudioMixInputParameters *audioInputParams = [AVMutableAudioMixInputParameters audioMixInputParametersWithTrack:audioTrack];
+        [audioInputParams getVolumeRampForTime:player.currentTime startVolume: &startVolume endVolume: &endVolume timeRange: &timeRange];
+        return endVolume;
+    }
+    return 0.0f;
 }
 
 - (void) syncSlider {
@@ -408,19 +439,19 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
 }
 
 - (void)orientationChanged:(NSNotification *)notification {
-    if (self.player.rate > 0 && !self.player.error) {
-        [self mirrorRotation:[[UIApplication sharedApplication] statusBarOrientation]];
-    }
+    [self mirrorRotation:[[UIApplication sharedApplication] statusBarOrientation]];
 }
 
 - (void) mirrorRotation:(UIInterfaceOrientation) orientation {
     if(IS_IPAD)
         return;
     
+    /*
     if(self.player.rate == 0.0f) {
         [self updateFrame:initialRect isMax:NO];
         return;
     }
+     */
 
     if(orientation == UIInterfaceOrientationLandscapeLeft ) {
         playerLayer.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
@@ -435,6 +466,8 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
         controlView.frame = CGRectMake(0, self.frame.size.height-110, self.frame.size.width, 110);
         [controlView updateInnerFrames];
     }
+    float currentVolumeVal = self.currentVolume;
+    [self.controlView initialVolumeLevel:currentVolumeVal];
 }
 
 

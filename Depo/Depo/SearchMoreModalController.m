@@ -166,7 +166,7 @@
 
 - (void) dynamicallyLoadNextPage {
     listOffset++;
-    [loadMoreDao requestMetadata:searchText andPage:listOffset andSize:NO_OF_FILES_PER_PAGE andSortType:APPDELEGATE.session.sortType andSearchListType:searchListType];
+    [loadMoreDao requestMetadata:searchText andPage:listOffset*NO_OF_FILES_PER_PAGE andSize:NO_OF_FILES_PER_PAGE andSortType:APPDELEGATE.session.sortType andSearchListType:searchListType];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

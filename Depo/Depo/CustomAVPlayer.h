@@ -15,7 +15,7 @@
 - (void) customPlayerDidScrollInitialScreen;
 @end
 
-@interface CustomAVPlayer : UIView <CustomAVControlDelegate>
+@interface CustomAVPlayer : UIView <CustomAVControlDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) id<CustomAVPlayerDelegate> delegate;
 @property (nonatomic, strong) AVPlayerItem *mPlayerItem;
@@ -29,6 +29,7 @@
 @property (nonatomic) CGRect maxRect;
 @property (nonatomic) CGRect maxLandscapeRect;
 @property (nonatomic) CGPoint lastContact;
+@property (nonatomic) float currentVolume;
 @property (nonatomic, strong) MetaFile *video;
 @property (nonatomic, strong) CustomAVControl *controlView;
 

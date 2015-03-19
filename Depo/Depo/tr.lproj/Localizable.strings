@@ -446,3 +446,12 @@
 
 "ShareTitle"="Paylaş";
 "MoveTitle"="Taşı";
+
+"ContactBackupInfo"="Telefon rehberinizdeki kayıtları Akıllı Depo'ya yükleyebilirsiniz";
+"ContactRestoreInfo"="Akıllı Depo'daki rehber kayıtlarınızı telefonunuza indirebilirsiniz";
+
+"ContactBackupButtonTitle"="Akıllı Depo'ya Yükle";
+"ContactRestoreButtonTitle"="Telefonuma İndir";
+
+"ContactResultBackupSectionTitle"="Akıllı Depo'da";
+"ContactResultRestoreSectionTitle"="Telefonda";

@@ -10,6 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <Foundation/Foundation.h>
 #import "VolumeLevelIndicator.h"
+#import "VolumeSliderView.h"
 
 @protocol CustomAVControlDelegate <NSObject>
 - (void) customAVShouldPause;
@@ -19,7 +20,7 @@
 - (void) customAVShouldChangeVolumeTo:(float) volumeVal;
 @end
 
-@interface CustomAVControl : UIView <VolumeLevelDelegate>
+@interface CustomAVControl : UIView <VolumeLevelDelegate, VolumeSliderDelegate>
 
 @property (nonatomic, strong) id<CustomAVControlDelegate> delegate;
 @property (nonatomic, strong) CustomButton *playButton;
@@ -27,14 +28,12 @@
 @property (nonatomic, strong) CustomButton *fullScreenButton;
 @property (nonatomic, strong) CustomButton *volumeButton;
 @property (nonatomic, strong) UIView *airPlayView;
-@property (nonatomic, strong) UIView *customVolumeView;
+@property (nonatomic, strong) VolumeSliderView *customVolumeView;
 @property (nonatomic, strong) UILabel *totalDuration;
 @property (nonatomic, strong) UILabel *passedDuration;
 @property (nonatomic, strong) NSMutableArray *volumeLevels;
 @property (nonatomic, strong) UIView *separator;
 @property (nonatomic, strong) UISlider *slider;
-@property (nonatomic, strong) CustomButton *volumeMuteButton;
-@property (nonatomic, strong) CustomButton *volumeFullButton;
 @property (nonatomic) int totalTimeInSec;
 
 - (id)initWithFrame:(CGRect)frame withTotalDuration:(NSString *) totalDur;
