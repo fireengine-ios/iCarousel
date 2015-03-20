@@ -75,7 +75,7 @@
     [locManager startUpdatingLocation];
 }
 */
- 
+
 - (void) photoListSuccessCallback:(NSArray *) files {
     for(MetaFile *row in files) {
         if(row.metaHash != nil) {
@@ -99,7 +99,17 @@
                             ConnectionOption connectionOption = (ConnectionOption)[CacheUtil readCachedSettingSyncingConnectionType];
                             if(networkStatus == kReachableViaWiFi || (networkStatus == kReachableViaWWAN && connectionOption == ConnectionOptionWifi3G)) {
                                 NSString *localHash = [asset.defaultRepresentation MD5];
-                                if(![remoteHashList containsObject:localHash]) {
+                                BOOL serverContainsImageFlag = [remoteHashList containsObject:localHash];
+                                if(!serverContainsImageFlag) {
+                                    ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
+                                    NSString *assetFileName = [defaultRep filename];
+                                    for(MetaFile *serverFile in files) {
+                                        if([serverFile.name isEqualToString:assetFileName] && serverFile.bytes == [defaultRep size]) {
+                                            serverContainsImageFlag = YES;
+                                        }
+                                    }
+                                }
+                                if(!serverContainsImageFlag) {
                                     [self startUploadForAsset:asset andRemoteHash:nil andLocalHash:localHash];
                                     [SyncUtil writeFirstTimeSyncFlag];
                                     [SyncUtil updateLastSyncDate];
@@ -162,8 +172,8 @@
 - (void) firstTimeSyncStartFinalized {
     NSTimeInterval timeInMiliseconds2 = [[NSDate date] timeIntervalSince1970];
     NSLog(@"End: %f", timeInMiliseconds2);
-    [SyncUtil writeLastSyncDate:[NSDate date]];
-//    [APPDELEGATE.uploadQueue startReadyTasks];
+    [SyncUtil writeFirstTimeSyncFlag];
+    [SyncUtil updateLastSyncDate];
 }
 
 - (void) manuallyCheckIfAlbumChanged {
