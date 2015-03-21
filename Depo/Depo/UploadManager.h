@@ -49,7 +49,6 @@
 - (id) initWithUploadInfo:(UploadRef *) ref;
 
 - (void) configureUploadFileForPath:(NSString *) filePath atFolder:(MetaFile *) _folder withFileName:(NSString *) fileName;
-- (void) configureUploadData:(NSData *) _dataToUpload atFolder:(MetaFile *) _folder withFileName:(NSString *) fileName;
 - (void) configureUploadAsset:(NSString *) assetUrl atFolder:(MetaFile *) _folder;
 
 - (void) startTask;

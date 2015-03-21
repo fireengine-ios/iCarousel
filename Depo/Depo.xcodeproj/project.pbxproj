@@ -578,6 +578,7 @@
 		05C3F60A1A3902E0001954E8 /* check_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C3F6081A3902E0001954E8 /* check_icon.png */; };
 		05C3F60B1A3902E0001954E8 /* check_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C3F6091A3902E0001954E8 /* check_icon@2x.png */; };
 		05C7145C1A7823C400C467D9 /* RadiusDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C7145B1A7823C400C467D9 /* RadiusDao.m */; };
+		05C7CB6A1ABC91B200A7BF8E /* MetaFileSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C7CB691ABC91B200A7BF8E /* MetaFileSummary.m */; };
 		05D2B19719E676BF00FC309D /* AlbumListDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D2B19619E676BF00FC309D /* AlbumListDao.m */; };
 		05D2B19A19E679E500FC309D /* PhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D2B19919E679E500FC309D /* PhotoAlbum.m */; };
 		05D2B19D19E67C6900FC309D /* MainPhotoAlbumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D2B19C19E67C6900FC309D /* MainPhotoAlbumCell.m */; };
@@ -1456,6 +1457,8 @@
 		05C3F6091A3902E0001954E8 /* check_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "check_icon@2x.png"; sourceTree = "<group>"; };
 		05C7145A1A7823C400C467D9 /* RadiusDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadiusDao.h; sourceTree = "<group>"; };
 		05C7145B1A7823C400C467D9 /* RadiusDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadiusDao.m; sourceTree = "<group>"; };
+		05C7CB681ABC91B200A7BF8E /* MetaFileSummary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetaFileSummary.h; sourceTree = "<group>"; };
+		05C7CB691ABC91B200A7BF8E /* MetaFileSummary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MetaFileSummary.m; sourceTree = "<group>"; };
 		05D2B19519E676BF00FC309D /* AlbumListDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumListDao.h; sourceTree = "<group>"; };
 		05D2B19619E676BF00FC309D /* AlbumListDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumListDao.m; sourceTree = "<group>"; };
 		05D2B19819E679E500FC309D /* PhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoAlbum.h; sourceTree = "<group>"; };
@@ -2009,6 +2012,8 @@
 				05DEB1C21A80B8FE007793DD /* MigrationStatus.m */,
 				059CE5451A87D45100F6CFAE /* ContactSyncResult.h */,
 				059CE5461A87D45100F6CFAE /* ContactSyncResult.m */,
+				05C7CB681ABC91B200A7BF8E /* MetaFileSummary.h */,
+				05C7CB691ABC91B200A7BF8E /* MetaFileSummary.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -3387,6 +3392,7 @@
 				058B328B1A14ABBE00A291C4 /* DeleteAlbumsDao.m in Sources */,
 				058219C51A384CC6001FA679 /* SearchMoreModalController.m in Sources */,
 				052644AD19D5A2A600B63759 /* SettingsContactsController.m in Sources */,
+				05C7CB6A1ABC91B200A7BF8E /* MetaFileSummary.m in Sources */,
 				051E1EA719CB209F00FD1E03 /* MenuCell.m in Sources */,
 				562FB3FB1AA48C4400F9EFBD /* CurioDBToolkit.m in Sources */,
 				051E1E0319CAC2F900FD1E03 /* main.m in Sources */,

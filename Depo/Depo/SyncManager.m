@@ -16,6 +16,7 @@
 #import "UploadManager.h"
 #import "AppDelegate.h"
 #import "UploadQueue.h"
+#import <MobileCoreServices/MobileCoreServices.h>
 
 @implementation SyncManager
 
@@ -39,51 +40,19 @@
     [elasticSearchDao requestPhotosForPage:0 andSize:10000 andSortType:SortTypeAlphaAsc];
 }
 
-- (void) startAutoSync {
-    /*
-     notification'ın backgrounddan dönünce gelmesi dolayısıyla background fetch sorgusunda tüm photo albüm kontrol ediliyor. O nedenle notification commentlendi
-     */
-    
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(albumChanged:) name:ALAssetsLibraryChangedNotification object:nil];
-//    [self startLocationManagerIfNecessary];
-}
-
-- (void) stopAutoSync {
-    /*
-     notification'ın backgrounddan dönünce gelmesi dolayısıyla background fetch sorgusunda tüm photo albüm kontrol ediliyor. O nedenle notification commentlendi. Background fetch nedeniyle location kullanımından vazgeçildi
-     */
-    
-    /*
-    if(locManager) {
-        [locManager stopUpdatingLocation];
-        locManager = nil;
-    }
-     */
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:ALAssetsLibraryChangedNotification object:nil];
-}
-
-/*
-- (void) startLocationManagerIfNecessary {
-    if(!locManager) {
-        self.locManager = [[CLLocationManager alloc] init];
-        self.locManager.delegate = self;
-        self.locManager.pausesLocationUpdatesAutomatically = NO;
-        self.locManager.distanceFilter = 2000;
-        self.locManager.desiredAccuracy = kCLLocationAccuracyKilometer;
-        [self.locManager requestAlwaysAuthorization];
-    }
-    [locManager startUpdatingLocation];
-}
-*/
-
 - (void) photoListSuccessCallback:(NSArray *) files {
     for(MetaFile *row in files) {
         if(row.metaHash != nil) {
             [SyncUtil cacheSyncHashRemotely:row.metaHash];
         }
+        MetaFileSummary *fileSummary = [[MetaFileSummary alloc] init];
+        fileSummary.bytes = row.bytes;
+        fileSummary.fileName = row.name;
+        [SyncUtil cacheSyncFileSummary:fileSummary];
     }
     
     NSArray *remoteHashList = [SyncUtil readSyncHashRemotely];
+    NSArray *remoteSummaryList = [SyncUtil readSyncFileSummaries];
 
     NSTimeInterval timeInMiliseconds1 = [[NSDate date] timeIntervalSince1970];
     NSLog(@"startFirstTimeSync Start: %f", timeInMiliseconds1);
@@ -103,8 +72,8 @@
                                 if(!serverContainsImageFlag) {
                                     ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
                                     NSString *assetFileName = [defaultRep filename];
-                                    for(MetaFile *serverFile in files) {
-                                        if([serverFile.name isEqualToString:assetFileName] && serverFile.bytes == [defaultRep size]) {
+                                    for(MetaFileSummary *summary in remoteSummaryList) {
+                                        if([summary.fileName isEqualToString:assetFileName] && summary.bytes == [defaultRep size]) {
                                             serverContainsImageFlag = YES;
                                         }
                                     }
@@ -177,10 +146,6 @@
 }
 
 - (void) manuallyCheckIfAlbumChanged {
-    [self albumChanged:nil];
-}
-
-- (void) albumChanged:(NSNotification *) not {
     EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
 
     BOOL triggerSyncing = NO;
@@ -197,6 +162,7 @@
     if(triggerSyncing) {
         NSArray *localHashList = [SyncUtil readSyncHashLocally];
         NSArray *remoteHashList = [SyncUtil readSyncHashRemotely];
+        NSArray *remoteSummaryList = [SyncUtil readSyncFileSummaries];
         
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
             [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
@@ -209,7 +175,19 @@
                                 ConnectionOption connectionOption = (ConnectionOption)[CacheUtil readCachedSettingSyncingConnectionType];
                                 if(networkStatus == kReachableViaWiFi || (networkStatus == kReachableViaWWAN && connectionOption == ConnectionOptionWifi3G)) {
                                     NSString *localHash = [asset.defaultRepresentation MD5];
-                                    if(![localHashList containsObject:localHash] && ![remoteHashList containsObject:localHash] && [APPDELEGATE.uploadQueue uploadRefForAsset:[asset.defaultRepresentation.url absoluteString]] == nil) {
+                                    BOOL shouldStartUpload = ![localHashList containsObject:localHash] && ![remoteHashList containsObject:localHash] && [APPDELEGATE.uploadQueue uploadRefForAsset:[asset.defaultRepresentation.url absoluteString]] == nil;
+                                    if(shouldStartUpload) {
+                                        ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
+                                        NSString *assetFileName = [defaultRep filename];
+                                        NSLog(@"ASSET NAME:%@ SIZE:%lld", assetFileName, [defaultRep size]);
+                                        for(MetaFileSummary *summary in remoteSummaryList) {
+                                            NSLog(@"SUMMARY NAME:%@ SIZE:%lld", summary.fileName, summary.bytes);
+                                            if([summary.fileName isEqualToString:assetFileName] && summary.bytes == [defaultRep size]) {
+                                                shouldStartUpload = NO;
+                                            }
+                                        }
+                                    }
+                                    if(shouldStartUpload) {
                                         [self startUploadForAsset:asset andRemoteHash:nil andLocalHash:localHash];
                                         //                                [SyncUtil updateLastSyncDate];
                                         //                                [SyncUtil increaseBadgeCount];
@@ -232,6 +210,14 @@
 }
 
 - (void) startUploadForAsset:(ALAsset *) asset andRemoteHash:(NSString *) remoteHash andLocalHash:(NSString *) localHash {
+    NSString *mimeType = (__bridge_transfer NSString*)UTTypeCopyPreferredTagWithClass
+    ((__bridge CFStringRef)[asset.defaultRepresentation UTI], kUTTagClassMIMEType);
+    NSLog(@"MIME TYPE: %@", mimeType);
+
+    MetaFileSummary *summary = [[MetaFileSummary alloc] init];
+    summary.fileName = [asset.defaultRepresentation filename];
+    summary.bytes = [asset.defaultRepresentation size];
+
     UploadRef *ref = [[UploadRef alloc] init];
     ref.remoteHash = remoteHash;
     ref.localHash = localHash;
@@ -240,7 +226,9 @@
     ref.autoSyncFlag = YES;
     ref.ownerPage = UploadStarterPageAuto;
     ref.folderUuid = APPDELEGATE.session.user.mobileUploadFolderUuid;
-
+    ref.summary = summary;
+    ref.mimeType = mimeType;
+    
     if ([[asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
         ref.contentType = ContentTypeVideo;
     } else {
@@ -251,23 +239,5 @@
     [manager configureUploadAsset:ref.filePath atFolder:nil];
     [APPDELEGATE.uploadQueue addNewUploadTask:manager];
 }
-
-/*
-- (void) locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
-    
-    CLLocationCoordinate2D currentCoordinates = newLocation.coordinate;
-    NSLog(@"Entered new Location with the coordinates Latitude: %f Longitude: %f", currentCoordinates.latitude, currentCoordinates.longitude);
-    [self manuallyCheckIfAlbumChanged];
-}
-
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
-    NSLog(@"Unable to start location manager. Error:%@", [error description]);
-    [self manuallyCheckIfAlbumChanged];
-}
-
-- (void) locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
-    NSLog(@"location manager auth status changed");
-}
-*/
 
 @end

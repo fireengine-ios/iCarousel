@@ -303,13 +303,12 @@
     if(![SyncUtil readFirstTimeSyncFlag]) {
         [syncManager startFirstTimeSync];
     } else {
-        [syncManager startAutoSync];
         [syncManager manuallyCheckIfAlbumChanged];
     }
 }
 
 - (void) stopAutoSync {
-    [syncManager stopAutoSync];
+//    [syncManager stopAutoSync];
 }
 
 - (void) addInitialBgImage {
@@ -373,7 +372,6 @@
 - (void) application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     NSLog(@"AutoSyncControl");
     EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
-    EnableOption contactSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncContacts];
 
     if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
         [self.syncManager manuallyCheckIfAlbumChanged];

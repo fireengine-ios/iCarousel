@@ -96,6 +96,7 @@
     @try {
         for(UploadManager *row in [uploadManagers copy]) {
             if(!row.uploadRef.hasFinished && row.uploadRef.isReady && ![activeTaskIds containsObject:[row uniqueUrl]]) {
+                NSLog(@"UPLOAD NAME: %@, TASK_ID:%d", row.uploadRef.fileName, row.uploadTask.taskIdentifier);
                 if(nextTask == nil) {
                     nextTask = row;
                 } else {
@@ -235,6 +236,9 @@
             if(currentManager.uploadRef.remoteHash != nil) {
                 [SyncUtil cacheSyncHashRemotely:currentManager.uploadRef.remoteHash];
             }
+            if(currentManager.uploadRef.summary != nil) {
+                [SyncUtil cacheSyncFileSummary:currentManager.uploadRef.summary];
+            }
             [currentManager removeTemporaryFile];
             [currentManager notifyUpload];
         } else {
@@ -265,6 +269,19 @@
         }
     }
 }
+
+- (void) URLSession:(NSURLSession *)session didBecomeInvalidWithError:(NSError *)error {
+    NSLog(@"URLSession:didBecomeInvalidWithError:");
+}
+
+- (void) URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task needNewBodyStream:(void (^)(NSInputStream *))completionHandler {
+    NSLog(@"URLSession:task:needNewBodyStream:");
+}
+
+- (void) URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task willPerformHTTPRedirection:(NSHTTPURLResponse *)response newRequest:(NSURLRequest *)request completionHandler:(void (^)(NSURLRequest *))completionHandler {
+    NSLog(@"URLSession:task:willPerformHTTPRedirection:");
+}
+
 
 - (void) URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession *) _session {
     NSLog(@"URLSessionDidFinishEventsForBackgroundURLSession");

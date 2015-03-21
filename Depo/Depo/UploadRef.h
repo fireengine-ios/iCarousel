@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "AppConstants.h"
+#import "MetaFileSummary.h"
 
 @class MetaFile;
 
@@ -35,9 +36,10 @@
 @property (nonatomic, strong) NSString *localHash;
 @property (nonatomic, strong) NSString *remoteHash;
 @property (nonatomic) UploadStarterPage ownerPage;
+@property (nonatomic, strong) MetaFileSummary *summary;
+@property (nonatomic, strong) NSString *mimeType;
 
 - (void) configureUploadFileForPath:(NSString *) _filePath atFolder:(MetaFile *) _folder withFileName:(NSString *) fileName;
-- (void) configureUploadData:(NSData *) _dataToUpload atFolder:(MetaFile *) _folder withFileName:(NSString *) fileName;
 - (void) configureUploadAsset:(NSString *) _assetUrl atFolder:(MetaFile *) _folder;
 
 @end

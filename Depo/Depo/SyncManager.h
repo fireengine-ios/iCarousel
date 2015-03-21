@@ -18,9 +18,6 @@
 @property (nonatomic, strong) CLLocationManager *locManager;
 
 - (void) startFirstTimeSync;
-- (void) startAutoSync;
-- (void) stopAutoSync;
 - (void) manuallyCheckIfAlbumChanged;
-- (void) startLocationManagerIfNecessary;
 
 @end

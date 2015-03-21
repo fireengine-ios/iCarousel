@@ -35,6 +35,8 @@
 @synthesize localHash;
 @synthesize remoteHash;
 @synthesize ownerPage;
+@synthesize summary;
+@synthesize mimeType;
 
 - (void) configureUploadFileForPath:(NSString *) _filePath atFolder:(MetaFile *) _folder withFileName:(NSString *) fileName {
 
@@ -46,21 +48,6 @@
     NSString *newUuid = [[NSUUID UUID] UUIDString];
     self.urlForUpload = [NSString stringWithFormat:@"%@/%@", APPDELEGATE.session.baseUrl, newUuid];
     self.fileUuid = newUuid;
-    self.folderUuid = _folder ? _folder.uuid : folderUuid ? folderUuid : nil;
-}
-
-- (void) configureUploadData:(NSData *) _dataToUpload atFolder:(MetaFile *) _folder withFileName:(NSString *) fileName {
-    
-    self.taskType = UploadTaskTypeData;
-    self.isReady = YES;
-    
-    self.folder = _folder;
-    self.fileData = _dataToUpload;
-    
-    NSString *newUuid = [[NSUUID UUID] UUIDString];
-    self.fileUuid = newUuid;
-    
-    self.urlForUpload = [NSString stringWithFormat:@"%@/%@", APPDELEGATE.session.baseUrl, newUuid];
     self.folderUuid = _folder ? _folder.uuid : folderUuid ? folderUuid : nil;
 }
 

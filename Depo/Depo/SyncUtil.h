@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "SyncReference.h"
 #import "ContactSyncResult.h"
+#import "MetaFileSummary.h"
 
 @interface SyncUtil : NSObject
 
@@ -31,6 +32,9 @@
 + (void) increaseBadgeCount;
 + (void) resetBadgeCount;
 + (int) readBadgeCount;
+
++ (void) cacheSyncFileSummary:(MetaFileSummary *) summary;
++ (NSArray *) readSyncFileSummaries;
 
 + (void) writeLastContactSyncResult:(ContactSyncResult *) syncResult;
 + (ContactSyncResult *) readLastContactSyncResult;

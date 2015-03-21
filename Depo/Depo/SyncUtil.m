@@ -141,6 +141,24 @@
     return result;
 }
 
++ (void) cacheSyncFileSummary:(MetaFileSummary *) summary {
+    NSArray *result = [SyncUtil readSyncFileSummaries];
+    if(![result containsObject:summary]) {
+        NSArray *updatedArray = [result arrayByAddingObject:summary];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray] forKey:[NSString stringWithFormat:SYNCED_REMOTE_FILES_SUMMARY_KEY, APPDELEGATE.session.baseUrlConstant]];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
++ (NSArray *) readSyncFileSummaries {
+    NSArray *result = [[NSArray alloc] init];
+    NSData *arrData = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:SYNCED_REMOTE_FILES_SUMMARY_KEY, APPDELEGATE.session.baseUrlConstant]];
+    if (arrData != nil) {
+        result = [NSKeyedUnarchiver unarchiveObjectWithData:arrData];
+    }
+    return result;
+}
+
 + (void) writeFirstTimeSyncFlag {
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:FIRST_SYNC_DONE_FLAG_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];

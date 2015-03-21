@@ -40,13 +40,8 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     [self.uploadRef configureUploadFileForPath:filePath atFolder:_folder withFileName:fileName];
 }
 
-- (void) configureUploadData:(NSData *) _dataToUpload atFolder:(MetaFile *) _folder withFileName:(NSString *) fileName {
-    [self.uploadRef configureUploadData:_dataToUpload atFolder:_folder withFileName:fileName];
-}
-
 - (void) configureUploadAsset:(NSString *) assetUrl atFolder:(MetaFile *) _folder {
     [self.uploadRef configureUploadAsset:assetUrl atFolder:_folder];
-//    [queueDelegate uploadManagerIsReadToStartTask:self];
 }
 
 - (void) startTask {
@@ -57,11 +52,9 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         } else if(self.uploadRef.taskType == UploadTaskTypeFile) {
             self.uploadTask = [APPDELEGATE.uploadQueue.session uploadTaskWithRequest:[self prepareRequestSetVideo:NO] fromFile:[NSURL fileURLWithPath:self.uploadRef.filePath]];
             [uploadTask resume];
-//            [queueDelegate uploadManagerTaskIsInitialized:self];
         } else {
             self.uploadTask = [APPDELEGATE.uploadQueue.session uploadTaskWithRequest:[self prepareRequestSetVideo:NO] fromData:self.uploadRef.fileData];
             [uploadTask resume];
-//            [queueDelegate uploadManagerTaskIsInitialized:self];
         }
     });
     
@@ -196,10 +189,14 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         [request setValue:@"" forHTTPHeaderField:@"X-Object-Meta-Parent-Uuid"];
     }
     [request setValue:self.uploadRef.fileName forHTTPHeaderField:@"X-Object-Meta-File-Name"];
-    if (isVideo) {
-        [request addValue:@"video/mp4" forHTTPHeaderField:@"Content-Type"];
+    if(self.uploadRef.mimeType != nil) {
+        [request addValue:self.uploadRef.mimeType forHTTPHeaderField:@"Content-Type"];
     } else {
-        [request addValue:@"image/png" forHTTPHeaderField:@"Content-Type"];
+        if (isVideo) {
+            [request addValue:@"video/mp4" forHTTPHeaderField:@"Content-Type"];
+        } else {
+            [request addValue:@"image/png" forHTTPHeaderField:@"Content-Type"];
+        }
     }
     if(self.uploadRef.localHash != nil) {
         [request setValue:self.uploadRef.localHash forHTTPHeaderField:@"X-Object-Meta-Ios-Metadata-Hash"];
@@ -210,8 +207,9 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 
     NSFileManager *fileManager=[NSFileManager defaultManager];
     NSDictionary *attributesDict=[fileManager attributesOfItemAtPath:self.uploadRef.tempUrl error:NULL];
-    NSInteger fileSize = [attributesDict fileSize];
-    NSString *postLength = [NSString stringWithFormat:@"%ld", (long)fileSize];
+    long long fileSize = [attributesDict fileSize];
+    NSString *postLength = [NSString stringWithFormat:@"%lld", fileSize];
+    NSLog(@"CONTENT_LENGTH: %@", postLength);
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     
     return request;

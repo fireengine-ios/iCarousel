@@ -13,6 +13,7 @@
 #import "SyncUtil.h"
 #import <CommonCrypto/CommonDigest.h>
 #import "ALAssetRepresentation+MD5.h"
+#import <MobileCoreServices/MobileCoreServices.h>
 
 @interface PhotoListModalController ()
 
@@ -118,9 +119,13 @@
     if([selectedAssets count] > 0) {
         NSMutableArray *selectedAssetUrls = [[NSMutableArray alloc] init];
         for(ALAsset *row in selectedAssets) {
+            NSString *mimeType = (__bridge_transfer NSString*)UTTypeCopyPreferredTagWithClass
+            ((__bridge CFStringRef)[row.defaultRepresentation UTI], kUTTagClassMIMEType);
+            
             UploadRef *ref = [[UploadRef alloc] init];
             ref.fileName = row.defaultRepresentation.filename;
             ref.filePath = [row.defaultRepresentation.url absoluteString];
+            ref.mimeType = mimeType;
             if ([[row valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
                 ref.contentType = ContentTypeVideo;
             } else {
