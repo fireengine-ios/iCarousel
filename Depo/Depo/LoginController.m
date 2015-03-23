@@ -53,7 +53,7 @@
         passField.delegate = self;
         [self.view addSubview:passField];
 
-        rememberMe = [[CheckButton alloc] initWithFrame:CGRectMake(25, 220, 120, 25) withTitle:NSLocalizedString(@"RememberMe", @"") isInitiallyChecked:NO];
+        rememberMe = [[CheckButton alloc] initWithFrame:CGRectMake(25, 220, 120, 25) withTitle:NSLocalizedString(@"RememberMe", @"") isInitiallyChecked:YES];
         [self.view addSubview:rememberMe];
         
         SmsForPassButton *smsButton = [[SmsForPassButton alloc] initWithFrame:CGRectMake(20, 280, 280, 40)];
