@@ -13,6 +13,7 @@
 #import "AppUtil.h"
 #import "UploadQueue.h"
 #import <MobileCoreServices/MobileCoreServices.h>
+#import "CurioSDK.h"
 
 typedef void (^ALAssetsLibraryAssetForURLResultBlock)(ALAsset *asset);
 typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
@@ -52,9 +53,13 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         } else if(self.uploadRef.taskType == UploadTaskTypeFile) {
             self.uploadTask = [APPDELEGATE.uploadQueue.session uploadTaskWithRequest:[self prepareRequestSetVideo:NO] fromFile:[NSURL fileURLWithPath:self.uploadRef.filePath]];
             [uploadTask resume];
+            
+            [[CurioSDK shared] sendEvent:@"upload_started" eventValue:[NSString stringWithFormat:@"file type: %@", @"image"]];
         } else {
             self.uploadTask = [APPDELEGATE.uploadQueue.session uploadTaskWithRequest:[self prepareRequestSetVideo:NO] fromData:self.uploadRef.fileData];
             [uploadTask resume];
+            
+            [[CurioSDK shared] sendEvent:@"upload_started" eventValue:[NSString stringWithFormat:@"file type: %@", @"image"]];
         }
     });
     
@@ -98,6 +103,8 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     self.uploadRef.tempUrl = tempPath;
     self.uploadRef.tempThumbnailUrl = tempThumbnailPath;
     
+    NSString *fileType = @"image";
+    
     if ([[self.asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
 //        @autoreleasepool {
             ALAssetRepresentation *rep = [self.asset defaultRepresentation];
@@ -106,6 +113,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             NSData *videoData = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
             [videoData writeToFile:tempPath atomically:YES];
 //        }
+        fileType = @"video";
     } else {
         UIImageOrientation orientation = UIImageOrientationUp;
         NSNumber* orientationValue = [self.asset valueForProperty:@"ALAssetPropertyOrientation"];
@@ -164,6 +172,9 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     
     self.uploadTask = [APPDELEGATE.uploadQueue.session uploadTaskWithRequest:[self prepareRequestSetVideo:[[self.asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]] fromFile:[NSURL fileURLWithPath:self.uploadRef.tempUrl]];
     [uploadTask resume];
+    
+    [[CurioSDK shared] sendEvent:@"upload_started" eventValue:[NSString stringWithFormat:@"file type: %@", fileType]];
+    
     //    [queueDelegate uploadManagerTaskIsInitialized:self];
     
 }

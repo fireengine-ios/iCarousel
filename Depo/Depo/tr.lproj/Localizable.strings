@@ -78,8 +78,8 @@
 "AlbumCellSubtitle"="%d Foto, %d Video";
 "AlbumCellSubtitlePhotosOnly"="%d Foto";
 "AlbumCellSubtitleVideosOnly"="%d Video";
-"NoAlbumMessage"="Albüm Yok";
-"NoAlbumSubmessage"="Yeni bir albüm oluşturmak için \"+\" düğmesine basınız";
+"NoAlbumMessage"="Henüz hiç albümünüz yok.";
+"NoAlbumSubmessage"="\"+\" butonuna dokunarak yeni bir albüm oluşturabilirsiniz.";
 "NewAlbumTitle"="Yeni Albüm";
 "AlbumAddTitle"="ALBÜM İSMİ";
 "AlbumNamePlaceholder"="Örnek Albüm İsmi";
@@ -429,12 +429,12 @@
 
 "StartUsingTitle"="Kullanmaya başla";
 
-"EmptyMusicTitle"="Hiç müziğiniz bulunmuyor.";
-"EmptyDocumentsTitle"="Hiç belgeniz bulunmuyor.";
-"EmptyPhotosVideosTitle"="Fotoğraf veya videonuz bulunmuyor.";
-"EmptyPhotosVideosDescription"="iPhone'ununzdan fotoğraf ve video yüklemek için \"+\" butonuna basın";
-"EmptyAlbumsTitle"="Hiç albümünüz bulunmuyor.";
-"EmptyAlbumsDescription"="Yeni albüm oluşturmak için \"+\" butonuna basın";
+"EmptyMusicTitle"="Henüz hiç müziğiniz yok.";
+"EmptyDocumentsTitle"="Henüz hiç belgeniz yok.";
+"EmptyPhotosVideosTitle"="Henüz hiç fotoğraf ya da videonuz yok.";
+"EmptyPhotosVideosDescription"="\"+\" butonuna dokunarak fotoğraf ve video yüklemeye başlayabilirsiniz.";
+"EmptyAlbumsTitle"="Henüz hiç albümünüz yok.";
+"EmptyAlbumsDescription"="\"+\" butonuna dokunarak albüm oluşturabilirsiniz.";
 
 "Welcome"="Hoşgeldiniz";
 "Error"="Hata";

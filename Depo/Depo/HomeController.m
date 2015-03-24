@@ -21,6 +21,7 @@
 #import "MusicListController.h"
 #import "SettingsController.h"
 #import "ContactSyncController.h"
+#import "CurioSDK.h"
 
 @interface HomeController ()
 
@@ -198,6 +199,7 @@
     double percentUsageVal = 100 * ((double)APPDELEGATE.session.usage.usedStorage/(double)APPDELEGATE.session.usage.totalStorage);
     if(percentUsageVal >= 80) {
         moreStorageButton.hidden = NO;
+        [[CurioSDK shared] sendEvent:@"quota_exceeded_80_perc" eventValue:[NSString stringWithFormat:@"current: %.2f", percentUsageVal]];
     }
     
     [contactCountDao requestContactCount];

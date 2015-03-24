@@ -76,6 +76,8 @@
     [[CurioSDK shared] startSession:@"http://curio.turkcell.com.tr/api/v2" apiKey:@"cab314f33df2514764664e5544def586" trackingCode:@"KL2XNFIE" sessionTimeout:4 periodicDispatchEnabled:YES dispatchPeriod:1 maxCachedActivitiyCount:1000 loggingEnabled:YES logLevel:3 registerForRemoteNotifications:YES notificationTypes:@"Sound,Badge,Alert" fetchLocationEnabled:NO maxValidLocationTimeInterval:0 appLaunchOptions:launchOptions]; // Live
 //    [[CurioSDK shared] startSession:@"https://curiotest.turkcell.com.tr/api/v2" apiKey:@"7dfb5740be8111e4a44b63ca635716aa" trackingCode:@"OO5CO5YS" sessionTimeout:4 periodicDispatchEnabled:NO dispatchPeriod:1 maxCachedActivitiyCount:1000 loggingEnabled:YES logLevel:3 registerForRemoteNotifications:YES notificationTypes:@"Sound,Badge,Alert" fetchLocationEnabled:NO maxValidLocationTimeInterval:0 appLaunchOptions:launchOptions]; // NewTest
 
+    [[CurioSDK shared] sendEvent:@"application_started" eventValue:@"true"];
+
     [self addInitialBgImage];
 
     progress = [[MBProgressHUD alloc] initWithWindow:self.window];

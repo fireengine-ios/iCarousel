@@ -97,7 +97,9 @@
     [mainScroll addSubview:contentLabel];
     
     mainScroll.contentSize = CGSizeMake(mainScroll.frame.size.width, (int)ceil((float)counter/4.0)*79 + 120);
-    mainScroll.contentOffset = CGPointMake(0, mainScroll.contentSize.height - mainScroll.frame.size.height);
+    if(mainScroll.contentSize.height > mainScroll.frame.size.height) {
+        mainScroll.contentOffset = CGPointMake(0, mainScroll.contentSize.height - mainScroll.frame.size.height);
+    }
     self.title = [NSString stringWithFormat:NSLocalizedString(@"AddPhotosTitle", @""), [selectedAssets count], [assets count]];
 }
 

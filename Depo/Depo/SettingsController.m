@@ -106,12 +106,13 @@
 }
 
 - (void) drawSettingsCategories {
-    pageContentTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topIndex + 159, 325, self.view.frame.size.height-self.bottomIndex-159) style:UITableViewStylePlain];
+    pageContentTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topIndex + 159, 325, self.view.frame.size.height-self.bottomIndex-159) style:UITableViewStyleGrouped];
     pageContentTable.delegate = self;
     pageContentTable.dataSource = self;
     pageContentTable.backgroundColor = [UIColor clearColor];
     pageContentTable.backgroundView = nil;
     [pageContentTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    pageContentTable.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, pageContentTable.bounds.size.width, 0.01f)];
     [self.view addSubview:pageContentTable];
 }
 
@@ -251,6 +252,24 @@
     return 69;
 }
 
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 0;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 40;
+}
+
+- (UIView *) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 40)];
+    footerView.backgroundColor = [UIColor whiteColor];
+    
+    CustomLabel *versionLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, 10, footerView.frame.size.width, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:16] withColor:[Util UIColorForHexColor:@"565656"] withText:[NSString stringWithFormat:@"v. %@", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]] withAlignment:NSTextAlignmentCenter];
+    [footerView addSubview:versionLabel];
+    
+    return footerView;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *cellIdentifier = [NSString stringWithFormat:@"MenuCell%d-%d", (int)indexPath.section, (int)indexPath.row];
     
@@ -263,16 +282,20 @@
         percentUsageVal = (percentUsageVal > 0 && percentUsageVal < 1) ? 1 : percentUsageVal;
         NSString *subTitle = [NSString stringWithFormat: NSLocalizedString(@"StorageUsageInfo", @""), [NSString stringWithFormat:@"%d", (int)floor(percentUsageVal+0.5f)], [Util transformedHugeSizeValueNoDecimal:APPDELEGATE.session.usage.totalStorage]];
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"Memory", @"") titleColor:nil subTitleText:subTitle iconName:@"stroge_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
+        cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         return cell;
     } else if (indexPath.row == 1) {
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"AutomaticSynchronization", @"") titleColor:nil subTitleText:@"" iconName:@"syncing_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
+        cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         return cell;
     } else if (indexPath.row == 2) {
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"ConnectedDevices", @"") titleColor:nil subTitleText:@"" iconName:@"device_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
+        cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         return cell;
     } else if (indexPath.row == 3) {
 //        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"HowTo", @"") titleColor:nil subTitleText:@"" iconName:@"info_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"FAQ", @"") titleColor:nil subTitleText:@"" iconName:@"help_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
+        cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         return cell;
     } else {
         return nil;

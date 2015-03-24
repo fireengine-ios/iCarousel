@@ -13,6 +13,7 @@
 #import "SettingsContactsController.h"
 #import "Util.h"
 #import "AppDelegate.h"
+#import "CurioSDK.h"
 
 @interface SettingsUploadController ()
 
@@ -51,9 +52,14 @@
             } failureBlock:^(NSError *error) {
                 [self showErrorAlertWithMessage:NSLocalizedString(@"ALAssetsAccessError", @"")];
             }];
+
+            [[CurioSDK shared] sendEvent:@"photo_video_sync_opened" eventValue:@"true"];
+
         } else {
             [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOff];
             [APPDELEGATE.uploadQueue cancelRemainingUploads];
+
+            [[CurioSDK shared] sendEvent:@"photo_video_sync_opened" eventValue:@"false"];
         }
     }
     if (currentConnectionSetting != oldConnectionSetting)

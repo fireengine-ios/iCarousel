@@ -12,6 +12,7 @@
 #import "AppDelegate.h"
 #import "AppSession.h"
 #import "BaseDao.h"
+#import "CurioSDK.h"
 
 @implementation RadiusDao
 
@@ -80,6 +81,7 @@
         
         if(authToken != nil && ![authToken isKindOfClass:[NSNull class]]) {
             APPDELEGATE.session.authToken = authToken;
+            [[CurioSDK shared] sendEvent:@"login_success" eventValue:@"true"];
             SuppressPerformSelectorLeakWarning([delegate performSelector:successMethod]);
         } else {
             SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:TOKEN_ERROR_MESSAGE]);
