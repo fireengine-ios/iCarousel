@@ -297,12 +297,12 @@
 
 - (void) mirrorRotation:(UIInterfaceOrientation) orientation {
     if(UIInterfaceOrientationIsLandscape(orientation)) {
-        mainScroll.frame = CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.topIndex);
+        mainScroll.frame = CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - 60);
         imgView.frame = CGRectMake(0, 0, mainScroll.frame.size.width, mainScroll.frame.size.height);
         footer.frame = CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60);
         [footer updateInnerViews];
     } else {
-        mainScroll.frame = CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.topIndex);
+        mainScroll.frame = CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - 60);
         imgView.frame = CGRectMake(0, 0, mainScroll.frame.size.width, mainScroll.frame.size.height);
         footer.frame = CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60);
         [footer updateInnerViews];

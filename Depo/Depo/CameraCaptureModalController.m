@@ -23,7 +23,7 @@
     if (self) {
         self.delegate = self;
         self.sourceType = UIImagePickerControllerSourceTypeCamera;
-        self.allowsEditing = YES;
+        self.allowsEditing = NO;
         self.showsCameraControls = YES;
     }
     return self;
