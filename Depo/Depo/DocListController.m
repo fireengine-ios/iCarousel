@@ -177,6 +177,10 @@
         }
     }
     
+    if(docList == nil || [docList count] == 0) {
+        return;
+    }
+    
     MetaFile *fileAtIndex = [docList objectAtIndex:indexPath.row];
     if([AppUtil isMetaFileDoc:fileAtIndex]){
         FileDetailInWebViewController *detail = [[FileDetailInWebViewController alloc] initWithFile:fileAtIndex];
