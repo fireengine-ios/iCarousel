@@ -9,6 +9,7 @@
 #import "RecentActivityHeaderView.h"
 #import "Util.h"
 #import "CustomLabel.h"
+#import "NSDate+Utilities.h"
 
 @implementation RecentActivityHeaderView
 
@@ -31,12 +32,10 @@
         dayImgView.image = dayImg;
         [self addSubview:dayImgView];
 
-        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-        [dateFormat setDateFormat:@"dd.MM.yyyy"];
-        
-        BOOL isToday = [[dateFormat stringFromDate:[NSDate date]] isEqualToString:[dateFormat stringFromDate:_date]];
-        if(isToday) {
+        if([_date isToday]) {
             titleLabel.text = NSLocalizedString(@"TodayTitle", @"");
+        } else if([_date isYesterday]) {
+            titleLabel.text = NSLocalizedString(@"YesterdayTitle", @"");
         } else {
             NSDateFormatter *shortDateFormat = [[NSDateFormatter alloc] init];
             [shortDateFormat setDateFormat:NSLocalizedString(@"RecentSectionDateFormat", @"")];

@@ -19,7 +19,7 @@
         self.clipsToBounds = YES;
         [self.layer setCornerRadius:65];
         
-        CustomLabel *totalUsageLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, 30, self.frame.size.width, 40) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:36] withColor:[Util UIColorForHexColor:@"363e4f"] withText:[Util transformedHugeSizeValue:[usage usedStorage]] withAlignment:NSTextAlignmentCenter];
+        CustomLabel *totalUsageLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, 30, self.frame.size.width, 40) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:36] withColor:[Util UIColorForHexColor:@"363e4f"] withText:[usage usedStorage] == 0 ? @"--" : [Util transformedHugeSizeValue:[usage usedStorage]] withAlignment:NSTextAlignmentCenter];
         [self addSubview:totalUsageLabel];
         
         NSString *totalStorageVal = [NSString stringWithFormat:NSLocalizedString(@"HomeUsageTotalStorage", @""), [Util transformedHugeSizeValue:usage.totalStorage]];

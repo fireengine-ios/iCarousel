@@ -162,6 +162,7 @@
 "RecentActivitiesTitle"="En Son İşlemler";
 "RecentActivityLinkerTitle"="En Son İşlemler";
 "TodayTitle"="BUGÜN";
+"YesterdayTitle"="DÜN";
 "RecentSectionDateFormat"="dd MMM";
 "SelfMoveError"="Bir klasörü kendi içine taşıyamazsınız";
 "SameMoveError"="Bir dosyayı aynı klasör içine taşıyamazsınız";
