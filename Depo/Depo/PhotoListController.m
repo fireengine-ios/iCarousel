@@ -523,6 +523,10 @@
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(albumList == nil || [albumList count] == 0) {
+        return;
+    }
+    
     PhotoAlbum *album = [albumList objectAtIndex:indexPath.row];
     if(isSelectible) {
         UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
