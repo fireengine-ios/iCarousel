@@ -163,6 +163,10 @@
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(fileList == nil || [fileList count] == 0) {
+        return;
+    }
+    
     MetaFile *fileAtIndex = [fileList objectAtIndex:indexPath.row];
     
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];

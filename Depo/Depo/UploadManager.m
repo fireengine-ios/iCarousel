@@ -216,8 +216,8 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         [request setValue:@"MOBILE_UPLOAD" forHTTPHeaderField:@"X-Object-Meta-Special-Folder"];
     }
 
-    NSFileManager *fileManager=[NSFileManager defaultManager];
-    NSDictionary *attributesDict=[fileManager attributesOfItemAtPath:self.uploadRef.tempUrl error:NULL];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSDictionary *attributesDict = [fileManager attributesOfItemAtPath:self.uploadRef.tempUrl error:NULL];
     long long fileSize = [attributesDict fileSize];
     NSString *postLength = [NSString stringWithFormat:@"%lld", fileSize];
     NSLog(@"CONTENT_LENGTH: %@", postLength);

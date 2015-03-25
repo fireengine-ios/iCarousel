@@ -321,10 +321,12 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
         float endVolume;
         CMTimeRange timeRange;
         
-        AVAssetTrack *audioTrack = [[player.currentItem.asset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0];
-        AVMutableAudioMixInputParameters *audioInputParams = [AVMutableAudioMixInputParameters audioMixInputParametersWithTrack:audioTrack];
-        [audioInputParams getVolumeRampForTime:player.currentTime startVolume: &startVolume endVolume: &endVolume timeRange: &timeRange];
-        return endVolume;
+        if([[player.currentItem.asset tracksWithMediaType:AVMediaTypeAudio] count] > 0) {
+            AVAssetTrack *audioTrack = [[player.currentItem.asset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0];
+            AVMutableAudioMixInputParameters *audioInputParams = [AVMutableAudioMixInputParameters audioMixInputParametersWithTrack:audioTrack];
+            [audioInputParams getVolumeRampForTime:player.currentTime startVolume: &startVolume endVolume: &endVolume timeRange: &timeRange];
+            return endVolume;
+        }
     }
     return 0.0f;
 }

@@ -37,7 +37,7 @@
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *tempPath = [documentsDirectory stringByAppendingFormat:@"/%@", camImgName];
     
-    UIImage *pickedImage = [info objectForKey:UIImagePickerControllerEditedImage];
+    UIImage *pickedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     UIImage *resized = [pickedImage resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:pickedImage.size interpolationQuality:kCGInterpolationHigh];
 
     [UIImageJPEGRepresentation(resized, 1.0) writeToFile:tempPath atomically:NO];

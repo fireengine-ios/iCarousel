@@ -40,8 +40,10 @@
     SearchHistory *sh;
     for (int i = 0; i < mResult.count; i++) {
         sh = [mResult objectAtIndex:i];
-        if ([sh.searchText isEqualToString:historyItem.searchText])
+        if ([sh.searchText isEqualToString:historyItem.searchText]) {
             [mResult removeObjectAtIndex:i];
+            break;
+        }
     }
     [mResult addObject:historyItem];
     [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:mResult] forKey:SEARCH_HISTORY_KEY];
