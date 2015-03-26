@@ -158,6 +158,10 @@
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(docList == nil || [docList count] == 0) {
+        return;
+    }
+
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if(isSelectible) {
         if([cell isKindOfClass:[AbstractFileFolderCell class]]) {
@@ -175,10 +179,6 @@
         if(fileFolderCell.menuActive) {
             return;
         }
-    }
-    
-    if(docList == nil || [docList count] == 0) {
-        return;
     }
     
     MetaFile *fileAtIndex = [docList objectAtIndex:indexPath.row];

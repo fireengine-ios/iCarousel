@@ -160,7 +160,7 @@
     double percentUsageVal = 100 * ((double)APPDELEGATE.session.usage.usedStorage/(double)APPDELEGATE.session.usage.totalStorage);
 
     self.usages = [NSMutableArray arrayWithCapacity:5];
-    [usages addObject:[NSNumber numberWithLongLong:APPDELEGATE.session.usage.imageUsage]];
+    [usages addObject:[NSNumber numberWithLongLong:(APPDELEGATE.session.usage.imageUsage + APPDELEGATE.session.usage.videoUsage)]];
     [usages addObject:[NSNumber numberWithLongLong:APPDELEGATE.session.usage.musicUsage]];
     [usages addObject:[NSNumber numberWithLongLong:APPDELEGATE.session.usage.otherUsage]];
     [usages addObject:[NSNumber numberWithLongLong:0ll]];
@@ -182,7 +182,7 @@
     separator.backgroundColor = [Util UIColorForHexColor:@"ebebed"];
     [self.view addSubview:separator];
     
-    imageButton = [[UsageButton alloc] initWithFrame:CGRectMake(20, separator.frame.origin.y + (IS_IPHONE_5 ? 41 : 11), 75, 60) withUsage:UsageTypeImage withStorage:APPDELEGATE.session.usage.imageUsage withFileCount:APPDELEGATE.session.usage.imageCount];
+    imageButton = [[UsageButton alloc] initWithFrame:CGRectMake(20, separator.frame.origin.y + (IS_IPHONE_5 ? 41 : 11), 75, 60) withUsage:UsageTypeImage withStorage:(APPDELEGATE.session.usage.imageUsage + APPDELEGATE.session.usage.videoUsage) withFileCount:(APPDELEGATE.session.usage.imageCount + APPDELEGATE.session.usage.videoCount)];
     [imageButton addTarget:self action:@selector(triggerPhotosPage) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:imageButton];
     

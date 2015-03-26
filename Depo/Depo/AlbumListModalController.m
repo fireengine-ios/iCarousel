@@ -44,7 +44,7 @@
         albumTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         [self.view addSubview:albumTable];
         
-        [al enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+        [al enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
             if(group) {
                 [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
                     NSString *albumName = [group valueForProperty:ALAssetsGroupPropertyName];

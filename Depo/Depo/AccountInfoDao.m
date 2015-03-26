@@ -37,8 +37,10 @@
             NSString *mobileUploadsSpecialFolderUuid = [mainDict objectForKey:@"mobileUploadsSpecialFolderUuid"];
             NSString *url = [mainDict objectForKey:@"url"];
             
-//            user.fullName = [NSString stringWithFormat:@"%@ %@", [self strByRawVal:name], [self strByRawVal:surname]];
-            user.fullName = [NSString stringWithFormat:@"%@", [self strByRawVal:name]];
+            user.fullName = [NSString stringWithFormat:@"%@ %@", [self strByRawVal:name], [self strByRawVal:surname]];
+//            user.fullName = [NSString stringWithFormat:@"%@", [self strByRawVal:name]];
+            user.name = [self strByRawVal:name];
+            user.surname = [self strByRawVal:surname];
             user.profileImgUrl = [self strByRawVal:url];
             if(mobileUploadsSpecialFolderUuid != nil && ![mobileUploadsSpecialFolderUuid isKindOfClass:[NSNull class]]) {
                 user.mobileUploadFolderUuid = mobileUploadsSpecialFolderUuid;

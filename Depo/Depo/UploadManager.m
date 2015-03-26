@@ -70,7 +70,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     
     @try {
         self.assetsLibrary = [[ALAssetsLibrary alloc] init];
-        [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *outerStop) {
+        [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *outerStop) {
             if(group) {
                 [group enumerateAssetsUsingBlock:^(ALAsset *_asset, NSUInteger index, BOOL *innerStop) {
                     if(_asset && !self.asset) {
@@ -108,7 +108,8 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     if ([[self.asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
 //        @autoreleasepool {
             ALAssetRepresentation *rep = [self.asset defaultRepresentation];
-            Byte *buffer = (Byte*)malloc(rep.size);
+            unsigned long dataSize = (unsigned long)[rep size];
+            Byte *buffer = (Byte *) malloc(dataSize);
             NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:rep.size error:nil];
             NSData *videoData = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
             [videoData writeToFile:tempPath atomically:YES];
@@ -213,7 +214,10 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         [request setValue:self.uploadRef.localHash forHTTPHeaderField:@"X-Object-Meta-Ios-Metadata-Hash"];
     }
     if(self.uploadRef.autoSyncFlag || self.uploadRef.ownerPage == UploadStarterPagePhotos) {
+        NSLog(@"X-Object-Meta-Special-Folder SET for img: %@", self.uploadRef.fileName);
         [request setValue:@"MOBILE_UPLOAD" forHTTPHeaderField:@"X-Object-Meta-Special-Folder"];
+    } else {
+        NSLog(@"X-Object-Meta-Special-Folder NOT SET for img: %@", self.uploadRef.fileName);
     }
 
     NSFileManager *fileManager = [NSFileManager defaultManager];
