@@ -456,3 +456,5 @@
 
 "ContactResultBackupSectionTitle"="Akıllı Depo'da";
 "ContactResultRestoreSectionTitle"="Telefonda";
+
+"AutoSyncStatusInfo"="Fotoğraflar / Videolar Yükleniyor (%d/%d)";

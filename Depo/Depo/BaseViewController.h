@@ -15,11 +15,13 @@
 #import "FloatingAddMenu.h"
 #import "PhotoAlbum.h"
 #import "ShareLinkDao.h"
+#import "SyncInfoHeaderView.h"
 
 @interface BaseViewController : UIViewController <SlidingMenuDelegate, SlidingMenuCloseDelegate, MyViewDelegate, FloatingAddButtonDelegate, FloatingAddDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UIScrollView *scroll;
 @property (nonatomic, strong) UIView *transparentView;
+@property (nonatomic, strong) SyncInfoHeaderView *syncInfoView;
 @property (nonatomic, strong) MyNavigationController *nav;
 @property (nonatomic, strong) SlidingMenu *menu;
 @property (nonatomic, strong) MBProgressHUD *baseProgress;
@@ -56,5 +58,8 @@
 
 - (void) lockMenu;
 - (void) unlockMenu;
+
+- (void) showSyncInfoView;
+- (void) hideSyncInfoView;
 
 @end

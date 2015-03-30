@@ -10,6 +10,7 @@
 #import "Util.h"
 #import "PostLoginSyncContactController.h"
 #import "AppDelegate.h"
+#import "CurioSDK.h"
 
 @interface PostLoginSyncPhotoController ()
 
@@ -78,8 +79,11 @@
             }
              */
         }];
+        [[CurioSDK shared] sendEvent:@"photo_video_sync_opened" eventValue:@"true"];
     } else {
         [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOff];
+        [[CurioSDK shared] sendEvent:@"photo_video_sync_opened" eventValue:@"false"];
+
         PostLoginSyncContactController *contactPref = [[PostLoginSyncContactController alloc] init];
         [self.navigationController pushViewController:contactPref animated:YES];
     }

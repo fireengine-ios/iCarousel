@@ -144,6 +144,7 @@
     @finally {
     }
     self.uploadManagers = cleanArray;
+    [[NSNotificationCenter defaultCenter] postNotificationName:AUTO_SYNC_QUEUE_CHANGED_NOTIFICATION object:nil userInfo:nil];
 }
 
 - (void) addOnlyNewUploadTask:(UploadManager *) newManager {
@@ -170,6 +171,7 @@
             [newManager startTask];
         }
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:AUTO_SYNC_QUEUE_CHANGED_NOTIFICATION object:nil userInfo:nil];
 }
 
 #pragma mark UploadManagerQueueDelegate
@@ -187,6 +189,7 @@
             [nextManager startTask];
         }
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:AUTO_SYNC_QUEUE_CHANGED_NOTIFICATION object:nil userInfo:nil];
 }
 
 - (void) uploadManagerIsReadToStartTask:(UploadManager *)manRef {
@@ -316,6 +319,38 @@
         //TODO check
         [currentManager startTask];
     }
+}
+
+- (int) totalAutoSyncCount {
+    int count = 0;
+    @try {
+        for(UploadManager *row in [uploadManagers copy]) {
+            if(row.uploadRef.autoSyncFlag) {
+                count++;
+            }
+        }
+    }
+    @catch (NSException *exception) {
+    }
+    @finally {
+    }
+    return count;
+}
+
+- (int) finishedAutoSyncCount {
+    int count = 0;
+    @try {
+        for(UploadManager *row in [uploadManagers copy]) {
+            if(row.uploadRef.hasFinished && row.uploadRef.autoSyncFlag) {
+                count++;
+            }
+        }
+    }
+    @catch (NSException *exception) {
+    }
+    @finally {
+    }
+    return count;
 }
 
 @end

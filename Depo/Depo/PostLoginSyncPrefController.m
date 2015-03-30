@@ -14,6 +14,7 @@
 #import "CacheUtil.h"
 #import "AppUtil.h"
 #import <AddressBookUI/AddressBookUI.h>
+#import "CurioSDK.h"
 
 @interface PostLoginSyncPrefController ()
 
@@ -113,9 +114,12 @@
         [CacheUtil writeCachedSettingSyncContacts:EnableOptionOn];
         [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOn];
     
+        [[CurioSDK shared] sendEvent:@"photo_video_sync_opened" eventValue:@"true"];
+
     } else {
         [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOff];
         [CacheUtil writeCachedSettingSyncContacts:EnableOptionOff];
+        [[CurioSDK shared] sendEvent:@"photo_video_sync_opened" eventValue:@"false"];
     }
     
     [CacheUtil writeCachedSettingSyncingConnectionType:selectedOption];

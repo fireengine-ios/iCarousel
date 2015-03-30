@@ -9,7 +9,6 @@
 #import "SyncManager.h"
 #import "CacheUtil.h"
 #import "AppConstants.h"
-#import "Reachability.h"
 #import "ALAssetRepresentation+MD5.h"
 #import "SyncUtil.h"
 #import "UploadRef.h"
@@ -17,6 +16,8 @@
 #import "AppDelegate.h"
 #import "UploadQueue.h"
 #import <MobileCoreServices/MobileCoreServices.h>
+#import "ReachabilityManager.h"
+#import "Reachability.h"
 
 @implementation SyncManager
 
@@ -32,6 +33,8 @@
         elasticSearchDao.failMethod = @selector(photoListFailCallback:);
 
         self.assetsLibrary = [[ALAssetsLibrary alloc] init];
+        
+         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityDidChange) name:kReachabilityChangedNotification object:nil];
     }
     return self;
 }
@@ -64,9 +67,8 @@
                     if(asset) {
                         EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
                         if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
-                            NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
                             ConnectionOption connectionOption = (ConnectionOption)[CacheUtil readCachedSettingSyncingConnectionType];
-                            if(networkStatus == kReachableViaWiFi || (networkStatus == kReachableViaWWAN && connectionOption == ConnectionOptionWifi3G)) {
+                            if([ReachabilityManager isReachableViaWiFi] || ([ReachabilityManager isReachableViaWWAN] && connectionOption == ConnectionOptionWifi3G)) {
                                 NSString *localHash = [asset.defaultRepresentation MD5];
                                 BOOL serverContainsImageFlag = [remoteHashList containsObject:localHash];
                                 if(!serverContainsImageFlag) {
@@ -150,11 +152,10 @@
 
     BOOL triggerSyncing = NO;
     if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
-        NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
         ConnectionOption connectionOption = (ConnectionOption)[CacheUtil readCachedSettingSyncingConnectionType];
-        if(networkStatus == kReachableViaWiFi) {
+        if([ReachabilityManager isReachableViaWiFi]) {
             triggerSyncing = YES;
-        } else if(networkStatus == kReachableViaWWAN && connectionOption == ConnectionOptionWifi3G) {
+        } else if([ReachabilityManager isReachableViaWWAN] && connectionOption == ConnectionOptionWifi3G) {
             triggerSyncing = YES;
         }
     }
@@ -171,9 +172,8 @@
                         if(asset) {
                             EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
                             if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
-                                NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
                                 ConnectionOption connectionOption = (ConnectionOption)[CacheUtil readCachedSettingSyncingConnectionType];
-                                if(networkStatus == kReachableViaWiFi || (networkStatus == kReachableViaWWAN && connectionOption == ConnectionOptionWifi3G)) {
+                                if([ReachabilityManager isReachableViaWiFi] || ([ReachabilityManager isReachableViaWWAN] && connectionOption == ConnectionOptionWifi3G)) {
                                     NSString *localHash = [asset.defaultRepresentation MD5];
                                     BOOL shouldStartUpload = ![localHashList containsObject:localHash] && ![remoteHashList containsObject:localHash] && [APPDELEGATE.uploadQueue uploadRefForAsset:[asset.defaultRepresentation.url absoluteString]] == nil;
                                     if(shouldStartUpload) {
@@ -238,6 +238,25 @@
     UploadManager *manager = [[UploadManager alloc] initWithUploadInfo:ref];
     [manager configureUploadAsset:ref.filePath atFolder:nil];
     [APPDELEGATE.uploadQueue addNewUploadTask:manager];
+}
+
+- (void) reachabilityDidChange {
+    EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
+    if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
+        ConnectionOption connectionOption = (ConnectionOption)[CacheUtil readCachedSettingSyncingConnectionType];
+        if([ReachabilityManager isReachableViaWiFi]) {
+                //auto sync çalışmalıdır
+            [self manuallyCheckIfAlbumChanged];
+        } else if([ReachabilityManager isReachableViaWWAN]) {
+            if(connectionOption == ConnectionOptionWifi3G) {
+                //auto sync çalışmalıdır
+                [self manuallyCheckIfAlbumChanged];
+            } else if(connectionOption == ConnectionOptionWifi) {
+                //auto sync çalışmamalı ve queue'dakiler de temizlenmelidir
+                [APPDELEGATE.uploadQueue cancelRemainingUploads];
+            }
+        }
+    }
 }
 
 @end

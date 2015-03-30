@@ -24,5 +24,7 @@
 - (void) addOnlyNewUploadTask:(UploadManager *) newManager;
 - (void) startReadyTasks;
 - (void) cancelRemainingUploads;
+- (int) totalAutoSyncCount;
+- (int) finishedAutoSyncCount;
 
 @end

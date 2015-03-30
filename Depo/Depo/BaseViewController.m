@@ -55,6 +55,7 @@
 @synthesize addMenu;
 @synthesize shareDao;
 @synthesize menuLocked;
+@synthesize syncInfoView;
 
 - (id)initWithRootViewController:(MyViewController *) rootViewController {
     self = [super init];
@@ -107,6 +108,10 @@
         addButton.delegate = self;
         [scroll addSubview:addButton];
         
+        syncInfoView = [[SyncInfoHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 24)];
+        syncInfoView.hidden = YES;
+        [self.view addSubview:syncInfoView];
+        
         UISwipeGestureRecognizer *recognizerLeft = [[UISwipeGestureRecognizer alloc]
                                                     initWithTarget:self action:@selector(swipeLeft:)];
         recognizerLeft.direction = UISwipeGestureRecognizerDirectionLeft;
@@ -118,7 +123,9 @@
         recognizerRight.direction = UISwipeGestureRecognizerDirectionRight;
         recognizerRight.delegate = self;
         [self.view addGestureRecognizer:recognizerRight];
-        
+
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncQueueChanged) name:AUTO_SYNC_QUEUE_CHANGED_NOTIFICATION object:nil];
+
     }
     return self;
 }
@@ -560,6 +567,36 @@
 
 - (void) unlockMenu {
     self.menuLocked = NO;
+}
+
+- (void) showSyncInfoView {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if(syncInfoView.isHidden) {
+            [[[[UIApplication sharedApplication] delegate] window] setWindowLevel:UIWindowLevelStatusBar+1];
+            syncInfoView.hidden = NO;
+        }
+        [self.view bringSubviewToFront:syncInfoView];
+        [syncInfoView reCheckInfo];
+    });
+}
+
+- (void) hideSyncInfoView {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if(!syncInfoView.isHidden) {
+            [[[[UIApplication sharedApplication] delegate] window] setWindowLevel:UIWindowLevelNormal];
+            syncInfoView.hidden = YES;
+        }
+    });
+}
+
+- (void) syncQueueChanged {
+    int totalAutoSyncCount = [APPDELEGATE.uploadQueue totalAutoSyncCount];
+    int finishedAutoSyncCount = [APPDELEGATE.uploadQueue finishedAutoSyncCount];
+    if(finishedAutoSyncCount < totalAutoSyncCount) {
+        [self showSyncInfoView];
+    } else {
+        [self hideSyncInfoView];
+    }
 }
 
 @end

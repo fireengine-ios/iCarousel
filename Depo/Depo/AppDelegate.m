@@ -24,7 +24,6 @@
 #import "PreLoginController.h"
 #import "LoginController.h"
 #import "PostLoginSyncPrefController.h"
-#import "Reachability.h"
 
 #import "MigrateStatusController.h"
 #import "TermsController.h"
@@ -34,6 +33,8 @@
 #import <SplunkMint-iOS/SplunkMint-iOS.h>
 #import "CurioSDK.h"
 #import "ContactSyncSDK.h"
+
+#import "ReachabilityManager.h"
 
 @implementation AppDelegate
 
@@ -56,6 +57,8 @@
     session = [[AppSession alloc] init];
     
     uploadQueue = [[UploadQueue alloc] init];
+
+    syncManager = [[SyncManager alloc] init];
     
     mapUtil = [[MapUtil alloc] init];
     
@@ -102,8 +105,9 @@
         }
     }
     
-    NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
-    if(networkStatus == kNotReachable) {
+    [ReachabilityManager currentManager];
+    
+    if(![ReachabilityManager isReachable]) {
         UIAlertView *noConnAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", @"") message:NSLocalizedString(@"ConnectionErrorWarning", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"SubmitButtonTitle", @"") otherButtonTitles:nil];
         [noConnAlert show];
     } else {
@@ -129,8 +133,7 @@
 }
 
 - (void) triggerPostTermsAndMigration {
-    NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
-    if(networkStatus == kReachableViaWiFi) {
+    if([ReachabilityManager isReachableViaWiFi]) {
         NSString *cachedMsisdn = [CacheUtil readCachedMsisdnForPostMigration];
         NSString *cachedPass = [CacheUtil readCachedPassForPostMigration];
         if(cachedMsisdn != nil && cachedPass != nil) {
@@ -141,7 +144,7 @@
             MyNavigationController *loginNav = [[MyNavigationController alloc] initWithRootViewController:login];
             self.window.rootViewController = loginNav;
         }
-    } else if(networkStatus == kReachableViaWWAN) {
+    } else if([ReachabilityManager isReachableViaWWAN]) {
         [self.window.rootViewController.view removeFromSuperview];
         [tokenManager requestRadiusLogin];
         [self showMainLoading];
@@ -149,12 +152,11 @@
 }
 
 - (void) triggerLogin {
-    NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
-    if(networkStatus == kReachableViaWiFi) {
+    if([ReachabilityManager isReachableViaWiFi]) {
         LoginController *login = [[LoginController alloc] init];
         MyNavigationController *loginNav = [[MyNavigationController alloc] initWithRootViewController:login];
         self.window.rootViewController = loginNav;
-    } else if(networkStatus == kReachableViaWWAN) {
+    } else if([ReachabilityManager isReachableViaWWAN]) {
         [self.window.rootViewController.view removeFromSuperview];
         [tokenManager requestRadiusLogin];
         [self showMainLoading];
@@ -299,9 +301,6 @@
 }
 
 - (void) startAutoSync {
-    if(!syncManager) {
-        self.syncManager = [[SyncManager alloc] init];
-    }
     if(![SyncUtil readFirstTimeSyncFlag]) {
         [syncManager startFirstTimeSync];
     } else {
