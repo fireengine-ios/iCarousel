@@ -16,6 +16,7 @@
 @property (nonatomic, strong) ALAssetsLibrary *assetsLibrary;
 @property (nonatomic, strong) ElasticSearchDao *elasticSearchDao;
 @property (nonatomic, strong) CLLocationManager *locManager;
+@property (nonatomic) BOOL autoSyncIterationInProgress;
 
 - (void) startFirstTimeSync;
 - (void) manuallyCheckIfAlbumChanged;

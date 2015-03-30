@@ -233,6 +233,13 @@
 - (void) triggerLogout {
     [tokenManager requestLogout];
 
+    /* TODO check
+    for (ASIHTTPRequest *req in ASIHTTPRequest.sharedQueue.operations) {
+        [req cancel];
+        [req setDelegate:nil];
+    }
+     */
+    
     self.session.user = nil;
     [CacheUtil resetRememberMeToken];
 //    [self triggerLogin];

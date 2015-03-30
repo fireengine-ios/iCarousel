@@ -24,6 +24,7 @@
 @synthesize assetsLibrary;
 @synthesize elasticSearchDao;
 @synthesize locManager;
+@synthesize autoSyncIterationInProgress;
 
 - (id) init {
     if(self = [super init]) {
@@ -40,27 +41,27 @@
 }
 
 - (void) startFirstTimeSync {
-    [elasticSearchDao requestPhotosForPage:0 andSize:10000 andSortType:SortTypeAlphaAsc];
+    [elasticSearchDao requestPhotosForPage:0 andSize:20000 andSortType:SortTypeAlphaAsc];
 }
 
 - (void) photoListSuccessCallback:(NSArray *) files {
-    for(MetaFile *row in files) {
-        if(row.metaHash != nil) {
-            [SyncUtil cacheSyncHashRemotely:row.metaHash];
-        }
-        MetaFileSummary *fileSummary = [[MetaFileSummary alloc] init];
-        fileSummary.bytes = row.bytes;
-        fileSummary.fileName = row.name;
-        [SyncUtil cacheSyncFileSummary:fileSummary];
-    }
-    
-    NSArray *remoteHashList = [SyncUtil readSyncHashRemotely];
-    NSArray *remoteSummaryList = [SyncUtil readSyncFileSummaries];
-
-    NSTimeInterval timeInMiliseconds1 = [[NSDate date] timeIntervalSince1970];
-    NSLog(@"startFirstTimeSync Start: %f", timeInMiliseconds1);
-    
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        for(MetaFile *row in files) {
+            if(row.metaHash != nil) {
+                [SyncUtil cacheSyncHashRemotely:row.metaHash];
+            }
+            MetaFileSummary *fileSummary = [[MetaFileSummary alloc] init];
+            fileSummary.bytes = row.bytes;
+            fileSummary.fileName = row.name;
+            [SyncUtil cacheSyncFileSummary:fileSummary];
+        }
+        
+        NSArray *remoteHashList = [SyncUtil readSyncHashRemotely];
+        NSArray *remoteSummaryList = [SyncUtil readSyncFileSummaries];
+        
+        NSTimeInterval timeInMiliseconds1 = [[NSDate date] timeIntervalSince1970];
+        NSLog(@"startFirstTimeSync Start: %f", timeInMiliseconds1);
+    
         [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
             if(group) {
                 [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
@@ -148,6 +149,9 @@
 }
 
 - (void) manuallyCheckIfAlbumChanged {
+    if(autoSyncIterationInProgress)
+        return;
+    
     EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
 
     BOOL triggerSyncing = NO;
@@ -165,6 +169,13 @@
         NSArray *remoteHashList = [SyncUtil readSyncHashRemotely];
         NSArray *remoteSummaryList = [SyncUtil readSyncFileSummaries];
         
+        NSLog(@"LOCAL HASHES: %@", localHashList);
+        NSLog(@"REMOTE HASHES: %@", remoteHashList);
+        
+        NSTimeInterval timeInMilisecondsStart = [[NSDate date] timeIntervalSince1970];
+        NSLog(@"auto sync start: %f", timeInMilisecondsStart);
+
+        autoSyncIterationInProgress = YES;
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
             [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
                 if(group) {
@@ -179,7 +190,7 @@
                                     if(shouldStartUpload) {
                                         ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
                                         NSString *assetFileName = [defaultRep filename];
-                                        NSLog(@"ASSET NAME:%@ SIZE:%lld", assetFileName, [defaultRep size]);
+                                        NSLog(@"ASSET NAME:%@ SIZE:%lld URL:%@ PATH:%@", assetFileName, [defaultRep size], [asset.defaultRepresentation.url absoluteString], [asset.defaultRepresentation.url path]);
                                         for(MetaFileSummary *summary in remoteSummaryList) {
                                             NSLog(@"SUMMARY NAME:%@ SIZE:%lld", summary.fileName, summary.bytes);
                                             if([summary.fileName isEqualToString:assetFileName] && summary.bytes == [defaultRep size]) {
@@ -197,9 +208,10 @@
                         }
                     }];
                 } else {
-                    NSTimeInterval timeInMiliseconds2 = [[NSDate date] timeIntervalSince1970];
-                    NSLog(@"End: %f", timeInMiliseconds2);
+                    NSTimeInterval timeInMilisecondsEnd = [[NSDate date] timeIntervalSince1970];
+                    NSLog(@"auto sync end: %f", timeInMilisecondsEnd);
                     [SyncUtil writeLastSyncDate:[NSDate date]];
+                    autoSyncIterationInProgress = NO;
 //                    [APPDELEGATE.uploadQueue startReadyTasks];
                 }
             } failureBlock:^(NSError *error) {
@@ -214,30 +226,32 @@
     ((__bridge CFStringRef)[asset.defaultRepresentation UTI], kUTTagClassMIMEType);
     NSLog(@"MIME TYPE: %@", mimeType);
 
-    MetaFileSummary *summary = [[MetaFileSummary alloc] init];
-    summary.fileName = [asset.defaultRepresentation filename];
-    summary.bytes = [asset.defaultRepresentation size];
-
-    UploadRef *ref = [[UploadRef alloc] init];
-    ref.remoteHash = remoteHash;
-    ref.localHash = localHash;
-    ref.fileName = asset.defaultRepresentation.filename;
-    ref.filePath = [asset.defaultRepresentation.url absoluteString];
-    ref.autoSyncFlag = YES;
-    ref.ownerPage = UploadStarterPageAuto;
-    ref.folderUuid = APPDELEGATE.session.user.mobileUploadFolderUuid;
-    ref.summary = summary;
-    ref.mimeType = mimeType;
-    
-    if ([[asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
-        ref.contentType = ContentTypeVideo;
-    } else {
-        ref.contentType = ContentTypePhoto;
+    if(asset.defaultRepresentation.url != nil && [asset.defaultRepresentation.url absoluteString] != nil) {
+        MetaFileSummary *summary = [[MetaFileSummary alloc] init];
+        summary.fileName = [asset.defaultRepresentation filename];
+        summary.bytes = [asset.defaultRepresentation size];
+        
+        UploadRef *ref = [[UploadRef alloc] init];
+        ref.remoteHash = remoteHash;
+        ref.localHash = localHash;
+        ref.fileName = asset.defaultRepresentation.filename;
+        ref.filePath = [asset.defaultRepresentation.url absoluteString];
+        ref.autoSyncFlag = YES;
+        ref.ownerPage = UploadStarterPageAuto;
+        ref.folderUuid = APPDELEGATE.session.user.mobileUploadFolderUuid;
+        ref.summary = summary;
+        ref.mimeType = mimeType;
+        
+        if ([[asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
+            ref.contentType = ContentTypeVideo;
+        } else {
+            ref.contentType = ContentTypePhoto;
+        }
+        
+        UploadManager *manager = [[UploadManager alloc] initWithUploadInfo:ref];
+        [manager configureUploadAsset:ref.filePath atFolder:nil];
+        [APPDELEGATE.uploadQueue addNewUploadTask:manager];
     }
-    
-    UploadManager *manager = [[UploadManager alloc] initWithUploadInfo:ref];
-    [manager configureUploadAsset:ref.filePath atFolder:nil];
-    [APPDELEGATE.uploadQueue addNewUploadTask:manager];
 }
 
 - (void) reachabilityDidChange {
