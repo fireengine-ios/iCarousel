@@ -54,5 +54,6 @@
 - (MetaFile *) itemRefForCurrentAsset;
 - (void) checkLatestContactSyncStatus;
 - (BOOL) isPrevNextAvailable;
+- (void) cleanoutAfterLogout;
 
 @end

@@ -14,6 +14,7 @@
 #import "VideoPreviewController.h"
 #import "AppDelegate.h"
 #import "BaseViewController.h"
+#import "UploadingImagePreviewController.h"
 
 @interface PhotoAlbumController ()
 
@@ -245,6 +246,14 @@
 - (void) deleteImgFailCallback:(NSString *) errorMessage {
     [self proceedFailureForProgressView];
     [self showErrorAlertWithMessage:errorMessage];
+}
+
+- (void) squareImageWasSelectedForView:(SquareImageView *) squareRef {
+    UploadingImagePreviewController *preview = [[UploadingImagePreviewController alloc] initWithUploadReference:squareRef.uploadRef];
+    preview.oldDelegateRef = squareRef;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:preview];
+    preview.nav = modalNav;
+    [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
 }
 
 - (void) squareImageWasSelectedForFile:(MetaFile *)fileSelected {

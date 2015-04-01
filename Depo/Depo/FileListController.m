@@ -20,6 +20,7 @@
 #import "AppDelegate.h"
 #import "AppSession.h"
 #import "BaseViewController.h"
+#import "UploadingImagePreviewController.h"
 
 @interface FileListController ()
 
@@ -294,6 +295,12 @@
         UploadingImageCell *uploadingCell = (UploadingImageCell *) cell;
         if(uploadingCell.postFile != nil) {
             [self navigateToFileDetail:uploadingCell.postFile];
+        } else {
+            UploadingImagePreviewController *preview = [[UploadingImagePreviewController alloc] initWithUploadReference:uploadingCell.uploadRef];
+            MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:preview];
+            preview.nav = modalNav;
+            preview.oldDelegateRef = uploadingCell;
+            [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
         }
         return;
     }

@@ -458,3 +458,8 @@
 "ContactResultRestoreSectionTitle"="Telefonda";
 
 "AutoSyncStatusInfo"="Fotoğraflar / Videolar Yükleniyor (%d/%d)";
+
+"UploadingPhoto"="Fotoğraf Yükleniyor";
+"UploadingPhotoCompleteStatus"="%%%d tamamlandı";
+"UploadingPhotoFinishedSuccessfully"="Fotoğraf başarıyla yüklendi";
+"UploadingPhotoFinishedWithError"="Yükleme esnasında hata oluştu";

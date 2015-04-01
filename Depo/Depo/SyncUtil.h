@@ -20,6 +20,7 @@
 + (void) updateLastContactSyncDate;
 + (void) cacheSyncReference:(SyncReference *) ref;
 + (NSArray *) readSyncReferences;
++ (NSString *) md5StringOfString:(NSString *) rawVal;
 + (NSString *) md5String:(NSData *) data;
 + (NSString *) md5StringFromPath:(NSString *) path;
 
@@ -29,6 +30,8 @@
 + (NSArray *) readSyncHashRemotely;
 + (void) writeFirstTimeSyncFlag;
 + (BOOL) readFirstTimeSyncFlag;
++ (void) writeFirstTimeSyncFinishedFlag;
++ (BOOL) readFirstTimeSyncFinishedFlag;
 + (void) increaseBadgeCount;
 + (void) resetBadgeCount;
 + (int) readBadgeCount;
@@ -38,5 +41,12 @@
 
 + (void) writeLastContactSyncResult:(ContactSyncResult *) syncResult;
 + (ContactSyncResult *) readLastContactSyncResult;
+
++ (void) increaseAutoSyncIndex;
++ (int) readAutoSyncIndex;
+
++ (void) lockAutoSyncBlockInProgress;
++ (void) unlockAutoSyncBlockInProgress;
++ (BOOL) readAutoSyncBlockInProgress;
 
 @end

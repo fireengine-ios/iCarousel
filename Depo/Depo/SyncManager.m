@@ -41,7 +41,11 @@
 }
 
 - (void) startFirstTimeSync {
+    if(autoSyncIterationInProgress)
+        return;
+
     [elasticSearchDao requestPhotosForPage:0 andSize:20000 andSortType:SortTypeAlphaAsc];
+    autoSyncIterationInProgress = YES;
 }
 
 - (void) photoListSuccessCallback:(NSArray *) files {
@@ -55,22 +59,51 @@
             fileSummary.fileName = row.name;
             [SyncUtil cacheSyncFileSummary:fileSummary];
         }
-        
+        autoSyncIterationInProgress = NO;
+        [self initializeNextAutoSyncPackage];
+    });
+}
+
+- (void) initializeNextAutoSyncPackage {
+    if(autoSyncIterationInProgress)
+        return;
+
+    EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
+    
+    BOOL triggerSyncing = NO;
+    if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
+        ConnectionOption connectionOption = (ConnectionOption)[CacheUtil readCachedSettingSyncingConnectionType];
+        if([ReachabilityManager isReachableViaWiFi]) {
+            triggerSyncing = YES;
+        } else if([ReachabilityManager isReachableViaWWAN] && connectionOption == ConnectionOptionWifi3G) {
+            triggerSyncing = YES;
+        }
+    }
+    
+    if(triggerSyncing) {
         NSArray *remoteHashList = [SyncUtil readSyncHashRemotely];
         NSArray *remoteSummaryList = [SyncUtil readSyncFileSummaries];
         
         NSTimeInterval timeInMiliseconds1 = [[NSDate date] timeIntervalSince1970];
         NSLog(@"startFirstTimeSync Start: %f", timeInMiliseconds1);
-    
+        
+        autoSyncIterationInProgress = YES;
         [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
             if(group) {
-                [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
+                int startIndex = [SyncUtil readAutoSyncIndex] * AUTO_SYNC_ASSET_COUNT;
+                int length = AUTO_SYNC_ASSET_COUNT;
+                if(startIndex + length > [group numberOfAssets]) {
+                    length = (int)[group numberOfAssets] - startIndex;
+                }
+                NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(startIndex, length)];
+                NSLog(@"AUTO SYNC INDEX: %@", indexSet);
+                [group enumerateAssetsAtIndexes:indexSet options:0 usingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
                     if(asset) {
                         EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
                         if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
                             ConnectionOption connectionOption = (ConnectionOption)[CacheUtil readCachedSettingSyncingConnectionType];
                             if([ReachabilityManager isReachableViaWiFi] || ([ReachabilityManager isReachableViaWWAN] && connectionOption == ConnectionOptionWifi3G)) {
-                                NSString *localHash = [asset.defaultRepresentation MD5];
+                                NSString *localHash = [SyncUtil md5StringOfString:[asset.defaultRepresentation.url absoluteString]];
                                 BOOL serverContainsImageFlag = [remoteHashList containsObject:localHash];
                                 if(!serverContainsImageFlag) {
                                     ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
@@ -82,70 +115,48 @@
                                     }
                                 }
                                 if(!serverContainsImageFlag) {
-                                    [self startUploadForAsset:asset andRemoteHash:nil andLocalHash:localHash];
+                                    NSLog(@"auto upload started for index: %d", (int) index);
+                                    [self startUploadForAsset:asset andLocalHash:localHash];
+                                    [SyncUtil lockAutoSyncBlockInProgress];
                                     [SyncUtil writeFirstTimeSyncFlag];
                                     [SyncUtil updateLastSyncDate];
                                 }
                             }
                         }
+                    } else {
+                        //asset list finished for this enumeration
+                        [SyncUtil increaseAutoSyncIndex];
+                        
+                        //check and set if no enumeration left
+                        if([SyncUtil readAutoSyncIndex] * AUTO_SYNC_ASSET_COUNT >= [group numberOfAssets]) {
+                            [SyncUtil writeFirstTimeSyncFinishedFlag];
+                        }
                     }
                 }];
             } else {
-                [self firstTimeSyncStartFinalized];
+                [self firstTimeBlockSyncEnumerationFinished];
+                autoSyncIterationInProgress = NO;
             }
         } failureBlock:^(NSError *error) {
         }];
-    });
-
-    /*
-    NSArray *remoteHashList = [SyncUtil readSyncHashRemotely];
-    
-    NSTimeInterval timeInMiliseconds1 = [[NSDate date] timeIntervalSince1970];
-    NSLog(@"Start: %f", timeInMiliseconds1);
-
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-        [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-            if(group) {
-                [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
-                    if(asset) {
-                        NSString *localHash = [asset.defaultRepresentation MD5];
-                        
-                        NSString *remoteCalcHash = nil;
-                        if ([[asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
-                            ALAssetRepresentation *rep = [asset defaultRepresentation];
-                            Byte *buffer = (Byte*)malloc(rep.size);
-                            NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:rep.size error:nil];
-                            NSData *videoData = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
-                            remoteCalcHash = [SyncUtil md5String:videoData];
-                        } else {
-                            ALAssetOrientation imgOrientation = [[asset valueForProperty:@"ALAssetPropertyOrientation"] intValue];
-                            UIImage *image = [UIImage imageWithCGImage:[asset.defaultRepresentation fullResolutionImage] scale:1.0 orientation:imgOrientation];
-                            remoteCalcHash = [SyncUtil md5String:UIImagePNGRepresentation(image)];
-                        }
-                        if(![remoteHashList containsObject:remoteCalcHash]) {
-                            [self startUploadForAsset:asset andRemoteHash:remoteCalcHash andLocalHash:localHash];
-                            [SyncUtil updateLastSyncDate];
-                        }
-                        
-                    }
-                }];
-            } else {
-                [self firstTimeSyncStartFinalized];
-            }
-        } failureBlock:^(NSError *error) {
-        }];
-    });
-     */
+    }
 }
 
 - (void) photoListFailCallback:(NSString *) errorMessage {
+    autoSyncIterationInProgress = NO;
 }
 
-- (void) firstTimeSyncStartFinalized {
+- (void) firstTimeBlockSyncEnumerationFinished {
     NSTimeInterval timeInMiliseconds2 = [[NSDate date] timeIntervalSince1970];
     NSLog(@"End: %f", timeInMiliseconds2);
     [SyncUtil writeFirstTimeSyncFlag];
     [SyncUtil updateLastSyncDate];
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if(![SyncUtil readAutoSyncBlockInProgress]) {
+            [self initializeNextAutoSyncPackage];
+        }
+    });
 }
 
 - (void) manuallyCheckIfAlbumChanged {
@@ -169,9 +180,6 @@
         NSArray *remoteHashList = [SyncUtil readSyncHashRemotely];
         NSArray *remoteSummaryList = [SyncUtil readSyncFileSummaries];
         
-        NSLog(@"LOCAL HASHES: %@", localHashList);
-        NSLog(@"REMOTE HASHES: %@", remoteHashList);
-        
         NSTimeInterval timeInMilisecondsStart = [[NSDate date] timeIntervalSince1970];
         NSLog(@"auto sync start: %f", timeInMilisecondsStart);
 
@@ -185,23 +193,20 @@
                             if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
                                 ConnectionOption connectionOption = (ConnectionOption)[CacheUtil readCachedSettingSyncingConnectionType];
                                 if([ReachabilityManager isReachableViaWiFi] || ([ReachabilityManager isReachableViaWWAN] && connectionOption == ConnectionOptionWifi3G)) {
-                                    NSString *localHash = [asset.defaultRepresentation MD5];
+//                                    NSString *localHash = [asset.defaultRepresentation MD5];
+                                    NSString *localHash = [SyncUtil md5StringOfString:[asset.defaultRepresentation.url absoluteString]];
                                     BOOL shouldStartUpload = ![localHashList containsObject:localHash] && ![remoteHashList containsObject:localHash] && [APPDELEGATE.uploadQueue uploadRefForAsset:[asset.defaultRepresentation.url absoluteString]] == nil;
                                     if(shouldStartUpload) {
                                         ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
                                         NSString *assetFileName = [defaultRep filename];
-                                        NSLog(@"ASSET NAME:%@ SIZE:%lld URL:%@ PATH:%@", assetFileName, [defaultRep size], [asset.defaultRepresentation.url absoluteString], [asset.defaultRepresentation.url path]);
                                         for(MetaFileSummary *summary in remoteSummaryList) {
-                                            NSLog(@"SUMMARY NAME:%@ SIZE:%lld", summary.fileName, summary.bytes);
                                             if([summary.fileName isEqualToString:assetFileName] && summary.bytes == [defaultRep size]) {
                                                 shouldStartUpload = NO;
                                             }
                                         }
                                     }
                                     if(shouldStartUpload) {
-                                        [self startUploadForAsset:asset andRemoteHash:nil andLocalHash:localHash];
-                                        //                                [SyncUtil updateLastSyncDate];
-                                        //                                [SyncUtil increaseBadgeCount];
+                                        [self startUploadForAsset:asset andLocalHash:localHash];
                                     }
                                 }
                             }
@@ -221,10 +226,9 @@
     }
 }
 
-- (void) startUploadForAsset:(ALAsset *) asset andRemoteHash:(NSString *) remoteHash andLocalHash:(NSString *) localHash {
+- (void) startUploadForAsset:(ALAsset *) asset andLocalHash:(NSString *) localHash {
     NSString *mimeType = (__bridge_transfer NSString*)UTTypeCopyPreferredTagWithClass
     ((__bridge CFStringRef)[asset.defaultRepresentation UTI], kUTTagClassMIMEType);
-    NSLog(@"MIME TYPE: %@", mimeType);
 
     if(asset.defaultRepresentation.url != nil && [asset.defaultRepresentation.url absoluteString] != nil) {
         MetaFileSummary *summary = [[MetaFileSummary alloc] init];
@@ -232,7 +236,6 @@
         summary.bytes = [asset.defaultRepresentation size];
         
         UploadRef *ref = [[UploadRef alloc] init];
-        ref.remoteHash = remoteHash;
         ref.localHash = localHash;
         ref.fileName = asset.defaultRepresentation.filename;
         ref.filePath = [asset.defaultRepresentation.url absoluteString];
@@ -255,21 +258,38 @@
 }
 
 - (void) reachabilityDidChange {
+    BOOL triggerAutoSync = NO;
     EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
     if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
         ConnectionOption connectionOption = (ConnectionOption)[CacheUtil readCachedSettingSyncingConnectionType];
         if([ReachabilityManager isReachableViaWiFi]) {
-                //auto sync çalışmalıdır
-            [self manuallyCheckIfAlbumChanged];
+            //auto sync çalışmalıdır
+            triggerAutoSync = YES;
         } else if([ReachabilityManager isReachableViaWWAN]) {
             if(connectionOption == ConnectionOptionWifi3G) {
                 //auto sync çalışmalıdır
-                [self manuallyCheckIfAlbumChanged];
+                triggerAutoSync = YES;
             } else if(connectionOption == ConnectionOptionWifi) {
                 //auto sync çalışmamalı ve queue'dakiler de temizlenmelidir
                 [APPDELEGATE.uploadQueue cancelRemainingUploads];
             }
         }
+    }
+
+    if(triggerAutoSync) {
+        [self decideAndStartAutoSync];
+    }
+}
+
+- (void) decideAndStartAutoSync {
+    if(![SyncUtil readFirstTimeSyncFlag]) {
+        [self startFirstTimeSync];
+    } else if(![SyncUtil readFirstTimeSyncFinishedFlag]) {
+        if(![SyncUtil readAutoSyncBlockInProgress]) {
+            [self initializeNextAutoSyncPackage];
+        }
+    } else {
+        [self manuallyCheckIfAlbumChanged];
     }
 }
 

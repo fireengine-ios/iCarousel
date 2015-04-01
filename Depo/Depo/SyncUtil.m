@@ -63,6 +63,20 @@
     return result;
 }
 
++ (NSString *) md5StringOfString:(NSString *) rawVal {
+    const char *cstr = [rawVal UTF8String];
+    unsigned char result[16];
+    CC_MD5(cstr, strlen(cstr), result);
+    
+    return [NSString stringWithFormat:
+            @"%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X",
+            result[0], result[1], result[2], result[3],
+            result[4], result[5], result[6], result[7],
+            result[8], result[9], result[10], result[11],
+            result[12], result[13], result[14], result[15]
+            ];
+}
+
 + (NSString *) md5String:(NSData *) data {
     unsigned char result[CC_MD5_DIGEST_LENGTH];
     CC_MD5([data bytes], [data length], result);
@@ -169,6 +183,29 @@
     return [[NSUserDefaults standardUserDefaults] boolForKey:FIRST_SYNC_DONE_FLAG_KEY];
 }
 
++ (void) writeFirstTimeSyncFinishedFlag {
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:FIRST_SYNC_FINALIZED_FLAG_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (BOOL) readFirstTimeSyncFinishedFlag {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:FIRST_SYNC_FINALIZED_FLAG_KEY];
+}
+
++ (void) lockAutoSyncBlockInProgress {
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:BULK_AUTO_SYNC_IN_PROGRESS_FLAG_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (void) unlockAutoSyncBlockInProgress {
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:BULK_AUTO_SYNC_IN_PROGRESS_FLAG_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (BOOL) readAutoSyncBlockInProgress {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:BULK_AUTO_SYNC_IN_PROGRESS_FLAG_KEY];
+}
+
 + (void) increaseBadgeCount {
     int newBadgeCount = [SyncUtil readBadgeCount] + 1;
     [[NSUserDefaults standardUserDefaults] setInteger:newBadgeCount forKey:UPLOAD_FILE_BADGE_COUNT_KEY];
@@ -212,6 +249,16 @@
         result = [NSKeyedUnarchiver unarchiveObjectWithData:resultData];
     }
     return result;
+}
+
++ (void) increaseAutoSyncIndex {
+    int newAutoSyncIndex = [SyncUtil readAutoSyncIndex] + 1;
+    [[NSUserDefaults standardUserDefaults] setInteger:newAutoSyncIndex forKey:AUTO_SYNC_INDEX_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (int) readAutoSyncIndex {
+    return (int)[[NSUserDefaults standardUserDefaults] integerForKey:AUTO_SYNC_INDEX_KEY];
 }
 
 @end

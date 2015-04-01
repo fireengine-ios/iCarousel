@@ -130,6 +130,23 @@
     return count;
 }
 
+- (void) cancelAllUploads {
+    [self cancelRemainingUploads];
+    @try {
+        for(UploadManager *row in [uploadManagers copy]) {
+            if(row.uploadTask) {
+                [row.uploadTask cancel];
+            }
+        }
+    }
+    @catch (NSException *exception) {
+    }
+    @finally {
+        [self.uploadManagers removeAllObjects];
+        [self.activeTaskIds removeAllObjects];
+    }
+}
+
 - (void) cancelRemainingUploads {
     NSMutableArray *cleanArray = [[NSMutableArray alloc] init];
     @try {
@@ -144,6 +161,7 @@
     @finally {
     }
     self.uploadManagers = cleanArray;
+    [SyncUtil unlockAutoSyncBlockInProgress];
     [[NSNotificationCenter defaultCenter] postNotificationName:AUTO_SYNC_QUEUE_CHANGED_NOTIFICATION object:nil userInfo:nil];
 }
 
@@ -187,6 +205,11 @@
             NSLog(@"!!!!!!!! Next manager started");
             [activeTaskIds addObject:[nextManager uniqueUrl]];
             [nextManager startTask];
+        } else {
+            if(![SyncUtil readFirstTimeSyncFinishedFlag]) {
+                [SyncUtil unlockAutoSyncBlockInProgress];
+                [APPDELEGATE.syncManager initializeNextAutoSyncPackage];
+            }
         }
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:AUTO_SYNC_QUEUE_CHANGED_NOTIFICATION object:nil userInfo:nil];
@@ -254,17 +277,20 @@
                     [APPDELEGATE.tokenManager requestTokenWithinProcess:task.taskIdentifier];
                 } else {
                     currentManager.uploadRef.hasFinished = YES;
+                    currentManager.uploadRef.hasFinishedWithError = YES;
                     [currentManager removeTemporaryFile];
                     [currentManager.delegate uploadManagerLoginRequiredForAsset:currentManager.uploadRef.assetUrl];
                     [self uploadManager:currentManager didFinishUploadingWithSuccess:NO];
                 }
             } else if(httpResp.statusCode == 413) {
                 currentManager.uploadRef.hasFinished = YES;
+                currentManager.uploadRef.hasFinishedWithError = YES;
                 [currentManager removeTemporaryFile];
                 [currentManager.delegate uploadManagerQuotaExceedForAsset:currentManager.uploadRef.assetUrl];
                 [self uploadManager:currentManager didFinishUploadingWithSuccess:NO];
             } else {
                 currentManager.uploadRef.hasFinished = YES;
+                currentManager.uploadRef.hasFinishedWithError = YES;
                 [currentManager removeTemporaryFile];
                 [currentManager.delegate uploadManagerDidFailUploadingForAsset:currentManager.uploadRef.assetUrl];
                 [self uploadManager:currentManager didFinishUploadingWithSuccess:NO];

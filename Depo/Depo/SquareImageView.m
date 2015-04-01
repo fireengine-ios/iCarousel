@@ -193,13 +193,17 @@
 }
 
 - (void) imageTapped {
-    if(self.uploadRef != nil && self.file == nil) {
-        if(uploadErrorType == UploadErrorTypeQuota) {
-            [delegate squareImageUploadQuotaError:self.file];
-        } else if(uploadErrorType == UploadErrorTypeLogin) {
-            [delegate squareImageUploadLoginError:self.file];
+    if(self.uploadRef != nil) {
+        if(self.file == nil) {
+            if(uploadErrorType == UploadErrorTypeQuota) {
+                [delegate squareImageUploadQuotaError:self.file];
+                return;
+            } else if(uploadErrorType == UploadErrorTypeLogin) {
+                [delegate squareImageUploadLoginError:self.file];
+                return;
+            }
         }
-        return;
+        [delegate squareImageWasSelectedForView:self];
     }
     
     if(isSelectible) {

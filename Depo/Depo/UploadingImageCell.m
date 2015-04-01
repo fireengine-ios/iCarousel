@@ -106,6 +106,7 @@
 }
 
 - (void) uploadManagerDidFailUploadingAsData {
+    [self updateProgressByWidth:[NSNumber numberWithLong:self.frame.size.width]];
     progressSeparator.backgroundColor = [Util UIColorForHexColor:@"ad3110"];
     detailLabel.text = NSLocalizedString(@"UploadFailedPlaceholder", @"");
 }
@@ -119,6 +120,7 @@
 }
 
 - (void) uploadManagerDidFinishUploadingAsData {
+    [self updateProgressByWidth:[NSNumber numberWithLong:self.frame.size.width]];
     progressSeparator.backgroundColor = [Util UIColorForHexColor:@"67d74b"];
     detailLabel.text = NSLocalizedString(@"UploadFinishedPlaceholder", @"");
 }

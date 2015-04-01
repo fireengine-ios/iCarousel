@@ -19,6 +19,8 @@
 @property (nonatomic) BOOL autoSyncIterationInProgress;
 
 - (void) startFirstTimeSync;
+- (void) initializeNextAutoSyncPackage;
 - (void) manuallyCheckIfAlbumChanged;
+- (void) decideAndStartAutoSync;
 
 @end

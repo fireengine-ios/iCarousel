@@ -231,18 +231,18 @@
 }
 
 - (void) triggerLogout {
-    [tokenManager requestLogout];
+    // Tekrar 3G radius loginine girdiği için commentlendi
+//    [tokenManager requestLogout];
 
-    /* TODO check
     for (ASIHTTPRequest *req in ASIHTTPRequest.sharedQueue.operations) {
         [req cancel];
         [req setDelegate:nil];
     }
-     */
-    
-    self.session.user = nil;
+
+    [self.session cleanoutAfterLogout];
     [CacheUtil resetRememberMeToken];
-//    [self triggerLogin];
+    [uploadQueue cancelAllUploads];
+
     LoginController *login = [[LoginController alloc] init];
     MyNavigationController *loginNav = [[MyNavigationController alloc] initWithRootViewController:login];
     self.window.rootViewController = loginNav;
@@ -308,11 +308,7 @@
 }
 
 - (void) startAutoSync {
-    if(![SyncUtil readFirstTimeSyncFlag]) {
-        [syncManager startFirstTimeSync];
-    } else {
-        [syncManager manuallyCheckIfAlbumChanged];
-    }
+    [syncManager decideAndStartAutoSync];
 }
 
 - (void) stopAutoSync {
@@ -378,13 +374,7 @@
 }
 
 - (void) application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-    NSLog(@"AutoSyncControl");
-    EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
-
-    if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
-        [self.syncManager manuallyCheckIfAlbumChanged];
-    }
-
+    [syncManager decideAndStartAutoSync];
     completionHandler(UIBackgroundFetchResultNewData);
 }
 
@@ -415,6 +405,9 @@
     }
     if(activatedFromBackground) {
         [self triggerAutoSynchronization];
+    } else {
+        // eğer backgrounddan gelmiyorsa bir sonraki auto sync bloğununun okunmasını engelleyen lock kaldırılıyor
+        [SyncUtil unlockAutoSyncBlockInProgress];
     }
 }
 

@@ -23,6 +23,7 @@
 - (void) addNewUploadTask:(UploadManager *) newManager;
 - (void) addOnlyNewUploadTask:(UploadManager *) newManager;
 - (void) startReadyTasks;
+- (void) cancelAllUploads;
 - (void) cancelRemainingUploads;
 - (int) totalAutoSyncCount;
 - (int) finishedAutoSyncCount;

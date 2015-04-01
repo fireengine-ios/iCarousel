@@ -25,6 +25,7 @@
 @synthesize fileData;
 @synthesize contentType;
 @synthesize hasFinished;
+@synthesize hasFinishedWithError;
 @synthesize isReady;
 @synthesize autoSyncFlag;
 @synthesize retryDoneForTokenFlag;

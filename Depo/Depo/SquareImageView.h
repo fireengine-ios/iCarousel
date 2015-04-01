@@ -11,6 +11,8 @@
 #import "UploadManager.h"
 #import "UploadRef.h"
 
+@class SquareImageView;
+
 @protocol SquareImageDelegate <NSObject>
 - (void) squareImageWasSelectedForFile:(MetaFile *) fileSelected;
 - (void) squareImageWasMarkedForFile:(MetaFile *) fileSelected;
@@ -19,6 +21,7 @@
 - (void) squareImageWasLongPressedForFile:(MetaFile *) fileSelected;
 - (void) squareImageUploadQuotaError:(MetaFile *) fileSelected;
 - (void) squareImageUploadLoginError:(MetaFile *) fileSelected;
+- (void) squareImageWasSelectedForView:(SquareImageView *) ref;
 @end
 
 @interface SquareImageView : UIView <UploadManagerDelegate> {

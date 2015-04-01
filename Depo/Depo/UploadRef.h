@@ -26,6 +26,7 @@
 @property (nonatomic, strong) NSData *fileData;
 @property (nonatomic) ContentType contentType;
 @property (nonatomic) BOOL hasFinished;
+@property (nonatomic) BOOL hasFinishedWithError;
 @property (nonatomic) BOOL isReady;
 @property (nonatomic) BOOL autoSyncFlag;
 @property (nonatomic) BOOL retryDoneForTokenFlag;

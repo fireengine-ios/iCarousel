@@ -14,6 +14,7 @@
 #import "AppSession.h"
 #import "BaseViewController.h"
 #import "MapUtil.h"
+#import "UploadingImagePreviewController.h"
 
 #define IMG_FOOTER_TAG 111
 #define ALBUM_FOOTER_TAG 222
@@ -338,6 +339,14 @@
             self.title = NSLocalizedString(@"SelectFilesTitle", @"");
         }
     }
+}
+
+- (void) squareImageWasSelectedForView:(SquareImageView *) squareRef {
+    UploadingImagePreviewController *preview = [[UploadingImagePreviewController alloc] initWithUploadReference:squareRef.uploadRef];
+    preview.oldDelegateRef = squareRef;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:preview];
+    preview.nav = modalNav;
+    [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
 }
 
 - (void) squareImageWasSelectedForFile:(MetaFile *)fileSelected {

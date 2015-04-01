@@ -176,4 +176,11 @@
     }
 }
 
+- (void) cleanoutAfterLogout {
+    self.user = nil;
+    self.authToken = nil;
+    self.baseUrl = nil;
+    self.baseUrlConstant = nil;
+}
+
 @end
