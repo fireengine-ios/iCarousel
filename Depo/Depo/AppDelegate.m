@@ -399,10 +399,11 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     [SyncUtil resetBadgeCount];
     application.applicationIconBadgeNumber = 0;
-//auto contact sync kaldirildi    [ContactSyncSDK awake];
+
     if(session != nil) {
         [session checkLatestContactSyncStatus];
     }
+    
     if(activatedFromBackground) {
         [self triggerAutoSynchronization];
     } else {

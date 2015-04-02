@@ -14,6 +14,7 @@
 #import "Util.h"
 #import "AppDelegate.h"
 #import "CurioSDK.h"
+#import "ReachabilityManager.h"
 
 @interface SettingsUploadController ()
 
@@ -41,29 +42,51 @@
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
+    BOOL triggerAutoSync = NO;
+    BOOL cancelAutoSync = NO;
     if (currentSyncPhotosVideosSetting != oldSyncPhotosVideosSetting) {
         if(currentSyncPhotosVideosSetting == EnableOptionOn || currentSyncPhotosVideosSetting == EnableOptionAuto) {
-            ALAssetsLibrary *assetsLibrary = [[ALAssetsLibrary alloc] init];
-            [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-                if(group == nil) {
-                    [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOn];
-                    [APPDELEGATE startAutoSync];
-                }
-            } failureBlock:^(NSError *error) {
-                [self showErrorAlertWithMessage:NSLocalizedString(@"ALAssetsAccessError", @"")];
-            }];
-
+            triggerAutoSync = YES;
+            [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOn];
             [[CurioSDK shared] sendEvent:@"photo_video_sync_opened" eventValue:@"true"];
-
         } else {
+            cancelAutoSync = YES;
             [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOff];
-            [APPDELEGATE.uploadQueue cancelRemainingUploads];
-
             [[CurioSDK shared] sendEvent:@"photo_video_sync_opened" eventValue:@"false"];
         }
     }
-    if (currentConnectionSetting != oldConnectionSetting)
+    if (currentConnectionSetting != oldConnectionSetting) {
         [CacheUtil writeCachedSettingSyncingConnectionType:currentConnectionSetting];
+        //conn type değişmişse zaten yukarıda handle ediliyor
+        if (currentSyncPhotosVideosSetting == oldSyncPhotosVideosSetting) {
+            if(currentSyncPhotosVideosSetting == EnableOptionAuto || currentSyncPhotosVideosSetting == EnableOptionOn) {
+                if([ReachabilityManager isReachableViaWiFi]) {
+                    triggerAutoSync = YES;
+                } else if([ReachabilityManager isReachableViaWWAN]) {
+                    if(currentConnectionSetting == ConnectionOptionWifi3G) {
+                        triggerAutoSync = YES;
+                    } else {
+                        cancelAutoSync = YES;
+                    }
+                }
+            }
+        }
+    }
+    
+    if(triggerAutoSync) {
+        ALAssetsLibrary *assetsLibrary = [[ALAssetsLibrary alloc] init];
+        [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+            if(group == nil) {
+                [APPDELEGATE startAutoSync];
+            }
+        } failureBlock:^(NSError *error) {
+            [self showErrorAlertWithMessage:NSLocalizedString(@"ALAssetsAccessError", @"")];
+        }];
+    }
+
+    if(cancelAutoSync) {
+        [APPDELEGATE.uploadQueue cancelRemainingUploads];
+    }
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {

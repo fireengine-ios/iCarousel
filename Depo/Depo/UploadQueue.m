@@ -46,12 +46,14 @@
 
 - (NSArray *) uploadRefsForFolder:(NSString *) folderUuid {
     NSMutableArray *result = [[NSMutableArray alloc] init];
-    for(UploadManager *manager in [self.uploadManagers copy]) {
-        if(!manager.uploadRef.hasFinished) {
-            if(manager.uploadRef.folderUuid == nil && folderUuid == nil) {
-                [result addObject:manager.uploadRef];
-            } else if([folderUuid isEqualToString:manager.uploadRef.folderUuid]){
-                [result addObject:manager.uploadRef];
+    @synchronized(uploadManagers) {
+        for(UploadManager *manager in uploadManagers) {
+            if(!manager.uploadRef.hasFinished) {
+                if(manager.uploadRef.folderUuid == nil && folderUuid == nil) {
+                    [result addObject:manager.uploadRef];
+                } else if([folderUuid isEqualToString:manager.uploadRef.folderUuid]){
+                    [result addObject:manager.uploadRef];
+                }
             }
         }
     }
@@ -60,10 +62,12 @@
 
 - (NSArray *) uploadImageRefs {
     NSMutableArray *result = [[NSMutableArray alloc] init];
-    for(UploadManager *manager in [self.uploadManagers copy]) {
-        if(!manager.uploadRef.hasFinished) {
-            if(manager.uploadRef.contentType == ContentTypePhoto || manager.uploadRef.contentType == ContentTypeVideo) {
-                [result addObject:manager.uploadRef];
+    @synchronized(uploadManagers) {
+        for(UploadManager *manager in uploadManagers) {
+            if(!manager.uploadRef.hasFinished) {
+                if(manager.uploadRef.contentType == ContentTypePhoto || manager.uploadRef.contentType == ContentTypeVideo) {
+                    [result addObject:manager.uploadRef];
+                }
             }
         }
     }
@@ -71,9 +75,11 @@
 }
 
 - (UploadRef *) uploadRefForAsset:(NSString *) assetUrl {
-    for(UploadManager *manager in [self.uploadManagers copy]) {
-        if([manager.uploadRef.assetUrl isEqualToString:assetUrl]) {
-            return manager.uploadRef;
+    @synchronized(uploadManagers) {
+        for(UploadManager *manager in uploadManagers) {
+            if([manager.uploadRef.assetUrl isEqualToString:assetUrl]) {
+                return manager.uploadRef;
+            }
         }
     }
     return nil;
@@ -81,10 +87,12 @@
 
 - (NSArray *) uploadImageRefsForAlbum:(NSString *) albumUuid {
     NSMutableArray *result = [[NSMutableArray alloc] init];
-    for(UploadManager *manager in [self.uploadManagers copy]) {
-        if(!manager.uploadRef.hasFinished && [manager.uploadRef.albumUuid isEqualToString:albumUuid]) {
-            if(manager.uploadRef.contentType == ContentTypePhoto || manager.uploadRef.contentType == ContentTypeVideo) {
-                [result addObject:manager.uploadRef];
+    @synchronized(uploadManagers) {
+        for(UploadManager *manager in uploadManagers) {
+            if(!manager.uploadRef.hasFinished && [manager.uploadRef.albumUuid isEqualToString:albumUuid]) {
+                if(manager.uploadRef.contentType == ContentTypePhoto || manager.uploadRef.contentType == ContentTypeVideo) {
+                    [result addObject:manager.uploadRef];
+                }
             }
         }
     }
@@ -93,80 +101,90 @@
 
 - (UploadManager *) findNextTask {
     UploadManager *nextTask = nil;
-    @try {
-        for(UploadManager *row in [uploadManagers copy]) {
-            if(!row.uploadRef.hasFinished && row.uploadRef.isReady && ![activeTaskIds containsObject:[row uniqueUrl]]) {
-                NSLog(@"UPLOAD NAME: %@, TASK_ID:%d", row.uploadRef.fileName, row.uploadTask.taskIdentifier);
-                if(nextTask == nil) {
-                    nextTask = row;
-                } else {
-                    if([row.uploadRef.initializationDate compare:nextTask.uploadRef.initializationDate] == NSOrderedAscending) {
+    @synchronized(uploadManagers) {
+        @try {
+            for(UploadManager *row in uploadManagers) {
+                if(!row.uploadRef.hasFinished && row.uploadRef.isReady && ![activeTaskIds containsObject:[row uniqueUrl]]) {
+                    NSLog(@"UPLOAD NAME: %@, TASK_ID:%d", row.uploadRef.fileName, row.uploadTask.taskIdentifier);
+                    if(nextTask == nil) {
                         nextTask = row;
+                    } else {
+                        if([row.uploadRef.initializationDate compare:nextTask.uploadRef.initializationDate] == NSOrderedAscending) {
+                            nextTask = row;
+                        }
                     }
                 }
             }
         }
-    }
-    @catch (NSException *exception) {
-    }
-    @finally {
+        @catch (NSException *exception) {
+        }
+        @finally {
+        }
     }
     return nextTask;
 }
 
 - (int) remainingCount {
     int count = 0;
-    @try {
-        for(UploadManager *row in [uploadManagers copy]) {
-            if(!row.uploadRef.hasFinished && row.uploadRef.isReady) {
-                count++;
+    @synchronized(uploadManagers) {
+        @try {
+            for(UploadManager *row in uploadManagers) {
+                if(!row.uploadRef.hasFinished && row.uploadRef.isReady) {
+                    count++;
+                }
             }
         }
-    }
-    @catch (NSException *exception) {
-    }
-    @finally {
+        @catch (NSException *exception) {
+        }
+        @finally {
+        }
     }
     return count;
 }
 
 - (void) cancelAllUploads {
     [self cancelRemainingUploads];
-    @try {
-        for(UploadManager *row in [uploadManagers copy]) {
-            if(row.uploadTask) {
-                [row.uploadTask cancel];
+    @synchronized(uploadManagers) {
+        @try {
+            for(UploadManager *row in uploadManagers) {
+                if(row.uploadTask) {
+                    [row.uploadTask cancel];
+                }
             }
         }
-    }
-    @catch (NSException *exception) {
-    }
-    @finally {
-        [self.uploadManagers removeAllObjects];
-        [self.activeTaskIds removeAllObjects];
+        @catch (NSException *exception) {
+        }
+        @finally {
+            [self.uploadManagers removeAllObjects];
+            [self.activeTaskIds removeAllObjects];
+        }
     }
 }
 
 - (void) cancelRemainingUploads {
     NSMutableArray *cleanArray = [[NSMutableArray alloc] init];
-    @try {
-        for(UploadManager *row in [uploadManagers copy]) {
-            if(!row.uploadRef.autoSyncFlag || [activeTaskIds containsObject:[row uniqueUrl]]) {
-                [cleanArray addObject:row];
+    @synchronized(uploadManagers) {
+        @try {
+            for(UploadManager *row in uploadManagers) {
+                if(!row.uploadRef.autoSyncFlag || [activeTaskIds containsObject:[row uniqueUrl]]) {
+                    [cleanArray addObject:row];
+                }
             }
         }
+        @catch (NSException *exception) {
+        }
+        @finally {
+        }
+        self.uploadManagers = cleanArray;
     }
-    @catch (NSException *exception) {
-    }
-    @finally {
-    }
-    self.uploadManagers = cleanArray;
     [SyncUtil unlockAutoSyncBlockInProgress];
     [[NSNotificationCenter defaultCenter] postNotificationName:AUTO_SYNC_QUEUE_CHANGED_NOTIFICATION object:nil userInfo:nil];
 }
 
 - (void) addOnlyNewUploadTask:(UploadManager *) newManager {
-    [uploadManagers addObject:newManager];
+    @synchronized(uploadManagers) {
+        [uploadManagers addObject:newManager];
+    }
 }
 
 - (void) startReadyTasks {
@@ -181,7 +199,9 @@
 }
 
 - (void) addNewUploadTask:(UploadManager *) newManager {
-    [uploadManagers addObject:newManager];
+    @synchronized(uploadManagers) {
+        [uploadManagers addObject:newManager];
+    }
     newManager.queueDelegate = self;
     if(newManager.uploadRef.isReady) {
         if([activeTaskIds count] < MAX_CONCURRENT_UPLOAD_TASKS) {
@@ -189,7 +209,9 @@
             [newManager startTask];
         }
     }
+
     [[NSNotificationCenter defaultCenter] postNotificationName:AUTO_SYNC_QUEUE_CHANGED_NOTIFICATION object:nil userInfo:nil];
+    [self updateGroupUserDefaults];
 }
 
 #pragma mark UploadManagerQueueDelegate
@@ -212,16 +234,20 @@
             }
         }
     }
+
     [[NSNotificationCenter defaultCenter] postNotificationName:AUTO_SYNC_QUEUE_CHANGED_NOTIFICATION object:nil userInfo:nil];
+    [self updateGroupUserDefaults];
 }
 
 - (void) uploadManagerIsReadToStartTask:(UploadManager *)manRef {
     if([activeTaskIds count] < MAX_CONCURRENT_UPLOAD_TASKS) {
-        for(UploadManager *row in [self.uploadManagers copy]) {
-            if([[row uniqueUrl] isEqualToString:[manRef uniqueUrl]]) {
-                [activeTaskIds addObject:[row uniqueUrl]];
-                [row startTask];
-                break;
+        @synchronized(uploadManagers) {
+            for(UploadManager *row in uploadManagers) {
+                if([[row uniqueUrl] isEqualToString:[manRef uniqueUrl]]) {
+                    [activeTaskIds addObject:[row uniqueUrl]];
+                    [row startTask];
+                    break;
+                }
             }
         }
     }
@@ -230,15 +256,17 @@
 - (void) uploadManagerTaskIsInitialized:(UploadManager *)manRef {
     if([activeTaskIds containsObject:[manRef uniqueUrl]]) {
         UploadManager *oldMan = nil;
-        for(UploadManager *row in [self.uploadManagers copy]) {
-            if([[row uniqueUrl] isEqualToString:[manRef uniqueUrl]]) {
-                oldMan = row;
-                break;
+        @synchronized(uploadManagers) {
+            for(UploadManager *row in uploadManagers) {
+                if([[row uniqueUrl] isEqualToString:[manRef uniqueUrl]]) {
+                    oldMan = row;
+                    break;
+                }
             }
+            manRef.queueDelegate = self;
+            [self.uploadManagers removeObject:oldMan];
+            [self.uploadManagers addObject:manRef];
         }
-        manRef.queueDelegate = self;
-        [self.uploadManagers removeObject:oldMan];
-        [self.uploadManagers addObject:manRef];
     }
 }
 
@@ -317,14 +345,16 @@
 }
 
 - (UploadManager *) findByTaskId:(long) taskId {
-    if(self.uploadManagers != nil) {
-        for(UploadManager *row in [self.uploadManagers copy]) {
-            if(row.uploadTask.taskIdentifier == taskId) {
-                return row;
+    @synchronized(uploadManagers) {
+        if(self.uploadManagers != nil) {
+            for(UploadManager *row in uploadManagers) {
+                if(row.uploadTask.taskIdentifier == taskId) {
+                    return row;
+                }
             }
         }
+        return nil;
     }
-    return nil;
 }
 
 #pragma mark TokenManagerWithinProcessDelegate methods
@@ -349,34 +379,51 @@
 
 - (int) totalAutoSyncCount {
     int count = 0;
-    @try {
-        for(UploadManager *row in [uploadManagers copy]) {
-            if(row.uploadRef.autoSyncFlag) {
-                count++;
+    @synchronized(uploadManagers) {
+        @try {
+            for(UploadManager *row in uploadManagers) {
+                if(row.uploadRef.autoSyncFlag) {
+                    count++;
+                }
             }
         }
-    }
-    @catch (NSException *exception) {
-    }
-    @finally {
+        @catch (NSException *exception) {
+        }
+        @finally {
+        }
     }
     return count;
 }
 
 - (int) finishedAutoSyncCount {
     int count = 0;
-    @try {
-        for(UploadManager *row in [uploadManagers copy]) {
-            if(row.uploadRef.hasFinished && row.uploadRef.autoSyncFlag) {
-                count++;
+    @synchronized(uploadManagers) {
+        @try {
+            for(UploadManager *row in uploadManagers) {
+                if(row.uploadRef.hasFinished && row.uploadRef.autoSyncFlag) {
+                    count++;
+                }
             }
         }
-    }
-    @catch (NSException *exception) {
-    }
-    @finally {
+        @catch (NSException *exception) {
+        }
+        @finally {
+        }
     }
     return count;
+}
+
+//Mahir: this method saves the values needed for the Today Extension to the group nsuserdefaults
+- (void) updateGroupUserDefaults {
+//    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        int totalAutoSyncCount = [self totalAutoSyncCount];
+        int finishedAutoSyncCount = [self finishedAutoSyncCount];
+        
+        NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:GROUP_NAME_SUITE_NSUSERDEFAULTS];
+        [sharedDefaults setInteger:totalAutoSyncCount forKey:@"totalAutoSyncCount"];
+        [sharedDefaults setInteger:finishedAutoSyncCount forKey:@"finishedAutoSyncCount"];
+        [sharedDefaults synchronize];
+//    });
 }
 
 @end
