@@ -24,7 +24,7 @@
 
 - (id)initWithCoder:(NSCoder *) decoder {
     if (self = [super initWithCoder:decoder]) {
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDefaultsDidChange) name:NSUserDefaultsDidChangeNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDefaultsDidChange:) name:NSUserDefaultsDidChangeNotification object:nil];
     }
     return self;
 }
@@ -44,7 +44,9 @@
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncQueueChanged:) name:@"AUTO_SYNC_QUEUE_CHANGED_NOTIFICATION" object:nil];
 }
 
-- (void) userDefaultsDidChange {
+- (void)userDefaultsDidChange:(NSNotification *)notification {
+    NSLog(@"AT userDefaultsDidChange:");
+
     NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:GROUP_NAME_SUITE_NSUSERDEFAULTS];
     NSInteger totalCount = [defaults integerForKey:@"totalAutoSyncCount"];
     NSInteger finishedCount = [defaults integerForKey:@"finishedAutoSyncCount"];

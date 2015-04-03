@@ -413,7 +413,7 @@
     return count;
 }
 
-//Mahir: this method saves the values needed for the Today Extension to the group nsuserdefaults
+//Mahir: this method saves into the group nsuserdefaults the values needed for the Today Extension
 - (void) updateGroupUserDefaults {
 //    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         int totalAutoSyncCount = [self totalAutoSyncCount];
