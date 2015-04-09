@@ -36,6 +36,11 @@
 
 #import "ReachabilityManager.h"
 
+//TODO MACRO TANIMLANACAK (extension group id için)
+
+
+//TODO info'larda version update
+
 @implementation AppDelegate
 
 @synthesize session;
@@ -123,6 +128,8 @@
         }
     }
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginRequiredNotificationRaised) name:LOGIN_REQ_NOTIFICATION object:nil];
+
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -160,6 +167,27 @@
         [self.window.rootViewController.view removeFromSuperview];
         [tokenManager requestRadiusLogin];
         [self showMainLoading];
+    }
+}
+
+- (void) loginRequiredNotificationRaised {
+    BOOL shouldShowLogin = YES;
+    if([self.window.rootViewController isKindOfClass:[MyNavigationController class]]) {
+        MyNavigationController *currentNav = (MyNavigationController *) self.window.rootViewController;
+        if([currentNav.viewControllers count] > 0) {
+            id controllerAtTopStack = [currentNav.viewControllers objectAtIndex:[currentNav.viewControllers count] -1];
+            if([controllerAtTopStack isKindOfClass:[LoginController class]]) {
+                shouldShowLogin = NO;
+            }
+        }
+    }
+    if(shouldShowLogin) {
+        [self triggerLogout];
+        /*
+        LoginController *login = [[LoginController alloc] init];
+        MyNavigationController *loginNav = [[MyNavigationController alloc] initWithRootViewController:login];
+        self.window.rootViewController = loginNav;
+         */
     }
 }
 
@@ -374,6 +402,14 @@
 }
 
 - (void) application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    //TODO sil
+    /*
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    [notification setAlertBody:@"Background fetch çalıştı."];
+    [notification setFireDate:[NSDate date]];
+    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+     */
+    
     [syncManager decideAndStartAutoSync];
     completionHandler(UIBackgroundFetchResultNewData);
 }
@@ -416,6 +452,10 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     [[CurioSDK shared] endSession];
+}
+
+- (void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(NSString *)identifier completionHandler:(void (^)())completionHandler {
+    NSLog(@"At handleEventsForBackgroundURLSession");
 }
 
 @end

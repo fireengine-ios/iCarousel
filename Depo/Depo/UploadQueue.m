@@ -38,7 +38,7 @@
             }
             
             configuration.sessionSendsLaunchEvents = YES;
-            self.session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
+            self.session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:[NSOperationQueue mainQueue]];
         });
     }
     return self;
@@ -234,6 +234,7 @@
             }
         }
     }
+    [[UIApplication sharedApplication] endBackgroundTask:manRef.bgTaskI];
 
     [[NSNotificationCenter defaultCenter] postNotificationName:AUTO_SYNC_QUEUE_CHANGED_NOTIFICATION object:nil userInfo:nil];
     [self updateGroupUserDefaults];
@@ -279,16 +280,21 @@
 }
 
 - (void) URLSession:(NSURLSession *) _session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error {
-    
+    NSLog(@"AT URLSession:didCompleteWithError");
     UploadManager *currentManager = [self findByTaskId:task.taskIdentifier];
     if(currentManager != nil) {
         NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) task.response;
         if (!error && httpResp.statusCode == 201) {
             if(currentManager.uploadRef.localHash != nil) {
                 [SyncUtil cacheSyncHashLocally:currentManager.uploadRef.localHash];
+                //local ile remote hash aynı seviyeye getirildi. O yüzden local kaydediliyor.
+                [SyncUtil cacheSyncHashRemotely:currentManager.uploadRef.localHash];
             }
-            if(currentManager.uploadRef.remoteHash != nil) {
-                [SyncUtil cacheSyncHashRemotely:currentManager.uploadRef.remoteHash];
+            if(currentManager.uploadRef.summary != nil) {
+                [SyncUtil cacheSyncFileSummary:currentManager.uploadRef.summary];
+            }
+            if(currentManager.uploadRef.autoSyncFlag) {
+                [SyncUtil increaseAutoSyncIndex];
             }
             if(currentManager.uploadRef.summary != nil) {
                 [SyncUtil cacheSyncFileSummary:currentManager.uploadRef.summary];
@@ -415,7 +421,7 @@
 
 //Mahir: this method saves into the group nsuserdefaults the values needed for the Today Extension
 - (void) updateGroupUserDefaults {
-//    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         int totalAutoSyncCount = [self totalAutoSyncCount];
         int finishedAutoSyncCount = [self finishedAutoSyncCount];
         
@@ -423,7 +429,9 @@
         [sharedDefaults setInteger:totalAutoSyncCount forKey:@"totalAutoSyncCount"];
         [sharedDefaults setInteger:finishedAutoSyncCount forKey:@"finishedAutoSyncCount"];
         [sharedDefaults synchronize];
-//    });
+        
+        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:totalAutoSyncCount - finishedAutoSyncCount];
+    });
 }
 
 @end

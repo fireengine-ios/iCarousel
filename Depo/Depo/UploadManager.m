@@ -28,6 +28,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 @synthesize asset;
 @synthesize notifyDao;
 @synthesize albumAddPhotosDao;
+@synthesize bgTaskI;
 
 - (id) initWithUploadInfo:(UploadRef *) ref {
     if(self = [super init]) {
@@ -46,6 +47,10 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 }
 
 - (void) startTask {
+    bgTaskI = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        [[UIApplication sharedApplication] endBackgroundTask:bgTaskI];
+    }];
+    
     dispatch_queue_t uploadQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
     dispatch_async(uploadQueue, ^{
         if(self.uploadRef.taskType == UploadTaskTypeAsset) {
@@ -62,7 +67,6 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             [[CurioSDK shared] sendEvent:@"upload_started" eventValue:[NSString stringWithFormat:@"file type: %@", @"image"]];
         }
     });
-    
 }
 
 - (void) triggerAndStartAssetsTask {
@@ -104,6 +108,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     self.uploadRef.tempThumbnailUrl = tempThumbnailPath;
     
     NSString *fileType = @"image";
+    BOOL writeSuccess = YES;
     
     if ([[self.asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
 //        @autoreleasepool {
@@ -112,7 +117,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             Byte *buffer = (Byte *) malloc(dataSize);
             NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:rep.size error:nil];
             NSData *videoData = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
-            [videoData writeToFile:tempPath atomically:YES];
+            writeSuccess = [videoData writeToFile:tempPath atomically:YES];
 //        }
         fileType = @"video";
     } else {
@@ -143,21 +148,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
                 bufferOffset   += bytesRead;
                 [imgData appendBytes:buffer length:bytesRead];
             }
-            [imgData writeToFile:tempPath atomically:YES];
-            
-            /*
-            NSString *mimeType = (__bridge_transfer NSString*) UTTypeCopyPreferredTagWithClass
-            ((__bridge CFStringRef)[rep UTI], kUTTagClassMIMEType);
-            NSLog(@"MIME TYPE: %@", mimeType);
-            
-            UIImage *image = [UIImage imageWithCGImage:[self.asset.defaultRepresentation fullResolutionImage] scale:1.0 orientation:orientation];
-            //            UIImage *image = [UIImage imageWithCGImage:[self.asset.defaultRepresentation fullResolutionImage]];
-            if([[mimeType lowercaseString] isEqualToString:CONTENT_TYPE_JPEG_VALUE] || [[mimeType lowercaseString] isEqualToString:CONTENT_TYPE_JPG_VALUE]) {
-                [UIImageJPEGRepresentation(image, 1.0) writeToFile:tempPath atomically:YES];
-            } else {
-                [UIImagePNGRepresentation(image) writeToFile:tempPath atomically:YES];
-            }
-             */
+            writeSuccess = [imgData writeToFile:tempPath atomically:YES];
         }
 
         @autoreleasepool {
@@ -166,18 +157,23 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         }
     }
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:TEMP_IMG_UPLOAD_NOTIFICATION object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:self.uploadRef.fileUuid, TEMP_IMG_UPLOAD_NOTIFICATION_UUID_PARAM, tempThumbnailPath, TEMP_IMG_UPLOAD_NOTIFICATION_URL_PARAM, nil]];
-    
-    self.uploadRef.fileName = self.asset.defaultRepresentation.filename;
-    self.uploadRef.urlForUpload = [NSString stringWithFormat:@"%@/%@", APPDELEGATE.session.baseUrl, self.uploadRef.fileUuid];
-    
-    self.uploadTask = [APPDELEGATE.uploadQueue.session uploadTaskWithRequest:[self prepareRequestSetVideo:[[self.asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]] fromFile:[NSURL fileURLWithPath:self.uploadRef.tempUrl]];
-    [uploadTask resume];
-    
-    [[CurioSDK shared] sendEvent:@"upload_started" eventValue:[NSString stringWithFormat:@"file type: %@", fileType]];
-    
-    //    [queueDelegate uploadManagerTaskIsInitialized:self];
-    
+    if(writeSuccess) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:TEMP_IMG_UPLOAD_NOTIFICATION object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:self.uploadRef.fileUuid, TEMP_IMG_UPLOAD_NOTIFICATION_UUID_PARAM, tempThumbnailPath, TEMP_IMG_UPLOAD_NOTIFICATION_URL_PARAM, nil]];
+        
+        self.uploadRef.fileName = self.asset.defaultRepresentation.filename;
+        self.uploadRef.urlForUpload = [NSString stringWithFormat:@"%@/%@", APPDELEGATE.session.baseUrl, self.uploadRef.fileUuid];
+        
+        self.uploadTask = [APPDELEGATE.uploadQueue.session uploadTaskWithRequest:[self prepareRequestSetVideo:[[self.asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]] fromFile:[NSURL fileURLWithPath:self.uploadRef.tempUrl]];
+        [uploadTask resume];
+        
+        [[CurioSDK shared] sendEvent:@"upload_started" eventValue:[NSString stringWithFormat:@"file type: %@", fileType]];
+
+        //    [queueDelegate uploadManagerTaskIsInitialized:self];
+    } else {
+        self.uploadRef.hasFinished = YES;
+        [delegate uploadManagerDidFailUploadingForAsset:self.uploadRef.assetUrl];
+        [queueDelegate uploadManager:self didFinishUploadingWithSuccess:NO];
+    }
 }
 
 - (void) removeTemporaryFile {

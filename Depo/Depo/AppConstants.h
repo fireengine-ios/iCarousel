@@ -156,12 +156,14 @@
 
 #define AUTO_SYNC_QUEUE_CHANGED_NOTIFICATION @"AUTO_SYNC_QUEUE_CHANGED_NOTIFICATION"
 
+#define LOGIN_REQ_NOTIFICATION @"LOGIN_REQ_NOTIFICATION"
+
 #define AKILLI_DEPO_PROFILE_IMG_NAME @"akilli_depo_profile_img.jpg"
 
 #define MAX_CONCURRENT_UPLOAD_TASKS 1
 
 //TODO group id for shared nsuserdefaults - this will be revisited for Turkcell
-#define GROUP_NAME_SUITE_NSUSERDEFAULTS @"group.com.igones"
+#define GROUP_NAME_SUITE_NSUSERDEFAULTS @"group.com.turkcell.akillideponew.ent"
 
 //TODO
 //#define CONTACT_SYNC_SERVER_URL @"https://tcloudstb.turkcell.com.tr/sync/ttyapi/"

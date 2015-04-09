@@ -10,7 +10,7 @@
 #import <NotificationCenter/NotificationCenter.h>
 
 //TODO group id for shared nsuserdefaults - this will be revisited for Turkcell
-#define GROUP_NAME_SUITE_NSUSERDEFAULTS @"group.com.igones"
+#define GROUP_NAME_SUITE_NSUSERDEFAULTS @"group.com.turkcell.akillideponew.ent"
 
 @interface TodayViewController () <NCWidgetProviding>
 

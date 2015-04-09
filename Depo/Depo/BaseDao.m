@@ -94,7 +94,8 @@
             self.tokenAlreadyRevisitedFlag = YES;
             [self triggerNewToken];
         } else {
-            [self shouldReturnFailWithMessage:LOGIN_REQ_ERROR_MESSAGE];
+//            [self shouldReturnFailWithMessage:LOGIN_REQ_ERROR_MESSAGE];
+            [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_REQ_NOTIFICATION object:nil userInfo:nil];
         }
     } else if([request responseStatusCode] == 403) {
         [self shouldReturnFailWithMessage:FORBIDDEN_ERROR_MESSAGE];
@@ -445,7 +446,8 @@
             tokenDao.failMethod = @selector(tokenRevisitedFailCallback:);
             [tokenDao requestTokenByRememberMe];
         } else {
-            [self shouldReturnFailWithMessage:LOGIN_REQ_ERROR_MESSAGE];
+//            [self shouldReturnFailWithMessage:LOGIN_REQ_ERROR_MESSAGE];
+            [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_REQ_NOTIFICATION object:nil userInfo:nil];
         }
     } else if(networkStatus == kReachableViaWWAN) {
         radiusDao = [[RadiusDao alloc] init];

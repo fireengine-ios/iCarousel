@@ -78,6 +78,9 @@
     [self.audioPlayer play];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(queueItemDidReachEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:self.playerItem];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(queueItemDidFail) name:AVPlayerItemPlaybackStalledNotification object:self.playerItem];
+    
 
     [[NSNotificationCenter defaultCenter] postNotificationName:MUSIC_CHANGED_NOTIFICATION object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[self itemRefForCurrentAsset], CHANGED_MUSIC_OBJ_KEY, nil]];
 }
@@ -154,6 +157,10 @@
     } else {
         [self playNextAudioItem];
     }
+}
+
+- (void) queueItemDidFail {
+    NSLog(@"AT queueItemDidFail");
 }
 
 - (void) checkLatestContactSyncStatus {

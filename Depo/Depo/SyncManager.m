@@ -90,7 +90,7 @@
         autoSyncIterationInProgress = YES;
         [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
             if(group) {
-                int startIndex = [SyncUtil readAutoSyncIndex] * AUTO_SYNC_ASSET_COUNT;
+                int startIndex = [SyncUtil readAutoSyncIndex];
                 int length = AUTO_SYNC_ASSET_COUNT;
                 if(startIndex + length > [group numberOfAssets]) {
                     length = (int)[group numberOfAssets] - startIndex;
@@ -120,15 +120,14 @@
                                     [SyncUtil lockAutoSyncBlockInProgress];
                                     [SyncUtil writeFirstTimeSyncFlag];
                                     [SyncUtil updateLastSyncDate];
+                                } else {
+                                    [SyncUtil increaseAutoSyncIndex];
                                 }
                             }
                         }
                     } else {
-                        //asset list finished for this enumeration
-                        [SyncUtil increaseAutoSyncIndex];
-                        
                         //check and set if no enumeration left
-                        if([SyncUtil readAutoSyncIndex] * AUTO_SYNC_ASSET_COUNT >= [group numberOfAssets]) {
+                        if([SyncUtil readAutoSyncIndex] >= [group numberOfAssets]) {
                             [SyncUtil writeFirstTimeSyncFinishedFlag];
                         }
                     }
@@ -153,13 +152,14 @@
     [SyncUtil updateLastSyncDate];
 
     dispatch_async(dispatch_get_main_queue(), ^{
-        if(![SyncUtil readAutoSyncBlockInProgress]) {
+        if(![SyncUtil readFirstTimeSyncFinishedFlag] && ![SyncUtil readAutoSyncBlockInProgress]) {
             [self initializeNextAutoSyncPackage];
         }
     });
 }
 
 - (void) manuallyCheckIfAlbumChanged {
+    NSLog(@"manuallyCheckIfAlbumChanged called");
     if(autoSyncIterationInProgress)
         return;
     
@@ -177,7 +177,9 @@
     
     if(triggerSyncing) {
         NSArray *localHashList = [SyncUtil readSyncHashLocally];
+        NSLog(@"local hash: %@", localHashList);
         NSArray *remoteHashList = [SyncUtil readSyncHashRemotely];
+        NSLog(@"remote hash: %@", remoteHashList);
         NSArray *remoteSummaryList = [SyncUtil readSyncFileSummaries];
         
         NSTimeInterval timeInMilisecondsStart = [[NSDate date] timeIntervalSince1970];
@@ -195,11 +197,14 @@
                                 if([ReachabilityManager isReachableViaWiFi] || ([ReachabilityManager isReachableViaWWAN] && connectionOption == ConnectionOptionWifi3G)) {
 //                                    NSString *localHash = [asset.defaultRepresentation MD5];
                                     NSString *localHash = [SyncUtil md5StringOfString:[asset.defaultRepresentation.url absoluteString]];
-                                    BOOL shouldStartUpload = ![localHashList containsObject:localHash] && ![remoteHashList containsObject:localHash] && [APPDELEGATE.uploadQueue uploadRefForAsset:[asset.defaultRepresentation.url absoluteString]] == nil;
+                                    NSLog(@"Calculated local hash:%@", localHash);
+                                    BOOL shouldStartUpload = ![localHashList containsObject:localHash] && ![remoteHashList containsObject:localHash] && ([APPDELEGATE.uploadQueue uploadRefForAsset:[asset.defaultRepresentation.url absoluteString]] == nil);
                                     if(shouldStartUpload) {
                                         ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
                                         NSString *assetFileName = [defaultRep filename];
                                         for(MetaFileSummary *summary in remoteSummaryList) {
+                                            NSLog(@"SUMMARY ROW FILENAME:%@ AND BYTES:%lld", summary.fileName, summary.bytes);
+                                            NSLog(@"SUMMARY CURRENT ASSET:%@ AND BYTES:%lld", assetFileName, [defaultRep size]);
                                             if([summary.fileName isEqualToString:assetFileName] && summary.bytes == [defaultRep size]) {
                                                 shouldStartUpload = NO;
                                             }
@@ -230,7 +235,9 @@
     NSString *mimeType = (__bridge_transfer NSString*)UTTypeCopyPreferredTagWithClass
     ((__bridge CFStringRef)[asset.defaultRepresentation UTI], kUTTagClassMIMEType);
 
+    NSLog(@"At startUploadForAsset for hash: %@", localHash);
     if(asset.defaultRepresentation.url != nil && [asset.defaultRepresentation.url absoluteString] != nil) {
+        NSLog(@"At startUploadForAsset asset.defaultRepresentation.url not null");
         MetaFileSummary *summary = [[MetaFileSummary alloc] init];
         summary.fileName = [asset.defaultRepresentation filename];
         summary.bytes = [asset.defaultRepresentation size];
