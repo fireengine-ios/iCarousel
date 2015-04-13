@@ -261,4 +261,32 @@
     return (int)[[NSUserDefaults standardUserDefaults] integerForKey:AUTO_SYNC_INDEX_KEY];
 }
 
++ (NSMutableDictionary *) readOngoingTasks {
+    NSMutableDictionary *dict = [[NSUserDefaults standardUserDefaults] objectForKey:ONGOING_TASKS_KEY];
+    if(!dict) {
+        dict = [[NSMutableDictionary alloc] init];
+    }
+    return dict;
+}
+
++ (void) resetOngoingTasks {
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:ONGOING_TASKS_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (void) addToOngoingTasksWithFilename:(NSString *) filename andTaskUrl:(NSString *) taskUrl {
+    NSMutableDictionary *currentDict = [[NSUserDefaults standardUserDefaults] objectForKey:ONGOING_TASKS_KEY];
+    if(currentDict == nil) {
+        currentDict = [NSMutableDictionary dictionaryWithObject:taskUrl forKey:filename];
+        [[NSUserDefaults standardUserDefaults] setObject:currentDict forKey:ONGOING_TASKS_KEY];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    } else {
+        if([currentDict objectForKey:filename] == nil) {
+            [currentDict setObject:taskUrl forKey:filename];
+            [[NSUserDefaults standardUserDefaults] setObject:currentDict forKey:ONGOING_TASKS_KEY];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+    }
+}
+
 @end

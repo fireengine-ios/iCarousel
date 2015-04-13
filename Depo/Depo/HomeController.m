@@ -60,10 +60,12 @@
         usageDao.successMethod = @selector(usageSuccessCallback:);
         usageDao.failMethod = @selector(usageFailCallback:);
         
+        /* contactCountSuccessCallback
         contactCountDao = [[ContactCountDao alloc] init];
         contactCountDao.delegate = self;
         contactCountDao.successMethod = @selector(contactCountSuccessCallback:);
         contactCountDao.failMethod = @selector(contactCountFailCallback:);
+        */
         
         usageChart = [[XYPieChart alloc] initWithFrame:CGRectMake(60, IS_IPHONE_5 ? 40 : 26, 200, 200)];
         usageChart.dataSource = self;
@@ -186,17 +188,19 @@
     [imageButton addTarget:self action:@selector(triggerPhotosPage) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:imageButton];
     
-    musicButton = [[UsageButton alloc] initWithFrame:CGRectMake(90, separator.frame.origin.y + (IS_IPHONE_5 ? 41 : 11), 75, 60) withUsage:UsageTypeMusic withStorage:APPDELEGATE.session.usage.musicUsage withFileCount:APPDELEGATE.session.usage.audioCount];
+    musicButton = [[UsageButton alloc] initWithFrame:CGRectMake(122, separator.frame.origin.y + (IS_IPHONE_5 ? 41 : 11), 75, 60) withUsage:UsageTypeMusic withStorage:APPDELEGATE.session.usage.musicUsage withFileCount:APPDELEGATE.session.usage.audioCount];
     [musicButton addTarget:self action:@selector(triggerMusicPage) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:musicButton];
     
-    otherButton = [[UsageButton alloc] initWithFrame:CGRectMake(160, separator.frame.origin.y + (IS_IPHONE_5 ? 41 : 11), 75, 60) withUsage:UsageTypeOther withStorage:APPDELEGATE.session.usage.otherUsage withFileCount:APPDELEGATE.session.usage.othersCount];
+    otherButton = [[UsageButton alloc] initWithFrame:CGRectMake(225, separator.frame.origin.y + (IS_IPHONE_5 ? 41 : 11), 75, 60) withUsage:UsageTypeOther withStorage:APPDELEGATE.session.usage.otherUsage withFileCount:APPDELEGATE.session.usage.othersCount];
     [otherButton addTarget:self action:@selector(triggerDocsPage) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:otherButton];
     
+    /* contacts commented out
     contactButton = [[UsageButton alloc] initWithFrame:CGRectMake(230, separator.frame.origin.y + (IS_IPHONE_5 ? 41 : 11), 75, 60) withUsage:UsageTypeContact withCountValue:@""];
     [contactButton addTarget:self action:@selector(triggerContactsPage) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:contactButton];
+     */
 
     if(percentUsageVal >= 80) {
         moreStorageButton.hidden = NO;
@@ -208,7 +212,7 @@
         usageSummaryView.frame = CGRectMake((usageChart.frame.size.width - 130)/2, (usageChart.frame.size.height - 130)/2, 130, 130);
     }
     
-    [contactCountDao requestContactCount];
+// contacts commented out //    [contactCountDao requestContactCount];
 }
 
 - (void) usageFailCallback:(NSString *) errorMessage {

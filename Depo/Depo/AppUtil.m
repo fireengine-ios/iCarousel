@@ -62,7 +62,7 @@
     logoutMenu.iconName = @"logout_icon.png";
     logoutMenu.selectedIconName = @"yellow_logout_icon.png";
 
-    return @[profileMenu, searchMenu, homeMenu, favMenu, fileMenu, photoMenu, musicMenu, docMenu, contactMenu, logoutMenu];
+    return @[profileMenu, searchMenu, homeMenu, favMenu, fileMenu, photoMenu, musicMenu, docMenu, /* contacts commented out // contactMenu ,*/ logoutMenu];
 }
 
 + (NSString *) iconNameByContentType:(ContentType) contentType {

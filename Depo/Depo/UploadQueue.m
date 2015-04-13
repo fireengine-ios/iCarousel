@@ -11,6 +11,8 @@
 #import "UploadManager.h"
 #import "SyncUtil.h"
 #import "AppDelegate.h"
+#import "MMWormhole.h"
+#import "AppUtil.h"
 
 @implementation UploadQueue
 
@@ -232,6 +234,8 @@
                 [SyncUtil unlockAutoSyncBlockInProgress];
                 [APPDELEGATE.syncManager initializeNextAutoSyncPackage];
             }
+            [APPDELEGATE.session cleanBgOngoingTaskUrls];
+            [SyncUtil resetOngoingTasks];
         }
     }
     [[UIApplication sharedApplication] endBackgroundTask:manRef.bgTaskI];
@@ -421,15 +425,21 @@
 
 //Mahir: this method saves into the group nsuserdefaults the values needed for the Today Extension
 - (void) updateGroupUserDefaults {
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+    dispatch_async(dispatch_get_main_queue(), ^(void) {
         int totalAutoSyncCount = [self totalAutoSyncCount];
         int finishedAutoSyncCount = [self finishedAutoSyncCount];
+        
+        NSString *lastSyncDateInReadableFormat = [NSString stringWithFormat:NSLocalizedString(@"LastSyncFormat", @""), [AppUtil readDueDateInReadableFormat:[SyncUtil readLastSyncDate]]];
         
         NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:GROUP_NAME_SUITE_NSUSERDEFAULTS];
         [sharedDefaults setInteger:totalAutoSyncCount forKey:@"totalAutoSyncCount"];
         [sharedDefaults setInteger:finishedAutoSyncCount forKey:@"finishedAutoSyncCount"];
+        [sharedDefaults setValue:lastSyncDateInReadableFormat forKey:@"lastSyncDate"];
         [sharedDefaults synchronize];
         
+        [APPDELEGATE.wormhole passMessageObject:@{@"totalCount":[NSNumber numberWithInt: totalAutoSyncCount]} identifier:EXTENSION_WORMHOLE_TOTAL_COUNT_IDENTIFIER];
+        [APPDELEGATE.wormhole passMessageObject:@{@"finishedCount":[NSNumber numberWithInt: finishedAutoSyncCount]} identifier:EXTENSION_WORMHOLE_FINISHED_COUNT_IDENTIFIER];
+
         [[UIApplication sharedApplication] setApplicationIconBadgeNumber:totalAutoSyncCount - finishedAutoSyncCount];
     });
 }

@@ -87,6 +87,8 @@
 
 #define AUTO_SYNC_INDEX_KEY @"AUTO_SYNC_INDEX_KEY"
 
+#define ONGOING_TASKS_KEY @"ONGOING_TASKS_KEY"
+
 #define CONTENT_TYPE_JPEG_VALUE @"image/jpeg"
 
 #define CONTENT_TYPE_JPG_VALUE @"image/jpg"
@@ -162,8 +164,14 @@
 
 #define MAX_CONCURRENT_UPLOAD_TASKS 1
 
-//TODO group id for shared nsuserdefaults - this will be revisited for Turkcell
+//TODO group id for shared nsuserdefaults - this will be revisited for Turkcell - igones: group.com.igones.Depo
 #define GROUP_NAME_SUITE_NSUSERDEFAULTS @"group.com.turkcell.akillideponew.ent"
+
+#define EXTENSION_WORMHOLE_DIR @"WORMHOLE_DIR"
+
+#define EXTENSION_WORMHOLE_TOTAL_COUNT_IDENTIFIER @"EXTENSION_WORMHOLE_TOTAL_COUNT_IDENTIFIER"
+
+#define EXTENSION_WORMHOLE_FINISHED_COUNT_IDENTIFIER @"EXTENSION_WORMHOLE_FINISHED_COUNT_IDENTIFIER"
 
 //TODO
 //#define CONTACT_SYNC_SERVER_URL @"https://tcloudstb.turkcell.com.tr/sync/ttyapi/"

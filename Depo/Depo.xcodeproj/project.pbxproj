@@ -524,6 +524,10 @@
 		05A8ADA51A5ABCD8007566BF /* UploadQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A8ADA41A5ABCD8007566BF /* UploadQueue.m */; };
 		05AD502B1A7ED75500C40777 /* TermsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AD502A1A7ED75500C40777 /* TermsController.m */; };
 		05AD502E1A7ED76200C40777 /* MigrateStatusController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AD502D1A7ED76200C40777 /* MigrateStatusController.m */; };
+		05AD7F821AD7FD0E0052153A /* MMWormhole.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AD7F811AD7FD0E0052153A /* MMWormhole.m */; };
+		05AD7F851AD7FD160052153A /* MMWormhole.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AD7F841AD7FD160052153A /* MMWormhole.m */; };
+		05AD7F881AD801B20052153A /* added_tick.png in Resources */ = {isa = PBXBuildFile; fileRef = 05AD7F861AD801B20052153A /* added_tick.png */; };
+		05AD7F891AD801B20052153A /* added_tick@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05AD7F871AD801B20052153A /* added_tick@2x.png */; };
 		05AF7C811A1C8CD100F5011A /* RecentActivitiesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AF7C801A1C8CD100F5011A /* RecentActivitiesController.m */; };
 		05AF7C841A1C8D6D00F5011A /* Activity.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AF7C831A1C8D6D00F5011A /* Activity.m */; };
 		05AF7C871A1C8EEB00F5011A /* RecentActivitiesDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AF7C861A1C8EEB00F5011A /* RecentActivitiesDao.m */; };
@@ -1410,6 +1414,12 @@
 		05AD502A1A7ED75500C40777 /* TermsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TermsController.m; sourceTree = "<group>"; };
 		05AD502C1A7ED76200C40777 /* MigrateStatusController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MigrateStatusController.h; sourceTree = "<group>"; };
 		05AD502D1A7ED76200C40777 /* MigrateStatusController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MigrateStatusController.m; sourceTree = "<group>"; };
+		05AD7F801AD7FD0E0052153A /* MMWormhole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMWormhole.h; sourceTree = "<group>"; };
+		05AD7F811AD7FD0E0052153A /* MMWormhole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMWormhole.m; sourceTree = "<group>"; };
+		05AD7F831AD7FD160052153A /* MMWormhole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMWormhole.h; sourceTree = "<group>"; };
+		05AD7F841AD7FD160052153A /* MMWormhole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMWormhole.m; sourceTree = "<group>"; };
+		05AD7F861AD801B20052153A /* added_tick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = added_tick.png; sourceTree = "<group>"; };
+		05AD7F871AD801B20052153A /* added_tick@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "added_tick@2x.png"; sourceTree = "<group>"; };
 		05AF7C7F1A1C8CD100F5011A /* RecentActivitiesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentActivitiesController.h; sourceTree = "<group>"; };
 		05AF7C801A1C8CD100F5011A /* RecentActivitiesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentActivitiesController.m; sourceTree = "<group>"; };
 		05AF7C821A1C8D6D00F5011A /* Activity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Activity.h; sourceTree = "<group>"; };
@@ -2210,6 +2220,8 @@
 		051E1E3A19CAC8EA00FD1E03 /* out */ = {
 			isa = PBXGroup;
 			children = (
+				05AD7F831AD7FD160052153A /* MMWormhole.h */,
+				05AD7F841AD7FD160052153A /* MMWormhole.m */,
 				05B01D9A1AC2E2D000D5B827 /* NSDate+Utilities.h */,
 				05B01D9B1AC2E2D000D5B827 /* NSDate+Utilities.m */,
 				562FB3D71AA48C4400F9EFBD /* CurioSDK */,
@@ -2737,6 +2749,15 @@
 			name = fonts;
 			sourceTree = "<group>";
 		};
+		05AD7F7F1AD7FCFF0052153A /* out */ = {
+			isa = PBXGroup;
+			children = (
+				05AD7F801AD7FD0E0052153A /* MMWormhole.h */,
+				05AD7F811AD7FD0E0052153A /* MMWormhole.m */,
+			);
+			name = out;
+			sourceTree = "<group>";
+		};
 		05C29FFD1A79830500EE4D78 /* Adjust */ = {
 			isa = PBXGroup;
 			children = (
@@ -2820,6 +2841,7 @@
 		05C850A41ACD63F700F976DE /* AutoSyncWidget */ = {
 			isa = PBXGroup;
 			children = (
+				05AD7F7F1AD7FCFF0052153A /* out */,
 				0592FC351ACEC7200083A6C6 /* AutoSyncWidget-AppStore.entitlements */,
 				0592FC361ACEC7200083A6C6 /* AutoSyncWidget-Enterprise.entitlements */,
 				05BB0EB41ACD91F300D90C98 /* AutoSyncWidget.entitlements */,
@@ -2835,6 +2857,8 @@
 		05C850A51ACD63F700F976DE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				05AD7F861AD801B20052153A /* added_tick.png */,
+				05AD7F871AD801B20052153A /* added_tick@2x.png */,
 				0592FC391ACEC7580083A6C6 /* Info-AppStore.plist */,
 				0592FC3A1ACEC7580083A6C6 /* Info-Enterprise.plist */,
 				05BB0EA31ACD897500D90C98 /* TurkcellSaturaBol.ttf */,
@@ -3393,6 +3417,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05AD7F881AD801B20052153A /* added_tick.png in Resources */,
 				05BB0EAB1ACD897500D90C98 /* TurkcellSaturaBol.ttf in Resources */,
 				05BB0EAF1ACD897500D90C98 /* TurkcellSaturaIta.ttf in Resources */,
 				05BB0EAD1ACD897500D90C98 /* TurkcellSaturaDem.ttf in Resources */,
@@ -3402,6 +3427,7 @@
 				05BB0EB71ACD94FC00D90C98 /* Localizable.strings in Resources */,
 				05BB0EB21ACD897500D90C98 /* TurkcellSaturaReg.ttf in Resources */,
 				05C850AB1ACD63F700F976DE /* MainInterface.storyboard in Resources */,
+				05AD7F891AD801B20052153A /* added_tick@2x.png in Resources */,
 				0592FC381ACEC7200083A6C6 /* AutoSyncWidget-Enterprise.entitlements in Resources */,
 				05BB0EB11ACD897500D90C98 /* TurkcellSaturaMedIta.ttf in Resources */,
 				0592FC3B1ACEC7580083A6C6 /* Info-AppStore.plist in Resources */,
@@ -3662,6 +3688,7 @@
 				05501F3819EBBB4600CA9F4E /* AlbumDetailDao.m in Sources */,
 				05DEB1EB1A81775F007793DD /* ContactSyncSDK.m in Sources */,
 				05DA564C1A56D5B3007D2B1D /* ALAssetRepresentation+MD5.m in Sources */,
+				05AD7F851AD7FD160052153A /* MMWormhole.m in Sources */,
 				05C244331A0243BE000D65D0 /* SortTypeCell.m in Sources */,
 				05E8113819DF27690063F99A /* MusicListModalController.m in Sources */,
 				059C9EC71A07DC60000C54D9 /* FolderDetailModalController.m in Sources */,
@@ -3700,6 +3727,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05AD7F821AD7FD0E0052153A /* MMWormhole.m in Sources */,
 				05C850A91ACD63F700F976DE /* TodayViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3834,6 +3862,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = Depo/Depo.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Mahir Kemal Tarlan (R2478SCTN5)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3863,6 +3892,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = Depo/Depo.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Mahir Kemal Tarlan (R2478SCTN5)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4092,6 +4122,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = AutoSyncWidget/AutoSyncWidget.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Mahir Kemal Tarlan (R2478SCTN5)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mahir Kemal Tarlan (R2478SCTN5)";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -4113,6 +4144,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = AutoSyncWidget/AutoSyncWidget.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Mahir Kemal Tarlan (R2478SCTN5)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;

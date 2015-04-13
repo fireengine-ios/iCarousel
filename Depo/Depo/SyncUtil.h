@@ -49,4 +49,8 @@
 + (void) unlockAutoSyncBlockInProgress;
 + (BOOL) readAutoSyncBlockInProgress;
 
++ (NSMutableDictionary *) readOngoingTasks;
++ (void) resetOngoingTasks;
++ (void) addToOngoingTasksWithFilename:(NSString *) filename andTaskUrl:(NSString *) taskUrl;
+
 @end

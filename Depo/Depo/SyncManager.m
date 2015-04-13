@@ -83,6 +83,7 @@
     if(triggerSyncing) {
         NSArray *remoteHashList = [SyncUtil readSyncHashRemotely];
         NSArray *remoteSummaryList = [SyncUtil readSyncFileSummaries];
+        NSMutableDictionary *bgOngoingTasks = [SyncUtil readOngoingTasks];
         
         NSTimeInterval timeInMiliseconds1 = [[NSDate date] timeIntervalSince1970];
         NSLog(@"startFirstTimeSync Start: %f", timeInMiliseconds1);
@@ -114,6 +115,7 @@
                                         }
                                     }
                                 }
+                                serverContainsImageFlag = ([bgOngoingTasks objectForKey:asset.defaultRepresentation.filename] != nil);
                                 if(!serverContainsImageFlag) {
                                     NSLog(@"auto upload started for index: %d", (int) index);
                                     [self startUploadForAsset:asset andLocalHash:localHash];
@@ -181,6 +183,7 @@
         NSArray *remoteHashList = [SyncUtil readSyncHashRemotely];
         NSLog(@"remote hash: %@", remoteHashList);
         NSArray *remoteSummaryList = [SyncUtil readSyncFileSummaries];
+        NSMutableDictionary *bgOngoingTasks = [SyncUtil readOngoingTasks];
         
         NSTimeInterval timeInMilisecondsStart = [[NSDate date] timeIntervalSince1970];
         NSLog(@"auto sync start: %f", timeInMilisecondsStart);
@@ -198,7 +201,7 @@
 //                                    NSString *localHash = [asset.defaultRepresentation MD5];
                                     NSString *localHash = [SyncUtil md5StringOfString:[asset.defaultRepresentation.url absoluteString]];
                                     NSLog(@"Calculated local hash:%@", localHash);
-                                    BOOL shouldStartUpload = ![localHashList containsObject:localHash] && ![remoteHashList containsObject:localHash] && ([APPDELEGATE.uploadQueue uploadRefForAsset:[asset.defaultRepresentation.url absoluteString]] == nil);
+                                    BOOL shouldStartUpload = ![localHashList containsObject:localHash] && ![remoteHashList containsObject:localHash] && ([APPDELEGATE.uploadQueue uploadRefForAsset:[asset.defaultRepresentation.url absoluteString]] == nil) && ([bgOngoingTasks objectForKey:asset.defaultRepresentation.filename] == nil);
                                     if(shouldStartUpload) {
                                         ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
                                         NSString *assetFileName = [defaultRep filename];

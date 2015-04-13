@@ -42,6 +42,8 @@
 
 @property (assign) BOOL shuffleFlag;
 
+@property (nonatomic, strong) NSMutableArray *bgOngoingTasksOriginalUrls;
+
 - (void) playAudioItemAtIndex:(int) itemIndex;
 - (void) playNextAudioItem;
 - (void) playPreviousAudioItem;
@@ -55,5 +57,9 @@
 - (void) checkLatestContactSyncStatus;
 - (BOOL) isPrevNextAvailable;
 - (void) cleanoutAfterLogout;
+
+- (void) addBgOngoingTaskUrl:(NSString *) taskUrl;
+- (void) cleanBgOngoingTaskUrls;
+- (BOOL) isUrlPresentInBgOngoingTaskUrls:(NSString *) taskUrl;
 
 @end

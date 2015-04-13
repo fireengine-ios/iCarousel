@@ -19,6 +19,7 @@
 @class MyNavigationController;
 @class MyViewController;
 @class MapUtil;
+@class MMWormhole;
 
 #define APPDELEGATE ((AppDelegate *)[[UIApplication sharedApplication] delegate])
 
@@ -32,6 +33,7 @@
 @property (strong, nonatomic) MBProgressHUD *progress;
 @property (strong, nonatomic) SyncManager *syncManager;
 @property (strong, nonatomic) UploadQueue *uploadQueue;
+@property (nonatomic, strong) MMWormhole *wormhole;
 @property (nonatomic) NotificationAction notifitacionAction;
 @property (nonatomic) BOOL activatedFromBackground;
 

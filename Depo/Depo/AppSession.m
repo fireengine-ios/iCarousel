@@ -32,6 +32,7 @@
 @synthesize mobileUploadsFolderName;
 @synthesize syncType;
 @synthesize shuffleFlag;
+@synthesize bgOngoingTasksOriginalUrls;
 
 - (id) init {
     if(self = [super init]) {
@@ -188,6 +189,26 @@
     self.authToken = nil;
     self.baseUrl = nil;
     self.baseUrlConstant = nil;
+}
+
+- (void) addBgOngoingTaskUrl:(NSString *) taskUrl {
+    if(!bgOngoingTasksOriginalUrls) {
+        bgOngoingTasksOriginalUrls = [[NSMutableArray alloc] init];
+    }
+    [bgOngoingTasksOriginalUrls addObject:taskUrl];
+}
+
+- (void) cleanBgOngoingTaskUrls {
+    if(bgOngoingTasksOriginalUrls) {
+        [bgOngoingTasksOriginalUrls removeAllObjects];
+    }
+}
+
+- (BOOL) isUrlPresentInBgOngoingTaskUrls:(NSString *) taskUrl {
+    if(bgOngoingTasksOriginalUrls) {
+        return [bgOngoingTasksOriginalUrls containsObject:taskUrl];
+    }
+    return NO;
 }
 
 @end

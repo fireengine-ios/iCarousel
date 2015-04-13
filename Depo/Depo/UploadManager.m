@@ -14,6 +14,7 @@
 #import "UploadQueue.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "CurioSDK.h"
+#import "SyncUtil.h"
 
 typedef void (^ALAssetsLibraryAssetForURLResultBlock)(ALAsset *asset);
 typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
@@ -212,6 +213,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     if(self.uploadRef.autoSyncFlag || self.uploadRef.ownerPage == UploadStarterPagePhotos) {
         NSLog(@"X-Object-Meta-Special-Folder SET for img: %@", self.uploadRef.fileName);
         [request setValue:@"MOBILE_UPLOAD" forHTTPHeaderField:@"X-Object-Meta-Special-Folder"];
+        [SyncUtil addToOngoingTasksWithFilename:self.uploadRef.fileName andTaskUrl:self.uploadRef.urlForUpload];
     } else {
         NSLog(@"X-Object-Meta-Special-Folder NOT SET for img: %@", self.uploadRef.fileName);
     }

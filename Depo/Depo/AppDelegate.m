@@ -36,6 +36,8 @@
 
 #import "ReachabilityManager.h"
 
+#import "MMWormhole.h"
+
 //TODO MACRO TANIMLANACAK (extension group id için)
 
 
@@ -49,6 +51,7 @@
 @synthesize mapUtil;
 @synthesize progress;
 @synthesize syncManager;
+@synthesize wormhole;
 @synthesize uploadQueue;
 @synthesize activatedFromBackground;
 
@@ -60,13 +63,11 @@
     }
     
     session = [[AppSession alloc] init];
-    
     uploadQueue = [[UploadQueue alloc] init];
-
     syncManager = [[SyncManager alloc] init];
-    
     mapUtil = [[MapUtil alloc] init];
-    
+    wormhole = [[MMWormhole alloc] initWithApplicationGroupIdentifier:GROUP_NAME_SUITE_NSUSERDEFAULTS optionalDirectory:EXTENSION_WORMHOLE_DIR];
+
     [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
 
     //Adjust initialization
@@ -202,7 +203,17 @@
 }
 
 - (void) startOpeningPage {
-    [self triggerAutoSynchronization];
+    [APPDELEGATE.uploadQueue.session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
+        if(uploadTasks) {
+            for(NSURLSessionUploadTask *task in uploadTasks) {
+                if([task.originalRequest.URL absoluteString]) {
+                    [APPDELEGATE.session addBgOngoingTaskUrl:[task.originalRequest.URL absoluteString]];
+                }
+            }
+        }
+        [self triggerAutoSynchronization];
+    }];
+
     if (self.notifitacionAction > 0) {
         if (self.notifitacionAction == NotificationActionSyncSettings) {
             [self triggerSyncSettings];
@@ -441,7 +452,16 @@
     }
     
     if(activatedFromBackground) {
-        [self triggerAutoSynchronization];
+        [APPDELEGATE.uploadQueue.session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
+            if(uploadTasks) {
+                for(NSURLSessionUploadTask *task in uploadTasks) {
+                    if([task.originalRequest.URL absoluteString]) {
+                        [APPDELEGATE.session addBgOngoingTaskUrl:[task.originalRequest.URL absoluteString]];
+                    }
+                }
+            }
+            [self triggerAutoSynchronization];
+        }];
     } else {
         // eğer backgrounddan gelmiyorsa bir sonraki auto sync bloğununun okunmasını engelleyen lock kaldırılıyor
         [SyncUtil unlockAutoSyncBlockInProgress];
