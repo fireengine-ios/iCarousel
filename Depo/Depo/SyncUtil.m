@@ -282,8 +282,9 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
     } else {
         if([currentDict objectForKey:filename] == nil) {
-            [currentDict setObject:taskUrl forKey:filename];
-            [[NSUserDefaults standardUserDefaults] setObject:currentDict forKey:ONGOING_TASKS_KEY];
+            NSMutableDictionary *mutableDict = [currentDict mutableCopy];
+            [mutableDict setObject:taskUrl forKey:filename];
+            [[NSUserDefaults standardUserDefaults] setObject:mutableDict forKey:ONGOING_TASKS_KEY];
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
     }
