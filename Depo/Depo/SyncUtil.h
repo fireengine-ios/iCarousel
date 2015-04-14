@@ -27,6 +27,7 @@
 + (void) cacheSyncHashLocally:(NSString *) hash;
 + (NSArray *) readSyncHashLocally;
 + (void) cacheSyncHashRemotely:(NSString *) hash;
++ (void) cacheSyncHashesRemotely:(NSMutableArray *) newArray;
 + (NSArray *) readSyncHashRemotely;
 + (void) writeFirstTimeSyncFlag;
 + (BOOL) readFirstTimeSyncFlag;
@@ -37,6 +38,7 @@
 + (int) readBadgeCount;
 
 + (void) cacheSyncFileSummary:(MetaFileSummary *) summary;
++ (void) cacheSyncFileSummaries:(NSMutableArray *) newArray;
 + (NSArray *) readSyncFileSummaries;
 
 + (void) writeLastContactSyncResult:(ContactSyncResult *) syncResult;

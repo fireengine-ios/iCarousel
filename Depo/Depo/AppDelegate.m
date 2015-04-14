@@ -421,7 +421,16 @@
     [[UIApplication sharedApplication] scheduleLocalNotification:notification];
      */
     
-    [syncManager decideAndStartAutoSync];
+    [APPDELEGATE.uploadQueue.session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
+        if(uploadTasks) {
+            for(NSURLSessionUploadTask *task in uploadTasks) {
+                if([task.originalRequest.URL absoluteString]) {
+                    [APPDELEGATE.session addBgOngoingTaskUrl:[task.originalRequest.URL absoluteString]];
+                }
+            }
+        }
+        [self triggerAutoSynchronization];
+    }];
     completionHandler(UIBackgroundFetchResultNewData);
 }
 
@@ -444,8 +453,7 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    [SyncUtil resetBadgeCount];
-    application.applicationIconBadgeNumber = 0;
+//    [SyncUtil resetBadgeCount];
 
     if(session != nil) {
         [session checkLatestContactSyncStatus];

@@ -116,7 +116,7 @@
 #define RECENT_ACTIVITY_COUNT 30
 
 //TODO 100 ya da 1000 gibi bir rakam set edilebilir
-#define AUTO_SYNC_ASSET_COUNT 100
+#define AUTO_SYNC_ASSET_COUNT 1000
 
 #define SEARCH_HISTORY_KEY @"SEARCH_HISTORY_KEY"
 

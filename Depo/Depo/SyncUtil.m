@@ -147,6 +147,13 @@
     }
 }
 
++ (void) cacheSyncHashesRemotely:(NSMutableArray *) newArray {
+    NSArray *result = [SyncUtil readSyncHashRemotely];
+    NSArray *updatedArray = [result arrayByAddingObjectsFromArray:newArray];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray] forKey:[NSString stringWithFormat:SYNCED_REMOTE_HASHES_KEY, APPDELEGATE.session.baseUrlConstant]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 + (NSArray *) readSyncHashRemotely {
     NSArray *result = [[NSArray alloc] init];
     NSData *arrData = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:SYNCED_REMOTE_HASHES_KEY, APPDELEGATE.session.baseUrlConstant]];
@@ -163,6 +170,13 @@
         [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray] forKey:[NSString stringWithFormat:SYNCED_REMOTE_FILES_SUMMARY_KEY, APPDELEGATE.session.baseUrlConstant]];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
+}
+
++ (void) cacheSyncFileSummaries:(NSMutableArray *) newArray {
+    NSArray *result = [SyncUtil readSyncFileSummaries];
+    NSArray *updatedArray = [result arrayByAddingObjectsFromArray:newArray];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray] forKey:[NSString stringWithFormat:SYNCED_REMOTE_FILES_SUMMARY_KEY, APPDELEGATE.session.baseUrlConstant]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 + (NSArray *) readSyncFileSummaries {

@@ -136,6 +136,7 @@
 
 - (void) requestTokenWithinProcess:(int) taskId {
     self.processDelegateTaskId = taskId;
+    NSLog(@"At requestTokenWithinProcess for task id: %d", taskId);
     
     NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
     if(networkStatus == kReachableViaWiFi) {

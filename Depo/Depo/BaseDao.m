@@ -95,6 +95,7 @@
             [self triggerNewToken];
         } else {
 //            [self shouldReturnFailWithMessage:LOGIN_REQ_ERROR_MESSAGE];
+            NSLog(@"Login Required Triggered within requestFailed instead of fail method: %@", NSStringFromSelector(failMethod));
             [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_REQ_NOTIFICATION object:nil userInfo:nil];
         }
     } else if([request responseStatusCode] == 403) {
@@ -447,6 +448,7 @@
             [tokenDao requestTokenByRememberMe];
         } else {
 //            [self shouldReturnFailWithMessage:LOGIN_REQ_ERROR_MESSAGE];
+            NSLog(@"Login Required Triggered within triggerNewToken instead of fail method: %@", NSStringFromSelector(failMethod));
             [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_REQ_NOTIFICATION object:nil userInfo:nil];
         }
     } else if(networkStatus == kReachableViaWWAN) {

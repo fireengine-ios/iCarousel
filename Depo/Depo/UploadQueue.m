@@ -160,6 +160,14 @@
             [self.uploadManagers removeAllObjects];
             [self.activeTaskIds removeAllObjects];
         }
+
+        [self.session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
+            if(uploadTasks) {
+                for(NSURLSessionUploadTask *task in uploadTasks) {
+                    [task cancel];
+                }
+            }
+        }];
     }
 }
 
@@ -280,6 +288,10 @@
     UploadManager *currentManager = [self findByTaskId:task.taskIdentifier];
     if(currentManager != nil) {
         [currentManager.delegate uploadManagerDidSendData:(long)totalBytesSent inTotal:(long)totalBytesExpectedToSend];
+        // mahir: bir kere paket yollanmışsa tekrar invalid token'a düşme ihtimaline karşı flag tekrar NO'ya çekiliyor.
+        if(currentManager.uploadRef.retryDoneForTokenFlag) {
+            currentManager.uploadRef.retryDoneForTokenFlag = NO;
+        }
     }
 }
 
@@ -297,16 +309,14 @@
             if(currentManager.uploadRef.summary != nil) {
                 [SyncUtil cacheSyncFileSummary:currentManager.uploadRef.summary];
             }
-            if(currentManager.uploadRef.autoSyncFlag) {
-                [SyncUtil increaseAutoSyncIndex];
-            }
             if(currentManager.uploadRef.summary != nil) {
                 [SyncUtil cacheSyncFileSummary:currentManager.uploadRef.summary];
             }
             [currentManager removeTemporaryFile];
             [currentManager notifyUpload];
         } else {
-            if(httpResp.statusCode == 403) {
+            NSLog(@"AT URLSession:didCompleteWithError http error code: %ld", (long)httpResp.statusCode);
+            if(httpResp.statusCode == 401 || httpResp.statusCode == 403) {
                 if(!currentManager.uploadRef.retryDoneForTokenFlag) {
                     //TODO aynı anda tek upload işlemine göre tasarlandı. Eğer aynı anda birden fazla upload yapılacaksa
                     //token requesti tek yapılacak şekilde (synchronized) düzenleme yapmak gerekir.

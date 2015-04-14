@@ -50,14 +50,22 @@
 
 - (void) photoListSuccessCallback:(NSArray *) files {
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        NSMutableArray *summaryArray = [[NSMutableArray alloc] init];
+        NSMutableArray *hashArray = [[NSMutableArray alloc] init];
         for(MetaFile *row in files) {
             if(row.metaHash != nil) {
-                [SyncUtil cacheSyncHashRemotely:row.metaHash];
+                [hashArray addObject:row.metaHash];
             }
             MetaFileSummary *fileSummary = [[MetaFileSummary alloc] init];
             fileSummary.bytes = row.bytes;
             fileSummary.fileName = row.name;
-            [SyncUtil cacheSyncFileSummary:fileSummary];
+            [summaryArray addObject:fileSummary];
+        }
+        if([summaryArray count] > 0) {
+            [SyncUtil cacheSyncFileSummaries:summaryArray];
+        }
+        if([hashArray count] > 0) {
+            [SyncUtil cacheSyncHashesRemotely:hashArray];
         }
         autoSyncIterationInProgress = NO;
         [self initializeNextAutoSyncPackage];
@@ -91,7 +99,7 @@
         autoSyncIterationInProgress = YES;
         [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
             if(group) {
-                int startIndex = [SyncUtil readAutoSyncIndex];
+                int startIndex = [SyncUtil readAutoSyncIndex] * AUTO_SYNC_ASSET_COUNT;
                 int length = AUTO_SYNC_ASSET_COUNT;
                 if(startIndex + length > [group numberOfAssets]) {
                     length = (int)[group numberOfAssets] - startIndex;
@@ -122,14 +130,13 @@
                                     [SyncUtil lockAutoSyncBlockInProgress];
                                     [SyncUtil writeFirstTimeSyncFlag];
                                     [SyncUtil updateLastSyncDate];
-                                } else {
-                                    [SyncUtil increaseAutoSyncIndex];
                                 }
                             }
                         }
                     } else {
+                        [SyncUtil increaseAutoSyncIndex];
                         //check and set if no enumeration left
-                        if([SyncUtil readAutoSyncIndex] >= [group numberOfAssets]) {
+                        if([SyncUtil readAutoSyncIndex] * AUTO_SYNC_ASSET_COUNT >= [group numberOfAssets]) {
                             [SyncUtil writeFirstTimeSyncFinishedFlag];
                         }
                     }

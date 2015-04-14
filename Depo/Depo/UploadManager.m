@@ -52,8 +52,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         [[UIApplication sharedApplication] endBackgroundTask:bgTaskI];
     }];
     
-    dispatch_queue_t uploadQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
-    dispatch_async(uploadQueue, ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         if(self.uploadRef.taskType == UploadTaskTypeAsset) {
             [self triggerAndStartAssetsTask];
         } else if(self.uploadRef.taskType == UploadTaskTypeFile) {

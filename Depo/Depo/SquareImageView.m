@@ -91,9 +91,23 @@
                         NSURL *assetUrl = [NSURL URLWithString:self.uploadRef.assetUrl];
                         ALAssetsLibrary *assetsLibraryForSingle = [[ALAssetsLibrary alloc] init];
                         [assetsLibraryForSingle assetForURL:assetUrl resultBlock:^(ALAsset *myAsset) {
-                            CGImageRef thumbnailRef = [myAsset thumbnail];
-                            if (thumbnailRef) {
-                                imgView.image = [UIImage imageWithCGImage:thumbnailRef];
+                            if(myAsset) {
+                                CGImageRef thumbnailRef = [myAsset thumbnail];
+                                if (thumbnailRef) {
+                                    imgView.image = [UIImage imageWithCGImage:thumbnailRef];
+                                }
+                            } else {
+                                //TODO test
+                                [assetsLibraryForSingle enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+                                     [group enumerateAssetsWithOptions:NSEnumerationReverse usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
+                                         if([[result.defaultRepresentation.url absoluteString] isEqualToString:self.uploadRef.assetUrl]) {
+                                             CGImageRef thumbnailRef = [result thumbnail];
+                                             if (thumbnailRef) {
+                                                 imgView.image = [UIImage imageWithCGImage:thumbnailRef];
+                                             }
+                                         }
+                                     }];
+                                 } failureBlock:nil];
                             }
                         } failureBlock:nil];
                     }
