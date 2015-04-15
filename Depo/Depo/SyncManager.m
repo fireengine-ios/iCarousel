@@ -123,12 +123,13 @@
                                         }
                                     }
                                 }
-                                serverContainsImageFlag = ([bgOngoingTasks objectForKey:asset.defaultRepresentation.filename] != nil);
+                                if(!serverContainsImageFlag) {
+                                    serverContainsImageFlag = ([bgOngoingTasks objectForKey:asset.defaultRepresentation.filename] != nil);
+                                }
                                 if(!serverContainsImageFlag) {
                                     NSLog(@"auto upload started for index: %d", (int) index);
                                     [self startUploadForAsset:asset andLocalHash:localHash];
                                     [SyncUtil lockAutoSyncBlockInProgress];
-                                    [SyncUtil writeFirstTimeSyncFlag];
                                     [SyncUtil updateLastSyncDate];
                                 }
                             }
@@ -142,6 +143,7 @@
                     }
                 }];
             } else {
+                [SyncUtil writeFirstTimeSyncFlag];
                 [self firstTimeBlockSyncEnumerationFinished];
                 autoSyncIterationInProgress = NO;
             }

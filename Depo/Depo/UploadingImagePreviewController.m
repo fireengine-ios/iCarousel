@@ -45,9 +45,22 @@
                     NSURL *assetUrl = [NSURL URLWithString:self.uploadRef.assetUrl];
                     ALAssetsLibrary *assetsLibraryForSingle = [[ALAssetsLibrary alloc] init];
                     [assetsLibraryForSingle assetForURL:assetUrl resultBlock:^(ALAsset *myAsset) {
-                        CGImageRef thumbnailRef = [myAsset.defaultRepresentation fullResolutionImage];
-                        if (thumbnailRef) {
-                            imageView.image = [UIImage imageWithCGImage:thumbnailRef];
+                        if(myAsset) {
+                            CGImageRef thumbnailRef = [myAsset.defaultRepresentation fullResolutionImage];
+                            if (thumbnailRef) {
+                                imageView.image = [UIImage imageWithCGImage:thumbnailRef];
+                            }
+                        } else {
+                            [assetsLibraryForSingle enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+                                [group enumerateAssetsWithOptions:NSEnumerationReverse usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
+                                    if([[result.defaultRepresentation.url absoluteString] isEqualToString:self.uploadRef.assetUrl]) {
+                                        CGImageRef thumbnailRef = [result.defaultRepresentation fullResolutionImage];
+                                        if (thumbnailRef) {
+                                            imageView.image = [UIImage imageWithCGImage:thumbnailRef];
+                                        }
+                                    }
+                                }];
+                            } failureBlock:nil];
                         }
                     } failureBlock:nil];
                 }

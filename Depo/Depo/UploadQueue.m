@@ -309,9 +309,6 @@
             if(currentManager.uploadRef.summary != nil) {
                 [SyncUtil cacheSyncFileSummary:currentManager.uploadRef.summary];
             }
-            if(currentManager.uploadRef.summary != nil) {
-                [SyncUtil cacheSyncFileSummary:currentManager.uploadRef.summary];
-            }
             [currentManager removeTemporaryFile];
             [currentManager notifyUpload];
         } else {

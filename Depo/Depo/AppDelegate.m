@@ -278,6 +278,7 @@
         [req setDelegate:nil];
     }
 
+    [self.session stopAudioItem];
     [self.session cleanoutAfterLogout];
     [CacheUtil resetRememberMeToken];
     [uploadQueue cancelAllUploads];
