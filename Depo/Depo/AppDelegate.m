@@ -415,23 +415,25 @@
 
 - (void) application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     //TODO sil
-    /*
     UILocalNotification *notification = [[UILocalNotification alloc] init];
     [notification setAlertBody:@"Background fetch çalıştı."];
     [notification setFireDate:[NSDate date]];
     [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-     */
     
-    [APPDELEGATE.uploadQueue.session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
-        if(uploadTasks) {
-            for(NSURLSessionUploadTask *task in uploadTasks) {
-                if([task.originalRequest.URL absoluteString]) {
-                    [APPDELEGATE.session addBgOngoingTaskUrl:[task.originalRequest.URL absoluteString]];
+    if(self.uploadQueue && self.uploadQueue.session) {
+        [self.uploadQueue.session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
+            if(uploadTasks) {
+                for(NSURLSessionUploadTask *task in uploadTasks) {
+                    if([task.originalRequest.URL absoluteString]) {
+                        [APPDELEGATE.session addBgOngoingTaskUrl:[task.originalRequest.URL absoluteString]];
+                    }
                 }
             }
-        }
+            [self triggerAutoSynchronization];
+        }];
+    } else {
         [self triggerAutoSynchronization];
-    }];
+    }
     completionHandler(UIBackgroundFetchResultNewData);
 }
 
