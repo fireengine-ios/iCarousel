@@ -43,10 +43,20 @@
         baseUrlDao.successMethod = @selector(baseUrlDaoSuccessCallback);
         baseUrlDao.failMethod = @selector(baseUrlDaoFailCallback:);
         
+        baseUrlWithinProcessDao = [[RequestBaseUrlDao alloc] init];
+        baseUrlWithinProcessDao.delegate = self;
+        baseUrlWithinProcessDao.successMethod = @selector(baseUrlWithinProcessDaoSuccessCallback);
+        baseUrlWithinProcessDao.failMethod = @selector(baseUrlWithinProcessDaoFailCallback:);
+        
         userInfoDao = [[AccountInfoDao alloc] init];
         userInfoDao.delegate = self;
         userInfoDao.successMethod = @selector(userInfoSuccessCallback:);
         userInfoDao.failMethod = @selector(userInfoFailCallback:);
+        
+        userInfoWithinProcessDao = [[AccountInfoDao alloc] init];
+        userInfoWithinProcessDao.delegate = self;
+        userInfoWithinProcessDao.successMethod = @selector(userInfoWithinProcessSuccessCallback:);
+        userInfoWithinProcessDao.failMethod = @selector(userInfoWithinProcessFailCallback:);
         
         radiusDao = [[RadiusDao alloc] init];
         radiusDao.delegate = self;
@@ -110,7 +120,7 @@
 }
 
 - (void) tokenWithinProcessDaoSuccessCallback {
-    [processDelegate tokenManagerWithinProcessDidReceiveTokenFor:self.processDelegateTaskId];
+    [userInfoWithinProcessDao requestAccountInfo];
 }
 
 - (void) tokenWithinProcessDaoFailCallback:(NSString *) errorMessage {
@@ -125,6 +135,14 @@
     [delegate tokenManagerDidFailReceivingBaseUrl];
 }
 
+- (void) baseUrlWithinProcessDaoSuccessCallback {
+    [processDelegate tokenManagerWithinProcessDidReceiveTokenFor:self.processDelegateTaskId];
+}
+
+- (void) baseUrlWithinProcessDaoFailCallback:(NSString *) errorMessage {
+    [processDelegate tokenManagerWithinProcessDidFailReceivingTokenFor:self.processDelegateTaskId];
+}
+
 - (void) userInfoSuccessCallback:(User *) enrichedUser {
     APPDELEGATE.session.user = enrichedUser;
     [delegate tokenManagerDidReceiveUserInfo];
@@ -132,6 +150,15 @@
 
 - (void) userInfoFailCallback:(NSString *) errorMessage {
     [delegate tokenManagerDidFailReceivingUserInfo];
+}
+
+- (void) userInfoWithinProcessSuccessCallback:(User *) enrichedUser {
+    APPDELEGATE.session.user = enrichedUser;
+    [baseUrlWithinProcessDao requestBaseUrl];
+}
+
+- (void) userInfoWithinProcessFailCallback:(NSString *) errorMessage {
+    [processDelegate tokenManagerWithinProcessDidFailReceivingTokenFor:self.processDelegateTaskId];
 }
 
 - (void) requestTokenWithinProcess:(int) taskId {

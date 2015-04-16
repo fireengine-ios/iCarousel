@@ -84,6 +84,11 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
                             [self continueAssetUpload];
                             return;
                         }
+                    } else if(!self.asset) {
+                        //fail case. queueda olan bir asset icin dosya galeriden silinmis
+                        self.uploadRef.hasFinished = YES;
+                        [delegate uploadManagerDidFailUploadingForAsset:self.uploadRef.assetUrl];
+                        [queueDelegate uploadManager:self didFinishUploadingWithSuccess:NO];
                     }
                 }];
             }

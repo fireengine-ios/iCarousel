@@ -210,6 +210,7 @@
                                     NSString *localHash = [SyncUtil md5StringOfString:[asset.defaultRepresentation.url absoluteString]];
                                     NSLog(@"Calculated local hash:%@", localHash);
                                     BOOL shouldStartUpload = ![localHashList containsObject:localHash] && ![remoteHashList containsObject:localHash] && ([APPDELEGATE.uploadQueue uploadRefForAsset:[asset.defaultRepresentation.url absoluteString]] == nil) && ([bgOngoingTasks objectForKey:asset.defaultRepresentation.filename] == nil);
+                                    NSLog(@"ASSET IN LOCAL HASH:%d, ASSET IN REMOTE HASH:%d, ASSET IN QUEUE:%d, ASSET IN BG ONGOING REQUESTS:%d", [localHashList containsObject:localHash], [remoteHashList containsObject:localHash], ([APPDELEGATE.uploadQueue uploadRefForAsset:[asset.defaultRepresentation.url absoluteString]] != nil), ([bgOngoingTasks objectForKey:asset.defaultRepresentation.filename] != nil));
                                     if(shouldStartUpload) {
                                         ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
                                         NSString *assetFileName = [defaultRep filename];
@@ -301,14 +302,16 @@
 }
 
 - (void) decideAndStartAutoSync {
-    if(![SyncUtil readFirstTimeSyncFlag]) {
-        [self startFirstTimeSync];
-    } else if(![SyncUtil readFirstTimeSyncFinishedFlag]) {
-        if(![SyncUtil readAutoSyncBlockInProgress]) {
-            [self initializeNextAutoSyncPackage];
+    if(APPDELEGATE.session.user) {
+        if(![SyncUtil readFirstTimeSyncFlag]) {
+            [self startFirstTimeSync];
+        } else if(![SyncUtil readFirstTimeSyncFinishedFlag]) {
+            if(![SyncUtil readAutoSyncBlockInProgress]) {
+                [self initializeNextAutoSyncPackage];
+            }
+        } else {
+            [self manuallyCheckIfAlbumChanged];
         }
-    } else {
-        [self manuallyCheckIfAlbumChanged];
     }
 }
 

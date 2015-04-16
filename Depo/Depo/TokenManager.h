@@ -38,7 +38,9 @@
     RequestTokenDao *tokenDao;
     RequestTokenDao *tokenWithinProcessDao;
     RequestBaseUrlDao *baseUrlDao;
+    RequestBaseUrlDao *baseUrlWithinProcessDao;
     AccountInfoDao *userInfoDao;
+    AccountInfoDao *userInfoWithinProcessDao;
     RadiusDao *radiusDao;
     RadiusDao *radiusWithinProcessDao;
     LogoutDao *logoutDao;
