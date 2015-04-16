@@ -302,30 +302,12 @@
 
 - (void) decideAndStartAutoSync {
     if(![SyncUtil readFirstTimeSyncFlag]) {
-        //TODO sil
-        UILocalNotification *notification = [[UILocalNotification alloc] init];
-        [notification setAlertBody:@"decideAndStartAutoSync : readFirstTimeSyncFlag is NO"];
-        [notification setFireDate:[NSDate date]];
-        [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-
         [self startFirstTimeSync];
     } else if(![SyncUtil readFirstTimeSyncFinishedFlag]) {
         if(![SyncUtil readAutoSyncBlockInProgress]) {
-            //TODO sil
-            UILocalNotification *notification = [[UILocalNotification alloc] init];
-            [notification setAlertBody:@"decideAndStartAutoSync : readFirstTimeSyncFinishedFlag is NO"];
-            [notification setFireDate:[NSDate date]];
-            [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-
             [self initializeNextAutoSyncPackage];
         }
     } else {
-        //TODO sil
-        UILocalNotification *notification = [[UILocalNotification alloc] init];
-        [notification setAlertBody:@"decideAndStartAutoSync : manuallyCheckIfAlbumChanged"];
-        [notification setFireDate:[NSDate date]];
-        [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-
         [self manuallyCheckIfAlbumChanged];
     }
 }

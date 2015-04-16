@@ -12,6 +12,7 @@
 #import "DeleteDao.h"
 #import "FavoriteDao.h"
 #import "RenameDao.h"
+#import "ShareLinkDao.h"
 
 @interface PreviewUnavailableController : MyViewController {
     CustomButton *moreButton;
@@ -19,6 +20,7 @@
     DeleteDao *deleteDao;
     FavoriteDao *favDao;
     RenameDao *renameDao;
+    ShareLinkDao *shareDao;
 }
 
 @property (nonatomic, strong) MetaFile *file;

@@ -12,6 +12,7 @@
 #import "DeleteDao.h"
 #import "FavoriteDao.h"
 #import "RenameDao.h"
+#import "ShareLinkDao.h"
 
 @protocol FileDetailInWebViewDelegate <NSObject>
 - (void) previewedFileWasDeleted:(MetaFile *) fileDeleted;
@@ -23,6 +24,7 @@
     DeleteDao *deleteDao;
     FavoriteDao *favDao;
     RenameDao *renameDao;
+    ShareLinkDao *shareDao;
 }
 
 @property (nonatomic, strong) id<FileDetailInWebViewDelegate> delegate;

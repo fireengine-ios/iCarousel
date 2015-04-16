@@ -706,6 +706,7 @@
 
 #pragma mark PhotoAlbumDelegate methods
 - (void) photoAlbumDidChange:(NSString *)albumUuid {
+    [self proceedSuccessForProgressViewWithAddButtonKey:albumTable.hidden ? @"PhotoTab" : @"AlbumTab"];
     [self triggerRefresh];
 }
 
