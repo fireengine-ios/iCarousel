@@ -126,9 +126,13 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             ALAssetRepresentation *rep = [self.asset defaultRepresentation];
             unsigned long dataSize = (unsigned long)[rep size];
             Byte *buffer = (Byte *) malloc(dataSize);
-            NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:rep.size error:nil];
-            NSData *videoData = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
-            writeSuccess = [videoData writeToFile:tempPath atomically:YES];
+            if(buffer) {
+                NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:rep.size error:nil];
+                NSData *videoData = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
+                writeSuccess = [videoData writeToFile:tempPath atomically:YES];
+            } else {
+                writeSuccess = NO;
+            }
 //        }
         fileType = @"video";
     } else {
