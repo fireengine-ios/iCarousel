@@ -102,6 +102,7 @@
             [self showErrorAlertWithMessage:NSLocalizedString(@"ALAssetsAccessError", @"")];
         }];
         
+        /*
         ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(nil, nil);
         if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined) {
             ABAddressBookRequestAccessWithCompletion(addressBookRef, ^(bool granted, CFErrorRef error) {
@@ -110,6 +111,7 @@
         }
         else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) { }
         else { }
+         */
 
         [CacheUtil writeCachedSettingSyncContacts:EnableOptionOn];
         [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOn];

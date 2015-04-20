@@ -223,6 +223,10 @@
                                         }
                                     }
                                     if(shouldStartUpload) {
+                                        //TODO sil
+//                                        NSString *localMsg = [NSString stringWithFormat:@"LOCAL HASH:%d, REMOTE HASH:%d, QUEUE:%d, ONGOING:%d", [localHashList containsObject:localHash], [remoteHashList containsObject:localHash], ([APPDELEGATE.uploadQueue uploadRefForAsset:[asset.defaultRepresentation.url absoluteString]] != nil), ([bgOngoingTasks objectForKey:asset.defaultRepresentation.filename] != nil)];
+//                                        [self sendLocalNotificationForDate:[NSDate date] withMessage:localMsg];
+                                        
                                         NSLog(@"At manuallyCheckIfAlbumChanged : starting upload for asset: %@", asset.defaultRepresentation.filename);
                                         [self startUploadForAsset:asset andLocalHash:localHash];
                                     }
@@ -313,6 +317,14 @@
             [self manuallyCheckIfAlbumChanged];
         }
     }
+}
+
+- (void) sendLocalNotificationForDate:(NSDate *) dateToSend withMessage:(NSString *) msg {
+    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+    localNotification.fireDate = dateToSend;
+    localNotification.alertBody = msg;
+    localNotification.soundName = UILocalNotificationDefaultSoundName;
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
 }
 
 @end

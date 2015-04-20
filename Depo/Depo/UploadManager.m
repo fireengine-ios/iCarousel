@@ -48,9 +48,11 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 }
 
 - (void) startTask {
+    /*
     bgTaskI = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
         [[UIApplication sharedApplication] endBackgroundTask:bgTaskI];
     }];
+     */
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         if(self.uploadRef.taskType == UploadTaskTypeAsset) {
@@ -77,20 +79,24 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *outerStop) {
             if(group) {
                 [group enumerateAssetsUsingBlock:^(ALAsset *_asset, NSUInteger index, BOOL *innerStop) {
-                    if(_asset && !self.asset) {
-                        NSURL *_assetUrl = _asset.defaultRepresentation.url;
-                        if([[_assetUrl absoluteString] isEqualToString:self.uploadRef.assetUrl]) {
-                            self.asset = _asset;
-                            [self continueAssetUpload];
-                            return;
+                    if(_asset) {
+                        if(self.asset == nil) {
+                            NSURL *_assetUrl = _asset.defaultRepresentation.url;
+                            if([[_assetUrl absoluteString] isEqualToString:self.uploadRef.assetUrl]) {
+                                self.asset = _asset;
+                                [self continueAssetUpload];
+                                return;
+                            }
                         }
-                    } else if(!self.asset) {
-                        //fail case. queueda olan bir asset icin dosya galeriden silinmis
-                        self.uploadRef.hasFinished = YES;
-                        [delegate uploadManagerDidFailUploadingForAsset:self.uploadRef.assetUrl];
-                        [queueDelegate uploadManager:self didFinishUploadingWithSuccess:NO];
                     }
                 }];
+            } else {
+                if(self.asset == nil) {
+                    //fail case. queueda olan bir asset icin dosya galeriden silinmis
+                    self.uploadRef.hasFinished = YES;
+                    [delegate uploadManagerDidFailUploadingForAsset:self.uploadRef.assetUrl];
+                    [queueDelegate uploadManager:self didFinishUploadingWithSuccess:NO];
+                }
             }
         } failureBlock:^(NSError *error) {
         }];

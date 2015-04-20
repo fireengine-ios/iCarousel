@@ -34,9 +34,9 @@
         dispatch_once(&onceToken, ^{
             NSURLSessionConfiguration *configuration;
             if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
-                configuration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"com.igones.depo.BackgroundSession"];
+                configuration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"com.igones.akillidepo.BackgroundSession"];
             } else {
-                configuration = [NSURLSessionConfiguration backgroundSessionConfiguration:@"com.igones.depo.BackgroundSession"];
+                configuration = [NSURLSessionConfiguration backgroundSessionConfiguration:@"com.igones.akillidepo.BackgroundSession"];
             }
             
             configuration.sessionSendsLaunchEvents = YES;
@@ -246,7 +246,7 @@
             [SyncUtil resetOngoingTasks];
         }
     }
-    [[UIApplication sharedApplication] endBackgroundTask:manRef.bgTaskI];
+//    [[UIApplication sharedApplication] endBackgroundTask:manRef.bgTaskI];
 
     [[NSNotificationCenter defaultCenter] postNotificationName:AUTO_SYNC_QUEUE_CHANGED_NOTIFICATION object:nil userInfo:nil];
     [self updateGroupUserDefaults];
