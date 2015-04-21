@@ -167,6 +167,8 @@
                     [task cancel];
                 }
             }
+            [[NSNotificationCenter defaultCenter] postNotificationName:AUTO_SYNC_QUEUE_CHANGED_NOTIFICATION object:nil userInfo:nil];
+            [self updateGroupUserDefaults];
         }];
     }
 }
@@ -189,6 +191,7 @@
     }
     [SyncUtil unlockAutoSyncBlockInProgress];
     [[NSNotificationCenter defaultCenter] postNotificationName:AUTO_SYNC_QUEUE_CHANGED_NOTIFICATION object:nil userInfo:nil];
+    [self updateGroupUserDefaults];
 }
 
 - (void) addOnlyNewUploadTask:(UploadManager *) newManager {
@@ -208,6 +211,10 @@
     }
 }
 
+- (void) manualAutoSyncIterationFinished {
+    [self updateGroupUserDefaults];
+}
+
 - (void) addNewUploadTask:(UploadManager *) newManager {
     @synchronized(uploadManagers) {
         [uploadManagers addObject:newManager];
@@ -221,7 +228,7 @@
     }
 
     [[NSNotificationCenter defaultCenter] postNotificationName:AUTO_SYNC_QUEUE_CHANGED_NOTIFICATION object:nil userInfo:nil];
-    [self updateGroupUserDefaults];
+//    [self updateGroupUserDefaults];
 }
 
 #pragma mark UploadManagerQueueDelegate
@@ -246,7 +253,7 @@
             [SyncUtil resetOngoingTasks];
         }
     }
-//    [[UIApplication sharedApplication] endBackgroundTask:manRef.bgTaskI];
+    [[UIApplication sharedApplication] endBackgroundTask:manRef.bgTaskI];
 
     [[NSNotificationCenter defaultCenter] postNotificationName:AUTO_SYNC_QUEUE_CHANGED_NOTIFICATION object:nil userInfo:nil];
     [self updateGroupUserDefaults];

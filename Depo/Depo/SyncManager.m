@@ -208,15 +208,15 @@
                                 if([ReachabilityManager isReachableViaWiFi] || ([ReachabilityManager isReachableViaWWAN] && connectionOption == ConnectionOptionWifi3G)) {
 //                                    NSString *localHash = [asset.defaultRepresentation MD5];
                                     NSString *localHash = [SyncUtil md5StringOfString:[asset.defaultRepresentation.url absoluteString]];
-                                    NSLog(@"Calculated local hash:%@", localHash);
+//                                    NSLog(@"Calculated local hash:%@", localHash);
                                     BOOL shouldStartUpload = ![localHashList containsObject:localHash] && ![remoteHashList containsObject:localHash] && ([APPDELEGATE.uploadQueue uploadRefForAsset:[asset.defaultRepresentation.url absoluteString]] == nil) && ([bgOngoingTasks objectForKey:asset.defaultRepresentation.filename] == nil);
-                                    NSLog(@"ASSET IN LOCAL HASH:%d, ASSET IN REMOTE HASH:%d, ASSET IN QUEUE:%d, ASSET IN BG ONGOING REQUESTS:%d", [localHashList containsObject:localHash], [remoteHashList containsObject:localHash], ([APPDELEGATE.uploadQueue uploadRefForAsset:[asset.defaultRepresentation.url absoluteString]] != nil), ([bgOngoingTasks objectForKey:asset.defaultRepresentation.filename] != nil));
+//                                    NSLog(@"ASSET IN LOCAL HASH:%d, ASSET IN REMOTE HASH:%d, ASSET IN QUEUE:%d, ASSET IN BG ONGOING REQUESTS:%d", [localHashList containsObject:localHash], [remoteHashList containsObject:localHash], ([APPDELEGATE.uploadQueue uploadRefForAsset:[asset.defaultRepresentation.url absoluteString]] != nil), ([bgOngoingTasks objectForKey:asset.defaultRepresentation.filename] != nil));
                                     if(shouldStartUpload) {
                                         ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
                                         NSString *assetFileName = [defaultRep filename];
                                         for(MetaFileSummary *summary in remoteSummaryList) {
-                                            NSLog(@"SUMMARY ROW FILENAME:%@ AND BYTES:%lld", summary.fileName, summary.bytes);
-                                            NSLog(@"SUMMARY CURRENT ASSET:%@ AND BYTES:%lld", assetFileName, [defaultRep size]);
+//                                            NSLog(@"SUMMARY ROW FILENAME:%@ AND BYTES:%lld", summary.fileName, summary.bytes);
+//                                            NSLog(@"SUMMARY CURRENT ASSET:%@ AND BYTES:%lld", assetFileName, [defaultRep size]);
                                             if([summary.fileName isEqualToString:assetFileName] && summary.bytes == [defaultRep size]) {
                                                 shouldStartUpload = NO;
                                             }
@@ -240,6 +240,7 @@
                     [SyncUtil writeLastSyncDate:[NSDate date]];
                     autoSyncIterationInProgress = NO;
 //                    [APPDELEGATE.uploadQueue startReadyTasks];
+                    [APPDELEGATE.uploadQueue manualAutoSyncIterationFinished];
                 }
             } failureBlock:^(NSError *error) {
             }];

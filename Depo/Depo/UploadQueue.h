@@ -27,5 +27,6 @@
 - (void) cancelRemainingUploads;
 - (int) totalAutoSyncCount;
 - (int) finishedAutoSyncCount;
+- (void) manualAutoSyncIterationFinished;
 
 @end

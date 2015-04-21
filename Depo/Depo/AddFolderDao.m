@@ -23,7 +23,7 @@
     NSLog(@"Add Folder Payload: %@", jsonStr);
     
 	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request addRequestHeader:@"Folder-Name" value:folderName];
+    [request addRequestHeader:@"Folder-Name" value:[folderName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     [request setPostBody:[postData mutableCopy]];
     [request setDelegate:self];
     

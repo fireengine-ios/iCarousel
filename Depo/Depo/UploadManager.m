@@ -48,11 +48,9 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 }
 
 - (void) startTask {
-    /*
     bgTaskI = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
         [[UIApplication sharedApplication] endBackgroundTask:bgTaskI];
     }];
-     */
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         if(self.uploadRef.taskType == UploadTaskTypeAsset) {
