@@ -189,21 +189,21 @@
 }
 
 + (void) writeFirstTimeSyncFlag {
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:FIRST_SYNC_DONE_FLAG_KEY];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:FIRST_SYNC_DONE_FLAG_KEY, APPDELEGATE.session.baseUrlConstant]];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 + (BOOL) readFirstTimeSyncFlag {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:FIRST_SYNC_DONE_FLAG_KEY];
+    return [[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:FIRST_SYNC_DONE_FLAG_KEY, APPDELEGATE.session.baseUrlConstant]];
 }
 
 + (void) writeFirstTimeSyncFinishedFlag {
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:FIRST_SYNC_FINALIZED_FLAG_KEY];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:FIRST_SYNC_FINALIZED_FLAG_KEY, APPDELEGATE.session.baseUrlConstant]];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 + (BOOL) readFirstTimeSyncFinishedFlag {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:FIRST_SYNC_FINALIZED_FLAG_KEY];
+    return [[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:FIRST_SYNC_FINALIZED_FLAG_KEY, APPDELEGATE.session.baseUrlConstant]];
 }
 
 + (void) lockAutoSyncBlockInProgress {
@@ -267,12 +267,12 @@
 
 + (void) increaseAutoSyncIndex {
     int newAutoSyncIndex = [SyncUtil readAutoSyncIndex] + 1;
-    [[NSUserDefaults standardUserDefaults] setInteger:newAutoSyncIndex forKey:AUTO_SYNC_INDEX_KEY];
+    [[NSUserDefaults standardUserDefaults] setInteger:newAutoSyncIndex forKey:[NSString stringWithFormat:AUTO_SYNC_INDEX_KEY, APPDELEGATE.session.baseUrlConstant]];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 + (int) readAutoSyncIndex {
-    return (int)[[NSUserDefaults standardUserDefaults] integerForKey:AUTO_SYNC_INDEX_KEY];
+    return (int)[[NSUserDefaults standardUserDefaults] integerForKey:[NSString stringWithFormat:AUTO_SYNC_INDEX_KEY, APPDELEGATE.session.baseUrlConstant]];
 }
 
 + (NSMutableDictionary *) readOngoingTasks {

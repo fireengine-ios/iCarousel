@@ -12,7 +12,10 @@
 @interface SyncInfoHeaderView : UIView
 
 @property (nonatomic, strong) CustomLabel *infoLabel;
+@property (nonatomic, strong) UIActivityIndicatorView *indicator;
 
 - (void) reCheckInfo;
+- (void) show;
+- (void) hide;
 
 @end

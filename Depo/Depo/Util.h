@@ -20,5 +20,6 @@
 + (NSString *) uniqueGlobalDeviceIdentifier;
 + (NSString *) getWorkaroundUUID;
 + (NSString *) transformedHugeSizeValueNoDecimal:(long long) byteCount;
++ (NSString *) cleanSpecialCharacters:(NSString *) rawStr;
 
 @end

@@ -149,6 +149,14 @@
     return nil;
 }
 
+- (void) modifyPlayerItemFavUnfavFlag:(BOOL) favUnfav forUuid:(NSString *) uuid {
+    for(MetaFile *file in self.playerItemFilesRef) {
+        if([file.uuid isEqualToString:uuid]) {
+            file.detail.favoriteFlag = favUnfav;
+        }
+    }
+}
+
 - (void) queueItemDidReachEnd:(NSNotification *)notification {
     AVPlayerItem *lastItem = [notification object];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:lastItem];

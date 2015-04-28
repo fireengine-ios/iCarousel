@@ -62,4 +62,6 @@
 - (void) cleanBgOngoingTaskUrls;
 - (BOOL) isUrlPresentInBgOngoingTaskUrls:(NSString *) taskUrl;
 
+- (void) modifyPlayerItemFavUnfavFlag:(BOOL) favUnfav forUuid:(NSString *) uuid;
+
 @end

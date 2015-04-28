@@ -109,8 +109,8 @@
         [scroll addSubview:addButton];
         
         syncInfoView = [[SyncInfoHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 24)];
-        syncInfoView.hidden = YES;
         [self.view addSubview:syncInfoView];
+        [syncInfoView hide];
         
         UISwipeGestureRecognizer *recognizerLeft = [[UISwipeGestureRecognizer alloc]
                                                     initWithTarget:self action:@selector(swipeLeft:)];
@@ -573,7 +573,7 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         if(syncInfoView.isHidden) {
             [[[[UIApplication sharedApplication] delegate] window] setWindowLevel:UIWindowLevelStatusBar+1];
-            syncInfoView.hidden = NO;
+            [syncInfoView show];
         }
         [self.view bringSubviewToFront:syncInfoView];
         [syncInfoView reCheckInfo];
@@ -584,7 +584,7 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         if(!syncInfoView.isHidden) {
             [[[[UIApplication sharedApplication] delegate] window] setWindowLevel:UIWindowLevelNormal];
-            syncInfoView.hidden = YES;
+            [syncInfoView hide];
         }
     });
 }

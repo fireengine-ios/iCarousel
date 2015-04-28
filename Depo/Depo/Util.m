@@ -154,4 +154,18 @@
     return UUID;
 }
 
++ (NSString *) cleanSpecialCharacters:(NSString *) rawStr {
+    rawStr = [rawStr stringByReplacingOccurrencesOfString:@"^" withString:@""];
+    rawStr = [rawStr stringByReplacingOccurrencesOfString:@"/" withString:@""];
+    rawStr = [rawStr stringByReplacingOccurrencesOfString:@"\\" withString:@""];
+    rawStr = [rawStr stringByReplacingOccurrencesOfString:@":" withString:@""];
+    rawStr = [rawStr stringByReplacingOccurrencesOfString:@"*" withString:@""];
+    rawStr = [rawStr stringByReplacingOccurrencesOfString:@"?" withString:@""];
+    rawStr = [rawStr stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+    rawStr = [rawStr stringByReplacingOccurrencesOfString:@"<" withString:@""];
+    rawStr = [rawStr stringByReplacingOccurrencesOfString:@">" withString:@""];
+    rawStr = [rawStr stringByReplacingOccurrencesOfString:@"|" withString:@""];
+    return rawStr;
+}
+
 @end

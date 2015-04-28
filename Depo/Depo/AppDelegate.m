@@ -122,6 +122,8 @@
             [self showMainLoading];
         } else {
             if(![AppUtil readFirstVisitOverFlag]) {
+                //Uygulama silinip tekrar kurulursa eski badge degerini koruyor. Bunun engellenmesi icin eklendi
+                [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
                 [self triggerPreLogin];
             } else {
                 [self triggerLogin];

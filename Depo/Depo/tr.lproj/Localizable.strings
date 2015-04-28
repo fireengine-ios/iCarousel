@@ -180,6 +180,7 @@
 "SortTypeAlbumDescTitle"="Albüm İsmi (Z-A)";
 "HomeUsageTotalStorage"="Toplam %@";
 "LastSyncFormat"="SON YÜKLEME: %@ ÖNCE";
+"LastSyncFormatForWidget"="Son Yükleme: %@";
 
 "GetMoreStorageButtonTitle"="Daha Fazla Hafıza";
 "SongTitleFieldTitle"="BAŞLIK";

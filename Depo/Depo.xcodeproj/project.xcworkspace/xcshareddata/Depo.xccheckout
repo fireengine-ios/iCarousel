@@ -11,7 +11,7 @@
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>ED67A28C3F6455F39DD461F61EFE67BE1930F5D6</key>
-		<string>https://stash.turkcell.com.tr/git/scm/adr/akillidepo-ios.git</string>
+		<string>https://mahir.tarlan@stash.turkcell.com.tr/git/scm/adr/akillidepo-ios.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Depo/Depo.xcodeproj</string>
@@ -21,7 +21,7 @@
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://stash.turkcell.com.tr/git/scm/adr/akillidepo-ios.git</string>
+	<string>https://mahir.tarlan@stash.turkcell.com.tr/git/scm/adr/akillidepo-ios.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>

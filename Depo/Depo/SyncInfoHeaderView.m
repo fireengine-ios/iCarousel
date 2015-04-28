@@ -13,15 +13,30 @@
 @implementation SyncInfoHeaderView
 
 @synthesize infoLabel;
+@synthesize indicator;
 
 - (id) initWithFrame:(CGRect)frame {
     if(self = [super initWithFrame:frame]) {
         self.backgroundColor = [Util UIColorForHexColor:@"ffe000"];
         
-        infoLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 3, self.frame.size.width - 40, 18) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:14] withColor:[Util UIColorForHexColor:@"565656"] withText:@""];
+        infoLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(60, 3, self.frame.size.width - 70, 18) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:14] withColor:[Util UIColorForHexColor:@"565656"] withText:@""];
         [self addSubview:infoLabel];
+        
+        indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        indicator.center = CGPointMake(30, self.frame.size.height/2);
+        [self addSubview:indicator];
     }
     return self;
+}
+
+- (void) show {
+    self.hidden = NO;
+    [indicator startAnimating];
+}
+
+- (void) hide {
+    self.hidden = YES;
+    [indicator stopAnimating];
 }
 
 - (void) reCheckInfo {

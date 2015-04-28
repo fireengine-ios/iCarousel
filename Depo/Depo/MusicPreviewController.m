@@ -130,6 +130,7 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
         [self.view addSubview:albumImgView];
         
         MetaFile *file = [APPDELEGATE.session itemRefForCurrentAsset];
+        self.fileUuid = file.uuid;
         NSString *nameVal = file.visibleName;
         if(file.detail && file.detail.songTitle) {
             nameVal = file.detail.songTitle;

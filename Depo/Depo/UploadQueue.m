@@ -253,7 +253,7 @@
             [SyncUtil resetOngoingTasks];
         }
     }
-    [[UIApplication sharedApplication] endBackgroundTask:manRef.bgTaskI];
+//    [[UIApplication sharedApplication] endBackgroundTask:manRef.bgTaskI];
 
     [[NSNotificationCenter defaultCenter] postNotificationName:AUTO_SYNC_QUEUE_CHANGED_NOTIFICATION object:nil userInfo:nil];
     [self updateGroupUserDefaults];
@@ -443,7 +443,9 @@
         int totalAutoSyncCount = [self totalAutoSyncCount];
         int finishedAutoSyncCount = [self finishedAutoSyncCount];
         
-        NSString *lastSyncDateInReadableFormat = [NSString stringWithFormat:NSLocalizedString(@"LastSyncFormat", @""), [AppUtil readDueDateInReadableFormat:[SyncUtil readLastSyncDate]]];
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat:@"dd.MM.yyyy HH:mm"];
+        NSString *lastSyncDateInReadableFormat = [NSString stringWithFormat:NSLocalizedString(@"LastSyncFormatForWidget", @""), [dateFormat stringFromDate:[SyncUtil readLastSyncDate]]];
         
         NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:GROUP_NAME_SUITE_NSUSERDEFAULTS];
         [sharedDefaults setInteger:totalAutoSyncCount forKey:@"totalAutoSyncCount"];

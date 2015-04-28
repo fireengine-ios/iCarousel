@@ -32,6 +32,8 @@
 @synthesize fileTable;
 @synthesize refreshControl;
 @synthesize fileList;
+@synthesize favUnfavFileUuidRef;
+@synthesize favUnfavFileFlagRef;
 
 - (id) init {
     if (self = [super init]) {
@@ -96,6 +98,10 @@
 }
 
 - (void) favSuccessCallback {
+    if(favUnfavFileUuidRef != nil) {
+        [APPDELEGATE.session modifyPlayerItemFavUnfavFlag:favUnfavFileFlagRef forUuid:favUnfavFileUuidRef];
+        self.favUnfavFileUuidRef = nil;
+    }
     [self proceedSuccessForProgressView];
     [self triggerRefresh];
 }
@@ -226,12 +232,18 @@
 }
 
 - (void) fileFolderCellShouldFavForFile:(MetaFile *)fileSelected {
+    self.favUnfavFileUuidRef = fileSelected.uuid;
+    self.favUnfavFileFlagRef = YES;
+    
     [favoriteDao requestMetadataForFiles:@[fileSelected.uuid] shouldFavorite:YES];
     //    [self showLoading];
     [self pushProgressViewWithProcessMessage:NSLocalizedString(@"FavAddProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"FavAddSuccessMessage", @"") andFailMessage:NSLocalizedString(@"FavAddFailMessage", @"")];
 }
 
 - (void) fileFolderCellShouldUnfavForFile:(MetaFile *)fileSelected {
+    self.favUnfavFileUuidRef = fileSelected.uuid;
+    self.favUnfavFileFlagRef = NO;
+
     [favoriteDao requestMetadataForFiles:@[fileSelected.uuid] shouldFavorite:NO];
     //    [self showLoading];
     [self pushProgressViewWithProcessMessage:NSLocalizedString(@"UnfavProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"UnfavSuccessMessage", @"") andFailMessage:NSLocalizedString(@"UnfavFailMessage", @"")];

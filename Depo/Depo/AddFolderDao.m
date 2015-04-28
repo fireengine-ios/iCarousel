@@ -7,6 +7,7 @@
 //
 
 #import "AddFolderDao.h"
+#import "Util.h"
 
 @implementation AddFolderDao
 
@@ -23,7 +24,7 @@
     NSLog(@"Add Folder Payload: %@", jsonStr);
     
 	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request addRequestHeader:@"Folder-Name" value:[folderName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    [request addRequestHeader:@"Folder-Name" value:[[Util cleanSpecialCharacters:folderName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     [request setPostBody:[postData mutableCopy]];
     [request setDelegate:self];
     

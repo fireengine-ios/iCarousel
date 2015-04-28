@@ -22,5 +22,7 @@
 @property (nonatomic, strong) UITableView *fileTable;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, strong) NSMutableArray *fileList;
+@property (nonatomic, strong) NSString *favUnfavFileUuidRef;
+@property (nonatomic) BOOL favUnfavFileFlagRef;
 
 @end
