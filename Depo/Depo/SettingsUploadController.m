@@ -48,11 +48,11 @@
         if(currentSyncPhotosVideosSetting == EnableOptionOn || currentSyncPhotosVideosSetting == EnableOptionAuto) {
             triggerAutoSync = YES;
             [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOn];
-            [[CurioSDK shared] sendEvent:@"photo_video_sync_opened" eventValue:@"true"];
+            [[CurioSDK shared] sendEvent:@"SyncOpened" eventValue:@"true"];
         } else {
             cancelAutoSync = YES;
             [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOff];
-            [[CurioSDK shared] sendEvent:@"photo_video_sync_opened" eventValue:@"false"];
+            [[CurioSDK shared] sendEvent:@"SyncClosed" eventValue:@"true"];
         }
     }
     if (currentConnectionSetting != oldConnectionSetting) {
@@ -85,7 +85,7 @@
     }
 
     if(cancelAutoSync) {
-        [APPDELEGATE.uploadQueue cancelRemainingUploads];
+        [[UploadQueue sharedInstance] cancelRemainingUploads];
     }
 }
 

@@ -70,7 +70,7 @@
             }
         }
         
-        for(UploadManager *manager in [APPDELEGATE.uploadQueue.uploadManagers copy]) {
+        for(UploadManager *manager in [[UploadQueue sharedInstance].uploadManagers copy]) {
             if(!manager.uploadRef.hasFinished && [manager.uploadRef.fileUuid isEqualToString:self.uploadRef.fileUuid]) {
                 manager.delegate = self;
             }
@@ -97,11 +97,11 @@
 
         if(self.uploadRef.hasFinishedWithError) {
             uploadingPhotoLabel.text = NSLocalizedString(@"UploadingPhotoFinishedWithError", @"");
-            [self updateProgressByWidth:[NSNumber numberWithLong:self.view.frame.size.width]];
+            [self updateProgressByWidth:[NSNumber numberWithLong:self.view.frame.size.width] hasError:YES];
             progressView.backgroundColor = [Util UIColorForHexColor:@"ad3110"];
         } else if([self.uploadRef hasFinished]) {
             uploadingPhotoLabel.text = NSLocalizedString(@"UploadingPhotoFinishedSuccessfully", @"");
-            [self updateProgressByWidth:[NSNumber numberWithLong:self.view.frame.size.width]];
+            [self updateProgressByWidth:[NSNumber numberWithLong:self.view.frame.size.width] hasError:NO];
             progressView.backgroundColor = [Util UIColorForHexColor:@"67d74b"];
         } else {
             [indicator startAnimating];
@@ -121,6 +121,14 @@
     progressLabel.text = [NSString stringWithFormat:NSLocalizedString(@"UploadingPhotoCompleteStatus", @""), percent];
 }
 
+- (void) updateProgressByWidth:(NSNumber *) newWidth hasError:(BOOL) errorFlag {
+    progressView.frame = CGRectMake(0, self.view.frame.size.height-50, [newWidth intValue], 2);
+    int percent = [newWidth intValue] * 100 / self.view.frame.size.width;
+    if(!errorFlag) {
+        progressLabel.text = [NSString stringWithFormat:NSLocalizedString(@"UploadingPhotoCompleteStatus", @""), percent];
+    }
+}
+
 - (void) uploadManagerDidFailUploadingForAsset:(NSString *) assetToUpload {
     uploadingPhotoLabel.text = NSLocalizedString(@"UploadingPhotoFinishedWithError", @"");
     progressView.backgroundColor = [Util UIColorForHexColor:@"ad3110"];
@@ -129,35 +137,35 @@
 
 - (void) uploadManagerQuotaExceedForAsset:(NSString *) assetToUpload {
     uploadingPhotoLabel.text = NSLocalizedString(@"UploadingPhotoFinishedWithError", @"");
-    [self updateProgressByWidth:[NSNumber numberWithLong:self.view.frame.size.width]];
+    [self updateProgressByWidth:[NSNumber numberWithLong:self.view.frame.size.width] hasError:YES];
     progressView.backgroundColor = [Util UIColorForHexColor:@"ad3110"];
     [indicator stopAnimating];
 }
 
 - (void) uploadManagerLoginRequiredForAsset:(NSString *) assetToUpload {
     uploadingPhotoLabel.text = NSLocalizedString(@"UploadingPhotoFinishedWithError", @"");
-    [self updateProgressByWidth:[NSNumber numberWithLong:self.view.frame.size.width]];
+    [self updateProgressByWidth:[NSNumber numberWithLong:self.view.frame.size.width] hasError:YES];
     progressView.backgroundColor = [Util UIColorForHexColor:@"ad3110"];
     [indicator stopAnimating];
 }
 
 - (void) uploadManagerDidFinishUploadingForAsset:(NSString *)assetToUpload withFinalFile:(MetaFile *) finalFile {
     uploadingPhotoLabel.text = NSLocalizedString(@"UploadingPhotoFinishedSuccessfully", @"");
-    [self updateProgressByWidth:[NSNumber numberWithLong:self.view.frame.size.width]];
+    [self updateProgressByWidth:[NSNumber numberWithLong:self.view.frame.size.width] hasError:NO];
     progressView.backgroundColor = [Util UIColorForHexColor:@"67d74b"];
     [indicator stopAnimating];
 }
 
 - (void) uploadManagerDidFailUploadingAsData {
     uploadingPhotoLabel.text = NSLocalizedString(@"UploadingPhotoFinishedWithError", @"");
-    [self updateProgressByWidth:[NSNumber numberWithLong:self.view.frame.size.width]];
+    [self updateProgressByWidth:[NSNumber numberWithLong:self.view.frame.size.width] hasError:YES];
     progressView.backgroundColor = [Util UIColorForHexColor:@"ad3110"];
     [indicator stopAnimating];
 }
 
 - (void) uploadManagerDidFinishUploadingAsData {
     uploadingPhotoLabel.text = NSLocalizedString(@"UploadingPhotoFinishedSuccessfully", @"");
-    [self updateProgressByWidth:[NSNumber numberWithLong:self.view.frame.size.width]];
+    [self updateProgressByWidth:[NSNumber numberWithLong:self.view.frame.size.width] hasError:NO];
     progressView.backgroundColor = [Util UIColorForHexColor:@"67d74b"];
     [indicator stopAnimating];
 }
@@ -178,7 +186,7 @@
     [super viewWillDisappear:animated];
     [indicator stopAnimating];
     if(oldDelegateRef) {
-        for(UploadManager *manager in [APPDELEGATE.uploadQueue.uploadManagers copy]) {
+        for(UploadManager *manager in [[UploadQueue sharedInstance].uploadManagers copy]) {
             if([manager.uploadRef.fileUuid isEqualToString:self.uploadRef.fileUuid]) {
                 manager.delegate = oldDelegateRef;
                 

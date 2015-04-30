@@ -116,12 +116,12 @@
         [CacheUtil writeCachedSettingSyncContacts:EnableOptionOn];
         [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOn];
     
-        [[CurioSDK shared] sendEvent:@"photo_video_sync_opened" eventValue:@"true"];
+        [[CurioSDK shared] sendEvent:@"SyncOpened" eventValue:@"true"];
 
     } else {
         [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOff];
         [CacheUtil writeCachedSettingSyncContacts:EnableOptionOff];
-        [[CurioSDK shared] sendEvent:@"photo_video_sync_opened" eventValue:@"false"];
+        [[CurioSDK shared] sendEvent:@"SyncClosed" eventValue:@"true"];
     }
     
     [CacheUtil writeCachedSettingSyncingConnectionType:selectedOption];

@@ -76,7 +76,7 @@
         selectedAlbumList = [[NSMutableArray alloc] init];
 
         photoList = [[NSMutableArray alloc] init];
-        [photoList addObjectsFromArray:[APPDELEGATE.uploadQueue uploadImageRefs]];
+        [photoList addObjectsFromArray:[[UploadQueue sharedInstance] uploadImageRefs]];
         
         normalizedContentHeight = self.view.frame.size.height - self.bottomIndex - 50;
         maximizedContentHeight = self.view.frame.size.height - self.bottomIndex + 14;
@@ -191,7 +191,7 @@
         }
     }
     
-    [photoList addObjectsFromArray:[APPDELEGATE.uploadQueue uploadImageRefs]];
+    [photoList addObjectsFromArray:[[UploadQueue sharedInstance] uploadImageRefs]];
     [self addOngoingPhotos];
 
     listOffset = 0;
@@ -392,7 +392,7 @@
 }
 
 - (void) squareImageUploadFinishedForFile:(NSString *) fileUuid {
-    if([[APPDELEGATE.uploadQueue uploadImageRefs] count] == 0) {
+    if([[[UploadQueue sharedInstance] uploadImageRefs] count] == 0) {
         [self triggerRefresh];
     }
 }
@@ -598,7 +598,7 @@
 
         UploadManager *manager = [[UploadManager alloc] initWithUploadInfo:ref];
         [manager configureUploadAsset:ref.filePath atFolder:nil];
-        [APPDELEGATE.uploadQueue addNewUploadTask:manager];
+        [[UploadQueue sharedInstance] addNewUploadTask:manager];
     }
     [self triggerRefresh];
 }
@@ -618,7 +618,7 @@
     
     UploadManager *uploadManager = [[UploadManager alloc] initWithUploadInfo:uploadRef];
     [uploadManager configureUploadFileForPath:filePath atFolder:nil withFileName:fileName];
-    [APPDELEGATE.uploadQueue addNewUploadTask:uploadManager];
+    [[UploadQueue sharedInstance] addNewUploadTask:uploadManager];
     
     [self triggerRefresh];
 }

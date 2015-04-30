@@ -36,5 +36,6 @@
 + (NSString *) readDueDateInReadableFormat:(NSDate *) date;
 + (NSString *) userUniqueValueByBaseUrl:(NSString *) baseUrl;
 + (NSString *) readDocumentsPathForFileName:(NSString *)name;
++ (void) sendLocalNotificationForDate:(NSDate *) dateToSend withMessage:(NSString *) msg;
 
 @end

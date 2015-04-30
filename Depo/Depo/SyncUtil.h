@@ -25,6 +25,7 @@
 + (NSString *) md5StringFromPath:(NSString *) path;
 
 + (void) cacheSyncHashLocally:(NSString *) hash;
++ (void) removeLocalHash:(NSString *) hash;
 + (NSArray *) readSyncHashLocally;
 + (void) cacheSyncHashRemotely:(NSString *) hash;
 + (void) cacheSyncHashesRemotely:(NSMutableArray *) newArray;

@@ -15,7 +15,9 @@
 @property (nonatomic, strong) NSMutableSet *activeTaskIds;
 @property (nonatomic, strong) NSMutableArray *uploadManagers;
 @property (nonatomic, strong) NSURLSession *session;
+@property (nonatomic, copy) void (^backgroundSessionCompletionHandler)(void);
 
++ (UploadQueue *) sharedInstance;
 - (NSArray *) uploadRefsForFolder:(NSString *) folderUuid;
 - (UploadRef *) uploadRefForAsset:(NSString *) assetUrl;
 - (NSArray *) uploadImageRefs;

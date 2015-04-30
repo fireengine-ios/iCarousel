@@ -172,7 +172,7 @@
     if(refreshControl) {
         [refreshControl endRefreshing];
     }
-    self.fileList = [[APPDELEGATE.uploadQueue uploadRefsForFolder:[self.folder uuid]] arrayByAddingObjectsFromArray:files];
+    self.fileList = [[[UploadQueue sharedInstance] uploadRefsForFolder:[self.folder uuid]] arrayByAddingObjectsFromArray:files];
     self.tableUpdateCounter ++;
     [fileTable reloadData];
 }
@@ -585,7 +585,7 @@
     
     uploadManager = [[UploadManager alloc] initWithUploadInfo:uploadRef];
     [uploadManager configureUploadFileForPath:filePath atFolder:self.folder withFileName:fileName];
-    [APPDELEGATE.uploadQueue addNewUploadTask:uploadManager];
+    [[UploadQueue sharedInstance] addNewUploadTask:uploadManager];
     
     fileList = [@[uploadRef] arrayByAddingObjectsFromArray:fileList];
     self.tableUpdateCounter++;
@@ -614,7 +614,7 @@
 
             UploadManager *manager = [[UploadManager alloc] initWithUploadInfo:ref];
             [manager configureUploadAsset:ref.filePath atFolder:self.folder];
-            [APPDELEGATE.uploadQueue addNewUploadTask:manager];
+            [[UploadQueue sharedInstance] addNewUploadTask:manager];
         }
         fileList = [assetUrls arrayByAddingObjectsFromArray:fileList];
         self.tableUpdateCounter++;

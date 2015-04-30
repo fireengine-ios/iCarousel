@@ -100,6 +100,8 @@
         }
     } else if([request responseStatusCode] == 403) {
         [self shouldReturnFailWithMessage:FORBIDDEN_ERROR_MESSAGE];
+    } else if([request responseStatusCode] == 412) {
+        [self shouldReturnFailWithMessage:INVALID_CONTENT_ERROR_MESSAGE];
     } else {
         if([request.error code] == ASIConnectionFailureErrorType){
             [self shouldReturnFailWithMessage:NO_CONN_ERROR_MESSAGE];

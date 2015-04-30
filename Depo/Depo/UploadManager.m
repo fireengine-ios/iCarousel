@@ -50,25 +50,25 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 - (void) startTask {
     /*
     bgTaskI = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
-        NSLog(@"mahir: at beginBackgroundTaskWithExpirationHandler");
         [[UIApplication sharedApplication] endBackgroundTask:bgTaskI];
     }];
      */
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         if(self.uploadRef.taskType == UploadTaskTypeAsset) {
-            NSLog(@"mahir: at startTask-UploadTaskTypeAsset");
             [self triggerAndStartAssetsTask];
         } else if(self.uploadRef.taskType == UploadTaskTypeFile) {
-            self.uploadTask = [APPDELEGATE.uploadQueue.session uploadTaskWithRequest:[self prepareRequestSetVideo:NO] fromFile:[NSURL fileURLWithPath:self.uploadRef.filePath]];
+            self.uploadTask = [[UploadQueue sharedInstance].session uploadTaskWithRequest:[self prepareRequestSetVideo:NO] fromFile:[NSURL fileURLWithPath:self.uploadRef.filePath]];
+            self.uploadTask.taskDescription = self.uploadRef.localHash;
             [uploadTask resume];
             
-            [[CurioSDK shared] sendEvent:@"upload_started" eventValue:[NSString stringWithFormat:@"file type: %@", @"image"]];
+            [[CurioSDK shared] sendEvent:@"UploadStarted" eventValue:[NSString stringWithFormat:@"file type: %@", @"image"]];
         } else {
-            self.uploadTask = [APPDELEGATE.uploadQueue.session uploadTaskWithRequest:[self prepareRequestSetVideo:NO] fromData:self.uploadRef.fileData];
+            self.uploadTask = [[UploadQueue sharedInstance].session uploadTaskWithRequest:[self prepareRequestSetVideo:NO] fromData:self.uploadRef.fileData];
+            self.uploadTask.taskDescription = self.uploadRef.localHash;
             [uploadTask resume];
             
-            [[CurioSDK shared] sendEvent:@"upload_started" eventValue:[NSString stringWithFormat:@"file type: %@", @"image"]];
+            [[CurioSDK shared] sendEvent:@"UploadStarted" eventValue:[NSString stringWithFormat:@"file type: %@", @"image"]];
         }
     });
 }
@@ -83,7 +83,6 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
                 [group enumerateAssetsUsingBlock:^(ALAsset *_asset, NSUInteger index, BOOL *innerStop) {
                     if(_asset) {
                         if(self.asset == nil) {
-                            NSLog(@"mahir: at triggerAndStartAssetsTask-asset found");
                             NSURL *_assetUrl = _asset.defaultRepresentation.url;
                             if([[_assetUrl absoluteString] isEqualToString:self.uploadRef.assetUrl]) {
                                 self.asset = _asset;
@@ -195,11 +194,13 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         if(dataMD5Hash != nil) {
             [uploadRequest setValue:dataMD5Hash forHTTPHeaderField:@"ETag"];
         }
-        self.uploadTask = [APPDELEGATE.uploadQueue.session uploadTaskWithRequest:uploadRequest fromFile:[NSURL fileURLWithPath:self.uploadRef.tempUrl]];
-        NSLog(@"mahir: at uploadTask started");
+        self.uploadTask = [[UploadQueue sharedInstance].session uploadTaskWithRequest:uploadRequest fromFile:[NSURL fileURLWithPath:self.uploadRef.tempUrl]];
+        self.uploadTask.taskDescription = self.uploadRef.localHash;
+        [SyncUtil cacheSyncHashLocally:self.uploadRef.localHash];
+        [SyncUtil increaseAutoSyncIndex];
         [uploadTask resume];
         
-        [[CurioSDK shared] sendEvent:@"upload_started" eventValue:[NSString stringWithFormat:@"file type: %@", fileType]];
+        [[CurioSDK shared] sendEvent:@"UploadStarted" eventValue:[NSString stringWithFormat:@"file type: %@", fileType]];
 
         //    [queueDelegate uploadManagerTaskIsInitialized:self];
     } else {
@@ -243,18 +244,13 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         [request setValue:self.uploadRef.localHash forHTTPHeaderField:@"X-Object-Meta-Ios-Metadata-Hash"];
     }
     if(self.uploadRef.autoSyncFlag || self.uploadRef.ownerPage == UploadStarterPagePhotos) {
-        NSLog(@"X-Object-Meta-Special-Folder SET for img: %@", self.uploadRef.fileName);
         [request setValue:@"MOBILE_UPLOAD" forHTTPHeaderField:@"X-Object-Meta-Special-Folder"];
-        [SyncUtil addToOngoingTasksWithFilename:self.uploadRef.fileName andTaskUrl:self.uploadRef.urlForUpload];
-    } else {
-        NSLog(@"X-Object-Meta-Special-Folder NOT SET for img: %@", self.uploadRef.fileName);
     }
 
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSDictionary *attributesDict = [fileManager attributesOfItemAtPath:self.uploadRef.tempUrl error:NULL];
     long long fileSize = [attributesDict fileSize];
     NSString *postLength = [NSString stringWithFormat:@"%lld", fileSize];
-    NSLog(@"CONTENT_LENGTH: %@", postLength);
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     
     return request;
@@ -313,6 +309,16 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     self.uploadRef.hasFinished = YES;
     [delegate uploadManagerDidFinishUploadingForAsset:self.uploadRef.assetUrl withFinalFile:self.uploadRef.finalFile];
     [queueDelegate uploadManager:self didFinishUploadingWithSuccess:NO];
+}
+
+- (BOOL) isEqual:(id)other {
+    if (other == self)
+        return YES;
+    if (!other || ![other isKindOfClass:[self class]])
+        return NO;
+    if(self.uploadRef == nil || ((UploadManager *)other).uploadRef == nil)
+        return NO;
+    return (self.uploadRef.autoSyncFlag && ((UploadManager *)other).uploadRef.autoSyncFlag && [self.uploadRef.localHash isEqualToString:((UploadManager *)other).uploadRef.localHash]);
 }
 
 @end

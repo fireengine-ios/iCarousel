@@ -128,6 +128,18 @@
     }
 }
 
++ (void) removeLocalHash:(NSString *) hash {
+    if(hash == nil)
+        return;
+    NSArray *result = [SyncUtil readSyncHashLocally];
+    if([result containsObject:hash]) {
+        NSMutableArray *updatedArray = [result mutableCopy];
+        [updatedArray removeObject:hash];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray] forKey:[NSString stringWithFormat:SYNCED_LOCAL_HASHES_KEY, APPDELEGATE.session.baseUrlConstant]];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
 + (NSArray *) readSyncHashLocally {
     NSArray *result = [[NSArray alloc] init];
     NSData *arrData = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:SYNCED_LOCAL_HASHES_KEY, APPDELEGATE.session.baseUrlConstant]];

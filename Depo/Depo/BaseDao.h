@@ -121,6 +121,8 @@
 
 #define NO_CONN_ERROR_MESSAGE @"Lütfen internet bağlantınızı kontrol ediniz."
 
+#define INVALID_CONTENT_ERROR_MESSAGE @"Geçersiz bir değer gönderildi. Lütfen kontrol ediniz."
+
 #define FORBIDDEN_ERROR_MESSAGE @"Bu işlem için yetkiniz bulunmamaktadır."
 
 #define LOGIN_REQ_ERROR_MESSAGE @"Oturumunuz zaman aşımına uğradı. Lütfen tekrar giriş yapınız."

@@ -63,7 +63,7 @@
     }
     
     session = [[AppSession alloc] init];
-    uploadQueue = [[UploadQueue alloc] init];
+//    uploadQueue = [[UploadQueue alloc] init];
     syncManager = [[SyncManager alloc] init];
     mapUtil = [[MapUtil alloc] init];
     wormhole = [[MMWormhole alloc] initWithApplicationGroupIdentifier:GROUP_NAME_SUITE_NSUSERDEFAULTS optionalDirectory:EXTENSION_WORMHOLE_DIR];
@@ -80,12 +80,10 @@
     //BugSense integration
     [[Mint sharedInstance] initAndStartSession:@"13ceffcf"];
 
-    // TODO
     //Curio integration
     [[CurioSDK shared] startSession:@"http://curio.turkcell.com.tr/api/v2" apiKey:@"cab314f33df2514764664e5544def586" trackingCode:@"KL2XNFIE" sessionTimeout:4 periodicDispatchEnabled:YES dispatchPeriod:1 maxCachedActivitiyCount:1000 loggingEnabled:YES logLevel:3 registerForRemoteNotifications:YES notificationTypes:@"Sound,Badge,Alert" fetchLocationEnabled:NO maxValidLocationTimeInterval:0 appLaunchOptions:launchOptions]; // Live
-//    [[CurioSDK shared] startSession:@"https://curiotest.turkcell.com.tr/api/v2" apiKey:@"7dfb5740be8111e4a44b63ca635716aa" trackingCode:@"OO5CO5YS" sessionTimeout:4 periodicDispatchEnabled:NO dispatchPeriod:1 maxCachedActivitiyCount:1000 loggingEnabled:YES logLevel:3 registerForRemoteNotifications:YES notificationTypes:@"Sound,Badge,Alert" fetchLocationEnabled:NO maxValidLocationTimeInterval:0 appLaunchOptions:launchOptions]; // NewTest
 
-    [[CurioSDK shared] sendEvent:@"application_started" eventValue:@"true"];
+    [[CurioSDK shared] sendEvent:@"ApplicationStarted" eventValue:@"true"];
 
     [self addInitialBgImage];
 
@@ -133,6 +131,9 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginRequiredNotificationRaised) name:LOGIN_REQ_NOTIFICATION object:nil];
 
+//    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
+    
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -205,6 +206,7 @@
 }
 
 - (void) startOpeningPage {
+    /*
     [APPDELEGATE.uploadQueue.session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
         if(uploadTasks) {
             for(NSURLSessionUploadTask *task in uploadTasks) {
@@ -215,6 +217,12 @@
         }
         [self triggerAutoSynchronization];
     }];
+     */
+
+    [[UploadQueue sharedInstance].session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
+    }];
+
+    [self triggerAutoSynchronization];
 
     if (self.notifitacionAction > 0) {
         if (self.notifitacionAction == NotificationActionSyncSettings) {
@@ -416,6 +424,7 @@
 }
 
 - (void) application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    /*
     if(self.uploadQueue && self.uploadQueue.session) {
         [self.uploadQueue.session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
             if(uploadTasks) {
@@ -430,6 +439,13 @@
     } else {
         [self triggerAutoSynchronization];
     }
+     */
+    
+    [[UploadQueue sharedInstance].session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
+    }];
+
+    [self triggerAutoSynchronization];
+
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 25 * NSEC_PER_SEC),
                    dispatch_get_main_queue(), ^{
                        completionHandler(UIBackgroundFetchResultNewData);
@@ -462,6 +478,7 @@
     }
     
     if(activatedFromBackground) {
+        /*
         [APPDELEGATE.uploadQueue.session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
             if(uploadTasks) {
                 for(NSURLSessionUploadTask *task in uploadTasks) {
@@ -472,6 +489,12 @@
             }
             [self triggerAutoSynchronization];
         }];
+        */
+
+        [[UploadQueue sharedInstance].session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
+        }];
+        
+        [self triggerAutoSynchronization];
     } else {
         // eğer backgrounddan gelmiyorsa bir sonraki auto sync bloğununun okunmasını engelleyen lock kaldırılıyor
         [SyncUtil unlockAutoSyncBlockInProgress];
@@ -486,6 +509,13 @@
 
 - (void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(NSString *)identifier completionHandler:(void (^)())completionHandler {
     NSLog(@"At handleEventsForBackgroundURLSession");
+    [UploadQueue sharedInstance].backgroundSessionCompletionHandler = completionHandler;
+}
+
+void uncaughtExceptionHandler(NSException *exception) {
+//    NSLog(@"CRASH: %@", exception);
+//    NSLog(@"Stack Trace: %@", [exception callStackSymbols]);
+    [[UploadQueue sharedInstance] cancelAllUploads];
 }
 
 @end

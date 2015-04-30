@@ -590,8 +590,9 @@
 }
 
 - (void) syncQueueChanged {
-    int totalAutoSyncCount = [APPDELEGATE.uploadQueue totalAutoSyncCount];
-    int finishedAutoSyncCount = [APPDELEGATE.uploadQueue finishedAutoSyncCount];
+    int totalAutoSyncCount = [[UploadQueue sharedInstance] totalAutoSyncCount];
+    int finishedAutoSyncCount = [[UploadQueue sharedInstance] finishedAutoSyncCount];
+    NSLog(@"totalAutoSyncCount: %d, finishedAutoSyncCount: %d", totalAutoSyncCount, finishedAutoSyncCount);
     if(finishedAutoSyncCount < totalAutoSyncCount) {
         [self showSyncInfoView];
     } else {

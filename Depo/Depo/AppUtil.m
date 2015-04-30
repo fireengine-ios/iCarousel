@@ -521,4 +521,12 @@
     return [documentsPath stringByAppendingPathComponent:name];
 }
 
++ (void) sendLocalNotificationForDate:(NSDate *) dateToSend withMessage:(NSString *) msg {
+    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+    localNotification.fireDate = dateToSend;
+    localNotification.alertBody = msg;
+    localNotification.soundName = UILocalNotificationDefaultSoundName;
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+}
+
 @end

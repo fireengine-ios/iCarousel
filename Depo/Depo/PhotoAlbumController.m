@@ -64,7 +64,7 @@
         selectedFileList = [[NSMutableArray alloc] init];
 
         photoList = [[NSMutableArray alloc] init];
-        [photoList addObjectsFromArray:[APPDELEGATE.uploadQueue uploadImageRefsForAlbum:self.album.uuid]];
+        [photoList addObjectsFromArray:[[UploadQueue sharedInstance] uploadImageRefsForAlbum:self.album.uuid]];
         
         if(self.album.cover.tempDownloadUrl) {
             UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 160)];
@@ -116,7 +116,7 @@
         }
     }
     [photoList removeAllObjects];
-    [photoList addObjectsFromArray:[APPDELEGATE.uploadQueue uploadImageRefsForAlbum:self.album.uuid]];
+    [photoList addObjectsFromArray:[[UploadQueue sharedInstance] uploadImageRefsForAlbum:self.album.uuid]];
     [self addOngoingPhotos];
 
     listOffset = 0;
@@ -213,14 +213,14 @@
 }
 
 - (void) photosAddedSuccessCallback {
-    if([[APPDELEGATE.uploadQueue uploadImageRefsForAlbum:self.album.uuid] count] == 0) {
+    if([[[UploadQueue sharedInstance] uploadImageRefsForAlbum:self.album.uuid] count] == 0) {
         contentModified = YES;
         [self triggerRefresh];
     }
 }
 
 - (void) photosAddedFailCallback:(NSString *) errorMessage {
-    if([[APPDELEGATE.uploadQueue uploadImageRefsForAlbum:self.album.uuid] count] == 0) {
+    if([[[UploadQueue sharedInstance] uploadImageRefsForAlbum:self.album.uuid] count] == 0) {
         contentModified = YES;
         [self triggerRefresh];
     }
@@ -365,7 +365,7 @@
 }
 
 - (void) squareImageUploadFinishedForFile:(NSString *) fileUuid {
-    if([[APPDELEGATE.uploadQueue uploadImageRefsForAlbum:self.album.uuid] count] == 0) {
+    if([[[UploadQueue sharedInstance] uploadImageRefsForAlbum:self.album.uuid] count] == 0) {
         contentModified = YES;
         [self triggerRefresh];
     }
@@ -489,7 +489,7 @@
 
         UploadManager *manager = [[UploadManager alloc] initWithUploadInfo:ref];
         [manager configureUploadAsset:ref.filePath atFolder:nil];
-        [APPDELEGATE.uploadQueue addNewUploadTask:manager];
+        [[UploadQueue sharedInstance] addNewUploadTask:manager];
     }
     contentModified = YES;
     [self triggerRefresh];
@@ -512,7 +512,7 @@
     
     UploadManager *uploadManager = [[UploadManager alloc] initWithUploadInfo:uploadRef];
     [uploadManager configureUploadFileForPath:filePath atFolder:nil withFileName:fileName];
-    [APPDELEGATE.uploadQueue addNewUploadTask:uploadManager];
+    [[UploadQueue sharedInstance] addNewUploadTask:uploadManager];
     
     contentModified = YES;
     [self triggerRefresh];

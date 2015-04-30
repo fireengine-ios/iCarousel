@@ -20,6 +20,26 @@
 @synthesize uploadManagers;
 @synthesize session;
 
++ (UploadQueue *) sharedInstance {
+    static UploadQueue *sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[UploadQueue alloc] init];
+        
+        NSURLSessionConfiguration *configuration;
+        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+            configuration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"com.igones.akillidepo.BackgroundSession"];
+        } else {
+            configuration = [NSURLSessionConfiguration backgroundSessionConfiguration:@"com.igones.akillidepo.BackgroundSession"];
+        }
+        
+        configuration.sessionSendsLaunchEvents = YES;
+        sharedInstance.session = [NSURLSession sessionWithConfiguration:configuration delegate:sharedInstance delegateQueue:[NSOperationQueue mainQueue]];
+    });
+    
+    return sharedInstance;
+}
+
 - (id) init {
     if(self = [super init]) {
         self.uploadManagers = [[NSMutableArray alloc] init];
@@ -29,7 +49,7 @@
          Mahir:
          session'ın bir kere oluşturulduğundan emin oluyoruz. Aynı identifier'la farklı bir session oluşturulması engelleniyor.
          */
-        
+        /*
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
             NSURLSessionConfiguration *configuration;
@@ -42,6 +62,7 @@
             configuration.sessionSendsLaunchEvents = YES;
             self.session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:[NSOperationQueue mainQueue]];
         });
+         */
     }
     return self;
 }
@@ -107,7 +128,6 @@
         @try {
             for(UploadManager *row in uploadManagers) {
                 if(!row.uploadRef.hasFinished && row.uploadRef.isReady && ![activeTaskIds containsObject:[row uniqueUrl]]) {
-                    NSLog(@"UPLOAD NAME: %@, TASK_ID:%d", row.uploadRef.fileName, row.uploadTask.taskIdentifier);
                     if(nextTask == nil) {
                         nextTask = row;
                     } else {
@@ -217,6 +237,18 @@
 
 - (void) addNewUploadTask:(UploadManager *) newManager {
     @synchronized(uploadManagers) {
+        if([uploadManagers containsObject:newManager]) {
+            UploadManager *managerToRemove = nil;
+            for(UploadManager *row in uploadManagers) {
+                if([row.uploadRef.localHash isEqualToString:newManager.uploadRef.localHash]) {
+                    managerToRemove = row;
+                    break;
+                }
+            }
+            if(managerToRemove != nil) {
+                [uploadManagers removeObject:managerToRemove];
+            }
+        }
         [uploadManagers addObject:newManager];
     }
     newManager.queueDelegate = self;
@@ -249,8 +281,6 @@
                 [SyncUtil unlockAutoSyncBlockInProgress];
                 [APPDELEGATE.syncManager initializeNextAutoSyncPackage];
             }
-            [APPDELEGATE.session cleanBgOngoingTaskUrls];
-            [SyncUtil resetOngoingTasks];
         }
     }
 //    [[UIApplication sharedApplication] endBackgroundTask:manRef.bgTaskI];
@@ -290,6 +320,21 @@
     }
 }
 
+- (void) removeUploadManagerReferenceAfterFail:(UploadManager *)manToRemove {
+    @synchronized(uploadManagers) {
+        UploadManager *rowToDelete = nil;
+        for(UploadManager *row in uploadManagers) {
+            if([[row uniqueUrl] isEqualToString:[manToRemove uniqueUrl]]) {
+                rowToDelete = row;
+                break;
+            }
+        }
+        if(rowToDelete != nil) {
+            [self.uploadManagers removeObject:rowToDelete];
+        }
+    }
+}
+
 - (void) URLSession:(NSURLSession *) _session task:(NSURLSessionTask *)task didSendBodyData:(int64_t)bytesSent totalBytesSent:(int64_t)totalBytesSent totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend {
     NSLog(@"BYTES SENT: %lld, total bytes sent: %lld", bytesSent, totalBytesSent);
     UploadManager *currentManager = [self findByTaskId:task.taskIdentifier];
@@ -303,24 +348,20 @@
 }
 
 - (void) URLSession:(NSURLSession *) _session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error {
-    NSLog(@"AT URLSession:didCompleteWithError");
     UploadManager *currentManager = [self findByTaskId:task.taskIdentifier];
-    if(currentManager != nil) {
-        NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) task.response;
-        if (!error && httpResp.statusCode == 201) {
-            if(currentManager.uploadRef.localHash != nil) {
-                [SyncUtil cacheSyncHashLocally:currentManager.uploadRef.localHash];
-                //local ile remote hash aynı seviyeye getirildi. O yüzden local kaydediliyor.
-                [SyncUtil cacheSyncHashRemotely:currentManager.uploadRef.localHash];
-            }
+    NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) task.response;
+    NSLog(@"At didCompleteWithError: %d and %@", httpResp.statusCode, [error description]);
+    if (!error && httpResp.statusCode == 201) {
+        if(currentManager != nil) {
             if(currentManager.uploadRef.summary != nil) {
                 [SyncUtil cacheSyncFileSummary:currentManager.uploadRef.summary];
             }
             [currentManager removeTemporaryFile];
             [currentManager notifyUpload];
-        } else {
-            NSLog(@"AT URLSession:didCompleteWithError http error code: %ld", (long)httpResp.statusCode);
-            if(httpResp.statusCode == 401 || httpResp.statusCode == 403) {
+        }
+    } else {
+        if(httpResp.statusCode == 401 || httpResp.statusCode == 403) {
+            if(currentManager != nil) {
                 if(!currentManager.uploadRef.retryDoneForTokenFlag) {
                     //TODO aynı anda tek upload işlemine göre tasarlandı. Eğer aynı anda birden fazla upload yapılacaksa
                     //token requesti tek yapılacak şekilde (synchronized) düzenleme yapmak gerekir.
@@ -331,16 +372,25 @@
                     currentManager.uploadRef.hasFinished = YES;
                     currentManager.uploadRef.hasFinishedWithError = YES;
                     [currentManager removeTemporaryFile];
+                    [SyncUtil removeLocalHash:task.taskDescription];
                     [currentManager.delegate uploadManagerLoginRequiredForAsset:currentManager.uploadRef.assetUrl];
                     [self uploadManager:currentManager didFinishUploadingWithSuccess:NO];
                 }
-            } else if(httpResp.statusCode == 413) {
+            } else {
+                [SyncUtil removeLocalHash:task.taskDescription];
+            }
+        } else if(httpResp.statusCode == 413) {
+            [SyncUtil removeLocalHash:task.taskDescription];
+            if(currentManager != nil) {
                 currentManager.uploadRef.hasFinished = YES;
                 currentManager.uploadRef.hasFinishedWithError = YES;
                 [currentManager removeTemporaryFile];
                 [currentManager.delegate uploadManagerQuotaExceedForAsset:currentManager.uploadRef.assetUrl];
                 [self uploadManager:currentManager didFinishUploadingWithSuccess:NO];
-            } else {
+            }
+        } else {
+            [SyncUtil removeLocalHash:task.taskDescription];
+            if(currentManager != nil) {
                 currentManager.uploadRef.hasFinished = YES;
                 currentManager.uploadRef.hasFinishedWithError = YES;
                 [currentManager removeTemporaryFile];
@@ -366,6 +416,10 @@
 
 - (void) URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession *) _session {
     NSLog(@"URLSessionDidFinishEventsForBackgroundURLSession");
+    if (self.backgroundSessionCompletionHandler) {
+        self.backgroundSessionCompletionHandler();
+        self.backgroundSessionCompletionHandler = nil;
+    }
 }
 
 - (UploadManager *) findByTaskId:(long) taskId {
@@ -396,7 +450,6 @@
 - (void) tokenManagerWithinProcessDidReceiveTokenFor:(int) taskId {
     UploadManager *currentManager = [self findByTaskId:taskId];
     if(currentManager != nil) {
-        //TODO check
         [currentManager startTask];
     }
 }
