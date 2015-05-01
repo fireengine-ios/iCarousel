@@ -249,7 +249,7 @@
 }
 
 - (void) squareImageWasSelectedForView:(SquareImageView *) squareRef {
-    UploadingImagePreviewController *preview = [[UploadingImagePreviewController alloc] initWithUploadReference:squareRef.uploadRef];
+    UploadingImagePreviewController *preview = [[UploadingImagePreviewController alloc] initWithUploadReference:squareRef.uploadRef withImage:squareRef.imgView.image];
     preview.oldDelegateRef = squareRef;
     MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:preview];
     preview.nav = modalNav;

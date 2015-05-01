@@ -26,7 +26,6 @@
 
 @interface SquareImageView : UIView <UploadManagerDelegate> {
     UIView *progressSeparator;
-    UIImageView *imgView;
     UIImageView *maskView;
     BOOL isSelectible;
     BOOL isMarked;
@@ -38,6 +37,7 @@
 @property (nonatomic, strong) UploadRef *uploadRef;
 @property (nonatomic, strong) UILongPressGestureRecognizer *longPressGesture;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
+@property (nonatomic, strong) UIImageView *imgView;
 
 - (id)initWithFrame:(CGRect)frame withFile:(MetaFile *) _file;
 - (id)initWithFrame:(CGRect)frame withUploadRef:(UploadRef *) ref;

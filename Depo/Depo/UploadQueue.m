@@ -279,14 +279,14 @@
         } else {
             if(![SyncUtil readFirstTimeSyncFinishedFlag]) {
                 [SyncUtil unlockAutoSyncBlockInProgress];
-                [APPDELEGATE.syncManager initializeNextAutoSyncPackage];
+                [[SyncManager sharedInstance] initializeNextAutoSyncPackage];
             }
         }
     }
-//    [[UIApplication sharedApplication] endBackgroundTask:manRef.bgTaskI];
-
     [[NSNotificationCenter defaultCenter] postNotificationName:AUTO_SYNC_QUEUE_CHANGED_NOTIFICATION object:nil userInfo:nil];
     [self updateGroupUserDefaults];
+
+    [[UIApplication sharedApplication] endBackgroundTask:manRef.bgTaskI];
 }
 
 - (void) uploadManagerIsReadToStartTask:(UploadManager *)manRef {
@@ -417,8 +417,9 @@
 - (void) URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession *) _session {
     NSLog(@"URLSessionDidFinishEventsForBackgroundURLSession");
     if (self.backgroundSessionCompletionHandler) {
-        self.backgroundSessionCompletionHandler();
+        void (^completionHandler)() = self.backgroundSessionCompletionHandler;
         self.backgroundSessionCompletionHandler = nil;
+        completionHandler();
     }
 }
 

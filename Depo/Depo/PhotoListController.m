@@ -155,7 +155,11 @@
             [photosScroll addSubview:imgView];
             counter ++;
         }
-        photosScroll.contentSize = CGSizeMake(photosScroll.frame.size.width, ((int)ceil(counter/3)+1)*105 + 20);
+        float contentSizeHeight = ((int)ceil(counter/3)+1)*105 + 20;
+        if(contentSizeHeight <= photosScroll.frame.size.height) {
+            contentSizeHeight = photosScroll.frame.size.height + 1;
+        }
+        photosScroll.contentSize = CGSizeMake(photosScroll.frame.size.width, contentSizeHeight);
     }
 }
 
@@ -212,7 +216,11 @@
         [photosScroll addSubview:imgView];
         counter ++;
     }
-    photosScroll.contentSize = CGSizeMake(photosScroll.frame.size.width, ((int)ceil(counter/3)+1)*105 + 20);
+    float contentSizeHeight = ((int)ceil(counter/3)+1)*105 + 20;
+    if(contentSizeHeight <= photosScroll.frame.size.height) {
+        contentSizeHeight = photosScroll.frame.size.height + 1;
+    }
+    photosScroll.contentSize = CGSizeMake(photosScroll.frame.size.width, contentSizeHeight);
     [photoList addObjectsFromArray:files];
     if (photoList.count == 0) {
         if (noItemCell == nil)
@@ -228,6 +236,52 @@
         [refreshControlAlbums endRefreshing];
     }
     isLoading = NO;
+}
+
+- (void) alignPhotosScrollPostDelete {
+    NSMutableArray *filteredFiles = [[NSMutableArray alloc] init];
+    NSMutableArray *ongoingFiles = [[NSMutableArray alloc] init];
+    for(id row in photoList) {
+        if([row isKindOfClass:[MetaFile class]]) {
+            MetaFile *file = (MetaFile *) row;
+            if(![selectedFileList containsObject:file.uuid]) {
+                [filteredFiles addObject:row];
+            }
+        } else {
+            [ongoingFiles addObject:row];
+        }
+    }
+    
+    for(UIView *subView in photosScroll.subviews) {
+        if([subView isKindOfClass:[SquareImageView class]]) {
+            if(((SquareImageView *) subView).uploadRef == nil) {
+                [subView removeFromSuperview];
+            }
+        }
+    }
+
+    int counter = (int)[ongoingFiles count];
+    for(MetaFile *row in filteredFiles) {
+        CGRect imgRect = CGRectMake(5 + (counter%3 * 105), 15 + ((int)floor(counter/3)*105), 100, 100);
+        SquareImageView *imgView = [[SquareImageView alloc] initWithFrame:imgRect withFile:row withSelectibleStatus:isSelectible];
+        imgView.delegate = self;
+        [photosScroll addSubview:imgView];
+        counter ++;
+    }
+    float contentSizeHeight = ((int)ceil(counter/3)+1)*105 + 20;
+    if(contentSizeHeight <= photosScroll.frame.size.height) {
+        contentSizeHeight = photosScroll.frame.size.height + 1;
+    }
+    photosScroll.contentSize = CGSizeMake(photosScroll.frame.size.width, contentSizeHeight);
+
+    self.photoList = ongoingFiles;
+    [photoList addObjectsFromArray:filteredFiles];
+
+    if (photoList.count == 0) {
+        if (noItemCell == nil)
+            noItemCell = [[NoItemCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"" imageName:@"no_photo_icon" titleText:NSLocalizedString(@"EmptyPhotosVideosTitle", @"") descriptionText:NSLocalizedString(@"EmptyPhotosVideosDescription", @"")];
+        [photosScroll addSubview:noItemCell];
+    }
 }
 
 - (void) photoListFailCallback:(NSString *) errorMessage {
@@ -258,12 +312,14 @@
 }
 
 - (void) deleteSuccessCallback {
+    [self alignPhotosScrollPostDelete];
+
     if(isSelectible) {
         [self cancelSelectible];
     }
     
     [self proceedSuccessForProgressViewWithAddButtonKey:albumTable.hidden ? @"PhotoTab" : @"AlbumTab"];
-    [self triggerRefresh];
+//    [self triggerRefresh];
 }
 
 - (void) deleteFailCallback:(NSString *) errorMessage {
@@ -342,7 +398,7 @@
 }
 
 - (void) squareImageWasSelectedForView:(SquareImageView *) squareRef {
-    UploadingImagePreviewController *preview = [[UploadingImagePreviewController alloc] initWithUploadReference:squareRef.uploadRef];
+    UploadingImagePreviewController *preview = [[UploadingImagePreviewController alloc] initWithUploadReference:squareRef.uploadRef withImage:squareRef.imgView.image];
     preview.oldDelegateRef = squareRef;
     MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:preview];
     preview.nav = modalNav;

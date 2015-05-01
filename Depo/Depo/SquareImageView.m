@@ -16,6 +16,7 @@
 @implementation SquareImageView
 
 @synthesize delegate;
+@synthesize imgView;
 @synthesize file;
 @synthesize uploadRef;
 @synthesize longPressGesture;

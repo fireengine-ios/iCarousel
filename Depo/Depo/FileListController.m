@@ -296,7 +296,7 @@
         if(uploadingCell.postFile != nil) {
             [self navigateToFileDetail:uploadingCell.postFile];
         } else {
-            UploadingImagePreviewController *preview = [[UploadingImagePreviewController alloc] initWithUploadReference:uploadingCell.uploadRef];
+            UploadingImagePreviewController *preview = [[UploadingImagePreviewController alloc] initWithUploadReference:uploadingCell.uploadRef withImage:uploadingCell.imgView.image];
             MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:preview];
             preview.nav = modalNav;
             preview.oldDelegateRef = uploadingCell;

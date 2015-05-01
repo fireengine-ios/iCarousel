@@ -50,9 +50,7 @@
 @synthesize tokenManager;
 @synthesize mapUtil;
 @synthesize progress;
-@synthesize syncManager;
 @synthesize wormhole;
-@synthesize uploadQueue;
 @synthesize activatedFromBackground;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -63,8 +61,6 @@
     }
     
     session = [[AppSession alloc] init];
-//    uploadQueue = [[UploadQueue alloc] init];
-    syncManager = [[SyncManager alloc] init];
     mapUtil = [[MapUtil alloc] init];
     wormhole = [[MMWormhole alloc] initWithApplicationGroupIdentifier:GROUP_NAME_SUITE_NSUSERDEFAULTS optionalDirectory:EXTENSION_WORMHOLE_DIR];
 
@@ -291,7 +287,7 @@
     [self.session stopAudioItem];
     [self.session cleanoutAfterLogout];
     [CacheUtil resetRememberMeToken];
-    [uploadQueue cancelAllUploads];
+    [[UploadQueue sharedInstance] cancelAllUploads];
 
     LoginController *login = [[LoginController alloc] init];
     MyNavigationController *loginNav = [[MyNavigationController alloc] initWithRootViewController:login];
@@ -358,7 +354,7 @@
 }
 
 - (void) startAutoSync {
-    [syncManager decideAndStartAutoSync];
+    [[SyncManager sharedInstance] decideAndStartAutoSync];
 }
 
 - (void) stopAutoSync {

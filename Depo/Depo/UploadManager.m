@@ -48,13 +48,12 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 }
 
 - (void) startTask {
-    /*
+
     bgTaskI = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
         [[UIApplication sharedApplication] endBackgroundTask:bgTaskI];
     }];
-     */
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         if(self.uploadRef.taskType == UploadTaskTypeAsset) {
             [self triggerAndStartAssetsTask];
         } else if(self.uploadRef.taskType == UploadTaskTypeFile) {
@@ -196,8 +195,10 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         }
         self.uploadTask = [[UploadQueue sharedInstance].session uploadTaskWithRequest:uploadRequest fromFile:[NSURL fileURLWithPath:self.uploadRef.tempUrl]];
         self.uploadTask.taskDescription = self.uploadRef.localHash;
-        [SyncUtil cacheSyncHashLocally:self.uploadRef.localHash];
-        [SyncUtil increaseAutoSyncIndex];
+        if(self.uploadRef.autoSyncFlag) {
+            [SyncUtil cacheSyncHashLocally:self.uploadRef.localHash];
+            [SyncUtil increaseAutoSyncIndex];
+        }
         [uploadTask resume];
         
         [[CurioSDK shared] sendEvent:@"UploadStarted" eventValue:[NSString stringWithFormat:@"file type: %@", fileType]];

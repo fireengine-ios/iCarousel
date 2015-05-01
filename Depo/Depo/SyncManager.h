@@ -18,6 +18,7 @@
 @property (nonatomic, strong) CLLocationManager *locManager;
 @property (nonatomic) BOOL autoSyncIterationInProgress;
 
++ (SyncManager *) sharedInstance;
 - (void) startFirstTimeSync;
 - (void) initializeNextAutoSyncPackage;
 - (void) manuallyCheckIfAlbumChanged;

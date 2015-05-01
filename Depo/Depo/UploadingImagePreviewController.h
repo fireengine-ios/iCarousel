@@ -21,6 +21,6 @@
 @property (nonatomic, strong) UIActivityIndicatorView *indicator;
 @property (nonatomic, strong) id oldDelegateRef;
 
-- (id) initWithUploadReference:(UploadRef *) ref;
+- (id) initWithUploadReference:(UploadRef *) ref withImage:(UIImage *) imgRef;
 
 @end

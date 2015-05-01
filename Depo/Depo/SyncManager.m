@@ -26,6 +26,15 @@
 @synthesize locManager;
 @synthesize autoSyncIterationInProgress;
 
++ (SyncManager *) sharedInstance {
+    static SyncManager *sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[SyncManager alloc] init];
+    });
+    return sharedInstance;
+}
+
 - (id) init {
     if(self = [super init]) {
         elasticSearchDao = [[ElasticSearchDao alloc] init];
@@ -219,7 +228,7 @@
                             }
                         }
                     }];
-                } else {
+                } else { 
                     NSTimeInterval timeInMilisecondsEnd = [[NSDate date] timeIntervalSince1970];
                     NSLog(@"Auto Sync End: %f", timeInMilisecondsEnd);
                     [SyncUtil writeLastSyncDate:[NSDate date]];

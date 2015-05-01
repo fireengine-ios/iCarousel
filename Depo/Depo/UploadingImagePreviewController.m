@@ -25,7 +25,8 @@
 @synthesize indicator;
 @synthesize oldDelegateRef;
 
-- (id) initWithUploadReference:(UploadRef *) ref {
+//TODO test
+- (id) initWithUploadReference:(UploadRef *) ref withImage:(UIImage *) imgRef {
     if(self = [super init]) {
         self.uploadRef = ref;
         self.title = self.uploadRef.fileName;
@@ -37,8 +38,15 @@
         imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, self.topIndex + 20, self.view.frame.size.width-20, self.view.frame.size.height - self.bottomIndex - 200)];
         imageView.contentMode = UIViewContentModeScaleAspectFill;
         imageView.clipsToBounds = YES;
+        imageView.image = imgRef;
         [self.view addSubview:imageView];
         
+        if(self.uploadRef.taskType == UploadTaskTypeFile) {
+            UIImage *thumbImageFromCam = [UIImage imageWithContentsOfFile:self.uploadRef.tempUrl];
+            imageView.image = [Util imageWithImage:thumbImageFromCam scaledToFillSize:CGSizeMake(40, 40)];
+        }
+        
+        /*
         @autoreleasepool {
             if(self.uploadRef.taskType == UploadTaskTypeAsset) {
                 if(self.uploadRef.assetUrl) {
@@ -51,16 +59,20 @@
                                 imageView.image = [UIImage imageWithCGImage:thumbnailRef];
                             }
                         } else {
-                            [assetsLibraryForSingle enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-                                [group enumerateAssetsWithOptions:NSEnumerationReverse usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
-                                    if([[result.defaultRepresentation.url absoluteString] isEqualToString:self.uploadRef.assetUrl]) {
-                                        CGImageRef thumbnailRef = [result.defaultRepresentation fullResolutionImage];
-                                        if (thumbnailRef) {
-                                            imageView.image = [UIImage imageWithCGImage:thumbnailRef];
-                                        }
-                                    }
-                                }];
-                            } failureBlock:nil];
+                            if(imageView.image == nil) {
+                                imageView.image = imgRef;
+                            }
+
+//                            [assetsLibraryForSingle enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+//                                [group enumerateAssetsWithOptions:NSEnumerationReverse usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
+//                                    if([[result.defaultRepresentation.url absoluteString] isEqualToString:self.uploadRef.assetUrl]) {
+//                                        CGImageRef thumbnailRef = [result.defaultRepresentation fullResolutionImage];
+//                                        if (thumbnailRef) {
+//                                            imageView.image = [UIImage imageWithCGImage:thumbnailRef];
+//                                        }
+//                                    }
+//                                }];
+//                            } failureBlock:nil];
                         }
                     } failureBlock:nil];
                 }
@@ -69,6 +81,7 @@
                 imageView.image = [Util imageWithImage:thumbImageFromCam scaledToFillSize:CGSizeMake(40, 40)];
             }
         }
+        */
         
         for(UploadManager *manager in [[UploadQueue sharedInstance].uploadManagers copy]) {
             if(!manager.uploadRef.hasFinished && [manager.uploadRef.fileUuid isEqualToString:self.uploadRef.fileUuid]) {
