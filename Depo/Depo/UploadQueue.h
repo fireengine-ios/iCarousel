@@ -30,5 +30,6 @@
 - (int) totalAutoSyncCount;
 - (int) finishedAutoSyncCount;
 - (void) manualAutoSyncIterationFinished;
+- (int) remainingCount;
 
 @end

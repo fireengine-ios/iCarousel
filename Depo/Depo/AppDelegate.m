@@ -444,7 +444,11 @@
 
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 25 * NSEC_PER_SEC),
                    dispatch_get_main_queue(), ^{
-                       completionHandler(UIBackgroundFetchResultNewData);
+                       if([[UploadQueue sharedInstance] remainingCount] > 0) {
+                           completionHandler(UIBackgroundFetchResultNewData);
+                       } else {
+                           completionHandler(UIBackgroundFetchResultNoData);
+                       }
                    });
 }
 
