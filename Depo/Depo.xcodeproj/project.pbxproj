@@ -522,6 +522,19 @@
 		05A7CE711A7FC27300020B6F /* karebg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05A7CE6E1A7FC27300020B6F /* karebg@2x.png */; };
 		05A7CE721A7FC27300020B6F /* karebg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05A7CE6F1A7FC27300020B6F /* karebg@3x.png */; };
 		05A8ADA51A5ABCD8007566BF /* UploadQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A8ADA41A5ABCD8007566BF /* UploadQueue.m */; };
+		05A938241AF6AE9100AE2892 /* Configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A938091AF6AE9100AE2892 /* Configuration.m */; };
+		05A938251AF6AE9100AE2892 /* Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A9380B1AF6AE9100AE2892 /* Controller.m */; };
+		05A938261AF6AE9100AE2892 /* CustomIOS7AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A9380D1AF6AE9100AE2892 /* CustomIOS7AlertView.m */; };
+		05A938271AF6AE9100AE2892 /* Filter.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A9380F1AF6AE9100AE2892 /* Filter.m */; };
+		05A938281AF6AE9100AE2892 /* FLImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A938111AF6AE9100AE2892 /* FLImageView.m */; };
+		05A938291AF6AE9100AE2892 /* FullyLoaded.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A938131AF6AE9100AE2892 /* FullyLoaded.m */; };
+		05A9382A1AF6AE9100AE2892 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A938151AF6AE9100AE2892 /* Message.m */; };
+		05A9382B1AF6AE9100AE2892 /* MessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A938171AF6AE9100AE2892 /* MessageView.m */; };
+		05A9382C1AF6AE9100AE2892 /* UIAlertViewCustom.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A9381A1AF6AE9100AE2892 /* UIAlertViewCustom.m */; };
+		05A9382D1AF6AE9100AE2892 /* UpdateCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A9381C1AF6AE9100AE2892 /* UpdateCheck.m */; };
+		05A9382E1AF6AE9100AE2892 /* updater_strings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05A9381E1AF6AE9100AE2892 /* updater_strings.plist */; };
+		05A9382F1AF6AE9100AE2892 /* UpdaterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A938201AF6AE9100AE2892 /* UpdaterController.m */; };
+		05A938301AF6AE9100AE2892 /* UpdateServerIntegration.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A938231AF6AE9100AE2892 /* UpdateServerIntegration.m */; };
 		05AD502B1A7ED75500C40777 /* TermsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AD502A1A7ED75500C40777 /* TermsController.m */; };
 		05AD502E1A7ED76200C40777 /* MigrateStatusController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AD502D1A7ED76200C40777 /* MigrateStatusController.m */; };
 		05AD7F821AD7FD0E0052153A /* MMWormhole.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AD7F811AD7FD0E0052153A /* MMWormhole.m */; };
@@ -1410,6 +1423,34 @@
 		05A7CE6F1A7FC27300020B6F /* karebg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "karebg@3x.png"; sourceTree = "<group>"; };
 		05A8ADA31A5ABCD8007566BF /* UploadQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadQueue.h; sourceTree = "<group>"; };
 		05A8ADA41A5ABCD8007566BF /* UploadQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadQueue.m; sourceTree = "<group>"; };
+		05A938081AF6AE9100AE2892 /* Configuration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Configuration.h; sourceTree = "<group>"; };
+		05A938091AF6AE9100AE2892 /* Configuration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Configuration.m; sourceTree = "<group>"; };
+		05A9380A1AF6AE9100AE2892 /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Controller.h; sourceTree = "<group>"; };
+		05A9380B1AF6AE9100AE2892 /* Controller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Controller.m; sourceTree = "<group>"; };
+		05A9380C1AF6AE9100AE2892 /* CustomIOS7AlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomIOS7AlertView.h; sourceTree = "<group>"; };
+		05A9380D1AF6AE9100AE2892 /* CustomIOS7AlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomIOS7AlertView.m; sourceTree = "<group>"; };
+		05A9380E1AF6AE9100AE2892 /* Filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Filter.h; sourceTree = "<group>"; };
+		05A9380F1AF6AE9100AE2892 /* Filter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Filter.m; sourceTree = "<group>"; };
+		05A938101AF6AE9100AE2892 /* FLImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLImageView.h; sourceTree = "<group>"; };
+		05A938111AF6AE9100AE2892 /* FLImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLImageView.m; sourceTree = "<group>"; };
+		05A938121AF6AE9100AE2892 /* FullyLoaded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullyLoaded.h; sourceTree = "<group>"; };
+		05A938131AF6AE9100AE2892 /* FullyLoaded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullyLoaded.m; sourceTree = "<group>"; };
+		05A938141AF6AE9100AE2892 /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		05A938151AF6AE9100AE2892 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
+		05A938161AF6AE9100AE2892 /* MessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageView.h; sourceTree = "<group>"; };
+		05A938171AF6AE9100AE2892 /* MessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageView.m; sourceTree = "<group>"; };
+		05A938181AF6AE9100AE2892 /* MessageViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewDelegate.h; sourceTree = "<group>"; };
+		05A938191AF6AE9100AE2892 /* UIAlertViewCustom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAlertViewCustom.h; sourceTree = "<group>"; };
+		05A9381A1AF6AE9100AE2892 /* UIAlertViewCustom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAlertViewCustom.m; sourceTree = "<group>"; };
+		05A9381B1AF6AE9100AE2892 /* UpdateCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateCheck.h; sourceTree = "<group>"; };
+		05A9381C1AF6AE9100AE2892 /* UpdateCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateCheck.m; sourceTree = "<group>"; };
+		05A9381D1AF6AE9100AE2892 /* UpdateCheckDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateCheckDelegate.h; sourceTree = "<group>"; };
+		05A9381E1AF6AE9100AE2892 /* updater_strings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = updater_strings.plist; sourceTree = "<group>"; };
+		05A9381F1AF6AE9100AE2892 /* UpdaterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdaterController.h; sourceTree = "<group>"; };
+		05A938201AF6AE9100AE2892 /* UpdaterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdaterController.m; sourceTree = "<group>"; };
+		05A938211AF6AE9100AE2892 /* UpdaterControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdaterControllerDelegate.h; sourceTree = "<group>"; };
+		05A938221AF6AE9100AE2892 /* UpdateServerIntegration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateServerIntegration.h; sourceTree = "<group>"; };
+		05A938231AF6AE9100AE2892 /* UpdateServerIntegration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateServerIntegration.m; sourceTree = "<group>"; };
 		05AD50291A7ED75500C40777 /* TermsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TermsController.h; sourceTree = "<group>"; };
 		05AD502A1A7ED75500C40777 /* TermsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TermsController.m; sourceTree = "<group>"; };
 		05AD502C1A7ED76200C40777 /* MigrateStatusController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MigrateStatusController.h; sourceTree = "<group>"; };
@@ -2220,6 +2261,7 @@
 		051E1E3A19CAC8EA00FD1E03 /* out */ = {
 			isa = PBXGroup;
 			children = (
+				05A938071AF6AE7C00AE2892 /* TurkcellUpdaterSDK */,
 				05AD7F831AD7FD160052153A /* MMWormhole.h */,
 				05AD7F841AD7FD160052153A /* MMWormhole.m */,
 				05B01D9A1AC2E2D000D5B827 /* NSDate+Utilities.h */,
@@ -2749,6 +2791,41 @@
 			name = fonts;
 			sourceTree = "<group>";
 		};
+		05A938071AF6AE7C00AE2892 /* TurkcellUpdaterSDK */ = {
+			isa = PBXGroup;
+			children = (
+				05A938081AF6AE9100AE2892 /* Configuration.h */,
+				05A938091AF6AE9100AE2892 /* Configuration.m */,
+				05A9380A1AF6AE9100AE2892 /* Controller.h */,
+				05A9380B1AF6AE9100AE2892 /* Controller.m */,
+				05A9380C1AF6AE9100AE2892 /* CustomIOS7AlertView.h */,
+				05A9380D1AF6AE9100AE2892 /* CustomIOS7AlertView.m */,
+				05A9380E1AF6AE9100AE2892 /* Filter.h */,
+				05A9380F1AF6AE9100AE2892 /* Filter.m */,
+				05A938101AF6AE9100AE2892 /* FLImageView.h */,
+				05A938111AF6AE9100AE2892 /* FLImageView.m */,
+				05A938121AF6AE9100AE2892 /* FullyLoaded.h */,
+				05A938131AF6AE9100AE2892 /* FullyLoaded.m */,
+				05A938141AF6AE9100AE2892 /* Message.h */,
+				05A938151AF6AE9100AE2892 /* Message.m */,
+				05A938161AF6AE9100AE2892 /* MessageView.h */,
+				05A938171AF6AE9100AE2892 /* MessageView.m */,
+				05A938181AF6AE9100AE2892 /* MessageViewDelegate.h */,
+				05A938191AF6AE9100AE2892 /* UIAlertViewCustom.h */,
+				05A9381A1AF6AE9100AE2892 /* UIAlertViewCustom.m */,
+				05A9381B1AF6AE9100AE2892 /* UpdateCheck.h */,
+				05A9381C1AF6AE9100AE2892 /* UpdateCheck.m */,
+				05A9381D1AF6AE9100AE2892 /* UpdateCheckDelegate.h */,
+				05A9381E1AF6AE9100AE2892 /* updater_strings.plist */,
+				05A9381F1AF6AE9100AE2892 /* UpdaterController.h */,
+				05A938201AF6AE9100AE2892 /* UpdaterController.m */,
+				05A938211AF6AE9100AE2892 /* UpdaterControllerDelegate.h */,
+				05A938221AF6AE9100AE2892 /* UpdateServerIntegration.h */,
+				05A938231AF6AE9100AE2892 /* UpdateServerIntegration.m */,
+			);
+			name = TurkcellUpdaterSDK;
+			sourceTree = "<group>";
+		};
 		05AD7F7F1AD7FCFF0052153A /* out */ = {
 			isa = PBXGroup;
 			children = (
@@ -3093,6 +3170,7 @@
 				0526448B19D5A26400B63759 /* camera_icon@2x.png in Resources */,
 				058219D81A3850E2001FA679 /* close_icon.png in Resources */,
 				051CB3F619D2F71200E5FC88 /* document_icon.png in Resources */,
+				05A9382E1AF6AE9100AE2892 /* updater_strings.plist in Resources */,
 				057C9D881A2B8D68001DDDEC /* music_next.png in Resources */,
 				050A7B2019F7CBB600B084B9 /* volume_level@2x.png in Resources */,
 				058BC22F1A308ACB0007F4DE /* video_tour@2x.png in Resources */,
@@ -3444,6 +3522,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0557C73819D1C905005E9F6B /* MetaFile.m in Sources */,
+				05A938271AF6AE9100AE2892 /* Filter.m in Sources */,
 				052644BF19D5A32300B63759 /* TextCell.m in Sources */,
 				059A46DD1A6D3E2000935023 /* Subscription.m in Sources */,
 				058B328E1A14ABCB00A291C4 /* RenameAlbumDao.m in Sources */,
@@ -3456,11 +3535,13 @@
 				05B01D9C1AC2E2D000D5B827 /* NSDate+Utilities.m in Sources */,
 				0526444819D546BB00B63759 /* MapUtil.m in Sources */,
 				05DEB1F11A81775F007793DD /* SyncSettings.m in Sources */,
+				05A9382D1AF6AE9100AE2892 /* UpdateCheck.m in Sources */,
 				05754C141AC711EA00727B42 /* SyncInfoHeaderView.m in Sources */,
 				05C2A0351A79830500EE4D78 /* ADJTimer.m in Sources */,
 				052644AF19D5A2A600B63759 /* SettingsDocumentsController.m in Sources */,
 				05368B471A4AD29C00B79403 /* SyncManager.m in Sources */,
 				051E1E5819CAC90700FD1E03 /* AFURLConnectionOperation.m in Sources */,
+				05A938291AF6AE9100AE2892 /* FullyLoaded.m in Sources */,
 				05C2A0371A79830500EE4D78 /* ADJUtil.m in Sources */,
 				05C0C70D1A7D73EA0078F826 /* LogoutDao.m in Sources */,
 				057C9D8C1A2B903E001DDDEC /* NSMutableArray_Shuffling.m in Sources */,
@@ -3475,6 +3556,7 @@
 				058337D619ED9AF300DCF0C5 /* VideoPreviewController.m in Sources */,
 				059A46E21A6D3E3F00935023 /* DeviceDao.m in Sources */,
 				051CB3A119D2E42300E5FC88 /* DocCell.m in Sources */,
+				05A938261AF6AE9100AE2892 /* CustomIOS7AlertView.m in Sources */,
 				057DF50B19D04EDF0005A389 /* RequestBaseUrlDao.m in Sources */,
 				0555EF1D19F91ACA0068F4CC /* SimpleButton.m in Sources */,
 				051E1EAE19CB20D500FD1E03 /* MenuSearchCell.m in Sources */,
@@ -3543,6 +3625,7 @@
 				051E1E0719CAC2F900FD1E03 /* AppDelegate.m in Sources */,
 				0555EF1A19F8F50B0068F4CC /* ConfirmDeleteModalController.m in Sources */,
 				05C0E2011A06ABD7005E1E92 /* MoveModalFooterView.m in Sources */,
+				05A938241AF6AE9100AE2892 /* Configuration.m in Sources */,
 				05620F211A4C62B30089DFB5 /* SyncReference.m in Sources */,
 				0556EA571A19EA0700123A14 /* SearchHistory.m in Sources */,
 				052160A319E2E56B0007B321 /* DepoUploadTask.m in Sources */,
@@ -3560,10 +3643,12 @@
 				051E1E8319CAC92700FD1E03 /* SBJsonBase.m in Sources */,
 				053F993419E1B88100928F22 /* ImagePreviewController.m in Sources */,
 				052644B119D5A2A600B63759 /* SettingsBaseViewController.m in Sources */,
+				05A9382A1AF6AE9100AE2892 /* Message.m in Sources */,
 				054730C319FA3D5A00F913FF /* FavoriteDao.m in Sources */,
 				05DEB1EF1A81775F007793DD /* SyncDBUtils.m in Sources */,
 				05C2A0331A79830500EE4D78 /* ADJPackageHandler.m in Sources */,
 				057DF50819D038080005A389 /* RequestTokenDao.m in Sources */,
+				05A938301AF6AE9100AE2892 /* UpdateServerIntegration.m in Sources */,
 				052644BD19D5A32300B63759 /* TitleCell.m in Sources */,
 				054206DE19DD6DCD0026771C /* UploadManager.m in Sources */,
 				05C2A0251A79830500EE4D78 /* ADJActivityHandler.m in Sources */,
@@ -3576,6 +3661,8 @@
 				05E8112F19DF09DB0063F99A /* AlbumListModalController.m in Sources */,
 				05C2A0281A79830500EE4D78 /* ADJActivityState.m in Sources */,
 				051E1E5419CAC90700FD1E03 /* AFImageRequestOperation.m in Sources */,
+				05A9382B1AF6AE9100AE2892 /* MessageView.m in Sources */,
+				05A938281AF6AE9100AE2892 /* FLImageView.m in Sources */,
 				052644B419D5A2A600B63759 /* SettingsConnectedDevicesController.m in Sources */,
 				052A221F19F67FB5000C3C75 /* MBProgressHUD.m in Sources */,
 				051E1E8819CAC92700FD1E03 /* ASIDataDecompressor.m in Sources */,
@@ -3602,6 +3689,7 @@
 				058219C41A384CC6001FA679 /* SearchModalController.m in Sources */,
 				562FB3F71AA48C4400F9EFBD /* CurioAction.m in Sources */,
 				051CB38F19D2DD7100E5FC88 /* FileListController.m in Sources */,
+				05A9382C1AF6AE9100AE2892 /* UIAlertViewCustom.m in Sources */,
 				05E8113219DF0ACB0063F99A /* MetaAlbum.m in Sources */,
 				05AF7C871A1C8EEB00F5011A /* RecentActivitiesDao.m in Sources */,
 				05C2A02B1A79830500EE4D78 /* ADJAdjustFactory.m in Sources */,
@@ -3609,6 +3697,7 @@
 				050D4C351A31E17F00809A01 /* PostLoginSyncContactController.m in Sources */,
 				051DE35C19CC128600F27C85 /* MyNavigationController.m in Sources */,
 				05C2A0261A79830500EE4D78 /* ADJActivityKind.m in Sources */,
+				05A9382F1AF6AE9100AE2892 /* UpdaterController.m in Sources */,
 				051E1E8219CAC92700FD1E03 /* SBJSON.m in Sources */,
 				051DE37219CC140100F27C85 /* CustomAlertView.m in Sources */,
 				059E9A021A35DB5F00922A77 /* SmsForPassButton.m in Sources */,
@@ -3687,6 +3776,7 @@
 				562FB4031AA48C4400F9EFBD /* CurioSDK.m in Sources */,
 				05501F3819EBBB4600CA9F4E /* AlbumDetailDao.m in Sources */,
 				05DEB1EB1A81775F007793DD /* ContactSyncSDK.m in Sources */,
+				05A938251AF6AE9100AE2892 /* Controller.m in Sources */,
 				05DA564C1A56D5B3007D2B1D /* ALAssetRepresentation+MD5.m in Sources */,
 				05AD7F851AD7FD160052153A /* MMWormhole.m in Sources */,
 				05C244331A0243BE000D65D0 /* SortTypeCell.m in Sources */,

@@ -177,6 +177,10 @@
 //#define CONTACT_SYNC_SERVER_URL @"https://tcloudstb.turkcell.com.tr/sync/ttyapi/"
 #define CONTACT_SYNC_SERVER_URL @"https://adepo.turkcell.com.tr/ttyapi/"
 
+//TODO
+//#define UPDATER_SDK_URL @"http://www.igones.com/adepo/ios_igones.json"
+#define UPDATER_SDK_URL @"https://adepo.turkcell.com.tr/download/update_ios.json"
+
 #define SuppressPerformSelectorLeakWarning(Stuff) \
 do { \
 _Pragma("clang diagnostic push") \

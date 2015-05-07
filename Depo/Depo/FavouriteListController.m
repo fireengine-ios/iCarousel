@@ -22,6 +22,7 @@
 #import "PreviewUnavailableController.h"
 #import "MessageCell.h"
 #import "BaseViewController.h"
+#import "NoItemCell.h"
 
 @interface FavouriteListController ()
 
@@ -162,7 +163,8 @@
             cell = [[MessageCell alloc]initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"ConnectionErrorWarning", @"")];
         }
         else if ([fileList count] == 0) {
-            cell = [[MessageCell alloc]initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"NoFavouriteFound", @"")];
+            cell = [[NoItemCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier imageName:@"empty_state_icon" titleText:NSLocalizedString(@"NoFavouriteFound", @"") descriptionText:@""];
+            //[[MessageCell alloc]initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"NoFavouriteFound", @"")];
         }
     }
     return cell;

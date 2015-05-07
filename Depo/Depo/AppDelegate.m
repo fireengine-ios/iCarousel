@@ -38,8 +38,9 @@
 
 #import "MMWormhole.h"
 
-//TODO MACRO TANIMLANACAK (extension group id için)
+#import "UpdaterController.h"
 
+//TODO MACRO TANIMLANACAK (extension group id için)
 
 //TODO info'larda version update
 
@@ -111,18 +112,9 @@
         UIAlertView *noConnAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", @"") message:NSLocalizedString(@"ConnectionErrorWarning", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"SubmitButtonTitle", @"") otherButtonTitles:nil];
         [noConnAlert show];
     } else {
-        if([CacheUtil readRememberMeToken] != nil) {
-            [tokenManager requestToken];
-            [self showMainLoading];
-        } else {
-            if(![AppUtil readFirstVisitOverFlag]) {
-                //Uygulama silinip tekrar kurulursa eski badge degerini koruyor. Bunun engellenmesi icin eklendi
-                [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
-                [self triggerPreLogin];
-            } else {
-                [self triggerLogin];
-            }
-        }
+        UpdaterController *updaterController = [UpdaterController initWithUpdateURL:UPDATER_SDK_URL delegate:self postProperties:NO];
+        [self.window addSubview:updaterController];
+        [updaterController getUpdateInformation];
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginRequiredNotificationRaised) name:LOGIN_REQ_NOTIFICATION object:nil];
@@ -516,6 +508,26 @@ void uncaughtExceptionHandler(NSException *exception) {
 //    NSLog(@"CRASH: %@", exception);
 //    NSLog(@"Stack Trace: %@", [exception callStackSymbols]);
     [[UploadQueue sharedInstance] cancelAllUploads];
+}
+
+- (void) updateActionChosen {
+    NSLog(@"At updateActionChosen");
+}
+
+- (void) updateCheckCompleted{
+    NSLog(@"At updateCheckCompleted");
+    if([CacheUtil readRememberMeToken] != nil) {
+        [tokenManager requestToken];
+        [self showMainLoading];
+    } else {
+        if(![AppUtil readFirstVisitOverFlag]) {
+            //Uygulama silinip tekrar kurulursa eski badge degerini koruyor. Bunun engellenmesi icin eklendi
+            [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+            [self triggerPreLogin];
+        } else {
+            [self triggerLogin];
+        }
+    }
 }
 
 @end

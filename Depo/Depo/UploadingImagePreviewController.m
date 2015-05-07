@@ -25,7 +25,6 @@
 @synthesize indicator;
 @synthesize oldDelegateRef;
 
-//TODO test
 - (id) initWithUploadReference:(UploadRef *) ref withImage:(UIImage *) imgRef {
     if(self = [super init]) {
         self.uploadRef = ref;

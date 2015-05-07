@@ -12,6 +12,7 @@
 #import "MBProgressHUD.h"
 #import "SyncManager.h"
 #import "UploadQueue.h"
+#import "UpdaterControllerDelegate.h"
 
 @class CustomAlertView;
 @class CustomConfirmView;
@@ -23,7 +24,7 @@
 
 #define APPDELEGATE ((AppDelegate *)[[UIApplication sharedApplication] delegate])
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, TokenManagerDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, TokenManagerDelegate, UpdaterControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) AppSession *session;

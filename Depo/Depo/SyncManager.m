@@ -137,6 +137,8 @@
                                     [self startUploadForAsset:asset andLocalHash:localHash];
                                     [SyncUtil lockAutoSyncBlockInProgress];
                                     [SyncUtil updateLastSyncDate];
+                                } else {
+                                    [SyncUtil increaseAutoSyncIndex];
                                 }
                             }
                         }

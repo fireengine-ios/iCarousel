@@ -464,3 +464,6 @@
 "UploadingPhotoCompleteStatus"="%%%d tamamlandı";
 "UploadingPhotoFinishedSuccessfully"="Fotoğraf başarıyla yüklendi";
 "UploadingPhotoFinishedWithError"="Yükleme esnasında hata oluştu";
+
+"LocalNotificationManualUploadsFinished"="Yüklemeler tamamlandı, telefon hafızanızda yer açmak için bu dosyaları telefonunuzdan silebilirsiniz.";
+"LocalNotificationAutoUploadsFinished"="Fotoğraf / videonuz Akıllı Deponuza otomatik yüklendi. Görüntülemek ister misiniz?";
