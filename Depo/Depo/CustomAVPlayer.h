@@ -29,6 +29,7 @@
 @property (nonatomic) CGRect maxRect;
 @property (nonatomic) CGRect maxLandscapeRect;
 @property (nonatomic) CGPoint lastContact;
+@property (nonatomic) int playerTryCount;
 @property (nonatomic) float currentVolume;
 @property (nonatomic, strong) MetaFile *video;
 @property (nonatomic, strong) CustomAVControl *controlView;

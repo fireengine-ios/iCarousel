@@ -164,8 +164,13 @@
 
 #define MAX_CONCURRENT_UPLOAD_TASKS 1
 
-//TODO group id for shared nsuserdefaults - this will be revisited for Turkcell - igones: group.com.igones.Depo
+#ifdef PLATFORM_STORE
+#define GROUP_NAME_SUITE_NSUSERDEFAULTS @"group.com.turkcell.akillidepo"
+#elif defined PLATFORM_ICT
 #define GROUP_NAME_SUITE_NSUSERDEFAULTS @"group.com.turkcell.akillideponew.ent"
+#else
+#define GROUP_NAME_SUITE_NSUSERDEFAULTS @"group.com.igones.Depo"
+#endif
 
 #define EXTENSION_WORMHOLE_DIR @"WORMHOLE_DIR"
 
@@ -173,8 +178,6 @@
 
 #define EXTENSION_WORMHOLE_FINISHED_COUNT_IDENTIFIER @"EXTENSION_WORMHOLE_FINISHED_COUNT_IDENTIFIER"
 
-//TODO
-//#define CONTACT_SYNC_SERVER_URL @"https://tcloudstb.turkcell.com.tr/sync/ttyapi/"
 #define CONTACT_SYNC_SERVER_URL @"https://adepo.turkcell.com.tr/ttyapi/"
 
 //TODO
@@ -335,7 +338,8 @@ typedef enum {
     NotificationActionMain = 1,
     NotificationActionSyncSettings,
     NotificationActionFloatingMenu,
-    NotificationActionPackages
+    NotificationActionPackages,
+    NotificationActionPhotos
 } NotificationAction;
 
 typedef enum {

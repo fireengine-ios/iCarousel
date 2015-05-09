@@ -97,6 +97,7 @@
 
 - (void) renameSuccessCallback:(MetaFile *) updatedFileRef {
     [self proceedSuccessForProgressView];
+    self.file.name = updatedFileRef.name;
     self.file.visibleName = updatedFileRef.name;
     self.file.lastModified = updatedFileRef.lastModified;
     self.title = self.file.visibleName;

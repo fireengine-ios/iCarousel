@@ -659,6 +659,7 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
     [self proceedSuccessForProgressView];
 
     MetaFile *file = [APPDELEGATE.session itemRefForCurrentAsset];
+    file.name = updatedFileRef.name;
     file.visibleName = updatedFileRef.name;
     file.lastModified = updatedFileRef.lastModified;
 //    self.title = file.visibleName;

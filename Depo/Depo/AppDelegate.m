@@ -24,6 +24,7 @@
 #import "PreLoginController.h"
 #import "LoginController.h"
 #import "PostLoginSyncPrefController.h"
+#import "PhotoListController.h"
 
 #import "MigrateStatusController.h"
 #import "TermsController.h"
@@ -39,8 +40,6 @@
 #import "MMWormhole.h"
 
 #import "UpdaterController.h"
-
-//TODO MACRO TANIMLANACAK (extension group id için)
 
 //TODO info'larda version update
 
@@ -91,9 +90,12 @@
     tokenManager = [[TokenManager alloc] init];
     tokenManager.delegate = self;
     
-    if (launchOptions != nil && launchOptions[@"action"] != nil) {
+    if (launchOptions != nil && (launchOptions[@"action"] != nil || launchOptions[UIApplicationLaunchOptionsLocalNotificationKey] != nil)) {
         NSString *actionString = launchOptions[@"action"];
-        NSLog(@"Notification Action: %@", actionString);
+        if(actionString == nil && launchOptions[UIApplicationLaunchOptionsLocalNotificationKey] != nil) {
+            UILocalNotification *localNotification = launchOptions[UIApplicationLaunchOptionsLocalNotificationKey];
+            actionString = [localNotification userInfo][@"action"];
+        }
         
         if ([actionString isEqualToString:@"main"]) {
             self.notifitacionAction = NotificationActionMain;
@@ -103,6 +105,8 @@
             self.notifitacionAction = NotificationActionFloatingMenu;
         } else if ([actionString isEqualToString:@"packages"]) {
             self.notifitacionAction = NotificationActionPackages;
+        } else if ([actionString isEqualToString:@"photos_videos"]) {
+            self.notifitacionAction = NotificationActionPhotos;
         }
     }
     
@@ -120,7 +124,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginRequiredNotificationRaised) name:LOGIN_REQ_NOTIFICATION object:nil];
 
 //    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
-    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
+//    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
     
     [self.window makeKeyAndVisible];
     return YES;
@@ -219,6 +223,8 @@
             [self triggerStorageSettings];
         } else if (self.notifitacionAction == NotificationActionFloatingMenu) {
             [self triggerFloatingMenu];
+        } else if (self.notifitacionAction == NotificationActionPhotos) {
+            [self triggerPhotosAndVideos];
         } else {
             [self triggerHome];
         }
@@ -230,6 +236,12 @@
 - (void) triggerHome {
     MyViewController *homeController = [[HomeController alloc] init];
     base = [[BaseViewController alloc] initWithRootViewController:homeController];
+    [self.window setRootViewController:base];
+}
+
+- (void) triggerPhotosAndVideos {
+    MyViewController *photosController = [[PhotoListController alloc] init];
+    base = [[BaseViewController alloc] initWithRootViewController:photosController];
     [self.window setRootViewController:base];
 }
 
@@ -380,6 +392,10 @@
 
 - (void) hideMainLoading {
     [progress hide:YES];
+}
+
+- (void) application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    [self application:application didFinishLaunchingWithOptions:notification.userInfo];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {

@@ -9,8 +9,13 @@
 #import "TodayViewController.h"
 #import <NotificationCenter/NotificationCenter.h>
 
-//TODO group id for shared nsuserdefaults - this will be revisited for Turkcell - igones: group.com.igones.Depo
+#ifdef PLATFORM_STORE
+#define GROUP_NAME_SUITE_NSUSERDEFAULTS @"group.com.turkcell.akillidepo"
+#elif defined PLATFORM_ICT
 #define GROUP_NAME_SUITE_NSUSERDEFAULTS @"group.com.turkcell.akillideponew.ent"
+#else
+#define GROUP_NAME_SUITE_NSUSERDEFAULTS @"group.com.igones.Depo"
+#endif
 
 #define EXTENSION_WORMHOLE_DIR @"WORMHOLE_DIR"
 

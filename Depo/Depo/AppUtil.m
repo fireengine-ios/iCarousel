@@ -526,6 +526,7 @@
     localNotification.fireDate = dateToSend;
     localNotification.alertBody = msg;
     localNotification.soundName = UILocalNotificationDefaultSoundName;
+    localNotification.userInfo = @{@"action":@"photos_videos"};
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
 }
 

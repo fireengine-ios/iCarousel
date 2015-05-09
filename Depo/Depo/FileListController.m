@@ -520,6 +520,7 @@
 
 - (void) renameSuccessCallback:(MetaFile *) updatedFileRef {
     [self proceedSuccessForProgressView];
+    self.folder.name = updatedFileRef.name;
     self.folder.visibleName = updatedFileRef.name;
     self.folder.lastModified = updatedFileRef.lastModified;
     self.title = self.folder.visibleName;

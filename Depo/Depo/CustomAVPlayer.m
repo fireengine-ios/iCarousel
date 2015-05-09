@@ -10,6 +10,8 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "VolumeSliderView.h"
 
+#define CUSTOM_AV_PLAYER_STALL_TRY_COUNT 20
+
 static void *AVPlayerPlaybackViewControllerRateObservationContext = &AVPlayerPlaybackViewControllerRateObservationContext;
 static void *AVPlayerPlaybackViewControllerStatusObservationContext = &AVPlayerPlaybackViewControllerStatusObservationContext;
 static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPlayerPlaybackViewControllerCurrentItemObservationContext;
@@ -33,6 +35,7 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
 @synthesize lastContact;
 @synthesize isPlayable;
 @synthesize currentVolume;
+@synthesize playerTryCount;
 
 - (id)initWithFrame:(CGRect)frame withVideo:(MetaFile *) _video {
     self = [super initWithFrame:frame];
@@ -46,6 +49,7 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
         self.maxLandscapeRect = CGRectMake(frame.origin.x, frame.origin.y, APPDELEGATE.window.frame.size.height-frame.origin.x, APPDELEGATE.window.frame.size.width-frame.origin.y);
         
         self.currentVolume = 1.0f;
+        self.playerTryCount = -1;
 
         [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(orientationChanged:)    name:UIDeviceOrientationDidChangeNotification  object:nil];
     }
@@ -140,13 +144,16 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
     
     /* Observe the player item "status" key to determine when it is ready to play. */
     [self.mPlayerItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:AVPlayerPlaybackViewControllerStatusObservationContext];
-	
+
+    [self.mPlayerItem addObserver:self forKeyPath:@"playbackLikelyToKeepUp" options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerContinue) name:@"PlayerContinueNotification" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerHanging) name:@"PlayerHangingNotification" object:nil];
+
     /* When the player item has played to its end time we'll toggle
      the movie controller Pause button to be the Play button */
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(playerItemDidReachEnd:)
-                                                 name:AVPlayerItemDidPlayToEndTimeNotification
-                                               object:self.mPlayerItem];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerItemDidReachEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:self.mPlayerItem];
 	
     self.seekToZeroBeforePlay = NO;
 	
@@ -193,7 +200,15 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
 }
 
 - (void)observeValueForKeyPath:(NSString*) path ofObject:(id)object change:(NSDictionary*)change context:(void*)context {
-	if (context == AVPlayerPlaybackViewControllerStatusObservationContext) {
+    if ([path isEqualToString:@"playbackLikelyToKeepUp"]) {
+        if (self.player.currentItem.playbackLikelyToKeepUp == NO &&
+            CMTIME_COMPARE_INLINE(self.player.currentTime, >, kCMTimeZero) &&
+            CMTIME_COMPARE_INLINE(self.player.currentTime, !=, self.player.currentItem.duration)) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"PlayerHangingNotification" object:nil];
+        }
+    }
+    
+    if (context == AVPlayerPlaybackViewControllerStatusObservationContext) {
         //		[self syncPlayPauseButtons];
         
         AVPlayerStatus status = [[change objectForKey:NSKeyValueChangeNewKey] integerValue];
@@ -204,6 +219,7 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
                 
             case AVPlayerStatusReadyToPlay: {
                 [self.player play];
+                self.playerTryCount = 0;
                 [self.controlView videoDidStart];
                 
                 float currentVolumeVal = 1.0f;
@@ -472,5 +488,45 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
     [self.controlView initialVolumeLevel:currentVolumeVal];
 }
 
+- (void) playerHanging {
+    if (playerTryCount <= CUSTOM_AV_PLAYER_STALL_TRY_COUNT) {
+        playerTryCount += 1;
+        [self customAVShouldPause];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"PlayerContinueNotification" object:nil];
+    } else {
+        [self customAVShouldPause];
+        [self assetFailedToPrepareForPlayback:nil];
+    }
+}
+
+- (void) playerContinue {
+    if (CMTIME_COMPARE_INLINE(self.player.currentTime, ==, self.player.currentItem.duration)) {
+        //mahir: played to the end, do nothing, let AVPlayerItemDidPlayToEndTimeNotification do the work
+        return;
+    } else if(playerTryCount > CUSTOM_AV_PLAYER_STALL_TRY_COUNT) {
+        [self customAVShouldPause];
+        [self assetFailedToPrepareForPlayback:nil];
+        return;
+    } else if(playerTryCount == 0) {
+        return;
+    } else if (self.player.currentItem.playbackLikelyToKeepUp == YES) {
+        [self.player play];
+        playerTryCount = 0;
+    } else {
+        playerTryCount += 1;
+        double delayInSeconds = 0.5;
+        dispatch_time_t executeTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(executeTime, dispatch_get_main_queue(), ^{
+            if (playerTryCount > 0) {
+                if (playerTryCount <= CUSTOM_AV_PLAYER_STALL_TRY_COUNT) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"PlayerContinueNotification" object:nil];
+                } else {
+                    [self customAVShouldPause];
+                    [self assetFailedToPrepareForPlayback:nil];
+                }
+            }
+        });
+    }
+}
 
 @end

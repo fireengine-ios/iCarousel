@@ -280,8 +280,8 @@
     NSLog(@"At MyView cameraCapturaModalDidCancel");
 }
 
-- (void) cameraCapturaModalDidCaptureAndStoreImageToPath:(NSString *)filepath {
-    NSLog(@"At MyView cameraCapturaModalDidCaptureAndStoreImageToPath for filePath:%@", filepath);
+- (void) cameraCapturaModalDidCaptureAndStoreImageToPath:(NSString *)filepath withName:(NSString *)fileName {
+    NSLog(@"At MyView cameraCapturaModalDidCaptureAndStoreImageToPath for filePath:%@ and name:%@", filepath, fileName);
 }
 
 - (void) photoModalDidTriggerUploadForUrls:(NSArray *)assetUrls {
