@@ -395,7 +395,8 @@
 }
 
 - (void) application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
-    [self application:application didFinishLaunchingWithOptions:notification.userInfo];
+    //Uygulama açıkken akış bozulmasın diye burası commentlendi
+//    [self application:application didFinishLaunchingWithOptions:notification.userInfo];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
