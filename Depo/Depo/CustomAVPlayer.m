@@ -250,7 +250,9 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
 	} else if (context == AVPlayerPlaybackViewControllerCurrentItemObservationContext) {
 	} else if(context==VLAirplayButtonObservationContext){
     } else {
-		[super observeValueForKeyPath:path ofObject:object change:change context:context];
+        if(![path isEqualToString:@"playbackLikelyToKeepUp"]) {
+            [super observeValueForKeyPath:path ofObject:object change:change context:context];
+        }
 	}
 }
 

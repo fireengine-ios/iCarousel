@@ -18,6 +18,7 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "ReachabilityManager.h"
 #import "Reachability.h"
+#import "AppUtil.h"
 
 @implementation SyncManager
 
@@ -224,13 +225,13 @@
                                     }
                                     if(shouldStartUpload) {
                                         NSLog(@"At ManuallyCheckIfAlbumChanged : starting upload for asset: %@", asset.defaultRepresentation.filename);
-                                        [self startUploadForAsset:asset andLocalHash:localHash];
+                                        [[SyncManager sharedInstance] startUploadForAsset:asset andLocalHash:localHash];
                                     }
                                 }
                             }
                         }
                     }];
-                } else { 
+                } else {
                     NSTimeInterval timeInMilisecondsEnd = [[NSDate date] timeIntervalSince1970];
                     NSLog(@"Auto Sync End: %f", timeInMilisecondsEnd);
                     [SyncUtil writeLastSyncDate:[NSDate date]];
