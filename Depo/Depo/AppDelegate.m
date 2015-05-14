@@ -60,6 +60,10 @@
         [application setStatusBarStyle:UIStatusBarStyleLightContent];
     }
     
+#ifdef LOG2FILE
+    [self logToFiles];
+#endif
+    
     session = [[AppSession alloc] init];
     mapUtil = [[MapUtil alloc] init];
     wormhole = [[MMWormhole alloc] initWithApplicationGroupIdentifier:GROUP_NAME_SUITE_NSUSERDEFAULTS optionalDirectory:EXTENSION_WORMHOLE_DIR];
@@ -358,6 +362,7 @@
 }
 
 - (void) startAutoSync {
+    [[LocationManager sharedInstance] startLocationManager];
     [[SyncManager sharedInstance] decideAndStartAutoSync];
 }
 
@@ -518,6 +523,7 @@
 
 - (void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(NSString *)identifier completionHandler:(void (^)())completionHandler {
     NSLog(@"At handleEventsForBackgroundURLSession");
+    
     [UploadQueue sharedInstance].backgroundSessionCompletionHandler = completionHandler;
 }
 
@@ -545,6 +551,13 @@ void uncaughtExceptionHandler(NSException *exception) {
             [self triggerLogin];
         }
     }
+}
+
+- (void) logToFiles {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *logPath = [documentsDirectory stringByAppendingPathComponent:@"nslogs.log"];
+    freopen([logPath cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
 }
 
 @end

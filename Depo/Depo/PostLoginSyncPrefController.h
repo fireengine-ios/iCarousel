@@ -9,8 +9,9 @@
 #import "MyViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "PostLoginPrefCell.h"
+#import "LocationManager.h"
 
-@interface PostLoginSyncPrefController : MyViewController <UITableViewDataSource, UITableViewDelegate>
+@interface PostLoginSyncPrefController : MyViewController <UITableViewDataSource, UITableViewDelegate, LocationManagerDelegate>
 
 @property (nonatomic, strong) UISwitch *autoSyncSwitch;
 @property (nonatomic, strong) CustomLabel *choiceTitleLabel;

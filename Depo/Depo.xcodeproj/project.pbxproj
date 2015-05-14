@@ -312,6 +312,7 @@
 		055A3F5A19E81C3D004A0121 /* album_selected_mask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 055A3F5619E81C3D004A0121 /* album_selected_mask@2x.png */; };
 		055A3F5D19E82B2C004A0121 /* PhotoAlbumController.m in Sources */ = {isa = PBXBuildFile; fileRef = 055A3F5C19E82B2C004A0121 /* PhotoAlbumController.m */; };
 		056090E41AC5A44000710211 /* ReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 056090E31AC5A44000710211 /* ReachabilityManager.m */; };
+		0560F46F1B00D5D0005E6936 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0560F46E1B00D5D0005E6936 /* LocationManager.m */; };
 		05620F211A4C62B30089DFB5 /* SyncReference.m in Sources */ = {isa = PBXBuildFile; fileRef = 05620F201A4C62B30089DFB5 /* SyncReference.m */; };
 		0569C8341A8A2B61000E0486 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0569C8321A8A2B61000E0486 /* Icon.png */; };
 		0569C8351A8A2B61000E0486 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0569C8331A8A2B61000E0486 /* Icon@2x.png */; };
@@ -1149,6 +1150,8 @@
 		055A3F5C19E82B2C004A0121 /* PhotoAlbumController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoAlbumController.m; sourceTree = "<group>"; };
 		056090E21AC5A44000710211 /* ReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachabilityManager.h; sourceTree = "<group>"; };
 		056090E31AC5A44000710211 /* ReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachabilityManager.m; sourceTree = "<group>"; };
+		0560F46D1B00D5D0005E6936 /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
+		0560F46E1B00D5D0005E6936 /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		05620F1F1A4C62B30089DFB5 /* SyncReference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncReference.h; sourceTree = "<group>"; };
 		05620F201A4C62B30089DFB5 /* SyncReference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncReference.m; sourceTree = "<group>"; };
 		0569C8321A8A2B61000E0486 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
@@ -2428,6 +2431,8 @@
 				05A8ADA41A5ABCD8007566BF /* UploadQueue.m */,
 				056090E21AC5A44000710211 /* ReachabilityManager.h */,
 				056090E31AC5A44000710211 /* ReachabilityManager.m */,
+				0560F46D1B00D5D0005E6936 /* LocationManager.h */,
+				0560F46E1B00D5D0005E6936 /* LocationManager.m */,
 			);
 			name = manager;
 			sourceTree = "<group>";
@@ -3521,6 +3526,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0560F46F1B00D5D0005E6936 /* LocationManager.m in Sources */,
 				0557C73819D1C905005E9F6B /* MetaFile.m in Sources */,
 				05A938271AF6AE9100AE2892 /* Filter.m in Sources */,
 				052644BF19D5A32300B63759 /* TextCell.m in Sources */,
@@ -3963,6 +3969,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"PLATFORM_LOCAL=1",
+					"LOG2FILE=1",
 				);
 				INFOPLIST_FILE = "Depo/Depo-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;

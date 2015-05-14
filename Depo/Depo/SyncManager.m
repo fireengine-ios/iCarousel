@@ -24,7 +24,6 @@
 
 @synthesize assetsLibrary;
 @synthesize elasticSearchDao;
-@synthesize locManager;
 @synthesize autoSyncIterationInProgress;
 
 + (SyncManager *) sharedInstance {
@@ -116,7 +115,7 @@
                 }
                 NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(startIndex, length)];
                 [group enumerateAssetsAtIndexes:indexSet options:0 usingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
-                    if(asset) {
+                    if(asset && [[asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypePhoto]) {
                         EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
                         if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
                             ConnectionOption connectionOption = (ConnectionOption)[CacheUtil readCachedSettingSyncingConnectionType];
@@ -143,7 +142,7 @@
                                 }
                             }
                         }
-                    } else {
+                    } else if(!asset) {
                         //check and set "finished flag" to TRUE if no enumeration is left
                         if([SyncUtil readAutoSyncIndex] >= [group numberOfAssets]) {
                             [SyncUtil writeFirstTimeSyncFinishedFlag];
@@ -153,6 +152,7 @@
             } else {
                 autoSyncIterationInProgress = NO;
                 [self firstTimeBlockSyncEnumerationFinished];
+                [[UploadQueue sharedInstance] manualAutoSyncIterationFinished];
             }
         } failureBlock:^(NSError *error) {
         }];
@@ -206,7 +206,7 @@
             [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
                 if(group) {
                     [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
-                        if(asset) {
+                        if(asset && [[asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypePhoto]) {
                             EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
                             if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
                                 ConnectionOption connectionOption = (ConnectionOption)[CacheUtil readCachedSettingSyncingConnectionType];

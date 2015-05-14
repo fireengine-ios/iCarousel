@@ -9,13 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "ElasticSearchDao.h"
-#import <CoreLocation/CoreLocation.h>
 
-@interface SyncManager : NSObject <CLLocationManagerDelegate>
+@interface SyncManager : NSObject
 
 @property (nonatomic, strong) ALAssetsLibrary *assetsLibrary;
 @property (nonatomic, strong) ElasticSearchDao *elasticSearchDao;
-@property (nonatomic, strong) CLLocationManager *locManager;
 @property (nonatomic) BOOL autoSyncIterationInProgress;
 
 + (SyncManager *) sharedInstance;

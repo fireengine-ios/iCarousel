@@ -399,14 +399,14 @@
     }
 }
 
-+ (NSString *) serverSortNameByEnum:(SortType) type {
++ (NSString *) serverSortNameByEnum:(SortType) type forPhotosOnly:(BOOL) photosOnly {
     switch (type) {
         case SortTypeAlphaAsc:
         case SortTypeAlphaDesc:
             return @"name";
         case SortTypeDateDesc:
         case SortTypeDateAsc:
-            return @"createdDate";
+            return photosOnly ? @"metadata.Image-DateTime" : @"createdDate";
         case SortTypeSizeAsc:
         case SortTypeSizeDesc:
             return @"bytes";
@@ -422,6 +422,10 @@
         default:
             return @"";
     }
+}
+
++ (NSString *) serverSortNameByEnum:(SortType) type {
+    return [AppUtil serverSortNameByEnum:type forPhotosOnly:NO];
 }
 
 + (BOOL) isAscByEnum:(SortType) type {

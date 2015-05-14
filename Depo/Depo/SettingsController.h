@@ -9,8 +9,9 @@
 #import "MyViewController.h"
 #import "TitleCell.h"
 #import "CacheUtil.h"
+#import <MessageUI/MessageUI.h>
 
-@interface SettingsController : MyViewController <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
+@interface SettingsController : MyViewController <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MFMailComposeViewControllerDelegate> {
     UIImageView *profileImageView;
     UITableView *pageContentTable;
     UIView *imageOptionsArea;

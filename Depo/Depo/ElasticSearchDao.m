@@ -15,7 +15,7 @@
 - (void) requestPhotosForPage:(int) page andSize:(int) size andSortType:(SortType) sortType {
     sortType = [self resetSortType:sortType];
     
-    NSString *parentListingUrl = [NSString stringWithFormat:ELASTIC_LISTING_MAIN_URL, @"content_type", @"image%20OR%20video", [AppUtil serverSortNameByEnum:sortType], [AppUtil isAscByEnum:sortType] ? @"ASC":@"DESC", page, size];
+    NSString *parentListingUrl = [NSString stringWithFormat:ELASTIC_LISTING_MAIN_URL, @"content_type", @"image%20OR%20video", [AppUtil serverSortNameByEnum:sortType forPhotosOnly:YES], [AppUtil isAscByEnum:sortType] ? @"ASC":@"DESC", page, size];
 	NSURL *url = [NSURL URLWithString:parentListingUrl];
 	
 	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];

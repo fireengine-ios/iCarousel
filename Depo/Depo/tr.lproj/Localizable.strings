@@ -458,7 +458,7 @@
 "ContactResultBackupSectionTitle"="Akıllı Depo'da";
 "ContactResultRestoreSectionTitle"="Telefonda";
 
-"AutoSyncStatusInfo"="Fotoğraflar / Videolar Yükleniyor (%d/%d)";
+"AutoSyncStatusInfo"="Fotoğraflar / Videolar Yükleniyor (%d/%d%@)";
 
 "UploadingPhoto"="Fotoğraf Yükleniyor";
 "UploadingPhotoCompleteStatus"="%%%d tamamlandı";
@@ -467,3 +467,5 @@
 
 "LocalNotificationManualUploadsFinished"="Yüklemeler tamamlandı, telefon hafızanızda yer açmak için bu dosyaları telefonunuzdan silebilirsiniz.";
 "LocalNotificationAutoUploadsFinished"="Fotoğraf / videonuz Akıllı Deponuza otomatik yüklendi. Görüntülemek ister misiniz?";
+
+"LocationNotEnabled"="Konum Servisi açık değil.";

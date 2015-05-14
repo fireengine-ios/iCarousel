@@ -45,7 +45,7 @@
 @property (nonatomic, strong) UploadNotifyDao *notifyDao;
 @property (nonatomic, strong) AlbumAddPhotosDao *albumAddPhotosDao;
 
-@property (nonatomic) UIBackgroundTaskIdentifier bgTaskI;
+@property (nonatomic) __block UIBackgroundTaskIdentifier bgTaskI;
 
 
 - (id) initWithUploadInfo:(UploadRef *) ref;

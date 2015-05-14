@@ -10,7 +10,7 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "VolumeSliderView.h"
 
-#define CUSTOM_AV_PLAYER_STALL_TRY_COUNT 20
+#define CUSTOM_AV_PLAYER_STALL_TRY_COUNT 40
 
 static void *AVPlayerPlaybackViewControllerRateObservationContext = &AVPlayerPlaybackViewControllerRateObservationContext;
 static void *AVPlayerPlaybackViewControllerStatusObservationContext = &AVPlayerPlaybackViewControllerStatusObservationContext;
@@ -282,10 +282,14 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
 }
 
 - (void) customAVShouldPause {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"PlayerContinueNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"PlayerHangingNotification" object:nil];
     [self.player pause];
 }
 
 - (void) customAVShouldPlay {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerContinue) name:@"PlayerContinueNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerHanging) name:@"PlayerHangingNotification" object:nil];
     [self.player play];
 }
 

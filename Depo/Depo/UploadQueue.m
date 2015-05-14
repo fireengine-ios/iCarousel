@@ -256,6 +256,7 @@
     if(newManager.uploadRef.isReady) {
         if([activeTaskIds count] < MAX_CONCURRENT_UPLOAD_TASKS) {
             [activeTaskIds addObject:[newManager uniqueUrl]];
+            NSLog(@"Starting new task");
             [newManager startTask];
         }
     }
@@ -296,6 +297,7 @@
     [self updateGroupUserDefaults];
 
     [[UIApplication sharedApplication] endBackgroundTask:manRef.bgTaskI];
+    manRef.bgTaskI = UIBackgroundTaskInvalid;
 }
 
 - (void) uploadManagerIsReadToStartTask:(UploadManager *)manRef {

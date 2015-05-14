@@ -49,8 +49,12 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 
 - (void) startTask {
 
-    bgTaskI = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+    NSString *bgTaskName = [NSString stringWithFormat:@"BG_TASK_%@", (self.uploadRef.taskType == UploadTaskTypeAsset) ? self.uploadRef.assetUrl : @""];
+    NSLog(@"BG Task Name for new task: %@", bgTaskName);
+    bgTaskI = [[UIApplication sharedApplication] beginBackgroundTaskWithName:bgTaskName expirationHandler:^{
+        NSLog(@"BG Task ended by os timeout");
         [[UIApplication sharedApplication] endBackgroundTask:bgTaskI];
+        bgTaskI = UIBackgroundTaskInvalid;
     }];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -73,6 +77,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 }
 
 - (void) triggerAndStartAssetsTask {
+    NSLog(@"At triggerAndStartAssetsTask");
     self.asset = nil;
     
     @try {
@@ -109,6 +114,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 }
 
 - (void) continueAssetUpload {
+    NSLog(@"At continueAssetUpload");
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     
@@ -199,6 +205,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             [SyncUtil cacheSyncHashLocally:self.uploadRef.localHash];
             [SyncUtil increaseAutoSyncIndex];
         }
+        NSLog(@"Upload Task started");
         [uploadTask resume];
         
         [[CurioSDK shared] sendEvent:@"UploadStarted" eventValue:[NSString stringWithFormat:@"file type: %@", fileType]];

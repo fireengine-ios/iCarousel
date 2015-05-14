@@ -15,6 +15,7 @@
 #import "AppDelegate.h"
 #import "CurioSDK.h"
 #import "ReachabilityManager.h"
+#import "LocationManager.h"
 
 @interface SettingsUploadController ()
 
@@ -85,6 +86,7 @@
     }
 
     if(cancelAutoSync) {
+        [[LocationManager sharedInstance] stopLocationManager];
         [[UploadQueue sharedInstance] cancelRemainingUploads];
     }
 }

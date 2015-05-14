@@ -245,7 +245,11 @@
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+#ifdef LOG2FILE
+    return 5;
+#else
     return 4;
+#endif
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -297,6 +301,10 @@
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"FAQ", @"") titleColor:nil subTitleText:@"" iconName:@"help_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         return cell;
+    } else if (indexPath.row == 4) {
+        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"Mail Logs" titleColor:nil subTitleText:@"" iconName:@"help_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
+        cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+        return cell;
     } else {
         return nil;
     }
@@ -317,9 +325,43 @@
 //            [self didTriggerAboutUs];
             [self didTriggerHelp];
             break;
+        case 4:
+            [self triggerMailLog];
+            break;
         default:
             break;
     }
+}
+
+- (void) triggerMailLog {
+    if([MFMailComposeViewController canSendMail]) {
+        MFMailComposeViewController *mailCont = [[MFMailComposeViewController alloc] init];
+        mailCont.mailComposeDelegate = self;
+        
+        [mailCont setSubject:@"Device Logs"];
+        [mailCont setToRecipients:[NSArray arrayWithObject:@"mahirtarlan@gmail.com"]];
+        [mailCont setMessageBody:@"Latest device logs are attached" isHTML:NO];
+        
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString *logPath = [documentsDirectory stringByAppendingPathComponent:@"nslogs.log"];
+        NSData *logData = [NSData dataWithContentsOfFile:logPath];
+        
+        [mailCont addAttachmentData:logData mimeType:@"text/plain" fileName:@"logs.txt"];
+
+        [self presentViewController:mailCont animated:YES completion:nil];
+    }
+}
+    
+- (void) mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
+    [controller dismissViewControllerAnimated:YES completion:nil];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *logPath = [documentsDirectory stringByAppendingPathComponent:@"nslogs.log"];
+
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    [fileManager removeItemAtPath:logPath error:nil];
 }
 
 - (void) ShowImageOptionsArea {

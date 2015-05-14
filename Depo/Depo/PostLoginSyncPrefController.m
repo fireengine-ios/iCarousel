@@ -96,40 +96,20 @@
 
 - (void) continueClicked {
     if(autoSyncSwitch.isOn) {
-        self.assetsLibrary = [[ALAssetsLibrary alloc] init];
-        [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-        } failureBlock:^(NSError *error) {
-            [self showErrorAlertWithMessage:NSLocalizedString(@"ALAssetsAccessError", @"")];
-        }];
-        
-        /*
-        ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(nil, nil);
-        if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined) {
-            ABAddressBookRequestAccessWithCompletion(addressBookRef, ^(bool granted, CFErrorRef error) {
-                if (granted) { } else { }
-            });
-        }
-        else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) { }
-        else { }
-         */
-
-        [CacheUtil writeCachedSettingSyncContacts:EnableOptionOn];
-        [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOn];
-    
-        [[CurioSDK shared] sendEvent:@"SyncOpened" eventValue:@"true"];
-
+        [LocationManager sharedInstance].delegate = self;
+        [[LocationManager sharedInstance] startLocationManager];
     } else {
         [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOff];
         [CacheUtil writeCachedSettingSyncContacts:EnableOptionOff];
         [[CurioSDK shared] sendEvent:@"SyncClosed" eventValue:@"true"];
-    }
-    
-    [CacheUtil writeCachedSettingSyncingConnectionType:selectedOption];
-    [CacheUtil writeCachedSettingDataRoaming:NO];
 
-    [AppUtil writeFirstVisitOverFlag];
-//    [APPDELEGATE triggerHome];
-    [APPDELEGATE startOpeningPage];
+        [CacheUtil writeCachedSettingSyncingConnectionType:selectedOption];
+        [CacheUtil writeCachedSettingDataRoaming:NO];
+        
+        [AppUtil writeFirstVisitOverFlag];
+        //    [APPDELEGATE triggerHome];
+        [APPDELEGATE startOpeningPage];
+    }
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
@@ -188,6 +168,54 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
+}
+
+#pragma mark LocationManagerDelegate methods
+- (void) locationPermissionDenied {
+    [LocationManager sharedInstance].delegate = nil;
+    [self triggerAssetPermissionAndContinue];
+}
+
+- (void) locationPermissionGranted {
+    [LocationManager sharedInstance].delegate = nil;
+    [self triggerAssetPermissionAndContinue];
+}
+
+- (void) locationPermissionError:(NSString *)errorMessage {
+    [LocationManager sharedInstance].delegate = nil;
+    [self triggerAssetPermissionAndContinue];
+}
+
+- (void) triggerAssetPermissionAndContinue {
+    self.assetsLibrary = [[ALAssetsLibrary alloc] init];
+    [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+    } failureBlock:^(NSError *error) {
+        [self showErrorAlertWithMessage:NSLocalizedString(@"ALAssetsAccessError", @"")];
+    }];
+    
+    
+    /*
+     ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(nil, nil);
+     if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined) {
+     ABAddressBookRequestAccessWithCompletion(addressBookRef, ^(bool granted, CFErrorRef error) {
+     if (granted) { } else { }
+     });
+     }
+     else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) { }
+     else { }
+     */
+    
+    [CacheUtil writeCachedSettingSyncContacts:EnableOptionOn];
+    [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOn];
+    
+    [[CurioSDK shared] sendEvent:@"SyncOpened" eventValue:@"true"];
+
+    [CacheUtil writeCachedSettingSyncingConnectionType:selectedOption];
+    [CacheUtil writeCachedSettingDataRoaming:NO];
+    
+    [AppUtil writeFirstVisitOverFlag];
+    //    [APPDELEGATE triggerHome];
+    [APPDELEGATE startOpeningPage];
 }
 
 @end
