@@ -37,7 +37,7 @@
     }
     self.locManager.delegate = self;
     self.locManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
-    self.locManager.distanceFilter = 10.0f;
+    self.locManager.distanceFilter = 100.0f;
 }
 
 /*
@@ -85,7 +85,7 @@
 
 - (void) stopLocationManager {
     if(self.locManager) {
-        [self.locManager stopMonitoringSignificantLocationChanges];
+        [self.locManager stopUpdatingLocation];
         self.locManager.delegate = nil;
     }
 }

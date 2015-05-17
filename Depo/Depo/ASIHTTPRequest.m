@@ -297,7 +297,7 @@ static NSOperationQueue *sharedQueue = nil;
 	[self setTimeOutSeconds:[ASIHTTPRequest defaultTimeOutSeconds]];
 	[self setUseSessionPersistence:YES];
 	[self setUseCookiePersistence:YES];
-//TODO mahir	[self setValidatesSecureCertificate:YES];
+//mahir	[self setValidatesSecureCertificate:YES];
     [self setValidatesSecureCertificate:NO];
 	[self setRequestCookies:[[[NSMutableArray alloc] init] autorelease]];
 	[self setDidStartSelector:@selector(requestStarted:)];
