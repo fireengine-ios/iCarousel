@@ -279,12 +279,14 @@
             [activeTaskIds addObject:[nextManager uniqueUrl]];
             [nextManager startTask];
         } else {
-            //all the tasks in the url session has finalized and no more task waiting in queue
-            EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
-            if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
-                [AppUtil sendLocalNotificationForDate:[NSDate date] withMessage:NSLocalizedString(@"LocalNotificationAutoUploadsFinished", @"")];
-            } else {
-                [AppUtil sendLocalNotificationForDate:[NSDate date] withMessage:NSLocalizedString(@"LocalNotificationManualUploadsFinished", @"")];
+            if([UIApplication sharedApplication].applicationState != UIApplicationStateActive) {
+                //all the tasks in the url session has finalized and no more task waiting in queue
+                EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
+                if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
+                    [AppUtil sendLocalNotificationForDate:[NSDate date] withMessage:NSLocalizedString(@"LocalNotificationAutoUploadsFinished", @"")];
+                } else {
+                    [AppUtil sendLocalNotificationForDate:[NSDate date] withMessage:NSLocalizedString(@"LocalNotificationManualUploadsFinished", @"")];
+                }
             }
 
             if(![SyncUtil readFirstTimeSyncFinishedFlag]) {
@@ -427,6 +429,19 @@
 
 - (void) URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession *) _session {
     NSLog(@"URLSessionDidFinishEventsForBackgroundURLSession");
+    
+    if([UIApplication sharedApplication].applicationState != UIApplicationStateActive) {
+        //all the tasks in the url session has finalized and no more task waiting in queue
+        EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
+        if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
+            [AppUtil sendLocalNotificationForDate:[NSDate date] withMessage:NSLocalizedString(@"LocalNotificationAutoUploadsFinished", @"")];
+        } else {
+            [AppUtil sendLocalNotificationForDate:[NSDate date] withMessage:NSLocalizedString(@"LocalNotificationManualUploadsFinished", @"")];
+        }
+    }
+    
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+    
     if (self.backgroundSessionCompletionHandler) {
         void (^completionHandler)() = self.backgroundSessionCompletionHandler;
         self.backgroundSessionCompletionHandler = nil;

@@ -150,6 +150,10 @@
     return result;
 }
 
++ (BOOL) localHashListContainsHash:(NSString *) hash {
+    return [[SyncUtil readSyncHashLocally] containsObject:hash];
+}
+
 + (void) cacheSyncHashRemotely:(NSString *) hash {
     NSArray *result = [SyncUtil readSyncHashRemotely];
     if(![result containsObject:hash]) {

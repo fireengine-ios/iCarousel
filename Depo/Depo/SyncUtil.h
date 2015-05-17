@@ -27,6 +27,7 @@
 + (void) cacheSyncHashLocally:(NSString *) hash;
 + (void) removeLocalHash:(NSString *) hash;
 + (NSArray *) readSyncHashLocally;
++ (BOOL) localHashListContainsHash:(NSString *) hash;
 + (void) cacheSyncHashRemotely:(NSString *) hash;
 + (void) cacheSyncHashesRemotely:(NSMutableArray *) newArray;
 + (NSArray *) readSyncHashRemotely;

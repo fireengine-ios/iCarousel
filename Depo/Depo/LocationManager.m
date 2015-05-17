@@ -36,7 +36,7 @@
         self.locManager = [[CLLocationManager alloc] init];
     }
     self.locManager.delegate = self;
-    self.locManager.desiredAccuracy = kCLLocationAccuracyBest;
+    self.locManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
     self.locManager.distanceFilter = 10.0f;
 }
 
@@ -72,13 +72,13 @@
                 if(delegate) {
                     [delegate locationPermissionGranted];
                 }
-                [self.locManager startMonitoringSignificantLocationChanges];
+                [self.locManager startUpdatingLocation];
             }
         } else if([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways) {
             if(delegate) {
                 [delegate locationPermissionGranted];
             }
-            [self.locManager startMonitoringSignificantLocationChanges];
+            [self.locManager startUpdatingLocation];
         }
     }
 }
@@ -95,12 +95,12 @@
         if(delegate) {
             [delegate locationPermissionGranted];
         }
-        [self.locManager startMonitoringSignificantLocationChanges];
+        [self.locManager startUpdatingLocation];
     } else if (status == kCLAuthorizationStatusAuthorized) {
         if(delegate) {
             [delegate locationPermissionGranted];
         }
-        [self.locManager startMonitoringSignificantLocationChanges];
+        [self.locManager startUpdatingLocation];
     } else {
         if(delegate) {
             [delegate locationPermissionDenied];
@@ -110,6 +110,7 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     NSLog(@"At locationManager:didUpdateLocations:");
+    
     [[SyncManager sharedInstance] decideAndStartAutoSync];
 }
 

@@ -102,6 +102,9 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
                     self.uploadRef.hasFinished = YES;
                     [delegate uploadManagerDidFailUploadingForAsset:self.uploadRef.assetUrl];
                     [queueDelegate uploadManager:self didFinishUploadingWithSuccess:NO];
+                    if(self.uploadRef.autoSyncFlag) {
+                        [SyncUtil increaseAutoSyncIndex];
+                    }
                 }
             }
         } failureBlock:^(NSError *error) {
@@ -115,6 +118,17 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 
 - (void) continueAssetUpload {
     NSLog(@"At continueAssetUpload");
+
+    if(self.uploadRef.autoSyncFlag) {
+        if([SyncUtil localHashListContainsHash:self.uploadRef.localHash]){
+            NSLog(@"localHashListContainsHash inside continueAssetUpload returns YES");
+            self.uploadRef.hasFinished = YES;
+            [delegate uploadManagerDidFailUploadingForAsset:self.uploadRef.assetUrl];
+            [queueDelegate uploadManager:self didFinishUploadingWithSuccess:NO];
+            [SyncUtil increaseAutoSyncIndex];
+        }
+    }
+
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     
@@ -215,6 +229,9 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         self.uploadRef.hasFinished = YES;
         [delegate uploadManagerDidFailUploadingForAsset:self.uploadRef.assetUrl];
         [queueDelegate uploadManager:self didFinishUploadingWithSuccess:NO];
+        if(self.uploadRef.autoSyncFlag) {
+            [SyncUtil increaseAutoSyncIndex];
+        }
     }
 }
 

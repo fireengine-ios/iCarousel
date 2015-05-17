@@ -68,7 +68,7 @@
     mapUtil = [[MapUtil alloc] init];
     wormhole = [[MMWormhole alloc] initWithApplicationGroupIdentifier:GROUP_NAME_SUITE_NSUSERDEFAULTS optionalDirectory:EXTENSION_WORMHOLE_DIR];
 
-    [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
+//mahir: loc update geldiğinden bg fetch cikarildi simdilik    [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
 
     //Adjust initialization
     ADJConfig *adjustConfig = [ADJConfig configWithAppToken:@"hlqdgtbmrdb9" environment:ADJEnvironmentProduction];
@@ -94,25 +94,7 @@
     tokenManager = [[TokenManager alloc] init];
     tokenManager.delegate = self;
     
-    if (launchOptions != nil && (launchOptions[@"action"] != nil || launchOptions[UIApplicationLaunchOptionsLocalNotificationKey] != nil)) {
-        NSString *actionString = launchOptions[@"action"];
-        if(actionString == nil && launchOptions[UIApplicationLaunchOptionsLocalNotificationKey] != nil) {
-            UILocalNotification *localNotification = launchOptions[UIApplicationLaunchOptionsLocalNotificationKey];
-            actionString = [localNotification userInfo][@"action"];
-        }
-        
-        if ([actionString isEqualToString:@"main"]) {
-            self.notifitacionAction = NotificationActionMain;
-        } else if ([actionString isEqualToString:@"sync_settings"]) {
-            self.notifitacionAction = NotificationActionSyncSettings;
-        } else if ([actionString isEqualToString:@"floating_menu"]) {
-            self.notifitacionAction = NotificationActionFloatingMenu;
-        } else if ([actionString isEqualToString:@"packages"]) {
-            self.notifitacionAction = NotificationActionPackages;
-        } else if ([actionString isEqualToString:@"photos_videos"]) {
-            self.notifitacionAction = NotificationActionPhotos;
-        }
-    }
+    [self assignNotificationActionByLaunchOptions:launchOptions];
     
     [ReachabilityManager currentManager];
     
@@ -132,6 +114,28 @@
     
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (void) assignNotificationActionByLaunchOptions:(NSDictionary *)launchOptions {
+    if (launchOptions != nil && (launchOptions[@"action"] != nil || launchOptions[UIApplicationLaunchOptionsLocalNotificationKey] != nil)) {
+        NSString *actionString = launchOptions[@"action"];
+        if(actionString == nil && launchOptions[UIApplicationLaunchOptionsLocalNotificationKey] != nil) {
+            UILocalNotification *localNotification = launchOptions[UIApplicationLaunchOptionsLocalNotificationKey];
+            actionString = [localNotification userInfo][@"action"];
+        }
+        
+        if ([actionString isEqualToString:@"main"]) {
+            self.notifitacionAction = NotificationActionMain;
+        } else if ([actionString isEqualToString:@"sync_settings"]) {
+            self.notifitacionAction = NotificationActionSyncSettings;
+        } else if ([actionString isEqualToString:@"floating_menu"]) {
+            self.notifitacionAction = NotificationActionFloatingMenu;
+        } else if ([actionString isEqualToString:@"packages"]) {
+            self.notifitacionAction = NotificationActionPackages;
+        } else if ([actionString isEqualToString:@"photos_videos"]) {
+            self.notifitacionAction = NotificationActionPhotos;
+        }
+    }
 }
 
 - (void) triggerPreLogin {
@@ -400,8 +404,18 @@
 }
 
 - (void) application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
-    //Uygulama açıkken akış bozulmasın diye burası commentlendi
-//    [self application:application didFinishLaunchingWithOptions:notification.userInfo];
+    if(application.applicationState != UIApplicationStateActive ) {
+        [self application:application didFinishLaunchingWithOptions:notification.userInfo];
+    }
+}
+
+- (void) application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)())completionHandler {
+
+    [self application:application didFinishLaunchingWithOptions:notification.userInfo];
+
+    if (completionHandler) {
+        completionHandler();
+    }
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {

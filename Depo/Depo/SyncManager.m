@@ -109,46 +109,51 @@
         [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
             if(group) {
                 int startIndex = [SyncUtil readAutoSyncIndex];
-                int length = AUTO_SYNC_ASSET_COUNT;
-                if(startIndex + length > [group numberOfAssets]) {
-                    length = (int)[group numberOfAssets] - startIndex;
-                }
-                NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(startIndex, length)];
-                [group enumerateAssetsAtIndexes:indexSet options:0 usingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
-                    if(asset && [[asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypePhoto]) {
-                        EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
-                        if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
-                            ConnectionOption connectionOption = (ConnectionOption)[CacheUtil readCachedSettingSyncingConnectionType];
-                            if([ReachabilityManager isReachableViaWiFi] || ([ReachabilityManager isReachableViaWWAN] && connectionOption == ConnectionOptionWifi3G)) {
-
-                                ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
-                                NSString *localHash = [SyncUtil md5StringOfString:[defaultRep.url absoluteString]];
-                                
-                                BOOL serverContainsImageFlag = [remoteHashList containsObject:localHash] || [localHashList containsObject:localHash];
-                                
-                                if(!serverContainsImageFlag) {
-                                    MetaFileSummary *assetSummary = [[MetaFileSummary alloc] init];
-                                    assetSummary.bytes = [defaultRep size];
-                                    assetSummary.fileName = [defaultRep filename];
-                                    serverContainsImageFlag = [remoteSummaryList containsObject:assetSummary];
-                                }
-                                if(!serverContainsImageFlag) {
-                                    NSLog(@"auto upload started for image: %@", defaultRep.filename);
-                                    [self startUploadForAsset:asset andLocalHash:localHash];
-                                    [SyncUtil lockAutoSyncBlockInProgress];
-                                    [SyncUtil updateLastSyncDate];
-                                } else {
-                                    [SyncUtil increaseAutoSyncIndex];
+                //check and set "finished flag" to TRUE if no enumeration is left
+                if(startIndex >= [group numberOfAssets]) {
+                    [SyncUtil writeFirstTimeSyncFinishedFlag];
+                } else {
+                    int length = AUTO_SYNC_ASSET_COUNT;
+                    if(startIndex + length > [group numberOfAssets]) {
+                        length = (int)[group numberOfAssets] - startIndex;
+                    }
+                    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(startIndex, length)];
+                    [group enumerateAssetsAtIndexes:indexSet options:0 usingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
+                        if(asset && [[asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypePhoto]) {
+                            EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
+                            if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
+                                ConnectionOption connectionOption = (ConnectionOption)[CacheUtil readCachedSettingSyncingConnectionType];
+                                if([ReachabilityManager isReachableViaWiFi] || ([ReachabilityManager isReachableViaWWAN] && connectionOption == ConnectionOptionWifi3G)) {
+                                    
+                                    ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
+                                    NSString *localHash = [SyncUtil md5StringOfString:[defaultRep.url absoluteString]];
+                                    
+                                    BOOL serverContainsImageFlag = [remoteHashList containsObject:localHash] || [localHashList containsObject:localHash];
+                                    
+                                    if(!serverContainsImageFlag) {
+                                        MetaFileSummary *assetSummary = [[MetaFileSummary alloc] init];
+                                        assetSummary.bytes = [defaultRep size];
+                                        assetSummary.fileName = [defaultRep filename];
+                                        serverContainsImageFlag = [remoteSummaryList containsObject:assetSummary];
+                                    }
+                                    if(!serverContainsImageFlag) {
+                                        NSLog(@"auto upload started for image: %@", defaultRep.filename);
+                                        [self startUploadForAsset:asset andLocalHash:localHash];
+                                        [SyncUtil lockAutoSyncBlockInProgress];
+                                        [SyncUtil updateLastSyncDate];
+                                    } else {
+                                        [SyncUtil increaseAutoSyncIndex];
+                                    }
                                 }
                             }
+                        } else if(!asset) {
+                            //check and set "finished flag" to TRUE if no enumeration is left
+                            if([SyncUtil readAutoSyncIndex] >= [group numberOfAssets]) {
+                                [SyncUtil writeFirstTimeSyncFinishedFlag];
+                            }
                         }
-                    } else if(!asset) {
-                        //check and set "finished flag" to TRUE if no enumeration is left
-                        if([SyncUtil readAutoSyncIndex] >= [group numberOfAssets]) {
-                            [SyncUtil writeFirstTimeSyncFinishedFlag];
-                        }
-                    }
-                }];
+                    }];
+                }
             } else {
                 autoSyncIterationInProgress = NO;
                 [self firstTimeBlockSyncEnumerationFinished];

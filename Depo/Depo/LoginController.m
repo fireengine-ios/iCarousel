@@ -16,6 +16,7 @@
 #import "SmsForPassButton.h"
 #import "MyMessageComposeViewController.h"
 #import "CacheUtil.h"
+#import "CurioSDK.h"
 
 @interface LoginController ()
 
@@ -70,6 +71,10 @@
 - (void) tokenDaoSuccessCallback {
     [self hideLoading];
     
+    if(msisdnValue != nil) {
+        [[CurioSDK shared] sendCustomId:msisdnValue];
+    }
+    [[CurioSDK shared] sendEvent:@"LoginSuccess" eventValue:@"true"];
     [APPDELEGATE triggerPostLogin];
 }
 
