@@ -10,12 +10,19 @@
 #import "OfferCell.h"
 #import "CustomConfirmView.h"
 #import "AppDelegate.h"
+#import "BaseViewController.h"
+#import "OfferContainer.h"
+#import "AppUtil.h"
 
 @interface SettingsStorageController ()
 
 @end
 
 @implementation SettingsStorageController
+
+@synthesize purchaseView;
+@synthesize offerToSubs;
+@synthesize containerOffers;
 
 - (id)init
 {
@@ -43,7 +50,7 @@
         [accountDaoToGetCurrentSubscription requestCurrentAccount];
     }
     
-    if (currentSubscription == nil && accountDaoToLearnIsJobExists == nil) {
+    if (currentSubscription == nil) {
         accountDaoToLearnIsJobExists = [[AccountDao alloc]init];
         accountDaoToLearnIsJobExists.delegate = self;
         accountDaoToLearnIsJobExists.successMethod = @selector(isJobExistsCallback:);
@@ -88,7 +95,17 @@
 }
 
 - (void) loadOffersCallback:(NSArray *) files {
+    //offer listesi başarıyla alınınca bu metoda düşer
     offers = [[NSMutableArray alloc] initWithArray:files];
+    if ([currentSubscription.plan.role isEqualToString:@"demo"]) {
+        NSArray *temp = [self sortArray:offers withKey:@"quota" withAscending:YES];
+        containerOffers = [self sortingOfferContainers:temp];
+    }
+    else {
+        NSArray *temp = [self sortArray:offers withKey:@"quota" withAscending:NO];
+        containerOffers = [self sortingOfferContainers:temp];
+    }
+    
     if (offers.count > 0) {
         [super drawPageContentTable];
         [super hideLoading];
@@ -96,23 +113,30 @@
 }
 
 - (void) loadOffersFailCallback:(NSString *) errorMessage {
+    //offer listesi hata alırsa bu metoda düşer
     [super hideLoading];
     [super showErrorAlertWithMessage:errorMessage];
 }
 
 - (void) activateOfferCallback {
-    currentSubscription = nil;
-    isJobExists = YES;
-    [offers removeAllObjects];
-    [self loadPageContent];
-    [pageContentTable reloadData];
-    [self.navigationController popViewControllerAnimated:YES];
-    [super showInfoAlertWithMessage:NSLocalizedString(@"ActivateOfferSuccess", @"")];
+    [super hideLoading];
+    
+    //[super showInfoAlertWithMessage:NSLocalizedString(@"ActivateOfferSuccess", @"")];
+    if(purchaseView) {
+        [purchaseView drawSuccessPurchaseView];
+    }
 }
 
 - (void) activateOfferFailCallback:(NSString *) errorMessage {
     [super hideLoading];
-    [super showErrorAlertWithMessage:errorMessage];
+    //[super showErrorAlertWithMessage:errorMessage];
+    if(purchaseView) {
+        [purchaseView drawFailedPurchaseView:errorMessage];
+    }
+}
+
+- (void) failedPurchaseTryAgainDelegate {
+    [self activateOffer:selectedOffer];
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
@@ -126,12 +150,17 @@
     if (section == 0) {
         if (currentSubscription.plan == nil) {
             return 0;
-        } else if ([currentSubscription.plan.role isEqualToString:@"demo"]) {
+        }
+        else{
             return 1;
-        } else {
-            return 2;
         }
     }
+    /*else if ([currentSubscription.plan.role isEqualToString:@"demo"]) {
+     return 1;
+     } else {
+     return 2;
+     }
+     }*/
     else
         return offers.count;
 }
@@ -147,15 +176,15 @@
         if (currentSubscription.plan == nil)
             return 0;
         else if (indexPath.row == 0)
-            return 69;
+            return 80;
         else
-            return 54;
+            return 120;
     }
     else {
         if (indexPath.row == 0 || indexPath.row == offers.count - 1)
-            return 75;
+            return 90;
         else
-            return 60;
+            return 90;
     }
 }
 
@@ -175,11 +204,15 @@
     
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            NSString *subscriptionDisplayName = [self getPackageDisplayName:currentSubscription.plan.role];
-            NSString *title = [NSString stringWithFormat:NSLocalizedString(@"SubscriptionInfo", @""), subscriptionDisplayName, currentSubscription.plan.quota/(1024*1024*1024), currentSubscription.plan.price];
+            //NSString *subscriptionDisplayName = [self getPackageDisplayName:currentSubscription.plan.role];
+            //NSString *title = [NSString stringWithFormat:NSLocalizedString(@"SubscriptionInfo", @""), subscriptionDisplayName, currentSubscription.plan.quota/(1024*1024*1024), currentSubscription.plan.price];
             
-            TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:title titleColor:nil subTitleText:@"" iconName:@"" hasSeparator:YES isLink:NO linkText:@"" cellHeight:69];
+            //TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:title titleColor:nil subTitleText:@"" iconName:@"" hasSeparator:YES isLink:NO linkText:@"" cellHeight:69];
+            
+            OfferRedesignCell *cell = [[OfferRedesignCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withCurrenSubscription:currentSubscription];
             return cell;
+            
+            
         }
         else {
             NSString *nameForSms = [self getNameForSms:currentSubscription.plan.role];
@@ -188,33 +221,44 @@
                 contentText = [NSString stringWithFormat:NSLocalizedString(@"CancelSubscriptionInfo", @""), nameForSms];
             }
             TextCell *cell = [[TextCell alloc]initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"" titleColor:nil contentText:contentText contentTextColor:nil backgroundColor:nil hasSeparator:NO];
+            
+            
             return cell;
         }
     }
     else {
-        OfferCell *cell;
-        Offer *offer = [offers objectAtIndex:indexPath.row];
-        NSString *offerDisplayName = [self getPackageDisplayName:offer.role];
-        NSString *packageName = @"%@ (%gGB) %@ TL/%@";
-        packageName = [NSString stringWithFormat:packageName, offerDisplayName, offer.quota/(1024*1024*1024), offer.price, NSLocalizedString(@"Month", @"")];
-        packageName = [packageName stringByReplacingOccurrencesOfString:@"Akıllı Depo " withString:@""];
-        if (indexPath.row == 0)
-            cell = [[OfferCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:packageName hasSeparator:NO topIndex:15 bottomIndex:0];
-        else if (indexPath.row == offers.count - 1)
-            cell = [[OfferCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:packageName hasSeparator:YES topIndex:0 bottomIndex:15];
-        else
-            cell = [[OfferCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:packageName hasSeparator:NO];
+        //OfferCell *cell;
+        //Offer *offer = [offers objectAtIndex:indexPath.row];
+        //NSArray *temp = [self sortingOfferContainers:[AppUtil tempOffers]];
+        //NSArray *offersContainers = [self sortArray:temp withKey:@"quota"];
+        //OfferRedesignCell *cell = [[OfferRedesignCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withOffer:[offersContainers objectAtIndex:indexPath.row]];
+        OfferRedesignCell *cell = [[OfferRedesignCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withOffer:[containerOffers objectAtIndex:indexPath.row] withCurrentSubscription:currentSubscription];
+        cell.offerCellDel = self;
+        
+        
+        //NSString *offerDisplayName = [self getPackageDisplayName:offer.role];
+        //NSString *packageName = @"%@ (%gGB) %@ TL/%@";
+        //packageName = [NSString stringWithFormat:packageName, offerDisplayName, offer.quota/(1024*1024*1024), offer.price, NSLocalizedString(@"Month", @"")];
+        //packageName = [packageName stringByReplacingOccurrencesOfString:@"Akıllı Depo " withString:@""];
+        /*if (indexPath.row == 0)
+         cell = [[OfferCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:packageName hasSeparator:NO topIndex:15 bottomIndex:0];
+         else if (indexPath.row == offers.count - 1)
+         cell = [[OfferCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:packageName hasSeparator:YES topIndex:0 bottomIndex:15];
+         else
+         cell = [[OfferCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:packageName hasSeparator:NO];*/
+        
         return cell;
     }
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 1) {
-        selectedOffer = [offers objectAtIndex:indexPath.row];
-        CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Approve", @"") withCancelTitle:NSLocalizedString(@"TitleNo", @"") withApproveTitle:NSLocalizedString(@"TitleYes", @"") withMessage:NSLocalizedString(@"ActivateOfferApprove", @"") withModalType:ModalTypeApprove];
-        confirm.delegate = self;
-        [APPDELEGATE showCustomConfirm:confirm];
-    }
+    /*if (indexPath.section == 1) {
+     selectedOffer = [offers objectAtIndex:indexPath.row];
+     CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Approve", @"") withCancelTitle:NSLocalizedString(@"TitleNo", @"") withApproveTitle:NSLocalizedString(@"TitleYes", @"") withMessage:NSLocalizedString(@"ActivateOfferApprove", @"") withModalType:ModalTypeApprove];
+     confirm.delegate = self;
+     [APPDELEGATE showCustomConfirm:confirm];
+     }
+     */
 }
 
 - (void) didApproveCustomAlert:(CustomConfirmView *)alertView {
@@ -222,16 +266,16 @@
 }
 
 - (void) didRejectCustomAlert:(CustomConfirmView *)alertView {
-//    [alertView removeFromSuperview];
+    //    [alertView removeFromSuperview];
 }
 
 - (void) activateOffer:(Offer *)offer {
     [super showLoading];
     accountDaoToActivateOffer = [[AccountDao alloc]init];
-    accountDaoToGetOffers.delegate = self;
-    accountDaoToGetOffers.successMethod = @selector(activateOfferCallback);
-    accountDaoToGetOffers.failMethod = @selector(activateOfferFailCallback:);
-    [accountDaoToGetOffers requestActivateOffer:offer];
+    accountDaoToActivateOffer.delegate = self;
+    accountDaoToActivateOffer.successMethod = @selector(activateOfferCallback);
+    accountDaoToActivateOffer.failMethod = @selector(activateOfferFailCallback:);
+    [accountDaoToActivateOffer requestActivateOffer:offer];
 }
 
 - (NSString *)getPackageDisplayName: (NSString *)roleName {
@@ -258,6 +302,101 @@
         name = @"MEGADEPO";
     }
     return name;
+}
+
+- (void) selectedOfferPurchase:(Offer *)offer {
+    purchaseView = [[PurchaseView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height) withOffer:offer];
+    purchaseView.delegate = self;
+    [purchaseView drawBeforePurchaseView];
+    [self.view addSubview:purchaseView];
+}
+
+- (void) shouldCloseView {
+    if(purchaseView) {
+        [purchaseView removeFromSuperview];
+        purchaseView = nil;
+    }
+}
+
+
+- (void) activatePurchasing:(Offer *) chosenOffer {
+    selectedOffer = chosenOffer;
+    [self activateOffer:selectedOffer];
+}
+
+- (NSArray *) sortingOfferContainers:(NSArray *) offerPackages {
+    
+    OfferContainer *firstContainer = [[OfferContainer alloc] init];
+    Offer *tmp = [[Offer alloc] init];
+    tmp = [offerPackages objectAtIndex:0];
+    NSMutableArray *containerArray = [[NSMutableArray alloc] init];
+    if ([tmp.period isEqualToString:@"MONTH"]) {
+        firstContainer.montlyOffer = tmp;
+        firstContainer.quota = tmp.quota;
+        [containerArray addObject:firstContainer];
+    }
+    else {
+        firstContainer.yearlyOffer = tmp;
+        firstContainer.quota = tmp.quota;
+        [containerArray addObject:firstContainer];
+    }
+    for (int j = 0; j <[offerPackages count]; j++) {
+        Offer *comparableOffer = [offerPackages objectAtIndex:j];
+        if (comparableOffer.quota == firstContainer.quota) {
+            if ([comparableOffer.period isEqualToString:@"MONTH"]) {
+                firstContainer.montlyOffer = comparableOffer;
+                
+            }
+            else if([comparableOffer.period isEqualToString:@"YEAR"]){
+                firstContainer.yearlyOffer = comparableOffer;
+            }
+        }
+        else {
+            firstContainer = [[OfferContainer alloc] init];
+            firstContainer.quota = comparableOffer.quota;
+            if ([comparableOffer.period isEqualToString:@"MONTH"]) {
+                firstContainer.montlyOffer = comparableOffer;
+                [containerArray addObject:firstContainer];
+                
+            }
+            else {
+                firstContainer.yearlyOffer = comparableOffer;
+                [containerArray addObject:firstContainer];
+            }
+            
+        }
+    }
+    
+    return containerArray;
+    
+}
+
+- (void) failedActivationTryAgain {
+    [self activateOffer:selectedOffer];
+}
+
+- (void) purchasingDone {
+    [self shouldCloseView];
+    currentSubscription = nil;
+    isJobExists = YES;
+    [offers removeAllObjects];
+    [self loadPageContent];
+    [pageContentTable reloadData];
+}
+
+- (NSArray *) sortArray:(NSArray *) array withKey:(NSString *) key withAscending:(BOOL) ascending {
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:key ascending:ascending];
+    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    NSArray * sortedArray = [array sortedArrayUsingDescriptors:sortDescriptors];
+    
+    for (int i = 0; i< [offers count]; i++) {
+        Offer *tmp = [[Offer alloc] init];
+        tmp = [sortedArray objectAtIndex:i];
+        NSLog(@"%f",tmp.quota);
+    }
+    
+    return sortedArray;
+    
 }
 
 @end

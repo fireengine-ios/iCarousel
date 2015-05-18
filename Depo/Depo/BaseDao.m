@@ -393,6 +393,7 @@
         NSString *price = [dict objectForKey:@"price"];
         NSString *role = [dict objectForKey:@"role"];
         NSString *quotaString = [dict objectForKey:@"quota"];
+        NSString *period = [dict objectForKey:@"period"];
         NSNumber *quota = [dict objectForKey:@"quota"];
         
         offer.offerId = [self strByRawVal:offerId];
@@ -408,6 +409,7 @@
         offer.role = [self strByRawVal:role];
         offer.quotaString = [self strByRawVal:quotaString];
         offer.quota = [self floatByNumber:quota];
+        offer.period = [self strByRawVal:period];
     }
     
     return offer;

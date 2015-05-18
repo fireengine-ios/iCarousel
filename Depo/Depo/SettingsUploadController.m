@@ -58,6 +58,11 @@
     }
     if (currentConnectionSetting != oldConnectionSetting) {
         [CacheUtil writeCachedSettingSyncingConnectionType:currentConnectionSetting];
+        
+        if(currentConnectionSetting == ConnectionOptionWifi) {
+            [[CurioSDK shared] sendEvent:@"SyncWifiOnly" eventValue:@"true"];
+        }
+        
         //conn type değişmişse zaten yukarıda handle ediliyor
         if (currentSyncPhotosVideosSetting == oldSyncPhotosVideosSetting) {
             if(currentSyncPhotosVideosSetting == EnableOptionAuto || currentSyncPhotosVideosSetting == EnableOptionOn) {

@@ -31,8 +31,8 @@
     requestMethod = RequestMethodActivateOffer;
     NSURL *url = [NSURL URLWithString:REQUEST_ACTIVATE_OFFER_URL];
     
-//    NSDictionary *metadata = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO], @"X-Object-Meta-Favourite", nil];
-//    NSDictionary *payload = [NSDictionary dictionaryWithObjectsAndKeys:metadata, @"metadata", nil];
+    //    NSDictionary *metadata = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO], @"X-Object-Meta-Favourite", nil];
+    //    NSDictionary *payload = [NSDictionary dictionaryWithObjectsAndKeys:metadata, @"metadata", nil];
     
     NSDictionary *payload = [NSDictionary dictionaryWithObjectsAndKeys:offer.offerId, @"aeOfferId", offer.name, @"aeOfferName", offer.campaignChannel, @"campaignChannel", offer.campaignCode, @"campaignCode", offer.campaignId, @"campaignId", offer.campaignUserCode, @"campaignUserCode", offer.cometParameters, @"cometParameters", offer.responseApi, @"responseApi", offer.validationKey, @"validationKey", offer.price, @"price", offer.role, @"role", offer.quotaString, @"quota", nil];
     
@@ -58,14 +58,14 @@
 //- (void) requestCancelSubscription: (Subscription *)subscription {
 //    requestMethod = RequestMethodCancelSubscription;
 //    NSURL *url = [NSURL URLWithString:REQUEST_CANCEL_SUBSCRIPTION_URL];
-//    
+//
 //    NSDictionary *metadata = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO], @"X-Object-Meta-Favourite", nil];
 //    NSDictionary *payload = [NSDictionary dictionaryWithObjectsAndKeys:metadata, @"metadata", nil];
-//    
+//
 //    SBJSON *json = [SBJSON new];
 //    NSString *jsonStr = [json stringWithObject:payload];
 //    NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
-//    
+//
 //    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
 //    [request addRequestHeader:@"createdDate" value:subscription.createdDate];
 //    [request addRequestHeader:@"lastModifiedDate" value:subscription.lastModifiedDate];
@@ -73,11 +73,11 @@
 //    [request addRequestHeader:@"lastModifiedBy" value:subscription.lastModifiedBy];
 //    [request addRequestHeader:@"isCurrentSubscription" value:subscription.isCurrentSubscription ? @"1" : @"0"];
 //    [request addRequestHeader:@"status" value:subscription.status];
-//    
+//
 //    NSDictionary *planDict = [NSDictionary dictionaryWithObjectsAndKeys:subscription.plan.name, @"name", subscription.plan.displayName, @"displayName", subscription.plan.description, @"description", subscription.plan.price, @"price", subscription.plan.isDefault ? @"1" : @"2", @"isDefault", subscription.plan.role, @"role", subscription.plan.slcmOfferId, @"sclmOfferId", subscription.plan.cometOfferId, @"cometOfferId", subscription.plan.quota, @"quota", nil];
 //    NSLog(@"PlanDictionary: %@", planDict);
 //    [request addRequestHeader:@"subscriptionPlan" value:[NSString stringWithFormat:@"my dictionary is %@", planDict]];
-//    
+//
 //    [request setPostBody:[postData mutableCopy]];
 //    [request setDelegate:self];
 //    [self sendPostRequest:request];

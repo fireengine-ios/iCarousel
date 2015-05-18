@@ -90,7 +90,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
                             NSURL *_assetUrl = _asset.defaultRepresentation.url;
                             if([[_assetUrl absoluteString] isEqualToString:self.uploadRef.assetUrl]) {
                                 self.asset = _asset;
-                                [self continueAssetUpload];
+                                [self checkActiveTasksPreResume];
                                 return;
                             }
                         }
@@ -114,6 +114,27 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     }
     @finally {
     }
+}
+
+- (void) checkActiveTasksPreResume {
+    [[UploadQueue sharedInstance].session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
+        BOOL continueUpload = YES;
+        for(NSURLSessionUploadTask *task in uploadTasks) {
+            if(task.taskDescription != nil && self.uploadRef.localHash != nil && [task.taskDescription isEqualToString:self.uploadRef.localHash]) {
+                continueUpload = NO;
+                break;
+            }
+        }
+        if(continueUpload) {
+            [self continueAssetUpload];
+        } else {
+            NSLog(@"getTasksWithCompletionHandler contains ongoing upload for file: %@", self.uploadRef.localHash);
+            self.uploadRef.hasFinished = YES;
+            [delegate uploadManagerDidFailUploadingForAsset:self.uploadRef.assetUrl];
+            [queueDelegate uploadManager:self didFinishUploadingWithSuccess:NO];
+            [SyncUtil increaseAutoSyncIndex];
+        }
+    }];
 }
 
 - (void) continueAssetUpload {

@@ -18,6 +18,7 @@
 @property (nonatomic, strong) NSString *role;
 @property (nonatomic, strong) NSString *slcmOfferId;
 @property (nonatomic, strong) NSString *cometOfferId;
+@property (nonatomic,strong) NSString *period;
 @property (nonatomic) float quota;
 
 @end

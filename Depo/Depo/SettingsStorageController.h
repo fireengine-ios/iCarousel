@@ -9,8 +9,10 @@
 #import "SettingsBaseViewController.h"
 #import "AccountDao.h"
 #import "CustomConfirmView.h"
+#import "OfferRedesignCell.h"
+#import "PurchaseView.h"
 
-@interface SettingsStorageController : SettingsBaseViewController <CustomConfirmDelegate> {
+@interface SettingsStorageController : SettingsBaseViewController <CustomConfirmDelegate,OfferReDesignCellDelegate,PurchaseViewDelegate> {
     AccountDao *accountDaoToGetCurrentSubscription;
     AccountDao *accountDaoToGetOffers;
     AccountDao *accountDaoToActivateOffer;
@@ -21,5 +23,9 @@
     BOOL isJobExists;
     Offer *selectedOffer;
 }
+
+@property (strong,nonatomic) PurchaseView *purchaseView ;
+@property (strong,nonatomic) Subscription *offerToSubs;
+@property (strong,nonatomic) NSArray *containerOffers;
 
 @end

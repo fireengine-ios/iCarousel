@@ -19,5 +19,6 @@
 @synthesize slcmOfferId;
 @synthesize cometOfferId;
 @synthesize quota;
+@synthesize period;
 
 @end

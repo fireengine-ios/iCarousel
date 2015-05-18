@@ -23,5 +23,6 @@
 @synthesize role;
 @synthesize quotaString;
 @synthesize quota;
+@synthesize period;
 
 @end

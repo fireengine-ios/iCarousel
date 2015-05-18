@@ -28,5 +28,15 @@
         <string>Search</string>
         <key>LoginController</key>
         <string>Login</string>
+        <key>SettingsController</key>
+        <string>Settings</string>
+        <key>SettingsStorageController</key>
+        <string>Settings-Packages</string>
+        <key>SettingsUploadController</key>
+        <string>Settings-Sync</string>
+        <key>SettingsConnectedDevicesController</key>
+        <string>Settings-ConnectedDevices</string>
+        <key>SearchMoreModalController</key>
+        <string>Search-Results</string>
     </dict>
 </plist>

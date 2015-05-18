@@ -363,7 +363,7 @@
 - (void) URLSession:(NSURLSession *) _session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error {
     UploadManager *currentManager = [self findByTaskId:task.taskIdentifier];
     NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) task.response;
-    NSLog(@"At didCompleteWithError: %d and %@", httpResp.statusCode, [error description]);
+    NSLog(@"At didCompleteWithError: %d and %@", (int)httpResp.statusCode, [error description]);
     if (!error && httpResp.statusCode == 201) {
         if(currentManager != nil) {
             if(currentManager.uploadRef.summary != nil) {
@@ -410,6 +410,10 @@
                 [currentManager.delegate uploadManagerDidFailUploadingForAsset:currentManager.uploadRef.assetUrl];
                 [self uploadManager:currentManager didFinishUploadingWithSuccess:NO];
             }
+        }
+        //cancel the task if suspended or running in case of error
+        if(task.state == NSURLSessionTaskStateRunning || task.state == NSURLSessionTaskStateSuspended) {
+            [task cancel];
         }
     }
 }

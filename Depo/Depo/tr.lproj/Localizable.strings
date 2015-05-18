@@ -469,3 +469,15 @@
 "LocalNotificationAutoUploadsFinished"="Fotoğraf / videonuz Akıllı Deponuza otomatik yüklendi. Görüntülemek ister misiniz?";
 
 "LocationNotEnabled"="Konum Servisi açık değil.";
+
+"PurchasingViewInfo"="*ÜCRET İLK FATURANIZA YANSITILACAKTIR";
+"PurchasingViewSuccessInfo"="PAKET DEĞİŞİKLİĞİNİN HESABINIZA YANSIMASI ZAMAN ALABİLİR. DEĞİŞİKLİK GERÇEKLEŞTİĞİNDE SMS İLE BİLGİLENDİRİLECEKSİNİZ.";
+"SuccessPurchased"="PAKETİ BAŞARIYLA SATIN ALDINIZ.";
+"PurchaseFailure"="PAKET ALINAMADI.";
+"TryAgain"="Tekrar Dene";
+"ErrorPurchasingFailure"="PAKET SATIN ALINIRKEN BİR SIKINTI OLUŞTU.";
+"MONTHLY"="AYLIK";
+"YEARLY"="YILLIK";
+"SubscriptionLongInfo"="Paketinizi iptal etmek için 2222'ye \"Depo iptal\" yazıp göndermeniz yeterlidir";
+"SubscriptionFree"="ÜCRETSİZ";
+"PurchasePackage"="Satın Al";

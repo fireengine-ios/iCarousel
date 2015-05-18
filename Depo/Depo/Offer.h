@@ -22,6 +22,7 @@
 @property (nonatomic, strong) NSString *price;
 @property (nonatomic, strong) NSString *role;
 @property (nonatomic, strong) NSString *quotaString;
+@property (nonatomic, strong) NSString *period;
 @property (nonatomic) float quota;
 
 @end
