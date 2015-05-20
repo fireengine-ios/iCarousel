@@ -33,7 +33,8 @@
 @property (strong, nonatomic) MapUtil *mapUtil;
 @property (strong, nonatomic) MBProgressHUD *progress;
 @property (nonatomic, strong) MMWormhole *wormhole;
-@property (nonatomic) NotificationAction notifitacionAction;
+@property (nonatomic) NotificationAction notificationAction;
+@property (nonatomic) NSString *notificationActionUrl;
 @property (nonatomic) BOOL activatedFromBackground;
 
 - (void) showCustomAlert:(CustomAlertView *) alertView;

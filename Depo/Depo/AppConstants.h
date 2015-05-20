@@ -337,7 +337,8 @@ typedef enum {
     NotificationActionSyncSettings,
     NotificationActionFloatingMenu,
     NotificationActionPackages,
-    NotificationActionPhotos
+    NotificationActionPhotos,
+    NotificationActionWeb
 } NotificationAction;
 
 typedef enum {

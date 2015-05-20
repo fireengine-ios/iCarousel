@@ -52,6 +52,8 @@
 @synthesize progress;
 @synthesize wormhole;
 @synthesize activatedFromBackground;
+@synthesize notificationAction;
+@synthesize notificationActionUrl;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -125,15 +127,18 @@
         }
         
         if ([actionString isEqualToString:@"main"]) {
-            self.notifitacionAction = NotificationActionMain;
+            self.notificationAction = NotificationActionMain;
         } else if ([actionString isEqualToString:@"sync_settings"]) {
-            self.notifitacionAction = NotificationActionSyncSettings;
+            self.notificationAction = NotificationActionSyncSettings;
         } else if ([actionString isEqualToString:@"floating_menu"]) {
-            self.notifitacionAction = NotificationActionFloatingMenu;
+            self.notificationAction = NotificationActionFloatingMenu;
         } else if ([actionString isEqualToString:@"packages"]) {
-            self.notifitacionAction = NotificationActionPackages;
+            self.notificationAction = NotificationActionPackages;
         } else if ([actionString isEqualToString:@"photos_videos"]) {
-            self.notifitacionAction = NotificationActionPhotos;
+            self.notificationAction = NotificationActionPhotos;
+        } else if([actionString hasPrefix:@"http"]) {
+            self.notificationAction = NotificationActionWeb;
+            self.notificationActionUrl = actionString;
         }
     }
 }
@@ -224,17 +229,21 @@
 
     [self triggerAutoSynchronization];
 
-    if (self.notifitacionAction > 0) {
-        if (self.notifitacionAction == NotificationActionSyncSettings) {
+    if (self.notificationAction > 0) {
+        if (self.notificationAction == NotificationActionSyncSettings) {
             [self triggerSyncSettings];
-        } else if (self.notifitacionAction == NotificationActionPackages) {
+        } else if (self.notificationAction == NotificationActionPackages) {
             [self triggerStorageSettings];
-        } else if (self.notifitacionAction == NotificationActionFloatingMenu) {
+        } else if (self.notificationAction == NotificationActionFloatingMenu) {
             [self triggerFloatingMenu];
-        } else if (self.notifitacionAction == NotificationActionPhotos) {
+        } else if (self.notificationAction == NotificationActionPhotos) {
             [self triggerPhotosAndVideos];
-        } else {
+        } else if (self.notificationAction == NotificationActionWeb){
+            if(notificationActionUrl != nil && [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:notificationActionUrl]]) {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:notificationActionUrl]];
+            }
             [self triggerHome];
+        } else {
         }
     } else {
         [self triggerHome];
