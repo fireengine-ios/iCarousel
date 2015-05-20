@@ -224,10 +224,14 @@
         isMarked = !isMarked;
         if(isMarked) {
             maskView.hidden = NO;
-            [delegate squareImageWasMarkedForFile:self.file];
+            if(self.file != nil) {
+                [delegate squareImageWasMarkedForFile:self.file];
+            }
         } else {
             maskView.hidden = YES;
-            [delegate squareImageWasUnmarkedForFile:self.file];
+            if(self.file != nil) {
+                [delegate squareImageWasUnmarkedForFile:self.file];
+            }
         }
     } else {
         [delegate squareImageWasSelectedForFile:self.file];

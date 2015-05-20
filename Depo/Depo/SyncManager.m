@@ -53,8 +53,22 @@
     if(autoSyncIterationInProgress)
         return;
 
-    [elasticSearchDao requestPhotosForPage:0 andSize:20000 andSortType:SortTypeAlphaAsc];
-    autoSyncIterationInProgress = YES;
+    EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
+    
+    BOOL triggerSyncing = NO;
+    if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
+        ConnectionOption connectionOption = (ConnectionOption)[CacheUtil readCachedSettingSyncingConnectionType];
+        if([ReachabilityManager isReachableViaWiFi]) {
+            triggerSyncing = YES;
+        } else if([ReachabilityManager isReachableViaWWAN] && connectionOption == ConnectionOptionWifi3G) {
+            triggerSyncing = YES;
+        }
+    }
+
+    if(triggerSyncing) {
+        [elasticSearchDao requestPhotosForPage:0 andSize:20000 andSortType:SortTypeAlphaAsc];
+        autoSyncIterationInProgress = YES;
+    }
 }
 
 - (void) photoListSuccessCallback:(NSArray *) files {

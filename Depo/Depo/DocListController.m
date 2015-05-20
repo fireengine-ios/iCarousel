@@ -228,6 +228,7 @@
         [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
     } else {
         fileSelectedRef = fileSelected;
+        self.deleteType = DeleteTypeSwipeMenu;
         [APPDELEGATE.base showConfirmDelete];
     }
 }

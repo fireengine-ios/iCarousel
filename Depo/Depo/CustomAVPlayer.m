@@ -10,7 +10,7 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "VolumeSliderView.h"
 
-#define CUSTOM_AV_PLAYER_STALL_TRY_COUNT 40
+#define CUSTOM_AV_PLAYER_STALL_TRY_COUNT 30
 
 static void *AVPlayerPlaybackViewControllerRateObservationContext = &AVPlayerPlaybackViewControllerRateObservationContext;
 static void *AVPlayerPlaybackViewControllerStatusObservationContext = &AVPlayerPlaybackViewControllerStatusObservationContext;
@@ -193,6 +193,11 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
 	[alertView show];
 }
 
+- (void) assetFailedToLoad:(NSError *)error {
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Video Yüklenemedi" message:@"Bu Video içeriğinin yüklenmesi zaman almaktadır. Lütfen başka bir Video içeriği deneyin." delegate:nil cancelButtonTitle:@"Tamam" otherButtonTitles:nil];
+    [alertView show];
+}
+
 - (void)playerItemDidReachEnd:(NSNotification *)notification {
 	self.seekToZeroBeforePlay = YES;
     [self.player seekToTime:kCMTimeZero];
@@ -218,8 +223,8 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
                 break;
                 
             case AVPlayerStatusReadyToPlay: {
-                [self.player play];
                 self.playerTryCount = 0;
+                [self.player play];
                 [self.controlView videoDidStart];
                 
                 float currentVolumeVal = 1.0f;
@@ -282,14 +287,15 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
 }
 
 - (void) customAVShouldPause {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"PlayerContinueNotification" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"PlayerHangingNotification" object:nil];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"PlayerContinueNotification" object:nil];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"PlayerHangingNotification" object:nil];
     [self.player pause];
 }
 
 - (void) customAVShouldPlay {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerContinue) name:@"PlayerContinueNotification" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerHanging) name:@"PlayerHangingNotification" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerContinue) name:@"PlayerContinueNotification" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerHanging) name:@"PlayerHangingNotification" object:nil];
+    self.playerTryCount = 0;
     [self.player play];
 }
 
@@ -495,40 +501,44 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
 }
 
 - (void) playerHanging {
+    [self.controlView pauseClicked];
     if (playerTryCount <= CUSTOM_AV_PLAYER_STALL_TRY_COUNT) {
         playerTryCount += 1;
-        [self customAVShouldPause];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"PlayerContinueNotification" object:nil];
     } else {
-        [self customAVShouldPause];
-        [self assetFailedToPrepareForPlayback:nil];
+        [self assetFailedToLoad:nil];
     }
 }
 
 - (void) playerContinue {
+    NSArray *loadedTimeRanges = [[self.player currentItem] loadedTimeRanges];
+    CMTimeRange timeRange = [[loadedTimeRanges objectAtIndex:0] CMTimeRangeValue];
+    CGFloat smartValue = CMTimeGetSeconds(CMTimeAdd(timeRange.start, timeRange.duration));
+    CGFloat duration   = CMTimeGetSeconds(self.player.currentTime);
+    NSTimeInterval availableLoad = smartValue - duration;
+
     if (CMTIME_COMPARE_INLINE(self.player.currentTime, ==, self.player.currentItem.duration)) {
         //mahir: played to the end, do nothing, let AVPlayerItemDidPlayToEndTimeNotification do the work
         return;
     } else if(playerTryCount > CUSTOM_AV_PLAYER_STALL_TRY_COUNT) {
         [self customAVShouldPause];
-        [self assetFailedToPrepareForPlayback:nil];
+        [self assetFailedToLoad:nil];
         return;
     } else if(playerTryCount == 0) {
         return;
-    } else if (self.player.currentItem.playbackLikelyToKeepUp == YES) {
-        [self.player play];
-        playerTryCount = 0;
+    } else if(!self.player.currentItem.playbackBufferEmpty && availableLoad > 4.0) {
+        [self.controlView playClicked];
     } else {
         playerTryCount += 1;
-        double delayInSeconds = 0.5;
+        double delayInSeconds = 1.0;
         dispatch_time_t executeTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
         dispatch_after(executeTime, dispatch_get_main_queue(), ^{
             if (playerTryCount > 0) {
                 if (playerTryCount <= CUSTOM_AV_PLAYER_STALL_TRY_COUNT) {
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"PlayerContinueNotification" object:nil];
                 } else {
-                    [self customAVShouldPause];
-                    [self assetFailedToPrepareForPlayback:nil];
+                    [self.controlView pauseClicked];
+                    [self assetFailedToLoad:nil];
                 }
             }
         });

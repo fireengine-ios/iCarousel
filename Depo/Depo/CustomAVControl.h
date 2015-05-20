@@ -42,5 +42,7 @@
 - (void) videoDidStop;
 - (void) updateInnerFrames;
 - (void) initialVolumeLevel:(float) level;
+- (void) playClicked;
+- (void) pauseClicked;
 
 @end
