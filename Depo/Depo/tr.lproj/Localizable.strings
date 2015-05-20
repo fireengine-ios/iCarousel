@@ -254,7 +254,7 @@
 "SignIn"="Giriş yap";
 "Continue"="Devam";
 
-"PostLoginSyncInfo"="Fotoğraflarınızı ve videolarınızı iPhone'unuzdan Turkcell Akıllı Depo uygulamasına otomatik olarak yükleyin";
+"PostLoginSyncInfo"="Fotoğraflarınızı iPhone'unuzdan Turkcell Akıllı Depo uygulamasına otomatik olarak yükleyin";
 "PostLoginImgPrefInfo"="Fotoğraf & Videolarınızı iPhone'unuzdan Turkcell Akıllı Depo uygulamasına otomatik olarak yükleyin";
 "PostLoginContactPrefInfo"="Rehberinizi ve Sosyal Ağ kişilerinizi Akıllı Depo uygulamasına otomatik olarak yükleyin";
 
@@ -301,9 +301,9 @@
 "ActivateOfferApprove"="Paket değişikliği yapmak istediğinize emin misiniz?";
 
 "AutomaticSynchronization"="Otomatik Yükleme";
-"Photos&Videos"="Fotoğraf ve Videolar";
-"Photos&VideosInfo"="Fotoğraf ve videolarınızın Akıllı Depo'nuza otomatik olarak yüklenmesi için açık konuma getirin.";
-"Photos&VideosAutoInfo"="Akıllı Depo'daki fotoğraf ve videolarınıza erişebilir ve istediğinizde albümünüzdeki fotoğraf ve videoları Akıllı Depo'ya yükleyebilirsiniz.\n\n(Fotoğraf ve videoları Akıllı Depo'ya yüklemek için uygulamadaki \"+\" butonunu kullanın.)\n\nOtomatik yükleme etkin durumda, albümünüzdeki fotoğraf ve videolar otomatik olarak bulutta yedeklenecek.";
+"Photos&Videos"="Fotoğraflar";
+"Photos&VideosInfo"="Fotoğraflarınızın Akıllı Depo'nuza otomatik olarak yüklenmesi için açık konuma getirin.";
+"Photos&VideosAutoInfo"="Akıllı Depo'daki fotoğraf ve videolarınıza erişebilir ve istediğinizde albümünüzdeki fotoğraf ve videoları Akıllı Depo'ya yükleyebilirsiniz.\n\n(Fotoğraf ve videoları Akıllı Depo'ya yüklemek için uygulamadaki \"+\" butonunu kullanın.)\n\nOtomatik yükleme etkin durumda, albümünüzdeki fotoğraflar otomatik olarak bulutta yedeklenecek.";
 "Photos&VideosOnInfo"="Akıllı Depo'daki fotoğraf ve videolarınıza erişebilir ve istediğinizde albümünüzdeki fotoğraf ve videoları Akıllı Depo'ya yükleyebilirsiniz.\n\n(Fotoğraf ve videoları Akıllı Depo'ya yüklemek için uygulamadaki \"+\" butonunu kullanın.)";
 "Photos&VideosOffInfo"="Akıllı Depo'daki fotoğraf ve videolarınıza erişemez ve Akıllı Depo'ya yeni fotoğraf veya video yükleyemezsiniz.";
 "Music"="Müzik";

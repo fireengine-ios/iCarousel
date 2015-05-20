@@ -361,6 +361,7 @@
         NSString *slcmOfferId = [detailDict objectForKey:@"slcmOfferId"];
         NSString *cometOfferId = [detailDict objectForKey:@"cometOfferId"];
         NSNumber *quota = [detailDict objectForKey:@"quota"];
+        NSString *period = [detailDict objectForKey:@"period"];
         
         subscription.plan = [[SubscriptionPlan alloc] init];
         subscription.plan.name = [self strByRawVal:name];
@@ -372,6 +373,7 @@
         subscription.plan.slcmOfferId = [self strByRawVal:slcmOfferId];
         subscription.plan.cometOfferId = [self strByRawVal:cometOfferId];
         subscription.plan.quota = [self floatByNumber:quota];
+        subscription.plan.period = [self strByRawVal:period];
     }
     
     return subscription;
@@ -443,7 +445,7 @@
 
 - (void) triggerNewToken {
     NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
-    if(networkStatus == kReachableViaWiFi) {
+    if(networkStatus == kReachableViaWiFi || networkStatus == kReachableViaWWAN) {
         if([CacheUtil readRememberMeToken] != nil) {
             tokenDao = [[RequestTokenDao alloc] init];
             tokenDao.delegate = self;
@@ -451,16 +453,18 @@
             tokenDao.failMethod = @selector(tokenRevisitedFailCallback:);
             [tokenDao requestTokenByRememberMe];
         } else {
-//            [self shouldReturnFailWithMessage:LOGIN_REQ_ERROR_MESSAGE];
-            NSLog(@"Login Required Triggered within triggerNewToken instead of fail method: %@", NSStringFromSelector(failMethod));
-            [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_REQ_NOTIFICATION object:nil userInfo:nil];
+            if(networkStatus == kReachableViaWiFi) {
+                //            [self shouldReturnFailWithMessage:LOGIN_REQ_ERROR_MESSAGE];
+                NSLog(@"Login Required Triggered within triggerNewToken instead of fail method: %@", NSStringFromSelector(failMethod));
+                [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_REQ_NOTIFICATION object:nil userInfo:nil];
+            } else {
+                radiusDao = [[RadiusDao alloc] init];
+                radiusDao.delegate = self;
+                radiusDao.successMethod = @selector(tokenRevisitedSuccessCallback);
+                radiusDao.failMethod = @selector(tokenRevisitedFailCallback:);
+                [radiusDao requestRadiusLogin];
+            }
         }
-    } else if(networkStatus == kReachableViaWWAN) {
-        radiusDao = [[RadiusDao alloc] init];
-        radiusDao.delegate = self;
-        radiusDao.successMethod = @selector(tokenRevisitedSuccessCallback);
-        radiusDao.failMethod = @selector(tokenRevisitedFailCallback:);
-        [radiusDao requestRadiusLogin];
     }
 }
 

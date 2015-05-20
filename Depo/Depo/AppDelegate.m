@@ -244,6 +244,7 @@
             }
             [self triggerHome];
         } else {
+            [self triggerHome];
         }
     } else {
         [self triggerHome];
