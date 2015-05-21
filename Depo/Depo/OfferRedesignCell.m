@@ -99,7 +99,11 @@
         }
         else {
             UILabel *subscriptionDesc = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width/2, 7, self.frame.size.width/2-20, 15)];
-            subscriptionDesc.text = [NSString stringWithFormat:@"%@ %.2f TL",[self getOfferPeriodString:curentSubscription.plan.period],curentSubscription.plan.price];
+            if(curentSubscription.plan.price > 0.0f) {
+                subscriptionDesc.text = [NSString stringWithFormat:@"%@ %.2f TL",[self getOfferPeriodString:curentSubscription.plan.period],curentSubscription.plan.price];
+            } else {
+                subscriptionDesc.text = NSLocalizedString(@"SubscriptionFree", @"");
+            }
             subscriptionDesc.textAlignment = NSTextAlignmentCenter;
             subscriptionDesc.font = [UIFont fontWithName:@"TurkcellSaturaMed" size:15];
             subscriptionDesc.backgroundColor = [UIColor clearColor];
@@ -109,7 +113,12 @@
             UILabel *longSubscriptionDesc = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width/2, 25, self.frame.size.width/2-20,40)];
             longSubscriptionDesc.numberOfLines = 0;
             longSubscriptionDesc.lineBreakMode = NSLineBreakByWordWrapping;
-            longSubscriptionDesc.text = NSLocalizedString(@"SubscriptionLongInfo", "");
+            NSString *cancelKeyword = [self getNameForSms:curentSubscription];
+            if([cancelKeyword isEqualToString:@""]) {
+                longSubscriptionDesc.text = @"";
+            } else {
+                longSubscriptionDesc.text = [NSString stringWithFormat:NSLocalizedString(@"SubscriptionLongInfo", ""), [self getNameForSms:curentSubscription]];
+            }
             longSubscriptionDesc.textColor = [Util UIColorForHexColor:@"999999"];
             longSubscriptionDesc.textAlignment = NSTextAlignmentCenter;
             longSubscriptionDesc.font = [UIFont fontWithName:@"TurkcellSaturaMed" size:12];
@@ -260,5 +269,16 @@
     [offerCellDel selectedOfferPurchase:offer];
 }
 
+- (NSString *)getNameForSms: (Subscription *) currentSubscription {
+    NSString *name = @"";
+    if ([currentSubscription.plan.role isEqualToString:@"standard"]) {
+        name = @"MINIDEPO";
+    } else if ([currentSubscription.plan.role isEqualToString:@"premium"]) {
+        name = @"STANDARTDEPO";
+    } else if ([currentSubscription.plan.role isEqualToString:@"ultimate"]) {
+        name = @"MEGADEPO";
+    }
+    return name;
+}
 
 @end

@@ -20,6 +20,7 @@
 @property (nonatomic, strong) NSString *responseApi;
 @property (nonatomic, strong) NSString *validationKey;
 @property (nonatomic, strong) NSString *price;
+@property (nonatomic) float rawPrice;
 @property (nonatomic, strong) NSString *role;
 @property (nonatomic, strong) NSString *quotaString;
 @property (nonatomic, strong) NSString *period;

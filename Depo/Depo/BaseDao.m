@@ -408,6 +408,7 @@
         offer.responseApi = [self strByRawVal:responseApi];
         offer.validationKey = [self strByRawVal:validationKey];
         offer.price = [self strByRawVal:price];
+        offer.rawPrice = [self floatByNumber:price];
         offer.role = [self strByRawVal:role];
         offer.quotaString = [self strByRawVal:quotaString];
         offer.quota = [self floatByNumber:quota];

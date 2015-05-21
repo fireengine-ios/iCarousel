@@ -37,7 +37,11 @@
         [self addSubview:offerQuota];
         
         UILabel *offerPrice = [[UILabel alloc] initWithFrame:CGRectMake(20, 90, self.frame.size.width-40, 20)];
-        offerPrice.text = [NSString stringWithFormat:@"* %@ %@ TL",NSLocalizedString(@"MONTHLY", ""),offer.price];
+        if(offer.rawPrice > 0.0f) {
+            offerPrice.text = [NSString stringWithFormat:@"%@ %@ TL", [offer.period isEqualToString:@"MONTH"] ? NSLocalizedString(@"MONTHLY", "") : NSLocalizedString(@"YEARLY", ""), offer.price];
+        } else {
+            offerPrice.text = NSLocalizedString(@"SubscriptionFree", @"");
+        }
         offerPrice.textColor = [Util UIColorForHexColor:@"363e4e"];
         offerPrice.textAlignment = NSTextAlignmentCenter;
         offerPrice.font = [UIFont fontWithName:@"TurkcellSaturaReg" size:20];
@@ -47,12 +51,14 @@
         [buyButton addTarget:self action:@selector(buyClicked) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:buyButton];
         
+        /*
         UILabel *infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 200, self.frame.size.width-50, 10)];
         infoLabel.text = NSLocalizedString(@"PurchasingViewInfo", @"");
         infoLabel.textAlignment = NSTextAlignmentCenter;
         infoLabel.textColor = [Util UIColorForHexColor:@"707a8e"];
         infoLabel.font = [UIFont fontWithName:@"TurkcellSaturaReg" size:10];
         [self addSubview:infoLabel];
+         */
     }
     return self;
 }

@@ -24,5 +24,6 @@
 @synthesize quotaString;
 @synthesize quota;
 @synthesize period;
+@synthesize rawPrice;
 
 @end

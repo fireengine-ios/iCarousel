@@ -380,8 +380,9 @@
     currentSubscription = nil;
     isJobExists = YES;
     [offers removeAllObjects];
-    [self loadPageContent];
-    [pageContentTable reloadData];
+//    [self loadPageContent];
+//    [pageContentTable reloadData];
+    [APPDELEGATE triggerHome];
 }
 
 - (NSArray *) sortArray:(NSArray *) array withKey:(NSString *) key withAscending:(BOOL) ascending {

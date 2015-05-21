@@ -27,7 +27,7 @@
     if(self = [super init]) {
         self.view.backgroundColor = [Util UIColorForHexColor:@"3fb0e8"];
         
-        infoScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, IS_IPHONE_5 ? 80 : 30, self.view.frame.size.width, 355)];
+        infoScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, IS_IPHONE_5 ? 80 : 45, self.view.frame.size.width, 350)];
         infoScroll.pagingEnabled = YES;
         infoScroll.showsHorizontalScrollIndicator = NO;
         infoScroll.delegate = self;
@@ -50,7 +50,7 @@
         
         infoScroll.contentSize = CGSizeMake(infoScroll.frame.size.width * 5, infoScroll.frame.size.height);
 
-        pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(110, infoScroll.frame.origin.y + infoScroll.frame.size.height + 5, 100, 40)];
+        pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(110, infoScroll.frame.origin.y + infoScroll.frame.size.height, 100, 30)];
         pageControl.numberOfPages = 5;
         pageControl.currentPage = 0;
         [self.view addSubview:pageControl];
@@ -71,6 +71,10 @@
         descLabel.numberOfLines = 0;
         [self.view addSubview:descLabel];
         */
+
+        UIImageView *iconImgView = [[UIImageView alloc] initWithFrame:CGRectMake(150, 28, 29, 20)];
+        iconImgView.image = [UIImage imageNamed:@"cloud_icon.png"];
+        [self.view addSubview:iconImgView];
 
         SimpleButton *loginButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, self.view.frame.size.height - 60, self.view.frame.size.width - 40, 50) withTitle:NSLocalizedString(@"StartUsingTitle", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
         [loginButton addTarget:self action:@selector(loginClicked) forControlEvents:UIControlEventTouchUpInside];

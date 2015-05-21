@@ -43,6 +43,8 @@
 
 //TODO info'larda version update
 
+#define NO_CONN_ALERT_TAG 111
+
 @implementation AppDelegate
 
 @synthesize session;
@@ -102,6 +104,8 @@
     
     if(![ReachabilityManager isReachable]) {
         UIAlertView *noConnAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", @"") message:NSLocalizedString(@"ConnectionErrorWarning", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"SubmitButtonTitle", @"") otherButtonTitles:nil];
+        noConnAlert.delegate = self;
+        noConnAlert.tag = NO_CONN_ALERT_TAG;
         [noConnAlert show];
     } else {
         UpdaterController *updaterController = [UpdaterController initWithUpdateURL:UPDATER_SDK_URL delegate:self postProperties:NO];
@@ -588,6 +592,12 @@ void uncaughtExceptionHandler(NSException *exception) {
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *logPath = [documentsDirectory stringByAppendingPathComponent:@"nslogs.log"];
     freopen([logPath cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
+}
+
+- (void) alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if(alertView.tag == NO_CONN_ALERT_TAG) {
+        [self triggerLogout];
+    }
 }
 
 @end

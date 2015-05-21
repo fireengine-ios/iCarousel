@@ -24,7 +24,7 @@
 
 #define APPDELEGATE ((AppDelegate *)[[UIApplication sharedApplication] delegate])
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, TokenManagerDelegate, UpdaterControllerDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, TokenManagerDelegate, UpdaterControllerDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) AppSession *session;

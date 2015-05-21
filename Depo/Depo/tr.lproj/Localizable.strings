@@ -178,7 +178,7 @@
 "SortTypeArtistDescTitle"="Artist İsmi (Z-A)";
 "SortTypeAlbumAscTitle"="Albüm İsmi (A-Z)";
 "SortTypeAlbumDescTitle"="Albüm İsmi (Z-A)";
-"HomeUsageTotalStorage"="Toplam %@";
+"HomeUsageTotalStorage"="%@";
 "LastSyncFormat"="SON YÜKLEME: %@ ÖNCE";
 "LastSyncFormatForWidget"="Son Yükleme: %@";
 
@@ -201,12 +201,12 @@
 
 "RecentActivitySingleFolderAdded"="%d klasör oluşturuldu";
 "RecentActivityMultipleFoldersAdded"="%d klasör oluşturuldu";
-"RecentActivitySingleImageAdded"="%d resim oluşturuldu";
-"RecentActivityMultipleImagesAdded"="%d resim oluşturuldu";
-"RecentActivitySingleFileAdded"="%d dosya oluşturuldu";
-"RecentActivityMultipleFilesAdded"="%d dosya oluşturuldu";
-"RecentActivitySingleMusicAdded"="%d şarkı oluşturuldu";
-"RecentActivityMultipleMusicsAdded"="%d şarkı oluşturuldu";
+"RecentActivitySingleImageAdded"="%d fotoğraf yüklendi";
+"RecentActivityMultipleImagesAdded"="%d fotoğraf yüklendi";
+"RecentActivitySingleFileAdded"="%d dosya yüklendi";
+"RecentActivityMultipleFilesAdded"="%d dosya yüklendi";
+"RecentActivitySingleMusicAdded"="%d şarkı yüklendi";
+"RecentActivityMultipleMusicsAdded"="%d şarkı yüklendi";
 
 "RecentActivitySingleFolderMoved"="%d klasör taşındı";
 "RecentActivityMultipleFoldersMoved"="%d klasör taşındı";
@@ -254,11 +254,11 @@
 "SignIn"="Giriş yap";
 "Continue"="Devam";
 
-"PostLoginSyncInfo"="Fotoğraflarınızı iPhone'unuzdan Turkcell Akıllı Depo uygulamasına otomatik olarak yükleyin";
-"PostLoginImgPrefInfo"="Fotoğraf & Videolarınızı iPhone'unuzdan Turkcell Akıllı Depo uygulamasına otomatik olarak yükleyin";
-"PostLoginContactPrefInfo"="Rehberinizi ve Sosyal Ağ kişilerinizi Akıllı Depo uygulamasına otomatik olarak yükleyin";
+"PostLoginSyncInfo"="Fotoğraflarınızı iPhone'unuzdan Akıllı Deponuza otomatik olarak yükleyin";
+"PostLoginImgPrefInfo"="Fotoğraflarınızı iPhone'unuzdan Akıllı Deponuza otomatik olarak yükleyin";
+"PostLoginContactPrefInfo"="Rehberinizi ve Sosyal Ağ kişilerinizi Akıllı Deponuza otomatik olarak yükleyin";
 
-"PostLoginSyncPrefTitle"="BAĞLANTI TERCİHİ";
+"PostLoginSyncPrefTitle"="YÜKLEME TERCİHİ";
 "PostLoginRoamingTitle"="Yurtdışı Dolaşım";
 "PostLoginRoamingDesc"="Yurtdışındayken otomatik yükle";
 
@@ -277,7 +277,7 @@
 
 "FavouritesTitle"="Favoriler";
 "ConnectionErrorWarning"="Bir bağlantı sorunu oluştu. Lütfen internet bağlantınızı kontrol edin.";
-"NoFavouriteFound"="Favori olarak işaretlenmiş dosyanız yok.";
+"NoFavouriteFound"="Favori dosyanız yok";
 
 "Auto"="Otomatik";
 "On"="Açık";
@@ -391,7 +391,7 @@
 "SubmitButtonTitle"="Tamam";
 
 "MigrationTitle"="TURKCELL AKILLI DEPO KURULUMU";
-"MigrationSubTitle"="Turkcell Akıllı Depo kurulumunuz yapılıyor...";
+"MigrationSubTitle"="Akıllı Depo kurulumunuz yapılıyor...";
 
 "AcceptTerms"="Kullanım koşullarını kabul ediyorum.";
 "AcceptTermsWarning"="Kullanım koşullarını kabul etmeniz gerekiyor.";
@@ -427,7 +427,7 @@
 "PreLoginTitle2"="Telefonunuza Ek Hafıza";
 "PreLoginTitle3"="Fotoğraflarınız anında bilgisayarınızda, tabletinizde";
 "PreLoginTitle4"="Kolayca paylaşın";
-"PreLoginTitle5"="Herşey Güvende";
+"PreLoginTitle5"="Her Şey Güvende";
 
 "StartUsingTitle"="Kullanmaya başla";
 
@@ -458,7 +458,7 @@
 "ContactResultBackupSectionTitle"="Akıllı Depo'da";
 "ContactResultRestoreSectionTitle"="Telefonda";
 
-"AutoSyncStatusInfo"="Fotoğraflar / Videolar Yükleniyor (%d/%d%@)";
+"AutoSyncStatusInfo"="Yükleniyor (%d/%d%@)";
 
 "UploadingPhoto"="Fotoğraf Yükleniyor";
 "UploadingPhotoCompleteStatus"="%%%d tamamlandı";
@@ -466,7 +466,7 @@
 "UploadingPhotoFinishedWithError"="Yükleme esnasında hata oluştu";
 
 "LocalNotificationManualUploadsFinished"="Yüklemeler tamamlandı, telefon hafızanızda yer açmak için bu dosyaları telefonunuzdan silebilirsiniz.";
-"LocalNotificationAutoUploadsFinished"="Fotoğraf / videonuz Akıllı Deponuza otomatik yüklendi. Görüntülemek ister misiniz?";
+"LocalNotificationAutoUploadsFinished"="Fotoğraflarınız Akıllı Deponuza yüklendi. Görüntülemek ister misiniz?";
 
 "LocationNotEnabled"="Konum Servisi açık değil.";
 
@@ -478,6 +478,8 @@
 "ErrorPurchasingFailure"="PAKET SATIN ALINIRKEN BİR SIKINTI OLUŞTU.";
 "MONTHLY"="AYLIK";
 "YEARLY"="YILLIK";
-"SubscriptionLongInfo"="Paketinizi iptal etmek için 2222'ye \"Depo iptal\" yazıp göndermeniz yeterlidir";
+"SubscriptionLongInfo"="Paketinizi iptal etmek için 2222'ye \"IPTAL %@\" yazıp göndermeniz yeterlidir";
 "SubscriptionFree"="ÜCRETSİZ";
 "PurchasePackage"="Satın Al";
+"ItemTitle"="adet";
+"ItemsTitle"="adet";

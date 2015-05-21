@@ -214,6 +214,7 @@
     
     if(triggerSyncing) {
         NSArray *localHashList = [SyncUtil readSyncHashLocally];
+        NSLog(@"Local Hash List: %@", localHashList);
         NSArray *remoteHashList = [SyncUtil readSyncHashRemotely];
         NSArray *remoteSummaryList = [SyncUtil readSyncFileSummaries];
         
@@ -243,7 +244,7 @@
                                         shouldStartUpload = ![remoteSummaryList containsObject:assetSummary];
                                     }
                                     if(shouldStartUpload) {
-                                        NSLog(@"At ManuallyCheckIfAlbumChanged : starting upload for asset: %@", asset.defaultRepresentation.filename);
+                                        NSLog(@"At ManuallyCheckIfAlbumChanged : starting upload for asset: %@ with hash: %@", asset.defaultRepresentation.filename, localHash);
                                         [[SyncManager sharedInstance] startUploadForAsset:asset andLocalHash:localHash];
                                     }
                                 }
