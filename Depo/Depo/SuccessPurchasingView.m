@@ -34,7 +34,7 @@
         offerQuota.textAlignment = NSTextAlignmentCenter;
         [self addSubview:offerQuota];
         
-        UILabel *purchasingSuccessInfo = [[UILabel alloc] initWithFrame:CGRectMake(80, 55, 120,35)];
+        UILabel *purchasingSuccessInfo = [[UILabel alloc] initWithFrame:CGRectMake(60, 55, 160,35)];
         purchasingSuccessInfo.numberOfLines = 0;
         purchasingSuccessInfo.font = [UIFont fontWithName:@"TurkcellSaturaMed" size:15];
         purchasingSuccessInfo.backgroundColor = [UIColor clearColor];
