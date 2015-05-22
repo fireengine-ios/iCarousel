@@ -98,7 +98,7 @@
             [self addSubview:infoSubscriton];
         }
         else {
-            UILabel *subscriptionDesc = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width/2, 7, self.frame.size.width/2-20, 15)];
+            UILabel *subscriptionDesc = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width/2, 5, self.frame.size.width/2-20, 15)];
             if(curentSubscription.plan.price > 0.0f) {
                 subscriptionDesc.text = [NSString stringWithFormat:@"%@ %.2f TL",[self getOfferPeriodString:curentSubscription.plan.period],curentSubscription.plan.price];
             } else {
@@ -110,7 +110,7 @@
             subscriptionDesc.textColor = [Util UIColorForHexColor:@"199cd4"];
             [self addSubview:subscriptionDesc];
             
-            UILabel *longSubscriptionDesc = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width/2, 25, self.frame.size.width/2-20,40)];
+            UILabel *longSubscriptionDesc = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width/2, 20, self.frame.size.width/2-20, 55)];
             longSubscriptionDesc.numberOfLines = 0;
             longSubscriptionDesc.lineBreakMode = NSLineBreakByWordWrapping;
             NSString *cancelKeyword = [self getNameForSms:curentSubscription];

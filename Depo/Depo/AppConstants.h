@@ -314,7 +314,8 @@ typedef enum {
 } SearchListType;
 
 typedef enum {
-    UploadTaskTypeAsset = 0,
+    UploadTaskTypeUnknown = 0,
+    UploadTaskTypeAsset,
     UploadTaskTypeData,
     UploadTaskTypeFile
 } UploadTaskType;

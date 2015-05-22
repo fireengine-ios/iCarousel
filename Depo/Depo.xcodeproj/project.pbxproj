@@ -4027,7 +4027,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"PLATFORM_LOCAL=1",
-					"LOG2FILE_passive=1",
+					"LOG2FILE=1",
 				);
 				INFOPLIST_FILE = "Depo/Depo-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;

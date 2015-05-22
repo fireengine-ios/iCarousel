@@ -514,11 +514,11 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-//    [SyncUtil resetBadgeCount];
-
+    /*
     if(session != nil) {
         [session checkLatestContactSyncStatus];
     }
+     */
     
     if(activatedFromBackground) {
         /*
