@@ -373,6 +373,10 @@
             [currentManager notifyUpload];
         }
     } else {
+        if(httpResp.statusCode == 0 && error != nil && ([error code] == -1 || [error code] == -997)) {
+            NSLog(@"At URLSession:didCompleteWithError for hash: %@, error code is: %d", task.taskDescription, (int)[error code]);
+            return;
+        }
         if(httpResp.statusCode == 401 || httpResp.statusCode == 403) {
             if(currentManager != nil) {
                 if(!currentManager.uploadRef.retryDoneForTokenFlag) {

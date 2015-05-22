@@ -31,7 +31,7 @@
         }
         
         if(moveFlag) {
-            moveButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width/2 - 28, 20, 56, 20) withImageName:@"white_move_icon.png" withSideTitle:NSLocalizedString(@"MoveTitle", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[UIColor whiteColor]];
+            moveButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width/2 - 32, 20, 64, 20) withImageName:@"white_move_icon.png" withSideTitle:NSLocalizedString(@"MoveTitle", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[UIColor whiteColor]];
             [moveButton addTarget:self action:@selector(moveClicked) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:moveButton];
         }

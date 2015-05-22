@@ -81,7 +81,7 @@
     return name;
 }
 
-- (NSString *) quotaCalculator:(long) quota {
+- (NSString *) quotaCalculator:(float) quota {
     int quotInt = (int)( quota/(1024*1024*1024));
     NSString *quotStr = [NSString stringWithFormat:@"%d",quotInt];
     return quotStr;

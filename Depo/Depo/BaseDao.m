@@ -393,6 +393,7 @@
         NSString *responseApi = [dict objectForKey:@"responseApi"];
         NSString *validationKey = [dict objectForKey:@"validationKey"];
         NSString *price = [dict objectForKey:@"price"];
+        NSNumber *rawPrice = [dict objectForKey:@"price"];
         NSString *role = [dict objectForKey:@"role"];
         NSString *quotaString = [dict objectForKey:@"quota"];
         NSString *period = [dict objectForKey:@"period"];
@@ -408,7 +409,7 @@
         offer.responseApi = [self strByRawVal:responseApi];
         offer.validationKey = [self strByRawVal:validationKey];
         offer.price = [self strByRawVal:price];
-        offer.rawPrice = [self floatByNumber:price];
+        offer.rawPrice = [self floatByNumber:rawPrice];
         offer.role = [self strByRawVal:role];
         offer.quotaString = [self strByRawVal:quotaString];
         offer.quota = [self floatByNumber:quota];
