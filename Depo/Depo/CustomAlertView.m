@@ -72,7 +72,7 @@
         messageLabel.numberOfLines = 0;
         [modalView addSubview:messageLabel];
         
-        SimpleButton *dismissButton = [[SimpleButton alloc] initWithFrame:CGRectMake(19, modalView.frame.size.height - 66, 242, 52) withTitle:@"Tamam" withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:22] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
+        SimpleButton *dismissButton = [[SimpleButton alloc] initWithFrame:CGRectMake(19, modalView.frame.size.height - 66, 242, 52) withTitle:NSLocalizedString(@"OK", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:22] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
 
         [dismissButton addTarget:self action:@selector(triggerDismiss) forControlEvents:UIControlEventTouchUpInside];
         [modalView addSubview:dismissButton];

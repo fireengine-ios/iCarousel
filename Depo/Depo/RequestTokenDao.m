@@ -141,7 +141,7 @@
         SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:FORBIDDEN_ERROR_MESSAGE]);
     } else {
         if([request.error code] == ASIConnectionFailureErrorType){
-            SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:NO_CONN_ERROR_MESSAGE]);
+            SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:NSLocalizedString(@"NoConnErrorMessage", @"")]);
         } else {
             SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:GENERAL_ERROR_MESSAGE]);
         }

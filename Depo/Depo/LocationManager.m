@@ -10,6 +10,7 @@
 #import "SyncManager.h"
 #import "AppConstants.h"
 #import "AppUtil.h"
+#import "SyncUtil.h"
 
 @implementation LocationManager
 
@@ -36,8 +37,9 @@
         self.locManager = [[CLLocationManager alloc] init];
     }
     self.locManager.delegate = self;
-    self.locManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
+    self.locManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
     self.locManager.distanceFilter = 100.0f;
+    self.locManager.pausesLocationUpdatesAutomatically = NO;
 }
 
 /*
@@ -72,21 +74,21 @@
                 if(delegate) {
                     [delegate locationPermissionGranted];
                 }
-                [self.locManager startUpdatingLocation];
+                [self.locManager startMonitoringSignificantLocationChanges];
             }
         } else if([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways) {
             if(delegate) {
                 [delegate locationPermissionGranted];
             }
-            [self.locManager startUpdatingLocation];
+            [self.locManager startMonitoringSignificantLocationChanges];
         }
     }
 }
 
 - (void) stopLocationManager {
-    if(self.locManager) {
-        [self.locManager stopUpdatingLocation];
-        self.locManager.delegate = nil;
+    if([LocationManager sharedInstance].locManager) {
+        [[LocationManager sharedInstance].locManager stopMonitoringSignificantLocationChanges];
+        [LocationManager sharedInstance].locManager.delegate = nil;
     }
 }
 
@@ -95,12 +97,12 @@
         if(delegate) {
             [delegate locationPermissionGranted];
         }
-        [self.locManager startUpdatingLocation];
+        [self.locManager startMonitoringSignificantLocationChanges];
     } else if (status == kCLAuthorizationStatusAuthorized) {
         if(delegate) {
             [delegate locationPermissionGranted];
         }
-        [self.locManager startUpdatingLocation];
+        [self.locManager startMonitoringSignificantLocationChanges];
     } else {
         if(delegate) {
             [delegate locationPermissionDenied];
@@ -110,6 +112,12 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     NSLog(@"At locationManager:didUpdateLocations:");
+    
+    NSDate *lastUpdateDate = [SyncUtil readLastLocUpdateTime];
+    if(lastUpdateDate != nil && [[NSDate date] timeIntervalSinceDate:lastUpdateDate] < 30) {
+        return;
+    }
+    [SyncUtil writeLastLocUpdateTime:[NSDate date]];
     
     [[SyncManager sharedInstance] decideAndStartAutoSync];
 }

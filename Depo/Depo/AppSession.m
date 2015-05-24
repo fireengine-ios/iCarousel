@@ -197,6 +197,7 @@
     self.authToken = nil;
     self.baseUrl = nil;
     self.baseUrlConstant = nil;
+    [SyncUtil resetBaseUrlConstant];
 }
 
 - (void) addBgOngoingTaskUrl:(NSString *) taskUrl {

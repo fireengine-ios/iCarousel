@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "AppSession.h"
 #import "AppUtil.h"
+#import "SyncUtil.h"
 
 @implementation RequestBaseUrlDao
 
@@ -36,6 +37,7 @@
             NSString *baseUrlValue = [mainDict objectForKey:@"value"];
             APPDELEGATE.session.baseUrl = [self strByRawVal:baseUrlValue];
             APPDELEGATE.session.baseUrlConstant = [AppUtil userUniqueValueByBaseUrl:[self strByRawVal:baseUrlValue]];
+            [SyncUtil writeBaseUrlConstant:APPDELEGATE.session.baseUrlConstant];
         }
         
         [self shouldReturnSuccess];

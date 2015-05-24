@@ -147,6 +147,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             [delegate uploadManagerDidFailUploadingForAsset:self.uploadRef.assetUrl];
             [queueDelegate uploadManager:self didFinishUploadingWithSuccess:NO];
             [SyncUtil increaseAutoSyncIndex];
+            return;
         }
     }
 

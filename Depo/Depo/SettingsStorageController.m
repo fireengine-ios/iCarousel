@@ -51,18 +51,22 @@
     }
     
     if (currentSubscription == nil) {
-        accountDaoToLearnIsJobExists = [[AccountDao alloc]init];
-        accountDaoToLearnIsJobExists.delegate = self;
-        accountDaoToLearnIsJobExists.successMethod = @selector(isJobExistsCallback:);
-        accountDaoToLearnIsJobExists.failMethod = @selector(isJobExistsFailCallback:);
+        if(accountDaoToLearnIsJobExists == nil) {
+            accountDaoToLearnIsJobExists = [[AccountDao alloc]init];
+            accountDaoToLearnIsJobExists.delegate = self;
+            accountDaoToLearnIsJobExists.successMethod = @selector(isJobExistsCallback:);
+            accountDaoToLearnIsJobExists.failMethod = @selector(isJobExistsFailCallback:);
+        }
         [accountDaoToLearnIsJobExists requestIsJobExists];
     }
     
     if (!isJobExists) {
-        accountDaoToGetOffers = [[AccountDao alloc]init];
-        accountDaoToGetOffers.delegate = self;
-        accountDaoToGetOffers.successMethod = @selector(loadOffersCallback:);
-        accountDaoToGetOffers.failMethod = @selector(loadOffersFailCallback:);
+        if(accountDaoToGetOffers == nil) {
+            accountDaoToGetOffers = [[AccountDao alloc]init];
+            accountDaoToGetOffers.delegate = self;
+            accountDaoToGetOffers.successMethod = @selector(loadOffersCallback:);
+            accountDaoToGetOffers.failMethod = @selector(loadOffersFailCallback:);
+        }
         [accountDaoToGetOffers requestOffers];
     }
 }

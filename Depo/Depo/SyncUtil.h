@@ -57,4 +57,12 @@
 + (void) resetOngoingTasks;
 + (void) addToOngoingTasksWithFilename:(NSString *) filename andTaskUrl:(NSString *) taskUrl;
 
++ (void) writeBaseUrlConstant:(NSString *) baseUrlConstant;
++ (void) resetBaseUrlConstant;
++ (NSString *) readBaseUrlConstant;
+
++ (void) writeLastLocUpdateTime:(NSDate *) date;
++ (void) resetLastLocUpdateTime;
++ (NSDate *) readLastLocUpdateTime;
+
 @end

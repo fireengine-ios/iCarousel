@@ -123,7 +123,7 @@
     NSArray *result = [SyncUtil readSyncHashLocally];
     if(![result containsObject:hash]) {
         NSArray *updatedArray = [result arrayByAddingObject:hash];
-        [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray] forKey:[NSString stringWithFormat:SYNCED_LOCAL_HASHES_KEY, APPDELEGATE.session.baseUrlConstant]];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray] forKey:[NSString stringWithFormat:SYNCED_LOCAL_HASHES_KEY, [SyncUtil readBaseUrlConstant]]];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
@@ -135,15 +135,15 @@
     if([result containsObject:hash]) {
         NSMutableArray *updatedArray = [result mutableCopy];
         [updatedArray removeObject:hash];
-        [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray] forKey:[NSString stringWithFormat:SYNCED_LOCAL_HASHES_KEY, APPDELEGATE.session.baseUrlConstant]];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray] forKey:[NSString stringWithFormat:SYNCED_LOCAL_HASHES_KEY, [SyncUtil readBaseUrlConstant]]];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
 
 + (NSArray *) readSyncHashLocally {
     NSArray *result = [[NSArray alloc] init];
-    NSData *arrData = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:SYNCED_LOCAL_HASHES_KEY, APPDELEGATE.session.baseUrlConstant]];
-    NSLog(@"LOCAL HASH KEY:%@", [NSString stringWithFormat:SYNCED_LOCAL_HASHES_KEY, APPDELEGATE.session.baseUrlConstant]);
+    NSData *arrData = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:SYNCED_LOCAL_HASHES_KEY, [SyncUtil readBaseUrlConstant]]];
+    NSLog(@"LOCAL HASH KEY:%@", [NSString stringWithFormat:SYNCED_LOCAL_HASHES_KEY, [SyncUtil readBaseUrlConstant]]);
     if (arrData != nil) {
         result = [NSKeyedUnarchiver unarchiveObjectWithData:arrData];
     }
@@ -158,7 +158,7 @@
     NSArray *result = [SyncUtil readSyncHashRemotely];
     if(![result containsObject:hash]) {
         NSArray *updatedArray = [result arrayByAddingObject:hash];
-        [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray] forKey:[NSString stringWithFormat:SYNCED_REMOTE_HASHES_KEY, APPDELEGATE.session.baseUrlConstant]];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray] forKey:[NSString stringWithFormat:SYNCED_REMOTE_HASHES_KEY, [SyncUtil readBaseUrlConstant]]];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
@@ -166,13 +166,13 @@
 + (void) cacheSyncHashesRemotely:(NSMutableArray *) newArray {
     NSArray *result = [SyncUtil readSyncHashRemotely];
     NSArray *updatedArray = [result arrayByAddingObjectsFromArray:newArray];
-    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray] forKey:[NSString stringWithFormat:SYNCED_REMOTE_HASHES_KEY, APPDELEGATE.session.baseUrlConstant]];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray] forKey:[NSString stringWithFormat:SYNCED_REMOTE_HASHES_KEY, [SyncUtil readBaseUrlConstant]]];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 + (NSArray *) readSyncHashRemotely {
     NSArray *result = [[NSArray alloc] init];
-    NSData *arrData = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:SYNCED_REMOTE_HASHES_KEY, APPDELEGATE.session.baseUrlConstant]];
+    NSData *arrData = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:SYNCED_REMOTE_HASHES_KEY, [SyncUtil readBaseUrlConstant]]];
     if (arrData != nil) {
         result = [NSKeyedUnarchiver unarchiveObjectWithData:arrData];
     }
@@ -183,7 +183,7 @@
     NSArray *result = [SyncUtil readSyncFileSummaries];
     if(![result containsObject:summary]) {
         NSArray *updatedArray = [result arrayByAddingObject:summary];
-        [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray] forKey:[NSString stringWithFormat:SYNCED_REMOTE_FILES_SUMMARY_KEY, APPDELEGATE.session.baseUrlConstant]];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray] forKey:[NSString stringWithFormat:SYNCED_REMOTE_FILES_SUMMARY_KEY, [SyncUtil readBaseUrlConstant]]];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
@@ -191,13 +191,13 @@
 + (void) cacheSyncFileSummaries:(NSMutableArray *) newArray {
     NSArray *result = [SyncUtil readSyncFileSummaries];
     NSArray *updatedArray = [result arrayByAddingObjectsFromArray:newArray];
-    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray] forKey:[NSString stringWithFormat:SYNCED_REMOTE_FILES_SUMMARY_KEY, APPDELEGATE.session.baseUrlConstant]];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray] forKey:[NSString stringWithFormat:SYNCED_REMOTE_FILES_SUMMARY_KEY, [SyncUtil readBaseUrlConstant]]];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 + (NSArray *) readSyncFileSummaries {
     NSArray *result = [[NSArray alloc] init];
-    NSData *arrData = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:SYNCED_REMOTE_FILES_SUMMARY_KEY, APPDELEGATE.session.baseUrlConstant]];
+    NSData *arrData = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:SYNCED_REMOTE_FILES_SUMMARY_KEY, [SyncUtil readBaseUrlConstant]]];
     if (arrData != nil) {
         result = [NSKeyedUnarchiver unarchiveObjectWithData:arrData];
     }
@@ -205,21 +205,21 @@
 }
 
 + (void) writeFirstTimeSyncFlag {
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:FIRST_SYNC_DONE_FLAG_KEY, APPDELEGATE.session.baseUrlConstant]];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:FIRST_SYNC_DONE_FLAG_KEY, [SyncUtil readBaseUrlConstant]]];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 + (BOOL) readFirstTimeSyncFlag {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:FIRST_SYNC_DONE_FLAG_KEY, APPDELEGATE.session.baseUrlConstant]];
+    return [[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:FIRST_SYNC_DONE_FLAG_KEY, [SyncUtil readBaseUrlConstant]]];
 }
 
 + (void) writeFirstTimeSyncFinishedFlag {
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:FIRST_SYNC_FINALIZED_FLAG_KEY, APPDELEGATE.session.baseUrlConstant]];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:FIRST_SYNC_FINALIZED_FLAG_KEY, [SyncUtil readBaseUrlConstant]]];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 + (BOOL) readFirstTimeSyncFinishedFlag {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:FIRST_SYNC_FINALIZED_FLAG_KEY, APPDELEGATE.session.baseUrlConstant]];
+    return [[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:FIRST_SYNC_FINALIZED_FLAG_KEY, [SyncUtil readBaseUrlConstant]]];
 }
 
 + (void) lockAutoSyncBlockInProgress {
@@ -283,12 +283,12 @@
 
 + (void) increaseAutoSyncIndex {
     int newAutoSyncIndex = [SyncUtil readAutoSyncIndex] + 1;
-    [[NSUserDefaults standardUserDefaults] setInteger:newAutoSyncIndex forKey:[NSString stringWithFormat:AUTO_SYNC_INDEX_KEY, APPDELEGATE.session.baseUrlConstant]];
+    [[NSUserDefaults standardUserDefaults] setInteger:newAutoSyncIndex forKey:[NSString stringWithFormat:AUTO_SYNC_INDEX_KEY, [SyncUtil readBaseUrlConstant]]];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 + (int) readAutoSyncIndex {
-    return (int)[[NSUserDefaults standardUserDefaults] integerForKey:[NSString stringWithFormat:AUTO_SYNC_INDEX_KEY, APPDELEGATE.session.baseUrlConstant]];
+    return (int)[[NSUserDefaults standardUserDefaults] integerForKey:[NSString stringWithFormat:AUTO_SYNC_INDEX_KEY, [SyncUtil readBaseUrlConstant]]];
 }
 
 + (NSMutableDictionary *) readOngoingTasks {
@@ -318,6 +318,34 @@
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
     }
+}
+
++ (void) writeBaseUrlConstant:(NSString *) baseUrlConstant {
+    [[NSUserDefaults standardUserDefaults] setValue:baseUrlConstant forKey:PERSISTENT_BASE_URL_CONSTANT_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (void) resetBaseUrlConstant {
+    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:PERSISTENT_BASE_URL_CONSTANT_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (NSString *) readBaseUrlConstant {
+    return [[NSUserDefaults standardUserDefaults] valueForKey:PERSISTENT_BASE_URL_CONSTANT_KEY];
+}
+
++ (void) writeLastLocUpdateTime:(NSDate *) date {
+    [[NSUserDefaults standardUserDefaults] setObject:date forKey:LAST_LOC_UPDATE_TIME_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (void) resetLastLocUpdateTime {
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:LAST_LOC_UPDATE_TIME_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (NSDate *) readLastLocUpdateTime {
+    return [[ NSUserDefaults standardUserDefaults] objectForKey:LAST_LOC_UPDATE_TIME_KEY];
 }
 
 @end

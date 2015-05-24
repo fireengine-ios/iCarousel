@@ -100,6 +100,10 @@
     
     [self assignNotificationActionByLaunchOptions:launchOptions];
     
+    if ([launchOptions objectForKey:UIApplicationLaunchOptionsLocationKey]) {
+        [[LocationManager sharedInstance] startLocationManager];
+    }
+    
     [ReachabilityManager currentManager];
     
     if(![ReachabilityManager isReachable]) {
@@ -514,11 +518,9 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    /*
     if(session != nil) {
         [session checkLatestContactSyncStatus];
     }
-     */
     
     if(activatedFromBackground) {
         /*
@@ -549,8 +551,7 @@
     }
 }
 
-- (void)applicationWillTerminate:(UIApplication *)application
-{
+- (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     [[CurioSDK shared] endSession];
 }

@@ -104,7 +104,7 @@
         [self shouldReturnFailWithMessage:INVALID_CONTENT_ERROR_MESSAGE];
     } else {
         if([request.error code] == ASIConnectionFailureErrorType){
-            [self shouldReturnFailWithMessage:NO_CONN_ERROR_MESSAGE];
+            [self shouldReturnFailWithMessage:NSLocalizedString(@"NoConnErrorMessage", @"")];
         } else {
             [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
         }

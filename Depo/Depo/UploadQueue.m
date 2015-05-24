@@ -373,9 +373,10 @@
             [currentManager notifyUpload];
         }
     } else {
+        BOOL shouldDeleteHash = YES;
         if(httpResp.statusCode == 0 && error != nil && ([error code] == -1 || [error code] == -997)) {
             NSLog(@"At URLSession:didCompleteWithError for hash: %@, error code is: %d", task.taskDescription, (int)[error code]);
-            return;
+            shouldDeleteHash = NO;
         }
         if(httpResp.statusCode == 401 || httpResp.statusCode == 403) {
             if(currentManager != nil) {
@@ -389,18 +390,21 @@
                     currentManager.uploadRef.hasFinished = YES;
                     currentManager.uploadRef.hasFinishedWithError = YES;
                     [currentManager removeTemporaryFile];
-                    NSLog(@"Before removeLocalHash 111 for: %@", task.taskDescription);
-                    [SyncUtil removeLocalHash:task.taskDescription];
+                    if(shouldDeleteHash) {
+                        [SyncUtil removeLocalHash:task.taskDescription];
+                    }
                     [currentManager.delegate uploadManagerLoginRequiredForAsset:currentManager.uploadRef.assetUrl];
                     [self uploadManager:currentManager didFinishUploadingWithSuccess:NO];
                 }
             } else {
-                NSLog(@"Before removeLocalHash 222 for: %@", task.taskDescription);
-                [SyncUtil removeLocalHash:task.taskDescription];
+                if(shouldDeleteHash) {
+                    [SyncUtil removeLocalHash:task.taskDescription];
+                }
             }
         } else if(httpResp.statusCode == 413) {
-            NSLog(@"Before removeLocalHash 333 for: %@", task.taskDescription);
-            [SyncUtil removeLocalHash:task.taskDescription];
+            if(shouldDeleteHash) {
+                [SyncUtil removeLocalHash:task.taskDescription];
+            }
             if(currentManager != nil) {
                 currentManager.uploadRef.hasFinished = YES;
                 currentManager.uploadRef.hasFinishedWithError = YES;
@@ -409,8 +413,9 @@
                 [self uploadManager:currentManager didFinishUploadingWithSuccess:NO];
             }
         } else {
-            NSLog(@"Before removeLocalHash 444 for: %@", task.taskDescription);
-            [SyncUtil removeLocalHash:task.taskDescription];
+            if(shouldDeleteHash) {
+                [SyncUtil removeLocalHash:task.taskDescription];
+            }
             if(currentManager != nil) {
                 currentManager.uploadRef.hasFinished = YES;
                 currentManager.uploadRef.hasFinishedWithError = YES;

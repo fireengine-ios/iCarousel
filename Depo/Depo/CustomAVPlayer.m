@@ -189,12 +189,12 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
 }
 
 -(void)assetFailedToPrepareForPlayback:(NSError *)error {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Video Oynatılamadı" message:@"Bu Video içeriği oynatılamıyor. Lütfen başka bir Video içeriği deneyin." delegate:nil cancelButtonTitle:@"Tamam" otherButtonTitles:nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"VideoPlayErrorTitle", @"") message:NSLocalizedString(@"VideoPlayErrorDescription", @"") delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil];
 	[alertView show];
 }
 
 - (void) assetFailedToLoad:(NSError *)error {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Video Yüklenemedi" message:@"Bu Video içeriğinin yüklenmesi zaman almaktadır. Lütfen başka bir Video içeriği deneyin." delegate:nil cancelButtonTitle:@"Tamam" otherButtonTitles:nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"VideoLoadErrorTitle", @"") message:NSLocalizedString(@"VideoLoadErrorDescription", @"") delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil];
     [alertView show];
 }
 

@@ -163,6 +163,10 @@
 
 #define MAX_CONCURRENT_UPLOAD_TASKS 1
 
+#define PERSISTENT_BASE_URL_CONSTANT_KEY @"PERSISTENT_BASE_URL_CONSTANT_KEY"
+
+#define LAST_LOC_UPDATE_TIME_KEY @"LAST_LOC_UPDATE_TIME_KEY"
+
 #ifdef PLATFORM_STORE
 #define GROUP_NAME_SUITE_NSUSERDEFAULTS @"group.com.turkcell.akillidepo"
 #elif defined PLATFORM_ICT
@@ -314,8 +318,7 @@ typedef enum {
 } SearchListType;
 
 typedef enum {
-    UploadTaskTypeUnknown = 0,
-    UploadTaskTypeAsset,
+    UploadTaskTypeAsset = 0,
     UploadTaskTypeData,
     UploadTaskTypeFile
 } UploadTaskType;

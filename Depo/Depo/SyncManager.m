@@ -196,10 +196,13 @@
 }
 
 - (void) manuallyCheckIfAlbumChanged {
-    NSLog(@"ManuallyCheckIfAlbumChanged called");
     if(autoSyncIterationInProgress)
         return;
     
+    if([SyncUtil readBaseUrlConstant] == nil)
+        return;
+    
+    NSLog(@"ManuallyCheckIfAlbumChanged called");
     EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
 
     BOOL triggerSyncing = NO;
@@ -251,7 +254,7 @@
                             }
                         }
                     }];
-                } else {
+                } else { 
                     NSTimeInterval timeInMilisecondsEnd = [[NSDate date] timeIntervalSince1970];
                     NSLog(@"Auto Sync End: %f", timeInMilisecondsEnd);
                     [SyncUtil writeLastSyncDate:[NSDate date]];

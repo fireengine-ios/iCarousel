@@ -483,3 +483,10 @@
 "PurchasePackage"="Satın Al";
 "ItemTitle"="adet";
 "ItemsTitle"="adet";
+
+"NoConnErrorMessage"="Lütfen internet bağlantınızı kontrol ediniz.";
+
+"VideoPlayErrorTitle"="Video Oynatılamadı";
+"VideoPlayErrorDescription"="Bu Video içeriği oynatılamıyor. Lütfen başka bir Video içeriği deneyin.";
+"VideoLoadErrorTitle"="Video Yüklenemedi";
+"VideoLoadErrorDescription"="Bu Video içeriğinin yüklenmesi zaman almaktadır. Lütfen başka bir Video içeriği deneyin.";
