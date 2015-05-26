@@ -522,7 +522,9 @@
         [session checkLatestContactSyncStatus];
     }
     
+    NSLog(@"At applicationDidBecomeActive");
     if(activatedFromBackground) {
+        NSLog(@"At applicationDidBecomeActive : activatedFromBackground is true");
         /*
         [APPDELEGATE.uploadQueue.session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
             if(uploadTasks) {
@@ -539,11 +541,15 @@
         [[UploadQueue sharedInstance].session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
         }];
         
-        [self triggerAutoSynchronization];
     } else {
+        NSLog(@"At applicationDidBecomeActive : activatedFromBackground is false");
         // eğer backgrounddan gelmiyorsa bir sonraki auto sync bloğununun okunmasını engelleyen lock kaldırılıyor
         [SyncUtil unlockAutoSyncBlockInProgress];
     }
+    
+    NSLog(@"At applicationDidBecomeActive : before triggerAutoSynchronization called");
+    [self triggerAutoSynchronization];
+    NSLog(@"At applicationDidBecomeActive : after triggerAutoSynchronization called");
 
     [[UIDevice currentDevice] setBatteryMonitoringEnabled:YES];
     if ([[UIDevice currentDevice] batteryState] == UIDeviceBatteryStateCharging || [[UIDevice currentDevice] batteryState] == UIDeviceBatteryStateFull) {

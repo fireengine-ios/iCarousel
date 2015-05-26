@@ -50,9 +50,11 @@
 }
 
 - (void) startFirstTimeSync {
+    NSLog(@"At startFirstTimeSync");
     if(autoSyncIterationInProgress)
         return;
 
+    NSLog(@"At startFirstTimeSync : starting...");
     EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
     
     BOOL triggerSyncing = NO;
@@ -66,12 +68,14 @@
     }
 
     if(triggerSyncing) {
+        NSLog(@"At startFirstTimeSync : querying for server photos...");
         [elasticSearchDao requestPhotosForPage:0 andSize:20000 andSortType:SortTypeAlphaAsc];
         autoSyncIterationInProgress = YES;
     }
 }
 
 - (void) photoListSuccessCallback:(NSArray *) files {
+    NSLog(@"At photoListSuccessCallback");
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         NSMutableArray *summaryArray = [[NSMutableArray alloc] init];
         NSMutableArray *hashArray = [[NSMutableArray alloc] init];
@@ -96,14 +100,18 @@
 }
 
 - (void) initializeNextAutoSyncPackage {
+    NSLog(@"At initializeNextAutoSyncPackage");
     if(autoSyncIterationInProgress)
         return;
 
+    NSLog(@"At initializeNextAutoSyncPackage : starting ...");
     EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
+    NSLog(@"At initializeNextAutoSyncPackage : photoSyncFlag = %d", photoSyncFlag);
     
     BOOL triggerSyncing = NO;
     if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
         ConnectionOption connectionOption = (ConnectionOption)[CacheUtil readCachedSettingSyncingConnectionType];
+        NSLog(@"At initializeNextAutoSyncPackage : connectionOption = %d", connectionOption);
         if([ReachabilityManager isReachableViaWiFi]) {
             triggerSyncing = YES;
         } else if([ReachabilityManager isReachableViaWWAN] && connectionOption == ConnectionOptionWifi3G) {
@@ -112,6 +120,7 @@
     }
     
     if(triggerSyncing) {
+        NSLog(@"At initializeNextAutoSyncPackage : triggerSyncing is true");
         NSArray *localHashList = [SyncUtil readSyncHashLocally];
         NSArray *remoteHashList = [SyncUtil readSyncHashRemotely];
         NSArray *remoteSummaryList = [SyncUtil readSyncFileSummaries];
@@ -327,12 +336,17 @@
     if(APPDELEGATE.session.user) {
         NSLog(@"At decideAndStartAutoSync user not null");
         if(![SyncUtil readFirstTimeSyncFlag]) {
+            NSLog(@"At decideAndStartAutoSync : calling startFirstTimeSync");
             [self startFirstTimeSync];
         } else if(![SyncUtil readFirstTimeSyncFinishedFlag]) {
             if(![SyncUtil readAutoSyncBlockInProgress]) {
+                NSLog(@"At decideAndStartAutoSync : calling initializeNextAutoSyncPackage");
                 [self initializeNextAutoSyncPackage];
+            } else {
+                NSLog(@"At decideAndStartAutoSync : readAutoSyncBlockInProgress is TRUE : NOT calling initializeNextAutoSyncPackage");
             }
         } else {
+            NSLog(@"At decideAndStartAutoSync : calling manuallyCheckIfAlbumChanged");
             [self manuallyCheckIfAlbumChanged];
         }
     } else {

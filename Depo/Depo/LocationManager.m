@@ -11,6 +11,7 @@
 #import "AppConstants.h"
 #import "AppUtil.h"
 #import "SyncUtil.h"
+#import "UploadQueue.h"
 
 @implementation LocationManager
 
@@ -125,6 +126,9 @@
         return;
     }
     
+    [[UploadQueue sharedInstance].session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
+    }];
+
     //TODO sil
     [AppUtil sendLocalNotificationForDate:[NSDate date] withMessage:@"startMonitoringSignificantLocationChanges returns location"];
     
