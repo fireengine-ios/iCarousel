@@ -22,7 +22,7 @@
 @synthesize session;
 
 + (UploadQueue *) sharedInstance {
-    static UploadQueue *sharedInstance = nil;
+    static UploadQueue *sharedInstance;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedInstance = [[UploadQueue alloc] init];

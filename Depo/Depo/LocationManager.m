@@ -18,7 +18,7 @@
 @synthesize locManager;
 
 + (LocationManager *) sharedInstance {
-    static LocationManager *sharedInstance = nil;
+    static LocationManager *sharedInstance;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedInstance = [[LocationManager alloc] init];
@@ -33,13 +33,13 @@
 }
 
 - (void) initializeLocationManager {
-    if(!self.locManager) {
-        self.locManager = [[CLLocationManager alloc] init];
+    if(![LocationManager sharedInstance].locManager) {
+        [LocationManager sharedInstance].locManager = [[CLLocationManager alloc] init];
     }
-    self.locManager.delegate = self;
-    self.locManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
-    self.locManager.distanceFilter = 100.0f;
-    self.locManager.pausesLocationUpdatesAutomatically = NO;
+    [LocationManager sharedInstance].locManager.delegate = self;
+    [LocationManager sharedInstance].locManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
+    [LocationManager sharedInstance].locManager.distanceFilter = 100.0f;
+    [LocationManager sharedInstance].locManager.pausesLocationUpdatesAutomatically = NO;
 }
 
 /*
@@ -68,20 +68,24 @@
         
         if([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined) {
             SEL authorizationSel = NSSelectorFromString(@"requestAlwaysAuthorization");
-            if ([self.locManager respondsToSelector:authorizationSel]) {
-                [self.locManager requestAlwaysAuthorization];
+            if ([[LocationManager sharedInstance].locManager respondsToSelector:authorizationSel]) {
+                [[LocationManager sharedInstance].locManager requestAlwaysAuthorization];
             } else {
                 if(delegate) {
                     [delegate locationPermissionGranted];
                 }
-                [self.locManager startMonitoringSignificantLocationChanges];
+                NSLog(@"Location services calling startMonitoringSignificantLocationChanges");
+                [[LocationManager sharedInstance].locManager startMonitoringSignificantLocationChanges];
             }
         } else if([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways) {
             if(delegate) {
                 [delegate locationPermissionGranted];
             }
-            [self.locManager startMonitoringSignificantLocationChanges];
+            NSLog(@"Location services calling startMonitoringSignificantLocationChanges");
+            [[LocationManager sharedInstance].locManager startMonitoringSignificantLocationChanges];
         }
+    } else {
+        NSLog(@"Location services disabled");
     }
 }
 
@@ -97,12 +101,14 @@
         if(delegate) {
             [delegate locationPermissionGranted];
         }
-        [self.locManager startMonitoringSignificantLocationChanges];
+        NSLog(@"Location services calling startMonitoringSignificantLocationChanges");
+        [[LocationManager sharedInstance].locManager startMonitoringSignificantLocationChanges];
     } else if (status == kCLAuthorizationStatusAuthorized) {
         if(delegate) {
             [delegate locationPermissionGranted];
         }
-        [self.locManager startMonitoringSignificantLocationChanges];
+        NSLog(@"Location services calling startMonitoringSignificantLocationChanges");
+        [[LocationManager sharedInstance].locManager startMonitoringSignificantLocationChanges];
     } else {
         if(delegate) {
             [delegate locationPermissionDenied];
@@ -115,8 +121,13 @@
     
     NSDate *lastUpdateDate = [SyncUtil readLastLocUpdateTime];
     if(lastUpdateDate != nil && [[NSDate date] timeIntervalSinceDate:lastUpdateDate] < 30) {
+        NSLog(@"At locationManager:didUpdateLocations: still under 30 seconds, ignoring...");
         return;
     }
+    
+    //TODO sil
+    [AppUtil sendLocalNotificationForDate:[NSDate date] withMessage:@"startMonitoringSignificantLocationChanges returns location"];
+    
     [SyncUtil writeLastLocUpdateTime:[NSDate date]];
     
     [[SyncManager sharedInstance] decideAndStartAutoSync];

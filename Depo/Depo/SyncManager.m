@@ -27,7 +27,7 @@
 @synthesize autoSyncIterationInProgress;
 
 + (SyncManager *) sharedInstance {
-    static SyncManager *sharedInstance = nil;
+    static SyncManager *sharedInstance;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedInstance = [[SyncManager alloc] init];
@@ -323,7 +323,9 @@
 }
 
 - (void) decideAndStartAutoSync {
+    NSLog(@"At decideAndStartAutoSync");
     if(APPDELEGATE.session.user) {
+        NSLog(@"At decideAndStartAutoSync user not null");
         if(![SyncUtil readFirstTimeSyncFlag]) {
             [self startFirstTimeSync];
         } else if(![SyncUtil readFirstTimeSyncFinishedFlag]) {
@@ -333,6 +335,8 @@
         } else {
             [self manuallyCheckIfAlbumChanged];
         }
+    } else {
+        NSLog(@"At decideAndStartAutoSync user is null");
     }
 }
 
