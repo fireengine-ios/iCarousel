@@ -29,9 +29,9 @@
         
         NSURLSessionConfiguration *configuration;
         if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
-            configuration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"com.igones.akillidepo.BackgroundSession"];
+            configuration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"com.igones.akillidepo.BackgroundUploadSession"];
         } else {
-            configuration = [NSURLSessionConfiguration backgroundSessionConfiguration:@"com.igones.akillidepo.BackgroundSession"];
+            configuration = [NSURLSessionConfiguration backgroundSessionConfiguration:@"com.igones.akillidepo.BackgroundUploadSession"];
         }
         
         configuration.sessionSendsLaunchEvents = YES;
@@ -249,6 +249,7 @@
 }
 
 - (void) addNewUploadTask:(UploadManager *) newManager {
+    NSLog(@"At addNewUploadTask");
     @synchronized(uploadManagers) {
         if([uploadManagers containsObject:newManager]) {
             UploadManager *managerToRemove = nil;
@@ -270,6 +271,8 @@
             [activeTaskIds addObject:[newManager uniqueUrl]];
             NSLog(@"Starting new task");
             [newManager startTask];
+        } else {
+            NSLog(@"Cannot start new task, activeTaskIds count is: %d", (int)[activeTaskIds count]);
         }
     }
 
@@ -310,8 +313,8 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:AUTO_SYNC_QUEUE_CHANGED_NOTIFICATION object:nil userInfo:nil];
     [self updateGroupUserDefaults];
 
-    [[UIApplication sharedApplication] endBackgroundTask:manRef.bgTaskI];
-    manRef.bgTaskI = UIBackgroundTaskInvalid;
+//    [[UIApplication sharedApplication] endBackgroundTask:manRef.bgTaskI];
+//    manRef.bgTaskI = UIBackgroundTaskInvalid;
 }
 
 - (void) uploadManagerIsReadToStartTask:(UploadManager *)manRef {

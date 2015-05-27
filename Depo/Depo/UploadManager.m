@@ -49,6 +49,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 
 - (void) startTask {
 
+    /*
     NSString *bgTaskName = [NSString stringWithFormat:@"BG_TASK_%@", (self.uploadRef.taskType == UploadTaskTypeAsset) ? self.uploadRef.assetUrl : @""];
     NSLog(@"BG Task Name for new task: %@", bgTaskName);
     bgTaskI = [[UIApplication sharedApplication] beginBackgroundTaskWithName:bgTaskName expirationHandler:^{
@@ -56,6 +57,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         [[UIApplication sharedApplication] endBackgroundTask:bgTaskI];
         bgTaskI = UIBackgroundTaskInvalid;
     }];
+     */
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         if(self.uploadRef.taskType == UploadTaskTypeAsset) {
