@@ -178,7 +178,7 @@
 "SortTypeArtistDescTitle"="Artist İsmi (Z-A)";
 "SortTypeAlbumAscTitle"="Albüm İsmi (A-Z)";
 "SortTypeAlbumDescTitle"="Albüm İsmi (Z-A)";
-"HomeUsageTotalStorage"="Toplam %@";
+"HomeUsageTotalStorage"="%@";
 "LastSyncFormat"="SON YÜKLEME: %@ ÖNCE";
 "LastSyncFormatForWidget"="Son Yükleme: %@";
 
@@ -478,7 +478,7 @@
 "ErrorPurchasingFailure"="PAKET SATIN ALINIRKEN BİR SIKINTI OLUŞTU.";
 "MONTHLY"="AYLIK";
 "YEARLY"="YILLIK";
-"SubscriptionLongInfo"="Paketinizi iptal etmek için 2222'ye \"Depo iptal\" yazıp göndermeniz yeterlidir";
+"SubscriptionLongInfo"="Paketinizi iptal etmek için 2222'ye \"IPTAL %@\" yazıp göndermeniz yeterlidir";
 "SubscriptionFree"="ÜCRETSİZ";
 "PurchasePackage"="Satın Al";
 "ItemTitle"="adet";
