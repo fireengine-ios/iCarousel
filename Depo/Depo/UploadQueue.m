@@ -166,7 +166,11 @@
 }
 
 - (void) cancelAllUploads {
-    [self cancelRemainingUploads];
+    [[UploadQueue sharedInstance] cancelAllUploadsUpdateReferences:YES];
+}
+
+- (void) cancelAllUploadsUpdateReferences:(BOOL) updateReferencesFlag {
+    [self cancelRemainingUploadsUpdateReferences:updateReferencesFlag];
     @synchronized(uploadManagers) {
         @try {
             for(UploadManager *row in uploadManagers) {
@@ -188,13 +192,19 @@
                     [task cancel];
                 }
             }
-            [[NSNotificationCenter defaultCenter] postNotificationName:AUTO_SYNC_QUEUE_CHANGED_NOTIFICATION object:nil userInfo:nil];
-            [self updateGroupUserDefaults];
+            if(updateReferencesFlag) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:AUTO_SYNC_QUEUE_CHANGED_NOTIFICATION object:nil userInfo:nil];
+                [self updateGroupUserDefaults];
+            }
         }];
     }
 }
 
 - (void) cancelRemainingUploads {
+    [[UploadQueue sharedInstance] cancelRemainingUploadsUpdateReferences:YES];
+}
+
+- (void) cancelRemainingUploadsUpdateReferences:(BOOL) updateReferencesFlag {
     NSMutableArray *cleanArray = [[NSMutableArray alloc] init];
     @synchronized(uploadManagers) {
         @try {
@@ -211,8 +221,10 @@
         self.uploadManagers = cleanArray;
     }
     [SyncUtil unlockAutoSyncBlockInProgress];
-    [[NSNotificationCenter defaultCenter] postNotificationName:AUTO_SYNC_QUEUE_CHANGED_NOTIFICATION object:nil userInfo:nil];
-    [self updateGroupUserDefaults];
+    if(updateReferencesFlag) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:AUTO_SYNC_QUEUE_CHANGED_NOTIFICATION object:nil userInfo:nil];
+        [self updateGroupUserDefaults];
+    }
 }
 
 - (void) addOnlyNewUploadTask:(UploadManager *) newManager {
@@ -454,6 +466,10 @@
             [AppUtil sendLocalNotificationForDate:[NSDate date] withMessage:NSLocalizedString(@"LocalNotificationAutoUploadsFinished", @"")];
         } else {
             [AppUtil sendLocalNotificationForDate:[NSDate date] withMessage:NSLocalizedString(@"LocalNotificationManualUploadsFinished", @"")];
+        }
+        if(![SyncUtil readFirstTimeSyncFinishedFlag]) {
+            //ilk auto sync henuz tamamlanmamissa ama queue bosalmissa bir sonraki loc update'te tekrar queue'yu olusturmasi icin olasi bekleyenler temizleniyor ve lock kaldiriliyor
+            [[UploadQueue sharedInstance] cancelAllUploadsUpdateReferences:NO];
         }
     }
     

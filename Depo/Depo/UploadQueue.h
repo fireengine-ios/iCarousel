@@ -26,7 +26,9 @@
 - (void) addOnlyNewUploadTask:(UploadManager *) newManager;
 - (void) startReadyTasks;
 - (void) cancelAllUploads;
+- (void) cancelAllUploadsUpdateReferences:(BOOL) updateReferencesFlag;
 - (void) cancelRemainingUploads;
+- (void) cancelRemainingUploadsUpdateReferences:(BOOL) updateReferencesFlag;
 - (int) totalAutoSyncCount;
 - (int) finishedAutoSyncCount;
 - (void) manualAutoSyncIterationFinished;
