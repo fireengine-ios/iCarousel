@@ -334,6 +334,20 @@
     return [[NSUserDefaults standardUserDefaults] valueForKey:PERSISTENT_BASE_URL_CONSTANT_KEY];
 }
 
++ (void) writeBaseUrl:(NSString *) baseUrl {
+    [[NSUserDefaults standardUserDefaults] setValue:baseUrl forKey:PERSISTENT_BASE_URL_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (void) resetBaseUrl {
+    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:PERSISTENT_BASE_URL_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (NSString *) readBaseUrl {
+    return [[NSUserDefaults standardUserDefaults] valueForKey:PERSISTENT_BASE_URL_KEY];
+}
+
 + (void) writeLastLocUpdateTime:(NSDate *) date {
     [[NSUserDefaults standardUserDefaults] setObject:date forKey:LAST_LOC_UPDATE_TIME_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];

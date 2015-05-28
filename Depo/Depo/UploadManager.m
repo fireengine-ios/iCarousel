@@ -49,15 +49,21 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 
 - (void) startTask {
 
-    /*
     NSString *bgTaskName = [NSString stringWithFormat:@"BG_TASK_%@", (self.uploadRef.taskType == UploadTaskTypeAsset) ? self.uploadRef.assetUrl : @""];
     NSLog(@"BG Task Name for new task: %@", bgTaskName);
     bgTaskI = [[UIApplication sharedApplication] beginBackgroundTaskWithName:bgTaskName expirationHandler:^{
         NSLog(@"BG Task ended by os timeout");
+        
+        self.uploadRef.hasFinished = YES;
+        [delegate uploadManagerDidFailUploadingForAsset:self.uploadRef.assetUrl];
+        [queueDelegate uploadManager:self didFinishUploadingWithSuccess:NO];
+        if(self.uploadRef.autoSyncFlag) {
+            [SyncUtil increaseAutoSyncIndex];
+        }
+
         [[UIApplication sharedApplication] endBackgroundTask:bgTaskI];
         bgTaskI = UIBackgroundTaskInvalid;
     }];
-     */
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         if(self.uploadRef.taskType == UploadTaskTypeAsset) {
@@ -119,6 +125,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 }
 
 - (void) checkActiveTasksPreResume {
+    NSLog(@"At checkActiveTasksPreResume for img hash: %@", self.uploadRef.localHash);
     [[UploadQueue sharedInstance].session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
         BOOL continueUpload = YES;
         for(NSURLSessionUploadTask *task in uploadTasks) {
@@ -140,7 +147,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 }
 
 - (void) continueAssetUpload {
-    NSLog(@"At continueAssetUpload");
+    NSLog(@"At continueAssetUpload for img hash: %@", self.uploadRef.localHash);
 
     if(self.uploadRef.autoSyncFlag) {
         if([SyncUtil localHashListContainsHash:self.uploadRef.localHash]){

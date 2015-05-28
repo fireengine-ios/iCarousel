@@ -135,7 +135,8 @@
     [SyncUtil writeLastLocUpdateTime:[NSDate date]];
     
     //TODO check
-    [SyncUtil unlockAutoSyncBlockInProgress];
+//    [SyncUtil unlockAutoSyncBlockInProgress];
+    
     [[SyncManager sharedInstance] decideAndStartAutoSync];
 }
 

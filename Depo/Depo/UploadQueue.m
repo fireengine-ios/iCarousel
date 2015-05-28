@@ -32,7 +32,7 @@
             configuration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"com.igones.akillidepo.BackgroundUploadSession"];
         } else {
             configuration = [NSURLSessionConfiguration backgroundSessionConfiguration:@"com.igones.akillidepo.BackgroundUploadSession"];
-            configuration.timeoutIntervalForRequest = GENERAL_TASK_TIMEOUT;
+            configuration.timeoutIntervalForResource = GENERAL_TASK_TIMEOUT;
         }
         
         configuration.sessionSendsLaunchEvents = YES;
@@ -319,8 +319,8 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:AUTO_SYNC_QUEUE_CHANGED_NOTIFICATION object:nil userInfo:nil];
     [self updateGroupUserDefaults];
 
-//    [[UIApplication sharedApplication] endBackgroundTask:manRef.bgTaskI];
-//    manRef.bgTaskI = UIBackgroundTaskInvalid;
+    [[UIApplication sharedApplication] endBackgroundTask:manRef.bgTaskI];
+    manRef.bgTaskI = UIBackgroundTaskInvalid;
 }
 
 - (void) uploadManagerIsReadToStartTask:(UploadManager *)manRef {
@@ -480,11 +480,7 @@
         }
     }
 
-    if(![SyncUtil readFirstTimeSyncFinishedFlag]) {
-        NSLog(@"At URLSessionDidFinishEventsForBackgroundURLSession: cancelling all remaining uploads for next cycle");
-        //ilk auto sync henuz tamamlanmamissa ama queue bosalmissa bir sonraki loc update'te tekrar queue'yu olusturmasi icin olasi bekleyenler temizleniyor ve lock kaldiriliyor
-        [[UploadQueue sharedInstance] cancelAllUploadsUpdateReferences:NO];
-    }
+    [[UploadQueue sharedInstance] cancelAllUploadsUpdateReferences:NO];
 
 //    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     
@@ -533,7 +529,7 @@
         @try {
 //            NSLog(@"------------------------");
             for(UploadManager *row in uploadManagers) {
-//                NSLog(@"UPLOAD MANAGER: %@", row.uploadRef.localHash);
+//                NSLog(@"UPLOAD MANAGER : %@", row.uploadRef.fileName);
                 if(row.uploadRef.autoSyncFlag) {
                     count++;
                 }

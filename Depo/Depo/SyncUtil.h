@@ -61,6 +61,10 @@
 + (void) resetBaseUrlConstant;
 + (NSString *) readBaseUrlConstant;
 
++ (void) writeBaseUrl:(NSString *) baseUrlConstant;
++ (void) resetBaseUrl;
++ (NSString *) readBaseUrl;
+
 + (void) writeLastLocUpdateTime:(NSDate *) date;
 + (void) resetLastLocUpdateTime;
 + (NSDate *) readLastLocUpdateTime;
