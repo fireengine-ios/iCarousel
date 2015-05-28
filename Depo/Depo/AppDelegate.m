@@ -422,8 +422,8 @@
 }
 
 - (void) application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
-    if(application.applicationState != UIApplicationStateActive ) {
-        [self application:application didFinishLaunchingWithOptions:notification.userInfo];
+    if(application.applicationState != UIApplicationStateActive) {
+        //TODO [self application:application didFinishLaunchingWithOptions:notification.userInfo];
     }
 }
 
@@ -514,6 +514,7 @@
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
+    NSLog(@"At applicationWillEnterForeground");
     activatedFromBackground = YES;
 }
 

@@ -32,6 +32,7 @@
             configuration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"com.igones.akillidepo.BackgroundUploadSession"];
         } else {
             configuration = [NSURLSessionConfiguration backgroundSessionConfiguration:@"com.igones.akillidepo.BackgroundUploadSession"];
+            configuration.timeoutIntervalForRequest = GENERAL_TASK_TIMEOUT;
         }
         
         configuration.sessionSendsLaunchEvents = YES;
@@ -183,6 +184,7 @@
         }
         @finally {
             [self.uploadManagers removeAllObjects];
+            NSLog(@"REMOVING FROM activeTaskIds in cancelAllUploadsUpdateReferences");
             [self.activeTaskIds removeAllObjects];
         }
 
@@ -238,6 +240,7 @@
         UploadManager *nextManager = [self findNextTask];
         nextManager.queueDelegate = self;
         if(nextManager != nil) {
+            NSLog(@"ADDING TO activeTaskIds in startReadyTasks");
             [activeTaskIds addObject:[nextManager uniqueUrl]];
             [nextManager startTask];
         }
@@ -268,6 +271,7 @@
     newManager.queueDelegate = self;
     if(newManager.uploadRef.isReady) {
         if([activeTaskIds count] < MAX_CONCURRENT_UPLOAD_TASKS) {
+            NSLog(@"ADDING TO activeTaskIds in addNewUploadTask");
             [activeTaskIds addObject:[newManager uniqueUrl]];
             NSLog(@"Starting new task");
             [newManager startTask];
@@ -282,6 +286,7 @@
 
 #pragma mark UploadManagerQueueDelegate
 - (void) uploadManager:(UploadManager *)manRef didFinishUploadingWithSuccess:(BOOL)success {
+    NSLog(@"REMOVING FROM activeTaskIds in didFinishUploadingWithSuccess: %@", [manRef uniqueUrl]);
     [activeTaskIds removeObject:[manRef uniqueUrl]];
     NSLog(@"!!!!!!!! AT didFinishUploadingWithSuccess. Remaining list count: %d", [self remainingCount]);
     
@@ -291,6 +296,7 @@
         nextManager.queueDelegate = self;
         if(nextManager != nil) {
             NSLog(@"!!!!!!!! Next manager started");
+            NSLog(@"ADDING TO activeTaskIds in didFinishUploadingWithSuccess");
             [activeTaskIds addObject:[nextManager uniqueUrl]];
             [nextManager startTask];
         } else {
@@ -322,6 +328,7 @@
         @synchronized(uploadManagers) {
             for(UploadManager *row in uploadManagers) {
                 if([[row uniqueUrl] isEqualToString:[manRef uniqueUrl]]) {
+                    NSLog(@"ADDING TO activeTaskIds in uploadManagerIsReadToStartTask");
                     [activeTaskIds addObject:[row uniqueUrl]];
                     [row startTask];
                     break;
@@ -379,6 +386,7 @@
     UploadManager *currentManager = [self findByTaskId:task.taskIdentifier];
     NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) task.response;
     NSLog(@"At didCompleteWithError: %d and %@", (int)httpResp.statusCode, [error description]);
+    
     if (!error && httpResp.statusCode == 201) {
         if(currentManager != nil) {
             if(currentManager.uploadRef.summary != nil) {
@@ -470,12 +478,14 @@
         } else {
             [AppUtil sendLocalNotificationForDate:[NSDate date] withMessage:NSLocalizedString(@"LocalNotificationManualUploadsFinished", @"")];
         }
-        if(![SyncUtil readFirstTimeSyncFinishedFlag]) {
-            //ilk auto sync henuz tamamlanmamissa ama queue bosalmissa bir sonraki loc update'te tekrar queue'yu olusturmasi icin olasi bekleyenler temizleniyor ve lock kaldiriliyor
-            [[UploadQueue sharedInstance] cancelAllUploadsUpdateReferences:NO];
-        }
     }
-    
+
+    if(![SyncUtil readFirstTimeSyncFinishedFlag]) {
+        NSLog(@"At URLSessionDidFinishEventsForBackgroundURLSession: cancelling all remaining uploads for next cycle");
+        //ilk auto sync henuz tamamlanmamissa ama queue bosalmissa bir sonraki loc update'te tekrar queue'yu olusturmasi icin olasi bekleyenler temizleniyor ve lock kaldiriliyor
+        [[UploadQueue sharedInstance] cancelAllUploadsUpdateReferences:NO];
+    }
+
 //    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     
     if (self.backgroundSessionCompletionHandler) {
@@ -518,26 +528,29 @@
 }
 
 - (int) totalAutoSyncCount {
-    int count = 0;
     @synchronized(uploadManagers) {
+        int count = 0;
         @try {
+//            NSLog(@"------------------------");
             for(UploadManager *row in uploadManagers) {
+//                NSLog(@"UPLOAD MANAGER: %@", row.uploadRef.localHash);
                 if(row.uploadRef.autoSyncFlag) {
                     count++;
                 }
             }
+//            NSLog(@"========================");
         }
         @catch (NSException *exception) {
         }
         @finally {
         }
+        return count;
     }
-    return count;
 }
 
 - (int) finishedAutoSyncCount {
-    int count = 0;
     @synchronized(uploadManagers) {
+        int count = 0;
         @try {
             for(UploadManager *row in uploadManagers) {
                 if(row.uploadRef.hasFinished && row.uploadRef.autoSyncFlag) {
@@ -549,8 +562,8 @@
         }
         @finally {
         }
+        return count;
     }
-    return count;
 }
 
 //Mahir: this method saves into the group nsuserdefaults the values needed for the Today Extension

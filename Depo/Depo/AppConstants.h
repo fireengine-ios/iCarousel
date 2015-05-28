@@ -167,6 +167,8 @@
 
 #define LAST_LOC_UPDATE_TIME_KEY @"LAST_LOC_UPDATE_TIME_KEY"
 
+#define GENERAL_TASK_TIMEOUT 600.0f
+
 #ifdef PLATFORM_STORE
 #define GROUP_NAME_SUITE_NSUSERDEFAULTS @"group.com.turkcell.akillidepo"
 #elif defined PLATFORM_ICT

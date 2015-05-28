@@ -243,7 +243,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             [SyncUtil cacheSyncHashLocally:self.uploadRef.localHash];
             [SyncUtil increaseAutoSyncIndex];
         }
-        NSLog(@"Upload Task started");
+        NSLog(@"Upload Task started with url: %@", self.uploadRef.urlForUpload);
         [uploadTask resume];
         
         [[CurioSDK shared] sendEvent:@"UploadStarted" eventValue:[NSString stringWithFormat:@"file type: %@", fileType]];
@@ -268,12 +268,15 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 - (NSMutableURLRequest *) prepareRequestSetVideo:(BOOL) isVideo {
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:self.uploadRef.urlForUpload]];
     
+    [request setTimeoutInterval:GENERAL_TASK_TIMEOUT];
     [request setHTTPMethod:@"PUT"];
     [request setValue:APPDELEGATE.session.authToken forHTTPHeaderField:@"X-Auth-Token"];
     [request setValue:@"false" forHTTPHeaderField:@"X-Object-Meta-Favourite"];
     [request setValue:[Util getWorkaroundUUID] forHTTPHeaderField:@"X-Object-Meta-Device-UUID"];
     [request setValue:@"1" forHTTPHeaderField:@"x-meta-strategy"];
     [request setValue:@"100-continue" forHTTPHeaderField:@"Expect"];
+    NSLog(@"At Preparing request... auth token: %@", APPDELEGATE.session.authToken);
+    
     if(self.uploadRef.folder) {
         [request setValue:self.uploadRef.folder.uuid forHTTPHeaderField:@"X-Object-Meta-Parent-Uuid"];
     } else {
