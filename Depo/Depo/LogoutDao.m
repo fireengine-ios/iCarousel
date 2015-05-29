@@ -25,7 +25,6 @@
 
 - (void)requestFinished:(ASIHTTPRequest *)request {
     NSError *error = [request error];
-    
     if (!error) {
         NSString *responseStr = [request responseString];
         NSLog(@"Logout response: %@", responseStr);

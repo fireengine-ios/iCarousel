@@ -281,7 +281,7 @@
     double cellHeight = 69;
     
     if(indexPath.row == 0) {
-        NSLog(@"USAGE:%lld and %lld", APPDELEGATE.session.usage.usedStorage, APPDELEGATE.session.usage.totalStorage);
+//        NSLog(@"USAGE:%lld and %lld", APPDELEGATE.session.usage.usedStorage, APPDELEGATE.session.usage.totalStorage);
         double percentUsageVal = 100 * ((double)APPDELEGATE.session.usage.usedStorage/(double)APPDELEGATE.session.usage.totalStorage);
         percentUsageVal = (percentUsageVal > 0 && percentUsageVal < 1) ? 1 : percentUsageVal;
         NSString *subTitle = [NSString stringWithFormat: NSLocalizedString(@"StorageUsageInfo", @""), [NSString stringWithFormat:@"%d", (int)floor(percentUsageVal+0.5f)], [Util transformedHugeSizeValueNoDecimal:APPDELEGATE.session.usage.totalStorage]];

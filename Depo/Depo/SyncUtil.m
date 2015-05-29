@@ -143,7 +143,7 @@
 + (NSArray *) readSyncHashLocally {
     NSArray *result = [[NSArray alloc] init];
     NSData *arrData = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:SYNCED_LOCAL_HASHES_KEY, [SyncUtil readBaseUrlConstant]]];
-    NSLog(@"LOCAL HASH KEY:%@", [NSString stringWithFormat:SYNCED_LOCAL_HASHES_KEY, [SyncUtil readBaseUrlConstant]]);
+//    NSLog(@"LOCAL HASH KEY:%@", [NSString stringWithFormat:SYNCED_LOCAL_HASHES_KEY, [SyncUtil readBaseUrlConstant]]);
     if (arrData != nil) {
         result = [NSKeyedUnarchiver unarchiveObjectWithData:arrData];
     }

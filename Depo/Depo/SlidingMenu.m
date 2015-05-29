@@ -269,7 +269,6 @@
 #pragma mark AudioFooterDelegate methods
 
 - (void) audioMenuFooterWasClicked {
-    NSLog(@"audioMenuFooterWasClicked");
     [delegate didTriggerCurrentMusic];
     [self close];
 }

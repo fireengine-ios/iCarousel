@@ -46,7 +46,7 @@
 	
 	if (!error) {
 		NSString *responseEnc = [request responseString];
-        NSLog(@"REQUEST AUTH RESP:%@", responseEnc);
+//        NSLog(@"REQUEST AUTH RESP:%@", responseEnc);
 		
 		SBJSON *jsonParser = [SBJSON new];
 		NSDictionary *mainDict = [jsonParser objectWithString:responseEnc];

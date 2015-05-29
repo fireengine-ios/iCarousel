@@ -26,7 +26,7 @@
 	
 	if (!error) {
         NSString *responseEnc = [request responseString];
-        NSLog(@"Upload Notify Response: %@", responseEnc);
+//        NSLog(@"Upload Notify Response: %@", responseEnc);
         SBJSON *jsonParser = [SBJSON new];
         NSDictionary *mainDict = [jsonParser objectWithString:responseEnc];
         MetaFile *finalFile = [self parseFile:mainDict];

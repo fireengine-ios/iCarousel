@@ -184,7 +184,6 @@
         }
         @finally {
             [self.uploadManagers removeAllObjects];
-            NSLog(@"REMOVING FROM activeTaskIds in cancelAllUploadsUpdateReferences");
             [self.activeTaskIds removeAllObjects];
         }
 
@@ -240,7 +239,6 @@
         UploadManager *nextManager = [self findNextTask];
         nextManager.queueDelegate = self;
         if(nextManager != nil) {
-            NSLog(@"ADDING TO activeTaskIds in startReadyTasks");
             [activeTaskIds addObject:[nextManager uniqueUrl]];
             [nextManager startTask];
         }
@@ -252,7 +250,6 @@
 }
 
 - (void) addNewUploadTask:(UploadManager *) newManager {
-    NSLog(@"At addNewUploadTask");
     @synchronized(uploadManagers) {
         if([uploadManagers containsObject:newManager]) {
             UploadManager *managerToRemove = nil;
@@ -271,12 +268,8 @@
     newManager.queueDelegate = self;
     if(newManager.uploadRef.isReady) {
         if([activeTaskIds count] < MAX_CONCURRENT_UPLOAD_TASKS) {
-            NSLog(@"ADDING TO activeTaskIds in addNewUploadTask");
             [activeTaskIds addObject:[newManager uniqueUrl]];
-            NSLog(@"Starting new task");
             [newManager startTask];
-        } else {
-            NSLog(@"Cannot start new task, activeTaskIds count is: %d", (int)[activeTaskIds count]);
         }
     }
 
@@ -286,30 +279,15 @@
 
 #pragma mark UploadManagerQueueDelegate
 - (void) uploadManager:(UploadManager *)manRef didFinishUploadingWithSuccess:(BOOL)success {
-    NSLog(@"REMOVING FROM activeTaskIds in didFinishUploadingWithSuccess: %@", [manRef uniqueUrl]);
     [activeTaskIds removeObject:[manRef uniqueUrl]];
-    NSLog(@"!!!!!!!! AT didFinishUploadingWithSuccess. Remaining list count: %d", [self remainingCount]);
     
     if([activeTaskIds count] < MAX_CONCURRENT_UPLOAD_TASKS) {
-        NSLog(@"!!!!!!!! empty slot present");
         UploadManager *nextManager = [self findNextTask];
         nextManager.queueDelegate = self;
         if(nextManager != nil) {
-            NSLog(@"!!!!!!!! Next manager started");
-            NSLog(@"ADDING TO activeTaskIds in didFinishUploadingWithSuccess");
             [activeTaskIds addObject:[nextManager uniqueUrl]];
             [nextManager startTask];
         } else {
-            if([UIApplication sharedApplication].applicationState != UIApplicationStateActive) {
-                //all the tasks in the url session has finalized and no more task waiting in queue
-                EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
-                if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
-                    [AppUtil sendLocalNotificationForDate:[NSDate date] withMessage:NSLocalizedString(@"LocalNotificationAutoUploadsFinished", @"")];
-                } else {
-                    [AppUtil sendLocalNotificationForDate:[NSDate date] withMessage:NSLocalizedString(@"LocalNotificationManualUploadsFinished", @"")];
-                }
-            }
-
             if(![SyncUtil readFirstTimeSyncFinishedFlag]) {
                 [SyncUtil unlockAutoSyncBlockInProgress];
                 [[SyncManager sharedInstance] initializeNextAutoSyncPackage];
@@ -328,7 +306,6 @@
         @synchronized(uploadManagers) {
             for(UploadManager *row in uploadManagers) {
                 if([[row uniqueUrl] isEqualToString:[manRef uniqueUrl]]) {
-                    NSLog(@"ADDING TO activeTaskIds in uploadManagerIsReadToStartTask");
                     [activeTaskIds addObject:[row uniqueUrl]];
                     [row startTask];
                     break;
@@ -371,7 +348,6 @@
 }
 
 - (void) URLSession:(NSURLSession *) _session task:(NSURLSessionTask *)task didSendBodyData:(int64_t)bytesSent totalBytesSent:(int64_t)totalBytesSent totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend {
-    NSLog(@"BYTES SENT: %lld, total bytes sent: %lld", bytesSent, totalBytesSent);
     UploadManager *currentManager = [self findByTaskId:task.taskIdentifier];
     if(currentManager != nil) {
         [currentManager.delegate uploadManagerDidSendData:(long)totalBytesSent inTotal:(long)totalBytesExpectedToSend];
@@ -385,7 +361,6 @@
 - (void) URLSession:(NSURLSession *) _session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error {
     UploadManager *currentManager = [self findByTaskId:task.taskIdentifier];
     NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) task.response;
-    NSLog(@"At didCompleteWithError: %d and %@", (int)httpResp.statusCode, [error description]);
     
     if (!error && httpResp.statusCode == 201) {
         if(currentManager != nil) {
@@ -393,12 +368,12 @@
                 [SyncUtil cacheSyncFileSummary:currentManager.uploadRef.summary];
             }
             [currentManager removeTemporaryFile];
+            currentManager.uploadRef.hasFinished = YES;
             [currentManager notifyUpload];
         }
     } else {
         BOOL shouldDeleteHash = YES;
         if(httpResp.statusCode == 0 && error != nil && ([error code] == -1 || [error code] == -997)) {
-            NSLog(@"At URLSession:didCompleteWithError for hash: %@, error code is: %d", task.taskDescription, (int)[error code]);
             shouldDeleteHash = NO;
         }
         if(httpResp.statusCode == 401 || httpResp.statusCode == 403) {
@@ -455,35 +430,24 @@
 }
 
 - (void) URLSession:(NSURLSession *)session didBecomeInvalidWithError:(NSError *)error {
-    NSLog(@"URLSession:didBecomeInvalidWithError:");
 }
 
 - (void) URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task needNewBodyStream:(void (^)(NSInputStream *))completionHandler {
-    NSLog(@"URLSession:task:needNewBodyStream:");
 }
 
 - (void) URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task willPerformHTTPRedirection:(NSHTTPURLResponse *)response newRequest:(NSURLRequest *)request completionHandler:(void (^)(NSURLRequest *))completionHandler {
-    NSLog(@"URLSession:task:willPerformHTTPRedirection:");
 }
 
 
 - (void) URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession *) _session {
-    NSLog(@"URLSessionDidFinishEventsForBackgroundURLSession");
     
     if([UIApplication sharedApplication].applicationState != UIApplicationStateActive) {
-        //all the tasks in the url session has finalized and no more task waiting in queue
-        EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
-        if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
-            [AppUtil sendLocalNotificationForDate:[NSDate date] withMessage:NSLocalizedString(@"LocalNotificationAutoUploadsFinished", @"")];
-        } else {
-            [AppUtil sendLocalNotificationForDate:[NSDate date] withMessage:NSLocalizedString(@"LocalNotificationManualUploadsFinished", @"")];
-        }
+        [SyncManager sharedInstance].queueCountDelegate = self;
+        [[SyncManager sharedInstance] remainingQueueCount];
     }
 
     [[UploadQueue sharedInstance] cancelAllUploadsUpdateReferences:NO];
 
-//    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
-    
     if (self.backgroundSessionCompletionHandler) {
         void (^completionHandler)() = self.backgroundSessionCompletionHandler;
         self.backgroundSessionCompletionHandler = nil;
@@ -527,14 +491,11 @@
     @synchronized(uploadManagers) {
         int count = 0;
         @try {
-//            NSLog(@"------------------------");
             for(UploadManager *row in uploadManagers) {
-//                NSLog(@"UPLOAD MANAGER : %@", row.uploadRef.fileName);
                 if(row.uploadRef.autoSyncFlag) {
                     count++;
                 }
             }
-//            NSLog(@"========================");
         }
         @catch (NSException *exception) {
         }
@@ -583,6 +544,21 @@
 
         [[UIApplication sharedApplication] setApplicationIconBadgeNumber:totalAutoSyncCount - finishedAutoSyncCount];
     });
+}
+
+#pragma mark SyncManagerUploadQueueDelegate methods
+- (void) syncManagerNumberOfImagesInQueue:(int)queueCount {
+    if(queueCount == 0) {
+        //all the tasks in the url session has finalized and no more task waiting in queue
+        EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
+        if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
+            [AppUtil sendLocalNotificationForDate:[NSDate date] withMessage:NSLocalizedString(@"LocalNotificationAutoUploadsFinished", @"")];
+        } else {
+            [AppUtil sendLocalNotificationForDate:[NSDate date] withMessage:NSLocalizedString(@"LocalNotificationManualUploadsFinished", @"")];
+        }
+        
+        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+    }
 }
 
 @end

@@ -21,7 +21,7 @@
     NSString *jsonStr = [json stringWithObject:payload];
     NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
     
-    NSLog(@"Add Folder Payload: %@", jsonStr);
+//    NSLog(@"Add Folder Payload: %@", jsonStr);
     
 	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request addRequestHeader:@"Folder-Name" value:[[Util cleanSpecialCharacters:folderName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
@@ -36,7 +36,7 @@
 	if (!error) {
 		NSString *responseEnc = [request responseString];
 		
-        NSLog(@"Add Folder Response: %@", responseEnc);
+//        NSLog(@"Add Folder Response: %@", responseEnc);
 
         [self shouldReturnSuccess];
 	} else {

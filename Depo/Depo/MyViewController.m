@@ -273,91 +273,71 @@
 }
 
 - (void) newFolderModalDidTriggerNewFolderWithName:(NSString *)folderName {
-    NSLog(@"At MyView newFolderModalDidTriggerNewFolderWithName");
 }
 
 - (void) cameraCapturaModalDidCancel {
-    NSLog(@"At MyView cameraCapturaModalDidCancel");
 }
 
 - (void) cameraCapturaModalDidCaptureAndStoreImageToPath:(NSString *)filepath withName:(NSString *)fileName {
-    NSLog(@"At MyView cameraCapturaModalDidCaptureAndStoreImageToPath for filePath:%@ and name:%@", filepath, fileName);
 }
 
 - (void) photoModalDidTriggerUploadForUrls:(NSArray *)assetUrls {
-    NSLog(@"At MyView photoModalDidTriggerUploadForUrls");
 }
 
 - (void) newAlbumModalDidTriggerNewAlbumWithName:(NSString *)albumName {
-    NSLog(@"At MyView newAlbumModalDidTriggerNewAlbumWithName");
 }
 
 - (void) sortDidChange {
-    NSLog(@"At MyView sortDidChange");
 }
 
 - (void) changeToSelectedStatus {
-    NSLog(@"At MyView changeToSelectedStatus");
 }
 
 - (void) moveListModalDidSelectFolder:(NSString *)folderUuid {
-    NSLog(@"At MyView moveListModalDidSelectFolder");
 }
 
 - (void) folderDetailShouldRename:(NSString *)newNameVal {
-    NSLog(@"At MyView folderDetailShouldRename");
 }
 
 - (void) fileDetailShouldRename:(NSString *)newNameVal {
-    NSLog(@"At MyView fileDetailShouldRename");
 }
 
 #pragma mark ConfirmDeleteModalDelegate methods
 
 - (void) confirmDeleteDidCancel {
-    NSLog(@"At MyView confirmDeleteDidCancel");
 }
 
 - (void) confirmDeleteDidConfirm {
-    NSLog(@"At MyView confirmDeleteDidConfirm");
 }
 
 #pragma mark MoreMenuDelegate methods
 
 - (void) moreMenuDidSelectDelete {
-    NSLog(@"At MyView moreMenuDidSelectDelete");
 }
 
 - (void) moreMenuDidSelectFav {
-    NSLog(@"At MyView moreMenuDidSelectFav");
 }
 
 - (void) moreMenuDidSelectUnfav {
-    NSLog(@"At MyView moreMenuDidSelectUnfav");
 }
 
 - (void) moreMenuDidSelectShare {
-    NSLog(@"At MyView moreMenuDidSelectShare");
 }
 
 - (void) moreMenuDidSelectDownloadImage {
-    NSLog(@"At MyView moreMenuDidSelectDownloadImage");
 }
 
 - (void) moreMenuDidSelectSortWithList {
-    NSLog(@"At MyView moreMenuDidSelectSortWithList");
 }
 
 #pragma mark AlbumModalDelegate methods
 
 - (void) albumModalDidSelectAlbum:(NSString *)albumUuid {
-    NSLog(@"At MyView albumModalDidSelectAlbum");
 }
 
 #pragma mark AlbumDetailDelegate methods
 
 - (void)albumDetailShouldRenameWithName:(NSString *)newName {
-    NSLog(@"At MyView albumDetailShouldRenameWithName");
 }
 
 

@@ -64,7 +64,6 @@
 
 - (void) startLocationManager {
     if ([CLLocationManager locationServicesEnabled]) {
-        NSLog(@"Location services enabled");
         [[LocationManager sharedInstance] initializeLocationManager];
         
         if([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined) {
@@ -75,18 +74,14 @@
                 if(delegate) {
                     [delegate locationPermissionGranted];
                 }
-                NSLog(@"Location services calling startMonitoringSignificantLocationChanges");
                 [[LocationManager sharedInstance].locManager startMonitoringSignificantLocationChanges];
             }
         } else if([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways) {
             if(delegate) {
                 [delegate locationPermissionGranted];
             }
-            NSLog(@"Location services calling startMonitoringSignificantLocationChanges");
             [[LocationManager sharedInstance].locManager startMonitoringSignificantLocationChanges];
         }
-    } else {
-        NSLog(@"Location services disabled");
     }
 }
 
@@ -102,13 +97,11 @@
         if(delegate) {
             [delegate locationPermissionGranted];
         }
-        NSLog(@"Location services calling startMonitoringSignificantLocationChanges");
         [[LocationManager sharedInstance].locManager startMonitoringSignificantLocationChanges];
     } else if (status == kCLAuthorizationStatusAuthorized) {
         if(delegate) {
             [delegate locationPermissionGranted];
         }
-        NSLog(@"Location services calling startMonitoringSignificantLocationChanges");
         [[LocationManager sharedInstance].locManager startMonitoringSignificantLocationChanges];
     } else {
         if(delegate) {
@@ -118,30 +111,20 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    NSLog(@"At locationManager:didUpdateLocations:");
-    
     NSDate *lastUpdateDate = [SyncUtil readLastLocUpdateTime];
     if(lastUpdateDate != nil && [[NSDate date] timeIntervalSinceDate:lastUpdateDate] < 30) {
-        NSLog(@"At locationManager:didUpdateLocations: still under 30 seconds, ignoring...");
         return;
     }
     
     [[UploadQueue sharedInstance].session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
     }];
 
-    //TODO sil
-    [AppUtil sendLocalNotificationForDate:[NSDate date] withMessage:@"startMonitoringSignificantLocationChanges returns location"];
-    
     [SyncUtil writeLastLocUpdateTime:[NSDate date]];
-    
-    //TODO check
-//    [SyncUtil unlockAutoSyncBlockInProgress];
     
     [[SyncManager sharedInstance] decideAndStartAutoSync];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
-    NSLog(@"At locationManager:didFailWithError:");
 }
 
 @end

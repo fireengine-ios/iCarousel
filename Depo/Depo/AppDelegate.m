@@ -439,22 +439,12 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [[CurioNotificationManager shared] didReceiveNotification:userInfo];
     [self application:application didFinishLaunchingWithOptions:userInfo];
-    
-    NSLog(@"didReceiveRemoteNotification CALLED.");
-    if (userInfo != nil) {
-        NSLog(@"didReceiveRemoteNotification user info received.");
-    }
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     completionHandler(UIBackgroundFetchResultNewData);
     [[CurioNotificationManager shared] didReceiveNotification:userInfo];
     [self application:application didFinishLaunchingWithOptions:userInfo];
-    
-    NSLog(@"didReceiveRemoteNotification:fetchCompletionHandler CALLED");
-    if (userInfo != nil) {
-        NSLog(@"didReceiveRemoteNotification:fetchCompletionHandler user info received.");
-    }
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
@@ -514,7 +504,6 @@
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    NSLog(@"At applicationWillEnterForeground");
     activatedFromBackground = YES;
 }
 
@@ -523,9 +512,7 @@
         [session checkLatestContactSyncStatus];
     }
     
-    NSLog(@"At applicationDidBecomeActive");
     if(activatedFromBackground) {
-        NSLog(@"At applicationDidBecomeActive : activatedFromBackground is true");
         /*
         [APPDELEGATE.uploadQueue.session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
             if(uploadTasks) {
@@ -543,14 +530,11 @@
         }];
         
     } else {
-        NSLog(@"At applicationDidBecomeActive : activatedFromBackground is false");
         // eğer backgrounddan gelmiyorsa bir sonraki auto sync bloğununun okunmasını engelleyen lock kaldırılıyor
         [SyncUtil unlockAutoSyncBlockInProgress];
     }
     
-    NSLog(@"At applicationDidBecomeActive : before triggerAutoSynchronization called");
     [self triggerAutoSynchronization];
-    NSLog(@"At applicationDidBecomeActive : after triggerAutoSynchronization called");
 
     [[UIDevice currentDevice] setBatteryMonitoringEnabled:YES];
     if ([[UIDevice currentDevice] batteryState] == UIDeviceBatteryStateCharging || [[UIDevice currentDevice] batteryState] == UIDeviceBatteryStateFull) {
@@ -564,8 +548,6 @@
 }
 
 - (void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(NSString *)identifier completionHandler:(void (^)())completionHandler {
-    NSLog(@"At handleEventsForBackgroundURLSession");
-    
     [UploadQueue sharedInstance].backgroundSessionCompletionHandler = completionHandler;
 }
 
@@ -576,11 +558,9 @@ void uncaughtExceptionHandler(NSException *exception) {
 }
 
 - (void) updateActionChosen {
-    NSLog(@"At updateActionChosen");
 }
 
 - (void) updateCheckCompleted{
-    NSLog(@"At updateCheckCompleted");
     if([CacheUtil readRememberMeToken] != nil) {
         [tokenManager requestToken];
         [self showMainLoading];

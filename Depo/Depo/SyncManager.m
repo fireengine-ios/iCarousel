@@ -22,6 +22,7 @@
 
 @implementation SyncManager
 
+@synthesize queueCountDelegate;
 @synthesize assetsLibrary;
 @synthesize elasticSearchDao;
 @synthesize autoSyncIterationInProgress;
@@ -50,11 +51,9 @@
 }
 
 - (void) startFirstTimeSync {
-    NSLog(@"At startFirstTimeSync");
     if(autoSyncIterationInProgress)
         return;
 
-    NSLog(@"At startFirstTimeSync : starting...");
     EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
     
     BOOL triggerSyncing = NO;
@@ -68,14 +67,12 @@
     }
 
     if(triggerSyncing) {
-        NSLog(@"At startFirstTimeSync : querying for server photos...");
         [elasticSearchDao requestPhotosForPage:0 andSize:20000 andSortType:SortTypeAlphaAsc];
         autoSyncIterationInProgress = YES;
     }
 }
 
 - (void) photoListSuccessCallback:(NSArray *) files {
-    NSLog(@"At photoListSuccessCallback");
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         NSMutableArray *summaryArray = [[NSMutableArray alloc] init];
         NSMutableArray *hashArray = [[NSMutableArray alloc] init];
@@ -100,18 +97,14 @@
 }
 
 - (void) initializeNextAutoSyncPackage {
-    NSLog(@"At initializeNextAutoSyncPackage");
     if(autoSyncIterationInProgress)
         return;
 
-    NSLog(@"At initializeNextAutoSyncPackage : starting ...");
     EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
-    NSLog(@"At initializeNextAutoSyncPackage : photoSyncFlag = %d", photoSyncFlag);
     
     BOOL triggerSyncing = NO;
     if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
         ConnectionOption connectionOption = (ConnectionOption)[CacheUtil readCachedSettingSyncingConnectionType];
-        NSLog(@"At initializeNextAutoSyncPackage : connectionOption = %d", connectionOption);
         if([ReachabilityManager isReachableViaWiFi]) {
             triggerSyncing = YES;
         } else if([ReachabilityManager isReachableViaWWAN] && connectionOption == ConnectionOptionWifi3G) {
@@ -120,17 +113,15 @@
     }
     
     if(triggerSyncing) {
-        NSLog(@"At initializeNextAutoSyncPackage : triggerSyncing is true");
         NSArray *localHashList = [SyncUtil readSyncHashLocally];
         NSArray *remoteHashList = [SyncUtil readSyncHashRemotely];
         NSArray *remoteSummaryList = [SyncUtil readSyncFileSummaries];
         
-        NSTimeInterval timeInMilisecondsStart = [[NSDate date] timeIntervalSince1970];
-        NSLog(@"FirstTimeSync Start: %f", timeInMilisecondsStart);
-        
         autoSyncIterationInProgress = YES;
         [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
             if(group) {
+                [group setAssetsFilter:[ALAssetsFilter allPhotos]];
+
                 int startIndex = [SyncUtil readAutoSyncIndex];
                 //check and set "finished flag" to TRUE if no enumeration is left
                 if(startIndex >= [group numberOfAssets]) {
@@ -160,7 +151,6 @@
                                         serverContainsImageFlag = [remoteSummaryList containsObject:assetSummary];
                                     }
                                     if(!serverContainsImageFlag) {
-                                        NSLog(@"auto upload started for image: %@", defaultRep.filename);
                                         [self startUploadForAsset:asset andLocalHash:localHash];
                                         [SyncUtil lockAutoSyncBlockInProgress];
                                         [SyncUtil updateLastSyncDate];
@@ -193,7 +183,6 @@
 
 - (void) firstTimeBlockSyncEnumerationFinished {
     NSTimeInterval timeInMiliseconds2 = [[NSDate date] timeIntervalSince1970];
-    NSLog(@"End: %f", timeInMiliseconds2);
     [SyncUtil writeFirstTimeSyncFlag];
     [SyncUtil updateLastSyncDate];
 
@@ -211,7 +200,6 @@
     if([SyncUtil readBaseUrlConstant] == nil)
         return;
     
-    NSLog(@"ManuallyCheckIfAlbumChanged called");
     EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
 
     BOOL triggerSyncing = NO;
@@ -226,17 +214,14 @@
     
     if(triggerSyncing) {
         NSArray *localHashList = [SyncUtil readSyncHashLocally];
-        NSLog(@"Local Hash List: %@", localHashList);
         NSArray *remoteHashList = [SyncUtil readSyncHashRemotely];
         NSArray *remoteSummaryList = [SyncUtil readSyncFileSummaries];
         
-        NSTimeInterval timeInMilisecondsStart = [[NSDate date] timeIntervalSince1970];
-        NSLog(@"Auto Sync Start: %f", timeInMilisecondsStart);
-
         autoSyncIterationInProgress = YES;
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
             [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
                 if(group) {
+                    [group setAssetsFilter:[ALAssetsFilter allPhotos]];
                     [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
                         if(asset && [[asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypePhoto]) {
                             EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
@@ -256,7 +241,6 @@
                                         shouldStartUpload = ![remoteSummaryList containsObject:assetSummary];
                                     }
                                     if(shouldStartUpload) {
-                                        NSLog(@"At ManuallyCheckIfAlbumChanged : starting upload for asset: %@ with hash: %@", asset.defaultRepresentation.filename, localHash);
                                         [[SyncManager sharedInstance] startUploadForAsset:asset andLocalHash:localHash];
                                     }
                                 }
@@ -264,8 +248,6 @@
                         }
                     }];
                 } else { 
-                    NSTimeInterval timeInMilisecondsEnd = [[NSDate date] timeIntervalSince1970];
-                    NSLog(@"Auto Sync End: %f", timeInMilisecondsEnd);
                     [SyncUtil writeLastSyncDate:[NSDate date]];
                     autoSyncIterationInProgress = NO;
                     [[UploadQueue sharedInstance] manualAutoSyncIterationFinished];
@@ -274,6 +256,46 @@
             }];
         });
     }
+}
+
+- (void) remainingQueueCount {
+    NSTimeInterval timeInMilisecondsStart = [[NSDate date] timeIntervalSince1970];
+
+    NSArray *localHashList = [SyncUtil readSyncHashLocally];
+    NSArray *remoteHashList = [SyncUtil readSyncHashRemotely];
+    NSArray *remoteSummaryList = [SyncUtil readSyncFileSummaries];
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        __block int waitingInQueueCount = 0;
+        [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+            
+            if(group) {
+                [group setAssetsFilter:[ALAssetsFilter allPhotos]];
+                [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
+                    if(asset && [[asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypePhoto]) {
+                        ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
+                        NSString *localHash = [SyncUtil md5StringOfString:[defaultRep.url absoluteString]];
+                        
+                        BOOL isWaitingForSync = ![localHashList containsObject:localHash] && ![remoteHashList containsObject:localHash];
+                        
+                        if(isWaitingForSync) {
+                            MetaFileSummary *assetSummary = [[MetaFileSummary alloc] init];
+                            assetSummary.bytes = [defaultRep size];
+                            assetSummary.fileName = [defaultRep filename];
+                            isWaitingForSync = ![remoteSummaryList containsObject:assetSummary];
+                        }
+                        if(isWaitingForSync) {
+                            waitingInQueueCount++;
+                        }
+                    }
+                }];
+            } else {
+                NSTimeInterval timeInMilisecondsEnd = [[NSDate date] timeIntervalSince1970];
+                [queueCountDelegate syncManagerNumberOfImagesInQueue:waitingInQueueCount];
+            }
+        } failureBlock:^(NSError *error) {
+        }];
+    });
 }
 
 - (void) startUploadForAsset:(ALAsset *) asset andLocalHash:(NSString *) localHash {
@@ -332,25 +354,16 @@
 }
 
 - (void) decideAndStartAutoSync {
-    NSLog(@"At decideAndStartAutoSync");
     if(APPDELEGATE.session.user) {
-        NSLog(@"At decideAndStartAutoSync user not null");
         if(![SyncUtil readFirstTimeSyncFlag]) {
-            NSLog(@"At decideAndStartAutoSync : calling startFirstTimeSync");
             [self startFirstTimeSync];
         } else if(![SyncUtil readFirstTimeSyncFinishedFlag]) {
             if(![SyncUtil readAutoSyncBlockInProgress]) {
-                NSLog(@"At decideAndStartAutoSync : calling initializeNextAutoSyncPackage");
                 [self initializeNextAutoSyncPackage];
-            } else {
-                NSLog(@"At decideAndStartAutoSync : readAutoSyncBlockInProgress is TRUE : NOT calling initializeNextAutoSyncPackage");
             }
         } else {
-            NSLog(@"At decideAndStartAutoSync : calling manuallyCheckIfAlbumChanged");
             [self manuallyCheckIfAlbumChanged];
         }
-    } else {
-        NSLog(@"At decideAndStartAutoSync user is null");
     }
 }
 

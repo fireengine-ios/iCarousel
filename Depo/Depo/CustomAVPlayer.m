@@ -94,7 +94,6 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
 
 - (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     UIView *view = touch.view;
-    NSLog(@"Is of type: %@", [view class]);
     if([view isKindOfClass:[CustomAVControl class]] || [view isKindOfClass:[VolumeSliderView class]]) {
         return NO;
     }

@@ -789,7 +789,6 @@
 }
 
 - (void) moreMenuDidSelectShare {
-    NSLog(@"At INNER moreMenuDidSelectShare");
     if(self.folder != nil && self.folder.uuid != nil) {
         [APPDELEGATE.base triggerShareForFiles:@[self.folder.uuid]];
     }
@@ -798,7 +797,6 @@
 #pragma mark ConfirmDeleteModalDelegate methods
 
 - (void) confirmDeleteDidCancel {
-    NSLog(@"At INNER confirmDeleteDidCancel");
 }
 
 - (void) confirmDeleteDidConfirm {

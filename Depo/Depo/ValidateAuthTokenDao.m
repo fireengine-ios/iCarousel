@@ -24,7 +24,7 @@
     NSError *error = [request error];
     if (!error) {
         NSString *responseEnc = [request responseString];
-        NSLog(@"Auth Token Response: %@", responseEnc);
+//        NSLog(@"Auth Token Response: %@", responseEnc);
         
         SBJSON *jsonParser = [SBJSON new];
         NSDictionary *mainDict = [jsonParser objectWithString:responseEnc];

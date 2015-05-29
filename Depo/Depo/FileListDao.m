@@ -46,7 +46,7 @@
     NSString *parentListingUrl = [NSString stringWithFormat:FOLDER_LISTING_MAIN_URL, folderUuid==nil ? @"" : folderUuid, [AppUtil serverSortNameByEnum:sortType], [AppUtil isAscByEnum:sortType] ? @"ASC" : @"DESC", page, size];
     NSURL *url = [NSURL URLWithString:parentListingUrl];
     
-    NSLog(@"FOLDER URL: %@", parentListingUrl);
+//    NSLog(@"FOLDER URL: %@", parentListingUrl);
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setDelegate:self];
@@ -60,7 +60,7 @@
 	if (!error) {
 		NSString *responseEnc = [request responseString];
 		
-        NSLog(@"File Listing Response: %@", responseEnc);
+//        NSLog(@"File Listing Response: %@", responseEnc);
         
 		SBJSON *jsonParser = [SBJSON new];
 		NSDictionary *mainDict = [jsonParser objectWithString:responseEnc];

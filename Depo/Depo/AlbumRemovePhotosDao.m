@@ -18,7 +18,7 @@
     NSString *jsonStr = [json stringWithObject:uuidList];
     NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
     
-    NSLog(@"Album Remove Photos Payload: %@", jsonStr);
+//    NSLog(@"Album Remove Photos Payload: %@", jsonStr);
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request addRequestHeader:@"x-meta-strategy" value:@"1"];
@@ -35,7 +35,7 @@
     if (!error) {
         NSString *responseEnc = [request responseString];
         
-        NSLog(@"Album Remove Photos Response: %@", responseEnc);
+//        NSLog(@"Album Remove Photos Response: %@", responseEnc);
         
         SBJSON *jsonParser = [SBJSON new];
         NSDictionary *mainDict = [jsonParser objectWithString:responseEnc];

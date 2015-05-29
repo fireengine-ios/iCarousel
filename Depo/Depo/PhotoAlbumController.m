@@ -168,7 +168,6 @@
         }
         [photoList addObjectsFromArray:albumWithUpdatedContent.content];
     }
-    NSLog(@"List size: %d", (int)[photoList count]);
 
     photosScroll.contentSize = CGSizeMake(photosScroll.frame.size.width, ((int)ceil(counter/3)+1)*105 + 20);
     isLoading = NO;
@@ -460,7 +459,6 @@
 #pragma mark ConfirmDeleteModalDelegate methods
 
 - (void) confirmDeleteDidCancel {
-    NSLog(@"At INNER confirmDeleteDidCancel");
 }
 
 - (void) confirmDeleteDidConfirm {

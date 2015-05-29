@@ -18,7 +18,7 @@
 
     NSString *urlStr = [NSString stringWithFormat:@"%@/%@", APPDELEGATE.session.baseUrl, fileName];
 	NSURL *url = [NSURL URLWithString:urlStr];
-    NSLog(@"UPLOAD URL: %@", urlStr);
+//    NSLog(@"UPLOAD URL: %@", urlStr);
 
     Byte *buffer = (Byte*)malloc(rep.size);
     NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:rep.size error:nil];
@@ -38,7 +38,7 @@
 	if (!error) {
 		NSString *responseEnc = [request responseString];
 		
-        NSLog(@"UPLOAD File Response: %@", responseEnc);
+//        NSLog(@"UPLOAD File Response: %@", responseEnc);
         
         [self shouldReturnSuccess];
 	} else {

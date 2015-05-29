@@ -23,7 +23,7 @@
     
     if (!error) {
         NSString *responseStr = [request responseString];
-        NSLog(@"Migration Status Response: %@", responseStr);
+//        NSLog(@"Migration Status Response: %@", responseStr);
         
         SBJSON *jsonParser = [SBJSON new];
         NSDictionary *mainDict = [jsonParser objectWithString:responseStr];

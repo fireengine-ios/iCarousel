@@ -17,7 +17,7 @@
     NSString *jsonStr = [json stringWithObject:files];
     NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
     
-    NSLog(@"Share Payload: %@", jsonStr);
+//    NSLog(@"Share Payload: %@", jsonStr);
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setPostBody:[postData mutableCopy]];

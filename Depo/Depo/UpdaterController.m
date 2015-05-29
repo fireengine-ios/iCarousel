@@ -143,12 +143,10 @@
 
 - (void) updateCheckFailed:(NSError *)error
 {
-    NSLog(@"updateCheckFailed %@", [error description]);
     [updaterControllerDelegate updateCheckCompleted];
 }
 
 - (void) updateNotFound{
-    NSLog(@"updateNotFound");
     [updaterControllerDelegate updateCheckCompleted];
 }
 

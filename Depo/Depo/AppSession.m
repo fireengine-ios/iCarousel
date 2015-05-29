@@ -169,7 +169,6 @@
 }
 
 - (void) queueItemDidFail {
-    NSLog(@"AT queueItemDidFail");
 }
 
 - (void) checkLatestContactSyncStatus {

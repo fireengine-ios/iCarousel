@@ -18,7 +18,7 @@
     
     NSString *urlStr = [NSString stringWithFormat:RENAME_ALBUM_URL, albumUuid, newName];
     NSURL *url = [NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    NSLog(@"RENAME ALBUM URL: %@", [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]);
+//    NSLog(@"RENAME ALBUM URL: %@", [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]);
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setDelegate:self];
@@ -30,7 +30,7 @@
     NSError *error = [request error];
     if (!error) {
         NSString *responseEnc = [request responseString];
-        NSLog(@"RENAME ALBUM Response: %@", responseEnc);
+//        NSLog(@"RENAME ALBUM Response: %@", responseEnc);
         
         PhotoAlbum *finalAlbum = [[PhotoAlbum alloc] init];
         finalAlbum.label = self.nameRef;

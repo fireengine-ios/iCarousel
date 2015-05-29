@@ -29,7 +29,7 @@
 	if (!error) {
 		NSString *responseEnc = [request responseString];
 		
-        NSLog(@"User Base Url Response: %@", responseEnc);
+//        NSLog(@"User Base Url Response: %@", responseEnc);
         
 		SBJSON *jsonParser = [SBJSON new];
 		NSDictionary *mainDict = [jsonParser objectWithString:responseEnc];

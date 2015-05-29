@@ -30,13 +30,13 @@
 //                                ([AppUtil readFirstVisitOverFlag] ? @"false" : @"true"), @"newDevice",
                                 nil];
     
-    NSLog(@"Device Info: %@", deviceInfo);
+//    NSLog(@"Device Info: %@", deviceInfo);
     
     SBJSON *json = [SBJSON new];
     NSString *jsonStr = [json stringWithObject:deviceInfo];
     NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
     
-    NSLog(@"Radius Login Req: %@", jsonStr);
+//    NSLog(@"Radius Login Req: %@", jsonStr);
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setPostBody:[postData mutableCopy]];
@@ -61,8 +61,8 @@
         NSNumber *newUserFlag = [headerParams objectForKey:@"X-New-User"];
         NSNumber *migrationUserFlag = [headerParams objectForKey:@"X-Migration-User"];
         
-        NSLog(@"Radius Login Response Headers: %@", headerParams);
-        NSLog(@"TOKEN: %@", authToken);
+//        NSLog(@"Radius Login Response Headers: %@", headerParams);
+//        NSLog(@"TOKEN: %@", authToken);
         
         if(newUserFlag != nil && ![newUserFlag isKindOfClass:[NSNull class]]) {
             APPDELEGATE.session.newUserFlag = [newUserFlag boolValue];

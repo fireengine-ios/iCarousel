@@ -24,7 +24,7 @@
     NSError *error = [request error];
     if (!error) {
         NSString *responseEnc = [request responseString];
-        NSLog(@"Rename Response: %@", responseEnc);
+//        NSLog(@"Rename Response: %@", responseEnc);
         
         SBJSON *jsonParser = [SBJSON new];
         NSDictionary *mainDict = [jsonParser objectWithString:responseEnc];

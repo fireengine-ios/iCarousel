@@ -534,7 +534,6 @@
 
 - (void)sscrollViewWillBeginDragging:(UIScrollView *)scrollView {
     CGPoint velocity = [scrollView.panGestureRecognizer velocityInView:scrollView.superview];
-    NSLog(@"AT scrollViewWillBeginDragging: %.2f", velocity.y);
     
     if(velocity.y > 0) {
         [self.nav showNavigationBar];
@@ -813,7 +812,6 @@
 #pragma mark ConfirmDeleteModalDelegate methods
 
 - (void) confirmDeleteDidCancel {
-    NSLog(@"At INNER confirmDeleteDidCancel");
 }
 
 - (void) confirmDeleteDidConfirm {

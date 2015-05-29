@@ -26,7 +26,7 @@
     if (!error) {
         NSString *responseEnc = [request responseString];
         
-        NSLog(@"Recent Activities Response: %@", responseEnc);
+//        NSLog(@"Recent Activities Response: %@", responseEnc);
 
         SBJSON *jsonParser = [SBJSON new];
         NSArray *mainArray = [jsonParser objectWithString:responseEnc];

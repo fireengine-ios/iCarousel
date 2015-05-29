@@ -39,7 +39,6 @@
     SBJSON *json = [SBJSON new];
     NSString *jsonStr = [json stringWithObject:payload];
     NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
-    NSLog(@"Add Offer Payload: %@", jsonStr);
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setPostBody:[postData mutableCopy]];
@@ -89,7 +88,7 @@
     if (!error) {
         @try {
             NSString *responseStr = [request responseString];
-            NSLog(@"RESULT: %@", responseStr);
+//            NSLog(@"RESULT: %@", responseStr);
             SBJSON *jsonParser = [SBJSON new];
             if (requestMethod == RequestMethodGetCurrentSubscription) {
                 NSDictionary *responseDict = [jsonParser objectWithString:responseStr];
@@ -141,7 +140,7 @@
             }
         }
         @catch (NSException *e) {
-            NSLog(@"Exception: %@", e);
+//            NSLog(@"Exception: %@", e);
         }
     } else {
         [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];

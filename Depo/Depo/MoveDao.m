@@ -17,7 +17,7 @@
     NSString *jsonStr = [json stringWithObject:fileList];
     NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
     
-    NSLog(@"Move Payload: %@", jsonStr);
+//    NSLog(@"Move Payload: %@", jsonStr);
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setPostBody:[postData mutableCopy]];
@@ -30,7 +30,7 @@
     NSError *error = [request error];
     if (!error) {
         NSString *responseEnc = [request responseString];
-        NSLog(@"Move Response: %@", responseEnc);
+//        NSLog(@"Move Response: %@", responseEnc);
         [self shouldReturnSuccess];
     } else {
         [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];

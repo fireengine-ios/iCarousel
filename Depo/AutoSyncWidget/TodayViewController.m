@@ -92,8 +92,6 @@
 }
 
 - (void)userDefaultsDidChange:(NSNotification *)notification {
-    NSLog(@"AT userDefaultsDidChange:");
-
     NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:GROUP_NAME_SUITE_NSUSERDEFAULTS];
     self.totalCount = (int)[defaults integerForKey:@"totalAutoSyncCount"];
     self.finishedCount = (int)[defaults integerForKey:@"finishedAutoSyncCount"];
@@ -106,8 +104,6 @@
 }
 
 - (void)widgetPerformUpdateWithCompletionHandler:(void (^)(NCUpdateResult))completionHandler {
-    NSLog(@"At widgetPerformUpdateWithCompletionHandler");
-    
     NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:GROUP_NAME_SUITE_NSUSERDEFAULTS];
     self.totalCount = (int)[defaults integerForKey:@"totalAutoSyncCount"];
     self.finishedCount = (int)[defaults integerForKey:@"finishedAutoSyncCount"];

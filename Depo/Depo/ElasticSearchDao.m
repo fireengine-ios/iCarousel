@@ -26,7 +26,7 @@
 
 - (void) requestMusicForPage:(int) page andSize:(int) size andSortType:(SortType) sortType {
     NSString *parentListingUrl = [NSString stringWithFormat:ELASTIC_LISTING_MAIN_URL, @"content_type", @"audio", [AppUtil serverSortNameByEnum:sortType], [AppUtil isAscByEnum:sortType] ? @"ASC":@"DESC", page, size];
-    NSLog(@"MUSIC REQ URL: %@", parentListingUrl);
+//    NSLog(@"MUSIC REQ URL: %@", parentListingUrl);
     NSURL *url = [NSURL URLWithString:parentListingUrl];
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
@@ -53,7 +53,7 @@
 	if (!error) {
 		NSString *responseEnc = [request responseString];
 		
-        NSLog(@"Elastic Search Response: %@", responseEnc);
+//        NSLog(@"Elastic Search Response: %@", responseEnc);
         
 		SBJSON *jsonParser = [SBJSON new];
 		NSArray *mainArray = [jsonParser objectWithString:responseEnc];

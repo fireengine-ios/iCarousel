@@ -130,14 +130,12 @@
 }
 
 - (void) moreMenuDidSelectShare {
-    NSLog(@"At INNER moreMenuDidSelectShare");
     [self triggerShareForFiles:@[self.file.uuid]];
 }
 
 #pragma mark ConfirmDeleteModalDelegate methods
 
 - (void) confirmDeleteDidCancel {
-    NSLog(@"At INNER confirmDeleteDidCancel");
 }
 
 - (void) confirmDeleteDidConfirm {

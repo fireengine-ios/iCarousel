@@ -170,7 +170,6 @@
     tableUpdateCounter++;
     [searchResultsTable reloadData];
     [super hideLoading];
-    NSLog(@"alpha before in: %f", searchResultsTable.alpha);
     [super fadeIn:searchResultsTable duration:0.2];
     
 }
@@ -511,7 +510,6 @@
 #pragma mark ConfirmDeleteModalDelegate methods
 
 - (void) confirmDeleteDidCancel {
-    NSLog(@"At INNER confirmDeleteDidCancel");
 }
 
 - (void) confirmDeleteDidConfirm {

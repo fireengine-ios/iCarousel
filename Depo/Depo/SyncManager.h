@@ -10,8 +10,13 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "ElasticSearchDao.h"
 
+@protocol SyncManagerQueueCountDelegate <NSObject>
+- (void) syncManagerNumberOfImagesInQueue:(int) queueCount;
+@end
+
 @interface SyncManager : NSObject
 
+@property (nonatomic, strong) id<SyncManagerQueueCountDelegate> queueCountDelegate;
 @property (nonatomic, strong) ALAssetsLibrary *assetsLibrary;
 @property (nonatomic, strong) ElasticSearchDao *elasticSearchDao;
 @property (nonatomic) BOOL autoSyncIterationInProgress;
@@ -21,5 +26,6 @@
 - (void) initializeNextAutoSyncPackage;
 - (void) manuallyCheckIfAlbumChanged;
 - (void) decideAndStartAutoSync;
+- (void) remainingQueueCount;
 
 @end

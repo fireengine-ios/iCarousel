@@ -25,7 +25,7 @@
 	NSError *error = [request error];
 	if (!error) {
 		NSString *responseEnc = [request responseString];
-        NSLog(@"Album List Response: %@", responseEnc);
+//        NSLog(@"Album List Response: %@", responseEnc);
         
 		SBJSON *jsonParser = [SBJSON new];
 		NSArray *mainArray = [jsonParser objectWithString:responseEnc];

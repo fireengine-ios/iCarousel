@@ -597,8 +597,7 @@ static bool syncing = false;
     dispatch_async(dispatch_get_main_queue(), ^{
         NSInteger interval = [SyncSettings shared].syncInterval;
         NSInteger delay =[SyncSettings shared].delayInterval;
-        NSLog(@"Timer is running");
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:(interval+delay)*60 target:self selector:@selector(fireSynch) userInfo:nil repeats:YES];
+//        self.timer = [NSTimer scheduledTimerWithTimeInterval:(interval+delay)*60 target:self selector:@selector(fireSynch) userInfo:nil repeats:YES];
 
     });
     

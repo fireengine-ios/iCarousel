@@ -15,7 +15,7 @@
     NSString *albumDetailUrl = [NSString stringWithFormat:ALBUM_DETAIL_URL, albumUuid, page, size];
 	NSURL *url = [NSURL URLWithString:albumDetailUrl];
     
-    NSLog(@"Album Detail URL: %@", albumDetailUrl);
+//    NSLog(@"Album Detail URL: %@", albumDetailUrl);
 	
 	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setDelegate:self];
@@ -27,7 +27,7 @@
 	NSError *error = [request error];
 	if (!error) {
 		NSString *responseEnc = [request responseString];
-        NSLog(@"Album Detail Response: %@", responseEnc);
+//        NSLog(@"Album Detail Response: %@", responseEnc);
         
 		SBJSON *jsonParser = [SBJSON new];
 		NSDictionary *mainDict = [jsonParser objectWithString:responseEnc];

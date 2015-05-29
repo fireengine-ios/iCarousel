@@ -30,7 +30,7 @@
 //                                ([AppUtil readFirstVisitOverFlag] ? @"false" : @"true"), @"newDevice",
                                 nil];
 
-    NSLog(@"Device Info: %@", deviceInfo);
+//    NSLog(@"Device Info: %@", deviceInfo);
 
     NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:
                             msisdnVal, @"username",
@@ -45,7 +45,7 @@
     NSString *jsonStr = [json stringWithObject:info];
     NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
     
-    NSLog(@"Token Req: %@", jsonStr);
+//    NSLog(@"Token Req: %@", jsonStr);
     
 	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setPostBody:[postData mutableCopy]];
@@ -75,7 +75,7 @@
     NSString *jsonStr = [json stringWithObject:info];
     NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
     
-    NSLog(@"Token Req: %@", jsonStr);
+//    NSLog(@"Token Req: %@", jsonStr);
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request addRequestHeader:@"X-Remember-Me-Token" value:[CacheUtil readRememberMeToken]];
@@ -101,8 +101,8 @@
         NSNumber *newUserFlag = [headerParams objectForKey:@"X-New-User"];
         NSNumber *migrationUserFlag = [headerParams objectForKey:@"X-Migration-User"];
         
-        NSLog(@"Auth Token Response Headers: %@", headerParams);
-        NSLog(@"TOKEN: %@", authToken);
+//        NSLog(@"Auth Token Response Headers: %@", headerParams);
+//        NSLog(@"TOKEN: %@", authToken);
 
         if(newUserFlag != nil && ![newUserFlag isKindOfClass:[NSNull class]]) {
             APPDELEGATE.session.newUserFlag = [newUserFlag boolValue];

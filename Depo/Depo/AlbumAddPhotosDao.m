@@ -17,7 +17,7 @@
     NSString *jsonStr = [json stringWithObject:uuidList];
     NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
     
-    NSLog(@"Album Add Photos Payload: %@", jsonStr);
+//    NSLog(@"Album Add Photos Payload: %@", jsonStr);
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request addRequestHeader:@"x-meta-strategy" value:@"1"];
@@ -34,7 +34,7 @@
     if (!error) {
         NSString *responseEnc = [request responseString];
         
-        NSLog(@"Album Add Photos Response: %@", responseEnc);
+//        NSLog(@"Album Add Photos Response: %@", responseEnc);
         
         [self shouldReturnSuccess];
     } else {

@@ -19,7 +19,7 @@
     NSString *jsonStr = [json stringWithObject:payload];
     NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
     
-    NSLog(@"Add Album Payload: %@", jsonStr);
+//    NSLog(@"Add Album Payload: %@", jsonStr);
     
 	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setPostBody:[postData mutableCopy]];
@@ -33,7 +33,7 @@
 	if (!error) {
 		NSString *responseEnc = [request responseString];
 		
-        NSLog(@"Add Album Response: %@", responseEnc);
+//        NSLog(@"Add Album Response: %@", responseEnc);
         
         [self shouldReturnSuccess];
 	} else {

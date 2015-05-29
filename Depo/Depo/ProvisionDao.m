@@ -18,7 +18,7 @@
     SBJSON *json = [SBJSON new];
     NSString *jsonStr = [json stringWithObject:dict];
     NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
-    NSLog(@"Provision Load: %@", jsonStr);
+//    NSLog(@"Provision Load: %@", jsonStr);
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setPostBody:postData];

@@ -9,8 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "UploadManager.h"
 #import "TokenManager.h"
+#import "SyncManager.h"
 
-@interface UploadQueue : NSObject <UploadManagerQueueDelegate, NSURLSessionDelegate, NSURLSessionTaskDelegate, TokenManagerWithinProcessDelegate>
+@interface UploadQueue : NSObject <UploadManagerQueueDelegate, NSURLSessionDelegate, NSURLSessionTaskDelegate, TokenManagerWithinProcessDelegate, SyncManagerQueueCountDelegate>
 
 @property (nonatomic, strong) NSMutableSet *activeTaskIds;
 @property (nonatomic, strong) NSMutableArray *uploadManagers;

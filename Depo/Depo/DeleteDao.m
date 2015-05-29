@@ -17,7 +17,7 @@
     NSString *jsonStr = [json stringWithObject:uuidList];
     NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
     
-    NSLog(@"Delete Payload: %@", jsonStr);
+//    NSLog(@"Delete Payload: %@", jsonStr);
     
 	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setPostBody:[postData mutableCopy]];
@@ -32,7 +32,7 @@
 	if (!error) {
 		NSString *responseEnc = [request responseString];
 		
-        NSLog(@"Delete Response: %@", responseEnc);
+//        NSLog(@"Delete Response: %@", responseEnc);
         
         [self shouldReturnSuccess];
 	} else {

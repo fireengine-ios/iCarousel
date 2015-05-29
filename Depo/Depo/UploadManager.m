@@ -48,11 +48,8 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 }
 
 - (void) startTask {
-
     NSString *bgTaskName = [NSString stringWithFormat:@"BG_TASK_%@", (self.uploadRef.taskType == UploadTaskTypeAsset) ? self.uploadRef.assetUrl : @""];
-    NSLog(@"BG Task Name for new task: %@", bgTaskName);
     bgTaskI = [[UIApplication sharedApplication] beginBackgroundTaskWithName:bgTaskName expirationHandler:^{
-        NSLog(@"BG Task ended by os timeout");
         
         self.uploadRef.hasFinished = YES;
         [delegate uploadManagerDidFailUploadingForAsset:self.uploadRef.assetUrl];
@@ -85,7 +82,6 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 }
 
 - (void) triggerAndStartAssetsTask {
-    NSLog(@"At triggerAndStartAssetsTask");
     self.asset = nil;
     
     @try {
@@ -125,7 +121,6 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 }
 
 - (void) checkActiveTasksPreResume {
-    NSLog(@"At checkActiveTasksPreResume for img hash: %@", self.uploadRef.localHash);
     [[UploadQueue sharedInstance].session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
         BOOL continueUpload = YES;
         for(NSURLSessionUploadTask *task in uploadTasks) {
@@ -137,7 +132,6 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         if(continueUpload) {
             [self continueAssetUpload];
         } else {
-            NSLog(@"getTasksWithCompletionHandler contains ongoing upload for file: %@", self.uploadRef.localHash);
             self.uploadRef.hasFinished = YES;
             [delegate uploadManagerDidFailUploadingForAsset:self.uploadRef.assetUrl];
             [queueDelegate uploadManager:self didFinishUploadingWithSuccess:NO];
@@ -147,11 +141,8 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 }
 
 - (void) continueAssetUpload {
-    NSLog(@"At continueAssetUpload for img hash: %@", self.uploadRef.localHash);
-
     if(self.uploadRef.autoSyncFlag) {
         if([SyncUtil localHashListContainsHash:self.uploadRef.localHash]){
-            NSLog(@"localHashListContainsHash inside continueAssetUpload returns YES");
             self.uploadRef.hasFinished = YES;
             [delegate uploadManagerDidFailUploadingForAsset:self.uploadRef.assetUrl];
             [queueDelegate uploadManager:self didFinishUploadingWithSuccess:NO];
@@ -210,7 +201,6 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             while (bytesRemaining > 0) {
                 bytesRead = [rep getBytes:buffer fromOffset:bufferOffset length:bufferSize error:&error];
                 if (bytesRead == 0) {
-                    NSLog(@"error reading asset representation: %@", error);
                     return;
                 }
                 bytesRemaining -= bytesRead;
@@ -250,7 +240,6 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             [SyncUtil cacheSyncHashLocally:self.uploadRef.localHash];
             [SyncUtil increaseAutoSyncIndex];
         }
-        NSLog(@"Upload Task started with url: %@", self.uploadRef.urlForUpload);
         [uploadTask resume];
         
         [[CurioSDK shared] sendEvent:@"UploadStarted" eventValue:[NSString stringWithFormat:@"file type: %@", fileType]];
@@ -282,7 +271,6 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     [request setValue:[Util getWorkaroundUUID] forHTTPHeaderField:@"X-Object-Meta-Device-UUID"];
     [request setValue:@"1" forHTTPHeaderField:@"x-meta-strategy"];
     [request setValue:@"100-continue" forHTTPHeaderField:@"Expect"];
-    NSLog(@"At Preparing request... auth token: %@", APPDELEGATE.session.authToken);
     
     if(self.uploadRef.folder) {
         [request setValue:self.uploadRef.folder.uuid forHTTPHeaderField:@"X-Object-Meta-Parent-Uuid"];

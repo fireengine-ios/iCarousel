@@ -25,7 +25,7 @@
     if (!error) {
         NSString *responseEnc = [request responseString];
         
-        NSLog(@"Usage Response: %@", responseEnc);
+//        NSLog(@"Usage Response: %@", responseEnc);
         
         SBJSON *jsonParser = [SBJSON new];
         NSDictionary *mainDict = [jsonParser objectWithString:responseEnc];

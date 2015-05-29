@@ -696,14 +696,12 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 }
 
 - (void) moreMenuDidSelectShare {
-    NSLog(@"At INNER moreMenuDidSelectShare");
     [APPDELEGATE.base triggerShareForFiles:@[self.fileUuid]];
 }
 
 #pragma mark ConfirmDeleteModalDelegate methods
 
 - (void) confirmDeleteDidCancel {
-    NSLog(@"At INNER confirmDeleteDidCancel");
 }
 
 - (void) confirmDeleteDidConfirm {

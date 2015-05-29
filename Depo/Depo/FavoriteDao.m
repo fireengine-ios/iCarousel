@@ -25,7 +25,7 @@
     NSString *jsonStr = [json stringWithObject:payloadDict];
     NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
     
-    NSLog(@"Favorite Payload: %@", jsonStr);
+//    NSLog(@"Favorite Payload: %@", jsonStr);
     
 	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setPostBody:[postData mutableCopy]];
