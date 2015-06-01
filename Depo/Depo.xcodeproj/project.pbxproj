@@ -311,6 +311,8 @@
 		055A3F5919E81C3D004A0121 /* no_album_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 055A3F5519E81C3D004A0121 /* no_album_icon@2x.png */; };
 		055A3F5A19E81C3D004A0121 /* album_selected_mask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 055A3F5619E81C3D004A0121 /* album_selected_mask@2x.png */; };
 		055A3F5D19E82B2C004A0121 /* PhotoAlbumController.m in Sources */ = {isa = PBXBuildFile; fileRef = 055A3F5C19E82B2C004A0121 /* PhotoAlbumController.m */; };
+		055F527B1B1CD6570052C854 /* Icon_152.png in Resources */ = {isa = PBXBuildFile; fileRef = 055F52791B1CD6570052C854 /* Icon_152.png */; };
+		055F527C1B1CD6570052C854 /* Icon_76.png in Resources */ = {isa = PBXBuildFile; fileRef = 055F527A1B1CD6570052C854 /* Icon_76.png */; };
 		056090E41AC5A44000710211 /* ReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 056090E31AC5A44000710211 /* ReachabilityManager.m */; };
 		0560F46F1B00D5D0005E6936 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0560F46E1B00D5D0005E6936 /* LocationManager.m */; };
 		05620F211A4C62B30089DFB5 /* SyncReference.m in Sources */ = {isa = PBXBuildFile; fileRef = 05620F201A4C62B30089DFB5 /* SyncReference.m */; };
@@ -1159,6 +1161,8 @@
 		055A3F5619E81C3D004A0121 /* album_selected_mask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "album_selected_mask@2x.png"; sourceTree = "<group>"; };
 		055A3F5B19E82B2C004A0121 /* PhotoAlbumController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoAlbumController.h; sourceTree = "<group>"; };
 		055A3F5C19E82B2C004A0121 /* PhotoAlbumController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoAlbumController.m; sourceTree = "<group>"; };
+		055F52791B1CD6570052C854 /* Icon_152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_152.png; sourceTree = "<group>"; };
+		055F527A1B1CD6570052C854 /* Icon_76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_76.png; sourceTree = "<group>"; };
 		056090E21AC5A44000710211 /* ReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachabilityManager.h; sourceTree = "<group>"; };
 		056090E31AC5A44000710211 /* ReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachabilityManager.m; sourceTree = "<group>"; };
 		0560F46D1B00D5D0005E6936 /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
@@ -2524,6 +2528,8 @@
 				0569C8371A8A324A000E0486 /* Icon_180.png */,
 				0569C8321A8A2B61000E0486 /* Icon.png */,
 				0569C8331A8A2B61000E0486 /* Icon@2x.png */,
+				055F52791B1CD6570052C854 /* Icon_152.png */,
+				055F527A1B1CD6570052C854 /* Icon_76.png */,
 				058219D21A3850E2001FA679 /* multiply.png */,
 				058219D31A3850E2001FA679 /* multiply@2x.png */,
 				05A7CE551A7FBD3E00020B6F /* percent.png */,
@@ -3408,6 +3414,7 @@
 				0589063019CC226D00A9E517 /* blue_bg.png in Resources */,
 				05AF7CA91A1CC0A200F5011A /* circle_folder_icon.png in Resources */,
 				050A7B1C19F7CBB600B084B9 /* volume_button@2x.png in Resources */,
+				055F527B1B1CD6570052C854 /* Icon_152.png in Resources */,
 				0526447919D5A26400B63759 /* toggle_on.png in Resources */,
 				058219E01A386829001FA679 /* nav_favourite_inactive_icon.png in Resources */,
 				051CB40319D2F71200E5FC88 /* nav_select_icon@2x.png in Resources */,
@@ -3439,6 +3446,7 @@
 				051CB41019D2F71200E5FC88 /* yellow_button_bg.png in Resources */,
 				05A7CE641A7FC1EF00020B6F /* dolancember.png in Resources */,
 				0569C8391A8A324A000E0486 /* Icon_180.png in Resources */,
+				055F527C1B1CD6570052C854 /* Icon_76.png in Resources */,
 				051CB40419D2F71200E5FC88 /* nav_sort_icon@2x.png in Resources */,
 				051CB3FD19D2F71200E5FC88 /* big_plus_icon.png in Resources */,
 				056BEC851A8AA7CF00BA0805 /* pre_login_info2.png in Resources */,

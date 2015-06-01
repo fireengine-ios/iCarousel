@@ -56,5 +56,12 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+    <key>CFBundleIconFiles</key>
+    <array>
+        <string>Icon.png</string>
+        <string>Icon@2x.png</string>
+        <string>Icon_76.png</string>
+        <string>Icon_152.png</string>
+    </array>
 </dict>
 </plist>
