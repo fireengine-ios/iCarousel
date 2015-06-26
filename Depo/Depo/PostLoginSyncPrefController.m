@@ -54,20 +54,34 @@
         
         NSString *descStr = NSLocalizedString(@"PostLoginSyncInfo", @"");
         int descHeight = [Util calculateHeightForText:descStr forWidth:self.view.frame.size.width-40 forFont:descFont] + 5;
-        CustomLabel *descLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, syncImgView.frame.origin.y + syncImgView.frame.size.height + 10, self.view.frame.size.width - 40, descHeight) withFont:descFont withColor:[Util UIColorForHexColor:@"FFFFFF"] withText:descStr withAlignment:NSTextAlignmentCenter];
+        
+        TTTAttributedLabel *descLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(20, syncImgView.frame.origin.y + syncImgView.frame.size.height + 5, self.view.frame.size.width - 40, descHeight)];
+        descLabel.font = descFont;
+        descLabel.frame = CGRectMake(20, syncImgView.frame.origin.y + syncImgView.frame.size.height + 5, self.view.frame.size.width - 40, descHeight);
+        descLabel.delegate = self;
+        descLabel.textColor = [Util UIColorForHexColor:@"FFFFFF"];
+        descLabel.textAlignment = NSTextAlignmentCenter;
+        descLabel.lineBreakMode = NSLineBreakByWordWrapping;
         descLabel.numberOfLines = 0;
+        descLabel.text = descStr;
         [self.view addSubview:descLabel];
         
-        CustomLabel *switchLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, syncImgView.frame.origin.y + syncImgView.frame.size.height + 75, 230, 40) withFont:descFont withColor:[Util UIColorForHexColor:@"FFFFFF"] withText:NSLocalizedString(@"AutoSyncTitle", @"") withAlignment:NSTextAlignmentLeft];
+        NSRange faqRange = [descStr rangeOfString:@"For details"];
+        if(faqRange.location == NSNotFound) {
+            faqRange = [descStr rangeOfString:@"Detaylı bilgi"];
+        }
+        [descLabel addLinkToURL:[NSURL URLWithString:@"action://show-faq"] withRange:faqRange];
+        
+        CustomLabel *switchLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, syncImgView.frame.origin.y + syncImgView.frame.size.height + 80, 230, 40) withFont:descFont withColor:[Util UIColorForHexColor:@"FFFFFF"] withText:NSLocalizedString(@"AutoSyncTitle", @"") withAlignment:NSTextAlignmentLeft];
         switchLabel.adjustsFontSizeToFitWidth = YES;
         [self.view addSubview:switchLabel];
         
-        autoSyncSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 60, syncImgView.frame.origin.y + syncImgView.frame.size.height + 80, 40, 40)];
+        autoSyncSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 60, syncImgView.frame.origin.y + syncImgView.frame.size.height + 85, 40, 40)];
         [autoSyncSwitch setOn:YES];
         [autoSyncSwitch addTarget:self action:@selector(autoSyncSwitchChanged:) forControlEvents:UIControlEventValueChanged];
         [self.view addSubview:autoSyncSwitch];
         
-        choiceTitleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, syncImgView.frame.origin.y + syncImgView.frame.size.height + 120, self.view.frame.size.width - 40, 15) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:13] withColor:[Util UIColorForHexColor:@"FFFFFF"] withText:NSLocalizedString(@"PostLoginSyncPrefTitle", @"")];
+        choiceTitleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, syncImgView.frame.origin.y + syncImgView.frame.size.height + 125, self.view.frame.size.width - 40, 15) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:13] withColor:[Util UIColorForHexColor:@"FFFFFF"] withText:NSLocalizedString(@"PostLoginSyncPrefTitle", @"")];
         [self.view addSubview:choiceTitleLabel];
         
         choiceTable = [[UITableView alloc] initWithFrame:CGRectMake(0, syncImgView.frame.origin.y + syncImgView.frame.size.height + 145, self.view.frame.size.width, 80) style:UITableViewStylePlain];
@@ -75,7 +89,7 @@
         choiceTable.dataSource = self;
         choiceTable.bounces = NO;
         [self.view addSubview:choiceTable];
-
+        
         SimpleButton *continueButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, self.view.frame.size.height - 70, self.view.frame.size.width - 40, 50) withTitle:NSLocalizedString(@"Continue", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
         [continueButton addTarget:self action:@selector(continueClicked) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:continueButton];
@@ -102,7 +116,7 @@
         [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOff];
         [CacheUtil writeCachedSettingSyncContacts:EnableOptionOff];
         [[CurioSDK shared] sendEvent:@"SyncClosed" eventValue:@"true"];
-
+        
         [CacheUtil writeCachedSettingSyncingConnectionType:selectedOption];
         [CacheUtil writeCachedSettingDataRoaming:NO];
         
@@ -209,13 +223,22 @@
     [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOn];
     
     [[CurioSDK shared] sendEvent:@"SyncOpened" eventValue:@"true"];
-
+    
     [CacheUtil writeCachedSettingSyncingConnectionType:selectedOption];
     [CacheUtil writeCachedSettingDataRoaming:NO];
     
     [AppUtil writeFirstVisitOverFlag];
     //    [APPDELEGATE triggerHome];
     [APPDELEGATE startOpeningPage];
+}
+
+- (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url {
+    if ([[url scheme] hasPrefix:@"action"]) {
+        if ([[url host] hasPrefix:@"show-faq"]) {
+            NSURL *url = [NSURL URLWithString:@"http://trcll.im/zbQxU"];
+            [[UIApplication sharedApplication] openURL:url];
+        }
+    }
 }
 
 @end

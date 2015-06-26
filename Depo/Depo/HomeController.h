@@ -15,10 +15,13 @@
 #import "SimpleButton.h"
 #import "UsageInfoDao.h"
 #import "ContactCountDao.h"
+#import "AccountDao.h"
+#import "OnkatDepoPopUP.h"
 
-@interface HomeController : MyViewController <RecentActivityLinkerDelegate, XYPieChartDelegate, XYPieChartDataSource> {
+@interface HomeController : MyViewController <RecentActivityLinkerDelegate, XYPieChartDelegate, XYPieChartDataSource, OnKatViewDeleagate> {
     UsageInfoDao *usageDao;
     ContactCountDao *contactCountDao;
+    AccountDao *accountDao;
 }
 
 @property (nonatomic, strong) RecentActivityLinkerFooter *footer;
@@ -34,5 +37,6 @@
 @property (nonatomic, strong) UsageButton *musicButton;
 @property (nonatomic, strong) UsageButton *otherButton;
 @property (nonatomic, strong) UsageButton *contactButton;
+@property (nonatomic, strong) OnkatDepoPopUP *onkatView;
 
 @end

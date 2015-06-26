@@ -618,6 +618,20 @@
 		05C3F6071A3900A8001954E8 /* PostLoginPrefCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C3F6061A3900A8001954E8 /* PostLoginPrefCell.m */; };
 		05C3F60A1A3902E0001954E8 /* check_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C3F6081A3902E0001954E8 /* check_icon.png */; };
 		05C3F60B1A3902E0001954E8 /* check_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C3F6091A3902E0001954E8 /* check_icon@2x.png */; };
+		05C6C7011B3C123C00CB6CE5 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C6C7001B3C123C00CB6CE5 /* TTTAttributedLabel.m */; };
+		05C6C7041B3C20FC00CB6CE5 /* OnkatDepoPopUP.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C6C7031B3C20FC00CB6CE5 /* OnkatDepoPopUP.m */; };
+		05C6C7111B3C212A00CB6CE5 /* tamam_rollover@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C6C7051B3C212A00CB6CE5 /* tamam_rollover@1x.png */; };
+		05C6C7121B3C212A00CB6CE5 /* tamam_rollover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C6C7061B3C212A00CB6CE5 /* tamam_rollover@2x.png */; };
+		05C6C7131B3C212A00CB6CE5 /* tamam_rollover@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C6C7071B3C212A00CB6CE5 /* tamam_rollover@3x.png */; };
+		05C6C7141B3C212A00CB6CE5 /* tamam@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C6C7081B3C212A00CB6CE5 /* tamam@1x.png */; };
+		05C6C7151B3C212A00CB6CE5 /* tamam@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C6C7091B3C212A00CB6CE5 /* tamam@2x.png */; };
+		05C6C7161B3C212A00CB6CE5 /* tamam@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C6C70A1B3C212A00CB6CE5 /* tamam@3x.png */; };
+		05C6C7171B3C212A00CB6CE5 /* siyah_bg@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C6C70B1B3C212A00CB6CE5 /* siyah_bg@1x.png */; };
+		05C6C7181B3C212A00CB6CE5 /* siyah_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C6C70C1B3C212A00CB6CE5 /* siyah_bg@2x.png */; };
+		05C6C7191B3C212A00CB6CE5 /* siyah_bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C6C70D1B3C212A00CB6CE5 /* siyah_bg@3x.png */; };
+		05C6C71A1B3C212A00CB6CE5 /* bulut-bg-bos@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C6C70E1B3C212A00CB6CE5 /* bulut-bg-bos@1x.png */; };
+		05C6C71B1B3C212A00CB6CE5 /* bulut-bg-bos@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C6C70F1B3C212A00CB6CE5 /* bulut-bg-bos@2x.png */; };
+		05C6C71C1B3C212A00CB6CE5 /* bulut-bg-bos@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C6C7101B3C212A00CB6CE5 /* bulut-bg-bos@3x.png */; };
 		05C7145C1A7823C400C467D9 /* RadiusDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C7145B1A7823C400C467D9 /* RadiusDao.m */; };
 		05C7CB6A1ABC91B200A7BF8E /* MetaFileSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C7CB691ABC91B200A7BF8E /* MetaFileSummary.m */; };
 		05C850A31ACD63F700F976DE /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C850A21ACD63F700F976DE /* NotificationCenter.framework */; };
@@ -1598,6 +1612,22 @@
 		05C3F6061A3900A8001954E8 /* PostLoginPrefCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostLoginPrefCell.m; sourceTree = "<group>"; };
 		05C3F6081A3902E0001954E8 /* check_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check_icon.png; sourceTree = "<group>"; };
 		05C3F6091A3902E0001954E8 /* check_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "check_icon@2x.png"; sourceTree = "<group>"; };
+		05C6C6FF1B3C123C00CB6CE5 /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
+		05C6C7001B3C123C00CB6CE5 /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
+		05C6C7021B3C20FC00CB6CE5 /* OnkatDepoPopUP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnkatDepoPopUP.h; sourceTree = "<group>"; };
+		05C6C7031B3C20FC00CB6CE5 /* OnkatDepoPopUP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnkatDepoPopUP.m; sourceTree = "<group>"; };
+		05C6C7051B3C212A00CB6CE5 /* tamam_rollover@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tamam_rollover@1x.png"; sourceTree = "<group>"; };
+		05C6C7061B3C212A00CB6CE5 /* tamam_rollover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tamam_rollover@2x.png"; sourceTree = "<group>"; };
+		05C6C7071B3C212A00CB6CE5 /* tamam_rollover@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tamam_rollover@3x.png"; sourceTree = "<group>"; };
+		05C6C7081B3C212A00CB6CE5 /* tamam@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tamam@1x.png"; sourceTree = "<group>"; };
+		05C6C7091B3C212A00CB6CE5 /* tamam@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tamam@2x.png"; sourceTree = "<group>"; };
+		05C6C70A1B3C212A00CB6CE5 /* tamam@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tamam@3x.png"; sourceTree = "<group>"; };
+		05C6C70B1B3C212A00CB6CE5 /* siyah_bg@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "siyah_bg@1x.png"; sourceTree = "<group>"; };
+		05C6C70C1B3C212A00CB6CE5 /* siyah_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "siyah_bg@2x.png"; sourceTree = "<group>"; };
+		05C6C70D1B3C212A00CB6CE5 /* siyah_bg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "siyah_bg@3x.png"; sourceTree = "<group>"; };
+		05C6C70E1B3C212A00CB6CE5 /* bulut-bg-bos@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bulut-bg-bos@1x.png"; sourceTree = "<group>"; };
+		05C6C70F1B3C212A00CB6CE5 /* bulut-bg-bos@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bulut-bg-bos@2x.png"; sourceTree = "<group>"; };
+		05C6C7101B3C212A00CB6CE5 /* bulut-bg-bos@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bulut-bg-bos@3x.png"; sourceTree = "<group>"; };
 		05C7145A1A7823C400C467D9 /* RadiusDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadiusDao.h; sourceTree = "<group>"; };
 		05C7145B1A7823C400C467D9 /* RadiusDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadiusDao.m; sourceTree = "<group>"; };
 		05C7CB681ABC91B200A7BF8E /* MetaFileSummary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetaFileSummary.h; sourceTree = "<group>"; };
@@ -1993,6 +2023,8 @@
 		051E1E2619CAC53000FD1E03 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				05C6C7021B3C20FC00CB6CE5 /* OnkatDepoPopUP.h */,
+				05C6C7031B3C20FC00CB6CE5 /* OnkatDepoPopUP.m */,
 				0589066B19CC560100A9E517 /* CustomLabel.h */,
 				0589066C19CC560100A9E517 /* CustomLabel.m */,
 				05D5E5911B09D5DD00A22957 /* BeforePurchasingView.h */,
@@ -2311,6 +2343,8 @@
 		051E1E3A19CAC8EA00FD1E03 /* out */ = {
 			isa = PBXGroup;
 			children = (
+				05C6C6FF1B3C123C00CB6CE5 /* TTTAttributedLabel.h */,
+				05C6C7001B3C123C00CB6CE5 /* TTTAttributedLabel.m */,
 				05A938071AF6AE7C00AE2892 /* TurkcellUpdaterSDK */,
 				05AD7F831AD7FD160052153A /* MMWormhole.h */,
 				05AD7F841AD7FD160052153A /* MMWormhole.m */,
@@ -2496,6 +2530,18 @@
 		0589060219CC226500A9E517 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				05C6C7051B3C212A00CB6CE5 /* tamam_rollover@1x.png */,
+				05C6C7061B3C212A00CB6CE5 /* tamam_rollover@2x.png */,
+				05C6C7071B3C212A00CB6CE5 /* tamam_rollover@3x.png */,
+				05C6C7081B3C212A00CB6CE5 /* tamam@1x.png */,
+				05C6C7091B3C212A00CB6CE5 /* tamam@2x.png */,
+				05C6C70A1B3C212A00CB6CE5 /* tamam@3x.png */,
+				05C6C70B1B3C212A00CB6CE5 /* siyah_bg@1x.png */,
+				05C6C70C1B3C212A00CB6CE5 /* siyah_bg@2x.png */,
+				05C6C70D1B3C212A00CB6CE5 /* siyah_bg@3x.png */,
+				05C6C70E1B3C212A00CB6CE5 /* bulut-bg-bos@1x.png */,
+				05C6C70F1B3C212A00CB6CE5 /* bulut-bg-bos@2x.png */,
+				05C6C7101B3C212A00CB6CE5 /* bulut-bg-bos@3x.png */,
 				563FB1BF1AA5EC990066F8E6 /* circle_welcome_icon.png */,
 				563FB1C01AA5EC990066F8E6 /* circle_welcome_icon@2x.png */,
 				050833431AC6C3FA0087B88F /* square_placeholder@2x.png */,
@@ -3222,6 +3268,7 @@
 				051CB3B419D2F6F700E5FC88 /* passive_dots_icon.png in Resources */,
 				059AD37A1A1E26A000AA41BD /* circle_contact_icon@2x.png in Resources */,
 				05A7CE6B1A7FC22900020B6F /* bulutheader@2x.png in Resources */,
+				05C6C71B1B3C212A00CB6CE5 /* bulut-bg-bos@2x.png in Resources */,
 				0589066519CC524900A9E517 /* TurkcellSaturaMed.ttf in Resources */,
 				051CB41919D2F71200E5FC88 /* blue_add_camera_shot_icon@2x.png in Resources */,
 				05224AAF19DC4A2D00214767 /* photos_videos_icon@2x.png in Resources */,
@@ -3233,6 +3280,7 @@
 				057C9D881A2B8D68001DDDEC /* music_next.png in Resources */,
 				050A7B2019F7CBB600B084B9 /* volume_level@2x.png in Resources */,
 				058BC22F1A308ACB0007F4DE /* video_tour@2x.png in Resources */,
+				05C6C7181B3C212A00CB6CE5 /* siyah_bg@2x.png in Resources */,
 				0526448E19D5A26400B63759 /* notifications_icon.png in Resources */,
 				564A318F1A93419D00C5B755 /* profile_icon@2x.png in Resources */,
 				0569C8341A8A2B61000E0486 /* Icon.png in Resources */,
@@ -3286,6 +3334,7 @@
 				05B1847E1A24C07E00FDA023 /* nav_download_icon.png in Resources */,
 				05AF7C9F1A1CC08E00F5011A /* activity_bullet.png in Resources */,
 				051CB42019D2F71200E5FC88 /* folder_icon@2x.png in Resources */,
+				05C6C7151B3C212A00CB6CE5 /* tamam@2x.png in Resources */,
 				0589063919CC2A5600A9E517 /* file_icon.png in Resources */,
 				058BC22E1A308ACB0007F4DE /* video_tour.png in Resources */,
 				0589064F19CC2B9500A9E517 /* yellow_logout_icon.png in Resources */,
@@ -3360,6 +3409,7 @@
 				05DEB1D21A8169D1007793DD /* CurioMapping.plist in Resources */,
 				05B73E821A5EEF05005D24BE /* video_main_icon@2x.png in Resources */,
 				050A7B1719F7CBB600B084B9 /* volume_level.png in Resources */,
+				05C6C7141B3C212A00CB6CE5 /* tamam@1x.png in Resources */,
 				564A318D1A933FE300C5B755 /* profile_icon.png in Resources */,
 				057C9D771A2B494E001DDDEC /* docs_icon@2x.png in Resources */,
 				0526448419D5A26400B63759 /* tick_icon.png in Resources */,
@@ -3380,12 +3430,14 @@
 				051CB3EF19D2F71200E5FC88 /* nav_blue_tick.png in Resources */,
 				05D5E5901B09D56A00A22957 /* icon_settings_tick.png in Resources */,
 				056BEC8A1A8AA7CF00BA0805 /* pre_login_info4@2x.png in Resources */,
+				05C6C7121B3C212A00CB6CE5 /* tamam_rollover@2x.png in Resources */,
 				051CB3B619D2F6F700E5FC88 /* nav_share_icon.png in Resources */,
 				052A223019F6853C000C3C75 /* inner_loading_bg@2x.png in Resources */,
 				0589062C19CC226D00A9E517 /* profile_bg@2x.png in Resources */,
 				0526449619D5A26400B63759 /* cellphone_icon.png in Resources */,
 				052A222719F682CA000C3C75 /* Default.png in Resources */,
 				0589061F19CC226D00A9E517 /* photos_icon.png in Resources */,
+				05C6C71A1B3C212A00CB6CE5 /* bulut-bg-bos@1x.png in Resources */,
 				051CB40919D2F71200E5FC88 /* white_left_arrow@2x.png in Resources */,
 				051CB3B519D2F6F700E5FC88 /* nav_sort_icon.png in Resources */,
 				050D4C381A31E2E800809A01 /* camera_backup.png in Resources */,
@@ -3412,9 +3464,11 @@
 				058337F719EDA04A00DCF0C5 /* bttn-player-handle@2x.png in Resources */,
 				0589061C19CC226D00A9E517 /* home_icon@2x.png in Resources */,
 				0589063019CC226D00A9E517 /* blue_bg.png in Resources */,
+				05C6C7111B3C212A00CB6CE5 /* tamam_rollover@1x.png in Resources */,
 				05AF7CA91A1CC0A200F5011A /* circle_folder_icon.png in Resources */,
 				050A7B1C19F7CBB600B084B9 /* volume_button@2x.png in Resources */,
 				055F527B1B1CD6570052C854 /* Icon_152.png in Resources */,
+				05C6C7191B3C212A00CB6CE5 /* siyah_bg@3x.png in Resources */,
 				0526447919D5A26400B63759 /* toggle_on.png in Resources */,
 				058219E01A386829001FA679 /* nav_favourite_inactive_icon.png in Resources */,
 				051CB40319D2F71200E5FC88 /* nav_select_icon@2x.png in Resources */,
@@ -3472,6 +3526,7 @@
 				0589065519CC2B9500A9E517 /* yellow_fav_icon@2x.png in Resources */,
 				0526449019D5A26400B63759 /* device_icon.png in Resources */,
 				0526447F19D5A26400B63759 /* iphone_icon@2x.png in Resources */,
+				05C6C7131B3C212A00CB6CE5 /* tamam_rollover@3x.png in Resources */,
 				0526447C19D5A26400B63759 /* android_icon.png in Resources */,
 				058BC2381A30D46C0007F4DE /* textfield_bg@2x.png in Resources */,
 				050D4C401A31E77F00809A01 /* sync_prefs.png in Resources */,
@@ -3479,6 +3534,7 @@
 				056BEC831A8AA7CF00BA0805 /* pre_login_info1.png in Resources */,
 				052A222919F682D1000C3C75 /* Default@2x.png in Resources */,
 				058219E11A386829001FA679 /* nav_favourite_inactive_icon@2x.png in Resources */,
+				05C6C7161B3C212A00CB6CE5 /* tamam@3x.png in Resources */,
 				0589062219CC226D00A9E517 /* music_icon@2x.png in Resources */,
 				058219D91A3850E2001FA679 /* close_icon@2x.png in Resources */,
 				05AF7CAB1A1CC0A200F5011A /* circle_photos_icon.png in Resources */,
@@ -3538,7 +3594,9 @@
 				050A7B1F19F7CBB600B084B9 /* volume_current_level@2x.png in Resources */,
 				0526449419D5A26400B63759 /* stroge_icon.png in Resources */,
 				058337EA19EDA00200DCF0C5 /* video-player-bckgrnd.png in Resources */,
+				05C6C7171B3C212A00CB6CE5 /* siyah_bg@1x.png in Resources */,
 				05224ABA19DC4A2D00214767 /* menu_select_white_flap@2x.png in Resources */,
+				05C6C71C1B3C212A00CB6CE5 /* bulut-bg-bos@3x.png in Resources */,
 				0589061B19CC226D00A9E517 /* home_icon.png in Resources */,
 				0589065019CC2B9500A9E517 /* yellow_logout_icon@2x.png in Resources */,
 				05224AB519DC4A2D00214767 /* dont_show_blue_tick@2x.png in Resources */,
@@ -3754,6 +3812,7 @@
 				05E0705F1AB977850038BE68 /* ConstantsDao.m in Sources */,
 				05AF7C981A1CA22200F5011A /* RecentActivityHeaderView.m in Sources */,
 				052644B219D5A2A600B63759 /* SettingsUploadController.m in Sources */,
+				05C6C7011B3C123C00CB6CE5 /* TTTAttributedLabel.m in Sources */,
 				05440AE019D4445D009803D7 /* FloatingAddButton.m in Sources */,
 				058219C41A384CC6001FA679 /* SearchModalController.m in Sources */,
 				562FB3F71AA48C4400F9EFBD /* CurioAction.m in Sources */,
@@ -3860,6 +3919,7 @@
 				05DEB1C91A80C16B007793DD /* MigrateDao.m in Sources */,
 				059CE54D1A87E7BA00F6CFAE /* ContactSyncResultTitleCell.m in Sources */,
 				05C2A0341A79830500EE4D78 /* ADJRequestHandler.m in Sources */,
+				05C6C7041B3C20FC00CB6CE5 /* OnkatDepoPopUP.m in Sources */,
 				56BDE2501A8DEA8B0082F8B8 /* OfferCell.m in Sources */,
 				05D2B19719E676BF00FC309D /* AlbumListDao.m in Sources */,
 				056BEC781A8AA55000BA0805 /* PreLoginInfoView.m in Sources */,

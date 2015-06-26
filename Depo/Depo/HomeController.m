@@ -22,6 +22,7 @@
 #import "SettingsController.h"
 #import "ContactSyncController.h"
 #import "CurioSDK.h"
+#import "Subscription.h"
 
 @interface HomeController ()
 
@@ -42,6 +43,7 @@
 @synthesize musicButton;
 @synthesize otherButton;
 @synthesize contactButton;
+@synthesize onkatView;
 
 - (id)init {
     self = [super init];
@@ -60,6 +62,11 @@
         usageDao.successMethod = @selector(usageSuccessCallback:);
         usageDao.failMethod = @selector(usageFailCallback:);
         
+        accountDao = [[AccountDao alloc] init];
+        accountDao.delegate = self;
+        accountDao.successMethod = @selector(accountSuccessCallback:);
+        accountDao.failMethod = @selector(accountFailCallback:);
+
         /* contactCountSuccessCallback
         contactCountDao = [[ContactCountDao alloc] init];
         contactCountDao.delegate = self;
@@ -99,6 +106,10 @@
         
         [usageDao requestUsageInfo];
         [self showLoading];
+        
+        if(![[NSUserDefaults standardUserDefaults] objectForKey:@"onKatViewFlag"]){
+            [accountDao requestCurrentAccount];
+        }
     }
     return self;
 }
@@ -273,6 +284,31 @@
 
 - (void) contactCountFailCallback:(NSString *) errorMessage {
     [contactButton updateCountValue:[NSString stringWithFormat:@"%d", 0]];
+}
+
+- (void) accountSuccessCallback:(Subscription *) currentSubscription{
+    if ([self shouldShowOnKatView:currentSubscription]) {
+        UIWindow *currentWindow = [UIApplication sharedApplication].keyWindow;
+        onkatView = [[OnkatDepoPopUP alloc] initWithFrame:CGRectMake(0, 0, currentWindow.bounds.size.width, currentWindow.bounds.size.height)];
+        onkatView.delegate = self;
+        [currentWindow addSubview:onkatView];
+    }
+}
+
+- (BOOL) shouldShowOnKatView:(Subscription *) currentSubscription {
+    if (![currentSubscription.plan.role isEqualToString:@"demo"] ) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"onKatViewFlag"];
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+- (void) accountFailCallback:(NSString *) errorMessage{
+}
+
+- (void) dismissOnKatView {
+    [onkatView removeFromSuperview];
 }
 
 - (void)viewDidLoad {

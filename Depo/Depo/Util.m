@@ -71,7 +71,7 @@
     
     NSArray *tokens = [NSArray arrayWithObjects:@"bytes", @"KB", @"MB", @"GB", @"TB", nil];
     
-    while (convertedValue >= 1024) {
+    while (convertedValue >= 1024 && multiplyFactor < [tokens count]-1) {
         convertedValue /= 1024;
         multiplyFactor++;
     }
@@ -86,7 +86,7 @@
     
     NSArray *tokens = [NSArray arrayWithObjects:@"bytes", @"KB", @"MB", @"GB", @"TB", nil];
     
-    while (convertedValue >= 1024) {
+    while (convertedValue >= 1024 && multiplyFactor < [tokens count]-1) {
         convertedValue /= 1024;
         multiplyFactor++;
     }
@@ -114,6 +114,27 @@
         return [NSString stringWithFormat:@"%d %@", (int)convertedValue, [tokens objectAtIndex:multiplyFactor]];
     else
         return [NSString stringWithFormat:@"%d %@", (int)convertedValue, [tokens objectAtIndex:multiplyFactor]];
+    
+}
+
++ (NSString *) transformedHugeSizeValueDecimalIfNecessary:(long long) byteCount {
+    
+    double convertedValue = (double) byteCount;
+    int multiplyFactor = 0;
+    
+    NSArray *tokens = [NSArray arrayWithObjects:@"bytes", @"KB", @"MB", @"GB", @"TB", nil];
+    
+    while (convertedValue >= 1024) {
+        convertedValue /= 1024;
+        multiplyFactor++;
+    }
+    
+    BOOL hasDecimal = (convertedValue-(int)convertedValue != 0);
+    
+    if (multiplyFactor == 0 || multiplyFactor == 1 || multiplyFactor == 2)
+        return [NSString stringWithFormat:@"%d %@", (int)convertedValue, [tokens objectAtIndex:multiplyFactor]];
+    else
+        return hasDecimal ? [NSString stringWithFormat:@"%4.1f %@", convertedValue, [tokens objectAtIndex:multiplyFactor]] : [NSString stringWithFormat:@"%d %@", (int)convertedValue, [tokens objectAtIndex:multiplyFactor]];
     
 }
 

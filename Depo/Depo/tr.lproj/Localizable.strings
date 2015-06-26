@@ -254,7 +254,7 @@
 "SignIn"="Giriş yap";
 "Continue"="Devam";
 
-"PostLoginSyncInfo"="Fotoğraflarınızı iPhone'unuzdan Akıllı Deponuza otomatik olarak yükleyin";
+"PostLoginSyncInfo"="Fotoğraflarınızı iPhone'unuzdan Akıllı Deponuza otomatik olarak yükleyin. Akıllı Depo, otomatik yükleme için lokasyon değişiminizi kullanır. Detaylı bilgi";
 "PostLoginImgPrefInfo"="Fotoğraflarınızı iPhone'unuzdan Akıllı Deponuza otomatik olarak yükleyin";
 "PostLoginContactPrefInfo"="Rehberinizi ve Sosyal Ağ kişilerinizi Akıllı Deponuza otomatik olarak yükleyin";
 
@@ -490,3 +490,7 @@
 "VideoPlayErrorDescription"="Bu Video içeriği oynatılamıyor. Lütfen başka bir Video içeriği deneyin.";
 "VideoLoadErrorTitle"="Video Yüklenemedi";
 "VideoLoadErrorDescription"="Bu Video içeriğinin yüklenmesi zaman almaktadır. Lütfen başka bir Video içeriği deneyin.";
+
+"OnKatDepoTitle"="DEPONUZUN KAPASİTESİ";
+"OnKatDepoSubTitle"="KATINA ÇIKTI";
+"OnKatDepoExplain"="Yeni saklama alanınız ile daha çok fotoğraf ve video saklayabilirsiniz.";
