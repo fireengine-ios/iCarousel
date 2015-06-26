@@ -38,7 +38,7 @@
         UILabel *tenLabel = [[UILabel alloc] initWithFrame:CGRectMake(20,110 , popUp.frame.size.width-40, 90)];
         tenLabel.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:90];
         tenLabel.textColor = [Util UIColorForHexColor:@"4f8caa"];
-        tenLabel.text = @"10";
+        tenLabel.text = NSLocalizedString(@"Ten", @"");
         tenLabel.textAlignment = NSTextAlignmentCenter;
         [popUp addSubview:tenLabel];
         
@@ -59,7 +59,7 @@
         explainLabel.textAlignment = NSTextAlignmentCenter;
         [popUp addSubview:explainLabel];
         
-        SimpleButton *okButton = [[SimpleButton alloc] initWithFrame:CGRectMake(30, self.frame.size.height-90, self.frame.size.width - 60, 60) withTitle:NSLocalizedString(@"OK", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
+        SimpleButton *okButton = [[SimpleButton alloc] initWithFrame:CGRectMake(30, self.frame.size.height-90, self.frame.size.width - 60, 60) withTitle:NSLocalizedString(@"Okay", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
         [okButton addTarget:self action:@selector(okButtonClicked) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:okButton];
         
