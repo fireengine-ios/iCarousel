@@ -155,11 +155,21 @@
     }
     
     NSURLSessionTask *downloadTask = [[NSURLSession sharedSession] downloadTaskWithURL:sourceURL completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
-        NSURL *documentsURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] firstObject];
-        NSURL *tempURL = [documentsURL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", [sourceURL lastPathComponent], contentType]];
-
-        [[NSFileManager defaultManager] moveItemAtURL:location toURL:tempURL error:nil];
-        UISaveVideoAtPathToSavedPhotosAlbum(tempURL.path, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+        if (error) {
+            [self showErrorAlertWithMessage:NSLocalizedString(@"DownloadVideoFailMessage", @"")];
+        }
+        else {
+            NSURL *documentsURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] firstObject];
+            NSURL *tempURL = [documentsURL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", [sourceURL lastPathComponent], contentType]];
+            if (location) {
+                if ([[NSFileManager defaultManager] moveItemAtURL:location toURL:tempURL error:nil]) {
+                    UISaveVideoAtPathToSavedPhotosAlbum(tempURL.path, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+                }
+            }
+            else {
+                [self showErrorAlertWithMessage:NSLocalizedString(@"DownloadVideoFailMessage", @"")];
+            }
+        }
     }];
     [downloadTask resume];
 }
@@ -295,7 +305,12 @@
     
 //    activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll];
     
-    [self presentViewController:activityViewController animated:YES completion:nil];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        [self presentViewController:activityViewController animated:YES completion:nil];
+    } else {
+        UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
+        [popup presentPopoverFromRect:CGRectMake(self.view.frame.size.width-240, self.view.frame.size.height-40, 240, 300)inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
 }
 
 - (void) shareFailCallback:(NSString *) errorMessage {

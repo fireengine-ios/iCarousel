@@ -349,6 +349,7 @@
 
 - (void) URLSession:(NSURLSession *) _session task:(NSURLSessionTask *)task didSendBodyData:(int64_t)bytesSent totalBytesSent:(int64_t)totalBytesSent totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend {
     UploadManager *currentManager = [self findByTaskId:task.taskIdentifier];
+    NSLog(@"BYTES SENT FOR TASK: %ld", task.taskIdentifier);
     if(currentManager != nil) {
         [currentManager.delegate uploadManagerDidSendData:(long)totalBytesSent inTotal:(long)totalBytesExpectedToSend];
         // mahir: bir kere paket yollanmışsa tekrar invalid token'a düşme ihtimaline karşı flag tekrar NO'ya çekiliyor.
@@ -542,7 +543,8 @@
         [APPDELEGATE.wormhole passMessageObject:@{@"totalCount":[NSNumber numberWithInt: totalAutoSyncCount]} identifier:EXTENSION_WORMHOLE_TOTAL_COUNT_IDENTIFIER];
         [APPDELEGATE.wormhole passMessageObject:@{@"finishedCount":[NSNumber numberWithInt: finishedAutoSyncCount]} identifier:EXTENSION_WORMHOLE_FINISHED_COUNT_IDENTIFIER];
 
-        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:totalAutoSyncCount - finishedAutoSyncCount];
+        int activeSyncCount = totalAutoSyncCount - finishedAutoSyncCount;
+        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:activeSyncCount > 1000 ? 1000 : activeSyncCount];
     });
 }
 

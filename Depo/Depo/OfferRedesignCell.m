@@ -8,6 +8,7 @@
 
 #import "OfferRedesignCell.h"
 #import "Util.h"
+#import "AppDelegate.h"
 
 @implementation OfferRedesignCell
 
@@ -65,21 +66,24 @@
 - (id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withCurrenSubscription:(Subscription *)curentSubscription {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        int quotaInt = (int) (curentSubscription.plan.quota/(1024*1024*1024));
-        NSString *quotaConvertToString = [NSString stringWithFormat:@"%d",quotaInt];
+        //int quotaInt = (int) (curentSubscription.plan.quota/(1024*1024*1024));
+        NSString *quotaConvertToString = [NSString stringWithFormat:@"%@",[Util transformedHugeSizeValueDecimalIfNecessary:APPDELEGATE.session.usage.totalStorage]];
+        NSArray *quotaInfo = [self getQuotaInfoStrings:quotaConvertToString];
         UIFont *font = [UIFont fontWithName:@"TurkcellSaturaMed" size:40];
-        int width = [Util calculateWidthForText:quotaConvertToString forHeight:40 forFont:font]+2;
+        int width = [Util calculateWidthForText:[quotaInfo objectAtIndex:0] forHeight:40 forFont:font]+2;
 
         UILabel *quotaLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 15, width, 40)];
-        quotaLabel.text = quotaConvertToString;
+        quotaLabel.text = [quotaInfo objectAtIndex:0];
         quotaLabel.font = [UIFont fontWithName:@"TurkcellSaturaMed" size:40];
         quotaLabel.textColor = [Util UIColorForHexColor:@"363e4f"];
         [self addSubview:quotaLabel];
+
         UILabel *quotaGBLabel = [[UILabel alloc] initWithFrame:CGRectMake(20+quotaLabel.frame.size.width, 25, 50, 25)];
-        quotaGBLabel.text = @"GB";
+        quotaGBLabel.text = [quotaInfo objectAtIndex:1];
         quotaGBLabel.font = [UIFont fontWithName:@"TurkcellSaturaMed" size:25];
         quotaGBLabel.textColor = [Util UIColorForHexColor:@"363e4f"];
         [self addSubview:quotaGBLabel];
+
         int descWidth = [Util calculateWidthForText:[self roleTranslator:curentSubscription.plan.displayName] forHeight:20 forFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:20]]+2;
         UILabel *offerDescriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 55,descWidth , 20)];
         offerDescriptionLabel.text = [self roleTranslator:curentSubscription.plan.role];
@@ -134,19 +138,21 @@
 - (id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withOffer:(OfferContainer *)offerContainer withCurrentSubscription:(Subscription *)currentSubscription {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        int quotaInt = (int) (offerContainer.quota/(1024*1024*1024));
-        NSString *quotaConvertToString = [NSString stringWithFormat:@"%d",quotaInt];
+        //int quotaInt = (int) (offerContainer.quota/(1024*1024*1024));
+        NSString *quotaConvertToString = [NSString stringWithFormat:@"%@",[Util transformedHugeSizeValueDecimalIfNecessary:offerContainer.quota]];
+        NSArray *quotaArr = [self getQuotaInfoStrings:quotaConvertToString];
+        //NSString *quotaConvertToString = [NSString stringWithFormat:@"%d",quotaInt];
         UIFont *font = [UIFont fontWithName:@"TurkcellSaturaMed" size:40];
-        int width = [Util calculateWidthForText:quotaConvertToString forHeight:40 forFont:font]+2;
+        int width = [Util calculateWidthForText:[quotaArr objectAtIndex:0] forHeight:40 forFont:font]+2;
         
         UILabel *quotaLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 15, width, 40)];
-        quotaLabel.text = quotaConvertToString;
+        quotaLabel.text = [quotaArr objectAtIndex:0];
         quotaLabel.font = [UIFont fontWithName:@"TurkcellSaturaMed" size:40];
         quotaLabel.textColor = [Util UIColorForHexColor:@"363e4f"];
         [self addSubview:quotaLabel];
         
         UILabel *quotaGBLabel = [[UILabel alloc] initWithFrame:CGRectMake(20+quotaLabel.frame.size.width, 25, 50, 25)];
-        quotaGBLabel.text = @"GB";
+        quotaGBLabel.text = [quotaArr objectAtIndex:1];
         quotaGBLabel.font = [UIFont fontWithName:@"TurkcellSaturaMed" size:25];
         quotaGBLabel.textColor = [Util UIColorForHexColor:@"363e4f"];
         [self addSubview:quotaGBLabel];
@@ -244,6 +250,12 @@
     else
         return @"Hoşgeldin Paketi";
     
+}
+
+- (NSArray *) getQuotaInfoStrings :(NSString *) quotaString {
+    NSString* result = [quotaString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSArray *array = [result componentsSeparatedByString:@" "];
+    return array;
 }
 
 - (void) layoutSubviews {

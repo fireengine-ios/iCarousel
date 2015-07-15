@@ -159,14 +159,8 @@
             return 1;
         }
     }
-    /*else if ([currentSubscription.plan.role isEqualToString:@"demo"]) {
-     return 1;
-     } else {
-     return 2;
-     }
-     }*/
     else
-        return offers.count;
+        return containerOffers.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -231,26 +225,8 @@
         }
     }
     else {
-        //OfferCell *cell;
-        //Offer *offer = [offers objectAtIndex:indexPath.row];
-        //NSArray *temp = [self sortingOfferContainers:[AppUtil tempOffers]];
-        //NSArray *offersContainers = [self sortArray:temp withKey:@"quota"];
-        //OfferRedesignCell *cell = [[OfferRedesignCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withOffer:[offersContainers objectAtIndex:indexPath.row]];
         OfferRedesignCell *cell = [[OfferRedesignCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withOffer:[containerOffers objectAtIndex:indexPath.row] withCurrentSubscription:currentSubscription];
         cell.offerCellDel = self;
-        
-        
-        //NSString *offerDisplayName = [self getPackageDisplayName:offer.role];
-        //NSString *packageName = @"%@ (%gGB) %@ TL/%@";
-        //packageName = [NSString stringWithFormat:packageName, offerDisplayName, offer.quota/(1024*1024*1024), offer.price, NSLocalizedString(@"Month", @"")];
-        //packageName = [packageName stringByReplacingOccurrencesOfString:@"Akıllı Depo " withString:@""];
-        /*if (indexPath.row == 0)
-         cell = [[OfferCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:packageName hasSeparator:NO topIndex:15 bottomIndex:0];
-         else if (indexPath.row == offers.count - 1)
-         cell = [[OfferCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:packageName hasSeparator:YES topIndex:0 bottomIndex:15];
-         else
-         cell = [[OfferCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:packageName hasSeparator:NO];*/
-        
         return cell;
     }
 }

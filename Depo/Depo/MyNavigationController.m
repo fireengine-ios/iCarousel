@@ -62,7 +62,7 @@
 - (void) pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
     [super pushViewController:viewController animated:animated];
     
-    if([self.viewControllers count] > 1) {
+    if(self.viewControllers && [self.viewControllers count] > 1) {
         CustomButton *customBackButton = [[CustomButton alloc] initWithFrame:CGRectMake(10, 0, 20, 34) withImageName:@"white_left_arrow.png"];
         [customBackButton addTarget:self action:@selector(triggerBackByNav) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:customBackButton];

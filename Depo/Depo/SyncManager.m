@@ -19,6 +19,7 @@
 #import "ReachabilityManager.h"
 #import "Reachability.h"
 #import "AppUtil.h"
+#import "CurioSDK.h"
 
 @implementation SyncManager
 
@@ -132,6 +133,9 @@
                         length = (int)[group numberOfAssets] - startIndex;
                     }
                     NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(startIndex, length)];
+                    
+                    [[CurioSDK shared] sendEvent:@"FirstSyncStarted" eventValue:[NSString stringWithFormat:@"start index: %d", startIndex]];
+
                     [group enumerateAssetsAtIndexes:indexSet options:0 usingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
                         if(asset && [[asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypePhoto]) {
                             EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
@@ -182,7 +186,6 @@
 }
 
 - (void) firstTimeBlockSyncEnumerationFinished {
-    NSTimeInterval timeInMiliseconds2 = [[NSDate date] timeIntervalSince1970];
     [SyncUtil writeFirstTimeSyncFlag];
     [SyncUtil updateLastSyncDate];
 
@@ -217,6 +220,8 @@
         NSArray *remoteHashList = [SyncUtil readSyncHashRemotely];
         NSArray *remoteSummaryList = [SyncUtil readSyncFileSummaries];
         
+        [[CurioSDK shared] sendEvent:@"BackgroundSync" eventValue:@"started"];
+
         autoSyncIterationInProgress = YES;
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
             [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
@@ -251,6 +256,7 @@
                     [SyncUtil writeLastSyncDate:[NSDate date]];
                     autoSyncIterationInProgress = NO;
                     [[UploadQueue sharedInstance] manualAutoSyncIterationFinished];
+                    [[CurioSDK shared] sendEvent:@"BackgroundSync" eventValue:@"ended"];
                 }
             } failureBlock:^(NSError *error) {
             }];
@@ -358,7 +364,7 @@
         if(![SyncUtil readFirstTimeSyncFlag]) {
             [self startFirstTimeSync];
         } else if(![SyncUtil readFirstTimeSyncFinishedFlag]) {
-            if(![SyncUtil readAutoSyncBlockInProgress]) {
+           if(![SyncUtil readAutoSyncBlockInProgress]) {
                 [self initializeNextAutoSyncPackage];
             }
         } else {

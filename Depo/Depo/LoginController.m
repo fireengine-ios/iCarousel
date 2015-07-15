@@ -57,9 +57,12 @@
         rememberMe = [[CheckButton alloc] initWithFrame:CGRectMake(25, 220, 120, 25) withTitle:NSLocalizedString(@"RememberMe", @"") isInitiallyChecked:YES];
         [self.view addSubview:rememberMe];
         
-        SmsForPassButton *smsButton = [[SmsForPassButton alloc] initWithFrame:CGRectMake(20, 280, 280, 40)];
-        [smsButton addTarget:self action:@selector(triggerSms) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:smsButton];
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+            SmsForPassButton *smsButton = [[SmsForPassButton alloc] initWithFrame:CGRectMake(20, 280, 280, 40)];
+            [smsButton addTarget:self action:@selector(triggerSms) forControlEvents:UIControlEventTouchUpInside];
+            [self.view addSubview:smsButton];
+            
+        }
 
         SimpleButton *loginButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, self.view.frame.size.height - 134, self.view.frame.size.width - 40, 50) withTitle:NSLocalizedString(@"SignIn", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
         [loginButton addTarget:self action:@selector(loginClicked) forControlEvents:UIControlEventTouchUpInside];

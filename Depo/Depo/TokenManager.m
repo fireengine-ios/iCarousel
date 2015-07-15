@@ -165,10 +165,8 @@
     self.processDelegateTaskId = taskId;
     
     NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
-    if(networkStatus == kReachableViaWiFi) {
-        if([CacheUtil readRememberMeToken] != nil) {
-            [tokenWithinProcessDao requestTokenByRememberMe];
-        }
+    if([CacheUtil readRememberMeToken] != nil) {
+        [tokenWithinProcessDao requestTokenByRememberMe];
     } else if(networkStatus == kReachableViaWWAN) {
         [radiusWithinProcessDao requestRadiusLogin];
     }

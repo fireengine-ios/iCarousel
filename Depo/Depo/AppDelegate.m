@@ -529,11 +529,13 @@
         [[UploadQueue sharedInstance].session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
         }];
         
-    } else {
+//    } else {
         // eğer backgrounddan gelmiyorsa bir sonraki auto sync bloğununun okunmasını engelleyen lock kaldırılıyor
-        [SyncUtil unlockAutoSyncBlockInProgress];
+//        [SyncUtil unlockAutoSyncBlockInProgress];
     }
     
+    [SyncUtil unlockAutoSyncBlockInProgress];
+
     [self triggerAutoSynchronization];
 
     [[UIDevice currentDevice] setBatteryMonitoringEnabled:YES];
@@ -545,6 +547,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     [[CurioSDK shared] endSession];
+    [SyncUtil unlockAutoSyncBlockInProgress];
 }
 
 - (void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(NSString *)identifier completionHandler:(void (^)())completionHandler {

@@ -48,6 +48,7 @@
 @property (nonatomic, strong) MoreMenuView *moreMenuView;
 
 @property (nonatomic, strong) NSMutableArray *selectedFileList;
+@property (nonatomic, strong) NSMutableArray *selectedFileLinkList;
 @property (nonatomic, strong) FooterActionsMenuView *footerActionMenu;
 
 - (id)initWithAlbum:(PhotoAlbum *) _album;

@@ -14,6 +14,16 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>DepoActionExtension.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>ShareExtension.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -23,6 +33,16 @@
 			<true/>
 		</dict>
 		<key>051E1E0D19CAC2F900FD1E03</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>05201BDC1B53C2900039FBB1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>05201BF21B53C7470039FBB1</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -189,6 +189,11 @@
 
 - (void) triggerRefresh {
     [photoList removeAllObjects];
+    if (isSelectible) {
+        [selectedFileList removeAllObjects];
+        [self hideImgFooterMenu];
+        self.title = NSLocalizedString(@"SelectFilesTitle", @"");
+    }
     for(UIView *subView in photosScroll.subviews) {
         if([subView isKindOfClass:[SquareImageView class]]) {
             [subView removeFromSuperview];
@@ -422,8 +427,10 @@
 }
 
 - (void) squareImageWasMarkedForFile:(MetaFile *)fileSelected {
-    if(![selectedFileList containsObject:fileSelected.uuid]) {
-        [selectedFileList addObject:fileSelected.uuid];
+    if(fileSelected.uuid) {
+        if(![selectedFileList containsObject:fileSelected.uuid]) {
+            [selectedFileList addObject:fileSelected.uuid];
+        }
     }
     if([selectedFileList count] > 0) {
         [self showImgFooterMenu];
@@ -619,6 +626,9 @@
 
 - (void) tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     if(isSelectible) {
+        if(!albumList || [albumList count] == 0) {
+            return;
+        }
         PhotoAlbum *album = [albumList objectAtIndex:indexPath.row];
         if([selectedAlbumList containsObject:album.uuid]) {
             [selectedAlbumList removeObject:album.uuid];
@@ -800,7 +810,20 @@
 }
 
 - (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {
-    [APPDELEGATE.base triggerShareForFiles:selectedFileList];
+    MetaFile *shareObject = [[MetaFile alloc] init];
+    if ([selectedFileList count] == 1) {
+        for (id fileIndex in photoList) {
+            if ([fileIndex isKindOfClass:[MetaFile class]]) {
+                MetaFile *tempFile = (MetaFile *) fileIndex;
+                if ([tempFile.uuid isEqualToString:[selectedFileList objectAtIndex:0]]) {
+                    shareObject = tempFile;
+                }
+            }
+        }
+        [APPDELEGATE.base triggerShareForFileObjects:@[shareObject]];
+    } else {
+        [APPDELEGATE.base triggerShareForFiles:selectedFileList];
+    }
 }
 
 - (void) albumModalDidSelectAlbum:(NSString *)albumUuid {

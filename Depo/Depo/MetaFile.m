@@ -30,4 +30,14 @@
 @synthesize contentLengthDisplay;
 @synthesize itemCount;
 
+- (BOOL) isEqual:(id)other {
+    if (other == self)
+        return YES;
+    if (!other || ![other isKindOfClass:[self class]])
+        return NO;
+    if(self.uuid == nil || ((MetaFile *)other).uuid == nil)
+        return NO;
+    return ([self.uuid isEqualToString:((MetaFile *)other).uuid]);
+}
+
 @end

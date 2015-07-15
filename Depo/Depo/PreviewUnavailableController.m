@@ -205,7 +205,12 @@
     
     //    activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll];
     
-    [self presentViewController:activityViewController animated:YES completion:nil];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        [self presentViewController:activityViewController animated:YES completion:nil];
+    } else {
+        UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
+        [popup presentPopoverFromRect:CGRectMake(self.view.frame.size.width-240, self.view.frame.size.height-40, 240, 300)inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
 }
 
 - (void) shareFailCallback:(NSString *) errorMessage {

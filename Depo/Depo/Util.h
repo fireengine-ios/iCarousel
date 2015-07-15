@@ -21,6 +21,7 @@
 + (NSString *) getWorkaroundUUID;
 + (NSString *) transformedHugeSizeValueNoDecimal:(long long) byteCount;
 + (NSString *) transformedHugeSizeValueDecimalIfNecessary:(long long) byteCount;
++ (NSArray *) transformedHugeSizeValueDecimalAsArrayIfNecessary:(long long) byteCount;
 + (NSString *) cleanSpecialCharacters:(NSString *) rawStr;
 
 @end

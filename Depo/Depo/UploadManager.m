@@ -58,6 +58,9 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             [SyncUtil increaseAutoSyncIndex];
         }
 
+        //TODO: uygulama suspenddeyken loc update geldiğinde tekrar background'a geliyor ama active olmuyor. O yüzden AutoSyncBlockInProgress unlock olmuyor. Background task expire olursa bu flag'i unlock etmenin en iyi yeri burası görünüyor. Netleştirip aşağıdaki satırı açabiliriz
+        //[SyncUtil unlockAutoSyncBlockInProgress];
+        
         [[UIApplication sharedApplication] endBackgroundTask:bgTaskI];
         bgTaskI = UIBackgroundTaskInvalid;
     }];

@@ -42,7 +42,7 @@
 - (void) reCheckInfo {
     int totalAutoSyncCount = [[UploadQueue sharedInstance] totalAutoSyncCount];
     int finishedAutoSyncCount = [[UploadQueue sharedInstance] finishedAutoSyncCount];
-    NSString *infoMessage = [NSString stringWithFormat:NSLocalizedString(@"AutoSyncStatusInfo", @""), finishedAutoSyncCount + 1, totalAutoSyncCount, (totalAutoSyncCount%1000==0) ? @"+" : @""];
+    NSString *infoMessage = [NSString stringWithFormat:NSLocalizedString(@"AutoSyncStatusInfo", @""), finishedAutoSyncCount + 1, totalAutoSyncCount > 1000 ? 1000 : totalAutoSyncCount, ((totalAutoSyncCount%1000==0) || totalAutoSyncCount > 1000) ? @"+" : @""];
     infoLabel.text = infoMessage;
 }
 

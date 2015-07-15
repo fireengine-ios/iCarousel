@@ -118,7 +118,8 @@
             }
 //        });
 
-        for(UploadManager *manager in [[UploadQueue sharedInstance].uploadManagers copy]) {
+        NSMutableArray *managersArray = [[UploadQueue sharedInstance].uploadManagers copy];
+        for(UploadManager *manager in managersArray) {
             if(!manager.uploadRef.hasFinished && [manager.uploadRef.fileUuid isEqualToString:self.uploadRef.fileUuid]) {
                 manager.delegate = self;
             }

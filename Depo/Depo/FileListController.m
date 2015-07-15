@@ -410,7 +410,7 @@
 }
 
 - (void) fileFolderCellShouldShareForFile:(MetaFile *)fileSelected {
-    [APPDELEGATE.base triggerShareForFiles:@[fileSelected.uuid]];
+    [APPDELEGATE.base triggerShareForFileObjects:@[fileSelected]];
 }
 
 - (void) fileFolderCellShouldMoveForFile:(MetaFile *)fileSelected {
@@ -749,7 +749,20 @@
 }
 
 - (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {
-    [APPDELEGATE.base triggerShareForFiles:selectedFileList];
+    MetaFile *shareObject = [[MetaFile alloc] init];
+    if ([selectedFileList count] == 1) {
+        for (id fileIndex in fileList) {
+            if ([fileIndex isKindOfClass:[MetaFile class]]) {
+                MetaFile *tempFile = (MetaFile *) fileIndex;
+                if ([tempFile.uuid isEqualToString:[selectedFileList objectAtIndex:0]]) {
+                    shareObject = tempFile;
+                }
+            }
+        }
+        [APPDELEGATE.base triggerShareForFileObjects:@[shareObject]];
+    } else {
+        [APPDELEGATE.base triggerShareForFiles:selectedFileList];
+    }
 }
 
 - (void) moveListModalDidSelectFolder:(NSString *)folderUuid {

@@ -280,16 +280,44 @@
 
 #pragma mark ShareLinkDao Delegate Methods
 - (void) shareSuccessCallback:(NSString *) linkToShare {
-    [self hideLoading];
-    NSArray *activityItems = [NSArray arrayWithObjects:linkToShare, nil];
-    
-    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
-    [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
-    activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    
-//    activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll];
-    
-    [self presentViewController:activityViewController animated:YES completion:nil];
+    [self showLoading];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        [self downloadImageWithURL:[NSURL URLWithString:self.file.tempDownloadUrl] completionBlock:^(BOOL succeeded, UIImage *image) {
+            if (succeeded) {
+                [self hideLoading];
+                NSArray *activityItems = [NSArray arrayWithObjects:image, nil];
+                
+                UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+                [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
+                activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+                
+                //    activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll];
+
+                if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+                    [self presentViewController:activityViewController animated:YES completion:nil];
+                } else {
+                    UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
+                    [popup presentPopoverFromRect:CGRectMake(self.view.frame.size.width-240, self.view.frame.size.height-40, 240, 300)inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+                }
+                
+            }
+        }];
+    });
+}
+
+- (void)downloadImageWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, UIImage *image))completionBlock {
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                               if ( !error )
+                               {
+                                   UIImage *image = [[UIImage alloc] initWithData:data];
+                                   completionBlock(YES, image);
+                               } else{
+                                   completionBlock(NO, nil);
+                               }
+                           }];
 }
 
 - (void) shareFailCallback:(NSString *) errorMessage {

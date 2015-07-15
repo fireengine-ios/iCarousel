@@ -350,6 +350,9 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSMutableArray *currentList = [self getCurrentList:(int)indexPath.section];
     if (indexPath.row < 2) {
+        if([currentList count] == 0 || [currentList count] <= indexPath.row)
+            return;
+        
         MetaFile *fileAtIndex = (MetaFile *) [currentList objectAtIndex:indexPath.row];
         
         UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
@@ -378,7 +381,7 @@
                 VideoPreviewController *detail = [[VideoPreviewController alloc] initWithFile:fileAtIndex];
                 MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
                 detail.nav = modalNav;
-                [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
+                [self presentViewController:modalNav animated:YES completion:nil];
             } else if([AppUtil isMetaFileMusic:fileAtIndex]) {
                 MusicPreviewController *detail = [[MusicPreviewController alloc] initWithFile:fileAtIndex.uuid withFileList:@[fileAtIndex]];
                 detail.nav = self.nav;
@@ -450,8 +453,46 @@
 }
 
 - (void) fileFolderCellShouldShareForFile:(MetaFile *)fileSelected {
-    [shareDao requestLinkForFiles:@[fileSelected.uuid]];
     [self showLoading];
+    if (fileSelected.contentType != ContentTypePhoto) {
+        [shareDao requestLinkForFiles:@[fileSelected.uuid]];
+    } else {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            [self downloadImageWithURL:[NSURL URLWithString:fileSelected.tempDownloadUrl] completionBlock:^(BOOL succeeded, UIImage *image) {
+                if (succeeded) {
+                    [self hideLoading];
+                    NSArray *activityItems = [NSArray arrayWithObjects:image, nil];
+                    
+                    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+                    [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
+                    activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+                    
+                    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+                        [self presentViewController:activityViewController animated:YES completion:nil];
+                    } else {
+                        UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
+                        [popup presentPopoverFromRect:CGRectMake(self.view.frame.size.width-240, self.view.frame.size.height-40, 240, 300)inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+                    }
+                }
+            }];
+        });
+    }
+}
+
+- (void)downloadImageWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, UIImage *image))completionBlock
+{
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                               if ( !error )
+                               {
+                                   UIImage *image = [[UIImage alloc] initWithData:data];
+                                   completionBlock(YES,image);
+                               } else{
+                                   completionBlock(NO,nil);
+                               }
+                           }];
 }
 
 - (void) fileFolderCellShouldDeleteForFile:(MetaFile *)fileSelected {
@@ -488,7 +529,12 @@
     
     //    activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll];
     
-    [self presentViewController:activityViewController animated:YES completion:nil];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        [self presentViewController:activityViewController animated:YES completion:nil];
+    } else {
+        UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
+        [popup presentPopoverFromRect:CGRectMake(self.view.frame.size.width-240, self.view.frame.size.height-40, 240, 300)inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
 }
 
 - (void) shareFailCallback:(NSString *) errorMessage {

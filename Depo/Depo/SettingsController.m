@@ -284,7 +284,7 @@
 //        NSLog(@"USAGE:%lld and %lld", APPDELEGATE.session.usage.usedStorage, APPDELEGATE.session.usage.totalStorage);
         double percentUsageVal = 100 * ((double)APPDELEGATE.session.usage.usedStorage/(double)APPDELEGATE.session.usage.totalStorage);
         percentUsageVal = (percentUsageVal > 0 && percentUsageVal < 1) ? 1 : percentUsageVal;
-        NSString *subTitle = [NSString stringWithFormat: NSLocalizedString(@"StorageUsageInfo", @""), [NSString stringWithFormat:@"%d", (int)floor(percentUsageVal+0.5f)], [Util transformedHugeSizeValueNoDecimal:APPDELEGATE.session.usage.totalStorage]];
+        NSString *subTitle = [NSString stringWithFormat: NSLocalizedString(@"StorageUsageInfo", @""), [NSString stringWithFormat:@"%d", (int)floor(percentUsageVal+0.5f)], [Util transformedHugeSizeValueDecimalIfNecessary:APPDELEGATE.session.usage.totalStorage]];
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"Memory", @"") titleColor:nil subTitleText:subTitle iconName:@"stroge_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         return cell;
