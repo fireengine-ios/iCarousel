@@ -13,6 +13,7 @@
 #import "CacheUtil.h"
 #import "BaseDao.h"
 #import "CurioSDK.h"
+#import "SharedUtil.h"
 
 @implementation RequestTokenDao
 
@@ -102,7 +103,7 @@
         NSNumber *migrationUserFlag = [headerParams objectForKey:@"X-Migration-User"];
         
 //        NSLog(@"Auth Token Response Headers: %@", headerParams);
-//        NSLog(@"TOKEN: %@", authToken);
+        NSLog(@"TOKEN: %@", authToken);
 
         if(newUserFlag != nil && ![newUserFlag isKindOfClass:[NSNull class]]) {
             APPDELEGATE.session.newUserFlag = [newUserFlag boolValue];
@@ -117,10 +118,12 @@
 
         if(rememberMeToken != nil && ![rememberMeToken isKindOfClass:[NSNull class]]) {
             [CacheUtil writeRememberMeToken:rememberMeToken];
+            [SharedUtil writeSharedRememberMeToken:rememberMeToken];
         }
 
         if(authToken != nil && ![authToken isKindOfClass:[NSNull class]]) {
             APPDELEGATE.session.authToken = authToken;
+            [SharedUtil writeSharedToken:authToken];
             
             [[CurioSDK shared] sendEvent:@"LoginSuccess" eventValue:@"true"];
 

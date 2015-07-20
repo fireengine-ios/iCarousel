@@ -496,3 +496,8 @@
 "OnKatDepoExplain"="Yeni saklama alanınız ile daha çok fotoğraf ve video saklayabilirsiniz.";
 "Okay"="Tamam";
 "Ten"="10";
+
+"UploadError"="Dosya yüklemesi esnasında hata alındı.";
+"UploadSuccess"="Dosya başarıyla yüklendi.";
+"UploadInProgress"="Yükleniyor...";
+"ExtLoginRequiredMessage"="Önce uygulamadan giriş yapmalısınız.";

@@ -26,6 +26,10 @@
     return self;
 }
 
+- (NSUInteger) hash {
+    return [self.fileName hash];
+}
+
 - (BOOL) isEqual:(id) comparedObj {
     if (comparedObj == self)
         return YES;

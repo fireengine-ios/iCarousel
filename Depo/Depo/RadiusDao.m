@@ -13,6 +13,7 @@
 #import "AppSession.h"
 #import "BaseDao.h"
 #import "CurioSDK.h"
+#import "SharedUtil.h"
 
 @implementation RadiusDao
 
@@ -77,10 +78,13 @@
         
         if(rememberMeToken != nil && ![rememberMeToken isKindOfClass:[NSNull class]]) {
             [CacheUtil writeRememberMeToken:rememberMeToken];
+            [SharedUtil writeSharedRememberMeToken:rememberMeToken];
         }
         
         if(authToken != nil && ![authToken isKindOfClass:[NSNull class]]) {
             APPDELEGATE.session.authToken = authToken;
+            [SharedUtil writeSharedToken:authToken];
+            
             [[CurioSDK shared] sendEvent:@"LoginSuccess" eventValue:@"true"];
             SuppressPerformSelectorLeakWarning([delegate performSelector:successMethod]);
         } else {

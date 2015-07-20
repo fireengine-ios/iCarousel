@@ -213,7 +213,7 @@
     
     MetaFile *file = [[MetaFile alloc] init];
     file.uuid = [self strByRawVal:uuid];
-    file.hash = [self strByRawVal:hash];
+    file.fileHash = [self strByRawVal:hash];
     file.subDir = [self strByRawVal:subdir];
     file.parent = [self strByRawVal:parent];
     file.name = [self strByRawVal:name];

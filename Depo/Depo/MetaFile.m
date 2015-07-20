@@ -11,7 +11,7 @@
 @implementation MetaFile
 
 @synthesize uuid;
-@synthesize hash;
+@synthesize fileHash;
 @synthesize metaHash;
 @synthesize subDir;
 @synthesize parent;
@@ -29,6 +29,10 @@
 @synthesize detail;
 @synthesize contentLengthDisplay;
 @synthesize itemCount;
+
+- (NSUInteger) hash {
+    return [self.uuid hash];
+}
 
 - (BOOL) isEqual:(id)other {
     if (other == self)

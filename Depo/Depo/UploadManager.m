@@ -361,6 +361,10 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     [queueDelegate uploadManager:self didFinishUploadingWithSuccess:NO];
 }
 
+- (NSUInteger) hash {
+    return [self.uploadRef.localHash hash];
+}
+
 - (BOOL) isEqual:(id)other {
     if (other == self)
         return YES;

@@ -11,6 +11,7 @@
 #import "CacheUtil.h"
 #import "ContactSyncSDK.h"
 #import "SyncUtil.h"
+#import "SharedUtil.h"
 
 @implementation AppSession
 
@@ -197,6 +198,7 @@
     self.baseUrl = nil;
     self.baseUrlConstant = nil;
     [SyncUtil resetBaseUrlConstant];
+    [SharedUtil writeSharedToken:nil];
 }
 
 - (void) addBgOngoingTaskUrl:(NSString *) taskUrl {

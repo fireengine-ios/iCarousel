@@ -11,6 +11,7 @@
 #import "AppSession.h"
 #import "AppUtil.h"
 #import "SyncUtil.h"
+#import "SharedUtil.h"
 
 @implementation RequestBaseUrlDao
 
@@ -29,7 +30,7 @@
 	if (!error) {
 		NSString *responseEnc = [request responseString];
 		
-//        NSLog(@"User Base Url Response: %@", responseEnc);
+        NSLog(@"User Base Url Response: %@", responseEnc);
         
 		SBJSON *jsonParser = [SBJSON new];
 		NSDictionary *mainDict = [jsonParser objectWithString:responseEnc];
@@ -37,6 +38,7 @@
             NSString *baseUrlValue = [mainDict objectForKey:@"value"];
             APPDELEGATE.session.baseUrl = [self strByRawVal:baseUrlValue];
             APPDELEGATE.session.baseUrlConstant = [AppUtil userUniqueValueByBaseUrl:[self strByRawVal:baseUrlValue]];
+            [SharedUtil writeSharedBaseUrl:APPDELEGATE.session.baseUrl];
             [SyncUtil writeBaseUrlConstant:APPDELEGATE.session.baseUrlConstant];
         }
         

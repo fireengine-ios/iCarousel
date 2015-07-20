@@ -7,6 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05028CBA1B57E62E000F2D09 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 051E1E0819CAC2F900FD1E03 /* Images.xcassets */; };
+		05028CBB1B58F694000F2D09 /* yellow_close_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 051CB3E319D2F71200E5FC88 /* yellow_close_button@2x.png */; };
+		05028CBC1B58F697000F2D09 /* yellow_close_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 051CB3A219D2F6F700E5FC88 /* yellow_close_button.png */; };
+		05028CBD1B58F7FD000F2D09 /* yellow_button_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 051CB3DB19D2F71200E5FC88 /* yellow_button_bg.png */; };
+		05028CC01B595440000F2D09 /* ExtensionUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 05028CBF1B595440000F2D09 /* ExtensionUploadManager.m */; };
+		05028CC11B595915000F2D09 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 051E1E3119CAC57400FD1E03 /* Util.m */; };
+		05028CC31B5A315F000F2D09 /* CustomAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 051DE36F19CC140100F27C85 /* CustomAlertView.m */; };
+		05028CC41B5A3184000F2D09 /* SimpleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0555EF1C19F91ACA0068F4CC /* SimpleButton.m */; };
+		05028CC51B5A319A000F2D09 /* CustomLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0589066C19CC560100A9E517 /* CustomLabel.m */; };
+		05028CC61B5A596F000F2D09 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 053EC45919DAA2BF000C2B77 /* Localizable.strings */; };
+		05028CC71B5A5BE6000F2D09 /* TurkcellSaturaBol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0589066219CC51EC00A9E517 /* TurkcellSaturaBol.ttf */; };
+		05028CC81B5A5BEA000F2D09 /* TurkcellSaturaBolIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0589066119CC51EC00A9E517 /* TurkcellSaturaBolIta.ttf */; };
+		05028CC91B5A5BED000F2D09 /* TurkcellSaturaDem.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0589066019CC51EC00A9E517 /* TurkcellSaturaDem.ttf */; };
+		05028CCA1B5A5BEF000F2D09 /* TurkcellSaturaDemIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0589065F19CC51EC00A9E517 /* TurkcellSaturaDemIta.ttf */; };
+		05028CCB1B5A5BF2000F2D09 /* TurkcellSaturaIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0589065E19CC51EC00A9E517 /* TurkcellSaturaIta.ttf */; };
+		05028CCC1B5A5BF4000F2D09 /* TurkcellSaturaMed.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0589065D19CC51EC00A9E517 /* TurkcellSaturaMed.ttf */; };
+		05028CCD1B5A5BF9000F2D09 /* TurkcellSaturaMedIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0589065C19CC51EC00A9E517 /* TurkcellSaturaMedIta.ttf */; };
+		05028CCE1B5A5BFB000F2D09 /* TurkcellSaturaReg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0589065B19CC51EC00A9E517 /* TurkcellSaturaReg.ttf */; };
+		05028CCF1B5A5E53000F2D09 /* close_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 058219D41A3850E2001FA679 /* close_icon.png */; };
+		05028CD01B5A5E56000F2D09 /* close_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 058219D51A3850E2001FA679 /* close_icon@2x.png */; };
+		05028CD31B5A9866000F2D09 /* SharedUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 05028CD21B5A9866000F2D09 /* SharedUtil.m */; };
+		05028CD41B5A9887000F2D09 /* SharedUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 05028CD21B5A9866000F2D09 /* SharedUtil.m */; };
+		05028D2A1B5CE9D7000F2D09 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 051E1E5D19CAC92700FD1E03 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		050833451AC6C3FA0087B88F /* square_placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 050833431AC6C3FA0087B88F /* square_placeholder@2x.png */; };
 		050833461AC6C3FA0087B88F /* square_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 050833441AC6C3FA0087B88F /* square_placeholder.png */; };
 		050A7B1719F7CBB600B084B9 /* volume_level.png in Resources */ = {isa = PBXBuildFile; fileRef = 050A7B0D19F7CBB600B084B9 /* volume_level.png */; };
@@ -615,6 +638,9 @@
 		05C2A0441A79882100EE4D78 /* libGoogleConversionTracking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C2A0421A79882100EE4D78 /* libGoogleConversionTracking.a */; };
 		05C2A0471A7989AD00EE4D78 /* SplunkMint-iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C2A0461A7989AD00EE4D78 /* SplunkMint-iOS.framework */; };
 		05C2A0491A7989CD00EE4D78 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C2A0481A7989CD00EE4D78 /* CoreTelephony.framework */; };
+		05C3A37F1B57DFAB002AB49A /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C3A37E1B57DFAB002AB49A /* ShareViewController.m */; };
+		05C3A3811B57DFAB002AB49A /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05C3A3801B57DFAB002AB49A /* MainInterface.storyboard */; };
+		05C3A3841B57DFAB002AB49A /* DepoShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 05C3A3791B57DFAB002AB49A /* DepoShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		05C3F6071A3900A8001954E8 /* PostLoginPrefCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C3F6061A3900A8001954E8 /* PostLoginPrefCell.m */; };
 		05C3F60A1A3902E0001954E8 /* check_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C3F6081A3902E0001954E8 /* check_icon.png */; };
 		05C3F60B1A3902E0001954E8 /* check_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C3F6091A3902E0001954E8 /* check_icon@2x.png */; };
@@ -715,6 +741,13 @@
 			remoteGlobalIDString = 051E1DF219CAC2F900FD1E03;
 			remoteInfo = Depo;
 		};
+		05C3A3821B57DFAB002AB49A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 05C3A3781B57DFAB002AB49A;
+			remoteInfo = DepoShareExtension;
+		};
 		05C850AC1ACD63F700F976DE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
@@ -731,6 +764,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				05C3A3841B57DFAB002AB49A /* DepoShareExtension.appex in Embed App Extensions */,
 				05C850AE1ACD63F700F976DE /* AutoSyncWidget.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
@@ -739,6 +773,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		05028CBE1B595440000F2D09 /* ExtensionUploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtensionUploadManager.h; sourceTree = "<group>"; };
+		05028CBF1B595440000F2D09 /* ExtensionUploadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtensionUploadManager.m; sourceTree = "<group>"; };
+		05028CD11B5A9866000F2D09 /* SharedUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedUtil.h; sourceTree = "<group>"; };
+		05028CD21B5A9866000F2D09 /* SharedUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharedUtil.m; sourceTree = "<group>"; };
 		050833431AC6C3FA0087B88F /* square_placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "square_placeholder@2x.png"; sourceTree = "<group>"; };
 		050833441AC6C3FA0087B88F /* square_placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = square_placeholder.png; sourceTree = "<group>"; };
 		050A7B0D19F7CBB600B084B9 /* volume_level.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = volume_level.png; sourceTree = "<group>"; };
@@ -1608,6 +1646,12 @@
 		05C2A0421A79882100EE4D78 /* libGoogleConversionTracking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleConversionTracking.a; sourceTree = "<group>"; };
 		05C2A0461A7989AD00EE4D78 /* SplunkMint-iOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "SplunkMint-iOS.framework"; path = "Depo/SplunkMint-iOS.framework"; sourceTree = "<group>"; };
 		05C2A0481A7989CD00EE4D78 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		05C3A3791B57DFAB002AB49A /* DepoShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DepoShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		05C3A37C1B57DFAB002AB49A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		05C3A37D1B57DFAB002AB49A /* ShareViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
+		05C3A37E1B57DFAB002AB49A /* ShareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
+		05C3A3801B57DFAB002AB49A /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
+		05C3A38A1B57E362002AB49A /* DepoShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = DepoShareExtension.entitlements; sourceTree = "<group>"; };
 		05C3F6051A3900A8001954E8 /* PostLoginPrefCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostLoginPrefCell.h; sourceTree = "<group>"; };
 		05C3F6061A3900A8001954E8 /* PostLoginPrefCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostLoginPrefCell.m; sourceTree = "<group>"; };
 		05C3F6081A3902E0001954E8 /* check_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check_icon.png; sourceTree = "<group>"; };
@@ -1794,6 +1838,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		05C3A3761B57DFAB002AB49A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		05C8509E1ACD63F700F976DE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1824,6 +1875,7 @@
 				051E1DFC19CAC2F900FD1E03 /* Depo */,
 				051E1E1519CAC2F900FD1E03 /* DepoTests */,
 				05C850A41ACD63F700F976DE /* AutoSyncWidget */,
+				05C3A37A1B57DFAB002AB49A /* DepoShareExtension */,
 				051E1DF519CAC2F900FD1E03 /* Frameworks */,
 				051E1DF419CAC2F900FD1E03 /* Products */,
 			);
@@ -1835,6 +1887,7 @@
 				051E1DF319CAC2F900FD1E03 /* Depo.app */,
 				051E1E0E19CAC2F900FD1E03 /* DepoTests.xctest */,
 				05C850A11ACD63F700F976DE /* AutoSyncWidget.appex */,
+				05C3A3791B57DFAB002AB49A /* DepoShareExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2109,6 +2162,8 @@
 				05F4AA271A2F7692000F41B8 /* ActivityUtil.m */,
 				058B44D91A4C0D89005B1590 /* SyncUtil.h */,
 				058B44DA1A4C0D89005B1590 /* SyncUtil.m */,
+				05028CD11B5A9866000F2D09 /* SharedUtil.h */,
+				05028CD21B5A9866000F2D09 /* SharedUtil.m */,
 			);
 			name = util;
 			sourceTree = "<group>";
@@ -3019,6 +3074,28 @@
 			path = DoubleClick;
 			sourceTree = "<group>";
 		};
+		05C3A37A1B57DFAB002AB49A /* DepoShareExtension */ = {
+			isa = PBXGroup;
+			children = (
+				05C3A38A1B57E362002AB49A /* DepoShareExtension.entitlements */,
+				05C3A37D1B57DFAB002AB49A /* ShareViewController.h */,
+				05C3A37E1B57DFAB002AB49A /* ShareViewController.m */,
+				05C3A3801B57DFAB002AB49A /* MainInterface.storyboard */,
+				05C3A37B1B57DFAB002AB49A /* Supporting Files */,
+				05028CBE1B595440000F2D09 /* ExtensionUploadManager.h */,
+				05028CBF1B595440000F2D09 /* ExtensionUploadManager.m */,
+			);
+			path = DepoShareExtension;
+			sourceTree = "<group>";
+		};
+		05C3A37B1B57DFAB002AB49A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				05C3A37C1B57DFAB002AB49A /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		05C850A41ACD63F700F976DE /* AutoSyncWidget */ = {
 			isa = PBXGroup;
 			children = (
@@ -3137,6 +3214,7 @@
 			);
 			dependencies = (
 				05C850AD1ACD63F700F976DE /* PBXTargetDependency */,
+				05C3A3831B57DFAB002AB49A /* PBXTargetDependency */,
 			);
 			name = Depo;
 			productName = Depo;
@@ -3160,6 +3238,23 @@
 			productName = DepoTests;
 			productReference = 051E1E0E19CAC2F900FD1E03 /* DepoTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		05C3A3781B57DFAB002AB49A /* DepoShareExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 05C3A3891B57DFAC002AB49A /* Build configuration list for PBXNativeTarget "DepoShareExtension" */;
+			buildPhases = (
+				05C3A3751B57DFAB002AB49A /* Sources */,
+				05C3A3761B57DFAB002AB49A /* Frameworks */,
+				05C3A3771B57DFAB002AB49A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DepoShareExtension;
+			productName = DepoShareExtension;
+			productReference = 05C3A3791B57DFAB002AB49A /* DepoShareExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 		05C850A01ACD63F700F976DE /* AutoSyncWidget */ = {
 			isa = PBXNativeTarget;
@@ -3201,6 +3296,15 @@
 					051E1E0D19CAC2F900FD1E03 = {
 						TestTargetID = 051E1DF219CAC2F900FD1E03;
 					};
+					05C3A3781B57DFAB002AB49A = {
+						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = AQ3G89KT47;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
 					05C850A01ACD63F700F976DE = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = AQ3G89KT47;
@@ -3228,6 +3332,7 @@
 				051E1DF219CAC2F900FD1E03 /* Depo */,
 				051E1E0D19CAC2F900FD1E03 /* DepoTests */,
 				05C850A01ACD63F700F976DE /* AutoSyncWidget */,
+				05C3A3781B57DFAB002AB49A /* DepoShareExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -3613,6 +3718,29 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		05C3A3771B57DFAB002AB49A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05028CC91B5A5BED000F2D09 /* TurkcellSaturaDem.ttf in Resources */,
+				05028CCF1B5A5E53000F2D09 /* close_icon.png in Resources */,
+				05028CC71B5A5BE6000F2D09 /* TurkcellSaturaBol.ttf in Resources */,
+				05028CCA1B5A5BEF000F2D09 /* TurkcellSaturaDemIta.ttf in Resources */,
+				05028CBA1B57E62E000F2D09 /* Images.xcassets in Resources */,
+				05028CC61B5A596F000F2D09 /* Localizable.strings in Resources */,
+				05028CCC1B5A5BF4000F2D09 /* TurkcellSaturaMed.ttf in Resources */,
+				05028CCD1B5A5BF9000F2D09 /* TurkcellSaturaMedIta.ttf in Resources */,
+				05C3A3811B57DFAB002AB49A /* MainInterface.storyboard in Resources */,
+				05028CBD1B58F7FD000F2D09 /* yellow_button_bg.png in Resources */,
+				05028CC81B5A5BEA000F2D09 /* TurkcellSaturaBolIta.ttf in Resources */,
+				05028CCB1B5A5BF2000F2D09 /* TurkcellSaturaIta.ttf in Resources */,
+				05028CD01B5A5E56000F2D09 /* close_icon@2x.png in Resources */,
+				05028CBC1B58F697000F2D09 /* yellow_close_button.png in Resources */,
+				05028CBB1B58F694000F2D09 /* yellow_close_button@2x.png in Resources */,
+				05028CCE1B5A5BFB000F2D09 /* TurkcellSaturaReg.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		05C8509F1ACD63F700F976DE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3907,6 +4035,7 @@
 				05501F3819EBBB4600CA9F4E /* AlbumDetailDao.m in Sources */,
 				05DEB1EB1A81775F007793DD /* ContactSyncSDK.m in Sources */,
 				05A938251AF6AE9100AE2892 /* Controller.m in Sources */,
+				05028CD31B5A9866000F2D09 /* SharedUtil.m in Sources */,
 				05DA564C1A56D5B3007D2B1D /* ALAssetRepresentation+MD5.m in Sources */,
 				05AD7F851AD7FD160052153A /* MMWormhole.m in Sources */,
 				05C244331A0243BE000D65D0 /* SortTypeCell.m in Sources */,
@@ -3945,6 +4074,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		05C3A3751B57DFAB002AB49A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05028CC01B595440000F2D09 /* ExtensionUploadManager.m in Sources */,
+				05C3A37F1B57DFAB002AB49A /* ShareViewController.m in Sources */,
+				05028D2A1B5CE9D7000F2D09 /* Reachability.m in Sources */,
+				05028CC31B5A315F000F2D09 /* CustomAlertView.m in Sources */,
+				05028CD41B5A9887000F2D09 /* SharedUtil.m in Sources */,
+				05028CC41B5A3184000F2D09 /* SimpleButton.m in Sources */,
+				05028CC11B595915000F2D09 /* Util.m in Sources */,
+				05028CC51B5A319A000F2D09 /* CustomLabel.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		05C8509D1ACD63F700F976DE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3961,6 +4105,11 @@
 			isa = PBXTargetDependency;
 			target = 051E1DF219CAC2F900FD1E03 /* Depo */;
 			targetProxy = 051E1E1319CAC2F900FD1E03 /* PBXContainerItemProxy */;
+		};
+		05C3A3831B57DFAB002AB49A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 05C3A3781B57DFAB002AB49A /* DepoShareExtension */;
+			targetProxy = 05C3A3821B57DFAB002AB49A /* PBXContainerItemProxy */;
 		};
 		05C850AD1ACD63F700F976DE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -4084,7 +4233,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Mahir Kemal Tarlan (R2478SCTN5)";
+				CODE_SIGN_ENTITLEMENTS = Depo/Depo.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4108,7 +4259,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7f8d2c1e-4236-48f8-bf20-cde201b5bce0";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -4120,7 +4271,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Depo/Depo.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Mahir Kemal Tarlan (R2478SCTN5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4140,7 +4292,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7f8d2c1e-4236-48f8-bf20-cde201b5bce0";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -4224,8 +4376,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_ENTITLEMENTS = "Depo/Depo-AppStore.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
+				CODE_SIGN_ENTITLEMENTS = Depo/Depo.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4245,7 +4398,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "605facd4-4374-4d38-a61f-c6be498c6bd1";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -4306,8 +4459,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_ENTITLEMENTS = "Depo/Depo-Enterprise.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
+				CODE_SIGN_ENTITLEMENTS = Depo/Depo.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4327,7 +4481,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "84a78222-9ab4-4769-a20c-cb5e2fbde3e0";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -4348,6 +4502,101 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
+			};
+			name = Enterprise;
+		};
+		05C3A3851B57DFAC002AB49A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = DepoShareExtension/DepoShareExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = DepoShareExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		05C3A3861B57DFAC002AB49A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = DepoShareExtension/DepoShareExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = DepoShareExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		05C3A3871B57DFAC002AB49A /* AppStore */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = DepoShareExtension/DepoShareExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = DepoShareExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = AppStore;
+		};
+		05C3A3881B57DFAC002AB49A /* Enterprise */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = DepoShareExtension/DepoShareExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = DepoShareExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
 			};
 			name = Enterprise;
 		};
@@ -4465,6 +4714,17 @@
 				051E1E2419CAC2F900FD1E03 /* Release */,
 				0555EF2219F938350068F4CC /* AppStore */,
 				0555EF2519F9383C0068F4CC /* Enterprise */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		05C3A3891B57DFAC002AB49A /* Build configuration list for PBXNativeTarget "DepoShareExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05C3A3851B57DFAC002AB49A /* Debug */,
+				05C3A3861B57DFAC002AB49A /* Release */,
+				05C3A3871B57DFAC002AB49A /* AppStore */,
+				05C3A3881B57DFAC002AB49A /* Enterprise */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
