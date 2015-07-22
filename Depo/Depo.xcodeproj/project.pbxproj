@@ -359,6 +359,10 @@
 		056BEC8C1A8AA7CF00BA0805 /* pre_login_info5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 056BEC821A8AA7CF00BA0805 /* pre_login_info5@2x.png */; };
 		056E2A151A28BC2700C24904 /* XYPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 056E2A141A28BC2700C24904 /* XYPieChart.m */; };
 		05754C141AC711EA00727B42 /* SyncInfoHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05754C131AC711EA00727B42 /* SyncInfoHeaderView.m */; };
+		0576F7E01B5F876D00BD271B /* DepoShareExtension-AppStore.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 0576F7DE1B5F876D00BD271B /* DepoShareExtension-AppStore.entitlements */; };
+		0576F7E11B5F876D00BD271B /* DepoShareExtension-Enterprise.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 0576F7DF1B5F876D00BD271B /* DepoShareExtension-Enterprise.entitlements */; };
+		0576F7E41B5F878E00BD271B /* Info-AppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0576F7E21B5F878E00BD271B /* Info-AppStore.plist */; };
+		0576F7E51B5F878E00BD271B /* Info-Enterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0576F7E31B5F878E00BD271B /* Info-Enterprise.plist */; };
 		057C9D6A1A2B48E6001DDDEC /* contacts_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 057C9D681A2B48E6001DDDEC /* contacts_icon.png */; };
 		057C9D6B1A2B48E6001DDDEC /* contacts_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 057C9D691A2B48E6001DDDEC /* contacts_icon@2x.png */; };
 		057C9D6E1A2B48F8001DDDEC /* musics_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 057C9D6C1A2B48F8001DDDEC /* musics_icon.png */; };
@@ -1246,6 +1250,10 @@
 		056E2A141A28BC2700C24904 /* XYPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPieChart.m; sourceTree = "<group>"; };
 		05754C121AC711EA00727B42 /* SyncInfoHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncInfoHeaderView.h; sourceTree = "<group>"; };
 		05754C131AC711EA00727B42 /* SyncInfoHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncInfoHeaderView.m; sourceTree = "<group>"; };
+		0576F7DE1B5F876D00BD271B /* DepoShareExtension-AppStore.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "DepoShareExtension-AppStore.entitlements"; sourceTree = "<group>"; };
+		0576F7DF1B5F876D00BD271B /* DepoShareExtension-Enterprise.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "DepoShareExtension-Enterprise.entitlements"; sourceTree = "<group>"; };
+		0576F7E21B5F878E00BD271B /* Info-AppStore.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-AppStore.plist"; sourceTree = "<group>"; };
+		0576F7E31B5F878E00BD271B /* Info-Enterprise.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Enterprise.plist"; sourceTree = "<group>"; };
 		057C9D681A2B48E6001DDDEC /* contacts_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = contacts_icon.png; sourceTree = "<group>"; };
 		057C9D691A2B48E6001DDDEC /* contacts_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "contacts_icon@2x.png"; sourceTree = "<group>"; };
 		057C9D6C1A2B48F8001DDDEC /* musics_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = musics_icon.png; sourceTree = "<group>"; };
@@ -3077,6 +3085,8 @@
 		05C3A37A1B57DFAB002AB49A /* DepoShareExtension */ = {
 			isa = PBXGroup;
 			children = (
+				0576F7DE1B5F876D00BD271B /* DepoShareExtension-AppStore.entitlements */,
+				0576F7DF1B5F876D00BD271B /* DepoShareExtension-Enterprise.entitlements */,
 				05C3A38A1B57E362002AB49A /* DepoShareExtension.entitlements */,
 				05C3A37D1B57DFAB002AB49A /* ShareViewController.h */,
 				05C3A37E1B57DFAB002AB49A /* ShareViewController.m */,
@@ -3091,6 +3101,8 @@
 		05C3A37B1B57DFAB002AB49A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0576F7E21B5F878E00BD271B /* Info-AppStore.plist */,
+				0576F7E31B5F878E00BD271B /* Info-Enterprise.plist */,
 				05C3A37C1B57DFAB002AB49A /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -3730,14 +3742,18 @@
 				05028CC61B5A596F000F2D09 /* Localizable.strings in Resources */,
 				05028CCC1B5A5BF4000F2D09 /* TurkcellSaturaMed.ttf in Resources */,
 				05028CCD1B5A5BF9000F2D09 /* TurkcellSaturaMedIta.ttf in Resources */,
+				0576F7E11B5F876D00BD271B /* DepoShareExtension-Enterprise.entitlements in Resources */,
 				05C3A3811B57DFAB002AB49A /* MainInterface.storyboard in Resources */,
 				05028CBD1B58F7FD000F2D09 /* yellow_button_bg.png in Resources */,
 				05028CC81B5A5BEA000F2D09 /* TurkcellSaturaBolIta.ttf in Resources */,
 				05028CCB1B5A5BF2000F2D09 /* TurkcellSaturaIta.ttf in Resources */,
+				0576F7E51B5F878E00BD271B /* Info-Enterprise.plist in Resources */,
 				05028CD01B5A5E56000F2D09 /* close_icon@2x.png in Resources */,
+				0576F7E41B5F878E00BD271B /* Info-AppStore.plist in Resources */,
 				05028CBC1B58F697000F2D09 /* yellow_close_button.png in Resources */,
 				05028CBB1B58F694000F2D09 /* yellow_close_button@2x.png in Resources */,
 				05028CCE1B5A5BFB000F2D09 /* TurkcellSaturaReg.ttf in Resources */,
+				0576F7E01B5F876D00BD271B /* DepoShareExtension-AppStore.entitlements in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4560,9 +4576,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_ENTITLEMENTS = DepoShareExtension/DepoShareExtension.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = "DepoShareExtension/DepoShareExtension-AppStore.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -4572,7 +4588,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "225267d9-c4c9-4128-ba7b-9ee9d00ab12a";
 				SKIP_INSTALL = YES;
 			};
 			name = AppStore;
@@ -4583,9 +4599,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_ENTITLEMENTS = DepoShareExtension/DepoShareExtension.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = "DepoShareExtension/DepoShareExtension-Enterprise.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -4595,7 +4611,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "be3f61b9-47e5-4506-b7bc-71da99b4152c​";
 				SKIP_INSTALL = YES;
 			};
 			name = Enterprise;
