@@ -4588,7 +4588,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "225267d9-c4c9-4128-ba7b-9ee9d00ab12a";
+				PROVISIONING_PROFILE = "9aa503c5-84a8-4ba3-b241-f78364a4748e";
 				SKIP_INSTALL = YES;
 			};
 			name = AppStore;
@@ -4611,7 +4611,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "be3f61b9-47e5-4506-b7bc-71da99b4152c​";
+				PROVISIONING_PROFILE = "1ba59cfd-ac9e-4803-9442-4d152e44ab6f";
 				SKIP_INSTALL = YES;
 			};
 			name = Enterprise;
