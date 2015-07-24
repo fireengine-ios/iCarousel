@@ -4414,7 +4414,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "605facd4-4374-4d38-a61f-c6be498c6bd1";
+				PROVISIONING_PROFILE = "9bd0a13a-3933-4c94-8815-e2ab20ef3700";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -4497,7 +4497,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "84a78222-9ab4-4769-a20c-cb5e2fbde3e0";
+				PROVISIONING_PROFILE = "b962b48d-5298-4ace-84c0-14505e96fca9";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -4588,7 +4588,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9aa503c5-84a8-4ba3-b241-f78364a4748e";
+				PROVISIONING_PROFILE = "cedf489e-5faf-470c-9077-f63efbaad85a";
 				SKIP_INSTALL = YES;
 			};
 			name = AppStore;
@@ -4611,7 +4611,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1ba59cfd-ac9e-4803-9442-4d152e44ab6f";
+				PROVISIONING_PROFILE = "76db3989-d03c-488f-b935-3a3c29b730d4";
 				SKIP_INSTALL = YES;
 			};
 			name = Enterprise;
@@ -4673,7 +4673,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ebee7f2e-ec4c-47d9-96f2-fede74c06a52";
+				PROVISIONING_PROFILE = "1ef7e74d-bf7b-4fcb-bb2a-b28506ace896";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -4693,7 +4693,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "dd78c391-f46b-4f04-afc3-d4705f96db23";
+				PROVISIONING_PROFILE = "bd14f39d-d882-4a6a-8613-42f518aee209";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
