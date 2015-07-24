@@ -8,7 +8,13 @@
 
 #import "SharedUtil.h"
 
-#define SHARED_GROUP_NAME @"group.com.igones"
+#ifdef PLATFORM_STORE
+#define SHARED_GROUP_NAME @"group.com.turkcell.akillidepo"
+#elif defined PLATFORM_ICT
+#define SHARED_GROUP_NAME @"group.com.turkcell.akillideponew.ent"
+#else
+#define SHARED_GROUP_NAME @"group.com.igones.Depo"
+#endif
 #define SHARED_TOKEN_KEY @"SHARED_TOKEN_KEY"
 #define SHARED_REMEMBER_ME_TOKEN_KEY @"SHARED_REMEMBER_ME_TOKEN_KEY"
 #define SHARED_BASE_URL @"SHARED_BASE_URL"
