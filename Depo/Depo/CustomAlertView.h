@@ -18,7 +18,9 @@
 @interface CustomAlertView : UIView
 
 @property (nonatomic, strong) id<CustomAlertDelegate> delegate;
+@property (nonatomic, strong) UIView *modalView;
 
 - (id)initWithFrame:(CGRect)frame withTitle:(NSString *) title withMessage:(NSString *) message withModalType:(ModalType) modalType;
+- (void) reorientateModalView:(CGPoint) newCenterPoint;
 
 @end

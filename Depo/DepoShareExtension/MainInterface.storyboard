@@ -31,15 +31,19 @@
                                 </connections>
                             </button>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" id="0k1-mT-TQO">
-                                <rect key="frame" x="150" y="230" width="20" height="20"/>
+                                <rect key="frame" x="150" y="190" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Gws-c7-pUr">
-                                <rect key="frame" x="10" y="140" width="300" height="200"/>
+                                <rect key="frame" x="10" y="100" width="300" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="5vV-ey-il7">
+                                <rect key="frame" x="10" y="330" width="300" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="R08-zi-563">
-                                <rect key="frame" x="10" y="400" width="300" height="50"/>
+                                <rect key="frame" x="10" y="420" width="300" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="22"/>
                                 <state key="normal" title="Yükle" backgroundImage="yellow_button_bg.png">
@@ -51,7 +55,7 @@
                                 </connections>
                             </button>
                             <view hidden="YES" contentMode="scaleToFill" id="z8d-eY-to5">
-                                <rect key="frame" x="10" y="400" width="300" height="50"/>
+                                <rect key="frame" x="10" y="420" width="300" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" id="sT5-yo-mmQ">
@@ -81,6 +85,7 @@
                     <connections>
                         <outlet property="cancelButton" destination="BMe-vH-Sk6" id="kNC-B3-lHV"/>
                         <outlet property="imageLoadingIndicator" destination="0k1-mT-TQO" id="NIX-sV-Fam"/>
+                        <outlet property="imagesScroll" destination="5vV-ey-il7" id="fUY-eU-weq"/>
                         <outlet property="loadingView" destination="z8d-eY-to5" id="oNi-7Q-gDj"/>
                         <outlet property="previewView" destination="Gws-c7-pUr" id="NQV-zM-W5d"/>
                         <outlet property="progressView" destination="Ipv-Zb-kGD" id="do7-Lg-6IW"/>

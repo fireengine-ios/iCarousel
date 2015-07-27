@@ -21,9 +21,10 @@
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *imageLoadingIndicator;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *uploadIndicator;
 @property (nonatomic, weak) IBOutlet UILabel *uploadingLabel;
-@property (nonatomic, strong) UIImage *sharedImage;
-@property (nonatomic, strong) NSURL *moviePath;
+@property (nonatomic, weak) IBOutlet UIScrollView *imagesScroll;
 @property (nonatomic, strong) CustomAlertView *alertView;
 @property (nonatomic, strong) NSURLSession *httpSession;
+@property (nonatomic, strong) NSMutableArray *urlsToUpload;
+@property (nonatomic) int currentUploadIndex;
 
 @end

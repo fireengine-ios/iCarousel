@@ -23,12 +23,12 @@
         sharedInstance = [[ExtensionUploadManager alloc] init];
         
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        configuration.HTTPMaximumConnectionsPerHost = 1;
         /*
         if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
             configuration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"com.igones.akillidepo.ext.BackgroundUploadSession"];
         } else {
             configuration = [NSURLSessionConfiguration backgroundSessionConfiguration:@"com.igones.akillidepo.ext.BackgroundUploadSession"];
-            configuration.timeoutIntervalForResource = 1200.0f;
         }
          */
         

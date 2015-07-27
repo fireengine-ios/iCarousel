@@ -14,6 +14,7 @@
 @implementation CustomAlertView
 
 @synthesize delegate;
+@synthesize modalView;
 
 - (id)initWithFrame:(CGRect)frame withTitle:(NSString *) title withMessage:(NSString *) message withModalType:(ModalType) modalType {
     self = [super initWithFrame:frame];
@@ -29,7 +30,7 @@
         
         int modalHeight = messageHeight + 140;
 
-        UIView *modalView = [[UIView alloc] initWithFrame:CGRectMake(20, (self.frame.size.height - modalHeight)/2, 280, modalHeight)];
+        modalView = [[UIView alloc] initWithFrame:CGRectMake(20, (self.frame.size.height - modalHeight)/2, 280, modalHeight)];
         modalView.backgroundColor = [UIColor whiteColor];
         
         UIImage *iconImg = nil;
@@ -85,6 +86,10 @@
 - (void) triggerDismiss {
     [delegate didDismissCustomAlert:self];
     [self removeFromSuperview];
+}
+
+- (void) reorientateModalView:(CGPoint) newCenterPoint {
+    modalView.center = newCenterPoint;
 }
 
 /*
