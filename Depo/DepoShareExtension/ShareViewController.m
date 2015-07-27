@@ -191,6 +191,7 @@
                     if([(NSObject*)item isKindOfClass:[UIImage class]]) {
                         sharedImage = (UIImage*)item;
                     }
+                    
                     if(counter == 0) {
                         previewView.image = sharedImage;
                         uploadButton.enabled = YES;

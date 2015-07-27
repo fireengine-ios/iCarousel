@@ -10,6 +10,8 @@
 #import "Util.h"
 #import <CommonCrypto/CommonDigest.h>
 #import "SharedUtil.h"
+#import "ExifContainer.h"
+#import "UIImage+Exif.h"
 
 @implementation ExtensionUploadManager
 
@@ -78,7 +80,10 @@
 }
 
 - (void) startUploadForImage:(UIImage *) img {
-    NSData *data = UIImageJPEGRepresentation(img, 1.0f);
+    ExifContainer *container = [[ExifContainer alloc] init];
+    [container addCreationDate:[NSDate date]];
+    
+    NSData *data = [img addExif:container];
 
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];

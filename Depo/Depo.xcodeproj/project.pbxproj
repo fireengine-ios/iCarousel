@@ -310,6 +310,10 @@
 		05440ADC19D4363D009803D7 /* green_music_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 05440ADA19D4363D009803D7 /* green_music_icon.png */; };
 		05440ADD19D4363D009803D7 /* green_music_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05440ADB19D4363D009803D7 /* green_music_icon@2x.png */; };
 		05440AE019D4445D009803D7 /* FloatingAddButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 05440ADF19D4445D009803D7 /* FloatingAddButton.m */; };
+		0544A0FE1B6619E7006EB9B5 /* ExifContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0544A0FB1B6619E7006EB9B5 /* ExifContainer.m */; };
+		0544A0FF1B6619E7006EB9B5 /* UIImage+Exif.m in Sources */ = {isa = PBXBuildFile; fileRef = 0544A0FD1B6619E7006EB9B5 /* UIImage+Exif.m */; };
+		0544A1001B661A18006EB9B5 /* ExifContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0544A0FB1B6619E7006EB9B5 /* ExifContainer.m */; };
+		0544A1011B661A1B006EB9B5 /* UIImage+Exif.m in Sources */ = {isa = PBXBuildFile; fileRef = 0544A0FD1B6619E7006EB9B5 /* UIImage+Exif.m */; };
 		0546992C19F4E9EA00A87840 /* FileDetailFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0546992B19F4E9EA00A87840 /* FileDetailFooter.m */; };
 		054730C019FA39C300F913FF /* DeleteDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 054730BF19FA39C300F913FF /* DeleteDao.m */; };
 		054730C319FA3D5A00F913FF /* FavoriteDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 054730C219FA3D5A00F913FF /* FavoriteDao.m */; };
@@ -1179,6 +1183,10 @@
 		05440ADB19D4363D009803D7 /* green_music_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green_music_icon@2x.png"; sourceTree = "<group>"; };
 		05440ADE19D4445D009803D7 /* FloatingAddButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FloatingAddButton.h; sourceTree = "<group>"; };
 		05440ADF19D4445D009803D7 /* FloatingAddButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FloatingAddButton.m; sourceTree = "<group>"; };
+		0544A0FA1B6619E7006EB9B5 /* ExifContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExifContainer.h; sourceTree = "<group>"; };
+		0544A0FB1B6619E7006EB9B5 /* ExifContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExifContainer.m; sourceTree = "<group>"; };
+		0544A0FC1B6619E7006EB9B5 /* UIImage+Exif.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Exif.h"; sourceTree = "<group>"; };
+		0544A0FD1B6619E7006EB9B5 /* UIImage+Exif.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Exif.m"; sourceTree = "<group>"; };
 		0546992A19F4E9EA00A87840 /* FileDetailFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileDetailFooter.h; sourceTree = "<group>"; };
 		0546992B19F4E9EA00A87840 /* FileDetailFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileDetailFooter.m; sourceTree = "<group>"; };
 		054730BE19FA39C300F913FF /* DeleteDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeleteDao.h; sourceTree = "<group>"; };
@@ -2408,6 +2416,10 @@
 			children = (
 				05C6C6FF1B3C123C00CB6CE5 /* TTTAttributedLabel.h */,
 				05C6C7001B3C123C00CB6CE5 /* TTTAttributedLabel.m */,
+				0544A0FA1B6619E7006EB9B5 /* ExifContainer.h */,
+				0544A0FB1B6619E7006EB9B5 /* ExifContainer.m */,
+				0544A0FC1B6619E7006EB9B5 /* UIImage+Exif.h */,
+				0544A0FD1B6619E7006EB9B5 /* UIImage+Exif.m */,
 				05A938071AF6AE7C00AE2892 /* TurkcellUpdaterSDK */,
 				05AD7F831AD7FD160052153A /* MMWormhole.h */,
 				05AD7F841AD7FD160052153A /* MMWormhole.m */,
@@ -3808,6 +3820,7 @@
 				05C2A0351A79830500EE4D78 /* ADJTimer.m in Sources */,
 				052644AF19D5A2A600B63759 /* SettingsDocumentsController.m in Sources */,
 				05368B471A4AD29C00B79403 /* SyncManager.m in Sources */,
+				0544A0FF1B6619E7006EB9B5 /* UIImage+Exif.m in Sources */,
 				051E1E5819CAC90700FD1E03 /* AFURLConnectionOperation.m in Sources */,
 				05A938291AF6AE9100AE2892 /* FullyLoaded.m in Sources */,
 				05C2A0371A79830500EE4D78 /* ADJUtil.m in Sources */,
@@ -3933,6 +3946,7 @@
 				051E1E5419CAC90700FD1E03 /* AFImageRequestOperation.m in Sources */,
 				05A9382B1AF6AE9100AE2892 /* MessageView.m in Sources */,
 				05D5E5A21B09D5EC00A22957 /* OfferRedesignCell.m in Sources */,
+				0544A0FE1B6619E7006EB9B5 /* ExifContainer.m in Sources */,
 				05A938281AF6AE9100AE2892 /* FLImageView.m in Sources */,
 				052644B419D5A2A600B63759 /* SettingsConnectedDevicesController.m in Sources */,
 				052A221F19F67FB5000C3C75 /* MBProgressHUD.m in Sources */,
@@ -4100,6 +4114,8 @@
 				05028CC31B5A315F000F2D09 /* CustomAlertView.m in Sources */,
 				05028CD41B5A9887000F2D09 /* SharedUtil.m in Sources */,
 				05028CC41B5A3184000F2D09 /* SimpleButton.m in Sources */,
+				0544A1001B661A18006EB9B5 /* ExifContainer.m in Sources */,
+				0544A1011B661A1B006EB9B5 /* UIImage+Exif.m in Sources */,
 				05028CC11B595915000F2D09 /* Util.m in Sources */,
 				05028CC51B5A319A000F2D09 /* CustomLabel.m in Sources */,
 			);

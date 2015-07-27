@@ -446,14 +446,6 @@
         [SyncManager sharedInstance].queueCountDelegate = self;
         [[SyncManager sharedInstance] remainingQueueCount];
     }
-
-    [[UploadQueue sharedInstance] cancelAllUploadsUpdateReferences:NO];
-
-    if (self.backgroundSessionCompletionHandler) {
-        void (^completionHandler)() = self.backgroundSessionCompletionHandler;
-        self.backgroundSessionCompletionHandler = nil;
-        completionHandler();
-    }
 }
 
 - (UploadManager *) findByTaskId:(long) taskId {
@@ -560,6 +552,14 @@
         }
         
         [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+    }
+
+    [[UploadQueue sharedInstance] cancelAllUploadsUpdateReferences:NO];
+    
+    if (self.backgroundSessionCompletionHandler) {
+        void (^completionHandler)() = self.backgroundSessionCompletionHandler;
+        self.backgroundSessionCompletionHandler = nil;
+        completionHandler();
     }
 }
 

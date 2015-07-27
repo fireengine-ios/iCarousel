@@ -265,8 +265,6 @@
 }
 
 - (void) remainingQueueCount {
-    NSTimeInterval timeInMilisecondsStart = [[NSDate date] timeIntervalSince1970];
-
     NSArray *localHashList = [SyncUtil readSyncHashLocally];
     NSArray *remoteHashList = [SyncUtil readSyncHashRemotely];
     NSArray *remoteSummaryList = [SyncUtil readSyncFileSummaries];
@@ -296,7 +294,6 @@
                     }
                 }];
             } else {
-                NSTimeInterval timeInMilisecondsEnd = [[NSDate date] timeIntervalSince1970];
                 [queueCountDelegate syncManagerNumberOfImagesInQueue:waitingInQueueCount];
             }
         } failureBlock:^(NSError *error) {
