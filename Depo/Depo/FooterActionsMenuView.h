@@ -15,6 +15,8 @@
 - (void) footerActionMenuDidSelectDelete:(FooterActionsMenuView *) menu;
 - (void) footerActionMenuDidSelectMove:(FooterActionsMenuView *) menu;
 - (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu;
+- (void) footerActionMenuDidSelectPrint:(FooterActionsMenuView *)menu;
+
 @end
 
 @interface FooterActionsMenuView : UIView
@@ -23,7 +25,9 @@
 @property (nonatomic, strong) CustomButton *shareButton;
 @property (nonatomic, strong) CustomButton *moveButton;
 @property (nonatomic, strong) CustomButton *deleteButton;
+@property (nonatomic,strong) CustomButton *printButton;
 
-- (id) initWithFrame:(CGRect)frame shouldShowShare:(BOOL) shareFlag shouldShowMove:(BOOL) moveFlag shouldShowDelete:(BOOL) deleteFlag;
+- (id) initWithFrame:(CGRect)frame shouldShowShare:(BOOL) shareFlag shouldShowMove:(BOOL) moveFlag shouldShowDelete:(BOOL) deleteFlag shouldShowPrint:(BOOL) printFlag;
+
 
 @end

@@ -423,7 +423,7 @@
     if(footerActionMenu) {
         [footerActionMenu removeFromSuperview];
     }
-    footerActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60) shouldShowShare:NO shouldShowMove:NO shouldShowDelete:YES];
+    footerActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60) shouldShowShare:NO shouldShowMove:NO shouldShowDelete:YES shouldShowPrint:NO];
     footerActionMenu.delegate = self;
     footerActionMenu.hidden = YES;
     [self.view addSubview:footerActionMenu];

@@ -15,6 +15,7 @@
 #import "BaseViewController.h"
 #import "MapUtil.h"
 #import "UploadingImagePreviewController.h"
+#import "PrintWebViewController.h"
 
 #define IMG_FOOTER_TAG 111
 #define ALBUM_FOOTER_TAG 222
@@ -491,7 +492,7 @@
     if(albumFooterActionMenu) {
         albumFooterActionMenu.hidden = NO;
     } else {
-        albumFooterActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60) shouldShowShare:NO shouldShowMove:NO shouldShowDelete:YES];
+        albumFooterActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60) shouldShowShare:NO shouldShowMove:NO shouldShowDelete:YES shouldShowPrint:YES];
         albumFooterActionMenu.tag = ALBUM_FOOTER_TAG;
         albumFooterActionMenu.delegate = self;
         [self.view addSubview:albumFooterActionMenu];
@@ -831,6 +832,24 @@
     [self pushProgressViewWithProcessMessage:NSLocalizedString(@"AlbumMovePhotoProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"AlbumMovePhotoSuccessMessage", @"") andFailMessage:NSLocalizedString(@"AlbumMovePhotoFailMessage", @"")];
 
 }
+
+- (void) footerActionMenuDidSelectPrint:(FooterActionsMenuView *)menu {
+    NSMutableArray *printList = [[NSMutableArray alloc] init];
+    for (int i = 0; i<[photoList count]; i++) {
+        MetaFile *tempFile = [photoList objectAtIndex:i];
+        for (int j = 0;j< [selectedFileList count]; j++) {
+            if ([tempFile.uuid isEqualToString:[selectedFileList objectAtIndex:j]]) {
+                [printList addObject:tempFile];
+            }
+        }
+        
+    }
+    //[printDao requestForPrintPhotos:printList];
+    PrintWebViewController *printController = [[PrintWebViewController alloc] initWithUrl:@"http://akillidepo.cellograf.com" withFileList:printList];
+    [self.nav pushViewController:printController animated:YES];
+    
+}
+
 
 #pragma mark ConfirmDeleteModalDelegate methods
 

@@ -41,6 +41,9 @@
 
 #import "UpdaterController.h"
 
+#import <AVFoundation/AVFoundation.h>
+#import <AudioToolbox/AudioToolbox.h>
+
 //TODO info'larda version update
 
 #define NO_CONN_ALERT_TAG 111
@@ -118,7 +121,8 @@
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginRequiredNotificationRaised) name:LOGIN_REQ_NOTIFICATION object:nil];
-
+    
+   
 //    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
 //    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
     

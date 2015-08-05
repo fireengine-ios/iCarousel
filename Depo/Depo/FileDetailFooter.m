@@ -15,6 +15,7 @@
 @synthesize shareButton;
 @synthesize deleteButton;
 @synthesize separatorView;
+@synthesize printButton;
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -32,6 +33,11 @@
         deleteButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 40, (self.frame.size.height - 21)/2, 20, 21) withImageName:@"white_delete_icon.png"];
         [deleteButton addTarget:self action:@selector(deleteClicked) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:deleteButton];
+        
+        printButton = [[CustomButton alloc] initWithFrame:CGRectMake(60, (self.frame.size.height - 22)/2, 22, 23) withImageName:@"white_print_icon.png"];
+        [printButton addTarget:self action:@selector(printClicked) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:printButton];
+
     }
     return self;
 }
@@ -49,6 +55,11 @@
 - (void) deleteClicked {
     [delegate fileDetailFooterDidTriggerDelete];
 }
+
+- (void) printClicked {
+    [delegate fileDetailFooterDidTriggerPrint];
+}
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

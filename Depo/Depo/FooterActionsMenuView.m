@@ -15,12 +15,13 @@
 @synthesize shareButton;
 @synthesize moveButton;
 @synthesize deleteButton;
+@synthesize printButton;
 
 - (id) initWithFrame:(CGRect)frame {
-    return [self initWithFrame:frame shouldShowShare:YES shouldShowMove:YES shouldShowDelete:YES];
+    return [self initWithFrame:frame shouldShowShare:YES shouldShowMove:YES shouldShowDelete:YES shouldShowPrint:YES];
 }
 
-- (id) initWithFrame:(CGRect)frame shouldShowShare:(BOOL) shareFlag shouldShowMove:(BOOL) moveFlag shouldShowDelete:(BOOL) deleteFlag {
+- (id) initWithFrame:(CGRect)frame shouldShowShare:(BOOL) shareFlag shouldShowMove:(BOOL) moveFlag shouldShowDelete:(BOOL) deleteFlag shouldShowPrint:(BOOL)printFlag {
     if(self = [super initWithFrame:frame]) {
         self.backgroundColor = [Util UIColorForHexColor:@"363e4f"];
         
@@ -31,7 +32,7 @@
         }
         
         if(moveFlag) {
-            moveButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width/2 - 32, 20, 64, 20) withImageName:@"white_move_icon.png" withSideTitle:NSLocalizedString(@"MoveTitle", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[UIColor whiteColor]];
+            moveButton = [[CustomButton alloc] initWithFrame:CGRectMake(100, 20, 80, 20) withImageName:@"white_move_icon.png" withSideTitle:NSLocalizedString(@"MoveTitle", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[UIColor whiteColor]];
             [moveButton addTarget:self action:@selector(moveClicked) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:moveButton];
         }
@@ -41,6 +42,12 @@
             [deleteButton addTarget:self action:@selector(deleteClicked) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:deleteButton];
         }
+        if (printFlag) {
+            printButton = [[CustomButton alloc] initWithFrame:CGRectMake(185, 20, 80, 20) withImageName:@"white_print_icon.png" withSideTitle:NSLocalizedString(@"Print", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[UIColor whiteColor] ];
+            [printButton addTarget:self action:@selector(printClicked) forControlEvents:UIControlEventTouchUpInside];
+            [self addSubview:printButton];
+        }
+
     }
     return self;
 }
@@ -56,6 +63,11 @@
 - (void) deleteClicked {
     [delegate footerActionMenuDidSelectDelete:self];
 }
+
+- (void) printClicked {
+    [delegate footerActionMenuDidSelectPrint:self];
+}
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

@@ -713,6 +713,11 @@
 		05EA75B819DC78C800AC77AB /* UploadDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EA75B719DC78C800AC77AB /* UploadDao.m */; };
 		05EAB3D21AB6E350009A1543 /* ContactCountDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EAB3D11AB6E350009A1543 /* ContactCountDao.m */; };
 		05F4AA281A2F7692000F41B8 /* ActivityUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F4AA271A2F7692000F41B8 /* ActivityUtil.m */; };
+		2443E1541B6BB0C5001C274D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2443E1531B6BB0C5001C274D /* AudioToolbox.framework */; };
+		2443E1571B6BB5F3001C274D /* AudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2443E1561B6BB5F3001C274D /* AudioManager.m */; };
+		24FE7B0B1B6A539D007B53A0 /* PrintWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24FE7B0A1B6A539D007B53A0 /* PrintWebViewController.m */; };
+		24FE7B0E1B6A5A98007B53A0 /* white_print_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 24FE7B0C1B6A5A98007B53A0 /* white_print_icon.png */; };
+		24FE7B0F1B6A5A98007B53A0 /* white_print_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24FE7B0D1B6A5A98007B53A0 /* white_print_icon@2x.png */; };
 		562FB3F71AA48C4400F9EFBD /* CurioAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 562FB3D91AA48C4400F9EFBD /* CurioAction.m */; };
 		562FB3F81AA48C4400F9EFBD /* CurioActionToolkit.m in Sources */ = {isa = PBXBuildFile; fileRef = 562FB3DB1AA48C4400F9EFBD /* CurioActionToolkit.m */; };
 		562FB3F91AA48C4400F9EFBD /* CurioConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 562FB3DD1AA48C4400F9EFBD /* CurioConstants.m */; };
@@ -1774,6 +1779,13 @@
 		05EAB3D11AB6E350009A1543 /* ContactCountDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactCountDao.m; sourceTree = "<group>"; };
 		05F4AA261A2F7692000F41B8 /* ActivityUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityUtil.h; sourceTree = "<group>"; };
 		05F4AA271A2F7692000F41B8 /* ActivityUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityUtil.m; sourceTree = "<group>"; };
+		2443E1531B6BB0C5001C274D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		2443E1551B6BB5F3001C274D /* AudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioManager.h; sourceTree = "<group>"; };
+		2443E1561B6BB5F3001C274D /* AudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioManager.m; sourceTree = "<group>"; };
+		24FE7B091B6A539D007B53A0 /* PrintWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrintWebViewController.h; sourceTree = "<group>"; };
+		24FE7B0A1B6A539D007B53A0 /* PrintWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrintWebViewController.m; sourceTree = "<group>"; };
+		24FE7B0C1B6A5A98007B53A0 /* white_print_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white_print_icon.png; sourceTree = "<group>"; };
+		24FE7B0D1B6A5A98007B53A0 /* white_print_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "white_print_icon@2x.png"; sourceTree = "<group>"; };
 		562FB3D81AA48C4400F9EFBD /* CurioAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioAction.h; sourceTree = "<group>"; };
 		562FB3D91AA48C4400F9EFBD /* CurioAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioAction.m; sourceTree = "<group>"; };
 		562FB3DA1AA48C4400F9EFBD /* CurioActionToolkit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioActionToolkit.h; sourceTree = "<group>"; };
@@ -1824,6 +1836,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2443E1541B6BB0C5001C274D /* AudioToolbox.framework in Frameworks */,
 				053685FF1AA990DF007EBB23 /* MobileCoreServices.framework in Frameworks */,
 				05C2A0491A7989CD00EE4D78 /* CoreTelephony.framework in Frameworks */,
 				05C2A0471A7989AD00EE4D78 /* SplunkMint-iOS.framework in Frameworks */,
@@ -1911,6 +1924,7 @@
 		051E1DF519CAC2F900FD1E03 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2443E1531B6BB0C5001C274D /* AudioToolbox.framework */,
 				053685FE1AA990DF007EBB23 /* MobileCoreServices.framework */,
 				053B8E8A1A7AE7DE004E6456 /* Metal.framework */,
 				05C2A0481A7989CD00EE4D78 /* CoreTelephony.framework */,
@@ -2085,6 +2099,8 @@
 				05AD502A1A7ED75500C40777 /* TermsController.m */,
 				05AD502C1A7ED76200C40777 /* MigrateStatusController.h */,
 				05AD502D1A7ED76200C40777 /* MigrateStatusController.m */,
+				24FE7B091B6A539D007B53A0 /* PrintWebViewController.h */,
+				24FE7B0A1B6A539D007B53A0 /* PrintWebViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -2589,6 +2605,8 @@
 				056090E31AC5A44000710211 /* ReachabilityManager.m */,
 				0560F46D1B00D5D0005E6936 /* LocationManager.h */,
 				0560F46E1B00D5D0005E6936 /* LocationManager.m */,
+				2443E1551B6BB5F3001C274D /* AudioManager.h */,
+				2443E1561B6BB5F3001C274D /* AudioManager.m */,
 			);
 			name = manager;
 			sourceTree = "<group>";
@@ -2605,6 +2623,8 @@
 		0589060219CC226500A9E517 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				24FE7B0C1B6A5A98007B53A0 /* white_print_icon.png */,
+				24FE7B0D1B6A5A98007B53A0 /* white_print_icon@2x.png */,
 				05C6C7051B3C212A00CB6CE5 /* tamam_rollover@1x.png */,
 				05C6C7061B3C212A00CB6CE5 /* tamam_rollover@2x.png */,
 				05C6C7071B3C212A00CB6CE5 /* tamam_rollover@3x.png */,
@@ -3403,6 +3423,7 @@
 				05224AAF19DC4A2D00214767 /* photos_videos_icon@2x.png in Resources */,
 				05440ADD19D4363D009803D7 /* green_music_icon@2x.png in Resources */,
 				0526448B19D5A26400B63759 /* camera_icon@2x.png in Resources */,
+				24FE7B0F1B6A5A98007B53A0 /* white_print_icon@2x.png in Resources */,
 				058219D81A3850E2001FA679 /* close_icon.png in Resources */,
 				051CB3F619D2F71200E5FC88 /* document_icon.png in Resources */,
 				05A9382E1AF6AE9100AE2892 /* updater_strings.plist in Resources */,
@@ -3682,6 +3703,7 @@
 				563FB1BE1AA5EB030066F8E6 /* settings_icon@2x.png in Resources */,
 				0526449319D5A26400B63759 /* syncing_icon@2x.png in Resources */,
 				058219DE1A386829001FA679 /* nav_favourite_active_icon.png in Resources */,
+				24FE7B0E1B6A5A98007B53A0 /* white_print_icon.png in Resources */,
 				05AF7C951A1CA04E00F5011A /* white_right_arrow_icon@2x.png in Resources */,
 				056BEC8C1A8AA7CF00BA0805 /* pre_login_info5@2x.png in Resources */,
 				050A7B1A19F7CBB600B084B9 /* volume_full.png in Resources */,
@@ -3905,6 +3927,7 @@
 				0546992C19F4E9EA00A87840 /* FileDetailFooter.m in Sources */,
 				05A4845F1A6C614300793A90 /* UIImage+RoundedCorner.m in Sources */,
 				051E1E0719CAC2F900FD1E03 /* AppDelegate.m in Sources */,
+				24FE7B0B1B6A539D007B53A0 /* PrintWebViewController.m in Sources */,
 				0555EF1A19F8F50B0068F4CC /* ConfirmDeleteModalController.m in Sources */,
 				05C0E2011A06ABD7005E1E92 /* MoveModalFooterView.m in Sources */,
 				05A938241AF6AE9100AE2892 /* Configuration.m in Sources */,
@@ -3956,6 +3979,7 @@
 				052644B019D5A2A600B63759 /* SettingsMusicController.m in Sources */,
 				05C2A02E1A79830500EE4D78 /* ADJConfig.m in Sources */,
 				051E1E8719CAC92700FD1E03 /* ASIDataCompressor.m in Sources */,
+				2443E1571B6BB5F3001C274D /* AudioManager.m in Sources */,
 				051E1E5619CAC90700FD1E03 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				051E1EB119CB20FC00FD1E03 /* MetaMenu.m in Sources */,
 				058911161A139DAF00BF6A52 /* PhotoAlbumListModalController.m in Sources */,
@@ -4265,7 +4289,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_ENTITLEMENTS = Depo/Depo.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Mahir Kemal Tarlan (R2478SCTN5)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mahir Kemal Tarlan (R2478SCTN5)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
@@ -4291,7 +4314,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "dbf62cd4-df32-49b5-9a9c-922c6462d09a";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -4324,7 +4347,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "dbf62cd4-df32-49b5-9a9c-922c6462d09a";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -4348,6 +4371,7 @@
 				);
 				INFOPLIST_FILE = "DepoTests/DepoTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "dbf62cd4-df32-49b5-9a9c-922c6462d09a";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -4366,6 +4390,7 @@
 				GCC_PREFIX_HEADER = "Depo/Depo-Prefix.pch";
 				INFOPLIST_FILE = "DepoTests/DepoTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "dbf62cd4-df32-49b5-9a9c-922c6462d09a";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -4449,6 +4474,7 @@
 				GCC_PREFIX_HEADER = "Depo/Depo-Prefix.pch";
 				INFOPLIST_FILE = "DepoTests/DepoTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "dbf62cd4-df32-49b5-9a9c-922c6462d09a";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -4532,6 +4558,7 @@
 				GCC_PREFIX_HEADER = "Depo/Depo-Prefix.pch";
 				INFOPLIST_FILE = "DepoTests/DepoTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "dbf62cd4-df32-49b5-9a9c-922c6462d09a";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -4543,7 +4570,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_ENTITLEMENTS = DepoShareExtension/DepoShareExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Mahir Kemal Tarlan (R2478SCTN5)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mahir Kemal Tarlan (R2478SCTN5)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -4559,7 +4585,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "dbf62cd4-df32-49b5-9a9c-922c6462d09a";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -4583,7 +4609,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "dbf62cd4-df32-49b5-9a9c-922c6462d09a";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -4640,7 +4666,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_ENTITLEMENTS = AutoSyncWidget/AutoSyncWidget.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Mahir Kemal Tarlan (R2478SCTN5)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mahir Kemal Tarlan (R2478SCTN5)";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -4653,7 +4678,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7f8d2c1e-4236-48f8-bf20-cde201b5bce0";
+				PROVISIONING_PROFILE = "dbf62cd4-df32-49b5-9a9c-922c6462d09a";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -4673,7 +4698,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7f8d2c1e-4236-48f8-bf20-cde201b5bce0";
+				PROVISIONING_PROFILE = "dbf62cd4-df32-49b5-9a9c-922c6462d09a";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

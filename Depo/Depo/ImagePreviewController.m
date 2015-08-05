@@ -11,6 +11,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "AppDelegate.h"
 #import "BaseViewController.h"
+#import "PrintWebViewController.h"
 
 @interface ImagePreviewController ()
 
@@ -103,6 +104,13 @@
 
 - (void) fileDetailFooterDidTriggerShare {
     [self triggerShareForFiles:@[self.file.uuid]];
+}
+
+- (void) fileDetailFooterDidTriggerPrint {
+    NSArray *tempArr = [NSArray arrayWithObject:file];
+    PrintWebViewController *printController = [[PrintWebViewController alloc] initWithUrl:@"http://akillidepo.cellograf.com/" withFileList:tempArr];
+    [self.nav pushViewController:printController animated:YES];
+    
 }
 
 - (void) moreClicked {
