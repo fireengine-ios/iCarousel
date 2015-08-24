@@ -38,5 +38,7 @@
 + (NSString *) userUniqueValueByBaseUrl:(NSString *) baseUrl;
 + (NSString *) readDocumentsPathForFileName:(NSString *)name;
 + (void) sendLocalNotificationForDate:(NSDate *) dateToSend withMessage:(NSString *) msg;
-
++ (BOOL) shouldShowNewFeatures;
++ (BOOL) checkIsUpdate;
++ (BOOL) checkAndSetFlags:(NSString *) flagKey;
 @end

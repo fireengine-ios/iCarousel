@@ -21,6 +21,8 @@
 
 @synthesize delegate;
 @synthesize file;
+@synthesize files;
+@synthesize cursor;
 
 - (id)initWithFile:(MetaFile *) _file {
     self = [super init];
@@ -86,6 +88,198 @@
     }
     return self;
 }
+
+- (id) initWithFiles:(NSArray *)_files withImage:(MetaFile *)_file withListOffset:(int)offset {
+    self = [super init];
+    if (self) {
+        self.files = [_files mutableCopy];
+        self.file = _file;
+        cursor = [self findCursorValue];
+        listOffSet = offset;
+        self.title = self.file.visibleName;
+        self.view.backgroundColor = [Util UIColorForHexColor:@"191e24"];
+        
+        self.view.autoresizesSubviews = YES;
+        self.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        
+        elasticSearchDao = [[ElasticSearchDao alloc] init];
+        elasticSearchDao.delegate = self;
+        elasticSearchDao.successMethod = @selector(photoListSuccessCallback:);
+        elasticSearchDao.failMethod = @selector(photoListFailCallback:);
+        
+        deleteDao = [[DeleteDao alloc] init];
+        deleteDao.delegate = self;
+        deleteDao.successMethod = @selector(deleteSuccessCallback);
+        deleteDao.failMethod = @selector(deleteFailCallback:);
+        
+        favDao = [[FavoriteDao alloc] init];
+        favDao.delegate = self;
+        favDao.successMethod = @selector(favSuccessCallback:);
+        favDao.failMethod = @selector(favFailCallback:);
+        
+        renameDao = [[RenameDao alloc] init];
+        renameDao.delegate = self;
+        renameDao.successMethod = @selector(renameSuccessCallback:);
+        renameDao.failMethod = @selector(renameFailCallback:);
+        
+        shareDao = [[ShareLinkDao alloc] init];
+        shareDao.delegate = self;
+        shareDao.successMethod = @selector(shareSuccessCallback:);
+        shareDao.failMethod = @selector(shareFailCallback:);
+        
+        mainScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex - 60)];
+        mainScroll.delegate = self;
+        mainScroll.maximumZoomScale = 5.0f;
+        [self.view addSubview:mainScroll];
+        
+        imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, mainScroll.frame.size.width, mainScroll.frame.size.height)];
+        imgView.contentMode = UIViewContentModeScaleAspectFit;
+        NSString *imgUrlStr = [self.file.tempDownloadUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        if(self.file.detail && self.file.detail.thumbLargeUrl) {
+            imgUrlStr = [self.file.detail.thumbLargeUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        }
+        [self showLoading];
+        __weak ImagePreviewController *weakSelf = self;
+        [imgView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:imgUrlStr]] placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+            [weakSelf hideLoading];
+        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+            [weakSelf hideLoading];
+        }];
+        /*
+         [imgView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:imgUrlStr]] placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+         imgView.image = [UIImage imageWithCGImage:[image CGImage] scale:1.0 orientation: UIImageOrientationUp];
+         } failure:nil];
+         */
+        [mainScroll addSubview:imgView];
+        
+        footer = [[FileDetailFooter alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60)];
+        footer.delegate = self;
+        [self.view addSubview:footer];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(orientationChanged:)    name:UIDeviceOrientationDidChangeNotification  object:nil];
+        
+        UISwipeGestureRecognizer * swipeleft=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeLeft:)];
+        swipeleft.direction=UISwipeGestureRecognizerDirectionLeft;
+        [self.view addGestureRecognizer:swipeleft];
+        
+        UISwipeGestureRecognizer * swiperight=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeRight:)];
+        swiperight.direction=UISwipeGestureRecognizerDirectionRight;
+        [self.view addGestureRecognizer:swiperight];
+        
+    }
+    return self;
+}
+
+#pragma mark gesture recognizers methods
+
+- (void) swipeLeft:(UISwipeGestureRecognizer*) gestureRecognizer  {
+    if (cursor == [self.files count]) {
+        return;
+    }
+    else{
+        [self seekPhotoInFiles:YES];
+        [self loadImageView:self.file];
+    }
+
+}
+
+- (void) swipeRight :(UISwipeGestureRecognizer *) gestureRecognizer {
+    if (cursor == 0) {
+        return;
+    }
+    else{
+        [self seekPhotoInFiles:NO];
+        [self loadImageView:self.file];
+    }
+}
+
+#pragma mark photo swipe actions
+
+- (void) loadImageView:(MetaFile *) image {
+    NSString *imgUrlStr = [image.tempDownloadUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    if(image.detail && image.detail.thumbLargeUrl) {
+        imgUrlStr = [image.detail.thumbLargeUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    }
+    [self showLoading];
+    __weak ImagePreviewController *weakSelf = self;
+    [imgView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:imgUrlStr]] placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        [weakSelf hideLoading];
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+        [weakSelf hideLoading];
+    }];
+    
+    self.title = self.file.name;
+}
+
+- (int) findCursorValue{
+   
+    MetaFile *tempFile = [MetaFile alloc];
+    int cursorFound = 0;
+    for (int i = 0; i<[self.files count]; i++) {
+        tempFile = [self.files objectAtIndex:i];
+        if ([tempFile.uuid isEqualToString:self.file.uuid]) {
+            cursorFound = i;
+        }
+    }
+    return cursorFound;
+}
+
+- (BOOL) checkFileIsPhoto:(MetaFile *) isPhoto {
+    if (isPhoto.contentType == ContentTypePhoto) {
+        return YES;
+    }
+    else
+        return NO;
+}
+
+- (void) seekPhotoInFiles:(BOOL) isLeftSwipe {
+        if (!isLeftSwipe) {
+            if (cursor == 0) {
+                return;
+            }else {
+                cursor--;
+                MetaFile *tempFile = [self.files objectAtIndex:cursor];
+                if ([self checkFileIsPhoto:tempFile]) {
+                    self.file = tempFile;
+                }
+                else {
+                    [self seekPhotoInFiles:NO];
+                }
+            }
+        }
+        else {
+            if (cursor == [self.files count]-1) {
+                [self dynamicallyLoadNextPage];
+                [self loadImageView:self.file];
+            } else{
+                cursor++;
+                MetaFile *tempFile = [self.files objectAtIndex:cursor];
+                if ([self checkFileIsPhoto:tempFile]) {
+                    self.file = tempFile;
+                }
+                else {
+                    [self seekPhotoInFiles:YES];
+                }
+
+            }
+        }
+}
+
+- (void) dynamicallyLoadNextPage {
+    listOffSet ++;
+    [elasticSearchDao requestPhotosForPage:listOffSet andSize:21 andSortType:APPDELEGATE.session.sortType];
+}
+
+- (void) photoListSuccessCallback:(NSArray *) moreFiles {
+    [self hideLoading];
+    [self.files addObjectsFromArray:moreFiles];
+}
+
+- (void) photoListFailCallback:(NSString *) errorMessage {
+    [self hideLoading];
+    [self showErrorAlertWithMessage:errorMessage];
+}
+
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
     return imgView;

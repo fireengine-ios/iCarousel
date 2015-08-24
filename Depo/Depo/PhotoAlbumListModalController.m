@@ -88,7 +88,7 @@
 
 - (void) prepareAndSetNavigationTitleView {
     UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 160, 40)];
-    CustomLabel *subTitleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, 0, titleView.frame.size.width, 16) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:14] withColor:[UIColor whiteColor] withText:NSLocalizedString(@"MoveModalSubTitleForAlbum", @"")];
+    CustomLabel *subTitleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, 0, titleView.frame.size.width, 16) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:14] withColor:[UIColor whiteColor] withText:NSLocalizedString(@"MoveModalSubTitleForAlbumNew", @"")];
     subTitleLabel.textAlignment = NSTextAlignmentCenter;
     [titleView addSubview:subTitleLabel];
     CustomLabel *mainTitleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, 18, titleView.frame.size.width, 22) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:18] withColor:[UIColor whiteColor] withText:NSLocalizedString(@"AlbumsTitle", @"")];

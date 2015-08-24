@@ -18,7 +18,7 @@
 @synthesize printButton;
 
 - (id) initWithFrame:(CGRect)frame {
-    return [self initWithFrame:frame shouldShowShare:YES shouldShowMove:YES shouldShowDelete:YES shouldShowPrint:YES];
+    return [self initWithFrame:frame shouldShowShare:YES shouldShowMove:YES shouldShowDelete:YES shouldShowPrint:NO];
 }
 
 - (id) initWithFrame:(CGRect)frame shouldShowShare:(BOOL) shareFlag shouldShowMove:(BOOL) moveFlag shouldShowDelete:(BOOL) deleteFlag shouldShowPrint:(BOOL)printFlag {
@@ -43,7 +43,7 @@
             [self addSubview:deleteButton];
         }
         if (printFlag) {
-            printButton = [[CustomButton alloc] initWithFrame:CGRectMake(185, 20, 80, 20) withImageName:@"white_print_icon.png" withSideTitle:NSLocalizedString(@"Print", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[UIColor whiteColor] ];
+            printButton = [[CustomButton alloc] initWithFrame:CGRectMake(185, 20, 80, 20) withImageName:@"white_print_icon.png" withSideTitle:NSLocalizedString(@"PrintTitle", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[UIColor whiteColor] ];
             [printButton addTarget:self action:@selector(printClicked) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:printButton];
         }
@@ -51,6 +51,39 @@
     }
     return self;
 }
+
+- (id) initWithFrame:(CGRect)frame shouldShowShare:(BOOL) shareFlag shouldShowMove:(BOOL) moveFlag shouldShowDelete:(BOOL) deleteFlag shouldShowPrint:(BOOL)printFlag isMoveAlbum:(BOOL) moveRename {
+    if(self = [super initWithFrame:frame]) {
+        self.backgroundColor = [Util UIColorForHexColor:@"363e4f"];
+        
+        if(shareFlag) {
+            shareButton = [[CustomButton alloc] initWithFrame:CGRectMake(15, 19, 80, 22) withImageName:@"white_share_icon.png" withSideTitle:NSLocalizedString(@"ShareTitle", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[UIColor whiteColor]];
+            [shareButton addTarget:self action:@selector(shareClicked) forControlEvents:UIControlEventTouchUpInside];
+            [self addSubview:shareButton];
+        }
+        
+        if(moveFlag) {
+            CGFloat width = [Util calculateWidthForText:NSLocalizedString(@"MoveToAlbum", @"") forHeight:20 forFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15]];
+            moveButton = [[CustomButton alloc] initWithFrame:CGRectMake(shareButton.frame.size.width+5,20 , width+30,20 ) withImageName:@"white_move_icon.png" withSideTitle:NSLocalizedString(@"AddToAlbumTitle", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[UIColor whiteColor]];
+            [moveButton addTarget:self action:@selector(moveClicked) forControlEvents:UIControlEventTouchUpInside];
+            [self addSubview:moveButton];
+        }
+        
+        if(deleteFlag) {
+            deleteButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 35, 19, 20, 21) withImageName:@"white_delete_icon.png"];
+            [deleteButton addTarget:self action:@selector(deleteClicked) forControlEvents:UIControlEventTouchUpInside];
+            [self addSubview:deleteButton];
+        }
+        if (printFlag) {
+            printButton = [[CustomButton alloc] initWithFrame:CGRectMake(moveButton.frame.origin.x+moveButton.frame.size.width+5, 20, 80, 20) withImageName:@"white_print_icon.png" withSideTitle:NSLocalizedString(@"PrintTitle", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[UIColor whiteColor] ];
+            [printButton addTarget:self action:@selector(printClicked) forControlEvents:UIControlEventTouchUpInside];
+            [self addSubview:printButton];
+        }
+        
+    }
+    return self;
+}
+
 
 - (void) shareClicked {
     [delegate footerActionMenuDidSelectShare:self];
@@ -66,6 +99,18 @@
 
 - (void) printClicked {
     [delegate footerActionMenuDidSelectPrint:self];
+}
+
+- (void) hidePrintIcon {
+    if (self.printButton) {
+        self.printButton.hidden = YES;
+    }
+}
+
+- (void) showPrintIcon {
+    if (self.printButton) {
+        self.printButton.hidden = NO;
+    }
 }
 
 

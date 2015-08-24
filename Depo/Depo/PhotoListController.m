@@ -37,6 +37,7 @@
 @synthesize selectedAlbumList;
 @synthesize imgFooterActionMenu;
 @synthesize albumFooterActionMenu;
+@synthesize photoCount;
 
 - (id)init {
     self = [super init];
@@ -72,6 +73,8 @@
         albumAddPhotosDao.delegate = self;
         albumAddPhotosDao.successMethod = @selector(photosAddedSuccessCallback);
         albumAddPhotosDao.failMethod = @selector(photosAddedFailCallback:);
+        
+        photoCount = 0;
         
         selectedFileList = [[NSMutableArray alloc] init];
         selectedAlbumList = [[NSMutableArray alloc] init];
@@ -413,7 +416,7 @@
 
 - (void) squareImageWasSelectedForFile:(MetaFile *)fileSelected {
     if(fileSelected.contentType == ContentTypePhoto) {
-        ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFile:fileSelected];
+        ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFiles:photoList withImage:fileSelected withListOffset:listOffset];
         detail.delegate = self;
         MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
         detail.nav = modalNav;
@@ -440,6 +443,18 @@
         [self hideImgFooterMenu];
         self.title = NSLocalizedString(@"SelectFilesTitle", @"");
     }
+    if (fileSelected.contentType == ContentTypeVideo) {
+        if (photoCount == 0) {
+            [imgFooterActionMenu hidePrintIcon];
+        }
+        else{
+            [imgFooterActionMenu showPrintIcon];
+        }
+    }
+    else {
+        photoCount++;
+        [imgFooterActionMenu showPrintIcon];
+    }
 }
 
 - (void) squareImageWasUnmarkedForFile:(MetaFile *)fileSelected {
@@ -453,7 +468,23 @@
         [self hideImgFooterMenu];
         self.title = NSLocalizedString(@"SelectFilesTitle", @"");
     }
+    if (fileSelected.contentType == ContentTypePhoto) {
+        photoCount--;
+    }
+    if (photoCount == 0) {
+        [imgFooterActionMenu hidePrintIcon];
+    }
 }
+
+- (BOOL) checkIfSelectedFileListContainsPhoto {
+    if (photoCount > 0) {
+        return YES;
+    }
+    else {
+        return NO;
+    }
+}
+
 
 - (void) squareImageUploadFinishedForFile:(NSString *) fileUuid {
     if([[[UploadQueue sharedInstance] uploadImageRefs] count] == 0) {
@@ -477,7 +508,7 @@
     if(imgFooterActionMenu) {
         imgFooterActionMenu.hidden = NO;
     } else {
-        imgFooterActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60)];
+        imgFooterActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60) shouldShowShare:YES shouldShowMove:YES shouldShowDelete:YES shouldShowPrint:YES isMoveAlbum:YES];
         imgFooterActionMenu.tag = IMG_FOOTER_TAG;
         imgFooterActionMenu.delegate = self;
         [self.view addSubview:imgFooterActionMenu];
@@ -492,7 +523,7 @@
     if(albumFooterActionMenu) {
         albumFooterActionMenu.hidden = NO;
     } else {
-        albumFooterActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60) shouldShowShare:NO shouldShowMove:NO shouldShowDelete:YES shouldShowPrint:YES];
+        albumFooterActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60) shouldShowShare:NO shouldShowMove:NO shouldShowDelete:YES shouldShowPrint:NO];
         albumFooterActionMenu.tag = ALBUM_FOOTER_TAG;
         albumFooterActionMenu.delegate = self;
         [self.view addSubview:albumFooterActionMenu];
@@ -654,7 +685,7 @@
 
 - (void) newAlbumModalDidTriggerNewAlbumWithName:(NSString *)albumName {
     [addAlbumDao requestAddAlbumWithName:albumName];
-    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"AlbumAddProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"AlbumAddSuccessMessage", @"") andFailMessage:NSLocalizedString(@"AlbumAddFailMessage", @"")];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"AlbumAddProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"MoveSuccessMessageNew", @"") andFailMessage:NSLocalizedString(@"AlbumAddFailMessage", @"")];
 }
 
 - (void) photoModalDidTriggerUploadForUrls:(NSArray *)assetUrls {
@@ -829,7 +860,7 @@
 
 - (void) albumModalDidSelectAlbum:(NSString *)albumUuid {
     [albumAddPhotosDao requestAddPhotos:selectedFileList toAlbum:albumUuid];
-    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"AlbumMovePhotoProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"AlbumMovePhotoSuccessMessage", @"") andFailMessage:NSLocalizedString(@"AlbumMovePhotoFailMessage", @"")];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"AlbumMovePhotoProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"MoveSuccessMessageNew", @"") andFailMessage:NSLocalizedString(@"AlbumMovePhotoFailMessage", @"")];
 
 }
 
@@ -839,7 +870,9 @@
         MetaFile *tempFile = [photoList objectAtIndex:i];
         for (int j = 0;j< [selectedFileList count]; j++) {
             if ([tempFile.uuid isEqualToString:[selectedFileList objectAtIndex:j]]) {
-                [printList addObject:tempFile];
+                if(tempFile.contentType == ContentTypePhoto){
+                    [printList addObject:tempFile];
+                }
             }
         }
         

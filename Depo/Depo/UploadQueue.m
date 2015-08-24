@@ -35,6 +35,7 @@
             configuration.timeoutIntervalForResource = GENERAL_TASK_TIMEOUT;
         }
         
+//        configuration.HTTPMaximumConnectionsPerHost = 1;
         configuration.sessionSendsLaunchEvents = YES;
         sharedInstance.session = [NSURLSession sessionWithConfiguration:configuration delegate:sharedInstance delegateQueue:[NSOperationQueue mainQueue]];
     });
@@ -371,6 +372,9 @@
             [currentManager removeTemporaryFile];
             currentManager.uploadRef.hasFinished = YES;
             [currentManager notifyUpload];
+        } else {
+            //TODO: tek dosya uploadu oldugu icin upload bitiminde documents folder altindaki temp dosyalarinin hepsini temizliyoruz. Eger paralel upload sayisi 1'den fazla olursa bu kismin silinmesi gerekiyor.
+            [APPDELEGATE removeAllMediaFiles];
         }
     } else {
         BOOL shouldDeleteHash = YES;
@@ -399,28 +403,38 @@
                 if(shouldDeleteHash) {
                     [SyncUtil removeLocalHash:task.taskDescription];
                 }
+                //TODO: tek dosya uploadu oldugu icin upload bitiminde documents folder altindaki temp dosyalarinin hepsini temizliyoruz. Eger paralel upload sayisi 1'den fazla olursa bu kismin silinmesi gerekiyor.
+                [APPDELEGATE removeAllMediaFiles];
             }
         } else if(httpResp.statusCode == 413) {
             if(shouldDeleteHash) {
                 [SyncUtil removeLocalHash:task.taskDescription];
             }
+            
             if(currentManager != nil) {
                 currentManager.uploadRef.hasFinished = YES;
                 currentManager.uploadRef.hasFinishedWithError = YES;
                 [currentManager removeTemporaryFile];
                 [currentManager.delegate uploadManagerQuotaExceedForAsset:currentManager.uploadRef.assetUrl];
                 [self uploadManager:currentManager didFinishUploadingWithSuccess:NO];
+            } else {
+                //TODO: tek dosya uploadu oldugu icin upload bitiminde documents folder altindaki temp dosyalarinin hepsini temizliyoruz. Eger paralel upload sayisi 1'den fazla olursa bu kismin silinmesi gerekiyor.
+                [APPDELEGATE removeAllMediaFiles];
             }
         } else {
             if(shouldDeleteHash) {
                 [SyncUtil removeLocalHash:task.taskDescription];
             }
+            
             if(currentManager != nil) {
                 currentManager.uploadRef.hasFinished = YES;
                 currentManager.uploadRef.hasFinishedWithError = YES;
                 [currentManager removeTemporaryFile];
                 [currentManager.delegate uploadManagerDidFailUploadingForAsset:currentManager.uploadRef.assetUrl];
                 [self uploadManager:currentManager didFinishUploadingWithSuccess:NO];
+            } else {
+                //TODO: tek dosya uploadu oldugu icin upload bitiminde documents folder altindaki temp dosyalarinin hepsini temizliyoruz. Eger paralel upload sayisi 1'den fazla olursa bu kismin silinmesi gerekiyor.
+                [APPDELEGATE removeAllMediaFiles];
             }
         }
         //cancel the task if suspended or running in case of error

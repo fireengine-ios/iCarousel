@@ -533,7 +533,13 @@
         [[UploadQueue sharedInstance].session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
         }];
         
-//    } else {
+    } else {
+        
+        [[UploadQueue sharedInstance].session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
+            if (!uploadTasks || [uploadTasks count] == 0) {
+                [self removeAllMediaFiles];
+            }
+        }];
         // eğer backgrounddan gelmiyorsa bir sonraki auto sync bloğununun okunmasını engelleyen lock kaldırılıyor
 //        [SyncUtil unlockAutoSyncBlockInProgress];
     }
@@ -592,6 +598,45 @@ void uncaughtExceptionHandler(NSException *exception) {
 - (void) alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     if(alertView.tag == NO_CONN_ALERT_TAG) {
         [self triggerLogout];
+    }
+}
+
+-(void) removeAllMediaFiles
+{
+    /*NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+     NSString *documentsDirectory = [paths objectAtIndex:0];
+     NSFileManager *fm = [NSFileManager defaultManager];
+     NSArray *dirContents = [fm contentsOfDirectoryAtPath:documentsDirectory error:nil];
+     for (int i = 0; i< [dirContents count]; i++) {
+     NSLog(@"%@",[dirContents objectAtIndex:i]);
+     
+     }*/
+
+    NSFileManager  *manager = [NSFileManager defaultManager];
+    
+    // the preferred way to get the apps documents directory
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    
+    // grab all the files in the documents dir
+    NSArray *allFiles = [manager contentsOfDirectoryAtPath:documentsDirectory error:nil];
+    
+    // filter the array for only sqlite files
+    NSPredicate *fltrDepoUploadLeaks = [NSPredicate predicateWithFormat:@"self CONTAINS 'DEPO_UPLOAD_FILE'"];
+    NSArray *leakFiles = [allFiles filteredArrayUsingPredicate:fltrDepoUploadLeaks];
+        //NSPredicate *fltr = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:fltr3GP,fltrGIF,fltrJPEG,fltrMOV,fltrMp3,fltrMP4,fltrPNG, nil]];
+    //NSArray *mediaFiles = [allFiles filteredArrayUsingPredicate:fltr];
+    
+    // use fast enumeration to iterate the array and delete the files
+    for (NSString *file in leakFiles)
+    {
+        // NSError *error = nil;
+        //[manager removeItemAtPath:[documentsDirectory stringByAppendingPathComponent:sqliteFile] error:&error];
+        //NSAssert(!error, @"Assertion: SQLite file deletion shall never throw an error.");
+        NSString *path = file;
+        NSString *leakFilePath = [documentsDirectory stringByAppendingPathComponent:path];
+        [manager removeItemAtPath:leakFilePath error:nil];
+
     }
 }
 

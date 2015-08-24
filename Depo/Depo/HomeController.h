@@ -17,8 +17,9 @@
 #import "ContactCountDao.h"
 #import "AccountDao.h"
 #import "OnkatDepoPopUP.h"
+#import "CustomAdvertisementView.h"
 
-@interface HomeController : MyViewController <RecentActivityLinkerDelegate, XYPieChartDelegate, XYPieChartDataSource, OnKatViewDeleagate> {
+@interface HomeController : MyViewController <RecentActivityLinkerDelegate, XYPieChartDelegate, XYPieChartDataSource, OnKatViewDeleagate,CustomAdvertisementDelegate> {
     UsageInfoDao *usageDao;
     ContactCountDao *contactCountDao;
     AccountDao *accountDao;
@@ -38,5 +39,7 @@
 @property (nonatomic, strong) UsageButton *otherButton;
 @property (nonatomic, strong) UsageButton *contactButton;
 @property (nonatomic, strong) OnkatDepoPopUP *onkatView;
+@property (nonatomic, strong) Subscription *currentSubscription;
+@property (nonatomic, strong) CustomAdvertisementView *advertisementView;
 
 @end

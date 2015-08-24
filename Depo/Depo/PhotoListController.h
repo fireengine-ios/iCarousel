@@ -59,5 +59,6 @@
 
 @property (nonatomic, strong) FooterActionsMenuView *imgFooterActionMenu;
 @property (nonatomic, strong) FooterActionsMenuView *albumFooterActionMenu;
+@property int photoCount;
 
 @end

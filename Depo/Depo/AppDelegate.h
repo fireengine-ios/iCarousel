@@ -47,5 +47,7 @@
 - (void) startAutoSync;
 - (void) stopAutoSync;
 - (void) startOpeningPage;
+- (void) removeAllMediaFiles;
+
 
 @end

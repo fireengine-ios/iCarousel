@@ -198,6 +198,26 @@ Stuff; \
 _Pragma("clang diagnostic pop") \
 } while (0)
 
+#define DIALOGUE_P1_FLAG @"P1Flag"
+#define DIALOGUE_P2_FLAG @"P2Flag"
+#define DIALOGUE_P3_FLAG @"P3Flag"
+#define DIALOGUE_P4_FLAG @"P4Flag"
+#define DIALOGUE_P5_FLAG @"P5Flag"
+#define DIALOGUE_P6_FLAG @"P6Flag"
+#define DIALOGUE_P7_FLAG @"P7Flag"
+#define DIALOGUE_P8_FLAG @"P8Flag"
+
+#define SYSTEM_VERSION_KEY @"VERSION_NUMBER"
+#define NEW_FEATURES_FLAG_KEY @"NEW_FEATURES_FLAG"
+
+#define STANDART_PAKET_KEY @"standard";
+#define DEMO_PAKET_KEY @"demo";
+#define PREMIUM_PAKET_KEY @"premium";
+#define ULTIMATE_PAKET_KEY @"ultimate";
+#define TURKCELL_PHONE_PAKET_KEY @"turkcellphone";
+#define TURKCELL_PLATINIUM_PAKET_KEY @"platiniumpaket";
+
+
 typedef enum {
 	LoginTypeRadius = 0,
 	LoginTypeWebSifre
@@ -359,6 +379,15 @@ typedef enum {
     UploadStarterPageList,
     UploadStarterPageAuto
 } UploadStarterPage;
+
+typedef enum {
+    PackageInfo1GB = 1,
+    PackageInfo5GB,
+    PackageInfo500GB,
+    PackageInfoMini,
+    PackageInfoStandart,
+    PackageInfoMegaPaket
+} PackageInfo;
 
 @interface AppConstants : NSObject
 

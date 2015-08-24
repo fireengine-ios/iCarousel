@@ -158,8 +158,8 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     
     NSString *randomVal = [NSString stringWithFormat:@"%.0f%d", [[NSDate date] timeIntervalSince1970], arc4random_uniform(99)];
-    NSString *tempPath = [documentsDirectory stringByAppendingFormat:@"/%@_%@", randomVal, self.asset.defaultRepresentation.filename];
-    NSString *tempThumbnailPath = [documentsDirectory stringByAppendingFormat:@"/thumb_%@_%@", randomVal, self.asset.defaultRepresentation.filename];
+    NSString *tempPath = [documentsDirectory stringByAppendingFormat:@"/DEPO_UPLOAD_FILE%@_%@", randomVal, self.asset.defaultRepresentation.filename];
+    NSString *tempThumbnailPath = [documentsDirectory stringByAppendingFormat:@"/DEPO_UPLOAD_FILEthumb_%@_%@", randomVal, self.asset.defaultRepresentation.filename];
 
     self.uploadRef.tempUrl = tempPath;
     self.uploadRef.tempThumbnailUrl = tempThumbnailPath;
@@ -262,6 +262,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     NSFileManager *fileManager = [NSFileManager defaultManager];
     [fileManager removeItemAtPath:self.uploadRef.tempUrl error:nil];
     [fileManager removeItemAtPath:self.uploadRef.tempThumbnailUrl error:nil];
+    NSLog(@"Removed From File Path");
 }
 
 - (NSMutableURLRequest *) prepareRequestSetVideo:(BOOL) isVideo {

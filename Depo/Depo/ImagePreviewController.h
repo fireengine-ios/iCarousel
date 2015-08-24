@@ -15,6 +15,7 @@
 #import "FavoriteDao.h"
 #import "RenameDao.h"
 #import "ShareLinkDao.h"
+#import "ElasticSearchDao.h"
 
 @protocol ImagePreviewDelegate <NSObject>
 - (void) previewedImageWasDeleted:(MetaFile *) deletedFile;
@@ -25,16 +26,21 @@
     FileDetailFooter *footer;
     CustomButton *moreButton;
     UIScrollView *mainScroll;
-
+    
+    ElasticSearchDao *elasticSearchDao;
     DeleteDao *deleteDao;
     FavoriteDao *favDao;
     RenameDao *renameDao;
     ShareLinkDao *shareDao;
+    int listOffSet;
 }
 
 @property (nonatomic, strong) id<ImagePreviewDelegate> delegate;
 @property (nonatomic, strong) MetaFile *file;
+@property (nonatomic, strong) NSMutableArray *files;
+@property int cursor;
 
 - (id)initWithFile:(MetaFile *) _file;
+- (id)initWithFiles:(NSArray *) _files withImage:(MetaFile *) _file withListOffset:(int) offset ;
 
 @end

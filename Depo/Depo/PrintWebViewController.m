@@ -10,6 +10,8 @@
 #import "PrintWebViewController.h"
 #import "MetaFile.h"
 #import "SyncUtil.h"
+#import "ASIFormDataRequest.h"
+
 static const NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
 @interface PrintWebViewController ()
@@ -22,7 +24,7 @@ static const NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRS
     if (self = [super init]) {
         NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[self createPhotoJson:fileList],@"data", nil];
         
-        NSMutableURLRequest *printRequest = [self requestWithGet:dict];
+        NSMutableURLRequest *printRequest = [self requestWithPost:dict];
         UIWebView *printWeb = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
         printWeb.scalesPageToFit = YES;
         [self.view addSubview:printWeb];
@@ -30,6 +32,10 @@ static const NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRS
         
     }
     return self;
+}
+
+- (BOOL) shouldAutorotate {
+    return NO;
 }
 
 - (NSMutableURLRequest *) requestWithGet:(NSDictionary *) dictionary {
@@ -56,19 +62,18 @@ static const NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRS
 
 - (NSMutableURLRequest *) requestWithPost:(NSDictionary *) dictionary {
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary options:0 error:nil];
-    //NSString *urlWithData = @"http://akillidepo.cellograf.com/?";
-    NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    NSString *str = [NSString stringWithFormat:@"jsonPhotos=%@",jsonStr];
-    NSData *myData = [str dataUsingEncoding:NSUTF8StringEncoding];
-    NSString *webStr = [str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSURL *finalUrl = [NSURL URLWithString:webStr];
+    NSString *urlString = @"http://akillidepo.cellograf.com";
+    NSString *encodedURLString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    NSURL *finalUrl = [NSURL URLWithString:encodedURLString];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:finalUrl];
-    [request setHTTPBody:myData];
+    [request setHTTPBody:jsonData];
     [request setHTTPMethod:@"POST"];
     [request setTimeoutInterval:30];
     [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    
+    [request addValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request addValue:[NSString stringWithFormat:@"%lu",(unsigned long)[jsonData length]] forHTTPHeaderField:@"Content-Length"];
+
     return request;
 }
 
@@ -81,8 +86,8 @@ static const NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRS
     NSMutableArray *photos = [[NSMutableArray alloc] init];
     for (int i = 0; i<[fileList count]; i++) {
         MetaFile *tempFile = [fileList objectAtIndex:i];
-        NSString *thumb =tempFile.detail.thumbMediumUrl ;
-        NSString *original = tempFile.tempDownloadUrl;
+        NSString *thumb =[tempFile.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSString *original = [tempFile.tempDownloadUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *tempDict = [NSDictionary dictionaryWithObjectsAndKeys:thumb,@"thumb",original,@"original" ,nil];
         [photos addObject:tempDict];
     }

@@ -534,4 +534,47 @@
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
 }
 
++ (BOOL) checkIsUpdate {
+    //NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
+    NSString *version = @"2.5";
+    NSString *oldVersion = [[NSUserDefaults standardUserDefaults] objectForKey:SYSTEM_VERSION_KEY];
+    if (oldVersion) {
+        if ([version isEqualToString:oldVersion]) {
+            return NO;
+        }
+        else {
+            [[NSUserDefaults standardUserDefaults] setObject:version forKey:SYSTEM_VERSION_KEY];
+            return YES;
+        }
+    }
+    else {
+        [[NSUserDefaults standardUserDefaults] setObject:version forKey:SYSTEM_VERSION_KEY];
+        return NO;
+    }
+}
+
++ (BOOL) shouldShowNewFeatures {
+    BOOL newFeaturesFlag = NO;
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:NEW_FEATURES_FLAG_KEY]) {
+        newFeaturesFlag = [[NSUserDefaults standardUserDefaults] boolForKey:NEW_FEATURES_FLAG_KEY];
+        return newFeaturesFlag;
+    }
+    else {
+        newFeaturesFlag = YES;
+        [[NSUserDefaults standardUserDefaults] setBool:newFeaturesFlag forKey:NEW_FEATURES_FLAG_KEY];
+        return newFeaturesFlag;
+    }
+}
+
++ (BOOL) checkAndSetFlags:(NSString *) flagKey {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:flagKey]) {
+        return [[NSUserDefaults standardUserDefaults] boolForKey:flagKey];
+    }
+    else {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:flagKey];
+        return YES;
+    }
+}
+
+
 @end

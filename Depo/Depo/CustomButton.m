@@ -89,7 +89,7 @@
         bgImgView.image = bgImg;
         [self addSubview:bgImgView];
         
-        titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(bgImg.size.width + 10, (self.frame.size.height - (font.lineHeight  + 5))/2, self.frame.size.width - bgImg.size.width - 10, font.lineHeight  + 5)];
+        titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(bgImg.size.width + 5, (self.frame.size.height - (font.lineHeight  + 5))/2, self.frame.size.width - bgImg.size.width , font.lineHeight  + 5)];
         titleLabel.text = title;
         titleLabel.backgroundColor = [UIColor clearColor];
         titleLabel.font = font;

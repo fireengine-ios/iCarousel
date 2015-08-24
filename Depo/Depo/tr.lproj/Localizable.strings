@@ -448,6 +448,9 @@
 
 "ShareTitle"="Paylaş";
 "MoveTitle"="Taşı";
+"MoveToAlbum"="Albüme Ekle";
+"MovedAlbumTitle"="Eklenecek Albüm";
+"PhotosAddedToAlbum"="Fotoğraflar Albüme eklendi.";
 
 "ContactBackupInfo"="Telefon rehberinizdeki kayıtları Akıllı Depo'ya yükleyebilirsiniz";
 "ContactRestoreInfo"="Akıllı Depo'daki rehber kayıtlarınızı telefonunuza indirebilirsiniz";
@@ -501,3 +504,25 @@
 "UploadSuccess"="Dosya başarıyla yüklendi.";
 "UploadInProgress"="Yükleniyor...";
 "ExtLoginRequiredMessage"="Önce uygulamadan giriş yapmalısınız.";
+
+"PrintTitle"="Yazdır";
+"MoveModalSubTitleForAlbumNew"="Eklenecek Albüm";
+"AddToAlbumTitle"="Albüme ekle";
+"MoveSuccessMessageNew"="Fotoğraflar albüme eklendi.";
+
+"WelcomePackage1GB"="Akıllı Depo’dan hediye 1GB ek hafızanız kullanıma hazır!";
+"PlatinPackage500GBTitle"="PLATINIUM AYRICALIĞI!";
+"PlatinPackage500GB"="Size ozel ucretsiz 500 GB ek hafıza Akıllı Depo’dan hediye!";
+"TurkcellPhone5GB"=" Telefonumu iyi ki Turkcell’den almışım demek için bir neden daha Akıllı Depo’dan 5 GB ek hafıza hediye";
+"StorageOver80Title"="Paketinizin %80'i doldu";
+"StorageOver80"="En avantajlı ek hafıza paketlerinden yararlanmak için Paketlerim sayfasini ziyaret edebilirsiniz.";
+"StorageOver90Title"="Paketinizin %90'i doldu";
+"StorageOver90"="En avantajlı ek hafıza paketlerinden yararlanmak için Paketlerim sayfasini ziyaret edebilirsiniz.";
+"StorageFull100Title"="AKILLI DEPO HAFIZANIZI DOLDURDUNUZ!";
+"StorageFull100"="En avantajlı ek hafıza paketlerinden yararlanmak için Paketlerim sayfasini ziyaret edebilirsiniz.";
+"NewVersionNewFeaturesTitle"="SİZİN İÇİN YENİLENDİK!";
+"NewVersionNewFeatures"="Uygulamanızı hemen güncelleyin Akıllı Depo’nuzu yeni özellikleriyle kullanmaya devam edin.";
+"CancelButtonTittle"= "İptal";
+"MoreStorageButtonTitle"="Ek Hafıza";
+
+"CloseTitle"="Kapat";

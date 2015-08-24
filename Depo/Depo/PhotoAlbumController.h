@@ -15,6 +15,7 @@
 #import "SquareImageView.h"
 #import "FooterActionsMenuView.h"
 #import "ShareLinkDao.h"
+#import "AddAlbumDao.h"
 #import "ImagePreviewController.h"
 
 @protocol PhotoAlbumDelegate <NSObject>
@@ -27,6 +28,7 @@
     DeleteAlbumsDao *deleteDao;
     AlbumRemovePhotosDao *deleteImgDao;
     ShareLinkDao *shareDao;
+    AlbumAddPhotosDao *albumAddPhotosDao;
     
     UIImageView *emptyBgImgView;
     CustomButton *moreButton;
@@ -39,6 +41,8 @@
     BOOL isLoading;
     BOOL isSelectible;
     BOOL contentModified;
+    
+    MyNavigationController *printNav;
 }
 
 @property (nonatomic, strong) id<PhotoAlbumDelegate> delegate;

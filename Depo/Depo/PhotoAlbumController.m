@@ -15,6 +15,7 @@
 #import "AppDelegate.h"
 #import "BaseViewController.h"
 #import "UploadingImagePreviewController.h"
+#import "PrintWebViewController.h"
 
 @interface PhotoAlbumController ()
 
@@ -60,7 +61,12 @@
         shareDao.delegate = self;
         shareDao.successMethod = @selector(shareSuccessCallback:);
         shareDao.failMethod = @selector(shareFailCallback:);
-
+        
+        albumAddPhotosDao = [[AlbumAddPhotosDao alloc] init];
+        albumAddPhotosDao.delegate = self;
+        albumAddPhotosDao.successMethod = @selector(photosAddedSuccessCallback);
+        albumAddPhotosDao.failMethod = @selector(photosAddedFailCallback:);
+        
         selectedFileList = [[NSMutableArray alloc] init];
 
         photoList = [[NSMutableArray alloc] init];
@@ -215,6 +221,7 @@
     if([[[UploadQueue sharedInstance] uploadImageRefsForAlbum:self.album.uuid] count] == 0) {
         contentModified = YES;
         [self triggerRefresh];
+        [self proceedSuccessForProgressView];
     }
 }
 
@@ -382,7 +389,7 @@
     if(footerActionMenu) {
         footerActionMenu.hidden = NO;
     } else {
-        footerActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60) shouldShowShare:NO shouldShowMove:NO shouldShowDelete:YES shouldShowPrint:YES];
+        footerActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60) shouldShowShare:YES shouldShowMove:YES shouldShowDelete:YES shouldShowPrint:YES];
         footerActionMenu.delegate = self;
         [self.view addSubview:footerActionMenu];
     }
@@ -431,6 +438,8 @@
 
 #pragma mark FooterMenuDelegate methods
 
+
+
 - (void) footerActionMenuDidSelectDelete:(FooterActionsMenuView *) menu {
     if([CacheUtil showConfirmDeletePageFlag]) {
         for(UIView *innerView in [photosScroll subviews]) {
@@ -450,10 +459,58 @@
 }
 
 - (void) footerActionMenuDidSelectMove:(FooterActionsMenuView *) menu {
+    [APPDELEGATE.base showPhotoAlbums];
 }
 
+- (void) albumModalDidSelectAlbum:(NSString *)albumUuid {
+    [albumAddPhotosDao requestAddPhotos:selectedFileList toAlbum:albumUuid];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"AlbumMovePhotoProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"MoveSuccessMessageNew", @"") andFailMessage:NSLocalizedString(@"AlbumMovePhotoFailMessage", @"")];
+    
+}
+
+
+
 - (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {
-    [APPDELEGATE.base triggerShareForFiles:selectedFileList];
+    MetaFile *shareObject = [[MetaFile alloc] init];
+    if ([selectedFileList count] == 1) {
+        for (id fileIndex in photoList) {
+            if ([fileIndex isKindOfClass:[MetaFile class]]) {
+                MetaFile *tempFile = (MetaFile *) fileIndex;
+                if ([tempFile.uuid isEqualToString:[selectedFileList objectAtIndex:0]]) {
+                    shareObject = tempFile;
+                }
+            }
+        }
+        [APPDELEGATE.base triggerShareForFileObjects:@[shareObject]];
+    } else {
+        [APPDELEGATE.base triggerShareForFiles:selectedFileList];
+    }
+    //[APPDELEGATE.base triggerShareForFiles:selectedFileList];
+}
+
+- (void) footerActionMenuDidSelectPrint:(FooterActionsMenuView *)menu {
+    NSMutableArray *printList = [[NSMutableArray alloc] init];
+    for (int i = 0; i<[photoList count]; i++) {
+        MetaFile *tempFile = [photoList objectAtIndex:i];
+        for (int j = 0;j< [selectedFileList count]; j++) {
+            if ([tempFile.uuid isEqualToString:[selectedFileList objectAtIndex:j]]) {
+                if(tempFile.contentType == ContentTypePhoto){
+                    [printList addObject:tempFile];
+                }
+            }
+        }
+        
+    }
+    //[printDao requestForPrintPhotos:printList];
+    PrintWebViewController *printController = [[PrintWebViewController alloc] initWithUrl:@"http://akillidepo.cellograf.com" withFileList:printList];
+    printNav = [[MyNavigationController alloc] initWithRootViewController:printController];
+    printController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"CloseTitle", @"") style:UIBarButtonItemStyleDone target:self action:@selector(closePrintPage)];
+    [self.nav presentViewController:printNav animated:YES completion:nil];
+    
+}
+
+- (void) closePrintPage {
+    [printNav dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark ConfirmDeleteModalDelegate methods
