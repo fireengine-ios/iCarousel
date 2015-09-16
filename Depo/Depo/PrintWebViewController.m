@@ -11,6 +11,7 @@
 #import "MetaFile.h"
 #import "SyncUtil.h"
 #import "ASIFormDataRequest.h"
+#import "CurioSDK.h"
 
 static const NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
@@ -22,6 +23,9 @@ static const NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRS
 
 - (id) initWithUrl:(NSString *)url withFileList:(NSArray *)fileList{
     if (self = [super init]) {
+        
+        [[CurioSDK shared] sendEvent:@"PhotoPrint" eventValue:[NSString stringWithFormat:@"%lu",(unsigned long)[fileList count]]];
+        
         NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[self createPhotoJson:fileList],@"data", nil];
         
         NSMutableURLRequest *printRequest = [self requestWithPost:dict];
