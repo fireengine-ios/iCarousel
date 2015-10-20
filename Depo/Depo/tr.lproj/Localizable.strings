@@ -505,7 +505,7 @@
 "UploadInProgress"="Yükleniyor...";
 "ExtLoginRequiredMessage"="Önce uygulamadan giriş yapmalısınız.";
 
-"PrintTitle"="Yazdır";
+"PrintTitle"="Baskı Al";
 "MoveModalSubTitleForAlbumNew"="Eklenecek Albüm";
 "AddToAlbumTitle"="Albüme ekle";
 "MoveSuccessMessageNew"="Fotoğraflar albüme eklendi.";
@@ -526,3 +526,4 @@
 "MoreStorageButtonTitle"="Ek Hafıza";
 
 "CloseTitle"="Kapat";
+"PrintBackTitle"="Fotoğraflarıma Geri Dön";

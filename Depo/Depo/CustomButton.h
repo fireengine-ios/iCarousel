@@ -19,5 +19,6 @@
 - (id)initWithFrame:(CGRect)frame withImageName:(NSString *) imageName withSideTitle:(NSString *) title withFont:(UIFont *) font withColor:(UIColor *) textColor;
 - (void) changeTextColor:(UIColor *) newColor;
 - (void) updateImage:(NSString *) newImgName;
+- (id)initWithFrame:(CGRect)frame withImageName:(NSString *) imageName withTitle:(NSString *) title withFont:(UIFont *) font withColor:(UIColor *) textColor isMultipleLine:(BOOL) multiple ;
 
 @end

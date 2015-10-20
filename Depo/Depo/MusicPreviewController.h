@@ -16,12 +16,13 @@
 #import "DeleteDao.h"
 #import "FavoriteDao.h"
 #import "RenameDao.h"
+#import "ShareLinkDao.h"
 
 @protocol MusicPreviewDelegate <NSObject>
 - (void) previewedMusicWasDeleted;
 @end
 
-@interface MusicPreviewController : MyViewController <VolumeSliderDelegate> {
+@interface MusicPreviewController : MyViewController <VolumeSliderDelegate,FileDetailDelegate> {
     CustomButton *moreButton;
     CustomLabel *titleLabel;
     CustomLabel *detailLabel;
@@ -29,6 +30,7 @@
     DeleteDao *deleteDao;
     FavoriteDao *favDao;
     RenameDao *renameDao;
+    ShareLinkDao *shareDao;
     
     int currentItemPlace;
 }

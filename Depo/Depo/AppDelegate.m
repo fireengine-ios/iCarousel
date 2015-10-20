@@ -43,6 +43,7 @@
 
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
+#import "BgViewController.h"
 
 //TODO info'larda version update
 
@@ -66,6 +67,7 @@
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
         [application setStatusBarStyle:UIStatusBarStyleLightContent];
     }
+    [self.window setRootViewController:[BgViewController alloc]];
     
 #ifdef LOG2FILE
     [self logToFiles];
@@ -87,7 +89,7 @@
     //BugSense integration
     [[Mint sharedInstance] initAndStartSession:@"13ceffcf"];
 
-    //Curio integration
+    //Curio integrationc
     [[CurioSDK shared] startSession:@"http://curio.turkcell.com.tr/api/v2" apiKey:@"cab314f33df2514764664e5544def586" trackingCode:@"KL2XNFIE" sessionTimeout:4 periodicDispatchEnabled:YES dispatchPeriod:1 maxCachedActivitiyCount:1000 loggingEnabled:YES logLevel:3 registerForRemoteNotifications:YES notificationTypes:@"Sound,Badge,Alert" fetchLocationEnabled:NO maxValidLocationTimeInterval:0 appLaunchOptions:launchOptions]; // Live
 
     [[CurioSDK shared] sendEvent:@"ApplicationStarted" eventValue:@"true"];

@@ -54,7 +54,8 @@
         
         nameField = [[GeneralTextField alloc] initWithFrame:CGRectMake(20, yIndex, 280, 43) withPlaceholder:NSLocalizedString(@"FileNamePlaceholder", @"")];
         nameField.delegate = self;
-        nameField.text = self.file.name;
+        NSString *fileNameWithoutExtension = [self.file.name stringByDeletingPathExtension];
+        nameField.text = fileNameWithoutExtension;
         [mainScroll addSubview:nameField];
         
         yIndex += 63;
@@ -188,7 +189,10 @@
 
 - (void) triggerDone {
     NSString *finalName = nameField.text;
-    if(![finalName isEqualToString:self.file.name]) {
+    NSString *filePath = [self.file.name pathExtension];
+    NSString *addedDot = [finalName stringByAppendingString:@"."];
+    NSString *finalNameWithExtension = [addedDot stringByAppendingString:filePath];
+    if(![finalNameWithExtension isEqualToString:self.file.name]) {
         [delegate fileDetailShouldRename:finalName];
     }
     [self dismissViewControllerAnimated:YES completion:nil];

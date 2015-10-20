@@ -139,6 +139,9 @@
         case MoreMenuTypeDownloadImage:
             [delegate moreMenuDidSelectDownloadImage];
             break;
+        case MoreMenuTypeMusicDetail:
+            [delegate moreMenuDidSelectMusicDetail];
+            break;
         default:
             break;
     }

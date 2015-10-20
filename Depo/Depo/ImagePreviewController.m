@@ -303,8 +303,13 @@
 - (void) fileDetailFooterDidTriggerPrint {
     NSArray *tempArr = [NSArray arrayWithObject:file];
     PrintWebViewController *printController = [[PrintWebViewController alloc] initWithUrl:@"http://akillidepo.cellograf.com/" withFileList:tempArr];
-    [self.nav pushViewController:printController animated:YES];
-    
+    printNav = [[MyNavigationController alloc] initWithRootViewController:printController];
+   
+    [self presentViewController:printNav animated:YES completion:nil];
+}
+
+- (void) closePrintPage {
+    [printNav dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void) moreClicked {

@@ -30,6 +30,7 @@
 @synthesize moreMenuView;
 @synthesize selectedFileList;
 @synthesize footerActionMenu;
+@synthesize refreshControlPhotos;
 
 - (id)initWithAlbum:(PhotoAlbum *) _album {
     self = [super init];
@@ -108,7 +109,13 @@
         photosScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 160, self.view.frame.size.width, self.view.frame.size.height - 160)];
         photosScroll.delegate = self;
         photosScroll.tag = 111;
+        photosScroll.userInteractionEnabled = YES ;
+        photosScroll.scrollEnabled = YES;
         [self.view addSubview:photosScroll];
+        
+        refreshControlPhotos = [[UIRefreshControl alloc] init];
+        [refreshControlPhotos addTarget:self action:@selector(triggerRefresh) forControlEvents:UIControlEventValueChanged];
+        [photosScroll addSubview:refreshControlPhotos];
         
         [self triggerRefresh];
     }
@@ -124,7 +131,7 @@
     [photoList removeAllObjects];
     [photoList addObjectsFromArray:[[UploadQueue sharedInstance] uploadImageRefsForAlbum:self.album.uuid]];
     [self addOngoingPhotos];
-
+    
     listOffset = 0;
     [detailDao requestDetailOfAlbum:self.album.uuid forStart:listOffset andSize:20];
 }
@@ -183,6 +190,11 @@
     self.album.label = albumWithUpdatedContent.label;
     self.album.lastModifiedDate = albumWithUpdatedContent.lastModifiedDate;
     [self initAndSetSubTitle];
+    
+    if (refreshControlPhotos.isRefreshing) {
+        [refreshControlPhotos endRefreshing];
+    }
+
 }
 
 - (void) albumDetailFailCallback:(NSString *) errorMessage {
@@ -502,10 +514,10 @@
         
     }
     //[printDao requestForPrintPhotos:printList];
-    PrintWebViewController *printController = [[PrintWebViewController alloc] initWithUrl:@"http://akillidepo.cellograf.com" withFileList:printList];
+    PrintWebViewController *printController = [[PrintWebViewController alloc] initWithUrl:@"http://akillidepo.cellograf.com/" withFileList:printList];
     printNav = [[MyNavigationController alloc] initWithRootViewController:printController];
-    printController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"CloseTitle", @"") style:UIBarButtonItemStyleDone target:self action:@selector(closePrintPage)];
-    [self.nav presentViewController:printNav animated:YES completion:nil];
+    
+    [self presentViewController:printNav animated:YES completion:nil];
     
 }
 
@@ -609,16 +621,19 @@
 
 #pragma mark ScrollViewDelegate methods
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView {
-    if(scrollView.tag == 111) {
-        if(!isLoading) {
-            CGFloat currentOffset = photosScroll.contentOffset.y;
-            CGFloat maximumOffset = photosScroll.contentSize.height - photosScroll.frame.size.height;
-            
-            if (currentOffset - maximumOffset >= 0.0) {
-                isLoading = YES;
-                [self dynamicallyLoadNextPage];
+    if (photosScroll.frame.origin.y > 160) {
+        if(scrollView.tag == 111) {
+            if(!isLoading) {
+                CGFloat currentOffset = photosScroll.contentOffset.y;
+                CGFloat maximumOffset = photosScroll.contentSize.height - photosScroll.frame.size.height;
+                
+                if (currentOffset - maximumOffset >= 0.0) {
+                    isLoading = YES;
+                    [self dynamicallyLoadNextPage];
+                }
             }
         }
+
     }
 }
 

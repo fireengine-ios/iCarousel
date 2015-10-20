@@ -74,7 +74,9 @@
     if(self.audioPlayer == nil) {
         self.audioPlayer = [AVPlayer playerWithPlayerItem:self.playerItem];
     } else {
-        [self.audioPlayer replaceCurrentItemWithPlayerItem:self.playerItem];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.audioPlayer replaceCurrentItemWithPlayerItem:self.playerItem];
+        });
     }
     [self.audioPlayer seekToTime:kCMTimeZero];
     [self.audioPlayer play];

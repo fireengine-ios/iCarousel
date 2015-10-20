@@ -66,6 +66,11 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
         renameDao.delegate = self;
         renameDao.successMethod = @selector(renameSuccessCallback:);
         renameDao.failMethod = @selector(renameFailCallback:);
+        
+        shareDao = [[ShareLinkDao alloc] init];
+        shareDao.delegate = self;
+        shareDao.successMethod = @selector(shareSuccessCallback:);
+        shareDao.failMethod = @selector(shareFailCallback:);
 
         UIImage *albumImg = [UIImage imageNamed:@"no_music_icon.png"];
         UIImageView *albumImgView = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - albumImg.size.width)/2, 60, albumImg.size.width, albumImg.size.height)];
@@ -190,9 +195,10 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
     }
 
     self.title = [NSString stringWithFormat:@"%d/%d", currentItemPlace + 1, (int)[items count]];
-    
     APPDELEGATE.session.playerItems = items;
     APPDELEGATE.session.playerItemFilesRef = self.files;
+    //[APPDELEGATE.session.audioPlayer addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
+
     [APPDELEGATE.session playAudioItemAtIndex:currentItemPlace];
 
     __weak MusicPreviewController *weakSelf = self;
@@ -200,13 +206,31 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
         [weakSelf syncSlider];
         [weakSelf initNowPlayingInfoCenter:[weakSelf currentFile]];
     }];
-
+    
     float currentVolumeVal = [APPDELEGATE.session.audioPlayer volume];
     [customVolumeView setInitialVolumeLevels:currentVolumeVal];
-
+    
     playButton.hidden = YES;
     pauseButton.hidden = NO;
 
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
+                        change:(NSDictionary *)change context:(void *)context {
+    APPDELEGATE.session.audioPlayer = (AVPlayer *) object;
+    if ([keyPath isEqualToString:@"status"]) {
+        if (APPDELEGATE.session.audioPlayer.status == AVPlayerStatusReadyToPlay) {
+            [APPDELEGATE.session.audioPlayer removeObserver:self forKeyPath:@"status" context:nil];
+            if (APPDELEGATE.session.playerItem.status == AVPlayerStatusReadyToPlay) {
+                [APPDELEGATE.session.audioPlayer play];
+            }
+        } else if (APPDELEGATE.session.audioPlayer.status == AVPlayerStatusFailed) {
+            
+        }
+        else if(APPDELEGATE.session.audioPlayer.status == AVPlayerItemStatusUnknown) {
+            [self initializePlayer];
+        }
+    }
 }
 
 - (void) initializeOngoingPlayer {
@@ -305,24 +329,26 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
     
     MPNowPlayingInfoCenter* mpic = [MPNowPlayingInfoCenter defaultCenter];
     NSMutableDictionary *songDictionary = [[NSMutableDictionary alloc] init];
-    if (songInfo.detail.songTitle) {
-        [songDictionary setObject:songInfo.detail.songTitle forKey:MPMediaItemPropertyTitle];
-    } else {
-        [songDictionary setObject:songInfo.visibleName forKey:MPMediaItemPropertyTitle];
-    }
-    if (songInfo.detail.artist) {
-        [songDictionary setObject:songInfo.detail.artist forKey:MPMediaItemPropertyArtist];
-    }
-    if (songInfo.detail.album) {
-        [songDictionary setObject:songInfo.detail.album forKey:MPMediaItemPropertyAlbumTitle];
-    }
-    if (songInfo.detail.duration) {
-        double durationDouble = CMTimeGetSeconds([APPDELEGATE.session.playerItem duration]);
-        [songDictionary setObject:[NSNumber numberWithDouble:durationDouble] forKey:MPMediaItemPropertyPlaybackDuration];
-        
-        double playbackDouble = CMTimeGetSeconds([APPDELEGATE.session.playerItem currentTime]);
-        [songDictionary setObject:[NSNumber numberWithDouble:playbackDouble] forKey:MPNowPlayingInfoPropertyElapsedPlaybackTime];
-
+    if(songInfo) {
+        if (songInfo.detail.songTitle) {
+            [songDictionary setObject:songInfo.detail.songTitle forKey:MPMediaItemPropertyTitle];
+        } else {
+            [songDictionary setObject:songInfo.visibleName forKey:MPMediaItemPropertyTitle];
+        }
+        if (songInfo.detail.artist) {
+            [songDictionary setObject:songInfo.detail.artist forKey:MPMediaItemPropertyArtist];
+        }
+        if (songInfo.detail.album) {
+            [songDictionary setObject:songInfo.detail.album forKey:MPMediaItemPropertyAlbumTitle];
+        }
+        if (songInfo.detail.duration) {
+            double durationDouble = CMTimeGetSeconds([APPDELEGATE.session.playerItem duration]);
+            [songDictionary setObject:[NSNumber numberWithDouble:durationDouble] forKey:MPMediaItemPropertyPlaybackDuration];
+            
+            double playbackDouble = CMTimeGetSeconds([APPDELEGATE.session.playerItem currentTime]);
+            [songDictionary setObject:[NSNumber numberWithDouble:playbackDouble] forKey:MPNowPlayingInfoPropertyElapsedPlaybackTime];
+            
+        }
     }
     if(mpic) {
         [mpic setNowPlayingInfo:songDictionary];
@@ -470,9 +496,9 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 }
 
 - (void) playingMusicChanged:(NSNotification *) notification {
+    
     NSDictionary *userInfo = notification.userInfo;
     MetaFile *musicFilePlaying = [userInfo objectForKey:CHANGED_MUSIC_OBJ_KEY];
-    [self initNowPlayingInfoCenter:musicFilePlaying];
     self.fileUuid = musicFilePlaying.uuid;
     NSString *nameVal = musicFilePlaying.visibleName;
     if(musicFilePlaying.detail && musicFilePlaying.detail.songTitle) {
@@ -490,6 +516,7 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
     detailLabel.text = detailVal;
 
     self.title = [NSString stringWithFormat:@"%d/%d", APPDELEGATE.session.currentAudioItemIndex + 1, (int)[APPDELEGATE.session.playerItemFilesRef count]];
+    //[self initNowPlayingInfoCenter:musicFilePlaying];
 }
 
 - (void) volumeClicked {
@@ -552,6 +579,7 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 }
 
 - (NSString *) formatPlayTime:(int)second{
+    NSLog(@"SEC:%d", second);
     if(second < 0){
         return @"--:--";
     } else {
@@ -718,7 +746,7 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 
 - (void) moreClicked {
     MetaFile *file = [APPDELEGATE.session itemRefForCurrentAsset];
-    [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeFileDetail], [NSNumber numberWithInt:MoreMenuTypeShare], file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDelete]] withFileFolder:file];
+    [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeMusicDetail], [NSNumber numberWithInt:MoreMenuTypeShare], file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDelete]] withFileFolder:file];
 }
 
 - (void) deleteSuccessCallback {
@@ -770,13 +798,27 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 
 #pragma mark MoreMenuDelegate
 
+- (void) moreMenuDidSelectMusicDetail {
+    FileDetailModalController *fileDetail = [[FileDetailModalController alloc] initWithFile:[self currentFile]];
+    fileDetail.delegate = self;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:fileDetail];
+    [self presentViewController:modalNav animated:YES completion:nil];
+
+}
+
+
 - (void) moreMenuDidSelectDelete {
     if([CacheUtil showConfirmDeletePageFlag]) {
         [self confirmDeleteDidConfirm];
     } else {
-        [APPDELEGATE.base showConfirmDelete];
+        ConfirmDeleteModalController *confirmDelete = [[ConfirmDeleteModalController alloc] init];
+        confirmDelete.delegate = self;
+        MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:confirmDelete];
+        [self presentViewController:modalNav animated:YES completion:nil];
     }
 }
+
+
 
 - (void) moreMenuDidSelectFav {
     [favDao requestMetadataForFiles:@[self.fileUuid] shouldFavorite:YES];
@@ -789,7 +831,9 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 }
 
 - (void) moreMenuDidSelectShare {
-    [APPDELEGATE.base triggerShareForFiles:@[self.fileUuid]];
+    //[APPDELEGATE.base triggerShareForFiles:@[self.fileUuid]];
+    [shareDao requestLinkForFiles:@[self.fileUuid]];
+    [self showLoading];
 }
 
 #pragma mark ConfirmDeleteModalDelegate methods
@@ -800,6 +844,34 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 - (void) confirmDeleteDidConfirm {
     [deleteDao requestDeleteFiles:@[self.fileUuid]];
     [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+}
+
+- (void) triggerShareForFiles:(NSArray *) fileUuidList {
+    [shareDao requestLinkForFiles:fileUuidList];
+    [self showLoading];
+}
+
+#pragma mark ShareLinkDao Delegate Methods
+- (void) shareSuccessCallback:(NSString *) linkToShare {
+    [self hideLoading];
+    NSArray *activityItems = [NSArray arrayWithObjects:linkToShare, nil];
+    
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+    [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
+    activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    
+    //    activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll];
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        [self presentViewController:activityViewController animated:YES completion:nil];
+    } else {
+        UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
+        [popup presentPopoverFromRect:CGRectMake(self.view.frame.size.width-240, self.view.frame.size.height-40, 240, 300)inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
+}
+
+- (void) shareFailCallback:(NSString *) errorMessage {
+    [self hideLoading];
 }
 
 - (void)viewDidLoad {

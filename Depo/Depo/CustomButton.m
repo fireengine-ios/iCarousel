@@ -59,6 +59,28 @@
     return self;
 }
 
+- (id)initWithFrame:(CGRect)frame withImageName:(NSString *) imageName withTitle:(NSString *) title withFont:(UIFont *) font withColor:(UIColor *) textColor isMultipleLine:(BOOL) multiple {
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.backgroundColor = [UIColor clearColor];
+        
+        if(imageName) {
+            [self setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+        }
+        
+        titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+        titleLabel.text = title;
+        titleLabel.backgroundColor = [UIColor clearColor];
+        titleLabel.font = font;
+        titleLabel.textAlignment = NSTextAlignmentLeft;
+        titleLabel.textColor = textColor;
+        titleLabel.numberOfLines = 0;
+        [self addSubview:titleLabel];
+    }
+    return self;
+}
+
+
 - (id)initWithFrame:(CGRect)frame withImageName:(NSString *) imageName withTitle:(NSString *) title withFont:(UIFont *) font fillXY:(BOOL) shouldFillXY {
     self = [super initWithFrame:frame];
     if (self) {

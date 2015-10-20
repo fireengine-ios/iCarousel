@@ -384,8 +384,9 @@
                 [self presentViewController:modalNav animated:YES completion:nil];
             } else if([AppUtil isMetaFileMusic:fileAtIndex]) {
                 MusicPreviewController *detail = [[MusicPreviewController alloc] initWithFile:fileAtIndex.uuid withFileList:@[fileAtIndex]];
+                
                 detail.nav = self.nav;
-                [self.nav pushViewController:detail animated:NO];
+                [self.nav pushViewController:detail animated:YES];
             } else {
                 PreviewUnavailableController *detail = [[PreviewUnavailableController alloc] initWithFile:fileAtIndex];
                 detail.nav = self.nav;

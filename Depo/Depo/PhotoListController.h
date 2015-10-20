@@ -44,6 +44,8 @@
     BOOL isSelectible;
     
     NoItemCell *noItemCell;
+    
+    MyNavigationController *printNav;
 }
 
 @property (nonatomic, strong) PhotoHeaderSegmentView *headerView;

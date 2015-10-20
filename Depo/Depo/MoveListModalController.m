@@ -61,7 +61,7 @@
         folderTable.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
         [self.view addSubview:folderTable];
 
-        [fileListDao requestFolderListingForFolder:self.folder?self.folder.uuid:nil andForPage:0 andSize:NO_OF_FILES_PER_PAGE sortBy:APPDELEGATE.session.sortType];
+        [fileListDao requestFolderListingForFolder:self.folder?self.folder.uuid:nil andForPage:0 andSize:999999 sortBy:APPDELEGATE.session.sortType];
 
         footerView = [[MoveModalFooterView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60)];
         footerView.delegate = self;

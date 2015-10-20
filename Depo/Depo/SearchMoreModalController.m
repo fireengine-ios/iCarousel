@@ -263,7 +263,6 @@
             VideoPreviewController *detail = [[VideoPreviewController alloc] initWithFile:fileAtIndex];
             MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
             detail.nav = modalNav;
-//            [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
             [self presentViewController:modalNav animated:YES completion:nil];
         } else if([AppUtil isMetaFileMusic:fileAtIndex]) {
             MusicPreviewController *detail = [[MusicPreviewController alloc] initWithFile:fileAtIndex.uuid withFileList:@[fileAtIndex]];

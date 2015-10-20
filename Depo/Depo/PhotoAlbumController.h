@@ -54,6 +54,8 @@
 @property (nonatomic, strong) NSMutableArray *selectedFileList;
 @property (nonatomic, strong) NSMutableArray *selectedFileLinkList;
 @property (nonatomic, strong) FooterActionsMenuView *footerActionMenu;
+@property (nonatomic, strong) UIRefreshControl *refreshControlPhotos;
+
 
 - (id)initWithAlbum:(PhotoAlbum *) _album;
 

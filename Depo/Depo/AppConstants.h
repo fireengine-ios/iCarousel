@@ -270,6 +270,7 @@ typedef enum {
 	MoreMenuTypeFileDetail,
     MoreMenuTypeFolderDetail,
     MoreMenuTypeAlbumDetail,
+    MoreMenuTypeMusicDetail,
     MoreMenuTypeVideoDetail,
     MoreMenuTypeImageDetail,
 	MoreMenuTypeShare,

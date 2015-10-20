@@ -33,6 +33,7 @@
     RenameDao *renameDao;
     ShareLinkDao *shareDao;
     int listOffSet;
+    MyNavigationController *printNav;
 }
 
 @property (nonatomic, strong) id<ImagePreviewDelegate> delegate;

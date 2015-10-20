@@ -173,7 +173,7 @@
             iconName = @"nav_favourite_icon.png";
             break;
         case MoreMenuTypeUnfav:
-            iconName = @"nav_favourite_icon.png";//@"yellow_fav_icon.png";
+            iconName = @"yellow_fav_icon.png";//@"nav_favourite_active_icon.png";
             break;
         case MoreMenuTypeDelete:
         case MoreMenuTypeAlbumDelete:
@@ -209,6 +209,8 @@
             break;
         case MoreMenuTypeImageDetail:
             title = NSLocalizedString(@"MoreMenuDetailFileTitleImg", @"");
+        case MoreMenuTypeMusicDetail:
+            title = NSLocalizedString(@"MoreMenuDetailFileTitleMusic", @"");
             break;
         case MoreMenuTypeFileDetail: {
             switch (contentType) {
