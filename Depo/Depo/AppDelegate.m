@@ -70,7 +70,9 @@
     [self.window setRootViewController:[BgViewController alloc]];
     
 #ifdef LOG2FILE
+    
     [self logToFiles];
+
 #endif
     
     session = [[AppSession alloc] init];
