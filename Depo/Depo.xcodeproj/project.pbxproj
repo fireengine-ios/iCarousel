@@ -4361,7 +4361,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "dbf62cd4-df32-49b5-9a9c-922c6462d09a";
+				PROVISIONING_PROFILE = "7f8d2c1e-4236-48f8-bf20-cde201b5bce0";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -4627,7 +4627,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "dbf62cd4-df32-49b5-9a9c-922c6462d09a";
+				PROVISIONING_PROFILE = "7f8d2c1e-4236-48f8-bf20-cde201b5bce0";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -4698,7 +4698,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a1df46d6-4462-42b2-a850-d6decc73759d";
+				PROVISIONING_PROFILE = "7f8d2c1e-4236-48f8-bf20-cde201b5bce0";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -4720,7 +4720,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a1df46d6-4462-42b2-a850-d6decc73759d";
+				PROVISIONING_PROFILE = "7f8d2c1e-4236-48f8-bf20-cde201b5bce0";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
