@@ -24,6 +24,7 @@
 - (void) didTriggerDocs;
 - (void) didTriggerLogout;
 - (void) didTriggerLogin;
+- (void) didTriggerCropAndShare;
 - (void) didTriggerCurrentMusic;
 - (void) didTriggerContactSync;
 @end

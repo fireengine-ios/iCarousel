@@ -15,5 +15,6 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *surname;
 @property (nonatomic, strong) NSString *mobileUploadFolderUuid;
+@property (nonatomic) BOOL cropAndSharePresentFlag;
 
 @end

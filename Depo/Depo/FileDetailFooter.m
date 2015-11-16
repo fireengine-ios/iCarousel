@@ -18,6 +18,10 @@
 @synthesize printButton;
 
 - (id)initWithFrame:(CGRect)frame {
+    return [self initWithFrame:frame withPrintEnabled:YES];
+}
+
+- (id)initWithFrame:(CGRect)frame withPrintEnabled:(BOOL) printEnabledFlag {
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [Util UIColorForHexColor:@"191e24"];
@@ -34,9 +38,11 @@
         [deleteButton addTarget:self action:@selector(deleteClicked) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:deleteButton];
         
-        printButton = [[CustomButton alloc] initWithFrame:CGRectMake(60, (self.frame.size.height - 22)/2, 22, 23) withImageName:@"white_print_icon.png"];
-        [printButton addTarget:self action:@selector(printClicked) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:printButton];
+        if(printEnabledFlag) {
+            printButton = [[CustomButton alloc] initWithFrame:CGRectMake(60, (self.frame.size.height - 22)/2, 22, 23) withImageName:@"white_print_icon.png"];
+            [printButton addTarget:self action:@selector(printClicked) forControlEvents:UIControlEventTouchUpInside];
+            [self addSubview:printButton];
+        }
 
     }
     return self;

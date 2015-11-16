@@ -18,13 +18,15 @@
 #import "RadiusDao.h"
 #import "RequestTokenDao.h"
 
-#define BASE_URL @"https://adepo.turkcell.com.tr/api"
-//#define BASE_URL @"https://tcloudstb.turkcell.com.tr/api"
+//TODO test -> prod
+//#define BASE_URL @"https://adepo.turkcell.com.tr/api"
+#define BASE_URL @"https://tcloudstb.turkcell.com.tr/api"
 
 #define TOKEN_URL BASE_URL@"/auth/token?rememberMe=%@"
 
-#define RADIUS_URL @"http://adepo.turkcell.com.tr/api/auth/gsm/login?rememberMe=on"
-//#define RADIUS_URL @"http://tcloudstb.turkcell.com.tr/api/auth/gsm/login?rememberMe=on"
+//TODO test -> prod
+//#define RADIUS_URL @"http://adepo.turkcell.com.tr/api/auth/gsm/login?rememberMe=on"
+#define RADIUS_URL @"http://tcloudstb.turkcell.com.tr/api/auth/gsm/login?rememberMe=on"
 
 #define REMEMBER_ME_URL BASE_URL@"/auth/rememberMe"
 

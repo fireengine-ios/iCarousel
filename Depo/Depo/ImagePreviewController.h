@@ -42,6 +42,7 @@
 @property int cursor;
 
 - (id)initWithFile:(MetaFile *) _file;
-- (id)initWithFiles:(NSArray *) _files withImage:(MetaFile *) _file withListOffset:(int) offset ;
+- (id)initWithFiles:(NSArray *) _files withImage:(MetaFile *) _file withListOffset:(int) offset;
+- (id) initWithFiles:(NSArray *)_files withImage:(MetaFile *)_file withListOffset:(int)offset printEnabled:(BOOL) printEnabledFlag;
 
 @end

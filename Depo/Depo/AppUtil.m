@@ -8,61 +8,84 @@
 
 #import "AppUtil.h"
 #import "MetaMenu.h"
+#import "AppDelegate.h"
+#import "AppSession.h"
+#import "User.h"
 
 @implementation AppUtil
 
 + (NSArray *) readMenuItemsForLoggedIn {
+    NSMutableArray *result = [[NSMutableArray alloc] init];
+    
     MetaMenu *profileMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeProfile];
     profileMenu.title = @"Mahir Tarlan";
     profileMenu.iconName = @"";
     profileMenu.selectedIconName = @"";
+    [result addObject:profileMenu];
     
     MetaMenu *searchMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeSearch];
     searchMenu.title = NSLocalizedString(@"MenuSearch", @"");
     searchMenu.iconName = @"";
     searchMenu.selectedIconName = @"";
+    [result addObject:searchMenu];
     
     MetaMenu *homeMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeHome];
     homeMenu.title = NSLocalizedString(@"MenuHome", @"");
     homeMenu.iconName = @"home_icon.png";
     homeMenu.selectedIconName = @"yellow_home_icon.png";
+    [result addObject:homeMenu];
     
     MetaMenu *favMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeFav];
     favMenu.title = NSLocalizedString(@"MenuFav", @"");
     favMenu.iconName = @"fav_icon.png";
     favMenu.selectedIconName = @"yellow_fav_icon.png";
+    [result addObject:favMenu];
     
     MetaMenu *fileMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeFiles];
     fileMenu.title = NSLocalizedString(@"MenuFiles", @"");
     fileMenu.iconName = @"file_icon.png";
     fileMenu.selectedIconName = @"yellow_file_icon.png";
+    [result addObject:fileMenu];
     
     MetaMenu *photoMenu = [[MetaMenu alloc] initWithMenuType:MenuTypePhoto];
     photoMenu.title = NSLocalizedString(@"MenuPhoto", @"");
     photoMenu.iconName = @"photos_icon.png";
     photoMenu.selectedIconName = @"yellow_photos_icon.png";
+    [result addObject:photoMenu];
     
     MetaMenu *musicMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeMusic];
     musicMenu.title = NSLocalizedString(@"MenuMusic", @"");
     musicMenu.iconName = @"music_icon.png";
     musicMenu.selectedIconName = @"yellow_music_icon.png";
+    [result addObject:musicMenu];
     
     MetaMenu *docMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeDoc];
     docMenu.title = NSLocalizedString(@"MenuDoc", @"");
     docMenu.iconName = @"documents_icon.png";
     docMenu.selectedIconName = @"yellow_documents_icon.png";
-
+    [result addObject:docMenu];
+    
     MetaMenu *contactMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeContactSync];
     contactMenu.title = NSLocalizedString(@"MenuContactSync", @"");
     contactMenu.iconName = @"contact_sync_icon.png";
     contactMenu.selectedIconName = @"yellow_contact_sync_icon.png";
-
+    
+    if(APPDELEGATE.session.user.cropAndSharePresentFlag) {
+        MetaMenu *cropAndShare = [[MetaMenu alloc] initWithMenuType:MenuTypeCropAndShare];
+        cropAndShare.title = NSLocalizedString(@"CropAndShareTitle", @"");
+        cropAndShare.iconName = @"photos_icon.png";
+        cropAndShare.selectedIconName = @"yellow_photos_icon.png";
+        [result addObject:cropAndShare];
+    }
+    
     MetaMenu *logoutMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeLogout];
     logoutMenu.title = NSLocalizedString(@"MenuLogout", @"");
     logoutMenu.iconName = @"logout_icon.png";
     logoutMenu.selectedIconName = @"yellow_logout_icon.png";
-
-    return @[profileMenu, searchMenu, homeMenu, favMenu, fileMenu, photoMenu, musicMenu, docMenu, /* contacts commented out // contactMenu ,*/ logoutMenu];
+    [result addObject:logoutMenu];
+    
+    return result;
+    //    return @[profileMenu, searchMenu, homeMenu, favMenu, fileMenu, photoMenu, musicMenu, docMenu, /* contacts commented out // contactMenu ,*/ logoutMenu];
 }
 
 + (NSString *) iconNameByContentType:(ContentType) contentType {
@@ -209,6 +232,7 @@
             break;
         case MoreMenuTypeImageDetail:
             title = NSLocalizedString(@"MoreMenuDetailFileTitleImg", @"");
+            break;
         case MoreMenuTypeMusicDetail:
             title = NSLocalizedString(@"MoreMenuDetailFileTitleMusic", @"");
             break;
@@ -349,7 +373,7 @@
 }
 
 + (BOOL) isMetaFileMusic:(MetaFile *) file {
-//    return ([file.rawContentType isEqualToString:CONTENT_TYPE_AUDIO_MP3_VALUE] || [file.rawContentType isEqualToString:CONTENT_TYPE_AUDIO_MPEG_VALUE]);
+    //    return ([file.rawContentType isEqualToString:CONTENT_TYPE_AUDIO_MP3_VALUE] || [file.rawContentType isEqualToString:CONTENT_TYPE_AUDIO_MPEG_VALUE]);
     return ([file.rawContentType hasPrefix:@"audio/"]);
 }
 
@@ -361,7 +385,7 @@
     if([str isEqualToString:@"AddTypeAlbum"]) {
         return AddTypeAlbum;
     } else if([str isEqualToString:@"AddTypeMusic"]) {
-            return AddTypeMusic;
+        return AddTypeMusic;
     } else if([str isEqualToString:@"AddTypePhoto"]) {
         return AddTypePhoto;
     } else if([str isEqualToString:@"AddTypeCamera"]) {
@@ -491,7 +515,7 @@
     
     NSDate *today = [NSDate date];
     double diffInSec = [today timeIntervalSinceReferenceDate] - [date timeIntervalSinceReferenceDate];
-
+    
     int days = floor(diffInSec/86400);
     int hours = floor((diffInSec - days*86400)/3600);
     int minutes = floor((diffInSec - days*86400 - hours*3600)/60);

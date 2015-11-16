@@ -23,6 +23,7 @@
 @property (nonatomic, strong) CustomButton *printButton;
 @property (nonatomic, strong) UIView *separatorView;
 
+- (id)initWithFrame:(CGRect)frame withPrintEnabled:(BOOL) printEnabledFlag;
 - (void) updateInnerViews;
 
 @end

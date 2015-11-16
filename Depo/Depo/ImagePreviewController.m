@@ -90,6 +90,10 @@
 }
 
 - (id) initWithFiles:(NSArray *)_files withImage:(MetaFile *)_file withListOffset:(int)offset {
+    return [self initWithFiles:_files withImage:_file withListOffset:offset printEnabled:YES];
+}
+
+- (id) initWithFiles:(NSArray *)_files withImage:(MetaFile *)_file withListOffset:(int)offset printEnabled:(BOOL) printEnabledFlag {
     self = [super init];
     if (self) {
         self.files = [_files mutableCopy];
@@ -152,7 +156,7 @@
          */
         [mainScroll addSubview:imgView];
         
-        footer = [[FileDetailFooter alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60)];
+        footer = [[FileDetailFooter alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60)withPrintEnabled:printEnabledFlag];
         footer.delegate = self;
         [self.view addSubview:footer];
         

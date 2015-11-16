@@ -14,5 +14,6 @@
 - (void) requestPhotosForPage:(int) page andSize:(int) size andSortType:(SortType) sortType;
 - (void) requestMusicForPage:(int) page andSize:(int) size andSortType:(SortType) sortType;
 - (void) requestDocForPage:(int) page andSize:(int) size andSortType:(SortType) sortType;
+- (void) requestCropNShareForPage:(int) page andSize:(int) size andSortType:(SortType) sortType;
 
 @end

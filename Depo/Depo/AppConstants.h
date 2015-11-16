@@ -57,6 +57,8 @@
 
 #define MUSIC_SHUFFLE_NOTIFICATION @"MUSIC_SHUFFLE_NOTIFICATION"
 
+#define CROPY_EMPTY_NOTIFICATION @"CROPY_EMPTY_NOTIFICATION"
+
 #define CHANGED_MUSIC_OBJ_KEY @"CHANGED_MUSIC_OBJ_KEY"
 
 #define INDEX_AFTER_SHUFFLE_OBJ_KEY @"INDEX_AFTER_SHUFFLE_OBJ_KEY"
@@ -219,22 +221,23 @@ _Pragma("clang diagnostic pop") \
 
 
 typedef enum {
-	LoginTypeRadius = 0,
-	LoginTypeWebSifre
+    LoginTypeRadius = 0,
+    LoginTypeWebSifre
 } LoginType;
 
 typedef enum {
-	MenuTypeProfile = 0,
-	MenuTypeSearch,
-	MenuTypeHome,
-	MenuTypeFav,
-	MenuTypeFiles,
-	MenuTypePhoto,
-	MenuTypeMusic,
-	MenuTypeDoc,
+    MenuTypeProfile = 0,
+    MenuTypeSearch,
+    MenuTypeHome,
+    MenuTypeFav,
+    MenuTypeFiles,
+    MenuTypePhoto,
+    MenuTypeMusic,
+    MenuTypeDoc,
     MenuTypeContactSync,
-	MenuTypeLogin,
-	MenuTypeLogout
+    MenuTypeLogin,
+    MenuTypeCropAndShare,
+    MenuTypeLogout
 } MenuType;
 
 typedef enum {
@@ -246,36 +249,36 @@ typedef enum {
 } ModalType;
 
 typedef enum {
-	ContentTypeFolder = 0,
-	ContentTypePhoto,
+    ContentTypeFolder = 0,
+    ContentTypePhoto,
     ContentTypeVideo,
-	ContentTypeMusic,
-	ContentTypeDoc,
-	ContentTypeOther
+    ContentTypeMusic,
+    ContentTypeDoc,
+    ContentTypeOther
 } ContentType;
 
 typedef enum {
-	AddTypeFolder = 0,
-	AddTypeAlbum,
-	AddTypePhoto,
-	AddTypeMusic,
-	AddTypeCamera,
-	AddTypeOther
+    AddTypeFolder = 0,
+    AddTypeAlbum,
+    AddTypePhoto,
+    AddTypeMusic,
+    AddTypeCamera,
+    AddTypeOther
 } AddType;
 
 typedef enum {
-	MoreMenuTypeSort = 0,
+    MoreMenuTypeSort = 0,
     MoreMenuTypeSortWithList,
-	MoreMenuTypeSelect,
-	MoreMenuTypeFileDetail,
+    MoreMenuTypeSelect,
+    MoreMenuTypeFileDetail,
     MoreMenuTypeFolderDetail,
     MoreMenuTypeAlbumDetail,
     MoreMenuTypeMusicDetail,
     MoreMenuTypeVideoDetail,
     MoreMenuTypeImageDetail,
-	MoreMenuTypeShare,
+    MoreMenuTypeShare,
     MoreMenuTypeAlbumShare,
-	MoreMenuTypeFav,
+    MoreMenuTypeFav,
     MoreMenuTypeUnfav,
     MoreMenuTypeDownloadImage,
     MoreMenuTypeDelete,

@@ -36,6 +36,7 @@
 #import "FavouriteListController.h"
 #import "MusicPreviewController.h"
 #import "ContactSyncController.h"
+#import "CropAndShareListController.h"
 
 #define kMenuOpenOriginX 276
 
@@ -205,6 +206,13 @@
 }
 
 - (void) didTriggerLogin {
+}
+
+- (void) didTriggerCropAndShare {
+    CropAndShareListController *cropAndShare = [[CropAndShareListController alloc] init];
+    cropAndShare.nav = self.nav;
+    cropAndShare.myDelegate = self;
+    [self.nav setViewControllers:@[cropAndShare] animated:NO];
 }
 
 - (void) didTriggerLogout {

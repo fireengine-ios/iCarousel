@@ -56,7 +56,8 @@
 
 - (void) sendGetRequest:(ASIFormDataRequest *) request {
     [request setRequestMethod:@"GET"];
-    request.timeOutSeconds = 30;
+    //TODO aslen 30 sn
+    request.timeOutSeconds = 120;
     [request addRequestHeader:@"Accept" value:@"application/json"];
     [request addRequestHeader:@"Content-Type" value:@"application/json; encoding=utf-8"];
     if(APPDELEGATE.session.authToken) {

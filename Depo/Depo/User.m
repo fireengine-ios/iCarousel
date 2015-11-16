@@ -15,6 +15,7 @@
 @synthesize mobileUploadFolderUuid;
 @synthesize name;
 @synthesize surname;
+@synthesize cropAndSharePresentFlag;
 
 - (id) init {
     if(self = [super init]) {

@@ -45,28 +45,30 @@
         menuTable.separatorColor = [UIColor clearColor];
         menuTable.contentInset = UIEdgeInsetsMake(0, 0, 60, 0);
         [self addSubview:menuTable];
-
+        
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(loginSuccessful)
                                                      name:LOGGED_IN_NOT_NAME object:nil];
-
+        
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(silentLoginSuccessful)
                                                      name:SILENT_LOGGED_IN_NOT_NAME object:nil];
-
+        
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(logoutSuccessful)
                                                      name:LOGGED_OUT_NOT_NAME object:nil];
-
+        
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(forceHomePage)
                                                      name:FORCE_HOMEPAGE_NOTIFICATION object:nil];
-
+        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playingMusicChanged:) name:MUSIC_CHANGED_NOTIFICATION object:nil];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shouldRemoveMusic) name:MUSIC_SHOULD_BE_REMOVED_NOTIFICATION object:nil];
-        
 
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cropyEmptied) name:CROPY_EMPTY_NOTIFICATION object:nil];
+
+        
     }
     return self;
 }
@@ -74,7 +76,7 @@
 - (void) playingMusicChanged:(NSNotification *) notification {
     NSDictionary *userInfo = notification.userInfo;
     MetaFile *musicFilePlaying = [userInfo objectForKey:CHANGED_MUSIC_OBJ_KEY];
-
+    
     if(audioFooterView) {
         [audioFooterView removeFromSuperview];
         audioFooterView = nil;
@@ -100,19 +102,29 @@
     }
 }
 
+- (void) cropyEmptied {
+    sectionMetaArray = [AppUtil readMenuItemsForLoggedIn];
+    tableUpdateCounter ++;
+    [menuTable reloadData];
+}
+
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
     return [sectionMetaArray count];
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if(section == 4 || section == 8) {
+    if(section == 4 ||
+       (APPDELEGATE.session.user.cropAndSharePresentFlag && section == 9) ||
+       (!APPDELEGATE.session.user.cropAndSharePresentFlag && section == 8)) {
         return 21;
     }
     return 0;
 }
 
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if(section == 4 || section == 8) {
+    if(section == 4 ||
+       (APPDELEGATE.session.user.cropAndSharePresentFlag && section == 9) ||
+       (!APPDELEGATE.session.user.cropAndSharePresentFlag && section == 8)) {
         UIView *separatorView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 21)];
         UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(12, 10, separatorView.frame.size.width-24, 1)];
         separator.backgroundColor = [Util UIColorForHexColor:@"2c3037"];
@@ -135,22 +147,22 @@
 }
 
 /*
--(void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-    // fix for separators bug in iOS 7
-    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-}
-
-
--(void)tableView:(UITableView *)tableView didUnhighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-    // fix for separators bug in iOS 7
-    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-}
-*/
+ -(void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+ // fix for separators bug in iOS 7
+ tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+ tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+ }
+ 
+ 
+ -(void)tableView:(UITableView *)tableView didUnhighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+ // fix for separators bug in iOS 7
+ tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+ tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+ }
+ */
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	NSString *cellIdentifier = [NSString stringWithFormat:@"MenuCell%d-%d-%d", (int)indexPath.section, (int)indexPath.row, tableUpdateCounter];
+    NSString *cellIdentifier = [NSString stringWithFormat:@"MenuCell%d-%d-%d", (int)indexPath.section, (int)indexPath.row, tableUpdateCounter];
     
     MetaMenu *metaData = [sectionMetaArray objectAtIndex:indexPath.section];
     
@@ -192,7 +204,7 @@
         AbstractMenuCell *menuCell = (AbstractMenuCell *) cell;
         sectionType = menuCell.metaData.menuType;
     }
-
+    
     switch (sectionType) {
         case MenuTypeHome:
             [delegate didTriggerHome];
@@ -223,6 +235,9 @@
             break;
         case MenuTypeLogin:
             [delegate didTriggerLogin];
+            break;
+        case MenuTypeCropAndShare:
+            [delegate didTriggerCropAndShare];
             break;
         case MenuTypeLogout:
             [delegate didTriggerLogout];
