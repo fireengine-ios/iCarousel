@@ -9,7 +9,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PrintWebViewController : UIViewController
+@interface PrintWebViewController : UIViewController <UIWebViewDelegate>
 
 - (id) initWithUrl:(NSString *) url withFileList:(NSArray *) fileList;
 

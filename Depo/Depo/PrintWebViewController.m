@@ -39,6 +39,7 @@ static const NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRS
         NSMutableURLRequest *printRequest = [self requestWithPost:dict];
         UIWebView *printWeb = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
         printWeb.scalesPageToFit = YES;
+        printWeb.delegate = self;
         [self.view addSubview:printWeb];
         [printWeb loadRequest:printRequest];
         
@@ -137,6 +138,14 @@ static const NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRS
     return randomString;
 }
 
+- (BOOL) webView:(UIWebView*)webView shouldStartLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType {
+    NSURL *URL = [request URL];
+    if ([[URL scheme] isEqualToString:@"turkcelldepo"]) {
+        [self triggerBackToPhotos];
+        return NO;
+    }
+    return YES;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

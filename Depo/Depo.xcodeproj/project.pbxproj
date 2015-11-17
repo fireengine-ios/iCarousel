@@ -714,6 +714,10 @@
 		05EA75B519DC6C2400AC77AB /* MultipleUploadFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EA75B419DC6C2400AC77AB /* MultipleUploadFooterView.m */; };
 		05EA75B819DC78C800AC77AB /* UploadDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EA75B719DC78C800AC77AB /* UploadDao.m */; };
 		05EAB3D21AB6E350009A1543 /* ContactCountDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EAB3D11AB6E350009A1543 /* ContactCountDao.m */; };
+		05F178441BFBB4A70014B2BD /* cropy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05F178401BFBB4A70014B2BD /* cropy@2x.png */; };
+		05F178451BFBB4A70014B2BD /* cropy.png in Resources */ = {isa = PBXBuildFile; fileRef = 05F178411BFBB4A70014B2BD /* cropy.png */; };
+		05F178461BFBB4A70014B2BD /* yellow_cropy.png in Resources */ = {isa = PBXBuildFile; fileRef = 05F178421BFBB4A70014B2BD /* yellow_cropy.png */; };
+		05F178471BFBB4A70014B2BD /* yellow_cropy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05F178431BFBB4A70014B2BD /* yellow_cropy@2x.png */; };
 		05F4AA281A2F7692000F41B8 /* ActivityUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F4AA271A2F7692000F41B8 /* ActivityUtil.m */; };
 		2443E1541B6BB0C5001C274D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2443E1531B6BB0C5001C274D /* AudioToolbox.framework */; };
 		2443E1571B6BB5F3001C274D /* AudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2443E1561B6BB5F3001C274D /* AudioManager.m */; };
@@ -1785,6 +1789,10 @@
 		05EA75B719DC78C800AC77AB /* UploadDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadDao.m; sourceTree = "<group>"; };
 		05EAB3D01AB6E350009A1543 /* ContactCountDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactCountDao.h; sourceTree = "<group>"; };
 		05EAB3D11AB6E350009A1543 /* ContactCountDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactCountDao.m; sourceTree = "<group>"; };
+		05F178401BFBB4A70014B2BD /* cropy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cropy@2x.png"; sourceTree = "<group>"; };
+		05F178411BFBB4A70014B2BD /* cropy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cropy.png; sourceTree = "<group>"; };
+		05F178421BFBB4A70014B2BD /* yellow_cropy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellow_cropy.png; sourceTree = "<group>"; };
+		05F178431BFBB4A70014B2BD /* yellow_cropy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yellow_cropy@2x.png"; sourceTree = "<group>"; };
 		05F4AA261A2F7692000F41B8 /* ActivityUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityUtil.h; sourceTree = "<group>"; };
 		05F4AA271A2F7692000F41B8 /* ActivityUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityUtil.m; sourceTree = "<group>"; };
 		2443E1531B6BB0C5001C274D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -2651,6 +2659,10 @@
 				05C6C7081B3C212A00CB6CE5 /* tamam@1x.png */,
 				05C6C7091B3C212A00CB6CE5 /* tamam@2x.png */,
 				05C6C70A1B3C212A00CB6CE5 /* tamam@3x.png */,
+				05F178401BFBB4A70014B2BD /* cropy@2x.png */,
+				05F178411BFBB4A70014B2BD /* cropy.png */,
+				05F178421BFBB4A70014B2BD /* yellow_cropy.png */,
+				05F178431BFBB4A70014B2BD /* yellow_cropy@2x.png */,
 				05C6C70B1B3C212A00CB6CE5 /* siyah_bg@1x.png */,
 				05C6C70C1B3C212A00CB6CE5 /* siyah_bg@2x.png */,
 				05C6C70D1B3C212A00CB6CE5 /* siyah_bg@3x.png */,
@@ -3428,6 +3440,7 @@
 				051CB40B19D2F71200E5FC88 /* action_bar_preloader@2x.png in Resources */,
 				052D415919EC1A25001B4088 /* empty_album_header_bg@2x.png in Resources */,
 				05D5E58D1B09D56A00A22957 /* icon_settings_arrow.png in Resources */,
+				05F178441BFBB4A70014B2BD /* cropy@2x.png in Resources */,
 				0526448019D5A26400B63759 /* macbook_icon.png in Resources */,
 				051CB41719D2F71200E5FC88 /* action_menu_overlay.png in Resources */,
 				05224AAE19DC4A2D00214767 /* photos_videos_icon.png in Resources */,
@@ -3450,6 +3463,7 @@
 				057C9D881A2B8D68001DDDEC /* music_next.png in Resources */,
 				050A7B2019F7CBB600B084B9 /* volume_level@2x.png in Resources */,
 				058BC22F1A308ACB0007F4DE /* video_tour@2x.png in Resources */,
+				05F178451BFBB4A70014B2BD /* cropy.png in Resources */,
 				05C6C7181B3C212A00CB6CE5 /* siyah_bg@2x.png in Resources */,
 				0526448E19D5A26400B63759 /* notifications_icon.png in Resources */,
 				564A318F1A93419D00C5B755 /* profile_icon@2x.png in Resources */,
@@ -3509,6 +3523,7 @@
 				058BC22E1A308ACB0007F4DE /* video_tour.png in Resources */,
 				0589064F19CC2B9500A9E517 /* yellow_logout_icon.png in Resources */,
 				0589062419CC226D00A9E517 /* documents_icon@2x.png in Resources */,
+				05F178461BFBB4A70014B2BD /* yellow_cropy.png in Resources */,
 				057C9D891A2B8D68001DDDEC /* music_prev@2x.png in Resources */,
 				05A7CE6C1A7FC22900020B6F /* bulutheader@3x.png in Resources */,
 				05D5E58F1B09D56A00A22957 /* icon_settings_exclamation.png in Resources */,
@@ -3700,6 +3715,7 @@
 				0526447C19D5A26400B63759 /* android_icon.png in Resources */,
 				058BC2381A30D46C0007F4DE /* textfield_bg@2x.png in Resources */,
 				050D4C401A31E77F00809A01 /* sync_prefs.png in Resources */,
+				05F178471BFBB4A70014B2BD /* yellow_cropy@2x.png in Resources */,
 				058337FB19EDA07600DCF0C5 /* player_track@2x.png in Resources */,
 				056BEC831A8AA7CF00BA0805 /* pre_login_info1.png in Resources */,
 				052A222919F682D1000C3C75 /* Default@2x.png in Resources */,

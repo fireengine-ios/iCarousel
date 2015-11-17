@@ -73,8 +73,8 @@
     if(APPDELEGATE.session.user.cropAndSharePresentFlag) {
         MetaMenu *cropAndShare = [[MetaMenu alloc] initWithMenuType:MenuTypeCropAndShare];
         cropAndShare.title = NSLocalizedString(@"CropAndShareTitle", @"");
-        cropAndShare.iconName = @"photos_icon.png";
-        cropAndShare.selectedIconName = @"yellow_photos_icon.png";
+        cropAndShare.iconName = @"cropy.png";
+        cropAndShare.selectedIconName = @"yellow_cropy.png";
         [result addObject:cropAndShare];
     }
     
