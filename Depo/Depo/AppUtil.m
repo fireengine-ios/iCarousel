@@ -561,8 +561,7 @@
 }
 
 + (BOOL) checkIsUpdate {
-    //NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
-    NSString *version = @"2.5";
+    NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
     NSString *oldVersion = [[NSUserDefaults standardUserDefaults] objectForKey:SYSTEM_VERSION_KEY];
     if (oldVersion) {
         if ([version isEqualToString:oldVersion]) {

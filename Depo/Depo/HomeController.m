@@ -358,7 +358,7 @@
             else {
                 if ([currentSubscription.plan.role isEqualToString:@"ultimate"]) {
                     
-                }else {
+                } else {
                     if (percentUsageVal >= 100 && [AppUtil checkAndSetFlags:DIALOGUE_P6_FLAG] ){
                         [AppUtil checkAndSetFlags:DIALOGUE_P5_FLAG];
                         [AppUtil checkAndSetFlags:DIALOGUE_P4_FLAG];
@@ -372,7 +372,6 @@
                         [self loadAdvertisementView:NSLocalizedString(@"StorageOver80", @"") withOption:YES withTitle:NSLocalizedString(@"StorageOver80Title", @"")];
                     }
                 }
-                
             }
         }
     }

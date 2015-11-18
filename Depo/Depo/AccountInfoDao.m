@@ -50,6 +50,9 @@
                 user.cropAndSharePresentFlag = [isCropAndShareTagAvailable boolValue];
             }
             
+            //TODO 2.2 versiyonunda prodda olmayacagi icin bu flag false set edildi. Bir sonraki versiyonda silinecek
+            user.cropAndSharePresentFlag = false;
+            
         }
         [self shouldReturnSuccessWithObject:user];
     } else {
