@@ -28,12 +28,13 @@
 @property (nonatomic, strong) FloatingAddButton *addButton;
 @property (nonatomic, strong) FloatingAddMenu *addMenu;
 @property (nonatomic, strong) ShareLinkDao *shareDao;
+@property (nonatomic, strong) MyViewController *rootViewController;
 @property (nonatomic) BOOL menuOpen;
 @property (nonatomic) BOOL menuLocked;
 
 - (void) showBaseLoading;
 - (void) hideBaseLoading;
-- (id)initWithRootViewController:(MyViewController *) rootViewController;
+- (id) initWithRootViewController:(MyViewController *) _rootViewController;
 - (void) presentAddButtonWithList:(NSArray *) _addTypeList;
 - (void) modifyAddButtonWithList:(NSArray *) addTypeList;
 - (void) dismissAddButton;

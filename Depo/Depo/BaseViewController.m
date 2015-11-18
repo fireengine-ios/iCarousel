@@ -57,8 +57,14 @@
 @synthesize shareDao;
 @synthesize menuLocked;
 @synthesize syncInfoView;
+@synthesize rootViewController;
 
-- (id)initWithRootViewController:(MyViewController *) rootViewController {
+- (id) initWithRootViewController:(MyViewController *) _rootViewController {
+    self.rootViewController = _rootViewController;
+    return [self init];
+}
+
+- (id) init {
     self = [super init];
     if (self) {
 
@@ -77,7 +83,11 @@
         menu.closeDelegate = self;
         [scroll addSubview:menu];
         
-        nav = [[MyNavigationController alloc] initWithRootViewController:rootViewController];
+        if(!self.rootViewController) {
+            self.rootViewController = [[HomeController alloc] init];
+        }
+        
+        nav = [[MyNavigationController alloc] initWithRootViewController:self.rootViewController];
         nav.view.frame = CGRectMake(kMenuOpenOriginX, 0, self.view.frame.size.width, self.view.frame.size.height);
         rootViewController.nav = nav;
         rootViewController.myDelegate = self;

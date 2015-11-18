@@ -130,6 +130,8 @@
 //    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
 //    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
     
+    [self initAudioSession];
+
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -268,20 +270,19 @@
 }
 
 - (void) triggerHome {
-    MyViewController *homeController = [[HomeController alloc] init];
-    base = [[BaseViewController alloc] initWithRootViewController:homeController];
+    self.base = [[BaseViewController alloc] init];
     [self.window setRootViewController:base];
 }
 
 - (void) triggerPhotosAndVideos {
     MyViewController *photosController = [[PhotoListController alloc] init];
-    base = [[BaseViewController alloc] initWithRootViewController:photosController];
+    self.base = [[BaseViewController alloc] initWithRootViewController:photosController];
     [self.window setRootViewController:base];
 }
 
 - (void) triggerSyncSettings {
     MyViewController *settingsController = [[SettingsController alloc] init];
-    base = [[BaseViewController alloc] initWithRootViewController:settingsController];
+    self.base = [[BaseViewController alloc] initWithRootViewController:settingsController];
     [self.window setRootViewController:base];
     
     SettingsUploadController *uploadController = [[SettingsUploadController alloc] init];
@@ -291,7 +292,7 @@
 
 - (void) triggerStorageSettings {
     MyViewController *settingsController = [[SettingsController alloc] init];
-    base = [[BaseViewController alloc] initWithRootViewController:settingsController];
+    self.base = [[BaseViewController alloc] initWithRootViewController:settingsController];
     [self.window setRootViewController:base];
     
     SettingsStorageController *storageController = [[SettingsStorageController alloc] init];
@@ -301,7 +302,7 @@
 
 - (void) triggerFloatingMenu {
     MyViewController *fileListController = [[FileListController alloc] init];
-    base = [[BaseViewController alloc] initWithRootViewController:fileListController];
+    self.base = [[BaseViewController alloc] initWithRootViewController:fileListController];
     [self.window setRootViewController:base];
     [base floatingAddButtonDidOpenMenu];
 }
@@ -641,6 +642,33 @@ void uncaughtExceptionHandler(NSException *exception) {
         NSString *leakFilePath = [documentsDirectory stringByAppendingPathComponent:path];
         [manager removeItemAtPath:leakFilePath error:nil];
 
+    }
+}
+
+- (void) initAudioSession {
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+    [audioSession setCategory: AVAudioSessionCategoryPlayback error: nil];
+    [audioSession setActive:YES error:nil];
+    [self becomeFirstResponder];
+}
+
+- (void) remoteControlReceivedWithEvent:(UIEvent *)event {
+    UIEventSubtype type = event.subtype;
+    if (type == UIEventSubtypeRemoteControlNextTrack) {
+        [session playNextAudioItem];
+    }
+    if (type == UIEventSubtypeRemoteControlPreviousTrack) {
+        [session playPreviousAudioItem];
+    }
+    if (type == UIEventSubtypeRemoteControlStop) {
+        [session stopAudioItem];
+    }
+    if (type == UIEventSubtypeRemoteControlPause) {
+        [session pauseAudioItem];
+    }
+    if (type == UIEventSubtypeRemoteControlPlay) {
+        [session playAudioItem];
     }
 }
 

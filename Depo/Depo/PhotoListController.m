@@ -661,16 +661,18 @@
         if(!albumList || [albumList count] == 0) {
             return;
         }
-        PhotoAlbum *album = [albumList objectAtIndex:indexPath.row];
-        if([selectedAlbumList containsObject:album.uuid]) {
-            [selectedAlbumList removeObject:album.uuid];
-        }
-        if([selectedAlbumList count] > 0) {
-            [self showAlbumFooterMenu];
-            self.title = [NSString stringWithFormat:NSLocalizedString(@"AlbumsSelectedTitle", @""), [selectedAlbumList count]];
-        } else {
-            [self hideAlbumFooterMenu];
-            self.title = NSLocalizedString(@"SelectAlbumsTitle", @"");
+        if([albumList count] > indexPath.row) {
+            PhotoAlbum *album = [albumList objectAtIndex:indexPath.row];
+            if([selectedAlbumList containsObject:album.uuid]) {
+                [selectedAlbumList removeObject:album.uuid];
+            }
+            if([selectedAlbumList count] > 0) {
+                [self showAlbumFooterMenu];
+                self.title = [NSString stringWithFormat:NSLocalizedString(@"AlbumsSelectedTitle", @""), [selectedAlbumList count]];
+            } else {
+                [self hideAlbumFooterMenu];
+                self.title = NSLocalizedString(@"SelectAlbumsTitle", @"");
+            }
         }
     }
 }

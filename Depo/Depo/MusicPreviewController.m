@@ -326,33 +326,7 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 }
 
 - (void) initNowPlayingInfoCenter:(MetaFile *) songInfo {
-    
-    MPNowPlayingInfoCenter* mpic = [MPNowPlayingInfoCenter defaultCenter];
-    NSMutableDictionary *songDictionary = [[NSMutableDictionary alloc] init];
-    if(songInfo) {
-        if (songInfo.detail.songTitle) {
-            [songDictionary setObject:songInfo.detail.songTitle forKey:MPMediaItemPropertyTitle];
-        } else {
-            [songDictionary setObject:songInfo.visibleName forKey:MPMediaItemPropertyTitle];
-        }
-        if (songInfo.detail.artist) {
-            [songDictionary setObject:songInfo.detail.artist forKey:MPMediaItemPropertyArtist];
-        }
-        if (songInfo.detail.album) {
-            [songDictionary setObject:songInfo.detail.album forKey:MPMediaItemPropertyAlbumTitle];
-        }
-        if (songInfo.detail.duration) {
-            double durationDouble = CMTimeGetSeconds([APPDELEGATE.session.playerItem duration]);
-            [songDictionary setObject:[NSNumber numberWithDouble:durationDouble] forKey:MPMediaItemPropertyPlaybackDuration];
-            
-            double playbackDouble = CMTimeGetSeconds([APPDELEGATE.session.playerItem currentTime]);
-            [songDictionary setObject:[NSNumber numberWithDouble:playbackDouble] forKey:MPNowPlayingInfoPropertyElapsedPlaybackTime];
-            
-        }
-    }
-    if(mpic) {
-        [mpic setNowPlayingInfo:songDictionary];
-    }
+    [APPDELEGATE.session initNowPlayingInfoCenter:songInfo];
 }
 
 - (void) triggerDismiss {
@@ -401,17 +375,6 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
         [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys: [UIColor whiteColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"TurkcellSaturaDem" size:18], NSFontAttributeName, nil]];
     }
     
-    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
-    [audioSession setCategory: AVAudioSessionCategoryPlayback error: nil];
-    [audioSession setActive:YES error:nil];
-    [self becomeFirstResponder];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(handleAudioSessionInterruption:)
-                                                 name:AVAudioSessionInterruptionNotification
-                                               object:audioSession];
-
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
@@ -579,7 +542,6 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 }
 
 - (NSString *) formatPlayTime:(int)second{
-    NSLog(@"SEC:%d", second);
     if(second < 0){
         return @"--:--";
     } else {
@@ -689,52 +651,7 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
     }
 }
 */
-#pragma mark Audi Notifications and Events
-- (void) remoteControlReceivedWithEvent:(UIEvent *)event {
-    UIEventSubtype type = event.subtype;
-    if (type == UIEventSubtypeRemoteControlNextTrack) {
-        [self nextClicked];
-    }
-    if (type == UIEventSubtypeRemoteControlPreviousTrack) {
-        [self prevClicked];
-    }
-    if (type == UIEventSubtypeRemoteControlStop) {
-        [self pauseClicked];
-    }
-    if (type == UIEventSubtypeRemoteControlPause) {
-        [self pauseClicked];
-    }
-    if (type == UIEventSubtypeRemoteControlPlay) {
-        [self playClicked];
-    }
-}
 
-- (void)handleAudioSessionInterruption:(NSNotification*)notification {
-    
-    NSNumber *interruptionType = [[notification userInfo] objectForKey:AVAudioSessionInterruptionTypeKey];
-    NSNumber *interruptionOption = [[notification userInfo] objectForKey:AVAudioSessionInterruptionOptionKey];
-    
-    switch (interruptionType.unsignedIntegerValue) {
-        case AVAudioSessionInterruptionTypeBegan:{
-            // • Audio has stopped, already inactive
-            // • Change state of UI, etc., to reflect non-playing state
-            [self pauseClicked];
-            NSLog(@"Interruption Begun");
-        } break;
-        case AVAudioSessionInterruptionTypeEnded:{
-            // • Make session active
-            // • Update user interface
-            // • AVAudioSessionInterruptionOptionShouldResume option
-            if (interruptionOption.unsignedIntegerValue == AVAudioSessionInterruptionOptionShouldResume) {
-                // Here you should continue playback.
-                NSLog(@"Interruption Finish");
-                [self playClicked];
-            }
-        } break;
-        default:
-            break;
-    }
-}
 - (MetaFile *) currentFile {
     for(MetaFile *row in self.files) {
         if([row.uuid isEqualToString:self.fileUuid]) {

@@ -14,6 +14,7 @@
 #import "MetaFile.h"
 #import "Usage.h"
 #import "ContactSyncResult.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 @interface AppSession : NSObject
 
@@ -63,5 +64,8 @@
 - (BOOL) isUrlPresentInBgOngoingTaskUrls:(NSString *) taskUrl;
 
 - (void) modifyPlayerItemFavUnfavFlag:(BOOL) favUnfav forUuid:(NSString *) uuid;
+
+- (void) initNowPlayingInfoCenter:(MetaFile *) songInfo;
+- (BOOL) isAudioPlaying;
 
 @end

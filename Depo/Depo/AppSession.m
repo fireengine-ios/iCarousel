@@ -223,4 +223,37 @@
     return NO;
 }
 
+- (void) initNowPlayingInfoCenter:(MetaFile *) songInfo {
+    MPNowPlayingInfoCenter* mpic = [MPNowPlayingInfoCenter defaultCenter];
+    NSMutableDictionary *songDictionary = [[NSMutableDictionary alloc] init];
+    if(songInfo) {
+        if (songInfo.detail.songTitle) {
+            [songDictionary setObject:songInfo.detail.songTitle forKey:MPMediaItemPropertyTitle];
+        } else {
+            [songDictionary setObject:songInfo.visibleName forKey:MPMediaItemPropertyTitle];
+        }
+        if (songInfo.detail.artist) {
+            [songDictionary setObject:songInfo.detail.artist forKey:MPMediaItemPropertyArtist];
+        }
+        if (songInfo.detail.album) {
+            [songDictionary setObject:songInfo.detail.album forKey:MPMediaItemPropertyAlbumTitle];
+        }
+        if (songInfo.detail.duration) {
+            double durationDouble = CMTimeGetSeconds([self.playerItem duration]);
+            [songDictionary setObject:[NSNumber numberWithDouble:durationDouble] forKey:MPMediaItemPropertyPlaybackDuration];
+            
+            double playbackDouble = CMTimeGetSeconds([self.playerItem currentTime]);
+            [songDictionary setObject:[NSNumber numberWithDouble:playbackDouble] forKey:MPNowPlayingInfoPropertyElapsedPlaybackTime];
+            
+        }
+    }
+    if(mpic) {
+        [mpic setNowPlayingInfo:songDictionary];
+    }
+}
+
+- (BOOL) isAudioPlaying {
+    return (self.audioPlayer.rate != 0 && !self.audioPlayer.error);
+}
+
 @end
