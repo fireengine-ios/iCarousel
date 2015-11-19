@@ -36,7 +36,7 @@
     MyNavigationController *printNav;
 }
 
-@property (nonatomic, strong) id<ImagePreviewDelegate> delegate;
+@property (nonatomic, weak) id<ImagePreviewDelegate> delegate;
 @property (nonatomic, strong) MetaFile *file;
 @property (nonatomic, strong) NSMutableArray *files;
 @property int cursor;

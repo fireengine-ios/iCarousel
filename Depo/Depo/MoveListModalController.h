@@ -19,7 +19,7 @@
     FileListDao *fileListDao;
 }
 
-@property (nonatomic, strong) id<MoveListModalProtocol> delegate;
+@property (nonatomic, weak) id<MoveListModalProtocol> delegate;
 @property (nonatomic, strong) MetaFile *folder;
 @property (nonatomic, strong) UITableView *folderTable;
 @property (nonatomic, strong) NSArray *folderList;

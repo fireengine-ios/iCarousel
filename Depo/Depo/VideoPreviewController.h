@@ -28,7 +28,7 @@
     ShareLinkDao *shareDao;
 }
 
-@property (nonatomic, strong) id<VideoPreviewDelegate> delegate;
+@property (nonatomic, weak) id<VideoPreviewDelegate> delegate;
 @property (nonatomic, strong) MetaFile *file;
 @property (nonatomic, strong) CustomAVPlayer *avPlayer;
 

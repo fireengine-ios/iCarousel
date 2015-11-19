@@ -45,7 +45,7 @@
     MyNavigationController *printNav;
 }
 
-@property (nonatomic, strong) id<PhotoAlbumDelegate> delegate;
+@property (nonatomic, weak) id<PhotoAlbumDelegate> delegate;
 @property (nonatomic, strong) PhotoAlbum *album;
 @property (nonatomic, strong) UIScrollView *photosScroll;
 @property (nonatomic, strong) NSMutableArray *photoList;

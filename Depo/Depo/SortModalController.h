@@ -14,7 +14,7 @@
 
 @interface SortModalController : MyModalController <UITableViewDataSource, UITableViewDelegate>
 
-@property(nonatomic, strong) id<SortModalDelegate> delegate;
+@property(nonatomic, weak) id<SortModalDelegate> delegate;
 @property(nonatomic, strong) UITableView *sortTable;
 @property(nonatomic, strong) NSArray *sortTypes;
 

@@ -16,7 +16,7 @@
 
 @interface AlbumDetailModalController : MyModalController <UITextFieldDelegate, UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) id<AlbumDetailDelegate> delegate;
+@property (nonatomic, weak) id<AlbumDetailDelegate> delegate;
 @property (nonatomic, strong) PhotoAlbum *album;
 @property (nonatomic, strong) GeneralTextField *nameField;
 

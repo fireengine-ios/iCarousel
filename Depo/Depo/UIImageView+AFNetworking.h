@@ -71,6 +71,8 @@
  */
 - (void)cancelImageRequestOperation;
 
++ (void)clearImageCaches;
+
 @end
 
 #endif

@@ -34,8 +34,8 @@
     NSMutableDictionary *filterDictionary;
 }
 
-@property (nonatomic, strong) id<MyViewDelegate> myDelegate;
-@property (nonatomic, strong) MyNavigationController *nav;
+@property (nonatomic, weak) id<MyViewDelegate> myDelegate;
+@property (nonatomic, weak) MyNavigationController *nav;
 @property (nonatomic, strong) MBProgressHUD *progress;
 @property (nonatomic, strong) NSArray *refPageList;
 @property (nonatomic, strong) NSString *searchQueryRef;

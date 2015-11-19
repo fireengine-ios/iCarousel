@@ -36,7 +36,7 @@
             NSString *surname = [mainDict objectForKey:@"surname"];
             NSString *mobileUploadsSpecialFolderUuid = [mainDict objectForKey:@"mobileUploadsSpecialFolderUuid"];
             NSString *url = [mainDict objectForKey:@"url"];
-            NSNumber *isCropAndShareTagAvailable = [mainDict objectForKey:@"isCropAndShareTagAvailable"];
+            NSNumber *isCropAndShareTagAvailable = [mainDict objectForKey:@"isCropyTagAvailable"];
             
             user.fullName = [NSString stringWithFormat:@"%@ %@", [self strByRawVal:name], [self strByRawVal:surname]];
             //            user.fullName = [NSString stringWithFormat:@"%@", [self strByRawVal:name]];

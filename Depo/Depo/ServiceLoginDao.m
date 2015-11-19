@@ -70,16 +70,16 @@
             result.authToken = token;
         }
 		
-        [delegate performSelector:successMethod withObject:result];
+        [self.delegate performSelector:successMethod withObject:result];
 		
 	} else {
-        [delegate performSelector:failMethod withObject:GENERAL_ERROR_MESSAGE];
+        [self.delegate performSelector:failMethod withObject:GENERAL_ERROR_MESSAGE];
 	}
     
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request {
-	[delegate performSelector:failMethod withObject:GENERAL_ERROR_MESSAGE];
+	[self.delegate performSelector:failMethod withObject:GENERAL_ERROR_MESSAGE];
 }
 
 @end

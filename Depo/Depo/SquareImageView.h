@@ -32,7 +32,7 @@
     UploadErrorType uploadErrorType;
 }
 
-@property (nonatomic, strong) id<SquareImageDelegate> delegate;
+@property (nonatomic, weak) id<SquareImageDelegate> delegate;
 @property (nonatomic, strong) MetaFile *file;
 @property (nonatomic, strong) UploadRef *uploadRef;
 @property (nonatomic, strong) UILongPressGestureRecognizer *longPressGesture;

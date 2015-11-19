@@ -22,7 +22,7 @@
     BOOL processConcluded;
 }
 
-@property (nonatomic, strong) id<ProcessFooterDelegate> delegate;
+@property (nonatomic, weak) id<ProcessFooterDelegate> delegate;
 @property (nonatomic, strong) NSString *processMsg;
 @property (nonatomic, strong) NSString *successMsg;
 @property (nonatomic, strong) NSString *failMsg;

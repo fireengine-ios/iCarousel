@@ -75,6 +75,9 @@ static char kAFImageRequestOperationObjectKey;
     static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{
         _af_imageCache = [[AFImageCache alloc] init];
+        [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidReceiveMemoryWarningNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+            [_af_imageCache removeAllObjects];
+        }];
     });
     
     return _af_imageCache;
@@ -150,6 +153,10 @@ static char kAFImageRequestOperationObjectKey;
 - (void)cancelImageRequestOperation {
     [self.af_imageRequestOperation cancel];
     self.af_imageRequestOperation = nil;
+}
+
++ (void)clearImageCaches {
+    [[UIImageView af_sharedImageCache] removeAllObjects];
 }
 
 @end

@@ -16,7 +16,7 @@
 
 @interface NewFolderModalController : MyModalController <UITextFieldDelegate, UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) id<NewFolderDelegate> delegate;
+@property (nonatomic, weak) id<NewFolderDelegate> delegate;
 @property (nonatomic, strong) GeneralTextField *nameField;
 
 @end

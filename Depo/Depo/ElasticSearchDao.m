@@ -50,7 +50,7 @@
 - (void) requestCropNShareForPage:(int) page andSize:(int) size andSortType:(SortType) sortType {
     sortType = [self resetSortType:sortType];
     
-    NSString *parentListingUrl = [NSString stringWithFormat:ELASTIC_LISTING_MAIN_URL, @"metadata.Crop-and-Share", @"true", [AppUtil serverSortNameByEnum:sortType forPhotosOnly:YES], [AppUtil isAscByEnum:sortType] ? @"ASC":@"DESC", page, size];
+    NSString *parentListingUrl = [NSString stringWithFormat:ELASTIC_LISTING_MAIN_URL, @"metadata.Cropy", @"true", [AppUtil serverSortNameByEnum:sortType forPhotosOnly:YES], [AppUtil isAscByEnum:sortType] ? @"ASC":@"DESC", page, size];
     NSURL *url = [NSURL URLWithString:parentListingUrl];
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];

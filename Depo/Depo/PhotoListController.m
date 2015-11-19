@@ -16,6 +16,7 @@
 #import "MapUtil.h"
 #import "UploadingImagePreviewController.h"
 #import "PrintWebViewController.h"
+#import "UIImageView+AFNetworking.h"
 
 #define IMG_FOOTER_TAG 111
 #define ALBUM_FOOTER_TAG 222
@@ -938,6 +939,11 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
+}
+
+- (void) dealloc {
+    //mahir
+    [UIImageView clearImageCaches];
 }
 
 @end

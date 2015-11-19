@@ -18,7 +18,7 @@
     UIImageView *bgView;
 }
 
-@property (nonatomic, strong) id<PhotoHeaderSegmentDelegate> delegate;
+@property (nonatomic, weak) id<PhotoHeaderSegmentDelegate> delegate;
 @property (nonatomic, strong) CustomButton *photoButton;
 @property (nonatomic, strong) CustomButton *albumButton;
 @property (nonatomic, strong) UIImage *firstBgImg;

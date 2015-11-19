@@ -16,6 +16,6 @@
 @interface CameraCaptureModalController : UIImagePickerController <UINavigationControllerDelegate, UIImagePickerControllerDelegate> {
 }
 
-@property (nonatomic, strong) id<CameraCapturaModalDelegate> modalDelegate;
+@property (nonatomic, weak) id<CameraCapturaModalDelegate> modalDelegate;
 
 @end

@@ -132,7 +132,6 @@
 #define OSP_PASS @"proxyuser2013"
 
 @interface BaseDao : NSObject {
-	id delegate;
 	SEL successMethod;
 	SEL failMethod;
     
@@ -140,7 +139,7 @@
     RequestTokenDao *tokenDao;
 }
 
-@property (nonatomic, strong) id delegate;
+@property (nonatomic, weak) id delegate;
 @property (nonatomic) SEL successMethod;
 @property (nonatomic) SEL failMethod;
 @property (nonatomic, strong) ASIFormDataRequest *currentRequest;

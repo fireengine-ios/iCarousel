@@ -21,7 +21,7 @@
     UploadManager *uploadManager;
 }
 
-@property (nonatomic, strong) id<PhotoModalDelegate> modalDelegate;
+@property (nonatomic, weak) id<PhotoModalDelegate> modalDelegate;
 @property (nonatomic, strong) NSMutableArray *assets;
 @property (nonatomic, strong) NSMutableArray *selectedAssets;
 @property (nonatomic, strong) UIScrollView *mainScroll;
