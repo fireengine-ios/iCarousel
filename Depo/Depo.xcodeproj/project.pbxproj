@@ -4355,7 +4355,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "fc494555-bd66-45d1-bed4-e6ba28b89f22";
+				PROVISIONING_PROFILE = "7f8d2c1e-4236-48f8-bf20-cde201b5bce0";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};

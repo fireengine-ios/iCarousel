@@ -219,23 +219,23 @@
             }
         }
         [delegate squareImageWasSelectedForView:self];
-    }
-    
-    if(isSelectible) {
-        isMarked = !isMarked;
-        if(isMarked) {
-            maskView.hidden = NO;
-            if(self.file != nil) {
-                [delegate squareImageWasMarkedForFile:self.file];
+    } else {
+        if(isSelectible) {
+            isMarked = !isMarked;
+            if(isMarked) {
+                maskView.hidden = NO;
+                if(self.file != nil) {
+                    [delegate squareImageWasMarkedForFile:self.file];
+                }
+            } else {
+                maskView.hidden = YES;
+                if(self.file != nil) {
+                    [delegate squareImageWasUnmarkedForFile:self.file];
+                }
             }
         } else {
-            maskView.hidden = YES;
-            if(self.file != nil) {
-                [delegate squareImageWasUnmarkedForFile:self.file];
-            }
+            [delegate squareImageWasSelectedForFile:self.file];
         }
-    } else {
-        [delegate squareImageWasSelectedForFile:self.file];
     }
 }
 
