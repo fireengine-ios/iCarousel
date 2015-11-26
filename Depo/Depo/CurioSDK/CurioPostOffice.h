@@ -16,7 +16,9 @@ typedef NS_ENUM(NSUInteger, CPostType) {
     CPostTypeEndScreen = 3,
     CPostTypeSendEvent = 4,
     CPostTypeStartSession = 5,
-    CPostTypeEndSession = 6
+    CPostTypeEndSession = 6,
+    CPostTypeUnregister = 7,
+    CPostTypeEndEvent = 8,
 };
 
 

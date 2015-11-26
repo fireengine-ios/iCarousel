@@ -161,6 +161,25 @@ fetchLocationEnabled:(NSNumber *)fetchLocationEnabled
 maxValidLocationTimeInterval:(NSNumber *)maxValidLocationTimeInterval;
 
 /**
+ Overrides all settings values with given ones
+ 
+ @return True if required values are ok FALSE if not
+ */
+- (BOOL) set:(NSString *)serverUrl
+      apiKey:(NSString *)apiKey
+trackingCode:(NSString *)trackingCode
+sessionTimeout:(NSNumber *)sessionTimeout
+periodicDispatchEnabled:(NSNumber *)periodicDispatchEnabled
+dispatchPeriod:(NSNumber *)dispatchPeriod
+maxCachedActivitiyCount:(NSNumber *)maxCachedActivityCount
+loggingEnabled:(NSNumber *)logginEnabled
+    logLevel:(NSNumber *)logLevel
+fetchLocationEnabled:(NSNumber *)fetchLocationEnabled
+maxValidLocationTimeInterval:(NSNumber *)maxValidLocationTimeInterval;
+
+
+
+/**
  Reads settings values from *-Info.plist file
  
  @return If everything goes fine then TRUE otherwise FALSE

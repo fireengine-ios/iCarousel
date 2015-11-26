@@ -81,7 +81,13 @@
             [self.locationManager requestWhenInUseAuthorization];
         }
         
+#if TARGET_OS_TV
+        [self.locationManager requestLocation];
+#else
         [self.locationManager startUpdatingLocation];
+#endif
+        
+        
     });
 }
 
@@ -89,7 +95,11 @@
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
     if (status == kCLAuthorizationStatusAuthorizedWhenInUse || status == kCLAuthorizationStatusAuthorizedAlways) {
+#if TARGET_OS_TV
+        [self.locationManager requestLocation];
+#else
         [self.locationManager startUpdatingLocation];
+#endif
     }
 }
 
@@ -220,12 +230,13 @@
                 
                 [[CurioDBToolkit shared] addLocationData:
                  [[CurioLocationData alloc] init:[[CurioUtil shared] nanos]
-                                 latitude:(userInfo != nil ? [userInfo objectForKey: CURKeyLatitude] : nil)
-                                      longitude:(userInfo != nil ? [userInfo objectForKey: CURKeyLongitude] : nil)]];
+                                        latitude:(userInfo != nil ? [userInfo objectForKey: CURKeyLatitude] : nil)
+                                       longitude:(userInfo != nil ? [userInfo objectForKey: CURKeyLongitude] : nil)]];
                 
                 CS_Log_Warning(@"Adding location to DB because it was not successfull");
                 
             }
+
             
         }
         

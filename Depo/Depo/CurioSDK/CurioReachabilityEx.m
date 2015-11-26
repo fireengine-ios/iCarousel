@@ -26,7 +26,7 @@
  */
 
 #import "CurioReachabilityEx.h"
-
+#import <Foundation/Foundation.h>
 
 NSString *const kReachabilityExChangedNotification = @"kReachabilityExChangedNotification";
 
@@ -467,7 +467,7 @@ static void TMReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
     return 0;
 }
 
--(NSString*)currentReachabilityString
+-(NSString*)currentReachabilityString __TVOS_UNAVAILABLE
 {
     CurioNetworkStatus temp = [self currentReachabilityStatus];
     

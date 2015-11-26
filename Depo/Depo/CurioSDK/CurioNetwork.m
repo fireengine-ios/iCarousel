@@ -9,8 +9,10 @@
 
 #import "CurioSDK.h"
 
+#if !TARGET_OS_TV
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <CoreTelephony/CTCarrier.h>
+#endif
 
 
 /**
@@ -49,7 +51,7 @@
             
                 //if (!slf.previouslyOnline && slf.isOnline) {
                     // Moved from offline to online
-                    
+                    [CurioSDK shared].retryCount = 0;
                     [[NSNotificationCenter defaultCenter] postNotificationName:CS_NOTIF_NEW_ACTION object:nil];
                     
                 //}
@@ -85,21 +87,28 @@
 
 - (NSString *) carrierCountryCode {
     
-    
+#if !TARGET_OS_TV
     CTTelephonyNetworkInfo *networkInfo = [[CTTelephonyNetworkInfo alloc] init];
     CTCarrier *carrier = networkInfo.subscriberCellularProvider;
     
     return carrier.mobileCountryCode != nil ? [carrier.mobileCountryCode uppercaseString] : CURNetworkCarrierUnknown;
+#endif
+    
+    return CURNetworkCarrierUnknown;
     
 }
 
 - (NSString *) carrierName {
     
-    
+#if !TARGET_OS_TV
     CTTelephonyNetworkInfo *networkInfo = [[CTTelephonyNetworkInfo alloc] init];
     CTCarrier *carrier = networkInfo.subscriberCellularProvider;
     
     return carrier.carrierName != nil ? [carrier.carrierName uppercaseString] : CURNetworkCarrierUnknown;
+#endif
+    
+    return CURNetworkCarrierUnknown;
+    
     
 }
 @end

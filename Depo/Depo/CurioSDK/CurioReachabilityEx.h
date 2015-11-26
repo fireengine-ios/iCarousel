@@ -67,13 +67,13 @@ typedef NS_ENUM(NSInteger, CurioNetworkStatus) {
 //Class has been renamed so applications using same classes do not overlap.
 @class CurioReachabilityEx;
 
-typedef void (^NetworkReachable)(CurioReachabilityEx * reachability);
-typedef void (^NetworkUnreachable)(CurioReachabilityEx * reachability);
+typedef void (^CurioNetworkReachable)(CurioReachabilityEx * reachability);
+typedef void (^CurioNetworkUnreachable)(CurioReachabilityEx * reachability);
 
 @interface CurioReachabilityEx : NSObject
 
-@property (nonatomic, copy) NetworkReachable    reachableBlock;
-@property (nonatomic, copy) NetworkUnreachable  unreachableBlock;
+@property (nonatomic, copy) CurioNetworkReachable    reachableBlock;
+@property (nonatomic, copy) CurioNetworkUnreachable  unreachableBlock;
 
 
 @property (nonatomic, assign) BOOL reachableOnWWAN;

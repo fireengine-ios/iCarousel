@@ -181,11 +181,10 @@
     
 }
 
-
 - (BOOL) addAction:(CurioAction *) action {
     
     
-    NSString *sql = [NSString stringWithFormat:@"INSERT INTO ACTIONS  VALUES('%@', %i ,'%@','%@','%@','%@','%@','%@',%@,'%@')",
+    NSString *sql = [NSString stringWithFormat:@"INSERT INTO ACTIONS VALUES('%@', %i ,'%@','%@','%@','%@','%@','%@','%@','%@')",
                      action.aId,
                      action.actionType,
                      [[CurioUtil shared] urlEncode:action.stamp],
@@ -195,8 +194,7 @@
                      [[CurioUtil shared] urlEncode:action.eventKey],
                      [[CurioUtil shared] urlEncode:action.eventValue],
                      action.isOnline,
-                     [[CurioUtil shared] toJson:action.properties enablePercentEncoding:TRUE]
-                     ];
+                     [[CurioUtil shared] toJson:action.properties enablePercentEncoding:TRUE]];
     
     CS_Log_Debug(@"Action (%@) => %@",CS_ACTION_TYPE_TO_STR(action.actionType),CS_RM_STR_NEWLINE([[CurioActionToolkit shared] actionToOnlinePostParameters:action]));
     
@@ -212,7 +210,7 @@
 
 
 - (NSArray *) getActions:(int) limit {
-
+    
     NSMutableArray *ret = [NSMutableArray new];
     
     [[CurioDB shared] invokeBlockSafe:^(sqlite3 *db) {
@@ -226,7 +224,7 @@
         {
             while (sqlite3_step(statement) == SQLITE_ROW)
             {
-
+                
                 CurioAction *act = [[CurioAction alloc] init:CS_AS_STRING(sqlite3_column_text(statement, 0))
                                                         type:sqlite3_column_int(statement, 1)
                                                        stamp:CS_LLD_AS_STRING(sqlite3_column_int64(statement, 2))
@@ -235,12 +233,9 @@
                                                      hitCode:CS_AS_STRING(sqlite3_column_text(statement, 5))
                                                     eventKey:CS_AS_STRING(sqlite3_column_text(statement, 6))
                                                   eventValue:CS_AS_STRING(sqlite3_column_text(statement, 7))];
-                
                 act.isOnline = [NSNumber numberWithInt:sqlite3_column_int(statement,8)];
-                act.properties = [NSMutableDictionary dictionaryWithDictionary:
-                                  [[CurioUtil shared] fromJson:CS_AS_STRING(sqlite3_column_text(statement, 9)) percentEncoded:TRUE]];
+                act.properties = [NSMutableDictionary dictionaryWithDictionary:[[CurioUtil shared] fromJson:CS_AS_STRING(sqlite3_column_text(statement, 9)) percentEncoded:TRUE]];
                 
-                              
                 [ret addObject:act];
                 
             }

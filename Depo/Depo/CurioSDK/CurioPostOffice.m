@@ -74,7 +74,21 @@ static pthread_mutex_t mutex;
                                                   forKey:[NSString stringWithFormat:@"HC%@",screenClass]];
             }
             
+        } else if (action != nil && action.actionType == CActionTypeSendEvent) {
+            // Check for hit code
+            NSString *eventKeyAndValue = [action.properties objectForKey:CS_CUSTOM_VAR_EVENTCLASS];
             
+            if (eventKeyAndValue) {
+                
+                NSDictionary *ret =  [[CurioUtil shared] fromJson:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] percentEncoded:FALSE];
+                
+                NSString *hitCode = [NSString stringWithFormat:@"%@",[ret objectForKey:CS_HTTP_JSON_VARNAME_EVENTCODE]];
+                
+                CS_Log_Info(@"Retrieved hit code %@ for screen %@",hitCode,eventKeyAndValue);
+                
+                [[CurioSDK shared].memoryStore setObject:hitCode
+                                                  forKey:[NSString stringWithFormat:@"HC%@",eventKeyAndValue]];
+            }
         }
         
         // Means we are successfully posted online post request
@@ -168,7 +182,9 @@ static pthread_mutex_t mutex;
         postType == CPostTypeStartSession ? CS_SERVER_URL_SUFFIX_SESSION_START :
         postType == CPostTypeSendEvent ? CS_SERVER_URL_SUFFIX_SEND_EVENT :
         postType == CPostTypeEndSession ? CS_SERVER_URL_SUFFIX_SESSION_END :
-        postType == CPostTypeEndScreen ? CS_SERVER_URL_SUFFIX_SCREEN_END : @"";
+        postType == CPostTypeEndScreen ? CS_SERVER_URL_SUFFIX_SCREEN_END :
+        postType == CPostTypeUnregister ? CS_SERVER_URL_SUFFIX_UNREGISTER :
+        postType == CPostTypeEndEvent ? CS_SERVER_URL_SUFFIX_END_EVENT : @"";
 
         NSString *sUrl = [NSString stringWithFormat:@"%@%@",[[CurioSettings shared] serverUrl],suffix];
     
@@ -191,9 +207,18 @@ static pthread_mutex_t mutex;
 
         BOOL responseOk = [self checkResponse:(NSHTTPURLResponse *)response url:sUrl data:data postedParameters:parameters action:action];
         
+        if(responseOk){
+            [CurioSDK shared].retryCount = 0;
+        }
+        
+        if (postType == CPostTypeUnregister) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:CS_NOTIF_UNREGISTER
+                                                                object:nil
+                                                              userInfo:responseOk ? @{CURKeyStatus: CURKeyOK, CURKeyResponse: @"Unregistered Successfully"} : @{CURKeyStatus: CURKeyNOK, CURKeyResponse: error ? error.description : @""}];
+        }
+        
         if (error != nil) {
             CS_Log_Warning(@"Warning: %ld , %@",(long)error.code, error.localizedDescription);
-            
             last_errorCode = (long) error.code;
         } else {
             last_errorCode = 0;
@@ -250,7 +275,10 @@ static pthread_mutex_t mutex;
     action.actionType == CActionTypeStartScreen ? CPostTypeStartScreen :
     action.actionType == CActionTypeEndScreen ? CPostTypeEndScreen :
     action.actionType == CActionTypeEndSession ? CPostTypeEndSession :
-    action.actionType == CActionTypeSendEvent ? CPostTypeSendEvent : 0;
+    action.actionType == CActionTypeSendEvent ? CPostTypeSendEvent :
+    action.actionType == CActionTypeUnregister ? CPostTypeUnregister :
+    action.actionType == CActionTypeEndEvent ? CPostTypeEndEvent : 0;
+    
     
     return [self postRequest:type parameters:[[CurioActionToolkit shared] actionToOnlinePostParameters:action] action:action];
 }
@@ -331,8 +359,10 @@ static pthread_mutex_t mutex;
 
 - (void) flushAwaitingOfflineActions:(NSMutableArray *)oactions {
     
-    if (oactions.count  > 0 )
-    {
+    if (oactions.count  > 0 && [[CurioSDK shared] retryCount] < CURMaxRequestRetryCount) {
+        
+        [CurioSDK shared].retryCount++;
+        
         if ([self postOfflineActions:oactions]) {
             [[CurioDBToolkit shared] deleteRecords:oactions];
             [oactions removeAllObjects];
@@ -354,8 +384,10 @@ static pthread_mutex_t mutex;
 
 - (void) flushAwaitingPDRActions:(NSMutableArray *)pactions {
     
-    
-    if (pactions.count > 0) {
+    if (pactions.count > 0 && [[CurioSDK shared] retryCount] < CURMaxRequestRetryCount) {
+        
+        [CurioSDK shared].retryCount++;
+        
         if ([self postPeriodicDispatchActions:pactions]) {
             [[CurioDBToolkit shared] deleteRecords:pactions];
             [pactions removeAllObjects];
@@ -376,8 +408,6 @@ static pthread_mutex_t mutex;
 }
 
 - (void) tryToPostAwaitingActions:(BOOL) canRunOnMainThread {
-    
-    
     
     if (pthread_mutex_trylock(&mutex) != 0)
     {
@@ -407,6 +437,9 @@ static pthread_mutex_t mutex;
     if (![[CurioNetwork shared] isOnline]) {
         
         [[CurioDBToolkit shared] markAsOfflineRecords:actions];
+        NSMutableArray *offlineActions = [NSMutableArray new];
+        [offlineActions addObjectsFromArray:actions];
+        [self flushAwaitingOfflineActions:offlineActions];
     } else {
         // We are online... it is good to go
         NSMutableArray *offlineActions = [NSMutableArray new];
@@ -426,7 +459,8 @@ static pthread_mutex_t mutex;
                 
                 if (CS_NSN_IS_TRUE([[CurioSettings shared] periodicDispatchEnabled])
                     && action.actionType != CActionTypeStartSession
-                    && action.actionType != CActionTypeEndSession) {
+                    && action.actionType != CActionTypeEndSession
+                    && action.actionType != CActionTypeUnregister) {
                     
                     [pdrActions addObject:action];
                     
@@ -436,7 +470,6 @@ static pthread_mutex_t mutex;
                     if ([self postAction:action]) {
                         [[CurioDBToolkit shared] deleteRecords:[NSArray arrayWithObject:action]];
                     } else  {
-                        
                         
                         // A Problem with online post
                         BOOL fixed = (action.actionType == CActionTypeEndSession) ? FALSE :
@@ -474,7 +507,8 @@ static pthread_mutex_t mutex;
     // If we read as max as we could that means
     // there may be more records to work on
     // So in case that there is, we are running same function again
-    if (actions.count == CS_OPT_MAX_ACTION_TO_READ_PER_POST) {
+    CS_Log_Debug(@"Actions count: %lu, RetryCount: %lu", (unsigned long)actions.count, (unsigned long)[CurioSDK shared].retryCount);
+    if (actions.count == CS_OPT_MAX_ACTION_TO_READ_PER_POST && [CurioSDK shared].retryCount < CURMaxRequestRetryCount) {
         CS_Log_Debug(@"Trying to post rest of the actions...");
         [self tryToPostAwaitingActions:canRunOnMainThread];
     }

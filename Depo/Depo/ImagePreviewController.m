@@ -220,9 +220,11 @@
     MetaFile *tempFile = [MetaFile alloc];
     int cursorFound = 0;
     for (int i = 0; i<[self.files count]; i++) {
-        tempFile = [self.files objectAtIndex:i];
-        if ([tempFile.uuid isEqualToString:self.file.uuid]) {
-            cursorFound = i;
+        if([[self.files objectAtIndex:i] isKindOfClass:[MetaFile class]]) {
+            tempFile = [self.files objectAtIndex:i];
+            if ([tempFile.uuid isEqualToString:self.file.uuid]) {
+                cursorFound = i;
+            }
         }
     }
     return cursorFound;

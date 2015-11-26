@@ -17,12 +17,14 @@
 #endif
 
 
-#define CURIO_SDK_VERSION @"1.04"
+#define CURIO_SDK_VERSION @"1.2.1"
 
 // Notification names
 
 #define CS_NOTIF_NEW_ACTION @"CS_NOTIF_NEW_ACTION"
 #define CS_NOTIF_REGISTERED_NEW_SESSION_CODE @"CS_NOTIF_REGISTERED_NEW_SESSION_CODE"
+#define CS_NOTIF_UNREGISTER @"CS_NOTIF_UNREGISTER"
+#define CS_NOTIF_CUSTOM_ID_SET @"CS_NOTIF_CUSTOM_ID_SET"
 
 // Optional parameters
 
@@ -55,6 +57,7 @@
 #define CS_SERVER_URL_SUFFIX_SCREEN_START @"/hit/create"
 #define CS_SERVER_URL_SUFFIX_SCREEN_END  @"/hit/end"
 #define CS_SERVER_URL_SUFFIX_SEND_EVENT  @"/event/create"
+#define CS_SERVER_URL_SUFFIX_END_EVENT  @"/event/end"
 #define CS_SERVER_URL_SUFFIX_PERIODIC_BATCH @"/batch/create"
 #define CS_SERVER_URL_SUFFIX_OFFLINE_CACHE  @"/offline/create"
 #define CS_SERVER_URL_SUFFIX_PUSH_DATA @"/visitor/setPushData"
@@ -63,6 +66,7 @@
 #define CS_SERVER_URL_SUFFIX_PUSH_HISTORY @"/pushHistory/get"
 
 #define CS_HTTP_PARAM_HIT_CODE @"hitCode"
+#define CS_HTTP_PARAM_EVENT_CODE @"eventCode"
 #define CS_HTTP_PARAM_TRACKING_CODE @"trackingCode"
 #define CS_HTTP_PARAM_VISITOR_CODE @"visitorCode"
 #define CS_HTTP_PARAM_PATH @"path"
@@ -79,6 +83,7 @@
 #define CS_HTTP_PARAM_SESSION_CODE @"sessionCode"
 #define CS_HTTP_PARAM_EVENT_KEY @"eventKey"
 #define CS_HTTP_PARAM_EVENT_VALUE @"eventValue"
+#define CS_HTTP_PARAM_EVENT_DURATION @"eventDuration"
 #define CS_HTTP_PARAM_SIM_OPERATOR @"simOperator"
 #define CS_HTTP_PARAM_SIM_COUNTRY_ISO @"simOpCountry"
 #define CS_HTTP_PARAM_NETWORK_OPERATOR_NAME @"networkOpName"
@@ -90,23 +95,30 @@
 #define CS_HTTP_PARAM_TIME @"time"
 #define CS_HTTP_PARAM_JSON_DATA @"data"
 #define CS_HTTP_PARAM_TITLE @"pageTitle"
+#define CS_HTTP_PARAM_BATTERY_STATE @"batteryState"
+#define CS_HTTP_PARAM_BATTERY_LEVEL @"batteryLevel"
+#define CS_HTTP_PARAM_BLUETOOTH_STATE @"bluetooth"
+#define CS_HTTP_PARAM_TOTAL_STORAGE_SPACE @"totalStorageSpace"
+#define CS_HTTP_PARAM_TOTAL_FREE_STORAGE_SPACE @"storage"
 
 #define CS_CUSTOM_VAR_SCREENCLASS @"screenClass"
-
+#define CS_CUSTOM_VAR_EVENTCLASS @"eventClass"
 
 #define CS_HTTP_JSON_VARNAME_TYPE @"type"
 #define CS_HTTP_JSON_VARNAME_TIMESTAMP @"timestamp"
 #define CS_HTTP_JSON_VARNAME_PAGETITLE @"pageTitle"
 #define CS_HTTP_JSON_VARNAME_PATH @"path"
 #define CS_HTTP_JSON_VARNAME_HITCODE @"hitCode"
+#define CS_HTTP_JSON_VARNAME_EVENTCODE @"eventCode"
 #define CS_HTTP_JSON_VARNAME_SESSIONCODE @"sessionCode"
 #define CS_HTTP_JSON_VARNAME_EVENT_KEY @"eventKey"
 #define CS_HTTP_JSON_VARNAME_EVENT_VALUE @"eventValue"
-
+#define CS_HTTP_JSON_VARNAME_EVENT_DURATION @"eventDuration"
 
 // Shortcuts
 
 #define CS_CONST_AL_SC @"ALIVE_SCREENS"
+#define CS_CONST_AL_EV @"ALIVE_EVENTS"
 
 #define CS_CONST_DEV_TOK @"DEVICE_TOKEN"
 
@@ -130,12 +142,13 @@
 
 #define CS_AS_STRING(val) [NSString stringWithFormat:@"%s",val]
 #define CS_INT_AS_STRING(val) [NSString stringWithFormat:@"%i",val]
+#define CS_DOUBLE_AS_STRING(val) [NSString stringWithFormat:@"%lf",val]
 #define CS_LLD_AS_STRING(val) [NSString stringWithFormat:@"%lld",val]
 
 #define CS_SET_DICT_IF_NOT_NIL(dict,val,key) if (val != nil) [dict setObject:val forKey:key];
 
-
 #import <UIKit/UIKit.h>
+
 #import "CurioConstants.h"
 #import "CurioReachabilityEx.h"
 #import "CurioSettings.h"
@@ -150,8 +163,14 @@
 #import "CurioNotificationManager.h"
 #import "CurioLocationManager.h"
 #import "CurioLocationData.h"
+#import "CurioResourceUtil.h"
 
 
+__TVOS_UNAVAILABLE
+@protocol CurioSDKDelegate <NSObject>
+- (void) unregisteredFromNotificationServer:(NSDictionary *)responseDictionary;
+- (void) customIDSent:(NSDictionary *)responseDictionary;
+@end
 
 
 @interface CurioSDK : NSObject {
@@ -159,18 +178,21 @@
     NSOperationQueue *curioQueue;
     NSOperationQueue *curioActionQueue;
     BOOL appWasInBackground;
-
 }
 
 @property (nonatomic) BOOL sessionCodeRegisteredOnServer;
 @property (strong, nonatomic) NSMutableDictionary *memoryStore;
 @property (strong, nonatomic) NSMutableArray *aliveScreens;
+@property (strong, nonatomic) NSMutableArray *aliveEvents;
 @property (strong, nonatomic) NSDictionary *appLaunchOptions;
 
 //Custom Id parameter.
 @property (strong, nonatomic) NSString *customId;
 
+@property (assign, nonatomic) NSUInteger retryCount;
 
+
+@property (assign,nonatomic) id<CurioSDKDelegate> delegate __TVOS_UNAVAILABLE;
 
 
 /**
@@ -205,6 +227,14 @@
 - (void) sendEvent:(NSString *) eventKey eventValue:(NSString *) eventValue;
 
 /**
+ *  Sends event-key and event-value back to Curio Server
+ *
+ *  @param eventKey   Key of the event
+ *  @param eventValue Value of the event
+ *
+ */
+- (void) endEvent:(NSString *) eventKey eventValue:(NSString *) eventValue eventDuration:(NSUInteger) eventDuration;
+/**
  *  Send endScreen message back to Curio server
  *
  *  @param screenClass Class type of the screen mentioned
@@ -236,10 +266,56 @@
  */
 - (void) startSession:(NSDictionary *)appLaunchOptions;
 
-/**
-    Starts Curio session.
+/*
  
+ ServerURL: [Required] Curio server URL, can be obtained from Turkcell.
+ 
+ ApiKey: [Required] Application specific API key, can be obtained from Turkcell.
+ 
+ TrackingCode: [Required] Application specific tracking code, can be obtained from Turkcell.
+ 
+ SessionTimeout: [Optional] Session timeout in minutes. Default is 30 minutes but it's highly recommended to change this value acording to the nature of your application. Specifiying a correct session timeout value for your application will increase the accuracy of the analytics data.
+ 
+ PeriodicDispatchEnabled: [Optional] Periodic dispatch is enabled if true. Default is false.
+ 
+ DispatchPeriod: [Optional] If periodic dispatch is enabled, this parameter configures dispatching period in minutes. Deafult is 5 minutes. Note: This parameter cannot be greater than session timeout value.
+ 
+ MaxCachedActivityCount: [Optional] Max. number of user activity that Curio library will remember when device is not connected to the Internet. Default is 1000. Max. value can be 4000.
+ 
+ LoggingEnabled: [Optional] All of the Curio logs will be disabled if this is false. Default is true.
+ 
+ LogLevel: [Optional] Contains level of the print-out logs. 0 - Error, 1 - Warning, 2 - Info, 3 - Debug. Default is 0 (Error).
+ 
+ RegisterForRemoteNotifications: If enabled, then Curio SDK will automatically register for remote notifications for types defined in "NotificationTypes" parameter.
+ 
+ NotificationTypes: Notification types to register; available values: Sound, Badge, Alert
+ 
+ FetchLocationEnabled: [Optional] If enabled, the current location of the device will be tracked while using the application. Default is true. The accuracy of recent location is validated using MaxValidLocationTimeInterval. Location tracking stops when the accurate location is found according to the needs. For further location tracking you can use [[CurioSDK shared] sendLocation] method. In order to track locations in iOS8 NSLocationWhenInUseUsageDescription must be implemented in Info.plist file.
+ 
+ MaxValidLocationTimeInterval: [Optional] Default is 600 seconds. The accuracy of recent location is validated using this parameter. Location tracking continues until it reaches to a valid location time interval.
+ 
+ delegate: If you are using "CurioSDKDelegate" protocol, you can set this parameter with your class reference. "CurioSDKDelegate" protocol provides callbacks for responses from "unregisterFromNotificationServer" and "sendCustomId" methods.
+ 
+*/
+
+/*! Starts Curio session.
+ * \param startSession serverUrl [Required] Curio server URL, can be obtained from Turkcell.
+ * \param apiKey [Required] Application specific API key, can be obtained from Turkcell.
+ * \param trackingCode [Required] Application specific tracking code, can be obtained from Turkcell.
+ * \param sessionTimeout [Optional] Session timeout in minutes. Default is 30 minutes but it's highly recommended to change this value acording to the nature of your application. Specifiying a correct session timeout value for your application will increase the accuracy of the analytics data.
+ * \param periodicDispatchEnabled [Optional] Periodic dispatch is enabled if true. Default is false.
+ * \param dispatchPeriod [Optional] If periodic dispatch is enabled, this parameter configures dispatching period in minutes. Deafult is 5 minutes. Note: This parameter cannot be greater than session timeout value.
+ * \param maxCachedActivitiyCount [Optional] Max. number of user activity that Curio library will remember when device is not connected to the Internet. Default is 1000. Max. value can be 4000.
+ * \param loggingEnabled [Optional] All of the Curio logs will be disabled if this is false. Default is true.
+ * \param logLevel [Optional] Contains level of the print-out logs. 0 - Error, 1 - Warning, 2 - Info, 3 - Debug. Default is 0 (Error).
+ * \param registerForRemoteNotifications If enabled, then Curio SDK will automatically register for remote notifications for types defined in "NotificationTypes" parameter.
+ * \param notificationTypes Notification types to register; available values: Sound, Badge, Alert
+ * \param fetchLocationEnabled [Optional] If enabled, the current location of the device will be tracked while using the application. Default is true. The accuracy of recent location is validated using MaxValidLocationTimeInterval. Location tracking stops when the accurate location is found according to the needs. For further location tracking you can use [[CurioSDK shared] sendLocation] method. In order to track locations in iOS8 NSLocationWhenInUseUsageDescription must be implemented in Info.plist file.
+ * \param maxValidLocationTimeInterval [Optional] Default is 600 seconds. The accuracy of recent location is validated using this parameter. Location tracking continues until it reaches to a valid location time interval.
+ * \param delegate If you are using "CurioSDKDelegate" protocol, you can set this parameter with your class reference. "CurioSDKDelegate" protocol provides callbacks for responses from "unregisterFromNotificationServer" and "sendCustomId" methods.
+ * \param appLaunchOptions Set this with Appdelegate's appLaunchOptions. It is used for tracking notifications.
  */
+
 - (void) startSession:(NSString *)serverUrl
                apiKey:(NSString *)apiKey
          trackingCode:(NSString *)trackingCode
@@ -253,7 +329,8 @@ registerForRemoteNotifications:(BOOL)registerForRemoteNotifications
     notificationTypes:(NSString *) notificationTypes
  fetchLocationEnabled:(BOOL)fetchLocationEnabled
 maxValidLocationTimeInterval:(double)maxValidLocationTimeInterval
-     appLaunchOptions:(NSDictionary *)appLaunchOptions;
+             delegate:(id<CurioSDKDelegate>)delegate
+     appLaunchOptions:(NSDictionary *)appLaunchOptions __TVOS_UNAVAILABLE;
 
 /**
     Starts Curio session.
@@ -267,6 +344,23 @@ maxValidLocationTimeInterval:(double)maxValidLocationTimeInterval
 
 
 /**
+ *    Starts Curio session without notification features.
+ */
+
+-(void)startSession:(NSString *)serverUrl
+             apiKey:(NSString *)apiKey
+       trackingCode:(NSString *)trackingCode
+     sessionTimeout:(int)sessionTimeout
+periodicDispatchEnabled:(BOOL)periodicDispatchEnabled
+     dispatchPeriod:(int)dispatchPeriod
+maxCachedActivitiyCount:(int)maxCachedActivityCount
+     loggingEnabled:(BOOL)logginEnabled
+           logLevel:(int)logLevel
+fetchLocationEnabled:(BOOL)fetchLocationEnabled
+maxValidLocationTimeInterval:(double)maxValidLocationTimeInterval
+   appLaunchOptions:(NSDictionary *)appLaunchOptions;
+
+/**
  *  Re-generates session code for further actions
  */
 - (void) reGenerateSessionCode;
@@ -275,18 +369,24 @@ maxValidLocationTimeInterval:(double)maxValidLocationTimeInterval
 /**
  * Unregisters this device from push notification server.
  */
-- (void) unregisterFromNotificationServer;
+- (void) unregisterFromNotificationServer __TVOS_UNAVAILABLE;
 
 /**
  * Sends custom id to push notification server manually.
  */
-- (void) sendCustomId:(NSString *)theCustomId;
+- (void) sendCustomId:(NSString *)theCustomId __TVOS_UNAVAILABLE;
 
+/**
+ *
+ */
 - (void) sendLocation;
 
+/**
+ *
+ */
 - (void)getNotificationHistoryWithPageStart:(NSInteger)pageStart
                                rows:(NSInteger)rows
                                  success:(void(^)(NSDictionary *responseObject))success
-                                 failure:(void(^)(NSError *error))failure;
+                                 failure:(void(^)(NSError *error))failure __TVOS_UNAVAILABLE;
 
 @end

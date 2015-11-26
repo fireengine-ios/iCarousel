@@ -36,23 +36,6 @@
     return self;
 }
 
-/*- (NSString *) deviceToken {
-    
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    
-    return [userDefaults objectForKey:CS_CONST_DEV_TOK];
-}*/
-
-/*- (void) setDeviceToken:(NSString *) deviceToken {
-    
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    
-    [userDefaults setObject:deviceToken forKey:CS_CONST_DEV_TOK];
-    [userDefaults synchronize];
-    
-    
-}*/
-
 - (void) sendPreviouslyFailedPushDataToServer:(id) notif {
     
     NSArray *rNotifications = [[CurioDBToolkit shared] getStoredPushData];
@@ -81,95 +64,104 @@
     __weak CurioNotificationManager *weakSelf = self;
     
     [curioNotificationQueue addOperationWithBlock:^{
-        
-    @synchronized(weakSelf) {
-        
-        if (![[CurioSDK shared] sessionCodeRegisteredOnServer]) {
+        @synchronized(weakSelf) {
             
-            CS_Log_Debug(@"No session code registered on server, push data will be inserted into DB...");
+            if (![[CurioSDK shared] sessionCodeRegisteredOnServer]) {
+                
+                if ([@"YES" isEqualToString:[userInfo objectForKey:CURKeySendCustomID]]) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:CS_NOTIF_CUSTOM_ID_SET object:nil userInfo:@{CURKeyStatus: CURKeyNOK, CURKeyResponse: @"Custom ID could not be sent. There is no session code registered on server."}];
+                }
+                
+                CS_Log_Debug(@"No session code registered on server, push data will be inserted into DB...");
+                
+                BOOL result = [[CurioDBToolkit shared] addPushData:
+                               [[CurioPushData alloc] init:[[CurioUtil shared] nanos]
+                                               deviceToken:[weakSelf deviceToken]
+                                                    pushId:(userInfo != nil ? [userInfo objectForKey: CURKeyPId] : nil)]];
+                
+                CS_Log_Info(@"Push data DB insert result is %d", result);
+                
+                
+                return;
+            }
             
-            BOOL result = [[CurioDBToolkit shared] addPushData:
-             [[CurioPushData alloc] init:[[CurioUtil shared] nanos]
+            
+            NSString *sUrl = [NSString stringWithFormat:@"%@%@",[[CurioSettings shared] serverUrl],CS_SERVER_URL_SUFFIX_PUSH_DATA];
+            
+            NSURL *url = [NSURL URLWithString:sUrl];
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+            [request setHTTPMethod:@"POST"];
+            [request setHTTPShouldHandleCookies:NO];
+            [request setValue:CS_OPT_USER_AGENT forHTTPHeaderField:@"User-Agent"];
+            
+            NSString *pushMsgId = nil;
+            
+            if(userInfo != nil){
+                pushMsgId = [userInfo objectForKey: CURKeyPId];
+            }
+            
+            if(pushMsgId == nil){
+                pushMsgId = @"";
+            }
+            
+            NSString *postBody = [[CurioUtil shared] dictToPostBody:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                     [[CurioUtil shared] vendorIdentifier], CURHttpParamVisitorCode,
+                                                                     [[CurioSettings shared] trackingCode], CURHttpParamTrackingCode,
+                                                                     [[CurioSDK shared] sessionCode], CURKeySessionCode,
+                                                                     pushMsgId, CURHttpParamPushId, // message Id
+                                                                     [weakSelf deviceToken], CURHttpParamPushToken, //deviceToken
+                                                                     [[CurioSDK shared] customId], CURHttpParamCustomId, //Custom id param
+                                                                     nil]];
+            
+            NSData *dataPostBody = [postBody dataUsingEncoding:NSUTF8StringEncoding];
+            
+            CS_Log_Debug(@"\r\rSendPushData REQUEST;\rURL: %@,\rUserinfo: %@,\rPost body:\r%@\r\r",sUrl,CS_RM_STR_NEWLINE(userInfo),[postBody stringByReplacingOccurrencesOfString:@"&" withString:@"\r"]);
+            
+            [request setHTTPBody:dataPostBody];
+            
+            
+            NSURLResponse * response = nil;
+            NSError * error = nil;
+            NSData * data  = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+            
+            
+            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+            
+            
+            CS_Log_Debug(@"\r\rRESPONSE for URL: %@,\rStatus code: %ld,\rResponse string: %@\r\r",sUrl,(long)[((NSHTTPURLResponse *)response) statusCode],[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+            
+            BOOL failed = FALSE;
+            if ((long)httpResponse.statusCode != 200) {
+                CS_Log_Warning(@"Not ok: %ld, %@",(long)httpResponse.statusCode,[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+                failed = TRUE;
+            } else if ((long)httpResponse.statusCode == 200) {
+                if ([[CurioSDK shared] customId] && [[CurioSDK shared] customId].length && [@"YES" isEqualToString:[userInfo objectForKey:CURKeySendCustomID]]) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:CS_NOTIF_CUSTOM_ID_SET object:nil userInfo:@{CURKeyStatus: CURKeyOK, CURKeyResponse: @"Custom ID has been set successfully."}];
+                }
+            }
+            if (error != nil) {
+                CS_Log_Warning(@"Warning: %ld , %@ %@",(long)error.code, sUrl, error.localizedDescription);
+                
+                failed = TRUE;
+            }
+            
+            
+            if (failed) {
+                
+                if ([[CurioSDK shared] customId] && [[CurioSDK shared] customId].length > 0 && [@"YES" isEqualToString:[userInfo objectForKey:CURKeySendCustomID]]) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:CS_NOTIF_CUSTOM_ID_SET object:nil userInfo:@{CURKeyStatus: CURKeyNOK, CURKeyResponse: error ? error.description : @"Custom ID could not be sent."}];
+                }
+                
+                [[CurioDBToolkit shared] addPushData:
+                 [[CurioPushData alloc] init:[[CurioUtil shared] nanos]
                                  deviceToken:[weakSelf deviceToken]
                                       pushId:(userInfo != nil ? [userInfo objectForKey: CURKeyPId] : nil)]];
-            
-            CS_Log_Info(@"Push data DB insert result is %d", result);
-            
-            
-            return;
+                
+                CS_Log_Warning(@"Adding push data to DB because it was not successfull");
+                
+            }
         }
-        
-        
-        NSString *sUrl = [NSString stringWithFormat:@"%@%@",[[CurioSettings shared] serverUrl],CS_SERVER_URL_SUFFIX_PUSH_DATA];
-        
-        NSURL *url = [NSURL URLWithString:sUrl];
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
-        [request setHTTPMethod:@"POST"];
-        [request setHTTPShouldHandleCookies:NO];
-        [request setValue:CS_OPT_USER_AGENT forHTTPHeaderField:@"User-Agent"];
-        
-        NSString *pushMsgId = nil;
-        
-        if(userInfo != nil){
-            pushMsgId = [userInfo objectForKey: CURKeyPId];
-        }
-        
-        if(pushMsgId == nil){
-            pushMsgId = @"";
-        }
-        
-        NSString *postBody = [[CurioUtil shared] dictToPostBody:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                 [[CurioUtil shared] vendorIdentifier], CURHttpParamVisitorCode,
-                                                                 [[CurioSettings shared] trackingCode], CURHttpParamTrackingCode,
-                                                                 [[CurioSDK shared] sessionCode], CURKeySessionCode,
-                                                                 pushMsgId, CURHttpParamPushId, // message Id
-                                                                 [weakSelf deviceToken], CURHttpParamPushToken, //deviceToken
-                                                                 [[CurioSDK shared] customId], CURHttpParamCustomId, //Custom id param
-                                                                 nil]];
-        
-        NSData *dataPostBody = [postBody dataUsingEncoding:NSUTF8StringEncoding];
-        
-        CS_Log_Debug(@"\r\rSendPushData REQUEST;\rURL: %@,\rUserinfo: %@,\rPost body:\r%@\r\r",sUrl,CS_RM_STR_NEWLINE(userInfo),[postBody stringByReplacingOccurrencesOfString:@"&" withString:@"\r"]);
-        
-        [request setHTTPBody:dataPostBody];
-        
-        
-        NSURLResponse * response = nil;
-        NSError * error = nil;
-        NSData * data  = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-        
-        
-        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-        
-        
-        CS_Log_Debug(@"\r\rRESPONSE for URL: %@,\rStatus code: %ld,\rResponse string: %@\r\r",sUrl,(long)[((NSHTTPURLResponse *)response) statusCode],[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-        
-        BOOL failed = FALSE;
-        
-        if ((long)httpResponse.statusCode != 200) {
-            CS_Log_Warning(@"Not ok: %ld, %@",(long)httpResponse.statusCode,[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-            failed = TRUE;
-        }
-        if (error != nil) {
-            CS_Log_Warning(@"Warning: %ld , %@ %@",(long)error.code, sUrl, error.localizedDescription);
-            
-            failed = TRUE;
-        }
-        
-        
-        if (failed) {
-            
-            [[CurioDBToolkit shared] addPushData:
-             [[CurioPushData alloc] init:[[CurioUtil shared] nanos]
-                                 deviceToken:[weakSelf deviceToken]
-                                      pushId:(userInfo != nil ? [userInfo objectForKey: CURKeyPId] : nil)]];
-            
-            CS_Log_Warning(@"Adding push data to DB because it was not successfull");
-            
-        }
-        
-    }
-    
+
     }];
 }
 
@@ -210,15 +202,13 @@
                 (hasAlert ? CURNotificationTypeAlert : @"") ,
                 (hasBadge ? CURNotificationTypeBadge : @""))
     
-    
-    
     // If iOS version is 8.0
     if ([app respondsToSelector:@selector(isRegisteredForRemoteNotifications)])
     {
         
         UIUserNotificationType notificationType = ((hasSound ? UIUserNotificationTypeSound : 0) |
-                                          (hasAlert ? UIUserNotificationTypeAlert : 0) |
-                                          (hasBadge ? UIUserNotificationTypeBadge : 0));
+                                                   (hasAlert ? UIUserNotificationTypeAlert : 0) |
+                                                   (hasBadge ? UIUserNotificationTypeBadge : 0));
         
         CS_Log_Info(@"Registering for >= 8.0 notifications");
         
@@ -230,13 +220,14 @@
         // If iOS version is less than 8.0
     {
         UIRemoteNotificationType notificationType = ((hasSound ? UIRemoteNotificationTypeSound : 0) |
-                                            (hasAlert ? UIRemoteNotificationTypeAlert : 0) |
-                                            (hasBadge ? UIRemoteNotificationTypeBadge : 0));
+                                                     (hasAlert ? UIRemoteNotificationTypeAlert : 0) |
+                                                     (hasBadge ? UIRemoteNotificationTypeBadge : 0));
         
         CS_Log_Info(@"Registering for 8.0 < notifications");
         
         [app registerForRemoteNotificationTypes:notificationType];
     }
+
 }
 
 - (void) didRegisteredForNotifications:(NSData *)deviceToken {
@@ -259,12 +250,12 @@
     if (notif) {
         [self sendPushData:notif];
     }
-    
+
 }
 
 
 - (void) didReceiveNotification:(NSDictionary *)userInfo {
-    
+
     UIApplication *application = [UIApplication sharedApplication];
     
     // Means app resumed by push notification
@@ -273,61 +264,8 @@
     else {
         CS_Log_Info(@"Received notification %@ and ignoring",userInfo);
     }
+
 }
 
-
-- (void) unregister {
-    __weak CurioNotificationManager *weakSelf = self;
-    
-    [curioNotificationQueue addOperationWithBlock:^{
-        
-        @synchronized(weakSelf) {
-            
-            NSString *sUrl = [NSString stringWithFormat:@"%@%@",[[CurioSettings shared] serverUrl],CS_SERVER_URL_SUFFIX_UNREGISTER];
-            
-            NSURL *url = [NSURL URLWithString:sUrl];
-            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
-            [request setHTTPMethod:@"POST"];
-            [request setHTTPShouldHandleCookies:NO];
-            [request setValue:CS_OPT_USER_AGENT forHTTPHeaderField:@"User-Agent"];
-            
-            NSString *postBody = [[CurioUtil shared] dictToPostBody:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                     [weakSelf deviceToken], CURHttpParamPushToken, //deviceToken
-                                                                     [[CurioUtil shared] vendorIdentifier], CURHttpParamVisitorCode, // visitorCode
-                                                                     [[CurioSettings shared] trackingCode], CURHttpParamTrackingCode, // trackingCode
-                                                                     [[CurioSDK shared] sessionCode], CURKeySessionCode, //sessionCode
-                                                                     [[CurioSDK shared] customId], CURHttpParamCustomId, //Custom id param
-                                                                     nil]];
-            
-            NSData *dataPostBody = [postBody dataUsingEncoding:NSUTF8StringEncoding];
-            
-            CS_Log_Debug(@"\r\rUnregister REQUEST;\rURL: %@,\rPost body:\r%@\r\r",sUrl,[postBody stringByReplacingOccurrencesOfString:@"&" withString:@"\r"]);
-            
-            [request setHTTPBody:dataPostBody];
-            
-            
-            NSURLResponse * response = nil;
-            NSError * error = nil;
-            NSData * data  = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-            
-            
-            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-            
-            
-            CS_Log_Debug(@"\r\rRESPONSE for URL: %@,\rStatus code: %ld,\rResponse string: %@\r\r",sUrl,(long)[((NSHTTPURLResponse *)response) statusCode],[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-            
-            if ((long)httpResponse.statusCode != 200) {
-                CS_Log_Warning(@"Not ok: %ld, %@",(long)httpResponse.statusCode,[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-            }else {
-                CS_Log_Debug(@"Successfully unregistered. Server response:%@ %ld",httpResponse.allHeaderFields,(long)httpResponse.statusCode);
-            }
-            
-            if (error != nil) {
-                CS_Log_Warning(@"Warning: %ld , %@ %@",(long)error.code, sUrl, error.localizedDescription);
-            }
-        }
-        
-    }];
-}
 
 @end

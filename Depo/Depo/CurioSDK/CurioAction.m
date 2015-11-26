@@ -99,8 +99,14 @@
     CS_SET_DICT_IF_NOT_NIL(ret, [[CurioUtil shared] osVersion] ,CS_HTTP_PARAM_OS_VERSION);
     CS_SET_DICT_IF_NOT_NIL(ret, CURIO_SDK_VERSION,CS_HTTP_PARAM_SDK_VERSION);
     CS_SET_DICT_IF_NOT_NIL(ret, [[CurioUtil shared] appVersion],CS_HTTP_PARAM_APP_VERSION);
+    //CS_SET_DICT_IF_NOT_NIL(ret,[[CurioResourceUtil shared] batteryState],CS_HTTP_PARAM_BATTERY_STATE);
+#if !TARGET_OS_TV
+    CS_SET_DICT_IF_NOT_NIL(ret,[[CurioResourceUtil shared] batteryLevel],CS_HTTP_PARAM_BATTERY_LEVEL);
+    CS_SET_DICT_IF_NOT_NIL(ret,[[CurioResourceUtil shared] bluetoothState],CS_HTTP_PARAM_BLUETOOTH_STATE);
+    //CS_SET_DICT_IF_NOT_NIL(ret,[[CurioResourceUtil shared] totalSpace],CS_HTTP_PARAM_TOTAL_STORAGE_SPACE);
+    CS_SET_DICT_IF_NOT_NIL(ret,[[CurioResourceUtil shared] totalFreeSpace],CS_HTTP_PARAM_TOTAL_FREE_STORAGE_SPACE);
+#endif
     
-  
     
     return ret;
     
@@ -114,6 +120,19 @@
                                                title:nil path:nil hitCode:nil eventKey:eventKey eventValue:eventValue];
     
     [cAction.properties addEntriesFromDictionary:[self defaultActionProperties]];
+    
+    return cAction;
+}
+
++ (CurioAction *) actionEndEvent:(NSString *) hitCode eventDuration:(NSUInteger) eventDuration{
+    
+    CurioAction *cAction = [[CurioAction alloc] init:[[CurioUtil shared] nanos]
+                                                type:CActionTypeEndEvent
+                                               stamp:[[CurioUtil shared] currentTimeMillis]
+                                               title:nil path:nil hitCode:hitCode eventKey:nil eventValue:nil];
+    
+    [cAction.properties addEntriesFromDictionary:[self defaultActionProperties]];
+    [cAction.properties setObject:[NSString stringWithFormat:@"%lu",(unsigned long)eventDuration] forKey:CURKeyEventDuration];
     
     return cAction;
 }
@@ -163,6 +182,18 @@
     
     [cAction.properties addEntriesFromDictionary:[self defaultActionProperties]];
 
+    
+    return cAction;
+}
+
++ (CurioAction *) actionUnregister {
+    
+    CurioAction *cAction = [[CurioAction alloc] init:[[CurioUtil shared] nanos]
+                                                type:CActionTypeUnregister
+                                               stamp:[[CurioUtil shared] currentTimeMillis]
+                                               title:nil path:nil hitCode:nil eventKey:nil eventValue:nil];
+    
+    [cAction.properties addEntriesFromDictionary:[self defaultActionProperties]];
     
     return cAction;
 }

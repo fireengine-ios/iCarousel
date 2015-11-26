@@ -9,6 +9,52 @@
 
 #import "CurioSDK.h"
 
+@interface CurioEventData : NSObject
+
+@property (nonatomic,strong) NSString *eventKey;
+@property (nonatomic,strong) NSString *eventValue;
+@property (nonatomic,strong) NSString *eventDuration;
+
+@end
+
+@implementation CurioEventData
+
+- (id) init {
+    self = [super init];
+    
+    return  self;
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if (self = [super init]) {
+        self.eventKey = [decoder decodeObjectForKey:CURKeyEventKey];
+        self.eventValue = [decoder decodeObjectForKey:CURKeyEventValue];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:_eventKey forKey:CURKeyEventKey];
+    [encoder encodeObject:_eventValue forKey:CURKeyEventValue];
+}
+
+- (BOOL)isEqual:(id)object {
+    
+    if (![object isKindOfClass:[CurioEventData class]]) {
+        return NO;
+    }
+    
+    CurioEventData *o = object;
+    
+    return [self.eventKey isEqualToString:o.eventKey] && [self.eventValue isEqualToString:o.eventValue];
+}
+
+- (NSUInteger)hash {
+    return [self.eventKey hash] ^ [self.eventValue hash];
+}
+
+@end
+
 @interface CurioScreenData : NSObject
 
 @property (nonatomic,strong) NSString *className;
@@ -82,7 +128,10 @@
         
         appWasInBackground = FALSE;
         
+        _retryCount = 0;
+        
         _aliveScreens = [NSMutableArray new];
+        _aliveEvents = [NSMutableArray new];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillGoBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillTerminate) name:UIApplicationWillTerminateNotification object:nil];
@@ -103,6 +152,10 @@
 
         // Invoke settings initialization
         [CurioSettings shared];
+        
+        if([CurioSettings shared].sessionTimeout < [CurioSettings shared].dispatchPeriod){
+            CS_Log_Warning(@"Session timeout cannot be less than dispatch period. Please specify session timeout and dispatch period accordingly.");
+        }
 
         // Invoke network initialization
         [CurioNetwork shared];
@@ -126,15 +179,31 @@
                     CS_OPT_SKEY_MAX_VALID_LOCATION_TIME_INTERVAL, [[CurioSettings shared] maxValidLocationTimeInterval]
                     
           );
-
-        
-        
         
     }
     return self;
 }
 
 #pragma mark Application handling
+
+- (void) finishOffOpenEvents {
+    
+    NSMutableArray *dup = [_aliveEvents copy];
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:[NSKeyedArchiver archivedDataWithRootObject:_aliveEvents] forKey:CS_CONST_AL_EV];
+    [userDefaults synchronize];
+    
+    [dup enumerateObjectsUsingBlock:^(CurioEventData *obj, NSUInteger idx, BOOL *stop) {
+        
+        [self endEvent:obj.eventValue eventValue:obj.eventValue eventDuration:[obj.eventDuration integerValue]];
+        
+    }];
+    
+    [_aliveEvents removeAllObjects];
+    
+    
+}
 
 - (void) finishOffOpenScreens {
     
@@ -181,13 +250,16 @@
     // Uniquize screens
     [_aliveScreens setArray:[[NSSet setWithArray:_aliveScreens] allObjects]];
     
-    CS_Log_Info(@"Finishing off %lu",(unsigned long)_aliveScreens.count);
+    CS_Log_Info(@"Finishing off alive screens count %lu",(unsigned long)_aliveScreens.count);
     
+    [_aliveEvents setArray:[[NSSet setWithArray:_aliveEvents] allObjects]];
+    
+    CS_Log_Info(@"Finishing off alive events count %lu",(unsigned long)_aliveEvents.count);
+
     [self finishOffOpenScreens];
+    [self finishOffOpenEvents];
     
     [self enterDeactiveMode];
-
-    
 }
 
 - (void) applicationWillTerminate {
@@ -208,13 +280,12 @@
 
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 
-        NSData *dat = [userDefaults objectForKey:CS_CONST_AL_SC];
+        NSData *datAliveScreens = [userDefaults objectForKey:CS_CONST_AL_SC];
         
-        
-        if (dat == nil)
+        if (datAliveScreens == nil)
             _aliveScreens = [NSMutableArray new];
         else {
-            _aliveScreens = [NSKeyedUnarchiver unarchiveObjectWithData:dat];
+            _aliveScreens = [NSKeyedUnarchiver unarchiveObjectWithData:datAliveScreens];
             CS_Log_Info(@"Restoring %lu screens",(unsigned long)_aliveScreens.count);
             [_aliveScreens enumerateObjectsUsingBlock:^(CurioScreenData *obj, NSUInteger idx, BOOL *stop) {
                 [self startScreenWithName:obj.className title:obj.title path:obj.path];
@@ -222,6 +293,21 @@
         }
         
         [userDefaults removeObjectForKey:CS_CONST_AL_SC];
+        [userDefaults synchronize];
+        
+        NSData *datAliveEvents = [userDefaults objectForKey:CS_CONST_AL_EV];
+        
+        if (datAliveEvents == nil)
+            _aliveEvents = [NSMutableArray new];
+        else {
+            _aliveEvents = [NSKeyedUnarchiver unarchiveObjectWithData:datAliveEvents];
+            CS_Log_Info(@"Restoring %lu events",(unsigned long)_aliveEvents.count);
+            [_aliveEvents enumerateObjectsUsingBlock:^(CurioEventData *obj, NSUInteger idx, BOOL *stop) {
+                [self sendEvent:obj.eventKey eventValue:obj.eventValue];
+            }];
+        }
+        
+        [userDefaults removeObjectForKey:CS_CONST_AL_EV];
         [userDefaults synchronize];
     }
     
@@ -248,14 +334,65 @@
     
 }
 
+- (void) endEvent:(NSString *) eventKey  eventValue:(NSString *) eventValue eventDuration:(NSUInteger) eventDuration {
+    
+    [curioActionQueue addOperationWithBlock:^{
+        
+        //TODO key? HC%@_HC%@?
+        NSString *key = [NSString stringWithFormat:@"HC%@_%@",eventKey,eventValue];
+        
+        NSString *hitcode = [_memoryStore objectForKey:key];
+        
+        CurioAction *actionEndEvent = [CurioAction actionEndEvent:(hitcode == nil ? @"UNKNOWN" : hitcode) eventDuration:eventDuration];
+        
+        [[CurioDBToolkit shared] addAction:actionEndEvent];
+        
+        [_memoryStore removeObjectForKey:key];
+        
+        __block int rmIndex = -1;
+        [_aliveEvents enumerateObjectsUsingBlock:^(CurioEventData *obj, NSUInteger idx, BOOL *stop) {
+            
+            if ([obj.eventKey isEqualToString:eventKey] && [obj.eventValue isEqualToString:eventValue])
+            {
+                rmIndex = (int)idx;
+                *stop = true;
+            }
+        }];
+        
+        if (rmIndex != -1)
+            [_aliveEvents removeObjectAtIndex:rmIndex];
+        
+    }];
+}
+
 - (void) sendEvent:(NSString *) eventKey eventValue:(NSString *) eventValue {
 
     [curioActionQueue addOperationWithBlock:^{
-
         CurioAction *actionSendEvent = [CurioAction actionSendEvent:eventKey path:eventValue];
-    
+        
+        [actionSendEvent.properties setObject:[NSString stringWithFormat:@"%@_%@", eventKey, eventValue] forKey:CS_CUSTOM_VAR_EVENTCLASS];
+        
+        if (![[CurioNetwork shared] isOnline] || CS_NSN_IS_TRUE([[CurioSettings shared] periodicDispatchEnabled])) {
+            
+            NSString *hitCode = [[CurioUtil shared] uuidRandom];
+            
+            NSString *eventKeyAndValue = [actionSendEvent.properties objectForKey:CS_CUSTOM_VAR_EVENTCLASS];
+            CS_Log_Info(@"Created hit code %@ for screen %@ when periodicDispatchEnabled or the client is offline.",hitCode,eventKeyAndValue);
+            
+            [_memoryStore setObject:hitCode forKey:[NSString stringWithFormat:@"HC%@_%@",eventKey, eventValue]];
+            actionSendEvent.hitCode = hitCode;
+        }
+        
         [[CurioDBToolkit shared] addAction:actionSendEvent];
+        
+        CurioEventData *csd = [CurioEventData new];
+        csd.eventKey = eventKey;
+        csd.eventValue = eventValue;
+        
+        [_aliveEvents addObject:csd];
+        
     }];
+    
 
 }
 
@@ -304,6 +441,8 @@
         if (![[CurioNetwork shared] isOnline] || CS_NSN_IS_TRUE([[CurioSettings shared] periodicDispatchEnabled])) {
             
             NSString *hitCode = [[CurioUtil shared] uuidRandom];
+            NSString *screenKey = [actionStartScreen.properties objectForKey:CS_CUSTOM_VAR_SCREENCLASS];
+            CS_Log_Info(@"Created hit code %@ for screen %@ when periodicDispatchEnabled or the client is offline.",hitCode,screenKey);
             
             [_memoryStore setObject:hitCode forKey:[NSString stringWithFormat:@"HC%@",screenClassName]];
             actionStartScreen.hitCode = hitCode;
@@ -357,10 +496,30 @@
 {
     
     [[CurioSettings shared] set:serverUrl apiKey:apiKey trackingCode:trackingCode];
-    [self startSession:appLaunchOptions];
+    
+    //this is done for getting bluetoothstate
+    [self performSelector:@selector(startSession:) withObject:appLaunchOptions afterDelay:0.1];
+    //[self startSession:appLaunchOptions];
+    
 }
 
-
+/*! Starts Curio session.
+ * \param startSession serverUrl [Required] Curio server URL, can be obtained from Turkcell.
+ * \param apiKey [Required] Application specific API key, can be obtained from Turkcell.
+ * \param trackingCode [Required] Application specific tracking code, can be obtained from Turkcell.
+ * \param sessionTimeout [Optional] Session timeout in minutes. Default is 30 minutes but it's highly recommended to change this value acording to the nature of your application. Specifiying a correct session timeout value for your application will increase the accuracy of the analytics data.
+ * \param periodicDispatchEnabled [Optional] Periodic dispatch is enabled if true. Default is false.
+ * \param dispatchPeriod [Optional] If periodic dispatch is enabled, this parameter configures dispatching period in minutes. Deafult is 5 minutes. Note: This parameter cannot be greater than session timeout value.
+ * \param maxCachedActivitiyCount [Optional] Max. number of user activity that Curio library will remember when device is not connected to the Internet. Default is 1000. Max. value can be 4000.
+ * \param loggingEnabled [Optional] All of the Curio logs will be disabled if this is false. Default is true.
+ * \param logLevel [Optional] Contains level of the print-out logs. 0 - Error, 1 - Warning, 2 - Info, 3 - Debug. Default is 0 (Error).
+ * \param registerForRemoteNotifications If enabled, then Curio SDK will automatically register for remote notifications for types defined in "NotificationTypes" parameter.
+ * \param notificationTypes Notification types to register; available values: Sound, Badge, Alert
+ * \param fetchLocationEnabled [Optional] If enabled, the current location of the device will be tracked while using the application. Default is true. The accuracy of recent location is validated using MaxValidLocationTimeInterval. Location tracking stops when the accurate location is found according to the needs. For further location tracking you can use [[CurioSDK shared] sendLocation] method. In order to track locations in iOS8 NSLocationWhenInUseUsageDescription must be implemented in Info.plist file.
+ * \param maxValidLocationTimeInterval [Optional] Default is 600 seconds. The accuracy of recent location is validated using this parameter. Location tracking continues until it reaches to a valid location time interval.
+ * \param delegate If you are using "CurioSDKDelegate" protocol, you can set this parameter with your class reference. "CurioSDKDelegate" protocol provides callbacks for responses from "unregisterFromNotificationServer" and "sendCustomId" methods.
+ * \param appLaunchOptions Set this with Appdelegate's appLaunchOptions. It is used for tracking notifications.
+ */
 - (void) startSession:(NSString *)serverUrl
                apiKey:(NSString *)apiKey
          trackingCode:(NSString *)trackingCode
@@ -374,6 +533,7 @@ registerForRemoteNotifications:(BOOL)registerForRemoteNotifications
     notificationTypes:(NSString *) notificationTypes
  fetchLocationEnabled:(BOOL)fetchLocationEnabled
 maxValidLocationTimeInterval:(double)maxValidLocationTimeInterval
+             delegate:(id<CurioSDKDelegate>)delegate
      appLaunchOptions:(NSDictionary *)appLaunchOptions
 {
     
@@ -393,16 +553,56 @@ maxValidLocationTimeInterval:(double)maxValidLocationTimeInterval
            fetchLocationEnabled:fetchLocationEnabled ? CS_NSN_TRUE : CS_NSN_FALSE
         maxValidLocationTimeInterval:[NSNumber numberWithDouble:maxValidLocationTimeInterval]
      ];
-    [self startSession:appLaunchOptions];
+    
+    self.delegate = delegate;
+    
+    //this is done for getting bluetoothstate
+    [self performSelector:@selector(startSession:) withObject:appLaunchOptions afterDelay:0.1];
+    
+    //[self startSession:appLaunchOptions];
+}
 
+-(void)startSession:(NSString *)serverUrl
+             apiKey:(NSString *)apiKey
+       trackingCode:(NSString *)trackingCode
+     sessionTimeout:(int)sessionTimeout
+periodicDispatchEnabled:(BOOL)periodicDispatchEnabled
+     dispatchPeriod:(int)dispatchPeriod
+maxCachedActivitiyCount:(int)maxCachedActivityCount
+     loggingEnabled:(BOOL)logginEnabled
+           logLevel:(int)logLevel
+fetchLocationEnabled:(BOOL)fetchLocationEnabled
+maxValidLocationTimeInterval:(double)maxValidLocationTimeInterval
+   appLaunchOptions:(NSDictionary *)appLaunchOptions {
+    
+    [[CurioSettings shared] set:serverUrl
+                         apiKey:apiKey
+                   trackingCode:trackingCode
+                 sessionTimeout:[NSNumber numberWithInt:sessionTimeout]
+        periodicDispatchEnabled:periodicDispatchEnabled ? CS_NSN_TRUE :   CS_NSN_FALSE
+                 dispatchPeriod:[NSNumber numberWithInt:dispatchPeriod]
+        maxCachedActivitiyCount:[NSNumber numberWithInt:maxCachedActivityCount]
+                 loggingEnabled:logginEnabled ? CS_NSN_TRUE : CS_NSN_FALSE
+                       logLevel:[NSNumber numberWithInt:logLevel]
+           fetchLocationEnabled:fetchLocationEnabled ? CS_NSN_TRUE : CS_NSN_FALSE
+   maxValidLocationTimeInterval:[NSNumber numberWithDouble:maxValidLocationTimeInterval]
+     ];
+    
+    //this is done for getting bluetoothstate
+    [self performSelector:@selector(startSession:) withObject:appLaunchOptions afterDelay:0.1];
+    
 }
 
 - (void) startSession:(NSDictionary *) appLaunchOptions {
-    
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unregisterFromNotificationServerNotified:) name:CS_NOTIF_UNREGISTER object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(customIDSetNotified:) name:CS_NOTIF_CUSTOM_ID_SET object:nil];
+
     _appLaunchOptions = appLaunchOptions != nil ? appLaunchOptions : [NSDictionary new];
     
     [curioActionQueue addOperationWithBlock:^{
+#if !TARGET_OS_TV
+        [CurioResourceUtil shared];
+#endif
         
         CurioAction *actionStartSession = [CurioAction actionStartSession];
         
@@ -410,9 +610,11 @@ maxValidLocationTimeInterval:(double)maxValidLocationTimeInterval
         
         [[CurioDBToolkit shared] addAction:actionStartSession];
         
+#if !TARGET_OS_TV
         if (CS_NSN_IS_TRUE([[CurioSettings shared] registerForRemoteNotifications]))
             [[CurioNotificationManager shared] registerForNotifications];
-                
+#endif
+        
         if (CS_NSN_IS_TRUE([[CurioSettings shared] fetchLocationEnabled]))
             [[CurioLocationManager shared] sendLocation];
         
@@ -431,13 +633,38 @@ maxValidLocationTimeInterval:(double)maxValidLocationTimeInterval
 
 
 - (void) unregisterFromNotificationServer{
-    [[CurioNotificationManager shared] unregister];
+    
+    if ([[CurioNetwork shared] isOnline]) {
+        [curioActionQueue addOperationWithBlock:^{
+            CurioAction *actionUnregister = [CurioAction actionUnregister];
+            
+            CS_SET_DICT_IF_NOT_NIL(actionUnregister.properties, [self customId], CURHttpParamCustomId);
+            
+            //[actionUnregister.properties setObject:[self customId] forKey:CURHttpParamCustomId];
+            
+            [[CurioDBToolkit shared] addAction:actionUnregister];
+        }];
+        
+        [curioQueue addOperationWithBlock:^{
+            
+            [curioActionQueue waitUntilAllOperationsAreFinished];
+            
+            // No matter we are in PDR or not, start session and end session
+            // request should be send immediately if possible
+            [[CurioPostOffice shared] tryToPostAwaitingActions:NO];
+            
+        }];
+    } else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:CS_NOTIF_UNREGISTER
+                                                            object:nil
+                                                          userInfo: @{CURKeyStatus: CURKeyNOK, CURKeyResponse: @"Curio SDK is not online. Network connection may have been lost."}];
+    }
 }
 
 - (void) sendCustomId:(NSString *)theCustomId{
     CS_Log_Debug(@"Sending custom id: %@",theCustomId);
     [self setCustomId:theCustomId];
-    [[CurioNotificationManager shared] sendPushData:nil];
+    [[CurioNotificationManager shared] sendPushData:@{CURKeySendCustomID:@"YES"}];
 }
     
 - (void) sendLocation{
@@ -481,6 +708,26 @@ maxValidLocationTimeInterval:(double)maxValidLocationTimeInterval
                 
             });
         }];
+    });
+}
+
+#pragma mark - Unregister and CustomID set observers
+
+- (void)unregisterFromNotificationServerNotified:(NSNotification *)notification __TVOS_UNAVAILABLE {
+    __weak CurioSDK *weakSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if ([weakSelf.delegate respondsToSelector:@selector(unregisteredFromNotificationServer:)]) {
+            [weakSelf.delegate unregisteredFromNotificationServer:notification.userInfo];
+        }
+    });
+}
+
+- (void)customIDSetNotified:(NSNotification *)notification __TVOS_UNAVAILABLE {
+    __weak CurioSDK *weakSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if ([weakSelf.delegate respondsToSelector:@selector(customIDSent:)]) {
+            [weakSelf.delegate customIDSent:notification.userInfo];
+        }
     });
 }
 

@@ -9,6 +9,11 @@
 #ifndef CurioIOSSDKSample_CurioConstants_h
 #define CurioIOSSDKSample_CurioConstants_h
 
+#ifdef __OBJC__
+//#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#endif
+
 extern NSString * const CURKeyScreenDataTitle;
 extern NSString * const CURKeyScreenDataClassName;
 extern NSString * const CURKeyScreenDataPath;
@@ -26,6 +31,7 @@ extern NSString * const CURKeyTimeStamp;
 extern NSString * const CURKeyHitCode;
 extern NSString * const CURKeyEventKey;
 extern NSString * const CURKeyEventValue;
+extern NSString * const CURKeyEventDuration;
 extern NSString * const CURKeyIsOnline;
 extern NSString * const CURKeyProperties;
 extern NSString * const CURDeviceBrandName;
@@ -35,6 +41,12 @@ extern NSString * const CURNetworkTypeMobile;
 extern NSString * const CURNetworkTypeOffline;
 extern NSString * const CURNetworkCarrierUnknown;
 extern NSString * const CURKeyPId;
+extern NSString * const CURKeySendCustomID;
+
+extern NSString * const CURKeyStatus;
+extern NSString * const CURKeyOK;
+extern NSString * const CURKeyNOK;
+extern NSString * const CURKeyResponse;
 
 extern NSString * const CURHttpParamPushToken;
 extern NSString * const CURHttpParamVisitorCode;
@@ -48,5 +60,7 @@ extern NSString * const CURHttpParamLimitSize;
 extern NSString * const CURNotificationTypeSound;
 extern NSString * const CURNotificationTypeBadge;
 extern NSString * const CURNotificationTypeAlert;
+
+extern NSUInteger const CURMaxRequestRetryCount;
 
 #endif

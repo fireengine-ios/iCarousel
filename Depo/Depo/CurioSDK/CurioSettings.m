@@ -70,6 +70,31 @@ maxValidLocationTimeInterval:(NSNumber *)maxValidLocationTimeInterval
     return [self set:serverUrl apiKey:apiKey trackingCode:trackingCode];
 }
 
+- (BOOL) set:(NSString *)serverUrl
+      apiKey:(NSString *)apiKey
+trackingCode:(NSString *)trackingCode
+sessionTimeout:(NSNumber *)sessionTimeout
+periodicDispatchEnabled:(NSNumber *)periodicDispatchEnabled
+dispatchPeriod:(NSNumber *)dispatchPeriod
+maxCachedActivitiyCount:(NSNumber *)maxCachedActivityCount
+loggingEnabled:(NSNumber *)logginEnabled
+    logLevel:(NSNumber *)logLevel
+fetchLocationEnabled:(NSNumber *)fetchLocationEnabled
+maxValidLocationTimeInterval:(NSNumber *)maxValidLocationTimeInterval
+{
+    _sessionTimeout = CS_SET_IF_NOT_NIL(sessionTimeout, _sessionTimeout);
+    _periodicDispatchEnabled = CS_SET_IF_NOT_NIL(periodicDispatchEnabled, _periodicDispatchEnabled);
+    _dispatchPeriod = CS_SET_IF_NOT_NIL(dispatchPeriod, _dispatchPeriod);
+    _maxCachedActivityCount = CS_SET_IF_NOT_NIL(maxCachedActivityCount, _maxCachedActivityCount);
+    _loggingEnabled = CS_SET_IF_NOT_NIL(logginEnabled, _loggingEnabled);
+    _logLevel = CS_SET_IF_NOT_NIL(logLevel, _logLevel);
+    _fetchLocationEnabled =  CS_SET_IF_NOT_NIL(fetchLocationEnabled, _fetchLocationEnabled);
+    _maxValidLocationTimeInterval =  CS_SET_IF_NOT_NIL(maxValidLocationTimeInterval, _maxValidLocationTimeInterval);
+    
+    return [self set:serverUrl apiKey:apiKey trackingCode:trackingCode];
+}
+
+
 
 - (void) readBundleSettings {
     
@@ -103,10 +128,10 @@ maxValidLocationTimeInterval:[settings objectForKey:CS_OPT_SKEY_MAX_VALID_LOCATI
         
         // Defaults
         
-        _sessionTimeout = [NSNumber numberWithInt:30];
+        _sessionTimeout = [NSNumber numberWithInt:5];
         _periodicDispatchEnabled = CS_NSN_TRUE;
-        _dispatchPeriod = [NSNumber numberWithInt:5];
-        _maxCachedActivityCount = [NSNumber numberWithInt:100];
+        _dispatchPeriod = [NSNumber numberWithInt:1];
+        _maxCachedActivityCount = [NSNumber numberWithInt:500];
         _loggingEnabled = CS_NSN_TRUE;
         _logLevel = [NSNumber numberWithInt:CSLogLevelError];
         _registerForRemoteNotifications = CS_NSN_TRUE;
@@ -114,7 +139,8 @@ maxValidLocationTimeInterval:[settings objectForKey:CS_OPT_SKEY_MAX_VALID_LOCATI
         _fetchLocationEnabled = CS_NSN_TRUE;
         _maxValidLocationTimeInterval = [NSNumber numberWithDouble:600];
         
-        [self readBundleSettings];
+        [self readBundleSettings];   
+
     }
     return self;
 }

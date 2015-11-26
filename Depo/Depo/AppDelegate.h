@@ -13,6 +13,7 @@
 #import "SyncManager.h"
 #import "UploadQueue.h"
 #import "UpdaterControllerDelegate.h"
+#import "CurioSDK.h"
 
 @class CustomAlertView;
 @class CustomConfirmView;
@@ -24,7 +25,7 @@
 
 #define APPDELEGATE ((AppDelegate *)[[UIApplication sharedApplication] delegate])
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, TokenManagerDelegate, UpdaterControllerDelegate, UIAlertViewDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, TokenManagerDelegate, UpdaterControllerDelegate, UIAlertViewDelegate, CurioSDKDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) AppSession *session;

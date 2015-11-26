@@ -718,6 +718,22 @@
 		05F178451BFBB4A70014B2BD /* cropy.png in Resources */ = {isa = PBXBuildFile; fileRef = 05F178411BFBB4A70014B2BD /* cropy.png */; };
 		05F178461BFBB4A70014B2BD /* yellow_cropy.png in Resources */ = {isa = PBXBuildFile; fileRef = 05F178421BFBB4A70014B2BD /* yellow_cropy.png */; };
 		05F178471BFBB4A70014B2BD /* yellow_cropy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05F178431BFBB4A70014B2BD /* yellow_cropy@2x.png */; };
+		05F28BE21C0739C30002171A /* CurioAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F28BC31C0739C30002171A /* CurioAction.m */; };
+		05F28BE31C0739C30002171A /* CurioActionToolkit.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F28BC51C0739C30002171A /* CurioActionToolkit.m */; };
+		05F28BE41C0739C30002171A /* CurioConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F28BC71C0739C30002171A /* CurioConstants.m */; };
+		05F28BE51C0739C30002171A /* CurioDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F28BC91C0739C30002171A /* CurioDB.m */; };
+		05F28BE61C0739C30002171A /* CurioDBToolkit.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F28BCB1C0739C30002171A /* CurioDBToolkit.m */; };
+		05F28BE71C0739C30002171A /* CurioLocationData.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F28BCD1C0739C30002171A /* CurioLocationData.m */; };
+		05F28BE81C0739C30002171A /* CurioLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F28BCF1C0739C30002171A /* CurioLocationManager.m */; };
+		05F28BE91C0739C30002171A /* CurioNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F28BD11C0739C30002171A /* CurioNetwork.m */; };
+		05F28BEA1C0739C30002171A /* CurioNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F28BD31C0739C30002171A /* CurioNotificationManager.m */; };
+		05F28BEB1C0739C30002171A /* CurioPostOffice.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F28BD51C0739C30002171A /* CurioPostOffice.m */; };
+		05F28BEC1C0739C30002171A /* CurioPushData.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F28BD71C0739C30002171A /* CurioPushData.m */; };
+		05F28BED1C0739C30002171A /* CurioReachabilityEx.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F28BD91C0739C30002171A /* CurioReachabilityEx.m */; };
+		05F28BEE1C0739C30002171A /* CurioResourceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F28BDB1C0739C30002171A /* CurioResourceUtil.m */; };
+		05F28BEF1C0739C30002171A /* CurioSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F28BDD1C0739C30002171A /* CurioSDK.m */; };
+		05F28BF01C0739C30002171A /* CurioSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F28BDF1C0739C30002171A /* CurioSettings.m */; };
+		05F28BF11C0739C30002171A /* CurioUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F28BE11C0739C30002171A /* CurioUtil.m */; };
 		05F4AA281A2F7692000F41B8 /* ActivityUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F4AA271A2F7692000F41B8 /* ActivityUtil.m */; };
 		2443E1541B6BB0C5001C274D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2443E1531B6BB0C5001C274D /* AudioToolbox.framework */; };
 		2443E1571B6BB5F3001C274D /* AudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2443E1561B6BB5F3001C274D /* AudioManager.m */; };
@@ -726,21 +742,6 @@
 		24FE7B0B1B6A539D007B53A0 /* PrintWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24FE7B0A1B6A539D007B53A0 /* PrintWebViewController.m */; };
 		24FE7B0E1B6A5A98007B53A0 /* white_print_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 24FE7B0C1B6A5A98007B53A0 /* white_print_icon.png */; };
 		24FE7B0F1B6A5A98007B53A0 /* white_print_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24FE7B0D1B6A5A98007B53A0 /* white_print_icon@2x.png */; };
-		562FB3F71AA48C4400F9EFBD /* CurioAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 562FB3D91AA48C4400F9EFBD /* CurioAction.m */; };
-		562FB3F81AA48C4400F9EFBD /* CurioActionToolkit.m in Sources */ = {isa = PBXBuildFile; fileRef = 562FB3DB1AA48C4400F9EFBD /* CurioActionToolkit.m */; };
-		562FB3F91AA48C4400F9EFBD /* CurioConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 562FB3DD1AA48C4400F9EFBD /* CurioConstants.m */; };
-		562FB3FA1AA48C4400F9EFBD /* CurioDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 562FB3DF1AA48C4400F9EFBD /* CurioDB.m */; };
-		562FB3FB1AA48C4400F9EFBD /* CurioDBToolkit.m in Sources */ = {isa = PBXBuildFile; fileRef = 562FB3E11AA48C4400F9EFBD /* CurioDBToolkit.m */; };
-		562FB3FC1AA48C4400F9EFBD /* CurioLocationData.m in Sources */ = {isa = PBXBuildFile; fileRef = 562FB3E31AA48C4400F9EFBD /* CurioLocationData.m */; };
-		562FB3FD1AA48C4400F9EFBD /* CurioLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 562FB3E51AA48C4400F9EFBD /* CurioLocationManager.m */; };
-		562FB3FE1AA48C4400F9EFBD /* CurioNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 562FB3E71AA48C4400F9EFBD /* CurioNetwork.m */; };
-		562FB3FF1AA48C4400F9EFBD /* CurioNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 562FB3E91AA48C4400F9EFBD /* CurioNotificationManager.m */; };
-		562FB4001AA48C4400F9EFBD /* CurioPostOffice.m in Sources */ = {isa = PBXBuildFile; fileRef = 562FB3EB1AA48C4400F9EFBD /* CurioPostOffice.m */; };
-		562FB4011AA48C4400F9EFBD /* CurioPushData.m in Sources */ = {isa = PBXBuildFile; fileRef = 562FB3ED1AA48C4400F9EFBD /* CurioPushData.m */; };
-		562FB4021AA48C4400F9EFBD /* CurioReachabilityEx.m in Sources */ = {isa = PBXBuildFile; fileRef = 562FB3EF1AA48C4400F9EFBD /* CurioReachabilityEx.m */; };
-		562FB4031AA48C4400F9EFBD /* CurioSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 562FB3F21AA48C4400F9EFBD /* CurioSDK.m */; };
-		562FB4041AA48C4400F9EFBD /* CurioSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 562FB3F41AA48C4400F9EFBD /* CurioSettings.m */; };
-		562FB4051AA48C4400F9EFBD /* CurioUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 562FB3F61AA48C4400F9EFBD /* CurioUtil.m */; };
 		563FB1BD1AA5EB030066F8E6 /* settings_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 563FB1BB1AA5EB030066F8E6 /* settings_icon.png */; };
 		563FB1BE1AA5EB030066F8E6 /* settings_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 563FB1BC1AA5EB030066F8E6 /* settings_icon@2x.png */; };
 		563FB1C11AA5EC990066F8E6 /* circle_welcome_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 563FB1BF1AA5EC990066F8E6 /* circle_welcome_icon.png */; };
@@ -1793,6 +1794,38 @@
 		05F178411BFBB4A70014B2BD /* cropy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cropy.png; sourceTree = "<group>"; };
 		05F178421BFBB4A70014B2BD /* yellow_cropy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellow_cropy.png; sourceTree = "<group>"; };
 		05F178431BFBB4A70014B2BD /* yellow_cropy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yellow_cropy@2x.png"; sourceTree = "<group>"; };
+		05F28BC21C0739C30002171A /* CurioAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioAction.h; sourceTree = "<group>"; };
+		05F28BC31C0739C30002171A /* CurioAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioAction.m; sourceTree = "<group>"; };
+		05F28BC41C0739C30002171A /* CurioActionToolkit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioActionToolkit.h; sourceTree = "<group>"; };
+		05F28BC51C0739C30002171A /* CurioActionToolkit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioActionToolkit.m; sourceTree = "<group>"; };
+		05F28BC61C0739C30002171A /* CurioConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioConstants.h; sourceTree = "<group>"; };
+		05F28BC71C0739C30002171A /* CurioConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioConstants.m; sourceTree = "<group>"; };
+		05F28BC81C0739C30002171A /* CurioDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioDB.h; sourceTree = "<group>"; };
+		05F28BC91C0739C30002171A /* CurioDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioDB.m; sourceTree = "<group>"; };
+		05F28BCA1C0739C30002171A /* CurioDBToolkit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioDBToolkit.h; sourceTree = "<group>"; };
+		05F28BCB1C0739C30002171A /* CurioDBToolkit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioDBToolkit.m; sourceTree = "<group>"; };
+		05F28BCC1C0739C30002171A /* CurioLocationData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioLocationData.h; sourceTree = "<group>"; };
+		05F28BCD1C0739C30002171A /* CurioLocationData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioLocationData.m; sourceTree = "<group>"; };
+		05F28BCE1C0739C30002171A /* CurioLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioLocationManager.h; sourceTree = "<group>"; };
+		05F28BCF1C0739C30002171A /* CurioLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioLocationManager.m; sourceTree = "<group>"; };
+		05F28BD01C0739C30002171A /* CurioNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioNetwork.h; sourceTree = "<group>"; };
+		05F28BD11C0739C30002171A /* CurioNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioNetwork.m; sourceTree = "<group>"; };
+		05F28BD21C0739C30002171A /* CurioNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioNotificationManager.h; sourceTree = "<group>"; };
+		05F28BD31C0739C30002171A /* CurioNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioNotificationManager.m; sourceTree = "<group>"; };
+		05F28BD41C0739C30002171A /* CurioPostOffice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioPostOffice.h; sourceTree = "<group>"; };
+		05F28BD51C0739C30002171A /* CurioPostOffice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioPostOffice.m; sourceTree = "<group>"; };
+		05F28BD61C0739C30002171A /* CurioPushData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioPushData.h; sourceTree = "<group>"; };
+		05F28BD71C0739C30002171A /* CurioPushData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioPushData.m; sourceTree = "<group>"; };
+		05F28BD81C0739C30002171A /* CurioReachabilityEx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioReachabilityEx.h; sourceTree = "<group>"; };
+		05F28BD91C0739C30002171A /* CurioReachabilityEx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioReachabilityEx.m; sourceTree = "<group>"; };
+		05F28BDA1C0739C30002171A /* CurioResourceUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioResourceUtil.h; sourceTree = "<group>"; };
+		05F28BDB1C0739C30002171A /* CurioResourceUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioResourceUtil.m; sourceTree = "<group>"; };
+		05F28BDC1C0739C30002171A /* CurioSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioSDK.h; sourceTree = "<group>"; };
+		05F28BDD1C0739C30002171A /* CurioSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioSDK.m; sourceTree = "<group>"; };
+		05F28BDE1C0739C30002171A /* CurioSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioSettings.h; sourceTree = "<group>"; };
+		05F28BDF1C0739C30002171A /* CurioSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioSettings.m; sourceTree = "<group>"; };
+		05F28BE01C0739C30002171A /* CurioUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioUtil.h; sourceTree = "<group>"; };
+		05F28BE11C0739C30002171A /* CurioUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioUtil.m; sourceTree = "<group>"; };
 		05F4AA261A2F7692000F41B8 /* ActivityUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityUtil.h; sourceTree = "<group>"; };
 		05F4AA271A2F7692000F41B8 /* ActivityUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityUtil.m; sourceTree = "<group>"; };
 		2443E1531B6BB0C5001C274D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -1806,37 +1839,6 @@
 		24FE7B0A1B6A539D007B53A0 /* PrintWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrintWebViewController.m; sourceTree = "<group>"; };
 		24FE7B0C1B6A5A98007B53A0 /* white_print_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white_print_icon.png; sourceTree = "<group>"; };
 		24FE7B0D1B6A5A98007B53A0 /* white_print_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "white_print_icon@2x.png"; sourceTree = "<group>"; };
-		562FB3D81AA48C4400F9EFBD /* CurioAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioAction.h; sourceTree = "<group>"; };
-		562FB3D91AA48C4400F9EFBD /* CurioAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioAction.m; sourceTree = "<group>"; };
-		562FB3DA1AA48C4400F9EFBD /* CurioActionToolkit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioActionToolkit.h; sourceTree = "<group>"; };
-		562FB3DB1AA48C4400F9EFBD /* CurioActionToolkit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioActionToolkit.m; sourceTree = "<group>"; };
-		562FB3DC1AA48C4400F9EFBD /* CurioConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioConstants.h; sourceTree = "<group>"; };
-		562FB3DD1AA48C4400F9EFBD /* CurioConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioConstants.m; sourceTree = "<group>"; };
-		562FB3DE1AA48C4400F9EFBD /* CurioDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioDB.h; sourceTree = "<group>"; };
-		562FB3DF1AA48C4400F9EFBD /* CurioDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioDB.m; sourceTree = "<group>"; };
-		562FB3E01AA48C4400F9EFBD /* CurioDBToolkit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioDBToolkit.h; sourceTree = "<group>"; };
-		562FB3E11AA48C4400F9EFBD /* CurioDBToolkit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioDBToolkit.m; sourceTree = "<group>"; };
-		562FB3E21AA48C4400F9EFBD /* CurioLocationData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioLocationData.h; sourceTree = "<group>"; };
-		562FB3E31AA48C4400F9EFBD /* CurioLocationData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioLocationData.m; sourceTree = "<group>"; };
-		562FB3E41AA48C4400F9EFBD /* CurioLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioLocationManager.h; sourceTree = "<group>"; };
-		562FB3E51AA48C4400F9EFBD /* CurioLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioLocationManager.m; sourceTree = "<group>"; };
-		562FB3E61AA48C4400F9EFBD /* CurioNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioNetwork.h; sourceTree = "<group>"; };
-		562FB3E71AA48C4400F9EFBD /* CurioNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioNetwork.m; sourceTree = "<group>"; };
-		562FB3E81AA48C4400F9EFBD /* CurioNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioNotificationManager.h; sourceTree = "<group>"; };
-		562FB3E91AA48C4400F9EFBD /* CurioNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioNotificationManager.m; sourceTree = "<group>"; };
-		562FB3EA1AA48C4400F9EFBD /* CurioPostOffice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioPostOffice.h; sourceTree = "<group>"; };
-		562FB3EB1AA48C4400F9EFBD /* CurioPostOffice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioPostOffice.m; sourceTree = "<group>"; };
-		562FB3EC1AA48C4400F9EFBD /* CurioPushData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioPushData.h; sourceTree = "<group>"; };
-		562FB3ED1AA48C4400F9EFBD /* CurioPushData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioPushData.m; sourceTree = "<group>"; };
-		562FB3EE1AA48C4400F9EFBD /* CurioReachabilityEx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioReachabilityEx.h; sourceTree = "<group>"; };
-		562FB3EF1AA48C4400F9EFBD /* CurioReachabilityEx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioReachabilityEx.m; sourceTree = "<group>"; };
-		562FB3F01AA48C4400F9EFBD /* CurioSDK-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CurioSDK-Prefix.pch"; sourceTree = "<group>"; };
-		562FB3F11AA48C4400F9EFBD /* CurioSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioSDK.h; sourceTree = "<group>"; };
-		562FB3F21AA48C4400F9EFBD /* CurioSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioSDK.m; sourceTree = "<group>"; };
-		562FB3F31AA48C4400F9EFBD /* CurioSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioSettings.h; sourceTree = "<group>"; };
-		562FB3F41AA48C4400F9EFBD /* CurioSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioSettings.m; sourceTree = "<group>"; };
-		562FB3F51AA48C4400F9EFBD /* CurioUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioUtil.h; sourceTree = "<group>"; };
-		562FB3F61AA48C4400F9EFBD /* CurioUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioUtil.m; sourceTree = "<group>"; };
 		563FB1BB1AA5EB030066F8E6 /* settings_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings_icon.png; sourceTree = "<group>"; };
 		563FB1BC1AA5EB030066F8E6 /* settings_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings_icon@2x.png"; sourceTree = "<group>"; };
 		563FB1BF1AA5EC990066F8E6 /* circle_welcome_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle_welcome_icon.png; sourceTree = "<group>"; };
@@ -3239,37 +3241,38 @@
 		562FB3D71AA48C4400F9EFBD /* CurioSDK */ = {
 			isa = PBXGroup;
 			children = (
-				562FB3D81AA48C4400F9EFBD /* CurioAction.h */,
-				562FB3D91AA48C4400F9EFBD /* CurioAction.m */,
-				562FB3DA1AA48C4400F9EFBD /* CurioActionToolkit.h */,
-				562FB3DB1AA48C4400F9EFBD /* CurioActionToolkit.m */,
-				562FB3DC1AA48C4400F9EFBD /* CurioConstants.h */,
-				562FB3DD1AA48C4400F9EFBD /* CurioConstants.m */,
-				562FB3DE1AA48C4400F9EFBD /* CurioDB.h */,
-				562FB3DF1AA48C4400F9EFBD /* CurioDB.m */,
-				562FB3E01AA48C4400F9EFBD /* CurioDBToolkit.h */,
-				562FB3E11AA48C4400F9EFBD /* CurioDBToolkit.m */,
-				562FB3E21AA48C4400F9EFBD /* CurioLocationData.h */,
-				562FB3E31AA48C4400F9EFBD /* CurioLocationData.m */,
-				562FB3E41AA48C4400F9EFBD /* CurioLocationManager.h */,
-				562FB3E51AA48C4400F9EFBD /* CurioLocationManager.m */,
-				562FB3E61AA48C4400F9EFBD /* CurioNetwork.h */,
-				562FB3E71AA48C4400F9EFBD /* CurioNetwork.m */,
-				562FB3E81AA48C4400F9EFBD /* CurioNotificationManager.h */,
-				562FB3E91AA48C4400F9EFBD /* CurioNotificationManager.m */,
-				562FB3EA1AA48C4400F9EFBD /* CurioPostOffice.h */,
-				562FB3EB1AA48C4400F9EFBD /* CurioPostOffice.m */,
-				562FB3EC1AA48C4400F9EFBD /* CurioPushData.h */,
-				562FB3ED1AA48C4400F9EFBD /* CurioPushData.m */,
-				562FB3EE1AA48C4400F9EFBD /* CurioReachabilityEx.h */,
-				562FB3EF1AA48C4400F9EFBD /* CurioReachabilityEx.m */,
-				562FB3F01AA48C4400F9EFBD /* CurioSDK-Prefix.pch */,
-				562FB3F11AA48C4400F9EFBD /* CurioSDK.h */,
-				562FB3F21AA48C4400F9EFBD /* CurioSDK.m */,
-				562FB3F31AA48C4400F9EFBD /* CurioSettings.h */,
-				562FB3F41AA48C4400F9EFBD /* CurioSettings.m */,
-				562FB3F51AA48C4400F9EFBD /* CurioUtil.h */,
-				562FB3F61AA48C4400F9EFBD /* CurioUtil.m */,
+				05F28BC21C0739C30002171A /* CurioAction.h */,
+				05F28BC31C0739C30002171A /* CurioAction.m */,
+				05F28BC41C0739C30002171A /* CurioActionToolkit.h */,
+				05F28BC51C0739C30002171A /* CurioActionToolkit.m */,
+				05F28BC61C0739C30002171A /* CurioConstants.h */,
+				05F28BC71C0739C30002171A /* CurioConstants.m */,
+				05F28BC81C0739C30002171A /* CurioDB.h */,
+				05F28BC91C0739C30002171A /* CurioDB.m */,
+				05F28BCA1C0739C30002171A /* CurioDBToolkit.h */,
+				05F28BCB1C0739C30002171A /* CurioDBToolkit.m */,
+				05F28BCC1C0739C30002171A /* CurioLocationData.h */,
+				05F28BCD1C0739C30002171A /* CurioLocationData.m */,
+				05F28BCE1C0739C30002171A /* CurioLocationManager.h */,
+				05F28BCF1C0739C30002171A /* CurioLocationManager.m */,
+				05F28BD01C0739C30002171A /* CurioNetwork.h */,
+				05F28BD11C0739C30002171A /* CurioNetwork.m */,
+				05F28BD21C0739C30002171A /* CurioNotificationManager.h */,
+				05F28BD31C0739C30002171A /* CurioNotificationManager.m */,
+				05F28BD41C0739C30002171A /* CurioPostOffice.h */,
+				05F28BD51C0739C30002171A /* CurioPostOffice.m */,
+				05F28BD61C0739C30002171A /* CurioPushData.h */,
+				05F28BD71C0739C30002171A /* CurioPushData.m */,
+				05F28BD81C0739C30002171A /* CurioReachabilityEx.h */,
+				05F28BD91C0739C30002171A /* CurioReachabilityEx.m */,
+				05F28BDA1C0739C30002171A /* CurioResourceUtil.h */,
+				05F28BDB1C0739C30002171A /* CurioResourceUtil.m */,
+				05F28BDC1C0739C30002171A /* CurioSDK.h */,
+				05F28BDD1C0739C30002171A /* CurioSDK.m */,
+				05F28BDE1C0739C30002171A /* CurioSettings.h */,
+				05F28BDF1C0739C30002171A /* CurioSettings.m */,
+				05F28BE01C0739C30002171A /* CurioUtil.h */,
+				05F28BE11C0739C30002171A /* CurioUtil.m */,
 			);
 			path = CurioSDK;
 			sourceTree = "<group>";
@@ -3864,7 +3867,6 @@
 				052644BF19D5A32300B63759 /* TextCell.m in Sources */,
 				059A46DD1A6D3E2000935023 /* Subscription.m in Sources */,
 				058B328E1A14ABCB00A291C4 /* RenameAlbumDao.m in Sources */,
-				562FB3FE1AA48C4400F9EFBD /* CurioNetwork.m in Sources */,
 				058219BF1A384AF0001FA679 /* MessageCell.m in Sources */,
 				056090E41AC5A44000710211 /* ReachabilityManager.m in Sources */,
 				05403F1919F5584300AED10A /* ElasticSearchDao.m in Sources */,
@@ -3879,6 +3881,7 @@
 				05C2A0351A79830500EE4D78 /* ADJTimer.m in Sources */,
 				052644AF19D5A2A600B63759 /* SettingsDocumentsController.m in Sources */,
 				05368B471A4AD29C00B79403 /* SyncManager.m in Sources */,
+				05F28BF01C0739C30002171A /* CurioSettings.m in Sources */,
 				0544A0FF1B6619E7006EB9B5 /* UIImage+Exif.m in Sources */,
 				051E1E5819CAC90700FD1E03 /* AFURLConnectionOperation.m in Sources */,
 				05A938291AF6AE9100AE2892 /* FullyLoaded.m in Sources */,
@@ -3913,10 +3916,10 @@
 				05DEB1C31A80B8FE007793DD /* MigrationStatus.m in Sources */,
 				05DEB1F21A81775F007793DD /* SyncStatus.m in Sources */,
 				05D2B19A19E679E500FC309D /* PhotoAlbum.m in Sources */,
-				562FB3FF1AA48C4400F9EFBD /* CurioNotificationManager.m in Sources */,
 				052160A919E30D640007B321 /* UploadRef.m in Sources */,
 				051E1EA219CB206500FD1E03 /* SlidingMenu.m in Sources */,
 				051E1E5319CAC90700FD1E03 /* AFHTTPRequestOperation.m in Sources */,
+				05F28BF11C0739C30002171A /* CurioUtil.m in Sources */,
 				05DEB1ED1A81775F007793DD /* SyncAdapter.m in Sources */,
 				051E1E8A19CAC92700FD1E03 /* ASIFormDataRequest.m in Sources */,
 				051E1E8019CAC92700FD1E03 /* NSObject+SBJSON.m in Sources */,
@@ -3940,25 +3943,25 @@
 				059CE54A1A87DC5300F6CFAE /* ContactSyncResultCell.m in Sources */,
 				052644AE19D5A2A600B63759 /* SettingsPhotosVideosController.m in Sources */,
 				051E1E3919CAC85100FD1E03 /* BaseDao.m in Sources */,
+				05F28BE61C0739C30002171A /* CurioDBToolkit.m in Sources */,
 				056AC8FE19D15EA200AC96C3 /* CacheUtil.m in Sources */,
 				24B268BB1BCE7A8600FA8E58 /* BgViewController.m in Sources */,
 				051E1E8119CAC92700FD1E03 /* NSString+SBJSON.m in Sources */,
 				05B4F4E51A74524100F3A7EC /* AccountInfoDao.m in Sources */,
 				050F4CCC1AB3267F008B0B96 /* VolumeSliderView.m in Sources */,
-				562FB3FD1AA48C4400F9EFBD /* CurioLocationManager.m in Sources */,
 				059785BD1A0525B600A101EF /* FooterActionsMenuView.m in Sources */,
 				053F993719E1BE6F00928F22 /* PreviewUnavailableController.m in Sources */,
 				054206DB19DD399C0026771C /* UploadNotifyDao.m in Sources */,
 				051DE37619CC162700F27C85 /* HomeController.m in Sources */,
 				051E1E5119CAC90700FD1E03 /* UIButton+AFNetworking.m in Sources */,
 				05823AFB1A066FCD005869F6 /* MoveDao.m in Sources */,
+				05F28BEA1C0739C30002171A /* CurioNotificationManager.m in Sources */,
 				051E1EB419CB2D1300FD1E03 /* AppSession.m in Sources */,
 				059A46E61A6D3F4800935023 /* SettingsAboutUsController.m in Sources */,
+				05F28BE91C0739C30002171A /* CurioNetwork.m in Sources */,
 				05AF7C841A1C8D6D00F5011A /* Activity.m in Sources */,
 				052644BE19D5A32300B63759 /* HeaderCell.m in Sources */,
 				05C2A0291A79830500EE4D78 /* NSString+ADJAdditions.m in Sources */,
-				562FB3F91AA48C4400F9EFBD /* CurioConstants.m in Sources */,
-				562FB4051AA48C4400F9EFBD /* CurioUtil.m in Sources */,
 				05AF7C8D1A1C9C5800F5011A /* RecentActivityLinkerFooter.m in Sources */,
 				05224A9519DC1CBC00214767 /* PhotoListModalController.m in Sources */,
 				05C2A02C1A79830500EE4D78 /* ADJAttribution.m in Sources */,
@@ -3966,6 +3969,7 @@
 				05A4845F1A6C614300793A90 /* UIImage+RoundedCorner.m in Sources */,
 				051E1E0719CAC2F900FD1E03 /* AppDelegate.m in Sources */,
 				24FE7B0B1B6A539D007B53A0 /* PrintWebViewController.m in Sources */,
+				05F28BE21C0739C30002171A /* CurioAction.m in Sources */,
 				0555EF1A19F8F50B0068F4CC /* ConfirmDeleteModalController.m in Sources */,
 				05C0E2011A06ABD7005E1E92 /* MoveModalFooterView.m in Sources */,
 				05A938241AF6AE9100AE2892 /* Configuration.m in Sources */,
@@ -3975,7 +3979,6 @@
 				05BBE71119E06FB100805215 /* CameraCaptureModalController.m in Sources */,
 				051DE37319CC140100F27C85 /* CustomConfirmView.m in Sources */,
 				059A46DA1A6D3E2000935023 /* SubscriptionPlan.m in Sources */,
-				562FB4041AA48C4400F9EFBD /* CurioSettings.m in Sources */,
 				0515706419E5AC2600C62B98 /* PhotoHeaderSegmentView.m in Sources */,
 				247268911B7CC29900804E56 /* CustomAdvertisementView.m in Sources */,
 				05BCA2F819EE64EB00AF2FE2 /* AddAlbumDao.m in Sources */,
@@ -3988,6 +3991,7 @@
 				051E1E8319CAC92700FD1E03 /* SBJsonBase.m in Sources */,
 				053F993419E1B88100928F22 /* ImagePreviewController.m in Sources */,
 				052644B119D5A2A600B63759 /* SettingsBaseViewController.m in Sources */,
+				05F28BE81C0739C30002171A /* CurioLocationManager.m in Sources */,
 				05A9382A1AF6AE9100AE2892 /* Message.m in Sources */,
 				054730C319FA3D5A00F913FF /* FavoriteDao.m in Sources */,
 				05DEB1EF1A81775F007793DD /* SyncDBUtils.m in Sources */,
@@ -3996,6 +4000,7 @@
 				05A938301AF6AE9100AE2892 /* UpdateServerIntegration.m in Sources */,
 				052644BD19D5A32300B63759 /* TitleCell.m in Sources */,
 				054206DE19DD6DCD0026771C /* UploadManager.m in Sources */,
+				05F28BED1C0739C30002171A /* CurioReachabilityEx.m in Sources */,
 				05C2A0251A79830500EE4D78 /* ADJActivityHandler.m in Sources */,
 				0526445119D5627900B63759 /* MoreMenuCell.m in Sources */,
 				051E1E8D19CAC92700FD1E03 /* ASINetworkQueue.m in Sources */,
@@ -4016,7 +4021,9 @@
 				05DEB1CC1A80C175007793DD /* MigrateStatusDao.m in Sources */,
 				05AD502E1A7ED76200C40777 /* MigrateStatusController.m in Sources */,
 				052644B019D5A2A600B63759 /* SettingsMusicController.m in Sources */,
+				05F28BEF1C0739C30002171A /* CurioSDK.m in Sources */,
 				05C2A02E1A79830500EE4D78 /* ADJConfig.m in Sources */,
+				05F28BEB1C0739C30002171A /* CurioPostOffice.m in Sources */,
 				051E1E8719CAC92700FD1E03 /* ASIDataCompressor.m in Sources */,
 				2443E1571B6BB5F3001C274D /* AudioManager.m in Sources */,
 				051E1E5619CAC90700FD1E03 /* AFNetworkActivityIndicatorManager.m in Sources */,
@@ -4028,7 +4035,6 @@
 				05F4AA281A2F7692000F41B8 /* ActivityUtil.m in Sources */,
 				051E1E5A19CAC90700FD1E03 /* UIImageView+AFNetworking.m in Sources */,
 				059C9ECA1A07DCAD000C54D9 /* FileDetailModalController.m in Sources */,
-				562FB4021AA48C4400F9EFBD /* CurioReachabilityEx.m in Sources */,
 				051CB39219D2DD7C00E5FC88 /* PhotoListController.m in Sources */,
 				05E0705F1AB977850038BE68 /* ConstantsDao.m in Sources */,
 				05AF7C981A1CA22200F5011A /* RecentActivityHeaderView.m in Sources */,
@@ -4036,7 +4042,6 @@
 				05C6C7011B3C123C00CB6CE5 /* TTTAttributedLabel.m in Sources */,
 				05440AE019D4445D009803D7 /* FloatingAddButton.m in Sources */,
 				058219C41A384CC6001FA679 /* SearchModalController.m in Sources */,
-				562FB3F71AA48C4400F9EFBD /* CurioAction.m in Sources */,
 				051CB38F19D2DD7100E5FC88 /* FileListController.m in Sources */,
 				05A9382C1AF6AE9100AE2892 /* UIAlertViewCustom.m in Sources */,
 				05E8113219DF0ACB0063F99A /* MetaAlbum.m in Sources */,
@@ -4046,6 +4051,7 @@
 				050D4C351A31E17F00809A01 /* PostLoginSyncContactController.m in Sources */,
 				051DE35C19CC128600F27C85 /* MyNavigationController.m in Sources */,
 				05C2A0261A79830500EE4D78 /* ADJActivityKind.m in Sources */,
+				05F28BE51C0739C30002171A /* CurioDB.m in Sources */,
 				05A9382F1AF6AE9100AE2892 /* UpdaterController.m in Sources */,
 				051E1E8219CAC92700FD1E03 /* SBJSON.m in Sources */,
 				051DE37219CC140100F27C85 /* CustomAlertView.m in Sources */,
@@ -4055,7 +4061,6 @@
 				052644AD19D5A2A600B63759 /* SettingsContactsController.m in Sources */,
 				05C7CB6A1ABC91B200A7BF8E /* MetaFileSummary.m in Sources */,
 				051E1EA719CB209F00FD1E03 /* MenuCell.m in Sources */,
-				562FB3FB1AA48C4400F9EFBD /* CurioDBToolkit.m in Sources */,
 				051E1E0319CAC2F900FD1E03 /* main.m in Sources */,
 				051DE36C19CC130A00F27C85 /* LoginTextfield.m in Sources */,
 				0551CE161A2B3E9700DB117D /* HomeUsageView.m in Sources */,
@@ -4064,24 +4069,23 @@
 				0526444E19D5625E00B63759 /* MoreMenuView.m in Sources */,
 				05DEB1C61A80C161007793DD /* ProvisionDao.m in Sources */,
 				05BCA2FB19EE89EE00AF2FE2 /* MusicPreviewController.m in Sources */,
-				562FB3F81AA48C4400F9EFBD /* CurioActionToolkit.m in Sources */,
 				052644B519D5A2A600B63759 /* SettingsNotificationsController.m in Sources */,
 				05BCA2F519EE5CD900AF2FE2 /* NewAlbumModalController.m in Sources */,
 				051E1E3219CAC57400FD1E03 /* Util.m in Sources */,
+				05F28BE41C0739C30002171A /* CurioConstants.m in Sources */,
 				05A8ADA51A5ABCD8007566BF /* UploadQueue.m in Sources */,
 				051DE35519CC06F000F27C85 /* AbstractMenuCell.m in Sources */,
 				0514A62A1BF4D1030084E0AB /* CropAndShareListController.m in Sources */,
 				0551CE191A2B3EC900DB117D /* Usage.m in Sources */,
+				05F28BEE1C0739C30002171A /* CurioResourceUtil.m in Sources */,
 				058219D11A384D8D001FA679 /* SearchDao.m in Sources */,
 				051E1E8C19CAC92700FD1E03 /* ASIInputStream.m in Sources */,
 				05C244301A023F5C000D65D0 /* SortModalController.m in Sources */,
 				05C0E1FE1A0698C5005E1E92 /* MusicListController.m in Sources */,
 				0526444B19D5578C00B63759 /* FolderEmptyCell.m in Sources */,
-				562FB3FA1AA48C4400F9EFBD /* CurioDB.m in Sources */,
 				051E1EB719CB2DAC00FD1E03 /* User.m in Sources */,
 				051E1E5219CAC90700FD1E03 /* AFHTTPClient.m in Sources */,
 				055A3F5D19E82B2C004A0121 /* PhotoAlbumController.m in Sources */,
-				562FB4001AA48C4400F9EFBD /* CurioPostOffice.m in Sources */,
 				051DE36719CC12FD00F27C85 /* CustomButton.m in Sources */,
 				05BBE71419E07D0400805215 /* RefSongCell.m in Sources */,
 				059C046C1A85256B007B18BE /* ContactSyncController.m in Sources */,
@@ -4091,15 +4095,15 @@
 				059A46E31A6D3E3F00935023 /* AccountDao.m in Sources */,
 				058BC23F1A30E6B10007F4DE /* ServiceLoginDao.m in Sources */,
 				053D0EDE19DB01F7006A13E0 /* AddFolderDao.m in Sources */,
+				05F28BE31C0739C30002171A /* CurioActionToolkit.m in Sources */,
 				05D5E59E1B09D5DD00A22957 /* PurchaseView.m in Sources */,
-				562FB4011AA48C4400F9EFBD /* CurioPushData.m in Sources */,
 				051E1E7F19CAC92700FD1E03 /* Reachability.m in Sources */,
 				05C2A0361A79830500EE4D78 /* Adjust.m in Sources */,
 				05C3F6071A3900A8001954E8 /* PostLoginPrefCell.m in Sources */,
 				059A46DB1A6D3E2000935023 /* Device.m in Sources */,
-				562FB3FC1AA48C4400F9EFBD /* CurioLocationData.m in Sources */,
 				052644B319D5A2A600B63759 /* SettingsStorageController.m in Sources */,
 				058B32971A15E8A300A291C4 /* AlbumDetailModalController.m in Sources */,
+				05F28BE71C0739C30002171A /* CurioLocationData.m in Sources */,
 				059E9A091A35DC2500922A77 /* MyMessageComposeViewController.m in Sources */,
 				05144B5B1A0905FA00B2A414 /* SimpleMusicCell.m in Sources */,
 				051CB39B19D2E40B00E5FC88 /* MusicCell.m in Sources */,
@@ -4115,6 +4119,7 @@
 				058BC2321A30CD650007F4DE /* LastTwoDigitController.m in Sources */,
 				051DE36819CC12FD00F27C85 /* ToggleButton.m in Sources */,
 				058219BC1A384AB0001FA679 /* FavouriteListController.m in Sources */,
+				05F28BEC1C0739C30002171A /* CurioPushData.m in Sources */,
 				0589065919CC509700A9E517 /* SearchTextField.m in Sources */,
 				051CB39519D2E3F200E5FC88 /* AbstractFileFolderCell.m in Sources */,
 				058BC2351A30D2A90007F4DE /* LoginController.m in Sources */,
@@ -4125,7 +4130,6 @@
 				056E2A151A28BC2700C24904 /* XYPieChart.m in Sources */,
 				058B32911A14ABE500A291C4 /* AlbumAddPhotosDao.m in Sources */,
 				05AF7C811A1C8CD100F5011A /* RecentActivitiesController.m in Sources */,
-				562FB4031AA48C4400F9EFBD /* CurioSDK.m in Sources */,
 				05501F3819EBBB4600CA9F4E /* AlbumDetailDao.m in Sources */,
 				05DEB1EB1A81775F007793DD /* ContactSyncSDK.m in Sources */,
 				05A938251AF6AE9100AE2892 /* Controller.m in Sources */,
