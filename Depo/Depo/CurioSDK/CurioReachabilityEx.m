@@ -467,7 +467,7 @@ static void TMReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
     return 0;
 }
 
--(NSString*)currentReachabilityString __TVOS_UNAVAILABLE
+-(NSString*)currentReachabilityString
 {
     CurioNetworkStatus temp = [self currentReachabilityStatus];
     

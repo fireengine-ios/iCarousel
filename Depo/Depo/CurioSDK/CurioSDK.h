@@ -166,7 +166,7 @@
 #import "CurioResourceUtil.h"
 
 
-__TVOS_UNAVAILABLE
+
 @protocol CurioSDKDelegate <NSObject>
 - (void) unregisteredFromNotificationServer:(NSDictionary *)responseDictionary;
 - (void) customIDSent:(NSDictionary *)responseDictionary;
@@ -192,7 +192,7 @@ __TVOS_UNAVAILABLE
 @property (assign, nonatomic) NSUInteger retryCount;
 
 
-@property (assign,nonatomic) id<CurioSDKDelegate> delegate __TVOS_UNAVAILABLE;
+@property (assign,nonatomic) id<CurioSDKDelegate> delegate;
 
 
 /**
@@ -330,7 +330,7 @@ registerForRemoteNotifications:(BOOL)registerForRemoteNotifications
  fetchLocationEnabled:(BOOL)fetchLocationEnabled
 maxValidLocationTimeInterval:(double)maxValidLocationTimeInterval
              delegate:(id<CurioSDKDelegate>)delegate
-     appLaunchOptions:(NSDictionary *)appLaunchOptions __TVOS_UNAVAILABLE;
+     appLaunchOptions:(NSDictionary *)appLaunchOptions;
 
 /**
     Starts Curio session.
@@ -369,12 +369,12 @@ maxValidLocationTimeInterval:(double)maxValidLocationTimeInterval
 /**
  * Unregisters this device from push notification server.
  */
-- (void) unregisterFromNotificationServer __TVOS_UNAVAILABLE;
+- (void) unregisterFromNotificationServer;
 
 /**
  * Sends custom id to push notification server manually.
  */
-- (void) sendCustomId:(NSString *)theCustomId __TVOS_UNAVAILABLE;
+- (void) sendCustomId:(NSString *)theCustomId;
 
 /**
  *
@@ -387,6 +387,6 @@ maxValidLocationTimeInterval:(double)maxValidLocationTimeInterval
 - (void)getNotificationHistoryWithPageStart:(NSInteger)pageStart
                                rows:(NSInteger)rows
                                  success:(void(^)(NSDictionary *responseObject))success
-                                 failure:(void(^)(NSError *error))failure __TVOS_UNAVAILABLE;
+                                 failure:(void(^)(NSError *error))failure;
 
 @end

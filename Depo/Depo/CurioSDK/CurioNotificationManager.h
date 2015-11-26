@@ -9,7 +9,6 @@
 
 #import <Foundation/Foundation.h>
 
-__TVOS_UNAVAILABLE
 @interface CurioNotificationManager : NSObject
 {
     NSOperationQueue *curioNotificationQueue;
@@ -22,28 +21,28 @@ __TVOS_UNAVAILABLE
  
  @return CSSettings shared instance
  */
-+ (CS_INSTANCETYPE) shared __TVOS_UNAVAILABLE;
++ (CS_INSTANCETYPE) shared;
 
 /**
  
     Registers app for remote notification retrieval
  
  */
-- (void) registerForNotifications __TVOS_UNAVAILABLE;
+- (void) registerForNotifications;
 
 /**
  
     Notifies Curio SDK for registered notification state with device token.
  
  */
-- (void) didRegisteredForNotifications:(NSData *)deviceToken __TVOS_UNAVAILABLE;
+- (void) didRegisteredForNotifications:(NSData *)deviceToken;
 
 /**
  
     Notifies Curio SDK for received notification
  
  */
-- (void) didReceiveNotification:(NSDictionary *)userInfo __TVOS_UNAVAILABLE;
+- (void) didReceiveNotification:(NSDictionary *)userInfo;
 
 
 /**

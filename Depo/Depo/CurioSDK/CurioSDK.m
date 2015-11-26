@@ -713,7 +713,7 @@ maxValidLocationTimeInterval:(double)maxValidLocationTimeInterval
 
 #pragma mark - Unregister and CustomID set observers
 
-- (void)unregisterFromNotificationServerNotified:(NSNotification *)notification __TVOS_UNAVAILABLE {
+- (void)unregisterFromNotificationServerNotified:(NSNotification *)notification {
     __weak CurioSDK *weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
         if ([weakSelf.delegate respondsToSelector:@selector(unregisteredFromNotificationServer:)]) {
@@ -722,7 +722,7 @@ maxValidLocationTimeInterval:(double)maxValidLocationTimeInterval
     });
 }
 
-- (void)customIDSetNotified:(NSNotification *)notification __TVOS_UNAVAILABLE {
+- (void)customIDSetNotified:(NSNotification *)notification {
     __weak CurioSDK *weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
         if ([weakSelf.delegate respondsToSelector:@selector(customIDSent:)]) {
