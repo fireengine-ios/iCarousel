@@ -158,9 +158,13 @@
         else{
             return 1;
         }
+    } else {
+        if([offers count] > 0) {
+            return containerOffers.count;
+        } else {
+            return 0;
+        }
     }
-    else
-        return containerOffers.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -305,6 +309,9 @@
 }
 
 - (NSArray *) sortingOfferContainers:(NSArray *) offerPackages {
+    
+    if([offers count] == 0)
+        return [[NSArray alloc] init];
     
     OfferContainer *firstContainer = [[OfferContainer alloc] init];
     Offer *tmp = [[Offer alloc] init];
