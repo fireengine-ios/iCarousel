@@ -63,7 +63,7 @@
         NSNumber *migrationUserFlag = [headerParams objectForKey:@"X-Migration-User"];
         
 //        NSLog(@"Radius Login Response Headers: %@", headerParams);
-//        NSLog(@"TOKEN: %@", authToken);
+//        NSLog(@"Radius login response: %@", [request responseString]);
         
         if(newUserFlag != nil && ![newUserFlag isKindOfClass:[NSNull class]]) {
             APPDELEGATE.session.newUserFlag = [newUserFlag boolValue];

@@ -31,7 +31,7 @@
 
 #import "Adjust.h"
 #import "ACTReporter.h"
-#import <SplunkMint-iOS/SplunkMint-iOS.h>
+#import <SplunkMint/SplunkMint.h>
 #import "ContactSyncSDK.h"
 
 #import "ReachabilityManager.h"

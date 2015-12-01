@@ -344,6 +344,8 @@
 		055F527C1B1CD6570052C854 /* Icon_76.png in Resources */ = {isa = PBXBuildFile; fileRef = 055F527A1B1CD6570052C854 /* Icon_76.png */; };
 		056090E41AC5A44000710211 /* ReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 056090E31AC5A44000710211 /* ReachabilityManager.m */; };
 		0560F46F1B00D5D0005E6936 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0560F46E1B00D5D0005E6936 /* LocationManager.m */; };
+		056107201C0D8B310014D550 /* SplunkMint.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0561071F1C0D8B310014D550 /* SplunkMint.framework */; };
+		056107221C0D8E210014D550 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056107211C0D8E210014D550 /* WebKit.framework */; };
 		05620F211A4C62B30089DFB5 /* SyncReference.m in Sources */ = {isa = PBXBuildFile; fileRef = 05620F201A4C62B30089DFB5 /* SyncReference.m */; };
 		0569C8341A8A2B61000E0486 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0569C8321A8A2B61000E0486 /* Icon.png */; };
 		0569C8351A8A2B61000E0486 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0569C8331A8A2B61000E0486 /* Icon@2x.png */; };
@@ -646,7 +648,6 @@
 		05C2A0391A79832200EE4D78 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C2A0381A79832200EE4D78 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		05C2A03B1A79832600EE4D78 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C2A03A1A79832600EE4D78 /* iAd.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		05C2A0441A79882100EE4D78 /* libGoogleConversionTracking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C2A0421A79882100EE4D78 /* libGoogleConversionTracking.a */; };
-		05C2A0471A7989AD00EE4D78 /* SplunkMint-iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C2A0461A7989AD00EE4D78 /* SplunkMint-iOS.framework */; };
 		05C2A0491A7989CD00EE4D78 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C2A0481A7989CD00EE4D78 /* CoreTelephony.framework */; };
 		05C3A37F1B57DFAB002AB49A /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C3A37E1B57DFAB002AB49A /* ShareViewController.m */; };
 		05C3A3811B57DFAB002AB49A /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05C3A3801B57DFAB002AB49A /* MainInterface.storyboard */; };
@@ -1249,6 +1250,8 @@
 		056090E31AC5A44000710211 /* ReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachabilityManager.m; sourceTree = "<group>"; };
 		0560F46D1B00D5D0005E6936 /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		0560F46E1B00D5D0005E6936 /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
+		0561071F1C0D8B310014D550 /* SplunkMint.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SplunkMint.framework; path = Depo/SplunkMint.framework; sourceTree = "<group>"; };
+		056107211C0D8E210014D550 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		05620F1F1A4C62B30089DFB5 /* SyncReference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncReference.h; sourceTree = "<group>"; };
 		05620F201A4C62B30089DFB5 /* SyncReference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncReference.m; sourceTree = "<group>"; };
 		0569C8321A8A2B61000E0486 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
@@ -1678,7 +1681,6 @@
 		05C2A03F1A79882100EE4D78 /* GoogleConversionPing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleConversionPing.h; sourceTree = "<group>"; };
 		05C2A0411A79882100EE4D78 /* DCTReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCTReporter.h; sourceTree = "<group>"; };
 		05C2A0421A79882100EE4D78 /* libGoogleConversionTracking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleConversionTracking.a; sourceTree = "<group>"; };
-		05C2A0461A7989AD00EE4D78 /* SplunkMint-iOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "SplunkMint-iOS.framework"; path = "Depo/SplunkMint-iOS.framework"; sourceTree = "<group>"; };
 		05C2A0481A7989CD00EE4D78 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		05C3A3791B57DFAB002AB49A /* DepoShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DepoShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		05C3A37C1B57DFAB002AB49A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1858,10 +1860,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				056107221C0D8E210014D550 /* WebKit.framework in Frameworks */,
+				056107201C0D8B310014D550 /* SplunkMint.framework in Frameworks */,
 				2443E1541B6BB0C5001C274D /* AudioToolbox.framework in Frameworks */,
 				053685FF1AA990DF007EBB23 /* MobileCoreServices.framework in Frameworks */,
 				05C2A0491A7989CD00EE4D78 /* CoreTelephony.framework in Frameworks */,
-				05C2A0471A7989AD00EE4D78 /* SplunkMint-iOS.framework in Frameworks */,
 				05C2A0441A79882100EE4D78 /* libGoogleConversionTracking.a in Frameworks */,
 				05C2A03B1A79832600EE4D78 /* iAd.framework in Frameworks */,
 				05C2A0391A79832200EE4D78 /* AdSupport.framework in Frameworks */,
@@ -1946,11 +1949,12 @@
 		051E1DF519CAC2F900FD1E03 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				056107211C0D8E210014D550 /* WebKit.framework */,
+				0561071F1C0D8B310014D550 /* SplunkMint.framework */,
 				2443E1531B6BB0C5001C274D /* AudioToolbox.framework */,
 				053685FE1AA990DF007EBB23 /* MobileCoreServices.framework */,
 				053B8E8A1A7AE7DE004E6456 /* Metal.framework */,
 				05C2A0481A7989CD00EE4D78 /* CoreTelephony.framework */,
-				05C2A0461A7989AD00EE4D78 /* SplunkMint-iOS.framework */,
 				05C2A03A1A79832600EE4D78 /* iAd.framework */,
 				05C2A0381A79832200EE4D78 /* AdSupport.framework */,
 				05BBE71519E07DA600805215 /* MediaPlayer.framework */,

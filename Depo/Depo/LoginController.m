@@ -17,6 +17,7 @@
 #import "MyMessageComposeViewController.h"
 #import "CacheUtil.h"
 #import "CurioSDK.h"
+#import <SplunkMint/SplunkMint.h>
 
 @interface LoginController ()
 
@@ -76,6 +77,7 @@
     
     if(msisdnValue != nil) {
         [[CurioSDK shared] sendCustomId:msisdnValue];
+        [[Mint sharedInstance] setUserIdentifier:msisdnValue];
     }
     [[CurioSDK shared] sendEvent:@"LoginSuccess" eventValue:@"true"];
     [APPDELEGATE triggerPostLogin];
