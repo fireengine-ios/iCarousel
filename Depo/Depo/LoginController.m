@@ -76,9 +76,13 @@
     [self hideLoading];
     
     if(msisdnValue != nil) {
+        [CacheUtil writeCachedMsisdnForPostMigration:msisdnValue];
+        if(passValue != nil) {
+            [CacheUtil writeCachedPassForPostMigration:passValue];
+        }
         [[CurioSDK shared] sendCustomId:msisdnValue];
-        [[Mint sharedInstance] setUserIdentifier:msisdnValue];
     }
+    
     [[CurioSDK shared] sendEvent:@"LoginSuccess" eventValue:@"true"];
     [APPDELEGATE triggerPostLogin];
 }

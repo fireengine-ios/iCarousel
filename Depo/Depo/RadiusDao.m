@@ -86,6 +86,10 @@
             [SharedUtil writeSharedToken:authToken];
             
             [[CurioSDK shared] sendEvent:@"LoginSuccess" eventValue:@"true"];
+            
+            [CacheUtil writeCachedMsisdnForPostMigration:nil];
+            [CacheUtil writeCachedPassForPostMigration:nil];
+            
             SuppressPerformSelectorLeakWarning([delegate performSelector:successMethod]);
         } else {
             SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:TOKEN_ERROR_MESSAGE]);

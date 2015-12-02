@@ -24,6 +24,7 @@
 #import "CurioSDK.h"
 #import "Subscription.h"
 #import "AppSession.h"
+#import <SplunkMint/SplunkMint.h>
 
 @interface HomeController ()
 
@@ -447,6 +448,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //BugSense'e msisdn ekleyebilmek için burada initialize ediyoruz
+    if([CacheUtil readCachedMsisdnForPostMigration] != nil){
+        [[Mint sharedInstance] setUserIdentifier:[CacheUtil readCachedMsisdnForPostMigration]];
+    }
+    [[Mint sharedInstance] initAndStartSession:@"13ceffcf"];
 }
 
 - (void)didReceiveMemoryWarning {

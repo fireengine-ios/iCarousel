@@ -39,9 +39,6 @@
                             deviceInfo, @"deviceInfo",
                           	nil];
     
-    [CacheUtil writeCachedMsisdnForPostMigration:msisdnVal];
-    [CacheUtil writeCachedPassForPostMigration:passVal];
-    
     SBJSON *json = [SBJSON new];
     NSString *jsonStr = [json stringWithObject:info];
     NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
