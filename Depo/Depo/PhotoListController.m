@@ -870,15 +870,16 @@
 - (void) footerActionMenuDidSelectPrint:(FooterActionsMenuView *)menu {
     NSMutableArray *printList = [[NSMutableArray alloc] init];
     for (int i = 0; i<[photoList count]; i++) {
-        MetaFile *tempFile = [photoList objectAtIndex:i];
-        for (int j = 0;j< [selectedFileList count]; j++) {
-            if ([tempFile.uuid isEqualToString:[selectedFileList objectAtIndex:j]]) {
-                if(tempFile.contentType == ContentTypePhoto){
-                    [printList addObject:tempFile];
+        if([[photoList objectAtIndex:i] isKindOfClass:[MetaFile class]]) {
+            MetaFile *tempFile = [photoList objectAtIndex:i];
+            for (int j = 0;j< [selectedFileList count]; j++) {
+                if ([tempFile.uuid isEqualToString:[selectedFileList objectAtIndex:j]]) {
+                    if(tempFile.contentType == ContentTypePhoto){
+                        [printList addObject:tempFile];
+                    }
                 }
             }
         }
-        
     }
     //[printDao requestForPrintPhotos:printList];
     PrintWebViewController *printController = [[PrintWebViewController alloc] initWithUrl:@"http://akillidepo.cellograf.com/" withFileList:printList];

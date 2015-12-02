@@ -103,9 +103,11 @@
     [self reorganiseActivities:rawItems];
 
     [self.recentTable reloadData];
-    Activity *lastItem = [recentItems objectAtIndex:recentItems.count - 1];
-    if ([lastItem.rawActivityType isEqualToString:@"WELCOME"]) {
-        endOfList = YES;
+    if([recentItems count] > 0) {
+        Activity *lastItem = [recentItems objectAtIndex:recentItems.count - 1];
+        if ([lastItem.rawActivityType isEqualToString:@"WELCOME"]) {
+            endOfList = YES;
+        }
     }
 }
 

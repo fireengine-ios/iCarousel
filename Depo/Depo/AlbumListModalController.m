@@ -36,7 +36,7 @@
         self.al = [[ALAssetsLibrary alloc] init];
         self.albums = [[NSMutableArray alloc] init];
 
-        albumTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
+        albumTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 64) style:UITableViewStylePlain];
         albumTable.backgroundColor = [UIColor clearColor];
         albumTable.backgroundView = nil;
         albumTable.delegate = self;
@@ -44,7 +44,7 @@
         albumTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         [self.view addSubview:albumTable];
         
-        [al enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+        [al enumerateGroupsWithTypes:ALAssetsGroupAlbum | ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
             if(group) {
                 [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
                     NSString *albumName = [group valueForProperty:ALAssetsGroupPropertyName];
