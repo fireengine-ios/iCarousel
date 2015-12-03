@@ -217,7 +217,11 @@
         moreStorageButton.hidden = NO;
         usageChart.frame = CGRectMake(60, (moreStorageButton.frame.origin.y + lastSyncLabel.frame.origin.y + lastSyncLabel.frame.size.height)/2 - 100, 200, 200);
         usageSummaryView.frame = CGRectMake((usageChart.frame.size.width - 130)/2, (usageChart.frame.size.height - 130)/2, 130, 130);
-        [[CurioSDK shared] sendEvent:@"quota_exceeded_80_perc" eventValue:[NSString stringWithFormat:@"current: %.2f", percentUsageVal]];
+        if(!APPDELEGATE.session.quotaExceed80EventFlag) {
+            //session basina bu event bir kere gönderilsin kontrolü eklendi
+            [[CurioSDK shared] sendEvent:@"quota_exceeded_80_perc" eventValue:[NSString stringWithFormat:@"current: %.2f", percentUsageVal]];
+            APPDELEGATE.session.quotaExceed80EventFlag = YES;
+        }
     } else {
         usageChart.frame = CGRectMake(60, (separator.frame.origin.y + lastSyncLabel.frame.origin.y + lastSyncLabel.frame.size.height)/2 - 100, 200, 200);
         usageSummaryView.frame = CGRectMake((usageChart.frame.size.width - 130)/2, (usageChart.frame.size.height - 130)/2, 130, 130);

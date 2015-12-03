@@ -34,6 +34,7 @@
 @synthesize syncType;
 @synthesize shuffleFlag;
 @synthesize bgOngoingTasksOriginalUrls;
+@synthesize quotaExceed80EventFlag;
 
 - (id) init {
     if(self = [super init]) {

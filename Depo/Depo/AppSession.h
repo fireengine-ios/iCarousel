@@ -45,6 +45,8 @@
 
 @property (nonatomic, strong) NSMutableArray *bgOngoingTasksOriginalUrls;
 
+@property (nonatomic) BOOL quotaExceed80EventFlag;
+
 - (void) playAudioItemAtIndex:(int) itemIndex;
 - (void) playNextAudioItem;
 - (void) playPreviousAudioItem;
