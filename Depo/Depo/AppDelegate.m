@@ -48,7 +48,6 @@
 
 #define NO_CONN_ALERT_TAG 111
 
-
 @implementation AppDelegate
 
 @synthesize session;
