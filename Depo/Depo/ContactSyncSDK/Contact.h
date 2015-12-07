@@ -20,6 +20,7 @@
 @property (strong) NSString *firstName;
 @property (strong) NSString *middleName;
 @property (strong) NSString *lastName;
+@property (strong) NSString *displayName;
 
 @property (strong) NSMutableArray *devices;
 
@@ -27,9 +28,11 @@
 
 - (instancetype)initWithRecordRef:(ABRecordRef)ref;
 - (instancetype)initWithDictionary:(NSDictionary*)json;
-- (NSDictionary*) toJSON;
+- (NSDictionary*) toJSON:(BOOL)isNewContact;
+- (NSString*) toStringValue;
+- (NSString*) toMD5;
 - (void)copyContact:(Contact*)contact;
-- (NSString*)displayName;
+- (NSString*)generateDisplayName;
 - (BOOL)isDeviceSizeEqual:(Contact*)other;
 - (BOOL)preEqualCheck:(id)object;
 

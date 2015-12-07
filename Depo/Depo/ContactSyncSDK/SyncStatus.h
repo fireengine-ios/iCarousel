@@ -59,5 +59,6 @@ typedef NS_ENUM(NSUInteger, SYNCInfoStateType) {
 
 - (void)addContact:(Contact*)contact state:(SYNCInfoStateType)state;
 - (void)addRecord:(SyncRecord*)record state:(SYNCInfoStateType)state;
+- (void)addEmpty:(NSNumber *)count state:(SYNCInfoStateType)state;
 
 @end

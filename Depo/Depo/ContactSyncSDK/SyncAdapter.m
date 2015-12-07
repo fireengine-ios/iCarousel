@@ -8,6 +8,7 @@
 #import "SyncAdapter.h"
 #import "SyncSettings.h"
 #import "Contact.h"
+#import "GZIP.h"
 
 @implementation SyncAdapter
 
@@ -15,18 +16,41 @@
 {
     [SyncAdapter request:[self buildURL:[NSString stringWithFormat:@"contact/%@",contactId]] params:nil headers:nil method:GET callback:callback];
 }
-+ (void)getContacts:(void (^)(id, BOOL))callback
++ (void)getUpdatedContacts:(NSNumber *)lastSyncTime deviceId:(NSString *)deviceId callback:(void (^)(id, BOOL))callback
 {
-    [SyncAdapter request:[self buildURL:@"contact"] params:nil headers:nil method:GET callback:callback];
+    NSMutableDictionary *dict = [NSMutableDictionary new];
+    [dict setObject:[lastSyncTime stringValue] forKey:@"timestamp"];
+    [dict setObject:deviceId forKey:@"deviceId"];
+    [SyncAdapter request:[self buildURL:@"getUpdatedContacts"] params:dict headers:nil method:GET callback:callback];
 }
-+ (void)updateContacts:(NSArray*)contacts callback:(void (^)(id, BOOL))callback
+
+
+
++(void)restoreContactsWithTimestamp:(long long)timestamp deviceId:(NSString *)deviceId modifiedContactIDs:(NSArray *)modifiedContactIDs newContacts:(NSArray *)newContacts callback:(void (^)(id, BOOL))callback{
+    NSNumber *timestampNS = [NSNumber numberWithLongLong:timestamp];
+    
+    NSMutableArray *array = [NSMutableArray new];
+    for (Contact *c in newContacts){
+        [array addObject:[c toJSON:true]];
+    }
+
+    NSDictionary *restoreData = @{@"timestamp":timestampNS, @"deviceId":deviceId, @"modified":modifiedContactIDs, @"newContacts":array };
+    [SyncAdapter request:[self buildURL:@"restore"] params:restoreData headers:nil method:POST callback:callback];
+}
+
+
++ (void)backupContactsWithDeviceId:(NSString *)deviceId dirtyContacts:(NSArray*)dirtyContacts deletedContacts:(NSArray *)deletedContacts callback:(void (^)(id, BOOL))callback
 {
     NSMutableArray *array = [NSMutableArray new];
-    for (Contact *c in contacts){
-        [array addObject:[c toJSON]];
+    for (Contact *c in dirtyContacts){
+        [array addObject:[c toJSON:false]];
     }
-    [SyncAdapter request:[self buildURL:@"contacts"] params:@{@"data":array} headers:nil method:POST callback:callback];
+    NSDictionary *backupData = @{@"dirty":array, @"deleted":deletedContacts, @"deviceId":deviceId};
+    [SyncAdapter request:[self buildURL:@"backup"] params:backupData headers:nil method:POST callback:callback];
 }
+
+
+
 + (void)deleteContact:(NSNumber*)contactId callback:(void (^)(id, BOOL))callback
 {
     [SyncAdapter request:[self buildURL:[NSString stringWithFormat:@"contact/%@",contactId]] params:nil headers:nil method:DELETE callback:callback];
@@ -44,6 +68,11 @@
     [SyncAdapter request:[self buildURL:[NSString stringWithFormat:@"sync/status/%@",syncId]] params:nil headers:nil method:GET callback:callback];
 }
 
++ (void)sendLog:(NSData*)data file:(NSString*)file
+{
+    [SyncAdapter gzippedRequest:[self buildURL:@"saveLog"] data:data headers:@{@"FileName":file} callback:nil];
+}
+
 + (NSData*)postBody:(NSDictionary*)dict
 {
     if (SYNC_IS_NULL(dict)){
@@ -53,6 +82,11 @@
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict
                                                     options:0
                                                          error:&error];
+    /*
+     * This line can be used to print post body data with JSon object.
+     */
+    //NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    //SYNC_Log(@"%@", jsonString);
     
     if (!jsonData) {
         SYNC_Log(@"Got an error: %@", error);
@@ -74,6 +108,75 @@
         // problem
         return FALSE;
     }
+}
+
++ (void)gzippedRequest:(NSString*)url data:(NSData*)data headers:(NSDictionary*)headers callback:(void (^)(id, BOOL))callback
+{
+    NSData *requestBodyData = [data gzippedData];
+    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)requestBodyData.length];
+    
+    NSLog(@"POST : %@",postLength);
+    
+    NSURL *urlAddress = [NSURL URLWithString:url];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:urlAddress];
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPShouldHandleCookies:NO];
+    [request setTimeoutInterval:1800.0];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"gzip" forHTTPHeaderField:@"Content-Encoding"];
+    [request setHTTPBody:requestBodyData];
+    
+    if (headers){
+        for (NSString *key in headers){
+            [self addHeader:key value:headers[key] request:request];
+        }
+    }
+    
+    void (^success)(id responseObject) = ^(id responseObject){
+        NSLog(@"url response: %@ %@", url, responseObject);
+        if (callback)
+            callback(responseObject, TRUE);
+    };
+    
+    void (^fail)(id responseObject, NSError *error) = ^(id responseObject, NSError *error){
+        NSLog(@"Error: %@", error);
+        
+        if (callback)
+            callback(responseObject, FALSE);
+    };
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        BOOL isSuccess = FALSE;
+        id responseObject;
+        NSError *error = connectionError;
+        if (error==nil){
+            isSuccess = [SyncAdapter checkResponse:(NSHTTPURLResponse *)response data:data];
+            
+            if (data!=nil){
+                NSString *responseBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                responseObject = [NSJSONSerialization JSONObjectWithData: [responseBody dataUsingEncoding:NSUTF8StringEncoding] options: NSJSONReadingMutableContainers error: &error];
+            }
+        } else {
+            fail(nil, error);
+        }
+        
+        if (isSuccess && responseObject!=nil){
+            if (error!=nil){
+                fail(responseObject, error);
+            } else {
+                BOOL hasError = FALSE;
+                if (SYNC_IS_NULL(responseObject) || ![responseObject isKindOfClass:[NSDictionary class]]){
+                    hasError = TRUE;
+                }
+                if (!hasError)
+                    success(responseObject);
+                else
+                    fail(responseObject, nil);
+            }
+        } else {
+            fail(nil, error);
+        }
+    }];
 }
 
 + (void)request:(NSString*)url params:(NSDictionary*)params headers:(NSDictionary*)headers method:(HttpMethod)method callback:(void (^)(id, BOOL))callback
@@ -122,7 +225,9 @@
         }
     }
     
-    [self addHeader:@"Content-Type" value:@"application/json" request:request];
+    [self addHeader:@"Accept" value:@"application/json" request:request];
+    [self addHeader:@"X-Requested-With" value:@"XMLHttpRequest" request:request];
+    [self addHeader:@"Content-Type" value:@"application/json; charset=utf-8" request:request];
     [self addHeader:@"Cache-Control" value:@"no-cache" request:request];
     [self addHeader:@"User-Agent" value:SYNC_USER_AGENT request:request];
     [self addHeader:SYNC_HEADER_AUTH_TOKEN value:[SyncSettings shared].token request:request];
@@ -207,9 +312,7 @@
 
 + (NSString *)serializeParams:(NSDictionary *)params {
     /*
-     
-     Convert an NSDictionary to a query string
-     
+     * Convert an NSDictionary to a query string
      */
     
     NSMutableArray* pairs = [NSMutableArray array];
@@ -246,5 +349,3 @@
 }
 
 @end
-
-

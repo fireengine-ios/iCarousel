@@ -89,7 +89,8 @@ static pthread_mutex_t mutexInvoke;
                      %@ INTEGER, \
                      %@ INTEGER, \
                      %@ INTEGER, \
-                     %@ INTEGER);", TABLE_CONTACT_SYNC, COLUMN_MSISDN, COLUMN_LOCAL_ID, COLUMN_REMOTE_ID, COLUMN_LOCAL_UPDATE_DATE, COLUMN_REMOTE_UPDATE_DATE] ;
+                     %@ INTEGER, \
+                     %@ STRING);", TABLE_CONTACT_SYNC, COLUMN_MSISDN, COLUMN_LOCAL_ID, COLUMN_REMOTE_ID, COLUMN_LOCAL_UPDATE_DATE, COLUMN_REMOTE_UPDATE_DATE, COLUMN_CHECKSUM] ;
     
     [self executeSafe:sql];
     

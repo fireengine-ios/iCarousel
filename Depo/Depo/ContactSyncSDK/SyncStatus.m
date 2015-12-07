@@ -15,7 +15,7 @@
     if (self){
         _localId = contact.objectId;
         _remoteId = contact.remoteId;
-        _name = [contact displayName];
+        _name = [contact generateDisplayName];
         _state = state;
     }
     return self;
@@ -31,6 +31,16 @@
     }
     return self;
 }
+
+- (instancetype)initWithEmpty:(SYNCInfoStateType)state
+{
+    self = [super init];
+    if (self){
+        _state = state;
+    }
+    return self;
+}
+
 
 @end
 
@@ -61,6 +71,12 @@
 {
     SyncInfo *info = [[SyncInfo alloc] initWithRecord:record andState:state];
     [self addItem:info];
+}
+-(void)addEmpty:(NSNumber *)count state:(SYNCInfoStateType)state{
+    for(int i=0; i<[count integerValue]; i++){
+        SyncInfo *info = [[SyncInfo alloc] initWithEmpty:state];
+        [self addItem:info];
+    }
 }
 - (void)addItem:(SyncInfo*)object
 {

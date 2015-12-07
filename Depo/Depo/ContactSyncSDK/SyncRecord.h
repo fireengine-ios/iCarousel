@@ -16,6 +16,7 @@
 @property (nonatomic, strong) NSNumber * remoteId;
 @property (nonatomic, strong) NSNumber * localUpdateDate;
 @property (nonatomic, strong) NSNumber * remoteUpdateDate;
+@property (nonatomic, strong) NSString * checksum;
 
 - (NSDictionary *) asDict;
 

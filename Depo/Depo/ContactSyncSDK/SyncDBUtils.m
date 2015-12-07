@@ -23,23 +23,62 @@
     
     return instance;
 }
-- (BOOL) save:(SyncRecord *) record
-{
+
+
+- (BOOL) save:(SyncRecord *) record status:(SYNCContactStatus)status{
     NSString *sql = nil;
-    NSArray *result = [self fetch:[NSString stringWithFormat:@"%@=%lld AND %@=%lld",COLUMN_LOCAL_ID,[record.localId longLongValue],COLUMN_REMOTE_ID,[record.remoteId longLongValue]]];
-    BOOL isNew = NO;
-    if (SYNC_ARRAY_IS_NULL_OR_EMPTY(result)){
-        sql = [NSString stringWithFormat:@"INSERT INTO %@ VALUES('%@', %lld, %lld ,%lld,%lld)",
-                     TABLE_CONTACT_SYNC,
-                     [SyncSettings shared].msisdn,
-                     [record.localId longLongValue],
-                     [record.remoteId longLongValue],
-                     [record.localUpdateDate longLongValue],
-                     [record.remoteUpdateDate longLongValue]
-                     ];
-        isNew = YES;
-    } else {
-        sql = [NSString stringWithFormat:@"UPDATE %@ SET %@=%lld, %@=%lld, %@=%lld WHERE %@ = '%@' AND %@ = %@",
+    BOOL ret;
+    if (status == UNDEFINED_CONTACT){
+        NSArray *result = [self fetch:[NSString stringWithFormat:@"%@=%lld AND %@=%lld",COLUMN_LOCAL_ID,[record.localId longLongValue],COLUMN_REMOTE_ID,[record.remoteId longLongValue]]];
+        if (SYNC_ARRAY_IS_NULL_OR_EMPTY(result)){
+            sql = [NSString stringWithFormat:@"INSERT INTO %@ VALUES('%@', %lld, %lld ,%lld,%lld, '%@')",
+                   TABLE_CONTACT_SYNC,
+                   [SyncSettings shared].msisdn,
+                   [record.localId longLongValue],
+                   [record.remoteId longLongValue],
+                   [record.localUpdateDate longLongValue],
+                   [record.remoteUpdateDate longLongValue],
+                   [record checksum]
+                   ];
+        } else {
+            sql = [NSString stringWithFormat:@"UPDATE %@ SET %@=%lld, %@=%lld, %@=%lld, %@='%@' WHERE %@ = '%@' AND %@ = %@",
+                   TABLE_CONTACT_SYNC,
+                   COLUMN_REMOTE_ID,
+                   [record.remoteId longLongValue],
+                   COLUMN_LOCAL_UPDATE_DATE,
+                   [record.localUpdateDate longLongValue],
+                   COLUMN_REMOTE_UPDATE_DATE,
+                   [record.remoteUpdateDate longLongValue],
+                   COLUMN_CHECKSUM,
+                   [record checksum],
+                   COLUMN_MSISDN,
+                   [SyncSettings shared].msisdn,
+                   COLUMN_LOCAL_ID,
+                   record.localId
+                   ];
+        }
+//        SYNC_Log(@"save sql : %@",sql);
+        
+        ret = [[SyncDB shared] executeSafe:sql];
+        return ret;
+    }
+    else if ( status == NEW_CONTACT){
+        sql = [NSString stringWithFormat:@"INSERT INTO %@ VALUES('%@', %lld, %lld ,%lld,%lld, '%@')",
+               TABLE_CONTACT_SYNC,
+               [SyncSettings shared].msisdn,
+               [record.localId longLongValue],
+               [record.remoteId longLongValue],
+               [record.localUpdateDate longLongValue],
+               [record.remoteUpdateDate longLongValue],
+               [record checksum]
+               ];
+//        SYNC_Log(@"save sql : %@",sql);
+        ret = [[SyncDB shared] executeSafe:sql];
+        return ret;
+    
+    }
+    else if ( status == UPDATED_CONTACT){
+        sql = [NSString stringWithFormat:@"UPDATE %@ SET %@=%lld, %@=%lld, %@=%lld, %@='%@' WHERE %@ = '%@' AND %@ = %@",
                TABLE_CONTACT_SYNC,
                COLUMN_REMOTE_ID,
                [record.remoteId longLongValue],
@@ -47,23 +86,43 @@
                [record.localUpdateDate longLongValue],
                COLUMN_REMOTE_UPDATE_DATE,
                [record.remoteUpdateDate longLongValue],
+               COLUMN_CHECKSUM,
+               [record checksum],
                COLUMN_MSISDN,
                [SyncSettings shared].msisdn,
                COLUMN_LOCAL_ID,
                record.localId
                ];
-    }
+//        SYNC_Log(@"save sql : %@",sql);
+        ret = [[SyncDB shared] executeSafe:sql];
+        return ret;
     
-    BOOL ret = [[SyncDB shared] executeSafe:sql];
-    return ret;
+    }
+    else{
+        return false;
+    }
+
 }
 
-- (BOOL) isDirty:(Contact *) contact
+- (BOOL) save:(SyncRecord *) record
+{
+    return [self save:record status:UNDEFINED_CONTACT];
+}
+
+- (SyncRecord *) isRecorded:(Contact *) contact
 {
     NSArray *result = [self fetch:[NSString stringWithFormat:@"%@=%lld",COLUMN_LOCAL_ID,[contact.objectId longLongValue]]];
     if ([result count]==0){
-        return YES;
+        return nil;
     }
+    SyncRecord *rec = (SyncRecord*)result[0];
+    contact.remoteId = rec.remoteId;
+    
+    return rec;
+    
+    
+    
+    /*
     SyncRecord *rec = (SyncRecord*)result[0];
     contact.remoteId = rec.remoteId;
     SYNC_Log(@"%lld %@ , %lld %@", [rec.localUpdateDate longLongValue], [NSDate dateWithTimeIntervalSince1970:[rec.localUpdateDate longLongValue]/1000],
@@ -73,6 +132,7 @@
     } else {
         return YES;
     }
+     */
 }
 
 - (BOOL) hasRemoteId:(NSNumber*)remoteContactId
@@ -82,6 +142,17 @@
         return NO;
     } else {
         return YES;
+    }
+}
+
+- (void)printRecords
+{
+    if (!SYNC_Log_Enabled) {
+        return;
+    }
+    NSArray *records = [self fetch:nil];
+    for (SyncRecord *rec in records){
+        SYNC_Log(@"%@ %@ %@ %@",rec.localId,rec.remoteId,rec.localUpdateDate,rec.remoteUpdateDate);
     }
 }
 
@@ -95,9 +166,7 @@
     NSMutableArray *ret = [NSMutableArray new];
     
     [[SyncDB shared] invokeBlockSafe:^(sqlite3 *db) {
-        
         const char *sql = where==nil ? [[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@ = '%@'",TABLE_CONTACT_SYNC, COLUMN_MSISDN, [SyncSettings shared].msisdn] UTF8String] : [[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@ = '%@' AND (%@)",TABLE_CONTACT_SYNC, COLUMN_MSISDN, [SyncSettings shared].msisdn, where] UTF8String];
-        
         sqlite3_stmt *statement;
         
         if (sqlite3_prepare_v2(db, sql, -1, &statement, NULL) == SQLITE_OK)
@@ -109,6 +178,7 @@
                 rec.remoteId = [NSNumber numberWithLongLong:sqlite3_column_int64(statement, 2)];
                 rec.localUpdateDate = [NSNumber numberWithLongLong:sqlite3_column_int64(statement, 3)];
                 rec.remoteUpdateDate = [NSNumber numberWithLongLong:sqlite3_column_int64(statement, 4)];
+                rec.checksum = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];;
                 
                 [ret addObject:rec];
                 
@@ -129,10 +199,18 @@
     NSString *sql = [NSString stringWithFormat: @"DELETE FROM %@ WHERE %@ = '%@' AND %@ = %@", TABLE_CONTACT_SYNC, COLUMN_MSISDN, [SyncSettings shared].msisdn, COLUMN_LOCAL_ID, [localId stringValue]];
     [[SyncDB shared] executeSafe:sql];
 }
-- (void) deleteRecords:(NSArray*)ids
+- (void) deleteRecords:(NSArray *)ids
 {
-    NSString *sql = [NSString stringWithFormat: @"DELETE FROM %@ WHERE %@ = '%@' AND %@ IN (%@)", TABLE_CONTACT_SYNC, COLUMN_MSISDN, [SyncSettings shared].msisdn, COLUMN_LOCAL_ID, [ids componentsJoinedByString:@","]];
+    [self deleteRecordsWithIDs:ids where:nil];
+}
+
+
+- (void) deleteRecordsWithIDs:(NSArray *)ids where:(NSString *)where
+{
+    NSString *sql = where==nil ? [NSString stringWithFormat: @"DELETE FROM %@ WHERE %@ = '%@' AND %@ IN (%@)", TABLE_CONTACT_SYNC, COLUMN_MSISDN, [SyncSettings shared].msisdn, COLUMN_LOCAL_ID, [ids componentsJoinedByString:@","]] : [NSString stringWithFormat: @"DELETE FROM %@ WHERE %@ = '%@' AND %@ IN (%@)", TABLE_CONTACT_SYNC, COLUMN_MSISDN, [SyncSettings shared].msisdn, where, [ids componentsJoinedByString:@","]];
+    SYNC_Log(@"Deleted record ids from local database: %@", sql);
     [[SyncDB shared] executeSafe:sql];
 }
+
 
 @end

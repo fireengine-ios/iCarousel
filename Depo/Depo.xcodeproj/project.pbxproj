@@ -736,6 +736,10 @@
 		05F28BF01C0739C30002171A /* CurioSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F28BDF1C0739C30002171A /* CurioSettings.m */; };
 		05F28BF11C0739C30002171A /* CurioUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F28BE11C0739C30002171A /* CurioUtil.m */; };
 		05F4AA281A2F7692000F41B8 /* ActivityUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F4AA271A2F7692000F41B8 /* ActivityUtil.m */; };
+		05F931881C160E2F00858223 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05F931871C160E2F00858223 /* Accelerate.framework */; };
+		05F9318A1C160E7000858223 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05F931891C160E7000858223 /* LocalAuthentication.framework */; };
+		05F9318F1C160ED200858223 /* GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F9318C1C160ED200858223 /* GZIP.m */; };
+		05F931901C160ED200858223 /* SyncLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F9318E1C160ED200858223 /* SyncLogger.m */; };
 		2443E1541B6BB0C5001C274D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2443E1531B6BB0C5001C274D /* AudioToolbox.framework */; };
 		2443E1571B6BB5F3001C274D /* AudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2443E1561B6BB5F3001C274D /* AudioManager.m */; };
 		247268911B7CC29900804E56 /* CustomAdvertisementView.m in Sources */ = {isa = PBXBuildFile; fileRef = 247268901B7CC29900804E56 /* CustomAdvertisementView.m */; };
@@ -1830,6 +1834,12 @@
 		05F28BE11C0739C30002171A /* CurioUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioUtil.m; sourceTree = "<group>"; };
 		05F4AA261A2F7692000F41B8 /* ActivityUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityUtil.h; sourceTree = "<group>"; };
 		05F4AA271A2F7692000F41B8 /* ActivityUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityUtil.m; sourceTree = "<group>"; };
+		05F931871C160E2F00858223 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		05F931891C160E7000858223 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
+		05F9318B1C160ED200858223 /* GZIP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GZIP.h; sourceTree = "<group>"; };
+		05F9318C1C160ED200858223 /* GZIP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GZIP.m; sourceTree = "<group>"; };
+		05F9318D1C160ED200858223 /* SyncLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncLogger.h; sourceTree = "<group>"; };
+		05F9318E1C160ED200858223 /* SyncLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncLogger.m; sourceTree = "<group>"; };
 		2443E1531B6BB0C5001C274D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		2443E1551B6BB5F3001C274D /* AudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioManager.h; sourceTree = "<group>"; };
 		2443E1561B6BB5F3001C274D /* AudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioManager.m; sourceTree = "<group>"; };
@@ -1860,6 +1870,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05F9318A1C160E7000858223 /* LocalAuthentication.framework in Frameworks */,
+				05F931881C160E2F00858223 /* Accelerate.framework in Frameworks */,
 				056107221C0D8E210014D550 /* WebKit.framework in Frameworks */,
 				056107201C0D8B310014D550 /* SplunkMint.framework in Frameworks */,
 				2443E1541B6BB0C5001C274D /* AudioToolbox.framework in Frameworks */,
@@ -1949,6 +1961,8 @@
 		051E1DF519CAC2F900FD1E03 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				05F931891C160E7000858223 /* LocalAuthentication.framework */,
+				05F931871C160E2F00858223 /* Accelerate.framework */,
 				056107211C0D8E210014D550 /* WebKit.framework */,
 				0561071F1C0D8B310014D550 /* SplunkMint.framework */,
 				2443E1531B6BB0C5001C274D /* AudioToolbox.framework */,
@@ -3217,6 +3231,10 @@
 		05DEB1D31A81775F007793DD /* ContactSyncSDK */ = {
 			isa = PBXGroup;
 			children = (
+				05F9318B1C160ED200858223 /* GZIP.h */,
+				05F9318C1C160ED200858223 /* GZIP.m */,
+				05F9318D1C160ED200858223 /* SyncLogger.h */,
+				05F9318E1C160ED200858223 /* SyncLogger.m */,
 				05DEB1D41A81775F007793DD /* Contact.h */,
 				05DEB1D51A81775F007793DD /* Contact.m */,
 				05DEB1D61A81775F007793DD /* ContactDevice.h */,
@@ -4063,6 +4081,7 @@
 				058B328B1A14ABBE00A291C4 /* DeleteAlbumsDao.m in Sources */,
 				058219C51A384CC6001FA679 /* SearchMoreModalController.m in Sources */,
 				052644AD19D5A2A600B63759 /* SettingsContactsController.m in Sources */,
+				05F931901C160ED200858223 /* SyncLogger.m in Sources */,
 				05C7CB6A1ABC91B200A7BF8E /* MetaFileSummary.m in Sources */,
 				051E1EA719CB209F00FD1E03 /* MenuCell.m in Sources */,
 				051E1E0319CAC2F900FD1E03 /* main.m in Sources */,
@@ -4073,6 +4092,7 @@
 				0526444E19D5625E00B63759 /* MoreMenuView.m in Sources */,
 				05DEB1C61A80C161007793DD /* ProvisionDao.m in Sources */,
 				05BCA2FB19EE89EE00AF2FE2 /* MusicPreviewController.m in Sources */,
+				05F9318F1C160ED200858223 /* GZIP.m in Sources */,
 				052644B519D5A2A600B63759 /* SettingsNotificationsController.m in Sources */,
 				05BCA2F519EE5CD900AF2FE2 /* NewAlbumModalController.m in Sources */,
 				051E1E3219CAC57400FD1E03 /* Util.m in Sources */,

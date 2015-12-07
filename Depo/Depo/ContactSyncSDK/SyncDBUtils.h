@@ -12,6 +12,12 @@
 #import "SyncSettings.h"
 #import "Contact.h"
 
+typedef NS_ENUM(NSUInteger, SYNCContactStatus) {
+    NEW_CONTACT,
+    UPDATED_CONTACT,
+    UNDEFINED_CONTACT,
+};
+
 @interface SyncDBUtils : NSObject
 
 /**
@@ -23,14 +29,19 @@
 
 - (BOOL) save:(SyncRecord *) record;
 
-- (BOOL) isDirty:(Contact *) contact;
+- (BOOL) save:(SyncRecord *) record status:(SYNCContactStatus)status;
+
+- (SyncRecord *) isRecorded:(Contact *) contact;
 
 - (NSArray *) fetch;
 
 - (NSArray *) fetch:(NSString*)where;
 
+- (void)printRecords;
+
 - (void) deleteRecord:(NSNumber*)localId;
-- (void) deleteRecords:(NSArray*)ids;
+- (void) deleteRecords:(NSArray *)ids;
+- (void) deleteRecordsWithIDs:(NSArray*)ids where:(NSString *)where;
 
 - (BOOL) hasRemoteId:(NSNumber*)remoteContactId;
 

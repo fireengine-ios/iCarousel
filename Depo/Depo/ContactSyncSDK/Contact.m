@@ -8,6 +8,7 @@
 #import "Contact.h"
 #import "ContactDevice.h"
 #import "SyncSettings.h"
+#import <CommonCrypto/CommonDigest.h>
 
 @implementation Contact
 
@@ -28,8 +29,8 @@
         _lastName=(__bridge NSString*)ABRecordCopyValue(ref, kABPersonLastNameProperty);
 
         NSDate *lastModif=(__bridge NSDate *)(ABRecordCopyValue(_recordRef,kABPersonModificationDateProperty));
-        SYNC_Log(@"Last Modified Date : %@ %@ %@",_firstName, _lastName, lastModif);
         _localUpdateDate = SYNC_DATE_AS_NUMBER(lastModif);
+        SYNC_Log(@"Last Modified Date : %@ %@ %@ %@",_firstName, _lastName, lastModif, _localUpdateDate);
         
         _devices = [NSMutableArray new];
     }
@@ -44,17 +45,16 @@
 {
     self = [super init];
     if (self){
+        if(!SYNC_IS_NULL(json[@"localId"])){
+            _objectId = json[@"localId"];
+        }
         _remoteId = json[@"id"];
         _firstName = json[@"firstname"];
         _middleName = json[@"middlename"];
         _lastName = json[@"lastname"];
+        _displayName = json[@"displayname"];
         
-        if (!SYNC_IS_NULL(json[@"managementInfo"])){
-            NSDictionary *info = json[@"managementInfo"];
-            _remoteUpdateDate = info[@"updateDate"];
-        } else {
-            _remoteUpdateDate = [NSNumber numberWithInt:0];
-        }
+        _remoteUpdateDate = json[@"modified"];
         
         _devices = [NSMutableArray new];
         if (!SYNC_IS_NULL(json[@"devices"])){
@@ -73,64 +73,21 @@
     return self;
 }
 
-- (NSDictionary*) toJSON
+/*
+ * isNewContact should be true while "Mode:Restore" is adding new contact.
+ */
+- (NSDictionary*) toJSON:(BOOL)isNewContact
 {
     NSMutableDictionary *dict = [NSMutableDictionary new];
     if (!SYNC_IS_NULL(self.remoteId) && [self.remoteId integerValue]>0){
         dict[@"id"] = self.remoteId;
     }
+
     SYNC_SET_DICT_IF_NOT_NIL(dict, self.firstName, @"firstname");
     SYNC_SET_DICT_IF_NOT_NIL(dict, self.middleName, @"middlename");
     SYNC_SET_DICT_IF_NOT_NIL(dict, self.lastName, @"lastname");
-
-    NSMutableSet *emailTypes= [[NSMutableSet alloc]initWithArray:@[
-                                 [NSNumber numberWithInteger:CDEVICE_HOME],
-                                 [NSNumber numberWithInteger:CDEVICE_WORK],
-                                 [NSNumber numberWithInteger:CDEVICE_OTHER],
-                                 ]];
-    
-    NSMutableSet *phoneTypes =[[NSMutableSet alloc]initWithArray:@[
-                                 [NSNumber numberWithInteger:CDEVICE_HOME],
-                                 [NSNumber numberWithInteger:CDEVICE_MOBILE],
-                                 [NSNumber numberWithInteger:CDEVICE_WORK],
-                                 [NSNumber numberWithInteger:CDEVICE_WORK_MOBILE],
-                                 [NSNumber numberWithInteger:CDEVICE_OTHER]
-                                 ,]];
-    NSMutableArray *duplicated=[[NSMutableArray alloc] init];
-    
-    for (ContactDevice *device in _devices) {
-        if ([device isKindOfClass:[ContactPhone class]]) {
-            if ([phoneTypes containsObject:[NSNumber numberWithInteger:device.type]]) {
-                [phoneTypes removeObject:[NSNumber numberWithInteger:device.type]];
-            }else{
-                [duplicated addObject:device];
-            }
-        }else{
-            if ([emailTypes containsObject:[NSNumber numberWithInteger:device.type]]) {
-                [emailTypes removeObject:[NSNumber numberWithInteger:device.type]];
-            }else{
-                [duplicated addObject:device];
-            }
-        }
-    }
-    
-    NSMutableArray *remainingPhone = [[NSMutableArray alloc] initWithArray: [phoneTypes allObjects]];
-    NSMutableArray *remainingEmail = [[NSMutableArray alloc] initWithArray: [emailTypes allObjects]];
-    if (duplicated.count>0) {
-        for (ContactDevice *device in duplicated) {
-            if ([device isKindOfClass:[ContactPhone class]]) {
-                if (remainingPhone.count>0) {
-                    device.type=(SYNCDeviceType)[[remainingPhone firstObject] integerValue];
-                    [remainingPhone removeObjectAtIndex:0];
-                }
-            }else{
-                if (remainingEmail.count>0) {
-                    device.type=(SYNCDeviceType)[[remainingEmail firstObject] integerValue];
-                    [remainingEmail removeObjectAtIndex:0];
-                }
-            }
-        }
-    }
+    if(isNewContact)
+        SYNC_SET_DICT_IF_NOT_NIL(dict, self.objectId, @"localId");
     
     NSMutableArray *array = [NSMutableArray new];
     for (ContactDevice *device in _devices){
@@ -140,6 +97,43 @@
     dict[@"devices"] = array;
     
     return dict;
+}
+
+- (NSString*) toStringValue{
+    NSMutableString *value = [NSMutableString new];
+    SYNC_APPEND_STRING_IF_NOT_NIL(value, self.firstName);
+    SYNC_APPEND_STRING_IF_NOT_NIL(value, @";");
+    SYNC_APPEND_STRING_IF_NOT_NIL(value, self.middleName);
+    SYNC_APPEND_STRING_IF_NOT_NIL(value, @";");
+    SYNC_APPEND_STRING_IF_NOT_NIL(value, self.lastName);
+    SYNC_APPEND_STRING_IF_NOT_NIL(value, @";");
+    
+    NSMutableArray *ary = [NSMutableArray arrayWithArray:_devices];
+    NSArray *sorted = [ary sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        ContactDevice *d1 = (ContactDevice*)obj1;
+        ContactDevice *d2 = (ContactDevice*)obj2;
+        return [d1.value compare:d2.value options:NSNumericSearch];
+    }];
+    
+    for (ContactDevice *device in sorted){
+        SYNC_APPEND_STRING_IF_NOT_NIL(value, device.value);
+        SYNC_APPEND_STRING_IF_NOT_NIL(value, @";");
+        SYNC_APPEND_STRING_IF_NOT_NIL(value, ([NSString stringWithFormat:@"%lu", (unsigned long)device.type]));
+        SYNC_APPEND_STRING_IF_NOT_NIL(value, @";");
+    }
+    return [value copy];
+}
+
+-(NSString *)toMD5
+{
+    NSString *contactString = [self toStringValue];
+    const char *contactChars = [contactString UTF8String];
+    unsigned char contactMD5[CC_MD5_DIGEST_LENGTH];
+    CC_MD5(contactChars, strlen(contactChars),  contactMD5);
+    NSMutableString *output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
+    for(int i = 0; i < CC_MD5_DIGEST_LENGTH; i++)
+        [output appendFormat:@"%02x", contactMD5[i]];
+    return output;
 }
 
 - (BOOL)preEqualCheck:(id)object
@@ -184,7 +178,7 @@
         return NO;
     }
     Contact *other = object;
-    if (![[self displayName] isEqualToString:[other displayName]]) {
+    if (![[self generateDisplayName] isEqualToString:[other generateDisplayName]]) {
         return NO;
     }
     if (SYNC_IS_NULL(_devices)){
@@ -227,7 +221,7 @@
     return YES;
 }
 
-- (NSString*)displayName
+- (NSString*)generateDisplayName
 {
     NSMutableString *displayName=[[NSMutableString alloc]init];
     if (SYNC_STRING_IS_NULL_OR_EMPTY(self.middleName)){

@@ -52,13 +52,13 @@
 
 + (ContactDevice*)createFromJSON:(NSDictionary*)json
 {
-    if (SYNC_IS_NULL(json[@"type"])){
+    if (SYNC_IS_NULL(json[@"category"])){
         return nil;
     } else {
-        NSString *type = json[@"type"];
-        if ([@"phone" isEqualToString:type]){
+        NSString *type = json[@"category"];
+        if ([@"PHONE" isEqualToString:type]){
             return [[ContactPhone alloc] initWithDictionary:json];
-        } else if ([@"email" isEqualToString:type]){
+        } else if ([@"EMAIL" isEqualToString:type]){
             return [[ContactEmail alloc] initWithDictionary:json];
         } else {
             return nil;
@@ -129,22 +129,21 @@
     if (self){
         self.remoteId = SYNC_IS_NULL(json[@"id"])?[NSNumber numberWithInt:0] : json[@"id"];
         self.value = SYNC_IS_NULL(json[@"value"]) ? nil : json[@"value"];
-        NSString *subType = json[@"subtype"];
-        NSString *infoType = json[@"infoType"];
-        if ([@"cell" isEqualToString:subType]){
-            if ([@"pro" isEqualToString:infoType]){
-                self.type = CDEVICE_WORK_MOBILE;
-            } else {
+        NSString *type =  SYNC_IS_NULL(json[@"type"]) ? nil : json[@"type"];
+        if (type != nil){
+            if([type isEqualToString:@"HOME"]){
+                self.type = CDEVICE_HOME;
+            }
+            else if([type isEqualToString:@"WORK"]){
+                self.type = CDEVICE_WORK;
+            }
+            else if([type isEqualToString:@"MOBILE"]){
                 self.type = CDEVICE_MOBILE;
             }
-        } else if ([@"voice" isEqualToString:subType]){
-            if ([@"pro" isEqualToString:infoType]){
-                self.type = CDEVICE_WORK;
-            } else if ([@"perso" isEqualToString:infoType]){
-                self.type = CDEVICE_HOME;
-            } else {
+            else if([type isEqualToString:@"OTHER"]){
                 self.type = CDEVICE_OTHER;
             }
+        
         }
     }
     return self;
@@ -156,36 +155,32 @@
     if (!SYNC_IS_NULL(self.remoteId) && [self.remoteId integerValue]>0){
         dict[@"id"] = self.remoteId;
     }
+    dict[@"category"] = @"PHONE";
+    
     SYNC_SET_DICT_IF_NOT_NIL(dict, self.value, @"value");
     
     switch (self.type) {
         case CDEVICE_HOME:{
-            dict[@"infoType"] = @"perso";
-            dict[@"subtype"] = @"voice";
+            dict[@"type"] = @"HOME";
             break;
         }
         case CDEVICE_WORK:{
-            dict[@"infoType"] = @"pro";
-            dict[@"subtype"] = @"voice";
+            dict[@"type"] = @"WORK";
             break;
         }
         case CDEVICE_WORK_MOBILE:{
-            dict[@"infoType"] = @"pro";
-            dict[@"subtype"] = @"cell";
+            dict[@"type"] = @"WORK";
             break;
         }
         case CDEVICE_MOBILE:{
-            dict[@"infoType"] = @"unknown";
-            dict[@"subtype"] = @"cell";
+            dict[@"type"] = @"MOBILE";
             break;
         }
         default:{
-            dict[@"infoType"] = @"unknown";
-            dict[@"subtype"] = @"voice";
+            dict[@"type"] = @"OTHER";
             break;
         }
     }
-    dict[@"type"] = @"phone";
     
     return [dict copy];
 }
@@ -218,13 +213,18 @@
     if (self){
         self.remoteId = SYNC_IS_NULL(json[@"id"])?[NSNumber numberWithInt:0] : json[@"id"];
         self.value = SYNC_IS_NULL(json[@"value"]) ? nil : json[@"value"];
-        NSString *infoType = json[@"infoType"];
-        if ([@"pro" isEqualToString:infoType]){
-            self.type = CDEVICE_WORK;
-        } else if ([@"perso" isEqualToString:infoType]){
-            self.type = CDEVICE_HOME;
-        } else {
-            self.type = CDEVICE_OTHER;
+        NSString *type =  SYNC_IS_NULL(json[@"type"]) ? nil : json[@"type"];
+        if (type != nil){
+            if([type isEqualToString:@"HOME"]){
+                self.type = CDEVICE_HOME;
+            }
+            else if([type isEqualToString:@"WORK"]){
+                self.type = CDEVICE_WORK;
+            }
+            else if([type isEqualToString:@"OTHER"]){
+                self.type = CDEVICE_OTHER;
+            }
+            
         }
     }
     return self;
@@ -237,24 +237,22 @@
         dict[@"id"] = self.remoteId;
     }
     dict[@"value"] = self.value;
+    dict[@"category"] = @"EMAIL";
     
     switch (self.type) {
         case CDEVICE_HOME:{
-            dict[@"infoType"] = @"perso";
+            dict[@"type"] = @"HOME";
             break;
         }
         case CDEVICE_WORK:{
-            dict[@"infoType"] = @"pro";
+            dict[@"type"] = @"WORK";
             break;
         }
         default:{
-            dict[@"infoType"] = @"unknown";
+            dict[@"type"] = @"OTHER";
             break;
         }
     }
-    dict[@"subtype"] = @"internet";
-    dict[@"type"] = @"email";
-    
     return [dict copy];
 }
 

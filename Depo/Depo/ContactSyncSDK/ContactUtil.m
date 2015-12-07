@@ -13,6 +13,9 @@
 
 @property ABAddressBookRef addressBook;
 
+@property (strong) NSMutableArray* records;
+@property (strong) NSMutableArray* objectIds;
+ 
 @end
 
 @implementation ContactUtil
@@ -28,6 +31,11 @@
     });
     
     return instance;
+}
+
+- (void) reset {
+    self.records = [NSMutableArray new];
+    self.objectIds = [NSMutableArray new];
 }
 
 /**
@@ -99,8 +107,11 @@
         
         NSString *key = [NSString stringWithFormat:@"%@-%@",phoneNumber, type];
         
-        CFRelease(phoneNumberRef);
-        CFRelease(phoneTypeRef);
+        
+        if(phoneNumberRef != nil)
+            CFRelease(phoneNumberRef);
+        if(phoneTypeRef != nil)
+            CFRelease(phoneTypeRef);
         
         if ([phoneIdSet containsObject:key])
             ABMultiValueRemoveValueAndLabelAtIndex(phoneNumbers, i);
@@ -114,8 +125,10 @@
         
         NSString *key = [NSString stringWithFormat:@"%@-%@",address, type];
         
-        CFRelease(emailAddressRef);
-        CFRelease(emailTypeRef);
+        if(emailAddressRef != nil)
+            CFRelease(emailAddressRef);
+        if(emailTypeRef != nil)
+            CFRelease(emailTypeRef);
         
         if ([emailIdSet containsObject:key])
             ABMultiValueRemoveValueAndLabelAtIndex(emails, i);
@@ -130,13 +143,42 @@
         SYNC_Log(@"En error occurred while deleting contact devices : %@",error);
     }
 }
+
+- (NSMutableArray *)applyContacts{
+    CFErrorRef error;
+    bool success = false;
+    success = ABAddressBookSave(_addressBook, &error);
+    if (!success){
+        SYNC_Log(@"En error occurred while saving contacts : %@",error);
+    }
+    else{
+        _objectIds = [NSMutableArray new];
+        NSUInteger recordCount = [_records count];
+        for (NSUInteger i=0; i<recordCount; i++){
+            ABRecordRef record = (__bridge  ABRecordRef)[_records objectAtIndex:i];
+            ABRecordID recordId = ABRecordGetRecordID(record);
+            NSString *recordIdString = [NSString stringWithFormat:@"%d",recordId];
+            
+            [_objectIds addObject:recordIdString];
+        }
+    
+    }
+
+    return _objectIds;  // If not success then it will return nil. Check it to understand errors.
+}
+
 - (void)save:(Contact*)contact
 {
+    if(SYNC_IS_NULL(_records)){
+        _records = [NSMutableArray new];
+    }
+    
     ABRecordRef record=nil;
     BOOL isNew = NO;
     if (contact.recordRef){
         record = contact.recordRef;
-    } if (SYNC_NUMBER_IS_NULL_OR_ZERO(contact.objectId)){
+    }
+    if (SYNC_NUMBER_IS_NULL_OR_ZERO(contact.objectId)){
         record = ABPersonCreate();
         isNew = YES;
     } else {
@@ -170,27 +212,28 @@
     ABRecordSetValue(record, kABPersonPhoneProperty, phoneNumbers, nil);
     ABRecordSetValue(record, kABPersonEmailProperty, emails, nil);
     
-    CFErrorRef error;
-    BOOL success = NO;
     if (isNew){
-        if (ABAddressBookAddRecord(_addressBook, record, &error)){
-            success = ABAddressBookSave(_addressBook, &error);
-        }
-    } else {
-        success = ABAddressBookSave(_addressBook, &error);
-    }
-    if (!success){
-        SYNC_Log(@"En error occurred while saving contact : %@",error);
-    } else {
-        if (isNew){
+        CFErrorRef error;
+        BOOL success = NO;
+        success = ABAddressBookAddRecord(_addressBook, record, &error);
+        if (!success){
+            SYNC_Log(@"En error occurred while adding contact : %@",error);
+        } else {
             ABRecordID recordId = ABRecordGetRecordID(record);
+            //SYNC_Log(@"Record Id: %d", recordId);
             contact.objectId = [NSNumber numberWithInt:recordId];
         }
+        
     }
-    if (!isNew){
+    
+    [_records addObject:(__bridge id)record];
+    
+    if(phoneNumbers != nil)
         CFRelease(phoneNumbers);
+    if(emails != nil)
         CFRelease(emails);
-    }
+    if(record != nil)
+        CFRelease(record);
 }
 
 - (Contact*)findContactById:(NSNumber*)objectId
@@ -224,7 +267,7 @@
     {
         ABRecordRef ref = CFArrayGetValueAtIndex( allPeople, i );
         Contact *contact = [[Contact alloc] initWithRecordRef:ref];
-        //we must have either firstname or lastname, otherwise contact cannot be saved on server
+        // We must have either firstname or lastname, otherwise contact cannot be saved on server
         if (!SYNC_STRING_IS_NULL_OR_EMPTY(contact.firstName) || !SYNC_STRING_IS_NULL_OR_EMPTY(contact.lastName)){
             [ret addObject:contact];
         }
@@ -233,10 +276,34 @@
     return ret;
 }
 
+- (void)printContacts
+{
+    if (!SYNC_Log_Enabled) {
+        return;
+    }
+    CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople( _addressBook );
+    CFIndex nPeople = ABAddressBookGetPersonCount( _addressBook );
+    
+    for ( int i = 0; i < nPeople; i++ )
+    {
+        ABRecordRef ref = CFArrayGetValueAtIndex( allPeople, i );
+        
+        NSNumber *objectId = [NSNumber numberWithInt:ABRecordGetRecordID(ref)];
+        NSString *firstName=(__bridge NSString*)ABRecordCopyValue(ref, kABPersonFirstNameProperty);
+        NSString *lastName=(__bridge NSString*)ABRecordCopyValue(ref, kABPersonLastNameProperty);
+        
+        NSDate *lastModif=(__bridge NSDate *)(ABRecordCopyValue(ref,kABPersonModificationDateProperty));
+
+        SYNC_Log(@"%@ %@ %@ => %@ / %@", objectId, firstName, lastName, lastModif, SYNC_DATE_AS_NUMBER(lastModif));
+    }
+    CFRelease(allPeople);
+}
+
 - (void)fetchNumbers:(Contact*)contact
 {
     ABMultiValueRef multiPhones = ABRecordCopyValue(contact.recordRef, kABPersonPhoneProperty);
-    for(CFIndex i=0;i<ABMultiValueGetCount(multiPhones);i++) {
+    CFIndex cfCount = ABMultiValueGetCount(multiPhones);
+    for(CFIndex i=0;i<cfCount;i++) {
         CFStringRef phoneNumberRef = ABMultiValueCopyValueAtIndex(multiPhones, i);
         CFStringRef phoneTypeRef = ABMultiValueCopyLabelAtIndex(multiPhones, i);
         
@@ -262,11 +329,12 @@
         CFRelease(multiPhones);
     }
 }
+
 - (void)fetchEmails:(Contact*)contact
 {
     ABMultiValueRef multiEmails = ABRecordCopyValue(contact.recordRef, kABPersonEmailProperty);
-    
-    for (CFIndex i=0; i<ABMultiValueGetCount(multiEmails); i++) {
+    CFIndex cfCount = ABMultiValueGetCount(multiEmails);
+    for (CFIndex i=0; i<cfCount; i++) {
         CFStringRef emailRef = ABMultiValueCopyValueAtIndex(multiEmails, i);
         CFStringRef emailTypeRef = ABMultiValueCopyLabelAtIndex(multiEmails, i);
         
