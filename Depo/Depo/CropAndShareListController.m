@@ -58,7 +58,7 @@
         photosScroll.tag = 111;
         [self.view addSubview:photosScroll];
         
-        [self addOngoingPhotos];
+//        [self addOngoingPhotos];
         
         refreshControlPhotos = [[UIRefreshControl alloc] init];
         [refreshControlPhotos addTarget:self action:@selector(triggerRefresh) forControlEvents:UIControlEventValueChanged];
@@ -121,8 +121,8 @@
         }
     }
     
-    [photoList addObjectsFromArray:[[UploadQueue sharedInstance] uploadImageRefs]];
-    [self addOngoingPhotos];
+//    [photoList addObjectsFromArray:[[UploadQueue sharedInstance] uploadImageRefs]];
+//    [self addOngoingPhotos];
     
     listOffset = 0;
     self.tableUpdateCounter ++;
