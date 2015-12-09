@@ -120,7 +120,9 @@
 }
 
 - (void) tokenWithinProcessDaoSuccessCallback {
-    [userInfoWithinProcessDao requestAccountInfo];
+//silent login'de account infoya gitmesin diye commentlendi 9.12.15
+    //[userInfoWithinProcessDao requestAccountInfo];
+    [baseUrlWithinProcessDao requestBaseUrl];
 }
 
 - (void) tokenWithinProcessDaoFailCallback:(NSString *) errorMessage {
