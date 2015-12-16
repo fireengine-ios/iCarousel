@@ -187,7 +187,9 @@
 
 #define EXTENSION_WORMHOLE_FINISHED_COUNT_IDENTIFIER @"EXTENSION_WORMHOLE_FINISHED_COUNT_IDENTIFIER"
 
-#define CONTACT_SYNC_SERVER_URL @"https://adepo.turkcell.com.tr/ttyapi/"
+//TODO test->prod
+//#define CONTACT_SYNC_SERVER_URL @"https://adepo.turkcell.com.tr/ttyapi/"
+#define CONTACT_SYNC_SERVER_URL @"https://tcloudstb.turkcell.com.tr/ttyapi/"
 
 //#define UPDATER_SDK_URL @"http://www.igones.com/adepo/ios_igones.json"
 #define UPDATER_SDK_URL @"https://adepo.turkcell.com.tr/download/update_ios.json"
