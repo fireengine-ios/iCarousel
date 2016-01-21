@@ -12,6 +12,8 @@
 #import "AppConstants.h"
 #import "TitleCell.h"
 #import "SettingsStorageController.h"
+#import "RevisitedStorageController.h"
+
 #import "SettingsUploadController.h"
 #import "SettingsConnectedDevicesController.h"
 #import "SettingsNotificationsController.h"
@@ -410,7 +412,7 @@
 }
 
 - (void) didTriggerStorage {
-    SettingsStorageController *storageController = [[SettingsStorageController alloc] init];
+    RevisitedStorageController *storageController = [[RevisitedStorageController alloc] init];
     storageController.nav = self.nav;
     [self.nav pushViewController:storageController animated:YES];
 }

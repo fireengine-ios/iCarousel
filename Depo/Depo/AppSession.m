@@ -35,6 +35,12 @@
 @synthesize shuffleFlag;
 @synthesize bgOngoingTasksOriginalUrls;
 @synthesize quotaExceed80EventFlag;
+@synthesize signupReferenceToken;
+@synthesize signupReferenceMsisdn;
+@synthesize signupReferenceEmail;
+@synthesize signupReferencePassword;
+@synthesize emailEmptyMessageShown;
+@synthesize emailNotVerifiedMessageShown;
 
 - (id) init {
     if(self = [super init]) {

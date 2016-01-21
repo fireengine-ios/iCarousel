@@ -1984,9 +1984,11 @@ static NSOperationQueue *sharedQueue = nil;
 		return;
 	}
 
-	if (delegate && [delegate respondsToSelector:didReceiveResponseHeadersSelector]) {
-		[delegate performSelector:didReceiveResponseHeadersSelector withObject:self withObject:newResponseHeaders];
-	}
+    if(delegate) {
+        if ([delegate respondsToSelector:didReceiveResponseHeadersSelector]) {
+            [delegate performSelector:didReceiveResponseHeadersSelector withObject:self withObject:newResponseHeaders];
+        }
+    }
 
 	#if NS_BLOCKS_AVAILABLE
 	if(headersReceivedBlock){
@@ -3336,9 +3338,11 @@ static NSOperationQueue *sharedQueue = nil;
 		}
 		
 		BOOL dataWillBeHandledExternally = NO;
-		if ([[self delegate] respondsToSelector:[self didReceiveDataSelector]]) {
-			dataWillBeHandledExternally = YES;
-		}
+        if([self delegate]) {
+            if ([[self delegate] respondsToSelector:[self didReceiveDataSelector]]) {
+                dataWillBeHandledExternally = YES;
+            }
+        }
 		#if NS_BLOCKS_AVAILABLE
 		if (dataReceivedBlock) {
 			dataWillBeHandledExternally = YES;

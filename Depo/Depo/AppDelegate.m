@@ -16,6 +16,8 @@
 #import "SettingsController.h"
 #import "SettingsUploadController.h"
 #import "SettingsStorageController.h"
+#import "RevisitedStorageController.h"
+
 #import "FileListController.h"
 #import "MapUtil.h"
 #import "AppUtil.h"
@@ -294,7 +296,7 @@
     self.base = [[BaseViewController alloc] initWithRootViewController:settingsController];
     [self.window setRootViewController:base];
     
-    SettingsStorageController *storageController = [[SettingsStorageController alloc] init];
+    RevisitedStorageController *storageController = [[RevisitedStorageController alloc] init];
     storageController.nav = settingsController.nav;
     [settingsController.nav pushViewController:storageController animated:NO];
 }

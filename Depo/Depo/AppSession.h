@@ -47,6 +47,14 @@
 
 @property (nonatomic) BOOL quotaExceed80EventFlag;
 
+@property (nonatomic, strong) NSString *signupReferenceToken;
+@property (nonatomic, strong) NSString *signupReferenceMsisdn;
+@property (nonatomic, strong) NSString *signupReferenceEmail;
+@property (nonatomic, strong) NSString *signupReferencePassword;
+
+@property (nonatomic) BOOL emailEmptyMessageShown;
+@property (nonatomic) BOOL emailNotVerifiedMessageShown;
+
 - (void) playAudioItemAtIndex:(int) itemIndex;
 - (void) playNextAudioItem;
 - (void) playPreviousAudioItem;

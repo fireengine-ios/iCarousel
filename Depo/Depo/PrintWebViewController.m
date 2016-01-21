@@ -99,15 +99,18 @@ static const NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRS
     NSString *request_id = [self randomStringWithLength:28];
     NSString *date_created = [self currentDateString];
     NSString *date_send = [self currentDateString];
-    NSNumber *total_photos = [NSNumber numberWithLong:[fileList count]];
     NSMutableArray *photos = [[NSMutableArray alloc] init];
     for (int i = 0; i<[fileList count]; i++) {
         MetaFile *tempFile = [fileList objectAtIndex:i];
-        NSString *thumb =[tempFile.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        NSString *original = [tempFile.tempDownloadUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        NSDictionary *tempDict = [NSDictionary dictionaryWithObjectsAndKeys:thumb,@"thumb",original,@"original" ,nil];
-        [photos addObject:tempDict];
+        //uploadref olma ihtimaline karsi class kontrolü eklendi
+        if([tempFile isKindOfClass:[MetaFile class]]) {
+            NSString *thumb =[tempFile.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            NSString *original = [tempFile.tempDownloadUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            NSDictionary *tempDict = [NSDictionary dictionaryWithObjectsAndKeys:thumb,@"thumb",original,@"original" ,nil];
+            [photos addObject:tempDict];
+        }
     }
+    NSNumber *total_photos = [NSNumber numberWithLong:[photos count]];
     
     NSMutableDictionary *jsonBodyDict = [[NSMutableDictionary alloc] init];
     [jsonBodyDict setValue:uid forKey:@"uid"];

@@ -602,5 +602,68 @@
     }
 }
 
++ (NSDictionary *) readWaitingIAPValidationForFutureTry {
+    NSDictionary *dict = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"WAITING_IAP_VALIDATION_INFO_KEY"];
+    if(!dict)
+        dict = [[NSDictionary alloc] init];
+    return dict;
+}
+
++ (void) writeWaitingIAPValidationForFutureTryForProductId:(NSString *) productId andReceiptId:(NSString *) receiptId {
+    NSDictionary *currentDict = [AppUtil readWaitingIAPValidationForFutureTry];
+    if([currentDict objectForKey:productId] == nil) {
+        NSMutableDictionary *finalDict = [currentDict mutableCopy];
+        [finalDict setObject:receiptId forKey:productId];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:finalDict forKey:@"WAITING_IAP_VALIDATION_INFO_KEY"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
++ (void) cleanWaitingIAPValidationForFutureTryWithProductId:(NSString *) productId {
+    NSDictionary *currentDict = [AppUtil readWaitingIAPValidationForFutureTry];
+    if([currentDict objectForKey:productId] != nil) {
+        NSMutableDictionary *finalDict = [currentDict mutableCopy];
+        [finalDict removeObjectForKey:productId];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:finalDict forKey:@"WAITING_IAP_VALIDATION_INFO_KEY"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
++ (BOOL) isValidEmail:(NSString *)checkString {
+    BOOL stricterFilter = NO;
+    NSString *stricterFilterString = @"^[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$";
+    NSString *laxString = @"^.+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2}[A-Za-z]*$";
+    NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:checkString];
+}
+
++ (NSString *)getPackageDisplayName: (NSString *) roleName {
+    NSString *name = @"";
+    if ([roleName isEqualToString:@"demo"]) {
+        name = NSLocalizedString(@"Welcome", @"");
+    } else if ([roleName isEqualToString:@"standard"]) {
+        name = @"Mini Paket";
+    } else if ([roleName isEqualToString:@"premium"]) {
+        name = @"Standart Paket";
+    } else if ([roleName isEqualToString:@"ultimate"]) {
+        name = @"Mega Paket";
+    }
+    return name;
+}
+
++ (NSString *)getPackageNameForSms: (NSString *)roleName {
+    NSString *name = @"";
+    if ([roleName isEqualToString:@"standart"] || [roleName isEqualToString:@"standard"]) {
+        name = @"MINIDEPO";
+    } else if ([roleName isEqualToString:@"premium"]) {
+        name = @"STANDARTDEPO";
+    } else if ([roleName isEqualToString:@"ultimate"]) {
+        name = @"MEGADEPO";
+    }
+    return name;
+}
 
 @end

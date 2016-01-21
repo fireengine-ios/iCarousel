@@ -560,26 +560,28 @@
         if (!(tempToShare.contentType == ContentTypePhoto)) {
             [shareDao requestLinkForFiles:@[tempToShare.uuid]];
         } else {
-            [self showBaseLoading];
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-                [self downloadImageWithURL:[NSURL URLWithString:tempToShare.tempDownloadUrl] completionBlock:^(BOOL succeeded, UIImage *image) {
-                    if (succeeded) {
-                        [self hideBaseLoading];
-                        NSArray *activityItems = [NSArray arrayWithObjects:image, nil];
-                        
-                        UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
-                        [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
-                        activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-                        
-                        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-                            [self presentViewController:activityViewController animated:YES completion:nil];
-                        } else {
-                            UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
-                            [popup presentPopoverFromRect:CGRectMake(self.view.frame.size.width-240, self.view.frame.size.height-40, 240, 300)inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+            if([tempToShare isKindOfClass:[MetaFile class]]) {
+                [self showBaseLoading];
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                    [self downloadImageWithURL:[NSURL URLWithString:tempToShare.tempDownloadUrl] completionBlock:^(BOOL succeeded, UIImage *image) {
+                        if (succeeded) {
+                            [self hideBaseLoading];
+                            NSArray *activityItems = [NSArray arrayWithObjects:image, nil];
+                            
+                            UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+                            [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
+                            activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+                            
+                            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+                                [self presentViewController:activityViewController animated:YES completion:nil];
+                            } else {
+                                UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
+                                [popup presentPopoverFromRect:CGRectMake(self.view.frame.size.width-240, self.view.frame.size.height-40, 240, 300)inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+                            }
                         }
-                    }
-                }];
-            });
+                    }];
+                });
+            }
         }
     } else {
         NSMutableArray *fileUuidList = [[NSMutableArray alloc] init];

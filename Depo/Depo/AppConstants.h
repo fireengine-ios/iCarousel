@@ -173,6 +173,10 @@
 
 #define GENERAL_TASK_TIMEOUT 1200.0f
 
+#define POST_SIGNUP_ACTION_OTP @"CONTINUE_WITH_OTP_VERIFICATION"
+
+#define POST_SIGNUP_ACTION_EMAIL @"CONTINUE_WITH_EMAIL_VERIFICATION"
+
 #ifdef PLATFORM_STORE
 #define GROUP_NAME_SUITE_NSUSERDEFAULTS @"group.com.turkcell.akillidepo"
 #elif defined PLATFORM_ICT
@@ -221,6 +225,9 @@ _Pragma("clang diagnostic pop") \
 #define TURKCELL_PHONE_PAKET_KEY @"turkcellphone";
 #define TURKCELL_PLATINIUM_PAKET_KEY @"platiniumpaket";
 
+#define IAP_MINI_PACKAGE_ID @"mini_1_month";
+
+#define IAP_STANDARD_PACKAGE_ID @"standard_1_month";
 
 typedef enum {
     LoginTypeRadius = 0,
@@ -379,6 +386,16 @@ typedef enum {
     ContactSyncTypeBackup = 1,
     ContactSyncTypeRestore
 } ContactSyncType;
+
+typedef enum {
+    AccountTypeTurkcell,
+    AccountTypeOther
+} AccountType;
+
+typedef enum {
+    OfferTypeTurkcell,
+    OfferTypeApple
+} OfferType;
 
 typedef enum {
     UploadStarterPagePhotos = 1,

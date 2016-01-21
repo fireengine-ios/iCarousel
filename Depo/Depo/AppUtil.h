@@ -41,4 +41,12 @@
 + (BOOL) shouldShowNewFeatures;
 + (BOOL) checkIsUpdate;
 + (BOOL) checkAndSetFlags:(NSString *) flagKey;
+
++ (NSDictionary *) readWaitingIAPValidationForFutureTry;
++ (void) writeWaitingIAPValidationForFutureTryForProductId:(NSString *) productId andReceiptId:(NSString *) receiptId;
++ (void) cleanWaitingIAPValidationForFutureTryWithProductId:(NSString *) productId;
+
++ (NSString *)getPackageDisplayName: (NSString *) roleName;
++ (NSString *)getPackageNameForSms: (NSString *)roleName;
+
 @end

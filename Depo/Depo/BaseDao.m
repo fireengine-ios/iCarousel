@@ -342,6 +342,10 @@
     NSString *lastModifiedBy = [dict objectForKey:@"lastModifiedBy"];
     NSNumber *isCurrentSubscription = [dict objectForKey:@"isCurrentSubscription"];
     NSString *status = [dict objectForKey:@"status"];
+    NSNumber *nextRenewalDate = [dict objectForKey:@"nextRenewalDate"];
+    NSString *subscriptionEndDate = [dict objectForKey:@"subscriptionEndDate"];
+    NSString *type = [dict objectForKey:@"type"];
+    NSString *renewalStatus = [dict objectForKey:@"renewalStatus"];
     
     subscription.createdDate = [self strByRawVal:createdDate];
     subscription.lastModifiedDate = [self strByRawVal:lastModifiedDate];
@@ -349,6 +353,14 @@
     subscription.lastModifiedBy = [self strByRawVal:lastModifiedBy];
     subscription.isCurrentSubscription = [self boolByNumber:isCurrentSubscription];
     subscription.status = [self strByRawVal:status];
+    subscription.subscriptionEndDate = [self strByRawVal:subscriptionEndDate];
+    subscription.type = [self strByRawVal:type];
+    subscription.renewalStatus = [self strByRawVal:renewalStatus];
+    if(nextRenewalDate != nil && ![nextRenewalDate isKindOfClass:[NSNull class]]) {
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat:@"dd MMM yy"];
+        subscription.nextRenewalDate = [dateFormat stringFromDate:[NSDate dateWithTimeIntervalSince1970:([nextRenewalDate doubleValue]/1000)]];
+    }
     
     NSDictionary *detailDict = [dict objectForKey:@"subscriptionPlan"];
     if(detailDict != nil && ![detailDict isKindOfClass:[NSNull class]]) {
@@ -362,6 +374,8 @@
         NSString *cometOfferId = [detailDict objectForKey:@"cometOfferId"];
         NSNumber *quota = [detailDict objectForKey:@"quota"];
         NSString *period = [detailDict objectForKey:@"period"];
+        NSString *inAppPurchaseId = [detailDict objectForKey:@"inAppPurchaseId"];
+        NSString *type = [detailDict objectForKey:@"type"];
         
         subscription.plan = [[SubscriptionPlan alloc] init];
         subscription.plan.name = [self strByRawVal:name];
@@ -374,6 +388,8 @@
         subscription.plan.cometOfferId = [self strByRawVal:cometOfferId];
         subscription.plan.quota = [self floatByNumber:quota];
         subscription.plan.period = [self strByRawVal:period];
+        subscription.plan.inAppPurchaseId = [self strByRawVal:inAppPurchaseId];
+        subscription.plan.type = [self strByRawVal:type];
     }
     
     return subscription;

@@ -15,6 +15,8 @@
 #import "SyncUtil.h"
 #import "Usage.h"
 #import "SettingsStorageController.h"
+#import "RevisitedStorageController.h"
+
 #import "FileListController.h"
 #import "PhotoListController.h"
 #import "DocListController.h"
@@ -25,6 +27,7 @@
 #import "Subscription.h"
 #import "AppSession.h"
 #import <SplunkMint/SplunkMint.h>
+#import "EmailEntryController.h"
 
 @interface HomeController ()
 
@@ -112,7 +115,7 @@
         [self showLoading];
         
         if(![[NSUserDefaults standardUserDefaults] objectForKey:@"onKatViewFlag"]){
-            [accountDao requestCurrentAccount];
+            [accountDao requestActiveSubscriptions];
         }
     }
     return self;
@@ -242,7 +245,7 @@
 }
 
 - (void) triggerStoragePage {
-    SettingsStorageController *storageController = [[SettingsStorageController alloc] init];
+    RevisitedStorageController *storageController = [[RevisitedStorageController alloc] init];
     storageController.nav = self.nav;
     [self.nav pushViewController:storageController animated:NO];
 }
@@ -294,9 +297,27 @@
     [contactButton updateCountValue:[NSString stringWithFormat:@"%d", 0]];
 }
 
-- (void) accountSuccessCallback:(Subscription *) subscription{
-    currentSubscription = subscription;
-    [self flowChartAdvertising];
+- (void) accountSuccessCallback:(NSArray *) subscriptions {
+    
+    if(APPDELEGATE.session.user.msisdnEmpty) {
+        [APPDELEGATE triggerLogout];
+        [self showErrorAlertWithMessage:NSLocalizedString(@"MsisdnEmpty", @"")];
+        return;
+    }
+
+    if(APPDELEGATE.session.user.emailEmpty && !APPDELEGATE.session.emailEmptyMessageShown) {
+        APPDELEGATE.session.emailEmptyMessageShown = YES;
+        CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Approve", @"") withCancelTitle:NSLocalizedString(@"TitleLater", @"") withApproveTitle:NSLocalizedString(@"TitleYes", @"") withMessage:NSLocalizedString(@"EmailEmpty", @"") withModalType:ModalTypeApprove];
+        confirm.delegate = self;
+        [APPDELEGATE showCustomConfirm:confirm];
+    } else if(APPDELEGATE.session.user.emailNotVerified && !APPDELEGATE.session.emailNotVerifiedMessageShown) {
+        APPDELEGATE.session.emailNotVerifiedMessageShown = YES;
+        [self showInfoAlertWithMessage:NSLocalizedString(@"EmailNotVerified", @"")];
+    } else if([subscriptions count] > 0) {
+        //TODO ilk subscription'a bakiyor, bu düzeltilecek
+        currentSubscription = [subscriptions objectAtIndex:0];
+        [self flowChartAdvertising];
+    }
     /*if ([self shouldShowOnKatView:subscription]) {
         UIWindow *currentWindow = [UIApplication sharedApplication].keyWindow;
         onkatView = [[OnkatDepoPopUP alloc] initWithFrame:CGRectMake(0, 0, currentWindow.bounds.size.width, currentWindow.bounds.size.height)];
@@ -437,14 +458,14 @@
 }
 
 - (void) advertisementViewYesClick {
-    SettingsStorageController *storageController = [[SettingsStorageController alloc] init];
+    RevisitedStorageController *storageController = [[RevisitedStorageController alloc] init];
     storageController.nav = self.nav;
     [self.nav pushViewController:storageController animated:YES];
     [advertisementView removeFromSuperview];
 }
 
 - (void) advertisementViewOkClickWhenFull {
-    SettingsStorageController *storageController = [[SettingsStorageController alloc] init];
+    RevisitedStorageController *storageController = [[RevisitedStorageController alloc] init];
     storageController.nav = self.nav;
     [self.nav pushViewController:storageController animated:YES];
     [advertisementView removeFromSuperview];
@@ -473,6 +494,15 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
+}
+
+- (void) didRejectCustomAlert:(CustomConfirmView *) alertView {
+}
+
+- (void) didApproveCustomAlert:(CustomConfirmView *) alertView {
+    EmailEntryController *emailController = [[EmailEntryController alloc] init];
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:emailController];
+    [self presentViewController:modalNav animated:YES completion:nil];
 }
 
 @end

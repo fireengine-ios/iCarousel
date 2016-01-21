@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AppConstants.h"
 
 @interface Offer : NSObject
 
@@ -25,5 +26,7 @@
 @property (nonatomic, strong) NSString *quotaString;
 @property (nonatomic, strong) NSString *period;
 @property (nonatomic) float quota;
+@property (nonatomic) OfferType offerType;
+@property (nonatomic, strong) NSString *storeProductIdentifier;
 
 @end

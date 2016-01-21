@@ -22,6 +22,11 @@
 @synthesize failMethod;
 
 - (void) requestTokenForMsisdn:(NSString *) msisdnVal andPassword:(NSString *) passVal shouldRememberMe:(BOOL) rememberMeFlag {
+    [self requestTokenForMsisdn:msisdnVal andPassword:passVal shouldRememberMe:rememberMeFlag withCaptchaId:nil withCaptchaValue:nil];
+}
+
+- (void) requestTokenForMsisdn:(NSString *) msisdnVal andPassword:(NSString *) passVal shouldRememberMe:(BOOL) rememberMeFlag withCaptchaId:(NSString *) captchaId withCaptchaValue:(NSString *) captchaValue {
+    
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:TOKEN_URL, rememberMeFlag ? @"on" : @"off"]];
 	
     NSDictionary *deviceInfo = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -55,6 +60,10 @@
     [request addRequestHeader:@"Content-Type" value:@"application/json; encoding=utf-8"];
     if(APPDELEGATE.session.authToken) {
         [request addRequestHeader:@"X-Auth-Token" value:APPDELEGATE.session.authToken];
+    }
+    if(captchaId != nil && captchaValue != nil) {
+        [request addRequestHeader:@"X-Captcha-Id" value:captchaId];
+        [request addRequestHeader:@"X-Captcha-Answer" value:captchaValue];
     }
     [request startAsynchronous];
 }
@@ -93,6 +102,20 @@
 - (void)requestFinished:(ASIHTTPRequest *)request {
 	NSError *error = [request error];
 	if (!error) {
+        NSString *responseStr = [request responseString];
+        NSLog(@"RESULT: %@", responseStr);
+        SBJSON *jsonParser = [SBJSON new];
+        NSDictionary *dict = [jsonParser objectWithString:responseStr];
+        if(dict != nil && [dict isKindOfClass:[NSDictionary class]]) {
+            NSNumber *errorCode = [dict objectForKey:@"errorCode"];
+            if(errorCode != nil && ![errorCode isKindOfClass:[NSNull class]]) {
+                if([errorCode intValue] == 4002) {
+                    SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:CAPTCHA_ERROR_MESSAGE]);
+                    return;
+                }
+            }
+        }
+
         NSDictionary *headerParams = [request responseHeaders];
         NSString *authToken = [headerParams objectForKey:@"X-Auth-Token"];
         NSString *rememberMeToken = [headerParams objectForKey:@"X-Remember-Me-Token"];
@@ -135,6 +158,18 @@
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request {
+    NSString *responseStr = [request responseString];
+    SBJSON *jsonParser = [SBJSON new];
+    NSDictionary *dict = [jsonParser objectWithString:responseStr];
+    if(dict != nil && [dict isKindOfClass:[NSDictionary class]]) {
+        NSNumber *errorCode = [dict objectForKey:@"errorCode"];
+        if(errorCode != nil && ![errorCode isKindOfClass:[NSNull class]]) {
+            if([errorCode intValue] == 4002) {
+                SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:CAPTCHA_ERROR_MESSAGE]);
+                return;
+            }
+        }
+    }
     if([request responseStatusCode] == 401) {
         SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:GENERAL_ERROR_MESSAGE]);
     } else if([request responseStatusCode] == 403) {

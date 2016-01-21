@@ -20,5 +20,7 @@
 @property (nonatomic, strong) NSString *cometOfferId;
 @property (nonatomic,strong) NSString *period;
 @property (nonatomic) float quota;
+@property (nonatomic,strong) NSString *inAppPurchaseId;
+@property (nonatomic,strong) NSString *type;
 
 @end

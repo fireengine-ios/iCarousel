@@ -11,12 +11,15 @@
 #import "CustomConfirmView.h"
 #import "OfferRedesignCell.h"
 #import "PurchaseView.h"
+#import "IAPValidateDao.h"
+#import "IAPManager.h"
 
-@interface SettingsStorageController : SettingsBaseViewController <CustomConfirmDelegate,OfferReDesignCellDelegate,PurchaseViewDelegate> {
+@interface SettingsStorageController : SettingsBaseViewController <CustomConfirmDelegate,OfferReDesignCellDelegate,PurchaseViewDelegate, IAPManagerDelegate> {
     AccountDao *accountDaoToGetCurrentSubscription;
     AccountDao *accountDaoToGetOffers;
     AccountDao *accountDaoToActivateOffer;
     AccountDao *accountDaoToLearnIsJobExists;
+    IAPValidateDao *iapValidateDao;
     Subscription *currentSubscription;
     NSMutableArray *offers;
     int tableUpdateCounter;

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AppConstants.h"
 
 @interface User : NSObject
 
@@ -16,5 +17,9 @@
 @property (nonatomic, strong) NSString *surname;
 @property (nonatomic, strong) NSString *mobileUploadFolderUuid;
 @property (nonatomic) BOOL cropAndSharePresentFlag;
+@property (nonatomic) AccountType accountType;
+@property (nonatomic) BOOL emailEmpty;
+@property (nonatomic) BOOL msisdnEmpty;
+@property (nonatomic) BOOL emailNotVerified;
 
 @end

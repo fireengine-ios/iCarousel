@@ -17,5 +17,9 @@
 @synthesize isCurrentSubscription;
 @synthesize status;
 @synthesize plan;
+@synthesize nextRenewalDate;
+@synthesize subscriptionEndDate;
+@synthesize type;
+@synthesize renewalStatus;
 
 @end

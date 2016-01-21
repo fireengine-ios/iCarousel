@@ -245,6 +245,12 @@
 
 - (void) squareImageWasSelectedForFile:(MetaFile *)fileSelected {
     if(fileSelected.contentType == ContentTypePhoto) {
+        NSMutableArray *filteredPhotoList = [[NSMutableArray alloc] init];
+        for(id file in photoList) {
+            if([file isKindOfClass:[MetaFile class]]) {
+                [filteredPhotoList addObject:file];
+            }
+        }
         ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFiles:photoList withImage:fileSelected withListOffset:listOffset printEnabled:NO];
         detail.delegate = self;
         MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
@@ -381,7 +387,7 @@
 
 - (void) dynamicallyLoadNextPage {
     listOffset ++;
-    [elasticSearchDao requestPhotosForPage:listOffset andSize:21 andSortType:APPDELEGATE.session.sortType];
+    [elasticSearchDao requestCropNShareForPage:listOffset andSize:21 andSortType:APPDELEGATE.session.sortType];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {

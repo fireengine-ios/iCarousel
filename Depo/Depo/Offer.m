@@ -25,5 +25,7 @@
 @synthesize quota;
 @synthesize period;
 @synthesize rawPrice;
+@synthesize offerType;
+@synthesize storeProductIdentifier;
 
 @end

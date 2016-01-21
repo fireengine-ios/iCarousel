@@ -13,6 +13,8 @@
 #import "BaseViewController.h"
 #import "OfferContainer.h"
 #import "AppUtil.h"
+#import "AppSession.h"
+#import "AppConstants.h"
 
 @interface SettingsStorageController ()
 
@@ -24,8 +26,7 @@
 @synthesize offerToSubs;
 @synthesize containerOffers;
 
-- (id)init
-{
+- (id)init {
     self = [super init];
     if (self) {
         self.title = NSLocalizedString(@"Memory", @"");
@@ -36,6 +37,27 @@
 - (void) viewWillAppear:(BOOL)animated {
     isJobExists = YES;
     [self loadPageContent];
+    if(!iapValidateDao) {
+        iapValidateDao = [[IAPValidateDao alloc] init];
+        iapValidateDao.delegate = self;
+        iapValidateDao.successMethod = @selector(iapValidateSuccessCallback:);
+        iapValidateDao.failMethod = @selector(iapValidateFailCallback:);
+        NSDictionary *waitingForValidationDictionary = [AppUtil readWaitingIAPValidationForFutureTry];
+        if([[waitingForValidationDictionary allKeys] count] > 0) {
+            NSString *productIdWaitingForValidation = [[waitingForValidationDictionary allKeys] objectAtIndex:0];
+            NSString *receiptIdWaitingForValidation = [waitingForValidationDictionary objectForKey:productIdWaitingForValidation];
+            [iapValidateDao requestIAPValidationForProductId:productIdWaitingForValidation withReceiptId:receiptIdWaitingForValidation];
+        }
+    }
+}
+
+- (void) iapValidateSuccessCallback:(NSDictionary *) parameters {
+    [AppUtil cleanWaitingIAPValidationForFutureTryWithProductId:[parameters objectForKey:@"productId"]];
+    [self hideLoading];
+}
+
+- (void) iapValidateFailCallback:(NSDictionary *) parameters {
+    [AppUtil writeWaitingIAPValidationForFutureTryForProductId:[parameters objectForKey:@"productId"] andReceiptId:[parameters objectForKey:@"receiptId"]];
 }
 
 - (void) loadPageContent {
@@ -47,7 +69,7 @@
         accountDaoToGetCurrentSubscription.delegate = self;
         accountDaoToGetCurrentSubscription.successMethod = @selector(loadCurrentSubscriptionCallback:);
         accountDaoToGetCurrentSubscription.failMethod = @selector(loadCurrentSubscriptionFailCallback:);
-        [accountDaoToGetCurrentSubscription requestCurrentAccount];
+        [accountDaoToGetCurrentSubscription requestActiveSubscriptions];
     }
     
     if (currentSubscription == nil) {
@@ -61,20 +83,47 @@
     }
     
     if (!isJobExists) {
-        if(accountDaoToGetOffers == nil) {
-            accountDaoToGetOffers = [[AccountDao alloc]init];
-            accountDaoToGetOffers.delegate = self;
-            accountDaoToGetOffers.successMethod = @selector(loadOffersCallback:);
-            accountDaoToGetOffers.failMethod = @selector(loadOffersFailCallback:);
+        if(APPDELEGATE.session.user.accountType == AccountTypeTurkcell) {
+            if(accountDaoToGetOffers == nil) {
+                accountDaoToGetOffers = [[AccountDao alloc]init];
+                accountDaoToGetOffers.delegate = self;
+                accountDaoToGetOffers.successMethod = @selector(loadOffersCallback:);
+                accountDaoToGetOffers.failMethod = @selector(loadOffersFailCallback:);
+            }
+            [accountDaoToGetOffers requestOffers];
+        } else {
+            [IAPManager sharedInstance].delegate = self;
+            [[IAPManager sharedInstance] requestProducts:[NSArray arrayWithObjects:@"mini_1_month", @"standard_1_month", nil] withCompletionHandler:^(BOOL success, NSArray *products) {
+                [super hideLoading];
+                if(success) {
+                    offers = [[NSMutableArray alloc] initWithArray:products];
+                    if ([currentSubscription.plan.role isEqualToString:@"demo"]) {
+                        NSArray *temp = [self sortArray:offers withKey:@"quota" withAscending:YES];
+                        containerOffers = [self sortingOfferContainers:temp];
+                    }
+                    else {
+                        NSArray *temp = [self sortArray:offers withKey:@"quota" withAscending:NO];
+                        containerOffers = [self sortingOfferContainers:temp];
+                    }
+                    
+                    if (offers.count > 0) {
+                        [super drawPageContentTable];
+                    }
+                } else {
+                    //TODO show error message if necessary
+                }
+            }];
         }
-        [accountDaoToGetOffers requestOffers];
     }
 }
 
-- (void) loadCurrentSubscriptionCallback:(Subscription *) file {
-    currentSubscription = file;
-    [super drawPageContentTable];
+- (void) loadCurrentSubscriptionCallback:(NSArray *) subscriptions {
     [super hideLoading];
+    //TODO çoklu hale getirilecek
+    if([subscriptions count] > 0) {
+        currentSubscription = [subscriptions objectAtIndex:0];
+    }
+    [super drawPageContentTable];
 }
 
 - (void) loadCurrentSubscriptionFailCallback:(NSString *) errorMessage {
@@ -305,7 +354,12 @@
 
 - (void) activatePurchasing:(Offer *) chosenOffer {
     selectedOffer = chosenOffer;
-    [self activateOffer:selectedOffer];
+    if(selectedOffer.offerType == OfferTypeTurkcell) {
+        [self activateOffer:selectedOffer];
+    } else {
+        [[IAPManager sharedInstance] buyProductByIdentifier:chosenOffer.storeProductIdentifier];
+        [super showLoading];
+    }
 }
 
 - (NSArray *) sortingOfferContainers:(NSArray *) offerPackages {
@@ -385,6 +439,26 @@
     
     return sortedArray;
     
+}
+
+#pragma mark IAPManagerDelegate methods
+
+- (void) iapWasCancelled {
+    [self hideLoading];
+}
+
+- (void) iapFailedWithMessage:(NSString *) errorMessage {
+    [super hideLoading];
+    [super showErrorAlertWithMessage:errorMessage];
+}
+
+- (void) iapFinishedForProduct:(NSString *) productIdentifier withReceipt:(NSData *) receipt {
+    [iapValidateDao requestIAPValidationForProductId:productIdentifier withReceiptId:receipt];
+}
+
+- (void) iapRestoredForProduct:(NSString *) productIdentifier {
+    [super hideLoading];
+    //TODO restore için validation cagrilacak mi?
 }
 
 @end

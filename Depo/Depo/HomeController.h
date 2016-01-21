@@ -18,8 +18,9 @@
 #import "AccountDao.h"
 #import "OnkatDepoPopUP.h"
 #import "CustomAdvertisementView.h"
+#import "CustomConfirmView.h"
 
-@interface HomeController : MyViewController <RecentActivityLinkerDelegate, XYPieChartDelegate, XYPieChartDataSource, OnKatViewDeleagate,CustomAdvertisementDelegate> {
+@interface HomeController : MyViewController <RecentActivityLinkerDelegate, XYPieChartDelegate, XYPieChartDataSource, OnKatViewDeleagate,CustomAdvertisementDelegate, CustomConfirmDelegate> {
     UsageInfoDao *usageDao;
     ContactCountDao *contactCountDao;
     AccountDao *accountDao;

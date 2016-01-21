@@ -622,7 +622,7 @@
 
 #pragma mark ScrollViewDelegate methods
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (photosScroll.frame.origin.y > 160) {
+//TODO why    if (photosScroll.frame.origin.y > 160) {
         if(scrollView.tag == 111) {
             if(!isLoading) {
                 CGFloat currentOffset = photosScroll.contentOffset.y;
@@ -634,8 +634,7 @@
                 }
             }
         }
-
-    }
+//    }
 }
 
 - (void) dynamicallyLoadNextPage {

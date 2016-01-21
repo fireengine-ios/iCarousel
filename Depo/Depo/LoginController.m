@@ -18,6 +18,10 @@
 #import "CacheUtil.h"
 #import "CurioSDK.h"
 #import <SplunkMint/SplunkMint.h>
+#import "SignupController.h"
+#import "RememberMeEmailViewController.h"
+
+#define kOFFSET_FOR_KEYBOARD 200.0
 
 @interface LoginController ()
 
@@ -25,8 +29,13 @@
 
 @implementation LoginController
 
+@synthesize mainScroll;
+@synthesize loginButton;
+@synthesize refreshButton;
+@synthesize captchaView;
 @synthesize msisdnField;
 @synthesize passField;
+@synthesize captchaField;
 
 - (id) init {
     if(self = [super init]) {
@@ -39,37 +48,105 @@
         tokenDao.delegate = self;
         tokenDao.successMethod = @selector(tokenDaoSuccessCallback);
         tokenDao.failMethod = @selector(tokenDaoFailCallback:);
-
-        CustomLabel *msisdnLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(25, 50, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"MsisdnTitle", @"")];
-        [self.view addSubview:msisdnLabel];
         
-        msisdnField = [[LoginTextfield alloc] initWithFrame:CGRectMake(20, 75, self.view.frame.size.width - 40, 43) withPlaceholder:NSLocalizedString(@"MsisdnPlaceholder", @"")];
+        captchaDao = [[RequestCaptchaDao alloc] init];
+        captchaDao.delegate = self;
+        captchaDao.successMethod = @selector(captchaSuccessCallback:);
+        captchaDao.failMethod = @selector(captchaFailCallback:);
+
+        mainScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+        mainScroll.scrollEnabled = YES;
+        [self.view addSubview:mainScroll];
+        
+        int scrollYIndex = 50;
+        
+        CustomLabel *msisdnLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(25, scrollYIndex, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"MsisdnTitle", @"")];
+        [mainScroll addSubview:msisdnLabel];
+        
+        scrollYIndex += 25;
+        
+        msisdnField = [[LoginTextfield alloc] initWithFrame:CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 43) withPlaceholder:NSLocalizedString(@"MsisdnPlaceholder", @"")];
         msisdnField.delegate = self;
         msisdnField.placeholder = @"5xxxxxxxxx";
-        [self.view addSubview:msisdnField];
+        [mainScroll addSubview:msisdnField];
 
-        CustomLabel *passLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(25, 130, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"PasswordTitle", @"")];
-        [self.view addSubview:passLabel];
+        scrollYIndex += 55;
+
+        CustomLabel *passLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(25, scrollYIndex, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"PasswordTitle", @"")];
+        [mainScroll addSubview:passLabel];
         
-        passField = [[LoginTextfield alloc] initSecureWithFrame:CGRectMake(20, 155, self.view.frame.size.width - 40, 43) withPlaceholder:NSLocalizedString(@"PasswordPlaceholder", @"")];
+        scrollYIndex += 25;
+
+        passField = [[LoginTextfield alloc] initSecureWithFrame:CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 43) withPlaceholder:NSLocalizedString(@"PasswordPlaceholder", @"")];
         passField.delegate = self;
-        [self.view addSubview:passField];
+        [mainScroll addSubview:passField];
 
-        rememberMe = [[CheckButton alloc] initWithFrame:CGRectMake(25, 220, 120, 25) withTitle:NSLocalizedString(@"RememberMe", @"") isInitiallyChecked:YES];
-        [self.view addSubview:rememberMe];
+        scrollYIndex += 65;
+
+        rememberMe = [[CheckButton alloc] initWithFrame:CGRectMake(25, scrollYIndex, 120, 25) withTitle:NSLocalizedString(@"RememberMe", @"") isInitiallyChecked:YES];
+        [mainScroll addSubview:rememberMe];
+
+        SimpleButton *forgotPass = [[SimpleButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 140, scrollYIndex, 120, 25) withTitle:NSLocalizedString(@"ForgotPassButton", @"")];
+        [forgotPass addTarget:self action:@selector(forgotMeClicked) forControlEvents:UIControlEventTouchUpInside];
+        [mainScroll addSubview:forgotPass];
+
+        scrollYIndex += 40;
+
+        captchaView = [[UIImageView alloc] initWithFrame:CGRectMake(20, scrollYIndex, 200, 50)];
+        captchaView.hidden = YES;
+        [mainScroll addSubview:captchaView];
         
+        refreshButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 38, scrollYIndex, 18, 18) withImageName:@"icon_verif_refresh.png"];
+        refreshButton.hidden = YES;
+        [refreshButton addTarget:self action:@selector(loadCaptcha) forControlEvents:UIControlEventTouchUpInside];
+        [mainScroll addSubview:refreshButton];
+        
+        captchaField = [[LoginTextfield alloc] initSecureWithFrame:CGRectMake(20, captchaView.frame.origin.y + captchaView.frame.size.height + 5, self.view.frame.size.width - 40, 43) withPlaceholder:NSLocalizedString(@"CaptchaPlaceholder", @"")];
+        captchaField.hidden = YES;
+        captchaField.delegate = self;
+        [mainScroll addSubview:captchaField];
+
+        loginButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 50) withTitle:NSLocalizedString(@"SignIn", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
+        [loginButton addTarget:self action:@selector(loginClicked) forControlEvents:UIControlEventTouchUpInside];
+        [mainScroll addSubview:loginButton];
+
+        scrollYIndex += 60;
+        
+        /*
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-            SmsForPassButton *smsButton = [[SmsForPassButton alloc] initWithFrame:CGRectMake(20, 280, 280, 40)];
+            SmsForPassButton *smsButton = [[SmsForPassButton alloc] initWithFrame:CGRectMake(20, loginButton.frame.origin.y + loginButton.frame.size.height + 10, 280, 40)];
             [smsButton addTarget:self action:@selector(triggerSms) forControlEvents:UIControlEventTouchUpInside];
             [self.view addSubview:smsButton];
             
         }
+         */
 
-        SimpleButton *loginButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, self.view.frame.size.height - 134, self.view.frame.size.width - 40, 50) withTitle:NSLocalizedString(@"SignIn", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
-        [loginButton addTarget:self action:@selector(loginClicked) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:loginButton];
+        SimpleButton *registerButton = [[SimpleButton alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60) withTitle:NSLocalizedString(@"SignUpButtonTitle", @"") withTitleColor:[UIColor whiteColor] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[UIColor blackColor] withBgColor:[UIColor blackColor] withCornerRadius:0 withIconName:@"white_right_arrow_icon.png" withIconFrame:CGRectMake(self.view.frame.size.width - 100, 23, 8, 14)];
+        [registerButton addTarget:self action:@selector(registerClicked) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:registerButton];
+        
+        mainScroll.contentSize = CGSizeMake(mainScroll.frame.size.width, scrollYIndex + 120);
+
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow) name:UIKeyboardWillShowNotification object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide) name:UIKeyboardWillHideNotification object:nil];
     }
     return self;
+}
+
+- (void) forgotMeClicked {
+    RememberMeEmailViewController *rememberMeController = [[RememberMeEmailViewController alloc] init];
+    [self.navigationController pushViewController:rememberMeController animated:YES];
+}
+
+- (void) loadCaptcha {
+    captchaUniqueId = [[NSUUID UUID] UUIDString];
+    [captchaDao requestCaptchaForType:@"IMAGE" andId:captchaUniqueId];
+}
+
+- (void) registerClicked {
+    SignupController *signup = [[SignupController alloc] init];
+    [self.navigationController pushViewController:signup animated:YES];
 }
 
 - (void) tokenDaoSuccessCallback {
@@ -89,17 +166,27 @@
 
 - (void) tokenDaoFailCallback:(NSString *) errorMessage {
     [self hideLoading];
-    [self showErrorAlertWithMessage:NSLocalizedString(@"LoginError", @"")];
+    if([errorMessage isEqualToString:CAPTCHA_ERROR_MESSAGE]) {
+        [self showErrorAlertWithMessage:NSLocalizedString(@"CaptchaRequiredErrorMessage", @"")];
+        [self loadCaptcha];
+    } else {
+        [self showErrorAlertWithMessage:NSLocalizedString(@"LoginError", @"")];
+        if(![captchaField isHidden]) {
+            [self loadCaptcha];
+        }
+    }
 }
 
 - (void) textFieldDidEndEditing:(UITextField *)textField {
     [msisdnField resignFirstResponder];
     [passField resignFirstResponder];
+    [captchaField resignFirstResponder];
 }
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {
     [msisdnField resignFirstResponder];
     [passField resignFirstResponder];
+    [captchaField resignFirstResponder];
     return YES;
 }
 
@@ -131,7 +218,18 @@
         return;
     }
     
-    [tokenDao requestTokenForMsisdn:msisdnValue andPassword:passValue shouldRememberMe:rememberMe.isChecked];
+    if(![captchaField isHidden] && [captchaField.text length] == 0) {
+        [self showErrorAlertWithMessage:NSLocalizedString(@"CaptchaFieldErrorMessage", @"")];
+        return;
+    }
+    
+    [self.view endEditing:YES];
+
+    if(![captchaField isHidden]) {
+        [tokenDao requestTokenForMsisdn:msisdnValue andPassword:passValue shouldRememberMe:rememberMe.isChecked withCaptchaId:captchaUniqueId withCaptchaValue:captchaField.text];
+    } else {
+        [tokenDao requestTokenForMsisdn:msisdnValue andPassword:passValue shouldRememberMe:rememberMe.isChecked];
+    }
     [self showLoading];
 }
 
@@ -157,14 +255,56 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void) captchaSuccessCallback:(UIImage *) captchaImg {
+    captchaView.image = captchaImg;
+    
+    if(captchaView.isHidden) {
+        loginButton.frame = CGRectMake(loginButton.frame.origin.x, loginButton.frame.origin.y + 115, loginButton.frame.size.width, loginButton.frame.size.height);
+        mainScroll.contentSize = CGSizeMake(mainScroll.contentSize.width, mainScroll.contentSize.height + 115);
+        captchaView.hidden = NO;
+        captchaField.hidden = NO;
+        refreshButton.hidden = NO;
+    }
 }
-*/
+
+- (void) captchaFailCallback:(NSString *) errorMessage {
+    [self showErrorAlertWithMessage:errorMessage];
+}
+
+-(void)keyboardWillShow {
+    if(captchaField.isFirstResponder) {
+        if (self.view.frame.origin.y >= 0) {
+            [self setViewMovedUp:YES];
+        }
+    }
+}
+
+-(void)keyboardWillHide {
+    if (self.view.frame.origin.y < 0) {
+        [self setViewMovedUp:NO];
+    }
+}
+
+-(void)setViewMovedUp:(BOOL)movedUp {
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.2];
+    
+    CGRect rect = self.view.frame;
+    if (movedUp) {
+        rect.origin.y -= kOFFSET_FOR_KEYBOARD;
+        rect.size.height += kOFFSET_FOR_KEYBOARD;
+    } else {
+        rect.origin.y += kOFFSET_FOR_KEYBOARD;
+        rect.size.height -= kOFFSET_FOR_KEYBOARD;
+    }
+    self.view.frame = rect;
+    
+    [UIView commitAnimations];
+}
+
+- (void) viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.view endEditing:YES];
+}
 
 @end

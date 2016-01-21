@@ -11,6 +11,7 @@
 
 typedef enum {
     RequestMethodGetCurrentSubscription = 0,
+    RequestMethodGetActiveSubscriptions,
     RequestMethodGetOffers,
     RequestMethodActivateOffer,
     RequestMethodCancelSubscription,
@@ -22,6 +23,7 @@ typedef enum {
 }
 
 - (void) requestCurrentAccount;
+- (void) requestActiveSubscriptions;
 - (void) requestOffers;
 - (void) requestActivateOffer: (Offer *)offer;
 //- (void) requestCancelSubscription: (Subscription *)subscription;

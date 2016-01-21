@@ -49,14 +49,18 @@
         shareDao.successMethod = @selector(shareSuccessCallback:);
         shareDao.failMethod = @selector(shareFailCallback:);
 
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:self.file.tempDownloadUrl]];
-        [request setValue:APPDELEGATE.session.authToken forHTTPHeaderField:@"X-Auth-Token"];
 
         webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex)];
         webView.backgroundColor = [UIColor whiteColor];
         webView.delegate = self;
-        [webView loadRequest:request];
         [self.view addSubview:webView];
+
+        //uploadref gelme ihtimaline karsi class kontrolü yapiyoruz
+        if([self.file isKindOfClass:[MetaFile class]]) {
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:self.file.tempDownloadUrl]];
+            [request setValue:APPDELEGATE.session.authToken forHTTPHeaderField:@"X-Auth-Token"];
+            [webView loadRequest:request];
+        }
     }
     return self;
 }

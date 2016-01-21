@@ -20,5 +20,7 @@
 @synthesize cometOfferId;
 @synthesize quota;
 @synthesize period;
+@synthesize inAppPurchaseId;
+@synthesize type;
 
 @end

@@ -18,5 +18,9 @@
 @property (nonatomic) BOOL isCurrentSubscription;
 @property (nonatomic, strong) NSString *status;
 @property (nonatomic) SubscriptionPlan *plan;
+@property (nonatomic, strong) NSString *nextRenewalDate;
+@property (nonatomic, strong) NSString *subscriptionEndDate;
+@property (nonatomic, strong) NSString *type;
+@property (nonatomic, strong) NSString *renewalStatus;
 
 @end

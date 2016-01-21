@@ -92,6 +92,8 @@
 
 #define GET_CURRENT_SUBSCRIPTION_URL BASE_URL@"/account/currentSubscription"
 
+#define GET_ACTIVE_SUBSCRIPTIONS_URL BASE_URL@"/account/activeSubscriptionList"
+
 #define GET_SUBSCRIPTION_OFFERS_URL BASE_URL@"/account/offers"
 
 #define REQUEST_ACTIVATE_OFFER_URL BASE_URL@"/account/activateOffer"
@@ -102,9 +104,27 @@
 
 #define GET_CONNECTED_DEVICES BASE_URL@"/devices"
 
+#define SIGNUP_URL BASE_URL@"/signup"
+
+#define VERIFY_PHONE_URL BASE_URL@"/verify/phoneNumber"
+
+#define SEND_VERIFICATION_EMAIL_URL BASE_URL@"/verify/sendVerificationEmail"
+
+#define SEND_VERIFICATION_SMS_URL BASE_URL@"/verify/sendVerificationSMS"
+
+#define EMAIL_UPDATE_URL BASE_URL@"/account/email"
+
+#define IAP_VALIDATE_URL BASE_URL@"/inapppurchase/apple/validatePurchase"
+
+#define REQ_CAPTCHA_URL BASE_URL@"/captcha/%@/%@"
+
+#define FORGOT_PASS_URL BASE_URL@"/account/forgotPassword"
+
 #define APN_URL @"http://pushserver.turkcell.com.tr/PushServer/rest/registerdevice/"
 
 #define SHORTEN_URL @"https://www.googleapis.com/urlshortener/v1/url"
+
+#define APPLE_PRODUCT_NAMES_URL BASE_URL@"/account/allAccessOffers/APPLE"
 
 #define turkcellAuthAppId @"39532"
 #define turkcellAuthSecretKey @"9adc2130-7d20-11e3-baa7-0800200c9a66"
@@ -118,6 +138,8 @@
 #define TOKEN_ERROR_MESSAGE @"Kullanıcı girişi esnasında hata oluştu. Lütfen tekrar deneyiniz."
 
 #define GENERAL_ERROR_MESSAGE @"Genel bir hata oluştu. Lütfen tekrar deneyiniz."
+
+#define CAPTCHA_ERROR_MESSAGE @"CAPTCHA_REQ"
 
 #define NO_CONN_ERROR_MESSAGE @"Lütfen internet bağlantınızı kontrol ediniz."
 

@@ -417,7 +417,13 @@
 
 - (void) squareImageWasSelectedForFile:(MetaFile *)fileSelected {
     if(fileSelected.contentType == ContentTypePhoto) {
-        ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFiles:photoList withImage:fileSelected withListOffset:listOffset];
+        NSMutableArray *filteredPhotoList = [[NSMutableArray alloc] init];
+        for(id file in photoList) {
+            if([file isKindOfClass:[MetaFile class]]) {
+                [filteredPhotoList addObject:file];
+            }
+        }
+        ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFiles:filteredPhotoList withImage:fileSelected withListOffset:listOffset];
         detail.delegate = self;
         MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
         detail.nav = modalNav;
