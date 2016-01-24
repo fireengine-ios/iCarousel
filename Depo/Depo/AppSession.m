@@ -54,8 +54,9 @@
         
         //5322102103 for ios
         //5322109094 for presentation
-
-        [self checkLatestContactSyncStatus];
+        
+        //TODO contact sync ile aç
+//        [self checkLatestContactSyncStatus];
     }
     return self;
 }

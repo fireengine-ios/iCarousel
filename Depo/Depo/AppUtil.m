@@ -18,7 +18,7 @@
     NSMutableArray *result = [[NSMutableArray alloc] init];
     
     MetaMenu *profileMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeProfile];
-    profileMenu.title = @"Mahir Tarlan";
+    profileMenu.title = @"";
     profileMenu.iconName = @"";
     profileMenu.selectedIconName = @"";
     [result addObject:profileMenu];
@@ -69,7 +69,7 @@
     contactMenu.title = NSLocalizedString(@"MenuContactSync", @"");
     contactMenu.iconName = @"contact_sync_icon.png";
     contactMenu.selectedIconName = @"yellow_contact_sync_icon.png";
-    [result addObject:contactMenu];
+//    [result addObject:contactMenu];
     
     if(APPDELEGATE.session.user.cropAndSharePresentFlag) {
         MetaMenu *cropAndShare = [[MetaMenu alloc] initWithMenuType:MenuTypeCropAndShare];

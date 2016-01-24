@@ -518,9 +518,12 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
+    //TODO contact sync ile aç
+    /*
     if(session != nil) {
         [session checkLatestContactSyncStatus];
     }
+     */
     
     if(activatedFromBackground) {
         /*

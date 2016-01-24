@@ -87,14 +87,19 @@
         [self.navigationController pushViewController:emailResultController animated:YES];
     } else if([statusVal isEqualToString:@"EXPIRED_OTP"]) {
         [self showErrorAlertWithMessage:NSLocalizedString(@"OTPExpired", @"")];
+        [self cleanOTPFields];
     } else if([statusVal isEqualToString:@"INVALID_OTP"]) {
         [self showErrorAlertWithMessage:NSLocalizedString(@"OTPInvalid", @"")];
+        [self cleanOTPFields];
     } else if([statusVal isEqualToString:@"INVALID_TOKEN"]) {
         [self showErrorAlertWithMessage:NSLocalizedString(@"RefCodeInvalid", @"")];
         [self.navigationController popViewControllerAnimated:YES];
     } else if([statusVal isEqualToString:@"OK"]) {
         [self showInfoAlertWithMessage:NSLocalizedString(@"SignupSuccess", @"")];
         [self.navigationController popToRootViewControllerAnimated:YES];
+    } else {
+        [self showErrorAlertWithMessage:NSLocalizedString(statusVal, @"")];
+        [self cleanOTPFields];
     }
 }
 
@@ -190,6 +195,7 @@
             UIView *nextView = [self.view viewWithTag:nextTag];
             if(nextView != nil && [nextView isKindOfClass:[SingleCharField class]]) {
                 SingleCharField *nextField = (SingleCharField *) nextView;
+                nextField.text = @"";
                 [nextField becomeFirstResponder];
             } else {
                 NSMutableString *otpVal = [[NSMutableString alloc] init];
@@ -211,6 +217,16 @@
     
     //always return no since we are manually changing the text field
     return NO;
+}
+
+- (void) cleanOTPFields {
+    for(int i=0; i<otpLength; i++) {
+        UIView *inputView = [self.view viewWithTag:(100+i)];
+        if(inputView != nil && [inputView isKindOfClass:[SingleCharField class]]) {
+            SingleCharField *inputCharField = (SingleCharField *) inputView;
+            inputCharField.text = @"";
+        }
+    }
 }
 
 - (void) tickForSecond {
