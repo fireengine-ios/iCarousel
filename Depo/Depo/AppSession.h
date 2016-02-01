@@ -78,4 +78,6 @@
 - (void) initNowPlayingInfoCenter:(MetaFile *) songInfo;
 - (BOOL) isAudioPlaying;
 
+- (void) musicFileWasDeletedWithUuids:(NSArray *) uuidVals;
+
 @end

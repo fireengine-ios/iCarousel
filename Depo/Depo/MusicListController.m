@@ -24,6 +24,7 @@
 @synthesize selectedMusicList;
 @synthesize musicDict;
 @synthesize musicDictKeys;
+@synthesize uuidsToBeDeleted;
 @synthesize footerActionMenu;
 
 - (id) init {
@@ -275,6 +276,7 @@
 
 - (void) fileFolderCellShouldDeleteForFile:(MetaFile *)fileSelected {
     if([CacheUtil showConfirmDeletePageFlag]) {
+        uuidsToBeDeleted = @[fileSelected.uuid];
         [deleteDao requestDeleteFiles:@[fileSelected.uuid]];
         [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
     } else {
@@ -347,6 +349,7 @@
                 }
             }
         }
+        uuidsToBeDeleted = selectedMusicList;
         [deleteDao requestDeleteFiles:selectedMusicList];
         [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
     } else {
@@ -388,9 +391,11 @@
                 }
             }
         }
+        uuidsToBeDeleted = selectedMusicList;
         [deleteDao requestDeleteFiles:selectedMusicList];
         [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
     } else if(self.deleteType == DeleteTypeSwipeMenu) {
+        uuidsToBeDeleted = @[fileSelectedRef.uuid];
         [deleteDao requestDeleteFiles:@[fileSelectedRef.uuid]];
         [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
     }
@@ -479,6 +484,9 @@
         if(footerActionMenu) {
             [footerActionMenu removeFromSuperview];
         }
+    }
+    if(uuidsToBeDeleted) {
+        [APPDELEGATE.session musicFileWasDeletedWithUuids:uuidsToBeDeleted];
     }
     [self proceedSuccessForProgressView];
     [self triggerRefresh];

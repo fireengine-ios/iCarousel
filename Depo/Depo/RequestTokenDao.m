@@ -167,6 +167,9 @@
             if([errorCode intValue] == 4002) {
                 SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:CAPTCHA_ERROR_MESSAGE]);
                 return;
+            } else if([errorCode intValue] == 60) {
+                SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:EMAIL_NOT_VERIFIED_ERROR_MESSAGE]);
+                return;
             }
         }
     }

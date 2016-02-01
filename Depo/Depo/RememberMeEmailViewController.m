@@ -140,6 +140,9 @@
 - (void) forgotPassFailCallback:(NSString *) errorMessage {
     [self hideLoading];
     [self showErrorAlertWithMessage:errorMessage];
+    
+    captchaField.text = @"";
+    [self loadCaptcha];
 }
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {

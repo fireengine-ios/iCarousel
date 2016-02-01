@@ -67,6 +67,9 @@
                 [self showAlbums];
             }
         } failureBlock:^(NSError *error) {
+            if (error.code == ALAssetsLibraryAccessUserDeniedError || error.code == ALAssetsLibraryAccessGloballyDeniedError) {
+                [self showErrorAlertWithMessage:NSLocalizedString(@"ALAssetsAccessError", @"")];
+            }
         }];
     }
     return self;

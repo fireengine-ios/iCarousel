@@ -35,6 +35,15 @@
         NSString *responseStr = [request responseString];
         SBJSON *jsonParser = [SBJSON new];
         NSDictionary *dict = [jsonParser objectWithString:responseStr];
+        if(dict != nil && [dict isKindOfClass:[NSDictionary class]]) {
+            NSNumber *statusVal = [dict objectForKey:@"status"];
+            if(statusVal != nil && ![statusVal isKindOfClass:[NSNull class]]) {
+                if([statusVal intValue] == 4001) {
+                    [self shouldReturnFailWithMessage:NSLocalizedString(@"InvalidCaptchaErrorMessage", @"")];
+                    return;
+                }
+            }
+        }
         [self shouldReturnSuccessWithObject:dict];
     } else {
         [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];

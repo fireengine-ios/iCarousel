@@ -60,7 +60,7 @@
         
         int scrollYIndex = 50;
         
-        CustomLabel *msisdnLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(25, scrollYIndex, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"MsisdnTitle", @"")];
+        CustomLabel *msisdnLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(25, scrollYIndex, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"MsisdnEmailTitle", @"")];
         [mainScroll addSubview:msisdnLabel];
         
         scrollYIndex += 25;
@@ -169,6 +169,8 @@
     if([errorMessage isEqualToString:CAPTCHA_ERROR_MESSAGE]) {
         [self showErrorAlertWithMessage:NSLocalizedString(@"CaptchaRequiredErrorMessage", @"")];
         [self loadCaptcha];
+    } else if([errorMessage isEqualToString:EMAIL_NOT_VERIFIED_ERROR_MESSAGE]) {
+        [self showErrorAlertWithMessage:NSLocalizedString(@"EmailNotVerifiedError", @"")];
     } else {
         [self showErrorAlertWithMessage:NSLocalizedString(@"LoginError", @"")];
         if(![captchaField isHidden]) {
@@ -204,15 +206,24 @@
 
 - (void) loginClicked {
     msisdnValue = msisdnField.text;
+    /*
     if ([msisdnValue length] > 0)
         msisdnValue = [[msisdnValue substringToIndex:1] isEqualToString:@"0"] ? [msisdnValue substringFromIndex:1] : msisdnValue;
-    
+    */
     passValue = passField.text;
     
+    /*
     if([msisdnValue length] != 10) {
         [self showErrorAlertWithMessage:NSLocalizedString(@"MsisdnFormatErrorMessage", @"")];
         return;
     }
+     */
+
+    if([msisdnValue length] == 0) {
+        [self showErrorAlertWithMessage:NSLocalizedString(@"MsisdnEmailFormatErrorMessage", @"")];
+        return;
+    }
+    
     if([passValue length] == 0) {
         [self showErrorAlertWithMessage:NSLocalizedString(@"PassFormatErrorMessage", @"")];
         return;

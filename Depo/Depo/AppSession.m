@@ -93,8 +93,16 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(queueItemDidFail) name:AVPlayerItemPlaybackStalledNotification object:self.playerItem];
     
-
     [[NSNotificationCenter defaultCenter] postNotificationName:MUSIC_CHANGED_NOTIFICATION object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[self itemRefForCurrentAsset], CHANGED_MUSIC_OBJ_KEY, nil]];
+}
+
+- (void) musicFileWasDeletedWithUuids:(NSArray *) uuidVals {
+    MetaFile *currentFile = [self itemRefForCurrentAsset];
+    if(currentFile) {
+        if([uuidVals containsObject:currentFile.uuid]) {
+            [self stopAudioItem];
+        }
+    }
 }
 
 - (void) stopAudioItem {

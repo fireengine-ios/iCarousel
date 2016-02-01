@@ -61,6 +61,9 @@
                 [self showImages];
             }
          } failureBlock:^(NSError *error) {
+             if (error.code == ALAssetsLibraryAccessUserDeniedError || error.code == ALAssetsLibraryAccessGloballyDeniedError) {
+                 [self showErrorAlertWithMessage:NSLocalizedString(@"ALAssetsAccessError", @"")];
+             }
          }];
         
         footerView = [[MultipleUploadFooterView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60)];

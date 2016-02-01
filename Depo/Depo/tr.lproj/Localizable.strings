@@ -562,8 +562,9 @@
 
 "CaptchaPlaceholder"="Resimdeki değeri girin";
 "CaptchaFieldErrorMessage"="Lütfen güvenlik kodunu girin";
+"InvalidCaptchaErrorMessage"="Geçersiz bir güvenlik kodu girdiniz";
 "ForgotPassTitle"="Şifremi Unuttum";
-"PassSentToEmail"="şifreniz e-posta adresinize gönderilmiştir.";
+"PassSentToEmail"="Şifreniz e-posta adresinize gönderilmiştir.";
 "EmailError2222"="2222’ye mesaj atarak Turkcell Şifrenizle giriş yapabilirsiniz.";
 "CaptchaRequiredErrorMessage"="Güvenlik kodunu girmeniz gerekmektedir";
 "SignupSuccess"="Kayıt işleminiz başarıyla tamamlanmıştır.";
@@ -577,8 +578,18 @@
 "EmailEmpty"="Size daha iyi hizmet verebilmemiz için e-postanızı güncellemek ister misiniz?";
 "MsisdnEmpty"="GSM Numaranız sistemde bulunmamaktadır.";
 "EmailNotVerified"="Size daha iyi hizmet verebilmemiz için lütfen e-posta adresinize gönderilen doğrulama bağlantısına giriş yapınız";
+"EmailNotVerifiedError"="E-Posta adresinizi henüz doğrulamadınız. Lütfen e-posta adresinize gönderilen doğrulama bağlantısına giriş yapınız";
 "TitleLater"="Daha Sonra";
 "EmailAlreadyExist"="Bu e-posta adresi sistemde mevcut. Lütfen başka bir e-posta giriniz";
 "EmailInvalid"="Geçersiz bir e-posta adresi girdiniz";
 "PASSWORD_LENGTH_IS_BELOW_LIMIT"="Şifreniz çok kısa. Lütfen daha uzun bir şifreyle tekrar deneyin";
+"PASSWORD_LENGTH_EXCEEDED"="Şifreniz çok uzun. Lütfen daha kısa bir şifreyle tekrar deneyin";
 "CONSECUTIVE_NUMBERS"="Şifrenizde lütfen ardışık sayılar kullanmayın";
+"WAITING_FOR_TIMEOUT_PERIOD"="Çok sayıda hatalı giriş yaptınız. Lütfen daha sonra tekrar deneyiniz.";
+
+"MsisdnEmailTitle"="GSM NUMARASI / E-MAİL ADRESİ";
+"MsisdnEmailPlaceholder"="GSM Numarası/E-Mail Adresi";
+"MsisdnEmailFormatErrorMessage"="GSM numarasını/E-Mail adresini kontrol ediniz";
+
+"LocForAutoSyncError"="Otomatik yüklemenin başarıyla çalışabilmesi için konum servisinin açık olması gerekmektedir";
+"AssetForAutoSyncError"="Otomatik yüklemenin çalışabilmesi için fotoğraf galerisine erişim izni verilmelidir";

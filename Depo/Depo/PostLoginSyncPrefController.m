@@ -110,8 +110,13 @@
 
 - (void) continueClicked {
     if(autoSyncSwitch.isOn) {
-        [LocationManager sharedInstance].delegate = self;
-        [[LocationManager sharedInstance] startLocationManager];
+        if(![CLLocationManager locationServicesEnabled]) {
+            [self showErrorAlertWithMessage:NSLocalizedString(@"LocForAutoSyncError", @"")];
+            return;
+        } else {
+            [LocationManager sharedInstance].delegate = self;
+            [[LocationManager sharedInstance] startLocationManager];
+        }
     } else {
         [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOff];
         [CacheUtil writeCachedSettingSyncContacts:EnableOptionOff];
@@ -185,6 +190,7 @@
 }
 
 #pragma mark LocationManagerDelegate methods
+
 - (void) locationPermissionDenied {
     [LocationManager sharedInstance].delegate = nil;
     [self triggerAssetPermissionAndContinue];
@@ -201,11 +207,28 @@
 }
 
 - (void) triggerAssetPermissionAndContinue {
-    self.assetsLibrary = [[ALAssetsLibrary alloc] init];
-    [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-    } failureBlock:^(NSError *error) {
-        [self showErrorAlertWithMessage:NSLocalizedString(@"ALAssetsAccessError", @"")];
-    }];
+    
+    ALAuthorizationStatus photoLibraryStatus = [ALAssetsLibrary authorizationStatus];
+    if (photoLibraryStatus != ALAuthorizationStatusAuthorized) {
+        if(photoLibraryStatus == ALAuthorizationStatusNotDetermined) {
+            self.assetsLibrary = [[ALAssetsLibrary alloc] init];
+            [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+                [self continueToHome];
+            } failureBlock:^(NSError *error) {
+//                if (error.code == ALAssetsLibraryAccessUserDeniedError || error.code == ALAssetsLibraryAccessGloballyDeniedError) {
+                    [self showErrorAlertWithMessage:NSLocalizedString(@"AssetForAutoSyncError", @"")];
+                    return;
+//                }
+//                [self showErrorAlertWithMessage:NSLocalizedString(@"ALAssetsAccessError", @"")];
+//                [self continueToHome];
+            }];
+        } else {
+            [self showErrorAlertWithMessage:NSLocalizedString(@"AssetForAutoSyncError", @"")];
+            return;
+        }
+    } else {
+        [self continueToHome];
+    }
     
     
     /*
@@ -219,6 +242,9 @@
      else { }
      */
     
+}
+
+- (void) continueToHome {
     [CacheUtil writeCachedSettingSyncContacts:EnableOptionOn];
     [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOn];
     

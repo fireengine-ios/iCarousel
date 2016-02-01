@@ -36,6 +36,7 @@
 @synthesize selectedFileList;
 @synthesize footerActionMenu;
 @synthesize folderModificationFlag;
+@synthesize uuidListToBeDeleted;
 @synthesize longSelectFileUuid;
 
 - (id)initForFolder:(MetaFile *) _folder {
@@ -400,6 +401,7 @@
 
 - (void) fileFolderCellShouldDeleteForFile:(MetaFile *)fileSelected {
     if([CacheUtil showConfirmDeletePageFlag]) {
+        uuidListToBeDeleted = @[fileSelected.uuid];
         [deleteDao requestDeleteFiles:@[fileSelected.uuid]];
         [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
     } else {
@@ -462,7 +464,9 @@
             [footerActionMenu removeFromSuperview];
         }
     }
-
+    if(uuidListToBeDeleted) {
+        [APPDELEGATE.session musicFileWasDeletedWithUuids:uuidListToBeDeleted];
+    }
     [self proceedSuccessForProgressView];
     [self triggerRefresh];
 
@@ -736,6 +740,7 @@
                 }
             }
         }
+        uuidListToBeDeleted = selectedFileList;
         [deleteDao requestDeleteFiles:selectedFileList];
         [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
     } else {
@@ -783,6 +788,7 @@
 
 - (void) moreMenuDidSelectDelete {
     if([CacheUtil showConfirmDeletePageFlag]) {
+        uuidListToBeDeleted = @[self.folder.uuid];
         [folderDeleteDao requestDeleteFiles:@[self.folder.uuid]];
         [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
     } else {
@@ -825,10 +831,13 @@
                 }
             }
         }
+        uuidListToBeDeleted = selectedFileList;
         [deleteDao requestDeleteFiles:selectedFileList];
     } else if(self.deleteType == DeleteTypeMoreMenu) {
+        uuidListToBeDeleted = @[self.folder.uuid];
         [folderDeleteDao requestDeleteFiles:@[self.folder.uuid]];
     } else if(self.deleteType == DeleteTypeSwipeMenu) {
+        uuidListToBeDeleted = @[fileSelectedRef.uuid];
         [deleteDao requestDeleteFiles:@[fileSelectedRef.uuid]];
     }
     [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];

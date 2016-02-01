@@ -38,6 +38,7 @@
 @property (nonatomic, strong) NSMutableDictionary *musicDict;
 @property (nonatomic, strong) NSArray *musicDictKeys;
 @property (nonatomic, strong) NSArray *musicListRef;
+@property (nonatomic, strong) NSArray *uuidsToBeDeleted;
 @property (nonatomic, strong) FooterActionsMenuView *footerActionMenu;
 
 @end

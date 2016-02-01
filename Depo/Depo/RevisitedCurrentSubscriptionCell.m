@@ -37,10 +37,11 @@
         CustomLabel *bottomLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, 43, infoView.frame.size.width, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withColor:[Util UIColorForHexColor:@"888888"] withText:bottomInfo withAlignment:NSTextAlignmentCenter];
         [infoView addSubview:bottomLabel];
 
-        SimpleButton *cancelButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, infoView.frame.origin.y + infoView.frame.size.height + 14, infoView.frame.size.width, 20) withTitle:NSLocalizedString(@"CancelSubscription", @"") withTitleColor:[Util UIColorForHexColor:@"3fb0e8"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:12] isUnderline:YES withUnderlineColor:[Util UIColorForHexColor:@"3fb0e8"]];
-        [cancelButton addTarget:self action:@selector(cancelClicked) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:cancelButton];
-        
+        if(![subscription.plan.role isEqualToString:@"demo"]){
+            SimpleButton *cancelButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, infoView.frame.origin.y + infoView.frame.size.height + 14, infoView.frame.size.width, 20) withTitle:NSLocalizedString(@"CancelSubscription", @"") withTitleColor:[Util UIColorForHexColor:@"3fb0e8"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:12] isUnderline:YES withUnderlineColor:[Util UIColorForHexColor:@"3fb0e8"]];
+            [cancelButton addTarget:self action:@selector(cancelClicked) forControlEvents:UIControlEventTouchUpInside];
+            [self addSubview:cancelButton];
+        }
     }
     return self;
 }
