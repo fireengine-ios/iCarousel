@@ -12,7 +12,7 @@
 #import "CustomLabel.h"
 #import "SimpleButton.h"
 
-@interface OTPController : MyViewController <UITextFieldDelegate> {
+@interface OTPController : MyViewController <UITextFieldDelegate, UIGestureRecognizerDelegate> {
     VerifyPhoneDao *verifyDao;
     SendVerificationSMSDao *smsDao;
 

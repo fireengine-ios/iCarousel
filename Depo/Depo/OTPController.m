@@ -71,8 +71,18 @@
         [self.view addSubview:resendButton];
         
         tickTimer = [NSTimer scheduledTimerWithTimeInterval:1 target: self selector: @selector(tickForSecond) userInfo: nil repeats: YES];
+
+        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(triggerResign)];
+        tapGestureRecognizer.numberOfTapsRequired = 1;
+        tapGestureRecognizer.enabled = YES;
+        tapGestureRecognizer.delegate = self;
+        [self.view addGestureRecognizer:tapGestureRecognizer];
     }
     return self;
+}
+
+- (void) triggerResign {
+    [self.view endEditing:YES];
 }
 
 - (void) resendCode {
@@ -151,6 +161,8 @@
                     SingleCharField *firstCharFieldCast = (SingleCharField *) firstCharField;
                     [firstCharFieldCast becomeFirstResponder];
                 }
+                
+                resendButton.hidden = YES;
 
             }
         }
@@ -278,5 +290,17 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (BOOL)shouldAutorotate {
+    return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationPortrait | UIInterfaceOrientationPortraitUpsideDown;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
+}
 
 @end

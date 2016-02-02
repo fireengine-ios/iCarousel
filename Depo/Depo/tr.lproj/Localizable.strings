@@ -586,6 +586,7 @@
 "PASSWORD_LENGTH_EXCEEDED"="Şifreniz çok uzun. Lütfen daha kısa bir şifreyle tekrar deneyin";
 "CONSECUTIVE_NUMBERS"="Şifrenizde lütfen ardışık sayılar kullanmayın";
 "WAITING_FOR_TIMEOUT_PERIOD"="Çok sayıda hatalı giriş yaptınız. Lütfen daha sonra tekrar deneyiniz.";
+"SEQUENTIAL_CHARACTERS"="Şifrenizde lütfen ardışık sayılar kullanmayın";
 
 "MsisdnEmailTitle"="GSM NUMARASI / E-MAİL ADRESİ";
 "MsisdnEmailPlaceholder"="GSM Numarası/E-Mail Adresi";
