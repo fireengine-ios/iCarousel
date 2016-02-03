@@ -99,6 +99,13 @@
     productsRequest = nil;
     
     self.products = response.products;
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSString *errorMessage = [NSString stringWithFormat:@"Invalid identifiers: %@", response.invalidProductIdentifiers];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Apple Products Bilgi" message:errorMessage delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    });
+
     NSMutableArray *productsAsOffer = [[NSMutableArray alloc] init];
     for (SKProduct *skProduct in products) {
         NSLog(@"Found product: %@ %@ %0.2f",
