@@ -10,7 +10,7 @@
 #import "LoginTextfield.h"
 #import "SignupDao.h"
 
-@interface SignupController : MyViewController <UITextFieldDelegate> {
+@interface SignupController : MyViewController <UITextFieldDelegate, UIGestureRecognizerDelegate> {
     NSString *msisdnValue;
     NSString *emailValue;
     NSString *passwordValue;

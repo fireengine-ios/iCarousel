@@ -13,7 +13,7 @@
 - (void) requestNotifyForgotPassWithEmail:(NSString *) email withCaptchaId:(NSString *) captchaId withCaptchaValue:(NSString *) captchaValue {
     NSURL *url = [NSURL URLWithString:FORGOT_PASS_URL];
     
-    NSString *postValue = [NSString stringWithFormat:@"{%@}", email];
+    NSString *postValue = [NSString stringWithFormat:@"%@", email];
     NSData *postData = [postValue dataUsingEncoding:NSUTF8StringEncoding];
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
