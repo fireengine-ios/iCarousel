@@ -53,8 +53,24 @@
         [okButton addTarget:self action:@selector(triggerSave) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:okButton];
 
+        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(triggerResign)];
+        tapGestureRecognizer.numberOfTapsRequired = 1;
+        tapGestureRecognizer.enabled = YES;
+        tapGestureRecognizer.delegate = self;
+        [self.view addGestureRecognizer:tapGestureRecognizer];
     }
     return self;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if ([touch.view isKindOfClass:[UIControl class]]) {
+        return NO;
+    }
+    return YES;
+}
+
+- (void) triggerResign {
+    [self.view endEditing:YES];
 }
 
 - (void) triggerSave {

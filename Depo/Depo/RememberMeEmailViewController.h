@@ -12,7 +12,7 @@
 #import "ForgotPassDao.h"
 #import "CustomButton.h"
 
-@interface RememberMeEmailViewController : MyViewController <UITextFieldDelegate> {
+@interface RememberMeEmailViewController : MyViewController <UITextFieldDelegate, UIGestureRecognizerDelegate> {
     RequestCaptchaDao *captchaDao;
     ForgotPassDao *forgotPassDao;
 

@@ -79,8 +79,25 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow) name:UIKeyboardWillShowNotification object:nil];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide) name:UIKeyboardWillHideNotification object:nil];
+
+        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(triggerResign)];
+        tapGestureRecognizer.numberOfTapsRequired = 1;
+        tapGestureRecognizer.enabled = YES;
+        tapGestureRecognizer.delegate = self;
+        [self.view addGestureRecognizer:tapGestureRecognizer];
     }
     return self;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if ([touch.view isKindOfClass:[UIControl class]]) {
+        return NO;
+    }
+    return YES;
+}
+
+- (void) triggerResign {
+    [self.view endEditing:YES];
 }
 
 - (void) loadCaptcha {

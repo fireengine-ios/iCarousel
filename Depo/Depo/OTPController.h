@@ -11,8 +11,9 @@
 #import "SendVerificationSMSDao.h"
 #import "CustomLabel.h"
 #import "SimpleButton.h"
+#import "SingleCharField.h"
 
-@interface OTPController : MyViewController <UITextFieldDelegate, UIGestureRecognizerDelegate> {
+@interface OTPController : MyViewController <UITextFieldDelegate, UIGestureRecognizerDelegate, SingleCharFieldBackDelegate> {
     VerifyPhoneDao *verifyDao;
     SendVerificationSMSDao *smsDao;
 

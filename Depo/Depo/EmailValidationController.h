@@ -8,6 +8,6 @@
 
 #import "MyViewController.h"
 
-@interface EmailValidationController : MyViewController
+@interface EmailValidationController : MyViewController <UIGestureRecognizerDelegate>
 
 @end

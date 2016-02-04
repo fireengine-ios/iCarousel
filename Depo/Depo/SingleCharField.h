@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol SingleCharFieldBackDelegate <NSObject>
+- (void) emptyBackClickedForField:(int) fieldTag;
+@end
+
 @interface SingleCharField : UITextField
+
+@property (nonatomic, weak) id<SingleCharFieldBackDelegate> backDelegate;
 
 @end

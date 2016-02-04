@@ -12,6 +12,8 @@
 
 @implementation SingleCharField
 
+@synthesize backDelegate;
+
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
@@ -36,6 +38,13 @@
 
 - (CGRect)editingRectForBounds:(CGRect)bounds {
     return [super textRectForBounds:CGRectMake(5, bounds.origin.y , bounds.size.width - 10 , bounds.size.height)];
+}
+
+- (void) deleteBackward {
+    if(self.text.length == 0) {
+        [backDelegate emptyBackClickedForField:self.tag];
+    }
+    [super deleteBackward];
 }
 
 @end

@@ -15,7 +15,7 @@
 #import "SimpleButton.h"
 #import "CustomButton.h"
 
-@interface LoginController : MyViewController <UITextFieldDelegate, MFMessageComposeViewControllerDelegate> {
+@interface LoginController : MyViewController <UITextFieldDelegate, MFMessageComposeViewControllerDelegate, UIGestureRecognizerDelegate> {
 
     RequestTokenDao *tokenDao;
     RequestCaptchaDao *captchaDao;

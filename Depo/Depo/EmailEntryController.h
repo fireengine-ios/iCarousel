@@ -10,7 +10,7 @@
 #import "UpdateEmailDao.h"
 #import "LoginTextfield.h"
 
-@interface EmailEntryController : MyViewController <UITextFieldDelegate> {
+@interface EmailEntryController : MyViewController <UITextFieldDelegate, UIGestureRecognizerDelegate> {
     UpdateEmailDao *emailDao;
 }
 

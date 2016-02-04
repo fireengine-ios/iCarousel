@@ -55,6 +55,7 @@
         for(int i=0; i<inputLength; i++) {
             SingleCharField *charField = [[SingleCharField alloc] initWithFrame:CGRectMake(20 + i*(40+marginBetween), subMsisdnLabel.frame.origin.y + subMsisdnLabel.frame.size.height + 20, 40, 40)];
             charField.delegate = self;
+            charField.backDelegate = self;
             charField.tag = 100 + i;
             charField.keyboardType = UIKeyboardTypeNumberPad;
             [self.view addSubview:charField];
@@ -176,6 +177,7 @@
 
 - (BOOL) textField:(UITextField *) textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     BOOL shouldProcess = NO;
+    BOOL shouldMoveToPreviousField = NO;
     BOOL shouldMoveToNextField = NO;
     
     int insertStringLength = (int)[string length];
@@ -185,6 +187,9 @@
         if([[textField text] length] == 0) {
             shouldProcess = YES;
         }
+    }
+    if(range.length == 1) {
+        shouldMoveToPreviousField = YES;
     }
     
     if(shouldProcess){
@@ -223,6 +228,13 @@
                     [verifyDao requestTriggerVerifyPhone:APPDELEGATE.session.signupReferenceToken withOTP:otpVal];
                     [self showLoading];
                 }
+            }
+        } else if(shouldMoveToPreviousField) {
+            int previousTag = (int)textField.tag - 1;
+            UIView *previousView = [self.view viewWithTag:previousTag];
+            if(previousView != nil && [previousView isKindOfClass:[SingleCharField class]]) {
+                SingleCharField *previousField = (SingleCharField *) previousView;
+                [previousField becomeFirstResponder];
             }
         }
     }
@@ -301,6 +313,15 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
+}
+
+- (void) emptyBackClickedForField:(int)fieldTag {
+    int previousTag = fieldTag - 1;
+    UIView *previousView = [self.view viewWithTag:previousTag];
+    if(previousView != nil && [previousView isKindOfClass:[SingleCharField class]]) {
+        SingleCharField *previousField = (SingleCharField *) previousView;
+        [previousField becomeFirstResponder];
+    }
 }
 
 @end
