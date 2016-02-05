@@ -100,10 +100,10 @@
 }
 
 - (void) signupClicked {
-    if ([msisdnValue length] > 0)
-        msisdnValue = [[msisdnValue substringToIndex:1] isEqualToString:@"0"] ? [msisdnValue substringFromIndex:1] : msisdnValue;
+//    if ([msisdnValue length] > 0)
+//        msisdnValue = [[msisdnValue substringToIndex:1] isEqualToString:@"0"] ? [msisdnValue substringFromIndex:1] : msisdnValue;
     
-    if([msisdnField.text length] != 10) {
+    if([msisdnField.text length] < 10) {
         [self showErrorAlertWithMessage:NSLocalizedString(@"MsisdnFormatErrorMessage", @"")];
         return;
     }
