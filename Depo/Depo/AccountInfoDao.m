@@ -30,9 +30,6 @@
         SBJSON *jsonParser = [SBJSON new];
         NSDictionary *mainDict = [jsonParser objectWithString:responseEnc];
         
-        NSDictionary *headerParams = [request responseHeaders];
-        NSString *accountWarning = [headerParams objectForKey:@"X-Account-Warning"];
-        
         User *user = [[User alloc] init];
         if(mainDict != nil && ![mainDict isKindOfClass:[NSNull class]]) {
             NSString *name = [mainDict objectForKey:@"name"];
@@ -56,19 +53,6 @@
             if(accountType && ![accountType isKindOfClass:[NSNull class]]) {
                 user.accountType = [accountType isEqualToString:@"TURKCELL"] ? AccountTypeTurkcell : AccountTypeOther;
             }
-            
-            if(accountWarning != nil && ![accountWarning isKindOfClass:[NSNull class]]) {
-                if([accountWarning isEqualToString:@"EMPTY_MSISDN"]) {
-                    user.emailEmpty = YES;
-                }
-                if([accountWarning isEqualToString:@"EMPTY_EMAIL"]) {
-                    user.msisdnEmpty = YES;
-                }
-                if([accountWarning isEqualToString:@"EMAIL_NOT_VERIFIED"]) {
-                    user.emailNotVerified = YES;
-                }
-            }
-            
         }
         [self shouldReturnSuccessWithObject:user];
     } else {

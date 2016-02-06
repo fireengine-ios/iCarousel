@@ -21,7 +21,7 @@
 
 - (id) init {
     if(self = [super init]) {
-        self.title = NSLocalizedString(@"SignUp", @"");
+        self.title = NSLocalizedString(@"EmailEntry", @"");
         self.view.backgroundColor = [Util UIColorForHexColor:@"FFFFFF"];
         
         self.navigationItem.leftBarButtonItem = nil;
@@ -47,6 +47,7 @@
         
         emailField = [[LoginTextfield alloc] initWithFrame:CGRectMake(20, emailLabel.frame.origin.y + emailLabel.frame.size.height + 5, self.view.frame.size.width - 40, 43) withPlaceholder:NSLocalizedString(@"EmailPlaceholder", @"")];
         emailField.delegate = self;
+        emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         [self.view addSubview:emailField];
         
         SimpleButton *okButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, emailField.frame.origin.y + emailField.frame.size.height + 10, self.view.frame.size.width - 40, 50) withTitle:NSLocalizedString(@"OK", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];

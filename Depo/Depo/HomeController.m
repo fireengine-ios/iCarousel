@@ -299,18 +299,18 @@
 
 - (void) accountSuccessCallback:(NSArray *) subscriptions {
     
-    if(APPDELEGATE.session.user.msisdnEmpty) {
+    if(APPDELEGATE.session.msisdnEmpty) {
         [APPDELEGATE triggerLogout];
         [self showErrorAlertWithMessage:NSLocalizedString(@"MsisdnEmpty", @"")];
         return;
     }
 
-    if(APPDELEGATE.session.user.emailEmpty && !APPDELEGATE.session.emailEmptyMessageShown) {
+    if(APPDELEGATE.session.emailEmpty && !APPDELEGATE.session.emailEmptyMessageShown) {
         APPDELEGATE.session.emailEmptyMessageShown = YES;
         CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Approve", @"") withCancelTitle:NSLocalizedString(@"TitleLater", @"") withApproveTitle:NSLocalizedString(@"TitleYes", @"") withMessage:NSLocalizedString(@"EmailEmpty", @"") withModalType:ModalTypeApprove];
         confirm.delegate = self;
         [APPDELEGATE showCustomConfirm:confirm];
-    } else if(APPDELEGATE.session.user.emailNotVerified && !APPDELEGATE.session.emailNotVerifiedMessageShown) {
+    } else if(APPDELEGATE.session.emailNotVerified && !APPDELEGATE.session.emailNotVerifiedMessageShown) {
         APPDELEGATE.session.emailNotVerifiedMessageShown = YES;
         [self showInfoAlertWithMessage:NSLocalizedString(@"EmailNotVerified", @"")];
     } else if([subscriptions count] > 0) {

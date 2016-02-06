@@ -31,8 +31,15 @@
         SBJSON *jsonParser = [SBJSON new];
         NSDictionary *mainDict = [jsonParser objectWithString:responseStr];
         if(mainDict != nil && ![mainDict isKindOfClass:[NSNull class]]) {
-            if([mainDict objectForKey:@"status"] != nil && ![[mainDict objectForKey:@"status"] isKindOfClass:[NSNull class]]) {
+            if([mainDict objectForKey:@"status"] != nil && [[mainDict objectForKey:@"status"] isKindOfClass:[NSString class]]) {
                 statusVal = [mainDict objectForKey:@"status"];
+            } else if([mainDict objectForKey:@"status"] != nil && [[mainDict objectForKey:@"status"] isKindOfClass:[NSNumber class]]) {
+                //TODO normalde status "OK" gibi string gelmeli. Fakat sunucu tarafindaki bir sorundan dolayını bu kontrol eklendi
+                NSNumber *status = [mainDict objectForKey:@"status"];
+                if([status intValue] != 200 && [status intValue] != 0) {
+                    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                    return;
+                }
             }
         }
         [self shouldReturnSuccessWithObject:statusVal];

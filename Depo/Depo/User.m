@@ -17,9 +17,6 @@
 @synthesize surname;
 @synthesize cropAndSharePresentFlag;
 @synthesize accountType;
-@synthesize emailEmpty;
-@synthesize msisdnEmpty;
-@synthesize emailNotVerified;
 
 - (id) init {
     if(self = [super init]) {

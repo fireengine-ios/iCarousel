@@ -594,3 +594,5 @@
 
 "LocForAutoSyncError"="Otomatik yüklemenin başarıyla çalışabilmesi için konum servisinin açık olması gerekmektedir";
 "AssetForAutoSyncError"="Otomatik yüklemenin çalışabilmesi için fotoğraf galerisine erişim izni verilmelidir";
+
+"EmailEntry"="E-Mail Giriş";

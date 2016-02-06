@@ -121,6 +121,7 @@
         NSString *rememberMeToken = [headerParams objectForKey:@"X-Remember-Me-Token"];
         NSNumber *newUserFlag = [headerParams objectForKey:@"X-New-User"];
         NSNumber *migrationUserFlag = [headerParams objectForKey:@"X-Migration-User"];
+        NSString *accountWarning = [headerParams objectForKey:@"X-Account-Warning"];
         
 //        NSLog(@"Auth Token Response Headers: %@", headerParams);
         NSLog(@"TOKEN: %@", authToken);
@@ -134,6 +135,17 @@
             APPDELEGATE.session.migrationUserFlag = [migrationUserFlag boolValue];
         } else {
             APPDELEGATE.session.migrationUserFlag = NO;
+        }
+        if(accountWarning != nil && ![accountWarning isKindOfClass:[NSNull class]]) {
+            if([accountWarning isEqualToString:@"EMPTY_MSISDN"]) {
+                APPDELEGATE.session.msisdnEmpty = YES;
+            }
+            if([accountWarning isEqualToString:@"EMPTY_EMAIL"]) {
+                APPDELEGATE.session.emailEmpty = YES;
+            }
+            if([accountWarning isEqualToString:@"EMAIL_NOT_VERIFIED"]) {
+                APPDELEGATE.session.emailNotVerified = YES;
+            }
         }
 
         if(rememberMeToken != nil && ![rememberMeToken isKindOfClass:[NSNull class]]) {

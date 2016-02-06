@@ -41,6 +41,9 @@
 @synthesize signupReferencePassword;
 @synthesize emailEmptyMessageShown;
 @synthesize emailNotVerifiedMessageShown;
+@synthesize emailEmpty;
+@synthesize msisdnEmpty;
+@synthesize emailNotVerified;
 
 - (id) init {
     if(self = [super init]) {
