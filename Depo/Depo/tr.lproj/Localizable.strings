@@ -541,6 +541,7 @@
 
 "EMAIL_FIELD_IS_INVALID"="E-Posta geçersiz";
 "EMAIL_IS_ALREADY_EXIST"="E-Posta sistemde bulunmaktadır";
+"VERIFY_EXISTING_EMAIL"="E-Posta doğrulama beklemektedir. E-Posta adresinizi doğruladıktan sonra giriş yapabilirsiniz.";
 "PHONE_NUMBER_IS_INVALID"="Telefon numarası geçersiz";
 "PHONE_NUMBER_IS_ALREADY_EXIST"="Telefon numarası sistemde bulunmaktadır";
 "SignUpButtonTitle"="KAYIT OL";
@@ -587,6 +588,7 @@
 "CONSECUTIVE_NUMBERS"="Lütfen en az altı karakterden oluşan, aynı ya da ardışık sayılar içermeyen bir şifre belirleyin.";
 "WAITING_FOR_TIMEOUT_PERIOD"="Çok sayıda hatalı giriş yaptınız. Lütfen daha sonra tekrar deneyiniz.";
 "SEQUENTIAL_CHARACTERS"="Lütfen en az altı karakterden oluşan, aynı ya da ardışık sayılar içermeyen bir şifre belirleyin.";
+"SAME_CHARACTERS"="Lütfen en az altı karakterden oluşan, aynı ya da ardışık sayılar içermeyen bir şifre belirleyin.";
 
 "MsisdnEmailTitle"="GSM NUMARASI / E-MAİL ADRESİ";
 "MsisdnEmailPlaceholder"="GSM Numarası/E-Mail Adresi";
