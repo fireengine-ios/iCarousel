@@ -60,6 +60,7 @@
 - (void) drawFailedPurchaseView:(NSString *) error{
     [self.beforeDialog setHidden:YES];
     failDialog = [[FailurePurchasingView alloc] initWithFrame:CGRectMake(20, 130, self.frame.size.width-40, 290) withOffer:toBuyOffer withError:error];
+    failDialog.failedDelegate = self;
     [self addSubview:failDialog];
     
 }
@@ -88,6 +89,12 @@
 }
 
 - (void) failedActivationTryAgainDelegate {
+    /*
+    if(failDialog) {
+        [failDialog removeFromSuperview];
+    }
+     */
+    [delegate activatePurchasing:toBuyOffer];
 }
 
 - (void) failedPurchaseTryAgainDelegate {

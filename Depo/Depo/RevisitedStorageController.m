@@ -151,15 +151,14 @@
 
 - (void) iapFinishedForProduct:(NSString *) productIdentifier withReceipt:(NSData *) receipt {
     [iapValidateDao requestIAPValidationForProductId:productIdentifier withReceiptId:receipt];
-    if(purchaseView) {
-        [purchaseView removeFromSuperview];
-    }
     [self showLoading];
 }
 
 - (void) iapRestoredForProduct:(NSString *) productIdentifier {
     [super hideLoading];
     //TODO restore için validation çağrılacak mı
+    [self hideLoading];
+    [self refreshPageData];
 }
 
 #pragma mark UITableView methods
@@ -264,6 +263,7 @@
             [self refreshTable];
         } else {
             [self showErrorAlertWithMessage:NSLocalizedString(@"IAPProductReadError", @"")];
+            [self refreshTable];
         }
     }];
 }
@@ -271,6 +271,7 @@
 - (void) appleProductsFailCallback:(NSString *) errorMessage {
     [self hideLoading];
     [self showErrorAlertWithMessage:NSLocalizedString(@"IAPProductReadError", @"")];
+    [self refreshTable];
 }
 
 - (void) loadCurrentSubscriptionCallback:(NSArray *) subscriptions {
@@ -324,8 +325,13 @@
 }
 
 - (void) iapValidateSuccessCallback:(NSDictionary *) parameters {
-    [AppUtil cleanWaitingIAPValidationForFutureTryWithProductId:[parameters objectForKey:@"productId"]];
+    if(parameters != nil) {
+        [AppUtil cleanWaitingIAPValidationForFutureTryWithProductId:[parameters objectForKey:@"productId"]];
+    }
     [self hideLoading];
+    if(purchaseView) {
+        [purchaseView drawSuccessPurchaseView];
+    }
     [self refreshPageData];
 }
 

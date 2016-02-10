@@ -22,23 +22,36 @@
         self.layer.cornerRadius = 6.0;
         self.toActivateOffer = offer;
         
-        UILabel *offerName = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, self.frame.size.width-40, 30)];
-        offerName.text = [self getPackageDisplayName:offer.role];
-        offerName.textColor = [Util UIColorForHexColor:@"199cd4"];
-        offerName.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:30];
-        offerName.textAlignment = NSTextAlignmentCenter;
-        [self addSubview:offerName];
-        
-        UILabel *offerQuota = [[UILabel alloc] initWithFrame:CGRectMake(20, 50, self.frame.size.width-40, 30)];
-        offerQuota.text = [NSString stringWithFormat:@"%@ GB", [self quotaCalculator:offer.quota]];
-        offerQuota.textColor = [Util UIColorForHexColor:@"199cd4"];
-        offerQuota.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:30];
-        offerQuota.textAlignment = NSTextAlignmentCenter;
-        [self addSubview:offerQuota];
+        if(offer.offerType == OfferTypeTurkcell) {
+            UILabel *offerName = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, self.frame.size.width-40, 30)];
+            offerName.text = [self getPackageDisplayName:offer.role];
+            offerName.textColor = [Util UIColorForHexColor:@"199cd4"];
+            offerName.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:30];
+            offerName.textAlignment = NSTextAlignmentCenter;
+            [self addSubview:offerName];
+            
+            UILabel *offerQuota = [[UILabel alloc] initWithFrame:CGRectMake(20, 50, self.frame.size.width-40, 30)];
+            offerQuota.text = [NSString stringWithFormat:@"%@ GB", [self quotaCalculator:offer.quota]];
+            offerQuota.textColor = [Util UIColorForHexColor:@"199cd4"];
+            offerQuota.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:30];
+            offerQuota.textAlignment = NSTextAlignmentCenter;
+            [self addSubview:offerQuota];
+        } else {
+            UILabel *offerName = [[UILabel alloc] initWithFrame:CGRectMake(20, 30, self.frame.size.width-40, 30)];
+            offerName.text = offer.name;
+            offerName.textColor = [Util UIColorForHexColor:@"199cd4"];
+            offerName.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:30];
+            offerName.textAlignment = NSTextAlignmentCenter;
+            [self addSubview:offerName];
+        }
         
         UILabel *offerPrice = [[UILabel alloc] initWithFrame:CGRectMake(20, 90, self.frame.size.width-40, 20)];
         if(offer.rawPrice > 0.0f) {
-            offerPrice.text = [NSString stringWithFormat:@"%@ %@ TL", [offer.period isEqualToString:@"MONTH"] ? NSLocalizedString(@"MONTHLY", "") : NSLocalizedString(@"YEARLY", ""), offer.price];
+            if(offer.offerType == OfferTypeApple) {
+                offerPrice.text = [NSString stringWithFormat:@"%@ %@", [offer.period isEqualToString:@"MONTH"] ? NSLocalizedString(@"MONTHLY", "") : NSLocalizedString(@"YEARLY", ""), offer.price];
+            } else {
+                offerPrice.text = [NSString stringWithFormat:@"%@ %@ TL", [offer.period isEqualToString:@"MONTH"] ? NSLocalizedString(@"MONTHLY", "") : NSLocalizedString(@"YEARLY", ""), offer.price];
+            }
         } else {
             offerPrice.text = NSLocalizedString(@"SubscriptionFree", @"");
         }

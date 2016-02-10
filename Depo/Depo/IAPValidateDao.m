@@ -8,17 +8,20 @@
 
 #import "IAPValidateDao.h"
 
+@interface IAPValidateDao () {
+    NSDictionary *info;
+}
+@end
+
 @implementation IAPValidateDao
 
 - (void) requestIAPValidationForProductId:(NSString *) productId withReceiptId:(NSData *) receiptId {
     NSURL *url = [NSURL URLWithString:IAP_VALIDATE_URL];
 
-    NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:
-                          receiptId, @"receiptId",
+    info = [NSDictionary dictionaryWithObjectsAndKeys:
+                          [receiptId base64EncodedStringWithOptions:0], @"receiptId",
                           productId, @"productId",
                           nil];
-    
-    //TODO receiptId'yi base 64 encode edip ekle
     
     SBJSON *json = [SBJSON new];
     NSString *jsonStr = [json stringWithObject:info];
@@ -38,7 +41,7 @@
     if (!error) {
         NSString *responseStr = [request responseString];
         NSLog(@"Validate IAP Response: %@", responseStr);
-        [self shouldReturnSuccess];
+        [self shouldReturnSuccessWithObject:info];
     } else {
         [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
     }

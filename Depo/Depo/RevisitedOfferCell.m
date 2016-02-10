@@ -24,6 +24,9 @@
         self.offer = _offer;
         
         NSString *buttonTitle = [NSString stringWithFormat:@"%@ (%@) %@ TL/%@", offer.role ? [AppUtil getPackageDisplayName:offer.role] : offer.name, [Util transformedHugeSizeValueDecimalIfNecessary:offer.quota], offer.price, [offer.period isEqualToString:@"MONTH"] ? NSLocalizedString(@"MonthlyShort", "") : NSLocalizedString(@"YearlyShort", "")];
+        if(offer.offerType == OfferTypeApple) {
+            buttonTitle = [NSString stringWithFormat:@"%@ %@ /%@", offer.name, offer.price, [offer.period isEqualToString:@"MONTH"] ? NSLocalizedString(@"MonthlyShort", "") : NSLocalizedString(@"YearlyShort", "")];
+        }
 
         SimpleButton *buyButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, 10, self.frame.size.width - 40, 50) withTitle:buttonTitle withTitleColor:[Util UIColorForHexColor:@"555555"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:20] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:4 adjustFont:YES];
         [buyButton addTarget:self action:@selector(buyClicked) forControlEvents:UIControlEventTouchUpInside];

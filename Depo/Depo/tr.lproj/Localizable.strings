@@ -540,10 +540,10 @@
 "PassRepeatFormatErrorMessage"="Şifre tekrar alanını doldurunuz";
 
 "EMAIL_FIELD_IS_INVALID"="E-Posta geçersiz";
-"EMAIL_IS_ALREADY_EXIST"="E-Posta sistemde bulunmaktadır";
+"EMAIL_IS_ALREADY_EXIST"="Girmiş olduğunuz e-posta adresi kullanımda. Lütfen farklı bir e-posta adresi ile tekrar deneyiniz.";
 "VERIFY_EXISTING_EMAIL"="E-Posta doğrulama beklemektedir. E-Posta adresinizi doğruladıktan sonra giriş yapabilirsiniz.";
 "PHONE_NUMBER_IS_INVALID"="Telefon numarası geçersiz";
-"PHONE_NUMBER_IS_ALREADY_EXIST"="Telefon numarası sistemde bulunmaktadır";
+"PHONE_NUMBER_IS_ALREADY_EXIST"="Üyeliğiniz bulunmaktadır. Telefon Numarası ve şifrenizle giriş yapabilirsiniz.";
 "SignUpButtonTitle"="KAYIT OL";
 "ForgotPassButton"="ŞİFREMİ UNUTTUM?";
 
@@ -552,7 +552,7 @@
 "ResendButton"="Tekrardan Gönder";
 
 "EmailTopInfo"="E-Mailini Doğrula";
-"EmailSubInfo"="%@ adresine gönderilen doğrulama bağlantınıza tıklayınız.";
+"EmailSubInfo"="%@ adresine gönderilen bağlantıya tıklayınız.";
 "AlmostThere"="Bitmek Üzere";
 "EmailFieldRegistrationInfo"="Lütfen e-mail adresinizi giriniz.";
 "IAPProductReadError"="Satın alınabilir ürünleri okurken bir hata oluştu";
@@ -570,7 +570,7 @@
 "CaptchaRequiredErrorMessage"="Güvenlik kodunu girmeniz gerekmektedir";
 "SignupSuccess"="Kayıt işleminiz başarıyla tamamlanmıştır.";
 "OTPExpired"="Doğrulama kodunuz zamanaşımına uğramıştır";
-"OTPInvalid"="Geçersiz bir doğrulama kodu girdiniz";
+"OTPInvalid"="Geçersiz bir doğrulama kodu girdiniz. Lütfen tekrar deneyiniz.";
 "RefCodeInvalid"="Referans token bilgisi geçersiz";
 "InvalidSignupSession"="Kayıt açma oturumunuz zamanaşımına uğradı";
 "OTPWaitingForTimeoutPeriod"="Bir önceki doğrulama kodu hala aktif";
@@ -581,7 +581,7 @@
 "EmailNotVerified"="Size daha iyi hizmet verebilmemiz için lütfen e-posta adresinize gönderilen doğrulama bağlantısına giriş yapınız";
 "EmailNotVerifiedError"="E-Posta adresinizi henüz doğrulamadınız. Lütfen e-posta adresinize gönderilen doğrulama bağlantısına giriş yapınız";
 "TitleLater"="Daha Sonra";
-"EmailAlreadyExist"="Bu e-posta adresi sistemde mevcut. Lütfen başka bir e-posta giriniz";
+"EmailAlreadyExist"="Girmiş olduğunuz e-posta adresi kullanımda. Lütfen farklı bir e-posta adresi ile tekrar deneyiniz.";
 "EmailInvalid"="Geçersiz bir e-posta adresi girdiniz";
 "PASSWORD_LENGTH_IS_BELOW_LIMIT"="Lütfen en az altı karakterden oluşan bir şifre belirleyin.";
 "PASSWORD_LENGTH_EXCEEDED"="Lütfen en fazla 16 karakterden oluşan bir şifre belirleyin.";

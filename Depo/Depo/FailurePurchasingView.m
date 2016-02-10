@@ -19,19 +19,28 @@
         self.backgroundColor = [UIColor whiteColor];
         self.layer.cornerRadius = 6.0;
         
-        UILabel *offerName = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, self.frame.size.width-40, 30)];
-        offerName.text = [self getPackageDisplayName:offer.role];
-        offerName.textColor = [Util UIColorForHexColor:@"199cd4"];
-        offerName.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:30];
-        offerName.textAlignment = NSTextAlignmentCenter;
-        [self addSubview:offerName];
-        
-        UILabel *offerQuota = [[UILabel alloc] initWithFrame:CGRectMake(20, 35, self.frame.size.width-40, 25)];
-        offerQuota.text = [NSString stringWithFormat:@"%@ GB",[self quotaCalculator:offer.quota]];
-        offerQuota.textColor = [Util UIColorForHexColor:@"199cd4"];
-        offerQuota.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:20];
-        offerQuota.textAlignment = NSTextAlignmentCenter;
-        [self addSubview:offerQuota];
+        if(offer.offerType == OfferTypeTurkcell) {
+            UILabel *offerName = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, self.frame.size.width-40, 30)];
+            offerName.text = [self getPackageDisplayName:offer.role];
+            offerName.textColor = [Util UIColorForHexColor:@"199cd4"];
+            offerName.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:30];
+            offerName.textAlignment = NSTextAlignmentCenter;
+            [self addSubview:offerName];
+            
+            UILabel *offerQuota = [[UILabel alloc] initWithFrame:CGRectMake(20, 35, self.frame.size.width-40, 25)];
+            offerQuota.text = [NSString stringWithFormat:@"%@ GB",[self quotaCalculator:offer.quota]];
+            offerQuota.textColor = [Util UIColorForHexColor:@"199cd4"];
+            offerQuota.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:20];
+            offerQuota.textAlignment = NSTextAlignmentCenter;
+            [self addSubview:offerQuota];
+        } else {
+            UILabel *offerName = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, self.frame.size.width-40, 30)];
+            offerName.text = offer.name;
+            offerName.textColor = [Util UIColorForHexColor:@"199cd4"];
+            offerName.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:30];
+            offerName.textAlignment = NSTextAlignmentCenter;
+            [self addSubview:offerName];
+        }
         
         UILabel *purchasingFailInfo = [[UILabel alloc] initWithFrame:CGRectMake(80, 60, 120,40)];
         purchasingFailInfo.numberOfLines = 0;
@@ -82,21 +91,30 @@
         self.backgroundColor = [UIColor whiteColor];
         self.layer.cornerRadius = 6.0;
         
-        UILabel *offerName = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, self.frame.size.width-40, 30)];
-        offerName.text = [self getPackageDisplayName:offer.role];
-        offerName.textColor = [Util UIColorForHexColor:@"199cd4"];
-        offerName.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:30];
-        offerName.textAlignment = NSTextAlignmentCenter;
-        [self addSubview:offerName];
+        if(offer.offerType == OfferTypeTurkcell) {
+            UILabel *offerName = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, self.frame.size.width-40, 30)];
+            offerName.text = [self getPackageDisplayName:offer.role];
+            offerName.textColor = [Util UIColorForHexColor:@"199cd4"];
+            offerName.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:30];
+            offerName.textAlignment = NSTextAlignmentCenter;
+            [self addSubview:offerName];
+            
+            UILabel *offerQuota = [[UILabel alloc] initWithFrame:CGRectMake(20, 50, self.frame.size.width-40, 25)];
+            offerQuota.text = [NSString stringWithFormat:@"%@ GB",[self quotaCalculator:offer.quota]];
+            offerQuota.textColor = [Util UIColorForHexColor:@"199cd4"];
+            offerQuota.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:20];
+            offerQuota.textAlignment = NSTextAlignmentCenter;
+            [self addSubview:offerQuota];
+        } else {
+            UILabel *offerName = [[UILabel alloc] initWithFrame:CGRectMake(20, 30, self.frame.size.width-40, 30)];
+            offerName.text = offer.name;
+            offerName.textColor = [Util UIColorForHexColor:@"199cd4"];
+            offerName.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:30];
+            offerName.textAlignment = NSTextAlignmentCenter;
+            [self addSubview:offerName];
+        }
         
-        UILabel *offerQuota = [[UILabel alloc] initWithFrame:CGRectMake(20, 50, self.frame.size.width-40, 25)];
-        offerQuota.text = [NSString stringWithFormat:@"%@ GB",[self quotaCalculator:offer.quota]];
-        offerQuota.textColor = [Util UIColorForHexColor:@"199cd4"];
-        offerQuota.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:20];
-        offerQuota.textAlignment = NSTextAlignmentCenter;
-        [self addSubview:offerQuota];
-        
-        UILabel *purchasingFailInfo = [[UILabel alloc] initWithFrame:CGRectMake(70, 75, 120,40)];
+        UILabel *purchasingFailInfo = [[UILabel alloc] initWithFrame:CGRectMake(40, 75, self.frame.size.width - 80, 40)];
         purchasingFailInfo.numberOfLines = 0;
         purchasingFailInfo.font = [UIFont fontWithName:@"TurkcellSaturaBol" size:15];
         purchasingFailInfo.backgroundColor = [UIColor clearColor];

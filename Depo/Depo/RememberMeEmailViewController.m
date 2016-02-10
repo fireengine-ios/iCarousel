@@ -74,8 +74,6 @@
         [okButton addTarget:self action:@selector(forgotPassClicked) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:okButton];
 
-        [self performSelector:@selector(loadCaptcha) withObject:nil afterDelay:1.0f];
-
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow) name:UIKeyboardWillShowNotification object:nil];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide) name:UIKeyboardWillHideNotification object:nil];
@@ -85,6 +83,10 @@
         tapGestureRecognizer.enabled = YES;
         tapGestureRecognizer.delegate = self;
         [self.view addGestureRecognizer:tapGestureRecognizer];
+
+        self.navigationItem.leftBarButtonItem.enabled = NO;
+        
+        [self performSelector:@selector(loadCaptcha) withObject:nil afterDelay:0.0f];
     }
     return self;
 }
@@ -132,11 +134,15 @@
 }
 
 - (void) captchaSuccessCallback:(UIImage *) captchaImg {
+    self.navigationItem.leftBarButtonItem.enabled = YES;
+    
     captchaView.image = captchaImg;
     refreshButton.hidden = NO;
 }
 
 - (void) captchaFailCallback:(NSString *) errorMessage {
+    self.navigationItem.leftBarButtonItem.enabled = YES;
+
     [self showErrorAlertWithMessage:errorMessage];
 }
 

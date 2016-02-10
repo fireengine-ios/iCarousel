@@ -57,6 +57,9 @@
     
     productIdentifiers = [NSSet setWithArray:productNames];
 
+    //TODO sil
+//    productIdentifiers = [NSSet setWithObjects:@"mini_package", nil];
+    
     completionHandler = [handler copy];
     
     productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:productIdentifiers];
@@ -100,6 +103,7 @@
     
     self.products = response.products;
 
+    //TODO silinecek
     dispatch_async(dispatch_get_main_queue(), ^{
         NSString *errorMessage = [NSString stringWithFormat:@"Invalid identifiers: %@", response.invalidProductIdentifiers];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Apple Products Bilgi" message:errorMessage delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -132,22 +136,6 @@
         [productsAsOffer addObject:offer];
     }
 
-    /*
-    //TODO sil
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
-    [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [numberFormatter setLocale:[NSLocale currentLocale]];
-    Offer *offer = [[Offer alloc] init];
-    offer.storeProductIdentifier = @"mini_1_aylik";
-    offer.period = @"MONTH";
-    offer.name = @"Minicik Paket 1 Aylik";
-    offer.rawPrice = 9.90;
-    offer.price = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:offer.rawPrice]];
-    offer.offerType = OfferTypeApple;
-    [productsAsOffer addObject:offer];
-    */
-    
     completionHandler(YES, productsAsOffer);
     completionHandler = nil;
 }
@@ -155,7 +143,14 @@
 - (void)request:(SKRequest *)request didFailWithError:(NSError *)error {
     NSLog(@"Failed to load list of products.");
     productsRequest = nil;
-    
+
+    //TODO silinecek
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSString *errorMessage = [NSString stringWithFormat:@"Product Read Error: %@", [error localizedDescription]];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Apple Products Hata" message:errorMessage delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    });
+
     completionHandler(NO, nil);
     completionHandler = nil;
 }
