@@ -101,13 +101,6 @@
     
     self.products = response.products;
 
-    //TODO silinecek
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSString *errorMessage = [NSString stringWithFormat:@"Invalid identifiers: %@", response.invalidProductIdentifiers];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Apple Products Bilgi" message:errorMessage delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
-    });
-
     NSMutableArray *productsAsOffer = [[NSMutableArray alloc] init];
     for (SKProduct *skProduct in products) {
         NSLog(@"Found product: %@ %@ %0.2f",
@@ -127,6 +120,7 @@
         offer.rawPrice = skProduct.price.floatValue;
         offer.price = [numberFormatter stringFromNumber:skProduct.price];
         offer.offerType = OfferTypeApple;
+        offer.description = skProduct.localizedDescription;
         
         [productsAsOffer addObject:offer];
     }
@@ -159,13 +153,6 @@
 - (void)request:(SKRequest *)request didFailWithError:(NSError *)error {
     NSLog(@"Failed to load list of products.");
     productsRequest = nil;
-
-    //TODO silinecek
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSString *errorMessage = [NSString stringWithFormat:@"Product Read Error: %@", [error localizedDescription]];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Apple Products Hata" message:errorMessage delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
-    });
 
     completionHandler(NO, nil);
     completionHandler = nil;

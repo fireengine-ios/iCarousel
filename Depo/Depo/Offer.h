@@ -28,5 +28,6 @@
 @property (nonatomic) float quota;
 @property (nonatomic) OfferType offerType;
 @property (nonatomic, strong) NSString *storeProductIdentifier;
+@property (nonatomic, strong) NSString *description;
 
 @end

@@ -36,31 +36,39 @@
             offerQuota.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:30];
             offerQuota.textAlignment = NSTextAlignmentCenter;
             [self addSubview:offerQuota];
+
+            UILabel *offerPrice = [[UILabel alloc] initWithFrame:CGRectMake(20, 90, self.frame.size.width-40, 20)];
+            if(offer.rawPrice > 0.0f) {
+                if(offer.offerType == OfferTypeApple) {
+                    NSString *strKey = [NSString stringWithFormat:@"PERIOD_%@", offer.period];
+                    NSString *periodInfo = NSLocalizedString(strKey, "");
+                    offerPrice.text = [NSString stringWithFormat:@"%@ %@", periodInfo, offer.price];
+                } else {
+                    offerPrice.text = [NSString stringWithFormat:@"%@ %@ TL", [offer.period isEqualToString:@"MONTH"] ? NSLocalizedString(@"MONTHLY", "") : NSLocalizedString(@"YEARLY", ""), offer.price];
+                }
+            } else {
+                offerPrice.text = NSLocalizedString(@"SubscriptionFree", @"");
+            }
+            offerPrice.textColor = [Util UIColorForHexColor:@"363e4e"];
+            offerPrice.textAlignment = NSTextAlignmentCenter;
+            offerPrice.font = [UIFont fontWithName:@"TurkcellSaturaReg" size:20];
+            [self addSubview:offerPrice];
         } else {
-            UILabel *offerName = [[UILabel alloc] initWithFrame:CGRectMake(20, 30, self.frame.size.width-40, 30)];
+            UILabel *offerName = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, self.frame.size.width-40, 30)];
             offerName.text = offer.name;
             offerName.textColor = [Util UIColorForHexColor:@"199cd4"];
             offerName.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:30];
             offerName.textAlignment = NSTextAlignmentCenter;
             [self addSubview:offerName];
+
+            UILabel *offerDesc = [[UILabel alloc] initWithFrame:CGRectMake(25, 65, self.frame.size.width-50, 65)];
+            offerDesc.text = offer.description;
+            offerDesc.textColor = [Util UIColorForHexColor:@"363e4e"];
+            offerDesc.textAlignment = NSTextAlignmentCenter;
+            offerDesc.font = [UIFont fontWithName:@"TurkcellSaturaReg" size:17];
+            offerDesc.numberOfLines = 3;
+            [self addSubview:offerDesc];
         }
-        
-        UILabel *offerPrice = [[UILabel alloc] initWithFrame:CGRectMake(20, 90, self.frame.size.width-40, 20)];
-        if(offer.rawPrice > 0.0f) {
-            if(offer.offerType == OfferTypeApple) {
-                NSString *strKey = [NSString stringWithFormat:@"PERIOD_%@", offer.period];
-                NSString *periodInfo = NSLocalizedString(strKey, "");
-                offerPrice.text = [NSString stringWithFormat:@"%@ %@", periodInfo, offer.price];
-            } else {
-                offerPrice.text = [NSString stringWithFormat:@"%@ %@ TL", [offer.period isEqualToString:@"MONTH"] ? NSLocalizedString(@"MONTHLY", "") : NSLocalizedString(@"YEARLY", ""), offer.price];
-            }
-        } else {
-            offerPrice.text = NSLocalizedString(@"SubscriptionFree", @"");
-        }
-        offerPrice.textColor = [Util UIColorForHexColor:@"363e4e"];
-        offerPrice.textAlignment = NSTextAlignmentCenter;
-        offerPrice.font = [UIFont fontWithName:@"TurkcellSaturaReg" size:20];
-        [self addSubview:offerPrice];
         
         SimpleButton *buyButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, 140, self.frame.size.width-40, 50) withTitle:NSLocalizedString(@"PurchasePackage", "") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
         [buyButton addTarget:self action:@selector(buyClicked) forControlEvents:UIControlEventTouchUpInside];

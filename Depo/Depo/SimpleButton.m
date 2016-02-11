@@ -74,6 +74,25 @@
     return self;
 }
 
+- (id) initWithFrame:(CGRect)frame withTitle:(NSString *)titleVal withAlignment:(NSTextAlignment) alignment isUnderlined:(BOOL) underlineFlag {
+    if(self = [super initWithFrame:frame]) {
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, (self.frame.size.height - 15)/2, self.frame.size.width, 15)];
+        titleLabel.text = titleVal;
+        titleLabel.backgroundColor = [UIColor clearColor];
+        titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:11];
+        titleLabel.textAlignment = alignment;
+        titleLabel.textColor = [Util UIColorForHexColor:@"787878"];
+        [self addSubview:titleLabel];
+
+        if(underlineFlag) {
+            NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:titleVal];
+            [attString addAttribute:(NSString*) kCTUnderlineStyleAttributeName value:[NSNumber numberWithInt:kCTUnderlineStyleSingle] range:(NSRange){0,[attString length]}];
+            titleLabel.attributedText = attString;
+        }
+    }
+    return self;
+}
+
 - (id)initWithFrame:(CGRect)frame withTitle:(NSString *) titleVal withTitleColor:(UIColor *) titleColor withTitleFont:(UIFont *) titleFont isUnderline:(BOOL) underlineFlag withUnderlineColor:(UIColor *) underlineColor {
     self = [super initWithFrame:frame];
     if (self) {

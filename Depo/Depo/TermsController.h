@@ -18,4 +18,6 @@
 @property (nonatomic, strong) ProvisionDao *provisionDao;
 @property (nonatomic, strong) SimpleButton *acceptButton;
 
+- (id) initWithCheckEnabled:(BOOL) checkEnabled;
+
 @end

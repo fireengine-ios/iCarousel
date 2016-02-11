@@ -22,8 +22,14 @@
 @synthesize acceptButton;
 
 - (id) init {
+    return [self initWithCheckEnabled:YES];
+}
+
+- (id) initWithCheckEnabled:(BOOL) checkEnabled {
     if(self = [super init]) {
         self.view.backgroundColor = [UIColor whiteColor];
+        
+        self.title = NSLocalizedString(@"TermsTitle", @"");
         
         provisionDao = [[ProvisionDao alloc] init];
         provisionDao.delegate = self;
@@ -35,18 +41,20 @@
         topImgView.image = topImg;
         [self.view addSubview:topImgView];
         
-        webView = [[UIWebView alloc] initWithFrame:CGRectMake(10, topImgView.frame.size.height + 10, self.view.frame.size.width - 20, self.view.frame.size.height - topImgView.frame.size.height - 110)];
+        webView = [[UIWebView alloc] initWithFrame:CGRectMake(10, topImgView.frame.size.height + 10, self.view.frame.size.width - 20, self.view.frame.size.height - topImgView.frame.size.height - (checkEnabled ? 110 : 50))];
         webView.delegate = self;
         webView.backgroundColor = [UIColor whiteColor];
         [self.view addSubview:webView];
 
-        checkButton = [[CheckButton alloc] initWithFrame:CGRectMake(15, webView.frame.origin.y + webView.frame.size.height + 10, self.view.frame.size.width - 30, 25) withTitle:NSLocalizedString(@"AcceptTerms", @"") isInitiallyChecked:NO];
-        checkButton.checkDelegate = self;
-        [self.view addSubview:checkButton];
+        if(checkEnabled) {
+            checkButton = [[CheckButton alloc] initWithFrame:CGRectMake(15, webView.frame.origin.y + webView.frame.size.height + 10, self.view.frame.size.width - 30, 25) withTitle:NSLocalizedString(@"AcceptTerms", @"") isInitiallyChecked:NO];
+            checkButton.checkDelegate = self;
+            [self.view addSubview:checkButton];
 
-        acceptButton = [[SimpleButton alloc] initWithFrame:CGRectMake(15, checkButton.frame.origin.y + checkButton.frame.size.height + 5, self.view.frame.size.width - 30, 52) withTitle:NSLocalizedString(@"OK", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:22] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
-        [acceptButton addTarget:self action:@selector(triggerNext) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:acceptButton];
+            acceptButton = [[SimpleButton alloc] initWithFrame:CGRectMake(15, checkButton.frame.origin.y + checkButton.frame.size.height + 5, self.view.frame.size.width - 30, 52) withTitle:NSLocalizedString(@"OK", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:22] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
+            [acceptButton addTarget:self action:@selector(triggerNext) forControlEvents:UIControlEventTouchUpInside];
+            [self.view addSubview:acceptButton];
+        }
 
         NSURL *url = [[NSBundle mainBundle] URLForResource:@"terms" withExtension:@"htm"];
         [webView loadRequest:[NSURLRequest requestWithURL:url]];

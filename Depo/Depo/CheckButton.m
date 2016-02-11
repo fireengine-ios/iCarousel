@@ -29,7 +29,7 @@
             [self setImage:self.uncheckedImage forState:UIControlStateNormal];
         }
         
-//        [self addTarget:self action:@selector(toggle) forControlEvents:UIControlEventTouchUpInside];
+        [self addTarget:self action:@selector(toggle) forControlEvents:UIControlEventTouchUpInside];
     }
     return self;
 }

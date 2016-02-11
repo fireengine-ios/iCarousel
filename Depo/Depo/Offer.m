@@ -27,5 +27,6 @@
 @synthesize rawPrice;
 @synthesize offerType;
 @synthesize storeProductIdentifier;
+@synthesize description;
 
 @end

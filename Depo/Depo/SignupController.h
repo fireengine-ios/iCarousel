@@ -9,8 +9,9 @@
 #import "MyViewController.h"
 #import "LoginTextfield.h"
 #import "SignupDao.h"
+#import "CheckButton.h"
 
-@interface SignupController : MyViewController <UITextFieldDelegate, UIGestureRecognizerDelegate> {
+@interface SignupController : MyViewController <UITextFieldDelegate, UIGestureRecognizerDelegate, CheckButtonDelegate> {
     NSString *msisdnValue;
     NSString *emailValue;
     NSString *passwordValue;
@@ -23,5 +24,6 @@
 @property (nonatomic, strong) LoginTextfield *emailField;
 @property (nonatomic, strong) LoginTextfield *passwordField;
 @property (nonatomic, strong) LoginTextfield *passwordRepeatField;
+@property (nonatomic, strong) CheckButton *eulaCheck;
 
 @end

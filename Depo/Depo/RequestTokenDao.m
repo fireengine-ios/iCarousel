@@ -137,11 +137,9 @@
             APPDELEGATE.session.migrationUserFlag = NO;
         }
         if(accountWarning != nil && ![accountWarning isKindOfClass:[NSNull class]]) {
-            /* TODO sonra tekrar açılacak. Test amaçlı kapatıldı
             if([accountWarning isEqualToString:@"EMPTY_MSISDN"]) {
                 APPDELEGATE.session.msisdnEmpty = YES;
             }
-             */
             if([accountWarning isEqualToString:@"EMPTY_EMAIL"]) {
                 APPDELEGATE.session.emailEmpty = YES;
             }

@@ -4,11 +4,20 @@
 
 #import <Foundation/Foundation.h>
 
+#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
+#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
+#define SCREEN_MAX_LENGTH (MAX(SCREEN_WIDTH, SCREEN_HEIGHT))
+#define SCREEN_MIN_LENGTH (MIN(SCREEN_WIDTH, SCREEN_HEIGHT))
+
+#define IS_IPHONE_4_OR_LESS (IS_IPHONE && SCREEN_MAX_LENGTH < 568.0)
+
 #define IS_IPHONE_5 ([[UIScreen mainScreen] bounds].size.height == 568.0f)
 
 #define IS_BELOW_7 ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0)
 
 #define IS_BELOW_6 ([[[UIDevice currentDevice] systemVersion] floatValue] < 6.0)
+
+#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 
 #define IS_IPAD ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
 
