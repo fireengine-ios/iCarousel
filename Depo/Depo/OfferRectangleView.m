@@ -101,12 +101,17 @@
 }
 
 - (NSString *) getOfferPeriodString :(Offer *) offer {
+    NSString *strKey = [NSString stringWithFormat:@"PERIOD_%@", offer.period];
+    return NSLocalizedString(strKey, "");
+    /*
     if ([offer.period isEqualToString:@"MONTH"]) {
         return NSLocalizedString(@"MONTHLY", @"");
     }
     else
         return NSLocalizedString(@"YEARLY", @"");
+     */
 }
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

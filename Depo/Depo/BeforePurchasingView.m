@@ -48,7 +48,9 @@
         UILabel *offerPrice = [[UILabel alloc] initWithFrame:CGRectMake(20, 90, self.frame.size.width-40, 20)];
         if(offer.rawPrice > 0.0f) {
             if(offer.offerType == OfferTypeApple) {
-                offerPrice.text = [NSString stringWithFormat:@"%@ %@", [offer.period isEqualToString:@"MONTH"] ? NSLocalizedString(@"MONTHLY", "") : NSLocalizedString(@"YEARLY", ""), offer.price];
+                NSString *strKey = [NSString stringWithFormat:@"PERIOD_%@", offer.period];
+                NSString *periodInfo = NSLocalizedString(strKey, "");
+                offerPrice.text = [NSString stringWithFormat:@"%@ %@", periodInfo, offer.price];
             } else {
                 offerPrice.text = [NSString stringWithFormat:@"%@ %@ TL", [offer.period isEqualToString:@"MONTH"] ? NSLocalizedString(@"MONTHLY", "") : NSLocalizedString(@"YEARLY", ""), offer.price];
             }

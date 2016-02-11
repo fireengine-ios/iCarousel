@@ -598,3 +598,19 @@
 "AssetForAutoSyncError"="Otomatik yüklemenin çalışabilmesi için fotoğraf galerisine erişim izni verilmelidir";
 
 "EmailEntry"="E-Mail Giriş";
+
+"PERIOD_7_DAYS"="7 GÜNLÜK";
+"PERIOD_MONTH"="AYLIK";
+"PERIOD_2_MONTHS"="2 AYLIK";
+"PERIOD_3_MONTHS"="3 AYLIK";
+"PERIOD_6_MONTHS"="6 AYLIK";
+"PERIOD_9_MONTHS"="9 AYLIK";
+"PERIOD_YEAR"="YILLIK";
+
+"PERIOD_7_DAYS_SHORT"="7 GÜN";
+"PERIOD_MONTH_SHORT"="AY";
+"PERIOD_2_MONTHS_SHORT"="2 AY";
+"PERIOD_3_MONTHS_SHORT"="3 AY";
+"PERIOD_6_MONTHS_SHORT"="6 AY";
+"PERIOD_9_MONTHS_SHORT"="9 AY";
+"PERIOD_YEAR_SHORT"="YIL";

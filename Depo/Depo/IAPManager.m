@@ -56,10 +56,8 @@
 - (void) requestProducts:(NSArray *) productNames withCompletionHandler:(RequestProductsCompletionHandler) handler {
     
     productIdentifiers = [NSSet setWithArray:productNames];
+    NSLog(@"PRODUCT IDs: %@", productIdentifiers);
 
-    //TODO sil
-//    productIdentifiers = [NSSet setWithObjects:@"mini_package", nil];
-    
     completionHandler = [handler copy];
     
     productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:productIdentifiers];
@@ -116,7 +114,7 @@
               skProduct.productIdentifier,
               skProduct.localizedTitle,
               skProduct.price.floatValue);
-        
+
         NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
         [numberFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
         [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
@@ -124,20 +122,38 @@
         
         Offer *offer = [[Offer alloc] init];
         offer.storeProductIdentifier = skProduct.productIdentifier;
-        //TODO YEAR gelecek olan olursa burasi duzeltilecek
-        offer.period = @"MONTH";
+        offer.period = [self parseDurationByIdentifier:skProduct.productIdentifier];
         offer.name = skProduct.localizedTitle;
         offer.rawPrice = skProduct.price.floatValue;
         offer.price = [numberFormatter stringFromNumber:skProduct.price];
         offer.offerType = OfferTypeApple;
-        
-        //TODO quota konacak
         
         [productsAsOffer addObject:offer];
     }
 
     completionHandler(YES, productsAsOffer);
     completionHandler = nil;
+}
+
+- (NSString *) parseDurationByIdentifier:(NSString *) rawId {
+    if(rawId) {
+        NSArray *splittedList = [rawId componentsSeparatedByString:@"_"];
+        if([splittedList count] > 1) {
+            NSString *lastItem = [[splittedList objectAtIndex:[splittedList count]-1] uppercaseString];
+            if([lastItem isEqualToString:@"MONTH"]) {
+                return @"MONTH";
+            } else if([lastItem isEqualToString:@"MONTHS"]) {
+                NSString *length = [splittedList objectAtIndex:[splittedList count]-2];
+                return [NSString stringWithFormat:@"%@_%@", length, @"MONTHS"];
+            } else if([lastItem isEqualToString:@"DAYS"]) {
+                NSString *length = [splittedList objectAtIndex:[splittedList count]-2];
+                return [NSString stringWithFormat:@"%@_%@", length, @"DAYS"];
+            } else if([lastItem isEqualToString:@"YEAR"]){
+                return @"YEAR";
+            }
+        }
+    }
+    return @"";
 }
 
 - (void)request:(SKRequest *)request didFailWithError:(NSError *)error {

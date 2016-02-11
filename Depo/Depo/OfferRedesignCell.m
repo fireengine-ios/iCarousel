@@ -263,11 +263,8 @@
 }
 
 - (NSString *) getOfferPeriodString :(NSString *) period {
-    if ([period isEqualToString:@"MONTH"]) {
-        return NSLocalizedString(@"MONTHLY", @"");
-    }
-    else
-        return NSLocalizedString(@"YEARLY", @"");
+    NSString *strKey = [NSString stringWithFormat:@"PERIOD_%@", period];
+    return NSLocalizedString(strKey, "");
 }
 
 

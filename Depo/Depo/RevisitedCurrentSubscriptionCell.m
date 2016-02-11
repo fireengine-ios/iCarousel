@@ -29,13 +29,15 @@
         [self addSubview:infoView];
         
         NSString *topInfo = [NSString stringWithFormat:@"%@ (%@) %.1f TL/%@", subscription.plan.displayName, [Util transformedHugeSizeValueDecimalIfNecessary:subscription.plan.quota], subscription.plan.price, [subscription.plan.period isEqualToString:@"MONTH"] ? NSLocalizedString(@"MonthlyShort", "") : NSLocalizedString(@"YearlyShort", "")];
-        NSString *bottomInfo = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"RenewalDate", @""), subscription.nextRenewalDate ? subscription.nextRenewalDate : @""];
 
         CustomLabel *topLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, 23, infoView.frame.size.width, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:18] withColor:[Util UIColorForHexColor:@"555555"] withText:topInfo withAlignment:NSTextAlignmentCenter];
         [infoView addSubview:topLabel];
 
-        CustomLabel *bottomLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, 43, infoView.frame.size.width, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withColor:[Util UIColorForHexColor:@"888888"] withText:bottomInfo withAlignment:NSTextAlignmentCenter];
-        [infoView addSubview:bottomLabel];
+        if(subscription.nextRenewalDate) {
+            NSString *bottomInfo = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"RenewalDate", @""), subscription.nextRenewalDate ? subscription.nextRenewalDate : @""];
+            CustomLabel *bottomLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, 43, infoView.frame.size.width, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withColor:[Util UIColorForHexColor:@"888888"] withText:bottomInfo withAlignment:NSTextAlignmentCenter];
+            [infoView addSubview:bottomLabel];
+        }
 
         if(![subscription.plan.role isEqualToString:@"demo"]){
             SimpleButton *cancelButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, infoView.frame.origin.y + infoView.frame.size.height + 14, infoView.frame.size.width, 20) withTitle:NSLocalizedString(@"CancelSubscription", @"") withTitleColor:[Util UIColorForHexColor:@"3fb0e8"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:12] isUnderline:YES withUnderlineColor:[Util UIColorForHexColor:@"3fb0e8"]];
