@@ -56,6 +56,7 @@
         
         emailField = [[LoginTextfield alloc] initWithFrame:CGRectMake(20, emailLabel.frame.origin.y + emailLabel.frame.size.height + 5, self.view.frame.size.width - 40, 43) withPlaceholder:NSLocalizedString(@"EmailPlaceholder", @"")];
         emailField.delegate = self;
+        emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         [self.view addSubview:emailField];
         
         captchaView = [[UIImageView alloc] initWithFrame:CGRectMake(20, emailField.frame.origin.y + emailField.frame.size.height + 20, 200, 50)];
@@ -68,6 +69,7 @@
 
         captchaField = [[LoginTextfield alloc] initWithFrame:CGRectMake(20, captchaView.frame.origin.y + captchaView.frame.size.height + 5, self.view.frame.size.width - 40, 43) withPlaceholder:NSLocalizedString(@"CaptchaPlaceholder", @"")];
         captchaField.delegate = self;
+        captchaField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         [self.view addSubview:captchaField];
 
         SimpleButton *okButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, captchaField.frame.origin.y + captchaField.frame.size.height + 10, self.view.frame.size.width - 40, 50) withTitle:NSLocalizedString(@"OK", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
@@ -153,6 +155,9 @@
         if([errorMsg hasPrefix:@"User can not change password"]) {
             [self showInfoAlertWithMessage:NSLocalizedString(@"EmailError2222", @"")];
             [self.navigationController popToRootViewControllerAnimated:YES];
+            return;
+        } else if([errorMsg isEqualToString:@"ACCOUNT_NOT_FOUND_FOR_EMAIL"]) {
+            [self showInfoAlertWithMessage:NSLocalizedString(@"EmailNotFound", @"")];
             return;
         }
     }
