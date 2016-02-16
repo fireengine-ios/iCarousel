@@ -78,6 +78,7 @@
         tapGestureRecognizer.enabled = YES;
         tapGestureRecognizer.delegate = self;
         [self.view addGestureRecognizer:tapGestureRecognizer];
+        
     }
     return self;
 }
@@ -87,6 +88,8 @@
 }
 
 - (void) resendCode {
+    [[CurioSDK shared] sendEvent:@"SignUp>Otp" eventValue:@"Resend"];
+    
     [smsDao requestTriggerSendVerificationSMS:APPDELEGATE.session.signupReferenceToken];
     [self showLoading];
 }
@@ -94,21 +97,30 @@
 - (void) verifySuccessCallback:(NSString *) statusVal {
     [self hideLoading];
     if([statusVal isEqualToString:@"CONTINUE_WITH_EMAIL_VERIFICATION"]) {
+        [[CurioSDK shared] sendEvent:@"SignUp>Otp" eventValue:@"Success"];
+
         EmailValidationResultController *emailResultController = [[EmailValidationResultController alloc] initWithEmailVal:APPDELEGATE.session.signupReferenceEmail];
         [self.navigationController pushViewController:emailResultController animated:YES];
     } else if([statusVal isEqualToString:@"EXPIRED_OTP"]) {
+        [[CurioSDK shared] sendEvent:@"SignUp>Otp" eventValue:@"Fail"];
+
         [self showErrorAlertWithMessage:NSLocalizedString(@"OTPExpired", @"")];
         [self cleanOTPFields];
     } else if([statusVal isEqualToString:@"INVALID_OTP"]) {
+        [[CurioSDK shared] sendEvent:@"SignUp>Otp" eventValue:@"Fail"];
+
         [self showErrorAlertWithMessage:NSLocalizedString(@"OTPInvalid", @"")];
         [self cleanOTPFields];
     } else if([statusVal isEqualToString:@"INVALID_TOKEN"]) {
         [self showErrorAlertWithMessage:NSLocalizedString(@"RefCodeInvalid", @"")];
         [self.navigationController popViewControllerAnimated:YES];
     } else if([statusVal isEqualToString:@"OK"]) {
+        [[CurioSDK shared] sendEvent:@"SignUp" eventValue:@"Finish"];
+
         [self showInfoAlertWithMessage:NSLocalizedString(@"SignupSuccess", @"")];
         [self.navigationController popToRootViewControllerAnimated:YES];
     } else {
+        [[CurioSDK shared] sendEvent:@"SignUp>Otp" eventValue:@"Fail"];
         [self showErrorAlertWithMessage:NSLocalizedString(statusVal, @"")];
         [self cleanOTPFields];
     }
@@ -281,6 +293,11 @@
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
+    CustomButton *customBackButton = [[CustomButton alloc] initWithFrame:CGRectMake(10, 0, 20, 34) withImageName:@"white_left_arrow.png"];
+    [customBackButton addTarget:self action:@selector(innerTriggerBack) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:customBackButton];
+    self.navigationItem.leftBarButtonItem = backButton;
+
     UIView *firstCharField = [self.view viewWithTag:100];
     if(firstCharField != nil && [firstCharField isKindOfClass:[SingleCharField class]]) {
         SingleCharField *firstCharFieldCast = (SingleCharField *) firstCharField;
@@ -322,6 +339,11 @@
         SingleCharField *previousField = (SingleCharField *) previousView;
         [previousField becomeFirstResponder];
     }
+}
+
+- (void) innerTriggerBack {
+    [[CurioSDK shared] sendEvent:@"SignUp>Otp" eventValue:@"Back"];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

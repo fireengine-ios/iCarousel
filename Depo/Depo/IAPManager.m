@@ -125,7 +125,13 @@
         [productsAsOffer addObject:offer];
     }
 
-    completionHandler(YES, productsAsOffer);
+    NSArray *sortedArray = [productsAsOffer sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+        NSNumber *firstPrice = [NSNumber numberWithFloat:[(Offer*) a rawPrice]];
+        NSNumber *secondPrice = [NSNumber numberWithFloat:[(Offer*) b rawPrice]];
+        return [firstPrice compare:secondPrice];
+    }];
+
+    completionHandler(YES, sortedArray);
     completionHandler = nil;
 }
 

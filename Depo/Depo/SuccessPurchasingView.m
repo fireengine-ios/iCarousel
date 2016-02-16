@@ -59,7 +59,11 @@
         [self addSubview:successIcon];
         
         UILabel *infoSuccess = [[UILabel alloc] initWithFrame:CGRectMake(30, 170, self.frame.size.width-60, 60)];
-        infoSuccess.text = NSLocalizedString(@"PurchasingViewSuccessInfo", @"");
+        if(offer.offerType == OfferTypeTurkcell) {
+            infoSuccess.text = NSLocalizedString(@"PurchasingViewSuccessInfo", @"");
+        } else {
+            infoSuccess.text = NSLocalizedString(@"PurchasingViewSuccessInfoIAP", @"");
+        }
         infoSuccess.textAlignment = NSTextAlignmentCenter;
         infoSuccess.numberOfLines = 0;
         infoSuccess.textColor = [Util UIColorForHexColor:@"707a8e"];

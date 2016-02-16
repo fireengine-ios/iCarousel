@@ -29,7 +29,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        self.title = NSLocalizedString(@"Memory", @"");
+        self.title = NSLocalizedString(@"Packages", @"");
     }
     return self;
 }

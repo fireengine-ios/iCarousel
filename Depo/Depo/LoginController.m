@@ -162,6 +162,8 @@
 }
 
 - (void) registerClicked {
+    [[CurioSDK shared] sendEvent:@"SignUp" eventValue:@"Start"];
+
     SignupController *signup = [[SignupController alloc] init];
     [self.navigationController pushViewController:signup animated:YES];
 }
@@ -177,12 +179,16 @@
         [[CurioSDK shared] sendCustomId:msisdnValue];
     }
     
+    //TODO check hangisi dogru
     [[CurioSDK shared] sendEvent:@"LoginSuccess" eventValue:@"true"];
+    [[CurioSDK shared] sendEvent:@"Login" eventValue:@"Success"];
     [APPDELEGATE triggerPostLogin];
 }
 
 - (void) tokenDaoFailCallback:(NSString *) errorMessage {
     [self hideLoading];
+    [[CurioSDK shared] sendEvent:@"Login" eventValue:@"Fail"];
+
     if([errorMessage isEqualToString:CAPTCHA_ERROR_MESSAGE]) {
         [self showErrorAlertWithMessage:NSLocalizedString(@"CaptchaRequiredErrorMessage", @"")];
         [self loadCaptcha];

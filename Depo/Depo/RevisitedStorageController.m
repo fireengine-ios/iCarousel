@@ -25,7 +25,7 @@
 
 - (id)init {
     if(self = [super init]) {
-        self.title = NSLocalizedString(@"Memory", @"");
+        self.title = NSLocalizedString(@"Packages", @"");
         self.view.backgroundColor = [Util UIColorForHexColor:@"F1F2F6"];
     }
     return self;
@@ -77,6 +77,12 @@
     [mainTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.view addSubview:mainTable];
 
+    //added to prevent sticky section headers
+    CGFloat dummyViewHeight = 40;
+    UIView *dummyView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, mainTable.bounds.size.width, dummyViewHeight)];
+    mainTable.tableHeaderView = dummyView;
+    mainTable.contentInset = UIEdgeInsetsMake(-dummyViewHeight, 0, 0, 0);
+    
     [self refreshPageData];
 }
 

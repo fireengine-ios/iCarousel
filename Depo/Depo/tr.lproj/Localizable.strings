@@ -267,10 +267,10 @@
 "MsisdnTitle"="GSM NUMARASI";
 "PasswordTitle"="ŞİFRE";
 
-"MsisdnFormatErrorMessage"="GSM numarasını kontrol ediniz";
+"MsisdnFormatErrorMessage"="Lütfen geçerli bir telefon numarası giriniz";
 "PassFormatErrorMessage"="Şifre alanını doldurunuz";
 
-"LoginError"="Giriş yapılamadı. Lütfen bilgilerinizi kontrol ediniz";
+"LoginError"="Hatalı bir giriş yaptınız. Lütfen bilgilerinizi kontrol ediniz.";
 
 "RememberMe"="BENİ HATIRLA";
 "PassSmsTitle"="ŞİFRE ALMAK İÇİN";
@@ -289,8 +289,9 @@
 "Remove"="Çıkar";
 
 "Memory"="Hafıza";
+"Packages"="Paketler";
 "StorageUsageInfo"="%@%% / %@";
-"CurrentPackageTitle"="SAHİP OLDUĞUNUZ PAKET";
+"CurrentPackageTitle"="Sahip Olduğum Paketler";
 "SubscriptionInfo"="%@ (%gGB) %g TL/Ay";
 "RenewalDateInfo"="Yenileme tarihi: %@";
 "CancelSubscription"="Üyelikten Vazgeç";
@@ -475,7 +476,9 @@
 
 "PurchasingViewInfo"="*ÜCRET İLK FATURANIZA YANSITILACAKTIR";
 "PurchasingViewSuccessInfo"="PAKET DEĞİŞİKLİĞİNİN HESABINIZA YANSIMASI ZAMAN ALABİLİR. DEĞİŞİKLİK GERÇEKLEŞTİĞİNDE SMS İLE BİLGİLENDİRİLECEKSİNİZ.";
+"PurchasingViewSuccessInfoIAP"="Paketiniz kısa sürede aktif olacaktır.";
 "SuccessPurchased"="PAKETİ BAŞARIYLA SATIN ALDINIZ.";
+"SuccessPurchasedIAP"="Paketiniz kısa sürede aktif olacaktır.";
 "PurchaseFailure"="PAKET ALINAMADI.";
 "TryAgain"="Tekrar Dene";
 "ErrorPurchasingFailure"="PAKET SATIN ALINIRKEN BİR SIKINTI OLUŞTU.";
@@ -535,7 +538,7 @@
 "EmailPlaceholder"="E-Mail";
 "PasswordRepeatPlaceholder"="Şifre tekrar";
 "SignUp"="Kayıt Ol";
-"EmailFormatErrorMessage"="Lütfen geçerli bir e-posta değeri giriniz";
+"EmailFormatErrorMessage"="Lütfen geçerli bir e-posta adresi giriniz.";
 "PassMismatchErrorMessage"="Şifre alanları birbiriyle aynı değil. Lütfen tekrar giriş yapınız.";
 "PassRepeatFormatErrorMessage"="Şifre tekrar alanını doldurunuz";
 
@@ -574,21 +577,21 @@
 "RefCodeInvalid"="Referans token bilgisi geçersiz";
 "InvalidSignupSession"="Kayıt açma oturumunuz zamanaşımına uğradı";
 "OTPWaitingForTimeoutPeriod"="Bir önceki doğrulama kodu hala aktif";
-"OTPTooManyRequests"="Doğrulama kodu için çok fazla istekte bulundunuz";
+"OTPTooManyRequests"="Çok sayıda hatalı giriş yaptınız. Lütfen yeni bir doğrulama kodu isteyiniz.";
 "IAPProductNotFound"="Ürün bulunamadı";
 "EmailEmpty"="Size daha iyi hizmet verebilmemiz için e-postanızı güncellemek ister misiniz?";
 "MsisdnEmpty"="GSM Numaranız sistemde bulunmamaktadır.";
 "EmailNotVerified"="Size daha iyi hizmet verebilmemiz için lütfen e-posta adresinize gönderilen doğrulama bağlantısına giriş yapınız";
-"EmailNotVerifiedError"="E-Posta adresinizi henüz doğrulamadınız. Lütfen e-posta adresinize gönderilen doğrulama bağlantısına giriş yapınız";
+"EmailNotVerifiedError"="Üyeliğinizi başlatmak için e-posta adresinize gönderilen bağlantıya tıklayınız.";
 "TitleLater"="Daha Sonra";
 "EmailAlreadyExist"="Girmiş olduğunuz e-posta adresi kullanımda. Lütfen farklı bir e-posta adresi ile tekrar deneyiniz.";
 "EmailInvalid"="Geçersiz bir e-posta adresi girdiniz";
-"PASSWORD_LENGTH_IS_BELOW_LIMIT"="Lütfen en az altı karakterden oluşan bir şifre belirleyin.";
-"PASSWORD_LENGTH_EXCEEDED"="Lütfen en fazla 16 karakterden oluşan bir şifre belirleyin.";
-"CONSECUTIVE_NUMBERS"="Lütfen en az altı karakterden oluşan, aynı ya da ardışık sayılar içermeyen bir şifre belirleyin.";
+"PASSWORD_LENGTH_IS_BELOW_LIMIT"="Lütfen ardışık olmayan harf ve rakamlardan oluşan, en az 6 en fazla 16 karakterli bir şifre belirleyiniz.";
+"PASSWORD_LENGTH_EXCEEDED"="Lütfen ardışık olmayan harf ve rakamlardan oluşan, en az 6 en fazla 16 karakterli bir şifre belirleyiniz.";
+"CONSECUTIVE_NUMBERS"="Lütfen ardışık olmayan harf ve rakamlardan oluşan, en az 6 en fazla 16 karakterli bir şifre belirleyiniz.";
 "WAITING_FOR_TIMEOUT_PERIOD"="Çok sayıda hatalı giriş yaptınız. Lütfen daha sonra tekrar deneyiniz.";
-"SEQUENTIAL_CHARACTERS"="Lütfen en az altı karakterden oluşan, aynı ya da ardışık sayılar içermeyen bir şifre belirleyin.";
-"SAME_CHARACTERS"="Lütfen en az altı karakterden oluşan, aynı ya da ardışık sayılar içermeyen bir şifre belirleyin.";
+"SEQUENTIAL_CHARACTERS"="Lütfen ardışık olmayan harf ve rakamlardan oluşan, en az 6 en fazla 16 karakterli bir şifre belirleyiniz.";
+"SAME_CHARACTERS"="Lütfen ardışık olmayan harf ve rakamlardan oluşan, en az 6 en fazla 16 karakterli bir şifre belirleyiniz.";
 
 "MsisdnEmailTitle"="GSM NUMARASI / E-MAİL ADRESİ";
 "MsisdnEmailPlaceholder"="GSM Numarası/E-Mail Adresi";

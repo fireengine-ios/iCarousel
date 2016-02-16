@@ -160,7 +160,13 @@
                         [subscriptions addObject:subscription];
                     }
                 }
-                [self shouldReturnSuccessWithObject:subscriptions];
+                NSArray *sortedArray = [subscriptions sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+                    NSNumber *firstQuota = [NSNumber numberWithFloat:[(Subscription*) a plan].quota];
+                    NSNumber *secondQuota = [NSNumber numberWithFloat:[(Subscription*) b plan].quota];
+                    return [firstQuota compare:secondQuota];
+                }];
+                [self shouldReturnSuccessWithObject:sortedArray];
+                
                 /*
                 if ([subscriptions count] > 0) {
                     [self shouldReturnSuccessWithObject:subscriptions];
