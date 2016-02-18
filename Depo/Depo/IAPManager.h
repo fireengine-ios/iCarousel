@@ -13,7 +13,10 @@
 - (void) iapWasCancelled;
 - (void) iapFailedWithMessage:(NSString *) errorMessage;
 - (void) iapFinishedForProduct:(NSString *) productIdentifier withReceipt:(NSData *) receipt;
+- (void) iapInitializedWithReceipt:(NSData *) receipt;
 - (void) iapRestoredForProduct:(NSString *) productIdentifier;
+- (void) iapRestoreFinishedWithProductIds:(NSArray *) productIds;
+- (void) iapRestoreFinishedWithError:(NSString *) errorDesc;
 @end
 
 typedef void (^RequestProductsCompletionHandler)(BOOL success, NSArray * products);
@@ -23,11 +26,13 @@ typedef void (^RequestProductsCompletionHandler)(BOOL success, NSArray * product
 @property (nonatomic, weak) id<IAPManagerDelegate> delegate;
 @property (nonatomic, strong) NSArray *products;
 @property (nonatomic) BOOL processInProgress;
+@property (nonatomic) BOOL restoreInProgress;
 
 + (IAPManager *) sharedInstance;
 - (void) requestProducts:(NSArray *) productNames withCompletionHandler:(RequestProductsCompletionHandler) handler;
 - (void) buyProduct:(SKProduct *)product;
 - (void) buyProductByIdentifier:(NSString *) identifier;
 - (BOOL) isProductPurchasedWithIdentifier:(NSString *) identifier;
+- (void) restoreProducts;
 
 @end

@@ -621,3 +621,15 @@
 "TermsButtonTitle"="KULLANIM KOŞULLARINI KABUL EDİYORUM";
 "TermsTitle"="Kullanım Koşulları";
 "EmailNotFound"="Girmiş olduğunuz e-posta adresi kayıtlı değildir. Lütfen yeniden deneyiniz.";
+
+"IAPRestoreError"="Bu ürünü daha önceden satın almıştınız";
+
+"INVALID_SUBSCRIPTION"="Geçersiz bir satınalma işlemi yürütüldü.";
+"TEMPORARY_ERROR"="Teknik bir sebepten dolayı geçici bir hata oluştu.";
+"ALREADY_SUBSCRIBED_FOR_AN_ACCOUNT"="Bu paket Apple ID'niz ile daha önceden satın alınmıştır.";
+"CancelSubscriptionInfoApple"="Aboneliğinizi itunes üzerinden yaptığınız için paket iptalini yine itunes üzerinden gerçekleştirebilirsiniz.";
+"CancelSubscriptionInfoGoogle"="Aboneliğinizi GooglePlay üzerinden yaptığınız için paket iptalini yine GooglePlay üzerinden gerçekleştirebilirsiniz.";
+
+"TOO_MANY_REQUESTS"="Bu GSM Numarası için çok sayıda doğrulama kodu istendi. Lütfen bir süre sonra tekrar deneyiniz.";
+"TOO_MANY_INVALID_ATTEMPTS"="Bu doğrulama kodu için çok sayıda hatalı giriş yaptınız. Lütfen yeni bir doğrulama kodu talep ediniz.";
+"CannotChangeEmail"="E-Posta adresinizi değiştirmenize izin verilmemektedir.";

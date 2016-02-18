@@ -13,10 +13,12 @@
 @synthesize profileImgUrl;
 @synthesize fullName;
 @synthesize mobileUploadFolderUuid;
+@synthesize email;
 @synthesize name;
 @synthesize surname;
 @synthesize cropAndSharePresentFlag;
 @synthesize accountType;
+@synthesize username;
 
 - (id) init {
     if(self = [super init]) {

@@ -24,6 +24,7 @@
     AccountDao *accountDaoToLearnIsJobExists;
     AppleProductsListDao *appleProductsDao;
     IAPValidateDao *iapValidateDao;
+    IAPValidateDao *iapInitialValidateDao;
     
     NSArray *currentSubscriptions;
     NSArray *appleProductNames;
@@ -32,6 +33,7 @@
 
     int tableUpdateCounter;
     BOOL isJobExists;
+    BOOL refreshActive;
 }
 
 @property (nonatomic, strong) UITableView *mainTable;

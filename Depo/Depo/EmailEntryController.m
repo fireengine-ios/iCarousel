@@ -114,6 +114,8 @@
         [self showErrorAlertWithMessage:NSLocalizedString(@"EmailAlreadyExist", @"")];
     } else if([resultStatus isEqualToString:@"EMAIL_IS_INVALID"]) {
         [self showErrorAlertWithMessage:NSLocalizedString(@"EmailInvalid", @"")];
+    } else if([resultStatus isEqualToString:@"CAN_NOT_CHANGE_EMAIL"]) {
+        [self showErrorAlertWithMessage:NSLocalizedString(@"CannotChangeEmail", @"")];
     } else {
         [self dismissViewControllerAnimated:YES completion:nil];
     }

@@ -10,6 +10,11 @@
 #import "Util.h"
 #import "SimpleButton.h"
 
+@interface BeforePurchasingView () {
+    SimpleButton *buyButton;
+}
+@end
+
 @implementation BeforePurchasingView
 
 @synthesize delegate;
@@ -70,7 +75,7 @@
             [self addSubview:offerDesc];
         }
         
-        SimpleButton *buyButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, 140, self.frame.size.width-40, 50) withTitle:NSLocalizedString(@"PurchasePackage", "") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
+        buyButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, 140, self.frame.size.width-40, 50) withTitle:NSLocalizedString(@"PurchasePackage", "") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
         [buyButton addTarget:self action:@selector(buyClicked) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:buyButton];
         
@@ -87,6 +92,10 @@
 }
 
 - (void) buyClicked {
+    if(self.toActivateOffer.offerType == OfferTypeApple) {
+        buyButton.enabled = NO;
+        buyButton.alpha = 0.6f;
+    }
     [delegate buyButtonDelegate:self.toActivateOffer];
 }
 

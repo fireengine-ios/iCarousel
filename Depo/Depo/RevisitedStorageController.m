@@ -61,6 +61,11 @@
     iapValidateDao.successMethod = @selector(iapValidateSuccessCallback:);
     iapValidateDao.failMethod = @selector(iapValidateFailCallback:);
 
+    iapInitialValidateDao = [[IAPValidateDao alloc] init];
+    iapInitialValidateDao.delegate = self;
+    iapInitialValidateDao.successMethod = @selector(iapInitialValidateSuccessCallback:);
+    iapInitialValidateDao.failMethod = @selector(iapInitialValidateFailCallback:);
+    
     accountDaoToActivateOffer = [[AccountDao alloc]init];
     accountDaoToActivateOffer.delegate = self;
     accountDaoToActivateOffer.successMethod = @selector(activateOfferCallback);
@@ -83,17 +88,25 @@
     mainTable.tableHeaderView = dummyView;
     mainTable.contentInset = UIEdgeInsetsMake(-dummyViewHeight, 0, 0, 0);
     
+    if(APPDELEGATE.session.user.accountType == AccountTypeOther) {
+        CustomButton *restoreButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 18, 18) withImageName:@"icon_verif_refresh.png"];
+        [restoreButton addTarget:self action:@selector(restoreClicked) forControlEvents:UIControlEventTouchUpInside];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:restoreButton];
+    }
+
     [self refreshPageData];
+    [self readAndSendReceipt];
 }
 
 - (void) refreshPageData {
     [accountDaoToGetCurrentSubscription requestActiveSubscriptions];
-    [super showLoading];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [super showLoading];
+    });
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark CustomConfirmDelegate methods
@@ -156,15 +169,44 @@
 }
 
 - (void) iapFinishedForProduct:(NSString *) productIdentifier withReceipt:(NSData *) receipt {
-    [iapValidateDao requestIAPValidationForProductId:productIdentifier withReceiptId:receipt];
+    [iapValidateDao requestIAPValidationForProductId:productIdentifier withReceiptId:[receipt base64EncodedStringWithOptions:0]];
     [self showLoading];
 }
 
 - (void) iapRestoredForProduct:(NSString *) productIdentifier {
     [super hideLoading];
-    //TODO restore için validation çağrılacak mı
-    [self hideLoading];
+    /*
+    //TODO restore için şu anda hata gösteriliyor. Fakat success gösterip tekrar validasyona mı girmeli?
+    if(purchaseView) {
+        [purchaseView drawFailedPurchaseView:NSLocalizedString(@"IAPRestoreError", @"")];
+    }
     [self refreshPageData];
+     */
+}
+
+- (void) iapRestoreFinishedWithProductIds:(NSArray *)productIds {
+    NSLog(@"At iapRestoreFinishedWithProductIds: %@", productIds);
+    if(offers) {
+        NSMutableArray *filteredArray = [[NSMutableArray alloc] init];
+        for(Offer *offer in offers) {
+            if(![productIds containsObject:offer.storeProductIdentifier]) {
+                [filteredArray addObject:offer];
+            }
+        }
+        offers = filteredArray;
+        [self refreshTable];
+    }
+    [self hideLoading];
+}
+
+- (void) iapRestoreFinishedWithError:(NSString *)errorDesc {
+    NSLog(@"At iapRestoreFinishedWithError: %@", errorDesc);
+    [self showErrorAlertWithMessage:errorDesc];
+    [self hideLoading];
+}
+
+- (void) iapInitializedWithReceipt:(NSData *)receipt {
+//    [iapInitialValidateDao requestIAPValidationWithReceiptId:[receipt base64EncodedStringWithOptions:0]];
 }
 
 #pragma mark UITableView methods
@@ -263,14 +305,13 @@
     appleProductNames = productNames;
     
     [[IAPManager sharedInstance] requestProducts:appleProductNames withCompletionHandler:^(BOOL success, NSArray *products) {
-        [self hideLoading];
         if(success) {
             offers = [[NSMutableArray alloc] initWithArray:products];
-            [self refreshTable];
         } else {
             [self showErrorAlertWithMessage:NSLocalizedString(@"IAPProductReadError", @"")];
-            [self refreshTable];
         }
+        [self hideLoading];
+        [self refreshTable];
     }];
 }
 
@@ -282,6 +323,8 @@
 
 - (void) loadCurrentSubscriptionCallback:(NSArray *) subscriptions {
     currentSubscriptions = subscriptions;
+    [self refreshTable];
+
     [accountDaoToLearnIsJobExists requestIsJobExists];
 }
 
@@ -313,16 +356,8 @@
 
 - (void) loadOffersCallback:(NSArray *) files {
     offers = [[NSMutableArray alloc] initWithArray:files];
-
-    NSDictionary *waitingForValidationDictionary = [AppUtil readWaitingIAPValidationForFutureTry];
-    if([[waitingForValidationDictionary allKeys] count] > 0) {
-        NSString *productIdWaitingForValidation = [[waitingForValidationDictionary allKeys] objectAtIndex:0];
-        NSString *receiptIdWaitingForValidation = [waitingForValidationDictionary objectForKey:productIdWaitingForValidation];
-        [iapValidateDao requestIAPValidationForProductId:productIdWaitingForValidation withReceiptId:receiptIdWaitingForValidation];
-    } else {
-        [self hideLoading];
-        [self refreshTable];
-    }
+    [self hideLoading];
+    [self refreshTable];
 }
 
 - (void) loadOffersFailCallback:(NSString *) errorMessage {
@@ -330,21 +365,45 @@
     [self showErrorAlertWithMessage:errorMessage];
 }
 
-- (void) iapValidateSuccessCallback:(NSDictionary *) parameters {
-    if(parameters != nil) {
-        [AppUtil cleanWaitingIAPValidationForFutureTryWithProductId:[parameters objectForKey:@"productId"]];
-    }
+- (void) iapValidateSuccessCallback:(NSString *) resultingStatus {
     [self hideLoading];
-    if(purchaseView) {
-        [purchaseView drawSuccessPurchaseView];
+    if([resultingStatus isEqualToString:@"SUCCESS"]) {
+        if(purchaseView) {
+            [purchaseView drawSuccessPurchaseView];
+        }
+        [self refreshPageData];
+    } else {
+        if(purchaseView) {
+            [purchaseView drawFailedPurchaseView:NSLocalizedString(resultingStatus, @"")];
+        }
     }
-    [self refreshPageData];
 }
 
-- (void) iapValidateFailCallback:(NSDictionary *) parameters {
-    [AppUtil writeWaitingIAPValidationForFutureTryForProductId:[parameters objectForKey:@"productId"] andReceiptId:[parameters objectForKey:@"receiptId"]];
+- (void) iapValidateFailCallback:(NSString *) errorMessage {
+    if(purchaseView) {
+        [purchaseView drawFailedPurchaseView:errorMessage];
+    }
     [self hideLoading];
-    [self refreshPageData];
+}
+
+- (void) iapInitialValidateSuccessCallback:(NSString *) resultingStatus {
+    if(refreshActive) {
+        [self hideLoading];
+        refreshActive = NO;
+    }
+    if([resultingStatus isEqualToString:@"RESTORED"]) {
+        if(purchaseView) {
+            [purchaseView removeFromSuperview];
+        }
+        [self refreshPageData];
+    }
+}
+
+- (void) iapInitialValidateFailCallback:(NSString *) errorMessage {
+    if(refreshActive) {
+        [self hideLoading];
+        refreshActive = NO;
+    }
 }
 
 - (void) refreshTable {
@@ -374,14 +433,32 @@
     [super showLoading];
 }
 
+- (void) restoreClicked {
+    refreshActive = YES;
+    [self readAndSendReceipt];
+    [self showLoading];
+}
+
+- (void) readAndSendReceipt {
+    NSURL *receiptFileURL = [[NSBundle mainBundle] appStoreReceiptURL];
+    NSData *receiptData = [NSData dataWithContentsOfURL:receiptFileURL];
+    
+    [iapInitialValidateDao requestIAPValidationWithReceiptId:[receiptData base64EncodedStringWithOptions:0]];
+}
+
 #pragma mark RevisitedCurrentSubscriptionCellDelegate methods
 
 - (void) revisitedCurrentSubscriptionCellDidSelectCancelForSubscription:(Subscription *)sRef {
-    //TODO role değeri demo olanlar için cancel subscription görünmeyecek olabilir mi?
-    NSString *nameForSms = [AppUtil getPackageNameForSms:sRef.plan.role];
     NSString *contentText = @"";
-    if (![nameForSms isEqualToString:@""]) {
-        contentText = [NSString stringWithFormat:NSLocalizedString(@"CancelSubscriptionInfo", @""), nameForSms];
+    if([sRef.type isEqualToString:@"INAPP_PURCHASE_APPLE"]) {
+        contentText = NSLocalizedString(@"CancelSubscriptionInfoApple", @"");
+    } else if([sRef.type isEqualToString:@"INAPP_PURCHASE_GOOGLE"]) {
+        contentText = NSLocalizedString(@"CancelSubscriptionInfoGoogle", @"");
+    } else {
+        NSString *nameForSms = [AppUtil getPackageNameForSms:sRef.plan.role];
+        if (![nameForSms isEqualToString:@""]) {
+            contentText = [NSString stringWithFormat:NSLocalizedString(@"CancelSubscriptionInfo", @""), nameForSms];
+        }
     }
     [self showInfoAlertWithMessage:contentText];
 }

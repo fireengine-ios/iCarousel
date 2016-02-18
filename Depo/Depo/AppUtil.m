@@ -657,11 +657,11 @@
 + (NSString *)getPackageNameForSms: (NSString *)roleName {
     NSString *name = @"";
     if ([roleName isEqualToString:@"standart"] || [roleName isEqualToString:@"standard"]) {
-        name = @"MINIDEPO";
+        name = @"DEPO 50GB";
     } else if ([roleName isEqualToString:@"premium"]) {
-        name = @"STANDARTDEPO";
+        name = @"DEPO 500GB";
     } else if ([roleName isEqualToString:@"ultimate"]) {
-        name = @"MEGADEPO";
+        name = @"DEPO 25TB";
     }
     return name;
 }

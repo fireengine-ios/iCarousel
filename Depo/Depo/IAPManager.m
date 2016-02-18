@@ -21,6 +21,7 @@
 
 @synthesize delegate;
 @synthesize processInProgress;
+@synthesize restoreInProgress;
 @synthesize products;
 
 + (IAPManager *) sharedInstance {
@@ -34,6 +35,7 @@
 
 - (id) init {
     if ((self = [super init])) {
+        /*
         productIdentifiers = [NSSet setWithObjects:@"mini_1_month", @"standard_1_month", nil];
         
         purchasedProductIdentifiers = [NSMutableSet set];
@@ -43,6 +45,8 @@
                 [purchasedProductIdentifiers addObject:productIdentifier];
             }
         }
+         */
+        
         [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
     }
     return self;
@@ -58,6 +62,9 @@
     productIdentifiers = [NSSet setWithArray:productNames];
     NSLog(@"PRODUCT IDs: %@", productIdentifiers);
 
+    //TODO sil
+//    productIdentifiers = [NSSet setWithObjects:@"mini_package_2_months", @"standard_package_1_month", nil];
+    
     completionHandler = [handler copy];
     
     productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:productIdentifiers];
@@ -164,32 +171,79 @@
     completionHandler = nil;
 }
 
+- (void) restoreProducts {
+    restoreInProgress = YES;
+    [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
+}
+
+- (void) paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue {
+    restoreInProgress = NO;
+
+    NSMutableArray *purchasedItemIDs = [[NSMutableArray alloc] init];
+    
+    NSLog(@"received restored transactions: %lu", (unsigned long)queue.transactions.count);
+    for (SKPaymentTransaction *transaction in queue.transactions) {
+        NSString *productID = transaction.payment.productIdentifier;
+        [purchasedItemIDs addObject:productID];
+        [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+    }
+    [delegate iapRestoreFinishedWithProductIds:purchasedItemIDs];
+}
+
+- (void) paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error {
+    restoreInProgress = NO;
+    NSLog(@"Restore error: %@", error.localizedDescription);
+    [delegate iapRestoreFinishedWithError:error.localizedDescription];
+}
+
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions {
-    processInProgress = NO;
-    for (SKPaymentTransaction * transaction in transactions) {
-        switch (transaction.transactionState) {
-            case SKPaymentTransactionStatePurchased:
-                [self completeTransaction:transaction];
-                break;
-            case SKPaymentTransactionStateFailed:
-                [self failedTransaction:transaction];
-                break;
-            case SKPaymentTransactionStateRestored:
-                [self restoreTransaction:transaction];
-            default:
-                break;
+    if(!restoreInProgress) {
+        if(processInProgress) {
+            for (SKPaymentTransaction * transaction in transactions) {
+                switch (transaction.transactionState) {
+                    case SKPaymentTransactionStatePurchased:
+                        [self completeTransaction:transaction];
+                        break;
+                    case SKPaymentTransactionStateFailed:
+                        [self failedTransaction:transaction];
+                        break;
+                    case SKPaymentTransactionStateRestored:
+                        [self restoreTransaction:transaction];
+                    default:
+                        break;
+                }
+            }
+            processInProgress = NO;
+        } else {
+            for (SKPaymentTransaction * transaction in transactions) {
+                switch (transaction.transactionState) {
+                    case SKPaymentTransactionStatePurchased:
+                        [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+                        break;
+                    case SKPaymentTransactionStateFailed:
+                        [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+                        break;
+                    case SKPaymentTransactionStateRestored:
+                        [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+                    default:
+                        break;
+                }
+            }
+            NSURL *receiptFileURL = [[NSBundle mainBundle] appStoreReceiptURL];
+            NSData *receiptData = [NSData dataWithContentsOfURL:receiptFileURL];
+            
+            [delegate iapInitializedWithReceipt:receiptData];
         }
-    };
+    }
 }
 
 - (void)completeTransaction:(SKPaymentTransaction *)transaction {
     NSLog(@"completeTransaction...");
-    /*
-     [purchasedProductIdentifiers addObject:productIdentifier];
-     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:productIdentifier];
-     [[NSUserDefaults standardUserDefaults] synchronize];
-     */
-    [delegate iapFinishedForProduct:transaction.payment.productIdentifier withReceipt:transaction.transactionReceipt];
+    
+    NSURL *receiptFileURL = [[NSBundle mainBundle] appStoreReceiptURL];
+    NSData *receiptData = [NSData dataWithContentsOfURL:receiptFileURL];
+    
+    [delegate iapFinishedForProduct:transaction.payment.productIdentifier withReceipt:receiptData];
     [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
 }
 

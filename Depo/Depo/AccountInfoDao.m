@@ -38,12 +38,16 @@
             NSString *url = [mainDict objectForKey:@"url"];
             NSString *accountType = [mainDict objectForKey:@"accountType"];
             NSNumber *isCropAndShareTagAvailable = [mainDict objectForKey:@"isCropyTagAvailable"];
+            NSString *username = [mainDict objectForKey:@"username"];
+            NSString *email = [mainDict objectForKey:@"email"];
             
             user.fullName = [NSString stringWithFormat:@"%@ %@", [self strByRawVal:name], [self strByRawVal:surname]];
             //            user.fullName = [NSString stringWithFormat:@"%@", [self strByRawVal:name]];
             user.name = [self strByRawVal:name];
             user.surname = [self strByRawVal:surname];
             user.profileImgUrl = [self strByRawVal:url];
+            user.username = username;
+            user.email = email;
             if(mobileUploadsSpecialFolderUuid != nil && ![mobileUploadsSpecialFolderUuid isKindOfClass:[NSNull class]]) {
                 user.mobileUploadFolderUuid = mobileUploadsSpecialFolderUuid;
             }

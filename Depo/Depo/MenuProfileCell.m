@@ -42,17 +42,22 @@
             [self addSubview:profileImgView];
         });
 
+        NSString *infoFieldVal = APPDELEGATE.session.user.username;
+        if(APPDELEGATE.session.user.email) {
+            infoFieldVal = APPDELEGATE.session.user.email;
+        }
+        
         int nameWidth = self.frame.size.width - profileBgView.frame.origin.x - profileBgView.frame.size.width - 15;
         UIFont *nameFont = [UIFont fontWithName:@"TurkcellSaturaDem" size:18];
         
-        int nameHeight =  [Util calculateHeightForText:APPDELEGATE.session.user.name forWidth:nameWidth forFont:nameFont] + 5;
+        int nameHeight =  [Util calculateHeightForText:infoFieldVal forWidth:nameWidth forFont:nameFont] + 5;
         if(nameHeight > 60) {
             nameHeight = 60;
         }
         
         CGRect nameFieldRect = CGRectMake(profileBgView.frame.origin.x + profileBgView.frame.size.width + 15, (60 - nameHeight)/2, nameWidth, nameHeight);
         
-        CustomLabel *nameLabel = [[CustomLabel alloc] initWithFrame:nameFieldRect withFont:nameFont withColor:[Util UIColorForHexColor:@"FFFFFF"] withText:APPDELEGATE.session.user.name];
+        CustomLabel *nameLabel = [[CustomLabel alloc] initWithFrame:nameFieldRect withFont:nameFont withColor:[Util UIColorForHexColor:@"FFFFFF"] withText:infoFieldVal];
         [self addSubview:nameLabel];
     }
     return self;

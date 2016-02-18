@@ -10,6 +10,7 @@
 
 @interface IAPValidateDao : BaseDao
 
-- (void) requestIAPValidationForProductId:(NSString *) productId withReceiptId:(NSData *) receiptId;
+- (void) requestIAPValidationForProductId:(NSString *) productId withReceiptId:(NSString *) receiptId;
+- (void) requestIAPValidationWithReceiptId:(NSString *) receiptId;
 
 @end

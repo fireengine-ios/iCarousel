@@ -114,6 +114,11 @@
     } else if([statusVal isEqualToString:@"INVALID_TOKEN"]) {
         [self showErrorAlertWithMessage:NSLocalizedString(@"RefCodeInvalid", @"")];
         [self.navigationController popViewControllerAnimated:YES];
+    } else if([statusVal isEqualToString:@"TOO_MANY_INVALID_ATTEMPTS"]) {
+        [[CurioSDK shared] sendEvent:@"SignUp>Otp" eventValue:@"Fail"];
+
+        [self showErrorAlertWithMessage:NSLocalizedString(@"TOO_MANY_INVALID_ATTEMPTS", @"")];
+        [self cleanOTPFields];
     } else if([statusVal isEqualToString:@"OK"]) {
         [[CurioSDK shared] sendEvent:@"SignUp" eventValue:@"Finish"];
 
