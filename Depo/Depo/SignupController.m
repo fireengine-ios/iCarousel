@@ -201,7 +201,9 @@
         }
     } else {
         [self showErrorAlertWithMessage:NSLocalizedString(signupStatus, @"")];
-        return;
+        if([signupStatus isEqualToString:@"VERIFY_EXISTING_EMAIL"]) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
     }
 }
 

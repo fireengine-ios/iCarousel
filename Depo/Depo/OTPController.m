@@ -119,6 +119,7 @@
 
         [self showErrorAlertWithMessage:NSLocalizedString(@"TOO_MANY_INVALID_ATTEMPTS", @"")];
         [self cleanOTPFields];
+        [self prepareForResend];
     } else if([statusVal isEqualToString:@"OK"]) {
         [[CurioSDK shared] sendEvent:@"SignUp" eventValue:@"Finish"];
 
@@ -270,17 +271,23 @@
     }
 }
 
+- (void) prepareForResend {
+    remainingTimeInSec = 0;
+    counterLabel.text = [self timeFormatted:remainingTimeInSec];
+    if(tickTimer) {
+        [tickTimer invalidate];
+        tickTimer = nil;
+    }
+    resendButton.hidden = NO;
+    [self.view endEditing:YES];
+}
+
 - (void) tickForSecond {
     remainingTimeInSec --;
     if(remainingTimeInSec >= 0) {
         counterLabel.text = [self timeFormatted:remainingTimeInSec];
     } else {
-        if(tickTimer) {
-            [tickTimer invalidate];
-            tickTimer = nil;
-        }
-        resendButton.hidden = NO;
-        [self.view endEditing:YES];
+        [self prepareForResend];
     }
 }
 
