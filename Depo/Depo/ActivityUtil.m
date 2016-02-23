@@ -43,6 +43,12 @@
             } else {
                 [keyVal appendString:@"SingleFile"];
             }
+        } else if([activity.rawFileType isEqualToString:@"DIRECTORY"]) {
+            if([activity.actionItemList count] > 1) {
+                [keyVal appendString:@"MultipleFolders"];
+            } else {
+                [keyVal appendString:@"SingleFolder"];
+            }
         } else if([activity.rawFileType isEqualToString:@"AUDIO"]) {
             if([activity.actionItemList count] > 1) {
                 [keyVal appendString:@"MultipleMusics"];

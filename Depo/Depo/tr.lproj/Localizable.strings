@@ -294,9 +294,9 @@
 "CurrentPackageTitle"="Sahip Olduğum Paketler";
 "SubscriptionInfo"="%@ (%gGB) %g TL/Ay";
 "RenewalDateInfo"="Yenileme tarihi: %@";
-"CancelSubscription"="Üyelikten Vazgeç";
+"CancelSubscription"="Paket İptal";
 "CancelSubscriptionInfo"="İptal etmek için \"Iptal %@\" yazıp 2222'ye kısa mesaj gönderebilirsiniz.";
-"UpgradeOptionsTitle"="PAKET SEÇİMİ";
+"UpgradeOptionsTitle"="Paket Seçenekleri";
 "Month"="Ay";
 "ActivateOfferSuccess"="Paket talebiniz alınmıştır, paketiniz aktiflendiğinde SMS ile bilgilendirileceksiniz.";
 "ActivateOfferApprove"="Paket değişikliği yapmak istediğinize emin misiniz?";
@@ -586,15 +586,15 @@
 "TitleLater"="Daha Sonra";
 "EmailAlreadyExist"="Girmiş olduğunuz e-posta adresi kullanımda. Lütfen farklı bir e-posta adresi ile tekrar deneyiniz.";
 "EmailInvalid"="Geçersiz bir e-posta adresi girdiniz";
-"PASSWORD_LENGTH_IS_BELOW_LIMIT"="Lütfen ardışık olmayan harf ve rakamlardan oluşan, en az 6 en fazla 16 karakterli bir şifre belirleyiniz.";
-"PASSWORD_LENGTH_EXCEEDED"="Lütfen ardışık olmayan harf ve rakamlardan oluşan, en az 6 en fazla 16 karakterli bir şifre belirleyiniz.";
-"CONSECUTIVE_NUMBERS"="Lütfen ardışık olmayan harf ve rakamlardan oluşan, en az 6 en fazla 16 karakterli bir şifre belirleyiniz.";
+"PASSWORD_LENGTH_IS_BELOW_LIMIT"="Çok kısa bir şifre belirlediniz. Lütfen ardışık olmayan harf ve rakamlardan oluşan, en az 6 en fazla 16 karakterli bir şifre belirleyiniz.";
+"PASSWORD_LENGTH_EXCEEDED"="Çok uzun bir şifre belirlediniz. Lütfen ardışık olmayan harf ve rakamlardan oluşan, en az 6 en fazla 16 karakterli bir şifre belirleyiniz.";
+"CONSECUTIVE_NUMBERS"="Ardışık sayı veya harfler kullandınız. Lütfen ardışık olmayan harf ve rakamlardan oluşan, en az 6 en fazla 16 karakterli bir şifre belirleyiniz.";
 "WAITING_FOR_TIMEOUT_PERIOD"="Çok sayıda hatalı giriş yaptınız. Lütfen daha sonra tekrar deneyiniz.";
-"SEQUENTIAL_CHARACTERS"="Lütfen ardışık olmayan harf ve rakamlardan oluşan, en az 6 en fazla 16 karakterli bir şifre belirleyiniz.";
-"SAME_CHARACTERS"="Lütfen ardışık olmayan harf ve rakamlardan oluşan, en az 6 en fazla 16 karakterli bir şifre belirleyiniz.";
+"SEQUENTIAL_CHARACTERS"="Ardışık sayı veya harfler kullandınız. Lütfen ardışık olmayan harf ve rakamlardan oluşan, en az 6 en fazla 16 karakterli bir şifre belirleyiniz.";
+"SAME_CHARACTERS"="Sayı ve rakamlardan oluşan, en az 6 en fazla 16 karakterli, ardışık sayı ve harf içermeyen bir şifre belirlenmeli.";
 
-"MsisdnEmailTitle"="GSM NUMARASI / E-MAİL ADRESİ";
-"MsisdnEmailPlaceholder"="GSM Numarası/E-Mail Adresi";
+"MsisdnEmailTitle"="GSM NUMARASI veya E-POSTA ADRESİ";
+"MsisdnEmailPlaceholder"="GSM Numarası veya E-Posta Adresi";
 "MsisdnEmailFormatErrorMessage"="GSM numarasını/E-Mail adresini kontrol ediniz";
 
 "LocForAutoSyncError"="Otomatik yüklemenin başarıyla çalışabilmesi için konum servisinin açık olması gerekmektedir";
@@ -627,9 +627,10 @@
 "INVALID_SUBSCRIPTION"="Geçersiz bir satınalma işlemi yürütüldü.";
 "TEMPORARY_ERROR"="Teknik bir sebepten dolayı geçici bir hata oluştu.";
 "ALREADY_SUBSCRIBED_FOR_AN_ACCOUNT"="Bu paket Apple ID'niz ile daha önceden satın alınmıştır.";
-"CancelSubscriptionInfoApple"="Aboneliğinizi itunes üzerinden yaptığınız için paket iptalini yine itunes üzerinden gerçekleştirebilirsiniz.";
-"CancelSubscriptionInfoGoogle"="Aboneliğinizi GooglePlay üzerinden yaptığınız için paket iptalini yine GooglePlay üzerinden gerçekleştirebilirsiniz.";
+"CancelSubscriptionInfoApple"="Paket iptalini iTunes üzerinden gerçekleştirebilirsiniz.";
+"CancelSubscriptionInfoGoogle"="Paket iptalini GooglePlay üzerinden gerçekleştirebilirsiniz.";
 
 "TOO_MANY_REQUESTS"="Bu GSM Numarası için çok sayıda doğrulama kodu istendi. Lütfen bir süre sonra tekrar deneyiniz.";
 "TOO_MANY_INVALID_ATTEMPTS"="Bu doğrulama kodu için çok sayıda hatalı giriş yaptınız. Lütfen yeni bir doğrulama kodu talep ediniz.";
 "CannotChangeEmail"="E-Posta adresinizi değiştirmenize izin verilmemektedir.";
+"LdapLockedError"="Çok fazla sayıda hatalı giriş yaptınız. Lütfen 1 saat sonra tekrar deneyiniz.";

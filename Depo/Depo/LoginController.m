@@ -65,9 +65,8 @@
         
         scrollYIndex += 25;
         
-        msisdnField = [[LoginTextfield alloc] initWithFrame:CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 43) withPlaceholder:NSLocalizedString(@"MsisdnPlaceholder", @"")];
+        msisdnField = [[LoginTextfield alloc] initWithFrame:CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 43) withPlaceholder:@""/*NSLocalizedString(@"MsisdnEmailPlaceholder", @"")*/];
         msisdnField.delegate = self;
-        msisdnField.placeholder = @"5xxxxxxxxx";
         [mainScroll addSubview:msisdnField];
 
         scrollYIndex += 55;
@@ -159,6 +158,7 @@
 - (void) loadCaptcha {
     captchaUniqueId = [[NSUUID UUID] UUIDString];
     [captchaDao requestCaptchaForType:@"IMAGE" andId:captchaUniqueId];
+    captchaField.text = @"";
 }
 
 - (void) registerClicked {
@@ -194,6 +194,8 @@
         [self loadCaptcha];
     } else if([errorMessage isEqualToString:EMAIL_NOT_VERIFIED_ERROR_MESSAGE]) {
         [self showErrorAlertWithMessage:NSLocalizedString(@"EmailNotVerifiedError", @"")];
+    } else if([errorMessage isEqualToString:LDAP_LOCKED_ERROR_MESSAGE]) {
+        [self showErrorAlertWithMessage:NSLocalizedString(@"LdapLockedError", @"")];
     } else {
         [self showErrorAlertWithMessage:NSLocalizedString(@"LoginError", @"")];
         if(![captchaField isHidden]) {
@@ -270,6 +272,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    [msisdnField becomeFirstResponder];
+    [super viewDidAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning {

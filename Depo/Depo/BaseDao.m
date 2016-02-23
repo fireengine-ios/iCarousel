@@ -317,6 +317,8 @@
             result.activityType = ActivityTypeMusic;
         } else if([result.rawFileType isEqualToString:@"CONTACT"]) {
             result.activityType = ActivityTypeContact;
+        } else if([result.rawFileType isEqualToString:@"DIRECTORY"]) {
+            result.activityType = ActivityTypeFolder;
         } else {
             result.activityType = ActivityTypeFile;
         }

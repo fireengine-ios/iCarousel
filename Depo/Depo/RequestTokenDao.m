@@ -171,6 +171,7 @@
 
 - (void)requestFailed:(ASIHTTPRequest *)request {
     NSString *responseStr = [request responseString];
+    NSLog(@"Result: %@", responseStr);
     SBJSON *jsonParser = [SBJSON new];
     NSDictionary *dict = [jsonParser objectWithString:responseStr];
     if(dict != nil && [dict isKindOfClass:[NSDictionary class]]) {
@@ -181,6 +182,9 @@
                 return;
             } else if([errorCode intValue] == 60) {
                 SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:EMAIL_NOT_VERIFIED_ERROR_MESSAGE]);
+                return;
+            } else if([errorCode intValue] == 10) {
+                SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:LDAP_LOCKED_ERROR_MESSAGE]);
                 return;
             }
         }

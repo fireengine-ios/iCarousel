@@ -141,6 +141,8 @@
 
 #define CAPTCHA_ERROR_MESSAGE @"CAPTCHA_REQ"
 
+#define LDAP_LOCKED_ERROR_MESSAGE @"LDAP_LOCKED"
+
 #define EMAIL_NOT_VERIFIED_ERROR_MESSAGE @"EMAIL_NOT_VERIFIED"
 
 #define NO_CONN_ERROR_MESSAGE @"Lütfen internet bağlantınızı kontrol ediniz."
