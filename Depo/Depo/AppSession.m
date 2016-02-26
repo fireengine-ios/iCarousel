@@ -218,6 +218,8 @@
     self.authToken = nil;
     self.baseUrl = nil;
     self.baseUrlConstant = nil;
+    self.emailEmptyMessageShown = NO;
+    
     [SyncUtil resetBaseUrlConstant];
     [SharedUtil writeSharedToken:nil];
 }

@@ -28,7 +28,13 @@
         infoView.backgroundColor = [UIColor whiteColor];
         [self addSubview:infoView];
         
-        NSString *topInfo = [NSString stringWithFormat:@"%@ (%@) %.1f TL/%@", subscription.plan.displayName, [Util transformedHugeSizeValueDecimalIfNecessary:subscription.plan.quota], subscription.plan.price, [subscription.plan.period isEqualToString:@"MONTH"] ? NSLocalizedString(@"MonthlyShort", "") : NSLocalizedString(@"YearlyShort", "")];
+        NSString *topInfo = @"";
+
+        if([subscription.plan.name isEqualToString:@"demo"]) {
+            topInfo = [NSString stringWithFormat:NSLocalizedString(@"WelcomePackageName", @""), [Util transformedHugeSizeValueDecimalIfNecessary:subscription.plan.quota]];
+        } else {
+            topInfo = [NSString stringWithFormat:@"%@ %.1f TL/%@", [Util transformedHugeSizeValueDecimalIfNecessary:subscription.plan.quota], subscription.plan.price, [subscription.plan.period isEqualToString:@"MONTH"] ? NSLocalizedString(@"MonthlyShort", "") : NSLocalizedString(@"YearlyShort", "")];
+        }
 
         CustomLabel *topLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, 23, infoView.frame.size.width, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:18] withColor:[Util UIColorForHexColor:@"555555"] withText:topInfo withAlignment:NSTextAlignmentCenter];
         [infoView addSubview:topLabel];

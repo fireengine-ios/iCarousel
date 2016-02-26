@@ -634,3 +634,5 @@
 "TOO_MANY_INVALID_ATTEMPTS"="Bu doğrulama kodu için çok sayıda hatalı giriş yaptınız. Lütfen yeni bir doğrulama kodu talep ediniz.";
 "CannotChangeEmail"="E-Posta adresinizi değiştirmenize izin verilmemektedir.";
 "LdapLockedError"="Çok fazla sayıda hatalı giriş yaptınız. Lütfen 1 saat sonra tekrar deneyiniz.";
+
+"WelcomePackageName"="Hoşgeldin (%@)";

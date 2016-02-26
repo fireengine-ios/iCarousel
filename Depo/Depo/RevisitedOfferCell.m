@@ -26,7 +26,7 @@
         NSString *periodInfoKey = [NSString stringWithFormat:@"PERIOD_%@_SHORT", offer.period];
         NSString *periodInfo = NSLocalizedString(periodInfoKey, "");
 
-        NSString *buttonTitle = [NSString stringWithFormat:@"%@ (%@) %@ TL/%@", offer.role ? [AppUtil getPackageDisplayName:offer.role] : offer.name, [Util transformedHugeSizeValueDecimalIfNecessary:offer.quota], offer.price, [offer.period isEqualToString:@"MONTH"] ? NSLocalizedString(@"MonthlyShort", "") : NSLocalizedString(@"YearlyShort", "")];
+        NSString *buttonTitle = [NSString stringWithFormat:@"%@ %@ TL/%@", [Util transformedHugeSizeValueDecimalIfNecessary:offer.quota], offer.price, [offer.period isEqualToString:@"MONTH"] ? NSLocalizedString(@"MonthlyShort", "") : NSLocalizedString(@"YearlyShort", "")];
         if(offer.offerType == OfferTypeApple) {
             buttonTitle = [NSString stringWithFormat:@"%@ %@ /%@", offer.name, offer.price, periodInfo];
         }
