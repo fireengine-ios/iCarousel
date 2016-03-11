@@ -114,6 +114,8 @@
 
 #define EMAIL_UPDATE_URL BASE_URL@"/account/email"
 
+#define MSISDN_UPDATE_URL BASE_URL@"/account/updatePhoneNumber"
+
 #define IAP_VALIDATE_URL BASE_URL@"/inapppurchase/apple/validatePurchase"
 
 #define REQ_CAPTCHA_URL BASE_URL@"/captcha/%@/%@"

@@ -172,6 +172,16 @@
 
     [self.view endEditing:YES];
     
+    NSString *confirmMessage = [NSString stringWithFormat:NSLocalizedString(@"EmailConfirmMessage", @""), emailField.text];
+    CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Approve", @"") withCancelTitle:NSLocalizedString(@"EmailConfirmUpdate", @"") withApproveTitle:NSLocalizedString(@"EmailConfirmContinue", @"") withMessage:confirmMessage withModalType:ModalTypeApprove];
+    confirm.delegate = self;
+    [APPDELEGATE showCustomConfirm:confirm];
+}
+
+- (void) didRejectCustomAlert:(CustomConfirmView *)alertView {
+}
+
+- (void) didApproveCustomAlert:(CustomConfirmView *)alertView {
     [signupDao requestTriggerSignupForEmail:emailField.text forPhoneNumber:msisdnField.text withPassword:passwordField.text];
     [self showLoading];
 }
@@ -198,6 +208,14 @@
         } else {
             [self showInfoAlertWithMessage:NSLocalizedString(@"SignupSuccess", @"")];
             return;
+        }
+    } else if([[signupStatus uppercaseString] isEqualToString:@"INVALID_PASSWORD"]){
+        NSDictionary *detailDict = [signupResult objectForKey:@"value"];
+        NSString *errorReason = [detailDict objectForKey:@"reason"];
+        if(errorReason != nil && [errorReason isKindOfClass:[NSString class]]) {
+            [self showErrorAlertWithMessage:NSLocalizedString(errorReason, @"")];
+        } else {
+            [self showErrorAlertWithMessage:NSLocalizedString(signupStatus, @"")];
         }
     } else {
         [self showErrorAlertWithMessage:NSLocalizedString(signupStatus, @"")];

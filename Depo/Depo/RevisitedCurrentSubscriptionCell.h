@@ -11,6 +11,7 @@
 
 @protocol RevisitedCurrentSubscriptionCellDelegate <NSObject>
 - (void) revisitedCurrentSubscriptionCellDidSelectCancelForSubscription:(Subscription *) sRef;
+- (void) revisitedCurrentSubscriptionCellDidSelectLinkForSubscription:(Subscription *) sRef;
 @end
 
 @interface RevisitedCurrentSubscriptionCell : UITableViewCell

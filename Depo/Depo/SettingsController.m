@@ -21,6 +21,8 @@
 #import "SettingsAboutUsController.h"
 #import "CustomButton.h"
 #import "UIImageView+AFNetworking.h"
+#import "ChangePassController.h"
+#import "UpdateMsisdnController.h"
 
 @interface SettingsController ()
 
@@ -83,14 +85,42 @@
     profileButton.userInteractionEnabled = NO;
 //    [profileInfoArea addSubview:profileButton];
     
-    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 118, 300, 20)];
-    [nameLabel setText:APPDELEGATE.session.user.fullName];
+    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 108, 300, 20)];
+    if(APPDELEGATE.session.user.email) {
+        [nameLabel setText:APPDELEGATE.session.user.email];
+    } else {
+        [nameLabel setText:APPDELEGATE.session.user.fullName];
+    }
     nameLabel.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:20];
     nameLabel.textAlignment = NSTextAlignmentCenter;
     nameLabel.textColor = [Util UIColorForHexColor:@"FFFFFF"];
     nameLabel.backgroundColor= [UIColor clearColor];
     [profileInfoArea addSubview:nameLabel];
+
+    NSString *msisdnVal = APPDELEGATE.session.user.username;
+    UIFont *msisdnFont = [UIFont fontWithName:@"TurkcellSaturaDem" size:20];
     
+    float msisdnWidth = [Util calculateWidthForText:msisdnVal forHeight:20 forFont:msisdnFont] + 10;
+    
+    UILabel *msisdnLabel = [[UILabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - msisdnWidth)/2 + 10, 132, msisdnWidth, 20)];
+    [msisdnLabel setText:msisdnVal];
+    msisdnLabel.font = msisdnFont;
+    msisdnLabel.textAlignment = NSTextAlignmentCenter;
+    msisdnLabel.textColor = [Util UIColorForHexColor:@"bce3f7"];
+    msisdnLabel.backgroundColor= [UIColor clearColor];
+    [msisdnLabel setUserInteractionEnabled:YES];
+    [profileInfoArea addSubview:msisdnLabel];
+
+    UITapGestureRecognizer * singleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(msisdnClicked)];
+    singleTapGesture.numberOfTapsRequired = 1;
+    singleTapGesture.enabled = YES;
+    [msisdnLabel addGestureRecognizer:singleTapGesture];
+
+    UIImage *editIcon = [UIImage imageNamed:@"icon_editnum.png"];
+    UIImageView *editIconView = [[UIImageView alloc] initWithFrame:CGRectMake(msisdnLabel.frame.origin.x - 17, msisdnLabel.frame.origin.y, 14, 14)];
+    editIconView.image = editIcon;
+    [profileInfoArea addSubview:editIconView];
+
     /*
     UIImageView *cellPhoneIcon = [[UIImageView alloc]initWithFrame:CGRectMake(111, 123, 7, 11)];
     cellPhoneIcon.image = [UIImage imageNamed:@"cellphone_icon@2x"];
@@ -105,6 +135,14 @@
      */
     
     [self.view addSubview:profileInfoArea];
+}
+
+- (void) msisdnClicked {
+    if(APPDELEGATE.session.user.accountType == AccountTypeOther) {
+        UpdateMsisdnController *updateMsisdn = [[UpdateMsisdnController alloc] init];
+        updateMsisdn.nav = self.nav;
+        [self.nav pushViewController:updateMsisdn animated:YES];
+    }
 }
 
 - (void) drawSettingsCategories {
@@ -248,9 +286,9 @@
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #ifdef LOG2FILE
-    return 5;
+    return 6;
 #else
-    return 4;
+    return 5;
 #endif
 }
 
@@ -299,11 +337,14 @@
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         return cell;
     } else if (indexPath.row == 3) {
-//        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"HowTo", @"") titleColor:nil subTitleText:@"" iconName:@"info_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"FAQ", @"") titleColor:nil subTitleText:@"" iconName:@"help_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
+        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"PasswordSettingsTitle", @"") titleColor:nil subTitleText:@"" iconName:@"icon_set_pass" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         return cell;
     } else if (indexPath.row == 4) {
+        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"FAQ", @"") titleColor:nil subTitleText:@"" iconName:@"help_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
+        cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+        return cell;
+    } else if (indexPath.row == 5) {
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"Mail Logs" titleColor:nil subTitleText:@"" iconName:@"help_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         return cell;
@@ -324,10 +365,12 @@
             [self didTriggerConnectedDevices];
             break;
         case 3:
-//            [self didTriggerAboutUs];
-            [self didTriggerHelp];
+            [self didTriggerPass];
             break;
         case 4:
+            [self didTriggerHelp];
+            break;
+        case 5:
             [self triggerMailLog];
             break;
         default:
@@ -445,6 +488,12 @@
     SettingsAboutUsController *aboutUsController = [[SettingsAboutUsController alloc] init];
     aboutUsController.nav = self.nav;
     [self.nav pushViewController:aboutUsController animated:YES];
+}
+
+- (void) didTriggerPass {
+    ChangePassController *changePass = [[ChangePassController alloc] init];
+    changePass.nav = self.nav;
+    [self.nav pushViewController:changePass animated:YES];
 }
 
 - (BOOL)shouldAutorotate {

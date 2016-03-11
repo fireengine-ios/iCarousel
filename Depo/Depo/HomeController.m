@@ -28,6 +28,7 @@
 #import "AppSession.h"
 #import <SplunkMint/SplunkMint.h>
 #import "EmailEntryController.h"
+#import "MsisdnEntryController.h"
 
 @interface HomeController ()
 
@@ -300,9 +301,13 @@
 - (void) accountSuccessCallback:(NSArray *) subscriptions {
     
     if(APPDELEGATE.session.msisdnEmpty) {
-        [APPDELEGATE triggerLogout];
-        [self showErrorAlertWithMessage:NSLocalizedString(@"MsisdnEmpty", @"")];
-        return;
+        MsisdnEntryController *msisdnController = [[MsisdnEntryController alloc] init];
+        MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:msisdnController];
+        [self presentViewController:modalNav animated:YES completion:nil];
+
+//        [APPDELEGATE triggerLogout];
+//        [self showErrorAlertWithMessage:NSLocalizedString(@"MsisdnEmpty", @"")];
+//        return;
     }
 
     if(APPDELEGATE.session.emailEmpty && !APPDELEGATE.session.emailEmptyMessageShown) {

@@ -294,7 +294,7 @@
 "CurrentPackageTitle"="Sahip Olduğum Paketler";
 "SubscriptionInfo"="%@ (%gGB) %g TL/Ay";
 "RenewalDateInfo"="Yenileme tarihi: %@";
-"CancelSubscription"="Paket İptal";
+"CancelSubscription"="İptal";
 "CancelSubscriptionInfo"="İptal etmek için \"Iptal %@\" yazıp 2222'ye kısa mesaj gönderebilirsiniz.";
 "UpgradeOptionsTitle"="Paket Seçenekleri";
 "Month"="Ay";
@@ -592,6 +592,7 @@
 "WAITING_FOR_TIMEOUT_PERIOD"="Çok sayıda hatalı giriş yaptınız. Lütfen daha sonra tekrar deneyiniz.";
 "SEQUENTIAL_CHARACTERS"="Ardışık sayı veya harfler kullandınız. Lütfen ardışık olmayan harf ve rakamlardan oluşan, en az 6 en fazla 16 karakterli bir şifre belirleyiniz.";
 "SAME_CHARACTERS"="Sayı ve rakamlardan oluşan, en az 6 en fazla 16 karakterli, ardışık sayı ve harf içermeyen bir şifre belirlenmeli.";
+"INVALID_PASSWORD"="Sayı ve rakamlardan oluşan, en az 6 en fazla 16 karakterli, ardışık sayı ve harf içermeyen bir şifre belirlenmeli.";
 
 "MsisdnEmailTitle"="GSM NUMARASI veya E-POSTA ADRESİ";
 "MsisdnEmailPlaceholder"="GSM Numarası veya E-Posta Adresi";
@@ -636,3 +637,22 @@
 "LdapLockedError"="Çok fazla sayıda hatalı giriş yaptınız. Lütfen 1 saat sonra tekrar deneyiniz.";
 
 "WelcomePackageName"="Hoşgeldin (%@)";
+
+"MsisdnEntry"="GSM Numarası Giriş";
+"WelcomePageSubMessage"="Turkcell Akıllı Depo iPhone Uygulamasına hoşgeldiniz";
+"PasswordSettingsTitle"="Şifre";
+"PasswordChangeTitle"="Şifre Değiştir";
+
+"EmailConfirmUpdate"="GÜNCELLE";
+"EmailConfirmContinue"="ONAYLIYORUM";
+"EmailConfirmMessage"="Kayıt işleminizi %@ mail adresinizle tamamlıyorsunuz. Tüm güvenlik onayları ve bilgilendirmeler için vermiş olduğunuz mail adresi kullanılacağından doğruluğundan emin olmanızı rica ederiz.";
+
+"CAN_NOT_CHANGE_MSISDN"="Gsm Numarası değiştirmenize izin verilmemektedir.";
+"ChangeGsmNumber"="GSM Numara Değişikliği";
+"OldPhoneLabel"="ESKİ NUMARA";
+"NewPhoneLabel"="YENİ NUMARA";
+"ChangePhoneButton"="Numara değiştir";
+
+"NewPass"="YENİ ŞİFRE";
+"NewPassAgain"="YENİ ŞİFRE TEKRAR";
+"ChangePassButton"="Şifre değiştir";

@@ -45,6 +45,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
 #import "BgViewController.h"
+#import "WelcomeController.h"
 
 //TODO info'larda version update
 
@@ -175,9 +176,9 @@
             [tokenManager requestTokenByMsisdn:cachedMsisdn andPass:cachedPass shouldRememberMe:[CacheUtil readCachedRememberMeForPostMigration]];
             [self showMainLoading];
         } else {
-            LoginController *login = [[LoginController alloc] init];
-            MyNavigationController *loginNav = [[MyNavigationController alloc] initWithRootViewController:login];
-            self.window.rootViewController = loginNav;
+            WelcomeController *welcomePage = [[WelcomeController alloc] init];
+            MyNavigationController *welcomeNav = [[MyNavigationController alloc] initWithRootViewController:welcomePage];
+            self.window.rootViewController = welcomeNav;
         }
     } else if([ReachabilityManager isReachableViaWWAN]) {
         [self.window.rootViewController.view removeFromSuperview];
@@ -188,9 +189,9 @@
 
 - (void) triggerLogin {
     if([ReachabilityManager isReachableViaWiFi]) {
-        LoginController *login = [[LoginController alloc] init];
-        MyNavigationController *loginNav = [[MyNavigationController alloc] initWithRootViewController:login];
-        self.window.rootViewController = loginNav;
+        WelcomeController *welcomePage = [[WelcomeController alloc] init];
+        MyNavigationController *welcomeNav = [[MyNavigationController alloc] initWithRootViewController:welcomePage];
+        self.window.rootViewController = welcomeNav;
     } else if([ReachabilityManager isReachableViaWWAN]) {
         [self.window.rootViewController.view removeFromSuperview];
         [tokenManager requestRadiusLogin];
@@ -211,11 +212,6 @@
     }
     if(shouldShowLogin) {
         [self triggerLogout];
-        /*
-        LoginController *login = [[LoginController alloc] init];
-        MyNavigationController *loginNav = [[MyNavigationController alloc] initWithRootViewController:login];
-        self.window.rootViewController = loginNav;
-         */
     }
 }
 
@@ -329,9 +325,9 @@
     [CacheUtil resetRememberMeToken];
     [[UploadQueue sharedInstance] cancelAllUploads];
 
-    LoginController *login = [[LoginController alloc] init];
-    MyNavigationController *loginNav = [[MyNavigationController alloc] initWithRootViewController:login];
-    self.window.rootViewController = loginNav;
+    WelcomeController *welcomePage = [[WelcomeController alloc] init];
+    MyNavigationController *welcomeNav = [[MyNavigationController alloc] initWithRootViewController:welcomePage];
+    self.window.rootViewController = welcomeNav;
 }
 
 - (void) tokenManagerInadequateInfo {

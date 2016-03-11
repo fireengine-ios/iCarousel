@@ -212,63 +212,54 @@
 #pragma mark UITableView methods
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
-    if (offers.count > 0) {
-        return 2;
-    } else {
-        return 1;
-    }
+    return 2;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        if(currentSubscriptions == nil) {
-            return 0;
-        } else {
-            return [currentSubscriptions count];
-        }
-    } else {
         if(offers == nil) {
             return 0;
         } else {
             return [offers count];
+        }
+    } else {
+        if(currentSubscriptions == nil) {
+            return 0;
+        } else {
+            return [currentSubscriptions count];
         }
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section == 0){
+        if(offers == nil || [offers count] == 0) {
+            return 0;
+        } else {
+            return 50;
+        }
+    } else {
         if(currentSubscriptions == nil) {
             return 0;
         } else {
             return 40;
-        }
-    } else {
-        if(offers == nil) {
-            return 0;
-        } else {
-            return 50;
         }
     }
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        return 135;
-    } else {
         return 75;
+    } else {
+        return 135;
     }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 40)];
     if(section == 0) {
-        headerView.backgroundColor = [UIColor clearColor];
-        
-        CustomLabel *titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, 12, headerView.frame.size.width, 16) withFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:12] withColor:[Util UIColorForHexColor:@"292F3E"] withText:NSLocalizedString(@"CurrentPackageTitle", @"") withAlignment:NSTextAlignmentCenter];
-        [headerView addSubview:titleLabel];
-    } else {
         headerView.backgroundColor = [UIColor whiteColor];
-
+        
         CustomLabel *titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, 12, headerView.frame.size.width, 16) withFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:12] withColor:[Util UIColorForHexColor:@"292F3E"] withText:NSLocalizedString(@"UpgradeOptionsTitle", @"") withAlignment:NSTextAlignmentCenter];
         [headerView addSubview:titleLabel];
         
@@ -276,6 +267,11 @@
         separator.backgroundColor = [Util UIColorForHexColor:@"DADADA"];
         separator.alpha = 0.6f;
         [headerView addSubview:separator];
+    } else {
+        headerView.backgroundColor = [UIColor clearColor];
+        
+        CustomLabel *titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, 12, headerView.frame.size.width, 16) withFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:12] withColor:[Util UIColorForHexColor:@"292F3E"] withText:NSLocalizedString(@"CurrentPackageTitle", @"") withAlignment:NSTextAlignmentCenter];
+        [headerView addSubview:titleLabel];
     }
     return headerView;
 }
@@ -286,13 +282,13 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if(cell == nil) {
         if (indexPath.section == 0) {
-            Subscription *subscription = [currentSubscriptions objectAtIndex:indexPath.row];
-            cell = [[RevisitedCurrentSubscriptionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withSubscription:subscription];
-            ((RevisitedCurrentSubscriptionCell *) cell).delegate = self;
-        } else {
             Offer *offer = [offers objectAtIndex:indexPath.row];
             cell = [[RevisitedOfferCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withOffer:offer];
             ((RevisitedOfferCell *) cell).delegate = self;
+        } else {
+            Subscription *subscription = [currentSubscriptions objectAtIndex:indexPath.row];
+            cell = [[RevisitedCurrentSubscriptionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withSubscription:subscription];
+            ((RevisitedCurrentSubscriptionCell *) cell).delegate = self;
         }
     }
     return cell;
@@ -461,6 +457,22 @@
         }
     }
     [self showInfoAlertWithMessage:contentText];
+}
+
+- (void) revisitedCurrentSubscriptionCellDidSelectLinkForSubscription:(Subscription *)sRef {
+    /*
+    NSString *link = @"";
+    if([sRef.type isEqualToString:@"INAPP_PURCHASE_APPLE"]) {
+        link = @"http://itunes.apple.com";
+    } else if([sRef.type isEqualToString:@"INAPP_PURCHASE_GOOGLE"]) {
+        link = @"http://play.google.com";
+    } else {
+        link = @"http://www.turkcell.com.tr";
+    }
+    if([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:link]]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:link]];
+    }
+     */
 }
 
 #pragma mark  RevisitedOfferCellDelegate methods

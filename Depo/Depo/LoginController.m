@@ -122,7 +122,7 @@
 
         SimpleButton *registerButton = [[SimpleButton alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60) withTitle:NSLocalizedString(@"SignUpButtonTitle", @"") withTitleColor:[UIColor whiteColor] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[UIColor blackColor] withBgColor:[UIColor blackColor] withCornerRadius:0 withIconName:@"white_right_arrow_icon.png" withIconFrame:CGRectMake(self.view.frame.size.width - 100, 23, 8, 14)];
         [registerButton addTarget:self action:@selector(registerClicked) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:registerButton];
+//        [self.view addSubview:registerButton];
         
         mainScroll.contentSize = CGSizeMake(mainScroll.frame.size.width, scrollYIndex + 120);
 

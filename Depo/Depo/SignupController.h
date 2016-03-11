@@ -10,8 +10,9 @@
 #import "LoginTextfield.h"
 #import "SignupDao.h"
 #import "CheckButton.h"
+#import "CustomConfirmView.h"
 
-@interface SignupController : MyViewController <UITextFieldDelegate, UIGestureRecognizerDelegate, CheckButtonDelegate> {
+@interface SignupController : MyViewController <UITextFieldDelegate, UIGestureRecognizerDelegate, CheckButtonDelegate, CustomConfirmDelegate> {
     NSString *msisdnValue;
     NSString *emailValue;
     NSString *passwordValue;
