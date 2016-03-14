@@ -81,32 +81,42 @@
 
 - (void) updateMsisdnSuccessCallback:(NSDictionary *) resultDict {
     [self hideLoading];
+    
     NSString *resultStatus = [resultDict objectForKey:@"status"];
+    BOOL continueWithOTP = NO;
+    
     if([resultStatus isEqualToString:@"PHONE_NUMBER_IS_ALREADY_EXIST"]) {
         [self showErrorAlertWithMessage:NSLocalizedString(@"PHONE_NUMBER_IS_ALREADY_EXIST", @"")];
     } else if([resultStatus isEqualToString:@"CAN_NOT_CHANGE_MSISDN"]) {
         [self showErrorAlertWithMessage:NSLocalizedString(@"CAN_NOT_CHANGE_MSISDN", @"")];
     } else if([resultStatus isEqualToString:@"TOO_MANY_REQUESTS"]) {
         [self showErrorAlertWithMessage:NSLocalizedString(@"TOO_MANY_REQUESTS", @"")];
-    } else if([resultStatus isEqualToString:@"OK"]){
-        //TODO "OK" akışını kontrol et
+    } else if([resultStatus isEqualToString:POST_SIGNUP_ACTION_OTP] ){
+        continueWithOTP = YES;
+    } else if([resultStatus isEqualToString:@"OK"] ){
         NSDictionary *actionDict = [resultDict objectForKey:@"value"];
         if(actionDict != nil && [actionDict isKindOfClass:[NSDictionary class]]) {
             NSString *action = [actionDict objectForKey:@"action"];
-            NSString *refToken = [actionDict objectForKey:@"referenceToken"];
-            NSNumber *remainingTimeInMinutes = [actionDict objectForKey:@"remainingTimeInMinutes"];
-            NSNumber *expectedInputLength = [actionDict objectForKey:@"expectedInputLength"];
             if(action != nil && [action isKindOfClass:[NSString class]]) {
                 if([action isEqualToString:POST_SIGNUP_ACTION_OTP]) {
-                    APPDELEGATE.session.signupReferenceToken = refToken;
-                    
-                    OTPController *otp = [[OTPController alloc] initWithRemainingTimeInMinutes:[remainingTimeInMinutes intValue] andInputLength:[expectedInputLength intValue]];
-                    [self.navigationController pushViewController:otp animated:YES];
+                    continueWithOTP = YES;
                 }
             }
         }
     } else {
         [self showErrorAlertWithMessage:NSLocalizedString(resultStatus, @"")];
+    }
+    
+    if(continueWithOTP) {
+        NSDictionary *actionDict = [resultDict objectForKey:@"value"];
+        NSString *refToken = [actionDict objectForKey:@"referenceToken"];
+        NSNumber *remainingTimeInMinutes = [actionDict objectForKey:@"remainingTimeInMinutes"];
+        NSNumber *expectedInputLength = [actionDict objectForKey:@"expectedInputLength"];
+        APPDELEGATE.session.otpReferenceToken = refToken;
+        [CacheUtil writeCachedMsisdnForPostMigration:msisdnField.text];
+        
+        OTPController *otp = [[OTPController alloc] initWithRemainingTimeInMinutes:[remainingTimeInMinutes intValue] andInputLength:[expectedInputLength intValue] withType:MsisdnUpdateTypeEmpty];
+        [self.navigationController pushViewController:otp animated:YES];
     }
 }
 

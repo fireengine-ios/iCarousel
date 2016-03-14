@@ -24,8 +24,9 @@
 #import "ChangePassController.h"
 #import "UpdateMsisdnController.h"
 
-@interface SettingsController ()
-
+@interface SettingsController () {
+    UILabel *msisdnLabel;
+}
 @end
 
 @implementation SettingsController
@@ -40,9 +41,15 @@
         [self drawProfileInfoArea];
         [self drawSettingsCategories];
         //[self drawImageOptionsArea];
+
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(retouchMsisdn) name:MSISDN_CHANGED_NOTIFICATION object:nil];
     }
     
     return self;
+}
+
+- (void) retouchMsisdn {
+    [msisdnLabel setText:APPDELEGATE.session.user.phoneNumber];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -97,12 +104,12 @@
     nameLabel.backgroundColor= [UIColor clearColor];
     [profileInfoArea addSubview:nameLabel];
 
-    NSString *msisdnVal = APPDELEGATE.session.user.username;
+    NSString *msisdnVal = APPDELEGATE.session.user.phoneNumber;
     UIFont *msisdnFont = [UIFont fontWithName:@"TurkcellSaturaDem" size:20];
     
     float msisdnWidth = [Util calculateWidthForText:msisdnVal forHeight:20 forFont:msisdnFont] + 10;
     
-    UILabel *msisdnLabel = [[UILabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - msisdnWidth)/2 + 10, 132, msisdnWidth, 20)];
+    msisdnLabel = [[UILabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - msisdnWidth)/2 + 10, 132, msisdnWidth, 20)];
     [msisdnLabel setText:msisdnVal];
     msisdnLabel.font = msisdnFont;
     msisdnLabel.textAlignment = NSTextAlignmentCenter;
@@ -168,7 +175,6 @@
     
     UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(HideImageOptionsArea)];
     [darkArea addGestureRecognizer:singleFingerTap];
-    
     
     UISwipeGestureRecognizer *recognizerDown = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeDown:)];
     recognizerDown.direction = UISwipeGestureRecognizerDirectionDown;
@@ -286,9 +292,9 @@
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #ifdef LOG2FILE
-    return 6;
-#else
     return 5;
+#else
+    return 4;
 #endif
 }
 
@@ -336,15 +342,15 @@
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"ConnectedDevices", @"") titleColor:nil subTitleText:@"" iconName:@"device_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         return cell;
+//    } else if (indexPath.row == 3) {
+//        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"PasswordSettingsTitle", @"") titleColor:nil subTitleText:@"" iconName:@"icon_set_pass" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
+//        cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+//        return cell;
     } else if (indexPath.row == 3) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"PasswordSettingsTitle", @"") titleColor:nil subTitleText:@"" iconName:@"icon_set_pass" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
-        cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
-        return cell;
-    } else if (indexPath.row == 4) {
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"FAQ", @"") titleColor:nil subTitleText:@"" iconName:@"help_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         return cell;
-    } else if (indexPath.row == 5) {
+    } else if (indexPath.row == 4) {
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"Mail Logs" titleColor:nil subTitleText:@"" iconName:@"help_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         return cell;
@@ -364,13 +370,13 @@
         case 2:
             [self didTriggerConnectedDevices];
             break;
+//        case 3:
+//            [self didTriggerPass];
+//            break;
         case 3:
-            [self didTriggerPass];
-            break;
-        case 4:
             [self didTriggerHelp];
             break;
-        case 5:
+        case 4:
             [self triggerMailLog];
             break;
         default:

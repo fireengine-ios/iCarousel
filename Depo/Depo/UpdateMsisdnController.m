@@ -12,6 +12,7 @@
 #import "CustomLabel.h"
 #import "AppDelegate.h"
 #import "AppSession.h"
+#import "OTPController.h"
 
 @interface UpdateMsisdnController ()
 
@@ -26,6 +27,11 @@
         self.title = NSLocalizedString(@"ChangeGsmNumber", @"");
         self.view.backgroundColor = [Util UIColorForHexColor:@"FFFFFF"];
         
+        msisdnDao = [[UpdateMsisdnDao alloc] init];
+        msisdnDao.delegate = self;
+        msisdnDao.successMethod = @selector(updateMsisdnSuccessCallback:);
+        msisdnDao.failMethod = @selector(updateMsisdnFailCallback:);
+
         CustomLabel *emailLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(25, 30, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"EmailTitle", @"")];
         [self.view addSubview:emailLabel];
         
@@ -66,6 +72,64 @@
 }
 
 - (void) triggerSave {
+    if([updatedNumberField.text length] == 0) {
+        [self showErrorAlertWithMessage:NSLocalizedString(@"MsisdnFormatErrorMessage", @"")];
+        return;
+    }
+    [self.view endEditing:YES];
+    [msisdnDao requestUpdateMsisdn:updatedNumberField.text];
+    [self showLoading];
+}
+
+- (void) updateMsisdnSuccessCallback:(NSDictionary *) resultDict {
+    [self hideLoading];
+    
+    NSString *resultStatus = [resultDict objectForKey:@"status"];
+    BOOL continueWithOTP = NO;
+    
+    if([resultStatus isEqualToString:@"PHONE_NUMBER_IS_ALREADY_EXIST"]) {
+        [self showErrorAlertWithMessage:NSLocalizedString(@"PHONE_NUMBER_IS_ALREADY_EXIST", @"")];
+    } else if([resultStatus isEqualToString:@"CAN_NOT_CHANGE_MSISDN"]) {
+        [self showErrorAlertWithMessage:NSLocalizedString(@"CAN_NOT_CHANGE_MSISDN", @"")];
+    } else if([resultStatus isEqualToString:@"TOO_MANY_REQUESTS"]) {
+        [self showErrorAlertWithMessage:NSLocalizedString(@"TOO_MANY_REQUESTS", @"")];
+    } else if([resultStatus isEqualToString:POST_SIGNUP_ACTION_OTP] ){
+        continueWithOTP = YES;
+    } else if([resultStatus isEqualToString:@"OK"] ){
+        NSDictionary *actionDict = [resultDict objectForKey:@"value"];
+        if(actionDict != nil && [actionDict isKindOfClass:[NSDictionary class]]) {
+            NSString *action = [actionDict objectForKey:@"action"];
+            if(action != nil && [action isKindOfClass:[NSString class]]) {
+                if([action isEqualToString:POST_SIGNUP_ACTION_OTP]) {
+                    continueWithOTP = YES;
+                }
+            }
+        }
+    } else {
+        [self showErrorAlertWithMessage:NSLocalizedString(resultStatus, @"")];
+    }
+    
+    if(continueWithOTP) {
+        NSDictionary *actionDict = [resultDict objectForKey:@"value"];
+        NSString *refToken = [actionDict objectForKey:@"referenceToken"];
+        NSNumber *remainingTimeInMinutes = [actionDict objectForKey:@"remainingTimeInMinutes"];
+        NSNumber *expectedInputLength = [actionDict objectForKey:@"expectedInputLength"];
+        APPDELEGATE.session.otpReferenceToken = refToken;
+        [CacheUtil writeCachedMsisdnForPostMigration:updatedNumberField.text];
+        
+        OTPController *otp = [[OTPController alloc] initWithRemainingTimeInMinutes:[remainingTimeInMinutes intValue] andInputLength:[expectedInputLength intValue] withType:MsisdnUpdateTypeSettings];
+        [self.navigationController pushViewController:otp animated:YES];
+    }
+}
+
+- (void) updateMsisdnFailCallback:(NSString *) errorMessage {
+    [self hideLoading];
+    [self showErrorAlertWithMessage:errorMessage];
+}
+
+- (BOOL) textFieldShouldReturn:(UITextField *)textField {
+    [updatedNumberField resignFirstResponder];
+    return YES;
 }
 
 - (void) triggerResign {

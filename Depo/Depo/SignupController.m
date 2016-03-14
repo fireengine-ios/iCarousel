@@ -197,10 +197,10 @@
         NSNumber *remainingTimeInMinutes = [valueDict objectForKey:@"remainingTimeInMinutes"];
         NSNumber *expectedInputLength = [valueDict objectForKey:@"expectedInputLength"];
         
-        APPDELEGATE.session.signupReferenceToken = referenceToken;
+        APPDELEGATE.session.otpReferenceToken = referenceToken;
         
         if([action isEqualToString:POST_SIGNUP_ACTION_OTP]) {
-            OTPController *otp = [[OTPController alloc] initWithRemainingTimeInMinutes:[remainingTimeInMinutes intValue] andInputLength:[expectedInputLength intValue]];
+            OTPController *otp = [[OTPController alloc] initWithRemainingTimeInMinutes:[remainingTimeInMinutes intValue] andInputLength:[expectedInputLength intValue] withType:MsisdnUpdateTypeSignup];
             [self.navigationController pushViewController:otp animated:YES];
         } else if([action isEqualToString:POST_SIGNUP_ACTION_EMAIL]) {
             EmailValidationResultController *emailController = [[EmailValidationResultController alloc] initWithEmailVal:emailValue];

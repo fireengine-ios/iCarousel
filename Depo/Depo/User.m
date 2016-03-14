@@ -19,6 +19,7 @@
 @synthesize cropAndSharePresentFlag;
 @synthesize accountType;
 @synthesize username;
+@synthesize phoneNumber;
 
 - (id) init {
     if(self = [super init]) {

@@ -29,11 +29,36 @@
     [self sendPostRequest:request];
 }
 
+- (void) requestTriggerVerifyPhoneToUpdate:(NSString *) token withOTP:(NSString *) otp {
+    NSURL *url = [NSURL URLWithString:VERIFY_PHONE_TO_UPDATE_URL];
+    
+    NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:
+                          token, @"referenceToken",
+                          otp, @"otp",
+                          nil];
+    
+    SBJSON *json = [SBJSON new];
+    NSString *jsonStr = [json stringWithObject:info];
+    NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
+    
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    [request setPostBody:postData];
+    [request setDelegate:self];
+    
+    [self sendPostRequest:request];
+}
+
 - (void)requestFinished:(ASIHTTPRequest *)request {
     NSError *error = [request error];
     if (!error) {
         NSString *responseStr = [request responseString];
         NSLog(@"Verify Phone Response: %@", responseStr);
+        
+        if([responseStr length] == 0) {
+                // success durumunda response tamamen boş gelebiliyor
+            [self shouldReturnSuccessWithObject:@"OK"];
+            return;
+        }
         
         SBJSON *jsonParser = [SBJSON new];
         NSDictionary *mainDict = [jsonParser objectWithString:responseStr];

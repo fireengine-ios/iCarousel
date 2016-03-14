@@ -78,6 +78,8 @@
 
 #define ALBUM_LIST_URL BASE_URL@"/album?contentType=album/photo&page=%d&size=%d&sortBy=label&sortOrder=ASC"
 
+#define ALBUM_LIST_W_SORT_URL BASE_URL@"/album?contentType=album/photo&page=%d&size=%d&sortBy=%@&sortOrder=%@"
+
 #define ALBUM_DETAIL_URL BASE_URL@"/album/%@?page=%d&size=%d&sortBy=createdDate&sortOrder=DESC&"
 
 #define ADD_ALBUM_URL BASE_URL@"/album"
@@ -107,6 +109,8 @@
 #define SIGNUP_URL BASE_URL@"/signup"
 
 #define VERIFY_PHONE_URL BASE_URL@"/verify/phoneNumber"
+
+#define VERIFY_PHONE_TO_UPDATE_URL BASE_URL@"/account/verifyPhoneNumberToUpdate"
 
 #define SEND_VERIFICATION_EMAIL_URL BASE_URL@"/verify/sendVerificationEmail"
 

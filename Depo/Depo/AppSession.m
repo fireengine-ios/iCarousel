@@ -35,7 +35,7 @@
 @synthesize shuffleFlag;
 @synthesize bgOngoingTasksOriginalUrls;
 @synthesize quotaExceed80EventFlag;
-@synthesize signupReferenceToken;
+@synthesize otpReferenceToken;
 @synthesize signupReferenceMsisdn;
 @synthesize signupReferenceEmail;
 @synthesize signupReferencePassword;

@@ -68,6 +68,8 @@
 
 #define CROPY_EMPTY_NOTIFICATION @"CROPY_EMPTY_NOTIFICATION"
 
+#define MSISDN_CHANGED_NOTIFICATION @"MSISDN_CHANGED_NOTIFICATION"
+
 #define CHANGED_MUSIC_OBJ_KEY @"CHANGED_MUSIC_OBJ_KEY"
 
 #define INDEX_AFTER_SHUFFLE_OBJ_KEY @"INDEX_AFTER_SHUFFLE_OBJ_KEY"
@@ -420,6 +422,12 @@ typedef enum {
     PackageInfoStandart,
     PackageInfoMegaPaket
 } PackageInfo;
+
+typedef enum {
+    MsisdnUpdateTypeSignup,
+    MsisdnUpdateTypeEmpty,
+    MsisdnUpdateTypeSettings
+} MsisdnUpdateType;
 
 @interface AppConstants : NSObject
 

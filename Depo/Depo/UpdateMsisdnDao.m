@@ -34,6 +34,7 @@
         NSString *statusVal = @"";
         NSString *responseStr = [request responseString];
         
+        NSLog(@"Update Msisdn Response: %@", responseStr);
         SBJSON *jsonParser = [SBJSON new];
         NSDictionary *mainDict = [jsonParser objectWithString:responseStr];
         if(mainDict != nil && ![mainDict isKindOfClass:[NSNull class]]) {

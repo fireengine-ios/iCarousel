@@ -11,5 +11,6 @@
 @interface VerifyPhoneDao : BaseDao
 
 - (void) requestTriggerVerifyPhone:(NSString *) token withOTP:(NSString *) otp;
+- (void) requestTriggerVerifyPhoneToUpdate:(NSString *) token withOTP:(NSString *) otp;
 
 @end

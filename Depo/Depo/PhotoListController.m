@@ -212,7 +212,7 @@
     self.tableUpdateCounter ++;
 
     [elasticSearchDao requestPhotosForPage:listOffset andSize:21 andSortType:APPDELEGATE.session.sortType];
-    [albumListDao requestAlbumListForStart:0 andSize:50];
+    [albumListDao requestAlbumListForStart:0 andSize:50 andSortType:APPDELEGATE.session.sortType];
 }
 
 - (void) photoListSuccessCallback:(NSArray *) files {
@@ -313,7 +313,7 @@
     [self proceedSuccessForProgressViewWithAddButtonKey:albumTable.hidden ? @"PhotoTab" : @"AlbumTab"];
 //    [self performSelector:@selector(popProgressView) withObject:nil afterDelay:1.0f];
     
-    [albumListDao requestAlbumListForStart:0 andSize:50];
+    [albumListDao requestAlbumListForStart:0 andSize:50 andSortType:APPDELEGATE.session.sortType];
 }
 
 - (void) addAlbumFailCallback:(NSString *) errorMessage {
@@ -345,7 +345,7 @@
     [self proceedSuccessForProgressViewWithAddButtonKey:albumTable.hidden ? @"PhotoTab" : @"AlbumTab"];
 
     self.tableUpdateCounter ++;
-    [albumListDao requestAlbumListForStart:0 andSize:50];
+    [albumListDao requestAlbumListForStart:0 andSize:50 andSortType:APPDELEGATE.session.sortType];
 }
 
 - (void) deleteAlbumFailCallback:(NSString *) errorMessage {
@@ -361,7 +361,7 @@
     [self proceedSuccessForProgressViewWithAddButtonKey:albumTable.hidden ? @"PhotoTab" : @"AlbumTab"];
     
     self.tableUpdateCounter ++;
-    [albumListDao requestAlbumListForStart:0 andSize:50];
+    [albumListDao requestAlbumListForStart:0 andSize:50 andSortType:APPDELEGATE.session.sortType];
 }
 
 - (void) photosAddedFailCallback:(NSString *) errorMessage {
@@ -733,8 +733,12 @@
     if(albumTable.isHidden) {
         [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeSort], [NSNumber numberWithInt:MoreMenuTypeSelect]]];
     } else {
-        [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeSelect]]];
+        [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeSortWithList], [NSNumber numberWithInt:MoreMenuTypeSelect]]];
     }
+}
+
+- (void) moreMenuDidSelectSortWithList {
+    [APPDELEGATE.base showSortWithList:[NSArray arrayWithObjects:[NSNumber numberWithInt:SortTypeAlphaAsc], [NSNumber numberWithInt:SortTypeAlphaDesc], [NSNumber numberWithInt:SortTypeDateAsc], [NSNumber numberWithInt:SortTypeDateDesc], nil]];
 }
 
 - (void) sortDidChange {

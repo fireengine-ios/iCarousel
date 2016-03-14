@@ -11,5 +11,6 @@
 @interface AlbumListDao : BaseDao
 
 - (void) requestAlbumListForStart:(int) start andSize:(int) size;
+- (void) requestAlbumListForStart:(int) start andSize:(int) size andSortType:(SortType) sortType;
 
 @end

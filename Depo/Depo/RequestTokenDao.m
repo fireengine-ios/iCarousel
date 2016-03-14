@@ -147,7 +147,7 @@
                 APPDELEGATE.session.emailNotVerified = YES;
             }
         }
-
+        
         if(rememberMeToken != nil && ![rememberMeToken isKindOfClass:[NSNull class]]) {
             [CacheUtil writeRememberMeToken:rememberMeToken];
             [SharedUtil writeSharedRememberMeToken:rememberMeToken];

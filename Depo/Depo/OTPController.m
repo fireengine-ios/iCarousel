@@ -13,6 +13,7 @@
 #import "SingleCharField.h"
 #import "EmailValidationResultController.h"
 #import "EmailValidationController.h"
+#import "CurioSDK.h"
 
 @interface OTPController ()
 
@@ -22,11 +23,17 @@
 
 @synthesize tickTimer;
 
-- (id) initWithRemainingTimeInMinutes:(int) remainingMinutes andInputLength:(int) inputLength {
+- (id) initWithRemainingTimeInMinutes:(int) remainingMinutes andInputLength:(int) inputLength withType:(MsisdnUpdateType) _type {
     if(self = [super init]) {
-        self.title = NSLocalizedString(@"SignUp", @"");
         self.view.backgroundColor = [Util UIColorForHexColor:@"FFFFFF"];
-        
+        type = _type;
+
+        if(type == MsisdnUpdateTypeSignup) {
+            self.title = NSLocalizedString(@"SignUp", @"");
+        } else {
+            self.title = NSLocalizedString(@"ChangePhoneTitle", @"");
+        }
+
         self.navigationItem.leftBarButtonItem = nil;
         
         otpLength = inputLength;
@@ -41,6 +48,18 @@
         smsDao.successMethod = @selector(smsSuccessCallback:);
         smsDao.failMethod = @selector(smsFailCallback:);
         
+        userInfoDao = [[AccountInfoDao alloc] init];
+        userInfoDao.delegate = self;
+        userInfoDao.successMethod = @selector(userInfoSuccessCallback:);
+        userInfoDao.failMethod = @selector(userInfoFailCallback:);
+
+        if(type != MsisdnUpdateTypeSettings) {
+            tokenDao = [[RequestTokenDao alloc] init];
+            tokenDao.delegate = self;
+            tokenDao.successMethod = @selector(tokenDaoSuccessCallback);
+            tokenDao.failMethod = @selector(tokenDaoFailCallback:);
+        }
+
         CustomLabel *topInfoLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaReg" size:15] withColor:[Util UIColorForHexColor:@"3E3E3E"] withText:NSLocalizedString(@"OTPTopInfo", @"") withAlignment:NSTextAlignmentCenter];
         [self.view addSubview:topInfoLabel];
         
@@ -90,43 +109,63 @@
 - (void) resendCode {
     [[CurioSDK shared] sendEvent:@"SignUp>Otp" eventValue:@"Resend"];
     
-    [smsDao requestTriggerSendVerificationSMS:APPDELEGATE.session.signupReferenceToken];
+    [smsDao requestTriggerSendVerificationSMS:APPDELEGATE.session.otpReferenceToken];
     [self showLoading];
 }
 
 - (void) verifySuccessCallback:(NSString *) statusVal {
-    [self hideLoading];
+    NSString *curioPreEvent = @"SignUp";
+    if(type == MsisdnUpdateTypeSettings) {
+        curioPreEvent = @"MsisdnUpdate";
+    } else if(type == MsisdnUpdateTypeEmpty) {
+        curioPreEvent = @"MsisdnEntry";
+    }
+    
     if([statusVal isEqualToString:@"CONTINUE_WITH_EMAIL_VERIFICATION"]) {
-        [[CurioSDK shared] sendEvent:@"SignUp>Otp" eventValue:@"Success"];
+        [self hideLoading];
+        [[CurioSDK shared] sendEvent:[NSString stringWithFormat:@"%@>Otp", curioPreEvent] eventValue:@"Success"];
 
         EmailValidationResultController *emailResultController = [[EmailValidationResultController alloc] initWithEmailVal:APPDELEGATE.session.signupReferenceEmail];
         [self.navigationController pushViewController:emailResultController animated:YES];
     } else if([statusVal isEqualToString:@"EXPIRED_OTP"]) {
-        [[CurioSDK shared] sendEvent:@"SignUp>Otp" eventValue:@"Fail"];
+        [self hideLoading];
+        [[CurioSDK shared] sendEvent:[NSString stringWithFormat:@"%@>Otp", curioPreEvent] eventValue:@"Fail"];
 
         [self showErrorAlertWithMessage:NSLocalizedString(@"OTPExpired", @"")];
         [self cleanOTPFields];
     } else if([statusVal isEqualToString:@"INVALID_OTP"]) {
-        [[CurioSDK shared] sendEvent:@"SignUp>Otp" eventValue:@"Fail"];
+        [self hideLoading];
+        [[CurioSDK shared] sendEvent:[NSString stringWithFormat:@"%@>Otp", curioPreEvent] eventValue:@"Fail"];
 
         [self showErrorAlertWithMessage:NSLocalizedString(@"OTPInvalid", @"")];
         [self cleanOTPFields];
     } else if([statusVal isEqualToString:@"INVALID_TOKEN"]) {
+        [self hideLoading];
         [self showErrorAlertWithMessage:NSLocalizedString(@"RefCodeInvalid", @"")];
         [self.navigationController popViewControllerAnimated:YES];
     } else if([statusVal isEqualToString:@"TOO_MANY_INVALID_ATTEMPTS"]) {
-        [[CurioSDK shared] sendEvent:@"SignUp>Otp" eventValue:@"Fail"];
+        [self hideLoading];
+        [[CurioSDK shared] sendEvent:[NSString stringWithFormat:@"%@>Otp", curioPreEvent] eventValue:@"Fail"];
 
         [self showErrorAlertWithMessage:NSLocalizedString(@"TOO_MANY_INVALID_ATTEMPTS", @"")];
         [self cleanOTPFields];
         [self prepareForResend];
     } else if([statusVal isEqualToString:@"OK"]) {
-        [[CurioSDK shared] sendEvent:@"SignUp" eventValue:@"Finish"];
+        [[CurioSDK shared] sendEvent:curioPreEvent eventValue:@"Finish"];
 
-        [self showInfoAlertWithMessage:NSLocalizedString(@"SignupSuccess", @"")];
-        [self.navigationController popToRootViewControllerAnimated:YES];
+//        [self showInfoAlertWithMessage:NSLocalizedString(@"SignupSuccess", @"")];
+//        [self.navigationController popToRootViewControllerAnimated:YES];
+        [self.view endEditing:YES];
+        if(type == MsisdnUpdateTypeSettings) {
+            [userInfoDao requestAccountInfo];
+        } else if(type == MsisdnUpdateTypeSignup) {
+            [tokenDao requestTokenForMsisdn:APPDELEGATE.session.signupReferenceMsisdn andPassword:APPDELEGATE.session.signupReferencePassword shouldRememberMe:YES];
+        } else if(type == MsisdnUpdateTypeEmpty) {
+            [tokenDao requestTokenForMsisdn:[CacheUtil readCachedMsisdnForPostMigration] andPassword:[CacheUtil readCachedPassForPostMigration] shouldRememberMe:YES];
+        }
     } else {
-        [[CurioSDK shared] sendEvent:@"SignUp>Otp" eventValue:@"Fail"];
+        [self hideLoading];
+        [[CurioSDK shared] sendEvent:[NSString stringWithFormat:@"%@>Otp", curioPreEvent] eventValue:@"Fail"];
         [self showErrorAlertWithMessage:NSLocalizedString(statusVal, @"")];
         [self cleanOTPFields];
     }
@@ -163,7 +202,7 @@
                 NSNumber *expectedInputLength = [valueDict objectForKey:@"expectedInputLength"];
 
                 if(referenceToken != nil && ![referenceToken isKindOfClass:[NSNull class]]) {
-                    APPDELEGATE.session.signupReferenceToken = referenceToken;
+                    APPDELEGATE.session.otpReferenceToken = referenceToken;
                 }
                 
                 otpLength = [expectedInputLength intValue];
@@ -191,6 +230,24 @@
 - (void) smsFailCallback:(NSString *) errorMessage {
     [self hideLoading];
     [self showErrorAlertWithMessage:errorMessage];
+}
+
+- (void) userInfoSuccessCallback:(User *) enrichedUser {
+    APPDELEGATE.session.user = enrichedUser;
+    [self hideLoading];
+    [self showInfoAlertWithMessage:NSLocalizedString(@"MsisdnUpdateSuccess", @"")];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:MSISDN_CHANGED_NOTIFICATION object:nil userInfo:nil];
+}
+
+- (void) userInfoFailCallback:(NSString *) errorMessage {
+    [self hideLoading];
+    APPDELEGATE.session.user.phoneNumber = [CacheUtil readCachedMsisdnForPostMigration];
+    [self showInfoAlertWithMessage:NSLocalizedString(@"MsisdnUpdateSuccess", @"")];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:MSISDN_CHANGED_NOTIFICATION object:nil userInfo:nil];
 }
 
 - (BOOL) textField:(UITextField *) textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
@@ -243,7 +300,11 @@
                 }
                 if(otpVal.length == otpLength) {
                     [self.view endEditing:YES];
-                    [verifyDao requestTriggerVerifyPhone:APPDELEGATE.session.signupReferenceToken withOTP:otpVal];
+                    if(type == MsisdnUpdateTypeSignup) {
+                        [verifyDao requestTriggerVerifyPhone:APPDELEGATE.session.otpReferenceToken withOTP:otpVal];
+                    } else {
+                        [verifyDao requestTriggerVerifyPhoneToUpdate:APPDELEGATE.session.otpReferenceToken withOTP:otpVal];
+                    }
                     [self showLoading];
                 }
             }
@@ -356,6 +417,36 @@
 - (void) innerTriggerBack {
     [[CurioSDK shared] sendEvent:@"SignUp>Otp" eventValue:@"Back"];
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void) tokenDaoSuccessCallback {
+    [self hideLoading];
+    
+    [CacheUtil writeCachedMsisdnForPostMigration:APPDELEGATE.session.signupReferenceMsisdn];
+    [CacheUtil writeCachedPassForPostMigration:APPDELEGATE.session.signupReferencePassword];
+    
+    [[CurioSDK shared] sendCustomId:APPDELEGATE.session.signupReferenceMsisdn];
+    
+    //TODO check hangisi dogru
+    [[CurioSDK shared] sendEvent:@"LoginSuccess" eventValue:@"true"];
+    [[CurioSDK shared] sendEvent:@"Login" eventValue:@"Success"];
+    [APPDELEGATE triggerPostLogin];
+}
+
+- (void) tokenDaoFailCallback:(NSString *) errorMessage {
+    [self hideLoading];
+    [[CurioSDK shared] sendEvent:@"Login" eventValue:@"Fail"];
+    
+    if([errorMessage isEqualToString:CAPTCHA_ERROR_MESSAGE]) {
+        [self showErrorAlertWithMessage:NSLocalizedString(@"CaptchaRequiredErrorMessage", @"")];
+    } else if([errorMessage isEqualToString:EMAIL_NOT_VERIFIED_ERROR_MESSAGE]) {
+        [self showErrorAlertWithMessage:NSLocalizedString(@"EmailNotVerifiedError", @"")];
+    } else if([errorMessage isEqualToString:LDAP_LOCKED_ERROR_MESSAGE]) {
+        [self showErrorAlertWithMessage:NSLocalizedString(@"LdapLockedError", @"")];
+    } else {
+        [self showErrorAlertWithMessage:NSLocalizedString(@"LoginError", @"")];
+    }
+    [APPDELEGATE triggerLogin];
 }
 
 @end

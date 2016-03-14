@@ -8,6 +8,7 @@
 
 #import "AlbumListDao.h"
 #import "PhotoAlbum.h"
+#import "AppUtil.h"
 
 @implementation AlbumListDao
 
@@ -16,6 +17,22 @@
 	NSURL *url = [NSURL URLWithString:albumListUrl];
 	
 	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    [request setDelegate:self];
+    
+    [self sendGetRequest:request];
+}
+
+- (void) requestAlbumListForStart:(int) start andSize:(int) size andSortType:(SortType) sortType {
+    sortType = [self resetSortType:sortType];
+
+    NSString *sort = @"label";
+    if(sortType == SortTypeDateAsc || sortType == SortTypeDateDesc) {
+        sort = @"createdDate";
+    }
+    NSString *albumListUrl = [NSString stringWithFormat:ALBUM_LIST_W_SORT_URL, start, size, sort, [AppUtil isAscByEnum:sortType] ? @"ASC":@"DESC"];
+    NSURL *url = [NSURL URLWithString:albumListUrl];
+    
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setDelegate:self];
     
     [self sendGetRequest:request];

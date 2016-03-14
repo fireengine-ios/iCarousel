@@ -47,7 +47,7 @@
 
 @property (nonatomic) BOOL quotaExceed80EventFlag;
 
-@property (nonatomic, strong) NSString *signupReferenceToken;
+@property (nonatomic, strong) NSString *otpReferenceToken;
 @property (nonatomic, strong) NSString *signupReferenceMsisdn;
 @property (nonatomic, strong) NSString *signupReferenceEmail;
 @property (nonatomic, strong) NSString *signupReferencePassword;

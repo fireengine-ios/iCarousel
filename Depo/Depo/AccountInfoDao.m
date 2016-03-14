@@ -40,6 +40,7 @@
             NSNumber *isCropAndShareTagAvailable = [mainDict objectForKey:@"isCropyTagAvailable"];
             NSString *username = [mainDict objectForKey:@"username"];
             NSString *email = [mainDict objectForKey:@"email"];
+            NSString *phoneNumber = [mainDict objectForKey:@"phoneNumber"];
             
             user.fullName = [NSString stringWithFormat:@"%@ %@", [self strByRawVal:name], [self strByRawVal:surname]];
             //            user.fullName = [NSString stringWithFormat:@"%@", [self strByRawVal:name]];
@@ -48,6 +49,8 @@
             user.profileImgUrl = [self strByRawVal:url];
             user.username = username;
             user.email = email;
+            user.phoneNumber = [self strByRawVal:phoneNumber];
+
             if(mobileUploadsSpecialFolderUuid != nil && ![mobileUploadsSpecialFolderUuid isKindOfClass:[NSNull class]]) {
                 user.mobileUploadFolderUuid = mobileUploadsSpecialFolderUuid;
             }

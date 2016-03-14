@@ -816,6 +816,7 @@
 		94884CA51C91A24D006722F7 /* icon_editnum@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94884CA41C91A24D006722F7 /* icon_editnum@3x.png */; };
 		94884CA71C91A255006722F7 /* icon_editnum.png in Resources */ = {isa = PBXBuildFile; fileRef = 94884CA61C91A255006722F7 /* icon_editnum.png */; };
 		94884CAA1C91A469006722F7 /* UpdateMsisdnController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94884CA91C91A469006722F7 /* UpdateMsisdnController.m */; };
+		94A1D3C41C969F330066D92F /* UpdatePassDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94A1D3C31C969F330066D92F /* UpdatePassDao.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -2004,6 +2005,8 @@
 		94884CA61C91A255006722F7 /* icon_editnum.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_editnum.png; sourceTree = "<group>"; };
 		94884CA81C91A469006722F7 /* UpdateMsisdnController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateMsisdnController.h; sourceTree = "<group>"; };
 		94884CA91C91A469006722F7 /* UpdateMsisdnController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateMsisdnController.m; sourceTree = "<group>"; };
+		94A1D3C21C969F330066D92F /* UpdatePassDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdatePassDao.h; sourceTree = "<group>"; };
+		94A1D3C31C969F330066D92F /* UpdatePassDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdatePassDao.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2500,6 +2503,8 @@
 				056F29E31C4FD68D001DD486 /* UpdateEmailDao.m */,
 				94884C7B1C9063F4006722F7 /* UpdateMsisdnDao.h */,
 				94884C7C1C9063F4006722F7 /* UpdateMsisdnDao.m */,
+				94A1D3C21C969F330066D92F /* UpdatePassDao.h */,
+				94A1D3C31C969F330066D92F /* UpdatePassDao.m */,
 			);
 			name = http;
 			sourceTree = "<group>";
@@ -4149,6 +4154,7 @@
 				059A46DD1A6D3E2000935023 /* Subscription.m in Sources */,
 				058B328E1A14ABCB00A291C4 /* RenameAlbumDao.m in Sources */,
 				058219BF1A384AF0001FA679 /* MessageCell.m in Sources */,
+				94A1D3C41C969F330066D92F /* UpdatePassDao.m in Sources */,
 				056090E41AC5A44000710211 /* ReachabilityManager.m in Sources */,
 				05403F1919F5584300AED10A /* ElasticSearchDao.m in Sources */,
 				053D0ED819DAC959006A13E0 /* MyModalController.m in Sources */,
