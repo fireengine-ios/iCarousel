@@ -645,7 +645,7 @@
 
 "EmailConfirmUpdate"="GÜNCELLE";
 "EmailConfirmContinue"="ONAYLIYORUM";
-"EmailConfirmMessage"="Kayıt işleminizi %@ mail adresinizle tamamlıyorsunuz. Tüm güvenlik onayları ve bilgilendirmeler için vermiş olduğunuz mail adresi kullanılacağından doğruluğundan emin olmanızı rica ederiz.";
+"EmailConfirmMessage"="Kayıt işleminizi %@ mail adresinizle tamamlıyorsunuz. Şifre işlemleri ve bilgilendirmeler için vermiş olduğunuz mail adresi kullanılacaktır.";
 
 "CAN_NOT_CHANGE_MSISDN"="Gsm Numarası değiştirmenize izin verilmemektedir.";
 "ChangeGsmNumber"="GSM Numara Değişikliği";

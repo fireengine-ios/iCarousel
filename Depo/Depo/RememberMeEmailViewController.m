@@ -40,6 +40,9 @@
         forgotPassDao.successMethod = @selector(forgotPassSuccessCallback:);
         forgotPassDao.failMethod = @selector(forgotPassFailCallback:);
         
+        float containerWidth = 280;
+        float containerLeftMargin = (self.view.frame.size.width - containerWidth)/2;
+        
         CustomLabel *topInfoLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaReg" size:15] withColor:[Util UIColorForHexColor:@"3E3E3E"] withText:NSLocalizedString(@"AlmostThere", @"") withAlignment:NSTextAlignmentCenter];
         [self.view addSubview:topInfoLabel];
         
@@ -51,28 +54,28 @@
         CustomLabel *subInfoLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, iconView.frame.origin.y + iconView.frame.size.height + 10, self.view.frame.size.width-40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaReg" size:15] withColor:[Util UIColorForHexColor:@"3E3E3E"] withText:NSLocalizedString(@"EmailFieldRegistrationInfo", @"") withAlignment:NSTextAlignmentCenter];
         [self.view addSubview:subInfoLabel];
         
-        CustomLabel *emailLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(25, subInfoLabel.frame.origin.y + subInfoLabel.frame.size.height + 10, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"EmailTitle", @"")];
+        CustomLabel *emailLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(containerLeftMargin + 5, subInfoLabel.frame.origin.y + subInfoLabel.frame.size.height + 10, containerWidth, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"EmailTitle", @"")];
         [self.view addSubview:emailLabel];
         
-        emailField = [[LoginTextfield alloc] initWithFrame:CGRectMake(20, emailLabel.frame.origin.y + emailLabel.frame.size.height + 5, self.view.frame.size.width - 40, 43) withPlaceholder:NSLocalizedString(@"EmailPlaceholder", @"")];
+        emailField = [[LoginTextfield alloc] initWithFrame:CGRectMake(containerLeftMargin, emailLabel.frame.origin.y + emailLabel.frame.size.height + 5, containerWidth, 43) withPlaceholder:NSLocalizedString(@"EmailPlaceholder", @"")];
         emailField.delegate = self;
         emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         [self.view addSubview:emailField];
         
-        captchaView = [[UIImageView alloc] initWithFrame:CGRectMake(20, emailField.frame.origin.y + emailField.frame.size.height + 20, 200, 50)];
+        captchaView = [[UIImageView alloc] initWithFrame:CGRectMake(containerLeftMargin, emailField.frame.origin.y + emailField.frame.size.height + 20, 200, 50)];
         [self.view addSubview:captchaView];
         
-        refreshButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 38, emailField.frame.origin.y + emailField.frame.size.height + 20, 18, 18) withImageName:@"icon_verif_refresh.png"];
+        refreshButton = [[CustomButton alloc] initWithFrame:CGRectMake(emailField.frame.origin.x + emailField.frame.size.width - 18, emailField.frame.origin.y + emailField.frame.size.height + 20, 18, 18) withImageName:@"icon_verif_refresh.png"];
         refreshButton.hidden = YES;
         [refreshButton addTarget:self action:@selector(loadCaptcha) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:refreshButton];
 
-        captchaField = [[LoginTextfield alloc] initWithFrame:CGRectMake(20, captchaView.frame.origin.y + captchaView.frame.size.height + 5, self.view.frame.size.width - 40, 43) withPlaceholder:NSLocalizedString(@"CaptchaPlaceholder", @"")];
+        captchaField = [[LoginTextfield alloc] initWithFrame:CGRectMake(containerLeftMargin, captchaView.frame.origin.y + captchaView.frame.size.height + 5, containerWidth, 43) withPlaceholder:NSLocalizedString(@"CaptchaPlaceholder", @"")];
         captchaField.delegate = self;
         captchaField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         [self.view addSubview:captchaField];
 
-        SimpleButton *okButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, captchaField.frame.origin.y + captchaField.frame.size.height + 10, self.view.frame.size.width - 40, 50) withTitle:NSLocalizedString(@"OK", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
+        SimpleButton *okButton = [[SimpleButton alloc] initWithFrame:CGRectMake(containerLeftMargin, captchaField.frame.origin.y + captchaField.frame.size.height + 10, containerWidth, 50) withTitle:NSLocalizedString(@"OK", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
         [okButton addTarget:self action:@selector(forgotPassClicked) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:okButton];
 

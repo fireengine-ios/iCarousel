@@ -33,15 +33,18 @@
         msisdnDao.successMethod = @selector(updateMsisdnSuccessCallback:);
         msisdnDao.failMethod = @selector(updateMsisdnFailCallback:);
         
-        CustomLabel *msisdnLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(25, 50, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"MsisdnTitle", @"")];
+        float containerWidth = 280;
+        float containerLeftMargin = (self.view.frame.size.width - containerWidth)/2;
+
+        CustomLabel *msisdnLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(containerLeftMargin + 5, 50, containerWidth, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"MsisdnTitle", @"")];
         [self.view addSubview:msisdnLabel];
         
-        msisdnField = [[LoginTextfield alloc] initWithFrame:CGRectMake(20, msisdnLabel.frame.origin.y + msisdnLabel.frame.size.height + 15, self.view.frame.size.width - 40, 43) withPlaceholder:NSLocalizedString(@"MsisdnPlaceholder", @"")];
+        msisdnField = [[LoginTextfield alloc] initWithFrame:CGRectMake(containerLeftMargin, msisdnLabel.frame.origin.y + msisdnLabel.frame.size.height + 15, containerWidth, 43) withPlaceholder:NSLocalizedString(@"MsisdnPlaceholder", @"")];
         msisdnField.delegate = self;
         msisdnField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         [self.view addSubview:msisdnField];
         
-        SimpleButton *okButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, msisdnField.frame.origin.y + msisdnField.frame.size.height + 25, self.view.frame.size.width - 40, 50) withTitle:NSLocalizedString(@"OK", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
+        SimpleButton *okButton = [[SimpleButton alloc] initWithFrame:CGRectMake(containerLeftMargin, msisdnField.frame.origin.y + msisdnField.frame.size.height + 25, containerWidth, 50) withTitle:NSLocalizedString(@"OK", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
         [okButton addTarget:self action:@selector(triggerSave) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:okButton];
         

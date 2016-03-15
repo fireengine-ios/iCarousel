@@ -72,8 +72,11 @@
     accountDaoToActivateOffer.failMethod = @selector(activateOfferFailCallback:);
 
     [IAPManager sharedInstance].delegate = self;
-
-    mainTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topIndex, 320, self.view.frame.size.height - self.topIndex - 64) style:UITableViewStylePlain];
+    
+    float containerWidth = 320;
+    float containerLeftMargin = (self.view.frame.size.width - containerWidth)/2;
+    
+    mainTable = [[UITableView alloc] initWithFrame:CGRectMake(containerLeftMargin, self.topIndex, containerWidth, self.view.frame.size.height - self.topIndex - 64) style:UITableViewStylePlain];
     mainTable.delegate = self;
     mainTable.dataSource = self;
     mainTable.backgroundColor = [UIColor clearColor];

@@ -32,33 +32,37 @@
         msisdnDao.successMethod = @selector(updateMsisdnSuccessCallback:);
         msisdnDao.failMethod = @selector(updateMsisdnFailCallback:);
 
-        CustomLabel *emailLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(25, 30, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"EmailTitle", @"")];
+        float topIndex = IS_IPAD ? 100 : 30;
+        float containerWidth = 280;
+        float containerLeftMargin = (self.view.frame.size.width - 280)/2;
+        
+        CustomLabel *emailLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(containerLeftMargin + 5, topIndex, containerWidth, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"EmailTitle", @"")];
         [self.view addSubview:emailLabel];
         
-        LoginTextfield *emailField = [[LoginTextfield alloc] initWithFrame:CGRectMake(20, emailLabel.frame.origin.y + emailLabel.frame.size.height + 5, self.view.frame.size.width - 40, 43) withPlaceholder:@""];
+        LoginTextfield *emailField = [[LoginTextfield alloc] initWithFrame:CGRectMake(containerLeftMargin, emailLabel.frame.origin.y + emailLabel.frame.size.height + 5, containerWidth, 43) withPlaceholder:@""];
         emailField.text = APPDELEGATE.session.user.email;
         [emailField setUserInteractionEnabled:NO];
         emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         [self.view addSubview:emailField];
 
-        CustomLabel *oldPhoneLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(25, emailField.frame.origin.y + emailField.frame.size.height + 20, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"OldPhoneLabel", @"")];
+        CustomLabel *oldPhoneLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(containerLeftMargin + 5, emailField.frame.origin.y + emailField.frame.size.height + 20, containerWidth, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"OldPhoneLabel", @"")];
         [self.view addSubview:oldPhoneLabel];
         
-        LoginTextfield *oldPhoneValue = [[LoginTextfield alloc] initWithFrame:CGRectMake(20, oldPhoneLabel.frame.origin.y + oldPhoneLabel.frame.size.height + 5, self.view.frame.size.width - 40, 43) withPlaceholder:@""];
+        LoginTextfield *oldPhoneValue = [[LoginTextfield alloc] initWithFrame:CGRectMake(containerLeftMargin, oldPhoneLabel.frame.origin.y + oldPhoneLabel.frame.size.height + 5, containerWidth, 43) withPlaceholder:@""];
         oldPhoneValue.text = APPDELEGATE.session.user.username;
         [oldPhoneValue setUserInteractionEnabled:NO];
         oldPhoneValue.autocapitalizationType = UITextAutocapitalizationTypeNone;
         [self.view addSubview:oldPhoneValue];
 
-        CustomLabel *newPhoneLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(25, oldPhoneValue.frame.origin.y + oldPhoneValue.frame.size.height + 20, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"NewPhoneLabel", @"")];
+        CustomLabel *newPhoneLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(containerLeftMargin + 5, oldPhoneValue.frame.origin.y + oldPhoneValue.frame.size.height + 20, containerWidth, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"NewPhoneLabel", @"")];
         [self.view addSubview:newPhoneLabel];
 
-        updatedNumberField = [[LoginTextfield alloc] initWithFrame:CGRectMake(20, newPhoneLabel.frame.origin.y + newPhoneLabel.frame.size.height + 5, self.view.frame.size.width - 40, 43) withPlaceholder:NSLocalizedString(@"MsisdnPlaceholder", @"")];
+        updatedNumberField = [[LoginTextfield alloc] initWithFrame:CGRectMake(containerLeftMargin, newPhoneLabel.frame.origin.y + newPhoneLabel.frame.size.height + 5, containerWidth, 43) withPlaceholder:NSLocalizedString(@"MsisdnPlaceholder", @"")];
         updatedNumberField.delegate = self;
         updatedNumberField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         [self.view addSubview:updatedNumberField];
         
-        SimpleButton *okButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, updatedNumberField.frame.origin.y + updatedNumberField.frame.size.height + 30, self.view.frame.size.width - 40, 50) withTitle:NSLocalizedString(@"ChangePhoneButton", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
+        SimpleButton *okButton = [[SimpleButton alloc] initWithFrame:CGRectMake(containerLeftMargin, updatedNumberField.frame.origin.y + updatedNumberField.frame.size.height + 30, containerWidth, 50) withTitle:NSLocalizedString(@"ChangePhoneButton", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
         [okButton addTarget:self action:@selector(triggerSave) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:okButton];
         

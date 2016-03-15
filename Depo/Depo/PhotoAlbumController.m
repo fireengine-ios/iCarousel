@@ -78,6 +78,8 @@
         if(self.album.cover.tempDownloadUrl) {
             UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, mainImageHeight)];
             [bgImgView setImageWithURL:[NSURL URLWithString:self.album.cover.tempDownloadUrl]];
+            bgImgView.contentMode = UIViewContentModeScaleAspectFill;
+            [bgImgView setClipsToBounds:YES];
             [self.view addSubview:bgImgView];
             
             UIImageView *maskImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, mainImageHeight)];
