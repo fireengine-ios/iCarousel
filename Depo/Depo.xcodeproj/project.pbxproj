@@ -817,6 +817,7 @@
 		94884CA71C91A255006722F7 /* icon_editnum.png in Resources */ = {isa = PBXBuildFile; fileRef = 94884CA61C91A255006722F7 /* icon_editnum.png */; };
 		94884CAA1C91A469006722F7 /* UpdateMsisdnController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94884CA91C91A469006722F7 /* UpdateMsisdnController.m */; };
 		94A1D3C41C969F330066D92F /* UpdatePassDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94A1D3C31C969F330066D92F /* UpdatePassDao.m */; };
+		94EF279C1C982B460087EFBE /* NoItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94EF279B1C982B460087EFBE /* NoItemView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -2007,6 +2008,8 @@
 		94884CA91C91A469006722F7 /* UpdateMsisdnController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateMsisdnController.m; sourceTree = "<group>"; };
 		94A1D3C21C969F330066D92F /* UpdatePassDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdatePassDao.h; sourceTree = "<group>"; };
 		94A1D3C31C969F330066D92F /* UpdatePassDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdatePassDao.m; sourceTree = "<group>"; };
+		94EF279A1C982B460087EFBE /* NoItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoItemView.h; sourceTree = "<group>"; };
+		94EF279B1C982B460087EFBE /* NoItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoItemView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2382,6 +2385,8 @@
 				05754C131AC711EA00727B42 /* SyncInfoHeaderView.m */,
 				2472688F1B7CC29900804E56 /* CustomAdvertisementView.h */,
 				247268901B7CC29900804E56 /* CustomAdvertisementView.m */,
+				94EF279A1C982B460087EFBE /* NoItemView.h */,
+				94EF279B1C982B460087EFBE /* NoItemView.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -4282,6 +4287,7 @@
 				05BCA2F819EE64EB00AF2FE2 /* AddAlbumDao.m in Sources */,
 				05D5E59F1B09D5DD00A22957 /* SuccessPurchasingView.m in Sources */,
 				058BC22B1A30893C0007F4DE /* PreLoginController.m in Sources */,
+				94EF279C1C982B460087EFBE /* NoItemView.m in Sources */,
 				05C2A0321A79830500EE4D78 /* ADJPackageBuilder.m in Sources */,
 				056F29C91C4E715A001DD486 /* RequestCaptchaDao.m in Sources */,
 				051E1EAB19CB20AD00FD1E03 /* MenuProfileCell.m in Sources */,

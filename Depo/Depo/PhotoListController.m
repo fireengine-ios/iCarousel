@@ -17,6 +17,7 @@
 #import "UploadingImagePreviewController.h"
 #import "PrintWebViewController.h"
 #import "UIImageView+AFNetworking.h"
+#import "NoItemView.h"
 
 #define IMG_FOOTER_TAG 111
 #define ALBUM_FOOTER_TAG 222
@@ -260,7 +261,7 @@
     [photoList addObjectsFromArray:files];
     if (photoList.count == 0) {
         if (noItemCell == nil)
-            noItemCell = [[NoItemCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"" imageName:@"no_photo_icon" titleText:NSLocalizedString(@"EmptyPhotosVideosTitle", @"") descriptionText:NSLocalizedString(@"EmptyPhotosVideosDescription", @"")];
+            noItemCell = [[NoItemCell alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, photosScroll.frame.size.height) imageName:@"no_photo_icon" titleText:NSLocalizedString(@"EmptyPhotosVideosTitle", @"") descriptionText:NSLocalizedString(@"EmptyPhotosVideosDescription", @"")];
         [photosScroll addSubview:noItemCell];
     }
     else if (noItemCell != nil)
@@ -328,7 +329,7 @@
 
     if (photoList.count == 0) {
         if (noItemCell == nil)
-            noItemCell = [[NoItemCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"" imageName:@"no_photo_icon" titleText:NSLocalizedString(@"EmptyPhotosVideosTitle", @"") descriptionText:NSLocalizedString(@"EmptyPhotosVideosDescription", @"")];
+            noItemCell = [[NoItemCell alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, photosScroll.frame.size.height) imageName:@"no_photo_icon" titleText:NSLocalizedString(@"EmptyPhotosVideosTitle", @"") descriptionText:NSLocalizedString(@"EmptyPhotosVideosDescription", @"")];
         [photosScroll addSubview:noItemCell];
     }
 }

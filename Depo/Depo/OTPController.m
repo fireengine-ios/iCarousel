@@ -69,10 +69,12 @@
         CustomLabel *subMsisdnLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, msisdnLabel.frame.origin.y + msisdnLabel.frame.size.height + 5, self.view.frame.size.width, 15) withFont:[UIFont fontWithName:@"TurkcellSaturaReg" size:14] withColor:[Util UIColorForHexColor:@"2E2E2E"] withText:NSLocalizedString(@"OTPSubInfo", @"") withAlignment:NSTextAlignmentCenter];
         [self.view addSubview:subMsisdnLabel];
         
-        float marginBetween = (self.view.frame.size.width - 40 - (inputLength*40))/(inputLength-1);
+        float containerWidth = 280;
+        float containerLeftMargin = (self.view.frame.size.width - 280)/2;
+        float marginBetween = (containerWidth - (inputLength*40))/(inputLength-1);
         
         for(int i=0; i<inputLength; i++) {
-            SingleCharField *charField = [[SingleCharField alloc] initWithFrame:CGRectMake(20 + i*(40+marginBetween), subMsisdnLabel.frame.origin.y + subMsisdnLabel.frame.size.height + 20, 40, 40)];
+            SingleCharField *charField = [[SingleCharField alloc] initWithFrame:CGRectMake(containerLeftMargin + i*(40+marginBetween), subMsisdnLabel.frame.origin.y + subMsisdnLabel.frame.size.height + 20, 40, 40)];
             charField.delegate = self;
             charField.backDelegate = self;
             charField.tag = 100 + i;

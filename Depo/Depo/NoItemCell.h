@@ -10,6 +10,7 @@
 
 @interface NoItemCell : UITableViewCell
 
+- (id)initWithFrame:(CGRect)frame imageName:(NSString *)imageName titleText:(NSString *)titleText descriptionText:(NSString *)descriptionText;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier imageName:(NSString *)imageName titleText:(NSString *)titleText descriptionText:(NSString *)descriptionText;
 
 @end

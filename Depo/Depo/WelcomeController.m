@@ -50,6 +50,13 @@
         CustomButton *loginButton = [[CustomButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - buttonSize.width)/2, self.view.frame.size.height - signupButton.frame.size.height - 110, buttonSize.width, buttonSize.height) withImageName:@"buttonbg_yellow.png" withTitle:NSLocalizedString(@"Login", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withColor:[Util UIColorForHexColor:@"363e4f"]];
         [loginButton addTarget:self action:@selector(triggerLogin) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:loginButton];
+        
+        if(IS_IPAD) {
+            iconView.frame = CGRectMake(iconView.frame.origin.x, self.view.frame.size.width/2 - 150, iconView.frame.size.width, iconView.frame.size.height);
+            subTitle.frame = CGRectMake(subTitle.frame.origin.x, iconView.frame.origin.y + iconView.frame.size.height + 20, subTitle.frame.size.width, subTitle.frame.size.height);
+            loginButton.frame = CGRectMake(loginButton.frame.origin.x, (self.view.frame.size.width)/2 + 150, loginButton.frame.size.width, loginButton.frame.size.height);
+            signupButton.frame = CGRectMake(signupButton.frame.origin.x, loginButton.frame.origin.y + loginButton.frame.size.height + 20, signupButton.frame.size.width, signupButton.frame.size.height);
+        }
     }
     return self;
 }
