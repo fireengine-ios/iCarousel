@@ -22,6 +22,7 @@
 #import "VideoPreviewController.h"
 #import "PhotoAlbumController.h"
 #import "NoItemCell.h"
+#import "NoItemView.h"
 
 @interface PhotoListController : MyViewController <PhotoHeaderSegmentDelegate, SquareImageDelegate, UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate, FooterActionsDelegate, ImagePreviewDelegate, VideoPreviewDelegate, PhotoAlbumDelegate> {
     
@@ -44,6 +45,7 @@
     BOOL isSelectible;
     
     NoItemCell *noItemCell;
+    NoItemView *noItemView;
     
     MyNavigationController *printNav;
 }

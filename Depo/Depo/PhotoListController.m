@@ -150,8 +150,8 @@
 }
 
 - (void) addOngoingPhotos {
-    if (noItemCell != nil)
-        [noItemCell removeFromSuperview];
+    if (noItemView != nil)
+        [noItemView removeFromSuperview];
     if([photoList count] > 0) {
         int counter = 0;
 
@@ -260,12 +260,12 @@
     photosScroll.contentSize = CGSizeMake(photosScroll.frame.size.width, contentSizeHeight);
     [photoList addObjectsFromArray:files];
     if (photoList.count == 0) {
-        if (noItemCell == nil)
-            noItemCell = [[NoItemCell alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, photosScroll.frame.size.height) imageName:@"no_photo_icon" titleText:NSLocalizedString(@"EmptyPhotosVideosTitle", @"") descriptionText:NSLocalizedString(@"EmptyPhotosVideosDescription", @"")];
-        [photosScroll addSubview:noItemCell];
+        if (noItemView == nil)
+            noItemView = [[NoItemView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, photosScroll.frame.size.height) imageName:@"no_photo_icon" titleText:NSLocalizedString(@"EmptyPhotosVideosTitle", @"") descriptionText:NSLocalizedString(@"EmptyPhotosVideosDescription", @"")];
+        [photosScroll addSubview:noItemView];
     }
-    else if (noItemCell != nil)
-        [noItemCell removeFromSuperview];
+    else if (noItemView != nil)
+        [noItemView removeFromSuperview];
     if(refreshControlPhotos) {
         [refreshControlPhotos endRefreshing];
     }
@@ -328,9 +328,9 @@
     [photoList addObjectsFromArray:filteredFiles];
 
     if (photoList.count == 0) {
-        if (noItemCell == nil)
-            noItemCell = [[NoItemCell alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, photosScroll.frame.size.height) imageName:@"no_photo_icon" titleText:NSLocalizedString(@"EmptyPhotosVideosTitle", @"") descriptionText:NSLocalizedString(@"EmptyPhotosVideosDescription", @"")];
-        [photosScroll addSubview:noItemCell];
+        if (noItemView == nil)
+            noItemView = [[NoItemView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, photosScroll.frame.size.height) imageName:@"no_photo_icon" titleText:NSLocalizedString(@"EmptyPhotosVideosTitle", @"") descriptionText:NSLocalizedString(@"EmptyPhotosVideosDescription", @"")];
+        [photosScroll addSubview:noItemView];
     }
 }
 
