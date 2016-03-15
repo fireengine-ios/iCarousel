@@ -84,14 +84,27 @@
         [noItemCell removeFromSuperview];
     if([photoList count] > 0) {
         int counter = 0;
+
+        int imagePerLine = 3;
+        
+        float imageWidth = 100;
+        float interImageMargin = 5;
+        
+        if(IS_IPAD) {
+            imagePerLine = 5;
+            imageWidth = (self.view.frame.size.width - interImageMargin*(imagePerLine+1))/imagePerLine;
+        }
+        
+        float imageTotalWidth = imageWidth + interImageMargin;
+
         for(UploadRef *row in photoList) {
-            CGRect imgRect = CGRectMake(5 + (counter%3 * 105), 15 + ((int)floor(counter/3)*105), 100, 100);
+            CGRect imgRect = CGRectMake(interImageMargin + (counter%imagePerLine * imageTotalWidth), 15 + ((int)floor(counter/imagePerLine)*imageTotalWidth), imageWidth, imageWidth);
             SquareImageView *imgView = [[SquareImageView alloc] initWithFrame:imgRect withUploadRef:row];
             imgView.delegate = self;
             [photosScroll addSubview:imgView];
             counter ++;
         }
-        float contentSizeHeight = ((int)ceil(counter/3)+1)*105 + 20;
+        float contentSizeHeight = ((int)ceil(counter/imagePerLine)+1)*imageTotalWidth + 20;
         if(contentSizeHeight <= photosScroll.frame.size.height) {
             contentSizeHeight = photosScroll.frame.size.height + 1;
         }
@@ -127,21 +140,34 @@
     listOffset = 0;
     self.tableUpdateCounter ++;
     
-    [elasticSearchDao requestCropNShareForPage:listOffset andSize:21 andSortType:APPDELEGATE.session.sortType];
+    [elasticSearchDao requestCropNShareForPage:listOffset andSize:IS_IPAD ? 30 : 21 andSortType:APPDELEGATE.session.sortType];
 }
 
 - (void) photoListSuccessCallback:(NSArray *) files {
     [self hideLoading];
     
     int counter = (int)[photoList count];
+
+    int imagePerLine = 3;
+    
+    float imageWidth = 100;
+    float interImageMargin = 5;
+    
+    if(IS_IPAD) {
+        imagePerLine = 5;
+        imageWidth = (self.view.frame.size.width - interImageMargin*(imagePerLine+1))/imagePerLine;
+    }
+    
+    float imageTotalWidth = imageWidth + interImageMargin;
+
     for(MetaFile *row in files) {
-        CGRect imgRect = CGRectMake(5 + (counter%3 * 105), 15 + ((int)floor(counter/3)*105), 100, 100);
+        CGRect imgRect = CGRectMake(interImageMargin + (counter%imagePerLine * imageTotalWidth), 15 + ((int)floor(counter/imagePerLine)*imageTotalWidth), imageWidth, imageWidth);
         SquareImageView *imgView = [[SquareImageView alloc] initWithFrame:imgRect withFile:row withSelectibleStatus:isSelectible];
         imgView.delegate = self;
         [photosScroll addSubview:imgView];
         counter ++;
     }
-    float contentSizeHeight = ((int)ceil(counter/3)+1)*105 + 20;
+    float contentSizeHeight = ((int)ceil(counter/imagePerLine)+1)*imageTotalWidth + 20;
     if(contentSizeHeight <= photosScroll.frame.size.height) {
         contentSizeHeight = photosScroll.frame.size.height + 1;
     }
@@ -188,14 +214,27 @@
     }
     
     int counter = (int)[ongoingFiles count];
+
+    int imagePerLine = 3;
+    
+    float imageWidth = 100;
+    float interImageMargin = 5;
+    
+    if(IS_IPAD) {
+        imagePerLine = 5;
+        imageWidth = (self.view.frame.size.width - interImageMargin*(imagePerLine+1))/imagePerLine;
+    }
+    
+    float imageTotalWidth = imageWidth + interImageMargin;
+
     for(MetaFile *row in filteredFiles) {
-        CGRect imgRect = CGRectMake(5 + (counter%3 * 105), 15 + ((int)floor(counter/3)*105), 100, 100);
+        CGRect imgRect = CGRectMake(interImageMargin + (counter%imagePerLine * imageTotalWidth), 15 + ((int)floor(counter/imagePerLine)*imageTotalWidth), imageWidth, imageWidth);
         SquareImageView *imgView = [[SquareImageView alloc] initWithFrame:imgRect withFile:row withSelectibleStatus:isSelectible];
         imgView.delegate = self;
         [photosScroll addSubview:imgView];
         counter ++;
     }
-    float contentSizeHeight = ((int)ceil(counter/3)+1)*105 + 20;
+    float contentSizeHeight = ((int)ceil(counter/imagePerLine)+1)*imageTotalWidth + 20;
     if(contentSizeHeight <= photosScroll.frame.size.height) {
         contentSizeHeight = photosScroll.frame.size.height + 1;
     }
@@ -387,7 +426,7 @@
 
 - (void) dynamicallyLoadNextPage {
     listOffset ++;
-    [elasticSearchDao requestCropNShareForPage:listOffset andSize:21 andSortType:APPDELEGATE.session.sortType];
+    [elasticSearchDao requestCropNShareForPage:listOffset andSize:IS_IPAD ? 30 : 21 andSortType:APPDELEGATE.session.sortType];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {

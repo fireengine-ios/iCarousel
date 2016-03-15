@@ -65,13 +65,13 @@
     UITapGestureRecognizer *touchOnView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(crossButtonOutAction)];
     [tableHeaderView addGestureRecognizer:touchOnView];
     
-    crossButton = [[CustomButton alloc]initWithFrame:CGRectMake(275, 3, 29, 29) withImageName:@"close_icon"];
+    crossButton = [[CustomButton alloc]initWithFrame:CGRectMake(self.frame.size.width - 45, 3, 29, 29) withImageName:@"close_icon"];
     [crossButton addTarget:self action:@selector(crossButtonAction) forControlEvents:UIControlEventTouchUpInside];
     [tableHeaderView addSubview:crossButton];
     
     
     float clearButtonWidth = [NSLocalizedString(@"Clear", @"") length] < 6 ? 43 : 55;
-    clearButton = [[UIButton alloc]initWithFrame:CGRectMake(299-clearButtonWidth, 8, clearButtonWidth, 19)];
+    clearButton = [[UIButton alloc]initWithFrame:CGRectMake(self.frame.size.width-clearButtonWidth-20, 8, clearButtonWidth, 19)];
     [clearButton setTitle:NSLocalizedString(@"Clear", @"") forState:UIControlStateNormal];
     clearButton.backgroundColor = [Util UIColorForHexColor:@"BABBBD"];
     clearButton.layer.cornerRadius = 10.5f;

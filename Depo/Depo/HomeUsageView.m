@@ -10,6 +10,7 @@
 #import "CustomLabel.h"
 #import <QuartzCore/QuartzCore.h>
 #import "Util.h"
+#import "AppConstants.h"
 
 @implementation HomeUsageView
 
@@ -17,7 +18,7 @@
     if(self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor whiteColor];
         self.clipsToBounds = YES;
-        [self.layer setCornerRadius:65];
+        [self.layer setCornerRadius:self.frame.size.width/2];
         
         CustomLabel *totalUsageLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, 30, self.frame.size.width, 40) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:36] withColor:[Util UIColorForHexColor:@"363e4f"] withText:[usage usedStorage] == 0 ? @"--" : [Util transformedHugeSizeValue:[usage usedStorage]] withAlignment:NSTextAlignmentCenter];
         [self addSubview:totalUsageLabel];
@@ -27,6 +28,14 @@
         CustomLabel *totalStorageLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, 75, self.frame.size.width, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withColor:[Util UIColorForHexColor:@"7b8497"] withText:totalStorageVal withAlignment:NSTextAlignmentCenter];
         [self addSubview:totalStorageLabel];
         
+        if(IS_IPAD) {
+            totalUsageLabel.frame = CGRectMake(0, 100, self.frame.size.width, 80);
+            totalUsageLabel.font = [UIFont fontWithName:@"TurkcellSaturaBol" size:72];
+            
+            totalStorageLabel.frame = CGRectMake(0, 200, self.frame.size.width, 40);
+            totalStorageLabel.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:32];
+        }
+
     }
     return self;
 }

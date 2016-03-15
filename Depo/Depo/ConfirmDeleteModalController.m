@@ -34,45 +34,47 @@
         UIFont *confirmFont = [UIFont fontWithName:@"TurkcellSaturaBol" size:16];
         UIFont *checkFont = [UIFont fontWithName:@"TurkcellSaturaMed" size:17];
         
-        int yIndex = 30;
+        int yIndex = IS_IPAD ? 120 : 30;
         
         UIImage *deleteImg = [UIImage imageNamed:@"big_delete_icon.png"];
-        UIImageView *deleteImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, yIndex, deleteImg.size.width, deleteImg.size.height)];
+        UIImageView *deleteImgView = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - deleteImg.size.width)/2, yIndex, deleteImg.size.width, deleteImg.size.height)];
         deleteImgView.image = deleteImg;
         [self.view addSubview:deleteImgView];
         
-        yIndex += deleteImg.size.height + 20;
+        yIndex += deleteImg.size.height + (IS_IPAD ? 40 : 20);
         
-        int messageHeight = [Util calculateHeightForText:NSLocalizedString(@"ConfirmDeleteMessage", @"") forWidth:deleteImgView.frame.size.width-40 forFont:messageFont] + 10;
+        float messageWidth = IS_IPAD ? 400 : 280;
         
-        CustomLabel *messageLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, yIndex, deleteImgView.frame.size.width - 40, messageHeight) withFont:messageFont withColor:[Util UIColorForHexColor:@"888888"] withText:NSLocalizedString(@"ConfirmDeleteMessage", @"")];
+        int messageHeight = [Util calculateHeightForText:NSLocalizedString(@"ConfirmDeleteMessage", @"") forWidth:messageWidth forFont:messageFont] + 10;
+        
+        CustomLabel *messageLabel = [[CustomLabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - messageWidth)/2, yIndex, messageWidth, messageHeight) withFont:messageFont withColor:[Util UIColorForHexColor:@"888888"] withText:NSLocalizedString(@"ConfirmDeleteMessage", @"")];
         messageLabel.textAlignment = NSTextAlignmentCenter;
         messageLabel.numberOfLines = 0;
         [self.view addSubview:messageLabel];
 
-        yIndex += messageHeight + 10;
+        yIndex += messageHeight + (IS_IPAD ? 30 : 10);
 
-        CustomLabel *confirmLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, yIndex, deleteImgView.frame.size.width - 40, 24) withFont:confirmFont withColor:[Util UIColorForHexColor:@"555555"] withText:NSLocalizedString(@"ConfirmDeleteQuestion", @"")];
+        CustomLabel *confirmLabel = [[CustomLabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - messageWidth)/2, yIndex, messageWidth, 24) withFont:confirmFont withColor:[Util UIColorForHexColor:@"555555"] withText:NSLocalizedString(@"ConfirmDeleteQuestion", @"")];
         confirmLabel.textAlignment = NSTextAlignmentCenter;
         [self.view addSubview:confirmLabel];
 
-        yIndex += 40;
+        yIndex += 40 + (IS_IPAD ? 20 : 0);
 
-        cancelButton = [[SimpleButton alloc] initWithFrame:CGRectMake(30, yIndex, 120, 50) withTitle:NSLocalizedString(@"TitleNo", @"") withBorderColor:[Util UIColorForHexColor:@"e9ebef"] withBgColor:[Util UIColorForHexColor:@"FFFFFF"]];
+        cancelButton = [[SimpleButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - messageWidth)/2, yIndex, messageWidth/2 - 10, 50) withTitle:NSLocalizedString(@"TitleNo", @"") withBorderColor:[Util UIColorForHexColor:@"e9ebef"] withBgColor:[Util UIColorForHexColor:@"FFFFFF"]];
         [cancelButton addTarget:self action:@selector(cancelClicked) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:cancelButton];
 
-        confirmButton = [[SimpleButton alloc] initWithFrame:CGRectMake(170, yIndex, 120, 50) withTitle:NSLocalizedString(@"TitleYes", @"") withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"]];
+        confirmButton = [[SimpleButton alloc] initWithFrame:CGRectMake(cancelButton.frame.origin.x + cancelButton.frame.size.width + 20, yIndex, messageWidth/2 - 10, 50) withTitle:NSLocalizedString(@"TitleYes", @"") withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"]];
         [confirmButton addTarget:self action:@selector(confirmClicked) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:confirmButton];
 
-        yIndex += 68;
+        yIndex += 68 + (IS_IPAD ? 20 : 0);
 
-        checkButton = [[CheckButton alloc] initWithFrame:CGRectMake(40, yIndex, 21, 20) isInitiallyChecked:NO];
+        checkButton = [[CheckButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - messageWidth)/2 + 20, yIndex, 21, 20) isInitiallyChecked:NO];
         [checkButton addTarget:self action:@selector(toggleCheck) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:checkButton];
 
-        CustomLabel *checkLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(70, yIndex, self.view.frame.size.width - 90, 20) withFont:checkFont withColor:[Util UIColorForHexColor:@"555555"] withText:NSLocalizedString(@"MessageDontShowAgainCheck", @"")];
+        CustomLabel *checkLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(checkButton.frame.origin.x + checkButton.frame.size.width + 10, yIndex, messageWidth - 50, 20) withFont:checkFont withColor:[Util UIColorForHexColor:@"555555"] withText:NSLocalizedString(@"MessageDontShowAgainCheck", @"")];
         [self.view addSubview:checkLabel];
     }
     return self;

@@ -84,7 +84,7 @@
         searchFieldContainer = [[UIView alloc] init];
         searchFieldContainer.backgroundColor = [Util UIColorForHexColor:@"1a1e24"];
         
-        searchField = [[SearchTextField alloc] initWithFrame:CGRectMake(12, 38, 296, 43)];
+        searchField = [[SearchTextField alloc] initWithFrame:CGRectMake(12, 38, self.view.frame.size.width-24, 43)];
         searchField.placeholder = @"";
         searchField.returnKeyType = UIReturnKeySearch;
         searchField.delegate = self;
@@ -189,7 +189,7 @@
     [self.navigationController.navigationBar setBarTintColor:[Util UIColorForHexColor:@"1a1e24"]];
     [self.navigationController.navigationBar setTintColor:[Util UIColorForHexColor:@"1a1e24"]];
     if (animateSearchArea) {
-        searchFieldContainer.frame = CGRectMake(0, self.topIndex, 320, 90);
+        searchFieldContainer.frame = CGRectMake(0, self.topIndex, self.view.frame.size.width, 90);
         [UIView animateWithDuration:0.3
                               delay:0
                             options:UIViewAnimationOptionCurveEaseOut
@@ -280,7 +280,7 @@
         return 320;
     else {
         if (indexPath.row < 2)
-            return 68;
+            return IS_IPAD ? 102 : 68;
         else if (indexPath.row == 2)
             return 60;
         else

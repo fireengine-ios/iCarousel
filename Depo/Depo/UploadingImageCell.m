@@ -10,6 +10,11 @@
 #import "AppDelegate.h"
 #import "AppSession.h"
 
+@interface UploadingImageCell () {
+    CustomLabel *nameLabel;
+}
+@end
+
 @implementation UploadingImageCell
 
 @synthesize uploadRef;
@@ -136,6 +141,26 @@
     [self updateProgressByWidth:[NSNumber numberWithLong:self.frame.size.width]];
     progressSeparator.backgroundColor = [Util UIColorForHexColor:@"67d74b"];
     detailLabel.text = NSLocalizedString(@"UploadFinishedPlaceholder", @"");
+}
+
+- (void) layoutSubviews {
+    NSLog(@"At layoutSubviews: %@", NSStringFromCGRect(self.frame));
+    int leftIndex = 15;
+    if(self.imgView) {
+        self.imgView.frame = CGRectMake(leftIndex, (self.frame.size.height - 35)/2, 35, 35);
+    }
+    CGRect nameFieldRect = CGRectMake(leftIndex + 55, self.frame.size.height/2 - 22, self.frame.size.width - 80, 22);
+    CGRect detailFieldRect = CGRectMake(leftIndex + 55, self.frame.size.height/2, self.frame.size.width - 80, 20);
+    if(nameLabel) {
+        nameLabel.frame = nameFieldRect;
+    }
+    if(detailLabel) {
+        detailLabel.frame = detailFieldRect;
+    }
+    if(progressSeparator) {
+        progressSeparator.frame = CGRectMake(0, self.frame.size.height - 1, progressSeparator.frame.size.width, 1);
+    }
+    [super layoutSubviews];
 }
 
 @end

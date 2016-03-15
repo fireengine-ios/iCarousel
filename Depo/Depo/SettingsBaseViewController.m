@@ -47,7 +47,7 @@
 - (void)drawPageContentTable {
     if (pageContentTable != nil)
         [pageContentTable removeFromSuperview];
-    pageContentTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topIndex, 320, self.view.frame.size.height - self.topIndex) style:UITableViewStylePlain];
+    pageContentTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.topIndex) style:UITableViewStylePlain];
     pageContentTable.delegate = self;
     pageContentTable.dataSource = self;
     pageContentTable.backgroundColor = [UIColor clearColor];

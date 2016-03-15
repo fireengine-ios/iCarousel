@@ -8,6 +8,13 @@
 
 #import "DocCell.h"
 
+@interface DocCell () {
+    CustomLabel *nameLabel;
+    CustomLabel *detailLabel;
+    UIView *progressSeparator;
+}
+@end
+
 @implementation DocCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier  withFileFolder:(MetaFile *) _fileFolder isSelectible:(BOOL)_selectible {
@@ -32,13 +39,13 @@
         UIFont *nameFont = [self readNameFont];
         UIFont *detailFont = [self readDetailFont];
         
-        CustomLabel *nameLabel = [[CustomLabel alloc] initWithFrame:nameFieldRect withFont:nameFont withColor:[self readNameColor] withText:self.fileFolder.visibleName];
+        nameLabel = [[CustomLabel alloc] initWithFrame:nameFieldRect withFont:nameFont withColor:[self readNameColor] withText:self.fileFolder.visibleName];
         [self addSubview:nameLabel];
         
-        CustomLabel *detailLabel = [[CustomLabel alloc] initWithFrame:detailFieldRect withFont:detailFont withColor:[self readDetailColor] withText:[Util transformedSizeValue:self.fileFolder.bytes]];
+        detailLabel = [[CustomLabel alloc] initWithFrame:detailFieldRect withFont:detailFont withColor:[self readDetailColor] withText:[Util transformedSizeValue:self.fileFolder.bytes]];
         [self addSubview:detailLabel];
         
-        UIView *progressSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 67, self.frame.size.width, 1)];
+        progressSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 67, self.frame.size.width, 1)];
         progressSeparator.backgroundColor = [self readPassiveSeparatorColor];
         progressSeparator.alpha = 0.5f;
         [self addSubview:progressSeparator];
@@ -62,7 +69,7 @@
         UIFont *nameFont = [self readNameFont];
         UIFont *detailFont = [self readDetailFont];
         
-        CustomLabel *nameLabel = [[CustomLabel alloc] initWithFrame:nameFieldRect withFont:nameFont withColor:[self readNameColor] withText:self.fileFolder.visibleName];
+        nameLabel = [[CustomLabel alloc] initWithFrame:nameFieldRect withFont:nameFont withColor:[self readNameColor] withText:self.fileFolder.visibleName];
         [self addSubview:nameLabel];
         
         NSRange highlightingRange = [self.fileFolder.visibleName rangeOfString:highlightedText options:NSCaseInsensitiveSearch];
@@ -72,10 +79,10 @@
             [nameLabel setAttributedText: text];
         }
         
-        CustomLabel *detailLabel = [[CustomLabel alloc] initWithFrame:detailFieldRect withFont:detailFont withColor:[self readDetailColor] withText:[Util transformedSizeValue:self.fileFolder.bytes]];
+        detailLabel = [[CustomLabel alloc] initWithFrame:detailFieldRect withFont:detailFont withColor:[self readDetailColor] withText:[Util transformedSizeValue:self.fileFolder.bytes]];
         [self addSubview:detailLabel];
         
-        UIView *progressSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 67, self.frame.size.width, 1)];
+        progressSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 67, self.frame.size.width, 1)];
         progressSeparator.backgroundColor = [self readPassiveSeparatorColor];
         progressSeparator.alpha = 0.5f;
         [self addSubview:progressSeparator];
@@ -101,27 +108,63 @@
         UIFont *nameFont = [self readNameFont];
         UIFont *detailFont = [self readDetailFont];
         
-        CustomLabel *nameLabel = [[CustomLabel alloc] initWithFrame:nameFieldRect withFont:nameFont withColor:[self readNameColor] withText:self.fileFolder.visibleName];
+        nameLabel = [[CustomLabel alloc] initWithFrame:nameFieldRect withFont:nameFont withColor:[self readNameColor] withText:self.fileFolder.visibleName];
         [self addSubview:nameLabel];
         
-        CustomLabel *detailLabel = [[CustomLabel alloc] initWithFrame:detailFieldRect withFont:detailFont withColor:[self readDetailColor] withText:[Util transformedSizeValue:self.fileFolder.bytes]];
+        detailLabel = [[CustomLabel alloc] initWithFrame:detailFieldRect withFont:detailFont withColor:[self readDetailColor] withText:[Util transformedSizeValue:self.fileFolder.bytes]];
         [self addSubview:detailLabel];
         
-        UIView *progressSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 67, self.frame.size.width, 1)];
+        progressSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 67, self.frame.size.width, 1)];
         progressSeparator.backgroundColor = [self readPassiveSeparatorColor];
         progressSeparator.alpha = 0.5f;
         [self addSubview:progressSeparator];
         
-        self.favButton = [[CustomButton alloc] initWithFrame:CGRectMake(270, 14, 40, 40) withImageName:@"nav_favourite_inactive_icon"];
-        [self.favButton addTarget:self action:@selector(triggerFav) forControlEvents:UIControlEventTouchUpInside];
-        self.favButton.hidden = YES;
-        [self addSubview:self.favButton];
+        self.independentFavButton = [[CustomButton alloc] initWithFrame:CGRectMake(270, 14, 40, 40) withImageName:@"nav_favourite_inactive_icon"];
+        [self.independentFavButton addTarget:self action:@selector(triggerFav) forControlEvents:UIControlEventTouchUpInside];
+        self.independentFavButton.hidden = YES;
+        [self addSubview:self.independentFavButton];
         
-        self.unfavButton = [[CustomButton alloc] initWithFrame:CGRectMake(270, 14, 40, 40) withImageName:@"nav_favourite_active_icon"];
-        [self.unfavButton addTarget:self action:@selector(triggerUnfav) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:self.unfavButton];
+        self.independentUnfavButton = [[CustomButton alloc] initWithFrame:CGRectMake(270, 14, 40, 40) withImageName:@"nav_favourite_active_icon"];
+        [self.independentUnfavButton addTarget:self action:@selector(triggerUnfav) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:self.independentUnfavButton];
     }
     return self;
+}
+
+- (void) layoutSubviews {
+    NSLog(@"At layoutSubviews: %@", NSStringFromCGRect(self.frame));
+    int leftIndex = self.isSelectible ? 50 : 15;
+    if(self.checkButton) {
+        self.checkButton.frame = CGRectMake(15, (self.frame.size.height - 20)/2, 21, 20);
+    }
+
+    float imgWidth = IS_IPAD ? self.imgView.image.size.width*3/2 : self.imgView.image.size.width;
+    float imgHeight = IS_IPAD ? self.imgView.image.size.height*3/2 : self.imgView.image.size.height;
+    float imgMaxWidth = IS_IPAD ? 70 : 40;
+    float totalLeftIndex = leftIndex + imgMaxWidth + 15;
+
+    if(self.imgView) {
+        UIImage *iconImg = [UIImage imageNamed:[AppUtil iconNameByContentType:ContentTypeFolder]];
+        self.imgView.frame = CGRectMake(leftIndex + (imgMaxWidth - imgWidth)/2, (self.frame.size.height - imgHeight)/2, imgWidth, imgHeight);
+    }
+    CGRect nameFieldRect = CGRectMake(totalLeftIndex, self.frame.size.height/2 - 22, self.frame.size.width - totalLeftIndex, 22);
+    CGRect detailFieldRect = CGRectMake(totalLeftIndex, self.frame.size.height/2, self.frame.size.width - totalLeftIndex, 20);
+    if(nameLabel) {
+        nameLabel.frame = nameFieldRect;
+    }
+    if(detailLabel) {
+        detailLabel.frame = detailFieldRect;
+    }
+    if(progressSeparator) {
+        progressSeparator.frame = CGRectMake(0, self.frame.size.height - 1, self.frame.size.width, 1);
+    }
+    if(self.independentFavButton) {
+        self.independentFavButton.frame = CGRectMake(self.frame.size.width-50, (self.frame.size.height - 40)/2, 40, 40);
+    }
+    if(self.independentUnfavButton) {
+        self.independentUnfavButton.frame = CGRectMake(self.frame.size.width-50, (self.frame.size.height - 40)/2, 40, 40);
+    }
+    [super layoutSubviews];
 }
 
 /*

@@ -13,6 +13,12 @@
 #import "AppDelegate.h"
 #import "AppSession.h"
 
+@interface SortTypeCell () {
+    UIView *progressSeparator;
+    UIImageView *tickView;
+}
+@end
+
 @implementation SortTypeCell
 
 @synthesize type;
@@ -33,17 +39,25 @@
         
         if(APPDELEGATE.session.sortType == self.type) {
             UIImage *tickImg = [UIImage imageNamed:@"nav_blue_tick.png"];
-            UIImageView *tickView = [[UIImageView alloc] initWithFrame:CGRectMake(self.frame.size.width - 34, 20, 14, 11)];
+            tickView = [[UIImageView alloc] initWithFrame:CGRectMake(self.frame.size.width - 34, 20, 14, 11)];
             tickView.image = tickImg;
             [self addSubview:tickView];
         }
         
-        UIView *progressSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 49, self.frame.size.width, 1)];
+        progressSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 49, self.frame.size.width, 1)];
         progressSeparator.backgroundColor = [Util UIColorForHexColor:@"E1E1E1"];
         progressSeparator.alpha = 0.5f;
         [self addSubview:progressSeparator];
     }
     return self;
+}
+
+- (void) layoutSubviews {
+    progressSeparator.frame = CGRectMake(0, 49, self.frame.size.width, 1);
+    if(tickView) {
+        tickView.frame = CGRectMake(self.frame.size.width - (IS_IPAD ? 100 : 34), 20, 14, 11);
+    }
+    [super layoutSubviews];
 }
 
 - (void)awakeFromNib {

@@ -35,7 +35,7 @@
         imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
         imgView.contentMode = UIViewContentModeScaleAspectFill;
         imgView.clipsToBounds = YES;
-        [imgView setImageWithURL:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:[UIImage imageNamed:@"square_placeholder.png"]];
+        [imgView setNoCachedImageWithURL:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:[UIImage imageNamed:@"square_placeholder.png"]];
         [self addSubview:imgView];
         
         if(self.file.contentType == ContentTypeVideo) {
@@ -53,13 +53,16 @@
         maskView.hidden = YES;
         [self addSubview:maskView];
 
-        longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressed)];
+        longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressed:)];
         longPressGesture.minimumPressDuration = 1.0f;
         longPressGesture.allowableMovement = 10.0f;
+        longPressGesture.delegate = self;
         [self addGestureRecognizer:longPressGesture];
         
         tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapped)];
         tapGesture.numberOfTapsRequired = 1;
+        tapGesture.delegate = self;
+        [tapGesture requireGestureRecognizerToFail:longPressGesture];
         [self addGestureRecognizer:tapGesture];
     }
     return self;
@@ -145,6 +148,10 @@
     return self;
 }
 
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
+    return YES;
+}
+
 - (void) managerNotifyReceived:(NSNotification *) notification {
     NSDictionary *userInfo = notification.userInfo;
     NSString *fileUuid = [userInfo objectForKey:TEMP_IMG_UPLOAD_NOTIFICATION_UUID_PARAM];
@@ -199,11 +206,14 @@
     }
 }
 
-- (void) longPressed {
-    if(isSelectible) {
-        [self imageTapped];
-    } else {
-        [delegate squareImageWasLongPressedForFile:self.file];
+- (void) longPressed:(UILongPressGestureRecognizer*)sender {
+    if (sender.state == UIGestureRecognizerStateEnded) {
+        if(isSelectible) {
+            [self imageTapped];
+        } else {
+            [delegate squareImageWasLongPressedForFile:self.file];
+            [self performSelector:@selector(imageTapped) withObject:nil afterDelay:0.2f];
+        }
     }
 }
 

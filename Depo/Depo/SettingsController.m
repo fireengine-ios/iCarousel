@@ -57,17 +57,19 @@
 }
 
 - (void) drawProfileInfoArea {
-    UIView *profileInfoArea = [[UIView alloc] initWithFrame:CGRectMake(0, self.topIndex, 320, 159)];
+    UIView *profileInfoArea = [[UIView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.width/2)];
     profileInfoArea.backgroundColor = [Util UIColorForHexColor:@"3FB0E8"];
     
+    float imageWidth = profileInfoArea.frame.size.width * 0.275f;
+
     UIImage *profileBgImg = [UIImage imageNamed:@"profile_icon"];
-    profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(116, 15, 88, 88)];
+    profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake((profileInfoArea.frame.size.width - imageWidth)/2, (profileInfoArea.frame.size.height - imageWidth)/2 - 20, imageWidth, imageWidth)];
     profileImageView.image = profileBgImg;
     [profileInfoArea addSubview:profileImageView];
 
     if(APPDELEGATE.session.profileImageRef) {
-        UIImageView *profileImgView = [[UIImageView alloc] initWithFrame:CGRectMake(17, (60 - profileBgImg.size.height - 2)/2, profileImageView.frame.size.width - 4, profileImageView.frame.size.height - 4)];
-        profileImgView.image = [Util circularScaleNCrop:APPDELEGATE.session.profileImageRef forRect:CGRectMake(0, 0, 88, 88)];
+        UIImageView *profileImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, profileImageView.frame.size.width - 4, profileImageView.frame.size.height - 4)];
+        profileImgView.image = [Util circularScaleNCrop:APPDELEGATE.session.profileImageRef forRect:CGRectMake(0, 0, profileImageView.frame.size.width - 4, profileImageView.frame.size.width - 4)];
         profileImgView.center = profileImageView.center;
         [profileInfoArea addSubview:profileImgView];
     }
@@ -92,24 +94,24 @@
     profileButton.userInteractionEnabled = NO;
 //    [profileInfoArea addSubview:profileButton];
     
-    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 108, 300, 20)];
+    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, profileImageView.frame.origin.y + profileImageView.frame.size.height + (IS_IPAD ? 20 : 5), self.view.frame.size.width - 20, IS_IPAD ? 30 : 20)];
     if(APPDELEGATE.session.user.email) {
         [nameLabel setText:APPDELEGATE.session.user.email];
     } else {
         [nameLabel setText:APPDELEGATE.session.user.fullName];
     }
-    nameLabel.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:20];
+    nameLabel.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:(IS_IPAD ? 30 : 20)];
     nameLabel.textAlignment = NSTextAlignmentCenter;
     nameLabel.textColor = [Util UIColorForHexColor:@"FFFFFF"];
     nameLabel.backgroundColor= [UIColor clearColor];
     [profileInfoArea addSubview:nameLabel];
 
     NSString *msisdnVal = APPDELEGATE.session.user.phoneNumber;
-    UIFont *msisdnFont = [UIFont fontWithName:@"TurkcellSaturaDem" size:20];
+    UIFont *msisdnFont = [UIFont fontWithName:@"TurkcellSaturaDem" size:(IS_IPAD ? 30 : 20)];
     
-    float msisdnWidth = [Util calculateWidthForText:msisdnVal forHeight:20 forFont:msisdnFont] + 10;
+    float msisdnWidth = [Util calculateWidthForText:msisdnVal forHeight:(IS_IPAD ? 30 : 20) forFont:msisdnFont] + 10;
     
-    msisdnLabel = [[UILabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - msisdnWidth)/2 + 10, 132, msisdnWidth, 20)];
+    msisdnLabel = [[UILabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - msisdnWidth)/2 + 10, nameLabel.frame.origin.y + nameLabel.frame.size.height + (IS_IPAD ? 10 : 4), msisdnWidth, 20)];
     [msisdnLabel setText:msisdnVal];
     msisdnLabel.font = msisdnFont;
     msisdnLabel.textAlignment = NSTextAlignmentCenter;
@@ -153,7 +155,7 @@
 }
 
 - (void) drawSettingsCategories {
-    pageContentTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topIndex + 159, 325, self.view.frame.size.height-self.bottomIndex-159) style:UITableViewStyleGrouped];
+    pageContentTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topIndex + self.view.frame.size.width/2, self.view.frame.size.width, self.view.frame.size.height-self.bottomIndex-self.view.frame.size.width/2) style:UITableViewStyleGrouped];
     pageContentTable.delegate = self;
     pageContentTable.dataSource = self;
     pageContentTable.backgroundColor = [UIColor clearColor];
@@ -299,7 +301,11 @@
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 69;
+    if(IS_IPAD) {
+        return 102;
+    } else {
+        return 69;
+    }
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

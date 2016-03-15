@@ -166,7 +166,19 @@
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 68;
+    if([[musicDict allKeys] count] == 0) {
+        if(IS_IPAD) {
+            return 420;
+        } else {
+            return 320;
+        }
+    } else {
+        if(IS_IPAD) {
+            return 102;
+        } else {
+            return 68;
+        }
+    }
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {

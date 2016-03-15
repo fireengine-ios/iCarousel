@@ -36,6 +36,8 @@
 @property (nonatomic, strong) CustomButton *deleteButton;
 @property (nonatomic, strong) CheckButton *checkButton;
 @property (nonatomic, strong) UIImageView *imgView;
+@property (nonatomic, strong) CustomButton *independentFavButton;
+@property (nonatomic, strong) CustomButton *independentUnfavButton;
 
 @property (nonatomic) BOOL menuActive;
 @property (nonatomic) BOOL isSelectible;

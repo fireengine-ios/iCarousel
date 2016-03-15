@@ -42,17 +42,22 @@
         UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
         self.navigationItem.rightBarButtonItem = doneItem;
         
-        mainScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex)];
+        CGRect mainScrollRect = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex);
+        if(IS_IPAD) {
+            mainScrollRect = CGRectMake((self.view.frame.size.width - 500)/2, 0, 500, self.view.frame.size.height - self.bottomIndex);
+        }
+        
+        mainScroll = [[UIScrollView alloc] initWithFrame:mainScrollRect];
         [self.view addSubview:mainScroll];
         
-        float yIndex = self.topIndex + 30;
+        float yIndex = self.topIndex + (IS_IPAD ? 100 : 30);
 
-        CustomLabel *titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(25, yIndex, 280, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:12] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"FileDetailNameTitle", @"")];
+        CustomLabel *titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, yIndex, mainScroll.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:12] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"FileDetailNameTitle", @"")];
         [mainScroll addSubview:titleLabel];
         
         yIndex += 20;
         
-        nameField = [[GeneralTextField alloc] initWithFrame:CGRectMake(20, yIndex, 280, 43) withPlaceholder:NSLocalizedString(@"FileNamePlaceholder", @"")];
+        nameField = [[GeneralTextField alloc] initWithFrame:CGRectMake(20, yIndex, mainScroll.frame.size.width - 40, 43) withPlaceholder:NSLocalizedString(@"FileNamePlaceholder", @"")];
         nameField.delegate = self;
         NSString *fileNameWithoutExtension = [self.file.name stringByDeletingPathExtension];
         nameField.text = fileNameWithoutExtension;
@@ -61,12 +66,12 @@
         yIndex += 63;
 
         if([AppUtil isMetaFileMusic:self.file]) {
-            CustomLabel *songTitleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(25, yIndex, 280, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:12] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"SongTitleFieldTitle", @"")];
+            CustomLabel *songTitleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, yIndex, mainScroll.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:12] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"SongTitleFieldTitle", @"")];
             [mainScroll addSubview:songTitleLabel];
             
             yIndex += 20;
             
-            titleField = [[GeneralTextField alloc] initWithFrame:CGRectMake(20, yIndex, 280, 43) withPlaceholder:@""];
+            titleField = [[GeneralTextField alloc] initWithFrame:CGRectMake(20, yIndex, mainScroll.frame.size.width - 40, 43) withPlaceholder:@""];
             titleField.delegate = self;
             titleField.text = (self.file.detail && self.file.detail.songTitle) ? self.file.detail.songTitle : @"";
             titleField.userInteractionEnabled = NO;
@@ -74,12 +79,12 @@
             
             yIndex += 63;
 
-            CustomLabel *artistLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(25, yIndex, 280, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:12] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"ArtistFieldTitle", @"")];
+            CustomLabel *artistLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, yIndex, mainScroll.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:12] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"ArtistFieldTitle", @"")];
             [mainScroll addSubview:artistLabel];
             
             yIndex += 20;
             
-            artistField = [[GeneralTextField alloc] initWithFrame:CGRectMake(20, yIndex, 280, 43) withPlaceholder:@""];
+            artistField = [[GeneralTextField alloc] initWithFrame:CGRectMake(20, yIndex, mainScroll.frame.size.width - 40, 43) withPlaceholder:@""];
             artistField.delegate = self;
             artistField.text = (self.file.detail && self.file.detail.artist) ? self.file.detail.artist : @"";
             artistField.userInteractionEnabled = NO;
@@ -87,12 +92,12 @@
             
             yIndex += 63;
 
-            CustomLabel *albumLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(25, yIndex, 280, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:12] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"AlbumFieldTitle", @"")];
+            CustomLabel *albumLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, yIndex, mainScroll.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:12] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"AlbumFieldTitle", @"")];
             [mainScroll addSubview:albumLabel];
             
             yIndex += 20;
             
-            albumField = [[GeneralTextField alloc] initWithFrame:CGRectMake(20, yIndex, 280, 43) withPlaceholder:@""];
+            albumField = [[GeneralTextField alloc] initWithFrame:CGRectMake(20, yIndex, mainScroll.frame.size.width - 40, 43) withPlaceholder:@""];
             albumField.delegate = self;
             albumField.text = (self.file.detail && self.file.detail.album) ? self.file.detail.album : @"";
             albumField.userInteractionEnabled = NO;
@@ -105,12 +110,12 @@
         if([AppUtil isMetaFileMusic:self.file]) {
             detailsMainTitle = NSLocalizedString(@"TrackDetailSegmentTitle", @"");
         }
-        CustomLabel *detailLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(25, yIndex, 280, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:12] withColor:[Util UIColorForHexColor:@"363e4f"] withText:detailsMainTitle];
+        CustomLabel *detailLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, yIndex, mainScroll.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:12] withColor:[Util UIColorForHexColor:@"363e4f"] withText:detailsMainTitle];
         [mainScroll addSubview:detailLabel];
         
         yIndex += 30;
 
-        UIView *detailSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, yIndex, self.view.frame.size.width, 1)];
+        UIView *detailSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, yIndex, mainScroll.frame.size.width, 1)];
         detailSeparator.backgroundColor = [Util UIColorForHexColor:@"DEDEDE"];
         [mainScroll addSubview:detailSeparator];
 
@@ -118,7 +123,7 @@
 
         if([AppUtil isMetaFileMusic:self.file]) {
             //duration segment
-            CustomLabel *durationLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(25, yIndex, 175, 25) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:20] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"DurationTitle", @"")];
+            CustomLabel *durationLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, yIndex, 175, 25) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:20] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"DurationTitle", @"")];
             [mainScroll addSubview:durationLabel];
             
             NSString *durationVal = @"";
@@ -128,13 +133,13 @@
                 int remainingSec = durationInSec - durationInMin*60;
                 durationVal = [NSString stringWithFormat:@"%d:%@%d", durationInMin, remainingSec <=9 ? @"0": @"", remainingSec];
             }
-            CustomLabel *durationValueLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(200, yIndex, 95, 25) withFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:20] withColor:[Util UIColorForHexColor:@"707a8f"] withText:durationVal];
+            CustomLabel *durationValueLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(mainScroll.frame.size.width - 115, yIndex, 95, 25) withFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:20] withColor:[Util UIColorForHexColor:@"707a8f"] withText:durationVal];
             durationValueLabel.textAlignment = NSTextAlignmentRight;
             [mainScroll addSubview:durationValueLabel];
             
             yIndex += 40;
 
-            UIView *durationSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, yIndex, self.view.frame.size.width, 1)];
+            UIView *durationSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, yIndex, mainScroll.frame.size.width, 1)];
             durationSeparator.backgroundColor = [Util UIColorForHexColor:@"DEDEDE"];
             [mainScroll addSubview:durationSeparator];
             
@@ -142,35 +147,35 @@
         }
 
         //size segment
-        CustomLabel *sizeLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(25, yIndex, 175, 25) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:20] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"FolderDetailSize", @"")];
+        CustomLabel *sizeLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, yIndex, 175, 25) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:20] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"FolderDetailSize", @"")];
         [mainScroll addSubview:sizeLabel];
         
-        CustomLabel *sizeValueLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(200, yIndex, 95, 25) withFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:20] withColor:[Util UIColorForHexColor:@"707a8f"] withText:[Util transformedSizeValue:self.file.bytes]];
+        CustomLabel *sizeValueLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(mainScroll.frame.size.width - 115, yIndex, 95, 25) withFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:20] withColor:[Util UIColorForHexColor:@"707a8f"] withText:[Util transformedSizeValue:self.file.bytes]];
         sizeValueLabel.textAlignment = NSTextAlignmentRight;
         [mainScroll addSubview:sizeValueLabel];
         
         yIndex += 40;
 
-        UIView *sizeSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, yIndex, self.view.frame.size.width, 1)];
+        UIView *sizeSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, yIndex, mainScroll.frame.size.width, 1)];
         sizeSeparator.backgroundColor = [Util UIColorForHexColor:@"DEDEDE"];
         [mainScroll addSubview:sizeSeparator];
         
         yIndex += 16;
 
         //modify date segment
-        CustomLabel *dateLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(25, yIndex, 175, 25) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:20] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"FolderDetailModifyDate", @"")];
+        CustomLabel *dateLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, yIndex, 175, 25) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:20] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"FolderDetailModifyDate", @"")];
         [mainScroll addSubview:dateLabel];
         
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
         [dateFormat setDateFormat:@"dd MMM yyyy"];
         
-        CustomLabel *dateValueLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(200, yIndex, 95, 25) withFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:20] withColor:[Util UIColorForHexColor:@"707a8f"] withText:[dateFormat stringFromDate:self.file.lastModified]];
+        CustomLabel *dateValueLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(mainScroll.frame.size.width - 115, yIndex, 95, 25) withFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:20] withColor:[Util UIColorForHexColor:@"707a8f"] withText:[dateFormat stringFromDate:self.file.lastModified]];
         dateValueLabel.textAlignment = NSTextAlignmentRight;
         [mainScroll addSubview:dateValueLabel];
         
         yIndex += 40;
 
-        UIView *dateSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, yIndex, self.view.frame.size.width, 1)];
+        UIView *dateSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, yIndex, mainScroll.frame.size.width, 1)];
         dateSeparator.backgroundColor = [Util UIColorForHexColor:@"DEDEDE"];
         [mainScroll addSubview:dateSeparator];
         

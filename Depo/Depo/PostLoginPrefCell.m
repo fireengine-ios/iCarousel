@@ -20,12 +20,16 @@
         CustomLabel *titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 10, 200, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:17] withColor:[UIColor whiteColor] withText:titleVal];
         [self addSubview:titleLabel];
         
-        checkView = [[UIImageView alloc] initWithFrame:CGRectMake(296, 14, 14, 11)];
+        checkView = [[UIImageView alloc] initWithFrame:CGRectMake(self.frame.size.width - 44, 14, 14, 11)];
         checkView.image = [UIImage imageNamed:@"check_icon.png"];
         checkView.hidden = YES;
         [self addSubview:checkView];
     }
     return self;
+}
+
+- (void) layoutSubviews {
+    checkView.frame = CGRectMake(self.frame.size.width - 44, 14, 14, 11);
 }
 
 - (void)awakeFromNib {

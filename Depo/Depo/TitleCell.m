@@ -9,6 +9,16 @@
 #import "TitleCell.h"
 #import "ToggleButton.h"
 
+@interface TitleCell () {
+    UILabel *titleLabel;
+    UILabel *subTitleLabel;
+    UIImageView *categoryIcon;
+    UIImageView *rightIcon;
+    UILabel *linkLabel;
+    UIView *greyLine;
+}
+@end
+
 @implementation TitleCell
 
 @synthesize switchButton;
@@ -102,7 +112,7 @@
 }
 
 - (void)drawTitle {
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(titleLeft, titleTop, 280, 20)];
+    titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(titleLeft, titleTop, 280, 20)];
     [titleLabel setText:titleText];
     titleLabel.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:titleFontSize];
     titleLabel.textColor = titleColor;
@@ -111,7 +121,7 @@
 }
 
 - (void)drawSubTitle {
-    UILabel *subTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(titleLeft, titleTop + 20, 280, 20)];
+    subTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(titleLeft, titleTop + 20, 280, 20)];
     [subTitleLabel setText:subTitleText];
     subTitleLabel.font = [UIFont fontWithName:@"TurkcellSaturaMed" size:16];
     subTitleLabel.textColor = [Util UIColorForHexColor:@"5D667C"];
@@ -120,18 +130,18 @@
 }
 
 - (void)drawIcon {
-    UIImageView *categoryIcon = [[UIImageView alloc]initWithFrame:CGRectMake(15, cellHeight/2-15, 29, 29)];
+    categoryIcon = [[UIImageView alloc]initWithFrame:CGRectMake(15, cellHeight/2-15, 29, 29)];
     categoryIcon.image = [UIImage imageNamed:iconName];
     [self addSubview:categoryIcon];
 }
 
 - (void)drawLinkArea {
-    UIImageView *rightIcon = [[UIImageView alloc]initWithFrame:CGRectMake(293, cellHeight/2-7, 7, 13)];
+    rightIcon = [[UIImageView alloc]initWithFrame:CGRectMake(293, cellHeight/2-7, 7, 13)];
     rightIcon.image = [UIImage imageNamed:@"right_grey_icon"];
     [self addSubview:rightIcon];
     
     if(![linkText isEqualToString:@""]) {
-        UILabel *linkLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, cellHeight/2-10, 268, 20)];
+        linkLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, cellHeight/2-10, 268, 20)];
         [linkLabel setText:linkText];
         linkLabel.font = [UIFont fontWithName:@"TurkcellSaturaMed" size:17];
         linkLabel.textColor = [Util UIColorForHexColor:@"5D667C"];
@@ -155,7 +165,7 @@
 }
 
 - (void)drawSeparator {
-    UIView *greyLine = [[UIView alloc] initWithFrame:CGRectMake(0, cellHeight-1, 320, 1)];
+    greyLine = [[UIView alloc] initWithFrame:CGRectMake(0, cellHeight-1, 320, 1)];
     greyLine.backgroundColor = [Util UIColorForHexColor:@"E0E2E0"];
     [self addSubview:greyLine];
 }
@@ -166,6 +176,34 @@
 
 - (void)hideTick {
     tickIcon.hidden = YES;
+}
+
+- (void) layoutSubviews {
+    titleTop = (subTitleText == nil || [subTitleText isEqualToString:@""]) ? (self.frame.size.height - 20)/2 : self.frame.size.height/2 - 20;
+    
+    if(titleLabel) {
+        titleLabel.frame = CGRectMake(titleLeft, titleTop, self.frame.size.width - titleLeft, 20);
+    }
+    if(subTitleLabel) {
+        subTitleLabel.frame = CGRectMake(titleLeft, titleTop + 20, self.frame.size.width - titleLeft, 20);
+    }
+    if(categoryIcon) {
+        categoryIcon.frame = CGRectMake(15, (self.frame.size.height-29)/2, 29, 29);
+    }
+    if(rightIcon) {
+        rightIcon.frame = CGRectMake(self.frame.size.width - 27, (self.frame.size.height-13)/2, 7, 13);
+    }
+    if(linkLabel) {
+        linkLabel.frame = CGRectMake(15, (self.frame.size.height-20)/2, 268, 20);
+    }
+    if(greyLine) {
+        greyLine.frame = CGRectMake(0, self.frame.size.height-1, self.frame.size.width, 1);
+    }
+    if(tickIcon) {
+        tickIcon.frame = CGRectMake(self.frame.size.width - 40, (self.frame.size.height - 11)/2, 14, 11);
+    }
+    
+    [super layoutSubviews];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

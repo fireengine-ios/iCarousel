@@ -25,7 +25,7 @@
 }
 
 - (void) viewWillAppear:(BOOL)animated {
-    UIWebView *webView  = [[UIWebView alloc] initWithFrame:CGRectMake(0, self.topIndex, 320, self.view.frame.size.height - self.topIndex)];
+    UIWebView *webView  = [[UIWebView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.topIndex)];
     webView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     webView.scalesPageToFit = YES;
     webView.autoresizesSubviews = YES;

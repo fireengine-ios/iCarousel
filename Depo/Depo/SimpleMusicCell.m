@@ -8,6 +8,13 @@
 
 #import "SimpleMusicCell.h"
 
+@interface SimpleMusicCell () {
+    CustomLabel *nameLabel;
+    CustomLabel *detailLabel;
+    UIView *progressSeparator;
+}
+@end
+
 @implementation SimpleMusicCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier  withFileFolder:(MetaFile *) _fileFolder isSelectible:(BOOL)_selectible {
@@ -31,7 +38,7 @@
         if(self.fileFolder.detail && self.fileFolder.detail.songTitle) {
             nameVal = self.fileFolder.detail.songTitle;
         }
-        CustomLabel *nameLabel = [[CustomLabel alloc] initWithFrame:nameFieldRect withFont:nameFont withColor:[self readNameColor] withText:nameVal];
+        nameLabel = [[CustomLabel alloc] initWithFrame:nameFieldRect withFont:nameFont withColor:[self readNameColor] withText:nameVal];
         [self addSubview:nameLabel];
         
         NSString *detailVal = @"";
@@ -42,10 +49,10 @@
             detailVal = [NSString stringWithFormat:@"%@ - %@", detailVal, self.fileFolder.detail.album];
         }
         
-        CustomLabel *detailLabel = [[CustomLabel alloc] initWithFrame:detailFieldRect withFont:detailFont withColor:[self readDetailColor] withText:detailVal];
+        detailLabel = [[CustomLabel alloc] initWithFrame:detailFieldRect withFont:detailFont withColor:[self readDetailColor] withText:detailVal];
         [self addSubview:detailLabel];
         
-        UIView *progressSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 67, self.frame.size.width, 1)];
+        progressSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 67, self.frame.size.width, 1)];
         progressSeparator.backgroundColor = [self readPassiveSeparatorColor];
         progressSeparator.alpha = 0.5f;
         [self addSubview:progressSeparator];
@@ -53,6 +60,25 @@
         [self initializeSwipeMenu];
     }
     return self;
+}
+
+- (void) layoutSubviews {
+    int leftIndex = self.isSelectible ? 50 : 15;
+    if(self.checkButton) {
+        self.checkButton.frame = CGRectMake(15, (self.frame.size.height - 20)/2, 21, 20);
+    }
+    CGRect nameFieldRect = CGRectMake(leftIndex + 15, self.frame.size.height/2 - 22, self.frame.size.width - 30, 22);
+    CGRect detailFieldRect = CGRectMake(leftIndex + 15, self.frame.size.height/2, self.frame.size.width - 30, 20);
+    if(nameLabel) {
+        nameLabel.frame = nameFieldRect;
+    }
+    if(detailLabel) {
+        detailLabel.frame = detailFieldRect;
+    }
+    if(progressSeparator) {
+        progressSeparator.frame = CGRectMake(0, self.frame.size.height - 1, self.frame.size.width, 1);
+    }
+    [super layoutSubviews];
 }
 
 /*

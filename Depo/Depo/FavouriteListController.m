@@ -130,7 +130,11 @@
     if(fileList == nil || [fileList count] == 0) {
         return 320;
     } else {
-        return 68;
+        if(IS_IPAD) {
+            return 102;
+        } else {
+            return 68;
+        }
     }
 }
 

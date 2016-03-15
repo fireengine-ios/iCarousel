@@ -30,7 +30,7 @@
         
         int modalHeight = messageHeight + 140;
 
-        modalView = [[UIView alloc] initWithFrame:CGRectMake(20, (self.frame.size.height - modalHeight)/2, 280, modalHeight)];
+        modalView = [[UIView alloc] initWithFrame:CGRectMake((self.frame.size.width - 280)/2, (self.frame.size.height - modalHeight)/2, 280, modalHeight)];
         modalView.backgroundColor = [UIColor whiteColor];
         
         UIImage *iconImg = nil;

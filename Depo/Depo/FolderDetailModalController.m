@@ -37,32 +37,39 @@
         UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
         self.navigationItem.rightBarButtonItem = doneItem;
         
-        CustomLabel *titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(25, self.topIndex + 30, 280, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:12] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"FolderAddTitle", @"")];
+        float rowWidth = 280;
+        float calculatedTopIndex = self.topIndex + 30;
+        if(IS_IPAD) {
+            rowWidth = 500;
+            calculatedTopIndex = self.topIndex + 100;
+        }
+        
+        CustomLabel *titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - rowWidth)/2, self.topIndex + (IS_IPAD ? 100 : 30), rowWidth, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:12] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"FolderAddTitle", @"")];
         [self.view addSubview:titleLabel];
         
-        nameField = [[GeneralTextField alloc] initWithFrame:CGRectMake(20, self.topIndex + 55, 280, 43) withPlaceholder:NSLocalizedString(@"FolderNamePlaceholder", @"")];
+        nameField = [[GeneralTextField alloc] initWithFrame:CGRectMake((self.view.frame.size.width - rowWidth)/2, titleLabel.frame.origin.y + titleLabel.frame.size.height + 10, rowWidth, 43) withPlaceholder:NSLocalizedString(@"FolderNamePlaceholder", @"")];
         nameField.delegate = self;
         if(self.folder != nil) {
             nameField.text = self.folder.name;
         }
         [self.view addSubview:nameField];
         
-        CustomLabel *detailLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(25, nameField.frame.origin.y + nameField.frame.size.height + 30, 280, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:12] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"FolderDetailSegmentTitle", @"")];
+        CustomLabel *detailLabel = [[CustomLabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - rowWidth)/2, nameField.frame.origin.y + nameField.frame.size.height + 30, rowWidth, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:12] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"FolderDetailSegmentTitle", @"")];
         [self.view addSubview:detailLabel];
 
-        UIView *detailSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, detailLabel.frame.origin.y + detailLabel.frame.size.height + 10, self.view.frame.size.width, 1)];
+        UIView *detailSeparator = [[UIView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - rowWidth)/2, detailLabel.frame.origin.y + detailLabel.frame.size.height + 10, rowWidth, 1)];
         detailSeparator.backgroundColor = [Util UIColorForHexColor:@"DEDEDE"];
         [self.view addSubview:detailSeparator];
 
         //item segment
-        CustomLabel *itemsLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(25, detailSeparator.frame.origin.y + detailSeparator.frame.size.height + 15, 175, 25) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:20] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"FolderDetailItems", @"")];
+        CustomLabel *itemsLabel = [[CustomLabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - rowWidth)/2, detailSeparator.frame.origin.y + detailSeparator.frame.size.height + 15, 175, 25) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:20] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"FolderDetailItems", @"")];
         [self.view addSubview:itemsLabel];
         
-        CustomLabel *itemsValueLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(200, detailSeparator.frame.origin.y + detailSeparator.frame.size.height + 15, 95, 25) withFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:20] withColor:[Util UIColorForHexColor:@"707a8f"] withText:[NSString stringWithFormat:@"%d", self.folder.itemCount]];
+        CustomLabel *itemsValueLabel = [[CustomLabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width + rowWidth)/2 - 95, detailSeparator.frame.origin.y + detailSeparator.frame.size.height + 15, 95, 25) withFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:20] withColor:[Util UIColorForHexColor:@"707a8f"] withText:[NSString stringWithFormat:@"%d", self.folder.itemCount]];
         itemsValueLabel.textAlignment = NSTextAlignmentRight;
         [self.view addSubview:itemsValueLabel];
 
-        UIView *itemsSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, itemsLabel.frame.origin.y + itemsLabel.frame.size.height + 15, self.view.frame.size.width, 1)];
+        UIView *itemsSeparator = [[UIView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - rowWidth)/2, itemsLabel.frame.origin.y + itemsLabel.frame.size.height + 15, rowWidth, 1)];
         itemsSeparator.backgroundColor = [Util UIColorForHexColor:@"DEDEDE"];
         [self.view addSubview:itemsSeparator];
 
@@ -81,17 +88,17 @@
          */
         
         //modify date segment
-        CustomLabel *dateLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(25, itemsSeparator.frame.origin.y + itemsSeparator.frame.size.height + 15, 175, 25) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:20] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"FolderDetailModifyDate", @"")];
+        CustomLabel *dateLabel = [[CustomLabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - rowWidth)/2, itemsSeparator.frame.origin.y + itemsSeparator.frame.size.height + 15, 175, 25) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:20] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"FolderDetailModifyDate", @"")];
         [self.view addSubview:dateLabel];
         
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
         [dateFormat setDateFormat:@"dd MMM yyyy"];
         
-        CustomLabel *dateValueLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(200, itemsSeparator.frame.origin.y + itemsSeparator.frame.size.height + 15, 95, 25) withFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:20] withColor:[Util UIColorForHexColor:@"707a8f"] withText:[dateFormat stringFromDate:self.folder.lastModified]];
+        CustomLabel *dateValueLabel = [[CustomLabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width + rowWidth)/2 - 95, itemsSeparator.frame.origin.y + itemsSeparator.frame.size.height + 15, 95, 25) withFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:20] withColor:[Util UIColorForHexColor:@"707a8f"] withText:[dateFormat stringFromDate:self.folder.lastModified]];
         dateValueLabel.textAlignment = NSTextAlignmentRight;
         [self.view addSubview:dateValueLabel];
 
-        UIView *dateSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, dateLabel.frame.origin.y + dateLabel.frame.size.height + 15, self.view.frame.size.width, 1)];
+        UIView *dateSeparator = [[UIView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - rowWidth)/2, dateLabel.frame.origin.y + dateLabel.frame.size.height + 15, rowWidth, 1)];
         dateSeparator.backgroundColor = [Util UIColorForHexColor:@"DEDEDE"];
         [self.view addSubview:dateSeparator];
 

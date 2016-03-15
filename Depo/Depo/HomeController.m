@@ -82,16 +82,22 @@
         contactCountDao.failMethod = @selector(contactCountFailCallback:);
         */
         
-        usageChart = [[XYPieChart alloc] initWithFrame:CGRectMake(60, IS_IPHONE_5 ? 40 : 26, 200, 200)];
+        float chartWidth = 200;
+        float labelRadius = 40;
+        if(IS_IPAD) {
+            chartWidth = self.view.frame.size.width - 300;
+            labelRadius = 150;
+        }
+        usageChart = [[XYPieChart alloc] initWithFrame:[self usageChartFrame]];
         usageChart.dataSource = self;
         usageChart.startPieAngle = M_PI_2;
         usageChart.animationSpeed = 1.0;
         usageChart.labelFont = [UIFont fontWithName:@"TurkcellSaturaBol" size:24];
-        usageChart.labelRadius = 40;
+        usageChart.labelRadius = labelRadius;
         usageChart.showLabel = NO;
         usageChart.showPercentage = NO;
         usageChart.pieBackgroundColor = [UIColor whiteColor];
-        usageChart.pieCenter = CGPointMake(100, 100);
+        usageChart.pieCenter = CGPointMake(chartWidth/2, chartWidth/2);
         usageChart.userInteractionEnabled = NO;
         usageChart.labelShadowColor = [UIColor blackColor];
         [self.view addSubview:usageChart];
@@ -103,12 +109,18 @@
         lastSyncLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, IS_IPHONE_5 ? 18 : 8, self.view.frame.size.width - 40, 18) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:15] withColor:[Util UIColorForHexColor:@"7b8497"] withText:lastSyncTitle withAlignment:NSTextAlignmentCenter];
         [self.view addSubview:lastSyncLabel];
         
-        moreStorageButton = [[SimpleButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 150)/2, usageChart.frame.origin.y + usageChart.frame.size.height + (IS_IPHONE_5 ? 20 : 0), 150, 44) withTitle:NSLocalizedString(@"GetMoreStorageButtonTitle", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:22];
+        moreStorageButton = [[SimpleButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 150)/2, usageChart.frame.origin.y + usageChart.frame.size.height + (IS_IPAD ? 50 : IS_IPHONE_5 ? 20 : 0), 150, 44) withTitle:NSLocalizedString(@"GetMoreStorageButtonTitle", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:22];
         moreStorageButton.hidden = YES;
         [moreStorageButton addTarget:self action:@selector(triggerStoragePage) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:moreStorageButton];
         
-        footer = [[RecentActivityLinkerFooter alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60)];
+        float footerHeight = 60;
+        float footerYIndex = self.view.frame.size.height - 124;
+        if(IS_IPAD) {
+            footerHeight = 100;
+            footerYIndex = self.view.frame.size.height - 164;
+        }
+        footer = [[RecentActivityLinkerFooter alloc] initWithFrame:CGRectMake(0, footerYIndex, self.view.frame.size.width, footerHeight)];
         footer.delegate = self;
         [self.view addSubview:footer];
         
@@ -120,6 +132,16 @@
         }
     }
     return self;
+}
+
+- (CGRect) usageChartFrame {
+    float chartWidth = 200;
+    CGRect usageChartRect = CGRectMake(60, IS_IPHONE_5 ? 40 : 26, chartWidth, chartWidth);
+    if(IS_IPAD) {
+        chartWidth = self.view.frame.size.width - 300;
+        usageChartRect = CGRectMake(150, 50, chartWidth, chartWidth);
+    }
+    return usageChartRect;
 }
 
 #pragma mark RecentActivityLinker Method
@@ -192,22 +214,39 @@
 
     [usageChart reloadData];
     
-    usageSummaryView = [[HomeUsageView alloc] initWithFrame:CGRectMake((usageChart.frame.size.width - 130)/2, (usageChart.frame.size.height - 130)/2, 130, 130) withUsage:APPDELEGATE.session.usage];
+    CGRect usageSummaryRect = CGRectMake((usageChart.frame.size.width - 130)/2, (usageChart.frame.size.height - 130)/2, 130, 130);
+    if(IS_IPAD) {
+        usageSummaryRect = CGRectMake(80, 80, usageChart.frame.size.width - 160, usageChart.frame.size.width - 160);
+    }
+    usageSummaryView = [[HomeUsageView alloc] initWithFrame:usageSummaryRect withUsage:APPDELEGATE.session.usage];
     [usageChart addSubview:usageSummaryView];
     
-    UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(20, moreStorageButton.frame.origin.y + moreStorageButton.frame.size.height + (IS_IPHONE_5 ? 20: 5), self.view.frame.size.width - 40, 1)];
+    UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(20, moreStorageButton.frame.origin.y + moreStorageButton.frame.size.height + (IS_IPAD ? 50 : IS_IPHONE_5 ? 20: 5), self.view.frame.size.width - 40, 1)];
     separator.backgroundColor = [Util UIColorForHexColor:@"ebebed"];
     [self.view addSubview:separator];
     
-    imageButton = [[UsageButton alloc] initWithFrame:CGRectMake(20, separator.frame.origin.y + (IS_IPHONE_5 ? 41 : 11), 75, 60) withUsage:UsageTypeImage withStorage:(APPDELEGATE.session.usage.imageUsage + APPDELEGATE.session.usage.videoUsage) withFileCount:(APPDELEGATE.session.usage.imageCount + APPDELEGATE.session.usage.videoCount)];
+    CGRect imageRect = CGRectMake(20, separator.frame.origin.y + (IS_IPHONE_5 ? 41 : 11), 75, 60);
+    CGRect musicRect = CGRectMake(122, separator.frame.origin.y + (IS_IPHONE_5 ? 41 : 11), 75, 60);
+    CGRect otherRect = CGRectMake(225, separator.frame.origin.y + (IS_IPHONE_5 ? 41 : 11), 75, 60);
+    
+    if(IS_IPAD) {
+        float leftMarginForIpad = 100;
+        float buttonSliceWidth = (self.view.frame.size.width - (leftMarginForIpad*2))/3;
+        
+        imageRect = CGRectMake(leftMarginForIpad, separator.frame.origin.y + 51, buttonSliceWidth, 100);
+        musicRect = CGRectMake(self.view.frame.size.width/2 - buttonSliceWidth/2, separator.frame.origin.y + 51, buttonSliceWidth, 100);
+        otherRect = CGRectMake(self.view.frame.size.width - leftMarginForIpad - buttonSliceWidth, separator.frame.origin.y + 51, buttonSliceWidth, 100);
+    }
+    
+    imageButton = [[UsageButton alloc] initWithFrame:imageRect withUsage:UsageTypeImage withStorage:(APPDELEGATE.session.usage.imageUsage + APPDELEGATE.session.usage.videoUsage) withFileCount:(APPDELEGATE.session.usage.imageCount + APPDELEGATE.session.usage.videoCount)];
     [imageButton addTarget:self action:@selector(triggerPhotosPage) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:imageButton];
     
-    musicButton = [[UsageButton alloc] initWithFrame:CGRectMake(122, separator.frame.origin.y + (IS_IPHONE_5 ? 41 : 11), 75, 60) withUsage:UsageTypeMusic withStorage:APPDELEGATE.session.usage.musicUsage withFileCount:APPDELEGATE.session.usage.audioCount];
+    musicButton = [[UsageButton alloc] initWithFrame:musicRect withUsage:UsageTypeMusic withStorage:APPDELEGATE.session.usage.musicUsage withFileCount:APPDELEGATE.session.usage.audioCount];
     [musicButton addTarget:self action:@selector(triggerMusicPage) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:musicButton];
     
-    otherButton = [[UsageButton alloc] initWithFrame:CGRectMake(225, separator.frame.origin.y + (IS_IPHONE_5 ? 41 : 11), 75, 60) withUsage:UsageTypeOther withStorage:APPDELEGATE.session.usage.otherUsage withFileCount:APPDELEGATE.session.usage.othersCount];
+    otherButton = [[UsageButton alloc] initWithFrame:otherRect withUsage:UsageTypeOther withStorage:APPDELEGATE.session.usage.otherUsage withFileCount:APPDELEGATE.session.usage.othersCount];
     [otherButton addTarget:self action:@selector(triggerDocsPage) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:otherButton];
     
@@ -219,16 +258,28 @@
 
     if(percentUsageVal >= 80) {
         moreStorageButton.hidden = NO;
-        usageChart.frame = CGRectMake(60, (moreStorageButton.frame.origin.y + lastSyncLabel.frame.origin.y + lastSyncLabel.frame.size.height)/2 - 100, 200, 200);
-        usageSummaryView.frame = CGRectMake((usageChart.frame.size.width - 130)/2, (usageChart.frame.size.height - 130)/2, 130, 130);
+        CGRect currentChartFrame = [self usageChartFrame];
+        usageChart.frame = CGRectMake(currentChartFrame.origin.x, currentChartFrame.origin.y + lastSyncLabel.frame.size.height, currentChartFrame.size.width, currentChartFrame.size.height);
+        
+        CGRect usageSummaryRect = CGRectMake((usageChart.frame.size.width - 130)/2, (usageChart.frame.size.height - 130)/2, 130, 130);
+        if(IS_IPAD) {
+            usageSummaryRect = CGRectMake(80, 80, usageChart.frame.size.width - 160, usageChart.frame.size.width - 160);
+        }
+        usageSummaryView.frame = usageSummaryRect;
         if(!APPDELEGATE.session.quotaExceed80EventFlag) {
             //session basina bu event bir kere gönderilsin kontrolü eklendi
             [[CurioSDK shared] sendEvent:@"quota_exceeded_80_perc" eventValue:[NSString stringWithFormat:@"current: %.2f", percentUsageVal]];
             APPDELEGATE.session.quotaExceed80EventFlag = YES;
         }
     } else {
-        usageChart.frame = CGRectMake(60, (separator.frame.origin.y + lastSyncLabel.frame.origin.y + lastSyncLabel.frame.size.height)/2 - 100, 200, 200);
-        usageSummaryView.frame = CGRectMake((usageChart.frame.size.width - 130)/2, (usageChart.frame.size.height - 130)/2, 130, 130);
+        CGRect currentChartFrame = [self usageChartFrame];
+        usageChart.frame = CGRectMake(currentChartFrame.origin.x, currentChartFrame.origin.y + lastSyncLabel.frame.size.height, currentChartFrame.size.width, currentChartFrame.size.height);
+        
+        CGRect usageSummaryRect = CGRectMake((usageChart.frame.size.width - 130)/2, (usageChart.frame.size.height - 130)/2, 130, 130);
+        if(IS_IPAD) {
+            usageSummaryRect = CGRectMake(80, 80, usageChart.frame.size.width - 160, usageChart.frame.size.width - 160);
+        }
+        usageSummaryView.frame = usageSummaryRect;
     }
     
 // contacts commented out //    [contactCountDao requestContactCount];

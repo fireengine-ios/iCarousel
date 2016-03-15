@@ -90,7 +90,29 @@
         choiceTable.bounces = NO;
         [self.view addSubview:choiceTable];
         
-        SimpleButton *continueButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, self.view.frame.size.height - 70, self.view.frame.size.width - 40, 50) withTitle:NSLocalizedString(@"Continue", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
+        CGRect continueButtonRect = CGRectMake(20, self.view.frame.size.height - 70, self.view.frame.size.width - 40, 50);
+        
+        if(IS_IPAD) {
+            float yTopIndexForIpad = (self.view.frame.size.height - 600)/2;
+            float widthForIpad = self.view.frame.size.width > 400 ? 400 : self.view.frame.size.width;
+            float xLeftIndexForIpad = (self.view.frame.size.width - widthForIpad)/2;
+            
+            if(yTopIndexForIpad < 20) {
+                yTopIndexForIpad = 20;
+            }
+            
+            syncImgView.frame = CGRectMake(xLeftIndexForIpad + (widthForIpad - syncImg.size.width)/2, yTopIndexForIpad, syncImg.size.width, syncImg.size.height);
+            
+            descHeight = [Util calculateHeightForText:descStr forWidth:widthForIpad-40 forFont:descFont] + 5;
+            descLabel.frame = CGRectMake(xLeftIndexForIpad + 20, syncImgView.frame.origin.y + syncImgView.frame.size.height + 5, widthForIpad-40, descHeight);
+            switchLabel.frame = CGRectMake(xLeftIndexForIpad + 20, syncImgView.frame.origin.y + syncImgView.frame.size.height + 80, 230, 40);
+            autoSyncSwitch.frame = CGRectMake(xLeftIndexForIpad + widthForIpad - 40, syncImgView.frame.origin.y + syncImgView.frame.size.height + 85, 40, 40);
+            choiceTitleLabel.frame = CGRectMake(xLeftIndexForIpad + 20, syncImgView.frame.origin.y + syncImgView.frame.size.height + 125, widthForIpad - 40, 15);
+            choiceTable.frame = CGRectMake(xLeftIndexForIpad, syncImgView.frame.origin.y + syncImgView.frame.size.height + 145, widthForIpad, 80);
+            continueButtonRect = CGRectMake(xLeftIndexForIpad, choiceTable.frame.origin.y + choiceTable.frame.size.height + 30, widthForIpad, 50);
+        }
+        
+        SimpleButton *continueButton = [[SimpleButton alloc] initWithFrame:continueButtonRect withTitle:NSLocalizedString(@"Continue", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
         [continueButton addTarget:self action:@selector(continueClicked) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:continueButton];
     }

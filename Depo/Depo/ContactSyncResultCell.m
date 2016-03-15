@@ -13,6 +13,15 @@
 #import "AppDelegate.h"
 #import "AppSession.h"
 
+@interface ContactSyncResultCell () {
+    CustomLabel *rowTitleLabel;
+    CustomLabel *clientValLabel;
+    CustomLabel *serverValLabel;
+    CustomLabel *titleLabel;
+    CustomLabel *valLabel;
+}
+@end
+
 @implementation ContactSyncResultCell
 
 - (id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withTitle:(NSString *) titleVal withClientVal:(int) clientVal withServerVal:(int) serverVal {
@@ -20,8 +29,8 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [UIColor whiteColor];
         
-        CustomLabel *titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 15, 140, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[Util UIColorForHexColor:@"363e4f"] withText:titleVal withAlignment:NSTextAlignmentLeft];
-        [self addSubview:titleLabel];
+        rowTitleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 15, 140, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[Util UIColorForHexColor:@"363e4f"] withText:titleVal withAlignment:NSTextAlignmentLeft];
+        [self addSubview:rowTitleLabel];
 
         NSString *clientValStr = @"";
         NSString *serverValStr = @"";
@@ -30,10 +39,10 @@
             serverValStr = [NSString stringWithFormat:@"%d", serverVal];
         }
         
-        CustomLabel *clientValLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(160, 15, 80, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[Util UIColorForHexColor:@"888888"] withText:clientValStr withAlignment:NSTextAlignmentCenter];
+        clientValLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(160, 15, 80, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[Util UIColorForHexColor:@"888888"] withText:clientValStr withAlignment:NSTextAlignmentCenter];
         [self addSubview:clientValLabel];
 
-        CustomLabel *serverValLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(240, 15, 80, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[Util UIColorForHexColor:@"888888"] withText:serverValStr withAlignment:NSTextAlignmentCenter];
+        serverValLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(240, 15, 80, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[Util UIColorForHexColor:@"888888"] withText:serverValStr withAlignment:NSTextAlignmentCenter];
         [self addSubview:serverValLabel];
 
     }
@@ -45,7 +54,7 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [UIColor whiteColor];
         
-        CustomLabel *titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 10, 140, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[Util UIColorForHexColor:@"363e4f"] withText:titleVal withAlignment:NSTextAlignmentLeft];
+        titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 10, 140, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[Util UIColorForHexColor:@"363e4f"] withText:titleVal withAlignment:NSTextAlignmentLeft];
         [self addSubview:titleLabel];
         
         NSString *valStr = @"";
@@ -53,11 +62,22 @@
             valStr = [NSString stringWithFormat:@"%d", val];
         }
         
-        CustomLabel *valLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(160, 15, 160, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[Util UIColorForHexColor:@"888888"] withText:valStr withAlignment:NSTextAlignmentCenter];
+        valLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(160, 15, 160, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[Util UIColorForHexColor:@"888888"] withText:valStr withAlignment:NSTextAlignmentCenter];
         [self addSubview:valLabel];
         
     }
     return self;
+}
+
+- (void) layoutSubviews {
+    rowTitleLabel.frame = CGRectMake(IS_IPAD ? 50 : 20, (self.frame.size.height-20)/2 + 5, 140, 20);
+    clientValLabel.frame = CGRectMake(self.frame.size.width/2, (self.frame.size.height-20)/2 + 5, 80, 20);
+    serverValLabel.frame = CGRectMake(self.frame.size.width/2 + 80, (self.frame.size.height-20)/2 + 5, 80, 20);
+    
+    titleLabel.frame = CGRectMake(IS_IPAD ? 50 : 20, (self.frame.size.height-20)/2, 140, 20);
+    valLabel.frame = CGRectMake(self.frame.size.width/2, (self.frame.size.height-20)/2 + 5, 160, 20);
+    
+    [super layoutSubviews];
 }
 
 - (void)awakeFromNib {

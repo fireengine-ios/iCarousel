@@ -11,6 +11,13 @@
 #import "AppUtil.h"
 #import "Util.h"
 
+@interface MoreMenuCell () {
+    UIImageView *iconView;
+    CustomLabel *nameLabel;
+    UIView *progressSeparator;
+}
+@end
+
 @implementation MoreMenuCell
 
 @synthesize menuType;
@@ -23,7 +30,7 @@
         self.backgroundColor = [UIColor whiteColor];
 
         UIImage *iconImg = [UIImage imageNamed:[AppUtil moreMenuRowImgNameByMoreMenuType:menuType]];
-        UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(15, (40 - iconImg.size.height)/2, iconImg.size.width, iconImg.size.height)];
+        iconView = [[UIImageView alloc] initWithFrame:CGRectMake(15, (40 - iconImg.size.height)/2, iconImg.size.width, iconImg.size.height)];
         iconView.image = iconImg;
         [self addSubview:iconView];
         
@@ -31,10 +38,10 @@
         
         UIFont *nameFont = [UIFont fontWithName:@"TurkcellSaturaDem" size:18];
         
-        CustomLabel *nameLabel = [[CustomLabel alloc] initWithFrame:nameFieldRect withFont:nameFont withColor:[Util UIColorForHexColor:@"363E4F"] withText:[AppUtil moreMenuRowTitleByMoreMenuType:menuType withContentType:ContentTypeFolder]];
+        nameLabel = [[CustomLabel alloc] initWithFrame:nameFieldRect withFont:nameFont withColor:[Util UIColorForHexColor:@"363E4F"] withText:[AppUtil moreMenuRowTitleByMoreMenuType:menuType withContentType:ContentTypeFolder]];
         [self addSubview:nameLabel];
         
-        UIView *progressSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 49, self.frame.size.width, 1)];
+        progressSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 49, self.frame.size.width, 1)];
         progressSeparator.backgroundColor = [Util UIColorForHexColor:@"E1E1E1"];
         progressSeparator.alpha = 0.5f;
         [self addSubview:progressSeparator];
@@ -50,7 +57,7 @@
         self.backgroundColor = [UIColor whiteColor];
         
         UIImage *iconImg = [UIImage imageNamed:[AppUtil moreMenuRowImgNameByMoreMenuType:menuType]];
-        UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(15, (40 - iconImg.size.height)/2, iconImg.size.width, iconImg.size.height)];
+        iconView = [[UIImageView alloc] initWithFrame:CGRectMake(15, (40 - iconImg.size.height)/2, iconImg.size.width, iconImg.size.height)];
         iconView.image = iconImg;
         [self addSubview:iconView];
         
@@ -58,15 +65,20 @@
         
         UIFont *nameFont = [UIFont fontWithName:@"TurkcellSaturaDem" size:18];
         
-        CustomLabel *nameLabel = [[CustomLabel alloc] initWithFrame:nameFieldRect withFont:nameFont withColor:[Util UIColorForHexColor:@"363E4F"] withText:[AppUtil moreMenuRowTitleByMoreMenuType:menuType withContentType:self.contentType]];
+        nameLabel = [[CustomLabel alloc] initWithFrame:nameFieldRect withFont:nameFont withColor:[Util UIColorForHexColor:@"363E4F"] withText:[AppUtil moreMenuRowTitleByMoreMenuType:menuType withContentType:self.contentType]];
         [self addSubview:nameLabel];
         
-        UIView *progressSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 49, self.frame.size.width, 1)];
+        progressSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 49, self.frame.size.width, 1)];
         progressSeparator.backgroundColor = [Util UIColorForHexColor:@"E1E1E1"];
         progressSeparator.alpha = 0.5f;
         [self addSubview:progressSeparator];
     }
     return self;
+}
+
+- (void) layoutSubviews {
+    progressSeparator.frame = CGRectMake(0, 49, self.frame.size.width, 1);
+    [super layoutSubviews];
 }
 
 - (void)awakeFromNib

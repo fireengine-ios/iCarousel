@@ -73,16 +73,18 @@
         photoList = [[NSMutableArray alloc] init];
         [photoList addObjectsFromArray:[[UploadQueue sharedInstance] uploadImageRefsForAlbum:self.album.uuid]];
         
+        float mainImageHeight = self.view.frame.size.width/2;
+
         if(self.album.cover.tempDownloadUrl) {
-            UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 160)];
+            UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, mainImageHeight)];
             [bgImgView setImageWithURL:[NSURL URLWithString:self.album.cover.tempDownloadUrl]];
             [self.view addSubview:bgImgView];
             
-            UIImageView *maskImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 160)];
+            UIImageView *maskImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, mainImageHeight)];
             maskImgView.image = [UIImage imageNamed:@"album_mask.png"];
             [self.view addSubview:maskImgView];
         } else {
-            emptyBgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 160)];
+            emptyBgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, mainImageHeight)];
             emptyBgImgView.image = [UIImage imageNamed:@"empty_album_header_bg.png"];
             [self.view addSubview:emptyBgImgView];
         }
@@ -106,7 +108,7 @@
         [moreButton addTarget:self action:@selector(moreClicked) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:moreButton];
 
-        photosScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 160, self.view.frame.size.width, self.view.frame.size.height - 160)];
+        photosScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, mainImageHeight, self.view.frame.size.width, self.view.frame.size.height - mainImageHeight)];
         photosScroll.delegate = self;
         photosScroll.tag = 111;
         photosScroll.userInteractionEnabled = YES ;
@@ -139,14 +141,27 @@
 - (void) addOngoingPhotos {
     if([photoList count] > 0) {
         int counter = 0;
+
+        int imagePerLine = 3;
+        
+        float imageWidth = 100;
+        float interImageMargin = 5;
+        
+        if(IS_IPAD) {
+            imagePerLine = 5;
+            imageWidth = (self.view.frame.size.width - interImageMargin*(imagePerLine+1))/imagePerLine;
+        }
+        
+        float imageTotalWidth = imageWidth + interImageMargin;
+
         for(UploadRef *row in photoList) {
-            CGRect imgRect = CGRectMake(5 + (counter%3 * 105), 5 + ((int)floor(counter/3)*105), 100, 100);
+            CGRect imgRect = CGRectMake(interImageMargin + (counter%imagePerLine * imageTotalWidth), interImageMargin + ((int)floor(counter/imagePerLine)*imageTotalWidth), imageWidth, imageWidth);
             SquareImageView *imgView = [[SquareImageView alloc] initWithFrame:imgRect withUploadRef:row];
             imgView.delegate = self;
             [photosScroll addSubview:imgView];
             counter ++;
         }
-        photosScroll.contentSize = CGSizeMake(photosScroll.frame.size.width, ((int)ceil(counter/3)+1)*105 + 20);
+        photosScroll.contentSize = CGSizeMake(photosScroll.frame.size.width, ((int)ceil(counter/imagePerLine)+1)*imageTotalWidth + 20);
     }
 }
 
@@ -160,7 +175,7 @@
         subTitleVal = [NSString stringWithFormat: NSLocalizedString(@"AlbumCellSubtitleVideosOnly", @""), self.album.videoCount];
     }
     if(!subTitleLabel) {
-        subTitleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 124, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withColor:[UIColor whiteColor] withText:subTitleVal];
+        subTitleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, self.view.frame.size.width/2 - 36, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withColor:[UIColor whiteColor] withText:subTitleVal];
         [self.view addSubview:subTitleLabel];
     } else {
         subTitleLabel.text = subTitleVal;
@@ -169,10 +184,24 @@
 
 - (void) albumDetailSuccessCallback:(PhotoAlbum *) albumWithUpdatedContent {
     int counter = (int)[photoList count];
+
+    int imagePerLine = 3;
+    
+    float imageWidth = 100;
+    float interImageMargin = 5;
+    
+    if(IS_IPAD) {
+        imagePerLine = 5;
+        imageWidth = (self.view.frame.size.width - interImageMargin*(imagePerLine+1))/imagePerLine;
+    }
+    
+    float imageTotalWidth = imageWidth + interImageMargin;
+
     long totalBytes = 0;
+    
     if(albumWithUpdatedContent && albumWithUpdatedContent.content) {
         for(MetaFile *row in albumWithUpdatedContent.content) {
-            CGRect imgRect = CGRectMake(5 + (counter%3 * 105), 5 + ((int)floor(counter/3)*105), 100, 100);
+            CGRect imgRect = CGRectMake(interImageMargin + (counter%imagePerLine * imageTotalWidth), interImageMargin + ((int)floor(counter/imagePerLine)*imageTotalWidth), imageWidth, imageWidth);
             SquareImageView *imgView = [[SquareImageView alloc] initWithFrame:imgRect withFile:row withSelectibleStatus:isSelectible];
             imgView.delegate = self;
             [photosScroll addSubview:imgView];
@@ -182,7 +211,7 @@
         [photoList addObjectsFromArray:albumWithUpdatedContent.content];
     }
 
-    photosScroll.contentSize = CGSizeMake(photosScroll.frame.size.width, ((int)ceil(counter/3)+1)*105 + 20);
+    photosScroll.contentSize = CGSizeMake(photosScroll.frame.size.width, ((int)ceil(counter/imagePerLine)+1)*imageTotalWidth + 20);
     isLoading = NO;
     self.album.bytes = totalBytes;
     self.album.imageCount = albumWithUpdatedContent.imageCount;

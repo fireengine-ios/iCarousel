@@ -57,7 +57,7 @@
                      animations:^{
                          int counter = 1;
                          for(AddTypeButton *button in buttons) {
-                             button.frame = CGRectMake(95, initialPoint.y - 35 - counter * 90, 130, 90);
+                             button.frame = CGRectMake((self.frame.size.width - 130)/2, initialPoint.y - 35 - counter * 90, 130, 90);
                              button.alpha = 1.0f;
                              counter ++;
                          }

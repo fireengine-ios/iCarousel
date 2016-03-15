@@ -10,6 +10,7 @@
 #import "CustomButton.h"
 #import "CustomLabel.h"
 #import "Util.h"
+#import "AppConstants.h"
 
 @interface NewAlbumModalController ()
 
@@ -38,10 +39,17 @@
         UIBarButtonItem *addItem = [[UIBarButtonItem alloc] initWithCustomView:addButton];
         self.navigationItem.rightBarButtonItem = addItem;
         
-        CustomLabel *titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(25, self.topIndex + 30, 280, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:14] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"AlbumAddTitle", @"")];
+        CGRect titleRect = CGRectMake(25, self.topIndex + 30, 280, 20);
+        CGRect nameRect = CGRectMake(20, self.topIndex + 55, 280, 43);
+        if(IS_IPAD) {
+            titleRect = CGRectMake((self.view.frame.size.width - 400)/2, self.topIndex + 80, 400, 20);
+            nameRect = CGRectMake((self.view.frame.size.width - 400)/2, self.topIndex + 130, 400, 43);
+        }
+        
+        CustomLabel *titleLabel = [[CustomLabel alloc] initWithFrame:titleRect withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:14] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"AlbumAddTitle", @"")];
         [self.view addSubview:titleLabel];
         
-        nameField = [[GeneralTextField alloc] initWithFrame:CGRectMake(20, self.topIndex + 55, 280, 43) withPlaceholder:NSLocalizedString(@"AlbumNamePlaceholder", @"")];
+        nameField = [[GeneralTextField alloc] initWithFrame:nameRect withPlaceholder:NSLocalizedString(@"AlbumNamePlaceholder", @"")];
         nameField.delegate = self;
         [self.view addSubview:nameField];
         

@@ -8,6 +8,12 @@
 
 #import "HeaderCell.h"
 #import "Util.h"
+#import "AppConstants.h"
+
+@interface HeaderCell () {
+    UIView *greyLine;
+}
+@end
 
 @implementation HeaderCell
 
@@ -30,7 +36,7 @@
 }
 
 - (void)drawHeader {
-    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 27, 300, 20)];
+    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(IS_IPAD ? 50 : 15, 27, 300, 20)];
     [headerLabel setText:headerText];
     headerLabel.font = [UIFont fontWithName:@"TurkcellSaturaMed" size:12];
     headerLabel.textColor = [Util UIColorForHexColor:@"292F3E"];
@@ -38,13 +44,19 @@
 }
 
 - (void)drawSeparator {
-    UIView *greyLine = [[UIView alloc] initWithFrame:CGRectMake(0, separatorTop, 320, 1)];
+    greyLine = [[UIView alloc] initWithFrame:CGRectMake(0, separatorTop, self.frame.size.width, 1)];
     greyLine.backgroundColor = [Util UIColorForHexColor:@"E0E2E0"];
     [self addSubview:greyLine];
     
     //    UIView *tempLine = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 1)];
     //    tempLine.backgroundColor = [Util UIColorForHexColor:@"FF0000"];
     //    [self addSubview:tempLine];
+}
+
+- (void) layoutSubviews {
+    greyLine.frame = CGRectMake(0, separatorTop, self.frame.size.width, 1);
+    
+    [super layoutSubviews];
 }
 
 - (void)awakeFromNib

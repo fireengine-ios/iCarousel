@@ -10,6 +10,14 @@
 #import "UIImageView+AFNetworking.h"
 #import "CustomLabel.h"
 
+@interface MainPhotoAlbumCell() {
+    UIImageView *bgImgView;
+    UIImageView *maskImgView;
+    CustomLabel *titleLabel;
+    CustomLabel *subTitleLabel;
+}
+@end
+
 @implementation MainPhotoAlbumCell
 
 @synthesize album;
@@ -22,27 +30,28 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withPhotoAlbum:(PhotoAlbum *) _album isSelectible:(BOOL) selectibleFlag {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        self.clipsToBounds = YES;
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.album = _album;
         self.isSelectible = selectibleFlag;
         
         if(self.album.cover.tempDownloadUrl) {
-            UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 160)];
+            bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 160)];
             bgImgView.contentMode = UIViewContentModeScaleAspectFill;
             bgImgView.clipsToBounds = YES;
             [bgImgView setImageWithURL:[NSURL URLWithString:self.album.cover.tempDownloadUrl]];
             [self addSubview:bgImgView];
             
-            UIImageView *maskImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 160)];
+            maskImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 160)];
             maskImgView.image = [UIImage imageNamed:@"album_mask.png"];
             [self addSubview:maskImgView];
         } else {
-            UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 160)];
+            bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 160)];
             bgImgView.image = [UIImage imageNamed:@"empty_album_header_bg.png"];
             [self addSubview:bgImgView];
         }
 
-        CustomLabel *titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 100, self.frame.size.width - 40, 24) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:20] withColor:[UIColor whiteColor] withText:self.album.label];
+        titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 100, self.frame.size.width - 40, 24) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:20] withColor:[UIColor whiteColor] withText:self.album.label];
         [self addSubview:titleLabel];
         
         NSString *subTitleVal = @"";
@@ -53,7 +62,7 @@
         } else if(self.album.videoCount > 0) {
             subTitleVal = [NSString stringWithFormat: NSLocalizedString(@"AlbumCellSubtitleVideosOnly", @""), self.album.videoCount];
         }
-        CustomLabel *subTitleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 124, self.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withColor:[UIColor whiteColor] withText:subTitleVal];
+        subTitleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 124, self.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withColor:[UIColor whiteColor] withText:subTitleVal];
         [self addSubview:subTitleLabel];
         
         maskView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 160)];
@@ -63,6 +72,14 @@
         
     }
     return self;
+}
+
+- (void) layoutSubviews {
+    bgImgView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.width/2);
+    maskImgView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.width/2);
+    titleLabel.frame = CGRectMake(20, bgImgView.frame.size.height - 60, self.frame.size.width - 40, 24);
+    subTitleLabel.frame = CGRectMake(20, titleLabel.frame.origin.y + titleLabel.frame.size.height, self.frame.size.width - 40, 20);
+    maskView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.width/2);
 }
 
 - (void)awakeFromNib

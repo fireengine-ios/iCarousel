@@ -78,8 +78,21 @@
     int counter = 0;
     int imgCount = 0;
     int videoCount = 0;
+    
+    int assetPerLine = 4;
+    
+    float assetWidth = 75;
+    float interAssetMargin = 4;
+    
+    if(IS_IPAD) {
+        assetPerLine = 6;
+        assetWidth = (self.view.frame.size.width - interAssetMargin*(assetPerLine+1))/assetPerLine;
+    }
+    
+    float assetTotalWidth = assetWidth + interAssetMargin;
+
     for(ALAsset *row in assets) {
-        CGRect imgFrame = CGRectMake(4 + (counter%4 * 79), 4 + ((int)floor(counter/4) * 79), 75, 75);
+        CGRect imgFrame = CGRectMake(interAssetMargin + (counter%assetPerLine * assetTotalWidth), interAssetMargin + ((int)floor(counter/assetPerLine) * assetTotalWidth), assetWidth, assetWidth);
         SelectibleAssetView *assetView = [[SelectibleAssetView alloc] initWithFrame:imgFrame withAsset:row];
         assetView.delegate = self;
         [mainScroll addSubview:assetView];
@@ -95,11 +108,11 @@
     
     NSString *contentStr = [NSString stringWithFormat:NSLocalizedString(@"PhotoListContentFooterTitle", @""), imgCount, videoCount];
     
-    CustomLabel *contentLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, (int)ceil((float)counter/4.0)*79 + 20, mainScroll.frame.size.width, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:18] withColor:[Util UIColorForHexColor:@"1b1b1b"] withText:contentStr];
+    CustomLabel *contentLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, (int)ceil((float)counter/assetPerLine)*assetTotalWidth + 20, mainScroll.frame.size.width, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:18] withColor:[Util UIColorForHexColor:@"1b1b1b"] withText:contentStr];
     contentLabel.textAlignment = NSTextAlignmentCenter;
     [mainScroll addSubview:contentLabel];
     
-    mainScroll.contentSize = CGSizeMake(mainScroll.frame.size.width, (int)ceil((float)counter/4.0)*79 + 120);
+    mainScroll.contentSize = CGSizeMake(mainScroll.frame.size.width, (int)ceil((float)counter/assetPerLine)*assetTotalWidth + 120);
     if(mainScroll.contentSize.height > mainScroll.frame.size.height) {
         mainScroll.contentOffset = CGPointMake(0, mainScroll.contentSize.height - mainScroll.frame.size.height);
     }

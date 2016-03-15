@@ -23,6 +23,8 @@
 @synthesize isSelectible;
 @synthesize isSwipeable;
 @synthesize checkButton;
+@synthesize independentFavButton;
+@synthesize independentUnfavButton;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier  withFileFolder:(MetaFile *) _fileFolder isSelectible:(BOOL) _selectible {
     return [self initWithStyle:style reuseIdentifier:reuseIdentifier withFileFolder:_fileFolder isSelectible:_selectible isSwipeable:YES];
@@ -56,17 +58,21 @@
     swipeMenu.backgroundColor = [Util UIColorForHexColor:@"363e4f"];
     [self addSubview:swipeMenu];
 
+    if(IS_IPAD) {
+        swipeMenu.frame = CGRectMake(self.frame.size.width, 0, 320, 101);
+    }
+
     int buttonPlaygroundX = swipeMenu.frame.size.width / 4;
 
-    shareButton = [[CustomButton alloc] initWithFrame:CGRectMake((buttonPlaygroundX - 16)/2, 22, 16, 22) withImageName:@"white_share_icon.png"];
+    shareButton = [[CustomButton alloc] initWithFrame:CGRectMake((buttonPlaygroundX - 16)/2, (swipeMenu.frame.size.height - 22)/2, 16, 22) withImageName:@"white_share_icon.png"];
     [shareButton addTarget:self action:@selector(triggerShare) forControlEvents:UIControlEventTouchUpInside];
     [swipeMenu addSubview:shareButton];
 
-    favButton = [[CustomButton alloc] initWithFrame:CGRectMake(buttonPlaygroundX + (buttonPlaygroundX - 20)/2, 23, 20, 20) withImageName:@"fav_icon.png"];
+    favButton = [[CustomButton alloc] initWithFrame:CGRectMake(buttonPlaygroundX + (buttonPlaygroundX - 20)/2, (swipeMenu.frame.size.height - 20)/2, 20, 20) withImageName:@"fav_icon.png"];
     [favButton addTarget:self action:@selector(triggerFav) forControlEvents:UIControlEventTouchUpInside];
     [swipeMenu addSubview:favButton];
     
-    unfavButton = [[CustomButton alloc] initWithFrame:CGRectMake(buttonPlaygroundX + (buttonPlaygroundX - 20)/2, 23, 20, 20) withImageName:@"yellow_fav_icon.png"];
+    unfavButton = [[CustomButton alloc] initWithFrame:CGRectMake(buttonPlaygroundX + (buttonPlaygroundX - 20)/2, (swipeMenu.frame.size.height - 20)/2, 20, 20) withImageName:@"yellow_fav_icon.png"];
     [unfavButton addTarget:self action:@selector(triggerUnfav) forControlEvents:UIControlEventTouchUpInside];
     [swipeMenu addSubview:unfavButton];
     
@@ -78,11 +84,11 @@
         unfavButton.hidden = YES;
     }
 
-    moveButton = [[CustomButton alloc] initWithFrame:CGRectMake(buttonPlaygroundX*2 + (buttonPlaygroundX - 18)/2, 23, 18, 20) withImageName:@"white_move_icon.png"];
+    moveButton = [[CustomButton alloc] initWithFrame:CGRectMake(buttonPlaygroundX*2 + (buttonPlaygroundX - 18)/2, (swipeMenu.frame.size.height - 20)/2, 18, 20) withImageName:@"white_move_icon.png"];
     [moveButton addTarget:self action:@selector(triggerMove) forControlEvents:UIControlEventTouchUpInside];
     [swipeMenu addSubview:moveButton];
 
-    deleteButton = [[CustomButton alloc] initWithFrame:CGRectMake(buttonPlaygroundX*3 + (buttonPlaygroundX - 20)/2, 23, 20, 21) withImageName:@"white_delete_icon.png"];
+    deleteButton = [[CustomButton alloc] initWithFrame:CGRectMake(buttonPlaygroundX*3 + (buttonPlaygroundX - 20)/2, (swipeMenu.frame.size.height - 21)/2, 20, 21) withImageName:@"white_delete_icon.png"];
     [deleteButton addTarget:self action:@selector(triggerDelete) forControlEvents:UIControlEventTouchUpInside];
     [swipeMenu addSubview:deleteButton];
 }
@@ -95,10 +101,12 @@
                           delay:0.0f
                         options:UIViewAnimationCurveEaseInOut
                      animations:^{
-                         swipeMenu.frame = CGRectMake(30, 0, self.frame.size.width - 30, 67);
+                         swipeMenu.frame = CGRectMake(self.frame.size.width - swipeMenu.frame.size.width, 0, swipeMenu.frame.size.width, swipeMenu.frame.size.height);
                      } completion:^(BOOL finished) {
                          menuActive = YES;
-                         imgView.hidden = YES;
+                         if(!IS_IPAD) {
+                             imgView.hidden = YES;
+                         }
                      }];
 }
 
@@ -110,10 +118,12 @@
                           delay:0.0f
                         options:UIViewAnimationCurveEaseInOut
                      animations:^{
-                         swipeMenu.frame = CGRectMake(self.frame.size.width, 0, self.frame.size.width - 30, 67);
+                         swipeMenu.frame = CGRectMake(self.frame.size.width, 0, swipeMenu.frame.size.width, swipeMenu.frame.size.height);
                      } completion:^(BOOL finished) {
                          menuActive = NO;
-                         imgView.hidden = NO;
+                         if(!IS_IPAD) {
+                             imgView.hidden = NO;
+                         }
                      }];
 }
 
@@ -175,6 +185,16 @@
 }
 
 - (void) layoutSubviews {
+    CGSize swipeMenuSize = CGSizeMake(self.frame.size.width - 30, self.frame.size.height-1);
+    if(IS_IPAD) {
+        swipeMenuSize = CGSizeMake(320, self.frame.size.height-1);
+    }
+    if(menuActive) {
+        swipeMenu.frame = CGRectMake(self.frame.size.width - swipeMenuSize.width, 0, swipeMenuSize.width, swipeMenuSize.height);
+    } else {
+        swipeMenu.frame = CGRectMake(self.frame.size.width, 0, swipeMenuSize.width, swipeMenuSize.height);
+    }
+    [super layoutSubviews];
 }
 
 - (void) addMaskLayer {

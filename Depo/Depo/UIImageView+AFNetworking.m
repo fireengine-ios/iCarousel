@@ -27,6 +27,7 @@
 #import "UIImageView+AFNetworking.h"
 
 #import "AppDelegate.h"
+#import "AppConstants.h"
 
 @interface AFImageCache : NSCache
 - (UIImage *)cachedImageForRequest:(NSURLRequest *)request;
@@ -89,6 +90,10 @@ static char kAFImageRequestOperationObjectKey;
     [self setImageWithURL:url placeholderImage:nil];
 }
 
+- (void)setNoCachedImageWithURL:(NSURL *)url {
+    [self setNoCachedImageWithURL:url placeholderImage:nil];
+}
+
 - (void)setImageWithURL:(NSURL *)url 
        placeholderImage:(UIImage *)placeholderImage
 {
@@ -101,10 +106,30 @@ static char kAFImageRequestOperationObjectKey;
     [self setImageWithURLRequest:request placeholderImage:placeholderImage success:nil failure:nil];
 }
 
+- (void)setNoCachedImageWithURL:(NSURL *)url
+               placeholderImage:(UIImage *)placeholderImage
+{
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPShouldHandleCookies:NO];
+    [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
+    if(APPDELEGATE.session.authToken) {
+        [request addValue:APPDELEGATE.session.authToken forHTTPHeaderField:@"X-Auth-Token"];
+    }
+    [self setImageWithURLRequest:request placeholderImage:placeholderImage success:nil failure:nil shouldCache:NO];
+}
+
+- (void)setImageWithURLRequest:(NSURLRequest *)urlRequest
+              placeholderImage:(UIImage *)placeholderImage
+                       success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image))success
+                       failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
+{
+    [self setImageWithURLRequest:urlRequest placeholderImage:placeholderImage success:success failure:failure shouldCache:YES];
+}
+
 - (void)setImageWithURLRequest:(NSURLRequest *)urlRequest 
               placeholderImage:(UIImage *)placeholderImage 
                        success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image))success
-                       failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
+                       failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure shouldCache:(BOOL) cacheFlag
 {
     [self cancelImageRequestOperation];
     
@@ -122,7 +147,7 @@ static char kAFImageRequestOperationObjectKey;
         AFImageRequestOperation *requestOperation = [[AFImageRequestOperation alloc] initWithRequest:urlRequest];
         [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
             if ([[urlRequest URL] isEqual:[[self.af_imageRequestOperation request] URL]]) {
-                self.image = responseObject;
+                self.image = IS_IPAD ? cacheFlag ? responseObject : [self resizeImage:responseObject] : responseObject;
                 self.af_imageRequestOperation = nil;
             }
 
@@ -130,7 +155,9 @@ static char kAFImageRequestOperationObjectKey;
                 success(operation.request, operation.response, responseObject);
             }
 
-            [[[self class] af_sharedImageCache] cacheImage:responseObject forRequest:urlRequest];
+            if(cacheFlag) {
+                [[[self class] af_sharedImageCache] cacheImage:responseObject forRequest:urlRequest];
+            }
             
 
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -148,6 +175,49 @@ static char kAFImageRequestOperationObjectKey;
         
         [[[self class] af_sharedImageRequestOperationQueue] addOperation:self.af_imageRequestOperation];
     }
+}
+
+- (UIImage *) resizeImage:(UIImage *)image {
+    float actualHeight = image.size.height;
+    float actualWidth = image.size.width;
+    float maxHeight = 200.0;
+    float maxWidth = 200.0;
+    float imgRatio = actualWidth/actualHeight;
+    float maxRatio = maxWidth/maxHeight;
+    float compressionQuality = 0.2;//50 percent compression
+    
+    if (actualHeight > maxHeight || actualWidth > maxWidth)
+    {
+        if(imgRatio < maxRatio)
+        {
+            //adjust width according to maxHeight
+            imgRatio = maxHeight / actualHeight;
+            actualWidth = imgRatio * actualWidth;
+            actualHeight = maxHeight;
+        }
+        else if(imgRatio > maxRatio)
+        {
+            //adjust height according to maxWidth
+            imgRatio = maxWidth / actualWidth;
+            actualHeight = imgRatio * actualHeight;
+            actualWidth = maxWidth;
+        }
+        else
+        {
+            actualHeight = maxHeight;
+            actualWidth = maxWidth;
+        }
+    }
+    
+    CGRect rect = CGRectMake(0.0, 0.0, actualWidth, actualHeight);
+    UIGraphicsBeginImageContext(rect.size);
+    [image drawInRect:rect];
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    NSData *imageData = UIImageJPEGRepresentation(img, compressionQuality);
+    UIGraphicsEndImageContext();
+    
+    return [UIImage imageWithData:imageData];
+    
 }
 
 - (void)cancelImageRequestOperation {

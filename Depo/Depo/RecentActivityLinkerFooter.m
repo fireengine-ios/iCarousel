@@ -9,6 +9,7 @@
 #import "RecentActivityLinkerFooter.h"
 #import "Util.h"
 #import "CustomLabel.h"
+#import "AppConstants.h"
 
 @implementation RecentActivityLinkerFooter
 
@@ -19,15 +20,31 @@
         self.backgroundColor = [Util UIColorForHexColor:@"363e4f"];
         
         UIImage *iconImg = [UIImage imageNamed:@"recent_activity_icon.png"];
-        UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(20, (self.frame.size.height - iconImg.size.height)/2, iconImg.size.width, iconImg.size.height)];
+        UIImage *indicator = [UIImage imageNamed:@"white_right_arrow_icon.png"];
+        
+        float leftIndex = 20;
+        float lineHeight = 20;
+        float iconSize = iconImg.size.width;
+        CGSize indicatorSize = CGSizeMake(indicator.size.width, indicator.size.height);
+        
+        UIFont *titleFont = [UIFont fontWithName:@"TurkcellSaturaBol" size:17];
+        
+        if(IS_IPAD) {
+            leftIndex = 30;
+            lineHeight = 28;
+            iconSize = iconImg.size.width*3/2;
+            indicatorSize = CGSizeMake(indicator.size.width*3/2, indicator.size.height*3/2);
+            titleFont = [UIFont fontWithName:@"TurkcellSaturaBol" size:25];
+        }
+        
+        UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(leftIndex, (self.frame.size.height - iconSize)/2, iconSize, iconSize)];
         iconView.image = iconImg;
         [self addSubview:iconView];
         
-        CustomLabel *titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(60, (self.frame.size.height - 20)/2, self.frame.size.width - 100, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:17] withColor:[Util UIColorForHexColor:@"FFFFFF"] withText:NSLocalizedString(@"RecentActivityLinkerTitle", @"")];
+        CustomLabel *titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(leftIndex*2 + iconSize, (self.frame.size.height - lineHeight)/2, self.frame.size.width - (leftIndex*2 + iconSize), lineHeight) withFont:titleFont withColor:[Util UIColorForHexColor:@"FFFFFF"] withText:NSLocalizedString(@"RecentActivityLinkerTitle", @"")];
         [self addSubview:titleLabel];
         
-        UIImage *indicator = [UIImage imageNamed:@"white_right_arrow_icon.png"];
-        UIImageView *indicatorView = [[UIImageView alloc] initWithFrame:CGRectMake(self.frame.size.width - 30, (self.frame.size.height - indicator.size.height)/2, indicator.size.width, indicator.size.height)];
+        UIImageView *indicatorView = [[UIImageView alloc] initWithFrame:CGRectMake(self.frame.size.width - 20 - indicatorSize.width, (self.frame.size.height - indicatorSize.height)/2, indicatorSize.width, indicatorSize.height)];
         indicatorView.image = indicator;
         [self addSubview:indicatorView];
     }

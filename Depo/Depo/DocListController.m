@@ -136,9 +136,17 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if(docList == nil || [docList count] == 0) {
-        return 320;
+        if(IS_IPAD) {
+            return 420;
+        } else {
+            return 320;
+        }
     } else {
-        return 68;
+        if(IS_IPAD) {
+            return 102;
+        } else {
+            return 68;
+        }
     }
 }
 

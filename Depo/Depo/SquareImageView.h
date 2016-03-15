@@ -24,7 +24,7 @@
 - (void) squareImageWasSelectedForView:(SquareImageView *) ref;
 @end
 
-@interface SquareImageView : UIView <UploadManagerDelegate> {
+@interface SquareImageView : UIView <UploadManagerDelegate, UIGestureRecognizerDelegate> {
     UIView *progressSeparator;
     UIImageView *maskView;
     BOOL isSelectible;

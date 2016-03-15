@@ -10,6 +10,15 @@
 #import "CustomLabel.h"
 #import "Util.h"
 
+@interface RefAlbumCell () {
+    UIImageView *imgView;
+    CustomLabel *nameLabel;
+    CustomLabel *detailLabel;
+    UIView *progressSeparator;
+    UIImageView *indicatorView;
+}
+@end
+
 @implementation RefAlbumCell
 
 @synthesize album;
@@ -21,7 +30,7 @@
         self.album = _album;
         self.selectionStyle = UITableViewCellSelectionStyleNone;
 
-        UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(12, 12, 35, 35)];
+        imgView = [[UIImageView alloc] initWithFrame:CGRectMake(12, 12, 35, 35)];
         imgView.image = [album thumbnailImg];
         [self addSubview:imgView];
 
@@ -31,23 +40,35 @@
         UIFont *nameFont = [UIFont fontWithName:@"TurkcellSaturaDem" size:18];
         UIFont *detailFont = [UIFont fontWithName:@"TurkcellSaturaDem" size:16];
         
-        CustomLabel *nameLabel = [[CustomLabel alloc] initWithFrame:nameFieldRect withFont:nameFont withColor:[Util UIColorForHexColor:@"363E4F"] withText:self.album.albumName];
+        nameLabel = [[CustomLabel alloc] initWithFrame:nameFieldRect withFont:nameFont withColor:[Util UIColorForHexColor:@"363E4F"] withText:self.album.albumName];
         [self addSubview:nameLabel];
         
-        CustomLabel *detailLabel = [[CustomLabel alloc] initWithFrame:detailFieldRect withFont:detailFont withColor:[Util UIColorForHexColor:@"363E4F"] withText:[NSString stringWithFormat:@"%d", self.album.count]];
+        detailLabel = [[CustomLabel alloc] initWithFrame:detailFieldRect withFont:detailFont withColor:[Util UIColorForHexColor:@"363E4F"] withText:[NSString stringWithFormat:@"%d", self.album.count]];
         [self addSubview:detailLabel];
         
-        UIView *progressSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 59, self.frame.size.width, 1)];
+        progressSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, 59, self.frame.size.width, 1)];
         progressSeparator.backgroundColor = [Util UIColorForHexColor:@"E1E1E1"];
         progressSeparator.alpha = 0.5f;
         [self addSubview:progressSeparator];
         
-        UIImageView *indicatorView = [[UIImageView alloc] initWithFrame:CGRectMake(290, 23, 9, 14)];
+        indicatorView = [[UIImageView alloc] initWithFrame:CGRectMake(290, 23, 9, 14)];
         indicatorView.image = [UIImage imageNamed:@"right_grey_icon.png"];
         [self addSubview:indicatorView];
         
     }
     return self;
+}
+
+- (void) layoutSubviews {
+    CGRect nameFieldRect = CGRectMake(70, self.frame.size.height/2-22, self.frame.size.width - 80, 22);
+    CGRect detailFieldRect = CGRectMake(70, self.frame.size.height/2, self.frame.size.width - 80, 20);
+    
+    imgView.frame = CGRectMake(12, (self.frame.size.height-35)/2, 35, 35);
+    nameLabel.frame = nameFieldRect;
+    detailLabel.frame = detailFieldRect;
+    progressSeparator.frame = CGRectMake(0, self.frame.size.height-1, self.frame.size.width, 1);
+    indicatorView.frame = CGRectMake(self.frame.size.width - 30, (self.frame.size.height-14)/2, 9, 14);
+    [super layoutSubviews];
 }
 
 - (void)awakeFromNib

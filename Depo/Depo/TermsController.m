@@ -37,7 +37,9 @@
         provisionDao.failMethod = @selector(provisionFailCallback:);
         
         UIImage *topImg = [UIImage imageNamed:@"bulutheader.png"];
-        UIImageView *topImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, topImg.size.width, topImg.size.height)];
+        float imageHeight = (self.view.frame.size.width/topImg.size.width)*topImg.size.height;
+        
+        UIImageView *topImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, imageHeight)];
         topImgView.image = topImg;
         [self.view addSubview:topImgView];
         

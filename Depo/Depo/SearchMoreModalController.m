@@ -191,7 +191,7 @@
     if(fileList == nil || [fileList count] == 0)
         return 320;
     else
-        return 68;
+        return IS_IPAD ? 102 : 68;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section

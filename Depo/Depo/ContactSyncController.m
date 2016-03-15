@@ -36,21 +36,32 @@
         self.view.backgroundColor = [UIColor whiteColor];
         self.title = NSLocalizedString(@"ContactSyncTitle", @"");
         
-        backupButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, 10, self.view.frame.size.width - 40, 50) withTitle:NSLocalizedString(@"ContactBackupButtonTitle", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
+        float topIndex = IS_IPAD ? 50 : 10;
+        float buttonHeight = IS_IPAD ? 80 : 50;
+        
+        backupButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, topIndex, self.view.frame.size.width - 40, buttonHeight) withTitle:NSLocalizedString(@"ContactBackupButtonTitle", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
         [backupButton addTarget:self action:@selector(backupClicked) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:backupButton];
 
-        CustomLabel *backupLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(10, 60, 300, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"888888"] withText:NSLocalizedString(@"ContactBackupInfo", @"") withAlignment:NSTextAlignmentCenter];
+        topIndex += IS_IPAD ? (buttonHeight + 10) : buttonHeight;
+
+        CustomLabel *backupLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(10, topIndex, 300, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"888888"] withText:NSLocalizedString(@"ContactBackupInfo", @"") withAlignment:NSTextAlignmentCenter];
         backupLabel.adjustsFontSizeToFitWidth = YES;
         [self.view addSubview:backupLabel];
 
-        restoreButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, 90, self.view.frame.size.width - 40, 50) withTitle:NSLocalizedString(@"ContactRestoreButtonTitle", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
+        topIndex += IS_IPAD ? 45 : 30;
+        
+        restoreButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, topIndex, self.view.frame.size.width - 40, buttonHeight) withTitle:NSLocalizedString(@"ContactRestoreButtonTitle", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
         [restoreButton addTarget:self action:@selector(restoreClicked) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:restoreButton];
         
-        CustomLabel *restoreLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 140, 280, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"888888"] withText:NSLocalizedString(@"ContactRestoreInfo", @"") withAlignment:NSTextAlignmentCenter];
+        topIndex += IS_IPAD ? (buttonHeight + 10) : buttonHeight;
+        
+        CustomLabel *restoreLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, topIndex, 280, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"888888"] withText:NSLocalizedString(@"ContactRestoreInfo", @"") withAlignment:NSTextAlignmentCenter];
         restoreLabel.adjustsFontSizeToFitWidth = YES;
         [self.view addSubview:restoreLabel];
+
+        topIndex += IS_IPAD ? 60 : 40;
 
         NSString *lastSyncTitle = [NSString stringWithFormat:NSLocalizedString(@"ContactLastSyncDateTitle", @""), NSLocalizedString(@"NoneTitle", @"")];
         if([SyncUtil readLastContactSyncDate] != nil) {
@@ -58,10 +69,12 @@
             [dateFormat setDateFormat:@"dd.MM.yyyy HH:mm"];
             lastSyncTitle = [NSString stringWithFormat:NSLocalizedString(@"ContactLastSyncDateTitle", @""), [dateFormat stringFromDate:[SyncUtil readLastContactSyncDate]]];
         }
-        lastSyncDateLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 180, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:16] withColor:[Util UIColorForHexColor:@"363e4f"] withText:lastSyncTitle withAlignment:NSTextAlignmentLeft];
+        lastSyncDateLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, topIndex, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:16] withColor:[Util UIColorForHexColor:@"363e4f"] withText:lastSyncTitle withAlignment:NSTextAlignmentLeft];
         [self.view addSubview:lastSyncDateLabel];
         
-        lastSyncDetailTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 210, self.view.frame.size.width, 230) style:UITableViewStylePlain];
+        topIndex += IS_IPAD ? 45 : 30;
+        
+        lastSyncDetailTable = [[UITableView alloc] initWithFrame:CGRectMake(0, topIndex, self.view.frame.size.width, self.view.frame.size.height - topIndex - 60) style:UITableViewStylePlain];
         lastSyncDetailTable.backgroundColor = [UIColor clearColor];
         lastSyncDetailTable.backgroundView = nil;
         lastSyncDetailTable.delegate = self;

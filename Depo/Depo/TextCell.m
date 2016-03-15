@@ -9,6 +9,13 @@
 #import "TextCell.h"
 #import "Util.h"
 
+@interface TextCell () {
+    UILabel *titleLabel;
+    UILabel *contentTextLabel;
+    UIView *greyLine;
+}
+@end
+
 @implementation TextCell
 
 - (id)initWithCellStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier titleText:(NSString *)_titleText titleColor:(UIColor *)_titleColor contentText:(NSString *)_contentText contentTextColor:(UIColor *)_contentTextColor backgroundColor:(UIColor *)_backgroundColor hasSeparator:(BOOL)_hasSeparator
@@ -41,7 +48,7 @@
 }
 
 - (void)drawTitle {
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 15, 300, 20)];
+    titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 15, 300, 20)];
     [titleLabel setText:titleText];
     titleLabel.font = [UIFont fontWithName:@"TurkcellSaturaMed" size:12];
     titleLabel.textColor = titleColor;
@@ -49,7 +56,7 @@
 }
 
 - (void)drawContentText {
-    UILabel *contentTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, contentTextTop, 280, contentTextHeight)];
+    contentTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, contentTextTop, 280, contentTextHeight)];
     [contentTextLabel setText:contentText];
     contentTextLabel.font = [UIFont fontWithName:@"TurkcellSaturaMed" size:14];
     contentTextLabel.textColor = contentTextColor;
@@ -58,9 +65,17 @@
 }
 
 - (void)drawSeparator {
-    UIView *greyLine = [[UIView alloc] initWithFrame:CGRectMake(0, cellHeight-1, 320, 1)];
+    greyLine = [[UIView alloc] initWithFrame:CGRectMake(0, cellHeight-1, 320, 1)];
     greyLine.backgroundColor = [Util UIColorForHexColor:@"E0E2E0"];
     [self addSubview:greyLine];
+}
+
+- (void) layoutSubviews {
+    titleLabel.frame = CGRectMake(15, 15, self.frame.size.width - 30, 20);
+    contentTextHeight = [Util calculateHeightForText:contentText forWidth:self.frame.size.width - 40 forFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:14]];
+    contentTextLabel.frame = CGRectMake(20, contentTextTop, self.frame.size.width - 40, contentTextHeight);
+    greyLine.frame = CGRectMake(0, self.frame.size.height-1, self.frame.size.width, 1);
+    [super layoutSubviews];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
