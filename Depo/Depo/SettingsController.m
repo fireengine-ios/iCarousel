@@ -111,7 +111,7 @@
     
     float msisdnWidth = [Util calculateWidthForText:msisdnVal forHeight:(IS_IPAD ? 30 : 20) forFont:msisdnFont] + 10;
     
-    msisdnLabel = [[UILabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - msisdnWidth)/2 + 10, nameLabel.frame.origin.y + nameLabel.frame.size.height + (IS_IPAD ? 10 : 4), msisdnWidth, 20)];
+    msisdnLabel = [[UILabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - msisdnWidth)/2 + 10, nameLabel.frame.origin.y + nameLabel.frame.size.height + (IS_IPAD ? 10 : 4), msisdnWidth, (IS_IPAD ? 30 : 20))];
     [msisdnLabel setText:msisdnVal];
     msisdnLabel.font = msisdnFont;
     msisdnLabel.textAlignment = NSTextAlignmentCenter;

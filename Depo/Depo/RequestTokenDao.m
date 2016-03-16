@@ -139,15 +139,21 @@
         if(accountWarning != nil && ![accountWarning isKindOfClass:[NSNull class]]) {
             if([accountWarning isEqualToString:@"EMPTY_MSISDN"]) {
                 APPDELEGATE.session.msisdnEmpty = YES;
+            } else {
+                APPDELEGATE.session.msisdnEmpty = NO;
             }
             if([accountWarning isEqualToString:@"EMPTY_EMAIL"]) {
                 APPDELEGATE.session.emailEmpty = YES;
+            } else {
+                APPDELEGATE.session.emailEmpty = NO;
             }
             if([accountWarning isEqualToString:@"EMAIL_NOT_VERIFIED"]) {
                 APPDELEGATE.session.emailNotVerified = YES;
+            } else {
+                APPDELEGATE.session.emailNotVerified = NO;
             }
         }
-        
+
         if(rememberMeToken != nil && ![rememberMeToken isKindOfClass:[NSNull class]]) {
             [CacheUtil writeRememberMeToken:rememberMeToken];
             [SharedUtil writeSharedRememberMeToken:rememberMeToken];

@@ -78,10 +78,6 @@
     [self showLoading];
 }
 
-- (void) triggerDismiss {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
 - (void) updateMsisdnSuccessCallback:(NSDictionary *) resultDict {
     [self hideLoading];
     
@@ -131,6 +127,21 @@
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {
     [msisdnField resignFirstResponder];
     return YES;
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+
+    CustomButton *cancelButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 60, 20) withImageName:nil withTitle:NSLocalizedString(@"CancelButtonTittle", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[UIColor whiteColor]];
+    [cancelButton addTarget:self action:@selector(triggerDismiss) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithCustomView:cancelButton];
+    self.navigationItem.rightBarButtonItem = cancelItem;
+}
+
+- (void) triggerDismiss {
+    [APPDELEGATE triggerLogout];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)viewDidLoad {

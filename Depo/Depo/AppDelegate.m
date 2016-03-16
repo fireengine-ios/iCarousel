@@ -47,6 +47,9 @@
 #import "BgViewController.h"
 #import "WelcomeController.h"
 
+#import <CoreTelephony/CTCarrier.h>
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
+
 //TODO info'larda version update
 
 #define NO_CONN_ALERT_TAG 111
@@ -163,13 +166,23 @@
     }
 }
 
+- (BOOL) isTurkcell {
+    CTTelephonyNetworkInfo *networkInfo = [[CTTelephonyNetworkInfo alloc] init];
+    CTCarrier *carrier = [networkInfo subscriberCellularProvider];
+    
+    NSString *mcc = [carrier mobileCountryCode];
+    NSString *mnc = [carrier mobileNetworkCode];
+    return [mcc isEqualToString:@"286"] && [mnc isEqualToString:@"01"];
+}
+
 - (void) triggerPreLogin {
     PreLoginController *preLogin = [[PreLoginController alloc] init];
     self.window.rootViewController = preLogin;
 }
 
 - (void) triggerPostTermsAndMigration {
-    if([ReachabilityManager isReachableViaWiFi]) {
+    if([ReachabilityManager isReachableViaWiFi]
+       || ![self isTurkcell]) {
         NSString *cachedMsisdn = [CacheUtil readCachedMsisdnForPostMigration];
         NSString *cachedPass = [CacheUtil readCachedPassForPostMigration];
         if(cachedMsisdn != nil && cachedPass != nil) {
@@ -188,7 +201,7 @@
 }
 
 - (void) triggerLogin {
-    if([ReachabilityManager isReachableViaWiFi]) {
+    if([ReachabilityManager isReachableViaWiFi] || ![self isTurkcell]) {
         WelcomeController *welcomePage = [[WelcomeController alloc] init];
         MyNavigationController *welcomeNav = [[MyNavigationController alloc] initWithRootViewController:welcomePage];
         self.window.rootViewController = welcomeNav;

@@ -71,9 +71,11 @@
         NSArray *mainArray = [jsonParser objectWithString:responseEnc];
         
         NSMutableArray *result = [[NSMutableArray alloc] init];
-        if(mainArray != nil && ![mainArray isKindOfClass:[NSNull class]]) {
+        if(mainArray != nil && [mainArray isKindOfClass:[NSArray class]]) {
             for(NSDictionary *fileDict in mainArray) {
-                [result addObject:[self parseFile:fileDict]];
+                if([fileDict isKindOfClass:[NSDictionary class]]) {
+                    [result addObject:[self parseFile:fileDict]];
+                }
             }
         }
         [self shouldReturnSuccessWithObject:result];

@@ -64,7 +64,7 @@
                 if([subscription.type isEqualToString:@"INAPP_PURCHASE_GOOGLE"]) {
                     linkTitle = @"googleplay";
                 } else if([subscription.type isEqualToString:@"INAPP_PURCHASE_APPLE"]) {
-                    linkTitle = @"apple";
+                    linkTitle = @"applestore";
                 }
             }
             SimpleButton *linkButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, topYIndex, infoView.frame.size.width, 20) withTitle:linkTitle withTitleColor:[Util UIColorForHexColor:@"555555"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:12] isUnderline:NO withUnderlineColor:[Util UIColorForHexColor:@"555555"]];
