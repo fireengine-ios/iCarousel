@@ -152,6 +152,10 @@
             } else {
                 APPDELEGATE.session.emailNotVerified = NO;
             }
+        } else {
+            APPDELEGATE.session.msisdnEmpty = NO;
+            APPDELEGATE.session.emailEmpty = NO;
+            APPDELEGATE.session.emailNotVerified = NO;
         }
 
         if(rememberMeToken != nil && ![rememberMeToken isKindOfClass:[NSNull class]]) {

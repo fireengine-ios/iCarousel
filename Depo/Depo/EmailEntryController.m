@@ -10,6 +10,7 @@
 #import "Util.h"
 #import "CustomLabel.h"
 #import "LoginTextfield.h"
+#import "AppDelegate.h"
 
 @interface EmailEntryController ()
 
@@ -117,6 +118,7 @@
     } else if([resultStatus isEqualToString:@"CAN_NOT_CHANGE_EMAIL"]) {
         [self showErrorAlertWithMessage:NSLocalizedString(@"CannotChangeEmail", @"")];
     } else {
+        APPDELEGATE.session.user.email = emailField.text;
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 }

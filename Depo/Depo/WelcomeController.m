@@ -38,7 +38,7 @@
         
         topIndex += iconView.frame.size.height + 20;
         
-        CustomLabel *subTitle = [[CustomLabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 280)/2, topIndex, 280, 50) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:18] withColor:[UIColor whiteColor] withText:NSLocalizedString(@"WelcomePageSubMessage", @"") withAlignment:NSTextAlignmentCenter numberOfLines:2];
+        CustomLabel *subTitle = [[CustomLabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 280)/2, topIndex, 280, 60) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:18] withColor:[UIColor whiteColor] withText:NSLocalizedString(@"WelcomePageSubMessage", @"") withAlignment:NSTextAlignmentCenter numberOfLines:3];
         [self.view addSubview:subTitle];
         
         CGSize buttonSize = CGSizeMake(280, 50);
