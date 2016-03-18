@@ -7,6 +7,7 @@
 //
 
 #import "IAPValidateDao.h"
+#import "AppConstants.h"
 
 @interface IAPValidateDao () {
     NSDictionary *info;
@@ -27,6 +28,7 @@
     NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    request.tag = REQ_TAG_FOR_PACKAGE;
     [request setPostBody:postData];
     [request setDelegate:self];
     
@@ -46,6 +48,7 @@
     NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    request.tag = REQ_TAG_FOR_PACKAGE;
     [request setPostBody:postData];
     [request setDelegate:self];
     

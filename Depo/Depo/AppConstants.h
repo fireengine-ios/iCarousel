@@ -240,6 +240,8 @@ _Pragma("clang diagnostic pop") \
 
 #define IAP_STANDARD_PACKAGE_ID @"standard_1_month";
 
+#define REQ_TAG_FOR_PACKAGE 111
+
 typedef enum {
     LoginTypeRadius = 0,
     LoginTypeWebSifre

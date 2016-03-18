@@ -81,9 +81,21 @@
         return;
     }
     [self.view endEditing:YES];
+
+    NSString *confirmMessage = [NSString stringWithFormat:NSLocalizedString(@"EmailConfirmMessage", @""), emailField.text];
+    CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Approve", @"") withCancelTitle:NSLocalizedString(@"EmailConfirmUpdate", @"") withApproveTitle:NSLocalizedString(@"EmailConfirmContinue", @"") withMessage:confirmMessage withModalType:ModalTypeApprove];
+    confirm.delegate = self;
+    [APPDELEGATE showCustomConfirm:confirm];
+}
+
+- (void) didRejectCustomAlert:(CustomConfirmView *)alertView {
+}
+
+- (void) didApproveCustomAlert:(CustomConfirmView *)alertView {
     [emailDao requestUpdateEmail:emailField.text];
     [self showLoading];
 }
+
 
 - (void) triggerDismiss {
     [self dismissViewControllerAnimated:YES completion:nil];

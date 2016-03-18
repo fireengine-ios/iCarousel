@@ -49,6 +49,6 @@
 - (void) stopAutoSync;
 - (void) startOpeningPage;
 - (void) removeAllMediaFiles;
-
+- (void) cancelRequestsWithTag:(int) tag;
 
 @end

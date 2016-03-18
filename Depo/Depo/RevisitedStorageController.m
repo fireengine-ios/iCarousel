@@ -478,6 +478,11 @@
      */
 }
 
+- (void) viewWillDisappear:(BOOL)animated {
+    [APPDELEGATE cancelRequestsWithTag:REQ_TAG_FOR_PACKAGE];
+    [super viewWillDisappear:animated];
+}
+
 #pragma mark  RevisitedOfferCellDelegate methods
 
 - (void) revisitedOfferCellDelegateDidClickBuy:(Offer *)offerRef {

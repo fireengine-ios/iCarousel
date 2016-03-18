@@ -46,8 +46,14 @@
             }
         }
          */
-        
         [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
+        
+        //eger atıl bir transction kalmışsa önceden, observer'ı set eder etmez bunları temizliyoruz
+        if([[SKPaymentQueue defaultQueue] transactions]) {
+            for(SKPaymentTransaction *idleTransaction in [[SKPaymentQueue defaultQueue] transactions]) {
+                [[SKPaymentQueue defaultQueue] finishTransaction:idleTransaction];
+            }
+        }
     }
     return self;
 }

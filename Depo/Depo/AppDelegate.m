@@ -691,4 +691,13 @@ void uncaughtExceptionHandler(NSException *exception) {
 - (void)customIDSent:(NSDictionary *)responseDictionary {
 }
 
+- (void) cancelRequestsWithTag:(int) tag {
+    for (ASIHTTPRequest *req in ASIHTTPRequest.sharedQueue.operations) {
+        if(req.tag == tag) {
+            [req cancel];
+            [req setDelegate:nil];
+        }
+    }
+}
+
 @end

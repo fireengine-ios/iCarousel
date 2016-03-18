@@ -8,6 +8,7 @@
 
 #import "AccountDao.h"
 #import "AppUtil.h"
+#import "AppConstants.h"
 
 @implementation AccountDao
 
@@ -15,6 +16,7 @@
     requestMethod = RequestMethodGetCurrentSubscription;
     NSURL *url = [NSURL URLWithString:GET_CURRENT_SUBSCRIPTION_URL];
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    request.tag = REQ_TAG_FOR_PACKAGE;
     [request setDelegate:self];
     [self sendGetRequest:request];
 }
@@ -23,6 +25,7 @@
     requestMethod = RequestMethodGetActiveSubscriptions;
     NSURL *url = [NSURL URLWithString:GET_ACTIVE_SUBSCRIPTIONS_URL];
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    request.tag = REQ_TAG_FOR_PACKAGE;
     [request setDelegate:self];
     [self sendGetRequest:request];
 }
@@ -31,6 +34,7 @@
     requestMethod = RequestMethodGetOffers;
     NSURL *url = [NSURL URLWithString:GET_SUBSCRIPTION_OFFERS_URL];
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    request.tag = REQ_TAG_FOR_PACKAGE;
     [request setDelegate:self];
     [self sendGetRequest:request];
 }
@@ -49,6 +53,7 @@
     NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    request.tag = REQ_TAG_FOR_PACKAGE;
     [request setPostBody:[postData mutableCopy]];
     [request setDelegate:self];
     [self sendPostRequest:request];
@@ -58,6 +63,7 @@
     requestMethod = RequestMethodIsJobExists;
     NSURL *url = [NSURL URLWithString:REQUEST_IS_JOB_EXISTS];
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    request.tag = REQ_TAG_FOR_PACKAGE;
     [request setDelegate:self];
     [self sendGetRequest:request];
 }

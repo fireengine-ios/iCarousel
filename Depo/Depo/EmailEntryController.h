@@ -9,8 +9,9 @@
 #import "MyViewController.h"
 #import "UpdateEmailDao.h"
 #import "LoginTextfield.h"
+#import "CustomConfirmView.h"
 
-@interface EmailEntryController : MyViewController <UITextFieldDelegate, UIGestureRecognizerDelegate> {
+@interface EmailEntryController : MyViewController <UITextFieldDelegate, UIGestureRecognizerDelegate, CustomConfirmDelegate> {
     UpdateEmailDao *emailDao;
 }
 

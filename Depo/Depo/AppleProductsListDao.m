@@ -7,6 +7,7 @@
 //
 
 #import "AppleProductsListDao.h"
+#import "AppConstants.h"
 
 @implementation AppleProductsListDao
 
@@ -14,6 +15,7 @@
     NSURL *url = [NSURL URLWithString:APPLE_PRODUCT_NAMES_URL];
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    request.tag = REQ_TAG_FOR_PACKAGE;
     [request setDelegate:self];
     
     [self sendGetRequest:request];
