@@ -57,7 +57,8 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
 }
 
 - (void) initializePlayer {
-    self.currentAsset = [AVURLAsset URLAssetWithURL:[NSURL URLWithString:self.video.tempDownloadUrl] options:nil];
+    NSString *videoUrl = self.video.videoPreviewUrl ? self.video.videoPreviewUrl : self.video.tempDownloadUrl;
+    self.currentAsset = [AVURLAsset URLAssetWithURL:[NSURL URLWithString:videoUrl] options:nil];
     
     NSArray *requestedKeys = [NSArray arrayWithObjects:@"tracks", @"playable", nil];
     

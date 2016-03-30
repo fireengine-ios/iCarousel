@@ -255,15 +255,35 @@
     [self pushProgressViewWithProcessMessage:NSLocalizedString(@"UnfavProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"UnfavSuccessMessage", @"") andFailMessage:NSLocalizedString(@"UnfavFailMessage", @"")];
 }
 
+- (void) musicModalListReturnedWithSelectedList:(NSArray *)uuids {
+    shouldPreventLoadWhenAppeared = YES;
+    NSLog(@"uuids:%@", uuids);
+    [favoriteDao requestMetadataForFiles:uuids shouldFavorite:YES];
+}
+
+- (void) docModalListReturnedWithSelectedList:(NSArray *)uuids {
+    shouldPreventLoadWhenAppeared = YES;
+    NSLog(@"uuids:%@", uuids);
+    [favoriteDao requestMetadataForFiles:uuids shouldFavorite:YES];
+}
+
+- (void) photoModalListReturnedWithSelectedList:(NSArray *)uuids {
+    shouldPreventLoadWhenAppeared = YES;
+    NSLog(@"uuids:%@", uuids);
+    [favoriteDao requestMetadataForFiles:uuids shouldFavorite:YES];
+}
+
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self triggerRefresh];
-    [self showLoading];
+    if(!shouldPreventLoadWhenAppeared) {
+        [self triggerRefresh];
+        [self showLoading];
+    }
 }
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [APPDELEGATE.base immediateHideAddButton];
+//    [APPDELEGATE.base immediateHideAddButton];
 }
 
 - (BOOL)shouldAutorotate {

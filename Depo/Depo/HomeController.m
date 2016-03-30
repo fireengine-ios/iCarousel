@@ -29,6 +29,7 @@
 #import <SplunkMint/SplunkMint.h>
 #import "EmailEntryController.h"
 #import "MsisdnEntryController.h"
+#import "MPush.h"
 
 @interface HomeController ()
 
@@ -281,6 +282,16 @@
         }
         usageSummaryView.frame = usageSummaryRect;
     }
+
+    if(percentUsageVal >= 100) {
+        if(![AppUtil readDoNotShowAgainFlagForKey:@"QUOTA_FULL_DONTSHOW_DEFAULTS_KEY"]) {
+            CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"TitleLater", @"") withApproveTitle:NSLocalizedString(@"TitleYes", @"") withMessage:NSLocalizedString(@"PackageFullMaessage", @"") withModalType:ModalTypeApprove shouldShowCheck:YES withCheckKey:@"QUOTA_FULL_DONTSHOW_DEFAULTS_KEY"];
+            confirm.delegate = self;
+            confirm.tag = 222;
+            [APPDELEGATE showCustomConfirm:confirm];
+        }
+    }
+
     
 // contacts commented out //    [contactCountDao requestContactCount];
 }
@@ -363,8 +374,9 @@
 
     if(APPDELEGATE.session.emailEmpty && !APPDELEGATE.session.emailEmptyMessageShown) {
         APPDELEGATE.session.emailEmptyMessageShown = YES;
-        CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Approve", @"") withCancelTitle:NSLocalizedString(@"TitleLater", @"") withApproveTitle:NSLocalizedString(@"TitleYes", @"") withMessage:NSLocalizedString(@"EmailEmpty", @"") withModalType:ModalTypeApprove];
+        CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"TitleLater", @"") withApproveTitle:NSLocalizedString(@"TitleYes", @"") withMessage:NSLocalizedString(@"EmailEmpty", @"") withModalType:ModalTypeApprove];
         confirm.delegate = self;
+        confirm.tag = 111;
         [APPDELEGATE showCustomConfirm:confirm];
     } else if(APPDELEGATE.session.emailNotVerified && !APPDELEGATE.session.emailNotVerifiedMessageShown) {
         APPDELEGATE.session.emailNotVerifiedMessageShown = YES;
@@ -373,6 +385,32 @@
         //TODO ilk subscription'a bakiyor, bu düzeltilecek
         currentSubscription = [subscriptions objectAtIndex:0];
         [self flowChartAdvertising];
+        
+        for(Subscription *subsc in subscriptions) {
+            if(subsc.plan != nil && subsc.plan.cometOfferId != nil) {
+                if(subsc.plan.cometOfferId.intValue == 581814) {
+                    [MPush hitTag:@"platin_user"];
+                }
+            }
+        }
+
+        if(APPDELEGATE.session.user.accountType == AccountTypeTurkcell) {
+            BOOL hasAnyTurkcellPackage = NO;
+            for(Subscription *subscription in subscriptions) {
+                if(!subscription.type || !([subscription.type isEqualToString:@"INAPP_PURCHASE_GOOGLE"] || [subscription.type isEqualToString:@"INAPP_PURCHASE_APPLE"])) {
+                    hasAnyTurkcellPackage = YES;
+                }
+            }
+            if(!hasAnyTurkcellPackage) {
+                if(![AppUtil readDoNotShowAgainFlagForKey:@"PORTIN_DONTSHOW_DEFAULTS_KEY"]) {
+                    CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"TitleLater", @"") withApproveTitle:NSLocalizedString(@"TitleYes", @"") withMessage:NSLocalizedString(@"PortinInfoMessage", @"") withModalType:ModalTypeApprove shouldShowCheck:YES withCheckKey:@"PORTIN_DONTSHOW_DEFAULTS_KEY"];
+                    confirm.delegate = self;
+                    confirm.tag = 333;
+                    [APPDELEGATE showCustomConfirm:confirm];
+                }
+            }
+            
+        }
     }
     /*if ([self shouldShowOnKatView:subscription]) {
         UIWindow *currentWindow = [UIApplication sharedApplication].keyWindow;
@@ -402,6 +440,24 @@
 - (void) flowChartAdvertising {
     
     double percentUsageVal = 100 * ((double)APPDELEGATE.session.usage.usedStorage/(double)APPDELEGATE.session.usage.totalStorage);
+    
+    NSString *eventValue = nil;
+    if(percentUsageVal >= 100) {
+        eventValue = @"quota_full";
+    } else if(percentUsageVal >= 99.0) {
+        eventValue = @"quota_99_percent_full";
+    } else if(percentUsageVal >= 90.0) {
+        eventValue = @"quota_90_percent_full";
+    } else if(percentUsageVal >= 80.0) {
+        eventValue = @"quota_80_percent_full";
+    }
+    [MPush hitEvent:eventValue];
+    [MPush hitTag:@"quota_status" withValue:[NSString stringWithFormat:@"%.1f", percentUsageVal]];
+    
+    if(APPDELEGATE.session.usage.totalStorage - APPDELEGATE.session.usage.usedStorage <= 5242880) {
+        [MPush hitTag:@"quota_5_mb_left"];
+    }
+
     if ([AppUtil checkIsUpdate]) {
         if ([AppUtil checkAndSetFlags:DIALOGUE_P7_FLAG]) {
             [self loadAdvertisementView:NSLocalizedString(@"NewVersionNewFeatures", @"") withOption:NO withTitle:NSLocalizedString(@"NewVersionNewFeaturesTitle", @"")];
@@ -556,9 +612,15 @@
 }
 
 - (void) didApproveCustomAlert:(CustomConfirmView *) alertView {
-    EmailEntryController *emailController = [[EmailEntryController alloc] init];
-    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:emailController];
-    [self presentViewController:modalNav animated:YES completion:nil];
+    if(alertView.tag == 111) {
+        EmailEntryController *emailController = [[EmailEntryController alloc] init];
+        MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:emailController];
+        [self presentViewController:modalNav animated:YES completion:nil];
+    } else if(alertView.tag == 222 || alertView.tag == 333) {
+        RevisitedStorageController *storageController = [[RevisitedStorageController alloc] init];
+        storageController.nav = self.nav;
+        [self.nav pushViewController:storageController animated:NO];
+    }
 }
 
 @end

@@ -37,6 +37,12 @@
 #import "MusicPreviewController.h"
 #import "ContactSyncController.h"
 #import "CropAndShareListController.h"
+#import "PhotoListPopupController.h"
+#import "FileListPopupController.h"
+#import "MPush.h"
+#import "CurrentMusicListModalController.h"
+#import "CurrentPhotoListModalController.h"
+#import "CurrentDocumentListModalController.h"
 
 #define kMenuOpenOriginX 276
 
@@ -209,6 +215,9 @@
 #pragma mark SlidingMenuDelegate
 
 - (void) didTriggerHome {
+    [MPush hitTag:@"homepage"];
+    [MPush hitEvent:@"homepage"];
+
     HomeController *home = [[HomeController alloc] init];
     home.nav = self.nav;
     home.myDelegate = self;
@@ -226,10 +235,16 @@
 }
 
 - (void) didTriggerLogout {
+    [MPush hitTag:@"logged_out"];
+    [MPush hitEvent:@"logged_out"];
+
     [APPDELEGATE triggerLogout];
 }
 
 - (void) didTriggerFavorites {
+    [MPush hitTag:@"favorites"];
+    [MPush hitEvent:@"favorites"];
+
     FavouriteListController *favourites = [[FavouriteListController alloc] init];
     favourites.nav = self.nav;
     favourites.myDelegate = self;
@@ -237,6 +252,9 @@
 }
 
 - (void) didTriggerFiles {
+    [MPush hitTag:@"all_files"];
+    [MPush hitEvent:@"all_files"];
+
     FileListController *file = [[FileListController alloc] initForFolder:nil];
     file.nav = self.nav;
     file.myDelegate = self;
@@ -244,6 +262,9 @@
 }
 
 - (void) didTriggerPhotos {
+    [MPush hitTag:@"photos_and_videos"];
+    [MPush hitEvent:@"photos_and_videos"];
+
     PhotoListController *photo = [[PhotoListController alloc] init];
     photo.nav = self.nav;
     photo.myDelegate = self;
@@ -251,6 +272,9 @@
 }
 
 - (void) didTriggerMusic {
+    [MPush hitTag:@"music_files"];
+    [MPush hitEvent:@"music_files"];
+
     MusicListController *music = [[MusicListController alloc] init];
     music.nav = self.nav;
     music.myDelegate = self;
@@ -258,6 +282,9 @@
 }
 
 - (void) didTriggerDocs {
+    [MPush hitTag:@"documents"];
+    [MPush hitEvent:@"documents"];
+
     DocListController *doc = [[DocListController alloc] init];
     doc.nav = self.nav;
     doc.myDelegate = self;
@@ -272,6 +299,9 @@
 }
 
 - (void) didTriggerSearch {
+    [MPush hitTag:@"search"];
+    [MPush hitEvent:@"search"];
+
     SearchModalController *searchController = [[SearchModalController alloc] init];
     searchController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:searchController];
@@ -288,6 +318,9 @@
 }
 
 - (void) didTriggerProfile {
+    [MPush hitTag:@"settings"];
+    [MPush hitEvent:@"settings"];
+
     SettingsController *settings = [[SettingsController alloc] init];
     settings.nav = self.nav;
     settings.myDelegate = self;
@@ -381,6 +414,50 @@
     NewAlbumModalController *folderController = [[NewAlbumModalController alloc] init];
     folderController.delegate = [self.nav topViewController];
     MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:folderController];
+    [self presentViewController:modalNav animated:YES completion:nil];
+}
+
+- (void) floatingMenuDidTriggerAddFromDepo {
+    [addButton immediateReset];
+    [addMenu dismissWithAnimation];
+    [self performSelector:@selector(hideAddMenu) withObject:nil afterDelay:0.3];
+
+    FileListPopupController *fileController = [[FileListPopupController alloc] init];
+//    fileController.delegate = [self.nav topViewController];
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:fileController];
+    [self presentViewController:modalNav animated:YES completion:nil];
+}
+
+- (void) floatingMenuDidTriggerAddPhotoFromDepo {
+    [addButton immediateReset];
+    [addMenu dismissWithAnimation];
+    [self performSelector:@selector(hideAddMenu) withObject:nil afterDelay:0.3];
+
+    CurrentPhotoListModalController *photoController = [[CurrentPhotoListModalController alloc] init];
+    photoController.delegate = [self.nav topViewController];
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:photoController];
+    [self presentViewController:modalNav animated:YES completion:nil];
+}
+
+- (void) floatingMenuDidTriggerAddMusicFromDepo {
+    [addButton immediateReset];
+    [addMenu dismissWithAnimation];
+    [self performSelector:@selector(hideAddMenu) withObject:nil afterDelay:0.3];
+    
+    CurrentMusicListModalController *musicController = [[CurrentMusicListModalController alloc] init];
+    musicController.delegate = [self.nav topViewController];
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:musicController];
+    [self presentViewController:modalNav animated:YES completion:nil];
+}
+
+- (void) floatingMenuDidTriggerAddDocumentFromDepo {
+    [addButton immediateReset];
+    [addMenu dismissWithAnimation];
+    [self performSelector:@selector(hideAddMenu) withObject:nil afterDelay:0.3];
+    
+    CurrentDocumentListModalController *docController = [[CurrentDocumentListModalController alloc] init];
+    docController.delegate = [self.nav topViewController];
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:docController];
     [self presentViewController:modalNav animated:YES completion:nil];
 }
 

@@ -108,6 +108,7 @@
     NSString *iconName = @"blue_add_photo_icon.png";
     switch (addType) {
         case AddTypeMusic:
+        case AddTypeDepoMusic:
             iconName = @"blue_add_music_icon.png";
             break;
         case AddTypeFolder:
@@ -115,10 +116,15 @@
             iconName = @"blue_add_new_folder_icon.png";
             break;
         case AddTypePhoto:
+        case AddTypeDepoPhoto:
             iconName = @"blue_add_photo_icon.png";
             break;
         case AddTypeCamera:
             iconName = @"blue_add_camera_shot_icon.png";
+            break;
+        case AddTypeFile:
+        case AddTypeDepoDocument:
+            iconName = @"blue_add_new_folder_icon.png";
             break;
         default:
             break;
@@ -141,8 +147,20 @@
         case AddTypePhoto:
             title = NSLocalizedString(@"AddTypePhotoTitle", @"");
             break;
+        case AddTypeDepoPhoto:
+            title = NSLocalizedString(@"AddTypeDepoPhotoTitle", @"");
+            break;
         case AddTypeCamera:
             title = NSLocalizedString(@"AddTypeCameraTitle", @"");
+            break;
+        case AddTypeFile:
+            title = NSLocalizedString(@"AddTypeFromDepoTitle", @"");
+            break;
+        case AddTypeDepoDocument:
+            title = NSLocalizedString(@"AddTypeDepoDocumentTitle", @"");
+            break;
+        case AddTypeDepoMusic:
+            title = NSLocalizedString(@"AddTypeDepoMusicTitle", @"");
             break;
         default:
             break;
@@ -391,6 +409,14 @@
         return AddTypePhoto;
     } else if([str isEqualToString:@"AddTypeCamera"]) {
         return AddTypeCamera;
+    } else if([str isEqualToString:@"AddTypeFile"]) {
+        return AddTypeFile;
+    } else if([str isEqualToString:@"AddTypeDepoPhoto"]) {
+        return AddTypeDepoPhoto;
+    } else if([str isEqualToString:@"AddTypeDepoDocument"]) {
+        return AddTypeDepoDocument;
+    } else if([str isEqualToString:@"AddTypeDepoMusic"]) {
+        return AddTypeDepoMusic;
     }
     return AddTypeFolder;
 }
@@ -664,6 +690,15 @@
         name = @"DEPO 25TB";
     }
     return name;
+}
+
++ (void) writeDoNotShowAgainFlagForKey:(NSString *) key {
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:key];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (BOOL) readDoNotShowAgainFlagForKey:(NSString *) key {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:key];
 }
 
 @end

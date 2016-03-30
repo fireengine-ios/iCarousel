@@ -23,6 +23,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "ChangePassController.h"
 #import "UpdateMsisdnController.h"
+#import "MPush.h"
 
 @interface SettingsController () {
     UILabel *msisdnLabel;
@@ -467,6 +468,9 @@
 }
 
 - (void) didTriggerStorage {
+    [MPush hitTag:@"packages"];
+    [MPush hitEvent:@"packages"];
+
     RevisitedStorageController *storageController = [[RevisitedStorageController alloc] init];
     storageController.nav = self.nav;
     [self.nav pushViewController:storageController animated:YES];
@@ -479,6 +483,9 @@
 }
 
 - (void) didTriggerConnectedDevices {
+    [MPush hitTag:@"connected_devices"];
+    [MPush hitEvent:@"connected_devices"];
+
     SettingsConnectedDevicesController *connectedDevicesController = [[SettingsConnectedDevicesController alloc] init];
     connectedDevicesController.nav = self.nav;
     [self.nav pushViewController:connectedDevicesController animated:YES];

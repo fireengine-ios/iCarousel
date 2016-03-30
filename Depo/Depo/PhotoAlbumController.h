@@ -17,12 +17,13 @@
 #import "ShareLinkDao.h"
 #import "AddAlbumDao.h"
 #import "ImagePreviewController.h"
+#import "CurrentPhotoListModalController.h"
 
 @protocol PhotoAlbumDelegate <NSObject>
 - (void) photoAlbumDidChange:(NSString *) albumUuid;
 @end
 
-@interface PhotoAlbumController : MyViewController <SquareImageDelegate, FooterActionsDelegate, ImagePreviewDelegate, UIScrollViewDelegate> {
+@interface PhotoAlbumController : MyViewController <SquareImageDelegate, FooterActionsDelegate, ImagePreviewDelegate, UIScrollViewDelegate, CurrentPhotoListModalDelegate> {
     AlbumDetailDao *detailDao;
     RenameAlbumDao *renameDao;
     DeleteAlbumsDao *deleteDao;

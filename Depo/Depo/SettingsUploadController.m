@@ -16,6 +16,7 @@
 #import "CurioSDK.h"
 #import "ReachabilityManager.h"
 #import "LocationManager.h"
+#import "MPush.h"
 
 @interface SettingsUploadController ()
 
@@ -78,7 +79,20 @@
             }
         }
     }
-    
+
+    if(currentSyncPhotosVideosSetting == EnableOptionOn || currentSyncPhotosVideosSetting == EnableOptionAuto) {
+        if(currentConnectionSetting == ConnectionOptionWifi) {
+            [MPush hitTag:@"autosync_wifi"];
+            [MPush hitEvent:@"autosync_wifi"];
+        } else {
+            [MPush hitTag:@"autosync_wifi3g"];
+            [MPush hitEvent:@"autosync_wifi3g"];
+        }
+    } else {
+        [MPush hitTag:@"autosync_off"];
+        [MPush hitEvent:@"autosync_off"];
+    }
+
     if(triggerAutoSync) {
         ALAssetsLibrary *assetsLibrary = [[ALAssetsLibrary alloc] init];
         [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {

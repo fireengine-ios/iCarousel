@@ -9,14 +9,29 @@
 #import "CustomConfirmView.h"
 #import "Util.h"
 #import "CustomButton.h"
+#import "AppUtil.h"
+#import "CheckButton.h"
+#import "SimpleButton.h"
+
+@interface CustomConfirmView (){
+    CheckButton *dontShowAgain;
+    NSString *dontShowCheckKey;
+}
+@end
 
 @implementation CustomConfirmView
 
 @synthesize delegate;
 
 - (id)initWithFrame:(CGRect)frame withTitle:(NSString *) title withCancelTitle:(NSString *) cancelTitle withApproveTitle:(NSString *) approveTitle withMessage:(NSString *) message withModalType:(ModalType) modalType {
+    return [self initWithFrame:frame withTitle:title withCancelTitle:cancelTitle withApproveTitle:approveTitle withMessage:message withModalType:modalType shouldShowCheck:NO withCheckKey:nil];
+}
+
+- (id)initWithFrame:(CGRect)frame withTitle:(NSString *) title withCancelTitle:(NSString *) cancelTitle withApproveTitle:(NSString *) approveTitle withMessage:(NSString *) message withModalType:(ModalType) modalType shouldShowCheck:(BOOL) checkFlag withCheckKey:(NSString *) checkKey {
     self = [super initWithFrame:frame];
     if (self) {
+        dontShowCheckKey = checkKey;
+        
         UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
         bgView.backgroundColor = [UIColor blackColor];
         bgView.alpha = 0.7;
@@ -26,7 +41,7 @@
         
         int messageHeight = [Util calculateHeightForText:message forWidth:240 forFont:messageFont] + 20;
         
-        int modalHeight = messageHeight + 140;
+        int modalHeight = messageHeight + (checkFlag ? 200 : 140);
         
         UIView *modalView = [[UIView alloc] initWithFrame:CGRectMake((self.frame.size.width - 280)/2, (self.frame.size.height - modalHeight)/2, 280, modalHeight)];
         modalView.backgroundColor = [UIColor whiteColor];
@@ -72,6 +87,15 @@
         messageLabel.numberOfLines = 0;
         [modalView addSubview:messageLabel];
         
+        if(checkFlag) {
+            dontShowAgain = [[CheckButton alloc] initWithFrame:CGRectMake(20, messageLabel.frame.origin.y + messageLabel.frame.size.height + 17, 25, 25) isInitiallyChecked:NO];
+            [modalView addSubview:dontShowAgain];
+            
+            SimpleButton *dontShowButton = [[SimpleButton alloc] initWithFrame:CGRectMake(dontShowAgain.frame.origin.x + dontShowAgain.frame.size.width + 10, messageLabel.frame.origin.y + messageLabel.frame.size.height + 17, 120, 25) withTitle:NSLocalizedString(@"DontShowAgainMessage", @"") withAlignment:NSTextAlignmentLeft isUnderlined:NO];
+            [dontShowButton addTarget:self action:@selector(dontShowTextClicked) forControlEvents:UIControlEventTouchUpInside];
+            [modalView addSubview:dontShowButton];
+
+        }
         CustomButton *rejectButton = [[CustomButton alloc] initWithFrame:CGRectMake(19, modalView.frame.size.height - 66, 116, 52)];
         [rejectButton setTitle:cancelTitle forState:UIControlStateNormal];
         rejectButton.backgroundColor = [UIColor whiteColor];
@@ -97,12 +121,27 @@
     return self;
 }
 
+- (void) dontShowTextClicked {
+}
+
+- (void) checkBeforeDismiss {
+    if(dontShowAgain && dontShowCheckKey) {
+        if(dontShowAgain.isChecked){
+            [AppUtil writeDoNotShowAgainFlagForKey:dontShowCheckKey];
+        }
+    }
+}
+
 - (void) triggerCancel {
+    [self checkBeforeDismiss];
+    
     [delegate didRejectCustomAlert:self];
     [self removeFromSuperview];
 }
 
 - (void) triggerApprove {
+    [self checkBeforeDismiss];
+
     [delegate didApproveCustomAlert:self];
     [self removeFromSuperview];
 }

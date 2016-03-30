@@ -92,11 +92,23 @@
         case AddTypePhoto:
             [delegate floatingMenuDidTriggerAddPhoto];
             break;
+        case AddTypeDepoPhoto:
+            [delegate floatingMenuDidTriggerAddPhotoFromDepo];
+            break;
         case AddTypeCamera:
             [delegate floatingMenuDidTriggerCamera];
             break;
         case AddTypeAlbum:
             [delegate floatingMenuDidTriggerAddAlbum];
+            break;
+        case AddTypeFile:
+            [delegate floatingMenuDidTriggerAddFromDepo];
+            break;
+        case AddTypeDepoDocument:
+            [delegate floatingMenuDidTriggerAddDocumentFromDepo];
+            break;
+        case AddTypeDepoMusic:
+            [delegate floatingMenuDidTriggerAddMusicFromDepo];
             break;
         default:
             break;

@@ -285,6 +285,10 @@ typedef enum {
     AddTypePhoto,
     AddTypeMusic,
     AddTypeCamera,
+    AddTypeFile,
+    AddTypeDepoPhoto,
+    AddTypeDepoMusic,
+    AddTypeDepoDocument,
     AddTypeOther
 } AddType;
 

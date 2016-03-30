@@ -20,6 +20,7 @@
 #import <SplunkMint/SplunkMint.h>
 #import "SignupController.h"
 #import "RememberMeEmailViewController.h"
+#import "MPush.h"
 
 #define kOFFSET_FOR_KEYBOARD 200.0
 
@@ -195,6 +196,10 @@
     //TODO check hangisi dogru
     [[CurioSDK shared] sendEvent:@"LoginSuccess" eventValue:@"true"];
     [[CurioSDK shared] sendEvent:@"Login" eventValue:@"Success"];
+    
+    [MPush hitTag:@"logged_in" withValue:msisdnValue];
+    [MPush hitEvent:@"logged_in"];
+
     [APPDELEGATE triggerPostLogin];
 }
 

@@ -29,6 +29,7 @@
 @synthesize detail;
 @synthesize contentLengthDisplay;
 @synthesize itemCount;
+@synthesize videoPreviewUrl;
 
 - (NSUInteger) hash {
     return [self.uuid hash];

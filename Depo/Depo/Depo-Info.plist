@@ -65,11 +65,15 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-    <key>UISupportedInterfaceOrientations~ipad</key>
-    <array>
-        <string>UIInterfaceOrientationPortrait</string>
-    </array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>MenloApplicationKey</key>
+	<string>TDttInhNx_m-Ee76K35tiRJ5FW-ysLHd</string>
+	<key>MenloPushSandboxMode</key>
+	<true/>
 </dict>
 </plist>

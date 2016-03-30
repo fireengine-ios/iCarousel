@@ -8,6 +8,7 @@
 
 #import "FooterActionsMenuView.h"
 #import "Util.h"
+#import "MPush.h"
 
 @implementation FooterActionsMenuView
 
@@ -86,6 +87,9 @@
 
 
 - (void) shareClicked {
+    [MPush hitTag:@"share_button_clicked"];
+    [MPush hitEvent:@"share_button_clicked"];
+
     [delegate footerActionMenuDidSelectShare:self];
 }
 
@@ -94,10 +98,16 @@
 }
 
 - (void) deleteClicked {
+    [MPush hitTag:@"delete_button_clicked"];
+    [MPush hitEvent:@"delete_button_clicked"];
+
     [delegate footerActionMenuDidSelectDelete:self];
 }
 
 - (void) printClicked {
+    [MPush hitTag:@"cellograph_button_clicked"];
+    [MPush hitEvent:@"cellograph_button_clicked"];
+
     [delegate footerActionMenuDidSelectPrint:self];
 }
 

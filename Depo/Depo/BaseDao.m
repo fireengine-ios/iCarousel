@@ -235,6 +235,7 @@
         NSString *thumbLarge = [detailDict objectForKey:@"Thumbnail-Large"];
         NSString *thumbMedium = [detailDict objectForKey:@"Thumbnail-Medium"];
         NSString *thumbSmall = [detailDict objectForKey:@"Thumbnail-Small"];
+        NSString *videoPreview = [detailDict objectForKey:@"Video-Preview"];
         NSString *metaHash = [detailDict objectForKey:@"X-Object-Meta-Ios-Metadata-Hash"];
         NSNumber *imgHeight = [detailDict objectForKey:@"Image-Height"];
         NSNumber *imgWidth = [detailDict objectForKey:@"Image-Width"];
@@ -256,6 +257,8 @@
         detail.album = [self strByRawVal:album];
         detail.songTitle = [self strByRawVal:songTitle];
         detail.duration = [self floatByNumber:duration];
+
+        file.videoPreviewUrl = [self strByRawVal:videoPreview];
         
         NSString *durationVal = @"";
         if(detail.duration) {

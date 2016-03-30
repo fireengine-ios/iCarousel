@@ -21,5 +21,6 @@
 @property (nonatomic, strong) id<CustomConfirmDelegate> delegate;
 
 - (id)initWithFrame:(CGRect)frame withTitle:(NSString *) title withCancelTitle:(NSString *) cancelTitle withApproveTitle:(NSString *) approveTitle withMessage:(NSString *) message withModalType:(ModalType) modalType;
+- (id)initWithFrame:(CGRect)frame withTitle:(NSString *) title withCancelTitle:(NSString *) cancelTitle withApproveTitle:(NSString *) approveTitle withMessage:(NSString *) message withModalType:(ModalType) modalType shouldShowCheck:(BOOL) checkFlag withCheckKey:(NSString *) checkKey;
 
 @end

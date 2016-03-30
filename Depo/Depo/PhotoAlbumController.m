@@ -673,6 +673,10 @@
     [detailDao requestDetailOfAlbum:self.album.uuid forStart:listOffset andSize:20];
 }
 
+- (void) photoModalListReturnedWithSelectedList:(NSArray *)uuids {
+    [albumAddPhotosDao requestAddPhotos:uuids toAlbum:self.album.uuid];
+}
+
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.nav setNavigationBarHidden:YES animated:NO];

@@ -16,6 +16,7 @@
 #import "BaseViewController.h"
 #import "MapUtil.h"
 #import "CurioSDK.h"
+#import "MPush.h"
 
 @interface MyViewController ()
 
@@ -313,15 +314,19 @@
 #pragma mark MoreMenuDelegate methods
 
 - (void) moreMenuDidSelectDelete {
+    [MPush hitTag:@"delete_button_clicked"];
 }
 
 - (void) moreMenuDidSelectFav {
+    [MPush hitTag:@"add_to_favorites_button_clicked"];
 }
 
 - (void) moreMenuDidSelectUnfav {
 }
 
 - (void) moreMenuDidSelectShare {
+    [MPush hitTag:@"share_button_clicked"];
+    [MPush hitEvent:@"share_button_clicked"];
 }
 
 - (void) moreMenuDidSelectDownloadImage {

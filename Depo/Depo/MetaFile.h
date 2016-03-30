@@ -31,5 +31,6 @@
 @property (nonatomic, strong) FileDetail *detail;
 @property (nonatomic, strong) NSString *contentLengthDisplay;
 @property (nonatomic) int itemCount;
+@property (nonatomic, strong) NSString *videoPreviewUrl;
 
 @end

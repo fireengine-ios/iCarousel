@@ -14,6 +14,10 @@
 - (void) floatingMenuDidTriggerAddAlbum;
 - (void) floatingMenuDidTriggerAddMusic;
 - (void) floatingMenuDidTriggerAddPhoto;
+- (void) floatingMenuDidTriggerAddFromDepo;
+- (void) floatingMenuDidTriggerAddPhotoFromDepo;
+- (void) floatingMenuDidTriggerAddMusicFromDepo;
+- (void) floatingMenuDidTriggerAddDocumentFromDepo;
 - (void) floatingMenuDidTriggerCamera;
 @end
 

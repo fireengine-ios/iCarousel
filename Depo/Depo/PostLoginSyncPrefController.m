@@ -15,6 +15,7 @@
 #import "AppUtil.h"
 #import <AddressBookUI/AddressBookUI.h>
 #import "CurioSDK.h"
+#import "MPush.h"
 
 @interface PostLoginSyncPrefController ()
 
@@ -142,7 +143,10 @@
     } else {
         [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOff];
         [CacheUtil writeCachedSettingSyncContacts:EnableOptionOff];
+
         [[CurioSDK shared] sendEvent:@"SyncClosed" eventValue:@"true"];
+        [MPush hitTag:@"autosync_off"];
+        [MPush hitEvent:@"autosync_off"];
         
         [CacheUtil writeCachedSettingSyncingConnectionType:selectedOption];
         [CacheUtil writeCachedSettingDataRoaming:NO];
@@ -271,6 +275,14 @@
     [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOn];
     
     [[CurioSDK shared] sendEvent:@"SyncOpened" eventValue:@"true"];
+    
+    if(selectedOption == ConnectionOptionWifi3G) {
+        [MPush hitTag:@"autosync_wifi3g"];
+        [MPush hitEvent:@"autosync_wifi3g"];
+    } else {
+        [MPush hitTag:@"autosync_wifi"];
+        [MPush hitEvent:@"autosync_wifi"];
+    }
     
     [CacheUtil writeCachedSettingSyncingConnectionType:selectedOption];
     [CacheUtil writeCachedSettingDataRoaming:NO];

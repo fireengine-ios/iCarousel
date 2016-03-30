@@ -10,6 +10,7 @@
 #import "SimpleButton.h"
 #import "Util.h"
 #import "AppUtil.h"
+#import "MPush.h"
 
 @implementation RevisitedOfferCell
 
@@ -39,6 +40,20 @@
 }
 
 - (void) buyClicked {
+    NSString *formattedQuotaString = [Util transformedHugeSizeValueDecimalIfNecessary:offer.quota];
+    NSString *tagName = nil;
+    if([formattedQuotaString isEqualToString:@"50 GB"]) {
+        tagName = @"50_gb_button_clicked";
+    } else if([formattedQuotaString isEqualToString:@"500 GB"]) {
+        tagName = @"500_gb_button_clicked";
+    } else if([formattedQuotaString isEqualToString:@"2.5 TB"]) {
+        tagName = @"2_5_tb_button_clicked";
+    }
+    if(tagName) {
+        [MPush hitTag:tagName];
+        [MPush hitEvent:tagName];
+    }
+    
     [delegate revisitedOfferCellDelegateDidClickBuy:self.offer];
 }
 

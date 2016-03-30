@@ -8,6 +8,7 @@
 
 #import "FileDetailFooter.h"
 #import "Util.h"
+#import "MPush.h"
 
 @implementation FileDetailFooter
 
@@ -55,14 +56,23 @@
 }
 
 - (void) shareClicked {
+    [MPush hitTag:@"share_button_clicked"];
+    [MPush hitEvent:@"share_button_clicked"];
+    
     [delegate fileDetailFooterDidTriggerShare];
 }
 
 - (void) deleteClicked {
+    [MPush hitTag:@"delete_button_clicked"];
+    [MPush hitEvent:@"delete_button_clicked"];
+
     [delegate fileDetailFooterDidTriggerDelete];
 }
 
 - (void) printClicked {
+    [MPush hitTag:@"cellograph_button_clicked"];
+    [MPush hitEvent:@"cellograph_button_clicked"];
+
     [delegate fileDetailFooterDidTriggerPrint];
 }
 

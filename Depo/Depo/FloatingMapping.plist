@@ -18,15 +18,22 @@
 	<array>
 		<string>AddTypeCamera</string>
 		<string>AddTypePhoto</string>
+		<string>AddTypeDepoPhoto</string>
 	</array>
-    <key>AlbumTab</key>
-    <array>
-        <string>AddTypeAlbum</string>
-    </array>
-    <key>PhotoTab</key>
-    <array>
-        <string>AddTypeCamera</string>
-        <string>AddTypePhoto</string>
-    </array>
+	<key>AlbumTab</key>
+	<array>
+		<string>AddTypeAlbum</string>
+	</array>
+	<key>PhotoTab</key>
+	<array>
+		<string>AddTypeCamera</string>
+		<string>AddTypePhoto</string>
+	</array>
+	<key>FavouriteListController</key>
+	<array>
+		<string>AddTypeDepoPhoto</string>
+        <string>AddTypeDepoMusic</string>
+        <string>AddTypeDepoDocument</string>
+	</array>
 </dict>
 </plist>

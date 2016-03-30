@@ -7,6 +7,7 @@
 //
 
 #import "AbstractFileFolderCell.h"
+#import "MPush.h"
 
 @implementation AbstractFileFolderCell
 
@@ -148,6 +149,8 @@
 }
 
 - (void) triggerFav {
+    [MPush hitTag:@"add_to_favorites_button_clicked"];
+    
     unfavButton.hidden = NO;
     [UIView transitionFromView:favButton toView:unfavButton duration:0.5 options:UIViewAnimationOptionTransitionCrossDissolve completion:nil];
     [delegate fileFolderCellShouldFavForFile:self.fileFolder];
@@ -160,10 +163,15 @@
 }
 
 - (void) triggerShare {
+    [MPush hitTag:@"share_button_clicked"];
+    [MPush hitEvent:@"share_button_clicked"];
+    
     [delegate fileFolderCellShouldShareForFile:self.fileFolder];
 }
 
 - (void) triggerDelete {
+    [MPush hitTag:@"delete_button_clicked"];
+    
     [delegate fileFolderCellShouldDeleteForFile:self.fileFolder];
 }
 

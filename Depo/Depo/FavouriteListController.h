@@ -8,15 +8,18 @@
 
 #import "MyViewController.h"
 #import "FavoriteDao.h"
+#import "CurrentMusicListModalController.h"
+#import "CurrentDocumentListModalController.h"
+#import "CurrentPhotoListModalController.h"
 
-
-@interface FavouriteListController : MyViewController <UITableViewDelegate, UITableViewDataSource> {
+@interface FavouriteListController : MyViewController <UITableViewDelegate, UITableViewDataSource, CurrentMusicListModalDelegate, CurrentDocumentListModalDelegate, CurrentPhotoListModalDelegate> {
     FavoriteDao *listDao;
     FavoriteDao *favoriteDao;
     int listOffset;
     BOOL isLoading;
     FavoriteDao *loadMoreDao;
     BOOL isFirstLoad;
+    BOOL shouldPreventLoadWhenAppeared;
 }
 
 @property (nonatomic, strong) UITableView *fileTable;

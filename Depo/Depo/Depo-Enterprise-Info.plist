@@ -71,5 +71,9 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+    <key>MenloApplicationKey</key>
+    <string>TDttInhNx_m-Ee76K35tiRJ5FW-ysLHd</string>
+    <key>MenloPushSandboxMode</key>
+    <true/>
 </dict>
 </plist>
