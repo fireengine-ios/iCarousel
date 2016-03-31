@@ -14,6 +14,7 @@
 @class RadiusDao;
 @class LogoutDao;
 @class ConstantsDao;
+@class EulaCheckDao;
 
 @protocol TokenManagerDelegate <NSObject>
 - (void) tokenManagerDidReceiveToken;
@@ -45,6 +46,7 @@
     RadiusDao *radiusWithinProcessDao;
     LogoutDao *logoutDao;
     ConstantsDao *constantsDao;
+    EulaCheckDao *eulaCheckDao;
 }
 
 @property (nonatomic, strong) id<TokenManagerDelegate> delegate;

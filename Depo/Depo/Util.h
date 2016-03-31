@@ -25,5 +25,6 @@
 + (NSArray *) transformedHugeSizeValueDecimalAsArrayIfNecessary:(long long) byteCount;
 + (NSString *) cleanSpecialCharacters:(NSString *) rawStr;
 + (BOOL) isValidEmail:(NSString *)checkString;
++ (NSString *) readLocaleCode;
 
 @end

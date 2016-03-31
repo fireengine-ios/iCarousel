@@ -218,4 +218,9 @@
     return [emailTest evaluateWithObject:checkString];
 }
 
++ (NSString *) readLocaleCode {
+    NSLocale *locale = [NSLocale currentLocale];
+    return [locale objectForKey:NSLocaleLanguageCode];
+}
+
 @end

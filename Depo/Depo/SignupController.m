@@ -16,11 +16,13 @@
 #import "OTPController.h"
 #import "EmailValidationResultController.h"
 #import "TermsController.h"
+#import "Eula.h"
 
 #define kOFFSET_FOR_KEYBOARD 200.0
 
 @interface SignupController () {
     SimpleButton *signupButton;
+    Eula *eula;
 }
 @end
 
@@ -43,6 +45,11 @@
         signupDao.delegate = self;
         signupDao.successMethod = @selector(signupSuccessCallback:);
         signupDao.failMethod = @selector(signupFailCallback:);
+        
+        eulaDao = [[EulaDao alloc] init];
+        eulaDao.delegate = self;
+        eulaDao.successMethod = @selector(eulaReadSuccessCallback:);
+        eulaDao.failMethod = @selector(eulaReadFailCallback:);
         
         float topIndex = IS_IPAD ? 100 : (IS_IPHONE_4_OR_LESS ? 10 : 30);
         float fieldWidth = 280;
@@ -120,6 +127,9 @@
         tapGestureRecognizer.enabled = YES;
         tapGestureRecognizer.delegate = self;
         [self.view addGestureRecognizer:tapGestureRecognizer];
+        
+        [eulaDao requestEulaForLocale:[Util readLocaleCode]];
+        [self showLoading];
     }
     return self;
 }
@@ -185,7 +195,7 @@
 }
 
 - (void) didApproveCustomAlert:(CustomConfirmView *)alertView {
-    [signupDao requestTriggerSignupForEmail:emailField.text forPhoneNumber:msisdnField.text withPassword:passwordField.text];
+    [signupDao requestTriggerSignupForEmail:emailField.text forPhoneNumber:msisdnField.text withPassword:passwordField.text withEulaId:eula ? eula.eulaId : 0];
     [self showLoading];
 }
 
@@ -298,6 +308,15 @@
 }
 
 - (void) checkButtonWasUnchecked {
+}
+
+- (void) eulaReadSuccessCallback:(Eula *) eulaRead {
+    eula = eulaRead;
+    [self hideLoading];
+}
+
+- (void) eulaReadFailCallback:(NSString *) errorMessage {
+    [self hideLoading];
 }
 
 @end

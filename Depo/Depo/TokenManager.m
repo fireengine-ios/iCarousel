@@ -19,6 +19,8 @@
 #import "RadiusDao.h"
 #import "LogoutDao.h"
 #import "ConstantsDao.h"
+#import "EulaCheckDao.h"
+#import "Util.h"
 
 @implementation TokenManager
 
@@ -73,6 +75,11 @@
         constantsDao.successMethod = @selector(constantsSuccessCallback);
         constantsDao.failMethod = @selector(constantsFailCallback:);
         
+        eulaCheckDao = [[EulaCheckDao alloc] init];
+        eulaCheckDao.delegate = self;
+        eulaCheckDao.successMethod = @selector(eulaCheckSuccessCallback:);
+        eulaCheckDao.failMethod = @selector(eulaCheckFailCallback:);
+        
         logoutDao = [[LogoutDao alloc] init];
 //        logoutDao.delegate = self;
 //        logoutDao.successMethod = @selector(logoutSuccessCallback);
@@ -111,7 +118,8 @@
     } else if(APPDELEGATE.session.migrationUserFlag) {
         [delegate tokenManagerMigrationInProgress];
     } else {
-        [delegate tokenManagerDidReceiveToken];
+        [eulaCheckDao requestCheckEulaForLocale:[Util readLocaleCode]];
+//        [delegate tokenManagerDidReceiveToken];
     }
 }
 
@@ -184,6 +192,20 @@
 
 - (void) constantsFailCallback:(NSString *) errorMessage {
     [delegate tokenManagerDidFailReceivingConstants];
+}
+
+- (void) eulaCheckSuccessCallback:(NSString *) statusVal {
+    if(statusVal != nil) {
+        if([statusVal isEqualToString:@"EULA_APPROVE_REQUIRED"]) {
+            [delegate tokenManagerProvisionNeeded];
+            return;
+        }
+    }
+    [delegate tokenManagerDidReceiveToken];
+}
+
+- (void) eulaCheckFailCallback:(NSString *) errorMessage {
+    [delegate tokenManagerDidReceiveToken];
 }
 
 @end

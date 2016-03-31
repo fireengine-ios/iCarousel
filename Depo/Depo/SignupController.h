@@ -11,6 +11,7 @@
 #import "SignupDao.h"
 #import "CheckButton.h"
 #import "CustomConfirmView.h"
+#import "EulaDao.h"
 
 @interface SignupController : MyViewController <UITextFieldDelegate, UIGestureRecognizerDelegate, CheckButtonDelegate, CustomConfirmDelegate> {
     NSString *msisdnValue;
@@ -19,6 +20,7 @@
     NSString *passwordRepeatValue;
 
     SignupDao *signupDao;
+    EulaDao *eulaDao;
 }
 
 @property (nonatomic, strong) LoginTextfield *msisdnField;

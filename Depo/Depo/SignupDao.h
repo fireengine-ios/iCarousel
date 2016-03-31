@@ -10,6 +10,6 @@
 
 @interface SignupDao : BaseDao
 
-- (void) requestTriggerSignupForEmail:(NSString *) email forPhoneNumber:(NSString *) phoneNumber withPassword:(NSString *) password;
+- (void) requestTriggerSignupForEmail:(NSString *) email forPhoneNumber:(NSString *) phoneNumber withPassword:(NSString *) password withEulaId:(int) eulaId;
 
 @end

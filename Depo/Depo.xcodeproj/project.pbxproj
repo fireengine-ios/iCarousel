@@ -824,6 +824,10 @@
 		94884CAA1C91A469006722F7 /* UpdateMsisdnController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94884CA91C91A469006722F7 /* UpdateMsisdnController.m */; };
 		94A1D3C41C969F330066D92F /* UpdatePassDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94A1D3C31C969F330066D92F /* UpdatePassDao.m */; };
 		94B9D22A1CA86C4300FC28F2 /* libMPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 94B9D2281CA86C4300FC28F2 /* libMPush.a */; };
+		94BEABF51CAD1807002E37A7 /* EulaDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94BEABF41CAD1807002E37A7 /* EulaDao.m */; };
+		94BEABF81CAD1BF3002E37A7 /* EulaCheckDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94BEABF71CAD1BF3002E37A7 /* EulaCheckDao.m */; };
+		94BEABFB1CAD1BFE002E37A7 /* EulaApproveDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94BEABFA1CAD1BFE002E37A7 /* EulaApproveDao.m */; };
+		94BEABFE1CAD1D6C002E37A7 /* Eula.m in Sources */ = {isa = PBXBuildFile; fileRef = 94BEABFD1CAD1D6C002E37A7 /* Eula.m */; };
 		94EF279C1C982B460087EFBE /* NoItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94EF279B1C982B460087EFBE /* NoItemView.m */; };
 /* End PBXBuildFile section */
 
@@ -2028,6 +2032,14 @@
 		94A1D3C31C969F330066D92F /* UpdatePassDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdatePassDao.m; sourceTree = "<group>"; };
 		94B9D2281CA86C4300FC28F2 /* libMPush.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMPush.a; sourceTree = "<group>"; };
 		94B9D2291CA86C4300FC28F2 /* MPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPush.h; sourceTree = "<group>"; };
+		94BEABF31CAD1807002E37A7 /* EulaDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EulaDao.h; sourceTree = "<group>"; };
+		94BEABF41CAD1807002E37A7 /* EulaDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EulaDao.m; sourceTree = "<group>"; };
+		94BEABF61CAD1BF3002E37A7 /* EulaCheckDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EulaCheckDao.h; sourceTree = "<group>"; };
+		94BEABF71CAD1BF3002E37A7 /* EulaCheckDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EulaCheckDao.m; sourceTree = "<group>"; };
+		94BEABF91CAD1BFE002E37A7 /* EulaApproveDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EulaApproveDao.h; sourceTree = "<group>"; };
+		94BEABFA1CAD1BFE002E37A7 /* EulaApproveDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EulaApproveDao.m; sourceTree = "<group>"; };
+		94BEABFC1CAD1D6C002E37A7 /* Eula.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Eula.h; sourceTree = "<group>"; };
+		94BEABFD1CAD1D6C002E37A7 /* Eula.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Eula.m; sourceTree = "<group>"; };
 		94EF279A1C982B460087EFBE /* NoItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoItemView.h; sourceTree = "<group>"; };
 		94EF279B1C982B460087EFBE /* NoItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoItemView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -2542,6 +2554,12 @@
 				94884C7C1C9063F4006722F7 /* UpdateMsisdnDao.m */,
 				94A1D3C21C969F330066D92F /* UpdatePassDao.h */,
 				94A1D3C31C969F330066D92F /* UpdatePassDao.m */,
+				94BEABF31CAD1807002E37A7 /* EulaDao.h */,
+				94BEABF41CAD1807002E37A7 /* EulaDao.m */,
+				94BEABF61CAD1BF3002E37A7 /* EulaCheckDao.h */,
+				94BEABF71CAD1BF3002E37A7 /* EulaCheckDao.m */,
+				94BEABF91CAD1BFE002E37A7 /* EulaApproveDao.h */,
+				94BEABFA1CAD1BFE002E37A7 /* EulaApproveDao.m */,
 			);
 			name = http;
 			sourceTree = "<group>";
@@ -2591,6 +2609,8 @@
 				059CE5461A87D45100F6CFAE /* ContactSyncResult.m */,
 				05C7CB681ABC91B200A7BF8E /* MetaFileSummary.h */,
 				05C7CB691ABC91B200A7BF8E /* MetaFileSummary.m */,
+				94BEABFC1CAD1D6C002E37A7 /* Eula.h */,
+				94BEABFD1CAD1D6C002E37A7 /* Eula.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -4415,6 +4435,7 @@
 				0515F2F81C451E240098081C /* SingleCharField.m in Sources */,
 				9445B97E1C9F28FE000FDB80 /* PhotoListPopupController.m in Sources */,
 				05C2A0271A79830500EE4D78 /* ADJActivityPackage.m in Sources */,
+				94BEABFB1CAD1BFE002E37A7 /* EulaApproveDao.m in Sources */,
 				0526444E19D5625E00B63759 /* MoreMenuView.m in Sources */,
 				05DEB1C61A80C161007793DD /* ProvisionDao.m in Sources */,
 				05BCA2FB19EE89EE00AF2FE2 /* MusicPreviewController.m in Sources */,
@@ -4487,14 +4508,17 @@
 				05144B611A090B8000B2A414 /* SimpleDocCell.m in Sources */,
 				056E2A151A28BC2700C24904 /* XYPieChart.m in Sources */,
 				058B32911A14ABE500A291C4 /* AlbumAddPhotosDao.m in Sources */,
+				94BEABF51CAD1807002E37A7 /* EulaDao.m in Sources */,
 				05AF7C811A1C8CD100F5011A /* RecentActivitiesController.m in Sources */,
 				05501F3819EBBB4600CA9F4E /* AlbumDetailDao.m in Sources */,
+				94BEABF81CAD1BF3002E37A7 /* EulaCheckDao.m in Sources */,
 				05DEB1EB1A81775F007793DD /* ContactSyncSDK.m in Sources */,
 				05A938251AF6AE9100AE2892 /* Controller.m in Sources */,
 				05028CD31B5A9866000F2D09 /* SharedUtil.m in Sources */,
 				05DA564C1A56D5B3007D2B1D /* ALAssetRepresentation+MD5.m in Sources */,
 				05AD7F851AD7FD160052153A /* MMWormhole.m in Sources */,
 				05C244331A0243BE000D65D0 /* SortTypeCell.m in Sources */,
+				94BEABFE1CAD1D6C002E37A7 /* Eula.m in Sources */,
 				05E8113819DF27690063F99A /* MusicListModalController.m in Sources */,
 				05D5E5A51B09D5F800A22957 /* OfferContainer.m in Sources */,
 				059C9EC71A07DC60000C54D9 /* FolderDetailModalController.m in Sources */,

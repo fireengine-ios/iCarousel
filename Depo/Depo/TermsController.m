@@ -20,6 +20,9 @@
 @synthesize checkButton;
 @synthesize provisionDao;
 @synthesize acceptButton;
+@synthesize eulaDao;
+@synthesize eulaApproveDao;
+@synthesize eula;
 
 - (id) init {
     return [self initWithCheckEnabled:YES];
@@ -35,6 +38,16 @@
         provisionDao.delegate = self;
         provisionDao.successMethod = @selector(provisionSuccessCallback);
         provisionDao.failMethod = @selector(provisionFailCallback:);
+        
+        eulaDao = [[EulaDao alloc] init];
+        eulaDao.delegate = self;
+        eulaDao.successMethod = @selector(eulaReadSuccessCallback:);
+        eulaDao.failMethod = @selector(eulaReadFailCallback:);
+
+        eulaApproveDao = [[EulaApproveDao alloc] init];
+        eulaApproveDao.delegate = self;
+        eulaApproveDao.successMethod = @selector(eulaApproveSuccessCallback);
+        eulaApproveDao.failMethod = @selector(eulaApproveFailCallback:);
         
         UIImage *topImg = [UIImage imageNamed:@"bulutheader.png"];
         float imageHeight = (self.view.frame.size.width/topImg.size.width)*topImg.size.height;
@@ -57,9 +70,9 @@
             [acceptButton addTarget:self action:@selector(triggerNext) forControlEvents:UIControlEventTouchUpInside];
             [self.view addSubview:acceptButton];
         }
-
-        NSURL *url = [[NSBundle mainBundle] URLForResource:@"terms" withExtension:@"htm"];
-        [webView loadRequest:[NSURLRequest requestWithURL:url]];
+        
+        [eulaDao requestEulaForLocale:[Util readLocaleCode]];
+        [self showLoading];
     }
     return self;
 }
@@ -74,14 +87,22 @@
 }
 
 - (void) provisionSuccessCallback {
-    [self hideLoading];
-    [APPDELEGATE triggerPostTermsAndMigration];
-    [self.view removeFromSuperview];
+    [eulaApproveDao requestApproveEulaForId:self.eula.eulaId];
 }
 
 - (void) provisionFailCallback:(NSString *) errorMessage {
+    [eulaApproveDao requestApproveEulaForId:self.eula.eulaId];
+}
+
+- (void) eulaReadSuccessCallback:(Eula *) eulaRead {
+    self.eula = eulaRead;
     [self hideLoading];
-    [self showErrorAlertWithMessage:errorMessage];
+
+    [webView loadHTMLString:self.eula.content baseURL:[NSURL URLWithString:@"http://www.turkcell.com.tr"]];
+}
+
+- (void) eulaReadFailCallback:(NSString *) errorMessage {
+    [self hideLoading];
 }
 
 #pragma mark CheckButtonDelegate methods
@@ -114,6 +135,17 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) eulaApproveSuccessCallback {
+    [self hideLoading];
+    [APPDELEGATE triggerPostTermsAndMigration];
+    [self.view removeFromSuperview];
+}
+
+- (void) eulaApproveFailCallback:(NSString *) errorMessage {
+    [self hideLoading];
+    [self showErrorAlertWithMessage:errorMessage];
 }
 
 /*

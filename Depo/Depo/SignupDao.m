@@ -10,13 +10,14 @@
 
 @implementation SignupDao
 
-- (void) requestTriggerSignupForEmail:(NSString *) email forPhoneNumber:(NSString *) phoneNumber withPassword:(NSString *) password {
+- (void) requestTriggerSignupForEmail:(NSString *) email forPhoneNumber:(NSString *) phoneNumber withPassword:(NSString *) password withEulaId:(int) eulaId {
     NSURL *url = [NSURL URLWithString:SIGNUP_URL];
     
     NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:
                           email, @"email",
                           phoneNumber, @"phoneNumber",
                           password, @"password",
+                          [NSNumber numberWithInt:eulaId], @"eulaId",
                           nil];
     
     SBJSON *json = [SBJSON new];
