@@ -57,6 +57,7 @@
 - (void) requestRadiusLogin;
 - (void) requestToken;
 - (void) requestBaseUrl;
+- (void) requestEulaCheck;
 - (void) requestUserInfo;
 - (void) requestLogout;
 - (void) requestTokenByMsisdn:(NSString *) msisdn andPass:(NSString *) pass shouldRememberMe:(BOOL) rememberMeFlag;

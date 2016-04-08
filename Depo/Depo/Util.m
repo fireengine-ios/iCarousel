@@ -220,7 +220,11 @@
 
 + (NSString *) readLocaleCode {
     NSLocale *locale = [NSLocale currentLocale];
-    return [locale objectForKey:NSLocaleLanguageCode];
+    NSString *langCode = [locale objectForKey:NSLocaleLanguageCode];
+    if(langCode == nil) {
+        langCode = @"en";
+    }
+    return langCode;
 }
 
 @end

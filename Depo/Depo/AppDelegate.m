@@ -248,7 +248,7 @@
     } else if(APPDELEGATE.session.migrationUserFlag) {
         [self tokenManagerMigrationInProgress];
     } else {
-        [tokenManager requestUserInfo];
+        [tokenManager requestEulaCheck];
     }
 }
 

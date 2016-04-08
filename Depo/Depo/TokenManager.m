@@ -100,6 +100,10 @@
     [tokenDao requestTokenForMsisdn:msisdn andPassword:pass shouldRememberMe:rememberMeFlag];
 }
 
+- (void) requestEulaCheck {
+    [eulaCheckDao requestCheckEulaForLocale:[Util readLocaleCode]];
+}
+
 - (void) requestBaseUrl {
     [baseUrlDao requestBaseUrl];
 }
