@@ -114,18 +114,20 @@
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if(section == 4 ||
-       (APPDELEGATE.session.user.cropAndSharePresentFlag && section == 9) ||
-       (!APPDELEGATE.session.user.cropAndSharePresentFlag && section == 8)) {
+    MetaMenu *item = [sectionMetaArray objectAtIndex:section];
+    if(item.menuType == MenuTypeFiles
+        || ([APPDELEGATE.session.user.countryCode isEqualToString:@"90"] && item.menuType == MenuTypeCellograph)
+        || (![APPDELEGATE.session.user.countryCode isEqualToString:@"90"] && item.menuType == MenuTypeHelp)) {
         return 21;
     }
     return 0;
 }
 
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if(section == 4 ||
-       (APPDELEGATE.session.user.cropAndSharePresentFlag && section == 9) ||
-       (!APPDELEGATE.session.user.cropAndSharePresentFlag && section == 8)) {
+    MetaMenu *item = [sectionMetaArray objectAtIndex:section];
+    if(item.menuType == MenuTypeFiles
+       || ([APPDELEGATE.session.user.countryCode isEqualToString:@"90"] && item.menuType == MenuTypeCellograph)
+       || (![APPDELEGATE.session.user.countryCode isEqualToString:@"90"] && item.menuType == MenuTypeHelp)) {
         UIView *separatorView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 21)];
         UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(12, 10, separatorView.frame.size.width-24, 1)];
         separator.backgroundColor = [Util UIColorForHexColor:@"2c3037"];
@@ -239,6 +241,15 @@
             break;
         case MenuTypeCropAndShare:
             [delegate didTriggerCropAndShare];
+            break;
+        case MenuTypeCellograph:
+            [delegate didTriggerCellograph];
+            break;
+        case MenuTypeReachUs:
+            [delegate didTriggerReachUs];
+            break;
+        case MenuTypeHelp:
+            [delegate didTriggerHelp];
             break;
         case MenuTypeLogout:
             [delegate didTriggerLogout];

@@ -20,6 +20,7 @@
 @synthesize accountType;
 @synthesize username;
 @synthesize phoneNumber;
+@synthesize countryCode;
 
 - (id) init {
     if(self = [super init]) {

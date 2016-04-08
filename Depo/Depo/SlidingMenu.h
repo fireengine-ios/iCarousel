@@ -27,6 +27,9 @@
 - (void) didTriggerCropAndShare;
 - (void) didTriggerCurrentMusic;
 - (void) didTriggerContactSync;
+- (void) didTriggerCellograph;
+- (void) didTriggerReachUs;
+- (void) didTriggerHelp;
 @end
 
 @protocol SlidingMenuCloseDelegate <NSObject>

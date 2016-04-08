@@ -59,6 +59,8 @@
 @property (nonatomic) BOOL msisdnEmpty;
 @property (nonatomic) BOOL emailNotVerified;
 
+@property (nonatomic) BOOL storageFullPopupShown;
+
 - (void) playAudioItemAtIndex:(int) itemIndex;
 - (void) playNextAudioItem;
 - (void) playPreviousAudioItem;

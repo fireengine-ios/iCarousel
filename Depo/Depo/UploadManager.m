@@ -15,6 +15,9 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "CurioSDK.h"
 #import "SyncUtil.h"
+#import "MPush.h"
+#import "ReachabilityManager.h"
+#import "Reachability.h"
 
 typedef void (^ALAssetsLibraryAssetForURLResultBlock)(ALAsset *asset);
 typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
@@ -66,6 +69,8 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     }];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NetworkStatus networkStatus = [[[ReachabilityManager currentManager] reachability] currentReachabilityStatus];
+
         if(self.uploadRef.taskType == UploadTaskTypeAsset) {
             [self triggerAndStartAssetsTask];
         } else if(self.uploadRef.taskType == UploadTaskTypeFile) {
@@ -74,12 +79,14 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             [uploadTask resume];
             
             [[CurioSDK shared] sendEvent:@"UploadStarted" eventValue:[NSString stringWithFormat:@"file type: %@", @"image"]];
+            [MPush hitTag:@"photo_upload" withValue:(networkStatus == ReachableViaWWAN) ? @"3G" : @"Wifi"];
         } else {
             self.uploadTask = [[UploadQueue sharedInstance].session uploadTaskWithRequest:[self prepareRequestSetVideo:NO] fromData:self.uploadRef.fileData];
             self.uploadTask.taskDescription = self.uploadRef.localHash;
             [uploadTask resume];
             
             [[CurioSDK shared] sendEvent:@"UploadStarted" eventValue:[NSString stringWithFormat:@"file type: %@", @"image"]];
+            [MPush hitTag:@"photo_upload" withValue:(networkStatus == ReachableViaWWAN) ? @"3G" : @"Wifi"];
         }
     });
 }
@@ -245,7 +252,9 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         }
         [uploadTask resume];
         
+        NetworkStatus networkStatus = [[[ReachabilityManager currentManager] reachability] currentReachabilityStatus];
         [[CurioSDK shared] sendEvent:@"UploadStarted" eventValue:[NSString stringWithFormat:@"file type: %@", fileType]];
+        [MPush hitTag:@"photo_upload" withValue:(networkStatus==ReachableViaWWAN)?@"3G":@"Wifi"];
 
         //    [queueDelegate uploadManagerTaskIsInitialized:self];
     } else {

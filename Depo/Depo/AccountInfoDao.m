@@ -27,6 +27,7 @@
     
     if (!error) {
         NSString *responseEnc = [request responseString];
+        NSLog(@"Account info response: %@", responseEnc);
         SBJSON *jsonParser = [SBJSON new];
         NSDictionary *mainDict = [jsonParser objectWithString:responseEnc];
         
@@ -41,6 +42,7 @@
             NSString *username = [mainDict objectForKey:@"username"];
             NSString *email = [mainDict objectForKey:@"email"];
             NSString *phoneNumber = [mainDict objectForKey:@"phoneNumber"];
+            NSString *countryCode = [mainDict objectForKey:@"countryCode"];
             
             user.fullName = [NSString stringWithFormat:@"%@ %@", [self strByRawVal:name], [self strByRawVal:surname]];
             //            user.fullName = [NSString stringWithFormat:@"%@", [self strByRawVal:name]];
@@ -50,6 +52,7 @@
             user.username = username;
             user.email = email;
             user.phoneNumber = [self strByRawVal:phoneNumber];
+            user.countryCode = [self strByRawVal:countryCode];
 
             if(mobileUploadsSpecialFolderUuid != nil && ![mobileUploadsSpecialFolderUuid isKindOfClass:[NSNull class]]) {
                 user.mobileUploadFolderUuid = mobileUploadsSpecialFolderUuid;

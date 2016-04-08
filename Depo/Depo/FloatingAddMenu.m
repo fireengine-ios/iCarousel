@@ -93,6 +93,7 @@
             [delegate floatingMenuDidTriggerAddPhoto];
             break;
         case AddTypeDepoPhoto:
+        case AddTypeDepoPhotoFav:
             [delegate floatingMenuDidTriggerAddPhotoFromDepo];
             break;
         case AddTypeCamera:
@@ -104,10 +105,10 @@
         case AddTypeFile:
             [delegate floatingMenuDidTriggerAddFromDepo];
             break;
-        case AddTypeDepoDocument:
+        case AddTypeDepoDocumentFav:
             [delegate floatingMenuDidTriggerAddDocumentFromDepo];
             break;
-        case AddTypeDepoMusic:
+        case AddTypeDepoMusicFav:
             [delegate floatingMenuDidTriggerAddMusicFromDepo];
             break;
         default:

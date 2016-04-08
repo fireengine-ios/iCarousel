@@ -78,7 +78,27 @@
         cropAndShare.selectedIconName = @"yellow_cropy.png";
         [result addObject:cropAndShare];
     }
-    
+
+    if([APPDELEGATE.session.user.countryCode isEqualToString:@"90"]) {
+        MetaMenu *cellographMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeCellograph];
+        cellographMenu.title = NSLocalizedString(@"MenuCellograph", @"");
+        cellographMenu.iconName = @"logout_icon.png";
+        cellographMenu.selectedIconName = @"yellow_logout_icon.png";
+        [result addObject:cellographMenu];
+    }
+
+    MetaMenu *helpMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeHelp];
+    helpMenu.title = NSLocalizedString(@"MenuHelp", @"");
+    helpMenu.iconName = @"logout_icon.png";
+    helpMenu.selectedIconName = @"yellow_logout_icon.png";
+    [result addObject:helpMenu];
+
+    MetaMenu *reachUshMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeReachUs];
+    reachUshMenu.title = NSLocalizedString(@"MenuReachUs", @"");
+    reachUshMenu.iconName = @"logout_icon.png";
+    reachUshMenu.selectedIconName = @"yellow_logout_icon.png";
+    [result addObject:reachUshMenu];
+
     MetaMenu *logoutMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeLogout];
     logoutMenu.title = NSLocalizedString(@"MenuLogout", @"");
     logoutMenu.iconName = @"logout_icon.png";
@@ -108,7 +128,7 @@
     NSString *iconName = @"blue_add_photo_icon.png";
     switch (addType) {
         case AddTypeMusic:
-        case AddTypeDepoMusic:
+        case AddTypeDepoMusicFav:
             iconName = @"blue_add_music_icon.png";
             break;
         case AddTypeFolder:
@@ -116,14 +136,17 @@
             iconName = @"blue_add_new_folder_icon.png";
             break;
         case AddTypePhoto:
-        case AddTypeDepoPhoto:
+        case AddTypeDepoPhotoFav:
             iconName = @"blue_add_photo_icon.png";
+            break;
+        case AddTypeDepoPhoto:
+            iconName = @"icon_yukle_depo.png";
             break;
         case AddTypeCamera:
             iconName = @"blue_add_camera_shot_icon.png";
             break;
         case AddTypeFile:
-        case AddTypeDepoDocument:
+        case AddTypeDepoDocumentFav:
             iconName = @"blue_add_new_folder_icon.png";
             break;
         default:
@@ -156,11 +179,14 @@
         case AddTypeFile:
             title = NSLocalizedString(@"AddTypeFromDepoTitle", @"");
             break;
-        case AddTypeDepoDocument:
+        case AddTypeDepoDocumentFav:
             title = NSLocalizedString(@"AddTypeDepoDocumentTitle", @"");
             break;
-        case AddTypeDepoMusic:
+        case AddTypeDepoMusicFav:
             title = NSLocalizedString(@"AddTypeDepoMusicTitle", @"");
+            break;
+        case AddTypeDepoPhotoFav:
+            title = NSLocalizedString(@"AddTypeDepoPhotoFavTitle", @"");
             break;
         default:
             break;
@@ -413,10 +439,12 @@
         return AddTypeFile;
     } else if([str isEqualToString:@"AddTypeDepoPhoto"]) {
         return AddTypeDepoPhoto;
-    } else if([str isEqualToString:@"AddTypeDepoDocument"]) {
-        return AddTypeDepoDocument;
-    } else if([str isEqualToString:@"AddTypeDepoMusic"]) {
-        return AddTypeDepoMusic;
+    } else if([str isEqualToString:@"AddTypeDepoDocumentFav"]) {
+        return AddTypeDepoDocumentFav;
+    } else if([str isEqualToString:@"AddTypeDepoMusicFav"]) {
+        return AddTypeDepoMusicFav;
+    } else if([str isEqualToString:@"AddTypeDepoPhotoFav"]) {
+        return AddTypeDepoPhotoFav;
     }
     return AddTypeFolder;
 }

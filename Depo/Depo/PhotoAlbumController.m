@@ -615,6 +615,8 @@
     
     contentModified = YES;
     [self triggerRefresh];
+
+    [[CurioSDK shared] sendEvent:@"ImageCapture" eventValue:@"true"];
 }
 
 - (void) triggerShareForFiles:(NSArray *) fileUuidList {

@@ -43,6 +43,8 @@
 #import "CurrentMusicListModalController.h"
 #import "CurrentPhotoListModalController.h"
 #import "CurrentDocumentListModalController.h"
+#import "SettingsHelpController.h"
+#import "ReachUsController.h"
 
 #define kMenuOpenOriginX 276
 
@@ -232,6 +234,27 @@
     cropAndShare.nav = self.nav;
     cropAndShare.myDelegate = self;
     [self.nav setViewControllers:@[cropAndShare] animated:NO];
+}
+
+- (void) didTriggerHelp {
+    SettingsHelpController *help = [[SettingsHelpController alloc] init];
+    help.nav = self.nav;
+    help.myDelegate = self;
+    [self.nav setViewControllers:@[help] animated:NO];
+}
+
+- (void) didTriggerCellograph {
+    PhotoListController *photo = [[PhotoListController alloc] init];
+    photo.nav = self.nav;
+    photo.myDelegate = self;
+    [self.nav setViewControllers:@[photo] animated:NO];
+}
+
+- (void) didTriggerReachUs {
+    ReachUsController *reachUs = [[ReachUsController alloc] init];
+    reachUs.nav = self.nav;
+    reachUs.myDelegate = self;
+    [self.nav setViewControllers:@[reachUs] animated:NO];
 }
 
 - (void) didTriggerLogout {

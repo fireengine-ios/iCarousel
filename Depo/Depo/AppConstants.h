@@ -259,6 +259,9 @@ typedef enum {
     MenuTypeContactSync,
     MenuTypeLogin,
     MenuTypeCropAndShare,
+    MenuTypeCellograph,
+    MenuTypeReachUs,
+    MenuTypeHelp,
     MenuTypeLogout
 } MenuType;
 
@@ -287,8 +290,9 @@ typedef enum {
     AddTypeCamera,
     AddTypeFile,
     AddTypeDepoPhoto,
-    AddTypeDepoMusic,
-    AddTypeDepoDocument,
+    AddTypeDepoPhotoFav,
+    AddTypeDepoMusicFav,
+    AddTypeDepoDocumentFav,
     AddTypeOther
 } AddType;
 

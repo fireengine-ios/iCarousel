@@ -31,9 +31,9 @@
 	</array>
 	<key>FavouriteListController</key>
 	<array>
-		<string>AddTypeDepoPhoto</string>
-        <string>AddTypeDepoMusic</string>
-        <string>AddTypeDepoDocument</string>
+		<string>AddTypeDepoPhotoFav</string>
+		<string>AddTypeDepoMusicFav</string>
+		<string>AddTypeDepoDocumentFav</string>
 	</array>
 </dict>
 </plist>

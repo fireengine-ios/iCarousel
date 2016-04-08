@@ -10,13 +10,14 @@
 #import "SquareImageView.h"
 #import "ElasticSearchDao.h"
 #import "NoItemView.h"
+#import "MultipleUploadFooterView.h"
 
 @protocol CurrentPhotoListModalDelegate <NSObject>
 - (void) photoModalListReturnedWithSelectedList:(NSArray *) uuids;
 @end
 
 
-@interface CurrentPhotoListModalController : MyModalController <SquareImageDelegate, UIScrollViewDelegate> {
+@interface CurrentPhotoListModalController : MyModalController <SquareImageDelegate, UIScrollViewDelegate, MultipleUploadFooterDelegate> {
     
     ElasticSearchDao *elasticSearchDao;
     
@@ -31,5 +32,6 @@
 @property (nonatomic, strong) UIScrollView *photosScroll;
 @property (nonatomic, strong) NSMutableArray *photoList;
 @property (nonatomic, strong) NSMutableArray *selectedFileList;
+@property (nonatomic, strong) MultipleUploadFooterView *footerView;
 
 @end

@@ -466,6 +466,8 @@
     [[UploadQueue sharedInstance] addNewUploadTask:uploadManager];
     
     [self triggerRefresh];
+
+    [[CurioSDK shared] sendEvent:@"ImageCapture" eventValue:@"true"];
 }
 
 - (void) moreClicked {

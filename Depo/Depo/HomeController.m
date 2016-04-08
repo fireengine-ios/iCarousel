@@ -199,6 +199,8 @@
     
     double percentUsageVal = 100 * ((double)APPDELEGATE.session.usage.usedStorage/(double)APPDELEGATE.session.usage.totalStorage);
 
+    float remainingStorage = APPDELEGATE.session.usage.totalStorage - APPDELEGATE.session.usage.usedStorage;
+
     self.usages = [NSMutableArray arrayWithCapacity:5];
     [usages addObject:[NSNumber numberWithLongLong:(APPDELEGATE.session.usage.imageUsage + APPDELEGATE.session.usage.videoUsage)]];
     [usages addObject:[NSNumber numberWithLongLong:APPDELEGATE.session.usage.musicUsage]];
@@ -283,12 +285,13 @@
         usageSummaryView.frame = usageSummaryRect;
     }
 
-    if(percentUsageVal >= 100) {
-        if(![AppUtil readDoNotShowAgainFlagForKey:@"QUOTA_FULL_DONTSHOW_DEFAULTS_KEY"]) {
+    if(remainingStorage <= 5242880) {
+        if(![AppUtil readDoNotShowAgainFlagForKey:@"QUOTA_FULL_DONTSHOW_DEFAULTS_KEY"] && !APPDELEGATE.session.storageFullPopupShown) {
             CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"TitleLater", @"") withApproveTitle:NSLocalizedString(@"TitleYes", @"") withMessage:NSLocalizedString(@"PackageFullMaessage", @"") withModalType:ModalTypeApprove shouldShowCheck:YES withCheckKey:@"QUOTA_FULL_DONTSHOW_DEFAULTS_KEY"];
             confirm.delegate = self;
             confirm.tag = 222;
             [APPDELEGATE showCustomConfirm:confirm];
+            APPDELEGATE.session.storageFullPopupShown = YES;
         }
     }
 

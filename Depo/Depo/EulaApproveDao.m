@@ -25,6 +25,7 @@
         NSString *responseStr = [request responseString];
         NSLog(@"EULA Approve Response: %@", responseStr);
         [self shouldReturnSuccess];
+        return;
     }
     [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
 }

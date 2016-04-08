@@ -14,6 +14,7 @@
 #import "MMWormhole.h"
 #import "AppUtil.h"
 #import "CacheUtil.h"
+#import "MPush.h"
 
 @implementation UploadQueue
 
@@ -297,6 +298,8 @@
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:AUTO_SYNC_QUEUE_CHANGED_NOTIFICATION object:nil userInfo:nil];
     [self updateGroupUserDefaults];
+
+    [MPush hitEvent:@"photo_uploaded"];
 
     [[UIApplication sharedApplication] endBackgroundTask:manRef.bgTaskI];
     manRef.bgTaskI = UIBackgroundTaskInvalid;

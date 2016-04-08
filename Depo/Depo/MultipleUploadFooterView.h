@@ -21,4 +21,6 @@
 
 @property (nonatomic, strong) id<MultipleUploadFooterDelegate> delegate;
 
+- (id)initWithFrame:(CGRect)frame selectAllEnabled:(BOOL) selectAllFlag;
+
 @end

@@ -19,6 +19,7 @@
 @synthesize photosScroll;
 @synthesize photoList;
 @synthesize selectedFileList;
+@synthesize footerView;
 
 - (id) init {
     if(self = [super init]) {
@@ -33,13 +34,13 @@
         photoList = [[NSMutableArray alloc] init];
         selectedFileList = [[NSMutableArray alloc] init];
 
-        CustomButton *okButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 60, 20) withImageName:nil withTitle:NSLocalizedString(@"OK", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[UIColor whiteColor]];
-        [okButton addTarget:self action:@selector(triggerOk) forControlEvents:UIControlEventTouchUpInside];
+        CustomButton *cancelButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 60, 20) withImageName:nil withTitle:NSLocalizedString(@"ButtonCancel", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[UIColor whiteColor]];
+        [cancelButton addTarget:self action:@selector(triggerDismiss) forControlEvents:UIControlEventTouchUpInside];
         
-        UIBarButtonItem *okItem = [[UIBarButtonItem alloc] initWithCustomView:okButton];
-        self.navigationItem.rightBarButtonItem = okItem;
+        UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithCustomView:cancelButton];
+        self.navigationItem.rightBarButtonItem = cancelItem;
 
-        photosScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex)];
+        photosScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex - 60)];
         photosScroll.delegate = self;
         photosScroll.tag = 111;
         [self.view addSubview:photosScroll];
@@ -47,6 +48,10 @@
         listOffset = 0;
 
         [elasticSearchDao requestPhotosForPage:listOffset andSize:IS_IPAD ? 30 : 21 andSortType:APPDELEGATE.session.sortType];
+
+        footerView = [[MultipleUploadFooterView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60) selectAllEnabled:NO];
+        footerView.delegate = self;
+        [self.view addSubview:footerView];
     }
     return self;
 }
@@ -161,6 +166,17 @@
 - (void) dynamicallyLoadNextPage {
     listOffset ++;
     [elasticSearchDao requestPhotosForPage:listOffset andSize:IS_IPAD ? 30 : 21 andSortType:APPDELEGATE.session.sortType];
+}
+
+- (void) multipleUploadFooterDidTriggerUpload {
+    [delegate photoModalListReturnedWithSelectedList:self.selectedFileList];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void) multipleUploadFooterDidTriggerSelectAll {
+}
+
+- (void) multipleUploadFooterDidTriggerDeselectAll {
 }
 
 - (BOOL)shouldAutorotate {

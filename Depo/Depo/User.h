@@ -19,6 +19,7 @@
 @property (nonatomic, strong) NSString *email;
 @property (nonatomic, strong) NSString *username;
 @property (nonatomic, strong) NSString *phoneNumber;
+@property (nonatomic, strong) NSString *countryCode;
 @property (nonatomic) BOOL cropAndSharePresentFlag;
 @property (nonatomic) AccountType accountType;
 

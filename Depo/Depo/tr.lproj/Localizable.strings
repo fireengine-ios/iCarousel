@@ -658,12 +658,18 @@
 "NewPassAgain"="YENİ ŞİFRE TEKRAR";
 "ChangePassButton"="Şifre değiştir";
 "MsisdnUpdateSuccess"="Numara değişikliğiniz başarıyla tamamlanmıştır";
-"AddTypeFromDepoTitle"="Depodan Ekle";
-"AddTypeDepoPhotoTitle"="Depodan Ekle";
+"AddTypeFromDepoTitle"="Akıllı Depo'dan Yükle";
+"AddTypeDepoPhotoTitle"="Akıllı Depo'dan Yükle";
 
 "PackageFullMaessage"="Akıllı Depo kotanı doldurdun, daha fazla hafıza için paketler sayfamıza göz atmak ister misin?";
 "PortinInfoMessage"="Akıllı Depo faydalarını Turkcell avantajlarıyla kullanmak için paketler sayfamıza göz atmak ister misin?";
 "DontShowAgainMessage"="Bir Daha Gösterme";
 
-"AddTypeDepoMusicTitle"="Depodan Ekle";
-"AddTypeDepoDocumentTitle"="Depodan Ekle";
+"AddTypeDepoMusicTitle"="Müzik Ekle";
+"AddTypeDepoDocumentTitle"="Dosya Ekle";
+"AddTypeDepoPhotoFavTitle"="Resim/Video Ekle";
+
+"MenuCellograph"="Baskı Al";
+"MenuHelp"="Yardım";
+"MenuReachUs"="Bize Ulaşın";
+"ReachUsTitle"="Bize Ulaşın";

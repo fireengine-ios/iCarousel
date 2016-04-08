@@ -605,6 +605,8 @@
     [self.fileTable reloadData];
 
     self.folderModificationFlag = YES;
+
+    [[CurioSDK shared] sendEvent:@"ImageCapture" eventValue:@"true"];
 }
 
 - (NSString *) appendNewFileName:(NSString *) newFileName {
