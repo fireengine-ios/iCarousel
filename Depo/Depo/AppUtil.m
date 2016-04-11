@@ -729,4 +729,13 @@
     return [[NSUserDefaults standardUserDefaults] boolForKey:key];
 }
 
++ (BOOL) isAlreadyRated {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:APP_RATE_FLAG_KEY];
+}
+
++ (void) setAlreadyRated {
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:APP_RATE_FLAG_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 @end

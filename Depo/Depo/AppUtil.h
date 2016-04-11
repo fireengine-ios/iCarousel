@@ -52,4 +52,7 @@
 + (void) writeDoNotShowAgainFlagForKey:(NSString *) key;
 + (BOOL) readDoNotShowAgainFlagForKey:(NSString *) key;
 
++ (BOOL) isAlreadyRated;
++ (void) setAlreadyRated;
+
 @end

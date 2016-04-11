@@ -362,9 +362,9 @@
 
 - (void) tokenManagerDidFailReceivingToken {
     [self hideMainLoading];
-    LoginController *login = [[LoginController alloc] init];
-    MyNavigationController *loginNav = [[MyNavigationController alloc] initWithRootViewController:login];
-    self.window.rootViewController = loginNav;
+    WelcomeController *welcomePage = [[WelcomeController alloc] init];
+    MyNavigationController *welcomeNav = [[MyNavigationController alloc] initWithRootViewController:welcomePage];
+    self.window.rootViewController = welcomeNav;
 }
 
 - (void) tokenManagerDidReceiveBaseUrl {

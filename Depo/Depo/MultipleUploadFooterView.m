@@ -27,7 +27,7 @@
         UIFont *font = [UIFont fontWithName:@"TurkcellSaturaDem" size:18];
         
         if(selectAllFlag) {
-            checkButton = [[CheckButton alloc] initWithFrame:CGRectMake(20, (self.frame.size.height - 20)/2, 21, 20) isInitiallyChecked:NO];
+            checkButton = [[CheckButton alloc] initWithFrame:CGRectMake(20, (self.frame.size.height - 20)/2, 21, 20) isInitiallyChecked:NO autoActionFlag:NO];
             [checkButton addTarget:self action:@selector(triggerCheckAll) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:checkButton];
             

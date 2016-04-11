@@ -71,7 +71,7 @@
         yIndex += 68 + (IS_IPAD ? 20 : 0);
 
         checkButton = [[CheckButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - messageWidth)/2 + 20, yIndex, 21, 20) isInitiallyChecked:NO];
-        [checkButton addTarget:self action:@selector(toggleCheck) forControlEvents:UIControlEventTouchUpInside];
+//        [checkButton addTarget:self action:@selector(toggleCheck) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:checkButton];
 
         CustomLabel *checkLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(checkButton.frame.origin.x + checkButton.frame.size.width + 10, yIndex, messageWidth - 50, 20) withFont:checkFont withColor:[Util UIColorForHexColor:@"555555"] withText:NSLocalizedString(@"MessageDontShowAgainCheck", @"")];

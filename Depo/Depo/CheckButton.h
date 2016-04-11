@@ -24,6 +24,7 @@
 
 - (id)initWithFrame:(CGRect)frame isInitiallyChecked:(BOOL) isInitiallyChecked;
 - (id)initWithFrame:(CGRect)frame withTitle:(NSString *) title isInitiallyChecked:(BOOL) isInitiallyChecked;
+- (id)initWithFrame:(CGRect)frame isInitiallyChecked:(BOOL) isInitiallyChecked autoActionFlag:(BOOL) actionFlag;
 - (void) toggle;
 - (void) manuallyCheck;
 - (void) manuallyUncheck;

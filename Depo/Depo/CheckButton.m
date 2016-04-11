@@ -17,6 +17,10 @@
 @synthesize uncheckedImage;
 
 - (id)initWithFrame:(CGRect)frame isInitiallyChecked:(BOOL) isInitiallyChecked {
+    return [self initWithFrame:frame isInitiallyChecked:isInitiallyChecked autoActionFlag:YES];
+}
+
+- (id)initWithFrame:(CGRect)frame isInitiallyChecked:(BOOL) isInitiallyChecked autoActionFlag:(BOOL) actionFlag {
     self = [super initWithFrame:frame];
     if (self) {
         self.isChecked = isInitiallyChecked;
@@ -29,7 +33,9 @@
             [self setImage:self.uncheckedImage forState:UIControlStateNormal];
         }
         
-        [self addTarget:self action:@selector(toggle) forControlEvents:UIControlEventTouchUpInside];
+        if(actionFlag) {
+            [self addTarget:self action:@selector(toggle) forControlEvents:UIControlEventTouchUpInside];
+        }
     }
     return self;
 }

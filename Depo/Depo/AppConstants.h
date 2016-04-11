@@ -242,6 +242,8 @@ _Pragma("clang diagnostic pop") \
 
 #define REQ_TAG_FOR_PACKAGE 111
 
+#define APP_RATE_FLAG_KEY @"DEPO_APP_RATE_FLAG_KEY"
+
 typedef enum {
     LoginTypeRadius = 0,
     LoginTypeWebSifre

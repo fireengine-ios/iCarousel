@@ -673,3 +673,10 @@
 "MenuHelp"="Yardım";
 "MenuReachUs"="Bize Ulaşın";
 "ReachUsTitle"="Bize Ulaşın";
+
+"ReachUsInfo"="Öneri ve şikayetleriniz için bize ulaşın:";
+"Suggestion"="Öneri";
+"Complaint"="Şikayet";
+"ReachUsPlaceholder"="Öneri ya da şikayetinizi buraya yazın...";
+"SendButton"="Gönder";
+"RateButton"="Puan Ver";
