@@ -17,11 +17,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>19.4</string>
+	<string>19.5</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>2.3</string>
+	<string>2.4</string>
 	<key>UIRequiresFullScreen</key>
 	<true/>
 	<key>UIStatusBarStyle</key>
@@ -74,9 +74,9 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-    <key>MenloApplicationKey</key>
-    <string>TDttInhNx_m-Ee76K35tiRJ5FW-ysLHd</string>
-    <key>MenloPushSandboxMode</key>
-    <false/>
+	<key>MenloApplicationKey</key>
+	<string>TDttInhNx_m-Ee76K35tiRJ5FW-ysLHd</string>
+	<key>MenloPushSandboxMode</key>
+	<false/>
 </dict>
 </plist>

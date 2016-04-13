@@ -200,6 +200,11 @@
         }
     }
     if([request responseStatusCode] == 401) {
+        //TODO 401 kontrolü için 3 satır eklendi. Test et!
+        [APPDELEGATE.session cleanoutAfterLogout];
+        [CacheUtil resetRememberMeToken];
+        [[UploadQueue sharedInstance] cancelAllUploads];
+        
         SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:GENERAL_ERROR_MESSAGE]);
     } else if([request responseStatusCode] == 403) {
         SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:FORBIDDEN_ERROR_MESSAGE]);

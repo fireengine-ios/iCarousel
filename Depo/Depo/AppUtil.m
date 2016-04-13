@@ -79,6 +79,7 @@
         [result addObject:cropAndShare];
     }
 
+    /*
     if([APPDELEGATE.session.user.countryCode isEqualToString:@"90"]) {
         MetaMenu *cellographMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeCellograph];
         cellographMenu.title = NSLocalizedString(@"MenuCellograph", @"");
@@ -98,6 +99,7 @@
     reachUshMenu.iconName = @"logout_icon.png";
     reachUshMenu.selectedIconName = @"yellow_logout_icon.png";
     [result addObject:reachUshMenu];
+     */
 
     MetaMenu *logoutMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeLogout];
     logoutMenu.title = NSLocalizedString(@"MenuLogout", @"");
