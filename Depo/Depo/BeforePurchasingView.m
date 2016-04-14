@@ -29,14 +29,14 @@
         
         if(offer.offerType == OfferTypeTurkcell) {
             UILabel *offerName = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, self.frame.size.width-40, 30)];
-            offerName.text = [self getPackageDisplayName:offer.role];
+            offerName.text = [NSString stringWithFormat:@"%@", [Util transformedHugeSizeValueDecimalIfNecessary:offer.quota]];
             offerName.textColor = [Util UIColorForHexColor:@"199cd4"];
             offerName.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:30];
             offerName.textAlignment = NSTextAlignmentCenter;
-            [self addSubview:offerName];
+//            [self addSubview:offerName];
             
             UILabel *offerQuota = [[UILabel alloc] initWithFrame:CGRectMake(20, 50, self.frame.size.width-40, 30)];
-            offerQuota.text = [NSString stringWithFormat:@"%@ GB", [self quotaCalculator:offer.quota]];
+            offerQuota.text = [NSString stringWithFormat:@"%@", [Util transformedHugeSizeValueDecimalIfNecessary:offer.quota]];
             offerQuota.textColor = [Util UIColorForHexColor:@"199cd4"];
             offerQuota.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:30];
             offerQuota.textAlignment = NSTextAlignmentCenter;

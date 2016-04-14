@@ -61,6 +61,7 @@
         NSString *rememberMeToken = [headerParams objectForKey:@"X-Remember-Me-Token"];
         NSNumber *newUserFlag = [headerParams objectForKey:@"X-New-User"];
         NSNumber *migrationUserFlag = [headerParams objectForKey:@"X-Migration-User"];
+        NSString *accountWarning = [headerParams objectForKey:@"X-Account-Warning"];
         
 //        NSLog(@"Radius Login Response Headers: %@", headerParams);
 //        NSLog(@"Radius login response: %@", [request responseString]);
@@ -74,6 +75,27 @@
             APPDELEGATE.session.migrationUserFlag = [migrationUserFlag boolValue];
         } else {
             APPDELEGATE.session.migrationUserFlag = NO;
+        }
+        if(accountWarning != nil && ![accountWarning isKindOfClass:[NSNull class]]) {
+            if([accountWarning isEqualToString:@"EMPTY_MSISDN"]) {
+                APPDELEGATE.session.msisdnEmpty = YES;
+            } else {
+                APPDELEGATE.session.msisdnEmpty = NO;
+            }
+            if([accountWarning isEqualToString:@"EMPTY_EMAIL"]) {
+                APPDELEGATE.session.emailEmpty = YES;
+            } else {
+                APPDELEGATE.session.emailEmpty = NO;
+            }
+            if([accountWarning isEqualToString:@"EMAIL_NOT_VERIFIED"]) {
+                APPDELEGATE.session.emailNotVerified = YES;
+            } else {
+                APPDELEGATE.session.emailNotVerified = NO;
+            }
+        } else {
+            APPDELEGATE.session.msisdnEmpty = NO;
+            APPDELEGATE.session.emailEmpty = NO;
+            APPDELEGATE.session.emailNotVerified = NO;
         }
         
         if(rememberMeToken != nil && ![rememberMeToken isKindOfClass:[NSNull class]]) {

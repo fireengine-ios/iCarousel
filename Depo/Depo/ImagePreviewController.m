@@ -504,7 +504,7 @@
                 [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
                 activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
                 
-                //    activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll];
+                activityViewController.excludedActivityTypes = @[@"com.igones.adepo.DepoShareExtension"];
 
                 if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
                     [self presentViewController:activityViewController animated:YES completion:nil];
