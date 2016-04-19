@@ -244,6 +244,12 @@ _Pragma("clang diagnostic pop") \
 
 #define APP_RATE_FLAG_KEY @"DEPO_APP_RATE_FLAG_KEY"
 
+#define TUTORIAL_MENU_KEY @"ADEPO_TUTORIAL_MENU_KEY"
+
+#define TUTORIAL_DETAIL_KEY @"ADEPO_TUTORIAL_DETAIL_KEY"
+
+#define FIRST_UPLOAD_FLAG_KEY @"DEPO_FIRST_UPLOAD_FLAG_KEY"
+
 typedef enum {
     LoginTypeRadius = 0,
     LoginTypeWebSifre
@@ -440,6 +446,21 @@ typedef enum {
     MsisdnUpdateTypeEmpty,
     MsisdnUpdateTypeSettings
 } MsisdnUpdateType;
+
+typedef enum {
+    FeedBackTypeSuggestion,
+    FeedBackTypeComplaint
+} FeedBackType;
+
+typedef enum {
+    DropboxExportStatusPending,
+    DropboxExportStatusRunning,
+    DropboxExportStatusFailed,
+    DropboxExportStatusWaitingAction,
+    DropboxExportStatusScheduled,
+    DropboxExportStatusFinished,
+    DropboxExportStatusCancelled
+} DropboxExportStatus;
 
 @interface AppConstants : NSObject
 

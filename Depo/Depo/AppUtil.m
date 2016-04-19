@@ -79,12 +79,11 @@
         [result addObject:cropAndShare];
     }
 
-    /*
     if([APPDELEGATE.session.user.countryCode isEqualToString:@"90"]) {
         MetaMenu *cellographMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeCellograph];
         cellographMenu.title = NSLocalizedString(@"MenuCellograph", @"");
-        cellographMenu.iconName = @"logout_icon.png";
-        cellographMenu.selectedIconName = @"yellow_logout_icon.png";
+        cellographMenu.iconName = @"white_print_icon.png";
+        cellographMenu.selectedIconName = @"white_print_icon.png";
         [result addObject:cellographMenu];
     }
 
@@ -96,10 +95,9 @@
 
     MetaMenu *reachUshMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeReachUs];
     reachUshMenu.title = NSLocalizedString(@"MenuReachUs", @"");
-    reachUshMenu.iconName = @"logout_icon.png";
-    reachUshMenu.selectedIconName = @"yellow_logout_icon.png";
+    reachUshMenu.iconName = @"icon_menu_bizeulasin_w.png";
+    reachUshMenu.selectedIconName = @"icon_menu_bizeulasin.png";
     [result addObject:reachUshMenu];
-     */
 
     MetaMenu *logoutMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeLogout];
     logoutMenu.title = NSLocalizedString(@"MenuLogout", @"");
@@ -738,6 +736,15 @@
 + (void) setAlreadyRated {
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:APP_RATE_FLAG_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (void) writeFirstUploadFlag {
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:FIRST_UPLOAD_FLAG_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (BOOL) readFirstUploadFlag {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:FIRST_UPLOAD_FLAG_KEY];
 }
 
 @end

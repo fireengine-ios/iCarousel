@@ -15,6 +15,12 @@
 #import "AppUtil.h"
 #import "CacheUtil.h"
 #import "MPush.h"
+#import "FirstUploadFlagDao.h"
+
+@interface UploadQueue() {
+    FirstUploadFlagDao *firstUploadFlagDao;
+}
+@end
 
 @implementation UploadQueue
 
@@ -300,6 +306,12 @@
     [self updateGroupUserDefaults];
 
     [MPush hitEvent:@"photo_uploaded"];
+    
+    if(![AppUtil readFirstUploadFlag]) {
+        firstUploadFlagDao = [[FirstUploadFlagDao alloc] init];
+        [firstUploadFlagDao requestSendFirstUploadFlag];
+        [AppUtil writeFirstUploadFlag];
+    }
 
     [[UIApplication sharedApplication] endBackgroundTask:manRef.bgTaskI];
     manRef.bgTaskI = UIBackgroundTaskInvalid;

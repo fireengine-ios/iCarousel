@@ -52,6 +52,8 @@
 
 #import "MPush.h"
 
+#import <DropboxSDK/DropboxSDK.h>
+
 //TODO info'larda version update
 
 #define NO_CONN_ALERT_TAG 111
@@ -114,6 +116,9 @@
     [[CurioSDK shared] startSession:@"http://curio.turkcell.com.tr/api/v2" apiKey:@"cab314f33df2514764664e5544def586" trackingCode:@"KL2XNFIE" sessionTimeout:30 periodicDispatchEnabled:YES dispatchPeriod:5 maxCachedActivitiyCount:10 loggingEnabled:NO logLevel:0 registerForRemoteNotifications:NO notificationTypes:@"Sound,Badge,Alert" fetchLocationEnabled:NO maxValidLocationTimeInterval:600 delegate:self appLaunchOptions:launchOptions];
 
     [[CurioSDK shared] sendEvent:@"ApplicationStarted" eventValue:@"true"];
+
+    DBSession *dbSession = [[DBSession alloc] initWithAppKey:@"bxvk9rco608rizf" appSecret:@"my8utjj5dz16m5i" root:kDBRootDropbox];
+    [DBSession setSharedSession:dbSession];
 
     [self addInitialBgImage];
 
@@ -715,6 +720,16 @@ void uncaughtExceptionHandler(NSException *exception) {
             [req setDelegate:nil];
         }
     }
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url sourceApplication:(NSString *)source annotation:(id)annotation {
+    if ([[DBSession sharedSession] handleOpenURL:url]) {
+        if ([[DBSession sharedSession] isLinked]) {
+            NSLog(@"App linked successfully!");
+        }
+        return YES;
+    }
+    return NO;
 }
 
 @end

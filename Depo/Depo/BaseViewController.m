@@ -45,6 +45,7 @@
 #import "CurrentDocumentListModalController.h"
 #import "SettingsHelpController.h"
 #import "ReachUsController.h"
+#import "TutorialView.h"
 
 #define kMenuOpenOriginX 276
 
@@ -197,6 +198,13 @@
                      completion:^(BOOL finished) {
                          menuOpen = !menuOpen;
                          transparentView.hidden = !menuOpen;
+                         if(menuOpen) {
+                             //TODO bir sonraki pakette cikacak !!!!!
+                             if(![AppUtil readDoNotShowAgainFlagForKey:TUTORIAL_MENU_KEY]) {
+                                 TutorialView *tutorialView = [[TutorialView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) withBgImageName:@"img_baski_1.jpg" withTitle:@"" withKey:TUTORIAL_MENU_KEY];
+                                 [self.view addSubview:tutorialView];
+                             }
+                         }
                      }];
 }
 

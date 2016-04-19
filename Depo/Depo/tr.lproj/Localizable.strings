@@ -680,3 +680,13 @@
 "ReachUsPlaceholder"="Öneri ya da şikayetinizi buraya yazın...";
 "SendButton"="Gönder";
 "RateButton"="Puan Ver";
+
+"MessageSentSuccessfully"="Mesajınız başarıyla gönderildi";
+"FeedbackTypeComplaint"="Şikayet";
+"FeedbackTypeSuggestion"="Öneri";
+"FeedbackPlaceholder"="Öneri ya da şikayetinizi buraya girin...";
+
+"ExportFromDropbox"="Dropbox'tan Taşı";
+"Export"="Taşı";
+"FeedbackChoiceError"="Lütfen mesaj kategorinizi seçiniz";
+"FeedbackTextError"="Lütfen mesajınızı girin";

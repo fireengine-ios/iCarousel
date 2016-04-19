@@ -12,6 +12,8 @@
 #import "AppDelegate.h"
 #import "BaseViewController.h"
 #import "PrintWebViewController.h"
+#import "AppUtil.h"
+#import "TutorialView.h"
 
 @interface ImagePreviewController ()
 
@@ -468,6 +470,13 @@
     [moreButton addTarget:self action:@selector(moreClicked) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *moreItem = [[UIBarButtonItem alloc] initWithCustomView:moreButton];
     self.navigationItem.rightBarButtonItem = moreItem;
+
+    //TODO bir sonraki pakette cikacak !!!!!
+    if(![AppUtil readDoNotShowAgainFlagForKey:TUTORIAL_DETAIL_KEY]) {
+        UIWindow *window = APPDELEGATE.window;
+        TutorialView *tutorialView = [[TutorialView alloc] initWithFrame:CGRectMake(0, 0, window.frame.size.width, window.frame.size.height) withBgImageName:@"img_baski_2.jpg" withTitle:@"" withKey:TUTORIAL_DETAIL_KEY];
+        [window addSubview:tutorialView];
+    }
 }
 
 - (void) viewDidAppear:(BOOL)animated {

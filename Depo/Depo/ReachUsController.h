@@ -7,7 +7,12 @@
 //
 
 #import "MyViewController.h"
+#import "FeedbackDao.h"
 
-@interface ReachUsController : MyViewController
+@interface ReachUsController : MyViewController <UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, UIGestureRecognizerDelegate>
+
+@property (nonatomic, strong) FeedbackDao *dao;
+@property (nonatomic, strong) UITableView *choiceTable;
+@property (nonatomic, strong) UITextView *textView;
 
 @end

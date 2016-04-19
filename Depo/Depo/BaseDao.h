@@ -132,6 +132,16 @@
 
 #define APPROVE_EULA_URL BASE_URL@"/eula/approve/%d"
 
+#define FIRST_UPLOAD_FLAG_URL BASE_URL@"/account/firstUpload"
+
+#define FEEDBACK_URL BASE_URL@"/feedback/send/%@"
+
+#define DROPBOX_CONNECT_URL BASE_URL@"/migration/dropbox/connect?accessToken=%@"
+
+#define DROPBOX_START_URL BASE_URL@"/migration/dropbox/start"
+
+#define DROPBOX_STATUS_URL BASE_URL@"/migration/dropbox/status"
+
 #define APN_URL @"http://pushserver.turkcell.com.tr/PushServer/rest/registerdevice/"
 
 #define SHORTEN_URL @"https://www.googleapis.com/urlshortener/v1/url"

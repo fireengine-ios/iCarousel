@@ -793,6 +793,16 @@
 		56BDE2501A8DEA8B0082F8B8 /* OfferCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 56BDE24F1A8DEA8B0082F8B8 /* OfferCell.m */; };
 		56FCFDD51A9C7DDA00AC041C /* info_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 56FCFDD31A9C7DDA00AC041C /* info_icon.png */; };
 		56FCFDD61A9C7DDA00AC041C /* info_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56FCFDD41A9C7DDA00AC041C /* info_icon@2x.png */; };
+		94328BD41CC3E03300599CEE /* img_baski_1@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 94328BD21CC3E03300599CEE /* img_baski_1@2x.jpg */; };
+		94328BD51CC3E03300599CEE /* img_baski_2@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 94328BD31CC3E03300599CEE /* img_baski_2@2x.jpg */; };
+		94328BD81CC3E03C00599CEE /* img_baski_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 94328BD61CC3E03C00599CEE /* img_baski_1.jpg */; };
+		94328BD91CC3E03C00599CEE /* img_baski_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 94328BD71CC3E03C00599CEE /* img_baski_2.jpg */; };
+		94328BDC1CC3E04400599CEE /* img_baski_1@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 94328BDA1CC3E04400599CEE /* img_baski_1@3x.jpg */; };
+		94328BDD1CC3E04400599CEE /* img_baski_2@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 94328BDB1CC3E04400599CEE /* img_baski_2@3x.jpg */; };
+		94328BE01CC3E0B900599CEE /* TutorialView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94328BDF1CC3E0B900599CEE /* TutorialView.m */; };
+		94328BE31CC54E5A00599CEE /* FirstUploadFlagDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94328BE21CC54E5A00599CEE /* FirstUploadFlagDao.m */; };
+		94328BE61CC5666D00599CEE /* FeedbackDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94328BE51CC5666D00599CEE /* FeedbackDao.m */; };
+		94328BE91CC572DF00599CEE /* FeedbackChoiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94328BE81CC572DF00599CEE /* FeedbackChoiceCell.m */; };
 		9445B97B1C9F28D2000FDB80 /* FileListPopupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9445B97A1C9F28D2000FDB80 /* FileListPopupController.m */; };
 		9445B97E1C9F28FE000FDB80 /* PhotoListPopupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9445B97D1C9F28FE000FDB80 /* PhotoListPopupController.m */; };
 		9454FA601CAA81FD00BF1288 /* CurrentMusicListModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9454FA5F1CAA81FD00BF1288 /* CurrentMusicListModalController.m */; };
@@ -831,6 +841,33 @@
 		94BEABF81CAD1BF3002E37A7 /* EulaCheckDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94BEABF71CAD1BF3002E37A7 /* EulaCheckDao.m */; };
 		94BEABFB1CAD1BFE002E37A7 /* EulaApproveDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94BEABFA1CAD1BFE002E37A7 /* EulaApproveDao.m */; };
 		94BEABFE1CAD1D6C002E37A7 /* Eula.m in Sources */ = {isa = PBXBuildFile; fileRef = 94BEABFD1CAD1D6C002E37A7 /* Eula.m */; };
+		94E548FD1CC624ED003CB5DC /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94E548FC1CC624ED003CB5DC /* DropboxSDK.framework */; };
+		94E549001CC63480003CB5DC /* DropboxConnectDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E548FF1CC63480003CB5DC /* DropboxConnectDao.m */; };
+		94E549031CC6348E003CB5DC /* DropboxStartDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E549021CC6348E003CB5DC /* DropboxStartDao.m */; };
+		94E549061CC6349C003CB5DC /* DropboxStatusDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E549051CC6349C003CB5DC /* DropboxStatusDao.m */; };
+		94E549091CC63718003CB5DC /* DropboxExportController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E549081CC63718003CB5DC /* DropboxExportController.m */; };
+		94E5490C1CC638AA003CB5DC /* DropboxExportResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E5490B1CC638AA003CB5DC /* DropboxExportResult.m */; };
+		94E549141CC6BA27003CB5DC /* icon_complaint.png in Resources */ = {isa = PBXBuildFile; fileRef = 94E5490D1CC6BA26003CB5DC /* icon_complaint.png */; };
+		94E549151CC6BA27003CB5DC /* icon_dialog_success.png in Resources */ = {isa = PBXBuildFile; fileRef = 94E5490E1CC6BA26003CB5DC /* icon_dialog_success.png */; };
+		94E549161CC6BA27003CB5DC /* icon_menu_bizeulasin_w.png in Resources */ = {isa = PBXBuildFile; fileRef = 94E5490F1CC6BA26003CB5DC /* icon_menu_bizeulasin_w.png */; };
+		94E549171CC6BA27003CB5DC /* icon_menu_bizeulasin.png in Resources */ = {isa = PBXBuildFile; fileRef = 94E549101CC6BA26003CB5DC /* icon_menu_bizeulasin.png */; };
+		94E549181CC6BA27003CB5DC /* icon_select_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 94E549111CC6BA26003CB5DC /* icon_select_off.png */; };
+		94E549191CC6BA27003CB5DC /* icon_select_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 94E549121CC6BA27003CB5DC /* icon_select_on.png */; };
+		94E5491A1CC6BA27003CB5DC /* icon_suggestion.png in Resources */ = {isa = PBXBuildFile; fileRef = 94E549131CC6BA27003CB5DC /* icon_suggestion.png */; };
+		94E549221CC6BA34003CB5DC /* icon_complaint@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94E5491B1CC6BA34003CB5DC /* icon_complaint@2x.png */; };
+		94E549231CC6BA34003CB5DC /* icon_dialog_success@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94E5491C1CC6BA34003CB5DC /* icon_dialog_success@2x.png */; };
+		94E549241CC6BA34003CB5DC /* icon_menu_bizeulasin_w@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94E5491D1CC6BA34003CB5DC /* icon_menu_bizeulasin_w@2x.png */; };
+		94E549251CC6BA34003CB5DC /* icon_menu_bizeulasin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94E5491E1CC6BA34003CB5DC /* icon_menu_bizeulasin@2x.png */; };
+		94E549261CC6BA34003CB5DC /* icon_select_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94E5491F1CC6BA34003CB5DC /* icon_select_off@2x.png */; };
+		94E549271CC6BA34003CB5DC /* icon_select_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94E549201CC6BA34003CB5DC /* icon_select_on@2x.png */; };
+		94E549281CC6BA34003CB5DC /* icon_suggestion@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94E549211CC6BA34003CB5DC /* icon_suggestion@2x.png */; };
+		94E549301CC6BA43003CB5DC /* icon_complaint@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94E549291CC6BA43003CB5DC /* icon_complaint@3x.png */; };
+		94E549311CC6BA43003CB5DC /* icon_dialog_success@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94E5492A1CC6BA43003CB5DC /* icon_dialog_success@3x.png */; };
+		94E549321CC6BA43003CB5DC /* icon_menu_bizeulasin_w@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94E5492B1CC6BA43003CB5DC /* icon_menu_bizeulasin_w@3x.png */; };
+		94E549331CC6BA43003CB5DC /* icon_menu_bizeulasin@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94E5492C1CC6BA43003CB5DC /* icon_menu_bizeulasin@3x.png */; };
+		94E549341CC6BA43003CB5DC /* icon_select_off@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94E5492D1CC6BA43003CB5DC /* icon_select_off@3x.png */; };
+		94E549351CC6BA43003CB5DC /* icon_select_on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94E5492E1CC6BA43003CB5DC /* icon_select_on@3x.png */; };
+		94E549361CC6BA43003CB5DC /* icon_suggestion@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94E5492F1CC6BA43003CB5DC /* icon_suggestion@3x.png */; };
 		94E7B4B21CB2D12300385016 /* ReachUsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E7B4B11CB2D12300385016 /* ReachUsController.m */; };
 		94EF279C1C982B460087EFBE /* NoItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94EF279B1C982B460087EFBE /* NoItemView.m */; };
 /* End PBXBuildFile section */
@@ -1993,6 +2030,20 @@
 		56BDE24F1A8DEA8B0082F8B8 /* OfferCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfferCell.m; sourceTree = "<group>"; };
 		56FCFDD31A9C7DDA00AC041C /* info_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info_icon.png; sourceTree = "<group>"; };
 		56FCFDD41A9C7DDA00AC041C /* info_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "info_icon@2x.png"; sourceTree = "<group>"; };
+		94328BD21CC3E03300599CEE /* img_baski_1@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "img_baski_1@2x.jpg"; sourceTree = "<group>"; };
+		94328BD31CC3E03300599CEE /* img_baski_2@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "img_baski_2@2x.jpg"; sourceTree = "<group>"; };
+		94328BD61CC3E03C00599CEE /* img_baski_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img_baski_1.jpg; sourceTree = "<group>"; };
+		94328BD71CC3E03C00599CEE /* img_baski_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img_baski_2.jpg; sourceTree = "<group>"; };
+		94328BDA1CC3E04400599CEE /* img_baski_1@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "img_baski_1@3x.jpg"; sourceTree = "<group>"; };
+		94328BDB1CC3E04400599CEE /* img_baski_2@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "img_baski_2@3x.jpg"; sourceTree = "<group>"; };
+		94328BDE1CC3E0B900599CEE /* TutorialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialView.h; sourceTree = "<group>"; };
+		94328BDF1CC3E0B900599CEE /* TutorialView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialView.m; sourceTree = "<group>"; };
+		94328BE11CC54E5A00599CEE /* FirstUploadFlagDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstUploadFlagDao.h; sourceTree = "<group>"; };
+		94328BE21CC54E5A00599CEE /* FirstUploadFlagDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstUploadFlagDao.m; sourceTree = "<group>"; };
+		94328BE41CC5666D00599CEE /* FeedbackDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackDao.h; sourceTree = "<group>"; };
+		94328BE51CC5666D00599CEE /* FeedbackDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackDao.m; sourceTree = "<group>"; };
+		94328BE71CC572DF00599CEE /* FeedbackChoiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackChoiceCell.h; sourceTree = "<group>"; };
+		94328BE81CC572DF00599CEE /* FeedbackChoiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackChoiceCell.m; sourceTree = "<group>"; };
 		9445B9791C9F28D2000FDB80 /* FileListPopupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileListPopupController.h; sourceTree = "<group>"; };
 		9445B97A1C9F28D2000FDB80 /* FileListPopupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileListPopupController.m; sourceTree = "<group>"; };
 		9445B97C1C9F28FE000FDB80 /* PhotoListPopupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoListPopupController.h; sourceTree = "<group>"; };
@@ -2047,6 +2098,38 @@
 		94BEABFA1CAD1BFE002E37A7 /* EulaApproveDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EulaApproveDao.m; sourceTree = "<group>"; };
 		94BEABFC1CAD1D6C002E37A7 /* Eula.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Eula.h; sourceTree = "<group>"; };
 		94BEABFD1CAD1D6C002E37A7 /* Eula.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Eula.m; sourceTree = "<group>"; };
+		94E548FC1CC624ED003CB5DC /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DropboxSDK.framework; sourceTree = "<group>"; };
+		94E548FE1CC63480003CB5DC /* DropboxConnectDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxConnectDao.h; sourceTree = "<group>"; };
+		94E548FF1CC63480003CB5DC /* DropboxConnectDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropboxConnectDao.m; sourceTree = "<group>"; };
+		94E549011CC6348E003CB5DC /* DropboxStartDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxStartDao.h; sourceTree = "<group>"; };
+		94E549021CC6348E003CB5DC /* DropboxStartDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropboxStartDao.m; sourceTree = "<group>"; };
+		94E549041CC6349C003CB5DC /* DropboxStatusDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxStatusDao.h; sourceTree = "<group>"; };
+		94E549051CC6349C003CB5DC /* DropboxStatusDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropboxStatusDao.m; sourceTree = "<group>"; };
+		94E549071CC63718003CB5DC /* DropboxExportController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxExportController.h; sourceTree = "<group>"; };
+		94E549081CC63718003CB5DC /* DropboxExportController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropboxExportController.m; sourceTree = "<group>"; };
+		94E5490A1CC638AA003CB5DC /* DropboxExportResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxExportResult.h; sourceTree = "<group>"; };
+		94E5490B1CC638AA003CB5DC /* DropboxExportResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropboxExportResult.m; sourceTree = "<group>"; };
+		94E5490D1CC6BA26003CB5DC /* icon_complaint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_complaint.png; sourceTree = "<group>"; };
+		94E5490E1CC6BA26003CB5DC /* icon_dialog_success.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_dialog_success.png; sourceTree = "<group>"; };
+		94E5490F1CC6BA26003CB5DC /* icon_menu_bizeulasin_w.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_menu_bizeulasin_w.png; sourceTree = "<group>"; };
+		94E549101CC6BA26003CB5DC /* icon_menu_bizeulasin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_menu_bizeulasin.png; sourceTree = "<group>"; };
+		94E549111CC6BA26003CB5DC /* icon_select_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_select_off.png; sourceTree = "<group>"; };
+		94E549121CC6BA27003CB5DC /* icon_select_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_select_on.png; sourceTree = "<group>"; };
+		94E549131CC6BA27003CB5DC /* icon_suggestion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_suggestion.png; sourceTree = "<group>"; };
+		94E5491B1CC6BA34003CB5DC /* icon_complaint@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_complaint@2x.png"; sourceTree = "<group>"; };
+		94E5491C1CC6BA34003CB5DC /* icon_dialog_success@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_dialog_success@2x.png"; sourceTree = "<group>"; };
+		94E5491D1CC6BA34003CB5DC /* icon_menu_bizeulasin_w@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_menu_bizeulasin_w@2x.png"; sourceTree = "<group>"; };
+		94E5491E1CC6BA34003CB5DC /* icon_menu_bizeulasin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_menu_bizeulasin@2x.png"; sourceTree = "<group>"; };
+		94E5491F1CC6BA34003CB5DC /* icon_select_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_select_off@2x.png"; sourceTree = "<group>"; };
+		94E549201CC6BA34003CB5DC /* icon_select_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_select_on@2x.png"; sourceTree = "<group>"; };
+		94E549211CC6BA34003CB5DC /* icon_suggestion@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_suggestion@2x.png"; sourceTree = "<group>"; };
+		94E549291CC6BA43003CB5DC /* icon_complaint@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_complaint@3x.png"; sourceTree = "<group>"; };
+		94E5492A1CC6BA43003CB5DC /* icon_dialog_success@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_dialog_success@3x.png"; sourceTree = "<group>"; };
+		94E5492B1CC6BA43003CB5DC /* icon_menu_bizeulasin_w@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_menu_bizeulasin_w@3x.png"; sourceTree = "<group>"; };
+		94E5492C1CC6BA43003CB5DC /* icon_menu_bizeulasin@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_menu_bizeulasin@3x.png"; sourceTree = "<group>"; };
+		94E5492D1CC6BA43003CB5DC /* icon_select_off@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_select_off@3x.png"; sourceTree = "<group>"; };
+		94E5492E1CC6BA43003CB5DC /* icon_select_on@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_select_on@3x.png"; sourceTree = "<group>"; };
+		94E5492F1CC6BA43003CB5DC /* icon_suggestion@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_suggestion@3x.png"; sourceTree = "<group>"; };
 		94E7B4B01CB2D12300385016 /* ReachUsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachUsController.h; sourceTree = "<group>"; };
 		94E7B4B11CB2D12300385016 /* ReachUsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachUsController.m; sourceTree = "<group>"; };
 		94EF279A1C982B460087EFBE /* NoItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoItemView.h; sourceTree = "<group>"; };
@@ -2058,6 +2141,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94E548FD1CC624ED003CB5DC /* DropboxSDK.framework in Frameworks */,
 				94B9D22A1CA86C4300FC28F2 /* libMPush.a in Frameworks */,
 				05033BE11C24B22900FA2E5C /* StoreKit.framework in Frameworks */,
 				05F9318A1C160E7000858223 /* LocalAuthentication.framework in Frameworks */,
@@ -2151,6 +2235,7 @@
 		051E1DF519CAC2F900FD1E03 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				94E548FC1CC624ED003CB5DC /* DropboxSDK.framework */,
 				05033BE01C24B22900FA2E5C /* StoreKit.framework */,
 				05F931891C160E7000858223 /* LocalAuthentication.framework */,
 				05F931871C160E2F00858223 /* Accelerate.framework */,
@@ -2442,6 +2527,8 @@
 				247268901B7CC29900804E56 /* CustomAdvertisementView.m */,
 				94EF279A1C982B460087EFBE /* NoItemView.h */,
 				94EF279B1C982B460087EFBE /* NoItemView.m */,
+				94328BDE1CC3E0B900599CEE /* TutorialView.h */,
+				94328BDF1CC3E0B900599CEE /* TutorialView.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -2571,6 +2658,16 @@
 				94BEABF71CAD1BF3002E37A7 /* EulaCheckDao.m */,
 				94BEABF91CAD1BFE002E37A7 /* EulaApproveDao.h */,
 				94BEABFA1CAD1BFE002E37A7 /* EulaApproveDao.m */,
+				94328BE11CC54E5A00599CEE /* FirstUploadFlagDao.h */,
+				94328BE21CC54E5A00599CEE /* FirstUploadFlagDao.m */,
+				94328BE41CC5666D00599CEE /* FeedbackDao.h */,
+				94328BE51CC5666D00599CEE /* FeedbackDao.m */,
+				94E548FE1CC63480003CB5DC /* DropboxConnectDao.h */,
+				94E548FF1CC63480003CB5DC /* DropboxConnectDao.m */,
+				94E549011CC6348E003CB5DC /* DropboxStartDao.h */,
+				94E549021CC6348E003CB5DC /* DropboxStartDao.m */,
+				94E549041CC6349C003CB5DC /* DropboxStatusDao.h */,
+				94E549051CC6349C003CB5DC /* DropboxStatusDao.m */,
 			);
 			name = http;
 			sourceTree = "<group>";
@@ -2622,6 +2719,8 @@
 				05C7CB691ABC91B200A7BF8E /* MetaFileSummary.m */,
 				94BEABFC1CAD1D6C002E37A7 /* Eula.h */,
 				94BEABFD1CAD1D6C002E37A7 /* Eula.m */,
+				94E5490A1CC638AA003CB5DC /* DropboxExportResult.h */,
+				94E5490B1CC638AA003CB5DC /* DropboxExportResult.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -2629,6 +2728,8 @@
 		051E1E2A19CAC54500FD1E03 /* cell */ = {
 			isa = PBXGroup;
 			children = (
+				94328BE71CC572DF00599CEE /* FeedbackChoiceCell.h */,
+				94328BE81CC572DF00599CEE /* FeedbackChoiceCell.m */,
 				051CB39319D2E3F200E5FC88 /* AbstractFileFolderCell.h */,
 				051CB39419D2E3F200E5FC88 /* AbstractFileFolderCell.m */,
 				05D5E5A01B09D5EC00A22957 /* OfferRedesignCell.h */,
@@ -2882,6 +2983,8 @@
 				94884C9A1C90C506006722F7 /* ChangePassController.m */,
 				94884CA81C91A469006722F7 /* UpdateMsisdnController.h */,
 				94884CA91C91A469006722F7 /* UpdateMsisdnController.m */,
+				94E549071CC63718003CB5DC /* DropboxExportController.h */,
+				94E549081CC63718003CB5DC /* DropboxExportController.m */,
 			);
 			name = profile;
 			sourceTree = "<group>";
@@ -2939,6 +3042,33 @@
 		0589060219CC226500A9E517 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				94328BD61CC3E03C00599CEE /* img_baski_1.jpg */,
+				94328BD21CC3E03300599CEE /* img_baski_1@2x.jpg */,
+				94328BDA1CC3E04400599CEE /* img_baski_1@3x.jpg */,
+				94328BD71CC3E03C00599CEE /* img_baski_2.jpg */,
+				94328BD31CC3E03300599CEE /* img_baski_2@2x.jpg */,
+				94328BDB1CC3E04400599CEE /* img_baski_2@3x.jpg */,
+				94E549291CC6BA43003CB5DC /* icon_complaint@3x.png */,
+				94E5492A1CC6BA43003CB5DC /* icon_dialog_success@3x.png */,
+				94E5492B1CC6BA43003CB5DC /* icon_menu_bizeulasin_w@3x.png */,
+				94E5492C1CC6BA43003CB5DC /* icon_menu_bizeulasin@3x.png */,
+				94E5492D1CC6BA43003CB5DC /* icon_select_off@3x.png */,
+				94E5492E1CC6BA43003CB5DC /* icon_select_on@3x.png */,
+				94E5492F1CC6BA43003CB5DC /* icon_suggestion@3x.png */,
+				94E5491B1CC6BA34003CB5DC /* icon_complaint@2x.png */,
+				94E5491C1CC6BA34003CB5DC /* icon_dialog_success@2x.png */,
+				94E5491D1CC6BA34003CB5DC /* icon_menu_bizeulasin_w@2x.png */,
+				94E5491E1CC6BA34003CB5DC /* icon_menu_bizeulasin@2x.png */,
+				94E5491F1CC6BA34003CB5DC /* icon_select_off@2x.png */,
+				94E549201CC6BA34003CB5DC /* icon_select_on@2x.png */,
+				94E549211CC6BA34003CB5DC /* icon_suggestion@2x.png */,
+				94E5490D1CC6BA26003CB5DC /* icon_complaint.png */,
+				94E5490E1CC6BA26003CB5DC /* icon_dialog_success.png */,
+				94E5490F1CC6BA26003CB5DC /* icon_menu_bizeulasin_w.png */,
+				94E549101CC6BA26003CB5DC /* icon_menu_bizeulasin.png */,
+				94E549111CC6BA26003CB5DC /* icon_select_off.png */,
+				94E549121CC6BA27003CB5DC /* icon_select_on.png */,
+				94E549131CC6BA27003CB5DC /* icon_suggestion.png */,
 				94B6C8741CB657520083C1A8 /* icon_yukle_depo.png */,
 				94B6C8761CB6575A0083C1A8 /* icon_yukle_depo@2x.png */,
 				94B6C8781CB657610083C1A8 /* icon_yukle_depo@3x.png */,
@@ -3748,6 +3878,7 @@
 			files = (
 				056F29D21C4E8071001DD486 /* icon_verif_audio@3x.png in Resources */,
 				059AD37E1A1E26A000AA41BD /* circle_doc_icon.png in Resources */,
+				94328BD81CC3E03C00599CEE /* img_baski_1.jpg in Resources */,
 				05A7CE5E1A7FC0FD00020B6F /* yuvarlakbulut.png in Resources */,
 				0526448F19D5A26400B63759 /* notifications_icon@2x.png in Resources */,
 				051412A119D46393000EAE63 /* Default_old@2x.png in Resources */,
@@ -3758,6 +3889,7 @@
 				94884C901C90AFC3006722F7 /* buttonbg_yellow.png in Resources */,
 				0589066319CC524900A9E517 /* TurkcellSaturaReg.ttf in Resources */,
 				05994F971A0B57080081F000 /* music_backward.png in Resources */,
+				94E549351CC6BA43003CB5DC /* icon_select_on@3x.png in Resources */,
 				94884C941C90AFCC006722F7 /* buttonbg_yellow@2x.png in Resources */,
 				051CB3F419D2F71200E5FC88 /* dummy_profilePhoto.png in Resources */,
 				0589066419CC524900A9E517 /* TurkcellSaturaMedIta.ttf in Resources */,
@@ -3803,8 +3935,11 @@
 				94B6C8771CB6575A0083C1A8 /* icon_yukle_depo@2x.png in Resources */,
 				0526448819D5A26400B63759 /* upload_icon.png in Resources */,
 				05AF7CA71A1CC0A200F5011A /* circle_delete_icon.png in Resources */,
+				94328BD41CC3E03300599CEE /* img_baski_1@2x.jpg in Resources */,
 				0526449519D5A26400B63759 /* stroge_icon@2x.png in Resources */,
+				94E549181CC6BA27003CB5DC /* icon_select_off.png in Resources */,
 				05224AB319DC4A2D00214767 /* added_tick.png in Resources */,
+				94E5491A1CC6BA27003CB5DC /* icon_suggestion.png in Resources */,
 				052A222D19F6846B000C3C75 /* default_loading_bg@2x.png in Resources */,
 				057C9D861A2B8D68001DDDEC /* music_next@2x.png in Resources */,
 				057C9D731A2B4937001DDDEC /* usage_photos_icon@2x.png in Resources */,
@@ -3830,16 +3965,19 @@
 				053F993A19E1C40900928F22 /* unable_file_icon.png in Resources */,
 				050D4C3C1A31E58100809A01 /* contacts_backup.png in Resources */,
 				0526447D19D5A26400B63759 /* ipad_icon@2x.png in Resources */,
+				94E549151CC6BA27003CB5DC /* icon_dialog_success.png in Resources */,
 				051CB40A19D2F71200E5FC88 /* green_check_icon@2x.png in Resources */,
 				057C9D6F1A2B48F8001DDDEC /* musics_icon@2x.png in Resources */,
 				050A7B1D19F7CBB600B084B9 /* volume_full@2x.png in Resources */,
 				0569C8381A8A324A000E0486 /* Icon_120.png in Resources */,
 				050A7B1819F7CBB600B084B9 /* volume_current_level.png in Resources */,
 				056BEC871A8AA7CF00BA0805 /* pre_login_info3.png in Resources */,
+				94E549261CC6BA34003CB5DC /* icon_select_off@2x.png in Resources */,
 				0589066819CC524900A9E517 /* TurkcellSaturaDem.ttf in Resources */,
 				05224ABC19DC4A2D00214767 /* black_bg.png in Resources */,
 				564A318A1A9288A400C5B755 /* no_photo_icon.png in Resources */,
 				056F29CE1C4E8061001DD486 /* icon_verif_audio.png in Resources */,
+				94E549331CC6BA43003CB5DC /* icon_menu_bizeulasin@3x.png in Resources */,
 				050D4C391A31E2E800809A01 /* camera_backup@2x.png in Resources */,
 				94884CA11C90C64C006722F7 /* icon_set_pass.png in Resources */,
 				051CB3FF19D2F71200E5FC88 /* action_bar_preloader.png in Resources */,
@@ -3864,10 +4002,12 @@
 				05F178461BFBB4A70014B2BD /* yellow_cropy.png in Resources */,
 				057C9D891A2B8D68001DDDEC /* music_prev@2x.png in Resources */,
 				94884C981C90AFD5006722F7 /* buttonbg_yellow@3x.png in Resources */,
+				94E549271CC6BA34003CB5DC /* icon_select_on@2x.png in Resources */,
 				05A7CE6C1A7FC22900020B6F /* bulutheader@3x.png in Resources */,
 				05D5E58F1B09D56A00A22957 /* icon_settings_exclamation.png in Resources */,
 				05AF7C901A1C9FE800F5011A /* recent_activity_icon.png in Resources */,
 				059AD3771A1E26A000AA41BD /* circle_doc_icon@2x.png in Resources */,
+				94E549241CC6BA34003CB5DC /* icon_menu_bizeulasin_w@2x.png in Resources */,
 				05224ABB19DC4A2D00214767 /* menu_select_blue_flap@2x.png in Resources */,
 				053EC45719DAA2BF000C2B77 /* Localizable.strings in Resources */,
 				059C04681A8521C5007B18BE /* contact_sync_icon.png in Resources */,
@@ -3889,6 +4029,7 @@
 				94884C9D1C90C63D006722F7 /* icon_set_pass@2x.png in Resources */,
 				051CB3B319D2F6F700E5FC88 /* preloader_icon.png in Resources */,
 				052AE42C1A1D08260039DD7F /* cloud_icon.png in Resources */,
+				94E549311CC6BA43003CB5DC /* icon_dialog_success@3x.png in Resources */,
 				058337EE19EDA01300DCF0C5 /* bttn-video-pause.png in Resources */,
 				051CB3F019D2F71200E5FC88 /* mini_play_icon.png in Resources */,
 				058337F219EDA02C00DCF0C5 /* bttn-video-expend.png in Resources */,
@@ -3902,6 +4043,7 @@
 				055A3F4B19E7F9D6004A0121 /* photo_header_with_flap_second@2x.png in Resources */,
 				0526448919D5A26400B63759 /* upload_icon@2x.png in Resources */,
 				05A7CE601A7FC0FD00020B6F /* yuvarlakbulut@3x.png in Resources */,
+				94E549231CC6BA34003CB5DC /* icon_dialog_success@2x.png in Resources */,
 				051CB3FA19D2F71200E5FC88 /* blue_add_new_folder_icon.png in Resources */,
 				051CB40819D2F71200E5FC88 /* passive_dots_icon@2x.png in Resources */,
 				0526445519D5868300B63759 /* menu_drop.png in Resources */,
@@ -3957,6 +4099,7 @@
 				054B8D3C1A0FEDC500D24420 /* menu_drop_black.png in Resources */,
 				0589064C19CC2B9500A9E517 /* yellow_file_icon.png in Resources */,
 				051CB41C19D2F71200E5FC88 /* blue_add_new_folder_icon@2x.png in Resources */,
+				94328BDD1CC3E04400599CEE /* img_baski_2@3x.jpg in Resources */,
 				05994F9A1A0B57080081F000 /* music_forward@2x.png in Resources */,
 				051E1E0919CAC2F900FD1E03 /* Images.xcassets in Resources */,
 				059C04661A8521C5007B18BE /* yellow_contact_sync_icon@2x.png in Resources */,
@@ -3964,6 +4107,7 @@
 				051CB3EF19D2F71200E5FC88 /* nav_blue_tick.png in Resources */,
 				05D5E5901B09D56A00A22957 /* icon_settings_tick.png in Resources */,
 				056BEC8A1A8AA7CF00BA0805 /* pre_login_info4@2x.png in Resources */,
+				94E549341CC6BA43003CB5DC /* icon_select_off@3x.png in Resources */,
 				05C6C7121B3C212A00CB6CE5 /* tamam_rollover@2x.png in Resources */,
 				05C4E49F1C4D5E7B005B28E9 /* icon_dialog_positive.png in Resources */,
 				051CB3B619D2F6F700E5FC88 /* nav_share_icon.png in Resources */,
@@ -3981,6 +4125,7 @@
 				056BEC881A8AA7CF00BA0805 /* pre_login_info3@2x.png in Resources */,
 				051CB3FE19D2F71200E5FC88 /* big_delete_icon.png in Resources */,
 				05AF7CAA1A1CC0A200F5011A /* circle_folder_icon@2x.png in Resources */,
+				94E549171CC6BA27003CB5DC /* icon_menu_bizeulasin.png in Resources */,
 				058219DF1A386829001FA679 /* nav_favourite_active_icon@2x.png in Resources */,
 				0589065119CC2B9500A9E517 /* yellow_documents_icon@2x.png in Resources */,
 				053D0ED419DAC83B006A13E0 /* general_textfield_bg.png in Resources */,
@@ -4012,19 +4157,24 @@
 				058219E01A386829001FA679 /* nav_favourite_inactive_icon.png in Resources */,
 				051CB40319D2F71200E5FC88 /* nav_select_icon@2x.png in Resources */,
 				05D5E58E1B09D56A00A22957 /* icon_settings_dialog_close.png in Resources */,
+				94E549191CC6BA27003CB5DC /* icon_select_on.png in Resources */,
 				051CB41E19D2F71200E5FC88 /* dummy_profilePhoto@2x.png in Resources */,
 				0526448719D5A26400B63759 /* remove_icon@2x.png in Resources */,
 				0589064A19CC2B9500A9E517 /* yellow_fav_icon.png in Resources */,
+				94E549221CC6BA34003CB5DC /* icon_complaint@2x.png in Resources */,
 				0589065619CC2B9500A9E517 /* yellow_home_icon@2x.png in Resources */,
 				051CB3F919D2F71200E5FC88 /* blue_add_photo_icon.png in Resources */,
 				05A7CE6A1A7FC22900020B6F /* bulutheader.png in Resources */,
 				056F29D81C4E8128001DD486 /* icon_verif_refresh.png in Resources */,
 				0589063119CC226D00A9E517 /* menu_icon.png in Resources */,
+				94328BD91CC3E03C00599CEE /* img_baski_2.jpg in Resources */,
 				051CB3F819D2F71200E5FC88 /* check_checked_icon.png in Resources */,
 				94884C971C90AFD5006722F7 /* buttonbg_blue@3x.png in Resources */,
 				0589064E19CC2B9500A9E517 /* yellow_documents_icon.png in Resources */,
 				94884C8B1C907B02006722F7 /* welcome_cloud@2x.png in Resources */,
 				051CB41B19D2F71200E5FC88 /* blue_add_music_icon@2x.png in Resources */,
+				94328BDC1CC3E04400599CEE /* img_baski_1@3x.jpg in Resources */,
+				94E549301CC6BA43003CB5DC /* icon_complaint@3x.png in Resources */,
 				051CB42119D2F71200E5FC88 /* dots_icon@2x.png in Resources */,
 				051CB41519D2F71200E5FC88 /* preloader_icon@2x.png in Resources */,
 				055A3F4319E7F628004A0121 /* album_mask.png in Resources */,
@@ -4054,6 +4204,7 @@
 				051CB3F719D2F71200E5FC88 /* check_unchecked_icon.png in Resources */,
 				050833451AC6C3FA0087B88F /* square_placeholder@2x.png in Resources */,
 				051CB41819D2F71200E5FC88 /* yellow_close_button@2x.png in Resources */,
+				94E549361CC6BA43003CB5DC /* icon_suggestion@3x.png in Resources */,
 				058BC2391A30D46C0007F4DE /* textfield_bg.png in Resources */,
 				0589063A19CC2A5600A9E517 /* file_icon@2x.png in Resources */,
 				563FB1C21AA5EC990066F8E6 /* circle_welcome_icon@2x.png in Resources */,
@@ -4063,6 +4214,7 @@
 				051CB41F19D2F71200E5FC88 /* document_icon@2x.png in Resources */,
 				563FB1C11AA5EC990066F8E6 /* circle_welcome_icon.png in Resources */,
 				0589062119CC226D00A9E517 /* music_icon.png in Resources */,
+				94328BD51CC3E03300599CEE /* img_baski_2@2x.jpg in Resources */,
 				059E9A051A35DBB300922A77 /* sms_icon.png in Resources */,
 				56FCFDD61A9C7DDA00AC041C /* info_icon@2x.png in Resources */,
 				0526447E19D5A26400B63759 /* iphone_icon.png in Resources */,
@@ -4080,6 +4232,7 @@
 				056BEC831A8AA7CF00BA0805 /* pre_login_info1.png in Resources */,
 				052A222919F682D1000C3C75 /* Default@2x.png in Resources */,
 				058219E11A386829001FA679 /* nav_favourite_inactive_icon@2x.png in Resources */,
+				94E549161CC6BA27003CB5DC /* icon_menu_bizeulasin_w.png in Resources */,
 				05C6C7161B3C212A00CB6CE5 /* tamam@3x.png in Resources */,
 				0589062219CC226D00A9E517 /* music_icon@2x.png in Resources */,
 				058219D91A3850E2001FA679 /* close_icon@2x.png in Resources */,
@@ -4106,11 +4259,13 @@
 				056BEC8C1A8AA7CF00BA0805 /* pre_login_info5@2x.png in Resources */,
 				050A7B1A19F7CBB600B084B9 /* volume_full.png in Resources */,
 				0589062319CC226D00A9E517 /* documents_icon.png in Resources */,
+				94E549321CC6BA43003CB5DC /* icon_menu_bizeulasin_w@3x.png in Resources */,
 				0526448C19D5A26400B63759 /* help_icon.png in Resources */,
 				0589062519CC226D00A9E517 /* logout_icon.png in Resources */,
 				05AF7CA81A1CC0A200F5011A /* circle_delete_icon@2x.png in Resources */,
 				0526448319D5A26400B63759 /* android_icon@2x.png in Resources */,
 				94B6C8791CB657610083C1A8 /* icon_yukle_depo@3x.png in Resources */,
+				94E549281CC6BA34003CB5DC /* icon_suggestion@2x.png in Resources */,
 				058337E319ED9EEA00DCF0C5 /* airplay_icon@2x.png in Resources */,
 				05DEB1D01A80EBA6007793DD /* terms.txt in Resources */,
 				058337FA19EDA07600DCF0C5 /* player_track.png in Resources */,
@@ -4120,6 +4275,7 @@
 				05B1847F1A24C07E00FDA023 /* nav_download_icon@2x.png in Resources */,
 				055A3F4C19E7F9D6004A0121 /* photo_header_with_flap_first@2x.png in Resources */,
 				05C3F60B1A3902E0001954E8 /* check_icon@2x.png in Resources */,
+				94E549141CC6BA27003CB5DC /* icon_complaint.png in Resources */,
 				94884C931C90AFCC006722F7 /* buttonbg_blue@2x.png in Resources */,
 				051CB41A19D2F71200E5FC88 /* blue_add_photo_icon@2x.png in Resources */,
 				051CB3B019D2F6F700E5FC88 /* white_left_arrow.png in Resources */,
@@ -4132,6 +4288,7 @@
 				05AF7C941A1CA04E00F5011A /* white_right_arrow_icon.png in Resources */,
 				051CB40719D2F71200E5FC88 /* nav_detail_icon@2x.png in Resources */,
 				05DEB1CE1A80EA28007793DD /* terms.html in Resources */,
+				94E549251CC6BA34003CB5DC /* icon_menu_bizeulasin@2x.png in Resources */,
 				056BEC891A8AA7CF00BA0805 /* pre_login_info4.png in Resources */,
 				564A318B1A9288A400C5B755 /* no_photo_icon@2x.png in Resources */,
 				05994F9E1A0B572D0081F000 /* music_play_icon@2x.png in Resources */,
@@ -4235,6 +4392,7 @@
 				056090E41AC5A44000710211 /* ReachabilityManager.m in Sources */,
 				05403F1919F5584300AED10A /* ElasticSearchDao.m in Sources */,
 				053D0ED819DAC959006A13E0 /* MyModalController.m in Sources */,
+				94E549031CC6348E003CB5DC /* DropboxStartDao.m in Sources */,
 				058337D919ED9C1600DCF0C5 /* CustomAVPlayer.m in Sources */,
 				05B01D9C1AC2E2D000D5B827 /* NSDate+Utilities.m in Sources */,
 				0526444819D546BB00B63759 /* MapUtil.m in Sources */,
@@ -4300,6 +4458,7 @@
 				05836FCB1A05703A001D7346 /* MoveListModalController.m in Sources */,
 				051412A519D46748000EAE63 /* FloatingAddMenu.m in Sources */,
 				94884C9B1C90C506006722F7 /* ChangePassController.m in Sources */,
+				94E549091CC63718003CB5DC /* DropboxExportController.m in Sources */,
 				05C2A0311A79830500EE4D78 /* ADJLogger.m in Sources */,
 				05C2A02F1A79830500EE4D78 /* ADJDeviceInfo.m in Sources */,
 				058B44DB1A4C0D89005B1590 /* SyncUtil.m in Sources */,
@@ -4336,6 +4495,7 @@
 				05F28BE91C0739C30002171A /* CurioNetwork.m in Sources */,
 				05AF7C841A1C8D6D00F5011A /* Activity.m in Sources */,
 				052644BE19D5A32300B63759 /* HeaderCell.m in Sources */,
+				94E549001CC63480003CB5DC /* DropboxConnectDao.m in Sources */,
 				05C2A0291A79830500EE4D78 /* NSString+ADJAdditions.m in Sources */,
 				05AF7C8D1A1C9C5800F5011A /* RecentActivityLinkerFooter.m in Sources */,
 				05224A9519DC1CBC00214767 /* PhotoListModalController.m in Sources */,
@@ -4414,6 +4574,7 @@
 				051E1EB119CB20FC00FD1E03 /* MetaMenu.m in Sources */,
 				058911161A139DAF00BF6A52 /* PhotoAlbumListModalController.m in Sources */,
 				053D0ED119DAC2BC006A13E0 /* GeneralTextField.m in Sources */,
+				94E549061CC6349C003CB5DC /* DropboxStatusDao.m in Sources */,
 				058337DE19ED9C3400DCF0C5 /* CustomAVControl.m in Sources */,
 				059D97991A0CF12E00BCEDF3 /* RenameDao.m in Sources */,
 				05F4AA281A2F7692000F41B8 /* ActivityUtil.m in Sources */,
@@ -4428,6 +4589,7 @@
 				058219C41A384CC6001FA679 /* SearchModalController.m in Sources */,
 				051CB38F19D2DD7100E5FC88 /* FileListController.m in Sources */,
 				05A9382C1AF6AE9100AE2892 /* UIAlertViewCustom.m in Sources */,
+				94328BE91CC572DF00599CEE /* FeedbackChoiceCell.m in Sources */,
 				05E8113219DF0ACB0063F99A /* MetaAlbum.m in Sources */,
 				05AF7C871A1C8EEB00F5011A /* RecentActivitiesDao.m in Sources */,
 				05C2A02B1A79830500EE4D78 /* ADJAdjustFactory.m in Sources */,
@@ -4448,6 +4610,7 @@
 				051E1EA719CB209F00FD1E03 /* MenuCell.m in Sources */,
 				051E1E0319CAC2F900FD1E03 /* main.m in Sources */,
 				051DE36C19CC130A00F27C85 /* LoginTextfield.m in Sources */,
+				94328BE01CC3E0B900599CEE /* TutorialView.m in Sources */,
 				0551CE161A2B3E9700DB117D /* HomeUsageView.m in Sources */,
 				051CB39819D2E3FF00E5FC88 /* FolderCell.m in Sources */,
 				0515F2F81C451E240098081C /* SingleCharField.m in Sources */,
@@ -4457,11 +4620,13 @@
 				0526444E19D5625E00B63759 /* MoreMenuView.m in Sources */,
 				05DEB1C61A80C161007793DD /* ProvisionDao.m in Sources */,
 				05BCA2FB19EE89EE00AF2FE2 /* MusicPreviewController.m in Sources */,
+				94E5490C1CC638AA003CB5DC /* DropboxExportResult.m in Sources */,
 				05F9318F1C160ED200858223 /* GZIP.m in Sources */,
 				052644B519D5A2A600B63759 /* SettingsNotificationsController.m in Sources */,
 				05BCA2F519EE5CD900AF2FE2 /* NewAlbumModalController.m in Sources */,
 				051E1E3219CAC57400FD1E03 /* Util.m in Sources */,
 				05F28BE41C0739C30002171A /* CurioConstants.m in Sources */,
+				94328BE31CC54E5A00599CEE /* FirstUploadFlagDao.m in Sources */,
 				05A8ADA51A5ABCD8007566BF /* UploadQueue.m in Sources */,
 				051DE35519CC06F000F27C85 /* AbstractMenuCell.m in Sources */,
 				0514A62A1BF4D1030084E0AB /* CropAndShareListController.m in Sources */,
@@ -4490,6 +4655,7 @@
 				057942561C41626200899923 /* AppleProductsListDao.m in Sources */,
 				94884C7D1C9063F4006722F7 /* UpdateMsisdnDao.m in Sources */,
 				05F28BE31C0739C30002171A /* CurioActionToolkit.m in Sources */,
+				94328BE61CC5666D00599CEE /* FeedbackDao.m in Sources */,
 				05D5E59E1B09D5DD00A22957 /* PurchaseView.m in Sources */,
 				051E1E7F19CAC92700FD1E03 /* Reachability.m in Sources */,
 				05C2A0361A79830500EE4D78 /* Adjust.m in Sources */,
@@ -4740,6 +4906,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/Depo-Prefix.pch";
@@ -4780,6 +4947,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/Depo-Prefix.pch";
@@ -4892,6 +5060,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/Depo-Prefix.pch";
@@ -4979,6 +5148,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/Depo-Prefix.pch";

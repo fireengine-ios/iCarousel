@@ -52,6 +52,9 @@
 + (void) writeDoNotShowAgainFlagForKey:(NSString *) key;
 + (BOOL) readDoNotShowAgainFlagForKey:(NSString *) key;
 
++ (void) writeFirstUploadFlag;
++ (BOOL) readFirstUploadFlag;
+
 + (BOOL) isAlreadyRated;
 + (void) setAlreadyRated;
 

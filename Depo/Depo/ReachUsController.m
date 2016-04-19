@@ -11,19 +11,30 @@
 #import "Util.h"
 #import "CustomLabel.h"
 #import "AppUtil.h"
+#import "FeedbackChoiceCell.h"
 
-@interface ReachUsController ()
-
+@interface ReachUsController () {
+    NSNumber *selectedFeedbackType;
+}
 @end
 
 @implementation ReachUsController
 
+@synthesize dao;
+@synthesize choiceTable;
+@synthesize textView;
+
 - (id) init {
     if(self = [super init]) {
-        self.view.backgroundColor = [UIColor whiteColor];
+        self.view.backgroundColor = [Util UIColorForHexColor:@"f5f5f5"];
         self.title = NSLocalizedString(@"ReachUsTitle", @"");
 
         float yIndex = (IS_IPAD ? 50 : IS_IPHONE_5 ? 20 : 0);
+
+        dao = [[FeedbackDao alloc] init];
+        dao.delegate = self;
+        dao.successMethod = @selector(feedbackSuccessCallback);
+        dao.failMethod = @selector(feedbackFailCallback:);
         
         if(![AppUtil isAlreadyRated]) {
             SimpleButton *rateButton = [[SimpleButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 150)/2, yIndex, 150, 44) withTitle:NSLocalizedString(@"RateButton", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:22];
@@ -37,11 +48,127 @@
         [self.view addSubview:titleLabel];
 
         yIndex += 40;
+        
+        choiceTable = [[UITableView alloc] initWithFrame:CGRectMake(0, yIndex, self.view.frame.size.width, 80) style:UITableViewStylePlain];
+        choiceTable.delegate = self;
+        choiceTable.dataSource = self;
+        choiceTable.backgroundColor = [UIColor clearColor];
+        choiceTable.backgroundView = nil;
+        choiceTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [self.view addSubview:choiceTable];
+        
+        yIndex += 100;
+        
+        textView = [[UITextView alloc] initWithFrame:CGRectMake(0, yIndex, self.view.frame.size.width, 140)];
+        textView.backgroundColor = [UIColor whiteColor];
+        textView.delegate = self;
+        textView.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        textView.autocorrectionType = UITextAutocorrectionTypeNo;
+        textView.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:14];
+        textView.text = NSLocalizedString(@"FeedbackPlaceholder", @"");
+        textView.textColor = [Util UIColorForHexColor:@"aaaaaa"];
+        [self.view addSubview:textView];
+
+        yIndex += 160;
+
+        SimpleButton *sendButton = [[SimpleButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 100)/2, yIndex, 100, 44) withTitle:NSLocalizedString(@"SendButton", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
+        [sendButton addTarget:self action:@selector(triggerSend) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:sendButton];
+
+        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(triggerResign)];
+        tapGestureRecognizer.numberOfTapsRequired = 1;
+        tapGestureRecognizer.enabled = YES;
+        tapGestureRecognizer.delegate = self;
+        [self.view addGestureRecognizer:tapGestureRecognizer];
     }
     return self;
 }
 
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if ([touch.view isKindOfClass:[UIControl class]] || [touch.view isDescendantOfView:choiceTable]) {
+        return NO;
+    }
+    return YES;
+}
+
+- (void) triggerResign {
+    [self.view endEditing:YES];
+}
+
+- (void) triggerSend {
+    if(selectedFeedbackType == nil) {
+        [self showErrorAlertWithMessage:NSLocalizedString(@"FeedbackChoiceError", @"")];
+        return;
+    }
+    if([textView.text isEqualToString:NSLocalizedString(@"FeedbackPlaceholder", @"")]) {
+        [self showErrorAlertWithMessage:NSLocalizedString(@"FeedbackTextError", @"")];
+        return;
+    }
+    [dao requestSendFeedbackWithType:[selectedFeedbackType intValue] andMessage:textView.text];
+    [self showLoading];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 2;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 40;
+}
+
+- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *indicator = [NSString stringWithFormat:@"FEEDBACK_CELL_%d", (int)indexPath.row];
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:indicator];
+    if(!cell) {
+        if(indexPath.row == 0) {
+            cell = [[FeedbackChoiceCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:indicator withType:FeedBackTypeSuggestion];
+        } else {
+            cell = [[FeedbackChoiceCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:indicator withType:FeedBackTypeComplaint];
+        }
+    }
+    return cell;
+}
+
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(indexPath.row == 0) {
+        selectedFeedbackType = [NSNumber numberWithInt:FeedBackTypeSuggestion];
+    } else {
+        selectedFeedbackType = [NSNumber numberWithInt:FeedBackTypeComplaint];
+    }
+}
+
+- (void) feedbackSuccessCallback {
+    [self hideLoading];
+    [self showInfoAlertWithMessage:NSLocalizedString(@"MessageSentSuccessfully", @"")];
+}
+
+- (void) feedbackFailCallback:(NSString *) errorMessage {
+    [self hideLoading];
+    [self showErrorAlertWithMessage:errorMessage];
+}
+
 - (void) triggerRateUs {
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)_textView {
+    if ([textView.text isEqualToString:NSLocalizedString(@"FeedbackPlaceholder", @"")]) {
+        textView.text = @"";
+        textView.textColor = [Util UIColorForHexColor:@"555555"];
+    }
+    [textView becomeFirstResponder];
+}
+
+- (void)textViewDidEndEditing:(UITextView *)_textView {
+    if ([textView.text isEqualToString:@""]) {
+        textView.text = NSLocalizedString(@"FeedbackPlaceholder", @"");
+        textView.textColor = [Util UIColorForHexColor:@"aaaaaa"];
+    }
+    [textView resignFirstResponder];
 }
 
 - (void)viewDidLoad {

@@ -116,9 +116,9 @@
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     MetaMenu *item = [sectionMetaArray objectAtIndex:section];
 
-//    if(item.menuType == MenuTypeFiles || ([APPDELEGATE.session.user.countryCode isEqualToString:@"90"] && item.menuType == MenuTypeCellograph) || (![APPDELEGATE.session.user.countryCode isEqualToString:@"90"] && item.menuType == MenuTypeHelp))
+//    if(item.menuType == MenuTypeFiles || item.menuType == MenuTypeLogout)
     
-    if(item.menuType == MenuTypeFiles || item.menuType == MenuTypeLogout) {
+    if(item.menuType == MenuTypeFiles || ([APPDELEGATE.session.user.countryCode isEqualToString:@"90"] && item.menuType == MenuTypeCellograph) || (![APPDELEGATE.session.user.countryCode isEqualToString:@"90"] && item.menuType == MenuTypeHelp)) {
         return 21;
     }
     return 0;
@@ -127,9 +127,9 @@
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     MetaMenu *item = [sectionMetaArray objectAtIndex:section];
 
-//    if(item.menuType == MenuTypeFiles || ([APPDELEGATE.session.user.countryCode isEqualToString:@"90"] && item.menuType == MenuTypeCellograph) || (![APPDELEGATE.session.user.countryCode isEqualToString:@"90"] && item.menuType == MenuTypeHelp))
+//    if(item.menuType == MenuTypeFiles || item.menuType == MenuTypeLogout)
     
-    if(item.menuType == MenuTypeFiles || item.menuType == MenuTypeLogout) {
+    if(item.menuType == MenuTypeFiles || ([APPDELEGATE.session.user.countryCode isEqualToString:@"90"] && item.menuType == MenuTypeCellograph) || (![APPDELEGATE.session.user.countryCode isEqualToString:@"90"] && item.menuType == MenuTypeHelp)) {
         UIView *separatorView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 21)];
         UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(12, 10, separatorView.frame.size.width-24, 1)];
         separator.backgroundColor = [Util UIColorForHexColor:@"2c3037"];

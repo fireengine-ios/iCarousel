@@ -24,6 +24,7 @@
 #import "ChangePassController.h"
 #import "UpdateMsisdnController.h"
 #import "MPush.h"
+#import "DropboxExportController.h"
 
 @interface SettingsController () {
     UILabel *msisdnLabel;
@@ -295,9 +296,9 @@
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #ifdef LOG2FILE
-    return 5;
+    return 6;
 #else
-    return 4;
+    return 5;
 #endif
 }
 
@@ -354,10 +355,14 @@
 //        cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
 //        return cell;
     } else if (indexPath.row == 3) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"FAQ", @"") titleColor:nil subTitleText:@"" iconName:@"help_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
+        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"ExportFromDropbox", @"") titleColor:nil subTitleText:@"" iconName:@"nav_download_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         return cell;
     } else if (indexPath.row == 4) {
+        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"FAQ", @"") titleColor:nil subTitleText:@"" iconName:@"help_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
+        cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+        return cell;
+    } else if (indexPath.row == 5) {
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"Mail Logs" titleColor:nil subTitleText:@"" iconName:@"help_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         return cell;
@@ -381,9 +386,12 @@
 //            [self didTriggerPass];
 //            break;
         case 3:
-            [self didTriggerHelp];
+            [self didTriggerExportFromDropbox];
             break;
         case 4:
+            [self didTriggerHelp];
+            break;
+        case 5:
             [self triggerMailLog];
             break;
         default:
@@ -497,6 +505,13 @@
     [self.nav pushViewController:notificationsController animated:YES];
 }
 */
+
+- (void) didTriggerExportFromDropbox {
+    DropboxExportController *dbController = [[DropboxExportController alloc] init];
+    dbController.nav = self.nav;
+    [self.nav pushViewController:dbController animated:YES];
+}
+
 - (void) didTriggerHelp {
     SettingsHelpController *helpController = [[SettingsHelpController alloc] init];
     helpController.nav = self.nav;
