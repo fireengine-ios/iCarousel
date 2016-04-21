@@ -46,7 +46,7 @@
 
         self.assetsLibrary = [[ALAssetsLibrary alloc] init];
         
-         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityDidChange) name:kReachabilityChangedNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityDidChange) name:kReachabilityChangedNotification object:nil];
     }
     return self;
 }

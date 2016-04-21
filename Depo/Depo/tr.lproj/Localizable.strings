@@ -690,3 +690,5 @@
 "Export"="Taşı";
 "FeedbackChoiceError"="Lütfen mesaj kategorinizi seçiniz";
 "FeedbackTextError"="Lütfen mesajınızı girin";
+
+"CancelSubscriptionInfoLifecell"="İptal etmek için \"Iptal %@\" yazıp 2222'ye kısa mesaj gönderebilirsiniz.";

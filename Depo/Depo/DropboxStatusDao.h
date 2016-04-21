@@ -10,4 +10,6 @@
 
 @interface DropboxStatusDao : BaseDao
 
+- (void) requestDropboxStatus;
+
 @end

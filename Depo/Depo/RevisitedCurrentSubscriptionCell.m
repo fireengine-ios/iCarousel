@@ -32,11 +32,15 @@
 
         float topYIndex = 15;
 
-        if([subscription.plan.name isEqualToString:@"demo"]) {
-            topYIndex = 23;
-            topInfo = [NSString stringWithFormat:NSLocalizedString(@"WelcomePackageName", @""), [Util transformedHugeSizeValueDecimalIfNecessary:subscription.plan.quota]];
+        if([subscription.plan.type isEqualToString:@"LIFECELL"]) {
+            topInfo = subscription.plan.displayName;
         } else {
-            topInfo = [NSString stringWithFormat:@"%@ %.1f TL/%@", [Util transformedHugeSizeValueDecimalIfNecessary:subscription.plan.quota], subscription.plan.price, [subscription.plan.period isEqualToString:@"MONTH"] ? NSLocalizedString(@"MonthlyShort", "") : NSLocalizedString(@"YearlyShort", "")];
+            if([subscription.plan.name isEqualToString:@"demo"]) {
+                topYIndex = 23;
+                topInfo = [NSString stringWithFormat:NSLocalizedString(@"WelcomePackageName", @""), [Util transformedHugeSizeValueDecimalIfNecessary:subscription.plan.quota]];
+            } else {
+                topInfo = [NSString stringWithFormat:@"%@ %.1f TL/%@", [Util transformedHugeSizeValueDecimalIfNecessary:subscription.plan.quota], subscription.plan.price, [subscription.plan.period isEqualToString:@"MONTH"] ? NSLocalizedString(@"MonthlyShort", "") : NSLocalizedString(@"YearlyShort", "")];
+            }
         }
 
         CustomLabel *topLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, topYIndex, infoView.frame.size.width, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:18] withColor:[Util UIColorForHexColor:@"555555"] withText:topInfo withAlignment:NSTextAlignmentCenter];
@@ -60,6 +64,9 @@
             topYIndex += 28;
 
             NSString *linkTitle = @"turkcell.com.tr";
+            if([subscription.plan.type isEqualToString:@"LIFECELL"]) {
+                linkTitle = @"lifecell.com.ua";
+            }
             if(subscription.type) {
                 if([subscription.type isEqualToString:@"INAPP_PURCHASE_GOOGLE"]) {
                     linkTitle = @"googleplay";

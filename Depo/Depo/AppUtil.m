@@ -82,15 +82,15 @@
     if([APPDELEGATE.session.user.countryCode isEqualToString:@"90"]) {
         MetaMenu *cellographMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeCellograph];
         cellographMenu.title = NSLocalizedString(@"MenuCellograph", @"");
-        cellographMenu.iconName = @"white_print_icon.png";
-        cellographMenu.selectedIconName = @"white_print_icon.png";
+        cellographMenu.iconName = @"icon_m_baskial_w.png";
+        cellographMenu.selectedIconName = @"icon_m_baskial.png";
         [result addObject:cellographMenu];
     }
 
     MetaMenu *helpMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeHelp];
     helpMenu.title = NSLocalizedString(@"MenuHelp", @"");
-    helpMenu.iconName = @"logout_icon.png";
-    helpMenu.selectedIconName = @"yellow_logout_icon.png";
+    helpMenu.iconName = @"icon_m_yardim_w.png";
+    helpMenu.selectedIconName = @"icon_m_yardim.png";
     [result addObject:helpMenu];
 
     MetaMenu *reachUshMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeReachUs];
