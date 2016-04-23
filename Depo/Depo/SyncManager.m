@@ -137,6 +137,7 @@
                     [[CurioSDK shared] sendEvent:@"FirstSyncStarted" eventValue:[NSString stringWithFormat:@"start index: %d", startIndex]];
 
                     [group enumerateAssetsAtIndexes:indexSet options:0 usingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
+                         NSString *referenceAlbumName = [group valueForProperty:ALAssetsGroupPropertyName];
                         if(asset && [[asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypePhoto]) {
                             EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
                             if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
@@ -155,7 +156,7 @@
                                         serverContainsImageFlag = [remoteSummaryList containsObject:assetSummary];
                                     }
                                     if(!serverContainsImageFlag) {
-                                        [self startUploadForAsset:asset andLocalHash:localHash];
+                                        [self startUploadForAsset:asset withReferenceAlbumName:referenceAlbumName  andLocalHash:localHash];
                                         [SyncUtil lockAutoSyncBlockInProgress];
                                         [SyncUtil updateLastSyncDate];
                                     } else {
@@ -228,6 +229,7 @@
                 if(group) {
                     [group setAssetsFilter:[ALAssetsFilter allPhotos]];
                     [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
+                        NSString *referenceAlbumName = [group valueForProperty:ALAssetsGroupPropertyName];
                         if(asset && [[asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypePhoto]) {
                             EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
                             if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
@@ -246,7 +248,7 @@
                                         shouldStartUpload = ![remoteSummaryList containsObject:assetSummary];
                                     }
                                     if(shouldStartUpload) {
-                                        [[SyncManager sharedInstance] startUploadForAsset:asset andLocalHash:localHash];
+                                        [[SyncManager sharedInstance] startUploadForAsset:asset withReferenceAlbumName:referenceAlbumName andLocalHash:localHash];
                                     }
                                 }
                             }
@@ -301,7 +303,7 @@
     });
 }
 
-- (void) startUploadForAsset:(ALAsset *) asset andLocalHash:(NSString *) localHash {
+- (void) startUploadForAsset:(ALAsset *) asset withReferenceAlbumName:(NSString *) referenceAlbumName andLocalHash:(NSString *) localHash {
     NSString *mimeType = (__bridge_transfer NSString*)UTTypeCopyPreferredTagWithClass
     ((__bridge CFStringRef)[asset.defaultRepresentation UTI], kUTTagClassMIMEType);
 
@@ -319,6 +321,7 @@
         ref.folderUuid = APPDELEGATE.session.user.mobileUploadFolderUuid;
         ref.summary = summary;
         ref.mimeType = mimeType;
+        ref.referenceFolderName = referenceAlbumName;
         
         if ([[asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
             ref.contentType = ContentTypeVideo;

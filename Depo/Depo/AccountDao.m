@@ -113,9 +113,6 @@
                     [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
                 }
             } else if (requestMethod == RequestMethodGetOffers) {
-                //TODO sil
-//                responseStr = @"[{\"aeOfferId\":581795,\"aeOfferName\":\"Akıllı Depo Standart İndirimliye Mega İndirimli\",\"campaignChannel\":\"IA\",\"campaignCode\":\"AKILLI DEPO KAMPANYASI\",\"campaignId\":\"532566\",\"campaignUserCode\":\"AKILLI DEPO KAMPANYASI\",\"cometParameters\":\"<COMET></COMET>\",\"responseApi\":2,\"validationKey\":\"D180E2247A9AC1FCC64BE6B961A69477\",\"price\":9.9,\"role\":\"ultimate\",\"quota\":2748779069440,\"period\":\"MONTH\"}]";
-                
                 NSMutableArray *result = [[NSMutableArray alloc] init];
                 NSArray *mainArray = [jsonParser objectWithString:responseStr];
                 if (mainArray != nil && ![mainArray isKindOfClass:[NSNull class]]) {
@@ -155,9 +152,6 @@
                     [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
                 }
             } else if(requestMethod == RequestMethodGetActiveSubscriptions) {
-                //TODO sil
-//                responseStr = @"[{\"createdDate\":1448029694703,\"lastModifiedDate\":1448029694703,\"createdBy\":\"5322106601\",\"lastModifiedBy\":\"5322106601\",\"id\":1106,\"isCurrentSubscription\":true,\"status\":\"ACTIVE\",\"subscriptionPlan\":{\"name\":\"standard-allaccess\",\"displayName\":\"Mini Paket\",\"description\":\"Google 50GB\",\"price\":3.9,\"isDefault\":false,\"role\":\"standard\",\"inAppPurchaseId\":\"package1\",\"period\":\"MONTH\",\"type\":\"ALL_ACCESS\"},\"nextRenewalDate\":1450441248423,\"subscriptionEndDate\":1453119648423,\"type\":\"INAPP_PURCHASE_GOOGLE\",\"renewalStatus\":\"PENDING\"},{\"createdDate\":1448027552360,\"lastModifiedDate\":1448027552360,\"createdBy\":\"5322106601\",\"lastModifiedBy\":\"5322106601\",\"id\":1105,\"isCurrentSubscription\":false,\"status\":\"ACTIVE\",\"subscriptionPlan\":{\"name\":\"demo\",\"displayName\":\"Hoş geldin\",\"description\":\"${NAME} (${QUOTA}B) ${PRICE} ${CURRENCY}/Ay\",\"price\":0,\"isDefault\":true,\"role\":\"demo\",\"slcmOfferId\":602970086,\"cometOfferId\":581803,\"period\":\"MONTH\",\"type\":\"SLCM\"}}]";
-
                 NSDictionary *responseArray = [jsonParser objectWithString:responseStr];
                 NSMutableArray *subscriptions = [[NSMutableArray alloc] init];
                 if(responseArray != nil && [responseArray isKindOfClass:[NSArray class]]) {

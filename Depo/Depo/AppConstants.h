@@ -250,6 +250,8 @@ _Pragma("clang diagnostic pop") \
 
 #define FIRST_UPLOAD_FLAG_KEY @"DEPO_FIRST_UPLOAD_FLAG_KEY"
 
+#define DROPBOX_LINK_SUCCESS_KEY @"DEPO_DROPBOX_LINK_SUCCESS_KEY"
+
 typedef enum {
     LoginTypeRadius = 0,
     LoginTypeWebSifre

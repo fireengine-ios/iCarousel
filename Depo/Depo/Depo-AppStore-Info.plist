@@ -68,8 +68,8 @@
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
-        <string>dbapi-2</string>
-        <string>dbapi-8-emm</string>
+		<string>dbapi-2</string>
+		<string>dbapi-8-emm</string>
 	</array>
 	<key>NSAppTransportSecurity</key>
 	<dict>
@@ -80,14 +80,14 @@
 	<string>TDttInhNx_m-Ee76K35tiRJ5FW-ysLHd</string>
 	<key>MenloPushSandboxMode</key>
 	<false/>
-    <key>CFBundleURLTypes</key>
-    <array>
-        <dict>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <string>db-bxvk9rco608rizf</string>
-            </array>
-        </dict>
-    </array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>db-mydrrngzkvnljgs</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

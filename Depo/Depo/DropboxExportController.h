@@ -12,8 +12,10 @@
 #import "DropboxStartDao.h"
 #import "DropboxConnectDao.h"
 #import "DropboxStatusDao.h"
+#import "DropboxTokenDao.h"
+#import <DropboxSDK/DropboxSDK.h>
 
-@interface DropboxExportController : MyViewController <XYPieChartDelegate, XYPieChartDataSource>
+@interface DropboxExportController : MyViewController <XYPieChartDelegate, XYPieChartDataSource, UITableViewDataSource, UITableViewDelegate, DBRestClientDelegate>
 
 @property (nonatomic, strong) UIView *mainStatusView;
 
@@ -23,8 +25,11 @@
 @property (nonatomic, strong) NSMutableArray *statusList;
 @property (nonatomic, strong) NSArray *statusColors;
 
+@property (nonatomic, strong) UITableView *resultTable;
+
 @property (nonatomic, strong) DropboxConnectDao *connectDao;
 @property (nonatomic, strong) DropboxStartDao *startDao;
 @property (nonatomic, strong) DropboxStatusDao *statusDao;
+@property (nonatomic, strong) DropboxTokenDao *tokenDao;
 
 @end

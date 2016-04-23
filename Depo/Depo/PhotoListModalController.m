@@ -144,6 +144,7 @@
             ref.fileName = row.defaultRepresentation.filename;
             ref.filePath = [row.defaultRepresentation.url absoluteString];
             ref.mimeType = mimeType;
+            ref.referenceFolderName = self.album.albumName;
             if ([[row valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
                 ref.contentType = ContentTypeVideo;
             } else {

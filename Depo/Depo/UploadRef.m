@@ -16,6 +16,7 @@
 @synthesize fileName;
 @synthesize filePath;
 @synthesize folderUuid;
+@synthesize referenceFolderName;
 @synthesize fileUuid;
 @synthesize tempUrl;
 @synthesize tempThumbnailUrl;

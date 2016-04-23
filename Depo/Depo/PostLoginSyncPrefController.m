@@ -36,7 +36,7 @@
         self.view.backgroundColor = [Util UIColorForHexColor:@"3fb0e8"];
         
         choices = [[NSMutableArray alloc] init];
-        [choices addObject:@"Wifi + 3G"];
+        [choices addObject:@"Wifi + 3G + 4.5G"];
         [choices addObject:@"Wifi"];
         selectedOption = ConnectionOptionWifi3G;
         

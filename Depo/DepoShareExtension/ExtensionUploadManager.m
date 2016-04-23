@@ -79,6 +79,44 @@
     [uploadTask resume];
 }
 
+- (void) startUploadForDoc:(NSData *) docData withContentType:(NSString *) contentType withExt:(NSString *) ext {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    
+    NSString *randomVal = [NSString stringWithFormat:@"%.0f%d", [[NSDate date] timeIntervalSince1970], arc4random_uniform(99)];
+    NSString *tempName = [NSString stringWithFormat:@"/%@_EXT.%@", randomVal, ext];
+    NSString *tempPath = [documentsDirectory stringByAppendingString:tempName];
+    
+    BOOL shouldContinueUpload = YES;
+    @autoreleasepool {
+        shouldContinueUpload = [docData writeToFile:tempPath atomically:YES];
+    }
+    
+    NSString *newUuid = [[NSUUID UUID] UUIDString];
+    NSString *urlForUpload = [NSString stringWithFormat:@"%@/%@", [SharedUtil readSharedBaseUrl], newUuid];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlForUpload]];
+    
+    [request setTimeoutInterval:1200.0f];
+    [request setHTTPMethod:@"PUT"];
+    [request setValue:[SharedUtil readSharedToken] forHTTPHeaderField:@"X-Auth-Token"];
+    [request setValue:@"false" forHTTPHeaderField:@"X-Object-Meta-Favourite"];
+    [request setValue:[Util getWorkaroundUUID] forHTTPHeaderField:@"X-Object-Meta-Device-UUID"];
+    [request setValue:@"1" forHTTPHeaderField:@"x-meta-strategy"];
+    [request setValue:@"100-continue" forHTTPHeaderField:@"Expect"];
+    [request setValue:@"" forHTTPHeaderField:@"X-Object-Meta-Parent-Uuid"];
+    [request setValue:tempName forHTTPHeaderField:@"X-Object-Meta-File-Name"];
+    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    [request setValue:@"MOBILE_UPLOAD" forHTTPHeaderField:@"X-Object-Meta-Special-Folder"];
+    
+    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[docData length]];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    
+    NSURLSessionUploadTask *uploadTask = [[ExtensionUploadManager sharedInstance].session uploadTaskWithRequest:request fromFile:[NSURL fileURLWithPath:tempPath]];
+    uploadTask.taskDescription = tempPath;
+    [uploadTask resume];
+}
+
 - (void) startUploadForImage:(UIImage *) img {
     ExifContainer *container = [[ExifContainer alloc] init];
     [container addCreationDate:[NSDate date]];

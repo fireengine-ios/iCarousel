@@ -98,17 +98,30 @@
     NSDictionary *dict = [urlsToUpload objectAtIndex:currentUploadIndex];
     if(dict != nil) {
         BOOL isPhoto = [[dict objectForKey:@"isPhoto"] boolValue];
+        BOOL isMedia = [[dict objectForKey:@"isMedia"] boolValue];
         id item = [dict objectForKey:@"item"];
 
         [ExtensionUploadManager sharedInstance].delegate = self;
-        if(isPhoto) {
-            [[ExtensionUploadManager sharedInstance] startUploadForImage:previewView.image];
+        if(isMedia) {
+            if(isPhoto) {
+                [[ExtensionUploadManager sharedInstance] startUploadForImage:previewView.image];
+            } else {
+                NSURL *moviePath = item;
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    NSData *assetData = [NSData dataWithContentsOfURL:moviePath];
+                    [[ExtensionUploadManager sharedInstance] startUploadForVideoData:assetData];
+                });
+            }
         } else {
-            NSURL *moviePath = item;
-
+            NSURL *docPath = item;
+            
+            NSString *contentType = [dict objectForKey:@"contentType"];
+            NSString *extension = [dict objectForKey:@"extension"];
+            
             dispatch_async(dispatch_get_main_queue(), ^{
-                NSData *assetData = [NSData dataWithContentsOfURL:moviePath];
-                [[ExtensionUploadManager sharedInstance] startUploadForVideoData:assetData];
+                NSData *assetData = [NSData dataWithContentsOfURL:docPath];
+                [[ExtensionUploadManager sharedInstance] startUploadForDoc:assetData withContentType:contentType withExt:extension];
             });
         }
         uploadButton.hidden = YES;
@@ -154,7 +167,7 @@
         if([itemProvider hasItemConformingToTypeIdentifier:@"public.image"]) {
             [itemProvider loadItemForTypeIdentifier:@"public.image" options:nil completionHandler:
              ^(id<NSSecureCoding> item, NSError *error) {
-                 NSDictionary *dict = [NSDictionary dictionaryWithObjects:@[item, @"YES"] forKeys:@[@"item", @"isPhoto"]];
+                 NSDictionary *dict = [NSDictionary dictionaryWithObjects:@[item, @"YES", @"YES"] forKeys:@[@"item", @"isPhoto", @"isMedia"]];
                  [urlsToUpload addObject:dict];
                  counter ++;
                  if(counter == totalCount) {
@@ -164,7 +177,32 @@
         } else if ([itemProvider hasItemConformingToTypeIdentifier:(NSString *)kUTTypeQuickTimeMovie]) {
             [itemProvider loadItemForTypeIdentifier:@"com.apple.quicktime-movie" options:nil completionHandler:^(NSURL *path,NSError *error){
                 if (path) {
-                    NSDictionary *dict = [NSDictionary dictionaryWithObjects:@[path, @"NO"] forKeys:@[@"item", @"isPhoto"]];
+                    NSDictionary *dict = [NSDictionary dictionaryWithObjects:@[path, @"NO", @"YES"] forKeys:@[@"item", @"isPhoto", @"isMedia"]];
+                    [urlsToUpload addObject:dict];
+                    counter ++;
+                    if(counter == totalCount) {
+                        [self postUrlListConstruction];
+                    }
+                }
+            }];
+        } else if ([itemProvider hasItemConformingToTypeIdentifier:(NSString *)kUTTypePDF]) {
+            [itemProvider loadItemForTypeIdentifier:@"com.adobe.pdf" options:nil completionHandler:^(NSURL *path,NSError *error){
+                if (path) {
+                    NSDictionary *dict = [NSDictionary dictionaryWithObjects:@[path, @"NO", @"NO", @"application/pdf", @"pdf"] forKeys:@[@"item", @"isPhoto", @"isMedia", @"contentType", @"extension"]];
+                    [urlsToUpload addObject:dict];
+                    counter ++;
+                    if(counter == totalCount) {
+                        [self postUrlListConstruction];
+                    }
+                }
+            }];
+        } else {
+            [itemProvider loadItemForTypeIdentifier:@"public.data" options:nil completionHandler:^(NSURL *path,NSError *error){
+                if (path) {
+                    NSString *absStr = [path absoluteString];
+                    NSArray *items = [absStr componentsSeparatedByString:@"."];
+                    NSString *extension = [items objectAtIndex:[items count]-1];
+                    NSDictionary *dict = [NSDictionary dictionaryWithObjects:@[path, @"NO", @"NO", @"application/octet-stream", extension] forKeys:@[@"item", @"isPhoto", @"isMedia", @"contentType", @"extension"]];
                     [urlsToUpload addObject:dict];
                     counter ++;
                     if(counter == totalCount) {
@@ -180,61 +218,80 @@
     if(urlsToUpload != nil && urlsToUpload.count > 0) {
         for(int counter = 0; counter < urlsToUpload.count; counter ++) {
             NSDictionary *dict = [urlsToUpload objectAtIndex:counter];
+            BOOL isMedia = [[dict objectForKey:@"isMedia"] boolValue];
             BOOL isPhoto = [[dict objectForKey:@"isPhoto"] boolValue];
             id item = [dict objectForKey:@"item"];
-            if(isPhoto) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    UIImage *sharedImage = nil;
-                    if([(NSObject*)item isKindOfClass:[NSURL class]]) {
-                        sharedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:(NSURL*)item]];
-                    }
-                    if([(NSObject*)item isKindOfClass:[UIImage class]]) {
-                        sharedImage = (UIImage*)item;
-                    }
-                    
-                    if(counter == 0) {
-                        previewView.image = sharedImage;
-                        uploadButton.enabled = YES;
-                        imageLoadingIndicator.hidden = YES;
-                        previewView.hidden = NO;
-                        [self uploadFrames];
-                    }
-
-                    UIImageView *scrollableImgView = [[UIImageView alloc] initWithFrame:CGRectMake(counter * 60, 0, 50, 50)];
-                    scrollableImgView.image = sharedImage;
-                    scrollableImgView.alpha = 0.6;
-                    scrollableImgView.tag = counter;
-                    [imagesScroll addSubview:scrollableImgView];
-                });
+            if(isMedia) {
+                if(isPhoto) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        UIImage *sharedImage = nil;
+                        if([(NSObject*)item isKindOfClass:[NSURL class]]) {
+                            sharedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:(NSURL*)item]];
+                        }
+                        if([(NSObject*)item isKindOfClass:[UIImage class]]) {
+                            sharedImage = (UIImage*)item;
+                        }
+                        
+                        if(counter == 0) {
+                            previewView.image = sharedImage;
+                            uploadButton.enabled = YES;
+                            imageLoadingIndicator.hidden = YES;
+                            previewView.hidden = NO;
+                            [self uploadFrames];
+                        }
+                        
+                        UIImageView *scrollableImgView = [[UIImageView alloc] initWithFrame:CGRectMake(counter * 60, 0, 50, 50)];
+                        scrollableImgView.image = sharedImage;
+                        scrollableImgView.alpha = 0.6;
+                        scrollableImgView.tag = counter;
+                        [imagesScroll addSubview:scrollableImgView];
+                    });
+                } else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        NSURL *moviePath = item;
+                        
+                        AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:moviePath options:nil];
+                        AVAssetImageGenerator *gen = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+                        gen.appliesPreferredTrackTransform = YES;
+                        CMTime time = CMTimeMakeWithSeconds(0.0, 600);
+                        NSError *error = nil;
+                        CMTime actualTime;
+                        
+                        CGImageRef image = [gen copyCGImageAtTime:time actualTime:&actualTime error:&error];
+                        UIImage *thumb = [[UIImage alloc] initWithCGImage:image];
+                        CGImageRelease(image);
+                        
+                        if(counter == 0) {
+                            previewView.image = thumb;
+                            uploadButton.enabled = YES;
+                            imageLoadingIndicator.hidden = YES;
+                            previewView.hidden = NO;
+                            [self uploadFrames];
+                        }
+                        
+                        UIImageView *scrollableImgView = [[UIImageView alloc] initWithFrame:CGRectMake(counter * 60, 0, 50, 50)];
+                        scrollableImgView.image = thumb;
+                        scrollableImgView.alpha = 0.6;
+                        scrollableImgView.tag = counter;
+                        [imagesScroll addSubview:scrollableImgView];
+                        
+                    });
+                }
             } else {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    NSURL *moviePath = item;
-                    
-                    AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:moviePath options:nil];
-                    AVAssetImageGenerator *gen = [[AVAssetImageGenerator alloc] initWithAsset:asset];
-                    gen.appliesPreferredTrackTransform = YES;
-                    CMTime time = CMTimeMakeWithSeconds(0.0, 600);
-                    NSError *error = nil;
-                    CMTime actualTime;
-                    
-                    CGImageRef image = [gen copyCGImageAtTime:time actualTime:&actualTime error:&error];
-                    UIImage *thumb = [[UIImage alloc] initWithCGImage:image];
-                    CGImageRelease(image);
-
                     if(counter == 0) {
-                        previewView.image = thumb;
+                        previewView.image = [UIImage imageNamed:@"documents_icon.png"];
                         uploadButton.enabled = YES;
                         imageLoadingIndicator.hidden = YES;
                         previewView.hidden = NO;
                         [self uploadFrames];
                     }
-
-                    UIImageView *scrollableImgView = [[UIImageView alloc] initWithFrame:CGRectMake(counter * 60, 0, 50, 50)];
-                    scrollableImgView.image = thumb;
+                    
+                    UIImageView *scrollableImgView = [[UIImageView alloc] initWithFrame:CGRectMake(counter * 60, 0, 38, 50)];
+                    scrollableImgView.image = [UIImage imageNamed:@"documents_icon.png"];
                     scrollableImgView.alpha = 0.6;
                     scrollableImgView.tag = counter;
                     [imagesScroll addSubview:scrollableImgView];
-
                 });
             }
         }

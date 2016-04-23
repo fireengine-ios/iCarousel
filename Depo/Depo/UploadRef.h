@@ -17,6 +17,7 @@
 @property (nonatomic, strong) NSString *fileName;
 @property (nonatomic, strong) NSString *filePath;
 @property (nonatomic, strong) NSString *folderUuid;
+@property (nonatomic, strong) NSString *referenceFolderName;
 @property (nonatomic, strong) NSString *fileUuid;
 @property (nonatomic, strong) NSString *tempUrl;
 @property (nonatomic, strong) NSString *tempThumbnailUrl;

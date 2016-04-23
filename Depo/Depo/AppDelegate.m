@@ -117,7 +117,7 @@
 
     [[CurioSDK shared] sendEvent:@"ApplicationStarted" eventValue:@"true"];
 
-    DBSession *dbSession = [[DBSession alloc] initWithAppKey:@"bxvk9rco608rizf" appSecret:@"my8utjj5dz16m5i" root:kDBRootDropbox];
+    DBSession *dbSession = [[DBSession alloc] initWithAppKey:@"mydrrngzkvnljgs" appSecret:@"ygpn9yt1t128h3u" root:kDBRootDropbox];
     [DBSession setSharedSession:dbSession];
 
     [self addInitialBgImage];
@@ -726,6 +726,7 @@ void uncaughtExceptionHandler(NSException *exception) {
     if ([[DBSession sharedSession] handleOpenURL:url]) {
         if ([[DBSession sharedSession] isLinked]) {
             NSLog(@"App linked successfully!");
+            [[NSNotificationCenter defaultCenter] postNotificationName:DROPBOX_LINK_SUCCESS_KEY object:nil userInfo:nil];
         }
         return YES;
     }

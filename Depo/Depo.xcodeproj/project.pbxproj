@@ -793,6 +793,7 @@
 		56BDE2501A8DEA8B0082F8B8 /* OfferCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 56BDE24F1A8DEA8B0082F8B8 /* OfferCell.m */; };
 		56FCFDD51A9C7DDA00AC041C /* info_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 56FCFDD31A9C7DDA00AC041C /* info_icon.png */; };
 		56FCFDD61A9C7DDA00AC041C /* info_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56FCFDD41A9C7DDA00AC041C /* info_icon@2x.png */; };
+		94112A981CCA7DE00050E9B1 /* DropboxStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94112A971CCA7DE00050E9B1 /* DropboxStatusCell.m */; };
 		94328BD41CC3E03300599CEE /* img_baski_1@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 94328BD21CC3E03300599CEE /* img_baski_1@2x.jpg */; };
 		94328BD51CC3E03300599CEE /* img_baski_2@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 94328BD31CC3E03300599CEE /* img_baski_2@2x.jpg */; };
 		94328BD81CC3E03C00599CEE /* img_baski_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 94328BD61CC3E03C00599CEE /* img_baski_1.jpg */; };
@@ -803,6 +804,11 @@
 		94328BE31CC54E5A00599CEE /* FirstUploadFlagDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94328BE21CC54E5A00599CEE /* FirstUploadFlagDao.m */; };
 		94328BE61CC5666D00599CEE /* FeedbackDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94328BE51CC5666D00599CEE /* FeedbackDao.m */; };
 		94328BE91CC572DF00599CEE /* FeedbackChoiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94328BE81CC572DF00599CEE /* FeedbackChoiceCell.m */; };
+		943751F71CCAB3A7003A76A9 /* DropboxTokenDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 943751F61CCAB3A7003A76A9 /* DropboxTokenDao.m */; };
+		943751F81CCB6ED9003A76A9 /* document_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 051CB3C119D2F71200E5FC88 /* document_icon.png */; };
+		943751F91CCB6EDC003A76A9 /* document_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 051CB3EA19D2F71200E5FC88 /* document_icon@2x.png */; };
+		943751FA1CCB7934003A76A9 /* documents_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0589060B19CC226D00A9E517 /* documents_icon.png */; };
+		943751FB1CCB7936003A76A9 /* documents_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0589060C19CC226D00A9E517 /* documents_icon@2x.png */; };
 		9445B97B1C9F28D2000FDB80 /* FileListPopupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9445B97A1C9F28D2000FDB80 /* FileListPopupController.m */; };
 		9445B97E1C9F28FE000FDB80 /* PhotoListPopupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9445B97D1C9F28FE000FDB80 /* PhotoListPopupController.m */; };
 		9454FA601CAA81FD00BF1288 /* CurrentMusicListModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9454FA5F1CAA81FD00BF1288 /* CurrentMusicListModalController.m */; };
@@ -2042,6 +2048,8 @@
 		56BDE24F1A8DEA8B0082F8B8 /* OfferCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfferCell.m; sourceTree = "<group>"; };
 		56FCFDD31A9C7DDA00AC041C /* info_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info_icon.png; sourceTree = "<group>"; };
 		56FCFDD41A9C7DDA00AC041C /* info_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "info_icon@2x.png"; sourceTree = "<group>"; };
+		94112A961CCA7DE00050E9B1 /* DropboxStatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxStatusCell.h; sourceTree = "<group>"; };
+		94112A971CCA7DE00050E9B1 /* DropboxStatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropboxStatusCell.m; sourceTree = "<group>"; };
 		94328BD21CC3E03300599CEE /* img_baski_1@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "img_baski_1@2x.jpg"; sourceTree = "<group>"; };
 		94328BD31CC3E03300599CEE /* img_baski_2@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "img_baski_2@2x.jpg"; sourceTree = "<group>"; };
 		94328BD61CC3E03C00599CEE /* img_baski_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img_baski_1.jpg; sourceTree = "<group>"; };
@@ -2056,6 +2064,8 @@
 		94328BE51CC5666D00599CEE /* FeedbackDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackDao.m; sourceTree = "<group>"; };
 		94328BE71CC572DF00599CEE /* FeedbackChoiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackChoiceCell.h; sourceTree = "<group>"; };
 		94328BE81CC572DF00599CEE /* FeedbackChoiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackChoiceCell.m; sourceTree = "<group>"; };
+		943751F51CCAB3A7003A76A9 /* DropboxTokenDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxTokenDao.h; sourceTree = "<group>"; };
+		943751F61CCAB3A7003A76A9 /* DropboxTokenDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropboxTokenDao.m; sourceTree = "<group>"; };
 		9445B9791C9F28D2000FDB80 /* FileListPopupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileListPopupController.h; sourceTree = "<group>"; };
 		9445B97A1C9F28D2000FDB80 /* FileListPopupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileListPopupController.m; sourceTree = "<group>"; };
 		9445B97C1C9F28FE000FDB80 /* PhotoListPopupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoListPopupController.h; sourceTree = "<group>"; };
@@ -2692,6 +2702,8 @@
 				94E549021CC6348E003CB5DC /* DropboxStartDao.m */,
 				94E549041CC6349C003CB5DC /* DropboxStatusDao.h */,
 				94E549051CC6349C003CB5DC /* DropboxStatusDao.m */,
+				943751F51CCAB3A7003A76A9 /* DropboxTokenDao.h */,
+				943751F61CCAB3A7003A76A9 /* DropboxTokenDao.m */,
 			);
 			name = http;
 			sourceTree = "<group>";
@@ -2818,6 +2830,8 @@
 				05342FD51C4802470073359A /* RevisitedCurrentSubscriptionCell.m */,
 				05342FD71C4802560073359A /* RevisitedOfferCell.h */,
 				05342FD81C4802560073359A /* RevisitedOfferCell.m */,
+				94112A961CCA7DE00050E9B1 /* DropboxStatusCell.h */,
+				94112A971CCA7DE00050E9B1 /* DropboxStatusCell.m */,
 			);
 			name = cell;
 			sourceTree = "<group>";
@@ -4377,16 +4391,20 @@
 				05028CCF1B5A5E53000F2D09 /* close_icon.png in Resources */,
 				05028CC71B5A5BE6000F2D09 /* TurkcellSaturaBol.ttf in Resources */,
 				05028CCA1B5A5BEF000F2D09 /* TurkcellSaturaDemIta.ttf in Resources */,
+				943751F91CCB6EDC003A76A9 /* document_icon@2x.png in Resources */,
 				05028CBA1B57E62E000F2D09 /* Images.xcassets in Resources */,
 				05028CC61B5A596F000F2D09 /* Localizable.strings in Resources */,
 				05028CCC1B5A5BF4000F2D09 /* TurkcellSaturaMed.ttf in Resources */,
 				05028CCD1B5A5BF9000F2D09 /* TurkcellSaturaMedIta.ttf in Resources */,
+				943751F81CCB6ED9003A76A9 /* document_icon.png in Resources */,
 				0576F7E11B5F876D00BD271B /* DepoShareExtension-Enterprise.entitlements in Resources */,
 				05C3A3811B57DFAB002AB49A /* MainInterface.storyboard in Resources */,
+				943751FB1CCB7936003A76A9 /* documents_icon@2x.png in Resources */,
 				05028CBD1B58F7FD000F2D09 /* yellow_button_bg.png in Resources */,
 				05028CC81B5A5BEA000F2D09 /* TurkcellSaturaBolIta.ttf in Resources */,
 				05028CCB1B5A5BF2000F2D09 /* TurkcellSaturaIta.ttf in Resources */,
 				0576F7E51B5F878E00BD271B /* Info-Enterprise.plist in Resources */,
+				943751FA1CCB7934003A76A9 /* documents_icon.png in Resources */,
 				05028CD01B5A5E56000F2D09 /* close_icon@2x.png in Resources */,
 				0576F7E41B5F878E00BD271B /* Info-AppStore.plist in Resources */,
 				05028CBC1B58F697000F2D09 /* yellow_close_button.png in Resources */,
@@ -4501,6 +4519,7 @@
 				051E1E8A19CAC92700FD1E03 /* ASIFormDataRequest.m in Sources */,
 				051E1E8019CAC92700FD1E03 /* NSObject+SBJSON.m in Sources */,
 				054730C019FA39C300F913FF /* DeleteDao.m in Sources */,
+				943751F71CCAB3A7003A76A9 /* DropboxTokenDao.m in Sources */,
 				05868DEC1A275FA000CFE360 /* AudioMenuFooterView.m in Sources */,
 				056F29DE1C4FA786001DD486 /* SendVerificationSMSDao.m in Sources */,
 				05836FCB1A05703A001D7346 /* MoveListModalController.m in Sources */,
@@ -4542,6 +4561,7 @@
 				059A46E61A6D3F4800935023 /* SettingsAboutUsController.m in Sources */,
 				05F28BE91C0739C30002171A /* CurioNetwork.m in Sources */,
 				05AF7C841A1C8D6D00F5011A /* Activity.m in Sources */,
+				94112A981CCA7DE00050E9B1 /* DropboxStatusCell.m in Sources */,
 				052644BE19D5A32300B63759 /* HeaderCell.m in Sources */,
 				94E549001CC63480003CB5DC /* DropboxConnectDao.m in Sources */,
 				05C2A0291A79830500EE4D78 /* NSString+ADJAdditions.m in Sources */,
@@ -4947,8 +4967,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Mahir Kemal Tarlan (R2478SCTN5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mahir Kemal Tarlan (R2478SCTN5)";
+				CODE_SIGN_ENTITLEMENTS = Depo/Depo.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4974,9 +4995,9 @@
 					"-ObjC",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.igones.adepo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.igones.deponew;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "09c0fe4d-0f0d-4e0c-80ae-156f3ac5c880";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -4987,9 +5008,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_ENTITLEMENTS = Depo/Depo.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mahir Kemal Tarlan (AQ3G89KT47)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5011,9 +5032,9 @@
 					"-ObjC",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.igones.adepo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.igones.deponew;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3ed3e98a-030b-4ada-8277-b3f0a1c22615";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -5101,9 +5122,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "Depo/Depo-AppStore.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
-				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5124,7 +5144,7 @@
 					"-ObjC",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.igones.deponew;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "17f5dfc5-c650-490f-9658-b3191d40a262";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -5189,7 +5209,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "Depo/Depo-Enterprise.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				ENABLE_BITCODE = NO;
@@ -5212,7 +5232,7 @@
 					"-ObjC",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent;
+				PRODUCT_BUNDLE_IDENTIFIER = com.igones.deponew;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5910c814-1c2d-4395-b8f8-abe8da320e00";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -5245,8 +5265,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Mahir Kemal Tarlan (R2478SCTN5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mahir Kemal Tarlan (R2478SCTN5)";
+				CODE_SIGN_ENTITLEMENTS = DepoShareExtension/DepoShareExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -5260,9 +5281,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.igones.adepo.DepoShareExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.igones.deponew.DepoShareExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8c856075-f920-4e14-afeb-7414ff740030";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -5273,9 +5294,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Mahir Kemal Tarlan (AQ3G89KT47)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mahir Kemal Tarlan (AQ3G89KT47)";
+				CODE_SIGN_ENTITLEMENTS = DepoShareExtension/DepoShareExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
@@ -5286,9 +5307,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.igones.adepo.DepoShareExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.igones.deponew.DepoShareExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8918983d-d48a-4fa6-8df7-a18e2747765c";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -5312,7 +5333,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.shareextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.igones.deponew.DepoShareExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "e648adbb-1c99-4e14-a3ce-21965ab745fc";
 				SKIP_INSTALL = YES;
@@ -5338,7 +5359,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent.shareextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.igones.deponew.DepoShareExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "d6db7235-b6fd-4b52-aa7f-029ff77b9a01";
 				SKIP_INSTALL = YES;
@@ -5349,7 +5370,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Mahir Kemal Tarlan (R2478SCTN5)";
+				CODE_SIGN_ENTITLEMENTS = AutoSyncWidget/AutoSyncWidget.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -5360,9 +5383,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.igones.adepo.AutoSyncWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.igones.deponew.AutoSyncWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8c856075-f920-4e14-afeb-7414ff740030";
+				PROVISIONING_PROFILE = "a44b1e90-6b98-4066-8ce7-da6f43af3de8";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -5372,9 +5395,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_ENTITLEMENTS = AutoSyncWidget/AutoSyncWidget.entitlements;
 				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]" = "";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Mahir Kemal Tarlan (AQ3G89KT47)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -5383,9 +5407,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.igones.adepo.AutoSyncWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.igones.deponew.AutoSyncWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8918983d-d48a-4fa6-8df7-a18e2747765c";
+				PROVISIONING_PROFILE = "a44b1e90-6b98-4066-8ce7-da6f43af3de8";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -5398,6 +5422,7 @@
 				CODE_SIGN_ENTITLEMENTS = "AutoSyncWidget/AutoSyncWidget-AppStore.entitlements";
 				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]" = "AutoSyncWidget/AutoSyncWidget-AppStore.entitlements";
 				CODE_SIGN_IDENTITY = " iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = " iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -5406,7 +5431,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.todayextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.igones.deponew.AutoSyncWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "53b8799d-db75-4aaf-b653-d328227ee5be";
 				SKIP_INSTALL = YES;
@@ -5418,9 +5443,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_ENTITLEMENTS = "AutoSyncWidget/AutoSyncWidget-Enterprise.entitlements";
+				CODE_SIGN_ENTITLEMENTS = AutoSyncWidget/AutoSyncWidget.entitlements;
 				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]" = "AutoSyncWidget/AutoSyncWidget-Enterprise.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -5429,7 +5455,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent.todayextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.igones.deponew.AutoSyncWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "b26460e4-3d31-49aa-9b77-7fcc88fc416a";
 				SKIP_INSTALL = YES;

@@ -329,7 +329,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     notifyDao.successMethod = @selector(uploadNotifySuccessCallback:);
     notifyDao.failMethod = @selector(uploadNotifyFailCallback:);
 
-    [notifyDao requestNotifyUploadForFile:self.uploadRef.fileUuid atParentFolder:self.uploadRef.folder?self.uploadRef.folder.uuid:@""];
+    [notifyDao requestNotifyUploadForFile:self.uploadRef.fileUuid atParentFolder:self.uploadRef.folder?self.uploadRef.folder.uuid:@"" withReferenceAlbumName:self.uploadRef.referenceFolderName];
 }
 
 - (void) uploadNotifySuccessCallback:(MetaFile *) finalFile {

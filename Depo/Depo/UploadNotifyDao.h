@@ -11,5 +11,6 @@
 @interface UploadNotifyDao : BaseDao
 
 - (void) requestNotifyUploadForFile:(NSString *) fileUuid atParentFolder:(NSString *) parentUuid;
+- (void) requestNotifyUploadForFile:(NSString *) fileUuid atParentFolder:(NSString *) parentUuid withReferenceAlbumName:(NSString *) refAlbumName;
 
 @end
