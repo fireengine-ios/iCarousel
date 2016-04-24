@@ -19,7 +19,7 @@
 
 @property (nonatomic, strong) UIView *mainStatusView;
 
-@property (nonatomic, strong) UIImageView *circleView;
+@property (nonatomic, strong) UIView *circleView;
 @property (nonatomic, strong) CustomLabel *percentLabel;
 @property (nonatomic, strong) XYPieChart *statusChart;
 @property (nonatomic, strong) NSMutableArray *statusList;

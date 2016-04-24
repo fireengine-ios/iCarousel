@@ -142,6 +142,8 @@
 
 #define DROPBOX_STATUS_URL BASE_URL@"/migration/dropbox/status"
 
+#define SEARCH_BY_GROUP_URL BASE_URL@"/search/byFieldGroupByLocation"
+
 #define APN_URL @"http://pushserver.turkcell.com.tr/PushServer/rest/registerdevice/"
 
 #define SHORTEN_URL @"https://www.googleapis.com/urlshortener/v1/url"

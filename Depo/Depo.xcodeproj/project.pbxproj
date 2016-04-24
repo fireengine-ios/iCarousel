@@ -887,6 +887,7 @@
 		94E549351CC6BA43003CB5DC /* icon_select_on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94E5492E1CC6BA43003CB5DC /* icon_select_on@3x.png */; };
 		94E549361CC6BA43003CB5DC /* icon_suggestion@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94E5492F1CC6BA43003CB5DC /* icon_suggestion@3x.png */; };
 		94E7B4B21CB2D12300385016 /* ReachUsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E7B4B11CB2D12300385016 /* ReachUsController.m */; };
+		94EB28BC1CCD142B00A45050 /* SearchByGroupDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94EB28BB1CCD142B00A45050 /* SearchByGroupDao.m */; };
 		94EF279C1C982B460087EFBE /* NoItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94EF279B1C982B460087EFBE /* NoItemView.m */; };
 /* End PBXBuildFile section */
 
@@ -2166,6 +2167,8 @@
 		94E5492F1CC6BA43003CB5DC /* icon_suggestion@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_suggestion@3x.png"; sourceTree = "<group>"; };
 		94E7B4B01CB2D12300385016 /* ReachUsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachUsController.h; sourceTree = "<group>"; };
 		94E7B4B11CB2D12300385016 /* ReachUsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachUsController.m; sourceTree = "<group>"; };
+		94EB28BA1CCD142B00A45050 /* SearchByGroupDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchByGroupDao.h; sourceTree = "<group>"; };
+		94EB28BB1CCD142B00A45050 /* SearchByGroupDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchByGroupDao.m; sourceTree = "<group>"; };
 		94EF279A1C982B460087EFBE /* NoItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoItemView.h; sourceTree = "<group>"; };
 		94EF279B1C982B460087EFBE /* NoItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoItemView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -2704,6 +2707,8 @@
 				94E549051CC6349C003CB5DC /* DropboxStatusDao.m */,
 				943751F51CCAB3A7003A76A9 /* DropboxTokenDao.h */,
 				943751F61CCAB3A7003A76A9 /* DropboxTokenDao.m */,
+				94EB28BA1CCD142B00A45050 /* SearchByGroupDao.h */,
+				94EB28BB1CCD142B00A45050 /* SearchByGroupDao.m */,
 			);
 			name = http;
 			sourceTree = "<group>";
@@ -3875,6 +3880,9 @@
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
+							com.apple.Push = {
+								enabled = 0;
+							};
 						};
 					};
 					051E1E0D19CAC2F900FD1E03 = {
@@ -4635,6 +4643,7 @@
 				052644B019D5A2A600B63759 /* SettingsMusicController.m in Sources */,
 				05F28BEF1C0739C30002171A /* CurioSDK.m in Sources */,
 				05C2A02E1A79830500EE4D78 /* ADJConfig.m in Sources */,
+				94EB28BC1CCD142B00A45050 /* SearchByGroupDao.m in Sources */,
 				05F28BEB1C0739C30002171A /* CurioPostOffice.m in Sources */,
 				051E1E8719CAC92700FD1E03 /* ASIDataCompressor.m in Sources */,
 				2443E1571B6BB5F3001C274D /* AudioManager.m in Sources */,
@@ -5122,8 +5131,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "Depo/Depo-AppStore.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5146,7 +5155,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.igones.deponew;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "17f5dfc5-c650-490f-9658-b3191d40a262";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -5209,8 +5218,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "Depo/Depo-Enterprise.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5234,7 +5243,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.igones.deponew;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5910c814-1c2d-4395-b8f8-abe8da320e00";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};

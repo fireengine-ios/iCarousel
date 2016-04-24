@@ -10,6 +10,6 @@
 
 @interface DropboxTokenDao : BaseDao
 
-- (void) requestToken;
+- (void) requestTokenWithCurrentToken:(NSString *) currentToken withConsumerKey:(NSString *) consumerKey withAppSecret:(NSString *) appSecret withAuthTokenSecret:(NSString *) authTokenSecret;
 
 @end

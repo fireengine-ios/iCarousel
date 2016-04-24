@@ -56,8 +56,11 @@
         statusDao.failMethod = @selector(statusFailCallback:);
 
         tokenDao = [[DropboxTokenDao alloc] init];
+        tokenDao.delegate = self;
+        tokenDao.successMethod = @selector(tokenSuccessCallback:);
+        tokenDao.failMethod = @selector(tokenFailCallback:);
         
-        exportButton = [[CustomButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - buttonSize)/2, 50, buttonSize, 60) withImageName:@"buttonbg_yellow.png" withTitle:NSLocalizedString(@"Export", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withColor:[UIColor whiteColor]];
+        exportButton = [[CustomButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - buttonSize)/2, 50, buttonSize, 60) withImageName:@"buttonbg_yellow.png" withTitle:NSLocalizedString(@"Export", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withColor:[Util UIColorForHexColor:@"363e4f"]];
         [exportButton addTarget:self action:@selector(triggerExport) forControlEvents:UIControlEventTouchUpInside];
         exportButton.enabled = NO;
         [self.view addSubview:exportButton];
@@ -66,7 +69,7 @@
         mainStatusView.hidden = YES;
         [self.view addSubview:mainStatusView];
         
-        statusChart = [[XYPieChart alloc] initWithFrame:CGRectMake(mainStatusView.frame.size.width - 180, 0, 120, 120)];
+        statusChart = [[XYPieChart alloc] initWithFrame:CGRectMake((mainStatusView.frame.size.width - 120)/2, 0, 120, 120)];
         statusChart.dataSource = self;
         statusChart.startPieAngle = -M_PI_2;
         statusChart.animationSpeed = 0.01;
@@ -78,12 +81,12 @@
         statusChart.labelShadowColor = [UIColor blackColor];
         [mainStatusView addSubview:statusChart];
         
-        UIImage *circleImg = [UIImage imageNamed:@"yuvarlakbulut.png"];
-        circleView = [[UIImageView alloc] initWithFrame:CGRectMake(mainStatusView.frame.size.width - 165, 15, 90, 90)];
-        circleView.image = circleImg;
+        circleView = [[UIView alloc] initWithFrame:CGRectMake((mainStatusView.frame.size.width - 90)/2, 15, 90, 90)];
+        circleView.backgroundColor = [Util UIColorForHexColor:@"3fb0e8"];
+        circleView.layer.cornerRadius = 45;
         [mainStatusView addSubview:circleView];
         
-        percentLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(60, 45, 70, 30) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:25] withColor:[Util UIColorForHexColor:@"555555"] withText:@""];
+        percentLabel = [[CustomLabel alloc] initWithFrame:CGRectMake((mainStatusView.frame.size.width - 70)/2, 45, 70, 30) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:25] withColor:[Util UIColorForHexColor:@"FFFFFF"] withText:@""];
         percentLabel.textAlignment = NSTextAlignmentCenter;
         [mainStatusView addSubview:percentLabel];
 
@@ -100,8 +103,7 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dropboxDidLogin) name:DROPBOX_LINK_SUCCESS_KEY object:nil];
  
-        [statusDao requestDropboxStatus];
-        [self showLoading];
+        [self scheduleStatusQuery];
         
         //TODO sil
 //        [self performSelector:@selector(temp) withObject:nil afterDelay:4.0f];
@@ -122,18 +124,17 @@
     accountInfoClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
     accountInfoClient.delegate = self;
     [accountInfoClient loadAccountInfo];
+    [self showLoading];
 }
 
 - (void) triggerExport {
-    [self showLoading];
     if (![[DBSession sharedSession] isLinked]) {
         [[DBSession sharedSession] linkFromController:self];
     } else {
         accountInfoClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
         accountInfoClient.delegate = self;
         [accountInfoClient loadAccountInfo];
-//        [connectDao requestConnectDropboxWithToken:nil];
-//        [self showLoading];
+        [self showLoading];
     }
 }
 
@@ -197,6 +198,7 @@
 
 - (void) startSuccessCallback {
     [self hideLoading];
+    [self performSelector:@selector(scheduleStatusQuery) withObject:nil afterDelay:2.0f];
 }
 
 - (void) startFailCallback:(NSString *) errorMessage {
@@ -239,9 +241,19 @@
 
 - (void) scheduleStatusQuery {
     [statusDao requestDropboxStatus];
+    [self showLoading];
 }
 
 - (void) statusFailCallback:(NSString *) errorMessage {
+    [self hideLoading];
+}
+
+- (void) tokenSuccessCallback:(NSString *) newToken {
+    [connectDao requestConnectDropboxWithToken:newToken];
+}
+
+- (void) tokenFailCallback:(NSString *) errorMessage {
+    [self showErrorAlertWithMessage:errorMessage];
     [self hideLoading];
 }
 
@@ -280,15 +292,17 @@
     if(info) {
         MPOAuthCredentialConcreteStore *credentials = [[DBSession sharedSession] credentialStoreForUserId:info.userId];
         if(credentials.accessToken){
-            [connectDao requestConnectDropboxWithToken:credentials.accessToken];
+            [tokenDao requestTokenWithCurrentToken:credentials.accessToken withConsumerKey:credentials.consumerKey withAppSecret:@"ygpn9yt1t128h3u" withAuthTokenSecret:credentials.accessTokenSecret];
             return;
         }
     }
     [self showErrorAlertWithMessage:NSLocalizedString(@"DropboxAccessError", @"")];
+    [self hideLoading];
 }
 
 - (void)restClient:(DBRestClient *)client loadAccountInfoFailedWithError:(NSError *)error {
     [self showErrorAlertWithMessage:NSLocalizedString(@"DropboxAccessError", @"")];
+    [self hideLoading];
 }
 
 - (NSArray *)getTokensFromSyncAPI {
