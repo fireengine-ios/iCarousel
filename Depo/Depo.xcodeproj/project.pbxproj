@@ -5006,7 +5006,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.igones.deponew;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "ce83ac0b-ee03-4058-a10a-63f46f13d14c";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -5132,7 +5132,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "Depo/Depo-AppStore.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5153,9 +5153,9 @@
 					"-ObjC",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.igones.deponew;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "17f5dfc5-c650-490f-9658-b3191d40a262";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -5219,7 +5219,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "Depo/Depo-Enterprise.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5241,9 +5241,9 @@
 					"-ObjC",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.igones.deponew;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "5910c814-1c2d-4395-b8f8-abe8da320e00";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -5292,7 +5292,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igones.deponew.DepoShareExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "6b1577bd-ac26-4f8f-b015-d139301132e0";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -5342,7 +5342,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.igones.deponew.DepoShareExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.shareextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "e648adbb-1c99-4e14-a3ce-21965ab745fc";
 				SKIP_INSTALL = YES;
@@ -5368,7 +5368,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.igones.deponew.DepoShareExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent.shareextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "d6db7235-b6fd-4b52-aa7f-029ff77b9a01";
 				SKIP_INSTALL = YES;
@@ -5440,7 +5440,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.igones.deponew.AutoSyncWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.todayextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "53b8799d-db75-4aaf-b653-d328227ee5be";
 				SKIP_INSTALL = YES;
@@ -5464,7 +5464,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.igones.deponew.AutoSyncWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent.todayextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "b26460e4-3d31-49aa-9b77-7fcc88fc416a";
 				SKIP_INSTALL = YES;

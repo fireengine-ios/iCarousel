@@ -22,7 +22,7 @@
 	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setDelegate:self];
     if(refAlbumName != nil) {
-        [request addRequestHeader:@"Upload-Reference-Album-Name" value:refAlbumName];
+        [request addRequestHeader:@"X-Object-Meta-Album-Name" value:refAlbumName];
     }
     
     [self sendGetRequest:request];
