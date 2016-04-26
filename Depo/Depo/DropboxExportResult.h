@@ -14,10 +14,10 @@
 @property (nonatomic) BOOL connected;
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic) long progress;
-@property (nonatomic) long failedCount;
-@property (nonatomic) long successCount;
+@property (nonatomic) long failedSize;
+@property (nonatomic) long successSize;
 @property (nonatomic) long skippedCount;
-@property (nonatomic) long totalCount;
+@property (nonatomic) long totalSize;
 @property (nonatomic) DropboxExportStatus status;
 
 @end

@@ -455,6 +455,11 @@ typedef enum {
 } FeedBackType;
 
 typedef enum {
+    PhotoHeaderSegmentTypePhoto,
+    PhotoHeaderSegmentTypeAlbum
+} PhotoHeaderSegmentType;
+
+typedef enum {
     DropboxExportStatusPending,
     DropboxExportStatusRunning,
     DropboxExportStatusFailed,
@@ -463,6 +468,12 @@ typedef enum {
     DropboxExportStatusFinished,
     DropboxExportStatusCancelled
 } DropboxExportStatus;
+
+typedef enum {
+    ImageGroupLevelYear = 1,
+    ImageGroupLevelMonth,
+    ImageGroupLevelDay
+} ImageGroupLevel;
 
 @interface AppConstants : NSObject
 

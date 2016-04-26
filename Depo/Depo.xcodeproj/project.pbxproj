@@ -794,6 +794,8 @@
 		56FCFDD51A9C7DDA00AC041C /* info_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 56FCFDD31A9C7DDA00AC041C /* info_icon.png */; };
 		56FCFDD61A9C7DDA00AC041C /* info_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56FCFDD41A9C7DDA00AC041C /* info_icon@2x.png */; };
 		94112A981CCA7DE00050E9B1 /* DropboxStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94112A971CCA7DE00050E9B1 /* DropboxStatusCell.m */; };
+		941496611CCF559D008A8D0C /* GroupedPhotosAndVideosController.m in Sources */ = {isa = PBXBuildFile; fileRef = 941496601CCF559D008A8D0C /* GroupedPhotosAndVideosController.m */; };
+		941496641CCF5E51008A8D0C /* GroupedPhotosCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 941496631CCF5E51008A8D0C /* GroupedPhotosCell.m */; };
 		94328BD41CC3E03300599CEE /* img_baski_1@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 94328BD21CC3E03300599CEE /* img_baski_1@2x.jpg */; };
 		94328BD51CC3E03300599CEE /* img_baski_2@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 94328BD31CC3E03300599CEE /* img_baski_2@2x.jpg */; };
 		94328BD81CC3E03C00599CEE /* img_baski_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 94328BD61CC3E03C00599CEE /* img_baski_1.jpg */; };
@@ -804,6 +806,7 @@
 		94328BE31CC54E5A00599CEE /* FirstUploadFlagDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94328BE21CC54E5A00599CEE /* FirstUploadFlagDao.m */; };
 		94328BE61CC5666D00599CEE /* FeedbackDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94328BE51CC5666D00599CEE /* FeedbackDao.m */; };
 		94328BE91CC572DF00599CEE /* FeedbackChoiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94328BE81CC572DF00599CEE /* FeedbackChoiceCell.m */; };
+		9436AB321CCEB694001E0594 /* FileInfoGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 9436AB311CCEB694001E0594 /* FileInfoGroup.m */; };
 		943751F71CCAB3A7003A76A9 /* DropboxTokenDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 943751F61CCAB3A7003A76A9 /* DropboxTokenDao.m */; };
 		943751F81CCB6ED9003A76A9 /* document_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 051CB3C119D2F71200E5FC88 /* document_icon.png */; };
 		943751F91CCB6EDC003A76A9 /* document_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 051CB3EA19D2F71200E5FC88 /* document_icon@2x.png */; };
@@ -2051,6 +2054,10 @@
 		56FCFDD41A9C7DDA00AC041C /* info_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "info_icon@2x.png"; sourceTree = "<group>"; };
 		94112A961CCA7DE00050E9B1 /* DropboxStatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxStatusCell.h; sourceTree = "<group>"; };
 		94112A971CCA7DE00050E9B1 /* DropboxStatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropboxStatusCell.m; sourceTree = "<group>"; };
+		9414965F1CCF559D008A8D0C /* GroupedPhotosAndVideosController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupedPhotosAndVideosController.h; sourceTree = "<group>"; };
+		941496601CCF559D008A8D0C /* GroupedPhotosAndVideosController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupedPhotosAndVideosController.m; sourceTree = "<group>"; };
+		941496621CCF5E51008A8D0C /* GroupedPhotosCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupedPhotosCell.h; sourceTree = "<group>"; };
+		941496631CCF5E51008A8D0C /* GroupedPhotosCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupedPhotosCell.m; sourceTree = "<group>"; };
 		94328BD21CC3E03300599CEE /* img_baski_1@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "img_baski_1@2x.jpg"; sourceTree = "<group>"; };
 		94328BD31CC3E03300599CEE /* img_baski_2@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "img_baski_2@2x.jpg"; sourceTree = "<group>"; };
 		94328BD61CC3E03C00599CEE /* img_baski_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img_baski_1.jpg; sourceTree = "<group>"; };
@@ -2065,6 +2072,8 @@
 		94328BE51CC5666D00599CEE /* FeedbackDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackDao.m; sourceTree = "<group>"; };
 		94328BE71CC572DF00599CEE /* FeedbackChoiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackChoiceCell.h; sourceTree = "<group>"; };
 		94328BE81CC572DF00599CEE /* FeedbackChoiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackChoiceCell.m; sourceTree = "<group>"; };
+		9436AB301CCEB694001E0594 /* FileInfoGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileInfoGroup.h; sourceTree = "<group>"; };
+		9436AB311CCEB694001E0594 /* FileInfoGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileInfoGroup.m; sourceTree = "<group>"; };
 		943751F51CCAB3A7003A76A9 /* DropboxTokenDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxTokenDao.h; sourceTree = "<group>"; };
 		943751F61CCAB3A7003A76A9 /* DropboxTokenDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropboxTokenDao.m; sourceTree = "<group>"; };
 		9445B9791C9F28D2000FDB80 /* FileListPopupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileListPopupController.h; sourceTree = "<group>"; };
@@ -2489,6 +2498,8 @@
 				9454FA651CAA822300BF1288 /* CurrentPhotoListModalController.m */,
 				94E7B4B01CB2D12300385016 /* ReachUsController.h */,
 				94E7B4B11CB2D12300385016 /* ReachUsController.m */,
+				9414965F1CCF559D008A8D0C /* GroupedPhotosAndVideosController.h */,
+				941496601CCF559D008A8D0C /* GroupedPhotosAndVideosController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -2762,6 +2773,8 @@
 				94BEABFD1CAD1D6C002E37A7 /* Eula.m */,
 				94E5490A1CC638AA003CB5DC /* DropboxExportResult.h */,
 				94E5490B1CC638AA003CB5DC /* DropboxExportResult.m */,
+				9436AB301CCEB694001E0594 /* FileInfoGroup.h */,
+				9436AB311CCEB694001E0594 /* FileInfoGroup.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -2837,6 +2850,8 @@
 				05342FD81C4802560073359A /* RevisitedOfferCell.m */,
 				94112A961CCA7DE00050E9B1 /* DropboxStatusCell.h */,
 				94112A971CCA7DE00050E9B1 /* DropboxStatusCell.m */,
+				941496621CCF5E51008A8D0C /* GroupedPhotosCell.h */,
+				941496631CCF5E51008A8D0C /* GroupedPhotosCell.m */,
 			);
 			name = cell;
 			sourceTree = "<group>";
@@ -4533,6 +4548,7 @@
 				05836FCB1A05703A001D7346 /* MoveListModalController.m in Sources */,
 				051412A519D46748000EAE63 /* FloatingAddMenu.m in Sources */,
 				94884C9B1C90C506006722F7 /* ChangePassController.m in Sources */,
+				941496611CCF559D008A8D0C /* GroupedPhotosAndVideosController.m in Sources */,
 				94E549091CC63718003CB5DC /* DropboxExportController.m in Sources */,
 				05C2A0311A79830500EE4D78 /* ADJLogger.m in Sources */,
 				05C2A02F1A79830500EE4D78 /* ADJDeviceInfo.m in Sources */,
@@ -4680,6 +4696,7 @@
 				051DE37219CC140100F27C85 /* CustomAlertView.m in Sources */,
 				059E9A021A35DB5F00922A77 /* SmsForPassButton.m in Sources */,
 				058B328B1A14ABBE00A291C4 /* DeleteAlbumsDao.m in Sources */,
+				941496641CCF5E51008A8D0C /* GroupedPhotosCell.m in Sources */,
 				058219C51A384CC6001FA679 /* SearchMoreModalController.m in Sources */,
 				052644AD19D5A2A600B63759 /* SettingsContactsController.m in Sources */,
 				05F931901C160ED200858223 /* SyncLogger.m in Sources */,
@@ -4726,6 +4743,7 @@
 				9454FA601CAA81FD00BF1288 /* CurrentMusicListModalController.m in Sources */,
 				052E36ED1ACA8AFE009A2F13 /* UploadingImagePreviewController.m in Sources */,
 				051E1E5719CAC90700FD1E03 /* AFPropertyListRequestOperation.m in Sources */,
+				9436AB321CCEB694001E0594 /* FileInfoGroup.m in Sources */,
 				059A46E31A6D3E3F00935023 /* AccountDao.m in Sources */,
 				058BC23F1A30E6B10007F4DE /* ServiceLoginDao.m in Sources */,
 				053D0EDE19DB01F7006A13E0 /* AddFolderDao.m in Sources */,

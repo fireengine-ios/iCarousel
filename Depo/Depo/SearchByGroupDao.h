@@ -10,4 +10,6 @@
 
 @interface SearchByGroupDao : BaseDao
 
+- (void) requestImagesByGroupByPage:(int) page bySize:(int) size byLevel:(int) level byGroupDate:(NSString *) groupDate byGroupSize:(NSNumber *) groupSize;
+
 @end

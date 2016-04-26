@@ -21,5 +21,11 @@
 @synthesize album;
 @synthesize songTitle;
 @synthesize duration;
+@synthesize geoAdminLevel1;
+@synthesize geoAdminLevel2;
+@synthesize geoAdminLevel3;
+@synthesize geoAdminLevel4;
+@synthesize geoAdminLevel5;
+@synthesize geoAdminLevel6;
 
 @end

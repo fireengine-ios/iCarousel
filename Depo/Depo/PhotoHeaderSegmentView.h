@@ -23,5 +23,9 @@
 @property (nonatomic, strong) CustomButton *albumButton;
 @property (nonatomic, strong) UIImage *firstBgImg;
 @property (nonatomic, strong) UIImage *secondBgImg;
+@property (nonatomic) BOOL deactivated;
+
+- (void) deactivate;
+- (void) reactivate;
 
 @end

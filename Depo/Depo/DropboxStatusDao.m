@@ -29,21 +29,21 @@
         NSDictionary *mainDict = [jsonParser objectWithString:responseStr];
         if(mainDict != nil && ![mainDict isKindOfClass:[NSNull class]]) {
             NSNumber *connected = [mainDict objectForKey:@"connected"];
-            NSNumber *failedCount = [mainDict objectForKey:@"failedCount"];
+            NSNumber *failedSize = [mainDict objectForKey:@"failedSize"];
             NSNumber *progress = [mainDict objectForKey:@"progress"];
-            NSNumber *successCount = [mainDict objectForKey:@"successCount"];
+            NSNumber *successSize = [mainDict objectForKey:@"successSize"];
             NSNumber *skippedCount = [mainDict objectForKey:@"skippedCount"];
-            NSNumber *totalCount = [mainDict objectForKey:@"totalCount"];
+            NSNumber *totalSize = [mainDict objectForKey:@"totalSize"];
             NSString *status = [self strByRawVal:[mainDict objectForKey:@"status"]];
 
             DropboxExportResult *result = [[DropboxExportResult alloc] init];
             result.connected = [self boolByNumber:connected];
             result.date = [self dateByRawVal:[mainDict objectForKey:@"date"]];
-            result.failedCount = [self longByNumber:failedCount];
+            result.failedSize = [self longByNumber:failedSize];
             result.progress = [self longByNumber:progress];
-            result.successCount = [self longByNumber:successCount];
+            result.successSize = [self longByNumber:successSize];
             result.skippedCount = [self longByNumber:skippedCount];
-            result.totalCount = [self longByNumber:totalCount];
+            result.totalSize = [self longByNumber:totalSize];
             
             if(status) {
                 if([status isEqualToString:@"PENDING"]) {

@@ -21,5 +21,11 @@
 @property (nonatomic, strong) NSString *album;
 @property (nonatomic, strong) NSString *songTitle;
 @property (nonatomic) float duration;
+@property (nonatomic, strong) NSString *geoAdminLevel1;
+@property (nonatomic, strong) NSString *geoAdminLevel2;
+@property (nonatomic, strong) NSString *geoAdminLevel3;
+@property (nonatomic, strong) NSString *geoAdminLevel4;
+@property (nonatomic, strong) NSString *geoAdminLevel5;
+@property (nonatomic, strong) NSString *geoAdminLevel6;
 
 @end

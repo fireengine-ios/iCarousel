@@ -196,6 +196,25 @@
     SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:param]);
 }
 
+- (FileInfoGroup *) parseFileInfoGroup:(NSDictionary *) dict {
+    NSString *rangeStart = [dict objectForKey:@"rangeStart"];
+    NSString *rangeEnd = [dict objectForKey:@"rangeEnd"];
+    NSString *locationInfo = [dict objectForKey:@"locationInfo"];
+    NSArray *fileInfo = [dict objectForKey:@"fileInfo"];
+
+    FileInfoGroup *result = [[FileInfoGroup alloc] init];
+    result.rangeStart = rangeStart;
+    result.rangeEnd = rangeEnd;
+    result.locationInfo = locationInfo;
+    
+    NSMutableArray *fileList = [[NSMutableArray alloc] init];
+    for(NSDictionary *file in fileInfo) {
+        [fileList addObject:[self parseFile:file]];
+    }
+    result.fileInfo = fileList;
+    return result;
+}
+
 - (MetaFile *) parseFile:(NSDictionary *) dict {
     NSString *uuid = [dict objectForKey:@"uuid"];
     NSString *hash = [dict objectForKey:@"hash"];
@@ -245,6 +264,13 @@
         NSString *songTitle = [detailDict objectForKey:@"Title"];
         NSNumber *duration = [detailDict objectForKey:@"Duration"];
 
+        NSString *geoAdminLevel1 = [detailDict objectForKey:@"Geo-Admin-Level-1"];
+        NSString *geoAdminLevel2 = [detailDict objectForKey:@"Geo-Admin-Level-2"];
+        NSString *geoAdminLevel3 = [detailDict objectForKey:@"Geo-Admin-Level-3"];
+        NSString *geoAdminLevel4 = [detailDict objectForKey:@"Geo-Admin-Level-4"];
+        NSString *geoAdminLevel5 = [detailDict objectForKey:@"Geo-Admin-Level-5"];
+        NSString *geoAdminLevel6 = [detailDict objectForKey:@"Geo-Admin-Level-6"];
+
         FileDetail *detail = [[FileDetail alloc] init];
         detail.favoriteFlag = [self boolByNumber:favFlag];
         detail.thumbLargeUrl = thumbLarge;
@@ -257,6 +283,13 @@
         detail.album = [self strByRawVal:album];
         detail.songTitle = [self strByRawVal:songTitle];
         detail.duration = [self floatByNumber:duration];
+
+        detail.geoAdminLevel1 = [self strByRawVal:geoAdminLevel1];
+        detail.geoAdminLevel2 = [self strByRawVal:geoAdminLevel2];
+        detail.geoAdminLevel3 = [self strByRawVal:geoAdminLevel3];
+        detail.geoAdminLevel4 = [self strByRawVal:geoAdminLevel4];
+        detail.geoAdminLevel5 = [self strByRawVal:geoAdminLevel5];
+        detail.geoAdminLevel6 = [self strByRawVal:geoAdminLevel6];
 
         file.videoPreviewUrl = [self strByRawVal:videoPreview];
         

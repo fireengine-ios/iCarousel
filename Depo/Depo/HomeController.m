@@ -30,6 +30,7 @@
 #import "EmailEntryController.h"
 #import "MsisdnEntryController.h"
 #import "MPush.h"
+#import "GroupedPhotosAndVideosController.h"
 
 @interface HomeController ()
 

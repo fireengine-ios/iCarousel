@@ -17,6 +17,7 @@
 @synthesize albumButton;
 @synthesize firstBgImg;
 @synthesize secondBgImg;
+@synthesize deactivated;
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -52,6 +53,18 @@
 
     }
     return self;
+}
+
+- (void) deactivate {
+    self.deactivated = YES;
+    photoButton.enabled = NO;
+    albumButton.enabled = NO;
+}
+
+- (void) reactivate {
+    self.deactivated = NO;
+    photoButton.enabled = YES;
+    albumButton.enabled = YES;
 }
 
 - (void) photoClicked {

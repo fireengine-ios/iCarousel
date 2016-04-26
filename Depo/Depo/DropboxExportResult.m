@@ -13,10 +13,10 @@
 @synthesize connected;
 @synthesize date;
 @synthesize progress;
-@synthesize failedCount;
-@synthesize successCount;
+@synthesize failedSize;
+@synthesize successSize;
 @synthesize skippedCount;
-@synthesize totalCount;
+@synthesize totalSize;
 @synthesize status;
 
 @end

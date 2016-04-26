@@ -17,6 +17,7 @@
 #import "Device.h"
 #import "RadiusDao.h"
 #import "RequestTokenDao.h"
+#import "FileInfoGroup.h"
 
 //TODO test -> prod
 //#define BASE_URL @"https://adepo.turkcell.com.tr/api"
@@ -213,6 +214,7 @@
 - (void) shouldReturnFailWithMessage:(NSString *) errorMessage;
 - (void) shouldReturnFailWithParam:(id) param;
 - (MetaFile *) parseFile:(NSDictionary *) dict;
+- (FileInfoGroup *) parseFileInfoGroup:(NSDictionary *) dict;
 - (Activity *) parseActivity:(NSDictionary *) dict;
 - (SortType) resetSortType:(SortType) sortType;
 - (Subscription *) parseSubscription:(NSDictionary *) dict;

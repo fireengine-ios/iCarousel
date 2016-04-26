@@ -11,6 +11,7 @@
 #import "DropboxExportResult.h"
 #import "Util.h"
 #import "DropboxStatusCell.h"
+#import "AppUtil.h"
 
 @interface DropboxExportController () {
     CustomButton *exportButton;
@@ -105,19 +106,8 @@
  
         [self scheduleStatusQuery];
         
-        //TODO sil
-//        [self performSelector:@selector(temp) withObject:nil afterDelay:4.0f];
     }
     return self;
-}
-
-- (void) temp {
-    DropboxExportResult *status = [[DropboxExportResult alloc] init];
-    status.connected = YES;
-    status.successCount = 10;
-    status.failedCount = 4;
-    status.skippedCount = 2;
-    [self statusSuccessCallback:status];
 }
 
 - (void) dropboxDidLogin {
@@ -222,7 +212,7 @@
         
         [statusChart reloadData];
         
-        if(status.status == DropboxExportStatusFinished || status.status == DropboxExportStatusFailed) {
+        if(status.status == DropboxExportStatusFinished || status.status == DropboxExportStatusFailed || status.status == DropboxExportStatusCancelled) {
             exportButton.enabled = YES;
         } else {
             exportButton.enabled = NO;
@@ -277,12 +267,17 @@
     NSString *cellIdentifier = [NSString stringWithFormat:@"DROPBOX_STATUS_CELL"];
     NSString *cellText;
     if(indexPath.row == 0) {
-        cellText = [NSString stringWithFormat:NSLocalizedString(@"DropboxSuccessResult", @""), recentResult.successCount];
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat:@"dd.MM.yyyy HH:mm:ss"];
+        cellText = [NSString stringWithFormat:NSLocalizedString(@"DropboxLastExportDate", @""), [dateFormat stringFromDate: recentResult.date]];
     } else if(indexPath.row == 1) {
-        cellText = [NSString stringWithFormat:NSLocalizedString(@"DropboxFailedResult", @""), recentResult.failedCount];
-    } else {
-        cellText = [NSString stringWithFormat:NSLocalizedString(@"DropboxSkippedResult", @""), recentResult.skippedCount];
+        cellText = [NSString stringWithFormat:NSLocalizedString(@"DropboxSuccessResult", @""), [Util transformedHugeSizeValueDecimalIfNecessary:recentResult.successSize]];
+    } else if(indexPath.row == 2) {
+        cellText = [NSString stringWithFormat:NSLocalizedString(@"DropboxFailedResult", @""), [Util transformedHugeSizeValueDecimalIfNecessary:recentResult.failedSize]];
+//    } else {
+//        cellText = [NSString stringWithFormat:NSLocalizedString(@"DropboxSkippedResult", @""), recentResult.skippedCount];
     }
+    
     DropboxStatusCell *cell = [[DropboxStatusCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withTitle:cellText];
     return cell;
 }
