@@ -36,12 +36,14 @@
         dao.successMethod = @selector(feedbackSuccessCallback);
         dao.failMethod = @selector(feedbackFailCallback:);
         
+        /*
         if(![AppUtil isAlreadyRated]) {
             SimpleButton *rateButton = [[SimpleButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 150)/2, yIndex, 150, 44) withTitle:NSLocalizedString(@"RateButton", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:22];
             [rateButton addTarget:self action:@selector(triggerRateUs) forControlEvents:UIControlEventTouchUpInside];
             [self.view addSubview:rateButton];
         }
-        yIndex += 70;
+         */
+        yIndex += 50;
 
         CustomLabel *titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, yIndex, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:14] withColor:[Util UIColorForHexColor:@"888888"] withText:NSLocalizedString(@"ReachUsInfo", @"")];
         titleLabel.adjustsFontSizeToFitWidth = YES;
@@ -55,6 +57,7 @@
         choiceTable.backgroundColor = [UIColor clearColor];
         choiceTable.backgroundView = nil;
         choiceTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+        choiceTable.bounces = NO;
         [self.view addSubview:choiceTable];
         
         yIndex += 100;

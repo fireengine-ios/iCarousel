@@ -698,3 +698,5 @@
 "DropboxLastExportDate"="Son Aktarım Tarihi: %@";
 "DropboxExportStatus"="Son Aktarım Durumu:";
 "DropboxAccessError"="Dropbox hesabınıza erişirken sorun oluştu.";
+
+"LogoutConfirmMessage"="Uygulamadan çıkış yapıyorsunuz, emin misiniz?";

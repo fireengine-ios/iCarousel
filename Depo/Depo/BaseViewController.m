@@ -266,10 +266,9 @@
 }
 
 - (void) didTriggerLogout {
-    [MPush hitTag:@"logged_out"];
-    [MPush hitEvent:@"logged_out"];
-
-    [APPDELEGATE triggerLogout];
+    CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"ButtonCancel", @"") withApproveTitle:NSLocalizedString(@"OK", @"") withMessage:NSLocalizedString(@"LogoutConfirmMessage", @"") withModalType:ModalTypeApprove];
+    confirm.delegate = self;
+    [APPDELEGATE showCustomConfirm:confirm];
 }
 
 - (void) didTriggerFavorites {
@@ -782,6 +781,16 @@
     } else {
         [self hideSyncInfoView];
     }
+}
+
+- (void) didRejectCustomAlert:(CustomConfirmView *) alertView {
+}
+
+- (void) didApproveCustomAlert:(CustomConfirmView *) alertView {
+    [MPush hitTag:@"logged_out"];
+    [MPush hitEvent:@"logged_out"];
+    
+    [APPDELEGATE triggerLogout];
 }
 
 @end
