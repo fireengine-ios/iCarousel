@@ -19,6 +19,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "NoItemView.h"
 #import "GroupedPhotosCell.h"
+#import "UploadingImagePreviewController.h"
 
 #define IMG_FOOTER_TAG 111
 #define ALBUM_FOOTER_TAG 222
@@ -93,7 +94,6 @@
         selectedFileList = [[NSMutableArray alloc] init];
         selectedAlbumList = [[NSMutableArray alloc] init];
 
-
         mainTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topIndex + 60, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex - 50) style:UITableViewStylePlain];
         mainTable.backgroundColor = [UIColor clearColor];
         mainTable.backgroundView = nil;
@@ -140,11 +140,12 @@
 }
 
 - (void) groupSuccessCallback:(NSArray *) fileGroups {
-    [self hideLoading];
     [self.groups addObjectsFromArray:fileGroups];
 
     photoTableUpdateCounter ++;
     if(segmentType == PhotoHeaderSegmentTypePhoto) {
+        isLoading = NO;
+        [self hideLoading];
         [refreshControl endRefreshing];
         [mainTable reloadData];
     }
@@ -203,6 +204,8 @@
     
     [groupDao requestImagesByGroupByPage:photoListOffset bySize:100 byLevel:self.level byGroupDate:self.groupDate byGroupSize:[NSNumber numberWithInt:50]];
     [albumListDao requestAlbumListForStart:0 andSize:50 andSortType:APPDELEGATE.session.sortType];
+    isLoading = YES;
+    [self showLoading];
 }
 
 - (void) alignPhotosScrollPostDelete {
@@ -212,6 +215,8 @@
     self.albumList = list;
     albumTableUpdateCounter ++;
     if(segmentType == PhotoHeaderSegmentTypeAlbum) {
+        isLoading = NO;
+        [self hideLoading];
         [refreshControl endRefreshing];
         [mainTable reloadData];
     }
@@ -469,7 +474,7 @@
     } else {
         if(groups.count > 0) {
             FileInfoGroup *group = [groups objectAtIndex:indexPath.row];
-            int imageForRow = self.level == ImageGroupLevelYear ? 16 : self.level == ImageGroupLevelMonth ? 8 : 3;
+            int imageForRow = self.level == ImageGroupLevelYear ? 16 : self.level == ImageGroupLevelMonth ? 8 : 4;
             float imageItemSize = (mainTable.frame.size.width - 40)/imageForRow;
             float imageContainerHeight = (floorf(group.fileInfo.count/imageForRow)+1)*imageItemSize;
             return imageContainerHeight + 60;
@@ -486,7 +491,7 @@
         return [albumList count];
     } else {
         if (groups.count == 0)
-            return 1;
+            return isLoading ? 0 : 1;
         return [groups count];
     }
 }
@@ -499,7 +504,8 @@
         if(segmentType == PhotoHeaderSegmentTypePhoto) {
             if(groups.count > 0) {
                 FileInfoGroup *group = [groups objectAtIndex:indexPath.row];
-                cell = [[GroupedPhotosCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withGroup:group withLevel:self.level];
+                cell = [[GroupedPhotosCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withGroup:group withLevel:self.level isSelectible:isSelectible];
+                ((GroupedPhotosCell *)cell).delegate = self;
             } else {
                 cell = [[NoItemCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier imageName:@"no_photo_icon" titleText:NSLocalizedString(@"EmptyPhotosVideosTitle", @"") descriptionText:NSLocalizedString(@"EmptyPhotosVideosDescription", @"")];
             }
@@ -548,7 +554,8 @@
                 ImageGroupLevel nextLevel = level == ImageGroupLevelYear ? ImageGroupLevelMonth : ImageGroupLevelDay;
                 FileInfoGroup *selectedGroup = [groups objectAtIndex:indexPath.row];
                 GroupedPhotosAndVideosController *nextLevelController = [[GroupedPhotosAndVideosController alloc] initWithLevel:nextLevel withGroupDate:selectedGroup.rangeStart];
-                [self.navigationController pushViewController:nextLevelController animated:NO];
+                nextLevelController.nav = self.nav;
+                [self.nav pushViewController:nextLevelController animated:NO];
             }
         }
     }
@@ -622,7 +629,11 @@
 
 - (void) moreClicked {
     if(segmentType == PhotoHeaderSegmentTypePhoto) {
-        [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeSort]]];
+        if(self.level == ImageGroupLevelDay) {
+            [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeSort],[NSNumber numberWithInt:MoreMenuTypeSelect]]];
+        } else {
+            [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeSort]]];
+        }
     } else {
         [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeSortWithList], [NSNumber numberWithInt:MoreMenuTypeSelect]]];
     }
@@ -637,12 +648,10 @@
 }
 
 - (void) changeToSelectedStatus {
-    if(segmentType == PhotoHeaderSegmentTypeAlbum) {
+    if(segmentType == PhotoHeaderSegmentTypeAlbum || self.level == ImageGroupLevelDay) {
         isSelectible = YES;
         [headerView deactivate];
         
-        self.title = NSLocalizedString(@"SelectAlbumsTitle", @"");
-
         previousButtonRef = self.navigationItem.leftBarButtonItem;
         
         CustomButton *cancelButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 60, 20) withImageName:nil withTitle:NSLocalizedString(@"ButtonCancel", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[UIColor whiteColor]];
@@ -657,8 +666,14 @@
         [selectedFileList removeAllObjects];
         [selectedAlbumList removeAllObjects];
         
-        mainTable.allowsMultipleSelection = YES;
-        albumTableUpdateCounter ++;
+        if(segmentType == PhotoHeaderSegmentTypeAlbum) {
+            self.title = NSLocalizedString(@"SelectAlbumsTitle", @"");
+            mainTable.allowsMultipleSelection = YES;
+            albumTableUpdateCounter ++;
+        } else {
+            self.title = NSLocalizedString(@"SelectFilesTitle", @"");
+            photoTableUpdateCounter ++;
+        }
         [mainTable reloadData];
     }
 }
@@ -669,7 +684,7 @@
 }
 
 - (void) cancelSelectible {
-    if(segmentType == PhotoHeaderSegmentTypeAlbum) {
+    if(segmentType == PhotoHeaderSegmentTypeAlbum || self.level == ImageGroupLevelDay) {
         self.title = NSLocalizedString(@"PhotosTitle", @"");
         self.navigationItem.leftBarButtonItem = previousButtonRef;
         moreButton.hidden = NO;
@@ -680,8 +695,12 @@
         [selectedFileList removeAllObjects];
         [selectedAlbumList removeAllObjects];
         
-        mainTable.allowsMultipleSelection = NO;
-        albumTableUpdateCounter ++;
+        if(segmentType == PhotoHeaderSegmentTypeAlbum) {
+            mainTable.allowsMultipleSelection = NO;
+            albumTableUpdateCounter ++;
+        } else {
+            photoTableUpdateCounter ++;
+        }
         [mainTable reloadData];
         
         if(imgFooterActionMenu) {
@@ -799,6 +818,91 @@
 - (void) dealloc {
     //mahir
     [UIImageView clearImageCaches];
+}
+
+- (void) groupedPhotoCellImageWasSelectedForFile:(MetaFile *) fileSelected {
+    if(fileSelected.contentType == ContentTypePhoto) {
+        NSMutableArray *filteredPhotoList = [[NSMutableArray alloc] init];
+        [filteredPhotoList addObject:fileSelected];
+        ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFiles:filteredPhotoList withImage:fileSelected withListOffset:0];
+        detail.delegate = self;
+        MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
+        detail.nav = modalNav;
+        [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
+    } else if(fileSelected.contentType == ContentTypeVideo) {
+        VideoPreviewController *detail = [[VideoPreviewController alloc] initWithFile:fileSelected];
+        detail.delegate = self;
+        MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
+        detail.nav = modalNav;
+        [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
+    }
+}
+
+- (void) groupedPhotoCellImageWasMarkedForFile:(MetaFile *) fileSelected {
+    if(fileSelected.uuid) {
+        if(![selectedFileList containsObject:fileSelected.uuid]) {
+            [selectedFileList addObject:fileSelected.uuid];
+        }
+    }
+    if([selectedFileList count] > 0) {
+        [self showImgFooterMenu];
+        self.title = [NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]];
+    } else {
+        [self hideImgFooterMenu];
+        self.title = NSLocalizedString(@"SelectFilesTitle", @"");
+    }
+    if (fileSelected.contentType == ContentTypeVideo) {
+        if (photoCount == 0) {
+            [imgFooterActionMenu hidePrintIcon];
+        }
+        else{
+            [imgFooterActionMenu showPrintIcon];
+        }
+    }
+    else {
+        photoCount++;
+        [imgFooterActionMenu showPrintIcon];
+    }
+}
+
+- (void) groupedPhotoCellImageWasUnmarkedForFile:(MetaFile *) fileSelected {
+    if([selectedFileList containsObject:fileSelected.uuid]) {
+        [selectedFileList removeObject:fileSelected.uuid];
+    }
+    if([selectedFileList count] > 0) {
+        [self showImgFooterMenu];
+        self.title = [NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]];
+    } else {
+        [self hideImgFooterMenu];
+        self.title = NSLocalizedString(@"SelectFilesTitle", @"");
+    }
+    if (fileSelected.contentType == ContentTypePhoto) {
+        photoCount--;
+    }
+    if (photoCount == 0) {
+        [imgFooterActionMenu hidePrintIcon];
+    }
+}
+
+- (void) groupedPhotoCellImageUploadFinishedForFile:(NSString *) fileSelectedUuid {
+}
+
+- (void) groupedPhotoCellImageWasLongPressedForFile:(MetaFile *) fileSelected {
+    [self changeToSelectedStatus];
+}
+
+- (void) groupedPhotoCellImageUploadQuotaError:(MetaFile *) fileSelected {
+}
+
+- (void) groupedPhotoCellImageUploadLoginError:(MetaFile *) fileSelected {
+}
+
+- (void) groupedPhotoCellImageWasSelectedForView:(SquareImageView *) ref {
+    UploadingImagePreviewController *preview = [[UploadingImagePreviewController alloc] initWithUploadReference:ref.uploadRef withImage:ref.imgView.image];
+    preview.oldDelegateRef = ref;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:preview];
+    preview.nav = modalNav;
+    [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
 }
 
 @end

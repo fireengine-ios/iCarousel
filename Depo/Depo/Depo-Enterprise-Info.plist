@@ -83,6 +83,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>db-mydrrngzkvnljgs</string>
+                <string>akillidepo</string>
 			</array>
 		</dict>
 	</array>

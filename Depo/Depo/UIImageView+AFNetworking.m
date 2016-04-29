@@ -184,7 +184,7 @@ static char kAFImageRequestOperationObjectKey;
     float maxWidth = 200.0;
     float imgRatio = actualWidth/actualHeight;
     float maxRatio = maxWidth/maxHeight;
-    float compressionQuality = 0.2;//50 percent compression
+    float compressionQuality = 0.2;
     
     if (actualHeight > maxHeight || actualWidth > maxWidth)
     {

@@ -9,11 +9,24 @@
 #import <UIKit/UIKit.h>
 #import "FileInfoGroup.h"
 #import "AppConstants.h"
+#import "SquareImageView.h"
 
-@interface GroupedPhotosCell : UITableViewCell
+@protocol GroupedPhotosCellDelegate <NSObject>
+- (void) groupedPhotoCellImageWasSelectedForFile:(MetaFile *) fileSelected;
+- (void) groupedPhotoCellImageWasMarkedForFile:(MetaFile *) fileSelected;
+- (void) groupedPhotoCellImageWasUnmarkedForFile:(MetaFile *) fileSelected;
+- (void) groupedPhotoCellImageUploadFinishedForFile:(NSString *) fileSelectedUuid;
+- (void) groupedPhotoCellImageWasLongPressedForFile:(MetaFile *) fileSelected;
+- (void) groupedPhotoCellImageUploadQuotaError:(MetaFile *) fileSelected;
+- (void) groupedPhotoCellImageUploadLoginError:(MetaFile *) fileSelected;
+- (void) groupedPhotoCellImageWasSelectedForView:(SquareImageView *) ref;
+@end
 
+@interface GroupedPhotosCell : UITableViewCell <SquareImageDelegate>
+
+@property (nonatomic, weak) id<GroupedPhotosCellDelegate> delegate;
 @property (nonatomic, strong) FileInfoGroup *group;
 
-- (id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withGroup:(FileInfoGroup *) _group withLevel:(ImageGroupLevel) level;
+- (id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withGroup:(FileInfoGroup *) _group withLevel:(ImageGroupLevel) level isSelectible:(BOOL) selectFlag;
 
 @end

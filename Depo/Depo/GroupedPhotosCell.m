@@ -23,9 +23,10 @@
 
 @implementation GroupedPhotosCell
 
+@synthesize delegate;
 @synthesize group;
 
-- (id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withGroup:(FileInfoGroup *) _group withLevel:(ImageGroupLevel) level {
+- (id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withGroup:(FileInfoGroup *) _group withLevel:(ImageGroupLevel) level isSelectible:(BOOL) selectFlag {
     if(self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.group = _group;
         self.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -47,13 +48,14 @@
             }
         }
 
-        titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 10, self.frame.size.width-40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:16] withColor:[Util UIColorForHexColor:@"555555"] withText:titleVal];
+        titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 10, (self.frame.size.width-40)/2, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:14] withColor:[Util UIColorForHexColor:@"555555"] withText:titleVal];
+        titleLabel.adjustsFontSizeToFitWidth = YES;
         [self addSubview:titleLabel];
         
         locLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 10, self.frame.size.width-40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:16] withColor:[Util UIColorForHexColor:@"888888"] withText:self.group.locationInfo withAlignment:NSTextAlignmentRight];
         [self addSubview:locLabel];
         
-        int imageForRow = level == ImageGroupLevelYear ? 16 : level == ImageGroupLevelMonth ? 8 : 3;
+        int imageForRow = level == ImageGroupLevelYear ? 16 : level == ImageGroupLevelMonth ? 8 : 4;
 
         float imageItemSize = (self.frame.size.width - 40)/imageForRow;
         
@@ -66,15 +68,23 @@
         if(self.group.groupType == ImageGroupTypeInProgress) {
             for(UploadRef *row in self.group.fileInfo) {
                 SquareImageView *rowImgView = [[SquareImageView alloc] initWithFrame:CGRectMake((counter%imageForRow)*imageItemSize, floorf(counter/imageForRow)*imageItemSize, imageItemSize, imageItemSize) withUploadRef:row];
+                rowImgView.delegate = self;
                 [imageContainer addSubview:rowImgView];
                 counter++;
             }
         } else {
             for(MetaFile *row in self.group.fileInfo) {
-                UIImageView *rowImgView = [[UIImageView alloc] initWithFrame:CGRectMake((counter%imageForRow)*imageItemSize, floorf(counter/imageForRow)*imageItemSize, imageItemSize, imageItemSize)];
-                [rowImgView setNoCachedImageWithURL:[NSURL URLWithString:row.detail.thumbSmallUrl]];
-                [imageContainer addSubview:rowImgView];
-                counter++;
+                if(level == ImageGroupLevelDay) {
+                    SquareImageView *rowImgView = [[SquareImageView alloc] initWithFrame:CGRectMake((counter%imageForRow)*imageItemSize, floorf(counter/imageForRow)*imageItemSize, imageItemSize, imageItemSize) withFile:row withSelectibleStatus:selectFlag];
+                    rowImgView.delegate = self;
+                    [imageContainer addSubview:rowImgView];
+                    counter++;
+                } else {
+                    UIImageView *rowImgView = [[UIImageView alloc] initWithFrame:CGRectMake((counter%imageForRow)*imageItemSize, floorf(counter/imageForRow)*imageItemSize, imageItemSize, imageItemSize)];
+                    [rowImgView setNoCachedImageWithURL:[NSURL URLWithString:row.detail.thumbSmallUrl]];
+                    [imageContainer addSubview:rowImgView];
+                    counter++;
+                }
             }
         }
     }
@@ -94,6 +104,38 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void) squareImageWasSelectedForFile:(MetaFile *) fileSelected {
+    [delegate groupedPhotoCellImageWasSelectedForFile:fileSelected];
+}
+
+- (void) squareImageWasMarkedForFile:(MetaFile *) fileSelected {
+    [delegate groupedPhotoCellImageWasMarkedForFile:fileSelected];
+}
+
+- (void) squareImageWasUnmarkedForFile:(MetaFile *) fileSelected {
+    [delegate groupedPhotoCellImageWasUnmarkedForFile:fileSelected];
+}
+
+- (void) squareImageUploadFinishedForFile:(NSString *) fileSelectedUuid {
+    [delegate groupedPhotoCellImageUploadFinishedForFile:fileSelectedUuid];
+}
+
+- (void) squareImageWasLongPressedForFile:(MetaFile *) fileSelected {
+    [delegate groupedPhotoCellImageWasLongPressedForFile:fileSelected];
+}
+
+- (void) squareImageUploadQuotaError:(MetaFile *) fileSelected {
+    [delegate groupedPhotoCellImageUploadQuotaError:fileSelected];
+}
+
+- (void) squareImageUploadLoginError:(MetaFile *) fileSelected {
+    [delegate groupedPhotoCellImageUploadLoginError:fileSelected];
+}
+
+- (void) squareImageWasSelectedForView:(SquareImageView *) ref {
+    [delegate groupedPhotoCellImageWasSelectedForView:ref];
 }
 
 @end

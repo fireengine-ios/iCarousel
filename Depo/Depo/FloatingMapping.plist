@@ -14,6 +14,12 @@
 		<string>AddTypePhoto</string>
 		<string>AddTypeAlbum</string>
 	</array>
+    <key>GroupedPhotosAndVideosController</key>
+    <array>
+        <string>AddTypeCamera</string>
+        <string>AddTypePhoto</string>
+        <string>AddTypeAlbum</string>
+    </array>
 	<key>PhotoAlbumController</key>
 	<array>
 		<string>AddTypeCamera</string>
