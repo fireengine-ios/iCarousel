@@ -324,7 +324,7 @@
 }
 
 - (void) triggerPhotosPage {
-    PhotoListController *photo = [[PhotoListController alloc] init];
+    HomeController *photo = [[HomeController alloc] init];
     photo.nav = self.nav;
     [self.nav pushViewController:photo animated:NO];
 }

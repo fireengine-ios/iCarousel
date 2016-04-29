@@ -15,6 +15,8 @@
 @synthesize progress;
 @synthesize failedSize;
 @synthesize successSize;
+@synthesize failedCount;
+@synthesize successCount;
 @synthesize skippedCount;
 @synthesize totalSize;
 @synthesize status;

@@ -200,12 +200,23 @@
     NSString *rangeStart = [dict objectForKey:@"rangeStart"];
     NSString *rangeEnd = [dict objectForKey:@"rangeEnd"];
     NSString *locationInfo = [dict objectForKey:@"locationInfo"];
+    NSString *yearStr = [dict objectForKey:@"year"];
+    NSString *monthStr = [dict objectForKey:@"month"];
+    NSString *dayStr = [dict objectForKey:@"day"];
     NSArray *fileInfo = [dict objectForKey:@"fileInfo"];
 
     FileInfoGroup *result = [[FileInfoGroup alloc] init];
     result.rangeStart = rangeStart;
     result.rangeEnd = rangeEnd;
+    result.yearStr = yearStr;
+    result.monthStr = monthStr;
+    result.dayStr = dayStr;
     result.locationInfo = locationInfo;
+    result.groupType = ImageGroupTypeDepo;
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd"];
+    result.rangeRefDate = [dateFormat dateFromString:rangeStart];
     
     NSMutableArray *fileList = [[NSMutableArray alloc] init];
     for(NSDictionary *file in fileInfo) {

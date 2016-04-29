@@ -10,9 +10,14 @@
 
 @implementation FileInfoGroup
 
+@synthesize rangeRefDate;
 @synthesize rangeStart;
 @synthesize rangeEnd;
+@synthesize yearStr;
+@synthesize monthStr;
+@synthesize dayStr;
 @synthesize locationInfo;
 @synthesize fileInfo;
+@synthesize groupType;
 
 @end

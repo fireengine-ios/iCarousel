@@ -100,6 +100,7 @@
         resultTable.delegate = self;
         resultTable.dataSource = self;
         resultTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+        resultTable.bounces = NO;
         [mainStatusView addSubview:resultTable];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dropboxDidLogin) name:DROPBOX_LINK_SUCCESS_KEY object:nil];
@@ -271,9 +272,9 @@
         [dateFormat setDateFormat:@"dd.MM.yyyy HH:mm:ss"];
         cellText = [NSString stringWithFormat:NSLocalizedString(@"DropboxLastExportDate", @""), [dateFormat stringFromDate: recentResult.date]];
     } else if(indexPath.row == 1) {
-        cellText = [NSString stringWithFormat:NSLocalizedString(@"DropboxSuccessResult", @""), [Util transformedHugeSizeValueDecimalIfNecessary:recentResult.successSize]];
+        cellText = [NSString stringWithFormat:NSLocalizedString(@"DropboxSuccessResult", @""), recentResult.successCount];
     } else if(indexPath.row == 2) {
-        cellText = [NSString stringWithFormat:NSLocalizedString(@"DropboxFailedResult", @""), [Util transformedHugeSizeValueDecimalIfNecessary:recentResult.failedSize]];
+        cellText = [NSString stringWithFormat:NSLocalizedString(@"DropboxFailedResult", @""), recentResult.failedCount];
 //    } else {
 //        cellText = [NSString stringWithFormat:NSLocalizedString(@"DropboxSkippedResult", @""), recentResult.skippedCount];
     }

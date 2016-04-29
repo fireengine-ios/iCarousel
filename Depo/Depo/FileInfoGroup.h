@@ -7,12 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AppConstants.h"
 
 @interface FileInfoGroup : NSObject
 
+@property (nonatomic, strong) NSDate *rangeRefDate;
 @property (nonatomic, strong) NSString *rangeStart;
 @property (nonatomic, strong) NSString *rangeEnd;
+@property (nonatomic, strong) NSString *yearStr;
+@property (nonatomic, strong) NSString *monthStr;
+@property (nonatomic, strong) NSString *dayStr;
 @property (nonatomic, strong) NSString *locationInfo;
 @property (nonatomic, strong) NSArray *fileInfo;
+@property (nonatomic) ImageGroupType groupType;
 
 @end

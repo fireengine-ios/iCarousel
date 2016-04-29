@@ -11,6 +11,8 @@
 #import "Util.h"
 #import "MetaFile.h"
 #import "UIImageView+AFNetworking.h"
+#import "UploadRef.h"
+#import "SquareImageView.h"
 
 @interface GroupedPhotosCell() {
     CustomLabel *titleLabel;
@@ -23,28 +25,57 @@
 
 @synthesize group;
 
-- (id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withGroup:(FileInfoGroup *) _group {
+- (id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withGroup:(FileInfoGroup *) _group withLevel:(ImageGroupLevel) level {
     if(self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.group = _group;
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 10, self.frame.size.width-40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:16] withColor:[Util UIColorForHexColor:@"555555"] withText:self.group.rangeStart];
+        NSString *titleVal = @"";
+        if(self.group.groupType == ImageGroupTypeInProgress) {
+            titleVal = NSLocalizedString(@"ImageGroupTypeInProgress", @"");
+        } else {
+            if(level == ImageGroupLevelYear) {
+                titleVal = group.yearStr;
+            } else if(level == ImageGroupLevelMonth) {
+                NSDateFormatter *titleDateFormat = [[NSDateFormatter alloc] init];
+                [titleDateFormat setDateFormat:@"MMMM, yy"];
+                titleVal = [titleDateFormat stringFromDate:self.group.rangeRefDate];
+            } else {
+                NSDateFormatter *titleDateFormat = [[NSDateFormatter alloc] init];
+                [titleDateFormat setDateFormat:@"dd MMM, yy"];
+                titleVal = [titleDateFormat stringFromDate:self.group.rangeRefDate];
+            }
+        }
+
+        titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 10, self.frame.size.width-40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:16] withColor:[Util UIColorForHexColor:@"555555"] withText:titleVal];
         [self addSubview:titleLabel];
         
         locLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 10, self.frame.size.width-40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:16] withColor:[Util UIColorForHexColor:@"888888"] withText:self.group.locationInfo withAlignment:NSTextAlignmentRight];
         [self addSubview:locLabel];
         
-        float imageItemSize = (self.frame.size.width - 40)/10;
-        int imageForRow = 10;
+        int imageForRow = level == ImageGroupLevelYear ? 16 : level == ImageGroupLevelMonth ? 8 : 3;
+
+        float imageItemSize = (self.frame.size.width - 40)/imageForRow;
         
-        imageContainer = [[UIView alloc] initWithFrame:CGRectMake(20, 40, self.frame.size.width - 40, 40)];
+        float imageContainerHeight = (floorf(self.group.fileInfo.count/imageForRow)+1)*imageItemSize;
+        
+        imageContainer = [[UIView alloc] initWithFrame:CGRectMake(20, 40, self.frame.size.width - 40, imageContainerHeight)];
         [self addSubview:imageContainer];
         
         int counter = 0;
-        for(MetaFile *row in self.group.fileInfo) {
-            UIImageView *rowImgView = [[UIImageView alloc] initWithFrame:CGRectMake((counter%imageForRow)*imageItemSize, floorf(counter/imageForRow)*imageItemSize, imageItemSize, imageItemSize)];
-            [rowImgView setNoCachedImageWithURL:[NSURL URLWithString:row.detail.thumbSmallUrl]];
-            [imageContainer addSubview:rowImgView];
-            counter++;
+        if(self.group.groupType == ImageGroupTypeInProgress) {
+            for(UploadRef *row in self.group.fileInfo) {
+                SquareImageView *rowImgView = [[SquareImageView alloc] initWithFrame:CGRectMake((counter%imageForRow)*imageItemSize, floorf(counter/imageForRow)*imageItemSize, imageItemSize, imageItemSize) withUploadRef:row];
+                [imageContainer addSubview:rowImgView];
+                counter++;
+            }
+        } else {
+            for(MetaFile *row in self.group.fileInfo) {
+                UIImageView *rowImgView = [[UIImageView alloc] initWithFrame:CGRectMake((counter%imageForRow)*imageItemSize, floorf(counter/imageForRow)*imageItemSize, imageItemSize, imageItemSize)];
+                [rowImgView setNoCachedImageWithURL:[NSURL URLWithString:row.detail.thumbSmallUrl]];
+                [imageContainer addSubview:rowImgView];
+                counter++;
+            }
         }
     }
     return self;

@@ -41,15 +41,17 @@
 @synthesize photoCount;
 @synthesize level;
 @synthesize segmentType;
+@synthesize groupDate;
 
 - (id) init {
-    return [self initWithLevel:ImageGroupLevelYear];
+    return [self initWithLevel:ImageGroupLevelYear withGroupDate:nil];
 }
 
-- (id) initWithLevel:(ImageGroupLevel) levelVal {
+- (id) initWithLevel:(ImageGroupLevel) levelVal withGroupDate:(NSString *) groupDateVal {
     if(self = [super init]) {
         self.title = NSLocalizedString(@"PhotosTitle", @"");
         self.level = levelVal;
+        self.groupDate = groupDateVal;
         
         groupDao = [[SearchByGroupDao alloc] init];
         groupDao.delegate = self;
@@ -87,12 +89,11 @@
         photoTableUpdateCounter = 0;
         
         groups = [[NSMutableArray alloc] init];
+        
         selectedFileList = [[NSMutableArray alloc] init];
         selectedAlbumList = [[NSMutableArray alloc] init];
-        
-        refreshControl = [[UIRefreshControl alloc] init];
-        [refreshControl addTarget:self action:@selector(triggerRefresh) forControlEvents:UIControlEventValueChanged];
-        
+
+
         mainTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topIndex + 60, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex - 50) style:UITableViewStylePlain];
         mainTable.backgroundColor = [UIColor clearColor];
         mainTable.backgroundView = nil;
@@ -118,12 +119,35 @@
     return self;
 }
 
+- (void) addOngoingGroup {
+    FileInfoGroup *groupToRemove = nil;
+    for(FileInfoGroup *group in groups) {
+        if(group.groupType == ImageGroupTypeInProgress) {
+            groupToRemove = group;
+            break;
+        }
+    }
+    if(groupToRemove) {
+        [groups removeObject:groupToRemove];
+    }
+    NSArray *uploadingImageRefArray = [[UploadQueue sharedInstance] uploadImageRefs];
+    if([uploadingImageRefArray count] > 0) {
+        FileInfoGroup *inProgressGroup = [[FileInfoGroup alloc] init];
+        inProgressGroup.fileInfo = uploadingImageRefArray;
+        inProgressGroup.groupType = ImageGroupTypeInProgress;
+        [groups addObject:inProgressGroup];
+    }
+}
+
 - (void) groupSuccessCallback:(NSArray *) fileGroups {
     [self hideLoading];
     [self.groups addObjectsFromArray:fileGroups];
 
     photoTableUpdateCounter ++;
-    [mainTable reloadData];
+    if(segmentType == PhotoHeaderSegmentTypePhoto) {
+        [refreshControl endRefreshing];
+        [mainTable reloadData];
+    }
 }
 
 - (void) groupFailCallback:(NSString *) errorMessage {
@@ -146,41 +170,6 @@
     [self.nav setNavigationBarHidden:NO animated:NO];
 }
 
-/*
-- (void) addOngoingPhotos {
-    if (noItemView != nil)
-        [noItemView removeFromSuperview];
-    if([photoList count] > 0) {
-        int counter = 0;
-        
-        int imagePerLine = 3;
-        
-        float imageWidth = 100;
-        float interImageMargin = 5;
-        
-        if(IS_IPAD) {
-            imagePerLine = 5;
-            imageWidth = (self.view.frame.size.width - interImageMargin*(imagePerLine+1))/imagePerLine;
-        }
-        
-        float imageTotalWidth = imageWidth + interImageMargin;
-        
-        for(UploadRef *row in photoList) {
-            CGRect imgRect = CGRectMake(interImageMargin + (counter%imagePerLine * imageTotalWidth), 15 + ((int)floor(counter/imagePerLine)*imageTotalWidth), imageWidth, imageWidth);
-            SquareImageView *imgView = [[SquareImageView alloc] initWithFrame:imgRect withUploadRef:row];
-            imgView.delegate = self;
-            [photosScroll addSubview:imgView];
-            counter ++;
-        }
-        float contentSizeHeight = ((int)ceil(counter/imagePerLine)+1)*imageTotalWidth + 20;
-        if(contentSizeHeight <= photosScroll.frame.size.height) {
-            contentSizeHeight = photosScroll.frame.size.height + 1;
-        }
-        photosScroll.contentSize = CGSizeMake(photosScroll.frame.size.width, contentSizeHeight);
-    }
-}
-*/
-
 - (void) triggerSelectionState:(UILongPressGestureRecognizer *)gestureRecognizer {
     if(!isSelectible && segmentType == PhotoHeaderSegmentTypeAlbum) {
         if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
@@ -198,6 +187,8 @@
 
 - (void) triggerRefresh {
     [groups removeAllObjects];
+    [self addOngoingGroup];
+
     if (isSelectible) {
         [selectedFileList removeAllObjects];
         [self hideImgFooterMenu];
@@ -210,7 +201,7 @@
     albumTableUpdateCounter ++;
     photoTableUpdateCounter ++;
     
-    [groupDao requestImagesByGroupByPage:photoListOffset bySize:100 byLevel:self.level byGroupDate:nil byGroupSize:[NSNumber numberWithInt:50]];
+    [groupDao requestImagesByGroupByPage:photoListOffset bySize:100 byLevel:self.level byGroupDate:self.groupDate byGroupSize:[NSNumber numberWithInt:50]];
     [albumListDao requestAlbumListForStart:0 andSize:50 andSortType:APPDELEGATE.session.sortType];
 }
 
@@ -221,6 +212,7 @@
     self.albumList = list;
     albumTableUpdateCounter ++;
     if(segmentType == PhotoHeaderSegmentTypeAlbum) {
+        [refreshControl endRefreshing];
         [mainTable reloadData];
     }
 }
@@ -463,7 +455,7 @@
 - (void) dynamicallyLoadNextPage {
     if(segmentType == PhotoHeaderSegmentTypePhoto) {
         photoListOffset ++;
-        [groupDao requestImagesByGroupByPage:photoListOffset bySize:100 byLevel:self.level byGroupDate:nil byGroupSize:[NSNumber numberWithInt:50]];
+        [groupDao requestImagesByGroupByPage:photoListOffset bySize:100 byLevel:self.level byGroupDate:self.groupDate byGroupSize:[NSNumber numberWithInt:50]];
     }
 }
 
@@ -475,7 +467,15 @@
     if(segmentType == PhotoHeaderSegmentTypeAlbum) {
         return self.view.frame.size.width/2;
     } else {
-        return self.view.frame.size.width/2;
+        if(groups.count > 0) {
+            FileInfoGroup *group = [groups objectAtIndex:indexPath.row];
+            int imageForRow = self.level == ImageGroupLevelYear ? 16 : self.level == ImageGroupLevelMonth ? 8 : 3;
+            float imageItemSize = (mainTable.frame.size.width - 40)/imageForRow;
+            float imageContainerHeight = (floorf(group.fileInfo.count/imageForRow)+1)*imageItemSize;
+            return imageContainerHeight + 60;
+        } else {
+            return self.view.frame.size.width/2;
+        }
     }
 }
 
@@ -499,7 +499,7 @@
         if(segmentType == PhotoHeaderSegmentTypePhoto) {
             if(groups.count > 0) {
                 FileInfoGroup *group = [groups objectAtIndex:indexPath.row];
-                cell = [[GroupedPhotosCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withGroup:group];
+                cell = [[GroupedPhotosCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withGroup:group withLevel:self.level];
             } else {
                 cell = [[NoItemCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier imageName:@"no_photo_icon" titleText:NSLocalizedString(@"EmptyPhotosVideosTitle", @"") descriptionText:NSLocalizedString(@"EmptyPhotosVideosDescription", @"")];
             }
@@ -543,7 +543,14 @@
             [self.nav pushViewController:albumController animated:NO];
         }
     } else {
-        //TODO image group select
+        if([groups count] > 0) {
+            if(level == ImageGroupLevelYear || level == ImageGroupLevelMonth) {
+                ImageGroupLevel nextLevel = level == ImageGroupLevelYear ? ImageGroupLevelMonth : ImageGroupLevelDay;
+                FileInfoGroup *selectedGroup = [groups objectAtIndex:indexPath.row];
+                GroupedPhotosAndVideosController *nextLevelController = [[GroupedPhotosAndVideosController alloc] initWithLevel:nextLevel withGroupDate:selectedGroup.rangeStart];
+                [self.navigationController pushViewController:nextLevelController animated:NO];
+            }
+        }
     }
 }
 

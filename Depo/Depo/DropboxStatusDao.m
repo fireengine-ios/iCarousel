@@ -30,8 +30,10 @@
         if(mainDict != nil && ![mainDict isKindOfClass:[NSNull class]]) {
             NSNumber *connected = [mainDict objectForKey:@"connected"];
             NSNumber *failedSize = [mainDict objectForKey:@"failedSize"];
+            NSNumber *failedCount = [mainDict objectForKey:@"failedCount"];
             NSNumber *progress = [mainDict objectForKey:@"progress"];
             NSNumber *successSize = [mainDict objectForKey:@"successSize"];
+            NSNumber *successCount = [mainDict objectForKey:@"successCount"];
             NSNumber *skippedCount = [mainDict objectForKey:@"skippedCount"];
             NSNumber *totalSize = [mainDict objectForKey:@"totalSize"];
             NSString *status = [self strByRawVal:[mainDict objectForKey:@"status"]];
@@ -40,8 +42,10 @@
             result.connected = [self boolByNumber:connected];
             result.date = [self dateByRawVal:[mainDict objectForKey:@"date"]];
             result.failedSize = [self longByNumber:failedSize];
+            result.failedCount = [self longByNumber:failedCount];
             result.progress = [self longByNumber:progress];
             result.successSize = [self longByNumber:successSize];
+            result.successCount = [self longByNumber:successCount];
             result.skippedCount = [self longByNumber:skippedCount];
             result.totalSize = [self longByNumber:totalSize];
             

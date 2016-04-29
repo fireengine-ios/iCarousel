@@ -68,7 +68,8 @@
 @property (nonatomic) int photoCount;
 @property (nonatomic) ImageGroupLevel level;
 @property (nonatomic) PhotoHeaderSegmentType segmentType;
+@property (nonatomic, strong) NSString *groupDate;
 
-- (id) initWithLevel:(ImageGroupLevel) levelVal;
+- (id) initWithLevel:(ImageGroupLevel) levelVal withGroupDate:(NSString *) groupDateVal;
 
 @end

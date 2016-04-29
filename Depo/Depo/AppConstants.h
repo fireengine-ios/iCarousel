@@ -475,6 +475,11 @@ typedef enum {
     ImageGroupLevelDay
 } ImageGroupLevel;
 
+typedef enum {
+    ImageGroupTypeDepo = 1,
+    ImageGroupTypeInProgress
+} ImageGroupType;
+
 @interface AppConstants : NSObject
 
 @end

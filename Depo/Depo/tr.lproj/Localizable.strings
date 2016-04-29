@@ -692,11 +692,12 @@
 "FeedbackTextError"="Lütfen mesajınızı girin";
 
 "CancelSubscriptionInfoLifecell"="İptal etmek için \"Iptal %@\" yazıp 2222'ye kısa mesaj gönderebilirsiniz.";
-"DropboxFailedResult"="Başarısız Dosya Boyutu: %@";
-"DropboxSuccessResult"="Başarılı Dosya Boyutu: %@";
+"DropboxFailedResult"="Başarısız Dosya Sayısı: %d";
+"DropboxSuccessResult"="Başarılı Dosya Sayısı: %d";
 "DropboxSkippedResult"="Atlanmış Dosya Sayısı: %d";
 "DropboxLastExportDate"="Son Aktarım Tarihi: %@";
 "DropboxExportStatus"="Son Aktarım Durumu:";
 "DropboxAccessError"="Dropbox hesabınıza erişirken sorun oluştu.";
 
 "LogoutConfirmMessage"="Uygulamadan çıkış yapıyorsunuz, emin misiniz?";
+"ImageGroupTypeInProgress"="Upload In Progress";
