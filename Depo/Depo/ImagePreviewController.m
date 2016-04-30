@@ -96,12 +96,17 @@
 }
 
 - (id) initWithFiles:(NSArray *)_files withImage:(MetaFile *)_file withListOffset:(int)offset printEnabled:(BOOL) printEnabledFlag {
+    return [self initWithFiles:_files withImage:_file withListOffset:offset printEnabled:printEnabledFlag pagingEnabled:YES];
+}
+
+- (id) initWithFiles:(NSArray *)_files withImage:(MetaFile *)_file withListOffset:(int)offset printEnabled:(BOOL) printEnabledFlag pagingEnabled:(BOOL) pagingEnabled {
     self = [super init];
     if (self) {
         self.files = [_files mutableCopy];
         self.file = _file;
         cursor = [self findCursorValue];
         listOffSet = offset;
+        pagingEnabledFlag = pagingEnabled;
         self.title = self.file.visibleName;
         self.view.backgroundColor = [Util UIColorForHexColor:@"191e24"];
         
@@ -257,8 +262,10 @@
         }
         else {
             if (cursor == [self.files count]-1) {
-                [self dynamicallyLoadNextPage];
-                [self loadImageView:self.file];
+                if(pagingEnabledFlag) {
+                    [self dynamicallyLoadNextPage];
+                    [self loadImageView:self.file];
+                }
             } else{
                 cursor++;
                 MetaFile *tempFile = [self.files objectAtIndex:cursor];

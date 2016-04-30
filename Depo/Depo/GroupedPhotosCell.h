@@ -12,7 +12,7 @@
 #import "SquareImageView.h"
 
 @protocol GroupedPhotosCellDelegate <NSObject>
-- (void) groupedPhotoCellImageWasSelectedForFile:(MetaFile *) fileSelected;
+- (void) groupedPhotoCellImageWasSelectedForFile:(MetaFile *) fileSelected forGroupWithKey:(NSString *) groupKey;
 - (void) groupedPhotoCellImageWasMarkedForFile:(MetaFile *) fileSelected;
 - (void) groupedPhotoCellImageWasUnmarkedForFile:(MetaFile *) fileSelected;
 - (void) groupedPhotoCellImageUploadFinishedForFile:(NSString *) fileSelectedUuid;

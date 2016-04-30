@@ -107,7 +107,7 @@
 }
 
 - (void) squareImageWasSelectedForFile:(MetaFile *) fileSelected {
-    [delegate groupedPhotoCellImageWasSelectedForFile:fileSelected];
+    [delegate groupedPhotoCellImageWasSelectedForFile:fileSelected forGroupWithKey:self.group.uniqueKey];
 }
 
 - (void) squareImageWasMarkedForFile:(MetaFile *) fileSelected {

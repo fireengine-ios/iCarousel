@@ -10,6 +10,7 @@
 
 @implementation FileInfoGroup
 
+@synthesize uniqueKey;
 @synthesize rangeRefDate;
 @synthesize rangeStart;
 @synthesize rangeEnd;

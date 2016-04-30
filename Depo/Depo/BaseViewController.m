@@ -46,6 +46,7 @@
 #import "SettingsHelpController.h"
 #import "ReachUsController.h"
 #import "TutorialView.h"
+#import "GroupedPhotosAndVideosController.h"
 
 #define kMenuOpenOriginX 276
 
@@ -295,7 +296,7 @@
     [MPush hitTag:@"photos_and_videos"];
     [MPush hitEvent:@"photos_and_videos"];
 
-    PhotoListController *photo = [[PhotoListController alloc] init];
+    GroupedPhotosAndVideosController *photo = [[GroupedPhotosAndVideosController alloc] init];
     photo.nav = self.nav;
     photo.myDelegate = self;
     [self.nav setViewControllers:@[photo] animated:NO];

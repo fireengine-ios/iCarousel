@@ -206,6 +206,7 @@
     NSArray *fileInfo = [dict objectForKey:@"fileInfo"];
 
     FileInfoGroup *result = [[FileInfoGroup alloc] init];
+    result.uniqueKey = [[NSUUID UUID] UUIDString];
     result.rangeStart = rangeStart;
     result.rangeEnd = rangeEnd;
     result.yearStr = yearStr;

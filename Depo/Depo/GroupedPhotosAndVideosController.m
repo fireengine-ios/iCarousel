@@ -476,7 +476,10 @@
             FileInfoGroup *group = [groups objectAtIndex:indexPath.row];
             int imageForRow = self.level == ImageGroupLevelYear ? 16 : self.level == ImageGroupLevelMonth ? 8 : 4;
             float imageItemSize = (mainTable.frame.size.width - 40)/imageForRow;
-            float imageContainerHeight = (floorf(group.fileInfo.count/imageForRow)+1)*imageItemSize;
+            float imageContainerHeight = floorf(group.fileInfo.count/imageForRow)*imageItemSize;
+            if(group.fileInfo.count%imageForRow > 0) {
+                imageContainerHeight += imageItemSize;
+            }
             return imageContainerHeight + 60;
         } else {
             return self.view.frame.size.width/2;
@@ -820,11 +823,18 @@
     [UIImageView clearImageCaches];
 }
 
-- (void) groupedPhotoCellImageWasSelectedForFile:(MetaFile *) fileSelected {
+- (void) groupedPhotoCellImageWasSelectedForFile:(MetaFile *) fileSelected forGroupWithKey:(NSString *) groupKey {
     if(fileSelected.contentType == ContentTypePhoto) {
-        NSMutableArray *filteredPhotoList = [[NSMutableArray alloc] init];
-        [filteredPhotoList addObject:fileSelected];
-        ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFiles:filteredPhotoList withImage:fileSelected withListOffset:0];
+        NSArray *filteredPhotoList = [[NSArray alloc] initWithObjects:fileSelected, nil];
+
+        for(FileInfoGroup *group in groups) {
+            if([group.uniqueKey isEqualToString:groupKey]) {
+                filteredPhotoList = group.fileInfo;
+                break;
+            }
+        }
+
+        ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFiles:filteredPhotoList withImage:fileSelected withListOffset:photoListOffset printEnabled:YES pagingEnabled:NO];
         detail.delegate = self;
         MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
         detail.nav = modalNav;

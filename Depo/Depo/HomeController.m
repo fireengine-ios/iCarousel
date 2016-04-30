@@ -324,7 +324,7 @@
 }
 
 - (void) triggerPhotosPage {
-    HomeController *photo = [[HomeController alloc] init];
+    GroupedPhotosAndVideosController *photo = [[GroupedPhotosAndVideosController alloc] init];
     photo.nav = self.nav;
     [self.nav pushViewController:photo animated:NO];
 }

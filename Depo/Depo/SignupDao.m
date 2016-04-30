@@ -7,6 +7,7 @@
 //
 
 #import "SignupDao.h"
+#import "Util.h"
 
 @implementation SignupDao
 
@@ -18,6 +19,7 @@
                           phoneNumber, @"phoneNumber",
                           password, @"password",
                           [NSNumber numberWithInt:eulaId], @"eulaId",
+                          [Util readLocaleCode], @"language",
                           nil];
     
     SBJSON *json = [SBJSON new];

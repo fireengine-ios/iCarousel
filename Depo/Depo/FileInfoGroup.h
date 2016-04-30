@@ -11,6 +11,7 @@
 
 @interface FileInfoGroup : NSObject
 
+@property (nonatomic, strong) NSString *uniqueKey;
 @property (nonatomic, strong) NSDate *rangeRefDate;
 @property (nonatomic, strong) NSString *rangeStart;
 @property (nonatomic, strong) NSString *rangeEnd;
