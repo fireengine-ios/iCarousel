@@ -18,6 +18,7 @@
 	
 	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setDelegate:self];
+    request.tag = REQ_TAG_FOR_ALBUM;
     
     [self sendGetRequest:request];
 }
@@ -34,6 +35,7 @@
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setDelegate:self];
+    request.tag = REQ_TAG_FOR_ALBUM;
     
     [self sendGetRequest:request];
 }

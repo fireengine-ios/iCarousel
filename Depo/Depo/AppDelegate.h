@@ -50,5 +50,6 @@
 - (void) startOpeningPage;
 - (void) removeAllMediaFiles;
 - (void) cancelRequestsWithTag:(int) tag;
+- (void) cancelRequestsWithTags:(NSArray *) tags;
 
 @end

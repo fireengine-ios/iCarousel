@@ -16,6 +16,7 @@
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setDelegate:self];
+    request.tag = REQ_TAG_FOR_GROUPED_PHOTOS;
     
     [self sendGetRequest:request];
 }

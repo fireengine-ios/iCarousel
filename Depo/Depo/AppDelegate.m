@@ -722,6 +722,15 @@ void uncaughtExceptionHandler(NSException *exception) {
     }
 }
 
+- (void) cancelRequestsWithTags:(NSArray *) tags {
+    for (ASIHTTPRequest *req in ASIHTTPRequest.sharedQueue.operations) {
+        if([tags containsObject:[NSNumber numberWithInteger:req.tag]]) {
+            [req cancel];
+            [req setDelegate:nil];
+        }
+    }
+}
+
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url sourceApplication:(NSString *)source annotation:(id)annotation {
     if ([[DBSession sharedSession] handleOpenURL:url]) {
         if ([[DBSession sharedSession] isLinked]) {

@@ -22,6 +22,7 @@
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setPostBody:[postData mutableCopy]];
     [request setDelegate:self];
+    request.tag = REQ_TAG_FOR_ALBUM;
     
     [self sendDeleteRequest:request];
 }

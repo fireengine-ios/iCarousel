@@ -546,6 +546,8 @@
                 }
             }
         } else {
+            [self cleanPageRelatedRequests];
+
             PhotoAlbumController *albumController = [[PhotoAlbumController alloc] initWithAlbum:album];
             albumController.delegate = self;
             albumController.nav = self.nav;
@@ -554,6 +556,8 @@
     } else {
         if([groups count] > 0) {
             if(level == ImageGroupLevelYear || level == ImageGroupLevelMonth) {
+                [self cleanPageRelatedRequests];
+
                 ImageGroupLevel nextLevel = level == ImageGroupLevelYear ? ImageGroupLevelMonth : ImageGroupLevelDay;
                 FileInfoGroup *selectedGroup = [groups objectAtIndex:indexPath.row];
                 GroupedPhotosAndVideosController *nextLevelController = [[GroupedPhotosAndVideosController alloc] initWithLevel:nextLevel withGroupDate:selectedGroup.rangeStart];
@@ -562,6 +566,10 @@
             }
         }
     }
+}
+
+- (void) cleanPageRelatedRequests {
+    [APPDELEGATE cancelRequestsWithTags:@[[NSNumber numberWithInteger:REQ_TAG_FOR_GROUPED_PHOTOS], [NSNumber numberWithInteger:REQ_TAG_FOR_ALBUM], [NSNumber numberWithInteger:REQ_TAG_FOR_PHOTO]]];
 }
 
 - (void) tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -585,10 +593,6 @@
             }
         }
     }
-}
-
-- (void) viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
 }
 
 - (void) newAlbumModalDidTriggerNewAlbumWithName:(NSString *)albumName {
@@ -798,6 +802,10 @@
     [moreButton addTarget:self action:@selector(moreClicked) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *moreItem = [[UIBarButtonItem alloc] initWithCustomView:moreButton];
     self.navigationItem.rightBarButtonItem = moreItem;
+}
+
+- (void) viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning

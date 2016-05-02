@@ -24,6 +24,7 @@
     [request addRequestHeader:@"Content-Type" value:@"application/json; encoding=utf-8"];
     [request setPostBody:[postData mutableCopy]];
     [request setDelegate:self];
+    request.tag = REQ_TAG_FOR_ALBUM;
     
     [self sendPutRequest:request];
 }
