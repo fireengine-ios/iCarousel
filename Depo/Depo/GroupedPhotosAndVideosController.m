@@ -164,6 +164,48 @@
         addTypesForController = [APPDELEGATE.mapUtil readAddTypesByController:@"AlbumTab"];
     }
     [APPDELEGATE.base modifyAddButtonWithList:addTypesForController];
+    
+    NSArray *uploadingImageRefArray = [[UploadQueue sharedInstance] uploadImageRefs];
+    if(uploadingImageRefArray.count > 0) {
+        BOOL inProgressCellPresent = NO;
+        for(FileInfoGroup *group in groups) {
+            if(group.groupType == ImageGroupTypeInProgress) {
+                group.fileInfo = uploadingImageRefArray;
+                inProgressCellPresent = YES;
+                break;
+            }
+        }
+        if(!inProgressCellPresent) {
+            FileInfoGroup *inProgressGroup = [[FileInfoGroup alloc] init];
+            inProgressGroup.fileInfo = uploadingImageRefArray;
+            inProgressGroup.groupType = ImageGroupTypeInProgress;
+            [groups addObject:inProgressGroup];
+            
+            NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"groupType"
+                                                         ascending:NO];
+            NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+            groups = [[groups sortedArrayUsingDescriptors:sortDescriptors] mutableCopy];
+        }
+        photoTableUpdateCounter ++;
+        if(segmentType == PhotoHeaderSegmentTypePhoto) {
+            [mainTable reloadData];
+        }
+    } else {
+        FileInfoGroup *groupToRemove = nil;
+        for(FileInfoGroup *group in groups) {
+            if(group.groupType == ImageGroupTypeInProgress) {
+                groupToRemove = group;
+                break;
+            }
+        }
+        if(groupToRemove) {
+            [groups removeObject:groupToRemove];
+            photoTableUpdateCounter ++;
+            if(segmentType == PhotoHeaderSegmentTypePhoto) {
+                [mainTable reloadData];
+            }
+        }
+    }
 }
 
 - (void) viewWillAppear:(BOOL)animated {
