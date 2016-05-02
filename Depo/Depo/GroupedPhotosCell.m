@@ -52,16 +52,17 @@
         titleLabel.adjustsFontSizeToFitWidth = YES;
         [self addSubview:titleLabel];
         
-        locLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 10, self.frame.size.width-40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:16] withColor:[Util UIColorForHexColor:@"888888"] withText:self.group.locationInfo withAlignment:NSTextAlignmentRight];
+        locLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(self.frame.size.width/2, 10, (self.frame.size.width-40)/2, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:16] withColor:[Util UIColorForHexColor:@"888888"] withText:self.group.locationInfo withAlignment:NSTextAlignmentRight];
+        locLabel.adjustsFontSizeToFitWidth = YES;
         [self addSubview:locLabel];
         
         int imageForRow = level == ImageGroupLevelYear ? 16 : level == ImageGroupLevelMonth ? 8 : 4;
 
-        float imageItemSize = (self.frame.size.width - 40)/imageForRow;
+        float imageItemSize = self.frame.size.width/imageForRow;
         
         float imageContainerHeight = (floorf(self.group.fileInfo.count/imageForRow)+1)*imageItemSize;
         
-        imageContainer = [[UIView alloc] initWithFrame:CGRectMake(20, 40, self.frame.size.width - 40, imageContainerHeight)];
+        imageContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 40, self.frame.size.width, imageContainerHeight)];
         [self addSubview:imageContainer];
         
         int counter = 0;
@@ -92,8 +93,8 @@
 }
 
 - (void) layoutSubviews {
-    titleLabel.frame = CGRectMake(20, 10, self.frame.size.width-40, 20);
-    locLabel.frame = CGRectMake(20, 10, self.frame.size.width-40, 20);
+    titleLabel.frame = CGRectMake(20, 10, (self.frame.size.width-40)/2, 20);
+    locLabel.frame = CGRectMake(self.frame.size.width/2, 10, (self.frame.size.width-40)/2, 20);
 }
 
 - (void)awakeFromNib {

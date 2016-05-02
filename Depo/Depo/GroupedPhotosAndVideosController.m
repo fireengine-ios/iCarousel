@@ -517,7 +517,7 @@
         if(groups.count > 0) {
             FileInfoGroup *group = [groups objectAtIndex:indexPath.row];
             int imageForRow = self.level == ImageGroupLevelYear ? 16 : self.level == ImageGroupLevelMonth ? 8 : 4;
-            float imageItemSize = (mainTable.frame.size.width - 40)/imageForRow;
+            float imageItemSize = mainTable.frame.size.width/imageForRow;
             float imageContainerHeight = floorf(group.fileInfo.count/imageForRow)*imageItemSize;
             if(group.fileInfo.count%imageForRow > 0) {
                 imageContainerHeight += imageItemSize;
