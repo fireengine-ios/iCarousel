@@ -45,6 +45,8 @@
 @synthesize msisdnEmpty;
 @synthesize emailNotVerified;
 @synthesize storageFullPopupShown;
+@synthesize menuTipShown;
+@synthesize photoDetailTipShown;
 
 - (id) init {
     if(self = [super init]) {
@@ -221,6 +223,8 @@
     self.baseUrlConstant = nil;
     self.emailEmptyMessageShown = NO;
     self.storageFullPopupShown = NO;
+    self.menuTipShown = NO;
+    self.photoDetailTipShown = NO;
     
     [SyncUtil resetBaseUrlConstant];
     [SharedUtil writeSharedToken:nil];

@@ -56,7 +56,7 @@
         locLabel.adjustsFontSizeToFitWidth = YES;
         [self addSubview:locLabel];
         
-        int imageForRow = level == ImageGroupLevelYear ? 16 : level == ImageGroupLevelMonth ? 8 : 4;
+        int imageForRow = level == ImageGroupLevelYear ? 10 : level == ImageGroupLevelMonth ? 8 : 4;
 
         float imageItemSize = self.frame.size.width/imageForRow;
         

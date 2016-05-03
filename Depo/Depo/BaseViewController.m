@@ -200,10 +200,10 @@
                          menuOpen = !menuOpen;
                          transparentView.hidden = !menuOpen;
                          if(menuOpen) {
-                             //TODO bir sonraki pakette cikacak !!!!!
-                             if(![AppUtil readDoNotShowAgainFlagForKey:TUTORIAL_MENU_KEY]) {
+                             if(![AppUtil readDoNotShowAgainFlagForKey:TUTORIAL_MENU_KEY] && !APPDELEGATE.session.menuTipShown) {
                                  TutorialView *tutorialView = [[TutorialView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) withBgImageName:@"img_baski_1.jpg" withTitle:@"" withKey:TUTORIAL_MENU_KEY];
                                  [self.view addSubview:tutorialView];
+                                 APPDELEGATE.session.menuTipShown = YES;
                              }
                          }
                      }];

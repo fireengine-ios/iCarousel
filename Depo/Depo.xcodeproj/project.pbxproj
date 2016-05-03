@@ -772,7 +772,6 @@
 		05F28BF11C0739C30002171A /* CurioUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F28BE11C0739C30002171A /* CurioUtil.m */; };
 		05F4AA281A2F7692000F41B8 /* ActivityUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F4AA271A2F7692000F41B8 /* ActivityUtil.m */; };
 		05F931881C160E2F00858223 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05F931871C160E2F00858223 /* Accelerate.framework */; };
-		05F9318A1C160E7000858223 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05F931891C160E7000858223 /* LocalAuthentication.framework */; };
 		05F9318F1C160ED200858223 /* GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F9318C1C160ED200858223 /* GZIP.m */; };
 		05F931901C160ED200858223 /* SyncLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F9318E1C160ED200858223 /* SyncLogger.m */; };
 		2443E1541B6BB0C5001C274D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2443E1531B6BB0C5001C274D /* AudioToolbox.framework */; };
@@ -2190,7 +2189,6 @@
 				94E548FD1CC624ED003CB5DC /* DropboxSDK.framework in Frameworks */,
 				94B9D22A1CA86C4300FC28F2 /* libMPush.a in Frameworks */,
 				05033BE11C24B22900FA2E5C /* StoreKit.framework in Frameworks */,
-				05F9318A1C160E7000858223 /* LocalAuthentication.framework in Frameworks */,
 				05F931881C160E2F00858223 /* Accelerate.framework in Frameworks */,
 				056107221C0D8E210014D550 /* WebKit.framework in Frameworks */,
 				056107201C0D8B310014D550 /* SplunkMint.framework in Frameworks */,

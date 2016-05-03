@@ -60,6 +60,8 @@
 @property (nonatomic) BOOL emailNotVerified;
 
 @property (nonatomic) BOOL storageFullPopupShown;
+@property (nonatomic) BOOL menuTipShown;
+@property (nonatomic) BOOL photoDetailTipShown;
 
 - (void) playAudioItemAtIndex:(int) itemIndex;
 - (void) playNextAudioItem;

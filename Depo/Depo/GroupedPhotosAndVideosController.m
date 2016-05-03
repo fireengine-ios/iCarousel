@@ -244,7 +244,8 @@
     albumTableUpdateCounter ++;
     photoTableUpdateCounter ++;
     
-    [groupDao requestImagesByGroupByPage:photoListOffset bySize:100 byLevel:self.level byGroupDate:self.groupDate byGroupSize:[NSNumber numberWithInt:50]];
+    int groupSize = self.level == ImageGroupLevelYear ? 50 : 48;
+    [groupDao requestImagesByGroupByPage:photoListOffset bySize:500 byLevel:self.level byGroupDate:self.groupDate byGroupSize:[NSNumber numberWithInt:groupSize]];
     [albumListDao requestAlbumListForStart:0 andSize:50 andSortType:APPDELEGATE.session.sortType];
     isLoading = YES;
     [self showLoading];
@@ -502,7 +503,8 @@
 - (void) dynamicallyLoadNextPage {
     if(segmentType == PhotoHeaderSegmentTypePhoto) {
         photoListOffset ++;
-        [groupDao requestImagesByGroupByPage:photoListOffset bySize:100 byLevel:self.level byGroupDate:self.groupDate byGroupSize:[NSNumber numberWithInt:50]];
+        int groupSize = self.level == ImageGroupLevelYear ? 50 : 48;
+        [groupDao requestImagesByGroupByPage:photoListOffset bySize:500 byLevel:self.level byGroupDate:self.groupDate byGroupSize:[NSNumber numberWithInt:groupSize]];
     }
 }
 
@@ -516,7 +518,7 @@
     } else {
         if(groups.count > 0) {
             FileInfoGroup *group = [groups objectAtIndex:indexPath.row];
-            int imageForRow = self.level == ImageGroupLevelYear ? 16 : self.level == ImageGroupLevelMonth ? 8 : 4;
+            int imageForRow = self.level == ImageGroupLevelYear ? 10 : self.level == ImageGroupLevelMonth ? 8 : 4;
             float imageItemSize = mainTable.frame.size.width/imageForRow;
             float imageContainerHeight = floorf(group.fileInfo.count/imageForRow)*imageItemSize;
             if(group.fileInfo.count%imageForRow > 0) {
