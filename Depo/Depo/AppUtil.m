@@ -11,6 +11,8 @@
 #import "AppDelegate.h"
 #import "AppSession.h"
 #import "User.h"
+#import <CoreTelephony/CTCarrier.h>
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
 
 @implementation AppUtil
 
@@ -745,6 +747,21 @@
 
 + (BOOL) readFirstUploadFlag {
     return [[NSUserDefaults standardUserDefaults] boolForKey:FIRST_UPLOAD_FLAG_KEY];
+}
+
++ (NSString *) operatorName {
+    CTTelephonyNetworkInfo *networkInfo = [[CTTelephonyNetworkInfo alloc] init];
+    CTCarrier *carrier = [networkInfo subscriberCellularProvider];
+    if([carrier.mobileCountryCode isEqualToString:@"286"]) {
+        if([carrier.mobileNetworkCode isEqualToString:@"01"]) {
+            return @"TURKCELL";
+        } else if([carrier.mobileNetworkCode isEqualToString:@"02"]) {
+            return @"VODAFONE";
+        } else if([carrier.mobileNetworkCode isEqualToString:@"03"]) {
+            return @"AVEA";
+        }
+    }
+    return [NSString stringWithFormat:@"%@-%@", carrier.mobileCountryCode, carrier.mobileNetworkCode];
 }
 
 @end

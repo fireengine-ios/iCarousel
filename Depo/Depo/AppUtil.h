@@ -58,4 +58,6 @@
 + (BOOL) isAlreadyRated;
 + (void) setAlreadyRated;
 
++ (NSString *) operatorName;
+
 @end

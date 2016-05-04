@@ -245,7 +245,7 @@
     photoTableUpdateCounter ++;
     
     int groupSize = self.level == ImageGroupLevelYear ? 50 : 48;
-    [groupDao requestImagesByGroupByPage:photoListOffset bySize:500 byLevel:self.level byGroupDate:self.groupDate byGroupSize:[NSNumber numberWithInt:groupSize]];
+    [groupDao requestImagesByGroupByPage:photoListOffset bySize:groupSize*10 byLevel:self.level byGroupDate:self.groupDate byGroupSize:[NSNumber numberWithInt:groupSize] bySort:APPDELEGATE.session.sortType];
     [albumListDao requestAlbumListForStart:0 andSize:50 andSortType:APPDELEGATE.session.sortType];
     isLoading = YES;
     [self showLoading];
@@ -497,14 +497,24 @@
 }
 
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView {
-
+    if(segmentType == PhotoHeaderSegmentTypePhoto) {
+        if(!isLoading) {
+            CGFloat currentOffset = mainTable.contentOffset.y;
+            CGFloat maximumOffset = mainTable.contentSize.height - mainTable.frame.size.height;
+            
+            if (currentOffset - maximumOffset >= 0.0) {
+                isLoading = YES;
+                [self dynamicallyLoadNextPage];
+            }
+        }
+    }
 }
 
 - (void) dynamicallyLoadNextPage {
     if(segmentType == PhotoHeaderSegmentTypePhoto) {
         photoListOffset ++;
         int groupSize = self.level == ImageGroupLevelYear ? 50 : 48;
-        [groupDao requestImagesByGroupByPage:photoListOffset bySize:500 byLevel:self.level byGroupDate:self.groupDate byGroupSize:[NSNumber numberWithInt:groupSize]];
+        [groupDao requestImagesByGroupByPage:photoListOffset bySize:groupSize*10 byLevel:self.level byGroupDate:self.groupDate byGroupSize:[NSNumber numberWithInt:groupSize] bySort:APPDELEGATE.session.sortType];
     }
 }
 

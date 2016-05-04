@@ -8,8 +8,9 @@
 
 #import "MyViewController.h"
 #import "FeedbackDao.h"
+#import <MessageUI/MessageUI.h>
 
-@interface ReachUsController : MyViewController <UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, UIGestureRecognizerDelegate>
+@interface ReachUsController : MyViewController <UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, UIGestureRecognizerDelegate, MFMailComposeViewControllerDelegate>
 
 @property (nonatomic, strong) FeedbackDao *dao;
 @property (nonatomic, strong) UITableView *choiceTable;

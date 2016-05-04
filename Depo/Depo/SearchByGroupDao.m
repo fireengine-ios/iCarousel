@@ -10,8 +10,9 @@
 
 @implementation SearchByGroupDao
 
-- (void) requestImagesByGroupByPage:(int) page bySize:(int) size byLevel:(int) level byGroupDate:(NSString *) groupDate byGroupSize:(NSNumber *) groupSize {
-    NSString *urlStr = [NSString stringWithFormat:@"%@?fieldName=content_type&fieldValue=%@&sortOrder=DESC&page=%d&size=%d&level=%d&%@&%@", SEARCH_BY_GROUP_URL, @"image%20OR%20video", page, size, level, groupDate != nil ? [NSString stringWithFormat:@"groupDate=%@", groupDate] : @"", groupSize != nil ? [NSString stringWithFormat:@"groupSize=%d", [groupSize intValue]]: @""];
+- (void) requestImagesByGroupByPage:(int) page bySize:(int) size byLevel:(int) level byGroupDate:(NSString *) groupDate byGroupSize:(NSNumber *) groupSize bySort:(SortType) sortType {
+    NSString *sortOrder = sortType == SortTypeDateAsc ? @"ASC" : @"DESC";
+    NSString *urlStr = [NSString stringWithFormat:@"%@?fieldName=content_type&fieldValue=%@&sortOrder=%@&page=%d&size=%d&level=%d&%@&%@", SEARCH_BY_GROUP_URL, @"image%20OR%20video", sortOrder, page, size, level, groupDate != nil ? [NSString stringWithFormat:@"groupDate=%@", groupDate] : @"", groupSize != nil ? [NSString stringWithFormat:@"groupSize=%d", [groupSize intValue]]: @""];
     NSURL *url = [NSURL URLWithString:urlStr];
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];

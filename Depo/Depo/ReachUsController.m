@@ -12,6 +12,8 @@
 #import "CustomLabel.h"
 #import "AppUtil.h"
 #import "FeedbackChoiceCell.h"
+#import "AppDelegate.h"
+#import "ReachabilityManager.h"
 
 @interface ReachUsController () {
     NSNumber *selectedFeedbackType;
@@ -107,8 +109,10 @@
         [self showErrorAlertWithMessage:NSLocalizedString(@"FeedbackTextError", @"")];
         return;
     }
-    [dao requestSendFeedbackWithType:[selectedFeedbackType intValue] andMessage:textView.text];
-    [self showLoading];
+    
+    [self triggerMailComposeView];
+//    [dao requestSendFeedbackWithType:[selectedFeedbackType intValue] andMessage:textView.text];
+//    [self showLoading];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -194,6 +198,33 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
+}
+
+- (void) triggerMailComposeView {
+    if([MFMailComposeViewController canSendMail]) {
+        FeedBackType type = [selectedFeedbackType intValue];
+
+        NSString *messageSubject = type == FeedBackTypeComplaint ? NSLocalizedString(@"ComplaintSubject", @"") : NSLocalizedString(@"SuggestionSubject", @"");
+        
+        NSString *clientInfo = [NSString stringWithFormat:@"Application Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS:%@\nLanguage:%@\nNetwork Status:%@\n", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"], APPDELEGATE.session.user.phoneNumber, [AppUtil operatorName], [UIDevice currentDevice].model, [[UIDevice currentDevice] systemVersion], [Util readLocaleCode], [ReachabilityManager isReachableViaWWAN] ? @"WWAN" : @"WIFI"];
+        NSString *messageBody = [NSString stringWithFormat:@"%@\n\n%@\n\n%@", textView.text, NSLocalizedString(@"MailWarning", @""), clientInfo];
+        
+        MFMailComposeViewController *mailCont = [[MFMailComposeViewController alloc] init];
+        mailCont.mailComposeDelegate = self;
+        
+        [mailCont setSubject:messageSubject];
+        [mailCont setToRecipients:[NSArray arrayWithObject:REACH_US_MAIL_ADDRESS]];
+        [mailCont setMessageBody:messageBody isHTML:NO];
+        
+        [self presentViewController:mailCont animated:YES completion:nil];
+    }
+}
+
+- (void) mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
+    [controller dismissViewControllerAnimated:YES completion:nil];
+    if(result == 2) {
+        [self showInfoAlertWithMessage:NSLocalizedString(@"MessageSentSuccessfully", @"")];
+    }
 }
 
 @end

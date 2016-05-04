@@ -701,3 +701,7 @@
 
 "LogoutConfirmMessage"="Uygulamadan çıkış yapıyorsunuz, emin misiniz?";
 "ImageGroupTypeInProgress"="Yüklenmekte Olanlar";
+
+"SuggestionSubject"="Turkcell Akıllı Depo Hakkında Öneri";
+"ComplaintSubject"="Turkcell Akıllı Depo Hakkında Şikayet";
+"MailWarning"="Lütfen aşağıdaki bilgileri silmeyiniz. Bu bilgiler varsa problemleri bulmak için kullanılacaktır.";
