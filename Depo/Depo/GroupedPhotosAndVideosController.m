@@ -23,6 +23,7 @@
 
 #define IMG_FOOTER_TAG 111
 #define ALBUM_FOOTER_TAG 222
+#define GROUP_COUNT_FOR_PAGE 10
 
 @interface GroupedPhotosAndVideosController ()
 
@@ -142,7 +143,7 @@
 - (void) groupSuccessCallback:(NSArray *) fileGroups {
     [self.groups addObjectsFromArray:fileGroups];
 
-    photoTableUpdateCounter ++;
+//    photoTableUpdateCounter ++;
     if(segmentType == PhotoHeaderSegmentTypePhoto) {
         isLoading = NO;
         [self hideLoading];
@@ -245,7 +246,8 @@
     photoTableUpdateCounter ++;
     
     int groupSize = self.level == ImageGroupLevelYear ? 50 : 48;
-    [groupDao requestImagesByGroupByPage:photoListOffset bySize:groupSize*10 byLevel:self.level byGroupDate:self.groupDate byGroupSize:[NSNumber numberWithInt:groupSize] bySort:APPDELEGATE.session.sortType];
+    int pageSize = self.level == ImageGroupLevelDay ? 100 : (groupSize*GROUP_COUNT_FOR_PAGE);
+    [groupDao requestImagesByGroupByPage:photoListOffset bySize:pageSize byLevel:self.level byGroupDate:self.groupDate byGroupSize:[NSNumber numberWithInt:groupSize] bySort:APPDELEGATE.session.sortType];
     [albumListDao requestAlbumListForStart:0 andSize:50 andSortType:APPDELEGATE.session.sortType];
     isLoading = YES;
     [self showLoading];
@@ -514,7 +516,8 @@
     if(segmentType == PhotoHeaderSegmentTypePhoto) {
         photoListOffset ++;
         int groupSize = self.level == ImageGroupLevelYear ? 50 : 48;
-        [groupDao requestImagesByGroupByPage:photoListOffset bySize:groupSize*10 byLevel:self.level byGroupDate:self.groupDate byGroupSize:[NSNumber numberWithInt:groupSize] bySort:APPDELEGATE.session.sortType];
+        int pageSize = self.level == ImageGroupLevelDay ? 100 : (groupSize*GROUP_COUNT_FOR_PAGE);
+        [groupDao requestImagesByGroupByPage:photoListOffset bySize:pageSize byLevel:self.level byGroupDate:self.groupDate byGroupSize:[NSNumber numberWithInt:groupSize] bySort:APPDELEGATE.session.sortType];
     }
 }
 

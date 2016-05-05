@@ -117,7 +117,7 @@
 
     [[CurioSDK shared] sendEvent:@"ApplicationStarted" eventValue:@"true"];
 
-    DBSession *dbSession = [[DBSession alloc] initWithAppKey:@"mydrrngzkvnljgs" appSecret:@"ygpn9yt1t128h3u" root:kDBRootDropbox];
+    DBSession *dbSession = [[DBSession alloc] initWithAppKey:@"zeddgylajxc1op8" appSecret:@"kn9u1e77bzlk103" root:kDBRootDropbox];
     [DBSession setSharedSession:dbSession];
 
     [self addInitialBgImage];
