@@ -626,7 +626,12 @@
 }
 
 - (void) cleanPageRelatedRequests {
-    [APPDELEGATE cancelRequestsWithTags:@[[NSNumber numberWithInteger:REQ_TAG_FOR_GROUPED_PHOTOS], [NSNumber numberWithInteger:REQ_TAG_FOR_ALBUM], [NSNumber numberWithInteger:REQ_TAG_FOR_PHOTO]]];
+    [groupDao cancelRequest];
+    [albumListDao cancelRequest];
+    [addAlbumDao cancelRequest];
+    [deleteDao cancelRequest];
+    [deleteAlbumDao cancelRequest];
+    [albumAddPhotosDao cancelRequest];
 }
 
 - (void) tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -694,9 +699,9 @@
 - (void) moreClicked {
     if(segmentType == PhotoHeaderSegmentTypePhoto) {
         if(self.level == ImageGroupLevelDay) {
-            [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeSort],[NSNumber numberWithInt:MoreMenuTypeSelect]]];
+            [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeSortWithList],[NSNumber numberWithInt:MoreMenuTypeSelect]]];
         } else {
-            [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeSort]]];
+            [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeSortWithList]]];
         }
     } else {
         [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeSortWithList], [NSNumber numberWithInt:MoreMenuTypeSelect]]];
@@ -704,7 +709,11 @@
 }
 
 - (void) moreMenuDidSelectSortWithList {
-    [APPDELEGATE.base showSortWithList:[NSArray arrayWithObjects:[NSNumber numberWithInt:SortTypeAlphaAsc], [NSNumber numberWithInt:SortTypeAlphaDesc], [NSNumber numberWithInt:SortTypeDateAsc], [NSNumber numberWithInt:SortTypeDateDesc], nil]];
+    if(segmentType == PhotoHeaderSegmentTypeAlbum) {
+        [APPDELEGATE.base showSortWithList:[NSArray arrayWithObjects:[NSNumber numberWithInt:SortTypeAlphaAsc], [NSNumber numberWithInt:SortTypeAlphaDesc], [NSNumber numberWithInt:SortTypeDateAsc], [NSNumber numberWithInt:SortTypeDateDesc], nil]];
+    } else {
+        [APPDELEGATE.base showSortWithList:[NSArray arrayWithObjects:[NSNumber numberWithInt:SortTypeDateAsc], [NSNumber numberWithInt:SortTypeDateDesc], nil]];
+    }
 }
 
 - (void) sortDidChange {

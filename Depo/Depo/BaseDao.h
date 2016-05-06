@@ -220,5 +220,6 @@
 - (Subscription *) parseSubscription:(NSDictionary *) dict;
 - (Offer *) parseOffer:(NSDictionary *) dict;
 - (Device *) parseDevice:(NSDictionary *) dict;
+- (void) cancelRequest;
 
 @end

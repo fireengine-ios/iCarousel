@@ -217,6 +217,8 @@
         [mailCont setMessageBody:messageBody isHTML:NO];
         
         [self presentViewController:mailCont animated:YES completion:nil];
+    } else {
+        [self showErrorAlertWithMessage:NSLocalizedString(@"NoEmailAccountError", @"")];
     }
 }
 

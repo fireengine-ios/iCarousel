@@ -705,3 +705,4 @@
 "SuggestionSubject"="Turkcell Akıllı Depo Hakkında Öneri";
 "ComplaintSubject"="Turkcell Akıllı Depo Hakkında Şikayet";
 "MailWarning"="Lütfen aşağıdaki bilgileri silmeyiniz. Bu bilgiler varsa problemleri bulmak için kullanılacaktır.";
+"NoEmailAccountError"="Cihazınızda tanımlı bir e-posta hesabınız bulunmamaktadır.";

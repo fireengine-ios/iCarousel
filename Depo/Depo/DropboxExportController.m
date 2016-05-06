@@ -12,6 +12,7 @@
 #import "Util.h"
 #import "DropboxStatusCell.h"
 #import "AppUtil.h"
+#import "AppDelegate.h"
 
 @interface DropboxExportController () {
     CustomButton *exportButton;
@@ -219,7 +220,7 @@
             exportButton.enabled = NO;
         }
         
-        if(status.status == DropboxExportStatusRunning) {
+        if(status.status == DropboxExportStatusRunning || status.status == DropboxExportStatusPending || status.status == DropboxExportStatusScheduled) {
             [self performSelector:@selector(scheduleStatusQuery) withObject:nil afterDelay:2.0f];
         }
         mainStatusView.hidden = NO;
@@ -330,6 +331,14 @@
         }
     }
     return credentials;
+}
+
+- (void) viewWillDisappear:(BOOL)animated {
+    [connectDao cancelRequest];
+    [startDao cancelRequest];
+    [statusDao cancelRequest];
+    [tokenDao cancelRequest];
+    [super viewWillDisappear:animated];
 }
 
 @end

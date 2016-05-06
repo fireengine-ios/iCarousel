@@ -248,6 +248,8 @@ _Pragma("clang diagnostic pop") \
 
 #define REQ_TAG_FOR_PHOTO 444
 
+#define REQ_TAG_FOR_DROPBOX 555
+
 #define APP_RATE_FLAG_KEY @"DEPO_APP_RATE_FLAG_KEY"
 
 #define TUTORIAL_MENU_KEY @"ADEPO_TUTORIAL_MENU_KEY"

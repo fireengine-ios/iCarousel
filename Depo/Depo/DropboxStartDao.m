@@ -15,6 +15,7 @@
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setDelegate:self];
+    request.tag = REQ_TAG_FOR_DROPBOX;
     
     [self sendPostRequest:request];
 }

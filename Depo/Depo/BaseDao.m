@@ -548,4 +548,11 @@
     [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
 }
 
+- (void) cancelRequest {
+    if(self.currentRequest) {
+        self.currentRequest.delegate = nil;
+        [self.currentRequest cancel];
+    }
+}
+
 @end

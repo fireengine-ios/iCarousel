@@ -714,6 +714,7 @@ void uncaughtExceptionHandler(NSException *exception) {
 }
 
 - (void) cancelRequestsWithTag:(int) tag {
+    NSOperationQueue * temp = ASIHTTPRequest.sharedQueue;
     for (ASIHTTPRequest *req in ASIHTTPRequest.sharedQueue.operations) {
         if(req.tag == tag) {
             [req cancel];
