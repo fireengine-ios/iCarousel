@@ -246,7 +246,7 @@
     photoTableUpdateCounter ++;
     
     int groupSize = self.level == ImageGroupLevelYear ? 50 : 48;
-    int pageSize = self.level == ImageGroupLevelDay ? 100 : (groupSize*GROUP_COUNT_FOR_PAGE);
+    int pageSize = self.level == ImageGroupLevelDay ? 40 : (groupSize*GROUP_COUNT_FOR_PAGE);
     [groupDao requestImagesByGroupByPage:photoListOffset bySize:pageSize byLevel:self.level byGroupDate:self.groupDate byGroupSize:[NSNumber numberWithInt:groupSize] bySort:APPDELEGATE.session.sortType];
     [albumListDao requestAlbumListForStart:0 andSize:50 andSortType:APPDELEGATE.session.sortType];
     isLoading = YES;
@@ -516,7 +516,7 @@
     if(segmentType == PhotoHeaderSegmentTypePhoto) {
         photoListOffset ++;
         int groupSize = self.level == ImageGroupLevelYear ? 50 : 48;
-        int pageSize = self.level == ImageGroupLevelDay ? 100 : (groupSize*GROUP_COUNT_FOR_PAGE);
+        int pageSize = self.level == ImageGroupLevelDay ? 40 : (groupSize*GROUP_COUNT_FOR_PAGE);
         [groupDao requestImagesByGroupByPage:photoListOffset bySize:pageSize byLevel:self.level byGroupDate:self.groupDate byGroupSize:[NSNumber numberWithInt:groupSize] bySort:APPDELEGATE.session.sortType];
     }
 }

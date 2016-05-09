@@ -202,6 +202,8 @@
 
 #define EXTENSION_WORMHOLE_FINISHED_COUNT_IDENTIFIER @"EXTENSION_WORMHOLE_FINISHED_COUNT_IDENTIFIER"
 
+#define SPECIAL_LOCAL_ALBUM_NAMES @[@"Instagram", @"Picasa", @"Whatsapp", @"Facebook", @"Twitter"]
+
 //TODO test->prod
 //#define CONTACT_SYNC_SERVER_URL @"https://adepo.turkcell.com.tr/ttyapi/"
 #define CONTACT_SYNC_SERVER_URL @"https://tcloudstb.turkcell.com.tr/ttyapi/"

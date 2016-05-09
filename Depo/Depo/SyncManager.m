@@ -119,7 +119,7 @@
         NSArray *remoteSummaryList = [SyncUtil readSyncFileSummaries];
         
         autoSyncIterationInProgress = YES;
-        [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+        [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
             if(group) {
                 [group setAssetsFilter:[ALAssetsFilter allPhotos]];
 
@@ -137,8 +137,20 @@
                     [[CurioSDK shared] sendEvent:@"FirstSyncStarted" eventValue:[NSString stringWithFormat:@"start index: %d", startIndex]];
 
                     [group enumerateAssetsAtIndexes:indexSet options:0 usingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
-                         NSString *referenceAlbumName = [group valueForProperty:ALAssetsGroupPropertyName];
+                         NSString *referenceAlbumName = nil;//[group valueForProperty:ALAssetsGroupPropertyName];
                         if(asset && [[asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypePhoto]) {
+                            NSDictionary *metadataDict = [asset.defaultRepresentation metadata];
+                            if(metadataDict) {
+                                NSDictionary *tiffDict = [metadataDict objectForKey:@"{TIFF}"];
+                                if(tiffDict) {
+                                    NSString *softwareVal = [tiffDict objectForKey:@"Software"];
+                                    if(softwareVal) {
+                                        if([SPECIAL_LOCAL_ALBUM_NAMES containsObject:softwareVal]) {
+                                            referenceAlbumName = softwareVal;
+                                        }
+                                    }
+                                }
+                            }
                             EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
                             if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
                                 ConnectionOption connectionOption = (ConnectionOption)[CacheUtil readCachedSettingSyncingConnectionType];
@@ -225,12 +237,24 @@
 
         autoSyncIterationInProgress = YES;
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-            [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+            [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
                 if(group) {
                     [group setAssetsFilter:[ALAssetsFilter allPhotos]];
                     [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
-                        NSString *referenceAlbumName = [group valueForProperty:ALAssetsGroupPropertyName];
+                        NSString *referenceAlbumName = nil;//[group valueForProperty:ALAssetsGroupPropertyName];
                         if(asset && [[asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypePhoto]) {
+                            NSDictionary *metadataDict = [asset.defaultRepresentation metadata];
+                            if(metadataDict) {
+                                NSDictionary *tiffDict = [metadataDict objectForKey:@"{TIFF}"];
+                                if(tiffDict) {
+                                    NSString *softwareVal = [tiffDict objectForKey:@"Software"];
+                                    if(softwareVal) {
+                                        if([SPECIAL_LOCAL_ALBUM_NAMES containsObject:softwareVal]) {
+                                            referenceAlbumName = softwareVal;
+                                        }
+                                    }
+                                }
+                            }
                             EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
                             if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
                                 ConnectionOption connectionOption = (ConnectionOption)[CacheUtil readCachedSettingSyncingConnectionType];
@@ -273,7 +297,7 @@
     
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         __block int waitingInQueueCount = 0;
-        [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+        [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
             
             if(group) {
                 [group setAssetsFilter:[ALAssetsFilter allPhotos]];
