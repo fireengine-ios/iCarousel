@@ -504,7 +504,7 @@
             CGFloat currentOffset = mainTable.contentOffset.y;
             CGFloat maximumOffset = mainTable.contentSize.height - mainTable.frame.size.height;
             
-            if (currentOffset - maximumOffset >= 0.0) {
+            if (maximumOffset > 0.0f && currentOffset - maximumOffset >= 0.0f) {
                 isLoading = YES;
                 [self dynamicallyLoadNextPage];
             }

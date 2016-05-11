@@ -253,7 +253,7 @@
 }
 
 - (void) didTriggerCellograph {
-    PhotoListController *photo = [[PhotoListController alloc] init];
+    GroupedPhotosAndVideosController *photo = [[GroupedPhotosAndVideosController alloc] init];
     photo.nav = self.nav;
     photo.myDelegate = self;
     [self.nav setViewControllers:@[photo] animated:NO];
