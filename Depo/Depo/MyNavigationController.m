@@ -78,6 +78,9 @@
             [fileController.delegate folderWasModified];
         }
     }
+    if([lastController respondsToSelector:@selector(cancelRequests)]) {
+        [lastController performSelector:@selector(cancelRequests)];
+    }
     [self popViewControllerAnimated:YES];
     [APPDELEGATE.base checkAndShowAddButton];
 }

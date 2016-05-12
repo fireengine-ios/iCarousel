@@ -27,7 +27,6 @@ static const NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRS
     if (self = [super init]) {
         
         [[CurioSDK shared] sendEvent:@"PhotoPrint" eventValue:[NSString stringWithFormat:@"%lu",(unsigned long)[fileList count]]];
-        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[self createPhotoJson:fileList],@"data", nil];
         
         CustomButton *cancelButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 200, 30) withImageName:nil withTitle:NSLocalizedString(@"PrintBackTitle", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:16] withColor:[UIColor whiteColor] isMultipleLine:YES];
         [cancelButton addTarget:self action:@selector(triggerBackToPhotos) forControlEvents:UIControlEventTouchUpInside];
@@ -36,12 +35,15 @@ static const NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRS
         [self.navigationItem setLeftBarButtonItem:backToPhotos];
         [self.navigationItem setRightBarButtonItem:nil];
         
-        NSMutableURLRequest *printRequest = [self requestWithPost:dict];
-        UIWebView *printWeb = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-        printWeb.scalesPageToFit = YES;
-        printWeb.delegate = self;
-        [self.view addSubview:printWeb];
-        [printWeb loadRequest:printRequest];
+        if([SyncUtil readBaseUrlConstant] != nil) {
+            NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[self createPhotoJson:fileList],@"data", nil];
+            NSMutableURLRequest *printRequest = [self requestWithPost:dict];
+            UIWebView *printWeb = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+            printWeb.scalesPageToFit = YES;
+            printWeb.delegate = self;
+            [self.view addSubview:printWeb];
+            [printWeb loadRequest:printRequest];
+        }
         
     }
     return self;

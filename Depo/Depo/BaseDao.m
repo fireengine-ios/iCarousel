@@ -550,7 +550,7 @@
 
 - (void) cancelRequest {
     if(self.currentRequest) {
-        self.currentRequest.delegate = nil;
+        [self.currentRequest setDelegate:nil];
         [self.currentRequest cancel];
     }
 }

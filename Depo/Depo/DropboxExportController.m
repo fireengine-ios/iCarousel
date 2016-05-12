@@ -333,11 +333,22 @@
     return credentials;
 }
 
-- (void) viewWillDisappear:(BOOL)animated {
-    [connectDao cancelRequest];
-    [startDao cancelRequest];
+- (void)cancelRequests {
     [statusDao cancelRequest];
+    statusDao = nil;
+    
+    [connectDao cancelRequest];
+    connectDao = nil;
+    
+    [startDao cancelRequest];
+    startDao = nil;
+
     [tokenDao cancelRequest];
+    tokenDao = nil;
+}
+
+- (void) viewWillDisappear:(BOOL)animated {
+//    [self cancelRequests];
     [super viewWillDisappear:animated];
 }
 

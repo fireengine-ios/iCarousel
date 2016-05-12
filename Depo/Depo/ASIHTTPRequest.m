@@ -726,7 +726,7 @@ static NSOperationQueue *sharedQueue = nil;
 
 - (void)cancel
 {
-    [self performSelector:@selector(cancelOnRequestThread) onThread:[[self class] threadForRequest:self] withObject:nil waitUntilDone:NO];    
+    [self performSelector:@selector(cancelOnRequestThread) onThread:[[self class] threadForRequest:self] withObject:nil waitUntilDone:YES];
 }
 
 - (void)clearDelegatesAndCancel

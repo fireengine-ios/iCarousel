@@ -734,9 +734,11 @@ void uncaughtExceptionHandler(NSException *exception) {
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url sourceApplication:(NSString *)source annotation:(id)annotation {
     if ([[DBSession sharedSession] handleOpenURL:url]) {
-        if ([[DBSession sharedSession] isLinked]) {
-            NSLog(@"App linked successfully!");
-            [[NSNotificationCenter defaultCenter] postNotificationName:DROPBOX_LINK_SUCCESS_KEY object:nil userInfo:nil];
+        if(![[url absoluteString] hasSuffix:@"cancel"]) {
+            if ([[DBSession sharedSession] isLinked]) {
+                NSLog(@"App linked successfully!");
+                [[NSNotificationCenter defaultCenter] postNotificationName:DROPBOX_LINK_SUCCESS_KEY object:nil userInfo:nil];
+            }
         }
         return YES;
     }
