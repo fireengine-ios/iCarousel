@@ -22,7 +22,8 @@
 	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setDelegate:self];
     if(refAlbumName != nil) {
-        [request addRequestHeader:@"X-Object-Meta-Album-Name" value:refAlbumName];
+        NSString *utf8Str = [refAlbumName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        [request addRequestHeader:@"X-Object-Meta-Album-Name" value:utf8Str];
     }
     
     [self sendGetRequest:request];
