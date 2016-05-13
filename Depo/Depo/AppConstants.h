@@ -262,8 +262,7 @@ _Pragma("clang diagnostic pop") \
 
 #define DROPBOX_LINK_SUCCESS_KEY @"DEPO_DROPBOX_LINK_SUCCESS_KEY"
 
-//TODO
-#define REACH_US_MAIL_ADDRESS @"burcu.atalan@turkcell.com.tr"
+#define REACH_US_MAIL_ADDRESS @"DESTEK-AKILLIDEPO@turkcell.com.tr"
 
 typedef enum {
     LoginTypeRadius = 0,

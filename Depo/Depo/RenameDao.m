@@ -11,10 +11,11 @@
 @implementation RenameDao
 
 - (void) requestRenameForFile:(NSString *) uuid withNewName:(NSString *) newName {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:RENAME_URL, uuid]];
+    NSString *urlStr = [NSString stringWithFormat:RENAME_URL, uuid];
+    NSURL *url = [NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request addRequestHeader:@"New-Name" value:newName];
+    [request addRequestHeader:@"New-Name" value:[newName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     [request setDelegate:self];
     
     [self sendPostRequest:request];
