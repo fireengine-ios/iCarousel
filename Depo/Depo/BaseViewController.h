@@ -17,8 +17,9 @@
 #import "ShareLinkDao.h"
 #import "SyncInfoHeaderView.h"
 #import "CustomConfirmView.h"
+#import "AccurateLocationManager.h"
 
-@interface BaseViewController : UIViewController <SlidingMenuDelegate, SlidingMenuCloseDelegate, MyViewDelegate, FloatingAddButtonDelegate, FloatingAddDelegate, UIGestureRecognizerDelegate, CustomConfirmDelegate>
+@interface BaseViewController : UIViewController <SlidingMenuDelegate, SlidingMenuCloseDelegate, MyViewDelegate, FloatingAddButtonDelegate, FloatingAddDelegate, UIGestureRecognizerDelegate, CustomConfirmDelegate, AccurateLocationManagerDelegate>
 
 @property (nonatomic, strong) UIScrollView *scroll;
 @property (nonatomic, strong) UIView *transparentView;

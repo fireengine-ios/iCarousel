@@ -603,8 +603,6 @@
                 }
             }
         } else {
-            [self cleanPageRelatedRequests];
-
             PhotoAlbumController *albumController = [[PhotoAlbumController alloc] initWithAlbum:album];
             albumController.delegate = self;
             albumController.nav = self.nav;
@@ -613,8 +611,6 @@
     } else {
         if([groups count] > 0) {
             if(level == ImageGroupLevelYear || level == ImageGroupLevelMonth) {
-                [self cleanPageRelatedRequests];
-
                 ImageGroupLevel nextLevel = level == ImageGroupLevelYear ? ImageGroupLevelMonth : ImageGroupLevelDay;
                 FileInfoGroup *selectedGroup = [groups objectAtIndex:indexPath.row];
                 GroupedPhotosAndVideosController *nextLevelController = [[GroupedPhotosAndVideosController alloc] initWithLevel:nextLevel withGroupDate:selectedGroup.rangeStart];
@@ -987,6 +983,26 @@
     MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:preview];
     preview.nav = modalNav;
     [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
+}
+
+- (void)cancelRequests {
+    [groupDao cancelRequest];
+    groupDao = nil;
+    
+    [albumListDao cancelRequest];
+    albumListDao = nil;
+    
+    [addAlbumDao cancelRequest];
+    addAlbumDao = nil;
+    
+    [deleteDao cancelRequest];
+    deleteDao = nil;
+
+    [deleteAlbumDao cancelRequest];
+    deleteAlbumDao = nil;
+    
+    [albumAddPhotosDao cancelRequest];
+    albumAddPhotosDao = nil;
 }
 
 @end

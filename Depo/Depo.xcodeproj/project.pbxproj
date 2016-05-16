@@ -840,6 +840,7 @@
 		94884CA51C91A24D006722F7 /* icon_editnum@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94884CA41C91A24D006722F7 /* icon_editnum@3x.png */; };
 		94884CA71C91A255006722F7 /* icon_editnum.png in Resources */ = {isa = PBXBuildFile; fileRef = 94884CA61C91A255006722F7 /* icon_editnum.png */; };
 		94884CAA1C91A469006722F7 /* UpdateMsisdnController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94884CA91C91A469006722F7 /* UpdateMsisdnController.m */; };
+		948EEE671CE9BEB600E27A6D /* AccurateLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 948EEE661CE9BEB600E27A6D /* AccurateLocationManager.m */; };
 		949414E01CC8BCC4008904E2 /* icon_m_baskial_w.png in Resources */ = {isa = PBXBuildFile; fileRef = 949414DC1CC8BCC4008904E2 /* icon_m_baskial_w.png */; };
 		949414E11CC8BCC4008904E2 /* icon_m_baskial.png in Resources */ = {isa = PBXBuildFile; fileRef = 949414DD1CC8BCC4008904E2 /* icon_m_baskial.png */; };
 		949414E21CC8BCC4008904E2 /* icon_m_yardim_w.png in Resources */ = {isa = PBXBuildFile; fileRef = 949414DE1CC8BCC4008904E2 /* icon_m_yardim_w.png */; };
@@ -2114,6 +2115,8 @@
 		94884CA61C91A255006722F7 /* icon_editnum.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_editnum.png; sourceTree = "<group>"; };
 		94884CA81C91A469006722F7 /* UpdateMsisdnController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateMsisdnController.h; sourceTree = "<group>"; };
 		94884CA91C91A469006722F7 /* UpdateMsisdnController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateMsisdnController.m; sourceTree = "<group>"; };
+		948EEE651CE9BEB600E27A6D /* AccurateLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccurateLocationManager.h; sourceTree = "<group>"; };
+		948EEE661CE9BEB600E27A6D /* AccurateLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccurateLocationManager.m; sourceTree = "<group>"; };
 		949414DC1CC8BCC4008904E2 /* icon_m_baskial_w.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_m_baskial_w.png; sourceTree = "<group>"; };
 		949414DD1CC8BCC4008904E2 /* icon_m_baskial.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_m_baskial.png; sourceTree = "<group>"; };
 		949414DE1CC8BCC4008904E2 /* icon_m_yardim_w.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_m_yardim_w.png; sourceTree = "<group>"; };
@@ -3082,6 +3085,8 @@
 				0560F46E1B00D5D0005E6936 /* LocationManager.m */,
 				2443E1551B6BB5F3001C274D /* AudioManager.h */,
 				2443E1561B6BB5F3001C274D /* AudioManager.m */,
+				948EEE651CE9BEB600E27A6D /* AccurateLocationManager.h */,
+				948EEE661CE9BEB600E27A6D /* AccurateLocationManager.m */,
 			);
 			name = manager;
 			sourceTree = "<group>";
@@ -4517,6 +4522,7 @@
 				0555EF1D19F91ACA0068F4CC /* SimpleButton.m in Sources */,
 				051E1EAE19CB20D500FD1E03 /* MenuSearchCell.m in Sources */,
 				058219CE1A384D75001FA679 /* TableHeaderView.m in Sources */,
+				948EEE671CE9BEB600E27A6D /* AccurateLocationManager.m in Sources */,
 				052160A619E308380007B321 /* UploadingImageCell.m in Sources */,
 				051E1E5519CAC90700FD1E03 /* AFJSONRequestOperation.m in Sources */,
 				0590B3231A70EF4300A94AAB /* ShareLinkDao.m in Sources */,

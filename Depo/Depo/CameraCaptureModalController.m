@@ -9,6 +9,8 @@
 #import "CameraCaptureModalController.h"
 #import "AppUtil.h"
 #import "UIImage+Resize.h"
+#import <ImageIO/ImageIO.h>
+#import "AccurateLocationManager.h"
 
 @interface CameraCaptureModalController ()
 
@@ -40,10 +42,70 @@
     UIImage *pickedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     UIImage *resized = [pickedImage resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:pickedImage.size interpolationQuality:kCGInterpolationHigh];
 
-    [UIImageJPEGRepresentation(resized, 1.0) writeToFile:tempPath atomically:NO];
-    
+    BOOL savedWithLoc = NO;
+    if([AccurateLocationManager sharedInstance].currentLocation != nil) {
+        NSDictionary *locationDict = [self gpsDictionaryForLocation:[AccurateLocationManager sharedInstance].currentLocation];
+        NSMutableDictionary *imageMetadata = [[info objectForKey:UIImagePickerControllerMediaMetadata] mutableCopy];
+        [imageMetadata setObject:locationDict forKey:(NSString*)kCGImagePropertyGPSDictionary];
+
+        CGImageSourceRef source = CGImageSourceCreateWithData((CFDataRef)UIImageJPEGRepresentation(resized, 1.0), NULL);
+        CFStringRef UTI = CGImageSourceGetType(source);
+        NSMutableData *destData = [NSMutableData data];
+        CGImageDestinationRef destination = CGImageDestinationCreateWithData((CFMutableDataRef)destData, UTI, 1, NULL);
+        
+        if(destination) {
+            CGImageDestinationAddImageFromSource(destination, source, 0, (CFDictionaryRef) imageMetadata);
+            
+            BOOL success = CGImageDestinationFinalize(destination);
+            
+            if(success) {
+                [destData writeToFile:tempPath atomically:NO];
+                savedWithLoc = YES;
+            }
+            
+            CFRelease(destination);
+            CFRelease(source);
+        }
+    }
+
+    if(!savedWithLoc) {
+        [UIImageJPEGRepresentation(resized, 1.0) writeToFile:tempPath atomically:NO];
+    }
     [modalDelegate cameraCapturaModalDidCaptureAndStoreImageToPath:tempPath withName:camImgName];
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (NSDictionary *) gpsDictionaryForLocation:(CLLocation *)location {
+    CLLocationDegrees exifLatitude  = location.coordinate.latitude;
+    CLLocationDegrees exifLongitude = location.coordinate.longitude;
+    
+    NSString * latRef;
+    NSString * longRef;
+    if (exifLatitude < 0.0) {
+        exifLatitude = exifLatitude * -1.0f;
+        latRef = @"S";
+    } else {
+        latRef = @"N";
+    }
+    
+    if (exifLongitude < 0.0) {
+        exifLongitude = exifLongitude * -1.0f;
+        longRef = @"W";
+    } else {
+        longRef = @"E";
+    }
+    
+    NSMutableDictionary *locDict = [[NSMutableDictionary alloc] init];
+
+    [locDict setObject:location.timestamp forKey:(NSString*)kCGImagePropertyGPSTimeStamp];
+    [locDict setObject:latRef forKey:(NSString*)kCGImagePropertyGPSLatitudeRef];
+    [locDict setObject:[NSNumber numberWithFloat:exifLatitude] forKey:(NSString *)kCGImagePropertyGPSLatitude];
+    [locDict setObject:longRef forKey:(NSString*)kCGImagePropertyGPSLongitudeRef];
+    [locDict setObject:[NSNumber numberWithFloat:exifLongitude] forKey:(NSString *)kCGImagePropertyGPSLongitude];
+    [locDict setObject:[NSNumber numberWithFloat:location.horizontalAccuracy] forKey:(NSString*)kCGImagePropertyGPSDOP];
+    [locDict setObject:[NSNumber numberWithFloat:location.altitude] forKey:(NSString*)kCGImagePropertyGPSAltitude];
+    
+    return locDict;
 }
 
 - (void) imagePickerControllerDidCancel:(UIImagePickerController *)picker {

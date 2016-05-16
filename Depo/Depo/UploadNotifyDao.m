@@ -23,7 +23,7 @@
     [request setDelegate:self];
     if(refAlbumName != nil) {
         NSString *utf8Str = [refAlbumName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        [request addRequestHeader:@"X-Object-Meta-Album-Name" value:utf8Str];
+        [request addRequestHeader:@"X-Object-Meta-Album-Label" value:utf8Str];
     }
     
     [self sendGetRequest:request];

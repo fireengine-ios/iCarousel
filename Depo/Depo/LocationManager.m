@@ -17,6 +17,7 @@
 
 @synthesize delegate;
 @synthesize locManager;
+@synthesize currentLocation;
 
 + (LocationManager *) sharedInstance {
     static LocationManager *sharedInstance;
@@ -112,6 +113,7 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     NSDate *lastUpdateDate = [SyncUtil readLastLocUpdateTime];
+    self.currentLocation = [locations lastObject];
     if(lastUpdateDate != nil && [[NSDate date] timeIntervalSinceDate:lastUpdateDate] < 30) {
         return;
     }

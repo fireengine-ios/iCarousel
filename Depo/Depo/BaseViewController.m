@@ -432,6 +432,26 @@
     [addMenu dismissWithAnimation];
     [self performSelector:@selector(hideAddMenu) withObject:nil afterDelay:0.3];
     
+    [AccurateLocationManager sharedInstance].delegate = self;
+    [[AccurateLocationManager sharedInstance] startLocationManager];
+}
+
+- (void) accurateLocationManagerPermissionDenied {
+    [self triggerCapturaScreen];
+    [[AccurateLocationManager sharedInstance] stopLocationManager];
+}
+
+- (void) accurateLocationManagerDidReceiveError:(NSString *)errorMessage {
+    [self triggerCapturaScreen];
+    [[AccurateLocationManager sharedInstance] stopLocationManager];
+}
+
+- (void) accurateLocationManagerDidReceiveLocation {
+    [self triggerCapturaScreen];
+    [[AccurateLocationManager sharedInstance] stopLocationManager];
+}
+
+- (void) triggerCapturaScreen {
     CameraCaptureModalController *cameraController = [[CameraCaptureModalController alloc] init];
     cameraController.modalDelegate = [self.nav topViewController];
     [self presentViewController:cameraController animated:YES completion:nil];

@@ -19,6 +19,7 @@
 
 @property (nonatomic, strong) id<LocationManagerDelegate> delegate;
 @property (nonatomic, strong) CLLocationManager *locManager;
+@property (nonatomic, strong) CLLocation *currentLocation;
 
 + (LocationManager *) sharedInstance;
 - (void) startLocationManager;
