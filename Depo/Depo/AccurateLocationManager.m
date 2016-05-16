@@ -54,12 +54,16 @@
             [[AccurateLocationManager sharedInstance].locManager startUpdatingLocation];
         } else {
             if(delegate) {
-                [delegate accurateLocationManagerPermissionDenied];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [delegate accurateLocationManagerPermissionDenied];
+                });
             }
         }
     } else {
         if(delegate) {
-            [delegate accurateLocationManagerPermissionDenied];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [delegate accurateLocationManagerPermissionDenied];
+            });
         }
     }
 }
@@ -76,7 +80,9 @@
         [[AccurateLocationManager sharedInstance].locManager startUpdatingLocation];
     } else {
         if(delegate) {
-            [delegate accurateLocationManagerPermissionDenied];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [delegate accurateLocationManagerPermissionDenied];
+            });
         }
     }
 }
@@ -84,13 +90,17 @@
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     self.currentLocation = [locations lastObject];
     if(delegate) {
-        [delegate accurateLocationManagerDidReceiveLocation];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [delegate accurateLocationManagerDidReceiveLocation];
+        });
     }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
     if(delegate) {
-        [delegate accurateLocationManagerDidReceiveError:[error localizedDescription]];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [delegate accurateLocationManagerDidReceiveError:[error localizedDescription]];
+        });
     }
 }
 

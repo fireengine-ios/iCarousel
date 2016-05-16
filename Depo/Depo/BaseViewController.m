@@ -434,19 +434,23 @@
     
     [AccurateLocationManager sharedInstance].delegate = self;
     [[AccurateLocationManager sharedInstance] startLocationManager];
+    [self showBaseLoading];
 }
 
 - (void) accurateLocationManagerPermissionDenied {
+    [self hideBaseLoading];
     [self triggerCapturaScreen];
     [[AccurateLocationManager sharedInstance] stopLocationManager];
 }
 
 - (void) accurateLocationManagerDidReceiveError:(NSString *)errorMessage {
+    [self hideBaseLoading];
     [self triggerCapturaScreen];
     [[AccurateLocationManager sharedInstance] stopLocationManager];
 }
 
 - (void) accurateLocationManagerDidReceiveLocation {
+    [self hideBaseLoading];
     [self triggerCapturaScreen];
     [[AccurateLocationManager sharedInstance] stopLocationManager];
 }

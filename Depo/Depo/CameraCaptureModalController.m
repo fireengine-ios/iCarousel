@@ -47,6 +47,9 @@
         NSDictionary *locationDict = [self gpsDictionaryForLocation:[AccurateLocationManager sharedInstance].currentLocation];
         NSMutableDictionary *imageMetadata = [[info objectForKey:UIImagePickerControllerMediaMetadata] mutableCopy];
         [imageMetadata setObject:locationDict forKey:(NSString*)kCGImagePropertyGPSDictionary];
+        
+        //TODO orientation yanlis geliyor
+        [imageMetadata removeObjectForKey:@"Orientation"];
 
         CGImageSourceRef source = CGImageSourceCreateWithData((CFDataRef)UIImageJPEGRepresentation(resized, 1.0), NULL);
         CFStringRef UTI = CGImageSourceGetType(source);
