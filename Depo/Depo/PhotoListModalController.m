@@ -150,6 +150,18 @@
             } else {
                 ref.contentType = ContentTypePhoto;
             }
+            NSDictionary *metadataDict = [row.defaultRepresentation metadata];
+            if(metadataDict) {
+                NSDictionary *tiffDict = [metadataDict objectForKey:@"{TIFF}"];
+                if(tiffDict) {
+                    NSString *softwareVal = [tiffDict objectForKey:@"Software"];
+                    if(softwareVal) {
+                        if([SPECIAL_LOCAL_ALBUM_NAMES containsObject:softwareVal]) {
+                            ref.referenceFolderName = softwareVal;
+                        }
+                    }
+                }
+            }
             [selectedAssetUrls addObject:ref];
         }
         [modalDelegate photoModalDidTriggerUploadForUrls:selectedAssetUrls];

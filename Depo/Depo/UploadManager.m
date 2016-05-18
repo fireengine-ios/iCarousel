@@ -284,7 +284,12 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     [request setValue:[Util getWorkaroundUUID] forHTTPHeaderField:@"X-Object-Meta-Device-UUID"];
     [request setValue:@"1" forHTTPHeaderField:@"x-meta-strategy"];
     [request setValue:@"100-continue" forHTTPHeaderField:@"Expect"];
-    
+
+    if(self.uploadRef.referenceFolderName != nil) {
+        NSString *utf8Str = [self.uploadRef.referenceFolderName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        [request setValue:utf8Str forHTTPHeaderField:@"X-Object-Meta-Album-Label"];
+    }
+
     if(self.uploadRef.folder) {
         [request setValue:self.uploadRef.folder.uuid forHTTPHeaderField:@"X-Object-Meta-Parent-Uuid"];
     } else {
