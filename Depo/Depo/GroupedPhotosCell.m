@@ -82,7 +82,7 @@
                     counter++;
                 } else {
                     UIImageView *rowImgView = [[UIImageView alloc] initWithFrame:CGRectMake((counter%imageForRow)*imageItemSize, floorf(counter/imageForRow)*imageItemSize, imageItemSize, imageItemSize)];
-                    [rowImgView setNoCachedImageWithURL:[NSURL URLWithString:row.detail.thumbSmallUrl]];
+                    [rowImgView setNoCachedImageWithURL:[NSURL URLWithString:row.detail.thumbMediumUrl]];
                     [imageContainer addSubview:rowImgView];
                     counter++;
                 }

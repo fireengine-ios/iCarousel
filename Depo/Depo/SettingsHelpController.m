@@ -26,7 +26,7 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     UIWebView *webView  = [[UIWebView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.topIndex)];
-    webView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+//    webView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     webView.scalesPageToFit = YES;
     webView.autoresizesSubviews = YES;
     webView.delegate = self;
@@ -48,6 +48,12 @@
 - (void) webViewDidFinishLoad:(UIWebView *)webView {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     [self hideLoading];
+    
+    if ([webView respondsToSelector:@selector(scrollView)]) {
+        UIScrollView *scroll = [webView scrollView];
+        float zoom = webView.bounds.size.width/scroll.contentSize.width;
+        [scroll setZoomScale:zoom animated:YES];
+    }
 }
 
 - (void) webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
