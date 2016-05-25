@@ -6,8 +6,10 @@
 //  Copyright (c) 2014 com.igones. All rights reserved.
 //
 
-#import "SettingsBaseViewController.h"
+#import "MyViewController.h"
 
-@interface SettingsHelpController : SettingsBaseViewController <UIWebViewDelegate>
+@interface SettingsHelpController : MyViewController <UIWebViewDelegate>
+
+@property (nonatomic, strong) UIWebView *contentView;
 
 @end

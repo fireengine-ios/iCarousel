@@ -14,30 +14,28 @@
 
 @implementation SettingsHelpController
 
-- (id)init
-{
+@synthesize contentView;
+
+- (id)init {
     self = [super init];
     if (self) {
         self.title = NSLocalizedString(@"FAQ", @"");
     }
-    
     return self;
 }
 
-- (void) viewWillAppear:(BOOL)animated {
-    UIWebView *webView  = [[UIWebView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.topIndex)];
-//    webView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    webView.scalesPageToFit = YES;
-    webView.autoresizesSubviews = YES;
-    webView.delegate = self;
-    [self.view addSubview:webView];
+- (void) viewDidLoad {
+    [super viewDidLoad];
+
+    contentView  = [[UIWebView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.topIndex)];
+    //    webView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    contentView.scalesPageToFit = YES;
+    contentView.delegate = self;
+    [self.view addSubview:contentView];
+    
     NSURL *url = [NSURL URLWithString:@"http://trcll.im/zbQxU"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [webView loadRequest:request];
-}
-
-- (void) viewWillDisappear:(BOOL)animated {
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    [contentView loadRequest:request];
 }
 
 - (void) webViewDidStartLoad:(UIWebView *)webView {
@@ -49,9 +47,9 @@
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     [self hideLoading];
     
-    if ([webView respondsToSelector:@selector(scrollView)]) {
-        UIScrollView *scroll = [webView scrollView];
-        float zoom = webView.bounds.size.width/scroll.contentSize.width;
+    if ([contentView respondsToSelector:@selector(scrollView)]) {
+        UIScrollView *scroll = [contentView scrollView];
+        float zoom = contentView.bounds.size.width/scroll.contentSize.width;
         [scroll setZoomScale:zoom animated:YES];
     }
 }
