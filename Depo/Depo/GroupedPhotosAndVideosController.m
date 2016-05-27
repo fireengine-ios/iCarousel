@@ -834,7 +834,21 @@
 }
 
 - (void) footerActionMenuDidSelectPrint:(FooterActionsMenuView *)menu {
-    PrintWebViewController *printController = [[PrintWebViewController alloc] initWithUrl:@"http://akillidepo.cellograf.com/" withFileList:selectedFileList];
+    NSMutableArray *printList = [[NSMutableArray alloc] init];
+    for(FileInfoGroup *groupRow in groups) {
+        for(id fileRow in groupRow.fileInfo) {
+            if([fileRow isKindOfClass:[MetaFile class]]) {
+                MetaFile *castedRow = (MetaFile *) fileRow;
+                if([selectedFileList containsObject:castedRow.uuid]) {
+                    if(castedRow.contentType == ContentTypePhoto){
+                        [printList addObject:castedRow];
+                    }
+                }
+            }
+        }
+    }
+
+    PrintWebViewController *printController = [[PrintWebViewController alloc] initWithUrl:@"http://akillidepo.cellograf.com/" withFileList:printList];
     printNav = [[MyNavigationController alloc] initWithRootViewController:printController];
     
     [self presentViewController:printNav animated:YES completion:nil];

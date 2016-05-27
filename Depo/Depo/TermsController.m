@@ -9,6 +9,8 @@
 #import "TermsController.h"
 #import "Util.h"
 #import "AppDelegate.h"
+#import "ReachabilityManager.h"
+#import "CacheUtil.h"
 
 @interface TermsController ()
 
@@ -22,6 +24,8 @@
 @synthesize acceptButton;
 @synthesize eulaDao;
 @synthesize eulaApproveDao;
+@synthesize tokenDao;
+@synthesize radiusDao;
 @synthesize eula;
 
 - (id) init {
@@ -49,6 +53,16 @@
         eulaApproveDao.successMethod = @selector(eulaApproveSuccessCallback);
         eulaApproveDao.failMethod = @selector(eulaApproveFailCallback:);
         
+        tokenDao = [[RequestTokenDao alloc] init];
+        tokenDao.delegate = self;
+        tokenDao.successMethod = @selector(tokenDaoSuccessCallback);
+        tokenDao.failMethod = @selector(tokenDaoFailCallback:);
+
+        radiusDao = [[RadiusDao alloc] init];
+        radiusDao.delegate = self;
+        radiusDao.successMethod = @selector(tokenDaoSuccessCallback);
+        radiusDao.failMethod = @selector(tokenDaoFailCallback:);
+
         UIImage *topImg = [UIImage imageNamed:@"bulutheader.png"];
         float imageHeight = (self.view.frame.size.width/topImg.size.width)*topImg.size.height;
         
@@ -87,10 +101,18 @@
 }
 
 - (void) provisionSuccessCallback {
-    [eulaApproveDao requestApproveEulaForId:self.eula.eulaId];
+    [self preApproveLogin];
 }
 
 - (void) provisionFailCallback:(NSString *) errorMessage {
+    [self preApproveLogin];
+}
+
+- (void) tokenDaoSuccessCallback {
+    [eulaApproveDao requestApproveEulaForId:self.eula.eulaId];
+}
+
+- (void) tokenDaoFailCallback:(NSString *) errorMessage {
     [eulaApproveDao requestApproveEulaForId:self.eula.eulaId];
 }
 
@@ -137,6 +159,21 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) preApproveLogin {
+    if([ReachabilityManager isReachableViaWiFi]
+       || ![APPDELEGATE isTurkcell]) {
+        NSString *cachedMsisdn = [CacheUtil readCachedMsisdnForPostMigration];
+        NSString *cachedPass = [CacheUtil readCachedPassForPostMigration];
+        if(cachedMsisdn != nil && cachedPass != nil) {
+            [tokenDao requestTokenForMsisdn:cachedMsisdn andPassword:cachedPass shouldRememberMe:[CacheUtil readCachedRememberMeForPostMigration]];
+        } else {
+            [eulaApproveDao requestApproveEulaForId:self.eula.eulaId];
+        }
+    } else if([ReachabilityManager isReachableViaWWAN]) {
+        [radiusDao requestRadiusLogin];
+    }
 }
 
 - (void) eulaApproveSuccessCallback {

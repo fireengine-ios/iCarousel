@@ -51,5 +51,6 @@
 - (void) removeAllMediaFiles;
 - (void) cancelRequestsWithTag:(int) tag;
 - (void) cancelRequestsWithTags:(NSArray *) tags;
+- (BOOL) isTurkcell;
 
 @end

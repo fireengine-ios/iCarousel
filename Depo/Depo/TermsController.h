@@ -13,6 +13,8 @@
 #import "EulaDao.h"
 #import "Eula.h"
 #import "EulaApproveDao.h"
+#import "RequestTokenDao.h"
+#import "RadiusDao.h"
 
 @interface TermsController : MyModalController <UIWebViewDelegate, CheckButtonDelegate>
 
@@ -21,6 +23,8 @@
 @property (nonatomic, strong) ProvisionDao *provisionDao;
 @property (nonatomic, strong) EulaDao *eulaDao;
 @property (nonatomic, strong) EulaApproveDao *eulaApproveDao;
+@property (nonatomic, strong) RequestTokenDao *tokenDao;
+@property (nonatomic, strong) RadiusDao *radiusDao;
 @property (nonatomic, strong) SimpleButton *acceptButton;
 @property (nonatomic, strong) Eula *eula;
 
