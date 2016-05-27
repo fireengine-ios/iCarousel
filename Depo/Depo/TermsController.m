@@ -98,6 +98,8 @@
     self.eula = eulaRead;
     [self hideLoading];
 
+    [[CurioSDK shared] sendEvent:@"EulaShown" eventValue:[NSString stringWithFormat:@"EULA_ID:%d", self.eula.eulaId]];
+
     [webView loadHTMLString:self.eula.content baseURL:[NSURL URLWithString:@"http://www.turkcell.com.tr"]];
 }
 
@@ -138,12 +140,14 @@
 }
 
 - (void) eulaApproveSuccessCallback {
+    [[CurioSDK shared] sendEvent:@"EulaApprove" eventValue:@"Success"];
     [self hideLoading];
     [APPDELEGATE triggerPostTermsAndMigration];
     [self.view removeFromSuperview];
 }
 
 - (void) eulaApproveFailCallback:(NSString *) errorMessage {
+    [[CurioSDK shared] sendEvent:@"EulaApprove" eventValue:@"Fail"];
     [self hideLoading];
     [self showErrorAlertWithMessage:errorMessage];
 }

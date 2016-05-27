@@ -204,6 +204,7 @@
     NSLog(@"Signup Result: %@", signupResult);
     NSString *signupStatus = [signupResult objectForKey:@"status"];
     if([[signupStatus uppercaseString] isEqualToString:@"OK"]) {
+        [[CurioSDK shared] sendEvent:@"SignUp>First" eventValue:@"Success"];
         NSDictionary *valueDict = [signupResult objectForKey:@"value"];
         NSString *action = [valueDict objectForKey:@"action"];
         NSString *referenceToken = [valueDict objectForKey:@"referenceToken"];
@@ -223,6 +224,7 @@
             return;
         }
     } else if([[signupStatus uppercaseString] isEqualToString:@"INVALID_PASSWORD"]){
+        [[CurioSDK shared] sendEvent:@"SignUp>First" eventValue:@"InvalidPassword"];
         NSDictionary *detailDict = [signupResult objectForKey:@"value"];
         NSString *errorReason = [detailDict objectForKey:@"reason"];
         if(errorReason != nil && [errorReason isKindOfClass:[NSString class]]) {
@@ -233,19 +235,38 @@
     } else {
         [self showErrorAlertWithMessage:NSLocalizedString(signupStatus, @"")];
         if([signupStatus isEqualToString:@"VERIFY_EXISTING_EMAIL"]) {
+            [[CurioSDK shared] sendEvent:@"SignUp>First" eventValue:@"VerifyExistingEmail"];
             [self.navigationController popViewControllerAnimated:YES];
+        } else {
+            [[CurioSDK shared] sendEvent:@"SignUp>First" eventValue:@"Fail"];
         }
     }
 }
 
+- (void) innerTriggerBack {
+    [[CurioSDK shared] sendEvent:@"SignUp>First" eventValue:@"Back"];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void) signupFailCallback:(NSString *) errorMessage {
+    [[CurioSDK shared] sendEvent:@"Signup>First" eventValue:@"Fail"];
     [self hideLoading];
     [self showErrorAlertWithMessage:errorMessage];
 }
 
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    CustomButton *customBackButton = [[CustomButton alloc] initWithFrame:CGRectMake(10, 0, 20, 34) withImageName:@"white_left_arrow.png"];
+    [customBackButton addTarget:self action:@selector(innerTriggerBack) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:customBackButton];
+    self.navigationItem.leftBarButtonItem = backButton;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    [[CurioSDK shared] sendEvent:@"Signup>First" eventValue:@"Enter"];
 }
 
 - (void)didReceiveMemoryWarning {
