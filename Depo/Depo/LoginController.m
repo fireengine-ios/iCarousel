@@ -197,7 +197,7 @@
     [[CurioSDK shared] sendEvent:@"LoginSuccess" eventValue:@"true"];
     [[CurioSDK shared] sendEvent:@"Login" eventValue:@"Success"];
     
-    [MPush hitTag:@"logged_in" withValue:msisdnValue];
+    [MPush hitTag:@"logged_in"];
     [MPush hitEvent:@"logged_in"];
 
     [APPDELEGATE triggerPostLogin];
