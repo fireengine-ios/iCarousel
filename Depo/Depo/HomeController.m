@@ -615,12 +615,14 @@
 - (void) didRejectCustomAlert:(CustomConfirmView *) alertView {
     if(alertView.tag == 111) {
         [[CurioSDK shared] sendEvent:@"EmailEmpty" eventValue:@"Later"];
+        [[CurioSDK shared] sendEvent:@"EmailConfirm" eventValue:@"later"];
     }
 }
 
 - (void) didApproveCustomAlert:(CustomConfirmView *) alertView {
     if(alertView.tag == 111) {
         [[CurioSDK shared] sendEvent:@"EmailEmpty" eventValue:@"Enter"];
+        [[CurioSDK shared] sendEvent:@"EmailConfirm" eventValue:@"ok"];
         EmailEntryController *emailController = [[EmailEntryController alloc] init];
         MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:emailController];
         [self presentViewController:modalNav animated:YES completion:nil];

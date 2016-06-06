@@ -145,6 +145,8 @@
         [CacheUtil writeCachedSettingSyncContacts:EnableOptionOff];
 
         [[CurioSDK shared] sendEvent:@"SyncClosed" eventValue:@"true"];
+        [[CurioSDK shared] sendEvent:@"FirstAutoSyncPref" eventValue:@"closed"];
+
         [MPush hitTag:@"autosync_off"];
         [MPush hitEvent:@"autosync_off"];
         
@@ -277,9 +279,11 @@
     [[CurioSDK shared] sendEvent:@"SyncOpened" eventValue:@"true"];
     
     if(selectedOption == ConnectionOptionWifi3G) {
+        [[CurioSDK shared] sendEvent:@"FirstAutoSyncPref" eventValue:@"any"];
         [MPush hitTag:@"autosync_wifi3g"];
         [MPush hitEvent:@"autosync_wifi3g"];
     } else {
+        [[CurioSDK shared] sendEvent:@"FirstAutoSyncPref" eventValue:@"wifi"];
         [MPush hitTag:@"autosync_wifi"];
         [MPush hitEvent:@"autosync_wifi"];
     }

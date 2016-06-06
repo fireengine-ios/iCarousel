@@ -96,6 +96,7 @@
 }
 
 - (void) loginClicked {
+    [[CurioSDK shared] sendEvent:@"GetStarted" eventValue:@"clicked"];
     [APPDELEGATE triggerLogin];
 }
 

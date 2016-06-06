@@ -12,6 +12,7 @@
 #import "Util.h"
 #import "LoginController.h"
 #import "SignupController.h"
+#import "CurioSDK.h"
 
 @interface WelcomeController ()
 
@@ -67,6 +68,7 @@
 }
 
 - (void) triggerSignup {
+    [[CurioSDK shared] sendEvent:@"Welcome" eventValue:@"signup_clicked"];
     SignupController *signup = [[SignupController alloc] init];
     [self.navigationController pushViewController:signup animated:YES];
 }

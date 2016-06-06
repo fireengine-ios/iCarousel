@@ -299,6 +299,14 @@
 }
 
 - (void) triggerHome {
+    SEL isRegisteredForRemoteNotificationsSel = NSSelectorFromString(@"isRegisteredForRemoteNotifications");
+    if([[UIApplication sharedApplication] respondsToSelector:isRegisteredForRemoteNotificationsSel]) {
+        if([[UIApplication sharedApplication] isRegisteredForRemoteNotifications]){
+            [[CurioSDK shared] sendEvent:@"NotificationPermission" eventValue:@"granted"];
+        } else {
+            [[CurioSDK shared] sendEvent:@"NotificationPermission" eventValue:@"denied"];
+        }
+    }
     self.base = [[BaseViewController alloc] init];
     [self.window setRootViewController:base];
 }

@@ -103,7 +103,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [[CurioSDK shared] sendEvent:@"EmailEntry" eventValue:@"opened"];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -130,6 +130,7 @@
     } else if([resultStatus isEqualToString:@"CAN_NOT_CHANGE_EMAIL"]) {
         [self showErrorAlertWithMessage:NSLocalizedString(@"CannotChangeEmail", @"")];
     } else {
+        [[CurioSDK shared] sendEvent:@"EmailEntry" eventValue:@"finished"];
         APPDELEGATE.session.user.email = emailField.text;
         [self dismissViewControllerAnimated:YES completion:nil];
     }

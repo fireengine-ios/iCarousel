@@ -12,6 +12,7 @@
 #import "AppUtil.h"
 #import "SyncUtil.h"
 #import "UploadQueue.h"
+#import "CurioSDK.h"
 
 @implementation LocationManager
 
@@ -95,16 +96,19 @@
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
     if (status == kCLAuthorizationStatusAuthorizedAlways) {
+        [[CurioSDK shared] sendEvent:@"LocationPermission" eventValue:@"granted"];
         if(delegate) {
             [delegate locationPermissionGranted];
         }
         [[LocationManager sharedInstance].locManager startMonitoringSignificantLocationChanges];
     } else if (status == kCLAuthorizationStatusAuthorized) {
+        [[CurioSDK shared] sendEvent:@"LocationPermission" eventValue:@"granted"];
         if(delegate) {
             [delegate locationPermissionGranted];
         }
         [[LocationManager sharedInstance].locManager startMonitoringSignificantLocationChanges];
     } else {
+        [[CurioSDK shared] sendEvent:@"LocationPermission" eventValue:@"denied"];
         if(delegate) {
             [delegate locationPermissionDenied];
         }
