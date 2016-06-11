@@ -91,7 +91,7 @@
         [SyncSettings shared].token = APPDELEGATE.session.authToken;
         [SyncSettings shared].url = CONTACT_SYNC_SERVER_URL;
         [SyncSettings shared].debug = YES;
-        [SyncSettings shared].callback = ^void(void) {
+        [SyncSettings shared].callback = ^void(id data) {
             SyncStatus *status = [SyncStatus shared];
             switch (status.status) {
                 case SYNC_RESULT_SUCCESS: {

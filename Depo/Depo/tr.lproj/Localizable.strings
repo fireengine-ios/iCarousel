@@ -621,7 +621,8 @@
 
 "TermsButtonTitle"="KULLANIM KOŞULLARINI KABUL EDİYORUM";
 "TermsTitle"="Kullanım Koşulları";
-"EmailNotFound"="Akıllı Depo üyeliğiniz bulunmamaktadır. Kayıt Ol menüsünden üyeliğinizi başlatabilirsiniz.";
+"EmailNotFound"="Akıllı Depo üyeliğiniz bulunmamaktadır. Kayıt Ol menüsünden üyeliğinizi başlatabilirsiniz. Turkcell abonesi iseniz 2222'ye SMS atarak şifrenizi alabilirsiniz.";
+
 
 "IAPRestoreError"="Bu ürünü daha önceden satın almıştınız";
 

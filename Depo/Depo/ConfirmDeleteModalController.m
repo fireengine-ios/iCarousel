@@ -97,10 +97,9 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    IGLog(@"ConfirmDeleteModalController viewDidLoad");
 }
 
 - (void)didReceiveMemoryWarning

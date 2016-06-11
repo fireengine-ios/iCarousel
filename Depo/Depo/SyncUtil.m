@@ -362,4 +362,32 @@
     return [[ NSUserDefaults standardUserDefaults] objectForKey:LAST_LOC_UPDATE_TIME_KEY];
 }
 
++ (void) write413Lock:(BOOL) newVal {
+    [[NSUserDefaults standardUserDefaults] setBool:newVal forKey:QUOTA_413_LOCK_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (BOOL) read413Lock {
+    return [[ NSUserDefaults standardUserDefaults] boolForKey:QUOTA_413_LOCK_KEY];
+}
+
++ (void) writeLast413CheckDate:(NSDate *) date {
+    [[NSUserDefaults standardUserDefaults] setObject:date forKey:QUOTA_413_LAST_CHECK_DATE_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (NSDate *) readLast413CheckDate {
+    return [[ NSUserDefaults standardUserDefaults] objectForKey:QUOTA_413_LAST_CHECK_DATE_KEY];
+}
+
++ (BOOL) isLast413CheckDateOneDayOld {
+    NSDate *lastDate = [SyncUtil readLast413CheckDate];
+    if(lastDate) {
+        NSDate *now = [NSDate date];
+        NSTimeInterval diffBetweenDates = [now timeIntervalSinceDate:lastDate];
+        return diffBetweenDates >= 3600;
+    }
+    return YES;
+}
+
 @end

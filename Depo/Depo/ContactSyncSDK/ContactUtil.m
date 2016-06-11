@@ -192,6 +192,7 @@
     
     ABRecordSetValue(record, kABPersonFirstNameProperty, (__bridge CFStringRef)contact.firstName, nil);
     ABRecordSetValue(record, kABPersonMiddleNameProperty, (__bridge CFStringRef)contact.middleName, nil);
+    ABRecordSetValue(record, kABPersonNicknameProperty, (__bridge CFStringRef)contact.nickName, nil);
     ABRecordSetValue(record, kABPersonLastNameProperty, (__bridge CFStringRef)contact.lastName, nil);
     
     ABMutableMultiValueRef phoneNumbers = nil;
@@ -267,10 +268,13 @@
     {
         ABRecordRef ref = CFArrayGetValueAtIndex( allPeople, i );
         Contact *contact = [[Contact alloc] initWithRecordRef:ref];
-        // We must have either firstname or lastname, otherwise contact cannot be saved on server
-        if (!SYNC_STRING_IS_NULL_OR_EMPTY(contact.firstName) || !SYNC_STRING_IS_NULL_OR_EMPTY(contact.lastName)){
-            [ret addObject:contact];
+
+        if (!SYNC_STRING_IS_NULL_OR_EMPTY(contact.firstName) || !SYNC_STRING_IS_NULL_OR_EMPTY(contact.middleName) || !SYNC_STRING_IS_NULL_OR_EMPTY(contact.lastName) || !SYNC_STRING_IS_NULL_OR_EMPTY(contact.nickName)){
+            contact.hasName = YES;
+        } else {
+            contact.hasName = NO;
         }
+        [ret addObject:contact];
     }
     CFRelease(allPeople);
     return ret;
@@ -290,17 +294,21 @@
         
         NSNumber *objectId = [NSNumber numberWithInt:ABRecordGetRecordID(ref)];
         NSString *firstName=(__bridge NSString*)ABRecordCopyValue(ref, kABPersonFirstNameProperty);
+        NSString *middleName=(__bridge NSString*)ABRecordCopyValue(ref, kABPersonMiddleNameProperty);
+        NSString *nickName=(__bridge NSString*)ABRecordCopyValue(ref, kABPersonNicknameProperty);
         NSString *lastName=(__bridge NSString*)ABRecordCopyValue(ref, kABPersonLastNameProperty);
         
         NSDate *lastModif=(__bridge NSDate *)(ABRecordCopyValue(ref,kABPersonModificationDateProperty));
 
-        SYNC_Log(@"%@ %@ %@ => %@ / %@", objectId, firstName, lastName, lastModif, SYNC_DATE_AS_NUMBER(lastModif));
+        SYNC_Log(@"%@ %@ %@ %@ %@ => %@ / %@", objectId, firstName, middleName, nickName, lastName, lastModif, SYNC_DATE_AS_NUMBER(lastModif));
     }
     CFRelease(allPeople);
 }
 
 - (void)fetchNumbers:(Contact*)contact
 {
+    contact.hasPhoneNumber = NO;
+    
     ABMultiValueRef multiPhones = ABRecordCopyValue(contact.recordRef, kABPersonPhoneProperty);
     CFIndex cfCount = ABMultiValueGetCount(multiPhones);
     for(CFIndex i=0;i<cfCount;i++) {
@@ -318,9 +326,11 @@
             CFRelease(phoneTypeRef);
         }
         
+        contact.hasPhoneNumber = YES;
+        
         ContactPhone *phone = (ContactPhone *)[[ContactPhone alloc] initWithValue:phoneNumber andType:type];
         if (![self isAdded:contact value:phone]) {
-            SYNC_Log(@"%@ %@ phone :%@ %@", contact.firstName, contact.lastName, phoneNumber, type);
+            SYNC_Log(@"%@ %@ %@ %@ phone :%@ %@", contact.firstName, contact.middleName, contact.nickName, contact.lastName, phoneNumber, type);
             [contact.devices addObject:phone];
         }
 
@@ -350,7 +360,7 @@
         
         ContactEmail *newMail = [[ContactEmail alloc] initWithValue:mailAddress andType:type];
         if (![self isAdded:contact value:newMail]) {
-            SYNC_Log(@"%@ %@ phone :%@ %@", contact.firstName, contact.lastName, mailAddress, type);
+            SYNC_Log(@"%@ %@ %@ %@ emai :%@ %@", contact.firstName, contact.middleName, contact.nickName, contact.lastName, mailAddress, type);
             [contact.devices addObject:newMail];
         }
     }

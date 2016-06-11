@@ -68,7 +68,7 @@
     }
 
     if(triggerSyncing) {
-        [elasticSearchDao requestPhotosForPage:0 andSize:20000 andSortType:SortTypeAlphaAsc];
+        [elasticSearchDao requestPhotosForPage:0 andSize:20000 andSortType:SortTypeAlphaAsc isMinimal:YES];
         autoSyncIterationInProgress = YES;
     }
 }
@@ -384,14 +384,22 @@
 }
 
 - (void) decideAndStartAutoSync {
+    IGLog(@"SyncManager decideAndStartAutoSync");
     if(APPDELEGATE.session.user) {
+        if([SyncUtil read413Lock] && ![SyncUtil isLast413CheckDateOneDayOld]) {
+            IGLog(@"SyncManager loop ignored by 413 lock");
+            return;
+        }
         if(![SyncUtil readFirstTimeSyncFlag]) {
+            IGLog(@"SyncManager starting first time sync");
             [self startFirstTimeSync];
         } else if(![SyncUtil readFirstTimeSyncFinishedFlag]) {
            if(![SyncUtil readAutoSyncBlockInProgress]) {
+               IGLog(@"SyncManager initializing next auto sync package");
                 [self initializeNextAutoSyncPackage];
             }
         } else {
+            IGLog(@"SyncManager calling manuallyCheckIfAlbumChanged");
             [self manuallyCheckIfAlbumChanged];
         }
     }

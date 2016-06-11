@@ -20,6 +20,7 @@
 #import "NoItemView.h"
 #import "GroupedPhotosCell.h"
 #import "UploadingImagePreviewController.h"
+#import "AppConstants.h"
 
 #define IMG_FOOTER_TAG 111
 #define ALBUM_FOOTER_TAG 222
@@ -55,6 +56,9 @@
         self.level = levelVal;
         self.groupDate = groupDateVal;
         
+        NSString *logWithParams = [NSString stringWithFormat:@"GroupedPhotosAndVideosController init params level:%d groupDate:%@", levelVal, groupDateVal];
+        IGLog(logWithParams);
+
         groupDao = [[SearchByGroupDao alloc] init];
         groupDao.delegate = self;
         groupDao.successMethod = @selector(groupSuccessCallback:);
@@ -874,6 +878,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    IGLog(@"GroupedPhotosAndVideosController viewDidLoad");
+
     moreButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 22, 22) withImageName:@"dots_icon.png"];
     [moreButton addTarget:self action:@selector(moreClicked) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *moreItem = [[UIBarButtonItem alloc] initWithCustomView:moreButton];

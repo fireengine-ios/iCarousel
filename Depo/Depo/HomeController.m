@@ -589,6 +589,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[CurioSDK shared] sendEvent:@"Home" eventValue:@"shown"];
+    IGLog(@"HomeController viewDidLoad");
     //BugSense'e msisdn ekleyebilmek için burada initialize ediyoruz
     if([CacheUtil readCachedMsisdnForPostMigration] != nil){
         [[Mint sharedInstance] setUserIdentifier:[CacheUtil readCachedMsisdnForPostMigration]];

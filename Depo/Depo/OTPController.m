@@ -14,6 +14,7 @@
 #import "EmailValidationResultController.h"
 #import "EmailValidationController.h"
 #import "CurioSDK.h"
+#import "AppUtil.h"
 
 @interface OTPController ()
 
@@ -363,6 +364,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    IGLog(@"OTPController viewDidLoad");
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -432,6 +434,8 @@
     //TODO check hangisi dogru
     [[CurioSDK shared] sendEvent:@"LoginSuccess" eventValue:@"true"];
     [[CurioSDK shared] sendEvent:@"Login" eventValue:@"Success"];
+    [[CurioSDK shared] sendEvent:@"Mnc" eventValue:[AppUtil readCurrentMobileNetworkCode]];
+
     [APPDELEGATE triggerPostLogin];
 }
 

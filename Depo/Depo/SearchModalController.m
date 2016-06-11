@@ -181,6 +181,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    IGLog(@"SearchModalController viewDidLoad");
     animateSearchArea = YES;
 }
 

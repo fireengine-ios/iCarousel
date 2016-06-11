@@ -690,6 +690,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    IGLog(@"PhotoAlbumController viewDidLoad");
 }
 
 - (void) viewDidAppear:(BOOL)animated {

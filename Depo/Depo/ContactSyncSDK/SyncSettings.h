@@ -56,7 +56,7 @@ typedef NS_ENUM(NSUInteger, SYNCMode) {
  */
 @property (nonatomic) BOOL periodicSync;
 
-@property (nonatomic, copy) void (^callback)(void);
+@property (nonatomic, copy) void (^callback)(id data);
 
 + (SYNC_INSTANCETYPE) shared;
 

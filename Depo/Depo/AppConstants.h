@@ -3,6 +3,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LoggerUtil.h"
+
+#define IGLog(x) [LoggerUtil logString:(x)]
 
 #define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
 #define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
@@ -181,6 +184,10 @@
 #define PERSISTENT_BASE_URL_KEY @"PERSISTENT_BASE_URL_KEY"
 
 #define LAST_LOC_UPDATE_TIME_KEY @"LAST_LOC_UPDATE_TIME_KEY"
+
+#define QUOTA_413_LOCK_KEY @"QUOTA_413_LOCK_KEY"
+
+#define QUOTA_413_LAST_CHECK_DATE_KEY @"QUOTA_413_LAST_CHECK_DATE_KEY"
 
 #define GENERAL_TASK_TIMEOUT 1200.0f
 

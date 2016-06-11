@@ -100,6 +100,11 @@
     [APPDELEGATE triggerLogin];
 }
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [[CurioSDK shared] sendEvent:@"TutorialPage" eventValue:@"shown"];
+}
+
 - (BOOL)shouldAutorotate {
     return YES;
 }

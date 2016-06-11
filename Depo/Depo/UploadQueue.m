@@ -422,6 +422,7 @@
                 [APPDELEGATE removeAllMediaFiles];
             }
         } else if(httpResp.statusCode == 413) {
+            [SyncUtil write413Lock:YES];
             if(shouldDeleteHash) {
                 [SyncUtil removeLocalHash:task.taskDescription];
             }

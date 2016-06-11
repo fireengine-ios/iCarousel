@@ -99,6 +99,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    IGLog(@"PhotoAlbumListModalController viewDidLoad");
 }
 
 - (void) viewDidAppear:(BOOL)animated {

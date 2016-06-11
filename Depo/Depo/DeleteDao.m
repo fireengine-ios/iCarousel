@@ -7,6 +7,7 @@
 //
 
 #import "DeleteDao.h"
+#import "SyncUtil.h"
 
 @implementation DeleteDao
 
@@ -35,6 +36,7 @@
 		
 //        NSLog(@"Delete Response: %@", responseEnc);
         
+        [SyncUtil write413Lock:NO];
         [self shouldReturnSuccess];
 	} else {
         [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];

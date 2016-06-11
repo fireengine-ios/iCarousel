@@ -35,6 +35,7 @@
 #import "ACTReporter.h"
 #import <SplunkMint/SplunkMint.h>
 #import "ContactSyncSDK.h"
+#import "AppConstants.h"
 
 #import "ReachabilityManager.h"
 
@@ -78,6 +79,8 @@
     }
     [self.window setRootViewController:[BgViewController alloc]];
     
+    IGLog(@"AppDelegate didFinishLaunchingWithOptions");
+
 #ifdef LOG2FILE
     
     [self logToFiles];
@@ -138,11 +141,15 @@
     [ReachabilityManager currentManager];
     
     if(![ReachabilityManager isReachable]) {
+        IGLog(@"AppDelegate ReachabilityManager notReachable");
+
         UIAlertView *noConnAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", @"") message:NSLocalizedString(@"ConnectionErrorWarning", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"SubmitButtonTitle", @"") otherButtonTitles:nil];
         noConnAlert.delegate = self;
         noConnAlert.tag = NO_CONN_ALERT_TAG;
         [noConnAlert show];
     } else {
+        IGLog(@"AppDelegate UpdaterController called");
+
         UpdaterController *updaterController = [UpdaterController initWithUpdateURL:UPDATER_SDK_URL delegate:self postProperties:NO];
         [self.window addSubview:updaterController];
         [updaterController getUpdateInformation];
@@ -221,10 +228,12 @@
 
 - (void) triggerLogin {
     if([ReachabilityManager isReachableViaWiFi] || ![self isTurkcell]) {
+        IGLog(@"AppDelegate Welcome Screen triggered");
         WelcomeController *welcomePage = [[WelcomeController alloc] init];
         MyNavigationController *welcomeNav = [[MyNavigationController alloc] initWithRootViewController:welcomePage];
         self.window.rootViewController = welcomeNav;
     } else if([ReachabilityManager isReachableViaWWAN]) {
+        IGLog(@"AppDelegate Radius Login triggered");
         [self.window.rootViewController.view removeFromSuperview];
         [tokenManager requestRadiusLogin];
         [self showMainLoading];
@@ -355,6 +364,8 @@
     // Tekrar 3G radius loginine girdiği için commentlendi
 //    [tokenManager requestLogout];
 
+    IGLog(@"AppDelegate Logged out");
+
     for (ASIHTTPRequest *req in ASIHTTPRequest.sharedQueue.operations) {
         [req cancel];
         [req setDelegate:nil];
@@ -374,6 +385,8 @@
 }
 
 - (void) tokenManagerDidFailReceivingToken {
+    IGLog(@"AppDelegate tokenManagerDidFailReceivingToken");
+
     [self hideMainLoading];
     WelcomeController *welcomePage = [[WelcomeController alloc] init];
     MyNavigationController *welcomeNav = [[MyNavigationController alloc] initWithRootViewController:welcomePage];
@@ -381,6 +394,8 @@
 }
 
 - (void) tokenManagerDidReceiveBaseUrl {
+    IGLog(@"AppDelegate tokenManagerDidReceiveBaseUrl");
+
     [self hideMainLoading];
     
     if(![AppUtil readFirstVisitOverFlag]) {
@@ -394,42 +409,52 @@
 }
 
 - (void) tokenManagerDidFailReceivingBaseUrl {
+    IGLog(@"AppDelegate tokenManagerDidFailReceivingBaseUrl");
+
     [self hideMainLoading];
 //    [self triggerHome];
     [self startOpeningPage];
 }
 
 - (void) tokenManagerDidReceiveToken {
+    IGLog(@"AppDelegate tokenManagerDidReceiveToken");
     [tokenManager requestUserInfo];
 }
 
 - (void) tokenManagerDidReceiveUserInfo {
+    IGLog(@"AppDelegate tokenManagerDidReceiveUserInfo");
     [tokenManager requestBaseUrl];
 }
 
 - (void) tokenManagerDidFailReceivingUserInfo {
+    IGLog(@"AppDelegate tokenManagerDidFailReceivingUserInfo");
     [tokenManager requestBaseUrl];
 }
 
 - (void) tokenManagerDidReceiveConstants {
+    IGLog(@"AppDelegate tokenManagerDidReceiveConstants");
     [tokenManager requestBaseUrl];
 }
 
 - (void) tokenManagerDidFailReceivingConstants {
+    IGLog(@"AppDelegate tokenManagerDidFailReceivingConstants");
     [tokenManager requestBaseUrl];
 }
 
 - (void) tokenManagerProvisionNeeded {
+    IGLog(@"AppDelegate tokenManagerProvisionNeeded");
     TermsController *termsPage = [[TermsController alloc] init];
     [self.window setRootViewController:termsPage];
 }
 
 - (void) tokenManagerMigrationInProgress {
+    IGLog(@"AppDelegate tokenManagerMigrationInProgress");
     MigrateStatusController *migrationPage = [[MigrateStatusController alloc] init];
     [self.window setRootViewController:migrationPage];
 }
 
 - (void) startAutoSync {
+    IGLog(@"AppDelegate startAutoSync");
     [[LocationManager sharedInstance] startLocationManager];
     [[SyncManager sharedInstance] decideAndStartAutoSync];
 }

@@ -817,6 +817,7 @@
 		9454FA631CAA821200BF1288 /* CurrentDocumentListModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9454FA621CAA821200BF1288 /* CurrentDocumentListModalController.m */; };
 		9454FA661CAA822300BF1288 /* CurrentPhotoListModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9454FA651CAA822300BF1288 /* CurrentPhotoListModalController.m */; };
 		9456A03A1C9BECD200058896 /* terms.htm in Resources */ = {isa = PBXBuildFile; fileRef = 9456A0391C9BECD200058896 /* terms.htm */; };
+		947EDDCD1D0C3B8B0098D2C2 /* LoggerUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 947EDDCC1D0C3B8B0098D2C2 /* LoggerUtil.m */; };
 		94884C7A1C90620C006722F7 /* MsisdnEntryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94884C791C90620C006722F7 /* MsisdnEntryController.m */; };
 		94884C7D1C9063F4006722F7 /* UpdateMsisdnDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94884C7C1C9063F4006722F7 /* UpdateMsisdnDao.m */; };
 		94884C801C9078C6006722F7 /* WelcomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94884C7F1C9078C6006722F7 /* WelcomeController.m */; };
@@ -2087,6 +2088,8 @@
 		9454FA641CAA822300BF1288 /* CurrentPhotoListModalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentPhotoListModalController.h; sourceTree = "<group>"; };
 		9454FA651CAA822300BF1288 /* CurrentPhotoListModalController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentPhotoListModalController.m; sourceTree = "<group>"; };
 		9456A0391C9BECD200058896 /* terms.htm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = terms.htm; sourceTree = "<group>"; };
+		947EDDCB1D0C3B8B0098D2C2 /* LoggerUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoggerUtil.h; sourceTree = "<group>"; };
+		947EDDCC1D0C3B8B0098D2C2 /* LoggerUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoggerUtil.m; sourceTree = "<group>"; };
 		94884C781C90620C006722F7 /* MsisdnEntryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsisdnEntryController.h; sourceTree = "<group>"; };
 		94884C791C90620C006722F7 /* MsisdnEntryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsisdnEntryController.m; sourceTree = "<group>"; };
 		94884C7B1C9063F4006722F7 /* UpdateMsisdnDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateMsisdnDao.h; sourceTree = "<group>"; };
@@ -2602,6 +2605,8 @@
 				058B44DA1A4C0D89005B1590 /* SyncUtil.m */,
 				05028CD11B5A9866000F2D09 /* SharedUtil.h */,
 				05028CD21B5A9866000F2D09 /* SharedUtil.m */,
+				947EDDCB1D0C3B8B0098D2C2 /* LoggerUtil.h */,
+				947EDDCC1D0C3B8B0098D2C2 /* LoggerUtil.m */,
 			);
 			name = util;
 			sourceTree = "<group>";
@@ -4750,6 +4755,7 @@
 				9436AB321CCEB694001E0594 /* FileInfoGroup.m in Sources */,
 				059A46E31A6D3E3F00935023 /* AccountDao.m in Sources */,
 				058BC23F1A30E6B10007F4DE /* ServiceLoginDao.m in Sources */,
+				947EDDCD1D0C3B8B0098D2C2 /* LoggerUtil.m in Sources */,
 				053D0EDE19DB01F7006A13E0 /* AddFolderDao.m in Sources */,
 				057942561C41626200899923 /* AppleProductsListDao.m in Sources */,
 				94884C7D1C9063F4006722F7 /* UpdateMsisdnDao.m in Sources */,

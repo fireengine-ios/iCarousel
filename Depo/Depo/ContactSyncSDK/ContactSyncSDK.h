@@ -30,6 +30,8 @@
  * @return true, if synchronization is still running
  */
 + (BOOL)isRunning;
+
++ (void)hasContactForBackup:(void(^)(SYNCResultType))callback;
 #pragma mark -
 
 @end

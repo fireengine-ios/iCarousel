@@ -206,6 +206,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    IGLog(@"CurrentDocumentListModalController viewDidLoad");
 }
 
 - (void)didReceiveMemoryWarning {

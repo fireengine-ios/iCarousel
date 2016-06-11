@@ -13,6 +13,7 @@
 #import "AppUtil.h"
 #import "AppSession.h"
 #import "AppConstants.h"
+#import "SyncUtil.h"
 
 @interface RevisitedStorageController ()
 
@@ -367,6 +368,7 @@
 - (void) iapValidateSuccessCallback:(NSString *) resultingStatus {
     [self hideLoading];
     if([resultingStatus isEqualToString:@"SUCCESS"]) {
+        [SyncUtil write413Lock:NO];
         if(purchaseView) {
             [purchaseView drawSuccessPurchaseView];
         }
@@ -414,6 +416,7 @@
     [super hideLoading];
     
     //[super showInfoAlertWithMessage:NSLocalizedString(@"ActivateOfferSuccess", @"")];
+    [SyncUtil write413Lock:NO];
     if(purchaseView) {
         [purchaseView drawSuccessPurchaseView];
     }

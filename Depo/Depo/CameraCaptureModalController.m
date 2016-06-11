@@ -116,10 +116,9 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    IGLog(@"CameraCapturaModalController viewDidLoad");
 }
 
 - (void)didReceiveMemoryWarning

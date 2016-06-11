@@ -13,9 +13,16 @@
 @implementation ElasticSearchDao
 
 - (void) requestPhotosForPage:(int) page andSize:(int) size andSortType:(SortType) sortType {
+    [self requestPhotosForPage:page andSize:size andSortType:sortType isMinimal:NO];
+}
+
+- (void) requestPhotosForPage:(int) page andSize:(int) size andSortType:(SortType) sortType isMinimal:(BOOL) minimalFlag {
     sortType = [self resetSortType:sortType];
     
     NSString *parentListingUrl = [NSString stringWithFormat:ELASTIC_LISTING_MAIN_URL, @"content_type", @"image%20OR%20video", [AppUtil serverSortNameByEnum:sortType forPhotosOnly:YES], [AppUtil isAscByEnum:sortType] ? @"ASC":@"DESC", page, size];
+    if(minimalFlag) {
+        parentListingUrl = [NSString stringWithFormat:@"%@&minified=true", parentListingUrl];
+    }
     NSURL *url = [NSURL URLWithString:parentListingUrl];
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];

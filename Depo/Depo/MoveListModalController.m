@@ -143,6 +143,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    IGLog(@"MoveListModalController viewDidLoad");
 }
 
 - (void) viewDidAppear:(BOOL)animated {

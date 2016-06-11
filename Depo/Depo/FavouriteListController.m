@@ -286,6 +286,11 @@
 //    [APPDELEGATE.base immediateHideAddButton];
 }
 
+- (void) viewDidLoad {
+    [super viewDidLoad];
+    IGLog(@"FavouriteListController viewDidLoad");
+}
+
 - (BOOL)shouldAutorotate {
     return YES;
 }

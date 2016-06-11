@@ -8,6 +8,7 @@
 
 #import "MusicListModalController.h"
 #import "RefSongCell.h"
+#import "AppConstants.h"
 
 @interface MusicListModalController ()
 
@@ -46,6 +47,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    IGLog(@"MusicListModalController viewDidLoad");
+
     MPMediaPropertyPredicate *predicate = [MPMediaPropertyPredicate predicateWithValue:[NSNumber numberWithInteger:MPMediaTypeAny] forProperty:MPMediaItemPropertyMediaType];
     
     self.songQuery = [[MPMediaQuery alloc] init];

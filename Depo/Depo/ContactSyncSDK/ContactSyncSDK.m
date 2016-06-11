@@ -188,8 +188,13 @@ static bool syncing = false;
                         }
                         [[ContactUtil shared] fetchNumbers:contact];
                         [[ContactUtil shared] fetchEmails:contact];
-                        [_dirtyRemoteContacts setObject:contact forKey:[contact objectId]];
-                        SYNC_Log(@"Dirty Contact (3): %@ RemoteId:%@ LocalId:%@ localUpdate:%@ remoteUpdate:%@", [contact displayName], [contact remoteId], [contact objectId], [contact localUpdateDate], [contact remoteUpdateDate]);
+                        if (contact.hasName || contact.hasPhoneNumber){
+                            [_dirtyRemoteContacts setObject:contact forKey:[contact objectId]];
+                            SYNC_Log(@"Dirty Contact (3): %@ RemoteId:%@ LocalId:%@ localUpdate:%@ remoteUpdate:%@", [contact displayName], [contact remoteId], [contact objectId], [contact localUpdateDate], [contact remoteUpdateDate]);
+                        } else { //ignore contact if it has neither name nor phone number
+                            SYNC_Log(@"Ignore Contact : %@ RemoteId:%@ LocalId:%@ localUpdate:%@ remoteUpdate:%@", [contact displayName], [contact remoteId], [contact objectId], [contact localUpdateDate], [contact remoteUpdateDate]);
+                            [_localContactIds removeObject:[contact objectId]];
+                        }
                     }
             }
         }
@@ -223,7 +228,12 @@ static bool syncing = false;
                          */
                         [[ContactUtil shared] fetchNumbers:contact];
                         [[ContactUtil shared] fetchEmails:contact];
-                        [_createdLocalContacts setObject:contact forKey:contact.objectId];
+                        if (contact.hasName || contact.hasPhoneNumber){
+                            [_createdLocalContacts setObject:contact forKey:contact.objectId];
+                        } else { //ignore contact if it has neither name nor phone number
+                            SYNC_Log(@"Ignore contact : %@",[contact objectId]);
+                            [_localContactIds removeObject:[contact objectId]];
+                        }
                         
                     }
                     else{
@@ -612,6 +622,21 @@ static bool syncing = false;
                 [[ContactUtil shared] printContacts];
                 
                 [self endOfSyncCycle:SYNC_RESULT_SUCCESS];
+            } else if ([@"ERROR" isEqualToString:data[@"status"]]) {
+                [defaults removeObjectForKey:SYNC_KEY_CONTACT_STORE_DELETED];
+                [defaults removeObjectForKey:SYNC_KEY_CONTACT_STORE_UPDATED];
+                [defaults removeObjectForKey:SYNC_KEY_CHECK_UPDATE];
+                [defaults synchronize];
+                
+                if (SYNC_IS_NULL(data[@"result"])){
+                    [self endOfSyncCycle:SYNC_RESULT_ERROR_REMOTE_SERVER];
+                } else {
+                    NSString *resultString = data[@"result"];
+                    NSData *data = [resultString dataUsingEncoding:NSUTF8StringEncoding];
+                    id result = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                    
+                    [self endOfSyncCycle:SYNC_RESULT_ERROR_REMOTE_SERVER messages:result];
+                }
             } else {
                 [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(checkProgressStatusForBackup) userInfo:nil repeats:NO];
             }
@@ -630,7 +655,7 @@ static bool syncing = false;
     [SyncAdapter checkStatus:key callback:^(id response, BOOL isSuccess) {
         if (isSuccess && !SYNC_IS_NULL(response)){
             NSDictionary *data = response[SYNC_JSON_PARAM_DATA];
-            if (SYNC_IS_NULL(data) || [@"ERROR" isEqualToString:data[@"status"]]){
+            if (SYNC_IS_NULL(data)){
                 [defaults removeObjectForKey:SYNC_KEY_CONTACT_STORE_DELETED];
                 [defaults removeObjectForKey:SYNC_KEY_CONTACT_STORE_UPDATED];
                 [defaults removeObjectForKey:SYNC_KEY_CHECK_UPDATE];
@@ -829,6 +854,21 @@ static bool syncing = false;
                 [[SyncDBUtils shared] printRecords];
     
                 [self endOfSyncCycle:SYNC_RESULT_SUCCESS];
+            } else if ([@"ERROR" isEqualToString:data[@"status"]]) {
+                [defaults removeObjectForKey:SYNC_KEY_CONTACT_STORE_DELETED];
+                [defaults removeObjectForKey:SYNC_KEY_CONTACT_STORE_UPDATED];
+                [defaults removeObjectForKey:SYNC_KEY_CHECK_UPDATE];
+                [defaults synchronize];
+                
+                if (SYNC_IS_NULL(data[@"result"])){
+                    [self endOfSyncCycle:SYNC_RESULT_ERROR_REMOTE_SERVER];
+                } else {
+                    NSString *resultString = data[@"result"];
+                    NSData *data = [resultString dataUsingEncoding:NSUTF8StringEncoding];
+                    id result = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                    
+                    [self endOfSyncCycle:SYNC_RESULT_ERROR_REMOTE_SERVER messages:result];
+                }
             } else {
                 [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(checkProgressStatusForRestore) userInfo:nil repeats:NO];
             }
@@ -840,14 +880,19 @@ static bool syncing = false;
 
 - (void)endOfSyncCycle:(SYNCResultType)result
 {
+    [self endOfSyncCycle:result messages:nil];
+}
+
+- (void)endOfSyncCycle:(SYNCResultType)result messages:(id)messages
+{
     syncing = false;
     [SyncStatus shared].status = result;
     
     [[SyncLogger shared] stopLogging];
     
-    void (^callback)(void) = [SyncSettings shared].callback;
+    void (^callback)(id) = [SyncSettings shared].callback;
     if (callback){
-        callback();
+        callback(messages);
     }
     
     if (_startNewSync){
@@ -882,6 +927,39 @@ static bool syncing = false;
 + (BOOL)isRunning
 {
     return [[SyncHelper new] isRunning];
+}
+
++ (void)hasContactForBackup:(void (^)(SYNCResultType))callback
+{
+    [[ContactUtil shared] checkAddressbookAccess:^(BOOL hasAccess) {
+        if (hasAccess){
+            NSMutableArray *contacts = [[ContactUtil shared] fetchContacts];
+            if (!SYNC_IS_NULL(contacts) && [contacts count]>0){
+                for (Contact *contact in contacts){
+                    if (!SYNC_IS_NULL(contact)){
+                        if (contact.hasName){
+                            if (callback!=nil)
+                                callback(SYNC_RESULT_SUCCESS);
+                            return;
+                        }
+                        [[ContactUtil shared] fetchNumbers:contact];
+                        if (contact.hasPhoneNumber){
+                            if (callback!=nil)
+                                callback(SYNC_RESULT_SUCCESS);
+                            return;
+                        }
+                    }
+                }
+            }
+            if (callback!=nil)
+                callback(SYNC_RESULT_FAIL);
+            return;
+        } else {
+            if (callback!=nil)
+                callback(SYNC_RESULT_ERROR_PERMISSION_ADDRESS_BOOK);
+            return;
+        }
+    }];
 }
 
 

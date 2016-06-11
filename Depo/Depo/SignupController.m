@@ -265,6 +265,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    IGLog(@"SignupController viewDidLoad");
 
     [[CurioSDK shared] sendEvent:@"Signup>First" eventValue:@"Enter"];
 }

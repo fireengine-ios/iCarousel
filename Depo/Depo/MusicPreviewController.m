@@ -794,6 +794,8 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    IGLog(@"MusicPreviewController viewDidLoad");
+
     moreButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 22, 22) withImageName:@"dots_icon.png"];
     [moreButton addTarget:self action:@selector(moreClicked) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *moreItem = [[UIBarButtonItem alloc] initWithCustomView:moreButton];

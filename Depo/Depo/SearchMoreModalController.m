@@ -276,6 +276,11 @@
     }
 }
 
+- (void) viewDidLoad {
+    [super viewDidLoad];
+    IGLog(@"SearchMoreModalController viewDidLoad");
+}
+
 #pragma mark AbstractFileFolderDelegate methods
 
 - (void) fileFolderCellShouldFavForFile:(MetaFile *)fileSelected {

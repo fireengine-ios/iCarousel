@@ -69,4 +69,11 @@
 + (void) resetLastLocUpdateTime;
 + (NSDate *) readLastLocUpdateTime;
 
++ (void) write413Lock:(BOOL) newVal;
++ (BOOL) read413Lock;
+
++ (void) writeLast413CheckDate:(NSDate *) date;
++ (NSDate *) readLast413CheckDate;
++ (BOOL) isLast413CheckDateOneDayOld;
+
 @end

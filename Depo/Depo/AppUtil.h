@@ -59,5 +59,6 @@
 + (void) setAlreadyRated;
 
 + (NSString *) operatorName;
++ (NSString *) readCurrentMobileNetworkCode;
 
 @end

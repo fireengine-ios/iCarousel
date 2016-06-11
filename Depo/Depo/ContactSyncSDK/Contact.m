@@ -27,6 +27,7 @@
         _firstName=(__bridge NSString*)ABRecordCopyValue(ref, kABPersonFirstNameProperty);
         _middleName=(__bridge NSString*)ABRecordCopyValue(ref, kABPersonMiddleNameProperty);
         _lastName=(__bridge NSString*)ABRecordCopyValue(ref, kABPersonLastNameProperty);
+        _nickName=(__bridge NSString*)ABRecordCopyValue(ref, kABPersonNicknameProperty);
 
         NSDate *lastModif=(__bridge NSDate *)(ABRecordCopyValue(_recordRef,kABPersonModificationDateProperty));
         _localUpdateDate = SYNC_DATE_AS_NUMBER(lastModif);
@@ -52,6 +53,7 @@
         _firstName = json[@"firstname"];
         _middleName = json[@"middlename"];
         _lastName = json[@"lastname"];
+        _nickName = json[@"nickname"];
         _displayName = json[@"displayname"];
         
         _remoteUpdateDate = json[@"modified"];
@@ -85,6 +87,7 @@
 
     SYNC_SET_DICT_IF_NOT_NIL(dict, self.firstName, @"firstname");
     SYNC_SET_DICT_IF_NOT_NIL(dict, self.middleName, @"middlename");
+    SYNC_SET_DICT_IF_NOT_NIL(dict, self.nickName, @"nickname");
     SYNC_SET_DICT_IF_NOT_NIL(dict, self.lastName, @"lastname");
     if(isNewContact)
         SYNC_SET_DICT_IF_NOT_NIL(dict, self.objectId, @"localId");
@@ -104,6 +107,8 @@
     SYNC_APPEND_STRING_IF_NOT_NIL(value, self.firstName);
     SYNC_APPEND_STRING_IF_NOT_NIL(value, @";");
     SYNC_APPEND_STRING_IF_NOT_NIL(value, self.middleName);
+    SYNC_APPEND_STRING_IF_NOT_NIL(value, @";");
+    SYNC_APPEND_STRING_IF_NOT_NIL(value, self.nickName);
     SYNC_APPEND_STRING_IF_NOT_NIL(value, @";");
     SYNC_APPEND_STRING_IF_NOT_NIL(value, self.lastName);
     SYNC_APPEND_STRING_IF_NOT_NIL(value, @";");
@@ -157,6 +162,13 @@
             return NO;
         }
     } else if (![_middleName isEqualToString:other.middleName]){
+        return NO;
+    }
+    if (SYNC_IS_NULL(_nickName)){
+        if (!SYNC_IS_NULL(other.nickName) && other.nickName.length!=0){
+            return NO;
+        }
+    } else if (![_nickName isEqualToString:other.nickName]){
         return NO;
     }
     if (SYNC_IS_NULL(_lastName)){
@@ -224,10 +236,22 @@
 - (NSString*)generateDisplayName
 {
     NSMutableString *displayName=[[NSMutableString alloc]init];
-    if (SYNC_STRING_IS_NULL_OR_EMPTY(self.middleName)){
-        [displayName appendString:[NSString stringWithFormat:@"%@ %@",(SYNC_IS_NULL(self.firstName)?@"":self.firstName), (SYNC_IS_NULL(self.lastName)?@"":self.lastName)]];
-    } else {
-        [displayName appendString:[NSString stringWithFormat:@"%@ %@ %@",(SYNC_IS_NULL(self.firstName)?@"":self.firstName), self.middleName, (SYNC_IS_NULL(self.lastName)?@"":self.lastName)]];
+    
+    if (!SYNC_STRING_IS_NULL_OR_EMPTY(self.firstName)){
+        [displayName appendString:self.firstName];
+        [displayName appendString:@" "];
+    }
+    if (!SYNC_STRING_IS_NULL_OR_EMPTY(self.middleName)){
+        [displayName appendString:self.middleName];
+        [displayName appendString:@" "];
+    }
+    if (!SYNC_STRING_IS_NULL_OR_EMPTY(self.nickName)){
+        [displayName appendString:[NSString stringWithFormat:@"\"%@\"",self.nickName]];
+        [displayName appendString:@" "];
+    }
+    if (!SYNC_STRING_IS_NULL_OR_EMPTY(self.lastName)){
+        [displayName appendString:self.lastName];
+        [displayName appendString:@" "];
     }
     
     return [displayName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -237,6 +261,7 @@
 {
     _firstName = contact.firstName;
     _middleName = contact.middleName;
+    _nickName = contact.nickName;
     _lastName = contact.lastName;
     for (ContactDevice *d in contact.devices){
         if (![_devices containsObject:d]){

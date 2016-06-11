@@ -206,6 +206,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    IGLog(@"CurrentMusicListModalController viewDidLoad");
 }
 
 - (void)didReceiveMemoryWarning {

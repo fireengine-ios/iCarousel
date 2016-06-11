@@ -7,6 +7,7 @@
 //
 
 #import "MyMessageComposeViewController.h"
+#import "AppConstants.h"
 
 @interface MyMessageComposeViewController ()
 
@@ -34,10 +35,9 @@
     return UIInterfaceOrientationMaskPortrait;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    IGLog(@"MyMessageComposeViewController viewDidLoad");
 }
 
 - (void)didReceiveMemoryWarning

@@ -62,7 +62,7 @@
         //5322109094 for presentation
         
         //TODO contact sync ile aç
-//        [self checkLatestContactSyncStatus];
+        [self checkLatestContactSyncStatus];
     }
     return self;
 }
@@ -201,12 +201,12 @@
     if(status != nil) {
         if(status.status == SYNC_RESULT_SUCCESS) {
             ContactSyncResult *currentSyncResult = [[ContactSyncResult alloc] init];
-            currentSyncResult.clientUpdateCount = status.updatedContactsReceived.count;
-            currentSyncResult.serverUpdateCount = status.updatedContactsSent.count;
-            currentSyncResult.clientNewCount = status.createdContactsReceived.count;
-            currentSyncResult.serverNewCount = status.createdContactsSent.count;
-            currentSyncResult.clientDeleteCount = status.deletedContactsOnDevice.count;
-            currentSyncResult.serverDeleteCount = status.deletedContactsOnServer.count;
+            currentSyncResult.clientUpdateCount = (int)status.updatedContactsReceived.count;
+            currentSyncResult.serverUpdateCount = (int)status.updatedContactsSent.count;
+            currentSyncResult.clientNewCount = (int)status.createdContactsReceived.count;
+            currentSyncResult.serverNewCount = (int)status.createdContactsSent.count;
+            currentSyncResult.clientDeleteCount = (int)status.deletedContactsOnDevice.count;
+            currentSyncResult.serverDeleteCount = (int)status.deletedContactsOnServer.count;
             self.syncResult = currentSyncResult;
             [SyncUtil writeLastContactSyncResult:currentSyncResult];
         }

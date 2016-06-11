@@ -109,10 +109,9 @@
     [self.navigationController pushViewController:photoListController animated:YES];
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    IGLog(@"AlbumListModalController viewDidLoad");
 }
 
 - (void)didReceiveMemoryWarning

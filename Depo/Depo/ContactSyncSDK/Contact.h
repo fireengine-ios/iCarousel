@@ -20,9 +20,13 @@
 @property (strong) NSString *firstName;
 @property (strong) NSString *middleName;
 @property (strong) NSString *lastName;
+@property (strong) NSString *nickName;
 @property (strong) NSString *displayName;
 
 @property (strong) NSMutableArray *devices;
+
+@property BOOL hasName;
+@property BOOL hasPhoneNumber;
 
 @property ABRecordRef recordRef;
 

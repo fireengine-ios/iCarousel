@@ -180,7 +180,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    IGLog(@"ReachUsController viewDidLoad");
 }
 
 - (void)didReceiveMemoryWarning {
@@ -216,6 +216,14 @@
         [mailCont setToRecipients:[NSArray arrayWithObject:REACH_US_MAIL_ADDRESS]];
         [mailCont setMessageBody:messageBody isHTML:NO];
         
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString *logPath = [documentsDirectory stringByAppendingPathComponent:@"iglogs.log"];
+        if([[NSFileManager defaultManager] fileExistsAtPath:logPath]) {
+            NSData *logData = [NSData dataWithContentsOfFile:logPath];
+            [mailCont addAttachmentData:logData mimeType:@"text/plain" fileName:@"logs.txt"];
+        }
+
         [self presentViewController:mailCont animated:YES completion:nil];
     } else {
         [self showErrorAlertWithMessage:NSLocalizedString(@"NoEmailAccountError", @"")];
@@ -224,7 +232,15 @@
 
 - (void) mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
     [controller dismissViewControllerAnimated:YES completion:nil];
+    
     if(result == 2) {
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString *logPath = [documentsDirectory stringByAppendingPathComponent:@"iglogs.log"];
+        
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        [fileManager removeItemAtPath:logPath error:nil];
+
         [self showInfoAlertWithMessage:NSLocalizedString(@"MessageSentSuccessfully", @"")];
     }
 }

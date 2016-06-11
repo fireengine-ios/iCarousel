@@ -63,6 +63,7 @@
 }
 
 - (void) triggerLogin {
+    [[CurioSDK shared] sendEvent:@"Welcome" eventValue:@"login_clicked"];
     LoginController *login = [[LoginController alloc] init];
     [self.navigationController pushViewController:login animated:YES];
 }
@@ -85,7 +86,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [[CurioSDK shared] sendEvent:@"Welcome" eventValue:@"shown"];
 }
 
 - (void)didReceiveMemoryWarning {

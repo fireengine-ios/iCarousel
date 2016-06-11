@@ -12,6 +12,7 @@
 @interface ElasticSearchDao : BaseDao
 
 - (void) requestPhotosForPage:(int) page andSize:(int) size andSortType:(SortType) sortType;
+- (void) requestPhotosForPage:(int) page andSize:(int) size andSortType:(SortType) sortType isMinimal:(BOOL) minimalFlag;
 - (void) requestMusicForPage:(int) page andSize:(int) size andSortType:(SortType) sortType;
 - (void) requestDocForPage:(int) page andSize:(int) size andSortType:(SortType) sortType;
 - (void) requestCropNShareForPage:(int) page andSize:(int) size andSortType:(SortType) sortType;

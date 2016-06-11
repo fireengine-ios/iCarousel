@@ -21,6 +21,7 @@
 #import "SignupController.h"
 #import "RememberMeEmailViewController.h"
 #import "MPush.h"
+#import "AppUtil.h"
 
 #define kOFFSET_FOR_KEYBOARD 200.0
 
@@ -196,7 +197,8 @@
     //TODO check hangisi dogru
     [[CurioSDK shared] sendEvent:@"LoginSuccess" eventValue:@"true"];
     [[CurioSDK shared] sendEvent:@"Login" eventValue:@"Success"];
-    
+    [[CurioSDK shared] sendEvent:@"Mnc" eventValue:[AppUtil readCurrentMobileNetworkCode]];
+
     [MPush hitTag:@"logged_in"];
     [MPush hitEvent:@"logged_in"];
 
@@ -289,7 +291,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    IGLog(@"LoginController viewDidLoad");
 }
 
 - (void) viewDidAppear:(BOOL)animated {
