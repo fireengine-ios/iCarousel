@@ -120,7 +120,6 @@
         }
         
         loginButton = [[SimpleButton alloc] initWithFrame:loginButtonFrame withTitle:NSLocalizedString(@"SignIn", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
-
         [loginButton addTarget:self action:@selector(loginClicked) forControlEvents:UIControlEventTouchUpInside];
         [mainScroll addSubview:loginButton];
 
@@ -320,8 +319,8 @@
     captchaView.image = captchaImg;
     
     if(captchaView.isHidden) {
-        loginButton.frame = CGRectMake(loginButton.frame.origin.x, loginButton.frame.origin.y + 115, loginButton.frame.size.width, loginButton.frame.size.height);
-        mainScroll.contentSize = CGSizeMake(mainScroll.contentSize.width, mainScroll.contentSize.height + 115);
+        loginButton.frame = CGRectMake(loginButton.frame.origin.x, captchaField.frame.origin.y + captchaField.frame.size.height + 20, loginButton.frame.size.width, loginButton.frame.size.height);
+        mainScroll.contentSize = CGSizeMake(mainScroll.contentSize.width, mainScroll.contentSize.height + 120);
         captchaView.hidden = NO;
         captchaField.hidden = NO;
         refreshButton.hidden = NO;

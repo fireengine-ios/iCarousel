@@ -13,6 +13,8 @@
 - (void) requestSendProvision {
     NSURL *url = [NSURL URLWithString:PROVISION_URL];
     
+    IGLog(@"ProvisionDao requestSendProvision called");
+
     NSDictionary *dict = [[NSDictionary alloc] init];
     
     SBJSON *json = [SBJSON new];
@@ -33,6 +35,9 @@
     if (!error) {
         NSString *responseStr = [request responseString];
         NSLog(@"Provision response: %@", responseStr);
+
+        NSString *log = [NSString stringWithFormat:@"ProvisionDao requestFinished with result: %@", responseStr];
+        IGLog(log);
     }
     [self shouldReturnSuccess];
 }

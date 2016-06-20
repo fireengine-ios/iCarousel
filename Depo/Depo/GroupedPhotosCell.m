@@ -52,8 +52,7 @@
         titleLabel.adjustsFontSizeToFitWidth = YES;
         [self addSubview:titleLabel];
         
-        locLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(self.frame.size.width/2, 10, (self.frame.size.width-40)/2, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:16] withColor:[Util UIColorForHexColor:@"888888"] withText:self.group.locationInfo withAlignment:NSTextAlignmentRight];
-        locLabel.adjustsFontSizeToFitWidth = YES;
+        locLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(self.frame.size.width/2, 10, (self.frame.size.width-40)/2, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:14] withColor:[Util UIColorForHexColor:@"888888"] withText:self.group.locationInfo withAlignment:NSTextAlignmentRight];
         [self addSubview:locLabel];
         
         int imageForRow = level == ImageGroupLevelYear ? 10 : level == ImageGroupLevelMonth ? 8 : 4;

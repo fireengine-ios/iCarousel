@@ -28,6 +28,7 @@
 - (void) requestTokenForMsisdn:(NSString *) msisdnVal andPassword:(NSString *) passVal shouldRememberMe:(BOOL) rememberMeFlag withCaptchaId:(NSString *) captchaId withCaptchaValue:(NSString *) captchaValue {
     
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:TOKEN_URL, rememberMeFlag ? @"on" : @"off"]];
+    IGLog(@"Calling requestTokenForMsisdn:andPassword:shouldRememberMe:");
 	
     NSDictionary *deviceInfo = [NSDictionary dictionaryWithObjectsAndKeys:
                                 [[UIDevice currentDevice] identifierForVendor].UUIDString, @"uuid",
@@ -35,6 +36,8 @@
                                 (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? @"IPAD" : @"IPHONE"), @"deviceType",
 //                                ([AppUtil readFirstVisitOverFlag] ? @"false" : @"true"), @"newDevice",
                                 nil];
+    NSString *logParams = [NSString stringWithFormat:@"requestTokenForMsisdn:andPassword:shouldRememberMe: %@", deviceInfo];
+    IGLog(logParams);
 
 //    NSLog(@"Device Info: %@", deviceInfo);
 
@@ -70,6 +73,7 @@
 
 - (void) requestTokenByRememberMe {
     NSURL *url = [NSURL URLWithString:REMEMBER_ME_URL];
+    IGLog(@"Calling requestTokenByRememberMe");
     
     NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:
                                 [[UIDevice currentDevice] identifierForVendor].UUIDString, @"uuid",
@@ -78,6 +82,9 @@
 //                                ([AppUtil readFirstVisitOverFlag] ? @"false" : @"true"), @"newDevice",
                                 nil];
     
+    NSString *logParams = [NSString stringWithFormat:@"requestTokenByRememberMe %@", info];
+    IGLog(logParams);
+
     SBJSON *json = [SBJSON new];
     NSString *jsonStr = [json stringWithObject:info];
     NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
@@ -104,6 +111,10 @@
 	if (!error) {
         NSString *responseStr = [request responseString];
         NSLog(@"RESULT: %@", responseStr);
+
+        NSString *log = [NSString stringWithFormat:@"RequestTokenDao request finished with result:%@", responseStr];
+        IGLog(log);
+        
         SBJSON *jsonParser = [SBJSON new];
         NSDictionary *dict = [jsonParser objectWithString:responseStr];
         if(dict != nil && [dict isKindOfClass:[NSDictionary class]]) {
@@ -174,6 +185,8 @@
             SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:TOKEN_ERROR_MESSAGE]);
         }
 	} else {
+        NSString *log = [NSString stringWithFormat:@"RequestTokenDao request finished with error:%@", [error localizedDescription]];
+        IGLog(log);
         SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:GENERAL_ERROR_MESSAGE]);
 	}
     
@@ -182,6 +195,10 @@
 - (void)requestFailed:(ASIHTTPRequest *)request {
     NSString *responseStr = [request responseString];
     NSLog(@"Result: %@", responseStr);
+    
+    NSString *log = [NSString stringWithFormat:@"RequestTokenDao request failed with response:%@", responseStr];
+    IGLog(log);
+    
     SBJSON *jsonParser = [SBJSON new];
     NSDictionary *dict = [jsonParser objectWithString:responseStr];
     if(dict != nil && [dict isKindOfClass:[NSDictionary class]]) {

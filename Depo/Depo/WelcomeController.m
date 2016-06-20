@@ -13,6 +13,7 @@
 #import "LoginController.h"
 #import "SignupController.h"
 #import "CurioSDK.h"
+#import "MPush.h"
 
 @interface WelcomeController ()
 
@@ -64,12 +65,14 @@
 
 - (void) triggerLogin {
     [[CurioSDK shared] sendEvent:@"Welcome" eventValue:@"login_clicked"];
+    [MPush hitTag:@"Welcome" withValue:@"login_clicked"];
     LoginController *login = [[LoginController alloc] init];
     [self.navigationController pushViewController:login animated:YES];
 }
 
 - (void) triggerSignup {
     [[CurioSDK shared] sendEvent:@"Welcome" eventValue:@"signup_clicked"];
+    [MPush hitTag:@"Welcome" withValue:@"signup_clicked"];
     SignupController *signup = [[SignupController alloc] init];
     [self.navigationController pushViewController:signup animated:YES];
 }
@@ -87,6 +90,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[CurioSDK shared] sendEvent:@"Welcome" eventValue:@"shown"];
+    [MPush hitTag:@"Welcome" withValue:@"shown"];
 }
 
 - (void)didReceiveMemoryWarning {

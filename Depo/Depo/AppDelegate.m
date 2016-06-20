@@ -55,6 +55,9 @@
 
 #import <DropboxSDK/DropboxSDK.h>
 
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+
 //TODO info'larda version update
 
 #define NO_CONN_ALERT_TAG 111
@@ -87,6 +90,8 @@
 
 #endif
     
+    [Fabric with:@[[Crashlytics class]]];
+
     session = [[AppSession alloc] init];
     mapUtil = [[MapUtil alloc] init];
     wormhole = [[MMWormhole alloc] initWithApplicationGroupIdentifier:GROUP_NAME_SUITE_NSUSERDEFAULTS optionalDirectory:EXTENSION_WORMHOLE_DIR];

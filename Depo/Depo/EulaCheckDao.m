@@ -13,6 +13,9 @@
 - (void) requestCheckEulaForLocale:(NSString *) locale {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:CHECK_EULA_URL, locale]];
     
+    NSString *log = [NSString stringWithFormat:@"EulaCheckDao requestCheckEulaForLocale %@", locale];
+    IGLog(log);
+
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setDelegate:self];
     
@@ -24,7 +27,10 @@
     if (!error) {
         NSString *responseStr = [request responseString];
         NSLog(@"EULA Check Response: %@", responseStr);
-        
+
+        NSString *log = [NSString stringWithFormat:@"EulaCheckDao requestFinished with response %@", responseStr];
+        IGLog(log);
+
         SBJSON *jsonParser = [SBJSON new];
         NSDictionary *mainDict = [jsonParser objectWithString:responseStr];
         
@@ -34,6 +40,7 @@
             return;
         }
     }
+    IGLog(@"EulaCheckDao requestFinished with error");
     [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
 }
 
@@ -41,6 +48,9 @@
     NSString *responseStr = [request responseString];
     NSLog(@"Eula Check Error Response: %@", responseStr);
     
+    NSString *log = [NSString stringWithFormat:@"EulaCheckDao requestFailed with error: %@", responseStr];
+    IGLog(log);
+
     if([request responseStatusCode] == 412) {
         SBJSON *jsonParser = [SBJSON new];
         NSDictionary *mainDict = [jsonParser objectWithString:responseStr];

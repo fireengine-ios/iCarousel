@@ -13,6 +13,9 @@
 - (void) requestApproveEulaForId:(int) eulaId {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:APPROVE_EULA_URL, eulaId]];
     
+    NSString *log = [NSString stringWithFormat:@"EulaApproveDao requestApproveEulaForId with eulaId: %d", eulaId];
+    IGLog(log);
+
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setDelegate:self];
     
@@ -24,9 +27,14 @@
     if (!error) {
         NSString *responseStr = [request responseString];
         NSLog(@"EULA Approve Response: %@", responseStr);
+
+        NSString *log = [NSString stringWithFormat:@"EulaApproveDao requestFinished with result: %@", responseStr];
+        IGLog(log);
+
         [self shouldReturnSuccess];
         return;
     }
+    IGLog(@"EulaApproveDao requestFinished with general error");
     [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
 }
 

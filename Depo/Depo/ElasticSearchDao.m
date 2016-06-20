@@ -24,7 +24,10 @@
         parentListingUrl = [NSString stringWithFormat:@"%@&minified=true", parentListingUrl];
     }
     NSURL *url = [NSURL URLWithString:parentListingUrl];
-    
+
+    NSString *log = [NSString stringWithFormat:@"ElasticSearchDao requestPhotosForPage url: %@", parentListingUrl];
+    IGLog(log);
+
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setDelegate:self];
     
@@ -72,6 +75,9 @@
     if (!error) {
         NSString *responseEnc = [request responseString];
         
+        NSString *log = [NSString stringWithFormat:@"ElasticSearchDao requestFinished with result: %@", responseEnc];
+        IGLog(log);
+
         //        NSLog(@"Elastic Search Response: %@", responseEnc);
         
         SBJSON *jsonParser = [SBJSON new];
@@ -87,6 +93,7 @@
         }
         [self shouldReturnSuccessWithObject:result];
     } else {
+        IGLog(@"ElasticSearchDao requestFinished with error");
         [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
     }
     

@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "ReachabilityManager.h"
 #import "CacheUtil.h"
+#import "MPush.h"
 
 @interface TermsController ()
 
@@ -121,6 +122,7 @@
     [self hideLoading];
 
     [[CurioSDK shared] sendEvent:@"EulaShown" eventValue:[NSString stringWithFormat:@"EULA_ID:%d", self.eula.eulaId]];
+    [MPush hitTag:@"EulaShown" withValue:[NSString stringWithFormat:@"EULA_ID:%d", self.eula.eulaId]];
 
     [webView loadHTMLString:self.eula.content baseURL:[NSURL URLWithString:@"http://www.turkcell.com.tr"]];
 }
@@ -154,6 +156,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     IGLog(@"TermsController viewDidLoad");
+    [[CurioSDK shared] sendEvent:@"EulaPage" eventValue:@"shown"];
+    [MPush hitTag:@"EulaApprove" withValue:@"shown"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -178,6 +182,8 @@
 
 - (void) eulaApproveSuccessCallback {
     [[CurioSDK shared] sendEvent:@"EulaApprove" eventValue:@"Success"];
+    [MPush hitTag:@"EulaApprove" withValue:@"Success"];
+    
     [self hideLoading];
     [APPDELEGATE triggerPostTermsAndMigration];
     [self.view removeFromSuperview];
@@ -185,6 +191,8 @@
 
 - (void) eulaApproveFailCallback:(NSString *) errorMessage {
     [[CurioSDK shared] sendEvent:@"EulaApprove" eventValue:@"Fail"];
+    [MPush hitTag:@"EulaApprove" withValue:@"Fail"];
+
     [self hideLoading];
     [self showErrorAlertWithMessage:errorMessage];
 }

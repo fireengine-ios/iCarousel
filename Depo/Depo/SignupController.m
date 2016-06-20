@@ -17,6 +17,7 @@
 #import "EmailValidationResultController.h"
 #import "TermsController.h"
 #import "Eula.h"
+#import "MPush.h"
 
 #define kOFFSET_FOR_KEYBOARD 200.0
 
@@ -192,9 +193,14 @@
 }
 
 - (void) didRejectCustomAlert:(CustomConfirmView *)alertView {
+    [[CurioSDK shared] sendEvent:@"Signup>EmailConfirm" eventValue:@"Denied"];
+    [MPush hitTag:@"Signup>EmailConfirm" withValue:@"Denied"];
 }
 
 - (void) didApproveCustomAlert:(CustomConfirmView *)alertView {
+    [[CurioSDK shared] sendEvent:@"Signup>EmailConfirm" eventValue:@"Approved"];
+    [MPush hitTag:@"Signup>EmailConfirm" withValue:@"Approved"];
+    
     [signupDao requestTriggerSignupForEmail:emailField.text forPhoneNumber:msisdnField.text withPassword:passwordField.text withEulaId:eula ? eula.eulaId : 0];
     [self showLoading];
 }

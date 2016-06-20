@@ -205,7 +205,7 @@
     if(refreshControl) {
         [refreshControl endRefreshing];
     }
-    [self showErrorAlertWithMessage:errorMessage];
+//TODO check    [self showErrorAlertWithMessage:errorMessage];
 }
 
 - (void) addFolderSuccessCallback {

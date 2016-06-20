@@ -90,6 +90,7 @@
 
 - (void)requestFailed:(ASIHTTPRequest *)request {
     if([request responseStatusCode] == 401) {
+        IGLog(@"BaseDao request failed with 401");
         if(!self.tokenAlreadyRevisitedFlag) {
             self.tokenAlreadyRevisitedFlag = YES;
             [self triggerNewToken];
@@ -99,10 +100,13 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_REQ_NOTIFICATION object:nil userInfo:nil];
         }
     } else if([request responseStatusCode] == 403) {
+        IGLog(@"BaseDao request failed with 403");
         [self shouldReturnFailWithMessage:FORBIDDEN_ERROR_MESSAGE];
     } else if([request responseStatusCode] == 412) {
+        IGLog(@"BaseDao request failed with 412");
         [self shouldReturnFailWithMessage:INVALID_CONTENT_ERROR_MESSAGE];
     } else {
+        IGLog(@"BaseDao request failed");
         if([request.error code] == ASIConnectionFailureErrorType){
             [self shouldReturnFailWithMessage:NSLocalizedString(@"NoConnErrorMessage", @"")];
         } else {

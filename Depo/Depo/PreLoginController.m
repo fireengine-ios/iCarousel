@@ -13,6 +13,7 @@
 #import "SimpleButton.h"
 #import "AppDelegate.h"
 #import "PreLoginInfoView.h"
+#import "MPush.h"
 
 @interface PreLoginController ()
 
@@ -103,6 +104,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[CurioSDK shared] sendEvent:@"TutorialPage" eventValue:@"shown"];
+    [MPush hitTag:@"TutorialPage" withValue:@"shown"];
 }
 
 - (BOOL)shouldAutorotate {

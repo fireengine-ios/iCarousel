@@ -26,6 +26,9 @@
         NSString *responseStr = [request responseString];
         NSLog(@"EULA Response: %@", responseStr);
 
+        NSString *log = [NSString stringWithFormat:@"EulaDao request finished with response:%@", responseStr];
+        IGLog(log);
+
         SBJSON *jsonParser = [SBJSON new];
         NSDictionary *mainDict = [jsonParser objectWithString:responseStr];
         
@@ -39,6 +42,7 @@
             return;
         }
     }
+    IGLog(@"EulaDao request finished with general error");
     [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
 }
 

@@ -135,6 +135,10 @@
 
 - (void) multipleUploadFooterDidTriggerUpload {
     if([selectedAssets count] > 0) {
+        if([selectedAssets count] > 100) {
+            [self showErrorAlertWithMessage:NSLocalizedString(@"UploadCountLimitError", @"")];
+            return;
+        }
         NSMutableArray *selectedAssetUrls = [[NSMutableArray alloc] init];
         for(ALAsset *row in selectedAssets) {
             NSString *mimeType = (__bridge_transfer NSString*)UTTypeCopyPreferredTagWithClass
