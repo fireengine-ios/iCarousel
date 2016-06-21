@@ -98,6 +98,7 @@
 
 - (void) loginClicked {
     [[CurioSDK shared] sendEvent:@"GetStarted" eventValue:@"clicked"];
+    [MPush hitTag:@"GetStarted" withValue:@"clicked"];
     [APPDELEGATE triggerLogin];
 }
 

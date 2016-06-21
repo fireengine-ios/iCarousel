@@ -285,7 +285,7 @@
 }
 
 - (void) deleteSuccessCallback {
-    [self alignPhotosScrollPostDelete];
+    [self triggerRefresh];
     
     if(isSelectible) {
         [self cancelSelectible];
@@ -808,7 +808,8 @@
 - (void) footerActionMenuDidSelectDelete:(FooterActionsMenuView *) menu {
     if([CacheUtil showConfirmDeletePageFlag]) {
         if(menu.tag == IMG_FOOTER_TAG) {
-            //TODO image delete nasıl olacak
+            [deleteDao requestDeleteFiles:selectedFileList];
+            [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
         } else {
             [deleteAlbumDao requestDeleteAlbums:selectedAlbumList];
             [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteAlbumProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteAlbumSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteAlbumFailMessage", @"")];
@@ -869,7 +870,8 @@
 
 - (void) confirmDeleteDidConfirm {
     if(self.deleteType == DeleteTypePhotos) {
-        //TODO image delete nasıl olacak
+        [deleteDao requestDeleteFiles:selectedFileList];
+        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
     } else if(self.deleteType == DeleteTypeAlbums) {
         [deleteAlbumDao requestDeleteAlbums:selectedAlbumList];
         [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteAlbumProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteAlbumSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteAlbumFailMessage", @"")];

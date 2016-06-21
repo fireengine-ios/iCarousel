@@ -15,6 +15,7 @@
 #import "EmailValidationController.h"
 #import "CurioSDK.h"
 #import "AppUtil.h"
+#import "MPush.h"
 
 @interface OTPController ()
 
@@ -111,6 +112,7 @@
 
 - (void) resendCode {
     [[CurioSDK shared] sendEvent:@"SignUp>Otp" eventValue:@"Resend"];
+    [MPush hitTag:@"Signup>Otp" withValue:@"Resend"];
     
     [smsDao requestTriggerSendVerificationSMS:APPDELEGATE.session.otpReferenceToken];
     [self showLoading];
@@ -127,18 +129,21 @@
     if([statusVal isEqualToString:@"CONTINUE_WITH_EMAIL_VERIFICATION"]) {
         [self hideLoading];
         [[CurioSDK shared] sendEvent:[NSString stringWithFormat:@"%@>Otp", curioPreEvent] eventValue:@"Success"];
+        [MPush hitTag:[NSString stringWithFormat:@"%@>Otp", curioPreEvent] withValue:@"Success"];
 
         EmailValidationResultController *emailResultController = [[EmailValidationResultController alloc] initWithEmailVal:APPDELEGATE.session.signupReferenceEmail];
         [self.navigationController pushViewController:emailResultController animated:YES];
     } else if([statusVal isEqualToString:@"EXPIRED_OTP"]) {
         [self hideLoading];
         [[CurioSDK shared] sendEvent:[NSString stringWithFormat:@"%@>Otp", curioPreEvent] eventValue:@"Fail"];
+        [MPush hitTag:[NSString stringWithFormat:@"%@>Otp", curioPreEvent] withValue:@"Fail"];
 
         [self showErrorAlertWithMessage:NSLocalizedString(@"OTPExpired", @"")];
         [self cleanOTPFields];
     } else if([statusVal isEqualToString:@"INVALID_OTP"]) {
         [self hideLoading];
         [[CurioSDK shared] sendEvent:[NSString stringWithFormat:@"%@>Otp", curioPreEvent] eventValue:@"Fail"];
+        [MPush hitTag:[NSString stringWithFormat:@"%@>Otp", curioPreEvent] withValue:@"Fail"];
 
         [self showErrorAlertWithMessage:NSLocalizedString(@"OTPInvalid", @"")];
         [self cleanOTPFields];
@@ -149,12 +154,14 @@
     } else if([statusVal isEqualToString:@"TOO_MANY_INVALID_ATTEMPTS"]) {
         [self hideLoading];
         [[CurioSDK shared] sendEvent:[NSString stringWithFormat:@"%@>Otp", curioPreEvent] eventValue:@"Fail"];
+        [MPush hitTag:[NSString stringWithFormat:@"%@>Otp", curioPreEvent] withValue:@"Fail"];
 
         [self showErrorAlertWithMessage:NSLocalizedString(@"TOO_MANY_INVALID_ATTEMPTS", @"")];
         [self cleanOTPFields];
         [self prepareForResend];
     } else if([statusVal isEqualToString:@"OK"]) {
         [[CurioSDK shared] sendEvent:curioPreEvent eventValue:@"Finish"];
+        [MPush hitTag:curioPreEvent withValue:@"Finish"];
 
 //        [self showInfoAlertWithMessage:NSLocalizedString(@"SignupSuccess", @"")];
 //        [self.navigationController popToRootViewControllerAnimated:YES];
@@ -169,6 +176,7 @@
     } else {
         [self hideLoading];
         [[CurioSDK shared] sendEvent:[NSString stringWithFormat:@"%@>Otp", curioPreEvent] eventValue:@"Fail"];
+        [MPush hitTag:[NSString stringWithFormat:@"%@>Otp", curioPreEvent] withValue:@"Fail"];
         [self showErrorAlertWithMessage:NSLocalizedString(statusVal, @"")];
         [self cleanOTPFields];
     }
@@ -420,6 +428,7 @@
 
 - (void) innerTriggerBack {
     [[CurioSDK shared] sendEvent:@"SignUp>Otp" eventValue:@"Back"];
+    [MPush hitTag:@"SignUp>Otp" withValue:@"Back"];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -434,7 +443,10 @@
     //TODO check hangisi dogru
     [[CurioSDK shared] sendEvent:@"LoginSuccess" eventValue:@"true"];
     [[CurioSDK shared] sendEvent:@"Login" eventValue:@"Success"];
+    [MPush hitTag:@"Login" withValue:@"Success"];
+
     [[CurioSDK shared] sendEvent:@"Mnc" eventValue:[AppUtil readCurrentMobileNetworkCode]];
+    [MPush hitTag:@"Mnc" withValue:[AppUtil readCurrentMobileNetworkCode]];
 
     [APPDELEGATE triggerPostLogin];
 }
@@ -442,6 +454,7 @@
 - (void) tokenDaoFailCallback:(NSString *) errorMessage {
     [self hideLoading];
     [[CurioSDK shared] sendEvent:@"Login" eventValue:@"Fail"];
+    [MPush hitTag:@"Login" withValue:@"Fail"];
     
     if([errorMessage isEqualToString:CAPTCHA_ERROR_MESSAGE]) {
         [self showErrorAlertWithMessage:NSLocalizedString(@"CaptchaRequiredErrorMessage", @"")];

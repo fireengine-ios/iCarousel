@@ -211,6 +211,8 @@
     NSString *signupStatus = [signupResult objectForKey:@"status"];
     if([[signupStatus uppercaseString] isEqualToString:@"OK"]) {
         [[CurioSDK shared] sendEvent:@"SignUp>First" eventValue:@"Success"];
+        [MPush hitTag:@"Signup>First" withValue:@"Success"];
+
         NSDictionary *valueDict = [signupResult objectForKey:@"value"];
         NSString *action = [valueDict objectForKey:@"action"];
         NSString *referenceToken = [valueDict objectForKey:@"referenceToken"];
@@ -231,6 +233,8 @@
         }
     } else if([[signupStatus uppercaseString] isEqualToString:@"INVALID_PASSWORD"]){
         [[CurioSDK shared] sendEvent:@"SignUp>First" eventValue:@"InvalidPassword"];
+        [MPush hitTag:@"Signup>First" withValue:@"InvalidPassword"];
+
         NSDictionary *detailDict = [signupResult objectForKey:@"value"];
         NSString *errorReason = [detailDict objectForKey:@"reason"];
         if(errorReason != nil && [errorReason isKindOfClass:[NSString class]]) {
@@ -242,20 +246,27 @@
         [self showErrorAlertWithMessage:NSLocalizedString(signupStatus, @"")];
         if([signupStatus isEqualToString:@"VERIFY_EXISTING_EMAIL"]) {
             [[CurioSDK shared] sendEvent:@"SignUp>First" eventValue:@"VerifyExistingEmail"];
+            [MPush hitTag:@"Signup>First" withValue:@"VerifyExistingEmail"];
+
             [self.navigationController popViewControllerAnimated:YES];
         } else {
             [[CurioSDK shared] sendEvent:@"SignUp>First" eventValue:@"Fail"];
+            [MPush hitTag:@"Signup>First" withValue:@"Fail"];
         }
     }
 }
 
 - (void) innerTriggerBack {
     [[CurioSDK shared] sendEvent:@"SignUp>First" eventValue:@"Back"];
+    [MPush hitTag:@"Signup>First" withValue:@"Back"];
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void) signupFailCallback:(NSString *) errorMessage {
     [[CurioSDK shared] sendEvent:@"Signup>First" eventValue:@"Fail"];
+    [MPush hitTag:@"Signup>First" withValue:@"Fail"];
+    
     [self hideLoading];
     [self showErrorAlertWithMessage:errorMessage];
 }
@@ -274,6 +285,7 @@
     IGLog(@"SignupController viewDidLoad");
 
     [[CurioSDK shared] sendEvent:@"Signup>First" eventValue:@"Enter"];
+    [MPush hitTag:@"Signup>First" withValue:@"Enter"];
 }
 
 - (void)didReceiveMemoryWarning {
