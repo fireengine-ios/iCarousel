@@ -376,9 +376,9 @@
 //        return;
     }
 
-    if(APPDELEGATE.session.emailEmpty && !APPDELEGATE.session.emailEmptyMessageShown) {
+    if(APPDELEGATE.session.emailEmpty && !APPDELEGATE.session.emailEmptyMessageShown && ![AppUtil readDoNotShowAgainFlagForKey:EMPTY_EMAIL_CONFIRM_KEY]) {
         APPDELEGATE.session.emailEmptyMessageShown = YES;
-        CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"TitleLater", @"") withApproveTitle:NSLocalizedString(@"TitleYes", @"") withMessage:NSLocalizedString(@"EmailEmpty", @"") withModalType:ModalTypeApprove];
+        CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"TitleLater", @"") withApproveTitle:NSLocalizedString(@"TitleYes", @"") withMessage:NSLocalizedString(@"EmailEmpty", @"") withModalType:ModalTypeApprove shouldShowCheck:YES withCheckKey:EMPTY_EMAIL_CONFIRM_KEY];
         confirm.delegate = self;
         confirm.tag = 111;
         [APPDELEGATE showCustomConfirm:confirm];

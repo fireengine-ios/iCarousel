@@ -795,6 +795,9 @@
 		94112A981CCA7DE00050E9B1 /* DropboxStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94112A971CCA7DE00050E9B1 /* DropboxStatusCell.m */; };
 		941496611CCF559D008A8D0C /* GroupedPhotosAndVideosController.m in Sources */ = {isa = PBXBuildFile; fileRef = 941496601CCF559D008A8D0C /* GroupedPhotosAndVideosController.m */; };
 		941496641CCF5E51008A8D0C /* GroupedPhotosCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 941496631CCF5E51008A8D0C /* GroupedPhotosCell.m */; };
+		942972BF1D1B8B0D00A4616C /* email_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 942972BD1D1B8B0D00A4616C /* email_icon.png */; };
+		942972C01D1B8B0D00A4616C /* email_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 942972BE1D1B8B0D00A4616C /* email_icon@2x.png */; };
+		942972C31D1B91FF00A4616C /* EmailChangeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 942972C21D1B91FF00A4616C /* EmailChangeController.m */; };
 		94328BD41CC3E03300599CEE /* img_baski_1@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 94328BD21CC3E03300599CEE /* img_baski_1@2x.jpg */; };
 		94328BD51CC3E03300599CEE /* img_baski_2@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 94328BD31CC3E03300599CEE /* img_baski_2@2x.jpg */; };
 		94328BD81CC3E03C00599CEE /* img_baski_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 94328BD61CC3E03C00599CEE /* img_baski_1.jpg */; };
@@ -2061,6 +2064,10 @@
 		941496601CCF559D008A8D0C /* GroupedPhotosAndVideosController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupedPhotosAndVideosController.m; sourceTree = "<group>"; };
 		941496621CCF5E51008A8D0C /* GroupedPhotosCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupedPhotosCell.h; sourceTree = "<group>"; };
 		941496631CCF5E51008A8D0C /* GroupedPhotosCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupedPhotosCell.m; sourceTree = "<group>"; };
+		942972BD1D1B8B0D00A4616C /* email_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email_icon.png; sourceTree = "<group>"; };
+		942972BE1D1B8B0D00A4616C /* email_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "email_icon@2x.png"; sourceTree = "<group>"; };
+		942972C11D1B91FF00A4616C /* EmailChangeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailChangeController.h; sourceTree = "<group>"; };
+		942972C21D1B91FF00A4616C /* EmailChangeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailChangeController.m; sourceTree = "<group>"; };
 		94328BD21CC3E03300599CEE /* img_baski_1@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "img_baski_1@2x.jpg"; sourceTree = "<group>"; };
 		94328BD31CC3E03300599CEE /* img_baski_2@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "img_baski_2@2x.jpg"; sourceTree = "<group>"; };
 		94328BD61CC3E03C00599CEE /* img_baski_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img_baski_1.jpg; sourceTree = "<group>"; };
@@ -2512,6 +2519,8 @@
 				94E7B4B11CB2D12300385016 /* ReachUsController.m */,
 				9414965F1CCF559D008A8D0C /* GroupedPhotosAndVideosController.h */,
 				941496601CCF559D008A8D0C /* GroupedPhotosAndVideosController.m */,
+				942972C11D1B91FF00A4616C /* EmailChangeController.h */,
+				942972C21D1B91FF00A4616C /* EmailChangeController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -3122,6 +3131,8 @@
 				94328BD71CC3E03C00599CEE /* img_baski_2.jpg */,
 				94328BD31CC3E03300599CEE /* img_baski_2@2x.jpg */,
 				94328BDB1CC3E04400599CEE /* img_baski_2@3x.jpg */,
+				942972BD1D1B8B0D00A4616C /* email_icon.png */,
+				942972BE1D1B8B0D00A4616C /* email_icon@2x.png */,
 				94E549291CC6BA43003CB5DC /* icon_complaint@3x.png */,
 				94E5492A1CC6BA43003CB5DC /* icon_dialog_success@3x.png */,
 				94E5492B1CC6BA43003CB5DC /* icon_menu_bizeulasin_w@3x.png */,
@@ -4220,6 +4231,7 @@
 				051CB3B519D2F6F700E5FC88 /* nav_sort_icon.png in Resources */,
 				94884CA51C91A24D006722F7 /* icon_editnum@3x.png in Resources */,
 				050D4C381A31E2E800809A01 /* camera_backup.png in Resources */,
+				942972C01D1B8B0D00A4616C /* email_icon@2x.png in Resources */,
 				056BEC881A8AA7CF00BA0805 /* pre_login_info3@2x.png in Resources */,
 				051CB3FE19D2F71200E5FC88 /* big_delete_icon.png in Resources */,
 				05AF7CAA1A1CC0A200F5011A /* circle_folder_icon@2x.png in Resources */,
@@ -4287,6 +4299,7 @@
 				058337F619EDA04A00DCF0C5 /* bttn-player-handle.png in Resources */,
 				055A3F5719E81C3D004A0121 /* album_selected_mask.png in Resources */,
 				0589065419CC2B9500A9E517 /* yellow_photos_icon@2x.png in Resources */,
+				942972BF1D1B8B0D00A4616C /* email_icon.png in Resources */,
 				051CB40619D2F71200E5FC88 /* nav_share_icon@2x.png in Resources */,
 				0589064D19CC2B9500A9E517 /* yellow_music_icon.png in Resources */,
 				051CB3FC19D2F71200E5FC88 /* blue_add_camera_shot_icon.png in Resources */,
@@ -4626,6 +4639,7 @@
 				05AF7C8D1A1C9C5800F5011A /* RecentActivityLinkerFooter.m in Sources */,
 				05224A9519DC1CBC00214767 /* PhotoListModalController.m in Sources */,
 				05C2A02C1A79830500EE4D78 /* ADJAttribution.m in Sources */,
+				942972C31D1B91FF00A4616C /* EmailChangeController.m in Sources */,
 				0546992C19F4E9EA00A87840 /* FileDetailFooter.m in Sources */,
 				05A4845F1A6C614300793A90 /* UIImage+RoundedCorner.m in Sources */,
 				051E1E0719CAC2F900FD1E03 /* AppDelegate.m in Sources */,

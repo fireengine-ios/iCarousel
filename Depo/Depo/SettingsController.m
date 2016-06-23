@@ -25,6 +25,7 @@
 #import "UpdateMsisdnController.h"
 #import "MPush.h"
 #import "DropboxExportController.h"
+#import "EmailChangeController.h"
 
 @interface SettingsController () {
     UILabel *msisdnLabel;
@@ -296,9 +297,9 @@
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #ifdef LOG2FILE
-    return 6;
+    return 7;
 #else
-    return 5;
+    return 6;
 #endif
 }
 
@@ -355,14 +356,18 @@
 //        cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
 //        return cell;
     } else if (indexPath.row == 3) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"ExportFromDropbox", @"") titleColor:nil subTitleText:@"" iconName:@"nav_download_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
+        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"EmailTitle", @"") titleColor:nil subTitleText:@"" iconName:@"email_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         return cell;
     } else if (indexPath.row == 4) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"FAQ", @"") titleColor:nil subTitleText:@"" iconName:@"help_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
+        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"ExportFromDropbox", @"") titleColor:nil subTitleText:@"" iconName:@"nav_download_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         return cell;
     } else if (indexPath.row == 5) {
+        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"FAQ", @"") titleColor:nil subTitleText:@"" iconName:@"help_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
+        cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+        return cell;
+    } else if (indexPath.row == 6) {
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"Mail Logs" titleColor:nil subTitleText:@"" iconName:@"help_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         return cell;
@@ -386,12 +391,15 @@
 //            [self didTriggerPass];
 //            break;
         case 3:
-            [self didTriggerExportFromDropbox];
+            [self didTriggerEmail];
             break;
         case 4:
-            [self didTriggerHelp];
+            [self didTriggerExportFromDropbox];
             break;
         case 5:
+            [self didTriggerHelp];
+            break;
+        case 6:
             [self triggerMailLog];
             break;
         default:
@@ -505,6 +513,12 @@
     [self.nav pushViewController:notificationsController animated:YES];
 }
 */
+
+- (void) didTriggerEmail {
+    EmailChangeController *emailController = [[EmailChangeController alloc] init];
+    emailController.nav = self.nav;
+    [self.nav pushViewController:emailController animated:YES];
+}
 
 - (void) didTriggerExportFromDropbox {
     DropboxExportController *dbController = [[DropboxExportController alloc] init];

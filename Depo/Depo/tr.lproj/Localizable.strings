@@ -709,3 +709,6 @@
 "NoEmailAccountError"="Cihazınızda tanımlı bir e-posta hesabınız bulunmamaktadır.";
 
 "UploadCountLimitError"="Bir seferde en fazla 100 dosya seçebilirsiniz.";
+"EmailTitle"="E-posta";
+"EmailUpdate"="E-posta Güncelleme";
+"EmailUpdateConfirmMessage"="Emailiniz %@ mail adresinizle güncellenecektir. Şifre işlemleri ve bilgilendirmeler için vermiş olduğunuz mail adresi kullanılacaktır.";

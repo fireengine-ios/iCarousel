@@ -131,6 +131,7 @@
 
 - (void)drawIcon {
     categoryIcon = [[UIImageView alloc]initWithFrame:CGRectMake(15, cellHeight/2-15, 29, 29)];
+    categoryIcon.contentMode = UIViewContentModeScaleAspectFit;
     categoryIcon.image = [UIImage imageNamed:iconName];
     [self addSubview:categoryIcon];
 }
