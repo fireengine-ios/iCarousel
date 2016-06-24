@@ -11,6 +11,7 @@
 #import "PostLoginSyncContactController.h"
 #import "AppDelegate.h"
 #import "CurioSDK.h"
+#import "MPush.h"
 
 @interface PostLoginSyncPhotoController ()
 
@@ -80,9 +81,11 @@
              */
         }];
         [[CurioSDK shared] sendEvent:@"SyncOpened" eventValue:@"true"];
+        [MPush hitTag:@"SyncOpened" withValue:@"true"];
     } else {
         [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOff];
         [[CurioSDK shared] sendEvent:@"SyncClosed" eventValue:@"true"];
+        [MPush hitTag:@"SyncClosed" withValue:@"true"];
 
         PostLoginSyncContactController *contactPref = [[PostLoginSyncContactController alloc] init];
         [self.navigationController pushViewController:contactPref animated:YES];

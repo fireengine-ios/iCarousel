@@ -16,6 +16,7 @@
 #import "BaseViewController.h"
 #import "UploadingImagePreviewController.h"
 #import "PrintWebViewController.h"
+#import "MPush.h"
 
 @interface PhotoAlbumController ()
 
@@ -617,6 +618,7 @@
     [self triggerRefresh];
 
     [[CurioSDK shared] sendEvent:@"ImageCapture" eventValue:@"true"];
+    [MPush hitTag:@"ImageCapture" withValue:@"true"];
 }
 
 - (void) triggerShareForFiles:(NSArray *) fileUuidList {

@@ -20,6 +20,7 @@
 #import "Reachability.h"
 #import "AppUtil.h"
 #import "CurioSDK.h"
+#import "MPush.h"
 
 @implementation SyncManager
 
@@ -135,6 +136,7 @@
                     NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(startIndex, length)];
                     
                     [[CurioSDK shared] sendEvent:@"FirstSyncStarted" eventValue:[NSString stringWithFormat:@"start index: %d", startIndex]];
+                    [MPush hitTag:@"FirstSyncStarted" withValue:[NSString stringWithFormat:@"start index: %d", startIndex]];
 
                     [group enumerateAssetsAtIndexes:indexSet options:0 usingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
                          NSString *referenceAlbumName = nil;//[group valueForProperty:ALAssetsGroupPropertyName];
@@ -234,6 +236,7 @@
         NSArray *remoteSummaryList = [SyncUtil readSyncFileSummaries];
         
         [[CurioSDK shared] sendEvent:@"BackgroundSync" eventValue:@"started"];
+        [MPush hitTag:@"BackgroundSync" withValue:@"started"];
 
         autoSyncIterationInProgress = YES;
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
@@ -283,6 +286,7 @@
                     autoSyncIterationInProgress = NO;
                     [[UploadQueue sharedInstance] manualAutoSyncIterationFinished];
                     [[CurioSDK shared] sendEvent:@"BackgroundSync" eventValue:@"ended"];
+                    [MPush hitTag:@"BackgroundSync" withValue:@"ended"];
                 }
             } failureBlock:^(NSError *error) {
             }];

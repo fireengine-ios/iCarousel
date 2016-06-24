@@ -177,6 +177,7 @@
 
 - (void) registerClicked {
     [[CurioSDK shared] sendEvent:@"SignUp" eventValue:@"Start"];
+    [MPush hitTag:@"SignUp" withValue:@"Start"];
 
     SignupController *signup = [[SignupController alloc] init];
     [self.navigationController pushViewController:signup animated:YES];
@@ -207,6 +208,7 @@
 - (void) tokenDaoFailCallback:(NSString *) errorMessage {
     [self hideLoading];
     [[CurioSDK shared] sendEvent:@"Login" eventValue:@"Fail"];
+    [MPush hitTag:@"Login" withValue:@"Fail"];
 
     if([errorMessage isEqualToString:CAPTCHA_ERROR_MESSAGE]) {
         [self showErrorAlertWithMessage:NSLocalizedString(@"CaptchaRequiredErrorMessage", @"")];

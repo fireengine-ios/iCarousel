@@ -14,6 +14,7 @@
 #import "BaseDao.h"
 #import "CurioSDK.h"
 #import "SharedUtil.h"
+#import "MPush.h"
 
 @implementation RequestTokenDao
 
@@ -179,6 +180,7 @@
             [SharedUtil writeSharedToken:authToken];
             
             [[CurioSDK shared] sendEvent:@"LoginSuccess" eventValue:@"true"];
+            [MPush hitTag:@"LoginSuccess" withValue:@"true"];
 
             SuppressPerformSelectorLeakWarning([delegate performSelector:successMethod]);
         } else {

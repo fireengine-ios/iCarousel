@@ -11,6 +11,7 @@
 #import "CustomLabel.h"
 #import "LoginTextfield.h"
 #import "AppDelegate.h"
+#import "MPush.h"
 
 @interface EmailEntryController ()
 
@@ -104,6 +105,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[CurioSDK shared] sendEvent:@"EmailEntry" eventValue:@"opened"];
+    [MPush hitTag:@"EmailEntry" withValue:@"opened"];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -131,6 +133,7 @@
         [self showErrorAlertWithMessage:NSLocalizedString(@"CannotChangeEmail", @"")];
     } else {
         [[CurioSDK shared] sendEvent:@"EmailEntry" eventValue:@"finished"];
+        [MPush hitTag:@"EmailEntry" withValue:@"finished"];
         APPDELEGATE.session.user.email = emailField.text;
         [self dismissViewControllerAnimated:YES completion:nil];
     }

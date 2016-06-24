@@ -23,8 +23,10 @@
 @implementation ReachUsController
 
 @synthesize dao;
+@synthesize accountDao;
 @synthesize choiceTable;
 @synthesize textView;
+@synthesize subscriptions;
 
 - (id) init {
     if(self = [super init]) {
@@ -37,7 +39,12 @@
         dao.delegate = self;
         dao.successMethod = @selector(feedbackSuccessCallback);
         dao.failMethod = @selector(feedbackFailCallback:);
-        
+
+        accountDao = [[AccountDao alloc] init];
+        accountDao.delegate = self;
+        accountDao.successMethod = @selector(accountSuccessCallback:);
+        accountDao.failMethod = @selector(accountFailCallback:);
+
         /*
         if(![AppUtil isAlreadyRated]) {
             SimpleButton *rateButton = [[SimpleButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 150)/2, yIndex, 150, 44) withTitle:NSLocalizedString(@"RateButton", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:22];
@@ -85,8 +92,20 @@
         tapGestureRecognizer.enabled = YES;
         tapGestureRecognizer.delegate = self;
         [self.view addGestureRecognizer:tapGestureRecognizer];
+        
+        [accountDao requestActiveSubscriptions];
+        [self showLoading];
     }
     return self;
+}
+
+- (void) accountSuccessCallback:(NSArray *) _subscriptions {
+    [self hideLoading];
+    self.subscriptions = _subscriptions;
+}
+
+- (void) accountFailCallback:(NSString *) errorMessage{
+    [self hideLoading];
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
@@ -206,7 +225,14 @@
 
         NSString *messageSubject = type == FeedBackTypeComplaint ? NSLocalizedString(@"ComplaintSubject", @"") : NSLocalizedString(@"SuggestionSubject", @"");
         
-        NSString *clientInfo = [NSString stringWithFormat:@"Application Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS:%@\nLanguage:%@\nNetwork Status:%@\n", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"], APPDELEGATE.session.user.phoneNumber, [AppUtil operatorName], [UIDevice currentDevice].model, [[UIDevice currentDevice] systemVersion], [Util readLocaleCode], [ReachabilityManager isReachableViaWWAN] ? @"WWAN" : @"WIFI"];
+        NSMutableString *packageInfo = [[NSMutableString alloc] init];
+        if(self.subscriptions) {
+            for(Subscription *row in self.subscriptions) {
+                [packageInfo appendString:[NSString stringWithFormat:@"%@\n", row.plan.displayName]];
+            }
+        }
+        NSString *clientInfo = [NSString stringWithFormat:@"Application Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS:%@\nLanguage:%@\nNetwork Status:%@\nTotal Storage:%lld\nUsed Storage:%lld\nPackages:%@\n", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"], APPDELEGATE.session.user.phoneNumber, [AppUtil operatorName], [UIDevice currentDevice].model, [[UIDevice currentDevice] systemVersion], [Util readLocaleCode], [ReachabilityManager isReachableViaWWAN] ? @"WWAN" : @"WIFI", APPDELEGATE.session.usage.totalStorage, APPDELEGATE.session.usage.usedStorage, packageInfo];
+
         NSString *messageBody = [NSString stringWithFormat:@"%@\n\n%@\n\n%@", textView.text, NSLocalizedString(@"MailWarning", @""), clientInfo];
         
         MFMailComposeViewController *mailCont = [[MFMailComposeViewController alloc] init];

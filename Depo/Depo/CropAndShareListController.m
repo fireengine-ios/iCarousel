@@ -14,6 +14,7 @@
 #import "MapUtil.h"
 #import "UploadingImagePreviewController.h"
 #import "PrintWebViewController.h"
+#import "MPush.h"
 
 @interface CropAndShareListController ()
 
@@ -468,6 +469,7 @@
     [self triggerRefresh];
 
     [[CurioSDK shared] sendEvent:@"ImageCapture" eventValue:@"true"];
+    [MPush hitTag:@"ImageCapture" withValue:@"true"];
 }
 
 - (void) moreClicked {

@@ -273,6 +273,7 @@
         if(!APPDELEGATE.session.quotaExceed80EventFlag) {
             //session basina bu event bir kere gönderilsin kontrolü eklendi
             [[CurioSDK shared] sendEvent:@"quota_exceeded_80_perc" eventValue:[NSString stringWithFormat:@"current: %.2f", percentUsageVal]];
+            [MPush hitTag:@"quota_exceeded_80_perc" withValue:[NSString stringWithFormat:@"current: %.2f", percentUsageVal]];
             APPDELEGATE.session.quotaExceed80EventFlag = YES;
         }
     } else {
@@ -462,57 +463,44 @@
         [MPush hitTag:@"quota_5_mb_left"];
     }
 
-    if ([AppUtil checkIsUpdate]) {
-        if ([AppUtil checkAndSetFlags:DIALOGUE_P7_FLAG]) {
-            [self loadAdvertisementView:NSLocalizedString(@"NewVersionNewFeatures", @"") withOption:NO withTitle:NSLocalizedString(@"NewVersionNewFeaturesTitle", @"")];
-        }
-    }
-    else {
-        if (APPDELEGATE.session.newUserFlag) {
-            if (currentSubscription.plan.cometOfferId.intValue == 581803) {
-                if ( [AppUtil checkAndSetFlags:DIALOGUE_P1_FLAG]) {
-                    [self loadAdvertisementView:NSLocalizedString(@"WelcomePackage1GB", @"") withOption:NO withTitle:nil];
-                }
+    if (APPDELEGATE.session.newUserFlag) {
+        if (currentSubscription.plan.cometOfferId.intValue == 581803) {
+            if ( [AppUtil checkAndSetFlags:DIALOGUE_P1_FLAG]) {
+                [self loadAdvertisementView:NSLocalizedString(@"WelcomePackage1GB", @"") withOption:NO withTitle:nil];
             }
-            else if (currentSubscription.plan.cometOfferId.intValue == 581814){
-                if ([AppUtil checkAndSetFlags:DIALOGUE_P2_FLAG]) {
-                    [self loadAdvertisementView:NSLocalizedString(@"PlatinPackage500GB", @"") withOption:NO withTitle:NSLocalizedString(@"PlatinPackage500GBTitle", @"")];
-                }
+        } else if (currentSubscription.plan.cometOfferId.intValue == 581814){
+            if ([AppUtil checkAndSetFlags:DIALOGUE_P2_FLAG]) {
+                [self loadAdvertisementView:NSLocalizedString(@"PlatinPackage500GB", @"") withOption:NO withTitle:NSLocalizedString(@"PlatinPackage500GBTitle", @"")];
             }
-            else if (currentSubscription.plan.slcmOfferId.intValue == 603505139){
-                if ([AppUtil checkAndSetFlags:DIALOGUE_P3_FLAG]) {
+        } else if (currentSubscription.plan.slcmOfferId.intValue == 603505139){
+            if ([AppUtil checkAndSetFlags:DIALOGUE_P3_FLAG]) {
                 [self loadAdvertisementView:NSLocalizedString(@"TurkcellPhone5GB", @"") withOption:NO withTitle:nil];
-                }
             }
         }
-        else {
-            if (APPDELEGATE.session.migrationUserFlag && ![currentSubscription.plan.role isEqualToString:@"demo"]) {
-                if ([AppUtil checkAndSetFlags:DIALOGUE_P8_FLAG]) {
-                    if ([self shouldShowOnKatView:currentSubscription]) {
-                        UIWindow *currentWindow = [UIApplication sharedApplication].keyWindow;
-                        onkatView = [[OnkatDepoPopUP alloc] initWithFrame:CGRectMake(0, 0, currentWindow.bounds.size.width, currentWindow.bounds.size.height)];
-                        onkatView.delegate = self;
-                        [currentWindow addSubview:onkatView];
-                    }
-
+    } else {
+        if (APPDELEGATE.session.migrationUserFlag && ![currentSubscription.plan.role isEqualToString:@"demo"]) {
+            if ([AppUtil checkAndSetFlags:DIALOGUE_P8_FLAG]) {
+                if ([self shouldShowOnKatView:currentSubscription]) {
+                    UIWindow *currentWindow = [UIApplication sharedApplication].keyWindow;
+                    onkatView = [[OnkatDepoPopUP alloc] initWithFrame:CGRectMake(0, 0, currentWindow.bounds.size.width, currentWindow.bounds.size.height)];
+                    onkatView.delegate = self;
+                    [currentWindow addSubview:onkatView];
                 }
+                
             }
-            else {
-                if ([currentSubscription.plan.role isEqualToString:@"ultimate"]) {
-                    
-                } else {
-                    if (percentUsageVal >= 100 && [AppUtil checkAndSetFlags:DIALOGUE_P6_FLAG] ){
-                        [AppUtil checkAndSetFlags:DIALOGUE_P5_FLAG];
-                        [AppUtil checkAndSetFlags:DIALOGUE_P4_FLAG];
-                        [self loadAdvertiesementViewFullMessage:NSLocalizedString(@"StorageFull100", @"") isFull:YES withTitle:NSLocalizedString(@"StorageFull100Title", @"")];
-                    }
-                    else if (percentUsageVal >= 90 && [AppUtil checkAndSetFlags:DIALOGUE_P5_FLAG]){
-                        [AppUtil checkAndSetFlags:DIALOGUE_P5_FLAG];
-                        [self loadAdvertisementView:NSLocalizedString(@"StorageOver90", @"") withOption:YES withTitle:NSLocalizedString(@"StorageOver90Title", @"")];
-                    }
-                    else if (percentUsageVal >= 80 && [AppUtil checkAndSetFlags:DIALOGUE_P4_FLAG]){
-                        [self loadAdvertisementView:NSLocalizedString(@"StorageOver80", @"") withOption:YES withTitle:NSLocalizedString(@"StorageOver80Title", @"")];
-                    }
+        } else {
+            if ([currentSubscription.plan.role isEqualToString:@"ultimate"]) {
+                //TODO no action for now
+            } else {
+                if (percentUsageVal >= 100 && [AppUtil checkAndSetFlags:DIALOGUE_P6_FLAG] ){
+                    [AppUtil checkAndSetFlags:DIALOGUE_P5_FLAG];
+                    [AppUtil checkAndSetFlags:DIALOGUE_P4_FLAG];
+                    [self loadAdvertiesementViewFullMessage:NSLocalizedString(@"StorageFull100", @"") isFull:YES withTitle:NSLocalizedString(@"StorageFull100Title", @"")];
+                } else if (percentUsageVal >= 90 && [AppUtil checkAndSetFlags:DIALOGUE_P5_FLAG]){
+                    [AppUtil checkAndSetFlags:DIALOGUE_P5_FLAG];
+                    [self loadAdvertisementView:NSLocalizedString(@"StorageOver90", @"") withOption:YES withTitle:NSLocalizedString(@"StorageOver90Title", @"")];
+                } else if (percentUsageVal >= 80 && [AppUtil checkAndSetFlags:DIALOGUE_P4_FLAG]){
+                    [self loadAdvertisementView:NSLocalizedString(@"StorageOver80", @"") withOption:YES withTitle:NSLocalizedString(@"StorageOver80Title", @"")];
                 }
             }
         }
@@ -619,6 +607,8 @@
     if(alertView.tag == 111) {
         [[CurioSDK shared] sendEvent:@"EmailEmpty" eventValue:@"Later"];
         [[CurioSDK shared] sendEvent:@"EmailConfirm" eventValue:@"later"];
+        [MPush hitTag:@"EmailEmpty" withValue:@"Later"];
+        [MPush hitTag:@"EmailConfirm" withValue:@"later"];
     }
 }
 
@@ -626,6 +616,8 @@
     if(alertView.tag == 111) {
         [[CurioSDK shared] sendEvent:@"EmailEmpty" eventValue:@"Enter"];
         [[CurioSDK shared] sendEvent:@"EmailConfirm" eventValue:@"ok"];
+        [MPush hitTag:@"EmailEmpty" withValue:@"Enter"];
+        [MPush hitTag:@"EmailConfirm" withValue:@"ok"];
         EmailEntryController *emailController = [[EmailEntryController alloc] init];
         MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:emailController];
         [self presentViewController:modalNav animated:YES completion:nil];

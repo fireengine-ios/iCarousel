@@ -51,11 +51,14 @@
             triggerAutoSync = YES;
             [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOn];
             [[CurioSDK shared] sendEvent:@"SyncOpened" eventValue:@"true"];
+            [MPush hitTag:@"SyncOpened" withValue:@"true"];
         } else {
             cancelAutoSync = YES;
             [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOff];
             [[CurioSDK shared] sendEvent:@"SyncClosed" eventValue:@"true"];
             [[CurioSDK shared] sendEvent:@"SettingsAutoSyncPref" eventValue:@"closed"];
+            [MPush hitTag:@"SyncClosed" withValue:@"true"];
+            [MPush hitTag:@"SettingsAutoSyncPref" withValue:@"closed"];
         }
     }
     if (currentConnectionSetting != oldConnectionSetting) {
@@ -64,8 +67,11 @@
         if(currentConnectionSetting == ConnectionOptionWifi) {
             [[CurioSDK shared] sendEvent:@"SyncWifiOnly" eventValue:@"true"];
             [[CurioSDK shared] sendEvent:@"SettingsAutoSyncPref" eventValue:@"wifi"];
+            [MPush hitTag:@"SyncWifiOnly" withValue:@"true"];
+            [MPush hitTag:@"SettingsAutoSyncPref" withValue:@"wifi"];
         } else {
             [[CurioSDK shared] sendEvent:@"SettingsAutoSyncPref" eventValue:@"any"];
+            [MPush hitTag:@"SettingsAutoSyncPref" withValue:@"any"];
         }
         
         //conn type değişmişse zaten yukarıda handle ediliyor

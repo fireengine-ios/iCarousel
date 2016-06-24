@@ -21,6 +21,7 @@
 #import "AppSession.h"
 #import "BaseViewController.h"
 #import "UploadingImagePreviewController.h"
+#import "MPush.h"
 
 @interface FileListController ()
 
@@ -610,6 +611,7 @@
     self.folderModificationFlag = YES;
 
     [[CurioSDK shared] sendEvent:@"ImageCapture" eventValue:@"true"];
+    [MPush hitTag:@"ImageCapture" withValue:@"true"];
 }
 
 - (NSString *) appendNewFileName:(NSString *) newFileName {

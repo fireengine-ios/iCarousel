@@ -14,6 +14,7 @@
 #import "BaseDao.h"
 #import "CurioSDK.h"
 #import "SharedUtil.h"
+#import "MPush.h"
 
 @implementation RadiusDao
 
@@ -114,6 +115,7 @@
             [SharedUtil writeSharedToken:authToken];
             
             [[CurioSDK shared] sendEvent:@"LoginSuccess" eventValue:@"true"];
+            [MPush hitTag:@"LoginSuccess" withValue:@"true"];
             
             [CacheUtil writeCachedMsisdnForPostMigration:nil];
             [CacheUtil writeCachedPassForPostMigration:nil];

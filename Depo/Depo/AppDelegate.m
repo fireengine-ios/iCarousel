@@ -124,6 +124,7 @@
     [[CurioSDK shared] startSession:@"http://curio.turkcell.com.tr/api/v2" apiKey:@"cab314f33df2514764664e5544def586" trackingCode:@"KL2XNFIE" sessionTimeout:30 periodicDispatchEnabled:YES dispatchPeriod:5 maxCachedActivitiyCount:10 loggingEnabled:NO logLevel:0 registerForRemoteNotifications:NO notificationTypes:@"Sound,Badge,Alert" fetchLocationEnabled:NO maxValidLocationTimeInterval:600 delegate:self appLaunchOptions:launchOptions];
 
     [[CurioSDK shared] sendEvent:@"ApplicationStarted" eventValue:@"true"];
+    [MPush hitTag:@"ApplicationStarted" withValue:@"true"];
 
     DBSession *dbSession = [[DBSession alloc] initWithAppKey:@"zeddgylajxc1op8" appSecret:@"kn9u1e77bzlk103" root:kDBRootDropbox];
     [DBSession setSharedSession:dbSession];
@@ -317,8 +318,10 @@
     if([[UIApplication sharedApplication] respondsToSelector:isRegisteredForRemoteNotificationsSel]) {
         if([[UIApplication sharedApplication] isRegisteredForRemoteNotifications]){
             [[CurioSDK shared] sendEvent:@"NotificationPermission" eventValue:@"granted"];
+            [MPush hitTag:@"NotificationPermission" withValue:@"granted"];
         } else {
             [[CurioSDK shared] sendEvent:@"NotificationPermission" eventValue:@"denied"];
+            [MPush hitTag:@"NotificationPermission" withValue:@"denied"];
         }
     }
     self.base = [[BaseViewController alloc] init];

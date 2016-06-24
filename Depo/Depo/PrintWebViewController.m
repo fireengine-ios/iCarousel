@@ -14,6 +14,7 @@
 #import "CurioSDK.h"
 #import "CustomButton.h"
 #import "MyNavigationController.h"
+#import "MPush.h"
 
 static const NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
@@ -27,6 +28,7 @@ static const NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRS
     if (self = [super init]) {
         
         [[CurioSDK shared] sendEvent:@"PhotoPrint" eventValue:[NSString stringWithFormat:@"%lu",(unsigned long)[fileList count]]];
+        [MPush hitTag:@"PhotoPrint" withValue:[NSString stringWithFormat:@"%lu",(unsigned long)[fileList count]]];
         
         CustomButton *cancelButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 200, 30) withImageName:nil withTitle:NSLocalizedString(@"PrintBackTitle", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:16] withColor:[UIColor whiteColor] isMultipleLine:YES];
         [cancelButton addTarget:self action:@selector(triggerBackToPhotos) forControlEvents:UIControlEventTouchUpInside];

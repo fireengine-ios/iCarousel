@@ -21,6 +21,7 @@
 #import "GroupedPhotosCell.h"
 #import "UploadingImagePreviewController.h"
 #import "AppConstants.h"
+#import "MPush.h"
 
 #define IMG_FOOTER_TAG 111
 #define ALBUM_FOOTER_TAG 222
@@ -659,7 +660,7 @@
 
 - (void) newAlbumModalDidTriggerNewAlbumWithName:(NSString *)albumName {
     [addAlbumDao requestAddAlbumWithName:albumName];
-    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"AlbumAddProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"MoveSuccessMessageNew", @"") andFailMessage:NSLocalizedString(@"AlbumAddFailMessage", @"")];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"AlbumAddProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"AlbumAddSuccessMessage", @"") andFailMessage:NSLocalizedString(@"AlbumAddFailMessage", @"")];
 }
 
 - (void) photoModalDidTriggerUploadForUrls:(NSArray *)assetUrls {
@@ -694,6 +695,7 @@
     [self triggerRefresh];
     
     [[CurioSDK shared] sendEvent:@"ImageCapture" eventValue:@"true"];
+    [MPush hitTag:@"ImageCapture" withValue:@"true"];
 }
 
 - (void) moreClicked {

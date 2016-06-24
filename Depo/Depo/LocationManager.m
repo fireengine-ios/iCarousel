@@ -13,6 +13,7 @@
 #import "SyncUtil.h"
 #import "UploadQueue.h"
 #import "CurioSDK.h"
+#import "MPush.h"
 
 @implementation LocationManager
 
@@ -97,18 +98,21 @@
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
     if (status == kCLAuthorizationStatusAuthorizedAlways) {
         [[CurioSDK shared] sendEvent:@"LocationPermission" eventValue:@"granted"];
+        [MPush hitTag:@"LocationPermission" withValue:@"granted"];
         if(delegate) {
             [delegate locationPermissionGranted];
         }
         [[LocationManager sharedInstance].locManager startMonitoringSignificantLocationChanges];
     } else if (status == kCLAuthorizationStatusAuthorized) {
         [[CurioSDK shared] sendEvent:@"LocationPermission" eventValue:@"granted"];
+        [MPush hitTag:@"LocationPermission" withValue:@"granted"];
         if(delegate) {
             [delegate locationPermissionGranted];
         }
         [[LocationManager sharedInstance].locManager startMonitoringSignificantLocationChanges];
     } else {
         [[CurioSDK shared] sendEvent:@"LocationPermission" eventValue:@"denied"];
+        [MPush hitTag:@"LocationPermission" withValue:@"denied"];
         if(delegate) {
             [delegate locationPermissionDenied];
         }
