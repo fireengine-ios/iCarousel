@@ -62,7 +62,7 @@
         //5322109094 for presentation
         
         //TODO contact sync ile aç
-        [self checkLatestContactSyncStatus];
+//        [self checkLatestContactSyncStatus];
     }
     return self;
 }

@@ -71,7 +71,7 @@
     contactMenu.title = NSLocalizedString(@"MenuContactSync", @"");
     contactMenu.iconName = @"contact_sync_icon.png";
     contactMenu.selectedIconName = @"yellow_contact_sync_icon.png";
-    [result addObject:contactMenu];
+//    [result addObject:contactMenu];
     
     if(APPDELEGATE.session.user.cropAndSharePresentFlag) {
         MetaMenu *cropAndShare = [[MetaMenu alloc] initWithMenuType:MenuTypeCropAndShare];
