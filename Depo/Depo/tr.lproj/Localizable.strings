@@ -727,3 +727,6 @@
 "DropboxSubInfo"="Taşıma işlemi tamamen ücretsiz ve internet paketinizden yemez :)";
 "DropboxExport"="Dropbox'tan Taşı";
 "ExportingFiles"="Dosyalar Taşınıyor";
+"PromoCodeEntrance"="Promosyon Kod Girişi";
+"PromoSuccess"="Promosyon kodunuz onaylandığında Paketler ekranında yeni paketinizi görebilirsiniz.";
+"PromoError"="Lütfen promosyon kodunuzu kontrol edin";

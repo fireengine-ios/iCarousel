@@ -11,6 +11,7 @@
 #import "PromotionsController.h"
 #import "CustomLabel.h"
 #import "Util.h"
+#import "AppDelegate.h"
 
 @interface PromotionEntryController ()
 
@@ -94,7 +95,7 @@
     CustomButton *historyButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20) withImageName:@"recent_activity_icon.png"];
     [historyButton addTarget:self action:@selector(historyClicked) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:historyButton];
-    self.navigationItem.rightBarButtonItem = rightBarButton;
+//    self.navigationItem.rightBarButtonItem = rightBarButton;
 }
 
 - (void) historyClicked {
@@ -109,7 +110,9 @@
 
 - (void) promoActivateSuccess {
     [self hideLoading];
+    [self showInfoAlertWithMessage:NSLocalizedString(@"PromoSuccess", @"")];
     [self.view endEditing:YES];
+    [self.nav popViewControllerAnimated:YES];
 }
 
 - (void) promoActivateFail:(NSString *) errorMessage {

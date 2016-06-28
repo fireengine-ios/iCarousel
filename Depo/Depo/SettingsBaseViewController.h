@@ -15,10 +15,11 @@
 #import "TextCell.h"
 
 @interface SettingsBaseViewController : MyViewController <UITableViewDataSource, UITabBarControllerDelegate> {
-    UITableView *pageContentTable;
     int currentSetting;
     int oldSetting;
 }
+
+@property (nonatomic, strong) UITableView *pageContentTable;
 
 - (void)drawPageContentTable;
 - (void)setAuto;

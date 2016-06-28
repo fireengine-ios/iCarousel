@@ -77,7 +77,7 @@
     promoMenu.title = NSLocalizedString(@"MenuPromo", @"");
     promoMenu.iconName = @"documents_icon.png";
     promoMenu.selectedIconName = @"yellow_documents_icon.png";
-    [result addObject:promoMenu];
+//    [result addObject:promoMenu];
 
     MetaMenu *contactMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeContactSync];
     contactMenu.title = NSLocalizedString(@"MenuContactSync", @"");

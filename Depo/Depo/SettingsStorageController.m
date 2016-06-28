@@ -15,6 +15,7 @@
 #import "AppUtil.h"
 #import "AppSession.h"
 #import "AppConstants.h"
+#import "PromotionEntryController.h"
 
 @interface SettingsStorageController ()
 
@@ -124,6 +125,10 @@
         currentSubscription = [subscriptions objectAtIndex:0];
     }
     [super drawPageContentTable];
+    
+}
+
+- (void) triggerPromo {
 }
 
 - (void) loadCurrentSubscriptionFailCallback:(NSString *) errorMessage {

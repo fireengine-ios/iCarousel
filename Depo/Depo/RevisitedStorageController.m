@@ -14,6 +14,7 @@
 #import "AppSession.h"
 #import "AppConstants.h"
 #import "SyncUtil.h"
+#import "PromotionEntryController.h"
 
 @interface RevisitedStorageController ()
 
@@ -91,7 +92,14 @@
     UIView *dummyView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, mainTable.bounds.size.width, dummyViewHeight)];
     mainTable.tableHeaderView = dummyView;
     mainTable.contentInset = UIEdgeInsetsMake(-dummyViewHeight, 0, 0, 0);
+
+    UIView *tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 80)];
+    CustomButton *promoButton = [[CustomButton alloc] initWithFrame:CGRectMake(20, 10, tableFooterView.frame.size.width - 40, 60) withImageName:@"buttonbg_yellow.png" withTitle:NSLocalizedString(@"PromoCodeEntrance", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withColor:[Util UIColorForHexColor:@"363e4f"]];
+    [promoButton addTarget:self action:@selector(triggerPromo) forControlEvents:UIControlEventTouchUpInside];
+    [tableFooterView addSubview:promoButton];
     
+    mainTable.tableFooterView = tableFooterView;
+
     if(APPDELEGATE.session.user.accountType == AccountTypeOther) {
         CustomButton *restoreButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 18, 18) withImageName:@"icon_verif_refresh.png"];
         [restoreButton addTarget:self action:@selector(restoreClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -100,6 +108,11 @@
 
     [self refreshPageData];
     [self readAndSendReceipt];
+}
+
+- (void) triggerPromo {
+    PromotionEntryController *promoController = [[PromotionEntryController alloc] init];
+    [self.nav pushViewController:promoController animated:YES];
 }
 
 - (void) refreshPageData {

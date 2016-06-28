@@ -14,8 +14,9 @@
 
 @implementation SettingsBaseViewController
 
-- (id)init
-{
+@synthesize pageContentTable;
+
+- (id)init {
     self = [super init];
     if (self) {
         self.view.backgroundColor = [Util UIColorForHexColor:@"F1F2F6"];
