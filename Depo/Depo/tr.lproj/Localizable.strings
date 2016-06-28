@@ -621,7 +621,7 @@
 
 "TermsButtonTitle"="KULLANIM KOŞULLARINI KABUL EDİYORUM";
 "TermsTitle"="Kullanım Koşulları";
-"EmailNotFound"="Akıllı Depo üyeliğiniz bulunmamaktadır. Kayıt Ol menüsünden üyeliğinizi başlatabilirsiniz. Turkcell abonesi iseniz 2222'ye SMS atarak şifrenizi alabilirsiniz.";
+"EmailNotFound"="Turkcell abonesi iseniz, SIFRE yazıp 2222’ye SMS göndererek şifrenizi ücretsiz olarak alabilirsiniz.";
 
 
 "IAPRestoreError"="Bu ürünü daha önceden satın almıştınız";
@@ -712,3 +712,18 @@
 "EmailTitle"="E-posta";
 "EmailUpdate"="E-posta Güncelleme";
 "EmailUpdateConfirmMessage"="Emailiniz %@ mail adresinizle güncellenecektir. Şifre işlemleri ve bilgilendirmeler için vermiş olduğunuz mail adresi kullanılacaktır.";
+
+"TakePhoto"="Kamera Aç";
+"ChooseFromLibrary"="Galeriden Seç";
+"ProfilePhotoUploadSuccess"="Profil fotonuz başarıyla değiştirildi.";
+"MenuPromo"="Promosyonlar";
+"PromoEarning"="Kazandıklarınız";
+"PromotionTopTitle"="Akıllı Depo Size Özel Kampanya";
+"PromotionSubTitle"="Burada da alt metin görünecek. Burada da alt metin görünecek. Burada da alt metin görünecek. Burada da alt metin görünecek.";
+"PromoCodePlaceholder"="Promosyon Kodu";
+"PromoCodeEmpty"="Lütfen promosyon kodunu girin";
+"LegalNotice"="YASAL AÇIKLAMA";
+"LegalNoticeContent"="Burada promosyon için yasal uyarı metni olacak. Burada promosyon için yasal uyarı metni olacak. Burada promosyon için yasal uyarı metni olacak. Burada promosyon için yasal uyarı metni olacak. Burada promosyon için yasal uyarı metni olacak. Burada promosyon için yasal uyarı metni olacak. Burada promosyon için yasal uyarı metni olacak. Burada promosyon için yasal uyarı metni olacak.";
+"DropboxSubInfo"="Taşıma işlemi tamamen ücretsiz ve internet paketinizden yemez :)";
+"DropboxExport"="Dropbox'tan Taşı";
+"ExportingFiles"="Dosyalar Taşınıyor";

@@ -20,14 +20,14 @@
 #import "FileInfoGroup.h"
 
 //TODO test -> prod
-#define BASE_URL @"https://adepo.turkcell.com.tr/api"
-//#define BASE_URL @"https://tcloudstb.turkcell.com.tr/api"
+//#define BASE_URL @"https://adepo.turkcell.com.tr/api"
+#define BASE_URL @"https://tcloudstb.turkcell.com.tr/api"
 
 #define TOKEN_URL BASE_URL@"/auth/token?rememberMe=%@"
 
 //TODO test -> prod
-#define RADIUS_URL @"http://adepo.turkcell.com.tr/api/auth/gsm/login?rememberMe=on"
-//#define RADIUS_URL @"http://tcloudstb.turkcell.com.tr/api/auth/gsm/login?rememberMe=on"
+//#define RADIUS_URL @"http://adepo.turkcell.com.tr/api/auth/gsm/login?rememberMe=on"
+#define RADIUS_URL @"http://tcloudstb.turkcell.com.tr/api/auth/gsm/login?rememberMe=on"
 
 #define REMEMBER_ME_URL BASE_URL@"/auth/rememberMe"
 
@@ -144,6 +144,10 @@
 #define DROPBOX_STATUS_URL BASE_URL@"/migration/dropbox/status"
 
 #define SEARCH_BY_GROUP_URL BASE_URL@"/search/byFieldGroupByLocation"
+
+#define PROFILE_IMG_URL BASE_URL@"/account/profilePhoto"
+
+#define PROMO_ACTIVATE_URL BASE_URL@"/promo/activate"
 
 #define APN_URL @"http://pushserver.turkcell.com.tr/PushServer/rest/registerdevice/"
 

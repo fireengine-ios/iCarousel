@@ -73,6 +73,8 @@
 
 #define MSISDN_CHANGED_NOTIFICATION @"MSISDN_CHANGED_NOTIFICATION"
 
+#define PROFILE_IMG_UPLOADED_NOTIFICATION @"PROFILE_IMG_UPLOADED_NOTIFICATION"
+
 #define CHANGED_MUSIC_OBJ_KEY @"CHANGED_MUSIC_OBJ_KEY"
 
 #define INDEX_AFTER_SHUFFLE_OBJ_KEY @"INDEX_AFTER_SHUFFLE_OBJ_KEY"
@@ -289,6 +291,8 @@ typedef enum {
     MenuTypePhoto,
     MenuTypeMusic,
     MenuTypeDoc,
+    MenuTypePromo,
+    MenuTypeDropbox,
     MenuTypeContactSync,
     MenuTypeLogin,
     MenuTypeCropAndShare,

@@ -47,6 +47,8 @@
 #import "ReachUsController.h"
 #import "TutorialView.h"
 #import "GroupedPhotosAndVideosController.h"
+#import "PromotionEntryController.h"
+#import "DropboxExportController.h"
 
 #define kMenuOpenOriginX 276
 
@@ -320,6 +322,20 @@
     doc.nav = self.nav;
     doc.myDelegate = self;
     [self.nav setViewControllers:@[doc] animated:NO];
+}
+
+- (void) didTriggerDropbox {
+    DropboxExportController *controller = [[DropboxExportController alloc] init];
+    controller.nav = self.nav;
+    controller.myDelegate = self;
+    [self.nav setViewControllers:@[controller] animated:NO];
+}
+
+- (void) didTriggerPromotions {
+    PromotionEntryController *controller = [[PromotionEntryController alloc] init];
+    controller.nav = self.nav;
+    controller.myDelegate = self;
+    [self.nav setViewControllers:@[controller] animated:NO];
 }
 
 - (void) didTriggerContactSync {

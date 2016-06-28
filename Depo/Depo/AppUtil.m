@@ -42,7 +42,13 @@
     favMenu.iconName = @"fav_icon.png";
     favMenu.selectedIconName = @"yellow_fav_icon.png";
     [result addObject:favMenu];
-    
+
+    MetaMenu *dropboxMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeDropbox];
+    dropboxMenu.title = NSLocalizedString(@"ExportFromDropbox", @"");
+    dropboxMenu.iconName = @"icon_menu_dbtasi_w.png";
+    dropboxMenu.selectedIconName = @"icon_menu_dbtasi_w.png";
+    [result addObject:dropboxMenu];
+
     MetaMenu *fileMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeFiles];
     fileMenu.title = NSLocalizedString(@"MenuFiles", @"");
     fileMenu.iconName = @"file_icon.png";
@@ -66,7 +72,13 @@
     docMenu.iconName = @"documents_icon.png";
     docMenu.selectedIconName = @"yellow_documents_icon.png";
     [result addObject:docMenu];
-    
+
+    MetaMenu *promoMenu = [[MetaMenu alloc] initWithMenuType:MenuTypePromo];
+    promoMenu.title = NSLocalizedString(@"MenuPromo", @"");
+    promoMenu.iconName = @"documents_icon.png";
+    promoMenu.selectedIconName = @"yellow_documents_icon.png";
+    [result addObject:promoMenu];
+
     MetaMenu *contactMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeContactSync];
     contactMenu.title = NSLocalizedString(@"MenuContactSync", @"");
     contactMenu.iconName = @"contact_sync_icon.png";

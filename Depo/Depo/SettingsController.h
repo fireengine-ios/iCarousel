@@ -10,8 +10,9 @@
 #import "TitleCell.h"
 #import "CacheUtil.h"
 #import <MessageUI/MessageUI.h>
+#import "ProfilePhotoUploadDao.h"
 
-@interface SettingsController : MyViewController <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MFMailComposeViewControllerDelegate> {
+@interface SettingsController : MyViewController <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, UIActionSheetDelegate> {
     UIImageView *profileImageView;
     UITableView *pageContentTable;
     UIView *imageOptionsArea;
@@ -24,6 +25,7 @@
     UILabel *uploadLabel;
     CustomButton *removeButton;
     UILabel *removeLabel;
+    ProfilePhotoUploadDao *uploadDao;
 }
 
 @end

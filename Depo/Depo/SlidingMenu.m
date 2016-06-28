@@ -235,6 +235,12 @@
         case MenuTypeDoc:
             [delegate didTriggerDocs];
             break;
+        case MenuTypePromo:
+            [delegate didTriggerPromotions];
+            break;
+        case MenuTypeDropbox:
+            [delegate didTriggerDropbox];
+            break;
         case MenuTypeContactSync:
             [delegate didTriggerContactSync];
             break;

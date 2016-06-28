@@ -62,15 +62,53 @@
         tokenDao.successMethod = @selector(tokenSuccessCallback:);
         tokenDao.failMethod = @selector(tokenFailCallback:);
         
-        exportButton = [[CustomButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - buttonSize)/2, 50, buttonSize, 60) withImageName:@"buttonbg_yellow.png" withTitle:NSLocalizedString(@"Export", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withColor:[Util UIColorForHexColor:@"363e4f"]];
+        UIImage *iconImg = [UIImage imageNamed:@"img_dbtasi.png"];
+        UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - iconImg.size.width)/2, 30, iconImg.size.width, iconImg.size.height)];
+        iconView.image = iconImg;
+        [self.view addSubview:iconView];
+
+        CustomLabel *infoTitle = [[CustomLabel alloc] initWithFrame:CGRectMake(30, iconView.frame.origin.y + iconView.frame.size.height + 20, self.view.frame.size.width - 60, 60) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:16] withColor:[Util UIColorForHexColor:@"555555"] withText:NSLocalizedString(@"DropboxSubInfo", @"") withAlignment:NSTextAlignmentCenter numberOfLines:3];
+        [self.view addSubview:infoTitle];
+
+        exportButton = [[CustomButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - buttonSize)/2, infoTitle.frame.origin.y + infoTitle.frame.size.height + 20, buttonSize, 60) withImageName:@"buttonbg_yellow.png" withTitle:NSLocalizedString(@"DropboxExport", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withColor:[Util UIColorForHexColor:@"363e4f"]];
         [exportButton addTarget:self action:@selector(triggerExport) forControlEvents:UIControlEventTouchUpInside];
         exportButton.enabled = NO;
         [self.view addSubview:exportButton];
 
-        mainStatusView = [[UIView alloc] initWithFrame:CGRectMake(0, exportButton.frame.origin.y + exportButton.frame.size.height + 5, self.view.frame.size.width, self.view.frame.size.height - exportButton.frame.origin.y - exportButton.frame.size.height - 5)];
+        resultTable = [[UITableView alloc] initWithFrame:CGRectMake(20, exportButton.frame.origin.y + exportButton.frame.size.height + 10, self.view.frame.size.width - 40, 90) style:UITableViewStylePlain];
+        resultTable.backgroundColor = [UIColor clearColor];
+        resultTable.backgroundView = nil;
+        resultTable.delegate = self;
+        resultTable.dataSource = self;
+        resultTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+        resultTable.bounces = NO;
+        [self.view addSubview:resultTable];
+
+        mainStatusView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
         mainStatusView.hidden = YES;
+        mainStatusView.backgroundColor = [UIColor whiteColor];
         [self.view addSubview:mainStatusView];
         
+        UIImageView *statusBgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, mainStatusView.frame.size.width, mainStatusView.frame.size.height)];
+        statusBgImgView.image = [UIImage imageNamed:@"bg_fullimg.png"];
+        [mainStatusView addSubview:statusBgImgView];
+        
+        UIImage *statusBgImg = [UIImage imageNamed:@"bg_cloud_big.png"];
+        float statusInfoWidth = mainStatusView.frame.size.width - 80;
+        float statusInfoHeight = statusInfoWidth * statusBgImg.size.height/statusBgImg.size.width;
+        UIImageView *statusInfoView = [[UIImageView alloc] initWithFrame:CGRectMake((mainStatusView.frame.size.width - statusInfoWidth)/2, (mainStatusView.frame.size.height - statusInfoHeight)/2 - 50, statusInfoWidth, statusInfoHeight)];
+        statusInfoView.image = statusBgImg;
+        [mainStatusView addSubview:statusInfoView];
+
+        percentLabel = [[CustomLabel alloc] initWithFrame:CGRectMake((statusInfoView.frame.size.width - 100)/2, (statusInfoView.frame.size.height - 40)/2, 100, 40) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:34] withColor:[Util UIColorForHexColor:@"555555"] withText:@""];
+        percentLabel.textAlignment = NSTextAlignmentCenter;
+        [statusInfoView addSubview:percentLabel];
+
+        CustomLabel *subInfoLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, percentLabel.frame.origin.y + percentLabel.frame.size.height + 5, statusInfoView.frame.size.width, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:16] withColor:[Util UIColorForHexColor:@"555555"] withText:NSLocalizedString(@"ExportingFiles", @"") withAlignment:NSTextAlignmentCenter];
+        percentLabel.textAlignment = NSTextAlignmentCenter;
+        [statusInfoView addSubview:subInfoLabel];
+
+        /*
         statusChart = [[XYPieChart alloc] initWithFrame:CGRectMake((mainStatusView.frame.size.width - 120)/2, 0, 120, 120)];
         statusChart.dataSource = self;
         statusChart.startPieAngle = -M_PI_2;
@@ -94,15 +132,7 @@
 
         CustomLabel *tableTitle = [[CustomLabel alloc] initWithFrame:CGRectMake(20, statusChart.frame.origin.y + statusChart.frame.size.height + 20, mainStatusView.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:16] withColor:[Util UIColorForHexColor:@"555555"] withText:NSLocalizedString(@"DropboxExportStatus", @"")];
         [mainStatusView addSubview:tableTitle];
-
-        resultTable = [[UITableView alloc] initWithFrame:CGRectMake(0, tableTitle.frame.origin.y + tableTitle.frame.size.height + 10, mainStatusView.frame.size.width, 120) style:UITableViewStylePlain];
-        resultTable.backgroundColor = [UIColor clearColor];
-        resultTable.backgroundView = nil;
-        resultTable.delegate = self;
-        resultTable.dataSource = self;
-        resultTable.separatorStyle = UITableViewCellSeparatorStyleNone;
-        resultTable.bounces = NO;
-        [mainStatusView addSubview:resultTable];
+         */
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dropboxDidLogin) name:DROPBOX_LINK_SUCCESS_KEY object:nil];
  
@@ -222,11 +252,14 @@
         
         if(status.status == DropboxExportStatusRunning || status.status == DropboxExportStatusPending || status.status == DropboxExportStatusScheduled) {
             [self performSelector:@selector(scheduleStatusQuery) withObject:nil afterDelay:2.0f];
+            mainStatusView.hidden = NO;
+        } else {
+            mainStatusView.hidden = YES;
         }
-        mainStatusView.hidden = NO;
+        resultTable.hidden = NO;
         [resultTable reloadData];
     } else {
-        mainStatusView.hidden = YES;
+        resultTable.hidden = YES;
         exportButton.enabled = YES;
     }
 }
@@ -262,7 +295,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 40;
+    return 30;
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -270,7 +303,7 @@
     NSString *cellText;
     if(indexPath.row == 0) {
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-        [dateFormat setDateFormat:@"dd.MM.yyyy HH:mm:ss"];
+        [dateFormat setDateFormat:@"dd.MM.yyyy"];
         cellText = [NSString stringWithFormat:NSLocalizedString(@"DropboxLastExportDate", @""), [dateFormat stringFromDate: recentResult.date]];
     } else if(indexPath.row == 1) {
         cellText = [NSString stringWithFormat:NSLocalizedString(@"DropboxSuccessResult", @""), recentResult.successCount];

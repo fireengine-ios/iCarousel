@@ -29,6 +29,8 @@
 
 @interface SettingsController () {
     UILabel *msisdnLabel;
+    UIImageView *profileImgView;
+    UIImage *updatedImageRef;
 }
 @end
 
@@ -45,6 +47,11 @@
         [self drawSettingsCategories];
         //[self drawImageOptionsArea];
 
+        uploadDao = [[ProfilePhotoUploadDao alloc] init];
+        uploadDao.delegate = self;
+        uploadDao.successMethod = @selector(photoUploadSuccess);
+        uploadDao.failMethod = @selector(photoUploadFail:);
+        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(retouchMsisdn) name:MSISDN_CHANGED_NOTIFICATION object:nil];
     }
     
@@ -68,13 +75,19 @@
     UIImage *profileBgImg = [UIImage imageNamed:@"profile_icon"];
     profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake((profileInfoArea.frame.size.width - imageWidth)/2, (profileInfoArea.frame.size.height - imageWidth)/2 - 20, imageWidth, imageWidth)];
     profileImageView.image = profileBgImg;
+    [profileImageView setUserInteractionEnabled:YES];
     [profileInfoArea addSubview:profileImageView];
 
     if(APPDELEGATE.session.profileImageRef) {
-        UIImageView *profileImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, profileImageView.frame.size.width - 4, profileImageView.frame.size.height - 4)];
+        profileImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, profileImageView.frame.size.width - 4, profileImageView.frame.size.height - 4)];
         profileImgView.image = [Util circularScaleNCrop:APPDELEGATE.session.profileImageRef forRect:CGRectMake(0, 0, profileImageView.frame.size.width - 4, profileImageView.frame.size.width - 4)];
         profileImgView.center = profileImageView.center;
         [profileInfoArea addSubview:profileImgView];
+
+        UITapGestureRecognizer *imageTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapped)];
+        imageTap.enabled = YES;
+        imageTap.numberOfTapsRequired = 1;
+        [profileImageView addGestureRecognizer:imageTap];
     }
     
     /*
@@ -268,23 +281,6 @@
 
 - (void)RemoveButtonAction: (id)sender {
     [self HideImageOptionsArea];
-}
-
-- (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    UIImage *choosenImage = info[UIImagePickerControllerEditedImage];
-    
-    // Resize Image
-    CGSize newSize = CGSizeMake(480, 480);
-    UIGraphicsBeginImageContext(newSize);
-    [choosenImage drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
-    UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    [picker dismissViewControllerAnimated:YES completion:NULL];
-}
-
-- (void) imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -554,6 +550,69 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
+}
+
+- (void) imageTapped {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"ButtonCancel", @"") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"TakePhoto", @""), NSLocalizedString(@"ChooseFromLibrary", @""), nil];
+    [actionSheet showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch(buttonIndex) {
+        case 0: {
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.allowsEditing = YES;
+            picker.delegate = self;
+            picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            [self presentViewController:picker animated:YES completion:nil];
+        }
+            break;
+        case 1: {
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.allowsEditing = YES;
+            picker.delegate = self;
+            picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            [self presentViewController:picker animated:YES completion:nil];
+        }
+        default:
+            break;
+    }
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    UIImage *selectedImage;
+    NSURL *mediaUrl;
+    mediaUrl = (NSURL *)[info valueForKey:UIImagePickerControllerMediaURL];
+    if(mediaUrl == nil) {
+        selectedImage = (UIImage *) [info valueForKey:UIImagePickerControllerEditedImage];
+        if(selectedImage == nil) {
+            selectedImage= (UIImage *) [info valueForKey:UIImagePickerControllerOriginalImage];
+        }
+    }
+    if(selectedImage) {
+        updatedImageRef = selectedImage;
+        [uploadDao requestUploadForImage:selectedImage];
+        [self showLoading];
+    }
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void) photoUploadSuccess {
+    [self hideLoading];
+    [self showInfoAlertWithMessage:NSLocalizedString(@"ProfilePhotoUploadSuccess", @"")];
+
+    APPDELEGATE.session.profileImageRef = updatedImageRef;
+    profileImgView.image = [Util circularScaleNCrop:APPDELEGATE.session.profileImageRef forRect:CGRectMake(0, 0, profileImageView.frame.size.width - 4, profileImageView.frame.size.width - 4)];
+    [[NSNotificationCenter defaultCenter] postNotificationName:PROFILE_IMG_UPLOADED_NOTIFICATION object:nil];
+}
+
+- (void) photoUploadFail:(NSString *) errorMessage {
+    [self hideLoading];
+    [self showErrorAlertWithMessage:errorMessage];
 }
 
 @end

@@ -22,6 +22,8 @@
 - (void) didTriggerPhotos;
 - (void) didTriggerMusic;
 - (void) didTriggerDocs;
+- (void) didTriggerPromotions;
+- (void) didTriggerDropbox;
 - (void) didTriggerLogout;
 - (void) didTriggerLogin;
 - (void) didTriggerCropAndShare;

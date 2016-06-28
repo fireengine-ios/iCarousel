@@ -21,20 +21,20 @@
 - (id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withTitle:(NSString *) titleVal {
     if(self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor clearColor];
         
-        titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, (self.frame.size.height - 20)/2, self.frame.size.width - 20, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:14] withColor:[Util UIColorForHexColor:@"888888"] withText:titleVal];
+        titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, (self.frame.size.height - 20)/2, self.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:14] withColor:[Util UIColorForHexColor:@"888888"] withText:titleVal withAlignment:NSTextAlignmentCenter];
         [self addSubview:titleLabel];
         
         separatorView = [[UIView alloc] initWithFrame:CGRectMake(20, self.frame.size.height-1, self.frame.size.width - 40, 1)];
         separatorView.backgroundColor = [Util UIColorForHexColor:@"DDDDDD"];
-        [self addSubview:separatorView];
+//        [self addSubview:separatorView];
     }
     return self;
 }
 
 - (void) layoutSubviews {
-    titleLabel.frame = CGRectMake(20, (self.frame.size.height - 20)/2, self.frame.size.width - 20, 20);
+    titleLabel.frame = CGRectMake(20, (self.frame.size.height - 20)/2, self.frame.size.width - 40, 20);
     separatorView.frame = CGRectMake(20, self.frame.size.height-1, self.frame.size.width - 40, 1);
 }
 

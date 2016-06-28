@@ -15,6 +15,12 @@
 #import "UIImageView+AFNetworking.h"
 #import "AppUtil.h"
 
+@interface MenuProfileCell() {
+    UIImageView *profileBgView;
+    UIImageView *profileImgView;
+}
+@end
+
 @implementation MenuProfileCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withMetaData:(MetaMenu *) _metaData {
@@ -24,7 +30,7 @@
 
         UIImage *profileBgImg = [UIImage imageNamed:@"profile_icon.png"];
 
-        UIImageView *profileBgView = [[UIImageView alloc] initWithFrame:CGRectMake(15, (60 - profileBgImg.size.height)/2, profileBgImg.size.width, profileBgImg.size.height)];
+        profileBgView = [[UIImageView alloc] initWithFrame:CGRectMake(15, (60 - profileBgImg.size.height)/2, profileBgImg.size.width, profileBgImg.size.height)];
         profileBgView.image = profileBgImg;
         [self addSubview:profileBgView];
 
@@ -36,7 +42,7 @@
             NSData *imageData = UIImageJPEGRepresentation(profileImage, 1);
             [imageData writeToFile:imagePath atomically:YES];
              */
-            UIImageView *profileImgView = [[UIImageView alloc] initWithFrame:CGRectMake(17, (60 - profileBgImg.size.height - 2)/2, profileBgImg.size.width - 4, profileBgImg.size.height - 4)];
+            profileImgView = [[UIImageView alloc] initWithFrame:CGRectMake(17, (60 - profileBgImg.size.height - 2)/2, profileBgImg.size.width - 4, profileBgImg.size.height - 4)];
             profileImgView.image = [Util circularScaleNCrop:profileImage forRect:CGRectMake(0, 0, 44, 44)];
             profileImgView.center = profileBgView.center;
             [self addSubview:profileImgView];
@@ -59,8 +65,14 @@
         
         CustomLabel *nameLabel = [[CustomLabel alloc] initWithFrame:nameFieldRect withFont:nameFont withColor:[Util UIColorForHexColor:@"FFFFFF"] withText:infoFieldVal];
         [self addSubview:nameLabel];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profileImageUpdated) name:PROFILE_IMG_UPLOADED_NOTIFICATION object:nil];
     }
     return self;
+}
+
+- (void) profileImageUpdated {
+    profileImgView.image = [Util circularScaleNCrop:APPDELEGATE.session.profileImageRef forRect:CGRectMake(0, 0, 44, 44)];
 }
 
 - (void)awakeFromNib
