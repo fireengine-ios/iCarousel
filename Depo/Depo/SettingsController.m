@@ -84,10 +84,12 @@
         profileImgView.center = profileImageView.center;
         [profileInfoArea addSubview:profileImgView];
 
+        /*TODO 111
         UITapGestureRecognizer *imageTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapped)];
         imageTap.enabled = YES;
         imageTap.numberOfTapsRequired = 1;
         [profileImageView addGestureRecognizer:imageTap];
+         */
     }
     
     /*
