@@ -27,9 +27,15 @@
 			<array>
 				<string>db-zeddgylajxc1op8</string>
 				<string>akillidepo</string>
+                <string>fb577584232413476</string>
 			</array>
 		</dict>
 	</array>
+    <key>FacebookAppID</key>
+    <string>577584232413476</string>
+    <key>FacebookDisplayName</key>
+    <string>Akıllı Depo</string>
+    
 	<key>CFBundleVersion</key>
 	<string>0.5</string>
 	<key>Fabric</key>
@@ -51,6 +57,9 @@
 		<string>fbapi</string>
 		<string>dbapi-2</string>
 		<string>dbapi-8-emm</string>
+        <string>fb-messenger-api</string>
+        <string>fbauth2</string>
+        <string>fbshareextension</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

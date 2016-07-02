@@ -920,6 +920,13 @@
 		94E7B4B21CB2D12300385016 /* ReachUsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E7B4B11CB2D12300385016 /* ReachUsController.m */; };
 		94EB28BC1CCD142B00A45050 /* SearchByGroupDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94EB28BB1CCD142B00A45050 /* SearchByGroupDao.m */; };
 		94EF279C1C982B460087EFBE /* NoItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94EF279B1C982B460087EFBE /* NoItemView.m */; };
+		94F130C31D2496C10086BDBB /* SettingsSocialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F130C21D2496C10086BDBB /* SettingsSocialController.m */; };
+		94F130C71D2496D40086BDBB /* FacebookController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F130C61D2496D40086BDBB /* FacebookController.m */; };
+		94F130CA1D24970D0086BDBB /* InstagramController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F130C91D24970D0086BDBB /* InstagramController.m */; };
+		94F130CD1D2497460086BDBB /* SocialBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F130CC1D2497460086BDBB /* SocialBaseController.m */; };
+		94F130D11D24DDB10086BDBB /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94F130CE1D24DDB10086BDBB /* FBSDKCoreKit.framework */; };
+		94F130D21D24DDB10086BDBB /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94F130CF1D24DDB10086BDBB /* FBSDKLoginKit.framework */; };
+		94F130D31D24DDB10086BDBB /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94F130D01D24DDB10086BDBB /* FBSDKShareKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -2247,6 +2254,17 @@
 		94EB28BB1CCD142B00A45050 /* SearchByGroupDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchByGroupDao.m; sourceTree = "<group>"; };
 		94EF279A1C982B460087EFBE /* NoItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoItemView.h; sourceTree = "<group>"; };
 		94EF279B1C982B460087EFBE /* NoItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoItemView.m; sourceTree = "<group>"; };
+		94F130C11D2496C10086BDBB /* SettingsSocialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsSocialController.h; sourceTree = "<group>"; };
+		94F130C21D2496C10086BDBB /* SettingsSocialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsSocialController.m; sourceTree = "<group>"; };
+		94F130C51D2496D40086BDBB /* FacebookController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookController.h; sourceTree = "<group>"; };
+		94F130C61D2496D40086BDBB /* FacebookController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookController.m; sourceTree = "<group>"; };
+		94F130C81D24970D0086BDBB /* InstagramController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstagramController.h; sourceTree = "<group>"; };
+		94F130C91D24970D0086BDBB /* InstagramController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramController.m; sourceTree = "<group>"; };
+		94F130CB1D2497460086BDBB /* SocialBaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialBaseController.h; sourceTree = "<group>"; };
+		94F130CC1D2497460086BDBB /* SocialBaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialBaseController.m; sourceTree = "<group>"; };
+		94F130CE1D24DDB10086BDBB /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		94F130CF1D24DDB10086BDBB /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		94F130D01D24DDB10086BDBB /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2254,6 +2272,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94F130D11D24DDB10086BDBB /* FBSDKCoreKit.framework in Frameworks */,
+				94F130D21D24DDB10086BDBB /* FBSDKLoginKit.framework in Frameworks */,
+				94F130D31D24DDB10086BDBB /* FBSDKShareKit.framework in Frameworks */,
 				94E548FD1CC624ED003CB5DC /* DropboxSDK.framework in Frameworks */,
 				94B9D22A1CA86C4300FC28F2 /* libMPush.a in Frameworks */,
 				05033BE11C24B22900FA2E5C /* StoreKit.framework in Frameworks */,
@@ -2351,6 +2372,9 @@
 		051E1DF519CAC2F900FD1E03 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				94F130CE1D24DDB10086BDBB /* FBSDKCoreKit.framework */,
+				94F130CF1D24DDB10086BDBB /* FBSDKLoginKit.framework */,
+				94F130D01D24DDB10086BDBB /* FBSDKShareKit.framework */,
 				94E548FC1CC624ED003CB5DC /* DropboxSDK.framework */,
 				05033BE01C24B22900FA2E5C /* StoreKit.framework */,
 				05F931891C160E7000858223 /* LocalAuthentication.framework */,
@@ -3099,6 +3123,7 @@
 		052160AA19E31AA70007B321 /* profile */ = {
 			isa = PBXGroup;
 			children = (
+				94F130C41D2496C70086BDBB /* social */,
 				059A46E41A6D3F4800935023 /* SettingsAboutUsController.h */,
 				059A46E51A6D3F4800935023 /* SettingsAboutUsController.m */,
 				052644A119D5A2A600B63759 /* SettingsBaseViewController.h */,
@@ -3131,6 +3156,8 @@
 				94884CA91C91A469006722F7 /* UpdateMsisdnController.m */,
 				94E549071CC63718003CB5DC /* DropboxExportController.h */,
 				94E549081CC63718003CB5DC /* DropboxExportController.m */,
+				94F130C11D2496C10086BDBB /* SettingsSocialController.h */,
+				94F130C21D2496C10086BDBB /* SettingsSocialController.m */,
 			);
 			name = profile;
 			sourceTree = "<group>";
@@ -3909,6 +3936,19 @@
 			path = CurioSDK;
 			sourceTree = "<group>";
 		};
+		94F130C41D2496C70086BDBB /* social */ = {
+			isa = PBXGroup;
+			children = (
+				94F130C51D2496D40086BDBB /* FacebookController.h */,
+				94F130C61D2496D40086BDBB /* FacebookController.m */,
+				94F130C81D24970D0086BDBB /* InstagramController.h */,
+				94F130C91D24970D0086BDBB /* InstagramController.m */,
+				94F130CB1D2497460086BDBB /* SocialBaseController.h */,
+				94F130CC1D2497460086BDBB /* SocialBaseController.m */,
+			);
+			name = social;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -4627,6 +4667,7 @@
 				94E549031CC6348E003CB5DC /* DropboxStartDao.m in Sources */,
 				058337D919ED9C1600DCF0C5 /* CustomAVPlayer.m in Sources */,
 				05B01D9C1AC2E2D000D5B827 /* NSDate+Utilities.m in Sources */,
+				94F130C31D2496C10086BDBB /* SettingsSocialController.m in Sources */,
 				0526444819D546BB00B63759 /* MapUtil.m in Sources */,
 				05DEB1F11A81775F007793DD /* SyncSettings.m in Sources */,
 				0514A6291BF4D1030084E0AB /* BaseBgController.m in Sources */,
@@ -4659,6 +4700,7 @@
 				94E7B4B21CB2D12300385016 /* ReachUsController.m in Sources */,
 				057DF50B19D04EDF0005A389 /* RequestBaseUrlDao.m in Sources */,
 				9445B97B1C9F28D2000FDB80 /* FileListPopupController.m in Sources */,
+				94F130C71D2496D40086BDBB /* FacebookController.m in Sources */,
 				0555EF1D19F91ACA0068F4CC /* SimpleButton.m in Sources */,
 				051E1EAE19CB20D500FD1E03 /* MenuSearchCell.m in Sources */,
 				058219CE1A384D75001FA679 /* TableHeaderView.m in Sources */,
@@ -4712,6 +4754,7 @@
 				059CE54A1A87DC5300F6CFAE /* ContactSyncResultCell.m in Sources */,
 				052644AE19D5A2A600B63759 /* SettingsPhotosVideosController.m in Sources */,
 				051E1E3919CAC85100FD1E03 /* BaseDao.m in Sources */,
+				94F130CA1D24970D0086BDBB /* InstagramController.m in Sources */,
 				05F28BE61C0739C30002171A /* CurioDBToolkit.m in Sources */,
 				056AC8FE19D15EA200AC96C3 /* CacheUtil.m in Sources */,
 				24B268BB1BCE7A8600FA8E58 /* BgViewController.m in Sources */,
@@ -4852,6 +4895,7 @@
 				05C7CB6A1ABC91B200A7BF8E /* MetaFileSummary.m in Sources */,
 				051E1EA719CB209F00FD1E03 /* MenuCell.m in Sources */,
 				051E1E0319CAC2F900FD1E03 /* main.m in Sources */,
+				94F130CD1D2497460086BDBB /* SocialBaseController.m in Sources */,
 				051DE36C19CC130A00F27C85 /* LoginTextfield.m in Sources */,
 				94328BE01CC3E0B900599CEE /* TutorialView.m in Sources */,
 				0551CE161A2B3E9700DB117D /* HomeUsageView.m in Sources */,

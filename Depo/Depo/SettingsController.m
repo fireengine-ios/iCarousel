@@ -26,6 +26,7 @@
 #import "MPush.h"
 #import "DropboxExportController.h"
 #import "EmailChangeController.h"
+#import "SettingsSocialController.h"
 
 @interface SettingsController () {
     UILabel *msisdnLabel;
@@ -358,14 +359,20 @@
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         return cell;
     } else if (indexPath.row == 4) {
+//        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"ExportFromDropbox", @"") titleColor:nil subTitleText:@"" iconName:@"icon_dbtasi" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"ExportFromDropbox", @"") titleColor:nil subTitleText:@"" iconName:@"nav_download_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         return cell;
     } else if (indexPath.row == 5) {
+//        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"SocialMediaTitle", @"") titleColor:nil subTitleText:@"" iconName:@"nav_download_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"FAQ", @"") titleColor:nil subTitleText:@"" iconName:@"help_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         return cell;
     } else if (indexPath.row == 6) {
+//        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"FAQ", @"") titleColor:nil subTitleText:@"" iconName:@"help_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
+//        cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+//        return cell;
+//    } else if (indexPath.row == 7) {
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"Mail Logs" titleColor:nil subTitleText:@"" iconName:@"help_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         return cell;
@@ -395,9 +402,13 @@
             [self didTriggerExportFromDropbox];
             break;
         case 5:
+//            [self didTriggerExportFromSocial];
             [self didTriggerHelp];
             break;
         case 6:
+//            [self didTriggerHelp];
+//            break;
+//        case 7:
             [self triggerMailLog];
             break;
         default:
@@ -522,6 +533,12 @@
     DropboxExportController *dbController = [[DropboxExportController alloc] init];
     dbController.nav = self.nav;
     [self.nav pushViewController:dbController animated:YES];
+}
+
+- (void) didTriggerExportFromSocial {
+    SettingsSocialController *socialController = [[SettingsSocialController alloc] init];
+    socialController.nav = self.nav;
+    [self.nav pushViewController:socialController animated:YES];
 }
 
 - (void) didTriggerHelp {

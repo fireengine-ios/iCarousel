@@ -31,8 +31,8 @@
             SBJSON *jsonParser = [SBJSON new];
             NSDictionary *dict = [jsonParser objectWithString:responseStr];
             if(dict != nil && [dict isKindOfClass:[NSDictionary class]]) {
-                NSNumber *errorCode = [dict objectForKey:@"errorCode"];
-                if(errorCode != nil && [errorCode intValue] == 0) {
+                NSString *status = [dict objectForKey:@"status"];
+                if(status != nil && [status isEqualToString:@"OK"]) {
                     [self shouldReturnSuccess];
                     return;
                 } else {

@@ -50,6 +50,7 @@
             result.skippedCount = [self longByNumber:skippedCount];
             result.totalSize = [self longByNumber:totalSize];
             
+            result.status = DropboxExportStatusFinished;
             if(status) {
                 if([status isEqualToString:@"PENDING"]) {
                     result.status = DropboxExportStatusPending;

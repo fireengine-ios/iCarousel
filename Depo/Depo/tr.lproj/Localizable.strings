@@ -730,3 +730,6 @@
 "PromoCodeEntrance"="Promosyon Kod Girişi";
 "PromoSuccess"="Promosyon kodunuz onaylandığında Paketler ekranında yeni paketinizi görebilirsiniz.";
 "PromoError"="Lütfen promosyon kodunuzu kontrol edin";
+"SocialMediaTitle"="Sosyal Medya Entegrasyonu";
+"FacebookExportTitle"="Facebook'tan Taşı";
+"InstagramExportTitle"="Instagram'dan Taşı";

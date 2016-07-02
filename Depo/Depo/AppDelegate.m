@@ -57,6 +57,7 @@
 
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 //TODO info'larda version update
 
@@ -783,7 +784,7 @@ void uncaughtExceptionHandler(NSException *exception) {
         }
         return YES;
     }
-    return NO;
+    return [[FBSDKApplicationDelegate sharedInstance] application:app openURL:url sourceApplication:source annotation:annotation];
 }
 
 @end

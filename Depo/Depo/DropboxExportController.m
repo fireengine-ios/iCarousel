@@ -304,7 +304,7 @@
     if(indexPath.row == 0) {
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
         [dateFormat setDateFormat:@"dd.MM.yyyy"];
-        cellText = [NSString stringWithFormat:NSLocalizedString(@"DropboxLastExportDate", @""), [dateFormat stringFromDate: recentResult.date]];
+        cellText = [NSString stringWithFormat:NSLocalizedString(@"DropboxLastExportDate", @""),recentResult.date ? [dateFormat stringFromDate: recentResult.date] : @"-"];
     } else if(indexPath.row == 1) {
         cellText = [NSString stringWithFormat:NSLocalizedString(@"DropboxSuccessResult", @""), recentResult.successCount];
     } else if(indexPath.row == 2) {
