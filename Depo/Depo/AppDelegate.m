@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "CustomAlertView.h"
 #import "CustomConfirmView.h"
+#import "CustomEntryPopupView.h"
 #import "MyViewController.h"
 #import "MyNavigationController.h"
 #import "BaseViewController.h"
@@ -490,6 +491,11 @@
 - (void) showCustomConfirm:(CustomConfirmView *) alertView {
     [self.window addSubview:alertView];
     [self.window bringSubviewToFront:alertView];
+}
+
+- (void) showCustomEntryPopup:(CustomEntryPopupView *) entryView {
+    [self.window addSubview:entryView];
+    [self.window bringSubviewToFront:entryView];
 }
 
 - (void) showMainLoading {

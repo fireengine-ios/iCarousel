@@ -93,14 +93,12 @@
     mainTable.tableHeaderView = dummyView;
     mainTable.contentInset = UIEdgeInsetsMake(-dummyViewHeight, 0, 0, 0);
 
-    /* TODO 111
     UIView *tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 80)];
     CustomButton *promoButton = [[CustomButton alloc] initWithFrame:CGRectMake(20, 10, tableFooterView.frame.size.width - 40, 60) withImageName:@"buttonbg_yellow.png" withTitle:NSLocalizedString(@"PromoCodeEntrance", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withColor:[Util UIColorForHexColor:@"363e4f"]];
     [promoButton addTarget:self action:@selector(triggerPromo) forControlEvents:UIControlEventTouchUpInside];
     [tableFooterView addSubview:promoButton];
     
     mainTable.tableFooterView = tableFooterView;
-     */
 
     if(APPDELEGATE.session.user.accountType == AccountTypeOther) {
         CustomButton *restoreButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 18, 18) withImageName:@"icon_verif_refresh.png"];

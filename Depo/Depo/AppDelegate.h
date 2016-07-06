@@ -17,6 +17,7 @@
 
 @class CustomAlertView;
 @class CustomConfirmView;
+@class CustomEntryPopupView;
 @class BaseViewController;
 @class MyNavigationController;
 @class MyViewController;
@@ -40,6 +41,7 @@
 
 - (void) showCustomAlert:(CustomAlertView *) alertView;
 - (void) showCustomConfirm:(CustomConfirmView *) alertView;
+- (void) showCustomEntryPopup:(CustomEntryPopupView *) entryView;
 - (void) triggerPostTermsAndMigration;
 - (void) triggerLogin;
 - (void) triggerPostLogin;

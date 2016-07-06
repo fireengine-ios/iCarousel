@@ -22,6 +22,8 @@
 #import "UploadingImagePreviewController.h"
 #import "AppConstants.h"
 #import "MPush.h"
+#import "SelectiblePhotoListModalController.h"
+#import "Story.h"
 
 #define IMG_FOOTER_TAG 111
 #define ALBUM_FOOTER_TAG 222
@@ -701,7 +703,7 @@
 - (void) moreClicked {
     if(segmentType == PhotoHeaderSegmentTypePhoto) {
         if(self.level == ImageGroupLevelDay) {
-            [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeSortWithList],[NSNumber numberWithInt:MoreMenuTypeSelect]]];
+            [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeSortWithList],[NSNumber numberWithInt:MoreMenuTypeSelect]/*, [NSNumber numberWithInt:MoreMenuTypeVideofy]*/]];
         } else {
             [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeSortWithList]]];
         }
@@ -716,6 +718,21 @@
     } else {
         [APPDELEGATE.base showSortWithList:[NSArray arrayWithObjects:[NSNumber numberWithInt:SortTypeDateAsc], [NSNumber numberWithInt:SortTypeDateDesc], nil]];
     }
+}
+
+- (void) moreMenuDidSelectVideofy {
+    NSLog(@"moreMenuDidSelectVideofy called");
+    CustomEntryPopupView *entryPopup = [[CustomEntryPopupView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"CreateName", @"") withButtonTitle:NSLocalizedString(@"Save", @"")];
+    entryPopup.delegate = self;
+    [APPDELEGATE showCustomEntryPopup:entryPopup];
+}
+
+- (void) customEntryDidDismissWithValue:(NSString *)val {
+    Story *rawStory = [[Story alloc] init];
+    rawStory.title = val;
+    SelectiblePhotoListModalController *modalController = [[SelectiblePhotoListModalController alloc] initWithStory:rawStory];
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:modalController];
+    [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
 }
 
 - (void) sortDidChange {

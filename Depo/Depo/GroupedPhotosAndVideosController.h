@@ -26,8 +26,9 @@
 #import "NoItemCell.h"
 #import "NoItemView.h"
 #import "GroupedPhotosCell.h"
+#import "CustomEntryPopupView.h"
 
-@interface GroupedPhotosAndVideosController : MyViewController <PhotoHeaderSegmentDelegate, SquareImageDelegate, UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate, FooterActionsDelegate, ImagePreviewDelegate, VideoPreviewDelegate, PhotoAlbumDelegate, GroupedPhotosCellDelegate> {
+@interface GroupedPhotosAndVideosController : MyViewController <PhotoHeaderSegmentDelegate, SquareImageDelegate, UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate, FooterActionsDelegate, ImagePreviewDelegate, VideoPreviewDelegate, PhotoAlbumDelegate, GroupedPhotosCellDelegate, CustomEntryPopupDelegate> {
 
     SearchByGroupDao *groupDao;
     AlbumListDao *albumListDao;

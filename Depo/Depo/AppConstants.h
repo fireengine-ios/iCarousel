@@ -336,6 +336,7 @@ typedef enum {
     MoreMenuTypeSort = 0,
     MoreMenuTypeSortWithList,
     MoreMenuTypeSelect,
+    MoreMenuTypeVideofy,
     MoreMenuTypeFileDetail,
     MoreMenuTypeFolderDetail,
     MoreMenuTypeAlbumDetail,

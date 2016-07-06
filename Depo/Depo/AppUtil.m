@@ -47,7 +47,7 @@
     dropboxMenu.title = NSLocalizedString(@"ExportFromDropbox", @"");
     dropboxMenu.iconName = @"icon_menu_dbtasi_w.png";
     dropboxMenu.selectedIconName = @"icon_menu_dbtasi_w.png";
-//TODO 111    [result addObject:dropboxMenu];
+    [result addObject:dropboxMenu];
 
     MetaMenu *fileMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeFiles];
     fileMenu.title = NSLocalizedString(@"MenuFiles", @"");
@@ -240,6 +240,9 @@
         case MoreMenuTypeSelect:
             iconName = @"nav_select_icon.png";
             break;
+        case MoreMenuTypeVideofy:
+            iconName = @"icon_createstory.png";
+            break;
         case MoreMenuTypeFileDetail:
         case MoreMenuTypeFolderDetail:
         case MoreMenuTypeAlbumDetail:
@@ -279,6 +282,9 @@
             break;
         case MoreMenuTypeSelect:
             title = NSLocalizedString(@"MoreMenuSelectTitle", @"");
+            break;
+        case MoreMenuTypeVideofy:
+            title = NSLocalizedString(@"MoreMenuVideofyTitle", @"");
             break;
         case MoreMenuTypeFolderDetail:
             title = NSLocalizedString(@"MoreMenuDetailFolderTitle", @"");

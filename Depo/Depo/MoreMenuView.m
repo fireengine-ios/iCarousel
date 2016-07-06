@@ -142,6 +142,9 @@
         case MoreMenuTypeMusicDetail:
             [delegate moreMenuDidSelectMusicDetail];
             break;
+        case MoreMenuTypeVideofy:
+            [delegate moreMenuDidSelectVideofy];
+            break;
         default:
             break;
     }

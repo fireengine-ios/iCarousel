@@ -23,6 +23,7 @@
 - (void) moreMenuDidSelectDownloadImage;
 - (void) moreMenuDidDismiss;
 - (void) moreMenuDidSelectMusicDetail;
+- (void) moreMenuDidSelectVideofy;
 @end
 
 @interface MoreMenuView : UIView <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
