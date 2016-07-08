@@ -7,7 +7,10 @@
 //
 
 #import "BaseDao.h"
+#import "VideofyAudio.h"
 
 @interface VideofyAudioListDao : BaseDao
+
+- (void) requestAudioList;
 
 @end

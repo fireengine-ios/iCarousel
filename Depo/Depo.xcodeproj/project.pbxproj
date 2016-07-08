@@ -944,6 +944,31 @@
 		94F130D11D24DDB10086BDBB /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94F130CE1D24DDB10086BDBB /* FBSDKCoreKit.framework */; };
 		94F130D21D24DDB10086BDBB /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94F130CF1D24DDB10086BDBB /* FBSDKLoginKit.framework */; };
 		94F130D31D24DDB10086BDBB /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94F130D01D24DDB10086BDBB /* FBSDKShareKit.framework */; };
+		94FAE0B11D2F119300BC9F77 /* VideofyFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94FAE0B01D2F119300BC9F77 /* VideofyFooterView.m */; };
+		94FAE0B41D2F11A400BC9F77 /* VideofyMusicListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94FAE0B31D2F11A400BC9F77 /* VideofyMusicListController.m */; };
+		94FAE0B61D2F1B3400BC9F77 /* icon_bottom_addmusic.png in Resources */ = {isa = PBXBuildFile; fileRef = 94FAE0B51D2F1B3400BC9F77 /* icon_bottom_addmusic.png */; };
+		94FAE0B81D2F1B3D00BC9F77 /* icon_bottom_addmusic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94FAE0B71D2F1B3D00BC9F77 /* icon_bottom_addmusic@2x.png */; };
+		94FAE0BA1D2F1B4400BC9F77 /* icon_bottom_addmusic@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94FAE0B91D2F1B4300BC9F77 /* icon_bottom_addmusic@3x.png */; };
+		94FAE0BD1D2F1F1800BC9F77 /* VideofyAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = 94FAE0BC1D2F1F1800BC9F77 /* VideofyAudio.m */; };
+		94FAE0C01D2F22EB00BC9F77 /* VideofyAudioCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94FAE0BF1D2F22EB00BC9F77 /* VideofyAudioCell.m */; };
+		94FAE0C31D2F2B4300BC9F77 /* VideofyFinalInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94FAE0C21D2F2B4300BC9F77 /* VideofyFinalInfoController.m */; };
+		94FAE0C61D2F2BAA00BC9F77 /* FBPermissionDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94FAE0C51D2F2BAA00BC9F77 /* FBPermissionDao.m */; };
+		94FAE0C91D2F6EC500BC9F77 /* FBConnectDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94FAE0C81D2F6EC500BC9F77 /* FBConnectDao.m */; };
+		94FAE0CC1D2F6ED200BC9F77 /* FBStartDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94FAE0CB1D2F6ED200BC9F77 /* FBStartDao.m */; };
+		94FAE0CF1D2F6EDF00BC9F77 /* FBStatusDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94FAE0CE1D2F6EDF00BC9F77 /* FBStatusDao.m */; };
+		94FAE0D21D2F772B00BC9F77 /* SocialExportResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 94FAE0D11D2F772B00BC9F77 /* SocialExportResult.m */; };
+		94FAE0D71D2F7E5500BC9F77 /* icon_list_circle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94FAE0D31D2F7E5500BC9F77 /* icon_list_circle@2x.png */; };
+		94FAE0D81D2F7E5500BC9F77 /* icon_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94FAE0D41D2F7E5500BC9F77 /* icon_select@2x.png */; };
+		94FAE0D91D2F7E5500BC9F77 /* minibutton_pause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94FAE0D51D2F7E5500BC9F77 /* minibutton_pause@2x.png */; };
+		94FAE0DA1D2F7E5500BC9F77 /* minibutton_play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94FAE0D61D2F7E5500BC9F77 /* minibutton_play@2x.png */; };
+		94FAE0DF1D2F7E6300BC9F77 /* icon_list_circle@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94FAE0DB1D2F7E6300BC9F77 /* icon_list_circle@3x.png */; };
+		94FAE0E01D2F7E6300BC9F77 /* icon_select@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94FAE0DC1D2F7E6300BC9F77 /* icon_select@3x.png */; };
+		94FAE0E11D2F7E6300BC9F77 /* minibutton_pause@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94FAE0DD1D2F7E6300BC9F77 /* minibutton_pause@3x.png */; };
+		94FAE0E21D2F7E6300BC9F77 /* minibutton_play@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94FAE0DE1D2F7E6300BC9F77 /* minibutton_play@3x.png */; };
+		94FAE0E71D2F7E7800BC9F77 /* icon_list_circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 94FAE0E31D2F7E7800BC9F77 /* icon_list_circle.png */; };
+		94FAE0E81D2F7E7800BC9F77 /* icon_select.png in Resources */ = {isa = PBXBuildFile; fileRef = 94FAE0E41D2F7E7800BC9F77 /* icon_select.png */; };
+		94FAE0E91D2F7E7800BC9F77 /* minibutton_pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 94FAE0E51D2F7E7800BC9F77 /* minibutton_pause.png */; };
+		94FAE0EA1D2F7E7800BC9F77 /* minibutton_play.png in Resources */ = {isa = PBXBuildFile; fileRef = 94FAE0E61D2F7E7800BC9F77 /* minibutton_play.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -2304,6 +2329,41 @@
 		94F130CE1D24DDB10086BDBB /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		94F130CF1D24DDB10086BDBB /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		94F130D01D24DDB10086BDBB /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		94FAE0AF1D2F119300BC9F77 /* VideofyFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideofyFooterView.h; sourceTree = "<group>"; };
+		94FAE0B01D2F119300BC9F77 /* VideofyFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideofyFooterView.m; sourceTree = "<group>"; };
+		94FAE0B21D2F11A400BC9F77 /* VideofyMusicListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideofyMusicListController.h; sourceTree = "<group>"; };
+		94FAE0B31D2F11A400BC9F77 /* VideofyMusicListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideofyMusicListController.m; sourceTree = "<group>"; };
+		94FAE0B51D2F1B3400BC9F77 /* icon_bottom_addmusic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_bottom_addmusic.png; sourceTree = "<group>"; };
+		94FAE0B71D2F1B3D00BC9F77 /* icon_bottom_addmusic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_bottom_addmusic@2x.png"; sourceTree = "<group>"; };
+		94FAE0B91D2F1B4300BC9F77 /* icon_bottom_addmusic@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_bottom_addmusic@3x.png"; sourceTree = "<group>"; };
+		94FAE0BB1D2F1F1800BC9F77 /* VideofyAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideofyAudio.h; sourceTree = "<group>"; };
+		94FAE0BC1D2F1F1800BC9F77 /* VideofyAudio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideofyAudio.m; sourceTree = "<group>"; };
+		94FAE0BE1D2F22EB00BC9F77 /* VideofyAudioCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideofyAudioCell.h; sourceTree = "<group>"; };
+		94FAE0BF1D2F22EB00BC9F77 /* VideofyAudioCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideofyAudioCell.m; sourceTree = "<group>"; };
+		94FAE0C11D2F2B4300BC9F77 /* VideofyFinalInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideofyFinalInfoController.h; sourceTree = "<group>"; };
+		94FAE0C21D2F2B4300BC9F77 /* VideofyFinalInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideofyFinalInfoController.m; sourceTree = "<group>"; };
+		94FAE0C41D2F2BAA00BC9F77 /* FBPermissionDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBPermissionDao.h; sourceTree = "<group>"; };
+		94FAE0C51D2F2BAA00BC9F77 /* FBPermissionDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBPermissionDao.m; sourceTree = "<group>"; };
+		94FAE0C71D2F6EC500BC9F77 /* FBConnectDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBConnectDao.h; sourceTree = "<group>"; };
+		94FAE0C81D2F6EC500BC9F77 /* FBConnectDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBConnectDao.m; sourceTree = "<group>"; };
+		94FAE0CA1D2F6ED200BC9F77 /* FBStartDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBStartDao.h; sourceTree = "<group>"; };
+		94FAE0CB1D2F6ED200BC9F77 /* FBStartDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBStartDao.m; sourceTree = "<group>"; };
+		94FAE0CD1D2F6EDF00BC9F77 /* FBStatusDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBStatusDao.h; sourceTree = "<group>"; };
+		94FAE0CE1D2F6EDF00BC9F77 /* FBStatusDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBStatusDao.m; sourceTree = "<group>"; };
+		94FAE0D01D2F772B00BC9F77 /* SocialExportResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialExportResult.h; sourceTree = "<group>"; };
+		94FAE0D11D2F772B00BC9F77 /* SocialExportResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialExportResult.m; sourceTree = "<group>"; };
+		94FAE0D31D2F7E5500BC9F77 /* icon_list_circle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_list_circle@2x.png"; sourceTree = "<group>"; };
+		94FAE0D41D2F7E5500BC9F77 /* icon_select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_select@2x.png"; sourceTree = "<group>"; };
+		94FAE0D51D2F7E5500BC9F77 /* minibutton_pause@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "minibutton_pause@2x.png"; sourceTree = "<group>"; };
+		94FAE0D61D2F7E5500BC9F77 /* minibutton_play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "minibutton_play@2x.png"; sourceTree = "<group>"; };
+		94FAE0DB1D2F7E6300BC9F77 /* icon_list_circle@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_list_circle@3x.png"; sourceTree = "<group>"; };
+		94FAE0DC1D2F7E6300BC9F77 /* icon_select@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_select@3x.png"; sourceTree = "<group>"; };
+		94FAE0DD1D2F7E6300BC9F77 /* minibutton_pause@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "minibutton_pause@3x.png"; sourceTree = "<group>"; };
+		94FAE0DE1D2F7E6300BC9F77 /* minibutton_play@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "minibutton_play@3x.png"; sourceTree = "<group>"; };
+		94FAE0E31D2F7E7800BC9F77 /* icon_list_circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_list_circle.png; sourceTree = "<group>"; };
+		94FAE0E41D2F7E7800BC9F77 /* icon_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_select.png; sourceTree = "<group>"; };
+		94FAE0E51D2F7E7800BC9F77 /* minibutton_pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = minibutton_pause.png; sourceTree = "<group>"; };
+		94FAE0E61D2F7E7800BC9F77 /* minibutton_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = minibutton_play.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2645,6 +2705,10 @@
 				94C7CEE71D2C42C50040897A /* SelectiblePhotoListModalController.m */,
 				94C7CEF81D2CE1510040897A /* ArrangeSelectedPhotosModalController.h */,
 				94C7CEF91D2CE1510040897A /* ArrangeSelectedPhotosModalController.m */,
+				94FAE0B21D2F11A400BC9F77 /* VideofyMusicListController.h */,
+				94FAE0B31D2F11A400BC9F77 /* VideofyMusicListController.m */,
+				94FAE0C11D2F2B4300BC9F77 /* VideofyFinalInfoController.h */,
+				94FAE0C21D2F2B4300BC9F77 /* VideofyFinalInfoController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -2724,6 +2788,10 @@
 				94328BDF1CC3E0B900599CEE /* TutorialView.m */,
 				94C7CEFB1D2CE67E0040897A /* SquareSequencedPictureView.h */,
 				94C7CEFC1D2CE67E0040897A /* SquareSequencedPictureView.m */,
+				94FAE0AF1D2F119300BC9F77 /* VideofyFooterView.h */,
+				94FAE0B01D2F119300BC9F77 /* VideofyFooterView.m */,
+				94FAE0BE1D2F22EB00BC9F77 /* VideofyAudioCell.h */,
+				94FAE0BF1D2F22EB00BC9F77 /* VideofyAudioCell.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -2879,6 +2947,14 @@
 				9433BD011D21DF6C00991483 /* VideofyCreateDao.m */,
 				9433BD031D21DF9300991483 /* VideofyAudioListDao.h */,
 				9433BD041D21DF9300991483 /* VideofyAudioListDao.m */,
+				94FAE0C41D2F2BAA00BC9F77 /* FBPermissionDao.h */,
+				94FAE0C51D2F2BAA00BC9F77 /* FBPermissionDao.m */,
+				94FAE0C71D2F6EC500BC9F77 /* FBConnectDao.h */,
+				94FAE0C81D2F6EC500BC9F77 /* FBConnectDao.m */,
+				94FAE0CA1D2F6ED200BC9F77 /* FBStartDao.h */,
+				94FAE0CB1D2F6ED200BC9F77 /* FBStartDao.m */,
+				94FAE0CD1D2F6EDF00BC9F77 /* FBStatusDao.h */,
+				94FAE0CE1D2F6EDF00BC9F77 /* FBStatusDao.m */,
 			);
 			name = http;
 			sourceTree = "<group>";
@@ -2936,6 +3012,10 @@
 				9436AB311CCEB694001E0594 /* FileInfoGroup.m */,
 				94C7CEF51D2C49190040897A /* Story.h */,
 				94C7CEF61D2C49190040897A /* Story.m */,
+				94FAE0BB1D2F1F1800BC9F77 /* VideofyAudio.h */,
+				94FAE0BC1D2F1F1800BC9F77 /* VideofyAudio.m */,
+				94FAE0D01D2F772B00BC9F77 /* SocialExportResult.h */,
+				94FAE0D11D2F772B00BC9F77 /* SocialExportResult.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -3272,6 +3352,9 @@
 				94328BD71CC3E03C00599CEE /* img_baski_2.jpg */,
 				94328BD31CC3E03300599CEE /* img_baski_2@2x.jpg */,
 				94328BDB1CC3E04400599CEE /* img_baski_2@3x.jpg */,
+				94FAE0B51D2F1B3400BC9F77 /* icon_bottom_addmusic.png */,
+				94FAE0B71D2F1B3D00BC9F77 /* icon_bottom_addmusic@2x.png */,
+				94FAE0B91D2F1B4300BC9F77 /* icon_bottom_addmusic@3x.png */,
 				94C7CEFE1D2CE8300040897A /* overlay_grid_blank.png */,
 				94C7CF001D2CE83A0040897A /* overlay_grid_blank@2x.png */,
 				94C7CF021D2CE8410040897A /* overlay_grid_blank@3x.png */,
@@ -3302,6 +3385,18 @@
 				94E5492A1CC6BA43003CB5DC /* icon_dialog_success@3x.png */,
 				94E5492B1CC6BA43003CB5DC /* icon_menu_bizeulasin_w@3x.png */,
 				94E5492C1CC6BA43003CB5DC /* icon_menu_bizeulasin@3x.png */,
+				94FAE0E31D2F7E7800BC9F77 /* icon_list_circle.png */,
+				94FAE0E41D2F7E7800BC9F77 /* icon_select.png */,
+				94FAE0E51D2F7E7800BC9F77 /* minibutton_pause.png */,
+				94FAE0E61D2F7E7800BC9F77 /* minibutton_play.png */,
+				94FAE0DB1D2F7E6300BC9F77 /* icon_list_circle@3x.png */,
+				94FAE0DC1D2F7E6300BC9F77 /* icon_select@3x.png */,
+				94FAE0DD1D2F7E6300BC9F77 /* minibutton_pause@3x.png */,
+				94FAE0DE1D2F7E6300BC9F77 /* minibutton_play@3x.png */,
+				94FAE0D31D2F7E5500BC9F77 /* icon_list_circle@2x.png */,
+				94FAE0D41D2F7E5500BC9F77 /* icon_select@2x.png */,
+				94FAE0D51D2F7E5500BC9F77 /* minibutton_pause@2x.png */,
+				94FAE0D61D2F7E5500BC9F77 /* minibutton_play@2x.png */,
 				94E5492D1CC6BA43003CB5DC /* icon_select_off@3x.png */,
 				94E5492E1CC6BA43003CB5DC /* icon_select_on@3x.png */,
 				94E5492F1CC6BA43003CB5DC /* icon_suggestion@3x.png */,
@@ -4170,12 +4265,14 @@
 				059C04691A8521C5007B18BE /* contact_sync_icon@2x.png in Resources */,
 				058337F319EDA02C00DCF0C5 /* bttn-video-expend@2x.png in Resources */,
 				050A7B1919F7CBB600B084B9 /* volume_mute.png in Resources */,
+				94FAE0E91D2F7E7800BC9F77 /* minibutton_pause.png in Resources */,
 				94884C901C90AFC3006722F7 /* buttonbg_yellow.png in Resources */,
 				0589066319CC524900A9E517 /* TurkcellSaturaReg.ttf in Resources */,
 				05994F971A0B57080081F000 /* music_backward.png in Resources */,
 				94E549351CC6BA43003CB5DC /* icon_select_on@3x.png in Resources */,
 				94884C941C90AFCC006722F7 /* buttonbg_yellow@2x.png in Resources */,
 				051CB3F419D2F71200E5FC88 /* dummy_profilePhoto.png in Resources */,
+				94FAE0E81D2F7E7800BC9F77 /* icon_select.png in Resources */,
 				0589066419CC524900A9E517 /* TurkcellSaturaMedIta.ttf in Resources */,
 				051CB41119D2F71200E5FC88 /* check_unchecked_icon@2x.png in Resources */,
 				0526447A19D5A26400B63759 /* toggle_on@2x.png in Resources */,
@@ -4213,6 +4310,7 @@
 				05A9382E1AF6AE9100AE2892 /* updater_strings.plist in Resources */,
 				057C9D881A2B8D68001DDDEC /* music_next.png in Resources */,
 				050A7B2019F7CBB600B084B9 /* volume_level@2x.png in Resources */,
+				94FAE0D81D2F7E5500BC9F77 /* icon_select@2x.png in Resources */,
 				058BC22F1A308ACB0007F4DE /* video_tour@2x.png in Resources */,
 				05F178451BFBB4A70014B2BD /* cropy.png in Resources */,
 				05C6C7181B3C212A00CB6CE5 /* siyah_bg@2x.png in Resources */,
@@ -4241,11 +4339,13 @@
 				057C9D871A2B8D68001DDDEC /* music_prev.png in Resources */,
 				05224AB919DC4A2D00214767 /* selectAll_checkbox@2x.png in Resources */,
 				0589066619CC524900A9E517 /* TurkcellSaturaIta.ttf in Resources */,
+				94FAE0BA1D2F1B4400BC9F77 /* icon_bottom_addmusic@3x.png in Resources */,
 				0589066719CC524900A9E517 /* TurkcellSaturaDemIta.ttf in Resources */,
 				94884C8C1C907B02006722F7 /* welcome_cloud@3x.png in Resources */,
 				051CB3B719D2F6F700E5FC88 /* nav_select_icon.png in Resources */,
 				052D415819EC1A25001B4088 /* empty_album_header_bg.png in Resources */,
 				0526449119D5A26400B63759 /* device_icon@2x.png in Resources */,
+				94FAE0B81D2F1B3D00BC9F77 /* icon_bottom_addmusic@2x.png in Resources */,
 				05A7CE5F1A7FC0FD00020B6F /* yuvarlakbulut@2x.png in Resources */,
 				05144B641A091CA800B2A414 /* no_music_icon.png in Resources */,
 				05A7CE701A7FC27300020B6F /* karebg.png in Resources */,
@@ -4265,6 +4365,7 @@
 				94E549261CC6BA34003CB5DC /* icon_select_off@2x.png in Resources */,
 				0589066819CC524900A9E517 /* TurkcellSaturaDem.ttf in Resources */,
 				05224ABC19DC4A2D00214767 /* black_bg.png in Resources */,
+				94FAE0EA1D2F7E7800BC9F77 /* minibutton_play.png in Resources */,
 				9433BD131D21EC5700991483 /* icon_menu_dbtasi_w.png in Resources */,
 				949414EA1CC8BCCF008904E2 /* icon_m_yardim_w@2x.png in Resources */,
 				9433BD211D220D2600991483 /* bg_fullimg@2x.png in Resources */,
@@ -4280,6 +4381,7 @@
 				05C4E4A31C4D5E97005B28E9 /* icon_dialog_positive@3x.png in Resources */,
 				050D4C3D1A31E58100809A01 /* contacts_backup@2x.png in Resources */,
 				0526448619D5A26400B63759 /* remove_icon.png in Resources */,
+				94FAE0DA1D2F7E5500BC9F77 /* minibutton_play@2x.png in Resources */,
 				057C9D6B1A2B48E6001DDDEC /* contacts_icon@2x.png in Resources */,
 				05994F981A0B57080081F000 /* music_backward@2x.png in Resources */,
 				0589066A19CC524900A9E517 /* TurkcellSaturaBol.ttf in Resources */,
@@ -4316,11 +4418,13 @@
 				05994F9D1A0B572D0081F000 /* music_play_icon.png in Resources */,
 				055A3F4419E7F628004A0121 /* album_mask@2x.png in Resources */,
 				051CB3F219D2F71200E5FC88 /* folder_icon.png in Resources */,
+				94FAE0D71D2F7E5500BC9F77 /* icon_list_circle@2x.png in Resources */,
 				051CB40019D2F71200E5FC88 /* big_delete_icon@2x.png in Resources */,
 				0526449719D5A26400B63759 /* cellphone_icon@2x.png in Resources */,
 				949414E21CC8BCC4008904E2 /* icon_m_yardim_w.png in Resources */,
 				051CB40119D2F71200E5FC88 /* empty_state_icon@2x.png in Resources */,
 				058219D71A3850E2001FA679 /* multiply@2x.png in Resources */,
+				94FAE0E21D2F7E6300BC9F77 /* minibutton_play@3x.png in Resources */,
 				05994F991A0B57080081F000 /* music_forward.png in Resources */,
 				94884C9D1C90C63D006722F7 /* icon_set_pass@2x.png in Resources */,
 				051CB3B319D2F6F700E5FC88 /* preloader_icon.png in Resources */,
@@ -4363,11 +4467,13 @@
 				052A222C19F6846B000C3C75 /* default_loading_bg.png in Resources */,
 				051CB3F319D2F71200E5FC88 /* empty_state_icon.png in Resources */,
 				053F993B19E1C40900928F22 /* unable_file_icon@2x.png in Resources */,
+				94FAE0B61D2F1B3400BC9F77 /* icon_bottom_addmusic.png in Resources */,
 				054B8D3B1A0FEDC500D24420 /* menu_drop_black@2x.png in Resources */,
 				051CB3F519D2F71200E5FC88 /* dots_icon.png in Resources */,
 				56FCFDD51A9C7DDA00AC041C /* info_icon.png in Resources */,
 				059AD37D1A1E26A000AA41BD /* circle_music_icon@2x.png in Resources */,
 				051CB40C19D2F71200E5FC88 /* white_delete_icon@2x.png in Resources */,
+				94FAE0DF1D2F7E6300BC9F77 /* icon_list_circle@3x.png in Resources */,
 				05C4E4A71C4D5EB9005B28E9 /* bg_verif_digit@2x.png in Resources */,
 				051CB40D19D2F71200E5FC88 /* white_move_icon@2x.png in Resources */,
 				056BEC861A8AA7CF00BA0805 /* pre_login_info2@2x.png in Resources */,
@@ -4408,6 +4514,7 @@
 				059C04661A8521C5007B18BE /* yellow_contact_sync_icon@2x.png in Resources */,
 				0526447819D5A26400B63759 /* toggle_off.png in Resources */,
 				051CB3EF19D2F71200E5FC88 /* nav_blue_tick.png in Resources */,
+				94FAE0D91D2F7E5500BC9F77 /* minibutton_pause@2x.png in Resources */,
 				949414F01CC8BCD8008904E2 /* icon_m_baskial_w@3x.png in Resources */,
 				05D5E5901B09D56A00A22957 /* icon_settings_tick.png in Resources */,
 				056BEC8A1A8AA7CF00BA0805 /* pre_login_info4@2x.png in Resources */,
@@ -4442,6 +4549,7 @@
 				0589062019CC226D00A9E517 /* photos_icon@2x.png in Resources */,
 				0526449219D5A26400B63759 /* syncing_icon.png in Resources */,
 				05C4E4A91C4D5ED1005B28E9 /* bg_verif_digit@3x.png in Resources */,
+				94FAE0E01D2F7E6300BC9F77 /* icon_select@3x.png in Resources */,
 				059AD37C1A1E26A000AA41BD /* circle_contact_icon.png in Resources */,
 				05440ADC19D4363D009803D7 /* green_music_icon.png in Resources */,
 				05144B651A091CA800B2A414 /* no_music_icon@2x.png in Resources */,
@@ -4577,6 +4685,7 @@
 				05AF7C951A1CA04E00F5011A /* white_right_arrow_icon@2x.png in Resources */,
 				056BEC8C1A8AA7CF00BA0805 /* pre_login_info5@2x.png in Resources */,
 				050A7B1A19F7CBB600B084B9 /* volume_full.png in Resources */,
+				94FAE0E11D2F7E6300BC9F77 /* minibutton_pause@3x.png in Resources */,
 				0589062319CC226D00A9E517 /* documents_icon.png in Resources */,
 				94E549321CC6BA43003CB5DC /* icon_menu_bizeulasin_w@3x.png in Resources */,
 				0526448C19D5A26400B63759 /* help_icon.png in Resources */,
@@ -4603,6 +4712,7 @@
 				057C9D761A2B494E001DDDEC /* docs_icon.png in Resources */,
 				051CB40219D2F71200E5FC88 /* nav_blue_tick@2x.png in Resources */,
 				051CB3B219D2F6F700E5FC88 /* right_grey_icon.png in Resources */,
+				94FAE0E71D2F7E7800BC9F77 /* icon_list_circle.png in Resources */,
 				0589063519CC2A0400A9E517 /* fav_icon.png in Resources */,
 				051412A219D46393000EAE63 /* Default-568h_old@2x.png in Resources */,
 				0589062619CC226D00A9E517 /* logout_icon@2x.png in Resources */,
@@ -4732,6 +4842,7 @@
 				058B328E1A14ABCB00A291C4 /* RenameAlbumDao.m in Sources */,
 				058219BF1A384AF0001FA679 /* MessageCell.m in Sources */,
 				94A1D3C41C969F330066D92F /* UpdatePassDao.m in Sources */,
+				94FAE0C91D2F6EC500BC9F77 /* FBConnectDao.m in Sources */,
 				9433BD081D21E45500991483 /* PromotionsController.m in Sources */,
 				056090E41AC5A44000710211 /* ReachabilityManager.m in Sources */,
 				05403F1919F5584300AED10A /* ElasticSearchDao.m in Sources */,
@@ -4744,6 +4855,7 @@
 				0526444819D546BB00B63759 /* MapUtil.m in Sources */,
 				05DEB1F11A81775F007793DD /* SyncSettings.m in Sources */,
 				0514A6291BF4D1030084E0AB /* BaseBgController.m in Sources */,
+				94FAE0CF1D2F6EDF00BC9F77 /* FBStatusDao.m in Sources */,
 				05A9382D1AF6AE9100AE2892 /* UpdateCheck.m in Sources */,
 				05754C141AC711EA00727B42 /* SyncInfoHeaderView.m in Sources */,
 				05C2A0351A79830500EE4D78 /* ADJTimer.m in Sources */,
@@ -4896,6 +5008,7 @@
 				05C2A0331A79830500EE4D78 /* ADJPackageHandler.m in Sources */,
 				057DF50819D038080005A389 /* RequestTokenDao.m in Sources */,
 				05A938301AF6AE9100AE2892 /* UpdateServerIntegration.m in Sources */,
+				94FAE0D21D2F772B00BC9F77 /* SocialExportResult.m in Sources */,
 				052644BD19D5A32300B63759 /* TitleCell.m in Sources */,
 				054206DE19DD6DCD0026771C /* UploadManager.m in Sources */,
 				05F28BED1C0739C30002171A /* CurioReachabilityEx.m in Sources */,
@@ -4945,6 +5058,7 @@
 				051CB39219D2DD7C00E5FC88 /* PhotoListController.m in Sources */,
 				05E0705F1AB977850038BE68 /* ConstantsDao.m in Sources */,
 				05AF7C981A1CA22200F5011A /* RecentActivityHeaderView.m in Sources */,
+				94FAE0C31D2F2B4300BC9F77 /* VideofyFinalInfoController.m in Sources */,
 				052644B219D5A2A600B63759 /* SettingsUploadController.m in Sources */,
 				05C6C7011B3C123C00CB6CE5 /* TTTAttributedLabel.m in Sources */,
 				05440AE019D4445D009803D7 /* FloatingAddButton.m in Sources */,
@@ -4952,6 +5066,7 @@
 				051CB38F19D2DD7100E5FC88 /* FileListController.m in Sources */,
 				05A9382C1AF6AE9100AE2892 /* UIAlertViewCustom.m in Sources */,
 				94328BE91CC572DF00599CEE /* FeedbackChoiceCell.m in Sources */,
+				94FAE0CC1D2F6ED200BC9F77 /* FBStartDao.m in Sources */,
 				05E8113219DF0ACB0063F99A /* MetaAlbum.m in Sources */,
 				05AF7C871A1C8EEB00F5011A /* RecentActivitiesDao.m in Sources */,
 				05C2A02B1A79830500EE4D78 /* ADJAdjustFactory.m in Sources */,
@@ -4972,6 +5087,7 @@
 				05C7CB6A1ABC91B200A7BF8E /* MetaFileSummary.m in Sources */,
 				051E1EA719CB209F00FD1E03 /* MenuCell.m in Sources */,
 				051E1E0319CAC2F900FD1E03 /* main.m in Sources */,
+				94FAE0C01D2F22EB00BC9F77 /* VideofyAudioCell.m in Sources */,
 				94F130CD1D2497460086BDBB /* SocialBaseController.m in Sources */,
 				051DE36C19CC130A00F27C85 /* LoginTextfield.m in Sources */,
 				94328BE01CC3E0B900599CEE /* TutorialView.m in Sources */,
@@ -4999,6 +5115,7 @@
 				05F28BEE1C0739C30002171A /* CurioResourceUtil.m in Sources */,
 				058219D11A384D8D001FA679 /* SearchDao.m in Sources */,
 				051E1E8C19CAC92700FD1E03 /* ASIInputStream.m in Sources */,
+				94FAE0B41D2F11A400BC9F77 /* VideofyMusicListController.m in Sources */,
 				057942411C3EEF8700899923 /* SignupDao.m in Sources */,
 				05C244301A023F5C000D65D0 /* SortModalController.m in Sources */,
 				05C0E1FE1A0698C5005E1E92 /* MusicListController.m in Sources */,
@@ -5057,6 +5174,7 @@
 				058BC2421A30E7100007F4DE /* AuthResponse.m in Sources */,
 				050D4C321A31E17200809A01 /* PostLoginSyncPhotoController.m in Sources */,
 				0515F2FF1C469A3C0098081C /* RevisitedStorageController.m in Sources */,
+				94FAE0B11D2F119300BC9F77 /* VideofyFooterView.m in Sources */,
 				05144B611A090B8000B2A414 /* SimpleDocCell.m in Sources */,
 				056E2A151A28BC2700C24904 /* XYPieChart.m in Sources */,
 				058B32911A14ABE500A291C4 /* AlbumAddPhotosDao.m in Sources */,
@@ -5070,6 +5188,7 @@
 				05DA564C1A56D5B3007D2B1D /* ALAssetRepresentation+MD5.m in Sources */,
 				05AD7F851AD7FD160052153A /* MMWormhole.m in Sources */,
 				05C244331A0243BE000D65D0 /* SortTypeCell.m in Sources */,
+				94FAE0BD1D2F1F1800BC9F77 /* VideofyAudio.m in Sources */,
 				94BEABFE1CAD1D6C002E37A7 /* Eula.m in Sources */,
 				05E8113819DF27690063F99A /* MusicListModalController.m in Sources */,
 				05D5E5A51B09D5F800A22957 /* OfferContainer.m in Sources */,
@@ -5085,6 +5204,7 @@
 				05D2B19719E676BF00FC309D /* AlbumListDao.m in Sources */,
 				056BEC781A8AA55000BA0805 /* PreLoginInfoView.m in Sources */,
 				0524E32919D955FA00E2698E /* FileDetail.m in Sources */,
+				94FAE0C61D2F2BAA00BC9F77 /* FBPermissionDao.m in Sources */,
 				05EA75B519DC6C2400AC77AB /* MultipleUploadFooterView.m in Sources */,
 				05B73E7F1A5EC04B005D24BE /* UsageInfoDao.m in Sources */,
 				052644B619D5A2A600B63759 /* SettingsHelpController.m in Sources */,

@@ -7,12 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MetaFile.h"
 
 @interface Story : NSObject
 
 @property (nonatomic, strong) NSMutableArray *fileList;
-@property (nonatomic, strong) MetaFile *musicFile;
+@property (nonatomic, strong) NSString *musicFileUuid;
+@property (nonatomic, strong) NSString *musicFileId;
 @property (nonatomic, strong) NSString *title;
 
 @end

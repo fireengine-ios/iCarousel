@@ -7,7 +7,10 @@
 //
 
 #import "BaseDao.h"
+#import "Story.h"
 
 @interface VideofyCreateDao : BaseDao
+
+- (void) requestVideofyCreateForStory:(Story *) story;
 
 @end

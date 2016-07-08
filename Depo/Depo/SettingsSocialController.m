@@ -18,12 +18,18 @@
 @implementation SettingsSocialController
 
 @synthesize mainTable;
+@synthesize fbPermissionDao;
 
 - (id) init {
     if(self = [super init]) {
         self.title = NSLocalizedString(@"SocialMediaTitle", @"");
         self.view.backgroundColor = [Util UIColorForHexColor:@"F1F2F6"];
 
+        fbPermissionDao = [[FBPermissionDao alloc] init];
+        fbPermissionDao.delegate = self;
+        fbPermissionDao.successMethod = @selector(fbPermissionSuccessCallback:);
+        fbPermissionDao.failMethod = @selector(fbPermissionFailCallback:);
+        
         mainTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
         mainTable.bounces = NO;
         mainTable.delegate = self;
@@ -78,16 +84,8 @@
 }
 
 - (void) triggerFacebookLogin {
-    FBSDKLoginManager *fbLoginButton = [[FBSDKLoginManager alloc] init];
-    [fbLoginButton logInWithReadPermissions: @[@"public_profile", @"user_photos", @"user_videos"] fromViewController:self handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-         if (error) {
-             NSLog(@"Process error");
-         } else if (result.isCancelled) {
-             NSLog(@"Cancelled");
-         } else {
-             NSLog(@"Logged in");
-         }
-     }];
+    [fbPermissionDao requestFbPermissionTypes];
+    [self showLoading];
 }
 
 - (void)viewDidLoad {
@@ -100,14 +98,28 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void) fbPermissionSuccessCallback:(NSArray *) permissions {
+    [self hideLoading];
+    [self triggerFBLoginWithPermissions:permissions];
 }
-*/
+
+- (void) fbPermissionFailCallback:(NSString *) errorMessage {
+    [self hideLoading];
+    NSArray *permissions = [NSArray arrayWithObjects:@"public_profile", @"user_photos", @"user_videos", @"user_birthday", nil];
+    [self triggerFBLoginWithPermissions:permissions];
+}
+
+- (void) triggerFBLoginWithPermissions:(NSArray *) permissions {
+    FBSDKLoginManager *fbLoginButton = [[FBSDKLoginManager alloc] init];
+    [fbLoginButton logInWithReadPermissions:permissions fromViewController:self handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+        if (error) {
+            NSLog(@"Process error");
+        } else if (result.isCancelled) {
+            NSLog(@"Cancelled");
+        } else {
+            NSLog(@"Logged in");
+        }
+    }];
+}
 
 @end

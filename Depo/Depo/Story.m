@@ -11,7 +11,8 @@
 @implementation Story
 
 @synthesize fileList;
-@synthesize musicFile;
+@synthesize musicFileUuid;
+@synthesize musicFileId;
 @synthesize title;
 
 @end

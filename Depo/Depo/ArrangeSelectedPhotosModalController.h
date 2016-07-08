@@ -8,13 +8,16 @@
 
 #import "MyModalController.h"
 #import "Story.h"
+#import "VideofyFooterView.h"
 
-@interface ArrangeSelectedPhotosModalController : MyModalController
+@interface ArrangeSelectedPhotosModalController : MyModalController <UIGestureRecognizerDelegate, VideofyFooterDelegate>
 
 @property (nonatomic, strong) Story *story;
 @property (nonatomic, strong) UIScrollView *photosScroll;
 @property (nonatomic, strong) NSMutableArray *photoList;
 @property (nonatomic, strong) NSMutableArray *selectedFileList;
+
+@property (nonatomic, strong) VideofyFooterView *footerView;
 
 - (id) initWithStory:(Story *) rawStory;
 

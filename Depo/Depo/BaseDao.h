@@ -20,14 +20,14 @@
 #import "FileInfoGroup.h"
 
 //TODO test -> prod
-#define BASE_URL @"https://adepo.turkcell.com.tr/api"
-//#define BASE_URL @"https://tcloudstb.turkcell.com.tr/api"
+//#define BASE_URL @"https://adepo.turkcell.com.tr/api"
+#define BASE_URL @"https://tcloudstb.turkcell.com.tr/api"
 
 #define TOKEN_URL BASE_URL@"/auth/token?rememberMe=%@"
 
 //TODO test -> prod
-#define RADIUS_URL @"http://adepo.turkcell.com.tr/api/auth/gsm/login?rememberMe=on"
-//#define RADIUS_URL @"http://tcloudstb.turkcell.com.tr/api/auth/gsm/login?rememberMe=on"
+//#define RADIUS_URL @"http://adepo.turkcell.com.tr/api/auth/gsm/login?rememberMe=on"
+#define RADIUS_URL @"http://tcloudstb.turkcell.com.tr/api/auth/gsm/login?rememberMe=on"
 
 #define REMEMBER_ME_URL BASE_URL@"/auth/rememberMe"
 
@@ -137,6 +137,10 @@
 
 #define FEEDBACK_URL BASE_URL@"/feedback/send/%@"
 
+#define VIDEOFY_AUDIO_URL BASE_URL@"/slideshow/audio/list"
+
+#define VIDEOFY_CREATE_URL BASE_URL@"/slideshow/create"
+
 #define DROPBOX_CONNECT_URL BASE_URL@"/migration/dropbox/connect?accessToken=%@"
 
 #define DROPBOX_START_URL BASE_URL@"/migration/dropbox/start"
@@ -148,6 +152,14 @@
 #define PROFILE_IMG_URL BASE_URL@"/account/profilePhoto"
 
 #define PROMO_ACTIVATE_URL BASE_URL@"/promo/activate"
+
+#define FB_PERMISSIONS_URL BASE_URL@"/migration/facebook/permissions"
+
+#define FB_CONNECT_URL BASE_URL@"/migration/facebook/connect"
+
+#define FB_STATUS_URL BASE_URL@"/migration/facebook/status"
+
+#define FB_START_URL BASE_URL@"/migration/facebook/start"
 
 #define APN_URL @"http://pushserver.turkcell.com.tr/PushServer/rest/registerdevice/"
 

@@ -75,6 +75,8 @@
 
 #define PROFILE_IMG_UPLOADED_NOTIFICATION @"PROFILE_IMG_UPLOADED_NOTIFICATION"
 
+#define VIDEOFY_MUSIC_PREVIEW_CHANGED_NOTIFICATION @"VIDEOFY_MUSIC_PREVIEW_CHANGED_NOTIFICATION"
+
 #define CHANGED_MUSIC_OBJ_KEY @"CHANGED_MUSIC_OBJ_KEY"
 
 #define INDEX_AFTER_SHUFFLE_OBJ_KEY @"INDEX_AFTER_SHUFFLE_OBJ_KEY"
@@ -495,6 +497,16 @@ typedef enum {
     DropboxExportStatusFinished,
     DropboxExportStatusCancelled
 } DropboxExportStatus;
+
+typedef enum {
+    SocialExportStatusPending,
+    SocialExportStatusRunning,
+    SocialExportStatusFailed,
+    SocialExportStatusWaitingAction,
+    SocialExportStatusScheduled,
+    SocialExportStatusFinished,
+    SocialExportStatusCancelled
+} SocialExportStatus;
 
 typedef enum {
     ImageGroupLevelYear = 1,

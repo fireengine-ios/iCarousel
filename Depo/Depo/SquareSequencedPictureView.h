@@ -19,10 +19,13 @@
 
 @property (nonatomic, weak) id<SquareSequencedPictureDelegate> delegate;
 @property (nonatomic, strong) CustomLabel *seqLabel;
+@property (nonatomic, strong) UIImageView *markView;
 @property (nonatomic, strong) MetaFile *file;
 @property (nonatomic) BOOL isMarked;
 @property (nonatomic) int sequence;
 
 - (id)initWithFrame:(CGRect)frame withFile:(MetaFile *) _file withSequence:(int) seq;
+- (void) updateSequence:(int) newSeq;
+- (void) toggleMarked;
 
 @end
