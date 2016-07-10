@@ -14,5 +14,9 @@
 @synthesize syncEnabled;
 @synthesize lastDate;
 @synthesize status;
+@synthesize progress;
+@synthesize failedCount;
+@synthesize successCount;
+@synthesize skippedCount;
 
 @end

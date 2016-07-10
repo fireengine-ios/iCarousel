@@ -14,6 +14,10 @@
 
 @interface ArrangeSelectedPhotosModalController () {
     SquareSequencedPictureView *focusView;
+    BOOL shouldAllowPan;
+    UIPanGestureRecognizer *panGesture;
+    UITapGestureRecognizer *tapGesture;
+    UILongPressGestureRecognizer *longGesture;
 }
 @end
 
@@ -24,6 +28,7 @@
 @synthesize photoList;
 @synthesize selectedFileList;
 @synthesize footerView;
+@synthesize createDao;
 
 - (id) initWithStory:(Story *) rawStory {
     if(self = [super init]) {
@@ -31,6 +36,11 @@
         self.view.backgroundColor = [UIColor whiteColor];
         
         self.story = rawStory;
+        
+        createDao = [[VideofyCreateDao alloc] init];
+        createDao.delegate = self;
+        createDao.successMethod = @selector(videofySuccessCallback);
+        createDao.failMethod = @selector(videofyFailCallback:);
         
         photoList  = [[NSMutableArray alloc] init];
         selectedFileList = [[NSMutableArray alloc] init];
@@ -48,17 +58,37 @@
         
         [self loadScrollView];
         
-        UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+        panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
         panGesture.enabled = YES;
+        panGesture.delegate = self;
         [photosScroll addGestureRecognizer:panGesture];
         
-        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+        tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
         tapGesture.delegate = self;
         [photosScroll addGestureRecognizer:tapGesture];
         [tapGesture requireGestureRecognizerToFail:panGesture];
         
+        longGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+        longGesture.delegate = self;
+        [photosScroll addGestureRecognizer:longGesture];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(musicHandler:) name:VIDEOFY_DEPO_MUSIC_SELECTED_NOTIFICATION object:nil];
+        
     }
     return self;
+}
+
+- (void) musicHandler:(NSNotification *) notification {
+    NSDictionary *userInfo = notification.userInfo;
+    NSNumber *audioId = [userInfo objectForKey:@"audio_file_selected"];
+    if(audioId != nil) {
+        self.story.musicFileId = [NSString stringWithFormat:@"%ld", audioId.longValue];
+    } else {
+        NSString *audioUuid = [userInfo objectForKey:@"depo_file_selected"];
+        if(audioUuid != nil) {
+            self.story.musicFileUuid = audioUuid;
+        }
+    }
 }
 
 - (void) loadScrollView {
@@ -87,6 +117,19 @@
         contentSizeHeight = photosScroll.frame.size.height + 1;
     }
     photosScroll.contentSize = CGSizeMake(photosScroll.frame.size.width, contentSizeHeight);
+}
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    if([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]] && ! shouldAllowPan) {
+        return NO;
+    }
+    return YES;
+}
+
+- (void) handleLongPress:(UILongPressGestureRecognizer *)recognizer {
+    if(UIGestureRecognizerStateChanged == recognizer.state) {
+        shouldAllowPan = YES;
+    }
 }
 
 - (void) handleTap:(UIPanGestureRecognizer *)recognizer {
@@ -156,6 +199,7 @@
         focusView.frame = [self calculateReqBySeq:newSeq];
         [focusView updateSequence:newSeq];
         focusView = nil;
+        shouldAllowPan = NO;
     }
 }
 
@@ -210,6 +254,7 @@
     self.navigationItem.leftBarButtonItem = cancelItem;
     
     CustomButton *nextButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 80, 20) withImageName:nil withTitle:NSLocalizedString(@"ButtonCreate", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[UIColor whiteColor]];
+    [nextButton addTarget:self action:@selector(triggerNext) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem *nextItem = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
     self.navigationItem.rightBarButtonItem = nextItem;
@@ -221,6 +266,8 @@
 }
 
 - (void) triggerNext {
+    [createDao requestVideofyCreateForStory:self.story];
+    [self showLoading];
 }
 
 - (void) videofyFooterDeleteClicked {
@@ -243,6 +290,15 @@
     VideofyMusicListController *musicController = [[VideofyMusicListController alloc] init];
     MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:musicController];
     [self presentViewController:modalNav animated:YES completion:nil];
+}
+
+- (void) videofySuccessCallback {
+    [self hideLoading];
+}
+
+- (void) videofyFailCallback:(NSString *) errorMessage {
+    [self hideLoading];
+    [self showErrorAlertWithMessage:errorMessage];
 }
 
 - (BOOL)shouldAutorotate {

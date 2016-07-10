@@ -7,7 +7,12 @@
 //
 
 #import "SocialBaseController.h"
+#import "FBStatusDao.h"
+#import "FBStartDao.h"
 
 @interface FacebookController : SocialBaseController
+
+@property (nonatomic, strong) FBStatusDao *statusDao;
+@property (nonatomic, strong) FBStartDao *startDao;
 
 @end

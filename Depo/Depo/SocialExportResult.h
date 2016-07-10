@@ -15,5 +15,9 @@
 @property (nonatomic) BOOL syncEnabled;
 @property (nonatomic, strong) NSDate *lastDate;
 @property (nonatomic) SocialExportStatus status;
+@property (nonatomic) long progress;
+@property (nonatomic) long failedCount;
+@property (nonatomic) long successCount;
+@property (nonatomic) long skippedCount;
 
 @end

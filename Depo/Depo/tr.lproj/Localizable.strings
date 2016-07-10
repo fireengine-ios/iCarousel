@@ -740,3 +740,7 @@
 "VideofySelectibleInfo"="En çok 50 fotoğraf ve video seçin";
 "VideofySequenceInfo"="Seçtiğiniz fotoğrafları istediğiniz sıra ile sıralayabilirsiniz";
 "VideofyAddMusic"="Hikayene Müzik Ekle";
+"FBConnectError"="Facebook bağlantısı sağlanamadı. Lütfen daha sonra tekrar deneyin.";
+"FBSubInfo"="Taşıma işlemi tamamen ücretsiz ve internet paketinizden yemez :)";
+"StartExport"="Şimdi Aktar";
+"Add"="Ekle";

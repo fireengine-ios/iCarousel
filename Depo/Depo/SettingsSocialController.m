@@ -10,6 +10,8 @@
 #import "Util.h"
 #import "TitleCell.h"
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import "FacebookController.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 @interface SettingsSocialController ()
 
@@ -19,6 +21,7 @@
 
 @synthesize mainTable;
 @synthesize fbPermissionDao;
+@synthesize fbConnectDao;
 
 - (id) init {
     if(self = [super init]) {
@@ -29,6 +32,11 @@
         fbPermissionDao.delegate = self;
         fbPermissionDao.successMethod = @selector(fbPermissionSuccessCallback:);
         fbPermissionDao.failMethod = @selector(fbPermissionFailCallback:);
+        
+        fbConnectDao = [[FBConnectDao alloc] init];
+        fbConnectDao.delegate = self;
+        fbConnectDao.successMethod = @selector(fbConnectSuccessCallback);
+        fbConnectDao.failMethod = @selector(fbConnectFailCallback:);
         
         mainTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
         mainTable.bounces = NO;
@@ -109,15 +117,34 @@
     [self triggerFBLoginWithPermissions:permissions];
 }
 
+- (void) fbConnectSuccessCallback {
+    [self hideLoading];
+    FacebookController *controller = [[FacebookController alloc] init];
+    [self.nav pushViewController:controller animated:YES];
+}
+
+- (void) fbConnectFailCallback:(NSString *) errorMessage {
+    [self hideLoading];
+    [self showErrorAlertWithMessage:errorMessage];
+}
+
 - (void) triggerFBLoginWithPermissions:(NSArray *) permissions {
     FBSDKLoginManager *fbLoginButton = [[FBSDKLoginManager alloc] init];
     [fbLoginButton logInWithReadPermissions:permissions fromViewController:self handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
         if (error) {
             NSLog(@"Process error");
+            dispatch_async(dispatch_get_main_queue(), ^(){
+                [self showErrorAlertWithMessage:NSLocalizedString(@"FBConnectError", @"")];
+            });
         } else if (result.isCancelled) {
             NSLog(@"Cancelled");
         } else {
             NSLog(@"Logged in");
+            dispatch_async(dispatch_get_main_queue(), ^(){
+                NSLog(@"Access token: %@", [[FBSDKAccessToken currentAccessToken] tokenString]);
+                [fbConnectDao requestFbConnectWithToken:[[FBSDKAccessToken currentAccessToken] tokenString]];
+                [self showLoading];
+            });
         }
     }];
 }

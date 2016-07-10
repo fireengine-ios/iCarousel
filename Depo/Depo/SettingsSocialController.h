@@ -8,10 +8,12 @@
 
 #import "MyViewController.h"
 #import "FBPermissionDao.h"
+#import "FBConnectDao.h"
 
 @interface SettingsSocialController : MyViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *mainTable;
 @property (nonatomic, strong) FBPermissionDao *fbPermissionDao;
+@property (nonatomic, strong) FBConnectDao *fbConnectDao;
 
 @end

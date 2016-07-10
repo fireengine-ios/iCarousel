@@ -9,6 +9,7 @@
 #import "MyModalController.h"
 #import "Story.h"
 #import "VideofyFooterView.h"
+#import "VideofyCreateDao.h"
 
 @interface ArrangeSelectedPhotosModalController : MyModalController <UIGestureRecognizerDelegate, VideofyFooterDelegate>
 
@@ -18,6 +19,7 @@
 @property (nonatomic, strong) NSMutableArray *selectedFileList;
 
 @property (nonatomic, strong) VideofyFooterView *footerView;
+@property (nonatomic, strong) VideofyCreateDao *createDao;
 
 - (id) initWithStory:(Story *) rawStory;
 

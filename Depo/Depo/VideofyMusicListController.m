@@ -7,6 +7,7 @@
 //
 
 #import "VideofyMusicListController.h"
+#import "VideofyDepoMusicModalController.h"
 
 @interface VideofyMusicListController ()
 
@@ -18,6 +19,9 @@
 @synthesize audioList;
 @synthesize audioTable;
 @synthesize audioPlayer;
+@synthesize addButton;
+@synthesize addMenu;
+@synthesize audioIdSelected;
 
 - (id) init {
     if(self = [super init]) {
@@ -39,6 +43,16 @@
         
         [audioDao requestAudioList];
         [self showLoading];
+
+        self.addMenu = [[FloatingAddMenu alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) withBasePoint:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height - 125)];
+        addMenu.hidden = YES;
+        addMenu.delegate = self;
+        [addMenu loadButtons:[NSArray arrayWithObjects:@"AddTypeDepoMusicFav", nil]];
+        [self.view addSubview:addMenu];
+
+        self.addButton = [[FloatingAddButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 70)/2, self.view.frame.size.height - 160, 70, 70)];
+        addButton.delegate = self;
+        [self.view addSubview:addButton];
     }
     return self;
 }
@@ -51,7 +65,7 @@
     UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithCustomView:cancelButton];
     self.navigationItem.leftBarButtonItem = cancelItem;
 
-    CustomButton *nextButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 80, 20) withImageName:nil withTitle:NSLocalizedString(@"ButtonCreate", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[UIColor whiteColor]];
+    CustomButton *nextButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 40, 20) withImageName:nil withTitle:NSLocalizedString(@"Add", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[UIColor whiteColor]];
     [nextButton addTarget:self action:@selector(triggerDone) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem *nextItem = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
@@ -59,7 +73,10 @@
 }
 
 - (void) triggerDone {
-    //TODO notificationcenter'dan yolla
+    if(audioIdSelected > 0) {
+        NSDictionary *userInfo = [NSDictionary dictionaryWithObject:[NSNumber numberWithLong:audioIdSelected] forKey:@"audio_file_selected"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:VIDEOFY_DEPO_MUSIC_SELECTED_NOTIFICATION object:nil userInfo:userInfo];
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -101,6 +118,11 @@
     return cell;
 }
 
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    VideofyAudio *audio = [audioList objectAtIndex:indexPath.row];
+    audioIdSelected = audio.audioId;
+}
+
 - (void)videofyAudioCellPlayClickedWithId:(long)audioId {
     NSDictionary* userInfo = [NSDictionary dictionaryWithObject:[NSNumber numberWithLong:audioId] forKey:@"playingAudioId"];
     [[NSNotificationCenter defaultCenter] postNotificationName:VIDEOFY_MUSIC_PREVIEW_CHANGED_NOTIFICATION object:self userInfo:userInfo];
@@ -122,6 +144,32 @@
 
 - (void) videofyAudioCellPauseClickedWithId:(long)audioId {
     [audioPlayer pause];
+}
+
+- (void) floatingAddButtonDidOpenMenu {
+    addMenu.hidden = NO;
+    [addMenu presentWithAnimation];
+}
+
+- (void) floatingAddButtonDidCloseMenu {
+    [addMenu dismissWithAnimation];
+    [self performSelector:@selector(hideAddMenu) withObject:nil afterDelay:0.3];
+}
+
+- (void) hideAddMenu {
+    addMenu.hidden = YES;
+}
+
+- (void) floatingMenuDidTriggerAddMusicFromDepo {
+    VideofyDepoMusicModalController *musicController = [[VideofyDepoMusicModalController alloc] init];
+    [self.navigationController pushViewController:musicController animated:YES];
+
+    [addButton immediateReset];
+    addMenu.hidden = YES;
+    [addMenu dismissWithAnimation];
+}
+
+- (void) musicModalListReturnedWithSelectedList:(NSArray *) uuids {
 }
 
 @end
