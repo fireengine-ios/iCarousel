@@ -11,6 +11,8 @@
 #import "SquareSequencedPictureView.h"
 #import "MetaFile.h"
 #import "VideofyMusicListController.h"
+#import "VideofyPreparationInfoView.h"
+#import "AppDelegate.h"
 
 @interface ArrangeSelectedPhotosModalController () {
     SquareSequencedPictureView *focusView;
@@ -126,8 +128,12 @@
     return YES;
 }
 
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
+}
+
 - (void) handleLongPress:(UILongPressGestureRecognizer *)recognizer {
-    if(UIGestureRecognizerStateChanged == recognizer.state) {
+    if(UIGestureRecognizerStateBegan == recognizer.state) {
         shouldAllowPan = YES;
     }
 }
@@ -158,6 +164,10 @@
 - (void) handlePan:(UIPanGestureRecognizer *)recognizer {
     CGPoint translation = [recognizer locationInView:photosScroll];
     
+    if (recognizer.state != UIGestureRecognizerStateEnded) {
+        photosScroll.scrollEnabled = NO;
+    }
+
     if(!focusView) {
         for(UIView *subview in [photosScroll subviews]) {
             if([subview isKindOfClass:[SquareSequencedPictureView class]]) {
@@ -175,6 +185,8 @@
     }
     
     if (recognizer.state == UIGestureRecognizerStateEnded) {
+        photosScroll.scrollEnabled = YES;
+        
         int oldSeq = focusView.sequence;
         int newSeq = [self calculateSeqByPoint:focusView.center withInitialSeq:focusView.sequence];
         if(oldSeq != newSeq) {
@@ -280,7 +292,9 @@
         }
         self.story.fileList = newFileList;
         for(UIView *subview in [photosScroll subviews]) {
-            [subview removeFromSuperview];
+            if([subview isKindOfClass:[SquareSequencedPictureView class]]) {
+                [subview removeFromSuperview];
+            }
         }
         [self loadScrollView];
     }
@@ -294,6 +308,8 @@
 
 - (void) videofySuccessCallback {
     [self hideLoading];
+    VideofyPreparationInfoView *finalView = [[VideofyPreparationInfoView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.bounds.size.width, APPDELEGATE.window.bounds.size.height)];
+    [APPDELEGATE.window addSubview:finalView];
 }
 
 - (void) videofyFailCallback:(NSString *) errorMessage {

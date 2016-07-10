@@ -103,7 +103,7 @@
             cell = [[NoItemCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier imageName:@"empty_state_icon" titleText:NSLocalizedString(@"EmptyMusicTitle", @"") descriptionText:@""];
         } else {
             MetaFile *fileAtIndex = [musicList objectAtIndex:indexPath.row];
-            cell = [[SimpleMusicCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex isSelectible:YES];
+            cell = [[SimpleMusicCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex isSelectible:NO isSwipeable:NO];
         }
     }
     return cell;
@@ -120,6 +120,7 @@
         NSDictionary *userInfo = [NSDictionary dictionaryWithObject:file.uuid forKey:@"depo_file_selected"];
         [[NSNotificationCenter defaultCenter] postNotificationName:VIDEOFY_DEPO_MUSIC_SELECTED_NOTIFICATION object:nil userInfo:userInfo];
     }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (NSMutableArray *) filterFilesFromList:(NSArray *) list {

@@ -66,4 +66,6 @@
 - (void) showSyncInfoView;
 - (void) hideSyncInfoView;
 
+- (void) didTriggerHome;
+
 @end
