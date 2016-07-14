@@ -32,8 +32,7 @@
 //                                ([AppUtil readFirstVisitOverFlag] ? @"false" : @"true"), @"newDevice",
                                 nil];
     
-    NSString *log = [NSString stringWithFormat:@"RadiusDao requestRadiusLogin called with params: %@", deviceInfo];
-    IGLog(log);
+    IGLog(@"[POST] RadiusDao requestRadiusLogin called");
 
     //    NSLog(@"Device Info: %@", deviceInfo);
     
@@ -67,8 +66,7 @@
         NSNumber *migrationUserFlag = [headerParams objectForKey:@"X-Migration-User"];
         NSString *accountWarning = [headerParams objectForKey:@"X-Account-Warning"];
         
-        NSString *log = [NSString stringWithFormat:@"RadiusDao requestFinished with auth token %@ and remember me token %@", authToken, rememberMeToken];
-        IGLog(log);
+        IGLog(@"RadiusDao requestFinished successfully");
         
 //        NSLog(@"Radius Login Response Headers: %@", headerParams);
 //        NSLog(@"Radius login response: %@", [request responseString]);
@@ -125,20 +123,20 @@
             SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:TOKEN_ERROR_MESSAGE]);
         }
     } else {
-        IGLog(@"requestFinished requestFinished with general error");
+        IGLog(@"RadiusDao requestFinished requestFinished with general error");
         SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:GENERAL_ERROR_MESSAGE]);
     }
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request {
     if([request responseStatusCode] == 401) {
-        IGLog(@"requestFinished request failed with 401");
+        IGLog(@"RadiusDao requestFinished request failed with 401");
         SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:GENERAL_ERROR_MESSAGE]);
     } else if([request responseStatusCode] == 403) {
-        IGLog(@"requestFinished request failed with 403");
+        IGLog(@"RadiusDao requestFinished request failed with 403");
         SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:FORBIDDEN_ERROR_MESSAGE]);
     } else {
-        IGLog(@"requestFinished request failed");
+        IGLog(@"RadiusDao requestFinished request failed");
         if([request.error code] == ASIConnectionFailureErrorType){
             SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:NSLocalizedString(@"NoConnErrorMessage", @"")]);
         } else {

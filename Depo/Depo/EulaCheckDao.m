@@ -13,7 +13,7 @@
 - (void) requestCheckEulaForLocale:(NSString *) locale {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:CHECK_EULA_URL, locale]];
     
-    NSString *log = [NSString stringWithFormat:@"EulaCheckDao requestCheckEulaForLocale %@", locale];
+    NSString *log = [NSString stringWithFormat:@"[GET] EulaCheckDao requestCheckEulaForLocale %@", locale];
     IGLog(log);
 
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
@@ -28,8 +28,7 @@
         NSString *responseStr = [request responseString];
         NSLog(@"EULA Check Response: %@", responseStr);
 
-        NSString *log = [NSString stringWithFormat:@"EulaCheckDao requestFinished with response %@", responseStr];
-        IGLog(log);
+        IGLog(@"EulaCheckDao requestFinished successfully");
 
         SBJSON *jsonParser = [SBJSON new];
         NSDictionary *mainDict = [jsonParser objectWithString:responseStr];

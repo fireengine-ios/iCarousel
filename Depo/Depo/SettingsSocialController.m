@@ -67,7 +67,7 @@
     double cellHeight = 69;
     
     if(indexPath.row == 0) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"FacebookExportTitle", @"") titleColor:nil subTitleText:@"" iconName:@"icon_dbtasi" hasSeparator:YES isLink:YES linkText:@"" cellHeight:cellHeight];
+        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"FacebookExportTitle", @"") titleColor:nil subTitleText:@"" iconName:@"icon_fb_aktar.png" hasSeparator:YES isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         return cell;
     } else if (indexPath.row == 1) {

@@ -13,7 +13,7 @@
 - (void) requestSendProvision {
     NSURL *url = [NSURL URLWithString:PROVISION_URL];
     
-    IGLog(@"ProvisionDao requestSendProvision called");
+    IGLog(@"[POST] ProvisionDao requestSendProvision called");
 
     NSDictionary *dict = [[NSDictionary alloc] init];
     
@@ -34,10 +34,9 @@
     
     if (!error) {
         NSString *responseStr = [request responseString];
-        NSLog(@"Provision response: %@", responseStr);
+        NSLog(@"Provision returned successfully: %@", responseStr);
 
-        NSString *log = [NSString stringWithFormat:@"ProvisionDao requestFinished with result: %@", responseStr];
-        IGLog(log);
+        IGLog(@"ProvisionDao requestFinished successfully");
     }
     [self shouldReturnSuccess];
 }

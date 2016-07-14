@@ -25,8 +25,7 @@
     }
     NSURL *url = [NSURL URLWithString:parentListingUrl];
 
-    NSString *log = [NSString stringWithFormat:@"ElasticSearchDao requestPhotosForPage url: %@", parentListingUrl];
-    IGLog(log);
+    IGLog(@"[GET] ElasticSearchDao requestPhotosForPage called");
 
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setDelegate:self];
@@ -75,8 +74,7 @@
     if (!error) {
         NSString *responseEnc = [request responseString];
         
-        NSString *log = [NSString stringWithFormat:@"ElasticSearchDao requestFinished with result: %@", responseEnc];
-        IGLog(log);
+        IGLog(@"ElasticSearchDao request successfully finished");
 
         //        NSLog(@"Elastic Search Response: %@", responseEnc);
         

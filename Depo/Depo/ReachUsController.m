@@ -242,7 +242,6 @@
         [mailCont setToRecipients:[NSArray arrayWithObject:REACH_US_MAIL_ADDRESS]];
         [mailCont setMessageBody:messageBody isHTML:NO];
         
-        /*TODO loglardan hassas data kaldirilinca attachment geri konulacak
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentsDirectory = [paths objectAtIndex:0];
         NSString *logPath = [documentsDirectory stringByAppendingPathComponent:@"iglogs.log"];
@@ -250,7 +249,6 @@
             NSData *logData = [NSData dataWithContentsOfFile:logPath];
             [mailCont addAttachmentData:logData mimeType:@"text/plain" fileName:@"logs.txt"];
         }
-         */
 
         [self presentViewController:mailCont animated:YES completion:nil];
     } else {

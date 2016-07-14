@@ -13,7 +13,7 @@
 - (void) requestAudioList {
     NSURL *url = [NSURL URLWithString:VIDEOFY_AUDIO_URL];
     
-    IGLog(@"VideofyAudioListDao requestAudioList called");
+    IGLog(@"[GET] VideofyAudioListDao requestAudioList called");
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setDelegate:self];
@@ -25,8 +25,6 @@
     if (!error) {
         NSString *responseStr = [request responseString];
         NSLog(@"VideofyAudioListDao Response: %@", responseStr);
-        
-        IGLog(@"VideofyAudioListDao requestFinished");
         
         SBJSON *jsonParser = [SBJSON new];
         NSArray *mainArr = [jsonParser objectWithString:responseStr];
@@ -47,11 +45,12 @@
                 
                 [result addObject:audio];
             }
+            IGLog(@"VideofyAudioListDao requestFinished successfully");
             [self shouldReturnSuccessWithObject:result];
             return;
         }
     }
-    IGLog(@"VideofyAudioListDao requestFinished with error");
+    IGLog(@"VideofyAudioListDao requestFinished with general error");
     [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
 }
 

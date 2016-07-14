@@ -14,6 +14,8 @@
 - (void) requestEulaForLocale:(NSString *) locale {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:EULA_URL, locale]];
     
+    IGLog(@"[GET] EulaDao requestEulaForLocale called");
+
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setDelegate:self];
     
@@ -26,8 +28,7 @@
         NSString *responseStr = [request responseString];
         NSLog(@"EULA Response: %@", responseStr);
 
-        NSString *log = [NSString stringWithFormat:@"EulaDao request finished with response:%@", responseStr];
-        IGLog(log);
+        IGLog(@"EulaDao request finished successfully");
 
         SBJSON *jsonParser = [SBJSON new];
         NSDictionary *mainDict = [jsonParser objectWithString:responseStr];

@@ -19,7 +19,7 @@
 @synthesize startDao;
 
 - (id) init {
-    if(self = [super initWithImageName:@"img_dbtasi.png.png" withMessage:NSLocalizedString(@"FBSubInfo", @"")]) {
+    if(self = [super initWithImageName:@"icon_fb_big.png" withMessage:NSLocalizedString(@"FBSubInfo", @"")]) {
         
         statusDao = [[FBStatusDao alloc] init];
         statusDao.delegate = self;

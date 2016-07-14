@@ -14,7 +14,7 @@
 - (void) requestFBStatus {
     NSURL *url = [NSURL URLWithString:FB_STATUS_URL];
     
-    IGLog(@"FBStatusDao requestFBStatus called");
+    IGLog(@"[GET] FBStatusDao requestFBStatus called");
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setDelegate:self];
@@ -59,10 +59,12 @@
                 }
             }
             
+            IGLog(@"FBStatusDao request finished successfully");
             [self shouldReturnSuccessWithObject:result];
             return;
         }
     }
+    IGLog(@"FBStatusDao request failed with general error");
     [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
 }
 

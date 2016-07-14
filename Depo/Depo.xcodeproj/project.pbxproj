@@ -885,6 +885,21 @@
 		94A1D3C41C969F330066D92F /* UpdatePassDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94A1D3C31C969F330066D92F /* UpdatePassDao.m */; };
 		94A375261D31B2FC00D06A0C /* VideofyPreparationInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94A375251D31B2FC00D06A0C /* VideofyPreparationInfoView.m */; };
 		94A375291D31C1D600D06A0C /* VideofyDepoMusicModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94A375281D31C1D600D06A0C /* VideofyDepoMusicModalController.m */; };
+		94B2F33B1D373E48009CD8B1 /* icon_fb_aktar.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B2F3361D373E48009CD8B1 /* icon_fb_aktar.png */; };
+		94B2F33C1D373E48009CD8B1 /* icon_fb_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B2F3371D373E48009CD8B1 /* icon_fb_big.png */; };
+		94B2F33D1D373E48009CD8B1 /* icon_ig_aktar.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B2F3381D373E48009CD8B1 /* icon_ig_aktar.png */; };
+		94B2F33E1D373E48009CD8B1 /* icon_ig_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B2F3391D373E48009CD8B1 /* icon_ig_big.png */; };
+		94B2F33F1D373E48009CD8B1 /* icon_sm.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B2F33A1D373E48009CD8B1 /* icon_sm.png */; };
+		94B2F3451D373E53009CD8B1 /* icon_fb_aktar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B2F3401D373E53009CD8B1 /* icon_fb_aktar@2x.png */; };
+		94B2F3461D373E53009CD8B1 /* icon_fb_big@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B2F3411D373E53009CD8B1 /* icon_fb_big@2x.png */; };
+		94B2F3471D373E53009CD8B1 /* icon_ig_aktar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B2F3421D373E53009CD8B1 /* icon_ig_aktar@2x.png */; };
+		94B2F3481D373E53009CD8B1 /* icon_ig_big@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B2F3431D373E53009CD8B1 /* icon_ig_big@2x.png */; };
+		94B2F3491D373E53009CD8B1 /* icon_sm@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B2F3441D373E53009CD8B1 /* icon_sm@2x.png */; };
+		94B2F34F1D373E5C009CD8B1 /* icon_fb_aktar@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B2F34A1D373E5C009CD8B1 /* icon_fb_aktar@3x.png */; };
+		94B2F3501D373E5C009CD8B1 /* icon_fb_big@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B2F34B1D373E5C009CD8B1 /* icon_fb_big@3x.png */; };
+		94B2F3511D373E5C009CD8B1 /* icon_ig_aktar@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B2F34C1D373E5C009CD8B1 /* icon_ig_aktar@3x.png */; };
+		94B2F3521D373E5C009CD8B1 /* icon_ig_big@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B2F34D1D373E5C009CD8B1 /* icon_ig_big@3x.png */; };
+		94B2F3531D373E5C009CD8B1 /* icon_sm@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B2F34E1D373E5C009CD8B1 /* icon_sm@3x.png */; };
 		94B6C8751CB657520083C1A8 /* icon_yukle_depo.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B6C8741CB657520083C1A8 /* icon_yukle_depo.png */; };
 		94B6C8771CB6575A0083C1A8 /* icon_yukle_depo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B6C8761CB6575A0083C1A8 /* icon_yukle_depo@2x.png */; };
 		94B6C8791CB657610083C1A8 /* icon_yukle_depo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B6C8781CB657610083C1A8 /* icon_yukle_depo@3x.png */; };
@@ -2254,6 +2269,21 @@
 		94A375251D31B2FC00D06A0C /* VideofyPreparationInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideofyPreparationInfoView.m; sourceTree = "<group>"; };
 		94A375271D31C1D600D06A0C /* VideofyDepoMusicModalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideofyDepoMusicModalController.h; sourceTree = "<group>"; };
 		94A375281D31C1D600D06A0C /* VideofyDepoMusicModalController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideofyDepoMusicModalController.m; sourceTree = "<group>"; };
+		94B2F3361D373E48009CD8B1 /* icon_fb_aktar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_fb_aktar.png; sourceTree = "<group>"; };
+		94B2F3371D373E48009CD8B1 /* icon_fb_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_fb_big.png; sourceTree = "<group>"; };
+		94B2F3381D373E48009CD8B1 /* icon_ig_aktar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_ig_aktar.png; sourceTree = "<group>"; };
+		94B2F3391D373E48009CD8B1 /* icon_ig_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_ig_big.png; sourceTree = "<group>"; };
+		94B2F33A1D373E48009CD8B1 /* icon_sm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_sm.png; sourceTree = "<group>"; };
+		94B2F3401D373E53009CD8B1 /* icon_fb_aktar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_fb_aktar@2x.png"; sourceTree = "<group>"; };
+		94B2F3411D373E53009CD8B1 /* icon_fb_big@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_fb_big@2x.png"; sourceTree = "<group>"; };
+		94B2F3421D373E53009CD8B1 /* icon_ig_aktar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_ig_aktar@2x.png"; sourceTree = "<group>"; };
+		94B2F3431D373E53009CD8B1 /* icon_ig_big@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_ig_big@2x.png"; sourceTree = "<group>"; };
+		94B2F3441D373E53009CD8B1 /* icon_sm@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_sm@2x.png"; sourceTree = "<group>"; };
+		94B2F34A1D373E5C009CD8B1 /* icon_fb_aktar@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_fb_aktar@3x.png"; sourceTree = "<group>"; };
+		94B2F34B1D373E5C009CD8B1 /* icon_fb_big@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_fb_big@3x.png"; sourceTree = "<group>"; };
+		94B2F34C1D373E5C009CD8B1 /* icon_ig_aktar@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_ig_aktar@3x.png"; sourceTree = "<group>"; };
+		94B2F34D1D373E5C009CD8B1 /* icon_ig_big@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_ig_big@3x.png"; sourceTree = "<group>"; };
+		94B2F34E1D373E5C009CD8B1 /* icon_sm@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_sm@3x.png"; sourceTree = "<group>"; };
 		94B6C8741CB657520083C1A8 /* icon_yukle_depo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_yukle_depo.png; sourceTree = "<group>"; };
 		94B6C8761CB6575A0083C1A8 /* icon_yukle_depo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_yukle_depo@2x.png"; sourceTree = "<group>"; };
 		94B6C8781CB657610083C1A8 /* icon_yukle_depo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_yukle_depo@3x.png"; sourceTree = "<group>"; };
@@ -3365,6 +3395,21 @@
 				94328BD71CC3E03C00599CEE /* img_baski_2.jpg */,
 				94328BD31CC3E03300599CEE /* img_baski_2@2x.jpg */,
 				94328BDB1CC3E04400599CEE /* img_baski_2@3x.jpg */,
+				94B2F3361D373E48009CD8B1 /* icon_fb_aktar.png */,
+				94B2F3371D373E48009CD8B1 /* icon_fb_big.png */,
+				94B2F3381D373E48009CD8B1 /* icon_ig_aktar.png */,
+				94B2F3391D373E48009CD8B1 /* icon_ig_big.png */,
+				94B2F33A1D373E48009CD8B1 /* icon_sm.png */,
+				94B2F3401D373E53009CD8B1 /* icon_fb_aktar@2x.png */,
+				94B2F3411D373E53009CD8B1 /* icon_fb_big@2x.png */,
+				94B2F3421D373E53009CD8B1 /* icon_ig_aktar@2x.png */,
+				94B2F3431D373E53009CD8B1 /* icon_ig_big@2x.png */,
+				94B2F3441D373E53009CD8B1 /* icon_sm@2x.png */,
+				94B2F34A1D373E5C009CD8B1 /* icon_fb_aktar@3x.png */,
+				94B2F34B1D373E5C009CD8B1 /* icon_fb_big@3x.png */,
+				94B2F34C1D373E5C009CD8B1 /* icon_ig_aktar@3x.png */,
+				94B2F34D1D373E5C009CD8B1 /* icon_ig_big@3x.png */,
+				94B2F34E1D373E5C009CD8B1 /* icon_sm@3x.png */,
 				94FAE0B51D2F1B3400BC9F77 /* icon_bottom_addmusic.png */,
 				94FAE0B71D2F1B3D00BC9F77 /* icon_bottom_addmusic@2x.png */,
 				94FAE0B91D2F1B4300BC9F77 /* icon_bottom_addmusic@3x.png */,
@@ -4283,6 +4328,7 @@
 				94FAE0E91D2F7E7800BC9F77 /* minibutton_pause.png in Resources */,
 				94884C901C90AFC3006722F7 /* buttonbg_yellow.png in Resources */,
 				0589066319CC524900A9E517 /* TurkcellSaturaReg.ttf in Resources */,
+				94B2F33C1D373E48009CD8B1 /* icon_fb_big.png in Resources */,
 				05994F971A0B57080081F000 /* music_backward.png in Resources */,
 				94E549351CC6BA43003CB5DC /* icon_select_on@3x.png in Resources */,
 				94884C941C90AFCC006722F7 /* buttonbg_yellow@2x.png in Resources */,
@@ -4322,6 +4368,7 @@
 				24FE7B0F1B6A5A98007B53A0 /* white_print_icon@2x.png in Resources */,
 				058219D81A3850E2001FA679 /* close_icon.png in Resources */,
 				051CB3F619D2F71200E5FC88 /* document_icon.png in Resources */,
+				94B2F33F1D373E48009CD8B1 /* icon_sm.png in Resources */,
 				05A9382E1AF6AE9100AE2892 /* updater_strings.plist in Resources */,
 				057C9D881A2B8D68001DDDEC /* music_next.png in Resources */,
 				050A7B2019F7CBB600B084B9 /* volume_level@2x.png in Resources */,
@@ -4329,9 +4376,11 @@
 				058BC22F1A308ACB0007F4DE /* video_tour@2x.png in Resources */,
 				05F178451BFBB4A70014B2BD /* cropy.png in Resources */,
 				05C6C7181B3C212A00CB6CE5 /* siyah_bg@2x.png in Resources */,
+				94B2F33B1D373E48009CD8B1 /* icon_fb_aktar.png in Resources */,
 				0526448E19D5A26400B63759 /* notifications_icon.png in Resources */,
 				564A318F1A93419D00C5B755 /* profile_icon@2x.png in Resources */,
 				0569C8341A8A2B61000E0486 /* Icon.png in Resources */,
+				94B2F3451D373E53009CD8B1 /* icon_fb_aktar@2x.png in Resources */,
 				050D4C411A31E77F00809A01 /* sync_prefs@2x.png in Resources */,
 				949414E81CC8BCCF008904E2 /* icon_m_baskial_w@2x.png in Resources */,
 				94B6C8771CB6575A0083C1A8 /* icon_yukle_depo@2x.png in Resources */,
@@ -4351,6 +4400,7 @@
 				059AD37B1A1E26A000AA41BD /* circle_fav_icon.png in Resources */,
 				055A3F4A19E7F9D6004A0121 /* photo_header_with_flap_first.png in Resources */,
 				058219D61A3850E2001FA679 /* multiply.png in Resources */,
+				94B2F3481D373E53009CD8B1 /* icon_ig_big@2x.png in Resources */,
 				057C9D871A2B8D68001DDDEC /* music_prev.png in Resources */,
 				05224AB919DC4A2D00214767 /* selectAll_checkbox@2x.png in Resources */,
 				0589066619CC524900A9E517 /* TurkcellSaturaIta.ttf in Resources */,
@@ -4461,6 +4511,7 @@
 				05A7CE601A7FC0FD00020B6F /* yuvarlakbulut@3x.png in Resources */,
 				94C7CF011D2CE83A0040897A /* overlay_grid_blank@2x.png in Resources */,
 				94E549231CC6BA34003CB5DC /* icon_dialog_success@2x.png in Resources */,
+				94B2F33E1D373E48009CD8B1 /* icon_ig_big.png in Resources */,
 				051CB3FA19D2F71200E5FC88 /* blue_add_new_folder_icon.png in Resources */,
 				949414F31CC8BCD8008904E2 /* icon_m_yardim@3x.png in Resources */,
 				051CB40819D2F71200E5FC88 /* passive_dots_icon@2x.png in Resources */,
@@ -4475,6 +4526,7 @@
 				051CB3EE19D2F71200E5FC88 /* nav_delete_icon.png in Resources */,
 				0589062F19CC226D00A9E517 /* nav_favourite_icon@2x.png in Resources */,
 				05A7CE5A1A7FBD3E00020B6F /* percent@3x.png in Resources */,
+				94B2F34F1D373E5C009CD8B1 /* icon_fb_aktar@3x.png in Resources */,
 				05AF7C911A1C9FE800F5011A /* recent_activity_icon@2x.png in Resources */,
 				056B38551A841866009292BA /* terms_old.htm in Resources */,
 				05224AAC19DC4A2D00214767 /* selected_mask.png in Resources */,
@@ -4483,6 +4535,7 @@
 				051CB3F319D2F71200E5FC88 /* empty_state_icon.png in Resources */,
 				053F993B19E1C40900928F22 /* unable_file_icon@2x.png in Resources */,
 				94FAE0B61D2F1B3400BC9F77 /* icon_bottom_addmusic.png in Resources */,
+				94B2F3531D373E5C009CD8B1 /* icon_sm@3x.png in Resources */,
 				054B8D3B1A0FEDC500D24420 /* menu_drop_black@2x.png in Resources */,
 				051CB3F519D2F71200E5FC88 /* dots_icon.png in Resources */,
 				56FCFDD51A9C7DDA00AC041C /* info_icon.png in Resources */,
@@ -4494,6 +4547,7 @@
 				056BEC861A8AA7CF00BA0805 /* pre_login_info2@2x.png in Resources */,
 				0526448519D5A26400B63759 /* tick_icon@2x.png in Resources */,
 				0526448119D5A26400B63759 /* macbook_icon@2x.png in Resources */,
+				94B2F3521D373E5C009CD8B1 /* icon_ig_big@3x.png in Resources */,
 				058337E219ED9EEA00DCF0C5 /* airplay_icon.png in Resources */,
 				0589062E19CC226D00A9E517 /* nav_favourite_icon.png in Resources */,
 				9433BD151D21EC5F00991483 /* icon_menu_dbtasi_w@2x.png in Resources */,
@@ -4628,6 +4682,7 @@
 				051CB3FC19D2F71200E5FC88 /* blue_add_camera_shot_icon.png in Resources */,
 				051CB41019D2F71200E5FC88 /* yellow_button_bg.png in Resources */,
 				05A7CE641A7FC1EF00020B6F /* dolancember.png in Resources */,
+				94B2F3471D373E53009CD8B1 /* icon_ig_aktar@2x.png in Resources */,
 				0569C8391A8A324A000E0486 /* Icon_180.png in Resources */,
 				055F527C1B1CD6570052C854 /* Icon_76.png in Resources */,
 				051CB40419D2F71200E5FC88 /* nav_sort_icon@2x.png in Resources */,
@@ -4653,6 +4708,7 @@
 				94328BD51CC3E03300599CEE /* img_baski_2@2x.jpg in Resources */,
 				059E9A051A35DBB300922A77 /* sms_icon.png in Resources */,
 				56FCFDD61A9C7DDA00AC041C /* info_icon@2x.png in Resources */,
+				94B2F3501D373E5C009CD8B1 /* icon_fb_big@3x.png in Resources */,
 				0526447E19D5A26400B63759 /* iphone_icon.png in Resources */,
 				9433BD251D220D3200991483 /* bg_fullimg@3x.png in Resources */,
 				0589065519CC2B9500A9E517 /* yellow_fav_icon@2x.png in Resources */,
@@ -4663,6 +4719,7 @@
 				05C6C7131B3C212A00CB6CE5 /* tamam_rollover@3x.png in Resources */,
 				9433BD0D1D21EB7A00991483 /* icon_dbtasi.png in Resources */,
 				0526447C19D5A26400B63759 /* android_icon.png in Resources */,
+				94B2F3511D373E5C009CD8B1 /* icon_ig_aktar@3x.png in Resources */,
 				058BC2381A30D46C0007F4DE /* textfield_bg@2x.png in Resources */,
 				050D4C401A31E77F00809A01 /* sync_prefs.png in Resources */,
 				05F178471BFBB4A70014B2BD /* yellow_cropy@2x.png in Resources */,
@@ -4705,6 +4762,7 @@
 				94E549321CC6BA43003CB5DC /* icon_menu_bizeulasin_w@3x.png in Resources */,
 				0526448C19D5A26400B63759 /* help_icon.png in Resources */,
 				0589062519CC226D00A9E517 /* logout_icon.png in Resources */,
+				94B2F33D1D373E48009CD8B1 /* icon_ig_aktar.png in Resources */,
 				05AF7CA81A1CC0A200F5011A /* circle_delete_icon@2x.png in Resources */,
 				0526448319D5A26400B63759 /* android_icon@2x.png in Resources */,
 				94B6C8791CB657610083C1A8 /* icon_yukle_depo@3x.png in Resources */,
@@ -4727,6 +4785,7 @@
 				057C9D761A2B494E001DDDEC /* docs_icon.png in Resources */,
 				051CB40219D2F71200E5FC88 /* nav_blue_tick@2x.png in Resources */,
 				051CB3B219D2F6F700E5FC88 /* right_grey_icon.png in Resources */,
+				94B2F3491D373E53009CD8B1 /* icon_sm@2x.png in Resources */,
 				94FAE0E71D2F7E7800BC9F77 /* icon_list_circle.png in Resources */,
 				0589063519CC2A0400A9E517 /* fav_icon.png in Resources */,
 				051412A219D46393000EAE63 /* Default-568h_old@2x.png in Resources */,
@@ -4741,6 +4800,7 @@
 				05994F9E1A0B572D0081F000 /* music_play_icon@2x.png in Resources */,
 				051CB41219D2F71200E5FC88 /* check_checked_icon@2x.png in Resources */,
 				949414E31CC8BCC4008904E2 /* icon_m_yardim.png in Resources */,
+				94B2F3461D373E53009CD8B1 /* icon_fb_big@2x.png in Resources */,
 				0589064B19CC2B9500A9E517 /* yellow_photos_icon.png in Resources */,
 				563FB1BD1AA5EB030066F8E6 /* settings_icon.png in Resources */,
 				057C9D6E1A2B48F8001DDDEC /* musics_icon.png in Resources */,

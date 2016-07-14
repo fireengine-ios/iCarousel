@@ -20,8 +20,7 @@
     NSString *parentListingUrl = [NSString stringWithFormat:FILE_LISTING_MAIN_URL, @"", [AppUtil serverSortNameByEnum:sortType], [AppUtil isAscByEnum:sortType] ? @"ASC" : @"DESC", page, size];
 	NSURL *url = [NSURL URLWithString:parentListingUrl];
 	
-    NSString *log = [NSString stringWithFormat:@"FileListDao requestFileListingForParentForPage url: %@", parentListingUrl];
-    IGLog(log);
+    IGLog(@"[GET] FileListDao requestFileListingForParentForPage");
 
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setDelegate:self];
@@ -36,8 +35,7 @@
     NSString *parentListingUrl = [NSString stringWithFormat:FILE_LISTING_MAIN_URL, folderUuid, [AppUtil serverSortNameByEnum:sortType], [AppUtil isAscByEnum:sortType] ? @"ASC" : @"DESC", page, size];
 	NSURL *url = [NSURL URLWithString:parentListingUrl];
 	
-    NSString *log = [NSString stringWithFormat:@"FileListDao requestFileListingForFolder url: %@", parentListingUrl];
-    IGLog(log);
+    IGLog(@"[GET] FileListDao requestFileListingForFolder");
 
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setDelegate:self];
@@ -52,8 +50,7 @@
     NSString *parentListingUrl = [NSString stringWithFormat:FOLDER_LISTING_MAIN_URL, folderUuid==nil ? @"" : folderUuid, [AppUtil serverSortNameByEnum:sortType], [AppUtil isAscByEnum:sortType] ? @"ASC" : @"DESC", page, size];
     NSURL *url = [NSURL URLWithString:parentListingUrl];
     
-    NSString *log = [NSString stringWithFormat:@"FileListDao requestFolderListingForFolder url: %@", parentListingUrl];
-    IGLog(log);
+    IGLog(@"[GET] FileListDao requestFolderListingForFolder");
 
     //    NSLog(@"FOLDER URL: %@", parentListingUrl);
     
@@ -69,9 +66,6 @@
 	if (!error) {
 		NSString *responseEnc = [request responseString];
 		
-        NSString *log = [NSString stringWithFormat:@"FileListDao requestFinished with result: %@", responseEnc];
-        IGLog(log);
-
         //        NSLog(@"File Listing Response: %@", responseEnc);
         
 		SBJSON *jsonParser = [SBJSON new];
@@ -89,6 +83,7 @@
                     [result addObject:parsedFile];
                 }
             }
+            IGLog(@"FileListDao requestFinished successfully");
             [self shouldReturnSuccessWithObject:result];
         } else {
             IGLog(@"FileListDao requestFinished with maindict null returning general error");

@@ -13,7 +13,7 @@
 - (void) requestFbPermissionTypes {
     NSURL *url = [NSURL URLWithString:FB_PERMISSIONS_URL];
     
-    IGLog(@"FBPermissionDao requestFbPermissionTypes called");
+    IGLog(@"[GET] FBPermissionDao requestFbPermissionTypes called");
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setDelegate:self];
@@ -31,16 +31,19 @@
         if(mainDict != nil && [mainDict isKindOfClass:[NSDictionary class]]) {
             NSArray *permissionsArr = [mainDict objectForKey:@"permissions"];
             if(permissionsArr != nil && ![permissionsArr isKindOfClass:[NSNull class]]) {
+                IGLog(@"FBPermissionDao request finished successfully");
                 [self shouldReturnSuccessWithObject:permissionsArr];
                 return;
             }
         } else if(mainDict != nil && [mainDict isKindOfClass:[NSArray class]]) {
             //dict beklerken array gelme durumu oldugundan bu sekilde gelistirme eklendi
             NSArray *mainArr = (NSArray *) mainDict;
+            IGLog(@"FBPermissionDao request finished successfully");
             [self shouldReturnSuccessWithObject:mainArr];
             return;
         }
     }
+    IGLog(@"FBPermissionDao request failed with general error message");
     [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
 }
 

@@ -29,7 +29,7 @@
 - (void) requestTokenForMsisdn:(NSString *) msisdnVal andPassword:(NSString *) passVal shouldRememberMe:(BOOL) rememberMeFlag withCaptchaId:(NSString *) captchaId withCaptchaValue:(NSString *) captchaValue {
     
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:TOKEN_URL, rememberMeFlag ? @"on" : @"off"]];
-    IGLog(@"Calling requestTokenForMsisdn:andPassword:shouldRememberMe:");
+    IGLog(@"[POST] Calling requestTokenForMsisdn:andPassword:shouldRememberMe:");
 	
     NSDictionary *deviceInfo = [NSDictionary dictionaryWithObjectsAndKeys:
                                 [[UIDevice currentDevice] identifierForVendor].UUIDString, @"uuid",
@@ -37,9 +37,6 @@
                                 (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? @"IPAD" : @"IPHONE"), @"deviceType",
 //                                ([AppUtil readFirstVisitOverFlag] ? @"false" : @"true"), @"newDevice",
                                 nil];
-    NSString *logParams = [NSString stringWithFormat:@"requestTokenForMsisdn:andPassword:shouldRememberMe: %@", deviceInfo];
-    IGLog(logParams);
-
 //    NSLog(@"Device Info: %@", deviceInfo);
 
     NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -74,7 +71,7 @@
 
 - (void) requestTokenByRememberMe {
     NSURL *url = [NSURL URLWithString:REMEMBER_ME_URL];
-    IGLog(@"Calling requestTokenByRememberMe");
+    IGLog(@"[POST] Calling requestTokenByRememberMe");
     
     NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:
                                 [[UIDevice currentDevice] identifierForVendor].UUIDString, @"uuid",
@@ -83,9 +80,6 @@
 //                                ([AppUtil readFirstVisitOverFlag] ? @"false" : @"true"), @"newDevice",
                                 nil];
     
-    NSString *logParams = [NSString stringWithFormat:@"requestTokenByRememberMe %@", info];
-    IGLog(logParams);
-
     SBJSON *json = [SBJSON new];
     NSString *jsonStr = [json stringWithObject:info];
     NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
@@ -113,15 +107,13 @@
         NSString *responseStr = [request responseString];
         NSLog(@"RESULT: %@", responseStr);
 
-        NSString *log = [NSString stringWithFormat:@"RequestTokenDao request finished with result:%@", responseStr];
-        IGLog(log);
-        
         SBJSON *jsonParser = [SBJSON new];
         NSDictionary *dict = [jsonParser objectWithString:responseStr];
         if(dict != nil && [dict isKindOfClass:[NSDictionary class]]) {
             NSNumber *errorCode = [dict objectForKey:@"errorCode"];
             if(errorCode != nil && ![errorCode isKindOfClass:[NSNull class]]) {
                 if([errorCode intValue] == 4002) {
+                    IGLog(@"RequestTokenDao request failed with captcha error");
                     SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:CAPTCHA_ERROR_MESSAGE]);
                     return;
                 }
@@ -182,8 +174,10 @@
             [[CurioSDK shared] sendEvent:@"LoginSuccess" eventValue:@"true"];
             [MPush hitTag:@"LoginSuccess" withValue:@"true"];
 
+            IGLog(@"RequestTokenDao request finished successfully");
             SuppressPerformSelectorLeakWarning([delegate performSelector:successMethod]);
         } else {
+            IGLog(@"RequestTokenDao request failed with token error");
             SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:TOKEN_ERROR_MESSAGE]);
         }
 	} else {

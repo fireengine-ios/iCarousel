@@ -13,7 +13,7 @@
 - (void) requestFBStart {
     NSURL *url = [NSURL URLWithString:FB_START_URL];
     
-    IGLog(@"FBStartDao requestFBStart called");
+    IGLog(@"[GET] FBStartDao requestFBStart called");
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setDelegate:self];
@@ -25,9 +25,11 @@
     if (!error) {
         NSString *responseStr = [request responseString];
         NSLog(@"FBStartDao requestFBStart Response: %@", responseStr);
+        IGLog(@"FBStartDao request finished successfully");
         [self shouldReturnSuccess];
         return;
     }
+    IGLog(@"FBStartDao request failed with general error");
     [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
 }
 
