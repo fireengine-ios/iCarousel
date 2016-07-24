@@ -43,6 +43,7 @@
             NSString *email = [mainDict objectForKey:@"email"];
             NSString *phoneNumber = [mainDict objectForKey:@"phoneNumber"];
             NSString *countryCode = [mainDict objectForKey:@"countryCode"];
+            NSString *cellografId = [mainDict objectForKey:@"cellografId"];
             
             user.fullName = [NSString stringWithFormat:@"%@ %@", [self strByRawVal:name], [self strByRawVal:surname]];
             //            user.fullName = [NSString stringWithFormat:@"%@", [self strByRawVal:name]];
@@ -53,6 +54,7 @@
             user.email = email;
             user.phoneNumber = [self strByRawVal:phoneNumber];
             user.countryCode = [self strByRawVal:countryCode];
+            user.cellographId = [self strByRawVal:cellografId];
 
             if(mobileUploadsSpecialFolderUuid != nil && ![mobileUploadsSpecialFolderUuid isKindOfClass:[NSNull class]]) {
                 user.mobileUploadFolderUuid = mobileUploadsSpecialFolderUuid;

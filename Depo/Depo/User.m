@@ -21,6 +21,7 @@
 @synthesize username;
 @synthesize phoneNumber;
 @synthesize countryCode;
+@synthesize cellographId;
 
 - (id) init {
     if(self = [super init]) {

@@ -730,7 +730,7 @@
 "PromoCodeEntrance"="Promosyon Kod Girişi";
 "PromoSuccess"="Promosyon kodunuz onaylandığında Paketler ekranında yeni paketinizi görebilirsiniz.";
 "PromoError"="Lütfen promosyon kodunuzu kontrol edin";
-"SocialMediaTitle"="Sosyal Medya Entegrasyonu";
+"SocialMediaTitle"="Sosyal Medya";
 "FacebookExportTitle"="Facebook'tan Taşı";
 "InstagramExportTitle"="Instagram'dan Taşı";
 "MoreMenuVideofyTitle"="Hikaye Oluştur";
@@ -746,3 +746,5 @@
 "Add"="Ekle";
 "HomePage"="Ana Sayfa";
 "VideofyPreparationMessage"="Videonuz hazırlanıyor... Tamamlandığında hikayelerim bölümünden ulaşabilirsiniz.";
+"CellographCurrent"="GÜNCEL SİPARİŞLER";
+"CellographHistory"="ESKİ SİPARİŞLER";

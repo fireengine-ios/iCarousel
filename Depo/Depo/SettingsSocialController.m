@@ -22,6 +22,9 @@
 @synthesize mainTable;
 @synthesize fbPermissionDao;
 @synthesize fbConnectDao;
+@synthesize fbStatusDao;
+@synthesize fbStartDao;
+@synthesize fbStopDao;
 
 - (id) init {
     if(self = [super init]) {
@@ -38,6 +41,21 @@
         fbConnectDao.successMethod = @selector(fbConnectSuccessCallback);
         fbConnectDao.failMethod = @selector(fbConnectFailCallback:);
         
+        fbStatusDao = [[FBStatusDao alloc] init];
+        fbStatusDao.delegate = self;
+        fbStatusDao.successMethod = @selector(fbStatusSuccessCallback:);
+        fbStatusDao.failMethod = @selector(fbStatusFailCallback:);
+
+        fbStartDao = [[FBStartDao alloc] init];
+        fbStartDao.delegate = self;
+        fbStartDao.successMethod = @selector(fbStartSuccessCallback);
+        fbStartDao.failMethod = @selector(fbStartFailCallback:);
+
+        fbStopDao = [[FBStopDao alloc] init];
+        fbStopDao.delegate = self;
+        fbStopDao.successMethod = @selector(fbStopSuccessCallback);
+        fbStopDao.failMethod = @selector(fbStopFailCallback:);
+
         mainTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
         mainTable.bounces = NO;
         mainTable.delegate = self;
@@ -64,15 +82,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *cellIdentifier = [NSString stringWithFormat:@"SettingsSharedCell%d-%d", (int)indexPath.section, (int)indexPath.row];
-    double cellHeight = 69;
     
     if(indexPath.row == 0) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"FacebookExportTitle", @"") titleColor:nil subTitleText:@"" iconName:@"icon_fb_aktar.png" hasSeparator:YES isLink:YES linkText:@"" cellHeight:cellHeight];
-        cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
-        return cell;
-    } else if (indexPath.row == 1) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"InstagramExportTitle", @"") titleColor:nil subTitleText:@"" iconName:@"icon_dbtasi" hasSeparator:YES isLink:YES linkText:@"" cellHeight:cellHeight];
-        cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+        TitleWithSwitchCell *cell = [[TitleWithSwitchCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withIcon:@"icon_fb_aktar.png" withTitle:NSLocalizedString(@"FacebookExportTitle", @"") withSwitchKey:FB_AUTO_SYNC_SWITCH_KEY withIndex:(int)indexPath.row];
+        cell.delegate = self;
         return cell;
     } else {
         return nil;
@@ -80,15 +93,32 @@
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch ([indexPath row]) {
-        case 0:
-            [self triggerFacebookLogin];
-            break;
-        case 1:
-            break;
-        default:
-            break;
+}
+
+- (void) titleWithSwitchValueChanged:(BOOL)isOn forKey:(NSString *)switchKeyRef {
+    if([switchKeyRef isEqualToString:FB_AUTO_SYNC_SWITCH_KEY]) {
+        if(isOn != [[NSUserDefaults standardUserDefaults] boolForKey:switchKeyRef]) {
+            if(isOn) {
+                [self triggerFacebookStart];
+            } else {
+                [self triggerFacebookStop];
+            }
+            [[NSUserDefaults standardUserDefaults] setBool:isOn forKey:switchKeyRef];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
     }
+}
+
+- (void) triggerFacebookStart {
+    NSLog(@"At triggerFacebookStart");
+    [fbStatusDao requestFBStatus];
+    [self showLoading];
+}
+
+- (void) triggerFacebookStop {
+    NSLog(@"At triggerFacebookStop");
+    [fbStopDao requestFBStop];
+    [self showLoading];
 }
 
 - (void) triggerFacebookLogin {
@@ -107,37 +137,46 @@
 }
 
 - (void) fbPermissionSuccessCallback:(NSArray *) permissions {
+    IGLog(@"FB Permission succeeded");
     [self hideLoading];
-    [self triggerFBLoginWithPermissions:permissions];
+    //TODO servisten gelende publish_actions vardi, o da hata veriyordu. Ayrıca publish için ikinci bir request yapmak gerekiyor API'ye
+    [self triggerFBLoginWithPermissions:[NSArray arrayWithObjects:@"public_profile", @"user_photos", @"user_videos", @"user_birthday", @"user_events", nil]];
 }
 
 - (void) fbPermissionFailCallback:(NSString *) errorMessage {
+    IGLog(@"FB Permission failed");
     [self hideLoading];
     NSArray *permissions = [NSArray arrayWithObjects:@"public_profile", @"user_photos", @"user_videos", @"user_birthday", nil];
     [self triggerFBLoginWithPermissions:permissions];
 }
 
 - (void) fbConnectSuccessCallback {
-    [self hideLoading];
-    FacebookController *controller = [[FacebookController alloc] init];
-    [self.nav pushViewController:controller animated:YES];
+    IGLog(@"FB Connect succeeded");
+    [fbStartDao requestFBStart];
 }
 
 - (void) fbConnectFailCallback:(NSString *) errorMessage {
+    IGLog(@"FB Connect failed");
     [self hideLoading];
     [self showErrorAlertWithMessage:errorMessage];
+    [[NSNotificationCenter defaultCenter] postNotificationName:FB_AUTO_SYNC_STOP_ERR_NOT_KEY object:nil userInfo:nil];
 }
 
 - (void) triggerFBLoginWithPermissions:(NSArray *) permissions {
+    [self hideLoading];
     FBSDKLoginManager *fbLoginButton = [[FBSDKLoginManager alloc] init];
     [fbLoginButton logInWithReadPermissions:permissions fromViewController:self handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
         if (error) {
             NSLog(@"Process error");
             dispatch_async(dispatch_get_main_queue(), ^(){
                 [self showErrorAlertWithMessage:NSLocalizedString(@"FBConnectError", @"")];
+                [[NSNotificationCenter defaultCenter] postNotificationName:FB_AUTO_SYNC_STOP_ERR_NOT_KEY object:nil userInfo:nil];
             });
         } else if (result.isCancelled) {
             NSLog(@"Cancelled");
+            dispatch_async(dispatch_get_main_queue(), ^(){
+                [[NSNotificationCenter defaultCenter] postNotificationName:FB_AUTO_SYNC_STOP_ERR_NOT_KEY object:nil userInfo:nil];
+            });
         } else {
             NSLog(@"Logged in");
             dispatch_async(dispatch_get_main_queue(), ^(){
@@ -147,6 +186,44 @@
             });
         }
     }];
+}
+
+- (void) fbStatusSuccessCallback:(SocialExportResult *) fbStatus {
+    if(fbStatus && fbStatus.connected) {
+        IGLog(@"FB Status: connected");
+        [fbStartDao requestFBStart];
+    } else {
+        IGLog(@"FB Status: not connected");
+        [fbPermissionDao requestFbPermissionTypes];
+    }
+}
+
+- (void) fbStatusFailCallback:(NSString *) errorMessage {
+    IGLog(@"FB Status service failed. Calling permission dao");
+    [fbPermissionDao requestFbPermissionTypes];
+}
+
+- (void) fbStartSuccessCallback {
+    IGLog(@"FB Start succeed");
+    [self hideLoading];
+}
+
+- (void) fbStartFailCallback:(NSString *) errorMessage {
+    IGLog(@"FB Start failed");
+    [self hideLoading];
+    [self showErrorAlertWithMessage:errorMessage];
+    [[NSNotificationCenter defaultCenter] postNotificationName:FB_AUTO_SYNC_STOP_ERR_NOT_KEY object:nil userInfo:nil];
+}
+
+- (void) fbStopSuccessCallback {
+    IGLog(@"FB Stop succeeded");
+    [self hideLoading];
+}
+
+- (void) fbStopFailCallback:(NSString *) errorMessage {
+    IGLog(@"FB Stop failed");
+    [self hideLoading];
+    [self showErrorAlertWithMessage:errorMessage];
 }
 
 @end

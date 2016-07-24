@@ -161,6 +161,12 @@
 
 #define FB_START_URL BASE_URL@"/migration/facebook/start"
 
+#define FB_STOP_URL BASE_URL@"/migration/facebook/stop"
+
+#define FILE_TAG_URL BASE_URL@"/filesystem/metadata"
+
+#define TAGGED_FILE_LIST_URL BASE_URL@"/search/byField?fieldName=metadata.Cellograf-Request-Id&fieldValue=%@&sortBy=%@&sortOrder=%@&page=%d&size=%d"
+
 #define APN_URL @"http://pushserver.turkcell.com.tr/PushServer/rest/registerdevice/"
 
 #define SHORTEN_URL @"https://www.googleapis.com/urlshortener/v1/url"

@@ -45,7 +45,9 @@
             profileImgView = [[UIImageView alloc] initWithFrame:CGRectMake(17, (60 - profileBgImg.size.height - 2)/2, profileBgImg.size.width - 4, profileBgImg.size.height - 4)];
             profileImgView.image = [Util circularScaleNCrop:profileImage forRect:CGRectMake(0, 0, 44, 44)];
             profileImgView.center = profileBgView.center;
-            [self addSubview:profileImgView];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self addSubview:profileImgView];
+            });
         });
 
         NSString *infoFieldVal = APPDELEGATE.session.user.username;

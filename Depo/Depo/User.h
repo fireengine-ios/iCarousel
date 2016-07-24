@@ -22,5 +22,6 @@
 @property (nonatomic, strong) NSString *countryCode;
 @property (nonatomic) BOOL cropAndSharePresentFlag;
 @property (nonatomic) AccountType accountType;
+@property (nonatomic, strong) NSString *cellographId;
 
 @end

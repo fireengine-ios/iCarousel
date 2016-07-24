@@ -83,9 +83,12 @@
 
         yIndex += 160;
 
-        SimpleButton *sendButton = [[SimpleButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 100)/2, yIndex, 100, 44) withTitle:NSLocalizedString(@"SendButton", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
+        CustomButton *sendButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 60, 20) withImageName:nil withTitle:NSLocalizedString(@"SendButton", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[UIColor whiteColor]];
+//        SimpleButton *sendButton = [[SimpleButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 100)/2, yIndex, 100, 44) withTitle:NSLocalizedString(@"SendButton", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
         [sendButton addTarget:self action:@selector(triggerSend) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:sendButton];
+//        [self.view addSubview:sendButton];
+        UIBarButtonItem *sendItem = [[UIBarButtonItem alloc] initWithCustomView:sendButton];
+        self.navigationItem.rightBarButtonItem = sendItem;
 
         UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(triggerResign)];
         tapGestureRecognizer.numberOfTapsRequired = 1;

@@ -49,6 +49,7 @@
 #import "GroupedPhotosAndVideosController.h"
 #import "PromotionEntryController.h"
 #import "DropboxExportController.h"
+#import "CellographMainController.h"
 
 #define kMenuOpenOriginX 276
 
@@ -255,6 +256,7 @@
 }
 
 - (void) didTriggerCellograph {
+//    CellographMainController *cello = [[CellographMainController alloc] init];
     GroupedPhotosAndVideosController *photo = [[GroupedPhotosAndVideosController alloc] init];
     photo.nav = self.nav;
     photo.myDelegate = self;

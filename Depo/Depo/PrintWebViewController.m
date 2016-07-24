@@ -15,6 +15,9 @@
 #import "CustomButton.h"
 #import "MyNavigationController.h"
 #import "MPush.h"
+#import "AppDelegate.h"
+#import "AppSession.h"
+#import "User.h"
 
 static const NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
@@ -37,7 +40,7 @@ static const NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRS
         [self.navigationItem setLeftBarButtonItem:backToPhotos];
         [self.navigationItem setRightBarButtonItem:nil];
         
-        if([SyncUtil readBaseUrlConstant] != nil) {
+        if(APPDELEGATE.session.user.cellographId != nil) {
             NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[self createPhotoJson:fileList],@"data", nil];
             NSMutableURLRequest *printRequest = [self requestWithPost:dict];
             UIWebView *printWeb = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
@@ -99,7 +102,7 @@ static const NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRS
 }
 
 - (NSDictionary *) createPhotoJson:(NSArray *)fileList {
-    NSString *uid = [SyncUtil readBaseUrlConstant];
+    NSString *uid = APPDELEGATE.session.user.cellographId;
     NSString *request_id = [self randomStringWithLength:28];
     NSString *date_created = [self currentDateString];
     NSString *date_send = [self currentDateString];
