@@ -17,11 +17,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>5.6</string>
+	<string>5.7</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>5.6</string>
+	<string>5.7</string>
 	<key>UIRequiresFullScreen</key>
 	<true/>
 	<key>UIStatusBarStyle</key>
@@ -67,9 +67,9 @@
 		<string>fbapi</string>
 		<string>dbapi-2</string>
 		<string>dbapi-8-emm</string>
-        <string>fb-messenger-api</string>
-        <string>fbauth2</string>
-        <string>fbshareextension</string>
+		<string>fb-messenger-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
 	</array>
 	<key>NSAppTransportSecurity</key>
 	<dict>
@@ -87,27 +87,27 @@
 			<array>
 				<string>db-zeddgylajxc1op8</string>
 				<string>akillidepo</string>
-                <string>fb577584232413476</string>
+				<string>fb577584232413476</string>
 			</array>
 		</dict>
 	</array>
-    <key>FacebookAppID</key>
-    <string>577584232413476</string>
-    <key>FacebookDisplayName</key>
-    <string>Akıllı Depo</string>
-    <key>Fabric</key>
-    <dict>
-        <key>APIKey</key>
-        <string>e0f104faa90cee1ef51529e825b7fed7cd31f0fe</string>
-        <key>Kits</key>
-        <array>
-            <dict>
-                <key>KitInfo</key>
-                <dict/>
-                <key>KitName</key>
-                <string>Crashlytics</string>
-            </dict>
-        </array>
-    </dict>
+	<key>FacebookAppID</key>
+	<string>577584232413476</string>
+	<key>FacebookDisplayName</key>
+	<string>Akıllı Depo</string>
+	<key>Fabric</key>
+	<dict>
+		<key>APIKey</key>
+		<string>e0f104faa90cee1ef51529e825b7fed7cd31f0fe</string>
+		<key>Kits</key>
+		<array>
+			<dict>
+				<key>KitInfo</key>
+				<dict/>
+				<key>KitName</key>
+				<string>Crashlytics</string>
+			</dict>
+		</array>
+	</dict>
 </dict>
 </plist>

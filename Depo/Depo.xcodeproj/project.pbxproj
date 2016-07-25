@@ -5684,7 +5684,7 @@
 					"-ObjC",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.igones.deponew;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "17f5dfc5-c650-490f-9658-b3191d40a262";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -5772,7 +5772,7 @@
 					"-ObjC",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.igones.deponew;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5910c814-1c2d-4395-b8f8-abe8da320e00";
 				TARGETED_DEVICE_FAMILY = "1,2";
