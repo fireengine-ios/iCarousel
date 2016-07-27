@@ -28,12 +28,14 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
 @synthesize seekToZeroBeforePlay;
 @synthesize controlVisible;
 @synthesize video;
+@synthesize videoLink;
 @synthesize controlView;
 @synthesize initialRect;
 @synthesize maxRect;
 @synthesize maxLandscapeRect;
 @synthesize lastContact;
 @synthesize isPlayable;
+@synthesize isLocal;
 @synthesize currentVolume;
 @synthesize playerTryCount;
 
@@ -43,6 +45,7 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
         self.isPlayable = YES;
         self.backgroundColor = [UIColor blackColor];
         self.video = _video;
+        self.videoLink = [NSURL URLWithString:(self.video.videoPreviewUrl ? self.video.videoPreviewUrl : self.video.tempDownloadUrl)];
         self.initialRect = frame;
         self.maxRect = CGRectMake(frame.origin.x, frame.origin.y, APPDELEGATE.window.frame.size.width-frame.origin.x, APPDELEGATE.window.frame.size.height-frame.origin.y);
         self.clipsToBounds = YES;
@@ -56,9 +59,32 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
     return self;
 }
 
+- (id)initWithFrame:(CGRect)frame withVideoLink:(NSURL *) _videoLink {
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.isPlayable = YES;
+        self.backgroundColor = [UIColor blackColor];
+        self.videoLink = _videoLink;
+        self.isLocal = YES;
+        self.initialRect = frame;
+        self.maxRect = CGRectMake(frame.origin.x, frame.origin.y, APPDELEGATE.window.frame.size.width-frame.origin.x, APPDELEGATE.window.frame.size.height-frame.origin.y);
+        self.clipsToBounds = YES;
+        self.maxLandscapeRect = CGRectMake(frame.origin.x, frame.origin.y, APPDELEGATE.window.frame.size.height-frame.origin.x, APPDELEGATE.window.frame.size.width-frame.origin.y);
+        
+        self.currentVolume = 1.0f;
+        self.playerTryCount = -1;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(orientationChanged:)    name:UIDeviceOrientationDidChangeNotification  object:nil];
+    }
+    return self;
+}
+
 - (void) initializePlayer {
-    NSString *videoUrl = self.video.videoPreviewUrl ? self.video.videoPreviewUrl : self.video.tempDownloadUrl;
-    self.currentAsset = [AVURLAsset URLAssetWithURL:[NSURL URLWithString:videoUrl] options:nil];
+    if(isLocal) {
+        self.currentAsset = [AVAsset assetWithURL:self.videoLink];
+    } else {
+        self.currentAsset = [AVURLAsset assetWithURL:self.videoLink];
+    }
     
     NSArray *requestedKeys = [NSArray arrayWithObjects:@"tracks", @"playable", nil];
     
@@ -81,7 +107,7 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
         [controlView removeFromSuperview];
     }
     
-    controlView = [[CustomAVControl alloc] initWithFrame:CGRectMake(0, self.frame.size.height-110, self.frame.size.width, 110) withTotalDuration:self.video.contentLengthDisplay];
+    controlView = [[CustomAVControl alloc] initWithFrame:CGRectMake(0, self.frame.size.height-110, self.frame.size.width, 110) withTotalDuration:self.video ? self.video.contentLengthDisplay : @""];
     //        controlView.alpha = 0.8;
     controlView.delegate = self;
     controlVisible = YES;

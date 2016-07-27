@@ -13,6 +13,7 @@
 #import "VideofyMusicListController.h"
 #import "VideofyPreparationInfoView.h"
 #import "AppDelegate.h"
+#import "VideofyPreviewController.h"
 
 @interface ArrangeSelectedPhotosModalController () {
     SquareSequencedPictureView *focusView;
@@ -278,8 +279,12 @@
 }
 
 - (void) triggerNext {
-    [createDao requestVideofyCreateForStory:self.story];
-    [self showLoading];
+    if([self.story.fileList count] == 0) {
+        [self showErrorAlertWithMessage:NSLocalizedString(@"VideofyFileListEmpty", @"")];
+    } else {
+        VideofyPreviewController *previewController = [[VideofyPreviewController alloc] initWithStory:self.story];
+        [self.navigationController pushViewController:previewController animated:YES];
+    }
 }
 
 - (void) videofyFooterDeleteClicked {

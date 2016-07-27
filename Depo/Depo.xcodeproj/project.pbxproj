@@ -887,6 +887,7 @@
 		94A1D3C41C969F330066D92F /* UpdatePassDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94A1D3C31C969F330066D92F /* UpdatePassDao.m */; };
 		94A375261D31B2FC00D06A0C /* VideofyPreparationInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94A375251D31B2FC00D06A0C /* VideofyPreparationInfoView.m */; };
 		94A375291D31C1D600D06A0C /* VideofyDepoMusicModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94A375281D31C1D600D06A0C /* VideofyDepoMusicModalController.m */; };
+		94B27F761D47E94B0092334A /* VideofyPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94B27F751D47E94B0092334A /* VideofyPreviewController.m */; };
 		94B2F33B1D373E48009CD8B1 /* icon_fb_aktar.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B2F3361D373E48009CD8B1 /* icon_fb_aktar.png */; };
 		94B2F33C1D373E48009CD8B1 /* icon_fb_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B2F3371D373E48009CD8B1 /* icon_fb_big.png */; };
 		94B2F33D1D373E48009CD8B1 /* icon_ig_aktar.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B2F3381D373E48009CD8B1 /* icon_ig_aktar.png */; };
@@ -2280,6 +2281,8 @@
 		94A375251D31B2FC00D06A0C /* VideofyPreparationInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideofyPreparationInfoView.m; sourceTree = "<group>"; };
 		94A375271D31C1D600D06A0C /* VideofyDepoMusicModalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideofyDepoMusicModalController.h; sourceTree = "<group>"; };
 		94A375281D31C1D600D06A0C /* VideofyDepoMusicModalController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideofyDepoMusicModalController.m; sourceTree = "<group>"; };
+		94B27F741D47E94B0092334A /* VideofyPreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideofyPreviewController.h; sourceTree = "<group>"; };
+		94B27F751D47E94B0092334A /* VideofyPreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideofyPreviewController.m; sourceTree = "<group>"; };
 		94B2F3361D373E48009CD8B1 /* icon_fb_aktar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_fb_aktar.png; sourceTree = "<group>"; };
 		94B2F3371D373E48009CD8B1 /* icon_fb_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_fb_big.png; sourceTree = "<group>"; };
 		94B2F3381D373E48009CD8B1 /* icon_ig_aktar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_ig_aktar.png; sourceTree = "<group>"; };
@@ -2773,6 +2776,8 @@
 				94A375281D31C1D600D06A0C /* VideofyDepoMusicModalController.m */,
 				94DCA1011D3CB3FC000965AE /* CellographMainController.h */,
 				94DCA1021D3CB3FC000965AE /* CellographMainController.m */,
+				94B27F741D47E94B0092334A /* VideofyPreviewController.h */,
+				94B27F751D47E94B0092334A /* VideofyPreviewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -5171,6 +5176,7 @@
 				05F4AA281A2F7692000F41B8 /* ActivityUtil.m in Sources */,
 				051E1E5A19CAC90700FD1E03 /* UIImageView+AFNetworking.m in Sources */,
 				059C9ECA1A07DCAD000C54D9 /* FileDetailModalController.m in Sources */,
+				94B27F761D47E94B0092334A /* VideofyPreviewController.m in Sources */,
 				051CB39219D2DD7C00E5FC88 /* PhotoListController.m in Sources */,
 				05E0705F1AB977850038BE68 /* ConstantsDao.m in Sources */,
 				05AF7C981A1CA22200F5011A /* RecentActivityHeaderView.m in Sources */,

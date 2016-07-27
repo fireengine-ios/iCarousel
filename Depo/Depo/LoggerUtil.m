@@ -12,7 +12,7 @@
 
 + (void) logString:(NSString *)text {
     @synchronized(self) {
-        text = [NSString stringWithFormat:@"%@\n", text];
+        text = [NSString stringWithFormat:@"%@ %@\n", [LoggerUtil getLogTimestamp], text];
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentsDirectory = [paths objectAtIndex:0];
         NSString *logPath = [documentsDirectory stringByAppendingPathComponent:@"iglogs.log"];
@@ -39,6 +39,12 @@
             [text writeToFile:logPath atomically:YES encoding:NSUTF8StringEncoding error:nil];
         }
     }
+}
+
++ (NSString *) getLogTimestamp {
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"dd.MM.yyyy HH:mm:ss"];
+    return [dateFormat stringFromDate:[NSDate date]];
 }
 
 @end

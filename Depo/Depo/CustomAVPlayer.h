@@ -21,10 +21,11 @@
 @property (nonatomic, strong) AVPlayerItem *mPlayerItem;
 @property (nonatomic, strong) AVPlayer *player;
 @property (nonatomic, strong) AVPlayerLayer *playerLayer;
-@property (nonatomic, strong) AVURLAsset *currentAsset;
+@property (nonatomic, strong) AVAsset *currentAsset;
 @property (assign) BOOL seekToZeroBeforePlay;
 @property (assign) BOOL controlVisible;
 @property (assign) BOOL isPlayable;
+@property (assign) BOOL isLocal;
 @property (nonatomic) CGRect initialRect;
 @property (nonatomic) CGRect maxRect;
 @property (nonatomic) CGRect maxLandscapeRect;
@@ -32,9 +33,11 @@
 @property (nonatomic) int playerTryCount;
 @property (nonatomic) float currentVolume;
 @property (nonatomic, strong) MetaFile *video;
+@property (nonatomic, strong) NSURL *videoLink;
 @property (nonatomic, strong) CustomAVControl *controlView;
 
 - (id) initWithFrame:(CGRect)frame withVideo:(MetaFile *) _video;
+- (id) initWithFrame:(CGRect)frame withVideoLink:(NSURL *) _videoLink;
 - (void) initializePlayer;
 - (void) willDismiss;
 - (void) updateFrame:(CGRect) newFrame isMax:(BOOL) isMax;

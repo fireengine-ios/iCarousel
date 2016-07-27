@@ -23,7 +23,7 @@
     if(story.musicFileUuid != nil) {
         [info setObject:story.musicFileUuid forKey:@"audioUUID"];
     } else if(story.musicFileId != nil) {
-        [info setObject:story.musicFileId forKey:@"audioID"];
+        [info setObject:story.musicFileId forKey:@"audioId"];
     }
     
     SBJSON *json = [SBJSON new];
