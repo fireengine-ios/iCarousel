@@ -44,5 +44,6 @@
 - (void) mirrorRotation:(UIInterfaceOrientation) orientation;
 - (void) triggerInfo;
 - (void) willDisappear;
+- (void) manualPlay;
 
 @end

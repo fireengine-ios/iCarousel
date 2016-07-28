@@ -250,8 +250,12 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
                 
             case AVPlayerStatusReadyToPlay: {
                 self.playerTryCount = 0;
-                [self.player play];
-                [self.controlView videoDidStart];
+                if(isLocal) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:VIDEO_READY_TO_PLAY_NOTIFICATION object:nil];
+                } else {
+                    [self.player play];
+                    [self.controlView videoDidStart];
+                }
                 
                 float currentVolumeVal = 1.0f;
                 [self.controlView initialVolumeLevel:currentVolumeVal];
@@ -323,6 +327,11 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerHanging) name:@"PlayerHangingNotification" object:nil];
     self.playerTryCount = 0;
     [self.player play];
+}
+
+- (void) manualPlay {
+    [self.player play];
+    [self.controlView videoDidStart];
 }
 
 - (void) customAVShouldBeFullScreen {

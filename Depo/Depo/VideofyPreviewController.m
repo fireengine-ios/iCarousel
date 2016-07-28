@@ -22,11 +22,13 @@
 @synthesize story;
 @synthesize avPlayer;
 @synthesize createDao;
+@synthesize bigPlayButton;
 
 - (id) initWithStory:(Story *)_story {
     if(self = [super init]) {
         self.story = _story;
         self.view.backgroundColor = [UIColor blackColor];
+        self.title = self.story.title;
         
         self.view.autoresizesSubviews = YES;
         self.view.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
@@ -94,6 +96,8 @@
 - (void) loadVideoForPath:(NSString *) path {
     [self hideLoading];
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoReady) name:VIDEO_READY_TO_PLAY_NOTIFICATION object:nil];
+
     NSURL *fileUrl = [NSURL fileURLWithPath:path];
     avPlayer = [[CustomAVPlayer alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.topIndex) withVideoLink:fileUrl];
     avPlayer.delegate = self;
@@ -102,6 +106,19 @@
     avPlayer.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
 
     [avPlayer initializePlayer];
+}
+
+- (void) videoReady {
+    if(!bigPlayButton) {
+        self.bigPlayButton = [[CustomButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width-68)/2, (self.view.frame.size.height-68)/2, 68, 68) withImageName:@"button_play.png"];
+        [bigPlayButton addTarget:self action:@selector(bigPlayClicked) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:bigPlayButton];
+    }
+}
+
+- (void) bigPlayClicked {
+    self.bigPlayButton.hidden = YES;
+    [avPlayer manualPlay];
 }
 
 - (void) previewFailCallback:(NSString *) errorMessage {

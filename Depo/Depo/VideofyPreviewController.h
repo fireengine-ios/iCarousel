@@ -16,6 +16,7 @@
 @property (nonatomic, strong) Story *story;
 @property (nonatomic, strong) CustomAVPlayer *avPlayer;
 @property (nonatomic, strong) VideofyCreateDao *createDao;
+@property (nonatomic, strong) CustomButton *bigPlayButton;
 
 - (id) initWithStory:(Story *) _story;
 

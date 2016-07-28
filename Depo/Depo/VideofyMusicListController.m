@@ -95,6 +95,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void) viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    if(audioPlayer) {
+        [audioPlayer pause];
+        audioPlayer = nil;
+        NSDictionary* userInfo = [NSDictionary dictionaryWithObject:[NSNumber numberWithLong:-1] forKey:@"playingAudioId"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:VIDEOFY_MUSIC_PREVIEW_CHANGED_NOTIFICATION object:self userInfo:userInfo];
+    }
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }

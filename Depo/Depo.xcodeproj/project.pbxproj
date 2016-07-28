@@ -995,6 +995,9 @@
 		94FAE0E81D2F7E7800BC9F77 /* icon_select.png in Resources */ = {isa = PBXBuildFile; fileRef = 94FAE0E41D2F7E7800BC9F77 /* icon_select.png */; };
 		94FAE0E91D2F7E7800BC9F77 /* minibutton_pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 94FAE0E51D2F7E7800BC9F77 /* minibutton_pause.png */; };
 		94FAE0EA1D2F7E7800BC9F77 /* minibutton_play.png in Resources */ = {isa = PBXBuildFile; fileRef = 94FAE0E61D2F7E7800BC9F77 /* minibutton_play.png */; };
+		94FE82AF1D4A85B400F62EF4 /* button_play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94FE82AE1D4A85B400F62EF4 /* button_play@2x.png */; };
+		94FE82B11D4A85BC00F62EF4 /* button_play@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94FE82B01D4A85BC00F62EF4 /* button_play@3x.png */; };
+		94FE82B31D4A85C600F62EF4 /* button_play.png in Resources */ = {isa = PBXBuildFile; fileRef = 94FE82B21D4A85C600F62EF4 /* button_play.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -2427,6 +2430,9 @@
 		94FAE0E41D2F7E7800BC9F77 /* icon_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_select.png; sourceTree = "<group>"; };
 		94FAE0E51D2F7E7800BC9F77 /* minibutton_pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = minibutton_pause.png; sourceTree = "<group>"; };
 		94FAE0E61D2F7E7800BC9F77 /* minibutton_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = minibutton_play.png; sourceTree = "<group>"; };
+		94FE82AE1D4A85B400F62EF4 /* button_play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_play@2x.png"; sourceTree = "<group>"; };
+		94FE82B01D4A85BC00F62EF4 /* button_play@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_play@3x.png"; sourceTree = "<group>"; };
+		94FE82B21D4A85C600F62EF4 /* button_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_play.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3435,6 +3441,9 @@
 				94328BD71CC3E03C00599CEE /* img_baski_2.jpg */,
 				94328BD31CC3E03300599CEE /* img_baski_2@2x.jpg */,
 				94328BDB1CC3E04400599CEE /* img_baski_2@3x.jpg */,
+				94FE82B21D4A85C600F62EF4 /* button_play.png */,
+				94FE82AE1D4A85B400F62EF4 /* button_play@2x.png */,
+				94FE82B01D4A85BC00F62EF4 /* button_play@3x.png */,
 				94B2F3361D373E48009CD8B1 /* icon_fb_aktar.png */,
 				94B2F3371D373E48009CD8B1 /* icon_fb_big.png */,
 				94B2F3381D373E48009CD8B1 /* icon_ig_aktar.png */,
@@ -4461,6 +4470,7 @@
 				050D4C3C1A31E58100809A01 /* contacts_backup.png in Resources */,
 				0526447D19D5A26400B63759 /* ipad_icon@2x.png in Resources */,
 				94E549151CC6BA27003CB5DC /* icon_dialog_success.png in Resources */,
+				94FE82B11D4A85BC00F62EF4 /* button_play@3x.png in Resources */,
 				051CB40A19D2F71200E5FC88 /* green_check_icon@2x.png in Resources */,
 				057C9D6F1A2B48F8001DDDEC /* musics_icon@2x.png in Resources */,
 				050A7B1D19F7CBB600B084B9 /* volume_full@2x.png in Resources */,
@@ -4545,6 +4555,7 @@
 				0589062B19CC226D00A9E517 /* profile_bg.png in Resources */,
 				0515F2FB1C4674830098081C /* temp_green_tick_icon.png in Resources */,
 				949414E91CC8BCCF008904E2 /* icon_m_baskial@2x.png in Resources */,
+				94FE82AF1D4A85B400F62EF4 /* button_play@2x.png in Resources */,
 				94884C8F1C90AFC3006722F7 /* buttonbg_blue.png in Resources */,
 				055A3F4B19E7F9D6004A0121 /* photo_header_with_flap_second@2x.png in Resources */,
 				0526448919D5A26400B63759 /* upload_icon@2x.png in Resources */,
@@ -4670,6 +4681,7 @@
 				051CB40E19D2F71200E5FC88 /* white_share_icon@2x.png in Resources */,
 				0515F2FC1C4674830098081C /* temp_green_tick_icon@2x.png in Resources */,
 				0592FC331ACEC6740083A6C6 /* Depo-AppStore.entitlements in Resources */,
+				94FE82B31D4A85C600F62EF4 /* button_play.png in Resources */,
 				058337FF19EDA08200DCF0C5 /* player_progress@2x.png in Resources */,
 				058337F719EDA04A00DCF0C5 /* bttn-player-handle@2x.png in Resources */,
 				0589061C19CC226D00A9E517 /* home_icon@2x.png in Resources */,
