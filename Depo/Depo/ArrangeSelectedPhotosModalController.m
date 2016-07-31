@@ -281,6 +281,8 @@
 - (void) triggerNext {
     if([self.story.fileList count] == 0) {
         [self showErrorAlertWithMessage:NSLocalizedString(@"VideofyFileListEmpty", @"")];
+    } else if(self.story.musicFileId == nil && self.story.musicFileUuid == nil) {
+        [self showErrorAlertWithMessage:NSLocalizedString(@"VideofyMusicEmpty", @"")];
     } else {
         VideofyPreviewController *previewController = [[VideofyPreviewController alloc] initWithStory:self.story];
         [self.navigationController pushViewController:previewController animated:YES];

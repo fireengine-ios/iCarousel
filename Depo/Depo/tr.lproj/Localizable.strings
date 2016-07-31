@@ -750,3 +750,4 @@
 "CellographHistory"="ESKİ SİPARİŞLER";
 "VideofyPreviewDownloadError"="Öngösterim için videoya erişilemedi";
 "VideofyFileListEmpty"="Lütfen en az bir fotoğraf ya da video seçiniz.";
+"VideofyMusicEmpty"="Lütfen videonuz için bir müzik seçiniz.";
