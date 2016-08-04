@@ -838,6 +838,8 @@
 		943751FB1CCB7936003A76A9 /* documents_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0589060C19CC226D00A9E517 /* documents_icon@2x.png */; };
 		9445B97B1C9F28D2000FDB80 /* FileListPopupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9445B97A1C9F28D2000FDB80 /* FileListPopupController.m */; };
 		9445B97E1C9F28FE000FDB80 /* PhotoListPopupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9445B97D1C9F28FE000FDB80 /* PhotoListPopupController.m */; };
+		944C07B51D4FE7CB00D45B61 /* RevisitedGroupedPhotosController.m in Sources */ = {isa = PBXBuildFile; fileRef = 944C07B41D4FE7CB00D45B61 /* RevisitedGroupedPhotosController.m */; };
+		944C07B81D4FE81400D45B61 /* RevisitedPhotoHeaderSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 944C07B71D4FE81400D45B61 /* RevisitedPhotoHeaderSegmentView.m */; };
 		9454FA601CAA81FD00BF1288 /* CurrentMusicListModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9454FA5F1CAA81FD00BF1288 /* CurrentMusicListModalController.m */; };
 		9454FA631CAA821200BF1288 /* CurrentDocumentListModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9454FA621CAA821200BF1288 /* CurrentDocumentListModalController.m */; };
 		9454FA661CAA822300BF1288 /* CurrentPhotoListModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9454FA651CAA822300BF1288 /* CurrentPhotoListModalController.m */; };
@@ -2219,6 +2221,10 @@
 		9445B97A1C9F28D2000FDB80 /* FileListPopupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileListPopupController.m; sourceTree = "<group>"; };
 		9445B97C1C9F28FE000FDB80 /* PhotoListPopupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoListPopupController.h; sourceTree = "<group>"; };
 		9445B97D1C9F28FE000FDB80 /* PhotoListPopupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoListPopupController.m; sourceTree = "<group>"; };
+		944C07B31D4FE7CB00D45B61 /* RevisitedGroupedPhotosController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RevisitedGroupedPhotosController.h; sourceTree = "<group>"; };
+		944C07B41D4FE7CB00D45B61 /* RevisitedGroupedPhotosController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RevisitedGroupedPhotosController.m; sourceTree = "<group>"; };
+		944C07B61D4FE81400D45B61 /* RevisitedPhotoHeaderSegmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RevisitedPhotoHeaderSegmentView.h; sourceTree = "<group>"; };
+		944C07B71D4FE81400D45B61 /* RevisitedPhotoHeaderSegmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RevisitedPhotoHeaderSegmentView.m; sourceTree = "<group>"; };
 		9454FA5E1CAA81FD00BF1288 /* CurrentMusicListModalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentMusicListModalController.h; sourceTree = "<group>"; };
 		9454FA5F1CAA81FD00BF1288 /* CurrentMusicListModalController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentMusicListModalController.m; sourceTree = "<group>"; };
 		9454FA611CAA821200BF1288 /* CurrentDocumentListModalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentDocumentListModalController.h; sourceTree = "<group>"; };
@@ -2784,6 +2790,8 @@
 				94DCA1021D3CB3FC000965AE /* CellographMainController.m */,
 				94B27F741D47E94B0092334A /* VideofyPreviewController.h */,
 				94B27F751D47E94B0092334A /* VideofyPreviewController.m */,
+				944C07B31D4FE7CB00D45B61 /* RevisitedGroupedPhotosController.h */,
+				944C07B41D4FE7CB00D45B61 /* RevisitedGroupedPhotosController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -2871,6 +2879,8 @@
 				94A375251D31B2FC00D06A0C /* VideofyPreparationInfoView.m */,
 				94DCA1041D3CB6AB000965AE /* CellographSegmentView.h */,
 				94DCA1051D3CB6AB000965AE /* CellographSegmentView.m */,
+				944C07B61D4FE81400D45B61 /* RevisitedPhotoHeaderSegmentView.h */,
+				944C07B71D4FE81400D45B61 /* RevisitedPhotoHeaderSegmentView.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -5009,6 +5019,7 @@
 				058337D619ED9AF300DCF0C5 /* VideoPreviewController.m in Sources */,
 				059A46E21A6D3E3F00935023 /* DeviceDao.m in Sources */,
 				051CB3A119D2E42300E5FC88 /* DocCell.m in Sources */,
+				944C07B51D4FE7CB00D45B61 /* RevisitedGroupedPhotosController.m in Sources */,
 				05A938261AF6AE9100AE2892 /* CustomIOS7AlertView.m in Sources */,
 				0579424A1C3FDC0C00899923 /* SignupController.m in Sources */,
 				94E7B4B21CB2D12300385016 /* ReachUsController.m in Sources */,
@@ -5040,6 +5051,7 @@
 				051E1E5319CAC90700FD1E03 /* AFHTTPRequestOperation.m in Sources */,
 				05F28BF11C0739C30002171A /* CurioUtil.m in Sources */,
 				05DEB1ED1A81775F007793DD /* SyncAdapter.m in Sources */,
+				944C07B81D4FE81400D45B61 /* RevisitedPhotoHeaderSegmentView.m in Sources */,
 				9454FA661CAA822300BF1288 /* CurrentPhotoListModalController.m in Sources */,
 				94C7CEFA1D2CE1510040897A /* ArrangeSelectedPhotosModalController.m in Sources */,
 				051E1E8A19CAC92700FD1E03 /* ASIFormDataRequest.m in Sources */,
