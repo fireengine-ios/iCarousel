@@ -199,9 +199,6 @@
     [[CurioSDK shared] sendEvent:@"Login" eventValue:@"Success"];
     [[CurioSDK shared] sendEvent:@"Mnc" eventValue:[AppUtil readCurrentMobileNetworkCode]];
 
-    [MPush hitTag:@"logged_in"];
-    [MPush hitEvent:@"logged_in"];
-
     [APPDELEGATE triggerPostLogin];
 }
 
@@ -292,7 +289,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     IGLog(@"LoginController viewDidLoad");
+
+    [MPush hitTag:@"logged_in" withValue:@"0"];
 }
 
 - (void) viewDidAppear:(BOOL)animated {

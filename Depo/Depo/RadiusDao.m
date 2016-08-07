@@ -114,6 +114,8 @@
             
             [[CurioSDK shared] sendEvent:@"LoginSuccess" eventValue:@"true"];
             [MPush hitTag:@"LoginSuccess" withValue:@"true"];
+            [MPush hitTag:@"logged_in" withValue:@"1"];
+            [MPush hitEvent:@"logged_in"];
             
             [CacheUtil writeCachedMsisdnForPostMigration:nil];
             [CacheUtil writeCachedPassForPostMigration:nil];

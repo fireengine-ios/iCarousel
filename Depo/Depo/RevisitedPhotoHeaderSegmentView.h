@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol RevisitedPhotoHeaderSegmentDelegate <NSObject>
+- (void) revisitedPhotoHeaderSegmentPhotoChosen;
+- (void) revisitedPhotoHeaderSegmentCollectionChosen;
+- (void) revisitedPhotoHeaderSegmentAlbumChosen;
+@end
+
 @interface RevisitedPhotoHeaderSegmentView : UIView
+
+@property (nonatomic, weak) id<RevisitedPhotoHeaderSegmentDelegate> delegate;
+@property (nonatomic, strong) UIImageView *indicator;
 
 @end

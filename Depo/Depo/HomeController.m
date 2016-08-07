@@ -129,9 +129,7 @@
         [usageDao requestUsageInfo];
         [self showLoading];
         
-        if(![[NSUserDefaults standardUserDefaults] objectForKey:@"onKatViewFlag"]){
-            [accountDao requestActiveSubscriptions];
-        }
+        [accountDao requestActiveSubscriptions];
     }
     return self;
 }
@@ -366,64 +364,65 @@
 }
 
 - (void) accountSuccessCallback:(NSArray *) subscriptions {
-    
-    if(APPDELEGATE.session.msisdnEmpty) {
-        MsisdnEntryController *msisdnController = [[MsisdnEntryController alloc] init];
-        MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:msisdnController];
-        [self presentViewController:modalNav animated:YES completion:nil];
-
-//        [APPDELEGATE triggerLogout];
-//        [self showErrorAlertWithMessage:NSLocalizedString(@"MsisdnEmpty", @"")];
-//        return;
-    }
-
-    if(APPDELEGATE.session.emailEmpty && !APPDELEGATE.session.emailEmptyMessageShown && ![AppUtil readDoNotShowAgainFlagForKey:EMPTY_EMAIL_CONFIRM_KEY]) {
-        APPDELEGATE.session.emailEmptyMessageShown = YES;
-        CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"TitleLater", @"") withApproveTitle:NSLocalizedString(@"TitleYes", @"") withMessage:NSLocalizedString(@"EmailEmpty", @"") withModalType:ModalTypeApprove shouldShowCheck:YES withCheckKey:EMPTY_EMAIL_CONFIRM_KEY];
-        confirm.delegate = self;
-        confirm.tag = 111;
-        [APPDELEGATE showCustomConfirm:confirm];
-    } else if(APPDELEGATE.session.emailNotVerified && !APPDELEGATE.session.emailNotVerifiedMessageShown) {
-        APPDELEGATE.session.emailNotVerifiedMessageShown = YES;
-        [self showInfoAlertWithMessage:NSLocalizedString(@"EmailNotVerified", @"")];
-    } else if([subscriptions count] > 0) {
-        //TODO ilk subscription'a bakiyor, bu düzeltilecek
-        currentSubscription = [subscriptions objectAtIndex:0];
-        [self flowChartAdvertising];
-        
-        for(Subscription *subsc in subscriptions) {
-            if(subsc.plan != nil && subsc.plan.cometOfferId != nil) {
-                if(subsc.plan.cometOfferId.intValue == 581814) {
-                    [MPush hitTag:@"platin_user"];
-                }
-            }
+    if(![[NSUserDefaults standardUserDefaults] objectForKey:@"onKatViewFlag"]){
+        if(APPDELEGATE.session.msisdnEmpty) {
+            MsisdnEntryController *msisdnController = [[MsisdnEntryController alloc] init];
+            MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:msisdnController];
+            [self presentViewController:modalNav animated:YES completion:nil];
+            
+            //        [APPDELEGATE triggerLogout];
+            //        [self showErrorAlertWithMessage:NSLocalizedString(@"MsisdnEmpty", @"")];
+            //        return;
         }
-
-        if(APPDELEGATE.session.user.accountType == AccountTypeTurkcell) {
-            BOOL hasAnyTurkcellPackage = NO;
-            for(Subscription *subscription in subscriptions) {
-                if(!subscription.type || !([subscription.type isEqualToString:@"INAPP_PURCHASE_GOOGLE"] || [subscription.type isEqualToString:@"INAPP_PURCHASE_APPLE"])) {
-                    hasAnyTurkcellPackage = YES;
-                }
-            }
-            if(!hasAnyTurkcellPackage) {
-                if(![AppUtil readDoNotShowAgainFlagForKey:@"PORTIN_DONTSHOW_DEFAULTS_KEY"]) {
-                    CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"TitleLater", @"") withApproveTitle:NSLocalizedString(@"TitleYes", @"") withMessage:NSLocalizedString(@"PortinInfoMessage", @"") withModalType:ModalTypeApprove shouldShowCheck:YES withCheckKey:@"PORTIN_DONTSHOW_DEFAULTS_KEY"];
-                    confirm.delegate = self;
-                    confirm.tag = 333;
-                    [APPDELEGATE showCustomConfirm:confirm];
+        
+        if(APPDELEGATE.session.emailEmpty && !APPDELEGATE.session.emailEmptyMessageShown && ![AppUtil readDoNotShowAgainFlagForKey:EMPTY_EMAIL_CONFIRM_KEY]) {
+            APPDELEGATE.session.emailEmptyMessageShown = YES;
+            CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"TitleLater", @"") withApproveTitle:NSLocalizedString(@"TitleYes", @"") withMessage:NSLocalizedString(@"EmailEmpty", @"") withModalType:ModalTypeApprove shouldShowCheck:YES withCheckKey:EMPTY_EMAIL_CONFIRM_KEY];
+            confirm.delegate = self;
+            confirm.tag = 111;
+            [APPDELEGATE showCustomConfirm:confirm];
+        } else if(APPDELEGATE.session.emailNotVerified && !APPDELEGATE.session.emailNotVerifiedMessageShown) {
+            APPDELEGATE.session.emailNotVerifiedMessageShown = YES;
+            [self showInfoAlertWithMessage:NSLocalizedString(@"EmailNotVerified", @"")];
+        } else if([subscriptions count] > 0) {
+            //TODO ilk subscription'a bakiyor, bu düzeltilecek
+            currentSubscription = [subscriptions objectAtIndex:0];
+            [self flowChartAdvertising];
+            
+            for(Subscription *subsc in subscriptions) {
+                if(subsc.plan != nil && subsc.plan.cometOfferId != nil) {
+                    if(subsc.plan.cometOfferId.intValue == 581814) {
+                        [MPush hitTag:@"platin_user"];
+                    }
                 }
             }
             
+            if(APPDELEGATE.session.user.accountType == AccountTypeTurkcell) {
+                BOOL hasAnyTurkcellPackage = NO;
+                for(Subscription *subscription in subscriptions) {
+                    if(!subscription.type || !([subscription.type isEqualToString:@"INAPP_PURCHASE_GOOGLE"] || [subscription.type isEqualToString:@"INAPP_PURCHASE_APPLE"])) {
+                        hasAnyTurkcellPackage = YES;
+                    }
+                }
+                if(!hasAnyTurkcellPackage) {
+                    if(![AppUtil readDoNotShowAgainFlagForKey:@"PORTIN_DONTSHOW_DEFAULTS_KEY"]) {
+                        CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"TitleLater", @"") withApproveTitle:NSLocalizedString(@"TitleYes", @"") withMessage:NSLocalizedString(@"PortinInfoMessage", @"") withModalType:ModalTypeApprove shouldShowCheck:YES withCheckKey:@"PORTIN_DONTSHOW_DEFAULTS_KEY"];
+                        confirm.delegate = self;
+                        confirm.tag = 333;
+                        [APPDELEGATE showCustomConfirm:confirm];
+                    }
+                }
+            }
         }
     }
-    /*if ([self shouldShowOnKatView:subscription]) {
-        UIWindow *currentWindow = [UIApplication sharedApplication].keyWindow;
-        onkatView = [[OnkatDepoPopUP alloc] initWithFrame:CGRectMake(0, 0, currentWindow.bounds.size.width, currentWindow.bounds.size.height)];
-        onkatView.delegate = self;
-        [currentWindow addSubview:onkatView];
+    int counter = 1;
+    for(Subscription *subsc in subscriptions) {
+        if(subsc.plan != nil && subsc.plan.displayName != nil) {
+            NSString *tagName = [NSString stringWithFormat:@"user_package_%d", counter];
+            [MPush hitTag:tagName withValue:subsc.plan.displayName];
+            counter ++;
+        }
     }
-     */
 }
 
 #pragma mark FlowChart Actions
@@ -457,7 +456,7 @@
         eventValue = @"quota_80_percent_full";
     }
     [MPush hitEvent:eventValue];
-    [MPush hitTag:@"quota_status" withValue:[NSString stringWithFormat:@"%.1f", percentUsageVal]];
+    [MPush hitTag:@"quota_status" withValue:[NSString stringWithFormat:@"%.0f", percentUsageVal]];
     
     if(APPDELEGATE.session.usage.totalStorage - APPDELEGATE.session.usage.usedStorage <= 5242880) {
         [MPush hitTag:@"quota_5_mb_left"];

@@ -414,7 +414,9 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         [self downloadImageWithURL:[NSURL URLWithString:self.file.tempDownloadUrl] completionBlock:^(BOOL succeeded, UIImage *image) {
             if (succeeded) {
-                UIImageWriteToSavedPhotosAlbum(imgView.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    UIImageWriteToSavedPhotosAlbum(imgView.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+                });
             }
         }];
     });

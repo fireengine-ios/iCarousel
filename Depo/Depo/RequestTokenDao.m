@@ -175,6 +175,8 @@
             [MPush hitTag:@"LoginSuccess" withValue:@"true"];
 
             IGLog(@"RequestTokenDao request finished successfully");
+            [MPush hitTag:@"logged_in" withValue:@"1"];
+            [MPush hitEvent:@"logged_in"];
             SuppressPerformSelectorLeakWarning([delegate performSelector:successMethod]);
         } else {
             IGLog(@"RequestTokenDao request failed with token error");

@@ -7,7 +7,8 @@
 //
 
 #import "MyViewController.h"
+#import "RevisitedPhotoHeaderSegmentView.h"
 
-@interface RevisitedGroupedPhotosController : MyViewController
+@interface RevisitedGroupedPhotosController : MyViewController <RevisitedPhotoHeaderSegmentDelegate>
 
 @end
