@@ -92,9 +92,11 @@
     if([request responseStatusCode] == 401) {
         IGLog(@"BaseDao request failed with 401");
         if(!self.tokenAlreadyRevisitedFlag) {
+            IGLog(@"BaseDao request failed with 401 - tokenAlreadyRevisitedFlag is false, setting to true");
             self.tokenAlreadyRevisitedFlag = YES;
             [self triggerNewToken];
         } else {
+            IGLog(@"BaseDao request failed with 401 - tokenAlreadyRevisitedFlag is true");
 //            [self shouldReturnFailWithMessage:LOGIN_REQ_ERROR_MESSAGE];
 //            NSLog(@"Login Required Triggered within requestFailed instead of fail method: %@", NSStringFromSelector(failMethod));
             [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_REQ_NOTIFICATION object:nil userInfo:nil];
@@ -106,10 +108,11 @@
         IGLog(@"BaseDao request failed with 412");
         [self shouldReturnFailWithMessage:INVALID_CONTENT_ERROR_MESSAGE];
     } else {
-        IGLog(@"BaseDao request failed");
         if([request.error code] == ASIConnectionFailureErrorType){
+            IGLog(@"BaseDao request failed ASIConnectionFailureErrorType");
             [self shouldReturnFailWithMessage:NSLocalizedString(@"NoConnErrorMessage", @"")];
         } else {
+            IGLog(@"BaseDao request failed - GENERAL_ERROR_MESSAGE");
             [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
         }
     }
@@ -516,9 +519,12 @@
 }
 
 - (void) triggerNewToken {
+    IGLog(@"BaseDao at triggerNewToken");
     NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
     if(networkStatus == kReachableViaWiFi || networkStatus == kReachableViaWWAN) {
+        IGLog(@"BaseDao at triggerNewToken kReachableViaWiFi || kReachableViaWWAN");
         if([CacheUtil readRememberMeToken] != nil) {
+            IGLog(@"BaseDao at triggerNewToken readRememberMeToken not null");
             tokenDao = [[RequestTokenDao alloc] init];
             tokenDao.delegate = self;
             tokenDao.successMethod = @selector(tokenRevisitedSuccessCallback);
@@ -526,10 +532,12 @@
             [tokenDao requestTokenByRememberMe];
         } else {
             if(networkStatus == kReachableViaWiFi) {
+                IGLog(@"BaseDao at triggerNewToken readRememberMeToken null - kReachableViaWiFi");
                 //            [self shouldReturnFailWithMessage:LOGIN_REQ_ERROR_MESSAGE];
 //                NSLog(@"Login Required Triggered within triggerNewToken instead of fail method: %@", NSStringFromSelector(failMethod));
                 [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_REQ_NOTIFICATION object:nil userInfo:nil];
             } else {
+                IGLog(@"BaseDao at triggerNewToken readRememberMeToken null - not kReachableViaWiFi -  calling radiusDao");
                 radiusDao = [[RadiusDao alloc] init];
                 radiusDao.delegate = self;
                 radiusDao.successMethod = @selector(tokenRevisitedSuccessCallback);

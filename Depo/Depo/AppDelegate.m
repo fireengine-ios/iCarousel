@@ -249,6 +249,7 @@
 }
 
 - (void) loginRequiredNotificationRaised {
+    IGLog(@"AppDelegate - loginRequiredNotificationRaised");
     BOOL shouldShowLogin = YES;
     if([self.window.rootViewController isKindOfClass:[MyNavigationController class]]) {
         MyNavigationController *currentNav = (MyNavigationController *) self.window.rootViewController;

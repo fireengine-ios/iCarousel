@@ -29,7 +29,7 @@
         cellHeight = _cellHeight;
         titleText = _titleText;
         titleColor = _titleColor == nil ? [Util UIColorForHexColor:@"292F3E"] : _titleColor;
-        titleFontSize = cellHeight > 60 ? 19 : 18;
+        titleFontSize = cellHeight > 60 ? 19 : 17;
         iconName = _iconName;
         hasIcon = [iconName isEqualToString:@""] ? NO : YES;
         titleLeft = hasIcon ? 65 : 20;
@@ -66,7 +66,7 @@
         titleColor = [Util UIColorForHexColor:@"292F3E"];
         titleLeft = 20;
         titleTop = 14;
-        titleFontSize = 18;
+        titleFontSize = 17;
         
         self.backgroundColor = [Util UIColorForHexColor:@"FFFFFF"];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -94,7 +94,7 @@
         titleColor = [Util UIColorForHexColor:@"292F3E"];
         titleLeft = 20;
         titleTop = [subTitleText isEqualToString:@""] ? 17 : 14;
-        titleFontSize = 18;
+        titleFontSize = 17;
         hasSeparator = _hasSeparator;
         hasSubTitle = [subTitleText isEqualToString:@""] ? NO : YES;
         
