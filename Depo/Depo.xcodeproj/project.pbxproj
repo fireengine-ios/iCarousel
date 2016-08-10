@@ -922,6 +922,9 @@
 		94BEABF81CAD1BF3002E37A7 /* EulaCheckDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94BEABF71CAD1BF3002E37A7 /* EulaCheckDao.m */; };
 		94BEABFB1CAD1BFE002E37A7 /* EulaApproveDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94BEABFA1CAD1BFE002E37A7 /* EulaApproveDao.m */; };
 		94BEABFE1CAD1D6C002E37A7 /* Eula.m in Sources */ = {isa = PBXBuildFile; fileRef = 94BEABFD1CAD1D6C002E37A7 /* Eula.m */; };
+		94BF90DD1D5A0E5E000078FD /* RevisitedAlbumListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94BF90DC1D5A0E5E000078FD /* RevisitedAlbumListView.m */; };
+		94BF90E01D5A1027000078FD /* RevisitedCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94BF90DF1D5A1027000078FD /* RevisitedCollectionView.m */; };
+		94BF90E31D5A105D000078FD /* RevisitedGroupedPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94BF90E21D5A105D000078FD /* RevisitedGroupedPhotoView.m */; };
 		94C7CEDE1D2B97420040897A /* icon_createstory.png in Resources */ = {isa = PBXBuildFile; fileRef = 94C7CEDD1D2B97420040897A /* icon_createstory.png */; };
 		94C7CEE01D2B974A0040897A /* icon_createstory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94C7CEDF1D2B974A0040897A /* icon_createstory@2x.png */; };
 		94C7CEE21D2B97520040897A /* icon_createstory@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94C7CEE11D2B97520040897A /* icon_createstory@3x.png */; };
@@ -2338,6 +2341,12 @@
 		94BEABFA1CAD1BFE002E37A7 /* EulaApproveDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EulaApproveDao.m; sourceTree = "<group>"; };
 		94BEABFC1CAD1D6C002E37A7 /* Eula.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Eula.h; sourceTree = "<group>"; };
 		94BEABFD1CAD1D6C002E37A7 /* Eula.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Eula.m; sourceTree = "<group>"; };
+		94BF90DB1D5A0E5E000078FD /* RevisitedAlbumListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RevisitedAlbumListView.h; sourceTree = "<group>"; };
+		94BF90DC1D5A0E5E000078FD /* RevisitedAlbumListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RevisitedAlbumListView.m; sourceTree = "<group>"; };
+		94BF90DE1D5A1027000078FD /* RevisitedCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RevisitedCollectionView.h; sourceTree = "<group>"; };
+		94BF90DF1D5A1027000078FD /* RevisitedCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RevisitedCollectionView.m; sourceTree = "<group>"; };
+		94BF90E11D5A105D000078FD /* RevisitedGroupedPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RevisitedGroupedPhotoView.h; sourceTree = "<group>"; };
+		94BF90E21D5A105D000078FD /* RevisitedGroupedPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RevisitedGroupedPhotoView.m; sourceTree = "<group>"; };
 		94C7CEDD1D2B97420040897A /* icon_createstory.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_createstory.png; sourceTree = "<group>"; };
 		94C7CEDF1D2B974A0040897A /* icon_createstory@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_createstory@2x.png"; sourceTree = "<group>"; };
 		94C7CEE11D2B97520040897A /* icon_createstory@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_createstory@3x.png"; sourceTree = "<group>"; };
@@ -2899,6 +2908,12 @@
 				94DCA1051D3CB6AB000965AE /* CellographSegmentView.m */,
 				944C07B61D4FE81400D45B61 /* RevisitedPhotoHeaderSegmentView.h */,
 				944C07B71D4FE81400D45B61 /* RevisitedPhotoHeaderSegmentView.m */,
+				94BF90DB1D5A0E5E000078FD /* RevisitedAlbumListView.h */,
+				94BF90DC1D5A0E5E000078FD /* RevisitedAlbumListView.m */,
+				94BF90DE1D5A1027000078FD /* RevisitedCollectionView.h */,
+				94BF90DF1D5A1027000078FD /* RevisitedCollectionView.m */,
+				94BF90E11D5A105D000078FD /* RevisitedGroupedPhotoView.h */,
+				94BF90E21D5A105D000078FD /* RevisitedGroupedPhotoView.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -5024,6 +5039,7 @@
 				9433BCFC1D21DC7500991483 /* PromoCodeActivateDao.m in Sources */,
 				94E549031CC6348E003CB5DC /* DropboxStartDao.m in Sources */,
 				058337D919ED9C1600DCF0C5 /* CustomAVPlayer.m in Sources */,
+				94BF90DD1D5A0E5E000078FD /* RevisitedAlbumListView.m in Sources */,
 				05B01D9C1AC2E2D000D5B827 /* NSDate+Utilities.m in Sources */,
 				94F130C31D2496C10086BDBB /* SettingsSocialController.m in Sources */,
 				0526444819D546BB00B63759 /* MapUtil.m in Sources */,
@@ -5216,6 +5232,7 @@
 				9454FA631CAA821200BF1288 /* CurrentDocumentListModalController.m in Sources */,
 				056F29E11C4FC112001DD486 /* EmailEntryController.m in Sources */,
 				051E1E8819CAC92700FD1E03 /* ASIDataDecompressor.m in Sources */,
+				94BF90E01D5A1027000078FD /* RevisitedCollectionView.m in Sources */,
 				05DEB1CC1A80C175007793DD /* MigrateStatusDao.m in Sources */,
 				05AD502E1A7ED76200C40777 /* MigrateStatusController.m in Sources */,
 				052644B019D5A2A600B63759 /* SettingsMusicController.m in Sources */,
@@ -5386,6 +5403,7 @@
 				05C6C7041B3C20FC00CB6CE5 /* OnkatDepoPopUP.m in Sources */,
 				56BDE2501A8DEA8B0082F8B8 /* OfferCell.m in Sources */,
 				05D2B19719E676BF00FC309D /* AlbumListDao.m in Sources */,
+				94BF90E31D5A105D000078FD /* RevisitedGroupedPhotoView.m in Sources */,
 				94DCA1061D3CB6AB000965AE /* CellographSegmentView.m in Sources */,
 				056BEC781A8AA55000BA0805 /* PreLoginInfoView.m in Sources */,
 				0524E32919D955FA00E2698E /* FileDetail.m in Sources */,
@@ -5574,8 +5592,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Depo/Depo.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mahir Kemal Tarlan (R2478SCTN5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mahir Kemal Tarlan (R2478SCTN5)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5603,7 +5621,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.igones.deponew;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9f892b83-0b03-4d8c-a2a3-d53b63fcd899";
+				PROVISIONING_PROFILE = "ce83ac0b-ee03-4058-a10a-63f46f13d14c";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};

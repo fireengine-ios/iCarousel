@@ -18,6 +18,9 @@
 
 @synthesize delegate;
 @synthesize indicator;
+@synthesize photoButton;
+@synthesize collectionButton;
+@synthesize albumButton;
 
 - (id) initWithFrame:(CGRect)frame {
     if(self = [super initWithFrame:frame]) {
@@ -30,8 +33,58 @@
         indicator = [[UIImageView alloc] initWithFrame:CGRectMake((itemWidth - indicatorImg.size.width)/2, self.frame.size.height - indicatorImg.size.height, indicatorImg.size.width, indicatorImg.size.height)];
         indicator.image = indicatorImg;
         [self addSubview:indicator];
+        
+        photoButton = [[SimpleButton alloc] initWithFrame:CGRectMake(3, (self.frame.size.height - 20)/2, itemWidth - 6, 20) withTitle:NSLocalizedString(@"PhotoTab", @"") withTitleColor:[UIColor whiteColor] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:13] isUnderline:NO withUnderlineColor:[UIColor clearColor]];
+        [photoButton addTarget:self action:@selector(photoClicked) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:photoButton];
+        
+        UIImageView *firstDividerView = [[UIImageView alloc] initWithFrame:CGRectMake(itemWidth - 1, (self.frame.size.height - 20)/2, 2, 20)];
+        firstDividerView.image = [UIImage imageNamed:@"divider_horizontal.png"];
+        [self addSubview:firstDividerView];
+
+        collectionButton = [[SimpleButton alloc] initWithFrame:CGRectMake(itemWidth + 3, (self.frame.size.height - 20)/2, itemWidth - 6, 20) withTitle:NSLocalizedString(@"CollectionTab", @"") withTitleColor:[UIColor whiteColor] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:13] isUnderline:NO withUnderlineColor:[UIColor clearColor]];
+        collectionButton.alpha = 0.6f;
+        [collectionButton addTarget:self action:@selector(collectionClicked) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:collectionButton];
+
+        UIImageView *secondDividerView = [[UIImageView alloc] initWithFrame:CGRectMake(itemWidth*2 - 1, (self.frame.size.height - 20)/2, 2, 20)];
+        secondDividerView.image = [UIImage imageNamed:@"divider_horizontal.png"];
+        [self addSubview:secondDividerView];
+
+        albumButton = [[SimpleButton alloc] initWithFrame:CGRectMake(itemWidth*2 + 3, (self.frame.size.height - 20)/2, itemWidth - 6, 20) withTitle:NSLocalizedString(@"AlbumTab", @"") withTitleColor:[UIColor whiteColor] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:13] isUnderline:NO withUnderlineColor:[UIColor clearColor]];
+        albumButton.alpha = 0.6f;
+        [albumButton addTarget:self action:@selector(albumClicked) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:albumButton];
+
     }
     return self;
+}
+
+- (void) photoClicked {
+    photoButton.alpha = 1.0f;
+    collectionButton.alpha = 0.6f;
+    albumButton.alpha = 0.6f;
+    indicator.frame = CGRectMake((itemWidth - indicator.frame.size.width)/2, self.frame.size.height - indicator.frame.size.height, indicator.frame.size.width, indicator.frame.size.height);
+    
+    [delegate revisitedPhotoHeaderSegmentPhotoChosen];
+}
+
+- (void) collectionClicked {
+    photoButton.alpha = 0.6f;
+    collectionButton.alpha = 1.0f;
+    albumButton.alpha = 0.6f;
+    indicator.frame = CGRectMake(itemWidth + (itemWidth - indicator.frame.size.width)/2, self.frame.size.height - indicator.frame.size.height, indicator.frame.size.width, indicator.frame.size.height);
+    
+    [delegate revisitedPhotoHeaderSegmentCollectionChosen];
+}
+
+- (void) albumClicked {
+    photoButton.alpha = 0.6f;
+    collectionButton.alpha = 0.6f;
+    albumButton.alpha = 1.0f;
+    indicator.frame = CGRectMake(itemWidth*2 + (itemWidth - indicator.frame.size.width)/2, self.frame.size.height - indicator.frame.size.height, indicator.frame.size.width, indicator.frame.size.height);
+    
+    [delegate revisitedPhotoHeaderSegmentAlbumChosen];
 }
 
 @end

@@ -31,6 +31,7 @@
 #import "MsisdnEntryController.h"
 #import "MPush.h"
 #import "GroupedPhotosAndVideosController.h"
+#import "RevisitedGroupedPhotosController.h"
 
 @interface HomeController ()
 
@@ -323,7 +324,9 @@
 }
 
 - (void) triggerPhotosPage {
+    //TODO düzelt
     GroupedPhotosAndVideosController *photo = [[GroupedPhotosAndVideosController alloc] init];
+//    RevisitedGroupedPhotosController *photo = [[RevisitedGroupedPhotosController alloc] init];
     photo.nav = self.nav;
     [self.nav pushViewController:photo animated:NO];
 }

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SimpleButton.h"
 
 @protocol RevisitedPhotoHeaderSegmentDelegate <NSObject>
 - (void) revisitedPhotoHeaderSegmentPhotoChosen;
@@ -18,5 +19,9 @@
 
 @property (nonatomic, weak) id<RevisitedPhotoHeaderSegmentDelegate> delegate;
 @property (nonatomic, strong) UIImageView *indicator;
+
+@property (nonatomic, strong) SimpleButton *photoButton;
+@property (nonatomic, strong) SimpleButton *collectionButton;
+@property (nonatomic, strong) SimpleButton *albumButton;
 
 @end

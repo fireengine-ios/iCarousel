@@ -751,3 +751,6 @@
 "VideofyPreviewDownloadError"="Öngösterim için videoya erişilemedi";
 "VideofyFileListEmpty"="Lütfen en az bir fotoğraf ya da video seçiniz.";
 "VideofyMusicEmpty"="Lütfen videonuz için bir müzik seçiniz.";
+"PhotoTab"="FOTOĞRAFLAR";
+"CollectionTab"="KOLEKSİYON";
+"AlbumTab"="ALBÜM & VİDEO";

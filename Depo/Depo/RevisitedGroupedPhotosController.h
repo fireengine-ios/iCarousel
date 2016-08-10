@@ -8,7 +8,15 @@
 
 #import "MyViewController.h"
 #import "RevisitedPhotoHeaderSegmentView.h"
+#import "RevisitedGroupedPhotoView.h"
+#import "RevisitedCollectionView.h"
+#import "RevisitedAlbumListView.h"
 
 @interface RevisitedGroupedPhotosController : MyViewController <RevisitedPhotoHeaderSegmentDelegate>
+
+@property (nonatomic, strong) RevisitedPhotoHeaderSegmentView *segmentView;
+@property (nonatomic, strong) RevisitedGroupedPhotoView *groupView;
+@property (nonatomic, strong) RevisitedCollectionView *collView;
+@property (nonatomic, strong) RevisitedAlbumListView *albumView;
 
 @end
