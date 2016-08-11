@@ -44,6 +44,9 @@
     [LocationManager sharedInstance].locManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
     [LocationManager sharedInstance].locManager.distanceFilter = 100.0f;
     [LocationManager sharedInstance].locManager.pausesLocationUpdatesAutomatically = NO;
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 9) {
+        [LocationManager sharedInstance].locManager.allowsBackgroundLocationUpdates = YES;
+    }
 }
 
 /*

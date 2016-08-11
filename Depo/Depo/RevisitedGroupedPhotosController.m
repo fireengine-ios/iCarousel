@@ -35,7 +35,10 @@
 
         albumView = [[RevisitedAlbumListView alloc] initWithFrame:CGRectMake(0, self.topIndex + 60, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex - 50)];
         albumView.hidden = YES;
+        albumView.delegate = self;
         [self.view addSubview:albumView];
+        
+        [albumView pullData];
     }
     return self;
 }
@@ -58,6 +61,25 @@
     albumView.hidden = NO;
 }
 
+- (void) revisitedAlbumListDidFinishLoading {
+}
+
+- (void) revisitedAlbumListDidFailRetrievingList:(NSString *)errorMessage {
+    [self showErrorAlertWithMessage:errorMessage];
+}
+
+- (void) revisitedAlbumListDidSelectAlbum:(PhotoAlbum *)albumSelected {
+    PhotoAlbumController *albumController = [[PhotoAlbumController alloc] initWithAlbum:albumSelected];
+    albumController.delegate = self;
+    albumController.nav = self.nav;
+    [self.nav pushViewController:albumController animated:NO];
+}
+
+#pragma mark PhotoAlbumDelegate methods
+- (void) photoAlbumDidChange:(NSString *)albumUuid {
+    [albumView pullData];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -66,6 +88,11 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.nav setNavigationBarHidden:NO animated:NO];
 }
 
 - (BOOL)shouldAutorotate {

@@ -717,4 +717,24 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
 }
 
+- (void) cancelRequests {
+    [detailDao cancelRequest];
+    detailDao = nil;
+    
+    [renameDao cancelRequest];
+    renameDao = nil;
+    
+    [deleteDao cancelRequest];
+    deleteDao = nil;
+    
+    [deleteImgDao cancelRequest];
+    deleteImgDao = nil;
+    
+    [shareDao cancelRequest];
+    shareDao = nil;
+    
+    [albumAddPhotosDao cancelRequest];
+    albumAddPhotosDao = nil;
+}
+
 @end

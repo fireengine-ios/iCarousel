@@ -566,7 +566,7 @@
         [APPDELEGATE.wormhole passMessageObject:@{@"finishedCount":[NSNumber numberWithInt: finishedAutoSyncCount]} identifier:EXTENSION_WORMHOLE_FINISHED_COUNT_IDENTIFIER];
 
         int activeSyncCount = totalAutoSyncCount - finishedAutoSyncCount;
-        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:activeSyncCount > 1000 ? 1000 : activeSyncCount];
+        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:activeSyncCount > AUTO_SYNC_ASSET_COUNT ? AUTO_SYNC_ASSET_COUNT : activeSyncCount];
     });
 }
 

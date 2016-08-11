@@ -61,4 +61,7 @@
 + (NSString *) operatorName;
 + (NSString *) readCurrentMobileNetworkCode;
 
++ (void) writeFeatureFlag;
++ (BOOL) readFeatureFlag;
+
 @end

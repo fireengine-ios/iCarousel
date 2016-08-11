@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MetaAlbum.h"
+#import "PhotoAlbum.h"
+#import "AlbumListDao.h"
 
 @protocol RevisitedAlbumListDelegate <NSObject>
-- (void) revisitedAlbumListDidSelectAlbum:(MetaAlbum *) albumSelected;
+- (void) revisitedAlbumListDidSelectAlbum:(PhotoAlbum *) albumSelected;
+- (void) revisitedAlbumListDidFinishLoading;
+- (void) revisitedAlbumListDidFailRetrievingList:(NSString *) errorMessage;
 @end
 
 @interface RevisitedAlbumListView : UIView <UITableViewDataSource, UITableViewDelegate>
@@ -18,5 +21,11 @@
 @property (nonatomic, weak) id<RevisitedAlbumListDelegate> delegate;
 @property (nonatomic, strong) NSArray *albums;
 @property (nonatomic, strong) UITableView *albumTable;
+@property (nonatomic, strong) AlbumListDao *albumsDao;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property (nonatomic, strong) NSMutableArray *selectedAlbumList;
+@property (nonatomic) BOOL isSelectible;
+
+- (void) pullData;
 
 @end

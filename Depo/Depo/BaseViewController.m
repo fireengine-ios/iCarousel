@@ -50,6 +50,7 @@
 #import "PromotionEntryController.h"
 #import "DropboxExportController.h"
 #import "CellographMainController.h"
+#import "NewFeatureInfoController.h"
 
 #define kMenuOpenOriginX 276
 
@@ -149,7 +150,7 @@
         [self.view addGestureRecognizer:recognizerRight];
 
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncQueueChanged) name:AUTO_SYNC_QUEUE_CHANGED_NOTIFICATION object:nil];
-
+        
     }
     return self;
 }
@@ -217,6 +218,12 @@
     transparentView.hidden = YES;
     self.scroll.contentOffset = CGPointMake(kMenuOpenOriginX, 0.0);
     menuOpen = NO;
+
+    if(![AppUtil readFeatureFlag]) {
+        NewFeatureInfoController *featurePresentController = [[NewFeatureInfoController alloc] init];
+        [self presentViewController:featurePresentController animated:NO completion:nil];
+        [AppUtil writeFeatureFlag];
+    }
 }
 
 - (void) viewDidDisappear:(BOOL)animated {

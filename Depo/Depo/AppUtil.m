@@ -790,4 +790,12 @@
     return mnc;
 }
 
++ (void) writeFeatureFlag {
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"FEATURE_PAGE_SHOWN_FLAG"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
++ (BOOL) readFeatureFlag {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"FEATURE_PAGE_SHOWN_FLAG"];
+}
+
 @end
