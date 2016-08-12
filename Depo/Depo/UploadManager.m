@@ -112,6 +112,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
                 }];
             } else {
                 if(self.asset == nil) {
+                    IGLog(@"Asset is deleted from phone gallery. Returning didFinishUploadingWithSuccess:NO");
                     //fail case. queueda olan bir asset icin dosya galeriden silinmis
                     self.uploadRef.hasFinished = YES;
                     [delegate uploadManagerDidFailUploadingForAsset:self.uploadRef.assetUrl];

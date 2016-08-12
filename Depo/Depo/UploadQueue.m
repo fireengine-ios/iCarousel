@@ -288,7 +288,8 @@
 #pragma mark UploadManagerQueueDelegate
 - (void) uploadManager:(UploadManager *)manRef didFinishUploadingWithSuccess:(BOOL)success {
     [activeTaskIds removeObject:[manRef uniqueUrl]];
-    
+    NSString *log = [NSString stringWithFormat:@"Calling didFinishUploadingWithSuccess : %@ for task: %@ and active task id count is %d", success ? @"YES" : @"NO", [manRef uniqueUrl], (int)[activeTaskIds count]];
+    IGLog(log);
     if([activeTaskIds count] < MAX_CONCURRENT_UPLOAD_TASKS) {
         UploadManager *nextManager = [self findNextTask];
         nextManager.queueDelegate = self;
