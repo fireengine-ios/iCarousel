@@ -109,10 +109,13 @@
         [self shouldReturnFailWithMessage:INVALID_CONTENT_ERROR_MESSAGE];
     } else {
         if([request.error code] == ASIConnectionFailureErrorType){
-            IGLog(@"BaseDao request failed ASIConnectionFailureErrorType");
+            NSString *errorMessageWithRequestUrl = [NSString stringWithFormat:@"BaseDao request failed - ASIConnectionFailureErrorType for %@", request.url.absoluteString];
+            IGLog(errorMessageWithRequestUrl);
             [self shouldReturnFailWithMessage:NSLocalizedString(@"NoConnErrorMessage", @"")];
         } else {
-            IGLog(@"BaseDao request failed - GENERAL_ERROR_MESSAGE");
+            NSString *errorMessageWithRequestUrl = [NSString stringWithFormat:@"BaseDao request failed - GENERAL_ERROR_MESSAGE for %@", request.url.absoluteString];
+            IGLog(errorMessageWithRequestUrl);
+            
             [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
         }
     }
