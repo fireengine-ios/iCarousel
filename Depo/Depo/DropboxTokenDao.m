@@ -20,7 +20,9 @@
     [request addRequestHeader:@"Authorization" value:authorizationHeaderValue];
     request.timeOutSeconds = 30;
     request.tag = REQ_TAG_FOR_DROPBOX;
-    [request startAsynchronous];
+    
+    self.currentRequest = request;
+    [self.currentRequest startAsynchronous];
 }
 
 - (void)requestFinished:(ASIHTTPRequest *)request {

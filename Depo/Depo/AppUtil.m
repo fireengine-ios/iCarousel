@@ -791,11 +791,14 @@
 }
 
 + (void) writeFeatureFlag {
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"FEATURE_PAGE_SHOWN_FLAG"];
+    NSString *keyVal = [NSString stringWithFormat:@"FEATURE_PAGE_SHOWN_FLAG_%@", APPDELEGATE.session.user.username];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:keyVal];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
+
 + (BOOL) readFeatureFlag {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:@"FEATURE_PAGE_SHOWN_FLAG"];
+    NSString *keyVal = [NSString stringWithFormat:@"FEATURE_PAGE_SHOWN_FLAG_%@", APPDELEGATE.session.user.username];
+    return [[NSUserDefaults standardUserDefaults] boolForKey:keyVal];
 }
 
 @end

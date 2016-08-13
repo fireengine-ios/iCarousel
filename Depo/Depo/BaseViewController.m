@@ -51,6 +51,7 @@
 #import "DropboxExportController.h"
 #import "CellographMainController.h"
 #import "NewFeatureInfoController.h"
+#import "NewFeatureInfoView.h"
 
 #define kMenuOpenOriginX 276
 
@@ -220,8 +221,8 @@
     menuOpen = NO;
 
     if(![AppUtil readFeatureFlag]) {
-        NewFeatureInfoController *featurePresentController = [[NewFeatureInfoController alloc] init];
-        [self presentViewController:featurePresentController animated:NO completion:nil];
+        NewFeatureInfoView *featurePresentView = [[NewFeatureInfoView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+        [self.view addSubview:featurePresentView];
         [AppUtil writeFeatureFlag];
     }
 }
@@ -233,9 +234,18 @@
     menuOpen = NO;
 }
 
+- (void) callCleanBeforeChange {
+    id currentController = [self.nav.viewControllers objectAtIndex:[self.nav.viewControllers count]-1];
+    if([currentController respondsToSelector:@selector(cancelRequests)]) {
+        [currentController performSelector:@selector(cancelRequests)];
+    }
+}
+
 #pragma mark SlidingMenuDelegate
 
 - (void) didTriggerHome {
+    [self callCleanBeforeChange];
+    
     [MPush hitTag:@"homepage"];
     [MPush hitEvent:@"homepage"];
 
@@ -249,6 +259,8 @@
 }
 
 - (void) didTriggerCropAndShare {
+    [self callCleanBeforeChange];
+
     CropAndShareListController *cropAndShare = [[CropAndShareListController alloc] init];
     cropAndShare.nav = self.nav;
     cropAndShare.myDelegate = self;
@@ -256,6 +268,8 @@
 }
 
 - (void) didTriggerHelp {
+    [self callCleanBeforeChange];
+
     SettingsHelpController *help = [[SettingsHelpController alloc] init];
     help.nav = self.nav;
     help.myDelegate = self;
@@ -263,6 +277,8 @@
 }
 
 - (void) didTriggerCellograph {
+    [self callCleanBeforeChange];
+    
 //    CellographMainController *cello = [[CellographMainController alloc] init];
     GroupedPhotosAndVideosController *photo = [[GroupedPhotosAndVideosController alloc] init];
     photo.nav = self.nav;
@@ -271,6 +287,8 @@
 }
 
 - (void) didTriggerReachUs {
+    [self callCleanBeforeChange];
+
     ReachUsController *reachUs = [[ReachUsController alloc] init];
     reachUs.nav = self.nav;
     reachUs.myDelegate = self;
@@ -284,6 +302,8 @@
 }
 
 - (void) didTriggerFavorites {
+    [self callCleanBeforeChange];
+
     [MPush hitTag:@"favorites"];
     [MPush hitEvent:@"favorites"];
 
@@ -294,6 +314,8 @@
 }
 
 - (void) didTriggerFiles {
+    [self callCleanBeforeChange];
+
     [MPush hitTag:@"all_files"];
     [MPush hitEvent:@"all_files"];
 
@@ -304,6 +326,8 @@
 }
 
 - (void) didTriggerPhotos {
+    [self callCleanBeforeChange];
+
     [MPush hitTag:@"photos_and_videos"];
     [MPush hitEvent:@"photos_and_videos"];
 
@@ -314,6 +338,8 @@
 }
 
 - (void) didTriggerMusic {
+    [self callCleanBeforeChange];
+
     [MPush hitTag:@"music_files"];
     [MPush hitEvent:@"music_files"];
 
@@ -324,6 +350,8 @@
 }
 
 - (void) didTriggerDocs {
+    [self callCleanBeforeChange];
+
     [MPush hitTag:@"documents"];
     [MPush hitEvent:@"documents"];
 
@@ -334,6 +362,8 @@
 }
 
 - (void) didTriggerDropbox {
+    [self callCleanBeforeChange];
+
     DropboxExportController *controller = [[DropboxExportController alloc] init];
     controller.nav = self.nav;
     controller.myDelegate = self;
@@ -341,6 +371,8 @@
 }
 
 - (void) didTriggerPromotions {
+    [self callCleanBeforeChange];
+
     PromotionEntryController *controller = [[PromotionEntryController alloc] init];
     controller.nav = self.nav;
     controller.myDelegate = self;
@@ -348,6 +380,8 @@
 }
 
 - (void) didTriggerContactSync {
+    [self callCleanBeforeChange];
+
     ContactSyncController *contactSync = [[ContactSyncController alloc] init];
     contactSync.nav = self.nav;
     contactSync.myDelegate = self;
@@ -355,6 +389,8 @@
 }
 
 - (void) didTriggerSearch {
+    [self callCleanBeforeChange];
+
     [MPush hitTag:@"search"];
     [MPush hitEvent:@"search"];
 
@@ -366,6 +402,8 @@
 }
 
 - (void) didTriggerCurrentMusic {
+    [self callCleanBeforeChange];
+
     MusicPreviewController *musicPreview = [[MusicPreviewController alloc] initForContinuingPlaylist];
     musicPreview.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:musicPreview];
@@ -374,6 +412,8 @@
 }
 
 - (void) didTriggerProfile {
+    [self callCleanBeforeChange];
+
     [MPush hitTag:@"settings"];
     [MPush hitEvent:@"settings"];
 

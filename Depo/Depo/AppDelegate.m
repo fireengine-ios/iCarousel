@@ -85,6 +85,7 @@
     [self.window setRootViewController:[BgViewController alloc]];
     
     IGLog(@"AppDelegate didFinishLaunchingWithOptions");
+    NSLog(@"AppDelegate didFinishLaunchingWithOptions");
 
 #ifdef LOG2FILE
     
@@ -598,11 +599,13 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     IGLog(@"AppDelegate applicationWillEnterForeground");
+    NSLog(@"AppDelegate applicationWillEnterForeground");
     activatedFromBackground = YES;
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     IGLog(@"AppDelegate applicationDidBecomeActive");
+    NSLog(@"AppDelegate applicationDidBecomeActive");
     //TODO contact sync ile aç
     /*
     if(session != nil) {
@@ -610,7 +613,23 @@
     }
      */
     
+    NSLog(@".... %@", NSStringFromClass([self.window.rootViewController class]));
     if(activatedFromBackground) {
+        if(![self.window.rootViewController isKindOfClass:[BaseViewController class]]) {
+            IGLog(@"AppDelegate should relogin after from background");
+            NSLog(@"AppDelegate should relogin after from background");
+            if([ReachabilityManager isReachable]) {
+                if([CacheUtil readRememberMeToken] != nil) {
+                    IGLog(@"AppDelegate should relogin after from background RememberMeToken not null");
+                    [tokenManager requestToken];
+                    [self showMainLoading];
+                } else if([ReachabilityManager isReachableViaWWAN]) {
+                    IGLog(@"AppDelegate should relogin after from background trying radius login");
+                    [tokenManager requestRadiusLogin];
+                    [self showMainLoading];
+                }
+            }
+        }
         /*
         [APPDELEGATE.uploadQueue.session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
             if(uploadTasks) {

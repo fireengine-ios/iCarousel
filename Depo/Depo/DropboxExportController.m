@@ -381,7 +381,6 @@
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
-//    [self cancelRequests];
     [super viewWillDisappear:animated];
 }
 

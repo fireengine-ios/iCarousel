@@ -29,7 +29,7 @@
         cellHeight = _cellHeight;
         titleText = _titleText;
         titleColor = _titleColor == nil ? [Util UIColorForHexColor:@"292F3E"] : _titleColor;
-        titleFontSize = cellHeight > 60 ? 19 : 17;
+        titleFontSize = 17;
         iconName = _iconName;
         hasIcon = [iconName isEqualToString:@""] ? NO : YES;
         titleLeft = hasIcon ? 65 : 20;

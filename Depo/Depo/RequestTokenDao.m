@@ -194,7 +194,7 @@
     NSString *responseStr = [request responseString];
     NSLog(@"Result: %@", responseStr);
     
-    NSString *log = [NSString stringWithFormat:@"RequestTokenDao request failed with response:%@", responseStr];
+    NSString *log = [NSString stringWithFormat:@"RequestTokenDao request failed with response:%@ and status code: %d", responseStr, [request responseStatusCode]];
     IGLog(log);
     
     SBJSON *jsonParser = [SBJSON new];

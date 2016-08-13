@@ -808,6 +808,7 @@
 		94328BE31CC54E5A00599CEE /* FirstUploadFlagDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94328BE21CC54E5A00599CEE /* FirstUploadFlagDao.m */; };
 		94328BE61CC5666D00599CEE /* FeedbackDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94328BE51CC5666D00599CEE /* FeedbackDao.m */; };
 		94328BE91CC572DF00599CEE /* FeedbackChoiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94328BE81CC572DF00599CEE /* FeedbackChoiceCell.m */; };
+		9432F16C1D5F55F60017973C /* NewFeatureInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9432F16B1D5F55F60017973C /* NewFeatureInfoView.m */; };
 		9433BCF91D219AE700991483 /* ProfilePhotoUploadDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 9433BCF81D219AE700991483 /* ProfilePhotoUploadDao.m */; };
 		9433BCFC1D21DC7500991483 /* PromoCodeActivateDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 9433BCFB1D21DC7500991483 /* PromoCodeActivateDao.m */; };
 		9433BCFF1D21DF3100991483 /* VideofyPreviewDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 9433BCFE1D21DF3100991483 /* VideofyPreviewDao.m */; };
@@ -2200,6 +2201,8 @@
 		94328BE51CC5666D00599CEE /* FeedbackDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackDao.m; sourceTree = "<group>"; };
 		94328BE71CC572DF00599CEE /* FeedbackChoiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackChoiceCell.h; sourceTree = "<group>"; };
 		94328BE81CC572DF00599CEE /* FeedbackChoiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackChoiceCell.m; sourceTree = "<group>"; };
+		9432F16A1D5F55F60017973C /* NewFeatureInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewFeatureInfoView.h; sourceTree = "<group>"; };
+		9432F16B1D5F55F60017973C /* NewFeatureInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewFeatureInfoView.m; sourceTree = "<group>"; };
 		9433BCF71D219AE700991483 /* ProfilePhotoUploadDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfilePhotoUploadDao.h; sourceTree = "<group>"; };
 		9433BCF81D219AE700991483 /* ProfilePhotoUploadDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfilePhotoUploadDao.m; sourceTree = "<group>"; };
 		9433BCFA1D21DC7500991483 /* PromoCodeActivateDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PromoCodeActivateDao.h; sourceTree = "<group>"; };
@@ -2925,6 +2928,8 @@
 				94BF90DF1D5A1027000078FD /* RevisitedCollectionView.m */,
 				94BF90E11D5A105D000078FD /* RevisitedGroupedPhotoView.h */,
 				94BF90E21D5A105D000078FD /* RevisitedGroupedPhotoView.m */,
+				9432F16A1D5F55F60017973C /* NewFeatureInfoView.h */,
+				9432F16B1D5F55F60017973C /* NewFeatureInfoView.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -5326,6 +5331,7 @@
 				05F28BE41C0739C30002171A /* CurioConstants.m in Sources */,
 				94328BE31CC54E5A00599CEE /* FirstUploadFlagDao.m in Sources */,
 				05A8ADA51A5ABCD8007566BF /* UploadQueue.m in Sources */,
+				9432F16C1D5F55F60017973C /* NewFeatureInfoView.m in Sources */,
 				051DE35519CC06F000F27C85 /* AbstractMenuCell.m in Sources */,
 				0514A62A1BF4D1030084E0AB /* CropAndShareListController.m in Sources */,
 				0551CE191A2B3EC900DB117D /* Usage.m in Sources */,
