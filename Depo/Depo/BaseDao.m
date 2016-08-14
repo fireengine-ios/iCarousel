@@ -117,7 +117,8 @@
             IGLog(errorMessageWithRequestUrl);
             [self shouldReturnFailWithMessage:NSLocalizedString(@"NoConnErrorMessage", @"")];
         } else {
-            NSString *errorMessageWithRequestUrl = [NSString stringWithFormat:@"BaseDao request failed - GENERAL_ERROR_MESSAGE for %@", request.url.absoluteString];
+            NSString *localizedErrStr = [request.error localizedDescription];
+            NSString *errorMessageWithRequestUrl = [NSString stringWithFormat:@"BaseDao request failed with code:%d and error: %@ - GENERAL_ERROR_MESSAGE for %@", (int)[request.error code], localizedErrStr, request.url.absoluteString];
             IGLog(errorMessageWithRequestUrl);
             
             [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
