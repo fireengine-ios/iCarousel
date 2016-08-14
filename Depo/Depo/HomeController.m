@@ -302,7 +302,7 @@
 
 - (void) usageFailCallback:(NSString *) errorMessage {
     [self hideLoading];
-    [self showErrorAlertWithMessage:errorMessage];
+//TODO check    [self showErrorAlertWithMessage:errorMessage];
 }
 
 - (void) triggerSettingsPage {

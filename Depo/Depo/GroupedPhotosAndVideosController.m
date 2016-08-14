@@ -161,7 +161,7 @@
 
 - (void) groupFailCallback:(NSString *) errorMessage {
     [self hideLoading];
-    [self showErrorAlertWithMessage:errorMessage];
+//TODO check    [self showErrorAlertWithMessage:errorMessage];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -275,7 +275,7 @@
 }
 
 - (void) albumListFailCallback:(NSString *) errorMessage {
-    [self showErrorAlertWithMessage:errorMessage];
+//TODO check    [self showErrorAlertWithMessage:errorMessage];
 }
 
 - (void) addAlbumSuccessCallback {

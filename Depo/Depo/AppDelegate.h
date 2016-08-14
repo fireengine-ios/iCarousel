@@ -38,6 +38,7 @@
 @property (nonatomic) NotificationAction notificationAction;
 @property (nonatomic) NSString *notificationActionUrl;
 @property (nonatomic) BOOL activatedFromBackground;
+@property (nonatomic) BOOL backgroundReloginInProgress;
 
 - (void) showCustomAlert:(CustomAlertView *) alertView;
 - (void) showCustomConfirm:(CustomConfirmView *) alertView;

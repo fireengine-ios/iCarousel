@@ -73,6 +73,7 @@
 @synthesize progress;
 @synthesize wormhole;
 @synthesize activatedFromBackground;
+@synthesize backgroundReloginInProgress;
 @synthesize notificationAction;
 @synthesize notificationActionUrl;
 
@@ -398,7 +399,8 @@
 
 - (void) tokenManagerDidFailReceivingToken {
     IGLog(@"AppDelegate tokenManagerDidFailReceivingToken");
-
+    backgroundReloginInProgress = NO;
+    
     [self hideMainLoading];
     WelcomeController *welcomePage = [[WelcomeController alloc] init];
     MyNavigationController *welcomeNav = [[MyNavigationController alloc] initWithRootViewController:welcomePage];
@@ -430,6 +432,7 @@
 
 - (void) tokenManagerDidReceiveToken {
     IGLog(@"AppDelegate tokenManagerDidReceiveToken");
+    backgroundReloginInProgress = NO;
     [tokenManager requestUserInfo];
 }
 
@@ -455,12 +458,14 @@
 
 - (void) tokenManagerProvisionNeeded {
     IGLog(@"AppDelegate tokenManagerProvisionNeeded");
+    backgroundReloginInProgress = NO;
     TermsController *termsPage = [[TermsController alloc] init];
     [self.window setRootViewController:termsPage];
 }
 
 - (void) tokenManagerMigrationInProgress {
     IGLog(@"AppDelegate tokenManagerMigrationInProgress");
+    backgroundReloginInProgress = NO;
     MigrateStatusController *migrationPage = [[MigrateStatusController alloc] init];
     [self.window setRootViewController:migrationPage];
 }
@@ -614,17 +619,19 @@
      */
     
     NSLog(@".... %@", NSStringFromClass([self.window.rootViewController class]));
-    if(activatedFromBackground) {
+    if(activatedFromBackground && !backgroundReloginInProgress) {
         if(![self.window.rootViewController isKindOfClass:[BaseViewController class]]) {
             IGLog(@"AppDelegate should relogin after from background");
             NSLog(@"AppDelegate should relogin after from background");
             if([ReachabilityManager isReachable]) {
                 if([CacheUtil readRememberMeToken] != nil) {
                     IGLog(@"AppDelegate should relogin after from background RememberMeToken not null");
+                    backgroundReloginInProgress = YES;
                     [tokenManager requestToken];
                     [self showMainLoading];
                 } else if([ReachabilityManager isReachableViaWWAN]) {
                     IGLog(@"AppDelegate should relogin after from background trying radius login");
+                    backgroundReloginInProgress = YES;
                     [tokenManager requestRadiusLogin];
                     [self showMainLoading];
                 }

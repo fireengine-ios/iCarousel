@@ -89,6 +89,10 @@
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request {
+    NSString *responseStr = [request responseString];
+    NSString *errorInfoLog = [NSString stringWithFormat:@"BaseDao request failed with code: %d and response: %@", [request responseStatusCode], responseStr];
+    IGLog(errorInfoLog);
+    NSLog(errorInfoLog);
     if([request responseStatusCode] == 401) {
         IGLog(@"BaseDao request failed with 401");
         if(!self.tokenAlreadyRevisitedFlag) {
