@@ -27,9 +27,11 @@
 @synthesize albums;
 @synthesize albumTable;
 @synthesize albumsDao;
+@synthesize deleteAlbumDao;
 @synthesize refreshControl;
 @synthesize isSelectible;
 @synthesize selectedAlbumList;
+@synthesize footerActionMenu;
 
 - (id) initWithFrame:(CGRect)frame {
     if(self = [super initWithFrame:frame]) {
@@ -39,6 +41,11 @@
         albumsDao.delegate = self;
         albumsDao.successMethod = @selector(albumListSuccessCallback:);
         albumsDao.failMethod = @selector(albumListFailCallback:);
+
+        deleteAlbumDao = [[DeleteAlbumsDao alloc] init];
+        deleteAlbumDao.delegate = self;
+        deleteAlbumDao.successMethod = @selector(deleteAlbumSuccessCallback);
+        deleteAlbumDao.failMethod = @selector(deleteAlbumFailCallback:);
 
         tableUpdateCounter = 0;
         listOffset = 0;
@@ -56,8 +63,50 @@
         refreshControl = [[UIRefreshControl alloc] init];
         [refreshControl addTarget:self action:@selector(pullData) forControlEvents:UIControlEventValueChanged];
         [albumTable addSubview:refreshControl];
+
+        UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(triggerSelectionState:)];
+        longPressGesture.minimumPressDuration = 1.0;
+        [albumTable addGestureRecognizer:longPressGesture];
     }
     return self;
+}
+
+- (void) triggerSelectionState:(UILongPressGestureRecognizer *)gestureRecognizer {
+    if(!isSelectible) {
+        if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+            CGPoint p = [gestureRecognizer locationInView:albumTable];
+            NSIndexPath *indexPath = [albumTable indexPathForRowAtPoint:p];
+            if (indexPath != nil) {
+                UITableViewCell *cell = [albumTable cellForRowAtIndexPath:indexPath];
+                if (cell.isHighlighted) {
+                    [self setToSelectible];
+                }
+            }
+        }
+    }
+}
+
+- (void) setToSelectible {
+    isSelectible = YES;
+    [selectedAlbumList removeAllObjects];
+    
+    albumTable.allowsMultipleSelection = YES;
+    tableUpdateCounter ++;
+    [albumTable reloadData];
+}
+
+- (void) setToUnselectible {
+    isSelectible = NO;
+    [selectedAlbumList removeAllObjects];
+    
+    if(footerActionMenu) {
+        [footerActionMenu removeFromSuperview];
+        footerActionMenu = nil;
+    }
+
+    albumTable.allowsMultipleSelection = NO;
+    tableUpdateCounter ++;
+    [albumTable reloadData];
 }
 
 - (void) pullData {
@@ -77,6 +126,34 @@
 
 - (void) albumListFailCallback:(NSString *) errorMessage {
     [delegate revisitedAlbumListDidFailRetrievingList:errorMessage];
+}
+
+- (void) deleteAlbumSuccessCallback {
+    if(isSelectible) {
+        [self setToUnselectible];
+    }
+    
+    [self pullData];
+    [delegate revisitedAlbumListShouldHideLoading];
+}
+
+- (void) deleteAlbumFailCallback:(NSString *) errorMessage {
+    [delegate revisitedAlbumListDidFailDeletingWithError:errorMessage];
+    [delegate revisitedAlbumListShouldHideLoading];
+}
+
+- (void) showAlbumFooterMenu {
+    if(footerActionMenu) {
+        footerActionMenu.hidden = NO;
+    } else {
+        footerActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 60, self.frame.size.width, 60) shouldShowShare:NO shouldShowMove:NO shouldShowDelete:YES shouldShowPrint:NO];
+        footerActionMenu.delegate = self;
+        [self addSubview:footerActionMenu];
+    }
+}
+
+- (void) hideAlbumFooterMenu {
+    footerActionMenu.hidden = YES;
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
@@ -121,11 +198,11 @@
                 [selectedAlbumList addObject:album.uuid];
             }
             if([selectedAlbumList count] > 0) {
-//TODO                [self showAlbumFooterMenu];
-//TODO                self.title = [NSString stringWithFormat:NSLocalizedString(@"AlbumsSelectedTitle", @""), [selectedAlbumList count]];
+                [self showAlbumFooterMenu];
+                [delegate revisitedAlbumListChangeTitleTo:[NSString stringWithFormat:NSLocalizedString(@"AlbumsSelectedTitle", @""), [selectedAlbumList count]]];
             } else {
-//TODO                [self hideAlbumFooterMenu];
-//TODO                self.title = NSLocalizedString(@"SelectAlbumsTitle", @"");
+                [self hideAlbumFooterMenu];
+                [delegate revisitedAlbumListChangeTitleTo:NSLocalizedString(@"SelectAlbumsTitle", @"")];
             }
         }
     } else {
@@ -148,14 +225,28 @@
                 [selectedAlbumList removeObject:album.uuid];
             }
             if([selectedAlbumList count] > 0) {
-//TODO                [self showAlbumFooterMenu];
-//TODO                self.title = [NSString stringWithFormat:NSLocalizedString(@"AlbumsSelectedTitle", @""), [selectedAlbumList count]];
+                [self showAlbumFooterMenu];
+                [delegate revisitedAlbumListChangeTitleTo:[NSString stringWithFormat:NSLocalizedString(@"AlbumsSelectedTitle", @""), [selectedAlbumList count]]];
             } else {
-//TODO                [self hideAlbumFooterMenu];
-//TODO                self.title = NSLocalizedString(@"SelectAlbumsTitle", @"");
+                [self hideAlbumFooterMenu];
+                [delegate revisitedAlbumListChangeTitleTo:NSLocalizedString(@"SelectAlbumsTitle", @"")];
             }
         }
     }
+}
+
+- (void) footerActionMenuDidSelectDelete:(FooterActionsMenuView *) menu {
+    [deleteAlbumDao requestDeleteAlbums:self.selectedAlbumList];
+    [delegate revisitedAlbumListShouldShowLoading];
+}
+
+- (void) footerActionMenuDidSelectMove:(FooterActionsMenuView *) menu {
+}
+
+- (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {
+}
+
+- (void) footerActionMenuDidSelectPrint:(FooterActionsMenuView *)menu {
 }
 
 @end

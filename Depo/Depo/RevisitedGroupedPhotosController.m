@@ -61,6 +61,8 @@
     albumView.hidden = NO;
 }
 
+#pragma mark RevisitedAlbumListDelegate methods
+
 - (void) revisitedAlbumListDidFinishLoading {
 }
 
@@ -73,6 +75,22 @@
     albumController.delegate = self;
     albumController.nav = self.nav;
     [self.nav pushViewController:albumController animated:NO];
+}
+
+- (void) revisitedAlbumListChangeTitleTo:(NSString *)pageTitle {
+    self.title = pageTitle;
+}
+
+- (void) revisitedAlbumListDidFailDeletingWithError:(NSString *)errorMessage {
+    [self showErrorAlertWithMessage:errorMessage];
+}
+
+- (void) revisitedAlbumListShouldShowLoading {
+    [self showLoading];
+}
+
+- (void) revisitedAlbumListShouldHideLoading {
+    [self hideLoading];
 }
 
 #pragma mark PhotoAlbumDelegate methods
