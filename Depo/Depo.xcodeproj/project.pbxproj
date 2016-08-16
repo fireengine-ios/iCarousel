@@ -6081,7 +6081,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.todayextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "53b8799d-db75-4aaf-b653-d328227ee5be";
+				PROVISIONING_PROFILE = "e19f8959-ec7f-4af7-851b-b8c39fc8de90";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
