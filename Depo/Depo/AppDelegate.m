@@ -627,11 +627,13 @@
                 if([CacheUtil readRememberMeToken] != nil) {
                     IGLog(@"AppDelegate should relogin after from background RememberMeToken not null");
                     backgroundReloginInProgress = YES;
+                    [self addInitialBgImage];
                     [tokenManager requestToken];
                     [self showMainLoading];
                 } else if([ReachabilityManager isReachableViaWWAN]) {
                     IGLog(@"AppDelegate should relogin after from background trying radius login");
                     backgroundReloginInProgress = YES;
+                    [self addInitialBgImage];
                     [tokenManager requestRadiusLogin];
                     [self showMainLoading];
                 }

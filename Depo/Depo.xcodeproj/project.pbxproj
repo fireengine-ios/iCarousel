@@ -5794,7 +5794,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "17f5dfc5-c650-490f-9658-b3191d40a262";
+				PROVISIONING_PROFILE = "c7326830-eaca-4f1e-9bbb-765e70c0d2fc";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -5882,7 +5882,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5910c814-1c2d-4395-b8f8-abe8da320e00";
+				PROVISIONING_PROFILE = "3d2683f7-410b-4d3d-82ee-4404d6095878";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -5983,7 +5983,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.shareextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e648adbb-1c99-4e14-a3ce-21965ab745fc";
+				PROVISIONING_PROFILE = "e9952454-e231-4aec-bcde-c65838f462c5";
 				SKIP_INSTALL = YES;
 			};
 			name = AppStore;
@@ -6009,7 +6009,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent.shareextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d6db7235-b6fd-4b52-aa7f-029ff77b9a01";
+				PROVISIONING_PROFILE = "28015523-0160-4d5a-a6fe-ca542c23e12a";
 				SKIP_INSTALL = YES;
 			};
 			name = Enterprise;
@@ -6105,7 +6105,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent.todayextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b26460e4-3d31-49aa-9b77-7fcc88fc416a";
+				PROVISIONING_PROFILE = "d508c49a-e11e-4c93-b749-190ea8e720d2";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

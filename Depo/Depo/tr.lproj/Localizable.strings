@@ -759,3 +759,4 @@
 "NewFeatureInfoSubLabel"="Yepyeni özellikler ve daha iyi bir deneyim çok yakında bu kutunun içinde...";
 
 "ForgetPass2222Info"="Turkcell abonesi iseniz, SIFRE yazıp 2222'ye SMS göndererek şifrenizi ücretsiz olarak alabilirsiniz.";
+"TimeoutMessage"="İşleminiz zamanaşımına uğramıştır. Lütfen tekrar deneyin.";

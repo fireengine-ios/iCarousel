@@ -116,6 +116,10 @@
             NSString *errorMessageWithRequestUrl = [NSString stringWithFormat:@"BaseDao request failed - ASIConnectionFailureErrorType for %@", request.url.absoluteString];
             IGLog(errorMessageWithRequestUrl);
             [self shouldReturnFailWithMessage:NSLocalizedString(@"NoConnErrorMessage", @"")];
+        } else if([request.error code] == ASIRequestTimedOutErrorType){
+            NSString *errorMessageWithRequestUrl = [NSString stringWithFormat:@"BaseDao request failed - ASIRequestTimedOutErrorType for %@", request.url.absoluteString];
+            IGLog(errorMessageWithRequestUrl);
+            [self shouldReturnFailWithMessage:NSLocalizedString(@"TimeoutMessage", @"")];
         } else {
             NSString *localizedErrStr = [request.error localizedDescription];
             NSString *errorMessageWithRequestUrl = [NSString stringWithFormat:@"BaseDao request failed with code:%d and error: %@ - GENERAL_ERROR_MESSAGE for %@", (int)[request.error code], localizedErrStr, request.url.absoluteString];

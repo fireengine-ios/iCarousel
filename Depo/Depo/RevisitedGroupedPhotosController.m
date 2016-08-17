@@ -39,6 +39,7 @@
         [self.view addSubview:albumView];
         
         [albumView pullData];
+        [collView pullData];
     }
     return self;
 }
