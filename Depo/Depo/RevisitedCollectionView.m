@@ -17,6 +17,7 @@
     int tableUpdateCounter;
     int listOffset;
     BOOL isLoading;
+    int photoCount;
 }
 @end
 
@@ -32,6 +33,7 @@
 @synthesize level;
 @synthesize collDate;
 @synthesize isSelectible;
+@synthesize progress;
 
 - (id) initWithFrame:(CGRect)frame {
     if(self = [super initWithFrame:frame]) {
@@ -44,6 +46,8 @@
 
         tableUpdateCounter = 0;
         listOffset = 0;
+        photoCount = 0;
+        level = ImageGroupLevelYear;
         
         collections = [[NSMutableArray alloc] init];
         selectedFileList = [[NSMutableArray alloc] init];
@@ -59,31 +63,64 @@
         refreshControl = [[UIRefreshControl alloc] init];
         [refreshControl addTarget:self action:@selector(pullData) forControlEvents:UIControlEventValueChanged];
         [collTable addSubview:refreshControl];
+
+        progress = [[MBProgressHUD alloc] initWithFrame:self.frame];
+        progress.opacity = 0.4f;
+        [self addSubview:progress];
     }
     return self;
 }
 
 - (void) pullData {
     listOffset = 0;
+    tableUpdateCounter ++;
     
-    int groupSize = self.level == ImageGroupLevelYear ? 50 : 48;
+    [self.collections removeAllObjects];
+    
+    int groupSize = 8;
     int pageSize = self.level == ImageGroupLevelDay ? 40 : (groupSize*COLL_COUNT_FOR_PAGE);
-    [collDao requestImagesByGroupByPage:listOffset bySize:pageSize byLevel:self.level byGroupDate:nil /*TODO*/ byGroupSize:[NSNumber numberWithInt:groupSize] bySort:APPDELEGATE.session.sortType];
+    [collDao requestImagesByGroupByPage:listOffset bySize:pageSize byLevel:self.level byGroupDate:collDate byGroupSize:[NSNumber numberWithInt:groupSize] bySort:APPDELEGATE.session.sortType];
     isLoading = YES;
-    [delegate revisitedCollectionShouldShowLoading];
+
+    [self bringSubviewToFront:progress];
+    [progress show:YES];
+}
+
+- (void) setToSelectible {
+    isSelectible = YES;
+    [refreshControl setEnabled:NO];
+    [selectedFileList removeAllObjects];
+    
+    tableUpdateCounter ++;
+    [collTable reloadData];
+}
+
+- (void) setToUnselectible {
+    isSelectible = NO;
+    [refreshControl setEnabled:YES];
+    [selectedFileList removeAllObjects];
+    
+    if(imgFooterActionMenu) {
+        [imgFooterActionMenu removeFromSuperview];
+        imgFooterActionMenu = nil;
+    }
+
+    tableUpdateCounter ++;
+    [collTable reloadData];
 }
 
 - (void) groupSuccessCallback:(NSArray *) fileGroups {
+    [progress hide:YES];
     [self.collections addObjectsFromArray:fileGroups];
     
     isLoading = NO;
-    [delegate revisitedCollectionShouldHideLoading];
     [refreshControl endRefreshing];
     [collTable reloadData];
 }
 
 - (void) groupFailCallback:(NSString *) errorMessage {
-    [delegate revisitedCollectionShouldHideLoading];
+    [progress hide:YES];
+    isLoading = NO;
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
@@ -93,13 +130,24 @@
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if(collections.count > 0) {
         FileInfoGroup *group = [collections objectAtIndex:indexPath.row];
-        int imageForRow = self.level == ImageGroupLevelYear ? 10 : self.level == ImageGroupLevelMonth ? 8 : 4;
-        float imageItemSize = collTable.frame.size.width/imageForRow;
-        float imageContainerHeight = floorf(group.fileInfo.count/imageForRow)*imageItemSize;
-        if(group.fileInfo.count%imageForRow > 0) {
-            imageContainerHeight += imageItemSize;
+
+        float boxWidth = collTable.frame.size.width/4;
+        int boxCountPerRow = 4;
+        
+        float imageContainerHeight = 60;
+        if(self.level == ImageGroupLevelYear || self.level == ImageGroupLevelMonth) {
+            if(group.fileInfo.count >= 4) {
+                imageContainerHeight += boxWidth*2;
+            } else {
+                imageContainerHeight += boxWidth;
+            }
+        } else {
+            imageContainerHeight += floorf(group.fileInfo.count/boxCountPerRow)*boxWidth;
+            if(group.fileInfo.count%boxCountPerRow > 0) {
+                imageContainerHeight += boxWidth;
+            }
         }
-        return imageContainerHeight + 60;
+        return imageContainerHeight;
     } else {
         return self.frame.size.width/2;
     }
@@ -117,9 +165,11 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if(cell == nil) {
         if(collections.count > 0) {
+            float boxWidth = collTable.frame.size.width/4;
+            int boxCountPerRow = 4;
             FileInfoGroup *group = [collections objectAtIndex:indexPath.row];
-            cell = [[GroupedPhotosCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withGroup:group withLevel:self.level isSelectible:isSelectible];
-//TODO            ((GroupedPhotosCell *)cell).delegate = self;
+            cell = [[CollCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withGroup:group withLevel:self.level isSelectible:isSelectible withImageWidth:boxWidth withImageCountPerRow:boxCountPerRow];
+            ((CollCell *)cell).delegate = self;
         } else {
             cell = [[NoItemCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier imageName:@"no_photo_icon" titleText:NSLocalizedString(@"EmptyPhotosVideosTitle", @"") descriptionText:NSLocalizedString(@"EmptyPhotosVideosDescription", @"")];
         }
@@ -155,9 +205,79 @@
 
 - (void) dynamicallyLoadNextPage {
     listOffset ++;
-    int groupSize = self.level == ImageGroupLevelYear ? 50 : 48;
+    int groupSize = 8;
     int pageSize = self.level == ImageGroupLevelDay ? 40 : (groupSize*COLL_COUNT_FOR_PAGE);
     [collDao requestImagesByGroupByPage:listOffset bySize:pageSize byLevel:self.level byGroupDate:self.collDate byGroupSize:[NSNumber numberWithInt:groupSize] bySort:APPDELEGATE.session.sortType];
+}
+
+- (void) collCellImageWasSelectedForFile:(MetaFile *) fileSelected forGroupWithKey:(NSString *) groupKey {
+    [delegate revisitedCollectionDidSelectFile:fileSelected withList:@[fileSelected]];
+}
+
+- (void) collCellImageWasMarkedForFile:(MetaFile *) fileSelected {
+    if(fileSelected.uuid) {
+        if(![selectedFileList containsObject:fileSelected.uuid]) {
+            [selectedFileList addObject:fileSelected.uuid];
+        }
+    }
+    if([selectedFileList count] > 0) {
+//        [self showImgFooterMenu];
+        [delegate revisitedCollectionChangeTitleTo:[NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]]];
+    } else {
+//        [self hideImgFooterMenu];
+        [delegate revisitedCollectionChangeTitleTo:NSLocalizedString(@"SelectFilesTitle", @"")];
+    }
+    
+    if (fileSelected.contentType == ContentTypeVideo) {
+        if (photoCount == 0) {
+//            [imgFooterActionMenu hidePrintIcon];
+        } else{
+//            [imgFooterActionMenu showPrintIcon];
+        }
+    } else {
+        photoCount++;
+//        [imgFooterActionMenu showPrintIcon];
+    }
+}
+
+- (void) collCellImageWasUnmarkedForFile:(MetaFile *) fileSelected {
+    if([selectedFileList containsObject:fileSelected.uuid]) {
+        [selectedFileList removeObject:fileSelected.uuid];
+    }
+    if([selectedFileList count] > 0) {
+//        [self showImgFooterMenu];
+        [delegate revisitedCollectionChangeTitleTo:[NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]]];
+    } else {
+//        [self hideImgFooterMenu];
+        [delegate revisitedCollectionChangeTitleTo:NSLocalizedString(@"SelectFilesTitle", @"")];
+    }
+    if (fileSelected.contentType == ContentTypePhoto) {
+        photoCount--;
+    }
+    if (photoCount == 0) {
+//        [imgFooterActionMenu hidePrintIcon];
+    }
+}
+
+- (void) collCellImageUploadFinishedForFile:(NSString *) fileSelectedUuid {
+}
+
+- (void) collCellImageWasLongPressedForFile:(MetaFile *) fileSelected {
+}
+
+- (void) collCellImageUploadQuotaError:(MetaFile *) fileSelected {
+}
+
+- (void) collCellImageUploadLoginError:(MetaFile *) fileSelected {
+}
+
+- (void) collCellImageWasSelectedForView:(SquareImageView *) ref {
+}
+
+- (void) collCellMoreSelectedForDate:(NSString *) rangeStart {
+    self.collDate = rangeStart;
+    self.level = (self.level == ImageGroupLevelYear) ? ImageGroupLevelMonth : ImageGroupLevelDay;
+    [self pullData];
 }
 
 @end

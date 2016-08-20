@@ -18,6 +18,7 @@
 @synthesize monthStr;
 @synthesize dayStr;
 @synthesize locationInfo;
+@synthesize customTitle;
 @synthesize fileInfo;
 @synthesize groupType;
 

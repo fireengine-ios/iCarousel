@@ -289,6 +289,7 @@
         NSString *metaHash = [detailDict objectForKey:@"X-Object-Meta-Ios-Metadata-Hash"];
         NSNumber *imgHeight = [detailDict objectForKey:@"Image-Height"];
         NSNumber *imgWidth = [detailDict objectForKey:@"Image-Width"];
+        NSString *fileDate = [detailDict objectForKey:@"Image-DateTime"];
         NSString *genre = [detailDict objectForKey:@"Genre"];
         NSString *artist = [detailDict objectForKey:@"Artist"];
         NSString *album = [detailDict objectForKey:@"Album"];
@@ -314,6 +315,7 @@
         detail.album = [self strByRawVal:album];
         detail.songTitle = [self strByRawVal:songTitle];
         detail.duration = [self floatByNumber:duration];
+        detail.fileDate = [self dateByRawVal:fileDate];
 
         detail.geoAdminLevel1 = [self strByRawVal:geoAdminLevel1];
         detail.geoAdminLevel2 = [self strByRawVal:geoAdminLevel2];

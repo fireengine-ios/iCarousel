@@ -28,10 +28,12 @@
 @synthesize albumTable;
 @synthesize albumsDao;
 @synthesize deleteAlbumDao;
+@synthesize addAlbumDao;
 @synthesize refreshControl;
 @synthesize isSelectible;
 @synthesize selectedAlbumList;
 @synthesize footerActionMenu;
+@synthesize progress;
 
 - (id) initWithFrame:(CGRect)frame {
     if(self = [super initWithFrame:frame]) {
@@ -46,6 +48,11 @@
         deleteAlbumDao.delegate = self;
         deleteAlbumDao.successMethod = @selector(deleteAlbumSuccessCallback);
         deleteAlbumDao.failMethod = @selector(deleteAlbumFailCallback:);
+
+        addAlbumDao = [[AddAlbumDao alloc] init];
+        addAlbumDao.delegate = self;
+        addAlbumDao.successMethod = @selector(addAlbumSuccessCallback);
+        addAlbumDao.failMethod = @selector(addAlbumFailCallback:);
 
         tableUpdateCounter = 0;
         listOffset = 0;
@@ -67,6 +74,10 @@
         UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(triggerSelectionState:)];
         longPressGesture.minimumPressDuration = 1.0;
         [albumTable addGestureRecognizer:longPressGesture];
+
+        progress = [[MBProgressHUD alloc] initWithFrame:self.frame];
+        progress.opacity = 0.4f;
+        [self addSubview:progress];
     }
     return self;
 }
@@ -80,6 +91,7 @@
                 UITableViewCell *cell = [albumTable cellForRowAtIndexPath:indexPath];
                 if (cell.isHighlighted) {
                     [self setToSelectible];
+                    [delegate revisitedAlbumListDidChangeToSelectState];
                 }
             }
         }
@@ -88,6 +100,7 @@
 
 - (void) setToSelectible {
     isSelectible = YES;
+    [refreshControl setEnabled:NO];
     [selectedAlbumList removeAllObjects];
     
     albumTable.allowsMultipleSelection = YES;
@@ -97,6 +110,7 @@
 
 - (void) setToUnselectible {
     isSelectible = NO;
+    [refreshControl setEnabled:YES];
     [selectedAlbumList removeAllObjects];
     
     if(footerActionMenu) {
@@ -112,19 +126,23 @@
 - (void) pullData {
     listOffset = 0;
     [albumsDao requestAlbumListForStart:0 andSize:50 andSortType:APPDELEGATE.session.sortType];
+    
+    [self bringSubviewToFront:progress];
+    [progress show:YES];
 }
 
 - (void) albumListSuccessCallback:(NSMutableArray *) list {
+    [progress hide:YES];
+
     self.albums = list;
     tableUpdateCounter ++;
     isLoading = NO;
     [refreshControl endRefreshing];
     [albumTable reloadData];
-    
-    [delegate revisitedAlbumListDidFinishLoading];
 }
 
 - (void) albumListFailCallback:(NSString *) errorMessage {
+    [progress hide:YES];
     [delegate revisitedAlbumListDidFailRetrievingList:errorMessage];
 }
 
@@ -134,12 +152,11 @@
     }
     
     [self pullData];
-    [delegate revisitedAlbumListShouldHideLoading];
 }
 
 - (void) deleteAlbumFailCallback:(NSString *) errorMessage {
+    [progress hide:YES];
     [delegate revisitedAlbumListDidFailDeletingWithError:errorMessage];
-    [delegate revisitedAlbumListShouldHideLoading];
 }
 
 - (void) showAlbumFooterMenu {
@@ -237,7 +254,9 @@
 
 - (void) footerActionMenuDidSelectDelete:(FooterActionsMenuView *) menu {
     [deleteAlbumDao requestDeleteAlbums:self.selectedAlbumList];
-    [delegate revisitedAlbumListShouldShowLoading];
+
+    [self bringSubviewToFront:progress];
+    [progress show:YES];
 }
 
 - (void) footerActionMenuDidSelectMove:(FooterActionsMenuView *) menu {
@@ -247,6 +266,23 @@
 }
 
 - (void) footerActionMenuDidSelectPrint:(FooterActionsMenuView *)menu {
+}
+
+- (void) addNewAlbumWithName:(NSString *) albumName {
+    [addAlbumDao requestAddAlbumWithName:albumName];
+
+    [self bringSubviewToFront:progress];
+    [progress show:YES];
+}
+
+- (void) addAlbumSuccessCallback {
+    [progress hide:YES];
+    [self pullData];
+}
+
+- (void) addAlbumFailCallback:(NSString *) errorMessage {
+    [progress hide:YES];
+    [delegate revisitedAlbumListDidFailRetrievingList:errorMessage];
 }
 
 @end

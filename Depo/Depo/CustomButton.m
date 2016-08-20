@@ -21,6 +21,19 @@
     return self;
 }
 
+- (id)initWithFrame:(CGRect)frame withCenteredImageName:(NSString *) imageName {
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.backgroundColor = [UIColor clearColor];
+        
+        UIImage *centerdImg = [UIImage imageNamed:imageName];
+        UIImageView *centeredImgView = [[UIImageView alloc] initWithFrame:CGRectMake((self.frame.size.width - centerdImg.size.width)/2, (self.frame.size.height - centerdImg.size.height)/2, centerdImg.size.width, centerdImg.size.height)];
+        centeredImgView.image = centerdImg;
+        [self addSubview:centeredImgView];
+    }
+    return self;
+}
+
 - (id)initWithFrame:(CGRect)frame withImageName:(NSString *) imageName withTitle:(NSString *) title withFont:(UIFont *) font {
     self = [super initWithFrame:frame];
     if (self) {

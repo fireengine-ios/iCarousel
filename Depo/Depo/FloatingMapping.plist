@@ -20,6 +20,12 @@
         <string>AddTypePhoto</string>
         <string>AddTypeAlbum</string>
     </array>
+    <key>RevisitedGroupedPhotosController</key>
+    <array>
+        <string>AddTypeCamera</string>
+        <string>AddTypePhoto</string>
+        <string>AddTypeAlbum</string>
+    </array>
 	<key>PhotoAlbumController</key>
 	<array>
 		<string>AddTypeCamera</string>
@@ -35,6 +41,11 @@
 		<string>AddTypeCamera</string>
 		<string>AddTypePhoto</string>
 	</array>
+    <key>CollTab</key>
+    <array>
+        <string>AddTypeCamera</string>
+        <string>AddTypePhoto</string>
+    </array>
 	<key>FavouriteListController</key>
 	<array>
 		<string>AddTypeDepoPhotoFav</string>

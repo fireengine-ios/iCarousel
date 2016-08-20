@@ -27,5 +27,6 @@
 @synthesize geoAdminLevel4;
 @synthesize geoAdminLevel5;
 @synthesize geoAdminLevel6;
+@synthesize fileDate;
 
 @end

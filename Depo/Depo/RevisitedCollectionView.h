@@ -12,18 +12,18 @@
 #import "FooterActionsMenuView.h"
 #import "NoItemCell.h"
 #import "GroupedPhotosCell.h"
+#import "CollCell.h"
+#import "MBProgressHUD.h"
 
 @protocol RevisitedCollectionDelegate <NSObject>
 - (void) revisitedCollectionDidSelectFile:(MetaFile *) fileSelected withList:(NSArray *) containingList;
 - (void) revisitedCollectionDidFinishLoading;
 - (void) revisitedCollectionDidFailRetrievingList:(NSString *) errorMessage;
 - (void) revisitedCollectionDidFailDeletingWithError:(NSString *) errorMessage;
-- (void) revisitedCollectionShouldShowLoading;
-- (void) revisitedCollectionShouldHideLoading;
 - (void) revisitedCollectionChangeTitleTo:(NSString *) pageTitle;
 @end
 
-@interface RevisitedCollectionView : UIView <UITableViewDelegate, UITableViewDataSource>
+@interface RevisitedCollectionView : UIView <UITableViewDelegate, UITableViewDataSource, CollCellDelegate>
 
 @property (nonatomic, weak) id<RevisitedCollectionDelegate> delegate;
 @property (nonatomic, strong) NSMutableArray *collections;
@@ -36,6 +36,10 @@
 @property (nonatomic) ImageGroupLevel level;
 @property (nonatomic) BOOL isSelectible;
 
+@property (nonatomic, strong) MBProgressHUD *progress;
+
 - (void) pullData;
+- (void) setToSelectible;
+- (void) setToUnselectible;
 
 @end

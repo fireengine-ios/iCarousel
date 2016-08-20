@@ -12,26 +12,35 @@
 #import "FooterActionsMenuView.h"
 #import "NoItemCell.h"
 #import "GroupedPhotosCell.h"
+#import "ElasticSearchDao.h"
+#import "MBProgressHUD.h"
+#import "GroupedCell.h"
 
 @protocol RevisitedGroupedPhotoDelegate <NSObject>
-- (void) RevisitedGroupedPhotoDidSelectFile:(MetaFile *) fileSelected withList:(NSArray *) containingList;
-- (void) RevisitedGroupedPhotoDidFinishLoading;
-- (void) RevisitedGroupedPhotoDidFailRetrievingList:(NSString *) errorMessage;
-- (void) RevisitedGroupedPhotoDidFailDeletingWithError:(NSString *) errorMessage;
-- (void) RevisitedGroupedPhotoShouldShowLoading;
-- (void) RevisitedGroupedPhotoShouldHideLoading;
-- (void) RevisitedGroupedPhotoChangeTitleTo:(NSString *) pageTitle;
+- (void) revisitedGroupedPhotoDidSelectFile:(MetaFile *) fileSelected withList:(NSArray *) containingList;
+- (void) revisitedGroupedPhotoDidFinishLoading;
+- (void) revisitedGroupedPhotoDidFailRetrievingList:(NSString *) errorMessage;
+- (void) revisitedGroupedPhotoDidFailDeletingWithError:(NSString *) errorMessage;
+- (void) revisitedGroupedPhotoChangeTitleTo:(NSString *) pageTitle;
 @end
 
-@interface RevisitedGroupedPhotoView : UIView
+@interface RevisitedGroupedPhotoView : UIView <UITableViewDelegate, UITableViewDataSource, GroupedCellDelegate>
 
 @property (nonatomic, weak) id<RevisitedGroupedPhotoDelegate> delegate;
+@property (nonatomic, strong) NSMutableArray *files;
 @property (nonatomic, strong) NSMutableArray *groups;
+@property (nonatomic, strong) NSMutableDictionary *groupDict;
 @property (nonatomic, strong) NSMutableArray *selectedFileList;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
-@property (nonatomic, strong) UITableView *groupTable;
-@property (nonatomic, strong) SearchByGroupDao *collDao;
+@property (nonatomic, strong) UITableView *fileTable;
+@property (nonatomic, strong) ElasticSearchDao *readDao;
 @property (nonatomic, strong) FooterActionsMenuView *imgFooterActionMenu;
 @property (nonatomic) BOOL isSelectible;
+
+@property (nonatomic, strong) MBProgressHUD *progress;
+
+- (void) pullData;
+- (void) setToSelectible;
+- (void) setToUnselectible;
 
 @end

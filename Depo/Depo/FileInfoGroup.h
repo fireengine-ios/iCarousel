@@ -19,7 +19,8 @@
 @property (nonatomic, strong) NSString *monthStr;
 @property (nonatomic, strong) NSString *dayStr;
 @property (nonatomic, strong) NSString *locationInfo;
-@property (nonatomic, strong) NSArray *fileInfo;
+@property (nonatomic, strong) NSString *customTitle;
+@property (nonatomic, strong) NSMutableArray *fileInfo;
 @property (nonatomic) ImageGroupType groupType;
 
 @end
