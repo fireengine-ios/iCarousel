@@ -7,11 +7,13 @@
 //
 
 #import "VideofyAudioListDao.h"
+#import "Util.h"
 
 @implementation VideofyAudioListDao
 
 - (void) requestAudioList {
-    NSURL *url = [NSURL URLWithString:VIDEOFY_AUDIO_URL];
+    NSString *urlStr = [NSString stringWithFormat:@"%@?language=%@", VIDEOFY_AUDIO_URL, [Util readLocaleCode]];
+    NSURL *url = [NSURL URLWithString:urlStr];
     
     IGLog(@"[GET] VideofyAudioListDao requestAudioList called");
     
