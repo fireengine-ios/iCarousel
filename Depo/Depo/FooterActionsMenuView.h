@@ -16,7 +16,6 @@
 - (void) footerActionMenuDidSelectMove:(FooterActionsMenuView *) menu;
 - (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu;
 - (void) footerActionMenuDidSelectPrint:(FooterActionsMenuView *)menu;
-
 @end
 
 @interface FooterActionsMenuView : UIView

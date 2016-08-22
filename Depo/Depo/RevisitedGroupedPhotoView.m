@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "AppSession.h"
 #import "GroupedPhotosCell.h"
+#import "CacheUtil.h"
 
 #define GROUP_PACKAGE_SIZE IS_IPAD ? 30 : 24
 #define GROUP_IMG_COUNT_PER_ROW 4
@@ -35,6 +36,7 @@
 @synthesize refreshControl;
 @synthesize fileTable;
 @synthesize readDao;
+@synthesize deleteDao;
 @synthesize imgFooterActionMenu;
 @synthesize isSelectible;
 @synthesize progress;
@@ -48,6 +50,11 @@
         readDao.successMethod = @selector(readSuccessCallback:);
         readDao.failMethod = @selector(readFailCallback:);
         
+        deleteDao = [[DeleteDao alloc] init];
+        deleteDao.delegate = self;
+        deleteDao.successMethod = @selector(deleteSuccessCallback);
+        deleteDao.failMethod = @selector(deleteFailCallback:);
+
         tableUpdateCounter = 0;
         listOffset = 0;
         photoCount = 0;
@@ -83,6 +90,7 @@
     listOffset = 0;
     
     [self.files removeAllObjects];
+    [self.groupDict removeAllObjects];
     
     [self addOngoingGroup];
     
@@ -109,6 +117,16 @@
     }
 }
 
+- (void) deleteSuccessCallback {
+    [delegate revisitedGroupedPhotoDidFinishDeleting];
+//    [self proceedSuccessForProgressViewWithAddButtonKey:@"PhotoTab"];
+}
+
+- (void) deleteFailCallback:(NSString *) errorMessage {
+//    [self proceedFailureForProgressViewWithAddButtonKey:@"PhotoTab"];
+    [delegate revisitedGroupedPhotoDidFailDeletingWithError:errorMessage];
+}
+
 - (void) setToSelectible {
     isSelectible = YES;
     [refreshControl setEnabled:NO];
@@ -124,6 +142,9 @@
         [imgFooterActionMenu removeFromSuperview];
         imgFooterActionMenu = nil;
     }
+
+    tableUpdateCounter ++;
+    [fileTable reloadData];
 }
 
 - (void) readSuccessCallback:(NSArray *) fileList {
@@ -373,22 +394,22 @@
         }
     }
     if([selectedFileList count] > 0) {
-        //        [self showImgFooterMenu];
+        [self showImgFooterMenu];
         [delegate revisitedGroupedPhotoChangeTitleTo:[NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]]];
     } else {
-        //        [self hideImgFooterMenu];
+        [self hideImgFooterMenu];
         [delegate revisitedGroupedPhotoChangeTitleTo:NSLocalizedString(@"SelectFilesTitle", @"")];
     }
     
     if (fileSelected.contentType == ContentTypeVideo) {
         if (photoCount == 0) {
-            //            [imgFooterActionMenu hidePrintIcon];
+            [imgFooterActionMenu hidePrintIcon];
         } else{
-            //            [imgFooterActionMenu showPrintIcon];
+            [imgFooterActionMenu showPrintIcon];
         }
     } else {
         photoCount++;
-        //        [imgFooterActionMenu showPrintIcon];
+        [imgFooterActionMenu showPrintIcon];
     }
 }
 
@@ -397,24 +418,40 @@
         [selectedFileList removeObject:fileSelected.uuid];
     }
     if([selectedFileList count] > 0) {
-        //        [self showImgFooterMenu];
+        [self showImgFooterMenu];
         [delegate revisitedGroupedPhotoChangeTitleTo:[NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]]];
     } else {
-        //        [self hideImgFooterMenu];
+        [self hideImgFooterMenu];
         [delegate revisitedGroupedPhotoChangeTitleTo:NSLocalizedString(@"SelectFilesTitle", @"")];
     }
     if (fileSelected.contentType == ContentTypePhoto) {
         photoCount--;
     }
     if (photoCount == 0) {
-        //        [imgFooterActionMenu hidePrintIcon];
+        [imgFooterActionMenu hidePrintIcon];
     }
+}
+
+- (void) showImgFooterMenu {
+    if(imgFooterActionMenu) {
+        imgFooterActionMenu.hidden = NO;
+    } else {
+        imgFooterActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 60, self.frame.size.width, 60) shouldShowShare:YES shouldShowMove:YES shouldShowDelete:YES shouldShowPrint:YES];
+        imgFooterActionMenu.delegate = self;
+        [self addSubview:imgFooterActionMenu];
+    }
+}
+
+- (void) hideImgFooterMenu {
+    imgFooterActionMenu.hidden = YES;
 }
 
 - (void) groupedCellImageUploadFinishedForFile:(NSString *) fileSelectedUuid {
 }
 
 - (void) groupedCellImageWasLongPressedForFile:(MetaFile *) fileSelected {
+    [self setToSelectible];
+    [delegate revisitedGroupedPhotoDidChangeToSelectState];
 }
 
 - (void) groupedCellImageUploadQuotaError:(MetaFile *) fileSelected {
@@ -424,6 +461,33 @@
 }
 
 - (void) groupedCellImageWasSelectedForView:(SquareImageView *) ref {
+}
+
+- (void) shouldContinueDelete {
+    [deleteDao requestDeleteFiles:selectedFileList];
+    [self bringSubviewToFront:progress];
+    [progress show:YES];
+}
+
+- (void) footerActionMenuDidSelectDelete:(FooterActionsMenuView *) menu {
+    if([CacheUtil showConfirmDeletePageFlag]) {
+        [deleteDao requestDeleteFiles:selectedFileList];
+        [self bringSubviewToFront:progress];
+        [progress show:YES];
+
+//        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+    } else {
+        [delegate revisitedGroupedPhotoShouldConfirmForDeleting];
+    }
+}
+
+- (void) footerActionMenuDidSelectMove:(FooterActionsMenuView *) menu {
+}
+
+- (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {
+}
+
+- (void) footerActionMenuDidSelectPrint:(FooterActionsMenuView *)menu {
 }
 
 @end

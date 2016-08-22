@@ -260,6 +260,7 @@
     NSString *tempDownloadURL = [dict objectForKey:@"tempDownloadURL"];
     NSString *last_modified = [dict objectForKey:@"lastModifiedDate"];
     NSString *content_type = [dict objectForKey:@"content_type"];
+    NSArray *albumUuids = [dict objectForKey:@"album"];
     
     MetaFile *file = [[MetaFile alloc] init];
     file.uuid = [self strByRawVal:uuid];
@@ -278,6 +279,10 @@
     file.visibleName = [AppUtil nakedFileFolderName:file.name];
     file.contentLengthDisplay = @"";
     file.itemCount = [self intByNumber:childCount];
+    
+    if(albumUuids != nil && [albumUuids isKindOfClass:[NSArray class]]) {
+        file.addedAlbumUuids = albumUuids;
+    }
     
     NSDictionary *detailDict = [dict objectForKey:@"metadata"];
     if(detailDict != nil && ![detailDict isKindOfClass:[NSNull class]]) {

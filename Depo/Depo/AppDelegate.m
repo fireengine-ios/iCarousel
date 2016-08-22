@@ -59,6 +59,7 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import "Reachability.h"
 
 //TODO info'larda version update
 
@@ -167,6 +168,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginRequiredNotificationRaised) name:LOGIN_REQ_NOTIFICATION object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityDidChange) name:kReachabilityChangedNotification object:nil];
    
 //    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
 //    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
@@ -826,6 +828,13 @@ void uncaughtExceptionHandler(NSException *exception) {
         return YES;
     }
     return [[FBSDKApplicationDelegate sharedInstance] application:app openURL:url sourceApplication:source annotation:annotation];
+}
+
+- (void) reachabilityDidChange {
+    if(![ReachabilityManager isReachable]) {
+        [[UploadQueue sharedInstance] cancelAllUploads];
+        [self.base hideSyncInfoView];
+    }
 }
 
 @end

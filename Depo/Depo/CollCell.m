@@ -15,6 +15,7 @@
 @interface CollCell() {
     CustomLabel *titleLabel;
     CustomLabel *locLabel;
+    CustomButton *moreIconView;
 }
 @end
 
@@ -80,7 +81,7 @@
             }
             if(level != ImageGroupLevelDay) {
                 if(counter >= 7) {
-                    CustomButton *moreIconView = [[CustomButton alloc] initWithFrame:CGRectMake((imageCountPerRow-1)*imageWidth, 40 + imageWidth,imageWidth, imageWidth) withCenteredImageName:@"icon_more.png"];
+                    moreIconView = [[CustomButton alloc] initWithFrame:CGRectMake((imageCountPerRow-1)*imageWidth, 40 + imageWidth,imageWidth, imageWidth) withCenteredImageName:@"icon_more.png"];
                     [moreIconView addTarget:self action:@selector(moreClicked) forControlEvents:UIControlEventTouchUpInside];
                     [self addSubview:moreIconView];
                 }
@@ -112,7 +113,9 @@
 }
 
 - (void) squareImageWasSelectedForFile:(MetaFile *) fileSelected {
-    [delegate collCellImageWasSelectedForFile:fileSelected forGroupWithKey:self.group.uniqueKey];
+    if(!isSelectible) {
+        [delegate collCellImageWasSelectedForFile:fileSelected forGroupWithKey:self.group.uniqueKey];
+    }
 }
 
 - (void) squareImageWasMarkedForFile:(MetaFile *) fileSelected {
@@ -128,6 +131,13 @@
 }
 
 - (void) squareImageWasLongPressedForFile:(MetaFile *) fileSelected {
+    moreIconView.enabled = NO;
+    for(UIView *innerView in [self subviews]) {
+        if([innerView isKindOfClass:[SquareImageView class]]) {
+            SquareImageView *sqView = (SquareImageView *) innerView;
+            [sqView setNewStatus:YES];
+        }
+    }
     [delegate collCellImageWasLongPressedForFile:fileSelected];
 }
 

@@ -45,11 +45,15 @@
         albumView.delegate = self;
         [self.view addSubview:albumView];
         
-        [albumView pullData];
-        [collView pullData];
-        [groupView pullData];
+        [self reloadLists];
     }
     return self;
+}
+
+- (void) reloadLists {
+    [albumView pullData];
+    [collView pullData];
+    [groupView pullData];
 }
 
 - (void) revisitedPhotoHeaderSegmentPhotoChosen {
@@ -171,7 +175,26 @@
     }
 }
 
+- (void) revisitedCollectionDidChangeToSelectState {
+    [groupView setToSelectible];
+    [albumView setToSelectible];
+    
+    [self setToSelectionState];
+}
+
 - (void) revisitedCollectionDidFinishLoading {
+}
+
+- (void) revisitedCollectionDidFinishDeleting {
+    [groupView pullData];
+    [collView pullData];
+    [albumView pullData];
+    
+    [self cancelClicked];
+}
+
+- (void) revisitedCollectionShouldConfirmForDeleting {
+    [APPDELEGATE.base showConfirmDelete];
 }
 
 - (void) revisitedCollectionDidFailRetrievingList:(NSString *) errorMessage {
@@ -216,6 +239,25 @@
 }
 
 - (void) revisitedGroupedPhotoDidFinishLoading {
+}
+
+- (void) revisitedGroupedPhotoDidFinishDeleting {
+    [groupView pullData];
+    [collView pullData];
+    [albumView pullData];
+
+    [self cancelClicked];
+}
+
+- (void) revisitedGroupedPhotoShouldConfirmForDeleting {
+    [APPDELEGATE.base showConfirmDelete];
+}
+
+- (void) revisitedGroupedPhotoDidChangeToSelectState {
+    [collView setToSelectible];
+    [albumView setToSelectible];
+
+    [self setToSelectionState];
 }
 
 - (void) revisitedGroupedPhotoDidFailRetrievingList:(NSString *) errorMessage {
@@ -277,6 +319,25 @@
 
 - (void) newAlbumModalDidTriggerNewAlbumWithName:(NSString *) albumName {
     [albumView addNewAlbumWithName:albumName];
+}
+
+- (void) previewedImageWasDeleted:(MetaFile *) deletedFile {
+    [self reloadLists];
+}
+
+- (void) previewedVideoWasDeleted:(MetaFile *) deletedFile {
+    [self reloadLists];
+}
+
+- (void) confirmDeleteDidCancel {
+}
+
+- (void) confirmDeleteDidConfirm {
+    if(!groupView.hidden) {
+        [groupView shouldContinueDelete];
+    } else if(!collView.hidden) {
+        [collView shouldContinueDelete];
+    }
 }
 
 @end

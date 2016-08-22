@@ -15,25 +15,33 @@
 #import "ElasticSearchDao.h"
 #import "MBProgressHUD.h"
 #import "GroupedCell.h"
+#import "DeleteDao.h"
 
 @protocol RevisitedGroupedPhotoDelegate <NSObject>
 - (void) revisitedGroupedPhotoDidSelectFile:(MetaFile *) fileSelected withList:(NSArray *) containingList;
 - (void) revisitedGroupedPhotoDidFinishLoading;
+- (void) revisitedGroupedPhotoDidFinishDeleting;
+- (void) revisitedGroupedPhotoShouldConfirmForDeleting;
+- (void) revisitedGroupedPhotoDidChangeToSelectState;
 - (void) revisitedGroupedPhotoDidFailRetrievingList:(NSString *) errorMessage;
 - (void) revisitedGroupedPhotoDidFailDeletingWithError:(NSString *) errorMessage;
 - (void) revisitedGroupedPhotoChangeTitleTo:(NSString *) pageTitle;
 @end
 
-@interface RevisitedGroupedPhotoView : UIView <UITableViewDelegate, UITableViewDataSource, GroupedCellDelegate>
+@interface RevisitedGroupedPhotoView : UIView <UITableViewDelegate, UITableViewDataSource, GroupedCellDelegate, FooterActionsDelegate>
 
 @property (nonatomic, weak) id<RevisitedGroupedPhotoDelegate> delegate;
 @property (nonatomic, strong) NSMutableArray *files;
 @property (nonatomic, strong) NSMutableArray *groups;
 @property (nonatomic, strong) NSMutableDictionary *groupDict;
 @property (nonatomic, strong) NSMutableArray *selectedFileList;
+
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, strong) UITableView *fileTable;
+
 @property (nonatomic, strong) ElasticSearchDao *readDao;
+@property (nonatomic, strong) DeleteDao *deleteDao;
+
 @property (nonatomic, strong) FooterActionsMenuView *imgFooterActionMenu;
 @property (nonatomic) BOOL isSelectible;
 
@@ -42,5 +50,6 @@
 - (void) pullData;
 - (void) setToSelectible;
 - (void) setToUnselectible;
+- (void) shouldContinueDelete;
 
 @end

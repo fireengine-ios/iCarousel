@@ -30,6 +30,7 @@
 @synthesize contentLengthDisplay;
 @synthesize itemCount;
 @synthesize videoPreviewUrl;
+@synthesize addedAlbumUuids;
 
 - (NSUInteger) hash {
     return [self.uuid hash];

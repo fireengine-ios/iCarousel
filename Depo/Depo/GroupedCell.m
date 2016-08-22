@@ -81,6 +81,12 @@
 }
 
 - (void) squareImageWasLongPressedForFile:(MetaFile *) fileSelected {
+    for(UIView *innerView in [self subviews]) {
+        if([innerView isKindOfClass:[SquareImageView class]]) {
+            SquareImageView *sqView = (SquareImageView *) innerView;
+            [sqView setNewStatus:YES];
+        }
+    }
     [delegate groupedCellImageWasLongPressedForFile:fileSelected];
 }
 
