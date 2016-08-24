@@ -269,10 +269,12 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 }
 
 - (void) removeTemporaryFile {
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    [fileManager removeItemAtPath:self.uploadRef.tempUrl error:nil];
-    [fileManager removeItemAtPath:self.uploadRef.tempThumbnailUrl error:nil];
-    NSLog(@"Removed From File Path");
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        [fileManager removeItemAtPath:self.uploadRef.tempUrl error:nil];
+        [fileManager removeItemAtPath:self.uploadRef.tempThumbnailUrl error:nil];
+        NSLog(@"Removed From File Path");
+    });
 }
 
 - (NSMutableURLRequest *) prepareRequestSetVideo:(BOOL) isVideo {

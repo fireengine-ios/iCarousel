@@ -153,22 +153,33 @@
     
     for(MetaFile *row in fileList) {
         NSString *dateStr = [dateCompareFormat stringFromDate:row.lastModified];
+        NSString *locStr = @"";
+        if(row.detail.geoAdminLevel6 != nil && ![row.detail.geoAdminLevel6 isEqualToString:@""]) {
+            locStr = row.detail.geoAdminLevel6;
+        } else if(row.detail.geoAdminLevel4 != nil && ![row.detail.geoAdminLevel4 isEqualToString:@""]) {
+            locStr = row.detail.geoAdminLevel4;
+        } else if(row.detail.geoAdminLevel2 != nil && ![row.detail.geoAdminLevel2 isEqualToString:@""]) {
+            locStr = row.detail.geoAdminLevel2;
+        }
+        NSString *keyVal = [NSString stringWithFormat:@"%@_%@", dateStr, locStr];
         if([[groupDict allKeys] count] == 0) {
             FileInfoGroup *newGroup = [[FileInfoGroup alloc] init];
             newGroup.customTitle = dateStr;
+            newGroup.locationInfo = locStr;
             newGroup.fileInfo = [[NSMutableArray alloc] init];
             [newGroup.fileInfo addObject:row];
-            [groupDict setObject:newGroup forKey:dateStr];
+            [groupDict setObject:newGroup forKey:keyVal];
         } else {
-            FileInfoGroup *currentGroup = [groupDict objectForKey:dateStr];
+            FileInfoGroup *currentGroup = [groupDict objectForKey:keyVal];
             if(currentGroup != nil) {
                 [currentGroup.fileInfo addObject:row];
             } else {
                 FileInfoGroup *newGroup = [[FileInfoGroup alloc] init];
                 newGroup.customTitle = dateStr;
+                newGroup.locationInfo = locStr;
                 newGroup.fileInfo = [[NSMutableArray alloc] init];
                 [newGroup.fileInfo addObject:row];
-                [groupDict setObject:newGroup forKey:dateStr];
+                [groupDict setObject:newGroup forKey:keyVal];
             }
         }
     }

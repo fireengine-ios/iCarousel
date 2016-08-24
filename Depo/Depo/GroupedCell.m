@@ -14,6 +14,7 @@
 
 @interface GroupedCell() {
     CustomLabel *titleLabel;
+    CustomLabel *locLabel;
 }
 @end
 
@@ -33,7 +34,10 @@
         titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 10, (self.frame.size.width-40)/2, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:14] withColor:[Util UIColorForHexColor:@"555555"] withText:titleVal];
         titleLabel.adjustsFontSizeToFitWidth = YES;
         [self addSubview:titleLabel];
-        
+
+        locLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(self.frame.size.width/2, 10, (self.frame.size.width-40)/2, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:14] withColor:[Util UIColorForHexColor:@"888888"] withText:self.group.locationInfo withAlignment:NSTextAlignmentRight];
+        [self addSubview:locLabel];
+
         int counter = 0;
         for(id row in self.group.fileInfo) {
             if([row isKindOfClass:[UploadRef class]]) {
@@ -52,6 +56,11 @@
         }
     }
     return self;
+}
+
+- (void) layoutSubviews {
+    titleLabel.frame = CGRectMake(20, 10, (self.frame.size.width-40)/2, 20);
+    locLabel.frame = CGRectMake(self.frame.size.width/2, 10, (self.frame.size.width-40)/2, 20);
 }
 
 - (void)awakeFromNib {

@@ -10,7 +10,7 @@
 #import "Util.h"
 #import "CustomLabel.h"
 
-#define kOFFSET_FOR_KEYBOARD 200.0
+#define kOFFSET_FOR_KEYBOARD 100.0
 
 @interface RememberMeEmailViewController ()
 

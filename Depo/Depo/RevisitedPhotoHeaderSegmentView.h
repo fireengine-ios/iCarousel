@@ -11,7 +11,6 @@
 
 @protocol RevisitedPhotoHeaderSegmentDelegate <NSObject>
 - (void) revisitedPhotoHeaderSegmentPhotoChosen;
-- (void) revisitedPhotoHeaderSegmentCollectionChosen;
 - (void) revisitedPhotoHeaderSegmentAlbumChosen;
 @end
 
@@ -21,7 +20,9 @@
 @property (nonatomic, strong) UIImageView *indicator;
 
 @property (nonatomic, strong) SimpleButton *photoButton;
-@property (nonatomic, strong) SimpleButton *collectionButton;
 @property (nonatomic, strong) SimpleButton *albumButton;
+
+- (void) enableNavigate;
+- (void) disableNavigate;
 
 @end

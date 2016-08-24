@@ -414,6 +414,12 @@
 
     [self hideMainLoading];
     
+    if(backgroundReloginInProgress) {
+        [SyncUtil unlockAutoSyncBlockInProgress];
+        [self triggerAutoSynchronization];
+        backgroundReloginInProgress = NO;
+    }
+    
     if(![AppUtil readFirstVisitOverFlag]) {
         PostLoginSyncPrefController *imgSync = [[PostLoginSyncPrefController alloc] init];
         MyNavigationController *imgSyncNav = [[MyNavigationController alloc] initWithRootViewController:imgSync];
@@ -434,7 +440,6 @@
 
 - (void) tokenManagerDidReceiveToken {
     IGLog(@"AppDelegate tokenManagerDidReceiveToken");
-    backgroundReloginInProgress = NO;
     [tokenManager requestUserInfo];
 }
 

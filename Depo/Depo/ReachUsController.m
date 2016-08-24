@@ -14,6 +14,7 @@
 #import "FeedbackChoiceCell.h"
 #import "AppDelegate.h"
 #import "ReachabilityManager.h"
+#import "BaseViewController.h"
 
 @interface ReachUsController () {
     NSNumber *selectedFeedbackType;
@@ -253,7 +254,7 @@
             [mailCont addAttachmentData:logData mimeType:@"text/plain" fileName:@"logs.txt"];
         }
 
-        [self presentViewController:mailCont animated:YES completion:nil];
+        [APPDELEGATE.base presentViewController:mailCont animated:YES completion:nil];
     } else {
         [self showErrorAlertWithMessage:NSLocalizedString(@"NoEmailAccountError", @"")];
     }

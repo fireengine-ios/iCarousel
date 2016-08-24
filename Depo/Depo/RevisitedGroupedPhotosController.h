@@ -9,17 +9,15 @@
 #import "MyViewController.h"
 #import "RevisitedPhotoHeaderSegmentView.h"
 #import "RevisitedGroupedPhotoView.h"
-#import "RevisitedCollectionView.h"
 #import "RevisitedAlbumListView.h"
 #import "PhotoAlbumController.h"
 #import "ImagePreviewController.h"
 #import "VideoPreviewController.h"
 
-@interface RevisitedGroupedPhotosController : MyViewController <RevisitedPhotoHeaderSegmentDelegate, RevisitedAlbumListDelegate, PhotoAlbumDelegate, RevisitedCollectionDelegate, NewAlbumDelegate, RevisitedGroupedPhotoDelegate, ImagePreviewDelegate, VideoPreviewDelegate>
+@interface RevisitedGroupedPhotosController : MyViewController <RevisitedPhotoHeaderSegmentDelegate, RevisitedAlbumListDelegate, PhotoAlbumDelegate, NewAlbumDelegate, RevisitedGroupedPhotoDelegate, ImagePreviewDelegate, VideoPreviewDelegate>
 
 @property (nonatomic, strong) RevisitedPhotoHeaderSegmentView *segmentView;
 @property (nonatomic, strong) RevisitedGroupedPhotoView *groupView;
-@property (nonatomic, strong) RevisitedCollectionView *collView;
 @property (nonatomic, strong) RevisitedAlbumListView *albumView;
 @property (nonatomic, strong) UIBarButtonItem *previousButtonRef;
 

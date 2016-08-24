@@ -20,7 +20,6 @@
 
 @synthesize segmentView;
 @synthesize groupView;
-@synthesize collView;
 @synthesize albumView;
 @synthesize previousButtonRef;
 
@@ -35,11 +34,6 @@
         groupView.delegate = self;
         [self.view addSubview:groupView];
         
-        collView = [[RevisitedCollectionView alloc] initWithFrame:CGRectMake(0, self.topIndex + 60, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex - 50)];
-        collView.hidden = YES;
-        collView.delegate = self;
-        [self.view addSubview:collView];
-
         albumView = [[RevisitedAlbumListView alloc] initWithFrame:CGRectMake(0, self.topIndex + 60, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex - 50)];
         albumView.hidden = YES;
         albumView.delegate = self;
@@ -52,13 +46,11 @@
 
 - (void) reloadLists {
     [albumView pullData];
-    [collView pullData];
     [groupView pullData];
 }
 
 - (void) revisitedPhotoHeaderSegmentPhotoChosen {
     groupView.hidden = NO;
-    collView.hidden = YES;
     albumView.hidden = YES;
 
     NSArray *addTypesForController = [APPDELEGATE.mapUtil readAddTypesByController:@"PhotoTab"];
@@ -67,7 +59,6 @@
 
 - (void) revisitedPhotoHeaderSegmentCollectionChosen {
     groupView.hidden = YES;
-    collView.hidden = NO;
     albumView.hidden = YES;
 
     NSArray *addTypesForController = [APPDELEGATE.mapUtil readAddTypesByController:@"CollTab"];
@@ -76,7 +67,6 @@
 
 - (void) revisitedPhotoHeaderSegmentAlbumChosen {
     groupView.hidden = YES;
-    collView.hidden = YES;
     albumView.hidden = NO;
 
     NSArray *addTypesForController = [APPDELEGATE.mapUtil readAddTypesByController:@"AlbumTab"];
@@ -84,6 +74,7 @@
 }
 
 - (void) setToSelectionState {
+    [segmentView disableNavigate];
     previousButtonRef = self.navigationItem.leftBarButtonItem;
 
     CustomButton *cancelButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 60, 20) withImageName:nil withTitle:NSLocalizedString(@"ButtonCancel", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[UIColor whiteColor]];
@@ -97,12 +88,13 @@
 }
 
 - (void) cancelClicked {
+    [segmentView enableNavigate];
+
     self.title = NSLocalizedString(@"PhotosTitle", @"");
     self.navigationItem.leftBarButtonItem = previousButtonRef;
 //    moreButton.hidden = NO;
     
     [albumView setToUnselectible];
-    [collView setToUnselectible];
     [groupView setToUnselectible];
 
     [APPDELEGATE.base immediateShowAddButton];
@@ -111,9 +103,7 @@
 #pragma mark RevisitedAlbumListDelegate methods
 
 - (void) revisitedAlbumListDidChangeToSelectState {
-    [collView setToSelectible];
     [groupView setToSelectible];
-
     [self setToSelectionState];
 }
 
@@ -147,76 +137,6 @@
     [self hideLoading];
 }
 
-#pragma mark RevisitedCollViewDelegate methods
-
-- (void) revisitedCollectionDidSelectFile:(MetaFile *) fileSelected withList:(NSArray *) containingList {
-    /*
-    UploadingImagePreviewController *preview = [[UploadingImagePreviewController alloc] initWithUploadReference:squareRef.uploadRef withImage:squareRef.imgView.image];
-    preview.oldDelegateRef = squareRef;
-    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:preview];
-    preview.nav = modalNav;
-    [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
-     */
-    if(fileSelected.contentType == ContentTypePhoto) {
-        NSMutableArray *filteredPhotoList = [[NSMutableArray alloc] init];
-        [filteredPhotoList addObject:fileSelected];
-        
-        ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFiles:filteredPhotoList withImage:fileSelected withListOffset:0]; //TODO
-        detail.delegate = self;
-        MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
-        detail.nav = modalNav;
-        [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
-    } else if(fileSelected.contentType == ContentTypeVideo) {
-        VideoPreviewController *detail = [[VideoPreviewController alloc] initWithFile:fileSelected];
-        detail.delegate = self;
-        MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
-        detail.nav = modalNav;
-        [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
-    }
-}
-
-- (void) revisitedCollectionDidChangeToSelectState {
-    [groupView setToSelectible];
-    [albumView setToSelectible];
-    
-    [self setToSelectionState];
-}
-
-- (void) revisitedCollectionDidFinishLoading {
-}
-
-- (void) revisitedCollectionDidFinishDeleting {
-    [groupView pullData];
-    [collView pullData];
-    [albumView pullData];
-    
-    [self cancelClicked];
-}
-
-- (void) revisitedCollectionShouldConfirmForDeleting {
-    [APPDELEGATE.base showConfirmDelete];
-}
-
-- (void) revisitedCollectionDidFailRetrievingList:(NSString *) errorMessage {
-    [self showErrorAlertWithMessage:errorMessage];
-}
-
-- (void) revisitedCollectionDidFailDeletingWithError:(NSString *) errorMessage {
-    [self showErrorAlertWithMessage:errorMessage];
-}
-
-- (void) revisitedCollectionShouldShowLoading {
-    [self showLoading];
-}
-
-- (void) revisitedCollectionShouldHideLoading {
-    [self hideLoading];
-}
-
-- (void) revisitedCollectionChangeTitleTo:(NSString *) pageTitle {
-    self.title = pageTitle;
-}
-
 #pragma mark RevisitedGroupPhotoDelegate methods
 
 - (void) revisitedGroupedPhotoDidSelectFile:(MetaFile *) fileSelected withList:(NSArray *) containingList {
@@ -243,7 +163,6 @@
 
 - (void) revisitedGroupedPhotoDidFinishDeleting {
     [groupView pullData];
-    [collView pullData];
     [albumView pullData];
 
     [self cancelClicked];
@@ -254,9 +173,7 @@
 }
 
 - (void) revisitedGroupedPhotoDidChangeToSelectState {
-    [collView setToSelectible];
     [albumView setToSelectible];
-
     [self setToSelectionState];
 }
 
@@ -287,9 +204,7 @@
     [super viewDidAppear:animated];
 
     NSArray *addTypesForController = [APPDELEGATE.mapUtil readAddTypesByController:@"PhotoTab"];
-    if(!collView.hidden) {
-        addTypesForController = [APPDELEGATE.mapUtil readAddTypesByController:@"CollType"];
-    } else if(!albumView.hidden) {
+    if(!albumView.hidden) {
         addTypesForController = [APPDELEGATE.mapUtil readAddTypesByController:@"AlbumTab"];
     }
     [APPDELEGATE.base modifyAddButtonWithList:addTypesForController];
@@ -333,10 +248,9 @@
 }
 
 - (void) confirmDeleteDidConfirm {
+    //TODO check
     if(!groupView.hidden) {
         [groupView shouldContinueDelete];
-    } else if(!collView.hidden) {
-        [collView shouldContinueDelete];
     }
 }
 
