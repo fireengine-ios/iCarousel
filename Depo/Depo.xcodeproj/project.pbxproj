@@ -941,6 +941,7 @@
 		949BB5C51D70469500BED9DB /* icon_hp_sonislemler.png in Resources */ = {isa = PBXBuildFile; fileRef = 949BB5C41D70469500BED9DB /* icon_hp_sonislemler.png */; };
 		949BB5C71D70469C00BED9DB /* icon_hp_sonislemler@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 949BB5C61D70469C00BED9DB /* icon_hp_sonislemler@2x.png */; };
 		949BB5C91D7046A300BED9DB /* icon_hp_sonislemler@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 949BB5C81D7046A300BED9DB /* icon_hp_sonislemler@3x.png */; };
+		949BB5CB1D707F8800BED9DB /* lifebox_teaser.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 949BB5CA1D707B2800BED9DB /* lifebox_teaser.mp4 */; };
 		94A1D3C41C969F330066D92F /* UpdatePassDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94A1D3C31C969F330066D92F /* UpdatePassDao.m */; };
 		94A375261D31B2FC00D06A0C /* VideofyPreparationInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94A375251D31B2FC00D06A0C /* VideofyPreparationInfoView.m */; };
 		94A375291D31C1D600D06A0C /* VideofyDepoMusicModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94A375281D31C1D600D06A0C /* VideofyDepoMusicModalController.m */; };
@@ -2405,6 +2406,7 @@
 		949BB5C41D70469500BED9DB /* icon_hp_sonislemler.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_hp_sonislemler.png; sourceTree = "<group>"; };
 		949BB5C61D70469C00BED9DB /* icon_hp_sonislemler@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_hp_sonislemler@2x.png"; sourceTree = "<group>"; };
 		949BB5C81D7046A300BED9DB /* icon_hp_sonislemler@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_hp_sonislemler@3x.png"; sourceTree = "<group>"; };
+		949BB5CA1D707B2800BED9DB /* lifebox_teaser.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = lifebox_teaser.mp4; sourceTree = "<group>"; };
 		94A1D3C21C969F330066D92F /* UpdatePassDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdatePassDao.h; sourceTree = "<group>"; };
 		94A1D3C31C969F330066D92F /* UpdatePassDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdatePassDao.m; sourceTree = "<group>"; };
 		94A375241D31B2FC00D06A0C /* VideofyPreparationInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideofyPreparationInfoView.h; sourceTree = "<group>"; };
@@ -2737,6 +2739,7 @@
 			isa = PBXGroup;
 			children = (
 				05DEB1CF1A80EBA6007793DD /* terms.txt */,
+				949BB5CA1D707B2800BED9DB /* lifebox_teaser.mp4 */,
 				9456A0391C9BECD200058896 /* terms.htm */,
 				05DEB1CD1A80EA28007793DD /* terms.html */,
 				056B38541A841866009292BA /* terms_old.htm */,
@@ -4574,6 +4577,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				949BB5CB1D707F8800BED9DB /* lifebox_teaser.mp4 in Resources */,
 				056F29D21C4E8071001DD486 /* icon_verif_audio@3x.png in Resources */,
 				059AD37E1A1E26A000AA41BD /* circle_doc_icon.png in Resources */,
 				94328BD81CC3E03C00599CEE /* img_baski_1.jpg in Resources */,

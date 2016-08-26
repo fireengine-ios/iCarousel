@@ -222,10 +222,10 @@
     self.scroll.contentOffset = CGPointMake(kMenuOpenOriginX, 0.0);
     menuOpen = NO;
 
-    if(![AppUtil readFeatureFlag]) {
+    if(![AppUtil readLifeboxTeaserFlag]) {
         NewFeatureInfoView *featurePresentView = [[NewFeatureInfoView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
         [self.view addSubview:featurePresentView];
-        [AppUtil writeFeatureFlag];
+        [AppUtil writeLifeboxTeaserFlag];
     }
 }
 

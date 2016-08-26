@@ -801,4 +801,15 @@
     return [[NSUserDefaults standardUserDefaults] boolForKey:keyVal];
 }
 
++ (void) writeLifeboxTeaserFlag {
+    NSString *keyVal = [NSString stringWithFormat:@"LIFEBOX_TEASER_PAGE_SHOWN_FLAG_%@", APPDELEGATE.session.user.username];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:keyVal];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (BOOL) readLifeboxTeaserFlag {
+    NSString *keyVal = [NSString stringWithFormat:@"LIFEBOX_TEASER_PAGE_SHOWN_FLAG_%@", APPDELEGATE.session.user.username];
+    return [[NSUserDefaults standardUserDefaults] boolForKey:keyVal];
+}
+
 @end

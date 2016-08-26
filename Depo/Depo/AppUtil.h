@@ -64,4 +64,7 @@
 + (void) writeFeatureFlag;
 + (BOOL) readFeatureFlag;
 
++ (void) writeLifeboxTeaserFlag;
++ (BOOL) readLifeboxTeaserFlag;
+
 @end

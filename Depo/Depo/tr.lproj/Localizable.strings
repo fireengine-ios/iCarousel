@@ -84,7 +84,7 @@
 "AlbumAddTitle"="ALBÜM İSMİ";
 "AlbumNamePlaceholder"="Örnek Albüm İsmi";
 "ConfirmDeleteTitle"="Silmeyi Onayla";
-"ConfirmDeleteMessage"="Bu dosyayı silerseniz, Akıllı Deponuzdan da kalıcı olarak silinir.";
+"ConfirmDeleteMessage"="Bu dosyayı silerseniz, Lifebox'unuzdan da kalıcı olarak silinir.";
 "ConfirmDeleteQuestion"="Silmek istediğinize emin misiniz?";
 "MessageDontShowAgainCheck"="Bir daha gösterme";
 "TitleNo"="Hayır";
@@ -247,16 +247,16 @@
 "Seconds"="sn";
 "None"="Hiç";
 
-"AppTitleRef"="Turkcell Akıllı Depo";
-"AppPreLoginInfo"="Tüm fotoğraf, şarkı, belge ve rehber bilgilerinizi güvenle Akıllı Depo'da saklayın. Dosyalarınızı direk telefondan ya da bilgisayarınızdan düzenleyin.";
+"AppTitleRef"="Lifebox";
+"AppPreLoginInfo"="Tüm fotoğraf, şarkı, belge ve rehber bilgilerinizi güvenle Lifebox'ta saklayın. Dosyalarınızı direk telefondan ya da bilgisayarınızdan düzenleyin.";
 
 "Login"="Giriş yap";
 "SignIn"="Giriş yap";
 "Continue"="Devam";
 
-"PostLoginSyncInfo"="Fotoğraflarınızı iPhone'unuzdan Akıllı Deponuza otomatik olarak yükleyin. Akıllı Depo, otomatik yükleme için lokasyon değişiminizi kullanır. Detaylı bilgi";
-"PostLoginImgPrefInfo"="Fotoğraflarınızı iPhone'unuzdan Akıllı Deponuza otomatik olarak yükleyin";
-"PostLoginContactPrefInfo"="Rehberinizi ve Sosyal Ağ kişilerinizi Akıllı Deponuza otomatik olarak yükleyin";
+"PostLoginSyncInfo"="Fotoğraflarınızı iPhone'unuzdan Lifebox'unuza otomatik olarak yükleyin. Lifebox, otomatik yükleme için lokasyon değişiminizi kullanır. Detaylı bilgi";
+"PostLoginImgPrefInfo"="Fotoğraflarınızı iPhone'unuzdan Lifebox'unuza otomatik olarak yükleyin";
+"PostLoginContactPrefInfo"="Rehberinizi ve Sosyal Ağ kişilerinizi Lifebox'unuza otomatik olarak yükleyin";
 
 "PostLoginSyncPrefTitle"="YÜKLEME TERCİHİ";
 "PostLoginRoamingTitle"="Yurtdışı Dolaşım";
@@ -303,26 +303,26 @@
 
 "AutomaticSynchronization"="Otomatik Yükleme";
 "Photos&Videos"="Fotoğraflar";
-"Photos&VideosInfo"="Fotoğraflarınızın Akıllı Depo'nuza otomatik olarak yüklenmesi için açık konuma getirin.";
-"Photos&VideosAutoInfo"="Akıllı Depo'daki fotoğraf ve videolarınıza erişebilir ve istediğinizde albümünüzdeki fotoğraf ve videoları Akıllı Depo'ya yükleyebilirsiniz.\n\n(Fotoğraf ve videoları Akıllı Depo'ya yüklemek için uygulamadaki \"+\" butonunu kullanın.)\n\nOtomatik yükleme etkin durumda, albümünüzdeki fotoğraflar otomatik olarak bulutta yedeklenecek.";
-"Photos&VideosOnInfo"="Akıllı Depo'daki fotoğraf ve videolarınıza erişebilir ve istediğinizde albümünüzdeki fotoğraf ve videoları Akıllı Depo'ya yükleyebilirsiniz.\n\n(Fotoğraf ve videoları Akıllı Depo'ya yüklemek için uygulamadaki \"+\" butonunu kullanın.)";
-"Photos&VideosOffInfo"="Akıllı Depo'daki fotoğraf ve videolarınıza erişemez ve Akıllı Depo'ya yeni fotoğraf veya video yükleyemezsiniz.";
+"Photos&VideosInfo"="Fotoğraflarınızın Lifebox'unuza otomatik olarak yüklenmesi için açık konuma getirin.";
+"Photos&VideosAutoInfo"="Lifebox'taki fotoğraf ve videolarınıza erişebilir ve istediğinizde albümünüzdeki fotoğraf ve videoları Lifebox'a yükleyebilirsiniz.\n\n(Fotoğraf ve videoları Lifebox'a yüklemek için uygulamadaki \"+\" butonunu kullanın.)\n\nOtomatik yükleme etkin durumda, albümünüzdeki fotoğraflar otomatik olarak bulutta yedeklenecek.";
+"Photos&VideosOnInfo"="Lifebox'taki fotoğraf ve videolarınıza erişebilir ve istediğinizde albümünüzdeki fotoğraf ve videoları Lifebox'a yükleyebilirsiniz.\n\n(Fotoğraf ve videoları Lifebox'a yüklemek için uygulamadaki \"+\" butonunu kullanın.)";
+"Photos&VideosOffInfo"="Lifebox'taki fotoğraf ve videolarınıza erişemez ve Lifebox'a yeni fotoğraf veya video yükleyemezsiniz.";
 "Music"="Müzik";
-"MusicOnInfo"="Akıllı Depo'daki müziklerinize erişebilir ve istediğinizde iPhone'ununuzdaki müzikleri Akıllı Depo'ya yükleyebilirsiniz.\n\n(iTunes kütüphanenizdeki parçaları Akıllı Depo'ya yüklemek için uygulamadaki \"+\" butonunu kullanın.)";
-"MusicOffInfo"="Akıllı Depo'daki müziklerinize erişemez ve Akıllı Depo'ya yeni müzik yükleyemezsiniz.";
+"MusicOnInfo"="Lifebox'taki müziklerinize erişebilir ve istediğinizde iPhone'ununuzdaki müzikleri Lifebox'a yükleyebilirsiniz.\n\n(iTunes kütüphanenizdeki parçaları Lifebox'a yüklemek için uygulamadaki \"+\" butonunu kullanın.)";
+"MusicOffInfo"="Lifebox'taki müziklerinize erişemez ve Lifebox'a yeni müzik yükleyemezsiniz.";
 "Documents"="Belgeler";
-"DocumentsOnInfo"="Akıllı Depo'daki dökümanlarınıza erişebilir ve istediğinizde dökümanlarınızı Akıllı Depo'ya yükleyebilirsiniz. Diğer uygulamalar üzerinden (e-posta uygulamaları gibi) \"Akıllı Depo ile aç\" seçeneği ile dökümanlarınızı yükleyebilirsiniz.";
-"DocumentsOffInfo"="Akıllı Depo'daki dökümanlarınıza erişemez ve Akıllı Depo'ya yeni doküman yükleyemezsiniz.";
+"DocumentsOnInfo"="Lifebox'taki dökümanlarınıza erişebilir ve istediğinizde dökümanlarınızı Lifebox'a yükleyebilirsiniz. Diğer uygulamalar üzerinden (e-posta uygulamaları gibi) \"Lifebox ile aç\" seçeneği ile dökümanlarınızı yükleyebilirsiniz.";
+"DocumentsOffInfo"="Lifebox'taki dökümanlarınıza erişemez ve Lifebox'a yeni doküman yükleyemezsiniz.";
 "Contacts"="Rehber";
-"ContactsInfo"="Telefon rehberinizin Akıllı Depo'nuza otomatik olarak yüklenmesi için açık konuma getirin.";
-"ContactsAutoInfo"="Akıllı Depo'yu açtığınızda telefon rehberiniz otomatik olarak buluta yüklenecek.";
+"ContactsInfo"="Telefon rehberinizin Lifebox'unuza otomatik olarak yüklenmesi için açık konuma getirin.";
+"ContactsAutoInfo"="Lifebox'u açtığınızda telefon rehberiniz otomatik olarak buluta yüklenecek.";
 "ContactsOffInfo"="Telefon rehberiniz otomatik olarak buluta yüklenmeyecek.";
 "ContactsAutoDescriptionHeader"="%d KİŞİ HENÜZ EŞİTLENMEDİ";
-"ContactsAutoDescriptionBody"="Facebook, Twitter ve Exchange Server bağlantılarınız Turkcell Bulut'a yedeklenemezler.";
-"ContactsOnInfo"="Akıllı Depo'yu açtığınızda telefon rehberiniz otomatik olarak buluta yüklenecek.";
+"ContactsAutoDescriptionBody"="Facebook, Twitter ve Exchange Server bağlantılarınız Lifebox'a yedeklenemezler.";
+"ContactsOnInfo"="Lifebox'u açtığınızda telefon rehberiniz otomatik olarak buluta yüklenecek.";
 "ContactsOffInfo"="Telefon rehberiniz otomatik olarak buluta yüklenmeyecek.";
 "ContactsOnDescriptionHeader"="%d KİŞİ HENÜZ EŞİTLENMEDİ";
-"ContactsOnDescriptionBody"="Facebook, Twitter ve Exchange Server bağlantılarınız Turkcell Bulut'a yedeklenemezler.";
+"ContactsOnDescriptionBody"="Facebook, Twitter ve Exchange Server bağlantılarınız Lifebox'a yedeklenemezler.";
 "PhoneContacts"="Telefon Rehberi Kişileri";
 "SynchronizationPreferencesTitle"="YÜKLEME SEÇENEKLERİ";
 "AutoSynchronization"="OTOMATİK YÜKLEME";
@@ -346,7 +346,7 @@
 "FAQ"="Sıkça Sorulan Sorular";
 "VideoHelpGuides"="Video Yardım Rehberleri";
 "Troubleshooting"="Sorun Giderme";
-"AboutAkilliDepo"="Akıllı Depo Hakkında";
+"AboutAkilliDepo"="Lifebox Hakkında";
 "SupportWebsite"="Bize destek olun";
 
 "SearchTitle"="Arama";
@@ -391,8 +391,8 @@
 "Warning"="Uyarı";
 "SubmitButtonTitle"="Tamam";
 
-"MigrationTitle"="TURKCELL AKILLI DEPO KURULUMU";
-"MigrationSubTitle"="Akıllı Depo kurulumunuz yapılıyor...";
+"MigrationTitle"="LIFEBOX KURULUMU";
+"MigrationSubTitle"="Lifebox kurulumunuz yapılıyor...";
 
 "AcceptTerms"="Kullanım koşullarını kabul ediyorum.";
 "AcceptTermsWarning"="Kullanım koşullarını kabul etmeniz gerekiyor.";
@@ -420,11 +420,11 @@
 "ContactSyncGeneralError"="Yedekleme esnasında genel bir hata oluştu.";
 
 "PreLoginInfo1"="Fotoğraflarınız, hatıralarınız hep yanınızda, hep güvende.";
-"PreLoginInfo2"="Akıllı Depo'nuzdaki saklama alanınız ile daha çok fotoğraf ve video çekebilirsiniz, hiçbir hatıranızı silmek zorunda kalmazsınız.";
-"PreLoginInfo3"="Akıllı Depo'nuzdaki tüm fotoğraf ve videolarınıza, akıllı telefonunuzdan, bilgisayar ya da tabletinizden de ulaşabilirsiniz.";
+"PreLoginInfo2"="Lifebox'unuzdaki saklama alanınız ile daha çok fotoğraf ve video çekebilirsiniz, hiçbir hatıranızı silmek zorunda kalmazsınız.";
+"PreLoginInfo3"="Lifebox'unuzdaki tüm fotoğraf ve videolarınıza, akıllı telefonunuzdan, bilgisayar ya da tabletinizden de ulaşabilirsiniz.";
 "PreLoginInfo4"="Fotoğraflarınızı ya da diğer tüm dosyalarınızı sevdiklerinizle kolayca paylaşabilirsiniz.";
-"PreLoginInfo5"="Akıllı Depo tüm dosyalarınızı güvenle saklar, dosyalarınıza sadece siz ulaşırsınız.";
-"PreLoginTitle1"="Turkcell Akıllı Depo";
+"PreLoginInfo5"="Lifebox tüm dosyalarınızı güvenle saklar, dosyalarınıza sadece siz ulaşırsınız.";
+"PreLoginTitle1"="Lifebox";
 "PreLoginTitle2"="Telefonunuza Ek Hafıza";
 "PreLoginTitle3"="Fotoğraflarınız anında bilgisayarınızda, tabletinizde";
 "PreLoginTitle4"="Kolayca paylaşın";
@@ -453,13 +453,13 @@
 "MovedAlbumTitle"="Eklenecek Albüm";
 "PhotosAddedToAlbum"="Fotoğraflar Albüme eklendi.";
 
-"ContactBackupInfo"="Telefon rehberinizdeki kayıtları Akıllı Depo'ya yükleyebilirsiniz";
-"ContactRestoreInfo"="Akıllı Depo'daki rehber kayıtlarınızı telefonunuza indirebilirsiniz";
+"ContactBackupInfo"="Telefon rehberinizdeki kayıtları Lifebox'a yükleyebilirsiniz";
+"ContactRestoreInfo"="Lifebox'taki rehber kayıtlarınızı telefonunuza indirebilirsiniz";
 
-"ContactBackupButtonTitle"="Akıllı Depo'ya Yükle";
+"ContactBackupButtonTitle"="Lifebox'a Yükle";
 "ContactRestoreButtonTitle"="Telefonuma İndir";
 
-"ContactResultBackupSectionTitle"="Akıllı Depo'da";
+"ContactResultBackupSectionTitle"="Lifebox'ta";
 "ContactResultRestoreSectionTitle"="Telefonda";
 
 "AutoSyncStatusInfo"="Yükleniyor (%d/%d%@)";
@@ -470,7 +470,7 @@
 "UploadingPhotoFinishedWithError"="Yükleme esnasında hata oluştu";
 
 "LocalNotificationManualUploadsFinished"="Yüklemeler tamamlandı, telefon hafızanızda yer açmak için bu dosyaları telefonunuzdan silebilirsiniz.";
-"LocalNotificationAutoUploadsFinished"="Fotoğraflarınız Akıllı Deponuza yüklendi. Görüntülemek ister misiniz?";
+"LocalNotificationAutoUploadsFinished"="Fotoğraflarınız Lifebox'unuza yüklendi. Görüntülemek ister misiniz?";
 
 "LocationNotEnabled"="Konum Servisi açık değil.";
 
@@ -513,10 +513,10 @@
 "AddToAlbumTitle"="Albüme ekle";
 "MoveSuccessMessageNew"="Fotoğraflar albüme eklendi.";
 
-"WelcomePackage1GB"="Akıllı Depo’dan hediye 1GB ek hafızanız kullanıma hazır!";
+"WelcomePackage1GB"="Lifebox’tan hediye 1GB ek hafızanız kullanıma hazır!";
 "PlatinPackage500GBTitle"="PLATINIUM AYRICALIĞI!";
-"PlatinPackage500GB"="Size ozel ucretsiz 500 GB ek hafıza Akıllı Depo’dan hediye!";
-"TurkcellPhone5GB"=" Telefonumu iyi ki Turkcell’den almışım demek için bir neden daha Akıllı Depo’dan 5 GB ek hafıza hediye";
+"PlatinPackage500GB"="Size ozel ucretsiz 500 GB ek hafıza Lifebox’tan hediye!";
+"TurkcellPhone5GB"=" Telefonumu iyi ki Turkcell’den almışım demek için bir neden daha Lifebox’tan 5 GB ek hafıza hediye";
 "StorageOver80Title"="Paketinizin %80'i doldu";
 "StorageOver80"="En avantajlı ek hafıza paketlerinden yararlanmak için Paketlerim sayfasini ziyaret edebilirsiniz.";
 "StorageOver90Title"="Paketinizin %90'i doldu";
@@ -524,7 +524,7 @@
 "StorageFull100Title"="AKILLI DEPO HAFIZANIZI DOLDURDUNUZ!";
 "StorageFull100"="En avantajlı ek hafıza paketlerinden yararlanmak için Paketlerim sayfasini ziyaret edebilirsiniz.";
 "NewVersionNewFeaturesTitle"="SİZİN İÇİN YENİLENDİK!";
-"NewVersionNewFeatures"="Uygulamanızı hemen güncelleyin Akıllı Depo’nuzu yeni özellikleriyle kullanmaya devam edin.";
+"NewVersionNewFeatures"="Uygulamanızı hemen güncelleyin Lifebox’unuzu yeni özellikleriyle kullanmaya devam edin.";
 "CancelButtonTittle"= "İptal";
 "MoreStorageButtonTitle"="Ek Hafıza";
 
@@ -621,7 +621,7 @@
 
 "TermsButtonTitle"="KULLANIM KOŞULLARINI KABUL EDİYORUM";
 "TermsTitle"="Kullanım Koşulları";
-"EmailNotFound"="Akıllı Depo üyeliğiniz bulunmamaktadır. Kayıt Ol menüsünden üyeliğinizi başlatabilirsiniz. Turkcell abonesi iseniz, SIFRE yazıp 2222’ye SMS göndererek şifrenizi ücretsiz olarak alabilirsiniz.";
+"EmailNotFound"="Lifebox üyeliğiniz bulunmamaktadır. Kayıt Ol menüsünden üyeliğinizi başlatabilirsiniz. Turkcell abonesi iseniz, SIFRE yazıp 2222’ye SMS göndererek şifrenizi ücretsiz olarak alabilirsiniz.";
 
 
 "IAPRestoreError"="Bu ürünü daha önceden satın almıştınız";
@@ -640,7 +640,7 @@
 "WelcomePackageName"="Hoşgeldin (%@)";
 
 "MsisdnEntry"="GSM Numarası Giriş";
-"WelcomePageSubMessage"="Unutulmaz hatıralarınızın fotoğraflarını akıllı depoda saklayın, istediğiniz zaman erişin hatta sevdiklerinizle de paylaşın.";
+"WelcomePageSubMessage"="Unutulmaz hatıralarınızın fotoğraflarını Lifebox'ta saklayın, istediğiniz zaman erişin hatta sevdiklerinizle de paylaşın.";
 "PasswordSettingsTitle"="Şifre";
 "PasswordChangeTitle"="Şifre Değiştir";
 
@@ -659,11 +659,11 @@
 "NewPassAgain"="YENİ ŞİFRE TEKRAR";
 "ChangePassButton"="Şifre değiştir";
 "MsisdnUpdateSuccess"="Numara değişikliğiniz başarıyla tamamlanmıştır";
-"AddTypeFromDepoTitle"="Akıllı Depo'dan Yükle";
-"AddTypeDepoPhotoTitle"="Akıllı Depo'dan Yükle";
+"AddTypeFromDepoTitle"="Lifebox'tan Yükle";
+"AddTypeDepoPhotoTitle"="Lifebox'tan Yükle";
 
-"PackageFullMaessage"="Akıllı Depo kotanı doldurdun, daha fazla hafıza için paketler sayfamıza göz atmak ister misin?";
-"PortinInfoMessage"="Akıllı Depo faydalarını Turkcell avantajlarıyla kullanmak için paketler sayfamıza göz atmak ister misin?";
+"PackageFullMaessage"="Lifebox kotanı doldurdun, daha fazla hafıza için paketler sayfamıza göz atmak ister misin?";
+"PortinInfoMessage"="Lifebox faydalarını Turkcell avantajlarıyla kullanmak için paketler sayfamıza göz atmak ister misin?";
 "DontShowAgainMessage"="Bir Daha Gösterme";
 
 "AddTypeDepoMusicTitle"="Müzik Ekle";
@@ -703,8 +703,8 @@
 "LogoutConfirmMessage"="Uygulamadan çıkış yapıyorsunuz, emin misiniz?";
 "ImageGroupTypeInProgress"="Yüklenmekte Olanlar";
 
-"SuggestionSubject"="Turkcell Akıllı Depo Hakkında Öneri";
-"ComplaintSubject"="Turkcell Akıllı Depo Hakkında Şikayet";
+"SuggestionSubject"="Lifebox Hakkında Öneri";
+"ComplaintSubject"="Lifebox Hakkında Şikayet";
 "MailWarning"="Lütfen aşağıdaki bilgileri silmeyiniz. Bu bilgiler varsa problemleri bulmak için kullanılacaktır.";
 "NoEmailAccountError"="Cihazınızda tanımlı bir e-posta hesabınız bulunmamaktadır.";
 
@@ -718,7 +718,7 @@
 "ProfilePhotoUploadSuccess"="Profil fotonuz başarıyla değiştirildi.";
 "MenuPromo"="Promosyonlar";
 "PromoEarning"="Kazandıklarınız";
-"PromotionTopTitle"="Akıllı Depo Size Özel Kampanya";
+"PromotionTopTitle"="Lifebox Size Özel Kampanya";
 "PromotionSubTitle"="Burada da alt metin görünecek. Burada da alt metin görünecek. Burada da alt metin görünecek. Burada da alt metin görünecek.";
 "PromoCodePlaceholder"="Promosyon Kodu";
 "PromoCodeEmpty"="Lütfen promosyon kodunu girin";
@@ -755,21 +755,24 @@
 "CollectionTab"="KOLEKSİYON";
 "AlbumTab"="ALBÜM & VİDEO";
 
-"NewFeatureInfoLabel"="Akıllı Depo'da güzel şeyler oluyor";
+"NewFeatureInfoLabel"="Lifebox'ta güzel şeyler oluyor";
 "NewFeatureInfoSubLabel"="Yepyeni özellikler ve daha iyi bir deneyim çok yakında bu kutunun içinde...";
 
 "ForgetPass2222Info"="Turkcell abonesi iseniz, SIFRE yazıp 2222'ye SMS göndererek şifrenizi ücretsiz olarak alabilirsiniz.";
 "TimeoutMessage"="İşleminiz zamanaşımına uğramıştır. Lütfen tekrar deneyin.";
 
 "Welcome1Info"="Yaşa, Biriktir, Hatırla";
-"Welcome1SubInfo"="Fotoğraflarını, videolarını ve tüm dosylarını lifebox'ta biriktir, istediğin yerde istediğin zamanda aç ve hatırla";
-"Welcome2Info"="lifebox nedir?";
-"Welcome2SubInfo"="Tüm dosyalarını biriktirebileceğin ekstra bir saklama alanıdır. Artık hiçbir şeyi silmek zorunda kalmadan, daima güvende tutabilirsin. lifebox'a yüklediğin herşey 6 kat şifreleme teknolojisi ile güvende.";
-"Welcome3Info"="Hatıraların anında lifebox'ta";
-"Welcome3SubInfo"="Telefonun ve tabletindeki fotoğraflar otomatik lifebox'a yüklenir, güvenli bir şekilde birikir. Sana sadece yeni anıları yaşamak kalır.";
+"Welcome1SubInfo"="Fotoğraflarını, videolarını ve tüm dosylarını Lifebox'ta biriktir, istediğin yerde istediğin zamanda aç ve hatırla";
+"Welcome2Info"="Lifebox nedir?";
+"Welcome2SubInfo"="Tüm dosyalarını biriktirebileceğin ekstra bir saklama alanıdır. Artık hiçbir şeyi silmek zorunda kalmadan, daima güvende tutabilirsin. Lifebox'a yüklediğin herşey 6 kat şifreleme teknolojisi ile güvende.";
+"Welcome3Info"="Hatıraların anında Lifebox'ta";
+"Welcome3SubInfo"="Telefonun ve tabletindeki fotoğraflar otomatik Lifebox'a yüklenir, güvenli bir şekilde birikir. Sana sadece yeni anıları yaşamak kalır.";
 "Welcome4Info"="Her yerde, her zaman yanında";
 "Welcome4SubInfo"="Hatıraları biriktirmek kadar hatırlamak da önemlidir. Lifebox'taki tüm dosyalarına akıllı telefonundan, tabletinden veya bilgisayarından ulaşabilirsin";
 "Welcome5Info"="Güzel şeyler paylaştıkça çoğalır.";
 "Welcome5SubInfo"="lifebox'ta biriktirdiklerini kolayca paylaşabilirsin.";
 "Welcome6Info"="Anıların yaşam alanını süslesin.";
 "Welcome6SubInfo"="Fotoğraf ve diğer dosyalarını hızlı ve pratik bir şekilde baskı alabilirsin.";
+
+"LifeboxTeaserInfoLabel"="Lifebox'a hoşgeldiniz";
+"LifeboxTeaserInfoSubLabel"="Yepyeni özellikler ve daha iyi bir deneyim bu kutunun içinde";
