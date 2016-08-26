@@ -13,12 +13,15 @@
 #import "PhotoAlbumController.h"
 #import "ImagePreviewController.h"
 #import "VideoPreviewController.h"
+#import "CustomButton.h"
+#import "CustomEntryPopupView.h"
 
-@interface RevisitedGroupedPhotosController : MyViewController <RevisitedPhotoHeaderSegmentDelegate, RevisitedAlbumListDelegate, PhotoAlbumDelegate, NewAlbumDelegate, RevisitedGroupedPhotoDelegate, ImagePreviewDelegate, VideoPreviewDelegate>
+@interface RevisitedGroupedPhotosController : MyViewController <RevisitedPhotoHeaderSegmentDelegate, RevisitedAlbumListDelegate, PhotoAlbumDelegate, NewAlbumDelegate, RevisitedGroupedPhotoDelegate, ImagePreviewDelegate, VideoPreviewDelegate, CustomEntryPopupDelegate>
 
 @property (nonatomic, strong) RevisitedPhotoHeaderSegmentView *segmentView;
 @property (nonatomic, strong) RevisitedGroupedPhotoView *groupView;
 @property (nonatomic, strong) RevisitedAlbumListView *albumView;
 @property (nonatomic, strong) UIBarButtonItem *previousButtonRef;
+@property (nonatomic, strong) CustomButton *moreButton;
 
 @end

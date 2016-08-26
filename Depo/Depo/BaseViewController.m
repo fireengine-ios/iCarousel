@@ -52,6 +52,7 @@
 #import "CellographMainController.h"
 #import "NewFeatureInfoController.h"
 #import "NewFeatureInfoView.h"
+#import "RevisitedGroupedPhotosController.h"
 
 #define kMenuOpenOriginX 276
 
@@ -206,9 +207,10 @@
                          transparentView.hidden = !menuOpen;
                          if(menuOpen) {
                              if(![AppUtil readDoNotShowAgainFlagForKey:TUTORIAL_MENU_KEY] && !APPDELEGATE.session.menuTipShown) {
-                                 TutorialView *tutorialView = [[TutorialView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) withBgImageName:@"img_baski_1.jpg" withTitle:@"" withKey:TUTORIAL_MENU_KEY];
+                                 TutorialView *tutorialView = [[TutorialView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) withBgImageName:@"img_baski_1.jpg" withTitle:@"" withKey:TUTORIAL_MENU_KEY doNotShowFlag:NO];
                                  [self.view addSubview:tutorialView];
                                  APPDELEGATE.session.menuTipShown = YES;
+                                 [AppUtil writeDoNotShowAgainFlagForKey:TUTORIAL_MENU_KEY];
                              }
                          }
                      }];
@@ -280,7 +282,8 @@
     [self callCleanBeforeChange];
     
 //    CellographMainController *cello = [[CellographMainController alloc] init];
-    GroupedPhotosAndVideosController *photo = [[GroupedPhotosAndVideosController alloc] init];
+//    GroupedPhotosAndVideosController *photo = [[GroupedPhotosAndVideosController alloc] init];
+    RevisitedGroupedPhotosController *photo = [[RevisitedGroupedPhotosController alloc] init];
     photo.nav = self.nav;
     photo.myDelegate = self;
     [self.nav setViewControllers:@[photo] animated:NO];
@@ -331,7 +334,8 @@
     [MPush hitTag:@"photos_and_videos"];
     [MPush hitEvent:@"photos_and_videos"];
 
-    GroupedPhotosAndVideosController *photo = [[GroupedPhotosAndVideosController alloc] init];
+//    GroupedPhotosAndVideosController *photo = [[GroupedPhotosAndVideosController alloc] init];
+    RevisitedGroupedPhotosController *photo = [[RevisitedGroupedPhotosController alloc] init];
     photo.nav = self.nav;
     photo.myDelegate = self;
     [self.nav setViewControllers:@[photo] animated:NO];

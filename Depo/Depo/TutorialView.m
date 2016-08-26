@@ -20,6 +20,10 @@
 @synthesize checkButton;
 
 - (id) initWithFrame:(CGRect)frame withBgImageName:(NSString *) imgName withTitle:(NSString *) titleVal withKey:(NSString *) keyVal {
+    return [self initWithFrame:frame withBgImageName:imgName withTitle:titleVal withKey:keyVal doNotShowFlag:YES];
+}
+
+- (id) initWithFrame:(CGRect)frame withBgImageName:(NSString *) imgName withTitle:(NSString *) titleVal withKey:(NSString *) keyVal doNotShowFlag:(BOOL) doNotShowFlag {
     if(self = [super initWithFrame:frame]) {
         keyRef = keyVal;
         
@@ -33,17 +37,18 @@
         tapGestureRecognizer.enabled = YES;
         [self addGestureRecognizer:tapGestureRecognizer];
 
-        NSString *checkMessage = NSLocalizedString(@"DontShowAgainMessage", @"");
-        UIFont *checkFont = [UIFont fontWithName:@"TurkcellSaturaMed" size:14];
-        
-        float messageWidth = [Util calculateWidthForText:checkMessage forHeight:20 forFont:checkFont] + 10;
-        
-        CustomLabel *checkLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(self.frame.size.width - messageWidth - 10, self.frame.size.height - 30, messageWidth, 20) withFont:checkFont withColor:[Util UIColorForHexColor:@"FFFFFF"] withText:checkMessage];
-        [self addSubview:checkLabel];
-
-        checkButton = [[CheckButton alloc] initWithFrame:CGRectMake(checkLabel.frame.origin.x - 30, self.frame.size.height - 30, 21, 20) isInitiallyChecked:NO];
-        [self addSubview:checkButton];
-
+        if(doNotShowFlag) {
+            NSString *checkMessage = NSLocalizedString(@"DontShowAgainMessage", @"");
+            UIFont *checkFont = [UIFont fontWithName:@"TurkcellSaturaMed" size:14];
+            
+            float messageWidth = [Util calculateWidthForText:checkMessage forHeight:20 forFont:checkFont] + 10;
+            
+            CustomLabel *checkLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(self.frame.size.width - messageWidth - 10, self.frame.size.height - 30, messageWidth, 20) withFont:checkFont withColor:[Util UIColorForHexColor:@"FFFFFF"] withText:checkMessage];
+            [self addSubview:checkLabel];
+            
+            checkButton = [[CheckButton alloc] initWithFrame:CGRectMake(checkLabel.frame.origin.x - 30, self.frame.size.height - 30, 21, 20) isInitiallyChecked:NO];
+            [self addSubview:checkButton];
+        }
     }
     return self;
 }

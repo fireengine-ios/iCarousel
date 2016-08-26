@@ -65,11 +65,11 @@
 
 #define SHARE_LINK_URL BASE_URL@"/share/public"
 
-#define ADVANCED_SEARCH_URL BASE_URL@"/search/advancedSearch?name=%@&sortBy=%@&sortOrder=%@&from=%d&size=%d"
-//TODO 10august #define ADVANCED_SEARCH_URL BASE_URL@"/search/unified?text=%@&sortBy=%@&sortOrder=%@&from=%d&size=%d"
+//#define ADVANCED_SEARCH_URL BASE_URL@"/search/advancedSearch?name=%@&sortBy=%@&sortOrder=%@&from=%d&size=%d"
+#define ADVANCED_SEARCH_URL BASE_URL@"/search/unified?text=%@&sortBy=%@&sortOrder=%@&from=%d&size=%d"
 
-#define ADVANCED_SEARCH_URL_WITH_CATEGORY BASE_URL@"/search/advancedSearch?name=%@&sortBy=%@&sortOrder=%@&from=%d&size=%d&category=%@"
-//TODO 10august #define ADVANCED_SEARCH_URL_WITH_CATEGORY BASE_URL@"/search/unified?text=%@&sortBy=%@&sortOrder=%@&from=%d&size=%d&category=%@"
+//#define ADVANCED_SEARCH_URL_WITH_CATEGORY BASE_URL@"/search/advancedSearch?name=%@&sortBy=%@&sortOrder=%@&from=%d&size=%d&category=%@"
+#define ADVANCED_SEARCH_URL_WITH_CATEGORY BASE_URL@"/search/unified?text=%@&sortBy=%@&sortOrder=%@&from=%d&size=%d&category=%@"
 
 #define RENAME_URL BASE_URL@"/filesystem/rename/%@"
 

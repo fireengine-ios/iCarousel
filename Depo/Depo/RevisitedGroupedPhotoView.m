@@ -12,6 +12,7 @@
 #import "AppSession.h"
 #import "GroupedPhotosCell.h"
 #import "CacheUtil.h"
+#import "BaseViewController.h"
 
 #define GROUP_PACKAGE_SIZE IS_IPAD ? 30 : 24
 #define GROUP_IMG_COUNT_PER_ROW 4
@@ -22,6 +23,7 @@
     int listOffset;
     BOOL isLoading;
     int photoCount;
+    int groupSequence;
     NSDateFormatter *dateCompareFormat;
 }
 @end
@@ -37,6 +39,7 @@
 @synthesize fileTable;
 @synthesize readDao;
 @synthesize deleteDao;
+@synthesize albumAddPhotosDao;
 @synthesize imgFooterActionMenu;
 @synthesize isSelectible;
 @synthesize progress;
@@ -54,10 +57,16 @@
         deleteDao.delegate = self;
         deleteDao.successMethod = @selector(deleteSuccessCallback);
         deleteDao.failMethod = @selector(deleteFailCallback:);
+        
+        albumAddPhotosDao = [[AlbumAddPhotosDao alloc] init];
+        albumAddPhotosDao.delegate = self;
+        albumAddPhotosDao.successMethod = @selector(photosAddedSuccessCallback);
+        albumAddPhotosDao.failMethod = @selector(photosAddedFailCallback:);
 
         tableUpdateCounter = 0;
         listOffset = 0;
         photoCount = 0;
+        groupSequence = 0;
         
         dateCompareFormat = [[NSDateFormatter alloc] init];
         [dateCompareFormat setDateFormat:@"MMM yyyy"];
@@ -88,6 +97,7 @@
 
 - (void) pullData {
     listOffset = 0;
+    groupSequence = 0;
     
     [self.files removeAllObjects];
     [self.groupDict removeAllObjects];
@@ -112,8 +122,11 @@
         inProgressGroup.customTitle = NSLocalizedString(@"ImageGroupTypeInProgress", @"");
         inProgressGroup.fileInfo = uploadingImageRefArray;
         inProgressGroup.groupType = ImageGroupTypeInProgress;
+        inProgressGroup.sequence = groupSequence;
 //        [groups addObject:inProgressGroup];
         [groupDict setObject:inProgressGroup forKey:GROUP_INPROGRESS_KEY];
+        
+        groupSequence ++;
     }
 }
 
@@ -131,6 +144,9 @@
     isSelectible = YES;
     [refreshControl setEnabled:NO];
     [selectedFileList removeAllObjects];
+
+    tableUpdateCounter ++;
+    [fileTable reloadData];
 }
 
 - (void) setToUnselectible {
@@ -149,55 +165,67 @@
 
 - (void) readSuccessCallback:(NSArray *) fileList {
     [progress hide:YES];
-    [self.files addObjectsFromArray:fileList];
-    
-    for(MetaFile *row in fileList) {
-        NSString *dateStr = [dateCompareFormat stringFromDate:row.lastModified];
-        NSString *locStr = @"";
-        if(row.detail.geoAdminLevel6 != nil && ![row.detail.geoAdminLevel6 isEqualToString:@""]) {
-            locStr = row.detail.geoAdminLevel6;
-        } else if(row.detail.geoAdminLevel4 != nil && ![row.detail.geoAdminLevel4 isEqualToString:@""]) {
-            locStr = row.detail.geoAdminLevel4;
-        } else if(row.detail.geoAdminLevel2 != nil && ![row.detail.geoAdminLevel2 isEqualToString:@""]) {
-            locStr = row.detail.geoAdminLevel2;
-        }
-        NSString *keyVal = [NSString stringWithFormat:@"%@_%@", dateStr, locStr];
-        if([[groupDict allKeys] count] == 0) {
-            FileInfoGroup *newGroup = [[FileInfoGroup alloc] init];
-            newGroup.customTitle = dateStr;
-            newGroup.locationInfo = locStr;
-            newGroup.fileInfo = [[NSMutableArray alloc] init];
-            [newGroup.fileInfo addObject:row];
-            [groupDict setObject:newGroup forKey:keyVal];
-        } else {
-            FileInfoGroup *currentGroup = [groupDict objectForKey:keyVal];
-            if(currentGroup != nil) {
-                [currentGroup.fileInfo addObject:row];
-            } else {
+    if([fileList count] > 0) {
+        [self.files addObjectsFromArray:fileList];
+        
+        for(MetaFile *row in fileList) {
+            NSString *dateStr = [dateCompareFormat stringFromDate:row.lastModified];
+            NSString *locStr = @"";
+            if(row.detail.geoAdminLevel6 != nil && ![row.detail.geoAdminLevel6 isEqualToString:@""]) {
+                locStr = row.detail.geoAdminLevel6;
+            } else if(row.detail.geoAdminLevel4 != nil && ![row.detail.geoAdminLevel4 isEqualToString:@""]) {
+                locStr = row.detail.geoAdminLevel4;
+            } else if(row.detail.geoAdminLevel2 != nil && ![row.detail.geoAdminLevel2 isEqualToString:@""]) {
+                locStr = row.detail.geoAdminLevel2;
+            }
+            NSString *keyVal = [NSString stringWithFormat:@"%@_%@", dateStr, locStr];
+            if([[groupDict allKeys] count] == 0) {
                 FileInfoGroup *newGroup = [[FileInfoGroup alloc] init];
                 newGroup.customTitle = dateStr;
                 newGroup.locationInfo = locStr;
                 newGroup.fileInfo = [[NSMutableArray alloc] init];
                 [newGroup.fileInfo addObject:row];
+                newGroup.sequence = groupSequence;
                 [groupDict setObject:newGroup forKey:keyVal];
+                
+                groupSequence ++;
+            } else {
+                FileInfoGroup *currentGroup = [groupDict objectForKey:keyVal];
+                if(currentGroup != nil) {
+                    [currentGroup.fileInfo addObject:row];
+                } else {
+                    FileInfoGroup *newGroup = [[FileInfoGroup alloc] init];
+                    newGroup.customTitle = dateStr;
+                    newGroup.locationInfo = locStr;
+                    newGroup.fileInfo = [[NSMutableArray alloc] init];
+                    [newGroup.fileInfo addObject:row];
+                    newGroup.sequence = groupSequence;
+                    [groupDict setObject:newGroup forKey:keyVal];
+                    groupSequence ++;
+                }
             }
         }
-    }
-    FileInfoGroup *ongoingGroup = [groupDict objectForKey:GROUP_INPROGRESS_KEY];
-    if(ongoingGroup) {
-        [groupDict removeObjectForKey:GROUP_INPROGRESS_KEY];
-        self.groups = [[NSMutableArray alloc] init];
-        [self.groups addObject:ongoingGroup];
-        [self.groups addObjectsFromArray:[groupDict allValues]];
-    } else {
-        self.groups = [groupDict allValues];
+        FileInfoGroup *ongoingGroup = [groupDict objectForKey:GROUP_INPROGRESS_KEY];
+        if(ongoingGroup) {
+            [groupDict removeObjectForKey:GROUP_INPROGRESS_KEY];
+            self.groups = [[NSMutableArray alloc] init];
+            [self.groups addObject:ongoingGroup];
+            [self.groups addObjectsFromArray:[groupDict allValues]];
+        } else {
+            self.groups = [groupDict allValues];
+        }
+
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"sequence" ascending:YES];
+        NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+        self.groups = [self.groups sortedArrayUsingDescriptors:sortDescriptors];
+        
+        tableUpdateCounter++;
+        [fileTable reloadData];
     }
     
     isLoading = NO;
     [refreshControl endRefreshing];
     
-    tableUpdateCounter++;
-    [fileTable reloadData];
 }
 
 - (void) readFailCallback:(NSString *) errorMessage {
@@ -493,12 +521,32 @@
 }
 
 - (void) footerActionMenuDidSelectMove:(FooterActionsMenuView *) menu {
+    [APPDELEGATE.base showPhotoAlbums];
 }
 
 - (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {
+    [APPDELEGATE.base triggerShareForFiles:selectedFileList];
 }
 
 - (void) footerActionMenuDidSelectPrint:(FooterActionsMenuView *)menu {
+    [delegate revisitedGroupedPhotoShouldPrintWithFileList:selectedFileList];
+}
+
+- (void) destinationAlbumChosenWithUuid:(NSString *) chosenAlbumUuid {
+    [albumAddPhotosDao requestAddPhotos:selectedFileList toAlbum:chosenAlbumUuid];
+    [self bringSubviewToFront:progress];
+    [progress show:YES];
+//TODO    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"AlbumMovePhotoProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"MoveSuccessMessageNew", @"") andFailMessage:NSLocalizedString(@"AlbumMovePhotoFailMessage", @"")];
+}
+
+- (void) photosAddedSuccessCallback {
+    [progress hide:YES];
+    [delegate revisitedGroupedPhotoDidFinishMoving];
+}
+
+- (void) photosAddedFailCallback:(NSString *) errorMessage {
+    [progress hide:YES];
+    [delegate revisitedGroupedPhotoDidFailMovingWithError:errorMessage];
 }
 
 @end

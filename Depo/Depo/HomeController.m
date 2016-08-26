@@ -110,13 +110,14 @@
             lastSyncTitle = [NSString stringWithFormat:NSLocalizedString(@"LastSyncFormat", @""), [AppUtil readDueDateInReadableFormat:[SyncUtil readLastSyncDate]]];
         }
         lastSyncLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, IS_IPHONE_5 ? 18 : 8, self.view.frame.size.width - 40, 18) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:15] withColor:[Util UIColorForHexColor:@"7b8497"] withText:lastSyncTitle withAlignment:NSTextAlignmentCenter];
-        [self.view addSubview:lastSyncLabel];
+        //[self.view addSubview:lastSyncLabel];
         
         moreStorageButton = [[SimpleButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 150)/2, usageChart.frame.origin.y + usageChart.frame.size.height + (IS_IPAD ? 50 : IS_IPHONE_5 ? 20 : 0), 150, 44) withTitle:NSLocalizedString(@"GetMoreStorageButtonTitle", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:22];
         moreStorageButton.hidden = YES;
         [moreStorageButton addTarget:self action:@selector(triggerStoragePage) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:moreStorageButton];
         
+        /*
         float footerHeight = 60;
         float footerYIndex = self.view.frame.size.height - 124;
         if(IS_IPAD) {
@@ -126,6 +127,7 @@
         footer = [[RecentActivityLinkerFooter alloc] initWithFrame:CGRectMake(0, footerYIndex, self.view.frame.size.width, footerHeight)];
         footer.delegate = self;
         [self.view addSubview:footer];
+         */
         
         [usageDao requestUsageInfo];
         [self showLoading];
@@ -325,8 +327,8 @@
 
 - (void) triggerPhotosPage {
     //TODO düzelt
-    GroupedPhotosAndVideosController *photo = [[GroupedPhotosAndVideosController alloc] init];
-//    RevisitedGroupedPhotosController *photo = [[RevisitedGroupedPhotosController alloc] init];
+//    GroupedPhotosAndVideosController *photo = [[GroupedPhotosAndVideosController alloc] init];
+    RevisitedGroupedPhotosController *photo = [[RevisitedGroupedPhotosController alloc] init];
     photo.nav = self.nav;
     [self.nav pushViewController:photo animated:NO];
 }

@@ -14,6 +14,7 @@
 #import "AppDelegate.h"
 #import "PreLoginInfoView.h"
 #import "MPush.h"
+#import "WelcomePageView.h"
 
 @interface PreLoginController ()
 
@@ -28,63 +29,45 @@
     if(self = [super init]) {
         self.view.backgroundColor = [Util UIColorForHexColor:@"3fb0e8"];
         
-        UIImageView *iconImgView = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 29)/2, 28, 29, 20)];
-        iconImgView.image = [UIImage imageNamed:@"cloud_icon.png"];
-        [self.view addSubview:iconImgView];
-
-        infoScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, IS_IPHONE_5 ? 80 : 45, self.view.frame.size.width, 350)];
+        infoScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
         infoScroll.pagingEnabled = YES;
         infoScroll.showsHorizontalScrollIndicator = NO;
         infoScroll.delegate = self;
         [self.view addSubview:infoScroll];
         
-        if(IS_IPAD) {
-            infoScroll.frame = CGRectMake(0, (self.view.frame.size.height - 350)/2 - 50, self.view.frame.size.width, 350);
-        }
+        WelcomePageView *firstView = [[WelcomePageView alloc] initWithFrame:CGRectMake(0, 0, infoScroll.frame.size.width, infoScroll.frame.size.height) withBgImageName:@"bg_mtour_1.jpg" withTitle:NSLocalizedString(@"Welcome1Info", @"") withSubTitle:NSLocalizedString(@"Welcome1SubInfo", @"") withIcon:@"vect_mtour_1.png"];
+        [infoScroll addSubview:firstView];
 
-        PreLoginInfoView *firstInfoView = [[PreLoginInfoView alloc] initWithFrame:CGRectMake(10, 0, infoScroll.frame.size.width - 20, infoScroll.frame.size.height) withImageName:@"pre_login_info1.png" withTitleKey:@"PreLoginTitle1" withInfoKey:@"PreLoginInfo1"];
-        [infoScroll addSubview:firstInfoView];
+        WelcomePageView *secondView = [[WelcomePageView alloc] initWithFrame:CGRectMake(infoScroll.frame.size.width, 0, infoScroll.frame.size.width, infoScroll.frame.size.height) withBgImageName:@"bg_mtour_2.jpg" withTitle:NSLocalizedString(@"Welcome2Info", @"") withSubTitle:NSLocalizedString(@"Welcome2SubInfo", @"") withIcon:@"vect_mtour_2.png"];
+        [infoScroll addSubview:secondView];
         
-        PreLoginInfoView *secondInfoView = [[PreLoginInfoView alloc] initWithFrame:CGRectMake(infoScroll.frame.size.width + 10, 0, infoScroll.frame.size.width - 20, infoScroll.frame.size.height) withImageName:@"pre_login_info2.png" withTitleKey:@"PreLoginTitle2" withInfoKey:@"PreLoginInfo2"];
-        [infoScroll addSubview:secondInfoView];
+        WelcomePageView *thirdView = [[WelcomePageView alloc] initWithFrame:CGRectMake(infoScroll.frame.size.width * 2, 0, infoScroll.frame.size.width, infoScroll.frame.size.height) withBgImageName:@"bg_mtour_3.jpg" withTitle:NSLocalizedString(@"Welcome3Info", @"") withSubTitle:NSLocalizedString(@"Welcome3SubInfo", @"") withIcon:@"vect_mtour_3.png"];
+        [infoScroll addSubview:thirdView];
 
-        PreLoginInfoView *thirdInfoView = [[PreLoginInfoView alloc] initWithFrame:CGRectMake(infoScroll.frame.size.width * 2 + 10, 0, infoScroll.frame.size.width - 20, infoScroll.frame.size.height) withImageName:@"pre_login_info3.png" withTitleKey:@"PreLoginTitle3" withInfoKey:@"PreLoginInfo3"];
-        [infoScroll addSubview:thirdInfoView];
+        WelcomePageView *fourthView = [[WelcomePageView alloc] initWithFrame:CGRectMake(infoScroll.frame.size.width * 3, 0, infoScroll.frame.size.width, infoScroll.frame.size.height) withBgImageName:@"bg_mtour_4.jpg" withTitle:NSLocalizedString(@"Welcome4Info", @"") withSubTitle:NSLocalizedString(@"Welcome4SubInfo", @"") withIcon:@"vect_mtour_4.png"];
+        [infoScroll addSubview:fourthView];
 
-        PreLoginInfoView *fourthInfoView = [[PreLoginInfoView alloc] initWithFrame:CGRectMake(infoScroll.frame.size.width * 3 + 10, 0, infoScroll.frame.size.width - 20, infoScroll.frame.size.height) withImageName:@"pre_login_info4.png" withTitleKey:@"PreLoginTitle4" withInfoKey:@"PreLoginInfo4"];
-        [infoScroll addSubview:fourthInfoView];
+        WelcomePageView *fifthView = [[WelcomePageView alloc] initWithFrame:CGRectMake(infoScroll.frame.size.width * 4, 0, infoScroll.frame.size.width, infoScroll.frame.size.height) withBgImageName:@"bg_mtour_5.jpg" withTitle:NSLocalizedString(@"Welcome5Info", @"") withSubTitle:NSLocalizedString(@"Welcome5SubInfo", @"") withIcon:@"vect_mtour_5.png"];
+        [infoScroll addSubview:fifthView];
 
-        PreLoginInfoView *fifthInfoView = [[PreLoginInfoView alloc] initWithFrame:CGRectMake(infoScroll.frame.size.width * 4 + 10, 0, infoScroll.frame.size.width - 20, infoScroll.frame.size.height) withImageName:@"pre_login_info5.png" withTitleKey:@"PreLoginTitle5" withInfoKey:@"PreLoginInfo5"];
-        [infoScroll addSubview:fifthInfoView];
+        WelcomePageView *sixthView = [[WelcomePageView alloc] initWithFrame:CGRectMake(infoScroll.frame.size.width * 5, 0, infoScroll.frame.size.width, infoScroll.frame.size.height) withBgImageName:@"bg_mtour_6.jpg" withTitle:NSLocalizedString(@"Welcome6Info", @"") withSubTitle:NSLocalizedString(@"Welcome6SubInfo", @"") withIcon:@"vect_mtour_6.png"];
+        [infoScroll addSubview:sixthView];
         
-        infoScroll.contentSize = CGSizeMake(infoScroll.frame.size.width * 5, infoScroll.frame.size.height);
+        infoScroll.contentSize = CGSizeMake(infoScroll.frame.size.width * 6, infoScroll.frame.size.height);
 
-        pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 100)/2, infoScroll.frame.origin.y + infoScroll.frame.size.height, 100, 30)];
-        pageControl.numberOfPages = 5;
-        pageControl.currentPage = 0;
-        [self.view addSubview:pageControl];
-
-        /*
-        CustomButton *videoButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 50, 320, 200) withImageName:@"video_tour.png"];
-        [self.view addSubview:videoButton];
-        
-        CustomLabel *titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, 270, self.view.frame.size.width, 22) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[Util UIColorForHexColor:@"FFFFFF"] withText:NSLocalizedString(@"AppTitleRef", @"") withAlignment:NSTextAlignmentCenter];
-        [self.view addSubview:titleLabel];
-        
-        NSString *descStr = NSLocalizedString(@"AppPreLoginInfo", @"");
-        UIFont *descFont = [UIFont fontWithName:@"TurkcellSaturaBol" size:16];
-        
-        int descHeight = [Util calculateHeightForText:descStr forWidth:self.view.frame.size.width-40 forFont:descFont] + 5;
-        
-        CustomLabel *descLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 295, self.view.frame.size.width - 40, descHeight) withFont:descFont withColor:[Util UIColorForHexColor:@"b7ddef"] withText:descStr withAlignment:NSTextAlignmentCenter];
-        descLabel.numberOfLines = 0;
-        [self.view addSubview:descLabel];
-        */
+        UIImageView *iconImgView = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 80)/2, 28, 80, 30)];
+        iconImgView.image = [UIImage imageNamed:@"logo_lifebox.png"];
+        [self.view addSubview:iconImgView];
 
         SimpleButton *loginButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, self.view.frame.size.height - 60, self.view.frame.size.width - 40, 50) withTitle:NSLocalizedString(@"StartUsingTitle", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
         [loginButton addTarget:self action:@selector(loginClicked) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:loginButton];
-        
+
+        pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 100)/2, loginButton.frame.origin.y - 40, 100, 30)];
+        pageControl.numberOfPages = 6;
+        pageControl.currentPage = 0;
+        [self.view addSubview:pageControl];
+
     }
     return self;
 }

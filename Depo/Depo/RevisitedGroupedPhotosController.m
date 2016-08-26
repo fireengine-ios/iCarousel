@@ -11,9 +11,14 @@
 #import "AppDelegate.h"
 #import "BaseViewController.h"
 #import "MapUtil.h"
+#import "SelectiblePhotoListModalController.h"
+#import "Story.h"
+#import "MPush.h"
+#import "PrintWebViewController.h"
 
-@interface RevisitedGroupedPhotosController ()
-
+@interface RevisitedGroupedPhotosController () {
+    MyNavigationController *printNav;
+}
 @end
 
 @implementation RevisitedGroupedPhotosController
@@ -22,6 +27,7 @@
 @synthesize groupView;
 @synthesize albumView;
 @synthesize previousButtonRef;
+@synthesize moreButton;
 
 - (id) init {
     if(self = [super init]) {
@@ -168,6 +174,13 @@
     [self cancelClicked];
 }
 
+- (void) revisitedGroupedPhotoDidFinishMoving {
+    [groupView pullData];
+    [albumView pullData];
+    
+    [self cancelClicked];
+}
+
 - (void) revisitedGroupedPhotoShouldConfirmForDeleting {
     [APPDELEGATE.base showConfirmDelete];
 }
@@ -175,6 +188,13 @@
 - (void) revisitedGroupedPhotoDidChangeToSelectState {
     [albumView setToSelectible];
     [self setToSelectionState];
+}
+
+- (void) revisitedGroupedPhotoShouldPrintWithFileList:(NSArray *)fileListToPrint {
+    PrintWebViewController *printController = [[PrintWebViewController alloc] initWithUrl:@"http://akillidepo.cellograf.com/" withFileList:fileListToPrint];
+    printNav = [[MyNavigationController alloc] initWithRootViewController:printController];
+    
+    [self presentViewController:printNav animated:YES completion:nil];
 }
 
 - (void) revisitedGroupedPhotoDidFailRetrievingList:(NSString *) errorMessage {
@@ -185,8 +205,16 @@
     [self showErrorAlertWithMessage:errorMessage];
 }
 
+- (void) revisitedGroupedPhotoDidFailMovingWithError:(NSString *)errorMessage {
+    [self showErrorAlertWithMessage:errorMessage];
+}
+
 - (void) revisitedGroupedPhotoChangeTitleTo:(NSString *) pageTitle {
     self.title = pageTitle;
+}
+
+- (void) closePrintPage {
+    [printNav dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark PhotoAlbumDelegate methods
@@ -197,7 +225,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    moreButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 22, 22) withImageName:@"dots_icon.png"];
+    [moreButton addTarget:self action:@selector(moreClicked) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *moreItem = [[UIBarButtonItem alloc] initWithCustomView:moreButton];
+    self.navigationItem.rightBarButtonItem = moreItem;
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -252,6 +284,66 @@
     if(!groupView.hidden) {
         [groupView shouldContinueDelete];
     }
+}
+
+- (void) moreClicked {
+    if(!groupView.isHidden) {
+        [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeSelect], [NSNumber numberWithInt:MoreMenuTypeVideofy]]];
+    } else {
+        [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeSortWithList], [NSNumber numberWithInt:MoreMenuTypeSelect]]];
+    }
+}
+
+- (void) moreMenuDidSelectSortWithList {
+    if(!albumView.isHidden) {
+        [APPDELEGATE.base showSortWithList:[NSArray arrayWithObjects:[NSNumber numberWithInt:SortTypeAlphaAsc], [NSNumber numberWithInt:SortTypeAlphaDesc], [NSNumber numberWithInt:SortTypeDateAsc], [NSNumber numberWithInt:SortTypeDateDesc], nil]];
+    }
+}
+
+- (void) moreMenuDidSelectVideofy {
+    NSLog(@"moreMenuDidSelectVideofy called");
+    CustomEntryPopupView *entryPopup = [[CustomEntryPopupView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"CreateName", @"") withButtonTitle:NSLocalizedString(@"Save", @"")];
+    entryPopup.delegate = self;
+    [APPDELEGATE showCustomEntryPopup:entryPopup];
+}
+
+- (void) changeToSelectedStatus {
+    if(!groupView.isHidden) {
+        [groupView setToSelectible];
+    } else {
+        [albumView setToSelectible];
+    }
+    [self setToSelectionState];
+}
+
+- (void) customEntryDidDismissWithValue:(NSString *)val {
+    Story *rawStory = [[Story alloc] init];
+    rawStory.title = val;
+    SelectiblePhotoListModalController *modalController = [[SelectiblePhotoListModalController alloc] initWithStory:rawStory];
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:modalController];
+    [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
+}
+
+- (void) cameraCapturaModalDidCaptureAndStoreImageToPath:(NSString *)filePath withName:(NSString *)fileName {
+    UploadRef *uploadRef = [[UploadRef alloc] init];
+    uploadRef.tempUrl = filePath;
+    uploadRef.fileName = fileName;
+    uploadRef.contentType = ContentTypePhoto;
+    uploadRef.ownerPage = UploadStarterPagePhotos;
+    uploadRef.folderUuid = APPDELEGATE.session.user.mobileUploadFolderUuid;
+    
+    UploadManager *uploadManager = [[UploadManager alloc] initWithUploadInfo:uploadRef];
+    [uploadManager configureUploadFileForPath:filePath atFolder:nil withFileName:fileName];
+    [[UploadQueue sharedInstance] addNewUploadTask:uploadManager];
+    
+    [groupView pullData];
+    
+    [[CurioSDK shared] sendEvent:@"ImageCapture" eventValue:@"true"];
+    [MPush hitTag:@"ImageCapture" withValue:@"true"];
+}
+
+- (void) albumModalDidSelectAlbum:(NSString *)albumUuid {
+    [groupView destinationAlbumChosenWithUuid:albumUuid];
 }
 
 @end

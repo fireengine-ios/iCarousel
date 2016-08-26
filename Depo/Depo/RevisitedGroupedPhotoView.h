@@ -16,15 +16,19 @@
 #import "MBProgressHUD.h"
 #import "GroupedCell.h"
 #import "DeleteDao.h"
+#import "AlbumAddPhotosDao.h"
 
 @protocol RevisitedGroupedPhotoDelegate <NSObject>
 - (void) revisitedGroupedPhotoDidSelectFile:(MetaFile *) fileSelected withList:(NSArray *) containingList;
 - (void) revisitedGroupedPhotoDidFinishLoading;
 - (void) revisitedGroupedPhotoDidFinishDeleting;
+- (void) revisitedGroupedPhotoDidFinishMoving;
 - (void) revisitedGroupedPhotoShouldConfirmForDeleting;
 - (void) revisitedGroupedPhotoDidChangeToSelectState;
+- (void) revisitedGroupedPhotoShouldPrintWithFileList:(NSArray *) fileListToPrint;
 - (void) revisitedGroupedPhotoDidFailRetrievingList:(NSString *) errorMessage;
 - (void) revisitedGroupedPhotoDidFailDeletingWithError:(NSString *) errorMessage;
+- (void) revisitedGroupedPhotoDidFailMovingWithError:(NSString *) errorMessage;
 - (void) revisitedGroupedPhotoChangeTitleTo:(NSString *) pageTitle;
 @end
 
@@ -41,6 +45,7 @@
 
 @property (nonatomic, strong) ElasticSearchDao *readDao;
 @property (nonatomic, strong) DeleteDao *deleteDao;
+@property (nonatomic, strong) AlbumAddPhotosDao *albumAddPhotosDao;
 
 @property (nonatomic, strong) FooterActionsMenuView *imgFooterActionMenu;
 @property (nonatomic) BOOL isSelectible;
@@ -51,5 +56,6 @@
 - (void) setToSelectible;
 - (void) setToUnselectible;
 - (void) shouldContinueDelete;
+- (void) destinationAlbumChosenWithUuid:(NSString *) chosenAlbumUuid;
 
 @end

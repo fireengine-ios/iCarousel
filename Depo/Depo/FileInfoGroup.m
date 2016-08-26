@@ -20,6 +20,7 @@
 @synthesize locationInfo;
 @synthesize customTitle;
 @synthesize fileInfo;
+@synthesize sequence;
 @synthesize groupType;
 
 @end

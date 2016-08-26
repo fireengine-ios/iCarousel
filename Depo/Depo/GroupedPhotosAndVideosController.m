@@ -703,7 +703,7 @@
 - (void) moreClicked {
     if(segmentType == PhotoHeaderSegmentTypePhoto) {
         if(self.level == ImageGroupLevelDay) {
-            [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeSortWithList],[NSNumber numberWithInt:MoreMenuTypeSelect] /*TODO 10august , [NSNumber numberWithInt:MoreMenuTypeVideofy]*/]];
+            [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeSortWithList],[NSNumber numberWithInt:MoreMenuTypeSelect], [NSNumber numberWithInt:MoreMenuTypeVideofy]]];
         } else {
             [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeSortWithList]]];
         }

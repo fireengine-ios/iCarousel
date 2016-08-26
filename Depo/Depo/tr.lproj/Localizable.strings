@@ -760,3 +760,16 @@
 
 "ForgetPass2222Info"="Turkcell abonesi iseniz, SIFRE yazıp 2222'ye SMS göndererek şifrenizi ücretsiz olarak alabilirsiniz.";
 "TimeoutMessage"="İşleminiz zamanaşımına uğramıştır. Lütfen tekrar deneyin.";
+
+"Welcome1Info"="Yaşa, Biriktir, Hatırla";
+"Welcome1SubInfo"="Fotoğraflarını, videolarını ve tüm dosylarını lifebox'ta biriktir, istediğin yerde istediğin zamanda aç ve hatırla";
+"Welcome2Info"="lifebox nedir?";
+"Welcome2SubInfo"="Tüm dosyalarını biriktirebileceğin ekstra bir saklama alanıdır. Artık hiçbir şeyi silmek zorunda kalmadan, daima güvende tutabilirsin. lifebox'a yüklediğin herşey 6 kat şifreleme teknolojisi ile güvende.";
+"Welcome3Info"="Hatıraların anında lifebox'ta";
+"Welcome3SubInfo"="Telefonun ve tabletindeki fotoğraflar otomatik lifebox'a yüklenir, güvenli bir şekilde birikir. Sana sadece yeni anıları yaşamak kalır.";
+"Welcome4Info"="Her yerde, her zaman yanında";
+"Welcome4SubInfo"="Hatıraları biriktirmek kadar hatırlamak da önemlidir. Lifebox'taki tüm dosyalarına akıllı telefonundan, tabletinden veya bilgisayarından ulaşabilirsin";
+"Welcome5Info"="Güzel şeyler paylaştıkça çoğalır.";
+"Welcome5SubInfo"="lifebox'ta biriktirdiklerini kolayca paylaşabilirsin.";
+"Welcome6Info"="Anıların yaşam alanını süslesin.";
+"Welcome6SubInfo"="Fotoğraf ve diğer dosyalarını hızlı ve pratik bir şekilde baskı alabilirsin.";

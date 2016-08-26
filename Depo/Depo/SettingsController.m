@@ -27,6 +27,8 @@
 #import "DropboxExportController.h"
 #import "EmailChangeController.h"
 #import "SettingsSocialController.h"
+#import "RecentActivitiesController.h"
+#import "BaseViewController.h"
 
 @interface SettingsController () {
     UILabel *msisdnLabel;
@@ -86,8 +88,7 @@
         [profileInfoArea addSubview:profileImgView];
 
         UITapGestureRecognizer *imageTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapped)];
-//TODO 10august        imageTap.enabled = YES;
-        imageTap.enabled = NO;
+        imageTap.enabled = YES;
         imageTap.numberOfTapsRequired = 1;
         [profileImageView addGestureRecognizer:imageTap];
     }
@@ -295,11 +296,9 @@
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #ifdef LOG2FILE
-//TODO 10August    return 8;
-        return 7;
+    return 9;
 #else
-//TODO 10August    return 7;
-        return 6;
+    return 8;
 #endif
 }
 
@@ -348,6 +347,10 @@
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         return cell;
     } else if (indexPath.row == 2) {
+        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"RecentActivityLinkerTitle", @"") titleColor:nil subTitleText:@"" iconName:@"icon_hp_sonislemler.png" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
+        cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+        return cell;
+    } else if (indexPath.row == 3) {
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"ConnectedDevices", @"") titleColor:nil subTitleText:@"" iconName:@"device_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         return cell;
@@ -355,24 +358,24 @@
 //        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"PasswordSettingsTitle", @"") titleColor:nil subTitleText:@"" iconName:@"icon_set_pass" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
 //        cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
 //        return cell;
-    } else if (indexPath.row == 3) {
+    } else if (indexPath.row == 4) {
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"EmailTitle", @"") titleColor:nil subTitleText:@"" iconName:@"email_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         return cell;
-    } else if (indexPath.row == 4) {
+    } else if (indexPath.row == 5) {
 //        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"ExportFromDropbox", @"") titleColor:nil subTitleText:@"" iconName:@"icon_dbtasi" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"ExportFromDropbox", @"") titleColor:nil subTitleText:@"" iconName:@"nav_download_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         return cell;
-//TODO 10August    } else if (indexPath.row == 5) {
-//TODO 10August        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"SocialMediaTitle", @"") titleColor:nil subTitleText:@"" iconName:@"icon_sm.png" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
-//TODO 10August        cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
-//TODO 10August        return cell;
-    } else if (indexPath.row == 5) {
+    } else if (indexPath.row == 6) {
+        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"SocialMediaTitle", @"") titleColor:nil subTitleText:@"" iconName:@"icon_sm.png" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
+        cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+        return cell;
+    } else if (indexPath.row == 7) {
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"FAQ", @"") titleColor:nil subTitleText:@"" iconName:@"help_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         return cell;
-    } else if (indexPath.row == 6) {
+    } else if (indexPath.row == 8) {
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"Mail Logs" titleColor:nil subTitleText:@"" iconName:@"help_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         return cell;
@@ -390,24 +393,27 @@
             [self didTriggerUpload];
             break;
         case 2:
+            [self didTriggerRecentActivities];
+            break;
+        case 3:
             [self didTriggerConnectedDevices];
             break;
 //        case 3:
 //            [self didTriggerPass];
 //            break;
-        case 3:
+        case 4:
             [self didTriggerEmail];
             break;
-        case 4:
+        case 5:
             [self didTriggerExportFromDropbox];
             break;
-//TODO 10August        case 5:
-//TODO 10August            [self didTriggerExportFromSocial];
-//TODO 10August            break;
-        case 5:
+        case 6:
+            [self didTriggerExportFromSocial];
+            break;
+        case 7:
             [self didTriggerHelp];
             break;
-        case 6:
+        case 8:
             [self triggerMailLog];
             break;
         default:
@@ -504,6 +510,10 @@
     SettingsUploadController *uploadController = [[SettingsUploadController alloc] init];
     uploadController.nav = self.nav;
     [self.nav pushViewController:uploadController animated:YES];
+}
+
+- (void) didTriggerRecentActivities {
+    [APPDELEGATE.base showRecentActivities];
 }
 
 - (void) didTriggerConnectedDevices {

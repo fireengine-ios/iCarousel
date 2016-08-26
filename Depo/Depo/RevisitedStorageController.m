@@ -98,7 +98,7 @@
     [promoButton addTarget:self action:@selector(triggerPromo) forControlEvents:UIControlEventTouchUpInside];
     [tableFooterView addSubview:promoButton];
     
-//TODO 10august    mainTable.tableFooterView = tableFooterView;
+    mainTable.tableFooterView = tableFooterView;
 
     if(APPDELEGATE.session.user.accountType == AccountTypeOther) {
         CustomButton *restoreButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 18, 18) withImageName:@"icon_verif_refresh.png"];

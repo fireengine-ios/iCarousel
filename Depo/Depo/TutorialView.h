@@ -15,5 +15,6 @@
 @property (nonatomic, strong) CheckButton *checkButton;
 
 - (id) initWithFrame:(CGRect)frame withBgImageName:(NSString *) imgName withTitle:(NSString *) titleVal withKey:(NSString *) keyVal;
+- (id) initWithFrame:(CGRect)frame withBgImageName:(NSString *) imgName withTitle:(NSString *) titleVal withKey:(NSString *) keyVal doNotShowFlag:(BOOL) doNotShowFlag;
 
 @end
