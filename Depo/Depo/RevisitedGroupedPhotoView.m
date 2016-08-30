@@ -14,8 +14,9 @@
 #import "CacheUtil.h"
 #import "BaseViewController.h"
 
-#define GROUP_PACKAGE_SIZE IS_IPAD ? 30 : 24
-#define GROUP_IMG_COUNT_PER_ROW 4
+#define GROUP_PACKAGE_SIZE (IS_IPAD ? 30 : 24)
+#define GROUP_IMG_COUNT_PER_ROW (IS_IPAD ? 6 : 4)
+
 #define GROUP_INPROGRESS_KEY @"in_progress"
 
 @interface RevisitedGroupedPhotoView() {
@@ -43,6 +44,7 @@
 @synthesize imgFooterActionMenu;
 @synthesize isSelectible;
 @synthesize progress;
+@synthesize searchField;
 
 - (id) initWithFrame:(CGRect)frame {
     if(self = [super initWithFrame:frame]) {
@@ -83,6 +85,19 @@
         fileTable.dataSource = self;
         fileTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         [self addSubview:fileTable];
+        
+        UIView *tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 60)];
+        searchField = [[MainSearchTextfield alloc] initWithFrame:CGRectMake(20, 10, self.frame.size.width - 40, 40)];
+        searchField.delegate = self;
+        searchField.returnKeyType = UIReturnKeySearch;
+        searchField.userInteractionEnabled = NO;
+        [tableHeaderView addSubview:searchField];
+        fileTable.tableHeaderView = tableHeaderView;
+        
+        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(searchTapped)];
+        tapGestureRecognizer.numberOfTapsRequired = 1;
+        tapGestureRecognizer.enabled = YES;
+        [tableHeaderView addGestureRecognizer:tapGestureRecognizer];
         
         refreshControl = [[UIRefreshControl alloc] init];
         [refreshControl addTarget:self action:@selector(pullData) forControlEvents:UIControlEventValueChanged];
@@ -547,6 +562,19 @@
 - (void) photosAddedFailCallback:(NSString *) errorMessage {
     [progress hide:YES];
     [delegate revisitedGroupedPhotoDidFailMovingWithError:errorMessage];
+}
+
+- (void) textFieldDidEndEditing:(UITextField *) _textField {
+    [searchField resignFirstResponder];
+}
+
+- (BOOL) textFieldShouldReturn:(UITextField *) _textField {
+    [searchField resignFirstResponder];
+    return YES;
+}
+
+- (void) searchTapped {
+    [APPDELEGATE.base triggerInnerSearch];
 }
 
 @end

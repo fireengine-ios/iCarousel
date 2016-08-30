@@ -566,8 +566,9 @@
         [APPDELEGATE.wormhole passMessageObject:@{@"totalCount":[NSNumber numberWithInt: totalAutoSyncCount]} identifier:EXTENSION_WORMHOLE_TOTAL_COUNT_IDENTIFIER];
         [APPDELEGATE.wormhole passMessageObject:@{@"finishedCount":[NSNumber numberWithInt: finishedAutoSyncCount]} identifier:EXTENSION_WORMHOLE_FINISHED_COUNT_IDENTIFIER];
 
-        int activeSyncCount = totalAutoSyncCount - finishedAutoSyncCount;
-        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:activeSyncCount > AUTO_SYNC_ASSET_COUNT ? AUTO_SYNC_ASSET_COUNT : activeSyncCount];
+        /* package 6 bünyesinde kaldırıldı */
+//        int activeSyncCount = totalAutoSyncCount - finishedAutoSyncCount;
+//        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:activeSyncCount > AUTO_SYNC_ASSET_COUNT ? AUTO_SYNC_ASSET_COUNT : activeSyncCount];
     });
 }
 

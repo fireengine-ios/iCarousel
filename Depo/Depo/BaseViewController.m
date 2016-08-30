@@ -100,7 +100,7 @@
         [scroll addSubview:menu];
         
         if(!self.rootViewController) {
-            self.rootViewController = [[HomeController alloc] init];
+            self.rootViewController = [[RevisitedGroupedPhotosController alloc] init];
         }
         
         nav = [[MyNavigationController alloc] initWithRootViewController:self.rootViewController];
@@ -135,6 +135,13 @@
         addButton.delegate = self;
         [scroll addSubview:addButton];
         
+        NSArray *addTypesForController = [APPDELEGATE.mapUtil readAddTypesByController:NSStringFromClass(RevisitedGroupedPhotosController.class)];
+        if(addTypesForController != nil) {
+            [self presentAddButtonWithList:addTypesForController];
+        } else {
+            [self dismissAddButton];
+        }
+
         syncInfoView = [[SyncInfoHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 24)];
         [self.view addSubview:syncInfoView];
         [syncInfoView hide];
@@ -885,6 +892,19 @@
     [MPush hitEvent:@"logged_out"];
     
     [APPDELEGATE triggerLogout];
+}
+
+- (void) triggerInnerSearch {
+    [self callCleanBeforeChange];
+    
+    [MPush hitTag:@"search"];
+    [MPush hitEvent:@"search"];
+    
+    SearchModalController *searchController = [[SearchModalController alloc] init];
+    searchController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:searchController];
+    searchController.nav = modalNav;
+    [self presentViewController:modalNav animated:YES completion:nil];
 }
 
 @end

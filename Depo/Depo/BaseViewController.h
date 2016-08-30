@@ -67,5 +67,6 @@
 - (void) hideSyncInfoView;
 
 - (void) didTriggerHome;
+- (void) triggerInnerSearch;
 
 @end
