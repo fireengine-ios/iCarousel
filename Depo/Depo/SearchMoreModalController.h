@@ -14,8 +14,9 @@
 #import "MoveDao.h"
 #import "ConfirmDeleteModalController.h"
 #import "MoveListModalController.h"
+#import "CustomConfirmView.h"
 
-@interface SearchMoreModalController : MyModalController <UITableViewDelegate, UITableViewDataSource, ConfirmDeleteDelegate, MoveListModalProtocol> {
+@interface SearchMoreModalController : MyModalController <UITableViewDelegate, UITableViewDataSource, ConfirmDeleteDelegate, MoveListModalProtocol, CustomConfirmDelegate> {
     UITableView *searchResultsTable;
     SearchDao *searchDao;
     int listOffset;

@@ -14,12 +14,13 @@
 #import "FavoriteDao.h"
 #import "RenameDao.h"
 #import "ShareLinkDao.h"
+#import "CustomConfirmView.h"
 
 @protocol VideoPreviewDelegate <NSObject>
 - (void) previewedVideoWasDeleted:(MetaFile *) deletedFile;
 @end
 
-@interface VideoPreviewController : MyViewController <CustomAVPlayerDelegate> {
+@interface VideoPreviewController : MyViewController <CustomAVPlayerDelegate, CustomConfirmDelegate> {
     CustomButton *moreButton;
     
     DeleteDao *deleteDao;

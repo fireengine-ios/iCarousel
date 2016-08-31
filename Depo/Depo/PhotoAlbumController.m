@@ -657,19 +657,17 @@
 
 #pragma mark ScrollViewDelegate methods
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView {
-//TODO why    if (photosScroll.frame.origin.y > 160) {
-        if(scrollView.tag == 111) {
-            if(!isLoading) {
-                CGFloat currentOffset = photosScroll.contentOffset.y;
-                CGFloat maximumOffset = photosScroll.contentSize.height - photosScroll.frame.size.height;
-                
-                if (currentOffset - maximumOffset >= 0.0) {
-                    isLoading = YES;
-                    [self dynamicallyLoadNextPage];
-                }
+    if(scrollView.tag == 111) {
+        if(!isLoading) {
+            CGFloat currentOffset = photosScroll.contentOffset.y;
+            CGFloat maximumOffset = photosScroll.contentSize.height - photosScroll.frame.size.height;
+            
+            if (currentOffset - maximumOffset >= 0.0) {
+                isLoading = YES;
+                [self dynamicallyLoadNextPage];
             }
         }
-//    }
+    }
 }
 
 - (void) dynamicallyLoadNextPage {

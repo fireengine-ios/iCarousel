@@ -776,3 +776,5 @@
 
 "LifeboxTeaserInfoLabel"="lifebox'a hoşgeldiniz";
 "LifeboxTeaserInfoSubLabel"="Yepyeni özellikler ve daha iyi bir deneyim bu kutunun içinde";
+
+"DeleteFileInAlbumAlert"="Bu resmin silinmesi durumunda resminiz albümden de kaldırılacaktır. Onaylıyor musunuz?";

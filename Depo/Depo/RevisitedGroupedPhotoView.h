@@ -18,6 +18,7 @@
 #import "DeleteDao.h"
 #import "AlbumAddPhotosDao.h"
 #import "MainSearchTextfield.h"
+#import "CustomConfirmView.h"
 
 @protocol RevisitedGroupedPhotoDelegate <NSObject>
 - (void) revisitedGroupedPhotoDidSelectFile:(MetaFile *) fileSelected withList:(NSArray *) containingList;
@@ -33,7 +34,7 @@
 - (void) revisitedGroupedPhotoChangeTitleTo:(NSString *) pageTitle;
 @end
 
-@interface RevisitedGroupedPhotoView : UIView <UITableViewDelegate, UITableViewDataSource, GroupedCellDelegate, FooterActionsDelegate, UITextFieldDelegate>
+@interface RevisitedGroupedPhotoView : UIView <UITableViewDelegate, UITableViewDataSource, GroupedCellDelegate, FooterActionsDelegate, UITextFieldDelegate, CustomConfirmDelegate>
 
 @property (nonatomic, weak) id<RevisitedGroupedPhotoDelegate> delegate;
 @property (nonatomic, strong) NSMutableArray *files;

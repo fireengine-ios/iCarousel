@@ -373,6 +373,7 @@
 #pragma mark FooterMenuDelegate methods
 
 - (void) footerActionMenuDidSelectDelete:(FooterActionsMenuView *) menu {
+    BOOL inAnyAlbum = NO;
     if([CacheUtil showConfirmDeletePageFlag]) {
         for (NSInteger j = 0; j < [docTable numberOfSections]; ++j) {
             for (NSInteger i = 0; i < [docTable numberOfRowsInSection:j]; ++i) {
@@ -380,6 +381,8 @@
                 if([cell isKindOfClass:[AbstractFileFolderCell class]]) {
                     AbstractFileFolderCell *fileCell = (AbstractFileFolderCell *) cell;
                     if([selectedDocList containsObject:fileCell.fileFolder.uuid]) {
+                        if(fileCell.fileFolder.addedAlbumUuids != nil && [fileCell.fileFolder.addedAlbumUuids count] > 0)
+                            inAnyAlbum = YES;
                         [fileCell addMaskLayer];
                     }
                 }
@@ -426,12 +429,15 @@
 
 - (void) confirmDeleteDidConfirm {
     if(self.deleteType == DeleteTypeFooterMenu) {
+        BOOL inAnyAlbum = NO;
         for (NSInteger j = 0; j < [docTable numberOfSections]; ++j) {
             for (NSInteger i = 0; i < [docTable numberOfRowsInSection:j]; ++i) {
                 UITableViewCell *cell = [docTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]];
                 if([cell isKindOfClass:[AbstractFileFolderCell class]]) {
                     AbstractFileFolderCell *fileCell = (AbstractFileFolderCell *) cell;
                     if([selectedDocList containsObject:fileCell.fileFolder.uuid]) {
+                        if(fileCell.fileFolder.addedAlbumUuids != nil && [fileCell.fileFolder.addedAlbumUuids count] > 0)
+                            inAnyAlbum = YES;
                         [fileCell addMaskLayer];
                     }
                 }

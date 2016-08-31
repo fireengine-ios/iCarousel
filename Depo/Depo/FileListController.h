@@ -21,12 +21,13 @@
 #import "VideoPreviewController.h"
 #import "MusicPreviewController.h"
 #import "FileDetailInWebViewController.h"
+#import "CustomConfirmView.h"
 
 @protocol FileListDelegate <NSObject>
 - (void) folderWasModified;
 @end
 
-@interface FileListController : MyViewController <UITableViewDelegate, UITableViewDataSource, AbstractFileFolderDelegate, FooterActionsDelegate, FileListDelegate, ImagePreviewDelegate, VideoPreviewDelegate, MusicPreviewDelegate, FileDetailInWebViewDelegate> {
+@interface FileListController : MyViewController <UITableViewDelegate, UITableViewDataSource, AbstractFileFolderDelegate, FooterActionsDelegate, FileListDelegate, ImagePreviewDelegate, VideoPreviewDelegate, MusicPreviewDelegate, FileDetailInWebViewDelegate, CustomConfirmDelegate> {
     FileListDao *fileListDao;
     FileListDao *loadMoreDao;
     AddFolderDao *addFolderDao;

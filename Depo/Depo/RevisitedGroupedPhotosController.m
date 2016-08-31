@@ -280,7 +280,6 @@
 }
 
 - (void) confirmDeleteDidConfirm {
-    //TODO check
     if(!groupView.hidden) {
         [groupView shouldContinueDelete];
     }
@@ -344,6 +343,18 @@
 
 - (void) albumModalDidSelectAlbum:(NSString *)albumUuid {
     [groupView destinationAlbumChosenWithUuid:albumUuid];
+}
+
+- (void) photoModalDidTriggerUploadForUrls:(NSArray *)assetUrls {
+    for(UploadRef *ref in assetUrls) {
+        ref.ownerPage = UploadStarterPagePhotos;
+        ref.folderUuid = APPDELEGATE.session.user.mobileUploadFolderUuid;
+        
+        UploadManager *manager = [[UploadManager alloc] initWithUploadInfo:ref];
+        [manager configureUploadAsset:ref.filePath atFolder:nil];
+        [[UploadQueue sharedInstance] addNewUploadTask:manager];
+    }
+    [groupView pullData];
 }
 
 @end

@@ -300,8 +300,15 @@
 
 - (void) fileFolderCellShouldDeleteForFile:(MetaFile *)fileSelected {
     if([CacheUtil showConfirmDeletePageFlag]) {
-        [deleteDao requestDeleteFiles:@[fileSelected.uuid]];
-        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+        fileSelectedRef = fileSelected;
+        if((fileSelected.addedAlbumUuids != nil && [fileSelected.addedAlbumUuids count] > 0)) {
+            CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"ButtonCancel", @"") withApproveTitle:NSLocalizedString(@"OK", @"") withMessage:NSLocalizedString(@"DeleteFileInAlbumAlert", @"") withModalType:ModalTypeApprove];
+            confirm.delegate = self;
+            [APPDELEGATE showCustomConfirm:confirm];
+        } else {
+            [deleteDao requestDeleteFiles:@[fileSelected.uuid]];
+            [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+        }
     } else {
         fileSelectedRef = fileSelected;
         ConfirmDeleteModalController *confirmDelete = [[ConfirmDeleteModalController alloc] init];
@@ -369,8 +376,14 @@
 }
 
 - (void) confirmDeleteDidConfirm {
-    [deleteDao requestDeleteFiles:@[fileSelectedRef.uuid]];
-    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+    if((fileSelectedRef.addedAlbumUuids != nil && [fileSelectedRef.addedAlbumUuids count] > 0)) {
+        CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"ButtonCancel", @"") withApproveTitle:NSLocalizedString(@"OK", @"") withMessage:NSLocalizedString(@"DeleteFileInAlbumAlert", @"") withModalType:ModalTypeApprove];
+        confirm.delegate = self;
+        [APPDELEGATE showCustomConfirm:confirm];
+    } else {
+        [deleteDao requestDeleteFiles:@[fileSelectedRef.uuid]];
+        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+    }
 }
 
 - (void) moveListModalDidSelectFolder:(NSString *)folderUuid {
@@ -390,6 +403,14 @@
 - (void) moveFailCallback:(NSString *) errorMessage {
     [self proceedFailureForProgressView];
     [self showErrorAlertWithMessage:errorMessage];
+}
+
+- (void) didRejectCustomAlert:(CustomConfirmView *) alertView {
+}
+
+- (void) didApproveCustomAlert:(CustomConfirmView *) alertView {
+    [deleteDao requestDeleteFiles:@[fileSelectedRef.uuid]];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
 }
 
 @end

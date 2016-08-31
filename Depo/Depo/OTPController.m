@@ -440,7 +440,6 @@
     
     [[CurioSDK shared] sendCustomId:APPDELEGATE.session.signupReferenceMsisdn];
     
-    //TODO check hangisi dogru
     [[CurioSDK shared] sendEvent:@"LoginSuccess" eventValue:@"true"];
     [[CurioSDK shared] sendEvent:@"Login" eventValue:@"Success"];
     [MPush hitTag:@"Login" withValue:@"Success"];

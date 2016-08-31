@@ -55,6 +55,7 @@
 @synthesize onkatView;
 @synthesize currentSubscription;
 @synthesize advertisementView;
+@synthesize searchField;
 
 - (id)init {
     self = [super init];
@@ -84,6 +85,19 @@
         contactCountDao.successMethod = @selector(contactCountSuccessCallback:);
         contactCountDao.failMethod = @selector(contactCountFailCallback:);
         */
+        
+        UIView *searchBgView = [[UIView alloc] initWithFrame:CGRectMake(20, 10, self.view.frame.size.width - 40, 40)];
+        searchField = [[MainSearchTextfield alloc] initWithFrame:CGRectMake(0, 0, searchBgView.frame.size.width, searchBgView.frame.size.height)];
+        searchField.returnKeyType = UIReturnKeySearch;
+        searchField.userInteractionEnabled = NO;
+        [searchBgView addSubview:searchField];
+        
+        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(searchTapped)];
+        tapGestureRecognizer.numberOfTapsRequired = 1;
+        tapGestureRecognizer.enabled = YES;
+        [searchBgView addGestureRecognizer:tapGestureRecognizer];
+
+        [self.view addSubview:searchBgView];
         
         float chartWidth = 200;
         float labelRadius = 40;
@@ -139,10 +153,10 @@
 
 - (CGRect) usageChartFrame {
     float chartWidth = 200;
-    CGRect usageChartRect = CGRectMake(60, IS_IPHONE_5 ? 40 : 26, chartWidth, chartWidth);
+    CGRect usageChartRect = CGRectMake(60, IS_IPHONE_4_OR_LESS ? 60 : 80, chartWidth, chartWidth);
     if(IS_IPAD) {
         chartWidth = self.view.frame.size.width - 300;
-        usageChartRect = CGRectMake(150, 50, chartWidth, chartWidth);
+        usageChartRect = CGRectMake(150, 90, chartWidth, chartWidth);
     }
     return usageChartRect;
 }
@@ -226,13 +240,13 @@
     usageSummaryView = [[HomeUsageView alloc] initWithFrame:usageSummaryRect withUsage:APPDELEGATE.session.usage];
     [usageChart addSubview:usageSummaryView];
     
-    UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(20, moreStorageButton.frame.origin.y + moreStorageButton.frame.size.height + (IS_IPAD ? 50 : IS_IPHONE_5 ? 20: 5), self.view.frame.size.width - 40, 1)];
+    UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(20, moreStorageButton.frame.origin.y + moreStorageButton.frame.size.height + (IS_IPAD ? 50 : IS_IPHONE_4_OR_LESS ? 10: 20), self.view.frame.size.width - 40, 1)];
     separator.backgroundColor = [Util UIColorForHexColor:@"ebebed"];
     [self.view addSubview:separator];
     
-    CGRect imageRect = CGRectMake(20, separator.frame.origin.y + (IS_IPHONE_5 ? 41 : 11), 75, 60);
-    CGRect musicRect = CGRectMake(122, separator.frame.origin.y + (IS_IPHONE_5 ? 41 : 11), 75, 60);
-    CGRect otherRect = CGRectMake(225, separator.frame.origin.y + (IS_IPHONE_5 ? 41 : 11), 75, 60);
+    CGRect imageRect = CGRectMake(20, separator.frame.origin.y + (IS_IPHONE_4_OR_LESS ? 11 : 41), 75, 60);
+    CGRect musicRect = CGRectMake(122, separator.frame.origin.y + (IS_IPHONE_4_OR_LESS ? 11 : 41), 75, 60);
+    CGRect otherRect = CGRectMake(225, separator.frame.origin.y + (IS_IPHONE_4_OR_LESS ? 11 : 41), 75, 60);
     
     if(IS_IPAD) {
         float leftMarginForIpad = 100;
@@ -263,8 +277,8 @@
 
     if(percentUsageVal >= 80) {
         moreStorageButton.hidden = NO;
-        CGRect currentChartFrame = [self usageChartFrame];
-        usageChart.frame = CGRectMake(currentChartFrame.origin.x, currentChartFrame.origin.y + lastSyncLabel.frame.size.height, currentChartFrame.size.width, currentChartFrame.size.height);
+//        CGRect currentChartFrame = [self usageChartFrame];
+//        usageChart.frame = CGRectMake(currentChartFrame.origin.x, currentChartFrame.origin.y + lastSyncLabel.frame.size.height, currentChartFrame.size.width, currentChartFrame.size.height);
         
         CGRect usageSummaryRect = CGRectMake((usageChart.frame.size.width - 130)/2, (usageChart.frame.size.height - 130)/2, 130, 130);
         if(IS_IPAD) {
@@ -278,8 +292,8 @@
             APPDELEGATE.session.quotaExceed80EventFlag = YES;
         }
     } else {
-        CGRect currentChartFrame = [self usageChartFrame];
-        usageChart.frame = CGRectMake(currentChartFrame.origin.x, currentChartFrame.origin.y + lastSyncLabel.frame.size.height, currentChartFrame.size.width, currentChartFrame.size.height);
+//        CGRect currentChartFrame = [self usageChartFrame];
+//        usageChart.frame = CGRectMake(currentChartFrame.origin.x, currentChartFrame.origin.y + lastSyncLabel.frame.size.height, currentChartFrame.size.width, currentChartFrame.size.height);
         
         CGRect usageSummaryRect = CGRectMake((usageChart.frame.size.width - 130)/2, (usageChart.frame.size.height - 130)/2, 130, 130);
         if(IS_IPAD) {
@@ -326,7 +340,6 @@
 }
 
 - (void) triggerPhotosPage {
-    //TODO düzelt
 //    GroupedPhotosAndVideosController *photo = [[GroupedPhotosAndVideosController alloc] init];
     RevisitedGroupedPhotosController *photo = [[RevisitedGroupedPhotosController alloc] init];
     photo.nav = self.nav;
@@ -494,7 +507,7 @@
             }
         } else {
             if ([currentSubscription.plan.role isEqualToString:@"ultimate"]) {
-                //TODO no action for now
+                //no action for now
             } else {
                 if (percentUsageVal >= 100 && [AppUtil checkAndSetFlags:DIALOGUE_P6_FLAG] ){
                     [AppUtil checkAndSetFlags:DIALOGUE_P5_FLAG];
@@ -630,6 +643,10 @@
         storageController.nav = self.nav;
         [self.nav pushViewController:storageController animated:NO];
     }
+}
+
+- (void) searchTapped {
+    [APPDELEGATE.base triggerInnerSearch];
 }
 
 @end

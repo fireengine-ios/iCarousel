@@ -19,6 +19,7 @@
 #import "OnkatDepoPopUP.h"
 #import "CustomAdvertisementView.h"
 #import "CustomConfirmView.h"
+#import "MainSearchTextfield.h"
 
 @interface HomeController : MyViewController <RecentActivityLinkerDelegate, XYPieChartDelegate, XYPieChartDataSource, OnKatViewDeleagate,CustomAdvertisementDelegate, CustomConfirmDelegate> {
     UsageInfoDao *usageDao;
@@ -42,5 +43,6 @@
 @property (nonatomic, strong) OnkatDepoPopUP *onkatView;
 @property (nonatomic, strong) Subscription *currentSubscription;
 @property (nonatomic, strong) CustomAdvertisementView *advertisementView;
+@property (nonatomic, strong) MainSearchTextfield *searchField;
 
 @end

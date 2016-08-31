@@ -16,12 +16,13 @@
 #import "RenameDao.h"
 #import "ShareLinkDao.h"
 #import "ElasticSearchDao.h"
+#import "CustomConfirmView.h"
 
 @protocol ImagePreviewDelegate <NSObject>
 - (void) previewedImageWasDeleted:(MetaFile *) deletedFile;
 @end
 
-@interface ImagePreviewController : MyViewController <UIScrollViewDelegate, FileDetailFooterDelegate> {
+@interface ImagePreviewController : MyViewController <UIScrollViewDelegate, FileDetailFooterDelegate, CustomConfirmDelegate> {
     UIImageView *imgView;
     FileDetailFooter *footer;
     CustomButton *moreButton;

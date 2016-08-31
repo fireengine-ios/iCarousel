@@ -202,8 +202,14 @@
 }
 
 - (void) confirmDeleteDidConfirm {
-    [deleteDao requestDeleteFiles:@[self.file.uuid]];
-    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+    if(self.file.addedAlbumUuids != nil && [self.file.addedAlbumUuids count] > 0) {
+        CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"ButtonCancel", @"") withApproveTitle:NSLocalizedString(@"OK", @"") withMessage:NSLocalizedString(@"DeleteFileInAlbumAlert", @"") withModalType:ModalTypeApprove];
+        confirm.delegate = self;
+        [APPDELEGATE showCustomConfirm:confirm];
+    } else {
+        [deleteDao requestDeleteFiles:@[self.file.uuid]];
+        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+    }
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -345,6 +351,14 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown || interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight);
+}
+
+- (void) didRejectCustomAlert:(CustomConfirmView *) alertView {
+}
+
+- (void) didApproveCustomAlert:(CustomConfirmView *) alertView {
+    [deleteDao requestDeleteFiles:@[self.file.uuid]];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
 }
 
 @end

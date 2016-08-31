@@ -68,7 +68,7 @@
     productIdentifiers = [NSSet setWithArray:productNames];
     NSLog(@"PRODUCT IDs: %@", productIdentifiers);
 
-    //TODO sil
+    //uncomment for local test 
 //    productIdentifiers = [NSSet setWithObjects:@"mini_package_2_months", @"standard_package_1_month", nil];
     
     completionHandler = [handler copy];

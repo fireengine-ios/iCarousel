@@ -411,8 +411,16 @@
 - (void) fileFolderCellShouldDeleteForFile:(MetaFile *)fileSelected {
     if([CacheUtil showConfirmDeletePageFlag]) {
         uuidListToBeDeleted = @[fileSelected.uuid];
-        [deleteDao requestDeleteFiles:@[fileSelected.uuid]];
-        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+        if(fileSelected.addedAlbumUuids != nil && [fileSelected.addedAlbumUuids count] > 0) {
+            fileSelectedRef = fileSelected;
+            self.deleteType = DeleteTypeSwipeMenu;
+            CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"ButtonCancel", @"") withApproveTitle:NSLocalizedString(@"OK", @"") withMessage:NSLocalizedString(@"DeleteFileInAlbumAlert", @"") withModalType:ModalTypeApprove];
+            confirm.delegate = self;
+            [APPDELEGATE showCustomConfirm:confirm];
+        } else {
+            [deleteDao requestDeleteFiles:@[fileSelected.uuid]];
+            [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+        }
     } else {
         fileSelectedRef = fileSelected;
         self.deleteType = DeleteTypeSwipeMenu;
@@ -744,20 +752,30 @@
 
 - (void) footerActionMenuDidSelectDelete:(FooterActionsMenuView *) menu {
     if([CacheUtil showConfirmDeletePageFlag]) {
+        BOOL anyInAlbum = NO;
         for (NSInteger j = 0; j < [fileTable numberOfSections]; ++j) {
             for (NSInteger i = 0; i < [fileTable numberOfRowsInSection:j]; ++i) {
                 UITableViewCell *cell = [fileTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]];
                 if([cell isKindOfClass:[AbstractFileFolderCell class]]) {
                     AbstractFileFolderCell *fileCell = (AbstractFileFolderCell *) cell;
                     if([selectedFileList containsObject:fileCell.fileFolder.uuid]) {
+                        if(fileCell.fileFolder.addedAlbumUuids != nil && [fileCell.fileFolder.addedAlbumUuids count] > 0)
+                            anyInAlbum = YES;
                         [fileCell addMaskLayer];
                     }
                 }
             }
         }
         uuidListToBeDeleted = selectedFileList;
-        [deleteDao requestDeleteFiles:selectedFileList];
-        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+        if(anyInAlbum) {
+            self.deleteType = DeleteTypeFooterMenu;
+            CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"ButtonCancel", @"") withApproveTitle:NSLocalizedString(@"OK", @"") withMessage:NSLocalizedString(@"DeleteFileInAlbumAlert", @"") withModalType:ModalTypeApprove];
+            confirm.delegate = self;
+            [APPDELEGATE showCustomConfirm:confirm];
+        } else {
+            [deleteDao requestDeleteFiles:selectedFileList];
+            [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+        }
     } else {
         self.deleteType = DeleteTypeFooterMenu;
         [APPDELEGATE.base showConfirmDelete];
@@ -835,25 +853,40 @@
 
 - (void) confirmDeleteDidConfirm {
     if(self.deleteType == DeleteTypeFooterMenu) {
+        BOOL anyInAlbum = NO;
         for (NSInteger j = 0; j < [fileTable numberOfSections]; ++j) {
             for (NSInteger i = 0; i < [fileTable numberOfRowsInSection:j]; ++i) {
                 UITableViewCell *cell = [fileTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]];
                 if([cell isKindOfClass:[AbstractFileFolderCell class]]) {
                     AbstractFileFolderCell *fileCell = (AbstractFileFolderCell *) cell;
                     if([selectedFileList containsObject:fileCell.fileFolder.uuid]) {
+                        if(fileCell.fileFolder.addedAlbumUuids != nil && [fileCell.fileFolder.addedAlbumUuids count] > 0)
+                            anyInAlbum = YES;
                         [fileCell addMaskLayer];
                     }
                 }
             }
         }
         uuidListToBeDeleted = selectedFileList;
-        [deleteDao requestDeleteFiles:selectedFileList];
+        if(anyInAlbum) {
+            CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"ButtonCancel", @"") withApproveTitle:NSLocalizedString(@"OK", @"") withMessage:NSLocalizedString(@"DeleteFileInAlbumAlert", @"") withModalType:ModalTypeApprove];
+            confirm.delegate = self;
+            [APPDELEGATE showCustomConfirm:confirm];
+        } else {
+            [deleteDao requestDeleteFiles:selectedFileList];
+        }
     } else if(self.deleteType == DeleteTypeMoreMenu) {
         uuidListToBeDeleted = @[self.folder.uuid];
         [folderDeleteDao requestDeleteFiles:@[self.folder.uuid]];
     } else if(self.deleteType == DeleteTypeSwipeMenu) {
         uuidListToBeDeleted = @[fileSelectedRef.uuid];
-        [deleteDao requestDeleteFiles:@[fileSelectedRef.uuid]];
+        if(fileSelectedRef.addedAlbumUuids != nil && [fileSelectedRef.addedAlbumUuids count] > 0) {
+            CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"ButtonCancel", @"") withApproveTitle:NSLocalizedString(@"OK", @"") withMessage:NSLocalizedString(@"DeleteFileInAlbumAlert", @"") withModalType:ModalTypeApprove];
+            confirm.delegate = self;
+            [APPDELEGATE showCustomConfirm:confirm];
+        } else {
+            [deleteDao requestDeleteFiles:@[fileSelectedRef.uuid]];
+        }
     }
     [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
 }
@@ -887,6 +920,31 @@
 - (void) previewedFileWasDeleted:(MetaFile *)fileDeleted {
     [self triggerRefresh];
     [self showLoading];
+}
+
+- (void) didRejectCustomAlert:(CustomConfirmView *) alertView {
+}
+
+- (void) didApproveCustomAlert:(CustomConfirmView *) alertView {
+    if(self.deleteType == DeleteTypeSwipeMenu) {
+        uuidListToBeDeleted = @[fileSelectedRef.uuid];
+        [deleteDao requestDeleteFiles:uuidListToBeDeleted];
+        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+    } else if(self.deleteType == DeleteTypeFooterMenu) {
+        for (NSInteger j = 0; j < [fileTable numberOfSections]; ++j) {
+            for (NSInteger i = 0; i < [fileTable numberOfRowsInSection:j]; ++i) {
+                UITableViewCell *cell = [fileTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]];
+                if([cell isKindOfClass:[AbstractFileFolderCell class]]) {
+                    AbstractFileFolderCell *fileCell = (AbstractFileFolderCell *) cell;
+                    if([selectedFileList containsObject:fileCell.fileFolder.uuid]) {
+                        [fileCell addMaskLayer];
+                    }
+                }
+            }
+        }
+        uuidListToBeDeleted = selectedFileList;
+        [deleteDao requestDeleteFiles:selectedFileList];
+    }
 }
 
 @end
