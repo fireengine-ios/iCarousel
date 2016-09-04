@@ -18,6 +18,7 @@
 @property (nonatomic) int videoCount;
 @property (nonatomic, strong) MetaFile *cover;
 @property (nonatomic) long bytes;
+@property (nonatomic) BOOL isReadOnly;
 @property (nonatomic, strong) NSDate *lastModifiedDate;
 @property (nonatomic, strong) NSArray *content;
 

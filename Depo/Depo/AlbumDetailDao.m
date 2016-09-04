@@ -39,12 +39,14 @@
             NSNumber *imageCount = [mainDict objectForKey:@"imageCount"];
             NSNumber *videoCount = [mainDict objectForKey:@"videoCount"];
             NSString *lastModifiedDate = [mainDict objectForKey:@"lastModifiedDate"];
+            NSNumber *readOnly = [mainDict objectForKey:@"readOnly"];
             
             result.imageCount = [self intByNumber:imageCount];
             result.videoCount = [self intByNumber:videoCount];
             result.label = [self strByRawVal:label];
             result.uuid = [self strByRawVal:uuid];
             result.lastModifiedDate = [self dateByRawVal:lastModifiedDate];
+            result.isReadOnly = [self boolByNumber:readOnly];
             
             NSArray *mainArray = [mainDict objectForKey:@"fileList"];
             

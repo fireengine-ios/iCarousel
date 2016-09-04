@@ -50,6 +50,9 @@
         nameField = [[GeneralTextField alloc] initWithFrame:CGRectMake((self.view.frame.size.width - rowWidth)/2, titleLabel.frame.origin.y + titleLabel.frame.size.height + 5, rowWidth, 43) withPlaceholder:NSLocalizedString(@"AlbumNamePlaceholder", @"")];
         nameField.delegate = self;
         nameField.text = self.album.label;
+        if(self.album.isReadOnly) {
+            nameField.enabled = NO;
+        }
         [self.view addSubview:nameField];
         
         CustomLabel *detailLabel = [[CustomLabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - rowWidth)/2, nameField.frame.origin.y + nameField.frame.size.height + (IS_IPAD ? 60 : 30), rowWidth, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:12] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"AlbumDetailSegmentTitle", @"")];

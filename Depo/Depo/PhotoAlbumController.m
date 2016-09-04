@@ -237,6 +237,7 @@
     [self proceedSuccessForProgressView];
     self.album.label = updatedAlbum.label;
     self.album.lastModifiedDate = updatedAlbum.lastModifiedDate;
+    contentModified = YES;
 
     titleLabel.text = [updatedAlbum label];
 }
@@ -342,7 +343,11 @@
         [moreMenuView removeFromSuperview];
         moreMenuView = nil;
     } else {
-        moreMenuView = [[MoreMenuView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height-64) withList:@[[NSNumber numberWithInt:MoreMenuTypeAlbumDetail], [NSNumber numberWithInt:MoreMenuTypeAlbumDelete], [NSNumber numberWithInt:MoreMenuTypeSelect]] withFileFolder:nil withAlbum:self.album];
+        NSArray *menuContent = @[[NSNumber numberWithInt:MoreMenuTypeAlbumDetail], [NSNumber numberWithInt:MoreMenuTypeAlbumDelete], [NSNumber numberWithInt:MoreMenuTypeSelect]];
+        if(self.album.isReadOnly) {
+            menuContent = @[[NSNumber numberWithInt:MoreMenuTypeAlbumDetail], [NSNumber numberWithInt:MoreMenuTypeSelect]];
+        }
+        moreMenuView = [[MoreMenuView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height-64) withList:menuContent withFileFolder:nil withAlbum:self.album];
         moreMenuView.delegate = self;
         [self.view addSubview:moreMenuView];
         [self.view bringSubviewToFront:moreMenuView];
@@ -695,6 +700,9 @@
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    if(self.album.isReadOnly) {
+        [APPDELEGATE.base immediateHideAddButton];
+    }
 }
 
 - (void)didReceiveMemoryWarning

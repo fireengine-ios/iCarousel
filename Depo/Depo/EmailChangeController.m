@@ -119,6 +119,7 @@
         [[CurioSDK shared] sendEvent:@"EmailEntry" eventValue:@"finished"];
         [MPush hitTag:@"EmailEntry" withValue:@"finished"];
         APPDELEGATE.session.user.email = emailField.text;
+        [[NSNotificationCenter defaultCenter] postNotificationName:EMAIL_CHANGED_NOTIFICATION object:nil userInfo:nil];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 }

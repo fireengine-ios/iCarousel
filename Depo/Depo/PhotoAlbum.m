@@ -17,6 +17,7 @@
 @synthesize videoCount;
 @synthesize cover;
 @synthesize bytes;
+@synthesize isReadOnly;
 @synthesize lastModifiedDate;
 @synthesize content;
 

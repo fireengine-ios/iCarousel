@@ -18,6 +18,7 @@
 @interface MenuProfileCell() {
     UIImageView *profileBgView;
     UIImageView *profileImgView;
+    CustomLabel *nameLabel;
 }
 @end
 
@@ -65,16 +66,22 @@
         
         CGRect nameFieldRect = CGRectMake(profileBgView.frame.origin.x + profileBgView.frame.size.width + 15, (60 - nameHeight)/2, nameWidth, nameHeight);
         
-        CustomLabel *nameLabel = [[CustomLabel alloc] initWithFrame:nameFieldRect withFont:nameFont withColor:[Util UIColorForHexColor:@"FFFFFF"] withText:infoFieldVal];
+        nameLabel = [[CustomLabel alloc] initWithFrame:nameFieldRect withFont:nameFont withColor:[Util UIColorForHexColor:@"FFFFFF"] withText:infoFieldVal];
         [self addSubview:nameLabel];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profileImageUpdated) name:PROFILE_IMG_UPLOADED_NOTIFICATION object:nil];
+
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(emailChanged) name:EMAIL_CHANGED_NOTIFICATION object:nil];
     }
     return self;
 }
 
 - (void) profileImageUpdated {
     profileImgView.image = [Util circularScaleNCrop:APPDELEGATE.session.profileImageRef forRect:CGRectMake(0, 0, 44, 44)];
+}
+
+- (void) emailChanged {
+    nameLabel.text = APPDELEGATE.session.user.email;
 }
 
 - (void)awakeFromNib
