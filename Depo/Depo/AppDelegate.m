@@ -27,7 +27,7 @@
 #import "PreLoginController.h"
 #import "LoginController.h"
 #import "PostLoginSyncPrefController.h"
-#import "PhotoListController.h"
+#import "RevisitedGroupedPhotosController.h"
 
 #import "MigrateStatusController.h"
 #import "TermsController.h"
@@ -336,7 +336,7 @@
 }
 
 - (void) triggerPhotosAndVideos {
-    MyViewController *photosController = [[PhotoListController alloc] init];
+    MyViewController *photosController = [[RevisitedGroupedPhotosController alloc] init];
     self.base = [[BaseViewController alloc] initWithRootViewController:photosController];
     [self.window setRootViewController:base];
 }
