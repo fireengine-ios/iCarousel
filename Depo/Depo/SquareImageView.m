@@ -23,10 +23,14 @@
 @synthesize tapGesture;
 
 - (id)initWithFrame:(CGRect)frame withFile:(MetaFile *) _file {
-    return [self initWithFrame:frame withFile:_file withSelectibleStatus:NO];
+    return [self initWithFrame:frame withFile:_file withSelectibleStatus:NO shouldCache:NO];
 }
 
 - (id)initWithFrame:(CGRect)frame withFile:(MetaFile *) _file withSelectibleStatus:(BOOL) selectibleStatus {
+    return [self initWithFrame:frame withFile:_file withSelectibleStatus:selectibleStatus shouldCache:NO];
+}
+
+- (id)initWithFrame:(CGRect)frame withFile:(MetaFile *) _file withSelectibleStatus:(BOOL) selectibleStatus shouldCache:(BOOL) cacheFlag {
     self = [super initWithFrame:frame];
     if (self) {
         self.file = _file;
@@ -35,7 +39,11 @@
         imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
         imgView.contentMode = UIViewContentModeScaleAspectFill;
         imgView.clipsToBounds = YES;
-        [imgView setNoCachedImageWithURL:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:[UIImage imageNamed:@"square_placeholder.png"]];
+        if(cacheFlag) {
+            [imgView setImageWithURL:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:[UIImage imageNamed:@"square_placeholder.png"]];
+        } else {
+            [imgView setNoCachedImageWithURL:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:[UIImage imageNamed:@"square_placeholder.png"]];
+        }
         [self addSubview:imgView];
         
         if(self.file.contentType == ContentTypeVideo) {

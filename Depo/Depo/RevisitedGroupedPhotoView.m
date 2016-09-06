@@ -184,39 +184,43 @@
         [self.files addObjectsFromArray:fileList];
         
         for(MetaFile *row in fileList) {
-            NSString *dateStr = [dateCompareFormat stringFromDate:row.lastModified];
-            NSString *locStr = @"";
-            if(row.detail.geoAdminLevel6 != nil && ![row.detail.geoAdminLevel6 isEqualToString:@""]) {
-                locStr = row.detail.geoAdminLevel6;
-            } else if(row.detail.geoAdminLevel4 != nil && ![row.detail.geoAdminLevel4 isEqualToString:@""]) {
-                locStr = row.detail.geoAdminLevel4;
-            } else if(row.detail.geoAdminLevel2 != nil && ![row.detail.geoAdminLevel2 isEqualToString:@""]) {
-                locStr = row.detail.geoAdminLevel2;
-            }
-            NSString *keyVal = [NSString stringWithFormat:@"%@_%@", dateStr, locStr];
-            if([[groupDict allKeys] count] == 0) {
-                FileInfoGroup *newGroup = [[FileInfoGroup alloc] init];
-                newGroup.customTitle = dateStr;
-                newGroup.locationInfo = locStr;
-                newGroup.fileInfo = [[NSMutableArray alloc] init];
-                [newGroup.fileInfo addObject:row];
-                newGroup.sequence = groupSequence;
-                [groupDict setObject:newGroup forKey:keyVal];
-                
-                groupSequence ++;
-            } else {
-                FileInfoGroup *currentGroup = [groupDict objectForKey:keyVal];
-                if(currentGroup != nil) {
-                    [currentGroup.fileInfo addObject:row];
-                } else {
+            if(row.detail.fileDate) {
+                NSString *dateStr = [dateCompareFormat stringFromDate:row.detail.fileDate];
+                /*
+                 NSString *locStr = @"";
+                 if(row.detail.geoAdminLevel6 != nil && ![row.detail.geoAdminLevel6 isEqualToString:@""]) {
+                 locStr = row.detail.geoAdminLevel6;
+                 } else if(row.detail.geoAdminLevel4 != nil && ![row.detail.geoAdminLevel4 isEqualToString:@""]) {
+                 locStr = row.detail.geoAdminLevel4;
+                 } else if(row.detail.geoAdminLevel2 != nil && ![row.detail.geoAdminLevel2 isEqualToString:@""]) {
+                 locStr = row.detail.geoAdminLevel2;
+                 }
+                 NSString *keyVal = [NSString stringWithFormat:@"%@_%@", dateStr, locStr];
+                 */
+                if([[groupDict allKeys] count] == 0) {
                     FileInfoGroup *newGroup = [[FileInfoGroup alloc] init];
                     newGroup.customTitle = dateStr;
-                    newGroup.locationInfo = locStr;
+                    newGroup.locationInfo = @"";
                     newGroup.fileInfo = [[NSMutableArray alloc] init];
                     [newGroup.fileInfo addObject:row];
                     newGroup.sequence = groupSequence;
-                    [groupDict setObject:newGroup forKey:keyVal];
+                    [groupDict setObject:newGroup forKey:dateStr];
+                    
                     groupSequence ++;
+                } else {
+                    FileInfoGroup *currentGroup = [groupDict objectForKey:dateStr];
+                    if(currentGroup != nil) {
+                        [currentGroup.fileInfo addObject:row];
+                    } else {
+                        FileInfoGroup *newGroup = [[FileInfoGroup alloc] init];
+                        newGroup.customTitle = dateStr;
+                        newGroup.locationInfo = @"";
+                        newGroup.fileInfo = [[NSMutableArray alloc] init];
+                        [newGroup.fileInfo addObject:row];
+                        newGroup.sequence = groupSequence;
+                        [groupDict setObject:newGroup forKey:dateStr];
+                        groupSequence ++;
+                    }
                 }
             }
         }

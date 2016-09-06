@@ -48,7 +48,7 @@
                 counter++;
             } else if([row isKindOfClass:[MetaFile class]]) {
                 MetaFile *castedRow = (MetaFile *) row;
-                SquareImageView *rowImgView = [[SquareImageView alloc] initWithFrame:CGRectMake((counter%imageCountPerRow)*imageWidth, 40 + floorf(counter/imageCountPerRow)*imageWidth, imageWidth, imageWidth) withFile:castedRow withSelectibleStatus:selectFlag];
+                SquareImageView *rowImgView = [[SquareImageView alloc] initWithFrame:CGRectMake((counter%imageCountPerRow)*imageWidth, 40 + floorf(counter/imageCountPerRow)*imageWidth, imageWidth, imageWidth) withFile:castedRow withSelectibleStatus:selectFlag shouldCache:YES];
                 rowImgView.delegate = self;
                 [self addSubview:rowImgView];
                 counter++;
@@ -109,6 +109,11 @@
 
 - (void) squareImageWasSelectedForView:(SquareImageView *) ref {
     [delegate groupedCellImageWasSelectedForView:ref];
+}
+
+- (void) prepareForReuse {
+    [super prepareForReuse];
+    NSLog(@"At prepareForReuse");
 }
 
 @end
