@@ -48,6 +48,10 @@
         [self addGestureRecognizer:tapGestureRecognizer];
         
         [self addSubview:modalView];
+
+        CustomButton *closeButton = [[CustomButton alloc] initWithFrame:CGRectMake(modalView.frame.size.width - 40, 0, 40, 40) withCenteredImageName:@"close_icon.png"];
+        [closeButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
+        [modalView addSubview:closeButton];
     }
     return self;
 }
@@ -57,6 +61,11 @@
         return NO;
     }
     return YES;
+}
+
+- (void) dismiss {
+    [field resignFirstResponder];
+    [self removeFromSuperview];
 }
 
 - (void) triggerResign {
