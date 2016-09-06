@@ -288,7 +288,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     [request setValue:@"1" forHTTPHeaderField:@"x-meta-strategy"];
     [request setValue:@"100-continue" forHTTPHeaderField:@"Expect"];
 
-    if(self.uploadRef.referenceFolderName != nil) {
+    if(self.uploadRef.referenceFolderName != nil && !isVideo) {
         NSString *utf8Str = [self.uploadRef.referenceFolderName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         [request setValue:utf8Str forHTTPHeaderField:@"X-Object-Meta-Album-Label"];
     }
