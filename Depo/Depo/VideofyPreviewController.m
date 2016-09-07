@@ -11,7 +11,6 @@
 #import "AppDelegate.h"
 #import "BaseViewController.h"
 #import "AFNetworking.h"
-#import "VideofyPreparationInfoView.h"
 
 @interface VideofyPreviewController ()
 
@@ -132,6 +131,7 @@
     }
     [self hideLoading];
     VideofyPreparationInfoView *finalView = [[VideofyPreparationInfoView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.bounds.size.width, APPDELEGATE.window.bounds.size.height)];
+    finalView.delegate = self;
     [APPDELEGATE.window addSubview:finalView];
 }
 
@@ -256,6 +256,10 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown || interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight);
+}
+
+- (void) videofyPreparationViewShouldDismiss {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

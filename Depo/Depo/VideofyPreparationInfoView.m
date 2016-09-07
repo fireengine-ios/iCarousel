@@ -15,6 +15,8 @@
 
 @implementation VideofyPreparationInfoView
 
+@synthesize delegate;
+
 - (id) initWithFrame:(CGRect)frame {
     if(self = [super initWithFrame:frame]) {
         UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
@@ -42,7 +44,8 @@
 }
 
 - (void) triggerHome {
-    [APPDELEGATE triggerHome];
+    [delegate videofyPreparationViewShouldDismiss];
+    [self removeFromSuperview];
 }
 
 @end

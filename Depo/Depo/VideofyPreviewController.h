@@ -10,8 +10,9 @@
 #import "Story.h"
 #import "CustomAVPlayer.h"
 #import "VideofyCreateDao.h"
+#import "VideofyPreparationInfoView.h"
 
-@interface VideofyPreviewController : MyModalController <CustomAVPlayerDelegate>
+@interface VideofyPreviewController : MyModalController <CustomAVPlayerDelegate, VideofyPreparationInfoDelegate>
 
 @property (nonatomic, strong) Story *story;
 @property (nonatomic, strong) CustomAVPlayer *avPlayer;

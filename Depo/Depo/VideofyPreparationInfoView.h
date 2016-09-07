@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol VideofyPreparationInfoDelegate <NSObject>
+- (void) videofyPreparationViewShouldDismiss;
+@end
+
 @interface VideofyPreparationInfoView : UIView
+
+@property (nonatomic, weak) id<VideofyPreparationInfoDelegate> delegate;
 
 @end
