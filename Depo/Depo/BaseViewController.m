@@ -54,8 +54,6 @@
 #import "NewFeatureInfoView.h"
 #import "RevisitedGroupedPhotosController.h"
 
-#define kMenuOpenOriginX 276
-
 @interface BaseViewController ()
 
 @end
@@ -223,11 +221,16 @@
                      }];
 }
 
-- (void) viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     transparentView.hidden = YES;
     self.scroll.contentOffset = CGPointMake(kMenuOpenOriginX, 0.0);
     menuOpen = NO;
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
 
     if(![AppUtil readLifeboxTeaserFlag]) {
         NewFeatureInfoView *featurePresentView = [[NewFeatureInfoView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];

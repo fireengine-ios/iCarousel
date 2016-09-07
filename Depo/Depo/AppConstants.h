@@ -288,6 +288,8 @@ _Pragma("clang diagnostic pop") \
 //#define REACH_US_MAIL_ADDRESS @"burcu.atalan@turkcell.com.tr"
 #define REACH_US_MAIL_ADDRESS @"DESTEK-AKILLIDEPO@turkcell.com.tr"
 
+#define kMenuOpenOriginX 276
+
 typedef enum {
     LoginTypeRadius = 0,
     LoginTypeWebSifre

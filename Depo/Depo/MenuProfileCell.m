@@ -14,6 +14,7 @@
 #import "Util.h"
 #import "UIImageView+AFNetworking.h"
 #import "AppUtil.h"
+#import "AppConstants.h"
 
 @interface MenuProfileCell() {
     UIImageView *profileBgView;
@@ -56,7 +57,12 @@
             infoFieldVal = APPDELEGATE.session.user.email;
         }
         
-        int nameWidth = self.frame.size.width - profileBgView.frame.origin.x - profileBgView.frame.size.width - 15;
+        UIImage *settingsIcon = [UIImage imageNamed:@"icon_settings.png"];
+        UIImageView *settingsIconView = [[UIImageView alloc] initWithFrame:CGRectMake(profileBgView.frame.origin.x + profileBgView.frame.size.width + 15, (60 - settingsIcon.size.height)/2, settingsIcon.size.width, settingsIcon.size.height)];
+        settingsIconView.image = settingsIcon;
+        [self addSubview:settingsIconView];
+        
+        int nameWidth = kMenuOpenOriginX - profileBgView.frame.origin.x - profileBgView.frame.size.width - settingsIcon.size.width - 25;
         UIFont *nameFont = [UIFont fontWithName:@"TurkcellSaturaDem" size:18];
         
         int nameHeight =  [Util calculateHeightForText:infoFieldVal forWidth:nameWidth forFont:nameFont] + 5;
@@ -64,9 +70,10 @@
             nameHeight = 60;
         }
         
-        CGRect nameFieldRect = CGRectMake(profileBgView.frame.origin.x + profileBgView.frame.size.width + 15, (60 - nameHeight)/2, nameWidth, nameHeight);
+        CGRect nameFieldRect = CGRectMake(profileBgView.frame.origin.x + profileBgView.frame.size.width + settingsIcon.size.width + 20, (60 - nameHeight)/2, nameWidth, nameHeight);
         
-        nameLabel = [[CustomLabel alloc] initWithFrame:nameFieldRect withFont:nameFont withColor:[Util UIColorForHexColor:@"FFFFFF"] withText:infoFieldVal];
+        nameLabel = [[CustomLabel alloc] initWithFrame:nameFieldRect withFont:nameFont withColor:[Util UIColorForHexColor:@"FFFFFF"] withText:infoFieldVal withAlignment:NSTextAlignmentLeft numberOfLines:1];
+        //nameLabel.adjustsFontSizeToFitWidth = YES;
         [self addSubview:nameLabel];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profileImageUpdated) name:PROFILE_IMG_UPLOADED_NOTIFICATION object:nil];
