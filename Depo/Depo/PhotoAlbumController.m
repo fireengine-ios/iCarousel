@@ -458,7 +458,9 @@
     [cancelButton addTarget:self action:@selector(cancelSelectible) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:cancelButton];
     
-    [APPDELEGATE.base immediateHideAddButton];
+    if(!self.album.isReadOnly) {
+        [APPDELEGATE.base immediateHideAddButton];
+    }
     
     [selectedFileList removeAllObjects];
     
