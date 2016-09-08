@@ -35,7 +35,7 @@
         float videoHeight = 201;
         
         AVPlayerLayer *videoLayer = [AVPlayerLayer playerLayerWithPlayer:avPlayer];
-        videoLayer.frame = CGRectMake((self.frame.size.width - videoWidth)/2, 30, videoWidth, videoHeight);
+        videoLayer.frame = CGRectMake((self.frame.size.width - videoWidth)/2, 50, videoWidth, videoHeight);
         videoLayer.videoGravity = AVLayerVideoGravityResize;
         videoLayer.backgroundColor = [UIColor whiteColor].CGColor;
         [self.layer addSublayer:videoLayer];
@@ -45,7 +45,7 @@
         [closeButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:closeButton];
 
-        float topIndex = videoHeight + 40;
+        float topIndex = videoHeight + 80;
         
 //        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemDidFinishPlaying:) name:AVPlayerItemDidPlayToEndTimeNotification object:[avPlayer currentItem]];
         
