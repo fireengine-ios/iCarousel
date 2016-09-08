@@ -15,6 +15,7 @@
 @implementation SettingsHelpController
 
 @synthesize contentView;
+@synthesize faqUrlDao;
 
 - (id)init {
     self = [super init];
@@ -33,9 +34,23 @@
     contentView.delegate = self;
     [self.view addSubview:contentView];
     
-    NSURL *url = [NSURL URLWithString:@"http://trcll.im/zbQxU"];
+    faqUrlDao = [[FaqUrlDao alloc] init];
+    faqUrlDao.delegate = self;
+    faqUrlDao.successMethod = @selector(faqUrlSuccessCallback:);
+    faqUrlDao.failMethod = @selector(faqUrlFailCallback:);
+    
+    [faqUrlDao requestFaqUrl];
+    [self showLoading];
+}
+
+- (void) faqUrlSuccessCallback:(NSString *) urlToCall {
+    NSURL *url = [NSURL URLWithString:urlToCall];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [contentView loadRequest:request];
+}
+
+- (void) faqUrlFailCallback:(NSString *) errorMessage {
+    [self hideLoading];
 }
 
 - (void) webViewDidStartLoad:(UIWebView *)webView {

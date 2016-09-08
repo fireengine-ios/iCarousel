@@ -30,6 +30,7 @@
 @synthesize selectedOption;
 @synthesize assetsLibrary;
 @synthesize wifi3gCell;
+@synthesize locInfoPopup;
 
 - (id) init {
     if(self = [super init]) {
@@ -132,32 +133,7 @@
 }
 
 - (void) continueClicked {
-    if(autoSyncSwitch.isOn) {
-        if(![CLLocationManager locationServicesEnabled]) {
-            [self showErrorAlertWithMessage:NSLocalizedString(@"LocForAutoSyncError", @"")];
-            return;
-        } else {
-            [LocationManager sharedInstance].delegate = self;
-            [[LocationManager sharedInstance] startLocationManager];
-        }
-    } else {
-        [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOff];
-        [CacheUtil writeCachedSettingSyncContacts:EnableOptionOff];
-
-        [[CurioSDK shared] sendEvent:@"SyncClosed" eventValue:@"true"];
-        [MPush hitTag:@"SyncClosed" withValue:@"true"];
-        [[CurioSDK shared] sendEvent:@"FirstAutoSyncPref" eventValue:@"closed"];
-
-        [MPush hitTag:@"firstautosync_off"];
-        [MPush hitEvent:@"firstautosync_off"];
-        
-        [CacheUtil writeCachedSettingSyncingConnectionType:selectedOption];
-        [CacheUtil writeCachedSettingDataRoaming:NO];
-        
-        [AppUtil writeFirstVisitOverFlag];
-        //    [APPDELEGATE triggerHome];
-        [APPDELEGATE startOpeningPage];
-    }
+    [self showLocInfoPopup];
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
@@ -304,6 +280,41 @@
             NSURL *url = [NSURL URLWithString:@"http://trcll.im/zbQxU"];
             [[UIApplication sharedApplication] openURL:url];
         }
+    }
+}
+
+- (void) showLocInfoPopup {
+    if(autoSyncSwitch.isOn) {
+        locInfoPopup = [[CustomInfoWithIconView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) withIcon:@"icon_locationperm.png" withInfo:NSLocalizedString(@"LocInfoPopup", @"") withSubInfo:NSLocalizedString(@"LocSubinfoPopup", @"") isCloseable:YES];
+        locInfoPopup.delegate = self;
+        [self.view addSubview:locInfoPopup];
+    } else {
+        [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOff];
+        [CacheUtil writeCachedSettingSyncContacts:EnableOptionOff];
+        
+        [[CurioSDK shared] sendEvent:@"SyncClosed" eventValue:@"true"];
+        [MPush hitTag:@"SyncClosed" withValue:@"true"];
+        [[CurioSDK shared] sendEvent:@"FirstAutoSyncPref" eventValue:@"closed"];
+        
+        [MPush hitTag:@"firstautosync_off"];
+        [MPush hitEvent:@"firstautosync_off"];
+        
+        [CacheUtil writeCachedSettingSyncingConnectionType:selectedOption];
+        [CacheUtil writeCachedSettingDataRoaming:NO];
+        
+        [AppUtil writeFirstVisitOverFlag];
+        //    [APPDELEGATE triggerHome];
+        [APPDELEGATE startOpeningPage];
+    }
+}
+
+- (void) customInfoWithIconViewDidDismiss {
+    if(![CLLocationManager locationServicesEnabled]) {
+        [self showErrorAlertWithMessage:NSLocalizedString(@"LocForAutoSyncError", @"")];
+        return;
+    } else {
+        [LocationManager sharedInstance].delegate = self;
+        [[LocationManager sharedInstance] startLocationManager];
     }
 }
 

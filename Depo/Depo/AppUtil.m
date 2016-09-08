@@ -34,7 +34,7 @@
     MetaMenu *homeMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeHome];
     homeMenu.title = NSLocalizedString(@"MenuHome", @"");
     homeMenu.iconName = @"home_icon.png";
-    homeMenu.selectedIconName = @"yellow_home_icon.png";
+    homeMenu.selectedIconName = @"home_icon.png";
     [result addObject:homeMenu];
     
     MetaMenu *favMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeFav];

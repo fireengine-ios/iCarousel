@@ -169,6 +169,8 @@
 
 #define FILE_TAG_URL BASE_URL@"/filesystem/metadata"
 
+#define FAQ_RETRIEVAL_URL BASE_URL@"/faq/url/%@"
+
 #define TAGGED_FILE_LIST_URL BASE_URL@"/search/byField?fieldName=metadata.Cellograf-Request-Id&fieldValue=%@&sortBy=%@&sortOrder=%@&page=%d&size=%d"
 
 #define APN_URL @"http://pushserver.turkcell.com.tr/PushServer/rest/registerdevice/"

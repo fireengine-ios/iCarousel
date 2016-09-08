@@ -778,3 +778,6 @@
 "LifeboxTeaserInfoSubLabel"="Yepyeni özellikler ve daha iyi bir deneyim bu kutunun içinde";
 
 "DeleteFileInAlbumAlert"="Bu resmin silinmesi durumunda resminiz albümden de kaldırılacaktır. Onaylıyor musunuz?";
+
+"LocInfoPopup"="Lokasyon İzni";
+"LocSubinfoPopup"="Arka planda dosyalarınızın güncellenmesi için lokasyonunuz kullanılacaktır.";

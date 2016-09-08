@@ -331,9 +331,7 @@
         [delegate photoAlbumDidChange:self.album.uuid];
     }
     [self.nav popViewControllerAnimated:YES];
-    if(!self.album.isReadOnly) {
-        [APPDELEGATE.base checkAndShowAddButton];
-    }
+    [APPDELEGATE.base checkAndShowAddButton];
 }
 
 - (void) triggerMore {

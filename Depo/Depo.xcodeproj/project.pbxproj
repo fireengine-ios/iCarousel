@@ -970,6 +970,11 @@
 		94B3BE1F1D7FC84D0086D05E /* icon_settings@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B3BE1D1D7FC84D0086D05E /* icon_settings@3x.png */; };
 		94B3BE221D810EFA0086D05E /* Default_750.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B3BE201D810EFA0086D05E /* Default_750.png */; };
 		94B3BE231D810EFA0086D05E /* Default_1242.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B3BE211D810EFA0086D05E /* Default_1242.png */; };
+		94B3BE251D81E3260086D05E /* icon_locationperm@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B3BE241D81E3260086D05E /* icon_locationperm@2x.png */; };
+		94B3BE271D81E32D0086D05E /* icon_locationperm@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B3BE261D81E32D0086D05E /* icon_locationperm@3x.png */; };
+		94B3BE291D81E3340086D05E /* icon_locationperm.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B3BE281D81E3340086D05E /* icon_locationperm.png */; };
+		94B3BE2C1D81E3EA0086D05E /* CustomInfoWithIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94B3BE2B1D81E3EA0086D05E /* CustomInfoWithIconView.m */; };
+		94B3BE2F1D81F7C40086D05E /* FaqUrlDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94B3BE2E1D81F7C40086D05E /* FaqUrlDao.m */; };
 		94B6C8751CB657520083C1A8 /* icon_yukle_depo.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B6C8741CB657520083C1A8 /* icon_yukle_depo.png */; };
 		94B6C8771CB6575A0083C1A8 /* icon_yukle_depo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B6C8761CB6575A0083C1A8 /* icon_yukle_depo@2x.png */; };
 		94B6C8791CB657610083C1A8 /* icon_yukle_depo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B6C8781CB657610083C1A8 /* icon_yukle_depo@3x.png */; };
@@ -2449,6 +2454,13 @@
 		94B3BE1D1D7FC84D0086D05E /* icon_settings@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_settings@3x.png"; sourceTree = "<group>"; };
 		94B3BE201D810EFA0086D05E /* Default_750.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default_750.png; sourceTree = "<group>"; };
 		94B3BE211D810EFA0086D05E /* Default_1242.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default_1242.png; sourceTree = "<group>"; };
+		94B3BE241D81E3260086D05E /* icon_locationperm@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_locationperm@2x.png"; sourceTree = "<group>"; };
+		94B3BE261D81E32D0086D05E /* icon_locationperm@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_locationperm@3x.png"; sourceTree = "<group>"; };
+		94B3BE281D81E3340086D05E /* icon_locationperm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_locationperm.png; sourceTree = "<group>"; };
+		94B3BE2A1D81E3EA0086D05E /* CustomInfoWithIconView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomInfoWithIconView.h; sourceTree = "<group>"; };
+		94B3BE2B1D81E3EA0086D05E /* CustomInfoWithIconView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomInfoWithIconView.m; sourceTree = "<group>"; };
+		94B3BE2D1D81F7C40086D05E /* FaqUrlDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaqUrlDao.h; sourceTree = "<group>"; };
+		94B3BE2E1D81F7C40086D05E /* FaqUrlDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaqUrlDao.m; sourceTree = "<group>"; };
 		94B6C8741CB657520083C1A8 /* icon_yukle_depo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_yukle_depo.png; sourceTree = "<group>"; };
 		94B6C8761CB6575A0083C1A8 /* icon_yukle_depo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_yukle_depo@2x.png"; sourceTree = "<group>"; };
 		94B6C8781CB657610083C1A8 /* icon_yukle_depo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_yukle_depo@3x.png"; sourceTree = "<group>"; };
@@ -2669,6 +2681,8 @@
 				051412A419D46748000EAE63 /* FloatingAddMenu.m */,
 				94C7CEE31D2C3A0A0040897A /* CustomEntryPopupView.h */,
 				94C7CEE41D2C3A0A0040897A /* CustomEntryPopupView.m */,
+				94B3BE2A1D81E3EA0086D05E /* CustomInfoWithIconView.h */,
+				94B3BE2B1D81E3EA0086D05E /* CustomInfoWithIconView.m */,
 			);
 			name = modal;
 			sourceTree = "<group>";
@@ -3218,6 +3232,8 @@
 				94DCA10B1D3D8F67000965AE /* TaggedFileListDao.m */,
 				94DCA10D1D3D9B34000965AE /* CellographOrdersDao.h */,
 				94DCA10E1D3D9B34000965AE /* CellographOrdersDao.m */,
+				94B3BE2D1D81F7C40086D05E /* FaqUrlDao.h */,
+				94B3BE2E1D81F7C40086D05E /* FaqUrlDao.m */,
 			);
 			name = http;
 			sourceTree = "<group>";
@@ -3619,6 +3635,9 @@
 			children = (
 				94B3BE201D810EFA0086D05E /* Default_750.png */,
 				94B3BE211D810EFA0086D05E /* Default_1242.png */,
+				94B3BE281D81E3340086D05E /* icon_locationperm.png */,
+				94B3BE241D81E3260086D05E /* icon_locationperm@2x.png */,
+				94B3BE261D81E32D0086D05E /* icon_locationperm@3x.png */,
 				94FBAEF41D5B923C00C8E6F1 /* img_lifebox.png */,
 				94FBAEF61D5B924300C8E6F1 /* img_lifebox@2x.png */,
 				94FBAEF81D5B924900C8E6F1 /* img_lifebox@3x.png */,
@@ -4608,6 +4627,7 @@
 			files = (
 				949BB5CB1D707F8800BED9DB /* lifebox_teaser.mp4 in Resources */,
 				056F29D21C4E8071001DD486 /* icon_verif_audio@3x.png in Resources */,
+				94B3BE251D81E3260086D05E /* icon_locationperm@2x.png in Resources */,
 				059AD37E1A1E26A000AA41BD /* circle_doc_icon.png in Resources */,
 				94328BD81CC3E03C00599CEE /* img_baski_1.jpg in Resources */,
 				05A7CE5E1A7FC0FD00020B6F /* yuvarlakbulut.png in Resources */,
@@ -4762,6 +4782,7 @@
 				057C9D6B1A2B48E6001DDDEC /* contacts_icon@2x.png in Resources */,
 				05994F981A0B57080081F000 /* music_backward@2x.png in Resources */,
 				0589066A19CC524900A9E517 /* TurkcellSaturaBol.ttf in Resources */,
+				94B3BE291D81E3340086D05E /* icon_locationperm.png in Resources */,
 				05A7CE581A7FBD3E00020B6F /* percent.png in Resources */,
 				05B1847E1A24C07E00FDA023 /* nav_download_icon.png in Resources */,
 				05AF7C9F1A1CC08E00F5011A /* activity_bullet.png in Resources */,
@@ -5068,6 +5089,7 @@
 				9433BD0D1D21EB7A00991483 /* icon_dbtasi.png in Resources */,
 				0526447C19D5A26400B63759 /* android_icon.png in Resources */,
 				94B2F3511D373E5C009CD8B1 /* icon_ig_aktar@3x.png in Resources */,
+				94B3BE271D81E32D0086D05E /* icon_locationperm@3x.png in Resources */,
 				9498C00D1D537B3B009AF159 /* icon_more@3x.png in Resources */,
 				058BC2381A30D46C0007F4DE /* textfield_bg@2x.png in Resources */,
 				050D4C401A31E77F00809A01 /* sync_prefs.png in Resources */,
@@ -5342,6 +5364,7 @@
 				051E1E8919CAC92700FD1E03 /* ASIDownloadCache.m in Sources */,
 				053EC45119DA99C4000C2B77 /* NewFolderModalController.m in Sources */,
 				058B32941A14ABEF00A291C4 /* AlbumRemovePhotosDao.m in Sources */,
+				94B3BE2C1D81E3EA0086D05E /* CustomInfoWithIconView.m in Sources */,
 				05DEB1C31A80B8FE007793DD /* MigrationStatus.m in Sources */,
 				05DEB1F21A81775F007793DD /* SyncStatus.m in Sources */,
 				05D2B19A19E679E500FC309D /* PhotoAlbum.m in Sources */,
@@ -5669,6 +5692,7 @@
 				05E8113519DF10340063F99A /* RefAlbumCell.m in Sources */,
 				05DEB1EA1A81775F007793DD /* ContactDevice.m in Sources */,
 				94DCA10C1D3D8F67000965AE /* TaggedFileListDao.m in Sources */,
+				94B3BE2F1D81F7C40086D05E /* FaqUrlDao.m in Sources */,
 				05DEB1EC1A81775F007793DD /* ContactUtil.m in Sources */,
 				050D4C2F1A31E12F00809A01 /* PostLoginSyncPrefController.m in Sources */,
 			);

@@ -124,6 +124,7 @@
 }
 
 - (void) pullData {
+    isLoading = YES;
     listOffset = 0;
     [albumsDao requestAlbumListForStart:0 andSize:50 andSortType:APPDELEGATE.session.sortType];
     
@@ -142,6 +143,7 @@
 }
 
 - (void) albumListFailCallback:(NSString *) errorMessage {
+    isLoading = NO;
     [progress hide:YES];
     [delegate revisitedAlbumListDidFailRetrievingList:errorMessage];
 }
@@ -183,7 +185,7 @@
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (albums.count == 0)
-        return 1;
+        return isLoading ? 0 : 1;
     return [albums count];
 }
 

@@ -26,22 +26,26 @@
     if(self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor whiteColor];
         
-        CustomButton *closeButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 50, 10, 40, 40) withCenteredImageName:@"close_icon.png"];
-        [closeButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:closeButton];
-        
         NSURL *mp4Url = [[NSBundle mainBundle] URLForResource:@"lifebox_teaser" withExtension:@"mp4"];
         
         avPlayer = [AVPlayer playerWithURL:mp4Url];
         avPlayer.actionAtItemEnd = AVPlayerActionAtItemEndPause;
 
+        float videoWidth = 180; //manually set to prevent black marging
+        float videoHeight = 201;
+        
         AVPlayerLayer *videoLayer = [AVPlayerLayer playerLayerWithPlayer:avPlayer];
-        videoLayer.frame = CGRectMake(30, 30, self.frame.size.width - 60, self.frame.size.width - 40);
-        videoLayer.videoGravity = AVLayerVideoGravityResizeAspect;
+        videoLayer.frame = CGRectMake((self.frame.size.width - videoWidth)/2, 30, videoWidth, videoHeight);
+        videoLayer.videoGravity = AVLayerVideoGravityResize;
+        videoLayer.backgroundColor = [UIColor whiteColor].CGColor;
         [self.layer addSublayer:videoLayer];
         [avPlayer play];
         
-        float topIndex = self.frame.size.width + 10;
+        CustomButton *closeButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 50, 10, 40, 40) withCenteredImageName:@"close_icon.png"];
+        [closeButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:closeButton];
+
+        float topIndex = videoHeight + 40;
         
 //        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemDidFinishPlaying:) name:AVPlayerItemDidPlayToEndTimeNotification object:[avPlayer currentItem]];
         

@@ -7,9 +7,11 @@
 //
 
 #import "MyViewController.h"
+#import "FaqUrlDao.h"
 
 @interface SettingsHelpController : MyViewController <UIWebViewDelegate>
 
 @property (nonatomic, strong) UIWebView *contentView;
+@property (nonatomic, strong) FaqUrlDao *faqUrlDao;
 
 @end
