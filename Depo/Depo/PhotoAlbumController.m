@@ -76,11 +76,11 @@
         
         float mainImageHeight = self.view.frame.size.width/2;
 
-        if(self.album.cover.tempDownloadUrl) {
+        if(self.album.cover.detail.thumbLargeUrl) {
             UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, mainImageHeight)];
             [bgImgView setClipsToBounds:YES];
             bgImgView.contentMode = UIViewContentModeScaleAspectFill;
-            [bgImgView setImageWithURL:[NSURL URLWithString:self.album.cover.tempDownloadUrl]];
+            [bgImgView setImageWithURL:[NSURL URLWithString:self.album.cover.detail.thumbLargeUrl]];
             [self.view addSubview:bgImgView];
             
             UIImageView *maskImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, mainImageHeight)];
@@ -331,7 +331,9 @@
         [delegate photoAlbumDidChange:self.album.uuid];
     }
     [self.nav popViewControllerAnimated:YES];
-    [APPDELEGATE.base checkAndShowAddButton];
+    if(!self.album.isReadOnly) {
+        [APPDELEGATE.base checkAndShowAddButton];
+    }
 }
 
 - (void) triggerMore {
@@ -477,7 +479,9 @@
     isSelectible = NO;
     [selectedFileList removeAllObjects];
     
-    [APPDELEGATE.base immediateShowAddButton];
+    if(!self.album.isReadOnly) {
+        [APPDELEGATE.base immediateShowAddButton];
+    }
     
     [self setSelectibleStatusForSquareImages:NO];
 

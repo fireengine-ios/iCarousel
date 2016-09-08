@@ -35,11 +35,11 @@
         self.album = _album;
         self.isSelectible = selectibleFlag;
         
-        if(self.album.cover.tempDownloadUrl) {
+        if(self.album.cover.detail.thumbLargeUrl) {
             bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 160)];
             bgImgView.contentMode = UIViewContentModeScaleAspectFill;
             bgImgView.clipsToBounds = YES;
-            [bgImgView setImageWithURL:[NSURL URLWithString:self.album.cover.tempDownloadUrl]];
+            [bgImgView setImageWithURL:[NSURL URLWithString:self.album.cover.detail.thumbLargeUrl]];
             [self addSubview:bgImgView];
             
             maskImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 160)];

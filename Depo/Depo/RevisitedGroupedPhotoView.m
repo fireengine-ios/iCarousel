@@ -376,7 +376,7 @@
         
         int countPerRow = GROUP_IMG_COUNT_PER_ROW;
         if([[Util deviceType] isEqualToString:@"iPhone 6 Plus"] || [[Util deviceType] isEqualToString:@"iPhone 6S Plus"]) {
-            countPerRow = 6;
+            countPerRow = 5;
         }
         float boxWidth = fileTable.frame.size.width/countPerRow;
         int boxCountPerRow = countPerRow;
@@ -407,7 +407,7 @@
             FileInfoGroup *group = [groups objectAtIndex:indexPath.row];
             int countPerRow = GROUP_IMG_COUNT_PER_ROW;
             if([[Util deviceType] isEqualToString:@"iPhone 6 Plus"] || [[Util deviceType] isEqualToString:@"iPhone 6S Plus"]) {
-                countPerRow = 6;
+                countPerRow = 5;
             }
             float boxWidth = fileTable.frame.size.width/countPerRow;
             int boxCountPerRow = countPerRow;
