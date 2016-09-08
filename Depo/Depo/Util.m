@@ -8,6 +8,7 @@
 
 #import "Util.h"
 #import "AppConstants.h"
+#import <sys/utsname.h>
 
 @implementation Util
 
@@ -225,6 +226,52 @@
         langCode = @"en";
     }
     return langCode;
+}
+
++ (NSString *)deviceType {
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    NSString *result = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
+    NSDictionary *matches = @{
+                              @"i386" : @"32-bit Simulator",
+                              @"x86_64" : @"64-bit Simulator",
+                              @"iPod1,1" : @"iPod Touch",
+                              @"iPod2,1" : @"iPod Touch Second Generation",
+                              @"iPod3,1" : @"iPod Touch Third Generation",
+                              @"iPod4,1" : @"iPod Touch Fourth Generation",
+                              @"iPod5,1" : @"iPod Touch Fifth Generation",
+                              @"iPhone1,1" : @"iPhone",
+                              @"iPhone1,2" : @"iPhone 3G",
+                              @"iPhone2,1" : @"iPhone 3GS",
+                              @"iPad1,1" : @"iPad",
+                              @"iPad2,1" : @"iPad 2",
+                              @"iPad3,1" : @"3rd Generation iPad",
+                              @"iPad3,2" : @"iPad 3(GSM+CDMA)",
+                              @"iPad3,3" : @"iPad 3(GSM)",
+                              @"iPad3,4" : @"iPad 4(WiFi)",
+                              @"iPad3,5" : @"iPad 4(GSM)",
+                              @"iPad3,6" : @"iPad 4(GSM+CDMA)",
+                              @"iPhone3,1" : @"iPhone 4",
+                              @"iPhone4,1" : @"iPhone 4S",
+                              @"iPad3,4" : @"4th Generation iPad",
+                              @"iPad2,5" : @"iPad Mini",
+                              @"iPhone5,1" : @"iPhone 5(GSM)",
+                              @"iPhone5,2" : @"iPhone 5(GSM+CDMA)",
+                              @"iPhone5,3" : @"iPhone 5C(GSM)",
+                              @"iPhone5,4" : @"iPhone 5C(GSM+CDMA)",
+                              @"iPhone6,1" : @"iPhone 5S(GSM)",
+                              @"iPhone6,2" : @"iPhone 5S(GSM+CDMA)",
+                              @"iPhone7,1" : @"iPhone 6 Plus",
+                              @"iPhone7,2" : @"iPhone 6",
+                              @"iPhone8,1" : @"iPhone 6S",
+                              @"iPhone8,2" : @"iPhone 6S Plus"
+                              };
+    
+    if (matches[result]) {
+        return matches[result];
+    } else {
+        return result;
+    }
 }
 
 @end

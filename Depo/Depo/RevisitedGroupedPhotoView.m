@@ -15,7 +15,7 @@
 #import "BaseViewController.h"
 
 #define GROUP_PACKAGE_SIZE (IS_IPAD ? 30 : 24)
-#define GROUP_IMG_COUNT_PER_ROW (IS_IPAD ? 6 : 4)
+#define GROUP_IMG_COUNT_PER_ROW (IS_IPAD ? 6 : IS_IPHONE_6P_OR_HIGHER ? 6 : 4)
 
 #define GROUP_INPROGRESS_KEY @"in_progress"
 
@@ -50,6 +50,8 @@
     if(self = [super initWithFrame:frame]) {
         self.backgroundColor = [Util UIColorForHexColor:@"FFFFFF"];
 
+        NSLog(@"SCREEN LENGTH: %f", [[UIScreen mainScreen] bounds].size.height);
+        NSLog(@"TYPE: %@", [Util deviceType]);
         readDao = [[ElasticSearchDao alloc] init];
         readDao.delegate = self;
         readDao.successMethod = @selector(readSuccessCallback:);
@@ -372,8 +374,12 @@
     if(groups.count > 0) {
         FileInfoGroup *group = [groups objectAtIndex:indexPath.row];
         
-        float boxWidth = fileTable.frame.size.width/GROUP_IMG_COUNT_PER_ROW;
-        int boxCountPerRow = GROUP_IMG_COUNT_PER_ROW;
+        int countPerRow = GROUP_IMG_COUNT_PER_ROW;
+        if([[Util deviceType] isEqualToString:@"iPhone 6 Plus"] || [[Util deviceType] isEqualToString:@"iPhone 6S Plus"]) {
+            countPerRow = 6;
+        }
+        float boxWidth = fileTable.frame.size.width/countPerRow;
+        int boxCountPerRow = countPerRow;
         
         float imageContainerHeight = 60;
         imageContainerHeight += floorf(group.fileInfo.count/boxCountPerRow)*boxWidth;
@@ -399,8 +405,12 @@
     if(cell == nil) {
         if(files.count > 0) {
             FileInfoGroup *group = [groups objectAtIndex:indexPath.row];
-            float boxWidth = fileTable.frame.size.width/GROUP_IMG_COUNT_PER_ROW;
-            int boxCountPerRow = GROUP_IMG_COUNT_PER_ROW;
+            int countPerRow = GROUP_IMG_COUNT_PER_ROW;
+            if([[Util deviceType] isEqualToString:@"iPhone 6 Plus"] || [[Util deviceType] isEqualToString:@"iPhone 6S Plus"]) {
+                countPerRow = 6;
+            }
+            float boxWidth = fileTable.frame.size.width/countPerRow;
+            int boxCountPerRow = countPerRow;
             cell = [[GroupedCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withGroup:group isSelectible:isSelectible withImageWidth:boxWidth withImageCountPerRow:boxCountPerRow];
             ((GroupedCell *)cell).delegate = self;
         } else {

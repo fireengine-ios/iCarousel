@@ -26,5 +26,6 @@
 + (NSString *) cleanSpecialCharacters:(NSString *) rawStr;
 + (BOOL) isValidEmail:(NSString *)checkString;
 + (NSString *) readLocaleCode;
++ (NSString *)deviceType;
 
 @end
