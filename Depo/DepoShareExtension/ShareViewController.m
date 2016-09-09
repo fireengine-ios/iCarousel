@@ -185,6 +185,23 @@
                     }
                 }
             }];
+        } else if ([itemProvider hasItemConformingToTypeIdentifier:(NSString *)kUTTypeMovie]
+                   || [itemProvider hasItemConformingToTypeIdentifier:(NSString *)kUTTypeVideo]
+                   || [itemProvider hasItemConformingToTypeIdentifier:(NSString *)kUTTypeMPEG]
+                   || [itemProvider hasItemConformingToTypeIdentifier:(NSString *)kUTTypeMPEG4]
+                   || [itemProvider hasItemConformingToTypeIdentifier:(NSString *)kUTTypeAVIMovie]) {
+            IGLog(@"ShareViewController loadItemForTypeIdentifier:public.movie");
+            [itemProvider loadItemForTypeIdentifier:@"public.movie" options:nil completionHandler:^(NSURL *path,NSError *error){
+                if (path) {
+                    IGLog(@"ShareViewController loadItemForTypeIdentifier:public.movie path found");
+                    NSDictionary *dict = [NSDictionary dictionaryWithObjects:@[path, @"NO", @"YES"] forKeys:@[@"item", @"isPhoto", @"isMedia"]];
+                    [urlsToUpload addObject:dict];
+                    counter ++;
+                    if(counter == totalCount) {
+                        [self postUrlListConstruction];
+                    }
+                }
+            }];
         } else if ([itemProvider hasItemConformingToTypeIdentifier:(NSString *)kUTTypePDF]) {
             [itemProvider loadItemForTypeIdentifier:@"com.adobe.pdf" options:nil completionHandler:^(NSURL *path,NSError *error){
                 if (path) {
@@ -197,12 +214,22 @@
                 }
             }];
         } else {
+            IGLog(@"ShareViewController loadItemForTypeIdentifier:public.data");
             [itemProvider loadItemForTypeIdentifier:@"public.data" options:nil completionHandler:^(NSURL *path,NSError *error){
                 if (path) {
                     NSString *absStr = [path absoluteString];
                     NSArray *items = [absStr componentsSeparatedByString:@"."];
                     NSString *extension = [items objectAtIndex:[items count]-1];
-                    NSDictionary *dict = [NSDictionary dictionaryWithObjects:@[path, @"NO", @"NO", @"application/octet-stream", extension] forKeys:@[@"item", @"isPhoto", @"isMedia", @"contentType", @"extension"]];
+
+                    NSString *logData = [NSString stringWithFormat:@"ShareViewController loadItemForTypeIdentifier:public.data path found with path:%@ and extension:%@", path, extension];
+                    IGLog(logData);
+
+                    NSDictionary *dict;
+                    if([[extension lowercaseString] hasSuffix:@"mp4"] || [[extension lowercaseString] hasSuffix:@"mpeg"]) {
+                        dict = [NSDictionary dictionaryWithObjects:@[path, @"NO", @"YES"] forKeys:@[@"item", @"isPhoto", @"isMedia"]];
+                    } else {
+                        dict = [NSDictionary dictionaryWithObjects:@[path, @"NO", @"NO", @"application/octet-stream", extension] forKeys:@[@"item", @"isPhoto", @"isMedia", @"contentType", @"extension"]];
+                    }
                     [urlsToUpload addObject:dict];
                     counter ++;
                     if(counter == totalCount) {

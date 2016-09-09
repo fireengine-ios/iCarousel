@@ -116,6 +116,21 @@
 - (void) revisitedAlbumListDidFinishLoading {
 }
 
+- (void) revisitedAlbumListDidFinishDeleting {
+    [segmentView enableNavigate];
+    
+    self.title = NSLocalizedString(@"PhotosTitle", @"");
+    self.navigationItem.leftBarButtonItem = previousButtonRef;
+    //    moreButton.hidden = NO;
+    
+    [albumView setToUnselectiblePriorToRefresh];
+    [groupView setToUnselectiblePriorToRefresh];
+    
+    [APPDELEGATE.base immediateShowAddButton];
+
+    [albumView pullData];
+}
+
 - (void) revisitedAlbumListDidFailRetrievingList:(NSString *)errorMessage {
     [self showErrorAlertWithMessage:errorMessage];
 }
@@ -168,17 +183,35 @@
 }
 
 - (void) revisitedGroupedPhotoDidFinishDeleting {
+    [segmentView enableNavigate];
+    
+    self.title = NSLocalizedString(@"PhotosTitle", @"");
+    self.navigationItem.leftBarButtonItem = previousButtonRef;
+    //    moreButton.hidden = NO;
+    
+    [albumView setToUnselectiblePriorToRefresh];
+    [groupView setToUnselectiblePriorToRefresh];
+    
+    [APPDELEGATE.base immediateShowAddButton];
+
     [groupView pullData];
     [albumView pullData];
-
-    [self cancelClicked];
 }
 
 - (void) revisitedGroupedPhotoDidFinishMoving {
+    [segmentView enableNavigate];
+    
+    self.title = NSLocalizedString(@"PhotosTitle", @"");
+    self.navigationItem.leftBarButtonItem = previousButtonRef;
+    //    moreButton.hidden = NO;
+    
+    [albumView setToUnselectiblePriorToRefresh];
+    [groupView setToUnselectiblePriorToRefresh];
+    
+    [APPDELEGATE.base immediateShowAddButton];
+
     [groupView pullData];
     [albumView pullData];
-    
-    [self cancelClicked];
 }
 
 - (void) revisitedGroupedPhotoShouldConfirmForDeleting {

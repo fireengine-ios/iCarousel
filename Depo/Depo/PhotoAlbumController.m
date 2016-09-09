@@ -309,7 +309,7 @@
 
 - (void) squareImageWasSelectedForFile:(MetaFile *)fileSelected {
     if(fileSelected.contentType == ContentTypePhoto) {
-        ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFile:fileSelected];
+        ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFile:fileSelected referencedFromAlbum:YES];
         detail.delegate = self;
         MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
         detail.nav = modalNav;

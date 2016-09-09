@@ -26,6 +26,7 @@
 + (ExtensionUploadManager *) sharedInstance;
 - (void) startUploadForImage:(UIImage *) img;
 - (void) startUploadForVideoData:(NSData *) videoData;
+- (void) startUploadForVideoData:(NSData *) videoData withExtension:(NSString *) ext;
 - (void) startUploadForDoc:(NSData *) docData withContentType:(NSString *) contentType withExt:(NSString *) ext;
 
 @end

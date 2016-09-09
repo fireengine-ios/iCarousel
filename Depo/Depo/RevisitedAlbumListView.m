@@ -108,6 +108,17 @@
     [albumTable reloadData];
 }
 
+- (void) setToUnselectiblePriorToRefresh {
+    isSelectible = NO;
+    [refreshControl setEnabled:YES];
+    [selectedAlbumList removeAllObjects];
+    
+    if(footerActionMenu) {
+        [footerActionMenu removeFromSuperview];
+        footerActionMenu = nil;
+    }
+}
+
 - (void) setToUnselectible {
     isSelectible = NO;
     [refreshControl setEnabled:YES];
@@ -149,11 +160,7 @@
 }
 
 - (void) deleteAlbumSuccessCallback {
-    if(isSelectible) {
-        [self setToUnselectible];
-    }
-    
-    [self pullData];
+    [delegate revisitedAlbumListDidFinishDeleting];
 }
 
 - (void) deleteAlbumFailCallback:(NSString *) errorMessage {

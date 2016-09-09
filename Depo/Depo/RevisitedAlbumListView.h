@@ -17,6 +17,7 @@
 @protocol RevisitedAlbumListDelegate <NSObject>
 - (void) revisitedAlbumListDidSelectAlbum:(PhotoAlbum *) albumSelected;
 - (void) revisitedAlbumListDidFinishLoading;
+- (void) revisitedAlbumListDidFinishDeleting;
 - (void) revisitedAlbumListDidChangeToSelectState;
 - (void) revisitedAlbumListDidFailRetrievingList:(NSString *) errorMessage;
 - (void) revisitedAlbumListDidFailDeletingWithError:(NSString *) errorMessage;
@@ -42,5 +43,6 @@
 - (void) addNewAlbumWithName:(NSString *) albumName;
 - (void) setToSelectible;
 - (void) setToUnselectible;
+- (void) setToUnselectiblePriorToRefresh;
 
 @end

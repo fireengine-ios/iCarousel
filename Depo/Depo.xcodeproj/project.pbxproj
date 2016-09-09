@@ -975,6 +975,7 @@
 		94B3BE291D81E3340086D05E /* icon_locationperm.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B3BE281D81E3340086D05E /* icon_locationperm.png */; };
 		94B3BE2C1D81E3EA0086D05E /* CustomInfoWithIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94B3BE2B1D81E3EA0086D05E /* CustomInfoWithIconView.m */; };
 		94B3BE2F1D81F7C40086D05E /* FaqUrlDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94B3BE2E1D81F7C40086D05E /* FaqUrlDao.m */; };
+		94B3BE301D826F0F0086D05E /* LoggerUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 947EDDCC1D0C3B8B0098D2C2 /* LoggerUtil.m */; };
 		94B6C8751CB657520083C1A8 /* icon_yukle_depo.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B6C8741CB657520083C1A8 /* icon_yukle_depo.png */; };
 		94B6C8771CB6575A0083C1A8 /* icon_yukle_depo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B6C8761CB6575A0083C1A8 /* icon_yukle_depo@2x.png */; };
 		94B6C8791CB657610083C1A8 /* icon_yukle_depo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B6C8781CB657610083C1A8 /* icon_yukle_depo@3x.png */; };
@@ -5713,6 +5714,7 @@
 				05028CC01B595440000F2D09 /* ExtensionUploadManager.m in Sources */,
 				05C3A37F1B57DFAB002AB49A /* ShareViewController.m in Sources */,
 				05028D2A1B5CE9D7000F2D09 /* Reachability.m in Sources */,
+				94B3BE301D826F0F0086D05E /* LoggerUtil.m in Sources */,
 				05028CC31B5A315F000F2D09 /* CustomAlertView.m in Sources */,
 				05028CD41B5A9887000F2D09 /* SharedUtil.m in Sources */,
 				05028CC41B5A3184000F2D09 /* SimpleButton.m in Sources */,

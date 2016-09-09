@@ -27,11 +27,16 @@
 @synthesize cursor;
 
 - (id)initWithFile:(MetaFile *) _file {
+    return [self initWithFile:_file referencedFromAlbum:NO];
+}
+
+- (id)initWithFile:(MetaFile *) _file referencedFromAlbum:(BOOL) srcAlbumFlag {
     self = [super init];
     if (self) {
         self.file = _file;
         self.title = self.file.visibleName;
         self.view.backgroundColor = [Util UIColorForHexColor:@"191e24"];
+        refFromAlbumFlag = srcAlbumFlag;
 
         self.view.autoresizesSubviews = YES;
         self.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
@@ -436,7 +441,7 @@
 }
 
 - (void) confirmDeleteDidConfirm {
-    if(self.file.addedAlbumUuids != nil && [self.file.addedAlbumUuids count] > 0) {
+    if(self.file.addedAlbumUuids != nil && [self.file.addedAlbumUuids count] > 0 && !refFromAlbumFlag) {
         CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"ButtonCancel", @"") withApproveTitle:NSLocalizedString(@"OK", @"") withMessage:NSLocalizedString(@"DeleteFileInAlbumAlert", @"") withModalType:ModalTypeApprove];
         confirm.delegate = self;
         [APPDELEGATE showCustomConfirm:confirm];

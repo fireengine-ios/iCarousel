@@ -153,6 +153,7 @@
 }
 
 - (void) deleteFailCallback:(NSString *) errorMessage {
+    [progress hide:YES];
 //    [self proceedFailureForProgressViewWithAddButtonKey:@"PhotoTab"];
     [delegate revisitedGroupedPhotoDidFailDeletingWithError:errorMessage];
 }
@@ -164,6 +165,17 @@
 
     tableUpdateCounter ++;
     [fileTable reloadData];
+}
+
+- (void) setToUnselectiblePriorToRefresh {
+    isSelectible = NO;
+    [refreshControl setEnabled:YES];
+    [selectedFileList removeAllObjects];
+    
+    if(imgFooterActionMenu) {
+        [imgFooterActionMenu removeFromSuperview];
+        imgFooterActionMenu = nil;
+    }
 }
 
 - (void) setToUnselectible {
@@ -240,6 +252,10 @@
         NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
         self.groups = [self.groups sortedArrayUsingDescriptors:sortDescriptors];
         
+        if(listOffset == 0) {
+            [fileTable setContentOffset:CGPointZero animated:NO];
+        }
+
         tableUpdateCounter++;
         [fileTable reloadData];
     }

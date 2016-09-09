@@ -59,6 +59,7 @@
 - (void) pullData;
 - (void) setToSelectible;
 - (void) setToUnselectible;
+- (void) setToUnselectiblePriorToRefresh;
 - (void) shouldContinueDelete;
 - (void) destinationAlbumChosenWithUuid:(NSString *) chosenAlbumUuid;
 

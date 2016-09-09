@@ -144,7 +144,7 @@
 }
 
 - (void) layoutSubviews {
-    NSLog(@"At layoutSubviews: %@", NSStringFromCGRect(self.frame));
+//    NSLog(@"At layoutSubviews: %@", NSStringFromCGRect(self.frame));
     int leftIndex = 15;
     if(self.imgView) {
         self.imgView.frame = CGRectMake(leftIndex, (self.frame.size.height - 35)/2, 35, 35);

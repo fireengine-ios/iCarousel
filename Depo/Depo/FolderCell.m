@@ -132,7 +132,7 @@
 }
 
 - (void) layoutSubviews {
-    NSLog(@"At layoutSubviews: %@", NSStringFromCGRect(self.frame));
+//    NSLog(@"At layoutSubviews: %@", NSStringFromCGRect(self.frame));
     int leftIndex = self.isSelectible ? 50 : 15;
     if(self.checkButton) {
         self.checkButton.frame = CGRectMake(15, (self.frame.size.height - 20)/2, 21, 20);
