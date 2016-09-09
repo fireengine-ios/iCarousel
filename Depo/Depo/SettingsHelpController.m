@@ -28,7 +28,7 @@
 - (void) viewDidLoad {
     [super viewDidLoad];
 
-    contentView  = [[UIWebView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.topIndex)];
+    contentView  = [[UIWebView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.topIndex - self.bottomIndex)];
     //    webView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     contentView.scalesPageToFit = YES;
     contentView.delegate = self;

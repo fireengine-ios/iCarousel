@@ -197,6 +197,9 @@
 #pragma mark LocationManagerDelegate methods
 
 - (void) locationPermissionDenied {
+    [self showErrorAlertWithMessage:NSLocalizedString(@"LocForAutoSyncError", @"")];
+    [autoSyncSwitch setOn:NO];
+    
     [LocationManager sharedInstance].delegate = nil;
     [self triggerAssetPermissionAndContinue];
 }
