@@ -15,6 +15,7 @@
 #import "ElasticSearchDao.h"
 #import "MBProgressHUD.h"
 #import "GroupedCell.h"
+#import "GroupedView.h"
 #import "DeleteDao.h"
 #import "AlbumAddPhotosDao.h"
 #import "MainSearchTextfield.h"
@@ -34,16 +35,14 @@
 - (void) revisitedGroupedPhotoChangeTitleTo:(NSString *) pageTitle;
 @end
 
-@interface RevisitedGroupedPhotoView : UIView <UITableViewDelegate, UITableViewDataSource, GroupedCellDelegate, FooterActionsDelegate, UITextFieldDelegate, CustomConfirmDelegate>
+@interface RevisitedGroupedPhotoView : UIView <GroupedViewDelegate, FooterActionsDelegate, UITextFieldDelegate, CustomConfirmDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, weak) id<RevisitedGroupedPhotoDelegate> delegate;
 @property (nonatomic, strong) NSMutableArray *files;
-@property (nonatomic, strong) NSMutableArray *groups;
-@property (nonatomic, strong) NSMutableDictionary *groupDict;
 @property (nonatomic, strong) NSMutableArray *selectedFileList;
 
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
-@property (nonatomic, strong) UITableView *fileTable;
+@property (nonatomic, strong) UIScrollView *fileScroll;
 
 @property (nonatomic, strong) ElasticSearchDao *readDao;
 @property (nonatomic, strong) DeleteDao *deleteDao;

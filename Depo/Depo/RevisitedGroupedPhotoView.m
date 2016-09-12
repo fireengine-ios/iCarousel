@@ -14,7 +14,7 @@
 #import "CacheUtil.h"
 #import "BaseViewController.h"
 
-#define GROUP_PACKAGE_SIZE (IS_IPAD ? 30 : 24)
+#define GROUP_PACKAGE_SIZE (IS_IPAD ? 60 : IS_IPHONE_6P_OR_HIGHER ? 60 : 48)
 #define GROUP_IMG_COUNT_PER_ROW (IS_IPAD ? 6 : IS_IPHONE_6P_OR_HIGHER ? 6 : 4)
 
 #define GROUP_INPROGRESS_KEY @"in_progress"
@@ -26,6 +26,8 @@
     int photoCount;
     int groupSequence;
     NSDateFormatter *dateCompareFormat;
+    
+    float yIndex;
 }
 @end
 
@@ -33,11 +35,9 @@
 
 @synthesize delegate;
 @synthesize files;
-@synthesize groups;
-@synthesize groupDict;
 @synthesize selectedFileList;
 @synthesize refreshControl;
-@synthesize fileTable;
+@synthesize fileScroll;
 @synthesize readDao;
 @synthesize deleteDao;
 @synthesize albumAddPhotosDao;
@@ -50,8 +50,6 @@
     if(self = [super initWithFrame:frame]) {
         self.backgroundColor = [Util UIColorForHexColor:@"FFFFFF"];
 
-        NSLog(@"SCREEN LENGTH: %f", [[UIScreen mainScreen] bounds].size.height);
-        NSLog(@"TYPE: %@", [Util deviceType]);
         readDao = [[ElasticSearchDao alloc] init];
         readDao.delegate = self;
         readDao.successMethod = @selector(readSuccessCallback:);
@@ -76,17 +74,14 @@
         [dateCompareFormat setDateFormat:@"MMM yyyy"];
         
         files = [[NSMutableArray alloc] init];
-        groups = [[NSMutableArray alloc] init];
         selectedFileList = [[NSMutableArray alloc] init];
-        groupDict = [[NSMutableDictionary alloc] init];
+
+        yIndex = 0;
         
-        fileTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) style:UITableViewStylePlain];
-        fileTable.backgroundColor = [UIColor clearColor];
-        fileTable.backgroundView = nil;
-        fileTable.delegate = self;
-        fileTable.dataSource = self;
-        fileTable.separatorStyle = UITableViewCellSeparatorStyleNone;
-        [self addSubview:fileTable];
+        fileScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+        fileScroll.backgroundColor = [UIColor clearColor];
+        fileScroll.delegate = self;
+        [self addSubview:fileScroll];
         
         UIView *tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 60)];
         searchField = [[MainSearchTextfield alloc] initWithFrame:CGRectMake(20, 10, self.frame.size.width - 40, 40)];
@@ -94,8 +89,11 @@
         searchField.returnKeyType = UIReturnKeySearch;
         searchField.userInteractionEnabled = NO;
         [tableHeaderView addSubview:searchField];
-        fileTable.tableHeaderView = tableHeaderView;
-        
+        [fileScroll addSubview:tableHeaderView];
+
+        yIndex = 60;
+        fileScroll.contentSize = CGSizeMake(fileScroll.frame.size.width, yIndex);
+
         UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(searchTapped)];
         tapGestureRecognizer.numberOfTapsRequired = 1;
         tapGestureRecognizer.enabled = YES;
@@ -103,7 +101,7 @@
         
         refreshControl = [[UIRefreshControl alloc] init];
         [refreshControl addTarget:self action:@selector(pullData) forControlEvents:UIControlEventValueChanged];
-        [fileTable addSubview:refreshControl];
+        [fileScroll addSubview:refreshControl];
 
         progress = [[MBProgressHUD alloc] initWithFrame:self.frame];
         progress.opacity = 0.4f;
@@ -116,12 +114,23 @@
     listOffset = 0;
     groupSequence = 0;
     
-    [self.files removeAllObjects];
-    [self.groupDict removeAllObjects];
+    [files removeAllObjects];
+    for(id row in [self.fileScroll subviews]) {
+        if([row isKindOfClass:[GroupedView class]]) {
+            [row removeFromSuperview];
+        }
+    }
     
+    yIndex = 60;
+    fileScroll.contentSize = CGSizeMake(fileScroll.frame.size.width, yIndex);
+
     [self addOngoingGroup];
     
-    [readDao requestPhotosForPage:listOffset andSize:GROUP_PACKAGE_SIZE andSortType:SortTypeDateDesc];
+    int packageSize = GROUP_PACKAGE_SIZE;
+    if([[Util deviceType] isEqualToString:@"iPhone 6 Plus"] || [[Util deviceType] isEqualToString:@"iPhone 6S Plus"]) {
+        packageSize = 60;
+    }
+    [readDao requestPhotosForPage:listOffset andSize:packageSize andSortType:SortTypeDateDesc];
     isLoading = YES;
 
     [self bringSubviewToFront:progress];
@@ -129,10 +138,6 @@
 }
 
 - (void) addOngoingGroup {
-    FileInfoGroup *groupToRemove = [self.groupDict objectForKey:GROUP_INPROGRESS_KEY];
-    if(groupToRemove) {
-        [self.groupDict removeObjectForKey:GROUP_INPROGRESS_KEY];
-    }
     NSArray *uploadingImageRefArray = [[UploadQueue sharedInstance] uploadImageRefs];
     if([uploadingImageRefArray count] > 0) {
         FileInfoGroup *inProgressGroup = [[FileInfoGroup alloc] init];
@@ -140,10 +145,59 @@
         inProgressGroup.fileInfo = uploadingImageRefArray;
         inProgressGroup.groupType = ImageGroupTypeInProgress;
         inProgressGroup.sequence = groupSequence;
-//        [groups addObject:inProgressGroup];
-        [groupDict setObject:inProgressGroup forKey:GROUP_INPROGRESS_KEY];
+        inProgressGroup.groupKey = GROUP_INPROGRESS_KEY;
         
-        groupSequence ++;
+        [self addOrUpdateGroup:inProgressGroup];
+    }
+}
+
+- (void) addOrUpdateGroup:(FileInfoGroup *) group {
+    GroupedView *alreadyPresentView = nil;
+    for(id row in fileScroll.subviews) {
+        if([row isKindOfClass:[GroupedView class]]) {
+            GroupedView *castedView = (GroupedView *) row;
+            if([castedView.group.groupKey isEqualToString:group.groupKey]) {
+                alreadyPresentView = castedView;
+                break;
+            }
+        }
+    }
+    
+    int countPerRow = GROUP_IMG_COUNT_PER_ROW;
+    if([[Util deviceType] isEqualToString:@"iPhone 6 Plus"] || [[Util deviceType] isEqualToString:@"iPhone 6S Plus"]) {
+        countPerRow = 5;
+    }
+    float boxWidth = fileScroll.frame.size.width/countPerRow;
+    float imageContainerHeight = 60;
+    
+    if(alreadyPresentView) {
+        float currentHeight = alreadyPresentView.frame.size.height;
+        int newFileCount = (int)[alreadyPresentView.group.fileInfo count] + (int)group.fileInfo.count;
+        imageContainerHeight += floorf(newFileCount/countPerRow)*boxWidth;
+        if(group.fileInfo.count%countPerRow > 0) {
+            imageContainerHeight += boxWidth;
+        }
+        [alreadyPresentView loadMoreImages:group.fileInfo];
+        alreadyPresentView.frame = CGRectMake(alreadyPresentView.frame.origin.x, alreadyPresentView.frame.origin.y, alreadyPresentView.frame.size.width, imageContainerHeight);
+        
+        float heightDiff = imageContainerHeight - currentHeight;
+        fileScroll.contentSize = CGSizeMake(fileScroll.frame.size.width, fileScroll.contentSize.height + heightDiff);
+        
+        yIndex += heightDiff;
+        
+    } else {
+        imageContainerHeight += floorf(group.fileInfo.count/countPerRow)*boxWidth;
+        if(group.fileInfo.count%countPerRow > 0) {
+            imageContainerHeight += boxWidth;
+        }
+
+        GroupedView *groupedView = [[GroupedView alloc] initWithFrame:CGRectMake(0, yIndex, fileScroll.frame.size.width, imageContainerHeight) withGroup:group isSelectible:NO withImageWidth:boxWidth withImageCountPerRow:countPerRow];
+        groupedView.delegate = self;
+        [fileScroll addSubview:groupedView];
+        
+        fileScroll.contentSize = CGSizeMake(fileScroll.frame.size.width, fileScroll.contentSize.height + imageContainerHeight);
+        
+        yIndex += imageContainerHeight;
     }
 }
 
@@ -163,8 +217,12 @@
     [refreshControl setEnabled:NO];
     [selectedFileList removeAllObjects];
 
-    tableUpdateCounter ++;
-    [fileTable reloadData];
+    for(id row in fileScroll.subviews) {
+        if([row isKindOfClass:[GroupedView class]]) {
+            GroupedView *castedView = (GroupedView *) row;
+            [castedView setToSelectible];
+        }
+    }
 }
 
 - (void) setToUnselectiblePriorToRefresh {
@@ -188,29 +246,23 @@
         imgFooterActionMenu = nil;
     }
 
-    tableUpdateCounter ++;
-    [fileTable reloadData];
+    for(id row in fileScroll.subviews) {
+        if([row isKindOfClass:[GroupedView class]]) {
+            GroupedView *castedView = (GroupedView *) row;
+            [castedView setToUnselectible];
+        }
+    }
 }
 
 - (void) readSuccessCallback:(NSArray *) fileList {
     [progress hide:YES];
     if([fileList count] > 0) {
-        [self.files addObjectsFromArray:fileList];
+        [files addObjectsFromArray:fileList];
         
+        NSMutableDictionary *groupDict = [[NSMutableDictionary alloc] init];
         for(MetaFile *row in fileList) {
             if(row.detail.fileDate) {
                 NSString *dateStr = [dateCompareFormat stringFromDate:row.detail.fileDate];
-                /*
-                 NSString *locStr = @"";
-                 if(row.detail.geoAdminLevel6 != nil && ![row.detail.geoAdminLevel6 isEqualToString:@""]) {
-                 locStr = row.detail.geoAdminLevel6;
-                 } else if(row.detail.geoAdminLevel4 != nil && ![row.detail.geoAdminLevel4 isEqualToString:@""]) {
-                 locStr = row.detail.geoAdminLevel4;
-                 } else if(row.detail.geoAdminLevel2 != nil && ![row.detail.geoAdminLevel2 isEqualToString:@""]) {
-                 locStr = row.detail.geoAdminLevel2;
-                 }
-                 NSString *keyVal = [NSString stringWithFormat:@"%@_%@", dateStr, locStr];
-                 */
                 if([[groupDict allKeys] count] == 0) {
                     FileInfoGroup *newGroup = [[FileInfoGroup alloc] init];
                     newGroup.customTitle = dateStr;
@@ -218,6 +270,7 @@
                     newGroup.fileInfo = [[NSMutableArray alloc] init];
                     [newGroup.fileInfo addObject:row];
                     newGroup.sequence = groupSequence;
+                    newGroup.groupKey = dateStr;
                     [groupDict setObject:newGroup forKey:dateStr];
                     
                     groupSequence ++;
@@ -232,32 +285,22 @@
                         newGroup.fileInfo = [[NSMutableArray alloc] init];
                         [newGroup.fileInfo addObject:row];
                         newGroup.sequence = groupSequence;
+                        newGroup.groupKey = dateStr;
                         [groupDict setObject:newGroup forKey:dateStr];
                         groupSequence ++;
                     }
                 }
             }
         }
-        FileInfoGroup *ongoingGroup = [groupDict objectForKey:GROUP_INPROGRESS_KEY];
-        if(ongoingGroup) {
-            [groupDict removeObjectForKey:GROUP_INPROGRESS_KEY];
-            self.groups = [[NSMutableArray alloc] init];
-            [self.groups addObject:ongoingGroup];
-            [self.groups addObjectsFromArray:[groupDict allValues]];
-        } else {
-            self.groups = [groupDict allValues];
-        }
 
+        NSArray *groups = [groupDict allValues];
         NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"sequence" ascending:YES];
         NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-        self.groups = [self.groups sortedArrayUsingDescriptors:sortDescriptors];
-        
-        if(listOffset == 0) {
-            [fileTable setContentOffset:CGPointZero animated:NO];
+        groups = [groups sortedArrayUsingDescriptors:sortDescriptors];
+     
+        for(FileInfoGroup *row in groups) {
+            [self addOrUpdateGroup:row];
         }
-
-        tableUpdateCounter++;
-        [fileTable reloadData];
     }
     
     isLoading = NO;
@@ -382,67 +425,10 @@
 }
 */
 
-- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
-- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(groups.count > 0) {
-        FileInfoGroup *group = [groups objectAtIndex:indexPath.row];
-        
-        int countPerRow = GROUP_IMG_COUNT_PER_ROW;
-        if([[Util deviceType] isEqualToString:@"iPhone 6 Plus"] || [[Util deviceType] isEqualToString:@"iPhone 6S Plus"]) {
-            countPerRow = 5;
-        }
-        float boxWidth = fileTable.frame.size.width/countPerRow;
-        int boxCountPerRow = countPerRow;
-        
-        float imageContainerHeight = 60;
-        imageContainerHeight += floorf(group.fileInfo.count/boxCountPerRow)*boxWidth;
-        if(group.fileInfo.count%boxCountPerRow > 0) {
-            imageContainerHeight += boxWidth;
-        }
-        return imageContainerHeight;
-    } else {
-        return self.frame.size.width/2;
-    }
-}
-
-- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (groups.count == 0)
-        return isLoading ? 0 : 1;
-    return [groups count];
-}
-
-- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *cellIdentifier = [NSString stringWithFormat:@"%@_%d_%d", @"IMG_GROUP_CELL",  (int)indexPath.row, tableUpdateCounter];
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if(cell == nil) {
-        if(files.count > 0) {
-            FileInfoGroup *group = [groups objectAtIndex:indexPath.row];
-            int countPerRow = GROUP_IMG_COUNT_PER_ROW;
-            if([[Util deviceType] isEqualToString:@"iPhone 6 Plus"] || [[Util deviceType] isEqualToString:@"iPhone 6S Plus"]) {
-                countPerRow = 5;
-            }
-            float boxWidth = fileTable.frame.size.width/countPerRow;
-            int boxCountPerRow = countPerRow;
-            cell = [[GroupedCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withGroup:group isSelectible:isSelectible withImageWidth:boxWidth withImageCountPerRow:boxCountPerRow];
-            ((GroupedCell *)cell).delegate = self;
-        } else {
-            cell = [[NoItemCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier imageName:@"no_photo_icon" titleText:NSLocalizedString(@"EmptyPhotosVideosTitle", @"") descriptionText:NSLocalizedString(@"EmptyPhotosVideosDescription", @"")];
-        }
-    }
-    return cell;
-}
-
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-}
-
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView {
     if(!isLoading) {
-        CGFloat currentOffset = fileTable.contentOffset.y;
-        CGFloat maximumOffset = fileTable.contentSize.height - fileTable.frame.size.height;
+        CGFloat currentOffset = fileScroll.contentOffset.y;
+        CGFloat maximumOffset = fileScroll.contentSize.height - fileScroll.frame.size.height;
         
         if (maximumOffset > 0.0f && currentOffset - maximumOffset >= 0.0f) {
             isLoading = YES;
@@ -453,25 +439,35 @@
 
 - (void) dynamicallyLoadNextPage {
     listOffset ++;
-    [readDao requestPhotosForPage:listOffset andSize:GROUP_PACKAGE_SIZE andSortType:SortTypeDateDesc];
+    int packageSize = GROUP_PACKAGE_SIZE;
+    if([[Util deviceType] isEqualToString:@"iPhone 6 Plus"] || [[Util deviceType] isEqualToString:@"iPhone 6S Plus"]) {
+        packageSize = 60;
+    }
+    [readDao requestPhotosForPage:listOffset andSize:packageSize andSortType:SortTypeDateDesc];
 }
 
-- (void) groupedCellImageWasSelectedForFile:(MetaFile *) fileSelected forGroupWithKey:(NSString *) groupKey {
-    FileInfoGroup *groupSelected = nil;
-    for(FileInfoGroup *row in self.groups) {
-        if([row.customTitle isEqualToString:groupKey]) {
-            groupSelected = row;
-            break;
+- (FileInfoGroup *) groupByKey:(NSString *) groupKey {
+    for(id row in [fileScroll subviews]) {
+        if([row isKindOfClass:[GroupedView class]]) {
+            GroupedView *castedView = (GroupedView *) row;
+            if([castedView.group.groupKey isEqualToString:groupKey]) {
+                return castedView.group;
+            }
         }
     }
+    return nil;
+}
+
+- (void) groupedViewImageWasSelectedForFile:(MetaFile *) fileSelected forGroupWithKey:(NSString *) groupKey {
     NSArray *listToPass = @[fileSelected];
-    if(groupSelected != nil) {
-        listToPass = groupSelected.fileInfo;
+    FileInfoGroup *group = [self groupByKey:groupKey];
+    if(group != nil) {
+        listToPass = group.fileInfo;
     }
     [delegate revisitedGroupedPhotoDidSelectFile:fileSelected withList:listToPass];
 }
 
-- (void) groupedCellImageWasMarkedForFile:(MetaFile *) fileSelected {
+- (void) groupedViewImageWasMarkedForFile:(MetaFile *) fileSelected {
     if(fileSelected.uuid) {
         if(![selectedFileList containsObject:fileSelected.uuid]) {
             [selectedFileList addObject:fileSelected.uuid];
@@ -497,7 +493,7 @@
     }
 }
 
-- (void) groupedCellImageWasUnmarkedForFile:(MetaFile *) fileSelected {
+- (void) groupedViewImageWasUnmarkedForFile:(MetaFile *) fileSelected {
     if([selectedFileList containsObject:fileSelected.uuid]) {
         [selectedFileList removeObject:fileSelected.uuid];
     }
@@ -530,21 +526,21 @@
     imgFooterActionMenu.hidden = YES;
 }
 
-- (void) groupedCellImageUploadFinishedForFile:(NSString *) fileSelectedUuid {
+- (void) groupedViewImageUploadFinishedForFile:(NSString *) fileSelectedUuid {
 }
 
-- (void) groupedCellImageWasLongPressedForFile:(MetaFile *) fileSelected {
+- (void) groupedViewImageWasLongPressedForFile:(MetaFile *) fileSelected {
     [self setToSelectible];
     [delegate revisitedGroupedPhotoDidChangeToSelectState];
 }
 
-- (void) groupedCellImageUploadQuotaError:(MetaFile *) fileSelected {
+- (void) groupedViewImageUploadQuotaError:(MetaFile *) fileSelected {
 }
 
-- (void) groupedCellImageUploadLoginError:(MetaFile *) fileSelected {
+- (void) groupedViewImageUploadLoginError:(MetaFile *) fileSelected {
 }
 
-- (void) groupedCellImageWasSelectedForView:(SquareImageView *) ref {
+- (void) groupedViewImageWasSelectedForView:(SquareImageView *) ref {
 }
 
 - (void) shouldContinueDelete {

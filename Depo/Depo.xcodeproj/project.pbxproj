@@ -976,6 +976,7 @@
 		94B3BE2C1D81E3EA0086D05E /* CustomInfoWithIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94B3BE2B1D81E3EA0086D05E /* CustomInfoWithIconView.m */; };
 		94B3BE2F1D81F7C40086D05E /* FaqUrlDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94B3BE2E1D81F7C40086D05E /* FaqUrlDao.m */; };
 		94B3BE301D826F0F0086D05E /* LoggerUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 947EDDCC1D0C3B8B0098D2C2 /* LoggerUtil.m */; };
+		94B3BE331D847F560086D05E /* GroupedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94B3BE321D847F560086D05E /* GroupedView.m */; };
 		94B6C8751CB657520083C1A8 /* icon_yukle_depo.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B6C8741CB657520083C1A8 /* icon_yukle_depo.png */; };
 		94B6C8771CB6575A0083C1A8 /* icon_yukle_depo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B6C8761CB6575A0083C1A8 /* icon_yukle_depo@2x.png */; };
 		94B6C8791CB657610083C1A8 /* icon_yukle_depo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B6C8781CB657610083C1A8 /* icon_yukle_depo@3x.png */; };
@@ -2462,6 +2463,8 @@
 		94B3BE2B1D81E3EA0086D05E /* CustomInfoWithIconView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomInfoWithIconView.m; sourceTree = "<group>"; };
 		94B3BE2D1D81F7C40086D05E /* FaqUrlDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaqUrlDao.h; sourceTree = "<group>"; };
 		94B3BE2E1D81F7C40086D05E /* FaqUrlDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaqUrlDao.m; sourceTree = "<group>"; };
+		94B3BE311D847F560086D05E /* GroupedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupedView.h; sourceTree = "<group>"; };
+		94B3BE321D847F560086D05E /* GroupedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupedView.m; sourceTree = "<group>"; };
 		94B6C8741CB657520083C1A8 /* icon_yukle_depo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_yukle_depo.png; sourceTree = "<group>"; };
 		94B6C8761CB6575A0083C1A8 /* icon_yukle_depo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_yukle_depo@2x.png"; sourceTree = "<group>"; };
 		94B6C8781CB657610083C1A8 /* icon_yukle_depo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_yukle_depo@3x.png"; sourceTree = "<group>"; };
@@ -3062,6 +3065,8 @@
 				9432F16B1D5F55F60017973C /* NewFeatureInfoView.m */,
 				949BB5731D6F1E7A00BED9DB /* WelcomePageView.h */,
 				949BB5741D6F1E7A00BED9DB /* WelcomePageView.m */,
+				94B3BE311D847F560086D05E /* GroupedView.h */,
+				94B3BE321D847F560086D05E /* GroupedView.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -5558,6 +5563,7 @@
 				058219C51A384CC6001FA679 /* SearchMoreModalController.m in Sources */,
 				052644AD19D5A2A600B63759 /* SettingsContactsController.m in Sources */,
 				05F931901C160ED200858223 /* SyncLogger.m in Sources */,
+				94B3BE331D847F560086D05E /* GroupedView.m in Sources */,
 				05C7CB6A1ABC91B200A7BF8E /* MetaFileSummary.m in Sources */,
 				051E1EA719CB209F00FD1E03 /* MenuCell.m in Sources */,
 				051E1E0319CAC2F900FD1E03 /* main.m in Sources */,

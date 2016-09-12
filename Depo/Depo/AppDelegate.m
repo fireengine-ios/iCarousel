@@ -121,6 +121,8 @@
         types = UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeBadge;
     }
     
+    [MPush setLocationEnabled:NO];
+    
     [MPush registerForRemoteNotificationTypes:types];
     
     [MPush applicationDidFinishLaunchingWithOptions:launchOptions];

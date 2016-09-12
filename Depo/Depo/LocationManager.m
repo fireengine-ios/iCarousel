@@ -113,7 +113,7 @@
             [delegate locationPermissionGranted];
         }
         [[LocationManager sharedInstance].locManager startMonitoringSignificantLocationChanges];
-    } else {
+    } else if(status == kCLAuthorizationStatusRestricted || status == kCLAuthorizationStatusDenied){
         [[CurioSDK shared] sendEvent:@"LocationPermission" eventValue:@"denied"];
         [MPush hitTag:@"LocationPermission" withValue:@"denied"];
         if(delegate) {

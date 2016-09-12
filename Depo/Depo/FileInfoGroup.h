@@ -21,6 +21,7 @@
 @property (nonatomic, strong) NSString *locationInfo;
 @property (nonatomic, strong) NSString *customTitle;
 @property (nonatomic, strong) NSMutableArray *fileInfo;
+@property (nonatomic, strong) NSString *groupKey;
 @property (nonatomic) int sequence;
 @property (nonatomic) ImageGroupType groupType;
 
