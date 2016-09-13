@@ -236,4 +236,9 @@
 }
 */
 
+- (void) cancelRequests {
+    [recentDao cancelRequest];
+    recentDao = nil;
+}
+
 @end

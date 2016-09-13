@@ -172,4 +172,9 @@
 }
 */
 
+- (void) cancelRequests {
+    [msisdnDao cancelRequest];
+    msisdnDao = nil;
+}
+
 @end

@@ -71,14 +71,13 @@
 @synthesize shareDao;
 @synthesize menuLocked;
 @synthesize syncInfoView;
-@synthesize rootViewController;
-
-- (id) initWithRootViewController:(MyViewController *) _rootViewController {
-    self.rootViewController = _rootViewController;
-    return [self init];
-}
+//@synthesize rootViewController;
 
 - (id) init {
+    return [self initWithRootViewController:[[RevisitedGroupedPhotosController alloc] init]];
+}
+
+- (id) initWithRootViewController:(MyViewController *) _rootViewController {
     self = [super init];
     if (self) {
 
@@ -97,14 +96,10 @@
         menu.closeDelegate = self;
         [scroll addSubview:menu];
         
-        if(!self.rootViewController) {
-            self.rootViewController = [[RevisitedGroupedPhotosController alloc] init];
-        }
-        
-        nav = [[MyNavigationController alloc] initWithRootViewController:self.rootViewController];
+        nav = [[MyNavigationController alloc] initWithRootViewController:_rootViewController];
         nav.view.frame = CGRectMake(kMenuOpenOriginX, 0, self.view.frame.size.width, self.view.frame.size.height);
-        rootViewController.nav = nav;
-        rootViewController.myDelegate = self;
+        _rootViewController.nav = nav;
+        _rootViewController.myDelegate = self;
         [scroll addSubview:nav.view];
         
         transparentView = [[UIView alloc] initWithFrame:CGRectMake(kMenuOpenOriginX, 0, self.view.frame.size.width, self.view.frame.size.height)];

@@ -26,6 +26,7 @@
     int photoCount;
     int groupSequence;
     NSDateFormatter *dateCompareFormat;
+    BOOL anyOngoingPresent;
     
     float yIndex;
 }
@@ -45,6 +46,7 @@
 @synthesize isSelectible;
 @synthesize progress;
 @synthesize searchField;
+@synthesize noItemView;
 
 - (id) initWithFrame:(CGRect)frame {
     if(self = [super initWithFrame:frame]) {
@@ -148,10 +150,16 @@
         inProgressGroup.groupKey = GROUP_INPROGRESS_KEY;
         
         [self addOrUpdateGroup:inProgressGroup];
+        anyOngoingPresent = YES;
+    } else {
+        anyOngoingPresent = NO;
     }
 }
 
 - (void) addOrUpdateGroup:(FileInfoGroup *) group {
+    if (noItemView != nil)
+        [noItemView removeFromSuperview];
+
     GroupedView *alreadyPresentView = nil;
     for(id row in fileScroll.subviews) {
         if([row isKindOfClass:[GroupedView class]]) {
@@ -306,11 +314,20 @@
     isLoading = NO;
     [refreshControl endRefreshing];
     
+    if ([files count] == 0 && !anyOngoingPresent) {
+        if (noItemView == nil) {
+            noItemView = [[NoItemView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, fileScroll.frame.size.height) imageName:@"no_photo_icon" titleText:NSLocalizedString(@"EmptyPhotosVideosTitle", @"") descriptionText:NSLocalizedString(@"EmptyPhotosVideosDescription", @"")];
+            [fileScroll addSubview:noItemView];
+        }
+    } else if (noItemView != nil) {
+        [noItemView removeFromSuperview];
+    }
 }
 
 - (void) readFailCallback:(NSString *) errorMessage {
     [progress hide:YES];
     isLoading = NO;
+    [refreshControl endRefreshing];
 }
 
 /*
@@ -646,6 +663,17 @@
     [deleteDao requestDeleteFiles:selectedFileList];
     [self bringSubviewToFront:progress];
     [progress show:YES];
+}
+
+- (void) cancelRequests {
+    [readDao cancelRequest];
+    readDao = nil;
+    
+    [deleteDao cancelRequest];
+    deleteDao = nil;
+    
+    [albumAddPhotosDao cancelRequest];
+    albumAddPhotosDao = nil;
 }
 
 @end

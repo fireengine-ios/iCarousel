@@ -172,4 +172,9 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
 }
 
+- (void) cancelRequests {
+    [elasticSearchDao cancelRequest];
+    elasticSearchDao = nil;
+}
+
 @end

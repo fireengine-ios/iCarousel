@@ -182,4 +182,9 @@
 - (void) musicModalListReturnedWithSelectedList:(NSArray *) uuids {
 }
 
+- (void) cancelRequests {
+    [audioDao cancelRequest];
+    audioDao = nil;
+}
+
 @end

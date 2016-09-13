@@ -649,4 +649,12 @@
     [APPDELEGATE.base triggerInnerSearch];
 }
 
+- (void) cancelRequests {
+    [usageDao cancelRequest];
+    usageDao = nil;
+
+    [accountDao cancelRequest];
+    accountDao = nil;
+}
+
 @end

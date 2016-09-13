@@ -294,4 +294,15 @@
     [delegate revisitedAlbumListDidFailRetrievingList:errorMessage];
 }
 
+- (void) cancelRequests {
+    [albumsDao cancelRequest];
+    albumsDao = nil;
+    
+    [deleteAlbumDao cancelRequest];
+    deleteAlbumDao = nil;
+    
+    [addAlbumDao cancelRequest];
+    addAlbumDao = nil;
+}
+
 @end

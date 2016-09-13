@@ -473,4 +473,18 @@
 }
 */
 
+- (void) cancelRequests {
+    [elasticSearchDao cancelRequest];
+    elasticSearchDao = nil;
+    
+    [favoriteDao cancelRequest];
+    favoriteDao = nil;
+    
+    [moveDao cancelRequest];
+    moveDao = nil;
+    
+    [deleteDao cancelRequest];
+    deleteDao = nil;
+}
+
 @end

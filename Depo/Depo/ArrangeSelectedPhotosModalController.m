@@ -336,4 +336,9 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
 }
 
+- (void) cancelRequests {
+    [createDao cancelRequest];
+    createDao = nil;
+}
+
 @end

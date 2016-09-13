@@ -520,4 +520,27 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
 }
 
+- (void) cancelRequests {
+    [accountDaoToGetCurrentSubscription cancelRequest];
+    accountDaoToGetCurrentSubscription = nil;
+
+    [accountDaoToLearnIsJobExists cancelRequest];
+    accountDaoToLearnIsJobExists = nil;
+
+    [accountDaoToGetOffers cancelRequest];
+    accountDaoToGetOffers = nil;
+
+    [appleProductsDao cancelRequest];
+    appleProductsDao = nil;
+
+    [iapValidateDao cancelRequest];
+    iapValidateDao = nil;
+
+    [iapInitialValidateDao cancelRequest];
+    iapInitialValidateDao = nil;
+    
+    [accountDaoToActivateOffer cancelRequest];
+    accountDaoToActivateOffer = nil;
+}
+
 @end

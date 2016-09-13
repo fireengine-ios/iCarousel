@@ -20,6 +20,7 @@
 #import "AlbumAddPhotosDao.h"
 #import "MainSearchTextfield.h"
 #import "CustomConfirmView.h"
+#import "NoItemView.h"
 
 @protocol RevisitedGroupedPhotoDelegate <NSObject>
 - (void) revisitedGroupedPhotoDidSelectFile:(MetaFile *) fileSelected withList:(NSArray *) containingList;
@@ -54,6 +55,7 @@
 @property (nonatomic, strong) MBProgressHUD *progress;
 
 @property (nonatomic, strong) MainSearchTextfield *searchField;
+@property (nonatomic, strong) NoItemView *noItemView;
 
 - (void) pullData;
 - (void) setToSelectible;
@@ -61,5 +63,6 @@
 - (void) setToUnselectiblePriorToRefresh;
 - (void) shouldContinueDelete;
 - (void) destinationAlbumChosenWithUuid:(NSString *) chosenAlbumUuid;
+- (void) cancelRequests;
 
 @end

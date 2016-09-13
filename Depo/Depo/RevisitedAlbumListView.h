@@ -44,5 +44,6 @@
 - (void) setToSelectible;
 - (void) setToUnselectible;
 - (void) setToUnselectiblePriorToRefresh;
+- (void) cancelRequests;
 
 @end

@@ -30,7 +30,7 @@
 @property (nonatomic, strong) FloatingAddButton *addButton;
 @property (nonatomic, strong) FloatingAddMenu *addMenu;
 @property (nonatomic, strong) ShareLinkDao *shareDao;
-@property (nonatomic, strong) MyViewController *rootViewController;
+//@property (nonatomic, strong) MyViewController *rootViewController;
 @property (nonatomic) BOOL menuOpen;
 @property (nonatomic) BOOL menuLocked;
 

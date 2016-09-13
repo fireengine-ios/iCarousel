@@ -262,4 +262,9 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void) cancelRequests {
+    [createDao cancelRequest];
+    createDao = nil;
+}
+
 @end

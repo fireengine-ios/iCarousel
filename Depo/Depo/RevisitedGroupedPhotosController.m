@@ -139,7 +139,7 @@
     PhotoAlbumController *albumController = [[PhotoAlbumController alloc] initWithAlbum:albumSelected];
     albumController.delegate = self;
     albumController.nav = self.nav;
-    [self.nav pushViewController:albumController animated:NO];
+    [self.navigationController pushViewController:albumController animated:NO];
 }
 
 - (void) revisitedAlbumListChangeTitleTo:(NSString *)pageTitle {
@@ -388,6 +388,11 @@
         [[UploadQueue sharedInstance] addNewUploadTask:manager];
     }
     [groupView pullData];
+}
+
+- (void) cancelRequests {
+    [groupView cancelRequests];
+    [albumView cancelRequests];
 }
 
 @end

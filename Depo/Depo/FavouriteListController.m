@@ -307,4 +307,12 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void) cancelRequests {
+    [listDao cancelRequest];
+    listDao = nil;
+
+    [favoriteDao cancelRequest];
+    favoriteDao = nil;
+}
+
 @end

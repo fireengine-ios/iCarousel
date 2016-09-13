@@ -947,4 +947,33 @@
     }
 }
 
+- (void) cancelRequests {
+    [fileListDao cancelRequest];
+    fileListDao = nil;
+    
+    [loadMoreDao cancelRequest];
+    loadMoreDao = nil;
+
+    [addFolderDao cancelRequest];
+    addFolderDao = nil;
+    
+    [deleteDao cancelRequest];
+    deleteDao = nil;
+
+    [folderDeleteDao cancelRequest];
+    folderDeleteDao = nil;
+    
+    [favoriteDao cancelRequest];
+    favoriteDao = nil;
+
+    [folderFavDao cancelRequest];
+    folderFavDao = nil;
+
+    [moveDao cancelRequest];
+    moveDao = nil;
+
+    [renameDao cancelRequest];
+    renameDao = nil;
+}
+
 @end
