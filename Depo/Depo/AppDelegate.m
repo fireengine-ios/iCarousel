@@ -540,14 +540,14 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [[CurioNotificationManager shared] didReceiveNotification:userInfo];
-    [MPush applicationDidReceiveRemoteNotification:userInfo showAlert:NO];
+    [MPush applicationDidReceiveRemoteNotification:userInfo];
     [self application:application didFinishLaunchingWithOptions:userInfo];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     completionHandler(UIBackgroundFetchResultNewData);
     [[CurioNotificationManager shared] didReceiveNotification:userInfo];
-    [MPush applicationDidReceiveRemoteNotification:userInfo showAlert:NO];
+    [MPush applicationDidReceiveRemoteNotification:userInfo];
     [self application:application didFinishLaunchingWithOptions:userInfo];
 }
 

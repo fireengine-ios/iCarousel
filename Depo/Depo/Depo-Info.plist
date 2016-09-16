@@ -110,5 +110,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+    <key>MenloPushServerURL</key>
+    <string>https://turkcell.menloworks.com</string>
 </dict>
 </plist>

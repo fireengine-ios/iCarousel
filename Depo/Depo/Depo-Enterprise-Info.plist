@@ -110,5 +110,7 @@
 			</dict>
 		</array>
 	</dict>
+    <key>MenloPushServerURL</key>
+    <string>https://turkcell.menloworks.com</string>
 </dict>
 </plist>

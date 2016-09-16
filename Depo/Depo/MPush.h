@@ -1,56 +1,43 @@
 //
 //  MPush.h
-//  МPush
-//
-//  Created by Alex on 6/8/15.
-//  Copyright (c) 2015 МPush. All rights reserved.
-//
+//  MenloPush
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 /**
  *	Notification name, which will be sent when device registered in the server.
  */
-extern NSString *const МPushDeviceRegistrationNotification;
+extern NSString *const MPushDeviceRegistrationNotification;
 
 @interface MPush : NSObject
 
 /**
- *  Set external id of device which can be used then on platform to target devices
+ *	You should call it in [UIApplication applicationDidFinishLaunchingWithOptions:] method after configuring the library.
  */
-+ (void)setExternalId:(NSString *)externalId;
++ (void)applicationDidFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
 
 /**
- *  Check sandbox mode or not. Call singletone and check sandbox mode in it.
- *  Sandbox mode can switched in plist. Key for it: "MenloPushSandboxMode".
+ *	You should call it when application calls [UIApplication application: didRegisterForRemoteNotificationsWithDeviceToken:] method.
  */
-+ (BOOL)isSandboxModeOn;
++ (void)applicationDidRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken;
 
 /**
- *	Switches on/off in-app messages.
- *  By default is off.
+ *	You should call it when application calls [UIApplication application: didFailToRegisterForRemoteNotificationsWithError:] method.
  */
-+ (void)setInAppMessageEnabled:(BOOL)enabled;
++ (void)applicationDidFailToRegisterForRemoteNotificationsWithError:(NSError *)error;
 
 /**
- *  Switches on/off use location manager in the app.
- *  By default is on.
+ *	You should call it when application calls [UIApplication application: didReceiveRemoteNotification:] method.
  */
-+ (void)setLocationEnabled:(BOOL)locationEnabled;
++ (void)applicationDidReceiveRemoteNotification:(NSDictionary *)userInfo;
 
 /**
- *  If set to YES, application will ask about location permissions on first launch.
- *  If set to NO, you have manually ask about location permissions anytime you need.
- *  By default is YES.
- *  Has no affect is locationEnabled is set to NO.
+ *	You should call it when application calls [UIApplication application: didReceiveLocalNotification:] method.
  */
-+ (void)setAsksForLocationPermissions:(BOOL)asksForLocationPermissions;
++ (void)applicationDidReceiveLocalNotification:(UILocalNotification *)notification;
 
-/**
- *	Should or not application reset a badge icon.
- */
-+ (void)setShouldWipeBadgeNumber:(BOOL)shouldWipeBadgeNumber;
-+ (BOOL)shouldWipeBadgeNumber;
+
+
 
 /**
  *	Register current application and this lib to receive notifications. You should call it instead of [UIApplication registerForRemoteNotificationTypes:].
@@ -64,43 +51,41 @@ extern NSString *const МPushDeviceRegistrationNotification;
 + (void)unregisterForRemoteNotifications;
 
 /**
- *	Creates and runs lib. You should call it in [UIApplication applicationDidFinishLaunchingWithOptions:] method after configuring this library.
+ *	Should or not application reset a badge icon.
  */
-+ (void)applicationDidFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
++ (void)setShouldWipeBadgeNumber:(BOOL)shouldWipeBadgeNumber;
+
+
+
 
 /**
- *	You should call it when application calls [UIApplication application: didRegisterForRemoteNotificationsWithDeviceToken:] method.
+ *  Switches on/off using geofence and ibeacon monitoring in the app.
+ *  By default is off.
  */
-+ (void)applicationDidRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken;
++ (void)setLocationEnabled:(BOOL)locationEnabled;
 
 /**
- *	You should call it when your app receives notification and calls -applicationDidReceiveRemoteNotification: method. Lib shows alert with notification text and mark push as read on the platform.
- *  Alert is not shown if showAlert is set to NO.
+ *  If set to YES, application will ask about location permissions on first launch.
+ *  If set to NO, you have manually ask about location permissions anytime you need.
+ *  By default is YES.
+ *  Has no affect is locationEnabled is set to NO.
  */
-+ (void)applicationDidReceiveRemoteNotification:(NSDictionary *)userInfo showAlert:(BOOL)showAlert;
++ (void)setAsksForLocationPermissions:(BOOL)asksForLocationPermissions;
 
 /**
- *	You should call it when your app receives notification and calls -applicationDidReceiveRemoteNotification: method. Lib shows alert with notification text and mark push as read on the platform.
+ *  Ask for location permission.
+ *  Use only of locationEnabled is set to YES and asksForLocationPermissions is set to NO.
  */
-+ (void)applicationDidReceiveRemoteNotification:(NSDictionary *)userInfo;
++ (void)askForLocationPermissions;
+
+
+
 
 /**
- *	Does nothing.
+ *	Switches on/off in-app messages.
+ *  By default is off.
  */
-+ (void)applicationDidFailToRegisterForRemoteNotificationsWithError:(NSError *)error;
-
-/**
- *	Returns version of the lib.
- */
-+ (NSString *)version;
-
-/**
- *	Returns dictionary with device token and device id.
- *  MPushDeviceID - key for Menlo device id.
- *  deviceToken - key for token.
- *  deviceId - key for device IDFV.
- */
-+ (NSDictionary *)deviceInfo;
++ (void)setInAppMessageEnabled:(BOOL)enabled;
 
 /**
  *	Calls "eventHit" api method.
@@ -153,6 +138,44 @@ extern NSString *const МPushDeviceRegistrationNotification;
 + (void)setImpressionsStoreLimit:(NSUInteger *)limit;
 + (void)setSessionsStoreLimit:(NSUInteger *)limit;
 
+
+
+
+/**
+ *  Switches on/off collecting IDFA.
+ *  By default is off.
+ */
++ (void)setAttributionsEnabled:(BOOL)attributionsEnabled;
+
+/**
+ *  Switches on/off collecting device name.
+ *  By default is on.
+ */
++ (void)setNameCollectingEnabled:(BOOL)nameCollectingEnabled;
+
+/**
+ *  Set external id of device which can be used then on platform to target devices
+ */
++ (void)setExternalId:(NSString *)externalId;
+
+/**
+ *	Returns version of the lib.
+ */
++ (NSString *)version;
+
+/**
+ *	Returns dictionary with device token and device id.
+ *  MPushDeviceID - key for MenloPush device id.
+ *  deviceToken - key for token.
+ *  deviceID - key for device identifier (IDFV).
+ *  externalID - key for external id.
+ */
++ (NSDictionary *)deviceInfo;
+
+
+
+
+
 /**
  *	Used to get a list of push notifications for current device
  */
@@ -164,9 +187,18 @@ extern NSString *const МPushDeviceRegistrationNotification;
 + (void)markPushAsRead:(NSString *)actionId;
 
 /**
- *	Shows LibPushListViewController like modal view controller. Shows Inbox screen.
+ *	Shows Inbox screen.
  */
 + (void)showPushListController;
+
+
+
+
+
+/**
+ *  Change app key at runtime
+ */
++ (void)setSandboxModeEnabled:(BOOL)sandboxModeEnabled;
 
 /**
  *  Turn on/off showing of debug logs
@@ -190,12 +222,10 @@ extern NSString *const МPushDeviceRegistrationNotification;
 + (void)setServerExpectedCertificateFromFile:(NSString *)filePath;
 @end
 
-
 /**
- * Model for LibPushListViewController. When server returns pushList then list is parsed to array of models.
+ *  Push model
  */
 @interface MPushModel : NSObject
-
 @property (nonatomic, readonly) NSDate      *createDate;
 @property (nonatomic, readonly) NSString    *pushId;
 @property (nonatomic, readonly) NSString    *locationId;
@@ -204,9 +234,9 @@ extern NSString *const МPushDeviceRegistrationNotification;
 @property (nonatomic, readonly) NSString    *messageId;
 @property (nonatomic, readonly) NSString    *url;
 @property (nonatomic, readonly) BOOL        shouldOpenInApp;
-@property (nonatomic, assign)   BOOL        isRead;
+@property (nonatomic, readonly) BOOL        isRead;
 @property (nonatomic, readonly) NSDictionary *customPayload;
-
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
-
 @end
+
+
+

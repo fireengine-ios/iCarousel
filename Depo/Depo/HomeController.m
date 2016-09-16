@@ -473,7 +473,9 @@
     } else if(percentUsageVal >= 80.0) {
         eventValue = @"quota_80_percent_full";
     }
-    [MPush hitEvent:eventValue];
+    if(eventValue) {
+        [MPush hitEvent:eventValue];
+    }
     [MPush hitTag:@"quota_status" withValue:[NSString stringWithFormat:@"%.0f", percentUsageVal]];
     
     if(APPDELEGATE.session.usage.totalStorage - APPDELEGATE.session.usage.usedStorage <= 5242880) {
