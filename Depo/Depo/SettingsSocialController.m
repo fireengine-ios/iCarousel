@@ -140,7 +140,8 @@
     IGLog(@"FB Permission succeeded");
     [self hideLoading];
     //TODO servisten gelende publish_actions vardi, o da hata veriyordu. Ayrıca publish için ikinci bir request yapmak gerekiyor API'ye
-    [self triggerFBLoginWithPermissions:[NSArray arrayWithObjects:@"public_profile", @"user_photos", @"user_videos", @"user_birthday", @"user_events", nil]];
+//    [self triggerFBLoginWithPermissions:[NSArray arrayWithObjects:@"public_profile", @"user_photos", @"user_videos", @"user_birthday", @"user_events", nil]];
+    [self triggerFBLoginWithPermissions:permissions];
 }
 
 - (void) fbPermissionFailCallback:(NSString *) errorMessage {
