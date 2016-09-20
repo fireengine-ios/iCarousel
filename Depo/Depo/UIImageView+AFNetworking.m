@@ -147,7 +147,7 @@ static char kAFImageRequestOperationObjectKey;
         AFImageRequestOperation *requestOperation = [[AFImageRequestOperation alloc] initWithRequest:urlRequest];
         [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
             if ([[urlRequest URL] isEqual:[[self.af_imageRequestOperation request] URL]]) {
-                self.image = IS_IPAD ? cacheFlag ? responseObject : [self resizeImage:responseObject] : responseObject;
+                self.image = cacheFlag ? responseObject : [self resizeImage:responseObject];
                 self.af_imageRequestOperation = nil;
             }
 
