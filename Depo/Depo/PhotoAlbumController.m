@@ -315,7 +315,7 @@
         detail.nav = modalNav;
         [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
     } else if(fileSelected.contentType == ContentTypeVideo) {
-        VideoPreviewController *detail = [[VideoPreviewController alloc] initWithFile:fileSelected];
+        VideoPreviewController *detail = [[VideoPreviewController alloc] initWithFile:fileSelected referencedFromAlbum:YES];
         MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
         detail.nav = modalNav;
         [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];

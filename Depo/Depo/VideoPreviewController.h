@@ -27,6 +27,7 @@
     FavoriteDao *favDao;
     RenameDao *renameDao;
     ShareLinkDao *shareDao;
+    BOOL refFromAlbumFlag;
 }
 
 @property (nonatomic, weak) id<VideoPreviewDelegate> delegate;
@@ -34,5 +35,6 @@
 @property (nonatomic, strong) CustomAVPlayer *avPlayer;
 
 - (id)initWithFile:(MetaFile *) _file;
+- (id)initWithFile:(MetaFile *) _file referencedFromAlbum:(BOOL) albumFlag;
 
 @end
