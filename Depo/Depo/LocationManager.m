@@ -88,6 +88,8 @@
             }
             [[LocationManager sharedInstance].locManager startMonitoringSignificantLocationChanges];
         }
+    } else {
+        [delegate locationPermissionError:NSLocalizedString(@"LocationNotEnabled", @"")];
     }
 }
 

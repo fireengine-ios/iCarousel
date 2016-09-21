@@ -12,8 +12,9 @@
 #import "LocationManager.h"
 #import "TTTAttributedLabel.h"
 #import "CustomInfoWithIconView.h"
+#import "CustomAlertView.h"
 
-@interface PostLoginSyncPrefController : MyViewController <UITableViewDataSource, UITableViewDelegate, LocationManagerDelegate, TTTAttributedLabelDelegate, CustomInfoWithIconDelegate>
+@interface PostLoginSyncPrefController : MyViewController <UITableViewDataSource, UITableViewDelegate, LocationManagerDelegate, TTTAttributedLabelDelegate, CustomInfoWithIconDelegate, CustomAlertDelegate>
 
 @property (nonatomic, strong) UISwitch *autoSyncSwitch;
 @property (nonatomic, strong) CustomLabel *choiceTitleLabel;

@@ -13,6 +13,7 @@
 #import "User.h"
 #import <CoreTelephony/CTCarrier.h>
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
+#import "SyncUtil.h"
 
 @implementation AppUtil
 
@@ -810,6 +811,24 @@
 + (BOOL) readLifeboxTeaserFlag {
     NSString *keyVal = [NSString stringWithFormat:@"LIFEBOX_TEASER_PAGE_SHOWN_FLAG_%@", APPDELEGATE.session.user.username];
     return [[NSUserDefaults standardUserDefaults] boolForKey:keyVal];
+}
+
++ (void) writeLocInfoPopupShownFlag {
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"LOC_INFO_POPUP_SHOWN_%@", [SyncUtil readBaseUrlConstant]]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (BOOL) readLocInfoPopupShownFlag {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"LOC_INFO_POPUP_SHOWN_%@", [SyncUtil readBaseUrlConstant]]];
+}
+
++ (void) writeLastLocInfoPopupShownTime {
+    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:[NSString stringWithFormat:@"LAST_LOC_INFO_POPUP_SHOWN_TIME_%@", [SyncUtil readBaseUrlConstant]]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (NSDate *) readLastLocInfoPopupShownTime {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"LAST_LOC_INFO_POPUP_SHOWN_TIME_%@", [SyncUtil readBaseUrlConstant]]];
 }
 
 @end

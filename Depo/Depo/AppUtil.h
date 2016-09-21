@@ -67,4 +67,10 @@
 + (void) writeLifeboxTeaserFlag;
 + (BOOL) readLifeboxTeaserFlag;
 
++ (void) writeLocInfoPopupShownFlag;
++ (BOOL) readLocInfoPopupShownFlag;
+
++ (void) writeLastLocInfoPopupShownTime;
++ (NSDate *) readLastLocInfoPopupShownTime;
+
 @end

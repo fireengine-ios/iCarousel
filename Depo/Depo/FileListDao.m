@@ -66,7 +66,7 @@
 	if (!error) {
 		NSString *responseEnc = [request responseString];
 		
-        //        NSLog(@"File Listing Response: %@", responseEnc);
+                NSLog(@"File Listing Response: %@", responseEnc);
         
 		SBJSON *jsonParser = [SBJSON new];
 		NSDictionary *mainDict = [jsonParser objectWithString:responseEnc];

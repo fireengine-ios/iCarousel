@@ -197,11 +197,11 @@
 #pragma mark LocationManagerDelegate methods
 
 - (void) locationPermissionDenied {
-//    [self showErrorAlertWithMessage:NSLocalizedString(@"LocForAutoSyncError", @"")];
-//    [autoSyncSwitch setOn:NO];
+    CustomAlertView *alert = [[CustomAlertView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Error", @"") withMessage:NSLocalizedString(@"LocationNotEnabled", @"") withModalType:ModalTypeError];
+    alert.delegate = self;
+    [APPDELEGATE showCustomAlert:alert];
     
     [LocationManager sharedInstance].delegate = nil;
-    [self triggerAssetPermissionAndContinue];
 }
 
 - (void) locationPermissionGranted {
@@ -211,8 +211,18 @@
 }
 
 - (void) locationPermissionError:(NSString *)errorMessage {
+    CustomAlertView *alert = [[CustomAlertView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Error", @"") withMessage:errorMessage withModalType:ModalTypeError];
+    [APPDELEGATE showCustomAlert:alert];
+
     [LocationManager sharedInstance].delegate = nil;
-    [self triggerAssetPermissionAndContinue];
+}
+
+- (void) didDismissCustomAlert:(CustomAlertView *)alertView {
+    [autoSyncSwitch setOn:NO];
+    [self fadeOut:choiceTable duration:0.1];
+    [self fadeOut:choiceTitleLabel duration:0.1];
+
+    [self performSelector:@selector(moveToOpeningPage) withObject:nil afterDelay:0.2f];
 }
 
 - (void) triggerAssetPermissionAndContinue {
@@ -274,7 +284,9 @@
     [CacheUtil writeCachedSettingDataRoaming:NO];
     
     [AppUtil writeFirstVisitOverFlag];
+    [AppUtil writeLocInfoPopupShownFlag];
     //    [APPDELEGATE triggerHome];
+    
     [APPDELEGATE startOpeningPage];
 }
 
@@ -293,23 +305,27 @@
         locInfoPopup.delegate = self;
         [self.view addSubview:locInfoPopup];
     } else {
-        [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOff];
-        [CacheUtil writeCachedSettingSyncContacts:EnableOptionOff];
-        
-        [[CurioSDK shared] sendEvent:@"SyncClosed" eventValue:@"true"];
-        [MPush hitTag:@"SyncClosed" withValue:@"true"];
-        [[CurioSDK shared] sendEvent:@"FirstAutoSyncPref" eventValue:@"closed"];
-        
-        [MPush hitTag:@"firstautosync_off"];
-        [MPush hitEvent:@"firstautosync_off"];
-        
-        [CacheUtil writeCachedSettingSyncingConnectionType:selectedOption];
-        [CacheUtil writeCachedSettingDataRoaming:NO];
-        
-        [AppUtil writeFirstVisitOverFlag];
-        //    [APPDELEGATE triggerHome];
-        [APPDELEGATE startOpeningPage];
+        [self moveToOpeningPage];
     }
+}
+
+- (void) moveToOpeningPage {
+    [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOff];
+    [CacheUtil writeCachedSettingSyncContacts:EnableOptionOff];
+    
+    [[CurioSDK shared] sendEvent:@"SyncClosed" eventValue:@"true"];
+    [MPush hitTag:@"SyncClosed" withValue:@"true"];
+    [[CurioSDK shared] sendEvent:@"FirstAutoSyncPref" eventValue:@"closed"];
+    
+    [MPush hitTag:@"firstautosync_off"];
+    [MPush hitEvent:@"firstautosync_off"];
+    
+    [CacheUtil writeCachedSettingSyncingConnectionType:selectedOption];
+    [CacheUtil writeCachedSettingDataRoaming:NO];
+    
+    [AppUtil writeFirstVisitOverFlag];
+    //    [APPDELEGATE triggerHome];
+    [APPDELEGATE startOpeningPage];
 }
 
 - (void) customInfoWithIconViewDidDismiss {

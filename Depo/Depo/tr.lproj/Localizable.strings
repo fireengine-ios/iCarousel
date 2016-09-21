@@ -276,7 +276,7 @@
 "PassSmsTitle"="ŞİFRE ALMAK İÇİN";
 
 "FavouritesTitle"="Favoriler";
-"ConnectionErrorWarning"="Bir bağlantı sorunu oluştu. Lütfen internet bağlantınızı kontrol edin.";
+"ConnectionErrorWarning"="İnternet erişiminizin aktif olduğuna ve Ayarlar/lifebox altında Hücresel Veri'nin açık olduğuna emin olun.";
 "NoFavouriteFound"="Favori dosyanız yok";
 
 "Auto"="Otomatik";
@@ -472,7 +472,7 @@
 "LocalNotificationManualUploadsFinished"="Yüklemeler tamamlandı, telefon hafızanızda yer açmak için bu dosyaları telefonunuzdan silebilirsiniz.";
 "LocalNotificationAutoUploadsFinished"="Fotoğraflarınız Lifebox'unuza yüklendi. Görüntülemek ister misiniz?";
 
-"LocationNotEnabled"="Konum Servisi açık değil.";
+"LocationNotEnabled"="Arka planda dosyalarınızın sync olması için Konum servisinizin açık olması gerekmektedir.";
 
 "PurchasingViewInfo"="*ÜCRET İLK FATURANIZA YANSITILACAKTIR";
 "PurchasingViewSuccessInfo"="Paketinizin aktivasyonu zaman alabilir. Değişiklik gerçekleştiğinde sms ile bilgilendirileceksiniz.";
@@ -490,7 +490,7 @@
 "ItemTitle"="adet";
 "ItemsTitle"="adet";
 
-"NoConnErrorMessage"="Lütfen internet bağlantınızı kontrol ediniz.";
+"NoConnErrorMessage"="İnternet erişiminizin aktif olduğuna ve Ayarlar/lifebox altında Hücresel Veri'nin açık olduğuna emin olun.";
 
 "VideoPlayErrorTitle"="Video Oynatılamadı";
 "VideoPlayErrorDescription"="Bu Video içeriği oynatılamıyor. Lütfen başka bir Video içeriği deneyin.";
@@ -780,4 +780,5 @@
 "DeleteFileInAlbumAlert"="Bu resmin silinmesi durumunda resminiz albümden de kaldırılacaktır. Onaylıyor musunuz?";
 
 "LocInfoPopup"="Lokasyon İzni";
-"LocSubinfoPopup"="Arka planda dosyalarınızın güncellenmesi için lokasyonunuz kullanılacaktır.";
+"LocSubinfoPopup"="Dosyalarınız arka planda güncellenirken lokasyon bilginiz kullanılacaktır.";
+"LocSubInfoPeriodicMessage"="Arka planda dosyalarınızın sync olması için konum iznini Ayarlar/Gizlilik/Konum Servisleri altından açabilirsiniz.";

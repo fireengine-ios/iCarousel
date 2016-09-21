@@ -198,7 +198,7 @@
 
 #define EMAIL_NOT_VERIFIED_ERROR_MESSAGE @"EMAIL_NOT_VERIFIED"
 
-#define NO_CONN_ERROR_MESSAGE @"Lütfen internet bağlantınızı kontrol ediniz."
+#define NO_CONN_ERROR_MESSAGE @"İnternet erişiminizin aktif olduğuna ve Ayarlar/lifebox altında Hücresel Veri'nin açık olduğuna emin olun."
 
 #define INVALID_CONTENT_ERROR_MESSAGE @"Geçersiz bir değer gönderildi. Lütfen kontrol ediniz."
 

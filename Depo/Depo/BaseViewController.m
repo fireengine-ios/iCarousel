@@ -53,6 +53,7 @@
 #import "NewFeatureInfoController.h"
 #import "NewFeatureInfoView.h"
 #import "RevisitedGroupedPhotosController.h"
+#import "CustomInfoWithIconView.h"
 
 @interface BaseViewController ()
 
@@ -227,6 +228,24 @@
         NewFeatureInfoView *featurePresentView = [[NewFeatureInfoView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
         [self.view addSubview:featurePresentView];
         [AppUtil writeLifeboxTeaserFlag];
+    } else {
+        if(![AppUtil readLocInfoPopupShownFlag]) {
+            NSDate *lastInfoShownDate = [AppUtil readLastLocInfoPopupShownTime];
+            BOOL showNewAlert = NO;
+            if(!lastInfoShownDate) {
+                showNewAlert = YES;
+            } else {
+                NSDate *today = [NSDate date];
+                if([today timeIntervalSinceDate:lastInfoShownDate] > 15*24*3600) {
+                    showNewAlert = YES;
+                }
+            }
+            if(showNewAlert) {
+                CustomInfoWithIconView *locInfoPopup = [[CustomInfoWithIconView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) withIcon:@"icon_locationperm.png" withInfo:NSLocalizedString(@"LocInfoPopup", @"") withSubInfo:NSLocalizedString(@"LocSubInfoPeriodicMessage", @"") isCloseable:YES];
+                [self.view addSubview:locInfoPopup];
+                [AppUtil writeLastLocInfoPopupShownTime];
+            }
+        }
     }
 }
 
