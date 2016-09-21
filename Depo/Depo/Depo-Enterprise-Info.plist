@@ -29,7 +29,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Arka planda dosyalarınızın güncellenmesi için lokasyonunuz kullanılacaktır.</string>
+	<string>Your location will be used for background syncing</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>TurkcellSaturaReg.ttf</string>
@@ -110,7 +110,7 @@
 			</dict>
 		</array>
 	</dict>
-    <key>MenloPushServerURL</key>
-    <string>https://turkcell.menloworks.com</string>
+	<key>MenloPushServerURL</key>
+	<string>https://turkcell.menloworks.com</string>
 </dict>
 </plist>
