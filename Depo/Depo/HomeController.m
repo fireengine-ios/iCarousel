@@ -33,6 +33,8 @@
 #import "GroupedPhotosAndVideosController.h"
 #import "RevisitedGroupedPhotosController.h"
 
+#include <math.h>
+
 @interface HomeController ()
 
 @end
@@ -476,7 +478,9 @@
     if(eventValue) {
         [MPush hitEvent:eventValue];
     }
-    [MPush hitTag:@"quota_status" withValue:[NSString stringWithFormat:@"%.0f", percentUsageVal]];
+    if(!isnan(percentUsageVal)) {
+        [MPush hitTag:@"quota_status" withValue:[NSString stringWithFormat:@"%.0f", percentUsageVal]];
+    }
     
     if(APPDELEGATE.session.usage.totalStorage - APPDELEGATE.session.usage.usedStorage <= 5242880) {
         [MPush hitTag:@"quota_5_mb_left"];
