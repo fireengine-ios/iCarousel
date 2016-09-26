@@ -16,6 +16,8 @@
 - (id) initWithFrame:(CGRect)frame withBgImageName:(NSString *) imgName withTitle:(NSString *) titleVal withSubTitle:(NSString *) subTitleVal withIcon:(NSString *) iconName {
     if(self = [super initWithFrame:frame]) {
         
+        float topIndex = IS_IPAD ? 150 : 0;
+        
         UIImage *bgImg = [UIImage imageNamed:imgName];
         UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
         bgImgView.contentMode = UIViewContentModeScaleAspectFill;
@@ -32,14 +34,14 @@
         float infoHeight = [Util calculateHeightForText:titleVal forWidth:infoWidth forFont:infoFont] + 10;
         float subInfoHeight = [Util calculateHeightForText:subTitleVal forWidth:infoWidth forFont:subInfoFont] + 10;
 
-        CustomLabel *infoLabel = [[CustomLabel alloc] initWithFrame:CGRectMake((self.frame.size.width - infoWidth)/2, IS_IPHONE_4_OR_LESS ? 60 : 70, infoWidth, infoHeight) withFont:infoFont withColor:[UIColor whiteColor] withText:titleVal withAlignment:NSTextAlignmentLeft numberOfLines:0];
+        CustomLabel *infoLabel = [[CustomLabel alloc] initWithFrame:CGRectMake((self.frame.size.width - infoWidth)/2, topIndex + (IS_IPHONE_4_OR_LESS ? 60 : 70), infoWidth, infoHeight) withFont:infoFont withColor:[UIColor whiteColor] withText:titleVal withAlignment:NSTextAlignmentLeft numberOfLines:0];
         [self addSubview:infoLabel];
 
-        CustomLabel *subInfoLabel = [[CustomLabel alloc] initWithFrame:CGRectMake((self.frame.size.width - infoWidth)/2, (IS_IPHONE_4_OR_LESS ? 50 : 70) + infoHeight + (IS_IPHONE_4_OR_LESS ? 0 : 10), infoWidth, subInfoHeight) withFont:subInfoFont withColor:[UIColor whiteColor] withText:subTitleVal withAlignment:NSTextAlignmentLeft numberOfLines:0];
+        CustomLabel *subInfoLabel = [[CustomLabel alloc] initWithFrame:CGRectMake((self.frame.size.width - infoWidth)/2, topIndex + (IS_IPHONE_4_OR_LESS ? 50 : 70) + infoHeight + (IS_IPHONE_4_OR_LESS ? 0 : 10), infoWidth, subInfoHeight) withFont:subInfoFont withColor:[UIColor whiteColor] withText:subTitleVal withAlignment:NSTextAlignmentLeft numberOfLines:0];
         [self addSubview:subInfoLabel];
         
         UIImage *iconImg = [UIImage imageNamed:iconName];
-        UIImageView *iconImgView = [[UIImageView alloc] initWithFrame:CGRectMake((self.frame.size.width - iconImg.size.width)/2, subInfoLabel.frame.origin.y + subInfoLabel.frame.size.height + (IS_IPHONE_4_OR_LESS ? 0 : 10), iconImg.size.width, iconImg.size.height)];
+        UIImageView *iconImgView = [[UIImageView alloc] initWithFrame:CGRectMake((self.frame.size.width - iconImg.size.width)/2, topIndex + subInfoLabel.frame.origin.y + subInfoLabel.frame.size.height + (IS_IPHONE_4_OR_LESS ? 0 : 10), iconImg.size.width, iconImg.size.height)];
         iconImgView.image = iconImg;
         [self addSubview:iconImgView];
     }

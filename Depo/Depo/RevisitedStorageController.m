@@ -93,8 +93,9 @@
     mainTable.tableHeaderView = dummyView;
     mainTable.contentInset = UIEdgeInsetsMake(-dummyViewHeight, 0, 0, 0);
 
-    UIView *tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 80)];
-    CustomButton *promoButton = [[CustomButton alloc] initWithFrame:CGRectMake(20, 10, tableFooterView.frame.size.width - 40, 60) withImageName:@"buttonbg_yellow.png" withTitle:NSLocalizedString(@"PromoCodeEntrance", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withColor:[Util UIColorForHexColor:@"363e4f"]];
+    UIView *tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, mainTable.frame.size.width, 80)];
+    float buttonWidth = 280;
+    CustomButton *promoButton = [[CustomButton alloc] initWithFrame:CGRectMake((tableFooterView.frame.size.width - buttonWidth)/2, 10, buttonWidth, 60) withImageName:@"buttonbg_yellow.png" withTitle:NSLocalizedString(@"PromoCodeEntrance", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withColor:[Util UIColorForHexColor:@"363e4f"]];
     [promoButton addTarget:self action:@selector(triggerPromo) forControlEvents:UIControlEventTouchUpInside];
     [tableFooterView addSubview:promoButton];
     

@@ -29,10 +29,15 @@
         SBJSON *jsonParser = [SBJSON new];
         NSDictionary *mainDict = [jsonParser objectWithString:responseStr];
         if(mainDict != nil && [mainDict isKindOfClass:[NSDictionary class]]) {
-            NSArray *permissionsArr = [mainDict objectForKey:@"permissions"];
-            if(permissionsArr != nil && ![permissionsArr isKindOfClass:[NSNull class]]) {
+            NSArray *readArr = [mainDict objectForKey:@"read"];
+            NSArray *publishArr = [mainDict objectForKey:@"write"];
+            if(readArr != nil && ![readArr isKindOfClass:[NSNull class]]
+               && publishArr != nil  && ![publishArr isKindOfClass:[NSNull class]]) {
                 IGLog(@"FBPermissionDao request finished successfully");
-                [self shouldReturnSuccessWithObject:permissionsArr];
+                NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
+                [result setObject:readArr forKey:@"read"];
+                [result setObject:publishArr forKey:@"publish"];
+                [self shouldReturnSuccessWithObject:result];
                 return;
             }
         } else if(mainDict != nil && [mainDict isKindOfClass:[NSArray class]]) {

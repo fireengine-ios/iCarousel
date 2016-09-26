@@ -136,7 +136,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void) fbPermissionSuccessCallback:(NSArray *) permissions {
+- (void) fbPermissionSuccessCallback:(NSDictionary *) permissions {
     IGLog(@"FB Permission succeeded");
     [self hideLoading];
     //TODO servisten gelende publish_actions vardi, o da hata veriyordu. Ayrıca publish için ikinci bir request yapmak gerekiyor API'ye
@@ -163,23 +163,50 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:FB_AUTO_SYNC_STOP_ERR_NOT_KEY object:nil userInfo:nil];
 }
 
-- (void) triggerFBLoginWithPermissions:(NSArray *) permissions {
+- (void) triggerFBLoginWithPermissions:(NSDictionary *) permissions {
     [self hideLoading];
+    
+    NSArray *readPermissions = [permissions objectForKey:@"read"];
+    NSArray *publishPermissions = [permissions objectForKey:@"publish"];
+
     FBSDKLoginManager *fbLoginButton = [[FBSDKLoginManager alloc] init];
-    [fbLoginButton logInWithReadPermissions:permissions fromViewController:self handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+    [fbLoginButton logInWithReadPermissions:readPermissions fromViewController:self handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
         if (error) {
-            NSLog(@"Process error");
+            NSLog(@"Process error1");
             dispatch_async(dispatch_get_main_queue(), ^(){
                 [self showErrorAlertWithMessage:NSLocalizedString(@"FBConnectError", @"")];
                 [[NSNotificationCenter defaultCenter] postNotificationName:FB_AUTO_SYNC_STOP_ERR_NOT_KEY object:nil userInfo:nil];
             });
         } else if (result.isCancelled) {
-            NSLog(@"Cancelled");
+            NSLog(@"Cancelled1");
             dispatch_async(dispatch_get_main_queue(), ^(){
                 [[NSNotificationCenter defaultCenter] postNotificationName:FB_AUTO_SYNC_STOP_ERR_NOT_KEY object:nil userInfo:nil];
             });
         } else {
-            NSLog(@"Logged in");
+            NSLog(@"Read permission Logged in");
+            dispatch_async(dispatch_get_main_queue(), ^(){
+                [self performSelector:@selector(triggerNextPermissionStep:) withObject:publishPermissions afterDelay:0.2f];
+            });
+        }
+    }];
+}
+
+- (void) triggerNextPermissionStep:(NSArray *) publishPermissions {
+    FBSDKLoginManager *fbNextLoginButton = [[FBSDKLoginManager alloc] init];
+    [fbNextLoginButton logInWithPublishPermissions:publishPermissions fromViewController:self handler:^(FBSDKLoginManagerLoginResult *nextResult, NSError *nextError) {
+        if (nextError) {
+            NSLog(@"Process error2");
+            dispatch_async(dispatch_get_main_queue(), ^(){
+                [self showErrorAlertWithMessage:NSLocalizedString(@"FBConnectError", @"")];
+                [[NSNotificationCenter defaultCenter] postNotificationName:FB_AUTO_SYNC_STOP_ERR_NOT_KEY object:nil userInfo:nil];
+            });
+        } else if (nextResult.isCancelled) {
+            NSLog(@"Cancelled2");
+            dispatch_async(dispatch_get_main_queue(), ^(){
+                [[NSNotificationCenter defaultCenter] postNotificationName:FB_AUTO_SYNC_STOP_ERR_NOT_KEY object:nil userInfo:nil];
+            });
+        } else {
+            NSLog(@"Publish permission Logged in");
             dispatch_async(dispatch_get_main_queue(), ^(){
                 NSLog(@"Access token: %@", [[FBSDKAccessToken currentAccessToken] tokenString]);
                 [fbConnectDao requestFbConnectWithToken:[[FBSDKAccessToken currentAccessToken] tokenString]];

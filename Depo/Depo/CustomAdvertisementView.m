@@ -26,10 +26,12 @@
         popUp.image = [UIImage imageNamed:@"bulut-bg-bos@1x.png"];
         popUp.backgroundColor = [UIColor clearColor];
         [self addSubview:popUp];
+        
+        float topIndex = IS_IPAD ? self.frame.size.height/2-100 : 20;
         int titleHeight = 80;
         if (title || [title isKindOfClass:[NSNull class]]) {
             titleHeight = 10 + [Util calculateHeightForText:title forWidth:self.frame.size.width-40 forFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:35]];
-            UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, popUp.frame.size.width-40, titleHeight)];
+            UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, topIndex, popUp.frame.size.width-40, titleHeight)];
             titleLabel.font = [UIFont fontWithName:@"TurkcellSaturaBol" size:35];
             titleLabel.numberOfLines = 0;
             //titleLabel.lineBreakMode = NSLineBreakByWordWrapping ;
@@ -40,7 +42,8 @@
         }
         
         int height = [Util calculateHeightForText:message forWidth:popUp.frame.size.width-20 forFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:20]] ;
-        UILabel *explainLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, titleHeight+70,popUp.frame.size.width-20 ,height)];
+        
+        UILabel *explainLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, topIndex + titleHeight + 50, popUp.frame.size.width-20 ,height)];
         explainLabel.text = message;
         explainLabel.textColor = [Util UIColorForHexColor:@"4f8caa"];
         explainLabel.numberOfLines = 0;
