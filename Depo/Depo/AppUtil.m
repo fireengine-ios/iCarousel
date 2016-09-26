@@ -818,6 +818,11 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
++ (void) resetLocInfoPopupShownFlag {
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:[NSString stringWithFormat:@"LOC_INFO_POPUP_SHOWN_%@", [SyncUtil readBaseUrlConstant]]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 + (BOOL) readLocInfoPopupShownFlag {
     return [[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"LOC_INFO_POPUP_SHOWN_%@", [SyncUtil readBaseUrlConstant]]];
 }

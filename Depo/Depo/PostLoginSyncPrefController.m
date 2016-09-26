@@ -197,11 +197,15 @@
 #pragma mark LocationManagerDelegate methods
 
 - (void) locationPermissionDenied {
+    /*
     CustomAlertView *alert = [[CustomAlertView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Error", @"") withMessage:NSLocalizedString(@"LocationNotEnabled", @"") withModalType:ModalTypeError];
     alert.delegate = self;
     [APPDELEGATE showCustomAlert:alert];
     
     [LocationManager sharedInstance].delegate = nil;
+     */
+    [AppUtil resetLocInfoPopupShownFlag];
+    [self continueToHome];
 }
 
 - (void) locationPermissionGranted {
@@ -284,7 +288,6 @@
     [CacheUtil writeCachedSettingDataRoaming:NO];
     
     [AppUtil writeFirstVisitOverFlag];
-    [AppUtil writeLocInfoPopupShownFlag];
     //    [APPDELEGATE triggerHome];
     
     [APPDELEGATE startOpeningPage];
@@ -304,6 +307,7 @@
         locInfoPopup = [[CustomInfoWithIconView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) withIcon:@"icon_locationperm.png" withInfo:NSLocalizedString(@"LocInfoPopup", @"") withSubInfo:NSLocalizedString(@"LocSubinfoPopup", @"") isCloseable:YES];
         locInfoPopup.delegate = self;
         [self.view addSubview:locInfoPopup];
+        [AppUtil writeLocInfoPopupShownFlag];
     } else {
         [self moveToOpeningPage];
     }
