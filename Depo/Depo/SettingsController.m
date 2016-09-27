@@ -40,6 +40,8 @@
 
 @implementation SettingsController
 
+@synthesize popOver;
+
 - (id)init {
     self = [super init];
     
@@ -593,7 +595,13 @@
             picker.allowsEditing = YES;
             picker.delegate = self;
             picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-            [self presentViewController:picker animated:YES completion:nil];
+
+            if(IS_IPAD) {
+                popOver = [[UIPopoverController alloc] initWithContentViewController:picker];
+                [popOver presentPopoverFromRect:profileImgView.frame inView:APPDELEGATE.base.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
+            } else {
+                [self presentViewController:picker animated:YES completion:nil];
+            }
         }
             break;
         case 1: {
@@ -601,7 +609,13 @@
             picker.allowsEditing = YES;
             picker.delegate = self;
             picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-            [self presentViewController:picker animated:YES completion:nil];
+            
+            if(IS_IPAD) {
+                popOver = [[UIPopoverController alloc] initWithContentViewController:picker];
+                [popOver presentPopoverFromRect:profileImgView.frame inView:APPDELEGATE.base.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
+            } else {
+                [self presentViewController:picker animated:YES completion:nil];
+            }
         }
         default:
             break;
@@ -609,6 +623,10 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    if(popOver) {
+        [popOver dismissPopoverAnimated:YES];
+    }
+
     UIImage *selectedImage;
     NSURL *mediaUrl;
     mediaUrl = (NSURL *)[info valueForKey:UIImagePickerControllerMediaURL];
@@ -627,6 +645,9 @@
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    if(popOver) {
+        [popOver dismissPopoverAnimated:YES];
+    }
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 

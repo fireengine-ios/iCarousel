@@ -31,7 +31,7 @@
         modalView = [[UIView alloc] initWithFrame:CGRectMake((self.frame.size.width - 280)/2, (self.frame.size.height - modalHeight)/2, 280, modalHeight)];
         modalView.backgroundColor = [UIColor whiteColor];
         
-        UIImageView *iconImgView = [[UIImageView alloc] initWithFrame:CGRectMake((modalView.frame.size.width - iconImg.size.width)/2, 30, iconImg.size.width, iconImg.size.height)];
+        UIImageView *iconImgView = [[UIImageView alloc] initWithFrame:CGRectMake((modalView.frame.size.width - iconImg.size.width)/2, 10, iconImg.size.width, iconImg.size.height)];
         iconImgView.image = iconImg;
         [modalView addSubview:iconImgView];
         
@@ -53,9 +53,15 @@
         subInfoLabel.numberOfLines = 0;
         [modalView addSubview:subInfoLabel];
         
+        /*
         CustomButton *closeButton = [[CustomButton alloc] initWithFrame:CGRectMake(modalView.frame.size.width - 50, 10, 40, 40) withCenteredImageName:@"close_icon.png"];
         [closeButton addTarget:self action:@selector(triggerDismiss) forControlEvents:UIControlEventTouchUpInside];
         [modalView addSubview:closeButton];
+         */
+
+        SimpleButton *dismissButton = [[SimpleButton alloc] initWithFrame:CGRectMake((modalView.frame.size.width - 200)/2, modalView.frame.size.height - 60, 200, 44) withTitle:NSLocalizedString(@"OK", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
+        [dismissButton addTarget:self action:@selector(triggerDismiss) forControlEvents:UIControlEventTouchUpInside];
+        [modalView addSubview:dismissButton];
 
         [self addSubview:modalView];
     }

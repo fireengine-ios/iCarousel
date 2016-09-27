@@ -88,7 +88,7 @@
     
     for(MetaFile *row in files) {
         CGRect imgRect = CGRectMake(interImageMargin + (counter%imagePerLine * imageTotalWidth), 35 + ((int)floor(counter/imagePerLine)*imageTotalWidth), imageWidth, imageWidth);
-        SquareImageView *imgView = [[SquareImageView alloc] initWithFrame:imgRect withFile:row withSelectibleStatus:YES];
+        SquareImageView *imgView = [[SquareImageView alloc] initWithFrame:imgRect withFile:row withSelectibleStatus:YES shouldCache:NO manualQuality:YES];
         imgView.delegate = self;
         [photosScroll addSubview:imgView];
         counter ++;

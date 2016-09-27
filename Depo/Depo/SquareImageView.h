@@ -43,6 +43,7 @@
 - (id)initWithFrame:(CGRect)frame withUploadRef:(UploadRef *) ref;
 - (id)initWithFrame:(CGRect)frame withFile:(MetaFile *) _file withSelectibleStatus:(BOOL) selectibleStatus;
 - (id)initWithFrame:(CGRect)frame withFile:(MetaFile *) _file withSelectibleStatus:(BOOL) selectibleStatus shouldCache:(BOOL) cacheFlag;
+- (id)initWithFrame:(CGRect)frame withFile:(MetaFile *) _file withSelectibleStatus:(BOOL) selectibleStatus shouldCache:(BOOL) cacheFlag manualQuality:(BOOL) manualQuality;
 - (void) setNewStatus:(BOOL) newStatus;
 - (void) showProgressMask;
 

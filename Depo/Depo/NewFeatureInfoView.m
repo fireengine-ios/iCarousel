@@ -33,9 +33,10 @@
 
         float videoWidth = 180; //manually set to prevent black marging
         float videoHeight = 201;
+        float topIndex = IS_IPAD ? self.frame.size.height/2 - videoHeight : 50;
         
         AVPlayerLayer *videoLayer = [AVPlayerLayer playerLayerWithPlayer:avPlayer];
-        videoLayer.frame = CGRectMake((self.frame.size.width - videoWidth)/2, 50, videoWidth, videoHeight);
+        videoLayer.frame = CGRectMake((self.frame.size.width - videoWidth)/2, topIndex, videoWidth, videoHeight);
         videoLayer.videoGravity = AVLayerVideoGravityResize;
         videoLayer.backgroundColor = [UIColor whiteColor].CGColor;
         [self.layer addSublayer:videoLayer];
@@ -45,7 +46,7 @@
         [closeButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:closeButton];
 
-        float topIndex = videoHeight + 80;
+        topIndex += videoHeight + 30;
         
 //        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemDidFinishPlaying:) name:AVPlayerItemDidPlayToEndTimeNotification object:[avPlayer currentItem]];
         

@@ -79,6 +79,8 @@
 
 + (void)clearImageCaches;
 
+- (void) setNoCachedImageWithBetterQualityForUrl:(NSURL *)url placeholderImage:(UIImage *)placeholderImage;
+
 @end
 
 #endif

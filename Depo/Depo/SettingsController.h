@@ -28,4 +28,6 @@
     ProfilePhotoUploadDao *uploadDao;
 }
 
+@property (nonatomic, strong) UIPopoverController *popOver;
+
 @end

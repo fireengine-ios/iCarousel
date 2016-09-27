@@ -31,18 +31,27 @@
 }
 
 - (id)initWithFrame:(CGRect)frame withFile:(MetaFile *) _file withSelectibleStatus:(BOOL) selectibleStatus shouldCache:(BOOL) cacheFlag {
+    return [self initWithFrame:frame withFile:_file withSelectibleStatus:selectibleStatus shouldCache:cacheFlag manualQuality:NO];
+}
+
+- (id)initWithFrame:(CGRect)frame withFile:(MetaFile *) _file withSelectibleStatus:(BOOL) selectibleStatus shouldCache:(BOOL) cacheFlag manualQuality:(BOOL) manualQuality {
     self = [super initWithFrame:frame];
     if (self) {
         self.file = _file;
+        self.backgroundColor = [Util UIColorForHexColor:@"E3E3E3"];
         isSelectible = selectibleStatus;
 
         imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
         imgView.contentMode = UIViewContentModeScaleAspectFill;
         imgView.clipsToBounds = YES;
         if(cacheFlag) {
-            [imgView setImageWithURL:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:[UIImage imageNamed:@"square_placeholder.png"]];
+            [imgView setImageWithURL:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:nil];
         } else {
-            [imgView setNoCachedImageWithURL:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:[UIImage imageNamed:@"square_placeholder.png"]];
+            if(manualQuality) {
+                [imgView setNoCachedImageWithBetterQualityForUrl:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:nil];
+            } else {
+                [imgView setNoCachedImageWithURL:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:nil];
+            }
         }
         [self addSubview:imgView];
         
@@ -80,12 +89,13 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.uploadRef = ref;
+        self.backgroundColor = [Util UIColorForHexColor:@"E3E3E3"];
         
         imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
         imgView.contentMode = UIViewContentModeScaleAspectFill;
         imgView.clipsToBounds = YES;
         imgView.alpha = 0.5f;
-        imgView.image = [UIImage imageNamed:@"square_placeholder.png"];
+//        imgView.image = [UIImage imageNamed:@"square_placeholder.png"];
         [self addSubview:imgView];
 
 //        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul), ^(void) {
