@@ -99,6 +99,8 @@
         
         [accountDao requestActiveSubscriptions];
         [self showLoading];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuToggle) name:MENU_CLOSED_NOTIFICATION object:nil];
     }
     return self;
 }
@@ -275,4 +277,7 @@
     }
 }
 
+- (void) menuToggle {
+    [self.view endEditing:YES];
+}
 @end

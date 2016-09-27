@@ -28,10 +28,17 @@
 @synthesize albumView;
 @synthesize previousButtonRef;
 @synthesize moreButton;
+@synthesize usageDao;
 
 - (id) init {
     if(self = [super init]) {
         self.title = NSLocalizedString(@"PhotosTitle", @"");
+
+        usageDao = [[UsageInfoDao alloc] init];
+        usageDao.delegate = self;
+        usageDao.successMethod = @selector(usageSuccessCallback:);
+        usageDao.failMethod = @selector(usageFailCallback:);
+
         segmentView = [[RevisitedPhotoHeaderSegmentView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, 60)];
         segmentView.delegate = self;
         [self.view addSubview:segmentView];
@@ -44,6 +51,8 @@
         albumView.hidden = YES;
         albumView.delegate = self;
         [self.view addSubview:albumView];
+        
+        [usageDao requestUsageInfo];
         
         [self reloadLists];
     }
@@ -391,8 +400,18 @@
 }
 
 - (void) cancelRequests {
+    [usageDao cancelRequest];
+    usageDao = nil;
+    
     [groupView cancelRequests];
     [albumView cancelRequests];
+}
+
+- (void) usageSuccessCallback:(Usage *) _usage {
+    APPDELEGATE.session.usage = _usage;
+}
+
+- (void) usageFailCallback:(NSString *) errorMessage {
 }
 
 @end
