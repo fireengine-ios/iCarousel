@@ -381,6 +381,9 @@
                 //auto sync çalışmamalı ve queue'dakiler de temizlenmelidir
                 [[UploadQueue sharedInstance] cancelRemainingUploads];
             }
+        } else if(![ReachabilityManager isReachable]) {
+            //bağlantı gidince queue temizlenmeli ve bağlantı gelince bu akışa yeniden girmeli
+            [[UploadQueue sharedInstance] cancelRemainingUploads];
         }
     }
 

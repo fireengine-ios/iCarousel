@@ -14,6 +14,7 @@
 #import "UploadQueue.h"
 #import "UpdaterControllerDelegate.h"
 #import "CurioSDK.h"
+#import "CustomInfoWithIconView.h"
 
 @class CustomAlertView;
 @class CustomConfirmView;
@@ -26,7 +27,7 @@
 
 #define APPDELEGATE ((AppDelegate *)[[UIApplication sharedApplication] delegate])
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, TokenManagerDelegate, UpdaterControllerDelegate, UIAlertViewDelegate, CurioSDKDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, TokenManagerDelegate, UpdaterControllerDelegate, UIAlertViewDelegate, CurioSDKDelegate, CustomInfoWithIconDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) AppSession *session;
@@ -39,6 +40,7 @@
 @property (nonatomic) NSString *notificationActionUrl;
 @property (nonatomic) BOOL activatedFromBackground;
 @property (nonatomic) BOOL backgroundReloginInProgress;
+@property (nonatomic, strong) CustomInfoWithIconView *locInfoPopup;
 
 - (void) showCustomAlert:(CustomAlertView *) alertView;
 - (void) showCustomConfirm:(CustomConfirmView *) alertView;

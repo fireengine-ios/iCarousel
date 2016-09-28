@@ -77,6 +77,7 @@
 @synthesize backgroundReloginInProgress;
 @synthesize notificationAction;
 @synthesize notificationActionUrl;
+@synthesize locInfoPopup;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -481,12 +482,24 @@
 
 - (void) startAutoSync {
     IGLog(@"AppDelegate startAutoSync");
-    [[LocationManager sharedInstance] startLocationManager];
-    [[SyncManager sharedInstance] decideAndStartAutoSync];
+    if([AppUtil readLocInfoPopupShownFlag]) {
+        [[LocationManager sharedInstance] startLocationManager];
+        [[SyncManager sharedInstance] decideAndStartAutoSync];
+    } else {
+        locInfoPopup = [[CustomInfoWithIconView alloc] initWithFrame:CGRectMake(0, 0, self.window.frame.size.width, self.window.frame.size.height) withIcon:@"icon_locationperm.png" withInfo:NSLocalizedString(@"LocInfoPopup", @"") withSubInfo:NSLocalizedString(@"LocSubinfoPopup", @"") isCloseable:YES];
+        locInfoPopup.delegate = self;
+        [self.window addSubview:locInfoPopup];
+        [AppUtil writeLocInfoPopupShownFlag];
+    }
 }
 
 - (void) stopAutoSync {
 //    [syncManager stopAutoSync];
+}
+
+- (void) customInfoWithIconViewDidDismiss {
+    [[LocationManager sharedInstance] startLocationManager];
+    [[SyncManager sharedInstance] decideAndStartAutoSync];
 }
 
 - (void) addInitialBgImage {

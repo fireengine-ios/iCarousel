@@ -597,8 +597,10 @@
             picker.sourceType = UIImagePickerControllerSourceTypeCamera;
 
             if(IS_IPAD) {
-                popOver = [[UIPopoverController alloc] initWithContentViewController:picker];
-                [popOver presentPopoverFromRect:profileImgView.frame inView:APPDELEGATE.base.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
+                picker.modalPresentationStyle = UIModalPresentationFullScreen;
+                [APPDELEGATE.window.rootViewController presentViewController:picker animated:YES completion:nil];
+//                popOver = [[UIPopoverController alloc] initWithContentViewController:picker];
+//                [popOver presentPopoverFromRect:profileImgView.frame inView:APPDELEGATE.base.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
             } else {
                 [self presentViewController:picker animated:YES completion:nil];
             }

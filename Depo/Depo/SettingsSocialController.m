@@ -167,7 +167,6 @@
     [self hideLoading];
     
     NSArray *readPermissions = [permissions objectForKey:@"read"];
-    NSArray *publishPermissions = [permissions objectForKey:@"publish"];
 
     FBSDKLoginManager *fbLoginButton = [[FBSDKLoginManager alloc] init];
     [fbLoginButton logInWithReadPermissions:readPermissions fromViewController:self handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
@@ -185,7 +184,9 @@
         } else {
             NSLog(@"Read permission Logged in");
             dispatch_async(dispatch_get_main_queue(), ^(){
-                [self performSelector:@selector(triggerNextPermissionStep:) withObject:publishPermissions afterDelay:0.2f];
+                NSLog(@"Access token: %@", [[FBSDKAccessToken currentAccessToken] tokenString]);
+                [fbConnectDao requestFbConnectWithToken:[[FBSDKAccessToken currentAccessToken] tokenString]];
+                [self showLoading];
             });
         }
     }];
