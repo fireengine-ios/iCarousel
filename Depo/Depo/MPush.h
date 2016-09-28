@@ -1,6 +1,3 @@
-//
-//  MPush.h
-//  MenloPush
 
 #import <UIKit/UIKit.h>
 
@@ -8,6 +5,11 @@
  *	Notification name, which will be sent when device registered in the server.
  */
 extern NSString *const MPushDeviceRegistrationNotification;
+
+/**
+ *	Notification name, which will be sent when inbox badge has changed
+ */
+extern NSString *const MPushInboxBadgeChangeNotification;
 
 @interface MPush : NSObject
 
@@ -191,7 +193,29 @@ extern NSString *const MPushDeviceRegistrationNotification;
  */
 + (void)showPushListController;
 
+/**
+ *  Switches on/off user subscription
+ *  By default is on.
+ */
++ (void)setSubscription:(BOOL)subscription;
 
+
+
+/**
+ *  Switches on/off using inbox in the app.
+ *  By default is off.
+ */
++ (void)setInboxEnabled:(BOOL)inboxEnabled;
+
+/**
+ *	Shows Inbox screen.
+ */
++ (void)openInbox;
+
+/**
+ *  Get Inbox badge
+ */
++ (NSInteger *)getInboxBadge;
 
 
 
@@ -199,6 +223,11 @@ extern NSString *const MPushDeviceRegistrationNotification;
  *  Change app key at runtime
  */
 + (void)setSandboxModeEnabled:(BOOL)sandboxModeEnabled;
+
+/**
+ *  Turn on/off debug mode
+ */
++ (void)setDebugModeEnabled:(BOOL)debugModeEnabled;
 
 /**
  *  Turn on/off showing of debug logs
@@ -238,5 +267,12 @@ extern NSString *const MPushDeviceRegistrationNotification;
 @property (nonatomic, readonly) NSDictionary *customPayload;
 @end
 
+@interface MInboxButton : UIButton
+- (UILabel *)badge;
+- (void)setBadgeSize:(int)badgeSize;
+- (void)setBadgePosition:(CGPoint)badgeSize;
+- (void)setBadgeColor:(UIColor *)color;
+- (void)setBadgeTextColor:(UIColor *)color;
+@end
 
 
