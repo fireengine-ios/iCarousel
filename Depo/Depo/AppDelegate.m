@@ -691,9 +691,9 @@
 //        [SyncUtil unlockAutoSyncBlockInProgress];
     }
     
-    [SyncUtil unlockAutoSyncBlockInProgress];
+//    [SyncUtil unlockAutoSyncBlockInProgress];
 
-    [self triggerAutoSynchronization];
+//    [self triggerAutoSynchronization];
 
     [[UIDevice currentDevice] setBatteryMonitoringEnabled:YES];
     if ([[UIDevice currentDevice] batteryState] == UIDeviceBatteryStateCharging || [[UIDevice currentDevice] batteryState] == UIDeviceBatteryStateFull) {
