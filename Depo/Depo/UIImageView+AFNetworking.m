@@ -154,6 +154,41 @@ static char kAFImageRequestOperationObjectKey;
     }
 }
 
+- (void) setFinalNoCachedImageWithBetterQualityForUrl:(NSURL *)url placeholderImage:(UIImage *)placeholderImage withMaxWidth:(float) maxWidth withMaxHeight:(float) maxHeight forCompressQaulity:(float) compressQuality {
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPShouldHandleCookies:NO];
+    [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
+    if(APPDELEGATE.session.authToken) {
+        [request addValue:APPDELEGATE.session.authToken forHTTPHeaderField:@"X-Auth-Token"];
+    }
+    
+    [self cancelImageRequestOperation];
+    
+    UIImage *cachedImage = [[[self class] af_sharedImageCache] cachedImageForRequest:request];
+    if (cachedImage) {
+        self.image = cachedImage;
+        self.af_imageRequestOperation = nil;
+    } else {
+        self.image = placeholderImage;
+        
+        AFImageRequestOperation *requestOperation = [[AFImageRequestOperation alloc] initWithRequest:request];
+        [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+            if ([[request URL] isEqual:[[self.af_imageRequestOperation request] URL]]) {
+                self.image = [self manualResize:responseObject forMaxHeight:maxHeight forMaxWidth:maxWidth forCompressQuality:compressQuality];
+                self.af_imageRequestOperation = nil;
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            if ([[request URL] isEqual:[[self.af_imageRequestOperation request] URL]]) {
+                self.af_imageRequestOperation = nil;
+            }
+        }];
+        
+        self.af_imageRequestOperation = requestOperation;
+        
+        [[[self class] af_sharedImageRequestOperationQueue] addOperation:self.af_imageRequestOperation];
+    }
+}
+
 - (void)setImageWithURLRequest:(NSURLRequest *)urlRequest
               placeholderImage:(UIImage *)placeholderImage
                        success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image))success
@@ -284,7 +319,14 @@ static char kAFImageRequestOperationObjectKey;
             actualWidth = maxWidth;
         }
     }
-    
+
+    UIGraphicsBeginImageContext(CGSizeMake(actualWidth, actualHeight));
+    [image drawInRect:CGRectMake(0, 0, actualWidth, actualHeight)];
+    UIImage *destImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return destImage;
+
+    /*
     CGRect rect = CGRectMake(0.0, 0.0, actualWidth, actualHeight);
     UIGraphicsBeginImageContext(rect.size);
     [image drawInRect:rect];
@@ -293,6 +335,7 @@ static char kAFImageRequestOperationObjectKey;
     UIGraphicsEndImageContext();
     
     return [UIImage imageWithData:imageData];
+     */
     
 }
 

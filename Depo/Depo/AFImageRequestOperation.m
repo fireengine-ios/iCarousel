@@ -138,7 +138,7 @@ static dispatch_queue_t image_request_operation_processing_queue() {
     }
         
 #if __IPHONE_OS_VERSION_MIN_REQUIRED
-    self.imageScale = [[UIScreen mainScreen] scale];
+//    self.imageScale = [[UIScreen mainScreen] scale];
 #endif
     
     return self;

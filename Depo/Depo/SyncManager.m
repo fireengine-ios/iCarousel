@@ -367,7 +367,7 @@
 
 - (void) reachabilityDidChange {
     BOOL triggerAutoSync = NO;
-    [[UploadQueue sharedInstance] cancelRemainingUploads];
+//    [[UploadQueue sharedInstance] cancelRemainingUploads];
     EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
     if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
         ConnectionOption connectionOption = (ConnectionOption)[CacheUtil readCachedSettingSyncingConnectionType];

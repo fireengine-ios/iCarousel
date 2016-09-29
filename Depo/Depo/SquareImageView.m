@@ -85,6 +85,49 @@
     return self;
 }
 
+- (id) initFinalWithFrame:(CGRect)frame withFile:(MetaFile *) _file withSelectibleStatus:(BOOL) selectibleStatus {
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.file = _file;
+        self.backgroundColor = [Util UIColorForHexColor:@"E3E3E3"];
+        isSelectible = selectibleStatus;
+        
+        imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+        imgView.contentMode = UIViewContentModeScaleAspectFill;
+        imgView.clipsToBounds = YES;
+        [imgView setFinalNoCachedImageWithBetterQualityForUrl:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:nil withMaxWidth:400 withMaxHeight:400 forCompressQaulity:1.0f];
+        [self addSubview:imgView];
+        
+        if(self.file.contentType == ContentTypeVideo) {
+            UIImageView *playIconView = [[UIImageView alloc] initWithFrame:CGRectMake(4, self.frame.size.height - 22, 18, 18)];
+            playIconView.image = [UIImage imageNamed:@"mini_play_icon.png"];
+            [self addSubview:playIconView];
+            
+            CustomLabel *durationLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(22, self.frame.size.height - 22, self.frame.size.width - 26, 18) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:15] withColor:[UIColor whiteColor] withText:self.file.contentLengthDisplay];
+            durationLabel.textAlignment = NSTextAlignmentRight;
+            [self addSubview:durationLabel];
+        }
+        
+        maskView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+        maskView.image = [UIImage imageNamed:@"selected_mask.png"];
+        maskView.hidden = YES;
+        [self addSubview:maskView];
+        
+        longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressed:)];
+        longPressGesture.minimumPressDuration = 1.0f;
+        longPressGesture.allowableMovement = 10.0f;
+        longPressGesture.delegate = self;
+        [self addGestureRecognizer:longPressGesture];
+        
+        tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapped)];
+        tapGesture.numberOfTapsRequired = 1;
+        tapGesture.delegate = self;
+        [tapGesture requireGestureRecognizerToFail:longPressGesture];
+        [self addGestureRecognizer:tapGesture];
+    }
+    return self;
+}
+
 - (id)initWithFrame:(CGRect)frame withUploadRef:(UploadRef *)ref {
     self = [super initWithFrame:frame];
     if (self) {

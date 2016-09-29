@@ -205,7 +205,7 @@
     if(albumWithUpdatedContent && albumWithUpdatedContent.content) {
         for(MetaFile *row in albumWithUpdatedContent.content) {
             CGRect imgRect = CGRectMake(interImageMargin + (counter%imagePerLine * imageTotalWidth), interImageMargin + ((int)floor(counter/imagePerLine)*imageTotalWidth), imageWidth, imageWidth);
-            SquareImageView *imgView = [[SquareImageView alloc] initWithFrame:imgRect withFile:row withSelectibleStatus:isSelectible];
+            SquareImageView *imgView = [[SquareImageView alloc] initFinalWithFrame:imgRect withFile:row withSelectibleStatus:isSelectible];
             imgView.delegate = self;
             [photosScroll addSubview:imgView];
             counter ++;

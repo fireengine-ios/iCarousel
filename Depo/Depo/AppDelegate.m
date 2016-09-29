@@ -673,11 +673,14 @@
             [self triggerAutoSynchronization];
         }];
         */
-
+        
+        /*
         [[UploadQueue sharedInstance].session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
         }];
+         */
         
     } else {
+        IGLog(@"AppDelegate activatedFromBackground && !backgroundReloginInProgress else'ine girdi");
         
         [[UploadQueue sharedInstance].session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
             if (!uploadTasks || [uploadTasks count] == 0) {
