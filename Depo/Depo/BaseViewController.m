@@ -229,7 +229,7 @@
         [self.view addSubview:featurePresentView];
         [AppUtil writeLifeboxTeaserFlag];
     } else {
-        if(![AppUtil readLocInfoPopupShownFlag]) {
+        if(![AppUtil readPeriodicLocInfoPopupIdleFlag]) {
             NSDate *lastInfoShownDate = [AppUtil readLastLocInfoPopupShownTime];
             BOOL showNewAlert = NO;
             if(!lastInfoShownDate) {

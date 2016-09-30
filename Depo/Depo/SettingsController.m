@@ -299,9 +299,9 @@
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #ifdef LOG2FILE
-    return 9;
-#else
     return 8;
+#else
+    return 7;
 #endif
 }
 
@@ -370,15 +370,15 @@
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"ExportFromDropbox", @"") titleColor:nil subTitleText:@"" iconName:@"nav_download_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         return cell;
+//    } else if (indexPath.row == 6) {
+//        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"SocialMediaTitle", @"") titleColor:nil subTitleText:@"" iconName:@"icon_sm.png" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
+//        cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+//        return cell;
     } else if (indexPath.row == 6) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"SocialMediaTitle", @"") titleColor:nil subTitleText:@"" iconName:@"icon_sm.png" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
-        cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
-        return cell;
-    } else if (indexPath.row == 7) {
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"FAQ", @"") titleColor:nil subTitleText:@"" iconName:@"help_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         return cell;
-    } else if (indexPath.row == 8) {
+    } else if (indexPath.row == 7) {
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"Mail Logs" titleColor:nil subTitleText:@"" iconName:@"help_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         return cell;
@@ -410,13 +410,13 @@
         case 5:
             [self didTriggerExportFromDropbox];
             break;
-        case 6:
-            [self didTriggerExportFromSocial];
+//        case 6:
+//            [self didTriggerExportFromSocial];
             break;
-        case 7:
+        case 6:
             [self didTriggerHelp];
             break;
-        case 8:
+        case 7:
             [self triggerMailLog];
             break;
         default:

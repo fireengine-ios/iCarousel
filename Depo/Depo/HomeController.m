@@ -215,7 +215,10 @@
     [self hideLoading];
     APPDELEGATE.session.usage = _usage;
     
-    double percentUsageVal = 100 * ((double)APPDELEGATE.session.usage.usedStorage/(double)APPDELEGATE.session.usage.totalStorage);
+    double percentUsageVal = 0;
+    if(APPDELEGATE.session.usage.totalStorage > 0) {
+        percentUsageVal = 100 * ((double)APPDELEGATE.session.usage.usedStorage/(double)APPDELEGATE.session.usage.totalStorage);
+    }
 
     float remainingStorage = APPDELEGATE.session.usage.totalStorage - APPDELEGATE.session.usage.usedStorage;
 
@@ -304,7 +307,7 @@
         usageSummaryView.frame = usageSummaryRect;
     }
 
-    if(remainingStorage <= 5242880) {
+    if(APPDELEGATE.session.usage.totalStorage > 0 && remainingStorage <= 5242880) {
         if(![AppUtil readDoNotShowAgainFlagForKey:@"QUOTA_FULL_DONTSHOW_DEFAULTS_KEY"] && !APPDELEGATE.session.storageFullPopupShown) {
             CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"TitleLater", @"") withApproveTitle:NSLocalizedString(@"TitleYes", @"") withMessage:NSLocalizedString(@"PackageFullMaessage", @"") withModalType:ModalTypeApprove shouldShowCheck:YES withCheckKey:@"QUOTA_FULL_DONTSHOW_DEFAULTS_KEY"];
             confirm.delegate = self;

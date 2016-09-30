@@ -69,7 +69,10 @@
 
 + (void) writeLocInfoPopupShownFlag;
 + (BOOL) readLocInfoPopupShownFlag;
-+ (void) resetLocInfoPopupShownFlag;
+
++ (void) writePeriodicLocInfoPopupIdleFlag;
++ (void) resetPeriodicLocInfoPopupIdleFlag;
++ (BOOL) readPeriodicLocInfoPopupIdleFlag;
 
 + (void) writeLastLocInfoPopupShownTime;
 + (NSDate *) readLastLocInfoPopupShownTime;

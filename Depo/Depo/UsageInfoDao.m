@@ -14,6 +14,8 @@
 - (void) requestUsageInfo {
     NSURL *url = [NSURL URLWithString:USAGE_INFO_URL];
     
+    IGLog(@"UsageInfoDao [GET] calling requestUsageInfo");
+
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setDelegate:self];
     [self sendGetRequest:request];
@@ -24,6 +26,8 @@
     
     if (!error) {
         NSString *responseEnc = [request responseString];
+        
+        IGLog(@"UsageInfoDao request successfully finished");
         
 //        NSLog(@"Usage Response: %@", responseEnc);
         

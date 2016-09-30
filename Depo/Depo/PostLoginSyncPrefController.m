@@ -204,7 +204,7 @@
     
     [LocationManager sharedInstance].delegate = nil;
      */
-    [AppUtil resetLocInfoPopupShownFlag];
+    [AppUtil resetPeriodicLocInfoPopupIdleFlag];
     [self continueToHome];
 }
 
@@ -308,6 +308,7 @@
         locInfoPopup.delegate = self;
         [self.view addSubview:locInfoPopup];
         [AppUtil writeLocInfoPopupShownFlag];
+        [AppUtil writePeriodicLocInfoPopupIdleFlag];
     } else {
         [self moveToOpeningPage];
     }

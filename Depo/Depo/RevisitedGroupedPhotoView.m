@@ -200,7 +200,7 @@
             imageContainerHeight += boxWidth;
         }
 
-        GroupedView *groupedView = [[GroupedView alloc] initWithFrame:CGRectMake(0, yIndex, fileScroll.frame.size.width, imageContainerHeight) withGroup:group isSelectible:NO withImageWidth:boxWidth withImageCountPerRow:countPerRow];
+        GroupedView *groupedView = [[GroupedView alloc] initWithFrame:CGRectMake(0, yIndex, fileScroll.frame.size.width, imageContainerHeight) withGroup:group isSelectible:isSelectible withImageWidth:boxWidth withImageCountPerRow:countPerRow];
         groupedView.delegate = self;
         [fileScroll addSubview:groupedView];
         
@@ -444,6 +444,7 @@
 */
 
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView {
+
     if(!isLoading) {
         CGFloat currentOffset = fileScroll.contentOffset.y;
         CGFloat maximumOffset = fileScroll.contentSize.height - fileScroll.frame.size.height;

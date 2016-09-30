@@ -818,13 +818,22 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-+ (void) resetLocInfoPopupShownFlag {
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:[NSString stringWithFormat:@"LOC_INFO_POPUP_SHOWN_%@", [SyncUtil readBaseUrlConstant]]];
++ (BOOL) readLocInfoPopupShownFlag {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"LOC_INFO_POPUP_SHOWN_%@", [SyncUtil readBaseUrlConstant]]];
+}
+
++ (void) writePeriodicLocInfoPopupIdleFlag {
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"PERIODIC_LOC_INFO_POPUP_IDLE_%@", [SyncUtil readBaseUrlConstant]]];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-+ (BOOL) readLocInfoPopupShownFlag {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"LOC_INFO_POPUP_SHOWN_%@", [SyncUtil readBaseUrlConstant]]];
++ (void) resetPeriodicLocInfoPopupIdleFlag {
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:[NSString stringWithFormat:@"PERIODIC_LOC_INFO_POPUP_IDLE_%@", [SyncUtil readBaseUrlConstant]]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (BOOL) readPeriodicLocInfoPopupIdleFlag {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"PERIODIC_LOC_INFO_POPUP_IDLE_%@", [SyncUtil readBaseUrlConstant]]];
 }
 
 + (void) writeLastLocInfoPopupShownTime {

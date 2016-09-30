@@ -53,7 +53,7 @@
                 counter++;
             } else if([row isKindOfClass:[MetaFile class]]) {
                 MetaFile *castedRow = (MetaFile *) row;
-                SquareImageView *rowImgView = [[SquareImageView alloc] initFinalWithFrame:CGRectMake((counter%imageCountPerRow)*imageWidth, 40 + floorf(counter/imageCountPerRow)*imageWidth, imageWidth, imageWidth) withFile:castedRow withSelectibleStatus:selectFlag];
+                SquareImageView *rowImgView = [[SquareImageView alloc] initFinalWithFrame:CGRectMake((counter%imageCountPerRow)*imageWidth, 40 + floorf(counter/imageCountPerRow)*imageWidth, imageWidth, imageWidth) withFile:castedRow withSelectibleStatus:isSelectible];
                 rowImgView.delegate = self;
                 [self addSubview:rowImgView];
                 counter++;
@@ -121,6 +121,7 @@
 }
 
 - (void) setToSelectible {
+    self.isSelectible = YES;
     for(id row in self.subviews) {
         if([row isKindOfClass:[SquareImageView class]]) {
             SquareImageView *castedView = (SquareImageView *) row;
@@ -132,6 +133,7 @@
 }
 
 - (void) setToUnselectible {
+    self.isSelectible = NO;
     for(id row in self.subviews) {
         if([row isKindOfClass:[SquareImageView class]]) {
             SquareImageView *castedView = (SquareImageView *) row;

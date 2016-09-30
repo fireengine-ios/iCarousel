@@ -490,6 +490,7 @@
         locInfoPopup.delegate = self;
         [self.window addSubview:locInfoPopup];
         [AppUtil writeLocInfoPopupShownFlag];
+        [AppUtil writePeriodicLocInfoPopupIdleFlag];
     }
 }
 
@@ -512,7 +513,7 @@
 }
 
 - (void) locationPermissionDenied {
-    [AppUtil resetLocInfoPopupShownFlag];
+    [AppUtil resetPeriodicLocInfoPopupIdleFlag];
 }
 
 - (void) addInitialBgImage {
