@@ -39,15 +39,15 @@
         usageDao.successMethod = @selector(usageSuccessCallback:);
         usageDao.failMethod = @selector(usageFailCallback:);
 
-        segmentView = [[RevisitedPhotoHeaderSegmentView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, 60)];
+        segmentView = [[RevisitedPhotoHeaderSegmentView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, 40)];
         segmentView.delegate = self;
         [self.view addSubview:segmentView];
         
-        groupView = [[RevisitedGroupedPhotoView alloc] initWithFrame:CGRectMake(0, self.topIndex + 60, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex - 50)];
+        groupView = [[RevisitedGroupedPhotoView alloc] initWithFrame:CGRectMake(0, self.topIndex + 40, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex - 30)];
         groupView.delegate = self;
         [self.view addSubview:groupView];
         
-        albumView = [[RevisitedAlbumListView alloc] initWithFrame:CGRectMake(0, self.topIndex + 60, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex - 50)];
+        albumView = [[RevisitedAlbumListView alloc] initWithFrame:CGRectMake(0, self.topIndex + 40, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex - 30)];
         albumView.hidden = YES;
         albumView.delegate = self;
         [self.view addSubview:albumView];

@@ -15,6 +15,7 @@
 #import "UpdaterControllerDelegate.h"
 #import "CurioSDK.h"
 #import "CustomInfoWithIconView.h"
+#import "LocationManager.h"
 
 @class CustomAlertView;
 @class CustomConfirmView;
@@ -27,7 +28,7 @@
 
 #define APPDELEGATE ((AppDelegate *)[[UIApplication sharedApplication] delegate])
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, TokenManagerDelegate, UpdaterControllerDelegate, UIAlertViewDelegate, CurioSDKDelegate, CustomInfoWithIconDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, TokenManagerDelegate, UpdaterControllerDelegate, UIAlertViewDelegate, CurioSDKDelegate, CustomInfoWithIconDelegate, LocationManagerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) AppSession *session;

@@ -120,10 +120,13 @@
 }
 
 + (void) cacheSyncHashLocally:(NSString *) hash {
+    if(hash == nil)
+        return;
     NSArray *result = [SyncUtil readSyncHashLocally];
     if(![result containsObject:hash]) {
         NSArray *updatedArray = [result arrayByAddingObject:hash];
-        [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray] forKey:[NSString stringWithFormat:SYNCED_LOCAL_HASHES_KEY, [SyncUtil readBaseUrlConstant]]];
+        NSString *baseUrlConstant = [SyncUtil readBaseUrlConstant] != nil ? [SyncUtil readBaseUrlConstant] : @"";
+        [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray] forKey:[NSString stringWithFormat:SYNCED_LOCAL_HASHES_KEY, baseUrlConstant]];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
@@ -135,14 +138,16 @@
     if([result containsObject:hash]) {
         NSMutableArray *updatedArray = [result mutableCopy];
         [updatedArray removeObject:hash];
-        [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray] forKey:[NSString stringWithFormat:SYNCED_LOCAL_HASHES_KEY, [SyncUtil readBaseUrlConstant]]];
+        NSString *baseUrlConstant = [SyncUtil readBaseUrlConstant] != nil ? [SyncUtil readBaseUrlConstant] : @"";
+        [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray] forKey:[NSString stringWithFormat:SYNCED_LOCAL_HASHES_KEY, baseUrlConstant]];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
 
 + (NSArray *) readSyncHashLocally {
     NSArray *result = [[NSArray alloc] init];
-    NSData *arrData = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:SYNCED_LOCAL_HASHES_KEY, [SyncUtil readBaseUrlConstant]]];
+    NSString *baseUrlConstant = [SyncUtil readBaseUrlConstant] != nil ? [SyncUtil readBaseUrlConstant] : @"";
+    NSData *arrData = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:SYNCED_LOCAL_HASHES_KEY, baseUrlConstant]];
 //    NSLog(@"LOCAL HASH KEY:%@", [NSString stringWithFormat:SYNCED_LOCAL_HASHES_KEY, [SyncUtil readBaseUrlConstant]]);
     if (arrData != nil) {
         result = [NSKeyedUnarchiver unarchiveObjectWithData:arrData];
@@ -183,7 +188,8 @@
     NSArray *result = [SyncUtil readSyncFileSummaries];
     if(![result containsObject:summary]) {
         NSArray *updatedArray = [result arrayByAddingObject:summary];
-        [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray] forKey:[NSString stringWithFormat:SYNCED_REMOTE_FILES_SUMMARY_KEY, [SyncUtil readBaseUrlConstant]]];
+        NSString *baseUrlConstant = [SyncUtil readBaseUrlConstant] != nil ? [SyncUtil readBaseUrlConstant] : @"";
+        [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray] forKey:[NSString stringWithFormat:SYNCED_REMOTE_FILES_SUMMARY_KEY, baseUrlConstant]];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
@@ -191,13 +197,15 @@
 + (void) cacheSyncFileSummaries:(NSMutableArray *) newArray {
     NSArray *result = [SyncUtil readSyncFileSummaries];
     NSArray *updatedArray = [result arrayByAddingObjectsFromArray:newArray];
-    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray] forKey:[NSString stringWithFormat:SYNCED_REMOTE_FILES_SUMMARY_KEY, [SyncUtil readBaseUrlConstant]]];
+    NSString *baseUrlConstant = [SyncUtil readBaseUrlConstant] != nil ? [SyncUtil readBaseUrlConstant] : @"";
+    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray] forKey:[NSString stringWithFormat:SYNCED_REMOTE_FILES_SUMMARY_KEY, baseUrlConstant]];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 + (NSArray *) readSyncFileSummaries {
     NSArray *result = [[NSArray alloc] init];
-    NSData *arrData = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:SYNCED_REMOTE_FILES_SUMMARY_KEY, [SyncUtil readBaseUrlConstant]]];
+    NSString *baseUrlConstant = [SyncUtil readBaseUrlConstant] != nil ? [SyncUtil readBaseUrlConstant] : @"";
+    NSData *arrData = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:SYNCED_REMOTE_FILES_SUMMARY_KEY, baseUrlConstant]];
     if (arrData != nil) {
         result = [NSKeyedUnarchiver unarchiveObjectWithData:arrData];
     }

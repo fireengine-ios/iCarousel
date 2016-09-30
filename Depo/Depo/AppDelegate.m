@@ -499,7 +499,20 @@
 
 - (void) customInfoWithIconViewDidDismiss {
     [[LocationManager sharedInstance] startLocationManager];
+    [LocationManager sharedInstance].delegate = self;
     [[SyncManager sharedInstance] decideAndStartAutoSync];
+}
+
+- (void) locationPermissionGranted {
+    //not used
+}
+
+- (void) locationPermissionError:(NSString *) errorMessage {
+    //not used
+}
+
+- (void) locationPermissionDenied {
+    [AppUtil resetLocInfoPopupShownFlag];
 }
 
 - (void) addInitialBgImage {

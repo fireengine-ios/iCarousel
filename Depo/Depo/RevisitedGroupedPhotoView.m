@@ -95,6 +95,7 @@
 
         yIndex = 60;
         fileScroll.contentSize = CGSizeMake(fileScroll.frame.size.width, yIndex);
+        fileScroll.contentOffset = CGPointMake(0, 60);
 
         UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(searchTapped)];
         tapGestureRecognizer.numberOfTapsRequired = 1;
@@ -175,7 +176,7 @@
     if([[Util deviceType] isEqualToString:@"iPhone 6 Plus"] || [[Util deviceType] isEqualToString:@"iPhone 6S Plus"]) {
         countPerRow = 5;
     }
-    float boxWidth = fileScroll.frame.size.width/countPerRow;
+    int boxWidth = (int) fileScroll.frame.size.width/countPerRow;
     float imageContainerHeight = 60;
     
     if(alreadyPresentView) {

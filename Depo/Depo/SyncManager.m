@@ -266,18 +266,21 @@
                                 if([ReachabilityManager isReachableViaWiFi] || ([ReachabilityManager isReachableViaWWAN] && connectionOption == ConnectionOptionWifi3G)) {
 
                                     ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
-                                    NSString *localHash = [SyncUtil md5StringOfString:[defaultRep.url absoluteString]];
-
-                                    BOOL shouldStartUpload = ![localHashList containsObject:localHash] && ![remoteHashList containsObject:localHash];
-
-                                    if(shouldStartUpload) {
-                                        MetaFileSummary *assetSummary = [[MetaFileSummary alloc] init];
-                                        assetSummary.bytes = [defaultRep size];
-                                        assetSummary.fileName = [defaultRep filename];
-                                        shouldStartUpload = ![remoteSummaryList containsObject:assetSummary];
-                                    }
-                                    if(shouldStartUpload) {
-                                        [[SyncManager sharedInstance] startUploadForAsset:asset withReferenceAlbumName:referenceAlbumName andLocalHash:localHash];
+                                    NSString *repUrl = [defaultRep.url absoluteString];
+                                    if(repUrl != nil) {
+                                        NSString *localHash = [SyncUtil md5StringOfString:repUrl];
+                                        
+                                        BOOL shouldStartUpload = ![localHashList containsObject:localHash] && ![remoteHashList containsObject:localHash];
+                                        
+                                        if(shouldStartUpload) {
+                                            MetaFileSummary *assetSummary = [[MetaFileSummary alloc] init];
+                                            assetSummary.bytes = [defaultRep size];
+                                            assetSummary.fileName = [defaultRep filename];
+                                            shouldStartUpload = ![remoteSummaryList containsObject:assetSummary];
+                                        }
+                                        if(shouldStartUpload) {
+                                            [[SyncManager sharedInstance] startUploadForAsset:asset withReferenceAlbumName:referenceAlbumName andLocalHash:localHash];
+                                        }
                                     }
                                 }
                             }

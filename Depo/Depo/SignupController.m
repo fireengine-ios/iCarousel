@@ -209,50 +209,56 @@
     [self hideLoading];
     NSLog(@"Signup Result: %@", signupResult);
     NSString *signupStatus = [signupResult objectForKey:@"status"];
-    if([[signupStatus uppercaseString] isEqualToString:@"OK"]) {
-        [[CurioSDK shared] sendEvent:@"SignUp>First" eventValue:@"Success"];
-        [MPush hitTag:@"Signup>First" withValue:@"Success"];
-
-        NSDictionary *valueDict = [signupResult objectForKey:@"value"];
-        NSString *action = [valueDict objectForKey:@"action"];
-        NSString *referenceToken = [valueDict objectForKey:@"referenceToken"];
-        NSNumber *remainingTimeInMinutes = [valueDict objectForKey:@"remainingTimeInMinutes"];
-        NSNumber *expectedInputLength = [valueDict objectForKey:@"expectedInputLength"];
-        
-        APPDELEGATE.session.otpReferenceToken = referenceToken;
-        
-        if([action isEqualToString:POST_SIGNUP_ACTION_OTP]) {
-            OTPController *otp = [[OTPController alloc] initWithRemainingTimeInMinutes:[remainingTimeInMinutes intValue] andInputLength:[expectedInputLength intValue] withType:MsisdnUpdateTypeSignup];
-            [self.navigationController pushViewController:otp animated:YES];
-        } else if([action isEqualToString:POST_SIGNUP_ACTION_EMAIL]) {
-            EmailValidationResultController *emailController = [[EmailValidationResultController alloc] initWithEmailVal:emailValue];
-            [self.navigationController pushViewController:emailController animated:YES];
-        } else {
-            [self showInfoAlertWithMessage:NSLocalizedString(@"SignupSuccess", @"")];
-            return;
-        }
-    } else if([[signupStatus uppercaseString] isEqualToString:@"INVALID_PASSWORD"]){
-        [[CurioSDK shared] sendEvent:@"SignUp>First" eventValue:@"InvalidPassword"];
-        [MPush hitTag:@"Signup>First" withValue:@"InvalidPassword"];
-
-        NSDictionary *detailDict = [signupResult objectForKey:@"value"];
-        NSString *errorReason = [detailDict objectForKey:@"reason"];
-        if(errorReason != nil && [errorReason isKindOfClass:[NSString class]]) {
-            [self showErrorAlertWithMessage:NSLocalizedString(errorReason, @"")];
+    if(signupStatus != nil && ![signupStatus isKindOfClass:[NSNull class]]) {
+        if([[signupStatus uppercaseString] isEqualToString:@"OK"]) {
+            [[CurioSDK shared] sendEvent:@"SignUp>First" eventValue:@"Success"];
+            [MPush hitTag:@"Signup>First" withValue:@"Success"];
+            
+            NSDictionary *valueDict = [signupResult objectForKey:@"value"];
+            NSString *action = [valueDict objectForKey:@"action"];
+            NSString *referenceToken = [valueDict objectForKey:@"referenceToken"];
+            NSNumber *remainingTimeInMinutes = [valueDict objectForKey:@"remainingTimeInMinutes"];
+            NSNumber *expectedInputLength = [valueDict objectForKey:@"expectedInputLength"];
+            
+            APPDELEGATE.session.otpReferenceToken = referenceToken;
+            
+            if([action isEqualToString:POST_SIGNUP_ACTION_OTP]) {
+                OTPController *otp = [[OTPController alloc] initWithRemainingTimeInMinutes:[remainingTimeInMinutes intValue] andInputLength:[expectedInputLength intValue] withType:MsisdnUpdateTypeSignup];
+                [self.navigationController pushViewController:otp animated:YES];
+            } else if([action isEqualToString:POST_SIGNUP_ACTION_EMAIL]) {
+                EmailValidationResultController *emailController = [[EmailValidationResultController alloc] initWithEmailVal:emailValue];
+                [self.navigationController pushViewController:emailController animated:YES];
+            } else {
+                [self showInfoAlertWithMessage:NSLocalizedString(@"SignupSuccess", @"")];
+                return;
+            }
+        } else if([[signupStatus uppercaseString] isEqualToString:@"INVALID_PASSWORD"]){
+            [[CurioSDK shared] sendEvent:@"SignUp>First" eventValue:@"InvalidPassword"];
+            [MPush hitTag:@"Signup>First" withValue:@"InvalidPassword"];
+            
+            NSDictionary *detailDict = [signupResult objectForKey:@"value"];
+            NSString *errorReason = [detailDict objectForKey:@"reason"];
+            if(errorReason != nil && [errorReason isKindOfClass:[NSString class]]) {
+                [self showErrorAlertWithMessage:NSLocalizedString(errorReason, @"")];
+            } else {
+                [self showErrorAlertWithMessage:NSLocalizedString(signupStatus, @"")];
+            }
         } else {
             [self showErrorAlertWithMessage:NSLocalizedString(signupStatus, @"")];
+            if([signupStatus isEqualToString:@"VERIFY_EXISTING_EMAIL"]) {
+                [[CurioSDK shared] sendEvent:@"SignUp>First" eventValue:@"VerifyExistingEmail"];
+                [MPush hitTag:@"Signup>First" withValue:@"VerifyExistingEmail"];
+                
+                [self.navigationController popViewControllerAnimated:YES];
+            } else {
+                [[CurioSDK shared] sendEvent:@"SignUp>First" eventValue:@"Fail"];
+                [MPush hitTag:@"Signup>First" withValue:@"Fail"];
+            }
         }
     } else {
-        [self showErrorAlertWithMessage:NSLocalizedString(signupStatus, @"")];
-        if([signupStatus isEqualToString:@"VERIFY_EXISTING_EMAIL"]) {
-            [[CurioSDK shared] sendEvent:@"SignUp>First" eventValue:@"VerifyExistingEmail"];
-            [MPush hitTag:@"Signup>First" withValue:@"VerifyExistingEmail"];
-
-            [self.navigationController popViewControllerAnimated:YES];
-        } else {
-            [[CurioSDK shared] sendEvent:@"SignUp>First" eventValue:@"Fail"];
-            [MPush hitTag:@"Signup>First" withValue:@"Fail"];
-        }
+        [self showErrorAlertWithMessage:GENERAL_ERROR_MESSAGE];
+        [[CurioSDK shared] sendEvent:@"SignUp>First" eventValue:@"Fail"];
+        [MPush hitTag:@"Signup>First" withValue:@"Fail"];
     }
 }
 
