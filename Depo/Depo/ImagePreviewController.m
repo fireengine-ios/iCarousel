@@ -227,19 +227,18 @@
     self.title = self.file.name;
 }
 
-- (int) findCursorValue{
+- (int) findCursorValue {
    
     MetaFile *tempFile = [MetaFile alloc];
-    int cursorFound = 0;
     for (int i = 0; i<[self.files count]; i++) {
         if([[self.files objectAtIndex:i] isKindOfClass:[MetaFile class]]) {
             tempFile = [self.files objectAtIndex:i];
             if ([tempFile.uuid isEqualToString:self.file.uuid]) {
-                cursorFound = i;
+                return i;
             }
         }
     }
-    return cursorFound;
+    return 0;
 }
 
 - (BOOL) checkFileIsPhoto:(MetaFile *) isPhoto {

@@ -174,7 +174,7 @@
         NSMutableArray *filteredPhotoList = [[NSMutableArray alloc] init];
         [filteredPhotoList addObject:fileSelected];
         
-        ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFiles:filteredPhotoList withImage:fileSelected withListOffset:0]; //TODO
+        ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFiles:containingList withImage:fileSelected withListOffset:0]; //TODO
         detail.delegate = self;
         MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
         detail.nav = modalNav;
