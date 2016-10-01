@@ -86,7 +86,7 @@
 
     if(APPDELEGATE.session.profileImageRef) {
         profileImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, profileImageView.frame.size.width - 4, profileImageView.frame.size.height - 4)];
-        profileImgView.image = [Util circularScaleNCrop:APPDELEGATE.session.profileImageRef forRect:CGRectMake(0, 0, profileImageView.frame.size.width - 4, profileImageView.frame.size.width - 4)];
+        profileImgView.image = [Util circularScaleNCrop:APPDELEGATE.session.profileImageRef forRect:CGRectMake(0, 0, APPDELEGATE.session.profileImageRef.size.width, APPDELEGATE.session.profileImageRef.size.height)];
         profileImgView.center = profileImageView.center;
         [profileInfoArea addSubview:profileImgView];
 
@@ -658,7 +658,7 @@
     [self showInfoAlertWithMessage:NSLocalizedString(@"ProfilePhotoUploadSuccess", @"")];
 
     APPDELEGATE.session.profileImageRef = updatedImageRef;
-    profileImgView.image = [Util circularScaleNCrop:APPDELEGATE.session.profileImageRef forRect:CGRectMake(0, 0, profileImageView.frame.size.width - 4, profileImageView.frame.size.width - 4)];
+    profileImgView.image = [Util circularScaleNCrop:APPDELEGATE.session.profileImageRef forRect:CGRectMake(0, 0, APPDELEGATE.session.profileImageRef.size.width, APPDELEGATE.session.profileImageRef.size.height)];
     [[NSNotificationCenter defaultCenter] postNotificationName:PROFILE_IMG_UPLOADED_NOTIFICATION object:nil];
 }
 

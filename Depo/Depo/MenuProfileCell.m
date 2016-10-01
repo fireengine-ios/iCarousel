@@ -45,7 +45,7 @@
             [imageData writeToFile:imagePath atomically:YES];
              */
             profileImgView = [[UIImageView alloc] initWithFrame:CGRectMake(17, (60 - profileBgImg.size.height - 2)/2, profileBgImg.size.width - 4, profileBgImg.size.height - 4)];
-            profileImgView.image = [Util circularScaleNCrop:profileImage forRect:CGRectMake(0, 0, 44, 44)];
+            profileImgView.image = [Util circularScaleNCrop:profileImage forRect:CGRectMake(0, 0, profileImage.size.width, profileImage.size.height)];
             profileImgView.center = profileBgView.center;
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self addSubview:profileImgView];
@@ -84,7 +84,7 @@
 }
 
 - (void) profileImageUpdated {
-    profileImgView.image = [Util circularScaleNCrop:APPDELEGATE.session.profileImageRef forRect:CGRectMake(0, 0, 44, 44)];
+    profileImgView.image = [Util circularScaleNCrop:APPDELEGATE.session.profileImageRef forRect:CGRectMake(0, 0, APPDELEGATE.session.profileImageRef.size.width, APPDELEGATE.session.profileImageRef.size.height)];
 }
 
 - (void) emailChanged {
