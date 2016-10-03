@@ -65,6 +65,8 @@
 }
 
 - (void) revisitedPhotoHeaderSegmentPhotoChosen {
+    [groupView neutralizeSearchBar];
+
     groupView.hidden = NO;
     albumView.hidden = YES;
 
@@ -268,10 +270,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appGoesToBg) name:UIApplicationDidEnterBackgroundNotification object:nil];
+    
     moreButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 22, 22) withImageName:@"dots_icon.png"];
     [moreButton addTarget:self action:@selector(moreClicked) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *moreItem = [[UIBarButtonItem alloc] initWithCustomView:moreButton];
     self.navigationItem.rightBarButtonItem = moreItem;
+}
+
+- (void) appGoesToBg {
+    if(groupView) {
+        [groupView neutralizeSearchBar];
+    }
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -292,6 +302,9 @@
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.nav setNavigationBarHidden:NO animated:NO];
+    if(groupView) {
+        [groupView neutralizeSearchBar];
+    }
 }
 
 - (BOOL)shouldAutorotate {

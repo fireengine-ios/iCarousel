@@ -95,7 +95,6 @@
 
         yIndex = 60;
         fileScroll.contentSize = CGSizeMake(fileScroll.frame.size.width, yIndex);
-        fileScroll.contentOffset = CGPointMake(0, 60);
 
         UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(searchTapped)];
         tapGestureRecognizer.numberOfTapsRequired = 1;
@@ -208,6 +207,7 @@
         
         yIndex += imageContainerHeight;
     }
+    [self neutralizeSearchBar];
 }
 
 - (void) deleteSuccessCallback {
@@ -676,6 +676,12 @@
     
     [albumAddPhotosDao cancelRequest];
     albumAddPhotosDao = nil;
+}
+
+- (void) neutralizeSearchBar {
+    if(fileScroll.contentOffset.y < 60) {
+        fileScroll.contentOffset = CGPointMake(0, 60);
+    }
 }
 
 @end

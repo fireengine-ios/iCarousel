@@ -304,11 +304,30 @@
 
 - (void) showLocInfoPopup {
     if(autoSyncSwitch.isOn) {
-        locInfoPopup = [[CustomInfoWithIconView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) withIcon:@"icon_locationperm.png" withInfo:NSLocalizedString(@"LocInfoPopup", @"") withSubInfo:NSLocalizedString(@"LocSubinfoPopup", @"") isCloseable:YES];
-        locInfoPopup.delegate = self;
-        [self.view addSubview:locInfoPopup];
-        [AppUtil writeLocInfoPopupShownFlag];
-        [AppUtil writePeriodicLocInfoPopupIdleFlag];
+        if([AppUtil readLocInfoPopupShownFlag]) {
+            [self customInfoWithIconViewDidDismiss];
+        } else {
+            if(![CLLocationManager locationServicesEnabled]) {
+                [self showErrorAlertWithMessage:NSLocalizedString(@"LocForAutoSyncError", @"")];
+                return;
+            } else {
+                if([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined) {
+                    locInfoPopup = [[CustomInfoWithIconView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) withIcon:@"icon_locationperm.png" withInfo:NSLocalizedString(@"LocInfoPopup", @"") withSubInfo:NSLocalizedString(@"LocSubinfoPopup", @"") isCloseable:YES];
+                    locInfoPopup.delegate = self;
+                    [self.view addSubview:locInfoPopup];
+                    [AppUtil writeLocInfoPopupShownFlag];
+                    [AppUtil writePeriodicLocInfoPopupIdleFlag];
+                } else if([CLLocationManager authorizationStatus] == kCLAuthorizationStatusRestricted || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
+                    [AppUtil resetPeriodicLocInfoPopupIdleFlag];
+                    [self continueToHome];
+                } else {
+                    [LocationManager sharedInstance].delegate = self;
+                    [[LocationManager sharedInstance] startLocationManager];
+                    [AppUtil writeLocInfoPopupShownFlag];
+                    [AppUtil writePeriodicLocInfoPopupIdleFlag];
+                }
+            }
+        }
     } else {
         [self moveToOpeningPage];
     }

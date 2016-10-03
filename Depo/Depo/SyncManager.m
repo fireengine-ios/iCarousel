@@ -370,24 +370,31 @@
 
 - (void) reachabilityDidChange {
     BOOL triggerAutoSync = NO;
-    [[UploadQueue sharedInstance] cancelRemainingUploads];
+    IGLog(@"SyncManager reachabilityDidChange called");
+    [[UploadQueue sharedInstance] cancelAllUploads];
+    IGLog(@"SyncManager all uploads cancelled");
     EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
     if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
         ConnectionOption connectionOption = (ConnectionOption)[CacheUtil readCachedSettingSyncingConnectionType];
         if([ReachabilityManager isReachableViaWiFi]) {
+            IGLog(@"SyncManager reachabilityDidChange isReachableViaWiFi");
             //auto sync çalışmalıdır
             triggerAutoSync = YES;
         } else if([ReachabilityManager isReachableViaWWAN]) {
+            IGLog(@"SyncManager reachabilityDidChange isReachableViaWWAN");
             if(connectionOption == ConnectionOptionWifi3G) {
+                IGLog(@"SyncManager reachabilityDidChange isReachableViaWWAN ConnectionOptionWifi3G");
                 //auto sync çalışmalıdır
                 triggerAutoSync = YES;
             } else if(connectionOption == ConnectionOptionWifi) {
+                IGLog(@"SyncManager reachabilityDidChange isReachableViaWWAN ConnectionOptionWifi");
                 //auto sync çalışmamalı ve queue'dakiler de temizlenmelidir
-                [[UploadQueue sharedInstance] cancelRemainingUploads];
+                [[UploadQueue sharedInstance] cancelAllUploads];
             }
         } else if(![ReachabilityManager isReachable]) {
+            IGLog(@"SyncManager reachabilityDidChange isReachable NO");
             //bağlantı gidince queue temizlenmeli ve bağlantı gelince bu akışa yeniden girmeli
-            [[UploadQueue sharedInstance] cancelRemainingUploads];
+            [[UploadQueue sharedInstance] cancelAllUploads];
         }
     }
 

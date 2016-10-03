@@ -868,7 +868,9 @@ void uncaughtExceptionHandler(NSException *exception) {
 }
 
 - (void) reachabilityDidChange {
+    IGLog(@"AppDelegate reachabilityDidChange");
     if(![ReachabilityManager isReachable]) {
+        IGLog(@"AppDelegate reachabilityDidChange in ReachabilityManager:notReachable block");
         [[UploadQueue sharedInstance] cancelAllUploads];
         [self.base hideSyncInfoView];
     }
