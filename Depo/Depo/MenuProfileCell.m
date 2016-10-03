@@ -53,8 +53,10 @@
         });
 
         NSString *infoFieldVal = APPDELEGATE.session.user.username;
-        if(APPDELEGATE.session.user.email) {
-            infoFieldVal = APPDELEGATE.session.user.email;
+        if(APPDELEGATE.session.user.email != nil) {
+            if(![APPDELEGATE.session.user.email isEqualToString:@""]) {
+                infoFieldVal = APPDELEGATE.session.user.email;
+            }
         }
         
         UIImage *settingsIcon = [UIImage imageNamed:@"icon_settings.png"];

@@ -657,7 +657,16 @@
     
     NSLog(@".... %@", NSStringFromClass([self.window.rootViewController class]));
     if(activatedFromBackground && !backgroundReloginInProgress) {
-        if(![self.window.rootViewController isKindOfClass:[BaseViewController class]]) {
+        BOOL shouldContinue = YES;
+        if([self.window.rootViewController isKindOfClass:[BaseViewController class]]) {
+            shouldContinue = NO;
+        } else if([self.window.rootViewController isKindOfClass:[MyNavigationController class]]){
+            MyNavigationController *castedCtrl = (MyNavigationController *) self.window.rootViewController;
+            if([[castedCtrl.viewControllers lastObject] isKindOfClass:[PostLoginSyncPrefController class]]) {
+                shouldContinue = NO;
+            }
+        }
+        if(shouldContinue) {
             IGLog(@"AppDelegate should relogin after from background");
             NSLog(@"AppDelegate should relogin after from background");
             if([ReachabilityManager isReachable]) {

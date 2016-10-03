@@ -50,8 +50,8 @@
             user.name = [self strByRawVal:name];
             user.surname = [self strByRawVal:surname];
             user.profileImgUrl = [self strByRawVal:url];
-            user.username = username;
-            user.email = email;
+            user.username = [self strByRawVal:username];
+            user.email = [self strByRawVal:email];
             user.phoneNumber = [self strByRawVal:phoneNumber];
             user.countryCode = [self strByRawVal:countryCode];
             user.cellographId = [self strByRawVal:cellografId];
