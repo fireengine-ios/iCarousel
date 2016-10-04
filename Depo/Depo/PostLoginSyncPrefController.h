@@ -13,6 +13,7 @@
 #import "TTTAttributedLabel.h"
 #import "CustomInfoWithIconView.h"
 #import "CustomAlertView.h"
+#import "FaqUrlDao.h"
 
 @interface PostLoginSyncPrefController : MyViewController <UITableViewDataSource, UITableViewDelegate, LocationManagerDelegate, TTTAttributedLabelDelegate, CustomInfoWithIconDelegate, CustomAlertDelegate>
 
@@ -24,5 +25,6 @@
 @property (nonatomic, strong) ALAssetsLibrary *assetsLibrary;
 @property (nonatomic, strong) PostLoginPrefCell *wifi3gCell;
 @property (nonatomic, strong) CustomInfoWithIconView *locInfoPopup;
+@property (nonatomic, strong) FaqUrlDao *faqUrlDao;
 
 @end

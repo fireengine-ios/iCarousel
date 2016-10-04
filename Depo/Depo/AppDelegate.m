@@ -74,7 +74,7 @@
 @synthesize progress;
 @synthesize wormhole;
 @synthesize activatedFromBackground;
-@synthesize backgroundReloginInProgress;
+@synthesize loginInProgress;
 @synthesize notificationAction;
 @synthesize notificationActionUrl;
 @synthesize locInfoPopup;
@@ -252,6 +252,7 @@
         IGLog(@"AppDelegate Radius Login triggered");
         [self.window.rootViewController.view removeFromSuperview];
         [tokenManager requestRadiusLogin];
+        loginInProgress = YES;
         [self showMainLoading];
     }
 }
@@ -405,7 +406,7 @@
 
 - (void) tokenManagerDidFailReceivingToken {
     IGLog(@"AppDelegate tokenManagerDidFailReceivingToken");
-    backgroundReloginInProgress = NO;
+    loginInProgress = NO;
     
     [self hideMainLoading];
     WelcomeController *welcomePage = [[WelcomeController alloc] init];
@@ -418,10 +419,10 @@
 
     [self hideMainLoading];
     
-    if(backgroundReloginInProgress) {
+    if(loginInProgress) {
         [SyncUtil unlockAutoSyncBlockInProgress];
         [self triggerAutoSynchronization];
-        backgroundReloginInProgress = NO;
+        loginInProgress = NO;
     }
     
     if(![AppUtil readFirstVisitOverFlag]) {
@@ -469,14 +470,14 @@
 
 - (void) tokenManagerProvisionNeeded {
     IGLog(@"AppDelegate tokenManagerProvisionNeeded");
-    backgroundReloginInProgress = NO;
+    loginInProgress = NO;
     TermsController *termsPage = [[TermsController alloc] init];
     [self.window setRootViewController:termsPage];
 }
 
 - (void) tokenManagerMigrationInProgress {
     IGLog(@"AppDelegate tokenManagerMigrationInProgress");
-    backgroundReloginInProgress = NO;
+    loginInProgress = NO;
     MigrateStatusController *migrationPage = [[MigrateStatusController alloc] init];
     [self.window setRootViewController:migrationPage];
 }
@@ -656,7 +657,7 @@
      */
     
     NSLog(@".... %@", NSStringFromClass([self.window.rootViewController class]));
-    if(activatedFromBackground && !backgroundReloginInProgress) {
+    if(activatedFromBackground && !loginInProgress) {
         BOOL shouldContinue = YES;
         if([self.window.rootViewController isKindOfClass:[BaseViewController class]]) {
             shouldContinue = NO;
@@ -672,13 +673,13 @@
             if([ReachabilityManager isReachable]) {
                 if([CacheUtil readRememberMeToken] != nil) {
                     IGLog(@"AppDelegate should relogin after from background RememberMeToken not null");
-                    backgroundReloginInProgress = YES;
+                    loginInProgress = YES;
                     [self addInitialBgImage];
                     [tokenManager requestToken];
                     [self showMainLoading];
                 } else if([ReachabilityManager isReachableViaWWAN]) {
                     IGLog(@"AppDelegate should relogin after from background trying radius login");
-                    backgroundReloginInProgress = YES;
+                    loginInProgress = YES;
                     [self addInitialBgImage];
                     [tokenManager requestRadiusLogin];
                     [self showMainLoading];
@@ -748,6 +749,7 @@ void uncaughtExceptionHandler(NSException *exception) {
 - (void) updateCheckCompleted{
     if([CacheUtil readRememberMeToken] != nil) {
         [tokenManager requestToken];
+        loginInProgress = YES;
         [self showMainLoading];
     } else {
         if(![AppUtil readFirstVisitOverFlag]) {

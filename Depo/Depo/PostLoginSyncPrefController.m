@@ -31,11 +31,17 @@
 @synthesize assetsLibrary;
 @synthesize wifi3gCell;
 @synthesize locInfoPopup;
+@synthesize faqUrlDao;
 
 - (id) init {
     if(self = [super init]) {
         self.view.backgroundColor = [Util UIColorForHexColor:@"3fb0e8"];
         
+        faqUrlDao = [[FaqUrlDao alloc] init];
+        faqUrlDao.delegate = self;
+        faqUrlDao.successMethod = @selector(faqUrlSuccessCallback:);
+        faqUrlDao.failMethod = @selector(faqUrlFailCallback:);
+
         choices = [[NSMutableArray alloc] init];
         [choices addObject:@"Wifi + 3G + 4.5G"];
         [choices addObject:@"Wifi"];
@@ -119,6 +125,16 @@
         [self.view addSubview:continueButton];
     }
     return self;
+}
+
+- (void) faqUrlSuccessCallback:(NSString *) urlToCall {
+    [self hideLoading];
+    NSURL *url = [NSURL URLWithString:urlToCall];
+    [[UIApplication sharedApplication] openURL:url];
+}
+
+- (void) faqUrlFailCallback:(NSString *) errorMessage {
+    [self hideLoading];
 }
 
 - (void)autoSyncSwitchChanged:(id)sender
@@ -296,8 +312,8 @@
 - (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url {
     if ([[url scheme] hasPrefix:@"action"]) {
         if ([[url host] hasPrefix:@"show-faq"]) {
-            NSURL *url = [NSURL URLWithString:@"http://trcll.im/zbQxU"];
-            [[UIApplication sharedApplication] openURL:url];
+            [faqUrlDao requestFaqUrl];
+            [self showLoading];
         }
     }
 }

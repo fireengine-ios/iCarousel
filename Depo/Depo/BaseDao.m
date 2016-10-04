@@ -573,6 +573,7 @@
         [newRequest addRequestHeader:@"X-Auth-Token" value:APPDELEGATE.session.authToken];
     }
     [newRequest startAsynchronous];
+    self.tokenAlreadyRevisitedFlag = NO;
 }
 
 - (void) tokenRevisitedFailCallback:(NSString *) errorMessage {

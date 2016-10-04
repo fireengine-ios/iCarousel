@@ -40,7 +40,7 @@
 @property (nonatomic) NotificationAction notificationAction;
 @property (nonatomic) NSString *notificationActionUrl;
 @property (nonatomic) BOOL activatedFromBackground;
-@property (nonatomic) BOOL backgroundReloginInProgress;
+@property (nonatomic) BOOL loginInProgress;
 @property (nonatomic, strong) CustomInfoWithIconView *locInfoPopup;
 
 - (void) showCustomAlert:(CustomAlertView *) alertView;
