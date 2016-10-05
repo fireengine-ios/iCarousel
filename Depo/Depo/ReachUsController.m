@@ -273,11 +273,18 @@
         NSFileManager *fileManager = [NSFileManager defaultManager];
         [fileManager removeItemAtPath:logPath error:nil];
 
-        [self showInfoAlertWithMessage:NSLocalizedString(@"MessageSentSuccessfully", @"")];
+        CustomAlertView *alert = [[CustomAlertView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withMessage:NSLocalizedString(@"MessageSentSuccessfully", @"") withModalType:ModalTypeSuccess];
+        alert.delegate = self;
+        [APPDELEGATE showCustomAlert:alert];
     }
+}
+
+- (void) didDismissCustomAlert:(CustomAlertView *) alertView {
+    [[NSNotificationCenter defaultCenter] postNotificationName:PHOTOS_SCREEN_AUTO_TRIGGERED_NOTIFICATION object:nil];
 }
 
 - (void) menuToggle {
     [self.view endEditing:YES];
 }
+
 @end

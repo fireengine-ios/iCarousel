@@ -10,8 +10,9 @@
 #import "FeedbackDao.h"
 #import "AccountDao.h"
 #import <MessageUI/MessageUI.h>
+#import "CustomAlertView.h"
 
-@interface ReachUsController : MyViewController <UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, UIGestureRecognizerDelegate, MFMailComposeViewControllerDelegate>
+@interface ReachUsController : MyViewController <UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, UIGestureRecognizerDelegate, MFMailComposeViewControllerDelegate, CustomAlertDelegate>
 
 @property (nonatomic, strong) FeedbackDao *dao;
 @property (nonatomic, strong) AccountDao *accountDao;

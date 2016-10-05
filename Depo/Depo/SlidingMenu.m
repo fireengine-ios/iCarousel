@@ -62,6 +62,8 @@
                                                  selector:@selector(forceHomePage)
                                                      name:FORCE_HOMEPAGE_NOTIFICATION object:nil];
         
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(forcePhotosPage) name:PHOTOS_SCREEN_AUTO_TRIGGERED_NOTIFICATION object:nil];
+
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playingMusicChanged:) name:MUSIC_CHANGED_NOTIFICATION object:nil];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shouldRemoveMusic) name:MUSIC_SHOULD_BE_REMOVED_NOTIFICATION object:nil];
@@ -299,6 +301,11 @@
 - (void) forceHomePage {
     [menuTable selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] animated:NO scrollPosition:UITableViewScrollPositionNone];
     [delegate didTriggerHome];
+}
+
+- (void) forcePhotosPage {
+    [menuTable selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:5] animated:NO scrollPosition:UITableViewScrollPositionNone];
+    [delegate didTriggerPhotos];
 }
 
 #pragma mark AudioFooterDelegate methods

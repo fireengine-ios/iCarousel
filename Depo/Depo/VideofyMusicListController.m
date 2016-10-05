@@ -143,13 +143,19 @@
     }
 
     AVPlayerItem *item = nil;
+    int counter = 0;
     for(VideofyAudio *audio in self.audioList) {
         if(audio.audioId == audioId) {
             item = [[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:audio.path]];
+            break;
         }
+        counter ++;
     }
     audioPlayer = [[AVPlayer alloc] initWithPlayerItem:item];
     [audioPlayer play];
+    
+    NSIndexPath *indexPathToChoose = [NSIndexPath indexPathForRow:counter inSection:0];
+    [self.audioTable selectRowAtIndexPath:indexPathToChoose animated:NO scrollPosition:UITableViewScrollPositionNone];
 }
 
 - (void) videofyAudioCellPauseClickedWithId:(long)audioId {
