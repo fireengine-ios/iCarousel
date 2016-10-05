@@ -17,8 +17,9 @@
 #import "CurioSDK.h"
 #import "MPush.h"
 
-@interface PostLoginSyncPrefController ()
-
+@interface PostLoginSyncPrefController () {
+    BOOL homeTriggered;
+}
 @end
 
 @implementation PostLoginSyncPrefController
@@ -246,13 +247,15 @@
 }
 
 - (void) triggerAssetPermissionAndContinue {
-    
+    IGLog(@"PostLoginSyncPrefController triggerAssetPermissionAndContinue");
     ALAuthorizationStatus photoLibraryStatus = [ALAssetsLibrary authorizationStatus];
     if (photoLibraryStatus != ALAuthorizationStatusAuthorized) {
         if(photoLibraryStatus == ALAuthorizationStatusNotDetermined) {
             self.assetsLibrary = [[ALAssetsLibrary alloc] init];
             [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-                [self continueToHome];
+                if (group == nil) {
+                    [self continueToHome];
+                }
             } failureBlock:^(NSError *error) {
 //                if (error.code == ALAssetsLibraryAccessUserDeniedError || error.code == ALAssetsLibraryAccessGloballyDeniedError) {
                     [self showErrorAlertWithMessage:NSLocalizedString(@"AssetForAutoSyncError", @"")];
@@ -284,6 +287,14 @@
 }
 
 - (void) continueToHome {
+    IGLog(@"PostLoginSyncPrefController continueToHome called");
+    if(homeTriggered) {
+        IGLog(@"PostLoginSyncPrefController continueToHome home already triggered...");
+        return;
+    }
+    
+    homeTriggered = YES;
+    
     [CacheUtil writeCachedSettingSyncContacts:EnableOptionOn];
     [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOn];
     
@@ -306,6 +317,7 @@
     [AppUtil writeFirstVisitOverFlag];
     //    [APPDELEGATE triggerHome];
     
+    IGLog(@"PostLoginSyncPrefController AppDelegate startOpeningPage called");
     [APPDELEGATE startOpeningPage];
 }
 
@@ -350,6 +362,8 @@
 }
 
 - (void) moveToOpeningPage {
+    IGLog(@"PostLoginSyncPrefController moveToOpeningPage called");
+
     [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOff];
     [CacheUtil writeCachedSettingSyncContacts:EnableOptionOff];
     
@@ -365,6 +379,8 @@
     
     [AppUtil writeFirstVisitOverFlag];
     //    [APPDELEGATE triggerHome];
+
+    IGLog(@"PostLoginSyncPrefController moveToOpeningPage AppDelegate startOpeningPage called");
     [APPDELEGATE startOpeningPage];
 }
 

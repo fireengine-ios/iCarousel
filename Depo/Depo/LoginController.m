@@ -70,6 +70,9 @@
         msisdnField = [[LoginTextfield alloc] initWithFrame:CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 43) withPlaceholder:@""/*NSLocalizedString(@"MsisdnEmailPlaceholder", @"")*/];
         msisdnField.delegate = self;
         [mainScroll addSubview:msisdnField];
+        if([[Util readLocaleCode] isEqualToString:@"tr"]) {
+            msisdnField.placeholder = @"5XX XXX XX XX";
+        }
 
         scrollYIndex += 55;
 

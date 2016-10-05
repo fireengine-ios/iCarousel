@@ -270,6 +270,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    IGLog(@"RevisitedGroupedPhotosController viewDidLoad");
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appGoesToBg) name:UIApplicationDidEnterBackgroundNotification object:nil];
     
     moreButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 22, 22) withImageName:@"dots_icon.png"];

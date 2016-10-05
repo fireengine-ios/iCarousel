@@ -115,6 +115,7 @@
             MetaFile *filePresent = [self selectedFileListContainingFile:fileSelected];
             if(!filePresent) {
                 [selectedFileList addObject:fileSelected];
+                self.title = [NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]];
             }
         }
     }
@@ -124,6 +125,11 @@
     MetaFile *filePresent = [self selectedFileListContainingFile:fileSelected];
     if(filePresent) {
         [selectedFileList removeObject:fileSelected];
+        if([selectedFileList count] > 0) {
+            self.title = [NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]];
+        } else {
+            self.title = NSLocalizedString(@"CreateStoryTitle", @"");
+        }
     }
 }
 
