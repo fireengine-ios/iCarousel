@@ -110,6 +110,14 @@
 - (void) squareImageWasMarkedForFile:(MetaFile *)fileSelected {
     if([selectedFileList count] >= 50) {
         [self showErrorAlertWithMessage:NSLocalizedString(@"VideofySelectibleInfo", @"")];
+        for(UIView *subview in [photosScroll subviews]) {
+            if([subview isKindOfClass:[SquareImageView class]]) {
+                SquareImageView *castedView = (SquareImageView *) subview;
+                if([castedView.file.uuid isEqualToString:fileSelected.uuid]) {
+                    [castedView manuallyDeselect];
+                }
+            }
+        }
     } else {
         if(fileSelected.uuid) {
             MetaFile *filePresent = [self selectedFileListContainingFile:fileSelected];

@@ -47,5 +47,6 @@
 - (id) initFinalWithFrame:(CGRect)frame withFile:(MetaFile *) _file withSelectibleStatus:(BOOL) selectibleStatus;
 - (void) setNewStatus:(BOOL) newStatus;
 - (void) showProgressMask;
+- (void) manuallyDeselect;
 
 @end

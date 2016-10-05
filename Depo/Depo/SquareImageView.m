@@ -243,6 +243,11 @@
     maskView.hidden = YES;
 }
 
+- (void) manuallyDeselect {
+    isMarked = NO;
+    maskView.hidden = YES;
+}
+
 - (void) showProgressMask {
     maskView.hidden = YES;
     imgView.alpha = 0.25f;
