@@ -254,9 +254,9 @@
 "SignIn"="Giriş yap";
 "Continue"="Devam";
 
-"PostLoginSyncInfo"="Fotoğraflarınızı iPhone'unuzdan lifebox'unuza otomatik olarak yükleyin. lifebox, otomatik yükleme için lokasyon değişiminizi kullanır. Detaylı bilgi";
-"PostLoginImgPrefInfo"="Fotoğraflarınızı iPhone'unuzdan lifebox'unuza otomatik olarak yükleyin";
-"PostLoginContactPrefInfo"="Rehberinizi ve Sosyal Ağ kişilerinizi lifebox'unuza otomatik olarak yükleyin";
+"PostLoginSyncInfo"="Fotoğraflarınızı iPhone'unuzdan lifebox'ınıza otomatik olarak yükleyin. lifebox, otomatik yükleme için lokasyon değişiminizi kullanır. Detaylı bilgi";
+"PostLoginImgPrefInfo"="Fotoğraflarınızı iPhone'unuzdan lifebox'ınıza otomatik olarak yükleyin";
+"PostLoginContactPrefInfo"="Rehberinizi ve Sosyal Ağ kişilerinizi lifebox'ınıza otomatik olarak yükleyin";
 
 "PostLoginSyncPrefTitle"="YÜKLEME TERCİHİ";
 "PostLoginRoamingTitle"="Yurtdışı Dolaşım";
@@ -303,7 +303,7 @@
 
 "AutomaticSynchronization"="Otomatik Yükleme";
 "Photos&Videos"="Fotoğraflar";
-"Photos&VideosInfo"="Fotoğraflarınızın lifebox'unuza otomatik olarak yüklenmesi için açık konuma getirin.";
+"Photos&VideosInfo"="Fotoğraflarınızın lifebox'ınıza otomatik olarak yüklenmesi için açık konuma getirin.";
 "Photos&VideosAutoInfo"="lifebox'taki fotoğraf ve videolarınıza erişebilir ve istediğinizde albümünüzdeki fotoğraf ve videoları lifebox'a yükleyebilirsiniz.\n\n(Fotoğraf ve videoları lifebox'a yüklemek için uygulamadaki \"+\" butonunu kullanın.)\n\nOtomatik yükleme etkin durumda, albümünüzdeki fotoğraflar otomatik olarak bulutta yedeklenecek.";
 "Photos&VideosOnInfo"="lifebox'taki fotoğraf ve videolarınıza erişebilir ve istediğinizde albümünüzdeki fotoğraf ve videoları lifebox'a yükleyebilirsiniz.\n\n(Fotoğraf ve videoları lifebox'a yüklemek için uygulamadaki \"+\" butonunu kullanın.)";
 "Photos&VideosOffInfo"="lifebox'taki fotoğraf ve videolarınıza erişemez ve lifebox'a yeni fotoğraf veya video yükleyemezsiniz.";
@@ -314,7 +314,7 @@
 "DocumentsOnInfo"="lifebox'taki dökümanlarınıza erişebilir ve istediğinizde dökümanlarınızı lifebox'a yükleyebilirsiniz. Diğer uygulamalar üzerinden (e-posta uygulamaları gibi) \"lifebox ile aç\" seçeneği ile dökümanlarınızı yükleyebilirsiniz.";
 "DocumentsOffInfo"="lifebox'taki dökümanlarınıza erişemez ve lifebox'a yeni doküman yükleyemezsiniz.";
 "Contacts"="Rehber";
-"ContactsInfo"="Telefon rehberinizin lifebox'unuza otomatik olarak yüklenmesi için açık konuma getirin.";
+"ContactsInfo"="Telefon rehberinizin lifebox'ınıza otomatik olarak yüklenmesi için açık konuma getirin.";
 "ContactsAutoInfo"="lifebox'u açtığınızda telefon rehberiniz otomatik olarak buluta yüklenecek.";
 "ContactsOffInfo"="Telefon rehberiniz otomatik olarak buluta yüklenmeyecek.";
 "ContactsAutoDescriptionHeader"="%d KİŞİ HENÜZ EŞİTLENMEDİ";
@@ -470,7 +470,7 @@
 "UploadingPhotoFinishedWithError"="Yükleme esnasında hata oluştu";
 
 "LocalNotificationManualUploadsFinished"="Yüklemeler tamamlandı, telefon hafızanızda yer açmak için bu dosyaları telefonunuzdan silebilirsiniz.";
-"LocalNotificationAutoUploadsFinished"="Fotoğraflarınız lifebox'unuza yüklendi. Görüntülemek ister misiniz?";
+"LocalNotificationAutoUploadsFinished"="Fotoğraflarınız lifebox'ınıza yüklendi. Görüntülemek ister misiniz?";
 
 "LocationNotEnabled"="Arka planda dosyalarınızın sync olması için Konum servisinizin açık olması gerekmektedir.";
 
@@ -745,7 +745,7 @@
 "StartExport"="Şimdi Aktar";
 "Add"="Ekle";
 "HomePage"="Ana Sayfa";
-"VideofyPreparationMessage"="Videonuz hazırlanıyor... Tamamlandığında Videolar bölümünden ulaşabilirsiniz.";
+"VideofyPreparationMessage"="Hikayeniz hazırlanıyor. Tamamlandığında hikayenize Videolar albümünden ulaşabilirsiniz.";
 "CellographCurrent"="GÜNCEL SİPARİŞLER";
 "CellographHistory"="ESKİ SİPARİŞLER";
 "VideofyPreviewDownloadError"="Öngösterim için videoya erişilemedi";

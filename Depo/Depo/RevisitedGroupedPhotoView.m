@@ -13,6 +13,8 @@
 #import "GroupedPhotosCell.h"
 #import "CacheUtil.h"
 #import "BaseViewController.h"
+#import "ReachabilityManager.h"
+#import "Reachability.h"
 
 #define GROUP_PACKAGE_SIZE (IS_IPAD ? 60 : IS_IPHONE_6P_OR_HIGHER ? 60 : 48)
 #define GROUP_IMG_COUNT_PER_ROW (IS_IPAD ? 6 : IS_IPHONE_6P_OR_HIGHER ? 6 : 4)
@@ -108,6 +110,8 @@
         progress = [[MBProgressHUD alloc] initWithFrame:self.frame];
         progress.opacity = 0.4f;
         [self addSubview:progress];
+
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(autoIterationFinished) name:AUTO_ITERATION_FINISHED_NOT_KEY object:nil];
     }
     return self;
 }
@@ -682,6 +686,10 @@
     if(fileScroll.contentOffset.y < 60) {
         fileScroll.contentOffset = CGPointMake(0, 60);
     }
+}
+
+- (void) autoIterationFinished {
+    [self pullData];
 }
 
 @end

@@ -191,6 +191,7 @@
                     autoSyncIterationInProgress = NO;
                     [self firstTimeBlockSyncEnumerationFinished];
                     [[UploadQueue sharedInstance] manualAutoSyncIterationFinished];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:AUTO_ITERATION_FINISHED_NOT_KEY object:nil];
                 }
             } failureBlock:^(NSError *error) {
             }];
@@ -290,6 +291,7 @@
                     [SyncUtil writeLastSyncDate:[NSDate date]];
                     autoSyncIterationInProgress = NO;
                     [[UploadQueue sharedInstance] manualAutoSyncIterationFinished];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:AUTO_ITERATION_FINISHED_NOT_KEY object:nil];
                     [[CurioSDK shared] sendEvent:@"BackgroundSync" eventValue:@"ended"];
                     [MPush hitTag:@"BackgroundSync" withValue:@"ended"];
                 }
