@@ -689,7 +689,11 @@
 }
 
 - (void) autoIterationFinished {
-    [self pullData];
+    IGLog(@"At RevisitedGroupedPhotoView autoIterationFinished");
+    if([[UploadQueue sharedInstance] remainingCount] > 0) {
+        IGLog(@"At RevisitedGroupedPhotoView autoIterationFinished pullData will be called");
+        [self pullData];
+    }
 }
 
 @end

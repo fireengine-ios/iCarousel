@@ -99,6 +99,7 @@
 }
 
 - (void) initializeNextAutoSyncPackage {
+    IGLog(@"SyncManager initializeNextAutoSyncPackage called");
     if(autoSyncIterationInProgress)
         return;
 
@@ -188,6 +189,7 @@
                         }];
                     }
                 } else {
+                    IGLog(@"SyncManager initializeNextAutoSyncPackage group enumeration finished");
                     autoSyncIterationInProgress = NO;
                     [self firstTimeBlockSyncEnumerationFinished];
                     [[UploadQueue sharedInstance] manualAutoSyncIterationFinished];
@@ -215,6 +217,7 @@
 }
 
 - (void) manuallyCheckIfAlbumChanged {
+    IGLog(@"SyncManager manuallyCheckIfAlbumChanged");
     if(autoSyncIterationInProgress)
         return;
     
@@ -288,6 +291,7 @@
                         }
                     }];
                 } else { 
+                    IGLog(@"SyncManager manuallyCheckIfAlbumChanged group enumeration finished");
                     [SyncUtil writeLastSyncDate:[NSDate date]];
                     autoSyncIterationInProgress = NO;
                     [[UploadQueue sharedInstance] manualAutoSyncIterationFinished];
