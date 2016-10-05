@@ -19,16 +19,23 @@
         self.layer.borderColor = [Util UIColorForHexColor:@"BEBEBE"].CGColor;
         self.layer.borderWidth = 1.0f;
         self.layer.cornerRadius = 6;
-        self.placeholder = NSLocalizedString(@"MenuSearch", @"");
-        self.textColor = [Util UIColorForHexColor:@"888888"];
+        NSString *placeholderVal = NSLocalizedString(@"MenuSearch", @"");
+        self.placeholder = placeholderVal;
+        self.textColor = [Util UIColorForHexColor:@"5D667C"];
         
-        self.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:15];
+        self.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:16];
+        
+        float placeholderWidth = [Util calculateWidthForText:placeholderVal forHeight:20 forFont:self.font] + 10;
+        
+        UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake((self.frame.size.width - placeholderWidth)/2 - 24, (self.frame.size.height - 24)/2, 24, 24)];
+        iconView.image = [UIImage imageNamed:@"icon_search.png"];
+        [self addSubview:iconView];
     }
     return self;
 }
 
 - (void) drawPlaceholderInRect:(CGRect)rect {
-    [[Util UIColorForHexColor:@"BEBEBE"] setFill];
+    [[Util UIColorForHexColor:@"5D667C"] setFill];
 //    [[self placeholder] drawInRect:rect withFont:self.font];
     [self.placeholder drawInRect:rect withFont:self.font lineBreakMode:UILineBreakModeTailTruncation alignment:NSTextAlignmentCenter];
 }
@@ -37,6 +44,7 @@
     return CGRectMake(bounds.origin.x + 20, bounds.origin.y + 14,
                       bounds.size.width - 40, bounds.size.height - 15);
 }
+
 - (CGRect)editingRectForBounds:(CGRect)bounds {
     return [self textRectForBounds:bounds];
 }

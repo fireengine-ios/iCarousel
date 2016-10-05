@@ -134,6 +134,8 @@
 }
 
 - (void)videofyAudioCellPlayClickedWithId:(long)audioId {
+    audioIdSelected = audioId;
+
     NSDictionary* userInfo = [NSDictionary dictionaryWithObject:[NSNumber numberWithLong:audioId] forKey:@"playingAudioId"];
     [[NSNotificationCenter defaultCenter] postNotificationName:VIDEOFY_MUSIC_PREVIEW_CHANGED_NOTIFICATION object:self userInfo:userInfo];
     

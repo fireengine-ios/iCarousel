@@ -88,9 +88,8 @@
         searchField.placeholder = @"";
         searchField.returnKeyType = UIReturnKeySearch;
         searchField.delegate = self;
-        [searchField addTarget:self
-                      action:@selector(searchFieldDidChange)
-            forControlEvents:UIControlEventEditingChanged];
+        [searchField markIcon];
+        [searchField addTarget:self action:@selector(searchFieldDidChange) forControlEvents:UIControlEventEditingChanged];
         [searchFieldContainer addSubview:searchField];
         
         recentSearchesTableView = [[RecentSearchesTableView alloc] initWithSearchField:searchField];

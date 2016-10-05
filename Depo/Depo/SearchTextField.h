@@ -10,4 +10,6 @@
 
 @interface SearchTextField : UITextField
 
+- (void) markIcon;
+
 @end
