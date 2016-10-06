@@ -29,6 +29,7 @@
 @synthesize previousButtonRef;
 @synthesize moreButton;
 @synthesize usageDao;
+@synthesize accountDao;
 
 - (id) init {
     if(self = [super init]) {
@@ -38,6 +39,11 @@
         usageDao.delegate = self;
         usageDao.successMethod = @selector(usageSuccessCallback:);
         usageDao.failMethod = @selector(usageFailCallback:);
+
+        accountDao = [[AccountDao alloc] init];
+        accountDao.delegate = self;
+        accountDao.successMethod = @selector(accountSuccessCallback:);
+        accountDao.failMethod = @selector(accountFailCallback:);
 
         segmentView = [[RevisitedPhotoHeaderSegmentView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, 40)];
         segmentView.delegate = self;
@@ -53,6 +59,7 @@
         [self.view addSubview:albumView];
         
         [usageDao requestUsageInfo];
+        [accountDao requestActiveSubscriptions];
         
         [self reloadLists];
     }
@@ -424,9 +431,58 @@
 
 - (void) usageSuccessCallback:(Usage *) _usage {
     APPDELEGATE.session.usage = _usage;
+
+    double percentUsageVal = 0;
+    if(APPDELEGATE.session.usage.totalStorage > 0) {
+        percentUsageVal = 100 * ((double)APPDELEGATE.session.usage.usedStorage/(double)APPDELEGATE.session.usage.totalStorage);
+    }
+    
+    if(percentUsageVal >= 80) {
+        if(!APPDELEGATE.session.quotaExceed80EventFlag) {
+            [[CurioSDK shared] sendEvent:@"quota_exceeded_80_perc" eventValue:[NSString stringWithFormat:@"current: %.2f", percentUsageVal]];
+            [MPush hitTag:@"quota_exceeded_80_perc" withValue:[NSString stringWithFormat:@"current: %.2f", percentUsageVal]];
+            APPDELEGATE.session.quotaExceed80EventFlag = YES;
+        }
+    }
+    NSString *eventValue = nil;
+    if(percentUsageVal >= 100) {
+        eventValue = @"quota_full";
+    } else if(percentUsageVal >= 99.0) {
+        eventValue = @"quota_99_percent_full";
+    } else if(percentUsageVal >= 90.0) {
+        eventValue = @"quota_90_percent_full";
+    } else if(percentUsageVal >= 80.0) {
+        eventValue = @"quota_80_percent_full";
+    }
+    if(eventValue) {
+        [MPush hitEvent:eventValue];
+    }
+    if(!isnan(percentUsageVal)) {
+        [MPush hitTag:@"quota_status" withValue:[NSString stringWithFormat:@"%.0f", percentUsageVal]];
+    }
+    
+    if(APPDELEGATE.session.usage.totalStorage > 0) {
+        if(APPDELEGATE.session.usage.totalStorage - APPDELEGATE.session.usage.usedStorage <= 5242880) {
+            [MPush hitTag:@"quota_5_mb_left"];
+        }
+    }
 }
 
 - (void) usageFailCallback:(NSString *) errorMessage {
+}
+
+- (void) accountSuccessCallback:(NSArray *) subscriptions {
+    int counter = 1;
+    for(Subscription *subsc in subscriptions) {
+        if(subsc.plan != nil && subsc.plan.displayName != nil) {
+            NSString *tagName = [NSString stringWithFormat:@"user_package_%d", counter];
+            [MPush hitTag:tagName withValue:subsc.plan.displayName];
+            counter ++;
+        }
+    }
+}
+
+- (void) accountFailCallback:(NSString *) errorMessage{
 }
 
 @end

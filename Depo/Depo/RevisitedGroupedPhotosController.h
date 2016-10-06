@@ -16,6 +16,7 @@
 #import "CustomButton.h"
 #import "CustomEntryPopupView.h"
 #import "UsageInfoDao.h"
+#import "AccountDao.h"
 
 @interface RevisitedGroupedPhotosController : MyViewController <RevisitedPhotoHeaderSegmentDelegate, RevisitedAlbumListDelegate, PhotoAlbumDelegate, NewAlbumDelegate, RevisitedGroupedPhotoDelegate, ImagePreviewDelegate, VideoPreviewDelegate, CustomEntryPopupDelegate>
 
@@ -25,5 +26,6 @@
 @property (nonatomic, strong) UIBarButtonItem *previousButtonRef;
 @property (nonatomic, strong) CustomButton *moreButton;
 @property (nonatomic, strong) UsageInfoDao *usageDao;
+@property (nonatomic, strong) AccountDao *accountDao;
 
 @end

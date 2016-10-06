@@ -13,6 +13,8 @@
 @protocol CustomAVPlayerDelegate <NSObject>
 - (void) customPlayerDidScrollFullScreen;
 - (void) customPlayerDidScrollInitialScreen;
+- (void) customPlayerDidStartPlay;
+- (void) customPlayerDidPause;
 @end
 
 @interface CustomAVPlayer : UIView <CustomAVControlDelegate, UIGestureRecognizerDelegate>

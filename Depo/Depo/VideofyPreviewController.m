@@ -215,6 +215,18 @@
     [self.nav setNavigationBarHidden:YES animated:YES];
 }
 
+- (void) customPlayerDidStartPlay {
+    if(self.bigPlayButton) {
+        self.bigPlayButton.hidden = YES;
+    }
+}
+
+- (void) customPlayerDidPause {
+    if(self.bigPlayButton) {
+        self.bigPlayButton.hidden = NO;
+    }
+}
+
 - (void) triggerDismiss {
     if(avPlayer) {
         [avPlayer willDismiss];

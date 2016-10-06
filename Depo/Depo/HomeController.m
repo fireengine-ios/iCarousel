@@ -466,7 +466,10 @@
 
 - (void) flowChartAdvertising {
     
-    double percentUsageVal = 100 * ((double)APPDELEGATE.session.usage.usedStorage/(double)APPDELEGATE.session.usage.totalStorage);
+    double percentUsageVal = 0;
+    if(APPDELEGATE.session.usage.totalStorage > 0) {
+        percentUsageVal = 100 * ((double)APPDELEGATE.session.usage.usedStorage/(double)APPDELEGATE.session.usage.totalStorage);
+    }
     
     NSString *eventValue = nil;
     if(percentUsageVal >= 100) {
@@ -485,8 +488,10 @@
         [MPush hitTag:@"quota_status" withValue:[NSString stringWithFormat:@"%.0f", percentUsageVal]];
     }
     
-    if(APPDELEGATE.session.usage.totalStorage - APPDELEGATE.session.usage.usedStorage <= 5242880) {
-        [MPush hitTag:@"quota_5_mb_left"];
+    if(APPDELEGATE.session.usage.totalStorage > 0) {
+        if(APPDELEGATE.session.usage.totalStorage - APPDELEGATE.session.usage.usedStorage <= 5242880) {
+            [MPush hitTag:@"quota_5_mb_left"];
+        }
     }
 
     if (APPDELEGATE.session.newUserFlag) {

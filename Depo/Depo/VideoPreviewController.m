@@ -292,6 +292,12 @@
     [self.nav setNavigationBarHidden:YES animated:YES];
 }
 
+- (void) customPlayerDidStartPlay {
+}
+
+- (void) customPlayerDidPause {
+}
+
 - (void) triggerDismiss {
     if(avPlayer) {
         [avPlayer willDismiss];

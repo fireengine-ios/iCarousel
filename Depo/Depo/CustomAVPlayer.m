@@ -320,6 +320,7 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
 //    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"PlayerContinueNotification" object:nil];
 //    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"PlayerHangingNotification" object:nil];
     [self.player pause];
+    [delegate customPlayerDidPause];
 }
 
 - (void) customAVShouldPlay {
@@ -327,6 +328,7 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerHanging) name:@"PlayerHangingNotification" object:nil];
     self.playerTryCount = 0;
     [self.player play];
+    [delegate customPlayerDidStartPlay];
 }
 
 - (void) manualPlay {
