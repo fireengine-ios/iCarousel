@@ -327,7 +327,7 @@
 }
 
 - (void) videofyFooterMusicClicked {
-    VideofyMusicListController *musicController = [[VideofyMusicListController alloc] init];
+    VideofyMusicListController *musicController = [[VideofyMusicListController alloc] initWithStory:self.story];
     MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:musicController];
     [self presentViewController:modalNav animated:YES completion:nil];
 }

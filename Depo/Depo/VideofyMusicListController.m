@@ -22,11 +22,13 @@
 @synthesize addButton;
 @synthesize addMenu;
 @synthesize audioIdSelected;
+@synthesize story;
 
-- (id) init {
+- (id) initWithStory:(Story *) _story {
     if(self = [super init]) {
         self.title = NSLocalizedString(@"VideofyAddMusic", @"");
         self.view.backgroundColor = [UIColor whiteColor];
+        self.story = _story;
         
         audioDao = [[VideofyAudioListDao alloc] init];
         audioDao.delegate = self;
@@ -57,6 +59,21 @@
     return self;
 }
 
+- (void) setAlreadyChosen {
+    if(self.story.musicFileId != nil) {
+        long audioId = [self.story.musicFileId longLongValue];
+        int counter = 0;
+        for(VideofyAudio *audio in self.audioList) {
+            if(audio.audioId == audioId) {
+                NSIndexPath *indexPathToChoose = [NSIndexPath indexPathForRow:counter inSection:0];
+                [self.audioTable selectRowAtIndexPath:indexPathToChoose animated:NO scrollPosition:UITableViewScrollPositionNone];
+                break;
+            }
+            counter ++;
+        }
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     CustomButton *cancelButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30) withImageName:@"icon_ustbar_close.png"];
@@ -84,6 +101,8 @@
     [self hideLoading];
     self.audioList = list;
     [self.audioTable reloadData];
+    
+    [self performSelector:@selector(setAlreadyChosen) withObject:nil afterDelay:0.5f];
 }
 
 - (void) audioListFailCallback:(NSString *) errorMessage {

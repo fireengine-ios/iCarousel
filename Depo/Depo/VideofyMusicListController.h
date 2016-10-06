@@ -13,6 +13,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "FloatingAddButton.h"
 #import "FloatingAddMenu.h"
+#import "Story.h"
 
 @interface VideofyMusicListController : MyModalController <UITableViewDelegate, UITableViewDataSource, VideofyAudioCellDelegate, FloatingAddButtonDelegate, FloatingAddDelegate>
 
@@ -23,5 +24,8 @@
 @property (nonatomic, strong) FloatingAddButton *addButton;
 @property (nonatomic, strong) FloatingAddMenu *addMenu;
 @property (nonatomic) long audioIdSelected;
+@property (nonatomic, strong) Story *story;
+
+- (id) initWithStory:(Story *) _story;
 
 @end
