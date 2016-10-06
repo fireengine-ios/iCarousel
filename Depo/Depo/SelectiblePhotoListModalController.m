@@ -108,8 +108,8 @@
 }
 
 - (void) squareImageWasMarkedForFile:(MetaFile *)fileSelected {
-    if([selectedFileList count] >= 50) {
-        [self showErrorAlertWithMessage:NSLocalizedString(@"VideofySelectibleInfo", @"")];
+    if([selectedFileList count] >= 20) {
+        [self showInfoAlertWithMessage:NSLocalizedString(@"VideofySelectibleInfo", @"")];
         for(UIView *subview in [photosScroll subviews]) {
             if([subview isKindOfClass:[SquareImageView class]]) {
                 SquareImageView *castedView = (SquareImageView *) subview;

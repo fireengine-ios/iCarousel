@@ -260,6 +260,7 @@
 - (void) postDelete {
     [delegate photoAlbumDidChange:self.album.uuid];
     [self.nav popViewControllerAnimated:NO];
+    [APPDELEGATE.base checkAndShowAddButton];
 }
 
 - (void) photosAddedSuccessCallback {

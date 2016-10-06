@@ -284,6 +284,25 @@
     } else if(self.story.musicFileId == nil && self.story.musicFileUuid == nil) {
         [self showErrorAlertWithMessage:NSLocalizedString(@"VideofyMusicEmpty", @"")];
     } else {
+        NSMutableArray *finalArray = [[NSMutableArray alloc] init];
+        for(UIView *subview in [photosScroll subviews]) {
+            if([subview isKindOfClass:[SquareSequencedPictureView class]]) {
+                SquareSequencedPictureView *castedView = (SquareSequencedPictureView *) subview;
+                [finalArray addObject:castedView];
+            }
+        }
+
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"sequence" ascending:YES];
+        NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+        NSArray *sortedArray = [finalArray sortedArrayUsingDescriptors:sortDescriptors];
+        
+        NSMutableArray *finalFileList = [[NSMutableArray alloc] init];
+        for(SquareSequencedPictureView *row in sortedArray) {
+            [finalFileList addObject:row.file];
+        }
+        
+        self.story.fileList = finalFileList;
+        
         VideofyPreviewController *previewController = [[VideofyPreviewController alloc] initWithStory:self.story];
         [self.navigationController pushViewController:previewController animated:YES];
     }

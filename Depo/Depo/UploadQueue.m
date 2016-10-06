@@ -297,8 +297,8 @@
             [activeTaskIds addObject:[nextManager uniqueUrl]];
             [nextManager startTask];
         } else {
+            [SyncUtil unlockAutoSyncBlockInProgress];
             if(![SyncUtil readFirstTimeSyncFinishedFlag]) {
-                [SyncUtil unlockAutoSyncBlockInProgress];
                 [[SyncManager sharedInstance] initializeNextAutoSyncPackage];
             }
         }

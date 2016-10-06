@@ -92,7 +92,7 @@
         self.backgroundColor = [Util UIColorForHexColor:@"E3E3E3"];
         isSelectible = selectibleStatus;
         
-        imgView = [[UIImageView alloc] initWithFrame:CGRectMake(-2, -2, self.frame.size.width+4, self.frame.size.height+4)];
+        imgView = [[UIImageView alloc] initWithFrame:CGRectMake(-1, -1, self.frame.size.width+2, self.frame.size.height+2)];
         imgView.contentMode = UIViewContentModeScaleAspectFill;
         imgView.clipsToBounds = YES;
         [imgView setFinalNoCachedImageWithBetterQualityForUrl:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:nil withMaxWidth:400 withMaxHeight:400 forCompressQaulity:1.0f];
@@ -108,7 +108,7 @@
             [self addSubview:durationLabel];
         }
         
-        maskView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+        maskView = [[UIImageView alloc] initWithFrame:CGRectMake(-1, -1, self.frame.size.width+2, self.frame.size.height+2)];
         maskView.image = [UIImage imageNamed:@"selected_mask.png"];
         maskView.hidden = YES;
         [self addSubview:maskView];

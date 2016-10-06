@@ -237,6 +237,7 @@
     }
     
     if(triggerSyncing) {
+        IGLog(@"SyncManager manuallyCheckIfAlbumChanged at triggerSyncing");
         NSArray *localHashList = [SyncUtil readSyncHashLocally];
         NSArray *remoteHashList = [SyncUtil readSyncHashRemotely];
         NSArray *remoteSummaryList = [SyncUtil readSyncFileSummaries];
@@ -283,7 +284,11 @@
                                             shouldStartUpload = ![remoteSummaryList containsObject:assetSummary];
                                         }
                                         if(shouldStartUpload) {
+                                            NSString *logInfo = [NSString stringWithFormat:@"SyncManager manuallyCheckIfAlbumChanged sync starting for asset: %@", [defaultRep filename]];
+                                            IGLog(logInfo);
+                                            NSLog(@"%@", logInfo);
                                             [[SyncManager sharedInstance] startUploadForAsset:asset withReferenceAlbumName:referenceAlbumName andLocalHash:localHash];
+                                            [SyncUtil lockAutoSyncBlockInProgress];
                                         }
                                     }
                                 }
@@ -425,8 +430,11 @@
                 [self initializeNextAutoSyncPackage];
             }
         } else {
-            IGLog(@"SyncManager calling manuallyCheckIfAlbumChanged");
-            [self manuallyCheckIfAlbumChanged];
+            IGLog(@"SyncManager before calling manuallyCheckIfAlbumChanged");
+            if(![SyncUtil readAutoSyncBlockInProgress]) {
+                IGLog(@"SyncManager calling manuallyCheckIfAlbumChanged");
+                [self manuallyCheckIfAlbumChanged];
+            }
         }
     }
 }
