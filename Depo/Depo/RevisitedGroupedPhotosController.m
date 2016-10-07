@@ -305,7 +305,7 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    IGLog(@"RevisitedGroupedPhotoController didReceiveMemoryWarning");
 }
 
 - (void) viewWillAppear:(BOOL)animated {

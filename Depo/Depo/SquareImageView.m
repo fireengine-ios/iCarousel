@@ -95,7 +95,7 @@
         imgView = [[UIImageView alloc] initWithFrame:CGRectMake(-1, -1, self.frame.size.width+2, self.frame.size.height+2)];
         imgView.contentMode = UIViewContentModeScaleAspectFill;
         imgView.clipsToBounds = YES;
-        [imgView setFinalNoCachedImageWithBetterQualityForUrl:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:nil withMaxWidth:400 withMaxHeight:400 forCompressQaulity:1.0f];
+        [imgView setFinalNoCachedImageWithBetterQualityForUrl:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:nil withMaxWidth:200 withMaxHeight:200 forCompressQaulity:0.8f];
         [self addSubview:imgView];
         
         if(self.file.contentType == ContentTypeVideo) {
