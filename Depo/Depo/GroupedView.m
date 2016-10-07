@@ -60,7 +60,29 @@
             }
         }
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(memoryWarningNotificationReceived:) name:@"IMAGE_SCROLL_RECEIVED_MEMORY_WARNING" object:nil];
     return self;
+}
+
+- (void) memoryWarningNotificationReceived:(NSNotification*)notification {
+    NSDictionary* userInfo = notification.userInfo;
+    NSNumber *currentOffset = (NSNumber*) userInfo[@"startOffset"];
+    NSLog (@"Successfully received notification %f", currentOffset.floatValue);
+    
+    float currentOffsetAsFloat = [currentOffset floatValue];
+
+    for(UIView *subview in self.subviews) {
+        if([subview isKindOfClass:[SquareImageView class]]) {
+            SquareImageView *castedView = (SquareImageView *) subview;
+            if(castedView.uploadRef == nil) {
+                if(fabs(castedView.frame.origin.y - currentOffsetAsFloat) > 2000) {
+                    NSLog(@"THRESHOLD: %f", fabs(castedView.frame.origin.y - currentOffsetAsFloat));
+                    [castedView unloadContent];
+                }
+            }
+        }
+    }
 }
 
 - (void) squareImageWasSelectedForFile:(MetaFile *) fileSelected {

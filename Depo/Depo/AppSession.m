@@ -47,6 +47,7 @@
 @synthesize storageFullPopupShown;
 @synthesize menuTipShown;
 @synthesize photoDetailTipShown;
+@synthesize videofyTutorialCountChecked;
 
 - (id) init {
     if(self = [super init]) {

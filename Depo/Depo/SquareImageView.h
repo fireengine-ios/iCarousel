@@ -48,5 +48,7 @@
 - (void) setNewStatus:(BOOL) newStatus;
 - (void) showProgressMask;
 - (void) manuallyDeselect;
+- (void) unloadContent;
+- (void) reloadContent;
 
 @end

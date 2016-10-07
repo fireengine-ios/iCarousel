@@ -15,6 +15,8 @@
 #import "Story.h"
 #import "MPush.h"
 #import "PrintWebViewController.h"
+#import "AppUtil.h"
+#import "TutorialView.h"
 
 @interface RevisitedGroupedPhotosController () {
     MyNavigationController *printNav;
@@ -304,6 +306,7 @@
 }
 
 - (void)didReceiveMemoryWarning {
+//TODO aç    [groupView didReceiveMemoryWarning];
     [super didReceiveMemoryWarning];
     IGLog(@"RevisitedGroupedPhotoController didReceiveMemoryWarning");
 }
@@ -313,6 +316,18 @@
     [self.nav setNavigationBarHidden:NO animated:NO];
     if(groupView) {
         [groupView neutralizeSearchBar];
+    }
+    if(!APPDELEGATE.session.videofyTutorialCountChecked) {
+        if([AppUtil readVideofyTutorialCount] == 1) {
+            NSString *imageName = @"overlay_wt_en.png";
+            if([[Util readLocaleCode] isEqualToString:@"tr"]) {
+                imageName = @"overlay_wt_tr.png";
+            }
+            TutorialView *tutorialView = [[TutorialView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withBgImageName:imageName withTitle:@"" withKey:TUTORIAL_VIDEOFY_KEY doNotShowFlag:NO];
+            [APPDELEGATE.window addSubview:tutorialView];
+        }
+        [AppUtil increaseVideofyTutorialCount];
+        APPDELEGATE.session.videofyTutorialCountChecked = YES;
     }
 }
 

@@ -62,6 +62,7 @@
 @property (nonatomic) BOOL storageFullPopupShown;
 @property (nonatomic) BOOL menuTipShown;
 @property (nonatomic) BOOL photoDetailTipShown;
+@property (nonatomic) BOOL videofyTutorialCountChecked;
 
 - (void) playAudioItemAtIndex:(int) itemIndex;
 - (void) playNextAudioItem;

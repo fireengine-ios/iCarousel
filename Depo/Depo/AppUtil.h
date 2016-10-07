@@ -77,4 +77,7 @@
 + (void) writeLastLocInfoPopupShownTime;
 + (NSDate *) readLastLocInfoPopupShownTime;
 
++ (void) increaseVideofyTutorialCount;
++ (int) readVideofyTutorialCount;
+
 @end

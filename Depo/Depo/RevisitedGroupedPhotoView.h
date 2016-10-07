@@ -65,5 +65,6 @@
 - (void) destinationAlbumChosenWithUuid:(NSString *) chosenAlbumUuid;
 - (void) cancelRequests;
 - (void) neutralizeSearchBar;
+- (void) didReceiveMemoryWarning;
 
 @end

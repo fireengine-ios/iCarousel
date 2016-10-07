@@ -20,6 +20,7 @@
 #define GROUP_IMG_COUNT_PER_ROW (IS_IPAD ? 6 : IS_IPHONE_6P_OR_HIGHER ? 6 : 4)
 
 #define GROUP_INPROGRESS_KEY @"in_progress"
+#define IMAGE_SCROLL_THRESHOLD 2000
 
 @interface RevisitedGroupedPhotoView() {
     int tableUpdateCounter;
@@ -694,6 +695,12 @@
         IGLog(@"At RevisitedGroupedPhotoView autoIterationFinished pullData will be called");
         [self pullData];
     }
+}
+
+- (void) didReceiveMemoryWarning {
+    NSNumber *startOffset = [NSNumber numberWithFloat:self.fileScroll.contentOffset.y];
+    NSDictionary* userInfo = @{@"startOffset": startOffset};
+//TODO aç    [[NSNotificationCenter defaultCenter] postNotificationName:@"IMAGE_SCROLL_RECEIVED_MEMORY_WARNING" object:self userInfo:userInfo];
 }
 
 @end

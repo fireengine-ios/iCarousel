@@ -845,4 +845,16 @@
     return [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"LAST_LOC_INFO_POPUP_SHOWN_TIME_%@", [SyncUtil readBaseUrlConstant]]];
 }
 
++ (void) increaseVideofyTutorialCount {
+    NSInteger result = [[NSUserDefaults standardUserDefaults] integerForKey:[NSString stringWithFormat:TUTORIAL_VIDEOFY_COUNT_KEY, [SyncUtil readBaseUrlConstant]]];
+    result ++;
+    [[NSUserDefaults standardUserDefaults] setInteger:result forKey:[NSString stringWithFormat:TUTORIAL_VIDEOFY_COUNT_KEY, [SyncUtil readBaseUrlConstant]]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (int) readVideofyTutorialCount {
+    NSInteger result = [[NSUserDefaults standardUserDefaults] integerForKey:[NSString stringWithFormat:TUTORIAL_VIDEOFY_COUNT_KEY, [SyncUtil readBaseUrlConstant]]];
+    return (int)result;
+}
+
 @end

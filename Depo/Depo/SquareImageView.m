@@ -108,11 +108,6 @@
             [self addSubview:durationLabel];
         }
         
-        maskView = [[UIImageView alloc] initWithFrame:CGRectMake(-1, -1, self.frame.size.width+2, self.frame.size.height+2)];
-        maskView.image = [UIImage imageNamed:@"selected_mask.png"];
-        maskView.hidden = YES;
-        [self addSubview:maskView];
-        
         longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressed:)];
         longPressGesture.minimumPressDuration = 1.0f;
         longPressGesture.allowableMovement = 10.0f;
@@ -240,16 +235,22 @@
 - (void) setNewStatus:(BOOL) newStatus {
     isSelectible = newStatus;
     isMarked = NO;
-    maskView.hidden = YES;
+    if(maskView) {
+        maskView.hidden = YES;
+    }
 }
 
 - (void) manuallyDeselect {
     isMarked = NO;
-    maskView.hidden = YES;
+    if(maskView) {
+        maskView.hidden = YES;
+    }
 }
 
 - (void) showProgressMask {
-    maskView.hidden = YES;
+    if(maskView) {
+        maskView.hidden = YES;
+    }
     imgView.alpha = 0.25f;
 }
 
@@ -261,10 +262,18 @@
     if(isSelectible) {
         isMarked = !isMarked;
         if(isMarked) {
-            maskView.hidden = NO;
+            if(maskView) {
+                maskView.hidden = NO;
+            } else {
+                maskView = [[UIImageView alloc] initWithFrame:CGRectMake(-1, -1, self.frame.size.width+2, self.frame.size.height+2)];
+                maskView.image = [UIImage imageNamed:@"selected_mask.png"];
+                [self addSubview:maskView];
+            }
             [delegate squareImageWasMarkedForFile:self.file];
         } else {
-            maskView.hidden = YES;
+            if(maskView) {
+                maskView.hidden = YES;
+            }
             [delegate squareImageWasUnmarkedForFile:self.file];
         }
     } else {
@@ -299,12 +308,20 @@
         if(isSelectible) {
             isMarked = !isMarked;
             if(isMarked) {
-                maskView.hidden = NO;
+                if(maskView) {
+                    maskView.hidden = NO;
+                } else {
+                    maskView = [[UIImageView alloc] initWithFrame:CGRectMake(-1, -1, self.frame.size.width+2, self.frame.size.height+2)];
+                    maskView.image = [UIImage imageNamed:@"selected_mask.png"];
+                    [self addSubview:maskView];
+                }
                 if(self.file != nil) {
                     [delegate squareImageWasMarkedForFile:self.file];
                 }
             } else {
-                maskView.hidden = YES;
+                if(maskView) {
+                    maskView.hidden = YES;
+                }
                 if(self.file != nil) {
                     [delegate squareImageWasUnmarkedForFile:self.file];
                 }
@@ -374,5 +391,26 @@
     // Drawing code
 }
 */
+
+- (void) unloadContent {
+    if(imgView) {
+        [imgView removeFromSuperview];
+        imgView = nil;
+    }
+    if(maskView) {
+        [maskView removeFromSuperview];
+        maskView = nil;
+    }
+}
+
+- (void) reloadContent {
+    if(!imgView) {
+        imgView = [[UIImageView alloc] initWithFrame:CGRectMake(-1, -1, self.frame.size.width+2, self.frame.size.height+2)];
+        imgView.contentMode = UIViewContentModeScaleAspectFill;
+        imgView.clipsToBounds = YES;
+        [imgView setFinalNoCachedImageWithBetterQualityForUrl:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:nil withMaxWidth:200 withMaxHeight:200 forCompressQaulity:0.8f];
+        [self addSubview:imgView];
+    }
+}
 
 @end
