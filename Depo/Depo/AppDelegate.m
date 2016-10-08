@@ -125,8 +125,12 @@
     [MPush setShouldShowDebugLogs:YES];
     if(![AppUtil readFirstVisitOverFlag]) {
         [MPush setLocationEnabled:NO];
-//    } else {
-//        [MPush setLocationEnabled:YES];
+    } else {
+        if([CLLocationManager locationServicesEnabled] && ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways)) {
+            [MPush setLocationEnabled:YES];
+        } else {
+            [MPush setLocationEnabled:NO];
+        }
     }
     
     [MPush registerForRemoteNotificationTypes:types];
