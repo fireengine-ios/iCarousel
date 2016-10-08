@@ -296,7 +296,7 @@ _Pragma("clang diagnostic pop") \
 #define EMPTY_EMAIL_CONFIRM_KEY @"EMPTY_EMAIL_CONFIRM_KEY"
 
 //#define REACH_US_MAIL_ADDRESS @"burcu.atalan@turkcell.com.tr"
-#define REACH_US_MAIL_ADDRESS @"DESTEK-AKILLIDEPO@turkcell.com.tr"
+#define REACH_US_MAIL_ADDRESS @"DESTEK-LIFEBOX@TURKCELL.COM.TR"
 
 #define kMenuOpenOriginX 276
 

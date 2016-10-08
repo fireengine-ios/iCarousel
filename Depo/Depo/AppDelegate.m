@@ -125,8 +125,8 @@
     [MPush setShouldShowDebugLogs:YES];
     if(![AppUtil readFirstVisitOverFlag]) {
         [MPush setLocationEnabled:NO];
-    } else {
-        [MPush setLocationEnabled:YES];
+//    } else {
+//        [MPush setLocationEnabled:YES];
     }
     
     [MPush registerForRemoteNotificationTypes:types];

@@ -282,7 +282,7 @@
     if([self.story.fileList count] == 0) {
         [self showErrorAlertWithMessage:NSLocalizedString(@"VideofyFileListEmpty", @"")];
     } else if(self.story.musicFileId == nil && self.story.musicFileUuid == nil) {
-        [self showErrorAlertWithMessage:NSLocalizedString(@"VideofyMusicEmpty", @"")];
+        [self showInfoAlertWithMessage:NSLocalizedString(@"VideofyMusicEmpty", @"")];
     } else {
         NSMutableArray *finalArray = [[NSMutableArray alloc] init];
         for(UIView *subview in [photosScroll subviews]) {
