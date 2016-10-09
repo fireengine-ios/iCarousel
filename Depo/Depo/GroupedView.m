@@ -62,6 +62,9 @@
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(memoryWarningNotificationReceived:) name:@"IMAGE_SCROLL_RECEIVED_MEMORY_WARNING" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadAfterMemoryWarning:) name:@"IMAGE_SCROLL_RELOAD_DATA_AFTER_WARNING" object:nil];
+    
     return self;
 }
 
@@ -79,6 +82,26 @@
                 if(fabs(castedView.frame.origin.y - currentOffsetAsFloat) > 2000) {
                     NSLog(@"THRESHOLD: %f", fabs(castedView.frame.origin.y - currentOffsetAsFloat));
                     [castedView unloadContent];
+                }
+            }
+        }
+    }
+}
+
+- (void) reloadAfterMemoryWarning:(NSNotification*)notification {
+    NSDictionary* userInfo = notification.userInfo;
+    NSNumber *currentOffset = (NSNumber*) userInfo[@"startOffset"];
+    NSLog (@"Successfully received reload notification %f", currentOffset.floatValue);
+    
+    float currentOffsetAsFloat = [currentOffset floatValue];
+    
+    for(UIView *subview in self.subviews) {
+        if([subview isKindOfClass:[SquareImageView class]]) {
+            SquareImageView *castedView = (SquareImageView *) subview;
+            if(castedView.uploadRef == nil) {
+                if(fabs(castedView.frame.origin.y - currentOffsetAsFloat) <= 1000) {
+                    NSLog(@"RELOAD THRESHOLD: %f", fabs(castedView.frame.origin.y - currentOffsetAsFloat));
+                    [castedView reloadContent];
                 }
             }
         }

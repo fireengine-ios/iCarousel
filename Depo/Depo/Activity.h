@@ -21,5 +21,6 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *rawActivityType;
 @property (nonatomic, strong) NSString *rawFileType;
+@property (nonatomic) int deleteCount;
 
 @end

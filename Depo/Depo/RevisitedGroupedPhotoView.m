@@ -31,6 +31,9 @@
     NSDateFormatter *dateCompareFormat;
     BOOL anyOngoingPresent;
     
+    BOOL cleanedFlag;
+    float lastCheckYIndex;
+    
     float yIndex;
 }
 @end
@@ -458,6 +461,13 @@
             isLoading = YES;
             [self dynamicallyLoadNextPage];
         }
+        if(cleanedFlag) {
+            if(fabs(currentOffset - lastCheckYIndex) <= IMAGE_SCROLL_THRESHOLD/2) {
+                NSNumber *startOffset = [NSNumber numberWithFloat:self.fileScroll.contentOffset.y];
+                NSDictionary* userInfo = @{@"startOffset": startOffset};
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"IMAGE_SCROLL_RELOAD_DATA_AFTER_WARNING" object:self userInfo:userInfo];
+            }
+        }
     }
 }
 
@@ -700,7 +710,9 @@
 - (void) didReceiveMemoryWarning {
     NSNumber *startOffset = [NSNumber numberWithFloat:self.fileScroll.contentOffset.y];
     NSDictionary* userInfo = @{@"startOffset": startOffset};
-//TODO aç    [[NSNotificationCenter defaultCenter] postNotificationName:@"IMAGE_SCROLL_RECEIVED_MEMORY_WARNING" object:self userInfo:userInfo];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"IMAGE_SCROLL_RECEIVED_MEMORY_WARNING" object:self userInfo:userInfo];
+    cleanedFlag = YES;
+    lastCheckYIndex = self.fileScroll.contentOffset.y;
 }
 
 @end

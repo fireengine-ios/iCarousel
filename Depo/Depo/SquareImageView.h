@@ -29,6 +29,7 @@
     UIImageView *maskView;
     BOOL isSelectible;
     BOOL isMarked;
+    BOOL wasUnloaded;
     UploadErrorType uploadErrorType;
 }
 

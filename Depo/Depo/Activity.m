@@ -20,5 +20,6 @@
 @synthesize name;
 @synthesize rawActivityType;
 @synthesize rawFileType;
+@synthesize deleteCount;
 
 @end

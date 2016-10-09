@@ -27,7 +27,7 @@
 			<array>
 				<string>db-zeddgylajxc1op8</string>
 				<string>akillidepo</string>
-				<string>fb398766460277005</string>
+				<string>fb531658366898592</string>
 			</array>
 		</dict>
 	</array>
@@ -48,7 +48,7 @@
 		</array>
 	</dict>
 	<key>FacebookAppID</key>
-	<string>398766460277005</string>
+	<string>531658366898592</string>
 	<key>FacebookDisplayName</key>
 	<string>lifebox</string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -64,8 +64,12 @@
 	<true/>
 	<key>MenloApplicationKey</key>
 	<string>TDttInhNx_m-Ee76K35tiRJ5FW-ysLHd</string>
+	<key>MenloPushApplicationKey</key>
+	<string>TDttInhNx_m-Ee76K35tiRJ5FW-ysLHd</string>
 	<key>MenloPushSandboxMode</key>
 	<true/>
+	<key>MenloPushServerURL</key>
+	<string>https://turkcell.menloworks.com</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -101,8 +105,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
@@ -110,9 +112,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>MenloPushServerURL</key>
-	<string>https://turkcell.menloworks.com</string>
-    <key>MenloPushApplicationKey</key>
-    <string>TDttInhNx_m-Ee76K35tiRJ5FW-ysLHd</string>
 </dict>
 </plist>
