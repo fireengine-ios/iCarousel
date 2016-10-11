@@ -26,17 +26,21 @@
     if(self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor whiteColor];
         
-        NSURL *mp4Url = [[NSBundle mainBundle] URLForResource:@"lifebox_teaser" withExtension:@"mp4"];
+        NSString *videoName = @"lifebox_EN";
+        if([[Util readLocaleCode] isEqualToString:@"tr"]) {
+            videoName = @"lifebox_TR";
+        }
+        NSURL *mp4Url = [[NSBundle mainBundle] URLForResource:videoName withExtension:@"mp4"];
         
         avPlayer = [AVPlayer playerWithURL:mp4Url];
         avPlayer.actionAtItemEnd = AVPlayerActionAtItemEndPause;
 
-        float videoWidth = 180; //manually set to prevent black marging
-        float videoHeight = 201;
+        float videoWidth = self.frame.size.width;
+        float videoHeight = self.frame.size.height;
         float topIndex = IS_IPAD ? self.frame.size.height/2 - videoHeight : 50;
         
         AVPlayerLayer *videoLayer = [AVPlayerLayer playerLayerWithPlayer:avPlayer];
-        videoLayer.frame = CGRectMake((self.frame.size.width - videoWidth)/2, topIndex, videoWidth, videoHeight);
+        videoLayer.frame = CGRectMake(0, 0, videoWidth, videoHeight);
         videoLayer.videoGravity = AVLayerVideoGravityResize;
         videoLayer.backgroundColor = [UIColor whiteColor].CGColor;
         [self.layer addSublayer:videoLayer];
@@ -47,7 +51,9 @@
         [self addSubview:closeButton];
 
         topIndex += videoHeight + 30;
-        
+
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerFinishedPlaying) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+
 //        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemDidFinishPlaying:) name:AVPlayerItemDidPlayToEndTimeNotification object:[avPlayer currentItem]];
         
         /*
@@ -57,6 +63,7 @@
         [self addSubview:bgImgView];
          */
         
+        /*
         CustomLabel *infoLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, topIndex, self.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:16] withColor:[Util UIColorForHexColor:@"333333"] withText:NSLocalizedString(@"LifeboxTeaserInfoLabel", @"") withAlignment:NSTextAlignmentCenter numberOfLines:1];
         [self addSubview:infoLabel];
 
@@ -65,6 +72,7 @@
         
         CustomLabel *subInfoLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, infoLabel.frame.origin.y + infoLabel.frame.size.height + 20, self.frame.size.width - 40, subInfoHeight) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withColor:[Util UIColorForHexColor:@"555555"] withText:subInfoText withAlignment:NSTextAlignmentCenter numberOfLines:0];
         [self addSubview:subInfoLabel];
+         */
 
         /*
         SimpleButton *dismissButton = [[SimpleButton alloc] initWithFrame:CGRectMake((self.frame.size.width - 200)/2, self.frame.size.height - 80, 200, 60) withTitle:NSLocalizedString(@"Continue", "") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
@@ -75,12 +83,20 @@
     return self;
 }
 
+- (void) playerFinishedPlaying {
+    [self performSelector:@selector(dismiss) withObject:nil afterDelay:1.0f];
+}
+
 - (void)itemDidFinishPlaying:(NSNotification *)notification {
     AVPlayerItem *player = [notification object];
     [player seekToTime:kCMTimeZero];
 }
 
 - (void) dismiss {
+    if(avPlayer) {
+        [avPlayer pause];
+    }
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
     [self removeFromSuperview];
 }
 

@@ -884,6 +884,8 @@
 		94884CA51C91A24D006722F7 /* icon_editnum@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94884CA41C91A24D006722F7 /* icon_editnum@3x.png */; };
 		94884CA71C91A255006722F7 /* icon_editnum.png in Resources */ = {isa = PBXBuildFile; fileRef = 94884CA61C91A255006722F7 /* icon_editnum.png */; };
 		94884CAA1C91A469006722F7 /* UpdateMsisdnController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94884CA91C91A469006722F7 /* UpdateMsisdnController.m */; };
+		948C83511DACADEA0020DAF3 /* lifebox_EN.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 948C834D1DABFE2B0020DAF3 /* lifebox_EN.mp4 */; };
+		948C83521DACADEA0020DAF3 /* lifebox_TR.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 948C834E1DABFE2B0020DAF3 /* lifebox_TR.mp4 */; };
 		948EEE671CE9BEB600E27A6D /* AccurateLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 948EEE661CE9BEB600E27A6D /* AccurateLocationManager.m */; };
 		949414E01CC8BCC4008904E2 /* icon_m_baskial_w.png in Resources */ = {isa = PBXBuildFile; fileRef = 949414DC1CC8BCC4008904E2 /* icon_m_baskial_w.png */; };
 		949414E11CC8BCC4008904E2 /* icon_m_baskial.png in Resources */ = {isa = PBXBuildFile; fileRef = 949414DD1CC8BCC4008904E2 /* icon_m_baskial.png */; };
@@ -2377,6 +2379,8 @@
 		94884CA61C91A255006722F7 /* icon_editnum.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_editnum.png; sourceTree = "<group>"; };
 		94884CA81C91A469006722F7 /* UpdateMsisdnController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateMsisdnController.h; sourceTree = "<group>"; };
 		94884CA91C91A469006722F7 /* UpdateMsisdnController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateMsisdnController.m; sourceTree = "<group>"; };
+		948C834D1DABFE2B0020DAF3 /* lifebox_EN.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = lifebox_EN.mp4; sourceTree = "<group>"; };
+		948C834E1DABFE2B0020DAF3 /* lifebox_TR.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = lifebox_TR.mp4; sourceTree = "<group>"; };
 		948EEE651CE9BEB600E27A6D /* AccurateLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccurateLocationManager.h; sourceTree = "<group>"; };
 		948EEE661CE9BEB600E27A6D /* AccurateLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccurateLocationManager.m; sourceTree = "<group>"; };
 		949414DC1CC8BCC4008904E2 /* icon_m_baskial_w.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_m_baskial_w.png; sourceTree = "<group>"; };
@@ -2808,6 +2812,8 @@
 				9456A0391C9BECD200058896 /* terms.htm */,
 				05DEB1CD1A80EA28007793DD /* terms.html */,
 				056B38541A841866009292BA /* terms_old.htm */,
+				948C834D1DABFE2B0020DAF3 /* lifebox_EN.mp4 */,
+				948C834E1DABFE2B0020DAF3 /* lifebox_TR.mp4 */,
 				0555EF2A19F938DA0068F4CC /* Depo-AppStore-Info.plist */,
 				0555EF2B19F938DA0068F4CC /* Depo-Enterprise-Info.plist */,
 				053EC45219DAA207000C2B77 /* string */,
@@ -4674,6 +4680,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				948C83511DACADEA0020DAF3 /* lifebox_EN.mp4 in Resources */,
+				948C83521DACADEA0020DAF3 /* lifebox_TR.mp4 in Resources */,
 				949BB5CB1D707F8800BED9DB /* lifebox_teaser.mp4 in Resources */,
 				056F29D21C4E8071001DD486 /* icon_verif_audio@3x.png in Resources */,
 				94B3BE251D81E3260086D05E /* icon_locationperm@2x.png in Resources */,

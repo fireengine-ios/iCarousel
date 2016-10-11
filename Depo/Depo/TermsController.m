@@ -166,17 +166,17 @@
 }
 
 - (void) preApproveLogin {
-    if([ReachabilityManager isReachableViaWiFi]
-       || ![APPDELEGATE isTurkcell]) {
-        NSString *cachedMsisdn = [CacheUtil readCachedMsisdnForPostMigration];
-        NSString *cachedPass = [CacheUtil readCachedPassForPostMigration];
-        if(cachedMsisdn != nil && cachedPass != nil) {
-            [tokenDao requestTokenForMsisdn:cachedMsisdn andPassword:cachedPass shouldRememberMe:[CacheUtil readCachedRememberMeForPostMigration]];
-        } else {
+    NSString *cachedMsisdn = [CacheUtil readCachedMsisdnForPostMigration];
+    NSString *cachedPass = [CacheUtil readCachedPassForPostMigration];
+    
+    if(cachedMsisdn != nil && cachedPass != nil) {
+        [tokenDao requestTokenForMsisdn:cachedMsisdn andPassword:cachedPass shouldRememberMe:[CacheUtil readCachedRememberMeForPostMigration]];
+    } else {
+        if([ReachabilityManager isReachableViaWiFi] || ![APPDELEGATE isTurkcell]) {
             [eulaApproveDao requestApproveEulaForId:self.eula.eulaId];
+        } else if([ReachabilityManager isReachableViaWWAN]) {
+            [radiusDao requestRadiusLogin];
         }
-    } else if([ReachabilityManager isReachableViaWWAN]) {
-        [radiusDao requestRadiusLogin];
     }
 }
 

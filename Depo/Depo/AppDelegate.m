@@ -231,22 +231,23 @@
 }
 
 - (void) triggerPostTermsAndMigration {
-    if([ReachabilityManager isReachableViaWiFi]
-       || ![self isTurkcell]) {
-        NSString *cachedMsisdn = [CacheUtil readCachedMsisdnForPostMigration];
-        NSString *cachedPass = [CacheUtil readCachedPassForPostMigration];
-        if(cachedMsisdn != nil && cachedPass != nil) {
-            [tokenManager requestTokenByMsisdn:cachedMsisdn andPass:cachedPass shouldRememberMe:[CacheUtil readCachedRememberMeForPostMigration]];
-            [self showMainLoading];
-        } else {
+
+    NSString *cachedMsisdn = [CacheUtil readCachedMsisdnForPostMigration];
+    NSString *cachedPass = [CacheUtil readCachedPassForPostMigration];
+    if(cachedMsisdn != nil && cachedPass != nil) {
+        [tokenManager requestTokenByMsisdn:cachedMsisdn andPass:cachedPass shouldRememberMe:[CacheUtil readCachedRememberMeForPostMigration]];
+        [self showMainLoading];
+    } else {
+        if([ReachabilityManager isReachableViaWiFi]
+           || ![self isTurkcell]) {
             WelcomeController *welcomePage = [[WelcomeController alloc] init];
             MyNavigationController *welcomeNav = [[MyNavigationController alloc] initWithRootViewController:welcomePage];
             self.window.rootViewController = welcomeNav;
+        } else if([ReachabilityManager isReachableViaWWAN]) {
+            [self.window.rootViewController.view removeFromSuperview];
+            [tokenManager requestRadiusLogin];
+            [self showMainLoading];
         }
-    } else if([ReachabilityManager isReachableViaWWAN]) {
-        [self.window.rootViewController.view removeFromSuperview];
-        [tokenManager requestRadiusLogin];
-        [self showMainLoading];
     }
 }
 
