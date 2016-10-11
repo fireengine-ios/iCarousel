@@ -122,7 +122,7 @@
         types = UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeBadge;
     }
     
-    [MPush setShouldShowDebugLogs:YES];
+//    [MPush setShouldShowDebugLogs:YES];
     if(![AppUtil readFirstVisitOverFlag]) {
         [MPush setLocationEnabled:NO];
     } else {
