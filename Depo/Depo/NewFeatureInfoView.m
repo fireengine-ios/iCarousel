@@ -96,6 +96,7 @@
     if(avPlayer) {
         [avPlayer pause];
     }
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
     [self removeFromSuperview];
 }
