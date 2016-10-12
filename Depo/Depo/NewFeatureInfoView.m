@@ -26,6 +26,11 @@
     if(self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor whiteColor];
         
+        UIView *maskView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+        maskView.backgroundColor = [UIColor blackColor];
+        maskView.alpha = 0.6f;
+        [self addSubview:maskView];
+        
         NSString *videoName = @"lifebox_EN";
         if([[Util readLocaleCode] isEqualToString:@"tr"]) {
             videoName = @"lifebox_TR";
@@ -37,12 +42,16 @@
 
         float videoWidth = self.frame.size.width;
         float videoHeight = self.frame.size.height;
-        float topIndex = IS_IPAD ? self.frame.size.height/2 - videoHeight : 50;
+//        float topIndex = IS_IPAD ? self.frame.size.height/2 - videoHeight : 50;
         
         AVPlayerLayer *videoLayer = [AVPlayerLayer playerLayerWithPlayer:avPlayer];
-        videoLayer.frame = CGRectMake(0, 0, videoWidth, videoHeight);
-        videoLayer.videoGravity = AVLayerVideoGravityResize;
-        videoLayer.backgroundColor = [UIColor whiteColor].CGColor;
+        videoLayer.frame = CGRectMake((self.frame.size.width - videoWidth)/2, (self.frame.size.height - videoHeight)/2, videoWidth, videoHeight);
+        if(IS_IPAD) {
+            videoLayer.videoGravity = AVLayerVideoGravityResizeAspect;
+        } else {
+            videoLayer.videoGravity = AVLayerVideoGravityResize;
+        }
+        videoLayer.backgroundColor = [UIColor clearColor].CGColor;
         [self.layer addSublayer:videoLayer];
         [avPlayer play];
         
@@ -50,7 +59,7 @@
         [closeButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:closeButton];
 
-        topIndex += videoHeight + 30;
+//        topIndex += videoHeight + 30;
 
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerFinishedPlaying) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
 
