@@ -57,7 +57,7 @@
         
         CustomButton *closeButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 50, 10, 40, 40) withCenteredImageName:@"close_icon.png"];
         [closeButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:closeButton];
+//        [self addSubview:closeButton];
 
 //        topIndex += videoHeight + 30;
 

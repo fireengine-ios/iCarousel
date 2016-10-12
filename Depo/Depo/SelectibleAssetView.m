@@ -22,7 +22,9 @@
         self.asset = _asset;
 
         UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-        imgView.image = [UIImage imageWithCGImage:[asset thumbnail]];
+        imgView.image = [UIImage imageWithCGImage:[asset aspectRatioThumbnail]];
+        imgView.contentMode = UIViewContentModeScaleAspectFill;
+        imgView.clipsToBounds = YES;
         [self addSubview:imgView];
         
         if ([[asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
