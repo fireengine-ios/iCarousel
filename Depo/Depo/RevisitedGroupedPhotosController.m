@@ -101,12 +101,15 @@
 
 - (void) setToSelectionState {
     [segmentView disableNavigate];
-    previousButtonRef = self.navigationItem.leftBarButtonItem;
+    if(self.navigationItem.leftBarButtonItem.tag != 111) {
+        previousButtonRef = self.navigationItem.leftBarButtonItem;
+    }
 
     CustomButton *cancelButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 60, 20) withImageName:nil withTitle:NSLocalizedString(@"ButtonCancel", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[UIColor whiteColor]];
     [cancelButton addTarget:self action:@selector(cancelClicked) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithCustomView:cancelButton];
+    cancelItem.tag = 111;
     self.navigationItem.leftBarButtonItem = cancelItem;
 //    moreButton.hidden = YES;
     

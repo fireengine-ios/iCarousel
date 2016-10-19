@@ -783,3 +783,5 @@
 "LocSubinfoPopup"="Dosyalarınız arka planda güncellenirken lokasyon bilginiz kullanılacaktır.";
 "LocSubInfoPeriodicMessage"="Arka planda dosyalarınızın sync olması için konum iznini Ayarlar/Gizlilik/Konum Servisleri altından açabilirsiniz.";
 "IAgree"="ONAYLIYORUM";
+"FileDetailUploadDate"="Yükleme Tarihi";
+"FileDetailCreateDate"="Çekim Tarihi";

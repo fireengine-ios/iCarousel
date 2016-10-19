@@ -297,6 +297,8 @@
             [activeTaskIds addObject:[nextManager uniqueUrl]];
             [nextManager startTask];
         } else {
+            //TODO test et
+            [[NSNotificationCenter defaultCenter] postNotificationName:AUTO_SYNC_QUEUE_FINISHED_NOTIFICATION object:nil userInfo:nil];
             [SyncUtil unlockAutoSyncBlockInProgress];
             if(![SyncUtil readFirstTimeSyncFinishedFlag]) {
                 [[SyncManager sharedInstance] initializeNextAutoSyncPackage];

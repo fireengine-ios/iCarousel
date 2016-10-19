@@ -116,6 +116,8 @@
         [self addSubview:progress];
 
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(autoIterationFinished) name:AUTO_ITERATION_FINISHED_NOT_KEY object:nil];
+
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(autoQueueFinished) name:AUTO_SYNC_QUEUE_FINISHED_NOTIFICATION object:nil];
     }
     return self;
 }
@@ -230,14 +232,16 @@
 }
 
 - (void) setToSelectible {
-    isSelectible = YES;
-    [refreshControl setEnabled:NO];
-    [selectedFileList removeAllObjects];
-
-    for(id row in fileScroll.subviews) {
-        if([row isKindOfClass:[GroupedView class]]) {
-            GroupedView *castedView = (GroupedView *) row;
-            [castedView setToSelectible];
+    if(!isSelectible) {
+        isSelectible = YES;
+        [refreshControl setEnabled:NO];
+        [selectedFileList removeAllObjects];
+        
+        for(id row in fileScroll.subviews) {
+            if([row isKindOfClass:[GroupedView class]]) {
+                GroupedView *castedView = (GroupedView *) row;
+                [castedView setToSelectible];
+            }
         }
     }
 }
@@ -703,6 +707,14 @@
     IGLog(@"At RevisitedGroupedPhotoView autoIterationFinished");
     if([[UploadQueue sharedInstance] remainingCount] > 0) {
         IGLog(@"At RevisitedGroupedPhotoView autoIterationFinished pullData will be called");
+        [self pullData];
+    }
+}
+
+- (void) autoQueueFinished {
+    IGLog(@"At RevisitedGroupedPhotoView autoQueueFinished");
+    if([[UploadQueue sharedInstance] remainingCount] == 0) {
+        IGLog(@"At RevisitedGroupedPhotoView autoQueueFinished pullData will be called");
         [self pullData];
     }
 }

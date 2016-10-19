@@ -162,24 +162,56 @@
         
         yIndex += 16;
 
-        //modify date segment
-        CustomLabel *dateLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, yIndex, 175, 25) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:20] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"FolderDetailModifyDate", @"")];
-        [mainScroll addSubview:dateLabel];
-        
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
         [dateFormat setDateFormat:@"dd MMM yyyy"];
-        
-        CustomLabel *dateValueLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(mainScroll.frame.size.width - 115, yIndex, 95, 25) withFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:20] withColor:[Util UIColorForHexColor:@"707a8f"] withText:[dateFormat stringFromDate:self.file.lastModified]];
-        dateValueLabel.textAlignment = NSTextAlignmentRight;
-        [mainScroll addSubview:dateValueLabel];
-        
-        yIndex += 40;
 
-        UIView *dateSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, yIndex, mainScroll.frame.size.width, 1)];
-        dateSeparator.backgroundColor = [Util UIColorForHexColor:@"DEDEDE"];
-        [mainScroll addSubview:dateSeparator];
-        
-        yIndex += 11;
+        if([AppUtil isMetaFileImage:self.file]) {
+            CustomLabel *dateLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, yIndex, 175, 25) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:20] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"FileDetailUploadDate", @"")];
+            [mainScroll addSubview:dateLabel];
+            
+            CustomLabel *dateValueLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(mainScroll.frame.size.width - 115, yIndex, 95, 25) withFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:20] withColor:[Util UIColorForHexColor:@"707a8f"] withText:[dateFormat stringFromDate:self.file.detail.createdDate]];
+            dateValueLabel.textAlignment = NSTextAlignmentRight;
+            [mainScroll addSubview:dateValueLabel];
+            
+            yIndex += 40;
+            
+            UIView *dateSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, yIndex, mainScroll.frame.size.width, 1)];
+            dateSeparator.backgroundColor = [Util UIColorForHexColor:@"DEDEDE"];
+            [mainScroll addSubview:dateSeparator];
+            
+            yIndex += 11;
+
+            CustomLabel *imageDateLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, yIndex, 175, 25) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:20] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"FileDetailCreateDate", @"")];
+            [mainScroll addSubview:imageDateLabel];
+            
+            CustomLabel *imageDateValueLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(mainScroll.frame.size.width - 115, yIndex, 95, 25) withFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:20] withColor:[Util UIColorForHexColor:@"707a8f"] withText:[dateFormat stringFromDate:self.file.detail.imageDate]];
+            imageDateValueLabel.textAlignment = NSTextAlignmentRight;
+            [mainScroll addSubview:imageDateValueLabel];
+            
+            yIndex += 40;
+            
+            UIView *imageDateSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, yIndex, mainScroll.frame.size.width, 1)];
+            imageDateSeparator.backgroundColor = [Util UIColorForHexColor:@"DEDEDE"];
+            [mainScroll addSubview:imageDateSeparator];
+            
+            yIndex += 11;
+        } else {
+            //modify date segment
+            CustomLabel *dateLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, yIndex, 175, 25) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:20] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"FolderDetailModifyDate", @"")];
+            [mainScroll addSubview:dateLabel];
+            
+            CustomLabel *dateValueLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(mainScroll.frame.size.width - 115, yIndex, 95, 25) withFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:20] withColor:[Util UIColorForHexColor:@"707a8f"] withText:[dateFormat stringFromDate:self.file.lastModified]];
+            dateValueLabel.textAlignment = NSTextAlignmentRight;
+            [mainScroll addSubview:dateValueLabel];
+            
+            yIndex += 40;
+            
+            UIView *dateSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, yIndex, mainScroll.frame.size.width, 1)];
+            dateSeparator.backgroundColor = [Util UIColorForHexColor:@"DEDEDE"];
+            [mainScroll addSubview:dateSeparator];
+            
+            yIndex += 11;
+        }
 
         mainScroll.contentSize = CGSizeMake(mainScroll.frame.size.width, yIndex);
         

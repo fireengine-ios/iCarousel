@@ -260,6 +260,7 @@
     NSString *tempDownloadURL = [dict objectForKey:@"tempDownloadURL"];
     NSString *last_modified = [dict objectForKey:@"lastModifiedDate"];
     NSString *content_type = [dict objectForKey:@"content_type"];
+    NSString *createdDate = [dict objectForKey:@"createdDate"];
     NSArray *albumUuids = [dict objectForKey:@"album"];
     
     MetaFile *file = [[MetaFile alloc] init];
@@ -321,6 +322,8 @@
         detail.songTitle = [self strByRawVal:songTitle];
         detail.duration = [self floatByNumber:duration];
         detail.fileDate = [self dateByRawVal:fileDate];
+        detail.createdDate = [self dateByRawVal:createdDate];
+        detail.imageDate = [self dateByRawVal:fileDate];
 
         detail.geoAdminLevel1 = [self strByRawVal:geoAdminLevel1];
         detail.geoAdminLevel2 = [self strByRawVal:geoAdminLevel2];

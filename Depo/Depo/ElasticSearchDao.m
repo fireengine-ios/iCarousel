@@ -76,7 +76,7 @@
         
         IGLog(@"ElasticSearchDao request successfully finished");
 
-        //        NSLog(@"Elastic Search Response: %@", responseEnc);
+                NSLog(@"Elastic Search Response: %@", responseEnc);
         
         SBJSON *jsonParser = [SBJSON new];
         NSArray *mainArray = [jsonParser objectWithString:responseEnc];

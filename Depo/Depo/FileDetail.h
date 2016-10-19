@@ -28,5 +28,7 @@
 @property (nonatomic, strong) NSString *geoAdminLevel5;
 @property (nonatomic, strong) NSString *geoAdminLevel6;
 @property (nonatomic, strong) NSDate *fileDate;
+@property (nonatomic, strong) NSDate *createdDate;
+@property (nonatomic, strong) NSDate *imageDate;
 
 @end

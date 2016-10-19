@@ -73,6 +73,7 @@
 @synthesize menuLocked;
 @synthesize syncInfoView;
 //@synthesize rootViewController;
+@synthesize popupCheckDone;
 
 - (id) init {
     return [self initWithRootViewController:[[RevisitedGroupedPhotosController alloc] init]];
@@ -224,26 +225,33 @@
     self.scroll.contentOffset = CGPointMake(kMenuOpenOriginX, 0.0);
     menuOpen = NO;
 
-    if(![AppUtil readLifeboxTeaserFlag]) {
-        NewFeatureInfoView *featurePresentView = [[NewFeatureInfoView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-        [self.view addSubview:featurePresentView];
-        [AppUtil writeLifeboxTeaserFlag];
-    } else {
-        if(![AppUtil readPeriodicLocInfoPopupIdleFlag]) {
-            NSDate *lastInfoShownDate = [AppUtil readLastLocInfoPopupShownTime];
-            BOOL showNewAlert = NO;
-            if(!lastInfoShownDate) {
-                showNewAlert = YES;
-            } else {
-                NSDate *today = [NSDate date];
-                if([today timeIntervalSinceDate:lastInfoShownDate] > 15*24*3600) {
-                    showNewAlert = YES;
+    if(!popupCheckDone) {
+        popupCheckDone = YES;
+
+        if(![AppUtil readLifeboxTeaserFlag]) {
+            NewFeatureInfoView *featurePresentView = [[NewFeatureInfoView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+            [self.view addSubview:featurePresentView];
+            [AppUtil writeLifeboxTeaserFlag];
+        } else {
+            if(!([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways)) {
+                
+                if(![AppUtil readPeriodicLocInfoPopupIdleFlag]) {
+                    NSDate *lastInfoShownDate = [AppUtil readLastLocInfoPopupShownTime];
+                    BOOL showNewAlert = NO;
+                    if(!lastInfoShownDate) {
+                        showNewAlert = YES;
+                    } else {
+                        NSDate *today = [NSDate date];
+                        if([today timeIntervalSinceDate:lastInfoShownDate] > 15*24*3600) {
+                            showNewAlert = YES;
+                        }
+                    }
+                    if(showNewAlert) {
+                        CustomInfoWithIconView *locInfoPopup = [[CustomInfoWithIconView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) withIcon:@"icon_locationperm.png" withInfo:NSLocalizedString(@"LocInfoPopup", @"") withSubInfo:NSLocalizedString(@"LocSubInfoPeriodicMessage", @"") isCloseable:YES];
+                        [self.view addSubview:locInfoPopup];
+                        [AppUtil writeLastLocInfoPopupShownTime];
+                    }
                 }
-            }
-            if(showNewAlert) {
-                CustomInfoWithIconView *locInfoPopup = [[CustomInfoWithIconView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) withIcon:@"icon_locationperm.png" withInfo:NSLocalizedString(@"LocInfoPopup", @"") withSubInfo:NSLocalizedString(@"LocSubInfoPeriodicMessage", @"") isCloseable:YES];
-                [self.view addSubview:locInfoPopup];
-                [AppUtil writeLastLocInfoPopupShownTime];
             }
         }
     }

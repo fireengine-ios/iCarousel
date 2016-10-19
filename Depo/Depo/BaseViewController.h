@@ -33,6 +33,7 @@
 //@property (nonatomic, strong) MyViewController *rootViewController;
 @property (nonatomic) BOOL menuOpen;
 @property (nonatomic) BOOL menuLocked;
+@property (nonatomic) BOOL popupCheckDone;
 
 - (void) showBaseLoading;
 - (void) hideBaseLoading;

@@ -28,5 +28,7 @@
 @synthesize geoAdminLevel5;
 @synthesize geoAdminLevel6;
 @synthesize fileDate;
+@synthesize createdDate;
+@synthesize imageDate;
 
 @end
