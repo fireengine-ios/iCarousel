@@ -28,7 +28,9 @@
 #import "AppDelegate.h"
 #import "BaseViewController.h"
 
-@interface SearchModalController ()
+@interface SearchModalController ()  {
+#define searchResultCount 4
+}
 
 @end
 
@@ -70,12 +72,12 @@
         moveDao.delegate = self;
         moveDao.successMethod = @selector(moveSuccessCallback);
         moveDao.failMethod = @selector(moveFailCallback:);
-
+        
         shareDao = [[ShareLinkDao alloc] init];
         shareDao.delegate = self;
         shareDao.successMethod = @selector(shareSuccessCallback:);
         shareDao.failMethod = @selector(shareFailCallback:);
-
+        
         CustomButton *crossButton = [[CustomButton alloc]initWithFrame:CGRectMake(40, 15, 30, 30) withImageName:@"multiply"];
         [crossButton addTarget:self action:@selector(triggerDismiss) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithCustomView:crossButton];
@@ -258,10 +260,10 @@
         if (section == SearchListTypeAllFiles && (fileList.count == photoVideoList.count || fileList.count == musicList.count || fileList.count == docList.count))
             return 0;
         NSMutableArray *currentList = [self getCurrentList:(int)section];
-        if (currentList.count < 3)
+        if (currentList.count < searchResultCount + 1)
             return currentList.count;
         else
-            return 3;
+            return searchResultCount + 1;
     }
 }
 
@@ -279,9 +281,9 @@
     if (fileList == nil || [fileList count] == 0)
         return 320;
     else {
-        if (indexPath.row < 2)
+        if (indexPath.row < searchResultCount)
             return IS_IPAD ? 102 : 68;
-        else if (indexPath.row == 2)
+        else if (indexPath.row == searchResultCount)
             return 60;
         else
             return 0;
@@ -316,7 +318,7 @@
             if ([objAtIndex isKindOfClass:[MetaFile class]]) {
                 MetaFile *fileAtIndex = (MetaFile *) objAtIndex;
                 
-                if (indexPath.row == 0 || indexPath.row == 1) {
+                if (indexPath.row < searchResultCount) {
                     if (fileAtIndex.contentType == ContentTypeFolder)
                         cell = [[FolderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex highlightedText:currentSearchText];
                     else if (fileAtIndex.contentType == ContentTypePhoto || fileAtIndex.contentType == ContentTypeVideo)
@@ -329,12 +331,32 @@
                         cell = [[DocCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex highlightedText:currentSearchText];
                     ((AbstractFileFolderCell *) cell).delegate = self;
                 }
-                else if (indexPath.row == 2) {
+                else if (indexPath.row == searchResultCount) {
                     cell = [[MessageCell alloc]initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"ShowMore", @"")];
                 }
                 else {
                     return nil;
                 }
+                
+                //                if (indexPath.row == 0 || indexPath.row == 1) {
+                //                    if (fileAtIndex.contentType == ContentTypeFolder)
+                //                        cell = [[FolderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex highlightedText:currentSearchText];
+                //                    else if (fileAtIndex.contentType == ContentTypePhoto || fileAtIndex.contentType == ContentTypeVideo)
+                //                        cell = [[ImageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex highlightedText:currentSearchText];
+                //                    else if (fileAtIndex.contentType == ContentTypeMusic)
+                //                        cell = [[MusicCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex highlightedText:currentSearchText];
+                //                    else if (fileAtIndex.contentType == ContentTypeDoc)
+                //                        cell = [[DocCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex highlightedText:currentSearchText];
+                //                    else
+                //                        cell = [[DocCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex highlightedText:currentSearchText];
+                //                    ((AbstractFileFolderCell *) cell).delegate = self;
+                //                }
+                //                else if (indexPath.row == 2) {
+                //                    cell = [[MessageCell alloc]initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"ShowMore", @"")];
+                //                }
+                //                else {
+                //                    return nil;
+                //                }
             }
         }
         else if (fileList == nil) {
@@ -349,7 +371,7 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSMutableArray *currentList = [self getCurrentList:(int)indexPath.section];
-    if (indexPath.row < 2) {
+    if (indexPath.row < searchResultCount) {
         if([currentList count] == 0 || [currentList count] <= indexPath.row)
             return;
         
@@ -394,9 +416,9 @@
             }
         }
     }
-    else if (indexPath.row == 2)
+    else if (indexPath.row == searchResultCount)
         [self didTriggerMoreResults:currentSearchText andSearchListType:indexPath.section andFileCount:currentList.count];
-
+    
 }
 
 - (NSMutableArray *)getCurrentList:(int)sectionNumber {
@@ -552,7 +574,7 @@
 
 - (void) deleteSuccessCallback {
     [self proceedSuccessForProgressView];
-
+    
     [super showLoading];
     [searchDao requestMetadata:currentSearchText andPage:0 andSize:1000000 andSortType:APPDELEGATE.session.sortType andSearchListType:SearchListTypeAllFiles];
 }

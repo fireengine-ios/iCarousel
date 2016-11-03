@@ -120,6 +120,9 @@
     if(self.currentAudioItemIndex + 1 < [self.playerItems count]) {
         [self playAudioItemAtIndex:self.currentAudioItemIndex + 1];
     }
+    else {
+        [self playAudioItemAtIndex: 0];
+    }
 }
 
 - (void) playPreviousAudioItem {

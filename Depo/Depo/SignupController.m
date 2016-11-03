@@ -209,7 +209,7 @@
     [self hideLoading];
     NSLog(@"Signup Result: %@", signupResult);
     NSString *signupStatus = [signupResult objectForKey:@"status"];
-    if(signupStatus != nil && ![signupStatus isKindOfClass:[NSNull class]]) {
+    if(signupStatus != nil && ![signupStatus isKindOfClass:[NSNull class]] && [signupStatus isKindOfClass:[NSString class]]) {
         if([[signupStatus uppercaseString] isEqualToString:@"OK"]) {
             [[CurioSDK shared] sendEvent:@"SignUp>First" eventValue:@"Success"];
             [MPush hitTag:@"Signup>First" withValue:@"Success"];

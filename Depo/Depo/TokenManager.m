@@ -199,8 +199,8 @@
 }
 
 - (void) eulaCheckSuccessCallback:(NSString *) statusVal {
-    if(statusVal != nil) {
-        if([statusVal isEqualToString:@"EULA_APPROVE_REQUIRED"]) {
+    if(statusVal != nil && [statusVal isKindOfClass:[NSString class]]) {
+        if([statusVal isEqualToString:@"EULA_APPROVE_REQUIRED"] ) {
             [delegate tokenManagerProvisionNeeded];
             return;
         }
