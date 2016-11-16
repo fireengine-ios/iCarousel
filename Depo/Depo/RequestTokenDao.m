@@ -129,6 +129,8 @@
         
 //        NSLog(@"Auth Token Response Headers: %@", headerParams);
         NSLog(@"TOKEN: %@", authToken);
+        
+        [AppUtil increaseLoginCount];
 
         if(newUserFlag != nil && ![newUserFlag isKindOfClass:[NSNull class]]) {
             APPDELEGATE.session.newUserFlag = [newUserFlag boolValue];

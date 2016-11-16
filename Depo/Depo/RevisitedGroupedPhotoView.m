@@ -142,7 +142,7 @@
     if([[Util deviceType] isEqualToString:@"iPhone 6 Plus"] || [[Util deviceType] isEqualToString:@"iPhone 6S Plus"]) {
         packageSize = 60;
     }
-    [readDao requestPhotosForPage:listOffset andSize:packageSize andSortType:SortTypeDateDesc];
+    [readDao requestPhotosAndVideosForPage:listOffset andSize:packageSize andSortType:SortTypeDateDesc];
     isLoading = YES;
 
     [self bringSubviewToFront:progress];
@@ -481,7 +481,7 @@
     if([[Util deviceType] isEqualToString:@"iPhone 6 Plus"] || [[Util deviceType] isEqualToString:@"iPhone 6S Plus"]) {
         packageSize = 60;
     }
-    [readDao requestPhotosForPage:listOffset andSize:packageSize andSortType:SortTypeDateDesc];
+    [readDao requestPhotosAndVideosForPage:listOffset andSize:packageSize andSortType:SortTypeDateDesc];
 }
 
 - (FileInfoGroup *) groupByKey:(NSString *) groupKey {

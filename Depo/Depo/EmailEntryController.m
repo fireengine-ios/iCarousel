@@ -12,6 +12,7 @@
 #import "LoginTextfield.h"
 #import "AppDelegate.h"
 #import "MPush.h"
+#import "AppUtil.h"
 
 @interface EmailEntryController ()
 
@@ -97,11 +98,6 @@
     [self showLoading];
 }
 
-
-- (void) triggerDismiss {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[CurioSDK shared] sendEvent:@"EmailEntry" eventValue:@"opened"];
@@ -111,11 +107,28 @@
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    CustomButton *doneButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 60, 20) withImageName:nil withTitle:NSLocalizedString(@"DoneButtonTitle", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[UIColor whiteColor]];
-    [doneButton addTarget:self action:@selector(triggerDismiss) forControlEvents:UIControlEventTouchUpInside];
+    CustomButton *cancelButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 60, 20) withImageName:nil withTitle:NSLocalizedString(@"CancelButtonTittle", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[UIColor whiteColor]];
+    [cancelButton addTarget:self action:@selector(triggerDismiss) forControlEvents:UIControlEventTouchUpInside];
     
-    UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
-    self.navigationItem.rightBarButtonItem = doneItem;
+    UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithCustomView:cancelButton];
+    self.navigationItem.rightBarButtonItem = cancelItem;
+    
+//    CustomButton *doneButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 60, 20) withImageName:nil withTitle:NSLocalizedString(@"DoneButtonTitle", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[UIColor whiteColor]];
+//    [doneButton addTarget:self action:@selector(triggerDismiss) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
+//    self.navigationItem.rightBarButtonItem = doneItem;
+}
+
+//- (void) triggerDismiss {
+//    [self dismissViewControllerAnimated:YES completion:nil];
+//}
+
+- (void) triggerDismiss {
+    if ([AppUtil readLoginCount] >= 2)  {
+     [APPDELEGATE triggerLogout];
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -135,6 +148,7 @@
         [[CurioSDK shared] sendEvent:@"EmailEntry" eventValue:@"finished"];
         [MPush hitTag:@"EmailEntry" withValue:@"finished"];
         APPDELEGATE.session.user.email = emailField.text;
+        APPDELEGATE.session.emailEmpty = NO;
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 }

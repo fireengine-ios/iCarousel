@@ -139,7 +139,7 @@
 
     /*
     listOffset = 0;
-     [elasticSearchDao requestPhotosForPage:listOffset andSize:IS_IPAD ? 30 : 21 andSortType:APPDELEGATE.session.sortType];
+     [elasticSearchDao requestPhotosAndVideosForPage:listOffset andSize:IS_IPAD ? 30 : 21 andSortType:APPDELEGATE.session.sortType];
     [albumListDao requestAlbumListForStart:0 andSize:50];
     [self showLoading];
      */
@@ -226,7 +226,7 @@
     listOffset = 0;
     self.tableUpdateCounter ++;
 
-    [elasticSearchDao requestPhotosForPage:listOffset andSize:IS_IPAD ? 30 : 21 andSortType:APPDELEGATE.session.sortType];
+    [elasticSearchDao requestPhotosAndVideosForPage:listOffset andSize:IS_IPAD ? 30 : 21 andSortType:APPDELEGATE.session.sortType];
     [albumListDao requestAlbumListForStart:0 andSize:50 andSortType:APPDELEGATE.session.sortType];
 }
 
@@ -644,7 +644,7 @@
 
 - (void) dynamicallyLoadNextPage {
     listOffset ++;
-    [elasticSearchDao requestPhotosForPage:listOffset andSize:IS_IPAD ? 30 : 21 andSortType:APPDELEGATE.session.sortType];
+    [elasticSearchDao requestPhotosAndVideosForPage:listOffset andSize:IS_IPAD ? 30 : 21 andSortType:APPDELEGATE.session.sortType];
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {

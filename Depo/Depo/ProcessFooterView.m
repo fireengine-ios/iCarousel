@@ -83,7 +83,7 @@
     [defaultIndicator stopAnimating];
     defaultIndicator.hidden = YES;
     successImgView.hidden = NO;
-//    [self performSelector:@selector(dismissAfterDelay) withObject:nil afterDelay:1.2f];
+    [self performSelector:@selector(dismissAfterDelay) withObject:nil afterDelay:3.0f];
 }
 
 - (void) showMessageForFailure {
@@ -98,10 +98,11 @@
 //    indicator.hidden = YES;
     [defaultIndicator stopAnimating];
     defaultIndicator.hidden = YES;
-//    [self performSelector:@selector(dismissAfterDelay) withObject:nil afterDelay:1.2f];
+    [self performSelector:@selector(dismissAfterDelay) withObject:nil afterDelay:3.0f];
 }
 
 - (void) dismissAfterDelay {
+    [delegate processFooterShouldDismissWithButtonKey:self.postButtonKey];
     [self removeFromSuperview];
 }
 

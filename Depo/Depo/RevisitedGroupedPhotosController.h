@@ -18,7 +18,7 @@
 #import "UsageInfoDao.h"
 #import "AccountDao.h"
 
-@interface RevisitedGroupedPhotosController : MyViewController <RevisitedPhotoHeaderSegmentDelegate, RevisitedAlbumListDelegate, PhotoAlbumDelegate, NewAlbumDelegate, RevisitedGroupedPhotoDelegate, ImagePreviewDelegate, VideoPreviewDelegate, CustomEntryPopupDelegate>
+@interface RevisitedGroupedPhotosController : MyViewController <RevisitedPhotoHeaderSegmentDelegate, RevisitedAlbumListDelegate, PhotoAlbumDelegate, NewAlbumDelegate, RevisitedGroupedPhotoDelegate, ImagePreviewDelegate, VideoPreviewDelegate, CustomEntryPopupDelegate, CustomConfirmDelegate>
 
 @property (nonatomic, strong) RevisitedPhotoHeaderSegmentView *segmentView;
 @property (nonatomic, strong) RevisitedGroupedPhotoView *groupView;

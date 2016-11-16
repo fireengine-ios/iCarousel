@@ -18,12 +18,13 @@
 #import "AddAlbumDao.h"
 #import "ImagePreviewController.h"
 #import "CurrentPhotoListModalController.h"
+#import "VideoPreviewController.h"
 
 @protocol PhotoAlbumDelegate <NSObject>
 - (void) photoAlbumDidChange:(NSString *) albumUuid;
 @end
 
-@interface PhotoAlbumController : MyViewController <SquareImageDelegate, FooterActionsDelegate, ImagePreviewDelegate, UIScrollViewDelegate, CurrentPhotoListModalDelegate> {
+@interface PhotoAlbumController : MyViewController <SquareImageDelegate, FooterActionsDelegate, ImagePreviewDelegate, VideoPreviewDelegate, UIScrollViewDelegate, CurrentPhotoListModalDelegate> {
     AlbumDetailDao *detailDao;
     RenameAlbumDao *renameDao;
     DeleteAlbumsDao *deleteDao;

@@ -15,14 +15,19 @@
 @synthesize delegate;
 @synthesize shareButton;
 @synthesize deleteButton;
+@synthesize removeButton;
 @synthesize separatorView;
 @synthesize printButton;
 
-- (id)initWithFrame:(CGRect)frame {
-    return [self initWithFrame:frame withPrintEnabled:YES];
+- (id)initWithFrame:(CGRect)frame{
+    return [self initWithFrame:frame withPrintEnabled:YES withAlbum:nil];
 }
 
-- (id)initWithFrame:(CGRect)frame withPrintEnabled:(BOOL) printEnabledFlag {
+- (id)initWithFrame:(CGRect)frame withAlbum:(PhotoAlbum*)album{
+    return [self initWithFrame:frame withPrintEnabled:YES withAlbum:album];
+}
+
+- (id)initWithFrame:(CGRect)frame withPrintEnabled:(BOOL) printEnabledFlag withAlbum:(PhotoAlbum*)album{
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [Util UIColorForHexColor:@"191e24"];
@@ -35,6 +40,13 @@
         [shareButton addTarget:self action:@selector(shareClicked) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:shareButton];
 
+        //TakingBack RemoveFromAlbum
+//        if (album) {
+//            removeButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 80, (self.frame.size.height - 21)/2, 20, 21) withImageName:@"white_delete_icon.png"];
+//            [removeButton addTarget:self action:@selector(removeFromAlbumClicked) forControlEvents:UIControlEventTouchUpInside];
+//            [self addSubview:removeButton];
+//        }
+        
         deleteButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 40, (self.frame.size.height - 21)/2, 20, 21) withImageName:@"white_delete_icon.png"];
         [deleteButton addTarget:self action:@selector(deleteClicked) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:deleteButton];
@@ -52,6 +64,7 @@
 - (void) updateInnerViews {
     separatorView.frame = CGRectMake(0, 0, self.frame.size.width, 1);
     shareButton.frame = CGRectMake(20, (self.frame.size.height - 22)/2, 16, 22);
+//    removeButton.frame = CGRectMake(self.frame.size.width - 80, (self.frame.size.height - 21)/2, 20, 21);
     deleteButton.frame = CGRectMake(self.frame.size.width - 40, (self.frame.size.height - 21)/2, 20, 21);
 }
 
@@ -67,6 +80,13 @@
     [MPush hitEvent:@"delete_button_clicked"];
 
     [delegate fileDetailFooterDidTriggerDelete];
+}
+
+- (void) removeFromAlbumClicked {
+    [MPush hitTag:@"removeFromAlbum_button_clicked"];
+    [MPush hitEvent:@"removeFromAlbum_button_clicked"];
+    
+    [delegate fileDetailFooterDidTriggerRemoveFromAlbum];
 }
 
 - (void) printClicked {

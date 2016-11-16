@@ -14,6 +14,7 @@
 #import <CoreTelephony/CTCarrier.h>
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import "SyncUtil.h"
+#import "CacheUtil.h"
 
 @implementation AppUtil
 
@@ -411,6 +412,20 @@
                     break;
                 default:
                     title = NSLocalizedString(@"MoreMenuDeleteTitleOther", @"");
+                    break;
+            }
+            break;
+        }
+        case MoreMenuTypeRemoveFromAlbum: {
+            switch (contentType) {
+                case ContentTypePhoto:
+                    title = NSLocalizedString(@"MoreMenuRemoveTitleImg", @"");
+                    break;
+                case ContentTypeVideo:
+                    title = NSLocalizedString(@"MoreMenuRemoveTitleVideo", @"");
+                    break;
+                default:
+                    title = NSLocalizedString(@"MoreMenuRemoveTitleOther", @"");
                     break;
             }
             break;
@@ -854,6 +869,18 @@
 
 + (int) readVideofyTutorialCount {
     NSInteger result = [[NSUserDefaults standardUserDefaults] integerForKey:[NSString stringWithFormat:TUTORIAL_VIDEOFY_COUNT_KEY, [SyncUtil readBaseUrlConstant]]];
+    return (int)result;
+}
+
++ (void) increaseLoginCount {
+    NSInteger result = [[NSUserDefaults standardUserDefaults] integerForKey:[NSString stringWithFormat:DEPO_LOGIN_COUNT_KEY, [CacheUtil readCachedMsisdnForPostMigration]]];
+    result ++;
+    [[NSUserDefaults standardUserDefaults] setInteger:result forKey:[NSString stringWithFormat:DEPO_LOGIN_COUNT_KEY, [CacheUtil readCachedMsisdnForPostMigration]]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (int) readLoginCount {
+    NSInteger result = [[NSUserDefaults standardUserDefaults] integerForKey:[NSString stringWithFormat:DEPO_LOGIN_COUNT_KEY, [CacheUtil readCachedMsisdnForPostMigration]]];
     return (int)result;
 }
 

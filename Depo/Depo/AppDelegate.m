@@ -497,13 +497,30 @@
         [[LocationManager sharedInstance] startLocationManager];
         [[SyncManager sharedInstance] decideAndStartAutoSync];
     } else {
-        locInfoPopup = [[CustomInfoWithIconView alloc] initWithFrame:CGRectMake(0, 0, self.window.frame.size.width, self.window.frame.size.height) withIcon:@"icon_locationperm.png" withInfo:NSLocalizedString(@"LocInfoPopup", @"") withSubInfo:NSLocalizedString(@"LocSubinfoPopup", @"") isCloseable:YES];
-        locInfoPopup.delegate = self;
-        [self.window addSubview:locInfoPopup];
-        [AppUtil writeLocInfoPopupShownFlag];
-        [AppUtil writePeriodicLocInfoPopupIdleFlag];
+        if(![CLLocationManager locationServicesEnabled] || !([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedWhenInUse ||[CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways)) {
+            locInfoPopup = [[CustomInfoWithIconView alloc] initWithFrame:CGRectMake(0, 0, self.window.frame.size.width, self.window.frame.size.height) withIcon:@"icon_locationperm.png" withInfo:NSLocalizedString(@"LocInfoPopup", @"") withSubInfo:NSLocalizedString(@"LocSubinfoPopup", @"") isCloseable:YES];
+            locInfoPopup.delegate = self;
+            [self.window addSubview:locInfoPopup];
+            [AppUtil writeLocInfoPopupShownFlag];
+            [AppUtil writePeriodicLocInfoPopupIdleFlag];
+        }
     }
 }
+
+
+//- (void) startAutoSync {
+//    IGLog(@"AppDelegate startAutoSync");
+//    if([AppUtil readLocInfoPopupShownFlag]) {
+//        [[LocationManager sharedInstance] startLocationManager];
+//        [[SyncManager sharedInstance] decideAndStartAutoSync];
+//    } else {
+//        locInfoPopup = [[CustomInfoWithIconView alloc] initWithFrame:CGRectMake(0, 0, self.window.frame.size.width, self.window.frame.size.height) withIcon:@"icon_locationperm.png" withInfo:NSLocalizedString(@"LocInfoPopup", @"") withSubInfo:NSLocalizedString(@"LocSubinfoPopup", @"") isCloseable:YES];
+//        locInfoPopup.delegate = self;
+//        [self.window addSubview:locInfoPopup];
+//        [AppUtil writeLocInfoPopupShownFlag];
+//        [AppUtil writePeriodicLocInfoPopupIdleFlag];
+//    }
+//}
 
 - (void) stopAutoSync {
 //    [syncManager stopAutoSync];

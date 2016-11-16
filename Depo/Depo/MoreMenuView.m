@@ -97,6 +97,9 @@
         case MoreMenuTypeDelete:
             [delegate moreMenuDidSelectDelete];
             break;
+        case MoreMenuTypeRemoveFromAlbum:
+            [delegate moreMenuDidSelectRemoveFromAlbum];
+            break;
         case MoreMenuTypeSort:
             [APPDELEGATE.base showSort];
             break;

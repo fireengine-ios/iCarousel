@@ -12,11 +12,11 @@
 
 @implementation ElasticSearchDao
 
-- (void) requestPhotosForPage:(int) page andSize:(int) size andSortType:(SortType) sortType {
-    [self requestPhotosForPage:page andSize:size andSortType:sortType isMinimal:NO];
+- (void) requestPhotosAndVideosForPage:(int) page andSize:(int) size andSortType:(SortType) sortType {
+    [self requestPhotosAndVideosForPage:page andSize:size andSortType:sortType isMinimal:NO];
 }
 
-- (void) requestPhotosForPage:(int) page andSize:(int) size andSortType:(SortType) sortType isMinimal:(BOOL) minimalFlag {
+- (void) requestPhotosAndVideosForPage:(int) page andSize:(int) size andSortType:(SortType) sortType isMinimal:(BOOL) minimalFlag {
     sortType = [self resetSortType:sortType];
     
     NSString *parentListingUrl = [NSString stringWithFormat:ELASTIC_LISTING_MAIN_URL, @"content_type", @"image%20OR%20video", [AppUtil serverSortNameByEnum:sortType forPhotosOnly:YES], [AppUtil isAscByEnum:sortType] ? @"ASC":@"DESC", page, size];
@@ -25,13 +25,35 @@
     }
     NSURL *url = [NSURL URLWithString:parentListingUrl];
 
-    IGLog(@"[GET] ElasticSearchDao requestPhotosForPage called");
+    IGLog(@"[GET] ElasticSearchDao requestPhotosAndVideosForPage called");
 
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setDelegate:self];
     
     [self sendGetRequest:request];
 }
+
+- (void) requestPhotosForPage:(int) page andSize:(int) size andSortType:(SortType) sortType {
+    [self requestPhotosForPage:page andSize:size andSortType:sortType isMinimal:NO];
+}
+
+- (void) requestPhotosForPage:(int) page andSize:(int) size andSortType:(SortType) sortType isMinimal:(BOOL) minimalFlag {
+    sortType = [self resetSortType:sortType];
+    
+    NSString *parentListingUrl = [NSString stringWithFormat:ELASTIC_LISTING_MAIN_URL, @"content_type", @"image", [AppUtil serverSortNameByEnum:sortType forPhotosOnly:YES], [AppUtil isAscByEnum:sortType] ? @"ASC":@"DESC", page, size];
+    if(minimalFlag) {
+        parentListingUrl = [NSString stringWithFormat:@"%@&minified=true", parentListingUrl];
+    }
+    NSURL *url = [NSURL URLWithString:parentListingUrl];
+    
+    IGLog(@"[GET] ElasticSearchDao requestPhotosAndVideosForPage called");
+    
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    [request setDelegate:self];
+    
+    [self sendGetRequest:request];
+}
+
 
 - (void) requestMusicForPage:(int) page andSize:(int) size andSortType:(SortType) sortType {
     NSString *parentListingUrl = [NSString stringWithFormat:ELASTIC_LISTING_MAIN_URL, @"content_type", @"audio", [AppUtil serverSortNameByEnum:sortType], [AppUtil isAscByEnum:sortType] ? @"ASC":@"DESC", page, size];

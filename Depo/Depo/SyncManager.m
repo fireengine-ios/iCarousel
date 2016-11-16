@@ -69,7 +69,7 @@
     }
 
     if(triggerSyncing) {
-        [elasticSearchDao requestPhotosForPage:0 andSize:300000 andSortType:SortTypeAlphaAsc isMinimal:YES];
+        [elasticSearchDao requestPhotosAndVideosForPage:0 andSize:300000 andSortType:SortTypeAlphaAsc isMinimal:YES];
         autoSyncIterationInProgress = YES;
     }
 }

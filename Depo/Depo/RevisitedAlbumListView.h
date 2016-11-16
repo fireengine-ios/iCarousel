@@ -13,6 +13,7 @@
 #import "FooterActionsMenuView.h"
 #import "MBProgressHUD.h"
 #import "AddAlbumDao.h"
+#import "ConfirmDeleteModalController.h"
 
 @protocol RevisitedAlbumListDelegate <NSObject>
 - (void) revisitedAlbumListDidSelectAlbum:(PhotoAlbum *) albumSelected;
@@ -24,7 +25,7 @@
 - (void) revisitedAlbumListChangeTitleTo:(NSString *) pageTitle;
 @end
 
-@interface RevisitedAlbumListView : UIView <UITableViewDataSource, UITableViewDelegate, FooterActionsDelegate>
+@interface RevisitedAlbumListView : UIView <UITableViewDataSource, UITableViewDelegate, FooterActionsDelegate, ConfirmDeleteDelegate>
 
 @property (nonatomic, weak) id<RevisitedAlbumListDelegate> delegate;
 @property (nonatomic, strong) NSArray *albums;

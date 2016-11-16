@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "CustomButton.h"
+#import "PhotoAlbum.h"
 
 @protocol FileDetailFooterDelegate <NSObject>
 - (void) fileDetailFooterDidTriggerDelete;
+- (void) fileDetailFooterDidTriggerRemoveFromAlbum;
 - (void) fileDetailFooterDidTriggerShare;
 - (void) fileDetailFooterDidTriggerPrint;
 @end
@@ -20,10 +22,12 @@
 @property (nonatomic, strong) id<FileDetailFooterDelegate> delegate;
 @property (nonatomic, strong) CustomButton *shareButton;
 @property (nonatomic, strong) CustomButton *deleteButton;
+@property (nonatomic, strong) CustomButton *removeButton;
 @property (nonatomic, strong) CustomButton *printButton;
 @property (nonatomic, strong) UIView *separatorView;
 
-- (id)initWithFrame:(CGRect)frame withPrintEnabled:(BOOL) printEnabledFlag;
+- (id)initWithFrame:(CGRect)frame  withAlbum:(PhotoAlbum*)album;
+- (id)initWithFrame:(CGRect)frame withPrintEnabled:(BOOL) printEnabledFlag withAlbum:(PhotoAlbum*)album;
 - (void) updateInnerViews;
 
 @end

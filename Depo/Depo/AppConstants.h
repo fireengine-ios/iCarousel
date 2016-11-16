@@ -291,6 +291,8 @@ _Pragma("clang diagnostic pop") \
 
 #define TUTORIAL_VIDEOFY_COUNT_KEY @"TUTORIAL_VIDEOFY_COUNT_%@"
 
+#define DEPO_LOGIN_COUNT_KEY @"DEPO_LOGIN_COUNT_%@"
+
 #define FIRST_UPLOAD_FLAG_KEY @"DEPO_FIRST_UPLOAD_FLAG_KEY"
 
 #define DROPBOX_LINK_SUCCESS_KEY @"DEPO_DROPBOX_LINK_SUCCESS_KEY"
@@ -375,7 +377,8 @@ typedef enum {
     MoreMenuTypeUnfav,
     MoreMenuTypeDownloadImage,
     MoreMenuTypeDelete,
-    MoreMenuTypeAlbumDelete
+    MoreMenuTypeAlbumDelete,
+    MoreMenuTypeRemoveFromAlbum
 } MoreMenuType;
 
 typedef enum {

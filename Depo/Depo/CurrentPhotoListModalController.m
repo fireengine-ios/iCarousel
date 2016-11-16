@@ -47,7 +47,7 @@
 
         listOffset = 0;
 
-        [elasticSearchDao requestPhotosForPage:listOffset andSize:IS_IPAD ? 30 : 21 andSortType:APPDELEGATE.session.sortType];
+        [elasticSearchDao requestPhotosAndVideosForPage:listOffset andSize:IS_IPAD ? 30 : 21 andSortType:APPDELEGATE.session.sortType];
 
         footerView = [[MultipleUploadFooterView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60) selectAllEnabled:NO];
         footerView.delegate = self;
@@ -165,7 +165,7 @@
 
 - (void) dynamicallyLoadNextPage {
     listOffset ++;
-    [elasticSearchDao requestPhotosForPage:listOffset andSize:IS_IPAD ? 30 : 21 andSortType:APPDELEGATE.session.sortType];
+    [elasticSearchDao requestPhotosAndVideosForPage:listOffset andSize:IS_IPAD ? 30 : 21 andSortType:APPDELEGATE.session.sortType];
 }
 
 - (void) multipleUploadFooterDidTriggerUpload {

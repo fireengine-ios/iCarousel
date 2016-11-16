@@ -13,6 +13,9 @@
 #import "PhotoAlbum.h"
 #import "MainPhotoAlbumCell.h"
 #import "NoItemCell.h"
+#import "MyNavigationController.h"
+#import "CacheUtil.h"
+#import "MyViewController.h"
 
 @interface RevisitedAlbumListView() {
     int tableUpdateCounter;
@@ -261,12 +264,37 @@
     }
 }
 
-- (void) footerActionMenuDidSelectDelete:(FooterActionsMenuView *) menu {
-    [deleteAlbumDao requestDeleteAlbums:self.selectedAlbumList];
 
+
+- (void) footerActionMenuDidSelectDelete:(FooterActionsMenuView *) menu {
+    if([CacheUtil showConfirmDeletePageFlag]) {
+        [self confirmDeleteDidConfirm];
+    } else {
+        ConfirmDeleteModalController *confirmDelete = [[ConfirmDeleteModalController alloc] init];
+        confirmDelete.delegate = self;
+        MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:confirmDelete];
+        MyViewController * parent = (MyViewController*)self.delegate;
+        [parent presentViewController:modalNav animated:YES completion:nil];
+    }
+}
+
+-(void)confirmDeleteDidConfirm {
+    [deleteAlbumDao requestDeleteAlbums:self.selectedAlbumList];
+    
     [self bringSubviewToFront:progress];
     [progress show:YES];
 }
+
+-(void)confirmDeleteDidCancel{
+    
+}
+
+//- (void) footerActionMenuDidSelectDelete:(FooterActionsMenuView *) menu {
+//    [deleteAlbumDao requestDeleteAlbums:self.selectedAlbumList];
+//
+//    [self bringSubviewToFront:progress];
+//    [progress show:YES];
+//}
 
 - (void) footerActionMenuDidSelectMove:(FooterActionsMenuView *) menu {
 }

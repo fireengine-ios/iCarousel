@@ -29,7 +29,7 @@
 #import "BaseViewController.h"
 
 @interface SearchModalController ()  {
-#define searchResultCount 4
+#define searchResultCount 6
 }
 
 @end

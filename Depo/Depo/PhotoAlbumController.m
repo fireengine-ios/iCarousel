@@ -11,7 +11,6 @@
 #import "CustomButton.h"
 #import "CustomLabel.h"
 #import "MetaFile.h"
-#import "VideoPreviewController.h"
 #import "AppDelegate.h"
 #import "BaseViewController.h"
 #import "UploadingImagePreviewController.h"
@@ -310,13 +309,14 @@
 
 - (void) squareImageWasSelectedForFile:(MetaFile *)fileSelected {
     if(fileSelected.contentType == ContentTypePhoto) {
-        ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFile:fileSelected referencedFromAlbum:YES];
+        ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFile:fileSelected withAlbum:self.album];
         detail.delegate = self;
         MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
         detail.nav = modalNav;
         [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
     } else if(fileSelected.contentType == ContentTypeVideo) {
-        VideoPreviewController *detail = [[VideoPreviewController alloc] initWithFile:fileSelected referencedFromAlbum:YES];
+        VideoPreviewController *detail = [[VideoPreviewController alloc] initWithFile:fileSelected withAlbum:self.album];
+        detail.delegate = self;
         MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
         detail.nav = modalNav;
         [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
@@ -508,6 +508,8 @@
         [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
     } else {
         self.deleteType = DeleteTypeFooterMenu;
+        //TakingBack RemoveFromAlbum
+//        [APPDELEGATE.base showConfirmRemove];
         [APPDELEGATE.base showConfirmDelete];
     }
 }
@@ -570,11 +572,17 @@
 
 #pragma mark ConfirmDeleteModalDelegate methods
 
+
 - (void) confirmDeleteDidCancel {
 }
 
 - (void) confirmDeleteDidConfirm {
-    if(self.deleteType == DeleteTypeFooterMenu) {
+    if(self.deleteType == DeleteTypeMoreMenu) {
+        [deleteDao requestDeleteAlbums:@[self.album.uuid]];
+        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteAlbumProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteAlbumSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteAlbumFailMessage", @"")];
+    }
+    //TakingBack RemoveFromAlbum (eklendi)
+    else if(self.deleteType == DeleteTypeFooterMenu) {
         for(UIView *innerView in [photosScroll subviews]) {
             if([innerView isKindOfClass:[SquareImageView class]]) {
                 SquareImageView *sqView = (SquareImageView *) innerView;
@@ -584,12 +592,29 @@
             }
         }
         [deleteImgDao requestRemovePhotos:selectedFileList fromAlbum:self.album.uuid];
-        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
-    } else if(self.deleteType == DeleteTypeMoreMenu) {
-        [deleteDao requestDeleteAlbums:@[self.album.uuid]];
-        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteAlbumProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteAlbumSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteAlbumFailMessage", @"")];
+        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"RemoveProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"RemoveSuccessMessage", @"") andFailMessage:NSLocalizedString(@"RemoveFailMessage", @"")];
     }
+
 }
+
+//TakingBack RemoveFromAlbum
+//- (void) confirmRemoveDidCancel {
+//}
+//
+//- (void) confirmRemoveDidConfirm {
+//    if(self.deleteType == DeleteTypeFooterMenu) {
+//        for(UIView *innerView in [photosScroll subviews]) {
+//            if([innerView isKindOfClass:[SquareImageView class]]) {
+//                SquareImageView *sqView = (SquareImageView *) innerView;
+//                if([selectedFileList containsObject:sqView.file.uuid]) {
+//                    [sqView showProgressMask];
+//                }
+//            }
+//        }
+//        [deleteImgDao requestRemovePhotos:selectedFileList fromAlbum:self.album.uuid];
+//        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"RemoveProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"RemoveSuccessMessage", @"") andFailMessage:NSLocalizedString(@"RemoveFailMessage", @"")];
+//    }
+//}
 
 - (void) photoModalDidTriggerUploadForUrls:(NSArray *)assetUrls {
     for(UploadRef *ref in assetUrls) {
@@ -661,6 +686,11 @@
 
 #pragma mark ImagePreviewDelegate methods
 - (void) previewedImageWasDeleted:(MetaFile *)deletedFile {
+    contentModified = YES;
+    [self triggerRefresh];
+}
+
+- (void) previewedVideoWasDeleted:(MetaFile *)deletedFile {
     contentModified = YES;
     [self triggerRefresh];
 }

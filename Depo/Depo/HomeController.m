@@ -388,54 +388,35 @@
 
 - (void) accountSuccessCallback:(NSArray *) subscriptions {
     if(![[NSUserDefaults standardUserDefaults] objectForKey:@"onKatViewFlag"]){
-        if(APPDELEGATE.session.msisdnEmpty) {
-            MsisdnEntryController *msisdnController = [[MsisdnEntryController alloc] init];
-            MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:msisdnController];
-            [self presentViewController:modalNav animated:YES completion:nil];
-            
-            //        [APPDELEGATE triggerLogout];
-            //        [self showErrorAlertWithMessage:NSLocalizedString(@"MsisdnEmpty", @"")];
-            //        return;
-        }
-        
-        if(APPDELEGATE.session.emailEmpty && !APPDELEGATE.session.emailEmptyMessageShown && ![AppUtil readDoNotShowAgainFlagForKey:EMPTY_EMAIL_CONFIRM_KEY]) {
-            APPDELEGATE.session.emailEmptyMessageShown = YES;
-            CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"TitleLater", @"") withApproveTitle:NSLocalizedString(@"TitleYes", @"") withMessage:NSLocalizedString(@"EmailEmpty", @"") withModalType:ModalTypeApprove shouldShowCheck:YES withCheckKey:EMPTY_EMAIL_CONFIRM_KEY];
-            confirm.delegate = self;
-            confirm.tag = 111;
-            [APPDELEGATE showCustomConfirm:confirm];
-        } else if(APPDELEGATE.session.emailNotVerified && !APPDELEGATE.session.emailNotVerifiedMessageShown) {
-            APPDELEGATE.session.emailNotVerifiedMessageShown = YES;
-            [self showInfoAlertWithMessage:NSLocalizedString(@"EmailNotVerified", @"")];
-        } else if([subscriptions count] > 0) {
+        if([subscriptions count] > 0) {
             //TODO ilk subscription'a bakiyor, bu düzeltilecek
             currentSubscription = [subscriptions objectAtIndex:0];
             [self flowChartAdvertising];
             
-            for(Subscription *subsc in subscriptions) {
-                if(subsc.plan != nil && subsc.plan.cometOfferId != nil) {
-                    if(subsc.plan.cometOfferId.intValue == 581814) {
-                        [MPush hitTag:@"platin_user"];
-                    }
-                }
-            }
-            
-            if(APPDELEGATE.session.user.accountType == AccountTypeTurkcell) {
-                BOOL hasAnyTurkcellPackage = NO;
-                for(Subscription *subscription in subscriptions) {
-                    if(!subscription.type || !([subscription.type isEqualToString:@"INAPP_PURCHASE_GOOGLE"] || [subscription.type isEqualToString:@"INAPP_PURCHASE_APPLE"])) {
-                        hasAnyTurkcellPackage = YES;
-                    }
-                }
-                if(!hasAnyTurkcellPackage) {
-                    if(![AppUtil readDoNotShowAgainFlagForKey:@"PORTIN_DONTSHOW_DEFAULTS_KEY"]) {
-                        CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"TitleLater", @"") withApproveTitle:NSLocalizedString(@"TitleYes", @"") withMessage:NSLocalizedString(@"PortinInfoMessage", @"") withModalType:ModalTypeApprove shouldShowCheck:YES withCheckKey:@"PORTIN_DONTSHOW_DEFAULTS_KEY"];
-                        confirm.delegate = self;
-                        confirm.tag = 333;
-                        [APPDELEGATE showCustomConfirm:confirm];
-                    }
-                }
-            }
+//            for(Subscription *subsc in subscriptions) {
+//                if(subsc.plan != nil && subsc.plan.cometOfferId != nil) {
+//                    if(subsc.plan.cometOfferId.intValue == 581814) {
+//                        [MPush hitTag:@"platin_user"];
+//                    }
+//                }
+//            }
+//            
+//            if(APPDELEGATE.session.user.accountType == AccountTypeTurkcell) {
+//                BOOL hasAnyTurkcellPackage = NO;
+//                for(Subscription *subscription in subscriptions) {
+//                    if(!subscription.type || !([subscription.type isEqualToString:@"INAPP_PURCHASE_GOOGLE"] || [subscription.type isEqualToString:@"INAPP_PURCHASE_APPLE"])) {
+//                        hasAnyTurkcellPackage = YES;
+//                    }
+//                }
+//                if(!hasAnyTurkcellPackage) {
+//                    if(![AppUtil readDoNotShowAgainFlagForKey:@"PORTIN_DONTSHOW_DEFAULTS_KEY"]) {
+//                        CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"TitleLater", @"") withApproveTitle:NSLocalizedString(@"TitleYes", @"") withMessage:NSLocalizedString(@"PortinInfoMessage", @"") withModalType:ModalTypeApprove shouldShowCheck:YES withCheckKey:@"PORTIN_DONTSHOW_DEFAULTS_KEY"];
+//                        confirm.delegate = self;
+//                        confirm.tag = 333;
+//                        [APPDELEGATE showCustomConfirm:confirm];
+//                    }
+//                }
+//            }
         }
     }
     int counter = 1;
@@ -447,6 +428,132 @@
         }
     }
 }
+
+
+//- (void) accountSuccessCallback:(NSArray *) subscriptions {
+//    if(![[NSUserDefaults standardUserDefaults] objectForKey:@"onKatViewFlag"]){
+//        if(APPDELEGATE.session.msisdnEmpty) {
+//            MsisdnEntryController *msisdnController = [[MsisdnEntryController alloc] init];
+//            MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:msisdnController];
+//            [self presentViewController:modalNav animated:YES completion:nil];
+//            
+//            //        [APPDELEGATE triggerLogout];
+//            //        [self showErrorAlertWithMessage:NSLocalizedString(@"MsisdnEmpty", @"")];
+//            //        return;
+//        }
+//        else if(APPDELEGATE.session.emailEmpty && [AppUtil readLoginCount] >= 2) {
+////            [[CurioSDK shared] sendEvent:@"EmailEmpty" eventValue:@"Enter"];
+////            [[CurioSDK shared] sendEvent:@"EmailConfirm" eventValue:@"ok"];
+////            [MPush hitTag:@"EmailEmpty" withValue:@"Enter"];
+////            [MPush hitTag:@"EmailConfirm" withValue:@"ok"];
+//            EmailEntryController *emailController = [[EmailEntryController alloc] init];
+//            MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:emailController];
+//            [self presentViewController:modalNav animated:YES completion:nil];
+//        } else if(APPDELEGATE.session.emailNotVerified && !APPDELEGATE.session.emailNotVerifiedMessageShown) {
+//            APPDELEGATE.session.emailNotVerifiedMessageShown = YES;
+//            [self showInfoAlertWithMessage:NSLocalizedString(@"EmailNotVerified", @"")];
+//        } else if([subscriptions count] > 0) {
+//            //TODO ilk subscription'a bakiyor, bu düzeltilecek
+//            currentSubscription = [subscriptions objectAtIndex:0];
+//            [self flowChartAdvertising];
+//            
+//            for(Subscription *subsc in subscriptions) {
+//                if(subsc.plan != nil && subsc.plan.cometOfferId != nil) {
+//                    if(subsc.plan.cometOfferId.intValue == 581814) {
+//                        [MPush hitTag:@"platin_user"];
+//                    }
+//                }
+//            }
+//            
+//            if(APPDELEGATE.session.user.accountType == AccountTypeTurkcell) {
+//                BOOL hasAnyTurkcellPackage = NO;
+//                for(Subscription *subscription in subscriptions) {
+//                    if(!subscription.type || !([subscription.type isEqualToString:@"INAPP_PURCHASE_GOOGLE"] || [subscription.type isEqualToString:@"INAPP_PURCHASE_APPLE"])) {
+//                        hasAnyTurkcellPackage = YES;
+//                    }
+//                }
+//                if(!hasAnyTurkcellPackage) {
+//                    if(![AppUtil readDoNotShowAgainFlagForKey:@"PORTIN_DONTSHOW_DEFAULTS_KEY"]) {
+//                        CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"TitleLater", @"") withApproveTitle:NSLocalizedString(@"TitleYes", @"") withMessage:NSLocalizedString(@"PortinInfoMessage", @"") withModalType:ModalTypeApprove shouldShowCheck:YES withCheckKey:@"PORTIN_DONTSHOW_DEFAULTS_KEY"];
+//                        confirm.delegate = self;
+//                        confirm.tag = 333;
+//                        [APPDELEGATE showCustomConfirm:confirm];
+//                    }
+//                }
+//            }
+//        }
+//    }
+//    int counter = 1;
+//    for(Subscription *subsc in subscriptions) {
+//        if(subsc.plan != nil && subsc.plan.displayName != nil) {
+//            NSString *tagName = [NSString stringWithFormat:@"user_package_%d", counter];
+//            [MPush hitTag:tagName withValue:subsc.plan.displayName];
+//            counter ++;
+//        }
+//    }
+//}
+
+//- (void) accountSuccessCallback:(NSArray *) subscriptions {
+//    if(![[NSUserDefaults standardUserDefaults] objectForKey:@"onKatViewFlag"]){
+//        if(APPDELEGATE.session.msisdnEmpty) {
+//            MsisdnEntryController *msisdnController = [[MsisdnEntryController alloc] init];
+//            MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:msisdnController];
+//            [self presentViewController:modalNav animated:YES completion:nil];
+//            
+//            //        [APPDELEGATE triggerLogout];
+//            //        [self showErrorAlertWithMessage:NSLocalizedString(@"MsisdnEmpty", @"")];
+//            //        return;
+//        }
+//        
+//        if(APPDELEGATE.session.emailEmpty && !APPDELEGATE.session.emailEmptyMessageShown && ![AppUtil readDoNotShowAgainFlagForKey:EMPTY_EMAIL_CONFIRM_KEY]) {
+//            APPDELEGATE.session.emailEmptyMessageShown = YES;
+//            CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"TitleLater", @"") withApproveTitle:NSLocalizedString(@"TitleYes", @"") withMessage:NSLocalizedString(@"EmailEmpty", @"") withModalType:ModalTypeApprove shouldShowCheck:YES withCheckKey:EMPTY_EMAIL_CONFIRM_KEY];
+//            confirm.delegate = self;
+//            confirm.tag = 111;
+//            [APPDELEGATE showCustomConfirm:confirm];
+//        } else if(APPDELEGATE.session.emailNotVerified && !APPDELEGATE.session.emailNotVerifiedMessageShown) {
+//            APPDELEGATE.session.emailNotVerifiedMessageShown = YES;
+//            [self showInfoAlertWithMessage:NSLocalizedString(@"EmailNotVerified", @"")];
+//        } else if([subscriptions count] > 0) {
+//            //TODO ilk subscription'a bakiyor, bu düzeltilecek
+//            currentSubscription = [subscriptions objectAtIndex:0];
+//            [self flowChartAdvertising];
+//            
+//            for(Subscription *subsc in subscriptions) {
+//                if(subsc.plan != nil && subsc.plan.cometOfferId != nil) {
+//                    if(subsc.plan.cometOfferId.intValue == 581814) {
+//                        [MPush hitTag:@"platin_user"];
+//                    }
+//                }
+//            }
+//            
+//            if(APPDELEGATE.session.user.accountType == AccountTypeTurkcell) {
+//                BOOL hasAnyTurkcellPackage = NO;
+//                for(Subscription *subscription in subscriptions) {
+//                    if(!subscription.type || !([subscription.type isEqualToString:@"INAPP_PURCHASE_GOOGLE"] || [subscription.type isEqualToString:@"INAPP_PURCHASE_APPLE"])) {
+//                        hasAnyTurkcellPackage = YES;
+//                    }
+//                }
+//                if(!hasAnyTurkcellPackage) {
+//                    if(![AppUtil readDoNotShowAgainFlagForKey:@"PORTIN_DONTSHOW_DEFAULTS_KEY"]) {
+//                        CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"TitleLater", @"") withApproveTitle:NSLocalizedString(@"TitleYes", @"") withMessage:NSLocalizedString(@"PortinInfoMessage", @"") withModalType:ModalTypeApprove shouldShowCheck:YES withCheckKey:@"PORTIN_DONTSHOW_DEFAULTS_KEY"];
+//                        confirm.delegate = self;
+//                        confirm.tag = 333;
+//                        [APPDELEGATE showCustomConfirm:confirm];
+//                    }
+//                }
+//            }
+//        }
+//    }
+//    int counter = 1;
+//    for(Subscription *subsc in subscriptions) {
+//        if(subsc.plan != nil && subsc.plan.displayName != nil) {
+//            NSString *tagName = [NSString stringWithFormat:@"user_package_%d", counter];
+//            [MPush hitTag:tagName withValue:subsc.plan.displayName];
+//            counter ++;
+//        }
+//    }
+//}
 
 #pragma mark FlowChart Actions
 

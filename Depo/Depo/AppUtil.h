@@ -80,4 +80,6 @@
 + (void) increaseVideofyTutorialCount;
 + (int) readVideofyTutorialCount;
 
++ (void) increaseLoginCount;
++ (int) readLoginCount;
 @end

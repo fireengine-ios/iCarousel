@@ -15,26 +15,30 @@
 #import "RenameDao.h"
 #import "ShareLinkDao.h"
 #import "CustomConfirmView.h"
+#import "ConfirmRemoveModalController.h"
+#import "AlbumRemovePhotosDao.h"
 
 @protocol VideoPreviewDelegate <NSObject>
 - (void) previewedVideoWasDeleted:(MetaFile *) deletedFile;
 @end
 
-@interface VideoPreviewController : MyViewController <CustomAVPlayerDelegate, CustomConfirmDelegate> {
+@interface VideoPreviewController : MyViewController <CustomAVPlayerDelegate, CustomConfirmDelegate, ConfirmRemoveDelegate> {
     CustomButton *moreButton;
     
     DeleteDao *deleteDao;
+    AlbumRemovePhotosDao *removeDao;
     FavoriteDao *favDao;
     RenameDao *renameDao;
     ShareLinkDao *shareDao;
-    BOOL refFromAlbumFlag;
+//    BOOL refFromAlbumFlag;
 }
 
 @property (nonatomic, weak) id<VideoPreviewDelegate> delegate;
 @property (nonatomic, strong) MetaFile *file;
+@property (nonatomic, strong) PhotoAlbum *album;
 @property (nonatomic, strong) CustomAVPlayer *avPlayer;
 
 - (id)initWithFile:(MetaFile *) _file;
-- (id)initWithFile:(MetaFile *) _file referencedFromAlbum:(BOOL) albumFlag;
+- (id)initWithFile:(MetaFile *) _file withAlbum:(PhotoAlbum*) _album;
 
 @end

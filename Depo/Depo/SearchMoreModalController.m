@@ -143,7 +143,7 @@
 - (void) loadMoreSuccessCallback:(NSArray *) files {
     [fileList addObjectsFromArray:files];
     isLoading = NO;
-    tableUpdateCounter++;
+//    tableUpdateCounter++;
     [searchResultsTable reloadData];
     
     [self hideLoading];
@@ -235,6 +235,7 @@
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (fileList.count <= indexPath.row) return;
     MetaFile *fileAtIndex = [fileList objectAtIndex:indexPath.row];
     
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];

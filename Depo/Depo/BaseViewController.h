@@ -42,6 +42,8 @@
 - (void) modifyAddButtonWithList:(NSArray *) addTypeList;
 - (void) dismissAddButton;
 - (void) showConfirmDelete;
+//TakingBack RemoveFromAlbum
+//- (void) showConfirmRemove;
 - (void) showSort;
 - (void) showSortWithList:(NSArray *) sortTypeList;
 - (void) showSelect;

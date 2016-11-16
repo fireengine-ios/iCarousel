@@ -22,6 +22,7 @@
 #import "CameraCaptureModalController.h"
 #import "NewAlbumModalController.h"
 #import "ConfirmDeleteModalController.h"
+#import "ConfirmRemoveModalController.h"
 #import "SortModalController.h"
 #import "MoveListModalController.h"
 #import "MusicListController.h"
@@ -557,10 +558,37 @@
 }
 
 - (void) triggerCapturaScreen {
-    CameraCaptureModalController *cameraController = [[CameraCaptureModalController alloc] init];
-    cameraController.modalDelegate = [self.nav topViewController];
-    [self presentViewController:cameraController animated:YES completion:nil];
+    
+    NSString *mediaType = AVMediaTypeVideo;
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:mediaType];
+    if(authStatus == AVAuthorizationStatusAuthorized) {
+        CameraCaptureModalController *cameraController = [[CameraCaptureModalController alloc] init];
+        cameraController.modalDelegate = [self.nav topViewController];
+        [self presentViewController:cameraController animated:YES completion:nil];
+    } else if(authStatus == AVAuthorizationStatusDenied){
+        CustomAlertView *alert = [[CustomAlertView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Error", @"") withMessage: NSLocalizedString(@"CameraAccessError", @"") withModalType:ModalTypeError];
+        [APPDELEGATE showCustomAlert:alert];
+    } else if(authStatus == AVAuthorizationStatusRestricted){
+        NSLog(@"RESTRICTED %@", mediaType);
+    } else if(authStatus == AVAuthorizationStatusNotDetermined){
+        [AVCaptureDevice requestAccessForMediaType:mediaType completionHandler:^(BOOL granted) {
+            if(granted){
+                NSLog(@"Granted access to %@", mediaType);
+                CameraCaptureModalController *cameraController = [[CameraCaptureModalController alloc] init];
+                cameraController.modalDelegate = [self.nav topViewController];
+                [self presentViewController:cameraController animated:YES completion:nil];
+            } else {
+                NSLog(@"Not granted access to %@", mediaType);
+            }
+        }];
+    }
 }
+
+//- (void) triggerCapturaScreen {
+//    CameraCaptureModalController *cameraController = [[CameraCaptureModalController alloc] init];
+//    cameraController.modalDelegate = [self.nav topViewController];
+//    [self presentViewController:cameraController animated:YES completion:nil];
+//}
 
 - (void) floatingMenuDidTriggerAddAlbum {
     [addButton immediateReset];
@@ -683,6 +711,14 @@
     MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:confirmDelete];
     [self presentViewController:modalNav animated:YES completion:nil];
 }
+
+//TakingBack RemoveFromAlbum
+//- (void) showConfirmRemove {
+//    ConfirmRemoveModalController *confirmRemove = [[ConfirmRemoveModalController alloc] init];
+//    confirmRemove.delegate = [self.nav topViewController];
+//    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:confirmRemove];
+//    [self presentViewController:modalNav animated:YES completion:nil];
+//}
 
 - (void) showSort {
     SortModalController *sort = [[SortModalController alloc] init];

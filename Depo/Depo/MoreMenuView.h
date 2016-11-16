@@ -16,6 +16,7 @@
 - (void) moreMenuDidSelectUnfav;
 - (void) moreMenuDidSelectShare;
 - (void) moreMenuDidSelectDelete;
+- (void) moreMenuDidSelectRemoveFromAlbum;
 - (void) moreMenuDidSelectVideoDetail;
 - (void) moreMenuDidSelectImageDetail;
 - (void) moreMenuDidSelectAlbumShare;

@@ -25,42 +25,49 @@
 @synthesize file;
 @synthesize files;
 @synthesize cursor;
+@synthesize album;
 
 - (id)initWithFile:(MetaFile *) _file {
-    return [self initWithFile:_file referencedFromAlbum:NO];
+    return [self initWithFile:_file withAlbum:nil];
 }
 
-- (id)initWithFile:(MetaFile *) _file referencedFromAlbum:(BOOL) srcAlbumFlag {
+- (id)initWithFile:(MetaFile *) _file withAlbum:(PhotoAlbum*) _album {
     self = [super init];
     if (self) {
         self.file = _file;
         self.title = self.file.visibleName;
         self.view.backgroundColor = [Util UIColorForHexColor:@"191e24"];
-        refFromAlbumFlag = srcAlbumFlag;
-
+        self.album = _album;
+        
         self.view.autoresizesSubviews = YES;
         self.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-
+        
         deleteDao = [[DeleteDao alloc] init];
         deleteDao.delegate = self;
         deleteDao.successMethod = @selector(deleteSuccessCallback);
         deleteDao.failMethod = @selector(deleteFailCallback:);
-
+        
+        //TakingBack RemoveFromAlbum
+//        removeDao = [[AlbumRemovePhotosDao alloc] init];
+//        removeDao.delegate = self;
+//        removeDao.successMethod = @selector(removeFromAlbumSuccessCallback);
+//        removeDao.failMethod = @selector(removeFromAlbumFailCallback:);
+        
         favDao = [[FavoriteDao alloc] init];
         favDao.delegate = self;
         favDao.successMethod = @selector(favSuccessCallback:);
         favDao.failMethod = @selector(favFailCallback:);
-
+        
         renameDao = [[RenameDao alloc] init];
         renameDao.delegate = self;
         renameDao.successMethod = @selector(renameSuccessCallback:);
         renameDao.failMethod = @selector(renameFailCallback:);
-
+        
         shareDao = [[ShareLinkDao alloc] init];
         shareDao.delegate = self;
         shareDao.successMethod = @selector(shareSuccessCallback:);
         shareDao.failMethod = @selector(shareFailCallback:);
-
+        
         mainScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex - 60)];
         mainScroll.delegate = self;
         mainScroll.maximumZoomScale = 5.0f;
@@ -80,21 +87,96 @@
             [weakSelf hideLoading];
         }];
         /*
-        [imgView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:imgUrlStr]] placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-            imgView.image = [UIImage imageWithCGImage:[image CGImage] scale:1.0 orientation: UIImageOrientationUp];
-        } failure:nil];
+         [imgView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:imgUrlStr]] placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+         imgView.image = [UIImage imageWithCGImage:[image CGImage] scale:1.0 orientation: UIImageOrientationUp];
+         } failure:nil];
          */
         [mainScroll addSubview:imgView];
         
-        footer = [[FileDetailFooter alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60)];
+        footer = [[FileDetailFooter alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60) withAlbum:self.album];
         footer.delegate = self;
         [self.view addSubview:footer];
-
+        
         [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(orientationChanged:)    name:UIDeviceOrientationDidChangeNotification  object:nil];
-
+        
     }
     return self;
 }
+
+//- (id)initWithFile:(MetaFile *) _file {
+//    return [self initWithFile:_file referencedFromAlbum:NO];
+//}
+
+//- (id)initWithFile:(MetaFile *) _file referencedFromAlbum:(BOOL) srcAlbumFlag {
+//    self = [super init];
+//    if (self) {
+//        self.file = _file;
+//        self.title = self.file.visibleName;
+//        self.view.backgroundColor = [Util UIColorForHexColor:@"191e24"];
+//        refFromAlbumFlag = srcAlbumFlag;
+//
+//        self.view.autoresizesSubviews = YES;
+//        self.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+//
+//        deleteDao = [[DeleteDao alloc] init];
+//        deleteDao.delegate = self;
+//        deleteDao.successMethod = @selector(deleteSuccessCallback);
+//        deleteDao.failMethod = @selector(deleteFailCallback:);
+//        
+//        removeFromAlbumDao = [[AlbumRemovePhotosDao alloc] init];
+//        removeFromAlbumDao.delegate = self;
+//        removeFromAlbumDao.successMethod = @selector(removeFromAlbumSuccessCallback);
+//        removeFromAlbumDao.failMethod = @selector(removeFromAlbumFailCallback:);
+//
+//        favDao = [[FavoriteDao alloc] init];
+//        favDao.delegate = self;
+//        favDao.successMethod = @selector(favSuccessCallback:);
+//        favDao.failMethod = @selector(favFailCallback:);
+//
+//        renameDao = [[RenameDao alloc] init];
+//        renameDao.delegate = self;
+//        renameDao.successMethod = @selector(renameSuccessCallback:);
+//        renameDao.failMethod = @selector(renameFailCallback:);
+//
+//        shareDao = [[ShareLinkDao alloc] init];
+//        shareDao.delegate = self;
+//        shareDao.successMethod = @selector(shareSuccessCallback:);
+//        shareDao.failMethod = @selector(shareFailCallback:);
+//
+//        mainScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex - 60)];
+//        mainScroll.delegate = self;
+//        mainScroll.maximumZoomScale = 5.0f;
+//        [self.view addSubview:mainScroll];
+//        
+//        imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, mainScroll.frame.size.width, mainScroll.frame.size.height)];
+//        imgView.contentMode = UIViewContentModeScaleAspectFit;
+//        NSString *imgUrlStr = [self.file.tempDownloadUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//        if(self.file.detail && self.file.detail.thumbLargeUrl) {
+//            imgUrlStr = [self.file.detail.thumbLargeUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//        }
+//        [self showLoading];
+//        __weak ImagePreviewController *weakSelf = self;
+//        [imgView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:imgUrlStr]] placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+//            [weakSelf hideLoading];
+//        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+//            [weakSelf hideLoading];
+//        }];
+//        /*
+//        [imgView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:imgUrlStr]] placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+//            imgView.image = [UIImage imageWithCGImage:[image CGImage] scale:1.0 orientation: UIImageOrientationUp];
+//        } failure:nil];
+//         */
+//        [mainScroll addSubview:imgView];
+//        
+//        footer = [[FileDetailFooter alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60)];
+//        footer.delegate = self;
+//        [self.view addSubview:footer];
+//
+//        [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(orientationChanged:)    name:UIDeviceOrientationDidChangeNotification  object:nil];
+//
+//    }
+//    return self;
+//}
 
 - (id) initWithFiles:(NSArray *)_files withImage:(MetaFile *)_file withListOffset:(int)offset {
     return [self initWithFiles:_files withImage:_file withListOffset:offset printEnabled:YES];
@@ -168,7 +250,7 @@
          */
         [mainScroll addSubview:imgView];
         
-        footer = [[FileDetailFooter alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60)withPrintEnabled:printEnabledFlag];
+        footer = [[FileDetailFooter alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60)withPrintEnabled:printEnabledFlag withAlbum:self.album];
         footer.delegate = self;
         [self.view addSubview:footer];
         
@@ -286,7 +368,7 @@
 
 - (void) dynamicallyLoadNextPage {
     listOffSet ++;
-    [elasticSearchDao requestPhotosForPage:listOffSet andSize:21 andSortType:APPDELEGATE.session.sortType];
+    [elasticSearchDao requestPhotosAndVideosForPage:listOffSet andSize:21 andSortType:APPDELEGATE.session.sortType];
 }
 
 - (void) photoListSuccessCallback:(NSArray *) moreFiles {
@@ -315,6 +397,17 @@
     }
 }
 
+- (void) fileDetailFooterDidTriggerRemoveFromAlbum {
+    if([CacheUtil showConfirmDeletePageFlag]) {
+        [self confirmRemoveDidConfirm];
+    } else {
+        ConfirmRemoveModalController *confirmRemove = [[ConfirmRemoveModalController alloc] init];
+        confirmRemove.delegate = self;
+        MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:confirmRemove];
+        [self presentViewController:modalNav animated:YES completion:nil];
+    }
+}
+
 - (void) fileDetailFooterDidTriggerShare {
     [self triggerShareForFiles:@[self.file.uuid]];
 }
@@ -332,7 +425,12 @@
 }
 
 - (void) moreClicked {
-    [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeImageDetail], [NSNumber numberWithInt:MoreMenuTypeShare], self.file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDownloadImage], [NSNumber numberWithInt:MoreMenuTypeDelete]] withFileFolder:self.file];
+    NSArray* list = @[[NSNumber numberWithInt:MoreMenuTypeImageDetail], [NSNumber numberWithInt:MoreMenuTypeShare], self.file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDownloadImage], [NSNumber numberWithInt:MoreMenuTypeDelete]] ;
+    //TakingBack RemoveFromAlbum
+//    if (self.album) {
+//        list = @[[NSNumber numberWithInt:MoreMenuTypeImageDetail], [NSNumber numberWithInt:MoreMenuTypeShare], self.file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDownloadImage], [NSNumber numberWithInt:MoreMenuTypeRemoveFromAlbum], [NSNumber numberWithInt:MoreMenuTypeDelete]] ;
+//    }
+    [self presentMoreMenuWithList:list withFileFolder:self.file];
 }
 
 - (void) deleteSuccessCallback {
@@ -342,6 +440,17 @@
 }
 
 - (void) deleteFailCallback:(NSString *) errorMessage {
+    [self proceedFailureForProgressView];
+    [self showErrorAlertWithMessage:errorMessage];
+}
+
+- (void) removeFromAlbumSuccessCallback {
+    [self proceedSuccessForProgressView];
+    [delegate previewedImageWasDeleted:self.file];
+    [self performSelector:@selector(postDelete) withObject:nil afterDelay:1.0f];
+}
+
+- (void) removeFromAlbumFailCallback:(NSString *) errorMessage {
     [self proceedFailureForProgressView];
     [self showErrorAlertWithMessage:errorMessage];
 }
@@ -399,6 +508,17 @@
     }
 }
 
+- (void) moreMenuDidSelectRemoveFromAlbum {
+    if([CacheUtil showConfirmDeletePageFlag]) {
+        [self confirmRemoveDidConfirm];
+    } else {
+        ConfirmRemoveModalController *confirmRemove = [[ConfirmRemoveModalController alloc] init];
+        confirmRemove.delegate = self;
+        MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:confirmRemove];
+        [self presentViewController:modalNav animated:YES completion:nil];
+    }
+}
+
 - (void) moreMenuDidSelectFav {
     [favDao requestMetadataForFiles:@[self.file.uuid] shouldFavorite:YES];
     [self pushProgressViewWithProcessMessage:NSLocalizedString(@"FavAddProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"FavAddSuccessMessage", @"") andFailMessage:NSLocalizedString(@"FavAddFailMessage", @"")];
@@ -439,8 +559,9 @@
 - (void) confirmDeleteDidCancel {
 }
 
+
 - (void) confirmDeleteDidConfirm {
-    if(self.file.addedAlbumUuids != nil && [self.file.addedAlbumUuids count] > 0 && !refFromAlbumFlag) {
+    if(self.file.addedAlbumUuids != nil && [self.file.addedAlbumUuids count] > 0 && !self.album) {
         CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"ButtonCancel", @"") withApproveTitle:NSLocalizedString(@"OK", @"") withMessage:NSLocalizedString(@"DeleteFileInAlbumAlert", @"") withModalType:ModalTypeApprove];
         confirm.delegate = self;
         [APPDELEGATE showCustomConfirm:confirm];
@@ -449,6 +570,26 @@
         [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
     }
 }
+
+- (void) confirmRemoveDidCancel {
+}
+
+
+- (void) confirmRemoveDidConfirm {
+    [removeDao requestRemovePhotos:@[self.file.uuid] fromAlbum:self.album.uuid];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"RemoveProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"RemoveSuccessMessage", @"") andFailMessage:NSLocalizedString(@"RemoveFailMessage", @"")];
+}
+
+//- (void) confirmDeleteDidConfirm {
+//    if(self.file.addedAlbumUuids != nil && [self.file.addedAlbumUuids count] > 0 && !refFromAlbumFlag) {
+//        CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"ButtonCancel", @"") withApproveTitle:NSLocalizedString(@"OK", @"") withMessage:NSLocalizedString(@"DeleteFileInAlbumAlert", @"") withModalType:ModalTypeApprove];
+//        confirm.delegate = self;
+//        [APPDELEGATE showCustomConfirm:confirm];
+//    } else {
+//        [deleteDao requestDeleteFiles:@[self.file.uuid]];
+//        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+//    }
+//}
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];

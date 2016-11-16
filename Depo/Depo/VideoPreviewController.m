@@ -20,27 +20,34 @@
 @synthesize delegate;
 @synthesize file;
 @synthesize avPlayer;
+@synthesize album;
 
 - (id)initWithFile:(MetaFile *) _file  {
-    return [self initWithFile:_file referencedFromAlbum:NO];
+    return [self initWithFile:_file withAlbum:nil];
 }
 
-- (id)initWithFile:(MetaFile *) _file referencedFromAlbum:(BOOL) albumFlag {
+- (id)initWithFile:(MetaFile *) _file withAlbum:(PhotoAlbum*) _album {
     self = [super init];
     if (self) {
         self.view.backgroundColor = [UIColor blackColor];
         
         self.view.autoresizesSubviews = YES;
         self.view.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
-
+        
         self.file = _file;
         self.title = self.file.visibleName;
-        refFromAlbumFlag = albumFlag;
+        self.album = _album;
         
         deleteDao = [[DeleteDao alloc] init];
         deleteDao.delegate = self;
         deleteDao.successMethod = @selector(deleteSuccessCallback);
         deleteDao.failMethod = @selector(deleteFailCallback:);
+
+        //TakingBack RemoveFromAlbum
+//        removeDao = [[AlbumRemovePhotosDao alloc] init];
+//        removeDao.delegate = self;
+//        removeDao.successMethod = @selector(removeFromAlbumSuccessCallback);
+//        removeDao.failMethod = @selector(removeFromAlbumFailCallback:);
         
         favDao = [[FavoriteDao alloc] init];
         favDao.delegate = self;
@@ -51,24 +58,75 @@
         renameDao.delegate = self;
         renameDao.successMethod = @selector(renameSuccessCallback:);
         renameDao.failMethod = @selector(renameFailCallback:);
-
+        
         shareDao = [[ShareLinkDao alloc] init];
         shareDao.delegate = self;
         shareDao.successMethod = @selector(shareSuccessCallback:);
         shareDao.failMethod = @selector(shareFailCallback:);
-
+        
         avPlayer = [[CustomAVPlayer alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.topIndex) withVideo:self.file];
         avPlayer.delegate = self;
         [self.view addSubview:avPlayer];
         avPlayer.autoresizesSubviews = YES;
         avPlayer.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
-
+        
     }
     return self;
 }
 
+//- (id)initWithFile:(MetaFile *) _file  {
+//    return [self initWithFile:_file referencedFromAlbum:NO];
+//}
+//
+//- (id)initWithFile:(MetaFile *) _file referencedFromAlbum:(BOOL) albumFlag {
+//    self = [super init];
+//    if (self) {
+//        self.view.backgroundColor = [UIColor blackColor];
+//        
+//        self.view.autoresizesSubviews = YES;
+//        self.view.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
+//
+//        self.file = _file;
+//        self.title = self.file.visibleName;
+//        refFromAlbumFlag = albumFlag;
+//        
+//        deleteDao = [[DeleteDao alloc] init];
+//        deleteDao.delegate = self;
+//        deleteDao.successMethod = @selector(deleteSuccessCallback);
+//        deleteDao.failMethod = @selector(deleteFailCallback:);
+//        
+//        favDao = [[FavoriteDao alloc] init];
+//        favDao.delegate = self;
+//        favDao.successMethod = @selector(favSuccessCallback:);
+//        favDao.failMethod = @selector(favFailCallback:);
+//        
+//        renameDao = [[RenameDao alloc] init];
+//        renameDao.delegate = self;
+//        renameDao.successMethod = @selector(renameSuccessCallback:);
+//        renameDao.failMethod = @selector(renameFailCallback:);
+//
+//        shareDao = [[ShareLinkDao alloc] init];
+//        shareDao.delegate = self;
+//        shareDao.successMethod = @selector(shareSuccessCallback:);
+//        shareDao.failMethod = @selector(shareFailCallback:);
+//
+//        avPlayer = [[CustomAVPlayer alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.topIndex) withVideo:self.file];
+//        avPlayer.delegate = self;
+//        [self.view addSubview:avPlayer];
+//        avPlayer.autoresizesSubviews = YES;
+//        avPlayer.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
+//
+//    }
+//    return self;
+//}
+
 - (void) moreClicked {
-    [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeVideoDetail], [NSNumber numberWithInt:MoreMenuTypeShare], self.file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDownloadImage], [NSNumber numberWithInt:MoreMenuTypeDelete]] withFileFolder:self.file];
+    NSArray* list = @[[NSNumber numberWithInt:MoreMenuTypeVideoDetail], [NSNumber numberWithInt:MoreMenuTypeShare], self.file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDownloadImage], [NSNumber numberWithInt:MoreMenuTypeDelete]];
+    //TakingBack RemoveFromAlbum
+//    if (self.album) {
+//        list = @[[NSNumber numberWithInt:MoreMenuTypeVideoDetail], [NSNumber numberWithInt:MoreMenuTypeShare], self.file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDownloadImage], [NSNumber numberWithInt:MoreMenuTypeRemoveFromAlbum], [NSNumber numberWithInt:MoreMenuTypeDelete]] ;
+//    }
+    [self presentMoreMenuWithList:list withFileFolder:self.file];
 }
 
 - (void) deleteSuccessCallback {
@@ -78,6 +136,17 @@
 }
 
 - (void) deleteFailCallback:(NSString *) errorMessage {
+    [self proceedFailureForProgressView];
+    [self showErrorAlertWithMessage:errorMessage];
+}
+
+- (void) removeFromAlbumSuccessCallback {
+    [self proceedSuccessForProgressView];
+    [delegate previewedVideoWasDeleted:self.file];
+    [self performSelector:@selector(postDelete) withObject:nil afterDelay:1.0f];
+}
+
+- (void) removeFromAlbumFailCallback:(NSString *) errorMessage {
     [self proceedFailureForProgressView];
     [self showErrorAlertWithMessage:errorMessage];
 }
@@ -136,6 +205,26 @@
         MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:confirmDelete];
         [self presentViewController:modalNav animated:YES completion:nil];
     }
+}
+
+- (void) moreMenuDidSelectRemoveFromAlbum {
+    if([CacheUtil showConfirmDeletePageFlag]) {
+        [self confirmRemoveDidConfirm];
+    } else {
+        ConfirmRemoveModalController *confirmRemove = [[ConfirmRemoveModalController alloc] init];
+        confirmRemove.delegate = self;
+        MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:confirmRemove];
+        [self presentViewController:modalNav animated:YES completion:nil];
+    }
+}
+
+- (void) confirmRemoveDidCancel {
+}
+
+
+- (void) confirmRemoveDidConfirm {
+    [removeDao requestRemovePhotos:@[self.file.uuid] fromAlbum:self.album.uuid];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"RemoveProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"RemoveSuccessMessage", @"") andFailMessage:NSLocalizedString(@"RemoveFailMessage", @"")];
 }
 
 - (void) moreMenuDidSelectFav {
@@ -207,7 +296,7 @@
 }
 
 - (void) confirmDeleteDidConfirm {
-    if(self.file.addedAlbumUuids != nil && [self.file.addedAlbumUuids count] > 0 && !refFromAlbumFlag) {
+    if(self.file.addedAlbumUuids != nil && [self.file.addedAlbumUuids count] > 0 && !self.album) {
         CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"ButtonCancel", @"") withApproveTitle:NSLocalizedString(@"OK", @"") withMessage:NSLocalizedString(@"DeleteFileInAlbumAlert", @"") withModalType:ModalTypeApprove];
         confirm.delegate = self;
         [APPDELEGATE showCustomConfirm:confirm];

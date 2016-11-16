@@ -49,6 +49,9 @@
 "MoreMenuDeleteTitleMusic"="Müziği Sil";
 "MoreMenuDeleteTitleOther"="Dosyayı Sil";
 "MoreMenuDeleteTitleAlbum"="Albümü Sil";
+"MoreMenuRemoveTitleImg" = "Fotoğrafı Albümden Çıkar";
+"MoreMenuRemoveTitleVideo" = "Videoyu Albümden Çıkar";
+"MoreMenuRemoveTitleOther"="Dosyayı Albümden Çıkar";
 "MoreMenuDownloadImageTitle"="Telefona İndir";
 "FolderSubTitle"="%d dosya";
 "FolderEmptyMessage"="%@ boş";
@@ -89,6 +92,9 @@
 "MessageDontShowAgainCheck"="Bir daha gösterme";
 "TitleNo"="Hayır";
 "TitleYes"="Evet";
+"ConfirmRemoveTitle"="Albümden Çıkarmayı Onayla";
+"ConfirmRemoveMessage"="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi";
+"ConfirmRemoveQuestion"="Çıkarmak istediğinize emin misiniz?";
 "FavAddProgressMessage"="Favorilere Ekleniyor";
 "FavAddSuccessMessage"="Favorilere başarıyla eklendi";
 "FavAddFailMessage"="Favorilere eklenirken hata oluştu";
@@ -98,6 +104,9 @@
 "DeleteProgressMessage"="Dosya(lar) siliniyor";
 "DeleteSuccessMessage"="Dosya(lar) silindi";
 "DeleteFailMessage"="Dosya(lar) silinirken hata oluştu";
+"RemoveProgressMessage"="Dosya(lar) çıkarılıyor";
+"RemoveSuccessMessage"="Dosya(lar) çıkarıldı";
+"RemoveFailMessage"="Dosya(lar) çıkarılırken hata oluştu";
 "SortTitle"="Sırala";
 "ApplyTitle"="Uygula";
 "SortTypeAlphaAscTitle"="İsim (A-Z)";
@@ -296,6 +305,7 @@
 "RenewalDateInfo"="Yenileme tarihi: %@";
 "CancelSubscription"="İptal";
 "CancelSubscriptionInfo"="İptal etmek için \"Iptal %@\" yazıp 2222'ye kısa mesaj gönderebilirsiniz.";
+"CancelSubscriptionInfoForKKTCell"="Platinum ve lifecell kullanıcılarımız LIFE IPTAL yazıp, tekil paket kullanıcılarımız ise LIFEBOX IPTAL yazıp 3030'a SMS göndererek paketlerini iptal edebilirler.";
 "UpgradeOptionsTitle"="Paket Seçenekleri";
 "Month"="Ay";
 "ActivateOfferSuccess"="Paket talebiniz alınmıştır, paketiniz aktiflendiğinde SMS ile bilgilendirileceksiniz.";
@@ -644,7 +654,7 @@
 "PasswordSettingsTitle"="Şifre";
 "PasswordChangeTitle"="Şifre Değiştir";
 
-"EmailConfirmUpdate"="GÜNCELLE";
+"EmailConfirmUpdate"="İPTAL";
 "EmailConfirmContinue"="ONAYLIYORUM";
 "EmailConfirmMessage"="Kayıt işleminizi %@ mail adresinizle tamamlıyorsunuz. Şifre işlemleri ve bilgilendirmeler için vermiş olduğunuz mail adresi kullanılacaktır.";
 
@@ -785,3 +795,4 @@
 "IAgree"="ONAYLIYORUM";
 "FileDetailUploadDate"="Yükleme Tarihi";
 "FileDetailCreateDate"="Çekim Tarihi";
+"CameraAccessError"="Kameraya erişilemiyor. Lütfen telefon ayarlarınızı kontrol ediniz.";

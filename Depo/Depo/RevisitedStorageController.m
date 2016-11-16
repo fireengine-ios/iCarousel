@@ -471,9 +471,15 @@
     } else if([sRef.type isEqualToString:@"INAPP_PURCHASE_GOOGLE"]) {
         contentText = NSLocalizedString(@"CancelSubscriptionInfoGoogle", @"");
     } else {
-        NSString *nameForSms = [AppUtil getPackageNameForSms:sRef.plan.role];
-        if (![nameForSms isEqualToString:@""]) {
-            contentText = [NSString stringWithFormat:NSLocalizedString(@"CancelSubscriptionInfo", @""), nameForSms];
+        NSRange range = [sRef.plan.role rangeOfString:@"kktcell" options:NSCaseInsensitiveSearch];
+        if (range.length == -1) {
+            NSString *nameForSms = [AppUtil getPackageNameForSms:sRef.plan.role];
+            if (![nameForSms isEqualToString:@""]) {
+                contentText = [NSString stringWithFormat:NSLocalizedString(@"CancelSubscriptionInfo", @""), nameForSms];
+            }
+        }
+        else {
+            contentText = NSLocalizedString(@"CancelSubscriptionInfoForKKTCell", @"");
         }
     }
     [self showInfoAlertWithMessage:contentText];

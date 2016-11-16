@@ -67,6 +67,9 @@
             if([subscription.plan.type isEqualToString:@"LIFECELL"]) {
                 linkTitle = @"lifecell.com.ua";
             }
+            else if([subscription.plan.type isEqualToString:@"KKTCELL"]) {
+                linkTitle = @"";
+            }
             if(subscription.type) {
                 if([subscription.type isEqualToString:@"INAPP_PURCHASE_GOOGLE"]) {
                     linkTitle = @"googleplay";

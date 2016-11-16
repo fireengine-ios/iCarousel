@@ -781,6 +781,7 @@
 		24FE7B0B1B6A539D007B53A0 /* PrintWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24FE7B0A1B6A539D007B53A0 /* PrintWebViewController.m */; };
 		24FE7B0E1B6A5A98007B53A0 /* white_print_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 24FE7B0C1B6A5A98007B53A0 /* white_print_icon.png */; };
 		24FE7B0F1B6A5A98007B53A0 /* white_print_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24FE7B0D1B6A5A98007B53A0 /* white_print_icon@2x.png */; };
+		5247D5E71DD342B900FFE63E /* ConfirmRemoveModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D5E61DD342B900FFE63E /* ConfirmRemoveModalController.m */; };
 		563FB1BD1AA5EB030066F8E6 /* settings_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 563FB1BB1AA5EB030066F8E6 /* settings_icon.png */; };
 		563FB1BE1AA5EB030066F8E6 /* settings_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 563FB1BC1AA5EB030066F8E6 /* settings_icon@2x.png */; };
 		563FB1C11AA5EC990066F8E6 /* circle_welcome_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 563FB1BF1AA5EC990066F8E6 /* circle_welcome_icon.png */; };
@@ -2242,6 +2243,8 @@
 		24FE7B0A1B6A539D007B53A0 /* PrintWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrintWebViewController.m; sourceTree = "<group>"; };
 		24FE7B0C1B6A5A98007B53A0 /* white_print_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white_print_icon.png; sourceTree = "<group>"; };
 		24FE7B0D1B6A5A98007B53A0 /* white_print_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "white_print_icon@2x.png"; sourceTree = "<group>"; };
+		5247D5E51DD342B900FFE63E /* ConfirmRemoveModalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmRemoveModalController.h; sourceTree = "<group>"; };
+		5247D5E61DD342B900FFE63E /* ConfirmRemoveModalController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmRemoveModalController.m; sourceTree = "<group>"; };
 		563FB1BB1AA5EB030066F8E6 /* settings_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings_icon.png; sourceTree = "<group>"; };
 		563FB1BC1AA5EB030066F8E6 /* settings_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings_icon@2x.png"; sourceTree = "<group>"; };
 		563FB1BF1AA5EC990066F8E6 /* circle_welcome_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle_welcome_icon.png; sourceTree = "<group>"; };
@@ -2908,6 +2911,8 @@
 				05BCA2F419EE5CD900AF2FE2 /* NewAlbumModalController.m */,
 				0555EF1819F8F50B0068F4CC /* ConfirmDeleteModalController.h */,
 				0555EF1919F8F50B0068F4CC /* ConfirmDeleteModalController.m */,
+				5247D5E51DD342B900FFE63E /* ConfirmRemoveModalController.h */,
+				5247D5E61DD342B900FFE63E /* ConfirmRemoveModalController.m */,
 				05C2442E1A023F5C000D65D0 /* SortModalController.h */,
 				05C2442F1A023F5C000D65D0 /* SortModalController.m */,
 				05836FC91A05703A001D7346 /* MoveListModalController.h */,
@@ -4615,7 +4620,7 @@
 				ORGANIZATIONNAME = com.igones;
 				TargetAttributes = {
 					051E1DF219CAC2F900FD1E03 = {
-						DevelopmentTeam = AQ3G89KT47;
+						DevelopmentTeam = DB3TU6GTY2;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -4636,7 +4641,7 @@
 					};
 					05C3A3781B57DFAB002AB49A = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = AQ3G89KT47;
+						DevelopmentTeam = DB3TU6GTY2;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -4645,7 +4650,7 @@
 					};
 					05C850A01ACD63F700F976DE = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = AQ3G89KT47;
+						DevelopmentTeam = DB3TU6GTY2;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -5762,6 +5767,7 @@
 				05E8113519DF10340063F99A /* RefAlbumCell.m in Sources */,
 				05DEB1EA1A81775F007793DD /* ContactDevice.m in Sources */,
 				94DCA10C1D3D8F67000965AE /* TaggedFileListDao.m in Sources */,
+				5247D5E71DD342B900FFE63E /* ConfirmRemoveModalController.m in Sources */,
 				94B3BE2F1D81F7C40086D05E /* FaqUrlDao.m in Sources */,
 				05DEB1EC1A81775F007793DD /* ContactUtil.m in Sources */,
 				050D4C2F1A31E12F00809A01 /* PostLoginSyncPrefController.m in Sources */,
@@ -5938,8 +5944,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Mahir Kemal Tarlan (R2478SCTN5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mahir Kemal Tarlan (R2478SCTN5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5965,9 +5971,9 @@
 					"-ObjC",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.igones.deponew;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rdc.lifebox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ce83ac0b-ee03-4058-a10a-63f46f13d14c";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -6002,7 +6008,7 @@
 					"-ObjC",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.igones.deponew;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rdc.lifebox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -6093,7 +6099,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "Depo/Depo-AppStore.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6114,9 +6120,9 @@
 					"-ObjC",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rdc.lifebox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c7326830-eaca-4f1e-9bbb-765e70c0d2fc";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -6180,7 +6186,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "Depo/Depo-Enterprise.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -6202,9 +6208,9 @@
 					"-ObjC",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rdc.lifebox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3d2683f7-410b-4d3d-82ee-4404d6095878";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -6250,9 +6256,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.igones.deponew.DepoShareExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rdc.lifebox.DepoShareExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6b1577bd-ac26-4f8f-b015-d139301132e0";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -6276,7 +6282,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.igones.deponew.DepoShareExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rdc.lifebox.DepoShareExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
@@ -6290,8 +6296,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = "DepoShareExtension/DepoShareExtension-AppStore.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
@@ -6302,9 +6308,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.shareextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rdc.lifebox.DepoShareExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e9952454-e231-4aec-bcde-c65838f462c5";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = AppStore;
@@ -6316,8 +6322,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = "DepoShareExtension/DepoShareExtension-Enterprise.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
@@ -6328,9 +6334,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent.shareextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rdc.lifebox.DepoShareExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "28015523-0160-4d5a-a6fe-ca542c23e12a";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Enterprise;
@@ -6351,9 +6357,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.igones.deponew.AutoSyncWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rdc.lifebox.AutoSyncWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a44b1e90-6b98-4066-8ce7-da6f43af3de8";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -6375,9 +6381,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.igones.deponew.AutoSyncWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rdc.lifebox.AutoSyncWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a44b1e90-6b98-4066-8ce7-da6f43af3de8";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -6389,8 +6395,8 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = "AutoSyncWidget/AutoSyncWidget-AppStore.entitlements";
 				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]" = "AutoSyncWidget/AutoSyncWidget-AppStore.entitlements";
-				CODE_SIGN_IDENTITY = " iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = " iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -6399,9 +6405,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.todayextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rdc.lifebox.AutoSyncWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e19f8959-ec7f-4af7-851b-b8c39fc8de90";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -6413,8 +6419,8 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = AutoSyncWidget/AutoSyncWidget.entitlements;
 				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]" = "AutoSyncWidget/AutoSyncWidget-Enterprise.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -6423,9 +6429,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent.todayextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rdc.lifebox.AutoSyncWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d508c49a-e11e-4c93-b749-190ea8e720d2";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

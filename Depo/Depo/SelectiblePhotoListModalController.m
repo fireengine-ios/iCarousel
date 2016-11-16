@@ -73,6 +73,16 @@
     [self hideLoading];
     
     int counter = (int)[photoList count];
+
+//    int imagePerLine = 3;
+////    float imageWidth = 100;
+//    float interImageMargin = 0;
+//    float imageWidth = (self.view.frame.size.width - interImageMargin*(imagePerLine+1))/imagePerLine;
+//    
+//    if(IS_IPAD) {
+//        imagePerLine = 5;
+//        imageWidth = (self.view.frame.size.width - interImageMargin*(imagePerLine+1))/imagePerLine;
+//    }
     
     int imagePerLine = 3;
     
@@ -90,6 +100,8 @@
         CGRect imgRect = CGRectMake(interImageMargin + (counter%imagePerLine * imageTotalWidth), 35 + ((int)floor(counter/imagePerLine)*imageTotalWidth), imageWidth, imageWidth);
         SquareImageView *imgView = [[SquareImageView alloc] initFinalWithFrame:imgRect withFile:row withSelectibleStatus:YES];
         imgView.delegate = self;
+//        imgView.layer.shouldRasterize = YES;
+//        imgView.layer.rasterizationScale = [UIScreen mainScreen].scale;
         [photosScroll addSubview:imgView];
         counter ++;
     }
@@ -158,7 +170,7 @@
         if (currentOffset - maximumOffset >= 0.0) {
             isLoading = YES;
             listOffset ++;
-            [elasticSearchDao requestPhotosForPage:listOffset andSize:IS_IPAD ? 30 : 21 andSortType:APPDELEGATE.session.sortType];
+            [elasticSearchDao requestPhotosAndVideosForPage:listOffset andSize:IS_IPAD ? 30 : 21 andSortType:APPDELEGATE.session.sortType];
         }
     }
 }
