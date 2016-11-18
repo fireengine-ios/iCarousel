@@ -196,7 +196,7 @@
     
     [dup enumerateObjectsUsingBlock:^(CurioEventData *obj, NSUInteger idx, BOOL *stop) {
         
-        [self endEvent:obj.eventValue eventValue:obj.eventValue eventDuration:[obj.eventDuration integerValue]];
+        [self endEvent:obj.eventKey eventValue:obj.eventValue eventDuration:[obj.eventDuration integerValue]];
         
     }];
     
@@ -376,6 +376,8 @@
             
             NSString *hitCode = [[CurioUtil shared] uuidRandom];
             
+            
+            
             NSString *eventKeyAndValue = [actionSendEvent.properties objectForKey:CS_CUSTOM_VAR_EVENTCLASS];
             CS_Log_Info(@"Created hit code %@ for screen %@ when periodicDispatchEnabled or the client is offline.",hitCode,eventKeyAndValue);
             
@@ -445,6 +447,9 @@
             CS_Log_Info(@"Created hit code %@ for screen %@ when periodicDispatchEnabled or the client is offline.",hitCode,screenKey);
             
             [_memoryStore setObject:hitCode forKey:[NSString stringWithFormat:@"HC%@",screenClassName]];
+            
+            
+            
             actionStartScreen.hitCode = hitCode;
         }
         
@@ -460,7 +465,6 @@
     }];
 
 }
-
 
 - (void) startScreen:(Class) screenClass title:(NSString *) title path:(NSString *) path {
 
@@ -713,7 +717,7 @@ maxValidLocationTimeInterval:(double)maxValidLocationTimeInterval
 
 #pragma mark - Unregister and CustomID set observers
 
-- (void)unregisterFromNotificationServerNotified:(NSNotification *)notification {
+- (void)unregisterFromNotificationServerNotified:(NSNotification *)notification __TVOS_UNAVAILABLE {
     __weak CurioSDK *weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
         if ([weakSelf.delegate respondsToSelector:@selector(unregisteredFromNotificationServer:)]) {
@@ -722,13 +726,81 @@ maxValidLocationTimeInterval:(double)maxValidLocationTimeInterval
     });
 }
 
-- (void)customIDSetNotified:(NSNotification *)notification {
+- (void)customIDSetNotified:(NSNotification *)notification __TVOS_UNAVAILABLE {
     __weak CurioSDK *weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
         if ([weakSelf.delegate respondsToSelector:@selector(customIDSent:)]) {
             [weakSelf.delegate customIDSent:notification.userInfo];
         }
     });
+}
+
+-(void)sendUserTags:(NSDictionary *)tags {
+    
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:tags
+                                                       options:0
+                                                         error:&error];
+    NSString *jsonString;
+    if (error) {
+        CS_Log_Warning(@"Creating user tags dictionary failed: %@", [error description]);
+        return;
+    }else {
+         jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    }
+    
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        
+        NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                [[CurioUtil shared] vendorIdentifier], CURHttpParamVisitorCode,
+                                [[CurioSettings shared] trackingCode], CURHttpParamTrackingCode,
+                                [[CurioSDK shared] sessionCode], CURKeySessionCode,
+                                jsonString, CURKeyUserTags,
+                                nil];
+        
+        [[CurioPostOffice shared] postRequestResultWithParameters:params suffix:CS_SERVER_URL_SUFFIX_SET_USER_TAGS success:^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                CS_Log_Info(@"User tags sent");
+
+            });
+        } failure:^(NSError *error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                CS_Log_Warning(@"Error sending user tags: %@", [error description]);
+                
+            });
+        }];
+        
+        
+    });
+    
+}
+
+-(void)getUserTagsWithSuccess:(void(^)(NSDictionary *responseObject))success
+                      failure:(void(^)(NSError *error))failure {
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        
+        NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    [[CurioUtil shared] vendorIdentifier], CURHttpParamVisitorCode,
+                                    [[CurioSettings shared] trackingCode], CURHttpParamTrackingCode,
+                                    [[CurioSDK shared] sessionCode], CURKeySessionCode,
+                                    nil];
+        
+        [[CurioPostOffice shared] postRequestWithParameters:parameters suffix:CS_SERVER_URL_SUFFIX_GET_USER_TAGS success:^(id responseObject) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                success(responseObject);
+                
+            });
+        } failure:^(NSError *error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                failure(error);
+                
+            });
+        }];
+    });
+    
+    
 }
 
 @end

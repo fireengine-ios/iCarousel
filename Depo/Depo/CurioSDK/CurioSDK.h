@@ -17,7 +17,7 @@
 #endif
 
 
-#define CURIO_SDK_VERSION @"1.2.1"
+#define CURIO_SDK_VERSION @"1.2.4"
 
 // Notification names
 
@@ -64,6 +64,8 @@
 #define CS_SERVER_URL_SUFFIX_LOCATION_DATA @"/location/set"
 #define CS_SERVER_URL_SUFFIX_UNREGISTER @"/visitor/unregister"
 #define CS_SERVER_URL_SUFFIX_PUSH_HISTORY @"/pushHistory/get"
+#define CS_SERVER_URL_SUFFIX_SET_USER_TAGS @"/visitor/setUserTag"
+#define CS_SERVER_URL_SUFFIX_GET_USER_TAGS @"/visitor/getVisitorProfileTags"
 
 #define CS_HTTP_PARAM_HIT_CODE @"hitCode"
 #define CS_HTTP_PARAM_EVENT_CODE @"eventCode"
@@ -166,7 +168,7 @@
 #import "CurioResourceUtil.h"
 
 
-
+__TVOS_UNAVAILABLE
 @protocol CurioSDKDelegate <NSObject>
 - (void) unregisteredFromNotificationServer:(NSDictionary *)responseDictionary;
 - (void) customIDSent:(NSDictionary *)responseDictionary;
@@ -192,7 +194,7 @@
 @property (assign, nonatomic) NSUInteger retryCount;
 
 
-@property (assign,nonatomic) id<CurioSDKDelegate> delegate;
+@property (assign,nonatomic) id<CurioSDKDelegate> delegate __TVOS_UNAVAILABLE;
 
 
 /**
@@ -330,7 +332,7 @@ registerForRemoteNotifications:(BOOL)registerForRemoteNotifications
  fetchLocationEnabled:(BOOL)fetchLocationEnabled
 maxValidLocationTimeInterval:(double)maxValidLocationTimeInterval
              delegate:(id<CurioSDKDelegate>)delegate
-     appLaunchOptions:(NSDictionary *)appLaunchOptions;
+     appLaunchOptions:(NSDictionary *)appLaunchOptions __TVOS_UNAVAILABLE;
 
 /**
     Starts Curio session.
@@ -369,12 +371,12 @@ maxValidLocationTimeInterval:(double)maxValidLocationTimeInterval
 /**
  * Unregisters this device from push notification server.
  */
-- (void) unregisterFromNotificationServer;
+- (void) unregisterFromNotificationServer __TVOS_UNAVAILABLE;
 
 /**
  * Sends custom id to push notification server manually.
  */
-- (void) sendCustomId:(NSString *)theCustomId;
+- (void) sendCustomId:(NSString *)theCustomId __TVOS_UNAVAILABLE;
 
 /**
  *
@@ -387,6 +389,17 @@ maxValidLocationTimeInterval:(double)maxValidLocationTimeInterval
 - (void)getNotificationHistoryWithPageStart:(NSInteger)pageStart
                                rows:(NSInteger)rows
                                  success:(void(^)(NSDictionary *responseObject))success
-                                 failure:(void(^)(NSError *error))failure;
+                                 failure:(void(^)(NSError *error))failure __TVOS_UNAVAILABLE;
+
+/**
+ *
+ */
+-(void)sendUserTags:(NSDictionary *)tags;
+/**
+ *
+ */
+-(void)getUserTagsWithSuccess:(void(^)(NSDictionary *responseObject))success
+                      failure:(void(^)(NSError *error))failure;
+
 
 @end

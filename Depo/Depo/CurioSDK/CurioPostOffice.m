@@ -267,6 +267,43 @@ static pthread_mutex_t mutex;
     }
 }
 
+- (void) postRequestResultWithParameters:(NSDictionary *)parameters
+                            suffix:(NSString *)suffix
+                            success:(void(^)(void))success
+                           failure:(void(^)(NSError *error))failure {
+    
+    @synchronized(self) {
+        
+        NSString *sUrl = [NSString stringWithFormat:@"%@%@",[[CurioSettings shared] serverUrl],suffix];
+        
+        CS_Log_Info(@"URL: %@ %@",sUrl,CS_RM_STR_NEWLINE(parameters));
+        
+        NSURL *url = [NSURL URLWithString:sUrl];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+        [request setHTTPMethod:@"POST"];
+        [request setHTTPShouldHandleCookies:NO];
+        [request setValue:CS_OPT_USER_AGENT forHTTPHeaderField:@"User-Agent"];
+        [request setHTTPBody:[[[CurioUtil shared] dictToPostBody:parameters] dataUsingEncoding:NSUTF8StringEncoding]];
+        [request setTimeoutInterval:30.0];
+        
+        NSHTTPURLResponse * response = nil;
+        NSError * error = nil;
+        [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        
+        if (error != nil) {
+            CS_Log_Warning(@"Warning: %ld , %@",(long)error.code, error.localizedDescription);
+            failure(error);
+        } else {
+            if (response.statusCode == 200) {
+                success();
+            }else {
+                CS_Log_Warning(@"Error: %ld , %@",(long)error.code, error.localizedDescription);
+                failure(error);
+            }
+        }
+    }
+}
+
 
 - (BOOL) postAction:(CurioAction *)action {
     

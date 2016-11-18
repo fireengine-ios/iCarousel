@@ -84,7 +84,7 @@
         
         [actDict setObject:[NSNumber numberWithInt:action.actionType] forKey:CS_HTTP_JSON_VARNAME_TYPE];
         [actDict setObject:action.stamp forKey:CS_HTTP_JSON_VARNAME_TIMESTAMP];
-        [actDict setObject:[action.properties objectForKey:CS_HTTP_PARAM_SESSION_CODE] forKey:CS_HTTP_PARAM_SESSION_CODE];
+        [actDict setObject:CS_NULL_IF_NIL([action.properties objectForKey:CS_HTTP_PARAM_SESSION_CODE]) forKey:CS_HTTP_PARAM_SESSION_CODE];
         
         if (action.actionType == CActionTypeStartScreen) {
             
@@ -108,7 +108,7 @@
             
             [actDict setObject:action.eventKey forKey:CS_HTTP_JSON_VARNAME_EVENT_KEY];
             [actDict setObject:action.eventValue forKey:CS_HTTP_JSON_VARNAME_EVENT_VALUE];
-            [actDict setObject:[action.properties objectForKey:CS_HTTP_JSON_VARNAME_EVENT_DURATION] forKey:CS_HTTP_JSON_VARNAME_EVENT_DURATION];
+            [actDict setObject:CS_NULL_IF_NIL([action.properties objectForKey:CS_HTTP_JSON_VARNAME_EVENT_DURATION]) forKey:CS_HTTP_JSON_VARNAME_EVENT_DURATION];
             [actDict setObject:action.hitCode forKey:CS_HTTP_JSON_VARNAME_EVENTCODE];
             
         }
@@ -137,12 +137,17 @@
     NSMutableArray *dataArray = [NSMutableArray new];
     
     for (CurioAction *action in actions) {
+        //Every action must have a hitCode
+        if (action.hitCode.length < 1) {
+            CS_Log_Warning(@"Every action must have a hitCode");
+            continue;
+        }
         
         NSMutableDictionary *actDict = [NSMutableDictionary new];
         
         [actDict setObject:[NSNumber numberWithInt:action.actionType] forKey:CS_HTTP_JSON_VARNAME_TYPE];
         [actDict setObject:action.stamp forKey:CS_HTTP_JSON_VARNAME_TIMESTAMP];
-        [actDict setObject:[action.properties objectForKey:CS_HTTP_PARAM_SESSION_CODE] forKey:CS_HTTP_PARAM_SESSION_CODE];
+        [actDict setObject:CS_NULL_IF_NIL([action.properties objectForKey:CS_HTTP_PARAM_SESSION_CODE]) forKey:CS_HTTP_PARAM_SESSION_CODE];
         
         if (action.actionType == CActionTypeStartScreen) {
             
@@ -166,7 +171,7 @@
             
             [actDict setObject:action.eventKey forKey:CS_HTTP_JSON_VARNAME_EVENT_KEY];
             [actDict setObject:action.eventValue forKey:CS_HTTP_JSON_VARNAME_EVENT_VALUE];
-            [actDict setObject:[action.properties objectForKey:CS_HTTP_JSON_VARNAME_EVENT_DURATION] forKey:CS_HTTP_JSON_VARNAME_EVENT_DURATION];
+            [actDict setObject:CS_NULL_IF_NIL([action.properties objectForKey:CS_HTTP_JSON_VARNAME_EVENT_DURATION]) forKey:CS_HTTP_JSON_VARNAME_EVENT_DURATION];
             [actDict setObject:action.hitCode forKey:CS_HTTP_JSON_VARNAME_EVENTCODE];
             
         }

@@ -29,6 +29,7 @@ NSString * const CURKeyProperties = @"properties";
 NSString * const CURKeyData = @"data";
 NSString * const CURKeyPId = @"pId";
 NSString * const CURKeySendCustomID = @"sendCustomID";
+NSString * const CURKeyUserTags = @"userTags";
 
 NSString * const CURKeyStatus = @"Status";
 NSString * const CURKeyOK = @"OK";

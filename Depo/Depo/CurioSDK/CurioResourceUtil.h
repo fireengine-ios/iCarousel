@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 
-
+__TVOS_UNAVAILABLE
 @interface CurioResourceUtil : NSObject <CBCentralManagerDelegate>
 
 @property (nonatomic) CBCentralManager *bluetoothManager;

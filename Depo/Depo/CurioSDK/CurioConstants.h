@@ -42,6 +42,7 @@ extern NSString * const CURNetworkTypeOffline;
 extern NSString * const CURNetworkCarrierUnknown;
 extern NSString * const CURKeyPId;
 extern NSString * const CURKeySendCustomID;
+extern NSString * const CURKeyUserTags;
 
 extern NSString * const CURKeyStatus;
 extern NSString * const CURKeyOK;

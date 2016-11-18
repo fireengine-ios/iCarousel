@@ -49,4 +49,9 @@ typedef BOOL(^CurioPostOfficeRetryBlock)(void);
                             suffix:(NSString *)suffix
                            success:(void(^)(id responseObject))success
                            failure:(void(^)(NSError *error))failure;
+
+- (void) postRequestResultWithParameters:(NSDictionary *)parameters
+                                  suffix:(NSString *)suffix
+                                 success:(void(^)(void))success
+                                 failure:(void(^)(NSError *error))failure;
 @end

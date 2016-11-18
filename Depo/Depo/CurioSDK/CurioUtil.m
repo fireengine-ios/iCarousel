@@ -56,7 +56,7 @@
 - (NSString *) appVersion {
     
     NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
-    NSString *version = [infoDictionary objectForKey:@"CFBundleVersion"];
+    NSString *version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
         
     return [NSString stringWithFormat:@"%@", version];
     
@@ -118,13 +118,40 @@
 }
 
 
-
 - (NSString *)urlEncode:(NSString *)input {
     
-    if (input == nil)
+    if (input == nil) {
         return @"";
+    }
     
-    return [input stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSMutableString *output = [NSMutableString string];
+    //buffer for illegal input string types. eg nsnumber
+    NSString *str = [NSString stringWithFormat:@"%@", input];
+    const unsigned char *source = (const unsigned char *)[str UTF8String];
+    unsigned long sourceLen = strlen((const char *)source);
+    for (int i = 0; i < sourceLen; ++i) {
+        const unsigned char thisChar = source[i];
+        if (thisChar == ' '){
+            [output appendString:@"+"];
+        } else if (thisChar == '.' || thisChar == '-' || thisChar == '_' || thisChar == '~' ||
+                   (thisChar >= 'a' && thisChar <= 'z') ||
+                   (thisChar >= 'A' && thisChar <= 'Z') ||
+                   (thisChar >= '0' && thisChar <= '9')) {
+            [output appendFormat:@"%c", thisChar];
+        } else {
+            [output appendFormat:@"%%%02X", thisChar];
+        }
+    }
+    return output;
+}
+
+-(NSString *)urlDecode:(NSString *)input {
+    
+    
+return [[input
+      stringByReplacingOccurrencesOfString:@"+" withString:@" "]
+     stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
 }
 
 - (NSString *)toJson:(id) object enablePercentEncoding:(BOOL) percentEncoding {
@@ -136,26 +163,33 @@
     
     NSString *pJson = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     
-    return percentEncoding ? [pJson stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] : pJson;
+    return percentEncoding ? [self urlEncode:pJson] : pJson;
 }
 
 - (id) fromJson:(NSString *) json percentEncoded:(BOOL) percentEncoded {
     
-    NSString *js = !percentEncoded ? json  : [json stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *decodedJson = [self urlDecode:json];
+    
+    NSString *js = !percentEncoded ? json  : decodedJson;
     
     NSError *error;
     
     NSData *pData = [js dataUsingEncoding:NSUTF8StringEncoding];
     
-    return [NSJSONSerialization JSONObjectWithData:pData
-                                                     options:kNilOptions
-                                                       error:&error];
+    
+    id obj = [NSJSONSerialization JSONObjectWithData:pData
+                                             options:kNilOptions
+                                               error:&error];
 
+    
+    return obj;
 }
 
 - (id) fromJson:(NSString *) json percentEncoded:(BOOL) percentEncoded error:(NSError **)error{
     
-    NSString *js = !percentEncoded ? json  : [json stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *decodedJson = [self urlDecode:json];
+    
+    NSString *js = !percentEncoded ? json  : decodedJson;
     
     NSData *pData = [js dataUsingEncoding:NSUTF8StringEncoding];
     
@@ -176,9 +210,9 @@
             }
             first = NO;
             
-            [vars_str appendString:[key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            [vars_str appendString:[self urlEncode:key]];
             [vars_str appendString:@"="];
-            [vars_str appendString:[[NSString stringWithFormat:@"%@",[dict valueForKey:key]] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            [vars_str appendString:[self urlEncode:[dict valueForKey:key]]];
         }
     }
     
