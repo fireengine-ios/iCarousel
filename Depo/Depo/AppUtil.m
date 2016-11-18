@@ -873,15 +873,19 @@
 }
 
 + (void) increaseLoginCount {
-    NSInteger result = [[NSUserDefaults standardUserDefaults] integerForKey:[NSString stringWithFormat:DEPO_LOGIN_COUNT_KEY, [CacheUtil readCachedMsisdnForPostMigration]]];
+    NSInteger result = [AppUtil readLoginCount];
     result ++;
-    [[NSUserDefaults standardUserDefaults] setInteger:result forKey:[NSString stringWithFormat:DEPO_LOGIN_COUNT_KEY, [CacheUtil readCachedMsisdnForPostMigration]]];
+    NSString* key = [NSString stringWithFormat:DEPO_LOGIN_COUNT_KEY, [CacheUtil readCachedMsisdnForPostMigration]];
+    [[NSUserDefaults standardUserDefaults] setInteger:result forKey:key];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    if (result == 1) {
+        [AppUtil writeLastLocInfoPopupShownTime];
+    }
 }
 
 + (int) readLoginCount {
-    NSInteger result = [[NSUserDefaults standardUserDefaults] integerForKey:[NSString stringWithFormat:DEPO_LOGIN_COUNT_KEY, [CacheUtil readCachedMsisdnForPostMigration]]];
+    NSString* key = [NSString stringWithFormat:DEPO_LOGIN_COUNT_KEY, [CacheUtil readCachedMsisdnForPostMigration]];
+    NSInteger result = [[NSUserDefaults standardUserDefaults] integerForKey:key];
     return (int)result;
 }
-
 @end

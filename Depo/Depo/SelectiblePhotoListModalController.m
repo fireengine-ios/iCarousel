@@ -170,7 +170,7 @@
         if (currentOffset - maximumOffset >= 0.0) {
             isLoading = YES;
             listOffset ++;
-            [elasticSearchDao requestPhotosAndVideosForPage:listOffset andSize:IS_IPAD ? 30 : 21 andSortType:APPDELEGATE.session.sortType];
+            [elasticSearchDao requestPhotosForPage:listOffset andSize:IS_IPAD ? 30 : 21 andSortType:APPDELEGATE.session.sortType];
         }
     }
 }
