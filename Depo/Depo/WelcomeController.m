@@ -89,6 +89,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    IGLog(@"WelcomeController at viewDidLoad");
     [[CurioSDK shared] sendEvent:@"Welcome" eventValue:@"shown"];
     [MPush hitTag:@"Welcome" withValue:@"shown"];
 }

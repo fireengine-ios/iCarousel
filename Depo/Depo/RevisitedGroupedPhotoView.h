@@ -21,6 +21,8 @@
 #import "MainSearchTextfield.h"
 #import "CustomConfirmView.h"
 #import "NoItemView.h"
+#import "RevisitedPhotoCollCell.h"
+#import "RevisitedUploadingPhotoCollCell.h"
 
 @protocol RevisitedGroupedPhotoDelegate <NSObject>
 - (void) revisitedGroupedPhotoDidSelectFile:(MetaFile *) fileSelected withList:(NSArray *) containingList;
@@ -36,14 +38,13 @@
 - (void) revisitedGroupedPhotoChangeTitleTo:(NSString *) pageTitle;
 @end
 
-@interface RevisitedGroupedPhotoView : UIView <GroupedViewDelegate, FooterActionsDelegate, UITextFieldDelegate, CustomConfirmDelegate, UIScrollViewDelegate>
+@interface RevisitedGroupedPhotoView : UIView <FooterActionsDelegate, UITextFieldDelegate, CustomConfirmDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, RevisitedPhotoCollCellDelegate, RevisitedUploadingPhotoCollCellDelegate>
 
 @property (nonatomic, weak) id<RevisitedGroupedPhotoDelegate> delegate;
 @property (nonatomic, strong) NSMutableArray *files;
 @property (nonatomic, strong) NSMutableArray *selectedFileList;
 
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
-@property (nonatomic, strong) UIScrollView *fileScroll;
 
 @property (nonatomic, strong) ElasticSearchDao *readDao;
 @property (nonatomic, strong) DeleteDao *deleteDao;
@@ -56,6 +57,9 @@
 
 @property (nonatomic, strong) MainSearchTextfield *searchField;
 @property (nonatomic, strong) NoItemView *noItemView;
+
+@property (nonatomic, strong) NSMutableArray *groups;
+@property (nonatomic, strong) UICollectionView *collView;
 
 - (void) pullData;
 - (void) setToSelectible;

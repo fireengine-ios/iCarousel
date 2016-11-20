@@ -60,6 +60,7 @@
 #import <Crashlytics/Crashlytics.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "Reachability.h"
+#import "BaseBgController.h"
 
 //TODO info'larda version update
 
@@ -418,9 +419,13 @@
     loginInProgress = NO;
     
     [self hideMainLoading];
-    WelcomeController *welcomePage = [[WelcomeController alloc] init];
-    MyNavigationController *welcomeNav = [[MyNavigationController alloc] initWithRootViewController:welcomePage];
-    self.window.rootViewController = welcomeNav;
+    if([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground) {
+        [self.window setRootViewController:[[BaseBgController alloc] init]];
+    } else {
+        WelcomeController *welcomePage = [[WelcomeController alloc] init];
+        MyNavigationController *welcomeNav = [[MyNavigationController alloc] initWithRootViewController:welcomePage];
+        self.window.rootViewController = welcomeNav;
+    }
 }
 
 - (void) tokenManagerDidReceiveBaseUrl {
@@ -683,7 +688,7 @@
      */
     
     NSLog(@".... %@", NSStringFromClass([self.window.rootViewController class]));
-    if(activatedFromBackground && !loginInProgress) {
+    if(activatedFromBackground && !loginInProgress && !self.session.loggedOutManually) {
         BOOL shouldContinue = YES;
         if([self.window.rootViewController isKindOfClass:[BaseViewController class]]) {
             shouldContinue = NO;

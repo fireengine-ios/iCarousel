@@ -76,4 +76,7 @@
 + (NSDate *) readLast413CheckDate;
 + (BOOL) isLast413CheckDateOneDayOld;
 
++ (void) writeOneTimeSyncFlag;
++ (BOOL) readOneTimeSyncFlag;
+
 @end

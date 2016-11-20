@@ -81,6 +81,7 @@
 
 - (void) setNoCachedImageWithBetterQualityForUrl:(NSURL *)url placeholderImage:(UIImage *)placeholderImage;
 - (void) setFinalNoCachedImageWithBetterQualityForUrl:(NSURL *)url placeholderImage:(UIImage *)placeholderImage withMaxWidth:(float) maxWidth withMaxHeight:(float) maxHeight forCompressQaulity:(float) compressQuality;
+- (void) setFinalCachedImageWithBetterQualityForUrl:(NSURL *)url placeholderImage:(UIImage *)placeholderImage withMaxWidth:(float) maxWidth withMaxHeight:(float) maxHeight forCompressQaulity:(float) compressQuality;
 
 @end
 

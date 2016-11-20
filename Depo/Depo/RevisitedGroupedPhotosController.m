@@ -566,6 +566,17 @@
     }
 }
 
+- (void) devicePhotosDidTriggerUploadForUrls:(NSArray *)assetUrls {
+    for(UploadRef *ref in assetUrls) {
+        ref.ownerPage = UploadStarterPagePhotos;
+        ref.folderUuid = APPDELEGATE.session.user.mobileUploadFolderUuid;
+        
+        UploadManager *manager = [[UploadManager alloc] initWithUploadInfo:ref];
+        [manager configureUploadAsset:ref.filePath atFolder:nil];
+        [[UploadQueue sharedInstance] addNewUploadTask:manager];
+    }
+    [groupView pullData];
+}
 
 - (void) accountFailCallback:(NSString *) errorMessage{
 }

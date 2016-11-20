@@ -64,6 +64,8 @@
 @property (nonatomic) BOOL photoDetailTipShown;
 @property (nonatomic) BOOL videofyTutorialCountChecked;
 
+@property (nonatomic) BOOL loggedOutManually;
+
 - (void) playAudioItemAtIndex:(int) itemIndex;
 - (void) playNextAudioItem;
 - (void) playPreviousAudioItem;

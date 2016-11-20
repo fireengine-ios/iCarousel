@@ -116,6 +116,7 @@
     }
     
     if(triggerSyncing) {
+        IGLog(@"SyncManager initializeNextAutoSyncPackage at triggerSyncing");
         NSArray *localHashList = [SyncUtil readSyncHashLocally];
         NSArray *remoteHashList = [SyncUtil readSyncHashRemotely];
         NSArray *remoteSummaryList = [SyncUtil readSyncFileSummaries];
@@ -172,6 +173,8 @@
                                             serverContainsImageFlag = [remoteSummaryList containsObject:assetSummary];
                                         }
                                         if(!serverContainsImageFlag) {
+                                            NSString *logInfo = [NSString stringWithFormat:@"SyncManager initializeNextAutoSyncPackage sync starting for asset: %@", [defaultRep filename]];
+                                            IGLog(logInfo);
                                             [self startUploadForAsset:asset withReferenceAlbumName:referenceAlbumName  andLocalHash:localHash];
                                             [SyncUtil lockAutoSyncBlockInProgress];
                                             [SyncUtil updateLastSyncDate];
@@ -207,6 +210,7 @@
 
 - (void) firstTimeBlockSyncEnumerationFinished {
     [SyncUtil writeFirstTimeSyncFlag];
+    [SyncUtil writeOneTimeSyncFlag];
     [SyncUtil updateLastSyncDate];
 
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -352,6 +356,8 @@
     ((__bridge CFStringRef)[asset.defaultRepresentation UTI], kUTTagClassMIMEType);
 
     if(asset.defaultRepresentation.url != nil && [asset.defaultRepresentation.url absoluteString] != nil) {
+        NSString *logMessage = [NSString stringWithFormat:@"SyncManager startUploadForAsset called for %@", asset.defaultRepresentation.filename];
+        IGLog(logMessage);
         MetaFileSummary *summary = [[MetaFileSummary alloc] init];
         summary.fileName = [asset.defaultRepresentation filename];
         summary.bytes = [asset.defaultRepresentation size];
@@ -421,7 +427,7 @@
             IGLog(@"SyncManager loop ignored by 413 lock");
             return;
         }
-        if(![SyncUtil readFirstTimeSyncFlag]) {
+        if(![SyncUtil readFirstTimeSyncFlag] || ![SyncUtil readOneTimeSyncFlag]) {
             IGLog(@"SyncManager starting first time sync");
             [self startFirstTimeSync];
         } else if(![SyncUtil readFirstTimeSyncFinishedFlag]) {

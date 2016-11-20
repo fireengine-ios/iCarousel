@@ -9,6 +9,7 @@
 #import "AlbumListModalController.h"
 #import "RefAlbumCell.h"
 #import "PhotoListModalController.h"
+#import "DevicePhotosModalController.h"
 
 @interface AlbumListModalController ()
 
@@ -104,7 +105,7 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     MetaAlbum *album = [self.albums objectAtIndex:indexPath.row];
     
-    PhotoListModalController *photoListController = [[PhotoListModalController alloc] initWithAlbum:album];
+    DevicePhotosModalController *photoListController = [[DevicePhotosModalController alloc] initWithAlbum:album];
     photoListController.modalDelegate = self.delegateRef;
     [self.navigationController pushViewController:photoListController animated:YES];
 }

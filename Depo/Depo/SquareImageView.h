@@ -46,10 +46,16 @@
 - (id)initWithFrame:(CGRect)frame withFile:(MetaFile *) _file withSelectibleStatus:(BOOL) selectibleStatus shouldCache:(BOOL) cacheFlag;
 - (id)initWithFrame:(CGRect)frame withFile:(MetaFile *) _file withSelectibleStatus:(BOOL) selectibleStatus shouldCache:(BOOL) cacheFlag manualQuality:(BOOL) manualQuality;
 - (id) initFinalWithFrame:(CGRect)frame withFile:(MetaFile *) _file withSelectibleStatus:(BOOL) selectibleStatus;
+- (id) initCachedFinalWithFrame:(CGRect)frame withFile:(MetaFile *) _file withSelectibleStatus:(BOOL) selectibleStatus;
 - (void) setNewStatus:(BOOL) newStatus;
 - (void) showProgressMask;
+- (void) manuallySelect;
 - (void) manuallyDeselect;
 - (void) unloadContent;
 - (void) reloadContent;
+
+- (void) refresh:(UploadRef *)ref;
+- (void) refreshContent:(MetaFile *) fileToRefresh;
+- (void) recheckAndDrawProgress;
 
 @end

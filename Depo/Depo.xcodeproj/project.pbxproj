@@ -1088,6 +1088,12 @@
 		94FAE0E81D2F7E7800BC9F77 /* icon_select.png in Resources */ = {isa = PBXBuildFile; fileRef = 94FAE0E41D2F7E7800BC9F77 /* icon_select.png */; };
 		94FAE0E91D2F7E7800BC9F77 /* minibutton_pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 94FAE0E51D2F7E7800BC9F77 /* minibutton_pause.png */; };
 		94FAE0EA1D2F7E7800BC9F77 /* minibutton_play.png in Resources */ = {isa = PBXBuildFile; fileRef = 94FAE0E61D2F7E7800BC9F77 /* minibutton_play.png */; };
+		94FB09841DE2065B00DA666D /* RevisitedPhotoCollCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94FB09781DE2065B00DA666D /* RevisitedPhotoCollCell.m */; };
+		94FB09851DE2065B00DA666D /* DevicePhotoFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94FB097A1DE2065B00DA666D /* DevicePhotoFooterView.m */; };
+		94FB09861DE2065B00DA666D /* DevicePhotosModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94FB097B1DE2065B00DA666D /* DevicePhotosModalController.m */; };
+		94FB09871DE2065B00DA666D /* GroupPhotoSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94FB097D1DE2065B00DA666D /* GroupPhotoSectionView.m */; };
+		94FB09881DE2065B00DA666D /* RevisitedUploadingPhotoCollCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94FB09801DE2065B00DA666D /* RevisitedUploadingPhotoCollCell.m */; };
+		94FB09891DE2065B00DA666D /* DevicePhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94FB09821DE2065B00DA666D /* DevicePhotoCell.m */; };
 		94FBAEF31D5B883C00C8E6F1 /* NewFeatureInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94FBAEF21D5B883C00C8E6F1 /* NewFeatureInfoController.m */; };
 		94FBAEF51D5B923C00C8E6F1 /* img_lifebox.png in Resources */ = {isa = PBXBuildFile; fileRef = 94FBAEF41D5B923C00C8E6F1 /* img_lifebox.png */; };
 		94FBAEF71D5B924300C8E6F1 /* img_lifebox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94FBAEF61D5B924300C8E6F1 /* img_lifebox@2x.png */; };
@@ -2633,6 +2639,18 @@
 		94FAE0E41D2F7E7800BC9F77 /* icon_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_select.png; sourceTree = "<group>"; };
 		94FAE0E51D2F7E7800BC9F77 /* minibutton_pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = minibutton_pause.png; sourceTree = "<group>"; };
 		94FAE0E61D2F7E7800BC9F77 /* minibutton_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = minibutton_play.png; sourceTree = "<group>"; };
+		94FB09781DE2065B00DA666D /* RevisitedPhotoCollCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RevisitedPhotoCollCell.m; sourceTree = "<group>"; };
+		94FB09791DE2065B00DA666D /* DevicePhotoFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DevicePhotoFooterView.h; sourceTree = "<group>"; };
+		94FB097A1DE2065B00DA666D /* DevicePhotoFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DevicePhotoFooterView.m; sourceTree = "<group>"; };
+		94FB097B1DE2065B00DA666D /* DevicePhotosModalController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DevicePhotosModalController.m; sourceTree = "<group>"; };
+		94FB097C1DE2065B00DA666D /* GroupPhotoSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupPhotoSectionView.h; sourceTree = "<group>"; };
+		94FB097D1DE2065B00DA666D /* GroupPhotoSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupPhotoSectionView.m; sourceTree = "<group>"; };
+		94FB097E1DE2065B00DA666D /* RevisitedPhotoCollCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RevisitedPhotoCollCell.h; sourceTree = "<group>"; };
+		94FB097F1DE2065B00DA666D /* RevisitedUploadingPhotoCollCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RevisitedUploadingPhotoCollCell.h; sourceTree = "<group>"; };
+		94FB09801DE2065B00DA666D /* RevisitedUploadingPhotoCollCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RevisitedUploadingPhotoCollCell.m; sourceTree = "<group>"; };
+		94FB09811DE2065B00DA666D /* DevicePhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DevicePhotoCell.h; sourceTree = "<group>"; };
+		94FB09821DE2065B00DA666D /* DevicePhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DevicePhotoCell.m; sourceTree = "<group>"; };
+		94FB09831DE2065B00DA666D /* DevicePhotosModalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DevicePhotosModalController.h; sourceTree = "<group>"; };
 		94FBAEF11D5B883C00C8E6F1 /* NewFeatureInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewFeatureInfoController.h; sourceTree = "<group>"; };
 		94FBAEF21D5B883C00C8E6F1 /* NewFeatureInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewFeatureInfoController.m; sourceTree = "<group>"; };
 		94FBAEF41D5B923C00C8E6F1 /* img_lifebox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_lifebox.png; sourceTree = "<group>"; };
@@ -2852,6 +2870,8 @@
 		051E1E2519CAC52B00FD1E03 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				94FB097B1DE2065B00DA666D /* DevicePhotosModalController.m */,
+				94FB09831DE2065B00DA666D /* DevicePhotosModalController.h */,
 				0514A6251BF4D1030084E0AB /* BaseBgController.h */,
 				0514A6261BF4D1030084E0AB /* BaseBgController.m */,
 				0514A6271BF4D1030084E0AB /* CropAndShareListController.h */,
@@ -3012,6 +3032,16 @@
 		051E1E2619CAC53000FD1E03 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				94FB097E1DE2065B00DA666D /* RevisitedPhotoCollCell.h */,
+				94FB09781DE2065B00DA666D /* RevisitedPhotoCollCell.m */,
+				94FB09791DE2065B00DA666D /* DevicePhotoFooterView.h */,
+				94FB097A1DE2065B00DA666D /* DevicePhotoFooterView.m */,
+				94FB097C1DE2065B00DA666D /* GroupPhotoSectionView.h */,
+				94FB097D1DE2065B00DA666D /* GroupPhotoSectionView.m */,
+				94FB097F1DE2065B00DA666D /* RevisitedUploadingPhotoCollCell.h */,
+				94FB09801DE2065B00DA666D /* RevisitedUploadingPhotoCollCell.m */,
+				94FB09811DE2065B00DA666D /* DevicePhotoCell.h */,
+				94FB09821DE2065B00DA666D /* DevicePhotoCell.m */,
 				05C6C7021B3C20FC00CB6CE5 /* OnkatDepoPopUP.h */,
 				05C6C7031B3C20FC00CB6CE5 /* OnkatDepoPopUP.m */,
 				0589066B19CC560100A9E517 /* CustomLabel.h */,
@@ -5371,6 +5401,7 @@
 				052644BF19D5A32300B63759 /* TextCell.m in Sources */,
 				059A46DD1A6D3E2000935023 /* Subscription.m in Sources */,
 				058B328E1A14ABCB00A291C4 /* RenameAlbumDao.m in Sources */,
+				94FB09851DE2065B00DA666D /* DevicePhotoFooterView.m in Sources */,
 				058219BF1A384AF0001FA679 /* MessageCell.m in Sources */,
 				94A1D3C41C969F330066D92F /* UpdatePassDao.m in Sources */,
 				94FAE0C91D2F6EC500BC9F77 /* FBConnectDao.m in Sources */,
@@ -5442,11 +5473,13 @@
 				058B32941A14ABEF00A291C4 /* AlbumRemovePhotosDao.m in Sources */,
 				94B3BE2C1D81E3EA0086D05E /* CustomInfoWithIconView.m in Sources */,
 				5247D6251DDDD0F600FFE63E /* CurioNetwork.m in Sources */,
+				94FB09881DE2065B00DA666D /* RevisitedUploadingPhotoCollCell.m in Sources */,
 				05DEB1C31A80B8FE007793DD /* MigrationStatus.m in Sources */,
 				05DEB1F21A81775F007793DD /* SyncStatus.m in Sources */,
 				05D2B19A19E679E500FC309D /* PhotoAlbum.m in Sources */,
 				052160A919E30D640007B321 /* UploadRef.m in Sources */,
 				051E1EA219CB206500FD1E03 /* SlidingMenu.m in Sources */,
+				94FB09871DE2065B00DA666D /* GroupPhotoSectionView.m in Sources */,
 				051E1E5319CAC90700FD1E03 /* AFHTTPRequestOperation.m in Sources */,
 				05DEB1ED1A81775F007793DD /* SyncAdapter.m in Sources */,
 				944C07B81D4FE81400D45B61 /* RevisitedPhotoHeaderSegmentView.m in Sources */,
@@ -5524,6 +5557,7 @@
 				05A938241AF6AE9100AE2892 /* Configuration.m in Sources */,
 				949BB5751D6F1E7A00BED9DB /* WelcomePageView.m in Sources */,
 				05620F211A4C62B30089DFB5 /* SyncReference.m in Sources */,
+				94FB09891DE2065B00DA666D /* DevicePhotoCell.m in Sources */,
 				0556EA571A19EA0700123A14 /* SearchHistory.m in Sources */,
 				052160A319E2E56B0007B321 /* DepoUploadTask.m in Sources */,
 				05BBE71119E06FB100805215 /* CameraCaptureModalController.m in Sources */,
@@ -5646,6 +5680,7 @@
 				94BEABFB1CAD1BFE002E37A7 /* EulaApproveDao.m in Sources */,
 				94C7CEFD1D2CE67E0040897A /* SquareSequencedPictureView.m in Sources */,
 				0526444E19D5625E00B63759 /* MoreMenuView.m in Sources */,
+				94FB09861DE2065B00DA666D /* DevicePhotosModalController.m in Sources */,
 				05DEB1C61A80C161007793DD /* ProvisionDao.m in Sources */,
 				05BCA2FB19EE89EE00AF2FE2 /* MusicPreviewController.m in Sources */,
 				94E5490C1CC638AA003CB5DC /* DropboxExportResult.m in Sources */,
@@ -5721,6 +5756,7 @@
 				058BC2351A30D2A90007F4DE /* LoginController.m in Sources */,
 				94884CAA1C91A469006722F7 /* UpdateMsisdnController.m in Sources */,
 				0589066D19CC560100A9E517 /* CustomLabel.m in Sources */,
+				94FB09841DE2065B00DA666D /* RevisitedPhotoCollCell.m in Sources */,
 				9433BD0B1D21E48300991483 /* PromotionEntryController.m in Sources */,
 				058BC2421A30E7100007F4DE /* AuthResponse.m in Sources */,
 				050D4C321A31E17200809A01 /* PostLoginSyncPhotoController.m in Sources */,

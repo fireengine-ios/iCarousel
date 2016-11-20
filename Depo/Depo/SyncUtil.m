@@ -221,6 +221,15 @@
     return [[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:FIRST_SYNC_DONE_FLAG_KEY, [SyncUtil readBaseUrlConstant]]];
 }
 
++ (void) writeOneTimeSyncFlag {
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:ONE_TIME_SYNC_DONE_FLAG_KEY, [SyncUtil readBaseUrlConstant]]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (BOOL) readOneTimeSyncFlag {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:ONE_TIME_SYNC_DONE_FLAG_KEY, [SyncUtil readBaseUrlConstant]]];
+}
+
 + (void) writeFirstTimeSyncFinishedFlag {
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:FIRST_SYNC_FINALIZED_FLAG_KEY, [SyncUtil readBaseUrlConstant]]];
     [[NSUserDefaults standardUserDefaults] synchronize];

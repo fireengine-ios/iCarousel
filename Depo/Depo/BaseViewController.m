@@ -156,6 +156,8 @@
 
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncQueueChanged) name:AUTO_SYNC_QUEUE_CHANGED_NOTIFICATION object:nil];
         
+        //resetting manual logout flag
+        APPDELEGATE.session.loggedOutManually = NO;
     }
     return self;
 }
@@ -980,6 +982,7 @@
     [MPush hitTag:@"logged_out"];
     [MPush hitEvent:@"logged_out"];
     
+    APPDELEGATE.session.loggedOutManually = YES;
     [APPDELEGATE triggerLogout];
 }
 

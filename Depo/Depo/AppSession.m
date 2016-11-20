@@ -48,6 +48,7 @@
 @synthesize menuTipShown;
 @synthesize photoDetailTipShown;
 @synthesize videofyTutorialCountChecked;
+@synthesize loggedOutManually;
 
 - (id) init {
     if(self = [super init]) {

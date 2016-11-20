@@ -77,6 +77,8 @@ static char kAFImageRequestOperationObjectKey;
     dispatch_once(&oncePredicate, ^{
         _af_imageCache = [[AFImageCache alloc] init];
         [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidReceiveMemoryWarningNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+            NSLog(@"UIImageView+AFNetworking Received memory warning, cleaning cache...");
+            IGLog(@"UIImageView+AFNetworking Received memory warning, cleaning cache...");
             [_af_imageCache removeAllObjects];
         }];
     });
@@ -176,6 +178,43 @@ static char kAFImageRequestOperationObjectKey;
             if ([[request URL] isEqual:[[self.af_imageRequestOperation request] URL]]) {
                 self.image = [self manualResize:responseObject forMaxHeight:maxHeight forMaxWidth:maxWidth forCompressQuality:compressQuality];
                 self.af_imageRequestOperation = nil;
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            if ([[request URL] isEqual:[[self.af_imageRequestOperation request] URL]]) {
+                self.af_imageRequestOperation = nil;
+            }
+        }];
+        
+        self.af_imageRequestOperation = requestOperation;
+        
+        [[[self class] af_sharedImageRequestOperationQueue] addOperation:self.af_imageRequestOperation];
+    }
+}
+
+- (void) setFinalCachedImageWithBetterQualityForUrl:(NSURL *)url placeholderImage:(UIImage *)placeholderImage withMaxWidth:(float) maxWidth withMaxHeight:(float) maxHeight forCompressQaulity:(float) compressQuality {
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPShouldHandleCookies:NO];
+    [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
+    if(APPDELEGATE.session.authToken) {
+        [request addValue:APPDELEGATE.session.authToken forHTTPHeaderField:@"X-Auth-Token"];
+    }
+    
+    [self cancelImageRequestOperation];
+    
+    UIImage *cachedImage = [[[self class] af_sharedImageCache] cachedImageForRequest:request];
+    if (cachedImage) {
+        self.image = cachedImage;
+        self.af_imageRequestOperation = nil;
+    } else {
+        self.image = placeholderImage;
+        
+        AFImageRequestOperation *requestOperation = [[AFImageRequestOperation alloc] initWithRequest:request];
+        [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+            if ([[request URL] isEqual:[[self.af_imageRequestOperation request] URL]]) {
+                self.image = [self manualResize:responseObject forMaxHeight:maxHeight forMaxWidth:maxWidth forCompressQuality:compressQuality];
+                self.af_imageRequestOperation = nil;
+                
+                [[[self class] af_sharedImageCache] cacheImage:responseObject forRequest:request];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             if ([[request URL] isEqual:[[self.af_imageRequestOperation request] URL]]) {
