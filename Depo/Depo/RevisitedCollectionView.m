@@ -197,8 +197,8 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if([collections count] > 0) {
         if(level == ImageGroupLevelYear || level == ImageGroupLevelMonth) {
-            ImageGroupLevel nextLevel = level == ImageGroupLevelYear ? ImageGroupLevelMonth : ImageGroupLevelDay;
-            FileInfoGroup *selectedGroup = [collections objectAtIndex:indexPath.row];
+            //ImageGroupLevel nextLevel = level == ImageGroupLevelYear ? ImageGroupLevelMonth : ImageGroupLevelDay;
+            //FileInfoGroup *selectedGroup = [collections objectAtIndex:indexPath.row];
             /* TODO
             GroupedPhotosAndVideosController *nextLevelController = [[GroupedPhotosAndVideosController alloc] initWithLevel:nextLevel withGroupDate:selectedGroup.rangeStart];
             nextLevelController.nav = self.nav;
