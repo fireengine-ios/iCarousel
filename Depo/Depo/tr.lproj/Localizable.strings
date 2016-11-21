@@ -747,7 +747,7 @@
 "Save"="Kaydet";
 "CreateName"="İsim Oluştur";
 "CreateStoryTitle"="Hikaye Oluştur";
-"VideofySelectibleInfo"="En fazla 20 fotoğraf ve video seçebilirsiniz.";
+"VideofySelectibleInfo"="En fazla 20 fotoğraf seçebilirsiniz.";
 "VideofySequenceInfo"="Seçtiğiniz fotoğrafları istediğiniz sıra ile sıralayabilirsiniz";
 "VideofyAddMusic"="Hikayene Müzik Ekle";
 "FBConnectError"="Facebook bağlantısı sağlanamadı. Lütfen daha sonra tekrar deneyin.";

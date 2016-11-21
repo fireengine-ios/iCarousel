@@ -513,8 +513,8 @@
             //        [self showErrorAlertWithMessage:NSLocalizedString(@"MsisdnEmpty", @"")];
             //        return;
         }
-        else if(APPDELEGATE.session.emailEmpty) {
-//        else if(APPDELEGATE.session.emailEmpty && [AppUtil readLoginCount] >= 2) {
+        else if(APPDELEGATE.session.emailEmpty && !APPDELEGATE.session.emailEmptyMessageShown) {
+            APPDELEGATE.session.emailEmptyMessageShown = YES;
             [[CurioSDK shared] sendEvent:@"EmailEmpty" eventValue:@"Enter"];
             [[CurioSDK shared] sendEvent:@"EmailConfirm" eventValue:@"ok"];
             [MPush hitTag:@"EmailEmpty" withValue:@"Enter"];

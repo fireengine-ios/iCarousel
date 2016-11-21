@@ -39,7 +39,7 @@
 @synthesize signupReferenceMsisdn;
 @synthesize signupReferenceEmail;
 @synthesize signupReferencePassword;
-//@synthesize emailEmptyMessageShown;
+@synthesize emailEmptyMessageShown;
 @synthesize emailNotVerifiedMessageShown;
 @synthesize emailEmpty;
 @synthesize msisdnEmpty;
