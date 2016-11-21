@@ -100,9 +100,16 @@
         [accountDao requestActiveSubscriptions];
         [self showLoading];
         
+        [self performSelector:@selector(selectInitialCell) withObject:nil afterDelay:0.1f];
+        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuToggle) name:MENU_CLOSED_NOTIFICATION object:nil];
     }
     return self;
+}
+
+- (void) selectInitialCell {
+    [self.choiceTable selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
+    selectedFeedbackType = [NSNumber numberWithInt:FeedBackTypeSuggestion];
 }
 
 - (void) accountSuccessCallback:(NSArray *) _subscriptions {

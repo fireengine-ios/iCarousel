@@ -165,7 +165,7 @@
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
         [dateFormat setDateFormat:@"dd MMM yyyy"];
 
-        if([AppUtil isMetaFileImage:self.file]) {
+        if([AppUtil isMetaFileImage:self.file] || [AppUtil isMetaFileVideo:self.file]) {
             CustomLabel *dateLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, yIndex, 175, 25) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:20] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"FileDetailUploadDate", @"")];
             [mainScroll addSubview:dateLabel];
             

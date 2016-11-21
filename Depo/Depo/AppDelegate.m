@@ -508,6 +508,9 @@
             [self.window addSubview:locInfoPopup];
             [AppUtil writeLocInfoPopupShownFlag];
             [AppUtil writePeriodicLocInfoPopupIdleFlag];
+        } else {
+            [[LocationManager sharedInstance] startLocationManager];
+            [[SyncManager sharedInstance] decideAndStartAutoSync];
         }
     }
 }

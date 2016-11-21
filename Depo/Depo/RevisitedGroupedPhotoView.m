@@ -83,12 +83,12 @@
         photoCount = 0;
         groupSequence = 0;
         
-        if(IS_IPAD || [[Util deviceType] isEqualToString:@"iPhone 6 Plus"] || [[Util deviceType] isEqualToString:@"iPhone 6S Plus"]) {
-            imageWidth = (self.frame.size.width - 30)/6;
+        if(IS_IPAD) {
+            imageWidth = (self.frame.size.width - 14)/6;
         } else {
-            imageWidth = (self.frame.size.width - 20)/4;
+            imageWidth = (self.frame.size.width - 10)/4;
         }
-
+        
         dateCompareFormat = [[NSDateFormatter alloc] init];
         [dateCompareFormat setDateFormat:@"MMM yyyy"];
         
@@ -648,15 +648,15 @@
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(4, 4, 20, 4);
+    return UIEdgeInsetsMake(2, 2, 20, 2);
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionView *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    return 4;
+    return 2;
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionView *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    return 4;
+    return 2;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
@@ -679,7 +679,7 @@
     return nil;
 }
 
--(void)dealloc {
+- (void) dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
