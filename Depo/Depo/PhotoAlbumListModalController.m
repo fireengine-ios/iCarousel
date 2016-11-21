@@ -51,7 +51,16 @@
 }
 
 - (void) albumListSuccessCallback:(NSMutableArray *) list {
-    self.albumList = list;
+    NSMutableArray *filteredList = [[NSMutableArray alloc] init];
+    if(list) {
+        for(PhotoAlbum *row in list) {
+            if(!row.isReadOnly) {
+                [filteredList addObject:row];
+            }
+        }
+        
+    }
+    self.albumList = filteredList;
     [albumTable reloadData];
 }
 

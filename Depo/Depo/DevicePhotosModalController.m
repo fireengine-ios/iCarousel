@@ -98,6 +98,12 @@
 }
 
 - (void) showImages {
+    [assets sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        NSDate *date1 = [obj1 valueForProperty:ALAssetPropertyDate];
+        NSDate *date2 = [obj2 valueForProperty:ALAssetPropertyDate];
+        return ([date1 compare:date2] == NSOrderedAscending ? NSOrderedDescending : NSOrderedAscending);
+    }];
+    
     imagesLoaded = YES;
     self.title = [NSString stringWithFormat:NSLocalizedString(@"AddPhotosTitle", @""), [selectedAssets count], [assets count]];
     [self.collView reloadData];
