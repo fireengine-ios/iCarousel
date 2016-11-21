@@ -472,14 +472,14 @@
         contentText = NSLocalizedString(@"CancelSubscriptionInfoGoogle", @"");
     } else {
         NSRange range = [sRef.plan.role rangeOfString:@"kktcell" options:NSCaseInsensitiveSearch];
-        if (range.length == -1) {
+        if (range.length > 0) {
+            contentText = NSLocalizedString(@"CancelSubscriptionInfoForKKTCell", @"");
+        }
+        else {
             NSString *nameForSms = [AppUtil getPackageNameForSms:sRef.plan.role];
             if (![nameForSms isEqualToString:@""]) {
                 contentText = [NSString stringWithFormat:NSLocalizedString(@"CancelSubscriptionInfo", @""), nameForSms];
             }
-        }
-        else {
-            contentText = NSLocalizedString(@"CancelSubscriptionInfoForKKTCell", @"");
         }
     }
     [self showInfoAlertWithMessage:contentText];
