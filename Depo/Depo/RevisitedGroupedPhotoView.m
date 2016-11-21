@@ -85,8 +85,6 @@
         
         if(IS_IPAD) {
             imageWidth = (self.frame.size.width - 14)/6;
-        } else if([[Util deviceType] isEqualToString:@"iPhone 6 Plus"] || [[Util deviceType] isEqualToString:@"iPhone 6S Plus"]) {
-            imageWidth = (self.frame.size.width - 12)/5;
         } else {
             imageWidth = (self.frame.size.width - 10)/4;
         }
