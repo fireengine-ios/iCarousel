@@ -166,4 +166,9 @@
 }
 */
 
+- (void) cancelRequests {
+    [fileListDao cancelRequest];
+    fileListDao = nil;
+}
+
 @end

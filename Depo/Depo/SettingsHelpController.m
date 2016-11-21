@@ -87,4 +87,9 @@
  }
  */
 
+- (void) cancelRequests {
+    [faqUrlDao cancelRequest];
+    faqUrlDao = nil;
+}
+
 @end

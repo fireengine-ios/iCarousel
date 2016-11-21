@@ -414,4 +414,24 @@
     [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
 }
 
+- (void) cancelRequests {
+    [searchDao cancelRequest];
+    searchDao = nil;
+    
+    [loadMoreDao cancelRequest];
+    loadMoreDao = nil;
+    
+    [favoriteDao cancelRequest];
+    favoriteDao = nil;
+    
+    [shareDao cancelRequest];
+    shareDao = nil;
+    
+    [moveDao cancelRequest];
+    moveDao = nil;
+    
+    [deleteDao cancelRequest];
+    deleteDao = nil;
+}
+
 @end

@@ -99,4 +99,9 @@
     return cell;
 }
 
+- (void) cancelRequests {
+    [deviceDao cancelRequest];
+    deviceDao = nil;
+}
+
 @end

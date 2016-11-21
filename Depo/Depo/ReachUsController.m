@@ -294,4 +294,12 @@
     [self.view endEditing:YES];
 }
 
+- (void) cancelRequests {
+    [dao cancelRequest];
+    dao = nil;
+
+    [accountDao cancelRequest];
+    accountDao = nil;
+}
+
 @end

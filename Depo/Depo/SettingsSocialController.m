@@ -255,4 +255,21 @@
     [self showErrorAlertWithMessage:errorMessage];
 }
 
+- (void) cancelRequests {
+    [fbPermissionDao cancelRequest];
+    fbPermissionDao = nil;
+
+    [fbConnectDao cancelRequest];
+    fbConnectDao = nil;
+
+    [fbStatusDao cancelRequest];
+    fbStatusDao = nil;
+
+    [fbStartDao cancelRequest];
+    fbStartDao = nil;
+
+    [fbStopDao cancelRequest];
+    fbStopDao = nil;
+}
+
 @end

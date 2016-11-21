@@ -667,4 +667,9 @@
     [self showErrorAlertWithMessage:errorMessage];
 }
 
+- (void) cancelRequests {
+    [uploadDao cancelRequest];
+    uploadDao = nil;
+}
+
 @end

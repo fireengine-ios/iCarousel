@@ -131,4 +131,9 @@
 }
 */
 
+- (void) cancelRequests {
+    [albumsDao cancelRequest];
+    albumsDao = nil;
+}
+
 @end
