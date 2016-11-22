@@ -94,7 +94,14 @@
             [SyncUtil cacheSyncHashesRemotely:hashArray];
         }
         autoSyncIterationInProgress = NO;
-        [self initializeNextAutoSyncPackage];
+        if([SyncUtil readFirstTimeSyncFlag]) {
+            IGLog(@"SyncManager photoListSuccessCallback readFirstTimeSyncFlag is true calling manuallyCheckIfAlbumChanged");
+            [SyncUtil writeOneTimeSyncFlag];
+            [self manuallyCheckIfAlbumChanged];
+        } else {
+            IGLog(@"SyncManager photoListSuccessCallback readFirstTimeSyncFlag is false calling initializeNextAutoSyncPackage");
+            [self initializeNextAutoSyncPackage];
+        }
     });
 }
 
@@ -427,7 +434,7 @@
             IGLog(@"SyncManager loop ignored by 413 lock");
             return;
         }
-        if(![SyncUtil readFirstTimeSyncFlag] || ![SyncUtil readOneTimeSyncFlag]) {
+        if(![SyncUtil readFirstTimeSyncFlag]) {
             IGLog(@"SyncManager starting first time sync");
             [self startFirstTimeSync];
         } else if(![SyncUtil readFirstTimeSyncFinishedFlag]) {
@@ -438,8 +445,13 @@
         } else {
             IGLog(@"SyncManager before calling manuallyCheckIfAlbumChanged");
             if(![SyncUtil readAutoSyncBlockInProgress]) {
-                IGLog(@"SyncManager calling manuallyCheckIfAlbumChanged");
-                [self manuallyCheckIfAlbumChanged];
+                if(![SyncUtil readOneTimeSyncFlag]) {
+                    IGLog(@"SyncManager calling elastic search for one more time");
+                    [self startFirstTimeSync];
+                } else {
+                    IGLog(@"SyncManager calling manuallyCheckIfAlbumChanged");
+                    [self manuallyCheckIfAlbumChanged];
+                }
             }
         }
     }
