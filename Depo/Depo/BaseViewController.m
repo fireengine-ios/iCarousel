@@ -971,7 +971,9 @@
     if(finishedAutoSyncCount < totalAutoSyncCount) {
         [self showSyncInfoView];
     } else {
+        //TODO alttaki tek satır test et
         [self hideSyncInfoView];
+        [[UploadQueue sharedInstance] cleanAlreadyFinishedManagers];
     }
 }
 

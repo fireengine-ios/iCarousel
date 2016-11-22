@@ -245,8 +245,8 @@
 - (void) startReadyTasks {
     while([activeTaskIds count] < MAX_CONCURRENT_UPLOAD_TASKS) {
         UploadManager *nextManager = [self findNextTask];
-        nextManager.queueDelegate = self;
         if(nextManager != nil) {
+            nextManager.queueDelegate = self;
             [activeTaskIds addObject:[nextManager uniqueUrl]];
             [nextManager startTask];
         }
@@ -292,8 +292,8 @@
     IGLog(log);
     if([activeTaskIds count] < MAX_CONCURRENT_UPLOAD_TASKS) {
         UploadManager *nextManager = [self findNextTask];
-        nextManager.queueDelegate = self;
         if(nextManager != nil) {
+            nextManager.queueDelegate = self;
             [activeTaskIds addObject:[nextManager uniqueUrl]];
             [nextManager startTask];
         } else {
@@ -510,6 +510,18 @@
     UploadManager *currentManager = [self findByTaskId:taskId];
     if(currentManager != nil) {
         [currentManager startTask];
+    }
+}
+
+- (void) cleanAlreadyFinishedManagers {
+    @synchronized(uploadManagers) {
+        NSMutableArray *itemsToRemove = [[NSMutableArray alloc] init];
+        for(UploadManager *row in uploadManagers) {
+            if(row.uploadRef.autoSyncFlag && row.uploadRef.hasFinished) {
+                [itemsToRemove addObject:row];
+            }
+        }
+        [uploadManagers removeObjectsInArray:itemsToRemove];
     }
 }
 

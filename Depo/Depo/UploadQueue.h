@@ -34,5 +34,6 @@
 - (int) finishedAutoSyncCount;
 - (void) manualAutoSyncIterationFinished;
 - (int) remainingCount;
+- (void) cleanAlreadyFinishedManagers;
 
 @end
