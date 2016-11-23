@@ -286,6 +286,9 @@
 - (void) cameraCapturaModalDidCaptureAndStoreImageToPath:(NSString *)filepath withName:(NSString *)fileName {
 }
 
+- (void) devicePhotosDidTriggerUploadForUrls:(NSArray *)assetUrls {
+}
+
 - (void) photoModalDidTriggerUploadForUrls:(NSArray *)assetUrls {
 }
 

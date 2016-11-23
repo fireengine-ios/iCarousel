@@ -23,6 +23,7 @@
 #import "PhotoAlbumListModalController.h"
 #import "AlbumDetailModalController.h"
 #import "CacheUtil.h"
+#import "DevicePhotosModalController.h"
 
 @protocol MyViewDelegate <NSObject>
 - (void) shouldToggleMenu;
@@ -30,7 +31,7 @@
 - (void) shouldTriggerLogin;
 @end
 
-@interface MyViewController : UIViewController <NewFolderDelegate, CameraCapturaModalDelegate, PhotoModalDelegate, NewAlbumDelegate, SortModalDelegate, MoveListModalProtocol, FolderDetailDelegate, FileDetailDelegate, MoreMenuDelegate, ConfirmDeleteDelegate, AlbumModalDelete, AlbumDetailDelegate, ProcessFooterDelegate> {
+@interface MyViewController : UIViewController <NewFolderDelegate, CameraCapturaModalDelegate, PhotoModalDelegate, DevicePhotosModalDelegate, NewAlbumDelegate, SortModalDelegate, MoveListModalProtocol, FolderDetailDelegate, FileDetailDelegate, MoreMenuDelegate, ConfirmDeleteDelegate, AlbumModalDelete, AlbumDetailDelegate, ProcessFooterDelegate> {
     NSMutableDictionary *filterDictionary;
 }
 

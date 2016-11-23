@@ -634,6 +634,23 @@
     }
 }
 
+- (void) devicePhotosDidTriggerUploadForUrls:(NSArray *)assetUrls {
+    if([assetUrls count] > 0) {
+        for(UploadRef *ref in assetUrls) {
+            ref.ownerPage = UploadStarterPageList;
+            
+            UploadManager *manager = [[UploadManager alloc] initWithUploadInfo:ref];
+            [manager configureUploadAsset:ref.filePath atFolder:self.folder];
+            [[UploadQueue sharedInstance] addNewUploadTask:manager];
+        }
+        fileList = [assetUrls arrayByAddingObjectsFromArray:fileList];
+        self.tableUpdateCounter++;
+        [self.fileTable reloadData];
+        
+        self.folderModificationFlag = YES;
+    }
+}
+
 - (void) photoModalDidTriggerUploadForUrls:(NSArray *)assetUrls {
     
     if([assetUrls count] > 0) {
