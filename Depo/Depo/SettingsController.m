@@ -298,11 +298,7 @@
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#ifdef LOG2FILE
-    return 8;
-#else
-    return 7;
-#endif
+    return 6;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
