@@ -104,15 +104,33 @@
     }
 
     if(triggerAutoSync) {
-        ALAssetsLibrary *assetsLibrary = [[ALAssetsLibrary alloc] init];
-        [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-            if(group == nil) {
-                [APPDELEGATE startAutoSync];
-            }
-        } failureBlock:^(NSError *error) {
-            [self showErrorAlertWithMessage:NSLocalizedString(@"ALAssetsAccessError", @"")];
-        }];
+        ALAuthorizationStatus status = [ALAssetsLibrary authorizationStatus];
+        if (status != ALAuthorizationStatusAuthorized) {
+            ALAssetsLibrary *assetsLibrary = [[ALAssetsLibrary alloc] init];
+            [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+                if(group == nil) {
+                    if (SYSTEM_VERSION_LESS_THAN(@"10.0")) {
+                        [APPDELEGATE startAutoSync];
+                    }
+                }
+            } failureBlock:^(NSError *error) {
+                [self showErrorAlertWithMessage:NSLocalizedString(@"ALAssetsAccessError", @"")];
+            }];
+        }
+        else  {
+            [APPDELEGATE startAutoSync];
+        }
     }
+//    if(triggerAutoSync) {
+//        ALAssetsLibrary *assetsLibrary = [[ALAssetsLibrary alloc] init];
+//        [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+//            if(group == nil) {
+//                [APPDELEGATE startAutoSync];
+//            }
+//        } failureBlock:^(NSError *error) {
+//            [self showErrorAlertWithMessage:NSLocalizedString(@"ALAssetsAccessError", @"")];
+//        }];
+//    }
 
     if(cancelAutoSync) {
         [[LocationManager sharedInstance] stopLocationManager];
