@@ -750,7 +750,9 @@
 //        [SyncUtil unlockAutoSyncBlockInProgress];
     }
     
-//    [SyncUtil unlockAutoSyncBlockInProgress];
+    if([SyncUtil readFirstTimeSyncFinishedFlag]) {
+        [SyncUtil unlockAutoSyncBlockInProgress];
+    }
 
     [self triggerAutoSynchronization];
 
