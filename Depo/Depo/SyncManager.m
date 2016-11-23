@@ -299,7 +299,6 @@
                                             IGLog(logInfo);
                                             NSLog(@"%@", logInfo);
                                             [[SyncManager sharedInstance] startUploadForAsset:asset withReferenceAlbumName:referenceAlbumName andLocalHash:localHash];
-                                            [SyncUtil lockAutoSyncBlockInProgress];
                                         }
                                     }
                                 }

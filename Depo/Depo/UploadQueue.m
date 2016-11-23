@@ -259,6 +259,23 @@
 
 - (void) addNewUploadTask:(UploadManager *) newManager {
     @synchronized(uploadManagers) {
+        if(![uploadManagers containsObject:newManager]) {
+            newManager.queueDelegate = self;
+            [uploadManagers addObject:newManager];
+
+            if(newManager.uploadRef.autoSyncFlag) {
+                [SyncUtil lockAutoSyncBlockInProgress];
+            }
+
+            if(newManager.uploadRef.isReady) {
+                if([activeTaskIds count] < MAX_CONCURRENT_UPLOAD_TASKS) {
+                    [activeTaskIds addObject:[newManager uniqueUrl]];
+                    [newManager startTask];
+                }
+            }
+            [[NSNotificationCenter defaultCenter] postNotificationName:AUTO_SYNC_QUEUE_CHANGED_NOTIFICATION object:nil userInfo:nil];
+        }
+        /*
         if([uploadManagers containsObject:newManager]) {
             UploadManager *managerToRemove = nil;
             for(UploadManager *row in uploadManagers) {
@@ -268,11 +285,14 @@
                 }
             }
             if(managerToRemove != nil) {
+                newManager.delegate = managerToRemove.delegate;
                 [uploadManagers removeObject:managerToRemove];
             }
         }
         [uploadManagers addObject:newManager];
+         */
     }
+    /*
     newManager.queueDelegate = self;
     if(newManager.uploadRef.isReady) {
         if([activeTaskIds count] < MAX_CONCURRENT_UPLOAD_TASKS) {
@@ -280,8 +300,8 @@
             [newManager startTask];
         }
     }
+     */
 
-    [[NSNotificationCenter defaultCenter] postNotificationName:AUTO_SYNC_QUEUE_CHANGED_NOTIFICATION object:nil userInfo:nil];
 //    [self updateGroupUserDefaults];
 }
 
