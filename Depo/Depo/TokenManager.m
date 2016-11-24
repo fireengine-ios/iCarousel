@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "AppSession.h"
 #import "User.h"
+#import "AppUtil.h"
 #import "CacheUtil.h"
 #import "Reachability.h"
 
@@ -160,6 +161,7 @@
 - (void) userInfoSuccessCallback:(User *) enrichedUser {
     APPDELEGATE.session.user = enrichedUser;
     [delegate tokenManagerDidReceiveUserInfo];
+    [AppUtil increaseLoginCount];
 }
 
 - (void) userInfoFailCallback:(NSString *) errorMessage {

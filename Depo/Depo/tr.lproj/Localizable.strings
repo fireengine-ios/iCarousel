@@ -722,6 +722,7 @@
 "EmailTitle"="E-posta";
 "EmailUpdate"="E-posta Güncelleme";
 "EmailUpdateConfirmMessage"="Emailiniz %@ mail adresinizle güncellenecektir. Şifre işlemleri ve bilgilendirmeler için vermiş olduğunuz mail adresi kullanılacaktır.";
+"EmailEntryTitle"="Hesabını bir ömür koruyabilmek için e-mail adresini lifebox’a eklemen en güvenilir yol. Telefon numaran ya da operatörün değişse bile lifebox’taki anılarına ulaşmaya devam etmek için lütfen e-mail adresini ekle.";
 
 "TakePhoto"="Kamera Aç";
 "ChooseFromLibrary"="Galeriden Seç";

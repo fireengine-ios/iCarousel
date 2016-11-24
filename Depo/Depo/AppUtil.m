@@ -872,11 +872,14 @@
     return (int)result;
 }
 
++ (NSString*) loginCountKey {
+    return [NSString stringWithFormat:DEPO_LOGIN_COUNT_KEY, APPDELEGATE.session.user.phoneNumber];
+}
+
 + (void) increaseLoginCount {
     NSInteger result = [AppUtil readLoginCount];
     result ++;
-    NSString* key = [NSString stringWithFormat:DEPO_LOGIN_COUNT_KEY, [SyncUtil readBaseUrlConstant]];
-//    NSString* key = [NSString stringWithFormat:DEPO_LOGIN_COUNT_KEY, [CacheUtil readCachedMsisdnForPostMigration]];
+    NSString* key =  [self loginCountKey];
     [[NSUserDefaults standardUserDefaults] setInteger:result forKey:key];
     [[NSUserDefaults standardUserDefaults] synchronize];
     if (result == 1) {
@@ -885,9 +888,9 @@
 }
 
 + (int) readLoginCount {
-    NSString* key = [NSString stringWithFormat:DEPO_LOGIN_COUNT_KEY, [SyncUtil readBaseUrlConstant]];
-//    NSString* key = [NSString stringWithFormat:DEPO_LOGIN_COUNT_KEY, [CacheUtil readCachedMsisdnForPostMigration]];
+    NSString* key =  [self loginCountKey];
     NSInteger result = [[NSUserDefaults standardUserDefaults] integerForKey:key];
     return (int)result;
+    
 }
 @end

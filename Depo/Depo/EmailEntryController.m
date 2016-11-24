@@ -34,21 +34,23 @@
         emailDao.successMethod = @selector(updateEmailSuccessCallback:);
         emailDao.failMethod = @selector(updateEmailFailCallback:);
         
-        CustomLabel *topInfoLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaReg" size:15] withColor:[Util UIColorForHexColor:@"3E3E3E"] withText:NSLocalizedString(@"AlmostThere", @"") withAlignment:NSTextAlignmentCenter];
-        [self.view addSubview:topInfoLabel];
+//        CustomLabel *topInfoLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaReg" size:15] withColor:[Util UIColorForHexColor:@"3E3E3E"] withText:NSLocalizedString(@"AlmostThere", @"") withAlignment:NSTextAlignmentCenter];
+//        [self.view addSubview:topInfoLabel];
         
-        UIImage *iconImg = [UIImage imageNamed:@"icon_dialog_positive.png"];
-        UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - iconImg.size.width)/2, topInfoLabel.frame.origin.y + topInfoLabel.frame.size.height + 10, iconImg.size.width, iconImg.size.height)];
-        iconView.image = iconImg;
-        [self.view addSubview:iconView];
+//        UIImage *iconImg = [UIImage imageNamed:@"icon_dialog_positive.png"];
+//        UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - iconImg.size.width)/2, topInfoLabel.frame.origin.y + topInfoLabel.frame.size.height + 10, iconImg.size.width, iconImg.size.height)];
+//        iconView.image = iconImg;
+//        [self.view addSubview:iconView];
         
-        CustomLabel *subInfoLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, iconView.frame.origin.y + iconView.frame.size.height + 10, self.view.frame.size.width-40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaReg" size:15] withColor:[Util UIColorForHexColor:@"3E3E3E"] withText:NSLocalizedString(@"EmailFieldRegistrationInfo", @"") withAlignment:NSTextAlignmentCenter];
+        CustomLabel *subInfoLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 20, self.view.frame.size.width-40, 100) withFont:[UIFont fontWithName:@"TurkcellSaturaReg" size:15] withColor:[Util UIColorForHexColor:@"3E3E3E"] withText:NSLocalizedString(@"EmailEntryTitle", @"") withAlignment:NSTextAlignmentCenter];
+        subInfoLabel.numberOfLines = 5;
+        subInfoLabel.lineBreakMode = NSLineBreakByWordWrapping;
         [self.view addSubview:subInfoLabel];
         
-        CustomLabel *emailLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(25, subInfoLabel.frame.origin.y + subInfoLabel.frame.size.height + 10, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"EmailTitle", @"")];
-        [self.view addSubview:emailLabel];
+//        CustomLabel *emailLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(25, subInfoLabel.frame.origin.y + subInfoLabel.frame.size.height + 10, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"EmailTitle", @"")];
+//        [self.view addSubview:emailLabel];
         
-        emailField = [[LoginTextfield alloc] initWithFrame:CGRectMake(20, emailLabel.frame.origin.y + emailLabel.frame.size.height + 5, self.view.frame.size.width - 40, 43) withPlaceholder:NSLocalizedString(@"EmailPlaceholder", @"")];
+        emailField = [[LoginTextfield alloc] initWithFrame:CGRectMake(20, subInfoLabel.frame.origin.y + subInfoLabel.frame.size.height + 5, self.view.frame.size.width - 40, 43) withPlaceholder:NSLocalizedString(@"EmailPlaceholder", @"")];
         emailField.delegate = self;
         emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         [self.view addSubview:emailField];
@@ -125,7 +127,7 @@
 //}
 
 - (void) triggerDismiss {
-    if ([AppUtil readLoginCount] >= 2)  {
+    if ([AppUtil readLoginCount] >= 3)  {
      [APPDELEGATE triggerLogout];
     }
     [self dismissViewControllerAnimated:YES completion:nil];

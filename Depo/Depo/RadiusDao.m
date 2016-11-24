@@ -68,7 +68,7 @@
         
         IGLog(@"RadiusDao requestFinished successfully");
         
-        [AppUtil increaseLoginCount];
+       // [AppUtil increaseLoginCount];
 //        NSLog(@"Radius Login Response Headers: %@", headerParams);
 //        NSLog(@"Radius login response: %@", [request responseString]);
         
