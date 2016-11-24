@@ -882,9 +882,9 @@
     NSString* key =  [self loginCountKey];
     [[NSUserDefaults standardUserDefaults] setInteger:result forKey:key];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    if (result == 1) {
-        [AppUtil writeLastLocInfoPopupShownTime];
-    }
+//    if (result == 2) {
+//        [AppUtil writeLastLocInfoPopupShownTime];
+//    }
 }
 
 + (int) readLoginCount {

@@ -223,7 +223,7 @@
 
 //- (void) viewWillAppear:(BOOL)animated {
 //    [super viewWillAppear:animated];
-//    
+
 //    transparentView.hidden = YES;
 //    self.scroll.contentOffset = CGPointMake(kMenuOpenOriginX, 0.0);
 //    menuOpen = NO;
@@ -262,6 +262,10 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    if([AppUtil readLoginCount] == 1) {
+        [AppUtil writeLastLocInfoPopupShownTime];
+    }
     
     transparentView.hidden = YES;
     self.scroll.contentOffset = CGPointMake(kMenuOpenOriginX, 0.0);
