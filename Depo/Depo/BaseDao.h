@@ -37,6 +37,8 @@
 
 #define USAGE_INFO_URL BASE_URL@"/account/usageInfo"
 
+#define QUOTA_INFO_URL BASE_URL@"/account/quotaInfo"
+
 #define ACCOUNT_INFO_URL BASE_URL@"/account/info"
 
 #define TTY_CONTACT_COUNT_URL @"https://adepo.turkcell.com.tr/ttyapi/contact/count"
