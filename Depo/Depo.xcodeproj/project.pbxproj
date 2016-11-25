@@ -782,6 +782,8 @@
 		5247D62B1DDDD0F600FFE63E /* CurioSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D6191DDDD0F600FFE63E /* CurioSDK.m */; };
 		5247D62C1DDDD0F600FFE63E /* CurioSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D61B1DDDD0F600FFE63E /* CurioSettings.m */; };
 		5247D62D1DDDD0F600FFE63E /* CurioUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D61D1DDDD0F600FFE63E /* CurioUtil.m */; };
+		53FA9CDC1DE832A0008DCF93 /* Quota.m in Sources */ = {isa = PBXBuildFile; fileRef = 53FA9CDB1DE832A0008DCF93 /* Quota.m */; };
+		53FA9CDF1DE84EF8008DCF93 /* QuotaInfoDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 53FA9CDE1DE84EF8008DCF93 /* QuotaInfoDao.m */; };
 		563FB1BD1AA5EB030066F8E6 /* settings_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 563FB1BB1AA5EB030066F8E6 /* settings_icon.png */; };
 		563FB1BE1AA5EB030066F8E6 /* settings_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 563FB1BC1AA5EB030066F8E6 /* settings_icon@2x.png */; };
 		563FB1C11AA5EC990066F8E6 /* circle_welcome_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 563FB1BF1AA5EC990066F8E6 /* circle_welcome_icon.png */; };
@@ -2251,6 +2253,10 @@
 		5247D61B1DDDD0F600FFE63E /* CurioSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioSettings.m; sourceTree = "<group>"; };
 		5247D61C1DDDD0F600FFE63E /* CurioUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurioUtil.h; sourceTree = "<group>"; };
 		5247D61D1DDDD0F600FFE63E /* CurioUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioUtil.m; sourceTree = "<group>"; };
+		53FA9CDA1DE83290008DCF93 /* Quota.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Quota.h; sourceTree = "<group>"; };
+		53FA9CDB1DE832A0008DCF93 /* Quota.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Quota.m; sourceTree = "<group>"; };
+		53FA9CDD1DE84EF8008DCF93 /* QuotaInfoDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuotaInfoDao.h; sourceTree = "<group>"; };
+		53FA9CDE1DE84EF8008DCF93 /* QuotaInfoDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuotaInfoDao.m; sourceTree = "<group>"; };
 		563FB1BB1AA5EB030066F8E6 /* settings_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings_icon.png; sourceTree = "<group>"; };
 		563FB1BC1AA5EB030066F8E6 /* settings_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings_icon@2x.png"; sourceTree = "<group>"; };
 		563FB1BF1AA5EC990066F8E6 /* circle_welcome_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle_welcome_icon.png; sourceTree = "<group>"; };
@@ -3169,6 +3175,7 @@
 		051E1E2819CAC53A00FD1E03 /* http */ = {
 			isa = PBXGroup;
 			children = (
+				53FA9CCC1DE830B1008DCF93 /* QuotaInfo */,
 				051E1E3719CAC85100FD1E03 /* BaseDao.h */,
 				051E1E3819CAC85100FD1E03 /* BaseDao.m */,
 				059A46DE1A6D3E3F00935023 /* DeviceDao.h */,
@@ -3316,6 +3323,7 @@
 		051E1E2919CAC53E00FD1E03 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				53FA9CD91DE83282008DCF93 /* Quota */,
 				051E1EAF19CB20FC00FD1E03 /* MetaMenu.h */,
 				051E1EB019CB20FC00FD1E03 /* MetaMenu.m */,
 				051E1EB219CB2D1300FD1E03 /* AppSession.h */,
@@ -4510,6 +4518,24 @@
 			path = ContactSyncSDK;
 			sourceTree = "<group>";
 		};
+		53FA9CCC1DE830B1008DCF93 /* QuotaInfo */ = {
+			isa = PBXGroup;
+			children = (
+				53FA9CDD1DE84EF8008DCF93 /* QuotaInfoDao.h */,
+				53FA9CDE1DE84EF8008DCF93 /* QuotaInfoDao.m */,
+			);
+			name = QuotaInfo;
+			sourceTree = "<group>";
+		};
+		53FA9CD91DE83282008DCF93 /* Quota */ = {
+			isa = PBXGroup;
+			children = (
+				53FA9CDA1DE83290008DCF93 /* Quota.h */,
+				53FA9CDB1DE832A0008DCF93 /* Quota.m */,
+			);
+			name = Quota;
+			sourceTree = "<group>";
+		};
 		562FB3D71AA48C4400F9EFBD /* CurioSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -5568,6 +5594,7 @@
 				05BCA2F819EE64EB00AF2FE2 /* AddAlbumDao.m in Sources */,
 				5247D6221DDDD0F600FFE63E /* CurioDBToolkit.m in Sources */,
 				05D5E59F1B09D5DD00A22957 /* SuccessPurchasingView.m in Sources */,
+				53FA9CDC1DE832A0008DCF93 /* Quota.m in Sources */,
 				058BC22B1A30893C0007F4DE /* PreLoginController.m in Sources */,
 				94EF279C1C982B460087EFBE /* NoItemView.m in Sources */,
 				05C2A0321A79830500EE4D78 /* ADJPackageBuilder.m in Sources */,
@@ -5747,6 +5774,7 @@
 				94680E041D405CB000DC5227 /* TitleWithSwitchCell.m in Sources */,
 				058219C81A384D31001FA679 /* RecentSearchesTableView.m in Sources */,
 				05D5E59C1B09D5DD00A22957 /* FailurePurchasingView.m in Sources */,
+				53FA9CDF1DE84EF8008DCF93 /* QuotaInfoDao.m in Sources */,
 				058BC2321A30CD650007F4DE /* LastTwoDigitController.m in Sources */,
 				051DE36819CC12FD00F27C85 /* ToggleButton.m in Sources */,
 				058219BC1A384AB0001FA679 /* FavouriteListController.m in Sources */,
@@ -6007,9 +6035,9 @@
 					"-ObjC",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.igones.deponew;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rdc.lifebox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ce83ac0b-ee03-4058-a10a-63f46f13d14c";
+				PROVISIONING_PROFILE = "bea1bda0-fadb-4c10-974c-465aa05b7d4b";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -6044,9 +6072,9 @@
 					"-ObjC",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.igones.deponew;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rdc.lifebox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ce83ac0b-ee03-4058-a10a-63f46f13d14c";
+				PROVISIONING_PROFILE = "bea1bda0-fadb-4c10-974c-465aa05b7d4b";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -6156,7 +6184,7 @@
 					"-ObjC",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rdc.lifebox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "c7326830-eaca-4f1e-9bbb-765e70c0d2fc";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -6244,7 +6272,7 @@
 					"-ObjC",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rdc.lifebox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "3d2683f7-410b-4d3d-82ee-4404d6095878";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -6292,9 +6320,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.igones.deponew.DepoShareExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rdc.lifebox.DepoShareExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6b1577bd-ac26-4f8f-b015-d139301132e0";
+				PROVISIONING_PROFILE = "0aac4bf1-b2ac-4805-a609-0e3e7103584e";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -6318,9 +6346,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.igones.deponew.DepoShareExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rdc.lifebox.DepoShareExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6b1577bd-ac26-4f8f-b015-d139301132e0";
+				PROVISIONING_PROFILE = "0aac4bf1-b2ac-4805-a609-0e3e7103584e";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -6344,7 +6372,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.shareextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rdc.lifebox.DepoShareExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "e9952454-e231-4aec-bcde-c65838f462c5";
 				SKIP_INSTALL = YES;
@@ -6370,7 +6398,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent.shareextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rdc.lifebox.DepoShareExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "28015523-0160-4d5a-a6fe-ca542c23e12a";
 				SKIP_INSTALL = YES;
@@ -6393,9 +6421,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.igones.deponew.AutoSyncWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rdc.lifebox.AutoSyncWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a44b1e90-6b98-4066-8ce7-da6f43af3de8";
+				PROVISIONING_PROFILE = "377a0435-8b47-471b-8a0b-0d78b7a81d5c";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -6417,9 +6445,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.igones.deponew.AutoSyncWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rdc.lifebox.AutoSyncWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a44b1e90-6b98-4066-8ce7-da6f43af3de8";
+				PROVISIONING_PROFILE = "377a0435-8b47-471b-8a0b-0d78b7a81d5c";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -6441,7 +6469,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.todayextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rdc.lifebox.AutoSyncWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "e19f8959-ec7f-4af7-851b-b8c39fc8de90";
 				SKIP_INSTALL = YES;
@@ -6465,7 +6493,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent.todayextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rdc.lifebox.AutoSyncWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "d508c49a-e11e-4c93-b749-190ea8e720d2";
 				SKIP_INSTALL = YES;
