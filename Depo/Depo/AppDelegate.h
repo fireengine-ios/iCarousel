@@ -58,5 +58,6 @@
 - (void) cancelRequestsWithTag:(int) tag;
 - (void) cancelRequestsWithTags:(NSArray *) tags;
 - (BOOL) isTurkcell;
+- (void) initAudioSession;
 
 @end

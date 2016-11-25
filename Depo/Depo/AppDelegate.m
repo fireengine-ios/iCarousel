@@ -186,8 +186,6 @@
 //    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
 //    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
     
-    [self initAudioSession];
-
     [self.window makeKeyAndVisible];
     return YES;
 }
