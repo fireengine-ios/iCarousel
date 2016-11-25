@@ -12,6 +12,7 @@
 
 @interface MetaFile : NSObject
 
+@property (nonatomic) int Id;
 @property (nonatomic, strong) NSString *uuid;
 @property (nonatomic, strong) NSString *fileHash;
 @property (nonatomic, strong) NSString *metaHash;

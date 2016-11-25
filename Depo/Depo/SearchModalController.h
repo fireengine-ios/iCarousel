@@ -16,9 +16,10 @@
 #import "ShareLinkDao.h"
 #import "ConfirmDeleteModalController.h"
 #import "MoveListModalController.h"
+#import "PhotoAlbumController.h"
 #import "CustomConfirmView.h"
 
-@interface SearchModalController : MyModalController <UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, ConfirmDeleteDelegate, MoveListModalProtocol, CustomConfirmDelegate> {
+@interface SearchModalController : MyModalController <UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, ConfirmDeleteDelegate, MoveListModalProtocol, PhotoModalDelegate, CustomConfirmDelegate> {
     UIView *searchFieldContainer;
     SearchTextField *searchField;
     RecentSearchesTableView *recentSearchesTableView;

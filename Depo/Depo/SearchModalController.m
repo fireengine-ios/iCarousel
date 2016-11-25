@@ -389,7 +389,9 @@
             FileListController *innerList = [[FileListController alloc] initForFolder:fileAtIndex];
             innerList.nav = self.nav;
             [self.nav pushViewController:innerList animated:NO];
-        } else {
+        }else if (fileAtIndex.contentType == ContentTypeAlbumPhoto) {
+            [self showPhotoAlbumWithMetaFile:fileAtIndex];
+        }else {
             if([AppUtil isMetaFileImage:fileAtIndex]) {
                 ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFile:fileAtIndex];
                 MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
@@ -419,6 +421,14 @@
     else if (indexPath.row == searchResultCount)
         [self didTriggerMoreResults:currentSearchText andSearchListType:indexPath.section andFileCount:currentList.count];
     
+}
+
+-(void)showPhotoAlbumWithMetaFile:(MetaFile *)file {
+    PhotoAlbum *album = [[PhotoAlbum alloc] initWithMetaFile:file];
+    PhotoAlbumController *albumController = [[PhotoAlbumController alloc] initWithAlbum:album];
+    albumController.delegate = self;
+    albumController.nav = self.nav;
+    [self.navigationController pushViewController:albumController animated:NO];
 }
 
 - (NSMutableArray *)getCurrentList:(int)sectionNumber {
