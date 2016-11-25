@@ -32,6 +32,7 @@
 #include <math.h>
 
 @interface SettingsController () {
+    UILabel *nameLabel;
     UILabel *msisdnLabel;
     UIImageView *profileImgView;
     UIImage *updatedImageRef;
@@ -66,6 +67,7 @@
         uploadDao.failMethod = @selector(photoUploadFail:);
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(retouchMsisdn) name:MSISDN_CHANGED_NOTIFICATION object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(emailChanged) name:EMAIL_CHANGED_NOTIFICATION object:nil];
     }
     
     return self;
@@ -83,6 +85,10 @@
 - (void) usageFailCallback:(NSString *) errorMessage {
 }
 
+
+- (void) emailChanged {
+    [nameLabel setText:APPDELEGATE.session.user.email];
+}
 
 
 - (void) retouchMsisdn {
@@ -137,7 +143,8 @@
     profileButton.userInteractionEnabled = NO;
     //    [profileInfoArea addSubview:profileButton];
     
-    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, profileImageView.frame.origin.y + profileImageView.frame.size.height + (IS_IPAD ? 20 : 5), self.view.frame.size.width - 20, IS_IPAD ? 30 : 20)];
+    nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, profileImageView.frame.origin.y + profileImageView.frame.size.height + (IS_IPAD ? 20 : 5), self.view.frame.size.width - 20, IS_IPAD ? 30 : 20)];
+
     if(APPDELEGATE.session.user.email) {
         [nameLabel setText:APPDELEGATE.session.user.email];
     } else {
