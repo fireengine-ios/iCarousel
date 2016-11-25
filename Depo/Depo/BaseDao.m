@@ -64,7 +64,7 @@
     }
     self.currentRequest = request;
     [self.currentRequest startAsynchronous];
-} // testing
+} 
 
 - (void) sendPutRequest:(ASIFormDataRequest *) request {
     [request setRequestMethod:@"PUT"];
