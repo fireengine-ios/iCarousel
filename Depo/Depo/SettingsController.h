@@ -11,6 +11,7 @@
 #import "CacheUtil.h"
 #import <MessageUI/MessageUI.h>
 #import "ProfilePhotoUploadDao.h"
+#import "UsageInfoDao.h"
 
 @interface SettingsController : MyViewController <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, UIActionSheetDelegate> {
     UIImageView *profileImageView;
@@ -26,6 +27,7 @@
     CustomButton *removeButton;
     UILabel *removeLabel;
     ProfilePhotoUploadDao *uploadDao;
+    UsageInfoDao *usageDao;
 }
 
 @property (nonatomic, strong) UIPopoverController *popOver;

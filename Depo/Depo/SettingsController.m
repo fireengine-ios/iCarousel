@@ -48,11 +48,18 @@
     if (self) {
         self.title = NSLocalizedString(@"SettingsTitle", @"");
         self.view.backgroundColor = [Util UIColorForHexColor:@"F1F2F6"];
-        
-        [self drawProfileInfoArea];
-        [self drawSettingsCategories];
+        //[self drawProfileInfoArea];
+        //[self drawSettingsCategories];
         //[self drawImageOptionsArea];
-
+        
+        usageDao = [[UsageInfoDao alloc] init];
+        usageDao.delegate = self;
+        usageDao.successMethod = @selector(usageSuccessCallback:);
+        usageDao.failMethod = @selector(usageFailCallback:);
+        
+        [usageDao requestUsageInfo];
+        [self showLoading];
+        
         uploadDao = [[ProfilePhotoUploadDao alloc] init];
         uploadDao.delegate = self;
         uploadDao.successMethod = @selector(photoUploadSuccess);
@@ -63,6 +70,20 @@
     
     return self;
 }
+
+#pragma MARK: - Usage Info API Callbacks
+
+- (void) usageSuccessCallback:(Usage *) _usage {
+    [self hideLoading];
+    APPDELEGATE.session.usage = _usage;
+    [self drawProfileInfoArea];
+    [self drawSettingsCategories];
+}
+
+- (void) usageFailCallback:(NSString *) errorMessage {
+}
+
+
 
 - (void) retouchMsisdn {
     [msisdnLabel setText:APPDELEGATE.session.user.phoneNumber];
@@ -77,19 +98,19 @@
     profileInfoArea.backgroundColor = [Util UIColorForHexColor:@"3FB0E8"];
     
     float imageWidth = profileInfoArea.frame.size.width * 0.275f;
-
+    
     UIImage *profileBgImg = [UIImage imageNamed:@"profile_icon"];
     profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake((profileInfoArea.frame.size.width - imageWidth)/2, (profileInfoArea.frame.size.height - imageWidth)/2 - 20, imageWidth, imageWidth)];
     profileImageView.image = profileBgImg;
     [profileImageView setUserInteractionEnabled:YES];
     [profileInfoArea addSubview:profileImageView];
-
+    
     if(APPDELEGATE.session.profileImageRef) {
         profileImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, profileImageView.frame.size.width - 4, profileImageView.frame.size.height - 4)];
         profileImgView.image = [Util circularScaleNCrop:APPDELEGATE.session.profileImageRef forRect:CGRectMake(0, 0, APPDELEGATE.session.profileImageRef.size.width, APPDELEGATE.session.profileImageRef.size.height)];
         profileImgView.center = profileImageView.center;
         [profileInfoArea addSubview:profileImgView];
-
+        
         UITapGestureRecognizer *imageTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapped)];
         imageTap.enabled = YES;
         imageTap.numberOfTapsRequired = 1;
@@ -97,24 +118,24 @@
     }
     
     /*
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul), ^(void) {
-        UIImage *profileImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:APPDELEGATE.session.user.profileImgUrl]]];
-        UIImageView *profileImgView = [[UIImageView alloc] initWithFrame:CGRectMake(17, (60 - profileBgImg.size.height - 2)/2, profileImageView.frame.size.width - 4, profileImageView.frame.size.height - 4)];
-        profileImgView.image = [Util circularScaleNCrop:profileImage forRect:CGRectMake(0, 0, 88, 88)];
-        profileImgView.center = profileImageView.center;
-        [profileInfoArea addSubview:profileImgView];
-    });
+     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul), ^(void) {
+     UIImage *profileImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:APPDELEGATE.session.user.profileImgUrl]]];
+     UIImageView *profileImgView = [[UIImageView alloc] initWithFrame:CGRectMake(17, (60 - profileBgImg.size.height - 2)/2, profileImageView.frame.size.width - 4, profileImageView.frame.size.height - 4)];
+     profileImgView.image = [Util circularScaleNCrop:profileImage forRect:CGRectMake(0, 0, 88, 88)];
+     profileImgView.center = profileImageView.center;
+     [profileInfoArea addSubview:profileImgView];
+     });
      */
     
     UIImageView *profileFrameImageView = [[UIImageView alloc] initWithFrame:CGRectMake(116, 0, 88, 88)];
     UIImage *profileFrameImage = [UIImage imageNamed:@"profile_frame"];
     [profileFrameImageView setImage:profileFrameImage];
-//    [profileInfoArea addSubview:profileFrameImageView];
+    //    [profileInfoArea addSubview:profileFrameImageView];
     
     CustomButton *profileButton = [[CustomButton alloc]initWithFrame:CGRectMake(116, 0, 88, 88) withImageName:@"profile_image_button"];
     //[profileButton addTarget:self action:@selector(ShowImageOptionsArea) forControlEvents:UIControlEventTouchUpInside];
     profileButton.userInteractionEnabled = NO;
-//    [profileInfoArea addSubview:profileButton];
+    //    [profileInfoArea addSubview:profileButton];
     
     UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, profileImageView.frame.origin.y + profileImageView.frame.size.height + (IS_IPAD ? 20 : 5), self.view.frame.size.width - 20, IS_IPAD ? 30 : 20)];
     if(APPDELEGATE.session.user.email) {
@@ -127,7 +148,7 @@
     nameLabel.textColor = [Util UIColorForHexColor:@"FFFFFF"];
     nameLabel.backgroundColor= [UIColor clearColor];
     [profileInfoArea addSubview:nameLabel];
-
+    
     NSString *msisdnVal = APPDELEGATE.session.user.phoneNumber;
     UIFont *msisdnFont = [UIFont fontWithName:@"TurkcellSaturaDem" size:(IS_IPAD ? 30 : 20)];
     
@@ -141,28 +162,28 @@
     msisdnLabel.backgroundColor= [UIColor clearColor];
     [msisdnLabel setUserInteractionEnabled:YES];
     [profileInfoArea addSubview:msisdnLabel];
-
+    
     UITapGestureRecognizer * singleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(msisdnClicked)];
     singleTapGesture.numberOfTapsRequired = 1;
     singleTapGesture.enabled = YES;
     [msisdnLabel addGestureRecognizer:singleTapGesture];
-
+    
     UIImage *editIcon = [UIImage imageNamed:@"icon_editnum.png"];
     UIImageView *editIconView = [[UIImageView alloc] initWithFrame:CGRectMake(msisdnLabel.frame.origin.x - 17, msisdnLabel.frame.origin.y, 14, 14)];
     editIconView.image = editIcon;
     [profileInfoArea addSubview:editIconView];
-
-    /*
-    UIImageView *cellPhoneIcon = [[UIImageView alloc]initWithFrame:CGRectMake(111, 123, 7, 11)];
-    cellPhoneIcon.image = [UIImage imageNamed:@"cellphone_icon@2x"];
-    [profileInfoArea addSubview:cellPhoneIcon];
     
-    UILabel *phoneNumberLabel = [[UILabel alloc] initWithFrame:CGRectMake(122.5, 119, 190, 20)];
-//    [phoneNumberLabel setText:APPDELEGATE.session.user.msisdn];
-    phoneNumberLabel.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:17];
-    phoneNumberLabel.textColor = [Util UIColorForHexColor:@"AFDCF5"];
-    phoneNumberLabel.backgroundColor= [UIColor clearColor];
-    [profileInfoArea addSubview:phoneNumberLabel];
+    /*
+     UIImageView *cellPhoneIcon = [[UIImageView alloc]initWithFrame:CGRectMake(111, 123, 7, 11)];
+     cellPhoneIcon.image = [UIImage imageNamed:@"cellphone_icon@2x"];
+     [profileInfoArea addSubview:cellPhoneIcon];
+     
+     UILabel *phoneNumberLabel = [[UILabel alloc] initWithFrame:CGRectMake(122.5, 119, 190, 20)];
+     //    [phoneNumberLabel setText:APPDELEGATE.session.user.msisdn];
+     phoneNumberLabel.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:17];
+     phoneNumberLabel.textColor = [Util UIColorForHexColor:@"AFDCF5"];
+     phoneNumberLabel.backgroundColor= [UIColor clearColor];
+     [profileInfoArea addSubview:phoneNumberLabel];
      */
     
     [self.view addSubview:profileInfoArea];
@@ -177,7 +198,10 @@
 }
 
 - (void) drawSettingsCategories {
-    pageContentTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topIndex + self.view.frame.size.width/2, self.view.frame.size.width, self.view.frame.size.height-self.bottomIndex-self.view.frame.size.width/2) style:UITableViewStyleGrouped];
+    CGSize size = self.view.frame.size;
+    int yOffset = self.topIndex + self.view.frame.size.width/2;
+    pageContentTable = [[UITableView alloc] initWithFrame:CGRectMake(0, yOffset, size.width, size.height- yOffset)
+                                                    style:UITableViewStyleGrouped];
     pageContentTable.delegate = self;
     pageContentTable.dataSource = self;
     pageContentTable.backgroundColor = [UIColor clearColor];
@@ -349,27 +373,27 @@
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"RecentActivityLinkerTitle", @"") titleColor:nil subTitleText:@"" iconName:@"icon_hp_sonislemler.png" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         return cell;
-//    } else if (indexPath.row == 3) {
-//        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"ConnectedDevices", @"") titleColor:nil subTitleText:@"" iconName:@"device_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
-//        cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
-//        return cell;
-//    } else if (indexPath.row == 3) {
-//        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"PasswordSettingsTitle", @"") titleColor:nil subTitleText:@"" iconName:@"icon_set_pass" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
-//        cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
-//        return cell;
+        //    } else if (indexPath.row == 3) {
+        //        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"ConnectedDevices", @"") titleColor:nil subTitleText:@"" iconName:@"device_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
+        //        cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+        //        return cell;
+        //    } else if (indexPath.row == 3) {
+        //        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"PasswordSettingsTitle", @"") titleColor:nil subTitleText:@"" iconName:@"icon_set_pass" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
+        //        cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+        //        return cell;
     } else if (indexPath.row == 3) {
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"EmailTitle", @"") titleColor:nil subTitleText:@"" iconName:@"email_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         return cell;
     } else if (indexPath.row == 4) {
-//        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"ExportFromDropbox", @"") titleColor:nil subTitleText:@"" iconName:@"icon_dbtasi" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
+        //        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"ExportFromDropbox", @"") titleColor:nil subTitleText:@"" iconName:@"icon_dbtasi" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"ExportFromDropbox", @"") titleColor:nil subTitleText:@"" iconName:@"nav_download_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         return cell;
-//    } else if (indexPath.row == 6) {
-//        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"SocialMediaTitle", @"") titleColor:nil subTitleText:@"" iconName:@"icon_sm.png" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
-//        cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
-//        return cell;
+        //    } else if (indexPath.row == 6) {
+        //        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"SocialMediaTitle", @"") titleColor:nil subTitleText:@"" iconName:@"icon_sm.png" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
+        //        cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+        //        return cell;
     } else if (indexPath.row == 5) {
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"FAQ", @"") titleColor:nil subTitleText:@"" iconName:@"help_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
@@ -394,20 +418,20 @@
         case 2:
             [self didTriggerRecentActivities];
             break;
-//        case 3:
-//            [self didTriggerConnectedDevices];
-//            break;
-//        case 3:
-//            [self didTriggerPass];
-//            break;
+            //        case 3:
+            //            [self didTriggerConnectedDevices];
+            //            break;
+            //        case 3:
+            //            [self didTriggerPass];
+            //            break;
         case 3:
             [self didTriggerEmail];
             break;
         case 4:
             [self didTriggerExportFromDropbox];
             break;
-//        case 6:
-//            [self didTriggerExportFromSocial];
+            //        case 6:
+            //            [self didTriggerExportFromSocial];
             break;
         case 5:
             [self didTriggerHelp];
@@ -435,18 +459,18 @@
         NSData *logData = [NSData dataWithContentsOfFile:logPath];
         
         [mailCont addAttachmentData:logData mimeType:@"text/plain" fileName:@"logs.txt"];
-
+        
         [self presentViewController:mailCont animated:YES completion:nil];
     }
 }
-    
+
 - (void) mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
     [controller dismissViewControllerAnimated:YES completion:nil];
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *logPath = [documentsDirectory stringByAppendingPathComponent:@"nslogs.log"];
-
+    
     NSFileManager *fileManager = [NSFileManager defaultManager];
     [fileManager removeItemAtPath:logPath error:nil];
 }
@@ -477,29 +501,29 @@
                           delay:0
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
-        imageOptionsArea.frame = CGRectMake(0, popupContainer.frame.size.height - 205, imageOptionsArea.frame.size.width, imageOptionsArea.frame.size.height);
-        darkArea.alpha = 0.85;
-    } completion:^(BOOL finished) {
-    }];
+                         imageOptionsArea.frame = CGRectMake(0, popupContainer.frame.size.height - 205, imageOptionsArea.frame.size.width, imageOptionsArea.frame.size.height);
+                         darkArea.alpha = 0.85;
+                     } completion:^(BOOL finished) {
+                     }];
 }
 
 - (void) HideImageOptionsArea {
     [UIView animateWithDuration:0.3
                           delay:0
-    options:UIViewAnimationOptionCurveEaseIn
+                        options:UIViewAnimationOptionCurveEaseIn
                      animations:^{
-        imageOptionsArea.frame = CGRectMake(0, popupContainer.frame.size.height, imageOptionsArea.frame.size.width, imageOptionsArea.frame.size.height);
-        darkArea.alpha = 0.0;
-    } completion:^(BOOL finished) {
-        popupContainer.hidden = YES;
-        darkArea.alpha = 0.85;
-    }];
+                         imageOptionsArea.frame = CGRectMake(0, popupContainer.frame.size.height, imageOptionsArea.frame.size.width, imageOptionsArea.frame.size.height);
+                         darkArea.alpha = 0.0;
+                     } completion:^(BOOL finished) {
+                         popupContainer.hidden = YES;
+                         darkArea.alpha = 0.85;
+                     }];
 }
 
 - (void) didTriggerStorage {
     [MPush hitTag:@"packages"];
     [MPush hitEvent:@"packages"];
-
+    
     RevisitedStorageController *storageController = [[RevisitedStorageController alloc] init];
     storageController.nav = self.nav;
     [self.nav pushViewController:storageController animated:YES];
@@ -518,18 +542,18 @@
 - (void) didTriggerConnectedDevices {
     [MPush hitTag:@"connected_devices"];
     [MPush hitEvent:@"connected_devices"];
-
+    
     SettingsConnectedDevicesController *connectedDevicesController = [[SettingsConnectedDevicesController alloc] init];
     connectedDevicesController.nav = self.nav;
     [self.nav pushViewController:connectedDevicesController animated:YES];
 }
 /*
-- (void) didTriggerNotifications {
-    SettingsNotificationsController *notificationsController = [[SettingsNotificationsController alloc] init];
-    notificationsController.nav = self.nav;
-    [self.nav pushViewController:notificationsController animated:YES];
-}
-*/
+ - (void) didTriggerNotifications {
+ SettingsNotificationsController *notificationsController = [[SettingsNotificationsController alloc] init];
+ notificationsController.nav = self.nav;
+ [self.nav pushViewController:notificationsController animated:YES];
+ }
+ */
 
 - (void) didTriggerEmail {
     EmailChangeController *emailController = [[EmailChangeController alloc] init];
@@ -591,12 +615,12 @@
             picker.allowsEditing = YES;
             picker.delegate = self;
             picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-
+            
             if(IS_IPAD) {
                 picker.modalPresentationStyle = UIModalPresentationFullScreen;
                 [APPDELEGATE.window.rootViewController presentViewController:picker animated:YES completion:nil];
-//                popOver = [[UIPopoverController alloc] initWithContentViewController:picker];
-//                [popOver presentPopoverFromRect:profileImgView.frame inView:APPDELEGATE.base.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
+                //                popOver = [[UIPopoverController alloc] initWithContentViewController:picker];
+                //                [popOver presentPopoverFromRect:profileImgView.frame inView:APPDELEGATE.base.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
             } else {
                 [self presentViewController:picker animated:YES completion:nil];
             }
@@ -624,7 +648,7 @@
     if(popOver) {
         [popOver dismissPopoverAnimated:YES];
     }
-
+    
     UIImage *selectedImage;
     NSURL *mediaUrl;
     mediaUrl = (NSURL *)[info valueForKey:UIImagePickerControllerMediaURL];
@@ -652,7 +676,7 @@
 - (void) photoUploadSuccess {
     [self hideLoading];
     [self showInfoAlertWithMessage:NSLocalizedString(@"ProfilePhotoUploadSuccess", @"")];
-
+    
     APPDELEGATE.session.profileImageRef = updatedImageRef;
     profileImgView.image = [Util circularScaleNCrop:APPDELEGATE.session.profileImageRef forRect:CGRectMake(0, 0, APPDELEGATE.session.profileImageRef.size.width, APPDELEGATE.session.profileImageRef.size.height)];
     [[NSNotificationCenter defaultCenter] postNotificationName:PROFILE_IMG_UPLOADED_NOTIFICATION object:nil];

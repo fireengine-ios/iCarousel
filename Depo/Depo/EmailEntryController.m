@@ -151,6 +151,7 @@
         [MPush hitTag:@"EmailEntry" withValue:@"finished"];
         APPDELEGATE.session.user.email = emailField.text;
         APPDELEGATE.session.emailEmpty = NO;
+        [[NSNotificationCenter defaultCenter] postNotificationName:EMAIL_CHANGED_NOTIFICATION object:nil userInfo:nil];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
