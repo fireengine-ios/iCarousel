@@ -169,6 +169,7 @@
     NSArray *readPermissions = [permissions objectForKey:@"read"];
 
     FBSDKLoginManager *fbLoginButton = [[FBSDKLoginManager alloc] init];
+    fbLoginButton.loginBehavior = FBSDKLoginBehaviorWeb;
     [fbLoginButton logInWithReadPermissions:readPermissions fromViewController:self handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
         if (error) {
             NSLog(@"Process error1");
