@@ -22,6 +22,4 @@
 @property (nonatomic, strong) NSDate *lastModifiedDate;
 @property (nonatomic, strong) NSArray *content;
 
--(PhotoAlbum *)initWithMetaFile:(MetaFile *)file;
-
 @end

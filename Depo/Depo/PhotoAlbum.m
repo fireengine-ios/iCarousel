@@ -22,15 +22,4 @@
 @synthesize content;
 
 
--(PhotoAlbum *)initWithMetaFile:(MetaFile *)file {
-    self = [super init];
-    if (self) {
-        self.uuid = file.uuid;
-        self.albumId = file.Id;
-        self.label = file.name;
-    }
-    
-    return self;
-}
-
 @end

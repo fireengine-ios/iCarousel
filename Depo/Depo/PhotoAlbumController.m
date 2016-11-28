@@ -32,98 +32,128 @@
 @synthesize footerActionMenu;
 @synthesize refreshControlPhotos;
 
+
+#pragma mark - Init Methods
+
 - (id)initWithAlbum:(PhotoAlbum *) _album {
     self = [super init];
     if (self) {
         self.album = _album;
         self.view.backgroundColor = [UIColor whiteColor];
-
-        detailDao = [[AlbumDetailDao alloc] init];
-        detailDao.delegate = self;
-        detailDao.successMethod = @selector(albumDetailSuccessCallback:);
-        detailDao.failMethod = @selector(albumDetailFailCallback:);
         
-        renameDao = [[RenameAlbumDao alloc] init];
-        renameDao.delegate = self;
-        renameDao.successMethod = @selector(renameSuccessCallback:);
-        renameDao.failMethod = @selector(renameFailCallback:);
-        
-        deleteDao = [[DeleteAlbumsDao alloc] init];
-        deleteDao.delegate = self;
-        deleteDao.successMethod = @selector(deleteSuccessCallback);
-        deleteDao.failMethod = @selector(deleteFailCallback:);
-        
-        deleteImgDao = [[AlbumRemovePhotosDao alloc] init];
-        deleteImgDao.delegate = self;
-        deleteImgDao.successMethod = @selector(deleteImgSuccessCallback:);
-        deleteImgDao.failMethod = @selector(deleteImgFailCallback:);
-        
-        shareDao = [[ShareLinkDao alloc] init];
-        shareDao.delegate = self;
-        shareDao.successMethod = @selector(shareSuccessCallback:);
-        shareDao.failMethod = @selector(shareFailCallback:);
-        
-        albumAddPhotosDao = [[AlbumAddPhotosDao alloc] init];
-        albumAddPhotosDao.delegate = self;
-        albumAddPhotosDao.successMethod = @selector(photosAddedSuccessCallback);
-        albumAddPhotosDao.failMethod = @selector(photosAddedFailCallback:);
-        
+        [self initDaoModels];
         selectedFileList = [[NSMutableArray alloc] init];
-
         photoList = [[NSMutableArray alloc] init];
         [photoList addObjectsFromArray:[[UploadQueue sharedInstance] uploadImageRefsForAlbum:self.album.uuid]];
         
-        float mainImageHeight = self.view.frame.size.width/2;
-
-        if(self.album.cover.detail.thumbLargeUrl) {
-            UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, mainImageHeight)];
-            [bgImgView setClipsToBounds:YES];
-            bgImgView.contentMode = UIViewContentModeScaleAspectFill;
-            [bgImgView setImageWithURL:[NSURL URLWithString:self.album.cover.detail.thumbLargeUrl]];
-            [self.view addSubview:bgImgView];
-            
-            UIImageView *maskImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, mainImageHeight)];
-            maskImgView.image = [UIImage imageNamed:@"album_mask.png"];
-            [self.view addSubview:maskImgView];
-        } else {
-            emptyBgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, mainImageHeight)];
-            emptyBgImgView.image = [UIImage imageNamed:@"empty_album_header_bg.png"];
-            [self.view addSubview:emptyBgImgView];
-        }
-
-        topBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64)];
-        topBgView.backgroundColor = [Util UIColorForHexColor:@"3fb0e8"];
-        topBgView.hidden = YES;
-        [self.view addSubview:topBgView];
-        
-        CustomButton *customBackButton = [[CustomButton alloc] initWithFrame:CGRectMake(10, 30, 20, 34) withImageName:@"white_left_arrow.png"];
-        [customBackButton addTarget:self action:@selector(triggerBack) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:customBackButton];
-        
-        titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(40, 35, self.view.frame.size.width - 80, 24) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:20] withColor:[UIColor whiteColor] withText:self.album.label];
-        titleLabel.textAlignment = NSTextAlignmentCenter;
-        [self.view addSubview:titleLabel];
-
-        [self initAndSetSubTitle];
-        
-        moreButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 30, 35, 20, 20) withImageName:@"dots_icon.png"];
-        [moreButton addTarget:self action:@selector(moreClicked) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:moreButton];
-
-        photosScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, mainImageHeight, self.view.frame.size.width, self.view.frame.size.height - mainImageHeight)];
-        photosScroll.delegate = self;
-        photosScroll.tag = 111;
-        photosScroll.userInteractionEnabled = YES ;
-        photosScroll.scrollEnabled = YES;
-        [self.view addSubview:photosScroll];
-        
-        refreshControlPhotos = [[UIRefreshControl alloc] init];
-        [refreshControlPhotos addTarget:self action:@selector(triggerRefresh) forControlEvents:UIControlEventValueChanged];
-        [photosScroll addSubview:refreshControlPhotos];
-        
+        [self reloadUI];
         [self triggerRefresh];
     }
     return self;
+}
+
+- (id)initWithAlbumUUID:(NSString *) _albumUUID {
+    self = [super init];
+    if (self) {
+       
+        self.view.backgroundColor = [UIColor whiteColor];
+        
+        [self initDaoModels];
+        selectedFileList = [[NSMutableArray alloc] init];
+        photoList = [[NSMutableArray alloc] init];
+        [photoList addObjectsFromArray:[[UploadQueue sharedInstance] uploadImageRefsForAlbum:self.album.uuid]];
+        
+        listOffset = 0;
+        [self reloadUI];
+        [self showLoading];
+        //[detailDao requestDetailOfAlbum:_albumUUID forStart:listOffset andSize:20];
+    }
+    return self;
+}
+
+- (void) initDaoModels {
+    detailDao = [[AlbumDetailDao alloc] init];
+    detailDao.delegate = self;
+    detailDao.successMethod = @selector(albumDetailSuccessCallback:);
+    detailDao.failMethod = @selector(albumDetailFailCallback:);
+    
+    renameDao = [[RenameAlbumDao alloc] init];
+    renameDao.delegate = self;
+    renameDao.successMethod = @selector(renameSuccessCallback:);
+    renameDao.failMethod = @selector(renameFailCallback:);
+    
+    deleteDao = [[DeleteAlbumsDao alloc] init];
+    deleteDao.delegate = self;
+    deleteDao.successMethod = @selector(deleteSuccessCallback);
+    deleteDao.failMethod = @selector(deleteFailCallback:);
+    
+    deleteImgDao = [[AlbumRemovePhotosDao alloc] init];
+    deleteImgDao.delegate = self;
+    deleteImgDao.successMethod = @selector(deleteImgSuccessCallback:);
+    deleteImgDao.failMethod = @selector(deleteImgFailCallback:);
+    
+    shareDao = [[ShareLinkDao alloc] init];
+    shareDao.delegate = self;
+    shareDao.successMethod = @selector(shareSuccessCallback:);
+    shareDao.failMethod = @selector(shareFailCallback:);
+    
+    albumAddPhotosDao = [[AlbumAddPhotosDao alloc] init];
+    albumAddPhotosDao.delegate = self;
+    albumAddPhotosDao.successMethod = @selector(photosAddedSuccessCallback);
+    albumAddPhotosDao.failMethod = @selector(photosAddedFailCallback:);
+}
+
+#pragma mark - UI Reload
+
+- (void) reloadUI {
+    [self.view.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    float mainImageHeight = self.view.frame.size.width/2;
+    
+    if(self.album.cover.detail.thumbLargeUrl) {
+        UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, mainImageHeight)];
+        [bgImgView setClipsToBounds:YES];
+        bgImgView.contentMode = UIViewContentModeScaleAspectFill;
+        [bgImgView setImageWithURL:[NSURL URLWithString:self.album.cover.detail.thumbLargeUrl]];
+        [self.view addSubview:bgImgView];
+        
+        UIImageView *maskImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, mainImageHeight)];
+        maskImgView.image = [UIImage imageNamed:@"album_mask.png"];
+        [self.view addSubview:maskImgView];
+    } else {
+        emptyBgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, mainImageHeight)];
+        emptyBgImgView.image = [UIImage imageNamed:@"empty_album_header_bg.png"];
+        [self.view addSubview:emptyBgImgView];
+    }
+    
+    topBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64)];
+    topBgView.backgroundColor = [Util UIColorForHexColor:@"3fb0e8"];
+    topBgView.hidden = YES;
+    [self.view addSubview:topBgView];
+    
+    CustomButton *customBackButton = [[CustomButton alloc] initWithFrame:CGRectMake(10, 30, 20, 34) withImageName:@"white_left_arrow.png"];
+    [customBackButton addTarget:self action:@selector(triggerBack) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:customBackButton];
+    
+    titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(40, 35, self.view.frame.size.width - 80, 24) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:20] withColor:[UIColor whiteColor] withText:self.album.label];
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:titleLabel];
+    
+    [self initAndSetSubTitle];
+    
+    moreButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 30, 35, 20, 20) withImageName:@"dots_icon.png"];
+    [moreButton addTarget:self action:@selector(moreClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:moreButton];
+    
+    photosScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, mainImageHeight, self.view.frame.size.width, self.view.frame.size.height - mainImageHeight)];
+    photosScroll.delegate = self;
+    photosScroll.tag = 111;
+    photosScroll.userInteractionEnabled = YES ;
+    photosScroll.scrollEnabled = YES;
+    [self.view addSubview:photosScroll];
+    
+    refreshControlPhotos = [[UIRefreshControl alloc] init];
+    [refreshControlPhotos addTarget:self action:@selector(triggerRefresh) forControlEvents:UIControlEventValueChanged];
+    [photosScroll addSubview:refreshControlPhotos];
 }
 
 - (void) triggerRefresh {
@@ -185,6 +215,12 @@
 }
 
 - (void) albumDetailSuccessCallback:(PhotoAlbum *) albumWithUpdatedContent {
+    if (self.album == nil) {
+        self.album = [[PhotoAlbum alloc] init];
+        self.album = albumWithUpdatedContent;
+        [self reloadUI];
+        [self hideLoading];
+    }
     int counter = (int)[photoList count];
 
     int imagePerLine = 3;

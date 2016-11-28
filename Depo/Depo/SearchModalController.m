@@ -188,6 +188,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [self.navigationController setNavigationBarHidden:false];
     [self.navigationController.navigationBar setBarTintColor:[Util UIColorForHexColor:@"1a1e24"]];
     [self.navigationController.navigationBar setTintColor:[Util UIColorForHexColor:@"1a1e24"]];
     if (animateSearchArea) {
@@ -424,11 +425,11 @@
 }
 
 -(void)showPhotoAlbumWithMetaFile:(MetaFile *)file {
-    PhotoAlbum *album = [[PhotoAlbum alloc] initWithMetaFile:file];
-    PhotoAlbumController *albumController = [[PhotoAlbumController alloc] initWithAlbum:album];
+   // PhotoAlbum *album = [[PhotoAlbum alloc] initWithMetaFile:file];
+    PhotoAlbumController *albumController = [[PhotoAlbumController alloc] initWithAlbumUUID:file.uuid];
     albumController.delegate = self;
     albumController.nav = self.nav;
-    [self.navigationController pushViewController:albumController animated:NO];
+    [self.navigationController pushViewController:albumController animated:YES];
 }
 
 - (NSMutableArray *)getCurrentList:(int)sectionNumber {

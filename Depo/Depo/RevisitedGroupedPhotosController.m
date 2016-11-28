@@ -164,7 +164,7 @@
     PhotoAlbumController *albumController = [[PhotoAlbumController alloc] initWithAlbum:albumSelected];
     albumController.delegate = self;
     albumController.nav = self.nav;
-    [self.navigationController pushViewController:albumController animated:NO];
+    [self.navigationController pushViewController:albumController animated:YES];
 }
 
 - (void) revisitedAlbumListChangeTitleTo:(NSString *)pageTitle {
