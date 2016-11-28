@@ -667,13 +667,13 @@
     UIBarButtonItem *moreItem = [[UIBarButtonItem alloc] initWithCustomView:moreButton];
     self.navigationItem.rightBarButtonItem = moreItem;
     
-    if(![AppUtil readDoNotShowAgainFlagForKey:TUTORIAL_DETAIL_KEY] && !APPDELEGATE.session.photoDetailTipShown) {
-        UIWindow *window = APPDELEGATE.window;
-        TutorialView *tutorialView = [[TutorialView alloc] initWithFrame:CGRectMake(0, 0, window.frame.size.width, window.frame.size.height) withBgImageName:@"img_baski_2.jpg" withTitle:@"" withKey:TUTORIAL_DETAIL_KEY doNotShowFlag:NO];
-        [window addSubview:tutorialView];
-        APPDELEGATE.session.photoDetailTipShown = YES;
-        [AppUtil writeDoNotShowAgainFlagForKey:TUTORIAL_DETAIL_KEY];
-    }
+//    if(![AppUtil readDoNotShowAgainFlagForKey:TUTORIAL_DETAIL_KEY] && !APPDELEGATE.session.photoDetailTipShown) {
+//        UIWindow *window = APPDELEGATE.window;
+//        TutorialView *tutorialView = [[TutorialView alloc] initWithFrame:CGRectMake(0, 0, window.frame.size.width, window.frame.size.height) withBgImageName:@"img_baski_2.jpg" withTitle:@"" withKey:TUTORIAL_DETAIL_KEY doNotShowFlag:NO];
+//        [window addSubview:tutorialView];
+//        APPDELEGATE.session.photoDetailTipShown = YES;
+//        [AppUtil writeDoNotShowAgainFlagForKey:TUTORIAL_DETAIL_KEY];
+//    }
 }
 
 - (void) viewDidAppear:(BOOL)animated {
