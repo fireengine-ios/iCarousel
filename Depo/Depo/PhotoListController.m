@@ -781,8 +781,21 @@
     }
 }
 
+#pragma mark - More Menu Delegate
+
+-(void)moreMenuDidSelectUpdateSelectOption {
+    [self changeToSelectedStatus];
+}
+
 - (void) moreMenuDidSelectSortWithList {
     [APPDELEGATE.base showSortWithList:[NSArray arrayWithObjects:[NSNumber numberWithInt:SortTypeAlphaAsc], [NSNumber numberWithInt:SortTypeAlphaDesc], [NSNumber numberWithInt:SortTypeDateAsc], [NSNumber numberWithInt:SortTypeDateDesc], nil]];
+}
+
+-(void)moreMenuDidSelectSort {
+    SortModalController *sort = [[SortModalController alloc] init];
+    sort.delegate = self;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:sort];
+    [self presentViewController:modalNav animated:YES completion:nil];
 }
 
 - (void) sortDidChange {

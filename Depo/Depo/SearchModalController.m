@@ -16,6 +16,7 @@
 #import "MusicCell.h"
 #import "ImageCell.h"
 #import "DocCell.h"
+#import "AlbumCell.h"
 #import "TableHeaderView.h"
 #import "MessageCell.h"
 #import "SearchMoreModalController.h"
@@ -328,6 +329,9 @@
                         cell = [[MusicCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex highlightedText:currentSearchText];
                     else if (fileAtIndex.contentType == ContentTypeDoc)
                         cell = [[DocCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex highlightedText:currentSearchText];
+                    else if (fileAtIndex.contentType == ContentTypeAlbumPhoto) {
+                        cell = [[AlbumCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex highlightedText:currentSearchText];
+                    }
                     else
                         cell = [[DocCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex highlightedText:currentSearchText];
                     ((AbstractFileFolderCell *) cell).delegate = self;
@@ -425,11 +429,10 @@
 }
 
 -(void)showPhotoAlbumWithMetaFile:(MetaFile *)file {
-   // PhotoAlbum *album = [[PhotoAlbum alloc] initWithMetaFile:file];
     PhotoAlbumController *albumController = [[PhotoAlbumController alloc] initWithAlbumUUID:file.uuid];
     albumController.delegate = self;
     albumController.nav = self.nav;
-    [self.navigationController pushViewController:albumController animated:YES];
+    [self.navigationController pushViewController:albumController animated:NO];
 }
 
 - (NSMutableArray *)getCurrentList:(int)sectionNumber {
@@ -465,6 +468,12 @@
 }
 
 
+
+#pragma mark Photo Album Delegate
+
+- (void) photoAlbumDidChange:(NSString *) albumUuid {
+    [self startSearch:currentSearchText];
+}
 
 #pragma mark AbstractFileFolderDelegate methods
 

@@ -126,6 +126,13 @@
 
 #pragma mark MoreMenuDelegate
 
+- (void) moreMenuDidSelectFileDetailForFile:(MetaFile *) file {
+    FileDetailModalController *fileDetail = [[FileDetailModalController alloc] initWithFile:file];
+    fileDetail.delegate = self;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:fileDetail];
+    [self presentViewController:modalNav animated:YES completion:nil];
+}
+
 - (void) moreMenuDidSelectDelete {
     if([CacheUtil showConfirmDeletePageFlag]) {
         [self confirmDeleteDidConfirm];

@@ -406,6 +406,20 @@
     [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeSort], [NSNumber numberWithInt:MoreMenuTypeSelect]]];
 }
 
+
+#pragma mark - More Menu Delegate
+
+-(void)moreMenuDidSelectSort {
+    SortModalController *sort = [[SortModalController alloc] init];
+    sort.delegate = self;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:sort];
+    [self presentViewController:modalNav animated:YES completion:nil];
+}
+
+-(void)moreMenuDidSelectUpdateSelectOption {
+    [self changeToSelectedStatus];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 

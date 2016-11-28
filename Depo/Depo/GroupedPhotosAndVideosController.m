@@ -712,6 +712,13 @@
     }
 }
 
+
+#pragma mark - More Menu Delegate
+
+-(void)moreMenuDidSelectUpdateSelectOption {
+    [self changeToSelectedStatus];
+}
+
 - (void) moreMenuDidSelectSortWithList {
     if(segmentType == PhotoHeaderSegmentTypeAlbum) {
         [APPDELEGATE.base showSortWithList:[NSArray arrayWithObjects:[NSNumber numberWithInt:SortTypeAlphaAsc], [NSNumber numberWithInt:SortTypeAlphaDesc], [NSNumber numberWithInt:SortTypeDateAsc], [NSNumber numberWithInt:SortTypeDateDesc], nil]];

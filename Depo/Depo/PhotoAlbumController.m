@@ -65,8 +65,7 @@
         
         listOffset = 0;
         [self reloadUI];
-        [self showLoading];
-        //[detailDao requestDetailOfAlbum:_albumUUID forStart:listOffset andSize:20];
+        [detailDao requestDetailOfAlbum:_albumUUID forStart:listOffset andSize:20];
     }
     return self;
 }
@@ -219,7 +218,6 @@
         self.album = [[PhotoAlbum alloc] init];
         self.album = albumWithUpdatedContent;
         [self reloadUI];
-        [self hideLoading];
     }
     int counter = (int)[photoList count];
 
@@ -393,6 +391,10 @@
 
 #pragma mark MoreMenuDelegate
 
+-(void)moreMenuDidSelectUpdateSelectOption {
+    [self changeToSelectedStatus];
+}
+
 - (void) moreMenuDidSelectAlbumShare {
     [self triggerShareForFiles:@[self.album.uuid]];
 }
@@ -405,6 +407,13 @@
         self.deleteType = DeleteTypeMoreMenu;
         [APPDELEGATE.base showConfirmDelete];
     }
+}
+
+- (void) moreMenuDidSelectAlbumDetailForAlbum:(PhotoAlbum *) album {
+    AlbumDetailModalController *albumDetail = [[AlbumDetailModalController alloc] initWithAlbum:album];
+    albumDetail.delegate = self;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:albumDetail];
+    [self presentViewController:modalNav animated:YES completion:nil];
 }
 
 - (void) moreMenuDidDismiss {

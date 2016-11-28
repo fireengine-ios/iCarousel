@@ -19,7 +19,7 @@
 #import "PhotoAlbumController.h"
 #import "CustomConfirmView.h"
 
-@interface SearchModalController : MyModalController <UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, ConfirmDeleteDelegate, MoveListModalProtocol, PhotoModalDelegate, CustomConfirmDelegate> {
+@interface SearchModalController : MyModalController <UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, ConfirmDeleteDelegate, MoveListModalProtocol, PhotoAlbumDelegate, CustomConfirmDelegate> {
     UIView *searchFieldContainer;
     SearchTextField *searchField;
     RecentSearchesTableView *recentSearchesTableView;

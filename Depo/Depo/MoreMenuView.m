@@ -101,19 +101,21 @@
             [delegate moreMenuDidSelectRemoveFromAlbum];
             break;
         case MoreMenuTypeSort:
-            [APPDELEGATE.base showSort];
+            [delegate moreMenuDidSelectSort];
             break;
         case MoreMenuTypeSortWithList:
             [delegate moreMenuDidSelectSortWithList];
             break;
         case MoreMenuTypeSelect:
-            [APPDELEGATE.base showSelect];
+            if ([delegate respondsToSelector:@selector(moreMenuDidSelectUpdateSelectOption)]) {
+                [delegate moreMenuDidSelectUpdateSelectOption];
+            }
             break;
         case MoreMenuTypeFolderDetail:
-            [APPDELEGATE.base showFolderDetailForFolder:self.fileFolder];
+            [delegate moreMenuDidSelectFolderDetailForFolder:self.fileFolder];
             break;
         case MoreMenuTypeAlbumDetail:
-            [APPDELEGATE.base showAlbumDetailForAlbum:self.album];
+            [delegate moreMenuDidSelectAlbumDetailForAlbum:self.album];
             break;
         case MoreMenuTypeFav:
             [delegate moreMenuDidSelectFav];
@@ -122,7 +124,7 @@
             [delegate moreMenuDidSelectUnfav];
             break;
         case MoreMenuTypeFileDetail:
-            [APPDELEGATE.base showFileDetailForFile:self.fileFolder];
+            [delegate moreMenuDidSelectFileDetailForFile:self.fileFolder];
             break;
         case MoreMenuTypeImageDetail:
             [delegate moreMenuDidSelectImageDetail];

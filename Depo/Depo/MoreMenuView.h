@@ -12,6 +12,7 @@
 
 @protocol MoreMenuDelegate <NSObject>
 - (void) moreMenuDidSelectSortWithList;
+- (void) moreMenuDidSelectSort;
 - (void) moreMenuDidSelectFav;
 - (void) moreMenuDidSelectUnfav;
 - (void) moreMenuDidSelectShare;
@@ -25,6 +26,10 @@
 - (void) moreMenuDidDismiss;
 - (void) moreMenuDidSelectMusicDetail;
 - (void) moreMenuDidSelectVideofy;
+- (void) moreMenuDidSelectAlbumDetailForAlbum:(PhotoAlbum *) album;
+- (void) moreMenuDidSelectFolderDetailForFolder:(MetaFile *) folder;
+- (void) moreMenuDidSelectFileDetailForFile:(MetaFile *) file;
+- (void) moreMenuDidSelectUpdateSelectOption;
 @end
 
 @interface MoreMenuView : UIView <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>

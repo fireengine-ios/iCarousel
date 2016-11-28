@@ -134,6 +134,9 @@
         case ContentTypeFolder:
             iconName = @"folder_icon.png";
             break;
+        case ContentTypeAlbumPhoto:
+            iconName = @"album_photo_icon.png";
+            break;
         default:
             break;
     }

@@ -836,6 +836,24 @@
 
 #pragma mark MoreMenuDelegate
 
+-(void)moreMenuDidSelectFolderDetailForFolder:(MetaFile *) folder {
+    FolderDetailModalController *folderDetail = [[FolderDetailModalController alloc] initWithFolder:folder];
+    folderDetail.delegate = self;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:folderDetail];
+    [self presentViewController:modalNav animated:YES completion:nil];
+}
+
+-(void)moreMenuDidSelectUpdateSelectOption {
+    [self changeToSelectedStatus];
+}
+
+-(void)moreMenuDidSelectSort {
+    SortModalController *sort = [[SortModalController alloc] init];
+    sort.delegate = self;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:sort];
+    [self presentViewController:modalNav animated:YES completion:nil];
+}
+
 - (void) moreMenuDidSelectDelete {
     if([CacheUtil showConfirmDeletePageFlag]) {
         uuidListToBeDeleted = @[self.folder.uuid];

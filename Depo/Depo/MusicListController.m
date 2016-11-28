@@ -381,6 +381,10 @@
     [APPDELEGATE.base showSortWithList:[NSArray arrayWithObjects:[NSNumber numberWithInt:SortTypeSongNameAsc], [NSNumber numberWithInt:SortTypeSongNameDesc], [NSNumber numberWithInt:SortTypeArtistAsc], [NSNumber numberWithInt:SortTypeArtistDesc], [NSNumber numberWithInt:SortTypeAlbumAsc], [NSNumber numberWithInt:SortTypeAlbumDesc], nil]];
 }
 
+-(void)moreMenuDidSelectUpdateSelectOption {
+    [self changeToSelectedStatus];
+}
+
 - (void) moreClicked {
     [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeSortWithList], [NSNumber numberWithInt:MoreMenuTypeSelect]]];
 }
