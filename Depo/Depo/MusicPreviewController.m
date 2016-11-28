@@ -179,6 +179,8 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 }
 
 - (void) initializePlayer {
+    [APPDELEGATE initAudioSession];
+
     [self initializeControls];
 
     NSMutableArray *items = [[NSMutableArray alloc] init];
