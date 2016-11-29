@@ -520,7 +520,8 @@
 }
 
 - (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {
-    [APPDELEGATE.base triggerShareForFiles:selectedFileList];
+    [delegate revisitedGroupedPhoto:self triggerShareForFiles:selectedFileList];
+   // [APPDELEGATE.base triggerShareForFiles:selectedFileList];
 }
 
 - (void) footerActionMenuDidSelectPrint:(FooterActionsMenuView *)menu {

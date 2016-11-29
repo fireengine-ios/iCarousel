@@ -46,6 +46,11 @@
     self = [super init];
     if (self) {
         self.title = NSLocalizedString(@"PhotosTitle", @"");
+        
+        shareDao = [[ShareLinkDao alloc] init];
+        shareDao.delegate = self;
+        shareDao.successMethod = @selector(shareSuccessCallback:);
+        shareDao.failMethod = @selector(shareFailCallback:);
 
         elasticSearchDao = [[ElasticSearchDao alloc] init];
         elasticSearchDao.delegate = self;
@@ -788,22 +793,12 @@
 }
 
 - (void) moreMenuDidSelectSortWithList {
-    [self showSortWithList:[NSArray arrayWithObjects:[NSNumber numberWithInt:SortTypeAlphaAsc], [NSNumber numberWithInt:SortTypeAlphaDesc], [NSNumber numberWithInt:SortTypeDateAsc], [NSNumber numberWithInt:SortTypeDateDesc], nil]];
-    //[APPDELEGATE.base showSortWithList:[NSArray arrayWithObjects:[NSNumber numberWithInt:SortTypeAlphaAsc], [NSNumber numberWithInt:SortTypeAlphaDesc], [NSNumber numberWithInt:SortTypeDateAsc], [NSNumber numberWithInt:SortTypeDateDesc], nil]];
-}
-
-- (void) showSortWithList:(NSArray *) sortTypeList {
-    SortModalController *sort = [[SortModalController alloc] initWithList:sortTypeList];
-    sort.delegate = self;
-    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:sort];
-    [self.nav presentViewController:modalNav animated:YES completion:nil];
+    NSArray *list = [NSArray arrayWithObjects:[NSNumber numberWithInt:SortTypeAlphaAsc], [NSNumber numberWithInt:SortTypeAlphaDesc], [NSNumber numberWithInt:SortTypeDateAsc], [NSNumber numberWithInt:SortTypeDateDesc], nil];
+    [MoreMenuView presnetSortWithList:list fromController:self.nav delegateOwner:self];
 }
 
 -(void)moreMenuDidSelectSort {
-    SortModalController *sort = [[SortModalController alloc] init];
-    sort.delegate = self;
-    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:sort];
-    [self presentViewController:modalNav animated:YES completion:nil];
+    [MoreMenuView presentSortFromController:self.nav delegateOwner:self];
 }
 
 - (void) sortDidChange {
@@ -911,28 +906,12 @@
         } else {
             self.deleteType = DeleteTypeAlbums;
         }
-        [self showConfirmDelete];
-        //[APPDELEGATE.base showConfirmDelete];
+        [MoreMenuView presentConfirmDeleteFromController:self.nav delegateOwner:self];
     }
 }
 
 - (void) footerActionMenuDidSelectMove:(FooterActionsMenuView *) menu {
-    [self showPhotoAlbums];
-   // [APPDELEGATE.base showPhotoAlbums];
-}
-
-- (void) showPhotoAlbums {
-    PhotoAlbumListModalController *photoAlbumList = [[PhotoAlbumListModalController alloc] init];
-    photoAlbumList.delegate = self;
-    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:photoAlbumList];
-    [self.nav presentViewController:modalNav animated:YES completion:nil];
-}
-
-- (void) showConfirmDelete {
-    ConfirmDeleteModalController *confirmDelete = [[ConfirmDeleteModalController alloc] init];
-    confirmDelete.delegate = self;
-    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:confirmDelete];
-    [self.nav presentViewController:modalNav animated:YES completion:nil];
+    [MoreMenuView presentPhotoAlbumsFromController:self.nav delegateOwner:self];
 }
 
 - (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {
@@ -946,10 +925,96 @@
                 }
             }
         }
-        [APPDELEGATE.base triggerShareForFileObjects:@[shareObject]];
+        [self triggerShareForFileObjects:@[shareObject]];
+       // [APPDELEGATE.base triggerShareForFileObjects:@[shareObject]];
     } else {
-        [APPDELEGATE.base triggerShareForFiles:selectedFileList];
+        [self triggerShareForFiles:selectedFileList];
+        //[APPDELEGATE.base triggerShareForFiles:selectedFileList];
     }
+}
+
+#pragma mark - Share
+
+- (void) triggerShareForFiles:(NSArray *) fileUuidList {
+    [shareDao requestLinkForFiles:fileUuidList];
+    [self showLoading];
+}
+
+- (void) triggerShareForFileObjects:(NSArray *) fileList {
+    if([fileList count] == 1 && ( (MetaFile *)[fileList objectAtIndex:0]).contentType == ContentTypePhoto) {
+        MetaFile *tempToShare = (MetaFile *) [fileList objectAtIndex:0];
+        if (!(tempToShare.contentType == ContentTypePhoto)) {
+            [shareDao requestLinkForFiles:@[tempToShare.uuid]];
+        } else {
+            if([tempToShare isKindOfClass:[MetaFile class]]) {
+                [self loadView];
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                    [self downloadImageWithURL:[NSURL URLWithString:tempToShare.tempDownloadUrl] completionBlock:^(BOOL succeeded, UIImage *image) {
+                        if (succeeded) {
+                            [self hideLoading];
+                            NSArray *activityItems = [NSArray arrayWithObjects:image, nil];
+                            
+                            UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+                            [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
+                            activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+                            
+                            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+                                [self presentViewController:activityViewController animated:YES completion:nil];
+                            } else {
+                                UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
+                                [popup presentPopoverFromRect:CGRectMake(self.view.frame.size.width-240, self.view.frame.size.height-40, 240, 300)inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+                            }
+                        }
+                    }];
+                });
+            }
+        }
+    } else {
+        NSMutableArray *fileUuidList = [[NSMutableArray alloc] init];
+        for(MetaFile *file in fileList) {
+            [fileUuidList addObject:file.uuid];
+        }
+        [shareDao requestLinkForFiles:fileUuidList];
+        [self showLoading];
+    }
+}
+
+- (void)downloadImageWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, UIImage *image))completionBlock {
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                               if ( !error )
+                               {
+                                   UIImage *image = [[UIImage alloc] initWithData:data];
+                                   completionBlock(YES, image);
+                               } else{
+                                   completionBlock(NO, nil);
+                               }
+                           }];
+}
+
+#pragma mark ShareLinkDao Delegate Methods
+- (void) shareSuccessCallback:(NSString *) linkToShare {
+    [self hideLoading];
+    NSArray *activityItems = [NSArray arrayWithObjects:linkToShare, nil];
+    
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+    [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
+    activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    
+    //    activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll];
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        [self presentViewController:activityViewController animated:YES completion:nil];
+    } else {
+        UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
+        [popup presentPopoverFromRect:CGRectMake(self.view.frame.size.width-240, self.view.frame.size.height-40, 240, 300)inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
+}
+
+- (void) shareFailCallback:(NSString *) errorMessage {
+    [self hideLoading];
 }
 
 - (void) albumModalDidSelectAlbum:(NSString *)albumUuid {

@@ -17,6 +17,7 @@
 #import "FooterActionsMenuView.h"
 #import "MoveDao.h"
 #import "RenameDao.h"
+#import "ShareLinkDao.h"
 #import "ImagePreviewController.h"
 #import "VideoPreviewController.h"
 #import "MusicPreviewController.h"
@@ -37,6 +38,7 @@
     FavoriteDao *folderFavDao;
     MoveDao *moveDao;
     RenameDao *renameDao;
+    ShareLinkDao *shareDao;
     
     MetaFile *fileSelectedRef;
     

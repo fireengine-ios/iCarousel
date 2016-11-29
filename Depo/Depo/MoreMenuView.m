@@ -12,6 +12,8 @@
 #import "AppDelegate.h"
 #import "BaseViewController.h"
 
+
+
 @implementation MoreMenuView
 
 @synthesize delegate;
@@ -179,5 +181,67 @@
     // Drawing code
 }
 */
+
+
+#pragma mark - Class Methods
+
++(void)presentConfirmDeleteFromController:(UIViewController *)controller delegateOwner:(id<ConfirmDeleteDelegate>)delegateOwner {
+    ConfirmDeleteModalController *confirmDelete = [[ConfirmDeleteModalController alloc] init];
+    confirmDelete.delegate = delegateOwner;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:confirmDelete];
+    [controller presentViewController:modalNav animated:YES completion:nil];
+}
+
++(void)presentSortFromController:(UIViewController *)controller delegateOwner:(id<SortModalDelegate>)delegateOwner {
+    SortModalController *sort = [[SortModalController alloc] init];
+    sort.delegate = delegateOwner;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:sort];
+    [controller presentViewController:modalNav animated:YES completion:nil];
+}
+
++(void)presnetSortWithList:(NSArray *)sortTypeList
+            fromController:(UIViewController *)controller
+             delegateOwner:(id<SortModalDelegate>)delegateOwner {
+    
+    SortModalController *sort = [[SortModalController alloc] initWithList:sortTypeList];
+    sort.delegate = delegateOwner;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:sort];
+    [controller presentViewController:modalNav animated:YES completion:nil];
+}
+
++(void)presentMoveFoldersListFromController:(UIViewController *)controller delegateOwner:(id<MoveListModalProtocol>)delegateOwner {
+    MoveListModalController *move = [[MoveListModalController alloc] initForFolder:nil];
+    move.delegate = delegateOwner;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:move];
+    [controller presentViewController:modalNav animated:YES completion:nil];
+}
+
++(void)presentMoveFoldersListWithExcludingFolder:(NSString *)folderUUID
+                                  fromController:(UIViewController *)controller
+                                   delegateOwner:(id<MoveListModalProtocol>)delegateOwner {
+    
+    MoveListModalController *move = [[MoveListModalController alloc] initForFolder:nil withExludingFolder:folderUUID];
+    move.delegate = delegateOwner;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:move];
+    [controller presentViewController:modalNav animated:YES completion:nil];
+}
+
++(void)presentMoveFoldersListWithExcludingFolder:(NSString *)folderUUID
+                            prohibitedFolderList:(NSArray *)prohibitedList
+                                  fromController:(UIViewController *)controller
+                                   delegateOwner:(id<MoveListModalProtocol>)delegateOwner {
+    
+    MoveListModalController *move = [[MoveListModalController alloc] initForFolder:nil withExludingFolder:folderUUID withProhibitedFolders:prohibitedList];
+    move.delegate = delegateOwner;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:move];
+    [controller presentViewController:modalNav animated:YES completion:nil];
+}
+
++(void)presentPhotoAlbumsFromController:(UIViewController *)controller delegateOwner:(id<AlbumModalDelete>)delegateOwner {
+    PhotoAlbumListModalController *albumList = [[PhotoAlbumListModalController alloc] init];
+    albumList.delegate = delegateOwner;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:albumList];
+    [controller presentViewController:modalNav animated:YES completion:nil];
+}
 
 @end

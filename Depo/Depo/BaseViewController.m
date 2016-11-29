@@ -828,7 +828,7 @@
     MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:recentActivities];
     [self presentViewController:modalNav animated:YES completion:nil];
 }
-*/
+
 - (void) triggerShareForFiles:(NSArray *) fileUuidList {
     [shareDao requestLinkForFiles:fileUuidList];
     [self showBaseLoading];
@@ -855,7 +855,7 @@
 
 - (void) shareFailCallback:(NSString *) errorMessage {
     [self hideBaseLoading];
-}
+}*/
 
 - (void) triggerShareForFileObjects:(NSArray *) fileList {
     if([fileList count] == 1 && ( (MetaFile *)[fileList objectAtIndex:0]).contentType == ContentTypePhoto) {

@@ -17,8 +17,11 @@
 #import "CustomEntryPopupView.h"
 #import "UsageInfoDao.h"
 #import "AccountDao.h"
+#import "ShareLinkDao.h"
 
-@interface RevisitedGroupedPhotosController : MyViewController <RevisitedPhotoHeaderSegmentDelegate, RevisitedAlbumListDelegate, PhotoAlbumDelegate, NewAlbumDelegate, RevisitedGroupedPhotoDelegate, ImagePreviewDelegate, VideoPreviewDelegate, CustomEntryPopupDelegate, CustomConfirmDelegate>
+@interface RevisitedGroupedPhotosController : MyViewController <RevisitedPhotoHeaderSegmentDelegate, RevisitedAlbumListDelegate, PhotoAlbumDelegate, NewAlbumDelegate, RevisitedGroupedPhotoDelegate, ImagePreviewDelegate, VideoPreviewDelegate, CustomEntryPopupDelegate, CustomConfirmDelegate> {
+    ShareLinkDao *shareDao;
+}
 
 @property (nonatomic, strong) RevisitedPhotoHeaderSegmentView *segmentView;
 @property (nonatomic, strong) RevisitedGroupedPhotoView *groupView;

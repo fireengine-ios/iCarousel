@@ -122,18 +122,9 @@
     if([CacheUtil showConfirmDeletePageFlag]) {
         [self confirmDeleteDidConfirm];
     } else {
-        [self showConfirmDelete];
-       //[APPDELEGATE.base showConfirmDelete];
+        [MoreMenuView presentConfirmDeleteFromController:self.nav delegateOwner:self];
     }
 }
-
--(void)showConfirmDelete {
-    ConfirmDeleteModalController *confirmDelete = [[ConfirmDeleteModalController alloc] init];
-    confirmDelete.delegate = self;
-    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:confirmDelete];
-    [self.nav presentViewController:modalNav animated:YES completion:nil];
-}
-
 
 - (void) moreMenuDidSelectFav {
     [favDao requestMetadataForFiles:@[self.file.uuid] shouldFavorite:YES];

@@ -61,6 +61,12 @@
         
         NSString *logWithParams = [NSString stringWithFormat:@"GroupedPhotosAndVideosController init params level:%d groupDate:%@", levelVal, groupDateVal];
         IGLog(logWithParams);
+        
+        
+        shareDao = [[ShareLinkDao alloc] init];
+        shareDao.delegate = self;
+        shareDao.successMethod = @selector(shareSuccessCallback:);
+        shareDao.failMethod = @selector(shareFailCallback:);
 
         groupDao = [[SearchByGroupDao alloc] init];
         groupDao.delegate = self;
@@ -720,20 +726,14 @@
 }
 
 - (void) moreMenuDidSelectSortWithList {
+    NSArray *list;
     if(segmentType == PhotoHeaderSegmentTypeAlbum) {
-        [self showSortWithList:[NSArray arrayWithObjects:[NSNumber numberWithInt:SortTypeAlphaAsc], [NSNumber numberWithInt:SortTypeAlphaDesc], [NSNumber numberWithInt:SortTypeDateAsc], [NSNumber numberWithInt:SortTypeDateDesc], nil]];
-      //  [APPDELEGATE.base showSortWithList:[NSArray arrayWithObjects:[NSNumber numberWithInt:SortTypeAlphaAsc], [NSNumber numberWithInt:SortTypeAlphaDesc], [NSNumber numberWithInt:SortTypeDateAsc], [NSNumber numberWithInt:SortTypeDateDesc], nil]];
+        list = [NSArray arrayWithObjects:[NSNumber numberWithInt:SortTypeAlphaAsc], [NSNumber numberWithInt:SortTypeAlphaDesc], [NSNumber numberWithInt:SortTypeDateAsc], [NSNumber numberWithInt:SortTypeDateDesc], nil];
     } else {
-         [self showSortWithList:[NSArray arrayWithObjects:[NSNumber numberWithInt:SortTypeDateAsc], [NSNumber numberWithInt:SortTypeDateDesc], nil]];
-       // [APPDELEGATE.base showSortWithList:[NSArray arrayWithObjects:[NSNumber numberWithInt:SortTypeDateAsc], [NSNumber numberWithInt:SortTypeDateDesc], nil]];
+        list = [NSArray arrayWithObjects:[NSNumber numberWithInt:SortTypeDateAsc], [NSNumber numberWithInt:SortTypeDateDesc], nil];
     }
-}
 
-- (void) showSortWithList:(NSArray *) sortTypeList {
-    SortModalController *sort = [[SortModalController alloc] initWithList:sortTypeList];
-    sort.delegate = self;
-    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:sort];
-    [self.nav presentViewController:modalNav animated:YES completion:nil];
+    [MoreMenuView presnetSortWithList:list fromController:self.nav delegateOwner:self];
 }
 
 - (void) moreMenuDidSelectVideofy {
@@ -855,33 +855,47 @@
         } else {
             self.deleteType = DeleteTypeAlbums;
         }
-        [self showConfirmDelete];
-       // [APPDELEGATE.base showConfirmDelete];
+        [MoreMenuView presentConfirmDeleteFromController:self.nav delegateOwner:self];
     }
 }
 
--(void)showConfirmDelete {
-    ConfirmDeleteModalController *confirmDelete = [[ConfirmDeleteModalController alloc] init];
-    confirmDelete.delegate = self;
-    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:confirmDelete];
-    [self.nav presentViewController:modalNav animated:YES completion:nil];
-}
-
-
 - (void) footerActionMenuDidSelectMove:(FooterActionsMenuView *) menu {
-    [self showPhotoAlbums];
-    //[APPDELEGATE.base showPhotoAlbums];
+    [MoreMenuView presentPhotoAlbumsFromController:self.nav delegateOwner:self];
 }
 
 - (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {
-    [APPDELEGATE.base triggerShareForFiles:selectedFileList];
+    [self triggerShareForFiles:selectedFileList];
+    //[APPDELEGATE.base triggerShareForFiles:selectedFileList];
 }
 
-- (void) showPhotoAlbums {
-    PhotoAlbumListModalController *albums = [[PhotoAlbumListModalController alloc] init];
-    albums.delegate = self;
-    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:albums];
-    [self.nav presentViewController:modalNav animated:YES completion:nil];
+#pragma mark - Share
+
+- (void) triggerShareForFiles:(NSArray *) fileUuidList {
+    [shareDao requestLinkForFiles:fileUuidList];
+    [self showLoading];
+}
+
+#pragma mark ShareLinkDao Delegate Methods
+- (void) shareSuccessCallback:(NSString *) linkToShare {
+    [self hideLoading];
+    NSArray *activityItems = [NSArray arrayWithObjects:linkToShare, nil];
+    
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+    [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
+    activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    
+    //    activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll];
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        [self presentViewController:activityViewController animated:YES completion:nil];
+    } else {
+        UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
+        [popup presentPopoverFromRect:CGRectMake(self.view.frame.size.width-240, self.view.frame.size.height-40, 240, 300)inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
+}
+
+- (void) shareFailCallback:(NSString *) errorMessage {
+    [self hideLoading];
 }
 
 - (void) albumModalDidSelectAlbum:(NSString *)albumUuid {

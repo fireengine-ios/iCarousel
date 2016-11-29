@@ -12,6 +12,7 @@
 #import "PhotoHeaderSegmentView.h"
 #import "SquareImageView.h"
 #import "DeleteDao.h"
+#import "ShareLinkDao.h"
 #import "CustomButton.h"
 #import "FooterActionsMenuView.h"
 #import "ImagePreviewController.h"
@@ -22,6 +23,7 @@
     
     ElasticSearchDao *elasticSearchDao;
     DeleteDao *deleteDao;
+    ShareLinkDao *shareDao;
     
     CustomButton *moreButton;
     

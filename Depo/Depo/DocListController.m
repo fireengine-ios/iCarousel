@@ -35,6 +35,11 @@
         
         listOffset = 0;
         
+        shareDao = [[ShareLinkDao alloc] init];
+        shareDao.delegate = self;
+        shareDao.successMethod = @selector(shareSuccessCallback:);
+        shareDao.failMethod = @selector(shareFailCallback:);
+        
         elasticSearchDao = [[ElasticSearchDao alloc] init];
         elasticSearchDao.delegate = self;
         elasticSearchDao.successMethod = @selector(docListSuccessCallback:);
@@ -237,33 +242,48 @@
     } else {
         fileSelectedRef = fileSelected;
         self.deleteType = DeleteTypeSwipeMenu;
-        [self showConfirmDelete];
-        //[APPDELEGATE.base showConfirmDelete];
+        [MoreMenuView presentConfirmDeleteFromController:self.nav delegateOwner:self];
     }
 }
 
-- (void) showConfirmDelete {
-    ConfirmDeleteModalController *confirmDelete = [[ConfirmDeleteModalController alloc] init];
-    confirmDelete.delegate = self;
-    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:confirmDelete];
-    [self.nav presentViewController:modalNav animated:YES completion:nil];
-}
-
 - (void) fileFolderCellShouldShareForFile:(MetaFile *)fileSelected {
-    [APPDELEGATE.base triggerShareForFiles:@[fileSelected.uuid]];
+    [self triggerShareForFiles:@[fileSelected.uuid]];
+    //[APPDELEGATE.base triggerShareForFiles:@[fileSelected.uuid]];
 }
 
 - (void) fileFolderCellShouldMoveForFile:(MetaFile *)fileSelected {
     selectedDocList = [[NSMutableArray alloc] initWithObjects:fileSelected.uuid, nil];
-    [self showMoveFolders];
-    //[APPDELEGATE.base showMoveFolders];
+    [MoreMenuView presentMoveFoldersListFromController:self.nav delegateOwner:self];
 }
 
-- (void) showMoveFolders {
-    MoveListModalController *move = [[MoveListModalController alloc] initForFolder:nil];
-    move.delegate = self;
-    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:move];
-    [self.nav presentViewController:modalNav animated:YES completion:nil];
+#pragma mark - Share
+
+- (void) triggerShareForFiles:(NSArray *) fileUuidList {
+    [shareDao requestLinkForFiles:fileUuidList];
+    [self showLoading];
+}
+
+#pragma mark ShareLinkDao Delegate Methods
+- (void) shareSuccessCallback:(NSString *) linkToShare {
+    [self hideLoading];
+    NSArray *activityItems = [NSArray arrayWithObjects:linkToShare, nil];
+    
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+    [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
+    activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    
+    //    activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll];
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        [self presentViewController:activityViewController animated:YES completion:nil];
+    } else {
+        UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
+        [popup presentPopoverFromRect:CGRectMake(self.view.frame.size.width-240, self.view.frame.size.height-40, 240, 300)inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
+}
+
+- (void) shareFailCallback:(NSString *) errorMessage {
+    [self hideLoading];
 }
 
 - (void) fileFolderCellDidSelectFile:(MetaFile *)fileSelected {
@@ -408,8 +428,7 @@
         [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
     } else {
         self.deleteType = DeleteTypeFooterMenu;
-        [self showConfirmDelete];
-       // [APPDELEGATE.base showConfirmDelete];
+        [MoreMenuView presentConfirmDeleteFromController:self.nav delegateOwner:self];
     }
 }
 
@@ -427,10 +446,7 @@
 #pragma mark - More Menu Delegate
 
 -(void)moreMenuDidSelectSort {
-    SortModalController *sort = [[SortModalController alloc] init];
-    sort.delegate = self;
-    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:sort];
-    [self presentViewController:modalNav animated:YES completion:nil];
+    [MoreMenuView presentSortFromController:self.nav delegateOwner:self];
 }
 
 -(void)moreMenuDidSelectUpdateSelectOption {

@@ -17,6 +17,7 @@
 #import "GroupedCell.h"
 #import "GroupedView.h"
 #import "DeleteDao.h"
+#import "ShareLinkDao.h"
 #import "AlbumAddPhotosDao.h"
 #import "MainSearchTextfield.h"
 #import "CustomConfirmView.h"
@@ -39,9 +40,11 @@
 - (void) revisitedGroupedPhotoDidFailMovingWithError:(NSString *) errorMessage;
 - (void) revisitedGroupedPhotoChangeTitleTo:(NSString *) pageTitle;
 - (void) revisitedGroupedPhotoShowPhotoAlbums:(RevisitedGroupedPhotoView *)view;
+- (void) revisitedGroupedPhoto:(RevisitedGroupedPhotoView *)view triggerShareForFiles:(NSArray *) uuidList;
 @end
 
-@interface RevisitedGroupedPhotoView : UIView <FooterActionsDelegate, UITextFieldDelegate, CustomConfirmDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, RevisitedPhotoCollCellDelegate, RevisitedUploadingPhotoCollCellDelegate>
+@interface RevisitedGroupedPhotoView : UIView <FooterActionsDelegate, UITextFieldDelegate, CustomConfirmDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, RevisitedPhotoCollCellDelegate, RevisitedUploadingPhotoCollCellDelegate> {
+}
 
 @property (nonatomic, weak) id<RevisitedGroupedPhotoDelegate> delegate;
 @property (nonatomic, strong) NSMutableArray *files;

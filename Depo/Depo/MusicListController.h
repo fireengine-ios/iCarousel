@@ -11,6 +11,7 @@
 #import "FavoriteDao.h"
 #import "DeleteDao.h"
 #import "MoveDao.h"
+#import "ShareLinkDao.h"
 #import "AbstractFileFolderCell.h"
 #import "FooterActionsMenuView.h"
 #import "MusicPreviewController.h"
@@ -20,6 +21,7 @@
     FavoriteDao *favoriteDao;
     DeleteDao *deleteDao;
     MoveDao *moveDao;
+    ShareLinkDao *shareDao;
 
     MetaFile *fileSelectedRef;
     

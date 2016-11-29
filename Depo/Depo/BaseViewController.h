@@ -60,8 +60,8 @@
 - (BOOL) isAddButtonHidden;
 - (void) checkAndShowAddButton;
 
-- (void) triggerShareForFiles:(NSArray *) fileUuidList;
-- (void) triggerShareForFileObjects:(NSArray *) fileList;
+//- (void) triggerShareForFiles:(NSArray *) fileUuidList;
+//- (void) triggerShareForFileObjects:(NSArray *) fileList;
 
 - (void) lockMenu;
 - (void) unlockMenu;
