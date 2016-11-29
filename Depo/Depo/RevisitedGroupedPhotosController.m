@@ -244,6 +244,17 @@
     //[APPDELEGATE.base showConfirmDelete];
 }
 
+- (void) revisitedGroupedPhotoShowPhotoAlbums:(RevisitedGroupedPhotoView *)view {
+    [self showPhotoAlbums];
+}
+
+- (void) showPhotoAlbums {
+    PhotoAlbumListModalController *albumList = [[PhotoAlbumListModalController alloc] init];
+    albumList.delegate = self;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:albumList];
+    [self.nav presentViewController:modalNav animated:YES completion:nil];
+}
+
 -(void)showConfirmDelete {
     ConfirmDeleteModalController *confirmDelete = [[ConfirmDeleteModalController alloc] init];
     confirmDelete.delegate = self;

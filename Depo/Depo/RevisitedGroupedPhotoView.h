@@ -24,6 +24,8 @@
 #import "RevisitedPhotoCollCell.h"
 #import "RevisitedUploadingPhotoCollCell.h"
 
+@class RevisitedGroupedPhotoView;
+
 @protocol RevisitedGroupedPhotoDelegate <NSObject>
 - (void) revisitedGroupedPhotoDidSelectFile:(MetaFile *) fileSelected withList:(NSArray *) containingList;
 - (void) revisitedGroupedPhotoDidFinishLoading;
@@ -36,6 +38,7 @@
 - (void) revisitedGroupedPhotoDidFailDeletingWithError:(NSString *) errorMessage;
 - (void) revisitedGroupedPhotoDidFailMovingWithError:(NSString *) errorMessage;
 - (void) revisitedGroupedPhotoChangeTitleTo:(NSString *) pageTitle;
+- (void) revisitedGroupedPhotoShowPhotoAlbums:(RevisitedGroupedPhotoView *)view;
 @end
 
 @interface RevisitedGroupedPhotoView : UIView <FooterActionsDelegate, UITextFieldDelegate, CustomConfirmDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, RevisitedPhotoCollCellDelegate, RevisitedUploadingPhotoCollCellDelegate>

@@ -45,6 +45,4 @@
 - (id)initWithFrame:(CGRect)frame withList:(NSArray *) moreListRef withFileFolder:(MetaFile *) _fileFolder withAlbum:(PhotoAlbum *) _album;
 
 
-+ (void)
-
 @end

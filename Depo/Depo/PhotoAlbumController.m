@@ -563,12 +563,21 @@
         self.deleteType = DeleteTypeFooterMenu;
         //TakingBack RemoveFromAlbum
 //        [APPDELEGATE.base showConfirmRemove];
-        [APPDELEGATE.base showConfirmDelete];
+        //   [APPDELEGATE.base showConfirmDelete];
+        [self showConfirmDelete];
     }
 }
 
 - (void) footerActionMenuDidSelectMove:(FooterActionsMenuView *) menu {
-    [APPDELEGATE.base showPhotoAlbums];
+    //[APPDELEGATE.base showPhotoAlbums];
+    [self showPhotoAlbums];
+}
+
+- (void) showPhotoAlbums {
+    PhotoAlbumListModalController *albumList = [[PhotoAlbumListModalController alloc] init];
+    albumList.delegate = self;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:albumList];
+    [self.nav presentViewController:modalNav animated:YES completion:nil];
 }
 
 - (void) albumModalDidSelectAlbum:(NSString *)albumUuid {

@@ -107,9 +107,7 @@
             [delegate moreMenuDidSelectSortWithList];
             break;
         case MoreMenuTypeSelect:
-            if ([delegate respondsToSelector:@selector(moreMenuDidSelectUpdateSelectOption)]) {
-                [delegate moreMenuDidSelectUpdateSelectOption];
-            }
+            [delegate moreMenuDidSelectUpdateSelectOption];
             break;
         case MoreMenuTypeFolderDetail:
             [delegate moreMenuDidSelectFolderDetailForFolder:self.fileFolder];

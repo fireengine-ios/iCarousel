@@ -294,7 +294,7 @@
     } else {
         fileSelectedRef = fileSelected;
         self.deleteType = DeleteTypeSwipeMenu;
-        [APPDELEGATE.base showConfirmDelete];
+        [self showConfirmDelete];
     }
 }
 
@@ -304,7 +304,21 @@
 
 - (void) fileFolderCellShouldMoveForFile:(MetaFile *)fileSelected {
     selectedMusicList = [[NSMutableArray alloc] initWithObjects:fileSelected.uuid, nil];
-    [APPDELEGATE.base showMoveFolders];
+    [self showMoveFolders];
+}
+
+- (void) showConfirmDelete {
+    ConfirmDeleteModalController *confirmDelete = [[ConfirmDeleteModalController alloc] init];
+    confirmDelete.delegate = self;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:confirmDelete];
+    [self.nav presentViewController:modalNav animated:YES completion:nil];
+}
+
+- (void) showMoveFolders {
+    MoveListModalController *move = [[MoveListModalController alloc] initForFolder:nil];
+    move.delegate = self;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:move];
+    [self presentViewController:modalNav animated:YES completion:nil];
 }
 
 - (void) fileFolderCellDidSelectFile:(MetaFile *)fileSelected {
@@ -366,7 +380,7 @@
         [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
     } else {
         self.deleteType = DeleteTypeFooterMenu;
-        [APPDELEGATE.base showConfirmDelete];
+        [self showConfirmDelete];
     }
 }
 
@@ -376,9 +390,17 @@
 - (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {
 }
 
+
 #pragma mark MoreMenuDelegate
 - (void) moreMenuDidSelectSortWithList {
-    [APPDELEGATE.base showSortWithList:[NSArray arrayWithObjects:[NSNumber numberWithInt:SortTypeSongNameAsc], [NSNumber numberWithInt:SortTypeSongNameDesc], [NSNumber numberWithInt:SortTypeArtistAsc], [NSNumber numberWithInt:SortTypeArtistDesc], [NSNumber numberWithInt:SortTypeAlbumAsc], [NSNumber numberWithInt:SortTypeAlbumDesc], nil]];
+    [self showSortWithList:[NSArray arrayWithObjects:[NSNumber numberWithInt:SortTypeSongNameAsc], [NSNumber numberWithInt:SortTypeSongNameDesc], [NSNumber numberWithInt:SortTypeArtistAsc], [NSNumber numberWithInt:SortTypeArtistDesc], [NSNumber numberWithInt:SortTypeAlbumAsc], [NSNumber numberWithInt:SortTypeAlbumDesc], nil]];
+}
+
+- (void) showSortWithList:(NSArray *) sortTypeList {
+    SortModalController *sort = [[SortModalController alloc] initWithList:sortTypeList];
+    sort.delegate = self;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:sort];
+    [self.nav presentViewController:modalNav animated:YES completion:nil];
 }
 
 -(void)moreMenuDidSelectUpdateSelectOption {

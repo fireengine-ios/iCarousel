@@ -515,7 +515,8 @@
 }
 
 - (void) footerActionMenuDidSelectMove:(FooterActionsMenuView *) menu {
-    [APPDELEGATE.base showPhotoAlbums];
+    [delegate revisitedGroupedPhotoShowPhotoAlbums:self];
+    //[APPDELEGATE.base showPhotoAlbums];
 }
 
 - (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {

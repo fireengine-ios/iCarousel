@@ -911,12 +911,28 @@
         } else {
             self.deleteType = DeleteTypeAlbums;
         }
-        [APPDELEGATE.base showConfirmDelete];
+        [self showConfirmDelete];
+        //[APPDELEGATE.base showConfirmDelete];
     }
 }
 
 - (void) footerActionMenuDidSelectMove:(FooterActionsMenuView *) menu {
-    [APPDELEGATE.base showPhotoAlbums];
+    [self showPhotoAlbums];
+   // [APPDELEGATE.base showPhotoAlbums];
+}
+
+- (void) showPhotoAlbums {
+    PhotoAlbumListModalController *photoAlbumList = [[PhotoAlbumListModalController alloc] init];
+    photoAlbumList.delegate = self;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:photoAlbumList];
+    [self.nav presentViewController:modalNav animated:YES completion:nil];
+}
+
+- (void) showConfirmDelete {
+    ConfirmDeleteModalController *confirmDelete = [[ConfirmDeleteModalController alloc] init];
+    confirmDelete.delegate = self;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:confirmDelete];
+    [self.nav presentViewController:modalNav animated:YES completion:nil];
 }
 
 - (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {
