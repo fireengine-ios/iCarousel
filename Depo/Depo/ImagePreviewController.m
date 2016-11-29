@@ -31,76 +31,93 @@
     return [self initWithFile:_file withAlbum:nil];
 }
 
-- (id)initWithFile:(MetaFile *) _file withAlbum:(PhotoAlbum*) _album {
+- (id)initWithFile:(MetaFile *) _file withAlbum:(PhotoAlbum *) _album {
     self = [super init];
     if (self) {
-        self.file = _file;
-        self.title = self.file.visibleName;
-        self.view.backgroundColor = [Util UIColorForHexColor:@"191e24"];
-        self.album = _album;
-        
-        self.view.autoresizesSubviews = YES;
-        self.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-        
-        deleteDao = [[DeleteDao alloc] init];
-        deleteDao.delegate = self;
-        deleteDao.successMethod = @selector(deleteSuccessCallback);
-        deleteDao.failMethod = @selector(deleteFailCallback:);
-        
-        //TakingBack RemoveFromAlbum
-//        removeDao = [[AlbumRemovePhotosDao alloc] init];
-//        removeDao.delegate = self;
-//        removeDao.successMethod = @selector(removeFromAlbumSuccessCallback);
-//        removeDao.failMethod = @selector(removeFromAlbumFailCallback:);
-        
-        favDao = [[FavoriteDao alloc] init];
-        favDao.delegate = self;
-        favDao.successMethod = @selector(favSuccessCallback:);
-        favDao.failMethod = @selector(favFailCallback:);
-        
-        renameDao = [[RenameDao alloc] init];
-        renameDao.delegate = self;
-        renameDao.successMethod = @selector(renameSuccessCallback:);
-        renameDao.failMethod = @selector(renameFailCallback:);
-        
-        shareDao = [[ShareLinkDao alloc] init];
-        shareDao.delegate = self;
-        shareDao.successMethod = @selector(shareSuccessCallback:);
-        shareDao.failMethod = @selector(shareFailCallback:);
-        
-        mainScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex - 60)];
-        mainScroll.delegate = self;
-        mainScroll.maximumZoomScale = 5.0f;
-        [self.view addSubview:mainScroll];
-        
-        imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, mainScroll.frame.size.width, mainScroll.frame.size.height)];
-        imgView.contentMode = UIViewContentModeScaleAspectFit;
-        NSString *imgUrlStr = [self.file.tempDownloadUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        if(self.file.detail && self.file.detail.thumbLargeUrl) {
-            imgUrlStr = [self.file.detail.thumbLargeUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        }
-        [self showLoading];
-        __weak ImagePreviewController *weakSelf = self;
-        [imgView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:imgUrlStr]] placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-            [weakSelf hideLoading];
-        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-            [weakSelf hideLoading];
-        }];
-        /*
-         [imgView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:imgUrlStr]] placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-         imgView.image = [UIImage imageWithCGImage:[image CGImage] scale:1.0 orientation: UIImageOrientationUp];
-         } failure:nil];
-         */
-        [mainScroll addSubview:imgView];
-        
-        footer = [[FileDetailFooter alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60) withAlbum:self.album];
-        footer.delegate = self;
-        [self.view addSubview:footer];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(orientationChanged:)    name:UIDeviceOrientationDidChangeNotification  object:nil];
-        
+        [self configureWithFile:_file withAlbum:_album];
     }
     return self;
+}
+
+#pragma mark - Added For Swipe Feature
+
+- (id)initWithFile:(MetaFile *) _file withAlbum:(PhotoAlbum *) _album withFiles:(NSArray *)_files withListOffset:(int)offset {
+    self = [super init];
+    if (self) {
+        [self configureWithFile:_file withAlbum:_album];
+        self.files = [_files mutableCopy];
+        cursor = [self findCursorValue];
+        listOffSet = offset;
+        [self addSwipeGestures];
+    }
+    return self;
+}
+
+-(void)configureWithFile:(MetaFile *) _file withAlbum:(PhotoAlbum *) _album {
+    self.file = _file;
+    self.title = self.file.visibleName;
+    self.view.backgroundColor = [Util UIColorForHexColor:@"191e24"];
+    self.album = _album;
+    
+    self.view.autoresizesSubviews = YES;
+    self.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    
+    deleteDao = [[DeleteDao alloc] init];
+    deleteDao.delegate = self;
+    deleteDao.successMethod = @selector(deleteSuccessCallback);
+    deleteDao.failMethod = @selector(deleteFailCallback:);
+    
+    //TakingBack RemoveFromAlbum
+    //        removeDao = [[AlbumRemovePhotosDao alloc] init];
+    //        removeDao.delegate = self;
+    //        removeDao.successMethod = @selector(removeFromAlbumSuccessCallback);
+    //        removeDao.failMethod = @selector(removeFromAlbumFailCallback:);
+    
+    favDao = [[FavoriteDao alloc] init];
+    favDao.delegate = self;
+    favDao.successMethod = @selector(favSuccessCallback:);
+    favDao.failMethod = @selector(favFailCallback:);
+    
+    renameDao = [[RenameDao alloc] init];
+    renameDao.delegate = self;
+    renameDao.successMethod = @selector(renameSuccessCallback:);
+    renameDao.failMethod = @selector(renameFailCallback:);
+    
+    shareDao = [[ShareLinkDao alloc] init];
+    shareDao.delegate = self;
+    shareDao.successMethod = @selector(shareSuccessCallback:);
+    shareDao.failMethod = @selector(shareFailCallback:);
+    
+    mainScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex - 60)];
+    mainScroll.delegate = self;
+    mainScroll.maximumZoomScale = 5.0f;
+    [self.view addSubview:mainScroll];
+    
+    imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, mainScroll.frame.size.width, mainScroll.frame.size.height)];
+    imgView.contentMode = UIViewContentModeScaleAspectFit;
+    NSString *imgUrlStr = [self.file.tempDownloadUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    if(self.file.detail && self.file.detail.thumbLargeUrl) {
+        imgUrlStr = [self.file.detail.thumbLargeUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    }
+    [self showLoading];
+    __weak ImagePreviewController *weakSelf = self;
+    [imgView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:imgUrlStr]] placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        [weakSelf hideLoading];
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+        [weakSelf hideLoading];
+    }];
+    /*
+     [imgView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:imgUrlStr]] placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+     imgView.image = [UIImage imageWithCGImage:[image CGImage] scale:1.0 orientation: UIImageOrientationUp];
+     } failure:nil];
+     */
+    [mainScroll addSubview:imgView];
+    
+    footer = [[FileDetailFooter alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60) withAlbum:self.album];
+    footer.delegate = self;
+    [self.view addSubview:footer];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(orientationChanged:)    name:UIDeviceOrientationDidChangeNotification  object:nil];
 }
 
 //- (id)initWithFile:(MetaFile *) _file {
@@ -122,7 +139,7 @@
 //        deleteDao.delegate = self;
 //        deleteDao.successMethod = @selector(deleteSuccessCallback);
 //        deleteDao.failMethod = @selector(deleteFailCallback:);
-//        
+//
 //        removeFromAlbumDao = [[AlbumRemovePhotosDao alloc] init];
 //        removeFromAlbumDao.delegate = self;
 //        removeFromAlbumDao.successMethod = @selector(removeFromAlbumSuccessCallback);
@@ -147,7 +164,7 @@
 //        mainScroll.delegate = self;
 //        mainScroll.maximumZoomScale = 5.0f;
 //        [self.view addSubview:mainScroll];
-//        
+//
 //        imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, mainScroll.frame.size.width, mainScroll.frame.size.height)];
 //        imgView.contentMode = UIViewContentModeScaleAspectFit;
 //        NSString *imgUrlStr = [self.file.tempDownloadUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -167,7 +184,7 @@
 //        } failure:nil];
 //         */
 //        [mainScroll addSubview:imgView];
-//        
+//
 //        footer = [[FileDetailFooter alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60)];
 //        footer.delegate = self;
 //        [self.view addSubview:footer];
@@ -256,16 +273,27 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(orientationChanged:)    name:UIDeviceOrientationDidChangeNotification  object:nil];
         
-        UISwipeGestureRecognizer * swipeleft=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeLeft:)];
-        swipeleft.direction=UISwipeGestureRecognizerDirectionLeft;
-        [self.view addGestureRecognizer:swipeleft];
-        
-        UISwipeGestureRecognizer * swiperight=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeRight:)];
-        swiperight.direction=UISwipeGestureRecognizerDirectionRight;
-        [self.view addGestureRecognizer:swiperight];
+        /* UISwipeGestureRecognizer * swipeleft=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeLeft:)];
+         swipeleft.direction=UISwipeGestureRecognizerDirectionLeft;
+         [self.view addGestureRecognizer:swipeleft];
+         
+         UISwipeGestureRecognizer * swiperight=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeRight:)];
+         swiperight.direction=UISwipeGestureRecognizerDirectionRight;
+         [self.view addGestureRecognizer:swiperight]; */
+        [self addSwipeGestures];
         
     }
     return self;
+}
+
+-(void) addSwipeGestures {
+    UISwipeGestureRecognizer * swipeleft=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeLeft:)];
+    swipeleft.direction=UISwipeGestureRecognizerDirectionLeft;
+    [self.view addGestureRecognizer:swipeleft];
+    
+    UISwipeGestureRecognizer * swiperight=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeRight:)];
+    swiperight.direction=UISwipeGestureRecognizerDirectionRight;
+    [self.view addGestureRecognizer:swiperight];
 }
 
 #pragma mark gesture recognizers methods
@@ -278,7 +306,7 @@
         [self seekPhotoInFiles:YES];
         [self loadImageView:self.file];
     }
-
+    
 }
 
 - (void) swipeRight :(UISwipeGestureRecognizer *) gestureRecognizer {
@@ -310,7 +338,7 @@
 }
 
 - (int) findCursorValue {
-   
+    
     MetaFile *tempFile = [MetaFile alloc];
     for (int i = 0; i<[self.files count]; i++) {
         if([[self.files objectAtIndex:i] isKindOfClass:[MetaFile class]]) {
@@ -332,38 +360,39 @@
 }
 
 - (void) seekPhotoInFiles:(BOOL) isLeftSwipe {
-        if (!isLeftSwipe) {
-            if (cursor == 0) {
-                return;
-            }else {
-                cursor--;
-                MetaFile *tempFile = [self.files objectAtIndex:cursor];
-                if ([self checkFileIsPhoto:tempFile]) {
-                    self.file = tempFile;
-                }
-                else {
-                    [self seekPhotoInFiles:NO];
-                }
+    if (!isLeftSwipe) {
+        if (cursor == 0) {
+            return;
+        }else {
+            cursor--;
+            MetaFile *tempFile = [self.files objectAtIndex:cursor];
+            if ([self checkFileIsPhoto:tempFile]) {
+                self.file = tempFile;
+            }
+            else {
+                [self seekPhotoInFiles:NO];
             }
         }
-        else {
-            if (cursor == [self.files count]-1) {
-                if(pagingEnabledFlag) {
-                    [self dynamicallyLoadNextPage];
-                    [self loadImageView:self.file];
-                }
-            } else{
-                cursor++;
-                MetaFile *tempFile = [self.files objectAtIndex:cursor];
-                if ([self checkFileIsPhoto:tempFile]) {
-                    self.file = tempFile;
-                }
-                else {
-                    [self seekPhotoInFiles:YES];
-                }
-
+    }
+    else {
+        
+        if (cursor == [self.files count]-1) {
+            if(pagingEnabledFlag) {
+                [self dynamicallyLoadNextPage];
+                [self loadImageView:self.file];
             }
+        } else{
+            cursor++;
+            MetaFile *tempFile = [self.files objectAtIndex:cursor];
+            if ([self checkFileIsPhoto:tempFile]) {
+                self.file = tempFile;
+            }
+            else {
+                [self seekPhotoInFiles:YES];
+            }
+            
         }
+    }
 }
 
 - (void) dynamicallyLoadNextPage {
@@ -416,7 +445,7 @@
     NSArray *tempArr = [NSArray arrayWithObject:file];
     PrintWebViewController *printController = [[PrintWebViewController alloc] initWithUrl:@"http://akillidepo.cellograf.com/" withFileList:tempArr];
     printNav = [[MyNavigationController alloc] initWithRootViewController:printController];
-   
+    
     [self presentViewController:printNav animated:YES completion:nil];
 }
 
@@ -427,9 +456,9 @@
 - (void) moreClicked {
     NSArray* list = @[[NSNumber numberWithInt:MoreMenuTypeImageDetail], [NSNumber numberWithInt:MoreMenuTypeShare], self.file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDownloadImage], [NSNumber numberWithInt:MoreMenuTypeDelete]] ;
     //TakingBack RemoveFromAlbum
-//    if (self.album) {
-//        list = @[[NSNumber numberWithInt:MoreMenuTypeImageDetail], [NSNumber numberWithInt:MoreMenuTypeShare], self.file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDownloadImage], [NSNumber numberWithInt:MoreMenuTypeRemoveFromAlbum], [NSNumber numberWithInt:MoreMenuTypeDelete]] ;
-//    }
+    //    if (self.album) {
+    //        list = @[[NSNumber numberWithInt:MoreMenuTypeImageDetail], [NSNumber numberWithInt:MoreMenuTypeShare], self.file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDownloadImage], [NSNumber numberWithInt:MoreMenuTypeRemoveFromAlbum], [NSNumber numberWithInt:MoreMenuTypeDelete]] ;
+    //    }
     [self presentMoreMenuWithList:list withFileFolder:self.file];
 }
 
@@ -634,14 +663,14 @@
     [moreButton addTarget:self action:@selector(moreClicked) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *moreItem = [[UIBarButtonItem alloc] initWithCustomView:moreButton];
     self.navigationItem.rightBarButtonItem = moreItem;
-
-    if(![AppUtil readDoNotShowAgainFlagForKey:TUTORIAL_DETAIL_KEY] && !APPDELEGATE.session.photoDetailTipShown) {
-        UIWindow *window = APPDELEGATE.window;
-        TutorialView *tutorialView = [[TutorialView alloc] initWithFrame:CGRectMake(0, 0, window.frame.size.width, window.frame.size.height) withBgImageName:@"img_baski_2.jpg" withTitle:@"" withKey:TUTORIAL_DETAIL_KEY doNotShowFlag:NO];
-        [window addSubview:tutorialView];
-        APPDELEGATE.session.photoDetailTipShown = YES;
-        [AppUtil writeDoNotShowAgainFlagForKey:TUTORIAL_DETAIL_KEY];
-    }
+    
+//    if(![AppUtil readDoNotShowAgainFlagForKey:TUTORIAL_DETAIL_KEY] && !APPDELEGATE.session.photoDetailTipShown) {
+//        UIWindow *window = APPDELEGATE.window;
+//        TutorialView *tutorialView = [[TutorialView alloc] initWithFrame:CGRectMake(0, 0, window.frame.size.width, window.frame.size.height) withBgImageName:@"img_baski_2.jpg" withTitle:@"" withKey:TUTORIAL_DETAIL_KEY doNotShowFlag:NO];
+//        [window addSubview:tutorialView];
+//        APPDELEGATE.session.photoDetailTipShown = YES;
+//        [AppUtil writeDoNotShowAgainFlagForKey:TUTORIAL_DETAIL_KEY];
+//    }
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -651,7 +680,7 @@
     [customBackButton addTarget:self action:@selector(triggerDismiss) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:customBackButton];
     self.navigationItem.leftBarButtonItem = backButton;
-
+    
     [self mirrorRotation:[[UIApplication sharedApplication] statusBarOrientation]];
 }
 
@@ -679,7 +708,7 @@
                 activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
                 
                 activityViewController.excludedActivityTypes = @[@"com.igones.adepo.DepoShareExtension"];
-
+                
                 if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
                     [self presentViewController:activityViewController animated:YES completion:nil];
                 } else {

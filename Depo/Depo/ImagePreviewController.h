@@ -39,7 +39,7 @@
     int listOffSet;
     int pagingEnabledFlag;
     MyNavigationController *printNav;
-//    BOOL refFromAlbumFlag;
+    //    BOOL refFromAlbumFlag;
 }
 
 @property (nonatomic, weak) id<ImagePreviewDelegate> delegate;
@@ -49,10 +49,10 @@
 @property int cursor;
 
 - (id)initWithFile:(MetaFile *) _file;
-//- (id)initWithFile:(MetaFile *) _file referencedFromAlbum:(BOOL) srcAlbumFlag;
-- (id)initWithFile:(MetaFile *) _file withAlbum:(PhotoAlbum*) _album;
+- (id)initWithFile:(MetaFile *) _file withAlbum:(PhotoAlbum*) _album withFiles:(NSArray *)_files withListOffset:(int)offset;
 - (id)initWithFiles:(NSArray *) _files withImage:(MetaFile *) _file withListOffset:(int) offset;
 - (id) initWithFiles:(NSArray *)_files withImage:(MetaFile *)_file withListOffset:(int)offset printEnabled:(BOOL) printEnabledFlag;
 - (id) initWithFiles:(NSArray *)_files withImage:(MetaFile *)_file withListOffset:(int)offset printEnabled:(BOOL) printEnabledFlag pagingEnabled:(BOOL) pagingEnabled;
+
 
 @end

@@ -407,4 +407,13 @@
     return YES;
 }
 
++ (void) writeBaseUrlConstantForLocPopup:(NSString *) baseUrlConstantForLocPopup {
+    [[NSUserDefaults standardUserDefaults] setValue:baseUrlConstantForLocPopup forKey:PERSISTENT_BASE_URL_CONSTANT_KEY_FOR_LOC_POPUP];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (NSString *) readBaseUrlConstantForLocPopup {
+    return [[NSUserDefaults standardUserDefaults] valueForKey:PERSISTENT_BASE_URL_CONSTANT_KEY_FOR_LOC_POPUP];
+}
+
 @end

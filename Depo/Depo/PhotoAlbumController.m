@@ -343,7 +343,7 @@
 
 - (void) squareImageWasSelectedForFile:(MetaFile *)fileSelected {
     if(fileSelected.contentType == ContentTypePhoto) {
-        ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFile:fileSelected withAlbum:self.album];
+        ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFile:fileSelected withAlbum:self.album withFiles:photoList withListOffset:0];
         detail.delegate = self;
         MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
         detail.nav = modalNav;
@@ -356,6 +356,7 @@
         [self.nav presentViewController:modalNav animated:YES completion:nil];
     }
 }
+
 
 - (void) squareImageWasLongPressedForFile:(MetaFile *)fileSelected {
     [self changeToSelectedStatus];
