@@ -237,8 +237,16 @@
     } else {
         fileSelectedRef = fileSelected;
         self.deleteType = DeleteTypeSwipeMenu;
-        [APPDELEGATE.base showConfirmDelete];
+        [self showConfirmDelete];
+        //[APPDELEGATE.base showConfirmDelete];
     }
+}
+
+- (void) showConfirmDelete {
+    ConfirmDeleteModalController *confirmDelete = [[ConfirmDeleteModalController alloc] init];
+    confirmDelete.delegate = self;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:confirmDelete];
+    [self.nav presentViewController:modalNav animated:YES completion:nil];
 }
 
 - (void) fileFolderCellShouldShareForFile:(MetaFile *)fileSelected {
@@ -247,7 +255,15 @@
 
 - (void) fileFolderCellShouldMoveForFile:(MetaFile *)fileSelected {
     selectedDocList = [[NSMutableArray alloc] initWithObjects:fileSelected.uuid, nil];
-    [APPDELEGATE.base showMoveFolders];
+    [self showMoveFolders];
+    //[APPDELEGATE.base showMoveFolders];
+}
+
+- (void) showMoveFolders {
+    MoveListModalController *move = [[MoveListModalController alloc] initForFolder:nil];
+    move.delegate = self;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:move];
+    [self.nav presentViewController:modalNav animated:YES completion:nil];
 }
 
 - (void) fileFolderCellDidSelectFile:(MetaFile *)fileSelected {
@@ -392,7 +408,8 @@
         [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
     } else {
         self.deleteType = DeleteTypeFooterMenu;
-        [APPDELEGATE.base showConfirmDelete];
+        [self showConfirmDelete];
+       // [APPDELEGATE.base showConfirmDelete];
     }
 }
 

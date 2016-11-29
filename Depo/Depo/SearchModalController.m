@@ -393,7 +393,7 @@
         if(fileAtIndex.contentType == ContentTypeFolder) {
             FileListController *innerList = [[FileListController alloc] initForFolder:fileAtIndex];
             innerList.nav = self.nav;
-            [self.nav pushViewController:innerList animated:NO];
+            [self.nav pushViewController:innerList animated:YES];
         }else if (fileAtIndex.contentType == ContentTypeAlbumPhoto) {
             [self showPhotoAlbumWithMetaFile:fileAtIndex];
         }else {
@@ -405,7 +405,7 @@
             } else if([AppUtil isMetaFileDoc:fileAtIndex]){
                 FileDetailInWebViewController *detail = [[FileDetailInWebViewController alloc] initWithFile:fileAtIndex];
                 detail.nav = self.nav;
-                [self.nav pushViewController:detail animated:NO];
+                [self.nav pushViewController:detail animated:YES];
             } else if([AppUtil isMetaFileVideo:fileAtIndex]) {
                 VideoPreviewController *detail = [[VideoPreviewController alloc] initWithFile:fileAtIndex];
                 MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];

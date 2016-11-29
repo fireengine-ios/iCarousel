@@ -721,10 +721,19 @@
 
 - (void) moreMenuDidSelectSortWithList {
     if(segmentType == PhotoHeaderSegmentTypeAlbum) {
-        [APPDELEGATE.base showSortWithList:[NSArray arrayWithObjects:[NSNumber numberWithInt:SortTypeAlphaAsc], [NSNumber numberWithInt:SortTypeAlphaDesc], [NSNumber numberWithInt:SortTypeDateAsc], [NSNumber numberWithInt:SortTypeDateDesc], nil]];
+        [self showSortWithList:[NSArray arrayWithObjects:[NSNumber numberWithInt:SortTypeAlphaAsc], [NSNumber numberWithInt:SortTypeAlphaDesc], [NSNumber numberWithInt:SortTypeDateAsc], [NSNumber numberWithInt:SortTypeDateDesc], nil]];
+      //  [APPDELEGATE.base showSortWithList:[NSArray arrayWithObjects:[NSNumber numberWithInt:SortTypeAlphaAsc], [NSNumber numberWithInt:SortTypeAlphaDesc], [NSNumber numberWithInt:SortTypeDateAsc], [NSNumber numberWithInt:SortTypeDateDesc], nil]];
     } else {
-        [APPDELEGATE.base showSortWithList:[NSArray arrayWithObjects:[NSNumber numberWithInt:SortTypeDateAsc], [NSNumber numberWithInt:SortTypeDateDesc], nil]];
+         [self showSortWithList:[NSArray arrayWithObjects:[NSNumber numberWithInt:SortTypeDateAsc], [NSNumber numberWithInt:SortTypeDateDesc], nil]];
+       // [APPDELEGATE.base showSortWithList:[NSArray arrayWithObjects:[NSNumber numberWithInt:SortTypeDateAsc], [NSNumber numberWithInt:SortTypeDateDesc], nil]];
     }
+}
+
+- (void) showSortWithList:(NSArray *) sortTypeList {
+    SortModalController *sort = [[SortModalController alloc] initWithList:sortTypeList];
+    sort.delegate = self;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:sort];
+    [self.nav presentViewController:modalNav animated:YES completion:nil];
 }
 
 - (void) moreMenuDidSelectVideofy {
@@ -846,16 +855,33 @@
         } else {
             self.deleteType = DeleteTypeAlbums;
         }
-        [APPDELEGATE.base showConfirmDelete];
+        [self showConfirmDelete];
+       // [APPDELEGATE.base showConfirmDelete];
     }
 }
 
+-(void)showConfirmDelete {
+    ConfirmDeleteModalController *confirmDelete = [[ConfirmDeleteModalController alloc] init];
+    confirmDelete.delegate = self;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:confirmDelete];
+    [self.nav presentViewController:modalNav animated:YES completion:nil];
+}
+
+
 - (void) footerActionMenuDidSelectMove:(FooterActionsMenuView *) menu {
-    [APPDELEGATE.base showPhotoAlbums];
+    [self showPhotoAlbums];
+    //[APPDELEGATE.base showPhotoAlbums];
 }
 
 - (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {
     [APPDELEGATE.base triggerShareForFiles:selectedFileList];
+}
+
+- (void) showPhotoAlbums {
+    PhotoAlbumListModalController *albums = [[PhotoAlbumListModalController alloc] init];
+    albums.delegate = self;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:albums];
+    [self.nav presentViewController:modalNav animated:YES completion:nil];
 }
 
 - (void) albumModalDidSelectAlbum:(NSString *)albumUuid {

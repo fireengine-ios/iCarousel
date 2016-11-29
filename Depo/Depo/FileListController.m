@@ -310,7 +310,7 @@
             MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:preview];
             preview.nav = modalNav;
             preview.oldDelegateRef = uploadingCell;
-            [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
+            [self.nav presentViewController:modalNav animated:YES completion:nil];
         }
         return;
     }
@@ -340,7 +340,7 @@
             detail.delegate = self;
             MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
             detail.nav = modalNav;
-            [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
+            [self.nav presentViewController:modalNav animated:YES completion:nil];
         } else if([AppUtil isMetaFileDoc:fileSelected]){
             FileDetailInWebViewController *detail = [[FileDetailInWebViewController alloc] initWithFile:fileSelected];
             detail.delegate = self;
@@ -351,7 +351,7 @@
             detail.delegate = self;
             MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
             detail.nav = modalNav;
-            [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
+            [self.nav presentViewController:modalNav animated:YES completion:nil];
         } else if([AppUtil isMetaFileMusic:fileSelected]) {
             MusicPreviewController *detail = [[MusicPreviewController alloc] initWithFile:fileSelected.uuid withFileList:@[fileSelected]];
             detail.delegate = self;
@@ -424,8 +424,22 @@
     } else {
         fileSelectedRef = fileSelected;
         self.deleteType = DeleteTypeSwipeMenu;
-        [APPDELEGATE.base showConfirmDelete];
+        [self showConfirmDelete];
     }
+}
+
+-(void)showConfirmDelete {
+    ConfirmDeleteModalController *confirmDelete = [[ConfirmDeleteModalController alloc] init];
+    confirmDelete.delegate = self;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:confirmDelete];
+    [self.nav presentViewController:modalNav animated:YES completion:nil];
+}
+
+- (void) showMoveFoldersWithExludingFolder:(NSString *) exludingFolderUuid withProhibitedFolderList:(NSArray *) prohibitedList {
+    MoveListModalController *move = [[MoveListModalController alloc] initForFolder:nil withExludingFolder:exludingFolderUuid withProhibitedFolders:prohibitedList];
+    move.delegate = self;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:move];
+    [self.nav presentViewController:modalNav animated:YES completion:nil];
 }
 
 - (void) fileFolderCellShouldShareForFile:(MetaFile *)fileSelected {
@@ -434,7 +448,7 @@
 
 - (void) fileFolderCellShouldMoveForFile:(MetaFile *)fileSelected {
     selectedFileList = [[NSMutableArray alloc] initWithObjects:fileSelected.uuid, nil];
-    [APPDELEGATE.base showMoveFoldersWithExludingFolder:self.folder.uuid withProhibitedFolderList:selectedFileList];
+    [self showMoveFoldersWithExludingFolder:self.folder.uuid withProhibitedFolderList:selectedFileList];
 }
 
 - (void) fileFolderCellDidSelectFile:(MetaFile *)fileSelected {
@@ -795,12 +809,12 @@
         }
     } else {
         self.deleteType = DeleteTypeFooterMenu;
-        [APPDELEGATE.base showConfirmDelete];
+        [self showConfirmDelete];
     }
 }
 
 - (void) footerActionMenuDidSelectMove:(FooterActionsMenuView *) menu {
-    [APPDELEGATE.base showMoveFoldersWithExludingFolder:self.folder.uuid withProhibitedFolderList:selectedFileList];
+    [self showMoveFoldersWithExludingFolder:self.folder.uuid withProhibitedFolderList:selectedFileList];
 }
 
 - (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {
@@ -819,6 +833,8 @@
         [APPDELEGATE.base triggerShareForFiles:selectedFileList];
     }
 }
+
+#pragma mark - Move List Modal Delegate
 
 - (void) moveListModalDidSelectFolder:(NSString *)folderUuid {
     if([selectedFileList containsObject:folderUuid]) {
@@ -840,7 +856,7 @@
     FolderDetailModalController *folderDetail = [[FolderDetailModalController alloc] initWithFolder:folder];
     folderDetail.delegate = self;
     MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:folderDetail];
-    [self presentViewController:modalNav animated:YES completion:nil];
+    [self.nav presentViewController:modalNav animated:YES completion:nil];
 }
 
 -(void)moreMenuDidSelectUpdateSelectOption {
@@ -851,7 +867,7 @@
     SortModalController *sort = [[SortModalController alloc] init];
     sort.delegate = self;
     MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:sort];
-    [self presentViewController:modalNav animated:YES completion:nil];
+    [self.nav presentViewController:modalNav animated:YES completion:nil];
 }
 
 - (void) moreMenuDidSelectDelete {
@@ -861,7 +877,7 @@
         [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
     } else {
         self.deleteType = DeleteTypeMoreMenu;
-        [APPDELEGATE.base showConfirmDelete];
+        [self showConfirmDelete];
     }
 }
 

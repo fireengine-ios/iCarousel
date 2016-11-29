@@ -338,7 +338,7 @@
     preview.oldDelegateRef = squareRef;
     MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:preview];
     preview.nav = modalNav;
-    [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
+    [self.nav presentViewController:modalNav animated:YES completion:nil];
 }
 
 - (void) squareImageWasSelectedForFile:(MetaFile *)fileSelected {
@@ -347,13 +347,13 @@
         detail.delegate = self;
         MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
         detail.nav = modalNav;
-        [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
+        [self.nav presentViewController:modalNav animated:YES completion:nil];
     } else if(fileSelected.contentType == ContentTypeVideo) {
         VideoPreviewController *detail = [[VideoPreviewController alloc] initWithFile:fileSelected withAlbum:self.album];
         detail.delegate = self;
         MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
         detail.nav = modalNav;
-        [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
+        [self.nav presentViewController:modalNav animated:YES completion:nil];
     }
 }
 
@@ -405,7 +405,8 @@
         [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteAlbumProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteAlbumSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteAlbumFailMessage", @"")];
     } else {
         self.deleteType = DeleteTypeMoreMenu;
-        [APPDELEGATE.base showConfirmDelete];
+        [self showConfirmDelete];
+        //[APPDELEGATE.base showConfirmDelete];
     }
 }
 
@@ -413,7 +414,7 @@
     AlbumDetailModalController *albumDetail = [[AlbumDetailModalController alloc] initWithAlbum:album];
     albumDetail.delegate = self;
     MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:albumDetail];
-    [self presentViewController:modalNav animated:YES completion:nil];
+    [self.nav presentViewController:modalNav animated:YES completion:nil];
 }
 
 - (void) moreMenuDidDismiss {
@@ -423,6 +424,13 @@
 
 - (void) postMoreMenuDismiss {
     moreMenuView = nil;
+}
+
+-(void)showConfirmDelete {
+    ConfirmDeleteModalController *confirmDelete = [[ConfirmDeleteModalController alloc] init];
+    confirmDelete.delegate = self;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:confirmDelete];
+    [self.nav presentViewController:modalNav animated:YES completion:nil];
 }
 
 #pragma mark AlbumDetailDelegate methods
@@ -607,7 +615,7 @@
     PrintWebViewController *printController = [[PrintWebViewController alloc] initWithUrl:@"http://akillidepo.cellograf.com/" withFileList:printList];
     printNav = [[MyNavigationController alloc] initWithRootViewController:printController];
     
-    [self presentViewController:printNav animated:YES completion:nil];
+    [self.nav presentViewController:printNav animated:YES completion:nil];
     
 }
 
@@ -732,7 +740,7 @@
 //    activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll];
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        [self presentViewController:activityViewController animated:YES completion:nil];
+        [self.nav presentViewController:activityViewController animated:YES completion:nil];
     } else {
         UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
         [popup presentPopoverFromRect:CGRectMake(self.view.frame.size.width-240, self.view.frame.size.height-40, 240, 300)inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];

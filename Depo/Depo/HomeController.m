@@ -23,6 +23,7 @@
 #import "MusicListController.h"
 #import "SettingsController.h"
 #import "ContactSyncController.h"
+#import "RecentActivitiesController.h"
 #import "CurioSDK.h"
 #import "Subscription.h"
 #import "AppSession.h"
@@ -166,7 +167,14 @@
 #pragma mark RecentActivityLinker Method
 
 - (void) recentActivityLinkerDidTriggerPage {
-    [APPDELEGATE.base showRecentActivities];
+    [self showRecentActivities];
+   // [APPDELEGATE.base showRecentActivities];
+}
+
+- (void) showRecentActivities {
+    RecentActivitiesController *recentActivities = [[RecentActivitiesController alloc] init];
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:recentActivities];
+    [self.nav presentViewController:modalNav animated:YES completion:nil];
 }
 
 - (void) tempDraw {

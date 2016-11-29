@@ -738,7 +738,7 @@
         [self immediateShowAddButton];
     }
 }
-
+/*
 - (void) showConfirmDelete {
     ConfirmDeleteModalController *confirmDelete = [[ConfirmDeleteModalController alloc] init];
     confirmDelete.delegate = [self.nav topViewController];
@@ -828,7 +828,7 @@
     MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:recentActivities];
     [self presentViewController:modalNav animated:YES completion:nil];
 }
-
+*/
 - (void) triggerShareForFiles:(NSArray *) fileUuidList {
     [shareDao requestLinkForFiles:fileUuidList];
     [self showBaseLoading];

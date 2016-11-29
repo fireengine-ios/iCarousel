@@ -240,7 +240,15 @@
 }
 
 - (void) revisitedGroupedPhotoShouldConfirmForDeleting {
-    [APPDELEGATE.base showConfirmDelete];
+    [self showConfirmDelete];
+    //[APPDELEGATE.base showConfirmDelete];
+}
+
+-(void)showConfirmDelete {
+    ConfirmDeleteModalController *confirmDelete = [[ConfirmDeleteModalController alloc] init];
+    confirmDelete.delegate = self;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:confirmDelete];
+    [self.nav presentViewController:modalNav animated:YES completion:nil];
 }
 
 - (void) revisitedGroupedPhotoDidChangeToSelectState {
@@ -387,8 +395,16 @@
 
 - (void) moreMenuDidSelectSortWithList {
     if(!albumView.isHidden) {
-        [APPDELEGATE.base showSortWithList:[NSArray arrayWithObjects:[NSNumber numberWithInt:SortTypeAlphaAsc], [NSNumber numberWithInt:SortTypeAlphaDesc], [NSNumber numberWithInt:SortTypeDateAsc], [NSNumber numberWithInt:SortTypeDateDesc], nil]];
+        [self showSortWithList:[NSArray arrayWithObjects:[NSNumber numberWithInt:SortTypeAlphaAsc], [NSNumber numberWithInt:SortTypeAlphaDesc], [NSNumber numberWithInt:SortTypeDateAsc], [NSNumber numberWithInt:SortTypeDateDesc], nil]];
+       // [APPDELEGATE.base showSortWithList:[NSArray arrayWithObjects:[NSNumber numberWithInt:SortTypeAlphaAsc], [NSNumber numberWithInt:SortTypeAlphaDesc], [NSNumber numberWithInt:SortTypeDateAsc], [NSNumber numberWithInt:SortTypeDateDesc], nil]];
     }
+}
+
+- (void) showSortWithList:(NSArray *) sortTypeList {
+    SortModalController *sort = [[SortModalController alloc] initWithList:sortTypeList];
+    sort.delegate = self;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:sort];
+    [self.nav presentViewController:modalNav animated:YES completion:nil];
 }
 
 - (void) moreMenuDidSelectVideofy {
