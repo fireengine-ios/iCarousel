@@ -792,6 +792,8 @@
 		564A318B1A9288A400C5B755 /* no_photo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 564A31891A9288A300C5B755 /* no_photo_icon@2x.png */; };
 		564A318D1A933FE300C5B755 /* profile_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 564A318C1A933FE300C5B755 /* profile_icon.png */; };
 		564A318F1A93419D00C5B755 /* profile_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 564A318E1A93419D00C5B755 /* profile_icon@2x.png */; };
+		56B9E92A1DEC47A600DE1011 /* AppRater.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B9E9291DEC47A600DE1011 /* AppRater.m */; };
+		56B9E92D1DED752600DE1011 /* AppRater.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 56B9E92C1DED752600DE1011 /* AppRater.bundle */; };
 		56BDE2501A8DEA8B0082F8B8 /* OfferCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 56BDE24F1A8DEA8B0082F8B8 /* OfferCell.m */; };
 		56FCFDD51A9C7DDA00AC041C /* info_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 56FCFDD31A9C7DDA00AC041C /* info_icon.png */; };
 		56FCFDD61A9C7DDA00AC041C /* info_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56FCFDD41A9C7DDA00AC041C /* info_icon@2x.png */; };
@@ -2265,6 +2267,9 @@
 		564A31891A9288A300C5B755 /* no_photo_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no_photo_icon@2x.png"; sourceTree = "<group>"; };
 		564A318C1A933FE300C5B755 /* profile_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile_icon.png; sourceTree = "<group>"; };
 		564A318E1A93419D00C5B755 /* profile_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile_icon@2x.png"; sourceTree = "<group>"; };
+		56B9E9281DEC47A600DE1011 /* AppRater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppRater.h; sourceTree = "<group>"; };
+		56B9E9291DEC47A600DE1011 /* AppRater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppRater.m; sourceTree = "<group>"; };
+		56B9E92C1DED752600DE1011 /* AppRater.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AppRater.bundle; sourceTree = "<group>"; };
 		56BDE24E1A8DEA8B0082F8B8 /* OfferCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfferCell.h; sourceTree = "<group>"; };
 		56BDE24F1A8DEA8B0082F8B8 /* OfferCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfferCell.m; sourceTree = "<group>"; };
 		56FCFDD31A9C7DDA00AC041C /* info_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info_icon.png; sourceTree = "<group>"; };
@@ -3508,6 +3513,7 @@
 		051E1E3A19CAC8EA00FD1E03 /* out */ = {
 			isa = PBXGroup;
 			children = (
+				56B9E92B1DED750600DE1011 /* AppRater */,
 				94B9D2281CA86C4300FC28F2 /* libMPush.a */,
 				94B9D2291CA86C4300FC28F2 /* MPush.h */,
 				05C6C6FF1B3C123C00CB6CE5 /* TTTAttributedLabel.h */,
@@ -4575,6 +4581,16 @@
 			path = CurioSDK;
 			sourceTree = "<group>";
 		};
+		56B9E92B1DED750600DE1011 /* AppRater */ = {
+			isa = PBXGroup;
+			children = (
+				56B9E92C1DED752600DE1011 /* AppRater.bundle */,
+				56B9E9281DEC47A600DE1011 /* AppRater.h */,
+				56B9E9291DEC47A600DE1011 /* AppRater.m */,
+			);
+			name = AppRater;
+			sourceTree = "<group>";
+		};
 		94F130C41D2496C70086BDBB /* social */ = {
 			isa = PBXGroup;
 			children = (
@@ -4779,6 +4795,7 @@
 				052A222619F682CA000C3C75 /* Default-568h@2x.png in Resources */,
 				051CB40B19D2F71200E5FC88 /* action_bar_preloader@2x.png in Resources */,
 				9498C0071D537B34009AF159 /* icon_more@2x.png in Resources */,
+				56B9E92D1DED752600DE1011 /* AppRater.bundle in Resources */,
 				052D415919EC1A25001B4088 /* empty_album_header_bg@2x.png in Resources */,
 				94C7CEE21D2B97520040897A /* icon_createstory@3x.png in Resources */,
 				05D5E58D1B09D56A00A22957 /* icon_settings_arrow.png in Resources */,
@@ -5834,6 +5851,7 @@
 				5247D5E71DD342B900FFE63E /* ConfirmRemoveModalController.m in Sources */,
 				94B3BE2F1D81F7C40086D05E /* FaqUrlDao.m in Sources */,
 				05DEB1EC1A81775F007793DD /* ContactUtil.m in Sources */,
+				56B9E92A1DEC47A600DE1011 /* AppRater.m in Sources */,
 				050D4C2F1A31E12F00809A01 /* PostLoginSyncPrefController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

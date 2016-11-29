@@ -20,6 +20,8 @@
 #import "MsisdnEntryController.h"
 #import "EmailEntryController.h"
 
+#import "AppRater.h"
+
 @interface RevisitedGroupedPhotosController () {
     MyNavigationController *printNav;
 }

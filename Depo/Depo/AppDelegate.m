@@ -61,6 +61,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "Reachability.h"
 #import "BaseBgController.h"
+#import "AppRater.h"
 
 //TODO info'larda version update
 
@@ -187,6 +188,19 @@
 //    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
     
     [self.window makeKeyAndVisible];
+    
+    
+    // App Rater
+    [AppRater sharedInstance].daysUntilPrompt = 5;
+    [AppRater sharedInstance].launchesUntilPrompt = 3;
+    [AppRater sharedInstance].remindMeDaysUntilPrompt = 15;
+    [AppRater sharedInstance].remindMeLaunchesUntilPrompt = 3;
+    [AppRater sharedInstance].preferredLanguage = @"en";
+    [[AppRater sharedInstance] appLaunched];
+    
+    
+    
+    
     return YES;
 }
 
