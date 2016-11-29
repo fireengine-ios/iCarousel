@@ -167,15 +167,9 @@
 #pragma mark RecentActivityLinker Method
 
 - (void) recentActivityLinkerDidTriggerPage {
-    [self showRecentActivities];
-   // [APPDELEGATE.base showRecentActivities];
+    [MoreMenuView presentRecentActivitesFromController:self.nav];
 }
 
-- (void) showRecentActivities {
-    RecentActivitiesController *recentActivities = [[RecentActivitiesController alloc] init];
-    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:recentActivities];
-    [self.nav presentViewController:modalNav animated:YES completion:nil];
-}
 
 - (void) tempDraw {
     CGContextRef context = UIGraphicsGetCurrentContext();

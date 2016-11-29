@@ -244,4 +244,43 @@
     [controller presentViewController:modalNav animated:YES completion:nil];
 }
 
++(void)presentRecentActivitesFromController:(UIViewController *)controller {
+    RecentActivitiesController *recentActivities = [[RecentActivitiesController alloc] init];
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:recentActivities];
+    [controller presentViewController:modalNav animated:YES completion:nil];
+}
+
++(void)presentFolderDetailForFolder:(MetaFile *)folder
+                    fromController:(UIViewController *)controller
+                     delegateOwner:(id<FolderDetailDelegate>)delegateOwner {
+    
+    FolderDetailModalController *folderDetail = [[FolderDetailModalController alloc] initWithFolder:folder];
+    folderDetail.delegate = delegateOwner;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:folderDetail];
+    [controller presentViewController:modalNav animated:YES completion:nil];
+}
+
++(void)presentFileDetailForFile:(MetaFile *)file
+                 fromController:(UIViewController *)controller
+                  delegateOwner:(id<FileDetailDelegate>)delegateOwner {
+    
+    FileDetailModalController *fileDetail = [[FileDetailModalController alloc] initWithFile:file];
+    fileDetail.delegate = delegateOwner;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:fileDetail];
+    [controller presentViewController:modalNav animated:YES completion:nil];
+}
+
++(void)presentAlbumDetailForAlbum:(PhotoAlbum *)album
+                   fromController:(UIViewController *)controller
+                    delegateOwner:(id<AlbumDetailDelegate>)delegateOwner {
+    
+    AlbumDetailModalController *albumDetail = [[AlbumDetailModalController alloc] initWithAlbum:album];
+    albumDetail.delegate = delegateOwner;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:albumDetail];
+    [controller presentViewController:modalNav animated:YES completion:nil];
+}
+
+
+
+
 @end

@@ -190,10 +190,7 @@
 #pragma mark MoreMenuDelegate
 
 - (void) moreMenuDidSelectVideoDetail {
-    FileDetailModalController *fileDetail = [[FileDetailModalController alloc] initWithFile:file];
-    fileDetail.delegate = self;
-    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:fileDetail];
-    [self presentViewController:modalNav animated:YES completion:nil];
+    [MoreMenuView presentFileDetailForFile:file fromController:self.nav delegateOwner:self];
 }
 
 - (void) moreMenuDidSelectDelete {

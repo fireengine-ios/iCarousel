@@ -410,10 +410,7 @@
 }
 
 - (void) moreMenuDidSelectAlbumDetailForAlbum:(PhotoAlbum *) album {
-    AlbumDetailModalController *albumDetail = [[AlbumDetailModalController alloc] initWithAlbum:album];
-    albumDetail.delegate = self;
-    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:albumDetail];
-    [self.nav presentViewController:modalNav animated:YES completion:nil];
+    [MoreMenuView presentAlbumDetailForAlbum:album fromController:self.nav delegateOwner:self];
 }
 
 - (void) moreMenuDidDismiss {

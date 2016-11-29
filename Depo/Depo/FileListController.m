@@ -942,10 +942,7 @@
 #pragma mark MoreMenuDelegate
 
 -(void)moreMenuDidSelectFolderDetailForFolder:(MetaFile *) folder {
-    FolderDetailModalController *folderDetail = [[FolderDetailModalController alloc] initWithFolder:folder];
-    folderDetail.delegate = self;
-    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:folderDetail];
-    [self.nav presentViewController:modalNav animated:YES completion:nil];
+    [MoreMenuView presentFolderDetailForFolder:folder fromController:self.nav delegateOwner:self];
 }
 
 -(void)moreMenuDidSelectUpdateSelectOption {

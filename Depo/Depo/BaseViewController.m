@@ -855,7 +855,7 @@
 
 - (void) shareFailCallback:(NSString *) errorMessage {
     [self hideBaseLoading];
-}*/
+}
 
 - (void) triggerShareForFileObjects:(NSArray *) fileList {
     if([fileList count] == 1 && ( (MetaFile *)[fileList objectAtIndex:0]).contentType == ContentTypePhoto) {
@@ -909,7 +909,7 @@
                                    completionBlock(NO, nil);
                                }
                            }];
-}
+}*/
 
 - (void)viewDidLoad {
     [super viewDidLoad];

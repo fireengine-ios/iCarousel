@@ -544,14 +544,7 @@
 }
 
 - (void) didTriggerRecentActivities {
-    [self showRecentActivities];
-    //[APPDELEGATE.base showRecentActivities];
-}
-
-- (void) showRecentActivities {
-    RecentActivitiesController *recentActivities = [[RecentActivitiesController alloc] init];
-    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:recentActivities];
-    [self presentViewController:modalNav animated:YES completion:nil];
+    [MoreMenuView presentRecentActivitesFromController:self.nav];
 }
 
 - (void) didTriggerConnectedDevices {

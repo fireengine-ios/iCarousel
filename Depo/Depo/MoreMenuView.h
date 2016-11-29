@@ -14,6 +14,10 @@
 #import "SortModalController.h"
 #import "MoveListModalController.h"
 #import "PhotoAlbumListModalController.h"
+#import "RecentActivitiesController.h"
+#import "FolderDetailModalController.h"
+#import "FileDetailModalController.h"
+#import "AlbumDetailModalController.h"
 
 @protocol MoreMenuDelegate <NSObject>
 - (void) moreMenuDidSelectSortWithList;
@@ -66,4 +70,17 @@
                                    delegateOwner:(id<MoveListModalProtocol>)delegateOwner;
 
 +(void)presentPhotoAlbumsFromController:(UIViewController *)controller delegateOwner:(id<AlbumModalDelete>)delegateOwner;
++(void)presentRecentActivitesFromController:(UIViewController *)controller;
++(void)presentFolderDetailForFolder:(MetaFile *)folder
+                    fromController:(UIViewController *)controller
+                     delegateOwner:(id<FolderDetailDelegate>)delegateOwner;
+
++(void)presentFileDetailForFile:(MetaFile *)file
+                 fromController:(UIViewController *)controller
+                  delegateOwner:(id<FileDetailDelegate>)delegateOwner;
+
++(void)presentAlbumDetailForAlbum:(PhotoAlbum *)album
+                   fromController:(UIViewController *)controller
+                    delegateOwner:(id<AlbumDetailDelegate>)delegateOwner;
+
 @end
