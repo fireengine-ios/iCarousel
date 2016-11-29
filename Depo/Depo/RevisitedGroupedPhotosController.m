@@ -40,6 +40,11 @@
 - (id) init {
     if(self = [super init]) {
         self.title = NSLocalizedString(@"PhotosTitle", @"");
+        
+        shareDao = [[ShareLinkDao alloc] init];
+        shareDao.delegate = self;
+        shareDao.successMethod = @selector(shareSuccessCallback:);
+        shareDao.failMethod = @selector(shareFailCallback:);
 
         usageDao = [[UsageInfoDao alloc] init];
         usageDao.delegate = self;
@@ -166,7 +171,7 @@
     PhotoAlbumController *albumController = [[PhotoAlbumController alloc] initWithAlbum:albumSelected];
     albumController.delegate = self;
     albumController.nav = self.nav;
-    [self.navigationController pushViewController:albumController animated:NO];
+    [self.navigationController pushViewController:albumController animated:YES];
 }
 
 - (void) revisitedAlbumListChangeTitleTo:(NSString *)pageTitle {
@@ -242,7 +247,15 @@
 }
 
 - (void) revisitedGroupedPhotoShouldConfirmForDeleting {
-    [APPDELEGATE.base showConfirmDelete];
+    [MoreMenuView presentConfirmDeleteFromController:self.nav delegateOwner:self];
+}
+
+- (void) revisitedGroupedPhotoShowPhotoAlbums:(RevisitedGroupedPhotoView *)view {
+    [MoreMenuView presentPhotoAlbumsFromController:self.nav delegateOwner:self];
+}
+
+- (void) revisitedGroupedPhoto:(RevisitedGroupedPhotoView *)view triggerShareForFiles:(NSArray *) uuidList {
+    
 }
 
 - (void) revisitedGroupedPhotoDidChangeToSelectState {
@@ -276,6 +289,37 @@
 - (void) closePrintPage {
     [printNav dismissViewControllerAnimated:YES completion:nil];
 }
+
+#pragma mark - Share
+
+- (void) triggerShareForFiles:(NSArray *) fileUuidList {
+    [shareDao requestLinkForFiles:fileUuidList];
+    [self showLoading];
+}
+
+#pragma mark ShareLinkDao Delegate Methods
+- (void) shareSuccessCallback:(NSString *) linkToShare {
+    [self hideLoading];
+    NSArray *activityItems = [NSArray arrayWithObjects:linkToShare, nil];
+    
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+    [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
+    activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    
+    //    activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll];
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        [self presentViewController:activityViewController animated:YES completion:nil];
+    } else {
+        UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
+        [popup presentPopoverFromRect:CGRectMake(self.view.frame.size.width-240, self.view.frame.size.height-40, 240, 300)inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
+}
+
+- (void) shareFailCallback:(NSString *) errorMessage {
+    [self hideLoading];
+}
+
 
 #pragma mark PhotoAlbumDelegate methods
 
@@ -379,9 +423,18 @@
     }
 }
 
+
+
+#pragma mark - More Menu Delegate
+
+-(void)moreMenuDidSelectUpdateSelectOption {
+    [self changeToSelectedStatus];
+}
+
 - (void) moreMenuDidSelectSortWithList {
     if(!albumView.isHidden) {
-        [APPDELEGATE.base showSortWithList:[NSArray arrayWithObjects:[NSNumber numberWithInt:SortTypeAlphaAsc], [NSNumber numberWithInt:SortTypeAlphaDesc], [NSNumber numberWithInt:SortTypeDateAsc], [NSNumber numberWithInt:SortTypeDateDesc], nil]];
+        NSArray *list = [NSArray arrayWithObjects:[NSNumber numberWithInt:SortTypeAlphaAsc], [NSNumber numberWithInt:SortTypeAlphaDesc], [NSNumber numberWithInt:SortTypeDateAsc], [NSNumber numberWithInt:SortTypeDateDesc], nil];
+        [MoreMenuView presnetSortWithList:list fromController:self.nav delegateOwner:self];
     }
 }
 

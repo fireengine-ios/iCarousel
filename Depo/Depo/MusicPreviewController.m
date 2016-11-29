@@ -718,11 +718,7 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
 #pragma mark MoreMenuDelegate
 
 - (void) moreMenuDidSelectMusicDetail {
-    FileDetailModalController *fileDetail = [[FileDetailModalController alloc] initWithFile:[self currentFile]];
-    fileDetail.delegate = self;
-    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:fileDetail];
-    [self presentViewController:modalNav animated:YES completion:nil];
-
+    [MoreMenuView presentFileDetailForFile:[self currentFile] fromController:self.nav delegateOwner:self];
 }
 
 

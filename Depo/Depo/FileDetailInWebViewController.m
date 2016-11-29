@@ -126,11 +126,15 @@
 
 #pragma mark MoreMenuDelegate
 
+- (void) moreMenuDidSelectFileDetailForFile:(MetaFile *) file {
+    [MoreMenuView presentFileDetailForFile:file fromController:self.nav delegateOwner:self];
+}
+
 - (void) moreMenuDidSelectDelete {
     if([CacheUtil showConfirmDeletePageFlag]) {
         [self confirmDeleteDidConfirm];
     } else {
-        [APPDELEGATE.base showConfirmDelete];
+        [MoreMenuView presentConfirmDeleteFromController:self.nav delegateOwner:self];
     }
 }
 

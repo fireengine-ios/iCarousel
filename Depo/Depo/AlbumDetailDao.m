@@ -41,12 +41,18 @@
             NSString *lastModifiedDate = [mainDict objectForKey:@"lastModifiedDate"];
             NSNumber *readOnly = [mainDict objectForKey:@"readOnly"];
             
+            
             result.imageCount = [self intByNumber:imageCount];
             result.videoCount = [self intByNumber:videoCount];
             result.label = [self strByRawVal:label];
             result.uuid = [self strByRawVal:uuid];
             result.lastModifiedDate = [self dateByRawVal:lastModifiedDate];
             result.isReadOnly = [self boolByNumber:readOnly];
+            
+            NSDictionary *coverDict = [mainDict objectForKey:@"coverPhoto"];
+            if(coverDict != nil && ![coverDict isKindOfClass:[NSNull class]]) {
+                result.cover = [self parseFile:coverDict];
+            }
             
             NSArray *mainArray = [mainDict objectForKey:@"fileList"];
             

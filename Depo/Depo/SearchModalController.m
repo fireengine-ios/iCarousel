@@ -16,6 +16,7 @@
 #import "MusicCell.h"
 #import "ImageCell.h"
 #import "DocCell.h"
+#import "AlbumCell.h"
 #import "TableHeaderView.h"
 #import "MessageCell.h"
 #import "SearchMoreModalController.h"
@@ -188,6 +189,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [self.navigationController setNavigationBarHidden:false];
     [self.navigationController.navigationBar setBarTintColor:[Util UIColorForHexColor:@"1a1e24"]];
     [self.navigationController.navigationBar setTintColor:[Util UIColorForHexColor:@"1a1e24"]];
     if (animateSearchArea) {
@@ -327,6 +329,9 @@
                         cell = [[MusicCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex highlightedText:currentSearchText];
                     else if (fileAtIndex.contentType == ContentTypeDoc)
                         cell = [[DocCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex highlightedText:currentSearchText];
+                    else if (fileAtIndex.contentType == ContentTypeAlbumPhoto) {
+                        cell = [[AlbumCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex highlightedText:currentSearchText];
+                    }
                     else
                         cell = [[DocCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFileFolder:fileAtIndex highlightedText:currentSearchText];
                     ((AbstractFileFolderCell *) cell).delegate = self;
@@ -388,8 +393,10 @@
         if(fileAtIndex.contentType == ContentTypeFolder) {
             FileListController *innerList = [[FileListController alloc] initForFolder:fileAtIndex];
             innerList.nav = self.nav;
-            [self.nav pushViewController:innerList animated:NO];
-        } else {
+            [self.nav pushViewController:innerList animated:YES];
+        }else if (fileAtIndex.contentType == ContentTypeAlbumPhoto) {
+            [self showPhotoAlbumWithMetaFile:fileAtIndex];
+        }else {
             if([AppUtil isMetaFileImage:fileAtIndex]) {
                 ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFile:fileAtIndex];
                 MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
@@ -398,7 +405,7 @@
             } else if([AppUtil isMetaFileDoc:fileAtIndex]){
                 FileDetailInWebViewController *detail = [[FileDetailInWebViewController alloc] initWithFile:fileAtIndex];
                 detail.nav = self.nav;
-                [self.nav pushViewController:detail animated:NO];
+                [self.nav pushViewController:detail animated:YES];
             } else if([AppUtil isMetaFileVideo:fileAtIndex]) {
                 VideoPreviewController *detail = [[VideoPreviewController alloc] initWithFile:fileAtIndex];
                 MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
@@ -419,6 +426,13 @@
     else if (indexPath.row == searchResultCount)
         [self didTriggerMoreResults:currentSearchText andSearchListType:indexPath.section andFileCount:currentList.count];
     
+}
+
+-(void)showPhotoAlbumWithMetaFile:(MetaFile *)file {
+    PhotoAlbumController *albumController = [[PhotoAlbumController alloc] initWithAlbumUUID:file.uuid];
+    albumController.delegate = self;
+    albumController.nav = self.nav;
+    [self.navigationController pushViewController:albumController animated:NO];
 }
 
 - (NSMutableArray *)getCurrentList:(int)sectionNumber {
@@ -454,6 +468,12 @@
 }
 
 
+
+#pragma mark Photo Album Delegate
+
+- (void) photoAlbumDidChange:(NSString *) albumUuid {
+    [self startSearch:currentSearchText];
+}
 
 #pragma mark AbstractFileFolderDelegate methods
 

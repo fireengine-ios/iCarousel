@@ -189,7 +189,9 @@
         return ContentTypePhoto;
 //    } else if([metaFile.rawContentType isEqualToString:CONTENT_TYPE_AUDIO_MP3_VALUE] || [metaFile.rawContentType isEqualToString:CONTENT_TYPE_AUDIO_MPEG_VALUE]) {
 //            return ContentTypeMusic;
-    } else if([metaFile.rawContentType hasPrefix:@"audio/"]) {
+    }else if ([metaFile.rawContentType isEqualToString:@"album/photo"]) {
+        return ContentTypeAlbumPhoto;
+    }else if([metaFile.rawContentType hasPrefix:@"audio/"]) {
         return ContentTypeMusic;
     } else if([metaFile.rawContentType hasPrefix:@"video/"]) {
         return ContentTypeVideo;
@@ -264,6 +266,7 @@
     NSArray *albumUuids = [dict objectForKey:@"album"];
     
     MetaFile *file = [[MetaFile alloc] init];
+    file.Id = [dict valueForKey:@"id"];
     file.uuid = [self strByRawVal:uuid];
     file.fileHash = [self strByRawVal:hash];
     file.subDir = [self strByRawVal:subdir];

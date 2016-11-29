@@ -23,6 +23,7 @@
 #import "MusicListController.h"
 #import "SettingsController.h"
 #import "ContactSyncController.h"
+#import "RecentActivitiesController.h"
 #import "CurioSDK.h"
 #import "Subscription.h"
 #import "AppSession.h"
@@ -166,8 +167,9 @@
 #pragma mark RecentActivityLinker Method
 
 - (void) recentActivityLinkerDidTriggerPage {
-    [APPDELEGATE.base showRecentActivities];
+    [MoreMenuView presentRecentActivitesFromController:self.nav];
 }
+
 
 - (void) tempDraw {
     CGContextRef context = UIGraphicsGetCurrentContext();

@@ -738,7 +738,7 @@
         [self immediateShowAddButton];
     }
 }
-
+/*
 - (void) showConfirmDelete {
     ConfirmDeleteModalController *confirmDelete = [[ConfirmDeleteModalController alloc] init];
     confirmDelete.delegate = [self.nav topViewController];
@@ -909,7 +909,7 @@
                                    completionBlock(NO, nil);
                                }
                            }];
-}
+}*/
 
 - (void)viewDidLoad {
     [super viewDidLoad];

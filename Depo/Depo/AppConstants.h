@@ -347,6 +347,7 @@ typedef enum {
     ContentTypeVideo,
     ContentTypeMusic,
     ContentTypeDoc,
+    ContentTypeAlbumPhoto,
     ContentTypeOther
 } ContentType;
 
