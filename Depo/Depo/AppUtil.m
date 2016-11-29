@@ -828,13 +828,25 @@
     return [[NSUserDefaults standardUserDefaults] boolForKey:keyVal];
 }
 
+//+ (void) writeLocInfoPopupShownFlag {
+//    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"LOC_INFO_POPUP_SHOWN_%@", [SyncUtil readBaseUrlConstant]]];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+//}
+//
+//+ (BOOL) readLocInfoPopupShownFlag {
+//    return [[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"LOC_INFO_POPUP_SHOWN_%@", [SyncUtil readBaseUrlConstant]]];
+//}
+//
+
 + (void) writeLocInfoPopupShownFlag {
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"LOC_INFO_POPUP_SHOWN_%@", [SyncUtil readBaseUrlConstant]]];
+    NSString* key = [NSString stringWithFormat:@"LOC_INFO_POPUP_SHOWN_%@", [SyncUtil readBaseUrlConstantForLocPopup]];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:key];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 + (BOOL) readLocInfoPopupShownFlag {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"LOC_INFO_POPUP_SHOWN_%@", [SyncUtil readBaseUrlConstant]]];
+    NSString* key = [NSString stringWithFormat:@"LOC_INFO_POPUP_SHOWN_%@", [SyncUtil readBaseUrlConstantForLocPopup]];
+    return [[NSUserDefaults standardUserDefaults] boolForKey:key];
 }
 
 + (void) writePeriodicLocInfoPopupIdleFlag {

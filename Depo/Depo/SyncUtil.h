@@ -79,4 +79,7 @@
 + (void) writeOneTimeSyncFlag;
 + (BOOL) readOneTimeSyncFlag;
 
++ (void) writeBaseUrlConstantForLocPopup:(NSString *) baseUrlConstantForLocPopup;
++ (NSString *) readBaseUrlConstantForLocPopup;
+
 @end

@@ -40,6 +40,8 @@
             APPDELEGATE.session.baseUrlConstant = [AppUtil userUniqueValueByBaseUrl:[self strByRawVal:baseUrlValue]];
             [SharedUtil writeSharedBaseUrl:APPDELEGATE.session.baseUrl];
             [SyncUtil writeBaseUrlConstant:APPDELEGATE.session.baseUrlConstant];
+            [SyncUtil writeBaseUrlConstantForLocPopup:APPDELEGATE.session.baseUrlConstant];
+            
         }
         
         [self shouldReturnSuccess];
