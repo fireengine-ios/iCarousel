@@ -383,7 +383,8 @@ typedef enum {
     MoreMenuTypeDownloadImage,
     MoreMenuTypeDelete,
     MoreMenuTypeAlbumDelete,
-    MoreMenuTypeRemoveFromAlbum
+    MoreMenuTypeRemoveFromAlbum,
+    MoreMenutypeDownloadAlbum,
 } MoreMenuType;
 
 typedef enum {

@@ -144,6 +144,9 @@
         case MoreMenuTypeDownloadImage:
             [delegate moreMenuDidSelectDownloadImage];
             break;
+        case MoreMenutypeDownloadAlbum:
+            [delegate moreMenuDidSelectDownloadAlbum];
+            break;
         case MoreMenuTypeMusicDetail:
             [delegate moreMenuDidSelectMusicDetail];
             break;

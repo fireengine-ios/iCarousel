@@ -16,6 +16,7 @@
 #import "UploadingImagePreviewController.h"
 #import "PrintWebViewController.h"
 #import "MPush.h"
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface PhotoAlbumController ()
 
@@ -379,9 +380,9 @@
         [moreMenuView removeFromSuperview];
         moreMenuView = nil;
     } else {
-        NSArray *menuContent = @[[NSNumber numberWithInt:MoreMenuTypeAlbumDetail], [NSNumber numberWithInt:MoreMenuTypeAlbumDelete], [NSNumber numberWithInt:MoreMenuTypeSelect]];
+        NSArray *menuContent = @[[NSNumber numberWithInt:MoreMenuTypeAlbumDetail], [NSNumber numberWithInt:MoreMenutypeDownloadAlbum], [NSNumber numberWithInt:MoreMenuTypeAlbumDelete], [NSNumber numberWithInt:MoreMenuTypeSelect]];
         if(self.album.isReadOnly) {
-            menuContent = @[[NSNumber numberWithInt:MoreMenuTypeAlbumDetail], [NSNumber numberWithInt:MoreMenuTypeSelect]];
+            menuContent = @[[NSNumber numberWithInt:MoreMenuTypeAlbumDetail], [NSNumber numberWithInt:MoreMenutypeDownloadAlbum], [NSNumber numberWithInt:MoreMenuTypeSelect]];
         }
         moreMenuView = [[MoreMenuView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height-64) withList:menuContent withFileFolder:nil withAlbum:self.album];
         moreMenuView.delegate = self;
@@ -398,6 +399,10 @@
 
 - (void) moreMenuDidSelectAlbumShare {
     [self triggerShareForFiles:@[self.album.uuid]];
+}
+
+-(void)moreMenuDidSelectDownloadAlbum {
+    [self createAlbumInPhotoAlbum];
 }
 
 - (void) moreMenuDidSelectAlbumDelete {
@@ -837,6 +842,98 @@
 - (void) photoModalListReturnedWithSelectedList:(NSArray *)uuids {
     [albumAddPhotosDao requestAddPhotos:uuids toAlbum:self.album.uuid];
 }
+
+
+
+#pragma mark - Album Download
+
+-(void)createAlbumInPhotoAlbum {
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DownloadAlbumProgressMessage", @"")
+                           andSuccessMessage:NSLocalizedString(@"DownloadAlbumSuccessMessage", @"")
+                              andFailMessage:NSLocalizedString(@"DownloadAlbumFailMessage", @"")];
+    currentDownloadIndex = 0;
+    
+    PHFetchOptions *options = [[PHFetchOptions alloc] init];
+    options.predicate = [NSPredicate predicateWithFormat:@"title = %@", self.album.label];
+    PHFetchResult *collection = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum
+                                                                         subtype:PHAssetCollectionSubtypeAny options:options];
+    if (collection.firstObject) { // Album already exist.
+        NSLog(@"Album already exist: %@", self.album.label);
+        albumAssetCollection = (PHAssetCollection *)collection.firstObject;
+        [self downloadAlbumPhotosToDevice];
+    }else { // create the album
+        __weak PhotoAlbumController *weakSelf = self;
+        [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
+            PHAssetCollectionChangeRequest *request = [PHAssetCollectionChangeRequest creationRequestForAssetCollectionWithTitle:weakSelf.album.label];
+            albumAssetCollectionPlaceHolder = request.placeholderForCreatedAssetCollection;
+            [weakSelf downloadAlbumPhotosToDevice];
+        } completionHandler:^(BOOL success, NSError * _Nullable error) {
+            if (success) {
+                PHFetchResult *result = [PHAssetCollection fetchAssetCollectionsWithLocalIdentifiers:@[albumAssetCollectionPlaceHolder.localIdentifier]
+                                                                     options:nil];
+                NSLog(@"Create New Album Result: %@", result);
+                albumAssetCollection = (PHAssetCollection *)result.firstObject;
+                [weakSelf downloadAlbumPhotosToDevice];
+            }else {
+                NSLog(@"Create New Album Error: %@", error.description);
+                [self proceedFailureForProgressView];
+            }
+        }];
+    }
+}
+
+-(void)downloadAlbumPhotosToDevice {
+    if (currentDownloadIndex < photoList.count) {
+        [self savePhotoAtIndex:currentDownloadIndex];
+        currentDownloadIndex++;
+    }else {
+        [self proceedSuccessForProgressView];
+    }
+}
+
+-(void)savePhotoAtIndex:(int)index {
+    MetaFile *file = [photoList objectAtIndex:index];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        [self downloadImageWithURL:[NSURL URLWithString:file.tempDownloadUrl]
+                   completionBlock:^(BOOL succeeded, UIImage *image) {
+                       if (succeeded) {
+                           dispatch_async(dispatch_get_main_queue(), ^{
+                               [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
+                                   PHAssetChangeRequest *request = [PHAssetChangeRequest creationRequestForAssetFromImage:image];
+                                   PHObjectPlaceholder *assetPlaceHolder = [request placeholderForCreatedAsset];
+                                   PHAssetCollectionChangeRequest *albumChangeRequest = [PHAssetCollectionChangeRequest changeRequestForAssetCollection:albumAssetCollection];
+                                   [albumChangeRequest addAssets:@[assetPlaceHolder]];
+                               } completionHandler:^(BOOL success, NSError * _Nullable error) {
+                                   if (error) {
+                                       NSLog(@"Save Image To Album Error: %@", error.description);
+                                   }else {
+                                        NSLog(@"Save Image To Album Success");
+                                   }
+                                   [self image:image didFinishSavingWithError:error];
+                               }];
+                           });
+                       }else {
+                           NSLog(@"downloadImageWithURL Failed");
+                           [self image:nil didFinishSavingWithError:[[NSError alloc] init]];
+                       }
+                   }];
+    });
+    
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error {
+    [self downloadAlbumPhotosToDevice];
+    if(!error) {
+    } else {
+        NSLog(@"didFinishSavingWithError: %@", error.description);
+        [self proceedFailureForProgressView];
+    }
+    
+    if(currentDownloadIndex == photoList.count) {
+        [self proceedSuccessForProgressView];
+    }
+}
+
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];

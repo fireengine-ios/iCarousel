@@ -32,6 +32,7 @@
 - (void) moreMenuDidSelectAlbumShare;
 - (void) moreMenuDidSelectAlbumDelete;
 - (void) moreMenuDidSelectDownloadImage;
+- (void) moreMenuDidSelectDownloadAlbum;
 - (void) moreMenuDidDismiss;
 - (void) moreMenuDidSelectMusicDetail;
 - (void) moreMenuDidSelectVideofy;

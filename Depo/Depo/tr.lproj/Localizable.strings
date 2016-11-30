@@ -53,6 +53,7 @@
 "MoreMenuRemoveTitleVideo" = "Videoyu Albümden Çıkar";
 "MoreMenuRemoveTitleOther"="Dosyayı Albümden Çıkar";
 "MoreMenuDownloadImageTitle"="Telefona İndir";
+"MoreMenuDownloadTitleAlbum"="Albümü İndir";
 "FolderSubTitle"="%d dosya";
 "FolderEmptyMessage"="%@ boş";
 "FolderEmptySubMessage"="\"+\" butonuna dokunarak dosyalarınızı yüklemeye başlayabilirsiniz.";
@@ -176,8 +177,11 @@
 "SelfMoveError"="Bir klasörü kendi içine taşıyamazsınız";
 "SameMoveError"="Bir dosyayı aynı klasör içine taşıyamazsınız";
 "DownloadImageProgressMessage"="Resim kaydediliyor";
+"DownloadAlbumProgressMessage"="Albüm kaydediliyor";
 "DownloadImageSuccessMessage"="Resim başarıyla kaydedildi";
+"DownloadAlbumSuccessMessage"="Albüm başarıyla kaydedildi";
 "DownloadImageFailMessage"="Resim kaydedilirken hata oluştu";
+"DownloadAlbumFailMessage"="Albüm kaydedilirken hata oluştu";
 "DownloadVideoProgressMessage"="Video kaydediliyor";
 "DownloadVideoSuccessMessage"="Video başarıyla kaydedildi";
 "DownloadVideoFailMessage"="Video kaydedilirken hata oluştu";

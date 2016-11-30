@@ -19,6 +19,7 @@
 #import "ImagePreviewController.h"
 #import "CurrentPhotoListModalController.h"
 #import "VideoPreviewController.h"
+#import <Photos/Photos.h>
 
 @protocol PhotoAlbumDelegate <NSObject>
 - (void) photoAlbumDidChange:(NSString *) albumUuid;
@@ -40,9 +41,14 @@
     UIView *topBgView;
 
     int listOffset;
+    
     BOOL isLoading;
     BOOL isSelectible;
     BOOL contentModified;
+    
+    PHAssetCollection *albumAssetCollection;
+    PHObjectPlaceholder *albumAssetCollectionPlaceHolder;
+    int currentDownloadIndex;
     
     MyNavigationController *printNav;
 }

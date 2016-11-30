@@ -783,6 +783,7 @@
 		5247D62C1DDDD0F600FFE63E /* CurioSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D61B1DDDD0F600FFE63E /* CurioSettings.m */; };
 		5247D62D1DDDD0F600FFE63E /* CurioUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D61D1DDDD0F600FFE63E /* CurioUtil.m */; };
 		5332150D1DEC276800FE7289 /* AlbumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5332150C1DEC276800FE7289 /* AlbumCell.m */; };
+		533215101DEEAB0E00FE7289 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5332150F1DEEAB0E00FE7289 /* Photos.framework */; };
 		53FA9CE21DE86071008DCF93 /* QuotaInfoDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 53FA9CE11DE86071008DCF93 /* QuotaInfoDao.m */; };
 		53FA9CE51DE8607D008DCF93 /* Quota.m in Sources */ = {isa = PBXBuildFile; fileRef = 53FA9CE41DE8607D008DCF93 /* Quota.m */; };
 		563FB1BD1AA5EB030066F8E6 /* settings_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 563FB1BB1AA5EB030066F8E6 /* settings_icon.png */; };
@@ -2256,6 +2257,7 @@
 		5247D61D1DDDD0F600FFE63E /* CurioUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurioUtil.m; sourceTree = "<group>"; };
 		5332150C1DEC276800FE7289 /* AlbumCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumCell.m; sourceTree = "<group>"; };
 		5332150E1DEC277800FE7289 /* AlbumCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumCell.h; sourceTree = "<group>"; };
+		5332150F1DEEAB0E00FE7289 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		53FA9CE01DE86071008DCF93 /* QuotaInfoDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuotaInfoDao.h; sourceTree = "<group>"; };
 		53FA9CE11DE86071008DCF93 /* QuotaInfoDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuotaInfoDao.m; sourceTree = "<group>"; };
 		53FA9CE31DE8607D008DCF93 /* Quota.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quota.h; sourceTree = "<group>"; };
@@ -2721,6 +2723,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				533215101DEEAB0E00FE7289 /* Photos.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2780,6 +2783,7 @@
 		051E1DF519CAC2F900FD1E03 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5332150F1DEEAB0E00FE7289 /* Photos.framework */,
 				942DE8481D916300000A7786 /* Bolts.framework */,
 				94F130CE1D24DDB10086BDBB /* FBSDKCoreKit.framework */,
 				94F130CF1D24DDB10086BDBB /* FBSDKLoginKit.framework */,
