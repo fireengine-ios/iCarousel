@@ -274,11 +274,11 @@
     if(!popupCheckDone) {
         popupCheckDone = YES;
         
-        if(![AppUtil readLifeboxTeaserFlag]) {
-            NewFeatureInfoView *featurePresentView = [[NewFeatureInfoView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-            [self.view addSubview:featurePresentView];
-            [AppUtil writeLifeboxTeaserFlag];
-        } else {
+//        if(![AppUtil readLifeboxTeaserFlag]) {
+//            NewFeatureInfoView *featurePresentView = [[NewFeatureInfoView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+//            [self.view addSubview:featurePresentView];
+//            [AppUtil writeLifeboxTeaserFlag];
+//        } else {
             if(!([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways)) {
                 NSDate *lastInfoShownDate = [AppUtil readLastLocInfoPopupShownTime];
                 NSDate *today = [NSDate date];
@@ -288,7 +288,7 @@
                     [AppUtil writeLastLocInfoPopupShownTime];
                 }
             }
-        }
+//        }
     }
 }
 
@@ -738,7 +738,7 @@
         [self immediateShowAddButton];
     }
 }
-
+/*
 - (void) showConfirmDelete {
     ConfirmDeleteModalController *confirmDelete = [[ConfirmDeleteModalController alloc] init];
     confirmDelete.delegate = [self.nav topViewController];
@@ -916,7 +916,7 @@
                                    completionBlock(NO, nil);
                                }
                            }];
-}
+}*/
 
 - (void)viewDidLoad {
     [super viewDidLoad];

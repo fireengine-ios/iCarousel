@@ -18,6 +18,7 @@
 #import "DeleteDao.h"
 #import "DeleteAlbumsDao.h"
 #import "AlbumAddPhotosDao.h"
+#import "ShareLinkDao.h"
 #import "CustomButton.h"
 #import "FooterActionsMenuView.h"
 #import "ImagePreviewController.h"
@@ -36,6 +37,7 @@
     DeleteDao *deleteDao;
     DeleteAlbumsDao *deleteAlbumDao;
     AlbumAddPhotosDao *albumAddPhotosDao;
+    ShareLinkDao *shareDao;
     
     CustomButton *moreButton;
     

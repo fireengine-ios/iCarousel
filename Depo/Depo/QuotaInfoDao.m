@@ -14,7 +14,7 @@
 - (void) requestQuotaInfo {
     NSURL *url = [NSURL URLWithString:QUOTA_INFO_URL];
     
-    IGLog(@"UsageInfoDao [GET] calling requestUsageInfo");
+    IGLog(@"QuotaInfoDao [GET] calling requestQuotaInfo");
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setDelegate:self];
@@ -27,7 +27,7 @@
     if (!error) {
         NSString *responseEnc = [request responseString];
         
-        IGLog(@"UsageInfoDao request successfully finished");
+        IGLog(@"QuotaInfoDao request successfully finished");
         
         //        NSLog(@"Usage Response: %@", responseEnc);
         

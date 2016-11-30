@@ -32,98 +32,127 @@
 @synthesize footerActionMenu;
 @synthesize refreshControlPhotos;
 
+
+#pragma mark - Init Methods
+
 - (id)initWithAlbum:(PhotoAlbum *) _album {
     self = [super init];
     if (self) {
         self.album = _album;
         self.view.backgroundColor = [UIColor whiteColor];
-
-        detailDao = [[AlbumDetailDao alloc] init];
-        detailDao.delegate = self;
-        detailDao.successMethod = @selector(albumDetailSuccessCallback:);
-        detailDao.failMethod = @selector(albumDetailFailCallback:);
         
-        renameDao = [[RenameAlbumDao alloc] init];
-        renameDao.delegate = self;
-        renameDao.successMethod = @selector(renameSuccessCallback:);
-        renameDao.failMethod = @selector(renameFailCallback:);
-        
-        deleteDao = [[DeleteAlbumsDao alloc] init];
-        deleteDao.delegate = self;
-        deleteDao.successMethod = @selector(deleteSuccessCallback);
-        deleteDao.failMethod = @selector(deleteFailCallback:);
-        
-        deleteImgDao = [[AlbumRemovePhotosDao alloc] init];
-        deleteImgDao.delegate = self;
-        deleteImgDao.successMethod = @selector(deleteImgSuccessCallback:);
-        deleteImgDao.failMethod = @selector(deleteImgFailCallback:);
-        
-        shareDao = [[ShareLinkDao alloc] init];
-        shareDao.delegate = self;
-        shareDao.successMethod = @selector(shareSuccessCallback:);
-        shareDao.failMethod = @selector(shareFailCallback:);
-        
-        albumAddPhotosDao = [[AlbumAddPhotosDao alloc] init];
-        albumAddPhotosDao.delegate = self;
-        albumAddPhotosDao.successMethod = @selector(photosAddedSuccessCallback);
-        albumAddPhotosDao.failMethod = @selector(photosAddedFailCallback:);
-        
+        [self initDaoModels];
         selectedFileList = [[NSMutableArray alloc] init];
-
         photoList = [[NSMutableArray alloc] init];
         [photoList addObjectsFromArray:[[UploadQueue sharedInstance] uploadImageRefsForAlbum:self.album.uuid]];
         
-        float mainImageHeight = self.view.frame.size.width/2;
-
-        if(self.album.cover.detail.thumbLargeUrl) {
-            UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, mainImageHeight)];
-            [bgImgView setClipsToBounds:YES];
-            bgImgView.contentMode = UIViewContentModeScaleAspectFill;
-            [bgImgView setImageWithURL:[NSURL URLWithString:self.album.cover.detail.thumbLargeUrl]];
-            [self.view addSubview:bgImgView];
-            
-            UIImageView *maskImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, mainImageHeight)];
-            maskImgView.image = [UIImage imageNamed:@"album_mask.png"];
-            [self.view addSubview:maskImgView];
-        } else {
-            emptyBgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, mainImageHeight)];
-            emptyBgImgView.image = [UIImage imageNamed:@"empty_album_header_bg.png"];
-            [self.view addSubview:emptyBgImgView];
-        }
-
-        topBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64)];
-        topBgView.backgroundColor = [Util UIColorForHexColor:@"3fb0e8"];
-        topBgView.hidden = YES;
-        [self.view addSubview:topBgView];
-        
-        CustomButton *customBackButton = [[CustomButton alloc] initWithFrame:CGRectMake(10, 30, 20, 34) withImageName:@"white_left_arrow.png"];
-        [customBackButton addTarget:self action:@selector(triggerBack) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:customBackButton];
-        
-        titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(40, 35, self.view.frame.size.width - 80, 24) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:20] withColor:[UIColor whiteColor] withText:self.album.label];
-        titleLabel.textAlignment = NSTextAlignmentCenter;
-        [self.view addSubview:titleLabel];
-
-        [self initAndSetSubTitle];
-        
-        moreButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 30, 35, 20, 20) withImageName:@"dots_icon.png"];
-        [moreButton addTarget:self action:@selector(moreClicked) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:moreButton];
-
-        photosScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, mainImageHeight, self.view.frame.size.width, self.view.frame.size.height - mainImageHeight)];
-        photosScroll.delegate = self;
-        photosScroll.tag = 111;
-        photosScroll.userInteractionEnabled = YES ;
-        photosScroll.scrollEnabled = YES;
-        [self.view addSubview:photosScroll];
-        
-        refreshControlPhotos = [[UIRefreshControl alloc] init];
-        [refreshControlPhotos addTarget:self action:@selector(triggerRefresh) forControlEvents:UIControlEventValueChanged];
-        [photosScroll addSubview:refreshControlPhotos];
-        
+        [self reloadUI];
         [self triggerRefresh];
     }
     return self;
+}
+
+- (id)initWithAlbumUUID:(NSString *) _albumUUID {
+    self = [super init];
+    if (self) {
+       
+        self.view.backgroundColor = [UIColor whiteColor];
+        
+        [self initDaoModels];
+        selectedFileList = [[NSMutableArray alloc] init];
+        photoList = [[NSMutableArray alloc] init];
+        [photoList addObjectsFromArray:[[UploadQueue sharedInstance] uploadImageRefsForAlbum:self.album.uuid]];
+        
+        listOffset = 0;
+        [self reloadUI];
+        [detailDao requestDetailOfAlbum:_albumUUID forStart:listOffset andSize:20];
+    }
+    return self;
+}
+
+- (void) initDaoModels {
+    detailDao = [[AlbumDetailDao alloc] init];
+    detailDao.delegate = self;
+    detailDao.successMethod = @selector(albumDetailSuccessCallback:);
+    detailDao.failMethod = @selector(albumDetailFailCallback:);
+    
+    renameDao = [[RenameAlbumDao alloc] init];
+    renameDao.delegate = self;
+    renameDao.successMethod = @selector(renameSuccessCallback:);
+    renameDao.failMethod = @selector(renameFailCallback:);
+    
+    deleteDao = [[DeleteAlbumsDao alloc] init];
+    deleteDao.delegate = self;
+    deleteDao.successMethod = @selector(deleteSuccessCallback);
+    deleteDao.failMethod = @selector(deleteFailCallback:);
+    
+    deleteImgDao = [[AlbumRemovePhotosDao alloc] init];
+    deleteImgDao.delegate = self;
+    deleteImgDao.successMethod = @selector(deleteImgSuccessCallback:);
+    deleteImgDao.failMethod = @selector(deleteImgFailCallback:);
+    
+    shareDao = [[ShareLinkDao alloc] init];
+    shareDao.delegate = self;
+    shareDao.successMethod = @selector(shareSuccessCallback:);
+    shareDao.failMethod = @selector(shareFailCallback:);
+    
+    albumAddPhotosDao = [[AlbumAddPhotosDao alloc] init];
+    albumAddPhotosDao.delegate = self;
+    albumAddPhotosDao.successMethod = @selector(photosAddedSuccessCallback);
+    albumAddPhotosDao.failMethod = @selector(photosAddedFailCallback:);
+}
+
+#pragma mark - UI Reload
+
+- (void) reloadUI {
+    [self.view.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    float mainImageHeight = self.view.frame.size.width/2;
+    
+    if(self.album.cover.detail.thumbLargeUrl) {
+        UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, mainImageHeight)];
+        [bgImgView setClipsToBounds:YES];
+        bgImgView.contentMode = UIViewContentModeScaleAspectFill;
+        [bgImgView setImageWithURL:[NSURL URLWithString:self.album.cover.detail.thumbLargeUrl]];
+        [self.view addSubview:bgImgView];
+        
+        UIImageView *maskImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, mainImageHeight)];
+        maskImgView.image = [UIImage imageNamed:@"album_mask.png"];
+        [self.view addSubview:maskImgView];
+    } else {
+        emptyBgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, mainImageHeight)];
+        emptyBgImgView.image = [UIImage imageNamed:@"empty_album_header_bg.png"];
+        [self.view addSubview:emptyBgImgView];
+    }
+    
+    topBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64)];
+    topBgView.backgroundColor = [Util UIColorForHexColor:@"3fb0e8"];
+    topBgView.hidden = YES;
+    [self.view addSubview:topBgView];
+    
+    CustomButton *customBackButton = [[CustomButton alloc] initWithFrame:CGRectMake(10, 30, 20, 34) withImageName:@"white_left_arrow.png"];
+    [customBackButton addTarget:self action:@selector(triggerBack) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:customBackButton];
+    
+    titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(40, 35, self.view.frame.size.width - 80, 24) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:20] withColor:[UIColor whiteColor] withText:self.album.label];
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:titleLabel];
+    
+    [self initAndSetSubTitle];
+    
+    moreButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 30, 35, 20, 20) withImageName:@"dots_icon.png"];
+    [moreButton addTarget:self action:@selector(moreClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:moreButton];
+    
+    photosScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, mainImageHeight, self.view.frame.size.width, self.view.frame.size.height - mainImageHeight)];
+    photosScroll.delegate = self;
+    photosScroll.tag = 111;
+    photosScroll.userInteractionEnabled = YES ;
+    photosScroll.scrollEnabled = YES;
+    [self.view addSubview:photosScroll];
+    
+    refreshControlPhotos = [[UIRefreshControl alloc] init];
+    [refreshControlPhotos addTarget:self action:@selector(triggerRefresh) forControlEvents:UIControlEventValueChanged];
+    [photosScroll addSubview:refreshControlPhotos];
 }
 
 - (void) triggerRefresh {
@@ -185,6 +214,11 @@
 }
 
 - (void) albumDetailSuccessCallback:(PhotoAlbum *) albumWithUpdatedContent {
+    if (self.album == nil) {
+        self.album = [[PhotoAlbum alloc] init];
+        self.album = albumWithUpdatedContent;
+        [self reloadUI];
+    }
     int counter = (int)[photoList count];
 
     int imagePerLine = 3;
@@ -304,7 +338,7 @@
     preview.oldDelegateRef = squareRef;
     MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:preview];
     preview.nav = modalNav;
-    [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
+    [self.nav presentViewController:modalNav animated:YES completion:nil];
 }
 
 - (void) squareImageWasSelectedForFile:(MetaFile *)fileSelected {
@@ -313,13 +347,13 @@
         detail.delegate = self;
         MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
         detail.nav = modalNav;
-        [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
+        [self.nav presentViewController:modalNav animated:YES completion:nil];
     } else if(fileSelected.contentType == ContentTypeVideo) {
         VideoPreviewController *detail = [[VideoPreviewController alloc] initWithFile:fileSelected withAlbum:self.album];
         detail.delegate = self;
         MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
         detail.nav = modalNav;
-        [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
+        [self.nav presentViewController:modalNav animated:YES completion:nil];
     }
 }
 
@@ -358,6 +392,10 @@
 
 #pragma mark MoreMenuDelegate
 
+-(void)moreMenuDidSelectUpdateSelectOption {
+    [self changeToSelectedStatus];
+}
+
 - (void) moreMenuDidSelectAlbumShare {
     [self triggerShareForFiles:@[self.album.uuid]];
 }
@@ -368,8 +406,12 @@
         [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteAlbumProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteAlbumSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteAlbumFailMessage", @"")];
     } else {
         self.deleteType = DeleteTypeMoreMenu;
-        [APPDELEGATE.base showConfirmDelete:@"ConfirmDeleteAlbumMessage"];
+        [MoreMenuView presentConfirmDeleteFromController:self.nav delegateOwner:self];
     }
+}
+
+- (void) moreMenuDidSelectAlbumDetailForAlbum:(PhotoAlbum *) album {
+    [MoreMenuView presentAlbumDetailForAlbum:album fromController:self.nav delegateOwner:self];
 }
 
 - (void) moreMenuDidDismiss {
@@ -511,12 +553,12 @@
         self.deleteType = DeleteTypeFooterMenu;
         //TakingBack RemoveFromAlbum
         [APPDELEGATE.base showConfirmRemove];
-//        [APPDELEGATE.base showConfirmDelete];
+        [MoreMenuView presentConfirmDeleteFromController:self.nav delegateOwner:self];
     }
 }
 
 - (void) footerActionMenuDidSelectMove:(FooterActionsMenuView *) menu {
-    [APPDELEGATE.base showPhotoAlbums];
+    [MoreMenuView presentPhotoAlbumsFromController:self.nav delegateOwner:self];
 }
 
 - (void) albumModalDidSelectAlbum:(NSString *)albumUuid {
@@ -538,9 +580,11 @@
                 }
             }
         }
-        [APPDELEGATE.base triggerShareForFileObjects:@[shareObject]];
+        [self triggerShareForFileObjects:@[shareObject]];
+        //[APPDELEGATE.base triggerShareForFileObjects:@[shareObject]];
     } else {
-        [APPDELEGATE.base triggerShareForFiles:selectedFileList];
+        [self triggerShareForFiles:selectedFileList];
+        //[APPDELEGATE.base triggerShareForFiles:selectedFileList];
     }
     //[APPDELEGATE.base triggerShareForFiles:selectedFileList];
 }
@@ -563,13 +607,95 @@
     PrintWebViewController *printController = [[PrintWebViewController alloc] initWithUrl:@"http://akillidepo.cellograf.com/" withFileList:printList];
     printNav = [[MyNavigationController alloc] initWithRootViewController:printController];
     
-    [self presentViewController:printNav animated:YES completion:nil];
+    [self.nav presentViewController:printNav animated:YES completion:nil];
     
 }
 
 - (void) closePrintPage {
     [printNav dismissViewControllerAnimated:YES completion:nil];
 }
+
+#pragma mark - Share
+
+- (void) triggerShareForFileObjects:(NSArray *) fileList {
+    if([fileList count] == 1 && ( (MetaFile *)[fileList objectAtIndex:0]).contentType == ContentTypePhoto) {
+        MetaFile *tempToShare = (MetaFile *) [fileList objectAtIndex:0];
+        if (!(tempToShare.contentType == ContentTypePhoto)) {
+            [shareDao requestLinkForFiles:@[tempToShare.uuid]];
+        } else {
+            if([tempToShare isKindOfClass:[MetaFile class]]) {
+                [self showLoading];
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                    [self downloadImageWithURL:[NSURL URLWithString:tempToShare.tempDownloadUrl] completionBlock:^(BOOL succeeded, UIImage *image) {
+                        if (succeeded) {
+                            [self hideLoading];
+                            NSArray *activityItems = [NSArray arrayWithObjects:image, nil];
+                            
+                            UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+                            [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
+                            activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+                            
+                            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+                                [self presentViewController:activityViewController animated:YES completion:nil];
+                            } else {
+                                UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
+                                [popup presentPopoverFromRect:CGRectMake(self.view.frame.size.width-240, self.view.frame.size.height-40, 240, 300)inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+                            }
+                        }
+                    }];
+                });
+            }
+        }
+    } else {
+        NSMutableArray *fileUuidList = [[NSMutableArray alloc] init];
+        for(MetaFile *file in fileList) {
+            [fileUuidList addObject:file.uuid];
+        }
+        [shareDao requestLinkForFiles:fileUuidList];
+        [self showLoading];
+    }
+}
+
+- (void)downloadImageWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, UIImage *image))completionBlock {
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                               if ( !error )
+                               {
+                                   UIImage *image = [[UIImage alloc] initWithData:data];
+                                   completionBlock(YES, image);
+                               } else{
+                                   completionBlock(NO, nil);
+                               }
+                           }];
+}
+
+
+#pragma mark ShareLinkDao Delegate Methods
+- (void) shareSuccessCallback:(NSString *) linkToShare {
+    [self hideLoading];
+    NSArray *activityItems = [NSArray arrayWithObjects:linkToShare, nil];
+    
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+    [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
+    activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    
+    //    activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll];
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        [self presentViewController:activityViewController animated:YES completion:nil];
+    } else {
+        UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
+        [popup presentPopoverFromRect:CGRectMake(self.view.frame.size.width-240, self.view.frame.size.height-40, 240, 300)inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
+}
+
+- (void) shareFailCallback:(NSString *) errorMessage {
+    [self hideLoading];
+}
+
+
 
 #pragma mark ConfirmDeleteModalDelegate methods
 
@@ -676,28 +802,6 @@
     [self showLoading];
 }
 
-#pragma mark ShareLinkDao Delegate Methods
-- (void) shareSuccessCallback:(NSString *) linkToShare {
-    [self hideLoading];
-    NSArray *activityItems = [NSArray arrayWithObjects:linkToShare, nil];
-    
-    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
-    [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
-    activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    
-//    activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll];
-    
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        [self presentViewController:activityViewController animated:YES completion:nil];
-    } else {
-        UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
-        [popup presentPopoverFromRect:CGRectMake(self.view.frame.size.width-240, self.view.frame.size.height-40, 240, 300)inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-    }
-}
-
-- (void) shareFailCallback:(NSString *) errorMessage {
-    [self hideLoading];
-}
 
 #pragma mark ImagePreviewDelegate methods
 - (void) previewedImageWasDeleted:(MetaFile *)deletedFile {

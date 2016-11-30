@@ -544,7 +544,7 @@
 }
 
 - (void) didTriggerRecentActivities {
-    [APPDELEGATE.base showRecentActivities];
+    [MoreMenuView presentRecentActivitesFromController:self.nav];
 }
 
 - (void) didTriggerConnectedDevices {

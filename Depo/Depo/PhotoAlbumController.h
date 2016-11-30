@@ -60,5 +60,7 @@
 
 
 - (id)initWithAlbum:(PhotoAlbum *) _album;
+- (id)initWithAlbumUUID:(NSString *) _albumUUID;
+
 
 @end
