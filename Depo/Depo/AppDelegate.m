@@ -145,7 +145,7 @@
     [[CurioSDK shared] sendEvent:@"ApplicationStarted" eventValue:@"true"];
     [MPush hitTag:@"ApplicationStarted" withValue:@"true"];
 
-    DBSession *dbSession = [[DBSession alloc] initWithAppKey:@"zeddgylajxc1op8" appSecret:@"kn9u1e77bzlk103" root:kDBRootDropbox];
+    DBSession *dbSession = [[DBSession alloc] initWithAppKey:@"422fptod5dlxrn8" appSecret:@"umjclqg3juoyihd" root:kDBRootDropbox]; // initWithAppKey:@"zeddgylajxc1op8" appSecret:@"kn9u1e77bzlk103"
     [DBSession setSharedSession:dbSession];
 
     [self addInitialBgImage];
@@ -192,10 +192,10 @@
     
     // App Rater
     [AppRater sharedInstance].daysUntilPrompt = 5;
-    [AppRater sharedInstance].launchesUntilPrompt = 3;
+    [AppRater sharedInstance].launchesUntilPrompt = 10;
     [AppRater sharedInstance].remindMeDaysUntilPrompt = 15;
-    [AppRater sharedInstance].remindMeLaunchesUntilPrompt = 3;
-    [AppRater sharedInstance].preferredLanguage = @"en";
+    [AppRater sharedInstance].remindMeLaunchesUntilPrompt = 10;
+   // [AppRater sharedInstance].preferredLanguage = @"en";
     [[AppRater sharedInstance] appLaunched];
     
     

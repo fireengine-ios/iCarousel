@@ -396,7 +396,10 @@
     if (bundle == nil) {
         bundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"AppRater" ofType:@"bundle"]];
     }
-    NSString *systemLocale = [[NSLocale preferredLanguages] objectAtIndex:0];
+   
+    // NSString *systemLocale = [[NSLocale preferredLanguages] objectAtIndex:0];
+    NSString *languages = [[NSLocale preferredLanguages] objectAtIndex:0];
+    NSString *systemLocale = [[languages componentsSeparatedByString:@"-"] firstObject];
     
     static NSBundle *languageBundle = nil;
     
