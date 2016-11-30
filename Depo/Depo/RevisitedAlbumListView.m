@@ -270,7 +270,7 @@
     if([CacheUtil showConfirmDeletePageFlag]) {
         [self confirmDeleteDidConfirm];
     } else {
-        ConfirmDeleteModalController *confirmDelete = [[ConfirmDeleteModalController alloc] init];
+        ConfirmDeleteModalController *confirmDelete = [[ConfirmDeleteModalController alloc] initWithMessage:@"ConfirmDeleteAlbumMessage"];
         confirmDelete.delegate = self;
         MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:confirmDelete];
         MyViewController * parent = (MyViewController*)self.delegate;

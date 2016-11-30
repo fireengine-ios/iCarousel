@@ -44,10 +44,10 @@
         deleteDao.failMethod = @selector(deleteFailCallback:);
 
         //TakingBack RemoveFromAlbum
-//        removeDao = [[AlbumRemovePhotosDao alloc] init];
-//        removeDao.delegate = self;
-//        removeDao.successMethod = @selector(removeFromAlbumSuccessCallback);
-//        removeDao.failMethod = @selector(removeFromAlbumFailCallback:);
+        removeDao = [[AlbumRemovePhotosDao alloc] init];
+        removeDao.delegate = self;
+        removeDao.successMethod = @selector(removeFromAlbumSuccessCallback);
+        removeDao.failMethod = @selector(removeFromAlbumFailCallback:);
         
         favDao = [[FavoriteDao alloc] init];
         favDao.delegate = self;
@@ -123,9 +123,9 @@
 - (void) moreClicked {
     NSArray* list = @[[NSNumber numberWithInt:MoreMenuTypeVideoDetail], [NSNumber numberWithInt:MoreMenuTypeShare], self.file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDownloadImage], [NSNumber numberWithInt:MoreMenuTypeDelete]];
     //TakingBack RemoveFromAlbum
-//    if (self.album) {
-//        list = @[[NSNumber numberWithInt:MoreMenuTypeVideoDetail], [NSNumber numberWithInt:MoreMenuTypeShare], self.file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDownloadImage], [NSNumber numberWithInt:MoreMenuTypeRemoveFromAlbum], [NSNumber numberWithInt:MoreMenuTypeDelete]] ;
-//    }
+    if (self.album) {
+        list = @[[NSNumber numberWithInt:MoreMenuTypeVideoDetail], [NSNumber numberWithInt:MoreMenuTypeShare], self.file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDownloadImage], [NSNumber numberWithInt:MoreMenuTypeRemoveFromAlbum], [NSNumber numberWithInt:MoreMenuTypeDelete]] ;
+    }
     [self presentMoreMenuWithList:list withFileFolder:self.file];
 }
 

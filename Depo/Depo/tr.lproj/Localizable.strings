@@ -93,8 +93,9 @@
 "TitleNo"="Hayır";
 "TitleYes"="Evet";
 "ConfirmRemoveTitle"="Albümden Çıkarmayı Onayla";
-"ConfirmRemoveMessage"="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi";
+"ConfirmRemoveMessage"="Bu dosya sadece albumunuzden kaldırılacaktır. Dosyanıza Fotoğraflar sekmesinden ulaşabilirsiniz.";
 "ConfirmRemoveQuestion"="Çıkarmak istediğinize emin misiniz?";
+"ConfirmDeleteAlbumMessage" = "Bu albumu sildiğinizde albumun içindeki dosyalar lifebox'ınızda kalmaya devam edecektir. Dosyalarınıza Fotoğraflar sekmesinden ulaşabilirsiniz.";
 "FavAddProgressMessage"="Favorilere Ekleniyor";
 "FavAddSuccessMessage"="Favorilere başarıyla eklendi";
 "FavAddFailMessage"="Favorilere eklenirken hata oluştu";
