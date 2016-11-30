@@ -41,6 +41,7 @@
 - (void) revisitedGroupedPhotoChangeTitleTo:(NSString *) pageTitle;
 - (void) revisitedGroupedPhotoShowPhotoAlbums:(RevisitedGroupedPhotoView *)view;
 - (void) revisitedGroupedPhoto:(RevisitedGroupedPhotoView *)view triggerShareForFiles:(NSArray *) uuidList;
+-(void)revisitedGroupedPhoto:(RevisitedGroupedPhotoView *)view downloadSelectedFiles:(NSArray *)selectedFiles;
 @end
 
 @interface RevisitedGroupedPhotoView : UIView <FooterActionsDelegate, UITextFieldDelegate, CustomConfirmDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, RevisitedPhotoCollCellDelegate, RevisitedUploadingPhotoCollCellDelegate> {
@@ -49,6 +50,7 @@
 @property (nonatomic, weak) id<RevisitedGroupedPhotoDelegate> delegate;
 @property (nonatomic, strong) NSMutableArray *files;
 @property (nonatomic, strong) NSMutableArray *selectedFileList;
+@property (nonatomic, strong) NSMutableArray *selectedMetaFiles;
 
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 

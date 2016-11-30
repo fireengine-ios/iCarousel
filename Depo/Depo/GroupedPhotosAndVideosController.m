@@ -485,7 +485,7 @@
     if(imgFooterActionMenu) {
         imgFooterActionMenu.hidden = NO;
     } else {
-        imgFooterActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60) shouldShowShare:YES shouldShowMove:YES shouldShowDelete:YES shouldShowPrint:YES isMoveAlbum:YES];
+        imgFooterActionMenu = [[FooterActionsMenuView alloc] initForPhotosTabWithFrame:CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60) shouldShowShare:YES shouldShowMove:YES shouldShowDownload:YES shouldShowDelete:YES shouldShowPrint:YES isMoveAlbum:YES];
         imgFooterActionMenu.tag = IMG_FOOTER_TAG;
         imgFooterActionMenu.delegate = self;
         [self.view addSubview:imgFooterActionMenu];

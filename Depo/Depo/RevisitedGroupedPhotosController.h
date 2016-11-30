@@ -18,9 +18,11 @@
 #import "UsageInfoDao.h"
 #import "AccountDao.h"
 #import "ShareLinkDao.h"
+#import "DownloadManager.h"
 
-@interface RevisitedGroupedPhotosController : MyViewController <RevisitedPhotoHeaderSegmentDelegate, RevisitedAlbumListDelegate, PhotoAlbumDelegate, NewAlbumDelegate, RevisitedGroupedPhotoDelegate, ImagePreviewDelegate, VideoPreviewDelegate, CustomEntryPopupDelegate, CustomConfirmDelegate> {
+@interface RevisitedGroupedPhotosController : MyViewController <RevisitedPhotoHeaderSegmentDelegate, RevisitedAlbumListDelegate, PhotoAlbumDelegate, NewAlbumDelegate, RevisitedGroupedPhotoDelegate, ImagePreviewDelegate, VideoPreviewDelegate, CustomEntryPopupDelegate, CustomConfirmDelegate, DownloadManagerDelegate> {
     ShareLinkDao *shareDao;
+    DownloadManager *downloadManager;
 }
 
 @property (nonatomic, strong) RevisitedPhotoHeaderSegmentView *segmentView;

@@ -256,6 +256,14 @@
     
 }
 
+-(void)revisitedGroupedPhoto:(RevisitedGroupedPhotoView *)view downloadSelectedFiles:(NSArray *)selectedFiles {
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DownloadPhotoProgressMessage", @"")
+                           andSuccessMessage:NSLocalizedString(@"DownloadPhotoSuccessMessage", @"")
+                              andFailMessage:NSLocalizedString(@"DownloadPhotoFailMessage", @"")];
+    downloadManager = [[DownloadManager alloc] initWithDelegate:self];
+    [downloadManager downloadListOfFilesToCameraRoll:selectedFiles];
+}
+
 - (void) revisitedGroupedPhotoDidChangeToSelectState {
     [albumView setToSelectible];
     [self setToSelectionState];
@@ -412,6 +420,27 @@
         [groupView shouldContinueDelete];
     }
 }
+
+
+#pragma mark - Download Manager Delegate
+
+-(void)downloadManager:(DownloadManager *)manager didFinishSavingFile:(MetaFile *)file error:(NSError *)error {
+    if (error) {
+        [self proceedFailureForProgressView];
+    }else {
+        [self proceedSuccessForProgressView];
+    }
+}
+
+-(void)downloadManagerDidFinishDownloading:(DownloadManager *)manager error:(NSError *)error {
+    if (error) {
+        NSLog(@"didFinishSavingFile error: %@", error.description);
+    }else {
+        NSLog(@"didFinishSavingFile success");
+    }
+}
+
+
 
 - (void) moreClicked {
     if(!groupView.isHidden) {

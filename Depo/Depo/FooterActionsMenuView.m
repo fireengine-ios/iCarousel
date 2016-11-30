@@ -15,6 +15,7 @@
 @synthesize delegate;
 @synthesize shareButton;
 @synthesize moveButton;
+@synthesize downloadButton;
 @synthesize deleteButton;
 @synthesize printButton;
 
@@ -86,6 +87,77 @@
 }
 
 
+// Revisited Grouped Photos Controller footer view new design
+-(id)initForPhotosTabWithFrame:(CGRect)frame shouldShowShare:(BOOL) shareFlag shouldShowMove:(BOOL) moveFlag shouldShowDownload:(BOOL) downloadFlag shouldShowDelete:(BOOL) deleteFlag shouldShowPrint:(BOOL)printFlag isMoveAlbum:(BOOL) moveRename {
+    if(self = [super initWithFrame:frame]) {
+        self.backgroundColor = [Util UIColorForHexColor:@"363e4f"];
+        UIFont *font = [UIFont fontWithName:@"TurkcellSaturaBol" size:15];
+        UIColor *whiteColor = [UIColor whiteColor];
+        CGFloat height = self.frame.size.height;
+        CGFloat xOffset = 10;
+        int buttonCount = 0;
+        if (shareFlag) buttonCount++;
+        if (moveFlag) buttonCount++;
+        if (downloadFlag) buttonCount++;
+        if (deleteFlag) buttonCount++;
+        if (printFlag) buttonCount++;
+        
+        
+        CGFloat buttonWidth = (self.frame.size.width - 20) / buttonCount;
+        if(shareFlag) {
+            shareButton = [[CustomButton alloc] initWithFrame:CGRectMake(xOffset, 0, buttonWidth, height)
+                                                withImageName:@"white_share_icon.png"
+                                               withBelowTitle:NSLocalizedString(@"ShareTitle", @"")
+                                                     withFont:font
+                                                withTextColor:whiteColor];
+            [shareButton addTarget:self action:@selector(shareClicked) forControlEvents:UIControlEventTouchUpInside];
+            [self addSubview:shareButton];
+            xOffset += buttonWidth;
+        }
+        
+        if(moveFlag) {
+            moveButton = [[CustomButton alloc] initWithFrame:CGRectMake(xOffset, 0, buttonWidth, height)
+                                               withImageName:@"white_move_icon.png"
+                                              withBelowTitle:NSLocalizedString(@"MoveTitle", @"")
+                                                    withFont:font
+                                               withTextColor:whiteColor];
+            [moveButton addTarget:self action:@selector(moveClicked) forControlEvents:UIControlEventTouchUpInside];
+            [self addSubview:moveButton];
+            xOffset += buttonWidth;
+        }
+        
+        if(downloadFlag) {
+            downloadButton = [[CustomButton alloc] initWithFrame:CGRectMake(xOffset, 0, buttonWidth + 10, height)
+                                                   withImageName:@"icon_bottom_indir.png"
+                                                  withBelowTitle:NSLocalizedString(@"DownloadTitle", @"")
+                                                        withFont:font
+                                                   withTextColor:whiteColor];
+            [downloadButton addTarget:self action:@selector(downloadClicked) forControlEvents:UIControlEventTouchUpInside];
+            [self addSubview:downloadButton];
+            xOffset += buttonWidth + 10;
+        }
+        
+        if(deleteFlag) {
+            deleteButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - buttonWidth, 0, buttonWidth, 50) withCenteredImageName:@"white_delete_icon.png"];
+            [deleteButton addTarget:self action:@selector(deleteClicked) forControlEvents:UIControlEventTouchUpInside];
+            [self addSubview:deleteButton];
+        }
+        if (printFlag) {
+            printButton = [[CustomButton alloc] initWithFrame:CGRectMake(xOffset, 0, buttonWidth, height)
+                                                withImageName:@"white_print_icon.png"
+                                               withBelowTitle:NSLocalizedString(@"PrintTitle", @"")
+                                                     withFont:font
+                                                withTextColor:whiteColor];
+            [printButton addTarget:self action:@selector(printClicked) forControlEvents:UIControlEventTouchUpInside];
+            [self addSubview:printButton];
+            xOffset += buttonWidth;
+        }
+        
+    }
+    return self;
+}
+
+
 - (void) shareClicked {
     [MPush hitTag:@"share_button_clicked"];
     [MPush hitEvent:@"share_button_clicked"];
@@ -95,6 +167,10 @@
 
 - (void) moveClicked {
     [delegate footerActionMenuDidSelectMove:self];
+}
+
+-(void)downloadClicked {
+    [delegate footerActionMenuDidSelectDownload:self];
 }
 
 - (void) deleteClicked {

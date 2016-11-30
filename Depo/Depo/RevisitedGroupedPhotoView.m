@@ -46,6 +46,7 @@
 @synthesize delegate;
 @synthesize files;
 @synthesize selectedFileList;
+@synthesize selectedMetaFiles;
 @synthesize refreshControl;
 @synthesize readDao;
 @synthesize deleteDao;
@@ -95,6 +96,7 @@
         groups = [[NSMutableArray alloc] init];
         files = [[NSMutableArray alloc] init];
         selectedFileList = [[NSMutableArray alloc] init];
+        selectedMetaFiles = [[NSMutableArray alloc] init];
         
         yIndex = 0;
         
@@ -219,6 +221,7 @@
         isSelectible = YES;
         [refreshControl setEnabled:NO];
         [selectedFileList removeAllObjects];
+        [selectedMetaFiles removeAllObjects];
         
         [collView reloadData];
     }
@@ -228,6 +231,7 @@
     isSelectible = NO;
     [refreshControl setEnabled:YES];
     [selectedFileList removeAllObjects];
+    [selectedMetaFiles removeAllObjects];
     
     if(imgFooterActionMenu) {
         [imgFooterActionMenu removeFromSuperview];
@@ -239,6 +243,7 @@
     isSelectible = NO;
     [refreshControl setEnabled:YES];
     [selectedFileList removeAllObjects];
+    [selectedMetaFiles removeAllObjects];
     
     if(imgFooterActionMenu) {
         [imgFooterActionMenu removeFromSuperview];
@@ -365,6 +370,7 @@
     if(fileSelected.uuid) {
         if(![selectedFileList containsObject:fileSelected.uuid]) {
             [selectedFileList addObject:fileSelected.uuid];
+            [selectedMetaFiles addObject:fileSelected];
         }
     }
     if([selectedFileList count] > 0) {
@@ -393,6 +399,7 @@
 - (void) revisitedPhotoCollCellImageWasUnmarkedForFile:(MetaFile *) fileSelected {
     if([selectedFileList containsObject:fileSelected.uuid]) {
         [selectedFileList removeObject:fileSelected.uuid];
+        [selectedMetaFiles removeObject:fileSelected];
     }
     if([selectedFileList count] > 0) {
         [self showImgFooterMenu];
@@ -416,7 +423,20 @@
     if(imgFooterActionMenu) {
         imgFooterActionMenu.hidden = NO;
     } else {
-        imgFooterActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 60, self.frame.size.width, 60) shouldShowShare:YES shouldShowMove:YES shouldShowDelete:YES shouldShowPrint:YES];
+        CGRect frame = CGRectMake(0, self.frame.size.height - 60, self.frame.size.width, 60);
+       /* imgFooterActionMenu = [[FooterActionsMenuView alloc] initForPhotosTabWithFrame:frame
+                                                                       shouldShowShare:YES
+                                                                        shouldShowMove:YES
+                                                                    shouldShowDownload:YES
+                                                                      shouldShowDelete:YES
+                                                                       shouldShowPrint:YES]; */
+        imgFooterActionMenu = [[FooterActionsMenuView alloc] initForPhotosTabWithFrame:frame
+                                                                       shouldShowShare:YES
+                                                                        shouldShowMove:YES
+                                                                    shouldShowDownload:YES
+                                                                      shouldShowDelete:YES
+                                                                       shouldShowPrint:YES
+                                                                           isMoveAlbum:NO];
         imgFooterActionMenu.delegate = self;
         [self addSubview:imgFooterActionMenu];
     }
@@ -522,6 +542,10 @@
 - (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {
     [delegate revisitedGroupedPhoto:self triggerShareForFiles:selectedFileList];
    // [APPDELEGATE.base triggerShareForFiles:selectedFileList];
+}
+
+-(void)footerActionMenuDidSelectDownload:(FooterActionsMenuView *)menu {
+    [delegate revisitedGroupedPhoto:self downloadSelectedFiles:selectedMetaFiles];
 }
 
 - (void) footerActionMenuDidSelectPrint:(FooterActionsMenuView *)menu {

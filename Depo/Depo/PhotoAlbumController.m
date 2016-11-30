@@ -402,7 +402,12 @@
 }
 
 -(void)moreMenuDidSelectDownloadAlbum {
-    [self createAlbumInPhotoAlbum];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DownloadAlbumProgressMessage", @"")
+                           andSuccessMessage:NSLocalizedString(@"DownloadAlbumSuccessMessage", @"")
+                              andFailMessage:NSLocalizedString(@"DownloadAlbumFailMessage", @"")];
+    
+    downloadManager = [[DownloadManager alloc] initWithDelegate:self];
+    [downloadManager createAlbumName:self.album.label downloadFilesToAlbum:photoList];
 }
 
 - (void) moreMenuDidSelectAlbumDelete {
@@ -844,96 +849,33 @@
 }
 
 
+#pragma mark - Download Manager Delegate
 
-#pragma mark - Album Download
+-(void)downloadManager:(DownloadManager *)manager albumAlreadyExistNamed:(NSString *)albumName assetCollection:(PHAssetCollection *)assetCollection {
+}
 
--(void)createAlbumInPhotoAlbum {
-    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DownloadAlbumProgressMessage", @"")
-                           andSuccessMessage:NSLocalizedString(@"DownloadAlbumSuccessMessage", @"")
-                              andFailMessage:NSLocalizedString(@"DownloadAlbumFailMessage", @"")];
-    currentDownloadIndex = 0;
-    
-    PHFetchOptions *options = [[PHFetchOptions alloc] init];
-    options.predicate = [NSPredicate predicateWithFormat:@"title = %@", self.album.label];
-    PHFetchResult *collection = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum
-                                                                         subtype:PHAssetCollectionSubtypeAny options:options];
-    if (collection.firstObject) { // Album already exist.
-        NSLog(@"Album already exist: %@", self.album.label);
-        albumAssetCollection = (PHAssetCollection *)collection.firstObject;
-        [self downloadAlbumPhotosToDevice];
-    }else { // create the album
-        __weak PhotoAlbumController *weakSelf = self;
-        [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
-            PHAssetCollectionChangeRequest *request = [PHAssetCollectionChangeRequest creationRequestForAssetCollectionWithTitle:weakSelf.album.label];
-            albumAssetCollectionPlaceHolder = request.placeholderForCreatedAssetCollection;
-            [weakSelf downloadAlbumPhotosToDevice];
-        } completionHandler:^(BOOL success, NSError * _Nullable error) {
-            if (success) {
-                PHFetchResult *result = [PHAssetCollection fetchAssetCollectionsWithLocalIdentifiers:@[albumAssetCollectionPlaceHolder.localIdentifier]
-                                                                     options:nil];
-                NSLog(@"Create New Album Result: %@", result);
-                albumAssetCollection = (PHAssetCollection *)result.firstObject;
-                [weakSelf downloadAlbumPhotosToDevice];
-            }else {
-                NSLog(@"Create New Album Error: %@", error.description);
-                [self proceedFailureForProgressView];
-            }
-        }];
+-(void)downloadManager:(DownloadManager *)manager newAlbumCreatedNamed:(NSString *)albumName assetCollection:(PHAssetCollection *)assetCollection {
+}
+
+-(void)downloadManager:(DownloadManager *)manager createAlbumError:(NSError *)error {
+    [self proceedFailureForProgressView];
+}
+
+-(void)downloadManager:(DownloadManager *)manager didFinishSavingFile:(MetaFile *)file error:(NSError *)error {
+    if (error) {
+        NSLog(@"didFinishSavingFile error: %@", error.description);
+    }else {
+        NSLog(@"didFinishSavingFile success");
     }
 }
 
--(void)downloadAlbumPhotosToDevice {
-    if (currentDownloadIndex < photoList.count) {
-        [self savePhotoAtIndex:currentDownloadIndex];
-        currentDownloadIndex++;
+-(void)downloadManagerDidFinishDownloading:(DownloadManager *)manager error:(NSError *)error {
+    if (error) {
+        [self proceedFailureForProgressView];
     }else {
         [self proceedSuccessForProgressView];
     }
 }
-
--(void)savePhotoAtIndex:(int)index {
-    MetaFile *file = [photoList objectAtIndex:index];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        [self downloadImageWithURL:[NSURL URLWithString:file.tempDownloadUrl]
-                   completionBlock:^(BOOL succeeded, UIImage *image) {
-                       if (succeeded) {
-                           dispatch_async(dispatch_get_main_queue(), ^{
-                               [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
-                                   PHAssetChangeRequest *request = [PHAssetChangeRequest creationRequestForAssetFromImage:image];
-                                   PHObjectPlaceholder *assetPlaceHolder = [request placeholderForCreatedAsset];
-                                   PHAssetCollectionChangeRequest *albumChangeRequest = [PHAssetCollectionChangeRequest changeRequestForAssetCollection:albumAssetCollection];
-                                   [albumChangeRequest addAssets:@[assetPlaceHolder]];
-                               } completionHandler:^(BOOL success, NSError * _Nullable error) {
-                                   if (error) {
-                                       NSLog(@"Save Image To Album Error: %@", error.description);
-                                   }else {
-                                        NSLog(@"Save Image To Album Success");
-                                   }
-                                   [self image:image didFinishSavingWithError:error];
-                               }];
-                           });
-                       }else {
-                           NSLog(@"downloadImageWithURL Failed");
-                           [self image:nil didFinishSavingWithError:[[NSError alloc] init]];
-                       }
-                   }];
-    });
-    
-}
-
-- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error {
-    [self downloadAlbumPhotosToDevice];
-    if(!error) {
-    } else {
-        NSLog(@"didFinishSavingWithError: %@", error.description);
-        [self proceedFailureForProgressView];
-    }
-    
-    if(currentDownloadIndex == photoList.count) {
-        [self proceedSuccessForProgressView];
-    }
-}
-
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
