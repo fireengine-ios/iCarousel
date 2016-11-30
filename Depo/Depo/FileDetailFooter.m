@@ -41,11 +41,11 @@
         [self addSubview:shareButton];
 
         //TakingBack RemoveFromAlbum
-//        if (album) {
-//            removeButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 80, (self.frame.size.height - 21)/2, 20, 21) withImageName:@"white_delete_icon.png"];
-//            [removeButton addTarget:self action:@selector(removeFromAlbumClicked) forControlEvents:UIControlEventTouchUpInside];
-//            [self addSubview:removeButton];
-//        }
+        if (album) {
+            removeButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 80, (self.frame.size.height - 21)/2, 20, 21) withImageName:@"white_delete_icon.png"];
+            [removeButton addTarget:self action:@selector(removeFromAlbumClicked) forControlEvents:UIControlEventTouchUpInside];
+            [self addSubview:removeButton];
+        }
         
         deleteButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 40, (self.frame.size.height - 21)/2, 20, 21) withImageName:@"white_delete_icon.png"];
         [deleteButton addTarget:self action:@selector(deleteClicked) forControlEvents:UIControlEventTouchUpInside];

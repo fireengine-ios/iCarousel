@@ -95,6 +95,8 @@
                 if (cell.isHighlighted) {
                     [self setToSelectible];
                     [delegate revisitedAlbumListDidChangeToSelectState];
+                    [albumTable selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+                    [self selectAlbumIndex:indexPath];
                 }
             }
         }
@@ -218,10 +220,13 @@
     if(albums == nil || [albums count] == 0) {
         return;
     }
-    
+    [self selectAlbumIndex:indexPath];
+}
+
+-(void)selectAlbumIndex:(NSIndexPath*)indexPath {
     PhotoAlbum *album = [albums objectAtIndex:indexPath.row];
     if(isSelectible) {
-        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        UITableViewCell *cell = [albumTable cellForRowAtIndexPath:indexPath];
         if([cell isKindOfClass:[MainPhotoAlbumCell class]]) {
             if(![selectedAlbumList containsObject:album.uuid]) {
                 [selectedAlbumList addObject:album.uuid];
@@ -270,7 +275,7 @@
     if([CacheUtil showConfirmDeletePageFlag]) {
         [self confirmDeleteDidConfirm];
     } else {
-        ConfirmDeleteModalController *confirmDelete = [[ConfirmDeleteModalController alloc] init];
+        ConfirmDeleteModalController *confirmDelete = [[ConfirmDeleteModalController alloc] initWithMessage:@"ConfirmDeleteAlbumMessage"];
         confirmDelete.delegate = self;
         MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:confirmDelete];
         MyViewController * parent = (MyViewController*)self.delegate;
