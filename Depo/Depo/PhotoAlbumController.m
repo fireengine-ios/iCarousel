@@ -379,9 +379,9 @@
         [moreMenuView removeFromSuperview];
         moreMenuView = nil;
     } else {
-        NSArray *menuContent = @[[NSNumber numberWithInt:MoreMenuTypeAlbumDetail], [NSNumber numberWithInt:MoreMenuTypeAlbumDelete], [NSNumber numberWithInt:MoreMenuTypeSelect]];
+        NSArray *menuContent = @[[NSNumber numberWithInt:MoreMenuTypeAlbumDetail], [NSNumber numberWithInt:MoreMenuTypeAlbumShare], [NSNumber numberWithInt:MoreMenuTypeAlbumDelete], [NSNumber numberWithInt:MoreMenuTypeSelect]];
         if(self.album.isReadOnly) {
-            menuContent = @[[NSNumber numberWithInt:MoreMenuTypeAlbumDetail], [NSNumber numberWithInt:MoreMenuTypeSelect]];
+            menuContent = @[[NSNumber numberWithInt:MoreMenuTypeAlbumDetail], [NSNumber numberWithInt:MoreMenuTypeAlbumShare], [NSNumber numberWithInt:MoreMenuTypeSelect]];
         }
         moreMenuView = [[MoreMenuView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height-64) withList:menuContent withFileFolder:nil withAlbum:self.album];
         moreMenuView.delegate = self;
@@ -397,7 +397,8 @@
 }
 
 - (void) moreMenuDidSelectAlbumShare {
-    [self triggerShareForFiles:@[self.album.uuid]];
+    [shareDao requestLinkForFiles:@[self.album.uuid] isAlbum:true];
+    [APPDELEGATE.base showBaseLoading];
 }
 
 - (void) moreMenuDidSelectAlbumDelete {
@@ -682,6 +683,7 @@
 #pragma mark ShareLinkDao Delegate Methods
 - (void) shareSuccessCallback:(NSString *) linkToShare {
     [self hideLoading];
+    [APPDELEGATE.base hideBaseLoading];
     NSArray *activityItems = [NSArray arrayWithObjects:linkToShare, nil];
     
     UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
@@ -700,6 +702,7 @@
 
 - (void) shareFailCallback:(NSString *) errorMessage {
     [self hideLoading];
+    [APPDELEGATE.base hideBaseLoading];
 }
 
 

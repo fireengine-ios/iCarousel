@@ -174,6 +174,11 @@
     [self.navigationController pushViewController:albumController animated:YES];
 }
 
+- (void) revisitedAlbumListShareAlbums:(NSArray *)albumUUIDs {
+    [shareDao requestLinkForFiles:albumUUIDs isAlbum:true];
+    [self showLoading];
+}
+
 - (void) revisitedAlbumListChangeTitleTo:(NSString *)pageTitle {
     self.title = pageTitle;
 }
