@@ -56,7 +56,7 @@
         addAlbumDao.delegate = self;
         addAlbumDao.successMethod = @selector(addAlbumSuccessCallback);
         addAlbumDao.failMethod = @selector(addAlbumFailCallback:);
-
+        
         tableUpdateCounter = 0;
         listOffset = 0;
         
@@ -177,7 +177,7 @@
     if(footerActionMenu) {
         footerActionMenu.hidden = NO;
     } else {
-        footerActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 60, self.frame.size.width, 60) shouldShowShare:NO shouldShowMove:NO shouldShowDelete:YES shouldShowPrint:NO];
+        footerActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 60, self.frame.size.width, 60) shouldShowShare:YES shouldShowMove:NO shouldShowDelete:YES shouldShowPrint:NO];
         footerActionMenu.delegate = self;
         [self addSubview:footerActionMenu];
     }
@@ -305,10 +305,12 @@
 }
 
 - (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {
+    [delegate revisitedAlbumListShareAlbums:selectedAlbumList];
 }
 
 - (void) footerActionMenuDidSelectPrint:(FooterActionsMenuView *)menu {
 }
+
 
 - (void) addNewAlbumWithName:(NSString *) albumName {
     [addAlbumDao requestAddAlbumWithName:albumName];
@@ -336,6 +338,15 @@
     
     [addAlbumDao cancelRequest];
     addAlbumDao = nil;
+}
+
+- (void) showLoading {
+    [progress show:YES];
+    [self bringSubviewToFront:progress];
+}
+
+- (void) hideLoading {
+    [progress hide:YES];
 }
 
 @end

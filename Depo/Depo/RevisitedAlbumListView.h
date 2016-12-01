@@ -17,6 +17,7 @@
 
 @protocol RevisitedAlbumListDelegate <NSObject>
 - (void) revisitedAlbumListDidSelectAlbum:(PhotoAlbum *) albumSelected;
+- (void) revisitedAlbumListShareAlbums:(NSArray *)albumUUIDs;
 - (void) revisitedAlbumListDidFinishLoading;
 - (void) revisitedAlbumListDidFinishDeleting;
 - (void) revisitedAlbumListDidChangeToSelectState;
