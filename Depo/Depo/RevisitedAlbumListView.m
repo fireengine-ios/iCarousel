@@ -177,7 +177,7 @@
     if(footerActionMenu) {
         footerActionMenu.hidden = NO;
     } else {
-        footerActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 60, self.frame.size.width, 60) shouldShowShare:YES shouldShowMove:NO shouldShowDelete:YES shouldShowPrint:NO];
+        footerActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 70, self.frame.size.width, 60) shouldShowShare:YES shouldShowMove:NO shouldShowDelete:YES shouldShowPrint:NO];
         footerActionMenu.delegate = self;
         [self addSubview:footerActionMenu];
     }
