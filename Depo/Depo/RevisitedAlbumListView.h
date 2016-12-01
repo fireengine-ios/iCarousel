@@ -35,6 +35,7 @@
 @property (nonatomic, strong) AddAlbumDao *addAlbumDao;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, strong) NSMutableArray *selectedAlbumList;
+
 @property (nonatomic, strong) FooterActionsMenuView *footerActionMenu;
 @property (nonatomic) BOOL isSelectible;
 

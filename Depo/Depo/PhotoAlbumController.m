@@ -406,7 +406,8 @@
         [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteAlbumProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteAlbumSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteAlbumFailMessage", @"")];
     } else {
         self.deleteType = DeleteTypeMoreMenu;
-        [MoreMenuView presentConfirmDeleteFromController:self.nav delegateOwner:self];
+        [MoreMenuView presentConfirmDeleteFromController:self.nav delegateOwner:self withMessage:@"ConfirmDeleteAlbumMessage"];
+//        [MoreMenuView presentConfirmDeleteFromController:self.nav delegateOwner:self];
     }
 }
 
@@ -482,9 +483,12 @@
     if(footerActionMenu) {
         footerActionMenu.hidden = NO;
     } else {
-        footerActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60) shouldShowShare:YES shouldShowMove:YES shouldShowDelete:YES shouldShowPrint:YES];
+        footerActionMenu = [[PhotoAlbumFooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60)];
         footerActionMenu.delegate = self;
         [self.view addSubview:footerActionMenu];
+//        footerActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60) shouldShowShare:YES shouldShowMove:YES shouldShowDelete:YES shouldShowPrint:YES];
+//        footerActionMenu.delegate = self;
+//        [self.view addSubview:footerActionMenu];
     }
 }
 
@@ -535,9 +539,11 @@
 
 #pragma mark FooterMenuDelegate methods
 
+- (void) footerActionMenuDidSelectDownload:(PhotoAlbumFooterActionsMenuView *) menu {
+    
+}
 
-
-- (void) footerActionMenuDidSelectDelete:(FooterActionsMenuView *) menu {
+- (void) footerActionMenuDidSelectRemove:(PhotoAlbumFooterActionsMenuView *) menu {
     if([CacheUtil showConfirmDeletePageFlag]) {
         for(UIView *innerView in [photosScroll subviews]) {
             if([innerView isKindOfClass:[SquareImageView class]]) {
@@ -551,13 +557,11 @@
         [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
     } else {
         self.deleteType = DeleteTypeFooterMenu;
-        //TakingBack RemoveFromAlbum
-        [APPDELEGATE.base showConfirmRemove];
-        [MoreMenuView presentConfirmDeleteFromController:self.nav delegateOwner:self];
+        [MoreMenuView presentConfirmRemoveFromController:self.nav delegateOwner:self];
     }
 }
 
-- (void) footerActionMenuDidSelectMove:(FooterActionsMenuView *) menu {
+- (void) footerActionMenuDidSelectMove:(PhotoAlbumFooterActionsMenuView *) menu {
     [MoreMenuView presentPhotoAlbumsFromController:self.nav delegateOwner:self];
 }
 
@@ -569,7 +573,7 @@
 
 
 
-- (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {
+- (void) footerActionMenuDidSelectShare:(PhotoAlbumFooterActionsMenuView *) menu {
     MetaFile *shareObject = [[MetaFile alloc] init];
     if ([selectedFileList count] == 1) {
         for (id fileIndex in photoList) {
@@ -589,7 +593,7 @@
     //[APPDELEGATE.base triggerShareForFiles:selectedFileList];
 }
 
-- (void) footerActionMenuDidSelectPrint:(FooterActionsMenuView *)menu {
+- (void) footerActionMenuDidSelectPrint:(PhotoAlbumFooterActionsMenuView *)menu {
     NSMutableArray *printList = [[NSMutableArray alloc] init];
     for (int i = 0; i<[photoList count]; i++) {
         if([[photoList objectAtIndex:i] isKindOfClass:[MetaFile class]]) {

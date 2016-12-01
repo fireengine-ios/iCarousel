@@ -93,9 +93,9 @@
 "TitleNo"="Hayır";
 "TitleYes"="Evet";
 "ConfirmRemoveTitle"="Albümden Çıkarmayı Onayla";
-"ConfirmRemoveMessage"="Bu dosya sadece albumunuzden kaldırılacaktır. Dosyanıza Fotoğraflar sekmesinden ulaşabilirsiniz.";
+"ConfirmRemoveMessage"="Bu dosya sadece albümünüzden kaldırılacaktır. Dosyanıza Fotoğraflar sekmesinden ulaşabilirsiniz.";
 "ConfirmRemoveQuestion"="Çıkarmak istediğinize emin misiniz?";
-"ConfirmDeleteAlbumMessage" = "Bu albumu sildiğinizde albumun içindeki dosyalar lifebox'ınızda kalmaya devam edecektir. Dosyalarınıza Fotoğraflar sekmesinden ulaşabilirsiniz.";
+"ConfirmDeleteAlbumMessage" = "Bu albümü sildiğinizde albümün içindeki dosyalar lifebox'ınızda kalmaya devam edecektir. Dosyalarınıza Fotoğraflar sekmesinden ulaşabilirsiniz.";
 "FavAddProgressMessage"="Favorilere Ekleniyor";
 "FavAddSuccessMessage"="Favorilere başarıyla eklendi";
 "FavAddFailMessage"="Favorilere eklenirken hata oluştu";
@@ -523,6 +523,8 @@
 "MoveModalSubTitleForAlbumNew"="Eklenecek Albüm";
 "AddToAlbumTitle"="Albüme ekle";
 "MoveSuccessMessageNew"="Fotoğraflar albüme eklendi.";
+"DownloadTitle"="İndir";
+"RemoveTitle"="Kaldır";
 
 "WelcomePackage1GB"="lifebox’tan hediye 1GB ek hafızanız kullanıma hazır!";
 "PlatinPackage500GBTitle"="PLATINIUM AYRICALIĞI!";

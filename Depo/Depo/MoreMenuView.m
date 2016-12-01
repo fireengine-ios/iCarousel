@@ -185,6 +185,20 @@
 
 #pragma mark - Class Methods
 
++(void)presentConfirmRemoveFromController:(UIViewController *)controller delegateOwner:(id<ConfirmRemoveDelegate>)delegateOwner {
+    ConfirmRemoveModalController *confirmRemove = [[ConfirmRemoveModalController alloc] init];
+    confirmRemove.delegate = delegateOwner;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:confirmRemove];
+    [controller presentViewController:modalNav animated:YES completion:nil];
+}
+
++(void)presentConfirmDeleteFromController:(UIViewController *)controller delegateOwner:(id<ConfirmDeleteDelegate>)delegateOwner withMessage:(NSString*)message{
+    ConfirmDeleteModalController *confirmDelete = [[ConfirmDeleteModalController alloc] initWithMessage:message];
+    confirmDelete.delegate = delegateOwner;
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:confirmDelete];
+    [controller presentViewController:modalNav animated:YES completion:nil];
+}
+
 +(void)presentConfirmDeleteFromController:(UIViewController *)controller delegateOwner:(id<ConfirmDeleteDelegate>)delegateOwner {
     ConfirmDeleteModalController *confirmDelete = [[ConfirmDeleteModalController alloc] init];
     confirmDelete.delegate = delegateOwner;
