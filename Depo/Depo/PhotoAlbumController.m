@@ -447,8 +447,10 @@
     }
     if([selectedFileList count] > 0) {
         [self showFooterMenu];
+        titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]];
     } else {
         [self hideFooterMenu];
+        titleLabel.text = self.album.label;
     }
 }
 
@@ -458,10 +460,10 @@
     }
     if([selectedFileList count] > 0) {
         [self showFooterMenu];
-        self.title = [NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]];
+        titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]];
     } else {
         [self hideFooterMenu];
-        self.title = NSLocalizedString(@"SelectFilesTitle", @"");
+        titleLabel.text = self.album.label;
     }
 }
 
@@ -517,7 +519,8 @@
 }
 
 - (void) cancelSelectible {
-    self.title = NSLocalizedString(@"PhotosTitle", @"");
+    titleLabel.text = album.label;
+//    self.title = NSLocalizedString(@"PhotosTitle", @"");
     if(cancelButton) {
         [cancelButton removeFromSuperview];
     }
@@ -555,7 +558,7 @@
             }
         }
         [deleteImgDao requestRemovePhotos:selectedFileList fromAlbum:self.album.uuid];
-        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"RemoveProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"RemoveSuccessMessage", @"") andFailMessage:NSLocalizedString(@"RemoveFailMessage", @"")];
     } else {
         self.deleteType = DeleteTypeFooterMenu;
         [MoreMenuView presentConfirmRemoveFromController:self.nav delegateOwner:self];
@@ -715,23 +718,8 @@
         [deleteDao requestDeleteAlbums:@[self.album.uuid]];
         [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteAlbumProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteAlbumSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteAlbumFailMessage", @"")];
     }
-    //TakingBack RemoveFromAlbum (eklendi)
-//    else if(self.deleteType == DeleteTypeFooterMenu) {
-//        for(UIView *innerView in [photosScroll subviews]) {
-//            if([innerView isKindOfClass:[SquareImageView class]]) {
-//                SquareImageView *sqView = (SquareImageView *) innerView;
-//                if([selectedFileList containsObject:sqView.file.uuid]) {
-//                    [sqView showProgressMask];
-//                }
-//            }
-//        }
-//        [deleteImgDao requestRemovePhotos:selectedFileList fromAlbum:self.album.uuid];
-//        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"RemoveProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"RemoveSuccessMessage", @"") andFailMessage:NSLocalizedString(@"RemoveFailMessage", @"")];
-//    }
-
 }
 
-//TakingBack RemoveFromAlbum
 - (void) confirmRemoveDidCancel {
 }
 

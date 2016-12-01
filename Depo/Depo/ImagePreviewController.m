@@ -67,7 +67,6 @@
     deleteDao.successMethod = @selector(deleteSuccessCallback);
     deleteDao.failMethod = @selector(deleteFailCallback:);
     
-//    TakingBack RemoveFromAlbum
     removeDao = [[AlbumRemovePhotosDao alloc] init];
     removeDao.delegate = self;
     removeDao.successMethod = @selector(removeFromAlbumSuccessCallback);
