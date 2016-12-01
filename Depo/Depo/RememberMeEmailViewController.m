@@ -53,38 +53,54 @@
         [self.view addSubview:iconView];
          */
         
-        CustomLabel *subInfoLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 20, self.view.frame.size.width-40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaReg" size:15] withColor:[Util UIColorForHexColor:@"3E3E3E"] withText:NSLocalizedString(@"EmailFieldRegistrationInfo", @"") withAlignment:NSTextAlignmentCenter];
-        [self.view addSubview:subInfoLabel];
+        UIImage *logoImage = [UIImage imageNamed:@"icon_lifebox.png"];
+        UIImageView *logoImgView = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - logoImage.size.width)/2, 20, logoImage.size.width, logoImage.size.height)];
+        logoImgView.image = logoImage;
+        [self.view addSubview:logoImgView];
         
-        CustomLabel *emailLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(containerLeftMargin + 5, subInfoLabel.frame.origin.y + subInfoLabel.frame.size.height + 10, containerWidth, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"EmailTitle", @"")];
+//        CustomLabel *subInfoLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 20, self.view.frame.size.width-40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaReg" size:15] withColor:[Util UIColorForHexColor:@"3E3E3E"] withText:NSLocalizedString(@"EmailFieldRegistrationInfo", @"") withAlignment:NSTextAlignmentCenter];
+//        [self.view addSubview:subInfoLabel];
+        
+        CustomLabel *emailLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(containerLeftMargin, logoImgView.frame.origin.y + logoImgView.frame.size.height + 10, containerWidth, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"FormEmailTitle", @"")];
         [self.view addSubview:emailLabel];
         
-        emailField = [[LoginTextfield alloc] initWithFrame:CGRectMake(containerLeftMargin, emailLabel.frame.origin.y + emailLabel.frame.size.height + 5, containerWidth, 43) withPlaceholder:NSLocalizedString(@"EmailPlaceholder", @"")];
+        emailField = [[LoginTextfield alloc] initWithFrame:CGRectMake(containerLeftMargin, emailLabel.frame.origin.y + 5, containerWidth, 43) withPlaceholder:NSLocalizedString(@"EmailPlaceholder", @"")];
         emailField.delegate = self;
         emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         [self.view addSubview:emailField];
         
         captchaView = [[UIImageView alloc] initWithFrame:CGRectMake(containerLeftMargin, emailField.frame.origin.y + emailField.frame.size.height + 20, 200, 50)];
+        UIImage *image = [UIImage imageNamed:@"bg_captcha.png"];
+        CGSize newSize = captchaView.frame.size;
+        UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+        [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+        UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        captchaView.backgroundColor = [UIColor colorWithPatternImage:newImage];
+        //captchaView.contentMode = UIViewContentModeScaleAspectFill;
         [self.view addSubview:captchaView];
         
-        refreshButton = [[CustomButton alloc] initWithFrame:CGRectMake(emailField.frame.origin.x + emailField.frame.size.width - 18, emailField.frame.origin.y + emailField.frame.size.height + 20, 18, 18) withImageName:@"icon_verif_refresh.png"];
+        refreshButton = [[CustomButton alloc] initWithFrame:CGRectMake(captchaView.frame.origin.x + captchaView.frame.size.width + 32, captchaView.frame.origin.y + (captchaView.frame.size.height - 18)/2, 18, 18) withImageName:@"icon_captcha_refresh.png"];
         refreshButton.hidden = YES;
         [refreshButton addTarget:self action:@selector(loadCaptcha) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:refreshButton];
+        
+        CustomLabel *captchaLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(containerLeftMargin, captchaView.frame.origin.y + captchaView.frame.size.height + 20, containerWidth, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"CaptchaTitle", @"")];
+        [self.view addSubview:captchaLabel];
 
-        captchaField = [[LoginTextfield alloc] initWithFrame:CGRectMake(containerLeftMargin, captchaView.frame.origin.y + captchaView.frame.size.height + 5, containerWidth, 43) withPlaceholder:NSLocalizedString(@"CaptchaPlaceholder", @"")];
+        captchaField = [[LoginTextfield alloc] initWithFrame:CGRectMake(containerLeftMargin, captchaLabel.frame.origin.y + 5, containerWidth, 43) withPlaceholder:NSLocalizedString(@"CaptchaPlaceholder", @"")];
         captchaField.delegate = self;
         captchaField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         [self.view addSubview:captchaField];
-
-        SimpleButton *okButton = [[SimpleButton alloc] initWithFrame:CGRectMake(containerLeftMargin, captchaField.frame.origin.y + captchaField.frame.size.height + 10, containerWidth, 50) withTitle:NSLocalizedString(@"OK", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
+        
+        UIFont *infoFont = [UIFont fontWithName:@"TurkcellSaturaDem" size:17];
+        float infoHeight = [Util calculateHeightForText:NSLocalizedString(@"ForgetPass2222Info", @"") forWidth:containerWidth-20 forFont:infoFont] + 20;
+        CustomLabel *smsInfoLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(containerLeftMargin+10, captchaField.frame.origin.y + captchaField.frame.size.height + 20, containerWidth-20, infoHeight) withFont:infoFont withColor:[Util UIColorForHexColor:@"555555"] withText:NSLocalizedString(@"ForgetPass2222Info", @"") withAlignment:NSTextAlignmentCenter numberOfLines:0];
+        [self.view addSubview:smsInfoLabel];
+        
+        SimpleButton *okButton = [[SimpleButton alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60) withTitle:NSLocalizedString(@"OK", @"") withTitleColor:[Util UIColorForHexColor:@"ffffff"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"3FB0E8"] withBgColor:[Util UIColorForHexColor:@"3FB0E8"] withCornerRadius:0];
         [okButton addTarget:self action:@selector(forgotPassClicked) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:okButton];
-        
-        UIFont *infoFont = [UIFont fontWithName:@"TurkcellSaturaBol" size:15];
-        float infoHeight = [Util calculateHeightForText:NSLocalizedString(@"ForgetPass2222Info", @"") forWidth:containerWidth-20 forFont:infoFont] + 20;
-        CustomLabel *smsInfoLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(containerLeftMargin+10, okButton.frame.origin.y + okButton.frame.size.height + 20, containerWidth-20, infoHeight) withFont:infoFont withColor:[Util UIColorForHexColor:@"555555"] withText:NSLocalizedString(@"ForgetPass2222Info", @"") withAlignment:NSTextAlignmentCenter numberOfLines:0];
-        [self.view addSubview:smsInfoLabel];
 
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow) name:UIKeyboardWillShowNotification object:nil];
         

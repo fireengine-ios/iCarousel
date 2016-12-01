@@ -284,7 +284,7 @@
 
 "LoginError"="Giriş yapılamadı. Lütfen bilgilerinizi kontrol ediniz.";
 
-"RememberMe"="BENİ HATIRLA";
+"RememberMe"="Beni Hatırla";
 "PassSmsTitle"="ŞİFRE ALMAK İÇİN";
 
 "FavouritesTitle"="Favoriler";
@@ -546,11 +546,13 @@
 
 "CropAndShareTitle"="Cropy";
 
+"FormEmailTitle"="EMAIL";
 "EmailTitle"="E-MAİL ADRESİ";
 "PasswordRepeatTitle"="ŞİFRE TEKRAR";
 "EmailPlaceholder"="E-Mail";
 "PasswordRepeatPlaceholder"="Şifre tekrar";
 "SignUp"="Kayıt Ol";
+"SignUpButton"="Gönder";
 "EmailFormatErrorMessage"="Lütfen geçerli bir e-posta adresi giriniz.";
 "PassMismatchErrorMessage"="Şifre alanları birbiriyle aynı değil. Lütfen tekrar giriş yapınız.";
 "PassRepeatFormatErrorMessage"="Şifre tekrar alanını doldurunuz";
@@ -560,7 +562,7 @@
 "VERIFY_EXISTING_EMAIL"="E-Posta doğrulama beklemektedir. E-Posta adresinizi doğruladıktan sonra giriş yapabilirsiniz.";
 "PHONE_NUMBER_IS_INVALID"="Telefon numarası geçersiz";
 "PHONE_NUMBER_IS_ALREADY_EXIST"="Aboneliğiniz bulunmaktadır. Telefon Numarası ve şifrenizle giriş yapabilirsiniz.";
-"SignUpButtonTitle"="KAYIT OL";
+"SignUpButtonTitle"="Yeni hesap oluştur";
 "ForgotPassButton"="ŞİFREMİ UNUTTUM?";
 
 "OTPTopInfo"="GSM Numaranı Doğrula";
@@ -577,6 +579,7 @@
 "MonthlyShort"="Ay";
 "YearlyShort"="Yıl";
 
+"CaptchaTitle"="RESİMDEKİ DEĞERİ GİRİN";
 "CaptchaPlaceholder"="Resimdeki değeri girin";
 "CaptchaFieldErrorMessage"="Lütfen güvenlik kodunu girin";
 "InvalidCaptchaErrorMessage"="Geçersiz bir güvenlik kodu girdiniz";
@@ -632,7 +635,7 @@
 "PERIOD_9_MONTHS_SHORT"="9 AY";
 "PERIOD_YEAR_SHORT"="YIL";
 
-"TermsButtonTitle"="KULLANIM KOŞULLARINI KABUL EDİYORUM";
+"TermsButtonTitle"="Kullanım koşullarını kabul ediyorum";
 "TermsTitle"="Kullanım Koşulları";
 "EmailNotFound"="lifebox üyeliğiniz bulunmamaktadır. Kayıt Ol menüsünden üyeliğinizi başlatabilirsiniz. Turkcell abonesi iseniz, SIFRE yazıp 2222’ye SMS göndererek şifrenizi ücretsiz olarak alabilirsiniz.";
 
