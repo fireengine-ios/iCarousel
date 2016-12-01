@@ -20,14 +20,14 @@
 #import "FileInfoGroup.h"
 
 //TODO test -> prod
-#define BASE_URL @"https://adepo.turkcell.com.tr/api"
-//#define BASE_URL @"https://tcloudstb.turkcell.com.tr/api"
+//#define BASE_URL @"https://adepo.turkcell.com.tr/api"
+#define BASE_URL @"https://tcloudstb.turkcell.com.tr/api"
 
 #define TOKEN_URL BASE_URL@"/auth/token?rememberMe=%@"
 
 //TODO test -> prod
-#define RADIUS_URL @"http://adepo.turkcell.com.tr/api/auth/gsm/login?rememberMe=on"
-//#define RADIUS_URL @"http://tcloudstb.turkcell.com.tr/api/auth/gsm/login?rememberMe=on"
+//#define RADIUS_URL @"http://adepo.turkcell.com.tr/api/auth/gsm/login?rememberMe=on"
+#define RADIUS_URL @"http://tcloudstb.turkcell.com.tr/api/auth/gsm/login?rememberMe=on"
 
 #define REMEMBER_ME_URL BASE_URL@"/auth/rememberMe"
 
@@ -199,6 +199,8 @@
 #define LDAP_LOCKED_ERROR_MESSAGE @"LDAP_LOCKED"
 
 #define EMAIL_NOT_VERIFIED_ERROR_MESSAGE @"EMAIL_NOT_VERIFIED"
+
+#define SIGNUP_REQUIRED_ERROR_MESSAGE @"SIGNUP_REQUIRED"
 
 #define NO_CONN_ERROR_MESSAGE @"İnternet erişiminizin aktif olduğuna ve Ayarlar/lifebox altında Hücresel Veri'nin açık olduğuna emin olun."
 
