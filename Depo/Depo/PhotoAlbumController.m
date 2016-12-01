@@ -446,8 +446,10 @@
     }
     if([selectedFileList count] > 0) {
         [self showFooterMenu];
+        titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]];
     } else {
         [self hideFooterMenu];
+        titleLabel.text = self.album.label;
     }
 }
 
@@ -457,10 +459,10 @@
     }
     if([selectedFileList count] > 0) {
         [self showFooterMenu];
-        self.title = [NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]];
+        titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]];
     } else {
         [self hideFooterMenu];
-        self.title = NSLocalizedString(@"SelectFilesTitle", @"");
+        titleLabel.text = self.album.label;
     }
 }
 
