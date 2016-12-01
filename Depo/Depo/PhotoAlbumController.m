@@ -518,7 +518,8 @@
 }
 
 - (void) cancelSelectible {
-    self.title = NSLocalizedString(@"PhotosTitle", @"");
+    titleLabel.text = album.label;
+//    self.title = NSLocalizedString(@"PhotosTitle", @"");
     if(cancelButton) {
         [cancelButton removeFromSuperview];
     }
