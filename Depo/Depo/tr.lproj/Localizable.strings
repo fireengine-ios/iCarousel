@@ -217,6 +217,8 @@
 "RecentActivityMultipleFilesAdded"="%d dosya yüklendi";
 "RecentActivitySingleMusicAdded"="%d şarkı yüklendi";
 "RecentActivityMultipleMusicsAdded"="%d şarkı yüklendi";
+"RecentActivitySingleVideoAdded"="%d video yüklendi";
+"RecentActivityMultipleVideosAdded"="%d video yüklendi";
 
 "RecentActivitySingleFolderMoved"="%d klasör taşındı";
 "RecentActivityMultipleFoldersMoved"="%d klasör taşındı";

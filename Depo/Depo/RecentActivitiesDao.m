@@ -12,6 +12,7 @@
 @implementation RecentActivitiesDao
 
 - (void) requestRecentActivitiesForPage:(int) page andCount:(int) count {
+    NSLog(@"requestRecentActivitiesForPage:");
     NSString *parentListingUrl = [NSString stringWithFormat:RECENT_ACTIVITIES_URL, @"name", @"ASC", page, count];
     NSURL *url = [NSURL URLWithString:parentListingUrl];
     
@@ -21,12 +22,13 @@
 }
 
 - (void)requestFinished:(ASIHTTPRequest *)request {
+    NSLog(@"requestRecentActivitiesForPageFinished:");
     NSError *error = [request error];
     
     if (!error) {
         NSString *responseEnc = [request responseString];
         
-//        NSLog(@"Recent Activities Response: %@", responseEnc);
+       NSLog(@"Recent Activities Response: %@", responseEnc);
 
         SBJSON *jsonParser = [SBJSON new];
         NSArray *mainArray = [jsonParser objectWithString:responseEnc];
