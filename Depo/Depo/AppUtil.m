@@ -267,6 +267,7 @@
             break;
         case MoreMenuTypeDelete:
         case MoreMenuTypeAlbumDelete:
+        case MoreMenuTypeRemoveFromAlbum:
             iconName = @"nav_delete_icon.png";
             break;
         case MoreMenuTypeDownloadImage:
