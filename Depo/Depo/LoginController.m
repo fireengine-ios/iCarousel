@@ -60,28 +60,37 @@
         mainScroll.scrollEnabled = YES;
         [self.view addSubview:mainScroll];
         
-        int scrollYIndex = 50;
+        int scrollYIndex = 20;
         
-        CustomLabel *msisdnLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(25, scrollYIndex, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"MsisdnEmailTitle", @"")];
+        UIImage *logoImage = [UIImage imageNamed:@"icon_lifebox.png"];
+        UIImageView *logoImgView = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - logoImage.size.width)/2, scrollYIndex, logoImage.size.width, logoImage.size.height)];
+        logoImgView.image = logoImage;
+        [mainScroll addSubview:logoImgView];
+        
+        scrollYIndex += logoImage.size.height+50;
+        
+        
+        CustomLabel *msisdnLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"MsisdnEmailTitle", @"")];
         [mainScroll addSubview:msisdnLabel];
         
-        scrollYIndex += 25;
+        scrollYIndex += 5;
         
         msisdnField = [[LoginTextfield alloc] initWithFrame:CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 43) withPlaceholder:@""/*NSLocalizedString(@"MsisdnEmailPlaceholder", @"")*/];
         msisdnField.delegate = self;
+        [msisdnField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
         [mainScroll addSubview:msisdnField];
-        if([[Util readLocaleCode] isEqualToString:@"tr"]) {
-            msisdnField.placeholder = @"5XX XXX XX XX";
-        }
+//        if([[Util readLocaleCode] isEqualToString:@"tr"]) {
+//            msisdnField.placeholder = @"5XX XXX XX XX";
+//        }
 
         scrollYIndex += 55;
 
-        CustomLabel *passLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(25, scrollYIndex, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"PasswordTitle", @"")];
+        CustomLabel *passLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"PasswordTitle", @"")];
         [mainScroll addSubview:passLabel];
         
-        scrollYIndex += 25;
+        scrollYIndex += 5;
 
-        passField = [[LoginTextfield alloc] initSecureWithFrame:CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 43) withPlaceholder:NSLocalizedString(@"PasswordPlaceholder", @"")];
+        passField = [[LoginTextfield alloc] initSecureWithFrame:CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 43) withPlaceholder:/*NSLocalizedString(@"PasswordPlaceholder", @"")*/ @""];
         passField.delegate = self;
         [mainScroll addSubview:passField];
 
@@ -90,9 +99,9 @@
         rememberMe = [[CheckButton alloc] initWithFrame:CGRectMake(25, scrollYIndex, 120, 25) withTitle:NSLocalizedString(@"RememberMe", @"") isInitiallyChecked:YES];
         [mainScroll addSubview:rememberMe];
 
-        SimpleButton *forgotPass = [[SimpleButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 150, scrollYIndex, 130, 25) withTitle:NSLocalizedString(@"ForgotPassButton", @"")];
-        [forgotPass addTarget:self action:@selector(forgotMeClicked) forControlEvents:UIControlEventTouchUpInside];
-        [mainScroll addSubview:forgotPass];
+//        SimpleButton *forgotPass = [[SimpleButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 150, scrollYIndex, 130, 25) withTitle:NSLocalizedString(@"ForgotPassButton", @"")];
+//        [forgotPass addTarget:self action:@selector(forgotMeClicked) forControlEvents:UIControlEventTouchUpInside];
+//        [mainScroll addSubview:forgotPass];
 
         scrollYIndex += 40;
 
@@ -109,8 +118,25 @@
         captchaField.hidden = YES;
         captchaField.delegate = self;
         [mainScroll addSubview:captchaField];
+        
+       // scrollYIndex += 20;
+        
+        loginButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 50) withTitle:NSLocalizedString(@"Login", @"") withTitleColor:[Util UIColorForHexColor:@"FFFFFF"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"3FB0E8"] withBgColor:[Util UIColorForHexColor:@"3FB0E8"] withCornerRadius:5];
+        [loginButton addTarget:self action:@selector(loginClicked) forControlEvents:UIControlEventTouchUpInside];
+        [mainScroll addSubview:loginButton];
+        
+        scrollYIndex += 60;
+        
+        UIImage *newPassIcon = [UIImage imageNamed:@"icon_newpass.png"];
+        UIImageView *newPassIconImgView = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 130)/2 + 5, scrollYIndex + loginButton.frame.size.height, newPassIcon.size.width, newPassIcon.size.height)];
+        newPassIconImgView.image = newPassIcon;
+        [mainScroll addSubview:newPassIconImgView];
+        
+        SimpleButton *forgotPass = [[SimpleButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 130)/2, scrollYIndex + loginButton.frame.size.height, 130, 25) withTitle:NSLocalizedString(@"ForgotPassButton", @"")];
+        [forgotPass addTarget:self action:@selector(forgotMeClicked) forControlEvents:UIControlEventTouchUpInside];
+        [mainScroll addSubview:forgotPass];
 
-        CGRect loginButtonFrame = CGRectMake(20, self.view.frame.size.height - 134, self.view.frame.size.width - 40, 50);
+       // CGRect loginButtonFrame = CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 50);
         
         if(IS_IPAD) {
             msisdnLabel.frame = CGRectMake((self.view.frame.size.width - 320)/2 + 5, (self.view.frame.size.height - 300)/2 - 100, 320, 20);
@@ -119,14 +145,14 @@
             passField.frame = CGRectMake((self.view.frame.size.width - 320)/2, passLabel.frame.origin.y + passLabel.frame.size.height + 10, 320, 43);
             rememberMe.frame = CGRectMake((self.view.frame.size.width - 320)/2 + 5, passField.frame.origin.y + passField.frame.size.height + 30, 120, 25);
             forgotPass.frame = CGRectMake(passField.frame.origin.x + passField.frame.size.width - 130, rememberMe.frame.origin.y, 130, 25);
-            loginButtonFrame = CGRectMake((self.view.frame.size.width - 320)/2, rememberMe.frame.origin.y + rememberMe.frame.size.height + 30, 320, 50);
+            loginButton.frame = CGRectMake((self.view.frame.size.width - 320)/2, rememberMe.frame.origin.y + rememberMe.frame.size.height + 30, 320, 50);
         }
         
-        loginButton = [[SimpleButton alloc] initWithFrame:loginButtonFrame withTitle:NSLocalizedString(@"SignIn", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
-        [loginButton addTarget:self action:@selector(loginClicked) forControlEvents:UIControlEventTouchUpInside];
-        [mainScroll addSubview:loginButton];
-
-        scrollYIndex += 60;
+//        loginButton = [[SimpleButton alloc] initWithFrame:loginButtonFrame withTitle:NSLocalizedString(@"Login", @"") withTitleColor:[Util UIColorForHexColor:@"FFFFFF"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"3FB0E8"] withBgColor:[Util UIColorForHexColor:@"3FB0E8"] withCornerRadius:5];
+//        [loginButton addTarget:self action:@selector(loginClicked) forControlEvents:UIControlEventTouchUpInside];
+//        [mainScroll addSubview:loginButton];
+//
+//        scrollYIndex += 60;
         
         /*
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
@@ -137,9 +163,9 @@
         }
          */
 
-        SimpleButton *registerButton = [[SimpleButton alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60) withTitle:NSLocalizedString(@"SignUpButtonTitle", @"") withTitleColor:[UIColor whiteColor] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[UIColor blackColor] withBgColor:[UIColor blackColor] withCornerRadius:0 withIconName:@"white_right_arrow_icon.png" withIconFrame:CGRectMake(self.view.frame.size.width - 100, 23, 8, 14)];
+        SimpleButton *registerButton = [[SimpleButton alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60) withTitle:NSLocalizedString(@"SignUpButtonTitle", @"") withTitleColor:[UIColor whiteColor] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"3FB0E8"] withBgColor:[Util UIColorForHexColor:@"3FB0E8"] withCornerRadius:0];
         [registerButton addTarget:self action:@selector(registerClicked) forControlEvents:UIControlEventTouchUpInside];
-//        [self.view addSubview:registerButton];
+        [self.view addSubview:registerButton];
         
         mainScroll.contentSize = CGSizeMake(mainScroll.frame.size.width, scrollYIndex + 120);
 
@@ -216,10 +242,29 @@
         [self showErrorAlertWithMessage:NSLocalizedString(@"EmailNotVerifiedError", @"")];
     } else if([errorMessage isEqualToString:LDAP_LOCKED_ERROR_MESSAGE]) {
         [self showErrorAlertWithMessage:NSLocalizedString(@"LdapLockedError", @"")];
+    } else if([errorMessage isEqualToString:SIGNUP_REQUIRED_ERROR_MESSAGE]) {
+        [self showErrorAlertWithMessage:NSLocalizedString(@"SignUpRequiredError", @"")];
     } else {
         [self showErrorAlertWithMessage:NSLocalizedString(@"LoginError", @"")];
         if(![captchaField isHidden]) {
             [self loadCaptcha];
+        }
+    }
+}
+
+- (void) textFieldDidChange:(UITextField *) textField {
+    NSScanner *scanner = [NSScanner scannerWithString:textField.text];
+    BOOL isNumeric = [scanner scanInteger:NULL] && [scanner isAtEnd];
+    NSString* callingCode = @"+(90)";
+    if (isNumeric) {
+        if([[Util readLocaleCode] isEqualToString:@"uk"] || [[Util readLocaleCode] isEqualToString:@"ru"] ) {
+           callingCode = @"+(380)";
+            callingCode = [callingCode stringByAppendingString:textField.text];
+            msisdnField.text = callingCode;
+        }
+        else {
+            callingCode = [callingCode stringByAppendingString:textField.text];
+            msisdnField.text = callingCode;
         }
     }
 }
@@ -250,7 +295,10 @@
 }
 
 - (void) loginClicked {
-    msisdnValue = msisdnField.text;
+    
+    NSString *trimmedString = [[msisdnField.text stringByReplacingOccurrencesOfString:@"(" withString:@""] stringByReplacingOccurrencesOfString:@")" withString:@""];
+    
+    msisdnValue = trimmedString;
     /*
     if ([msisdnValue length] > 0)
         msisdnValue = [[msisdnValue substringToIndex:1] isEqualToString:@"0"] ? [msisdnValue substringFromIndex:1] : msisdnValue;

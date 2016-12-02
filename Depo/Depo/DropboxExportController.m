@@ -322,7 +322,7 @@
     if(info) {
         MPOAuthCredentialConcreteStore *credentials = [[DBSession sharedSession] credentialStoreForUserId:info.userId];
         if(credentials.accessToken){
-            [tokenDao requestTokenWithCurrentToken:credentials.accessToken withConsumerKey:credentials.consumerKey withAppSecret:@"kn9u1e77bzlk103" withAuthTokenSecret:credentials.accessTokenSecret];
+            [tokenDao requestTokenWithCurrentToken:credentials.accessToken withConsumerKey:credentials.consumerKey withAppSecret:@"umjclqg3juoyihd" withAuthTokenSecret:credentials.accessTokenSecret];
             return;
         }
     }
@@ -353,7 +353,8 @@
     
     if (status == noErr && foundValue) {
         NSDictionary *savedCreds = [NSKeyedUnarchiver unarchiveObjectWithData:foundValue];
-        NSArray *credsForApp = [[savedCreds objectForKey:@"accounts"] objectForKey:@"zeddgylajxc1op8"];
+//        NSArray *credsForApp = [[savedCreds objectForKey:@"accounts"] objectForKey:@"zeddgylajxc1op8"];
+         NSArray *credsForApp = [[savedCreds objectForKey:@"accounts"] objectForKey:@"422fptod5dlxrn8"]; 
         for (NSDictionary *credsForUser in credsForApp) {
             NSDictionary *token = @{
                                     @"userId": [credsForUser objectForKey:@"userId"],

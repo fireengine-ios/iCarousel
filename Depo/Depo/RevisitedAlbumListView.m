@@ -56,7 +56,7 @@
         addAlbumDao.delegate = self;
         addAlbumDao.successMethod = @selector(addAlbumSuccessCallback);
         addAlbumDao.failMethod = @selector(addAlbumFailCallback:);
-
+        
         tableUpdateCounter = 0;
         listOffset = 0;
         
@@ -95,6 +95,8 @@
                 if (cell.isHighlighted) {
                     [self setToSelectible];
                     [delegate revisitedAlbumListDidChangeToSelectState];
+                    [albumTable selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+                    [self selectAlbumIndex:indexPath];
                 }
             }
         }
@@ -175,7 +177,7 @@
     if(footerActionMenu) {
         footerActionMenu.hidden = NO;
     } else {
-        footerActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 60, self.frame.size.width, 60) shouldShowShare:NO shouldShowMove:NO shouldShowDelete:YES shouldShowPrint:NO];
+        footerActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 70, self.frame.size.width, 60) shouldShowShare:YES shouldShowMove:NO shouldShowDelete:YES shouldShowPrint:NO];
         footerActionMenu.delegate = self;
         [self addSubview:footerActionMenu];
     }
@@ -218,10 +220,13 @@
     if(albums == nil || [albums count] == 0) {
         return;
     }
-    
+    [self selectAlbumIndex:indexPath];
+}
+
+-(void)selectAlbumIndex:(NSIndexPath*)indexPath {
     PhotoAlbum *album = [albums objectAtIndex:indexPath.row];
     if(isSelectible) {
-        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        UITableViewCell *cell = [albumTable cellForRowAtIndexPath:indexPath];
         if([cell isKindOfClass:[MainPhotoAlbumCell class]]) {
             if(![selectedAlbumList containsObject:album.uuid]) {
                 [selectedAlbumList addObject:album.uuid];
@@ -270,7 +275,7 @@
     if([CacheUtil showConfirmDeletePageFlag]) {
         [self confirmDeleteDidConfirm];
     } else {
-        ConfirmDeleteModalController *confirmDelete = [[ConfirmDeleteModalController alloc] init];
+        ConfirmDeleteModalController *confirmDelete = [[ConfirmDeleteModalController alloc] initWithMessage:@"ConfirmDeleteAlbumMessage"];
         confirmDelete.delegate = self;
         MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:confirmDelete];
         MyViewController * parent = (MyViewController*)self.delegate;
@@ -300,10 +305,12 @@
 }
 
 - (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {
+    [delegate revisitedAlbumListShareAlbums:selectedAlbumList];
 }
 
 - (void) footerActionMenuDidSelectPrint:(FooterActionsMenuView *)menu {
 }
+
 
 - (void) addNewAlbumWithName:(NSString *) albumName {
     [addAlbumDao requestAddAlbumWithName:albumName];
@@ -331,6 +338,15 @@
     
     [addAlbumDao cancelRequest];
     addAlbumDao = nil;
+}
+
+- (void) showLoading {
+    [progress show:YES];
+    [self bringSubviewToFront:progress];
+}
+
+- (void) hideLoading {
+    [progress hide:YES];
 }
 
 @end

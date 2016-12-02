@@ -20,6 +20,8 @@
 #import "MsisdnEntryController.h"
 #import "EmailEntryController.h"
 
+#import "AppRater.h"
+
 @interface RevisitedGroupedPhotosController () {
     MyNavigationController *printNav;
 }
@@ -172,6 +174,11 @@
     [self.navigationController pushViewController:albumController animated:YES];
 }
 
+- (void) revisitedAlbumListShareAlbums:(NSArray *)albumUUIDs {
+    [shareDao requestLinkForFiles:albumUUIDs isAlbum:true];
+    [self showLoading];
+}
+
 - (void) revisitedAlbumListChangeTitleTo:(NSString *)pageTitle {
     self.title = pageTitle;
 }
@@ -259,9 +266,9 @@
 -(void)revisitedGroupedPhoto:(RevisitedGroupedPhotoView *)view downloadSelectedFiles:(NSArray *)selectedFiles {
     NSString *successMessage = NSLocalizedString(@"DownloadPhotoSuccessMessage", @"");
     NSString *failMessage = NSLocalizedString(@"DownloadPhotoFailMessage", @"");
-    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DownloadPhotoProgressMessage", @"")
+    /*[self pushProgressViewWithProcessMessage:NSLocalizedString(@"DownloadPhotoProgressMessage", @"")
                            andSuccessMessage:successMessage
-                              andFailMessage:failMessage];
+                              andFailMessage:failMessage]; */
     [APPDELEGATE.base downloadFilesToCameraRoll:selectedFiles successMessage:successMessage failMessage:failMessage];
 }
 
@@ -421,26 +428,6 @@
         [groupView shouldContinueDelete];
     }
 }
-
-
-#pragma mark - Download Manager Delegate
-
--(void)downloadManager:(DownloadManager *)manager didFinishSavingFile:(MetaFile *)file error:(NSError *)error {
-    if (error) {
-        [self proceedFailureForProgressView];
-    }else {
-        [self proceedSuccessForProgressView];
-    }
-}
-
--(void)downloadManagerDidFinishDownloading:(DownloadManager *)manager error:(NSError *)error {
-    if (error) {
-        NSLog(@"didFinishSavingFile error: %@", error.description);
-    }else {
-        NSLog(@"didFinishSavingFile success");
-    }
-}
-
 
 
 - (void) moreClicked {

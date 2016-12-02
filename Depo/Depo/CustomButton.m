@@ -135,23 +135,23 @@
     return self;
 }
 
--(id)initWithFrame:(CGRect)frame withImageName:(NSString *)imageName withBelowTitle:(NSString *)title withFont:(UIFont *)font withTextColor:(UIColor *)textColor {
+- (id)initWithFrame:(CGRect)frame withImageName:(NSString *) imageName withTitleBelow:(NSString *) title withFont:(UIFont *) font withColor:(UIColor *) textColor {
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
         
-        titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 28, self.frame.size.width, 15)];
+        UIImage *bgImg = [UIImage imageNamed:imageName];
+        UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake((self.frame.size.width - bgImg.size.width)/2, 0, bgImg.size.width, bgImg.size.height)];
+        bgImgView.image = bgImg;
+        [self addSubview:bgImgView];
+        
+        titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, bgImgView.frame.size.height, self.frame.size.width, font.lineHeight  + 5)];
         titleLabel.text = title;
         titleLabel.backgroundColor = [UIColor clearColor];
         titleLabel.font = font;
         titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.textColor = textColor;
         [self addSubview:titleLabel];
-        
-        UIImage *bgImg = [UIImage imageNamed:imageName];
-        UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake((self.frame.size.width - bgImg.size.width)/2, self.frame.size.height - titleLabel.frame.size.height - 18 - bgImg.size.height, bgImg.size.width, bgImg.size.height)];
-        bgImgView.image = bgImg;
-        [self addSubview:bgImgView];
     }
     return self;
 }

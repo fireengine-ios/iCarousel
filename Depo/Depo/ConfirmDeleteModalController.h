@@ -22,4 +22,5 @@
 @property (nonatomic, strong) SimpleButton *confirmButton;
 @property (nonatomic, strong) CheckButton *checkButton;
 
+- (id)initWithMessage:(NSString*)message;
 @end

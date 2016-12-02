@@ -94,8 +94,9 @@
 "TitleNo"="Hayır";
 "TitleYes"="Evet";
 "ConfirmRemoveTitle"="Albümden Çıkarmayı Onayla";
-"ConfirmRemoveMessage"="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi";
+"ConfirmRemoveMessage"="Bu dosya sadece albümünüzden kaldırılacaktır. Dosyanıza Fotoğraflar sekmesinden ulaşabilirsiniz.";
 "ConfirmRemoveQuestion"="Çıkarmak istediğinize emin misiniz?";
+"ConfirmDeleteAlbumMessage" = "Bu albümü sildiğinizde albümün içindeki dosyalar lifebox'ınızda kalmaya devam edecektir. Dosyalarınıza Fotoğraflar sekmesinden ulaşabilirsiniz.";
 "FavAddProgressMessage"="Favorilere Ekleniyor";
 "FavAddSuccessMessage"="Favorilere başarıyla eklendi";
 "FavAddFailMessage"="Favorilere eklenirken hata oluştu";
@@ -222,6 +223,8 @@
 "RecentActivityMultipleFilesAdded"="%d dosya yüklendi";
 "RecentActivitySingleMusicAdded"="%d şarkı yüklendi";
 "RecentActivityMultipleMusicsAdded"="%d şarkı yüklendi";
+"RecentActivitySingleVideoAdded"="%d video yüklendi";
+"RecentActivityMultipleVideosAdded"="%d video yüklendi";
 
 "RecentActivitySingleFolderMoved"="%d klasör taşındı";
 "RecentActivityMultipleFoldersMoved"="%d klasör taşındı";
@@ -287,7 +290,7 @@
 
 "LoginError"="Giriş yapılamadı. Lütfen bilgilerinizi kontrol ediniz.";
 
-"RememberMe"="BENİ HATIRLA";
+"RememberMe"="Beni Hatırla";
 "PassSmsTitle"="ŞİFRE ALMAK İÇİN";
 
 "FavouritesTitle"="Favoriler";
@@ -529,6 +532,8 @@
 "MoveModalSubTitleForAlbumNew"="Eklenecek Albüm";
 "AddToAlbumTitle"="Albüme ekle";
 "MoveSuccessMessageNew"="Fotoğraflar albüme eklendi.";
+"DownloadTitle"="İndir";
+"RemoveTitle"="Kaldır";
 
 "WelcomePackage1GB"="lifebox’tan hediye 1GB ek hafızanız kullanıma hazır!";
 "PlatinPackage500GBTitle"="PLATINIUM AYRICALIĞI!";
@@ -550,11 +555,13 @@
 
 "CropAndShareTitle"="Cropy";
 
+"FormEmailTitle"="EMAIL";
 "EmailTitle"="E-MAİL ADRESİ";
 "PasswordRepeatTitle"="ŞİFRE TEKRAR";
 "EmailPlaceholder"="E-Mail";
 "PasswordRepeatPlaceholder"="Şifre tekrar";
 "SignUp"="Kayıt Ol";
+"SignUpButton"="Gönder";
 "EmailFormatErrorMessage"="Lütfen geçerli bir e-posta adresi giriniz.";
 "PassMismatchErrorMessage"="Şifre alanları birbiriyle aynı değil. Lütfen tekrar giriş yapınız.";
 "PassRepeatFormatErrorMessage"="Şifre tekrar alanını doldurunuz";
@@ -564,7 +571,7 @@
 "VERIFY_EXISTING_EMAIL"="E-Posta doğrulama beklemektedir. E-Posta adresinizi doğruladıktan sonra giriş yapabilirsiniz.";
 "PHONE_NUMBER_IS_INVALID"="Telefon numarası geçersiz";
 "PHONE_NUMBER_IS_ALREADY_EXIST"="Aboneliğiniz bulunmaktadır. Telefon Numarası ve şifrenizle giriş yapabilirsiniz.";
-"SignUpButtonTitle"="KAYIT OL";
+"SignUpButtonTitle"="Yeni hesap oluştur";
 "ForgotPassButton"="ŞİFREMİ UNUTTUM?";
 
 "OTPTopInfo"="GSM Numaranı Doğrula";
@@ -581,6 +588,7 @@
 "MonthlyShort"="Ay";
 "YearlyShort"="Yıl";
 
+"CaptchaTitle"="RESİMDEKİ DEĞERİ GİRİN";
 "CaptchaPlaceholder"="Resimdeki değeri girin";
 "CaptchaFieldErrorMessage"="Lütfen güvenlik kodunu girin";
 "InvalidCaptchaErrorMessage"="Geçersiz bir güvenlik kodu girdiniz";
@@ -636,7 +644,7 @@
 "PERIOD_9_MONTHS_SHORT"="9 AY";
 "PERIOD_YEAR_SHORT"="YIL";
 
-"TermsButtonTitle"="KULLANIM KOŞULLARINI KABUL EDİYORUM";
+"TermsButtonTitle"="Kullanım koşullarını kabul ediyorum";
 "TermsTitle"="Kullanım Koşulları";
 "EmailNotFound"="lifebox üyeliğiniz bulunmamaktadır. Kayıt Ol menüsünden üyeliğinizi başlatabilirsiniz. Turkcell abonesi iseniz, SIFRE yazıp 2222’ye SMS göndererek şifrenizi ücretsiz olarak alabilirsiniz.";
 
@@ -653,6 +661,7 @@
 "TOO_MANY_INVALID_ATTEMPTS"="Çok sayıda hatalı giriş yaptınız. Lütfen yeni bir doğrulama kodu isteyiniz.";
 "CannotChangeEmail"="E-Posta adresinizi değiştirmenize izin verilmemektedir.";
 "LdapLockedError"="Çok fazla sayıda hatalı giriş yaptınız. Lütfen 1 saat sonra tekrar deneyiniz.";
+"SignUpRequiredError" = "Lifebox'ta kayıtlı bir kullanıcınız bulunmamaktadır, lütfen kayıt olunuz.";
 
 "WelcomePackageName"="Hoşgeldin (%@)";
 

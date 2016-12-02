@@ -24,6 +24,13 @@
             } else {
                 [keyVal appendString:@"SingleImage"];
             }
+        }
+        else if([activity.rawFileType isEqualToString:@"VIDEO"]) {
+            if([activity.actionItemList count] > 1 || activity.deleteCount > 1) {
+                [keyVal appendString:@"MultipleVideos"];
+            } else {
+                [keyVal appendString:@"SingleVideo"];
+            }
         } else if([activity.rawFileType isEqualToString:@"OTHER"]) {
             if([activity.actionItemList count] > 0) {
                 MetaFile *file = [activity.actionItemList objectAtIndex:0];

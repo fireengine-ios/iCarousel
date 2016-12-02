@@ -746,13 +746,20 @@
     [self presentViewController:modalNav animated:YES completion:nil];
 }
 
+- (void) showConfirmDelete:(NSString*) message {
+    ConfirmDeleteModalController *confirmDelete = [[ConfirmDeleteModalController alloc] initWithMessage:message];
+    confirmDelete.delegate = [self.nav topViewController];
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:confirmDelete];
+    [self presentViewController:modalNav animated:YES completion:nil];
+}
+
 //TakingBack RemoveFromAlbum
-//- (void) showConfirmRemove {
-//    ConfirmRemoveModalController *confirmRemove = [[ConfirmRemoveModalController alloc] init];
-//    confirmRemove.delegate = [self.nav topViewController];
-//    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:confirmRemove];
-//    [self presentViewController:modalNav animated:YES completion:nil];
-//}
+- (void) showConfirmRemove {
+    ConfirmRemoveModalController *confirmRemove = [[ConfirmRemoveModalController alloc] init];
+    confirmRemove.delegate = [self.nav topViewController];
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:confirmRemove];
+    [self presentViewController:modalNav animated:YES completion:nil];
+}
 
 - (void) showSort {
     SortModalController *sort = [[SortModalController alloc] init];
@@ -1051,9 +1058,9 @@ downloadFilesToAlbum:(NSArray *)files
 
 -(void)downloadManagerDidFinishDownloading:(DownloadManager *)manager error:(NSError *)error {
     if (error) {
-        [ProcessFooterView showFailureMessageOnWindow:manager.failMessage];
+      //  [ProcessFooterView showFailureMessageOnWindow:manager.failMessage];
     }else {
-        [ProcessFooterView showSuccessMessageOnWindow:manager.successMessage];
+      //  [ProcessFooterView showSuccessMessageOnWindow:manager.successMessage];
     }
 }
 

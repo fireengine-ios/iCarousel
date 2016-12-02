@@ -423,20 +423,20 @@
     if(imgFooterActionMenu) {
         imgFooterActionMenu.hidden = NO;
     } else {
-        CGRect frame = CGRectMake(0, self.frame.size.height - 60, self.frame.size.width, 60);
+        imgFooterActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 70, self.frame.size.width, 60) shouldShowShare:YES shouldShowMove:YES shouldShowDelete:YES shouldShowDownload:YES shouldShowPrint:YES];
        /* imgFooterActionMenu = [[FooterActionsMenuView alloc] initForPhotosTabWithFrame:frame
                                                                        shouldShowShare:YES
                                                                         shouldShowMove:YES
                                                                     shouldShowDownload:YES
                                                                       shouldShowDelete:YES
-                                                                       shouldShowPrint:YES]; */
+                                                                       shouldShowPrint:YES];
         imgFooterActionMenu = [[FooterActionsMenuView alloc] initForPhotosTabWithFrame:frame
                                                                        shouldShowShare:YES
                                                                         shouldShowMove:YES
                                                                     shouldShowDownload:YES
                                                                       shouldShowDelete:YES
                                                                        shouldShowPrint:YES
-                                                                           isMoveAlbum:NO];
+                                                                           isMoveAlbum:NO];*/
         imgFooterActionMenu.delegate = self;
         [self addSubview:imgFooterActionMenu];
     }
@@ -504,6 +504,10 @@
     }
 }
 
+- (void) footerActionMenuDidSelectDownload:(FooterActionsMenuView *) menu {
+    [delegate revisitedGroupedPhoto:self downloadSelectedFiles:selectedMetaFiles];
+}
+
 - (void) footerActionMenuDidSelectDelete:(FooterActionsMenuView *) menu {
     if([CacheUtil showConfirmDeletePageFlag]) {
         BOOL anyInAlbum = NO;
@@ -542,10 +546,6 @@
 - (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {
     [delegate revisitedGroupedPhoto:self triggerShareForFiles:selectedFileList];
    // [APPDELEGATE.base triggerShareForFiles:selectedFileList];
-}
-
--(void)footerActionMenuDidSelectDownload:(FooterActionsMenuView *)menu {
-    [delegate revisitedGroupedPhoto:self downloadSelectedFiles:selectedMetaFiles];
 }
 
 - (void) footerActionMenuDidSelectPrint:(FooterActionsMenuView *)menu {

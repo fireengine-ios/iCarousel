@@ -24,8 +24,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.isChecked = isInitiallyChecked;
-        self.checkedImage = [UIImage imageNamed:@"dont_show_blue_tick.png"];
-        self.uncheckedImage = [UIImage imageNamed:@"check_unchecked_icon.png"];
+        self.checkedImage = [UIImage imageNamed:@"checkbox_active.png"];
+        self.uncheckedImage = [UIImage imageNamed:@"checkbox_normal.png"];
         
         if(self.isChecked) {
             [self setImage:self.checkedImage forState:UIControlStateNormal];
@@ -44,8 +44,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.isChecked = isInitiallyChecked;
-        self.checkedImage = [UIImage imageNamed:@"dont_show_blue_tick.png"];
-        self.uncheckedImage = [UIImage imageNamed:@"check_unchecked_icon.png"];
+        self.checkedImage = [UIImage imageNamed:@"checkbox_active.png"];
+        self.uncheckedImage = [UIImage imageNamed:@"checkbox_normal.png"];
         
         bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, (self.frame.size.height - checkedImage.size.height)/2, checkedImage.size.width, checkedImage.size.height)];
         [self addSubview:bgImgView];
@@ -56,12 +56,13 @@
             bgImgView.image = self.uncheckedImage;
         }
 
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(bgImgView.frame.size.width + 10, (self.frame.size.height - 15)/2, self.frame.size.width - bgImgView.frame.size.width - 10, 15)];
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(bgImgView.frame.size.width + 10, (self.frame.size.height - 16)/2, self.frame.size.width - bgImgView.frame.size.width - 10, 17)];
         titleLabel.text = title;
         titleLabel.backgroundColor = [UIColor clearColor];
-        titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:11];
+        titleLabel.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:17];
         titleLabel.textAlignment = NSTextAlignmentLeft;
-        titleLabel.textColor = [Util UIColorForHexColor:@"787878"];
+        titleLabel.textColor = [Util UIColorForHexColor:@"363e4f"];
+        [titleLabel sizeToFit];
         [self addSubview:titleLabel];
 
         [self addTarget:self action:@selector(toggleWithBgView) forControlEvents:UIControlEventTouchUpInside];

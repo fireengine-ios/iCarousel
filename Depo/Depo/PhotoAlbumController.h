@@ -24,7 +24,7 @@
 - (void) photoAlbumDidChange:(NSString *) albumUuid;
 @end
 
-@interface PhotoAlbumController : MyViewController <SquareImageDelegate, FooterActionsDelegate, ImagePreviewDelegate, VideoPreviewDelegate, UIScrollViewDelegate, CurrentPhotoListModalDelegate> {
+@interface PhotoAlbumController : MyViewController <SquareImageDelegate, FooterActionsDelegate, ImagePreviewDelegate, VideoPreviewDelegate, UIScrollViewDelegate, CurrentPhotoListModalDelegate, ConfirmRemoveDelegate> {
     AlbumDetailDao *detailDao;
     RenameAlbumDao *renameDao;
     DeleteAlbumsDao *deleteDao;

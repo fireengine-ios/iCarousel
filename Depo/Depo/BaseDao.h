@@ -65,7 +65,7 @@
 
 #define FAVORITE_URL BASE_URL@"/filesystem/metadata"
 
-#define SHARE_LINK_URL BASE_URL@"/share/public"
+#define SHARE_LINK_URL BASE_URL@"/share/public/v2"
 
 //#define ADVANCED_SEARCH_URL BASE_URL@"/search/advancedSearch?name=%@&sortBy=%@&sortOrder=%@&from=%d&size=%d"
 #define ADVANCED_SEARCH_URL BASE_URL@"/search/unified?text=%@&sortBy=%@&sortOrder=%@&from=%d&size=%d"
@@ -199,6 +199,8 @@
 #define LDAP_LOCKED_ERROR_MESSAGE @"LDAP_LOCKED"
 
 #define EMAIL_NOT_VERIFIED_ERROR_MESSAGE @"EMAIL_NOT_VERIFIED"
+
+#define SIGNUP_REQUIRED_ERROR_MESSAGE @"SIGNUP_REQUIRED"
 
 #define NO_CONN_ERROR_MESSAGE @"İnternet erişiminizin aktif olduğuna ve Ayarlar/lifebox altında Hücresel Veri'nin açık olduğuna emin olun."
 

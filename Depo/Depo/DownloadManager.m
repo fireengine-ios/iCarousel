@@ -93,7 +93,7 @@
 #pragma mark - Download Photos/Videos To CameraRoll
 
 -(void)downloadFilesToCameraRoll {
-    if (currentDownloadIndex <= fileList.count) {
+    if (currentDownloadIndex < fileList.count) {
         MetaFile *file = [fileList objectAtIndex:currentDownloadIndex];
         if (file.contentType == ContentTypePhoto) {
             [self savePhotoFileToCameraRoll:file];

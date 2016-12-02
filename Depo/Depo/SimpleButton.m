@@ -66,9 +66,9 @@
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, (self.frame.size.height - 15)/2, self.frame.size.width, 15)];
         titleLabel.text = titleVal;
         titleLabel.backgroundColor = [UIColor clearColor];
-        titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:11];
+        titleLabel.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:11];
         titleLabel.textAlignment = NSTextAlignmentRight;
-        titleLabel.textColor = [Util UIColorForHexColor:@"787878"];
+        titleLabel.textColor = [Util UIColorForHexColor:@"363e4f"];
         [self addSubview:titleLabel];
     }
     return self;
@@ -79,7 +79,7 @@
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, (self.frame.size.height - 15)/2, self.frame.size.width, 15)];
         titleLabel.text = titleVal;
         titleLabel.backgroundColor = [UIColor clearColor];
-        titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:11];
+        titleLabel.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:17];
         titleLabel.textAlignment = alignment;
         titleLabel.textColor = [Util UIColorForHexColor:@"787878"];
         [self addSubview:titleLabel];
