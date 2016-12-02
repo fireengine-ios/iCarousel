@@ -8,6 +8,7 @@
 
 #import "ProcessFooterView.h"
 #import "Util.h"
+#import "AppDelegate.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation ProcessFooterView
@@ -127,6 +128,25 @@
                              }
                          }
                      }];
+}
+
+
+#pragma mark - Class Methods
+
++(void)showSuccessMessageOnWindow:(NSString *)successMessage {
+    CGRect windowFrame = APPDELEGATE.window.frame;
+    ProcessFooterView *processView = [[ProcessFooterView alloc] initWithFrame:CGRectMake(0, windowFrame.size.height - 60, windowFrame.size.width, 60) withProcessMessage:nil withFinalMessage:successMessage withFailMessage:nil];
+    [APPDELEGATE.window addSubview:processView];
+    [APPDELEGATE.window bringSubviewToFront:processView];
+    [processView showMessageForSuccess];
+}
+
++(void)showFailureMessageOnWindow:(NSString *)failureMessage {
+    CGRect windowFrame = APPDELEGATE.window.frame;
+    ProcessFooterView *processView = [[ProcessFooterView alloc] initWithFrame:CGRectMake(0, windowFrame.size.height - 60, windowFrame.size.width, 60) withProcessMessage:nil withFinalMessage:nil withFailMessage:failureMessage];
+    [APPDELEGATE.window addSubview:processView];
+    [APPDELEGATE.window bringSubviewToFront:processView];
+    [processView showMessageForFailure];
 }
 
     /*

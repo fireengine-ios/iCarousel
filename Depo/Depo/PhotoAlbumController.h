@@ -19,13 +19,12 @@
 #import "ImagePreviewController.h"
 #import "CurrentPhotoListModalController.h"
 #import "VideoPreviewController.h"
-#import "DownloadManager.h"
 
 @protocol PhotoAlbumDelegate <NSObject>
 - (void) photoAlbumDidChange:(NSString *) albumUuid;
 @end
 
-@interface PhotoAlbumController : MyViewController <SquareImageDelegate, FooterActionsDelegate, ImagePreviewDelegate, VideoPreviewDelegate, UIScrollViewDelegate, CurrentPhotoListModalDelegate, DownloadManagerDelegate> {
+@interface PhotoAlbumController : MyViewController <SquareImageDelegate, FooterActionsDelegate, ImagePreviewDelegate, VideoPreviewDelegate, UIScrollViewDelegate, CurrentPhotoListModalDelegate> {
     AlbumDetailDao *detailDao;
     RenameAlbumDao *renameDao;
     DeleteAlbumsDao *deleteDao;
@@ -46,7 +45,6 @@
     BOOL isSelectible;
     BOOL contentModified;
     
-    DownloadManager *downloadManager;
     
     MyNavigationController *printNav;
 }

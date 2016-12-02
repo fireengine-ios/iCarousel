@@ -8,36 +8,92 @@
 
 #import <Foundation/Foundation.h>
 #import "DownloadManager.h"
-
+#import "PhotoAlbum.h"
 
 @implementation DownloadManager
 
-
--(DownloadManager *)initWithDelegate:(id<DownloadManagerDelegate>)delegateOwner {
+-(DownloadManager *)initWithDelegate:(id<DownloadManagerDelegate>)delegateOwner
+                        downloadType:(enum DownloadType) type
+                      successMessage:(NSString *)successMesage
+                         failMessage:(NSString *)failMessage {
     self = [super init];
     if (self) {
         self.delegate = delegateOwner;
+        self.downloadType = type;
+        self.successMessage = successMesage;
+        self.failMessage = failMessage;
     }
     
     return self;
 }
 
 -(void)downloadListOfFilesToCameraRoll:(NSArray *)metaFiles {
-    fileList = metaFiles;
+    fileList = [[NSMutableArray alloc] initWithArray:metaFiles];
     [self downloadFilesToCameraRoll];
 }
 
--(void)createAlbumName:(NSString *)albumName downloadFilesToAlbum:(NSArray *)metaFiles {
-    fileList = metaFiles;
+
+
+#pragma mark - Album files Fetch
+
+-(void)createAlbumName:(NSString *)albumName albumUUID:(NSString *)albumUuid downloadFilesToAlbum:(NSArray *)metaFiles {
+    fileList = [[NSMutableArray alloc] initWithArray:metaFiles];
+    albumUUID = albumUuid;
+    [self initAlbumDetailDao];
     [self createAlbumInPhotoAlbum:albumName];
 }
 
+-(void)initAlbumDetailDao {
+    albumDetailDao = [[AlbumDetailDao alloc] init];
+    albumDetailDao.delegate = self;
+    albumDetailDao.successMethod = @selector(albumDetailSuccessCallback:);
+    albumDetailDao.failMethod = @selector(albumDetailFailCallback:);
+}
 
 
-#pragma mark - Download Photos/Videos To CameraRoll 
+-(void)fetchOtherFilesOfAlbum {
+    if (fileList.count < 20) { // album has less than 20 items
+        [self.delegate downloadManagerDidFinishDownloading:self error:nil];
+        return;
+    }else if ((fileList.count % 20) > 0) { // album has 47 items
+        [self.delegate downloadManagerDidFinishDownloading:self error:nil];
+        return;
+    }
+    
+    albumDownloadListIndex = (int)fileList.count / 20;
+    [albumDetailDao requestDetailOfAlbum:albumUUID forStart:albumDownloadListIndex andSize:20];
+}
+
+- (void) albumDetailSuccessCallback:(PhotoAlbum *) albumWithUpdatedContent {
+    for (MetaFile *file in albumWithUpdatedContent.content) {
+        if (![self isFileAlreadyDownloaded:file]) {
+            [fileList addObject:file];
+        }
+    }
+    
+    [self downloadAlbumPhotosToDevice];
+}
+
+-(BOOL)isFileAlreadyDownloaded:(MetaFile *)file {
+    for (MetaFile *fileInTheList in fileList) {
+        if ([fileInTheList.uuid isEqualToString:file.uuid]) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+- (void) albumDetailFailCallback:(NSString *) errorMessage {
+    NSMutableDictionary* details = [NSMutableDictionary dictionary];
+    [details setValue:@"Couldn't fetch album files from api" forKey:NSLocalizedDescriptionKey];
+    NSError *error = [NSError errorWithDomain:@"Fetching album photos fail" code:400 userInfo:details];
+    [self.delegate downloadManagerDidFinishDownloading:self error:error];
+}
+
+#pragma mark - Download Photos/Videos To CameraRoll
 
 -(void)downloadFilesToCameraRoll {
-    if (currentDownloadIndex < fileList.count) {
+    if (currentDownloadIndex <= fileList.count) {
         MetaFile *file = [fileList objectAtIndex:currentDownloadIndex];
         if (file.contentType == ContentTypePhoto) {
             [self savePhotoFileToCameraRoll:file];
@@ -151,6 +207,7 @@
 #pragma mark - Download Photos/Videos To Album
 
 -(void)downloadAlbumPhotosToDevice {
+    NSLog(@"downloadAlbumPhotosToDevice - currentDownloadIndex: %d", currentDownloadIndex);
     if (currentDownloadIndex < fileList.count) {
         MetaFile *file = [fileList objectAtIndex:currentDownloadIndex];
         if (file.contentType == ContentTypePhoto) {
@@ -160,6 +217,9 @@
         }
         
         currentDownloadIndex++;
+    }else if(currentDownloadIndex == fileList.count) {
+        NSLog(@"[self fetchOtherFilesOfAlbum]");
+        [self fetchOtherFilesOfAlbum];
     }else {
         [self.delegate downloadManagerDidFinishDownloading:self error:nil];
     }
@@ -180,7 +240,7 @@
                                    if (error) {
                                        NSLog(@"Save Image To Album Error: %@", error.description);
                                    }else {
-                                       NSLog(@"Save Image To Album Success");
+                                       NSLog(@"Save Image To Album Success uuid:%@", file.uuid);
                                    }
                                    [self didFinishSavingFileToAlbum:file error:error];
                                }];
@@ -226,15 +286,16 @@
                             PHAssetCollectionChangeRequest *albumChangeRequest = [PHAssetCollectionChangeRequest changeRequestForAssetCollection:albumAssetCollection];
                             [albumChangeRequest addAssets:@[assetPlaceHolder]];
                         } completionHandler:^(BOOL success, NSError * _Nullable error) {
+                            if (error) {
+                                NSLog(@"Save Video To Album Error: %@", error.description);
+                            }else {
+                                NSLog(@"Save Video To Album Success uuid:%@", file.uuid);
+                            }
                             [self didFinishSavingVideoFileToAlbum:file videoPath:tempURL.path error:error];
                         }];
                     });
                 }else {
-        //            NSMutableDictionary* details = [NSMutableDictionary dictionary];
-        //            [details setValue:@"Couldn't move downloaded video location to temp file" forKey:NSLocalizedDescriptionKey];
-        //            NSError *error = [NSError errorWithDomain:@"Video Location" code:400 userInfo:details];
                     [self didFinishSavingVideoFileToAlbum:file videoPath:tempURL.path error:error];
-                  //  [self didFinishSavingFileToAlbum:file error:error];
                 }
             }
             else {
@@ -242,8 +303,6 @@
                 [details setValue:@"Couldn't find downloaded video location" forKey:NSLocalizedDescriptionKey];
                 NSError *error = [NSError errorWithDomain:@"Video Location" code:400 userInfo:details];
                 [self didFinishSavingFileToAlbum:file error:error];
-
-                //[self showErrorAlertWithMessage:NSLocalizedString(@"DownloadVideoFailMessage", @"")];
             }
         }
     }];
@@ -251,11 +310,8 @@
 }
 
 - (void)didFinishSavingFileToAlbum:(MetaFile *)file error:(NSError *)error {
-    [self downloadAlbumPhotosToDevice];
     [self.delegate downloadManager:self didFinishSavingFile:file error:error];
-    if(currentDownloadIndex == fileList.count) {
-        [self.delegate downloadManagerDidFinishDownloading:self error:nil];
-    }
+    [self downloadAlbumPhotosToDevice];
 }
 
 -(void)didFinishSavingVideoFileToAlbum:(MetaFile *)file videoPath:(NSString *)videoPath error:(NSError *)error {
@@ -265,6 +321,7 @@
     }
     @catch (NSException *exception) {}
     @finally {
+        
         [self didFinishSavingFileToAlbum:file error:error];
     }
 }

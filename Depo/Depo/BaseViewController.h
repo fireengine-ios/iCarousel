@@ -18,8 +18,11 @@
 #import "SyncInfoHeaderView.h"
 #import "CustomConfirmView.h"
 #import "AccurateLocationManager.h"
+#import "DownloadManager.h"
 
-@interface BaseViewController : UIViewController <SlidingMenuDelegate, SlidingMenuCloseDelegate, MyViewDelegate, FloatingAddButtonDelegate, FloatingAddDelegate, UIGestureRecognizerDelegate, CustomConfirmDelegate, AccurateLocationManagerDelegate>
+@interface BaseViewController : UIViewController <SlidingMenuDelegate, SlidingMenuCloseDelegate, MyViewDelegate, FloatingAddButtonDelegate, FloatingAddDelegate, UIGestureRecognizerDelegate, CustomConfirmDelegate, AccurateLocationManagerDelegate, DownloadManagerDelegate> {
+    DownloadManager *downloadManager;
+}
 
 @property (nonatomic, strong) UIScrollView *scroll;
 @property (nonatomic, strong) UIView *transparentView;
@@ -72,4 +75,14 @@
 - (void) didTriggerHome;
 - (void) triggerInnerSearch;
 
+
+#pragma mark - Downloading to Photos
+
+-(void)createAlbum:(NSString *)albumName
+         albumUUID:(NSString *)albumUUID
+downloadFilesToAlbum:(NSArray *)files
+    successMessage:(NSString *)successMessage
+       failMessage:(NSString *)failMessage;
+
+-(void)downloadFilesToCameraRoll:(NSArray *)files successMessage:(NSString *)successMessage failMessage:(NSString *)failMessage;
 @end

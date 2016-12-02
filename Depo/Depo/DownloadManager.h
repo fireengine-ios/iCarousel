@@ -10,6 +10,13 @@
 #import <Foundation/Foundation.h>
 #import <Photos/Photos.h>
 #import "MetaFile.h"
+#import "AlbumDetailDao.h"
+
+
+enum DownloadType {
+    DownloadTypeAlbum = 1,
+    DownloadTypeListOfFiles
+};
 
 @class DownloadManager;
 @protocol DownloadManagerDelegate
@@ -24,14 +31,24 @@
     PHAssetCollection *albumAssetCollection;
     PHObjectPlaceholder *albumAssetCollectionPlaceHolder;
     int currentDownloadIndex;
-    NSArray *fileList;
+    NSMutableArray *fileList;
+    
+    int albumDownloadListIndex;
+    NSString *albumUUID;
+    AlbumDetailDao *albumDetailDao;
 }
 
 @property (nonatomic, assign) id<DownloadManagerDelegate> delegate;
+@property (nonatomic, assign) enum DownloadType downloadType;
+@property (nonatomic, strong) NSString *successMessage;
+@property (nonatomic, strong) NSString *failMessage;
 
--(DownloadManager *)initWithDelegate:(id<DownloadManagerDelegate>)delegateOwner;
+-(DownloadManager *)initWithDelegate:(id<DownloadManagerDelegate>)delegateOwner
+                        downloadType:(enum DownloadType) type
+                      successMessage:(NSString *)successMesage
+                         failMessage:(NSString *)failMessage;
 
 -(void)downloadListOfFilesToCameraRoll:(NSArray *)metaFiles;
+-(void)createAlbumName:(NSString *)albumName albumUUID:(NSString *)albumUuid downloadFilesToAlbum:(NSArray *)metaFiles;
 
--(void)createAlbumName:(NSString *)albumName downloadFilesToAlbum:(NSArray *)metaFiles;
 @end

@@ -1005,4 +1005,56 @@
     [self presentViewController:modalNav animated:YES completion:nil];
 }
 
+
+
+
+
+#pragma mark - Downloading to Photos 
+
+-(void)createAlbum:(NSString *)albumName
+         albumUUID:(NSString *)albumUUID
+downloadFilesToAlbum:(NSArray *)files
+    successMessage:(NSString *)successMessage
+       failMessage:(NSString *)failMessage {
+    downloadManager = [[DownloadManager alloc] initWithDelegate:self
+                                                                    downloadType:DownloadTypeAlbum
+                                                                  successMessage:successMessage
+                                                                     failMessage:failMessage];
+    [downloadManager createAlbumName:albumName albumUUID:albumUUID downloadFilesToAlbum:files];
+}
+
+-(void)downloadFilesToCameraRoll:(NSArray *)files successMessage:(NSString *)successMessage failMessage:(NSString *)failMessage {
+    downloadManager = [[DownloadManager alloc] initWithDelegate:self
+                                                                    downloadType:DownloadTypeListOfFiles
+                                                                  successMessage:successMessage
+                                                                     failMessage:failMessage];
+    [downloadManager downloadListOfFilesToCameraRoll:files];
+}
+
+#pragma mark - Download Manager Delegate
+
+-(void)downloadManager:(DownloadManager *)manager albumAlreadyExistNamed:(NSString *)albumName assetCollection:(PHAssetCollection *)assetCollection {
+    
+}
+
+-(void)downloadManager:(DownloadManager *)manager newAlbumCreatedNamed:(NSString *)albumName assetCollection:(PHAssetCollection *)assetCollection {
+    
+}
+
+-(void)downloadManager:(DownloadManager *)manager createAlbumError:(NSError *)error {
+    
+}
+
+-(void)downloadManager:(DownloadManager *)manager didFinishSavingFile:(MetaFile *)file error:(NSError *)error {
+    
+}
+
+-(void)downloadManagerDidFinishDownloading:(DownloadManager *)manager error:(NSError *)error {
+    if (error) {
+        [ProcessFooterView showFailureMessageOnWindow:manager.failMessage];
+    }else {
+        [ProcessFooterView showSuccessMessageOnWindow:manager.successMessage];
+    }
+}
+
 @end

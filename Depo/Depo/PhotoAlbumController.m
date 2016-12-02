@@ -406,8 +406,11 @@
                            andSuccessMessage:NSLocalizedString(@"DownloadAlbumSuccessMessage", @"")
                               andFailMessage:NSLocalizedString(@"DownloadAlbumFailMessage", @"")];
     
-    downloadManager = [[DownloadManager alloc] initWithDelegate:self];
-    [downloadManager createAlbumName:self.album.label downloadFilesToAlbum:photoList];
+    [APPDELEGATE.base createAlbum:self.album.label
+                        albumUUID:self.album.uuid
+             downloadFilesToAlbum:photoList
+                   successMessage:NSLocalizedString(@"DownloadAlbumSuccessMessage", @"")
+                      failMessage:NSLocalizedString(@"DownloadAlbumFailMessage", @"")];
 }
 
 - (void) moreMenuDidSelectAlbumDelete {
@@ -603,10 +606,9 @@
 }
 
 - (void) footerActionMenuDidSelectDownload:(FooterActionsMenuView *)menu {
-    if (!downloadManager) {
-        downloadManager = [[DownloadManager alloc] initWithDelegate:self];
-    }
-    [downloadManager downloadListOfFilesToCameraRoll:selectedFileList];
+    NSString *failMessage = NSLocalizedString(@"DownloadImagesFailMessage", @"");
+    NSString *successMessage = NSLocalizedString(@"DownloadImagesSuccessMessage", @"");
+    [APPDELEGATE.base downloadFilesToCameraRoll:selectedFileList successMessage:successMessage failMessage:failMessage];
 }
 
 - (void) footerActionMenuDidSelectPrint:(FooterActionsMenuView *)menu {
@@ -855,37 +857,6 @@
 
 - (void) photoModalListReturnedWithSelectedList:(NSArray *)uuids {
     [albumAddPhotosDao requestAddPhotos:uuids toAlbum:self.album.uuid];
-}
-
-
-#pragma mark - Download Manager Delegate
-
--(void)downloadManager:(DownloadManager *)manager albumAlreadyExistNamed:(NSString *)albumName assetCollection:(PHAssetCollection *)assetCollection {
-}
-
--(void)downloadManager:(DownloadManager *)manager newAlbumCreatedNamed:(NSString *)albumName assetCollection:(PHAssetCollection *)assetCollection {
-}
-
--(void)downloadManager:(DownloadManager *)manager createAlbumError:(NSError *)error {
-    [self proceedFailureForProgressView];
-}
-
--(void)downloadManager:(DownloadManager *)manager didFinishSavingFile:(MetaFile *)file error:(NSError *)error {
-    if (error) {
-        NSLog(@"didFinishSavingFile error: %@", error.description);
-    }else {
-        NSLog(@"didFinishSavingFile success");
-    }
-}
-
--(void)downloadManagerDidFinishDownloading:(DownloadManager *)manager error:(NSError *)error {
-    if (error) {
-      //  [ProcessFooterView showFailureMessageOnWindow:NSLocalizedString(@"DownloadAlbumFailMessage", @"")];
-        [self proceedFailureForProgressView];
-    }else {
-      //  [ProcessFooterView showSuccessMessageOnWindow:NSLocalizedString(@"DownloadAlbumSuccessMessage", @"")];
-        [self proceedSuccessForProgressView];
-    }
 }
 
 - (void) viewWillAppear:(BOOL)animated {

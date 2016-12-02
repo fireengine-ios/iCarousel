@@ -257,11 +257,12 @@
 }
 
 -(void)revisitedGroupedPhoto:(RevisitedGroupedPhotoView *)view downloadSelectedFiles:(NSArray *)selectedFiles {
+    NSString *successMessage = NSLocalizedString(@"DownloadPhotoSuccessMessage", @"");
+    NSString *failMessage = NSLocalizedString(@"DownloadPhotoFailMessage", @"");
     [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DownloadPhotoProgressMessage", @"")
-                           andSuccessMessage:NSLocalizedString(@"DownloadPhotoSuccessMessage", @"")
-                              andFailMessage:NSLocalizedString(@"DownloadPhotoFailMessage", @"")];
-    downloadManager = [[DownloadManager alloc] initWithDelegate:self];
-    [downloadManager downloadListOfFilesToCameraRoll:selectedFiles];
+                           andSuccessMessage:successMessage
+                              andFailMessage:failMessage];
+    [APPDELEGATE.base downloadFilesToCameraRoll:selectedFiles successMessage:successMessage failMessage:failMessage];
 }
 
 - (void) revisitedGroupedPhotoDidChangeToSelectState {
