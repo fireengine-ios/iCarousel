@@ -486,12 +486,9 @@
     if(footerActionMenu) {
         footerActionMenu.hidden = NO;
     } else {
-        footerActionMenu = [[PhotoAlbumFooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60)];
+        footerActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60) shouldShowShare:YES shouldShowMove:YES shouldShowDelete:NO shouldShowRemove:YES shouldShowDownload:YES shouldShowPrint:YES];
         footerActionMenu.delegate = self;
         [self.view addSubview:footerActionMenu];
-//        footerActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60) shouldShowShare:YES shouldShowMove:YES shouldShowDelete:YES shouldShowPrint:YES];
-//        footerActionMenu.delegate = self;
-//        [self.view addSubview:footerActionMenu];
     }
 }
 
@@ -543,11 +540,11 @@
 
 #pragma mark FooterMenuDelegate methods
 
-- (void) footerActionMenuDidSelectDownload:(PhotoAlbumFooterActionsMenuView *) menu {
+- (void) footerActionMenuDidSelectDownload:(FooterActionsMenuView *) menu {
     
 }
 
-- (void) footerActionMenuDidSelectRemove:(PhotoAlbumFooterActionsMenuView *) menu {
+- (void) footerActionMenuDidSelectRemove:(FooterActionsMenuView *) menu {
     if([CacheUtil showConfirmDeletePageFlag]) {
         for(UIView *innerView in [photosScroll subviews]) {
             if([innerView isKindOfClass:[SquareImageView class]]) {
@@ -565,7 +562,7 @@
     }
 }
 
-- (void) footerActionMenuDidSelectMove:(PhotoAlbumFooterActionsMenuView *) menu {
+- (void) footerActionMenuDidSelectMove:(FooterActionsMenuView *) menu {
     [MoreMenuView presentPhotoAlbumsFromController:self.nav delegateOwner:self];
 }
 
@@ -577,7 +574,7 @@
 
 
 
-- (void) footerActionMenuDidSelectShare:(PhotoAlbumFooterActionsMenuView *) menu {
+- (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {
     MetaFile *shareObject = [[MetaFile alloc] init];
     if ([selectedFileList count] == 1) {
         for (id fileIndex in photoList) {
@@ -597,7 +594,7 @@
     //[APPDELEGATE.base triggerShareForFiles:selectedFileList];
 }
 
-- (void) footerActionMenuDidSelectPrint:(PhotoAlbumFooterActionsMenuView *)menu {
+- (void) footerActionMenuDidSelectPrint:(FooterActionsMenuView *)menu {
     NSMutableArray *printList = [[NSMutableArray alloc] init];
     for (int i = 0; i<[photoList count]; i++) {
         if([[photoList objectAtIndex:i] isKindOfClass:[MetaFile class]]) {

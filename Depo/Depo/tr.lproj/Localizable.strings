@@ -654,6 +654,7 @@
 "TOO_MANY_INVALID_ATTEMPTS"="Çok sayıda hatalı giriş yaptınız. Lütfen yeni bir doğrulama kodu isteyiniz.";
 "CannotChangeEmail"="E-Posta adresinizi değiştirmenize izin verilmemektedir.";
 "LdapLockedError"="Çok fazla sayıda hatalı giriş yaptınız. Lütfen 1 saat sonra tekrar deneyiniz.";
+"SignUpRequiredError" = "Lifebox'ta kayıtlı bir kullanıcınız bulunmamaktadır, lütfen kayıt olunuz.";
 
 "WelcomePackageName"="Hoşgeldin (%@)";
 

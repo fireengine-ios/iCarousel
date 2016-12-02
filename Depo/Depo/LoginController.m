@@ -242,6 +242,8 @@
         [self showErrorAlertWithMessage:NSLocalizedString(@"EmailNotVerifiedError", @"")];
     } else if([errorMessage isEqualToString:LDAP_LOCKED_ERROR_MESSAGE]) {
         [self showErrorAlertWithMessage:NSLocalizedString(@"LdapLockedError", @"")];
+    } else if([errorMessage isEqualToString:SIGNUP_REQUIRED_ERROR_MESSAGE]) {
+        [self showErrorAlertWithMessage:NSLocalizedString(@"SignUpRequiredError", @"")];
     } else {
         [self showErrorAlertWithMessage:NSLocalizedString(@"LoginError", @"")];
         if(![captchaField isHidden]) {

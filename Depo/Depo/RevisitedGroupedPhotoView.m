@@ -416,7 +416,7 @@
     if(imgFooterActionMenu) {
         imgFooterActionMenu.hidden = NO;
     } else {
-        imgFooterActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 60, self.frame.size.width, 60) shouldShowShare:YES shouldShowMove:YES shouldShowDelete:YES shouldShowPrint:YES];
+        imgFooterActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 70, self.frame.size.width, 60) shouldShowShare:YES shouldShowMove:YES shouldShowDelete:YES shouldShowDownload:YES shouldShowPrint:YES];
         imgFooterActionMenu.delegate = self;
         [self addSubview:imgFooterActionMenu];
     }
@@ -482,6 +482,10 @@
         [self bringSubviewToFront:progress];
         [progress show:YES];
     }
+}
+
+- (void) footerActionMenuDidSelectDownload:(FooterActionsMenuView *) menu {
+    
 }
 
 - (void) footerActionMenuDidSelectDelete:(FooterActionsMenuView *) menu {

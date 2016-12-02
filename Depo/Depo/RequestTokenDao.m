@@ -129,8 +129,6 @@
         
 //        NSLog(@"Auth Token Response Headers: %@", headerParams);
         NSLog(@"TOKEN: %@", authToken);
-        
-      //  [AppUtil increaseLoginCount];
 
         if(newUserFlag != nil && ![newUserFlag isKindOfClass:[NSNull class]]) {
             APPDELEGATE.session.newUserFlag = [newUserFlag boolValue];
@@ -212,6 +210,10 @@
                 return;
             } else if([errorCode intValue] == 10) {
                 SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:LDAP_LOCKED_ERROR_MESSAGE]);
+                return;
+            }
+            else if([errorCode intValue] == 4101) {
+                SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:SIGNUP_REQUIRED_ERROR_MESSAGE]);
                 return;
             }
         }
