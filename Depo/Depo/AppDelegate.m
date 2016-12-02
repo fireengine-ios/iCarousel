@@ -253,8 +253,9 @@
     } else {
         if([ReachabilityManager isReachableViaWiFi]
            || ![self isTurkcell]) {
-            WelcomeController *welcomePage = [[WelcomeController alloc] init];
-            MyNavigationController *welcomeNav = [[MyNavigationController alloc] initWithRootViewController:welcomePage];
+            //WelcomeController *welcomePage = [[WelcomeController alloc] init];
+            LoginController *loginController = [[LoginController alloc] init];
+            MyNavigationController *welcomeNav = [[MyNavigationController alloc] initWithRootViewController:loginController];
             self.window.rootViewController = welcomeNav;
         } else if([ReachabilityManager isReachableViaWWAN]) {
             [self.window.rootViewController.view removeFromSuperview];
@@ -267,8 +268,9 @@
 - (void) triggerLogin {
     if([ReachabilityManager isReachableViaWiFi] || ![self isTurkcell]) {
         IGLog(@"AppDelegate Welcome Screen triggered");
-        WelcomeController *welcomePage = [[WelcomeController alloc] init];
-        MyNavigationController *welcomeNav = [[MyNavigationController alloc] initWithRootViewController:welcomePage];
+        //WelcomeController *welcomePage = [[WelcomeController alloc] init];
+        LoginController *loginController = [[LoginController alloc] init];
+        MyNavigationController *welcomeNav = [[MyNavigationController alloc] initWithRootViewController:loginController];
         self.window.rootViewController = welcomeNav;
     } else if([ReachabilityManager isReachableViaWWAN]) {
         IGLog(@"AppDelegate Radius Login triggered");
@@ -418,8 +420,9 @@
     [CacheUtil resetRememberMeToken];
     [[UploadQueue sharedInstance] cancelAllUploads];
 
-    WelcomeController *welcomePage = [[WelcomeController alloc] init];
-    MyNavigationController *welcomeNav = [[MyNavigationController alloc] initWithRootViewController:welcomePage];
+//    WelcomeController *welcomePage = [[WelcomeController alloc] init];
+    LoginController *loginController = [[LoginController alloc] init];
+    MyNavigationController *welcomeNav = [[MyNavigationController alloc] initWithRootViewController:loginController];
     self.window.rootViewController = welcomeNav;
 }
 
@@ -434,8 +437,9 @@
     if([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground) {
         [self.window setRootViewController:[[BaseBgController alloc] init]];
     } else {
-        WelcomeController *welcomePage = [[WelcomeController alloc] init];
-        MyNavigationController *welcomeNav = [[MyNavigationController alloc] initWithRootViewController:welcomePage];
+//        WelcomeController *welcomePage = [[WelcomeController alloc] init];
+        LoginController *loginController = [[LoginController alloc] init];
+        MyNavigationController *welcomeNav = [[MyNavigationController alloc] initWithRootViewController:loginController];
         self.window.rootViewController = welcomeNav;
     }
 }

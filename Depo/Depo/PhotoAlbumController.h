@@ -13,7 +13,8 @@
 #import "DeleteAlbumsDao.h"
 #import "AlbumRemovePhotosDao.h"
 #import "SquareImageView.h"
-#import "FooterActionsMenuView.h"
+#import "PhotoAlbumFooterActionsMenuView.h"
+//#import "FooterActionsMenuView.h"
 #import "ShareLinkDao.h"
 #import "AddAlbumDao.h"
 #import "ImagePreviewController.h"
@@ -24,7 +25,7 @@
 - (void) photoAlbumDidChange:(NSString *) albumUuid;
 @end
 
-@interface PhotoAlbumController : MyViewController <SquareImageDelegate, FooterActionsDelegate, ImagePreviewDelegate, VideoPreviewDelegate, UIScrollViewDelegate, CurrentPhotoListModalDelegate> {
+@interface PhotoAlbumController : MyViewController <SquareImageDelegate, PhotoAlbumFooterActionsDelegate, ImagePreviewDelegate, VideoPreviewDelegate, UIScrollViewDelegate, CurrentPhotoListModalDelegate, ConfirmRemoveDelegate> {
     AlbumDetailDao *detailDao;
     RenameAlbumDao *renameDao;
     DeleteAlbumsDao *deleteDao;
@@ -55,7 +56,8 @@
 
 @property (nonatomic, strong) NSMutableArray *selectedFileList;
 @property (nonatomic, strong) NSMutableArray *selectedFileLinkList;
-@property (nonatomic, strong) FooterActionsMenuView *footerActionMenu;
+@property (nonatomic, strong) PhotoAlbumFooterActionsMenuView *footerActionMenu;
+//@property (nonatomic, strong) FooterActionsMenuView *footerActionMenu;
 @property (nonatomic, strong) UIRefreshControl *refreshControlPhotos;
 
 

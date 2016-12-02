@@ -11,6 +11,7 @@
 #import "PhotoAlbum.h"
 
 #import "ConfirmDeleteModalController.h"
+#import "ConfirmRemoveModalController.h"
 #import "SortModalController.h"
 #import "MoveListModalController.h"
 #import "PhotoAlbumListModalController.h"
@@ -55,6 +56,8 @@
 
 
 +(void)presentConfirmDeleteFromController:(UIViewController *)controller delegateOwner:(id<ConfirmDeleteDelegate>)delegateOwner;
++(void)presentConfirmDeleteFromController:(UIViewController *)controller delegateOwner:(id<ConfirmDeleteDelegate>)delegateOwner withMessage:(NSString*)message;
++(void)presentConfirmRemoveFromController:(UIViewController *)controller delegateOwner:(id<ConfirmRemoveDelegate>)delegateOwner;
 +(void)presentSortFromController:(UIViewController *)controller delegateOwner:(id<SortModalDelegate>)delegateOwner;
 +(void)presnetSortWithList:(NSArray *)sortTypeList
             fromController:(UIViewController *)controller

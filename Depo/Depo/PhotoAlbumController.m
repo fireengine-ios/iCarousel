@@ -379,9 +379,9 @@
         [moreMenuView removeFromSuperview];
         moreMenuView = nil;
     } else {
-        NSArray *menuContent = @[[NSNumber numberWithInt:MoreMenuTypeAlbumDetail], [NSNumber numberWithInt:MoreMenuTypeAlbumDelete], [NSNumber numberWithInt:MoreMenuTypeSelect]];
+        NSArray *menuContent = @[[NSNumber numberWithInt:MoreMenuTypeAlbumDetail], [NSNumber numberWithInt:MoreMenuTypeAlbumShare], [NSNumber numberWithInt:MoreMenuTypeAlbumDelete], [NSNumber numberWithInt:MoreMenuTypeSelect]];
         if(self.album.isReadOnly) {
-            menuContent = @[[NSNumber numberWithInt:MoreMenuTypeAlbumDetail], [NSNumber numberWithInt:MoreMenuTypeSelect]];
+            menuContent = @[[NSNumber numberWithInt:MoreMenuTypeAlbumDetail], [NSNumber numberWithInt:MoreMenuTypeAlbumShare], [NSNumber numberWithInt:MoreMenuTypeSelect]];
         }
         moreMenuView = [[MoreMenuView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height-64) withList:menuContent withFileFolder:nil withAlbum:self.album];
         moreMenuView.delegate = self;
@@ -397,7 +397,8 @@
 }
 
 - (void) moreMenuDidSelectAlbumShare {
-    [self triggerShareForFiles:@[self.album.uuid]];
+    [shareDao requestLinkForFiles:@[self.album.uuid] isAlbum:true];
+    [APPDELEGATE.base showBaseLoading];
 }
 
 - (void) moreMenuDidSelectAlbumDelete {
@@ -406,7 +407,8 @@
         [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteAlbumProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteAlbumSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteAlbumFailMessage", @"")];
     } else {
         self.deleteType = DeleteTypeMoreMenu;
-        [MoreMenuView presentConfirmDeleteFromController:self.nav delegateOwner:self];
+        [MoreMenuView presentConfirmDeleteFromController:self.nav delegateOwner:self withMessage:@"ConfirmDeleteAlbumMessage"];
+//        [MoreMenuView presentConfirmDeleteFromController:self.nav delegateOwner:self];
     }
 }
 
@@ -445,8 +447,10 @@
     }
     if([selectedFileList count] > 0) {
         [self showFooterMenu];
+        titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]];
     } else {
         [self hideFooterMenu];
+        titleLabel.text = self.album.label;
     }
 }
 
@@ -456,10 +460,10 @@
     }
     if([selectedFileList count] > 0) {
         [self showFooterMenu];
-        self.title = [NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]];
+        titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]];
     } else {
         [self hideFooterMenu];
-        self.title = NSLocalizedString(@"SelectFilesTitle", @"");
+        titleLabel.text = self.album.label;
     }
 }
 
@@ -482,9 +486,12 @@
     if(footerActionMenu) {
         footerActionMenu.hidden = NO;
     } else {
-        footerActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60) shouldShowShare:YES shouldShowMove:YES shouldShowDelete:YES shouldShowPrint:YES];
+        footerActionMenu = [[PhotoAlbumFooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60)];
         footerActionMenu.delegate = self;
         [self.view addSubview:footerActionMenu];
+//        footerActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60) shouldShowShare:YES shouldShowMove:YES shouldShowDelete:YES shouldShowPrint:YES];
+//        footerActionMenu.delegate = self;
+//        [self.view addSubview:footerActionMenu];
     }
 }
 
@@ -512,7 +519,8 @@
 }
 
 - (void) cancelSelectible {
-    self.title = NSLocalizedString(@"PhotosTitle", @"");
+    titleLabel.text = album.label;
+//    self.title = NSLocalizedString(@"PhotosTitle", @"");
     if(cancelButton) {
         [cancelButton removeFromSuperview];
     }
@@ -535,9 +543,11 @@
 
 #pragma mark FooterMenuDelegate methods
 
+- (void) footerActionMenuDidSelectDownload:(PhotoAlbumFooterActionsMenuView *) menu {
+    
+}
 
-
-- (void) footerActionMenuDidSelectDelete:(FooterActionsMenuView *) menu {
+- (void) footerActionMenuDidSelectRemove:(PhotoAlbumFooterActionsMenuView *) menu {
     if([CacheUtil showConfirmDeletePageFlag]) {
         for(UIView *innerView in [photosScroll subviews]) {
             if([innerView isKindOfClass:[SquareImageView class]]) {
@@ -548,16 +558,14 @@
             }
         }
         [deleteImgDao requestRemovePhotos:selectedFileList fromAlbum:self.album.uuid];
-        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
+        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"RemoveProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"RemoveSuccessMessage", @"") andFailMessage:NSLocalizedString(@"RemoveFailMessage", @"")];
     } else {
         self.deleteType = DeleteTypeFooterMenu;
-        //TakingBack RemoveFromAlbum
-        [APPDELEGATE.base showConfirmRemove];
-        [MoreMenuView presentConfirmDeleteFromController:self.nav delegateOwner:self];
+        [MoreMenuView presentConfirmRemoveFromController:self.nav delegateOwner:self];
     }
 }
 
-- (void) footerActionMenuDidSelectMove:(FooterActionsMenuView *) menu {
+- (void) footerActionMenuDidSelectMove:(PhotoAlbumFooterActionsMenuView *) menu {
     [MoreMenuView presentPhotoAlbumsFromController:self.nav delegateOwner:self];
 }
 
@@ -569,7 +577,7 @@
 
 
 
-- (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {
+- (void) footerActionMenuDidSelectShare:(PhotoAlbumFooterActionsMenuView *) menu {
     MetaFile *shareObject = [[MetaFile alloc] init];
     if ([selectedFileList count] == 1) {
         for (id fileIndex in photoList) {
@@ -589,7 +597,7 @@
     //[APPDELEGATE.base triggerShareForFiles:selectedFileList];
 }
 
-- (void) footerActionMenuDidSelectPrint:(FooterActionsMenuView *)menu {
+- (void) footerActionMenuDidSelectPrint:(PhotoAlbumFooterActionsMenuView *)menu {
     NSMutableArray *printList = [[NSMutableArray alloc] init];
     for (int i = 0; i<[photoList count]; i++) {
         if([[photoList objectAtIndex:i] isKindOfClass:[MetaFile class]]) {
@@ -675,6 +683,7 @@
 #pragma mark ShareLinkDao Delegate Methods
 - (void) shareSuccessCallback:(NSString *) linkToShare {
     [self hideLoading];
+    [APPDELEGATE.base hideBaseLoading];
     NSArray *activityItems = [NSArray arrayWithObjects:linkToShare, nil];
     
     UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
@@ -693,6 +702,7 @@
 
 - (void) shareFailCallback:(NSString *) errorMessage {
     [self hideLoading];
+    [APPDELEGATE.base hideBaseLoading];
 }
 
 
@@ -708,23 +718,8 @@
         [deleteDao requestDeleteAlbums:@[self.album.uuid]];
         [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteAlbumProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteAlbumSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteAlbumFailMessage", @"")];
     }
-    //TakingBack RemoveFromAlbum (eklendi)
-//    else if(self.deleteType == DeleteTypeFooterMenu) {
-//        for(UIView *innerView in [photosScroll subviews]) {
-//            if([innerView isKindOfClass:[SquareImageView class]]) {
-//                SquareImageView *sqView = (SquareImageView *) innerView;
-//                if([selectedFileList containsObject:sqView.file.uuid]) {
-//                    [sqView showProgressMask];
-//                }
-//            }
-//        }
-//        [deleteImgDao requestRemovePhotos:selectedFileList fromAlbum:self.album.uuid];
-//        [self pushProgressViewWithProcessMessage:NSLocalizedString(@"RemoveProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"RemoveSuccessMessage", @"") andFailMessage:NSLocalizedString(@"RemoveFailMessage", @"")];
-//    }
-
 }
 
-//TakingBack RemoveFromAlbum
 - (void) confirmRemoveDidCancel {
 }
 

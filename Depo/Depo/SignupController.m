@@ -67,10 +67,10 @@
         
         topIndex += 5;
         
-        msisdnField = [[LoginTextfield alloc] initWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2, topIndex, fieldWidth, 43) withPlaceholder:NSLocalizedString(@"MsisdnPlaceholder", @"")];
+        msisdnField = [[LoginTextfield alloc] initWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2, topIndex, fieldWidth, 43) withPlaceholder:/*NSLocalizedString(@"MsisdnPlaceholder", @"")*/@""];
         msisdnField.delegate = self;
         [msisdnField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-        msisdnField.placeholder = @"5xxxxxxxxx";
+//        msisdnField.placeholder = @"5xxxxxxxxx";
         [self.view addSubview:msisdnField];
 
         topIndex += 55;
@@ -80,7 +80,7 @@
 
         topIndex += 5;
 
-        emailField = [[LoginTextfield alloc] initWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2, topIndex, fieldWidth, 43) withPlaceholder:NSLocalizedString(@"EmailPlaceholder", @"")];
+        emailField = [[LoginTextfield alloc] initWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2, topIndex, fieldWidth, 43) withPlaceholder:/*NSLocalizedString(@"EmailPlaceholder", @"")*/@""];
         emailField.delegate = self;
         [self.view addSubview:emailField];
 
@@ -91,7 +91,7 @@
         
         topIndex += 5;
 
-        passwordField = [[LoginTextfield alloc] initSecureWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2, topIndex, fieldWidth, 43) withPlaceholder:NSLocalizedString(@"PasswordPlaceholder", @"")];
+        passwordField = [[LoginTextfield alloc] initSecureWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2, topIndex, fieldWidth, 43) withPlaceholder:/*NSLocalizedString(@"PasswordPlaceholder", @"")*/@""];
         passwordField.delegate = self;
         [self.view addSubview:passwordField];
 
@@ -102,7 +102,7 @@
 
         topIndex += 5;
 
-        passwordRepeatField = [[LoginTextfield alloc] initSecureWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2, topIndex, fieldWidth, 43) withPlaceholder:NSLocalizedString(@"PasswordRepeatPlaceholder", @"")];
+        passwordRepeatField = [[LoginTextfield alloc] initSecureWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2, topIndex, fieldWidth, 43) withPlaceholder:/*NSLocalizedString(@"PasswordRepeatPlaceholder", @"")*/@""];
         passwordRepeatField.delegate = self;
         [self.view addSubview:passwordRepeatField];
 

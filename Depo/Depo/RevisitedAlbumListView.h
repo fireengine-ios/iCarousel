@@ -17,6 +17,7 @@
 
 @protocol RevisitedAlbumListDelegate <NSObject>
 - (void) revisitedAlbumListDidSelectAlbum:(PhotoAlbum *) albumSelected;
+- (void) revisitedAlbumListShareAlbums:(NSArray *)albumUUIDs;
 - (void) revisitedAlbumListDidFinishLoading;
 - (void) revisitedAlbumListDidFinishDeleting;
 - (void) revisitedAlbumListDidChangeToSelectState;
@@ -35,6 +36,7 @@
 @property (nonatomic, strong) AddAlbumDao *addAlbumDao;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, strong) NSMutableArray *selectedAlbumList;
+
 @property (nonatomic, strong) FooterActionsMenuView *footerActionMenu;
 @property (nonatomic) BOOL isSelectible;
 

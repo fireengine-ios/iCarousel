@@ -64,7 +64,7 @@
         CustomLabel *emailLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(containerLeftMargin, logoImgView.frame.origin.y + logoImgView.frame.size.height + 10, containerWidth, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"FormEmailTitle", @"")];
         [self.view addSubview:emailLabel];
         
-        emailField = [[LoginTextfield alloc] initWithFrame:CGRectMake(containerLeftMargin, emailLabel.frame.origin.y + 5, containerWidth, 43) withPlaceholder:NSLocalizedString(@"EmailPlaceholder", @"")];
+        emailField = [[LoginTextfield alloc] initWithFrame:CGRectMake(containerLeftMargin, emailLabel.frame.origin.y + 5, containerWidth, 43) withPlaceholder:/*NSLocalizedString(@"EmailPlaceholder", @"")*/@""];
         emailField.delegate = self;
         emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         [self.view addSubview:emailField];
@@ -88,7 +88,7 @@
         CustomLabel *captchaLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(containerLeftMargin, captchaView.frame.origin.y + captchaView.frame.size.height + 20, containerWidth, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"CaptchaTitle", @"")];
         [self.view addSubview:captchaLabel];
 
-        captchaField = [[LoginTextfield alloc] initWithFrame:CGRectMake(containerLeftMargin, captchaLabel.frame.origin.y + 5, containerWidth, 43) withPlaceholder:NSLocalizedString(@"CaptchaPlaceholder", @"")];
+        captchaField = [[LoginTextfield alloc] initWithFrame:CGRectMake(containerLeftMargin, captchaLabel.frame.origin.y + 5, containerWidth, 43) withPlaceholder:/*NSLocalizedString(@"CaptchaPlaceholder", @"")*/@""];
         captchaField.delegate = self;
         captchaField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         [self.view addSubview:captchaField];

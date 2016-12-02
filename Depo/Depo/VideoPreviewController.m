@@ -122,9 +122,8 @@
 
 - (void) moreClicked {
     NSArray* list = @[[NSNumber numberWithInt:MoreMenuTypeVideoDetail], [NSNumber numberWithInt:MoreMenuTypeShare], self.file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDownloadImage], [NSNumber numberWithInt:MoreMenuTypeDelete]];
-    //TakingBack RemoveFromAlbum
     if (self.album) {
-        list = @[[NSNumber numberWithInt:MoreMenuTypeVideoDetail], [NSNumber numberWithInt:MoreMenuTypeShare], self.file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDownloadImage], [NSNumber numberWithInt:MoreMenuTypeRemoveFromAlbum], [NSNumber numberWithInt:MoreMenuTypeDelete]] ;
+        list = @[[NSNumber numberWithInt:MoreMenuTypeVideoDetail], [NSNumber numberWithInt:MoreMenuTypeShare], self.file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDownloadImage], [NSNumber numberWithInt:MoreMenuTypeRemoveFromAlbum]] ;
     }
     [self presentMoreMenuWithList:list withFileFolder:self.file];
 }

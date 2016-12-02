@@ -79,9 +79,9 @@
         msisdnField.delegate = self;
         [msisdnField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
         [mainScroll addSubview:msisdnField];
-        if([[Util readLocaleCode] isEqualToString:@"tr"]) {
-            msisdnField.placeholder = @"5XX XXX XX XX";
-        }
+//        if([[Util readLocaleCode] isEqualToString:@"tr"]) {
+//            msisdnField.placeholder = @"5XX XXX XX XX";
+//        }
 
         scrollYIndex += 55;
 
@@ -90,7 +90,7 @@
         
         scrollYIndex += 5;
 
-        passField = [[LoginTextfield alloc] initSecureWithFrame:CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 43) withPlaceholder:NSLocalizedString(@"PasswordPlaceholder", @"")];
+        passField = [[LoginTextfield alloc] initSecureWithFrame:CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 43) withPlaceholder:/*NSLocalizedString(@"PasswordPlaceholder", @"")*/ @""];
         passField.delegate = self;
         [mainScroll addSubview:passField];
 
