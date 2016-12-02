@@ -174,6 +174,13 @@
     [self.navigationController pushViewController:albumController animated:YES];
 }
 
+- (void) revisitedAlbumListDownloadAlbums:(NSArray *)albumUUIDs albumNames:(NSArray *)albumNames {
+    [APPDELEGATE.base createAlbumNames:albumNames
+                            albumUUIDs:albumUUIDs
+                        successMessage:NSLocalizedString(@"DownloadAlbumSuccessMessage", @"")
+                           failMessage:NSLocalizedString(@"DownloadAlbumFailMessage", @"")];
+}
+
 - (void) revisitedAlbumListShareAlbums:(NSArray *)albumUUIDs {
     [shareDao requestLinkForFiles:albumUUIDs isAlbum:true];
     [self showLoading];

@@ -21,7 +21,7 @@
 #import "DownloadManager.h"
 
 @interface BaseViewController : UIViewController <SlidingMenuDelegate, SlidingMenuCloseDelegate, MyViewDelegate, FloatingAddButtonDelegate, FloatingAddDelegate, UIGestureRecognizerDelegate, CustomConfirmDelegate, AccurateLocationManagerDelegate, DownloadManagerDelegate> {
-    DownloadManager *downloadManager;
+    NSMutableArray *downloadManagers;
 }
 
 @property (nonatomic, strong) UIScrollView *scroll;
@@ -84,6 +84,11 @@
 downloadFilesToAlbum:(NSArray *)files
     successMessage:(NSString *)successMessage
        failMessage:(NSString *)failMessage;
+
+-(void)createAlbumNames:(NSArray *)albumNames
+         albumUUIDs:(NSArray *)albumUUIDs
+     successMessage:(NSString *)successMessage
+        failMessage:(NSString *)failMessage;
 
 -(void)downloadFilesToCameraRoll:(NSArray *)files successMessage:(NSString *)successMessage failMessage:(NSString *)failMessage;
 @end

@@ -177,7 +177,7 @@
     if(footerActionMenu) {
         footerActionMenu.hidden = NO;
     } else {
-        footerActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 70, self.frame.size.width, 60) shouldShowShare:YES shouldShowMove:NO shouldShowDelete:YES shouldShowPrint:NO];
+        footerActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 70, self.frame.size.width, 60) shouldShowShare:YES shouldShowMove:NO shouldShowDelete:YES shouldShowDownload:YES shouldShowPrint:NO];
         footerActionMenu.delegate = self;
         [self addSubview:footerActionMenu];
     }
@@ -309,6 +309,24 @@
 }
 
 - (void) footerActionMenuDidSelectPrint:(FooterActionsMenuView *)menu {
+}
+
+-(void)footerActionMenuDidSelectDownload:(FooterActionsMenuView *)menu {
+    [delegate revisitedAlbumListDownloadAlbums:selectedAlbumList albumNames:[self getSelectedAlbumNames]];
+}
+
+-(NSArray *)getSelectedAlbumNames {
+    NSMutableArray *names = [NSMutableArray array];
+    for (PhotoAlbum *album in self.albums) {
+        for (NSString *uuid in selectedAlbumList) {
+            if ([album.uuid isEqualToString:uuid]) {
+                [names addObject:album.label];
+            }
+        }
+        
+    }
+    
+    return names;
 }
 
 

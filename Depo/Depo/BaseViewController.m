@@ -83,7 +83,8 @@
 - (id) initWithRootViewController:(MyViewController *) _rootViewController {
     self = [super init];
     if (self) {
-
+        
+        downloadManagers = [[NSMutableArray alloc] init];
         shareDao = [[ShareLinkDao alloc] init];
         shareDao.delegate = self;
         shareDao.successMethod = @selector(shareSuccessCallback:);
@@ -1023,19 +1024,36 @@
 downloadFilesToAlbum:(NSArray *)files
     successMessage:(NSString *)successMessage
        failMessage:(NSString *)failMessage {
-    downloadManager = [[DownloadManager alloc] initWithDelegate:self
-                                                                    downloadType:DownloadTypeAlbum
-                                                                  successMessage:successMessage
-                                                                     failMessage:failMessage];
-    [downloadManager createAlbumName:albumName albumUUID:albumUUID downloadFilesToAlbum:files];
+    DownloadManager *manager = [[DownloadManager alloc] initWithDelegate:self
+                                                   downloadType:DownloadTypeAlbum
+                                                 successMessage:successMessage
+                                                    failMessage:failMessage];
+    [manager createAlbumName:albumName albumUUID:albumUUID downloadFilesToAlbum:files];
+    [downloadManagers addObject:manager];
+}
+
+
+-(void)createAlbumNames:(NSArray *)albumNames
+         albumUUIDs:(NSArray *)albumUUIDs
+     successMessage:(NSString *)successMessage
+        failMessage:(NSString *)failMessage {
+    for(int i = 0; i < albumNames.count; i++) {
+        DownloadManager *manager = [[DownloadManager alloc] initWithDelegate:self
+                                                                downloadType:DownloadTypeAlbum
+                                                              successMessage:successMessage
+                                                                 failMessage:failMessage];
+        [manager createAlbumName:[albumNames objectAtIndex:i] albumUUID:[albumUUIDs objectAtIndex:i]];
+        [downloadManagers addObject:manager];
+    }
 }
 
 -(void)downloadFilesToCameraRoll:(NSArray *)files successMessage:(NSString *)successMessage failMessage:(NSString *)failMessage {
-    downloadManager = [[DownloadManager alloc] initWithDelegate:self
-                                                                    downloadType:DownloadTypeListOfFiles
-                                                                  successMessage:successMessage
-                                                                     failMessage:failMessage];
-    [downloadManager downloadListOfFilesToCameraRoll:files];
+    DownloadManager *manager = [[DownloadManager alloc] initWithDelegate:self
+                                                   downloadType:DownloadTypeListOfFiles
+                                                 successMessage:successMessage
+                                                    failMessage:failMessage];
+    [manager downloadListOfFilesToCameraRoll:files];
+    [downloadManagers addObject:manager];
 }
 
 #pragma mark - Download Manager Delegate
@@ -1057,11 +1075,23 @@ downloadFilesToAlbum:(NSArray *)files
 }
 
 -(void)downloadManagerDidFinishDownloading:(DownloadManager *)manager error:(NSError *)error {
+
+    
     if (error) {
       //  [ProcessFooterView showFailureMessageOnWindow:manager.failMessage];
     }else {
       //  [ProcessFooterView showSuccessMessageOnWindow:manager.successMessage];
     }
+    
+    
+    NSMutableArray *temp = [NSMutableArray array];
+    for (DownloadManager *downloadManager in downloadManagers) {
+        if (![manager.albumUUID isEqualToString:downloadManager.albumUUID]) {
+            [temp addObject:downloadManager];
+            //[downloadManagers removeObject:downloadManager];
+        }
+    }
+    downloadManagers = temp;
 }
 
 @end

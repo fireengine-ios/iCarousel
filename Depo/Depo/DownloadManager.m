@@ -36,9 +36,21 @@
 
 #pragma mark - Album files Fetch
 
+-(void)createAlbumName:(NSString *)albumName albumUUID:(NSString *)albumUuid {
+    fileList = [[NSMutableArray alloc] init];
+    self.albumUUID = albumUuid;
+    [self initAlbumDetailDao];
+    [self createAlbumInPhotoAlbum:albumName];
+}
+
 -(void)createAlbumName:(NSString *)albumName albumUUID:(NSString *)albumUuid downloadFilesToAlbum:(NSArray *)metaFiles {
-    fileList = [[NSMutableArray alloc] initWithArray:metaFiles];
-    albumUUID = albumUuid;
+    if (metaFiles && metaFiles.count > 0) {
+        fileList = [[NSMutableArray alloc] initWithArray:metaFiles];
+    }else {
+        fileList = [[NSMutableArray alloc] init];
+    }
+    
+    self.albumUUID = albumUuid;
     [self initAlbumDetailDao];
     [self createAlbumInPhotoAlbum:albumName];
 }
@@ -50,6 +62,12 @@
     albumDetailDao.failMethod = @selector(albumDetailFailCallback:);
 }
 
+-(void)fetchFilesForAlbum {
+    NSLog(@"fetchFilesForAlbum: %@", self.albumUUID);
+    albumDownloadListIndex = (int)fileList.count / 20;
+    [albumDetailDao requestDetailOfAlbum:self.albumUUID forStart:albumDownloadListIndex andSize:20];
+}
+
 
 -(void)fetchOtherFilesOfAlbum {
     if (fileList.count < 20) { // album has less than 20 items
@@ -59,9 +77,7 @@
         [self.delegate downloadManagerDidFinishDownloading:self error:nil];
         return;
     }
-    
-    albumDownloadListIndex = (int)fileList.count / 20;
-    [albumDetailDao requestDetailOfAlbum:albumUUID forStart:albumDownloadListIndex andSize:20];
+    [self fetchFilesForAlbum];
 }
 
 - (void) albumDetailSuccessCallback:(PhotoAlbum *) albumWithUpdatedContent {
@@ -358,7 +374,11 @@
     if (collection.firstObject) { // Album already exist.
         albumAssetCollection = (PHAssetCollection *)collection.firstObject;
         [self.delegate downloadManager:self albumAlreadyExistNamed:albumName assetCollection:albumAssetCollection];
-        [self downloadAlbumPhotosToDevice];
+        if (fileList.count == 0) {
+            [self fetchFilesForAlbum];
+        }else {
+            [self downloadAlbumPhotosToDevice];
+        }
     }else { // create the album
         __weak DownloadManager *weakSelf = self;
         [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
@@ -370,7 +390,11 @@
                 PHFetchResult *result = [PHAssetCollection fetchAssetCollectionsWithLocalIdentifiers:@[albumAssetCollectionPlaceHolder.localIdentifier] options:nil];
                 albumAssetCollection = (PHAssetCollection *)result.firstObject;
                 [weakSelf.delegate downloadManager:self newAlbumCreatedNamed:albumName assetCollection:albumAssetCollection];
-                [weakSelf downloadAlbumPhotosToDevice];
+                if (fileList.count == 0) {
+                    [self fetchFilesForAlbum];
+                }else {
+                    [weakSelf downloadAlbumPhotosToDevice];
+                }
             }else {
                 [weakSelf.delegate downloadManager:self createAlbumError:error];
             }
