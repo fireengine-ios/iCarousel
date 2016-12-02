@@ -37,7 +37,7 @@
 
 - (id) init {
     if(self = [super init]) {
-        self.title = NSLocalizedString(@"SignUp", @"");
+        self.title = NSLocalizedString(@"SignUpButtonTitle", @"");
         self.view.backgroundColor = [Util UIColorForHexColor:@"FFFFFF"];
         
         self.navigationItem.leftBarButtonItem = nil;
@@ -52,49 +52,57 @@
         eulaDao.successMethod = @selector(eulaReadSuccessCallback:);
         eulaDao.failMethod = @selector(eulaReadFailCallback:);
         
-        float topIndex = IS_IPAD ? 100 : (IS_IPHONE_4_OR_LESS ? 10 : 30);
+        float topIndex = IS_IPAD ? 100 : (IS_IPHONE_4_OR_LESS ? 10 : 20);
         float fieldWidth = 280;
         
-        CustomLabel *msisdnLabel = [[CustomLabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2 + 5, topIndex, fieldWidth, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"MsisdnTitle", @"")];
+        UIImage *logoImage = [UIImage imageNamed:@"icon_lifebox.png"];
+        UIImageView *logoImgView = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - logoImage.size.width)/2, topIndex, logoImage.size.width, logoImage.size.height)];
+        logoImgView.image = logoImage;
+        [self.view addSubview:logoImgView];
+        
+        topIndex += logoImage.size.height+50;
+        
+        CustomLabel *msisdnLabel = [[CustomLabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2, topIndex, fieldWidth, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"MsisdnTitle", @"")];
         [self.view addSubview:msisdnLabel];
         
-        topIndex += 25;
+        topIndex += 5;
         
-        msisdnField = [[LoginTextfield alloc] initWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2, topIndex, fieldWidth, 43) withPlaceholder:NSLocalizedString(@"MsisdnPlaceholder", @"")];
+        msisdnField = [[LoginTextfield alloc] initWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2, topIndex, fieldWidth, 43) withPlaceholder:/*NSLocalizedString(@"MsisdnPlaceholder", @"")*/@""];
         msisdnField.delegate = self;
-        msisdnField.placeholder = @"5xxxxxxxxx";
+        [msisdnField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+//        msisdnField.placeholder = @"5xxxxxxxxx";
         [self.view addSubview:msisdnField];
 
         topIndex += 55;
 
-        CustomLabel *emailLabel = [[CustomLabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2 + 5, topIndex, fieldWidth, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"EmailTitle", @"")];
+        CustomLabel *emailLabel = [[CustomLabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2, topIndex, fieldWidth, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"FormEmailTitle", @"")];
         [self.view addSubview:emailLabel];
 
-        topIndex += 25;
+        topIndex += 5;
 
-        emailField = [[LoginTextfield alloc] initWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2, topIndex, fieldWidth, 43) withPlaceholder:NSLocalizedString(@"EmailPlaceholder", @"")];
+        emailField = [[LoginTextfield alloc] initWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2, topIndex, fieldWidth, 43) withPlaceholder:/*NSLocalizedString(@"EmailPlaceholder", @"")*/@""];
         emailField.delegate = self;
         [self.view addSubview:emailField];
 
         topIndex += 55;
 
-        CustomLabel *passLabel = [[CustomLabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2 + 5, topIndex, fieldWidth, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"PasswordTitle", @"")];
+        CustomLabel *passLabel = [[CustomLabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2, topIndex, fieldWidth, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"PasswordTitle", @"")];
         [self.view addSubview:passLabel];
         
-        topIndex += 25;
+        topIndex += 5;
 
-        passwordField = [[LoginTextfield alloc] initSecureWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2, topIndex, fieldWidth, 43) withPlaceholder:NSLocalizedString(@"PasswordPlaceholder", @"")];
+        passwordField = [[LoginTextfield alloc] initSecureWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2, topIndex, fieldWidth, 43) withPlaceholder:/*NSLocalizedString(@"PasswordPlaceholder", @"")*/@""];
         passwordField.delegate = self;
         [self.view addSubview:passwordField];
 
         topIndex += 55;
 
-        CustomLabel *passRepeatLabel = [[CustomLabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2 + 5, topIndex, fieldWidth, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"PasswordRepeatTitle", @"")];
+        CustomLabel *passRepeatLabel = [[CustomLabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2, topIndex, fieldWidth, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"PasswordRepeatTitle", @"")];
         [self.view addSubview:passRepeatLabel];
 
-        topIndex += 25;
+        topIndex += 5;
 
-        passwordRepeatField = [[LoginTextfield alloc] initSecureWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2, topIndex, fieldWidth, 43) withPlaceholder:NSLocalizedString(@"PasswordRepeatPlaceholder", @"")];
+        passwordRepeatField = [[LoginTextfield alloc] initSecureWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2, topIndex, fieldWidth, 43) withPlaceholder:/*NSLocalizedString(@"PasswordRepeatPlaceholder", @"")*/@""];
         passwordRepeatField.delegate = self;
         [self.view addSubview:passwordRepeatField];
 
@@ -108,14 +116,14 @@
         [eulaButton addTarget:self action:@selector(eulaClicked) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:eulaButton];
 
-        CGRect signupButtonRect = CGRectMake((self.view.frame.size.width - fieldWidth)/2, self.view.frame.size.height - 134, fieldWidth, 50);
+        CGRect signupButtonRect = CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60);
         if(IS_IPAD) {
             signupButtonRect = CGRectMake((self.view.frame.size.width - fieldWidth)/2, eulaButton.frame.origin.y + eulaButton.frame.size.height + 30, fieldWidth, 50);
         } else if(IS_IPHONE_4_OR_LESS) {
             signupButtonRect = CGRectMake((self.view.frame.size.width - fieldWidth)/2, self.view.frame.size.height - 124, fieldWidth, 50);
         }
         
-        signupButton = [[SimpleButton alloc] initWithFrame:signupButtonRect withTitle:NSLocalizedString(@"SignUp", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
+        signupButton = [[SimpleButton alloc] initWithFrame:signupButtonRect withTitle:NSLocalizedString(@"SignUpButton", @"") withTitleColor:[Util UIColorForHexColor:@"ffffff"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"3FB0E8"] withBgColor:[Util UIColorForHexColor:@"3FB0E8"] withCornerRadius:0];
         [signupButton addTarget:self action:@selector(signupClicked) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:signupButton];
         
@@ -155,7 +163,11 @@
 //    if ([msisdnValue length] > 0)
 //        msisdnValue = [[msisdnValue substringToIndex:1] isEqualToString:@"0"] ? [msisdnValue substringFromIndex:1] : msisdnValue;
     
-    if([msisdnField.text length] < 10) {
+    NSString *trimmedString = [[msisdnField.text stringByReplacingOccurrencesOfString:@"(" withString:@""] stringByReplacingOccurrencesOfString:@")" withString:@""];
+    
+    msisdnValue = trimmedString;
+    
+    if([msisdnValue length] < 10) {
         [self showErrorAlertWithMessage:NSLocalizedString(@"MsisdnFormatErrorMessage", @"")];
         return;
     }
@@ -279,11 +291,11 @@
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
     CustomButton *customBackButton = [[CustomButton alloc] initWithFrame:CGRectMake(10, 0, 20, 34) withImageName:@"white_left_arrow.png"];
     [customBackButton addTarget:self action:@selector(innerTriggerBack) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:customBackButton];
     self.navigationItem.leftBarButtonItem = backButton;
+
 }
 
 - (void)viewDidLoad {
@@ -328,6 +340,23 @@
     self.view.frame = rect;
     
     [UIView commitAnimations];
+}
+
+- (void) textFieldDidChange:(UITextField *) textField {
+    NSScanner *scanner = [NSScanner scannerWithString:textField.text];
+    BOOL isNumeric = [scanner scanInteger:NULL] && [scanner isAtEnd];
+    NSString* callingCode = @"+(90)";
+    if (isNumeric) {
+        if([[Util readLocaleCode] isEqualToString:@"uk"] || [[Util readLocaleCode] isEqualToString:@"ru"] ) {
+            callingCode = @"+(380)";
+            callingCode = [callingCode stringByAppendingString:textField.text];
+            msisdnField.text = callingCode;
+        }
+        else {
+            callingCode = [callingCode stringByAppendingString:textField.text];
+            msisdnField.text = callingCode;
+        }
+    }
 }
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {

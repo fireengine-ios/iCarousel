@@ -15,10 +15,21 @@
 - (id)initWithFrame:(CGRect)frame withPlaceholder:(NSString *) placeholderText {
     self = [super initWithFrame:frame];
     if (self) {
-        self.background = [UIImage imageNamed:@"textfield_bg.png"];
+       // self.background = [UIImage imageNamed:@"textfield_bg.png"];
         self.autocorrectionType = UITextAutocorrectionTypeNo;
         self.borderStyle = UITextBorderStyleNone;
         self.textAlignment = NSTextAlignmentLeft;
+        
+        CALayer *border = [CALayer layer];
+        border.contents = (id)[UIImage imageNamed:@"textline_1240.png"].CGImage;
+//        CGFloat borderWidth = 2;
+//        border.borderColor = [UIColor darkGrayColor].CGColor;
+        border.frame = CGRectMake(0, self.frame.size.height - 2 , self.frame.size.width, 2);
+        
+        //border.borderWidth = borderWidth;
+        [self.layer addSublayer:border];
+        //self.layer.masksToBounds = YES;
+        
         
         UIFont *currentFont = [UIFont fontWithName:@"TurkcellSaturaBol" size:15];
         UIColor *color = [Util UIColorForHexColor:@"8C8C8C"];
@@ -38,10 +49,20 @@
 - (id)initSecureWithFrame:(CGRect)frame withPlaceholder:(NSString *) placeholderText {
     self = [super initWithFrame:frame];
     if (self) {
-        self.background = [UIImage imageNamed:@"textfield_bg.png"];
+       // self.background = [UIImage imageNamed:@"textfield_bg.png"];
         self.borderStyle = UITextBorderStyleNone;
         self.textAlignment = NSTextAlignmentLeft;
         self.secureTextEntry = YES;
+        
+        CALayer *border = [CALayer layer];
+        border.contents = (id)[UIImage imageNamed:@"textline_1240.png"].CGImage;
+        //        CGFloat borderWidth = 2;
+        //        border.borderColor = [UIColor darkGrayColor].CGColor;
+        border.frame = CGRectMake(0, self.frame.size.height - 2 , self.frame.size.width, 2);
+        
+        //border.borderWidth = borderWidth;
+        [self.layer addSublayer:border];
+        //self.layer.masksToBounds = YES;
         
         UIFont *currentFont = [UIFont fontWithName:@"TurkcellSaturaBol" size:15];
         UIColor *color = [Util UIColorForHexColor:@"8C8C8C"];
@@ -59,7 +80,7 @@
 }
 
 - (CGRect)placeholderRectForBounds:(CGRect)bounds {
-    return [super placeholderRectForBounds:CGRectMake(20, bounds.origin.y , bounds.size.width - 40 , bounds.size.height)];
+    return [super placeholderRectForBounds:CGRectMake(0, bounds.origin.y , bounds.size.width - 40 , bounds.size.height)];
 }
 
 - (void) drawPlaceholderInRect:(CGRect)rect {
@@ -67,11 +88,11 @@
 }
 
 - (CGRect)textRectForBounds:(CGRect)bounds {
-    return [super textRectForBounds:CGRectMake(20, bounds.origin.y , bounds.size.width - 40 , bounds.size.height)];
+    return [super textRectForBounds:CGRectMake(0, bounds.origin.y + 10 , bounds.size.width - 40 , bounds.size.height)];
 }
 
 - (CGRect)editingRectForBounds:(CGRect)bounds {
-    return [super textRectForBounds:CGRectMake(20, bounds.origin.y , bounds.size.width - 40 , bounds.size.height)];
+    return [super textRectForBounds:CGRectMake(0, bounds.origin.y + 10 , bounds.size.width - 40 , bounds.size.height)];
 }
 
 /*
