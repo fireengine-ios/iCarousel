@@ -453,23 +453,23 @@
     if(![selectedFileList containsObject:fileSelected.uuid]) {
         [selectedFileList addObject:fileSelected.uuid];
     }
-    if([selectedFileList count] > 0) {
-        [self showFooterMenu];
-    } else {
-        [self hideFooterMenu];
-    }
+    [self updateFooterMenuAndTitle];
 }
 
 - (void) squareImageWasUnmarkedForFile:(MetaFile *)fileSelected {
     if([selectedFileList containsObject:fileSelected.uuid]) {
         [selectedFileList removeObject:fileSelected.uuid];
     }
+    [self updateFooterMenuAndTitle];
+}
+
+- (void) updateFooterMenuAndTitle {
     if([selectedFileList count] > 0) {
         [self showFooterMenu];
-        self.title = [NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]];
+        titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]];
     } else {
         [self hideFooterMenu];
-        self.title = NSLocalizedString(@"SelectFilesTitle", @"");
+        titleLabel.text = NSLocalizedString(@"SelectFilesTitle", @"");
     }
 }
 
@@ -492,7 +492,9 @@
     if(footerActionMenu) {
         footerActionMenu.hidden = NO;
     } else {
-        footerActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60) shouldShowShare:YES shouldShowMove:YES shouldShowDelete:YES shouldShowPrint:YES];
+        CGRect frame = CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60);
+        footerActionMenu = [[FooterActionsMenuView alloc] initForPhotosTabWithFrame:frame shouldShowShare:YES shouldShowMove:YES shouldShowDownload:YES shouldShowDelete:YES shouldShowPrint:YES isMoveAlbum:NO];
+       // footerActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60) shouldShowShare:YES shouldShowMove:YES shouldShowDelete:YES shouldShowPrint:YES];
         footerActionMenu.delegate = self;
         [self.view addSubview:footerActionMenu];
     }
@@ -523,6 +525,7 @@
 
 - (void) cancelSelectible {
     self.title = NSLocalizedString(@"PhotosTitle", @"");
+    titleLabel.text = self.album.label;
     if(cancelButton) {
         [cancelButton removeFromSuperview];
     }
@@ -599,6 +602,13 @@
     //[APPDELEGATE.base triggerShareForFiles:selectedFileList];
 }
 
+- (void) footerActionMenuDidSelectDownload:(FooterActionsMenuView *)menu {
+    if (!downloadManager) {
+        downloadManager = [[DownloadManager alloc] initWithDelegate:self];
+    }
+    [downloadManager downloadListOfFilesToCameraRoll:selectedFileList];
+}
+
 - (void) footerActionMenuDidSelectPrint:(FooterActionsMenuView *)menu {
     NSMutableArray *printList = [[NSMutableArray alloc] init];
     for (int i = 0; i<[photoList count]; i++) {
@@ -618,7 +628,6 @@
     printNav = [[MyNavigationController alloc] initWithRootViewController:printController];
     
     [self.nav presentViewController:printNav animated:YES completion:nil];
-    
 }
 
 - (void) closePrintPage {
@@ -871,8 +880,10 @@
 
 -(void)downloadManagerDidFinishDownloading:(DownloadManager *)manager error:(NSError *)error {
     if (error) {
+      //  [ProcessFooterView showFailureMessageOnWindow:NSLocalizedString(@"DownloadAlbumFailMessage", @"")];
         [self proceedFailureForProgressView];
     }else {
+      //  [ProcessFooterView showSuccessMessageOnWindow:NSLocalizedString(@"DownloadAlbumSuccessMessage", @"")];
         [self proceedSuccessForProgressView];
     }
 }
