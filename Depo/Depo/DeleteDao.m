@@ -14,33 +14,45 @@
 - (void) requestDeleteFiles:(NSArray *) uuidList {
 	NSURL *url = [NSURL URLWithString:DELETE_FILE_URL];
 	
-    SBJSON *json = [SBJSON new];
-    NSString *jsonStr = [json stringWithObject:uuidList];
-    NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:uuidList options:NSJSONWritingPrettyPrinted error:nil];
     
 //    NSLog(@"Delete Payload: %@", jsonStr);
-    
-	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setPostBody:[postData mutableCopy]];
-    [request setDelegate:self];
-    request.tag = REQ_TAG_FOR_PHOTO;
-    
-    [self sendDeleteRequest:request];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    request = [self sendDeleteRequest:request];
+    [request setHTTPBody:postData];
+    //request.tag = REQ_TAG_FOR_PHOTO;
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            if (![self checkResponseHasError:response]) {
+                [self requestFinished:data];
+            }
+        }
+    }]];
+    [task resume];
+    self.currentTask = task;
 }
 
-- (void)requestFinished:(ASIHTTPRequest *)request {
-	NSError *error = [request error];
-	
-	if (!error) {
-		NSString *responseEnc = [request responseString];
-		
-//        NSLog(@"Delete Response: %@", responseEnc);
-        
-        [SyncUtil write413Lock:NO];
+- (void)requestFinished:(NSData *) data {
+    [SyncUtil write413Lock:NO];
+    dispatch_async(dispatch_get_main_queue(), ^{
         [self shouldReturnSuccess];
-	} else {
-        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-	}
+    });
+    //	NSError *error = [request error];
+//	
+//	if (!error) {
+//		NSString *responseEnc = [request responseString];
+//		
+////        NSLog(@"Delete Response: %@", responseEnc);
+    
+//    
+//	} else {
+//        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+//	}
     
 }
 

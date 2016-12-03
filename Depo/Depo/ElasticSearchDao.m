@@ -24,13 +24,24 @@
         parentListingUrl = [NSString stringWithFormat:@"%@&minified=true", parentListingUrl];
     }
     NSURL *url = [NSURL URLWithString:parentListingUrl];
-
-    IGLog(@"[GET] ElasticSearchDao requestPhotosAndVideosForPage called");
-
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setDelegate:self];
     
-    [self sendGetRequest:request];
+    IGLog(@"[GET] ElasticSearchDao requestPhotosAndVideosForPage called");
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    request = [self sendGetRequest:request];
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            if (![self checkResponseHasError:response]) {
+                [self requestFinished:data];
+            }
+        }
+    }]];
+    [task resume];
+    self.currentTask = task;
 }
 
 - (void) requestPhotosForPage:(int) page andSize:(int) size andSortType:(SortType) sortType {
@@ -45,25 +56,48 @@
         parentListingUrl = [NSString stringWithFormat:@"%@&minified=true", parentListingUrl];
     }
     NSURL *url = [NSURL URLWithString:parentListingUrl];
-    
-    IGLog(@"[GET] ElasticSearchDao requestPhotosAndVideosForPage called");
-    
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setDelegate:self];
-    
-    [self sendGetRequest:request];
-}
 
+    IGLog(@"[GET] ElasticSearchDao requestPhotosForPage called");
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    request = [self sendGetRequest:request];
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            if (![self checkResponseHasError:response]) {
+                [self requestFinished:data];
+            }
+        }
+    }]];
+    [task resume];
+    self.currentTask = task;
+}
 
 - (void) requestMusicForPage:(int) page andSize:(int) size andSortType:(SortType) sortType {
     NSString *parentListingUrl = [NSString stringWithFormat:ELASTIC_LISTING_MAIN_URL, @"content_type", @"audio", [AppUtil serverSortNameByEnum:sortType], [AppUtil isAscByEnum:sortType] ? @"ASC":@"DESC", page, size];
     //    NSLog(@"MUSIC REQ URL: %@", parentListingUrl);
     NSURL *url = [NSURL URLWithString:parentListingUrl];
     
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setDelegate:self];
-    
-    [self sendGetRequest:request];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    request = [self sendGetRequest:request];
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            if (![self checkResponseHasError:response]) {
+                [self requestFinished:data];
+            }
+        }
+
+    }]];
+    [task resume];
+    self.currentTask = task;
 }
 
 - (void) requestDocForPage:(int) page andSize:(int) size andSortType:(SortType) sortType {
@@ -72,10 +106,21 @@
     NSString *parentListingUrl = [NSString stringWithFormat:ELASTIC_LISTING_MAIN_URL, @"content_type", @"application%20OR%20text", [AppUtil serverSortNameByEnum:sortType], [AppUtil isAscByEnum:sortType] ? @"ASC":@"DESC", page, size];
     NSURL *url = [NSURL URLWithString:parentListingUrl];
     
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setDelegate:self];
-    
-    [self sendGetRequest:request];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    request = [self sendGetRequest:request];
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            [self requestFinished:data];
+        }
+
+    }]];
+    [task resume];
+    self.currentTask = task;
 }
 
 - (void) requestCropNShareForPage:(int) page andSize:(int) size andSortType:(SortType) sortType {
@@ -84,39 +129,43 @@
     NSString *parentListingUrl = [NSString stringWithFormat:ELASTIC_LISTING_MAIN_URL, @"metadata.Cropy", @"true", [AppUtil serverSortNameByEnum:sortType forPhotosOnly:YES], [AppUtil isAscByEnum:sortType] ? @"ASC":@"DESC", page, size];
     NSURL *url = [NSURL URLWithString:parentListingUrl];
     
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setDelegate:self];
-    
-    [self sendGetRequest:request];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    request = [self sendGetRequest:request];
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            [self requestFinished:data];
+        }
+
+    }]];
+    [task resume];
+    self.currentTask = task;
 }
 
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    NSError *error = [request error];
+- (void)requestFinished:(NSData *)data {
+    //NSError *error = [request error];
+    IGLog(@"ElasticSearchDao request successfully finished");
+    NSArray *mainArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
     
-    if (!error) {
-        NSString *responseEnc = [request responseString];
-        
-        IGLog(@"ElasticSearchDao request successfully finished");
-
-                NSLog(@"Elastic Search Response: %@", responseEnc);
-        
-        SBJSON *jsonParser = [SBJSON new];
-        NSArray *mainArray = [jsonParser objectWithString:responseEnc];
-        
-        NSMutableArray *result = [[NSMutableArray alloc] init];
-        if(mainArray != nil && [mainArray isKindOfClass:[NSArray class]]) {
-            for(NSDictionary *fileDict in mainArray) {
-                if([fileDict isKindOfClass:[NSDictionary class]]) {
-                    [result addObject:[self parseFile:fileDict]];
-                }
+    NSMutableArray *result = [[NSMutableArray alloc] init];
+    if(mainArray != nil && [mainArray isKindOfClass:[NSArray class]]) {
+        for(NSDictionary *fileDict in mainArray) {
+            if([fileDict isKindOfClass:[NSDictionary class]]) {
+                [result addObject:[self parseFile:fileDict]];
             }
         }
-        [self shouldReturnSuccessWithObject:result];
-    } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self shouldReturnSuccessWithObject:result];
+        });
+    }
+    else {
         IGLog(@"ElasticSearchDao requestFinished with error");
         [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
     }
-    
 }
 
 @end

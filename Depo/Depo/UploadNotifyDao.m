@@ -19,25 +19,36 @@
     NSString *urlStr = [NSString stringWithFormat:UPLOAD_NOTIFY_URL, parentUuid, fileUuid];
 	NSURL *url = [NSURL URLWithString:urlStr];
 
-	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setDelegate:self];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    request = [self sendGetRequest:request];
     
-    [self sendGetRequest:request];
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            if (![self checkResponseHasError:response]) {
+                NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+                if (mainDict) {
+                    MetaFile *finalFile = [self parseFile:mainDict];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnSuccessWithObject:finalFile];
+                    });
+                }
+                else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                    });
+                }
+            }
+        }
+    }]];
+    self.currentTask = task;
+    [task resume];
 }
 
-- (void)requestFinished:(ASIHTTPRequest *)request {
-	NSError *error = [request error];
-	
-	if (!error) {
-        NSString *responseEnc = [request responseString];
-//        NSLog(@"Upload Notify Response: %@", responseEnc);
-        SBJSON *jsonParser = [SBJSON new];
-        NSDictionary *mainDict = [jsonParser objectWithString:responseEnc];
-        MetaFile *finalFile = [self parseFile:mainDict];
-        [self shouldReturnSuccessWithObject:finalFile];
-	} else {
-        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-	}
-}
+
 
 @end

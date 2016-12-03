@@ -12,28 +12,26 @@
 
 - (void) requestAuthToken:(NSString *) token {
     NSURL *url = [NSURL URLWithString:AUTH_TOKEN_URL];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    [request addValue:token forHTTPHeaderField:@"X-Auth-Token"];
     
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request addRequestHeader:@"X-Auth-Token" value:token];
-    [request setDelegate:self];
-    
-    [self sendPostRequest:request];
-}
-
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    NSError *error = [request error];
-    if (!error) {
-        NSString *responseEnc = [request responseString];
-//        NSLog(@"Auth Token Response: %@", responseEnc);
-        
-        SBJSON *jsonParser = [SBJSON new];
-        NSDictionary *mainDict = [jsonParser objectWithString:responseEnc];
-        
-        [self shouldReturnSuccess];
-    } else {
-        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-    }
-    
+    request = [self sendPostRequest:request];
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            if (![self checkResponseHasError:response]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self shouldReturnSuccess];
+                });
+            }
+        }
+    }]];
+    [task resume];
+    self.currentTask = task;
 }
 
 @end

@@ -23,28 +23,36 @@
     Byte *buffer = (Byte*)malloc(rep.size);
     NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:rep.size error:nil];
     NSData *sourceData = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
-	
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request addRequestHeader:@"X-Object-Meta-Favourite" value:@"false"];
-    [request addRequestHeader:@"x-meta-strategy" value:@"1"];
-    [request setDelegate:self];
-    [request setPostBody:[sourceData mutableCopy]];
-    
-    [self sendPutRequest:request];
-}
 
-- (void)requestFinished:(ASIHTTPRequest *)request {
-	NSError *error = [request error];
-	if (!error) {
-		NSString *responseEnc = [request responseString];
-		
-//        NSLog(@"UPLOAD File Response: %@", responseEnc);
-        
-        [self shouldReturnSuccess];
-	} else {
-        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-	}
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    request = [self sendPutRequest:request];
+    [request setHTTPBody:[sourceData copy]];
+    [request addValue:@"false" forHTTPHeaderField:@"X-Object-Meta-Favourite"];
+    [request addValue:@"1" forHTTPHeaderField:@"x-meta-strategy"];
+    
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (![self checkResponseHasError:response]) {
+                    [self shouldReturnSuccess];
+                }
+            });
+        }
+    }]];
+    self.currentTask = task;
+    [task resume];
     
 }
+//
+//- (void)requestFinished:(NSData *) data withResponse:(NSURLResponse *) response {
+//    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+//    //TODO URL response'unda ne yapilmali??
+//    [self shouldReturnSuccess];
+//}
 
 @end

@@ -17,32 +17,31 @@
     NSDictionary *metadata = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO], @"X-Object-Meta-Favourite", nil];
     NSDictionary *payload = [NSDictionary dictionaryWithObjectsAndKeys:metadata, @"metadata", nil];
     
-    SBJSON *json = [SBJSON new];
-    NSString *jsonStr = [json stringWithObject:payload];
-    NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
-    
-//    NSLog(@"Add Folder Payload: %@", jsonStr);
-    
-	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request addRequestHeader:@"Folder-Name" value:[[Util cleanSpecialCharacters:folderName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    [request setPostBody:[postData mutableCopy]];
-    [request setDelegate:self];
-    
-    [self sendPostRequest:request];
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:payload options:NSJSONWritingPrettyPrinted error:nil];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    request = [self sendPostRequest:request];
+    [request setHTTPBody:postData];
+    [request setValue:[[Util cleanSpecialCharacters:folderName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]  forHTTPHeaderField:@"Folder-Name"];
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (![self checkResponseHasError:response]) {
+                    [self shouldReturnSuccess];
+                }
+            });
+        }
+    }]];
+    self.currentTask = task;
+    [task resume];
 }
 
-- (void)requestFinished:(ASIHTTPRequest *)request {
-	NSError *error = [request error];
-	if (!error) {
-		NSString *responseEnc = [request responseString];
-		
-//        NSLog(@"Add Folder Response: %@", responseEnc);
-
-        [self shouldReturnSuccess];
-	} else {
-        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-	}
-    
-}
+//- (void)requestFinished:(NSData *)data withResponse:(NSURLResponse *) response {
+//    [self shouldReturnSuccess];
+//}
 
 @end

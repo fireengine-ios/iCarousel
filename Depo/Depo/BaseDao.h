@@ -7,8 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ASIFormDataRequest.h"
-#import "SBJSON.h"
 #import "AppConstants.h"
 #import "MetaFile.h"
 #import "Activity.h"
@@ -18,16 +16,17 @@
 #import "RadiusDao.h"
 #import "RequestTokenDao.h"
 #import "FileInfoGroup.h"
+#import "DepoHttpManager.h"
 
 //TODO test -> prod
-//#define BASE_URL @"https://adepo.turkcell.com.tr/api"
-#define BASE_URL @"https://tcloudstb.turkcell.com.tr/api"
+#define BASE_URL @"https://adepo.turkcell.com.tr/api"
+//#define BASE_URL @"https://tcloudstb.turkcell.com.tr/api"
 
 #define TOKEN_URL BASE_URL@"/auth/token?rememberMe=%@"
 
 //TODO test -> prod
-//#define RADIUS_URL @"http://adepo.turkcell.com.tr/api/auth/gsm/login?rememberMe=on"
-#define RADIUS_URL @"http://tcloudstb.turkcell.com.tr/api/auth/gsm/login?rememberMe=on"
+#define RADIUS_URL @"http://adepo.turkcell.com.tr/api/auth/gsm/login?rememberMe=on"
+//#define RADIUS_URL @"http://tcloudstb.turkcell.com.tr/api/auth/gsm/login?rememberMe=on"
 
 #define REMEMBER_ME_URL BASE_URL@"/auth/rememberMe"
 
@@ -222,17 +221,23 @@
     RequestTokenDao *tokenDao;
 }
 
+typedef void(^taskComplition)(NSData *data, NSURLResponse *response, NSError *error);
+
+@property (nonatomic, strong) NSURLSessionDataTask *currentTask;
+@property (nonatomic, strong) taskComplition taskCompletionHandler;
+
 @property (nonatomic, weak) id delegate;
 @property (nonatomic) SEL successMethod;
 @property (nonatomic) SEL failMethod;
-@property (nonatomic, strong) ASIFormDataRequest *currentRequest;
+@property (nonatomic, strong) NSMutableURLRequest *currentRequest;
 @property (nonatomic) BOOL tokenAlreadyRevisitedFlag;
+@property (nonatomic) BOOL hasError;
 
 - (NSString *) hasFinishedSuccessfully:(NSDictionary *) mainDict;
-- (void) sendPostRequest:(ASIFormDataRequest *) request;
-- (void) sendGetRequest:(ASIFormDataRequest *) request;
-- (void) sendPutRequest:(ASIFormDataRequest *) request;
-- (void) sendDeleteRequest:(ASIFormDataRequest *) request;
+- (NSMutableURLRequest *) sendPostRequest:(NSMutableURLRequest *) request;
+- (NSMutableURLRequest *) sendGetRequest:(NSMutableURLRequest *) request;
+- (NSMutableURLRequest *) sendPutRequest:(NSMutableURLRequest *) request;
+- (NSMutableURLRequest *) sendDeleteRequest:(NSMutableURLRequest *) request;
 - (BOOL) boolByNumber:(NSNumber *) numberObj;
 - (int) intByNumber:(NSNumber *) numberObj;
 - (float) floatByNumber:(NSNumber *) numberObj;
@@ -253,5 +258,7 @@
 - (Offer *) parseOffer:(NSDictionary *) dict;
 - (Device *) parseDevice:(NSDictionary *) dict;
 - (void) cancelRequest;
-
+- (taskComplition) createCompletionHandlerWithCompletion:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completion;
+- (void)requestFailed:(NSURLResponse *) response;
+- (BOOL) checkResponseHasError:(NSURLResponse *) response ;
 @end

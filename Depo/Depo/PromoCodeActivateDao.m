@@ -13,36 +13,44 @@
 - (void) requestActivateCode:(NSString *) promoCode {
     NSURL *url = [NSURL URLWithString:PROMO_ACTIVATE_URL];
     
-    NSData *postData = [promoCode dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:promoCode options:NSJSONWritingPrettyPrinted error:nil];
     
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setPostBody:postData];
-    [request setDelegate:self];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     
-    [self sendPostRequest:request];
-}
-
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    NSError *error = [request error];
-    if (!error) {
-        NSString *responseStr = [request responseString];
-        NSLog(@"Promo code response: %@", responseStr);
-        if(responseStr != nil && ![responseStr isKindOfClass:[NSNull class]]) {
-            SBJSON *jsonParser = [SBJSON new];
-            NSDictionary *dict = [jsonParser objectWithString:responseStr];
-            if(dict != nil && [dict isKindOfClass:[NSDictionary class]]) {
-                NSString *status = [dict objectForKey:@"status"];
-                if(status != nil && [status isEqualToString:@"OK"]) {
-                    [self shouldReturnSuccess];
-                    return;
-                } else {
-                    [self shouldReturnFailWithMessage:NSLocalizedString(@"PromoError", @"")];
-                    return;
+    request = [self sendPostRequest:request];
+    [request setHTTPBody:[postData mutableCopy]];
+    
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            if (![self checkResponseHasError:response]) {
+                NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                if(dict != nil && [dict isKindOfClass:[NSDictionary class]]) {
+                    NSString *status = [dict objectForKey:@"status"];
+                    if(status != nil && [status isEqualToString:@"OK"]) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self shouldReturnSuccess];
+                        });
+                    } else {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self shouldReturnFailWithMessage:NSLocalizedString(@"PromoError", @"")];
+                        });
+                    }
+                }
+                else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnFailWithMessage:NSLocalizedString(@"PromoError", @"")];
+                    });
                 }
             }
         }
-    }
-    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+    }]];
+    self.currentTask = task;
+    [task resume];
 }
 
 @end

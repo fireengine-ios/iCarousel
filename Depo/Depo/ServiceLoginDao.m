@@ -28,58 +28,50 @@
                           @"", @"captchaToken",
                           nil];
     
-    SBJSON *json = [SBJSON new];
-    NSString *jsonStr = [json stringWithObject:info];
-    NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:info options:NSJSONWritingPrettyPrinted error:nil];
     
-	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setRequestMethod:@"POST"];
-    [request addRequestHeader:@"Accept" value:@"application/json"];
-    [request addRequestHeader:@"Content-Type" value:@"application/json; encoding=utf-8"];
-    [request setPostBody:postData];
-    [request setDelegate:self];
-    [request startAsynchronous];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    [request setHTTPMethod:@"POST"];
+    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request addValue:@"application/json; encoding=utf-8" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            if (![self checkResponseHasError:response]) {
+                NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+                
+                NSNumber *code = [mainDict objectForKey:@"code"];
+                NSString *message = [mainDict objectForKey:@"message"];
+                NSNumber *rememberMe = [mainDict objectForKey:@"rememberMe"];
+                NSNumber *showCaptcha = [mainDict objectForKey:@"showCaptcha"];
+                NSString *token = [mainDict objectForKey:@"authToken"];
+                
+                AuthResponse *result = [[AuthResponse alloc] init];
+                result.code = [code intValue];
+                result.message = message;
+                if(rememberMe != nil) {
+                    result.rememberMe = [rememberMe boolValue];
+                }
+                if(showCaptcha != nil) {
+                    result.showCaptcha = [showCaptcha boolValue];
+                }
+                if(token != nil) {
+                    result.authToken = token;
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.delegate performSelector:successMethod withObject:result];
+                });
+            }
+        }
+    }]];
+    self.currentTask = task;
+    [task resume];
 }
 
-- (void)requestFinished:(ASIHTTPRequest *)request {
-	NSError *error = [request error];
-	
-	if (!error) {
-		NSString *responseEnc = [request responseString];
-//        NSLog(@"REQUEST AUTH RESP:%@", responseEnc);
-		
-		SBJSON *jsonParser = [SBJSON new];
-		NSDictionary *mainDict = [jsonParser objectWithString:responseEnc];
-
-        NSNumber *code = [mainDict objectForKey:@"code"];
-        NSString *message = [mainDict objectForKey:@"message"];
-        NSNumber *rememberMe = [mainDict objectForKey:@"rememberMe"];
-        NSNumber *showCaptcha = [mainDict objectForKey:@"showCaptcha"];
-        NSString *token = [mainDict objectForKey:@"authToken"];
-        
-        AuthResponse *result = [[AuthResponse alloc] init];
-        result.code = [code intValue];
-        result.message = message;
-        if(rememberMe != nil) {
-            result.rememberMe = [rememberMe boolValue];
-        }
-        if(showCaptcha != nil) {
-            result.showCaptcha = [showCaptcha boolValue];
-        }
-        if(token != nil) {
-            result.authToken = token;
-        }
-		
-        [self.delegate performSelector:successMethod withObject:result];
-		
-	} else {
-        [self.delegate performSelector:failMethod withObject:GENERAL_ERROR_MESSAGE];
-	}
-    
-}
-
-- (void)requestFailed:(ASIHTTPRequest *)request {
-	[self.delegate performSelector:failMethod withObject:GENERAL_ERROR_MESSAGE];
-}
 
 @end

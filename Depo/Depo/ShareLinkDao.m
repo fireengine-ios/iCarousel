@@ -21,30 +21,30 @@
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setObject:files forKey:@"fileUuidList"];
     [dict setObject:isAlbumValue forKey:@"isAlbum"];
-    
-    SBJSON *json = [SBJSON new];
-    NSString *jsonStr = [json stringWithObject:dict];
-    NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
+
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
     
 //    NSLog(@"Share Payload: %@", jsonStr);
     
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setPostBody:[postData mutableCopy]];
-    [request setDelegate:self];
-    
-    [self sendPostRequest:request];
-}
-
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    NSError *error = [request error];
-    
-    if (!error) {
-        NSString *responseEnc = [request responseString];
-        [self shouldReturnSuccessWithObject:responseEnc];
-    } else {
-        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-    }
-    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    [request setHTTPBody:[postData mutableCopy]];
+    request = [self sendPostRequest:request];
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            if (![self checkResponseHasError:response]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    NSString *responseEnc = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                    [self shouldReturnSuccessWithObject:responseEnc];
+                });
+            }
+        }
+    }]];
+    [task resume];
 }
 
 @end

@@ -60,6 +60,7 @@
 #import <Crashlytics/Crashlytics.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "Reachability.h"
+
 #import "BaseBgController.h"
 #import "AppRater.h"
 
@@ -83,7 +84,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-
+    
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
         [application setStatusBarStyle:UIStatusBarStyleLightContent];
     }
@@ -91,21 +92,21 @@
     
     IGLog(@"AppDelegate didFinishLaunchingWithOptions");
     NSLog(@"AppDelegate didFinishLaunchingWithOptions");
-
+    
 #ifdef LOG2FILE
     
     [self logToFiles];
-
+    
 #endif
     
     [Fabric with:@[[Crashlytics class]]];
-
+    
     session = [[AppSession alloc] init];
     mapUtil = [[MapUtil alloc] init];
     wormhole = [[MMWormhole alloc] initWithApplicationGroupIdentifier:GROUP_NAME_SUITE_NSUSERDEFAULTS optionalDirectory:EXTENSION_WORMHOLE_DIR];
-
-//mahir: loc update geldiğinden bg fetch cikarildi simdilik    [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
-
+    
+    //mahir: loc update geldiğinden bg fetch cikarildi simdilik    [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
+    
     //Adjust initialization
     ADJConfig *adjustConfig = [ADJConfig configWithAppToken:@"hlqdgtbmrdb9" environment:ADJEnvironmentProduction];
     [Adjust appDidLaunch:adjustConfig];
@@ -114,9 +115,9 @@
     [ACTConversionReporter reportWithConversionID:@"946883454" label:@"gJYdCOLv4wcQ_pbBwwM" value:@"0.00" isRepeatable:NO];
     
     //TODO BugSense integration
-//    [[Mint sharedInstance] initAndStartSession:@"13ceffcf"];
-
-
+    //    [[Mint sharedInstance] initAndStartSession:@"13ceffcf"];
+    
+    
     NSInteger types;
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.f) {
         types = UIUserNotificationTypeBadge | UIUserNotificationTypeAlert | UIUserNotificationTypeSound;
@@ -124,7 +125,7 @@
         types = UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeBadge;
     }
     
-//    [MPush setShouldShowDebugLogs:YES];
+    //    [MPush setShouldShowDebugLogs:YES];
     if(![AppUtil readFirstVisitOverFlag]) {
         [MPush setLocationEnabled:NO];
     } else {
@@ -141,19 +142,19 @@
     
     //Curio integrationc
     [[CurioSDK shared] startSession:@"http://curio.turkcell.com.tr/api/v2" apiKey:@"cab314f33df2514764664e5544def586" trackingCode:@"KL2XNFIE" sessionTimeout:30 periodicDispatchEnabled:YES dispatchPeriod:5 maxCachedActivitiyCount:10 loggingEnabled:NO logLevel:0 registerForRemoteNotifications:NO notificationTypes:@"Sound,Badge,Alert" fetchLocationEnabled:NO maxValidLocationTimeInterval:600 delegate:self appLaunchOptions:launchOptions];
-
+    
     [[CurioSDK shared] sendEvent:@"ApplicationStarted" eventValue:@"true"];
     [MPush hitTag:@"ApplicationStarted" withValue:@"true"];
-
+    
     DBSession *dbSession = [[DBSession alloc] initWithAppKey:@"422fptod5dlxrn8" appSecret:@"umjclqg3juoyihd" root:kDBRootDropbox]; // initWithAppKey:@"zeddgylajxc1op8" appSecret:@"kn9u1e77bzlk103"
     [DBSession setSharedSession:dbSession];
-
+    
     [self addInitialBgImage];
-
+    
     progress = [[MBProgressHUD alloc] initWithWindow:self.window];
     progress.opacity = 0.4f;
     [self.window addSubview:progress];
-
+    
     tokenManager = [[TokenManager alloc] init];
     tokenManager.delegate = self;
     
@@ -167,14 +168,14 @@
     
     if(![ReachabilityManager isReachable]) {
         IGLog(@"AppDelegate ReachabilityManager notReachable");
-
+        
         UIAlertView *noConnAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", @"") message:NSLocalizedString(@"ConnectionErrorWarning", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"SubmitButtonTitle", @"") otherButtonTitles:nil];
         noConnAlert.delegate = self;
         noConnAlert.tag = NO_CONN_ALERT_TAG;
         [noConnAlert show];
     } else {
         IGLog(@"AppDelegate UpdaterController called");
-
+        
         UpdaterController *updaterController = [UpdaterController initWithUpdateURL:UPDATER_SDK_URL delegate:self postProperties:NO];
         [self.window addSubview:updaterController];
         [updaterController getUpdateInformation];
@@ -183,24 +184,19 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginRequiredNotificationRaised) name:LOGIN_REQ_NOTIFICATION object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityDidChange) name:kReachabilityChangedNotification object:nil];
-   
-//    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
-//    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
     
-    [self.window makeKeyAndVisible];
-    
-    
+    //    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+    //    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
+
     // App Rater
     [AppRater sharedInstance].daysUntilPrompt = 5;
     [AppRater sharedInstance].launchesUntilPrompt = 10;
     [AppRater sharedInstance].remindMeDaysUntilPrompt = 15;
     [AppRater sharedInstance].remindMeLaunchesUntilPrompt = 10;
-   // [AppRater sharedInstance].preferredLanguage = @"en";
+    // [AppRater sharedInstance].preferredLanguage = @"en";
     [[AppRater sharedInstance] appLaunched];
-    
-    
-    
-    
+
+    [self.window makeKeyAndVisible];
     return YES;
 }
 
@@ -244,7 +240,7 @@
 }
 
 - (void) triggerPostTermsAndMigration {
-
+    
     NSString *cachedMsisdn = [CacheUtil readCachedMsisdnForPostMigration];
     NSString *cachedPass = [CacheUtil readCachedPassForPostMigration];
     if(cachedMsisdn != nil && cachedPass != nil) {
@@ -310,23 +306,23 @@
 
 - (void) startOpeningPage {
     /*
-    [APPDELEGATE.uploadQueue.session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
-        if(uploadTasks) {
-            for(NSURLSessionUploadTask *task in uploadTasks) {
-                if([task.originalRequest.URL absoluteString]) {
-                    [APPDELEGATE.session addBgOngoingTaskUrl:[task.originalRequest.URL absoluteString]];
-                }
-            }
-        }
-        [self triggerAutoSynchronization];
-    }];
+     [APPDELEGATE.uploadQueue.session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
+     if(uploadTasks) {
+     for(NSURLSessionUploadTask *task in uploadTasks) {
+     if([task.originalRequest.URL absoluteString]) {
+     [APPDELEGATE.session addBgOngoingTaskUrl:[task.originalRequest.URL absoluteString]];
+     }
+     }
+     }
+     [self triggerAutoSynchronization];
+     }];
      */
-
+    
     [[UploadQueue sharedInstance].session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
     }];
-
+    
     [self triggerAutoSynchronization];
-
+    
     if (self.notificationAction > 0) {
         if (self.notificationAction == NotificationActionSyncSettings) {
             [self triggerSyncSettings];
@@ -406,21 +402,21 @@
 
 - (void) triggerLogout {
     // Tekrar 3G radius loginine girdiği için commentlendi
-//    [tokenManager requestLogout];
-
+    //    [tokenManager requestLogout];
+    
     IGLog(@"AppDelegate Logged out");
-
-    for (ASIHTTPRequest *req in ASIHTTPRequest.sharedQueue.operations) {
-        [req cancel];
-        [req setDelegate:nil];
-    }
-
+    
+    //    for (ASIHTTPRequest *req in ASIHTTPRequest.sharedQueue.operations) {
+    //        [req cancel];
+    //        [req setDelegate:nil];
+    //    }
+    
     [self.session stopAudioItem];
     [self.session cleanoutAfterLogout];
     [CacheUtil resetRememberMeToken];
     [[UploadQueue sharedInstance] cancelAllUploads];
-
-//    WelcomeController *welcomePage = [[WelcomeController alloc] init];
+    
+    //    WelcomeController *welcomePage = [[WelcomeController alloc] init];
     LoginController *loginController = [[LoginController alloc] init];
     MyNavigationController *welcomeNav = [[MyNavigationController alloc] initWithRootViewController:loginController];
     self.window.rootViewController = welcomeNav;
@@ -437,7 +433,7 @@
     if([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground) {
         [self.window setRootViewController:[[BaseBgController alloc] init]];
     } else {
-//        WelcomeController *welcomePage = [[WelcomeController alloc] init];
+        //        WelcomeController *welcomePage = [[WelcomeController alloc] init];
         LoginController *loginController = [[LoginController alloc] init];
         MyNavigationController *welcomeNav = [[MyNavigationController alloc] initWithRootViewController:loginController];
         self.window.rootViewController = welcomeNav;
@@ -446,7 +442,7 @@
 
 - (void) tokenManagerDidReceiveBaseUrl {
     IGLog(@"AppDelegate tokenManagerDidReceiveBaseUrl");
-
+    
     [self hideMainLoading];
     
     if(loginInProgress) {
@@ -460,16 +456,16 @@
         MyNavigationController *imgSyncNav = [[MyNavigationController alloc] initWithRootViewController:imgSync];
         self.window.rootViewController = imgSyncNav;
     } else {
-//        [self triggerHome];
+        //        [self triggerHome];
         [self startOpeningPage];
     }
 }
 
 - (void) tokenManagerDidFailReceivingBaseUrl {
     IGLog(@"AppDelegate tokenManagerDidFailReceivingBaseUrl");
-
+    
     [self hideMainLoading];
-//    [self triggerHome];
+    //    [self triggerHome];
     [self startOpeningPage];
 }
 
@@ -531,23 +527,8 @@
     }
 }
 
-
-//- (void) startAutoSync {
-//    IGLog(@"AppDelegate startAutoSync");
-//    if([AppUtil readLocInfoPopupShownFlag]) {
-//        [[LocationManager sharedInstance] startLocationManager];
-//        [[SyncManager sharedInstance] decideAndStartAutoSync];
-//    } else {
-//        locInfoPopup = [[CustomInfoWithIconView alloc] initWithFrame:CGRectMake(0, 0, self.window.frame.size.width, self.window.frame.size.height) withIcon:@"icon_locationperm.png" withInfo:NSLocalizedString(@"LocInfoPopup", @"") withSubInfo:NSLocalizedString(@"LocSubinfoPopup", @"") isCloseable:YES];
-//        locInfoPopup.delegate = self;
-//        [self.window addSubview:locInfoPopup];
-//        [AppUtil writeLocInfoPopupShownFlag];
-//        [AppUtil writePeriodicLocInfoPopupIdleFlag];
-//    }
-//}
-
 - (void) stopAutoSync {
-//    [syncManager stopAutoSync];
+    //    [syncManager stopAutoSync];
 }
 
 - (void) customInfoWithIconViewDidDismiss {
@@ -609,9 +590,9 @@
 }
 
 - (void) application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)())completionHandler {
-
+    
     [self application:application didFinishLaunchingWithOptions:notification.userInfo];
-
+    
     if (completionHandler) {
         completionHandler();
     }
@@ -641,27 +622,27 @@
 
 - (void) application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     /*
-    if(self.uploadQueue && self.uploadQueue.session) {
-        [self.uploadQueue.session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
-            if(uploadTasks) {
-                for(NSURLSessionUploadTask *task in uploadTasks) {
-                    if([task.originalRequest.URL absoluteString]) {
-                        [APPDELEGATE.session addBgOngoingTaskUrl:[task.originalRequest.URL absoluteString]];
-                    }
-                }
-            }
-            [self triggerAutoSynchronization];
-        }];
-    } else {
-        [self triggerAutoSynchronization];
-    }
+     if(self.uploadQueue && self.uploadQueue.session) {
+     [self.uploadQueue.session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
+     if(uploadTasks) {
+     for(NSURLSessionUploadTask *task in uploadTasks) {
+     if([task.originalRequest.URL absoluteString]) {
+     [APPDELEGATE.session addBgOngoingTaskUrl:[task.originalRequest.URL absoluteString]];
+     }
+     }
+     }
+     [self triggerAutoSynchronization];
+     }];
+     } else {
+     [self triggerAutoSynchronization];
+     }
      */
     
     [[UploadQueue sharedInstance].session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
     }];
-
+    
     [self triggerAutoSynchronization];
-
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 25 * NSEC_PER_SEC),
                    dispatch_get_main_queue(), ^{
                        if([[UploadQueue sharedInstance] remainingCount] > 0) {
@@ -684,9 +665,9 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     IGLog(@"AppDelegate applicationDidEnterBackground");
     /* auto contact sync kaldirildi
-    if ([ContactSyncSDK automated]){
-        [ContactSyncSDK sleep];
-    }
+     if ([ContactSyncSDK automated]){
+     [ContactSyncSDK sleep];
+     }
      */
 }
 
@@ -701,9 +682,9 @@
     NSLog(@"AppDelegate applicationDidBecomeActive");
     //TODO contact sync ile aç
     /*
-    if(session != nil) {
-        [session checkLatestContactSyncStatus];
-    }
+     if(session != nil) {
+     [session checkLatestContactSyncStatus];
+     }
      */
     
     NSLog(@".... %@", NSStringFromClass([self.window.rootViewController class]));
@@ -737,21 +718,21 @@
             }
         }
         /*
-        [APPDELEGATE.uploadQueue.session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
-            if(uploadTasks) {
-                for(NSURLSessionUploadTask *task in uploadTasks) {
-                    if([task.originalRequest.URL absoluteString]) {
-                        [APPDELEGATE.session addBgOngoingTaskUrl:[task.originalRequest.URL absoluteString]];
-                    }
-                }
-            }
-            [self triggerAutoSynchronization];
-        }];
-        */
+         [APPDELEGATE.uploadQueue.session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
+         if(uploadTasks) {
+         for(NSURLSessionUploadTask *task in uploadTasks) {
+         if([task.originalRequest.URL absoluteString]) {
+         [APPDELEGATE.session addBgOngoingTaskUrl:[task.originalRequest.URL absoluteString]];
+         }
+         }
+         }
+         [self triggerAutoSynchronization];
+         }];
+         */
         
         /*
-        [[UploadQueue sharedInstance].session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
-        }];
+         [[UploadQueue sharedInstance].session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
+         }];
          */
         
     } else {
@@ -763,15 +744,17 @@
             }
         }];
         // eğer backgrounddan gelmiyorsa bir sonraki auto sync bloğununun okunmasını engelleyen lock kaldırılıyor
-//        [SyncUtil unlockAutoSyncBlockInProgress];
+        //        [SyncUtil unlockAutoSyncBlockInProgress];
     }
+    
+    //    [SyncUtil unlockAutoSyncBlockInProgress];
     
     if([SyncUtil readFirstTimeSyncFinishedFlag]) {
         [SyncUtil unlockAutoSyncBlockInProgress];
     }
 
     [self triggerAutoSynchronization];
-
+    
     [[UIDevice currentDevice] setBatteryMonitoringEnabled:YES];
     if ([[UIDevice currentDevice] batteryState] == UIDeviceBatteryStateCharging || [[UIDevice currentDevice] batteryState] == UIDeviceBatteryStateFull) {
         [UIApplication sharedApplication].idleTimerDisabled = YES;
@@ -790,8 +773,8 @@
 }
 
 void uncaughtExceptionHandler(NSException *exception) {
-//    NSLog(@"CRASH: %@", exception);
-//    NSLog(@"Stack Trace: %@", [exception callStackSymbols]);
+    //    NSLog(@"CRASH: %@", exception);
+    //    NSLog(@"Stack Trace: %@", [exception callStackSymbols]);
     [[UploadQueue sharedInstance] cancelAllUploads];
 }
 
@@ -823,7 +806,7 @@ void uncaughtExceptionHandler(NSException *exception) {
 
 - (void) alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     if(alertView.tag == NO_CONN_ALERT_TAG) {
-//        [self triggerLogout];
+        //        [self triggerLogout];
     }
 }
 
@@ -837,7 +820,7 @@ void uncaughtExceptionHandler(NSException *exception) {
      NSLog(@"%@",[dirContents objectAtIndex:i]);
      
      }*/
-
+    
     NSFileManager  *manager = [NSFileManager defaultManager];
     
     // the preferred way to get the apps documents directory
@@ -850,7 +833,7 @@ void uncaughtExceptionHandler(NSException *exception) {
     // filter the array for only sqlite files
     NSPredicate *fltrDepoUploadLeaks = [NSPredicate predicateWithFormat:@"self CONTAINS 'DEPO_UPLOAD_FILE'"];
     NSArray *leakFiles = [allFiles filteredArrayUsingPredicate:fltrDepoUploadLeaks];
-        //NSPredicate *fltr = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:fltr3GP,fltrGIF,fltrJPEG,fltrMOV,fltrMp3,fltrMP4,fltrPNG, nil]];
+    //NSPredicate *fltr = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:fltr3GP,fltrGIF,fltrJPEG,fltrMOV,fltrMp3,fltrMP4,fltrPNG, nil]];
     //NSArray *mediaFiles = [allFiles filteredArrayUsingPredicate:fltr];
     
     // use fast enumeration to iterate the array and delete the files
@@ -862,7 +845,7 @@ void uncaughtExceptionHandler(NSException *exception) {
         NSString *path = file;
         NSString *leakFilePath = [documentsDirectory stringByAppendingPathComponent:path];
         [manager removeItemAtPath:leakFilePath error:nil];
-
+        
     }
 }
 
@@ -900,22 +883,22 @@ void uncaughtExceptionHandler(NSException *exception) {
 }
 
 - (void) cancelRequestsWithTag:(int) tag {
-    NSOperationQueue * temp = ASIHTTPRequest.sharedQueue;
-    for (ASIHTTPRequest *req in ASIHTTPRequest.sharedQueue.operations) {
-        if(req.tag == tag) {
-            [req cancel];
-            [req setDelegate:nil];
-        }
-    }
+    //    NSOperationQueue * temp = ASIHTTPRequest.sharedQueue;
+    //    for (ASIHTTPRequest *req in ASIHTTPRequest.sharedQueue.operations) {
+    //        if(req.tag == tag) {
+    //            [req cancel];
+    //            [req setDelegate:nil];
+    //        }
+    //    }
 }
 
 - (void) cancelRequestsWithTags:(NSArray *) tags {
-    for (ASIHTTPRequest *req in ASIHTTPRequest.sharedQueue.operations) {
-        if([tags containsObject:[NSNumber numberWithInteger:req.tag]]) {
-            [req cancel];
-            [req setDelegate:nil];
-        }
-    }
+    //    for (ASIHTTPRequest *req in ASIHTTPRequest.sharedQueue.operations) {
+    //        if([tags containsObject:[NSNumber numberWithInteger:req.tag]]) {
+    //            [req cancel];
+    //            [req setDelegate:nil];
+    //        }
+    //    }
 }
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url sourceApplication:(NSString *)source annotation:(id)annotation {

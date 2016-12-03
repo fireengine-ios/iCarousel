@@ -16,58 +16,60 @@
     NSString *log = [NSString stringWithFormat:@"[GET] EulaCheckDao requestCheckEulaForLocale %@", locale];
     IGLog(log);
 
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setDelegate:self];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    request = [self sendGetRequest:request];
     
-    [self sendGetRequest:request];
-}
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            NSString *log = [NSString stringWithFormat:@"EulaCheckDao requestFailed with error: %@", [error localizedDescription]];
+            IGLog(log);
 
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    NSError *error = [request error];
-    if (!error) {
-        NSString *responseStr = [request responseString];
-        NSLog(@"EULA Check Response: %@", responseStr);
+            NSInteger statusCode = [(NSHTTPURLResponse *) response statusCode];
+            if (statusCode == 412) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self shouldReturnSuccessWithObject:[NSString stringWithFormat:@"%d",(int)statusCode]];
+                });
 
-        IGLog(@"EulaCheckDao requestFinished successfully");
-
-        SBJSON *jsonParser = [SBJSON new];
-        NSDictionary *mainDict = [jsonParser objectWithString:responseStr];
-        
-        if(mainDict != nil && ![mainDict isKindOfClass:[NSNull class]]) {
-            NSString *status = [self strByRawVal:[mainDict objectForKey:@"status"]];
-            [self shouldReturnSuccessWithObject:status];
-            return;
+            }
+            else if (statusCode == 403) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self shouldReturnFailWithMessage:FORBIDDEN_ERROR_MESSAGE];
+                });
+            }
+            else if(statusCode == NSURLErrorNotConnectedToInternet) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self shouldReturnFailWithMessage:NSLocalizedString(@"NoConnErrorMessage", @"")];
+                });
+            }
+            else {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                });
+            }
         }
-    }
-    IGLog(@"EulaCheckDao requestFinished with error");
-    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-}
-
-- (void)requestFailed:(ASIHTTPRequest *)request {
-    NSString *responseStr = [request responseString];
-    NSLog(@"Eula Check Error Response: %@", responseStr);
-    
-    NSString *log = [NSString stringWithFormat:@"EulaCheckDao requestFailed with error: %@", responseStr];
-    IGLog(log);
-
-    if([request responseStatusCode] == 412) {
-        SBJSON *jsonParser = [SBJSON new];
-        NSDictionary *mainDict = [jsonParser objectWithString:responseStr];
-        if(mainDict != nil && ![mainDict isKindOfClass:[NSNull class]]) {
-            NSString *status = [self strByRawVal:[mainDict objectForKey:@"status"]];
-            [self shouldReturnSuccessWithObject:status];
-            return;
+        else {
+            if (![self checkResponseHasError:response]) {
+                NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                
+                if(mainDict != nil && ![mainDict isKindOfClass:[NSNull class]]) {
+                    IGLog(@"EulaCheckDao requestFinished successfully");
+                    NSString *status = [self strByRawVal:[mainDict objectForKey:@"status"]];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnSuccessWithObject:status];
+                    });
+                }
+                else {
+                    IGLog(@"EulaCheckDao requestFinished with error");
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                    });
+                }
+            }
         }
-        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-    } else if([request responseStatusCode] == 403) {
-        [self shouldReturnFailWithMessage:FORBIDDEN_ERROR_MESSAGE];
-    } else {
-        if([request.error code] == ASIConnectionFailureErrorType){
-            [self shouldReturnFailWithMessage:NSLocalizedString(@"NoConnErrorMessage", @"")];
-        } else {
-            [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-        }
-    }
+    }]];
+    self.currentTask = task;
+    [task resume];
 }
 
 @end

@@ -14,40 +14,51 @@
     NSURL *url = [NSURL URLWithString:FORGOT_PASS_URL];
     
     NSString *postValue = [NSString stringWithFormat:@"%@", email];
-    NSData *postData = [postValue dataUsingEncoding:NSUTF8StringEncoding];
     
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setPostBody:postData];
-    [request setDelegate:self];
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:postValue options:NSJSONWritingPrettyPrinted error:nil];
     
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     if(captchaId != nil && captchaValue != nil) {
-        [request addRequestHeader:@"X-Captcha-Id" value:captchaId];
-        [request addRequestHeader:@"X-Captcha-Answer" value:captchaValue];
+        [request addValue:captchaId forHTTPHeaderField:@"X-Captcha-Id"];
+        [request addValue:captchaValue forHTTPHeaderField:@"X-Captcha-Answer"];
     }
+
+    request = [self sendPostRequest:request];
+    [request setHTTPBody:postData];
     
-    [self sendPostRequest:request];
-}
-
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    NSError *error = [request error];
-
-    if (!error) {
-        NSString *responseStr = [request responseString];
-        SBJSON *jsonParser = [SBJSON new];
-        NSDictionary *dict = [jsonParser objectWithString:responseStr];
-        if(dict != nil && [dict isKindOfClass:[NSDictionary class]]) {
-            NSNumber *statusVal = [dict objectForKey:@"status"];
-            if(statusVal != nil && ![statusVal isKindOfClass:[NSNull class]]) {
-                if([statusVal intValue] == 4001) {
-                    [self shouldReturnFailWithMessage:NSLocalizedString(@"InvalidCaptchaErrorMessage", @"")];
-                    return;
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            if (![self checkResponseHasError:response]) {
+                NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                if(mainDict && [mainDict isKindOfClass:[NSDictionary class]]) {
+                    NSNumber *statusVal = [mainDict objectForKey:@"status"];
+                    if(statusVal != nil && ![statusVal isKindOfClass:[NSNull class]]) {
+                        if([statusVal intValue] == 4001) {
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                [self shouldReturnFailWithMessage:NSLocalizedString(@"InvalidCaptchaErrorMessage", @"")];
+                                return ;
+                            });
+                        }
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self shouldReturnSuccessWithObject:mainDict];
+                        });
+                    }
+                }
+                else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                    });
                 }
             }
         }
-        [self shouldReturnSuccessWithObject:dict];
-    } else {
-        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-    }
+    }]];
+    self.currentTask = task;
+    [task resume];
 }
 
 @end

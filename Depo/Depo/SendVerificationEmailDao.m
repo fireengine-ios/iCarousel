@@ -16,35 +16,40 @@
     NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:
                           email, @"email",
                           nil];
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:info options:NSJSONWritingPrettyPrinted error:nil];
     
-    SBJSON *json = [SBJSON new];
-    NSString *jsonStr = [json stringWithObject:info];
-    NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    request = [self sendPostRequest:request];
+    [request setHTTPBody:postData];
     
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setPostBody:postData];
-    [request setDelegate:self];
-    
-    [self sendPostRequest:request];
-}
-
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    NSError *error = [request error];
-    if (!error) {
-        NSString *responseStr = [request responseString];
-        NSLog(@"Send Verification Email Response: %@", responseStr);
-        
-        SBJSON *jsonParser = [SBJSON new];
-        NSDictionary *mainDict = [jsonParser objectWithString:responseStr];
-        if(mainDict != nil && ![mainDict isKindOfClass:[NSNull class]]) {
-            NSString *statusVal = [mainDict objectForKey:@"status"];
-            if(statusVal != nil && ![statusVal isKindOfClass:[NSNull class]]) {
-                [self shouldReturnSuccessWithObject:statusVal];
-                return;
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            if (![self checkResponseHasError:response]) {
+                NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                if(mainDict != nil && ![mainDict isKindOfClass:[NSNull class]]) {
+                    NSString *statusVal = [mainDict objectForKey:@"status"];
+                    if(statusVal != nil && ![statusVal isKindOfClass:[NSNull class]]) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self shouldReturnSuccessWithObject:statusVal];
+                        });
+                    }
+                }
+                else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                    });
+                }
             }
         }
-    }
-    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+    }]];
+    self.currentTask = task;
+    [task resume];
+
 }
 
 @end

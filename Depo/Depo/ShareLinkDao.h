@@ -10,7 +10,7 @@
 
 @interface ShareLinkDao : BaseDao
 
-- (void) requestLinkForFiles:(NSArray *) files;
 - (void) requestLinkForFiles:(NSArray *) files isAlbum:(BOOL)isAlbum;
+- (void) requestLinkForFiles:(NSArray *) files;
 
 @end

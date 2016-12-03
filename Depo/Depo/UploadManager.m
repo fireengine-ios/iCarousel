@@ -177,19 +177,29 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     BOOL shouldStartProcess = YES;
     
     if ([[self.asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
-//        @autoreleasepool {
-            ALAssetRepresentation *rep = [self.asset defaultRepresentation];
-            unsigned long dataSize = (unsigned long)[rep size];
-            Byte *buffer = (Byte *) malloc(dataSize);
-            if(buffer) {
-                NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:rep.size error:nil];
-                NSData *videoData = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
-                shouldStartProcess = [videoData writeToFile:tempPath atomically:YES];
-                dataMD5Hash = [SyncUtil md5String:videoData];
-            } else {
-                shouldStartProcess = NO;
+        @autoreleasepool {
+            ALAssetRepresentation *rep = [asset defaultRepresentation];
+            
+            NSMutableData *videoData = [NSMutableData data];
+            
+            NSError *error;
+            long long bufferOffset = 0ll;
+            NSInteger bufferSize = 10000;
+            long long bytesRemaining = [rep size];
+            uint8_t buffer[bufferSize];
+            NSUInteger bytesRead;
+            while (bytesRemaining > 0) {
+                bytesRead = [rep getBytes:buffer fromOffset:bufferOffset length:bufferSize error:&error];
+                if (bytesRead == 0) {
+                    return;
+                }
+                bytesRemaining -= bytesRead;
+                bufferOffset   += bytesRead;
+                [videoData appendBytes:buffer length:bytesRead];
             }
-//        }
+            shouldStartProcess = [videoData writeToFile:tempPath atomically:YES];
+            dataMD5Hash = [SyncUtil md5String:videoData];
+        }
         fileType = @"video";
     } else {
         UIImageOrientation orientation = UIImageOrientationUp;

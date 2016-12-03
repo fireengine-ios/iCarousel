@@ -14,26 +14,34 @@
 - (void) requestAppleProductNames {
     NSURL *url = [NSURL URLWithString:APPLE_PRODUCT_NAMES_URL];
     
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    request.tag = REQ_TAG_FOR_PACKAGE;
-    [request setDelegate:self];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    request = [self sendGetRequest:request];
     
-    [self sendGetRequest:request];
-}
-
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    NSError *error = [request error];
-    
-    if (!error) {
-        NSString *responseStr = [request responseString];
-        SBJSON *jsonParser = [SBJSON new];
-        NSArray *productNamesArray = [jsonParser objectWithString:responseStr];
-        if(productNamesArray != nil && [productNamesArray isKindOfClass:[NSArray class]]) {
-            [self shouldReturnSuccessWithObject:productNamesArray];
-            return;
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
         }
-    }
-    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+        else {
+            if (![self checkResponseHasError:response]) {
+                NSArray *productNamesArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                if(productNamesArray != nil && [productNamesArray isKindOfClass:[NSArray class]]) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnSuccessWithObject:productNamesArray];
+                    });
+                }
+                else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                    });
+                }
+            }
+        }
+    }]];
+    self.currentTask = task;
+    [task resume];
+
 }
 
 @end

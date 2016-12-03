@@ -16,28 +16,32 @@
     NSDictionary *metadata = [NSDictionary dictionaryWithObjectsAndKeys:tagVal, keyVal, nil];
     NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:uuids, @"file-list", metadata, @"metadata", nil];
     
-    SBJSON *json = [SBJSON new];
-    NSString *jsonStr = [json stringWithObject:info];
-    NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:info options:NSJSONWritingPrettyPrinted error:nil];
     
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setPostBody:postData];
-    [request setDelegate:self];
     
-    [self sendPostRequest:request];
-}
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    [request setHTTPBody:postData];
+    request = [self sendPostRequest:request];
+    
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            IGLog(@"FileTagDao requestFeedTag failed with general error");
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            if (![self checkResponseHasError:response]) {
+                IGLog(@"FileTagDao requestFeedTag request finished successfully");
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self shouldReturnSuccess];
+                });
+            }
+        }
+    }]];
+    self.currentTask = task;
+    [task resume];
 
-- (void) requestFinished:(ASIHTTPRequest *)request {
-    NSError *error = [request error];
-    if (!error) {
-        NSString *responseStr = [request responseString];
-        NSLog(@"FileTagDao requestFeedTag Response: %@", responseStr);
-        IGLog(@"FileTagDao requestFeedTag request finished successfully");
-        [self shouldReturnSuccess];
-        return;
-    }
-    IGLog(@"FileTagDao requestFeedTag failed with general error");
-    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
 }
 
 @end

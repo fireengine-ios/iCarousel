@@ -13,26 +13,30 @@
 - (void) requestSendFeedbackWithType:(FeedBackType) type andMessage:(NSString *) message {
     NSString *feedbackUrlStr = [NSString stringWithFormat:FEEDBACK_URL, type == FeedBackTypeComplaint ? @"COMPLAINT":@"SUGGESTION"];
     NSURL *url = [NSURL URLWithString:feedbackUrlStr];
-    
-    NSData *postData = [message dataUsingEncoding:NSUTF8StringEncoding];
-    
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setPostBody:postData];
-    [request setDelegate:self];
-    
-    [self sendPostRequest:request];
-}
 
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    NSError *error = [request error];
-    if (!error) {
-        NSString *responseStr = [request responseString];
-        NSLog(@"Feedback Response: %@", responseStr);
-
-        [self shouldReturnSuccess];
-        return;
-    }
-    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:message options:NSJSONWritingPrettyPrinted error:nil];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    
+    request = [self sendPostRequest:request];
+    [request setHTTPBody:postData];
+    
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            if (![self checkResponseHasError:response]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self shouldReturnSuccess];
+                });
+            }
+        }
+    }]];
+    self.currentTask = task;
+    [task resume];
 }
 
 @end

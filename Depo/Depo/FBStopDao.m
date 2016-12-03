@@ -15,22 +15,28 @@
     
     IGLog(@"[GET] FBStopDao requestFBStop called");
     
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setDelegate:self];
-    [self sendGetRequest:request];
-}
-
-- (void) requestFinished:(ASIHTTPRequest *)request {
-    NSError *error = [request error];
-    if (!error) {
-        NSString *responseStr = [request responseString];
-        NSLog(@"FBStopDao requestFBStop Response: %@", responseStr);
-        IGLog(@"FBStopDao request finished successfully");
-        [self shouldReturnSuccess];
-        return;
-    }
-    IGLog(@"FBStopDao request failed with general error");
-    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    request = [self sendGetRequest:request];
+    
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            IGLog(@"FBStopDao request failed with general error");
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            if (![self checkResponseHasError:response]) {
+                IGLog(@"FBStopDao request finished successfully");
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self shouldReturnSuccess];
+                });
+            }
+        }
+    }]];
+    self.currentTask = task;
+    [task resume];
 }
 
 @end

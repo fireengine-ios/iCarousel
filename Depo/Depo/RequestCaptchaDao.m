@@ -14,26 +14,33 @@
     NSString *captchaUrlStr = [NSString stringWithFormat:REQ_CAPTCHA_URL, type, captchaId];
     NSURL *url = [NSURL URLWithString:captchaUrlStr];
     
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setDelegate:self];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    request = [self sendGetRequest:request];
     
-    [self sendGetRequest:request];
-}
-
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    NSError *error = [request error];
-    
-    if (!error) {
-        NSData *responseData = [request responseData];
-        if(responseData != nil && ![responseData isKindOfClass:[NSNull class]]) {
-            UIImage *img = [UIImage imageWithData:responseData];
-            if(img) {
-                [self shouldReturnSuccessWithObject:img];
-                return;
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            if (![self checkResponseHasError:response]) {
+                if(data != nil && ![data isKindOfClass:[NSNull class]]) {
+                    UIImage *img = [UIImage imageWithData:data];
+                    if(img) {
+                        [self shouldReturnSuccessWithObject:img];
+                    }
+                }
+                else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                    });
+                }
             }
         }
-    }
-    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+    }]];
+    self.currentTask = task;
+    [task resume];
 }
 
 @end

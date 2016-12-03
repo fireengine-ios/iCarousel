@@ -14,29 +14,39 @@
 - (void) requestConstants {
     NSURL *url = [NSURL URLWithString:CONSTANTS_URL];
     
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setDelegate:self];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    request = [self sendPostRequest:request];
     
-    [self sendGetRequest:request];
-}
-
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    NSError *error = [request error];
-    
-    if (!error) {
-        NSString *responseStr = [request responseString];
-        SBJSON *jsonParser = [SBJSON new];
-        NSDictionary *mainDict = [jsonParser objectWithString:responseStr];
-        if(mainDict != nil && ![mainDict isKindOfClass:[NSNull class]]) {
-            NSString *mobileUploadFolderName = [mainDict objectForKey:@"mobileUploadsFolderName"];
-            if(mobileUploadFolderName != nil && ![mobileUploadFolderName isKindOfClass:[NSNull class]]) {
-                APPDELEGATE.session.mobileUploadsFolderName = mobileUploadFolderName;
-                [self shouldReturnSuccess];
-                return;
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            if (![self checkResponseHasError:response]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                    if(mainDict != nil && ![mainDict isKindOfClass:[NSNull class]]) {
+                        NSString *mobileUploadFolderName = [mainDict objectForKey:@"mobileUploadsFolderName"];
+                        if(mobileUploadFolderName != nil && ![mobileUploadFolderName isKindOfClass:[NSNull class]]) {
+                            APPDELEGATE.session.mobileUploadsFolderName = mobileUploadFolderName;
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                [self shouldReturnSuccess];
+                            });
+                        }
+                    }
+                    else{
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                        });
+                    }
+                });
             }
         }
-    }
-    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+    }]];
+    self.currentTask = task;
+    [task resume];
 }
 
 @end

@@ -13,28 +13,44 @@
 - (void) requestMoveFiles:(NSArray *) fileList toFolder:(NSString *) folderUuid {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:MOVE_URL, folderUuid]];
     
-    SBJSON *json = [SBJSON new];
-    NSString *jsonStr = [json stringWithObject:fileList];
-    NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
+//    SBJSON *json = [SBJSON new];
+//    NSString *jsonStr = [json stringWithObject:fileList];
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:fileList options:NSJSONWritingPrettyPrinted error:nil];
     
 //    NSLog(@"Move Payload: %@", jsonStr);
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setPostBody:[postData mutableCopy]];
-    [request setDelegate:self];
+    [request setHTTPBody:[postData mutableCopy]];
+    request = [self sendPostRequest:request];
     
-    [self sendPostRequest:request];
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            if (![self checkResponseHasError:response]) {
+                [self requestFinished:data];
+            }
+        }
+    }]];
+    [task resume];
+    self.currentTask = task;
 }
 
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    NSError *error = [request error];
-    if (!error) {
-        NSString *responseEnc = [request responseString];
-//        NSLog(@"Move Response: %@", responseEnc);
+- (void)requestFinished:(NSData *) data {
+//    NSError *error = [request error];
+    dispatch_async(dispatch_get_main_queue(), ^{
         [self shouldReturnSuccess];
-    } else {
-        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-    }
+    });
+//    if (!error) {
+//        NSString *responseEnc = [request responseString];
+//        NSLog(@"Move Response: %@", responseEnc);
+//        [self shouldReturnSuccess];
+//    } else {
+//        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+//    }
     
 }
 

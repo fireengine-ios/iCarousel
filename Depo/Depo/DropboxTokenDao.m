@@ -12,37 +12,43 @@
 
 - (void) requestTokenWithCurrentToken:(NSString *) currentToken withConsumerKey:(NSString *) consumerKey withAppSecret:(NSString *) appSecret withAuthTokenSecret:(NSString *) authTokenSecret {
     NSURL *url = [NSURL URLWithString:@"https://api.dropboxapi.com/1/oauth2/token_from_oauth1"];
-    
+
     NSString *authorizationHeaderValue = [NSString stringWithFormat:@"OAuth oauth_version=\"1.0\", oauth_signature_method=\"PLAINTEXT\", oauth_consumer_key=\"%@\", oauth_token=\"%@\", oauth_signature=\"%@&%@\"", consumerKey, currentToken, appSecret, authTokenSecret];
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setDelegate:self];
-    [request setRequestMethod:@"POST"];
-    [request addRequestHeader:@"Authorization" value:authorizationHeaderValue];
-    request.timeOutSeconds = 30;
-    request.tag = REQ_TAG_FOR_DROPBOX;
+
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    //    request.tag = REQ_TAG_FOR_DROPBOX;
+
     
-    self.currentRequest = request;
-    [self.currentRequest startAsynchronous];
-}
-
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    NSError *error = [request error];
-    if (!error) {
-        NSString *responseStr = [request responseString];
-        NSLog(@"Dropbox Token Response: %@", responseStr);
-        SBJSON *jsonParser = [SBJSON new];
-        NSDictionary *mainDict = [jsonParser objectWithString:responseStr];
-        if(mainDict != nil && ![mainDict isKindOfClass:[NSNull class]]) {
-            NSString *token = [mainDict objectForKey:@"access_token"];
-            [self shouldReturnSuccessWithObject:token];
-            return;
+    [request setHTTPMethod:@"POST"];
+    [request addValue:authorizationHeaderValue forHTTPHeaderField:@"Authorization"];
+    [request setTimeoutInterval:30];
+    
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+            });
         }
-    }
-    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-}
-
-- (void)requestFailed:(ASIHTTPRequest *)request {
-    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+        else {
+            if (![self checkResponseHasError:response]) {
+                NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                if(mainDict != nil && ![mainDict isKindOfClass:[NSNull class]]) {
+                    NSString *token = [mainDict objectForKey:@"access_token"];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnSuccessWithObject:token];
+                    });
+                }
+                else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                    });
+                    
+                }
+            }
+        }
+    }]];
+    self.currentTask = task;
+    [task resume];
 }
 
 @end
