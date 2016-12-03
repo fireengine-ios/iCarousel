@@ -11,7 +11,7 @@
 #import <Photos/Photos.h>
 #import "MetaFile.h"
 #import "AlbumDetailDao.h"
-
+#import "ProcessFooterView.h"
 
 enum DownloadType {
     DownloadTypeAlbum = 1,
@@ -27,7 +27,7 @@ enum DownloadType {
 -(void)downloadManagerDidFinishDownloading:(DownloadManager *)manager error:(NSError *)error;
 @end
 
-@interface DownloadManager : NSObject {
+@interface DownloadManager : NSObject <ProcessFooterDelegate> {
     PHAssetCollection *albumAssetCollection;
     PHObjectPlaceholder *albumAssetCollectionPlaceHolder;
     int currentDownloadIndex;
@@ -35,21 +35,26 @@ enum DownloadType {
     
     int albumDownloadListIndex;
     AlbumDetailDao *albumDetailDao;
+    ProcessFooterView *processView;
 }
 
 @property (nonatomic, assign) id<DownloadManagerDelegate> delegate;
 @property (nonatomic, assign) enum DownloadType downloadType;
 @property (nonatomic, strong) NSString *successMessage;
 @property (nonatomic, strong) NSString *failMessage;
+@property (nonatomic, strong) NSString *loadingMessage;
 @property (nonatomic, strong) NSString *albumUUID;
 
 -(DownloadManager *)initWithDelegate:(id<DownloadManagerDelegate>)delegateOwner
-                        downloadType:(enum DownloadType) type
+                        downloadType:(enum DownloadType)type
+                      loadingMessage:(NSString *)loadingMessage
                       successMessage:(NSString *)successMesage
                          failMessage:(NSString *)failMessage;
 
 -(void)downloadListOfFilesToCameraRoll:(NSArray *)metaFiles;
 -(void)createAlbumName:(NSString *)albumName albumUUID:(NSString *)albumUuid downloadFilesToAlbum:(NSArray *)metaFiles;
 -(void)createAlbumName:(NSString *)albumName albumUUID:(NSString *)albumUuid;
+
+-(void)hideLoadingProcessViewWithSuccess:(BOOL)success;
 
 @end

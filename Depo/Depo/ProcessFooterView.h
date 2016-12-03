@@ -30,10 +30,14 @@
 
 - (id)initWithFrame:(CGRect)frame withProcessMessage:(NSString *) _processMsg withFinalMessage:(NSString *) _successMsg withFailMessage:(NSString *) _failMsg;
 - (void) startLoading;
+- (void) startLoadingAndHideAfterSeconds:(int)seconds;
 - (void) showMessageForSuccess;
 - (void) showMessageForSuccessWithPostButtonKey:(NSString *) buttonKey;
 - (void) showMessageForFailure;
 - (void) showMessageForFailureWithPostButtonKey:(NSString *) buttonKey;
+
+- (void) dismissWithSuccessMessage;
+- (void) dismissWithFailureMessage;
 
 +(void)showSuccessMessageOnWindow:(NSString *)successMessage;
 +(void)showFailureMessageOnWindow:(NSString *)failureMessage;

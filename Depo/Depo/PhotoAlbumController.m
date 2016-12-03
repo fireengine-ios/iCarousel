@@ -403,15 +403,13 @@
 }
 
 -(void)moreMenuDidSelectDownloadAlbum {
-    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DownloadAlbumProgressMessage", @"")
-                           andSuccessMessage:NSLocalizedString(@"DownloadAlbumSuccessMessage", @"")
-                              andFailMessage:NSLocalizedString(@"DownloadAlbumFailMessage", @"")];
-    
     [APPDELEGATE.base createAlbum:self.album.label
                         albumUUID:self.album.uuid
              downloadFilesToAlbum:photoList
+                   loadingMessage:NSLocalizedString(@"DownloadAlbumProgressMessage", @"")
                    successMessage:NSLocalizedString(@"DownloadAlbumSuccessMessage", @"")
                       failMessage:NSLocalizedString(@"DownloadAlbumFailMessage", @"")];
+    [self cancelSelectible];
 }
 
 - (void) moreMenuDidSelectAlbumDelete {
@@ -556,9 +554,14 @@
 #pragma mark FooterMenuDelegate methods
 
 - (void) footerActionMenuDidSelectDownload:(FooterActionsMenuView *) menu {
+    NSString *loadingMessage = NSLocalizedString(@"DownloadImagesProgressMessage", @"");
     NSString *failMessage = NSLocalizedString(@"DownloadImagesFailMessage", @"");
     NSString *successMessage = NSLocalizedString(@"DownloadImagesSuccessMessage", @"");
-    [APPDELEGATE.base downloadFilesToCameraRoll:selectedFileList successMessage:successMessage failMessage:failMessage];
+    [APPDELEGATE.base downloadFilesToCameraRoll:selectedFileList
+                                 loadingMessage:loadingMessage
+                                 successMessage:successMessage
+                                    failMessage:failMessage];
+    [self cancelSelectible];
 }
 
 - (void) footerActionMenuDidSelectRemove:(FooterActionsMenuView *) menu {

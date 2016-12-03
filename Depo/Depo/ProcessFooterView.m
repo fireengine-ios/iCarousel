@@ -64,6 +64,12 @@
      */
 }
 
+- (void) startLoadingAndHideAfterSeconds:(int)seconds {
+    messageLabel.text = self.processMsg;
+    [defaultIndicator startAnimating];
+    [self performSelectorOnMainThread:@selector(hideView) withObject:nil waitUntilDone:seconds];
+}
+
 - (void) messageClicked {
     if(processConcluded) {
         [delegate processFooterShouldDismissWithButtonKey:self.postButtonKey];
@@ -71,11 +77,32 @@
     }
 }
 
+- (void) dismissWithSuccessMessage {
+    self.hidden = false;
+    processConcluded = YES;
+    messageLabel.text = self.successMsg;
+    [defaultIndicator stopAnimating];
+    defaultIndicator.hidden = YES;
+    successImgView.hidden = NO;
+    [self performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:2.0f];
+}
+
+- (void) dismissWithFailureMessage {
+    self.hidden = false;
+    processConcluded = YES;
+    messageLabel.text = self.failMsg;
+    [defaultIndicator stopAnimating];
+    defaultIndicator.hidden = YES;
+    successImgView.hidden = NO;
+    [self performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:2.0f];
+}
+
 - (void) showMessageForSuccess {
     [self showMessageForSuccessWithPostButtonKey:nil];
 }
 
 - (void) showMessageForSuccessWithPostButtonKey:(NSString *) buttonKey {
+    self.hidden = false;
     self.postButtonKey = buttonKey;
     processConcluded = YES;
     messageLabel.text = self.successMsg;
@@ -92,6 +119,7 @@
 }
 
 - (void) showMessageForFailureWithPostButtonKey:(NSString *) buttonKey {
+    self.hidden = false;
     self.postButtonKey = buttonKey;
     processConcluded = YES;
     messageLabel.text = self.failMsg;
@@ -109,6 +137,10 @@
 
 - (void) stopLoading {
     isAnimating = NO;
+}
+
+- (void) hideView {
+    self.hidden = true;
 }
 
 - (void) spinWithOptions: (UIViewAnimationOptions) options {

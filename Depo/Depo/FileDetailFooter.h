@@ -12,6 +12,7 @@
 
 @protocol FileDetailFooterDelegate <NSObject>
 - (void) fileDetailFooterDidTriggerDelete;
+- (void) fileDetailFooterDidTriggerDownload;
 - (void) fileDetailFooterDidTriggerRemoveFromAlbum;
 - (void) fileDetailFooterDidTriggerShare;
 - (void) fileDetailFooterDidTriggerPrint;
@@ -22,6 +23,7 @@
 @property (nonatomic, strong) id<FileDetailFooterDelegate> delegate;
 @property (nonatomic, strong) CustomButton *shareButton;
 @property (nonatomic, strong) CustomButton *deleteButton;
+@property (nonatomic, strong) CustomButton *downloadButton;
 @property (nonatomic, strong) CustomButton *removeButton;
 @property (nonatomic, strong) CustomButton *printButton;
 @property (nonatomic, strong) UIView *separatorView;

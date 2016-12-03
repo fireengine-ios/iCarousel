@@ -178,7 +178,9 @@
 "SelfMoveError"="Bir klasörü kendi içine taşıyamazsınız";
 "SameMoveError"="Bir dosyayı aynı klasör içine taşıyamazsınız";
 "DownloadImageProgressMessage"="Resim kaydediliyor";
+"DownloadImagesProgressMessage"="Resimler kaydediliyor";
 "DownloadAlbumProgressMessage"="Albüm kaydediliyor";
+"DownloadAlbumsProgressMessage"="Albümler kaydediliyor";
 "DownloadImageSuccessMessage"="Resim başarıyla kaydedildi";
 "DownloadImagesSuccessMessage"="Resimler başarıyla kaydedildi";
 "DownloadAlbumSuccessMessage"="Albüm başarıyla kaydedildi";

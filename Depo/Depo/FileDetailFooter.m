@@ -15,6 +15,7 @@
 @synthesize delegate;
 @synthesize shareButton;
 @synthesize deleteButton;
+@synthesize downloadButton;
 @synthesize removeButton;
 @synthesize separatorView;
 @synthesize printButton;
@@ -56,6 +57,10 @@
             [printButton addTarget:self action:@selector(printClicked) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:printButton];
         }
+        
+        downloadButton = [[CustomButton alloc] initWithFrame:CGRectMake(100, (self.frame.size.height - 22)/2, 26, 24) withImageName:@"icon_bottom_indir.png"];
+        [downloadButton addTarget:self action:@selector(downloadClicked) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:downloadButton];
 
     }
     return self;
@@ -73,6 +78,13 @@
     [MPush hitEvent:@"share_button_clicked"];
     
     [delegate fileDetailFooterDidTriggerShare];
+}
+
+- (void) downloadClicked {
+    [MPush hitTag:@"download_button_clicked"];
+    [MPush hitEvent:@"download_button_clicked"];
+    
+    [delegate fileDetailFooterDidTriggerDownload];
 }
 
 - (void) deleteClicked {

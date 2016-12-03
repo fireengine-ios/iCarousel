@@ -9,19 +9,23 @@
 #import <Foundation/Foundation.h>
 #import "DownloadManager.h"
 #import "PhotoAlbum.h"
+#import "AppDelegate.h"
 
 @implementation DownloadManager
 
 -(DownloadManager *)initWithDelegate:(id<DownloadManagerDelegate>)delegateOwner
                         downloadType:(enum DownloadType) type
+                      loadingMessage:(NSString *)loadingMessage
                       successMessage:(NSString *)successMesage
                          failMessage:(NSString *)failMessage {
     self = [super init];
     if (self) {
         self.delegate = delegateOwner;
         self.downloadType = type;
+        self.loadingMessage = loadingMessage;
         self.successMessage = successMesage;
         self.failMessage = failMessage;
+        [self showLoadingProcessView];
     }
     
     return self;
@@ -32,7 +36,23 @@
     [self downloadFilesToCameraRoll];
 }
 
+-(void)showLoadingProcessView {
+    CGRect windowFrame = APPDELEGATE.window.frame;
+    processView = [[ProcessFooterView alloc] initWithFrame:CGRectMake(0, windowFrame.size.height - 60, windowFrame.size.width, 60) withProcessMessage:self.loadingMessage withFinalMessage:self.successMessage withFailMessage:self.failMessage];
+    processView.delegate = self;
+    [APPDELEGATE.window addSubview:processView];
+    [APPDELEGATE.window bringSubviewToFront:processView];
+    
+    [processView startLoadingAndHideAfterSeconds:3];
+}
 
+-(void)hideLoadingProcessViewWithSuccess:(BOOL)success {
+    if (success) {
+        [processView showMessageForSuccess];
+    }else {
+        [processView showMessageForFailure];
+    }
+}
 
 #pragma mark - Album files Fetch
 
@@ -402,5 +422,11 @@
     }
 }
 
+
+#pragma mark - Process Footer Delegate
+
+-(void)processFooterShouldDismissWithButtonKey:(NSString *)postButtonKeyVal {
+    [self.delegate downloadManagerDidFinishDownloading:self error:nil];
+}
 
 @end

@@ -177,8 +177,10 @@
 - (void) revisitedAlbumListDownloadAlbums:(NSArray *)albumUUIDs albumNames:(NSArray *)albumNames {
     [APPDELEGATE.base createAlbumNames:albumNames
                             albumUUIDs:albumUUIDs
+                        loadingMessage:NSLocalizedString(@"DownloadAlbumsProgressMessage", @"")
                         successMessage:NSLocalizedString(@"DownloadAlbumSuccessMessage", @"")
                            failMessage:NSLocalizedString(@"DownloadAlbumFailMessage", @"")];
+    [self cancelClicked];
 }
 
 - (void) revisitedAlbumListShareAlbums:(NSArray *)albumUUIDs {
@@ -271,12 +273,14 @@
 }
 
 -(void)revisitedGroupedPhoto:(RevisitedGroupedPhotoView *)view downloadSelectedFiles:(NSArray *)selectedFiles {
-    NSString *successMessage = NSLocalizedString(@"DownloadPhotoSuccessMessage", @"");
-    NSString *failMessage = NSLocalizedString(@"DownloadPhotoFailMessage", @"");
-    /*[self pushProgressViewWithProcessMessage:NSLocalizedString(@"DownloadPhotoProgressMessage", @"")
-                           andSuccessMessage:successMessage
-                              andFailMessage:failMessage]; */
-    [APPDELEGATE.base downloadFilesToCameraRoll:selectedFiles successMessage:successMessage failMessage:failMessage];
+    NSString *loadingMessage = NSLocalizedString(@"DownloadImagesProgressMessage", @"");
+    NSString *successMessage = NSLocalizedString(@"DownloadImagesSuccessMessage", @"");
+    NSString *failMessage = NSLocalizedString(@"DownloadImagesFailMessage", @"");
+    [APPDELEGATE.base downloadFilesToCameraRoll:selectedFiles
+                                 loadingMessage:loadingMessage
+                                 successMessage:successMessage
+                                    failMessage:failMessage];
+    [self cancelClicked];
 }
 
 - (void) revisitedGroupedPhotoDidChangeToSelectState {

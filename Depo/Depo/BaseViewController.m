@@ -1022,10 +1022,12 @@
 -(void)createAlbum:(NSString *)albumName
          albumUUID:(NSString *)albumUUID
 downloadFilesToAlbum:(NSArray *)files
+loadingMessage:(NSString *)loadingMessage
     successMessage:(NSString *)successMessage
        failMessage:(NSString *)failMessage {
     DownloadManager *manager = [[DownloadManager alloc] initWithDelegate:self
                                                    downloadType:DownloadTypeAlbum
+                                                 loadingMessage:loadingMessage
                                                  successMessage:successMessage
                                                     failMessage:failMessage];
     [manager createAlbumName:albumName albumUUID:albumUUID downloadFilesToAlbum:files];
@@ -1035,11 +1037,13 @@ downloadFilesToAlbum:(NSArray *)files
 
 -(void)createAlbumNames:(NSArray *)albumNames
          albumUUIDs:(NSArray *)albumUUIDs
+         loadingMessage:(NSString *)loadingMessage
      successMessage:(NSString *)successMessage
         failMessage:(NSString *)failMessage {
     for(int i = 0; i < albumNames.count; i++) {
         DownloadManager *manager = [[DownloadManager alloc] initWithDelegate:self
                                                                 downloadType:DownloadTypeAlbum
+                                                              loadingMessage:loadingMessage
                                                               successMessage:successMessage
                                                                  failMessage:failMessage];
         [manager createAlbumName:[albumNames objectAtIndex:i] albumUUID:[albumUUIDs objectAtIndex:i]];
@@ -1047,9 +1051,13 @@ downloadFilesToAlbum:(NSArray *)files
     }
 }
 
--(void)downloadFilesToCameraRoll:(NSArray *)files successMessage:(NSString *)successMessage failMessage:(NSString *)failMessage {
+-(void)downloadFilesToCameraRoll:(NSArray *)files
+                  loadingMessage:(NSString *)loadingMessage
+                  successMessage:(NSString *)successMessage
+                     failMessage:(NSString *)failMessage {
     DownloadManager *manager = [[DownloadManager alloc] initWithDelegate:self
-                                                   downloadType:DownloadTypeListOfFiles
+                                                            downloadType:DownloadTypeListOfFiles
+                                                          loadingMessage:loadingMessage
                                                  successMessage:successMessage
                                                     failMessage:failMessage];
     [manager downloadListOfFilesToCameraRoll:files];
@@ -1075,12 +1083,10 @@ downloadFilesToAlbum:(NSArray *)files
 }
 
 -(void)downloadManagerDidFinishDownloading:(DownloadManager *)manager error:(NSError *)error {
-
-    
     if (error) {
-      //  [ProcessFooterView showFailureMessageOnWindow:manager.failMessage];
+        [manager hideLoadingProcessViewWithSuccess:NO];
     }else {
-      //  [ProcessFooterView showSuccessMessageOnWindow:manager.successMessage];
+        [manager hideLoadingProcessViewWithSuccess:YES];
     }
     
     

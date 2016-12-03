@@ -440,6 +440,10 @@
     [self triggerShareForFiles:@[self.file.uuid]];
 }
 
+- (void) fileDetailFooterDidTriggerDownload {
+    [self moreMenuDidSelectDownloadImage];
+}
+
 - (void) fileDetailFooterDidTriggerPrint {
     NSArray *tempArr = [NSArray arrayWithObject:file];
     PrintWebViewController *printController = [[PrintWebViewController alloc] initWithUrl:@"http://akillidepo.cellograf.com/" withFileList:tempArr];
