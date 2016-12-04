@@ -16,24 +16,28 @@
     
     NSData *imageData = UIImagePNGRepresentation(imageFile);
     
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setDelegate:self];
-    [request setPostBody:[imageData mutableCopy]];
-    [request addRequestHeader:@"Accept" value:@"application/json"];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    request = [self sendPutRequest:request];
     
-    [self sendPutRequest:request];
-}
-
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    NSError *error = [request error];
-    if (!error) {
-        NSString *responseEnc = [request responseString];
-        NSLog(@"Profile Image Upload Response: %@", responseEnc);
-        [self shouldReturnSuccess];
-    } else {
-        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-    }
+    [request setHTTPBody:[imageData mutableCopy]];
     
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            if (![self checkResponseHasError:response]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self shouldReturnSuccess];
+                });
+            }
+        }
+    }]];
+    self.currentTask = task;
+    [task resume];
 }
 
 @end

@@ -17,43 +17,55 @@
     
     IGLog(@"[GET] VideofyAudioListDao requestAudioList called");
     
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setDelegate:self];
-    [self sendGetRequest:request];
-}
-
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    NSError *error = [request error];
-    if (!error) {
-        NSString *responseStr = [request responseString];
-        NSLog(@"VideofyAudioListDao Response: %@", responseStr);
-        
-        SBJSON *jsonParser = [SBJSON new];
-        NSArray *mainArr = [jsonParser objectWithString:responseStr];
-
-        NSMutableArray *result = [[NSMutableArray alloc] init];
-        if(mainArr != nil && ![mainArr isKindOfClass:[NSNull class]]) {
-            for(NSDictionary *rowDict in mainArr) {
-                NSNumber *audioId = [rowDict objectForKey:@"id"];
-                NSString *fileName = [rowDict objectForKey:@"fileName"];
-                NSString *path = [rowDict objectForKey:@"path"];
-                NSString *type = [rowDict objectForKey:@"type"];
-                
-                VideofyAudio *audio = [[VideofyAudio alloc] init];
-                audio.audioId = [self longByNumber:audioId];
-                audio.fileName = [self strByRawVal:fileName];
-                audio.path = [self strByRawVal:path];
-                audio.type = [self strByRawVal:type];
-                
-                [result addObject:audio];
-            }
-            IGLog(@"VideofyAudioListDao requestFinished successfully");
-            [self shouldReturnSuccessWithObject:result];
-            return;
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    
+    request = [self sendGetRequest:request];
+    
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
         }
-    }
-    IGLog(@"VideofyAudioListDao requestFinished with general error");
-    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+        else {
+            if (![self checkResponseHasError:response]) {
+                NSArray *mainArr = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                
+                NSMutableArray *result = [[NSMutableArray alloc] init];
+                if(mainArr != nil && ![mainArr isKindOfClass:[NSNull class]]) {
+                    for(NSDictionary *rowDict in mainArr) {
+                        NSNumber *audioId = [rowDict objectForKey:@"id"];
+                        NSString *fileName = [rowDict objectForKey:@"fileName"];
+                        NSString *path = [rowDict objectForKey:@"path"];
+                        NSString *type = [rowDict objectForKey:@"type"];
+                        
+                        VideofyAudio *audio = [[VideofyAudio alloc] init];
+                        audio.audioId = [self longByNumber:audioId];
+                        audio.fileName = [self strByRawVal:fileName];
+                        audio.path = [self strByRawVal:path];
+                        audio.type = [self strByRawVal:type];
+                        
+                        [result addObject:audio];
+                    }
+                    IGLog(@"VideofyAudioListDao requestFinished successfully");
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnSuccessWithObject:result];
+                    });
+                }
+                else {
+                    IGLog(@"VideofyAudioListDao requestFinished with general error");
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                    });
+                }
+            }
+        }
+    }]];
+    self.currentTask = task;
+    [task resume];
+
+    
 }
 
 @end

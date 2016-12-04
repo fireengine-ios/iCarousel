@@ -196,6 +196,7 @@
         } else {
             playIconView.hidden = NO;
             durationLabel.hidden = NO;
+            durationLabel.text = self.file.contentLengthDisplay;
         }
     } else {
         if(playIconView){

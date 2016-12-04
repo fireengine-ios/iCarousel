@@ -15,41 +15,53 @@
     
     IGLog(@"[GET] FBPermissionDao requestFbPermissionTypes called");
     
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setDelegate:self];
-    [self sendGetRequest:request];
-}
-
-- (void) requestFinished:(ASIHTTPRequest *)request {
-    NSError *error = [request error];
-    if (!error) {
-        NSString *responseStr = [request responseString];
-        NSLog(@"FBPermissionDao requestFbPermissionTypes Response: %@", responseStr);
-
-        SBJSON *jsonParser = [SBJSON new];
-        NSDictionary *mainDict = [jsonParser objectWithString:responseStr];
-        if(mainDict != nil && [mainDict isKindOfClass:[NSDictionary class]]) {
-            NSArray *readArr = [mainDict objectForKey:@"read"];
-            NSArray *publishArr = [mainDict objectForKey:@"write"];
-            if(readArr != nil && ![readArr isKindOfClass:[NSNull class]]
-               && publishArr != nil  && ![publishArr isKindOfClass:[NSNull class]]) {
-                IGLog(@"FBPermissionDao request finished successfully");
-                NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
-                [result setObject:readArr forKey:@"read"];
-                [result setObject:publishArr forKey:@"publish"];
-                [self shouldReturnSuccessWithObject:result];
-                return;
-            }
-        } else if(mainDict != nil && [mainDict isKindOfClass:[NSArray class]]) {
-            //dict beklerken array gelme durumu oldugundan bu sekilde gelistirme eklendi
-            NSArray *mainArr = (NSArray *) mainDict;
-            IGLog(@"FBPermissionDao request finished successfully");
-            [self shouldReturnSuccessWithObject:mainArr];
-            return;
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    
+    request = [self sendGetRequest:request];
+    
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
         }
-    }
-    IGLog(@"FBPermissionDao request failed with general error message");
-    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+        else {
+            if (![self checkResponseHasError:response]) {
+                NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                if(mainDict != nil && [mainDict isKindOfClass:[NSDictionary class]]) {
+                    NSArray *readArr = [mainDict objectForKey:@"read"];
+                    NSArray *publishArr = [mainDict objectForKey:@"write"];
+                    if(readArr != nil && ![readArr isKindOfClass:[NSNull class]]
+                       && publishArr != nil  && ![publishArr isKindOfClass:[NSNull class]]) {
+                        IGLog(@"FBPermissionDao request finished successfully");
+                        NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
+                        [result setObject:readArr forKey:@"read"];
+                        [result setObject:publishArr forKey:@"publish"];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self shouldReturnSuccessWithObject:result];
+                        });
+                    }
+                } else if(mainDict != nil && [mainDict isKindOfClass:[NSArray class]]) {
+                    //dict beklerken array gelme durumu oldugundan bu sekilde gelistirme eklendi
+                    NSArray *mainArr = (NSArray *) mainDict;
+                    IGLog(@"FBPermissionDao request finished successfully");
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnSuccessWithObject:mainArr];
+                    });
+                }
+                else {
+                    IGLog(@"FBPermissionDao request failed with general error message");
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                    });
+                }
+            }
+        }
+    }]];
+    self.currentTask = task;
+    [task resume];
+
 }
 
 @end

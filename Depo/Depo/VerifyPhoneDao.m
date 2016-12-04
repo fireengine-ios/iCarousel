@@ -18,15 +18,41 @@
                           otp, @"otp",
                           nil];
     
-    SBJSON *json = [SBJSON new];
-    NSString *jsonStr = [json stringWithObject:info];
-    NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:info options:NSJSONWritingPrettyPrinted error:nil];
     
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setPostBody:postData];
-    [request setDelegate:self];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    request = [self sendPostRequest:request];
+    [request setHTTPBody:postData];
     
-    [self sendPostRequest:request];
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            if (![self checkResponseHasError:response]) {
+                NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                if(mainDict && [mainDict isKindOfClass:[NSDictionary class]]) {
+                    NSString *status = [mainDict objectForKey:@"status"];
+                    if(status != nil && ![status isKindOfClass:[NSNull class]]) {
+                        NSString *statusVal = [mainDict objectForKey:@"status"];
+                        if(statusVal != nil && ![statusVal isKindOfClass:[NSNull class]]) {
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                [self shouldReturnSuccessWithObject:mainDict];
+                                return ;
+                            });
+                        }
+                    }
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self shouldReturnSuccessWithObject:@"OK"];
+                });
+            }
+        }
+    }]];
+    self.currentTask = task;
+    [task resume];
 }
 
 - (void) requestTriggerVerifyPhoneToUpdate:(NSString *) token withOTP:(NSString *) otp {
@@ -37,59 +63,41 @@
                           otp, @"otp",
                           nil];
     
-    SBJSON *json = [SBJSON new];
-    NSString *jsonStr = [json stringWithObject:info];
-    NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:info options:NSJSONWritingPrettyPrinted error:nil];
     
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setPostBody:postData];
-    [request setDelegate:self];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    request = [self sendPostRequest:request];
+    [request setHTTPBody:postData];
     
-    [self sendPostRequest:request];
-}
-
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    NSError *error = [request error];
-    if (!error) {
-        NSString *responseStr = [request responseString];
-        NSLog(@"Verify Phone Response: %@", responseStr);
-        
-        if([responseStr length] == 0) {
-                // success durumunda response tamamen boş gelebiliyor
-            [self shouldReturnSuccessWithObject:@"OK"];
-            return;
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
         }
-        
-        SBJSON *jsonParser = [SBJSON new];
-        NSDictionary *mainDict = [jsonParser objectWithString:responseStr];
-        if(mainDict != nil && ![mainDict isKindOfClass:[NSNull class]]) {
-            NSString *statusVal = [mainDict objectForKey:@"status"];
-            if(statusVal != nil && ![statusVal isKindOfClass:[NSNull class]]) {
-                [self shouldReturnSuccessWithObject:statusVal];
-                return;
+        else {
+            if (![self checkResponseHasError:response]) {
+                NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                if(mainDict && [mainDict isKindOfClass:[NSDictionary class]]) {
+                    NSString *status = [mainDict objectForKey:@"status"];
+                    if(status != nil && ![status isKindOfClass:[NSNull class]]) {
+                        NSString *statusVal = [mainDict objectForKey:@"status"];
+                        if(statusVal != nil && ![statusVal isKindOfClass:[NSNull class]]) {
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                [self shouldReturnSuccessWithObject:statusVal];
+                                return ;
+                            });
+                        }
+                    }
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self shouldReturnSuccessWithObject:@"OK"];
+                });
             }
         }
-    }
-    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+    }]];
+    self.currentTask = task;
+    [task resume];
 }
-
-/*
-- (void)requestFailed:(ASIHTTPRequest *)request {
-    NSString *responseStr = [request responseString];
-    NSLog(@"Verify Phone Error Response: %@", responseStr);
-
-    if([request responseStatusCode] == 412) {
-        //TODO
-    } else if([request responseStatusCode] == 403) {
-        [self shouldReturnFailWithMessage:FORBIDDEN_ERROR_MESSAGE];
-    } else {
-        if([request.error code] == ASIConnectionFailureErrorType){
-            [self shouldReturnFailWithMessage:NSLocalizedString(@"NoConnErrorMessage", @"")];
-        } else {
-            [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-        }
-    }
-}
-*/
 
 @end

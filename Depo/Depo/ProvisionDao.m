@@ -17,28 +17,33 @@
 
     NSDictionary *dict = [[NSDictionary alloc] init];
     
-    SBJSON *json = [SBJSON new];
-    NSString *jsonStr = [json stringWithObject:dict];
-    NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
+
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
 //    NSLog(@"Provision Load: %@", jsonStr);
     
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setPostBody:postData];
-    [request setDelegate:self];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     
-    [self sendPostRequest:request];
-}
-
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    NSError *error = [request error];
+    [request setHTTPBody:postData];
+    request = [self sendPostRequest:request];
     
-    if (!error) {
-        NSString *responseStr = [request responseString];
-        NSLog(@"Provision returned successfully: %@", responseStr);
-
-        IGLog(@"ProvisionDao requestFinished successfully");
-    }
-    [self shouldReturnSuccess];
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            if (![self checkResponseHasError:response]) {
+                //NSString *responseStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                IGLog(@"ProvisionDao requestFinished successfully");
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self shouldReturnSuccess];
+                });
+            }
+        }
+    }]];
+    [task resume];
+    self.currentTask = task;
 }
 
 @end

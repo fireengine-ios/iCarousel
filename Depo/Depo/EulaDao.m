@@ -16,35 +16,41 @@
     
     IGLog(@"[GET] EulaDao requestEulaForLocale called");
 
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setDelegate:self];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    request = [self sendGetRequest:request];
     
-    [self sendGetRequest:request];
-}
-
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    NSError *error = [request error];
-    if (!error) {
-        NSString *responseStr = [request responseString];
-        NSLog(@"EULA Response: %@", responseStr);
-
-        IGLog(@"EulaDao request finished successfully");
-
-        SBJSON *jsonParser = [SBJSON new];
-        NSDictionary *mainDict = [jsonParser objectWithString:responseStr];
-        
-        if(mainDict != nil && ![mainDict isKindOfClass:[NSNull class]]) {
-            Eula *eula = [[Eula alloc] init];
-            eula.eulaId = [self intByNumber:[mainDict objectForKey:@"id"]];
-            eula.locale = [self strByRawVal:[mainDict objectForKey:@"locale"]];
-            eula.content = [self strByRawVal:[mainDict objectForKey:@"content"]];
-
-            [self shouldReturnSuccessWithObject:eula];
-            return;
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
         }
-    }
-    IGLog(@"EulaDao request finished with general error");
-    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+        else {
+            if (![self checkResponseHasError:response]) {
+                NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                if(mainDict != nil && ![mainDict isKindOfClass:[NSNull class]]) {
+                    IGLog(@"EulaDao request finished successfully");
+                    
+                    Eula *eula = [[Eula alloc] init];
+                    eula.eulaId = [self intByNumber:[mainDict objectForKey:@"id"]];
+                    eula.locale = [self strByRawVal:[mainDict objectForKey:@"locale"]];
+                    eula.content = [self strByRawVal:[mainDict objectForKey:@"content"]];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnSuccessWithObject:eula];
+                    });
+                }
+                else {
+                    IGLog(@"EulaDao request finished with general error");
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                    });
+                }
+            }
+        }
+    }]];
+    self.currentTask = task;
+    [task resume];
 }
 
 @end

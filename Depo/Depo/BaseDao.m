@@ -19,6 +19,8 @@
 @synthesize failMethod;
 @synthesize currentRequest;
 @synthesize tokenAlreadyRevisitedFlag;
+@synthesize taskCompletionHandler;
+@synthesize hasError;
 
 - (NSString *) hasFinishedSuccessfully:(NSDictionary *) mainDict {
     if(mainDict == nil) {
@@ -42,58 +44,61 @@
     return nil;
 }
 
-- (void) sendPostRequest:(ASIFormDataRequest *) request {
-    [request setRequestMethod:@"POST"];
-    request.timeOutSeconds = 30;
-    [request addRequestHeader:@"Accept" value:@"application/json"];
-    [request addRequestHeader:@"Content-Type" value:@"application/json; encoding=utf-8"];
-    if(APPDELEGATE.session.authToken) {
-        [request addRequestHeader:@"X-Auth-Token" value:APPDELEGATE.session.authToken];
+- (NSMutableURLRequest *) sendPostRequest:(NSMutableURLRequest *) request {
+    [request setTimeoutInterval:30];
+    [request setHTTPMethod:@"POST"];
+    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request addValue:@"application/json; encoding=utf-8" forHTTPHeaderField:@"Content-Type"];
+    if (APPDELEGATE.session.authToken) {
+        [request addValue:APPDELEGATE.session.authToken forHTTPHeaderField:@"X-Auth-Token"];
     }
     self.currentRequest = request;
-    [self.currentRequest startAsynchronous];
+    return request;
 }
 
-- (void) sendGetRequest:(ASIFormDataRequest *) request {
-    [request setRequestMethod:@"GET"];
-    request.timeOutSeconds = 30;
-    [request addRequestHeader:@"Accept" value:@"application/json"];
-    [request addRequestHeader:@"Content-Type" value:@"application/json; encoding=utf-8"];
-    if(APPDELEGATE.session.authToken) {
-        [request addRequestHeader:@"X-Auth-Token" value:APPDELEGATE.session.authToken];
+- (NSURLRequest *) sendGetRequest:(NSMutableURLRequest *) request {
+    [request setHTTPMethod:@"GET"];
+    [request setTimeoutInterval:30];
+    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request addValue:@"application/json; encoding=utf-8" forHTTPHeaderField:@"Content-Type"];
+    if (APPDELEGATE.session.authToken) {
+        [request addValue:APPDELEGATE.session.authToken forHTTPHeaderField:@"X-Auth-Token"];
     }
     self.currentRequest = request;
-    [self.currentRequest startAsynchronous];
-} 
-
-- (void) sendPutRequest:(ASIFormDataRequest *) request {
-    [request setRequestMethod:@"PUT"];
-    request.timeOutSeconds = 90;
-    if(APPDELEGATE.session.authToken) {
-        [request addRequestHeader:@"X-Auth-Token" value:APPDELEGATE.session.authToken];
-    }
-    self.currentRequest = request;
-    [self.currentRequest startAsynchronous];
+    return request;
 }
 
-- (void) sendDeleteRequest:(ASIFormDataRequest *) request {
-    request.timeOutSeconds = 90;
-    if(APPDELEGATE.session.authToken) {
-        [request addRequestHeader:@"X-Auth-Token" value:APPDELEGATE.session.authToken];
+- (NSURLRequest *) sendPutRequest:(NSMutableURLRequest *) request {
+    [request setHTTPMethod:@"PUT"];
+    [request setTimeoutInterval:90];
+    if (APPDELEGATE.session.authToken) {
+        [request addValue:APPDELEGATE.session.authToken forHTTPHeaderField:@"X-Auth-Token"];
     }
-    [request addRequestHeader:@"Content-Type" value:@"application/json"];
-    [request buildPostBody];
-    [request setRequestMethod:@"DELETE"];
     self.currentRequest = request;
-    [self.currentRequest startAsynchronous];
+    return request;
 }
 
-- (void)requestFailed:(ASIHTTPRequest *)request {
-    NSString *responseStr = [request responseString];
-    NSString *errorInfoLog = [NSString stringWithFormat:@"BaseDao request failed with code: %d and response: %@", [request responseStatusCode], responseStr];
+- (NSURLRequest *) sendDeleteRequest:(NSMutableURLRequest *) request {
+    [request setHTTPMethod:@"DELETE"];
+    [request setTimeoutInterval:90];
+    if (APPDELEGATE.session.authToken) {
+        [request addValue:APPDELEGATE.session.authToken forHTTPHeaderField:@"X-Auth-Token"];
+    }
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    self.currentRequest = request;
+    return request;
+}
+
+- (void)requestFailed:(NSURLResponse *) response {
+    NSHTTPURLResponse *request = (NSHTTPURLResponse *) response;
+    NSString *errorInfoLog = [NSString stringWithFormat:@"BaseDao request failed with code: %d and response", (int)[request statusCode]];
     IGLog(errorInfoLog);
-    NSLog(errorInfoLog);
-    if([request responseStatusCode] == 401) {
+    NSLog(@"%@",errorInfoLog);
+    if ([request statusCode] == 200 || [request statusCode] == 0) {
+        return;
+    }
+    if([request statusCode] == 401) {
         IGLog(@"BaseDao request failed with 401");
         if(!self.tokenAlreadyRevisitedFlag) {
             IGLog(@"BaseDao request failed with 401 - tokenAlreadyRevisitedFlag is false, setting to true");
@@ -105,24 +110,24 @@
 //            NSLog(@"Login Required Triggered within requestFailed instead of fail method: %@", NSStringFromSelector(failMethod));
             [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_REQ_NOTIFICATION object:nil userInfo:nil];
         }
-    } else if([request responseStatusCode] == 403) {
+    } else if([request statusCode] == 403) {
         IGLog(@"BaseDao request failed with 403");
         [self shouldReturnFailWithMessage:FORBIDDEN_ERROR_MESSAGE];
-    } else if([request responseStatusCode] == 412) {
+    } else if([request statusCode] == 412) {
         IGLog(@"BaseDao request failed with 412");
         [self shouldReturnFailWithMessage:INVALID_CONTENT_ERROR_MESSAGE];
     } else {
-        if([request.error code] == ASIConnectionFailureErrorType){
-            NSString *errorMessageWithRequestUrl = [NSString stringWithFormat:@"BaseDao request failed - ASIConnectionFailureErrorType for %@", request.url.absoluteString];
+        if([request statusCode] == NSURLErrorNotConnectedToInternet){
+            NSString *errorMessageWithRequestUrl = [NSString stringWithFormat:@"BaseDao request failed - ASIConnectionFailureErrorType for %@", self.currentRequest.URL];
             IGLog(errorMessageWithRequestUrl);
             [self shouldReturnFailWithMessage:NSLocalizedString(@"NoConnErrorMessage", @"")];
-        } else if([request.error code] == ASIRequestTimedOutErrorType){
-            NSString *errorMessageWithRequestUrl = [NSString stringWithFormat:@"BaseDao request failed - ASIRequestTimedOutErrorType for %@", request.url.absoluteString];
+        } else if([request statusCode] == NSURLErrorTimedOut){
+            NSString *errorMessageWithRequestUrl = [NSString stringWithFormat:@"BaseDao request failed - NSURLErrorTimedOut for %@", self.currentRequest.URL];
             IGLog(errorMessageWithRequestUrl);
             [self shouldReturnFailWithMessage:NSLocalizedString(@"TimeoutMessage", @"")];
         } else {
-            NSString *localizedErrStr = [request.error localizedDescription];
-            NSString *errorMessageWithRequestUrl = [NSString stringWithFormat:@"BaseDao request failed with code:%d and error: %@ - GENERAL_ERROR_MESSAGE for %@", (int)[request.error code], localizedErrStr, request.url.absoluteString];
+            NSString *localizedErrStr = [NSHTTPURLResponse localizedStringForStatusCode:[request statusCode]];
+            NSString *errorMessageWithRequestUrl = [NSString stringWithFormat:@"BaseDao request failed with code:%d and error: %@ - GENERAL_ERROR_MESSAGE for %@", (int)[request statusCode], localizedErrStr, self.currentRequest.URL];
             IGLog(errorMessageWithRequestUrl);
             
             [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
@@ -189,9 +194,7 @@
         return ContentTypePhoto;
 //    } else if([metaFile.rawContentType isEqualToString:CONTENT_TYPE_AUDIO_MP3_VALUE] || [metaFile.rawContentType isEqualToString:CONTENT_TYPE_AUDIO_MPEG_VALUE]) {
 //            return ContentTypeMusic;
-    }else if ([metaFile.rawContentType isEqualToString:@"album/photo"]) {
-        return ContentTypeAlbumPhoto;
-    }else if([metaFile.rawContentType hasPrefix:@"audio/"]) {
+    } else if([metaFile.rawContentType hasPrefix:@"audio/"]) {
         return ContentTypeMusic;
     } else if([metaFile.rawContentType hasPrefix:@"video/"]) {
         return ContentTypeVideo;
@@ -266,7 +269,6 @@
     NSArray *albumUuids = [dict objectForKey:@"album"];
     
     MetaFile *file = [[MetaFile alloc] init];
-    file.Id = [dict valueForKey:@"id"];
     file.uuid = [self strByRawVal:uuid];
     file.fileHash = [self strByRawVal:hash];
     file.subDir = [self strByRawVal:subdir];
@@ -574,12 +576,13 @@
 }
 
 - (void) tokenRevisitedSuccessCallback {
-    ASIFormDataRequest *newRequest = [self.currentRequest copy];
     if(APPDELEGATE.session.authToken) {
-        [newRequest addRequestHeader:@"X-Auth-Token" value:APPDELEGATE.session.authToken];
+        NSMutableURLRequest *req = [self.currentTask.currentRequest mutableCopy];
+        [req setValue:APPDELEGATE.session.authToken forHTTPHeaderField:@"X-Auth-Token"];
+        self.currentTask = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:req completionHandler:self.taskCompletionHandler];
+        //        NSURLSessionDataTask *newTask = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:req completionHandler:taskCompletionHandler];
+        [self.currentTask resume];
     }
-    [newRequest startAsynchronous];
-    self.tokenAlreadyRevisitedFlag = NO;
 }
 
 - (void) tokenRevisitedFailCallback:(NSString *) errorMessage {
@@ -588,9 +591,27 @@
 
 - (void) cancelRequest {
     if(self.currentRequest) {
-        [self.currentRequest setDelegate:nil];
-        [self.currentRequest cancel];
+        [self setDelegate:nil];
+        //[self cancel];
     }
 }
 
+- (taskComplition) createCompletionHandlerWithCompletion:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completion{
+    
+    self.taskCompletionHandler = [completion copy];
+    return completion;
+}
+
+- (BOOL) checkResponseHasError:(NSURLResponse *) response {
+    if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+        if ([httpResponse statusCode] == 200) {
+            return NO;
+        }
+        else {
+            [self requestFailed:response];
+        }
+    }
+    return YES;
+}
 @end

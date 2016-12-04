@@ -14,33 +14,41 @@
     NSString *urlStr = [NSString stringWithFormat:TAGGED_FILE_LIST_URL, tagVal, @"metadata.Image-DateTime", @"ASC", 0, 1000];
     NSURL *url = [NSURL URLWithString:urlStr];
     
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setDelegate:self];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    request = [self sendGetRequest:request];
     
-    [self sendGetRequest:request];
-}
-
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    NSError *error = [request error];
-    
-    if (!error) {
-        NSString *responseEnc = [request responseString];
-        IGLog(@"TaggedFileListDao request finished successfully");
-        SBJSON *jsonParser = [SBJSON new];
-        NSArray *mainArray = [jsonParser objectWithString:responseEnc];
-        
-        NSMutableArray *result = [[NSMutableArray alloc] init];
-        if(mainArray != nil && ![mainArray isKindOfClass:[NSNull class]]) {
-            for(NSDictionary *fileDict in mainArray) {
-                [result addObject:[self parseFile:fileDict]];
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            IGLog(@"TaggedFileListDao request failed with general error");
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            if (![self checkResponseHasError:response]) {
+                IGLog(@"TaggedFileListDao request finished successfully");
+                NSArray *mainArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                NSMutableArray *result = [[NSMutableArray alloc] init];
+                
+                if(mainArray != nil && ![mainArray isKindOfClass:[NSNull class]]) {
+                    for(NSDictionary *fileDict in mainArray) {
+                        [result addObject:[self parseFile:fileDict]];
+                    }
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnSuccessWithObject:result];
+                    });
+                }
+                else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                    });
+                }
             }
         }
-        [self shouldReturnSuccessWithObject:result];
-    } else {
-        IGLog(@"TaggedFileListDao request failed with general error");
-        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-    }
-    
+    }]];
+    self.currentTask = task;
+    [task resume];
 }
 
 @end

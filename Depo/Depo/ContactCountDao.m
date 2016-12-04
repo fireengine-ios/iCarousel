@@ -13,28 +13,33 @@
 - (void) requestContactCount {
     NSURL *url = [NSURL URLWithString:TTY_CONTACT_COUNT_URL];
     
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setDelegate:self];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    request = [self sendGetRequest:request];
     
-    [self sendGetRequest:request];
-}
-
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    NSError *error = [request error];
-    
-    if (!error) {
-        NSString *responseStr = [request responseString];
-        SBJSON *jsonParser = [SBJSON new];
-        NSDictionary *mainDict = [jsonParser objectWithString:responseStr];
-        if(mainDict != nil && ![mainDict isKindOfClass:[NSNull class]]) {
-            NSNumber *countData = [mainDict objectForKey:@"data"];
-            if(countData != nil && ![countData isKindOfClass:[NSNull class]]) {
-                [self shouldReturnSuccessWithObject:[NSString stringWithFormat:@"%d", [countData intValue]]];
-                return;
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            if (![self checkResponseHasError:response]) {
+                NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                
+                if(mainDict != nil && ![mainDict isKindOfClass:[NSNull class]]) {
+                    NSNumber *countData = [mainDict objectForKey:@"data"];
+                    if(countData != nil && ![countData isKindOfClass:[NSNull class]]) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self shouldReturnSuccessWithObject:[NSString stringWithFormat:@"%d", [countData intValue]]];
+                        });
+                        return;
+                    }
+                }
             }
         }
-    }
-    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+    }]];
+    self.currentTask = task;
+    [task resume];
 }
 
 @end

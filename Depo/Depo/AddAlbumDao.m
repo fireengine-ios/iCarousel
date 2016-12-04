@@ -15,32 +15,31 @@
 	
     NSDictionary *payload = [NSDictionary dictionaryWithObjectsAndKeys:name, @"label", @"album/photo", @"contentType", nil];
     
-    SBJSON *json = [SBJSON new];
-    NSString *jsonStr = [json stringWithObject:payload];
-    NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:payload options:NSJSONWritingPrettyPrinted error:nil];
     
 //    NSLog(@"Add Album Payload: %@", jsonStr);
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    [request setHTTPBody:[postData mutableCopy]];
+//    request.tag = REQ_TAG_FOR_ALBUM;
     
-	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setPostBody:[postData mutableCopy]];
-    [request setDelegate:self];
-    request.tag = REQ_TAG_FOR_ALBUM;
-    
-    [self sendPostRequest:request];
-}
-
-- (void)requestFinished:(ASIHTTPRequest *)request {
-	NSError *error = [request error];
-	if (!error) {
-		NSString *responseEnc = [request responseString];
-		
-//        NSLog(@"Add Album Response: %@", responseEnc);
-        
-        [self shouldReturnSuccess];
-	} else {
-        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-	}
-    
+    request = [self sendPostRequest:request];
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (![self checkResponseHasError:response]) {
+                    [self shouldReturnSuccess];
+                }
+            });
+        }
+    }]];
+    self.currentTask = task;
+    [task resume];
 }
 
 @end

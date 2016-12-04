@@ -787,12 +787,12 @@
 		52B6D4BE1DEF0B0A00D466EA /* icon_bottom_indir@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52B6D4BC1DEF0B0A00D466EA /* icon_bottom_indir@2x.png */; };
 		52B6D4BF1DEF0B0A00D466EA /* icon_bottom_kaldir@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52B6D4BD1DEF0B0A00D466EA /* icon_bottom_kaldir@2x.png */; };
 		5332150D1DEC276800FE7289 /* AlbumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5332150C1DEC276800FE7289 /* AlbumCell.m */; };
-		535FD96E1DF01A99005AB4E7 /* album_photo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 535FD96D1DF01A99005AB4E7 /* album_photo_icon@2x.png */; };
-		535FD9701DF01AA2005AB4E7 /* album_photo_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 535FD96F1DF01AA2005AB4E7 /* album_photo_icon@3x.png */; };
 		533215101DEEAB0E00FE7289 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5332150F1DEEAB0E00FE7289 /* Photos.framework */; };
 		533215121DEF439B00FE7289 /* icon_bottom_indir@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 533215111DEF439B00FE7289 /* icon_bottom_indir@2x.png */; };
 		533215141DEF43A600FE7289 /* icon_bottom_indir@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 533215131DEF43A600FE7289 /* icon_bottom_indir@3x.png */; };
 		535FD96B1DEF5F92005AB4E7 /* DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 535FD96A1DEF5F92005AB4E7 /* DownloadManager.m */; };
+		535FD96E1DF01A99005AB4E7 /* album_photo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 535FD96D1DF01A99005AB4E7 /* album_photo_icon@2x.png */; };
+		535FD9701DF01AA2005AB4E7 /* album_photo_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 535FD96F1DF01AA2005AB4E7 /* album_photo_icon@3x.png */; };
 		53FA9CE21DE86071008DCF93 /* QuotaInfoDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 53FA9CE11DE86071008DCF93 /* QuotaInfoDao.m */; };
 		53FA9CE51DE8607D008DCF93 /* Quota.m in Sources */ = {isa = PBXBuildFile; fileRef = 53FA9CE41DE8607D008DCF93 /* Quota.m */; };
 		563FB1BD1AA5EB030066F8E6 /* settings_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 563FB1BB1AA5EB030066F8E6 /* settings_icon.png */; };
@@ -889,6 +889,7 @@
 		944A09ED1DA570C600FC1BBD /* icon_searchB@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 944A09EB1DA570C600FC1BBD /* icon_searchB@3x.png */; };
 		944C07B51D4FE7CB00D45B61 /* RevisitedGroupedPhotosController.m in Sources */ = {isa = PBXBuildFile; fileRef = 944C07B41D4FE7CB00D45B61 /* RevisitedGroupedPhotosController.m */; };
 		944C07B81D4FE81400D45B61 /* RevisitedPhotoHeaderSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 944C07B71D4FE81400D45B61 /* RevisitedPhotoHeaderSegmentView.m */; };
+		944D0E2F1DF373FC000333FF /* DepoHttpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 944D0E2D1DF373FC000333FF /* DepoHttpManager.m */; };
 		9454FA601CAA81FD00BF1288 /* CurrentMusicListModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9454FA5F1CAA81FD00BF1288 /* CurrentMusicListModalController.m */; };
 		9454FA631CAA821200BF1288 /* CurrentDocumentListModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9454FA621CAA821200BF1288 /* CurrentDocumentListModalController.m */; };
 		9454FA661CAA822300BF1288 /* CurrentPhotoListModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9454FA651CAA822300BF1288 /* CurrentPhotoListModalController.m */; };
@@ -2298,11 +2299,11 @@
 		5332150E1DEC277800FE7289 /* AlbumCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumCell.h; sourceTree = "<group>"; };
 		5332150F1DEEAB0E00FE7289 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		533215111DEF439B00FE7289 /* icon_bottom_indir@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_bottom_indir@2x.png"; sourceTree = "<group>"; };
-		535FD96D1DF01A99005AB4E7 /* album_photo_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "album_photo_icon@2x.png"; sourceTree = "<group>"; };
-		535FD96F1DF01AA2005AB4E7 /* album_photo_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "album_photo_icon@3x.png"; sourceTree = "<group>"; };
 		533215131DEF43A600FE7289 /* icon_bottom_indir@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_bottom_indir@3x.png"; sourceTree = "<group>"; };
 		535FD9691DEF5F83005AB4E7 /* DownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadManager.h; sourceTree = "<group>"; };
 		535FD96A1DEF5F92005AB4E7 /* DownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadManager.m; sourceTree = "<group>"; };
+		535FD96D1DF01A99005AB4E7 /* album_photo_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "album_photo_icon@2x.png"; sourceTree = "<group>"; };
+		535FD96F1DF01AA2005AB4E7 /* album_photo_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "album_photo_icon@3x.png"; sourceTree = "<group>"; };
 		53FA9CE01DE86071008DCF93 /* QuotaInfoDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuotaInfoDao.h; sourceTree = "<group>"; };
 		53FA9CE11DE86071008DCF93 /* QuotaInfoDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuotaInfoDao.m; sourceTree = "<group>"; };
 		53FA9CE31DE8607D008DCF93 /* Quota.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quota.h; sourceTree = "<group>"; };
@@ -2422,6 +2423,8 @@
 		944C07B41D4FE7CB00D45B61 /* RevisitedGroupedPhotosController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RevisitedGroupedPhotosController.m; sourceTree = "<group>"; };
 		944C07B61D4FE81400D45B61 /* RevisitedPhotoHeaderSegmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RevisitedPhotoHeaderSegmentView.h; sourceTree = "<group>"; };
 		944C07B71D4FE81400D45B61 /* RevisitedPhotoHeaderSegmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RevisitedPhotoHeaderSegmentView.m; sourceTree = "<group>"; };
+		944D0E2D1DF373FC000333FF /* DepoHttpManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DepoHttpManager.m; sourceTree = "<group>"; };
+		944D0E2E1DF373FC000333FF /* DepoHttpManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DepoHttpManager.h; sourceTree = "<group>"; };
 		9454FA5E1CAA81FD00BF1288 /* CurrentMusicListModalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentMusicListModalController.h; sourceTree = "<group>"; };
 		9454FA5F1CAA81FD00BF1288 /* CurrentMusicListModalController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentMusicListModalController.m; sourceTree = "<group>"; };
 		9454FA611CAA821200BF1288 /* CurrentDocumentListModalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentDocumentListModalController.h; sourceTree = "<group>"; };
@@ -3762,6 +3765,8 @@
 		056AC8F819D15DAE00AC96C3 /* manager */ = {
 			isa = PBXGroup;
 			children = (
+				944D0E2D1DF373FC000333FF /* DepoHttpManager.m */,
+				944D0E2E1DF373FC000333FF /* DepoHttpManager.h */,
 				535FD96C1DEF5F96005AB4E7 /* DownloadManager */,
 				05033BDD1C24B21600FA2E5C /* IAPManager.h */,
 				05033BDE1C24B21600FA2E5C /* IAPManager.m */,
@@ -5635,6 +5640,7 @@
 				05C0C70D1A7D73EA0078F826 /* LogoutDao.m in Sources */,
 				057C9D8C1A2B903E001DDDEC /* NSMutableArray_Shuffling.m in Sources */,
 				05AF7C8A1A1C8F4200F5011A /* RecentActivityCell.m in Sources */,
+				944D0E2F1DF373FC000333FF /* DepoHttpManager.m in Sources */,
 				05DEB1E91A81775F007793DD /* Contact.m in Sources */,
 				051E1E8619CAC92700FD1E03 /* ASIAuthenticationDialog.m in Sources */,
 				05AD502B1A7ED75500C40777 /* TermsController.m in Sources */,

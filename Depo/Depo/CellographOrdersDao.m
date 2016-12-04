@@ -14,26 +14,32 @@
     NSString *urlStr = [NSString stringWithFormat:@"http://api.cellograf.com/get/?method=getOrder&Cellograf_ID=%@", cellographId];
     NSURL *url = [NSURL URLWithString:urlStr];
     
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setDelegate:self];
-    [request setRequestMethod:@"GET"];
-    [request setTimeOutSeconds:30];
-    [request addRequestHeader:@"Accept" value:@"application/json"];
-    [request addRequestHeader:@"Content-Type" value:@"application/json; encoding=utf-8"];
-    [request startAsynchronous];
-}
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    [request setHTTPMethod:@"GET"];
+    [request setTimeoutInterval:30];
+    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request addValue:@"application/json; encoding=utf-8" forHTTPHeaderField:@"Content-Type"];
+    
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            IGLog(@"CellographOrdersDao requestOrdersForId failed with general error");
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            if (![self checkResponseHasError:response]) {
+                IGLog(@"CellographOrdersDao requestOrdersForId request finished successfully");
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self shouldReturnSuccess];
+                });
+            }
+        }
+    }]];
+    self.currentTask = task;
+    [task resume];
 
-- (void) requestFinished:(ASIHTTPRequest *)request {
-    NSError *error = [request error];
-    if (!error) {
-        NSString *responseStr = [request responseString];
-        NSLog(@"CellographOrdersDao requestOrdersForId Response: %@", responseStr);
-        IGLog(@"CellographOrdersDao requestOrdersForId request finished successfully");
-        [self shouldReturnSuccess];
-        return;
-    }
-    IGLog(@"CellographOrdersDao requestOrdersForId failed with general error");
-    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
 }
 
 @end

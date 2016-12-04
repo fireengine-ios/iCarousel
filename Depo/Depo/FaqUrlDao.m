@@ -16,22 +16,28 @@
     
     IGLog(@"[GET] FaqUrlDao requestFaqUrl called");
     
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setDelegate:self];
-    [self sendGetRequest:request];
-}
-
-- (void) requestFinished:(ASIHTTPRequest *)request {
-    NSError *error = [request error];
-    if (!error) {
-        NSString *responseStr = [request responseString];
-        NSLog(@"FaqUrlDao requestFaqUrl Success With Response: %@", responseStr);
-        IGLog(@"FaqUrlDao requestFaqUrl Success");
-        [self shouldReturnSuccessWithObject:responseStr];
-        return;
-    }
-    IGLog(@"FaqUrlDao requestFaqUrl failed with general error");
-    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    request = [self sendGetRequest:request];
+    
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            IGLog(@"FaqUrlDao requestFaqUrl failed with general error");
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            if (![self checkResponseHasError:response]) {
+                IGLog(@"FaqUrlDao requestFaqUrl Success");
+                NSString *faqUrl = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self shouldReturnSuccessWithObject:faqUrl];
+                });
+            }
+        }
+    }]];
+    self.currentTask = task;
+    [task resume];
 }
 
 @end

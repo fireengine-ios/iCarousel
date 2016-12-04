@@ -15,20 +15,25 @@
 
 - (void) requestLogout {
     NSURL *url = [NSURL URLWithString:LOGOUT_URL];
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setDelegate:self];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     if([CacheUtil readRememberMeToken] != nil) {
-        [request addRequestHeader:@"X-Remember-Me-Token" value:[CacheUtil readRememberMeToken]];
+        [request addValue:[CacheUtil readRememberMeToken] forHTTPHeaderField:@"X-Remember-Me-Token"];
     }
-    [self sendPostRequest:request];
-}
-
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    NSError *error = [request error];
-    if (!error) {
-        NSString *responseStr = [request responseString];
-        NSLog(@"Logout response: %@", responseStr);
-    }
+    request = [self sendPostRequest:request];
+    
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            NSString *responseStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSLog(@"Logout Response:%@", responseStr);
+        }
+    }]];
+    self.currentTask = task;
+    [task resume];
 }
 
 @end

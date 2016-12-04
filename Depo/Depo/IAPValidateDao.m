@@ -23,16 +23,40 @@
                           receiptId, @"receiptId",
                           nil];
     
-    SBJSON *json = [SBJSON new];
-    NSString *jsonStr = [json stringWithObject:info];
-    NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:info options:NSJSONWritingPrettyPrinted error:nil];
     
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    request.tag = REQ_TAG_FOR_PACKAGE;
-    [request setPostBody:postData];
-    [request setDelegate:self];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    request = [self sendPostRequest:request];
+    [request setHTTPBody:postData];
     
-    [self sendPostRequest:request];
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            if (![self checkResponseHasError:response]) {
+                NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                if(mainDict && [mainDict isKindOfClass:[NSDictionary class]]) {
+                    NSString *status = [mainDict objectForKey:@"status"];
+                    if(status != nil && ![status isKindOfClass:[NSNull class]]) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self shouldReturnSuccessWithObject:status];
+                        });
+                    }
+                }
+                else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                    });
+                }
+            }
+        }
+    }]];
+    self.currentTask = task;
+    [task resume];
+    
 }
 
 - (void) requestIAPValidationForProductId:(NSString *) productId withReceiptId:(NSString *) receiptId {
@@ -43,37 +67,39 @@
             productId, @"productId",
             nil];
     
-    SBJSON *json = [SBJSON new];
-    NSString *jsonStr = [json stringWithObject:info];
-    NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:info options:NSJSONWritingPrettyPrinted error:nil];
     
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    request.tag = REQ_TAG_FOR_PACKAGE;
-    [request setPostBody:postData];
-    [request setDelegate:self];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    request = [self sendPostRequest:request];
+    [request setHTTPBody:postData];
     
-    [self sendPostRequest:request];
-}
-
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    NSError *error = [request error];
-    
-    if (!error) {
-        NSString *responseStr = [request responseString];
-        NSLog(@"IAP Validate Response: %@", responseStr);
-        SBJSON *jsonParser = [SBJSON new];
-        NSDictionary *mainDict = [jsonParser objectWithString:responseStr];
-        if(mainDict && [mainDict isKindOfClass:[NSDictionary class]]) {
-            NSString *status = [mainDict objectForKey:@"status"];
-            if(status != nil && ![status isKindOfClass:[NSNull class]]) {
-                [self shouldReturnSuccessWithObject:status];
-                return;
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            if (![self checkResponseHasError:response]) {
+                NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                if(mainDict && [mainDict isKindOfClass:[NSDictionary class]]) {
+                    NSString *status = [mainDict objectForKey:@"status"];
+                    if(status != nil && ![status isKindOfClass:[NSNull class]]) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self shouldReturnSuccessWithObject:status];
+                        });
+                    }
+                }
+                else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                    });
+                }
             }
         }
-        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-    } else {
-        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-    }
+    }]];
+    self.currentTask = task;
+    [task resume];
 }
 
 @end

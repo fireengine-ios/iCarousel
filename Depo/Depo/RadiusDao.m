@@ -36,110 +36,99 @@
 
     //    NSLog(@"Device Info: %@", deviceInfo);
     
-    SBJSON *json = [SBJSON new];
-    NSString *jsonStr = [json stringWithObject:deviceInfo];
-    NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
-    
-//    NSLog(@"Radius Login Req: %@", jsonStr);
-    
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setPostBody:[postData mutableCopy]];
-    [request setDelegate:self];
-    
-    [request setRequestMethod:@"POST"];
-    request.timeOutSeconds = 30;
-    [request addRequestHeader:@"Accept" value:@"application/json"];
-    [request addRequestHeader:@"Content-Type" value:@"application/json; encoding=utf-8"];
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:deviceInfo options:0 error:nil];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    [request setHTTPBody:jsonData];
+    [request setTimeoutInterval:30];
+    [request setHTTPMethod:@"POST"];
+    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request addValue:@"application/json; encoding=utf-8" forHTTPHeaderField:@"Content-Type"];
     if(APPDELEGATE.session.authToken) {
-        [request addRequestHeader:@"X-Auth-Token" value:APPDELEGATE.session.authToken];
+        [request addValue:APPDELEGATE.session.authToken forHTTPHeaderField:@"X-Auth-Token"];
     }
-    [request startAsynchronous];
-}
-
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    NSError *error = [request error];
-    if (!error) {
-        NSDictionary *headerParams = [request responseHeaders];
-        NSString *authToken = [headerParams objectForKey:@"X-Auth-Token"];
-        NSString *rememberMeToken = [headerParams objectForKey:@"X-Remember-Me-Token"];
-        NSNumber *newUserFlag = [headerParams objectForKey:@"X-New-User"];
-        NSNumber *migrationUserFlag = [headerParams objectForKey:@"X-Migration-User"];
-        NSString *accountWarning = [headerParams objectForKey:@"X-Account-Warning"];
-        
-        IGLog(@"RadiusDao requestFinished successfully");
-        
-//        NSLog(@"Radius Login Response Headers: %@", headerParams);
-//        NSLog(@"Radius login response: %@", [request responseString]);
-        
-        if(newUserFlag != nil && ![newUserFlag isKindOfClass:[NSNull class]]) {
-            APPDELEGATE.session.newUserFlag = [newUserFlag boolValue];
-        } else {
-            APPDELEGATE.session.newUserFlag = NO;
-        }
-        if(migrationUserFlag != nil && ![migrationUserFlag isKindOfClass:[NSNull class]]) {
-            APPDELEGATE.session.migrationUserFlag = [migrationUserFlag boolValue];
-        } else {
-            APPDELEGATE.session.migrationUserFlag = NO;
-        }
-        if(accountWarning != nil && ![accountWarning isKindOfClass:[NSNull class]]) {
-            if([accountWarning isEqualToString:@"EMPTY_MSISDN"]) {
-                APPDELEGATE.session.msisdnEmpty = YES;
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (!error) {
+            NSDictionary *headerParams = [(NSHTTPURLResponse *)response allHeaderFields];
+            NSString *authToken = [headerParams objectForKey:@"X-Auth-Token"];
+            NSString *rememberMeToken = [headerParams objectForKey:@"X-Remember-Me-Token"];
+            NSNumber *newUserFlag = [headerParams objectForKey:@"X-New-User"];
+            NSNumber *migrationUserFlag = [headerParams objectForKey:@"X-Migration-User"];
+            NSString *accountWarning = [headerParams objectForKey:@"X-Account-Warning"];
+            
+            //        NSLog(@"Radius Login Response Headers: %@", headerParams);
+            //        NSLog(@"Radius login response: %@", [request responseString]);
+            
+            if(newUserFlag != nil && ![newUserFlag isKindOfClass:[NSNull class]]) {
+                APPDELEGATE.session.newUserFlag = [newUserFlag boolValue];
+            } else {
+                APPDELEGATE.session.newUserFlag = NO;
+            }
+            if(migrationUserFlag != nil && ![migrationUserFlag isKindOfClass:[NSNull class]]) {
+                APPDELEGATE.session.migrationUserFlag = [migrationUserFlag boolValue];
+            } else {
+                APPDELEGATE.session.migrationUserFlag = NO;
+            }
+            if(accountWarning != nil && ![accountWarning isKindOfClass:[NSNull class]]) {
+                if([accountWarning isEqualToString:@"EMPTY_MSISDN"]) {
+                    APPDELEGATE.session.msisdnEmpty = YES;
+                } else {
+                    APPDELEGATE.session.msisdnEmpty = NO;
+                }
+                if([accountWarning isEqualToString:@"EMPTY_EMAIL"]) {
+                    APPDELEGATE.session.emailEmpty = YES;
+                } else {
+                    APPDELEGATE.session.emailEmpty = NO;
+                }
+                if([accountWarning isEqualToString:@"EMAIL_NOT_VERIFIED"]) {
+                    APPDELEGATE.session.emailNotVerified = YES;
+                } else {
+                    APPDELEGATE.session.emailNotVerified = NO;
+                }
             } else {
                 APPDELEGATE.session.msisdnEmpty = NO;
-            }
-            if([accountWarning isEqualToString:@"EMPTY_EMAIL"]) {
-                APPDELEGATE.session.emailEmpty = YES;
-            } else {
                 APPDELEGATE.session.emailEmpty = NO;
-            }
-            if([accountWarning isEqualToString:@"EMAIL_NOT_VERIFIED"]) {
-                APPDELEGATE.session.emailNotVerified = YES;
-            } else {
                 APPDELEGATE.session.emailNotVerified = NO;
             }
+            
+            if(rememberMeToken != nil && ![rememberMeToken isKindOfClass:[NSNull class]]) {
+                [CacheUtil writeRememberMeToken:rememberMeToken];
+                [SharedUtil writeSharedRememberMeToken:rememberMeToken];
+            }
+            
+            if(authToken != nil && ![authToken isKindOfClass:[NSNull class]]) {
+                APPDELEGATE.session.authToken = authToken;
+                [SharedUtil writeSharedToken:authToken];
+                
+                [[CurioSDK shared] sendEvent:@"LoginSuccess" eventValue:@"true"];
+                
+                [CacheUtil writeCachedMsisdnForPostMigration:nil];
+                [CacheUtil writeCachedPassForPostMigration:nil];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    SuppressPerformSelectorLeakWarning([delegate performSelector:successMethod]);
+                });
+            } else {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:TOKEN_ERROR_MESSAGE]);
+                });
+            }
         } else {
-            APPDELEGATE.session.msisdnEmpty = NO;
-            APPDELEGATE.session.emailEmpty = NO;
-            APPDELEGATE.session.emailNotVerified = NO;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
         }
-        
-        if(rememberMeToken != nil && ![rememberMeToken isKindOfClass:[NSNull class]]) {
-            [CacheUtil writeRememberMeToken:rememberMeToken];
-            [SharedUtil writeSharedRememberMeToken:rememberMeToken];
-        }
-        
-        if(authToken != nil && ![authToken isKindOfClass:[NSNull class]]) {
-            APPDELEGATE.session.authToken = authToken;
-            [SharedUtil writeSharedToken:authToken];
-            
-            [[CurioSDK shared] sendEvent:@"LoginSuccess" eventValue:@"true"];
-            [MPush hitTag:@"LoginSuccess" withValue:@"true"];
-            [MPush hitTag:@"logged_in" withValue:@"1"];
-            [MPush hitEvent:@"logged_in"];
-            
-            [CacheUtil writeCachedMsisdnForPostMigration:nil];
-            [CacheUtil writeCachedPassForPostMigration:nil];
-            
-            SuppressPerformSelectorLeakWarning([delegate performSelector:successMethod]);
-        } else {
-            SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:TOKEN_ERROR_MESSAGE]);
-        }
-    } else {
-        IGLog(@"RadiusDao requestFinished requestFinished with general error");
-        SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:GENERAL_ERROR_MESSAGE]);
-    }
+
+    }];
+    [task resume];
 }
 
-- (void)requestFailed:(ASIHTTPRequest *)request {
-    if([request responseStatusCode] == 401) {
-        IGLog(@"RadiusDao requestFinished request failed with 401");
+- (void)requestFailed:(NSURLResponse *) urlresponse {
+    NSHTTPURLResponse *response = (NSHTTPURLResponse *) urlresponse;
+    if([response statusCode] == 401) {
         SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:GENERAL_ERROR_MESSAGE]);
-    } else if([request responseStatusCode] == 403) {
-        IGLog(@"RadiusDao requestFinished request failed with 403");
+    } else if([response statusCode] == 403) {
         SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:FORBIDDEN_ERROR_MESSAGE]);
     } else {
-        IGLog(@"RadiusDao requestFinished request failed");
-        if([request.error code] == ASIConnectionFailureErrorType){
+        if([response statusCode] == NSURLErrorNotConnectedToInternet){
             SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:NSLocalizedString(@"NoConnErrorMessage", @"")]);
         } else {
             SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:GENERAL_ERROR_MESSAGE]);

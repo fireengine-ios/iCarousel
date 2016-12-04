@@ -24,42 +24,44 @@
         parentListingUrl = [NSString stringWithFormat:ADVANCED_SEARCH_URL_WITH_CATEGORY, text, [AppUtil serverSortNameByEnum:sortType], [AppUtil isAscByEnum:sortType] ? @"ASC":@"DESC", page, size, @"documents"];
     
     NSURL *url = [NSURL URLWithString:[parentListingUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setDelegate:self];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     
     returnsList = YES;
     
-    [self sendGetRequest:request];
-}
-
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    NSError *error = [request error];
-    
-    if (!error) {
-        NSString *responseEnc = [request responseString];
-        
-//        NSLog(@"Search: %@", responseEnc);
-        
-        SBJSON *jsonParser = [SBJSON new];
-        NSDictionary *mainDict = [jsonParser objectWithString:responseEnc];
-        
-        if(mainDict != nil && ![mainDict isKindOfClass:[NSNull class]]) {
-            NSDictionary *mainArray = [mainDict objectForKey:@"found_items"];
-            
-            NSMutableArray *result = [[NSMutableArray alloc] init];
-            
-            if(mainArray != nil && ![mainArray isKindOfClass:[NSNull class]]) {
-                for(NSDictionary *fileDict in mainArray) {
-                    [result addObject:[self parseFile:fileDict]];
+    request = [self sendGetRequest:request];
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            if (![self checkResponseHasError:response]) {
+                NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+                
+                if(mainDict != nil && ![mainDict isKindOfClass:[NSNull class]]) {
+                    NSDictionary *mainArray = [mainDict objectForKey:@"found_items"];
+                    
+                    NSMutableArray *result = [[NSMutableArray alloc] init];
+                    
+                    if(mainArray != nil && ![mainArray isKindOfClass:[NSNull class]]) {
+                        for(NSDictionary *fileDict in mainArray) {
+                            [result addObject:[self parseFile:fileDict]];
+                        }
+                    }
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnSuccessWithObject:result];
+                    });
+                } else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                    });
                 }
             }
-            [self shouldReturnSuccessWithObject:result];
-        } else {
-            [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
         }
-    } else {
-        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-    }
+    }]];
+    [task resume];
+    self.currentTask = task;
 }
 
 @end

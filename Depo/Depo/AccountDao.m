@@ -15,28 +15,111 @@
 - (void) requestCurrentAccount {
     requestMethod = RequestMethodGetCurrentSubscription;
     NSURL *url = [NSURL URLWithString:GET_CURRENT_SUBSCRIPTION_URL];
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    request.tag = REQ_TAG_FOR_PACKAGE;
-    [request setDelegate:self];
-    [self sendGetRequest:request];
+    NSMutableURLRequest *tempRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    NSURLRequest *finalRequest = [self sendGetRequest:tempRequest];
+    
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:finalRequest completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            Subscription *currentSubscription = [self parseSubscription:dict];
+            if (currentSubscription != nil) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (![self checkResponseHasError:response]) {
+                        [self shouldReturnSuccessWithObject:currentSubscription];
+                    }
+                });
+            }
+            
+            else {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                });
+                
+            }
+        }
+    }]];
+    self.currentTask = task;
+    [task resume];
 }
 
 - (void) requestActiveSubscriptions {
     requestMethod = RequestMethodGetActiveSubscriptions;
     NSURL *url = [NSURL URLWithString:GET_ACTIVE_SUBSCRIPTIONS_URL];
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    request.tag = REQ_TAG_FOR_PACKAGE;
-    [request setDelegate:self];
-    [self sendGetRequest:request];
+    NSMutableURLRequest *tempRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    NSURLRequest *finalRequest = [self sendGetRequest:tempRequest];
+    
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:finalRequest completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            NSMutableArray *subscriptions = [[NSMutableArray alloc] init];
+            NSArray *responseArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+            if(responseArray != nil && [responseArray isKindOfClass:[NSArray class]]) {
+                for(NSDictionary *subscriptionDict in responseArray) {
+                    Subscription *subscription = [self parseSubscription:subscriptionDict];
+                    [subscriptions addObject:subscription];
+                }
+                NSArray *sortedArray = [subscriptions sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+                    NSNumber *firstQuota = [NSNumber numberWithFloat:[(Subscription*) a plan].quota];
+                    NSNumber *secondQuota = [NSNumber numberWithFloat:[(Subscription*) b plan].quota];
+                    return [firstQuota compare:secondQuota];
+                }];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self shouldReturnSuccessWithObject:sortedArray];
+                });
+            }
+            else {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                });
+            }
+        }
+    }]];
+    self.currentTask = task;
+    [task resume];
 }
 
 - (void) requestOffers {
     requestMethod = RequestMethodGetOffers;
     NSURL *url = [NSURL URLWithString:GET_SUBSCRIPTION_OFFERS_URL];
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    request.tag = REQ_TAG_FOR_PACKAGE;
-    [request setDelegate:self];
-    [self sendGetRequest:request];
+    NSMutableURLRequest *tempRequest = [NSMutableURLRequest requestWithURL:url];
+    NSURLRequest *finalRequest = [self sendGetRequest:tempRequest];
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:finalRequest completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            NSMutableArray *result = [[NSMutableArray alloc] init];
+            NSArray *mainArr = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            if (mainArr !=nil && ![mainArr isKindOfClass:[NSNull class]]) {
+                for (NSDictionary *dict in mainArr) {
+                    Offer *offer = [self parseOffer:dict];
+                    if (offer != nil) {
+                        [result addObject:offer];
+                    }
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self shouldReturnSuccessWithObject:result];
+                });
+            }
+            else {
+                [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+            }
+        }
+    }]];
+    
+    self.currentTask = task;
+    [task resume];
 }
 
 - (void) requestActivateOffer: (Offer *)offer {
@@ -47,25 +130,77 @@
     //    NSDictionary *payload = [NSDictionary dictionaryWithObjectsAndKeys:metadata, @"metadata", nil];
     
     NSDictionary *payload = [NSDictionary dictionaryWithObjectsAndKeys:offer.offerId, @"aeOfferId", offer.name, @"aeOfferName", offer.campaignChannel, @"campaignChannel", offer.campaignCode, @"campaignCode", offer.campaignId, @"campaignId", offer.campaignUserCode, @"campaignUserCode", offer.cometParameters, @"cometParameters", offer.responseApi, @"responseApi", offer.validationKey, @"validationKey", offer.price, @"price", offer.role, @"role", offer.quotaString, @"quota", nil];
-    
-    SBJSON *json = [SBJSON new];
-    NSString *jsonStr = [json stringWithObject:payload];
-    NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
-    
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    request.tag = REQ_TAG_FOR_PACKAGE;
-    [request setPostBody:[postData mutableCopy]];
-    [request setDelegate:self];
-    [self sendPostRequest:request];
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:payload options:0 error:nil];
+
+    NSMutableURLRequest *tempRequest = [NSMutableURLRequest requestWithURL:url];
+    [tempRequest setHTTPBody:jsonData];
+    NSURLRequest *finalRequest = [self sendPostRequest:tempRequest];
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:finalRequest completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSString *responseStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            if ([responseStr isEqualToString:@""]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self shouldReturnSuccess];
+                });
+                
+            } else {
+                NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                if(responseDict != nil && ![responseDict isKindOfClass:[NSNull class]]) {
+                    NSNumber *errorCode = [responseDict objectForKey:@"errorCode"];
+                    if(errorCode != nil && ![errorCode isKindOfClass:[NSNull class]]) {
+                        if([errorCode intValue] == 1004) {
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                [self shouldReturnFailWithMessage:NSLocalizedString(@"PackageSubscriptionQuotaErrorMessage", @"")];
+                                return;
+                            });
+                        }
+                    }
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                });
+            }
+            
+        }
+    }]];
+    self.currentTask = task;
+    [task resume];
 }
 
 - (void) requestIsJobExists {
     requestMethod = RequestMethodIsJobExists;
     NSURL *url = [NSURL URLWithString:REQUEST_IS_JOB_EXISTS];
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    request.tag = REQ_TAG_FOR_PACKAGE;
-    [request setDelegate:self];
-    [self sendGetRequest:request];
+    NSMutableURLRequest *tempRequest = [NSMutableURLRequest requestWithURL:url];
+    NSURLRequest *finalRequest = [self sendGetRequest:tempRequest];
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:finalRequest completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+            
+        }
+        else {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            NSNumber *result = [dict objectForKey:@"isJobExists"];
+            int resultInt = [self intByNumber:result];
+            if (resultInt == 0 || resultInt == 1) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self shouldReturnSuccessWithObject:result];
+                });
+            } else {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                });
+            }
+        }
+    }]];
+    self.currentTask = task;
+    [task resume];
 }
 
 //- (void) requestCancelSubscription: (Subscription *)subscription {
@@ -95,93 +230,5 @@
 //    [request setDelegate:self];
 //    [self sendPostRequest:request];
 //}
-
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    NSError *error = [request error];
-    
-    if (!error) {
-        @try {
-            NSString *responseStr = [request responseString];
-            NSLog(@"RESULT: %@", responseStr);
-            SBJSON *jsonParser = [SBJSON new];
-            if (requestMethod == RequestMethodGetCurrentSubscription) {
-                NSDictionary *responseDict = [jsonParser objectWithString:responseStr];
-                Subscription *subscription = [self parseSubscription:responseDict];
-                if (subscription != nil) {
-                    [self shouldReturnSuccessWithObject:subscription];
-                } else {
-                    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-                }
-            } else if (requestMethod == RequestMethodGetOffers) {
-                NSMutableArray *result = [[NSMutableArray alloc] init];
-                NSArray *mainArray = [jsonParser objectWithString:responseStr];
-                if (mainArray != nil && ![mainArray isKindOfClass:[NSNull class]]) {
-                    for (NSDictionary *offerDict in mainArray) {
-                        Offer *offer = [self parseOffer:offerDict];
-                        if (offer != nil) {
-                            [result addObject:offer];
-                        }
-                    }
-                    [self shouldReturnSuccessWithObject:result];
-                } else {
-                    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-                }
-            } else if (requestMethod == RequestMethodActivateOffer) {
-                if ([responseStr isEqualToString:@""]) {
-                    [self shouldReturnSuccess];
-                } else {
-                    NSDictionary *responseDict = [jsonParser objectWithString:responseStr];
-                    if(responseDict != nil && ![responseDict isKindOfClass:[NSNull class]]) {
-                        NSNumber *errorCode = [responseDict objectForKey:@"errorCode"];
-                        if(errorCode != nil && ![errorCode isKindOfClass:[NSNull class]]) {
-                            if([errorCode intValue] == 1004) {
-                                [self shouldReturnFailWithMessage:NSLocalizedString(@"PackageSubscriptionQuotaErrorMessage", @"")];
-                                return;
-                            }
-                        }
-                    }
-                    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-                }
-            } else if (requestMethod == RequestMethodIsJobExists) {
-                NSDictionary *responseDict = [jsonParser objectWithString:responseStr];
-                NSNumber *result = [responseDict objectForKey:@"isJobExists"];
-                int resultInt = [self intByNumber:result];
-                if (resultInt == 0 || resultInt == 1) {
-                    [self shouldReturnSuccessWithObject:result];
-                } else {
-                    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-                }
-            } else if(requestMethod == RequestMethodGetActiveSubscriptions) {
-                NSDictionary *responseArray = [jsonParser objectWithString:responseStr];
-                NSMutableArray *subscriptions = [[NSMutableArray alloc] init];
-                if(responseArray != nil && [responseArray isKindOfClass:[NSArray class]]) {
-                    for(NSDictionary *subscriptionDict in responseArray) {
-                        Subscription *subscription = [self parseSubscription:subscriptionDict];
-                        [subscriptions addObject:subscription];
-                    }
-                }
-                NSArray *sortedArray = [subscriptions sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
-                    NSNumber *firstQuota = [NSNumber numberWithFloat:[(Subscription*) a plan].quota];
-                    NSNumber *secondQuota = [NSNumber numberWithFloat:[(Subscription*) b plan].quota];
-                    return [firstQuota compare:secondQuota];
-                }];
-                [self shouldReturnSuccessWithObject:sortedArray];
-                
-                /*
-                if ([subscriptions count] > 0) {
-                    [self shouldReturnSuccessWithObject:subscriptions];
-                } else {
-                    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-                }
-                 */
-            }
-        }
-        @catch (NSException *e) {
-//            NSLog(@"Exception: %@", e);
-        }
-    } else {
-        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-    }
-}
 
 @end

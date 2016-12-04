@@ -13,30 +13,37 @@
 
 - (void) requestConnectedDevices {
     NSURL *url = [NSURL URLWithString:GET_CONNECTED_DEVICES];
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setDelegate:self];
-    [self sendGetRequest:request];
-}
-
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    NSError *error = [request error];
-    
-    if (!error) {
-        NSMutableArray *result = [[NSMutableArray alloc] init];
-        NSString *responseStr = [request responseString];
-        SBJSON *jsonParser = [SBJSON new];
-        NSArray *mainArray = [jsonParser objectWithString:responseStr];
-        if (mainArray != nil && ![mainArray isKindOfClass:[NSNull class]]) {
-            for (NSDictionary *deviceDict in mainArray) {
-                Device *device = [self parseDevice:deviceDict];
-                if (device != nil)
-                    [result addObject:device];
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:[self sendGetRequest:[NSMutableURLRequest requestWithURL:url]] completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        } else {
+            NSArray *mainArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            NSMutableArray *result = [[NSMutableArray alloc] init];
+            if(mainArray != nil && ![mainArray isKindOfClass:[NSNull class]]) {
+                for(NSDictionary *dict in mainArray) {
+                    Device *device = [self parseDevice:dict];
+                    if (device != nil) {
+                        [result addObject:device];
+                    }
+                    
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (![self checkResponseHasError:response]) {
+                        [self shouldReturnSuccessWithObject:result];
+                    }
+                });
             }
-            [self shouldReturnSuccessWithObject:result];
-        } else
-            [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-    } else
-        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+            else {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                });
+            }
+        }
+    }]];
+    self.currentTask = task;
+    [task resume];
 }
 
 @end

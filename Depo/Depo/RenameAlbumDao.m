@@ -19,26 +19,41 @@
     NSString *urlStr = [NSString stringWithFormat:RENAME_ALBUM_URL, albumUuid, newName];
     NSURL *url = [NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
 //    NSLog(@"RENAME ALBUM URL: %@", [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]);
-    
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setDelegate:self];
-    
-    [self sendPutRequest:request];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    request = [self sendPutRequest:request];
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            if (![self checkResponseHasError:response]) {
+                [self requestFinished:data];
+            }
+        }
+    }]];
+    self.currentTask = task;
+    [task resume];
 }
 
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    NSError *error = [request error];
-    if (!error) {
-        NSString *responseEnc = [request responseString];
-//        NSLog(@"RENAME ALBUM Response: %@", responseEnc);
-        
-        PhotoAlbum *finalAlbum = [[PhotoAlbum alloc] init];
-        finalAlbum.label = self.nameRef;
-        finalAlbum.lastModifiedDate = [NSDate date];
+- (void)requestFinished:(NSData *) data {
+//    NSError *error = [request error];
+    PhotoAlbum *finalAlbum = [[PhotoAlbum alloc] init];
+    finalAlbum.label = self.nameRef;
+    finalAlbum.lastModifiedDate = [NSDate date];
+    dispatch_async(dispatch_get_main_queue(), ^{
         [self shouldReturnSuccessWithObject:finalAlbum];
-    } else {
-        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-    }
+    });
+//    
+//    if (!error) {
+//        NSString *responseEnc = [request responseString];
+////        NSLog(@"RENAME ALBUM Response: %@", responseEnc);
+//        
+  
+//    } else {
+//        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+//    }
     
 }
 

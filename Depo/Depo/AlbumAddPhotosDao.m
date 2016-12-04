@@ -13,34 +13,47 @@
 - (void) requestAddPhotos:(NSArray *) uuidList toAlbum:(NSString *) albumUuid {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:ALBUM_ADD_PHOTOS_URL, albumUuid]];
     
-    SBJSON *json = [SBJSON new];
-    NSString *jsonStr = [json stringWithObject:uuidList];
-    NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:uuidList options:NSJSONWritingPrettyPrinted error:nil];
     
 //    NSLog(@"Album Add Photos Payload: %@", jsonStr);
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request addRequestHeader:@"x-meta-strategy" value:@"1"];
-    [request addRequestHeader:@"Content-Type" value:@"application/json; encoding=utf-8"];
-    [request setPostBody:[postData mutableCopy]];
-    [request setDelegate:self];
-    request.tag = REQ_TAG_FOR_ALBUM;
+    [request addValue:@"1" forHTTPHeaderField:@"x-meta-strategy"];
+    [request addValue:@"application/json; encoding=utf-8" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:[postData mutableCopy]];
+//    request.tag = REQ_TAG_FOR_ALBUM;
     
-    [self sendPutRequest:request];
+    request = [self sendPutRequest:request];
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            if (![self checkResponseHasError:response]) {
+                [self requestFinished:data];
+            }
+        }
+    }]];
+    self.currentTask = task;
+    [task resume];
 }
 
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    NSError *error = [request error];
-    
-    if (!error) {
-        NSString *responseEnc = [request responseString];
-        
-//        NSLog(@"Album Add Photos Response: %@", responseEnc);
-        
+- (void)requestFinished:(NSData *) data {
+//    NSError *error = [request error];
+    dispatch_async(dispatch_get_main_queue(), ^{
         [self shouldReturnSuccess];
-    } else {
-        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-    }
+    });
+//    if (!error) {
+//        NSString *responseEnc = [request responseString];
+//        
+////        NSLog(@"Album Add Photos Response: %@", responseEnc);
+//        
+//        [self shouldReturnSuccess];
+//    } else {
+//        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+//    }
     
 }
 

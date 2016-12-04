@@ -13,32 +13,46 @@
 - (void) requestDeleteAlbums:(NSArray *) uuidList {
     NSURL *url = [NSURL URLWithString:DELETE_ALBUM_URL];
     
-    SBJSON *json = [SBJSON new];
-    NSString *jsonStr = [json stringWithObject:uuidList];
-    NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:uuidList options:NSJSONWritingPrettyPrinted error:nil];
     
 //    NSLog(@"Album Delete Payload: %@", jsonStr);
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    request = [self sendPostRequest:request];
     
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setPostBody:[postData mutableCopy]];
-    [request setDelegate:self];
-    request.tag = REQ_TAG_FOR_ALBUM;
     
-    [self sendDeleteRequest:request];
+    [request setHTTPBody:[postData mutableCopy]];
+    
+   // request.tag = REQ_TAG_FOR_ALBUM;
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            if (![self checkResponseHasError:response]) {
+                [self requestFinished:data];
+            }
+        }
+    }]];
+    self.currentTask = task;
+    [task resume];
 }
 
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    NSError *error = [request error];
-    
-    if (!error) {
-        NSString *responseEnc = [request responseString];
-        
-//        NSLog(@"Album Delete Response: %@", responseEnc);
-        
+- (void)requestFinished:(NSData *) data {
+//    NSError *error = [request error];
+    dispatch_async(dispatch_get_main_queue(), ^{
         [self shouldReturnSuccess];
-    } else {
-        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-    }
+    });
+//    if (!error) {
+//        NSString *responseEnc = [request responseString];
+//        
+////        NSLog(@"Album Delete Response: %@", responseEnc);
+//        
+//        
+//    } else {
+//        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+//    }
     
 }
 

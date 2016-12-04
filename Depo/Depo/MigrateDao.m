@@ -12,19 +12,25 @@
 
 - (void) requestSendMigrate {
     NSURL *url = [NSURL URLWithString:MIGRATION_URL];
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setDelegate:self];
-    [self sendPostRequest:request];
-}
-
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    NSError *error = [request error];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    request = [self sendPostRequest:request];
     
-    if (!error) {
-        NSString *responseStr = [request responseString];
-        NSLog(@"Migration response: %@", responseStr);
-    }
-    [self shouldReturnSuccess];
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (![self checkResponseHasError:response]) {
+                    [self shouldReturnSuccess];
+                }
+            });
+        }
+    }]];
+    self.currentTask = task;
+    [task resume];
 }
 
 @end

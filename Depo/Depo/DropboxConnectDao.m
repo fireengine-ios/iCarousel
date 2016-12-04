@@ -13,24 +13,29 @@
 - (void) requestConnectDropboxWithToken:(NSString *) tokenVal {
     NSString *connectUrlStr = [NSString stringWithFormat:DROPBOX_CONNECT_URL, tokenVal];
     NSURL *url = [NSURL URLWithString:connectUrlStr];
+//    request.tag = REQ_TAG_FOR_DROPBOX;
     
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setDelegate:self];
-    request.tag = REQ_TAG_FOR_DROPBOX;
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     
-    [self sendPostRequest:request];
-}
+    request = [self sendPostRequest:request];
+    
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            if (![self checkResponseHasError:response]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self shouldReturnSuccess];
+                });
+            }
+        }
+    }]];
+    self.currentTask = task;
+    [task resume];
 
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    NSError *error = [request error];
-    if (!error) {
-        NSString *responseStr = [request responseString];
-        NSLog(@"Dropbox Connect Response: %@", responseStr);
-        
-        [self shouldReturnSuccess];
-        return;
-    }
-    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
 }
 
 @end

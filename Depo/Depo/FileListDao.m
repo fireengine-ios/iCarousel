@@ -21,11 +21,24 @@
 	NSURL *url = [NSURL URLWithString:parentListingUrl];
 	
     IGLog(@"[GET] FileListDao requestFileListingForParentForPage");
-
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setDelegate:self];
-    
-    [self sendGetRequest:request];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    request = [self sendGetRequest:request];
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (![self checkResponseHasError:response]) {
+                    [self requestFinished:data withResponse:response];
+                }
+            });
+        }
+    }]];
+    self.currentTask = task;
+    [task resume];
 }
 
 - (void) requestFileListingForFolder:(NSString *) folderUuid andForPage:(int) page andSize:(int) size sortBy:(SortType) sortType {
@@ -37,10 +50,24 @@
 	
     IGLog(@"[GET] FileListDao requestFileListingForFolder");
 
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setDelegate:self];
-    
-    [self sendGetRequest:request];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    request = [self sendGetRequest:request];
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+            });
+        }
+        else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (![self checkResponseHasError:response]) {
+                    [self requestFinished:data withResponse:response];
+                }
+            });
+        }
+    }]];
+    self.currentTask = task;
+    [task resume];
 }
 
 - (void) requestFolderListingForFolder:(NSString *) folderUuid andForPage:(int) page andSize:(int) size sortBy:(SortType) sortType {
@@ -54,23 +81,33 @@
 
     //    NSLog(@"FOLDER URL: %@", parentListingUrl);
     
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setDelegate:self];
-    
-    [self sendGetRequest:request];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    request = [self sendGetRequest:request];
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response];
+                IGLog(@"FileListDao requestFinished with general error");
+                //TODO Error handling nasil olmali ???
+//                [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+            });
+        }
+        else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (![self checkResponseHasError:response]) {
+                    [self requestFinished:data withResponse:response];
+                }
+            });
+        }
+    }]];
+    self.currentTask = task;
+    [task resume];
 }
 
-- (void)requestFinished:(ASIHTTPRequest *)request {
-	NSError *error = [request error];
-	
-	if (!error) {
-		NSString *responseEnc = [request responseString];
-		
-                NSLog(@"File Listing Response: %@", responseEnc);
-        
-		SBJSON *jsonParser = [SBJSON new];
-		NSDictionary *mainDict = [jsonParser objectWithString:responseEnc];
-
+- (void)requestFinished:(NSData *)data withResponse:(NSURLResponse *) response {
+    NSError *error;
+    NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
+    if (!error) {
         if(mainDict != nil && ![mainDict isKindOfClass:[NSNull class]]) {
             NSDictionary *mainArray = [mainDict objectForKey:@"fileList"];
             
@@ -89,11 +126,10 @@
             IGLog(@"FileListDao requestFinished with maindict null returning general error");
             [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
         }
-	} else {
-        IGLog(@"FileListDao requestFinished with general error");
+    }
+    else {
         [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-	}
-    
+    }
 }
 
 @end

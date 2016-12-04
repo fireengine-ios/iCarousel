@@ -45,28 +45,35 @@
                             deviceInfo, @"deviceInfo",
                           	nil];
     
-    SBJSON *json = [SBJSON new];
-    NSString *jsonStr = [json stringWithObject:info];
-    NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:info options:0 error:nil];
     
-//    NSLog(@"Token Req: %@", jsonStr);
-    
-	ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setPostBody:[postData mutableCopy]];
-    [request setDelegate:self];
-    
-    [request setRequestMethod:@"POST"];
-    request.timeOutSeconds = 30;
-    [request addRequestHeader:@"Accept" value:@"application/json"];
-    [request addRequestHeader:@"Content-Type" value:@"application/json; encoding=utf-8"];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    [request setHTTPBody:jsonData];
+    [request setTimeoutInterval:30];
+    [request setHTTPMethod:@"POST"];
+    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request addValue:@"application/json; encoding=utf-8" forHTTPHeaderField:@"Content-Type"];
+//    [request addValue:@"Basic QWEQWEQWE" forHTTPHeaderField:@"Authorization"];
     if(APPDELEGATE.session.authToken) {
-        [request addRequestHeader:@"X-Auth-Token" value:APPDELEGATE.session.authToken];
+        [request addValue:APPDELEGATE.session.authToken forHTTPHeaderField:@"X-Auth-Token"];
     }
     if(captchaId != nil && captchaValue != nil) {
-        [request addRequestHeader:@"X-Captcha-Id" value:captchaId];
-        [request addRequestHeader:@"X-Captcha-Answer" value:captchaValue];
+        [request setValue:captchaId forHTTPHeaderField:@"X-Captcha-Id"];
+        [request setValue:captchaValue forHTTPHeaderField:@"X-Captcha-Answer"];
     }
-    [request startAsynchronous];
+    
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (!error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFinished:data withResponse:response withRequest:request];
+            });
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response withData:data];
+            });
+        }
+    }];
+    [task resume];
 }
 
 - (void) requestTokenByRememberMe {
@@ -74,131 +81,141 @@
     IGLog(@"[POST] Calling requestTokenByRememberMe");
     
     NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:
-                                [[UIDevice currentDevice] identifierForVendor].UUIDString, @"uuid",
-                                [[UIDevice currentDevice] name], @"name",
-                                (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? @"IPAD" : @"IPHONE"), @"deviceType",
-//                                ([AppUtil readFirstVisitOverFlag] ? @"false" : @"true"), @"newDevice",
-                                nil];
+                          [[UIDevice currentDevice] identifierForVendor].UUIDString, @"uuid",
+                          [[UIDevice currentDevice] name], @"name",
+                          (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? @"IPAD" : @"IPHONE"), @"deviceType",
+                          //                                ([AppUtil readFirstVisitOverFlag] ? @"false" : @"true"), @"newDevice",
+                          nil];
     
-    SBJSON *json = [SBJSON new];
-    NSString *jsonStr = [json stringWithObject:info];
-    NSData *postData = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:info options:0 error:nil];
     
-//    NSLog(@"Token Req: %@", jsonStr);
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request addRequestHeader:@"X-Remember-Me-Token" value:[CacheUtil readRememberMeToken]];
-    [request setPostBody:[postData mutableCopy]];
-    [request setDelegate:self];
-    
-    [request setRequestMethod:@"POST"];
-    request.timeOutSeconds = 30;
-    [request addRequestHeader:@"Accept" value:@"application/json"];
-    [request addRequestHeader:@"Content-Type" value:@"application/json; encoding=utf-8"];
+    [request addValue:[CacheUtil readRememberMeToken] forHTTPHeaderField:@"X-Remember-Me-Token"];
+    [request setHTTPBody:jsonData];
+    [request setTimeoutInterval:30];
+    [request setHTTPMethod:@"POST"];
+    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request addValue:@"application/json; encoding=utf-8" forHTTPHeaderField:@"Content-Type"];
     if(APPDELEGATE.session.authToken) {
-        [request addRequestHeader:@"X-Auth-Token" value:APPDELEGATE.session.authToken];
+        [request addValue:APPDELEGATE.session.authToken forHTTPHeaderField:@"X-Auth-Token"];
     }
-    [request startAsynchronous];
+    
+    NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (!error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFinished:data withResponse:response withRequest:request];
+            });
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self requestFailed:response withData:data];
+            });
+        }
+    }];
+    [task resume];
 }
 
-- (void)requestFinished:(ASIHTTPRequest *)request {
-	NSError *error = [request error];
-	if (!error) {
-        NSString *responseStr = [request responseString];
-        NSLog(@"RESULT: %@", responseStr);
+- (void)requestFinished:(NSData *) data withResponse:(NSURLResponse *) response withRequest:(NSMutableURLRequest *) request {
+    NSHTTPURLResponse *castedResponse = (NSHTTPURLResponse *) response;
 
-        SBJSON *jsonParser = [SBJSON new];
-        NSDictionary *dict = [jsonParser objectWithString:responseStr];
-        if(dict != nil && [dict isKindOfClass:[NSDictionary class]]) {
-            NSNumber *errorCode = [dict objectForKey:@"errorCode"];
-            if(errorCode != nil && ![errorCode isKindOfClass:[NSNull class]]) {
-                if([errorCode intValue] == 4002) {
-                    IGLog(@"RequestTokenDao request failed with captcha error");
-                    SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:CAPTCHA_ERROR_MESSAGE]);
-                    return;
-                }
-            }
-        }
-
-        NSDictionary *headerParams = [request responseHeaders];
-        NSString *authToken = [headerParams objectForKey:@"X-Auth-Token"];
-        NSString *rememberMeToken = [headerParams objectForKey:@"X-Remember-Me-Token"];
-        NSNumber *newUserFlag = [headerParams objectForKey:@"X-New-User"];
-        NSNumber *migrationUserFlag = [headerParams objectForKey:@"X-Migration-User"];
-        NSString *accountWarning = [headerParams objectForKey:@"X-Account-Warning"];
-        
-//        NSLog(@"Auth Token Response Headers: %@", headerParams);
-        NSLog(@"TOKEN: %@", authToken);
-
-        if(newUserFlag != nil && ![newUserFlag isKindOfClass:[NSNull class]]) {
-            APPDELEGATE.session.newUserFlag = [newUserFlag boolValue];
-        } else {
-            APPDELEGATE.session.newUserFlag = NO;
-        }
-        if(migrationUserFlag != nil && ![migrationUserFlag isKindOfClass:[NSNull class]]) {
-            APPDELEGATE.session.migrationUserFlag = [migrationUserFlag boolValue];
-        } else {
-            APPDELEGATE.session.migrationUserFlag = NO;
-        }
-        if(accountWarning != nil && ![accountWarning isKindOfClass:[NSNull class]]) {
-            if([accountWarning isEqualToString:@"EMPTY_MSISDN"]) {
-                APPDELEGATE.session.msisdnEmpty = YES;
-            } else {
-                APPDELEGATE.session.msisdnEmpty = NO;
-            }
-            if([accountWarning isEqualToString:@"EMPTY_EMAIL"]) {
-                APPDELEGATE.session.emailEmpty = YES;
-            } else {
-                APPDELEGATE.session.emailEmpty = NO;
-            }
-            if([accountWarning isEqualToString:@"EMAIL_NOT_VERIFIED"]) {
-                APPDELEGATE.session.emailNotVerified = YES;
-            } else {
-                APPDELEGATE.session.emailNotVerified = NO;
-            }
+    NSDictionary *headerParams = [castedResponse allHeaderFields];
+    
+    NSString *authToken = [headerParams objectForKey:@"X-Auth-Token"];
+    NSString *rememberMeToken = [headerParams objectForKey:@"X-Remember-Me-Token"];
+    NSNumber *newUserFlag = [headerParams objectForKey:@"X-New-User"];
+    NSNumber *migrationUserFlag = [headerParams objectForKey:@"X-Migration-User"];
+    NSString *accountWarning = [headerParams objectForKey:@"X-Account-Warning"];
+    
+    //        NSLog(@"Auth Token Response Headers: %@", headerParams);
+    NSLog(@"TOKEN: %@", authToken);
+    
+    if(newUserFlag != nil && ![newUserFlag isKindOfClass:[NSNull class]]) {
+        APPDELEGATE.session.newUserFlag = [newUserFlag boolValue];
+    } else {
+        APPDELEGATE.session.newUserFlag = NO;
+    }
+    if(migrationUserFlag != nil && ![migrationUserFlag isKindOfClass:[NSNull class]]) {
+        APPDELEGATE.session.migrationUserFlag = [migrationUserFlag boolValue];
+    } else {
+        APPDELEGATE.session.migrationUserFlag = NO;
+    }
+    if(accountWarning != nil && ![accountWarning isKindOfClass:[NSNull class]]) {
+        if([accountWarning isEqualToString:@"EMPTY_MSISDN"]) {
+            APPDELEGATE.session.msisdnEmpty = YES;
         } else {
             APPDELEGATE.session.msisdnEmpty = NO;
+        }
+        if([accountWarning isEqualToString:@"EMPTY_EMAIL"]) {
+            APPDELEGATE.session.emailEmpty = YES;
+        } else {
             APPDELEGATE.session.emailEmpty = NO;
+        }
+        if([accountWarning isEqualToString:@"EMAIL_NOT_VERIFIED"]) {
+            APPDELEGATE.session.emailNotVerified = YES;
+        } else {
             APPDELEGATE.session.emailNotVerified = NO;
         }
+    } else {
+        APPDELEGATE.session.msisdnEmpty = NO;
+        APPDELEGATE.session.emailEmpty = NO;
+        APPDELEGATE.session.emailNotVerified = NO;
+    }
+    
+    if(rememberMeToken != nil && ![rememberMeToken isKindOfClass:[NSNull class]]) {
+        [CacheUtil writeRememberMeToken:rememberMeToken];
+        [SharedUtil writeSharedRememberMeToken:rememberMeToken];
+    }
+    
+    if(authToken != nil && ![authToken isKindOfClass:[NSNull class]]) {
+        APPDELEGATE.session.authToken = authToken;
+        [SharedUtil writeSharedToken:authToken];
         
-        if(rememberMeToken != nil && ![rememberMeToken isKindOfClass:[NSNull class]]) {
-            [CacheUtil writeRememberMeToken:rememberMeToken];
-            [SharedUtil writeSharedRememberMeToken:rememberMeToken];
-        }
-
-        if(authToken != nil && ![authToken isKindOfClass:[NSNull class]]) {
-            APPDELEGATE.session.authToken = authToken;
-            [SharedUtil writeSharedToken:authToken];
-            
-            [[CurioSDK shared] sendEvent:@"LoginSuccess" eventValue:@"true"];
-            [MPush hitTag:@"LoginSuccess" withValue:@"true"];
-
-            IGLog(@"RequestTokenDao request finished successfully");
-            [MPush hitTag:@"logged_in" withValue:@"1"];
-            [MPush hitEvent:@"logged_in"];
+        [[CurioSDK shared] sendEvent:@"LoginSuccess" eventValue:@"true"];
+        [MPush hitTag:@"LoginSuccess" withValue:@"true"];
+        
+        IGLog(@"RequestTokenDao request finished successfully");
+        [MPush hitTag:@"logged_in" withValue:@"1"];
+        [MPush hitEvent:@"logged_in"];
+        dispatch_async(dispatch_get_main_queue(), ^{
             SuppressPerformSelectorLeakWarning([delegate performSelector:successMethod]);
-        } else {
-            IGLog(@"RequestTokenDao request failed with token error");
+        });
+    } else {
+        IGLog(@"RequestTokenDao request failed with token error");
+        dispatch_async(dispatch_get_main_queue(), ^{
             SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:TOKEN_ERROR_MESSAGE]);
-        }
-	} else {
-        NSString *log = [NSString stringWithFormat:@"RequestTokenDao request finished with error:%@", [error localizedDescription]];
-        IGLog(log);
-        SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:GENERAL_ERROR_MESSAGE]);
-	}
+        });
+    }
+
+//    if (!error) {
+//        if(dict != nil && [dict isKindOfClass:[NSDictionary class]]) {
+//            NSNumber *errorCode = [dict objectForKey:@"errorCode"];
+//            if(errorCode != nil && ![errorCode isKindOfClass:[NSNull class]]) {
+//                if([errorCode intValue] == 4002) {
+//                    IGLog(@"RequestTokenDao request failed with captcha error");
+//                    SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:CAPTCHA_ERROR_MESSAGE]);
+//                    return;
+//                }
+//            }
+//        }
+//        
+//	} else {
+//        NSString *log = [NSString stringWithFormat:@"RequestTokenDao request finished with error:%@", [error localizedDescription]];
+//        IGLog(log);
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [self requestFailed:response withData:data];
+//        });
+//	}
     
 }
 
-- (void)requestFailed:(ASIHTTPRequest *)request {
-    NSString *responseStr = [request responseString];
-    NSLog(@"Result: %@", responseStr);
+- (void)requestFailed:(NSURLResponse *) response withData:(NSData *) data{
+    NSHTTPURLResponse *request = (NSHTTPURLResponse *) response;
     
-    NSString *log = [NSString stringWithFormat:@"RequestTokenDao request failed with response:%@ and status code: %d", responseStr, [request responseStatusCode]];
+//    NSLog(@"Result: %@", responseStr);
+    NSString *responseStr = [NSHTTPURLResponse localizedStringForStatusCode:[request statusCode]];;
+    NSString *log = [NSString stringWithFormat:@"RequestTokenDao request failed with response:%@ and status code: %d", responseStr, (int)[request statusCode]];
     IGLog(log);
-    
-    SBJSON *jsonParser = [SBJSON new];
-    NSDictionary *dict = [jsonParser objectWithString:responseStr];
+    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
     if(dict != nil && [dict isKindOfClass:[NSDictionary class]]) {
         NSNumber *errorCode = [dict objectForKey:@"errorCode"];
         if(errorCode != nil && ![errorCode isKindOfClass:[NSNull class]]) {
@@ -212,23 +229,19 @@
                 SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:LDAP_LOCKED_ERROR_MESSAGE]);
                 return;
             }
-            else if([errorCode intValue] == 4101) {
-                SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:SIGNUP_REQUIRED_ERROR_MESSAGE]);
-                return;
-            }
         }
     }
-    if([request responseStatusCode] == 401) {
+    if([request statusCode] == 401) {
         //TODO 401 kontrolü için 3 satır eklendi. Test et!
 //        [APPDELEGATE.session cleanoutAfterLogout];
 //        [CacheUtil resetRememberMeToken];
 //        [[UploadQueue sharedInstance] cancelAllUploads];
         
         SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:GENERAL_ERROR_MESSAGE]);
-    } else if([request responseStatusCode] == 403) {
+    } else if([request statusCode] == 403) {
         SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:FORBIDDEN_ERROR_MESSAGE]);
     } else {
-        if([request.error code] == ASIConnectionFailureErrorType){
+        if([request statusCode] == NSURLErrorNotConnectedToInternet){
             SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:NSLocalizedString(@"NoConnErrorMessage", @"")]);
         } else {
             SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:GENERAL_ERROR_MESSAGE]);
