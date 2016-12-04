@@ -54,7 +54,6 @@ enum DownloadType {
 -(void)downloadListOfFilesToCameraRoll:(NSArray *)metaFiles;
 -(void)createAlbumName:(NSString *)albumName albumUUID:(NSString *)albumUuid downloadFilesToAlbum:(NSArray *)metaFiles;
 -(void)createAlbumName:(NSString *)albumName albumUUID:(NSString *)albumUuid;
-
--(void)hideLoadingProcessViewWithSuccess:(BOOL)success;
+-(void)hideLoadingProcessViewWithError:(NSError *)error;
 
 @end

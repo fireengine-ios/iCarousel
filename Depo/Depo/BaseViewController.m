@@ -1083,18 +1083,11 @@ loadingMessage:(NSString *)loadingMessage
 }
 
 -(void)downloadManagerDidFinishDownloading:(DownloadManager *)manager error:(NSError *)error {
-    if (error) {
-        [manager hideLoadingProcessViewWithSuccess:NO];
-    }else {
-        [manager hideLoadingProcessViewWithSuccess:YES];
-    }
-    
-    
+    [manager hideLoadingProcessViewWithError:error];
     NSMutableArray *temp = [NSMutableArray array];
     for (DownloadManager *downloadManager in downloadManagers) {
         if (![manager.albumUUID isEqualToString:downloadManager.albumUUID]) {
             [temp addObject:downloadManager];
-            //[downloadManagers removeObject:downloadManager];
         }
     }
     downloadManagers = temp;

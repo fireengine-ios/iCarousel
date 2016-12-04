@@ -36,6 +36,9 @@
     [self downloadFilesToCameraRoll];
 }
 
+
+#pragma mark - Loading Process View
+
 -(void)showLoadingProcessView {
     CGRect windowFrame = APPDELEGATE.window.frame;
     processView = [[ProcessFooterView alloc] initWithFrame:CGRectMake(0, windowFrame.size.height - 60, windowFrame.size.width, 60) withProcessMessage:self.loadingMessage withFinalMessage:self.successMessage withFailMessage:self.failMessage];
@@ -43,14 +46,19 @@
     [APPDELEGATE.window addSubview:processView];
     [APPDELEGATE.window bringSubviewToFront:processView];
     
-    [processView startLoadingAndHideAfterSeconds:3];
+    [processView startLoading];
+    [self performSelector:@selector(hideProcessView) withObject:nil afterDelay:2];
 }
 
--(void)hideLoadingProcessViewWithSuccess:(BOOL)success {
-    if (success) {
-        [processView showMessageForSuccess];
-    }else {
+-(void)hideProcessView {
+    processView.hidden = true;
+}
+
+-(void)hideLoadingProcessViewWithError:(NSError *)error {
+    if (error) {
         [processView showMessageForFailure];
+    }else {
+        [processView showMessageForSuccess];
     }
 }
 
