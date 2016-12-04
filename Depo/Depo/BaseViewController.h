@@ -19,9 +19,11 @@
 #import "CustomConfirmView.h"
 #import "AccurateLocationManager.h"
 #import "DownloadManager.h"
+#import "ProcessFooterView.h"
 
-@interface BaseViewController : UIViewController <SlidingMenuDelegate, SlidingMenuCloseDelegate, MyViewDelegate, FloatingAddButtonDelegate, FloatingAddDelegate, UIGestureRecognizerDelegate, CustomConfirmDelegate, AccurateLocationManagerDelegate, DownloadManagerDelegate> {
+@interface BaseViewController : UIViewController <SlidingMenuDelegate, SlidingMenuCloseDelegate, MyViewDelegate, FloatingAddButtonDelegate, FloatingAddDelegate, UIGestureRecognizerDelegate, CustomConfirmDelegate, AccurateLocationManagerDelegate, DownloadManagerDelegate, ProcessFooterDelegate> {
     NSMutableArray *downloadManagers;
+    ProcessFooterView *downloadingProcessView;
 }
 
 @property (nonatomic, strong) UIScrollView *scroll;

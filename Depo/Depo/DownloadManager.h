@@ -11,7 +11,7 @@
 #import <Photos/Photos.h>
 #import "MetaFile.h"
 #import "AlbumDetailDao.h"
-#import "ProcessFooterView.h"
+
 
 enum DownloadType {
     DownloadTypeAlbum = 1,
@@ -27,7 +27,7 @@ enum DownloadType {
 -(void)downloadManagerDidFinishDownloading:(DownloadManager *)manager error:(NSError *)error;
 @end
 
-@interface DownloadManager : NSObject <ProcessFooterDelegate> {
+@interface DownloadManager : NSObject {
     PHAssetCollection *albumAssetCollection;
     PHObjectPlaceholder *albumAssetCollectionPlaceHolder;
     int currentDownloadIndex;
@@ -36,7 +36,6 @@ enum DownloadType {
     int albumDownloadListIndex;
     NSString *downloadingAlbumName;
     AlbumDetailDao *albumDetailDao;
-    ProcessFooterView *processView;
     NSMutableArray *syncedFilesOnAlbum;
 }
 
@@ -56,6 +55,5 @@ enum DownloadType {
 -(void)downloadListOfFilesToCameraRoll:(NSArray *)metaFiles;
 -(void)createAlbumName:(NSString *)albumName albumUUID:(NSString *)albumUuid downloadFilesToAlbum:(NSArray *)metaFiles;
 -(void)createAlbumName:(NSString *)albumName albumUUID:(NSString *)albumUuid;
--(void)hideLoadingProcessViewWithError:(NSError *)error;
 
 @end

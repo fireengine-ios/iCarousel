@@ -27,7 +27,6 @@
         self.loadingMessage = loadingMessage;
         self.successMessage = successMesage;
         self.failMessage = failMessage;
-        [self showLoadingProcessView];
     }
     
     return self;
@@ -38,31 +37,6 @@
     [self downloadFilesToCameraRoll];
 }
 
-
-#pragma mark - Loading Process View
-
--(void)showLoadingProcessView {
-    CGRect windowFrame = APPDELEGATE.window.frame;
-    processView = [[ProcessFooterView alloc] initWithFrame:CGRectMake(0, windowFrame.size.height - 60, windowFrame.size.width, 60) withProcessMessage:self.loadingMessage withFinalMessage:self.successMessage withFailMessage:self.failMessage];
-    processView.delegate = self;
-    [APPDELEGATE.window addSubview:processView];
-    [APPDELEGATE.window bringSubviewToFront:processView];
-    
-    [processView startLoading];
-    [self performSelector:@selector(hideProcessView) withObject:nil afterDelay:2];
-}
-
--(void)hideProcessView {
-    processView.hidden = true;
-}
-
--(void)hideLoadingProcessViewWithError:(NSError *)error {
-    if (error) {
-        [processView showMessageForFailure];
-    }else {
-        [processView showMessageForSuccess];
-    }
-}
 
 #pragma mark - Album files Fetch
 
@@ -187,9 +161,9 @@
 - (void)didFinishSavingFileToCameraRoll:(MetaFile *)file error:(NSError *)error {
     [self downloadFilesToCameraRoll];
     [self.delegate downloadManager:self didFinishSavingFile:file error:error];
-    if(currentDownloadIndex == fileList.count) {
+   /* if(currentDownloadIndex == fileList.count) {
         [self.delegate downloadManagerDidFinishDownloading:self error:nil];
-    }
+    }*/
 }
 
 -(void)didFinishSavingVideoFileToCameraRoll:(MetaFile *)file videoPath:(NSString *)videoPath error:(NSError *)error {
@@ -445,19 +419,26 @@
 }
 
 -(void)updateSyncedFilesOfAlbum {
-    PHFetchResult *userAlbums = [PHAssetCollection fetchAssetCollectionsWithLocalIdentifiers:@[downloadingAlbumName] options:nil];
+    PHFetchOptions *fetchOptions = [[PHFetchOptions alloc] init];
+    fetchOptions.predicate = [NSPredicate predicateWithFormat:@"title=%@", downloadingAlbumName];
+    PHFetchResult *userAlbums = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeAny options:fetchOptions];
     if (userAlbums.count == 0) {
+        [syncedFilesOnAlbum removeAllObjects];
         [SyncUtil removeAlbumFromSync:downloadingAlbumName];
         [self createAlbumInPhotoAlbum:downloadingAlbumName];
     }else {
         [userAlbums enumerateObjectsUsingBlock:^(PHAssetCollection *collection, NSUInteger idx, BOOL *stop) {
             PHFetchResult<PHAsset *> *assets = [PHAsset fetchAssetsInAssetCollection:collection options:nil];
+            NSMutableArray *files = [NSMutableArray array];
             [assets enumerateObjectsUsingBlock:^(PHAsset * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 DownloadedFile *file = [self getAssetLocalIdentifierFileInSyncedList:obj.localIdentifier];
                 if (file) {
-                    [syncedFilesOnAlbum removeObject:file];
+                    [files addObject:file];
+                   // [syncedFilesOnAlbum removeObject:file];
                 }
             }];
+            syncedFilesOnAlbum = files;
+            [SyncUtil updateLoadedFiles:syncedFilesOnAlbum inAlbum:downloadingAlbumName];
             [self createAlbumInPhotoAlbum:downloadingAlbumName];
         }];
     }
@@ -518,6 +499,7 @@
             if (success) {
                 PHFetchResult *result = [PHAssetCollection fetchAssetCollectionsWithLocalIdentifiers:@[albumAssetCollectionPlaceHolder.localIdentifier] options:nil];
                 albumAssetCollection = (PHAssetCollection *)result.firstObject;
+                
                 [SyncUtil createAlbumToSync:albumName];
                 [weakSelf.delegate downloadManager:self newAlbumCreatedNamed:albumName assetCollection:albumAssetCollection];
                 if (fileList.count == 0) {
@@ -531,12 +513,4 @@
         }];
     }
 }
-
-
-#pragma mark - Process Footer Delegate
-
--(void)processFooterShouldDismissWithButtonKey:(NSString *)postButtonKeyVal {
-    [self.delegate downloadManagerDidFinishDownloading:self error:nil];
-}
-
 @end

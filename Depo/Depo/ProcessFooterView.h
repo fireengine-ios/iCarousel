@@ -36,10 +36,9 @@
 - (void) showMessageForFailure;
 - (void) showMessageForFailureWithPostButtonKey:(NSString *) buttonKey;
 
+-(void)updateMessage:(NSString *)message isSuccess:(BOOL)success;
+
 - (void) dismissWithSuccessMessage;
 - (void) dismissWithFailureMessage;
-
-+(void)showSuccessMessageOnWindow:(NSString *)successMessage;
-+(void)showFailureMessageOnWindow:(NSString *)failureMessage;
 
 @end

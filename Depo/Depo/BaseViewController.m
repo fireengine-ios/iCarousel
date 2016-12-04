@@ -1025,6 +1025,7 @@ downloadFilesToAlbum:(NSArray *)files
 loadingMessage:(NSString *)loadingMessage
     successMessage:(NSString *)successMessage
        failMessage:(NSString *)failMessage {
+    [self showLoadingProcessView:loadingMessage successMessage:successMessage failMessage:failMessage];
     DownloadManager *manager = [[DownloadManager alloc] initWithDelegate:self
                                                    downloadType:DownloadTypeAlbum
                                                  loadingMessage:loadingMessage
@@ -1040,6 +1041,8 @@ loadingMessage:(NSString *)loadingMessage
          loadingMessage:(NSString *)loadingMessage
      successMessage:(NSString *)successMessage
         failMessage:(NSString *)failMessage {
+    [self showLoadingProcessView:loadingMessage successMessage:successMessage failMessage:failMessage];
+    
     for(int i = 0; i < albumNames.count; i++) {
         DownloadManager *manager = [[DownloadManager alloc] initWithDelegate:self
                                                                 downloadType:DownloadTypeAlbum
@@ -1055,6 +1058,8 @@ loadingMessage:(NSString *)loadingMessage
                   loadingMessage:(NSString *)loadingMessage
                   successMessage:(NSString *)successMessage
                      failMessage:(NSString *)failMessage {
+    [self showLoadingProcessView:loadingMessage successMessage:successMessage failMessage:failMessage];
+    
     DownloadManager *manager = [[DownloadManager alloc] initWithDelegate:self
                                                             downloadType:DownloadTypeListOfFiles
                                                           loadingMessage:loadingMessage
@@ -1083,14 +1088,51 @@ loadingMessage:(NSString *)loadingMessage
 }
 
 -(void)downloadManagerDidFinishDownloading:(DownloadManager *)manager error:(NSError *)error {
-    [manager hideLoadingProcessViewWithError:error];
-    NSMutableArray *temp = [NSMutableArray array];
-    for (DownloadManager *downloadManager in downloadManagers) {
-        if (![manager.albumUUID isEqualToString:downloadManager.albumUUID]) {
-            [temp addObject:downloadManager];
+    [downloadManagers removeObject:manager];
+    NSString *str = @"";
+    if (error) {
+        str = manager.failMessage;
+    }else {
+        str = manager.successMessage;
+    }
+    if (downloadManagers.count == 0) {
+        if (error) {
+            [downloadingProcessView showMessageForFailure];
+        }else {
+            [downloadingProcessView showMessageForSuccess];
         }
     }
-    downloadManagers = temp;
 }
+
+
+#pragma mark - Loading Process View
+
+-(void)showLoadingProcessView:(NSString *)loadingMessage
+               successMessage:(NSString *)successMessage
+                  failMessage:(NSString *)failMessage {
+    if (downloadingProcessView) {
+        [downloadingProcessView removeFromSuperview];
+        downloadingProcessView = nil;
+    }
+    CGRect windowFrame = APPDELEGATE.window.frame;
+    downloadingProcessView = [[ProcessFooterView alloc] initWithFrame:CGRectMake(0, windowFrame.size.height - 60, windowFrame.size.width, 60) withProcessMessage:loadingMessage withFinalMessage:successMessage withFailMessage:failMessage];
+    downloadingProcessView.delegate = self;
+    [APPDELEGATE.window addSubview:downloadingProcessView];
+    [APPDELEGATE.window bringSubviewToFront:downloadingProcessView];
+    [downloadingProcessView startLoading];
+    [self performSelector:@selector(hideProcessView) withObject:nil afterDelay:2];
+}
+
+-(void)hideProcessView {
+    downloadingProcessView.hidden = true;
+}
+
+- (void) processFooterShouldDismissWithButtonKey:(NSString *) postButtonKeyVal {
+    if (downloadManagers.count == 0) {
+        [downloadingProcessView removeFromSuperview];
+        downloadingProcessView = nil;
+    }
+}
+
 
 @end
