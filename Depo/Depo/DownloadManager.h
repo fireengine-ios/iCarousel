@@ -34,8 +34,10 @@ enum DownloadType {
     NSMutableArray *fileList;
     
     int albumDownloadListIndex;
+    NSString *downloadingAlbumName;
     AlbumDetailDao *albumDetailDao;
     ProcessFooterView *processView;
+    NSMutableArray *syncedFilesOnAlbum;
 }
 
 @property (nonatomic, assign) id<DownloadManagerDelegate> delegate;

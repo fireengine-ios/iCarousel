@@ -82,4 +82,10 @@
 + (void) writeBaseUrlConstantForLocPopup:(NSString *) baseUrlConstantForLocPopup;
 + (NSString *) readBaseUrlConstantForLocPopup;
 
+
++(NSArray *)loadDownloadedFilesForAlbum:(NSString *)albumName;
++(void)createAlbumToSync:(NSString *)albumName;
++(void)removeAlbumFromSync:(NSString *)albumName;
++(void)updateLoadedFiles:(NSArray *)files inAlbum:(NSString *)albumName;
+
 @end

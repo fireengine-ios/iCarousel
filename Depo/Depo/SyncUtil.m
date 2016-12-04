@@ -12,6 +12,7 @@
 #import "ContactSyncSDK.h"
 #import "AppDelegate.h"
 #import "AppSession.h"
+#import "DownloadedFile.h"
 
 @implementation SyncUtil
 
@@ -414,6 +415,43 @@
 
 + (NSString *) readBaseUrlConstantForLocPopup {
     return [[NSUserDefaults standardUserDefaults] valueForKey:PERSISTENT_BASE_URL_CONSTANT_KEY_FOR_LOC_POPUP];
+}
+
+
+
+#pragma mark - Album Download Files
++(NSArray *)loadDownloadedFilesForAlbum:(NSString *)albumName {
+    NSArray *fileDatas = [[NSUserDefaults standardUserDefaults] objectForKey:albumName];
+    if (fileDatas && fileDatas.count > 0) {
+        NSMutableArray *array = [NSMutableArray arrayWithCapacity:fileDatas.count];
+        for (NSData *data in fileDatas) {
+            DownloadedFile *file = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            [array addObject:file];
+        }
+        return array;
+    }
+    return [NSArray array];
+}
+
++(void)createAlbumToSync:(NSString *)albumName {
+    [[NSUserDefaults standardUserDefaults] setObject:[NSArray array] forKey:albumName];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++(void)removeAlbumFromSync:(NSString *)albumName {
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:albumName];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++(void)updateLoadedFiles:(NSArray *)files inAlbum:(NSString *)albumName {
+    NSMutableArray *archiveArray = [NSMutableArray arrayWithCapacity:files.count];
+    for (DownloadedFile *file in files) {
+        NSData *fileEncodedObject = [NSKeyedArchiver archivedDataWithRootObject:file];
+        [archiveArray addObject:fileEncodedObject];
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setObject:archiveArray forKey:albumName];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end

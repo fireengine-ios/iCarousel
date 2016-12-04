@@ -793,6 +793,7 @@
 		535FD96B1DEF5F92005AB4E7 /* DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 535FD96A1DEF5F92005AB4E7 /* DownloadManager.m */; };
 		535FD96E1DF01A99005AB4E7 /* album_photo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 535FD96D1DF01A99005AB4E7 /* album_photo_icon@2x.png */; };
 		535FD9701DF01AA2005AB4E7 /* album_photo_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 535FD96F1DF01AA2005AB4E7 /* album_photo_icon@3x.png */; };
+		535FD9741DF3FE3A005AB4E7 /* DownloadedFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 535FD9731DF3FE3A005AB4E7 /* DownloadedFile.m */; };
 		53FA9CE21DE86071008DCF93 /* QuotaInfoDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 53FA9CE11DE86071008DCF93 /* QuotaInfoDao.m */; };
 		53FA9CE51DE8607D008DCF93 /* Quota.m in Sources */ = {isa = PBXBuildFile; fileRef = 53FA9CE41DE8607D008DCF93 /* Quota.m */; };
 		563FB1BD1AA5EB030066F8E6 /* settings_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 563FB1BB1AA5EB030066F8E6 /* settings_icon.png */; };
@@ -2304,6 +2305,8 @@
 		535FD96A1DEF5F92005AB4E7 /* DownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadManager.m; sourceTree = "<group>"; };
 		535FD96D1DF01A99005AB4E7 /* album_photo_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "album_photo_icon@2x.png"; sourceTree = "<group>"; };
 		535FD96F1DF01AA2005AB4E7 /* album_photo_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "album_photo_icon@3x.png"; sourceTree = "<group>"; };
+		535FD9721DF3FE2C005AB4E7 /* DownloadedFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadedFile.h; sourceTree = "<group>"; };
+		535FD9731DF3FE3A005AB4E7 /* DownloadedFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadedFile.m; sourceTree = "<group>"; };
 		53FA9CE01DE86071008DCF93 /* QuotaInfoDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuotaInfoDao.h; sourceTree = "<group>"; };
 		53FA9CE11DE86071008DCF93 /* QuotaInfoDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuotaInfoDao.m; sourceTree = "<group>"; };
 		53FA9CE31DE8607D008DCF93 /* Quota.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quota.h; sourceTree = "<group>"; };
@@ -3405,6 +3408,7 @@
 		051E1E2919CAC53E00FD1E03 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				535FD9711DF3FE16005AB4E7 /* DownloadedFile */,
 				53FA9CD91DE83282008DCF93 /* Quota */,
 				051E1EAF19CB20FC00FD1E03 /* MetaMenu.h */,
 				051E1EB019CB20FC00FD1E03 /* MetaMenu.m */,
@@ -4655,6 +4659,15 @@
 			name = DownloadManager;
 			sourceTree = "<group>";
 		};
+		535FD9711DF3FE16005AB4E7 /* DownloadedFile */ = {
+			isa = PBXGroup;
+			children = (
+				535FD9721DF3FE2C005AB4E7 /* DownloadedFile.h */,
+				535FD9731DF3FE3A005AB4E7 /* DownloadedFile.m */,
+			);
+			name = DownloadedFile;
+			sourceTree = "<group>";
+		};
 		53FA9CCC1DE830B1008DCF93 /* QuotaInfo */ = {
 			isa = PBXGroup;
 			children = (
@@ -5681,6 +5694,7 @@
 				94B3BE2C1D81E3EA0086D05E /* CustomInfoWithIconView.m in Sources */,
 				5247D6251DDDD0F600FFE63E /* CurioNetwork.m in Sources */,
 				94FB09881DE2065B00DA666D /* RevisitedUploadingPhotoCollCell.m in Sources */,
+				535FD9741DF3FE3A005AB4E7 /* DownloadedFile.m in Sources */,
 				05DEB1C31A80B8FE007793DD /* MigrationStatus.m in Sources */,
 				05DEB1F21A81775F007793DD /* SyncStatus.m in Sources */,
 				05D2B19A19E679E500FC309D /* PhotoAlbum.m in Sources */,

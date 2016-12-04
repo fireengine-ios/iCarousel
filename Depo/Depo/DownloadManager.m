@@ -10,6 +10,8 @@
 #import "DownloadManager.h"
 #import "PhotoAlbum.h"
 #import "AppDelegate.h"
+#import "SyncUtil.h"
+#import "DownloadedFile.h"
 
 @implementation DownloadManager
 
@@ -66,9 +68,18 @@
 
 -(void)createAlbumName:(NSString *)albumName albumUUID:(NSString *)albumUuid {
     fileList = [[NSMutableArray alloc] init];
+    downloadingAlbumName = albumName;
     self.albumUUID = albumUuid;
     [self initAlbumDetailDao];
-    [self createAlbumInPhotoAlbum:albumName];
+    
+    NSArray *syncFiles = [SyncUtil loadDownloadedFilesForAlbum:albumName];
+    if (syncFiles && syncFiles.count > 0) {
+        syncedFilesOnAlbum = [[NSMutableArray alloc] initWithArray:syncFiles];
+        [self updateSyncedFilesOfAlbum];
+    }else {
+        syncedFilesOnAlbum = [[NSMutableArray alloc] init];
+        [self createAlbumInPhotoAlbum:albumName];
+    }
 }
 
 -(void)createAlbumName:(NSString *)albumName albumUUID:(NSString *)albumUuid downloadFilesToAlbum:(NSArray *)metaFiles {
@@ -77,10 +88,28 @@
     }else {
         fileList = [[NSMutableArray alloc] init];
     }
-    
+    downloadingAlbumName = albumName;
     self.albumUUID = albumUuid;
     [self initAlbumDetailDao];
-    [self createAlbumInPhotoAlbum:albumName];
+    
+    NSArray *syncFiles = [SyncUtil loadDownloadedFilesForAlbum:albumName];
+    if (syncFiles && syncFiles.count > 0) {
+        syncedFilesOnAlbum = [[NSMutableArray alloc] initWithArray:syncFiles];
+        [self updateSyncedFilesOfAlbum];
+    }else {
+        syncedFilesOnAlbum = [[NSMutableArray alloc] init];
+        [self createAlbumInPhotoAlbum:albumName];
+    }
+}
+
+-(void)loadSynchedFilesForAlbum:(NSString *)albumName {
+    NSArray *syncFiles = [SyncUtil loadDownloadedFilesForAlbum:albumName];
+    if (syncFiles && syncFiles.count > 0) {
+        syncedFilesOnAlbum = [[NSMutableArray alloc] initWithArray:syncFiles];
+         [self updateSyncedFilesOfAlbum];
+    }else {
+        syncedFilesOnAlbum = [[NSMutableArray alloc] init];
+    }
 }
 
 -(void)initAlbumDetailDao {
@@ -109,6 +138,10 @@
 }
 
 - (void) albumDetailSuccessCallback:(PhotoAlbum *) albumWithUpdatedContent {
+    if (albumWithUpdatedContent.content.count == 0) {
+        [self.delegate downloadManagerDidFinishDownloading:self error:nil];
+        return;
+    }
     for (MetaFile *file in albumWithUpdatedContent.content) {
         if (![self isFileAlreadyDownloaded:file]) {
             [fileList addObject:file];
@@ -179,6 +212,11 @@
                        if (succeeded) {
                            dispatch_async(dispatch_get_main_queue(), ^{
                                
+                           /*    if ([self isPhotoExistInCameraRoll:file]) {
+                                   [self didFinishSavingFileToCameraRoll:file error:nil];
+                                   return;
+                               }
+                               */
                                [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
                                    PHAssetChangeRequest *changeRequest = [PHAssetChangeRequest creationRequestForAssetFromImage:image];
                                } completionHandler:^(BOOL success, NSError *error) {
@@ -254,13 +292,16 @@
     NSLog(@"downloadAlbumPhotosToDevice - currentDownloadIndex: %d", currentDownloadIndex);
     if (currentDownloadIndex < fileList.count) {
         MetaFile *file = [fileList objectAtIndex:currentDownloadIndex];
-        if (file.contentType == ContentTypePhoto) {
+        if ([self isFileAlreadySyncedToAlbum:file.uuid]) {
+            currentDownloadIndex++;
+            [self downloadAlbumPhotosToDevice];
+        }else if (file.contentType == ContentTypePhoto) {
             [self savePhotoFileToAlbum:file];
+            currentDownloadIndex++;
         }else if (file.contentType == ContentTypeVideo) {
             [self saveVideoFileToAlbum:file];
+            currentDownloadIndex++;
         }
-        
-        currentDownloadIndex++;
     }else if(currentDownloadIndex == fileList.count) {
         NSLog(@"[self fetchOtherFilesOfAlbum]");
         [self fetchOtherFilesOfAlbum];
@@ -274,16 +315,21 @@
         [self downloadImageWithURL:[NSURL URLWithString:file.tempDownloadUrl]
                    completionBlock:^(BOOL succeeded, UIImage *image) {
                        if (succeeded) {
+                           __weak DownloadManager *weakSelf = self;
+                           __block NSString *localizedAssetIdentifier = @"";
                            dispatch_async(dispatch_get_main_queue(), ^{
                                [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
                                    PHAssetChangeRequest *request = [PHAssetChangeRequest creationRequestForAssetFromImage:image];
                                    PHObjectPlaceholder *assetPlaceHolder = [request placeholderForCreatedAsset];
                                    PHAssetCollectionChangeRequest *albumChangeRequest = [PHAssetCollectionChangeRequest changeRequestForAssetCollection:albumAssetCollection];
+                                  
+                                   localizedAssetIdentifier = assetPlaceHolder.localIdentifier;
                                    [albumChangeRequest addAssets:@[assetPlaceHolder]];
                                } completionHandler:^(BOOL success, NSError * _Nullable error) {
                                    if (error) {
                                        NSLog(@"Save Image To Album Error: %@", error.description);
                                    }else {
+                                       [weakSelf saveFileToSynchedFiles:file localizedIdentifier:localizedAssetIdentifier];
                                        NSLog(@"Save Image To Album Success uuid:%@", file.uuid);
                                    }
                                    [self didFinishSavingFileToAlbum:file error:error];
@@ -322,17 +368,21 @@
             NSURL *tempURL = [documentsURL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", [sourceURL lastPathComponent], contentType]];
             if (location) {
                 NSError *error;
+                __weak DownloadManager *weakSelf = self;
+                __block NSString *localizedAssetIdentifier = @"";
                 if ([[NSFileManager defaultManager] moveItemAtURL:location toURL:tempURL error:&error]) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
                             PHAssetChangeRequest *request = [PHAssetChangeRequest creationRequestForAssetFromVideoAtFileURL:tempURL];
                             PHObjectPlaceholder *assetPlaceHolder = [request placeholderForCreatedAsset];
                             PHAssetCollectionChangeRequest *albumChangeRequest = [PHAssetCollectionChangeRequest changeRequestForAssetCollection:albumAssetCollection];
+                            localizedAssetIdentifier = assetPlaceHolder.localIdentifier;
                             [albumChangeRequest addAssets:@[assetPlaceHolder]];
                         } completionHandler:^(BOOL success, NSError * _Nullable error) {
                             if (error) {
                                 NSLog(@"Save Video To Album Error: %@", error.description);
                             }else {
+                                [weakSelf saveFileToSynchedFiles:file localizedIdentifier:localizedAssetIdentifier];
                                 NSLog(@"Save Video To Album Success uuid:%@", file.uuid);
                             }
                             [self didFinishSavingVideoFileToAlbum:file videoPath:tempURL.path error:error];
@@ -353,6 +403,10 @@
     [downloadTask resume];
 }
 
+
+
+
+
 - (void)didFinishSavingFileToAlbum:(MetaFile *)file error:(NSError *)error {
     [self.delegate downloadManager:self didFinishSavingFile:file error:error];
     [self downloadAlbumPhotosToDevice];
@@ -371,6 +425,53 @@
 }
 
 
+#pragma mark - Downloaded File Sync
+
+-(BOOL)isFileAlreadySyncedToAlbum:(NSString *)fileUUID {
+    for (DownloadedFile *file in syncedFilesOnAlbum) {
+        if ([file.fileUUID isEqualToString:fileUUID]) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+-(void)saveFileToSynchedFiles:(MetaFile *)file localizedIdentifier:(NSString *)localizedIdentifier {
+    DownloadedFile *downloadedFile = [[DownloadedFile alloc] initWithFileUUID:file.uuid
+                                                              localIdentifier:localizedIdentifier
+                                                                  inAlbumName:downloadingAlbumName];
+    [syncedFilesOnAlbum addObject:downloadedFile];
+    [SyncUtil updateLoadedFiles:syncedFilesOnAlbum inAlbum:downloadingAlbumName];
+}
+
+-(void)updateSyncedFilesOfAlbum {
+    PHFetchResult *userAlbums = [PHAssetCollection fetchAssetCollectionsWithLocalIdentifiers:@[downloadingAlbumName] options:nil];
+    if (userAlbums.count == 0) {
+        [SyncUtil removeAlbumFromSync:downloadingAlbumName];
+        [self createAlbumInPhotoAlbum:downloadingAlbumName];
+    }else {
+        [userAlbums enumerateObjectsUsingBlock:^(PHAssetCollection *collection, NSUInteger idx, BOOL *stop) {
+            PHFetchResult<PHAsset *> *assets = [PHAsset fetchAssetsInAssetCollection:collection options:nil];
+            [assets enumerateObjectsUsingBlock:^(PHAsset * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                DownloadedFile *file = [self getAssetLocalIdentifierFileInSyncedList:obj.localIdentifier];
+                if (file) {
+                    [syncedFilesOnAlbum removeObject:file];
+                }
+            }];
+            [self createAlbumInPhotoAlbum:downloadingAlbumName];
+        }];
+    }
+    
+}
+
+-(DownloadedFile *)getAssetLocalIdentifierFileInSyncedList:(NSString *)localIdentifier {
+    for (DownloadedFile *file in syncedFilesOnAlbum) {
+        if ([file.fileLocalIdentifier isEqualToString:localIdentifier]) {
+            return file;
+        }
+    }
+    return nil;
+}
 
 #pragma mark - Download Image From Server
 
@@ -417,6 +518,7 @@
             if (success) {
                 PHFetchResult *result = [PHAssetCollection fetchAssetCollectionsWithLocalIdentifiers:@[albumAssetCollectionPlaceHolder.localIdentifier] options:nil];
                 albumAssetCollection = (PHAssetCollection *)result.firstObject;
+                [SyncUtil createAlbumToSync:albumName];
                 [weakSelf.delegate downloadManager:self newAlbumCreatedNamed:albumName assetCollection:albumAssetCollection];
                 if (fileList.count == 0) {
                     [self fetchFilesForAlbum];
