@@ -39,40 +39,40 @@
         int left = 15;
         int top = 9;
         if(shareFlag) {
-            shareButton = [[CustomButton alloc] initWithFrame:CGRectMake(left, top, 50, 22) withImageName:@"white_share_icon.png" withTitleBelow:NSLocalizedString(@"ShareTitle", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[UIColor whiteColor] ];
+            shareButton = [[CustomButton alloc] initWithFrame:CGRectMake(left, top, 50, 45) withImageName:@"white_share_icon.png" withTitleBelow:NSLocalizedString(@"ShareTitle", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[UIColor whiteColor] ];
             [shareButton addTarget:self action:@selector(shareClicked) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:shareButton];
             left = shareButton.frame.origin.x+shareButton.frame.size.width+5;
         }
         
         if(moveFlag) {
-            moveButton = [[CustomButton alloc] initWithFrame:CGRectMake(left, top + 2 , 50, 20) withImageName:@"white_move_icon.png" withTitleBelow:NSLocalizedString(@"MoveTitle", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[UIColor whiteColor]];
+            moveButton = [[CustomButton alloc] initWithFrame:CGRectMake(left, top + 2 , 50, 43) withImageName:@"white_move_icon.png" withTitleBelow:NSLocalizedString(@"MoveTitle", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[UIColor whiteColor]];
             [moveButton addTarget:self action:@selector(moveClicked) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:moveButton];
             left = moveButton.frame.origin.x+moveButton.frame.size.width+7;
         }
         
         if (downloadFlag) {
-            downloadButton = [[CustomButton alloc] initWithFrame:CGRectMake(left, shareButton.frame.origin.y - 1, 60, 20) withImageName:@"icon_bottom_indir.png" withTitleBelow:NSLocalizedString(@"DownloadTitle", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[UIColor whiteColor] ];
+            downloadButton = [[CustomButton alloc] initWithFrame:CGRectMake(left, shareButton.frame.origin.y - 1, 60, 43) withImageName:@"icon_bottom_indir.png" withTitleBelow:NSLocalizedString(@"DownloadTitle", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[UIColor whiteColor] ];
             [downloadButton addTarget:self action:@selector(downloadClicked) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:downloadButton];
             left = downloadButton.frame.origin.x+downloadButton.frame.size.width+7;
         }
         
         if (printFlag) {
-            printButton = [[CustomButton alloc] initWithFrame:CGRectMake(left, top + 3, 60, 20) withImageName:@"white_print_icon.png" withTitleBelow:NSLocalizedString(@"PrintTitle", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[UIColor whiteColor] ];
+            printButton = [[CustomButton alloc] initWithFrame:CGRectMake(left, top + 3, 60, 43) withImageName:@"white_print_icon.png" withTitleBelow:NSLocalizedString(@"PrintTitle", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[UIColor whiteColor] ];
             [printButton addTarget:self action:@selector(printClicked) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:printButton];
         }
         
         if (removeFlag) {
-            removeButton = [[CustomButton alloc] initWithFrame:CGRectMake(printButton.frame.origin.x+printButton.frame.size.width+5, downloadButton.frame.origin.y, 50, 20)  withImageName:@"icon_bottom_kaldir.png" withTitleBelow:NSLocalizedString(@"RemoveTitle", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[UIColor whiteColor] ];
+            removeButton = [[CustomButton alloc] initWithFrame:CGRectMake(printButton.frame.origin.x+printButton.frame.size.width+5, downloadButton.frame.origin.y, 50, 43)  withImageName:@"icon_bottom_kaldir.png" withTitleBelow:NSLocalizedString(@"RemoveTitle", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[UIColor whiteColor] ];
             [removeButton addTarget:self action:@selector(removeClicked) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:removeButton];
         }
 
         if(deleteFlag) {
-            deleteButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 35, 19, 20, 21) withImageName:@"white_delete_icon.png"];
+            deleteButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 35, 19, 20, 44) withImageName:@"white_delete_icon.png"];
             [deleteButton addTarget:self action:@selector(deleteClicked) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:deleteButton];
         }
