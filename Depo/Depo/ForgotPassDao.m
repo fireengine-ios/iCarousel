@@ -14,8 +14,8 @@
     NSURL *url = [NSURL URLWithString:FORGOT_PASS_URL];
     
     NSString *postValue = [NSString stringWithFormat:@"%@", email];
-    
-    NSData *postData = [NSJSONSerialization dataWithJSONObject:postValue options:NSJSONWritingPrettyPrinted error:nil];
+ 
+    NSData *postData = [postValue dataUsingEncoding:NSUTF8StringEncoding];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     if(captchaId != nil && captchaValue != nil) {

@@ -273,6 +273,19 @@
     [msisdnField resignFirstResponder];
     [passField resignFirstResponder];
     [captchaField resignFirstResponder];
+    
+    if(!textField.secureTextEntry) {
+        NSRange range = [textField.text rangeOfString:@")" options:NSBackwardsSearch];
+        if (range.location != NSNotFound) {
+            NSString *newString = [textField.text substringFromIndex:range.location + range.length];
+            if ([newString hasPrefix:@"0"] && [newString length] > 1) {
+                newString = [newString substringFromIndex:1];
+                NSString *onString = [textField.text substringToIndex:range.location + 1];
+                NSString *string = [onString stringByAppendingString:newString];
+                textField.text = string;
+            }
+        }
+    }
 }
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {
