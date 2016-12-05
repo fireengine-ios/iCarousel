@@ -556,11 +556,23 @@
     NSString *loadingMessage = NSLocalizedString(@"DownloadImagesProgressMessage", @"");
     NSString *failMessage = NSLocalizedString(@"DownloadImagesFailMessage", @"");
     NSString *successMessage = NSLocalizedString(@"DownloadImagesSuccessMessage", @"");
-    [APPDELEGATE.base downloadFilesToCameraRoll:selectedFileList
+    [APPDELEGATE.base downloadFilesToCameraRoll:[self getMetaFilesOfSelectedFiles]
                                  loadingMessage:loadingMessage
                                  successMessage:successMessage
                                     failMessage:failMessage];
     [self cancelSelectible];
+}
+
+-(NSMutableArray *)getMetaFilesOfSelectedFiles {
+    NSMutableArray *array = [NSMutableArray array];
+    for (MetaFile *file in photoList) {
+        for (NSString *uuid in selectedFileList) {
+            if ([uuid isEqualToString:file.uuid]) {
+                [array addObject:file];
+            }
+        }
+    }
+    return array;
 }
 
 - (void) footerActionMenuDidSelectRemove:(FooterActionsMenuView *) menu {
