@@ -458,7 +458,6 @@
     }
     [self updateFooterMenuAndTitle];
         titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]];
-        titleLabel.text = self.album.label;
 }
 
 - (void) squareImageWasUnmarkedForFile:(MetaFile *)fileSelected {

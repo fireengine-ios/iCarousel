@@ -269,7 +269,7 @@
 }
 
 - (void) revisitedGroupedPhoto:(RevisitedGroupedPhotoView *)view triggerShareForFiles:(NSArray *) uuidList {
-    
+    [self triggerShareForFiles:uuidList];
 }
 
 -(void)revisitedGroupedPhoto:(RevisitedGroupedPhotoView *)view downloadSelectedFiles:(NSArray *)selectedFiles {
