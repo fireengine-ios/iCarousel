@@ -59,6 +59,10 @@
                 [content addObject:[self parseFile:fileDict]];
             }
         }
+        NSDictionary *coverDict = [mainDict objectForKey:@"coverPhoto"];
+        if(coverDict != nil && ![coverDict isKindOfClass:[NSNull class]]) {
+            result.cover = [self parseFile:coverDict];
+        }
         result.content = content;
         dispatch_async(dispatch_get_main_queue(), ^{
             [self shouldReturnSuccessWithObject:result];

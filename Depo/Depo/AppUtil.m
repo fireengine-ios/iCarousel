@@ -470,6 +470,10 @@
     return ([file.rawContentType isEqualToString:CONTENT_TYPE_PDF_VALUE] || [file.rawContentType isEqualToString:CONTENT_TYPE_DOC_VALUE] || [file.rawContentType isEqualToString:CONTENT_TYPE_TXT_VALUE] || [file.rawContentType isEqualToString:CONTENT_TYPE_HTML_VALUE]);
 }
 
++ (BOOL) isMetaFileAlbumPhoto:(MetaFile *)file {
+    return ([file.rawContentType hasPrefix:@"album/photo"]);
+}
+
 + (AddType) strToAddType:(NSString *) str {
     if([str isEqualToString:@"AddTypeAlbum"]) {
         return AddTypeAlbum;

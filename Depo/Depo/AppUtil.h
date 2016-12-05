@@ -24,6 +24,7 @@
 + (BOOL) isMetaFileVideo:(MetaFile *) file;
 + (BOOL) isMetaFileMusic:(MetaFile *) file;
 + (BOOL) isMetaFileDoc:(MetaFile *) file;
++ (BOOL) isMetaFileAlbumPhoto:(MetaFile *)file;
 + (AddType) strToAddType:(NSString *) str;
 + (NSString *) sortTypeTitleByEnum:(SortType) type;
 + (NSString *) serverSortNameByEnum:(SortType) type forPhotosOnly:(BOOL) photosOnly;

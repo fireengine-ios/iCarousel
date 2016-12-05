@@ -411,7 +411,13 @@
                 MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
                 detail.nav = modalNav;
                 [self presentViewController:modalNav animated:YES completion:nil];
-            } else if([AppUtil isMetaFileMusic:fileAtIndex]) {
+            } else if ([AppUtil isMetaFileAlbumPhoto:fileAtIndex]) {
+                PhotoAlbumController *detail = [[PhotoAlbumController alloc] initWithAlbumUUID:fileAtIndex.uuid];
+                MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
+                detail.nav = modalNav;
+                [self presentViewController:modalNav animated:YES completion:nil];
+            }
+            else if([AppUtil isMetaFileMusic:fileAtIndex]) {
                 MusicPreviewController *detail = [[MusicPreviewController alloc] initWithFile:fileAtIndex.uuid withFileList:@[fileAtIndex]];
                 
                 detail.nav = self.nav;

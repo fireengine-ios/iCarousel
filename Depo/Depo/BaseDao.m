@@ -198,7 +198,9 @@
         return ContentTypeMusic;
     } else if([metaFile.rawContentType hasPrefix:@"video/"]) {
         return ContentTypeVideo;
-    } else if([metaFile.rawContentType isEqualToString:CONTENT_TYPE_PDF_VALUE] || [metaFile.rawContentType isEqualToString:CONTENT_TYPE_DOC_VALUE] || [metaFile.rawContentType isEqualToString:CONTENT_TYPE_TXT_VALUE] || [metaFile.rawContentType isEqualToString:CONTENT_TYPE_HTML_VALUE]) {
+    } else if ([metaFile.rawContentType hasPrefix:@"album/photo"]) {
+        return ContentTypeAlbumPhoto;
+    }else if([metaFile.rawContentType isEqualToString:CONTENT_TYPE_PDF_VALUE] || [metaFile.rawContentType isEqualToString:CONTENT_TYPE_DOC_VALUE] || [metaFile.rawContentType isEqualToString:CONTENT_TYPE_TXT_VALUE] || [metaFile.rawContentType isEqualToString:CONTENT_TYPE_HTML_VALUE]) {
         return ContentTypeDoc;
     }
     return ContentTypeOther;
