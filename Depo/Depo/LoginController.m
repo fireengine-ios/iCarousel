@@ -361,7 +361,7 @@
 }
 
 - (void) viewDidAppear:(BOOL)animated {
-    [msisdnField becomeFirstResponder];
+    //[msisdnField becomeFirstResponder];
     [super viewDidAppear:animated];
 }
 
