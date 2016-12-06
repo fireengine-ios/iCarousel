@@ -236,11 +236,23 @@
                                                                           inDomains:NSUserDomainMask] firstObject];
             NSURL *tempURL = [documentsURL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", [sourceURL lastPathComponent], contentType]];
             if (location) {
+                __weak DownloadManager *weakSelf = self;
+                __block NSString *localizedAssetIdentifier = @"";
                 if ([[NSFileManager defaultManager] moveItemAtURL:location toURL:tempURL error:nil]) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
                             PHAssetChangeRequest *request = [PHAssetChangeRequest creationRequestForAssetFromVideoAtFileURL:tempURL];
+                            PHObjectPlaceholder *assetPlaceHolder = [request placeholderForCreatedAsset];
+                            PHAssetCollectionChangeRequest *albumChangeRequest = [PHAssetCollectionChangeRequest changeRequestForAssetCollection:albumAssetCollection];
+                            
+                            localizedAssetIdentifier = assetPlaceHolder.localIdentifier;
                         } completionHandler:^(BOOL success, NSError * _Nullable error) {
+                            if (error) {
+                                NSLog(@"Save Image To Album Error: %@", error.description);
+                            }else {
+                                [weakSelf saveFileToSynchedFiles:file localizedIdentifier:localizedAssetIdentifier];
+                                NSLog(@"Save Image To Album Success uuid:%@", file.uuid);
+                            }
                             [self didFinishSavingVideoFileToAlbum:file videoPath:tempURL.path error:error];
                         }];
                     });
@@ -416,18 +428,40 @@
                                                                   inAlbumName:downloadingAlbumName];
     [syncedFilesOnAlbum addObject:downloadedFile];
     [SyncUtil updateLoadedFiles:syncedFilesOnAlbum inAlbum:downloadingAlbumName];
-//    [self insertFileToAutosyncCache:file localizedIdentifier:localizedIdentifier];
+    [self insertFileToAutosyncCache:file localizedIdentifier:localizedIdentifier];
 }
-/*
+
 -(void)insertFileToAutosyncCache:(MetaFile *)file localizedIdentifier:(NSString *)localizedIdentifier {
-    PHImageManager *imageManager = [[PHImageManager alloc] init];
     NSArray *seperateds = [localizedIdentifier componentsSeparatedByString:@"/"];
-    NSString *normalizedIdentifier = [NSString stringWithFormat:@"assets-library://asset/asset.JPG?id=%@&ext=JPG", seperateds[0]];
-    NSString *localHash = [SyncUtil md5StringOfString:normalizedIdentifier];
-    [SyncUtil cacheSyncHashLocally:localHash];
-    [SyncUtil increaseAutoSyncIndex];
+    PHFetchOptions *options = [[PHFetchOptions alloc] init];
+    options.predicate = [NSPredicate predicateWithFormat:@"localIdentifier=%@", seperateds[0]];
+    PHFetchResult<PHAsset *> *assets = [PHAsset fetchAssetsInAssetCollection:albumAssetCollection options:options];
+    [assets enumerateObjectsUsingBlock:^(PHAsset * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        
+        [[PHImageManager defaultManager]
+         requestImageDataForAsset:obj
+         options:nil
+         resultHandler:^(NSData *imageData, NSString *dataUTI,
+                         UIImageOrientation orientation,
+                         NSDictionary *info)
+         {
+             NSString *normalizedIdentifier = [NSString stringWithFormat:@"assets-library://asset/asset.JPG?id=%@&ext=JPG", seperateds[0]];
+             if ([info objectForKey:@"PHImageFileURLKey"]) {
+                 NSURL *fileURL = [info objectForKey:@"PHImageFileURLKey"];
+                 NSArray *paths = [fileURL.absoluteString componentsSeparatedByString:@"."];
+                 NSString *ext = [paths lastObject];
+                 normalizedIdentifier = [normalizedIdentifier stringByReplacingOccurrencesOfString:@"JPG" withString:ext];
+             }
+             NSString *localHash = [SyncUtil md5StringOfString:normalizedIdentifier];
+             NSLog(@"saved file localHash: %@ - identifier: %@", localHash, normalizedIdentifier);
+             [SyncUtil cacheSyncHashLocally:localHash];
+             [SyncUtil increaseAutoSyncIndex];
+         }];
+    }];
+
 }
-*/
+
 -(void)updateSyncedFilesOfAlbum {
     PHFetchOptions *fetchOptions = [[PHFetchOptions alloc] init];
     fetchOptions.predicate = [NSPredicate predicateWithFormat:@"title=%@", downloadingAlbumName];
