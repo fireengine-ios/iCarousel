@@ -277,12 +277,14 @@
     if(!textField.secureTextEntry) {
         NSRange range = [textField.text rangeOfString:@")" options:NSBackwardsSearch];
         if (range.location != NSNotFound) {
-            NSString *newString = [textField.text substringFromIndex:range.location + range.length];
-            if ([newString hasPrefix:@"0"] && [newString length] > 1) {
-                newString = [newString substringFromIndex:1];
-                NSString *onString = [textField.text substringToIndex:range.location + 1];
-                NSString *string = [onString stringByAppendingString:newString];
-                textField.text = string;
+            NSString *callingCode = [textField.text substringToIndex:range.location + 1];
+            if([callingCode isEqualToString:@"+(90)"]) {
+                NSString *number = [textField.text substringFromIndex:range.location + range.length];
+                if ([number hasPrefix:@"0"] && [number length] > 1) {
+                    number = [number substringFromIndex:1];
+                    NSString *editedNumber = [callingCode stringByAppendingString:number];
+                    textField.text = editedNumber;
+                }
             }
         }
     }
