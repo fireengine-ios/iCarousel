@@ -416,8 +416,18 @@
                                                                   inAlbumName:downloadingAlbumName];
     [syncedFilesOnAlbum addObject:downloadedFile];
     [SyncUtil updateLoadedFiles:syncedFilesOnAlbum inAlbum:downloadingAlbumName];
+//    [self insertFileToAutosyncCache:file localizedIdentifier:localizedIdentifier];
 }
-
+/*
+-(void)insertFileToAutosyncCache:(MetaFile *)file localizedIdentifier:(NSString *)localizedIdentifier {
+    PHImageManager *imageManager = [[PHImageManager alloc] init];
+    NSArray *seperateds = [localizedIdentifier componentsSeparatedByString:@"/"];
+    NSString *normalizedIdentifier = [NSString stringWithFormat:@"assets-library://asset/asset.JPG?id=%@&ext=JPG", seperateds[0]];
+    NSString *localHash = [SyncUtil md5StringOfString:normalizedIdentifier];
+    [SyncUtil cacheSyncHashLocally:localHash];
+    [SyncUtil increaseAutoSyncIndex];
+}
+*/
 -(void)updateSyncedFilesOfAlbum {
     PHFetchOptions *fetchOptions = [[PHFetchOptions alloc] init];
     fetchOptions.predicate = [NSPredicate predicateWithFormat:@"title=%@", downloadingAlbumName];

@@ -20,6 +20,8 @@
 + (void) updateLastContactSyncDate;
 + (void) cacheSyncReference:(SyncReference *) ref;
 + (NSArray *) readSyncReferences;
+
++ (NSString *) md5StringOfFileLocalIdentifier:(NSString *)identifier;
 + (NSString *) md5StringOfString:(NSString *) rawVal;
 + (NSString *) md5String:(NSData *) data;
 + (NSString *) md5StringFromPath:(NSString *) path;
