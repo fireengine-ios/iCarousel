@@ -78,7 +78,7 @@
 }
 
 - (void) dismissWithSuccessMessage {
-    self.hidden = false;
+    self.hidden = NO;
     processConcluded = YES;
     messageLabel.text = self.successMsg;
     [defaultIndicator stopAnimating];
@@ -88,7 +88,7 @@
 }
 
 - (void) dismissWithFailureMessage {
-    self.hidden = false;
+    self.hidden = NO;
     processConcluded = YES;
     messageLabel.text = self.failMsg;
     [defaultIndicator stopAnimating];
@@ -99,6 +99,15 @@
 
 - (void) showMessageForSuccess {
     [self showMessageForSuccessWithPostButtonKey:nil];
+}
+
+-(void)showWithLoadingMessage:(NSString *)message {
+    self.hidden = NO;
+    defaultIndicator.hidden = NO;
+    processConcluded = NO;
+    successImgView.hidden = YES;
+    messageLabel.text = message;
+    [defaultIndicator startAnimating];
 }
 
 - (void) showMessageForSuccessWithPostButtonKey:(NSString *) buttonKey {

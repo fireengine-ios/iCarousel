@@ -86,8 +86,11 @@
 
 
 +(NSArray *)loadDownloadedFilesForAlbum:(NSString *)albumName;
++(NSArray *)loadCameraRollFiles;
 +(void)createAlbumToSync:(NSString *)albumName;
 +(void)removeAlbumFromSync:(NSString *)albumName;
+
 +(void)updateLoadedFiles:(NSArray *)files inAlbum:(NSString *)albumName;
++(void)updateLoadedFilesInCameraRoll:(NSArray *)files;
 
 @end

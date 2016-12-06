@@ -34,6 +34,14 @@
 
 -(void)downloadListOfFilesToCameraRoll:(NSArray *)metaFiles {
     fileList = [[NSMutableArray alloc] initWithArray:metaFiles];
+    NSArray *syncFiles = [SyncUtil loadCameraRollFiles];
+    if (syncFiles && syncFiles.count > 0) {
+        syncedFilesOnAlbum = [[NSMutableArray alloc] initWithArray:syncFiles];
+        [self updateSyncedFilesOfAlbum];
+    }else {
+        syncedFilesOnAlbum = [[NSMutableArray alloc] init];
+    }
+
     [self downloadFilesToCameraRoll];
 }
 
@@ -184,17 +192,16 @@
         [self downloadImageWithURL:[NSURL URLWithString:file.tempDownloadUrl]
                    completionBlock:^(BOOL succeeded, UIImage *image) {
                        if (succeeded) {
+                           __weak DownloadManager *weakSelf = self;
+                           __block NSString *localizedAssetIdentifier = @"";
                            dispatch_async(dispatch_get_main_queue(), ^{
-                               
-                           /*    if ([self isPhotoExistInCameraRoll:file]) {
-                                   [self didFinishSavingFileToCameraRoll:file error:nil];
-                                   return;
-                               }
-                               */
                                [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
                                    PHAssetChangeRequest *changeRequest = [PHAssetChangeRequest creationRequestForAssetFromImage:image];
+                                   PHObjectPlaceholder *assetPlaceHolder = [changeRequest placeholderForCreatedAsset];
+                                   localizedAssetIdentifier = assetPlaceHolder.localIdentifier;
                                } completionHandler:^(BOOL success, NSError *error) {
                                    if (success) {
+                                       [weakSelf saveFileToCameraRoll:file localizedIdentifier:localizedAssetIdentifier];
                                        NSLog(@"Save Image To CameraRoll Success");
                                    }
                                    else {
@@ -236,21 +243,21 @@
                                                                           inDomains:NSUserDomainMask] firstObject];
             NSURL *tempURL = [documentsURL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", [sourceURL lastPathComponent], contentType]];
             if (location) {
-                __weak DownloadManager *weakSelf = self;
-                __block NSString *localizedAssetIdentifier = @"";
+                //__weak DownloadManager *weakSelf = self;
+                //__block NSString *localizedAssetIdentifier = @"";
                 if ([[NSFileManager defaultManager] moveItemAtURL:location toURL:tempURL error:nil]) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
                             PHAssetChangeRequest *request = [PHAssetChangeRequest creationRequestForAssetFromVideoAtFileURL:tempURL];
-                            PHObjectPlaceholder *assetPlaceHolder = [request placeholderForCreatedAsset];
+                           /* PHObjectPlaceholder *assetPlaceHolder = [request placeholderForCreatedAsset];
                             PHAssetCollectionChangeRequest *albumChangeRequest = [PHAssetCollectionChangeRequest changeRequestForAssetCollection:albumAssetCollection];
                             
-                            localizedAssetIdentifier = assetPlaceHolder.localIdentifier;
+                            localizedAssetIdentifier = assetPlaceHolder.localIdentifier; */
                         } completionHandler:^(BOOL success, NSError * _Nullable error) {
                             if (error) {
                                 NSLog(@"Save Image To Album Error: %@", error.description);
                             }else {
-                                [weakSelf saveFileToSynchedFiles:file localizedIdentifier:localizedAssetIdentifier];
+                               // [weakSelf saveFileToCameraRoll:file localizedIdentifier:localizedAssetIdentifier];
                                 NSLog(@"Save Image To Album Success uuid:%@", file.uuid);
                             }
                             [self didFinishSavingVideoFileToAlbum:file videoPath:tempURL.path error:error];
@@ -390,9 +397,6 @@
 }
 
 
-
-
-
 - (void)didFinishSavingFileToAlbum:(MetaFile *)file error:(NSError *)error {
     [self.delegate downloadManager:self didFinishSavingFile:file error:error];
     [self downloadAlbumPhotosToDevice];
@@ -428,6 +432,15 @@
                                                                   inAlbumName:downloadingAlbumName];
     [syncedFilesOnAlbum addObject:downloadedFile];
     [SyncUtil updateLoadedFiles:syncedFilesOnAlbum inAlbum:downloadingAlbumName];
+    [self insertFileToAutosyncCache:file localizedIdentifier:localizedIdentifier];
+}
+
+-(void)saveFileToCameraRoll:(MetaFile *)file localizedIdentifier:(NSString *)localizedIdentifier {
+    DownloadedFile *downloadedFile = [[DownloadedFile alloc] initWithFileUUID:file.uuid
+                                                              localIdentifier:localizedIdentifier
+                                                                  inAlbumName:@"-1CameraRoll"];
+    [syncedFilesOnAlbum addObject:downloadedFile];
+    [SyncUtil updateLoadedFilesInCameraRoll:syncedFilesOnAlbum];
     [self insertFileToAutosyncCache:file localizedIdentifier:localizedIdentifier];
 }
 
