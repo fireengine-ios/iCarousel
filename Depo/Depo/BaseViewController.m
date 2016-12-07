@@ -1031,8 +1031,9 @@ loadingMessage:(NSString *)loadingMessage
                                                  loadingMessage:loadingMessage
                                                  successMessage:successMessage
                                                     failMessage:failMessage];
-    [manager createAlbumName:albumName albumUUID:albumUUID downloadFilesToAlbum:files];
     [downloadManagers addObject:manager];
+    [manager createAlbumName:albumName albumUUID:albumUUID downloadFilesToAlbum:files];
+    //[downloadManagers addObject:manager];
 }
 
 
@@ -1049,8 +1050,9 @@ loadingMessage:(NSString *)loadingMessage
                                                               loadingMessage:loadingMessage
                                                               successMessage:successMessage
                                                                  failMessage:failMessage];
-        [manager createAlbumName:[albumNames objectAtIndex:i] albumUUID:[albumUUIDs objectAtIndex:i]];
         [downloadManagers addObject:manager];
+        [manager createAlbumName:[albumNames objectAtIndex:i] albumUUID:[albumUUIDs objectAtIndex:i]];
+//        [downloadManagers addObject:manager];
     }
 }
 

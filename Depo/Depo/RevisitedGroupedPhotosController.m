@@ -178,7 +178,7 @@
     [APPDELEGATE.base createAlbumNames:albumNames
                             albumUUIDs:albumUUIDs
                         loadingMessage:NSLocalizedString(@"DownloadAlbumsProgressMessage", @"")
-                        successMessage:NSLocalizedString(@"DownloadAlbumSuccessMessage", @"")
+                        successMessage:NSLocalizedString(@"DownloadAlbumsSuccessMessage", @"")
                            failMessage:NSLocalizedString(@"DownloadAlbumFailMessage", @"")];
     [self cancelClicked];
 }
@@ -354,6 +354,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // App Rater
+    [AppRater sharedInstance].daysUntilPrompt = 5;
+    [AppRater sharedInstance].launchesUntilPrompt = 10;
+    [AppRater sharedInstance].remindMeDaysUntilPrompt = 15;
+    [AppRater sharedInstance].remindMeLaunchesUntilPrompt = 10;
+    // [AppRater sharedInstance].preferredLanguage = @"en";
+    [[AppRater sharedInstance] appLaunched];
 
     IGLog(@"RevisitedGroupedPhotosController viewDidLoad");
     

@@ -148,7 +148,10 @@
     
     [groups removeAllObjects];
     [files removeAllObjects];
-    [collView reloadData];
+  //  [collView reloadData];
+    [self.collView performSelectorOnMainThread:@selector(reloadData)
+                                    withObject:nil
+                                 waitUntilDone:NO];
     
     yIndex = 60;
     

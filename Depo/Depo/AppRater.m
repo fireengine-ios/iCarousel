@@ -126,7 +126,7 @@
  */
 - (void)applicationWillEnterForeground {
     if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) {
-        [self appLaunched];
+        //[self appLaunched];
     }
 }
 
