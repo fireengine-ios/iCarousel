@@ -58,7 +58,6 @@
                 [filteredList addObject:row];
             }
         }
-        
     }
     self.albumList = filteredList;
     [albumTable reloadData];

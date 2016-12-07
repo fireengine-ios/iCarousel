@@ -178,7 +178,7 @@
     [APPDELEGATE.base createAlbumNames:albumNames
                             albumUUIDs:albumUUIDs
                         loadingMessage:NSLocalizedString(@"DownloadAlbumsProgressMessage", @"")
-                        successMessage:NSLocalizedString(@"DownloadAlbumSuccessMessage", @"")
+                        successMessage:NSLocalizedString(@"DownloadAlbumsSuccessMessage", @"")
                            failMessage:NSLocalizedString(@"DownloadAlbumFailMessage", @"")];
     [self cancelClicked];
 }
