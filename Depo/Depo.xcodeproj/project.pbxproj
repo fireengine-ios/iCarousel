@@ -997,6 +997,7 @@
 		94A1D3C41C969F330066D92F /* UpdatePassDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94A1D3C31C969F330066D92F /* UpdatePassDao.m */; };
 		94A375261D31B2FC00D06A0C /* VideofyPreparationInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94A375251D31B2FC00D06A0C /* VideofyPreparationInfoView.m */; };
 		94A375291D31C1D600D06A0C /* VideofyDepoMusicModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94A375281D31C1D600D06A0C /* VideofyDepoMusicModalController.m */; };
+		94AF7DD51DF857A3000D425B /* SearchContainerCollCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94AF7DD41DF857A3000D425B /* SearchContainerCollCell.m */; };
 		94B27F761D47E94B0092334A /* VideofyPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94B27F751D47E94B0092334A /* VideofyPreviewController.m */; };
 		94B2F33B1D373E48009CD8B1 /* icon_fb_aktar.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B2F3361D373E48009CD8B1 /* icon_fb_aktar.png */; };
 		94B2F33C1D373E48009CD8B1 /* icon_fb_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B2F3371D373E48009CD8B1 /* icon_fb_big.png */; };
@@ -2553,6 +2554,8 @@
 		94A375251D31B2FC00D06A0C /* VideofyPreparationInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideofyPreparationInfoView.m; sourceTree = "<group>"; };
 		94A375271D31C1D600D06A0C /* VideofyDepoMusicModalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideofyDepoMusicModalController.h; sourceTree = "<group>"; };
 		94A375281D31C1D600D06A0C /* VideofyDepoMusicModalController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideofyDepoMusicModalController.m; sourceTree = "<group>"; };
+		94AF7DD31DF857A3000D425B /* SearchContainerCollCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchContainerCollCell.h; sourceTree = "<group>"; };
+		94AF7DD41DF857A3000D425B /* SearchContainerCollCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchContainerCollCell.m; sourceTree = "<group>"; };
 		94B27F741D47E94B0092334A /* VideofyPreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideofyPreviewController.h; sourceTree = "<group>"; };
 		94B27F751D47E94B0092334A /* VideofyPreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideofyPreviewController.m; sourceTree = "<group>"; };
 		94B2F3361D373E48009CD8B1 /* icon_fb_aktar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_fb_aktar.png; sourceTree = "<group>"; };
@@ -3227,6 +3230,8 @@
 				949BB5741D6F1E7A00BED9DB /* WelcomePageView.m */,
 				94B3BE311D847F560086D05E /* GroupedView.h */,
 				94B3BE321D847F560086D05E /* GroupedView.m */,
+				94AF7DD31DF857A3000D425B /* SearchContainerCollCell.h */,
+				94AF7DD41DF857A3000D425B /* SearchContainerCollCell.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -5889,6 +5894,7 @@
 				05F931901C160ED200858223 /* SyncLogger.m in Sources */,
 				94B3BE331D847F560086D05E /* GroupedView.m in Sources */,
 				05C7CB6A1ABC91B200A7BF8E /* MetaFileSummary.m in Sources */,
+				94AF7DD51DF857A3000D425B /* SearchContainerCollCell.m in Sources */,
 				051E1EA719CB209F00FD1E03 /* MenuCell.m in Sources */,
 				051E1E0319CAC2F900FD1E03 /* main.m in Sources */,
 				94FAE0C01D2F22EB00BC9F77 /* VideofyAudioCell.m in Sources */,

@@ -16,6 +16,7 @@
 #import "ReachabilityManager.h"
 #import "Reachability.h"
 #import "GroupPhotoSectionView.h"
+#import "SearchContainerCollCell.h"
 
 #define GROUP_PACKAGE_SIZE (IS_IPAD ? 60 : IS_IPHONE_6P_OR_HIGHER ? 60 : 48)
 #define GROUP_IMG_COUNT_PER_ROW (IS_IPAD ? 6 : IS_IPHONE_6P_OR_HIGHER ? 6 : 4)
@@ -101,17 +102,20 @@
         yIndex = 0;
         
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+        layout.sectionHeadersPinToVisibleBounds = YES;
         
         collView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) collectionViewLayout:layout];
         collView.dataSource = self;
         collView.delegate = self;
         collView.backgroundColor = [UIColor whiteColor];
         [collView registerClass:[RevisitedPhotoCollCell class] forCellWithReuseIdentifier:@"COLL_PHOTO_CELL"];
+        [collView registerClass:[SearchContainerCollCell class] forCellWithReuseIdentifier:@"COLL_SEARCH_CELL"];
         [collView registerClass:[RevisitedUploadingPhotoCollCell class] forCellWithReuseIdentifier:@"COLL_UPLOADING_PHOTO_CELL"];
         [collView registerClass:[GroupPhotoSectionView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"group_photo_header"];
-        [collView setContentInset:UIEdgeInsetsMake(60, 0, 0, 0)];
+        //[collView setContentInset:UIEdgeInsetsMake(60, 0, 0, 0)];
         [self addSubview:collView];
         
+        /*
         UIView *searchContainer = [[UIView alloc] initWithFrame:CGRectMake(0, -60, collView.frame.size.width, 60)];
         searchField = [[MainSearchTextfield alloc] initWithFrame:CGRectMake(20, 10, searchContainer.frame.size.width - 40, 40)];
         searchField.delegate = self;
@@ -119,13 +123,16 @@
         searchField.userInteractionEnabled = NO;
         [searchContainer addSubview:searchField];
         [collView addSubview:searchContainer];
+        */
         
         yIndex = 60;
         
+        /*
         UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(searchTapped)];
         tapGestureRecognizer.numberOfTapsRequired = 1;
         tapGestureRecognizer.enabled = YES;
         [searchContainer addGestureRecognizer:tapGestureRecognizer];
+         */
         
         refreshControl = [[UIRefreshControl alloc] init];
         [refreshControl addTarget:self action:@selector(pullData) forControlEvents:UIControlEventValueChanged];
@@ -135,11 +142,18 @@
         progress.opacity = 0.4f;
         [self addSubview:progress];
         
+        [self performSelector:@selector(setCollViewContentOffset) withObject:nil afterDelay:0.1f];
+        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(autoIterationFinished) name:AUTO_ITERATION_FINISHED_NOT_KEY object:nil];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(autoQueueFinished) name:AUTO_SYNC_QUEUE_FINISHED_NOTIFICATION object:nil];
+
     }
     return self;
+}
+
+- (void) setCollViewContentOffset {
+    [collView setContentOffset:CGPointMake(0, 60)];
 }
 
 - (void) pullData {
@@ -149,9 +163,7 @@
     [groups removeAllObjects];
     [files removeAllObjects];
   //  [collView reloadData];
-    [self.collView performSelectorOnMainThread:@selector(reloadData)
-                                    withObject:nil
-                                 waitUntilDone:NO];
+    [self.collView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
     
     yIndex = 60;
     
@@ -640,50 +652,71 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
-    FileInfoGroup *sectionGroup = [self.groups objectAtIndex:section];
-    return [sectionGroup.fileInfo count];
+    if(section == 0) {
+        return 1;
+    } else {
+        FileInfoGroup *sectionGroup = [self.groups objectAtIndex:section-1];
+        return [sectionGroup.fileInfo count];
+    }
 }
 
 - (NSInteger)numberOfSectionsInCollectionView: (UICollectionView *)collectionView {
-    return [self.groups count];
+    return [self.groups count] + 1;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell * c = [cv dequeueReusableCellWithReuseIdentifier:@"COLL_PHOTO_CELL" forIndexPath:indexPath];
-    if (self.groups.count > indexPath.section) {
-        FileInfoGroup *sectionGroup = [self.groups objectAtIndex:indexPath.section];
-        if (sectionGroup.fileInfo.count > indexPath.row) {
-            id rowItem = [sectionGroup.fileInfo objectAtIndex:indexPath.row];
-            if([rowItem isKindOfClass:[MetaFile class]]) {
-                MetaFile *castedRow = (MetaFile *) rowItem;
-                RevisitedPhotoCollCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"COLL_PHOTO_CELL" forIndexPath:indexPath];
-                cell.delegate = self;
-                [cell loadContent:castedRow isSelectible:self.isSelectible withImageWidth:imageWidth withGroupKey:sectionGroup.groupKey isSelected:[selectedFileList containsObject:castedRow.uuid]];
-                return cell;
-            } else {
-                UploadRef *castedRow = (UploadRef *) rowItem;
-                RevisitedUploadingPhotoCollCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"COLL_UPLOADING_PHOTO_CELL" forIndexPath:indexPath];
-                cell.delegate = self;
-                [cell loadContent:castedRow isSelectible:self.isSelectible withImageWidth:imageWidth withGroupKey:sectionGroup.groupKey isSelected:NO];
-                return cell;
+    if(indexPath.section == 0) {
+        SearchContainerCollCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"COLL_SEARCH_CELL" forIndexPath:indexPath];
+        [cell loadContent];
+        return cell;
+    } else {
+        UICollectionViewCell * c = [cv dequeueReusableCellWithReuseIdentifier:@"COLL_PHOTO_CELL" forIndexPath:indexPath];
+        if (self.groups.count > (indexPath.section-1)) {
+            FileInfoGroup *sectionGroup = [self.groups objectAtIndex:(indexPath.section-1)];
+            if (sectionGroup.fileInfo.count > indexPath.row) {
+                id rowItem = [sectionGroup.fileInfo objectAtIndex:indexPath.row];
+                if([rowItem isKindOfClass:[MetaFile class]]) {
+                    MetaFile *castedRow = (MetaFile *) rowItem;
+                    RevisitedPhotoCollCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"COLL_PHOTO_CELL" forIndexPath:indexPath];
+                    cell.delegate = self;
+                    [cell loadContent:castedRow isSelectible:self.isSelectible withImageWidth:imageWidth withGroupKey:sectionGroup.groupKey isSelected:[selectedFileList containsObject:castedRow.uuid]];
+                    return cell;
+                } else {
+                    UploadRef *castedRow = (UploadRef *) rowItem;
+                    RevisitedUploadingPhotoCollCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"COLL_UPLOADING_PHOTO_CELL" forIndexPath:indexPath];
+                    cell.delegate = self;
+                    [cell loadContent:castedRow isSelectible:self.isSelectible withImageWidth:imageWidth withGroupKey:sectionGroup.groupKey isSelected:NO];
+                    return cell;
+                }
             }
         }
+        return c;
     }
-    return c;
 }
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    if(indexPath.section == 0) {
+        [self searchTapped];
+    }
     //    RevisitedPhotoCollCell *cell = (RevisitedPhotoCollCell *) [collectionView cellForItemAtIndexPath:indexPath];
 }
 
 #pragma mark – UICollectionViewDelegateFlowLayout
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(imageWidth, imageWidth);
+    if(indexPath.section == 0) {
+        return CGSizeMake(collectionView.frame.size.width, 60);
+    } else {
+        return CGSizeMake(imageWidth, imageWidth);
+    }
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(2, 2, 20, 2);
+    if(section == 0) {
+        return UIEdgeInsetsZero;
+    } else {
+        return UIEdgeInsetsMake(2, 2, 20, 2);
+    }
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionView *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
@@ -698,14 +731,18 @@
     if(!initialLoadDone) {
         return CGSizeZero;
     } else {
-        return CGSizeMake(self.frame.size.width, 40);
+        if(section == 0) {
+            return CGSizeZero;
+        } else {
+            return CGSizeMake(self.frame.size.width, 40);
+        }
     }
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)theCollectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)theIndexPath {
     if(kind == UICollectionElementKindSectionHeader && initialLoadDone) {
-        if (self.groups.count > theIndexPath.section) {
-            FileInfoGroup *sectionGroup = [self.groups objectAtIndex:theIndexPath.section];
+        if (self.groups.count > (theIndexPath.section-1)) {
+            FileInfoGroup *sectionGroup = [self.groups objectAtIndex:(theIndexPath.section-1)];
             
             GroupPhotoSectionView *collFooterView = [theCollectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"group_photo_header" forIndexPath:theIndexPath];
             [collFooterView loadSectionWithTitle:sectionGroup.customTitle];
