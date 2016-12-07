@@ -354,6 +354,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // App Rater
+    [AppRater sharedInstance].daysUntilPrompt = 5;
+    [AppRater sharedInstance].launchesUntilPrompt = 10;
+    [AppRater sharedInstance].remindMeDaysUntilPrompt = 15;
+    [AppRater sharedInstance].remindMeLaunchesUntilPrompt = 10;
+    // [AppRater sharedInstance].preferredLanguage = @"en";
+    [[AppRater sharedInstance] appLaunched];
 
     IGLog(@"RevisitedGroupedPhotosController viewDidLoad");
     
