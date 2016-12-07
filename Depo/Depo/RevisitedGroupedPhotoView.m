@@ -646,21 +646,27 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    FileInfoGroup *sectionGroup = [self.groups objectAtIndex:indexPath.section];
-    id rowItem = [sectionGroup.fileInfo objectAtIndex:indexPath.row];
-    if([rowItem isKindOfClass:[MetaFile class]]) {
-        MetaFile *castedRow = (MetaFile *) rowItem;
-        RevisitedPhotoCollCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"COLL_PHOTO_CELL" forIndexPath:indexPath];
-        cell.delegate = self;
-        [cell loadContent:castedRow isSelectible:self.isSelectible withImageWidth:imageWidth withGroupKey:sectionGroup.groupKey isSelected:[selectedFileList containsObject:castedRow.uuid]];
-        return cell;
-    } else {
-        UploadRef *castedRow = (UploadRef *) rowItem;
-        RevisitedUploadingPhotoCollCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"COLL_UPLOADING_PHOTO_CELL" forIndexPath:indexPath];
-        cell.delegate = self;
-        [cell loadContent:castedRow isSelectible:self.isSelectible withImageWidth:imageWidth withGroupKey:sectionGroup.groupKey isSelected:NO];
-        return cell;
+    UICollectionViewCell * c = [cv dequeueReusableCellWithReuseIdentifier:@"COLL_PHOTO_CELL" forIndexPath:indexPath];
+    if (self.groups.count > indexPath.section) {
+        FileInfoGroup *sectionGroup = [self.groups objectAtIndex:indexPath.section];
+        if (sectionGroup.fileInfo.count > indexPath.row) {
+            id rowItem = [sectionGroup.fileInfo objectAtIndex:indexPath.row];
+            if([rowItem isKindOfClass:[MetaFile class]]) {
+                MetaFile *castedRow = (MetaFile *) rowItem;
+                RevisitedPhotoCollCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"COLL_PHOTO_CELL" forIndexPath:indexPath];
+                cell.delegate = self;
+                [cell loadContent:castedRow isSelectible:self.isSelectible withImageWidth:imageWidth withGroupKey:sectionGroup.groupKey isSelected:[selectedFileList containsObject:castedRow.uuid]];
+                return cell;
+            } else {
+                UploadRef *castedRow = (UploadRef *) rowItem;
+                RevisitedUploadingPhotoCollCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"COLL_UPLOADING_PHOTO_CELL" forIndexPath:indexPath];
+                cell.delegate = self;
+                [cell loadContent:castedRow isSelectible:self.isSelectible withImageWidth:imageWidth withGroupKey:sectionGroup.groupKey isSelected:NO];
+                return cell;
+            }
+        }
     }
+    return c;
 }
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -695,13 +701,15 @@
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)theCollectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)theIndexPath {
     if(kind == UICollectionElementKindSectionHeader && initialLoadDone) {
-        FileInfoGroup *sectionGroup = [self.groups objectAtIndex:theIndexPath.section];
-        
-        GroupPhotoSectionView *collFooterView = [theCollectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"group_photo_header" forIndexPath:theIndexPath];
-        [collFooterView loadSectionWithTitle:sectionGroup.customTitle];
-        return collFooterView;
+        if (self.groups.count > theIndexPath.section) {
+            FileInfoGroup *sectionGroup = [self.groups objectAtIndex:theIndexPath.section];
+            
+            GroupPhotoSectionView *collFooterView = [theCollectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"group_photo_header" forIndexPath:theIndexPath];
+            [collFooterView loadSectionWithTitle:sectionGroup.customTitle];
+            return collFooterView;
+        }
+        return nil;
     }
-    
     return nil;
 }
 
