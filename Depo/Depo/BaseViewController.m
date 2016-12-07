@@ -1090,16 +1090,14 @@ loadingMessage:(NSString *)loadingMessage
 -(void)downloadManagerDidFinishDownloading:(DownloadManager *)manager error:(NSError *)error {
     [downloadManagers removeObject:manager];
     NSString *str = @"";
-    if (error) {
-        str = manager.failMessage;
-    }else {
-        str = manager.successMessage;
-    }
+    if (error) { str = manager.failMessage;
+    }else { str = manager.successMessage; }
+    
     if (downloadManagers.count == 0) {
         if (error) {
-            [downloadingProcessView showMessageForFailure];
+            [self removeProgressViewWithMessage:manager.failMessage isSuccess:NO];
         }else {
-            [downloadingProcessView showMessageForSuccess];
+            [self removeProgressViewWithMessage:manager.successMessage isSuccess:YES];
         }
     }
 }
@@ -1111,20 +1109,33 @@ loadingMessage:(NSString *)loadingMessage
                successMessage:(NSString *)successMessage
                   failMessage:(NSString *)failMessage {
     if (downloadingProcessView) {
-        [downloadingProcessView removeFromSuperview];
-        downloadingProcessView = nil;
+        [APPDELEGATE.window bringSubviewToFront:downloadingProcessView];
+        [downloadingProcessView showWithLoadingMessage:loadingMessage];
+        [self performSelector:@selector(hideProcessView) withObject:nil afterDelay:3];
+        return;
+    }else {
+        CGRect windowFrame = APPDELEGATE.window.frame;
+        downloadingProcessView = [[ProcessFooterView alloc] initWithFrame:CGRectMake(0, windowFrame.size.height - 60, windowFrame.size.width, 60)
+                                                       withProcessMessage:loadingMessage
+                                                         withFinalMessage:successMessage
+                                                          withFailMessage:failMessage];
+        downloadingProcessView.delegate = self;
+        [APPDELEGATE.window addSubview:downloadingProcessView];
+        [APPDELEGATE.window bringSubviewToFront:downloadingProcessView];
+        [downloadingProcessView startLoading];
+        [self performSelector:@selector(hideProcessView) withObject:nil afterDelay:3];
     }
-    CGRect windowFrame = APPDELEGATE.window.frame;
-    downloadingProcessView = [[ProcessFooterView alloc] initWithFrame:CGRectMake(0, windowFrame.size.height - 60, windowFrame.size.width, 60) withProcessMessage:loadingMessage withFinalMessage:successMessage withFailMessage:failMessage];
-    downloadingProcessView.delegate = self;
-    [APPDELEGATE.window addSubview:downloadingProcessView];
-    [APPDELEGATE.window bringSubviewToFront:downloadingProcessView];
-    [downloadingProcessView startLoading];
-    [self performSelector:@selector(hideProcessView) withObject:nil afterDelay:2];
 }
 
 -(void)hideProcessView {
+     NSLog(@"hideProcessView");
     downloadingProcessView.hidden = true;
+}
+
+-(void)removeProgressViewWithMessage:(NSString *)message isSuccess:(BOOL)success {
+    NSLog(@"removeProgressViewWithMessage: %@", message);
+    [downloadingProcessView updateMessage:message isSuccess:success];
+    [self performSelector:@selector(hideProcessView) withObject:nil afterDelay:3];
 }
 
 - (void) processFooterShouldDismissWithButtonKey:(NSString *) postButtonKeyVal {

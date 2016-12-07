@@ -64,20 +64,6 @@
     return result;
 }
 
-+ (NSString *) md5StringOfFileLocalIdentifier:(NSString *)identifier {
-    const char * pointer = [identifier UTF8String];
-    unsigned char md5Buffer[CC_MD5_DIGEST_LENGTH];
-    
-    CC_MD5(pointer, (CC_LONG)strlen(pointer), md5Buffer);
-    
-    NSMutableString *string = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
-    for (int i = 0; i < CC_MD5_DIGEST_LENGTH; i++)
-        [string appendFormat:@"%02x",md5Buffer[i]];
-    
-    return string;
-}
-
-
 + (NSString *) md5StringOfString:(NSString *) rawVal {
     const char *cstr = [rawVal UTF8String];
     unsigned char result[16];
@@ -434,6 +420,7 @@
 
 
 #pragma mark - Album Download Files
+
 +(NSArray *)loadDownloadedFilesForAlbum:(NSString *)albumName {
     NSArray *fileDatas = [[NSUserDefaults standardUserDefaults] objectForKey:albumName];
     if (fileDatas && fileDatas.count > 0) {
@@ -446,7 +433,6 @@
     }
     return [NSArray array];
 }
-
 +(void)createAlbumToSync:(NSString *)albumName {
     [[NSUserDefaults standardUserDefaults] setObject:[NSArray array] forKey:albumName];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -465,6 +451,37 @@
     }
     
     [[NSUserDefaults standardUserDefaults] setObject:archiveArray forKey:albumName];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+
+#pragma mark - Download Files to CameraRoll
+
++(NSArray *)loadCameraRollFiles { // -1 for cameraRollFiles
+    NSString *cameraRollKey = @"-1CameraRoll";
+    NSArray *filesData = [[NSUserDefaults standardUserDefaults] objectForKey:cameraRollKey];
+    if (filesData && filesData.count > 0) {
+        NSMutableArray *array = [NSMutableArray arrayWithCapacity:filesData.count];
+        for (NSData *data in filesData) {
+            DownloadedFile *file = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            [array addObject:file];
+        }
+        return array;
+    }else {
+        [SyncUtil createAlbumToSync:cameraRollKey];
+        return [NSArray array];
+    }
+}
+
++(void)updateLoadedFilesInCameraRoll:(NSArray *)files {
+     NSString *cameraRollKey = @"-1CameraRoll";
+    NSMutableArray *archiveArray = [NSMutableArray arrayWithCapacity:files.count];
+    for (DownloadedFile *file in files) {
+        NSData *fileEncodedObject = [NSKeyedArchiver archivedDataWithRootObject:file];
+        [archiveArray addObject:fileEncodedObject];
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setObject:archiveArray forKey:cameraRollKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

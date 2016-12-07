@@ -72,7 +72,7 @@
         }
 
         if(deleteFlag) {
-            deleteButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 35, 19, 20, 44) withImageName:@"white_delete_icon.png"];
+            deleteButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 35, 5, 20, 44) withImageName:@"white_delete_icon.png"];
             [deleteButton addTarget:self action:@selector(deleteClicked) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:deleteButton];
         }
