@@ -33,6 +33,9 @@
                     if (![self checkResponseHasError:response]) {
                         [self shouldReturnSuccessWithObject:result];
                     }
+                    else {
+                        [self requestFailed:response];
+                    }
                 });
             }
             else {

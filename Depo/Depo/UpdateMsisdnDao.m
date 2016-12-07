@@ -31,16 +31,21 @@
             });
         }
         else {
-            NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-            if(mainDict && [mainDict isKindOfClass:[NSDictionary class]]) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self shouldReturnSuccessWithObject:mainDict];
-                });
+            if (![self checkResponseHasError:response]) {
+                NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                if(mainDict && [mainDict isKindOfClass:[NSDictionary class]]) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnSuccessWithObject:mainDict];
+                    });
+                }
+                else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                    });
+                }
             }
             else {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-                });
+                [self requestFailed:response];
             }
         }
     }]];

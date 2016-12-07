@@ -95,7 +95,7 @@
     NSString *errorInfoLog = [NSString stringWithFormat:@"BaseDao request failed with code: %d and response", (int)[request statusCode]];
     IGLog(errorInfoLog);
     NSLog(@"%@",errorInfoLog);
-    if ([request statusCode] == 200 || [request statusCode] == 0) {
+    if (([request statusCode] > 199 && [request statusCode] < 300) || [request statusCode] == 0) {
         return;
     }
     if([request statusCode] == 401) {
@@ -103,34 +103,47 @@
         if(!self.tokenAlreadyRevisitedFlag) {
             IGLog(@"BaseDao request failed with 401 - tokenAlreadyRevisitedFlag is false, setting to true");
             self.tokenAlreadyRevisitedFlag = YES;
-            [self triggerNewToken];
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [self triggerNewToken];
+            });
         } else {
             IGLog(@"BaseDao request failed with 401 - tokenAlreadyRevisitedFlag is true");
 //            [self shouldReturnFailWithMessage:LOGIN_REQ_ERROR_MESSAGE];
 //            NSLog(@"Login Required Triggered within requestFailed instead of fail method: %@", NSStringFromSelector(failMethod));
-            [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_REQ_NOTIFICATION object:nil userInfo:nil];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_REQ_NOTIFICATION object:nil userInfo:nil];
+            });
         }
     } else if([request statusCode] == 403) {
         IGLog(@"BaseDao request failed with 403");
-        [self shouldReturnFailWithMessage:FORBIDDEN_ERROR_MESSAGE];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self shouldReturnFailWithMessage:FORBIDDEN_ERROR_MESSAGE];
+        });
     } else if([request statusCode] == 412) {
         IGLog(@"BaseDao request failed with 412");
-        [self shouldReturnFailWithMessage:INVALID_CONTENT_ERROR_MESSAGE];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self shouldReturnFailWithMessage:INVALID_CONTENT_ERROR_MESSAGE];
+        });
     } else {
         if([request statusCode] == NSURLErrorNotConnectedToInternet){
             NSString *errorMessageWithRequestUrl = [NSString stringWithFormat:@"BaseDao request failed - ASIConnectionFailureErrorType for %@", self.currentRequest.URL];
             IGLog(errorMessageWithRequestUrl);
-            [self shouldReturnFailWithMessage:NSLocalizedString(@"NoConnErrorMessage", @"")];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self shouldReturnFailWithMessage:NSLocalizedString(@"NoConnErrorMessage", @"")];
+            });
         } else if([request statusCode] == NSURLErrorTimedOut){
             NSString *errorMessageWithRequestUrl = [NSString stringWithFormat:@"BaseDao request failed - NSURLErrorTimedOut for %@", self.currentRequest.URL];
             IGLog(errorMessageWithRequestUrl);
-            [self shouldReturnFailWithMessage:NSLocalizedString(@"TimeoutMessage", @"")];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self shouldReturnFailWithMessage:NSLocalizedString(@"TimeoutMessage", @"")];
+            });
         } else {
             NSString *localizedErrStr = [NSHTTPURLResponse localizedStringForStatusCode:[request statusCode]];
             NSString *errorMessageWithRequestUrl = [NSString stringWithFormat:@"BaseDao request failed with code:%d and error: %@ - GENERAL_ERROR_MESSAGE for %@", (int)[request statusCode], localizedErrStr, self.currentRequest.URL];
             IGLog(errorMessageWithRequestUrl);
-            
-            [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+            });
         }
     }
 }
@@ -607,11 +620,8 @@
 - (BOOL) checkResponseHasError:(NSURLResponse *) response {
     if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
-        if ([httpResponse statusCode] == 200) {
+        if (([httpResponse statusCode] > 199 && [httpResponse statusCode] < 300) || [httpResponse statusCode] == 0) {
             return NO;
-        }
-        else {
-            [self requestFailed:response];
         }
     }
     return YES;

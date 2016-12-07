@@ -49,6 +49,9 @@
                     [self shouldReturnSuccessWithObject:statusVal];
                 });
             }
+            else {
+                [self requestFailed:response];
+            }
         }
     }]];
     self.currentTask = task;

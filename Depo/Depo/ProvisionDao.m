@@ -40,6 +40,9 @@
                     [self shouldReturnSuccess];
                 });
             }
+            else {
+                [self requestFailed:response];
+            }
         }
     }]];
     [task resume];

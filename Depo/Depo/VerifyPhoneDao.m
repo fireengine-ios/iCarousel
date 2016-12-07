@@ -49,6 +49,10 @@
                     [self shouldReturnSuccessWithObject:@"OK"];
                 });
             }
+            else {
+                [self requestFailed:response];
+            }
+
         }
     }]];
     self.currentTask = task;
@@ -93,6 +97,9 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self shouldReturnSuccessWithObject:@"OK"];
                 });
+            }
+            else {
+                [self requestFailed:response];
             }
         }
     }]];

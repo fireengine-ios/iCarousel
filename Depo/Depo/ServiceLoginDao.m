@@ -67,6 +67,9 @@
                     [self.delegate performSelector:successMethod withObject:result];
                 });
             }
+            else {
+                [self requestFailed:response];
+            }
         }
     }]];
     self.currentTask = task;

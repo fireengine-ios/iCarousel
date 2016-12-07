@@ -34,6 +34,9 @@
                     [self shouldReturnSuccessWithObject:faqUrl];
                 });
             }
+            else {
+                [self requestFailed:response];
+            }
         }
     }]];
     self.currentTask = task;

@@ -35,6 +35,9 @@
                 if (![self checkResponseHasError:response]) {
                     [self shouldReturnSuccess];
                 }
+                else {
+                    [self requestFailed:response];
+                }
             });
         }
     }]];

@@ -42,6 +42,9 @@
                     [self shouldReturnSuccessWithObject:responseEnc];
                 });
             }
+            else {
+                [self requestFailed:response];
+            }
         }
     }]];
     [task resume];

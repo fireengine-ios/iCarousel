@@ -34,6 +34,9 @@
                 if (![self checkResponseHasError:response]) {
                     [self requestFinished:data withResponse:response];
                 }
+                else {
+                    [self requestFailed:response];
+                }
             });
         }
     }]];
@@ -62,6 +65,9 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (![self checkResponseHasError:response]) {
                     [self requestFinished:data withResponse:response];
+                }
+                else {
+                    [self requestFailed:response];
                 }
             });
         }
@@ -96,6 +102,9 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (![self checkResponseHasError:response]) {
                     [self requestFinished:data withResponse:response];
+                }
+                else {
+                    [self requestFailed:response];
                 }
             });
         }

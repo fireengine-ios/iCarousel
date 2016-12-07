@@ -25,21 +25,24 @@
             });
         }
         else {
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            Subscription *currentSubscription = [self parseSubscription:dict];
-            if (currentSubscription != nil) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if (![self checkResponseHasError:response]) {
-                        [self shouldReturnSuccessWithObject:currentSubscription];
-                    }
-                });
+            if ([self checkResponseHasError:response]) {
+                [self requestFailed:response];
             }
-            
             else {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-                });
+                NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                Subscription *currentSubscription = [self parseSubscription:dict];
+                if (currentSubscription != nil) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnSuccessWithObject:currentSubscription];
+                    });
+                }
                 
+                else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                    });
+                    
+                }
             }
         }
     }]];
@@ -60,26 +63,31 @@
             });
         }
         else {
-            NSMutableArray *subscriptions = [[NSMutableArray alloc] init];
-            NSArray *responseArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-            if(responseArray != nil && [responseArray isKindOfClass:[NSArray class]]) {
-                for(NSDictionary *subscriptionDict in responseArray) {
-                    Subscription *subscription = [self parseSubscription:subscriptionDict];
-                    [subscriptions addObject:subscription];
+            if (![self checkResponseHasError:response]) {
+                NSMutableArray *subscriptions = [[NSMutableArray alloc] init];
+                NSArray *responseArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+                if(responseArray != nil && [responseArray isKindOfClass:[NSArray class]]) {
+                    for(NSDictionary *subscriptionDict in responseArray) {
+                        Subscription *subscription = [self parseSubscription:subscriptionDict];
+                        [subscriptions addObject:subscription];
+                    }
+                    NSArray *sortedArray = [subscriptions sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+                        NSNumber *firstQuota = [NSNumber numberWithFloat:[(Subscription*) a plan].quota];
+                        NSNumber *secondQuota = [NSNumber numberWithFloat:[(Subscription*) b plan].quota];
+                        return [firstQuota compare:secondQuota];
+                    }];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnSuccessWithObject:sortedArray];
+                    });
                 }
-                NSArray *sortedArray = [subscriptions sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
-                    NSNumber *firstQuota = [NSNumber numberWithFloat:[(Subscription*) a plan].quota];
-                    NSNumber *secondQuota = [NSNumber numberWithFloat:[(Subscription*) b plan].quota];
-                    return [firstQuota compare:secondQuota];
-                }];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self shouldReturnSuccessWithObject:sortedArray];
-                });
+                else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                    });
+                }
             }
             else {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-                });
+                [self requestFailed:response];
             }
         }
     }]];
@@ -99,21 +107,26 @@
             });
         }
         else {
-            NSMutableArray *result = [[NSMutableArray alloc] init];
-            NSArray *mainArr = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            if (mainArr !=nil && ![mainArr isKindOfClass:[NSNull class]]) {
-                for (NSDictionary *dict in mainArr) {
-                    Offer *offer = [self parseOffer:dict];
-                    if (offer != nil) {
-                        [result addObject:offer];
-                    }
-                }
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self shouldReturnSuccessWithObject:result];
-                });
+            if ([self checkResponseHasError:response]) {
+                [self requestFailed:response];
             }
             else {
-                [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                NSMutableArray *result = [[NSMutableArray alloc] init];
+                NSArray *mainArr = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                if (mainArr !=nil && ![mainArr isKindOfClass:[NSNull class]]) {
+                    for (NSDictionary *dict in mainArr) {
+                        Offer *offer = [self parseOffer:dict];
+                        if (offer != nil) {
+                            [result addObject:offer];
+                        }
+                    }
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnSuccessWithObject:result];
+                    });
+                }
+                else {
+                    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                }
             }
         }
     }]];
@@ -143,29 +156,33 @@
             });
         }
         else {
-            if ([responseStr isEqualToString:@""]) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self shouldReturnSuccess];
-                });
-                
-            } else {
-                NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-                if(responseDict != nil && ![responseDict isKindOfClass:[NSNull class]]) {
-                    NSNumber *errorCode = [responseDict objectForKey:@"errorCode"];
-                    if(errorCode != nil && ![errorCode isKindOfClass:[NSNull class]]) {
-                        if([errorCode intValue] == 1004) {
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                [self shouldReturnFailWithMessage:NSLocalizedString(@"PackageSubscriptionQuotaErrorMessage", @"")];
-                                return;
-                            });
+            if ([self checkResponseHasError:response]) {
+                [self requestFailed:response];
+            }
+            else {
+                if ([responseStr isEqualToString:@""]) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnSuccess];
+                    });
+                    
+                } else {
+                    NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                    if(responseDict != nil && ![responseDict isKindOfClass:[NSNull class]]) {
+                        NSNumber *errorCode = [responseDict objectForKey:@"errorCode"];
+                        if(errorCode != nil && ![errorCode isKindOfClass:[NSNull class]]) {
+                            if([errorCode intValue] == 1004) {
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    [self shouldReturnFailWithMessage:NSLocalizedString(@"PackageSubscriptionQuotaErrorMessage", @"")];
+                                    return;
+                                });
+                            }
                         }
                     }
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                    });
                 }
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-                });
             }
-            
         }
     }]];
     self.currentTask = task;
@@ -185,17 +202,22 @@
             
         }
         else {
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            NSNumber *result = [dict objectForKey:@"isJobExists"];
-            int resultInt = [self intByNumber:result];
-            if (resultInt == 0 || resultInt == 1) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self shouldReturnSuccessWithObject:result];
-                });
-            } else {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-                });
+            if ([self checkResponseHasError:response]) {
+                [self requestFailed:response];
+            }
+            else {
+                NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                NSNumber *result = [dict objectForKey:@"isJobExists"];
+                int resultInt = [self intByNumber:result];
+                if (resultInt == 0 || resultInt == 1) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnSuccessWithObject:result];
+                    });
+                } else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                    });
+                }
             }
         }
     }]];

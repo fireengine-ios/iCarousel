@@ -48,7 +48,13 @@
     }
     NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (!error) {
+            
             NSDictionary *headerParams = [(NSHTTPURLResponse *)response allHeaderFields];
+            NSHTTPURLResponse *res = (NSHTTPURLResponse *) response;
+            if (!([res statusCode] > 199 && [res statusCode] < 300)) {
+                [self requestFailed:response];
+                return ;
+            }
             NSString *authToken = [headerParams objectForKey:@"X-Auth-Token"];
             NSString *rememberMeToken = [headerParams objectForKey:@"X-Remember-Me-Token"];
             NSNumber *newUserFlag = [headerParams objectForKey:@"X-New-User"];

@@ -117,7 +117,10 @@
 
 - (void)requestFinished:(NSData *) data withResponse:(NSURLResponse *) response withRequest:(NSMutableURLRequest *) request {
     NSHTTPURLResponse *castedResponse = (NSHTTPURLResponse *) response;
-
+    if (!([castedResponse statusCode] > 199 && [castedResponse statusCode] < 300)) {
+        [self requestFailed:response withData:data];
+        return;
+    }
     NSDictionary *headerParams = [castedResponse allHeaderFields];
     
     NSString *authToken = [headerParams objectForKey:@"X-Auth-Token"];

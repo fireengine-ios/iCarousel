@@ -38,6 +38,9 @@
             if (![self checkResponseHasError:response]) {
                 [self requestFinished:data];
             }
+            else {
+                [self requestFailed:response];
+            }
         }
     }]];
     [task resume];
@@ -70,6 +73,9 @@
             if (![self checkResponseHasError:response]) {
                 [self requestFinished:data];
             }
+            else {
+                [self requestFailed:response];
+            }
         }
     }]];
     [task resume];
@@ -93,6 +99,9 @@
             if (![self checkResponseHasError:response]) {
                 [self requestFinished:data];
             }
+            else {
+                [self requestFailed:response];
+            }
         }
 
     }]];
@@ -115,7 +124,12 @@
             });
         }
         else {
-            [self requestFinished:data];
+            if (![self checkResponseHasError:response]) {
+                [self requestFinished:data];
+            }
+            else {
+                [self requestFailed:response];
+            }
         }
 
     }]];
@@ -138,7 +152,12 @@
             });
         }
         else {
-            [self requestFinished:data];
+            if (![self checkResponseHasError:response]) {
+                [self requestFinished:data];
+            }
+            else {
+                [self requestFailed:response];
+            }
         }
 
     }]];

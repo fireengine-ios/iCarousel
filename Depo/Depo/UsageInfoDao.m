@@ -95,6 +95,9 @@
                     });
                 }
             }
+            else {
+                [self requestFailed:response];
+            }
         }
     }]];
     [task resume];

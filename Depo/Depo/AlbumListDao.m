@@ -30,6 +30,9 @@
             if (![self checkResponseHasError:response]) {
                 [self requestFinished:data];
             }
+            else {
+                [self requestFailed:response];
+            }
         }
     }]];
     [task resume];
@@ -61,6 +64,9 @@
         else {
             if (![self checkResponseHasError:response]) {
                 [self requestFinished:data];
+            }
+            else {
+                [self requestFailed:response];
             }
         }
     }]];

@@ -31,6 +31,9 @@
                     [self shouldReturnSuccess];
                 });
             }
+            else {
+                [self requestFailed:response];
+            }
         }
     }]];
     self.currentTask = task;

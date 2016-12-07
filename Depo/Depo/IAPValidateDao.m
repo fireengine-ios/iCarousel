@@ -52,6 +52,9 @@
                     });
                 }
             }
+            else {
+                [self requestFailed:response];
+            }
         }
     }]];
     self.currentTask = task;
@@ -95,6 +98,9 @@
                         [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
                     });
                 }
+            }
+            else {
+                [self requestFailed:response];
             }
         }
     }]];

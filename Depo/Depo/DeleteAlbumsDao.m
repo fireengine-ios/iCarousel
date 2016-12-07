@@ -33,6 +33,9 @@
             if (![self checkResponseHasError:response]) {
                 [self requestFinished:data];
             }
+            else {
+                [self requestFailed:response];
+            }
         }
     }]];
     self.currentTask = task;
