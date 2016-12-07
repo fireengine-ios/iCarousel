@@ -19,8 +19,8 @@
 #import "DepoHttpManager.h"
 
 //TODO test -> prod
-#define BASE_URL @"https://adepo.turkcell.com.tr/api"
-//#define BASE_URL @"https://tcloudstb.turkcell.com.tr/api"
+//#define BASE_URL @"https://adepo.turkcell.com.tr/api"
+#define BASE_URL @"https://tcloudstb.turkcell.com.tr/api"
 
 #define TOKEN_URL BASE_URL@"/auth/token?rememberMe=%@"
 
