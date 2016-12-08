@@ -19,6 +19,8 @@
 #import "ReachabilityManager.h"
 #import "Reachability.h"
 
+static const NSUInteger BufferSize = 1024*1024;
+
 typedef void (^ALAssetsLibraryAssetForURLResultBlock)(ALAsset *asset);
 typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 
@@ -177,6 +179,31 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     BOOL shouldStartProcess = YES;
     
     if ([[self.asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
+        NSURL *tempUrl = [NSURL fileURLWithPath:tempPath];
+        [[NSFileManager defaultManager] createFileAtPath:tempPath contents:nil attributes:nil];
+        NSFileHandle *handle = [NSFileHandle fileHandleForWritingToURL:tempUrl error:nil];
+        if (!handle) {
+            shouldStartProcess = NO;
+        }
+        
+        ALAssetRepresentation *rep = [self.asset defaultRepresentation];
+        uint8_t *buffer = calloc(BufferSize, sizeof(*buffer));
+        NSUInteger offset = 0, bytesRead = 0;
+        
+        do {
+            @try {
+                bytesRead = [rep getBytes:buffer fromOffset:offset length:BufferSize error:nil];
+                [handle writeData:[NSData dataWithBytesNoCopy:buffer length:bytesRead freeWhenDone:NO]];
+                offset += bytesRead;
+            } @catch (NSException *exception) {
+                free(buffer);
+                shouldStartProcess = NO;
+            }
+        } while (bytesRead > 0);
+        
+        free(buffer);
+        
+        /*
         @autoreleasepool {
             ALAssetRepresentation *rep = [asset defaultRepresentation];
             
@@ -200,6 +227,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             shouldStartProcess = [videoData writeToFile:tempPath atomically:YES];
             dataMD5Hash = [SyncUtil md5String:videoData];
         }
+         */
         fileType = @"video";
     } else {
         UIImageOrientation orientation = UIImageOrientationUp;

@@ -18,6 +18,7 @@
 @implementation GroupPhotoSectionView
 
 - (void) loadSectionWithTitle:(NSString *) titleVal {
+    self.backgroundColor = [UIColor whiteColor];
     if(!titleLabel) {
         titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 10, (self.frame.size.width-40)/2, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:14] withColor:[Util UIColorForHexColor:@"555555"] withText:titleVal];
         titleLabel.adjustsFontSizeToFitWidth = YES;
