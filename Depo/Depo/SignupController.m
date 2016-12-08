@@ -363,15 +363,17 @@
     [msisdnField resignFirstResponder];
  
     if(!textField.secureTextEntry) {
-        NSRange range = [textField.text rangeOfString:@")" options:NSBackwardsSearch];
-        if (range.location != NSNotFound) {
-            NSString *callingCode = [textField.text substringToIndex:range.location + 1];
-            if([callingCode isEqualToString:@"+(90)"]) {
-                NSString *number = [textField.text substringFromIndex:range.location + range.length];
-                if ([number hasPrefix:@"0"] && [number length] > 1) {
-                    number = [number substringFromIndex:1];
-                    NSString *editedNumber = [callingCode stringByAppendingString:number];
-                    textField.text = editedNumber;
+        if([[Util readLocaleCode] isEqualToString:@"tr"] || [[Util readLocaleCode] isEqualToString:@"en"]) {
+            NSRange range = [textField.text rangeOfString:@")" options:NSBackwardsSearch];
+            if (range.location != NSNotFound) {
+                NSString *callingCode = [textField.text substringToIndex:range.location + 1];
+                if([callingCode isEqualToString:@"+(90)"]) {
+                    NSString *number = [textField.text substringFromIndex:range.location + range.length];
+                    if ([number hasPrefix:@"0"] && [number length] > 1) {
+                        number = [number substringFromIndex:1];
+                        NSString *editedNumber = [callingCode stringByAppendingString:number];
+                        textField.text = editedNumber;
+                    }
                 }
             }
         }
