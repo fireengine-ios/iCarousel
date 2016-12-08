@@ -17,12 +17,13 @@
     
 //    NSLog(@"Album Delete Payload: %@", jsonStr);
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
-    request = [self sendPostRequest:request];
+    request = [self sendDeleteRequest:request];
     
     
     [request setHTTPBody:[postData mutableCopy]];
     
    // request.tag = REQ_TAG_FOR_ALBUM;
+    NSLog(@"%@", request);
     NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (error) {
             dispatch_async(dispatch_get_main_queue(), ^{
