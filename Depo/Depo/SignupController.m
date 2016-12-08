@@ -24,6 +24,7 @@
 @interface SignupController () {
     SimpleButton *signupButton;
     Eula *eula;
+    UIScrollView* container;
 }
 @end
 
@@ -55,15 +56,19 @@
         float topIndex = IS_IPAD ? 100 : (IS_IPHONE_4_OR_LESS ? 10 : 20);
         float fieldWidth = 280;
         
+        container = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+//        container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + 20);
+        [self.view addSubview:container];
+        
         UIImage *logoImage = [UIImage imageNamed:@"icon_lifebox.png"];
         UIImageView *logoImgView = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - logoImage.size.width)/2, topIndex, logoImage.size.width, logoImage.size.height)];
         logoImgView.image = logoImage;
-        [self.view addSubview:logoImgView];
+        [container addSubview:logoImgView];
         
         topIndex += logoImage.size.height+50;
         
         CustomLabel *msisdnLabel = [[CustomLabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2, topIndex, fieldWidth, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"MsisdnTitle", @"")];
-        [self.view addSubview:msisdnLabel];
+        [container addSubview:msisdnLabel];
         
         topIndex += 5;
         
@@ -71,50 +76,52 @@
         msisdnField.delegate = self;
         [msisdnField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
 //        msisdnField.placeholder = @"5xxxxxxxxx";
-        [self.view addSubview:msisdnField];
+//        msisdnField.keyboardType = UIKeyboardTypePhonePad;
+        [container addSubview:msisdnField];
 
         topIndex += 55;
 
         CustomLabel *emailLabel = [[CustomLabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2, topIndex, fieldWidth, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"FormEmailTitle", @"")];
-        [self.view addSubview:emailLabel];
+        [container addSubview:emailLabel];
 
         topIndex += 5;
 
         emailField = [[LoginTextfield alloc] initWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2, topIndex, fieldWidth, 43) withPlaceholder:/*NSLocalizedString(@"EmailPlaceholder", @"")*/@""];
         emailField.delegate = self;
-        [self.view addSubview:emailField];
+        emailField.keyboardType = UIKeyboardTypeEmailAddress;
+        [container addSubview:emailField];
 
         topIndex += 55;
 
         CustomLabel *passLabel = [[CustomLabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2, topIndex, fieldWidth, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"PasswordTitle", @"")];
-        [self.view addSubview:passLabel];
+        [container addSubview:passLabel];
         
         topIndex += 5;
 
         passwordField = [[LoginTextfield alloc] initSecureWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2, topIndex, fieldWidth, 43) withPlaceholder:/*NSLocalizedString(@"PasswordPlaceholder", @"")*/@""];
         passwordField.delegate = self;
-        [self.view addSubview:passwordField];
+        [container addSubview:passwordField];
 
         topIndex += 55;
 
         CustomLabel *passRepeatLabel = [[CustomLabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2, topIndex, fieldWidth, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"PasswordRepeatTitle", @"")];
-        [self.view addSubview:passRepeatLabel];
+        [container addSubview:passRepeatLabel];
 
         topIndex += 5;
 
         passwordRepeatField = [[LoginTextfield alloc] initSecureWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2, topIndex, fieldWidth, 43) withPlaceholder:/*NSLocalizedString(@"PasswordRepeatPlaceholder", @"")*/@""];
         passwordRepeatField.delegate = self;
-        [self.view addSubview:passwordRepeatField];
+        [container addSubview:passwordRepeatField];
 
         topIndex += IS_IPHONE_4_OR_LESS ? 50 : 65;
 
         eulaCheck = [[CheckButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2 + 5, topIndex, 25, 25) isInitiallyChecked:NO];
         eulaCheck.checkDelegate = self;
-        [self.view addSubview:eulaCheck];
+        [container addSubview:eulaCheck];
 
         SimpleButton *eulaButton = [[SimpleButton alloc] initWithFrame:CGRectMake(eulaCheck.frame.origin.x + eulaCheck.frame.size.width + 10, topIndex, fieldWidth - 40, 25) withTitle:NSLocalizedString(@"TermsButtonTitle", @"") withAlignment:NSTextAlignmentLeft isUnderlined:YES];
         [eulaButton addTarget:self action:@selector(eulaClicked) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:eulaButton];
+        [container addSubview:eulaButton];
 
         CGRect signupButtonRect = CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60);
         if(IS_IPAD) {
@@ -125,17 +132,17 @@
         
         signupButton = [[SimpleButton alloc] initWithFrame:signupButtonRect withTitle:NSLocalizedString(@"SignUpButton", @"") withTitleColor:[Util UIColorForHexColor:@"ffffff"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"3FB0E8"] withBgColor:[Util UIColorForHexColor:@"3FB0E8"] withCornerRadius:0];
         [signupButton addTarget:self action:@selector(signupClicked) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:signupButton];
+        [container addSubview:signupButton];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow) name:UIKeyboardWillShowNotification object:nil];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide) name:UIKeyboardWillHideNotification object:nil];
 
-        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(triggerResign)];
-        tapGestureRecognizer.numberOfTapsRequired = 1;
-        tapGestureRecognizer.enabled = YES;
-        tapGestureRecognizer.delegate = self;
-        [self.view addGestureRecognizer:tapGestureRecognizer];
+//        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(triggerResign)];
+//        tapGestureRecognizer.numberOfTapsRequired = 1;
+//        tapGestureRecognizer.enabled = YES;
+//        tapGestureRecognizer.delegate = self;
+//        [self.view addGestureRecognizer:tapGestureRecognizer];
         
         [eulaDao requestEulaForLocale:[Util readLocaleCode]];
         [self showLoading];
@@ -313,33 +320,42 @@
 
 -(void)keyboardWillShow {
     if(passwordField.isFirstResponder || passwordRepeatField.isFirstResponder) {
-        if (self.view.frame.origin.y >= 0) {
+//        if (self.view.frame.origin.y >= 0) {
             [self setViewMovedUp:YES];
-        }
+//        }
     }
 }
 
 -(void)keyboardWillHide {
-    if (self.view.frame.origin.y < 0) {
+//    if (self.view.frame.origin.y < 0) {
         [self setViewMovedUp:NO];
-    }
+//    }
 }
 
 -(void)setViewMovedUp:(BOOL)movedUp {
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.2];
-    
-    CGRect rect = self.view.frame;
     if (movedUp) {
-        rect.origin.y -= kOFFSET_FOR_KEYBOARD;
-        rect.size.height += kOFFSET_FOR_KEYBOARD;
-    } else {
-        rect.origin.y += kOFFSET_FOR_KEYBOARD;
-        rect.size.height -= kOFFSET_FOR_KEYBOARD;
+        container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + 210);
+        [container setContentOffset:CGPointMake(0,  210) animated:YES];
     }
-    self.view.frame = rect;
-    
-    [UIView commitAnimations];
+    else {
+        container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
+        [container setContentOffset:CGPointZero animated:YES];
+    }
+
+//    [UIView beginAnimations:nil context:NULL];
+//    [UIView setAnimationDuration:0.2];
+//    
+//    CGRect rect = self.view.frame;
+//    if (movedUp) {
+//        rect.origin.y -= kOFFSET_FOR_KEYBOARD;
+//        rect.size.height += kOFFSET_FOR_KEYBOARD;
+//    } else {
+//        rect.origin.y += kOFFSET_FOR_KEYBOARD;
+//        rect.size.height -= kOFFSET_FOR_KEYBOARD;
+//    }
+//    self.view.frame = rect;
+//    
+//    [UIView commitAnimations];
 }
 
 - (void) textFieldDidChange:(UITextField *) textField {
