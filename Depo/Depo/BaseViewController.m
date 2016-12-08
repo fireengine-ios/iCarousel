@@ -1067,8 +1067,9 @@ loadingMessage:(NSString *)loadingMessage
                                                           loadingMessage:loadingMessage
                                                  successMessage:successMessage
                                                     failMessage:failMessage];
-    [manager downloadListOfFilesToCameraRoll:files];
     [downloadManagers addObject:manager];
+    [manager downloadListOfFilesToCameraRoll:files];
+//    [downloadManagers addObject:manager];
 }
 
 #pragma mark - Download Manager Delegate

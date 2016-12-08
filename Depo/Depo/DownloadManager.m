@@ -37,6 +37,7 @@
     NSArray *syncFiles = [SyncUtil loadCameraRollFiles];
     if (syncFiles && syncFiles.count > 0) {
         syncedFilesOnAlbum = [[NSMutableArray alloc] initWithArray:syncFiles];
+        downloadingAlbumName = @"";
         [self updateSyncedFilesOfAlbum];
     }else {
         syncedFilesOnAlbum = [[NSMutableArray alloc] init];
@@ -108,16 +109,16 @@
 }
 
 
--(void)fetchOtherFilesOfAlbum {
-    if (fileList.count < 20) { // album has less than 20 items
-        [self.delegate downloadManagerDidFinishDownloading:self error:nil];
-        return;
-    }else if ((fileList.count % 20) > 0) { // album has 47 items
-        [self.delegate downloadManagerDidFinishDownloading:self error:nil];
-        return;
-    }
-    [self fetchFilesForAlbum];
-}
+//-(void)fetchOtherFilesOfAlbum {
+//    if (fileList.count < 20) { // album has less than 20 items
+//        [self.delegate downloadManagerDidFinishDownloading:self error:nil];
+//        return;
+//    }else if ((fileList.count % 20) > 0) { // album has 47 items
+//        [self.delegate downloadManagerDidFinishDownloading:self error:nil];
+//        return;
+//    }
+//    [self fetchFilesForAlbum];
+//}
 
 - (void) albumDetailSuccessCallback:(PhotoAlbum *) albumWithUpdatedContent {
     if (albumWithUpdatedContent.content.count == 0) {
