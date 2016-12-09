@@ -34,13 +34,13 @@
 
 -(void)downloadListOfFilesToCameraRoll:(NSArray *)metaFiles {
     fileList = [[NSMutableArray alloc] initWithArray:metaFiles];
-    NSArray *syncFiles = [SyncUtil loadCameraRollFiles];
+    NSArray *syncFiles = [SyncUtil getExistingFilesOfCameraRoll];
     if (syncFiles && syncFiles.count > 0) {
-        syncedFilesOnAlbum = [[NSMutableArray alloc] initWithArray:syncFiles];
+        existingFilesOnAlbum = [[NSMutableArray alloc] initWithArray:syncFiles];
         downloadingAlbumName = @"";
         [self updateSyncedFilesOfAlbum];
     }else {
-        syncedFilesOnAlbum = [[NSMutableArray alloc] init];
+        existingFilesOnAlbum = [[NSMutableArray alloc] init];
     }
 
     [self downloadFilesToCameraRoll];
@@ -49,49 +49,23 @@
 
 #pragma mark - Album files Fetch
 
--(void)createAlbumName:(NSString *)albumName albumUUID:(NSString *)albumUuid {
-    fileList = [[NSMutableArray alloc] init];
-    downloadingAlbumName = albumName;
-    self.albumUUID = albumUuid;
-    [self initAlbumDetailDao];
-    
-    NSArray *syncFiles = [SyncUtil loadDownloadedFilesForAlbum:albumName];
-    if (syncFiles && syncFiles.count > 0) {
-        syncedFilesOnAlbum = [[NSMutableArray alloc] initWithArray:syncFiles];
-        [self updateSyncedFilesOfAlbum];
-    }else {
-        syncedFilesOnAlbum = [[NSMutableArray alloc] init];
-        [self createAlbumInPhotoAlbum:albumName];
-    }
-}
-
--(void)createAlbumName:(NSString *)albumName albumUUID:(NSString *)albumUuid downloadFilesToAlbum:(NSArray *)metaFiles {
+-(void)createAlbum:(NSString *)UUID withName:(NSString *)name withFiles:(NSArray *)metaFiles {
     if (metaFiles && metaFiles.count > 0) {
         fileList = [[NSMutableArray alloc] initWithArray:metaFiles];
     }else {
         fileList = [[NSMutableArray alloc] init];
     }
-    downloadingAlbumName = albumName;
-    self.albumUUID = albumUuid;
+    downloadingAlbumName = name;
+    self.albumUUID = UUID;
     [self initAlbumDetailDao];
     
-    NSArray *syncFiles = [SyncUtil loadDownloadedFilesForAlbum:albumName];
-    if (syncFiles && syncFiles.count > 0) {
-        syncedFilesOnAlbum = [[NSMutableArray alloc] initWithArray:syncFiles];
+    NSArray *filesExisting = [SyncUtil getExistingFilesOfAlbum:name];
+    if (filesExisting && filesExisting.count > 0) {
+        existingFilesOnAlbum = [[NSMutableArray alloc] initWithArray:filesExisting];
         [self updateSyncedFilesOfAlbum];
     }else {
-        syncedFilesOnAlbum = [[NSMutableArray alloc] init];
-        [self createAlbumInPhotoAlbum:albumName];
-    }
-}
-
--(void)loadSynchedFilesForAlbum:(NSString *)albumName {
-    NSArray *syncFiles = [SyncUtil loadDownloadedFilesForAlbum:albumName];
-    if (syncFiles && syncFiles.count > 0) {
-        syncedFilesOnAlbum = [[NSMutableArray alloc] initWithArray:syncFiles];
-         [self updateSyncedFilesOfAlbum];
-    }else {
-        syncedFilesOnAlbum = [[NSMutableArray alloc] init];
+        existingFilesOnAlbum = [[NSMutableArray alloc] init];
+        [self createAlbumOnSystemLibrary:name];
     }
 }
 
@@ -298,13 +272,15 @@
         }
     }
     else if(currentDownloadIndex == fileList.count) {
-        currentDownloadIndex++;
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-            [self downloadAlbumPhotosToDevice];
-        });
-        
-//        NSLog(@"[self fetchOtherFilesOfAlbum]");
-//        [self fetchOtherFilesOfAlbum];
+        NSLog(@"[self fetchOtherFilesOfAlbum]");
+        if (fileList.count < 20 || (fileList.count % 20) > 0) { // album has less than 20 items or album has 47 items
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                [self.delegate downloadManagerDidFinishDownloading:self error:nil];
+            });
+        }
+        else {
+            [self fetchFilesForAlbum];
+        }
     }
     else {
         [self.delegate downloadManagerDidFinishDownloading:self error:nil];
@@ -426,7 +402,7 @@
 #pragma mark - Downloaded File Sync
 
 -(BOOL)isFileAlreadySyncedToAlbum:(NSString *)fileUUID {
-    for (DownloadedFile *file in syncedFilesOnAlbum) {
+    for (DownloadedFile *file in existingFilesOnAlbum) {
         if ([file.fileUUID isEqualToString:fileUUID]) {
             return YES;
         }
@@ -438,8 +414,8 @@
     DownloadedFile *downloadedFile = [[DownloadedFile alloc] initWithFileUUID:file.uuid
                                                               localIdentifier:localizedIdentifier
                                                                   inAlbumName:downloadingAlbumName];
-    [syncedFilesOnAlbum addObject:downloadedFile];
-    [SyncUtil updateLoadedFiles:syncedFilesOnAlbum inAlbum:downloadingAlbumName];
+    [existingFilesOnAlbum addObject:downloadedFile];
+    [SyncUtil updateLoadedFiles:existingFilesOnAlbum inAlbum:downloadingAlbumName];
     [self insertFileToAutosyncCache:file localizedIdentifier:localizedIdentifier];
 }
 
@@ -447,8 +423,8 @@
     DownloadedFile *downloadedFile = [[DownloadedFile alloc] initWithFileUUID:file.uuid
                                                               localIdentifier:localizedIdentifier
                                                                   inAlbumName:@"-1CameraRoll"];
-    [syncedFilesOnAlbum addObject:downloadedFile];
-    [SyncUtil updateLoadedFilesInCameraRoll:syncedFilesOnAlbum];
+    [existingFilesOnAlbum addObject:downloadedFile];
+    [SyncUtil updateLoadedFilesInCameraRoll:existingFilesOnAlbum];
     [self insertFileToAutosyncCache:file localizedIdentifier:localizedIdentifier];
 }
 
@@ -488,9 +464,9 @@
     fetchOptions.predicate = [NSPredicate predicateWithFormat:@"title=%@", downloadingAlbumName];
     PHFetchResult *userAlbums = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeAny options:fetchOptions];
     if (userAlbums.count == 0) {
-        [syncedFilesOnAlbum removeAllObjects];
+        [existingFilesOnAlbum removeAllObjects];
         [SyncUtil removeAlbumFromSync:downloadingAlbumName];
-        [self createAlbumInPhotoAlbum:downloadingAlbumName];
+        [self createAlbumOnSystemLibrary:downloadingAlbumName];
     }else {
         [userAlbums enumerateObjectsUsingBlock:^(PHAssetCollection *collection, NSUInteger idx, BOOL *stop) {
             PHFetchResult<PHAsset *> *assets = [PHAsset fetchAssetsInAssetCollection:collection options:nil];
@@ -502,16 +478,16 @@
                    // [syncedFilesOnAlbum removeObject:file];
                 }
             }];
-            syncedFilesOnAlbum = files;
-            [SyncUtil updateLoadedFiles:syncedFilesOnAlbum inAlbum:downloadingAlbumName];
-            [self createAlbumInPhotoAlbum:downloadingAlbumName];
+            existingFilesOnAlbum = files;
+            [SyncUtil updateLoadedFiles:existingFilesOnAlbum inAlbum:downloadingAlbumName];
+            [self createAlbumOnSystemLibrary:downloadingAlbumName];
         }];
     }
     
 }
 
 -(DownloadedFile *)getAssetLocalIdentifierFileInSyncedList:(NSString *)localIdentifier {
-    for (DownloadedFile *file in syncedFilesOnAlbum) {
+    for (DownloadedFile *file in existingFilesOnAlbum) {
         if ([file.fileLocalIdentifier isEqualToString:localIdentifier]) {
             return file;
         }
@@ -539,14 +515,14 @@
 
 #pragma mark - Create Album
 
--(void)createAlbumInPhotoAlbum:(NSString *)albumName {
+-(void)createAlbumOnSystemLibrary:(NSString *)albumName {
     currentDownloadIndex = 0;
     
     PHFetchOptions *options = [[PHFetchOptions alloc] init];
     options.predicate = [NSPredicate predicateWithFormat:@"title = %@", albumName];
     PHFetchResult *collection = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum
                                                                          subtype:PHAssetCollectionSubtypeAny options:options];
-    if (collection.firstObject) { // Album already exist.
+    if (collection.firstObject) { // Album already exists.
         albumAssetCollection = (PHAssetCollection *)collection.firstObject;
         [self.delegate downloadManager:self albumAlreadyExistNamed:albumName assetCollection:albumAssetCollection];
         if (fileList.count == 0) {

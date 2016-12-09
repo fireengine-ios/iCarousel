@@ -421,8 +421,8 @@
 
 #pragma mark - Album Download Files
 
-+(NSArray *)loadDownloadedFilesForAlbum:(NSString *)albumName {
-    NSArray *fileDatas = [[NSUserDefaults standardUserDefaults] objectForKey:albumName];
++(NSArray *)getExistingFilesOfAlbum:(NSString *)name {
+    NSArray *fileDatas = [[NSUserDefaults standardUserDefaults] objectForKey:name];
     if (fileDatas && fileDatas.count > 0) {
         NSMutableArray *array = [NSMutableArray arrayWithCapacity:fileDatas.count];
         for (NSData *data in fileDatas) {
@@ -433,6 +433,7 @@
     }
     return [NSArray array];
 }
+
 +(void)createAlbumToSync:(NSString *)albumName {
     [[NSUserDefaults standardUserDefaults] setObject:[NSArray array] forKey:albumName];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -457,7 +458,7 @@
 
 #pragma mark - Download Files to CameraRoll
 
-+(NSArray *)loadCameraRollFiles { // -1 for cameraRollFiles
++(NSArray *)getExistingFilesOfCameraRoll { // -1 for cameraRollFiles
     NSString *cameraRollKey = @"-1CameraRoll";
     NSArray *filesData = [[NSUserDefaults standardUserDefaults] objectForKey:cameraRollKey];
     if (filesData && filesData.count > 0) {

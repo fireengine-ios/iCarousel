@@ -85,8 +85,8 @@
 + (NSString *) readBaseUrlConstantForLocPopup;
 
 
-+(NSArray *)loadDownloadedFilesForAlbum:(NSString *)albumName;
-+(NSArray *)loadCameraRollFiles;
++(NSArray *)getExistingFilesOfAlbum:(NSString *)albumName;
++(NSArray *)getExistingFilesOfCameraRoll;
 +(void)createAlbumToSync:(NSString *)albumName;
 +(void)removeAlbumFromSync:(NSString *)albumName;
 

@@ -1019,40 +1019,30 @@
 
 #pragma mark - Downloading to Photos 
 
--(void)createAlbum:(NSString *)albumName
-         albumUUID:(NSString *)albumUUID
-downloadFilesToAlbum:(NSArray *)files
-loadingMessage:(NSString *)loadingMessage
-    successMessage:(NSString *)successMessage
-       failMessage:(NSString *)failMessage {
-    [self showLoadingProcessView:loadingMessage successMessage:successMessage failMessage:failMessage];
+-(void)createAlbum:(NSString *)UUID withName:(NSString *)name withFiles:(NSArray *)files loadingMessage:(NSString *)message
+    successMessage:(NSString *)successMessage failMessage:(NSString *)failMessage {
+    [self showLoadingProcessView:message successMessage:successMessage failMessage:failMessage];
     DownloadManager *manager = [[DownloadManager alloc] initWithDelegate:self
                                                    downloadType:DownloadTypeAlbum
-                                                 loadingMessage:loadingMessage
+                                                 loadingMessage:message
                                                  successMessage:successMessage
                                                     failMessage:failMessage];
     [downloadManagers addObject:manager];
-    [manager createAlbumName:albumName albumUUID:albumUUID downloadFilesToAlbum:files];
-    //[downloadManagers addObject:manager];
+    [manager createAlbum:UUID withName:name  withFiles:files];
 }
 
-
--(void)createAlbumNames:(NSArray *)albumNames
-         albumUUIDs:(NSArray *)albumUUIDs
-         loadingMessage:(NSString *)loadingMessage
-     successMessage:(NSString *)successMessage
-        failMessage:(NSString *)failMessage {
-    [self showLoadingProcessView:loadingMessage successMessage:successMessage failMessage:failMessage];
+-(void)createAlbums:(NSArray *)UUIDs withNames:(NSArray *)names loadingMessage:(NSString *)message
+     successMessage:(NSString *)successMessage failMessage:(NSString *)failMessage {
+    [self showLoadingProcessView:message successMessage:successMessage failMessage:failMessage];
     
-    for(int i = 0; i < albumNames.count; i++) {
+    for(int i = 0; i < names.count; i++) {
         DownloadManager *manager = [[DownloadManager alloc] initWithDelegate:self
                                                                 downloadType:DownloadTypeAlbum
-                                                              loadingMessage:loadingMessage
+                                                              loadingMessage:message
                                                               successMessage:successMessage
                                                                  failMessage:failMessage];
         [downloadManagers addObject:manager];
-        [manager createAlbumName:[albumNames objectAtIndex:i] albumUUID:[albumUUIDs objectAtIndex:i]];
-//        [downloadManagers addObject:manager];
+        [manager createAlbum:[UUIDs objectAtIndex:i] withName:[names objectAtIndex:i] withFiles:nil];
     }
 }
 

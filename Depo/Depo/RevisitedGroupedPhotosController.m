@@ -175,8 +175,7 @@
 }
 
 - (void) revisitedAlbumListDownloadAlbums:(NSArray *)albumUUIDs albumNames:(NSArray *)albumNames {
-    [APPDELEGATE.base createAlbumNames:albumNames
-                            albumUUIDs:albumUUIDs
+    [APPDELEGATE.base createAlbums:albumUUIDs withNames:albumNames
                         loadingMessage:NSLocalizedString(@"DownloadAlbumsProgressMessage", @"")
                         successMessage:NSLocalizedString(@"DownloadAlbumsSuccessMessage", @"")
                            failMessage:NSLocalizedString(@"DownloadAlbumFailMessage", @"")];

@@ -36,7 +36,7 @@ enum DownloadType {
     int albumDownloadListIndex;
     NSString *downloadingAlbumName;
     AlbumDetailDao *albumDetailDao;
-    NSMutableArray *syncedFilesOnAlbum;
+    NSMutableArray *existingFilesOnAlbum;
 }
 
 @property (nonatomic, assign) id<DownloadManagerDelegate> delegate;
@@ -53,7 +53,5 @@ enum DownloadType {
                          failMessage:(NSString *)failMessage;
 
 -(void)downloadListOfFilesToCameraRoll:(NSArray *)metaFiles;
--(void)createAlbumName:(NSString *)albumName albumUUID:(NSString *)albumUuid downloadFilesToAlbum:(NSArray *)metaFiles;
--(void)createAlbumName:(NSString *)albumName albumUUID:(NSString *)albumUuid;
-
+-(void)createAlbum:(NSString *)UUID withName:(NSString *)name withFiles:(NSArray *)metaFiles;
 @end
