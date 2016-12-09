@@ -95,7 +95,7 @@
     NSString *errorInfoLog = [NSString stringWithFormat:@"BaseDao request failed with code: %d and response", (int)[request statusCode]];
     IGLog(errorInfoLog);
     NSLog(@"%@",errorInfoLog);
-    if (([request statusCode] > 199 && [request statusCode] < 300) || [request statusCode] == 0) {
+    if ([request statusCode] > 199 && [request statusCode] < 300) {
         return;
     }
     if([request statusCode] == 401) {
