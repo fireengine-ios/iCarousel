@@ -34,7 +34,6 @@ enum DownloadType {
     NSMutableArray *fileList;
     
     int albumDownloadListIndex;
-    NSString *downloadingAlbumName;
     AlbumDetailDao *albumDetailDao;
     NSMutableArray *existingFilesOnAlbum;
 }
