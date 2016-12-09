@@ -11,7 +11,7 @@
 #import <Photos/Photos.h>
 #import "MetaFile.h"
 #import "AlbumDetailDao.h"
-
+#import "PhotoAlbum.h"
 
 enum DownloadType {
     DownloadTypeAlbum = 1,
@@ -34,7 +34,6 @@ enum DownloadType {
     NSMutableArray *fileList;
     
     int albumDownloadListIndex;
-    NSString *downloadingAlbumName;
     AlbumDetailDao *albumDetailDao;
     NSMutableArray *existingFilesOnAlbum;
 }
@@ -44,7 +43,7 @@ enum DownloadType {
 @property (nonatomic, strong) NSString *successMessage;
 @property (nonatomic, strong) NSString *failMessage;
 @property (nonatomic, strong) NSString *loadingMessage;
-@property (nonatomic, strong) NSString *albumUUID;
+//@property (nonatomic, strong) NSString *albumUUID;
 
 -(DownloadManager *)initWithDelegate:(id<DownloadManagerDelegate>)delegateOwner
                         downloadType:(enum DownloadType)type
@@ -53,5 +52,5 @@ enum DownloadType {
                          failMessage:(NSString *)failMessage;
 
 -(void)downloadListOfFilesToCameraRoll:(NSArray *)metaFiles;
--(void)createAlbum:(NSString *)UUID withName:(NSString *)name withFiles:(NSArray *)metaFiles;
+-(void)createAlbum:(PhotoAlbum *)album withFiles:(NSArray *)metaFiles;
 @end

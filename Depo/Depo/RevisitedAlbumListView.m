@@ -284,10 +284,22 @@
 }
 
 -(void)confirmDeleteDidConfirm {
-    [deleteAlbumDao requestDeleteAlbums:self.selectedAlbumList];
-    
-    [self bringSubviewToFront:progress];
-    [progress show:YES];
+    NSArray* selectedAlbums = [self getSelectedAlbums];
+    BOOL hasReadOnlyAlbums = NO;
+    for (PhotoAlbum* album in selectedAlbums) {
+        if (album.isReadOnly) {
+            hasReadOnlyAlbums = YES;
+            break;
+        }
+    }
+    if (!hasReadOnlyAlbums) {
+        [deleteAlbumDao requestDeleteAlbums:self.selectedAlbumList];
+        [self bringSubviewToFront:progress];
+        [progress show:YES];
+    }
+    else {
+        [delegate revisitedAlbumListDidFailDeletingWithError:NSLocalizedString(@"CanNotDeleteReadonlyAlbums", nil)];
+    }
 }
 
 -(void)confirmDeleteDidCancel{
@@ -312,21 +324,36 @@
 }
 
 -(void)footerActionMenuDidSelectDownload:(FooterActionsMenuView *)menu {
-    [delegate revisitedAlbumListDownloadAlbums:selectedAlbumList albumNames:[self getSelectedAlbumNames]];
+    [delegate revisitedAlbumListDownloadAlbums:[self getSelectedAlbums]];
+//    [delegate revisitedAlbumListDownloadAlbums:selectedAlbumList albumNames:[self getSelectedAlbumNames]];
 }
 
--(NSArray *)getSelectedAlbumNames {
-    NSMutableArray *names = [NSMutableArray array];
+//-(NSArray *)getSelectedAlbumNames {
+//    NSMutableArray *names = [NSMutableArray array];
+//    for (PhotoAlbum *album in self.albums) {
+//        for (NSString *uuid in selectedAlbumList) {
+//            if ([album.uuid isEqualToString:uuid]) {
+//                [names addObject:album.label];
+//            }
+//        }
+//        
+//    }
+//    
+//    return names;
+//}
+
+-(NSArray *)getSelectedAlbums {
+    NSMutableArray *selectedAlbums = [NSMutableArray array];
     for (PhotoAlbum *album in self.albums) {
         for (NSString *uuid in selectedAlbumList) {
             if ([album.uuid isEqualToString:uuid]) {
-                [names addObject:album.label];
+                [selectedAlbums addObject:album];
             }
         }
         
     }
     
-    return names;
+    return selectedAlbums;
 }
 
 

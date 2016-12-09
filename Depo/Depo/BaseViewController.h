@@ -81,9 +81,9 @@
 
 #pragma mark - Downloading to Photos
 
--(void)createAlbum:(NSString *)UUID withName:(NSString *)name withFiles:(NSArray *)files loadingMessage:(NSString *)message
+-(void)createAlbum:(PhotoAlbum*)album withFiles:(NSArray *)files loadingMessage:(NSString *)message
     successMessage:(NSString *)successMessage failMessage:(NSString *)failMessage;
--(void)createAlbums:(NSArray *)UUIDs withNames:(NSArray *)names loadingMessage:(NSString *)message
+-(void)createAlbums:(NSArray *)albums loadingMessage:(NSString *)message
      successMessage:(NSString *)successMessage failMessage:(NSString *)failMessage;
 
 -(void)downloadFilesToCameraRoll:(NSArray *)files

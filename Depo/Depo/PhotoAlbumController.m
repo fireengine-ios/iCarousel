@@ -403,7 +403,7 @@
 }
 
 -(void)moreMenuDidSelectDownloadAlbum {
-    [APPDELEGATE.base createAlbum:self.album.uuid withName:self.album.label withFiles:photoList  loadingMessage:NSLocalizedString(@"DownloadAlbumProgressMessage", @"")
+    [APPDELEGATE.base createAlbum:self.album withFiles:photoList  loadingMessage:NSLocalizedString(@"DownloadAlbumProgressMessage", @"")
                    successMessage:NSLocalizedString(@"DownloadAlbumSuccessMessage", @"")
                       failMessage:NSLocalizedString(@"DownloadAlbumFailMessage", @"")];
     [self cancelSelectible];

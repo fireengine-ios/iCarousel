@@ -815,3 +815,4 @@
 "FileDetailUploadDate"="Yükleme Tarihi";
 "FileDetailCreateDate"="Çekim Tarihi";
 "CameraAccessError"="Kameraya erişilemiyor. Lütfen telefon ayarlarınızı kontrol ediniz.";
+"CanNotDeleteReadonlyAlbums" = "Videolar albümünüz otomatik olarak oluşturulmaktadır, bu yüzden silinemez.";
