@@ -284,10 +284,22 @@
 }
 
 -(void)confirmDeleteDidConfirm {
-    [deleteAlbumDao requestDeleteAlbums:self.selectedAlbumList];
-    
-    [self bringSubviewToFront:progress];
-    [progress show:YES];
+    NSArray* selectedAlbums = [self getSelectedAlbums];
+    BOOL hasReadOnlyAlbums = NO;
+    for (PhotoAlbum* album in selectedAlbums) {
+        if (album.isReadOnly) {
+            hasReadOnlyAlbums = YES;
+            break;
+        }
+    }
+    if (!hasReadOnlyAlbums) {
+        [deleteAlbumDao requestDeleteAlbums:self.selectedAlbumList];
+        [self bringSubviewToFront:progress];
+        [progress show:YES];
+    }
+    else {
+        [delegate revisitedAlbumListDidFailDeletingWithError:NSLocalizedString(@"CanNotDeleteReadonlyAlbums", nil)];
+    }
 }
 
 -(void)confirmDeleteDidCancel{
