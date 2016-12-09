@@ -138,11 +138,11 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide) name:UIKeyboardWillHideNotification object:nil];
 
-//        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(triggerResign)];
-//        tapGestureRecognizer.numberOfTapsRequired = 1;
-//        tapGestureRecognizer.enabled = YES;
-//        tapGestureRecognizer.delegate = self;
-//        [self.view addGestureRecognizer:tapGestureRecognizer];
+        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(triggerResign)];
+        tapGestureRecognizer.numberOfTapsRequired = 1;
+        tapGestureRecognizer.enabled = YES;
+        tapGestureRecognizer.delegate = self;
+        [self.view addGestureRecognizer:tapGestureRecognizer];
         
         [eulaDao requestEulaForLocale:[Util readLocaleCode]];
         [self showLoading];
