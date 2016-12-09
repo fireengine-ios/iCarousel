@@ -40,28 +40,28 @@
             });
         }
         else {
-            if (![self checkResponseHasError:response]) {
-                NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                if(dict != nil && [dict isKindOfClass:[NSDictionary class]]) {
-                    NSString *status = [dict objectForKey:@"status"];
-                    if(status != nil && [status isEqualToString:@"OK"]) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [self shouldReturnSuccess];
-                        });
-                    } else {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+            if(dict != nil && [dict isKindOfClass:[NSDictionary class]]) {
+                NSString *status = [dict objectForKey:@"status"];
+                if(status != nil && [status isEqualToString:@"OK"]) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnSuccess];
+                    });
+                } else {
+                    if ([self checkResponseHasError:response]) {
+                        [self requestFailed:response];
+                    }
+                    else {
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
                         });
                     }
                 }
-                else {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-                    });
-                }
             }
             else {
-                [self requestFailed:response];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                });
             }
         }
     }]];

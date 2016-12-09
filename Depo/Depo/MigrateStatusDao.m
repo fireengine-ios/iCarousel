@@ -22,32 +22,32 @@
             });
         }
         else {
-            if (![self checkResponseHasError:response]) {
-                NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+            NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+            
+            MigrationStatus *result = [[MigrationStatus alloc] init];
+            if(mainDict != nil && ![mainDict isKindOfClass:[NSNull class]]) {
+                NSNumber *progress = [mainDict objectForKey:@"progress"];
+                NSString *status = [mainDict objectForKey:@"status"];
                 
-                MigrationStatus *result = [[MigrationStatus alloc] init];
-                if(mainDict != nil && ![mainDict isKindOfClass:[NSNull class]]) {
-                    NSNumber *progress = [mainDict objectForKey:@"progress"];
-                    NSString *status = [mainDict objectForKey:@"status"];
-                    
-                    if(progress != nil && ![progress isKindOfClass:[NSNull class]]) {
-                        result.progress = [progress floatValue];
-                    }
-                    if(status != nil && ![status isKindOfClass:[NSNull class]]) {
-                        result.status = status;
-                    }
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self shouldReturnSuccessWithObject:result];
-                    });
+                if(progress != nil && ![progress isKindOfClass:[NSNull class]]) {
+                    result.progress = [progress floatValue];
                 }
-                else {
+                if(status != nil && ![status isKindOfClass:[NSNull class]]) {
+                    result.status = status;
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self shouldReturnSuccessWithObject:result];
+                });
+            }
+            else {
+                if (![self checkResponseHasError:response]) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
                     });
                 }
-            }
-            else {
-                [self requestFailed:response];
+                else {
+                    [self requestFailed:response];
+                }
             }
         }
     }]];

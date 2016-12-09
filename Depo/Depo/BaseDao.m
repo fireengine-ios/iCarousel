@@ -620,7 +620,7 @@
 - (BOOL) checkResponseHasError:(NSURLResponse *) response {
     if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
-        if (([httpResponse statusCode] > 199 && [httpResponse statusCode] < 300) || [httpResponse statusCode] == 0) {
+        if ([httpResponse statusCode] > 199 && [httpResponse statusCode] < 300) {
             return NO;
         }
     }

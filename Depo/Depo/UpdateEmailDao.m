@@ -27,31 +27,26 @@
             });
         }
         else {
-            if (![self checkResponseHasError:response]) {
-                NSString *statusVal = @"";
-                
-                NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                if(mainDict && [mainDict isKindOfClass:[NSDictionary class]]) {
-                    if([mainDict objectForKey:@"status"] != nil && [[mainDict objectForKey:@"status"] isKindOfClass:[NSString class]]) {
-                        statusVal = [mainDict objectForKey:@"status"];
-                    } else if([mainDict objectForKey:@"status"] != nil && [[mainDict objectForKey:@"status"] isKindOfClass:[NSNumber class]]) {
-                        //TODO normalde status "OK" gibi string gelmeli. Fakat sunucu tarafindaki bir sorundan dolayını bu kontrol eklendi
-                        NSNumber *status = [mainDict objectForKey:@"status"];
-                        if([status intValue] != 200 && [status intValue] != 0) {
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-                                return ;
-                            });
-                        }
+            NSString *statusVal = @"";
+            
+            NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+            if(mainDict && [mainDict isKindOfClass:[NSDictionary class]]) {
+                if([mainDict objectForKey:@"status"] != nil && [[mainDict objectForKey:@"status"] isKindOfClass:[NSString class]]) {
+                    statusVal = [mainDict objectForKey:@"status"];
+                } else if([mainDict objectForKey:@"status"] != nil && [[mainDict objectForKey:@"status"] isKindOfClass:[NSNumber class]]) {
+                    //TODO normalde status "OK" gibi string gelmeli. Fakat sunucu tarafindaki bir sorundan dolayını bu kontrol eklendi
+                    NSNumber *status = [mainDict objectForKey:@"status"];
+                    if([status intValue] != 200 && [status intValue] != 0) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                            return ;
+                        });
                     }
                 }
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self shouldReturnSuccessWithObject:statusVal];
-                });
             }
-            else {
-                [self requestFailed:response];
-            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self shouldReturnSuccessWithObject:statusVal];
+            });
         }
     }]];
     self.currentTask = task;

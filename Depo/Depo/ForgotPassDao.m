@@ -33,31 +33,32 @@
             });
         }
         else {
-            if (![self checkResponseHasError:response]) {
-                NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                if(mainDict && [mainDict isKindOfClass:[NSDictionary class]]) {
-                    NSNumber *statusVal = [mainDict objectForKey:@"status"];
-                    if(statusVal != nil && ![statusVal isKindOfClass:[NSNull class]]) {
-                        if([statusVal intValue] == 4001) {
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                [self shouldReturnFailWithMessage:NSLocalizedString(@"InvalidCaptchaErrorMessage", @"")];
-                                return ;
-                            });
-                        }
+            NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+            if(mainDict && [mainDict isKindOfClass:[NSDictionary class]]) {
+                NSNumber *statusVal = [mainDict objectForKey:@"status"];
+                if(statusVal != nil && ![statusVal isKindOfClass:[NSNull class]]) {
+                    if([statusVal intValue] == 4001) {
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            [self shouldReturnSuccessWithObject:mainDict];
+                            [self shouldReturnFailWithMessage:NSLocalizedString(@"InvalidCaptchaErrorMessage", @"")];
+                            return ;
                         });
                     }
-                }
-                else {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                        [self shouldReturnSuccessWithObject:mainDict];
                     });
                 }
             }
             else {
-                [self requestFailed:response];
+                if (![self checkResponseHasError:response]) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                    });
+                }
+                else {
+                    [self requestFailed:response];
+                }
             }
+
         }
     }]];
     self.currentTask = task;

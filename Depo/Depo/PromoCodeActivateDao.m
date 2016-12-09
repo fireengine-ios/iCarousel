@@ -27,28 +27,28 @@
             });
         }
         else {
-            if (![self checkResponseHasError:response]) {
-                NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                if(dict != nil && [dict isKindOfClass:[NSDictionary class]]) {
-                    NSString *status = [dict objectForKey:@"status"];
-                    if(status != nil && [status isEqualToString:@"OK"]) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [self shouldReturnSuccess];
-                        });
-                    } else {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [self shouldReturnFailWithMessage:NSLocalizedString(@"PromoError", @"")];
-                        });
-                    }
-                }
-                else {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+            if(dict != nil && [dict isKindOfClass:[NSDictionary class]]) {
+                NSString *status = [dict objectForKey:@"status"];
+                if(status != nil && [status isEqualToString:@"OK"]) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnSuccess];
+                    });
+                } else {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self shouldReturnFailWithMessage:NSLocalizedString(@"PromoError", @"")];
                     });
                 }
             }
             else {
-                [self requestFailed:response];
+                if (![self checkResponseHasError:response]) {
+                    [self requestFailed:response];
+                }
+                else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnFailWithMessage:NSLocalizedString(@"PromoError", @"")];
+                    });
+                }
             }
         }
     }]];

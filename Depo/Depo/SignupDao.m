@@ -35,27 +35,27 @@
             });
         }
         else {
-            if (![self checkResponseHasError:response]) {
-                NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                if(mainDict && [mainDict isKindOfClass:[NSDictionary class]]) {
-                    NSString *status = [mainDict objectForKey:@"status"];
-                    if(status != nil && ![status isKindOfClass:[NSNull class]]) {
-                        NSString *statusVal = [mainDict objectForKey:@"status"];
-                        if(statusVal != nil && ![statusVal isKindOfClass:[NSNull class]]) {
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                [self shouldReturnSuccessWithObject:mainDict];
-                            });
-                        }
+            NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+            if(mainDict && [mainDict isKindOfClass:[NSDictionary class]]) {
+                NSString *status = [mainDict objectForKey:@"status"];
+                if(status != nil && ![status isKindOfClass:[NSNull class]]) {
+                    NSString *statusVal = [mainDict objectForKey:@"status"];
+                    if(statusVal != nil && ![statusVal isKindOfClass:[NSNull class]]) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self shouldReturnSuccessWithObject:mainDict];
+                        });
                     }
                 }
                 else {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-                    });
+                    if ([self checkResponseHasError:response]) {
+                        [self requestFailed:response];
+                    }
                 }
             }
             else {
-                [self requestFailed:response];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                });
             }
         }
     }]];

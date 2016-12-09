@@ -48,26 +48,27 @@
             }
         }
         else {
-            if (![self checkResponseHasError:response]) {
-                NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+            NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+            
+            if(mainDict != nil && ![mainDict isKindOfClass:[NSNull class]]) {
+                IGLog(@"EulaCheckDao requestFinished successfully");
+                NSString *status = [self strByRawVal:[mainDict objectForKey:@"status"]];
                 
-                if(mainDict != nil && ![mainDict isKindOfClass:[NSNull class]]) {
-                    IGLog(@"EulaCheckDao requestFinished successfully");
-                    NSString *status = [self strByRawVal:[mainDict objectForKey:@"status"]];
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self shouldReturnSuccessWithObject:status];
-                    });
-                }
-                else {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self shouldReturnSuccessWithObject:status];
+                });
+            }
+            else {
+                if (![self checkResponseHasError:response]) {
                     IGLog(@"EulaCheckDao requestFinished with error");
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
                     });
                 }
-            }
-            else {
-                [self requestFailed:response];
+                else {
+                    [self requestFailed:response];
+                }
             }
         }
     }]];

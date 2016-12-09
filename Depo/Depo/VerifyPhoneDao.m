@@ -31,18 +31,16 @@
             });
         }
         else {
-            if (![self checkResponseHasError:response]) {
-                NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                if(mainDict && [mainDict isKindOfClass:[NSDictionary class]]) {
-                    NSString *status = [mainDict objectForKey:@"status"];
-                    if(status != nil && ![status isKindOfClass:[NSNull class]]) {
-                        NSString *statusVal = [mainDict objectForKey:@"status"];
-                        if(statusVal != nil && ![statusVal isKindOfClass:[NSNull class]]) {
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                [self shouldReturnSuccessWithObject:mainDict];
-                                return ;
-                            });
-                        }
+            NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+            if(mainDict && [mainDict isKindOfClass:[NSDictionary class]]) {
+                NSString *status = [mainDict objectForKey:@"status"];
+                if(status != nil && ![status isKindOfClass:[NSNull class]]) {
+                    NSString *statusVal = [mainDict objectForKey:@"status"];
+                    if(statusVal != nil && ![statusVal isKindOfClass:[NSNull class]]) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self shouldReturnSuccessWithObject:statusVal];
+                            return ;
+                        });
                     }
                 }
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -50,9 +48,15 @@
                 });
             }
             else {
-                [self requestFailed:response];
+                if (![self checkResponseHasError:response]) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                    });
+                }
+                else {
+                    [self requestFailed:response];
+                }
             }
-
         }
     }]];
     self.currentTask = task;
@@ -80,26 +84,31 @@
             });
         }
         else {
-            if (![self checkResponseHasError:response]) {
-                NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                if(mainDict && [mainDict isKindOfClass:[NSDictionary class]]) {
-                    NSString *status = [mainDict objectForKey:@"status"];
-                    if(status != nil && ![status isKindOfClass:[NSNull class]]) {
-                        NSString *statusVal = [mainDict objectForKey:@"status"];
-                        if(statusVal != nil && ![statusVal isKindOfClass:[NSNull class]]) {
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                [self shouldReturnSuccessWithObject:statusVal];
-                                return ;
-                            });
-                        }
+            NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+            if(mainDict && [mainDict isKindOfClass:[NSDictionary class]]) {
+                NSString *status = [mainDict objectForKey:@"status"];
+                if(status != nil && ![status isKindOfClass:[NSNull class]]) {
+                    NSString *statusVal = [mainDict objectForKey:@"status"];
+                    if(statusVal != nil && ![statusVal isKindOfClass:[NSNull class]]) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self shouldReturnSuccessWithObject:statusVal];
+                            return ;
+                        });
                     }
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnSuccessWithObject:@"OK"];
+                    });
                 }
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self shouldReturnSuccessWithObject:@"OK"];
-                });
             }
             else {
-                [self requestFailed:response];
+                if (![self checkResponseHasError:response]) {
+                    [self requestFailed:response];
+                }
+                else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                    });
+                }
             }
         }
     }]];

@@ -29,24 +29,24 @@
             });
         }
         else {
-            if (![self checkResponseHasError:response]) {
-                NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                if(mainDict != nil && ![mainDict isKindOfClass:[NSNull class]]) {
-                    NSString *statusVal = [mainDict objectForKey:@"status"];
-                    if(statusVal != nil && ![statusVal isKindOfClass:[NSNull class]]) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [self shouldReturnSuccessWithObject:statusVal];
-                        });
-                    }
-                }
-                else {
+            NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+            if(mainDict != nil && ![mainDict isKindOfClass:[NSNull class]]) {
+                NSString *statusVal = [mainDict objectForKey:@"status"];
+                if(statusVal != nil && ![statusVal isKindOfClass:[NSNull class]]) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                        [self shouldReturnSuccessWithObject:statusVal];
                     });
                 }
             }
             else {
-                [self requestFailed:response];
+                if (![self checkResponseHasError:response]) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                    });
+                }
+                else {
+                    [self requestFailed:response];
+                }
             }
         }
     }]];

@@ -36,24 +36,24 @@
             });
         }
         else {
-            if (![self checkResponseHasError:response]) {
-                NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                if(mainDict && [mainDict isKindOfClass:[NSDictionary class]]) {
-                    NSString *status = [mainDict objectForKey:@"status"];
-                    if(status != nil && ![status isKindOfClass:[NSNull class]]) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [self shouldReturnSuccessWithObject:status];
-                        });
-                    }
-                }
-                else {
+            NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+            if(mainDict && [mainDict isKindOfClass:[NSDictionary class]]) {
+                NSString *status = [mainDict objectForKey:@"status"];
+                if(status != nil && ![status isKindOfClass:[NSNull class]]) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                        [self shouldReturnSuccessWithObject:status];
                     });
                 }
             }
             else {
-                [self requestFailed:response];
+                if (![self checkResponseHasError:response]) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                    });
+                }
+                else {
+                    [self requestFailed:response];
+                }
             }
         }
     }]];
@@ -83,24 +83,24 @@
             });
         }
         else {
-            if (![self checkResponseHasError:response]) {
-                NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                if(mainDict && [mainDict isKindOfClass:[NSDictionary class]]) {
-                    NSString *status = [mainDict objectForKey:@"status"];
-                    if(status != nil && ![status isKindOfClass:[NSNull class]]) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [self shouldReturnSuccessWithObject:status];
-                        });
-                    }
-                }
-                else {
+            NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+            if(mainDict && [mainDict isKindOfClass:[NSDictionary class]]) {
+                NSString *status = [mainDict objectForKey:@"status"];
+                if(status != nil && ![status isKindOfClass:[NSNull class]]) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                        [self shouldReturnSuccessWithObject:status];
                     });
                 }
             }
             else {
-                [self requestFailed:response];
+                if (![self checkResponseHasError:response]) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                    });
+                }
+                else {
+                    [self requestFailed:response];
+                }
             }
         }
     }]];
