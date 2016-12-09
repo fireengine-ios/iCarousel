@@ -312,21 +312,36 @@
 }
 
 -(void)footerActionMenuDidSelectDownload:(FooterActionsMenuView *)menu {
-    [delegate revisitedAlbumListDownloadAlbums:selectedAlbumList albumNames:[self getSelectedAlbumNames]];
+    [delegate revisitedAlbumListDownloadAlbums:[self getSelectedAlbums]];
+//    [delegate revisitedAlbumListDownloadAlbums:selectedAlbumList albumNames:[self getSelectedAlbumNames]];
 }
 
--(NSArray *)getSelectedAlbumNames {
-    NSMutableArray *names = [NSMutableArray array];
+//-(NSArray *)getSelectedAlbumNames {
+//    NSMutableArray *names = [NSMutableArray array];
+//    for (PhotoAlbum *album in self.albums) {
+//        for (NSString *uuid in selectedAlbumList) {
+//            if ([album.uuid isEqualToString:uuid]) {
+//                [names addObject:album.label];
+//            }
+//        }
+//        
+//    }
+//    
+//    return names;
+//}
+
+-(NSArray *)getSelectedAlbums {
+    NSMutableArray *selectedAlbums = [NSMutableArray array];
     for (PhotoAlbum *album in self.albums) {
         for (NSString *uuid in selectedAlbumList) {
             if ([album.uuid isEqualToString:uuid]) {
-                [names addObject:album.label];
+                [selectedAlbums addObject:album];
             }
         }
         
     }
     
-    return names;
+    return selectedAlbums;
 }
 
 

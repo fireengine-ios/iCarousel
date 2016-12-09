@@ -174,8 +174,8 @@
     [self.navigationController pushViewController:albumController animated:YES];
 }
 
-- (void) revisitedAlbumListDownloadAlbums:(NSArray *)albumUUIDs albumNames:(NSArray *)albumNames {
-    [APPDELEGATE.base createAlbums:albumUUIDs withNames:albumNames
+- (void) revisitedAlbumListDownloadAlbums:(NSArray *)albums {
+    [APPDELEGATE.base createAlbums:albums
                         loadingMessage:NSLocalizedString(@"DownloadAlbumsProgressMessage", @"")
                         successMessage:NSLocalizedString(@"DownloadAlbumsSuccessMessage", @"")
                            failMessage:NSLocalizedString(@"DownloadAlbumFailMessage", @"")];
