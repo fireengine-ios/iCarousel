@@ -34,5 +34,6 @@
 @property (nonatomic, strong) LoginTextfield *msisdnField;
 @property (nonatomic, strong) LoginTextfield *passField;
 @property (nonatomic, strong) LoginTextfield *captchaField;
+@property (nonatomic, strong) UIView *forgotPassView;
 
 @end
