@@ -43,10 +43,10 @@
                             return ;
                         });
                     }
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self shouldReturnSuccessWithObject:mainDict];
-                    });
                 }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self shouldReturnSuccessWithObject:mainDict];
+                });
             }
             else {
                 if (![self checkResponseHasError:response]) {
