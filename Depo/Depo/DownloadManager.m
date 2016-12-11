@@ -34,9 +34,9 @@
 
 -(void)downloadListOfFilesToCameraRoll:(NSArray *)metaFiles {
     fileList = [[NSMutableArray alloc] initWithArray:metaFiles];
-    NSArray *syncFiles = [SyncUtil getExistingFilesOfCameraRoll];
-    if (syncFiles && syncFiles.count > 0) {
-        existingFilesOnAlbum = [[NSMutableArray alloc] initWithArray:syncFiles];
+    NSArray *filesExisting = [SyncUtil getExistingFilesOfCameraRoll];
+    if (filesExisting && filesExisting.count > 0) {
+        existingFilesOnAlbum = [[NSMutableArray alloc] initWithArray:filesExisting];
         [self updateSyncedFilesOfAlbum:nil];
     }else {
         existingFilesOnAlbum = [[NSMutableArray alloc] init];

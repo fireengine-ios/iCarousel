@@ -82,26 +82,29 @@
     
     if(mainArray != nil && ![mainArray isKindOfClass:[NSNull class]]) {
         for(NSDictionary *albumDict in mainArray) {
-            NSNumber *albumId = [albumDict objectForKey:@"id"];
-            NSString *label = [albumDict objectForKey:@"label"];
-            NSString *uuid = [albumDict objectForKey:@"uuid"];
-            NSNumber *imageCount = [albumDict objectForKey:@"imageCount"];
-            NSNumber *videoCount = [albumDict objectForKey:@"videoCount"];
-            NSNumber *readOnly = [albumDict objectForKey:@"readOnly"];
-            
-            PhotoAlbum *album = [[PhotoAlbum alloc] init];
-            album.albumId = [self longByNumber:albumId];
-            album.imageCount = [self intByNumber:imageCount];
-            album.videoCount = [self intByNumber:videoCount];
-            album.label = [self strByRawVal:label];
-            album.uuid = [self strByRawVal:uuid];
-            album.isReadOnly = [self boolByNumber:readOnly];
-            
-            NSDictionary *coverDict = [albumDict objectForKey:@"coverPhoto"];
-            if(coverDict != nil && ![coverDict isKindOfClass:[NSNull class]]) {
-                album.cover = [self parseFile:coverDict];
+            if(albumDict != nil && ![albumDict isKindOfClass:[NSNull class]]) {
+                NSNumber *albumId = [albumDict objectForKey:@"id"];
+                NSString *label = [albumDict objectForKey:@"label"];
+                NSString *uuid = [albumDict objectForKey:@"uuid"];
+                NSNumber *imageCount = [albumDict objectForKey:@"imageCount"];
+                NSNumber *videoCount = [albumDict objectForKey:@"videoCount"];
+                NSNumber *readOnly = [albumDict objectForKey:@"readOnly"];
+                
+                PhotoAlbum *album = [[PhotoAlbum alloc] init];
+                album.albumId = [self longByNumber:albumId];
+                album.imageCount = [self intByNumber:imageCount];
+                album.videoCount = [self intByNumber:videoCount];
+                album.label = [self strByRawVal:label];
+                album.uuid = [self strByRawVal:uuid];
+                album.isReadOnly = [self boolByNumber:readOnly];
+                
+                NSDictionary *coverDict = [albumDict objectForKey:@"coverPhoto"];
+                if(coverDict != nil && ![coverDict isKindOfClass:[NSNull class]]) {
+                    album.cover = [self parseFile:coverDict];
+                }
+                [result addObject:album];
             }
-            [result addObject:album];
+            
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             [self shouldReturnSuccessWithObject:result];
