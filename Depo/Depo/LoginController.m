@@ -119,10 +119,17 @@
 
         captchaView = [[UIImageView alloc] initWithFrame:CGRectMake(20, scrollYIndex, 200, 50)];
         captchaView.hidden = YES;
+        UIImage *image = [UIImage imageNamed:@"bg_captcha.png"];
+        CGSize newSize = captchaView.frame.size;
+        UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+        [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+        UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        captchaView.backgroundColor = [UIColor colorWithPatternImage:newImage];
 //        [mainScroll addSubview:captchaView];
         [container addSubview:captchaView];
         
-        refreshButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 38, scrollYIndex, 18, 18) withImageName:@"icon_verif_refresh.png"];
+        refreshButton = [[CustomButton alloc] initWithFrame:CGRectMake(captchaView.frame.origin.x + captchaView.frame.size.width + 32, captchaView.frame.origin.y + (captchaView.frame.size.height - 18)/2, 18, 18) withImageName:@"icon_captcha_refresh.png"];
         refreshButton.hidden = YES;
         [refreshButton addTarget:self action:@selector(loadCaptcha) forControlEvents:UIControlEventTouchUpInside];
 //        [mainScroll addSubview:refreshButton];
@@ -436,6 +443,7 @@
         
 //        mainScroll.contentSize = CGSizeMake(mainScroll.contentSize.width, mainScroll.contentSize.height + 120);
         container.contentSize = CGSizeMake(container.contentSize.width, self.view.frame.size.height + 200);
+        [container setContentOffset:CGPointMake(0, 105) animated:YES];
         captchaView.hidden = NO;
         captchaField.hidden = NO;
         refreshButton.hidden = NO;
@@ -481,11 +489,13 @@
     if (movedUp) {
         if(captchaView.isHidden) {
             container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + 280);
+            [container setContentOffset:CGPointMake(0, 85) animated:YES];
         }
         else {
             container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + 320);
+            [container setContentOffset:CGPointMake(0, 105) animated:YES];
         }
-        [container setContentOffset:CGPointMake(0, 150) animated:YES];
+//        [container setContentOffset:CGPointMake(0, 85) animated:YES];
     } else {
         if(captchaView.isHidden) {
             container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);

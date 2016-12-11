@@ -28,7 +28,9 @@
                 if(data != nil && ![data isKindOfClass:[NSNull class]]) {
                     UIImage *img = [UIImage imageWithData:data];
                     if(img) {
-                        [self shouldReturnSuccessWithObject:img];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self shouldReturnSuccessWithObject:img];
+                        });
                     }
                 }
                 else {

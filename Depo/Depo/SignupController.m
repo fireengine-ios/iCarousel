@@ -199,7 +199,7 @@
         return;
     }
     
-    APPDELEGATE.session.signupReferenceMsisdn = msisdnField.text;
+    APPDELEGATE.session.signupReferenceMsisdn = msisdnValue;
     APPDELEGATE.session.signupReferenceEmail = emailField.text;
     APPDELEGATE.session.signupReferencePassword = passwordField.text;
 
@@ -220,7 +220,7 @@
     [[CurioSDK shared] sendEvent:@"Signup>EmailConfirm" eventValue:@"Approved"];
     [MPush hitTag:@"Signup>EmailConfirm" withValue:@"Approved"];
     
-    [signupDao requestTriggerSignupForEmail:emailField.text forPhoneNumber:msisdnField.text withPassword:passwordField.text withEulaId:eula ? eula.eulaId : 0];
+    [signupDao requestTriggerSignupForEmail:emailField.text forPhoneNumber:msisdnValue withPassword:passwordField.text withEulaId:eula ? eula.eulaId : 0];
     [self showLoading];
 }
 
