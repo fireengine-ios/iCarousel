@@ -129,9 +129,7 @@
         tapGestureRecognizer.enabled = YES;
         [searchContainer addGestureRecognizer:tapGestureRecognizer];
         
-        refreshControl = [[UIRefreshControl alloc] init];
-        [refreshControl addTarget:self action:@selector(pullData) forControlEvents:UIControlEventValueChanged];
-        [collView addSubview:refreshControl];
+        [self createRefreshControl];
         
         progress = [[MBProgressHUD alloc] initWithFrame:self.frame];
         progress.opacity = 0.4f;
@@ -158,6 +156,19 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(autoQueueFinished) name:AUTO_SYNC_QUEUE_FINISHED_NOTIFICATION object:nil];
     }
     return self;
+}
+
+-(void)createRefreshControl {
+    if (!refreshControl) {
+        refreshControl = [[UIRefreshControl alloc] init];
+        [refreshControl addTarget:self action:@selector(pullData) forControlEvents:UIControlEventValueChanged];
+        [collView addSubview:refreshControl];
+    }
+}
+
+-(void)removeRefreshControl {
+    [refreshControl removeFromSuperview];
+    refreshControl = nil;
 }
 
 - (void) pullData {
@@ -240,7 +251,8 @@
 - (void) setToSelectible {
     if(!isSelectible) {
         isSelectible = YES;
-        [refreshControl setEnabled:NO];
+        [self removeRefreshControl];
+        //        [refreshControl setEnabled:NO];
         [selectedFileList removeAllObjects];
         [selectedMetaFiles removeAllObjects];
         
@@ -250,7 +262,8 @@
 
 - (void) setToUnselectiblePriorToRefresh {
     isSelectible = NO;
-    [refreshControl setEnabled:YES];
+    [self createRefreshControl];
+    //    [refreshControl setEnabled:YES];
     [selectedFileList removeAllObjects];
     [selectedMetaFiles removeAllObjects];
     
@@ -262,7 +275,8 @@
 
 - (void) setToUnselectible {
     isSelectible = NO;
-    [refreshControl setEnabled:YES];
+    [self createRefreshControl];
+    //    [refreshControl setEnabled:YES];
     [selectedFileList removeAllObjects];
     [selectedMetaFiles removeAllObjects];
     

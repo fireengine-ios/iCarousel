@@ -314,6 +314,7 @@
         [self triggerRefresh];
         [self proceedSuccessForProgressView];
     }
+    [self performSelector:@selector(setToUnselectible) withObject:nil afterDelay:3];
 }
 
 - (void) photosAddedFailCallback:(NSString *) errorMessage {
@@ -321,6 +322,7 @@
         contentModified = YES;
         [self triggerRefresh];
     }
+    [self performSelector:@selector(setToUnselectible) withObject:nil afterDelay:3];
 //    [self showErrorAlertWithMessage:errorMessage];
 }
 
