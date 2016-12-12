@@ -111,9 +111,11 @@
     [delegate groupedCellImageWasSelectedForView:ref];
 }
 
+/*
 - (void) prepareForReuse {
     [super prepareForReuse];
     NSLog(@"At prepareForReuse");
 }
+*/
 
 @end
