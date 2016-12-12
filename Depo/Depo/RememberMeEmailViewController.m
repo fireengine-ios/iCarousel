@@ -253,7 +253,7 @@
 -(void)setViewMovedUp:(BOOL)movedUp {
     if (movedUp) {
         container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + 280);
-        [container setContentOffset:CGPointMake(0, 210) animated:YES];
+        [container setContentOffset:CGPointMake(0, 70) animated:YES];
     } else {
         container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
         [container setContentOffset:CGPointZero animated:YES];

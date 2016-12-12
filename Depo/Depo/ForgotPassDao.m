@@ -40,8 +40,8 @@
                     if([statusVal intValue] == 4001) {
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [self shouldReturnFailWithMessage:NSLocalizedString(@"InvalidCaptchaErrorMessage", @"")];
-                            return ;
                         });
+                        return ;
                     }
                 }
                 dispatch_async(dispatch_get_main_queue(), ^{
