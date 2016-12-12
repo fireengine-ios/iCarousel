@@ -39,8 +39,8 @@
                     if([status intValue] != 200 && [status intValue] != 0) {
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-                            return ;
                         });
+                        return ;
                     }
                 }
             }

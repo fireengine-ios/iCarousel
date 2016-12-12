@@ -58,8 +58,8 @@
         if ([self checkResponseHasError:response]) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-                return ;
             });
+            return ;
         }
         else {
             if (error) {
@@ -86,8 +86,8 @@
     if (self.hasError) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-            return;
         });
+        return;
     }
     if (returnsList) {
 
