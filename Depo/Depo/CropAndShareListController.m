@@ -269,7 +269,7 @@
     [self alignPhotosScrollPostDelete];
     
     if(isSelectible) {
-        [self cancelSelectible];
+        [self setToUnselectible];
     }
     
     [self proceedSuccessForProgressView];
@@ -528,10 +528,10 @@
 }
 
 - (void) cancelClicked {
-    [self cancelSelectible];
+    [self setToUnselectible];
 }
 
-- (void) cancelSelectible {
+- (void) setToUnselectible {
     self.title = NSLocalizedString(@"CropAndShareTitle", @"");
     self.navigationItem.leftBarButtonItem = previousButtonRef;
     moreButton.hidden = NO;
