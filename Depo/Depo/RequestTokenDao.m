@@ -232,6 +232,10 @@
                 SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:LDAP_LOCKED_ERROR_MESSAGE]);
                 return;
             }
+            else if([errorCode intValue] == 4101) {
+                SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:SIGNUP_REQUIRED_ERROR_MESSAGE]);
+                return;
+            }
         }
     }
     if([request statusCode] == 401) {

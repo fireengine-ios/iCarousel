@@ -182,7 +182,7 @@
 "DownloadAlbumProgressMessage"="Albüm kaydediliyor";
 "DownloadAlbumsProgressMessage"="Albümler kaydediliyor";
 "DownloadImageSuccessMessage"="Resim başarıyla kaydedildi";
-"DownloadImagesSuccessMessage"="Resimler başarıyla kaydedildi";
+"DownloadImagesSuccessMessage"="Dosyalar başarıyla kaydedildi";
 "DownloadAlbumSuccessMessage"="Albüm başarıyla kaydedildi";
 "DownloadAlbumsSuccessMessage"="Albümler başarıyla kaydedildi";
 "DownloadImageFailMessage"="Resim kaydedilirken hata oluştu";
