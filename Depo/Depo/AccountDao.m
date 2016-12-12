@@ -173,8 +173,8 @@
                             if([errorCode intValue] == 1004) {
                                 dispatch_async(dispatch_get_main_queue(), ^{
                                     [self shouldReturnFailWithMessage:NSLocalizedString(@"PackageSubscriptionQuotaErrorMessage", @"")];
-                                    return;
                                 });
+                                return;
                             }
                         }
                     }

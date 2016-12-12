@@ -39,8 +39,8 @@
                     if(statusVal != nil && ![statusVal isKindOfClass:[NSNull class]]) {
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [self shouldReturnSuccessWithObject:statusVal];
-                            return ;
                         });
+                        return ;
                     }
                 }
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -92,8 +92,8 @@
                     if(statusVal != nil && ![statusVal isKindOfClass:[NSNull class]]) {
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [self shouldReturnSuccessWithObject:statusVal];
-                            return ;
                         });
+                        return ;
                     }
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self shouldReturnSuccessWithObject:@"OK"];
