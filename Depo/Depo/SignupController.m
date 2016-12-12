@@ -362,7 +362,7 @@
     NSScanner *scanner = [NSScanner scannerWithString:textField.text];
     BOOL isNumeric = [scanner scanInteger:NULL] && [scanner isAtEnd];
     NSString* callingCode = @"+(90)";
-    if (isNumeric) {
+    if (isNumeric && [textField.text rangeOfString:@"+"].location == NSNotFound) {
         if([[Util readLocaleCode] isEqualToString:@"uk"] || [[Util readLocaleCode] isEqualToString:@"ru"] ) {
             callingCode = @"+(380)";
             callingCode = [callingCode stringByAppendingString:textField.text];
