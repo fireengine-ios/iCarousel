@@ -107,6 +107,7 @@
         collView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) collectionViewLayout:layout];
         collView.dataSource = self;
         collView.delegate = self;
+        collView.showsVerticalScrollIndicator = NO;
         collView.backgroundColor = [UIColor whiteColor];
         [collView registerClass:[RevisitedPhotoCollCell class] forCellWithReuseIdentifier:@"COLL_PHOTO_CELL"];
         [collView registerClass:[RevisitedUploadingPhotoCollCell class] forCellWithReuseIdentifier:@"COLL_UPLOADING_PHOTO_CELL"];
@@ -129,27 +130,30 @@
         tapGestureRecognizer.enabled = YES;
         [searchContainer addGestureRecognizer:tapGestureRecognizer];
         
+//        refreshControl = [[UIRefreshControl alloc] init];
+//        [refreshControl addTarget:self action:@selector(pullData) forControlEvents:UIControlEventValueChanged];
+//        [collView addSubview:refreshControl];
         [self createRefreshControl];
         
         progress = [[MBProgressHUD alloc] initWithFrame:self.frame];
         progress.opacity = 0.4f;
         [self addSubview:progress];
         
-        /*
         verticalIndicator = [[UIView alloc] initWithFrame:CGRectMake(self.frame.size.width - 32, 20, 12, self.frame.size.height - 60)];
         UIImageView *verticalPole = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 12, verticalIndicator.frame.size.height)];
         verticalPole.image = [UIImage imageNamed:@"scroll_path.png"];
         [verticalIndicator addSubview:verticalPole];
-
+        
         UIImageView *sectionIndicatorBg = [[UIImageView alloc] initWithFrame:CGRectMake(-90, 60, 100, 36)];
         sectionIndicatorBg.image = [UIImage imageNamed:@"bg_label.png"];
         [verticalIndicator addSubview:sectionIndicatorBg];
         
-        sectionIndicator = [[CustomLabel alloc] initWithFrame:CGRectMake(-90, 68, 100, 20) withFont:[UIFont fontWithName:@"HelveticaNeue" size:12] withColor:[UIColor whiteColor] withText:@"Haziran 2016" withAlignment:NSTextAlignmentCenter];
+        sectionIndicator = [[CustomLabel alloc] initWithFrame:CGRectMake(-90, 68, 100, 20) withFont:[UIFont fontWithName:@"HelveticaNeue" size:12] withColor:[UIColor whiteColor] withText:@"" withAlignment:NSTextAlignmentCenter];
         [verticalIndicator addSubview:sectionIndicator];
-
+        
+        verticalIndicator.hidden = YES;
+        verticalIndicator.alpha = 0.0f;
         [self addSubview:verticalIndicator];
-         */
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(autoIterationFinished) name:AUTO_ITERATION_FINISHED_NOT_KEY object:nil];
         
@@ -252,7 +256,7 @@
     if(!isSelectible) {
         isSelectible = YES;
         [self removeRefreshControl];
-        //        [refreshControl setEnabled:NO];
+//        [refreshControl setEnabled:NO];
         [selectedFileList removeAllObjects];
         [selectedMetaFiles removeAllObjects];
         
@@ -263,7 +267,7 @@
 - (void) setToUnselectiblePriorToRefresh {
     isSelectible = NO;
     [self createRefreshControl];
-    //    [refreshControl setEnabled:YES];
+//    [refreshControl setEnabled:YES];
     [selectedFileList removeAllObjects];
     [selectedMetaFiles removeAllObjects];
     
@@ -276,7 +280,7 @@
 - (void) setToUnselectible {
     isSelectible = NO;
     [self createRefreshControl];
-    //    [refreshControl setEnabled:YES];
+//    [refreshControl setEnabled:YES];
     [selectedFileList removeAllObjects];
     [selectedMetaFiles removeAllObjects];
     
@@ -375,7 +379,26 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"IMAGE_SCROLL_RELOAD_DATA_AFTER_WARNING" object:self userInfo:userInfo];
             }
         }
+        NSIndexPath *visibleIndexPath = [collView indexPathForItemAtPoint:CGPointMake(30, currentOffset)];
+        if(visibleIndexPath) {
+            FileInfoGroup *visibleGroup = [self.groups objectAtIndex:visibleIndexPath.section];
+            sectionIndicator.text = visibleGroup.customTitle;
+        }
     }
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self showVerticalIndicator];
+}
+
+- (void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if(!decelerate) {
+        [self performSelector:@selector(hideVerticalIndicator) withObject:nil afterDelay:3.0f];
+    }
+}
+
+- (void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    [self performSelector:@selector(hideVerticalIndicator) withObject:nil afterDelay:3.0f];
 }
 
 - (void) dynamicallyLoadNextPage {
@@ -741,6 +764,25 @@
 
 - (void) dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void) showVerticalIndicator {
+    if(verticalIndicator.isHidden) {
+        verticalIndicator.hidden = NO;
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(hideVerticalIndicator) object:nil];
+        [UIView animateWithDuration:0.2f delay:0.0f options:0 animations:^{
+            verticalIndicator.alpha = 1.0f;
+        } completion:^(BOOL finished) {
+        }];
+    }
+}
+
+- (void) hideVerticalIndicator {
+    [UIView animateWithDuration:0.2f delay:0.0f options:0 animations:^{
+        verticalIndicator.alpha = 0.0f;
+    } completion:^(BOOL finished) {
+        verticalIndicator.hidden = YES;
+    }];
 }
 
 @end
