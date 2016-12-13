@@ -139,7 +139,7 @@
         progress.opacity = 0.4f;
         [self addSubview:progress];
         
-        verticalIndicator = [[UIView alloc] initWithFrame:CGRectMake(self.frame.size.width - 32, 20, 12, self.frame.size.height - 60)];
+        verticalIndicator = [[UIView alloc] initWithFrame:CGRectMake(self.frame.size.width - 22, 10, 12, self.frame.size.height - 60)];
         UIImageView *verticalPole = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 12, verticalIndicator.frame.size.height)];
         verticalPole.image = [UIImage imageNamed:@"scroll_path.png"];
         [verticalIndicator addSubview:verticalPole];
@@ -382,23 +382,35 @@
         NSIndexPath *visibleIndexPath = [collView indexPathForItemAtPoint:CGPointMake(30, currentOffset)];
         if(visibleIndexPath) {
             FileInfoGroup *visibleGroup = [self.groups objectAtIndex:visibleIndexPath.section];
-            sectionIndicator.text = visibleGroup.customTitle;
+            if([visibleGroup.customTitle isEqualToString:NSLocalizedString(@"ImageGroupTypeInProgress", @"")]) {
+                sectionIndicator.text = @"";
+                [self hideVerticalIndicator];
+            } else {
+                [self showVerticalIndicator];
+                sectionIndicator.text = visibleGroup.customTitle;
+            }
         }
     }
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    [self showVerticalIndicator];
+    NSIndexPath *visibleIndexPath = [collView indexPathForItemAtPoint:CGPointMake(30, collView.contentOffset.y)];
+    if(visibleIndexPath) {
+        FileInfoGroup *visibleGroup = [self.groups objectAtIndex:visibleIndexPath.section];
+        if(![visibleGroup.customTitle isEqualToString:NSLocalizedString(@"ImageGroupTypeInProgress", @"")]) {
+            [self showVerticalIndicator];
+        }
+    }
 }
 
 - (void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     if(!decelerate) {
-        [self performSelector:@selector(hideVerticalIndicator) withObject:nil afterDelay:3.0f];
+        [self performSelector:@selector(hideVerticalIndicator) withObject:nil afterDelay:1.8f];
     }
 }
 
 - (void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    [self performSelector:@selector(hideVerticalIndicator) withObject:nil afterDelay:3.0f];
+    [self performSelector:@selector(hideVerticalIndicator) withObject:nil afterDelay:1.8f];
 }
 
 - (void) dynamicallyLoadNextPage {
