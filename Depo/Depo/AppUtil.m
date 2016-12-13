@@ -885,14 +885,14 @@
 }
 
 + (void) increaseVideofyTutorialCount {
-    NSInteger result = [[NSUserDefaults standardUserDefaults] integerForKey:[NSString stringWithFormat:TUTORIAL_VIDEOFY_COUNT_KEY, [SyncUtil readBaseUrlConstant]]];
+    NSInteger result = [[NSUserDefaults standardUserDefaults] integerForKey:[NSString stringWithFormat:TUTORIAL_VIDEOFY_COUNT_KEY, APPDELEGATE.session.user.phoneNumber]];
     result ++;
-    [[NSUserDefaults standardUserDefaults] setInteger:result forKey:[NSString stringWithFormat:TUTORIAL_VIDEOFY_COUNT_KEY, [SyncUtil readBaseUrlConstant]]];
+    [[NSUserDefaults standardUserDefaults] setInteger:result forKey:[NSString stringWithFormat:TUTORIAL_VIDEOFY_COUNT_KEY, APPDELEGATE.session.user.phoneNumber]];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 + (int) readVideofyTutorialCount {
-    NSInteger result = [[NSUserDefaults standardUserDefaults] integerForKey:[NSString stringWithFormat:TUTORIAL_VIDEOFY_COUNT_KEY, [SyncUtil readBaseUrlConstant]]];
+    NSInteger result = [[NSUserDefaults standardUserDefaults] integerForKey:[NSString stringWithFormat:TUTORIAL_VIDEOFY_COUNT_KEY, APPDELEGATE.session.user.phoneNumber]];
     return (int)result;
 }
 

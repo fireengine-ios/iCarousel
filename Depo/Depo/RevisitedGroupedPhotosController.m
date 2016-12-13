@@ -135,7 +135,7 @@
     [albumView setToUnselectible];
     [groupView setToUnselectible];
 
-    [APPDELEGATE.base immediateShowAddButton];
+   // [APPDELEGATE.base immediateShowAddButton];
 }
 
 #pragma mark RevisitedAlbumListDelegate methods
