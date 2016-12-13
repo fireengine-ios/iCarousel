@@ -551,7 +551,7 @@
     [selectedFileList removeAllObjects];
     
     if(!self.album.isReadOnly) {
-        [APPDELEGATE.base immediateShowAddButton];
+       // [APPDELEGATE.base immediateShowAddButton];
     }
     
     [self setSelectibleStatusForSquareImages:NO];
