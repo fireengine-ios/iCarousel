@@ -122,6 +122,7 @@
 
 - (void) triggerFacebookStop {
     NSLog(@"At triggerFacebookStop");
+    [[FBSDKLoginManager new] logOut];
     [fbStopDao requestFBStop];
     [self showLoading];
 }
