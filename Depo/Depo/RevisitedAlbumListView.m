@@ -70,9 +70,7 @@
         albumTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         [self addSubview:albumTable];
         
-        refreshControl = [[UIRefreshControl alloc] init];
-        [refreshControl addTarget:self action:@selector(pullData) forControlEvents:UIControlEventValueChanged];
-        [albumTable addSubview:refreshControl];
+        [self createRefreshControl];
 
         UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(triggerSelectionState:)];
         longPressGesture.minimumPressDuration = 1.0;
@@ -83,6 +81,19 @@
         [self addSubview:progress];
     }
     return self;
+}
+
+-(void)createRefreshControl {
+    if (!refreshControl) {
+        refreshControl = [[UIRefreshControl alloc] init];
+        [refreshControl addTarget:self action:@selector(pullData) forControlEvents:UIControlEventValueChanged];
+        [albumTable addSubview:refreshControl];
+    }
+}
+
+-(void)removeRefreshControl {
+    [refreshControl removeFromSuperview];
+    refreshControl = nil;
 }
 
 - (void) triggerSelectionState:(UILongPressGestureRecognizer *)gestureRecognizer {
@@ -105,7 +116,8 @@
 
 - (void) setToSelectible {
     isSelectible = YES;
-    [refreshControl setEnabled:NO];
+    [self removeRefreshControl];
+//    [refreshControl setEnabled:NO];
     [selectedAlbumList removeAllObjects];
     
     albumTable.allowsMultipleSelection = YES;
@@ -115,7 +127,8 @@
 
 - (void) setToUnselectiblePriorToRefresh {
     isSelectible = NO;
-    [refreshControl setEnabled:YES];
+    [self createRefreshControl];
+//    [refreshControl setEnabled:YES];
     [selectedAlbumList removeAllObjects];
     
     if(footerActionMenu) {
@@ -126,7 +139,8 @@
 
 - (void) setToUnselectible {
     isSelectible = NO;
-    [refreshControl setEnabled:YES];
+    [self createRefreshControl];
+//    [refreshControl setEnabled:YES];
     [selectedAlbumList removeAllObjects];
     
     if(footerActionMenu) {

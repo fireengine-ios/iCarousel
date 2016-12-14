@@ -1123,6 +1123,7 @@
 -(void)hideProcessView {
      NSLog(@"hideProcessView");
     downloadingProcessView.hidden = true;
+    [self immediateShowAddButton];
 }
 
 -(void)removeProgressViewWithMessage:(NSString *)message isSuccess:(BOOL)success {

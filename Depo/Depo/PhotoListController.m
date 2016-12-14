@@ -371,7 +371,7 @@
     [self alignPhotosScrollPostDelete];
 
     if(isSelectible) {
-        [self cancelSelectible];
+        [self setToUnselectible];
     }
     
     [self proceedSuccessForProgressViewWithAddButtonKey:albumTable.hidden ? @"PhotoTab" : @"AlbumTab"];
@@ -385,7 +385,7 @@
 
 - (void) deleteAlbumSuccessCallback {
     if(isSelectible) {
-        [self cancelSelectible];
+        [self setToUnselectible];
     }
     
     [self proceedSuccessForProgressViewWithAddButtonKey:albumTable.hidden ? @"PhotoTab" : @"AlbumTab"];
@@ -401,7 +401,7 @@
 
 - (void) photosAddedSuccessCallback {
     if(isSelectible) {
-        [self cancelSelectible];
+        [self setToUnselectible];
     }
     
     [self proceedSuccessForProgressViewWithAddButtonKey:albumTable.hidden ? @"PhotoTab" : @"AlbumTab"];
@@ -835,11 +835,11 @@
 }
 
 - (void) cancelClicked {
-    [self cancelSelectible];
+    [self setToUnselectible];
     [APPDELEGATE.base immediateShowAddButton];
 }
 
-- (void) cancelSelectible {
+- (void) setToUnselectible {
     self.title = NSLocalizedString(@"PhotosTitle", @"");
     self.navigationItem.leftBarButtonItem = previousButtonRef;
     moreButton.hidden = NO;

@@ -24,6 +24,7 @@
 #import "NoItemView.h"
 #import "RevisitedPhotoCollCell.h"
 #import "RevisitedUploadingPhotoCollCell.h"
+#import "CustomLabel.h"
 
 @class RevisitedGroupedPhotoView;
 
@@ -51,6 +52,8 @@
 @property (nonatomic, strong) NSMutableArray *files;
 @property (nonatomic, strong) NSMutableArray *selectedFileList;
 @property (nonatomic, strong) NSMutableArray *selectedMetaFiles;
+@property (nonatomic, strong) UIView *verticalIndicator;
+@property (nonatomic, strong) CustomLabel *sectionIndicator;
 
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 

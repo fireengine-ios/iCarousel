@@ -72,8 +72,8 @@
     }
 }
 
-- (void) prepareForReuse {
-    [super prepareForReuse];
+//- (void) prepareForReuse {
+//    [super prepareForReuse];
 //    NSLog(@"At prepareForReuse");
     /*
     if(sqImageView) {
@@ -84,7 +84,7 @@
         sqImageView = nil;
     }
      */
-}
+//}
 
 - (void) squareImageWasSelectedForFile:(MetaFile *) fileSelected {
     [delegate revisitedPhotoCollCellImageWasSelectedForFile:fileSelected forGroupWithKey:self.groupKey];

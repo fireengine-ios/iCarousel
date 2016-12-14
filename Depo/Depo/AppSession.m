@@ -225,6 +225,7 @@
     self.storageFullPopupShown = NO;
     self.menuTipShown = NO;
     self.photoDetailTipShown = NO;
+    self.videofyTutorialCountChecked = NO;
     
     [SyncUtil resetBaseUrlConstant];
     [SharedUtil writeSharedToken:nil];

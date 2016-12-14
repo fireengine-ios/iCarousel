@@ -799,7 +799,7 @@
     previousButtonRef = self.navigationItem.leftBarButtonItem;
     
     CustomButton *cancelButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 60, 20) withImageName:nil withTitle:NSLocalizedString(@"ButtonCancel", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[UIColor whiteColor]];
-    [cancelButton addTarget:self action:@selector(cancelSelectible) forControlEvents:UIControlEventTouchUpInside];
+    [cancelButton addTarget:self action:@selector(setToUnselectible) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithCustomView:cancelButton];
     self.navigationItem.leftBarButtonItem = cancelItem;
@@ -826,7 +826,7 @@
     [self.view addSubview:footerActionMenu];
 }
 
-- (void) cancelSelectible {
+- (void) setToUnselectible {
     if(self.folder) {
         self.title = self.folder.visibleName;
     } else {

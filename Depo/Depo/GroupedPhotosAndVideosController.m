@@ -297,7 +297,7 @@
     [self triggerRefresh];
     
     if(isSelectible) {
-        [self cancelSelectible];
+        [self setToUnselectible];
     }
     
     [self proceedSuccessForProgressViewWithAddButtonKey:segmentType == PhotoHeaderSegmentTypePhoto ? @"PhotoTab" : @"AlbumTab"];
@@ -310,7 +310,7 @@
 
 - (void) deleteAlbumSuccessCallback {
     if(isSelectible) {
-        [self cancelSelectible];
+        [self setToUnselectible];
     }
     
     [self proceedSuccessForProgressViewWithAddButtonKey:segmentType == PhotoHeaderSegmentTypePhoto ? @"PhotoTab" : @"AlbumTab"];
@@ -326,7 +326,7 @@
 
 - (void) photosAddedSuccessCallback {
     if(isSelectible) {
-        [self cancelSelectible];
+        [self setToUnselectible];
     }
     
     [self proceedSuccessForProgressViewWithAddButtonKey:segmentType == PhotoHeaderSegmentTypePhoto ? @"PhotoTab" : @"AlbumTab"];
@@ -787,11 +787,11 @@
 }
 
 - (void) cancelClicked {
-    [self cancelSelectible];
+    [self setToUnselectible];
     [APPDELEGATE.base immediateShowAddButton];
 }
 
-- (void) cancelSelectible {
+- (void) setToUnselectible {
     if(segmentType == PhotoHeaderSegmentTypeAlbum || self.level == ImageGroupLevelDay) {
         self.title = NSLocalizedString(@"PhotosTitle", @"");
         self.navigationItem.leftBarButtonItem = previousButtonRef;

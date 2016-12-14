@@ -122,6 +122,7 @@
 
 - (void) triggerFacebookStop {
     NSLog(@"At triggerFacebookStop");
+    [[FBSDKLoginManager new] logOut];
     [fbStopDao requestFBStop];
     [self showLoading];
 }
@@ -174,8 +175,6 @@
     
     NSArray *readPermissions = [permissions objectForKey:@"read"];
 
-//    FBSDKLoginManager *fbLoginButton = [[FBSDKLoginManager alloc] init];
-//    fbLoginButton.loginBehavior = FBSDKLoginBehaviorWeb;
     [fbLoginButton logInWithReadPermissions:readPermissions fromViewController:self handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
         if (error) {
             NSLog(@"Process error1");

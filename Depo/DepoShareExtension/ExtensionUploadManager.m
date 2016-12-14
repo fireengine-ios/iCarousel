@@ -13,6 +13,8 @@
 #import "ExifContainer.h"
 #import "UIImage+Exif.h"
 
+static const NSUInteger ExtBufferSize = 1024*1024;
+
 @implementation ExtensionUploadManager
 
 @synthesize session;
@@ -81,6 +83,75 @@
     NSURLSessionUploadTask *uploadTask = [[ExtensionUploadManager sharedInstance].session uploadTaskWithRequest:request fromFile:[NSURL fileURLWithPath:tempPath]];
     uploadTask.taskDescription = tempPath;
     [uploadTask resume];
+}
+
+- (void) startUploadForVideoLink:(NSURL *) assetUrl {
+    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+    
+    [library assetForURL:assetUrl resultBlock:^(ALAsset *asset) {
+        if (asset) {
+            BOOL shouldContinueUpload = YES;
+            
+            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString *documentsDirectory = [paths objectAtIndex:0];
+            
+            NSString *randomVal = [NSString stringWithFormat:@"%.0f%d", [[NSDate date] timeIntervalSince1970], arc4random_uniform(99)];
+            NSString *tempVideoName = [NSString stringWithFormat:@"/%@_EXT.mpeg", randomVal];
+            NSString *tempPath = [documentsDirectory stringByAppendingString:tempVideoName];
+            
+            NSURL *tempUrl = [NSURL fileURLWithPath:tempPath];
+            [[NSFileManager defaultManager] createFileAtPath:tempPath contents:nil attributes:nil];
+            NSFileHandle *handle = [NSFileHandle fileHandleForWritingToURL:tempUrl error:nil];
+            if (!handle) {
+                shouldContinueUpload = NO;
+            }
+            
+            ALAssetRepresentation *rep = [asset defaultRepresentation];
+            uint8_t *buffer = calloc(ExtBufferSize, sizeof(*buffer));
+            NSUInteger offset = 0, bytesRead = 0;
+            
+            do {
+                @try {
+                    bytesRead = [rep getBytes:buffer fromOffset:offset length:ExtBufferSize error:nil];
+                    [handle writeData:[NSData dataWithBytesNoCopy:buffer length:bytesRead freeWhenDone:NO]];
+                    offset += bytesRead;
+                } @catch (NSException *exception) {
+                    free(buffer);
+                    shouldContinueUpload = NO;
+                }
+            } while (bytesRead > 0);
+            
+            free(buffer);
+            
+            NSString *newUuid = [[NSUUID UUID] UUIDString];
+            NSString *urlForUpload = [NSString stringWithFormat:@"%@/%@", [SharedUtil readSharedBaseUrl], newUuid];
+            
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlForUpload]];
+            
+            [request setTimeoutInterval:1200.0f];
+            [request setHTTPMethod:@"PUT"];
+            [request setValue:[SharedUtil readSharedToken] forHTTPHeaderField:@"X-Auth-Token"];
+            [request setValue:@"false" forHTTPHeaderField:@"X-Object-Meta-Favourite"];
+            [request setValue:[Util getWorkaroundUUID] forHTTPHeaderField:@"X-Object-Meta-Device-UUID"];
+            [request setValue:@"1" forHTTPHeaderField:@"x-meta-strategy"];
+            [request setValue:@"100-continue" forHTTPHeaderField:@"Expect"];
+            [request setValue:@"" forHTTPHeaderField:@"X-Object-Meta-Parent-Uuid"];
+            [request setValue:tempVideoName forHTTPHeaderField:@"X-Object-Meta-File-Name"];
+            [request addValue:@"video/mp4" forHTTPHeaderField:@"Content-Type"];
+            [request setValue:@"MOBILE_UPLOAD" forHTTPHeaderField:@"X-Object-Meta-Special-Folder"];
+            
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            NSDictionary *attributesDict = [fileManager attributesOfItemAtPath:tempPath error:NULL];
+            long long fileSize = [attributesDict fileSize];
+            NSString *postLength = [NSString stringWithFormat:@"%lld", fileSize];
+            [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+            
+            NSURLSessionUploadTask *uploadTask = [[ExtensionUploadManager sharedInstance].session uploadTaskWithRequest:request fromFile:tempUrl];
+            uploadTask.taskDescription = tempPath;
+            [uploadTask resume];
+        }
+    } failureBlock:^(NSError *error) {
+    }];
 }
 
 - (void) startUploadForDoc:(NSData *) docData withContentType:(NSString *) contentType withExt:(NSString *) ext {

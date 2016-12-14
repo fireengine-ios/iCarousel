@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @protocol ExtensionUploadManagerDelegate <NSObject>
 
@@ -28,5 +29,6 @@
 - (void) startUploadForVideoData:(NSData *) videoData;
 - (void) startUploadForVideoData:(NSData *) videoData withExtension:(NSString *) ext;
 - (void) startUploadForDoc:(NSData *) docData withContentType:(NSString *) contentType withExt:(NSString *) ext;
+- (void) startUploadForVideoLink:(NSURL *) assetUrl;
 
 @end

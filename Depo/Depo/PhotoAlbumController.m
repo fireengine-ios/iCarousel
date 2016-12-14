@@ -151,9 +151,20 @@
     photosScroll.scrollEnabled = YES;
     [self.view addSubview:photosScroll];
     
-    refreshControlPhotos = [[UIRefreshControl alloc] init];
-    [refreshControlPhotos addTarget:self action:@selector(triggerRefresh) forControlEvents:UIControlEventValueChanged];
-    [photosScroll addSubview:refreshControlPhotos];
+    [self createRefreshControl];
+}
+
+-(void)createRefreshControl {
+    if (!refreshControlPhotos) {
+        refreshControlPhotos = [[UIRefreshControl alloc] init];
+        [refreshControlPhotos addTarget:self action:@selector(triggerRefresh) forControlEvents:UIControlEventValueChanged];
+        [photosScroll addSubview:refreshControlPhotos];
+    }
+}
+
+-(void)removeRefreshControl {
+    [refreshControlPhotos removeFromSuperview];
+    refreshControlPhotos = nil;
 }
 
 - (void) triggerRefresh {
@@ -303,6 +314,7 @@
         [self triggerRefresh];
         [self proceedSuccessForProgressView];
     }
+    [self performSelector:@selector(setToUnselectible) withObject:nil afterDelay:3];
 }
 
 - (void) photosAddedFailCallback:(NSString *) errorMessage {
@@ -310,12 +322,13 @@
         contentModified = YES;
         [self triggerRefresh];
     }
+    [self performSelector:@selector(setToUnselectible) withObject:nil afterDelay:3];
 //    [self showErrorAlertWithMessage:errorMessage];
 }
 
 - (void) deleteImgSuccessCallback:(PhotoAlbum *) updatedAlbum {
     if(isSelectible) {
-        [self cancelSelectible];
+        [self setToUnselectible];
     }
     
     [self proceedSuccessForProgressView];
@@ -360,7 +373,7 @@
 
 
 - (void) squareImageWasLongPressedForFile:(MetaFile *)fileSelected {
-    [self changeToSelectedStatus];
+    [self setToSelectible];
 }
 
 - (void) triggerBack {
@@ -394,7 +407,7 @@
 #pragma mark MoreMenuDelegate
 
 -(void)moreMenuDidSelectUpdateSelectOption {
-    [self changeToSelectedStatus];
+    [self setToSelectible];
 }
 
 - (void) moreMenuDidSelectAlbumShare {
@@ -406,7 +419,7 @@
     [APPDELEGATE.base createAlbum:self.album withFiles:photoList  loadingMessage:NSLocalizedString(@"DownloadAlbumProgressMessage", @"")
                    successMessage:NSLocalizedString(@"DownloadAlbumSuccessMessage", @"")
                       failMessage:NSLocalizedString(@"DownloadAlbumFailMessage", @"")];
-    [self cancelSelectible];
+    [self setToUnselectible];
 }
 
 - (void) moreMenuDidSelectAlbumDelete {
@@ -505,14 +518,15 @@
     footerActionMenu.hidden = YES;
 }
 
-- (void) changeToSelectedStatus {
+- (void) setToSelectible {
     isSelectible = YES;
+    [self removeRefreshControl];
     self.title = NSLocalizedString(@"SelectFilesTitle", @"");
     
     moreButton.hidden = YES;
     
     cancelButton = [[CustomButton alloc] initWithFrame:CGRectMake(moreButton.frame.origin.x-30, moreButton.frame.origin.y, 60, 20) withImageName:nil withTitle:NSLocalizedString(@"ButtonCancel", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[UIColor whiteColor]];
-    [cancelButton addTarget:self action:@selector(cancelSelectible) forControlEvents:UIControlEventTouchUpInside];
+    [cancelButton addTarget:self action:@selector(setToUnselectible) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:cancelButton];
     
     if(!self.album.isReadOnly) {
@@ -524,7 +538,7 @@
     [self setSelectibleStatusForSquareImages:YES];
 }
 
-- (void) cancelSelectible {
+- (void) setToUnselectible {
     titleLabel.text = album.label;
 //    self.title = NSLocalizedString(@"PhotosTitle", @"");
     if(cancelButton) {
@@ -533,10 +547,11 @@
     moreButton.hidden = NO;
     
     isSelectible = NO;
+     [self createRefreshControl];
     [selectedFileList removeAllObjects];
     
     if(!self.album.isReadOnly) {
-        [APPDELEGATE.base immediateShowAddButton];
+       // [APPDELEGATE.base immediateShowAddButton];
     }
     
     [self setSelectibleStatusForSquareImages:NO];
@@ -557,7 +572,7 @@
                                  loadingMessage:loadingMessage
                                  successMessage:successMessage
                                     failMessage:failMessage];
-    [self cancelSelectible];
+    [self setToUnselectible];
 }
 
 -(NSMutableArray *)getMetaFilesOfSelectedFiles {

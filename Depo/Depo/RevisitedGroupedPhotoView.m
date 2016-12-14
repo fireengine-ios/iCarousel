@@ -56,6 +56,8 @@
 @synthesize progress;
 @synthesize searchField;
 @synthesize noItemView;
+@synthesize verticalIndicator;
+@synthesize sectionIndicator;
 
 @synthesize groups;
 @synthesize collView;
@@ -105,6 +107,7 @@
         collView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) collectionViewLayout:layout];
         collView.dataSource = self;
         collView.delegate = self;
+        collView.showsVerticalScrollIndicator = NO;
         collView.backgroundColor = [UIColor whiteColor];
         [collView registerClass:[RevisitedPhotoCollCell class] forCellWithReuseIdentifier:@"COLL_PHOTO_CELL"];
         [collView registerClass:[RevisitedUploadingPhotoCollCell class] forCellWithReuseIdentifier:@"COLL_UPLOADING_PHOTO_CELL"];
@@ -127,13 +130,30 @@
         tapGestureRecognizer.enabled = YES;
         [searchContainer addGestureRecognizer:tapGestureRecognizer];
         
-        refreshControl = [[UIRefreshControl alloc] init];
-        [refreshControl addTarget:self action:@selector(pullData) forControlEvents:UIControlEventValueChanged];
-        [collView addSubview:refreshControl];
+//        refreshControl = [[UIRefreshControl alloc] init];
+//        [refreshControl addTarget:self action:@selector(pullData) forControlEvents:UIControlEventValueChanged];
+//        [collView addSubview:refreshControl];
+        [self createRefreshControl];
         
         progress = [[MBProgressHUD alloc] initWithFrame:self.frame];
         progress.opacity = 0.4f;
         [self addSubview:progress];
+        
+        verticalIndicator = [[UIView alloc] initWithFrame:CGRectMake(self.frame.size.width - 15, 10, 12, self.frame.size.height - 60)];
+        UIImageView *verticalPole = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 12, verticalIndicator.frame.size.height)];
+        verticalPole.image = [UIImage imageNamed:@"scroll_path.png"];
+        [verticalIndicator addSubview:verticalPole];
+        
+        UIImageView *sectionIndicatorBg = [[UIImageView alloc] initWithFrame:CGRectMake(-90, 60, 100, 36)];
+        sectionIndicatorBg.image = [UIImage imageNamed:@"bg_label.png"];
+        [verticalIndicator addSubview:sectionIndicatorBg];
+        
+        sectionIndicator = [[CustomLabel alloc] initWithFrame:CGRectMake(-90, 68, 100, 20) withFont:[UIFont fontWithName:@"HelveticaNeue" size:12] withColor:[UIColor whiteColor] withText:@"" withAlignment:NSTextAlignmentCenter];
+        [verticalIndicator addSubview:sectionIndicator];
+        
+        verticalIndicator.hidden = YES;
+        verticalIndicator.alpha = 0.0f;
+        [self addSubview:verticalIndicator];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(autoIterationFinished) name:AUTO_ITERATION_FINISHED_NOT_KEY object:nil];
         
@@ -142,13 +162,26 @@
     return self;
 }
 
+-(void)createRefreshControl {
+    if (!refreshControl) {
+        refreshControl = [[UIRefreshControl alloc] init];
+        [refreshControl addTarget:self action:@selector(pullData) forControlEvents:UIControlEventValueChanged];
+        [collView addSubview:refreshControl];
+    }
+}
+
+-(void)removeRefreshControl {
+    [refreshControl removeFromSuperview];
+    refreshControl = nil;
+}
+
 - (void) pullData {
     listOffset = 0;
     groupSequence = 0;
     
     [groups removeAllObjects];
     [files removeAllObjects];
-  //  [collView reloadData];
+    //  [collView reloadData];
     [self.collView performSelectorOnMainThread:@selector(reloadData)
                                     withObject:nil
                                  waitUntilDone:NO];
@@ -222,7 +255,8 @@
 - (void) setToSelectible {
     if(!isSelectible) {
         isSelectible = YES;
-        [refreshControl setEnabled:NO];
+        [self removeRefreshControl];
+//        [refreshControl setEnabled:NO];
         [selectedFileList removeAllObjects];
         [selectedMetaFiles removeAllObjects];
         
@@ -232,7 +266,8 @@
 
 - (void) setToUnselectiblePriorToRefresh {
     isSelectible = NO;
-    [refreshControl setEnabled:YES];
+    [self createRefreshControl];
+//    [refreshControl setEnabled:YES];
     [selectedFileList removeAllObjects];
     [selectedMetaFiles removeAllObjects];
     
@@ -244,7 +279,8 @@
 
 - (void) setToUnselectible {
     isSelectible = NO;
-    [refreshControl setEnabled:YES];
+    [self createRefreshControl];
+//    [refreshControl setEnabled:YES];
     [selectedFileList removeAllObjects];
     [selectedMetaFiles removeAllObjects];
     
@@ -343,7 +379,38 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"IMAGE_SCROLL_RELOAD_DATA_AFTER_WARNING" object:self userInfo:userInfo];
             }
         }
+        NSIndexPath *visibleIndexPath = [collView indexPathForItemAtPoint:CGPointMake(30, currentOffset)];
+        if(visibleIndexPath) {
+            FileInfoGroup *visibleGroup = [self.groups objectAtIndex:visibleIndexPath.section];
+            if([visibleGroup.customTitle isEqualToString:NSLocalizedString(@"ImageGroupTypeInProgress", @"")]) {
+                sectionIndicator.text = @"";
+                [self hideVerticalIndicator];
+            } else {
+                [self showVerticalIndicator];
+                sectionIndicator.text = visibleGroup.customTitle;
+            }
+        }
     }
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    NSIndexPath *visibleIndexPath = [collView indexPathForItemAtPoint:CGPointMake(30, collView.contentOffset.y)];
+    if(visibleIndexPath) {
+        FileInfoGroup *visibleGroup = [self.groups objectAtIndex:visibleIndexPath.section];
+        if(![visibleGroup.customTitle isEqualToString:NSLocalizedString(@"ImageGroupTypeInProgress", @"")]) {
+            [self showVerticalIndicator];
+        }
+    }
+}
+
+- (void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if(!decelerate) {
+        [self performSelector:@selector(hideVerticalIndicator) withObject:nil afterDelay:1.8f];
+    }
+}
+
+- (void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    [self performSelector:@selector(hideVerticalIndicator) withObject:nil afterDelay:1.8f];
 }
 
 - (void) dynamicallyLoadNextPage {
@@ -427,19 +494,19 @@
         imgFooterActionMenu.hidden = NO;
     } else {
         imgFooterActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 70, self.frame.size.width, 60) shouldShowShare:YES shouldShowMove:YES shouldShowDelete:YES shouldShowDownload:YES shouldShowPrint:YES];
-       /* imgFooterActionMenu = [[FooterActionsMenuView alloc] initForPhotosTabWithFrame:frame
-                                                                       shouldShowShare:YES
-                                                                        shouldShowMove:YES
-                                                                    shouldShowDownload:YES
-                                                                      shouldShowDelete:YES
-                                                                       shouldShowPrint:YES];
-        imgFooterActionMenu = [[FooterActionsMenuView alloc] initForPhotosTabWithFrame:frame
-                                                                       shouldShowShare:YES
-                                                                        shouldShowMove:YES
-                                                                    shouldShowDownload:YES
-                                                                      shouldShowDelete:YES
-                                                                       shouldShowPrint:YES
-                                                                           isMoveAlbum:NO];*/
+        /* imgFooterActionMenu = [[FooterActionsMenuView alloc] initForPhotosTabWithFrame:frame
+         shouldShowShare:YES
+         shouldShowMove:YES
+         shouldShowDownload:YES
+         shouldShowDelete:YES
+         shouldShowPrint:YES];
+         imgFooterActionMenu = [[FooterActionsMenuView alloc] initForPhotosTabWithFrame:frame
+         shouldShowShare:YES
+         shouldShowMove:YES
+         shouldShowDownload:YES
+         shouldShowDelete:YES
+         shouldShowPrint:YES
+         isMoveAlbum:NO];*/
         imgFooterActionMenu.delegate = self;
         [self addSubview:imgFooterActionMenu];
     }
@@ -548,7 +615,7 @@
 
 - (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {
     [delegate revisitedGroupedPhoto:self triggerShareForFiles:selectedFileList];
-   // [APPDELEGATE.base triggerShareForFiles:selectedFileList];
+    // [APPDELEGATE.base triggerShareForFiles:selectedFileList];
 }
 
 - (void) footerActionMenuDidSelectPrint:(FooterActionsMenuView *)menu {
@@ -649,27 +716,21 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell * c = [cv dequeueReusableCellWithReuseIdentifier:@"COLL_PHOTO_CELL" forIndexPath:indexPath];
-    if (self.groups.count > indexPath.section) {
-        FileInfoGroup *sectionGroup = [self.groups objectAtIndex:indexPath.section];
-        if (sectionGroup.fileInfo.count > indexPath.row) {
-            id rowItem = [sectionGroup.fileInfo objectAtIndex:indexPath.row];
-            if([rowItem isKindOfClass:[MetaFile class]]) {
-                MetaFile *castedRow = (MetaFile *) rowItem;
-                RevisitedPhotoCollCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"COLL_PHOTO_CELL" forIndexPath:indexPath];
-                cell.delegate = self;
-                [cell loadContent:castedRow isSelectible:self.isSelectible withImageWidth:imageWidth withGroupKey:sectionGroup.groupKey isSelected:[selectedFileList containsObject:castedRow.uuid]];
-                return cell;
-            } else {
-                UploadRef *castedRow = (UploadRef *) rowItem;
-                RevisitedUploadingPhotoCollCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"COLL_UPLOADING_PHOTO_CELL" forIndexPath:indexPath];
-                cell.delegate = self;
-                [cell loadContent:castedRow isSelectible:self.isSelectible withImageWidth:imageWidth withGroupKey:sectionGroup.groupKey isSelected:NO];
-                return cell;
-            }
-        }
+    FileInfoGroup *sectionGroup = [self.groups objectAtIndex:indexPath.section];
+    id rowItem = [sectionGroup.fileInfo objectAtIndex:indexPath.row];
+    if([rowItem isKindOfClass:[MetaFile class]]) {
+        MetaFile *castedRow = (MetaFile *) rowItem;
+        RevisitedPhotoCollCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"COLL_PHOTO_CELL" forIndexPath:indexPath];
+        cell.delegate = self;
+        [cell loadContent:castedRow isSelectible:self.isSelectible withImageWidth:imageWidth withGroupKey:sectionGroup.groupKey isSelected:[selectedFileList containsObject:castedRow.uuid]];
+        return cell;
+    } else {
+        UploadRef *castedRow = (UploadRef *) rowItem;
+        RevisitedUploadingPhotoCollCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"COLL_UPLOADING_PHOTO_CELL" forIndexPath:indexPath];
+        cell.delegate = self;
+        [cell loadContent:castedRow isSelectible:self.isSelectible withImageWidth:imageWidth withGroupKey:sectionGroup.groupKey isSelected:NO];
+        return cell;
     }
-    return c;
 }
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -704,20 +765,36 @@
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)theCollectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)theIndexPath {
     if(kind == UICollectionElementKindSectionHeader && initialLoadDone) {
-        if (self.groups.count > theIndexPath.section) {
-            FileInfoGroup *sectionGroup = [self.groups objectAtIndex:theIndexPath.section];
-            
-            GroupPhotoSectionView *collFooterView = [theCollectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"group_photo_header" forIndexPath:theIndexPath];
-            [collFooterView loadSectionWithTitle:sectionGroup.customTitle];
-            return collFooterView;
-        }
-        return nil;
+        FileInfoGroup *sectionGroup = [self.groups objectAtIndex:theIndexPath.section];
+        
+        GroupPhotoSectionView *collFooterView = [theCollectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"group_photo_header" forIndexPath:theIndexPath];
+        [collFooterView loadSectionWithTitle:sectionGroup.customTitle];
+        return collFooterView;
     }
     return nil;
 }
 
 - (void) dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void) showVerticalIndicator {
+    if(verticalIndicator.isHidden) {
+        verticalIndicator.hidden = NO;
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(hideVerticalIndicator) object:nil];
+        [UIView animateWithDuration:0.2f delay:0.0f options:0 animations:^{
+            verticalIndicator.alpha = 1.0f;
+        } completion:^(BOOL finished) {
+        }];
+    }
+}
+
+- (void) hideVerticalIndicator {
+    [UIView animateWithDuration:0.2f delay:0.0f options:0 animations:^{
+        verticalIndicator.alpha = 0.0f;
+    } completion:^(BOOL finished) {
+        verticalIndicator.hidden = YES;
+    }];
 }
 
 @end

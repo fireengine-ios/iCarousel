@@ -123,13 +123,15 @@
 + (void) cacheSyncHashLocally:(NSString *) hash {
     if(hash == nil)
         return;
-    NSArray *result = [SyncUtil readSyncHashLocally];
-    if(![result containsObject:hash]) {
-        NSArray *updatedArray = [result arrayByAddingObject:hash];
-        NSString *baseUrlConstant = [SyncUtil readBaseUrlConstant] != nil ? [SyncUtil readBaseUrlConstant] : @"";
-        [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray] forKey:[NSString stringWithFormat:SYNCED_LOCAL_HASHES_KEY, baseUrlConstant]];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0ul), ^(void) {
+        NSArray *result = [SyncUtil readSyncHashLocally];
+        if(![result containsObject:hash]) {
+            NSArray *updatedArray = [result arrayByAddingObject:hash];
+            NSString *baseUrlConstant = [SyncUtil readBaseUrlConstant] != nil ? [SyncUtil readBaseUrlConstant] : @"";
+            [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray] forKey:[NSString stringWithFormat:SYNCED_LOCAL_HASHES_KEY, baseUrlConstant]];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+    });
 }
 
 + (void) removeLocalHash:(NSString *) hash {
@@ -186,13 +188,15 @@
 }
 
 + (void) cacheSyncFileSummary:(MetaFileSummary *) summary {
-    NSArray *result = [SyncUtil readSyncFileSummaries];
-    if(![result containsObject:summary]) {
-        NSArray *updatedArray = [result arrayByAddingObject:summary];
-        NSString *baseUrlConstant = [SyncUtil readBaseUrlConstant] != nil ? [SyncUtil readBaseUrlConstant] : @"";
-        [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray] forKey:[NSString stringWithFormat:SYNCED_REMOTE_FILES_SUMMARY_KEY, baseUrlConstant]];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0ul), ^(void) {
+        NSArray *result = [SyncUtil readSyncFileSummaries];
+        if(![result containsObject:summary]) {
+            NSArray *updatedArray = [result arrayByAddingObject:summary];
+            NSString *baseUrlConstant = [SyncUtil readBaseUrlConstant] != nil ? [SyncUtil readBaseUrlConstant] : @"";
+            [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray] forKey:[NSString stringWithFormat:SYNCED_REMOTE_FILES_SUMMARY_KEY, baseUrlConstant]];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+    });
 }
 
 + (void) cacheSyncFileSummaries:(NSMutableArray *) newArray {
