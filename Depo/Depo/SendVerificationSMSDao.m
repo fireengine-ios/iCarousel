@@ -39,18 +39,17 @@
                     NSString *statusVal = [mainDict objectForKey:@"status"];
                     if(statusVal != nil && ![statusVal isKindOfClass:[NSNull class]]) {
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            [self shouldReturnFailWithMessage:NSLocalizedString(@"InvalidCaptchaErrorMessage", @"")];
+                            [self shouldReturnSuccessWithObject:mainDict];
+                        });
+                        return ;
+                    }
+                    if (![self checkResponseHasError:response]) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
                         });
                     }
                     else {
-                        if (![self checkResponseHasError:response]) {
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-                            });
-                        }
-                        else {
-                            [self requestFailed:response];
-                        }
+                        [self requestFailed:response];
                     }
                 }
             }
