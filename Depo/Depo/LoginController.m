@@ -35,8 +35,9 @@
 
 @synthesize mainScroll;
 @synthesize loginButton;
-@synthesize refreshButton;
+//@synthesize refreshButton;
 @synthesize captchaView;
+@synthesize captchaContainer;
 @synthesize msisdnField;
 @synthesize passField;
 @synthesize captchaField;
@@ -114,11 +115,13 @@
 //        SimpleButton *forgotPass = [[SimpleButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 150, scrollYIndex, 130, 25) withTitle:NSLocalizedString(@"ForgotPassButton", @"")];
 //        [forgotPass addTarget:self action:@selector(forgotMeClicked) forControlEvents:UIControlEventTouchUpInside];
 //        [mainScroll addSubview:forgotPass];
+        
+        captchaContainer = [[UIView alloc] initWithFrame:CGRectMake(20, scrollYIndex, 200, 100)];
+//        captchaContainer.backgroundColor = [UIColor redColor];
+        captchaContainer.hidden = YES;
+        [container addSubview:captchaContainer];
 
-        scrollYIndex += 40;
-
-        captchaView = [[UIImageView alloc] initWithFrame:CGRectMake(20, scrollYIndex, 200, 50)];
-        captchaView.hidden = YES;
+        captchaView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 200, 50)];
         UIImage *image = [UIImage imageNamed:@"bg_captcha.png"];
         CGSize newSize = captchaView.frame.size;
         UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
@@ -126,22 +129,19 @@
         UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         captchaView.backgroundColor = [UIColor colorWithPatternImage:newImage];
-//        [mainScroll addSubview:captchaView];
-        [container addSubview:captchaView];
+        [captchaContainer addSubview:captchaView];
         
-        refreshButton = [[CustomButton alloc] initWithFrame:CGRectMake(captchaView.frame.origin.x + captchaView.frame.size.width + 32, captchaView.frame.origin.y + (captchaView.frame.size.height - 18)/2, 18, 18) withImageName:@"icon_captcha_refresh.png"];
-        refreshButton.hidden = YES;
+        CustomButton* refreshButton = [[CustomButton alloc] initWithFrame:CGRectMake(captchaView.frame.origin.x + captchaView.frame.size.width + 32, captchaView.frame.origin.y + (captchaView.frame.size.height - 18)/2, 18, 18) withImageName:@"icon_captcha_refresh.png"];
         [refreshButton addTarget:self action:@selector(loadCaptcha) forControlEvents:UIControlEventTouchUpInside];
-//        [mainScroll addSubview:refreshButton];
-        [container addSubview:refreshButton];
+        [captchaContainer addSubview:refreshButton];
         
-        captchaField = [[LoginTextfield alloc] initSecureWithFrame:CGRectMake(20, captchaView.frame.origin.y + captchaView.frame.size.height + 5, self.view.frame.size.width - 40, 43) withPlaceholder:NSLocalizedString(@"CaptchaPlaceholder", @"")];
-        captchaField.hidden = YES;
+        captchaField = [[LoginTextfield alloc] initSecureWithFrame:CGRectMake(0, captchaView.frame.origin.y + captchaView.frame.size.height + 5, self.view.frame.size.width - 40, 43) withPlaceholder:NSLocalizedString(@"CaptchaPlaceholder", @"")];
         captchaField.delegate = self;
-//        [mainScroll addSubview:captchaField];
-        [container addSubview:captchaField];
+        [captchaContainer addSubview:captchaField];
         
        // scrollYIndex += 20;
+        
+        scrollYIndex += 40;
         
         loginButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 50) withTitle:NSLocalizedString(@"Login", @"") withTitleColor:[Util UIColorForHexColor:@"FFFFFF"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"3FB0E8"] withBgColor:[Util UIColorForHexColor:@"3FB0E8"] withCornerRadius:5];
         [loginButton addTarget:self action:@selector(loginClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -159,7 +159,7 @@
 //        [mainScroll addSubview:passIconImgView];
         [forgotPassView addSubview:passIconImgView];
         
-        SimpleButton *forgotPass = [[SimpleButton alloc] initWithFrame:CGRectMake(0, 0, 130, 25) withTitle:NSLocalizedString(@"ForgotPassButton", @"")];
+        SimpleButton *forgotPass = [[SimpleButton alloc] initWithFrame:CGRectMake(0, 4, 130, 25) withTitle:NSLocalizedString(@"ForgotPassButton", @"")];
         [forgotPass addTarget:self action:@selector(forgotMeClicked) forControlEvents:UIControlEventTouchUpInside];
 //        [mainScroll addSubview:forgotPass];
         [forgotPassView addSubview:forgotPass];
@@ -167,13 +167,25 @@
        // CGRect loginButtonFrame = CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 50);
         
         if(IS_IPAD) {
-            msisdnLabel.frame = CGRectMake((self.view.frame.size.width - 320)/2 + 5, (self.view.frame.size.height - 300)/2 - 100, 320, 20);
-            msisdnField.frame = CGRectMake((self.view.frame.size.width - 320)/2, msisdnLabel.frame.origin.y + msisdnLabel.frame.size.height + 10, 320, 43);
-            passLabel.frame = CGRectMake((self.view.frame.size.width - 320)/2 + 5, msisdnField.frame.origin.y + msisdnField.frame.size.height + 20, 320, 20);
-            passField.frame = CGRectMake((self.view.frame.size.width - 320)/2, passLabel.frame.origin.y + passLabel.frame.size.height + 10, 320, 43);
-            rememberMe.frame = CGRectMake((self.view.frame.size.width - 320)/2 + 5, passField.frame.origin.y + passField.frame.size.height + 30, 120, 25);
-            forgotPass.frame = CGRectMake(passField.frame.origin.x + passField.frame.size.width - 130, rememberMe.frame.origin.y, 130, 25);
-            loginButton.frame = CGRectMake((self.view.frame.size.width - 320)/2, rememberMe.frame.origin.y + rememberMe.frame.size.height + 30, 320, 50);
+            msisdnLabel.frame = CGRectMake((self.view.frame.size.width - 320)/2 + 5, (self.view.frame.size.height - 300)/2 - 100, 320, msisdnLabel.frame.size.height);
+            msisdnField.frame = CGRectMake((self.view.frame.size.width - 320)/2, msisdnLabel.frame.origin.y + msisdnLabel.frame.size.height + 10, 320, msisdnField.frame.size.height);
+            passLabel.frame = CGRectMake((self.view.frame.size.width - 320)/2 + 5, msisdnField.frame.origin.y + msisdnField.frame.size.height + 20, 320, passLabel.frame.size.height);
+            passField.frame = CGRectMake((self.view.frame.size.width - 320)/2, passLabel.frame.origin.y + passLabel.frame.size.height + 10, 320, passField.frame.size.height);
+            rememberMe.frame = CGRectMake((self.view.frame.size.width - 320)/2 + 5, passField.frame.origin.y + passField.frame.size.height + 30, 120, rememberMe.frame.size.height);
+//            loginButton.frame = CGRectMake((self.view.frame.size.width - 320)/2, rememberMe.frame.origin.y + rememberMe.frame.size.height + 30, 320, loginButton.frame.size.height);
+            
+            //workaround
+            [loginButton removeFromSuperview];
+            loginButton = [[SimpleButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 320)/2, rememberMe.frame.origin.y + rememberMe.frame.size.height + 30, 320, loginButton.frame.size.height) withTitle:NSLocalizedString(@"Login", @"") withTitleColor:[Util UIColorForHexColor:@"FFFFFF"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"3FB0E8"] withBgColor:[Util UIColorForHexColor:@"3FB0E8"] withCornerRadius:5];
+            [loginButton addTarget:self action:@selector(loginClicked) forControlEvents:UIControlEventTouchUpInside];
+            [container addSubview:loginButton];
+            //workaround
+            
+            forgotPassView.frame = CGRectMake((self.view.frame.size.width - forgotPassView.frame.size.width)/2 , loginButton.frame.origin.y + loginButton.frame.size.height + 30, forgotPassView.frame.size.width, forgotPassView.frame.size.height);
+            
+            captchaContainer.frame = CGRectMake((self.view.frame.size.width - 320)/2 , loginButton.frame.origin.y + loginButton.frame.size.height + 30, 320, captchaContainer.frame.size.height);
+//            
+//            captchaField.frame = CGRectMake((self.view.frame.size.width - 320)/2 , loginButton.frame.origin.y + loginButton.frame.size.height + 30, 320, captchaField.frame.size.height);
         }
         
 //        loginButton = [[SimpleButton alloc] initWithFrame:loginButtonFrame withTitle:NSLocalizedString(@"Login", @"") withTitleColor:[Util UIColorForHexColor:@"FFFFFF"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"3FB0E8"] withBgColor:[Util UIColorForHexColor:@"3FB0E8"] withCornerRadius:5];
@@ -274,7 +286,7 @@
         [self showErrorAlertWithMessage:NSLocalizedString(@"SignUpRequiredError", @"")];
     } else {
         [self showErrorAlertWithMessage:NSLocalizedString(@"LoginError", @"")];
-        if(![captchaField isHidden]) {
+        if(![captchaContainer isHidden]) {
             [self loadCaptcha];
         }
     }
@@ -390,12 +402,12 @@
         return;
     }
     
-    if(![captchaField isHidden] && [captchaField.text length] == 0) {
+    if(![captchaContainer isHidden] && [captchaField.text length] == 0) {
         [self showErrorAlertWithMessage:NSLocalizedString(@"CaptchaFieldErrorMessage", @"")];
         return;
     }
 
-    if(![captchaField isHidden]) {
+    if(![captchaContainer isHidden]) {
         [tokenDao requestTokenForMsisdn:msisdnValue andPassword:passValue shouldRememberMe:rememberMe.isChecked withCaptchaId:captchaUniqueId withCaptchaValue:captchaField.text];
     } else {
         [tokenDao requestTokenForMsisdn:msisdnValue andPassword:passValue shouldRememberMe:rememberMe.isChecked];
@@ -436,17 +448,14 @@
 - (void) captchaSuccessCallback:(UIImage *) captchaImg {
     captchaView.image = captchaImg;
     
-    if(captchaView.isHidden) {
-        loginButton.frame = CGRectMake(loginButton.frame.origin.x, captchaField.frame.origin.y + captchaField.frame.size.height + 20, loginButton.frame.size.width, loginButton.frame.size.height);
+    if(captchaContainer.isHidden) {
+        loginButton.frame = CGRectMake(loginButton.frame.origin.x, captchaContainer.frame.origin.y + captchaContainer.frame.size.height + 20, loginButton.frame.size.width, loginButton.frame.size.height);
         
         forgotPassView.frame = CGRectMake(forgotPassView.frame.origin.x, loginButton.frame.origin.y + loginButton.frame.size.height + 60 , forgotPassView.frame.size.width, forgotPassView.frame.size.height);
         
-//        mainScroll.contentSize = CGSizeMake(mainScroll.contentSize.width, mainScroll.contentSize.height + 120);
         container.contentSize = CGSizeMake(container.contentSize.width, self.view.frame.size.height + 200);
         [container setContentOffset:CGPointMake(0, 105) animated:YES];
-        captchaView.hidden = NO;
-        captchaField.hidden = NO;
-        refreshButton.hidden = NO;
+        captchaContainer.hidden = NO;
     }
 }
 
@@ -487,7 +496,7 @@
 
 -(void)setViewMovedUp:(BOOL)movedUp {
     if (movedUp) {
-        if(captchaView.isHidden) {
+        if(captchaContainer.isHidden) {
             container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + 280);
             [container setContentOffset:CGPointMake(0, 85) animated:YES];
         }
@@ -497,7 +506,7 @@
         }
 //        [container setContentOffset:CGPointMake(0, 85) animated:YES];
     } else {
-        if(captchaView.isHidden) {
+        if(captchaContainer.isHidden) {
             container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
         }
         else {
