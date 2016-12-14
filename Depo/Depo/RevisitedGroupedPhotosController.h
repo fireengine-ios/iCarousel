@@ -21,6 +21,8 @@
 
 @interface RevisitedGroupedPhotosController : MyViewController <RevisitedPhotoHeaderSegmentDelegate, RevisitedAlbumListDelegate, PhotoAlbumDelegate, NewAlbumDelegate, RevisitedGroupedPhotoDelegate, ImagePreviewDelegate, VideoPreviewDelegate, CustomEntryPopupDelegate, CustomConfirmDelegate> {
     ShareLinkDao *shareDao;
+    
+    BOOL footerActionMenuDidSelect;
 }
 
 @property (nonatomic, strong) RevisitedPhotoHeaderSegmentView *segmentView;

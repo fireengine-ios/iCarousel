@@ -32,6 +32,7 @@
 @synthesize selectedFileList;
 @synthesize footerActionMenu;
 @synthesize refreshControlPhotos;
+//@synthesize footerActionMenuDidSelect;
 
 
 #pragma mark - Init Methods
@@ -550,9 +551,11 @@
      [self createRefreshControl];
     [selectedFileList removeAllObjects];
     
-    if(!self.album.isReadOnly) {
-       // [APPDELEGATE.base immediateShowAddButton];
+    if(!self.album.isReadOnly && !footerActionMenuDidSelect) {
+        [APPDELEGATE.base immediateShowAddButton];
     }
+    
+    footerActionMenuDidSelect = NO;
     
     [self setSelectibleStatusForSquareImages:NO];
 
@@ -572,6 +575,7 @@
                                  loadingMessage:loadingMessage
                                  successMessage:successMessage
                                     failMessage:failMessage];
+    footerActionMenuDidSelect = YES;
     [self setToUnselectible];
 }
 
@@ -603,6 +607,7 @@
         self.deleteType = DeleteTypeFooterMenu;
         [MoreMenuView presentConfirmRemoveFromController:self.nav delegateOwner:self];
     }
+    footerActionMenuDidSelect = YES;
 }
 
 - (void) footerActionMenuDidSelectMove:(FooterActionsMenuView *) menu {

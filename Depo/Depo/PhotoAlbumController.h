@@ -44,6 +44,7 @@
     BOOL isLoading;
     BOOL isSelectible;
     BOOL contentModified;
+    BOOL footerActionMenuDidSelect;
     
     
     MyNavigationController *printNav;

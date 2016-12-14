@@ -1120,6 +1120,8 @@
     }
 }
 
+
+
 -(void)hideProcessView {
      NSLog(@"hideProcessView");
     downloadingProcessView.hidden = true;
@@ -1129,6 +1131,7 @@
 -(void)removeProgressViewWithMessage:(NSString *)message isSuccess:(BOOL)success {
     NSLog(@"removeProgressViewWithMessage: %@", message);
     [downloadingProcessView updateMessage:message isSuccess:success];
+    [self immediateHideAddButton];
     [self performSelector:@selector(hideProcessView) withObject:nil afterDelay:3];
 }
 

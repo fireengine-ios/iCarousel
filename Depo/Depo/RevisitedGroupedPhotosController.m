@@ -135,7 +135,13 @@
     [albumView setToUnselectible];
     [groupView setToUnselectible];
 
-   // [APPDELEGATE.base immediateShowAddButton];
+    if(!footerActionMenuDidSelect) {
+        [APPDELEGATE.base immediateShowAddButton];
+    }
+    
+    footerActionMenuDidSelect = NO;
+    
+//    [APPDELEGATE.base immediateShowAddButton];
 }
 
 #pragma mark RevisitedAlbumListDelegate methods
@@ -179,6 +185,7 @@
                         loadingMessage:NSLocalizedString(@"DownloadAlbumsProgressMessage", @"")
                         successMessage:NSLocalizedString(@"DownloadAlbumsSuccessMessage", @"")
                            failMessage:NSLocalizedString(@"DownloadAlbumFailMessage", @"")];
+    footerActionMenuDidSelect = YES;
     [self cancelClicked];
 }
 
@@ -279,6 +286,7 @@
                                  loadingMessage:loadingMessage
                                  successMessage:successMessage
                                     failMessage:failMessage];
+    footerActionMenuDidSelect = YES;
     [self cancelClicked];
 }
 
