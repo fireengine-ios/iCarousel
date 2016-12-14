@@ -139,7 +139,7 @@
         progress.opacity = 0.4f;
         [self addSubview:progress];
         
-        verticalIndicator = [[UIView alloc] initWithFrame:CGRectMake(self.frame.size.width - 22, 10, 12, self.frame.size.height - 60)];
+        verticalIndicator = [[UIView alloc] initWithFrame:CGRectMake(self.frame.size.width - 15, 10, 12, self.frame.size.height - 60)];
         UIImageView *verticalPole = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 12, verticalIndicator.frame.size.height)];
         verticalPole.image = [UIImage imageNamed:@"scroll_path.png"];
         [verticalIndicator addSubview:verticalPole];
