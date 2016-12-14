@@ -170,6 +170,8 @@
 //    if ([msisdnValue length] > 0)
 //        msisdnValue = [[msisdnValue substringToIndex:1] isEqualToString:@"0"] ? [msisdnValue substringFromIndex:1] : msisdnValue;
     
+    [self.view endEditing:YES];
+    
     NSString *trimmedString = [[msisdnField.text stringByReplacingOccurrencesOfString:@"(" withString:@""] stringByReplacingOccurrencesOfString:@")" withString:@""];
     
     msisdnValue = trimmedString;
@@ -202,8 +204,6 @@
     APPDELEGATE.session.signupReferenceMsisdn = msisdnValue;
     APPDELEGATE.session.signupReferenceEmail = emailField.text;
     APPDELEGATE.session.signupReferencePassword = passwordField.text;
-
-    [self.view endEditing:YES];
     
     NSString *confirmMessage = [NSString stringWithFormat:NSLocalizedString(@"EmailConfirmMessage", @""), emailField.text];
     CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"EmailConfirmUpdate", @"") withApproveTitle:NSLocalizedString(@"EmailConfirmContinue", @"") withMessage:confirmMessage withModalType:ModalTypeApprove];

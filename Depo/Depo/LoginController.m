@@ -362,6 +362,8 @@
 
 - (void) loginClicked {
     
+    [self.view endEditing:YES];
+    
     NSString *trimmedString = [[msisdnField.text stringByReplacingOccurrencesOfString:@"(" withString:@""] stringByReplacingOccurrencesOfString:@")" withString:@""];
     
     msisdnValue = trimmedString;
@@ -392,8 +394,6 @@
         [self showErrorAlertWithMessage:NSLocalizedString(@"CaptchaFieldErrorMessage", @"")];
         return;
     }
-    
-    [self.view endEditing:YES];
 
     if(![captchaField isHidden]) {
         [tokenDao requestTokenForMsisdn:msisdnValue andPassword:passValue shouldRememberMe:rememberMe.isChecked withCaptchaId:captchaUniqueId withCaptchaValue:captchaField.text];
