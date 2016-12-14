@@ -103,7 +103,7 @@
         if(!self.tokenAlreadyRevisitedFlag) {
             IGLog(@"BaseDao request failed with 401 - tokenAlreadyRevisitedFlag is false, setting to true");
             self.tokenAlreadyRevisitedFlag = YES;
-            dispatch_sync(dispatch_get_main_queue(), ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
                 [self triggerNewToken];
             });
         } else {
