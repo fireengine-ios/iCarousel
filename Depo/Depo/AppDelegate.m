@@ -18,6 +18,7 @@
 #import "SettingsUploadController.h"
 #import "SettingsStorageController.h"
 #import "RevisitedStorageController.h"
+#import "OTPController.h"
 
 #import "FileListController.h"
 #import "MapUtil.h"
@@ -434,9 +435,12 @@
         [self.window setRootViewController:[[BaseBgController alloc] init]];
     } else {
         //        WelcomeController *welcomePage = [[WelcomeController alloc] init];
-        LoginController *loginController = [[LoginController alloc] init];
-        MyNavigationController *welcomeNav = [[MyNavigationController alloc] initWithRootViewController:loginController];
-        self.window.rootViewController = welcomeNav;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            LoginController *loginController = [[LoginController alloc] init];
+            MyNavigationController *welcomeNav = [[MyNavigationController alloc] initWithRootViewController:loginController];
+            self.window.rootViewController = welcomeNav;
+        });
+       
     }
 }
 
@@ -695,6 +699,9 @@
         } else if([self.window.rootViewController isKindOfClass:[MyNavigationController class]]){
             MyNavigationController *castedCtrl = (MyNavigationController *) self.window.rootViewController;
             if([[castedCtrl.viewControllers lastObject] isKindOfClass:[PostLoginSyncPrefController class]]) {
+                shouldContinue = NO;
+            }
+            if([[castedCtrl.viewControllers lastObject] isKindOfClass:[OTPController class]]) {
                 shouldContinue = NO;
             }
         }
