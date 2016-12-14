@@ -183,9 +183,9 @@
             
             forgotPassView.frame = CGRectMake((self.view.frame.size.width - forgotPassView.frame.size.width)/2 , loginButton.frame.origin.y + loginButton.frame.size.height + 30, forgotPassView.frame.size.width, forgotPassView.frame.size.height);
             
-            captchaContainer.frame = CGRectMake((self.view.frame.size.width - 320)/2 , loginButton.frame.origin.y + loginButton.frame.size.height + 30, 320, captchaContainer.frame.size.height);
-//            
-//            captchaField.frame = CGRectMake((self.view.frame.size.width - 320)/2 , loginButton.frame.origin.y + loginButton.frame.size.height + 30, 320, captchaField.frame.size.height);
+            captchaContainer.frame = CGRectMake((self.view.frame.size.width - 320)/2 , rememberMe.frame.origin.y + rememberMe.frame.size.height + 30, 320, captchaContainer.frame.size.height);
+            
+            captchaField.frame = CGRectMake(captchaField.frame.origin.x , captchaField.frame.origin.y, 320, captchaField.frame.size.height);
         }
         
 //        loginButton = [[SimpleButton alloc] initWithFrame:loginButtonFrame withTitle:NSLocalizedString(@"Login", @"") withTitleColor:[Util UIColorForHexColor:@"FFFFFF"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"3FB0E8"] withBgColor:[Util UIColorForHexColor:@"3FB0E8"] withCornerRadius:5];
@@ -453,8 +453,10 @@
         
         forgotPassView.frame = CGRectMake(forgotPassView.frame.origin.x, loginButton.frame.origin.y + loginButton.frame.size.height + 60 , forgotPassView.frame.size.width, forgotPassView.frame.size.height);
         
-        container.contentSize = CGSizeMake(container.contentSize.width, self.view.frame.size.height + 200);
-        [container setContentOffset:CGPointMake(0, 105) animated:YES];
+        if(!IS_IPAD) {
+            container.contentSize = CGSizeMake(container.contentSize.width, self.view.frame.size.height + 200);
+            [container setContentOffset:CGPointMake(0, 105) animated:YES];
+        }
         captchaContainer.hidden = NO;
     }
 }
