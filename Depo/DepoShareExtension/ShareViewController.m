@@ -99,7 +99,6 @@
     if(dict != nil) {
         BOOL isPhoto = [[dict objectForKey:@"isPhoto"] boolValue];
         BOOL isMedia = [[dict objectForKey:@"isMedia"] boolValue];
-        BOOL isLocal = [[dict objectForKey:@"isLocal"] boolValue];
         id item = [dict objectForKey:@"item"];
 
         [ExtensionUploadManager sharedInstance].delegate = self;
@@ -110,12 +109,8 @@
                 NSURL *moviePath = item;
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    if(isLocal) {
-                        [[ExtensionUploadManager sharedInstance] startUploadForVideoLink:moviePath];
-                    } else {
-                        NSData *assetData = [NSData dataWithContentsOfURL:moviePath];
-                        [[ExtensionUploadManager sharedInstance] startUploadForVideoData:assetData];
-                    }
+                    NSData *assetData = [NSData dataWithContentsOfURL:moviePath];
+                    [[ExtensionUploadManager sharedInstance] startUploadForVideoData:assetData];
                 });
             }
         } else {
@@ -172,7 +167,7 @@
         if([itemProvider hasItemConformingToTypeIdentifier:@"public.image"]) {
             [itemProvider loadItemForTypeIdentifier:@"public.image" options:nil completionHandler:
              ^(id<NSSecureCoding> item, NSError *error) {
-                 NSDictionary *dict = [NSDictionary dictionaryWithObjects:@[item, @"YES", @"YES", @"NO"] forKeys:@[@"item", @"isPhoto", @"isMedia", @"isLocal"]];
+                 NSDictionary *dict = [NSDictionary dictionaryWithObjects:@[item, @"YES", @"YES"] forKeys:@[@"item", @"isPhoto", @"isMedia"]];
                  [urlsToUpload addObject:dict];
                  counter ++;
                  if(counter == totalCount) {
@@ -182,7 +177,7 @@
         } else if ([itemProvider hasItemConformingToTypeIdentifier:(NSString *)kUTTypeQuickTimeMovie]) {
             [itemProvider loadItemForTypeIdentifier:@"com.apple.quicktime-movie" options:nil completionHandler:^(NSURL *path,NSError *error){
                 if (path) {
-                    NSDictionary *dict = [NSDictionary dictionaryWithObjects:@[path, @"NO", @"YES", @"NO"] forKeys:@[@"item", @"isPhoto", @"isMedia", @"isLocal"]];
+                    NSDictionary *dict = [NSDictionary dictionaryWithObjects:@[path, @"NO", @"YES"] forKeys:@[@"item", @"isPhoto", @"isMedia"]];
                     [urlsToUpload addObject:dict];
                     counter ++;
                     if(counter == totalCount) {
@@ -199,7 +194,7 @@
             [itemProvider loadItemForTypeIdentifier:@"public.movie" options:nil completionHandler:^(NSURL *path,NSError *error){
                 if (path) {
                     IGLog(@"ShareViewController loadItemForTypeIdentifier:public.movie path found");
-                    NSDictionary *dict = [NSDictionary dictionaryWithObjects:@[path, @"NO", @"YES", @"YES"] forKeys:@[@"item", @"isPhoto", @"isMedia", @"isLocal"]];
+                    NSDictionary *dict = [NSDictionary dictionaryWithObjects:@[path, @"NO", @"YES"] forKeys:@[@"item", @"isPhoto", @"isMedia"]];
                     [urlsToUpload addObject:dict];
                     counter ++;
                     if(counter == totalCount) {
@@ -210,7 +205,7 @@
         } else if ([itemProvider hasItemConformingToTypeIdentifier:(NSString *)kUTTypePDF]) {
             [itemProvider loadItemForTypeIdentifier:@"com.adobe.pdf" options:nil completionHandler:^(NSURL *path,NSError *error){
                 if (path) {
-                    NSDictionary *dict = [NSDictionary dictionaryWithObjects:@[path, @"NO", @"NO", @"NO", @"application/pdf", @"pdf"] forKeys:@[@"item", @"isPhoto", @"isMedia", @"isLocal", @"contentType", @"extension"]];
+                    NSDictionary *dict = [NSDictionary dictionaryWithObjects:@[path, @"NO", @"NO", @"application/pdf", @"pdf"] forKeys:@[@"item", @"isPhoto", @"isMedia", @"contentType", @"extension"]];
                     [urlsToUpload addObject:dict];
                     counter ++;
                     if(counter == totalCount) {
@@ -231,9 +226,9 @@
 
                     NSDictionary *dict;
                     if([[extension lowercaseString] hasSuffix:@"mp4"] || [[extension lowercaseString] hasSuffix:@"mpeg"]) {
-                        dict = [NSDictionary dictionaryWithObjects:@[path, @"NO", @"YES", @"NO"] forKeys:@[@"item", @"isPhoto", @"isMedia", @"isLocal"]];
+                        dict = [NSDictionary dictionaryWithObjects:@[path, @"NO", @"YES"] forKeys:@[@"item", @"isPhoto", @"isMedia"]];
                     } else {
-                        dict = [NSDictionary dictionaryWithObjects:@[path, @"NO", @"NO", @"NO", @"application/octet-stream", extension] forKeys:@[@"item", @"isPhoto", @"isMedia", @"isLocal", @"contentType", @"extension"]];
+                        dict = [NSDictionary dictionaryWithObjects:@[path, @"NO", @"NO", @"application/octet-stream", extension] forKeys:@[@"item", @"isPhoto", @"isMedia", @"contentType", @"extension"]];
                     }
                     [urlsToUpload addObject:dict];
                     counter ++;
