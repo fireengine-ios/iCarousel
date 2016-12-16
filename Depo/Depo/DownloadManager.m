@@ -87,7 +87,7 @@
         }
     }
     
-    [self downloadAlbumPhotosToDevice:album];
+    [self downloadAlbumPhotosToDevice:album withError:nil];
 }
 
 -(BOOL)isFileAlreadyDownloaded:(MetaFile *)file {
@@ -241,13 +241,13 @@
 
 #pragma mark - Download Photos/Videos To Album
 
--(void)downloadAlbumPhotosToDevice:(PhotoAlbum*)album{
+-(void)downloadAlbumPhotosToDevice:(PhotoAlbum*)album withError:(NSError*) error{
     NSLog(@"downloadAlbumPhotosToDevice - currentDownloadIndex: %d", currentDownloadIndex);
     if (currentDownloadIndex < fileList.count) {
         MetaFile *file = [fileList objectAtIndex:currentDownloadIndex];
         if ([self isFileAlreadySyncedToAlbum:file.uuid]) {
             currentDownloadIndex++;
-            [self downloadAlbumPhotosToDevice:album];
+            [self downloadAlbumPhotosToDevice:album withError:error];
         }else if (file.contentType == ContentTypePhoto) {
             [self savePhotoFileToAlbum:file withAlbum:album];
             currentDownloadIndex++;
@@ -260,7 +260,7 @@
         NSLog(@"[self fetchOtherFilesOfAlbum]");
         if (fileList.count < 20 || (fileList.count % 20) > 0) { // album has less than 20 items or album has 47 items
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-                [self.delegate downloadManagerDidFinishDownloading:self error:nil];
+                [self.delegate downloadManagerDidFinishDownloading:self error:error];
             });
         }
         else {
@@ -368,7 +368,7 @@
 
 - (void)didFinishSavingFileToAlbum:(MetaFile *)file error:(NSError *)error withAlbum:(PhotoAlbum*) album{
     [self.delegate downloadManager:self didFinishSavingFile:file error:error];
-    [self downloadAlbumPhotosToDevice:album];
+    [self downloadAlbumPhotosToDevice:album withError:error];
 }
 
 -(void)didFinishSavingVideoFileToAlbum:(MetaFile *)file videoPath:(NSString *)videoPath  withAlbum:(PhotoAlbum*) album error:(NSError *)error {
@@ -515,7 +515,7 @@
         if (fileList.count == 0) {
             [self fetchFilesForAlbum:album.uuid];
         }else {
-            [self downloadAlbumPhotosToDevice:album];
+            [self downloadAlbumPhotosToDevice:album withError:nil];
         }
     }else { // create the album
         __weak DownloadManager *weakSelf = self;
@@ -533,7 +533,7 @@
                 if (fileList.count == 0) {
                     [self fetchFilesForAlbum:album.uuid];
                 }else {
-                    [weakSelf downloadAlbumPhotosToDevice:album];
+                    [weakSelf downloadAlbumPhotosToDevice:album withError:error];
                 }
             }else {
                 [weakSelf.delegate downloadManager:self createAlbumError:error];
