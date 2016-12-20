@@ -96,18 +96,28 @@
             [modalView addSubview:dontShowButton];
 
         }
-        CustomButton *rejectButton = [[CustomButton alloc] initWithFrame:CGRectMake(19, modalView.frame.size.height - 66, 116, 52)];
-        [rejectButton setTitle:cancelTitle forState:UIControlStateNormal];
-        rejectButton.backgroundColor = [UIColor whiteColor];
-        rejectButton.layer.borderColor = [Util UIColorForHexColor:@"e9ebef"].CGColor;
-        rejectButton.layer.borderWidth = 1.0f;
-        rejectButton.layer.cornerRadius = 5.0f;
-        [rejectButton setTitleColor:[Util UIColorForHexColor:@"292F3E"] forState:UIControlStateNormal];
-        rejectButton.titleLabel.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:18];
-        [rejectButton addTarget:self action:@selector(triggerCancel) forControlEvents:UIControlEventTouchUpInside];
-        [modalView addSubview:rejectButton];
         
-        CustomButton *approveButton = [[CustomButton alloc] initWithFrame:CGRectMake(145, modalView.frame.size.height - 66, 116, 52)];
+        int left = 19;
+        int width = 116;
+        if (cancelTitle.length > 0) {
+            CustomButton *rejectButton = [[CustomButton alloc] initWithFrame:CGRectMake(left, modalView.frame.size.height - 66, width, 52)];
+            [rejectButton setTitle:cancelTitle forState:UIControlStateNormal];
+            rejectButton.backgroundColor = [UIColor whiteColor];
+            rejectButton.layer.borderColor = [Util UIColorForHexColor:@"e9ebef"].CGColor;
+            rejectButton.layer.borderWidth = 1.0f;
+            rejectButton.layer.cornerRadius = 5.0f;
+            [rejectButton setTitleColor:[Util UIColorForHexColor:@"292F3E"] forState:UIControlStateNormal];
+            rejectButton.titleLabel.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:18];
+            [rejectButton addTarget:self action:@selector(triggerCancel) forControlEvents:UIControlEventTouchUpInside];
+            [modalView addSubview:rejectButton];
+            
+            left = 145;
+        }
+        else {
+            width = 242;
+        }
+        
+        CustomButton *approveButton = [[CustomButton alloc] initWithFrame:CGRectMake(left, modalView.frame.size.height - 66, width, 52)];
         [approveButton setTitle:approveTitle forState:UIControlStateNormal];
         approveButton.backgroundColor = [Util UIColorForHexColor:@"FEDB13"];
         approveButton.layer.cornerRadius = 5.0f;

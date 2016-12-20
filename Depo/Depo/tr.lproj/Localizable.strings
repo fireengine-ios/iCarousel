@@ -96,6 +96,7 @@
 "ConfirmRemoveTitle"="Albümden Çıkarmayı Onayla";
 "ConfirmRemoveMessage"="Bu dosya sadece albümünüzden kaldırılacaktır. Dosyanıza Fotoğraflar sekmesinden ulaşabilirsiniz.";
 "ConfirmRemoveQuestion"="Çıkarmak istediğinize emin misiniz?";
+"StorageInfoMessage"="Platinum veya Lifecell paketi kullanıyorsanız LIFE yazıp, tekil paketler için ise “lifebox KOTA” yazıp 3030’a ücretsiz SMS göndererek paket satın alabilirsiniz.";
 "ConfirmDeleteAlbumMessage" = "Bu albümü sildiğinizde albümün içindeki dosyalar lifebox'ınızda kalmaya devam edecektir. Dosyalarınıza Fotoğraflar sekmesinden ulaşabilirsiniz.";
 "FavAddProgressMessage"="Favorilere Ekleniyor";
 "FavAddSuccessMessage"="Favorilere başarıyla eklendi";

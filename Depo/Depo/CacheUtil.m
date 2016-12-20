@@ -34,6 +34,10 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
++ (BOOL) showStorageInfoPageFlag {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:SHOW_STORAGEINFO_HIDDEN_KEY];
+}
+
 + (void) cacheSearchHistoryItem:(SearchHistory *) historyItem {
     NSArray *result = [CacheUtil readSearchHistoryItems];
     NSMutableArray *mResult = [[NSMutableArray alloc]initWithArray:result];
