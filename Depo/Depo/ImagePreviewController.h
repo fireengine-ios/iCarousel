@@ -16,6 +16,7 @@
 #import "FavoriteDao.h"
 #import "RenameDao.h"
 #import "ShareLinkDao.h"
+#import "CoverPhotoDao.h"
 #import "ElasticSearchDao.h"
 #import "CustomConfirmView.h"
 #import "ConfirmRemoveModalController.h"
@@ -36,6 +37,7 @@
     FavoriteDao *favDao;
     RenameDao *renameDao;
     ShareLinkDao *shareDao;
+    CoverPhotoDao *coverDao;
     int listOffSet;
     int pagingEnabledFlag;
     MyNavigationController *printNav;

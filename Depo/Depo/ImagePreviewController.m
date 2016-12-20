@@ -87,6 +87,12 @@
     shareDao.successMethod = @selector(shareSuccessCallback:);
     shareDao.failMethod = @selector(shareFailCallback:);
     
+    coverDao = [[CoverPhotoDao alloc] init];
+    coverDao.delegate = self;
+    coverDao.successMethod = @selector(coverSuccessCallback);
+    coverDao.failMethod = @selector(coverFailCallback:);
+    
+    
     mainScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex - 60)];
     mainScroll.delegate = self;
     mainScroll.maximumZoomScale = 5.0f;
@@ -459,7 +465,7 @@
 - (void) moreClicked {
     NSArray* list = @[[NSNumber numberWithInt:MoreMenuTypeImageDetail], [NSNumber numberWithInt:MoreMenuTypeShare], self.file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDownloadImage], [NSNumber numberWithInt:MoreMenuTypeDelete]] ;
         if (self.album) {
-            list = @[[NSNumber numberWithInt:MoreMenuTypeImageDetail], [NSNumber numberWithInt:MoreMenuTypeShare], self.file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDownloadImage], [NSNumber numberWithInt:MoreMenuTypeRemoveFromAlbum]] ;
+            list = @[[NSNumber numberWithInt:MoreMenuTypeImageDetail], [NSNumber numberWithInt:MoreMenuTypeShare], self.file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDownloadImage], [NSNumber numberWithInt:MoreMenuTypeRemoveFromAlbum], [NSNumber numberWithInt:MoreMenuTypeSetCoverPhoto]] ;
         }
     [self presentMoreMenuWithList:list withFileFolder:self.file];
 }
@@ -510,6 +516,17 @@
 }
 
 - (void) renameFailCallback:(NSString *) errorMessage {
+    [self proceedFailureForProgressView];
+    [self showErrorAlertWithMessage:errorMessage];
+}
+
+- (void) coverSuccessCallback {
+    [self proceedSuccessForProgressView];
+    self.album.cover.detail.thumbLargeUrl = self.file.detail.thumbLargeUrl;
+    [[NSNotificationCenter defaultCenter] postNotificationName:ALBUM_COVER_PHOTO_SET_NOTIFICATION object:nil];
+}
+
+- (void) coverFailCallback:(NSString *) errorMessage {
     [self proceedFailureForProgressView];
     [self showErrorAlertWithMessage:errorMessage];
 }
@@ -574,10 +591,18 @@
     });
 }
 
+- (void) moreMenuDidSelectSetCoverPhoto {
+    [coverDao requestSetCoverPhoto:self.album.uuid coverPhoto:self.file.uuid];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"SetCoverProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"SetCoverSuccessMessage", @"") andFailMessage:NSLocalizedString(@"SetCoverFailMessage", @"")];
+}
+
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo: (void *) contextInfo {
     if(!error) {
         [self proceedSuccessForProgressView];
     } else {
+        if([error.domain isEqualToString:@"ALAssetsLibraryErrorDomain"]) {
+            [self showErrorAlertWithMessage:NSLocalizedString(@"ALAssetsAccessError", @"")];
+        }
         [self proceedFailureForProgressView];
     }
 }

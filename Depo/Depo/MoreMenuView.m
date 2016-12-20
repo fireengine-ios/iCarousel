@@ -147,6 +147,9 @@
         case MoreMenutypeDownloadAlbum:
             [delegate moreMenuDidSelectDownloadAlbum];
             break;
+        case MoreMenuTypeSetCoverPhoto:
+            [delegate moreMenuDidSelectSetCoverPhoto];
+            break;
         case MoreMenuTypeMusicDetail:
             [delegate moreMenuDidSelectMusicDetail];
             break;

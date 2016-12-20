@@ -29,6 +29,7 @@
 @synthesize photosScroll;
 @synthesize photoList;
 @synthesize moreMenuView;
+@synthesize bgImgView;
 @synthesize selectedFileList;
 @synthesize footerActionMenu;
 @synthesize refreshControlPhotos;
@@ -50,6 +51,8 @@
         
         [self reloadUI];
         [self triggerRefresh];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(coverPhotoDidChange) name:ALBUM_COVER_PHOTO_SET_NOTIFICATION object:nil];
     }
     return self;
 }
@@ -68,6 +71,8 @@
         listOffset = 0;
         [self reloadUI];
         [detailDao requestDetailOfAlbum:_albumUUID forStart:listOffset andSize:20];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(coverPhotoDidChange) name:ALBUM_COVER_PHOTO_SET_NOTIFICATION object:nil];
     }
     return self;
 }
@@ -111,7 +116,7 @@
     float mainImageHeight = self.view.frame.size.width/2;
     
     if(self.album.cover.detail.thumbLargeUrl) {
-        UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, mainImageHeight)];
+        bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, mainImageHeight)];
         [bgImgView setClipsToBounds:YES];
         bgImgView.contentMode = UIViewContentModeScaleAspectFill;
         [bgImgView setImageWithURL:[NSURL URLWithString:self.album.cover.detail.thumbLargeUrl]];
@@ -139,7 +144,7 @@
     titleLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:titleLabel];
     
-    [self initAndSetSubTitle];
+    [self updateHeaderViews];
     
     moreButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 30, 35, 20, 20) withImageName:@"dots_icon.png"];
     [moreButton addTarget:self action:@selector(moreClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -209,7 +214,7 @@
     }
 }
 
-- (void) initAndSetSubTitle {
+- (void) updateHeaderViews {
     NSString *subTitleVal = @"";
     if(self.album.imageCount > 0 && self.album.videoCount > 0) {
         subTitleVal = [NSString stringWithFormat: NSLocalizedString(@"AlbumCellSubtitle", @""), self.album.imageCount, self.album.videoCount];
@@ -224,6 +229,8 @@
     } else {
         subTitleLabel.text = subTitleVal;
     }
+    
+    [bgImgView setImageWithURL:[NSURL URLWithString:self.album.cover.detail.thumbLargeUrl]];
 }
 
 - (void) albumDetailSuccessCallback:(PhotoAlbum *) albumWithUpdatedContent {
@@ -267,7 +274,8 @@
     self.album.videoCount = albumWithUpdatedContent.videoCount;
     self.album.label = albumWithUpdatedContent.label;
     self.album.lastModifiedDate = albumWithUpdatedContent.lastModifiedDate;
-    [self initAndSetSubTitle];
+    
+    [self updateHeaderViews];
     
     if (refreshControlPhotos.isRefreshing) {
         [refreshControlPhotos endRefreshing];
@@ -337,8 +345,9 @@
     self.album.imageCount = updatedAlbum.imageCount;
     self.album.videoCount = updatedAlbum.videoCount;
     self.album.lastModifiedDate = updatedAlbum.lastModifiedDate;
+    self.album.cover = updatedAlbum.cover;
 
-    [self initAndSetSubTitle];
+    [self updateHeaderViews];
     contentModified = YES;
     [self triggerRefresh];
 }
@@ -403,6 +412,10 @@
         [self.view addSubview:moreMenuView];
         [self.view bringSubviewToFront:moreMenuView];
     }
+}
+
+- (void) coverPhotoDidChange {
+    [bgImgView setImageWithURL:[NSURL URLWithString:self.album.cover.detail.thumbLargeUrl]];
 }
 
 #pragma mark MoreMenuDelegate
@@ -880,6 +893,9 @@
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.nav setNavigationBarHidden:YES animated:NO];
+    if(self.album.isReadOnly) {
+        [APPDELEGATE.base immediateHideAddButton];
+    }
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
@@ -893,9 +909,9 @@
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    if(self.album.isReadOnly) {
-        [APPDELEGATE.base immediateHideAddButton];
-    }
+//    if(self.album.isReadOnly) {
+//        [APPDELEGATE.base immediateHideAddButton];
+//    }
 }
 
 - (void)didReceiveMemoryWarning

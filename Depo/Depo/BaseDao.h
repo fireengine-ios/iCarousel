@@ -96,6 +96,8 @@
 
 #define ALBUM_REMOVE_PHOTOS_URL BASE_URL@"/album/removeFiles/%@"
 
+#define ALBUM_SET_COVER_PHOTO_URL BASE_URL@"/album/coverPhoto/%@?coverPhotoUuid=%@"
+
 #define GET_CURRENT_SUBSCRIPTION_URL BASE_URL@"/account/currentSubscription"
 
 #define GET_ACTIVE_SUBSCRIPTIONS_URL BASE_URL@"/account/activeSubscriptionList"

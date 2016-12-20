@@ -33,6 +33,7 @@
 - (void) moreMenuDidSelectAlbumShare;
 - (void) moreMenuDidSelectAlbumDelete;
 - (void) moreMenuDidSelectDownloadImage;
+- (void) moreMenuDidSelectSetCoverPhoto;
 - (void) moreMenuDidSelectDownloadAlbum;
 - (void) moreMenuDidDismiss;
 - (void) moreMenuDidSelectMusicDetail;

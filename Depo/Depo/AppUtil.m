@@ -447,6 +447,9 @@
         case MoreMenuTypeDownloadImage:
             title = NSLocalizedString(@"MoreMenuDownloadImageTitle", @"");
             break;
+        case MoreMenuTypeSetCoverPhoto:
+            title = NSLocalizedString(@"MoreMenuSetCoverPhotoTitle", @"");
+            break;
         default:
             break;
     }

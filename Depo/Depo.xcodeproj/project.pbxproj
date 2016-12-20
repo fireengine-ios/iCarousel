@@ -810,6 +810,7 @@
 		567408AD1DFFC165003DF541 /* overlay_wt_tr@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 567408AB1DFFC165003DF541 /* overlay_wt_tr@2x.png */; };
 		567408B01DFFC17E003DF541 /* overlay_wt_en.png in Resources */ = {isa = PBXBuildFile; fileRef = 567408AE1DFFC17E003DF541 /* overlay_wt_en.png */; };
 		567408B11DFFC17E003DF541 /* overlay_wt_tr.png in Resources */ = {isa = PBXBuildFile; fileRef = 567408AF1DFFC17E003DF541 /* overlay_wt_tr.png */; };
+		567408B41E08011B003DF541 /* CoverPhotoDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 567408B31E080118003DF541 /* CoverPhotoDao.m */; };
 		569749641DEEF999005C0460 /* textline_1240.png in Resources */ = {isa = PBXBuildFile; fileRef = 569749631DEEF999005C0460 /* textline_1240.png */; };
 		569749661DEEF9B1005C0460 /* textline_1240@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 569749651DEEF9B1005C0460 /* textline_1240@2x.png */; };
 		569749681DEEF9C9005C0460 /* textline_1240@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 569749671DEEF9C9005C0460 /* textline_1240@3x.png */; };
@@ -2335,6 +2336,8 @@
 		567408AB1DFFC165003DF541 /* overlay_wt_tr@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "overlay_wt_tr@2x.png"; sourceTree = "<group>"; };
 		567408AE1DFFC17E003DF541 /* overlay_wt_en.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = overlay_wt_en.png; sourceTree = "<group>"; };
 		567408AF1DFFC17E003DF541 /* overlay_wt_tr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = overlay_wt_tr.png; sourceTree = "<group>"; };
+		567408B21E07FE71003DF541 /* CoverPhotoDao.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoverPhotoDao.h; sourceTree = "<group>"; };
+		567408B31E080118003DF541 /* CoverPhotoDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoverPhotoDao.m; sourceTree = "<group>"; };
 		569749631DEEF999005C0460 /* textline_1240.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = textline_1240.png; sourceTree = "<group>"; };
 		569749651DEEF9B1005C0460 /* textline_1240@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "textline_1240@2x.png"; sourceTree = "<group>"; };
 		569749671DEEF9C9005C0460 /* textline_1240@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "textline_1240@3x.png"; sourceTree = "<group>"; };
@@ -3424,6 +3427,8 @@
 				94DCA10E1D3D9B34000965AE /* CellographOrdersDao.m */,
 				94B3BE2D1D81F7C40086D05E /* FaqUrlDao.h */,
 				94B3BE2E1D81F7C40086D05E /* FaqUrlDao.m */,
+				567408B21E07FE71003DF541 /* CoverPhotoDao.h */,
+				567408B31E080118003DF541 /* CoverPhotoDao.m */,
 			);
 			name = http;
 			sourceTree = "<group>";
@@ -6055,6 +6060,7 @@
 				05C6C7041B3C20FC00CB6CE5 /* OnkatDepoPopUP.m in Sources */,
 				56BDE2501A8DEA8B0082F8B8 /* OfferCell.m in Sources */,
 				05D2B19719E676BF00FC309D /* AlbumListDao.m in Sources */,
+				567408B41E08011B003DF541 /* CoverPhotoDao.m in Sources */,
 				94BF90E31D5A105D000078FD /* RevisitedGroupedPhotoView.m in Sources */,
 				94DCA1061D3CB6AB000965AE /* CellographSegmentView.m in Sources */,
 				056BEC781A8AA55000BA0805 /* PreLoginInfoView.m in Sources */,

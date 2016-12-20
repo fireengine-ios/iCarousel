@@ -54,6 +54,7 @@
 "MoreMenuRemoveTitleOther"="Dosyayı Albümden Çıkar";
 "MoreMenuDownloadImageTitle"="Telefona İndir";
 "MoreMenuDownloadTitleAlbum"="Albümü İndir";
+"MoreMenuSetCoverPhotoTitle"="Albüm Kapağı Yap";
 "FolderSubTitle"="%d dosya";
 "FolderEmptyMessage"="%@ boş";
 "FolderEmptySubMessage"="\"+\" butonuna dokunarak dosyalarınızı yüklemeye başlayabilirsiniz.";
@@ -109,6 +110,9 @@
 "RemoveProgressMessage"="Dosya(lar) çıkarılıyor";
 "RemoveSuccessMessage"="Dosya(lar) çıkarıldı";
 "RemoveFailMessage"="Dosya(lar) çıkarılırken hata oluştu";
+"SetCoverProgressMessage"="Albüm kapağı ayarlanıyor";
+"SetCoverSuccessMessage"="Albüm kapağı değiştirildi";
+"SetCoverFailMessage"="Albüm kapağı değiştirilirken hata oluştu";
 "SortTitle"="Sırala";
 "ApplyTitle"="Uygula";
 "SortTypeAlphaAscTitle"="İsim (A-Z)";
@@ -727,6 +731,7 @@
 "DropboxLastExportDate"="Son Aktarım Tarihi: %@";
 "DropboxExportStatus"="Son Aktarım Durumu:";
 "DropboxAccessError"="Dropbox hesabınıza erişirken sorun oluştu.";
+"DropboxInvalidQuotaMessage"="Dropbox’taki tüm arşivini aktarmak için lifebox’ta yeterli saklama alanın yok. Hafıza alanını büyütmek ve Dropbox aktarımına devam etmek için hemen tıkla!";
 
 "LogoutConfirmMessage"="Uygulamadan çıkış yapıyorsunuz, emin misiniz?";
 "ImageGroupTypeInProgress"="Yüklenmekte Olanlar";
@@ -806,7 +811,7 @@
 "LifeboxTeaserInfoLabel"="lifebox'a hoşgeldiniz";
 "LifeboxTeaserInfoSubLabel"="Yepyeni özellikler ve daha iyi bir deneyim bu kutunun içinde";
 
-"DeleteFileInAlbumAlert"="Bu resmin silinmesi durumunda resminiz albümden de kaldırılacaktır. Onaylıyor musunuz?";
+"DeleteFileInAlbumAlert"="Bu resmin silinmesi durumunda resminiz albümden de silinecektir. Onaylıyor musunuz?";
 
 "LocInfoPopup"="Lokasyon İzni";
 "LocSubinfoPopup"="Dosyalarınız arka planda güncellenirken lokasyon bilginiz kullanılacaktır.";

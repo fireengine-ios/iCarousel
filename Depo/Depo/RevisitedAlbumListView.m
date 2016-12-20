@@ -21,6 +21,8 @@
     int tableUpdateCounter;
     int listOffset;
     BOOL isLoading;
+    NSIndexPath *selectedAlbumIndexPath;
+    
 }
 @end
 
@@ -79,6 +81,9 @@
         progress = [[MBProgressHUD alloc] initWithFrame:self.frame];
         progress.opacity = 0.4f;
         [self addSubview:progress];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(coverPhotoChanged) name:ALBUM_COVER_PHOTO_SET_NOTIFICATION object:nil];
+        
     }
     return self;
 }
@@ -238,6 +243,7 @@
 }
 
 -(void)selectAlbumIndex:(NSIndexPath*)indexPath {
+    selectedAlbumIndexPath = indexPath;
     PhotoAlbum *album = [albums objectAtIndex:indexPath.row];
     if(isSelectible) {
         UITableViewCell *cell = [albumTable cellForRowAtIndexPath:indexPath];
@@ -406,6 +412,13 @@
 
 - (void) hideLoading {
     [progress hide:YES];
+}
+
+- (void) coverPhotoChanged {
+    [albumTable beginUpdates];
+    [albumTable reloadRowsAtIndexPaths:[NSArray arrayWithObject:selectedAlbumIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+    [albumTable endUpdates];
+    
 }
 
 @end
