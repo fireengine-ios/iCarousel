@@ -133,7 +133,12 @@
 }
 
 - (void) didApproveCustomAlert:(CustomConfirmView *) alertView {
-    [self activateOffer:selectedOffer];
+    if (alertView.tag == 111) {
+        
+    }
+    else {
+        [self activateOffer:selectedOffer];
+    }
 }
 
 #pragma mark PurchaseViewDelegate methods
@@ -358,7 +363,28 @@
         if(APPDELEGATE.session.user.accountType == AccountTypeTurkcell) {
             [accountDaoToGetOffers requestOffers];
         } else {
-            [appleProductsDao requestAppleProductNames];
+            BOOL isKKTCell = NO;
+            if (currentSubscriptions.count > 0) {
+                for (Subscription* s in currentSubscriptions) {
+                    NSRange range = [s.plan.role rangeOfString:@"kktcell" options:NSCaseInsensitiveSearch];
+                    if (range.length > 0) {
+                        isKKTCell = YES;
+                        break;
+                    }
+                }
+            }
+            if (!isKKTCell) {
+                [appleProductsDao requestAppleProductNames];
+            }
+            else {
+                [super hideLoading];
+                if(![CacheUtil showStorageInfoPageFlag]) {
+                    CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:@"" withApproveTitle:NSLocalizedString(@"TitleYes", @"") withMessage:NSLocalizedString(@"StorageInfoMessage", @"") withModalType:ModalTypeApprove shouldShowCheck:YES withCheckKey:@"SHOW_STORAGEINFO_HIDDEN_KEY"];
+                    confirm.delegate = self;
+                    confirm.tag = 111;
+                    [APPDELEGATE showCustomConfirm:confirm];
+                }
+            }
         }
     }
 }

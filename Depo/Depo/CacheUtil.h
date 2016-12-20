@@ -17,6 +17,7 @@
 + (void) resetRememberMeToken;
 + (BOOL) showConfirmDeletePageFlag;
 + (void) setConfirmDeletePageFlag;
++ (BOOL) showStorageInfoPageFlag ;
 + (void) cacheSearchHistoryItem:(SearchHistory *) historyItem;
 + (NSArray *) readSearchHistoryItems;
 + (void) clearSearchHistoryItems;
