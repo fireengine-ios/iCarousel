@@ -31,8 +31,9 @@
 @protocol RevisitedGroupedPhotoDelegate <NSObject>
 - (void) revisitedGroupedPhotoDidSelectFile:(MetaFile *) fileSelected withList:(NSArray *) containingList;
 - (void) revisitedGroupedPhotoDidFinishLoading;
-- (void) revisitedGroupedPhotoDidFinishDeleting;
-- (void) revisitedGroupedPhotoDidFinishMoving;
+//- (void) revisitedGroupedPhotoDidFinishDeleting;
+- (void) revisitedGroupedPhotoDidFinishDeletingOrMoving;
+//- (void) revisitedGroupedPhotoDidFinishMoving;
 - (void) revisitedGroupedPhotoShouldConfirmForDeleting;
 - (void) revisitedGroupedPhotoDidChangeToSelectState;
 - (void) revisitedGroupedPhotoShouldPrintWithFileList:(NSArray *) fileListToPrint;

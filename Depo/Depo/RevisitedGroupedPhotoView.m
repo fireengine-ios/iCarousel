@@ -242,7 +242,7 @@
 }
 
 - (void) deleteSuccessCallback {
-    [delegate revisitedGroupedPhotoDidFinishDeleting];
+    [delegate revisitedGroupedPhotoDidFinishDeletingOrMoving];
     //    [self proceedSuccessForProgressViewWithAddButtonKey:@"PhotoTab"];
 }
 
@@ -256,7 +256,6 @@
     if(!isSelectible) {
         isSelectible = YES;
         [self removeRefreshControl];
-//        [refreshControl setEnabled:NO];
         [selectedFileList removeAllObjects];
         [selectedMetaFiles removeAllObjects];
         
@@ -267,7 +266,6 @@
 - (void) setToUnselectiblePriorToRefresh {
     isSelectible = NO;
     [self createRefreshControl];
-//    [refreshControl setEnabled:YES];
     [selectedFileList removeAllObjects];
     [selectedMetaFiles removeAllObjects];
     
@@ -278,17 +276,7 @@
 }
 
 - (void) setToUnselectible {
-    isSelectible = NO;
-    [self createRefreshControl];
-//    [refreshControl setEnabled:YES];
-    [selectedFileList removeAllObjects];
-    [selectedMetaFiles removeAllObjects];
-    
-    if(imgFooterActionMenu) {
-        [imgFooterActionMenu removeFromSuperview];
-        imgFooterActionMenu = nil;
-    }
-    
+    [self setToUnselectiblePriorToRefresh];
     [collView reloadData];
 }
 
@@ -631,7 +619,7 @@
 
 - (void) photosAddedSuccessCallback {
     [progress hide:YES];
-    [delegate revisitedGroupedPhotoDidFinishMoving];
+    [delegate revisitedGroupedPhotoDidFinishDeletingOrMoving];
 }
 
 - (void) photosAddedFailCallback:(NSString *) errorMessage {

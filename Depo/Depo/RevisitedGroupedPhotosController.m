@@ -162,7 +162,7 @@
     //    moreButton.hidden = NO;
     
     [albumView setToUnselectiblePriorToRefresh];
-    [groupView setToUnselectiblePriorToRefresh];
+    [groupView setToUnselectible];
     
     [APPDELEGATE.base immediateShowAddButton];
 
@@ -234,7 +234,7 @@
 - (void) revisitedGroupedPhotoDidFinishLoading {
 }
 
-- (void) revisitedGroupedPhotoDidFinishDeleting {
+- (void) revisitedGroupedPhotoDidFinishDeletingOrMoving {
     [segmentView enableNavigate];
     
     self.title = NSLocalizedString(@"PhotosTitle", @"");
@@ -250,21 +250,22 @@
     [albumView pullData];
 }
 
-- (void) revisitedGroupedPhotoDidFinishMoving {
-    [segmentView enableNavigate];
-    
-    self.title = NSLocalizedString(@"PhotosTitle", @"");
-    self.navigationItem.leftBarButtonItem = previousButtonRef;
-    //    moreButton.hidden = NO;
-    
-    [albumView setToUnselectiblePriorToRefresh];
-    [groupView setToUnselectiblePriorToRefresh];
-    
-    [APPDELEGATE.base immediateShowAddButton];
-
-    [groupView pullData];
-    [albumView pullData];
-}
+//- (void) revisitedGroupedPhotoDidFinishMoving {
+//    [self revisitedAlbumListDidFinishDeleting];
+//    [segmentView enableNavigate];
+//    
+//    self.title = NSLocalizedString(@"PhotosTitle", @"");
+//    self.navigationItem.leftBarButtonItem = previousButtonRef;
+//    //    moreButton.hidden = NO;
+//    
+//    [albumView setToUnselectiblePriorToRefresh];
+//    [groupView setToUnselectiblePriorToRefresh];
+//    
+//    [APPDELEGATE.base immediateShowAddButton];
+//
+//    [groupView pullData];
+//    [albumView pullData];
+//}
 
 - (void) revisitedGroupedPhotoShouldConfirmForDeleting {
     [MoreMenuView presentConfirmDeleteFromController:self.nav delegateOwner:self];
