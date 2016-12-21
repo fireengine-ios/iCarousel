@@ -83,4 +83,8 @@
 
 + (void) increaseLoginCount;
 + (int) readLoginCount;
+
++ (void) writeAppFirstLaunchFlag;
++ (BOOL) readAppFirstLaunchFlag;
+
 @end

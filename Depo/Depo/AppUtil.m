@@ -920,4 +920,13 @@
     return (int)result;
     
 }
+
++ (void) writeAppFirstLaunchFlag {
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:APP_FIRST_LAUNCH_FLAG];
+}
+
++ (BOOL) readAppFirstLaunchFlag {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:APP_FIRST_LAUNCH_FLAG];
+}
+
 @end
