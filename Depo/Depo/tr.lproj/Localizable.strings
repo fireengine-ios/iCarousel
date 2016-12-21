@@ -111,7 +111,7 @@
 "RemoveProgressMessage"="Dosya(lar) çıkarılıyor";
 "RemoveSuccessMessage"="Dosya(lar) çıkarıldı";
 "RemoveFailMessage"="Dosya(lar) çıkarılırken hata oluştu";
-"SetCoverProgressMessage"="Albüm kapağı ayarlanıyor";
+"SetCoverProgressMessage"="Albüm kapağı değiştiriliyor";
 "SetCoverSuccessMessage"="Albüm kapağı değiştirildi";
 "SetCoverFailMessage"="Albüm kapağı değiştirilirken hata oluştu";
 "SortTitle"="Sırala";

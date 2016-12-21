@@ -218,26 +218,29 @@
     NSString *responseStr = [NSHTTPURLResponse localizedStringForStatusCode:[request statusCode]];;
     NSString *log = [NSString stringWithFormat:@"RequestTokenDao request failed with response:%@ and status code: %d", responseStr, (int)[request statusCode]];
     IGLog(log);
-    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-    if(dict != nil && [dict isKindOfClass:[NSDictionary class]]) {
-        NSNumber *errorCode = [dict objectForKey:@"errorCode"];
-        if(errorCode != nil && ![errorCode isKindOfClass:[NSNull class]]) {
-            if([errorCode intValue] == 4002) {
-                SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:CAPTCHA_ERROR_MESSAGE]);
-                return;
-            } else if([errorCode intValue] == 60) {
-                SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:EMAIL_NOT_VERIFIED_ERROR_MESSAGE]);
-                return;
-            } else if([errorCode intValue] == 10) {
-                SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:LDAP_LOCKED_ERROR_MESSAGE]);
-                return;
-            }
-            else if([errorCode intValue] == 4101) {
-                SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:SIGNUP_REQUIRED_ERROR_MESSAGE]);
-                return;
+    if(data) {
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+        if(dict != nil && [dict isKindOfClass:[NSDictionary class]]) {
+            NSNumber *errorCode = [dict objectForKey:@"errorCode"];
+            if(errorCode != nil && ![errorCode isKindOfClass:[NSNull class]]) {
+                if([errorCode intValue] == 4002) {
+                    SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:CAPTCHA_ERROR_MESSAGE]);
+                    return;
+                } else if([errorCode intValue] == 60) {
+                    SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:EMAIL_NOT_VERIFIED_ERROR_MESSAGE]);
+                    return;
+                } else if([errorCode intValue] == 10) {
+                    SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:LDAP_LOCKED_ERROR_MESSAGE]);
+                    return;
+                }
+                else if([errorCode intValue] == 4101) {
+                    SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:SIGNUP_REQUIRED_ERROR_MESSAGE]);
+                    return;
+                }
             }
         }
     }
+
     if([request statusCode] == 401) {
         //TODO 401 kontrolü için 3 satır eklendi. Test et!
 //        [APPDELEGATE.session cleanoutAfterLogout];
