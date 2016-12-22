@@ -29,6 +29,7 @@ _Pragma("clang diagnostic pop") \
 }
 
 @property (nonatomic) NSMutableArray *dataArray;
+@property (nonatomic) NSMutableArray *suggestions;
 @property (nonatomic) SEL searchMethod;
 @property (nonatomic, strong) id ownerController;
 @property (nonatomic) float tableHeight;
@@ -37,7 +38,8 @@ _Pragma("clang diagnostic pop") \
 - (void)showTableView;
 - (void)hideTableView;
 - (void)addTextToSearchHistory:(NSString *)text;
-
+- (void)showSuggestions:(NSMutableArray*)list ;
+- (void)hideRecentSearches;
 
 
 @end

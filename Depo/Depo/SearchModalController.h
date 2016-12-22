@@ -18,6 +18,7 @@
 #import "MoveListModalController.h"
 #import "PhotoAlbumController.h"
 #import "CustomConfirmView.h"
+#import "SuggestDao.h"
 
 @interface SearchModalController : MyModalController <UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, ConfirmDeleteDelegate, MoveListModalProtocol, PhotoAlbumDelegate, CustomConfirmDelegate> {
     UIView *searchFieldContainer;
@@ -26,6 +27,7 @@
     UITableView *searchResultsTable;
     
     SearchDao *searchDao;
+    SuggestDao *suggestionsDao;
     DeleteDao *deleteDao;
     DeleteDao *folderDeleteDao;
     FavoriteDao *favoriteDao;

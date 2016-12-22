@@ -12,5 +12,6 @@
 
 @property (nonatomic, strong) NSDate *searchDate;
 @property (nonatomic, strong) NSString *searchText;
+@property (nonatomic, strong) NSString *type;
 
 @end

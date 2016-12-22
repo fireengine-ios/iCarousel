@@ -19,14 +19,14 @@
 #import "DepoHttpManager.h"
 
 //TODO test -> prod
-#define BASE_URL @"https://adepo.turkcell.com.tr/api"
-//#define BASE_URL @"https://tcloudstb.turkcell.com.tr/api"
+//#define BASE_URL @"https://adepo.turkcell.com.tr/api"
+#define BASE_URL @"https://tcloudstb.turkcell.com.tr/api"
 
 #define TOKEN_URL BASE_URL@"/auth/token?rememberMe=%@"
 
 //TODO test -> prod
-#define RADIUS_URL @"http://adepo.turkcell.com.tr/api/auth/gsm/login?rememberMe=on"
-//#define RADIUS_URL @"http://tcloudstb.turkcell.com.tr/api/auth/gsm/login?rememberMe=on"
+//#define RADIUS_URL @"http://adepo.turkcell.com.tr/api/auth/gsm/login?rememberMe=on"
+#define RADIUS_URL @"http://tcloudstb.turkcell.com.tr/api/auth/gsm/login?rememberMe=on"
 
 #define REMEMBER_ME_URL BASE_URL@"/auth/rememberMe"
 
@@ -141,6 +141,8 @@
 #define FIRST_UPLOAD_FLAG_URL BASE_URL@"/account/firstUpload"
 
 #define FEEDBACK_URL BASE_URL@"/feedback/send/%@"
+
+#define SUGGEST_URL BASE_URL@"/search/unified/suggest?text=%@"
 
 #define VIDEOFY_AUDIO_URL BASE_URL@"/slideshow/audio/list"
 

@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SearchHistory.h"
 
 @interface RecentSearchCell : UITableViewCell
 
-- (id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier title:(NSString *)title;
+- (id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withHistory:(SearchHistory *)history;
 
 @end

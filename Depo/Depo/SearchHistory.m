@@ -12,6 +12,7 @@
 
 @synthesize searchDate;
 @synthesize searchText;
+@synthesize type;
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
     [encoder encodeObject:self.searchDate forKey:@"searchDate"];

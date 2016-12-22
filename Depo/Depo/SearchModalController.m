@@ -49,6 +49,11 @@
         searchDao.successMethod = @selector(searchListSuccessCallback:);
         searchDao.failMethod = @selector(searchListFailCallback:);
         
+        suggestionsDao = [[SuggestDao alloc] init];
+        suggestionsDao.delegate = self;
+        suggestionsDao.successMethod = @selector(suggestionListSuccessCallback:);
+        suggestionsDao.failMethod = @selector(suggestionListFailCallback:);
+        
         deleteDao = [[DeleteDao alloc] init];
         deleteDao.delegate = self;
         deleteDao.successMethod = @selector(deleteSuccessCallback);
@@ -134,6 +139,7 @@
 }
 
 - (void) searchListSuccessCallback:(NSArray *) files {
+    searchResultsTable.alpha = 1;
     if (fileList == nil)
         fileList = [[NSMutableArray alloc] init];
     else
@@ -177,6 +183,7 @@
 }
 
 - (void) searchListFailCallback:(NSString *) errorMessage {
+    searchResultsTable.alpha = 1;
     [super hideLoading];
     [super showErrorAlertWithMessage:errorMessage];
 }
@@ -209,6 +216,7 @@
 
 - (void)onKeyboardShow:(NSNotification *)notification
 {
+    [suggestionsDao requestSuggestion:searchField.text];
     CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     float keyboardHeight = MIN(keyboardSize.height,keyboardSize.width);
     if (recentSearchesTableView.tableHeight == 0) {
@@ -222,12 +230,28 @@
     [recentSearchesTableView hideTableView];
 }
 
+- (void) suggestionListSuccessCallback:(NSMutableArray*)list {
+    [recentSearchesTableView showSuggestions:list];
+    searchResultsTable.alpha = 0;
+//    fileList = nil;
+//    [searchResultsTable reloadData];
+}
+
+- (void) suggestionListFailCallback:(NSString *) errorMessage {
+//    fileList = nil;
+//    [searchResultsTable reloadData];
+}
+
 - (void)searchFieldDidChange {
+    [suggestionsDao requestSuggestion:searchField.text];
     if (recentSearchesTableView != nil) {
-        if (searchField.text.length > 0)
-            [recentSearchesTableView hideTableView];
-        else
-            [recentSearchesTableView showTableView];
+        if (searchField.text.length > 0) {
+         //            [recentSearchesTableView hideRecentSearches];
+        }
+            else {
+                [recentSearchesTableView showTableView];
+            }
+        
     }
 }
 
