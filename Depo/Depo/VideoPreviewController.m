@@ -64,6 +64,11 @@
         shareDao.successMethod = @selector(shareSuccessCallback:);
         shareDao.failMethod = @selector(shareFailCallback:);
         
+        coverDao = [[CoverPhotoDao alloc] init];
+        coverDao.delegate = self;
+        coverDao.successMethod = @selector(coverSuccessCallback);
+        coverDao.failMethod = @selector(coverFailCallback:);
+        
         avPlayer = [[CustomAVPlayer alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.topIndex) withVideo:self.file];
         avPlayer.delegate = self;
         [self.view addSubview:avPlayer];
@@ -123,7 +128,7 @@
 - (void) moreClicked {
     NSArray* list = @[[NSNumber numberWithInt:MoreMenuTypeVideoDetail], [NSNumber numberWithInt:MoreMenuTypeShare], self.file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDownloadImage], [NSNumber numberWithInt:MoreMenuTypeDelete]];
     if (self.album) {
-        list = @[[NSNumber numberWithInt:MoreMenuTypeVideoDetail], [NSNumber numberWithInt:MoreMenuTypeShare], self.file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDownloadImage], [NSNumber numberWithInt:MoreMenuTypeRemoveFromAlbum]] ;
+        list = @[[NSNumber numberWithInt:MoreMenuTypeVideoDetail], [NSNumber numberWithInt:MoreMenuTypeShare], self.file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDownloadImage], [NSNumber numberWithInt:MoreMenuTypeRemoveFromAlbum], [NSNumber numberWithInt:MoreMenuTypeSetCoverPhoto]] ;
     }
     [self presentMoreMenuWithList:list withFileFolder:self.file];
 }
@@ -264,6 +269,11 @@
     [downloadTask resume];
 }
 
+- (void) moreMenuDidSelectSetCoverPhoto {
+    [coverDao requestSetCoverPhoto:self.album.uuid coverPhoto:self.file.uuid];
+    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"SetCoverProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"SetCoverSuccessMessage", @"") andFailMessage:NSLocalizedString(@"SetCoverFailMessage", @"")];
+}
+
 - (void) video:(NSString *) videoPath didFinishSavingWithError:(NSError *)error contextInfo: (void *) contextInfo {
 
     @try {
@@ -397,6 +407,17 @@
 
 - (void) shareFailCallback:(NSString *) errorMessage {
     [self hideLoading];
+}
+
+- (void) coverSuccessCallback {
+    [self proceedSuccessForProgressView];
+    self.album.cover.detail.thumbLargeUrl = self.file.detail.thumbLargeUrl;
+    [[NSNotificationCenter defaultCenter] postNotificationName:ALBUM_COVER_PHOTO_SET_NOTIFICATION object:nil];
+}
+
+- (void) coverFailCallback:(NSString *) errorMessage {
+    [self proceedFailureForProgressView];
+    [self showErrorAlertWithMessage:errorMessage];
 }
 
 - (void)viewDidLoad {

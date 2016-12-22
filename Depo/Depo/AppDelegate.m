@@ -196,6 +196,12 @@
 //    [AppRater sharedInstance].remindMeLaunchesUntilPrompt = 10;
 //    // [AppRater sharedInstance].preferredLanguage = @"en";
 //    [[AppRater sharedInstance] appLaunched];
+    
+    // Cancel all notifications that is scheduled before
+    if(![AppUtil readAppFirstLaunchFlag]) {
+        [[UIApplication sharedApplication] cancelAllLocalNotifications];
+        [AppUtil writeAppFirstLaunchFlag];
+    }
 
     [self.window makeKeyAndVisible];
     return YES;

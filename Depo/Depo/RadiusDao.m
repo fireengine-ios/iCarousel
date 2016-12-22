@@ -134,7 +134,7 @@
     } else if([response statusCode] == 403) {
         SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:FORBIDDEN_ERROR_MESSAGE]);
     } else {
-        if([response statusCode] == NSURLErrorNotConnectedToInternet){
+        if([response statusCode] == NSURLErrorNotConnectedToInternet || [response statusCode] == 0){
             SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:NSLocalizedString(@"NoConnErrorMessage", @"")]);
         } else {
             SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:GENERAL_ERROR_MESSAGE]);
