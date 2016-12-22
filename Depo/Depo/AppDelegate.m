@@ -19,6 +19,7 @@
 #import "SettingsStorageController.h"
 #import "RevisitedStorageController.h"
 #import "OTPController.h"
+#import "SignupController.h"
 
 #import "FileListController.h"
 #import "MapUtil.h"
@@ -708,6 +709,9 @@
                 shouldContinue = NO;
             }
             if([[castedCtrl.viewControllers lastObject] isKindOfClass:[OTPController class]]) {
+                shouldContinue = NO;
+            }
+            if([[castedCtrl.viewControllers lastObject] isKindOfClass:[SignupController class]]) {
                 shouldContinue = NO;
             }
         }
