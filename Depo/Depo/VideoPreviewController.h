@@ -14,6 +14,7 @@
 #import "FavoriteDao.h"
 #import "RenameDao.h"
 #import "ShareLinkDao.h"
+#import "CoverPhotoDao.h"
 #import "CustomConfirmView.h"
 #import "ConfirmRemoveModalController.h"
 #import "AlbumRemovePhotosDao.h"
@@ -30,6 +31,7 @@
     FavoriteDao *favDao;
     RenameDao *renameDao;
     ShareLinkDao *shareDao;
+    CoverPhotoDao *coverDao;
 //    BOOL refFromAlbumFlag;
 }
 
