@@ -137,6 +137,13 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self shouldReturnFailWithMessage:NSLocalizedString(@"TimeoutMessage", @"")];
             });
+        }
+        else if([request statusCode] == 0){
+            NSString *errorMessageWithRequestUrl = [NSString stringWithFormat:@"BaseDao request failed - ASIConnectionFailureErrorType for %@", self.currentRequest.URL];
+            IGLog(errorMessageWithRequestUrl);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self shouldReturnFailWithMessage:NSLocalizedString(@"NoConnErrorMessage", @"")];
+            });
         } else {
             NSString *localizedErrStr = [NSHTTPURLResponse localizedStringForStatusCode:[request statusCode]];
             NSString *errorMessageWithRequestUrl = [NSString stringWithFormat:@"BaseDao request failed with code:%d and error: %@ - GENERAL_ERROR_MESSAGE for %@", (int)[request statusCode], localizedErrStr, self.currentRequest.URL];
