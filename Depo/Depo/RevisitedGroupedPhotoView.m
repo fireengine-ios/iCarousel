@@ -176,29 +176,37 @@
 }
 
 - (void) pullData {
-    listOffset = 0;
-    groupSequence = 0;
     
-    [groups removeAllObjects];
-    [files removeAllObjects];
-    //  [collView reloadData];
-    [self.collView performSelectorOnMainThread:@selector(reloadData)
-                                    withObject:nil
-                                 waitUntilDone:NO];
-    
-    yIndex = 60;
-    
-    [self addOngoingGroup];
-    
-    int packageSize = GROUP_PACKAGE_SIZE;
-    if([[Util deviceType] isEqualToString:@"iPhone 6 Plus"] || [[Util deviceType] isEqualToString:@"iPhone 6S Plus"]) {
-        packageSize = 60;
+    if([delegate checkInternet]) {
+        listOffset = 0;
+        groupSequence = 0;
+        
+        [groups removeAllObjects];
+        [files removeAllObjects];
+        
+        [self.collView performSelectorOnMainThread:@selector(reloadData)
+                                        withObject:nil
+                                     waitUntilDone:NO];
+        
+        yIndex = 60;
+        
+        [self addOngoingGroup];
+        
+        int packageSize = GROUP_PACKAGE_SIZE;
+        if([[Util deviceType] isEqualToString:@"iPhone 6 Plus"] || [[Util deviceType] isEqualToString:@"iPhone 6S Plus"]) {
+            packageSize = 60;
+        }
+        [readDao requestPhotosAndVideosForPage:listOffset andSize:packageSize andSortType:SortTypeDateDesc];
+        isLoading = YES;
+        
+        [self bringSubviewToFront:progress];
+        [progress show:YES];
     }
-    [readDao requestPhotosAndVideosForPage:listOffset andSize:packageSize andSortType:SortTypeDateDesc];
-    isLoading = YES;
+    else {
+        [refreshControl endRefreshing];
+    }
     
-    [self bringSubviewToFront:progress];
-    [progress show:YES];
+    
 }
 
 - (void) addOngoingGroup {
@@ -352,34 +360,37 @@
 }
 
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView {
-    if(!isLoading) {
-        CGFloat currentOffset = collView.contentOffset.y;
-        CGFloat maximumOffset = collView.contentSize.height - collView.frame.size.height;
-        
-        if (maximumOffset > 0.0f && currentOffset - maximumOffset >= 0.0f) {
-            isLoading = YES;
-            [self dynamicallyLoadNextPage];
-        }
-        if(cleanedFlag) {
-            if(fabs(currentOffset - lastCheckYIndex) <= IMAGE_SCROLL_THRESHOLD/2) {
-                NSNumber *startOffset = [NSNumber numberWithFloat:self.collView.contentOffset.y];
-                NSDictionary* userInfo = @{@"startOffset": startOffset};
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"IMAGE_SCROLL_RELOAD_DATA_AFTER_WARNING" object:self userInfo:userInfo];
+    if([ReachabilityManager isReachable]) {
+        if(!isLoading) {
+            CGFloat currentOffset = collView.contentOffset.y;
+            CGFloat maximumOffset = collView.contentSize.height - collView.frame.size.height;
+            
+            if (maximumOffset > 0.0f && currentOffset - maximumOffset >= 0.0f) {
+                isLoading = YES;
+                [self dynamicallyLoadNextPage];
+            }
+            if(cleanedFlag) {
+                if(fabs(currentOffset - lastCheckYIndex) <= IMAGE_SCROLL_THRESHOLD/2) {
+                    NSNumber *startOffset = [NSNumber numberWithFloat:self.collView.contentOffset.y];
+                    NSDictionary* userInfo = @{@"startOffset": startOffset};
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"IMAGE_SCROLL_RELOAD_DATA_AFTER_WARNING" object:self userInfo:userInfo];
+                }
+            }
+            NSIndexPath *visibleIndexPath = [collView indexPathForItemAtPoint:CGPointMake(30, currentOffset)];
+            if(visibleIndexPath) {
+                FileInfoGroup *visibleGroup = [self.groups objectAtIndex:visibleIndexPath.section];
+                if([visibleGroup.customTitle isEqualToString:NSLocalizedString(@"ImageGroupTypeInProgress", @"")]) {
+                    sectionIndicator.text = @"";
+                    [self hideVerticalIndicator];
+                } else {
+                    [self showVerticalIndicator];
+                    sectionIndicator.text = visibleGroup.customTitle;
+                }
             }
         }
-        NSIndexPath *visibleIndexPath = [collView indexPathForItemAtPoint:CGPointMake(30, currentOffset)];
-        if(visibleIndexPath) {
-            FileInfoGroup *visibleGroup = [self.groups objectAtIndex:visibleIndexPath.section];
-            if([visibleGroup.customTitle isEqualToString:NSLocalizedString(@"ImageGroupTypeInProgress", @"")]) {
-                sectionIndicator.text = @"";
-                [self hideVerticalIndicator];
-            } else {
-                [self showVerticalIndicator];
-                sectionIndicator.text = visibleGroup.customTitle;
-            }
-        }
+
     }
-}
+    }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     NSIndexPath *visibleIndexPath = [collView indexPathForItemAtPoint:CGPointMake(30, collView.contentOffset.y)];

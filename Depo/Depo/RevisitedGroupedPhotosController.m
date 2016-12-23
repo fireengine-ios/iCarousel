@@ -19,6 +19,7 @@
 #import "TutorialView.h"
 #import "MsisdnEntryController.h"
 #import "EmailEntryController.h"
+#import "ReachabilityManager.h"
 
 #import "AppRater.h"
 
@@ -676,6 +677,16 @@
 }
 
 - (void) accountFailCallback:(NSString *) errorMessage{
+}
+
+- (BOOL) checkInternet {
+    if([ReachabilityManager isReachable]) {
+        return YES;
+    }
+    else {
+        [self showErrorAlertWithMessage:NSLocalizedString(@"NoConnErrorMessage", @"")];
+        return NO;
+    }
 }
 
 @end

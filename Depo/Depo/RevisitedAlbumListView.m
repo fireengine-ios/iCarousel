@@ -180,7 +180,7 @@
 - (void) albumListFailCallback:(NSString *) errorMessage {
     isLoading = NO;
     [progress hide:YES];
-    [delegate revisitedAlbumListDidFailRetrievingList:errorMessage];
+    //[delegate revisitedAlbumListDidFailRetrievingList:errorMessage];
 }
 
 - (void) deleteAlbumSuccessCallback {

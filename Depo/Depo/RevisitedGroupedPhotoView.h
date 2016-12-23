@@ -44,6 +44,7 @@
 - (void) revisitedGroupedPhotoShowPhotoAlbums:(RevisitedGroupedPhotoView *)view;
 - (void) revisitedGroupedPhoto:(RevisitedGroupedPhotoView *)view triggerShareForFiles:(NSArray *) uuidList;
 -(void)revisitedGroupedPhoto:(RevisitedGroupedPhotoView *)view downloadSelectedFiles:(NSArray *)selectedFiles;
+- (BOOL) checkInternet;
 @end
 
 @interface RevisitedGroupedPhotoView : UIView <FooterActionsDelegate, UITextFieldDelegate, CustomConfirmDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, RevisitedPhotoCollCellDelegate, RevisitedUploadingPhotoCollCellDelegate> {
