@@ -113,6 +113,7 @@
         [collView registerClass:[RevisitedUploadingPhotoCollCell class] forCellWithReuseIdentifier:@"COLL_UPLOADING_PHOTO_CELL"];
         [collView registerClass:[GroupPhotoSectionView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"group_photo_header"];
         [collView setContentInset:UIEdgeInsetsMake(60, 0, 0, 0)];
+        collView.alwaysBounceVertical = YES;
         [self addSubview:collView];
         
         UIView *searchContainer = [[UIView alloc] initWithFrame:CGRectMake(0, -60, collView.frame.size.width, 60)];

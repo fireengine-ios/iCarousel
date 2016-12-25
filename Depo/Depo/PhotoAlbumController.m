@@ -155,6 +155,7 @@
     photosScroll.tag = 111;
     photosScroll.userInteractionEnabled = YES ;
     photosScroll.scrollEnabled = YES;
+    photosScroll.alwaysBounceVertical = YES;
     [self.view addSubview:photosScroll];
     
     [self createRefreshControl];
