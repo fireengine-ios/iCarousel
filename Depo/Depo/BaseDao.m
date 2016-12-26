@@ -599,11 +599,16 @@
 
 - (void) tokenRevisitedSuccessCallback {
     if(APPDELEGATE.session.authToken) {
-        NSMutableURLRequest *req = [self.currentTask.currentRequest mutableCopy];
-        [req setValue:APPDELEGATE.session.authToken forHTTPHeaderField:@"X-Auth-Token"];
-        self.currentTask = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:req completionHandler:self.taskCompletionHandler];
-        //        NSURLSessionDataTask *newTask = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:req completionHandler:taskCompletionHandler];
-        [self.currentTask resume];
+        if (self.currentTask.currentRequest) {
+            NSMutableURLRequest *req = [self.currentTask.currentRequest mutableCopy];
+            [req setValue:APPDELEGATE.session.authToken forHTTPHeaderField:@"X-Auth-Token"];
+            self.currentTask = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:req completionHandler:self.taskCompletionHandler];
+            //        NSURLSessionDataTask *newTask = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:req completionHandler:taskCompletionHandler];
+            [self.currentTask resume];
+        }
+        else {
+            IGLog(@"tokenRevisitedSuccessCallback self.currentTask.currentRequest = nil");
+        }
     }
 }
 

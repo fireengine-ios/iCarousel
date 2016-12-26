@@ -85,6 +85,7 @@
     if(self.audioPlayer == nil) {
         self.audioPlayer = [AVPlayer playerWithPlayerItem:self.playerItem];
     } else {
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.audioPlayer replaceCurrentItemWithPlayerItem:self.playerItem];
         });

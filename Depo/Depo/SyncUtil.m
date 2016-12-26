@@ -152,7 +152,7 @@
     NSString *baseUrlConstant = [SyncUtil readBaseUrlConstant] != nil ? [SyncUtil readBaseUrlConstant] : @"";
     NSData *arrData = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:SYNCED_LOCAL_HASHES_KEY, baseUrlConstant]];
 //    NSLog(@"LOCAL HASH KEY:%@", [NSString stringWithFormat:SYNCED_LOCAL_HASHES_KEY, [SyncUtil readBaseUrlConstant]]);
-    if (arrData != nil) {
+    if (arrData != nil && [arrData isKindOfClass:[NSData class]]) {
         result = [NSKeyedUnarchiver unarchiveObjectWithData:arrData];
     }
     return result;
