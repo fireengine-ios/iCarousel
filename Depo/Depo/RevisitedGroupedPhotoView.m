@@ -378,7 +378,7 @@
                 }
             }
             NSIndexPath *visibleIndexPath = [collView indexPathForItemAtPoint:CGPointMake(30, currentOffset)];
-            if(visibleIndexPath) {
+            if(visibleIndexPath && (self.groups.count > visibleIndexPath.section)) {
                 FileInfoGroup *visibleGroup = [self.groups objectAtIndex:visibleIndexPath.section];
                 if([visibleGroup.customTitle isEqualToString:NSLocalizedString(@"ImageGroupTypeInProgress", @"")]) {
                     sectionIndicator.text = @"";
