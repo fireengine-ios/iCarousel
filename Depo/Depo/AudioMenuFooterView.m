@@ -54,14 +54,19 @@
         playButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 42, 9, 32, 42) withImageName:@"music_play_icon.png"];
         playButton.hidden = YES;
         [playButton addTarget:self action:@selector(playClicked) forControlEvents:UIControlEventTouchUpInside];
+        playButton.isAccessibilityElement = YES;
+        playButton.accessibilityIdentifier = @"playButtonAudioMenu";
         [self addSubview:playButton];
         
         pauseButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 42, 4, 32, 52) withImageName:@"pause_icon.png"];
         pauseButton.hidden = NO;
         [pauseButton addTarget:self action:@selector(pauseClicked) forControlEvents:UIControlEventTouchUpInside];
+        pauseButton.isAccessibilityElement = YES;
+        pauseButton.accessibilityIdentifier = @"pauseButtonAudioMenu";
         [self addSubview:pauseButton];
 
         UITapGestureRecognizer * singleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(audioClicked)];
+        singleTapGesture.isAccessibilityElement = YES;
         [self addGestureRecognizer:singleTapGesture];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resumeNotified) name:MUSIC_RESUMED_NOTIFICATION object:nil];

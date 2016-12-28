@@ -67,6 +67,8 @@
         
         SimpleButton *tryagainButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, self.frame.size.height-60, self.frame.size.width-40, 50) withTitle:NSLocalizedString(@"TryAgain", "") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
         [tryagainButton addTarget:self action:@selector(tryAgainClicked) forControlEvents:UIControlEventTouchUpInside];
+        tryagainButton.isAccessibilityElement = YES;
+        tryagainButton.accessibilityIdentifier = @"tryagainButtonFailurePurchasing";
         [self addSubview:tryagainButton];
     }
     return self;
@@ -144,6 +146,8 @@
         [tryagainButton addTarget:self action:@selector(tryAgainClicked) forControlEvents:UIControlEventTouchUpInside];
         tryagainButton.backgroundColor = [Util UIColorForHexColor:@"ffe000"];
         tryagainButton.layer.cornerRadius = 5.0;
+        tryagainButton.isAccessibilityElement = YES;
+        tryagainButton.accessibilityIdentifier = @"tryagainFailurePurchasing";
         [self addSubview:tryagainButton];
 
     }

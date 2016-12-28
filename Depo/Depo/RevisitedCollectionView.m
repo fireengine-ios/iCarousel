@@ -65,6 +65,8 @@
         collTable.delegate = self;
         collTable.dataSource = self;
         collTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+        collTable.isAccessibilityElement = YES;
+        collTable.accessibilityIdentifier = @"collTableRevisitedCollection";
         [self addSubview:collTable];
         
         refreshControl = [[UIRefreshControl alloc] init];

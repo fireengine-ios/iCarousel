@@ -81,6 +81,8 @@
             charField.backDelegate = self;
             charField.tag = 100 + i;
             charField.keyboardType = UIKeyboardTypeNumberPad;
+            charField.isAccessibilityElement = YES;
+            charField.accessibilityIdentifier = @"charFieldOTP";
             [self.view addSubview:charField];
         }
         
@@ -92,6 +94,8 @@
         resendButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, counterLabel.frame.origin.y + counterLabel.frame.size.height + 20, self.view.frame.size.width - 40, 50) withTitle:NSLocalizedString(@"ResendButton", @"") withTitleColor:[Util UIColorForHexColor:@"3E3E3E"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"3E3E3E"] withBgColor:[Util UIColorForHexColor:@"FFFFFF"] withCornerRadius:3];
         resendButton.hidden = YES;
         [resendButton addTarget:self action:@selector(resendCode) forControlEvents:UIControlEventTouchUpInside];
+        resendButton.isAccessibilityElement = YES;
+        resendButton.accessibilityIdentifier = @"resendButtonOTP";
         [self.view addSubview:resendButton];
         
         tickTimer = [NSTimer scheduledTimerWithTimeInterval:1 target: self selector: @selector(tickForSecond) userInfo: nil repeats: YES];

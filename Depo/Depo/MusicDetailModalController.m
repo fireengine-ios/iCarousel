@@ -43,6 +43,8 @@
         nameField = [[GeneralTextField alloc] initWithFrame:CGRectMake(20, self.topIndex + 55, 280, 43) withPlaceholder:NSLocalizedString(@"FileNamePlaceholder", @"")];
         nameField.delegate = self;
         nameField.text = self.file.name;
+        nameField.isAccessibilityElement = YES;
+        nameField.accessibilityIdentifier = @"nameFieldMusicDetail";
         [self.view addSubview:nameField];
         
         CustomLabel *detailLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(25, nameField.frame.origin.y + nameField.frame.size.height + 30, 280, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:12] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"FileDetailSegmentTitle", @"")];

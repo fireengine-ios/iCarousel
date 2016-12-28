@@ -47,6 +47,8 @@
             [self addSubview:checkLabel];
             
             checkButton = [[CheckButton alloc] initWithFrame:CGRectMake(checkLabel.frame.origin.x - 30, self.frame.size.height - 30, 21, 20) isInitiallyChecked:NO];
+            checkButton.isAccessibilityElement = YES;
+            checkButton.accessibilityIdentifier = @"checkButtonTutorial";
             [self addSubview:checkButton];
         }
     }

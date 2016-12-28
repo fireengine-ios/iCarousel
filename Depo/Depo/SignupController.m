@@ -77,6 +77,8 @@
         [msisdnField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
 //        msisdnField.placeholder = @"5xxxxxxxxx";
 //        msisdnField.keyboardType = UIKeyboardTypePhonePad;
+        msisdnField.isAccessibilityElement = YES;
+        msisdnField.accessibilityIdentifier = @"msisdnFieldSignUp";
         [container addSubview:msisdnField];
 
         topIndex += 55;
@@ -89,6 +91,8 @@
         emailField = [[LoginTextfield alloc] initWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2, topIndex, fieldWidth, 43) withPlaceholder:/*NSLocalizedString(@"EmailPlaceholder", @"")*/@""];
         emailField.delegate = self;
         emailField.keyboardType = UIKeyboardTypeEmailAddress;
+        emailField.isAccessibilityElement = YES;
+        emailField.accessibilityIdentifier = @"emailFieldSignUp";
         [container addSubview:emailField];
 
         topIndex += 55;
@@ -100,6 +104,8 @@
 
         passwordField = [[LoginTextfield alloc] initSecureWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2, topIndex, fieldWidth, 43) withPlaceholder:/*NSLocalizedString(@"PasswordPlaceholder", @"")*/@""];
         passwordField.delegate = self;
+        passwordField.isAccessibilityElement = YES;
+        passwordField.accessibilityIdentifier = @"passwordFieldSignUp";
         [container addSubview:passwordField];
 
         topIndex += 55;
@@ -111,16 +117,22 @@
 
         passwordRepeatField = [[LoginTextfield alloc] initSecureWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2, topIndex, fieldWidth, 43) withPlaceholder:/*NSLocalizedString(@"PasswordRepeatPlaceholder", @"")*/@""];
         passwordRepeatField.delegate = self;
+        passwordRepeatField.isAccessibilityElement = YES;
+        passwordRepeatField.accessibilityIdentifier = @"passwordRepeatFieldSignUp";
         [container addSubview:passwordRepeatField];
 
         topIndex += IS_IPHONE_4_OR_LESS ? 50 : 65;
 
         eulaCheck = [[CheckButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2 + 5, topIndex, 25, 25) isInitiallyChecked:NO];
         eulaCheck.checkDelegate = self;
+        eulaCheck.isAccessibilityElement = YES;
+        eulaCheck.accessibilityIdentifier = @"eulaCheck";
         [container addSubview:eulaCheck];
 
         SimpleButton *eulaButton = [[SimpleButton alloc] initWithFrame:CGRectMake(eulaCheck.frame.origin.x + eulaCheck.frame.size.width + 10, topIndex, fieldWidth - 40, 25) withTitle:NSLocalizedString(@"TermsButtonTitle", @"") withAlignment:NSTextAlignmentLeft isUnderlined:YES];
         [eulaButton addTarget:self action:@selector(eulaClicked) forControlEvents:UIControlEventTouchUpInside];
+        eulaButton.isAccessibilityElement = YES;
+        eulaButton.accessibilityIdentifier = @"eulaButtonSignUp";
         [container addSubview:eulaButton];
 
         CGRect signupButtonRect = CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60);
@@ -132,6 +144,8 @@
         
         signupButton = [[SimpleButton alloc] initWithFrame:signupButtonRect withTitle:NSLocalizedString(@"SignUpButton", @"") withTitleColor:[Util UIColorForHexColor:@"ffffff"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"3FB0E8"] withBgColor:[Util UIColorForHexColor:@"3FB0E8"] withCornerRadius:0];
         [signupButton addTarget:self action:@selector(signupClicked) forControlEvents:UIControlEventTouchUpInside];
+        signupButton.isAccessibilityElement = YES;
+        signupButton.accessibilityIdentifier = @"submitButtonSignUp";
         [container addSubview:signupButton];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow) name:UIKeyboardWillShowNotification object:nil];

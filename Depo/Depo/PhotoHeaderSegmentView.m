@@ -41,10 +41,14 @@
         
         photoButton = [[CustomButton alloc] initWithFrame:photoButtonRect withImageName:nil withTitle:NSLocalizedString(@"PhotoHeaderPhotosButton", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[UIColor whiteColor]];
         [photoButton addTarget:self action:@selector(photoClicked) forControlEvents:UIControlEventTouchUpInside];
+        photoButton.isAccessibilityElement = YES;
+        photoButton.accessibilityIdentifier = @"photoButtonPhotoHeader";
         [self addSubview:photoButton];
         
         albumButton = [[CustomButton alloc] initWithFrame:albumButtonRect withImageName:nil withTitle:NSLocalizedString(@"PhotoHeaderAlbumsButton", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[Util UIColorForHexColor:@"3FB0E8"]];
         [albumButton addTarget:self action:@selector(albumClicked) forControlEvents:UIControlEventTouchUpInside];
+        albumButton.isAccessibilityElement = YES;
+        albumButton.accessibilityIdentifier = @"albumButtonPhotoHeader";
         [self addSubview:albumButton];
         
         UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(self.frame.size.width/2-0.25f, 0, 0.5, self.frame.size.height)];

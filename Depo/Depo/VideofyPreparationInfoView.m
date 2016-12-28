@@ -38,6 +38,8 @@
         
         CustomButton *homepageButton = [[CustomButton alloc] initWithFrame:CGRectMake((self.frame.size.width - 280)/2, infoTitle.frame.origin.y + infoTitle.frame.size.height + (IS_IPHONE_4_OR_LESS ? 30 : 60), 280, 60) withImageName:@"buttonbg_yellow.png" withTitle:NSLocalizedString(@"HomePage", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withColor:[Util UIColorForHexColor:@"363e4f"]];
         [homepageButton addTarget:self action:@selector(triggerHome) forControlEvents:UIControlEventTouchUpInside];
+        homepageButton.isAccessibilityElement = YES;
+        homepageButton.accessibilityIdentifier = @"homepageButtonVideofy";
         [self addSubview:homepageButton];
     }
     return self;

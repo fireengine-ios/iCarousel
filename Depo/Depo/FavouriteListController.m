@@ -47,6 +47,8 @@
         fileTable.backgroundColor = [UIColor clearColor];
         fileTable.backgroundView = nil;
         fileTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+        fileTable.isAccessibilityElement = YES;
+        fileTable.accessibilityIdentifier = @"fileTableFavourite";
         [self.view addSubview:fileTable];
         
         refreshControl = [[UIRefreshControl alloc] init];

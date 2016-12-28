@@ -55,6 +55,8 @@
     pageContentTable.backgroundView = nil;
     pageContentTable.bounces = NO;
     [pageContentTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    pageContentTable.isAccessibilityElement = YES;
+    pageContentTable.accessibilityIdentifier = @"pageContentTableSettings";
     [self.view addSubview:pageContentTable];
 }
 

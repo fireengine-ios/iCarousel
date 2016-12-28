@@ -295,35 +295,49 @@ static void *AVPlayerPlaybackViewControllerCurrentItemObservationContext = &AVPl
     volumeButton = [[CustomButton alloc] initWithFrame:CGRectMake(3, 15, 30, 30) withImageName:@"volume_button.png"];
     volumeButton.hidden = NO;
     [volumeButton addTarget:self action:@selector(volumeClicked) forControlEvents:UIControlEventTouchUpInside];
+    volumeButton.isAccessibilityElement = YES;
+    volumeButton.accessibilityIdentifier = @"volumeButtonMusicPreview";
     [playControlView addSubview:volumeButton];
     
     prevButton = [[CustomButton alloc] initWithFrame:CGRectMake(controlView.frame.size.width/2 - 60, 18, 18, 23) withImageName:@"music_prev.png"];
     [prevButton addTarget:self action:@selector(prevClicked) forControlEvents:UIControlEventTouchUpInside];
+    prevButton.isAccessibilityElement = YES;
+    prevButton.accessibilityIdentifier = @"prevButtonMusicPreview";
     [playControlView addSubview:prevButton];
 
     nextButton = [[CustomButton alloc] initWithFrame:CGRectMake(controlView.frame.size.width/2 + 42, 18, 18, 23) withImageName:@"music_next.png"];
     [nextButton addTarget:self action:@selector(nextClicked) forControlEvents:UIControlEventTouchUpInside];
+    nextButton.isAccessibilityElement = YES;
+    nextButton.accessibilityIdentifier = @"nextButtonMusicPreview";
     [playControlView addSubview:nextButton];
 
     playButton = [[CustomButton alloc] initWithFrame:CGRectMake((controlView.frame.size.width - 32)/2, 9, 32, 42) withImageName:@"music_play_icon.png"];
     playButton.hidden = NO;
     [playButton addTarget:self action:@selector(playClicked) forControlEvents:UIControlEventTouchUpInside];
+    playButton.isAccessibilityElement = YES;
+    playButton.accessibilityIdentifier = @"playButtonMusicPreview";
     [playControlView addSubview:playButton];
     
     pauseButton = [[CustomButton alloc] initWithFrame:CGRectMake((controlView.frame.size.width - 32)/2, 4, 32, 52) withImageName:@"pause_icon.png"];
     pauseButton.hidden = YES;
     [pauseButton addTarget:self action:@selector(pauseClicked) forControlEvents:UIControlEventTouchUpInside];
+    pauseButton.isAccessibilityElement = YES;
+    pauseButton.accessibilityIdentifier = @"pauseButtonMusicPreview";
     [playControlView addSubview:pauseButton];
     
     shuffleButton = [[CustomButton alloc] initWithFrame:CGRectMake(controlView.frame.size.width - 40, 10, 40, 40) withImageName:@"shuffle.png"];
     [shuffleButton addTarget:self action:@selector(setShuffleOn) forControlEvents:UIControlEventTouchUpInside];
     shuffleButton.alpha = 0.5f;
+    shuffleButton.isAccessibilityElement = YES;
+    shuffleButton.accessibilityIdentifier = @"shuffleButtonMusicPreview";
     [playControlView addSubview:shuffleButton];
     
     customVolumeView = [[VolumeSliderView alloc] initWithFrame:CGRectMake(0, 51, controlView.frame.size.width, controlView.frame.size.height - 51)];
     customVolumeView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"video-player-bckgrnd.png"]];
     customVolumeView.hidden = YES;
     customVolumeView.delegate = self;
+    customVolumeView.isAccessibilityElement = YES;
+    customVolumeView.accessibilityIdentifier = @"VolumeSliderMusicPreview";
     [controlView addSubview:customVolumeView];
 }
 

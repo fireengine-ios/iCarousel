@@ -70,6 +70,8 @@
         musicTable.backgroundView = nil;
         musicTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         musicTable.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
+        musicTable.isAccessibilityElement = YES;
+        musicTable.accessibilityIdentifier = @"musicTableMusicList";
         [self.view addSubview:musicTable];
         
         UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(shouldMoveToSelectionState:)];

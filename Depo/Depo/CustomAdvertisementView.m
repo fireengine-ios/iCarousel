@@ -54,16 +54,22 @@
         if (option) {
             SimpleButton *noButton = [[SimpleButton alloc] initWithFrame:CGRectMake(30, self.frame.size.height-90, (self.frame.size.width - 70)/2-5, 50) withTitle:NSLocalizedString(@"CancelButtonTittle", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
             [noButton addTarget:self action:@selector(noClicked) forControlEvents:UIControlEventTouchUpInside];
+            noButton.isAccessibilityElement = YES;
+            noButton.accessibilityIdentifier = @"noButtonAdvertisement";
             [self addSubview:noButton];
             
             SimpleButton *yesButton = [[SimpleButton alloc] initWithFrame:CGRectMake(self.frame.size.width-35-noButton.frame.size.width, self.frame.size.height-90, (self.frame.size.width - 70)/2-5, 50) withTitle:NSLocalizedString(@"MoreStorageButtonTitle", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
             [yesButton addTarget:self action:@selector(yesClicked) forControlEvents:UIControlEventTouchUpInside];
+            yesButton.isAccessibilityElement = YES;
+            yesButton.accessibilityIdentifier = @"yesButtonAdvertisement";
             [self addSubview:yesButton];
             
         }
         else {
             SimpleButton *okButton = [[SimpleButton alloc] initWithFrame:CGRectMake(30, self.frame.size.height-90, self.frame.size.width - 60, 60) withTitle:NSLocalizedString(@"Okay", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
             [okButton addTarget:self action:@selector(okClicked) forControlEvents:UIControlEventTouchUpInside];
+            okButton.isAccessibilityElement = YES;
+            okButton.accessibilityIdentifier = @"okButtonAdvertisement";
             [self addSubview:okButton];
         }
         
@@ -106,6 +112,8 @@
         if (isFull) {
             SimpleButton *okButton = [[SimpleButton alloc] initWithFrame:CGRectMake(30, self.frame.size.height-90, self.frame.size.width - 60, 60) withTitle:NSLocalizedString(@"Okay", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
             [okButton addTarget:self action:@selector(okIsFullClicked) forControlEvents:UIControlEventTouchUpInside];
+            okButton.isAccessibilityElement = YES;
+            okButton.accessibilityIdentifier = @"okIsFullButtonAdvertisement";
             [self addSubview:okButton];
 
         }

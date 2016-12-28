@@ -98,6 +98,8 @@
         searchField.delegate = self;
         [searchField markIcon];
         [searchField addTarget:self action:@selector(searchFieldDidChange) forControlEvents:UIControlEventEditingChanged];
+        searchField.isAccessibilityElement = YES;
+        searchField.accessibilityIdentifier = @"searchFieldSearchModal";
         [searchFieldContainer addSubview:searchField];
         
         recentSearchesTableView = [[RecentSearchesTableView alloc] initWithSearchField:searchField];
@@ -110,6 +112,8 @@
         searchResultsTable.delegate = self;
         searchResultsTable.dataSource = self;
         tableUpdateCounter = 0;
+        searchResultsTable.isAccessibilityElement = YES;
+        searchResultsTable.accessibilityIdentifier = @"searchResultsTableSearchModal";
         
         [self.view addSubview:searchResultsTable];
         [self.view addSubview:recentSearchesTableView];

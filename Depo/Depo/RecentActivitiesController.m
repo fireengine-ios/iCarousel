@@ -47,6 +47,8 @@
         recentTable.backgroundColor = [UIColor clearColor];
         recentTable.backgroundView = nil;
         recentTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+        recentTable.isAccessibilityElement = YES;
+        recentTable.accessibilityIdentifier = @"recentTableRecentActivities";
         [self.view addSubview:recentTable];
         
         refreshControl = [[UIRefreshControl alloc] init];
@@ -56,6 +58,8 @@
         CustomButton *customBackButton = [[CustomButton alloc] initWithFrame:CGRectMake(10, 0, 20, 34) withImageName:@"white_left_arrow.png"];
         [customBackButton addTarget:self action:@selector(triggerDismissModal) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:customBackButton];
+        backButton.isAccessibilityElement = YES;
+        backButton.accessibilityIdentifier = @"backButtonRecentActivities";
         self.navigationItem.leftBarButtonItem = backButton;
 
         [recentDao requestRecentActivitiesForPage:listOffset andCount:RECENT_ACTIVITY_COUNT];

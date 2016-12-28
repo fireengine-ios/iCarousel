@@ -45,6 +45,8 @@
         [cancelButton addTarget:self action:@selector(triggerDismiss) forControlEvents:UIControlEventTouchUpInside];
         
         UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithCustomView:cancelButton];
+        cancelItem.isAccessibilityElement = YES;
+        cancelItem.accessibilityIdentifier = @"cancelButtonDevicePhotos";
         self.navigationItem.rightBarButtonItem = cancelItem;
         
         al = [[ALAssetsLibrary alloc] init];
@@ -65,6 +67,8 @@
         collView.backgroundColor = [UIColor whiteColor];
         [collView registerClass:[DevicePhotoCell class] forCellWithReuseIdentifier:@"DEVICE_PHOTO_CELL"];
         [collView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"footer"];
+        collView.isAccessibilityElement = YES;
+        collView.accessibilityIdentifier = @"collViewDevicePhotos";
         [self.view addSubview:collView];
         
         [al enumerateGroupsWithTypes:ALAssetsGroupAll | ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
@@ -91,6 +95,8 @@
         
         footerView = [[MultipleUploadFooterView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60)];
         footerView.delegate = self;
+        footerView.isAccessibilityElement = YES;
+        footerView.accessibilityIdentifier = @"footerViewDevicePhotos";
         [self.view addSubview:footerView];
         
     }

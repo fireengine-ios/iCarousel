@@ -61,6 +61,8 @@
         
         SimpleButton *okButton = [[SimpleButton alloc] initWithFrame:CGRectMake(30, self.frame.size.height-90, self.frame.size.width - 60, 60) withTitle:NSLocalizedString(@"Okay", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
         [okButton addTarget:self action:@selector(okButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+        okButton.isAccessibilityElement = YES;
+        okButton.accessibilityIdentifier = @"okButtonOnKatDepo";
         [self addSubview:okButton];
         
     }

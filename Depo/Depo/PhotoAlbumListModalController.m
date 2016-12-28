@@ -43,6 +43,8 @@
         albumTable.backgroundColor = [UIColor clearColor];
         albumTable.backgroundView = nil;
         albumTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+        albumTable.isAccessibilityElement = YES;
+        albumTable.accessibilityIdentifier = @"albumTablePhotoAlbumList";
         [self.view addSubview:albumTable];
         
         [albumsDao requestAlbumListForStart:0 andSize:50];

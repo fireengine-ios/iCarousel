@@ -70,6 +70,8 @@
         albumTable.delegate = self;
         albumTable.dataSource = self;
         albumTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+        albumTable.isAccessibilityElement = YES;
+        albumTable.accessibilityIdentifier = @"albumTableRevisitedAlbum";
         [self addSubview:albumTable];
         
         [self createRefreshControl];

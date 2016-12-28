@@ -61,11 +61,15 @@
 
         SimpleButton *loginButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, self.view.frame.size.height - 60, self.view.frame.size.width - 40, 50) withTitle:NSLocalizedString(@"StartUsingTitle", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
         [loginButton addTarget:self action:@selector(loginClicked) forControlEvents:UIControlEventTouchUpInside];
+        loginButton.isAccessibilityElement = YES;
+        loginButton.accessibilityIdentifier = @"loginButtonPreLogin";
         [self.view addSubview:loginButton];
 
         pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 100)/2, loginButton.frame.origin.y - 40, 100, 30)];
         pageControl.numberOfPages = 6;
         pageControl.currentPage = 0;
+        pageControl.isAccessibilityElement = YES;
+        pageControl.accessibilityIdentifier = @"pageControlPreLogin";
         [self.view addSubview:pageControl];
 
     }

@@ -111,6 +111,8 @@
     if(!bigPlayButton) {
         self.bigPlayButton = [[CustomButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width-68)/2, (self.view.frame.size.height-68)/2, 68, 68) withImageName:@"button_play.png"];
         [bigPlayButton addTarget:self action:@selector(bigPlayClicked) forControlEvents:UIControlEventTouchUpInside];
+        bigPlayButton.isAccessibilityElement = YES;
+        bigPlayButton.accessibilityIdentifier = @"bigPlayButtonVideofy";
         [self.view addSubview:bigPlayButton];
     }
 }
@@ -177,6 +179,8 @@
     CustomButton *customBackButton = [[CustomButton alloc] initWithFrame:CGRectMake(10, 0, 20, 34) withImageName:@"white_left_arrow.png"];
     [customBackButton addTarget:self action:@selector(triggerDismiss) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:customBackButton];
+    backButton.isAccessibilityElement = YES;
+    backButton.accessibilityIdentifier = @"backButtonVideofy";
     self.navigationItem.leftBarButtonItem = backButton;
 }
 
@@ -242,6 +246,8 @@
     [nextButton addTarget:self action:@selector(triggerSave) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem *nextItem = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
+    nextItem.isAccessibilityElement = YES;
+    nextItem.accessibilityIdentifier = @"nextItemVideofy";
     self.navigationItem.rightBarButtonItem = nextItem;
 }
 

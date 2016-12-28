@@ -131,6 +131,8 @@
         [buttonView setFrame:CGRectMake(155, viewHeight - 35, 135, 30)];
         [buttonView setTitle:[Message getMessage:@"view"] forState:UIControlStateNormal];
         [buttonView addTarget:delegate action:@selector(viewButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+        buttonView.isAccessibilityElement = YES;
+        buttonView.accessibilityIdentifier = @"buttonMessageView";
         [[messageView view] addSubview:buttonView];
         buttonOKWidth = 135;
     }else{
@@ -141,6 +143,8 @@
     [buttonOK setFrame:CGRectMake(10, viewHeight - 35, buttonOKWidth, 30)];
     [buttonOK setTitle:[Message getMessage:@"close"] forState:UIControlStateNormal];
     [buttonOK addTarget:delegate action:@selector(OKButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    buttonOK.isAccessibilityElement = YES;
+    buttonOK.accessibilityIdentifier = @"buttonOKMessageView";
     [[messageView view] addSubview:buttonOK];
     
     return messageView;

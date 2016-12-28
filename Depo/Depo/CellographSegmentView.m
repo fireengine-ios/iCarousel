@@ -31,10 +31,14 @@
         
         currentButton = [[SimpleButton alloc] initWithFrame:currentButtonRect withTitle:NSLocalizedString(@"CellographCurrent", @"") withTitleColor:[UIColor whiteColor] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:17] isUnderline:NO withUnderlineColor:nil];
         [currentButton addTarget:self action:@selector(currentClicked) forControlEvents:UIControlEventTouchUpInside];
+        currentButton.isAccessibilityElement = YES;
+        currentButton.accessibilityIdentifier = @"currentButtonCellograph";
         [self addSubview:currentButton];
 
         historyButton = [[SimpleButton alloc] initWithFrame:historyButtonRect withTitle:NSLocalizedString(@"CellographHistory", @"") withTitleColor:[UIColor whiteColor] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:17] isUnderline:NO withUnderlineColor:nil];
         [historyButton addTarget:self action:@selector(historyClicked) forControlEvents:UIControlEventTouchUpInside];
+        historyButton.isAccessibilityElement = YES;
+        historyButton.accessibilityIdentifier = @"historyButtonCellograph";
         [self addSubview:historyButton];
 
         UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(self.frame.size.width/2-0.25f, 0, 0.5, self.frame.size.height)];

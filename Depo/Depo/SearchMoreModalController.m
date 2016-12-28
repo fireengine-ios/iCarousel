@@ -89,6 +89,8 @@
         deleteDao.successMethod = @selector(deleteSuccessCallback);
         deleteDao.failMethod = @selector(deleteFailCallback:);
 
+        searchResultsTable.isAccessibilityElement = YES;
+        searchResultsTable.accessibilityIdentifier = @"searchResultsSearchMoreModal";
         [self.view addSubview:searchResultsTable];
     }
     return self;

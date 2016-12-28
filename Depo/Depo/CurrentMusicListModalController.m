@@ -50,6 +50,8 @@
         musicTable.backgroundView = nil;
         musicTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         musicTable.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
+        musicTable.isAccessibilityElement = YES;
+        musicTable.accessibilityIdentifier = @"musicTableCurrentMusic";
         [self.view addSubview:musicTable];
         
         [elasticSearchDao requestMusicForPage:listOffset andSize:21 andSortType:APPDELEGATE.session.sortType];

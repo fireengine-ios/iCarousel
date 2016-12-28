@@ -59,6 +59,8 @@
         folderTable.backgroundView = nil;
         folderTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         folderTable.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
+        folderTable.isAccessibilityElement = YES;
+        folderTable.accessibilityIdentifier = @"folderTableMoveList";
         [self.view addSubview:folderTable];
 
         [fileListDao requestFolderListingForFolder:self.folder?self.folder.uuid:nil andForPage:0 andSize:999999 sortBy:APPDELEGATE.session.sortType];

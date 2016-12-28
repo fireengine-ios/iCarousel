@@ -61,6 +61,8 @@
         nameField.delegate = self;
         NSString *fileNameWithoutExtension = [self.file.name stringByDeletingPathExtension];
         nameField.text = fileNameWithoutExtension;
+        nameField.isAccessibilityElement = YES;
+        nameField.accessibilityIdentifier = @"nameFieldFileDetail";
         [mainScroll addSubview:nameField];
         
         yIndex += 63;
@@ -75,6 +77,8 @@
             titleField.delegate = self;
             titleField.text = (self.file.detail && self.file.detail.songTitle) ? self.file.detail.songTitle : @"";
             titleField.userInteractionEnabled = NO;
+            titleField.isAccessibilityElement = YES;
+            titleField.accessibilityIdentifier = @"titleFieldFileDetail";
             [mainScroll addSubview:titleField];
             
             yIndex += 63;
@@ -88,6 +92,8 @@
             artistField.delegate = self;
             artistField.text = (self.file.detail && self.file.detail.artist) ? self.file.detail.artist : @"";
             artistField.userInteractionEnabled = NO;
+            artistField.isAccessibilityElement = YES;
+            artistField.accessibilityIdentifier = @"artistFieldFileDetail";
             [mainScroll addSubview:artistField];
             
             yIndex += 63;
@@ -101,6 +107,8 @@
             albumField.delegate = self;
             albumField.text = (self.file.detail && self.file.detail.album) ? self.file.detail.album : @"";
             albumField.userInteractionEnabled = NO;
+            albumField.isAccessibilityElement = YES;
+            albumField.accessibilityIdentifier = @"albumFieldFileDetail";
             [mainScroll addSubview:albumField];
             
             yIndex += 63;

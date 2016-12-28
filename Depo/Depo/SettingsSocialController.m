@@ -65,6 +65,8 @@
         mainTable.backgroundColor = [UIColor clearColor];
         mainTable.backgroundView = nil;
         mainTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+        mainTable.isAccessibilityElement = YES;
+        mainTable.accessibilityIdentifier = @"mainTableSettingsSocial";
         [self.view addSubview:mainTable];
         
         fbLoginButton = [[FBSDKLoginManager alloc] init];

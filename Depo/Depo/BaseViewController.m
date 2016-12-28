@@ -125,11 +125,15 @@
         self.addMenu = [[FloatingAddMenu alloc] initWithFrame:CGRectMake(kMenuOpenOriginX, 0, self.view.frame.size.width, self.view.frame.size.height) withBasePoint:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height - 65)];
         addMenu.hidden = YES;
         addMenu.delegate = self;
+        self.addMenu.isAccessibilityElement = YES;
+        self.addMenu.accessibilityIdentifier = @"addMenuBaseView";
         [scroll addSubview:addMenu];
         
         self.addButton = [[FloatingAddButton alloc] initWithFrame:CGRectMake(kMenuOpenOriginX + (self.view.frame.size.width - 70)/2, self.view.frame.size.height - 100, 70, 70)];
         addButton.hidden = YES;
         addButton.delegate = self;
+        self.addButton.isAccessibilityElement = YES;
+        self.addButton.accessibilityIdentifier = @"addButtonBaseView";
         [scroll addSubview:addButton];
         
         NSArray *addTypesForController = [APPDELEGATE.mapUtil readAddTypesByController:NSStringFromClass(RevisitedGroupedPhotosController.class)];
@@ -147,12 +151,14 @@
                                                     initWithTarget:self action:@selector(swipeLeft:)];
         recognizerLeft.direction = UISwipeGestureRecognizerDirectionLeft;
         recognizerLeft.delegate = self;
+        recognizerLeft.isAccessibilityElement = YES;
         [self.view addGestureRecognizer:recognizerLeft];
         
         UISwipeGestureRecognizer *recognizerRight = [[UISwipeGestureRecognizer alloc]
                                                      initWithTarget:self action:@selector(swipeRight:)];
         recognizerRight.direction = UISwipeGestureRecognizerDirectionRight;
         recognizerRight.delegate = self;
+        recognizerRight.isAccessibilityElement = YES;
         [self.view addGestureRecognizer:recognizerRight];
 
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncQueueChanged) name:AUTO_SYNC_QUEUE_CHANGED_NOTIFICATION object:nil];

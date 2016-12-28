@@ -21,11 +21,15 @@
         [self.layer setCornerRadius:self.frame.size.width/2];
         
         CustomLabel *totalUsageLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, 30, self.frame.size.width, 40) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:36] withColor:[Util UIColorForHexColor:@"363e4f"] withText:[usage usedStorage] == 0 ? @"--" : [Util transformedHugeSizeValue:[usage usedStorage]] withAlignment:NSTextAlignmentCenter];
+        totalUsageLabel.isAccessibilityElement = YES;
+        totalUsageLabel.accessibilityIdentifier = @"totalUsageLabelHome";
         [self addSubview:totalUsageLabel];
         
         NSString *totalStorageVal = [NSString stringWithFormat:NSLocalizedString(@"HomeUsageTotalStorage", @""), [Util transformedHugeSizeValueDecimalIfNecessary:usage.totalStorage]];
         
         CustomLabel *totalStorageLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, 75, self.frame.size.width, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withColor:[Util UIColorForHexColor:@"7b8497"] withText:totalStorageVal withAlignment:NSTextAlignmentCenter];
+        totalStorageLabel.isAccessibilityElement = YES;
+        totalStorageLabel.accessibilityIdentifier = @"totalStorageLabelHome";
         [self addSubview:totalStorageLabel];
         
         if(IS_IPAD) {

@@ -42,10 +42,14 @@
         msisdnField = [[LoginTextfield alloc] initWithFrame:CGRectMake(containerLeftMargin, msisdnLabel.frame.origin.y + msisdnLabel.frame.size.height + 15, containerWidth, 43) withPlaceholder:NSLocalizedString(@"MsisdnPlaceholder", @"")];
         msisdnField.delegate = self;
         msisdnField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        msisdnField.isAccessibilityElement = YES;
+        msisdnField.accessibilityIdentifier = @"msisdnFieldMsisdnCont";
         [self.view addSubview:msisdnField];
         
         SimpleButton *okButton = [[SimpleButton alloc] initWithFrame:CGRectMake(containerLeftMargin, msisdnField.frame.origin.y + msisdnField.frame.size.height + 25, containerWidth, 50) withTitle:NSLocalizedString(@"OK", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
         [okButton addTarget:self action:@selector(triggerSave) forControlEvents:UIControlEventTouchUpInside];
+        okButton.isAccessibilityElement = YES;
+        okButton.accessibilityIdentifier = @"okButtonMsisdnCont";
         [self.view addSubview:okButton];
         
         UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(triggerResign)];

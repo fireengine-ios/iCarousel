@@ -51,6 +51,8 @@
         
         nameField = [[GeneralTextField alloc] initWithFrame:nameRect withPlaceholder:NSLocalizedString(@"AlbumNamePlaceholder", @"")];
         nameField.delegate = self;
+        nameField.isAccessibilityElement = YES;
+        nameField.accessibilityIdentifier = @"nameFieldNewAlbum";
         [self.view addSubview:nameField];
         
         UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(triggerResign)];

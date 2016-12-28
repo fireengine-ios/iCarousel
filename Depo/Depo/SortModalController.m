@@ -58,6 +58,8 @@
         sortTable.backgroundView = nil;
         sortTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         [sortTable sizeToFit];
+        sortTable.isAccessibilityElement = YES;
+        sortTable.accessibilityIdentifier = @"sortTableSortModal";
         [self.view addSubview:sortTable];
         
     }

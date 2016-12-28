@@ -113,6 +113,8 @@
         albumTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         albumTable.tag = 222;
         albumTable.hidden = YES;
+        albumTable.isAccessibilityElement = YES;
+        albumTable.accessibilityIdentifier = @"albumTablePhotoList";
         [self.view addSubview:albumTable];
 
         refreshControlAlbums = [[UIRefreshControl alloc] init];

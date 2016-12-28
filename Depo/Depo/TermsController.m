@@ -79,10 +79,14 @@
         if(checkEnabled) {
             checkButton = [[CheckButton alloc] initWithFrame:CGRectMake(15, webView.frame.origin.y + webView.frame.size.height + 10, self.view.frame.size.width - 30, 25) withTitle:NSLocalizedString(@"AcceptTerms", @"") isInitiallyChecked:NO];
             checkButton.checkDelegate = self;
+            checkButton.isAccessibilityElement = YES;
+            checkButton.accessibilityIdentifier = @"checkButtonTerms";
             [self.view addSubview:checkButton];
 
             acceptButton = [[SimpleButton alloc] initWithFrame:CGRectMake(15, checkButton.frame.origin.y + checkButton.frame.size.height + 5, self.view.frame.size.width - 30, 52) withTitle:NSLocalizedString(@"OK", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:22] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
             [acceptButton addTarget:self action:@selector(triggerNext) forControlEvents:UIControlEventTouchUpInside];
+            acceptButton.isAccessibilityElement = YES;
+            acceptButton.accessibilityIdentifier = @"acceptButtonTerms";
             [self.view addSubview:acceptButton];
         }
         

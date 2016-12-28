@@ -51,12 +51,16 @@
 //        yIndex += subTitleHeight + 20;
         
         promoField = [[GeneralTextField alloc] initWithFrame:CGRectMake(20, yIndex, mainScroll.frame.size.width - 40, 50) withPlaceholder:NSLocalizedString(@"PromoCodePlaceholder", @"")];
+        promoField.isAccessibilityElement = YES;
+        promoField.accessibilityIdentifier = @"promoFieldPromotion";
         [mainScroll addSubview:promoField];
 
         yIndex += 70;
 
         CustomButton *activateButton = [[CustomButton alloc] initWithFrame:CGRectMake(20, yIndex, mainScroll.frame.size.width - 40, 60) withImageName:@"buttonbg_yellow.png" withTitle:NSLocalizedString(@"ApplyButtonTitle", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withColor:[Util UIColorForHexColor:@"363e4f"]];
         [activateButton addTarget:self action:@selector(triggerActivate) forControlEvents:UIControlEventTouchUpInside];
+        activateButton.isAccessibilityElement = YES;
+        activateButton.accessibilityIdentifier = @"activateButtonPromotion";
         [mainScroll addSubview:activateButton];
 
         yIndex += 80;

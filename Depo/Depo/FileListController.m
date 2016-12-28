@@ -111,6 +111,8 @@
         fileTable.backgroundView = nil;
         fileTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         fileTable.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
+        fileTable.isAccessibilityElement = YES;
+        fileTable.accessibilityIdentifier = @"fileTableFileDetail";
         [self.view addSubview:fileTable];
 
         UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(shouldMoveToSelectionState:)];
