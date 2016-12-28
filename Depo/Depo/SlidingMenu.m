@@ -44,6 +44,8 @@
         menuTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         menuTable.separatorColor = [UIColor clearColor];
         menuTable.contentInset = UIEdgeInsetsMake(0, 0, 60, 0);
+        menuTable.isAccessibilityElement = YES;
+        menuTable.accessibilityIdentifier = @"menuTableSlidingMenu";
         [self addSubview:menuTable];
         
         [[NSNotificationCenter defaultCenter] addObserver:self

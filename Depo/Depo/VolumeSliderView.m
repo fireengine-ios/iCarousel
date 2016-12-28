@@ -24,10 +24,14 @@
         
         volumeMuteButton = [[CustomButton alloc] initWithFrame:CGRectMake(3, 15, 30, 30) withImageName:@"volume_mute.png"];
         [volumeMuteButton addTarget:self action:@selector(volumeMuteClicked) forControlEvents:UIControlEventTouchUpInside];
+        volumeMuteButton.isAccessibilityElement = YES;
+        volumeMuteButton.accessibilityIdentifier = @"volumeMuteButtonVolume";
         [self addSubview:volumeMuteButton];
         
         volumeFullButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 36, 15, 30, 30) withImageName:@"volume_full.png"];
         [volumeFullButton addTarget:self action:@selector(volumeFullClicked) forControlEvents:UIControlEventTouchUpInside];
+        volumeFullButton.isAccessibilityElement = YES;
+        volumeFullButton.accessibilityIdentifier = @"volumeFullButtonVolume";
         [self addSubview:volumeFullButton];
         
         volumeLevels = [[NSMutableArray alloc] init];
@@ -38,6 +42,8 @@
             VolumeLevelIndicator *volIndicator = [[VolumeLevelIndicator alloc] initWithFrame:CGRectMake(50 + (i-1)*10, 26, 8, 8) withLevel:(i+1)];
             volIndicator.userInteractionEnabled = NO;
             volIndicator.delegate = self;
+            volIndicator.isAccessibilityElement = YES;
+            volIndicator.accessibilityIdentifier = @"volIndicatorVolume";
             [self addSubview:volIndicator];
             
             [volumeLevels addObject:volIndicator];
@@ -139,6 +145,8 @@
         VolumeLevelIndicator *volIndicator = [[VolumeLevelIndicator alloc] initWithFrame:CGRectMake(50 + (i-1)*10, 26, 8, 8) withLevel:(i+1)];
         volIndicator.userInteractionEnabled = NO;
         volIndicator.delegate = self;
+        volIndicator.isAccessibilityElement = YES;
+        volIndicator.accessibilityIdentifier = @"volLevelIndicatorVolume";
         [self addSubview:volIndicator];
         
         [volumeLevels addObject:volIndicator];

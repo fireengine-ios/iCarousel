@@ -70,6 +70,8 @@
         CustomButton *customSettingsButton = [[CustomButton alloc] initWithFrame:CGRectMake(10, 0, 20, 34) withImageName:@"settings_icon"];
         [customSettingsButton addTarget:self action:@selector(triggerSettingsPage) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc] initWithCustomView:customSettingsButton];
+        settingsButton.isAccessibilityElement = YES;
+        settingsButton.accessibilityIdentifier = @"settingsButtonHome";
         self.navigationItem.rightBarButtonItem = settingsButton;
         
         usageDao = [[UsageInfoDao alloc] init];
@@ -93,13 +95,18 @@
         searchField = [[MainSearchTextfield alloc] initWithFrame:CGRectMake(0, 0, searchBgView.frame.size.width, searchBgView.frame.size.height)];
         searchField.returnKeyType = UIReturnKeySearch;
         searchField.userInteractionEnabled = NO;
+        searchField.isAccessibilityElement = YES;
+        searchField.accessibilityIdentifier = @"searchFieldHome";
         [searchBgView addSubview:searchField];
         
         UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(searchTapped)];
         tapGestureRecognizer.numberOfTapsRequired = 1;
         tapGestureRecognizer.enabled = YES;
+        tapGestureRecognizer.isAccessibilityElement = YES;
         [searchBgView addGestureRecognizer:tapGestureRecognizer];
 
+        searchBgView.isAccessibilityElement = YES;
+        searchBgView.accessibilityIdentifier = @"searchBgViewHome";
         [self.view addSubview:searchBgView];
         
         float chartWidth = 200;
@@ -120,6 +127,8 @@
         usageChart.pieCenter = CGPointMake(chartWidth/2, chartWidth/2);
         usageChart.userInteractionEnabled = NO;
         usageChart.labelShadowColor = [UIColor blackColor];
+        usageChart.isAccessibilityElement = YES;
+        usageChart.accessibilityIdentifier = @"usageChartHome";
         [self.view addSubview:usageChart];
 
         NSString *lastSyncTitle = @"";
@@ -132,6 +141,8 @@
         moreStorageButton = [[SimpleButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 150)/2, usageChart.frame.origin.y + usageChart.frame.size.height + (IS_IPAD ? 50 : IS_IPHONE_5 ? 20 : 0), 150, 44) withTitle:NSLocalizedString(@"GetMoreStorageButtonTitle", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:22];
         moreStorageButton.hidden = YES;
         [moreStorageButton addTarget:self action:@selector(triggerStoragePage) forControlEvents:UIControlEventTouchUpInside];
+        moreStorageButton.isAccessibilityElement = YES;
+        moreStorageButton.accessibilityIdentifier = @"moreStorageButtonHome";
         [self.view addSubview:moreStorageButton];
         
         /*
@@ -245,10 +256,14 @@
         usageSummaryRect = CGRectMake(80, 80, usageChart.frame.size.width - 160, usageChart.frame.size.width - 160);
     }
     usageSummaryView = [[HomeUsageView alloc] initWithFrame:usageSummaryRect withUsage:APPDELEGATE.session.usage];
+    usageSummaryView.isAccessibilityElement = YES;
+    usageSummaryView.accessibilityIdentifier = @"usageSummaryViewHome";
     [usageChart addSubview:usageSummaryView];
     
     UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(20, moreStorageButton.frame.origin.y + moreStorageButton.frame.size.height + (IS_IPAD ? 50 : IS_IPHONE_4_OR_LESS ? 10: 20), self.view.frame.size.width - 40, 1)];
     separator.backgroundColor = [Util UIColorForHexColor:@"ebebed"];
+    separator.isAccessibilityElement = YES;
+    separator.accessibilityIdentifier = @"separatorHome";
     [self.view addSubview:separator];
     
     CGRect imageRect = CGRectMake(20, separator.frame.origin.y + (IS_IPHONE_4_OR_LESS ? 11 : 41), 75, 60);
@@ -266,14 +281,20 @@
     
     imageButton = [[UsageButton alloc] initWithFrame:imageRect withUsage:UsageTypeImage withStorage:(APPDELEGATE.session.usage.imageUsage + APPDELEGATE.session.usage.videoUsage) withFileCount:(APPDELEGATE.session.usage.imageCount + APPDELEGATE.session.usage.videoCount)];
     [imageButton addTarget:self action:@selector(triggerPhotosPage) forControlEvents:UIControlEventTouchUpInside];
+    imageButton.isAccessibilityElement = YES;
+    imageButton.accessibilityIdentifier = @"imageButtonHome";
     [self.view addSubview:imageButton];
     
     musicButton = [[UsageButton alloc] initWithFrame:musicRect withUsage:UsageTypeMusic withStorage:APPDELEGATE.session.usage.musicUsage withFileCount:APPDELEGATE.session.usage.audioCount];
     [musicButton addTarget:self action:@selector(triggerMusicPage) forControlEvents:UIControlEventTouchUpInside];
+    musicButton.isAccessibilityElement = YES;
+    musicButton.accessibilityIdentifier = @"musicButtonHome";
     [self.view addSubview:musicButton];
     
     otherButton = [[UsageButton alloc] initWithFrame:otherRect withUsage:UsageTypeOther withStorage:APPDELEGATE.session.usage.otherUsage withFileCount:APPDELEGATE.session.usage.othersCount];
     [otherButton addTarget:self action:@selector(triggerDocsPage) forControlEvents:UIControlEventTouchUpInside];
+    otherButton.isAccessibilityElement = YES;
+    otherButton.accessibilityIdentifier = @"otherButtonHome";
     [self.view addSubview:otherButton];
     
     /* contacts commented out
@@ -314,6 +335,8 @@
             CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"TitleLater", @"") withApproveTitle:NSLocalizedString(@"TitleYes", @"") withMessage:NSLocalizedString(@"PackageFullMaessage", @"") withModalType:ModalTypeApprove shouldShowCheck:YES withCheckKey:@"QUOTA_FULL_DONTSHOW_DEFAULTS_KEY"];
             confirm.delegate = self;
             confirm.tag = 222;
+            confirm.isAccessibilityElement = YES;
+            confirm.accessibilityIdentifier = @"customConfirmViewHome";
             [APPDELEGATE showCustomConfirm:confirm];
             APPDELEGATE.session.storageFullPopupShown = YES;
         }
@@ -499,6 +522,8 @@
                     UIWindow *currentWindow = [UIApplication sharedApplication].keyWindow;
                     onkatView = [[OnkatDepoPopUP alloc] initWithFrame:CGRectMake(0, 0, currentWindow.bounds.size.width, currentWindow.bounds.size.height)];
                     onkatView.delegate = self;
+                    onkatView.isAccessibilityElement = YES;
+                    onkatView.accessibilityIdentifier = @"onkatViewHome";
                     [currentWindow addSubview:onkatView];
                 }
                 
@@ -557,6 +582,8 @@
     UIWindow *currentWindow = [UIApplication sharedApplication].keyWindow;
     advertisementView = [[CustomAdvertisementView alloc] initWithFrame:CGRectMake(0, 0, currentWindow.bounds.size.width, currentWindow.bounds.size.height) withMessage:message withBooleanOption:option withTitle:title];
     advertisementView.delegate = self;
+    advertisementView.isAccessibilityElement = YES;
+    advertisementView.accessibilityIdentifier = @"advertisementViewHome";
     [currentWindow addSubview:advertisementView];
 }
 
@@ -564,6 +591,8 @@
     UIWindow *currentWindow = [UIApplication sharedApplication].keyWindow;
     advertisementView = [[CustomAdvertisementView alloc] initWithFrame:CGRectMake(0, 0, currentWindow.bounds.size.width, currentWindow.bounds.size.height) withMessage:message withFullPackage:YES withTitle:title];
     advertisementView.delegate = self;
+    advertisementView.isAccessibilityElement = YES;
+    advertisementView.accessibilityIdentifier = @"advertisementViewMessageHome";
     [currentWindow addSubview:advertisementView];
 }
 

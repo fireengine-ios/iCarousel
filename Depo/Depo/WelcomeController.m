@@ -47,10 +47,14 @@
 
         CustomButton *signupButton = [[CustomButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - buttonSize.width)/2, self.view.frame.size.height - 100, buttonSize.width, buttonSize.height) withImageName:@"buttonbg_blue.png" withTitle:NSLocalizedString(@"SignUp", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withColor:[UIColor whiteColor]];
         [signupButton addTarget:self action:@selector(triggerSignup) forControlEvents:UIControlEventTouchUpInside];
+        signupButton.isAccessibilityElement = YES;
+        signupButton.accessibilityIdentifier = @"signupButtonWelcome";
         [self.view addSubview:signupButton];
 
         CustomButton *loginButton = [[CustomButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - buttonSize.width)/2, self.view.frame.size.height - signupButton.frame.size.height - 110, buttonSize.width, buttonSize.height) withImageName:@"buttonbg_yellow.png" withTitle:NSLocalizedString(@"Login", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withColor:[Util UIColorForHexColor:@"363e4f"]];
         [loginButton addTarget:self action:@selector(triggerLogin) forControlEvents:UIControlEventTouchUpInside];
+        loginButton.isAccessibilityElement = YES;
+        loginButton.accessibilityIdentifier = @"loginButtonWelcome";
         [self.view addSubview:loginButton];
         
         if(IS_IPAD) {

@@ -52,6 +52,8 @@
         if(self.folder != nil) {
             nameField.text = self.folder.name;
         }
+        nameField.isAccessibilityElement = YES;
+        nameField.accessibilityIdentifier = @"nameFieldFolderDetail";
         [self.view addSubview:nameField];
         
         CustomLabel *detailLabel = [[CustomLabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - rowWidth)/2, nameField.frame.origin.y + nameField.frame.size.height + 30, rowWidth, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:12] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"FolderDetailSegmentTitle", @"")];

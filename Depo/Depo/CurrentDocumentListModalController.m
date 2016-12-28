@@ -50,6 +50,8 @@
         docTable.backgroundView = nil;
         docTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         docTable.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
+        docTable.isAccessibilityElement = YES;
+        docTable.accessibilityIdentifier = @"docTableCurrentDocument";
         [self.view addSubview:docTable];
 
         [elasticSearchDao requestDocForPage:listOffset andSize:21 andSortType:APPDELEGATE.session.sortType];

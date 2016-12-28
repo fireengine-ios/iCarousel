@@ -88,6 +88,8 @@
         msisdnField.delegate = self;
         [msisdnField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
 //        [mainScroll addSubview:msisdnField];
+        msisdnField.isAccessibilityElement = YES;
+        msisdnField.accessibilityIdentifier = @"msisdnFieldLogin";
         [container addSubview:msisdnField];
 //        if([[Util readLocaleCode] isEqualToString:@"tr"]) {
 //            msisdnField.placeholder = @"5XX XXX XX XX";
@@ -104,12 +106,16 @@
         passField = [[LoginTextfield alloc] initSecureWithFrame:CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 43) withPlaceholder:/*NSLocalizedString(@"PasswordPlaceholder", @"")*/ @""];
         passField.delegate = self;
 //        [mainScroll addSubview:passField];
+        passField.isAccessibilityElement = YES;
+        passField.accessibilityIdentifier = @"passFieldLogin";
         [container addSubview:passField];
 
         scrollYIndex += 65;
 
         rememberMe = [[CheckButton alloc] initWithFrame:CGRectMake(25, scrollYIndex, 120, 25) withTitle:NSLocalizedString(@"RememberMe", @"") isInitiallyChecked:YES];
 //        [mainScroll addSubview:rememberMe];
+        rememberMe.isAccessibilityElement = YES;
+        rememberMe.accessibilityIdentifier = @"rememberMe";
         [container addSubview:rememberMe];
 
 //        SimpleButton *forgotPass = [[SimpleButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 150, scrollYIndex, 130, 25) withTitle:NSLocalizedString(@"ForgotPassButton", @"")];
@@ -119,6 +125,8 @@
         captchaContainer = [[UIView alloc] initWithFrame:CGRectMake(20, scrollYIndex, 200, 100)];
 //        captchaContainer.backgroundColor = [UIColor redColor];
         captchaContainer.hidden = YES;
+        captchaContainer.isAccessibilityElement = YES;
+        captchaContainer.accessibilityIdentifier = @"loginCaptchaContainer";
         [container addSubview:captchaContainer];
 
         captchaView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 200, 50)];
@@ -129,14 +137,20 @@
         UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         captchaView.backgroundColor = [UIColor colorWithPatternImage:newImage];
+        captchaView.isAccessibilityElement = YES;
+        captchaView.accessibilityIdentifier = @"loginCaptchaView";
         [captchaContainer addSubview:captchaView];
         
         CustomButton* refreshButton = [[CustomButton alloc] initWithFrame:CGRectMake(captchaView.frame.origin.x + captchaView.frame.size.width + 32, captchaView.frame.origin.y + (captchaView.frame.size.height - 18)/2, 18, 18) withImageName:@"icon_captcha_refresh.png"];
         [refreshButton addTarget:self action:@selector(loadCaptcha) forControlEvents:UIControlEventTouchUpInside];
+        refreshButton.isAccessibilityElement = YES;
+        refreshButton.accessibilityIdentifier = @"loginCaptcharefreshButton";
         [captchaContainer addSubview:refreshButton];
         
         captchaField = [[LoginTextfield alloc] initSecureWithFrame:CGRectMake(0, captchaView.frame.origin.y + captchaView.frame.size.height + 5, self.view.frame.size.width - 40, 43) withPlaceholder:NSLocalizedString(@"CaptchaPlaceholder", @"")];
         captchaField.delegate = self;
+        captchaField.isAccessibilityElement = YES;
+        captchaField.accessibilityIdentifier = @"loginCaptchaField";
         [captchaContainer addSubview:captchaField];
         
        // scrollYIndex += 20;
@@ -146,11 +160,15 @@
         loginButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 50) withTitle:NSLocalizedString(@"Login", @"") withTitleColor:[Util UIColorForHexColor:@"FFFFFF"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"3FB0E8"] withBgColor:[Util UIColorForHexColor:@"3FB0E8"] withCornerRadius:5];
         [loginButton addTarget:self action:@selector(loginClicked) forControlEvents:UIControlEventTouchUpInside];
 //        [mainScroll addSubview:loginButton];
+        loginButton.isAccessibilityElement = YES;
+        loginButton.accessibilityIdentifier = @"loginButton";
         [container addSubview:loginButton];
         
         scrollYIndex += 60;
         
         forgotPassView = [[UIView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 130)/2, scrollYIndex + loginButton.frame.size.height, 130, 25) ];
+        forgotPassView.isAccessibilityElement = YES;
+        forgotPassView.accessibilityIdentifier = @"forgotPassView";
         [container addSubview:forgotPassView];
         
         UIImage *newPassIcon = [UIImage imageNamed:@"icon_newpass.png"];
@@ -162,6 +180,8 @@
         SimpleButton *forgotPass = [[SimpleButton alloc] initWithFrame:CGRectMake(0, 4, 130, 25) withTitle:NSLocalizedString(@"ForgotPassButton", @"")];
         [forgotPass addTarget:self action:@selector(forgotMeClicked) forControlEvents:UIControlEventTouchUpInside];
 //        [mainScroll addSubview:forgotPass];
+        forgotPass.isAccessibilityElement = YES;
+        forgotPass.accessibilityIdentifier = @"forgotPassButton";
         [forgotPassView addSubview:forgotPass];
 
        // CGRect loginButtonFrame = CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 50);
@@ -178,6 +198,8 @@
             [loginButton removeFromSuperview];
             loginButton = [[SimpleButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 320)/2, rememberMe.frame.origin.y + rememberMe.frame.size.height + 30, 320, loginButton.frame.size.height) withTitle:NSLocalizedString(@"Login", @"") withTitleColor:[Util UIColorForHexColor:@"FFFFFF"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"3FB0E8"] withBgColor:[Util UIColorForHexColor:@"3FB0E8"] withCornerRadius:5];
             [loginButton addTarget:self action:@selector(loginClicked) forControlEvents:UIControlEventTouchUpInside];
+            loginButton.isAccessibilityElement = YES;
+            loginButton.accessibilityIdentifier = @"loginButtonForPAD";
             [container addSubview:loginButton];
             //workaround
             
@@ -205,6 +227,8 @@
 
         SimpleButton *registerButton = [[SimpleButton alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60) withTitle:NSLocalizedString(@"SignUpButtonTitle", @"") withTitleColor:[UIColor whiteColor] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"3FB0E8"] withBgColor:[Util UIColorForHexColor:@"3FB0E8"] withCornerRadius:0];
         [registerButton addTarget:self action:@selector(registerClicked) forControlEvents:UIControlEventTouchUpInside];
+        registerButton.isAccessibilityElement = YES;
+        registerButton.accessibilityIdentifier = @"registerButton";
         [self.view addSubview:registerButton];
         
         mainScroll.contentSize = CGSizeMake(mainScroll.frame.size.width, scrollYIndex + 120);

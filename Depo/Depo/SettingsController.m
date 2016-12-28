@@ -110,17 +110,22 @@
     profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake((profileInfoArea.frame.size.width - imageWidth)/2, (profileInfoArea.frame.size.height - imageWidth)/2 - 20, imageWidth, imageWidth)];
     profileImageView.image = profileBgImg;
     [profileImageView setUserInteractionEnabled:YES];
+    profileImageView.isAccessibilityElement = YES;
+    profileImageView.accessibilityIdentifier = @"profileImageViewSettings";
     [profileInfoArea addSubview:profileImageView];
     
     if(APPDELEGATE.session.profileImageRef) {
         profileImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, profileImageView.frame.size.width - 4, profileImageView.frame.size.height - 4)];
         profileImgView.image = [Util circularScaleNCrop:APPDELEGATE.session.profileImageRef forRect:CGRectMake(0, 0, APPDELEGATE.session.profileImageRef.size.width, APPDELEGATE.session.profileImageRef.size.height)];
         profileImgView.center = profileImageView.center;
+        profileImgView.isAccessibilityElement = YES;
+        profileImgView.accessibilityIdentifier = @"profileImgViewSettings";
         [profileInfoArea addSubview:profileImgView];
         
         UITapGestureRecognizer *imageTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapped)];
         imageTap.enabled = YES;
         imageTap.numberOfTapsRequired = 1;
+        imageTap.isAccessibilityElement = YES;
         [profileImageView addGestureRecognizer:imageTap];
     }
     
@@ -169,11 +174,14 @@
     msisdnLabel.textColor = [Util UIColorForHexColor:@"bce3f7"];
     msisdnLabel.backgroundColor= [UIColor clearColor];
     [msisdnLabel setUserInteractionEnabled:YES];
+    msisdnLabel.isAccessibilityElement = YES;
+    msisdnLabel.accessibilityIdentifier = @"msisdnLabelSettings";
     [profileInfoArea addSubview:msisdnLabel];
     
     UITapGestureRecognizer * singleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(msisdnClicked)];
     singleTapGesture.numberOfTapsRequired = 1;
     singleTapGesture.enabled = YES;
+    singleTapGesture.isAccessibilityElement = YES;
     [msisdnLabel addGestureRecognizer:singleTapGesture];
     
     UIImage *editIcon = [UIImage imageNamed:@"icon_editnum.png"];
@@ -193,7 +201,8 @@
      phoneNumberLabel.backgroundColor= [UIColor clearColor];
      [profileInfoArea addSubview:phoneNumberLabel];
      */
-    
+    profileInfoArea.isAccessibilityElement = YES;
+    profileInfoArea.accessibilityIdentifier = @"profileInfoAreaSettings";
     [self.view addSubview:profileInfoArea];
 }
 
@@ -216,6 +225,8 @@
     pageContentTable.backgroundView = nil;
     [pageContentTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     pageContentTable.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, pageContentTable.bounds.size.width, 0.01f)];
+    pageContentTable.isAccessibilityElement = YES;
+    pageContentTable.accessibilityIdentifier = @"pageContentTableSettings";
     [self.view addSubview:pageContentTable];
 }
 
@@ -223,13 +234,18 @@
     popupContainer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height - self.bottomIndex)];
     popupContainer.hidden = YES;
     popupContainer.userInteractionEnabled = YES;
+    popupContainer.isAccessibilityElement = YES;
+    popupContainer.accessibilityIdentifier = @"popupContainerSettings";
     [self.view addSubview:popupContainer];
     
     darkArea = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, popupContainer.frame.size.height)];
     darkArea.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.85];
+    darkArea.isAccessibilityElement = YES;
+    darkArea.accessibilityIdentifier = @"darkAreaSettings";
     [popupContainer addSubview:darkArea];
     
     UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(HideImageOptionsArea)];
+    singleFingerTap.isAccessibilityElement = YES;
     [darkArea addGestureRecognizer:singleFingerTap];
     
     UISwipeGestureRecognizer *recognizerDown = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeDown:)];
@@ -237,14 +253,19 @@
     
     imageOptionsArea = [[UIView alloc]initWithFrame:CGRectMake(0, popupContainer.frame.size.height, 320, 205)];
     imageOptionsArea.backgroundColor = [Util UIColorForHexColor:@"3FB0E8"];
+    recognizerDown.isAccessibilityElement = YES;
     [imageOptionsArea addGestureRecognizer:recognizerDown];
     [popupContainer addSubview:imageOptionsArea];
     
     UIButton *swipeDownButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
+    swipeDownButton.isAccessibilityElement = YES;
+    swipeDownButton.accessibilityIdentifier = @"swipeDownButtonSettings";
     [imageOptionsArea addSubview:swipeDownButton];
     
     UIImageView *swipeIcon = [[UIImageView alloc]initWithFrame:CGRectMake(128, 0, 64, 16)];
     swipeIcon.image = [UIImage imageNamed:@"slide_icon@2x"];
+    swipeIcon.isAccessibilityElement = YES;
+    swipeIcon.accessibilityIdentifier = @"swipeIconSettings";
     [imageOptionsArea addSubview:swipeIcon];
     
     UILabel *infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 29, 300, 20)];
@@ -253,10 +274,14 @@
     infoLabel.textAlignment = NSTextAlignmentCenter;
     infoLabel.textColor = [Util UIColorForHexColor:@"FFFFFF"];
     infoLabel.backgroundColor= [UIColor clearColor];
+    infoLabel.isAccessibilityElement = YES;
+    infoLabel.accessibilityIdentifier = @"infoLabelSettings";
     [imageOptionsArea addSubview:infoLabel];
     
     cameraButton = [[CustomButton alloc]initWithFrame:CGRectMake(29, 69, 75, 75) withImageName:@"camera_icon@2x"];
     [cameraButton addTarget:self action:@selector(CameraButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    cameraButton.isAccessibilityElement = YES;
+    cameraButton.accessibilityIdentifier = @"cameraButtonSettings";
     [imageOptionsArea addSubview:cameraButton];
     
     cameraLabel = [[UILabel alloc] initWithFrame:CGRectMake(29, 153, 75, 20)];
@@ -265,10 +290,14 @@
     cameraLabel.textAlignment = NSTextAlignmentCenter;
     cameraLabel.textColor = [Util UIColorForHexColor:@"FFFFFF"];
     cameraLabel.backgroundColor= [UIColor clearColor];
+    cameraLabel.isAccessibilityElement = YES;
+    cameraLabel.accessibilityIdentifier = @"cameraLabelSettings";
     [imageOptionsArea addSubview:cameraLabel];
     
     uploadButton = [[CustomButton alloc]initWithFrame:CGRectMake(122, 69, 75, 75) withImageName:@"upload_icon@2x"];
     [uploadButton addTarget:self action:@selector(UploadButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    uploadButton.isAccessibilityElement = YES;
+    uploadButton.accessibilityIdentifier = @"uploadButtonSettings";
     [imageOptionsArea addSubview:uploadButton];
     
     uploadLabel = [[UILabel alloc] initWithFrame:CGRectMake(122, 153, 75, 20)];
@@ -277,10 +306,14 @@
     uploadLabel.textAlignment = NSTextAlignmentCenter;
     uploadLabel.textColor = [Util UIColorForHexColor:@"FFFFFF"];
     uploadLabel.backgroundColor= [UIColor clearColor];
+    uploadLabel.isAccessibilityElement = YES;
+    uploadLabel.accessibilityIdentifier = @"uploadLabelSettings";
     [imageOptionsArea addSubview:uploadLabel];
     
     removeButton = [[CustomButton alloc]initWithFrame:CGRectMake(215, 69, 75, 75) withImageName:@"remove_icon@2x"];
     [removeButton addTarget:self action:@selector(RemoveButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    removeButton.isAccessibilityElement = YES;
+    removeButton.accessibilityIdentifier = @"removeButtonSettings";
     [imageOptionsArea addSubview:removeButton];
     
     removeLabel = [[UILabel alloc] initWithFrame:CGRectMake(215, 153, 75, 20)];
@@ -289,6 +322,8 @@
     removeLabel.textAlignment = NSTextAlignmentCenter;
     removeLabel.textColor = [Util UIColorForHexColor:@"FFFFFF"];
     removeLabel.backgroundColor= [UIColor clearColor];
+    removeLabel.isAccessibilityElement = YES;
+    removeLabel.accessibilityIdentifier = @"removeLabelSettings";
     [imageOptionsArea addSubview:removeLabel];
 }
 
@@ -372,14 +407,20 @@
         NSString *subTitle = [NSString stringWithFormat: NSLocalizedString(@"StorageUsageInfo", @""), [NSString stringWithFormat:@"%d", (int)floor(percentUsageVal+0.5f)], [Util transformedHugeSizeValueDecimalIfNecessary:quota.quotaBytes]];
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"Packages", @"") titleColor:nil subTitleText:subTitle iconName:@"stroge_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+        cell.isAccessibilityElement = YES;
+        cell.accessibilityIdentifier = @"usageCell";
         return cell;
     } else if (indexPath.row == 1) {
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"AutomaticSynchronization", @"") titleColor:nil subTitleText:@"" iconName:@"syncing_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+        cell.isAccessibilityElement = YES;
+        cell.accessibilityIdentifier = @"SyncCell";
         return cell;
     } else if (indexPath.row == 2) {
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"RecentActivityLinkerTitle", @"") titleColor:nil subTitleText:@"" iconName:@"icon_hp_sonislemler.png" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+        cell.isAccessibilityElement = YES;
+        cell.accessibilityIdentifier = @"RecentActivityCell";
         return cell;
         //    } else if (indexPath.row == 3) {
         //        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"ConnectedDevices", @"") titleColor:nil subTitleText:@"" iconName:@"device_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
@@ -392,11 +433,15 @@
     } else if (indexPath.row == 3) {
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"EmailTitle", @"") titleColor:nil subTitleText:@"" iconName:@"email_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+        cell.isAccessibilityElement = YES;
+        cell.accessibilityIdentifier = @"EmailCell";
         return cell;
     } else if (indexPath.row == 4) {
         //        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"ExportFromDropbox", @"") titleColor:nil subTitleText:@"" iconName:@"icon_dbtasi" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"ExportFromDropbox", @"") titleColor:nil subTitleText:@"" iconName:@"nav_download_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+        cell.isAccessibilityElement = YES;
+        cell.accessibilityIdentifier = @"ExportCell";
         return cell;
             }
 //    else if (indexPath.row == 5) {
@@ -407,10 +452,14 @@
     else if (indexPath.row == 5) {
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"FAQ", @"") titleColor:nil subTitleText:@"" iconName:@"help_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+        cell.isAccessibilityElement = YES;
+        cell.accessibilityIdentifier = @"FAQCell";
         return cell;
     } else if (indexPath.row == 6) {
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"Mail Logs" titleColor:nil subTitleText:@"" iconName:@"help_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+        cell.isAccessibilityElement = YES;
+        cell.accessibilityIdentifier = @"MailLogsCell";
         return cell;
     } else {
         return nil;
@@ -615,6 +664,8 @@
 
 - (void) imageTapped {
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"ButtonCancel", @"") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"TakePhoto", @""), NSLocalizedString(@"ChooseFromLibrary", @""), nil];
+    actionSheet.isAccessibilityElement = YES;
+    actionSheet.accessibilityIdentifier = @"actionSheetSettings";
     [actionSheet showInView:self.view];
 }
 

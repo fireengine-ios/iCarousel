@@ -39,27 +39,37 @@
         
         shareButton = [[CustomButton alloc] initWithFrame:CGRectMake(20, (self.frame.size.height - 22)/2, 16, 22) withImageName:@"white_share_icon.png"];
         [shareButton addTarget:self action:@selector(shareClicked) forControlEvents:UIControlEventTouchUpInside];
+        shareButton.isAccessibilityElement = YES;
+        shareButton.accessibilityIdentifier = @"shareButtonFileFooter";
         [self addSubview:shareButton];
 
         if (album) {
             removeButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 40, (self.frame.size.height - 21)/2, 20, 21) withImageName:@"icon_bottom_kaldir.png"];
             [removeButton addTarget:self action:@selector(removeFromAlbumClicked) forControlEvents:UIControlEventTouchUpInside];
+            removeButton.isAccessibilityElement = YES;
+            removeButton.accessibilityIdentifier = @"removeButtonFileFooter";
             [self addSubview:removeButton];
         }
         else{
             deleteButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 40, (self.frame.size.height - 21)/2, 20, 21) withImageName:@"white_delete_icon.png"];
             [deleteButton addTarget:self action:@selector(deleteClicked) forControlEvents:UIControlEventTouchUpInside];
+            deleteButton.isAccessibilityElement = YES;
+            deleteButton.accessibilityIdentifier = @"deleteButtonFileFooter";
             [self addSubview:deleteButton];
         }
         
         if(printEnabledFlag) {
             printButton = [[CustomButton alloc] initWithFrame:CGRectMake(60, (self.frame.size.height - 22)/2, 22, 23) withImageName:@"white_print_icon.png"];
             [printButton addTarget:self action:@selector(printClicked) forControlEvents:UIControlEventTouchUpInside];
+            printButton.isAccessibilityElement = YES;
+            printButton.accessibilityIdentifier = @"printButtonFileFooter";
             [self addSubview:printButton];
         }
         
         downloadButton = [[CustomButton alloc] initWithFrame:CGRectMake(100, (self.frame.size.height - 22)/2, 26, 24) withImageName:@"icon_bottom_indir.png"];
         [downloadButton addTarget:self action:@selector(downloadClicked) forControlEvents:UIControlEventTouchUpInside];
+        downloadButton.isAccessibilityElement = YES;
+        downloadButton.accessibilityIdentifier = @"downloadButtonFileFooter";
         [self addSubview:downloadButton];
 
     }

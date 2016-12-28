@@ -114,6 +114,8 @@
         mainTable.delegate = self;
         mainTable.dataSource = self;
         mainTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+        mainTable.isAccessibilityElement = YES;
+        mainTable.accessibilityIdentifier = @"mainTableGPAVC";
         [self.view addSubview:mainTable];
         
         refreshControl = [[UIRefreshControl alloc] init];

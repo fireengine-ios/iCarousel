@@ -90,6 +90,8 @@
         
         crossButton = [[CustomButton alloc]initWithFrame:CGRectMake(self.frame.size.width - 45, 3, 29, 29) withImageName:@"close_icon"];
         [crossButton addTarget:self action:@selector(crossButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        crossButton.isAccessibilityElement = YES;
+        crossButton.accessibilityIdentifier = @"crossButtonRecentSearches";
         [tableHeaderView addSubview:crossButton];
         
         

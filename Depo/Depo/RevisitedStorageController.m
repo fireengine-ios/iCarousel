@@ -85,6 +85,8 @@
     mainTable.backgroundView = nil;
     mainTable.bounces = NO;
     [mainTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    mainTable.isAccessibilityElement = YES;
+    mainTable.accessibilityIdentifier = @"mainTableRevStorage";
     [self.view addSubview:mainTable];
 
     //added to prevent sticky section headers
@@ -97,6 +99,8 @@
     float buttonWidth = 280;
     CustomButton *promoButton = [[CustomButton alloc] initWithFrame:CGRectMake((tableFooterView.frame.size.width - buttonWidth)/2, 10, buttonWidth, 60) withImageName:@"buttonbg_yellow.png" withTitle:NSLocalizedString(@"PromoCodeEntrance", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withColor:[Util UIColorForHexColor:@"363e4f"]];
     [promoButton addTarget:self action:@selector(triggerPromo) forControlEvents:UIControlEventTouchUpInside];
+    promoButton.isAccessibilityElement = YES;
+    promoButton.accessibilityIdentifier = @"promoButtonRevStorage";
     [tableFooterView addSubview:promoButton];
     
 //    mainTable.tableFooterView = tableFooterView;

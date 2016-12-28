@@ -56,6 +56,8 @@
         moreTable.backgroundView = nil;
         moreTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         [moreTable sizeToFit];
+        moreTable.isAccessibilityElement = YES;
+        moreTable.accessibilityIdentifier = @"moreTableMoreMenu";
         [self addSubview:moreTable];
         
         UIImage *dropImg = self.fileFolder ? self.fileFolder.folder ? [UIImage imageNamed:@"menu_drop.png"] : [UIImage imageNamed:@"menu_drop_black.png"] : [UIImage imageNamed:@"menu_drop.png"];

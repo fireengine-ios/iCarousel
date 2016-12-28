@@ -77,6 +77,8 @@
         
         buyButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, 140, self.frame.size.width-40, 50) withTitle:NSLocalizedString(@"PurchasePackage", "") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
         [buyButton addTarget:self action:@selector(buyClicked) forControlEvents:UIControlEventTouchUpInside];
+        buyButton.isAccessibilityElement = YES;
+        buyButton.accessibilityIdentifier = @"buyButtonBeforePurchasing";
         [self addSubview:buyButton];
         
         /*

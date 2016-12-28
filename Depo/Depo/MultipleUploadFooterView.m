@@ -29,6 +29,8 @@
         if(selectAllFlag) {
             checkButton = [[CheckButton alloc] initWithFrame:CGRectMake(20, (self.frame.size.height - 20)/2, 21, 20) isInitiallyChecked:NO autoActionFlag:NO];
             [checkButton addTarget:self action:@selector(triggerCheckAll) forControlEvents:UIControlEventTouchUpInside];
+            checkButton.isAccessibilityElement = YES;
+            checkButton.accessibilityIdentifier = @"checkMultipleUploadFooter";
             [self addSubview:checkButton];
             
             CustomLabel *checkTitle = [[CustomLabel alloc] initWithFrame:CGRectMake(50, (self.frame.size.height - 20)/2, 100, 20) withFont:font withColor:[UIColor whiteColor] withText:NSLocalizedString(@"SelectAllCheckTitle", @"")];
@@ -37,6 +39,8 @@
         
         CustomButton *uploadButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 80, (self.frame.size.height - 20)/2, 80, 20) withImageName:nil withTitle:NSLocalizedString(@"UploadButtonTitle", @"") withFont:font withColor:[UIColor whiteColor]];
         [uploadButton addTarget:self action:@selector(triggerUpload) forControlEvents:UIControlEventTouchUpInside];
+        uploadButton.isAccessibilityElement = YES;
+        uploadButton.accessibilityIdentifier = @"uploadMultipleUploadFooter";
         [self addSubview:uploadButton];
     }
     return self;

@@ -34,6 +34,8 @@
         UIButton *closeButton = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width-40, 86, 20, 20)];
         [closeButton setImage:[UIImage imageNamed:@"icon_settings_dialog_close.png"] forState:UIControlStateNormal];
         [closeButton addTarget:self action:@selector(closePurchasingView) forControlEvents:UIControlEventTouchUpInside];
+        closeButton.isAccessibilityElement = YES;
+        closeButton.accessibilityIdentifier = @"closeButtonPurchase";
         [self addSubview:closeButton];
         
         

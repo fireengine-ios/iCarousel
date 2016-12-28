@@ -38,6 +38,8 @@
 
         SimpleButton *dismissButton = [[SimpleButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 200)/2, self.view.frame.size.height - 80, 200, 60) withTitle:NSLocalizedString(@"Continue", "") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
         [dismissButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
+        dismissButton.isAccessibilityElement = YES;
+        dismissButton.accessibilityIdentifier = @"dismissButtonNewFeature";
         [self.view addSubview:dismissButton];
     }
     return self;

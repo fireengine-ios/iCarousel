@@ -43,6 +43,8 @@
         emailField.text = APPDELEGATE.session.user.email;
         [emailField setUserInteractionEnabled:NO];
         emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        emailField.isAccessibilityElement = YES;
+        emailField.accessibilityIdentifier = @"emailFieldUpdateMsisdn";
         [self.view addSubview:emailField];
 
         CustomLabel *oldPhoneLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(containerLeftMargin + 5, emailField.frame.origin.y + emailField.frame.size.height + 20, containerWidth, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"OldPhoneLabel", @"")];
@@ -60,10 +62,14 @@
         updatedNumberField = [[LoginTextfield alloc] initWithFrame:CGRectMake(containerLeftMargin, newPhoneLabel.frame.origin.y + newPhoneLabel.frame.size.height + 5, containerWidth, 43) withPlaceholder:NSLocalizedString(@"MsisdnPlaceholder", @"")];
         updatedNumberField.delegate = self;
         updatedNumberField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        updatedNumberField.isAccessibilityElement = YES;
+        updatedNumberField.accessibilityIdentifier = @"updatedNumberUpdateMsisdn";
         [self.view addSubview:updatedNumberField];
         
         SimpleButton *okButton = [[SimpleButton alloc] initWithFrame:CGRectMake(containerLeftMargin, updatedNumberField.frame.origin.y + updatedNumberField.frame.size.height + 30, containerWidth, 50) withTitle:NSLocalizedString(@"ChangePhoneButton", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
         [okButton addTarget:self action:@selector(triggerSave) forControlEvents:UIControlEventTouchUpInside];
+        okButton.isAccessibilityElement = YES;
+        okButton.accessibilityIdentifier = @"okButtonUpdateMsisdn";
         [self.view addSubview:okButton];
         
         UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(triggerResign)];

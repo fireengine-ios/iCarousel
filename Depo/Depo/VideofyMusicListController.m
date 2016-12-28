@@ -41,6 +41,8 @@
         audioTable.backgroundColor = [UIColor clearColor];
         audioTable.backgroundView = nil;
         audioTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+        audioTable.isAccessibilityElement = YES;
+        audioTable.accessibilityIdentifier = @"audioTableVideofyMusic";
         [self.view addSubview:audioTable];
         
         [audioDao requestAudioList];

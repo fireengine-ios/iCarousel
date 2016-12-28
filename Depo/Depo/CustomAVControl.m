@@ -59,6 +59,8 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
         [slider setMinimumTrackImage:sliderMin forState:UIControlStateNormal];
         [slider setMaximumTrackImage:sliderMax forState:UIControlStateNormal];
         [slider addTarget:self action:@selector(sliderChanged:) forControlEvents:UIControlEventValueChanged];
+        slider.isAccessibilityElement = YES;
+        slider.accessibilityIdentifier = @"sliderAVControl";
         [self addSubview:slider];
         
         separator = [[UIView alloc] initWithFrame:CGRectMake(0, 50, self.frame.size.width, 1)];
@@ -68,16 +70,22 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
         volumeButton = [[CustomButton alloc] initWithFrame:CGRectMake(10, 72, 16, 16) withImageName:@"volume_button.png"];
         volumeButton.hidden = NO;
         [volumeButton addTarget:self action:@selector(volumeClicked) forControlEvents:UIControlEventTouchUpInside];
+        volumeButton.isAccessibilityElement = YES;
+        volumeButton.accessibilityIdentifier = @"volumeButtonAVControl";
         [self addSubview:volumeButton];
         
         playButton = [[CustomButton alloc] initWithFrame:CGRectMake((self.frame.size.width - 32)/2, 54, 32, 52) withImageName:@"play_icon.png"];
         playButton.hidden = NO;
         [playButton addTarget:self action:@selector(playClicked) forControlEvents:UIControlEventTouchUpInside];
+        playButton.isAccessibilityElement = YES;
+        playButton.accessibilityIdentifier = @"playButtonAVControl";
         [self addSubview:playButton];
         
         pauseButton = [[CustomButton alloc] initWithFrame:CGRectMake((self.frame.size.width - 32)/2, 54, 32, 52) withImageName:@"pause_icon.png"];
         pauseButton.hidden = YES;
         [pauseButton addTarget:self action:@selector(pauseClicked) forControlEvents:UIControlEventTouchUpInside];
+        pauseButton.isAccessibilityElement = YES;
+        pauseButton.accessibilityIdentifier = @"pauseButtonAVControl";
         [self addSubview:pauseButton];
 
         airPlayView = [[UIView alloc] initWithFrame:CGRectMake(self.frame.size.width-54, 60, 44, 40)];
@@ -93,6 +101,8 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
         customVolumeView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"video-player-bckgrnd.png"]];
         customVolumeView.hidden = YES;
         customVolumeView.delegate = self;
+        customVolumeView.isAccessibilityElement = YES;
+        customVolumeView.accessibilityIdentifier = @"volumeViewAVControl";
         [self addSubview:customVolumeView];
 
         /*

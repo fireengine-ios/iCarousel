@@ -39,6 +39,8 @@
         exportButton = [[CustomButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - buttonSize)/2, infoTitle.frame.origin.y + infoTitle.frame.size.height + 20, buttonSize, 60) withImageName:@"buttonbg_yellow.png" withTitle:NSLocalizedString(@"StartExport", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withColor:[Util UIColorForHexColor:@"363e4f"]];
         [exportButton addTarget:self action:@selector(triggerExport) forControlEvents:UIControlEventTouchUpInside];
         exportButton.enabled = NO;
+        exportButton.isAccessibilityElement = YES;
+        exportButton.accessibilityIdentifier = @"exportButtonSocialBase";
         [self.view addSubview:exportButton];
         
         resultTable = [[UITableView alloc] initWithFrame:CGRectMake(20, exportButton.frame.origin.y + exportButton.frame.size.height + 10, self.view.frame.size.width - 40, 90) style:UITableViewStylePlain];
@@ -48,6 +50,8 @@
         resultTable.dataSource = self;
         resultTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         resultTable.bounces = NO;
+        resultTable.isAccessibilityElement = YES;
+        resultTable.accessibilityIdentifier = @"resultTableSocialBase";
         [self.view addSubview:resultTable];
         
         mainStatusView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];

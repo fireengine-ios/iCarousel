@@ -43,6 +43,8 @@
         albumTable.delegate = self;
         albumTable.dataSource = self;
         albumTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+        albumTable.isAccessibilityElement = YES;
+        albumTable.accessibilityIdentifier = @"albumTableAlbumList";
         [self.view addSubview:albumTable];
         
         [al enumerateGroupsWithTypes:ALAssetsGroupAlbum | ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {

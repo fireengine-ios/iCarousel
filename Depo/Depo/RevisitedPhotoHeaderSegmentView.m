@@ -35,6 +35,8 @@
         
         photoButton = [[SimpleButton alloc] initWithFrame:CGRectMake(3, (self.frame.size.height - 20)/2, itemWidth - 6, 20) withTitle:NSLocalizedString(@"PhotoTab", @"") withTitleColor:[UIColor whiteColor] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:13] isUnderline:NO withUnderlineColor:[UIColor clearColor]];
         [photoButton addTarget:self action:@selector(photoClicked) forControlEvents:UIControlEventTouchUpInside];
+        photoButton.isAccessibilityElement = YES;
+        photoButton.accessibilityIdentifier = @"photoButtonRevPhotoHeader";
         [self addSubview:photoButton];
         
         UIImageView *firstDividerView = [[UIImageView alloc] initWithFrame:CGRectMake(itemWidth - 1, (self.frame.size.height - 20)/2, 2, 20)];
@@ -44,6 +46,8 @@
         albumButton = [[SimpleButton alloc] initWithFrame:CGRectMake(itemWidth + 3, (self.frame.size.height - 20)/2, itemWidth - 6, 20) withTitle:NSLocalizedString(@"AlbumTab", @"") withTitleColor:[UIColor whiteColor] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:13] isUnderline:NO withUnderlineColor:[UIColor clearColor]];
         albumButton.alpha = 0.6f;
         [albumButton addTarget:self action:@selector(albumClicked) forControlEvents:UIControlEventTouchUpInside];
+        albumButton.isAccessibilityElement = YES;
+        albumButton.accessibilityIdentifier = @"albumButtonRevPhotoHeader";
         [self addSubview:albumButton];
 
     }

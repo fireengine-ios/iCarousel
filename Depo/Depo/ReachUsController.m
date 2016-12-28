@@ -68,6 +68,8 @@
         choiceTable.backgroundView = nil;
         choiceTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         choiceTable.bounces = NO;
+        choiceTable.isAccessibilityElement = YES;
+        choiceTable.accessibilityIdentifier = @"choiceTableReachUs";
         [self.view addSubview:choiceTable];
         
         yIndex += 100;
@@ -89,6 +91,8 @@
         [sendButton addTarget:self action:@selector(triggerSend) forControlEvents:UIControlEventTouchUpInside];
 //        [self.view addSubview:sendButton];
         UIBarButtonItem *sendItem = [[UIBarButtonItem alloc] initWithCustomView:sendButton];
+        sendItem.isAccessibilityElement = YES;
+        sendItem.accessibilityIdentifier = @"sendItemReachUs";
         self.navigationItem.rightBarButtonItem = sendItem;
 
         UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(triggerResign)];

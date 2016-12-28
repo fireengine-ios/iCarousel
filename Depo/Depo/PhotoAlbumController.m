@@ -138,6 +138,8 @@
     
     CustomButton *customBackButton = [[CustomButton alloc] initWithFrame:CGRectMake(10, 30, 20, 34) withImageName:@"white_left_arrow.png"];
     [customBackButton addTarget:self action:@selector(triggerBack) forControlEvents:UIControlEventTouchUpInside];
+    customBackButton.isAccessibilityElement = YES;
+    customBackButton.accessibilityIdentifier = @"backButtonPhotoAlbum";
     [self.view addSubview:customBackButton];
     
     titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(40, 35, self.view.frame.size.width - 80, 24) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:20] withColor:[UIColor whiteColor] withText:self.album.label];
@@ -148,6 +150,8 @@
     
     moreButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 30, 35, 20, 20) withImageName:@"dots_icon.png"];
     [moreButton addTarget:self action:@selector(moreClicked) forControlEvents:UIControlEventTouchUpInside];
+    moreButton.isAccessibilityElement = YES;
+    moreButton.accessibilityIdentifier = @"moreButtonPhotoAlbum";
     [self.view addSubview:moreButton];
     
     photosScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, mainImageHeight, self.view.frame.size.width, self.view.frame.size.height - mainImageHeight)];
@@ -542,6 +546,8 @@
     
     cancelButton = [[CustomButton alloc] initWithFrame:CGRectMake(moreButton.frame.origin.x-30, moreButton.frame.origin.y, 60, 20) withImageName:nil withTitle:NSLocalizedString(@"ButtonCancel", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[UIColor whiteColor]];
     [cancelButton addTarget:self action:@selector(setToUnselectible) forControlEvents:UIControlEventTouchUpInside];
+    cancelButton.isAccessibilityElement = YES;
+    cancelButton.accessibilityIdentifier = @"cancelButtonPhotoAlbum";
     [self.view addSubview:cancelButton];
     
     if(!self.album.isReadOnly) {

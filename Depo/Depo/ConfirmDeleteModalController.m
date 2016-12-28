@@ -66,16 +66,22 @@
         
         cancelButton = [[SimpleButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - messageWidth)/2, yIndex, messageWidth/2 - 10, 50) withTitle:NSLocalizedString(@"TitleNo", @"") withBorderColor:[Util UIColorForHexColor:@"e9ebef"] withBgColor:[Util UIColorForHexColor:@"FFFFFF"]];
         [cancelButton addTarget:self action:@selector(cancelClicked) forControlEvents:UIControlEventTouchUpInside];
+        cancelButton.isAccessibilityElement = YES;
+        cancelButton.accessibilityIdentifier = @"cancelButtonConfirmDelete";
         [self.view addSubview:cancelButton];
         
         confirmButton = [[SimpleButton alloc] initWithFrame:CGRectMake(cancelButton.frame.origin.x + cancelButton.frame.size.width + 20, yIndex, messageWidth/2 - 10, 50) withTitle:NSLocalizedString(@"TitleYes", @"") withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"]];
         [confirmButton addTarget:self action:@selector(confirmClicked) forControlEvents:UIControlEventTouchUpInside];
+        confirmButton.isAccessibilityElement = YES;
+        confirmButton.accessibilityIdentifier = @"confirmButtonConfirmDelete";
         [self.view addSubview:confirmButton];
         
         yIndex += 68 + (IS_IPAD ? 20 : 0);
         
         checkButton = [[CheckButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - messageWidth)/2 + 20, yIndex, 21, 20) isInitiallyChecked:NO];
         //        [checkButton addTarget:self action:@selector(toggleCheck) forControlEvents:UIControlEventTouchUpInside];
+        checkButton.isAccessibilityElement = YES;
+        checkButton.accessibilityIdentifier = @"checkButtonConfirmDelete";
         [self.view addSubview:checkButton];
         
         CustomLabel *checkLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(checkButton.frame.origin.x + checkButton.frame.size.width + 10, yIndex, messageWidth - 50, 20) withFont:checkFont withColor:[Util UIColorForHexColor:@"555555"] withText:NSLocalizedString(@"MessageDontShowAgainCheck", @"")];

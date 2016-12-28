@@ -114,6 +114,8 @@
         [collView registerClass:[GroupPhotoSectionView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"group_photo_header"];
         [collView setContentInset:UIEdgeInsetsMake(60, 0, 0, 0)];
         collView.alwaysBounceVertical = YES;
+        collView.isAccessibilityElement = YES;
+        collView.accessibilityIdentifier = @"collViewRevGroupedPhoto";
         [self addSubview:collView];
         
         UIView *searchContainer = [[UIView alloc] initWithFrame:CGRectMake(0, -60, collView.frame.size.width, 60)];
@@ -121,6 +123,8 @@
         searchField.delegate = self;
         searchField.returnKeyType = UIReturnKeySearch;
         searchField.userInteractionEnabled = NO;
+        searchField.isAccessibilityElement = YES;
+        searchField.accessibilityIdentifier = @"searchFieldRevGroupedPhoto";
         [searchContainer addSubview:searchField];
         [collView addSubview:searchContainer];
         

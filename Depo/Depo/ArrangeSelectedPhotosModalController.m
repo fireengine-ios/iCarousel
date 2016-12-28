@@ -49,14 +49,20 @@
         selectedFileList = [[NSMutableArray alloc] init];
         
         photosScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex - 60)];
+        photosScroll.isAccessibilityElement = YES;
+        photosScroll.accessibilityIdentifier = @"photosScrollArrangeSelected";
         [self.view addSubview:photosScroll];
         
         footerView = [[VideofyFooterView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - self.bottomIndex - 60, self.view.frame.size.width, 60)];
         footerView.delegate = self;
+        footerView.isAccessibilityElement = YES;
+        footerView.accessibilityIdentifier = @"footerViewArrangeSelected";
         [self.view addSubview:footerView];
         
         CustomLabel *infoLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 10, photosScroll.frame.size.width, 15) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:13] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"VideofySequenceInfo", @"")];
         infoLabel.adjustsFontSizeToFitWidth = YES;
+        infoLabel.isAccessibilityElement = YES;
+        infoLabel.accessibilityIdentifier = @"infoLabelArrangeSelected";
         [photosScroll addSubview:infoLabel];
         
         [self loadScrollView];
@@ -64,15 +70,18 @@
         panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
         panGesture.enabled = YES;
         panGesture.delegate = self;
+        panGesture.isAccessibilityElement = YES;
         [photosScroll addGestureRecognizer:panGesture];
         
         tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
         tapGesture.delegate = self;
         [photosScroll addGestureRecognizer:tapGesture];
+        tapGesture.isAccessibilityElement = YES;
         [tapGesture requireGestureRecognizerToFail:panGesture];
         
         longGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
         longGesture.delegate = self;
+        longGesture.isAccessibilityElement = YES;
         [photosScroll addGestureRecognizer:longGesture];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(musicHandler:) name:VIDEOFY_DEPO_MUSIC_SELECTED_NOTIFICATION object:nil];
@@ -335,6 +344,8 @@
 - (void) videofySuccessCallback {
     [self hideLoading];
     VideofyPreparationInfoView *finalView = [[VideofyPreparationInfoView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.bounds.size.width, APPDELEGATE.window.bounds.size.height)];
+    finalView.isAccessibilityElement = YES;
+    finalView.accessibilityIdentifier = @"finalViewArrangeSelected";
     [APPDELEGATE.window addSubview:finalView];
 }
 

@@ -38,6 +38,8 @@
         songTable.delegate = self;
         songTable.dataSource = self;
         songTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+        songTable.isAccessibilityElement = YES;
+        songTable.accessibilityIdentifier = @"songTableMusicListModal";
         [self.view addSubview:songTable];
 
     }

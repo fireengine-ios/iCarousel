@@ -88,6 +88,8 @@
         autoSyncSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 60, syncImgView.frame.origin.y + syncImgView.frame.size.height + 85, 40, 40)];
         [autoSyncSwitch setOn:YES];
         [autoSyncSwitch addTarget:self action:@selector(autoSyncSwitchChanged:) forControlEvents:UIControlEventValueChanged];
+        autoSyncSwitch.isAccessibilityElement = YES;
+        autoSyncSwitch.accessibilityIdentifier = @"autoSyncSwitchPostLoginPref";
         [self.view addSubview:autoSyncSwitch];
         
         choiceTitleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, syncImgView.frame.origin.y + syncImgView.frame.size.height + 125, self.view.frame.size.width - 40, 15) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:13] withColor:[Util UIColorForHexColor:@"FFFFFF"] withText:NSLocalizedString(@"PostLoginSyncPrefTitle", @"")];
@@ -97,6 +99,8 @@
         choiceTable.delegate = self;
         choiceTable.dataSource = self;
         choiceTable.bounces = NO;
+        choiceTable.isAccessibilityElement = YES;
+        choiceTable.accessibilityIdentifier = @"choiceTablePostLoginPref";
         [self.view addSubview:choiceTable];
         
         CGRect continueButtonRect = CGRectMake(20, self.view.frame.size.height - 70, self.view.frame.size.width - 40, 50);
@@ -123,6 +127,8 @@
         
         SimpleButton *continueButton = [[SimpleButton alloc] initWithFrame:continueButtonRect withTitle:NSLocalizedString(@"Continue", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
         [continueButton addTarget:self action:@selector(continueClicked) forControlEvents:UIControlEventTouchUpInside];
+        continueButton.isAccessibilityElement = YES;
+        continueButton.accessibilityIdentifier = @"continueButtonPostLoginPref";
         [self.view addSubview:continueButton];
     }
     return self;

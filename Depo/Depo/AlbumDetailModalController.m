@@ -26,12 +26,16 @@
         self.title = NSLocalizedString(@"AlbumDetailTitle", @"");
         
         CustomButton *cancelButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 60, 20) withImageName:nil withTitle:NSLocalizedString(@"ButtonCancel", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[UIColor whiteColor]];
+        cancelButton.isAccessibilityElement = YES;
+        cancelButton.accessibilityIdentifier = @"cancelButtonAbulDetail";
         [cancelButton addTarget:self action:@selector(triggerDismiss) forControlEvents:UIControlEventTouchUpInside];
         
         UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithCustomView:cancelButton];
         self.navigationItem.leftBarButtonItem = cancelItem;
         
         CustomButton *doneButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 60, 20) withImageName:nil withTitle:NSLocalizedString(@"DoneButtonTitle", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[UIColor whiteColor]];
+        doneButton.isAccessibilityElement = YES;
+        doneButton.accessibilityIdentifier = @"doneButtonAlbumDetail";
         [doneButton addTarget:self action:@selector(triggerDone) forControlEvents:UIControlEventTouchUpInside];
         
         UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
@@ -53,6 +57,8 @@
         if(self.album.isReadOnly) {
             nameField.enabled = NO;
         }
+        nameField.isAccessibilityElement = YES;
+        nameField.accessibilityIdentifier = @"nameFieldAlbumDetail";
         [self.view addSubview:nameField];
         
         CustomLabel *detailLabel = [[CustomLabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - rowWidth)/2, nameField.frame.origin.y + nameField.frame.size.height + (IS_IPAD ? 60 : 30), rowWidth, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:12] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"AlbumDetailSegmentTitle", @"")];

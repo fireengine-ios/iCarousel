@@ -53,10 +53,14 @@
         emailField = [[LoginTextfield alloc] initWithFrame:CGRectMake(20, subInfoLabel.frame.origin.y + subInfoLabel.frame.size.height + 5, self.view.frame.size.width - 40, 43) withPlaceholder:NSLocalizedString(@"EmailPlaceholder", @"")];
         emailField.delegate = self;
         emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        emailField.isAccessibilityElement = YES;
+        emailField.accessibilityIdentifier = @"emailFieldEmailEntry";
         [self.view addSubview:emailField];
         
         SimpleButton *okButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, emailField.frame.origin.y + emailField.frame.size.height + 10, self.view.frame.size.width - 40, 50) withTitle:NSLocalizedString(@"OK", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
         [okButton addTarget:self action:@selector(triggerSave) forControlEvents:UIControlEventTouchUpInside];
+        okButton.isAccessibilityElement = YES;
+        okButton.accessibilityIdentifier = @"okButtonEmailEntry";
         [self.view addSubview:okButton];
 
         UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(triggerResign)];
@@ -113,6 +117,8 @@
     [cancelButton addTarget:self action:@selector(triggerDismiss) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithCustomView:cancelButton];
+    cancelItem.isAccessibilityElement = YES;
+    cancelItem.accessibilityIdentifier = @"cancelItemEmailEntry";
     self.navigationItem.rightBarButtonItem = cancelItem;
     
 //    CustomButton *doneButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 60, 20) withImageName:nil withTitle:NSLocalizedString(@"DoneButtonTitle", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[UIColor whiteColor]];

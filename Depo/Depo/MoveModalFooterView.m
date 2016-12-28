@@ -20,6 +20,8 @@
         
         CustomButton *moveButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width/2 - 9, 20, 18, 20) withImageName:@"white_move_icon.png"];
         [moveButton addTarget:self action:@selector(moveClicked) forControlEvents:UIControlEventTouchUpInside];
+        moveButton.isAccessibilityElement = YES;
+        moveButton.accessibilityIdentifier = @"moveButtonMoveModal";
         [self addSubview:moveButton];
     }
     return self;

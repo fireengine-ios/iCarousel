@@ -40,10 +40,14 @@
             emailField.placeholder = APPDELEGATE.session.user.email;
         }
         emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        emailField.isAccessibilityElement = YES;
+        emailField.accessibilityIdentifier = @"emailFieldEmailChange";
         [self.view addSubview:emailField];
         
         SimpleButton *okButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, emailField.frame.origin.y + emailField.frame.size.height + 10, self.view.frame.size.width - 40, 50) withTitle:NSLocalizedString(@"OK", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
         [okButton addTarget:self action:@selector(triggerSave) forControlEvents:UIControlEventTouchUpInside];
+        okButton.isAccessibilityElement = YES;
+        okButton.accessibilityIdentifier = @"okButtonEmailChange";
         [self.view addSubview:okButton];
         
         UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(triggerResign)];

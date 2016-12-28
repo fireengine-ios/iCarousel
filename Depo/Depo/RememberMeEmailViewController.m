@@ -75,6 +75,8 @@
         emailField.delegate = self;
         emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
 //        [self.view addSubview:emailField];
+        emailField.isAccessibilityElement = YES;
+        emailField.accessibilityIdentifier = @"emailFieldForgotPass";
         [container addSubview:emailField];
         
         captchaView = [[UIImageView alloc] initWithFrame:CGRectMake(containerLeftMargin, emailField.frame.origin.y + emailField.frame.size.height + 20, 200, 50)];
@@ -87,12 +89,16 @@
         captchaView.backgroundColor = [UIColor colorWithPatternImage:newImage];
         //captchaView.contentMode = UIViewContentModeScaleAspectFill;
 //        [self.view addSubview:captchaView];
+        captchaView.isAccessibilityElement = YES;
+        captchaView.accessibilityIdentifier = @"captchaViewForgotPass";
         [container addSubview:captchaView];
         
         refreshButton = [[CustomButton alloc] initWithFrame:CGRectMake(captchaView.frame.origin.x + captchaView.frame.size.width + 32, captchaView.frame.origin.y + (captchaView.frame.size.height - 18)/2, 18, 18) withImageName:@"icon_captcha_refresh.png"];
         refreshButton.hidden = YES;
         [refreshButton addTarget:self action:@selector(loadCaptcha) forControlEvents:UIControlEventTouchUpInside];
 //        [self.view addSubview:refreshButton];
+        refreshButton.isAccessibilityElement = YES;
+        refreshButton.accessibilityIdentifier = @"refreshButtonForgotPass";
         [container addSubview:refreshButton];
         
         CustomLabel *captchaLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(containerLeftMargin, captchaView.frame.origin.y + captchaView.frame.size.height + 20, containerWidth, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"CaptchaTitle", @"")];
@@ -103,6 +109,8 @@
         captchaField.delegate = self;
         captchaField.autocapitalizationType = UITextAutocapitalizationTypeNone;
 //        [self.view addSubview:captchaField];
+        captchaField.isAccessibilityElement = YES;
+        captchaField.accessibilityIdentifier = @"captchaFieldForgotPass";
         [container addSubview:captchaField];
         
         UIFont *infoFont = [UIFont fontWithName:@"TurkcellSaturaDem" size:17];
@@ -114,6 +122,8 @@
         SimpleButton *okButton = [[SimpleButton alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60) withTitle:NSLocalizedString(@"OK", @"") withTitleColor:[Util UIColorForHexColor:@"ffffff"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"3FB0E8"] withBgColor:[Util UIColorForHexColor:@"3FB0E8"] withCornerRadius:0];
         [okButton addTarget:self action:@selector(forgotPassClicked) forControlEvents:UIControlEventTouchUpInside];
 //        [self.view addSubview:okButton];
+        okButton.isAccessibilityElement = YES;
+        okButton.accessibilityIdentifier = @"okButtonForgotPass";
         [container addSubview:okButton];
 
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow) name:UIKeyboardWillShowNotification object:nil];
