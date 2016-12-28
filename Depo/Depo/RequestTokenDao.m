@@ -91,7 +91,8 @@
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     
-    [request addValue:[CacheUtil readRememberMeToken] forHTTPHeaderField:@"X-Remember-Me-Token"];
+    NSString* rememberMeToken = [CacheUtil readRememberMeToken] ;
+    [request addValue:rememberMeToken forHTTPHeaderField:@"X-Remember-Me-Token"];
     [request setHTTPBody:jsonData];
     [request setTimeoutInterval:30];
     [request setHTTPMethod:@"POST"];

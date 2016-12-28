@@ -29,7 +29,8 @@
 
 + (NSString *) readSharedToken {
     NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:SHARED_GROUP_NAME];
-    return [sharedDefaults objectForKey:SHARED_TOKEN_KEY];
+    NSString* token = [sharedDefaults objectForKey:SHARED_TOKEN_KEY];
+    return token;
 }
 
 + (void) writeSharedRememberMeToken:(NSString *) token {
@@ -40,7 +41,8 @@
 
 + (NSString *) readSharedRememberMeToken {
     NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:SHARED_GROUP_NAME];
-    return [sharedDefaults objectForKey:SHARED_REMEMBER_ME_TOKEN_KEY];
+    NSString* token = [sharedDefaults objectForKey:SHARED_REMEMBER_ME_TOKEN_KEY];
+    return token;
 }
 
 + (void) writeSharedBaseUrl:(NSString *) url {

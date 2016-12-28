@@ -14,13 +14,21 @@
 #import "Reachability.h"
 #import "SharedUtil.h"
 
+//TODO test -> prod
 #define EXT_REMEMBER_ME_URL @"https://adepo.turkcell.com.tr/api/auth/rememberMe"
+//#define EXT_REMEMBER_ME_URL @"http://tcloudstb.turkcell.com.tr/api/auth/rememberMe"
 
+//TODO test -> prod
 #define EXT_RADIUS_URL @"http://adepo.turkcell.com.tr/api/auth/gsm/login?rememberMe=on"
+//#define EXT_RADIUS_URL @"http://tcloudstb.turkcell.com.tr/api/auth/gsm/login?rememberMe=on"
 
+//TODO test -> prod
 #define EXT_USER_BASE_URL @"https://adepo.turkcell.com.tr/api/container/baseUrl"
+//#define EXT_USER_BASE_URL @"http://tcloudstb.turkcell.com.tr/api/container/baseUrl"
 
-@interface ShareViewController ()
+@interface ShareViewController () {
+    double totalSize;
+}
 
 @end
 
@@ -72,7 +80,7 @@
     if([SharedUtil readSharedToken] == nil) {
         NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
         if(networkStatus == kReachableViaWiFi || networkStatus == kReachableViaWWAN) {
-            if([SharedUtil readSharedRememberMeToken] != nil) {
+            if([SharedUtil readSharedRememberMeToken]) {
                 [self requestToken];
             } else {
                 if(networkStatus == kReachableViaWiFi) {
@@ -242,6 +250,7 @@
 }
 
 - (void) postUrlListConstruction {
+    totalSize = 0;
     if(urlsToUpload != nil && urlsToUpload.count > 0) {
         for(int counter = 0; counter < urlsToUpload.count; counter ++) {
             NSDictionary *dict = [urlsToUpload objectAtIndex:counter];
@@ -252,12 +261,27 @@
                 if(isPhoto) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         UIImage *sharedImage = nil;
+                        
                         if([(NSObject*)item isKindOfClass:[NSURL class]]) {
-                            sharedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:(NSURL*)item]];
+                            NSData* imgData = [NSData dataWithContentsOfURL:(NSURL*)item];
+                            totalSize += imgData.length;
+                            sharedImage = [UIImage imageWithData:imgData];
                         }
                         if([(NSObject*)item isKindOfClass:[UIImage class]]) {
                             sharedImage = (UIImage*)item;
                         }
+                        
+//                        if (counter == urlsToUpload.count -1)  {
+//                            NSLog(@"Size of Images(bytes):%f", totalSize);
+//                            if (totalSize > 5610019) { // 5.35013 mb
+//                                alertView = [[CustomAlertView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) withTitle:NSLocalizedString(@"Error", @"") withMessage:NSLocalizedString(@"MaxSizeLimitExceeded", @"") withModalType:ModalTypeError];
+//                                alertView.delegate = self;
+//                                [alertView reorientateModalView:self.view.center];
+//                                [self.view addSubview:alertView];
+//                                [self.view bringSubviewToFront:alertView];
+//                                return;
+//                            }
+//                        }
                         
                         if(counter == 0) {
                             previewView.image = sharedImage;
@@ -558,6 +582,9 @@
     [postRequest setValue:@"application/json; encoding=utf-8" forHTTPHeaderField:@"Content-Type"];
     [postRequest setHTTPMethod:@"POST"];
     [postRequest setHTTPBody:jsonData];
+//    if([SharedUtil readSharedToken]) {
+//        [postRequest setValue:[SharedUtil readSharedToken] forHTTPHeaderField:@"X-Auth-Token"];
+//    }
     
     NSURLSessionDataTask *task = [self.httpSession dataTaskWithRequest:postRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if(error) {
