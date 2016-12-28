@@ -771,6 +771,7 @@
 		523E9C581E0BED1100C2DFE7 /* ic_av_timer@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 523E9C561E0BED1100C2DFE7 /* ic_av_timer@3x.png */; };
 		523E9C5B1E0BED2300C2DFE7 /* ic_location_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 523E9C591E0BED2300C2DFE7 /* ic_location_on@2x.png */; };
 		523E9C5C1E0BED2300C2DFE7 /* ic_location_on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 523E9C5A1E0BED2300C2DFE7 /* ic_location_on@3x.png */; };
+		523E9C651E13B16300C2DFE7 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5332150F1DEEAB0E00FE7289 /* Photos.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		5247D5E71DD342B900FFE63E /* ConfirmRemoveModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D5E61DD342B900FFE63E /* ConfirmRemoveModalController.m */; };
 		5247D61E1DDDD0F600FFE63E /* CurioAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D5FF1DDDD0F600FFE63E /* CurioAction.m */; };
 		5247D61F1DDDD0F600FFE63E /* CurioActionToolkit.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D6011DDDD0F600FFE63E /* CurioActionToolkit.m */; };
@@ -2791,6 +2792,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				523E9C651E13B16300C2DFE7 /* Photos.framework in Frameworks */,
 				942DE8491D916300000A7786 /* Bolts.framework in Frameworks */,
 				94F130D11D24DDB10086BDBB /* FBSDKCoreKit.framework in Frameworks */,
 				94F130D21D24DDB10086BDBB /* FBSDKLoginKit.framework in Frameworks */,
