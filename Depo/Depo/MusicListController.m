@@ -43,6 +43,11 @@
         elasticSearchDao.delegate = self;
         elasticSearchDao.successMethod = @selector(musicListSuccessCallback:);
         elasticSearchDao.failMethod = @selector(musicListFailCallback:);
+        
+        loadMoreDao = [[ElasticSearchDao alloc] init];
+        loadMoreDao.delegate = self;
+        loadMoreDao.successMethod = @selector(loadMoreSuccessCallback:);
+        loadMoreDao.failMethod = @selector(loadMoreFailCallback:);
 
         favoriteDao = [[FavoriteDao alloc] init];
         favoriteDao.delegate = self;
@@ -101,6 +106,11 @@
 }
 
 - (void) triggerRefresh {
+    if(isSelectible) {
+        [refreshControl endRefreshing];
+        return;
+    }
+
     listOffset = 0;
     if(musicDict) {
         [musicDict removeAllObjects];
@@ -151,6 +161,51 @@
     [self hideLoading];
     [self showErrorAlertWithMessage:errorMessage];
 }
+
+- (void) loadMoreSuccessCallback:(NSArray *) files {
+    [self hideLoading];
+    
+    if(refreshControl) {
+        [refreshControl endRefreshing];
+    }
+    
+    for(MetaFile *file in files) {
+        NSString *sortVal = file.name;
+        if(file.detail) {
+            if(APPDELEGATE.session.sortType == SortTypeAlbumAsc || APPDELEGATE.session.sortType == SortTypeAlbumDesc) {
+                sortVal = file.detail.album;
+            } else if(APPDELEGATE.session.sortType == SortTypeArtistAsc || APPDELEGATE.session.sortType == SortTypeArtistDesc) {
+                sortVal = file.detail.artist;
+            }
+        }
+        NSString *sortValKey = [[sortVal length] > 0 ? [sortVal substringToIndex:1] : @" " uppercaseString];
+        if(![musicDictKeys containsObject:sortValKey]) {
+            sortValKey = @"#";
+        }
+        if([musicDict objectForKey:sortValKey] == nil) {
+            NSMutableArray *filesForKey = [[NSMutableArray alloc] initWithObjects:file, nil];
+            [musicDict setObject:filesForKey forKey:sortValKey];
+        } else {
+            NSMutableArray *filesForKey = [musicDict objectForKey:sortValKey];
+            [filesForKey addObject:file];
+            [musicDict setObject:filesForKey forKey:sortValKey];
+        }
+    }
+    
+    isLoading = NO;
+    //    self.tableUpdateCounter ++;
+    [musicTable reloadData];
+}
+
+- (void) loadMoreFailCallback:(NSString *) errorMessage {
+    [self hideLoading];
+    
+    if(refreshControl) {
+        [refreshControl endRefreshing];
+    }
+    //TODO check    [self showErrorAlertWithMessage:errorMessage];
+}
+
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if(musicDict == nil)
@@ -278,7 +333,9 @@
 
 - (void) dynamicallyLoadNextPage {
     listOffset ++;
-    [elasticSearchDao requestMusicForPage:listOffset andSize:21 andSortType:APPDELEGATE.session.sortType];
+//    [elasticSearchDao requestMusicForPage:listOffset andSize:21 andSortType:APPDELEGATE.session.sortType];
+    [loadMoreDao requestMusicForPage:listOffset andSize:21 andSortType:APPDELEGATE.session.sortType];
+
 }
 
 #pragma mark AbstractFileFolderDelegate methods
