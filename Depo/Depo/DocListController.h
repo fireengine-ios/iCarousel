@@ -17,6 +17,7 @@
 
 @interface DocListController : MyViewController <UITableViewDataSource, UITableViewDelegate, AbstractFileFolderDelegate, FooterActionsDelegate> {
     ElasticSearchDao *elasticSearchDao;
+    ElasticSearchDao *loadMoreDao;
     FavoriteDao *favoriteDao;
     DeleteDao *deleteDao;
     MoveDao *moveDao;

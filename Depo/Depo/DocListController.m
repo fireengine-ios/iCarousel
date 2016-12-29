@@ -45,6 +45,11 @@
         elasticSearchDao.successMethod = @selector(docListSuccessCallback:);
         elasticSearchDao.failMethod = @selector(docListFailCallback:);
         
+        loadMoreDao = [[ElasticSearchDao alloc] init];
+        loadMoreDao.delegate = self;
+        loadMoreDao.successMethod = @selector(loadMoreSuccessCallback:);
+        loadMoreDao.failMethod = @selector(loadMoreFailCallback:);
+        
         favoriteDao = [[FavoriteDao alloc] init];
         favoriteDao.delegate = self;
         favoriteDao.successMethod = @selector(favSuccessCallback:);
@@ -98,6 +103,12 @@
 }
 
 - (void) triggerRefresh {
+    
+    if(isSelectible) {
+        [refreshControl endRefreshing];
+        return;
+    }
+    
     listOffset = 0;
     [docList removeAllObjects];
     [elasticSearchDao requestDocForPage:listOffset andSize:21 andSortType:APPDELEGATE.session.sortType];
@@ -123,6 +134,31 @@
 - (void) docListFailCallback:(NSString *) errorMessage {
     [self hideLoading];
     [self showErrorAlertWithMessage:errorMessage];
+}
+
+- (void) loadMoreSuccessCallback:(NSArray *) files {
+    [self hideLoading];
+    
+    if(refreshControl) {
+        [refreshControl endRefreshing];
+    }
+    if(docList == nil) {
+        docList = [[NSMutableArray alloc] init];
+    }
+    NSMutableArray *mutArray = [NSMutableArray arrayWithArray:[docList arrayByAddingObjectsFromArray:files]];
+    docList = mutArray;
+    isLoading = NO;
+    //    self.tableUpdateCounter ++;
+    [docTable reloadData];
+}
+
+- (void) loadMoreFailCallback:(NSString *) errorMessage {
+    [self hideLoading];
+    
+    if(refreshControl) {
+        [refreshControl endRefreshing];
+    }
+    //TODO check    [self showErrorAlertWithMessage:errorMessage];
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -220,7 +256,7 @@
 
 - (void) dynamicallyLoadNextPage {
     listOffset ++;
-    [elasticSearchDao requestDocForPage:listOffset andSize:21 andSortType:APPDELEGATE.session.sortType];
+    [loadMoreDao requestDocForPage:listOffset andSize:21 andSortType:APPDELEGATE.session.sortType];
 }
 
 #pragma mark AbstractFileFolderDelegate methods
@@ -300,6 +336,16 @@
 }
 
 - (void) fileFolderCellDidUnselectFile:(MetaFile *)fileSelected {
+    if([selectedDocList containsObject:fileSelected.uuid]) {
+        [selectedDocList removeObject:fileSelected.uuid];
+    }
+    if([selectedDocList count] > 0) {
+        [self showFooterMenu];
+        self.title = [NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedDocList count]];
+    } else {
+        [self hideFooterMenu];
+        self.title = NSLocalizedString(@"SelectFilesTitle", @"");
+    }
 }
 
 - (void) moveListModalDidSelectFolder:(NSString *)folderUuid {
@@ -338,6 +384,22 @@
 }
 
 - (void) deleteSuccessCallback {
+    if(isSelectible) {
+        
+        self.title = NSLocalizedString(@"FilesTitle", @"");
+        
+        self.navigationItem.leftBarButtonItem = previousButtonRef;
+        
+        
+        isSelectible = NO;
+        [selectedDocList removeAllObjects];
+        
+        if(footerActionMenu) {
+            [footerActionMenu removeFromSuperview];
+        }
+    }
+    
+    
     [self proceedSuccessForProgressView];
     [self triggerRefresh];
 }
@@ -349,6 +411,15 @@
 
 - (void) sortDidChange {
     [self triggerRefresh];
+}
+
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if([cell isKindOfClass:[AbstractFileFolderCell class]]){
+        AbstractFileFolderCell *fileCell = (AbstractFileFolderCell *) cell;
+        if([selectedDocList containsObject:fileCell.fileFolder.uuid]) {
+            [fileCell manuallyCheckButton];
+        }
+    }
 }
 
 - (void) changeToSelectedStatus {

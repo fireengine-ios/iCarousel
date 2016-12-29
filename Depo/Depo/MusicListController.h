@@ -18,6 +18,7 @@
 
 @interface MusicListController : MyViewController <UITableViewDataSource, UITableViewDelegate, AbstractFileFolderDelegate, FooterActionsDelegate, MusicPreviewDelegate> {
     ElasticSearchDao *elasticSearchDao;
+    ElasticSearchDao *loadMoreDao;
     FavoriteDao *favoriteDao;
     DeleteDao *deleteDao;
     MoveDao *moveDao;
