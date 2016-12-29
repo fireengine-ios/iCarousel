@@ -83,15 +83,22 @@
             if([SharedUtil readSharedRememberMeToken] != nil) {
                 [self requestToken];
             } else {
-                if(networkStatus == kReachableViaWiFi) {
-                    alertView = [[CustomAlertView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) withTitle:NSLocalizedString(@"Error", @"") withMessage:NSLocalizedString(@"ExtLoginRequiredMessage", @"") withModalType:ModalTypeError];
-                    alertView.delegate = self;
-                    [alertView reorientateModalView:self.view.center];
-                    [self.view addSubview:alertView];
-                    [self.view bringSubviewToFront:alertView];
-                } else {
-                    [self requestRadius];
-                }
+                alertView = [[CustomAlertView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) withTitle:NSLocalizedString(@"Error", @"") withMessage:NSLocalizedString(@"ExtLoginRequiredMessage", @"") withModalType:ModalTypeError];
+                alertView.delegate = self;
+                [alertView reorientateModalView:self.view.center];
+                [self.view addSubview:alertView];
+                [self.view bringSubviewToFront:alertView];
+                
+                //INFO - ADC 1440 kapsamında radius login in engellenmesi istendi.
+//                if(networkStatus == kReachableViaWiFi) {
+//                    alertView = [[CustomAlertView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) withTitle:NSLocalizedString(@"Error", @"") withMessage:NSLocalizedString(@"ExtLoginRequiredMessage", @"") withModalType:ModalTypeError];
+//                    alertView.delegate = self;
+//                    [alertView reorientateModalView:self.view.center];
+//                    [self.view addSubview:alertView];
+//                    [self.view bringSubviewToFront:alertView];
+//                } else {
+//                    [self requestRadius];
+//                }
             }
         }
     } else if([SharedUtil readSharedBaseUrl] == nil) {
