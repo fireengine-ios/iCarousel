@@ -230,6 +230,7 @@
     
     [SyncUtil resetBaseUrlConstant];
     [SharedUtil writeSharedToken:nil];
+    [SharedUtil writeSharedRememberMeToken:nil];
 }
 
 - (void) addBgOngoingTaskUrl:(NSString *) taskUrl {

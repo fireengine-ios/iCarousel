@@ -80,7 +80,7 @@
     if([SharedUtil readSharedToken] == nil) {
         NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
         if(networkStatus == kReachableViaWiFi || networkStatus == kReachableViaWWAN) {
-            if([SharedUtil readSharedRememberMeToken]) {
+            if([SharedUtil readSharedRememberMeToken] != nil) {
                 [self requestToken];
             } else {
                 if(networkStatus == kReachableViaWiFi) {
