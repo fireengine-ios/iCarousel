@@ -43,6 +43,7 @@
     } else {
         if (![[asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
             [playIconView removeFromSuperview];
+            playIconView = nil;
         }
     }
     
