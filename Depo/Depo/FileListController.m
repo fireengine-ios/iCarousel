@@ -347,7 +347,8 @@
             detail.delegate = self;
             MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
             detail.nav = modalNav;
-            [self.nav presentViewController:modalNav animated:YES completion:nil];
+            [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
+//            [self.nav presentViewController:modalNav animated:YES completion:nil];
         } else if([AppUtil isMetaFileDoc:fileSelected]){
             FileDetailInWebViewController *detail = [[FileDetailInWebViewController alloc] initWithFile:fileSelected];
             detail.delegate = self;
@@ -358,7 +359,8 @@
             detail.delegate = self;
             MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
             detail.nav = modalNav;
-            [self.nav presentViewController:modalNav animated:YES completion:nil];
+            [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
+//            [self.nav presentViewController:modalNav animated:YES completion:nil];
         } else if([AppUtil isMetaFileMusic:fileSelected]) {
             MusicPreviewController *detail = [[MusicPreviewController alloc] initWithFile:fileSelected.uuid withFileList:@[fileSelected]];
             detail.delegate = self;

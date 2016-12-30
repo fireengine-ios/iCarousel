@@ -376,13 +376,15 @@
         detail.delegate = self;
         MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
         detail.nav = modalNav;
-        [self.nav presentViewController:modalNav animated:YES completion:nil];
+        [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
+//        [self.nav presentViewController:modalNav animated:YES completion:nil];
     } else if(fileSelected.contentType == ContentTypeVideo) {
         VideoPreviewController *detail = [[VideoPreviewController alloc] initWithFile:fileSelected withAlbum:self.album];
         detail.delegate = self;
         MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
         detail.nav = modalNav;
-        [self.nav presentViewController:modalNav animated:YES completion:nil];
+        [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
+//        [self.nav presentViewController:modalNav animated:YES completion:nil];
     }
 }
 
