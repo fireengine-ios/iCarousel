@@ -362,6 +362,8 @@
     [self showErrorAlertWithMessage:errorMessage];
 }
 
+
+
 - (void) squareImageWasSelectedForView:(SquareImageView *) squareRef {
     UploadingImagePreviewController *preview = [[UploadingImagePreviewController alloc] initWithUploadReference:squareRef.uploadRef withImage:squareRef.imgView.image];
     preview.oldDelegateRef = squareRef;
@@ -388,6 +390,9 @@
     }
 }
 
+- (BOOL) canShowAddButtonImmediately {
+    return [super canShowAddButtonImmediately] && !self.album.isReadOnly;
+}
 
 - (void) squareImageWasLongPressedForFile:(MetaFile *)fileSelected {
     [self setToSelectible];
@@ -439,7 +444,8 @@
 -(void)moreMenuDidSelectDownloadAlbum {
     [APPDELEGATE.base createAlbum:self.album withFiles:photoList  loadingMessage:NSLocalizedString(@"DownloadAlbumProgressMessage", @"")
                    successMessage:NSLocalizedString(@"DownloadAlbumSuccessMessage", @"")
-                      failMessage:NSLocalizedString(@"DownloadAlbumFailMessage", @"")];
+                      failMessage:NSLocalizedString(@"DownloadAlbumFailMessage", @"")
+     ];
     [self setToUnselectible];
 }
 

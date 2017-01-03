@@ -73,8 +73,9 @@
 - (void) proceedFailureForProgressViewWithAddButtonKey:(NSString *) buttonKey;
 - (void) popProgressView;
 - (void) popProgressViewSimply;
-- (void) showAddButtonImmediately;
+- (void) immediateShowAddButton;
 - (void) fadeIn:(UIView *)view duration:(float)duration;
 - (void) fadeOut:(UIView *)view duration:(float)duration;
+- (BOOL) canShowAddButtonImmediately;
 
 @end
