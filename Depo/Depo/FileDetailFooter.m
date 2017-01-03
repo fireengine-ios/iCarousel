@@ -79,8 +79,8 @@
 - (void) updateInnerViews {
     separatorView.frame = CGRectMake(0, 0, self.frame.size.width, 1);
     shareButton.frame = CGRectMake(20, (self.frame.size.height - 22)/2, 16, 22);
-//    removeButton.frame = CGRectMake(self.frame.size.width - 80, (self.frame.size.height - 21)/2, 20, 21);
     deleteButton.frame = CGRectMake(self.frame.size.width - 40, (self.frame.size.height - 21)/2, 20, 21);
+    removeButton.frame = CGRectMake(self.frame.size.width - 40, (self.frame.size.height - 21)/2, 20, 21);
 }
 
 - (void) shareClicked {
