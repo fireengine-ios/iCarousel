@@ -42,7 +42,15 @@
         UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
         self.navigationItem.rightBarButtonItem = doneItem;
         
-        CGRect mainScrollRect = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex);
+        int width = self.view.frame.size.width;
+        int height = self.view.frame.size.height;
+        if(UIInterfaceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation])) {
+            width = self.view.frame.size.height;
+            height = self.view.frame.size.width;
+        }
+
+        
+        CGRect mainScrollRect = CGRectMake(0, 0, width, height - self.bottomIndex);
         if(IS_IPAD) {
             mainScrollRect = CGRectMake((self.view.frame.size.width - 500)/2, 0, 500, self.view.frame.size.height - self.bottomIndex);
         }
