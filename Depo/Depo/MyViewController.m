@@ -238,20 +238,23 @@
 
 - (void) processFooterShouldDismissWithButtonKey:(NSString *)postButtonKeyVal {
     if(postButtonKeyVal == nil) {
-        [self performSelector:@selector(showAddButtonImmediately) withObject:nil];
+        [self performSelector:@selector(immediateShowAddButton) withObject:nil];
     } else {
-        [self performSelector:@selector(showAddButtonImmediately:) withObject:postButtonKeyVal];
+        [self performSelector:@selector(immediateShowAddButton:) withObject:postButtonKeyVal];
     }
 }
 
-- (void) showAddButtonImmediately {
-    NSArray *addTypesForController = [APPDELEGATE.mapUtil readAddTypesByController:NSStringFromClass(self.class)];
-    if(addTypesForController != nil) {
+- (BOOL) canShowAddButtonImmediately {
+    return [APPDELEGATE.mapUtil readAddTypesByController:NSStringFromClass(self.class)];
+}
+
+- (void) immediateShowAddButton {
+    if([self canShowAddButtonImmediately]) {
         [APPDELEGATE.base immediateShowAddButton];
     }
 }
 
-- (void) showAddButtonImmediately:(NSString *) key {
+- (void) immediateShowAddButton:(NSString *) key {
     if([NSStringFromClass([[self.nav topViewController] class]) isEqualToString:@"PhotoListController"]) {
         NSArray *addTypesForKey = [APPDELEGATE.mapUtil readAddTypesByController:key];
         if(addTypesForKey != nil) {

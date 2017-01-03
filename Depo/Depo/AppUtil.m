@@ -274,6 +274,9 @@
         case MoreMenutypeDownloadAlbum:
             iconName = @"nav_download_icon.png";
             break;
+        case MoreMenuTypeSetCoverPhoto:
+            iconName = @"icon_kapakresmi.png";
+            break;
         default:
             break;
     }
