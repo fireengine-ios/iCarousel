@@ -316,6 +316,10 @@
     [self showErrorAlertWithMessage:errorMessage];
 }
 
+- (void) revisitedGroupedPhotoShowErrorMessage:(NSString *)errorMessage {
+    [self showErrorAlertWithMessage:errorMessage];
+}
+
 - (void) revisitedGroupedPhotoChangeTitleTo:(NSString *) pageTitle {
     self.title = pageTitle;
 }

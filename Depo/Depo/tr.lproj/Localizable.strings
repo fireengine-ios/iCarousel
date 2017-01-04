@@ -303,6 +303,7 @@
 
 "FavouritesTitle"="Favoriler";
 "ConnectionErrorWarning"="İnternet erişiminizin aktif olduğuna ve Ayarlar/lifebox altında Hücresel Veri'nin açık olduğuna emin olun.";
+"ConnectionLostErrorMessage"="İnternet erişiminiz aktif görünmesine rağmen, muhtemelen bağlantı hızınız çok düşük olduğu için bağlantınız kopuyor.Lütfen tekrar deneyiniz.";
 "NoFavouriteFound"="Favori dosyanız yok";
 
 "Auto"="Otomatik";

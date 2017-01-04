@@ -149,7 +149,7 @@
 
 - (void) dynamicallyLoadNextPage {
     listOffset ++;
-    [elasticSearchDao requestDocForPage:listOffset andSize:21 andSortType:APPDELEGATE.session.sortType];
+    [elasticSearchDao requestMusicForPage:listOffset andSize:21 andSortType:APPDELEGATE.session.sortType];
 }
 
 - (void)viewDidLoad {

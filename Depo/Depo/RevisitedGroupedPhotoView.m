@@ -362,6 +362,7 @@
     [progress hide:YES];
     isLoading = NO;
     [refreshControl endRefreshing];
+    [delegate revisitedGroupedPhotoShowErrorMessage:errorMessage];
 }
 
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView {

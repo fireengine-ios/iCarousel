@@ -40,6 +40,7 @@
 - (void) revisitedGroupedPhotoDidFailRetrievingList:(NSString *) errorMessage;
 - (void) revisitedGroupedPhotoDidFailDeletingWithError:(NSString *) errorMessage;
 - (void) revisitedGroupedPhotoDidFailMovingWithError:(NSString *) errorMessage;
+- (void) revisitedGroupedPhotoShowErrorMessage:(NSString *)errorMessage;
 - (void) revisitedGroupedPhotoChangeTitleTo:(NSString *) pageTitle;
 - (void) revisitedGroupedPhotoShowPhotoAlbums:(RevisitedGroupedPhotoView *)view;
 - (void) revisitedGroupedPhoto:(RevisitedGroupedPhotoView *)view triggerShareForFiles:(NSArray *) uuidList;

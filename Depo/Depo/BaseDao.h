@@ -264,5 +264,6 @@ typedef void(^taskComplition)(NSData *data, NSURLResponse *response, NSError *er
 - (void) cancelRequest;
 - (taskComplition) createCompletionHandlerWithCompletion:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completion;
 - (void)requestFailed:(NSURLResponse *) response;
+- (void)requestFailed:(NSURLResponse *) response withError:(NSError*) error;
 - (BOOL) checkResponseHasError:(NSURLResponse *) response ;
 @end

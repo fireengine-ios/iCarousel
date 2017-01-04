@@ -90,6 +90,40 @@
     return request;
 }
 
+- (void)requestFailed:(NSURLResponse *) response withError:(NSError*) error{
+    if (error) {
+        if(error.code == NSURLErrorNotConnectedToInternet){
+            NSString *errorMessageWithRequestUrl = [NSString stringWithFormat:@"BaseDao request failed - NSURLErrorNotConnectedToInternet for %@", self.currentRequest.URL];
+            IGLog(errorMessageWithRequestUrl);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self shouldReturnFailWithMessage:NSLocalizedString(@"NoConnErrorMessage", @"")];
+            });
+        } else if(error.code== NSURLErrorNetworkConnectionLost){
+            NSString *errorMessageWithRequestUrl = [NSString stringWithFormat:@"BaseDao request failed - NSURLErrorNetworkConnectionLost for %@", self.currentRequest.URL];
+            IGLog(errorMessageWithRequestUrl);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self shouldReturnFailWithMessage:NSLocalizedString(@"ConnectionLostErrorMessage", @"")];
+            });
+        }
+        else if(error.code== NSURLErrorTimedOut){
+            NSString *errorMessageWithRequestUrl = [NSString stringWithFormat:@"BaseDao request failed - NSURLErrorTimedOut for %@", self.currentRequest.URL];
+            IGLog(errorMessageWithRequestUrl);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self shouldReturnFailWithMessage:NSLocalizedString(@"TimeoutMessage", @"")];
+            });
+        } else {
+            NSString *localizedErrStr = [NSHTTPURLResponse localizedStringForStatusCode:error.code];
+            NSString *errorMessageWithRequestUrl = [NSString stringWithFormat:@"BaseDao request failed with code:%d and error: %@ - GENERAL_ERROR_MESSAGE for %@", (int)error.code, localizedErrStr, self.currentRequest.URL];
+            IGLog(errorMessageWithRequestUrl);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+            });
+        }
+    }
+    else
+        [self requestFailed:response];
+}
+
 - (void)requestFailed:(NSURLResponse *) response {
     NSHTTPURLResponse *request = (NSHTTPURLResponse *) response;
     NSString *errorInfoLog = [NSString stringWithFormat:@"BaseDao request failed with code: %d and response", (int)[request statusCode]];
