@@ -236,7 +236,7 @@
 
 - (void) suggestionListSuccessCallback:(NSMutableArray*)list {
     [recentSearchesTableView showSuggestions:list];
-    searchResultsTable.alpha = 0;
+    searchResultsTable.alpha = 1;
 //    fileList = nil;
 //    [searchResultsTable reloadData];
 }

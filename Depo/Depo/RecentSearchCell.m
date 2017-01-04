@@ -16,8 +16,9 @@
     if (self) {
         int left = 20;
         
-        if (history.type.length > 0) {
-            UIImage *iconImg = [UIImage imageNamed:@"ic_av_timer"];
+        if (history.type.length > 0 && ([history.type isEqualToString:@"TIME"] || [history.type isEqualToString:@"LOCATION"])) {
+            UIImage *iconImg = [UIImage imageNamed:@"icon_calendar"];
+            if ([history.type isEqualToString:@"LOCATION"]) iconImg = [UIImage imageNamed:@"icon_location"];
             UIImageView* imageView = [[UIImageView alloc] initWithFrame:CGRectMake(left, 7, iconImg.size.width, iconImg.size.height)];
             imageView.image = iconImg;
             [self addSubview:imageView];

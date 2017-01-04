@@ -37,6 +37,8 @@
                 if (data && ![data isKindOfClass:[NSNull class]]) {
                     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
                     if(dict) {
+                        NSString* logText = [NSString stringWithFormat: @"suggestions: %@", dict];
+                        IGLog(logText);
                         NSLog(@"suggestions: %@", dict);
                         NSMutableArray* list = [[NSMutableArray alloc] init];
                         for (NSDictionary* d in dict) {
@@ -52,6 +54,8 @@
                         });
                     }
                     else {
+                        NSString* logText = [NSString stringWithFormat: @"suggestions returned null: %@", data];
+                        IGLog(logText);
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
                         });
