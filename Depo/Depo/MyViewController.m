@@ -137,9 +137,9 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void) triggerMenuLoginWithinPage {
-    [myDelegate shouldTriggerLogin];
-}
+//- (void) triggerMenuLoginWithinPage {
+//    [myDelegate shouldTriggerLogin];
+//}
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];

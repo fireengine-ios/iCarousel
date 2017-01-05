@@ -62,7 +62,7 @@
 - (void) increaseTableUpdateCounter;
 - (void) resetTableUpdateCounter;
 - (void) resetPageOffset;
-- (void) triggerMenuLoginWithinPage;
+//- (void) triggerMenuLoginWithinPage;
 - (void) presentMoreMenuWithList:(NSArray *) itemList;
 - (void) presentMoreMenuWithList:(NSArray *) itemList withFileFolder:(MetaFile *) fileFolder;
 - (void) dismissMoreMenu;

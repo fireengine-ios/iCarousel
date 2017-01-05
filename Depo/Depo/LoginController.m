@@ -86,7 +86,7 @@
         
         msisdnField = [[LoginTextfield alloc] initWithFrame:CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 43) withPlaceholder:@""/*NSLocalizedString(@"MsisdnEmailPlaceholder", @"")*/];
         msisdnField.delegate = self;
-        [msisdnField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+        [msisdnField addTarget:self action:@selector(msisdnFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
 //        [mainScroll addSubview:msisdnField];
         msisdnField.isAccessibilityElement = YES;
         msisdnField.accessibilityIdentifier = @"msisdnFieldLogin";
@@ -316,7 +316,7 @@
     }
 }
 
-- (void) textFieldDidChange:(UITextField *) textField {
+- (void) msisdnFieldDidChange:(UITextField *) textField {
     NSScanner *scanner = [NSScanner scannerWithString:textField.text];
     BOOL isNumeric = [scanner scanInteger:NULL] && [scanner isAtEnd];
     NSString* callingCode = @"+(90)";
@@ -355,11 +355,11 @@
 //}
 
 - (void) textFieldDidEndEditing:(UITextField *)textField {
-    [msisdnField resignFirstResponder];
-    [passField resignFirstResponder];
-    [captchaField resignFirstResponder];
+//    [msisdnField resignFirstResponder];
+//    [passField resignFirstResponder];
+//    [captchaField resignFirstResponder];
     
-    if(!textField.secureTextEntry) {
+    if([textField isEqual:msisdnField]) {
         if([[Util readLocaleCode] isEqualToString:@"tr"] || [[Util readLocaleCode] isEqualToString:@"en"]) {
             NSRange range = [textField.text rangeOfString:@")" options:NSBackwardsSearch];
             if (range.location != NSNotFound) {
@@ -378,9 +378,10 @@
 }
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {
-    [msisdnField resignFirstResponder];
-    [passField resignFirstResponder];
-    [captchaField resignFirstResponder];
+    [textField resignFirstResponder];
+//    [msisdnField resignFirstResponder];
+//    [passField resignFirstResponder];
+//    [captchaField resignFirstResponder];
     return YES;
 }
 

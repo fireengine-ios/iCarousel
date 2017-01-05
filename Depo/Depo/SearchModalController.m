@@ -49,10 +49,10 @@
         searchDao.successMethod = @selector(searchListSuccessCallback:);
         searchDao.failMethod = @selector(searchListFailCallback:);
         
-        suggestionsDao = [[SuggestDao alloc] init];
-        suggestionsDao.delegate = self;
-        suggestionsDao.successMethod = @selector(suggestionListSuccessCallback:);
-        suggestionsDao.failMethod = @selector(suggestionListFailCallback:);
+//        suggestionsDao = [[SuggestDao alloc] init];
+//        suggestionsDao.delegate = self;
+//        suggestionsDao.successMethod = @selector(suggestionListSuccessCallback:);
+//        suggestionsDao.failMethod = @selector(suggestionListFailCallback:);
         
         deleteDao = [[DeleteDao alloc] init];
         deleteDao.delegate = self;
@@ -220,7 +220,8 @@
 
 - (void)onKeyboardShow:(NSNotification *)notification
 {
-    [suggestionsDao requestSuggestion:searchField.text];
+     [self requestSuggestion];
+//    [suggestionsDao requestSuggestion:searchField.text];
     CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     float keyboardHeight = MIN(keyboardSize.height,keyboardSize.width);
     if (recentSearchesTableView.tableHeight == 0) {
@@ -247,7 +248,8 @@
 }
 
 - (void)searchFieldDidChange {
-    [suggestionsDao requestSuggestion:searchField.text];
+    [self requestSuggestion];
+//    [suggestionsDao requestSuggestion:searchField.text];
     if (recentSearchesTableView != nil) {
         if (searchField.text.length > 0) {
          //            [recentSearchesTableView hideRecentSearches];
@@ -257,6 +259,19 @@
             }
         
     }
+}
+
+-(void)requestSuggestion {
+    if (suggestionsDao == nil) {
+        suggestionsDao = [[SuggestDao alloc] init];
+        suggestionsDao.delegate = self;
+        suggestionsDao.successMethod = @selector(suggestionListSuccessCallback:);
+        suggestionsDao.failMethod = @selector(suggestionListFailCallback:);
+    }
+    else {
+        [suggestionsDao cancelRequest];
+    }
+    [suggestionsDao requestSuggestion:searchField.text];
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
@@ -696,6 +711,9 @@
 
     [shareDao cancelRequest];
     shareDao = nil;
+    
+    [suggestionsDao cancelRequest];
+    suggestionsDao = nil;
 }
 
 @end

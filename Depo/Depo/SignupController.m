@@ -74,7 +74,7 @@
         
         msisdnField = [[LoginTextfield alloc] initWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2, topIndex, fieldWidth, 43) withPlaceholder:/*NSLocalizedString(@"MsisdnPlaceholder", @"")*/@""];
         msisdnField.delegate = self;
-        [msisdnField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+        [msisdnField addTarget:self action:@selector(msisdnFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
 //        msisdnField.placeholder = @"5xxxxxxxxx";
 //        msisdnField.keyboardType = UIKeyboardTypePhonePad;
         msisdnField.isAccessibilityElement = YES;
@@ -334,16 +334,12 @@
 
 -(void)keyboardWillShow {
     if(passwordField.isFirstResponder || passwordRepeatField.isFirstResponder) {
-//        if (self.view.frame.origin.y >= 0) {
-            [self setViewMovedUp:YES];
-//        }
+        [self setViewMovedUp:YES];
     }
 }
 
 -(void)keyboardWillHide {
-//    if (self.view.frame.origin.y < 0) {
-        [self setViewMovedUp:NO];
-//    }
+    [self setViewMovedUp:NO];
 }
 
 -(void)setViewMovedUp:(BOOL)movedUp {
@@ -355,24 +351,9 @@
         container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
         [container setContentOffset:CGPointZero animated:YES];
     }
-
-//    [UIView beginAnimations:nil context:NULL];
-//    [UIView setAnimationDuration:0.2];
-//    
-//    CGRect rect = self.view.frame;
-//    if (movedUp) {
-//        rect.origin.y -= kOFFSET_FOR_KEYBOARD;
-//        rect.size.height += kOFFSET_FOR_KEYBOARD;
-//    } else {
-//        rect.origin.y += kOFFSET_FOR_KEYBOARD;
-//        rect.size.height -= kOFFSET_FOR_KEYBOARD;
-//    }
-//    self.view.frame = rect;
-//    
-//    [UIView commitAnimations];
 }
 
-- (void) textFieldDidChange:(UITextField *) textField {
+- (void) msisdnFieldDidChange:(UITextField *) textField {
     NSScanner *scanner = [NSScanner scannerWithString:textField.text];
     BOOL isNumeric = [scanner scanInteger:NULL] && [scanner isAtEnd];
     NSString* callingCode = @"+(90)";
@@ -390,9 +371,9 @@
 }
 
 - (void) textFieldDidEndEditing:(UITextField *)textField {
-    [msisdnField resignFirstResponder];
- 
-    if(!textField.secureTextEntry) {
+//    [msisdnField resignFirstResponder];
+    
+    if([textField isEqual:msisdnField]) {
         if([[Util readLocaleCode] isEqualToString:@"tr"] || [[Util readLocaleCode] isEqualToString:@"en"]) {
             NSRange range = [textField.text rangeOfString:@")" options:NSBackwardsSearch];
             if (range.location != NSNotFound) {
@@ -411,10 +392,11 @@
 }
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {
-    [msisdnField resignFirstResponder];
-    [emailField resignFirstResponder];
-    [passwordField resignFirstResponder];
-    [passwordRepeatField resignFirstResponder];
+    [textField resignFirstResponder];
+//    [msisdnField resignFirstResponder];
+//    [emailField resignFirstResponder];
+//    [passwordField resignFirstResponder];
+//    [passwordRepeatField resignFirstResponder];
     return YES;
 }
 

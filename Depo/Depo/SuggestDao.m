@@ -30,15 +30,10 @@
             });
         }
         else {
-            if ([self checkResponseHasError:response]) {
-                [self requestFailed:response];
-            }
-            else {
+            if (![self checkResponseHasError:response]) {
                 if (data && ![data isKindOfClass:[NSNull class]]) {
                     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
                     if(dict) {
-                        NSString* logText = [NSString stringWithFormat: @"suggestions: %@", dict];
-                        IGLog(logText);
                         NSLog(@"suggestions: %@", dict);
                         NSMutableArray* list = [[NSMutableArray alloc] init];
                         for (NSDictionary* d in dict) {
