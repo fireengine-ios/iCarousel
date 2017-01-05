@@ -49,10 +49,10 @@
         searchDao.successMethod = @selector(searchListSuccessCallback:);
         searchDao.failMethod = @selector(searchListFailCallback:);
         
-//        suggestionsDao = [[SuggestDao alloc] init];
-//        suggestionsDao.delegate = self;
-//        suggestionsDao.successMethod = @selector(suggestionListSuccessCallback:);
-//        suggestionsDao.failMethod = @selector(suggestionListFailCallback:);
+        suggestionsDao = [[SuggestDao alloc] init];
+        suggestionsDao.delegate = self;
+        suggestionsDao.successMethod = @selector(suggestionListSuccessCallback:);
+        suggestionsDao.failMethod = @selector(suggestionListFailCallback:);
         
         deleteDao = [[DeleteDao alloc] init];
         deleteDao.delegate = self;
@@ -262,16 +262,14 @@
 }
 
 -(void)requestSuggestion {
-    if (suggestionsDao == nil) {
-        suggestionsDao = [[SuggestDao alloc] init];
-        suggestionsDao.delegate = self;
-        suggestionsDao.successMethod = @selector(suggestionListSuccessCallback:);
-        suggestionsDao.failMethod = @selector(suggestionListFailCallback:);
-    }
-    else {
-        [suggestionsDao cancelRequest];
-    }
+    [suggestionsDao cancelRequest];
     [suggestionsDao requestSuggestion:searchField.text];
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [suggestionsDao cancelRequest];
+    suggestionsDao = nil;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
