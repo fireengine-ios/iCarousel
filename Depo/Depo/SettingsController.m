@@ -666,7 +666,8 @@
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"ButtonCancel", @"") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"TakePhoto", @""), NSLocalizedString(@"ChooseFromLibrary", @""), nil];
     actionSheet.isAccessibilityElement = YES;
     actionSheet.accessibilityIdentifier = @"actionSheetSettings";
-    [actionSheet showInView:self.view];
+//    [actionSheet showInView:self.view];
+    [actionSheet showInView:self.view.window];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
