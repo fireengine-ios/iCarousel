@@ -165,8 +165,25 @@
 //    }
 //}
 
-- (void) triggerExport {
-    if(recentResult.isQuotaValid) {
+//- (void) triggerExport {
+//    if(recentResult.isQuotaValid) {
+//        if (![[DBSession sharedSession] isLinked]) {
+//            [[DBSession sharedSession] linkFromController:self];
+//        } else {
+//            accountInfoClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
+//            accountInfoClient.delegate = self;
+//            [accountInfoClient loadAccountInfo];
+//            [self showLoading];
+//        }
+//    }
+//    else {
+//        CustomConfirmView *confirmView = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"ButtonCancel", @"")  withApproveTitle:NSLocalizedString(@"OK", @"")  withMessage:NSLocalizedString(@"DropboxInvalidQuotaMessage", @"") withModalType:ModalTypeApprove];
+//        confirmView.delegate = self;
+//        [APPDELEGATE showCustomConfirm:confirmView];
+//    }
+//}
+    
+    - (void) triggerExport {
         if (![[DBSession sharedSession] isLinked]) {
             [[DBSession sharedSession] linkFromController:self];
         } else {
@@ -176,12 +193,6 @@
             [self showLoading];
         }
     }
-    else {
-        CustomConfirmView *confirmView = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"ButtonCancel", @"")  withApproveTitle:NSLocalizedString(@"OK", @"")  withMessage:NSLocalizedString(@"DropboxInvalidQuotaMessage", @"") withModalType:ModalTypeApprove];
-        confirmView.delegate = self;
-        [APPDELEGATE showCustomConfirm:confirmView];
-    }
-}
 
 - (void) didApproveCustomAlert:(CustomConfirmView *)alertView {
     RevisitedStorageController *storageController = [[RevisitedStorageController alloc] init];
@@ -241,8 +252,19 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
 }
 
+//- (void) connectSuccessCallback {
+//    [startDao requestStartDropbox];
+//}
+    
 - (void) connectSuccessCallback {
-    [startDao requestStartDropbox];
+    if(recentResult.isQuotaValid) {
+        [startDao requestStartDropbox];
+    }
+    else {
+        CustomConfirmView *confirmView = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"ButtonCancel", @"")  withApproveTitle:NSLocalizedString(@"OK", @"")  withMessage:NSLocalizedString(@"DropboxInvalidQuotaMessage", @"") withModalType:ModalTypeApprove];
+        confirmView.delegate = self;
+        [APPDELEGATE showCustomConfirm:confirmView];
+    }
 }
 
 - (void) connectFailCallback:(NSString *) errorMessage {
