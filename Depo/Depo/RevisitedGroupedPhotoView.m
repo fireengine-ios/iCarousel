@@ -667,14 +667,14 @@
 }
 
 - (void) cancelRequests {
-    [readDao cancelRequest];
-    readDao = nil;
-    
-    [deleteDao cancelRequest];
-    deleteDao = nil;
-    
-    [albumAddPhotosDao cancelRequest];
-    albumAddPhotosDao = nil;
+//    [readDao cancelRequest];
+//    readDao = nil;
+//    
+//    [deleteDao cancelRequest];
+//    deleteDao = nil;
+//    
+//    [albumAddPhotosDao cancelRequest];
+//    albumAddPhotosDao = nil;
 }
 
 - (void) neutralizeSearchBar {
