@@ -559,6 +559,11 @@ typedef enum {
     ImageGroupTypeInProgress
 } ImageGroupType;
 
+typedef enum {
+    RawFileTypeDepo,
+    RawFileTypeClient
+} RawFileType;
+
 @interface AppConstants : NSObject
 
 @end
