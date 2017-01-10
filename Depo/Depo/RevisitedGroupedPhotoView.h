@@ -25,6 +25,7 @@
 #import "RevisitedPhotoCollCell.h"
 #import "RevisitedUploadingPhotoCollCell.h"
 #import "CustomLabel.h"
+#import "AutoSyncOffHeaderView.h"
 
 @class RevisitedGroupedPhotoView;
 
@@ -48,7 +49,7 @@
 - (BOOL) checkInternet;
 @end
 
-@interface RevisitedGroupedPhotoView : UIView <FooterActionsDelegate, UITextFieldDelegate, CustomConfirmDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, RevisitedPhotoCollCellDelegate, RevisitedUploadingPhotoCollCellDelegate> {
+@interface RevisitedGroupedPhotoView : UIView <FooterActionsDelegate, UITextFieldDelegate, CustomConfirmDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, RevisitedPhotoCollCellDelegate, RevisitedUploadingPhotoCollCellDelegate, AutoSyncOffHeaderDelegate> {
 }
 
 @property (nonatomic, weak) id<RevisitedGroupedPhotoDelegate> delegate;
@@ -74,6 +75,8 @@
 
 @property (nonatomic, strong) NSMutableArray *groups;
 @property (nonatomic, strong) UICollectionView *collView;
+
+@property (nonatomic, strong) AutoSyncOffHeaderView *syncInfoHeaderView;
 
 - (void) pullData;
 - (void) setToSelectible;

@@ -11,5 +11,7 @@
 @implementation RawTypeFile
 
 @synthesize rawType;
+@synthesize uploadRef;
+@synthesize metaFile;
 
 @end

@@ -825,3 +825,6 @@
 "CanNotDeleteReadonlyAlbums" = "Videolar albümünüz otomatik olarak oluşturulmaktadır, bu yüzden silinemez.";
 
 "SuggestionsTitle" = "ÖNERİLER";
+
+"AutoSyncOffInfoTop"="Fotoğraflar yüklenme için bekliyor";
+"AutoSyncOffInfoBottom"="Bir Wi-fi'a bağlanın ya da Ayarlardan oto yüklemeyi açın";

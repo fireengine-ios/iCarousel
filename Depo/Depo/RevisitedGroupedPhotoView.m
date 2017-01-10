@@ -62,6 +62,8 @@
 @synthesize groups;
 @synthesize collView;
 
+@synthesize syncInfoHeaderView;
+
 - (id) initWithFrame:(CGRect)frame {
     if(self = [super initWithFrame:frame]) {
         self.backgroundColor = [Util UIColorForHexColor:@"FFFFFF"];
@@ -100,11 +102,19 @@
         selectedFileList = [[NSMutableArray alloc] init];
         selectedMetaFiles = [[NSMutableArray alloc] init];
         
+        BOOL isSyncHeaderVisible = YES;
+        
+        if(isSyncHeaderVisible) {
+            syncInfoHeaderView = [[AutoSyncOffHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 50)];
+            syncInfoHeaderView.delegate = self;
+            [self addSubview:syncInfoHeaderView];
+        }
+        
         yIndex = 0;
         
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         
-        collView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) collectionViewLayout:layout];
+        collView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, isSyncHeaderVisible ? 50 : 0, self.frame.size.width, self.frame.size.height - (isSyncHeaderVisible ? 50 : 0)) collectionViewLayout:layout];
         collView.dataSource = self;
         collView.delegate = self;
         collView.showsVerticalScrollIndicator = NO;
@@ -810,6 +820,18 @@
     } completion:^(BOOL finished) {
         verticalIndicator.hidden = YES;
     }];
+}
+
+- (void) autoSyncOffHeaderViewCloseClicked {
+    if(syncInfoHeaderView) {
+        [syncInfoHeaderView removeFromSuperview];
+        [UIView animateWithDuration:0.4 animations:^{
+            collView.frame = CGRectMake(collView.frame.origin.x, collView.frame.origin.y - 50, collView.frame.size.width, collView.frame.size.height + 50);
+        }];
+    }
+}
+
+- (void) autoSyncOffHeaderViewSettingsClicked {
 }
 
 @end
