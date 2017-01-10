@@ -48,6 +48,7 @@
 @synthesize menuTipShown;
 @synthesize photoDetailTipShown;
 @synthesize videofyTutorialCountChecked;
+@synthesize appRaterFlag;
 @synthesize loggedOutManually;
 
 - (id) init {
@@ -227,6 +228,8 @@
     self.menuTipShown = NO;
     self.photoDetailTipShown = NO;
     self.videofyTutorialCountChecked = NO;
+    self.appRaterFlag = NO;
+    
     
     [SyncUtil resetBaseUrlConstant];
     [SharedUtil writeSharedToken:nil];
