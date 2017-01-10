@@ -115,7 +115,9 @@
     NSInteger launchCount = [self getIntFromDefaultsWithKey:LAUNCH_COUNT_KEY]+1;
     [self setIntToDefaultsWithKey:LAUNCH_COUNT_KEY andValue:launchCount];
     
-    if (launchCount >= launches && [self isDateExpired:days]) {
+    BOOL isDateExpired = [self isDateExpired:days];
+    
+    if (launchCount >= launches && isDateExpired) {
         [self getApplicationID];
     }
 
