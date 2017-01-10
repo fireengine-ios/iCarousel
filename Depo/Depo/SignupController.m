@@ -65,7 +65,8 @@
         logoImgView.image = logoImage;
         [container addSubview:logoImgView];
         
-        topIndex += logoImage.size.height+50;
+//        topIndex += logoImage.size.height+50;
+        topIndex += logoImage.size.height + (IS_IPHONE_4_OR_LESS ? 20 : 50);
         
         CustomLabel *msisdnLabel = [[CustomLabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2, topIndex, fieldWidth, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"MsisdnTitle", @"")];
         [container addSubview:msisdnLabel];
