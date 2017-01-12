@@ -26,6 +26,9 @@
 #import "RevisitedUploadingPhotoCollCell.h"
 #import "CustomLabel.h"
 #import "AutoSyncOffHeaderView.h"
+#import "SyncManager.h"
+#import "RevisitedRawPhotoCollCell.h"
+#import "RawTypeFile.h"
 
 @class RevisitedGroupedPhotoView;
 
@@ -49,7 +52,7 @@
 - (BOOL) checkInternet;
 @end
 
-@interface RevisitedGroupedPhotoView : UIView <FooterActionsDelegate, UITextFieldDelegate, CustomConfirmDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, RevisitedPhotoCollCellDelegate, RevisitedUploadingPhotoCollCellDelegate, AutoSyncOffHeaderDelegate> {
+@interface RevisitedGroupedPhotoView : UIView <FooterActionsDelegate, UITextFieldDelegate, CustomConfirmDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, RevisitedPhotoCollCellDelegate, RevisitedUploadingPhotoCollCellDelegate, AutoSyncOffHeaderDelegate, SyncManagerInfoDelegate> {
 }
 
 @property (nonatomic, weak) id<RevisitedGroupedPhotoDelegate> delegate;

@@ -10,11 +10,13 @@
 #import "AppConstants.h"
 #import "UploadRef.h"
 #import "MetaFile.h"
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface RawTypeFile : NSObject
 
 @property (nonatomic) RawFileType rawType;
 @property (nonatomic, strong) UploadRef *uploadRef;
-@property (nonatomic, strong) MetaFile *metaFile;
+@property (nonatomic, strong) ALAsset *assetRef;
+@property (nonatomic, strong) MetaFile *fileRef;
 
 @end

@@ -25,6 +25,7 @@
 @implementation SyncManager
 
 @synthesize queueCountDelegate;
+@synthesize infoDelegate;
 @synthesize assetsLibrary;
 @synthesize elasticSearchDao;
 @synthesize autoSyncIterationInProgress;
@@ -454,6 +455,50 @@
             }
         }
     }
+}
+
+- (void) listOfUnsyncedImages {
+    IGLog(@"SyncManager listOfUnsyncedImages");
+
+    NSMutableArray *unsycedResult = [[NSMutableArray alloc] init];
+    
+    NSArray *localHashList = [SyncUtil readSyncHashLocally];
+    NSArray *remoteHashList = [SyncUtil readSyncHashRemotely];
+    NSArray *remoteSummaryList = [SyncUtil readSyncFileSummaries];
+    
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+            if(group) {
+                [group setAssetsFilter:[ALAssetsFilter allPhotos]];
+                [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
+                    if(asset && [[asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypePhoto]) {
+                        ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
+                        NSString *repUrl = [defaultRep.url absoluteString];
+                        if(repUrl != nil) {
+                            NSString *localHash = [SyncUtil md5StringOfString:repUrl];
+                            
+                            BOOL shouldStartUpload = ![localHashList containsObject:localHash] && ![remoteHashList containsObject:localHash];
+                            
+                            if(shouldStartUpload) {
+                                MetaFileSummary *assetSummary = [[MetaFileSummary alloc] init];
+                                assetSummary.bytes = [defaultRep size];
+                                assetSummary.fileName = [defaultRep filename];
+                                shouldStartUpload = ![remoteSummaryList containsObject:assetSummary];
+                            }
+                            if(shouldStartUpload) {
+                                [unsycedResult addObject:asset];
+                            }
+                        }
+                    }
+                }];
+            } else {
+                IGLog(@"SyncManager listOfUnsyncedImages group enumeration finished");
+                [infoDelegate syncManagerUnsyncedImageList:unsycedResult];
+            }
+        } failureBlock:^(NSError *error) {
+            [infoDelegate syncManagerUnsyncedImageList:unsycedResult];
+        }];
+    });
 }
 
 @end
