@@ -762,7 +762,7 @@
             if([rowItem isKindOfClass:[RawTypeFile class]]) {
                 RawTypeFile *castedRow = (RawTypeFile *) rowItem;
                 RevisitedRawPhotoCollCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"COLL_PHOTO_CELL" forIndexPath:indexPath];
-//TODO !!!                cell.delegate = self;
+                cell.delegate = self;
                 [cell loadContent:castedRow isSelectible:self.isSelectible withImageWidth:imageWidth withGroupKey:sectionGroup.groupKey isSelected:(castedRow.rawType == RawFileTypeDepo ? [selectedFileList containsObject:castedRow.fileRef.uuid] : NO)];
                 return cell;
             } else {
@@ -950,6 +950,93 @@
     result.fileRef = fileRef;
     result.rawType = RawFileTypeDepo;
     return result;
+}
+
+- (void) rawPhotoCollCellImageWasSelectedForFile:(MetaFile *) fileSelected forGroupWithKey:(NSString *) groupKey {
+    NSMutableArray *listToPass = [[NSMutableArray alloc] init];
+    [listToPass addObject:fileSelected];
+    
+    for(FileInfoGroup *row in self.groups) {
+        if([row.groupKey isEqualToString:groupKey]) {
+            for(id obj in row.fileInfo) {
+                if([obj isKindOfClass:[RawTypeFile class]]) {
+                    RawTypeFile *castedObj = (RawTypeFile *) obj;
+                    [listToPass addObject:castedObj.fileRef];
+                }
+            }
+        }
+    }
+    [delegate revisitedGroupedPhotoDidSelectFile:fileSelected withList:listToPass];
+}
+
+- (void) rawPhotoCollCellImageWasMarkedForFile:(MetaFile *) fileSelected {
+    if(fileSelected.uuid) {
+        if(![selectedFileList containsObject:fileSelected.uuid]) {
+            [selectedFileList addObject:fileSelected.uuid];
+            [selectedMetaFiles addObject:fileSelected];
+        }
+    }
+    if([selectedFileList count] > 0) {
+        [self showImgFooterMenu];
+        [delegate revisitedGroupedPhotoChangeTitleTo:[NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]]];
+    } else {
+        [self hideImgFooterMenu];
+        [delegate revisitedGroupedPhotoChangeTitleTo:NSLocalizedString(@"SelectFilesTitle", @"")];
+    }
+    
+    if (fileSelected.contentType == ContentTypeVideo) {
+        if (photoCount == 0) {
+            [imgFooterActionMenu hidePrintIcon];
+        } else{
+            [imgFooterActionMenu showPrintIcon];
+        }
+    } else {
+        photoCount++;
+        [imgFooterActionMenu showPrintIcon];
+    }
+}
+
+- (void) rawPhotoCollCellImageWasUnmarkedForFile:(MetaFile *) fileSelected {
+    if([selectedFileList containsObject:fileSelected.uuid]) {
+        [selectedFileList removeObject:fileSelected.uuid];
+        [selectedMetaFiles removeObject:fileSelected];
+    }
+    if([selectedFileList count] > 0) {
+        [self showImgFooterMenu];
+        [delegate revisitedGroupedPhotoChangeTitleTo:[NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]]];
+    } else {
+        [self hideImgFooterMenu];
+        [delegate revisitedGroupedPhotoChangeTitleTo:NSLocalizedString(@"SelectFilesTitle", @"")];
+    }
+    if (fileSelected.contentType == ContentTypePhoto) {
+        photoCount--;
+    }
+    if (photoCount == 0) {
+        [imgFooterActionMenu hidePrintIcon];
+    }
+}
+
+- (void) rawPhotoCollCellImageUploadFinishedForFile:(NSString *) fileSelectedUuid {
+}
+
+- (void) rawPhotoCollCellImageWasLongPressedForFile:(MetaFile *) fileSelected {
+    [self setToSelectible];
+    [delegate revisitedGroupedPhotoDidChangeToSelectState];
+}
+
+- (void) rawPhotoCollCellImageUploadQuotaError:(MetaFile *) fileSelected {
+}
+
+- (void) rawPhotoCollCellImageUploadLoginError:(MetaFile *) fileSelected {
+}
+
+- (void) rawPhotoCollCellImageWasSelectedForView:(SquareImageView *) ref {
+}
+
+- (void) rawPhotoCollCellAssetDidBecomeSelected:(ALAsset *) selectedAsset {
+}
+
+- (void) rawPhotoCollCellAssetDidBecomeDeselected:(ALAsset *) deselectedAsset {
 }
 
 @end

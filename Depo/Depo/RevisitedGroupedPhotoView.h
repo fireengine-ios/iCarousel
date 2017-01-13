@@ -52,7 +52,7 @@
 - (BOOL) checkInternet;
 @end
 
-@interface RevisitedGroupedPhotoView : UIView <FooterActionsDelegate, UITextFieldDelegate, CustomConfirmDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, RevisitedPhotoCollCellDelegate, RevisitedUploadingPhotoCollCellDelegate, AutoSyncOffHeaderDelegate, SyncManagerInfoDelegate> {
+@interface RevisitedGroupedPhotoView : UIView <FooterActionsDelegate, UITextFieldDelegate, CustomConfirmDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, RevisitedPhotoCollCellDelegate, RevisitedUploadingPhotoCollCellDelegate, AutoSyncOffHeaderDelegate, SyncManagerInfoDelegate, RawPhotoCollCellDelegate> {
 }
 
 @property (nonatomic, weak) id<RevisitedGroupedPhotoDelegate> delegate;
