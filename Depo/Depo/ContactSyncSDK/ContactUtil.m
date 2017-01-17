@@ -280,6 +280,12 @@
     return ret;
 }
 
+- (NSInteger)getContactCount
+{
+    CFIndex nPeople = ABAddressBookGetPersonCount( _addressBook );
+    return nPeople;
+}
+
 - (void)printContacts
 {
     if (!SYNC_Log_Enabled) {
