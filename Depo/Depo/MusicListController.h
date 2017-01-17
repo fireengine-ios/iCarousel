@@ -15,8 +15,9 @@
 #import "AbstractFileFolderCell.h"
 #import "FooterActionsMenuView.h"
 #import "MusicPreviewController.h"
+#import "MainSearchTextfield.h"
 
-@interface MusicListController : MyViewController <UITableViewDataSource, UITableViewDelegate, AbstractFileFolderDelegate, FooterActionsDelegate, MusicPreviewDelegate> {
+@interface MusicListController : MyViewController <UITableViewDataSource, UITableViewDelegate, AbstractFileFolderDelegate, FooterActionsDelegate, MusicPreviewDelegate, UITextFieldDelegate> {
     ElasticSearchDao *elasticSearchDao;
     ElasticSearchDao *loadMoreDao;
     FavoriteDao *favoriteDao;
@@ -43,5 +44,6 @@
 @property (nonatomic, strong) NSArray *musicListRef;
 @property (nonatomic, strong) NSArray *uuidsToBeDeleted;
 @property (nonatomic, strong) FooterActionsMenuView *footerActionMenu;
+@property (nonatomic, strong) MainSearchTextfield *searchField;
 
 @end

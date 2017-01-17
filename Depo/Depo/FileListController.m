@@ -31,6 +31,7 @@
 
 @synthesize delegate;
 @synthesize folder;
+@synthesize searchField;
 @synthesize fileTable;
 @synthesize refreshControl;
 @synthesize fileList;
@@ -103,6 +104,31 @@
         renameDao.delegate = self;
         renameDao.successMethod = @selector(renameSuccessCallback:);
         renameDao.failMethod = @selector(renameFailCallback:);
+        
+        self.topIndex = 10;
+        
+        UIView *searchContainer = [[UIView alloc] initWithFrame:CGRectMake(20, self.topIndex, self.view.frame.size.width, 60)];
+        searchField = [[MainSearchTextfield alloc] initWithFrame:CGRectMake(0, 0, searchContainer.frame.size.width - 40, 40)];
+        searchField.delegate = self;
+        searchField.returnKeyType = UIReturnKeySearch;
+        searchField.userInteractionEnabled = NO;
+        searchField.isAccessibilityElement = YES;
+        searchField.accessibilityIdentifier = @"searchFieldAllFiles";
+        [searchContainer addSubview:searchField];
+        [self.view addSubview:searchContainer];
+        
+        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(searchTapped)];
+        tapGestureRecognizer.numberOfTapsRequired = 1;
+        tapGestureRecognizer.enabled = YES;
+        [searchContainer addGestureRecognizer:tapGestureRecognizer];
+        
+        self.topIndex+=50;
+        
+        UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, 1)];
+        separator.backgroundColor = [Util UIColorForHexColor:@"BEBEBE"];
+        [self.view addSubview:separator];
+        
+        self.topIndex+=1;
 
         fileTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex) style:UITableViewStylePlain];
         fileTable.delegate = self;
@@ -399,7 +425,7 @@
     if(self.folder) {
         [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeFolderDetail], [NSNumber numberWithInt:MoreMenuTypeShare], self.folder.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDelete], [NSNumber numberWithInt:MoreMenuTypeSort], [NSNumber numberWithInt:MoreMenuTypeSelect]] withFileFolder:self.folder];
     } else {
-        [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeSort], [NSNumber numberWithInt:MoreMenuTypeSelect]]];
+        [self presentMoreMenuWithList:@[[NSNumber numberWithInt:MoreMenuTypeSort], [NSNumber numberWithInt:MoreMenuTypeSelect], [NSNumber numberWithInt:MoreMenuTypeFavourites]]];
     }
 }
 
@@ -920,6 +946,10 @@
     }
 }
 
+- (void) searchTapped {
+    [APPDELEGATE.base triggerInnerSearch];
+}
+
 #pragma mark - Share
 
 - (void) triggerShareForFiles:(NSArray *) fileUuidList {
@@ -955,6 +985,16 @@
 
 -(void)moreMenuDidSelectSort {
     [MoreMenuView presentSortFromController:self.nav delegateOwner:self];
+}
+    
+-(void)moreMenuDidSelectFavourites {
+    [MPush hitTag:@"favorites"];
+    [MPush hitEvent:@"favorites"];
+    
+    FavouriteListController *favourites = [[FavouriteListController alloc] init];
+    favourites.nav = self.nav;
+    favourites.myDelegate = self;
+    [self.nav pushViewController:favourites animated:YES];
 }
 
 - (void) moreMenuDidSelectDelete {

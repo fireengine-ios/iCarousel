@@ -13,8 +13,9 @@
 #import "ProfilePhotoUploadDao.h"
 #import "QuotaInfoDao.h"
 #import "Quota.h"
+#import "CustomConfirmView.h"
 
-@interface SettingsController : MyViewController <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, UIActionSheetDelegate> {
+@interface SettingsController : MyViewController <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, UIActionSheetDelegate, MyViewDelegate, CustomConfirmDelegate> {
     UIImageView *profileImageView;
     UITableView *pageContentTable;
     UIView *imageOptionsArea;

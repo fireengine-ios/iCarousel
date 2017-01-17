@@ -23,6 +23,7 @@
 @protocol MoreMenuDelegate <NSObject>
 - (void) moreMenuDidSelectSortWithList;
 - (void) moreMenuDidSelectSort;
+- (void) moreMenuDidSelectFavourites;
 - (void) moreMenuDidSelectFav;
 - (void) moreMenuDidSelectUnfav;
 - (void) moreMenuDidSelectShare;

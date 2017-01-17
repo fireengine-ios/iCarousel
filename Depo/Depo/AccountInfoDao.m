@@ -38,6 +38,7 @@
                     NSString *url = [mainDict objectForKey:@"url"];
                     NSString *accountType = [mainDict objectForKey:@"accountType"];
                     NSNumber *isCropAndShareTagAvailable = [mainDict objectForKey:@"isCropyTagAvailable"];
+                    NSNumber *isFavouriteTagAvailable = [mainDict objectForKey:@"isFavouriteTagAvailable"];
                     NSString *username = [mainDict objectForKey:@"username"];
                     NSString *email = [mainDict objectForKey:@"email"];
                     NSString *phoneNumber = [mainDict objectForKey:@"phoneNumber"];
@@ -60,6 +61,9 @@
                     }
                     if(isCropAndShareTagAvailable && ![isCropAndShareTagAvailable isKindOfClass:[NSNull class]]) {
                         user.cropAndSharePresentFlag = [isCropAndShareTagAvailable boolValue];
+                    }
+                    if(isFavouriteTagAvailable && ![isFavouriteTagAvailable isKindOfClass:[NSNull class]]) {
+                        user.favouriteTagPresentFlag = [isFavouriteTagAvailable boolValue];
                     }
                     if(accountType && ![accountType isKindOfClass:[NSNull class]]) {
                         user.accountType = [accountType isEqualToString:@"TURKCELL"] ? AccountTypeTurkcell : AccountTypeOther;

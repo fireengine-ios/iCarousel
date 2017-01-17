@@ -113,6 +113,9 @@
         case MoreMenuTypeSelect:
             [delegate moreMenuDidSelectUpdateSelectOption];
             break;
+        case MoreMenuTypeFavourites:
+            [delegate moreMenuDidSelectFavourites];
+            break;
         case MoreMenuTypeFolderDetail:
             [delegate moreMenuDidSelectFolderDetailForFolder:self.fileFolder];
             break;

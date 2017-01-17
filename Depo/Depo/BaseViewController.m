@@ -55,6 +55,8 @@
 #import "NewFeatureInfoView.h"
 #import "RevisitedGroupedPhotosController.h"
 #import "CustomInfoWithIconView.h"
+#import "SelectiblePhotoListModalController.h"
+#import "Story.h"
 
 @interface BaseViewController ()
 
@@ -361,6 +363,21 @@
     photo.nav = self.nav;
     photo.myDelegate = self;
     [self.nav setViewControllers:@[photo] animated:NO];
+}
+    
+- (void) didTriggerCreateStory {
+    NSLog(@"moreMenuDidSelectVideofy called");
+    CustomEntryPopupView *entryPopup = [[CustomEntryPopupView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"CreateName", @"") withButtonTitle:NSLocalizedString(@"Save", @"")];
+    entryPopup.delegate = self;
+    [APPDELEGATE showCustomEntryPopup:entryPopup];
+}
+    
+- (void) customEntryDidDismissWithValue:(NSString *)val {
+    Story *rawStory = [[Story alloc] init];
+    rawStory.title = val;
+    SelectiblePhotoListModalController *modalController = [[SelectiblePhotoListModalController alloc] initWithStory:rawStory];
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:modalController];
+    [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
 }
 
 - (void) didTriggerReachUs {
@@ -1128,10 +1145,18 @@
 
 
 
+//-(void)hideProcessView {
+//     NSLog(@"hideProcessView");
+//    downloadingProcessView.hidden = true;
+//    [self immediateShowAddButton];
+//}
+    
 -(void)hideProcessView {
-     NSLog(@"hideProcessView");
+    NSLog(@"hideProcessView");
     downloadingProcessView.hidden = true;
-    [self immediateShowAddButton];
+    if(!self.isVideosAlbum) {
+        [self immediateShowAddButton];
+    }
 }
 
 -(void)removeProgressViewWithMessage:(NSString *)message isSuccess:(BOOL)success {

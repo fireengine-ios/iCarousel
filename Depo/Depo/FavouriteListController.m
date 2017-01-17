@@ -93,6 +93,11 @@
     [super hideLoading];
     isLoading = NO;
     isFirstLoad = NO;
+    
+    if([fileList count] == 0) {
+        APPDELEGATE.session.user.favouriteTagPresentFlag = NO;
+        [[NSNotificationCenter defaultCenter] postNotificationName:FAV_LIST_EMPTY_NOTIFICATION object:nil userInfo:nil];
+    }
 }
 
 - (void) favListFailCallback:(NSString *) errorMessage {

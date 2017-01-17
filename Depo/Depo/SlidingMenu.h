@@ -30,6 +30,7 @@
 - (void) didTriggerCurrentMusic;
 - (void) didTriggerContactSync;
 - (void) didTriggerCellograph;
+- (void) didTriggerCreateStory;
 - (void) didTriggerReachUs;
 - (void) didTriggerHelp;
 @end

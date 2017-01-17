@@ -14,8 +14,9 @@
 #import "AbstractFileFolderCell.h"
 #import "FooterActionsMenuView.h"
 #import "ShareLinkDao.h"
+#import "MainSearchTextfield.h"
 
-@interface DocListController : MyViewController <UITableViewDataSource, UITableViewDelegate, AbstractFileFolderDelegate, FooterActionsDelegate> {
+@interface DocListController : MyViewController <UITableViewDataSource, UITableViewDelegate, AbstractFileFolderDelegate, FooterActionsDelegate, UITextFieldDelegate> {
     ElasticSearchDao *elasticSearchDao;
     ElasticSearchDao *loadMoreDao;
     FavoriteDao *favoriteDao;
@@ -39,5 +40,6 @@
 @property (nonatomic, strong) NSMutableArray *docList;
 @property (nonatomic, strong) NSMutableArray *selectedDocList;
 @property (nonatomic, strong) FooterActionsMenuView *footerActionMenu;
+@property (nonatomic, strong) MainSearchTextfield *searchField;
 
 @end

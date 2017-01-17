@@ -191,7 +191,7 @@
 "DownloadAlbumSuccessMessage"="Albüm başarıyla kaydedildi";
 "DownloadAlbumsSuccessMessage"="Albümler başarıyla kaydedildi";
 "DownloadImageFailMessage"="Resim kaydedilirken hata oluştu";
-"DownloadImagesFailMessage"="Resimler kaydedilirken hata oluştu";
+"DownloadImagesFailMessage"="Dosyalar kaydedilirken hata oluştu";
 "DownloadAlbumFailMessage"="Albüm kaydedilirken hata oluştu";
 "DownloadVideoProgressMessage"="Video kaydediliyor";
 "DownloadVideoSuccessMessage"="Video başarıyla kaydedildi";
@@ -315,6 +315,8 @@
 "Upload"="Yükle";
 "Remove"="Çıkar";
 
+"RemainingQuota"="Kalan";
+"UsageInfo"="Kullanım Bilgileri";
 "Memory"="Hafıza";
 "Packages"="Paketler";
 "StorageUsageInfo"="%@%% / %@";

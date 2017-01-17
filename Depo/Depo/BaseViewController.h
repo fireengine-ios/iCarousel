@@ -20,8 +20,9 @@
 #import "AccurateLocationManager.h"
 #import "DownloadManager.h"
 #import "ProcessFooterView.h"
+#import "CustomEntryPopupView.h"
 
-@interface BaseViewController : UIViewController <SlidingMenuDelegate, SlidingMenuCloseDelegate, MyViewDelegate, FloatingAddButtonDelegate, FloatingAddDelegate, UIGestureRecognizerDelegate, CustomConfirmDelegate, AccurateLocationManagerDelegate, DownloadManagerDelegate, ProcessFooterDelegate> {
+@interface BaseViewController : UIViewController <SlidingMenuDelegate, SlidingMenuCloseDelegate, MyViewDelegate, FloatingAddButtonDelegate, FloatingAddDelegate, UIGestureRecognizerDelegate, CustomConfirmDelegate, AccurateLocationManagerDelegate, DownloadManagerDelegate, ProcessFooterDelegate, CustomEntryPopupDelegate> {
     NSMutableArray *downloadManagers;
     ProcessFooterView *downloadingProcessView;
 }
@@ -39,6 +40,7 @@
 @property (nonatomic) BOOL menuOpen;
 @property (nonatomic) BOOL menuLocked;
 @property (nonatomic) BOOL popupCheckDone;
+@property (nonatomic) BOOL isVideosAlbum;
 
 - (void) showBaseLoading;
 - (void) hideBaseLoading;

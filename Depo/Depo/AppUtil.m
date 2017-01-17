@@ -31,19 +31,13 @@
     searchMenu.title = NSLocalizedString(@"MenuSearch", @"");
     searchMenu.iconName = @"";
     searchMenu.selectedIconName = @"";
-    [result addObject:searchMenu];
+//    [result addObject:searchMenu];
     
     MetaMenu *homeMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeHome];
     homeMenu.title = NSLocalizedString(@"MenuHome", @"");
     homeMenu.iconName = @"cloud_icon.png";
     homeMenu.selectedIconName = @"cloud_icon.png";
-    [result addObject:homeMenu];
-    
-    MetaMenu *favMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeFav];
-    favMenu.title = NSLocalizedString(@"MenuFav", @"");
-    favMenu.iconName = @"fav_icon.png";
-    favMenu.selectedIconName = @"yellow_fav_icon.png";
-    [result addObject:favMenu];
+//    [result addObject:homeMenu];
 
     MetaMenu *dropboxMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeDropbox];
     dropboxMenu.title = NSLocalizedString(@"ExportFromDropbox", @"");
@@ -56,6 +50,14 @@
     fileMenu.iconName = @"file_icon.png";
     fileMenu.selectedIconName = @"yellow_file_icon.png";
     [result addObject:fileMenu];
+    
+    if(APPDELEGATE.session.user.favouriteTagPresentFlag) {
+        MetaMenu *favMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeFav];
+        favMenu.title = NSLocalizedString(@"MenuFav", @"");
+        favMenu.iconName = @"fav_icon.png";
+        favMenu.selectedIconName = @"yellow_fav_icon.png";
+        [result addObject:favMenu];
+    }
     
     MetaMenu *photoMenu = [[MetaMenu alloc] initWithMenuType:MenuTypePhoto];
     photoMenu.title = NSLocalizedString(@"MenuPhoto", @"");
@@ -100,14 +102,20 @@
         cellographMenu.title = NSLocalizedString(@"MenuCellograph", @"");
         cellographMenu.iconName = @"icon_m_baskial_w.png";
         cellographMenu.selectedIconName = @"icon_m_baskial.png";
-        [result addObject:cellographMenu];
+//        [result addObject:cellographMenu];
     }
 
     MetaMenu *helpMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeHelp];
     helpMenu.title = NSLocalizedString(@"MenuHelp", @"");
     helpMenu.iconName = @"icon_m_yardim_w.png";
     helpMenu.selectedIconName = @"icon_m_yardim.png";
-    [result addObject:helpMenu];
+//    [result addObject:helpMenu];
+    
+    MetaMenu *createStoryMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeCreateStory];
+    createStoryMenu.title = NSLocalizedString(@"CreateStoryTitle", @"");
+    createStoryMenu.iconName = @"icon_m_createstory.png";
+//  TODO  createStoryMenu.selectedIconName = @"icon_menu_bizeulasin.png";
+    [result addObject:createStoryMenu];
 
     MetaMenu *reachUshMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeReachUs];
     reachUshMenu.title = NSLocalizedString(@"MenuReachUs", @"");
@@ -119,7 +127,7 @@
     logoutMenu.title = NSLocalizedString(@"MenuLogout", @"");
     logoutMenu.iconName = @"logout_icon.png";
     logoutMenu.selectedIconName = @"yellow_logout_icon.png";
-    [result addObject:logoutMenu];
+//    [result addObject:logoutMenu];
     
     return result;
     //    return @[profileMenu, searchMenu, homeMenu, favMenu, fileMenu, photoMenu, musicMenu, docMenu, /* contacts commented out // contactMenu ,*/ logoutMenu];
@@ -245,6 +253,9 @@
         case MoreMenuTypeSelect:
             iconName = @"nav_select_icon.png";
             break;
+        case MoreMenuTypeFavourites:
+            iconName = @"nav_favourite_icon.png";
+            break;
         case MoreMenuTypeVideofy:
             iconName = @"icon_createstory.png";
             break;
@@ -292,6 +303,9 @@
             break;
         case MoreMenuTypeSelect:
             title = NSLocalizedString(@"MoreMenuSelectTitle", @"");
+            break;
+        case MoreMenuTypeFavourites:
+            title = NSLocalizedString(@"FavouritesTitle", @"");
             break;
         case MoreMenuTypeVideofy:
             title = NSLocalizedString(@"MoreMenuVideofyTitle", @"");

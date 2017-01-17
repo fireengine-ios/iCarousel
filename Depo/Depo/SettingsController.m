@@ -29,6 +29,7 @@
 #import "SettingsSocialController.h"
 #import "RecentActivitiesController.h"
 #import "BaseViewController.h"
+#import "HomeController.h"
 
 #include <math.h>
 
@@ -365,7 +366,7 @@
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 6;
+    return 8;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -400,23 +401,34 @@
     BOOL drawSeparator = indexPath.section == 4 ? false : true;
     double cellHeight = 69;
     
-    if(indexPath.row == 0) {
+    if (indexPath.row == 0) {
         NSLog(@"USAGE:%lld and %lld", quota.bytesUsed, quota.quotaBytes);
         double percentUsageVal = 100 * ((double)quota.bytesUsed/(double)quota.quotaBytes);
         percentUsageVal = isnan(percentUsageVal) ? 0 : (percentUsageVal > 0 && percentUsageVal < 1) ? 1 : percentUsageVal;
         NSString *subTitle = [NSString stringWithFormat: NSLocalizedString(@"StorageUsageInfo", @""), [NSString stringWithFormat:@"%d", (int)floor(percentUsageVal+0.5f)], [Util transformedHugeSizeValueDecimalIfNecessary:quota.quotaBytes]];
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"Packages", @"") titleColor:nil subTitleText:subTitle iconName:@"stroge_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
+        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"UsageInfo", "") titleColor:nil subTitleText:subTitle iconName:@"icon_settings_kullanim.png" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
+        cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+        cell.isAccessibilityElement = YES;
+        cell.accessibilityIdentifier = @"UsageInfoCell";
+        return cell;
+    }
+    else if(indexPath.row == 1) {
+//        NSLog(@"USAGE:%lld and %lld", quota.bytesUsed, quota.quotaBytes);
+//        double percentUsageVal = 100 * ((double)quota.bytesUsed/(double)quota.quotaBytes);
+//        percentUsageVal = isnan(percentUsageVal) ? 0 : (percentUsageVal > 0 && percentUsageVal < 1) ? 1 : percentUsageVal;
+//        NSString *subTitle = [NSString stringWithFormat: NSLocalizedString(@"StorageUsageInfo", @""), [NSString stringWithFormat:@"%d", (int)floor(percentUsageVal+0.5f)], [Util transformedHugeSizeValueDecimalIfNecessary:quota.quotaBytes]];
+        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"Packages", @"") titleColor:nil subTitleText:@"" iconName:@"stroge_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         cell.isAccessibilityElement = YES;
         cell.accessibilityIdentifier = @"usageCell";
         return cell;
-    } else if (indexPath.row == 1) {
+    } else if (indexPath.row == 2) {
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"AutomaticSynchronization", @"") titleColor:nil subTitleText:@"" iconName:@"syncing_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         cell.isAccessibilityElement = YES;
         cell.accessibilityIdentifier = @"SyncCell";
         return cell;
-    } else if (indexPath.row == 2) {
+    } else if (indexPath.row == 3) {
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"RecentActivityLinkerTitle", @"") titleColor:nil subTitleText:@"" iconName:@"icon_hp_sonislemler.png" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         cell.isAccessibilityElement = YES;
@@ -430,13 +442,13 @@
         //        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"PasswordSettingsTitle", @"") titleColor:nil subTitleText:@"" iconName:@"icon_set_pass" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         //        cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         //        return cell;
-    } else if (indexPath.row == 3) {
+    } else if (indexPath.row == 4) {
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"EmailTitle", @"") titleColor:nil subTitleText:@"" iconName:@"email_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         cell.isAccessibilityElement = YES;
         cell.accessibilityIdentifier = @"EmailCell";
         return cell;
-    } else if (indexPath.row == 4) {
+    } else if (indexPath.row == 5) {
         //        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"ExportFromDropbox", @"") titleColor:nil subTitleText:@"" iconName:@"icon_dbtasi" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"ExportFromDropbox", @"") titleColor:nil subTitleText:@"" iconName:@"nav_download_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
@@ -449,19 +461,28 @@
 //                cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
 //                return cell;
 //    }
-    else if (indexPath.row == 5) {
+    else if (indexPath.row == 6) {
         TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"FAQ", @"") titleColor:nil subTitleText:@"" iconName:@"help_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         cell.isAccessibilityElement = YES;
         cell.accessibilityIdentifier = @"FAQCell";
         return cell;
-    } else if (indexPath.row == 6) {
-        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"Mail Logs" titleColor:nil subTitleText:@"" iconName:@"help_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
+    }
+//    else if (indexPath.row == 6) {
+//        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:@"Mail Logs" titleColor:nil subTitleText:@"" iconName:@"help_icon" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
+//        cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+//        cell.isAccessibilityElement = YES;
+//        cell.accessibilityIdentifier = @"MailLogsCell";
+//        return cell;
+//    }
+     else if (indexPath.row == 7) {
+        TitleCell *cell = [[TitleCell alloc] initWithCellStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier titleText:NSLocalizedString(@"MenuLogout", "") titleColor:nil subTitleText:@"" iconName:@"icon_settings_cikis.png" hasSeparator:drawSeparator isLink:YES linkText:@"" cellHeight:cellHeight];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         cell.isAccessibilityElement = YES;
-        cell.accessibilityIdentifier = @"MailLogsCell";
+        cell.accessibilityIdentifier = @"LogoutCell";
         return cell;
-    } else {
+    }
+    else {
         return nil;
     }
 }
@@ -469,12 +490,15 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch ([indexPath row]) {
         case 0:
-            [self didTriggerStorage];
+            [self didTriggerUsageInfo];
             break;
         case 1:
-            [self didTriggerUpload];
+            [self didTriggerStorage];
             break;
         case 2:
+            [self didTriggerUpload];
+            break;
+        case 3:
             [self didTriggerRecentActivities];
             break;
             //        case 3:
@@ -483,20 +507,23 @@
             //        case 3:
             //            [self didTriggerPass];
             //            break;
-        case 3:
+        case 4:
             [self didTriggerEmail];
             break;
-        case 4:
+        case 5:
             [self didTriggerExportFromDropbox];
             break;
 //        case 5:
 //            [self didTriggerExportFromSocial];
 //            break;
-        case 5:
+        case 6:
             [self didTriggerHelp];
             break;
-        case 6:
-            [self triggerMailLog];
+//        case 6:
+//            [self triggerMailLog];
+//            break;
+        case 7:
+            [self didTriggerLogout];
             break;
         default:
             break;
@@ -578,6 +605,19 @@
                          darkArea.alpha = 0.85;
                      }];
 }
+    
+- (void) didTriggerUsageInfo {
+//    [self callCleanBeforeChange];
+    
+    [MPush hitTag:@"homepage"];
+    [MPush hitEvent:@"homepage"];
+    
+    HomeController *home = [[HomeController alloc] init];
+    home.nav = self.nav;
+    home.myDelegate = self;
+//    [self.nav setViewControllers:@[home] animated:NO];
+    [self.nav pushViewController:home animated:YES];
+}
 
 - (void) didTriggerStorage {
     [MPush hitTag:@"packages"];
@@ -648,6 +688,23 @@
     ChangePassController *changePass = [[ChangePassController alloc] init];
     changePass.nav = self.nav;
     [self.nav pushViewController:changePass animated:YES];
+}
+    
+- (void) didTriggerLogout {
+    CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"ButtonCancel", @"") withApproveTitle:NSLocalizedString(@"OK", @"") withMessage:NSLocalizedString(@"LogoutConfirmMessage", @"") withModalType:ModalTypeApprove];
+    confirm.delegate = self;
+    [APPDELEGATE showCustomConfirm:confirm];
+}
+    
+- (void) didRejectCustomAlert:(CustomConfirmView *) alertView {
+}
+    
+- (void) didApproveCustomAlert:(CustomConfirmView *) alertView {
+    [MPush hitTag:@"logged_out"];
+    [MPush hitEvent:@"logged_out"];
+    
+    APPDELEGATE.session.loggedOutManually = YES;
+    [APPDELEGATE triggerLogout];
 }
 
 - (BOOL)shouldAutorotate {

@@ -28,7 +28,7 @@
         self.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:18];
 
         iconView = [[UIImageView alloc] initWithFrame:CGRectMake(10, (self.frame.size.height - 24)/2, 24, 24)];
-        iconView.image = [UIImage imageNamed:@"icon_searchB.png"];
+        iconView.image = [UIImage imageNamed:@"icon_search.png"];
         [self addSubview:iconView];
     }
     return self;
