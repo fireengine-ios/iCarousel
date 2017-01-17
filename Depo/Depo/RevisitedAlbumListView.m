@@ -255,6 +255,7 @@
             }
             if([selectedAlbumList count] > 0) {
                 [self showAlbumFooterMenu];
+                albumTable.contentSize = CGSizeMake(albumTable.contentSize.width, albumTable.contentSize.height + footerActionMenu.frame.size.height);
                 [delegate revisitedAlbumListChangeTitleTo:[NSString stringWithFormat:NSLocalizedString(@"AlbumsSelectedTitle", @""), [selectedAlbumList count]]];
             } else {
                 [self hideAlbumFooterMenu];
