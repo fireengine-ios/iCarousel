@@ -21,6 +21,7 @@
     int tableUpdateCounter;
     int listOffset;
     BOOL isLoading;
+    BOOL tableContentExtended;
     NSIndexPath *selectedAlbumIndexPath;
     
 }
@@ -255,6 +256,10 @@
             }
             if([selectedAlbumList count] > 0) {
                 [self showAlbumFooterMenu];
+                if(!tableContentExtended) {
+                    albumTable.contentSize = CGSizeMake(albumTable.contentSize.width, albumTable.contentSize.height + footerActionMenu.frame.size.height);
+                    tableContentExtended = YES;
+                }
                 [delegate revisitedAlbumListChangeTitleTo:[NSString stringWithFormat:NSLocalizedString(@"AlbumsSelectedTitle", @""), [selectedAlbumList count]]];
             } else {
                 [self hideAlbumFooterMenu];
@@ -285,6 +290,8 @@
                 [delegate revisitedAlbumListChangeTitleTo:[NSString stringWithFormat:NSLocalizedString(@"AlbumsSelectedTitle", @""), [selectedAlbumList count]]];
             } else {
                 [self hideAlbumFooterMenu];
+                albumTable.contentSize = CGSizeMake(albumTable.contentSize.width, albumTable.contentSize.height - footerActionMenu.frame.size.height);
+                tableContentExtended = NO;
                 [delegate revisitedAlbumListChangeTitleTo:NSLocalizedString(@"SelectAlbumsTitle", @"")];
             }
         }
