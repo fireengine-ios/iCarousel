@@ -50,8 +50,8 @@
     if (self) {
         self.title = NSLocalizedString(@"SettingsTitle", @"");
         self.view.backgroundColor = [Util UIColorForHexColor:@"F1F2F6"];
-        //[self drawProfileInfoArea];
-        //[self drawSettingsCategories];
+        [self drawProfileInfoArea];
+        [self drawSettingsCategories];
         //[self drawImageOptionsArea];
         
         quotaInfoDao = [[QuotaInfoDao alloc] init];
@@ -62,6 +62,7 @@
         [quotaInfoDao requestQuotaInfo];
         [self showLoading];
         
+        
         uploadDao = [[ProfilePhotoUploadDao alloc] init];
         uploadDao.delegate = self;
         uploadDao.successMethod = @selector(photoUploadSuccess);
@@ -69,6 +70,7 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(retouchMsisdn) name:MSISDN_CHANGED_NOTIFICATION object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(emailChanged) name:EMAIL_CHANGED_NOTIFICATION object:nil];
+       
     }
     
     return self;
@@ -79,11 +81,14 @@
 - (void) quotaSuccessCallback:(Quota *) _quota {
     [self hideLoading];
     quota = [[Quota alloc] initWithQuota:_quota];
-    [self drawProfileInfoArea];
-    [self drawSettingsCategories];
+//    [self drawProfileInfoArea];
+//    [self drawSettingsCategories];
+    [pageContentTable reloadData];
 }
 
 - (void) quotaFailCallback:(NSString *) errorMessage {
+    [self hideLoading];
+    [self showErrorAlertWithMessage:errorMessage];
 }
 
 
@@ -217,7 +222,9 @@
 - (void) drawSettingsCategories {
     CGSize size = self.view.frame.size;
     int yOffset = self.topIndex + self.view.frame.size.width/2;
-    pageContentTable = [[UITableView alloc] initWithFrame:CGRectMake(0, yOffset, size.width, size.height- yOffset)
+//    pageContentTable = [[UITableView alloc] initWithFrame:CGRectMake(0, yOffset, size.width, size.height- yOffset)
+//                                                    style:UITableViewStyleGrouped];
+    pageContentTable = [[UITableView alloc] initWithFrame:CGRectMake(0, yOffset, size.width, size.height- yOffset - 64)
                                                     style:UITableViewStyleGrouped];
     pageContentTable.delegate = self;
     pageContentTable.dataSource = self;
