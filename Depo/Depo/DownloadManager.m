@@ -182,6 +182,63 @@
     });
 }
 
+//-(void)saveVideoFileToCameraRoll:(MetaFile *)file  withAlbum:(PhotoAlbum*) album{
+//    NSURL *sourceURL = [NSURL URLWithString:file.tempDownloadUrl];
+//    NSString *contentType = @"mp4";
+//    NSArray *contentTypeComponents = [file.name componentsSeparatedByString:@"."];
+//    if(contentTypeComponents != nil && [contentTypeComponents count] > 0) {
+//        contentType = [contentTypeComponents objectAtIndex:[contentTypeComponents count]-1];
+//    }
+//    
+//    NSURLSessionTask *downloadTask = [[NSURLSession sharedSession] downloadTaskWithURL:sourceURL completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
+//        if (error) {
+//            NSMutableDictionary* details = [NSMutableDictionary dictionary];
+//            [details setValue:@"Couldn't download video from Server" forKey:NSLocalizedDescriptionKey];
+//            NSError *error = [NSError errorWithDomain:@"Download Video" code:400 userInfo:details];
+//            [self didFinishSavingFileToAlbum:file error:error withAlbum:album];
+//            // [self showErrorAlertWithMessage:NSLocalizedString(@"DownloadVideoFailMessage", @"")];
+//        }
+//        else {
+//            NSURL *documentsURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory
+//                                                                          inDomains:NSUserDomainMask] firstObject];
+//            NSURL *tempURL = [documentsURL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", [sourceURL lastPathComponent], contentType]];
+//            if (location) {
+//                //__weak DownloadManager *weakSelf = self;
+//                //__block NSString *localizedAssetIdentifier = @"";
+//                if ([[NSFileManager defaultManager] moveItemAtURL:location toURL:tempURL error:nil]) {
+//                    dispatch_async(dispatch_get_main_queue(), ^{
+//                        [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
+//                            PHAssetChangeRequest *request = [PHAssetChangeRequest creationRequestForAssetFromVideoAtFileURL:tempURL];
+//                           /* PHObjectPlaceholder *assetPlaceHolder = [request placeholderForCreatedAsset];
+//                            PHAssetCollectionChangeRequest *albumChangeRequest = [PHAssetCollectionChangeRequest changeRequestForAssetCollection:albumAssetCollection];
+//                            
+//                            localizedAssetIdentifier = assetPlaceHolder.localIdentifier; */
+//                        } completionHandler:^(BOOL success, NSError * _Nullable error) {
+//                            if (error) {
+//                                NSLog(@"Save Image To Album Error: %@", error.description);
+//                            }else {
+//                               // [weakSelf saveFileToCameraRoll:file localizedIdentifier:localizedAssetIdentifier];
+//                                NSLog(@"Save Image To Album Success uuid:%@", file.uuid);
+//                            }
+//                            [self didFinishSavingVideoFileToAlbum:file videoPath:tempURL.path  withAlbum:album error:error];
+//                        }];
+//                    });
+//                }
+//            }
+//            else {
+//                [self didFinishSavingVideoFileToAlbum:file videoPath:tempURL.path withAlbum:album error:error];
+//                NSMutableDictionary* details = [NSMutableDictionary dictionary];
+//                [details setValue:@"Couldn't find downloaded video location" forKey:NSLocalizedDescriptionKey];
+//                NSError *error = [NSError errorWithDomain:@"Video Location" code:400 userInfo:details];
+//                [self didFinishSavingFileToAlbum:file error:error withAlbum:album];
+//                
+//                //[self showErrorAlertWithMessage:NSLocalizedString(@"DownloadVideoFailMessage", @"")];
+//            }
+//        }
+//    }];
+//    [downloadTask resume];
+//}
+
 -(void)saveVideoFileToCameraRoll:(MetaFile *)file  withAlbum:(PhotoAlbum*) album{
     NSURL *sourceURL = [NSURL URLWithString:file.tempDownloadUrl];
     NSString *contentType = @"mp4";
@@ -205,32 +262,36 @@
             if (location) {
                 //__weak DownloadManager *weakSelf = self;
                 //__block NSString *localizedAssetIdentifier = @"";
-                if ([[NSFileManager defaultManager] moveItemAtURL:location toURL:tempURL error:nil]) {
+                NSError *e;
+                if ([[NSFileManager defaultManager] moveItemAtURL:location toURL:tempURL error:&e]) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
                             PHAssetChangeRequest *request = [PHAssetChangeRequest creationRequestForAssetFromVideoAtFileURL:tempURL];
-                           /* PHObjectPlaceholder *assetPlaceHolder = [request placeholderForCreatedAsset];
-                            PHAssetCollectionChangeRequest *albumChangeRequest = [PHAssetCollectionChangeRequest changeRequestForAssetCollection:albumAssetCollection];
-                            
-                            localizedAssetIdentifier = assetPlaceHolder.localIdentifier; */
-                        } completionHandler:^(BOOL success, NSError * _Nullable error) {
-                            if (error) {
-                                NSLog(@"Save Image To Album Error: %@", error.description);
+                            /* PHObjectPlaceholder *assetPlaceHolder = [request placeholderForCreatedAsset];
+                             PHAssetCollectionChangeRequest *albumChangeRequest = [PHAssetCollectionChangeRequest changeRequestForAssetCollection:albumAssetCollection];
+                             
+                             localizedAssetIdentifier = assetPlaceHolder.localIdentifier; */
+                        } completionHandler:^(BOOL success, NSError * _Nullable er) {
+                            if (er) {
+                                NSLog(@"Save Video To Album Error: %@", er.description);
                             }else {
-                               // [weakSelf saveFileToCameraRoll:file localizedIdentifier:localizedAssetIdentifier];
-                                NSLog(@"Save Image To Album Success uuid:%@", file.uuid);
+                                // [weakSelf saveFileToCameraRoll:file localizedIdentifier:localizedAssetIdentifier];
+                                NSLog(@"Save Video To Album Success uuid:%@", file.uuid);
                             }
-                            [self didFinishSavingVideoFileToAlbum:file videoPath:tempURL.path  withAlbum:album error:error];
+                            [self didFinishSavingVideoFileToAlbum:file videoPath:tempURL.path  withAlbum:album error:er];
                         }];
                     });
+                }
+                else {
+                    [self didFinishSavingVideoFileToAlbum:file videoPath:tempURL.path withAlbum:album error:e];
                 }
             }
             else {
                 [self didFinishSavingVideoFileToAlbum:file videoPath:tempURL.path withAlbum:album error:error];
-                NSMutableDictionary* details = [NSMutableDictionary dictionary];
-                [details setValue:@"Couldn't find downloaded video location" forKey:NSLocalizedDescriptionKey];
-                NSError *error = [NSError errorWithDomain:@"Video Location" code:400 userInfo:details];
-                [self didFinishSavingFileToAlbum:file error:error withAlbum:album];
+                //                NSMutableDictionary* details = [NSMutableDictionary dictionary];
+                //                [details setValue:@"Couldn't find downloaded video location" forKey:NSLocalizedDescriptionKey];
+                //                NSError *error = [NSError errorWithDomain:@"Video Location" code:400 userInfo:details];
+                //                [self didFinishSavingFileToAlbum:file error:error withAlbum:album];
                 
                 //[self showErrorAlertWithMessage:NSLocalizedString(@"DownloadVideoFailMessage", @"")];
             }
