@@ -39,6 +39,7 @@
 @property (nonatomic) BOOL menuOpen;
 @property (nonatomic) BOOL menuLocked;
 @property (nonatomic) BOOL popupCheckDone;
+@property (nonatomic) BOOL isVideosAlbum;
 
 - (void) showBaseLoading;
 - (void) hideBaseLoading;

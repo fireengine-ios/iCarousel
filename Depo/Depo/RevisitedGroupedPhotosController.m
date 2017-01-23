@@ -182,6 +182,7 @@
 }
 
 - (void) revisitedAlbumListDownloadAlbums:(NSArray *)albums {
+    APPDELEGATE.base.isVideosAlbum = NO;
     [APPDELEGATE.base createAlbums:albums
                         loadingMessage:NSLocalizedString(@"DownloadAlbumsProgressMessage", @"")
                         successMessage:NSLocalizedString(@"DownloadAlbumsSuccessMessage", @"")
@@ -284,6 +285,7 @@
     NSString *loadingMessage = NSLocalizedString(@"DownloadImagesProgressMessage", @"");
     NSString *successMessage = NSLocalizedString(@"DownloadImagesSuccessMessage", @"");
     NSString *failMessage = NSLocalizedString(@"DownloadImagesFailMessage", @"");
+    APPDELEGATE.base.isVideosAlbum = NO;
     [APPDELEGATE.base downloadFilesToCameraRoll:selectedFiles
                                  loadingMessage:loadingMessage
                                  successMessage:successMessage

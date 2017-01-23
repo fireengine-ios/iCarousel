@@ -599,6 +599,7 @@
     NSString *loadingMessage = NSLocalizedString(@"DownloadImagesProgressMessage", @"");
     NSString *failMessage = NSLocalizedString(@"DownloadImagesFailMessage", @"");
     NSString *successMessage = NSLocalizedString(@"DownloadImagesSuccessMessage", @"");
+    APPDELEGATE.base.isVideosAlbum = self.album.isReadOnly;
     [APPDELEGATE.base downloadFilesToCameraRoll:[self getMetaFilesOfSelectedFiles]
                                  loadingMessage:loadingMessage
                                  successMessage:successMessage

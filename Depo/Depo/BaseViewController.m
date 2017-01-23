@@ -1128,10 +1128,18 @@
 
 
 
+//-(void)hideProcessView {
+//     NSLog(@"hideProcessView");
+//    downloadingProcessView.hidden = true;
+//    [self immediateShowAddButton];
+//}
+
 -(void)hideProcessView {
-     NSLog(@"hideProcessView");
+    NSLog(@"hideProcessView");
     downloadingProcessView.hidden = true;
-    [self immediateShowAddButton];
+    if(!self.isVideosAlbum) {
+        [self immediateShowAddButton];
+    }
 }
 
 -(void)removeProgressViewWithMessage:(NSString *)message isSuccess:(BOOL)success {
