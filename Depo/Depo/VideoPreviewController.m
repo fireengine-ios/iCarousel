@@ -240,7 +240,7 @@
 
 - (void) moreMenuDidSelectDownloadImage {
     [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DownloadVideoProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DownloadVideoSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DownloadVideoFailMessage", @"")];
-
+    
     NSURL *sourceURL = [NSURL URLWithString:self.file.tempDownloadUrl];
     
     NSString *contentType = @"mp4";
@@ -258,7 +258,19 @@
             NSURL *tempURL = [documentsURL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", [sourceURL lastPathComponent], contentType]];
             if (location) {
                 if ([[NSFileManager defaultManager] moveItemAtURL:location toURL:tempURL error:nil]) {
-                    UISaveVideoAtPathToSavedPhotosAlbum(tempURL.path, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+                    if(UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(tempURL.path)) {
+                        UISaveVideoAtPathToSavedPhotosAlbum(tempURL.path, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+                    }
+                    else {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self proceedFailureForProgressView];
+                        });
+                    }
+                }
+                else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self proceedFailureForProgressView];
+                    });
                 }
             }
             else {
