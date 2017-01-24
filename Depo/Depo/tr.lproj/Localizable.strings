@@ -525,7 +525,7 @@
 "VideoLoadErrorTitle"="Video Yüklenemedi";
 "VideoLoadErrorDescription"="Bu Video içeriğinin yüklenmesi zaman almaktadır. Lütfen başka bir Video içeriği deneyin.";
 
-"OnKatDepoTitle"="DEPONUZUN KAPASİTESİ";
+"OnKatDepoTitle"="lifebox'ınızın Kapasitesi";
 "OnKatDepoSubTitle"="KATINA ÇIKTI";
 "OnKatDepoExplain"="Yeni saklama alanınız ile daha çok fotoğraf ve video saklayabilirsiniz.";
 "Okay"="Tamam";
