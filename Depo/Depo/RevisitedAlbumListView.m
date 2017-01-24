@@ -146,6 +146,7 @@
 }
 
 - (void) setToUnselectible {
+    tableContentExtended = NO;
     isSelectible = NO;
     [self createRefreshControl];
 //    [refreshControl setEnabled:YES];
