@@ -18,6 +18,7 @@
 @synthesize delegate;
 @synthesize album;
 @synthesize nameField;
+@synthesize doneButton;
 
 - (id) initWithAlbum:(PhotoAlbum *) _album {
     if(self = [super init]) {
@@ -33,7 +34,7 @@
         UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithCustomView:cancelButton];
         self.navigationItem.leftBarButtonItem = cancelItem;
         
-        CustomButton *doneButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 60, 20) withImageName:nil withTitle:NSLocalizedString(@"DoneButtonTitle", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[UIColor whiteColor]];
+        doneButton = [[CustomButton alloc] initWithFrame:CGRectMake(0, 0, 60, 20) withImageName:nil withTitle:NSLocalizedString(@"DoneButtonTitle", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[UIColor whiteColor]];
         doneButton.isAccessibilityElement = YES;
         doneButton.accessibilityIdentifier = @"doneButtonAlbumDetail";
         [doneButton addTarget:self action:@selector(triggerDone) forControlEvents:UIControlEventTouchUpInside];
@@ -53,6 +54,7 @@
         
         nameField = [[GeneralTextField alloc] initWithFrame:CGRectMake((self.view.frame.size.width - rowWidth)/2, titleLabel.frame.origin.y + titleLabel.frame.size.height + 5, rowWidth, 43) withPlaceholder:NSLocalizedString(@"AlbumNamePlaceholder", @"")];
         nameField.delegate = self;
+        [nameField addTarget:self action:@selector(nameFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
         nameField.text = self.album.label;
         if(self.album.isReadOnly) {
             nameField.enabled = NO;
@@ -145,6 +147,15 @@
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {
     [nameField resignFirstResponder];
     return YES;
+}
+
+- (void) nameFieldDidChange:(UITextField *) textField {
+    if([textField.text isEqualToString:@""]) {
+        [doneButton setEnabled:NO];
+    }
+    else {
+        [doneButton setEnabled:YES];
+    }
 }
 
 - (void)viewDidLoad {

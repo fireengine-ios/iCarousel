@@ -19,6 +19,7 @@
 @property (nonatomic, weak) id<AlbumDetailDelegate> delegate;
 @property (nonatomic, strong) PhotoAlbum *album;
 @property (nonatomic, strong) GeneralTextField *nameField;
+@property (nonatomic, strong) CustomButton *doneButton;
 
 - (id) initWithAlbum:(PhotoAlbum *) _album;
 
