@@ -148,6 +148,7 @@
 }
 
 + (NSArray *) readSyncHashLocally {
+    IGLog(@"SyncUtil readSyncHashLocally");
     NSArray *result = [[NSArray alloc] init];
     NSString *baseUrlConstant = [SyncUtil readBaseUrlConstant] != nil ? [SyncUtil readBaseUrlConstant] : @"";
     NSData *arrData = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:SYNCED_LOCAL_HASHES_KEY, baseUrlConstant]];
@@ -159,6 +160,7 @@
 }
 
 + (BOOL) localHashListContainsHash:(NSString *) hash {
+    IGLog(@"SyncUtil localHashListContainsHash");
     return [[SyncUtil readSyncHashLocally] containsObject:hash];
 }
 

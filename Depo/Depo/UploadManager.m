@@ -155,7 +155,9 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 
 - (void) continueAssetUpload {
     if(self.uploadRef.autoSyncFlag) {
+        IGLog(@"UploadManager continueAssetUpload");
         if([SyncUtil localHashListContainsHash:self.uploadRef.localHash]){
+            IGLog(@"UploadManager continueAssetUpload SyncUtil localHashListContainsHash check returns YES");
             self.uploadRef.hasFinished = YES;
             [delegate uploadManagerDidFailUploadingForAsset:self.uploadRef.assetUrl];
             [queueDelegate uploadManager:self didFinishUploadingWithSuccess:NO];

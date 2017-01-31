@@ -100,6 +100,12 @@
 //                    [self requestRadius];
 //                }
             }
+        } else {
+            alertView = [[CustomAlertView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) withTitle:NSLocalizedString(@"Error", @"") withMessage:NSLocalizedString(@"ConnectionErrorWarning", @"") withModalType:ModalTypeError];
+            alertView.delegate = self;
+            [alertView reorientateModalView:self.view.center];
+            [self.view addSubview:alertView];
+            [self.view bringSubviewToFront:alertView];
         }
     } else if([SharedUtil readSharedBaseUrl] == nil) {
         [self requestBaseUrl];
