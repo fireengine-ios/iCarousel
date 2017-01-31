@@ -261,6 +261,7 @@
         [self showLoading];
         __weak ImagePreviewController *weakSelf = self;
         [imgView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:imgUrlStr]] placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+            [weakSelf mirrorRotation:[[UIApplication sharedApplication] statusBarOrientation]];
             [weakSelf hideLoading];
         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
             [weakSelf hideLoading];
@@ -272,11 +273,20 @@
          */
         [mainScroll addSubview:imgView];
         
+        //
         footer = [[FileDetailFooter alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60)withPrintEnabled:printEnabledFlag withAlbum:self.album];
         footer.delegate = self;
         [self.view addSubview:footer];
         
+        //
+        CustomButton *customBackButton = [[CustomButton alloc] initWithFrame:CGRectMake(10, 0, 20, 34) withImageName:@"white_left_arrow.png"];
+        [customBackButton addTarget:self action:@selector(triggerDismiss) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:customBackButton];
+        self.navigationItem.leftBarButtonItem = backButton;
+        
         [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(orientationChanged:)    name:UIDeviceOrientationDidChangeNotification  object:nil];
+        
+        NSLog(@"init self view height -> %f", self.view.frame.size.height);
         
         /* UISwipeGestureRecognizer * swipeleft=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeLeft:)];
          swipeleft.direction=UISwipeGestureRecognizerDirectionLeft;
@@ -334,6 +344,7 @@
     [self showLoading];
     __weak ImagePreviewController *weakSelf = self;
     [imgView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:imgUrlStr]] placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        [weakSelf mirrorRotation:[[UIApplication sharedApplication] statusBarOrientation]];
         [weakSelf hideLoading];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
         [weakSelf hideLoading];
@@ -415,9 +426,16 @@
     [self showErrorAlertWithMessage:errorMessage];
 }
 
-
+// MARK: UIScrollViewDelegate Functions
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
     return imgView;
+}
+
+- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
+    float yOffset = MAX(0, (mainScroll.frame.size.height - imgView.frame.size.height) / 2);
+    float xOffset = MAX(0, (mainScroll.frame.size.width - imgView.frame.size.width) / 2);
+    
+    imgView.frame = CGRectMake(xOffset, yOffset, imgView.frame.size.width, imgView.frame.size.height);
 }
 
 - (void) fileDetailFooterDidTriggerDelete {
@@ -464,9 +482,9 @@
 
 - (void) moreClicked {
     NSArray* list = @[[NSNumber numberWithInt:MoreMenuTypeImageDetail], [NSNumber numberWithInt:MoreMenuTypeShare], self.file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDownloadImage], [NSNumber numberWithInt:MoreMenuTypeDelete]] ;
-        if (self.album) {
-            list = @[[NSNumber numberWithInt:MoreMenuTypeImageDetail], [NSNumber numberWithInt:MoreMenuTypeShare], self.file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDownloadImage], [NSNumber numberWithInt:MoreMenuTypeRemoveFromAlbum], [NSNumber numberWithInt:MoreMenuTypeSetCoverPhoto]] ;
-        }
+    if (self.album) {
+        list = @[[NSNumber numberWithInt:MoreMenuTypeImageDetail], [NSNumber numberWithInt:MoreMenuTypeShare], self.file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDownloadImage], [NSNumber numberWithInt:MoreMenuTypeRemoveFromAlbum], [NSNumber numberWithInt:MoreMenuTypeSetCoverPhoto]] ;
+    }
     [self presentMoreMenuWithList:list withFileFolder:self.file];
 }
 
@@ -652,6 +670,9 @@
     [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0], NSForegroundColorAttributeName, nil]];
     
     [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys: [UIColor whiteColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"TurkcellSaturaDem" size:18], NSFontAttributeName, nil]];
+    
+    // update ui
+    [self mirrorRotation:[[UIApplication sharedApplication] statusBarOrientation]];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
@@ -671,24 +692,20 @@
     UIBarButtonItem *moreItem = [[UIBarButtonItem alloc] initWithCustomView:moreButton];
     self.navigationItem.rightBarButtonItem = moreItem;
     
-//    if(![AppUtil readDoNotShowAgainFlagForKey:TUTORIAL_DETAIL_KEY] && !APPDELEGATE.session.photoDetailTipShown) {
-//        UIWindow *window = APPDELEGATE.window;
-//        TutorialView *tutorialView = [[TutorialView alloc] initWithFrame:CGRectMake(0, 0, window.frame.size.width, window.frame.size.height) withBgImageName:@"img_baski_2.jpg" withTitle:@"" withKey:TUTORIAL_DETAIL_KEY doNotShowFlag:NO];
-//        [window addSubview:tutorialView];
-//        APPDELEGATE.session.photoDetailTipShown = YES;
-//        [AppUtil writeDoNotShowAgainFlagForKey:TUTORIAL_DETAIL_KEY];
-//    }
+    // TODO ?
+    //    if(![AppUtil readDoNotShowAgainFlagForKey:TUTORIAL_DETAIL_KEY] && !APPDELEGATE.session.photoDetailTipShown) {
+    //        UIWindow *window = APPDELEGATE.window;
+    //        TutorialView *tutorialView = [[TutorialView alloc] initWithFrame:CGRectMake(0, 0, window.frame.size.width, window.frame.size.height) withBgImageName:@"img_baski_2.jpg" withTitle:@"" withKey:TUTORIAL_DETAIL_KEY doNotShowFlag:NO];
+    //        [window addSubview:tutorialView];
+    //        APPDELEGATE.session.photoDetailTipShown = YES;
+    //        [AppUtil writeDoNotShowAgainFlagForKey:TUTORIAL_DETAIL_KEY];
+    //    }
 }
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    CustomButton *customBackButton = [[CustomButton alloc] initWithFrame:CGRectMake(10, 0, 20, 34) withImageName:@"white_left_arrow.png"];
-    [customBackButton addTarget:self action:@selector(triggerDismiss) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:customBackButton];
-    self.navigationItem.leftBarButtonItem = backButton;
-    
-    [self mirrorRotation:[[UIApplication sharedApplication] statusBarOrientation]];
+    NSLog(@"viewDidAppear self view height -> %f", self.view.frame.size.height);
 }
 
 - (void) triggerDismiss {
@@ -752,17 +769,39 @@
 }
 
 - (void) mirrorRotation:(UIInterfaceOrientation) orientation {
-    if(UIInterfaceOrientationIsLandscape(orientation)) {
-        mainScroll.frame = CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - 60);
-        imgView.frame = CGRectMake(0, 0, mainScroll.frame.size.width, mainScroll.frame.size.height);
-        footer.frame = CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60);
-        [footer updateInnerViews];
-    } else {
-        mainScroll.frame = CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - 60);
-        imgView.frame = CGRectMake(0, 0, mainScroll.frame.size.width, mainScroll.frame.size.height);
-        footer.frame = CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60);
-        [footer updateInnerViews];
+    // reset zoom when orientation changed
+    mainScroll.zoomScale = 1;
+    
+    // update mainScroll frame
+    mainScroll.frame = CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - 60);
+    
+    // calculate imgView frame
+    CGRect tmp = CGRectMake(0, 0, mainScroll.frame.size.width, self.view.frame.size.height - 60);
+    UIImage *image = imgView.image;
+    
+    if (image != nil) {
+        // calculate aspect ratios
+        float ratioImgV = mainScroll.frame.size.width / mainScroll.frame.size.height;
+        float ratioImg = image.size.width / image.size.height;
+        
+        if (ratioImgV > ratioImg) {
+            // imageView is wider
+            tmp.size.width = mainScroll.frame.size.height * ratioImg;
+        } else {
+            // image is wider
+            tmp.size.height = mainScroll.frame.size.width / ratioImg;
+        }
     }
+    
+    // update imgView
+    imgView.frame = tmp;
+    
+    // update footer
+    footer.frame = CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60);
+    [footer updateInnerViews];
+    
+    // set imageview offset
+    [self scrollViewDidZoom:mainScroll];
 }
 
 - (void)didReceiveMemoryWarning
