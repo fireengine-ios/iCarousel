@@ -255,11 +255,15 @@
 }
 
 - (void) deleteSuccessCallback {
+    IGLog(@"RevisitedGroupedPhotoView deleteSuccessCallback");
+    [progress hide:YES];
     [delegate revisitedGroupedPhotoDidFinishDeletingOrMoving];
     //    [self proceedSuccessForProgressViewWithAddButtonKey:@"PhotoTab"];
 }
 
 - (void) deleteFailCallback:(NSString *) errorMessage {
+    NSString *logMessage = [NSString stringWithFormat:@"RevisitedGroupedPhotoView deleteFailCallback with error: %@", errorMessage];
+    IGLog(logMessage);
     [progress hide:YES];
     //    [self proceedFailureForProgressViewWithAddButtonKey:@"PhotoTab"];
     [delegate revisitedGroupedPhotoDidFailDeletingWithError:errorMessage];
@@ -556,6 +560,7 @@
 }
 
 - (void) shouldContinueDelete {
+    IGLog(@"RevisitedGroupedPhotoView shouldContinueDelete called");
     BOOL anyInAlbum = NO;
     for(id row in self.files) {
         if([row isKindOfClass:[MetaFile class]]) {
@@ -573,6 +578,7 @@
         confirm.delegate = self;
         [APPDELEGATE showCustomConfirm:confirm];
     } else {
+        IGLog(@"RevisitedGroupedPhotoView shouldContinueDelete deleteDao requestDeleteFiles called");
         [deleteDao requestDeleteFiles:selectedFileList];
         [self bringSubviewToFront:progress];
         [progress show:YES];
@@ -584,7 +590,9 @@
 }
 
 - (void) footerActionMenuDidSelectDelete:(FooterActionsMenuView *) menu {
+    IGLog(@"RevisitedGroupedPhotoView footerActionMenuDidSelectDelete called");
     if([CacheUtil showConfirmDeletePageFlag]) {
+        IGLog(@"RevisitedGroupedPhotoView footerActionMenuDidSelectDelete CacheUtil showConfirmDeletePageFlag returns YES");
         BOOL anyInAlbum = NO;
         for(id row in self.files) {
             if([row isKindOfClass:[MetaFile class]]) {
@@ -602,6 +610,7 @@
             confirm.delegate = self;
             [APPDELEGATE showCustomConfirm:confirm];
         } else {
+            IGLog(@"RevisitedGroupedPhotoView footerActionMenuDidSelectDelete deleteDao requestDeleteFiles called");
             [deleteDao requestDeleteFiles:selectedFileList];
             [self bringSubviewToFront:progress];
             [progress show:YES];
@@ -661,6 +670,7 @@
 }
 
 - (void) didApproveCustomAlert:(CustomConfirmView *) alertView {
+    IGLog(@"RevisitedGroupedPhotoView didApproveCustomAlert deleteDao requestDeleteFiles called");
     [deleteDao requestDeleteFiles:selectedFileList];
     [self bringSubviewToFront:progress];
     [progress show:YES];
