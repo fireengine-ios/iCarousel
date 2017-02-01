@@ -16,6 +16,7 @@
 #import "TutorialView.h"
 
 @interface ImagePreviewController ()
+@property (nonatomic, assign) UIInterfaceOrientation previousOrientation;
 
 @end
 
@@ -107,6 +108,7 @@
     [self showLoading];
     __weak ImagePreviewController *weakSelf = self;
     [imgView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:imgUrlStr]] placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        [self resizeScrollView];
         [weakSelf hideLoading];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
         [weakSelf hideLoading];
@@ -261,7 +263,7 @@
         [self showLoading];
         __weak ImagePreviewController *weakSelf = self;
         [imgView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:imgUrlStr]] placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-            [weakSelf mirrorRotation:[[UIApplication sharedApplication] statusBarOrientation]];
+            [self resizeScrollView];
             [weakSelf hideLoading];
         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
             [weakSelf hideLoading];
@@ -277,16 +279,6 @@
         footer = [[FileDetailFooter alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60)withPrintEnabled:printEnabledFlag withAlbum:self.album];
         footer.delegate = self;
         [self.view addSubview:footer];
-        
-        //
-        CustomButton *customBackButton = [[CustomButton alloc] initWithFrame:CGRectMake(10, 0, 20, 34) withImageName:@"white_left_arrow.png"];
-        [customBackButton addTarget:self action:@selector(triggerDismiss) forControlEvents:UIControlEventTouchUpInside];
-        UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:customBackButton];
-        self.navigationItem.leftBarButtonItem = backButton;
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(orientationChanged:)    name:UIDeviceOrientationDidChangeNotification  object:nil];
-        
-        NSLog(@"init self view height -> %f", self.view.frame.size.height);
         
         /* UISwipeGestureRecognizer * swipeleft=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeLeft:)];
          swipeleft.direction=UISwipeGestureRecognizerDirectionLeft;
@@ -671,6 +663,14 @@
     
     [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys: [UIColor whiteColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"TurkcellSaturaDem" size:18], NSFontAttributeName, nil]];
     
+    // add back button
+    CustomButton *customBackButton = [[CustomButton alloc] initWithFrame:CGRectMake(10, 0, 20, 34) withImageName:@"white_left_arrow.png"];
+    [customBackButton addTarget:self action:@selector(triggerDismiss) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:customBackButton];
+    self.navigationItem.leftBarButtonItem = backButton;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(orientationChanged:)    name:UIDeviceOrientationDidChangeNotification  object:nil];
+    
     // update ui
     [self mirrorRotation:[[UIApplication sharedApplication] statusBarOrientation]];
 }
@@ -769,9 +769,19 @@
 }
 
 - (void) mirrorRotation:(UIInterfaceOrientation) orientation {
+    
+    if (orientation == self.previousOrientation) {
+        return;
+    }
+    self.previousOrientation = orientation;
+    
     // reset zoom when orientation changed
     mainScroll.zoomScale = 1;
     
+    [self resizeScrollView];
+}
+
+-(void)resizeScrollView {
     // update mainScroll frame
     mainScroll.frame = CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - 60);
     
