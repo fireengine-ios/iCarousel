@@ -386,7 +386,7 @@
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"IMAGE_SCROLL_RELOAD_DATA_AFTER_WARNING" object:self userInfo:userInfo];
                 }
             }
-            // Bu bölümde 'indexPathForItemAtPoint' fonksiyonu zaman zaman 'index out of bound' hatası verebiliyor. Senaryo oluşturulamadı. Geçici düzeltme olarak bu fonksiyon scroll sırasında sürekli çağrıldığı için arada bir bu hataya düşmesinin kulanıcıyı etkilememesi beklenmektir. Bu hata iOS 8 cihazlarda olmaktadır.
+            // Bu bölümde 'indexPathForItemAtPoint' fonksiyonu zaman zaman 'index out of bound' hatası verebiliyor. Bu hata iOS 8 cihazlarda olmaktadır.
             @try {
                 NSIndexPath *visibleIndexPath = [collView indexPathForItemAtPoint:CGPointMake(30, currentOffset)];
                 if(visibleIndexPath && (self.groups.count > visibleIndexPath.section)) {
