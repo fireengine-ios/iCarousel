@@ -386,21 +386,27 @@
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"IMAGE_SCROLL_RELOAD_DATA_AFTER_WARNING" object:self userInfo:userInfo];
                 }
             }
-            NSIndexPath *visibleIndexPath = [collView indexPathForItemAtPoint:CGPointMake(30, currentOffset)];
-            if(visibleIndexPath && (self.groups.count > visibleIndexPath.section)) {
-                FileInfoGroup *visibleGroup = [self.groups objectAtIndex:visibleIndexPath.section];
-                if([visibleGroup.customTitle isEqualToString:NSLocalizedString(@"ImageGroupTypeInProgress", @"")]) {
-                    sectionIndicator.text = @"";
-                    [self hideVerticalIndicator];
-                } else {
-                    [self showVerticalIndicator];
-                    sectionIndicator.text = visibleGroup.customTitle;
+            // Bu bölümde 'indexPathForItemAtPoint' fonksiyonu zaman zaman 'index out of bound' hatası verebiliyor. Senaryo oluşturulamadı. Geçici düzeltme olarak bu fonksiyon scroll sırasında sürekli çağrıldığı için arada bir bu hataya düşmesinin kulanıcıyı etkilememesi beklenmektir. Bu hata iOS 8 cihazlarda olmaktadır.
+            @try {
+                NSIndexPath *visibleIndexPath = [collView indexPathForItemAtPoint:CGPointMake(30, currentOffset)];
+                if(visibleIndexPath && (self.groups.count > visibleIndexPath.section)) {
+                    FileInfoGroup *visibleGroup = [self.groups objectAtIndex:visibleIndexPath.section];
+                    if([visibleGroup.customTitle isEqualToString:NSLocalizedString(@"ImageGroupTypeInProgress", @"")]) {
+                        sectionIndicator.text = @"";
+                        [self hideVerticalIndicator];
+                    } else {
+                        [self showVerticalIndicator];
+                        sectionIndicator.text = visibleGroup.customTitle;
+                    }
                 }
+            } @catch (NSException *exception) {
+                NSString *log = [NSString stringWithFormat:@"Error when generating section indicator: Info: Groups count=%lu, exception=%@", (unsigned long)self.groups.count, exception];
+                IGLog(log);
             }
         }
 
     }
-    }
+}
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     NSIndexPath *visibleIndexPath = [collView indexPathForItemAtPoint:CGPointMake(30, collView.contentOffset.y)];
