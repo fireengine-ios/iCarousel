@@ -436,7 +436,12 @@
         [self hideLoading];
         refreshActive = NO;
     }
-    if([resultingStatus isEqualToString:@"RESTORED"]) {
+    
+    if (![resultingStatus isKindOfClass:[NSString class]]) {
+        resultingStatus = [NSString stringWithFormat:@"%@", resultingStatus];
+    }
+    
+    if(resultingStatus != nil && [resultingStatus isEqualToString:@"RESTORED"]) {
         if(purchaseView) {
             [purchaseView removeFromSuperview];
         }
