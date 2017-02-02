@@ -786,17 +786,19 @@
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)theCollectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)theIndexPath {
-    if(kind == UICollectionElementKindSectionHeader && initialLoadDone) {
-        if(self.groups.count > theIndexPath.section) {
-            FileInfoGroup *sectionGroup = [self.groups objectAtIndex:theIndexPath.section];
-            
-            GroupPhotoSectionView *collFooterView = [theCollectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"group_photo_header" forIndexPath:theIndexPath];
-            [collFooterView loadSectionWithTitle:sectionGroup.customTitle];
+    FileInfoGroup *sectionGroup = [self.groups objectAtIndex:theIndexPath.section];
+    
+    GroupPhotoSectionView *collFooterView = [theCollectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"group_photo_header" forIndexPath:theIndexPath];
+    if(self.groups.count > theIndexPath.section) {
+        [collFooterView loadSectionWithTitle:sectionGroup.customTitle];
+        if(kind == UICollectionElementKindSectionHeader && initialLoadDone) {
             return collFooterView;
         }
-        return nil;
+        collFooterView.frame = CGRectZero;
+        return collFooterView;
     }
-    return nil;
+    collFooterView.frame = CGRectZero;
+    return collFooterView;
 }
 
 - (void) dealloc {

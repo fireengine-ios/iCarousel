@@ -245,20 +245,20 @@
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)theCollectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)theIndexPath {
+    UICollectionReusableView *collFooterView = [theCollectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"footer" forIndexPath:theIndexPath];
+    if(imagesLoaded && !footerLoaded) {
+        footerLoaded = YES;
+        collFooterView.backgroundColor = [UIColor clearColor];
+        NSString *contentStr = [NSString stringWithFormat:NSLocalizedString(@"PhotoListContentFooterTitle", @""), imgCount, videoCount];
+        CustomLabel *contentLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, 0, collView.frame.size.width, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:18] withColor:[Util UIColorForHexColor:@"1b1b1b"] withText:contentStr];
+        contentLabel.textAlignment = NSTextAlignmentCenter;
+        [collFooterView addSubview:contentLabel];
+    }
     if(kind == UICollectionElementKindSectionFooter) {
-        UICollectionReusableView *collFooterView = [theCollectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"footer" forIndexPath:theIndexPath];
-        if(imagesLoaded && !footerLoaded) {
-            footerLoaded = YES;
-            collFooterView.backgroundColor = [UIColor clearColor];
-            NSString *contentStr = [NSString stringWithFormat:NSLocalizedString(@"PhotoListContentFooterTitle", @""), imgCount, videoCount];
-            CustomLabel *contentLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, 0, collView.frame.size.width, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:18] withColor:[Util UIColorForHexColor:@"1b1b1b"] withText:contentStr];
-            contentLabel.textAlignment = NSTextAlignmentCenter;
-            [collFooterView addSubview:contentLabel];
-        }
         return collFooterView;
     }
-    
-    return nil;
+    collFooterView.frame = CGRectZero;
+    return collFooterView;
 }
 
 @end
