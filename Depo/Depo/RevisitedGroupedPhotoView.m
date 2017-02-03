@@ -792,9 +792,15 @@
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)theCollectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)theIndexPath {
-    FileInfoGroup *sectionGroup = [self.groups objectAtIndex:theIndexPath.section];
     
     GroupPhotoSectionView *collFooterView = [theCollectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"group_photo_header" forIndexPath:theIndexPath];
+    
+    if(self.groups.count > theIndexPath.section) {
+        collFooterView.frame = CGRectZero;
+        return collFooterView;
+    }
+    FileInfoGroup *sectionGroup = [self.groups objectAtIndex:theIndexPath.section];
+    
     if(self.groups.count > theIndexPath.section) {
         [collFooterView loadSectionWithTitle:sectionGroup.customTitle];
         if(kind == UICollectionElementKindSectionHeader && initialLoadDone) {
