@@ -268,8 +268,8 @@
 
 -(void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [suggestionsDao cancelRequest];
-    suggestionsDao = nil;
+//    [suggestionsDao cancelRequest];
+//    suggestionsDao = nil;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
