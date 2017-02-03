@@ -171,6 +171,8 @@
 - (void) viewDidLoad {
     [super viewDidLoad];
     
+    [SharedUtil writeSharedToken:nil];
+    
     currentUploadIndex = 0;
     
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
