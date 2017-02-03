@@ -433,7 +433,7 @@
 - (void) tokenManagerInadequateInfo {
 }
 
-- (void) tokenManagerDidFailReceivingToken {
+- (void) tokenManagerDidFailReceivingToken: (NSString*) errorMessage {
     IGLog(@"AppDelegate tokenManagerDidFailReceivingToken");
     loginInProgress = NO;
     
@@ -443,9 +443,17 @@
     } else {
         //        WelcomeController *welcomePage = [[WelcomeController alloc] init];
         dispatch_async(dispatch_get_main_queue(), ^{
-            LoginController *loginController = [[LoginController alloc] init];
-            MyNavigationController *welcomeNav = [[MyNavigationController alloc] initWithRootViewController:loginController];
-            self.window.rootViewController = welcomeNav;
+            if([errorMessage isEqualToString:NO_CONN_ERROR_MESSAGE]) {
+                UIAlertView *noConnAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", @"") message:NSLocalizedString(@"ConnectionErrorWarning", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"SubmitButtonTitle", @"") otherButtonTitles:nil];
+                noConnAlert.delegate = self;
+                noConnAlert.tag = NO_CONN_ALERT_TAG;
+                [noConnAlert show];
+            }
+            else {
+                LoginController *loginController = [[LoginController alloc] init];
+                MyNavigationController *welcomeNav = [[MyNavigationController alloc] initWithRootViewController:loginController];
+                self.window.rootViewController = welcomeNav;
+            }
         });
        
     }

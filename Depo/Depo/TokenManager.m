@@ -129,7 +129,7 @@
 }
 
 - (void) tokenDaoFailCallback:(NSString *) errorMessage {
-    [delegate tokenManagerDidFailReceivingToken];
+    [delegate tokenManagerDidFailReceivingToken: errorMessage];
 }
 
 - (void) tokenWithinProcessDaoSuccessCallback {

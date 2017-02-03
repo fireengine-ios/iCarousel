@@ -18,7 +18,7 @@
 
 @protocol TokenManagerDelegate <NSObject>
 - (void) tokenManagerDidReceiveToken;
-- (void) tokenManagerDidFailReceivingToken;
+- (void) tokenManagerDidFailReceivingToken:(NSString *) errorMessage;
 - (void) tokenManagerInadequateInfo;
 - (void) tokenManagerDidReceiveBaseUrl;
 - (void) tokenManagerDidFailReceivingBaseUrl;

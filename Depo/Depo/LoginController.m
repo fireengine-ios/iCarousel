@@ -308,6 +308,8 @@
         [self showErrorAlertWithMessage:NSLocalizedString(@"LdapLockedError", @"")];
     } else if([errorMessage isEqualToString:SIGNUP_REQUIRED_ERROR_MESSAGE]) {
         [self showErrorAlertWithMessage:NSLocalizedString(@"SignUpRequiredError", @"")];
+    } else if ([errorMessage isEqualToString:NO_CONN_ERROR_MESSAGE]) {
+        [self showErrorAlertWithMessage:NSLocalizedString(@"NoConnErrorMessage", @"")];
     } else {
         [self showErrorAlertWithMessage:NSLocalizedString(@"LoginError", @"")];
         if(![captchaContainer isHidden]) {
