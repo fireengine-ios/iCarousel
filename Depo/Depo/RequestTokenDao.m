@@ -251,7 +251,10 @@
         SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:GENERAL_ERROR_MESSAGE]);
     } else if([request statusCode] == 403) {
         SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:FORBIDDEN_ERROR_MESSAGE]);
-    } else {
+    } else if([request statusCode] == 500) {
+        SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:NSLocalizedString(@"ServerError500", @"")]);
+    }
+    else {
         if([request statusCode] == NSURLErrorNotConnectedToInternet || [request statusCode] == 0){
             SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:NSLocalizedString(@"NoConnErrorMessage", @"")]);
         } else {

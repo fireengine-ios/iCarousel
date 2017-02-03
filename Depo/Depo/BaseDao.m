@@ -158,7 +158,13 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self shouldReturnFailWithMessage:INVALID_CONTENT_ERROR_MESSAGE];
         });
-    } else {
+    } else if([request statusCode] == 500) {
+        IGLog(@"BaseDao request failed with 500");
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self shouldReturnFailWithMessage:NSLocalizedString(@"ServerError500", @"")];
+        });
+    }
+    else {
         if([request statusCode] == NSURLErrorNotConnectedToInternet){
             NSString *errorMessageWithRequestUrl = [NSString stringWithFormat:@"BaseDao request failed - ASIConnectionFailureErrorType for %@", self.currentRequest.URL];
             IGLog(errorMessageWithRequestUrl);
