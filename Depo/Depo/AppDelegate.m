@@ -80,7 +80,7 @@
 @synthesize wormhole;
 @synthesize activatedFromBackground;
 @synthesize loginInProgress;
-@synthesize notificationAction;
+//@synthesize notificationAction;
 @synthesize notificationActionUrl;
 @synthesize locInfoPopup;
 
@@ -216,18 +216,33 @@
             actionString = [localNotification userInfo][@"action"];
         }
         
+//        if ([actionString isEqualToString:@"main"]) {
+//            self.notificationAction = NotificationActionMain;
+//        } else if ([actionString isEqualToString:@"sync_settings"]) {
+//            self.notificationAction = NotificationActionSyncSettings;
+//        } else if ([actionString isEqualToString:@"floating_menu"]) {
+//            self.notificationAction = NotificationActionFloatingMenu;
+//        } else if ([actionString isEqualToString:@"packages"]) {
+//            self.notificationAction = NotificationActionPackages;
+//        } else if ([actionString isEqualToString:@"photos_videos"]) {
+//            self.notificationAction = NotificationActionPhotos;
+//        } else if([actionString hasPrefix:@"http"]) {
+//            self.notificationAction = NotificationActionWeb;
+//            self.notificationActionUrl = actionString;
+//        }
+        
         if ([actionString isEqualToString:@"main"]) {
-            self.notificationAction = NotificationActionMain;
+            APPDELEGATE.session.notificationAction = NotificationActionMain;
         } else if ([actionString isEqualToString:@"sync_settings"]) {
-            self.notificationAction = NotificationActionSyncSettings;
+            APPDELEGATE.session.notificationAction = NotificationActionSyncSettings;
         } else if ([actionString isEqualToString:@"floating_menu"]) {
-            self.notificationAction = NotificationActionFloatingMenu;
+            APPDELEGATE.session.notificationAction = NotificationActionFloatingMenu;
         } else if ([actionString isEqualToString:@"packages"]) {
-            self.notificationAction = NotificationActionPackages;
+            APPDELEGATE.session.notificationAction = NotificationActionPackages;
         } else if ([actionString isEqualToString:@"photos_videos"]) {
-            self.notificationAction = NotificationActionPhotos;
+            APPDELEGATE.session.notificationAction = NotificationActionPhotos;
         } else if([actionString hasPrefix:@"http"]) {
-            self.notificationAction = NotificationActionWeb;
+            APPDELEGATE.session.notificationAction = NotificationActionWeb;
             self.notificationActionUrl = actionString;
         }
     }
@@ -331,16 +346,16 @@
     
     [self triggerAutoSynchronization];
     
-    if (self.notificationAction > 0) {
-        if (self.notificationAction == NotificationActionSyncSettings) {
+    if (APPDELEGATE.session.notificationAction > 0) {
+        if (APPDELEGATE.session.notificationAction == NotificationActionSyncSettings) {
             [self triggerSyncSettings];
-        } else if (self.notificationAction == NotificationActionPackages) {
+        } else if (APPDELEGATE.session.notificationAction == NotificationActionPackages) {
             [self triggerStorageSettings];
-        } else if (self.notificationAction == NotificationActionFloatingMenu) {
+        } else if (APPDELEGATE.session.notificationAction == NotificationActionFloatingMenu) {
             [self triggerFloatingMenu];
-        } else if (self.notificationAction == NotificationActionPhotos) {
+        } else if (APPDELEGATE.session.notificationAction == NotificationActionPhotos) {
             [self triggerPhotosAndVideos];
-        } else if (self.notificationAction == NotificationActionWeb){
+        } else if (APPDELEGATE.session.notificationAction == NotificationActionWeb){
             if(notificationActionUrl != nil && [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:notificationActionUrl]]) {
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:notificationActionUrl]];
             }

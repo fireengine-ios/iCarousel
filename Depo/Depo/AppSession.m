@@ -229,7 +229,7 @@
     self.photoDetailTipShown = NO;
     self.videofyTutorialCountChecked = NO;
     self.appRaterFlag = NO;
-    
+    self.notificationAction = 0;
     
     [SyncUtil resetBaseUrlConstant];
     [SharedUtil writeSharedToken:nil];
