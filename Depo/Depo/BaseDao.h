@@ -205,7 +205,7 @@
 
 #define SIGNUP_REQUIRED_ERROR_MESSAGE @"SIGNUP_REQUIRED"
 
-#define NO_CONN_ERROR_MESSAGE @"Please check your internet connection is active and Cellular Data is ON under Settings/lifebox."
+#define NO_CONN_ERROR_MESSAGE @"İnternet erişiminizin aktif olduğuna ve Ayarlar/lifebox altında Hücresel Veri'nin açık olduğuna emin olun."
 
 #define INVALID_CONTENT_ERROR_MESSAGE @"Geçersiz bir değer gönderildi. Lütfen kontrol ediniz."
 

@@ -443,7 +443,7 @@
     } else {
         //        WelcomeController *welcomePage = [[WelcomeController alloc] init];
         dispatch_async(dispatch_get_main_queue(), ^{
-            if([errorMessage isEqualToString:NO_CONN_ERROR_MESSAGE]) {
+            if([errorMessage isEqualToString:NSLocalizedString(@"NoConnErrorMessage", @"")]) {
                 UIAlertView *noConnAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", @"") message:NSLocalizedString(@"ConnectionErrorWarning", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"SubmitButtonTitle", @"") otherButtonTitles:nil];
                 noConnAlert.delegate = self;
                 noConnAlert.tag = NO_CONN_ALERT_TAG;
