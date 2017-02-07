@@ -288,7 +288,6 @@
          swiperight.direction=UISwipeGestureRecognizerDirectionRight;
          [self.view addGestureRecognizer:swiperight]; */
         [self addSwipeGestures];
-        
     }
     return self;
 }
@@ -765,12 +764,21 @@
 }
 
 - (void)orientationChanged:(NSNotification *)notification {
+    
+    [UIView beginAnimations:@"" context:NULL];
+    if(self.moreMenuView) {
+        [super dismissMoreMenu];
+        [self moreClicked];
+    }
+    
     [self mirrorRotation:[[UIApplication sharedApplication] statusBarOrientation]];
+    [UIView commitAnimations];
 }
 
 - (void) mirrorRotation:(UIInterfaceOrientation) orientation {
     
     if (orientation == self.previousOrientation) {
+        [self resizeScrollView];
         return;
     }
     self.previousOrientation = orientation;
@@ -778,7 +786,9 @@
     // reset zoom when orientation changed
     mainScroll.zoomScale = 1;
     
-    [self resizeScrollView];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self resizeScrollView];
+    });
 }
 
 -(void)resizeScrollView {
@@ -805,6 +815,7 @@
     
     // update imgView
     imgView.frame = tmp;
+    mainScroll.contentSize = tmp.size;
     
     // update footer
     footer.frame = CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60);
