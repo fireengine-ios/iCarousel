@@ -37,7 +37,7 @@
 @property (strong, nonatomic) MapUtil *mapUtil;
 @property (strong, nonatomic) MBProgressHUD *progress;
 @property (nonatomic, strong) MMWormhole *wormhole;
-@property (nonatomic) NotificationAction notificationAction;
+//@property (nonatomic) NotificationAction notificationAction;
 @property (nonatomic) NSString *notificationActionUrl;
 @property (nonatomic) BOOL activatedFromBackground;
 @property (nonatomic) BOOL loginInProgress;

@@ -67,6 +67,8 @@
 
 @property (nonatomic) BOOL loggedOutManually;
 
+@property (nonatomic) NotificationAction notificationAction;
+
 - (void) playAudioItemAtIndex:(int) itemIndex;
 - (void) playNextAudioItem;
 - (void) playPreviousAudioItem;
