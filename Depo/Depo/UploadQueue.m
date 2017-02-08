@@ -623,9 +623,12 @@
     [[UploadQueue sharedInstance] cancelAllUploadsUpdateReferences:NO];
     
     if (self.backgroundSessionCompletionHandler) {
+        
         void (^completionHandler)() = self.backgroundSessionCompletionHandler;
         self.backgroundSessionCompletionHandler = nil;
-        completionHandler();
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            completionHandler();
+        }];
     }
 }
 
