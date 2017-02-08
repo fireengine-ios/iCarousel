@@ -745,7 +745,7 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell * c = [cv dequeueReusableCellWithReuseIdentifier:@"COLL_PHOTO_CELL" forIndexPath:indexPath];
+//    UICollectionViewCell * c = [cv dequeueReusableCellWithReuseIdentifier:@"COLL_PHOTO_CELL" forIndexPath:indexPath];
     if(self.groups.count > indexPath.section) {
         FileInfoGroup *sectionGroup = [self.groups objectAtIndex:indexPath.section];
         if(sectionGroup.fileInfo.count > indexPath.row) {
@@ -766,7 +766,7 @@
         }
     }
     
-    return c;
+    return [cv dequeueReusableCellWithReuseIdentifier:@"COLL_PHOTO_CELL" forIndexPath:indexPath];
 }
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
