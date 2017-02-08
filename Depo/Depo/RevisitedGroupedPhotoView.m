@@ -163,8 +163,16 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(autoIterationFinished) name:AUTO_ITERATION_FINISHED_NOT_KEY object:nil];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(autoQueueFinished) name:AUTO_SYNC_QUEUE_FINISHED_NOTIFICATION object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCollectionViewData) name:UIApplicationDidBecomeActiveNotification object:nil];
     }
     return self;
+}
+
+- (void) checkCollectionViewData {
+    if ([self.groups count] < 1 || [self.files count] < 1) {
+        [self pullData];
+    }
 }
 
 -(void)createRefreshControl {

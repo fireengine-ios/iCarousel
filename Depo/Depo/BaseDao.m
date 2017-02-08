@@ -108,9 +108,12 @@
         else if(error.code== NSURLErrorTimedOut){
             NSString *errorMessageWithRequestUrl = [NSString stringWithFormat:@"BaseDao request failed - NSURLErrorTimedOut for %@", self.currentRequest.URL];
             IGLog(errorMessageWithRequestUrl);
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self shouldReturnFailWithMessage:NSLocalizedString(@"TimeoutMessage", @"")];
-            });
+            // show popup only when app active
+            if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self shouldReturnFailWithMessage:NSLocalizedString(@"TimeoutMessage", @"")];
+                });
+            }
         } else {
             NSString *localizedErrStr = [NSHTTPURLResponse localizedStringForStatusCode:error.code];
             NSString *errorMessageWithRequestUrl = [NSString stringWithFormat:@"BaseDao request failed with code:%d and error: %@ - GENERAL_ERROR_MESSAGE for %@", (int)error.code, localizedErrStr, self.currentRequest.URL];
