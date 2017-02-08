@@ -144,8 +144,16 @@ static char kAFImageRequestOperationObjectKey;
         [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
             if ([[request URL] isEqual:[[self.af_imageRequestOperation request] URL]]) {
                 @autoreleasepool {
-                    self.image = [self manualResize:responseObject forMaxHeight:600 forMaxWidth:600 forCompressQuality:0.8f];
-                    self.af_imageRequestOperation = nil;
+                     [self manualResize:responseObject
+                           forMaxHeight:600
+                            forMaxWidth:600
+                     forCompressQuality:0.8f
+                             completion:^(UIImage *finalImage) {
+                                 dispatch_async(dispatch_get_main_queue(), ^{
+                                     self.image = finalImage;
+                                     self.af_imageRequestOperation = nil;
+                                 });
+                             }];
                 }
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -181,8 +189,17 @@ static char kAFImageRequestOperationObjectKey;
         [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
             if ([[request URL] isEqual:[[self.af_imageRequestOperation request] URL]]) {
                 @autoreleasepool {
-                    self.image = [self manualResize:responseObject forMaxHeight:maxHeight forMaxWidth:maxWidth forCompressQuality:compressQuality];
-                    self.af_imageRequestOperation = nil;
+                    [self manualResize:responseObject
+                          forMaxHeight:maxHeight
+                           forMaxWidth:maxWidth
+                    forCompressQuality:compressQuality
+                            completion:
+                     ^(UIImage *finalImage) {
+                         dispatch_async(dispatch_get_main_queue(), ^{
+                             self.image = finalImage;
+                             self.af_imageRequestOperation = nil;
+                         });
+                     }];
                 }
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -218,8 +235,16 @@ static char kAFImageRequestOperationObjectKey;
             AFImageRequestOperation *requestOperation = [[AFImageRequestOperation alloc] initWithRequest:request];
             [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
                 if ([[request URL] isEqual:[[self.af_imageRequestOperation request] URL]]) {
-                    self.image = [self manualResize:responseObject forMaxHeight:maxHeight forMaxWidth:maxWidth forCompressQuality:compressQuality];
-                    self.af_imageRequestOperation = nil;
+                    [self manualResize:responseObject
+                          forMaxHeight:maxHeight
+                           forMaxWidth:maxWidth
+                    forCompressQuality:compressQuality
+                            completion:^(UIImage *finalImage) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            self.image = finalImage;
+                            self.af_imageRequestOperation = nil;
+                        });
+                    }];
                     
                     [[[self class] af_sharedImageCache] cacheImage:responseObject forRequest:request];
                 }
@@ -338,7 +363,10 @@ static char kAFImageRequestOperationObjectKey;
     
 }
 
-- (UIImage *) manualResize:(UIImage *)image forMaxHeight:(float) maxHeight forMaxWidth:(float) maxWidth forCompressQuality:(float) compressionQuality {
+- (void) manualResize:(UIImage *)image
+         forMaxHeight:(float) maxHeight
+          forMaxWidth:(float) maxWidth
+   forCompressQuality:(float) compressionQuality completion:(void (^)(UIImage *finalImage))completion{
     float actualHeight = image.size.height;
     float actualWidth = image.size.width;
     float imgRatio = actualWidth/actualHeight;
@@ -366,13 +394,15 @@ static char kAFImageRequestOperationObjectKey;
             actualWidth = maxWidth;
         }
     }
-
-    UIGraphicsBeginImageContext(CGSizeMake(actualWidth, actualHeight));
-    [image drawInRect:CGRectMake(0, 0, actualWidth, actualHeight)];
-    UIImage *destImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return destImage;
-
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        UIGraphicsBeginImageContext(CGSizeMake(actualWidth, actualHeight));
+        [image drawInRect:CGRectMake(0, 0, actualWidth, actualHeight)];
+        UIImage *destImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        //return destImage;
+        completion(destImage);
+    });
+    
     /*
     CGRect rect = CGRectMake(0.0, 0.0, actualWidth, actualHeight);
     UIGraphicsBeginImageContext(rect.size);
