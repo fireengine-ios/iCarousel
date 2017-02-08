@@ -198,7 +198,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
                 [handle writeData:[NSData dataWithBytesNoCopy:buffer length:bytesRead freeWhenDone:NO]];
                 offset += bytesRead;
             } @catch (NSException *exception) {
-                free(buffer);
+//                free(buffer);
                 shouldStartProcess = NO;
             }
         } while (bytesRead > 0);
