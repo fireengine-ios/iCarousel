@@ -38,6 +38,9 @@
 @property long long lastSync;
 @property BOOL startNewSync;
 
+@property NSString *updateId;
+@property NSInteger initialContactCount;
+
 
 - (void)startSyncing:(SYNCMode)mode;
 - (BOOL)isRunning;
@@ -77,16 +80,15 @@ static bool syncing = false;
      [NSString stringWithFormat:@"%@-%@",[SyncSettings shared].token,[@(mode) stringValue]]];
     
     [[ContactUtil shared] reset];
-    
+    self.initialContactCount = -1;
+    self.updateId = nil;
     
     self.remoteUpdatedContactRemoteIds = [NSMutableSet new];
     self.localContactIds = [NSMutableSet new];
     self.mode = mode;
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *key = [defaults objectForKey:SYNC_KEY_CHECK_UPDATE];
-    
-    
+    self.updateId = [defaults objectForKey:SYNC_KEY_CHECK_UPDATE];
     
     /*
      * deviceID check. If it is not in the defaults then generate and save it into the deafults.
@@ -99,7 +101,7 @@ static bool syncing = false;
     }
     SYNC_Log(@"UUID [Device ID]:%@", _deviceId);
     
-    if (!SYNC_IS_NULL(key)){
+    if (!SYNC_IS_NULL(self.updateId)){
         _startNewSync = YES;
         if(_mode == SYNCRestore)
             [self checkProgressStatusForRestore];
@@ -138,6 +140,7 @@ static bool syncing = false;
     [[ContactUtil shared] printContacts];
     
     NSMutableArray *contacts = [[ContactUtil shared] fetchContacts];
+    self.initialContactCount = [contacts count];
     if (!SYNC_IS_NULL(contacts) && [contacts count]>0){
         for (Contact *contact in contacts){
             if (!SYNC_IS_NULL(contact) && ![_localContactIds containsObject:[contact objectId]]){
@@ -215,6 +218,7 @@ static bool syncing = false;
         
 
         NSMutableArray *contacts = [[ContactUtil shared] fetchContacts];
+        self.initialContactCount = [contacts count];
         if (!SYNC_IS_NULL(contacts) && [contacts count]>0){
             for (Contact *contact in contacts){
                 
@@ -421,6 +425,9 @@ static bool syncing = false;
 
 - (NSMutableDictionary *)restoreRecordsFromUserDefaultsForRestore
 {
+    if (self.initialContactCount<0){
+        self.initialContactCount = [[ContactUtil shared] getContactCount];
+    }
     NSMutableArray *storeModifiedIDs = [NSMutableArray new];
         
     NSArray *updatedContactsIDs = [_modifiedContactIds allKeys];
@@ -472,6 +479,10 @@ static bool syncing = false;
 
 - (NSArray*)restoreRecordsFromUserDefaultsForBackup:(NSString *)restore
 {
+    if (self.initialContactCount<0){
+        self.initialContactCount = [[ContactUtil shared] getContactCount];
+    }
+    
     if([restore isEqualToString:SYNC_KEY_CONTACT_STORE_DIRTY]){
         /*
          * Return stored dirty contacts
@@ -523,9 +534,9 @@ static bool syncing = false;
 
 -(void)checkProgressStatusForBackup{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *key = [defaults objectForKey:SYNC_KEY_CHECK_UPDATE];
+    self.updateId = [defaults objectForKey:SYNC_KEY_CHECK_UPDATE];
     
-    [SyncAdapter checkStatus:key callback:^(id response, BOOL isSuccess) {
+    [SyncAdapter checkStatus:self.updateId callback:^(id response, BOOL isSuccess) {
         if (isSuccess && !SYNC_IS_NULL(response)){
             NSDictionary *data = response[SYNC_JSON_PARAM_DATA];
             if (SYNC_IS_NULL(data)){
@@ -650,9 +661,9 @@ static bool syncing = false;
 - (void)checkProgressStatusForRestore
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *key = [defaults objectForKey:SYNC_KEY_CHECK_UPDATE];
+    self.updateId = [defaults objectForKey:SYNC_KEY_CHECK_UPDATE];
     
-    [SyncAdapter checkStatus:key callback:^(id response, BOOL isSuccess) {
+    [SyncAdapter checkStatus:self.updateId callback:^(id response, BOOL isSuccess) {
         if (isSuccess && !SYNC_IS_NULL(response)){
             NSDictionary *data = response[SYNC_JSON_PARAM_DATA];
             if (SYNC_IS_NULL(data)){
@@ -887,6 +898,14 @@ static bool syncing = false;
 {
     syncing = false;
     [SyncStatus shared].status = result;
+    
+
+    NSInteger finalCount = [[ContactUtil shared] getContactCount];
+    [SyncAdapter sendStats:self.updateId start:self.initialContactCount
+                                        result:finalCount
+                                        created:[[SyncStatus shared].createdContactsReceived count]
+                                        updated:[[SyncStatus shared].updatedContactsReceived count]
+                                        deleted:[[SyncStatus shared].deletedContactsOnDevice count]];
     
     [[SyncLogger shared] stopLogging];
     

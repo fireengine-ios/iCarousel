@@ -24,7 +24,14 @@
     [SyncAdapter request:[self buildURL:@"getUpdatedContacts"] params:dict headers:nil method:GET callback:callback];
 }
 
-
++ (void)sendStats:(NSString*)key start:(NSInteger)start result:(NSInteger)result created:(NSInteger)created updated:(NSInteger)updated deleted:(NSInteger)deleted
+{
+    if (SYNC_IS_NULL(key)){
+        return;
+    }
+    NSDictionary *data = @{@"key":key, @"start":@(start), @"result":@(result), @"created":@(created), @"updated":@(updated), @"deleted":@(deleted) };
+    [SyncAdapter request:[self buildURL:@"stats"] params:data headers:nil method:POST callback:nil];
+}
 
 +(void)restoreContactsWithTimestamp:(long long)timestamp deviceId:(NSString *)deviceId modifiedContactIDs:(NSArray *)modifiedContactIDs newContacts:(NSArray *)newContacts callback:(void (^)(id, BOOL))callback{
     NSNumber *timestampNS = [NSNumber numberWithLongLong:timestamp];

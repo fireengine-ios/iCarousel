@@ -20,6 +20,7 @@
 - (void)save:(Contact*)contact;
 - (NSMutableArray *)applyContacts;
 - (NSMutableArray*)fetchContacts;
+- (NSInteger)getContactCount;
 - (Contact*)findContactById:(NSNumber*)objectId;
 - (NSNumber*)localUpdateDate:(NSNumber*)objectId;
 - (void)fetchNumbers:(Contact*)contact;
