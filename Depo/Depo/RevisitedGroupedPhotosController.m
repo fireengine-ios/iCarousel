@@ -687,6 +687,15 @@
 }
 
 - (void) accountFailCallback:(NSString *) errorMessage{
+    if(APPDELEGATE.session.msisdnEmpty) {
+        MsisdnEntryController *msisdnController = [[MsisdnEntryController alloc] init];
+        MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:msisdnController];
+        [self presentViewController:modalNav animated:YES completion:nil];
+        
+        //        [APPDELEGATE triggerLogout];
+        //        [self showErrorAlertWithMessage:NSLocalizedString(@"MsisdnEmpty", @"")];
+        //        return;
+    }
 }
 
 - (BOOL) checkInternet {

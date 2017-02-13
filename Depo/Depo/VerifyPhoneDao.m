@@ -85,7 +85,11 @@
         }
         else {
             NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-            if(mainDict && [mainDict isKindOfClass:[NSDictionary class]]) {
+            
+            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+            
+            if(httpResponse.statusCode == 200) {
+//            if(mainDict && [mainDict isKindOfClass:[NSDictionary class]]) {
                 NSString *status = [mainDict objectForKey:@"status"];
                 if(status != nil && ![status isKindOfClass:[NSNull class]]) {
                     NSString *statusVal = [mainDict objectForKey:@"status"];
@@ -95,6 +99,10 @@
                         });
                         return ;
                     }
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self shouldReturnSuccessWithObject:@"OK"];
+                    });
+                } else {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self shouldReturnSuccessWithObject:@"OK"];
                     });
