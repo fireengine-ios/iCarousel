@@ -150,13 +150,27 @@
 -(void)savePhotoFileToCameraRoll:(MetaFile *)file  withAlbum:(PhotoAlbum*) album{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         [self downloadImageWithURL:[NSURL URLWithString:file.tempDownloadUrl]
-                   completionBlock:^(BOOL succeeded, UIImage *image) {
+                   completionBlock:^(BOOL succeeded, UIImage *image, NSData *imageData) {
                        if (succeeded) {
                            __weak DownloadManager *weakSelf = self;
                            __block NSString *localizedAssetIdentifier = @"";
                            dispatch_async(dispatch_get_main_queue(), ^{
+                               //Photos framework is not avaible in iOS7
+                               //We should have never used this while supporting iOS7
                                [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
-                                   PHAssetChangeRequest *changeRequest = [PHAssetChangeRequest creationRequestForAssetFromImage:image];
+                                   
+                                   NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+                                   NSString *documentsDirectory = [paths objectAtIndex:0];
+                                   
+                                   NSString *randomVal = [NSString stringWithFormat:@"%.0f%d",
+                                                          [[NSDate date] timeIntervalSince1970],
+                                                          arc4random_uniform(99)];
+                                   NSString *tempPath = [documentsDirectory stringByAppendingFormat:@"/DEPO_DOWNLOAD_FILE%@.jpeg", randomVal];
+                                   
+                                   [imageData writeToFile:tempPath atomically:YES];
+                                   
+                                   PHAssetChangeRequest *changeRequest = [PHAssetChangeRequest creationRequestForAssetFromImageAtFileURL:
+                                                                          [NSURL fileURLWithPath:tempPath]];
                                    PHObjectPlaceholder *assetPlaceHolder = [changeRequest placeholderForCreatedAsset];
                                    localizedAssetIdentifier = assetPlaceHolder.localIdentifier;
                                } completionHandler:^(BOOL success, NSError *error) {
@@ -336,7 +350,7 @@
 -(void)savePhotoFileToAlbum:(MetaFile *)file withAlbum:(PhotoAlbum*)album{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         [self downloadImageWithURL:[NSURL URLWithString:file.tempDownloadUrl]
-                   completionBlock:^(BOOL succeeded, UIImage *image) {
+                   completionBlock:^(BOOL succeeded, UIImage *image, NSData *imageData) {
                        if (succeeded) {
                            __weak DownloadManager *weakSelf = self;
                            __block NSString *localizedAssetIdentifier = @"";
@@ -545,7 +559,7 @@
 
 #pragma mark - Download Image From Server
 
-- (void)downloadImageWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, UIImage *image))completionBlock {
+- (void)downloadImageWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, UIImage *image, NSData *data))completionBlock {
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [NSURLConnection sendAsynchronousRequest:request
                                        queue:[NSOperationQueue mainQueue]
@@ -553,9 +567,9 @@
                                if ( !error )
                                {
                                    UIImage *image = [[UIImage alloc] initWithData:data];
-                                   completionBlock(YES, image);
+                                   completionBlock(YES, image, data);
                                } else{
-                                   completionBlock(NO, nil);
+                                   completionBlock(NO, nil, nil);
                                }
                            }];
 }
