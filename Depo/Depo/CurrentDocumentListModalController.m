@@ -73,7 +73,8 @@
     if(docList == nil) {
         docList = [[NSMutableArray alloc] init];
     }
-    [docList addObjectsFromArray:[self filterFilesFromList:files]];
+//    [docList addObjectsFromArray:[self filterFilesFromList:files]];
+    [docList addObjectsFromArray:files];
     
     [docTable reloadData];
 }

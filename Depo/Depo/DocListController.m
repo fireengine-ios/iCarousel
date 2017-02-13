@@ -125,7 +125,8 @@
     if(docList == nil) {
         docList = [[NSMutableArray alloc] init];
     }
-    [docList addObjectsFromArray:[self filterFilesFromList:files]];
+//    [docList addObjectsFromArray:[self filterFilesFromList:files]];
+    [docList addObjectsFromArray:files];
     
     self.tableUpdateCounter ++;
     [docTable reloadData];
@@ -145,8 +146,7 @@
     if(docList == nil) {
         docList = [[NSMutableArray alloc] init];
     }
-    NSMutableArray *mutArray = [NSMutableArray arrayWithArray:[docList arrayByAddingObjectsFromArray:files]];
-    docList = mutArray;
+    [docList addObjectsFromArray:files];
     isLoading = NO;
     //    self.tableUpdateCounter ++;
     [docTable reloadData];
