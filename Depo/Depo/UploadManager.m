@@ -241,25 +241,41 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         @autoreleasepool {
             ALAssetRepresentation *rep = [asset defaultRepresentation];
             
-            NSMutableData *imgData = [NSMutableData data];
+//            NSMutableData *imgData = [NSMutableData data];
+//            
+//            NSError *error;
+//            long long bufferOffset = 0ll;
+//            NSInteger bufferSize = 10000;
+//            long long bytesRemaining = [rep size];
+//            uint8_t buffer[bufferSize];
+//            NSUInteger bytesRead;
+//            while (bytesRemaining > 0) {
+//                bytesRead = [rep getBytes:buffer fromOffset:bufferOffset length:bufferSize error:&error];
+//                if (bytesRead == 0) {
+//                    return;
+//                }
+//                bytesRemaining -= bytesRead;
+//                bufferOffset   += bytesRead;
+//                [imgData appendBytes:buffer length:bytesRead];
+//            }
             
-            NSError *error;
-            long long bufferOffset = 0ll;
-            NSInteger bufferSize = 10000;
-            long long bytesRemaining = [rep size];
-            uint8_t buffer[bufferSize];
-            NSUInteger bytesRead;
-            while (bytesRemaining > 0) {
-                bytesRead = [rep getBytes:buffer fromOffset:bufferOffset length:bufferSize error:&error];
-                if (bytesRead == 0) {
-                    return;
-                }
-                bytesRemaining -= bytesRead;
-                bufferOffset   += bytesRead;
-                [imgData appendBytes:buffer length:bytesRead];
+            
+            NSInteger byteArraySize = rep.size;
+            
+            NSMutableData *rawData = [[NSMutableData alloc]initWithCapacity:byteArraySize];
+            void* bufferPointer = [rawData mutableBytes];
+            
+            NSError* error = nil;
+            [rep getBytes:bufferPointer fromOffset:0 length:byteArraySize error:&error];
+            if (error) {
+                NSLog(@"%@",error);
             }
-            shouldStartProcess = [imgData writeToFile:tempPath atomically:YES];
-            dataMD5Hash = [SyncUtil md5String:imgData];
+            rawData = [NSMutableData dataWithBytes:bufferPointer length:byteArraySize];
+            
+            
+            
+            shouldStartProcess = [rawData writeToFile:tempPath atomically:YES];
+            dataMD5Hash = [SyncUtil md5String:rawData];
         }
 
         @autoreleasepool {

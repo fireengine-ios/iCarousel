@@ -112,7 +112,7 @@
 - (void) requestDocForPage:(int) page andSize:(int) size andSortType:(SortType) sortType {
     sortType = [self resetSortType:sortType];
     
-    NSString *parentListingUrl = [NSString stringWithFormat:ELASTIC_LISTING_MAIN_URL, @"content_type", @"application%20OR%20text", [AppUtil serverSortNameByEnum:sortType], [AppUtil isAscByEnum:sortType] ? @"ASC":@"DESC", page, size];
+    NSString *parentListingUrl = [NSString stringWithFormat:ELASTIC_LISTING_MAIN_URL, @"content_type", @"application%20OR%20text%20NOT%20directory", [AppUtil serverSortNameByEnum:sortType], [AppUtil isAscByEnum:sortType] ? @"ASC":@"DESC", page, size];
     NSURL *url = [NSURL URLWithString:parentListingUrl];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
