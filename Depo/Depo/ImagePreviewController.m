@@ -590,13 +590,17 @@
 - (void) moreMenuDidSelectDownloadImage {
     [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DownloadImageProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DownloadImageSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DownloadImageFailMessage", @"")];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        [self downloadImageWithURL:[NSURL URLWithString:self.file.tempDownloadUrl] completionBlock:^(BOOL succeeded, UIImage *image) {
-            if (succeeded) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-                });
-            }
-        }];
+        [self downloadImageWithURL:[NSURL URLWithString:self.file.tempDownloadUrl]
+                   completionBlock:
+         ^(BOOL succeeded, UIImage *image, NSData *imageData) {
+             if (succeeded) {
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                     ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+                     [library writeImageDataToSavedPhotosAlbum:imageData metadata:nil completionBlock:nil];
+                     [self image:image didFinishSavingWithError:nil contextInfo:nil];
+                 });
+             }
+         }];
     });
 }
 
@@ -721,7 +725,8 @@
 - (void) shareSuccessCallback:(NSString *) linkToShare {
     [self showLoading];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        [self downloadImageWithURL:[NSURL URLWithString:self.file.tempDownloadUrl] completionBlock:^(BOOL succeeded, UIImage *image) {
+        [self downloadImageWithURL:[NSURL URLWithString:self.file.tempDownloadUrl]
+                   completionBlock:^(BOOL succeeded, UIImage *image, NSData *imageData) {
             if (succeeded) {
                 [self hideLoading];
                 NSArray *activityItems = [NSArray arrayWithObjects:image, nil];
@@ -744,17 +749,20 @@
     });
 }
 
-- (void)downloadImageWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, UIImage *image))completionBlock {
+- (void)downloadImageWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, UIImage *image, NSData *imageData))completionBlock {
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [NSURLConnection sendAsynchronousRequest:request
                                        queue:[NSOperationQueue mainQueue]
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
                                if ( !error )
                                {
-                                   UIImage *image = [[UIImage alloc] initWithData:data];
-                                   completionBlock(YES, image);
+                                   dispatch_async(dispatch_get_main_queue(), ^{
+                                       
+                                       UIImage *image = [[UIImage alloc] initWithData:data];
+                                       completionBlock(YES, image, data);
+                                   });
                                } else{
-                                   completionBlock(NO, nil);
+                                   completionBlock(NO, nil, nil);
                                }
                            }];
 }
