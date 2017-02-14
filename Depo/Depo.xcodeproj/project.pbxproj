@@ -713,16 +713,6 @@
 		05DEB1CE1A80EA28007793DD /* terms.html in Resources */ = {isa = PBXBuildFile; fileRef = 05DEB1CD1A80EA28007793DD /* terms.html */; };
 		05DEB1D01A80EBA6007793DD /* terms.txt in Resources */ = {isa = PBXBuildFile; fileRef = 05DEB1CF1A80EBA6007793DD /* terms.txt */; };
 		05DEB1D21A8169D1007793DD /* CurioMapping.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05DEB1D11A8169D1007793DD /* CurioMapping.plist */; };
-		05DEB1E91A81775F007793DD /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DEB1D51A81775F007793DD /* Contact.m */; };
-		05DEB1EA1A81775F007793DD /* ContactDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DEB1D71A81775F007793DD /* ContactDevice.m */; };
-		05DEB1EB1A81775F007793DD /* ContactSyncSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DEB1D91A81775F007793DD /* ContactSyncSDK.m */; };
-		05DEB1EC1A81775F007793DD /* ContactUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DEB1DB1A81775F007793DD /* ContactUtil.m */; };
-		05DEB1ED1A81775F007793DD /* SyncAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DEB1DD1A81775F007793DD /* SyncAdapter.m */; };
-		05DEB1EE1A81775F007793DD /* SyncDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DEB1E01A81775F007793DD /* SyncDB.m */; };
-		05DEB1EF1A81775F007793DD /* SyncDBUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DEB1E21A81775F007793DD /* SyncDBUtils.m */; };
-		05DEB1F01A81775F007793DD /* SyncRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DEB1E41A81775F007793DD /* SyncRecord.m */; };
-		05DEB1F11A81775F007793DD /* SyncSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DEB1E61A81775F007793DD /* SyncSettings.m */; };
-		05DEB1F21A81775F007793DD /* SyncStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DEB1E81A81775F007793DD /* SyncStatus.m */; };
 		05E0705F1AB977850038BE68 /* ConstantsDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E0705E1AB977850038BE68 /* ConstantsDao.m */; };
 		05E8112F19DF09DB0063F99A /* AlbumListModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8112E19DF09DB0063F99A /* AlbumListModalController.m */; };
 		05E8113219DF0ACB0063F99A /* MetaAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8113119DF0ACB0063F99A /* MetaAlbum.m */; };
@@ -737,8 +727,6 @@
 		05F178471BFBB4A70014B2BD /* yellow_cropy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05F178431BFBB4A70014B2BD /* yellow_cropy@2x.png */; };
 		05F4AA281A2F7692000F41B8 /* ActivityUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F4AA271A2F7692000F41B8 /* ActivityUtil.m */; };
 		05F931881C160E2F00858223 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05F931871C160E2F00858223 /* Accelerate.framework */; };
-		05F9318F1C160ED200858223 /* GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F9318C1C160ED200858223 /* GZIP.m */; };
-		05F931901C160ED200858223 /* SyncLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F9318E1C160ED200858223 /* SyncLogger.m */; };
 		2443E1541B6BB0C5001C274D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2443E1531B6BB0C5001C274D /* AudioToolbox.framework */; };
 		2443E1571B6BB5F3001C274D /* AudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2443E1561B6BB5F3001C274D /* AudioManager.m */; };
 		247268911B7CC29900804E56 /* CustomAdvertisementView.m in Sources */ = {isa = PBXBuildFile; fileRef = 247268901B7CC29900804E56 /* CustomAdvertisementView.m */; };
@@ -864,6 +852,18 @@
 		56B9E92A1DEC47A600DE1011 /* AppRater.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B9E9291DEC47A600DE1011 /* AppRater.m */; };
 		56B9E92D1DED752600DE1011 /* AppRater.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 56B9E92C1DED752600DE1011 /* AppRater.bundle */; };
 		56BDE2501A8DEA8B0082F8B8 /* OfferCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 56BDE24F1A8DEA8B0082F8B8 /* OfferCell.m */; };
+		56D842A71E2E48D300028002 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 56D8428F1E2E48D300028002 /* Contact.m */; };
+		56D842A81E2E48D300028002 /* ContactDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 56D842911E2E48D300028002 /* ContactDevice.m */; };
+		56D842A91E2E48D300028002 /* ContactSyncSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 56D842931E2E48D300028002 /* ContactSyncSDK.m */; };
+		56D842AA1E2E48D300028002 /* ContactUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 56D842951E2E48D300028002 /* ContactUtil.m */; };
+		56D842AB1E2E48D300028002 /* GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 56D842971E2E48D300028002 /* GZIP.m */; };
+		56D842AC1E2E48D300028002 /* SyncAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 56D842991E2E48D300028002 /* SyncAdapter.m */; };
+		56D842AD1E2E48D300028002 /* SyncDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 56D8429C1E2E48D300028002 /* SyncDB.m */; };
+		56D842AE1E2E48D300028002 /* SyncDBUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 56D8429E1E2E48D300028002 /* SyncDBUtils.m */; };
+		56D842AF1E2E48D300028002 /* SyncLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 56D842A01E2E48D300028002 /* SyncLogger.m */; };
+		56D842B01E2E48D300028002 /* SyncRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 56D842A21E2E48D300028002 /* SyncRecord.m */; };
+		56D842B11E2E48D300028002 /* SyncSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 56D842A41E2E48D300028002 /* SyncSettings.m */; };
+		56D842B21E2E48D300028002 /* SyncStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 56D842A61E2E48D300028002 /* SyncStatus.m */; };
 		56FCFDD51A9C7DDA00AC041C /* info_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 56FCFDD31A9C7DDA00AC041C /* info_icon.png */; };
 		56FCFDD61A9C7DDA00AC041C /* info_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56FCFDD41A9C7DDA00AC041C /* info_icon@2x.png */; };
 		94112A981CCA7DE00050E9B1 /* DropboxStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94112A971CCA7DE00050E9B1 /* DropboxStatusCell.m */; };
@@ -2193,27 +2193,6 @@
 		05DEB1CD1A80EA28007793DD /* terms.html */ = {isa = PBXFileReference; fileEncoding = 14; lastKnownFileType = text.html; lineEnding = 2; path = terms.html; sourceTree = "<group>"; };
 		05DEB1CF1A80EBA6007793DD /* terms.txt */ = {isa = PBXFileReference; fileEncoding = 2147483683; lastKnownFileType = text; path = terms.txt; sourceTree = "<group>"; };
 		05DEB1D11A8169D1007793DD /* CurioMapping.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CurioMapping.plist; sourceTree = "<group>"; };
-		05DEB1D41A81775F007793DD /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
-		05DEB1D51A81775F007793DD /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
-		05DEB1D61A81775F007793DD /* ContactDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactDevice.h; sourceTree = "<group>"; };
-		05DEB1D71A81775F007793DD /* ContactDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactDevice.m; sourceTree = "<group>"; };
-		05DEB1D81A81775F007793DD /* ContactSyncSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactSyncSDK.h; sourceTree = "<group>"; };
-		05DEB1D91A81775F007793DD /* ContactSyncSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactSyncSDK.m; sourceTree = "<group>"; };
-		05DEB1DA1A81775F007793DD /* ContactUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactUtil.h; sourceTree = "<group>"; };
-		05DEB1DB1A81775F007793DD /* ContactUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactUtil.m; sourceTree = "<group>"; };
-		05DEB1DC1A81775F007793DD /* SyncAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncAdapter.h; sourceTree = "<group>"; };
-		05DEB1DD1A81775F007793DD /* SyncAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncAdapter.m; sourceTree = "<group>"; };
-		05DEB1DE1A81775F007793DD /* SyncConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncConstants.h; sourceTree = "<group>"; };
-		05DEB1DF1A81775F007793DD /* SyncDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncDB.h; sourceTree = "<group>"; };
-		05DEB1E01A81775F007793DD /* SyncDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncDB.m; sourceTree = "<group>"; };
-		05DEB1E11A81775F007793DD /* SyncDBUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncDBUtils.h; sourceTree = "<group>"; };
-		05DEB1E21A81775F007793DD /* SyncDBUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncDBUtils.m; sourceTree = "<group>"; };
-		05DEB1E31A81775F007793DD /* SyncRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncRecord.h; sourceTree = "<group>"; };
-		05DEB1E41A81775F007793DD /* SyncRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncRecord.m; sourceTree = "<group>"; };
-		05DEB1E51A81775F007793DD /* SyncSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncSettings.h; sourceTree = "<group>"; };
-		05DEB1E61A81775F007793DD /* SyncSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncSettings.m; sourceTree = "<group>"; };
-		05DEB1E71A81775F007793DD /* SyncStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncStatus.h; sourceTree = "<group>"; };
-		05DEB1E81A81775F007793DD /* SyncStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncStatus.m; sourceTree = "<group>"; };
 		05E0705D1AB977850038BE68 /* ConstantsDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstantsDao.h; sourceTree = "<group>"; };
 		05E0705E1AB977850038BE68 /* ConstantsDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstantsDao.m; sourceTree = "<group>"; };
 		05E8112D19DF09DB0063F99A /* AlbumListModalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumListModalController.h; sourceTree = "<group>"; };
@@ -2238,10 +2217,6 @@
 		05F4AA271A2F7692000F41B8 /* ActivityUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityUtil.m; sourceTree = "<group>"; };
 		05F931871C160E2F00858223 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		05F931891C160E7000858223 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
-		05F9318B1C160ED200858223 /* GZIP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GZIP.h; sourceTree = "<group>"; };
-		05F9318C1C160ED200858223 /* GZIP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GZIP.m; sourceTree = "<group>"; };
-		05F9318D1C160ED200858223 /* SyncLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncLogger.h; sourceTree = "<group>"; };
-		05F9318E1C160ED200858223 /* SyncLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncLogger.m; sourceTree = "<group>"; };
 		2443E1531B6BB0C5001C274D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		2443E1551B6BB5F3001C274D /* AudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioManager.h; sourceTree = "<group>"; };
 		2443E1561B6BB5F3001C274D /* AudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioManager.m; sourceTree = "<group>"; };
@@ -2427,6 +2402,31 @@
 		56B9E92C1DED752600DE1011 /* AppRater.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AppRater.bundle; sourceTree = "<group>"; };
 		56BDE24E1A8DEA8B0082F8B8 /* OfferCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfferCell.h; sourceTree = "<group>"; };
 		56BDE24F1A8DEA8B0082F8B8 /* OfferCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfferCell.m; sourceTree = "<group>"; };
+		56D8428E1E2E48D300028002 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
+		56D8428F1E2E48D300028002 /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
+		56D842901E2E48D300028002 /* ContactDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactDevice.h; sourceTree = "<group>"; };
+		56D842911E2E48D300028002 /* ContactDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactDevice.m; sourceTree = "<group>"; };
+		56D842921E2E48D300028002 /* ContactSyncSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactSyncSDK.h; sourceTree = "<group>"; };
+		56D842931E2E48D300028002 /* ContactSyncSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactSyncSDK.m; sourceTree = "<group>"; };
+		56D842941E2E48D300028002 /* ContactUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactUtil.h; sourceTree = "<group>"; };
+		56D842951E2E48D300028002 /* ContactUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactUtil.m; sourceTree = "<group>"; };
+		56D842961E2E48D300028002 /* GZIP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GZIP.h; sourceTree = "<group>"; };
+		56D842971E2E48D300028002 /* GZIP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GZIP.m; sourceTree = "<group>"; };
+		56D842981E2E48D300028002 /* SyncAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncAdapter.h; sourceTree = "<group>"; };
+		56D842991E2E48D300028002 /* SyncAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncAdapter.m; sourceTree = "<group>"; };
+		56D8429A1E2E48D300028002 /* SyncConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncConstants.h; sourceTree = "<group>"; };
+		56D8429B1E2E48D300028002 /* SyncDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncDB.h; sourceTree = "<group>"; };
+		56D8429C1E2E48D300028002 /* SyncDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncDB.m; sourceTree = "<group>"; };
+		56D8429D1E2E48D300028002 /* SyncDBUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncDBUtils.h; sourceTree = "<group>"; };
+		56D8429E1E2E48D300028002 /* SyncDBUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncDBUtils.m; sourceTree = "<group>"; };
+		56D8429F1E2E48D300028002 /* SyncLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncLogger.h; sourceTree = "<group>"; };
+		56D842A01E2E48D300028002 /* SyncLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncLogger.m; sourceTree = "<group>"; };
+		56D842A11E2E48D300028002 /* SyncRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncRecord.h; sourceTree = "<group>"; };
+		56D842A21E2E48D300028002 /* SyncRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncRecord.m; sourceTree = "<group>"; };
+		56D842A31E2E48D300028002 /* SyncSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncSettings.h; sourceTree = "<group>"; };
+		56D842A41E2E48D300028002 /* SyncSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncSettings.m; sourceTree = "<group>"; };
+		56D842A51E2E48D300028002 /* SyncStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncStatus.h; sourceTree = "<group>"; };
+		56D842A61E2E48D300028002 /* SyncStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncStatus.m; sourceTree = "<group>"; };
 		56FCFDD31A9C7DDA00AC041C /* info_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info_icon.png; sourceTree = "<group>"; };
 		56FCFDD41A9C7DDA00AC041C /* info_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "info_icon@2x.png"; sourceTree = "<group>"; };
 		94112A961CCA7DE00050E9B1 /* DropboxStatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxStatusCell.h; sourceTree = "<group>"; };
@@ -4662,31 +4662,31 @@
 		05DEB1D31A81775F007793DD /* ContactSyncSDK */ = {
 			isa = PBXGroup;
 			children = (
-				05F9318B1C160ED200858223 /* GZIP.h */,
-				05F9318C1C160ED200858223 /* GZIP.m */,
-				05F9318D1C160ED200858223 /* SyncLogger.h */,
-				05F9318E1C160ED200858223 /* SyncLogger.m */,
-				05DEB1D41A81775F007793DD /* Contact.h */,
-				05DEB1D51A81775F007793DD /* Contact.m */,
-				05DEB1D61A81775F007793DD /* ContactDevice.h */,
-				05DEB1D71A81775F007793DD /* ContactDevice.m */,
-				05DEB1D81A81775F007793DD /* ContactSyncSDK.h */,
-				05DEB1D91A81775F007793DD /* ContactSyncSDK.m */,
-				05DEB1DA1A81775F007793DD /* ContactUtil.h */,
-				05DEB1DB1A81775F007793DD /* ContactUtil.m */,
-				05DEB1DC1A81775F007793DD /* SyncAdapter.h */,
-				05DEB1DD1A81775F007793DD /* SyncAdapter.m */,
-				05DEB1DE1A81775F007793DD /* SyncConstants.h */,
-				05DEB1DF1A81775F007793DD /* SyncDB.h */,
-				05DEB1E01A81775F007793DD /* SyncDB.m */,
-				05DEB1E11A81775F007793DD /* SyncDBUtils.h */,
-				05DEB1E21A81775F007793DD /* SyncDBUtils.m */,
-				05DEB1E31A81775F007793DD /* SyncRecord.h */,
-				05DEB1E41A81775F007793DD /* SyncRecord.m */,
-				05DEB1E51A81775F007793DD /* SyncSettings.h */,
-				05DEB1E61A81775F007793DD /* SyncSettings.m */,
-				05DEB1E71A81775F007793DD /* SyncStatus.h */,
-				05DEB1E81A81775F007793DD /* SyncStatus.m */,
+				56D8428E1E2E48D300028002 /* Contact.h */,
+				56D8428F1E2E48D300028002 /* Contact.m */,
+				56D842901E2E48D300028002 /* ContactDevice.h */,
+				56D842911E2E48D300028002 /* ContactDevice.m */,
+				56D842921E2E48D300028002 /* ContactSyncSDK.h */,
+				56D842931E2E48D300028002 /* ContactSyncSDK.m */,
+				56D842941E2E48D300028002 /* ContactUtil.h */,
+				56D842951E2E48D300028002 /* ContactUtil.m */,
+				56D842961E2E48D300028002 /* GZIP.h */,
+				56D842971E2E48D300028002 /* GZIP.m */,
+				56D842981E2E48D300028002 /* SyncAdapter.h */,
+				56D842991E2E48D300028002 /* SyncAdapter.m */,
+				56D8429A1E2E48D300028002 /* SyncConstants.h */,
+				56D8429B1E2E48D300028002 /* SyncDB.h */,
+				56D8429C1E2E48D300028002 /* SyncDB.m */,
+				56D8429D1E2E48D300028002 /* SyncDBUtils.h */,
+				56D8429E1E2E48D300028002 /* SyncDBUtils.m */,
+				56D8429F1E2E48D300028002 /* SyncLogger.h */,
+				56D842A01E2E48D300028002 /* SyncLogger.m */,
+				56D842A11E2E48D300028002 /* SyncRecord.h */,
+				56D842A21E2E48D300028002 /* SyncRecord.m */,
+				56D842A31E2E48D300028002 /* SyncSettings.h */,
+				56D842A41E2E48D300028002 /* SyncSettings.m */,
+				56D842A51E2E48D300028002 /* SyncStatus.h */,
+				56D842A61E2E48D300028002 /* SyncStatus.m */,
 			);
 			path = ContactSyncSDK;
 			sourceTree = "<group>";
@@ -5765,6 +5765,7 @@
 				052644BF19D5A32300B63759 /* TextCell.m in Sources */,
 				059A46DD1A6D3E2000935023 /* Subscription.m in Sources */,
 				058B328E1A14ABCB00A291C4 /* RenameAlbumDao.m in Sources */,
+				56D842AD1E2E48D300028002 /* SyncDB.m in Sources */,
 				94FB09851DE2065B00DA666D /* DevicePhotoFooterView.m in Sources */,
 				058219BF1A384AF0001FA679 /* MessageCell.m in Sources */,
 				94A1D3C41C969F330066D92F /* UpdatePassDao.m in Sources */,
@@ -5784,7 +5785,6 @@
 				05B01D9C1AC2E2D000D5B827 /* NSDate+Utilities.m in Sources */,
 				94F130C31D2496C10086BDBB /* SettingsSocialController.m in Sources */,
 				0526444819D546BB00B63759 /* MapUtil.m in Sources */,
-				05DEB1F11A81775F007793DD /* SyncSettings.m in Sources */,
 				0514A6291BF4D1030084E0AB /* BaseBgController.m in Sources */,
 				94FAE0CF1D2F6EDF00BC9F77 /* FBStatusDao.m in Sources */,
 				563A98AE1E52ECF800D24B7E /* ADJAdjustFactory.m in Sources */,
@@ -5800,7 +5800,6 @@
 				057C9D8C1A2B903E001DDDEC /* NSMutableArray_Shuffling.m in Sources */,
 				05AF7C8A1A1C8F4200F5011A /* RecentActivityCell.m in Sources */,
 				944D0E2F1DF373FC000333FF /* DepoHttpManager.m in Sources */,
-				05DEB1E91A81775F007793DD /* Contact.m in Sources */,
 				051E1E8619CAC92700FD1E03 /* ASIAuthenticationDialog.m in Sources */,
 				05AD502B1A7ED75500C40777 /* TermsController.m in Sources */,
 				563A98C01E52ECF900D24B7E /* ADJSessionSuccess.m in Sources */,
@@ -5847,13 +5846,11 @@
 				94FB09881DE2065B00DA666D /* RevisitedUploadingPhotoCollCell.m in Sources */,
 				535FD9741DF3FE3A005AB4E7 /* DownloadedFile.m in Sources */,
 				05DEB1C31A80B8FE007793DD /* MigrationStatus.m in Sources */,
-				05DEB1F21A81775F007793DD /* SyncStatus.m in Sources */,
 				05D2B19A19E679E500FC309D /* PhotoAlbum.m in Sources */,
 				052160A919E30D640007B321 /* UploadRef.m in Sources */,
 				051E1EA219CB206500FD1E03 /* SlidingMenu.m in Sources */,
 				94FB09871DE2065B00DA666D /* GroupPhotoSectionView.m in Sources */,
 				051E1E5319CAC90700FD1E03 /* AFHTTPRequestOperation.m in Sources */,
-				05DEB1ED1A81775F007793DD /* SyncAdapter.m in Sources */,
 				944C07B81D4FE81400D45B61 /* RevisitedPhotoHeaderSegmentView.m in Sources */,
 				563A98C11E52ECF900D24B7E /* ADJSystemProfile.m in Sources */,
 				9454FA661CAA822300BF1288 /* CurrentPhotoListModalController.m in Sources */,
@@ -5868,6 +5865,7 @@
 				051412A519D46748000EAE63 /* FloatingAddMenu.m in Sources */,
 				94884C9B1C90C506006722F7 /* ChangePassController.m in Sources */,
 				941496611CCF559D008A8D0C /* GroupedPhotosAndVideosController.m in Sources */,
+				56D842A81E2E48D300028002 /* ContactDevice.m in Sources */,
 				5247D6241DDDD0F600FFE63E /* CurioLocationManager.m in Sources */,
 				94E549091CC63718003CB5DC /* DropboxExportController.m in Sources */,
 				058B44DB1A4C0D89005B1590 /* SyncUtil.m in Sources */,
@@ -5875,6 +5873,8 @@
 				057942501C3FDCF900899923 /* EmailValidationController.m in Sources */,
 				94DCA10F1D3D9B34000965AE /* CellographOrdersDao.m in Sources */,
 				056AC8FB19D15DBB00AC96C3 /* TokenManager.m in Sources */,
+				05C2A0301A79830500EE4D78 /* ADJEvent.m in Sources */,
+				56D842AE1E2E48D300028002 /* SyncDBUtils.m in Sources */,
 				051E1E2F19CAC56A00FD1E03 /* AppUtil.m in Sources */,
 				563A98AC1E52ECF800D24B7E /* NSString+ADJAdditions.m in Sources */,
 				9433BD021D21DF6C00991483 /* VideofyCreateDao.m in Sources */,
@@ -5934,6 +5934,7 @@
 				0556EA571A19EA0700123A14 /* SearchHistory.m in Sources */,
 				052160A319E2E56B0007B321 /* DepoUploadTask.m in Sources */,
 				05BBE71119E06FB100805215 /* CameraCaptureModalController.m in Sources */,
+				56D842A91E2E48D300028002 /* ContactSyncSDK.m in Sources */,
 				051DE37319CC140100F27C85 /* CustomConfirmView.m in Sources */,
 				059A46DA1A6D3E2000935023 /* SubscriptionPlan.m in Sources */,
 				0515706419E5AC2600C62B98 /* PhotoHeaderSegmentView.m in Sources */,
@@ -5956,6 +5957,7 @@
 				05A9382A1AF6AE9100AE2892 /* Message.m in Sources */,
 				054730C319FA3D5A00F913FF /* FavoriteDao.m in Sources */,
 				05DEB1EF1A81775F007793DD /* SyncDBUtils.m in Sources */,
+				05C2A0331A79830500EE4D78 /* ADJPackageHandler.m in Sources */,
 				057DF50819D038080005A389 /* RequestTokenDao.m in Sources */,
 				05A938301AF6AE9100AE2892 /* UpdateServerIntegration.m in Sources */,
 				94FAE0D21D2F772B00BC9F77 /* SocialExportResult.m in Sources */,
@@ -5966,10 +5968,11 @@
 				051E1E8D19CAC92700FD1E03 /* ASINetworkQueue.m in Sources */,
 				051DE35D19CC128600F27C85 /* MyViewController.m in Sources */,
 				535FD96B1DEF5F92005AB4E7 /* DownloadManager.m in Sources */,
+				05C2A02D1A79830500EE4D78 /* ADJAttributionHandler.m in Sources */,
+				56D842AA1E2E48D300028002 /* ContactUtil.m in Sources */,
 				9433BCF91D219AE700991483 /* ProfilePhotoUploadDao.m in Sources */,
 				947CA2F11D68AEE00026772F /* GroupedCell.m in Sources */,
 				057DF50E19D050F00005A389 /* FileListDao.m in Sources */,
-				05DEB1F01A81775F007793DD /* SyncRecord.m in Sources */,
 				942FD7D91D751EFB00EA81D3 /* MainSearchTextfield.m in Sources */,
 				05E8112F19DF09DB0063F99A /* AlbumListModalController.m in Sources */,
 				056F29E41C4FD68D001DD486 /* UpdateEmailDao.m in Sources */,
@@ -5991,6 +5994,8 @@
 				05DEB1CC1A80C175007793DD /* MigrateStatusDao.m in Sources */,
 				05AD502E1A7ED76200C40777 /* MigrateStatusController.m in Sources */,
 				052644B019D5A2A600B63759 /* SettingsMusicController.m in Sources */,
+				56D842B21E2E48D300028002 /* SyncStatus.m in Sources */,
+				05C2A02E1A79830500EE4D78 /* ADJConfig.m in Sources */,
 				94EB28BC1CCD142B00A45050 /* SearchByGroupDao.m in Sources */,
 				051E1E8719CAC92700FD1E03 /* ASIDataCompressor.m in Sources */,
 				94680E071D416F5700DC5227 /* FBStopDao.m in Sources */,
@@ -6001,6 +6006,7 @@
 				053D0ED119DAC2BC006A13E0 /* GeneralTextField.m in Sources */,
 				94E549061CC6349C003CB5DC /* DropboxStatusDao.m in Sources */,
 				058337DE19ED9C3400DCF0C5 /* CustomAVControl.m in Sources */,
+				56D842AF1E2E48D300028002 /* SyncLogger.m in Sources */,
 				059D97991A0CF12E00BCEDF3 /* RenameDao.m in Sources */,
 				05F4AA281A2F7692000F41B8 /* ActivityUtil.m in Sources */,
 				5247D61E1DDDD0F600FFE63E /* CurioAction.m in Sources */,
@@ -6035,7 +6041,6 @@
 				941496641CCF5E51008A8D0C /* GroupedPhotosCell.m in Sources */,
 				058219C51A384CC6001FA679 /* SearchMoreModalController.m in Sources */,
 				052644AD19D5A2A600B63759 /* SettingsContactsController.m in Sources */,
-				05F931901C160ED200858223 /* SyncLogger.m in Sources */,
 				94B3BE331D847F560086D05E /* GroupedView.m in Sources */,
 				05C7CB6A1ABC91B200A7BF8E /* MetaFileSummary.m in Sources */,
 				94AF7DD51DF857A3000D425B /* SearchContainerCollCell.m in Sources */,
@@ -6049,6 +6054,8 @@
 				051CB39819D2E3FF00E5FC88 /* FolderCell.m in Sources */,
 				0515F2F81C451E240098081C /* SingleCharField.m in Sources */,
 				9445B97E1C9F28FE000FDB80 /* PhotoListPopupController.m in Sources */,
+				56D842AC1E2E48D300028002 /* SyncAdapter.m in Sources */,
+				05C2A0271A79830500EE4D78 /* ADJActivityPackage.m in Sources */,
 				94BEABFB1CAD1BFE002E37A7 /* EulaApproveDao.m in Sources */,
 				94C7CEFD1D2CE67E0040897A /* SquareSequencedPictureView.m in Sources */,
 				0526444E19D5625E00B63759 /* MoreMenuView.m in Sources */,
@@ -6056,15 +6063,16 @@
 				563A98B31E52ECF800D24B7E /* ADJDeviceInfo.m in Sources */,
 				563A98B51E52ECF800D24B7E /* ADJEventFailure.m in Sources */,
 				05DEB1C61A80C161007793DD /* ProvisionDao.m in Sources */,
+				56D842AB1E2E48D300028002 /* GZIP.m in Sources */,
 				05BCA2FB19EE89EE00AF2FE2 /* MusicPreviewController.m in Sources */,
 				94E5490C1CC638AA003CB5DC /* DropboxExportResult.m in Sources */,
-				05F9318F1C160ED200858223 /* GZIP.m in Sources */,
 				5247D6211DDDD0F600FFE63E /* CurioDB.m in Sources */,
 				052644B519D5A2A600B63759 /* SettingsNotificationsController.m in Sources */,
 				05BCA2F519EE5CD900AF2FE2 /* NewAlbumModalController.m in Sources */,
 				051E1E3219CAC57400FD1E03 /* Util.m in Sources */,
 				94328BE31CC54E5A00599CEE /* FirstUploadFlagDao.m in Sources */,
 				05A8ADA51A5ABCD8007566BF /* UploadQueue.m in Sources */,
+				56D842A71E2E48D300028002 /* Contact.m in Sources */,
 				9432F16C1D5F55F60017973C /* NewFeatureInfoView.m in Sources */,
 				5247D62D1DDDD0F600FFE63E /* CurioUtil.m in Sources */,
 				051DE35519CC06F000F27C85 /* AbstractMenuCell.m in Sources */,
@@ -6096,6 +6104,7 @@
 				9436AB321CCEB694001E0594 /* FileInfoGroup.m in Sources */,
 				059A46E31A6D3E3F00935023 /* AccountDao.m in Sources */,
 				058BC23F1A30E6B10007F4DE /* ServiceLoginDao.m in Sources */,
+				56D842B11E2E48D300028002 /* SyncSettings.m in Sources */,
 				947EDDCD1D0C3B8B0098D2C2 /* LoggerUtil.m in Sources */,
 				053D0EDE19DB01F7006A13E0 /* AddFolderDao.m in Sources */,
 				057942561C41626200899923 /* AppleProductsListDao.m in Sources */,
@@ -6115,7 +6124,6 @@
 				051DE36919CC12FD00F27C85 /* CheckButton.m in Sources */,
 				5247D6281DDDD0F600FFE63E /* CurioPushData.m in Sources */,
 				050A7B2319F7DFBD00B084B9 /* VolumeLevelIndicator.m in Sources */,
-				05DEB1EE1A81775F007793DD /* SyncDB.m in Sources */,
 				059CE5471A87D45100F6CFAE /* ContactSyncResult.m in Sources */,
 				563A98B61E52ECF800D24B7E /* ADJEventSuccess.m in Sources */,
 				058BC23C1A30E5370007F4DE /* ValidateAuthTokenDao.m in Sources */,
@@ -6151,7 +6159,6 @@
 				05AF7C811A1C8CD100F5011A /* RecentActivitiesController.m in Sources */,
 				05501F3819EBBB4600CA9F4E /* AlbumDetailDao.m in Sources */,
 				94BEABF81CAD1BF3002E37A7 /* EulaCheckDao.m in Sources */,
-				05DEB1EB1A81775F007793DD /* ContactSyncSDK.m in Sources */,
 				05A938251AF6AE9100AE2892 /* Controller.m in Sources */,
 				05028CD31B5A9866000F2D09 /* SharedUtil.m in Sources */,
 				05DA564C1A56D5B3007D2B1D /* ALAssetRepresentation+MD5.m in Sources */,
@@ -6170,6 +6177,7 @@
 				059CE54D1A87E7BA00F6CFAE /* ContactSyncResultTitleCell.m in Sources */,
 				05C6C7041B3C20FC00CB6CE5 /* OnkatDepoPopUP.m in Sources */,
 				56BDE2501A8DEA8B0082F8B8 /* OfferCell.m in Sources */,
+				56D842B01E2E48D300028002 /* SyncRecord.m in Sources */,
 				05D2B19719E676BF00FC309D /* AlbumListDao.m in Sources */,
 				567408B41E08011B003DF541 /* CoverPhotoDao.m in Sources */,
 				94BF90E31D5A105D000078FD /* RevisitedGroupedPhotoView.m in Sources */,
@@ -6190,7 +6198,6 @@
 				94DCA10C1D3D8F67000965AE /* TaggedFileListDao.m in Sources */,
 				5247D5E71DD342B900FFE63E /* ConfirmRemoveModalController.m in Sources */,
 				94B3BE2F1D81F7C40086D05E /* FaqUrlDao.m in Sources */,
-				05DEB1EC1A81775F007793DD /* ContactUtil.m in Sources */,
 				56B9E92A1DEC47A600DE1011 /* AppRater.m in Sources */,
 				050D4C2F1A31E12F00809A01 /* PostLoginSyncPrefController.m in Sources */,
 			);

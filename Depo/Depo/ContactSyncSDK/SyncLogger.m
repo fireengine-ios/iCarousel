@@ -8,6 +8,7 @@
 #import "SyncLogger.h"
 #import "SyncConstants.h"
 #import "SyncAdapter.h"
+#import "SyncSettings.h"
 
 @interface SyncLogger ()
 @property (strong) NSURL *fileURL;
@@ -56,7 +57,7 @@
                                                       encoding:NSUTF8StringEncoding
                                                          error:&error];
 //        NSLog(content);
-        [SyncAdapter sendLog:[content dataUsingEncoding:NSUTF8StringEncoding] file:[[self.fileURL absoluteString] lastPathComponent]];
+        [SyncAdapter sendLog:[content dataUsingEncoding:NSUTF8StringEncoding] file:[NSString stringWithFormat:@"%@-%@",[SyncSettings shared].msisdn,[[self.fileURL absoluteString] lastPathComponent]]];
         
         [[NSFileManager defaultManager] removeItemAtURL:self.fileURL error:&error];
         self.fileURL = nil;

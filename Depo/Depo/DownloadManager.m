@@ -145,7 +145,38 @@
     }
 }
 
+- (void)getLastCameraRollImage:(void(^)(ALAsset *lastAsset))completion {
+    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+    [library enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+        [group setAssetsFilter:[ALAssetsFilter allPhotos]];
+        if ([group numberOfAssets] > 0) {
+            // Chooses the photo at the last index
+            [group enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:([group numberOfAssets] - 1)] options:0 usingBlock:^(ALAsset *alAsset, NSUInteger index, BOOL *innerStop) {
+                // The end of the enumeration is signaled by asset == nil.
+                completion(alAsset);
+            }];
+        }
+    } failureBlock: ^(NSError *error) {
+    }];
+}
 
+- (NSString *)contentTypeForImageData:(NSData *)data {
+    uint8_t c;
+    [data getBytes:&c length:1];
+    
+    switch (c) {
+        case 0xFF:
+            return @"JPG";
+        case 0x89:
+            return @"PNG";
+        case 0x47:
+            return @"gif";
+        case 0x49:
+        case 0x4D:
+            return @"tiff";
+    }
+    return nil;
+}
 
 -(void)savePhotoFileToCameraRoll:(MetaFile *)file  withAlbum:(PhotoAlbum*) album{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
@@ -157,31 +188,55 @@
                            dispatch_async(dispatch_get_main_queue(), ^{
                                //Photos framework is not avaible in iOS7
                                //We should have never used this while supporting iOS7
-                               [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
-                                   
-                                   NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-                                   NSString *documentsDirectory = [paths objectAtIndex:0];
-                                   
-                                   NSString *randomVal = [NSString stringWithFormat:@"%.0f%d",
-                                                          [[NSDate date] timeIntervalSince1970],
-                                                          arc4random_uniform(99)];
-                                   NSString *tempPath = [documentsDirectory stringByAppendingFormat:@"/DEPO_DOWNLOAD_FILE%@.jpeg", randomVal];
-                                   
-                                   [imageData writeToFile:tempPath atomically:YES];
-                                   
-                                   PHAssetChangeRequest *changeRequest = [PHAssetChangeRequest creationRequestForAssetFromImageAtFileURL:
-                                                                          [NSURL fileURLWithPath:tempPath]];
-                                   PHObjectPlaceholder *assetPlaceHolder = [changeRequest placeholderForCreatedAsset];
-                                   localizedAssetIdentifier = assetPlaceHolder.localIdentifier;
-                               } completionHandler:^(BOOL success, NSError *error) {
-                                   if (success) {
-                                       [weakSelf saveFileToCameraRoll:file localizedIdentifier:localizedAssetIdentifier];
-                                       NSLog(@"Save Image To CameraRoll Success");
+                               
+                               [self getLastCameraRollImage:^(ALAsset *lastAsset) {
+                                   if (lastAsset == nil) {
+                                       return;
                                    }
-                                   else {
-                                       NSLog(@"Save Image To Album Error: %@", error.description);
-                                   }
-                                   [self didFinishSavingFileToCameraRoll:file error:error];
+                                   ALAssetRepresentation *rep = [lastAsset defaultRepresentation];
+                                   NSString *fileName = [rep filename];
+                                   
+                                   NSLog(@"%@", fileName);
+                                   
+                                   NSString *pureNumbers = [[fileName componentsSeparatedByCharactersInSet:
+                                                             [[NSCharacterSet decimalDigitCharacterSet] invertedSet]]
+                                                            componentsJoinedByString:@""];
+                                   
+                                   __block NSInteger numberAsInteger = [pureNumbers integerValue];
+                                   numberAsInteger++;
+
+                                   [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
+                                       
+                                       NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+                                       NSString *documentsDirectory = [paths objectAtIndex:0];
+                                       
+                                       NSString *tempPath = [documentsDirectory stringByAppendingFormat:@"/IMG_%04ld.%@",
+                                                             (long)numberAsInteger,
+                                                             [self contentTypeForImageData:imageData]];
+                                       
+                                       [imageData writeToFile:tempPath atomically:YES];
+                                       
+                                       PHAssetChangeRequest *changeRequest = [PHAssetChangeRequest creationRequestForAssetFromImageAtFileURL:
+                                                                              [NSURL fileURLWithPath:tempPath]];
+                                       PHObjectPlaceholder *assetPlaceHolder = [changeRequest placeholderForCreatedAsset];
+                                       localizedAssetIdentifier = assetPlaceHolder.localIdentifier;
+                                   } completionHandler:^(BOOL success, NSError *error) {
+                                       NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+                                       NSString *documentsDirectory = [paths objectAtIndex:0];
+                                       
+                                       NSString *tempPath = [documentsDirectory stringByAppendingFormat:@"/IMG_%04ld.%@",
+                                                             (long)numberAsInteger,
+                                                             [self contentTypeForImageData:imageData]];
+                                       [[NSFileManager defaultManager] removeItemAtPath:tempPath error:&error];
+                                       if (success) {
+                                           [weakSelf saveFileToCameraRoll:file localizedIdentifier:localizedAssetIdentifier];
+                                           NSLog(@"Save Image To CameraRoll Success");
+                                       }
+                                       else {
+                                           NSLog(@"Save Image To Album Error: %@", error.description);
+                                       }
+                                       [self didFinishSavingFileToCameraRoll:file error:error];
+                                   }];
                                }];
                            });
                        }else {
