@@ -221,13 +221,13 @@
                                        PHObjectPlaceholder *assetPlaceHolder = [changeRequest placeholderForCreatedAsset];
                                        localizedAssetIdentifier = assetPlaceHolder.localIdentifier;
                                    } completionHandler:^(BOOL success, NSError *error) {
-//                                       NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-//                                       NSString *documentsDirectory = [paths objectAtIndex:0];
-//                                       
-//                                       NSString *tempPath = [documentsDirectory stringByAppendingFormat:@"/IMG_%04ld.%@",
-//                                                             (long)numberAsInteger,
-//                                                             [self contentTypeForImageData:imageData]];
-//                                       [[NSFileManager defaultManager] removeItemAtPath:tempPath error:&error];
+                                       NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+                                       NSString *documentsDirectory = [paths objectAtIndex:0];
+                                       
+                                       NSString *tempPath = [documentsDirectory stringByAppendingFormat:@"/IMG_%04ld.%@",
+                                                             (long)numberAsInteger,
+                                                             [self contentTypeForImageData:imageData]];
+                                       [[NSFileManager defaultManager] removeItemAtPath:tempPath error:&error];
                                        if (success) {
                                            [weakSelf saveFileToCameraRoll:file localizedIdentifier:localizedAssetIdentifier];
                                            NSLog(@"Save Image To CameraRoll Success");
