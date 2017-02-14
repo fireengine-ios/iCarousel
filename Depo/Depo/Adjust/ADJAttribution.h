@@ -31,10 +31,17 @@
 // tracker creative
 @property (nonatomic, copy) NSString *creative;
 
+// tracker click_label
+@property (nonatomic, copy) NSString *clickLabel;
+
+@property (nonatomic, copy) NSString *adid;
+
 - (BOOL)isEqualToAttribution:(ADJAttribution *)attribution;
 
-+ (ADJAttribution *)dataWithJsonDict:(NSDictionary *)jsonDict;
-- (id)initWithJsonDict:(NSDictionary *)jsonDict;
++ (ADJAttribution *)dataWithJsonDict:(NSDictionary *)jsonDict
+                                adid:(NSString *)adid;
+- (id)initWithJsonDict:(NSDictionary *)jsonDict
+                  adid:(NSString *)adid;
 - (NSDictionary *)dictionary;
 
 @end

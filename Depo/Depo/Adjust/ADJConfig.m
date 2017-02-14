@@ -9,110 +9,190 @@
 #import "ADJConfig.h"
 #import "ADJAdjustFactory.h"
 #import "ADJLogger.h"
+#import "ADJUtil.h"
+#import "Adjust.h"
+
+@interface ADJConfig()
+
+@property (nonatomic, weak) id<ADJLogger> logger;
+@property (nonatomic, assign) BOOL allowSuppressLogLevel;
+
+@end
 
 @implementation ADJConfig
 
-+ (ADJConfig *) configWithAppToken:(NSString *)appToken
-                       environment:(NSString *)environment {
++ (ADJConfig *)configWithAppToken:(NSString *)appToken
+                      environment:(NSString *)environment {
     return [[ADJConfig alloc] initWithAppToken:appToken environment:environment];
 }
 
-- (id) initWithAppToken:(NSString *)appToken
-            environment:(NSString *)environment
++ (ADJConfig *)configWithAppToken:(NSString *)appToken
+                      environment:(NSString *)environment
+             allowSuppressLogLevel:(BOOL)allowSuppressLogLevel
 {
-    if (![self checkAppToken:appToken]) return nil;
-    if (![self checkEnvironment:environment logAssert:YES]) return nil;
-
-    return [self initWithoutCheckAppToken:appToken environment:environment];
+    return [[ADJConfig alloc] initWithAppToken:appToken environment:environment allowSuppressLogLevel:allowSuppressLogLevel];
 }
 
-- (id) initWithoutCheckAppToken:(NSString *)appToken
-                    environment:(NSString *)environment
+- (id)initWithAppToken:(NSString *)appToken
+           environment:(NSString *)environment
+{
+    return [self initWithAppToken:appToken
+                      environment:environment
+             allowSuppressLogLevel:NO];
+}
+
+- (id)initWithAppToken:(NSString *)appToken
+           environment:(NSString *)environment
+  allowSuppressLogLevel:(BOOL)allowSuppressLogLevel
 {
     self = [super init];
     if (self == nil) return nil;
 
+    self.allowSuppressLogLevel = allowSuppressLogLevel;
+    self.logger = ADJAdjustFactory.logger;
+    // default values
+    [self setLogLevel:ADJLogLevelInfo environment:environment];
+
+    if (![self checkEnvironment:environment]) return self;
+    if (![self checkAppToken:appToken]) return self;
+
     _appToken = appToken;
     _environment = environment;
-
     // default values
-    self.logLevel = ADJLogLevelInfo;
-    self.macMd5TrackingEnabled = YES;
+    self.eventBufferingEnabled = NO;
 
     return self;
 }
 
-- (void) setDelegate:(NSObject<AdjustDelegate> *)delegate {
-    if (delegate == nil) {
+- (void)setLogLevel:(ADJLogLevel)logLevel {
+    [self setLogLevel:logLevel environment:self.environment];
+}
+
+- (void)setLogLevel:(ADJLogLevel)logLevel
+        environment:(NSString *)environment{
+    if ([environment isEqualToString:ADJEnvironmentProduction]) {
+        if (self.allowSuppressLogLevel) {
+            _logLevel = ADJLogLevelSuppress;
+        } else {
+            _logLevel = ADJLogLevelAssert;
+        }
+    } else {
+        if (!self.allowSuppressLogLevel &&
+            logLevel == ADJLogLevelSuppress) {
+            _logLevel = ADJLogLevelAssert;
+        } else {
+            _logLevel = logLevel;
+        }
+    }
+    [self.logger setLogLevel:self.logLevel];
+}
+
+
+- (void)setDelegate:(NSObject<AdjustDelegate> *)delegate {
+    BOOL hasResponseDelegate = NO;
+    BOOL implementsDeeplinkCallback = NO;
+
+    if ([ADJUtil isNull:delegate]) {
+        [self.logger warn:@"Delegate is nil"];
         _delegate = nil;
-        self.hasDelegate = NO;
         return;
     }
 
-    if (![delegate respondsToSelector:@selector(adjustAttributionChanged:)]) {
-        id<ADJLogger> logger = ADJAdjustFactory.logger;
-        [logger error:@"Delegate does not implement AdjustDelegate"];
+    if ([delegate respondsToSelector:@selector(adjustAttributionChanged:)]) {
+        [self.logger debug:@"Delegate implements adjustAttributionChanged:"];
 
+        hasResponseDelegate = YES;
+    }
+
+    if ([delegate respondsToSelector:@selector(adjustEventTrackingSucceeded:)]) {
+        [self.logger debug:@"Delegate implements adjustEventTrackingSucceeded:"];
+
+        hasResponseDelegate = YES;
+    }
+
+    if ([delegate respondsToSelector:@selector(adjustEventTrackingFailed:)]) {
+        [self.logger debug:@"Delegate implements adjustEventTrackingFailed:"];
+
+        hasResponseDelegate = YES;
+    }
+
+    if ([delegate respondsToSelector:@selector(adjustSessionTrackingSucceeded:)]) {
+        [self.logger debug:@"Delegate implements adjustSessionTrackingSucceeded:"];
+
+        hasResponseDelegate = YES;
+    }
+
+    if ([delegate respondsToSelector:@selector(adjustSessionTrackingFailed:)]) {
+        [self.logger debug:@"Delegate implements adjustSessionTrackingFailed:"];
+
+        hasResponseDelegate = YES;
+    }
+
+    if ([delegate respondsToSelector:@selector(adjustDeeplinkResponse:)]) {
+        [self.logger debug:@"Delegate implements adjustDeeplinkResponse:"];
+
+        // does not enable hasDelegate flag
+        implementsDeeplinkCallback = YES;
+    }
+
+    if (!(hasResponseDelegate || implementsDeeplinkCallback)) {
+        [self.logger error:@"Delegate does not implement any optional method"];
         _delegate = nil;
-        self.hasDelegate = NO;
         return;
     }
 
     _delegate = delegate;
-    self.hasDelegate = YES;
 }
 
-- (BOOL) checkEnvironment:(NSString *)environment
-                logAssert:(BOOL)logAssert
+- (BOOL)checkEnvironment:(NSString *)environment
 {
-    id<ADJLogger> logger = ADJAdjustFactory.logger;
+    if ([ADJUtil isNull:environment]) {
+        [self.logger error:@"Missing environment"];
+        return NO;
+    }
     if ([environment isEqualToString:ADJEnvironmentSandbox]) {
-        if (logAssert) {
-            [logger assert:@"SANDBOX: Adjust will run in Sandbox mode. Use this setting for testing. Don't forget to set the environment to ADJEnvironmentProduction before publishing!"];
-        }
+        [self.logger assert:@"SANDBOX: Adjust is running in Sandbox mode. Use this setting for testing. Don't forget to set the environment to `production` before publishing"];
         return YES;
     } else if ([environment isEqualToString:ADJEnvironmentProduction]) {
-        if (logAssert) {
-            [logger assert:@"PRODUCTION: Adjust will run in Production mode. Use this setting only for the build that you want to publish. Set the environment to ADJEnvironmentSandbox if you want to test your app!"];
-        }
+        [self.logger assert:@"PRODUCTION: Adjust is running in Production mode. Use this setting only for the build that you want to publish. Set the environment to `sandbox` if you want to test your app!"];
         return YES;
     }
-    [logger error:@"Malformed environment '%@'", environment];
+    [self.logger error:@"Unknown environment '%@'", environment];
     return NO;
 }
 
 - (BOOL)checkAppToken:(NSString *)appToken {
-    if (appToken == nil) {
-        [ADJAdjustFactory.logger error:@"Missing App Token"];
+    if ([ADJUtil isNull:appToken]) {
+        [self.logger error:@"Missing App Token"];
         return NO;
     }
-    if (appToken == nil || appToken.length != 12) {
-        [ADJAdjustFactory.logger error:@"Malformed App Token '%@'", appToken];
+    if (appToken.length != 12) {
+        [self.logger error:@"Malformed App Token '%@'", appToken];
         return NO;
     }
     return YES;
 }
 
-- (BOOL) isValid {
-    if (![self checkAppToken:self.appToken]) return NO;
-    if (![self checkEnvironment:self.environment logAssert:NO]) return NO;
-    return YES;
+- (BOOL)isValid {
+    return self.appToken != nil;
 }
 
 -(id)copyWithZone:(NSZone *)zone
 {
-    ADJConfig* copy = [[[self class] allocWithZone:zone]
-                       initWithoutCheckAppToken:[self.appToken copyWithZone:zone]
-                       environment:[self.environment copyWithZone:zone]];
+    ADJConfig* copy = [[[self class] allocWithZone:zone] init];
     if (copy) {
+        copy->_appToken = [self.appToken copyWithZone:zone];
+        copy->_environment = [self.environment copyWithZone:zone];
         copy.logLevel = self.logLevel;
         copy.sdkPrefix = [self.sdkPrefix copyWithZone:zone];
+        copy.defaultTracker = [self.defaultTracker copyWithZone:zone];
         copy.eventBufferingEnabled = self.eventBufferingEnabled;
-        copy.macMd5TrackingEnabled = self.macMd5TrackingEnabled;
-        copy.hasDelegate = self.hasDelegate;
+        copy.sendInBackground = self.sendInBackground;
+        copy.delayStart = self.delayStart;
+        copy.userAgent = [self.userAgent copyWithZone:zone];
         // adjust delegate not copied
     }
-    
+
     return copy;
 }
 
