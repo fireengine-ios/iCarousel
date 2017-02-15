@@ -548,10 +548,15 @@
         [shareDao requestLinkForFiles:@[fileSelected.uuid]];
     } else {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            [self downloadImageWithURL:[NSURL URLWithString:fileSelected.tempDownloadUrl] completionBlock:^(BOOL succeeded, UIImage *image) {
+            [self downloadImageWithURL:[NSURL URLWithString:fileSelected.tempDownloadUrl] completionBlock:^(BOOL succeeded, UIImage *image, NSData *imageData) {
                 if (succeeded) {
                     [self hideLoading];
-                    NSArray *activityItems = [NSArray arrayWithObjects:image, nil];
+//                    NSArray *activityItems = [NSArray arrayWithObjects:image, nil];
+                    
+                    NSURL *url = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingString:fileSelected.name]];
+                    [imageData writeToURL:url atomically:NO];
+                    
+                    NSArray *activityItems = @[url];
                     
                     UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
                     [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
@@ -569,7 +574,7 @@
     }
 }
 
-- (void)downloadImageWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, UIImage *image))completionBlock
+- (void)downloadImageWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, UIImage *image, NSData *imageData))completionBlock
 {
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [NSURLConnection sendAsynchronousRequest:request
@@ -578,9 +583,9 @@
                                if ( !error )
                                {
                                    UIImage *image = [[UIImage alloc] initWithData:data];
-                                   completionBlock(YES,image);
+                                   completionBlock(YES,image, data);
                                } else{
-                                   completionBlock(NO,nil);
+                                   completionBlock(NO,nil, nil);
                                }
                            }];
 }

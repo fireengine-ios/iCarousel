@@ -407,27 +407,62 @@
         [self downloadImageWithURL:[NSURL URLWithString:file.tempDownloadUrl]
                    completionBlock:^(BOOL succeeded, UIImage *image, NSData *imageData) {
                        if (succeeded) {
-                           __weak DownloadManager *weakSelf = self;
-                           __block NSString *localizedAssetIdentifier = @"";
-                           dispatch_async(dispatch_get_main_queue(), ^{
-                               [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
-                                   PHAssetChangeRequest *request = [PHAssetChangeRequest creationRequestForAssetFromImage:image];
-                                   PHObjectPlaceholder *assetPlaceHolder = [request placeholderForCreatedAsset];
-                                   PHAssetCollectionChangeRequest *albumChangeRequest = [PHAssetCollectionChangeRequest changeRequestForAssetCollection:albumAssetCollection];
-                                  
-                                   localizedAssetIdentifier = assetPlaceHolder.localIdentifier;
-                                   [albumChangeRequest addAssets:@[assetPlaceHolder]];
-                               } completionHandler:^(BOOL success, NSError * _Nullable error) {
-                                   if (error) {
-                                       NSLog(@"Save Image To Album Error: %@", error.description);
-                                   }else {
-                                       [weakSelf saveFileToSyncedFiles:file localizedIdentifier:localizedAssetIdentifier withName:album.label];
-                                       NSLog(@"Save Image To Album Success uuid:%@", file.uuid);
-                                   }
-                                   [self didFinishSavingFileToAlbum:file error:error withAlbum:album];
-                               }];
-                           });
-                       }else {
+                           
+                           [self getLastCameraRollImage:^(ALAsset *lastAsset) {
+                               if (lastAsset == nil) {
+                                   return;
+                               }
+                               ALAssetRepresentation *rep = [lastAsset defaultRepresentation];
+                               NSString *fileName = [rep filename];
+                               
+                               NSLog(@"%@", fileName);
+                               
+                               NSString *pureNumbers = [[fileName componentsSeparatedByCharactersInSet:
+                                                         [[NSCharacterSet decimalDigitCharacterSet] invertedSet]]
+                                                        componentsJoinedByString:@""];
+                               
+                               __block NSInteger numberAsInteger = [pureNumbers integerValue];
+                               numberAsInteger++;
+                               __weak DownloadManager *weakSelf = self;
+                               __block NSString *localizedAssetIdentifier = @"";
+                               dispatch_async(dispatch_get_main_queue(), ^{
+                                   [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
+                                       NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+                                       NSString *documentsDirectory = [paths objectAtIndex:0];
+                                       
+                                       NSString *tempPath = [documentsDirectory stringByAppendingFormat:@"/IMG_%04ld.%@",
+                                                             (long)numberAsInteger,
+                                                             [self contentTypeForImageData:imageData]];
+                                       
+                                       [imageData writeToFile:tempPath atomically:YES];
+                                       
+                                       PHAssetChangeRequest *request = [PHAssetChangeRequest creationRequestForAssetFromImageAtFileURL:
+                                                                              [NSURL fileURLWithPath:tempPath]];
+
+                                       PHObjectPlaceholder *assetPlaceHolder = [request placeholderForCreatedAsset];
+                                       PHAssetCollectionChangeRequest *albumChangeRequest = [PHAssetCollectionChangeRequest changeRequestForAssetCollection:albumAssetCollection];
+                                       
+                                       localizedAssetIdentifier = assetPlaceHolder.localIdentifier;
+                                       [albumChangeRequest addAssets:@[assetPlaceHolder]];
+                                   } completionHandler:^(BOOL success, NSError * _Nullable error) {
+                                       NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+                                       NSString *documentsDirectory = [paths objectAtIndex:0];
+                                       
+                                       NSString *tempPath = [documentsDirectory stringByAppendingFormat:@"/IMG_%04ld.%@",
+                                                             (long)numberAsInteger,
+                                                             [self contentTypeForImageData:imageData]];
+                                       [[NSFileManager defaultManager] removeItemAtPath:tempPath error:&error];
+                                       if (error) {
+                                           NSLog(@"Save Image To Album Error: %@", error.description);
+                                       }else {
+                                           [weakSelf saveFileToSyncedFiles:file localizedIdentifier:localizedAssetIdentifier withName:album.label];
+                                           NSLog(@"Save Image To Album Success uuid:%@", file.uuid);
+                                       }
+                                       [self didFinishSavingFileToAlbum:file error:error withAlbum:album];
+                                   }];
+                               });
+                           }];
+                       } else {
                            NSLog(@"downloadImageWithURL Failed");
                            NSMutableDictionary* details = [NSMutableDictionary dictionary];
                            [details setValue:@"Couldn't download photo from Server" forKey:NSLocalizedDescriptionKey];

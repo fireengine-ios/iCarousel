@@ -729,7 +729,11 @@
                    completionBlock:^(BOOL succeeded, UIImage *image, NSData *imageData) {
             if (succeeded) {
                 [self hideLoading];
-                NSArray *activityItems = [NSArray arrayWithObjects:image, nil];
+                
+                NSURL *url = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingString:self.file.name]];
+                [imageData writeToURL:url atomically:NO];
+                
+                NSArray *activityItems = @[url];
                 
                 UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
                 [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
