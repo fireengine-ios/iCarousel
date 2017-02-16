@@ -12,6 +12,10 @@
 #import "Reachability.h"
 #import "CacheUtil.h"
 
+@interface BaseDao ()
+@property (nonatomic, assign) BOOL triedAgain;
+@end
+
 @implementation BaseDao
 
 @synthesize delegate;
@@ -91,6 +95,13 @@
 }
 
 - (void)requestFailed:(NSURLResponse *) response withError:(NSError*) error{
+    
+    if (!self.triedAgain) {
+        self.triedAgain = YES;
+        [self reCallRequest];
+        return;
+    }
+    
     if (error) {
         if(error.code == NSURLErrorNotConnectedToInternet){
             NSString *errorMessageWithRequestUrl = [NSString stringWithFormat:@"BaseDao request failed - NSURLErrorNotConnectedToInternet for %@", self.currentRequest.URL];
@@ -128,6 +139,11 @@
 }
 
 - (void)requestFailed:(NSURLResponse *) response {
+    if (!self.triedAgain) {
+        self.triedAgain = YES;
+        [self reCallRequest];
+        return;
+    }
     NSHTTPURLResponse *request = (NSHTTPURLResponse *) response;
     NSString *errorInfoLog = [NSString stringWithFormat:@"BaseDao request failed with code: %d and response", (int)[request statusCode]];
     IGLog(errorInfoLog);
@@ -135,6 +151,10 @@
     if ([request statusCode] > 199 && [request statusCode] < 300) {
         return;
     }
+    
+    
+    //try again
+    
     if([request statusCode] == 401) {
         IGLog(@"BaseDao request failed with 401");
         if(!self.tokenAlreadyRevisitedFlag) {
@@ -640,14 +660,19 @@
     }
 }
 
+- (void)reCallRequest {
+    NSMutableURLRequest *req = [self.currentTask.currentRequest mutableCopy];
+    [req setValue:APPDELEGATE.session.authToken forHTTPHeaderField:@"X-Auth-Token"];
+    self.currentTask = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:req completionHandler:self.taskCompletionHandler];
+    //        NSURLSessionDataTask *newTask = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:req completionHandler:taskCompletionHandler];
+    [self.currentTask resume];
+
+}
+
 - (void) tokenRevisitedSuccessCallback {
     if(APPDELEGATE.session.authToken) {
         if (self.currentTask.currentRequest) {
-            NSMutableURLRequest *req = [self.currentTask.currentRequest mutableCopy];
-            [req setValue:APPDELEGATE.session.authToken forHTTPHeaderField:@"X-Auth-Token"];
-            self.currentTask = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:req completionHandler:self.taskCompletionHandler];
-            //        NSURLSessionDataTask *newTask = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:req completionHandler:taskCompletionHandler];
-            [self.currentTask resume];
+            [self reCallRequest];
         }
         else {
             IGLog(@"tokenRevisitedSuccessCallback self.currentTask.currentRequest = nil");
