@@ -71,6 +71,8 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shouldRemoveMusic) name:MUSIC_SHOULD_BE_REMOVED_NOTIFICATION object:nil];
 
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cropyEmptied) name:CROPY_EMPTY_NOTIFICATION object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(favsEmptied) name:FAV_LIST_EMPTY_NOTIFICATION object:nil];
 
         
     }
@@ -112,6 +114,12 @@
     tableUpdateCounter ++;
     [menuTable reloadData];
 }
+    
+- (void) favsEmptied {
+    sectionMetaArray = [AppUtil readMenuItemsForLoggedIn];
+    tableUpdateCounter ++;
+    [menuTable reloadData];
+}
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
     return [sectionMetaArray count];
@@ -122,7 +130,11 @@
 
 //    if(item.menuType == MenuTypeFiles || item.menuType == MenuTypeLogout)
     
-    if(item.menuType == MenuTypeFiles || ([APPDELEGATE.session.user.countryCode isEqualToString:@"90"] && item.menuType == MenuTypeCellograph) || (![APPDELEGATE.session.user.countryCode isEqualToString:@"90"] && item.menuType == MenuTypeHelp)) {
+//    if(item.menuType == MenuTypeFiles || ([APPDELEGATE.session.user.countryCode isEqualToString:@"90"] && item.menuType == MenuTypeCellograph) || (![APPDELEGATE.session.user.countryCode isEqualToString:@"90"] && item.menuType == MenuTypeHelp)) {
+//        return 21;
+//    }
+    
+    if(item.menuType == MenuTypeFiles || item.menuType == MenuTypeCreateStory) {
         return 21;
     }
     return 0;
@@ -133,7 +145,15 @@
 
 //    if(item.menuType == MenuTypeFiles || item.menuType == MenuTypeLogout)
     
-    if(item.menuType == MenuTypeFiles || ([APPDELEGATE.session.user.countryCode isEqualToString:@"90"] && item.menuType == MenuTypeCellograph) || (![APPDELEGATE.session.user.countryCode isEqualToString:@"90"] && item.menuType == MenuTypeHelp)) {
+//    if(item.menuType == MenuTypeFiles || ([APPDELEGATE.session.user.countryCode isEqualToString:@"90"] && item.menuType == MenuTypeCellograph) || (![APPDELEGATE.session.user.countryCode isEqualToString:@"90"] && item.menuType == MenuTypeHelp)) {
+//        UIView *separatorView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 21)];
+//        UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(12, 10, separatorView.frame.size.width-24, 1)];
+//        separator.backgroundColor = [Util UIColorForHexColor:@"2c3037"];
+//        [separatorView addSubview:separator];
+//        return separatorView;
+//    }
+    
+    if(item.menuType == MenuTypeFiles || item.menuType == MenuTypeCreateStory) {
         UIView *separatorView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 21)];
         UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(12, 10, separatorView.frame.size.width-24, 1)];
         separator.backgroundColor = [Util UIColorForHexColor:@"2c3037"];
@@ -182,10 +202,12 @@
                 cell = [[MenuProfileCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withMetaData:metaData];
             }
             return cell;
-        } else if(indexPath.section == 1) {
-            MenuSearchCell *cell = [[MenuSearchCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withMetaData:metaData];
-            return cell;
-        } else {
+        }
+//        else if(indexPath.section == 1) {
+//            MenuSearchCell *cell = [[MenuSearchCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withMetaData:metaData];
+//            return cell;
+//        }
+        else {
             MenuCell *cell = [[MenuCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withMetaData:metaData isCollapsible:NO isCollapsed:YES];
             return cell;
         }
@@ -193,10 +215,12 @@
         if(indexPath.section == 0) {
             MenuProfileCell *cell = [[MenuProfileCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withMetaData:metaData];
             return cell;
-        } else if(indexPath.section == 1) {
-            MenuSearchCell *cell = [[MenuSearchCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withMetaData:metaData];
-            return cell;
-        } else {
+        }
+//        else if(indexPath.section == 1) {
+//            MenuSearchCell *cell = [[MenuSearchCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withMetaData:metaData];
+//            return cell;
+//        }
+        else {
             MenuCell *cell = [[MenuCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withMetaData:metaData isCollapsible:NO isCollapsed:YES];
             return cell;
         }
@@ -256,6 +280,9 @@
             break;
         case MenuTypeCellograph:
             [delegate didTriggerCellograph];
+            break;
+        case MenuTypeCreateStory:
+            [delegate didTriggerCreateStory];
             break;
         case MenuTypeReachUs:
             [delegate didTriggerReachUs];

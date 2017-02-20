@@ -12,6 +12,7 @@
 
 @synthesize uniqueKey;
 @synthesize rangeRefDate;
+@synthesize refDate;
 @synthesize rangeStart;
 @synthesize rangeEnd;
 @synthesize yearStr;

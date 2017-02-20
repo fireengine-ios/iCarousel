@@ -22,13 +22,15 @@
 #import "VideoPreviewController.h"
 #import "MusicPreviewController.h"
 #import "FileDetailInWebViewController.h"
+#import "FavouriteListController.h"
 #import "CustomConfirmView.h"
+#import "MainSearchTextfield.h"
 
 @protocol FileListDelegate <NSObject>
 - (void) folderWasModified;
 @end
 
-@interface FileListController : MyViewController <UITableViewDelegate, UITableViewDataSource, AbstractFileFolderDelegate, FooterActionsDelegate, FileListDelegate, ImagePreviewDelegate, VideoPreviewDelegate, MusicPreviewDelegate, FileDetailInWebViewDelegate, CustomConfirmDelegate> {
+@interface FileListController : MyViewController <UITableViewDelegate, UITableViewDataSource, AbstractFileFolderDelegate, FooterActionsDelegate, FileListDelegate, ImagePreviewDelegate, VideoPreviewDelegate, MusicPreviewDelegate, FileDetailInWebViewDelegate, CustomConfirmDelegate, UITextFieldDelegate, MyViewDelegate> {
     FileListDao *fileListDao;
     FileListDao *loadMoreDao;
     AddFolderDao *addFolderDao;
@@ -54,6 +56,7 @@
 
 @property (nonatomic, strong) id<FileListDelegate> delegate;
 @property (nonatomic, strong) MetaFile *folder;
+@property (nonatomic, strong) MainSearchTextfield *searchField;
 @property (nonatomic, strong) UITableView *fileTable;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, strong) NSArray *fileList;

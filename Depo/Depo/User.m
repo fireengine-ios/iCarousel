@@ -17,6 +17,7 @@
 @synthesize name;
 @synthesize surname;
 @synthesize cropAndSharePresentFlag;
+@synthesize favouriteTagPresentFlag;
 @synthesize accountType;
 @synthesize username;
 @synthesize phoneNumber;

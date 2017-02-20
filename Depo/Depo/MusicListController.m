@@ -26,6 +26,7 @@
 @synthesize musicDictKeys;
 @synthesize uuidsToBeDeleted;
 @synthesize footerActionMenu;
+@synthesize searchField;
 
 - (id) init {
     if(self = [super init]) {
@@ -67,6 +68,31 @@
         selectedMusicList = [[NSMutableArray alloc] init];
         //musicDictKeys = [[NSMutableArray alloc] init];
         self.musicDictKeys = @[@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"R", @"S", @"T", @"U", @"V", @"Y", @"Z", @"#"];
+        
+        self.topIndex = 10;
+        
+        UIView *searchContainer = [[UIView alloc] initWithFrame:CGRectMake(20, self.topIndex, self.view.frame.size.width, 60)];
+        searchField = [[MainSearchTextfield alloc] initWithFrame:CGRectMake(0, 0, searchContainer.frame.size.width - 40, 40)];
+        searchField.delegate = self;
+        searchField.returnKeyType = UIReturnKeySearch;
+        searchField.userInteractionEnabled = NO;
+        searchField.isAccessibilityElement = YES;
+        searchField.accessibilityIdentifier = @"searchFieldAllFiles";
+        [searchContainer addSubview:searchField];
+        [self.view addSubview:searchContainer];
+        
+        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(searchTapped)];
+        tapGestureRecognizer.numberOfTapsRequired = 1;
+        tapGestureRecognizer.enabled = YES;
+        [searchContainer addGestureRecognizer:tapGestureRecognizer];
+        
+        self.topIndex+=50;
+        
+        UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, 1)];
+        separator.backgroundColor = [Util UIColorForHexColor:@"BEBEBE"];
+        [self.view addSubview:separator];
+        
+        self.topIndex+=1;
         
         musicTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex) style:UITableViewStylePlain];
         musicTable.delegate = self;
@@ -329,6 +355,10 @@
             [self dynamicallyLoadNextPage];
         }
     }
+}
+    
+- (void) searchTapped {
+    [APPDELEGATE.base triggerInnerSearch];
 }
 
 - (void) dynamicallyLoadNextPage {

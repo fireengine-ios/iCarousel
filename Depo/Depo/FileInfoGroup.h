@@ -13,6 +13,7 @@
 
 @property (nonatomic, strong) NSString *uniqueKey;
 @property (nonatomic, strong) NSDate *rangeRefDate;
+@property (nonatomic, strong) NSDate *refDate;
 @property (nonatomic, strong) NSString *rangeStart;
 @property (nonatomic, strong) NSString *rangeEnd;
 @property (nonatomic, strong) NSString *yearStr;

@@ -336,13 +336,13 @@
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
                             PHAssetChangeRequest *request = [PHAssetChangeRequest creationRequestForAssetFromVideoAtFileURL:tempURL];
-                            /* PHObjectPlaceholder *assetPlaceHolder = [request placeholderForCreatedAsset];
-                             PHAssetCollectionChangeRequest *albumChangeRequest = [PHAssetCollectionChangeRequest changeRequestForAssetCollection:albumAssetCollection];
-                             
-                             localizedAssetIdentifier = assetPlaceHolder.localIdentifier; */
+                           /* PHObjectPlaceholder *assetPlaceHolder = [request placeholderForCreatedAsset];
+                            PHAssetCollectionChangeRequest *albumChangeRequest = [PHAssetCollectionChangeRequest changeRequestForAssetCollection:albumAssetCollection];
+                            
+                            localizedAssetIdentifier = assetPlaceHolder.localIdentifier; */
                         } completionHandler:^(BOOL success, NSError * _Nullable er) {
                             if (er) {
-                                NSLog(@"Save Video To Album Error: %@", er.description);
+                                NSLog(@"Save Image To Album Error: %@", er.description);
                             }else {
                                 // [weakSelf saveFileToCameraRoll:file localizedIdentifier:localizedAssetIdentifier];
                                 NSLog(@"Save Video To Album Success uuid:%@", file.uuid);
@@ -357,10 +357,10 @@
             }
             else {
                 [self didFinishSavingVideoFileToAlbum:file videoPath:tempURL.path withAlbum:album error:error];
-                //                NSMutableDictionary* details = [NSMutableDictionary dictionary];
-                //                [details setValue:@"Couldn't find downloaded video location" forKey:NSLocalizedDescriptionKey];
-                //                NSError *error = [NSError errorWithDomain:@"Video Location" code:400 userInfo:details];
-                //                [self didFinishSavingFileToAlbum:file error:error withAlbum:album];
+//                NSMutableDictionary* details = [NSMutableDictionary dictionary];
+//                [details setValue:@"Couldn't find downloaded video location" forKey:NSLocalizedDescriptionKey];
+//                NSError *error = [NSError errorWithDomain:@"Video Location" code:400 userInfo:details];
+//                [self didFinishSavingFileToAlbum:file error:error withAlbum:album];
                 
                 //[self showErrorAlertWithMessage:NSLocalizedString(@"DownloadVideoFailMessage", @"")];
             }

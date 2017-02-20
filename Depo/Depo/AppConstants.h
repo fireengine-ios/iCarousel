@@ -73,6 +73,8 @@
 
 #define CROPY_EMPTY_NOTIFICATION @"CROPY_EMPTY_NOTIFICATION"
 
+#define FAV_LIST_EMPTY_NOTIFICATION @"FAV_LIST_EMPTY_NOTIFICATION"
+
 #define EMAIL_CHANGED_NOTIFICATION @"EMAIL_CHANGED_NOTIFICATION"
 
 #define MSISDN_CHANGED_NOTIFICATION @"MSISDN_CHANGED_NOTIFICATION"
@@ -334,6 +336,7 @@ typedef enum {
     MenuTypeLogin,
     MenuTypeCropAndShare,
     MenuTypeCellograph,
+    MenuTypeCreateStory,
     MenuTypeReachUs,
     MenuTypeHelp,
     MenuTypeLogout
@@ -384,6 +387,7 @@ typedef enum {
     MoreMenuTypeImageDetail,
     MoreMenuTypeShare,
     MoreMenuTypeAlbumShare,
+    MoreMenuTypeFavourites,
     MoreMenuTypeFav,
     MoreMenuTypeUnfav,
     MoreMenuTypeDownloadImage,
@@ -558,6 +562,11 @@ typedef enum {
     ImageGroupTypeDepo = 1,
     ImageGroupTypeInProgress
 } ImageGroupType;
+
+typedef enum {
+    RawFileTypeDepo,
+    RawFileTypeClient
+} RawFileType;
 
 @interface AppConstants : NSObject
 
