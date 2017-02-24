@@ -531,7 +531,6 @@
 		0592FC341ACEC6740083A6C6 /* Depo-Enterprise.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 0592FC321ACEC6740083A6C6 /* Depo-Enterprise.entitlements */; };
 		0592FC371ACEC7200083A6C6 /* AutoSyncWidget-AppStore.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 0592FC351ACEC7200083A6C6 /* AutoSyncWidget-AppStore.entitlements */; };
 		0592FC381ACEC7200083A6C6 /* AutoSyncWidget-Enterprise.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 0592FC361ACEC7200083A6C6 /* AutoSyncWidget-Enterprise.entitlements */; };
-		0592FC3B1ACEC7580083A6C6 /* Info-AppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0592FC391ACEC7580083A6C6 /* Info-AppStore.plist */; };
 		0592FC3C1ACEC7580083A6C6 /* Info-Enterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0592FC3A1ACEC7580083A6C6 /* Info-Enterprise.plist */; };
 		059785BD1A0525B600A101EF /* FooterActionsMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 059785BC1A0525B600A101EF /* FooterActionsMenuView.m */; };
 		05994F971A0B57080081F000 /* music_backward.png in Resources */ = {isa = PBXBuildFile; fileRef = 05994F931A0B57080081F000 /* music_backward.png */; };
@@ -5730,7 +5729,6 @@
 				05AD7F891AD801B20052153A /* added_tick@2x.png in Resources */,
 				0592FC381ACEC7200083A6C6 /* AutoSyncWidget-Enterprise.entitlements in Resources */,
 				05BB0EB11ACD897500D90C98 /* TurkcellSaturaMedIta.ttf in Resources */,
-				0592FC3B1ACEC7580083A6C6 /* Info-AppStore.plist in Resources */,
 				05BB0EAC1ACD897500D90C98 /* TurkcellSaturaBolIta.ttf in Resources */,
 				0592FC371ACEC7200083A6C6 /* AutoSyncWidget-AppStore.entitlements in Resources */,
 			);
