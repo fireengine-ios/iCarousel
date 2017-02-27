@@ -333,7 +333,44 @@
 #pragma mark - Share
 
 - (void) triggerShareForFiles:(NSArray *) fileUuidList {
-    [shareDao requestLinkForFiles:fileUuidList];
+//    [shareDao requestLinkForFiles:fileUuidList];
+    
+    __block NSInteger imagesCount = fileUuidList.count;
+    __block NSMutableArray *allImages = [@[] mutableCopy];
+    
+    for (MetaFile *file in fileUuidList) {
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:
+                                        [NSURL URLWithString:file.detail.thumbLargeUrl]];
+        [NSURLConnection sendAsynchronousRequest:request
+                                           queue:[[NSOperationQueue alloc] init]
+                               completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                                   if ( !error )
+                                   {
+                                       UIImage *image = [[UIImage alloc] initWithData:data];
+                                       
+                                       [allImages addObject:image];
+                                       if (allImages.count == imagesCount) {
+                                           NSLog(@"downloaded all images to share");
+                                           
+                                           dispatch_async(dispatch_get_main_queue(), ^{
+                                               [self hideLoading];
+                                               UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:allImages applicationActivities:nil];
+                                               [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
+                                               activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+                                               
+                                               if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+                                                   [self presentViewController:activityViewController animated:YES completion:nil];
+                                               } else {
+                                                   UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
+                                                   [popup presentPopoverFromRect:CGRectMake(self.view.frame.size.width-240, self.view.frame.size.height-40, 240, 300)inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+                                               }
+                                           });
+                                       }
+                                   } else{
+                                   }
+                               }];
+    }
+    
     [self showLoading];
 }
 

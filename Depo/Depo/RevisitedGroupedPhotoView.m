@@ -675,7 +675,7 @@
 }
 
 - (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {
-    [delegate revisitedGroupedPhoto:self triggerShareForFiles:selectedFileList];
+    [delegate revisitedGroupedPhoto:self triggerShareForFiles:selectedMetaFiles];
     // [APPDELEGATE.base triggerShareForFiles:selectedFileList];
 }
 
