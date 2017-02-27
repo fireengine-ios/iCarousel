@@ -14,10 +14,10 @@
 #import "DropboxStatusDao.h"
 #import "DropboxTokenDao.h"
 #import <DropboxSDK/DropboxSDK.h>
-//#import "CustomConfirmView.h"
+#import "CustomConfirmView.h"
 
 
-@interface DropboxExportController : MyViewController <XYPieChartDelegate, XYPieChartDataSource, UITableViewDataSource, UITableViewDelegate, DBRestClientDelegate/*, CustomConfirmDelegate*/>
+@interface DropboxExportController : MyViewController <XYPieChartDelegate, XYPieChartDataSource, UITableViewDataSource, UITableViewDelegate, DBRestClientDelegate, CustomConfirmDelegate>
 
 @property (nonatomic, strong) UIView *mainStatusView;
 
@@ -32,6 +32,7 @@
 @property (nonatomic, strong) DropboxConnectDao *connectDao;
 @property (nonatomic, strong) DropboxStartDao *startDao;
 @property (nonatomic, strong) DropboxStatusDao *statusDao;
+@property (nonatomic, strong) DropboxStatusDao *statusDaoForStart;
 @property (nonatomic, strong) DropboxTokenDao *tokenDao;
 
 @end

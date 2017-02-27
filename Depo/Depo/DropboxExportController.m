@@ -7,7 +7,7 @@
 //
 
 #import "DropboxExportController.h"
-//#import "RevisitedStorageController.h"
+#import "RevisitedStorageController.h"
 #import "CustomButton.h"
 #import "DropboxExportResult.h"
 #import "Util.h"
@@ -33,6 +33,7 @@
 @synthesize connectDao;
 @synthesize startDao;
 @synthesize statusDao;
+@synthesize statusDaoForStart;
 @synthesize resultTable;
 @synthesize tokenDao;
 
@@ -52,6 +53,11 @@
         startDao.delegate = self;
         startDao.successMethod = @selector(startSuccessCallback);
         startDao.failMethod = @selector(startFailCallback:);
+        
+        statusDaoForStart = [[DropboxStatusDao alloc] init];
+        statusDaoForStart.delegate = self;
+        statusDaoForStart.successMethod = @selector(statusForStartSuccessCallback:);
+        statusDaoForStart.failMethod = @selector(statusFailCallback:);
 
         statusDao = [[DropboxStatusDao alloc] init];
         statusDao.delegate = self;
@@ -157,22 +163,14 @@
 - (void) triggerExport {
     if (![[DBSession sharedSession] isLinked]) {
         [[DBSession sharedSession] linkFromController:self];
-    } else {
+    }
+    else {
         accountInfoClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
         accountInfoClient.delegate = self;
         [accountInfoClient loadAccountInfo];
         [self showLoading];
     }
 }
-
-//- (void) didApproveCustomAlert:(CustomConfirmView *)alertView {
-//    RevisitedStorageController *storageController = [[RevisitedStorageController alloc] init];
-//    [self.navigationController pushViewController:storageController animated:YES];
-//}
-//
-//- (void) didRejectCustomAlert:(CustomConfirmView *)alertView {
-//    
-//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -224,20 +222,9 @@
 }
 
 - (void) connectSuccessCallback {
-    [startDao requestStartDropbox];
+    //    [startDao requestStartDropbox];
+    [statusDaoForStart requestDropboxStatus];
 }
-    
-//- (void) connectSuccessCallback {
-//    [self scheduleStatusQuery];
-//    if(recentResult.isQuotaValid) {
-//        [startDao requestStartDropbox];
-//    }
-//    else {
-//        CustomConfirmView *confirmView = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"ButtonCancel", @"")  withApproveTitle:NSLocalizedString(@"OK", @"")  withMessage:NSLocalizedString(@"DropboxInvalidQuotaMessage", @"") withModalType:ModalTypeApprove];
-//        confirmView.delegate = self;
-//        [APPDELEGATE showCustomConfirm:confirmView];
-//    }
-//}
 
 - (void) connectFailCallback:(NSString *) errorMessage {
     [self hideLoading];
@@ -290,6 +277,26 @@
     }
 }
 
+- (void) statusForStartSuccessCallback:(DropboxExportResult *) status {
+    [self hideLoading];
+    if (status.isQuotaValid) {
+        [startDao requestStartDropbox];
+    } else {
+        CustomConfirmView *confirmView = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"ButtonCancel", @"")  withApproveTitle:NSLocalizedString(@"OK", @"")  withMessage:NSLocalizedString(@"DropboxInvalidQuotaMessage", @"") withModalType:ModalTypeApprove];
+        confirmView.delegate = self;
+        [APPDELEGATE showCustomConfirm:confirmView];
+    }
+}
+
+- (void) didApproveCustomAlert:(CustomConfirmView *)alertView {
+    RevisitedStorageController *storageController = [[RevisitedStorageController alloc] init];
+    [self.navigationController pushViewController:storageController animated:YES];
+}
+
+- (void) didRejectCustomAlert:(CustomConfirmView *)alertView {
+    
+}
+
 - (void) scheduleStatusQuery {
     [statusDao requestDropboxStatus];
     [self showLoading];
@@ -297,6 +304,10 @@
 
 - (void) statusFailCallback:(NSString *) errorMessage {
     [self hideLoading];
+    exportButton.enabled = YES;
+    if([[DBSession sharedSession] isLinked]) {
+        [[DBSession sharedSession] unlinkAll];
+    }
 }
 
 - (void) tokenSuccessCallback:(NSString *) newToken {
@@ -357,7 +368,14 @@
 }
 
 - (void)restClient:(DBRestClient *)client loadAccountInfoFailedWithError:(NSError *)error {
-    [self showErrorAlertWithMessage:NSLocalizedString(@"DropboxAccessError", @"")];
+    if(error.code == 401) { // Uygulama izninin Dropbox'tan silindigi durumda alinan 401 icin eklendi.
+        if([[DBSession sharedSession] isLinked]) {
+            [[DBSession sharedSession] unlinkAll];
+            [self triggerExport];
+        }
+    } else {
+        [self showErrorAlertWithMessage:NSLocalizedString(@"DropboxAccessError", @"")];
+    }
     [self hideLoading];
 }
 

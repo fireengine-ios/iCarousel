@@ -11,7 +11,7 @@
 
 @interface DropboxExportResult : NSObject
 
-//@property (nonatomic) BOOL isQuotaValid;
+@property (nonatomic) BOOL isQuotaValid;
 @property (nonatomic) BOOL connected;
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic) long progress;
