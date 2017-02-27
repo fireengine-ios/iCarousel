@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "InternetDataUsage.h"
 
 @interface Usage : NSObject
 
@@ -24,5 +25,6 @@
 @property (nonatomic) int videoCount;
 @property (nonatomic) int audioCount;
 @property (nonatomic) int othersCount;
+@property (nonatomic) InternetDataUsage *internetDataUsage;
 
 @end

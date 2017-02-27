@@ -34,7 +34,7 @@
 
 #define USER_BASE_URL BASE_URL@"/container/baseUrl"
 
-#define USAGE_INFO_URL BASE_URL@"/account/usageInfo"
+#define USAGE_INFO_URL BASE_URL@"/account/usages"
 
 #define QUOTA_INFO_URL BASE_URL@"/account/quotaInfo"
 

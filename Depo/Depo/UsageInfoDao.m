@@ -27,23 +27,60 @@
         else {
             if (![self checkResponseHasError:response]) {
                 NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-                
+                NSLog(@"USAGE INFO RESPONSE = %@",mainDict);
                 Usage *result = [[Usage alloc] init];
                 
                 if(mainDict != nil && ![mainDict isKindOfClass:[NSNull class]]) {
-                    NSString *totalStorage = [mainDict objectForKey:@"Quota-Bytes"];
-                    NSString *usedStorage = [mainDict objectForKey:@"Bytes-Used"];
-                    NSNumber *imageUsage = [mainDict objectForKey:@"imageUsage"];
-                    NSNumber *othersUsage = [mainDict objectForKey:@"othersUsage"];
-                    NSNumber *audioUsage = [mainDict objectForKey:@"audioUsage"];
-                    NSNumber *videoUsage = [mainDict objectForKey:@"videoUsage"];
                     
-                    NSNumber *totalFileCount = [mainDict objectForKey:@"totalFileCount"];
-                    NSNumber *folderCount = [mainDict objectForKey:@"folderCount"];
-                    NSNumber *imageCount = [mainDict objectForKey:@"imageCount"];
-                    NSNumber *videoCount = [mainDict objectForKey:@"videoCount"];
-                    NSNumber *audioCount = [mainDict objectForKey:@"audioCount"];
-                    NSNumber *othersCount = [mainDict objectForKey:@"othersCount"];
+                    NSDictionary *storageUsage = [mainDict objectForKey:@"storageUsage"];
+                    
+                    NSString *totalStorage = [storageUsage objectForKey:@"Quota-Bytes"];
+                    NSString *usedStorage = [storageUsage objectForKey:@"Bytes-Used"];
+                    NSNumber *imageUsage = [storageUsage objectForKey:@"imageUsage"];
+                    NSNumber *othersUsage = [storageUsage objectForKey:@"othersUsage"];
+                    NSNumber *audioUsage = [storageUsage objectForKey:@"audioUsage"];
+                    NSNumber *videoUsage = [storageUsage objectForKey:@"videoUsage"];
+                    
+                    NSNumber *totalFileCount = [storageUsage objectForKey:@"totalFileCount"];
+                    NSNumber *folderCount = [storageUsage objectForKey:@"folderCount"];
+                    NSNumber *imageCount = [storageUsage objectForKey:@"imageCount"];
+                    NSNumber *videoCount = [storageUsage objectForKey:@"videoCount"];
+                    NSNumber *audioCount = [storageUsage objectForKey:@"audioCount"];
+                    NSNumber *othersCount = [storageUsage objectForKey:@"othersCount"];
+                    
+                    
+                    NSMutableArray *internetDataArray = [mainDict objectForKey:@"internetDataUsage"];
+                    NSDictionary *internetDataDict = internetDataArray[0];
+                    
+                    if (internetDataDict != nil && ![internetDataDict isKindOfClass:[NSNull class]]) {
+                        
+                        InternetDataUsage *internetDataUsage = [[InternetDataUsage alloc] init];
+                        
+                        NSNumber *expiryDate = [internetDataDict objectForKey:@"expiryDate"];
+                        NSString *offerName = [internetDataDict objectForKey:@"offerName"];
+                        NSNumber *remaining = [internetDataDict objectForKey:@"remaining"];
+                        NSNumber *total = [internetDataDict objectForKey:@"total"];
+                        NSString *unit = [internetDataDict objectForKey:@"unit"];
+                        
+                        if (expiryDate != nil && ![expiryDate isKindOfClass:[NSNull class]]) {
+                            internetDataUsage.expiryDate = [expiryDate longLongValue];
+                        }
+                        if (offerName != nil && ![offerName isKindOfClass:[NSNull class]]) {
+                            internetDataUsage.offerName = offerName;
+                        }
+                        if (remaining != nil && ![remaining isKindOfClass:[NSNull class]]) {
+                            internetDataUsage.remaining = [remaining intValue];
+                        }
+                        if (total != nil && ![total isKindOfClass:[NSNull class]]) {
+                            internetDataUsage.total = [total intValue];
+                        }
+                        if (unit != nil && ![unit isKindOfClass:[NSNull class]]) {
+                            internetDataUsage.unit = unit;
+                        }
+                        
+                        result.internetDataUsage = internetDataUsage;
+                    }
+                    
                     
                     if(totalStorage != nil && ![totalStorage isKindOfClass:[NSNull class]]) {
                         result.totalStorage = [totalStorage longLongValue];

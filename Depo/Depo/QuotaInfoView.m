@@ -28,12 +28,28 @@
 @synthesize sizeUnitLabel;
 @synthesize packageUsageContainer;
 
-- (id) initWithFrame:(CGRect)frame withTitle:(NSString *) title withUsage:(Usage *) usage withControllerView:(UIView *) view {
+- (id) initWithFrame:(CGRect)frame withTitle:(NSString *) title withUsage:(Usage *) usage withControllerView:(UIView *) view showInternetData:(BOOL) shouldShow {
      if(self = [super initWithFrame:frame]) {
          
          controllerView = view;
          
-         NSArray *QuotaInfoArray = [self parseQuotaString:usage];
+         NSArray *QuotaInfoArray;
+         double usedQuotaPercentage;
+         
+         if(shouldShow) {
+             Usage *internetDataUsage = [[Usage alloc] init];
+             internetDataUsage.totalStorage = (usage.internetDataUsage.total * 1024) * 1024;
+             internetDataUsage.usedStorage = ((usage.internetDataUsage.total - usage.internetDataUsage.remaining) * 1024) * 1024;
+             QuotaInfoArray = [self parseQuotaString:internetDataUsage];
+             title = usage.internetDataUsage.offerName;
+             usedQuotaPercentage = (double)(usage.internetDataUsage.total - usage.internetDataUsage.remaining) / (double)usage.internetDataUsage.total;
+         } else {
+             QuotaInfoArray = [self parseQuotaString:usage];
+             usedQuotaPercentage = (double)usage.usedStorage/(double)usage.totalStorage;
+         }
+         
+         
+         
          
          //Package Name Label
          
@@ -43,9 +59,13 @@
          
          //Package Date Label
          
-         CustomLabel *packageDateLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, packageLabel.frame.size.height + 5, self.frame.size.width, 15) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:12] withColor:[Util UIColorForHexColor:@"7b8497"] withText:@"" withAlignment:NSTextAlignmentLeft numberOfLines:1];
-         packageDateLabel.text = @"25.01.2017";
-//         [self addSubview:packageDateLabel];
+         if(shouldShow) {
+             CustomLabel *packageDateLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, packageLabel.frame.size.height + 5, self.frame.size.width, 15) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:12] withColor:[Util UIColorForHexColor:@"7b8497"] withText:@"" withAlignment:NSTextAlignmentLeft numberOfLines:1];
+             packageDateLabel.text = [self getExpireDate:usage.internetDataUsage.expiryDate];
+             [self addSubview:packageDateLabel];
+         }
+         
+         
          
          //Package Usage Bar
          
@@ -55,7 +75,7 @@
          packageUsageBar.transform = transform;
          packageUsageBar.progressImage = [UIImage imageNamed:@"progress_fill_pattern.png"];
          packageUsageBar.trackImage = [UIImage imageNamed:@"progress_bg_pattern.png"];
-         [packageUsageBar setProgress:((double)usage.usedStorage/(double)usage.totalStorage)];
+         [packageUsageBar setProgress:usedQuotaPercentage];
          [self addSubview:packageUsageBar];
          
          //Package Rest Label
@@ -146,64 +166,21 @@
     
 }
 
-- (void) denemeFonk:(Usage *) usage {
+- (NSString *) getExpireDate:(long long) timeInMiliseconds {
     
-    packageUsageContainer = [[UIView alloc] initWithFrame:CGRectMake((controllerView.frame.size.width - 40) - 100, controllerView.frame.origin.y - 30 + controllerView.frame.size.height, 100, 30)];
-    //    packageUsageContainer.backgroundColor = [UIColor redColor];
-    [self addSubview:packageUsageContainer];
+//    NSTimeInterval timeInMiliseconds = [[NSDate date] timeIntervalSince1970];
+//    NSDate *date = [[NSDate date] dateByAddingTimeInterval:timeInMiliseconds];
     
-    //Package Size Of Used Label
+//    NSDate* date = [NSDate dateWithTimeIntervalSinceReferenceDate:timeInMiliseconds];
     
-    sizeOfUsedPackageLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0,2,0,0) withFont:[UIFont fontWithName:@"TurkcellSaturaReg" size:25] withColor:[Util UIColorForHexColor:@"EC2182"] withText:@"" withAlignment:NSTextAlignmentLeft numberOfLines:0];
-    sizeOfUsedPackageLabel.text = @"-----";
-    [sizeOfUsedPackageLabel sizeToFit];
-    //             sizeOfUsedPackageLabel.backgroundColor = [UIColor yellowColor];
-    [packageUsageContainer addSubview:sizeOfUsedPackageLabel];
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:((double)timeInMiliseconds / 1000)];
     
-    int horizontalIndex = 5;
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"dd MMM yy"];
+    NSString *dateString = [dateFormat stringFromDate:date];
     
-    //Package - Separator
-    
-    UIView *packageSeparator = [[UIView alloc] initWithFrame:CGRectMake(sizeOfUsedPackageLabel.frame.origin.x + sizeOfUsedPackageLabel.frame.size.width + 7, 7, 1, 20)];
-    packageSeparator.backgroundColor = [Util UIColorForHexColor:@"ebebed"];
-    [packageUsageContainer addSubview:packageSeparator];
-    
-    horizontalIndex += 5;
-    
-    //Package - Size of Package
-    
-    sizeOfPackageLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(packageSeparator.frame.origin.x + packageSeparator.frame.size.width + 7,2,0,0) withFont:[UIFont fontWithName:@"TurkcellSaturaReg" size:25] withColor:[Util UIColorForHexColor:@"5a5859"] withText:@""];
-    sizeOfPackageLabel.text = [NSString stringWithFormat:@"%lld", usage.totalStorage];
-    [sizeOfPackageLabel sizeToFit];
-    //    sizeOfPackageLabel.backgroundColor = [UIColor yellowColor];
-    [packageUsageContainer addSubview:sizeOfPackageLabel];
-    
-    horizontalIndex += 3;
-    
-    //Package Size Unit Label 2
-    
-    sizeUnitLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(sizeOfPackageLabel.frame.origin.x + sizeOfPackageLabel.frame.size.width + 3,1,0,0) withFont:[UIFont fontWithName:@"TurkcellSaturaReg" size:15] withColor:[Util UIColorForHexColor:@"7b8497"] withText:@""];
-    sizeUnitLabel.text = @"GB";
-    [sizeUnitLabel sizeToFit];
-    sizeUnitLabel.frame = CGRectMake(sizeOfPackageLabel.frame.size.width + sizeOfPackageLabel.frame.origin.x + 3,sizeOfPackageLabel.frame.size.height - sizeUnitLabel.frame.size.height,sizeUnitLabel.frame.size.width, sizeUnitLabel.frame.size.height);
-    //    sizeUnitLabel2.backgroundColor = [UIColor yellowColor];
-    [packageUsageContainer addSubview:sizeUnitLabel];
-    
-    float w = 0;
-    float h = 0;
-    
-    for (UIView *v in [packageUsageContainer subviews]) {
-        float fw = v.frame.origin.x + v.frame.size.width;
-        float fh = v.frame.origin.y + v.frame.size.height;
-        w = MAX(fw, w);
-        h = MAX(fh, h);
-    }
-    [packageUsageContainer setFrame:CGRectMake(packageUsageContainer.frame.origin.x, packageUsageContainer.frame.origin.y, w, h)];
-    
-    packageUsageContainer.frame = CGRectMake((controllerView.frame.size.width - 40 - packageUsageContainer.frame.size.width), packageUsageContainer.frame.origin.y, packageUsageContainer.frame.size.width, packageUsageContainer.frame.size.height);
-    
+    return dateString;
 }
-
 
 @end
 

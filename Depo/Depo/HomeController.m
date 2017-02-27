@@ -44,12 +44,8 @@
 @implementation HomeController
 
 @synthesize footer;
-@synthesize usageChart;
 @synthesize usages;
-@synthesize usageColors;
 @synthesize lastSyncLabel;
-@synthesize percentLabel;
-@synthesize usageSummaryView;
 @synthesize usage;
 @synthesize moreStorageButton;
 @synthesize imageButton;
@@ -59,7 +55,6 @@
 @synthesize onkatView;
 @synthesize currentSubscription;
 @synthesize advertisementView;
-@synthesize searchField;
 @synthesize packageContainer;
 @synthesize quotaContainer;
 @synthesize packageInfoView;
@@ -71,12 +66,6 @@
         
         self.title = NSLocalizedString(@"UsageInfo", @"");
         
-//        CustomButton *customSettingsButton = [[CustomButton alloc] initWithFrame:CGRectMake(10, 0, 20, 34) withImageName:@"settings_icon"];
-//        [customSettingsButton addTarget:self action:@selector(triggerSettingsPage) forControlEvents:UIControlEventTouchUpInside];
-//        UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc] initWithCustomView:customSettingsButton];
-//        settingsButton.isAccessibilityElement = YES;
-//        settingsButton.accessibilityIdentifier = @"settingsButtonHome";
-//        self.navigationItem.rightBarButtonItem = settingsButton;
         
         usageDao = [[UsageInfoDao alloc] init];
         usageDao.delegate = self;
@@ -93,33 +82,8 @@
         contactCountDao.delegate = self;
         contactCountDao.successMethod = @selector(contactCountSuccessCallback:);
         contactCountDao.failMethod = @selector(contactCountFailCallback:);
-        */
         
-       
-        [self drawPackageSection:nil];
-       
-
-//        packageInfoView = [[QuotaInfoView alloc] initWithFrame:CGRectMake(20, 30, self.view.frame.size.width - 40, 100) withTitle:@"4.5G Lifebox Standart Internet" withUsage:nil withControllerView:self.view];
-//        [self.view addSubview:packageInfoView];
-//        
-//        //Container Separator
-//        
-//        UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(20, packageInfoView.frame.origin.y + packageInfoView.frame.size.height + (IS_IPAD ? 50 : IS_IPHONE_4_OR_LESS ? 10: 30), self.view.frame.size.width - 40, 1)];
-//        separator.backgroundColor = [Util UIColorForHexColor:@"ebebed"];
-//        [self.view addSubview:separator];
-//        
-//        QuotaInfoView *quotaInfoView = [[QuotaInfoView alloc] initWithFrame:CGRectMake(20, separator.frame.origin.y + 30, self.view.frame.size.width - 40, 100) withTitle:@"Kota Bilgisi" withUsage:nil withControllerView:self.view];
-//        [self.view addSubview:quotaInfoView];
-        
-        
-        moreStorageButton = [[SimpleButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 150)/2, quotaInfoView.frame.origin.y + quotaInfoView.frame.size.height + (IS_IPAD ? 50 : IS_IPHONE_5 ? 20 : 0), 150, 44) withTitle:NSLocalizedString(@"GetMoreStorageButtonTitle", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:22];
-        moreStorageButton.hidden = YES;
-        [moreStorageButton addTarget:self action:@selector(triggerStoragePage) forControlEvents:UIControlEventTouchUpInside];
-        moreStorageButton.isAccessibilityElement = YES;
-        moreStorageButton.accessibilityIdentifier = @"moreStorageButtonHome";
-        [self.view addSubview:moreStorageButton];
-        
-        /*
+         
         float footerHeight = 60;
         float footerYIndex = self.view.frame.size.height - 124;
         if(IS_IPAD) {
@@ -139,63 +103,10 @@
     return self;
 }
 
-- (CGRect) usageChartFrame {
-    float chartWidth = 200;
-    CGRect usageChartRect = CGRectMake(60, IS_IPHONE_4_OR_LESS ? 60 : 80, chartWidth, chartWidth);
-    if(IS_IPAD) {
-        chartWidth = self.view.frame.size.width - 300;
-        usageChartRect = CGRectMake(150, 90, chartWidth, chartWidth);
-    }
-    return usageChartRect;
-}
-
 #pragma mark RecentActivityLinker Method
 
 - (void) recentActivityLinkerDidTriggerPage {
     [MoreMenuView presentRecentActivitesFromController:self.nav];
-}
-
-
-- (void) tempDraw {
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextAddArc(context, 100, 100, 50, 0, 30, 1);
-    CGContextSetRGBFillColor(context, 1, 0.5, 0.5, 1.0);
-    CGContextDrawPath(context, kCGPathStroke);
-}
-
-#pragma mark - XYPieChart Data Source
-
-- (NSUInteger)numberOfSlicesInPieChart:(XYPieChart *)pieChart {
-    return self.usages.count;
-}
-
-- (CGFloat)pieChart:(XYPieChart *)pieChart valueForSliceAtIndex:(NSUInteger)index {
-    long long sliceUsage = [[self.usages objectAtIndex:index] longLongValue];
-    
-    if(sliceUsage > 0.0l) {
-        float totalStorage5Percent = APPDELEGATE.session.usage.totalStorage/20;
-        if(sliceUsage < totalStorage5Percent) {
-            sliceUsage = totalStorage5Percent;
-        }
-    }
-    return sliceUsage;
-}
-
-- (UIColor *)pieChart:(XYPieChart *)pieChart colorForSliceAtIndex:(NSUInteger)index {
-    return [self.usageColors objectAtIndex:(index % self.usageColors.count)];
-}
-
-#pragma mark - XYPieChart Delegate
-- (void)pieChart:(XYPieChart *)pieChart willSelectSliceAtIndex:(NSUInteger)index {
-}
-
-- (void)pieChart:(XYPieChart *)pieChart willDeselectSliceAtIndex:(NSUInteger)index {
-}
-
-- (void)pieChart:(XYPieChart *)pieChart didDeselectSliceAtIndex:(NSUInteger)index {
-}
-
-- (void)pieChart:(XYPieChart *)pieChart didSelectSliceAtIndex:(NSUInteger)index {
 }
 
 - (void) usageSuccessCallback:(Usage *) _usage {
@@ -214,6 +125,13 @@
     [quotaInfoView removeFromSuperview];
     [self drawPackageSection:APPDELEGATE.session.usage];
     
+    moreStorageButton = [[SimpleButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 150)/2, quotaInfoView.frame.origin.y + quotaInfoView.frame.size.height + (IS_IPAD ? 50 : IS_IPHONE_5 ? 20 : 0), 150, 44) withTitle:NSLocalizedString(@"GetMoreStorageButtonTitle", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:22];
+    moreStorageButton.hidden = YES;
+    [moreStorageButton addTarget:self action:@selector(triggerStoragePage) forControlEvents:UIControlEventTouchUpInside];
+    moreStorageButton.isAccessibilityElement = YES;
+    moreStorageButton.accessibilityIdentifier = @"moreStorageButtonHome";
+    [self.view addSubview:moreStorageButton];
+    
 
     self.usages = [NSMutableArray arrayWithCapacity:5];
     [usages addObject:[NSNumber numberWithLongLong:(APPDELEGATE.session.usage.imageUsage + APPDELEGATE.session.usage.videoUsage)]];
@@ -221,24 +139,6 @@
     [usages addObject:[NSNumber numberWithLongLong:APPDELEGATE.session.usage.otherUsage]];
     [usages addObject:[NSNumber numberWithLongLong:0ll]];
     [usages addObject:[NSNumber numberWithLongLong:APPDELEGATE.session.usage.remainingStorage]];
-    
-    self.usageColors =[NSArray arrayWithObjects:
-                       [Util UIColorForHexColor:@"fcd02b"],
-                       [Util UIColorForHexColor:@"84c9b7"],
-                       [Util UIColorForHexColor:@"579fb2"],
-                       [Util UIColorForHexColor:@"ec6453"],
-                       [Util UIColorForHexColor:@"e8e9e8"], nil];
-
-    [usageChart reloadData];
-    
-    CGRect usageSummaryRect = CGRectMake((usageChart.frame.size.width - 130)/2, (usageChart.frame.size.height - 130)/2, 130, 130);
-    if(IS_IPAD) {
-        usageSummaryRect = CGRectMake(80, 80, usageChart.frame.size.width - 160, usageChart.frame.size.width - 160);
-    }
-    usageSummaryView = [[HomeUsageView alloc] initWithFrame:usageSummaryRect withUsage:APPDELEGATE.session.usage];
-    usageSummaryView.isAccessibilityElement = YES;
-    usageSummaryView.accessibilityIdentifier = @"usageSummaryViewHome";
-    [usageChart addSubview:usageSummaryView];
     
     UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(20, moreStorageButton.frame.origin.y + moreStorageButton.frame.size.height + (IS_IPAD ? 50 : IS_IPHONE_4_OR_LESS ? 10: 20), self.view.frame.size.width - 40, 1)];
     separator.backgroundColor = [Util UIColorForHexColor:@"ebebed"];
@@ -285,29 +185,13 @@
 
     if(percentUsageVal >= 80) {
         moreStorageButton.hidden = NO;
-//        CGRect currentChartFrame = [self usageChartFrame];
-//        usageChart.frame = CGRectMake(currentChartFrame.origin.x, currentChartFrame.origin.y + lastSyncLabel.frame.size.height, currentChartFrame.size.width, currentChartFrame.size.height);
         
-        CGRect usageSummaryRect = CGRectMake((usageChart.frame.size.width - 130)/2, (usageChart.frame.size.height - 130)/2, 130, 130);
-        if(IS_IPAD) {
-            usageSummaryRect = CGRectMake(80, 80, usageChart.frame.size.width - 160, usageChart.frame.size.width - 160);
-        }
-        usageSummaryView.frame = usageSummaryRect;
         if(!APPDELEGATE.session.quotaExceed80EventFlag) {
             //session basina bu event bir kere gönderilsin kontrolü eklendi
             [[CurioSDK shared] sendEvent:@"quota_exceeded_80_perc" eventValue:[NSString stringWithFormat:@"current: %.2f", percentUsageVal]];
             [MPush hitTag:@"quota_exceeded_80_perc" withValue:[NSString stringWithFormat:@"current: %.2f", percentUsageVal]];
             APPDELEGATE.session.quotaExceed80EventFlag = YES;
         }
-    } else {
-//        CGRect currentChartFrame = [self usageChartFrame];
-//        usageChart.frame = CGRectMake(currentChartFrame.origin.x, currentChartFrame.origin.y + lastSyncLabel.frame.size.height, currentChartFrame.size.width, currentChartFrame.size.height);
-        
-        CGRect usageSummaryRect = CGRectMake((usageChart.frame.size.width - 130)/2, (usageChart.frame.size.height - 130)/2, 130, 130);
-        if(IS_IPAD) {
-            usageSummaryRect = CGRectMake(80, 80, usageChart.frame.size.width - 160, usageChart.frame.size.width - 160);
-        }
-        usageSummaryView.frame = usageSummaryRect;
     }
 
     if(APPDELEGATE.session.usage.totalStorage > 0 && remainingStorage <= 5242880) {
@@ -329,12 +213,6 @@
 - (void) usageFailCallback:(NSString *) errorMessage {
     [self hideLoading];
 //TODO check    [self showErrorAlertWithMessage:errorMessage];
-}
-
-- (void) triggerSettingsPage {
-    SettingsController *settings = [[SettingsController alloc] init];
-    settings.nav = self.nav;
-    [self.nav pushViewController:settings animated:NO];
 }
 
 - (void) triggerStoragePage {
@@ -377,10 +255,6 @@
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [APPDELEGATE.base dismissAddButton];
-    if(usageChart) {
-        [usageChart reloadData];
-    }
-//    [self performSelector:@selector(tempDraw) withObject:nil afterDelay:2.0f];
 }
 
 - (void) contactCountSuccessCallback:(NSString *) contactVal {
@@ -652,10 +526,6 @@
     }
 }
 
-- (void) searchTapped {
-    [APPDELEGATE.base triggerInnerSearch];
-}
-
 - (void) cancelRequests {
     [usageDao cancelRequest];
     usageDao = nil;
@@ -666,18 +536,20 @@
 
 - (void) drawPackageSection:(Usage *) packageUsage {
     
-//    packageInfoView = [[QuotaInfoView alloc] initWithFrame:CGRectMake(20, 30, self.view.frame.size.width - 40, 100) withTitle:@"4.5G Lifebox Standart Internet" withUsage:packageUsage withControllerView:self.view];
-//    [self.view addSubview:packageInfoView];
-//    
-//    //Container Separator
-//    
-//    UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(20, packageInfoView.frame.origin.y + packageInfoView.frame.size.height + (IS_IPAD ? 50 : IS_IPHONE_4_OR_LESS ? 10: 30), self.view.frame.size.width - 40, 1)];
-//    separator.backgroundColor = [Util UIColorForHexColor:@"ebebed"];
-//    [self.view addSubview:separator];
-    
     UIView *separator;
     
-    quotaInfoView = [[QuotaInfoView alloc] initWithFrame:CGRectMake(20, separator.frame.origin.y + 30, self.view.frame.size.width - 40, 85) withTitle:NSLocalizedString(@"QuotaInfoTitle", @"") withUsage:packageUsage withControllerView:self.view];
+    if(packageUsage.internetDataUsage != nil && ![packageUsage.internetDataUsage isKindOfClass:[NSNull class]]) {
+        packageInfoView = [[QuotaInfoView alloc] initWithFrame:CGRectMake(20, 30, self.view.frame.size.width - 40, 85) withTitle:@"4.5G Lifebox Standart Internet" withUsage:packageUsage withControllerView:self.view showInternetData:YES];
+        [self.view addSubview:packageInfoView];
+        
+        //Container Separator
+        
+        separator = [[UIView alloc] initWithFrame:CGRectMake(20, packageInfoView.frame.origin.y + packageInfoView.frame.size.height + (IS_IPAD ? 50 : IS_IPHONE_4_OR_LESS ? 10: 32), self.view.frame.size.width - 40, 1)];
+        separator.backgroundColor = [Util UIColorForHexColor:@"ebebed"];
+        [self.view addSubview:separator];
+    }
+    
+    quotaInfoView = [[QuotaInfoView alloc] initWithFrame:CGRectMake(20, separator.frame.origin.y + 30, self.view.frame.size.width - 40, 85) withTitle:NSLocalizedString(@"QuotaInfoTitle", @"") withUsage:packageUsage withControllerView:self.view showInternetData:NO];
     [self.view addSubview:quotaInfoView];
 }
 

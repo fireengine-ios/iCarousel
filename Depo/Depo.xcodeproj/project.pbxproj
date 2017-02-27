@@ -865,6 +865,7 @@
 		56A0DE421E5C28C000553462 /* progress_bg_pattern@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56A0DE401E5C28BF00553462 /* progress_bg_pattern@3x.png */; };
 		56A0DE431E5C28C000553462 /* progress_fill_pattern@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56A0DE411E5C28C000553462 /* progress_fill_pattern@3x.png */; };
 		56A0DE471E5E239900553462 /* QuotaInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 56A0DE461E5E239900553462 /* QuotaInfoView.m */; };
+		56A0DE4E1E6445D800553462 /* InternetDataUsage.m in Sources */ = {isa = PBXBuildFile; fileRef = 56A0DE4D1E6445D800553462 /* InternetDataUsage.m */; };
 		56B9E92A1DEC47A600DE1011 /* AppRater.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B9E9291DEC47A600DE1011 /* AppRater.m */; };
 		56B9E92D1DED752600DE1011 /* AppRater.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 56B9E92C1DED752600DE1011 /* AppRater.bundle */; };
 		56BDE2501A8DEA8B0082F8B8 /* OfferCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 56BDE24F1A8DEA8B0082F8B8 /* OfferCell.m */; };
@@ -2452,6 +2453,8 @@
 		56A0DE4A1E600FCD00553462 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		56A0DE4B1E600FCD00553462 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		56A0DE4C1E600FCD00553462 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		56A0DE4D1E6445D800553462 /* InternetDataUsage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InternetDataUsage.m; sourceTree = "<group>"; };
+		56A0DE4F1E64465400553462 /* InternetDataUsage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InternetDataUsage.h; sourceTree = "<group>"; };
 		56B9E9281DEC47A600DE1011 /* AppRater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppRater.h; sourceTree = "<group>"; };
 		56B9E9291DEC47A600DE1011 /* AppRater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppRater.m; sourceTree = "<group>"; };
 		56B9E92C1DED752600DE1011 /* AppRater.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AppRater.bundle; sourceTree = "<group>"; };
@@ -3635,6 +3638,8 @@
 				94FAE0BC1D2F1F1800BC9F77 /* VideofyAudio.m */,
 				94FAE0D01D2F772B00BC9F77 /* SocialExportResult.h */,
 				94FAE0D11D2F772B00BC9F77 /* SocialExportResult.m */,
+				56A0DE4D1E6445D800553462 /* InternetDataUsage.m */,
+				56A0DE4F1E64465400553462 /* InternetDataUsage.h */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -6069,6 +6074,7 @@
 				24FE7B0B1B6A539D007B53A0 /* PrintWebViewController.m in Sources */,
 				0555EF1A19F8F50B0068F4CC /* ConfirmDeleteModalController.m in Sources */,
 				05C0E2011A06ABD7005E1E92 /* MoveModalFooterView.m in Sources */,
+				56A0DE4E1E6445D800553462 /* InternetDataUsage.m in Sources */,
 				94C7CEE81D2C42C50040897A /* SelectiblePhotoListModalController.m in Sources */,
 				057942471C3EEFB500899923 /* SendVerificationEmailDao.m in Sources */,
 				057942441C3EEFA500899923 /* VerifyPhoneDao.m in Sources */,

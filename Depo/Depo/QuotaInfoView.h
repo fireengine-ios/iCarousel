@@ -5,9 +5,7 @@
 
 @interface QuotaInfoView : UIView
 
-- (id) initWithFrame:(CGRect)frame withTitle:(NSString *) title withUsage:(Usage *) usage withControllerView:(UIView *) view;
-- (void) reloadData:(Usage *) usage;
-- (void) denemeFonk:(Usage *) usage;
+- (id) initWithFrame:(CGRect)frame withTitle:(NSString *) title withUsage:(Usage *) usage withControllerView:(UIView *) view showInternetData:(BOOL) shouldShow;
 
 @property (nonatomic, strong) UIView *packageUsageContainer;
 @property (nonatomic, strong) UIProgressView *packageUsageBar;
