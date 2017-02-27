@@ -23,5 +23,5 @@
 @property (nonatomic, strong) LoginTextfield *captchaField;
 @property (nonatomic, strong) UIImageView *captchaView;
 @property (nonatomic, strong) CustomButton *refreshButton;
-
+@property (nonatomic, strong) SimpleButton *okButton;
 @end

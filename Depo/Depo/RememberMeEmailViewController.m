@@ -24,6 +24,7 @@
 @synthesize captchaField;
 @synthesize captchaView;
 @synthesize refreshButton;
+@synthesize okButton;
 
 - (id) init {
     if(self = [super init]) {
@@ -119,7 +120,7 @@
 //        [self.view addSubview:smsInfoLabel];
         [container addSubview:smsInfoLabel];
         
-        SimpleButton *okButton = [[SimpleButton alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60) withTitle:NSLocalizedString(@"OK", @"") withTitleColor:[Util UIColorForHexColor:@"ffffff"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"3FB0E8"] withBgColor:[Util UIColorForHexColor:@"3FB0E8"] withCornerRadius:0];
+        okButton = [[SimpleButton alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60) withTitle:NSLocalizedString(@"OK", @"") withTitleColor:[Util UIColorForHexColor:@"ffffff"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"3FB0E8"] withBgColor:[Util UIColorForHexColor:@"3FB0E8"] withCornerRadius:0];
         [okButton addTarget:self action:@selector(forgotPassClicked) forControlEvents:UIControlEventTouchUpInside];
 //        [self.view addSubview:okButton];
         okButton.isAccessibilityElement = YES;
@@ -262,11 +263,17 @@
 
 -(void)setViewMovedUp:(BOOL)movedUp {
     if (movedUp) {
-        container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + 280);
-        [container setContentOffset:CGPointMake(0, 70) animated:YES];
+//        container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + 300);
+//        [container setContentOffset:CGPointMake(0, 230) animated:YES];
+        
+        CGRect okFrame = okButton.frame;
+        okFrame.origin.y = self.view.frame.size.height - 280;
+        okButton.frame = okFrame;
+        
     } else {
-        container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
-        [container setContentOffset:CGPointZero animated:YES];
+//        container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
+//        [container setContentOffset:CGPointZero animated:YES];
+        okButton.frame = CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60);
     }
 }
 
