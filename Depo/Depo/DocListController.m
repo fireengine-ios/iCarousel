@@ -416,7 +416,7 @@
 - (void) deleteSuccessCallback {
     if(isSelectible) {
         
-        self.title = NSLocalizedString(@"FilesTitle", @"");
+        self.title = NSLocalizedString(@"DocTitle", @"");
         
         self.navigationItem.leftBarButtonItem = previousButtonRef;
         
