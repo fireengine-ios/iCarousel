@@ -20,6 +20,7 @@
 #import "CustomAdvertisementView.h"
 #import "CustomConfirmView.h"
 #import "MainSearchTextfield.h"
+#import "QuotaInfoView.h"
 
 @interface HomeController : MyViewController <RecentActivityLinkerDelegate, XYPieChartDelegate, XYPieChartDataSource, OnKatViewDeleagate,CustomAdvertisementDelegate, CustomConfirmDelegate> {
     UsageInfoDao *usageDao;
@@ -34,6 +35,8 @@
 @property (nonatomic, strong) CustomLabel *lastSyncLabel;
 @property (nonatomic, strong) CustomLabel *percentLabel;
 @property (nonatomic, strong) HomeUsageView *usageSummaryView;
+@property (nonatomic, strong) QuotaInfoView *packageInfoView;
+@property (nonatomic, strong) QuotaInfoView *quotaInfoView;
 @property (nonatomic, strong) Usage *usage;
 @property (nonatomic, strong) SimpleButton *moreStorageButton;
 @property (nonatomic, strong) UsageButton *imageButton;
@@ -44,5 +47,7 @@
 @property (nonatomic, strong) Subscription *currentSubscription;
 @property (nonatomic, strong) CustomAdvertisementView *advertisementView;
 @property (nonatomic, strong) MainSearchTextfield *searchField;
+@property (nonatomic, strong) UIView *packageContainer;
+@property (nonatomic, strong) UIView *quotaContainer;
 
 @end

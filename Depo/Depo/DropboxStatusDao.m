@@ -29,7 +29,7 @@
             if (![self checkResponseHasError:response]) {
                 NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
                 if(mainDict != nil && ![mainDict isKindOfClass:[NSNull class]]) {
-//                    NSNumber *isQuotaValid = [mainDict objectForKey:@"quotaValid"];
+                    NSNumber *isQuotaValid = [mainDict objectForKey:@"quotaValid"];
                     NSNumber *connected = [mainDict objectForKey:@"connected"];
                     NSNumber *failedSize = [mainDict objectForKey:@"failedSize"];
                     NSNumber *failedCount = [mainDict objectForKey:@"failedCount"];
@@ -41,7 +41,7 @@
                     NSString *status = [self strByRawVal:[mainDict objectForKey:@"status"]];
                     
                     DropboxExportResult *result = [[DropboxExportResult alloc] init];
-//                    result.isQuotaValid = [self boolByNumber:isQuotaValid];
+                    result.isQuotaValid = [self boolByNumber:isQuotaValid];
                     result.connected = [self boolByNumber:connected];
                     result.date = [self dateByRawVal:[mainDict objectForKey:@"date"]];
                     result.failedSize = [self longByNumber:failedSize];

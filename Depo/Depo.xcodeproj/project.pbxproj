@@ -860,6 +860,11 @@
 		569B5CB91DF021D9008153F5 /* icon_newpass.png in Resources */ = {isa = PBXBuildFile; fileRef = 569B5CB61DF021D9008153F5 /* icon_newpass.png */; };
 		569B5CBA1DF021D9008153F5 /* icon_newpass@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 569B5CB71DF021D9008153F5 /* icon_newpass@2x.png */; };
 		569B5CBB1DF021D9008153F5 /* icon_newpass@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 569B5CB81DF021D9008153F5 /* icon_newpass@3x.png */; };
+		56A0DE3E1E5C28AA00553462 /* progress_bg_pattern@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56A0DE3C1E5C28AA00553462 /* progress_bg_pattern@2x.png */; };
+		56A0DE3F1E5C28AA00553462 /* progress_fill_pattern@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56A0DE3D1E5C28AA00553462 /* progress_fill_pattern@2x.png */; };
+		56A0DE421E5C28C000553462 /* progress_bg_pattern@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56A0DE401E5C28BF00553462 /* progress_bg_pattern@3x.png */; };
+		56A0DE431E5C28C000553462 /* progress_fill_pattern@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56A0DE411E5C28C000553462 /* progress_fill_pattern@3x.png */; };
+		56A0DE471E5E239900553462 /* QuotaInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 56A0DE461E5E239900553462 /* QuotaInfoView.m */; };
 		56B9E92A1DEC47A600DE1011 /* AppRater.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B9E9291DEC47A600DE1011 /* AppRater.m */; };
 		56B9E92D1DED752600DE1011 /* AppRater.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 56B9E92C1DED752600DE1011 /* AppRater.bundle */; };
 		56BDE2501A8DEA8B0082F8B8 /* OfferCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 56BDE24F1A8DEA8B0082F8B8 /* OfferCell.m */; };
@@ -2437,6 +2442,16 @@
 		569B5CB61DF021D9008153F5 /* icon_newpass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_newpass.png; sourceTree = "<group>"; };
 		569B5CB71DF021D9008153F5 /* icon_newpass@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_newpass@2x.png"; sourceTree = "<group>"; };
 		569B5CB81DF021D9008153F5 /* icon_newpass@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_newpass@3x.png"; sourceTree = "<group>"; };
+		56A0DE3C1E5C28AA00553462 /* progress_bg_pattern@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "progress_bg_pattern@2x.png"; sourceTree = "<group>"; };
+		56A0DE3D1E5C28AA00553462 /* progress_fill_pattern@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "progress_fill_pattern@2x.png"; sourceTree = "<group>"; };
+		56A0DE401E5C28BF00553462 /* progress_bg_pattern@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "progress_bg_pattern@3x.png"; sourceTree = "<group>"; };
+		56A0DE411E5C28C000553462 /* progress_fill_pattern@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "progress_fill_pattern@3x.png"; sourceTree = "<group>"; };
+		56A0DE461E5E239900553462 /* QuotaInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuotaInfoView.m; sourceTree = "<group>"; };
+		56A0DE481E5E23B400553462 /* QuotaInfoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuotaInfoView.h; sourceTree = "<group>"; };
+		56A0DE491E600FCC00553462 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		56A0DE4A1E600FCD00553462 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		56A0DE4B1E600FCD00553462 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		56A0DE4C1E600FCD00553462 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		56B9E9281DEC47A600DE1011 /* AppRater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppRater.h; sourceTree = "<group>"; };
 		56B9E9291DEC47A600DE1011 /* AppRater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppRater.m; sourceTree = "<group>"; };
 		56B9E92C1DED752600DE1011 /* AppRater.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AppRater.bundle; sourceTree = "<group>"; };
@@ -3375,6 +3390,8 @@
 				94E5E6531E24F68C008B0216 /* RevisitedRawPhotoCollCell.m */,
 				94E5E6611E24FA2E008B0216 /* AutoSyncOffHeaderView.h */,
 				94E5E6621E24FA2E008B0216 /* AutoSyncOffHeaderView.m */,
+				56A0DE461E5E239900553462 /* QuotaInfoView.m */,
+				56A0DE481E5E23B400553462 /* QuotaInfoView.h */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -3961,6 +3978,10 @@
 		0589060219CC226500A9E517 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				56A0DE401E5C28BF00553462 /* progress_bg_pattern@3x.png */,
+				56A0DE411E5C28C000553462 /* progress_fill_pattern@3x.png */,
+				56A0DE3C1E5C28AA00553462 /* progress_bg_pattern@2x.png */,
+				56A0DE3D1E5C28AA00553462 /* progress_fill_pattern@2x.png */,
 				568FEFF01E2D6CE000AF4FFB /* icon_m_createstory@3x.png */,
 				568FEFEC1E2D6CBB00AF4FFB /* icon_m_createstory@2x.png */,
 				568FEFEA1E2D6CAE00AF4FFB /* icon_m_createstory.png */,
@@ -5103,6 +5124,7 @@
 			knownRegions = (
 				en,
 				tr,
+				de,
 			);
 			mainGroup = 051E1DEA19CAC2F900FD1E03;
 			productRefGroup = 051E1DF419CAC2F900FD1E03 /* Products */;
@@ -5306,6 +5328,7 @@
 				0589066919CC524900A9E517 /* TurkcellSaturaBolIta.ttf in Resources */,
 				05C4E4A31C4D5E97005B28E9 /* icon_dialog_positive@3x.png in Resources */,
 				050D4C3D1A31E58100809A01 /* contacts_backup@2x.png in Resources */,
+				56A0DE3E1E5C28AA00553462 /* progress_bg_pattern@2x.png in Resources */,
 				0526448619D5A26400B63759 /* remove_icon.png in Resources */,
 				94FAE0DA1D2F7E5500BC9F77 /* minibutton_play@2x.png in Resources */,
 				5695E6E81E1D11F000351109 /* icon_calendar@3x.png in Resources */,
@@ -5555,6 +5578,7 @@
 				567408AD1DFFC165003DF541 /* overlay_wt_tr@2x.png in Resources */,
 				058219E01A386829001FA679 /* nav_favourite_inactive_icon.png in Resources */,
 				94427C571DFEF18700FC28B5 /* scroll_pointer.png in Resources */,
+				56A0DE431E5C28C000553462 /* progress_fill_pattern@3x.png in Resources */,
 				051CB40319D2F71200E5FC88 /* nav_select_icon@2x.png in Resources */,
 				949414E01CC8BCC4008904E2 /* icon_m_baskial_w.png in Resources */,
 				05D5E58E1B09D56A00A22957 /* icon_settings_dialog_close.png in Resources */,
@@ -5712,6 +5736,7 @@
 				94B3BE221D810EFA0086D05E /* Default_750.png in Resources */,
 				94E549321CC6BA43003CB5DC /* icon_menu_bizeulasin_w@3x.png in Resources */,
 				94FBAEF71D5B924300C8E6F1 /* img_lifebox@2x.png in Resources */,
+				56A0DE3F1E5C28AA00553462 /* progress_fill_pattern@2x.png in Resources */,
 				5695E6E31E1B6F8D00351109 /* icon_kapakresmi@2x.png in Resources */,
 				0526448C19D5A26400B63759 /* help_icon.png in Resources */,
 				0589062519CC226D00A9E517 /* logout_icon.png in Resources */,
@@ -5721,6 +5746,7 @@
 				0526448319D5A26400B63759 /* android_icon@2x.png in Resources */,
 				94B6C8791CB657610083C1A8 /* icon_yukle_depo@3x.png in Resources */,
 				94E549281CC6BA34003CB5DC /* icon_suggestion@2x.png in Resources */,
+				56A0DE421E5C28C000553462 /* progress_bg_pattern@3x.png in Resources */,
 				94427C5D1DFEF19000FC28B5 /* scroll_pointer@2x.png in Resources */,
 				058337E319ED9EEA00DCF0C5 /* airplay_icon@2x.png in Resources */,
 				9433BD111D21EB8900991483 /* icon_dbtasi@3x.png in Resources */,
@@ -5903,6 +5929,7 @@
 				94BF90DD1D5A0E5E000078FD /* RevisitedAlbumListView.m in Sources */,
 				05B01D9C1AC2E2D000D5B827 /* NSDate+Utilities.m in Sources */,
 				94F130C31D2496C10086BDBB /* SettingsSocialController.m in Sources */,
+				56A0DE471E5E239900553462 /* QuotaInfoView.m in Sources */,
 				0526444819D546BB00B63759 /* MapUtil.m in Sources */,
 				0514A6291BF4D1030084E0AB /* BaseBgController.m in Sources */,
 				94FAE0CF1D2F6EDF00BC9F77 /* FBStatusDao.m in Sources */,
@@ -5992,7 +6019,6 @@
 				057942501C3FDCF900899923 /* EmailValidationController.m in Sources */,
 				94DCA10F1D3D9B34000965AE /* CellographOrdersDao.m in Sources */,
 				056AC8FB19D15DBB00AC96C3 /* TokenManager.m in Sources */,
-				05C2A0301A79830500EE4D78 /* ADJEvent.m in Sources */,
 				56D842AE1E2E48D300028002 /* SyncDBUtils.m in Sources */,
 				051E1E2F19CAC56A00FD1E03 /* AppUtil.m in Sources */,
 				563A98AC1E52ECF800D24B7E /* NSString+ADJAdditions.m in Sources */,
@@ -6075,8 +6101,6 @@
 				052644B119D5A2A600B63759 /* SettingsBaseViewController.m in Sources */,
 				05A9382A1AF6AE9100AE2892 /* Message.m in Sources */,
 				054730C319FA3D5A00F913FF /* FavoriteDao.m in Sources */,
-				05DEB1EF1A81775F007793DD /* SyncDBUtils.m in Sources */,
-				05C2A0331A79830500EE4D78 /* ADJPackageHandler.m in Sources */,
 				94E5E6631E24FA2E008B0216 /* AutoSyncOffHeaderView.m in Sources */,
 				057DF50819D038080005A389 /* RequestTokenDao.m in Sources */,
 				05A938301AF6AE9100AE2892 /* UpdateServerIntegration.m in Sources */,
@@ -6088,7 +6112,6 @@
 				051E1E8D19CAC92700FD1E03 /* ASINetworkQueue.m in Sources */,
 				051DE35D19CC128600F27C85 /* MyViewController.m in Sources */,
 				535FD96B1DEF5F92005AB4E7 /* DownloadManager.m in Sources */,
-				05C2A02D1A79830500EE4D78 /* ADJAttributionHandler.m in Sources */,
 				56D842AA1E2E48D300028002 /* ContactUtil.m in Sources */,
 				9433BCF91D219AE700991483 /* ProfilePhotoUploadDao.m in Sources */,
 				947CA2F11D68AEE00026772F /* GroupedCell.m in Sources */,
@@ -6116,7 +6139,6 @@
 				05AD502E1A7ED76200C40777 /* MigrateStatusController.m in Sources */,
 				052644B019D5A2A600B63759 /* SettingsMusicController.m in Sources */,
 				56D842B21E2E48D300028002 /* SyncStatus.m in Sources */,
-				05C2A02E1A79830500EE4D78 /* ADJConfig.m in Sources */,
 				94EB28BC1CCD142B00A45050 /* SearchByGroupDao.m in Sources */,
 				051E1E8719CAC92700FD1E03 /* ASIDataCompressor.m in Sources */,
 				94680E071D416F5700DC5227 /* FBStopDao.m in Sources */,
@@ -6176,7 +6198,6 @@
 				0515F2F81C451E240098081C /* SingleCharField.m in Sources */,
 				9445B97E1C9F28FE000FDB80 /* PhotoListPopupController.m in Sources */,
 				56D842AC1E2E48D300028002 /* SyncAdapter.m in Sources */,
-				05C2A0271A79830500EE4D78 /* ADJActivityPackage.m in Sources */,
 				94BEABFB1CAD1BFE002E37A7 /* EulaApproveDao.m in Sources */,
 				94C7CEFD1D2CE67E0040897A /* SquareSequencedPictureView.m in Sources */,
 				0526444E19D5625E00B63759 /* MoreMenuView.m in Sources */,
@@ -6316,7 +6337,6 @@
 				0515706719E5B34100C62B98 /* SquareImageView.m in Sources */,
 				05E8113519DF10340063F99A /* RefAlbumCell.m in Sources */,
 				563A98B01E52ECF800D24B7E /* ADJAttributionHandler.m in Sources */,
-				05DEB1EA1A81775F007793DD /* ContactDevice.m in Sources */,
 				94DCA10C1D3D8F67000965AE /* TaggedFileListDao.m in Sources */,
 				5247D5E71DD342B900FFE63E /* ConfirmRemoveModalController.m in Sources */,
 				94B3BE2F1D81F7C40086D05E /* FaqUrlDao.m in Sources */,
@@ -6386,6 +6406,7 @@
 			children = (
 				051E1E0019CAC2F900FD1E03 /* en */,
 				053EC45519DAA289000C2B77 /* tr */,
+				56A0DE4A1E600FCD00553462 /* de */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -6395,6 +6416,7 @@
 			children = (
 				051E1E1919CAC2F900FD1E03 /* en */,
 				053EC45619DAA289000C2B77 /* tr */,
+				56A0DE4B1E600FCD00553462 /* de */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -6404,6 +6426,7 @@
 			children = (
 				053EC45819DAA2BF000C2B77 /* en */,
 				053EC45A19DAA2CC000C2B77 /* tr */,
+				56A0DE491E600FCC00553462 /* de */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -6413,6 +6436,7 @@
 			children = (
 				05BB0EB81ACD94FC00D90C98 /* en */,
 				05BB0EBA1ACD94FD00D90C98 /* tr */,
+				56A0DE4C1E600FCD00553462 /* de */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

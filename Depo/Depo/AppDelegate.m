@@ -438,6 +438,9 @@
     [self.session cleanoutAfterLogout];
     [CacheUtil resetRememberMeToken];
     [[UploadQueue sharedInstance] cancelAllUploads];
+    if([[DBSession sharedSession] isLinked]) {
+        [[DBSession sharedSession] unlinkAll];
+    }
     
     //    WelcomeController *welcomePage = [[WelcomeController alloc] init];
     LoginController *loginController = [[LoginController alloc] init];

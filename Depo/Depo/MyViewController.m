@@ -106,6 +106,12 @@
     [APPDELEGATE showCustomAlert:alert];
 }
 
+- (void) showErrorAlertWithMessage:(NSString *) errMessage withDelegate:(id) delegate {
+    CustomAlertView *alert = [[CustomAlertView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Error", @"") withMessage:errMessage withModalType:ModalTypeError];
+    alert.delegate = delegate;
+    [APPDELEGATE showCustomAlert:alert];
+}
+
 - (void) showInfoAlertWithMessage:(NSString *) infoMessage {
     CustomAlertView *alert = [[CustomAlertView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withMessage:infoMessage withModalType:ModalTypeSuccess];
     [APPDELEGATE showCustomAlert:alert];
@@ -174,7 +180,7 @@
     if(moreMenuView) {
         [self dismissMoreMenu];
     } else {
-        moreMenuView = [[MoreMenuView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height) withList:itemList withFileFolder:fileFolder];
+        moreMenuView = [[MoreMenuView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) withList:itemList withFileFolder:fileFolder];
         moreMenuView.delegate = self;
         [self.view addSubview:moreMenuView];
         [self.view bringSubviewToFront:moreMenuView];

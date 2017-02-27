@@ -33,6 +33,7 @@
 #import "MPush.h"
 #import "GroupedPhotosAndVideosController.h"
 #import "RevisitedGroupedPhotosController.h"
+#import "QuotaInfoView.h"
 
 #include <math.h>
 
@@ -59,20 +60,23 @@
 @synthesize currentSubscription;
 @synthesize advertisementView;
 @synthesize searchField;
+@synthesize packageContainer;
+@synthesize quotaContainer;
+@synthesize packageInfoView;
+@synthesize quotaInfoView;
 
 - (id)init {
     self = [super init];
     if (self) {
-        UIImageView *imgForTitle = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 29, 20)];
-        imgForTitle.image = [UIImage imageNamed:@"cloud_icon.png"];
-        self.navigationItem.titleView = imgForTitle;
         
-        CustomButton *customSettingsButton = [[CustomButton alloc] initWithFrame:CGRectMake(10, 0, 20, 34) withImageName:@"settings_icon"];
-        [customSettingsButton addTarget:self action:@selector(triggerSettingsPage) forControlEvents:UIControlEventTouchUpInside];
-        UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc] initWithCustomView:customSettingsButton];
-        settingsButton.isAccessibilityElement = YES;
-        settingsButton.accessibilityIdentifier = @"settingsButtonHome";
-        self.navigationItem.rightBarButtonItem = settingsButton;
+        self.title = NSLocalizedString(@"UsageInfo", @"");
+        
+//        CustomButton *customSettingsButton = [[CustomButton alloc] initWithFrame:CGRectMake(10, 0, 20, 34) withImageName:@"settings_icon"];
+//        [customSettingsButton addTarget:self action:@selector(triggerSettingsPage) forControlEvents:UIControlEventTouchUpInside];
+//        UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc] initWithCustomView:customSettingsButton];
+//        settingsButton.isAccessibilityElement = YES;
+//        settingsButton.accessibilityIdentifier = @"settingsButtonHome";
+//        self.navigationItem.rightBarButtonItem = settingsButton;
         
         usageDao = [[UsageInfoDao alloc] init];
         usageDao.delegate = self;
@@ -91,54 +95,24 @@
         contactCountDao.failMethod = @selector(contactCountFailCallback:);
         */
         
-        UIView *searchBgView = [[UIView alloc] initWithFrame:CGRectMake(20, 10, self.view.frame.size.width - 40, 40)];
-        searchField = [[MainSearchTextfield alloc] initWithFrame:CGRectMake(0, 0, searchBgView.frame.size.width, searchBgView.frame.size.height)];
-        searchField.returnKeyType = UIReturnKeySearch;
-        searchField.userInteractionEnabled = NO;
-        searchField.isAccessibilityElement = YES;
-        searchField.accessibilityIdentifier = @"searchFieldHome";
-        [searchBgView addSubview:searchField];
-        
-        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(searchTapped)];
-        tapGestureRecognizer.numberOfTapsRequired = 1;
-        tapGestureRecognizer.enabled = YES;
-        tapGestureRecognizer.isAccessibilityElement = YES;
-        [searchBgView addGestureRecognizer:tapGestureRecognizer];
+       
+        [self drawPackageSection:nil];
+       
 
-        searchBgView.isAccessibilityElement = YES;
-        searchBgView.accessibilityIdentifier = @"searchBgViewHome";
-        [self.view addSubview:searchBgView];
+//        packageInfoView = [[QuotaInfoView alloc] initWithFrame:CGRectMake(20, 30, self.view.frame.size.width - 40, 100) withTitle:@"4.5G Lifebox Standart Internet" withUsage:nil withControllerView:self.view];
+//        [self.view addSubview:packageInfoView];
+//        
+//        //Container Separator
+//        
+//        UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(20, packageInfoView.frame.origin.y + packageInfoView.frame.size.height + (IS_IPAD ? 50 : IS_IPHONE_4_OR_LESS ? 10: 30), self.view.frame.size.width - 40, 1)];
+//        separator.backgroundColor = [Util UIColorForHexColor:@"ebebed"];
+//        [self.view addSubview:separator];
+//        
+//        QuotaInfoView *quotaInfoView = [[QuotaInfoView alloc] initWithFrame:CGRectMake(20, separator.frame.origin.y + 30, self.view.frame.size.width - 40, 100) withTitle:@"Kota Bilgisi" withUsage:nil withControllerView:self.view];
+//        [self.view addSubview:quotaInfoView];
         
-        float chartWidth = 200;
-        float labelRadius = 40;
-        if(IS_IPAD) {
-            chartWidth = self.view.frame.size.width - 300;
-            labelRadius = 150;
-        }
-        usageChart = [[XYPieChart alloc] initWithFrame:[self usageChartFrame]];
-        usageChart.dataSource = self;
-        usageChart.startPieAngle = M_PI_2;
-        usageChart.animationSpeed = 1.0;
-        usageChart.labelFont = [UIFont fontWithName:@"TurkcellSaturaBol" size:24];
-        usageChart.labelRadius = labelRadius;
-        usageChart.showLabel = NO;
-        usageChart.showPercentage = NO;
-        usageChart.pieBackgroundColor = [UIColor whiteColor];
-        usageChart.pieCenter = CGPointMake(chartWidth/2, chartWidth/2);
-        usageChart.userInteractionEnabled = NO;
-        usageChart.labelShadowColor = [UIColor blackColor];
-        usageChart.isAccessibilityElement = YES;
-        usageChart.accessibilityIdentifier = @"usageChartHome";
-        [self.view addSubview:usageChart];
-
-        NSString *lastSyncTitle = @"";
-        if([SyncUtil readLastSyncDate] != nil) {
-            lastSyncTitle = [NSString stringWithFormat:NSLocalizedString(@"LastSyncFormat", @""), [AppUtil readDueDateInReadableFormat:[SyncUtil readLastSyncDate]]];
-        }
-        lastSyncLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, IS_IPHONE_5 ? 18 : 8, self.view.frame.size.width - 40, 18) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:15] withColor:[Util UIColorForHexColor:@"7b8497"] withText:lastSyncTitle withAlignment:NSTextAlignmentCenter];
-        //[self.view addSubview:lastSyncLabel];
         
-        moreStorageButton = [[SimpleButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 150)/2, usageChart.frame.origin.y + usageChart.frame.size.height + (IS_IPAD ? 50 : IS_IPHONE_5 ? 20 : 0), 150, 44) withTitle:NSLocalizedString(@"GetMoreStorageButtonTitle", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:22];
+        moreStorageButton = [[SimpleButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 150)/2, quotaInfoView.frame.origin.y + quotaInfoView.frame.size.height + (IS_IPAD ? 50 : IS_IPHONE_5 ? 20 : 0), 150, 44) withTitle:NSLocalizedString(@"GetMoreStorageButtonTitle", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:22];
         moreStorageButton.hidden = YES;
         [moreStorageButton addTarget:self action:@selector(triggerStoragePage) forControlEvents:UIControlEventTouchUpInside];
         moreStorageButton.isAccessibilityElement = YES;
@@ -234,6 +208,12 @@
     }
 
     float remainingStorage = APPDELEGATE.session.usage.totalStorage - APPDELEGATE.session.usage.usedStorage;
+    
+    
+    [packageInfoView removeFromSuperview];
+    [quotaInfoView removeFromSuperview];
+    [self drawPackageSection:APPDELEGATE.session.usage];
+    
 
     self.usages = [NSMutableArray arrayWithCapacity:5];
     [usages addObject:[NSNumber numberWithLongLong:(APPDELEGATE.session.usage.imageUsage + APPDELEGATE.session.usage.videoUsage)]];
@@ -682,6 +662,23 @@
 
     [accountDao cancelRequest];
     accountDao = nil;
+}
+
+- (void) drawPackageSection:(Usage *) packageUsage {
+    
+//    packageInfoView = [[QuotaInfoView alloc] initWithFrame:CGRectMake(20, 30, self.view.frame.size.width - 40, 100) withTitle:@"4.5G Lifebox Standart Internet" withUsage:packageUsage withControllerView:self.view];
+//    [self.view addSubview:packageInfoView];
+//    
+//    //Container Separator
+//    
+//    UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(20, packageInfoView.frame.origin.y + packageInfoView.frame.size.height + (IS_IPAD ? 50 : IS_IPHONE_4_OR_LESS ? 10: 30), self.view.frame.size.width - 40, 1)];
+//    separator.backgroundColor = [Util UIColorForHexColor:@"ebebed"];
+//    [self.view addSubview:separator];
+    
+    UIView *separator;
+    
+    quotaInfoView = [[QuotaInfoView alloc] initWithFrame:CGRectMake(20, separator.frame.origin.y + 30, self.view.frame.size.width - 40, 85) withTitle:NSLocalizedString(@"QuotaInfoTitle", @"") withUsage:packageUsage withControllerView:self.view];
+    [self.view addSubview:quotaInfoView];
 }
 
 @end

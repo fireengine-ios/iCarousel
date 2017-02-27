@@ -73,7 +73,7 @@
 - (void) triggerRefresh {
     listOffset = 0;
     isFirstLoad = YES;
-    [fileList removeAllObjects];
+//    [fileList removeAllObjects];
     self.tableUpdateCounter++;
     [listDao requestMetadata:listOffset andSize:NO_OF_FILES_PER_PAGE andSortType:APPDELEGATE.session.sortType];
 }
@@ -85,7 +85,7 @@
         [fileList removeAllObjects];
     
     [fileList addObjectsFromArray:files];
-    self.tableUpdateCounter++;
+//    self.tableUpdateCounter++;
     [fileTable reloadData];
     
     if (refreshControl)
@@ -96,8 +96,10 @@
     
     if([fileList count] == 0) {
         APPDELEGATE.session.user.favouriteTagPresentFlag = NO;
-        [[NSNotificationCenter defaultCenter] postNotificationName:FAV_LIST_EMPTY_NOTIFICATION object:nil userInfo:nil];
+    } else {
+        APPDELEGATE.session.user.favouriteTagPresentFlag = YES;
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:FAV_LIST_UPDATED_NOTIFICATION object:nil userInfo:nil];
 }
 
 - (void) favListFailCallback:(NSString *) errorMessage {
@@ -232,9 +234,11 @@
         CGFloat currentOffset = fileTable.contentOffset.y;
         CGFloat maximumOffset = fileTable.contentSize.height - fileTable.frame.size.height;
         
-        if (currentOffset - maximumOffset >= 0.0) {
-            isLoading = YES;
-            [self dynamicallyLoadNextPage];
+        if(currentOffset > 0) {
+            if (currentOffset - maximumOffset >= 0.0) {
+                isLoading = YES;
+                [self dynamicallyLoadNextPage];
+            }
         }
     }
 }
