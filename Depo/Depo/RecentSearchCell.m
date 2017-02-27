@@ -16,9 +16,17 @@
     if (self) {
         int left = 20;
         
-        if (history.type.length > 0 && ([history.type isEqualToString:@"TIME"] || [history.type isEqualToString:@"LOCATION"])) {
+        if (history.type.length > 0 &&
+            ([history.type isEqualToString:@"TIME"] ||
+             [history.type isEqualToString:@"LOCATION"] ||
+             [history.type isEqualToString:@"CATEGORY"])) {
             UIImage *iconImg = [UIImage imageNamed:@"icon_calendar"];
-            if ([history.type isEqualToString:@"LOCATION"]) iconImg = [UIImage imageNamed:@"icon_location"];
+            if ([history.type isEqualToString:@"LOCATION"]) {
+                iconImg = [UIImage imageNamed:@"icon_location"];
+            }
+            if ([history.type isEqualToString:@"CATEGORY"]) {
+                iconImg = [UIImage imageNamed:@"icon_bottom_sync_purple"];
+            }
             UIImageView* imageView = [[UIImageView alloc] initWithFrame:CGRectMake(left, 7, iconImg.size.width, iconImg.size.height)];
             imageView.image = iconImg;
             [self addSubview:imageView];
@@ -26,9 +34,36 @@
         }
         
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(left, 11, 280, 20)];
-        [titleLabel setText:history.searchText];
-        titleLabel.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:18];
-        titleLabel.textColor = [Util UIColorForHexColor:@"292F3E"];
+        
+        NSString *highLightedText = history.searchText;
+        
+        NSRange r1 = [highLightedText rangeOfString:@"<m>"];
+        NSRange r2 = [highLightedText rangeOfString:@"</m>"];
+        NSRange rSub = NSMakeRange(r1.location + r1.length, r2.location - r1.location - r1.length);
+        NSString *sub = @"";
+        if (rSub.location != NSNotFound) {
+            
+            sub = [highLightedText substringWithRange:rSub];
+            highLightedText = [highLightedText stringByReplacingOccurrencesOfString:@"<m>" withString:@""];
+            highLightedText = [highLightedText stringByReplacingOccurrencesOfString:@"</m>" withString:@""];
+        }
+        if (highLightedText != nil) {
+            NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:highLightedText];
+            [attributedString addAttribute:NSForegroundColorAttributeName
+                                     value:[Util UIColorForHexColor:@"292F3E"]
+                                     range:NSMakeRange(0, highLightedText.length)];
+            
+            [attributedString addAttribute:NSForegroundColorAttributeName
+                                     value:[Util UIColorForHexColor:@"199cd4"]
+                                     range:[highLightedText rangeOfString:sub]];
+            
+            [attributedString addAttribute:NSFontAttributeName
+                                     value:[UIFont fontWithName:@"TurkcellSaturaDem" size:18]
+                                     range:NSMakeRange(0, highLightedText.length)];
+            titleLabel.attributedText = attributedString;
+        }
+//        titleLabel.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:18];
+//        titleLabel.textColor = [Util UIColorForHexColor:@"292F3E"];
         titleLabel.backgroundColor= [UIColor clearColor];
         [self addSubview:titleLabel];
         

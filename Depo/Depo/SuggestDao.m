@@ -38,7 +38,10 @@
                         NSMutableArray* list = [[NSMutableArray alloc] init];
                         for (NSDictionary* d in dict) {
                             SearchHistory *s = [[SearchHistory alloc] init];
-                            s.searchText = [d objectForKey:@"text"];
+                            s.searchText = d[@"highlightedText"];
+                            if (s.searchText == nil) {
+                                s.searchText = d[@"text"];
+                            }
                             NSString* type = [d objectForKey:@"type"];
                             if ([type isKindOfClass:[NSNull class]]) type = @"";
                             s.type = type;
