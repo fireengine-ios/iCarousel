@@ -288,12 +288,17 @@
             NSURL *documentsURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] firstObject];
             NSURL *tempURL = [documentsURL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", [sourceURL lastPathComponent], contentType]];
             if (location) {
-                if ([[NSFileManager defaultManager] moveItemAtURL:location toURL:tempURL error:nil]) {
+                NSError *e;
+                if([[NSFileManager defaultManager] fileExistsAtPath:tempURL.path]) {
+                    [[NSFileManager defaultManager] removeItemAtURL:tempURL error:nil];
+                }
+                if ([[NSFileManager defaultManager] moveItemAtURL:location toURL:tempURL error:&e]) {
                     if(UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(tempURL.path)) {
                         UISaveVideoAtPathToSavedPhotosAlbum(tempURL.path, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
                     }
                     else {
                         dispatch_async(dispatch_get_main_queue(), ^{
+                             [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DownloadVideoProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DownloadVideoSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DownloadUnsupportedVideoFailMessage", @"")];
                             [self proceedFailureForProgressView];
                         });
                     }

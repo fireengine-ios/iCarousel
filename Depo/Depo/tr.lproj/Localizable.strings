@@ -193,6 +193,7 @@
 "DownloadImageFailMessage"="Resim kaydedilirken hata oluştu";
 "DownloadImagesFailMessage"="Dosyalar kaydedilirken hata oluştu";
 "DownloadAlbumFailMessage"="Albüm kaydedilirken hata oluştu";
+"DownloadUnsupportedVideoFailMessage"="Hata-desteklenmeyen video formatı";
 "DownloadVideoProgressMessage"="Video kaydediliyor";
 "DownloadVideoSuccessMessage"="Video başarıyla kaydedildi";
 "DownloadVideoFailMessage"="Video kaydedilirken hata oluştu";

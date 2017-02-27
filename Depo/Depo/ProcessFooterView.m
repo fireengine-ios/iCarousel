@@ -43,6 +43,12 @@
         successImgView.hidden = YES;
         [self addSubview:successImgView];
         
+        failImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_ustbar_close.png"]];
+        failImgView.frame = CGRectMake(20, (self.frame.size.height - 11)/2, 14, 14);
+        failImgView.center = indicator.center;
+        failImgView.hidden = YES;
+        [self addSubview:failImgView];
+        
         messageLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(60, (self.frame.size.height - 20)/2, self.frame.size.width - 70, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:17] withColor:[UIColor whiteColor] withText:@""];
         [self addSubview:messageLabel];
         
@@ -106,6 +112,7 @@
     defaultIndicator.hidden = NO;
     processConcluded = NO;
     successImgView.hidden = YES;
+    failImgView.hidden = YES;
     messageLabel.text = message;
     [defaultIndicator startAnimating];
 }
@@ -136,6 +143,7 @@
 //    indicator.hidden = YES;
     [defaultIndicator stopAnimating];
     defaultIndicator.hidden = YES;
+    failImgView.hidden = NO;
     [self performSelector:@selector(dismissAfterDelay) withObject:nil afterDelay:3.0f];
 }
 
@@ -159,6 +167,7 @@
         messageLabel.text = message;
         [defaultIndicator stopAnimating];
         defaultIndicator.hidden = YES;
+        failImgView.hidden = NO;
     }
     self.hidden = false;
 }
