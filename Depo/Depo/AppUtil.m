@@ -51,14 +51,6 @@
     fileMenu.selectedIconName = @"yellow_file_icon.png";
     [result addObject:fileMenu];
     
-    if(APPDELEGATE.session.user.favouriteTagPresentFlag) {
-        MetaMenu *favMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeFav];
-        favMenu.title = NSLocalizedString(@"MenuFav", @"");
-        favMenu.iconName = @"fav_icon.png";
-        favMenu.selectedIconName = @"yellow_fav_icon.png";
-        [result addObject:favMenu];
-    }
-    
     MetaMenu *photoMenu = [[MetaMenu alloc] initWithMenuType:MenuTypePhoto];
     photoMenu.title = NSLocalizedString(@"MenuPhoto", @"");
     photoMenu.iconName = @"photos_icon.png";
@@ -96,6 +88,14 @@
         cropAndShare.selectedIconName = @"yellow_cropy.png";
         [result addObject:cropAndShare];
     }
+    
+    if(APPDELEGATE.session.user.favouriteTagPresentFlag) {
+        MetaMenu *favMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeFav];
+        favMenu.title = NSLocalizedString(@"MenuFav", @"");
+        favMenu.iconName = @"fav_icon.png";
+        favMenu.selectedIconName = @"yellow_fav_icon.png";
+        [result addObject:favMenu];
+    }
 
     if([APPDELEGATE.session.user.countryCode isEqualToString:@"90"]) {
         MetaMenu *cellographMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeCellograph];
@@ -114,7 +114,7 @@
     MetaMenu *createStoryMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeCreateStory];
     createStoryMenu.title = NSLocalizedString(@"CreateStoryTitle", @"");
     createStoryMenu.iconName = @"icon_m_createstory.png";
-//  TODO  createStoryMenu.selectedIconName = @"icon_menu_bizeulasin.png";
+    createStoryMenu.selectedIconName = @"icon_m_createstory.png";
     [result addObject:createStoryMenu];
 
     MetaMenu *reachUshMenu = [[MetaMenu alloc] initWithMenuType:MenuTypeReachUs];

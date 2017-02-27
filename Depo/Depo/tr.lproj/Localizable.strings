@@ -316,7 +316,8 @@
 "Upload"="Yükle";
 "Remove"="Çıkar";
 
-"RemainingQuota"="Kalan";
+"QuotaInfoTitle"="Kota Bilgisi";
+"RemainingQuotaTitle"="Kalan";
 "UsageInfo"="Kullanım Bilgileri";
 "Memory"="Hafıza";
 "Packages"="Paketler";

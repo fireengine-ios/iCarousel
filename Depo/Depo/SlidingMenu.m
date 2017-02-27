@@ -72,7 +72,7 @@
 
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cropyEmptied) name:CROPY_EMPTY_NOTIFICATION object:nil];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(favsEmptied) name:FAV_LIST_EMPTY_NOTIFICATION object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(favsUpdated) name:FAV_LIST_UPDATED_NOTIFICATION object:nil];
 
         
     }
@@ -115,7 +115,7 @@
     [menuTable reloadData];
 }
     
-- (void) favsEmptied {
+- (void) favsUpdated {
     sectionMetaArray = [AppUtil readMenuItemsForLoggedIn];
     tableUpdateCounter ++;
     [menuTable reloadData];
@@ -155,7 +155,8 @@
     
     if(item.menuType == MenuTypeFiles || item.menuType == MenuTypeCreateStory) {
         UIView *separatorView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 21)];
-        UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(12, 10, separatorView.frame.size.width-24, 1)];
+//        separatorView.backgroundColor = [UIColor yellowColor];
+        UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(12, 20, separatorView.frame.size.width-24, 1)];
         separator.backgroundColor = [Util UIColorForHexColor:@"2c3037"];
         [separatorView addSubview:separator];
         return separatorView;
@@ -164,11 +165,11 @@
 }
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.section == 0)
-        return 60;
+        return 50;
     else if(indexPath.section == 1)
-        return 50;
+        return 40;
     else
-        return 50;
+        return 40;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -282,6 +283,7 @@
             [delegate didTriggerCellograph];
             break;
         case MenuTypeCreateStory:
+            [cell setSelected:NO animated:YES];
             [delegate didTriggerCreateStory];
             break;
         case MenuTypeReachUs:
@@ -296,7 +298,7 @@
         default:
             break;
     }
-    [self close];
+    if(sectionType != MenuTypeCreateStory) {[self close];}
 }
 
 - (void) scrollViewWillBeginDragging:(UIScrollView *)scrollView {

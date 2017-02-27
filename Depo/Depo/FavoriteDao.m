@@ -8,6 +8,7 @@
 
 #import "FavoriteDao.h"
 #import "AppUtil.h"
+#import "AppDelegate.h"
 
 @implementation FavoriteDao
 
@@ -112,6 +113,10 @@
     else {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self shouldReturnSuccessWithObject:[NSNumber numberWithBool:self.newFavFlag]];
+            if(self.newFavFlag) {
+                APPDELEGATE.session.user.favouriteTagPresentFlag = YES;
+                [[NSNotificationCenter defaultCenter] postNotificationName:FAV_LIST_UPDATED_NOTIFICATION object:nil userInfo:nil];
+            }
         });
     }
     
