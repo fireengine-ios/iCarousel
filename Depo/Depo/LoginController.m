@@ -307,7 +307,7 @@
     } else if([errorMessage isEqualToString:LDAP_LOCKED_ERROR_MESSAGE]) {
         [self showErrorAlertWithMessage:NSLocalizedString(@"LdapLockedError", @"")];
     } else if([errorMessage isEqualToString:SIGNUP_REQUIRED_ERROR_MESSAGE]) {
-        [self showErrorAlertWithMessage:NSLocalizedString(@"SignUpRequiredError", @"")];
+        [self showErrorAlertWithMessage:NSLocalizedString(@"SignUpRequiredError", @"") withDelegate:self];
     } else if ([errorMessage isEqualToString:NO_CONN_ERROR_MESSAGE]) {
         [self showErrorAlertWithMessage:NSLocalizedString(@"NoConnErrorMessage", @"")];
     } else {
@@ -316,6 +316,11 @@
             [self loadCaptcha];
         }
     }
+}
+
+- (void) didDismissCustomAlert:(CustomAlertView *) alertView {
+    SignupController *signup = [[SignupController alloc] init];
+    [self.navigationController pushViewController:signup animated:YES];
 }
 
 - (void) msisdnFieldDidChange:(UITextField *) textField {

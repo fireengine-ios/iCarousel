@@ -59,6 +59,7 @@
 - (void) hideLoading;
 - (void) showErrorAlertWithMessage:(NSString *) errMessage;
 - (void) showInfoAlertWithMessage:(NSString *) infoMessage;
+- (void) showErrorAlertWithMessage:(NSString *) errMessage withDelegate:(id) delegate;
 - (void) increaseTableUpdateCounter;
 - (void) resetTableUpdateCounter;
 - (void) resetPageOffset;

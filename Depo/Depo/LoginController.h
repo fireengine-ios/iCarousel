@@ -14,8 +14,9 @@
 #import "CheckButton.h"
 #import "SimpleButton.h"
 #import "CustomButton.h"
+#import "CustomAlertView.h"
 
-@interface LoginController : MyViewController <UITextFieldDelegate, MFMessageComposeViewControllerDelegate, UIGestureRecognizerDelegate> {
+@interface LoginController : MyViewController <UITextFieldDelegate, MFMessageComposeViewControllerDelegate, UIGestureRecognizerDelegate, CustomAlertDelegate> {
 
     RequestTokenDao *tokenDao;
     RequestCaptchaDao *captchaDao;
