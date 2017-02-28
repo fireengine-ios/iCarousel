@@ -229,7 +229,7 @@
         [registerButton addTarget:self action:@selector(registerClicked) forControlEvents:UIControlEventTouchUpInside];
         registerButton.isAccessibilityElement = YES;
         registerButton.accessibilityIdentifier = @"registerButton";
-        [self.view addSubview:registerButton];
+        [container addSubview:registerButton];
         
         mainScroll.contentSize = CGSizeMake(mainScroll.frame.size.width, scrollYIndex + 120);
 
@@ -486,8 +486,7 @@
         forgotPassView.frame = CGRectMake(forgotPassView.frame.origin.x, loginButton.frame.origin.y + loginButton.frame.size.height + 60 , forgotPassView.frame.size.width, forgotPassView.frame.size.height);
         
         if(!IS_IPAD) {
-            container.contentSize = CGSizeMake(container.contentSize.width, self.view.frame.size.height + 200);
-            [container setContentOffset:CGPointMake(0, 105) animated:YES];
+            container.contentSize = CGSizeMake(container.contentSize.width, self.view.frame.size.height);
         }
         captchaContainer.hidden = NO;
     }
@@ -498,11 +497,7 @@
 }
 
 -(void)keyboardWillShow {
-    if(captchaField.isFirstResponder || passField.isFirstResponder) {
-//        if (self.view.frame.origin.y >= 0) {
-            [self setViewMovedUp:YES];
-//        }
-    }
+    [self setViewMovedUp:YES];
 }
 
 -(void)keyboardWillHide {
@@ -530,21 +525,19 @@
 
 -(void)setViewMovedUp:(BOOL)movedUp {
     if (movedUp) {
+        container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + 280);
         if(captchaContainer.isHidden) {
-            container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + 280);
             [container setContentOffset:CGPointMake(0, 85) animated:YES];
         }
         else {
-            container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + 320);
-            [container setContentOffset:CGPointMake(0, 105) animated:YES];
+            [container setContentOffset:CGPointMake(0, 75) animated:YES];
         }
-//        [container setContentOffset:CGPointMake(0, 85) animated:YES];
     } else {
         if(captchaContainer.isHidden) {
             container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
         }
         else {
-            container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + 200);
+            container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
         }
         [container setContentOffset:CGPointZero animated:YES];
     }

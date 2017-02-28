@@ -230,11 +230,7 @@
 }
 
 -(void)keyboardWillShow {
-    if(captchaField.isFirstResponder) {
-//        if (self.view.frame.origin.y >= 0) {
-            [self setViewMovedUp:YES];
-//        }
-    }
+    [self setViewMovedUp:YES];
 }
 
 -(void)keyboardWillHide {
