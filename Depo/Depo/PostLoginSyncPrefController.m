@@ -119,7 +119,7 @@
             descHeight = [Util calculateHeightForText:descStr forWidth:widthForIpad-40 forFont:descFont] + 5;
             descLabel.frame = CGRectMake(xLeftIndexForIpad + 20, syncImgView.frame.origin.y + syncImgView.frame.size.height + 5, widthForIpad-40, descHeight);
             switchLabel.frame = CGRectMake(xLeftIndexForIpad + 20, syncImgView.frame.origin.y + syncImgView.frame.size.height + 80, 230, 40);
-            autoSyncSwitch.frame = CGRectMake(xLeftIndexForIpad + widthForIpad - 80, syncImgView.frame.origin.y + syncImgView.frame.size.height + 85, 40, 40);
+            autoSyncSwitch.frame = CGRectMake(xLeftIndexForIpad + widthForIpad - 40, syncImgView.frame.origin.y + syncImgView.frame.size.height + 85, 40, 40);
             choiceTitleLabel.frame = CGRectMake(xLeftIndexForIpad + 20, syncImgView.frame.origin.y + syncImgView.frame.size.height + 125, widthForIpad - 40, 15);
             choiceTable.frame = CGRectMake(xLeftIndexForIpad, syncImgView.frame.origin.y + syncImgView.frame.size.height + 145, widthForIpad, 80);
             continueButtonRect = CGRectMake(xLeftIndexForIpad, choiceTable.frame.origin.y + choiceTable.frame.size.height + 30, widthForIpad, 50);

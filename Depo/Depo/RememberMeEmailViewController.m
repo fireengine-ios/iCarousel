@@ -44,23 +44,18 @@
         forgotPassDao.failMethod = @selector(forgotPassFailCallback:);
         
         float containerWidth = 280;
+        float logoPaddingTop = 20;
+        if (IS_IPAD) {
+            containerWidth = 480;
+            logoPaddingTop = 200;
+        }
         float containerLeftMargin = (self.view.frame.size.width - containerWidth)/2;
         
         container = [[UIScrollView alloc] initWithFrame:self.view.bounds];
         [self.view addSubview:container];
         
-        /*
-        CustomLabel *topInfoLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaReg" size:15] withColor:[Util UIColorForHexColor:@"3E3E3E"] withText:NSLocalizedString(@"AlmostThere", @"") withAlignment:NSTextAlignmentCenter];
-        [self.view addSubview:topInfoLabel];
-        
-        UIImage *iconImg = [UIImage imageNamed:@"icon_dialog_positive.png"];
-        UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - iconImg.size.width)/2, topInfoLabel.frame.origin.y + topInfoLabel.frame.size.height + 10, iconImg.size.width, iconImg.size.height)];
-        iconView.image = iconImg;
-        [self.view addSubview:iconView];
-         */
-        
         UIImage *logoImage = [UIImage imageNamed:@"icon_lifebox.png"];
-        UIImageView *logoImgView = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - logoImage.size.width)/2, 20, logoImage.size.width, logoImage.size.height)];
+        UIImageView *logoImgView = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - logoImage.size.width)/2, logoPaddingTop, logoImage.size.width, logoImage.size.height)];
         logoImgView.image = logoImage;
 //        [self.view addSubview:logoImgView];
         [container addSubview:logoImgView];
@@ -68,7 +63,8 @@
 //        CustomLabel *subInfoLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 20, self.view.frame.size.width-40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaReg" size:15] withColor:[Util UIColorForHexColor:@"3E3E3E"] withText:NSLocalizedString(@"EmailFieldRegistrationInfo", @"") withAlignment:NSTextAlignmentCenter];
 //        [self.view addSubview:subInfoLabel];
         
-        CustomLabel *emailLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(containerLeftMargin, logoImgView.frame.origin.y + logoImgView.frame.size.height + 10, containerWidth, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"FormEmailTitle", @"")];
+        CustomLabel *emailLabel = [[CustomLabel alloc] initWithFrame:
+                                   CGRectMake(containerLeftMargin, logoImgView.frame.origin.y + logoImgView.frame.size.height + 10, containerWidth, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"FormEmailTitle", @"")];
 //        [self.view addSubview:emailLabel];
         [container addSubview:emailLabel];
         
