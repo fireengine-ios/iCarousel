@@ -43,7 +43,7 @@
         forgotPassDao.successMethod = @selector(forgotPassSuccessCallback:);
         forgotPassDao.failMethod = @selector(forgotPassFailCallback:);
         
-        float containerWidth = 280;
+        float containerWidth = self.view.frame.size.width - 40;
         float logoPaddingTop = 20;
         if (IS_IPAD) {
             containerWidth = 480;
