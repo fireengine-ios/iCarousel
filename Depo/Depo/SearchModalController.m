@@ -433,6 +433,7 @@
         
         if(fileAtIndex.contentType == ContentTypeFolder) {
             FileListController *innerList = [[FileListController alloc] initForFolder:fileAtIndex];
+            innerList.isTriggeredFromSearch = true;
             innerList.nav = self.nav;
             [self.nav pushViewController:innerList animated:YES];
         }else if (fileAtIndex.contentType == ContentTypeAlbumPhoto) {
@@ -494,6 +495,7 @@
 
 -(void)showPhotoAlbumWithMetaFile:(MetaFile *)file {
     PhotoAlbumController *albumController = [[PhotoAlbumController alloc] initWithAlbumUUID:file.uuid];
+    albumController.isTriggeredFromSearch = true;
     albumController.delegate = self;
     albumController.nav = self.nav;
     [self.navigationController pushViewController:albumController animated:NO];

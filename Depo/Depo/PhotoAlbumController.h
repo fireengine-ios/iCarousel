@@ -46,7 +46,6 @@
     BOOL contentModified;
     BOOL footerActionMenuDidSelect;
     
-    
     MyNavigationController *printNav;
 }
 
@@ -61,6 +60,7 @@
 @property (nonatomic, strong) NSMutableArray *selectedFileLinkList;
 @property (nonatomic, strong) FooterActionsMenuView *footerActionMenu;
 @property (nonatomic, strong) UIRefreshControl *refreshControlPhotos;
+@property (nonatomic) BOOL isTriggeredFromSearch;
 
 
 - (id)initWithAlbum:(PhotoAlbum *) _album;

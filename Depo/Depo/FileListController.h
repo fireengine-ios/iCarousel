@@ -65,6 +65,7 @@
 @property (nonatomic, strong) NSString *longSelectFileUuid;
 @property (nonatomic, strong) NSArray *uuidListToBeDeleted;
 @property (nonatomic) BOOL folderModificationFlag;
+@property (nonatomic) BOOL isTriggeredFromSearch;
 
 
 - (id)initForFolder:(MetaFile *) _folder;

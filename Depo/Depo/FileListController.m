@@ -364,11 +364,12 @@
 - (void) navigateToFileDetail:(MetaFile *) fileSelected {
     if(fileSelected.contentType == ContentTypeFolder) {
         FileListController *innerList = [[FileListController alloc] initForFolder:fileSelected];
+        innerList.isTriggeredFromSearch = _isTriggeredFromSearch;
         innerList.delegate = self;
         innerList.nav = self.nav;
         [self.nav pushViewController:innerList animated:NO];
     } else {
-        if([AppUtil isMetaFileImage:fileSelected]) {
+        if([AppUtil isMetaFileImage:fileSelected] || [AppUtil isMetaFileVideo:fileSelected]) {
             ImagePreviewController *detail = [[ImagePreviewController alloc]
                                               initWithFiles:[self getImageFiles]
                                               withImage:fileSelected
@@ -377,20 +378,16 @@
             detail.delegate = self;
             MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
             detail.nav = modalNav;
-            [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
-//            [self.nav presentViewController:modalNav animated:YES completion:nil];
+            if (_isTriggeredFromSearch) {
+                [self presentViewController:modalNav animated:YES completion:nil];
+            } else {
+                [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
+            }
         } else if([AppUtil isMetaFileDoc:fileSelected]){
             FileDetailInWebViewController *detail = [[FileDetailInWebViewController alloc] initWithFile:fileSelected];
             detail.delegate = self;
             detail.nav = self.nav;
             [self.nav pushViewController:detail animated:NO];
-        } else if([AppUtil isMetaFileVideo:fileSelected]) {
-            VideoPreviewController *detail = [[VideoPreviewController alloc] initWithFile:fileSelected];
-            detail.delegate = self;
-            MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
-            detail.nav = modalNav;
-            [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
-//            [self.nav presentViewController:modalNav animated:YES completion:nil];
         } else if([AppUtil isMetaFileMusic:fileSelected]) {
             MusicPreviewController *detail = [[MusicPreviewController alloc] initWithFile:fileSelected.uuid withFileList:@[fileSelected]];
             detail.delegate = self;
