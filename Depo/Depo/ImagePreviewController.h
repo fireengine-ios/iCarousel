@@ -20,12 +20,13 @@
 #import "ElasticSearchDao.h"
 #import "CustomConfirmView.h"
 #import "ConfirmRemoveModalController.h"
+#import "VideoView.h"
 
 @protocol ImagePreviewDelegate <NSObject>
 - (void) previewedImageWasDeleted:(MetaFile *) deletedFile;
 @end
 
-@interface ImagePreviewController : MyViewController <UIScrollViewDelegate, FileDetailFooterDelegate, CustomConfirmDelegate, ConfirmRemoveDelegate> {
+@interface ImagePreviewController : MyViewController <UIScrollViewDelegate, FileDetailFooterDelegate, CustomConfirmDelegate, ConfirmRemoveDelegate, VideoViewDelegate> {
     UIImageView *imgView;
     FileDetailFooter *footer;
     CustomButton *moreButton;
@@ -51,10 +52,10 @@
 @property int cursor;
 
 - (id)initWithFile:(MetaFile *) _file;
-- (id)initWithFile:(MetaFile *) _file withAlbum:(PhotoAlbum*) _album withFiles:(NSArray *)_files withListOffset:(int)offset;
-- (id)initWithFiles:(NSArray *) _files withImage:(MetaFile *) _file withListOffset:(int) offset;
-- (id) initWithFiles:(NSArray *)_files withImage:(MetaFile *)_file withListOffset:(int)offset printEnabled:(BOOL) printEnabledFlag;
-- (id) initWithFiles:(NSArray *)_files withImage:(MetaFile *)_file withListOffset:(int)offset printEnabled:(BOOL) printEnabledFlag pagingEnabled:(BOOL) pagingEnabled;
+- (id)initWithFile:(MetaFile *) _file withAlbum:(PhotoAlbum *) _album withFiles:(NSArray *)_files isFileInsertedToBegining:(BOOL)isFileInsertedTwice;
+- (id)initWithFiles:(NSArray *) _files withImage:(MetaFile *) _file withListOffset:(int) offset isFileInsertedToBegining:(BOOL)isFileInsertedTwice;
+- (id) initWithFiles:(NSArray *)_files withImage:(MetaFile *)_file withListOffset:(int)offset printEnabled:(BOOL) printEnabledFlag isFileInsertedToBegining:(BOOL)isFileInsertedTwice;
+- (id) initWithFiles:(NSArray *)_files withImage:(MetaFile *)_file withListOffset:(int)offset printEnabled:(BOOL) printEnabledFlag pagingEnabled:(BOOL) pagingEnabled isFileInsertedToBegining:(BOOL)isFileInsertedTwice;
 
 
 @end

@@ -15,6 +15,9 @@
 - (void) customPlayerDidScrollInitialScreen;
 - (void) customPlayerDidStartPlay;
 - (void) customPlayerDidPause;
+
+@optional
+- (void) controlVisibilityChanged;
 @end
 
 @interface CustomAVPlayer : UIView <CustomAVControlDelegate, UIGestureRecognizerDelegate>
@@ -37,6 +40,7 @@
 @property (nonatomic, strong) MetaFile *video;
 @property (nonatomic, strong) NSURL *videoLink;
 @property (nonatomic, strong) CustomAVControl *controlView;
+@property (assign) BOOL shouldManuallyAutoRotate;
 
 - (id) initWithFrame:(CGRect)frame withVideo:(MetaFile *) _video;
 - (id) initWithFrame:(CGRect)frame withVideoLink:(NSURL *) _videoLink;
@@ -47,5 +51,6 @@
 - (void) triggerInfo;
 - (void) willDisappear;
 - (void) manualPlay;
+- (void) manuelPause;
 
 @end

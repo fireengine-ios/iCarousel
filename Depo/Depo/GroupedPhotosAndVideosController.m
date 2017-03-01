@@ -395,7 +395,7 @@
         NSMutableArray *filteredPhotoList = [[NSMutableArray alloc] init];
         [filteredPhotoList addObject:fileSelected];
 
-        ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFiles:filteredPhotoList withImage:fileSelected withListOffset:photoListOffset];
+        ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFiles:filteredPhotoList withImage:fileSelected withListOffset:photoListOffset isFileInsertedToBegining:false];
         detail.delegate = self;
         MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
         detail.nav = modalNav;
@@ -995,7 +995,7 @@
             }
         }
 
-        ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFiles:filteredPhotoList withImage:fileSelected withListOffset:photoListOffset printEnabled:YES pagingEnabled:NO];
+        ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFiles:filteredPhotoList withImage:fileSelected withListOffset:photoListOffset printEnabled:YES pagingEnabled:NO isFileInsertedToBegining:false];
         detail.delegate = self;
         MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
         detail.nav = modalNav;

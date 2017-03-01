@@ -369,7 +369,11 @@
         [self.nav pushViewController:innerList animated:NO];
     } else {
         if([AppUtil isMetaFileImage:fileSelected]) {
-            ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFile:fileSelected];
+            ImagePreviewController *detail = [[ImagePreviewController alloc]
+                                              initWithFiles:[self getImageFiles]
+                                              withImage:fileSelected
+                                              withListOffset:0
+                                              isFileInsertedToBegining:false];
             detail.delegate = self;
             MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
             detail.nav = modalNav;
@@ -398,6 +402,20 @@
             [self.nav pushViewController:detail animated:NO];
         }
     }
+}
+
+- (NSArray*) getImageFiles {
+    NSMutableArray *tmp = [NSMutableArray new];
+    for (int i = 0; i < fileList.count; i++) {
+        id objAtIndex = [fileList objectAtIndex:i];
+        if([objAtIndex isKindOfClass:[MetaFile class]]) {
+            MetaFile *meta = (MetaFile*)objAtIndex;
+            if (meta.contentType == ContentTypePhoto || meta.contentType == ContentTypeVideo) {
+                [tmp addObject:objAtIndex];
+            }
+        }
+    }
+    return [NSArray arrayWithArray:tmp];
 }
 
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView {

@@ -250,12 +250,12 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
                 
             case AVPlayerStatusReadyToPlay: {
                 self.playerTryCount = 0;
-                if(isLocal) {
-                    [[NSNotificationCenter defaultCenter] postNotificationName:VIDEO_READY_TO_PLAY_NOTIFICATION object:nil];
-                } else {
-                    [self.player play];
-                    [self.controlView videoDidStart];
-                }
+                // TODO: Burada yapilan degisiklik nereleri etkiliyor?
+                [[NSNotificationCenter defaultCenter] postNotificationName:VIDEO_READY_TO_PLAY_NOTIFICATION object:nil];
+//                if(!isLocal) {
+//                    [self.player play];
+//                    [self.controlView videoDidStart];
+//                }
                 
                 float currentVolumeVal = 1.0f;
                 [self.controlView initialVolumeLevel:currentVolumeVal];
@@ -271,7 +271,7 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
                 [player addPeriodicTimeObserverForInterval:CMTimeMakeWithSeconds(0.1f, NSEC_PER_SEC)  queue:NULL usingBlock:^(CMTime time) {
                     [weakSelf syncSlider];
                 }];
-                [self performSelector:@selector(autoHideControls) withObject:nil afterDelay:3.0f];
+//                [self performSelector:@selector(autoHideControls) withObject:nil afterDelay:3.0f];
             }
                 break;
                 
@@ -310,6 +310,11 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
         controlVisible = YES;
         newAlpha = 1.0f;
     }
+    
+    if ([self.delegate respondsToSelector:@selector(controlVisibilityChanged)]) {
+        [self.delegate controlVisibilityChanged];
+    }
+    
 	[UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.3f];
     controlView.alpha = newAlpha;
@@ -334,6 +339,10 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
 - (void) manualPlay {
     [self.player play];
     [self.controlView videoDidStart];
+}
+
+- (void) manuelPause {
+    [controlView pauseClicked];
 }
 
 - (void) customAVShouldBeFullScreen {
@@ -506,6 +515,9 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
 }
 
 - (void)orientationChanged:(NSNotification *)notification {
+    if (_shouldManuallyAutoRotate)
+        return;
+    
     [self mirrorRotation:[[UIApplication sharedApplication] statusBarOrientation]];
 }
 
@@ -548,6 +560,10 @@ static void *VLAirplayButtonObservationContext = &VLAirplayButtonObservationCont
 }
 
 - (void) playerContinue {
+    if(!player) {
+        return;
+    }
+    
     NSArray *loadedTimeRanges = [[self.player currentItem] loadedTimeRanges];
     CMTimeRange timeRange = [[loadedTimeRanges objectAtIndex:0] CMTimeRangeValue];
     CGFloat smartValue = CMTimeGetSeconds(CMTimeAdd(timeRange.start, timeRange.duration));

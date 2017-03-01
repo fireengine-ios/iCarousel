@@ -373,21 +373,21 @@
 }
 
 - (void) squareImageWasSelectedForFile:(MetaFile *)fileSelected {
-    if(fileSelected.contentType == ContentTypePhoto) {
-        ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFile:fileSelected withAlbum:self.album withFiles:photoList withListOffset:0];
-        detail.delegate = self;
-        MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
-        detail.nav = modalNav;
-        [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
-//        [self.nav presentViewController:modalNav animated:YES completion:nil];
-    } else if(fileSelected.contentType == ContentTypeVideo) {
-        VideoPreviewController *detail = [[VideoPreviewController alloc] initWithFile:fileSelected withAlbum:self.album];
+    if(fileSelected.contentType == ContentTypePhoto || fileSelected.contentType == ContentTypeVideo) {
+        ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFile:fileSelected withAlbum:self.album withFiles:photoList isFileInsertedToBegining:false];
         detail.delegate = self;
         MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
         detail.nav = modalNav;
         [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
 //        [self.nav presentViewController:modalNav animated:YES completion:nil];
     }
+//    else if(fileSelected.contentType == ContentTypeVideo) {
+//        VideoPreviewController *detail = [[VideoPreviewController alloc] initWithFile:fileSelected withAlbum:self.album];
+//        detail.delegate = self;
+//        MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
+//        detail.nav = modalNav;
+//        [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
+//    }
 }
 
 - (BOOL) canShowAddButtonImmediately {

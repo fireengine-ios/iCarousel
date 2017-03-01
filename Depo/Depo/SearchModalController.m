@@ -439,7 +439,10 @@
             [self showPhotoAlbumWithMetaFile:fileAtIndex];
         }else {
             if([AppUtil isMetaFileImage:fileAtIndex]) {
-                ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFile:fileAtIndex];
+                ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFiles:[self getImageFiles]
+                                                                                     withImage:fileAtIndex
+                                                                                withListOffset:0
+                                                                      isFileInsertedToBegining:false];
                 MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
                 detail.nav = modalNav;
                 [self presentViewController:modalNav animated:YES completion:nil];
@@ -473,6 +476,20 @@
     else if (indexPath.row == searchResultCount)
         [self didTriggerMoreResults:currentSearchText andSearchListType:indexPath.section andFileCount:currentList.count];
     
+}
+
+- (NSArray*) getImageFiles {
+    NSMutableArray *tmp = [NSMutableArray new];
+    for (int i = 0; i < fileList.count; i++) {
+        id objAtIndex = [fileList objectAtIndex:i];
+        if([objAtIndex isKindOfClass:[MetaFile class]]) {
+            MetaFile *meta = (MetaFile*)objAtIndex;
+            if (meta.contentType == ContentTypePhoto || meta.contentType == ContentTypeVideo) {
+                [tmp addObject:objAtIndex];
+            }
+        }
+    }
+    return [NSArray arrayWithArray:tmp];
 }
 
 -(void)showPhotoAlbumWithMetaFile:(MetaFile *)file {

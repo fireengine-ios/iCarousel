@@ -11,7 +11,12 @@
 #import "AppDelegate.h"
 #import "BaseViewController.h"
 
-@interface VideoPreviewController ()
+@interface VideoPreviewController () {
+    
+}
+@property (nonatomic) UIButton *playButton;
+@property (atomic) BOOL isVideoReady;
+@property (atomic) BOOL playVideoWhenReady;
 
 @end
 
@@ -70,13 +75,49 @@
         coverDao.failMethod = @selector(coverFailCallback:);
         
         avPlayer = [[CustomAVPlayer alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.topIndex) withVideo:self.file];
+        
         avPlayer.delegate = self;
         [self.view addSubview:avPlayer];
         avPlayer.autoresizesSubviews = YES;
         avPlayer.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
         
+        [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(orientationChanged:)    name:UIDeviceOrientationDidChangeNotification  object:nil];
     }
     return self;
+}
+
+- (void)dealloc {
+    [self removeObserver:self forKeyPath:UIDeviceOrientationDidChangeNotification];
+    [self removeObserver:self forKeyPath:VIDEO_READY_TO_PLAY_NOTIFICATION];
+}
+
+- (void) playVideo:(UIButton*)sender {
+    [self showLoading];
+    [_playButton removeFromSuperview];
+    
+    if (_isVideoReady) {
+        [avPlayer.player play];
+        [self hideLoading];
+    } else {
+        _playVideoWhenReady = true;
+    }
+}
+
+- (void) videoIsReady:(id)sender {
+    [self hideLoading];
+    _isVideoReady = true;
+    if (_playVideoWhenReady) {
+        [avPlayer.player play];
+        [_playButton removeFromSuperview];
+    }
+}
+
+- (void)orientationChanged:(NSNotification *)notification {
+    if (UIInterfaceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation])) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+           [[UIApplication sharedApplication] setStatusBarHidden:true]; 
+        });
+    }
 }
 
 //- (id)initWithFile:(MetaFile *) _file  {
@@ -377,12 +418,19 @@
     [APPDELEGATE.session pauseAudioItem];
 
     if(avPlayer) {
-        if(avPlayer.currentAsset) {
-            [avPlayer.player play];
-        } else {
+        if(!avPlayer.currentAsset) {
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoIsReady:) name:VIDEO_READY_TO_PLAY_NOTIFICATION object:nil];
             [avPlayer initializePlayer];
         }
     }
+    
+    // play button
+    _playButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _playButton.frame = CGRectMake(0, 0, 68, 68);
+    _playButton.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
+    [_playButton setImage:[UIImage imageNamed:@"button_play"] forState:UIControlStateNormal];
+    [_playButton addTarget:self action:@selector(playVideo:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_playButton];
 
     CustomButton *customBackButton = [[CustomButton alloc] initWithFrame:CGRectMake(10, 0, 20, 34) withImageName:@"white_left_arrow.png"];
     [customBackButton addTarget:self action:@selector(triggerDismiss) forControlEvents:UIControlEventTouchUpInside];
