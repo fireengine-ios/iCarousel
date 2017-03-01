@@ -332,24 +332,36 @@
                 //__weak DownloadManager *weakSelf = self;
                 //__block NSString *localizedAssetIdentifier = @"";
                 NSError *e;
+                if([[NSFileManager defaultManager] fileExistsAtPath:tempURL.path]) {
+                    [[NSFileManager defaultManager] removeItemAtURL:tempURL error:nil];
+                }
                 if ([[NSFileManager defaultManager] moveItemAtURL:location toURL:tempURL error:&e]) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
-                            PHAssetChangeRequest *request = [PHAssetChangeRequest creationRequestForAssetFromVideoAtFileURL:tempURL];
-                            /* PHObjectPlaceholder *assetPlaceHolder = [request placeholderForCreatedAsset];
-                             PHAssetCollectionChangeRequest *albumChangeRequest = [PHAssetCollectionChangeRequest changeRequestForAssetCollection:albumAssetCollection];
-                             
-                             localizedAssetIdentifier = assetPlaceHolder.localIdentifier; */
-                        } completionHandler:^(BOOL success, NSError * _Nullable er) {
-                            if (er) {
-                                NSLog(@"Save Video To Album Error: %@", er.description);
-                            }else {
-                                // [weakSelf saveFileToCameraRoll:file localizedIdentifier:localizedAssetIdentifier];
-                                NSLog(@"Save Video To Album Success uuid:%@", file.uuid);
-                            }
-                            [self didFinishSavingVideoFileToAlbum:file videoPath:tempURL.path  withAlbum:album error:er];
-                        }];
-                    });
+
+                    if(UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(tempURL.path)) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
+                                PHAssetChangeRequest *request = [PHAssetChangeRequest creationRequestForAssetFromVideoAtFileURL:tempURL];
+                                /* PHObjectPlaceholder *assetPlaceHolder = [request placeholderForCreatedAsset];
+                                 PHAssetCollectionChangeRequest *albumChangeRequest = [PHAssetCollectionChangeRequest changeRequestForAssetCollection:albumAssetCollection];
+                                 
+                                 localizedAssetIdentifier = assetPlaceHolder.localIdentifier; */
+                            } completionHandler:^(BOOL success, NSError * _Nullable er) {
+                                if (er) {
+                                    NSLog(@"Save Image To Album Error: %@", er.description);
+                                }else {
+                                    // [weakSelf saveFileToCameraRoll:file localizedIdentifier:localizedAssetIdentifier];
+                                    NSLog(@"Save Video To Album Success uuid:%@", file.uuid);
+                                }
+                                [self didFinishSavingVideoFileToAlbum:file videoPath:tempURL.path  withAlbum:album error:er];
+                            }];
+                        });
+                    } else {
+                        NSMutableDictionary* details = [NSMutableDictionary dictionary];
+                        [details setValue:@"Video Bicimi Desteklenmiyor" forKey:NSLocalizedDescriptionKey];
+                        NSError *myError = [NSError errorWithDomain:@"Unsupported Video Type" code:400 userInfo:details];
+                        [self didFinishSavingVideoFileToAlbum:file videoPath:tempURL.path withAlbum:album error:myError];
+                    }
+                    
                 }
                 else {
                     [self didFinishSavingVideoFileToAlbum:file videoPath:tempURL.path withAlbum:album error:e];

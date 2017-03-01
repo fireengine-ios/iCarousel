@@ -83,6 +83,8 @@
 //@synthesize notificationAction;
 @synthesize notificationActionUrl;
 @synthesize locInfoPopup;
+@synthesize noConnPopupShown;
+@synthesize noConnAlert;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -171,10 +173,11 @@
     if(![ReachabilityManager isReachable]) {
         IGLog(@"AppDelegate ReachabilityManager notReachable");
         
-        UIAlertView *noConnAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", @"") message:NSLocalizedString(@"ConnectionErrorWarning", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"SubmitButtonTitle", @"") otherButtonTitles:nil];
+        noConnAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning", @"") message:NSLocalizedString(@"ConnectionErrorWarning", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"SubmitButtonTitle", @"") otherButtonTitles:nil];
         noConnAlert.delegate = self;
         noConnAlert.tag = NO_CONN_ALERT_TAG;
         [noConnAlert show];
+        noConnPopupShown = YES;
     } else {
         IGLog(@"AppDelegate UpdaterController called");
         
@@ -956,6 +959,12 @@ void uncaughtExceptionHandler(NSException *exception) {
 
 - (void) reachabilityDidChange {
     IGLog(@"AppDelegate reachabilityDidChange");
+    
+    if(noConnPopupShown) {
+        [noConnAlert dismissWithClickedButtonIndex:0 animated:NO];
+        noConnPopupShown = NO;
+    }
+    
     if(![ReachabilityManager isReachable]) {
         IGLog(@"AppDelegate reachabilityDidChange in ReachabilityManager:notReachable block");
         [[UploadQueue sharedInstance] cancelAllUploads];

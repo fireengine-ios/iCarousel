@@ -42,6 +42,8 @@
 @property (nonatomic) BOOL activatedFromBackground;
 @property (nonatomic) BOOL loginInProgress;
 @property (nonatomic, strong) CustomInfoWithIconView *locInfoPopup;
+@property (nonatomic) BOOL noConnPopupShown;
+@property (nonatomic, strong) UIAlertView *noConnAlert;
 
 - (void) showCustomAlert:(CustomAlertView *) alertView;
 - (void) showCustomConfirm:(CustomConfirmView *) alertView;

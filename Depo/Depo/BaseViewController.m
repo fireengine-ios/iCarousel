@@ -1089,14 +1089,20 @@
 -(void)downloadManagerDidFinishDownloading:(DownloadManager *)manager error:(NSError *)error {
     [downloadManagers removeObject:manager];
     NSString *str = @"";
-    if (error) { str = manager.failMessage;
-    }else { str = manager.successMessage; }
+    if (error) {
+        if([error.domain isEqual: @"Unsupported Video Type"]) {
+            str = NSLocalizedString(@"DownloadUnsupportedVideoFailMessage", @"");
+        } else {
+            str = manager.failMessage;
+        }
+    }else {
+        str = manager.successMessage; }
     
     if (downloadManagers.count == 0) {
         if (error) {
-            [self removeProgressViewWithMessage:manager.failMessage isSuccess:NO];
+            [self removeProgressViewWithMessage:str isSuccess:NO];
         }else {
-            [self removeProgressViewWithMessage:manager.successMessage isSuccess:YES];
+            [self removeProgressViewWithMessage:str isSuccess:YES];
         }
     }
 }

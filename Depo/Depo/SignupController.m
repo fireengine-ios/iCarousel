@@ -53,9 +53,11 @@
         eulaDao.successMethod = @selector(eulaReadSuccessCallback:);
         eulaDao.failMethod = @selector(eulaReadFailCallback:);
         
-        float topIndex = IS_IPAD ? 100 : (IS_IPHONE_4_OR_LESS ? 10 : 20);
-        float fieldWidth = 280;
-        
+        float topIndex = IS_IPAD ? (self.view.frame.size.height - 300)/2 - 100 : (IS_IPHONE_4_OR_LESS ? 10 : 20);
+        float fieldWidth = self.view.frame.size.width - 40;
+        if (IS_IPAD) {
+            fieldWidth = 480;
+        }
         container = [[UIScrollView alloc] initWithFrame:self.view.bounds];
 //        container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + 20);
         [self.view addSubview:container];
@@ -345,8 +347,8 @@
 
 -(void)setViewMovedUp:(BOOL)movedUp {
     if (movedUp) {
-        container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + 280);
-        [container setContentOffset:CGPointMake(0,  210) animated:YES];
+        container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + 300);
+        [container setContentOffset:CGPointMake(0,  230) animated:YES];
     }
     else {
         container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);

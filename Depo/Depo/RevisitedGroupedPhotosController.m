@@ -484,6 +484,10 @@
     [self changeToSelectedStatus];
 }
 
+- (void)sortDidChange {
+    [albumView pullData];
+}
+
 - (void) moreMenuDidSelectSortWithList {
     if(!albumView.isHidden) {
         NSArray *list = [NSArray arrayWithObjects:[NSNumber numberWithInt:SortTypeAlphaAsc], [NSNumber numberWithInt:SortTypeAlphaDesc], [NSNumber numberWithInt:SortTypeDateAsc], [NSNumber numberWithInt:SortTypeDateDesc], nil];

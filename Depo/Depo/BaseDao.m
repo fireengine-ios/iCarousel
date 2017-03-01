@@ -125,7 +125,17 @@
                     [self shouldReturnFailWithMessage:NSLocalizedString(@"TimeoutMessage", @"")];
                 });
             }
-        } else {
+        }
+        else if(error.code== NSURLErrorCannotFindHost){
+            NSString *errorMessageWithRequestUrl = [NSString stringWithFormat:@"BaseDao request failed - NSURLErrorCannotFindHost for %@", self.currentRequest.URL];
+            IGLog(errorMessageWithRequestUrl);
+            // show popup only when app active
+            if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self shouldReturnFailWithMessage:NSLocalizedString(@"NoConnErrorMessage", @"")];
+                });
+            }
+        }else {
             NSString *localizedErrStr = [NSHTTPURLResponse localizedStringForStatusCode:error.code];
             NSString *errorMessageWithRequestUrl = [NSString stringWithFormat:@"BaseDao request failed with code:%d and error: %@ - GENERAL_ERROR_MESSAGE for %@", (int)error.code, localizedErrStr, self.currentRequest.URL];
             IGLog(errorMessageWithRequestUrl);
@@ -671,6 +681,7 @@
 
 - (void) tokenRevisitedSuccessCallback {
     if(APPDELEGATE.session.authToken) {
+        self.tokenAlreadyRevisitedFlag = NO;
         if (self.currentTask.currentRequest) {
             [self reCallRequest];
         }

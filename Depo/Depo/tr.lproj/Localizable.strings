@@ -196,6 +196,7 @@
 "DownloadVideoProgressMessage"="Video kaydediliyor";
 "DownloadVideoSuccessMessage"="Video başarıyla kaydedildi";
 "DownloadVideoFailMessage"="Video kaydedilirken hata oluştu";
+"DownloadUnsupportedVideoFailMessage"="Hata-desteklenmeyen video formatı";
 "SortTypeSongNameAscTitle"="Şarkı İsmi (A-Z)";
 "SortTypeSongNameDescTitle"="Şarkı İsmi (Z-A)";
 "SortTypeArtistAscTitle"="Artist İsmi (A-Z)";
