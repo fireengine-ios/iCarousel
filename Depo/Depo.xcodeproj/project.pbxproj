@@ -157,15 +157,13 @@
 		051DE37219CC140100F27C85 /* CustomAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 051DE36F19CC140100F27C85 /* CustomAlertView.m */; };
 		051DE37319CC140100F27C85 /* CustomConfirmView.m in Sources */ = {isa = PBXBuildFile; fileRef = 051DE37119CC140100F27C85 /* CustomConfirmView.m */; };
 		051DE37619CC162700F27C85 /* HomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 051DE37519CC162700F27C85 /* HomeController.m */; };
-		051E1DF719CAC2F900FD1E03 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1DF619CAC2F900FD1E03 /* Foundation.framework */; };
 		051E1DF919CAC2F900FD1E03 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1DF819CAC2F900FD1E03 /* CoreGraphics.framework */; };
-		051E1DFB19CAC2F900FD1E03 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1DFA19CAC2F900FD1E03 /* UIKit.framework */; };
+		051E1DFB19CAC2F900FD1E03 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1DFA19CAC2F900FD1E03 /* UIKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		051E1E0119CAC2F900FD1E03 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 051E1DFF19CAC2F900FD1E03 /* InfoPlist.strings */; };
 		051E1E0319CAC2F900FD1E03 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 051E1E0219CAC2F900FD1E03 /* main.m */; };
 		051E1E0719CAC2F900FD1E03 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 051E1E0619CAC2F900FD1E03 /* AppDelegate.m */; };
 		051E1E0919CAC2F900FD1E03 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 051E1E0819CAC2F900FD1E03 /* Images.xcassets */; };
 		051E1E1019CAC2F900FD1E03 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1E0F19CAC2F900FD1E03 /* XCTest.framework */; };
-		051E1E1119CAC2F900FD1E03 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1DF619CAC2F900FD1E03 /* Foundation.framework */; };
 		051E1E1219CAC2F900FD1E03 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1DFA19CAC2F900FD1E03 /* UIKit.framework */; };
 		051E1E1A19CAC2F900FD1E03 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 051E1E1819CAC2F900FD1E03 /* InfoPlist.strings */; };
 		051E1E1C19CAC2F900FD1E03 /* DepoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 051E1E1B19CAC2F900FD1E03 /* DepoTests.m */; };
@@ -202,7 +200,6 @@
 		051E1E9319CACA0900FD1E03 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1E9219CACA0900FD1E03 /* AddressBook.framework */; };
 		051E1E9519CACA2D00FD1E03 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1E9419CACA2D00FD1E03 /* libsqlite3.dylib */; };
 		051E1E9719CACA4E00FD1E03 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1E9619CACA4E00FD1E03 /* QuartzCore.framework */; };
-		051E1E9919CACA5300FD1E03 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1E9819CACA5300FD1E03 /* CFNetwork.framework */; };
 		051E1EA219CB206500FD1E03 /* SlidingMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 051E1EA119CB206500FD1E03 /* SlidingMenu.m */; };
 		051E1EA719CB209F00FD1E03 /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 051E1EA419CB209F00FD1E03 /* MenuCell.m */; };
 		051E1EAB19CB20AD00FD1E03 /* MenuProfileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 051E1EAA19CB20AD00FD1E03 /* MenuProfileCell.m */; };
@@ -866,6 +863,9 @@
 		56FCFDD51A9C7DDA00AC041C /* info_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 56FCFDD31A9C7DDA00AC041C /* info_icon.png */; };
 		56FCFDD61A9C7DDA00AC041C /* info_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56FCFDD41A9C7DDA00AC041C /* info_icon@2x.png */; };
 		672F866F1E6027EF00229F58 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 672F866E1E6027EF00229F58 /* LaunchScreen.storyboard */; };
+		67C29C6E1E66E02300B2C442 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1DF619CAC2F900FD1E03 /* Foundation.framework */; };
+		67C29C6F1E66E02900B2C442 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1E9819CACA5300FD1E03 /* CFNetwork.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		67C29C701E66E06400B2C442 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1DF619CAC2F900FD1E03 /* Foundation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		94112A981CCA7DE00050E9B1 /* DropboxStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94112A971CCA7DE00050E9B1 /* DropboxStatusCell.m */; };
 		941496611CCF559D008A8D0C /* GroupedPhotosAndVideosController.m in Sources */ = {isa = PBXBuildFile; fileRef = 941496601CCF559D008A8D0C /* GroupedPhotosAndVideosController.m */; };
 		941496641CCF5E51008A8D0C /* GroupedPhotosCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 941496631CCF5E51008A8D0C /* GroupedPhotosCell.m */; };
@@ -2855,17 +2855,17 @@
 				05BBE71619E07DA600805215 /* MediaPlayer.framework in Frameworks */,
 				563A98CB1E52F0A200D24B7E /* Bolts.framework in Frameworks */,
 				05224A9719DC345B00214767 /* AssetsLibrary.framework in Frameworks */,
-				051E1E9919CACA5300FD1E03 /* CFNetwork.framework in Frameworks */,
 				051E1E9719CACA4E00FD1E03 /* QuartzCore.framework in Frameworks */,
 				051E1E9519CACA2D00FD1E03 /* libsqlite3.dylib in Frameworks */,
 				051E1E9319CACA0900FD1E03 /* AddressBook.framework in Frameworks */,
 				051E1E9119CAC9FE00FD1E03 /* Security.framework in Frameworks */,
 				051E1E8F19CAC9F400FD1E03 /* libz.dylib in Frameworks */,
+				67C29C6F1E66E02900B2C442 /* CFNetwork.framework in Frameworks */,
+				67C29C701E66E06400B2C442 /* Foundation.framework in Frameworks */,
 				945900E61D143A4A000B2DE2 /* Crashlytics.framework in Frameworks */,
 				051E1DF919CAC2F900FD1E03 /* CoreGraphics.framework in Frameworks */,
 				563A98CC1E52F0A200D24B7E /* FBSDKCoreKit.framework in Frameworks */,
 				051E1DFB19CAC2F900FD1E03 /* UIKit.framework in Frameworks */,
-				051E1DF719CAC2F900FD1E03 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2874,8 +2874,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				051E1E1019CAC2F900FD1E03 /* XCTest.framework in Frameworks */,
+				67C29C6E1E66E02300B2C442 /* Foundation.framework in Frameworks */,
 				051E1E1219CAC2F900FD1E03 /* UIKit.framework in Frameworks */,
-				051E1E1119CAC2F900FD1E03 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
