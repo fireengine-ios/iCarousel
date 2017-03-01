@@ -419,6 +419,7 @@
         self.title = NSLocalizedString(@"DocTitle", @"");
         
         self.navigationItem.leftBarButtonItem = previousButtonRef;
+        moreButton.hidden = NO;
         
         
         isSelectible = NO;
