@@ -50,11 +50,11 @@
         if (highLightedText != nil) {
             NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:highLightedText];
             [attributedString addAttribute:NSForegroundColorAttributeName
-                                     value:[Util UIColorForHexColor:@"292F3E"]
+                                     value:[Util UIColorForHexColor:@"bfbfbf"]
                                      range:NSMakeRange(0, highLightedText.length)];
             
             [attributedString addAttribute:NSForegroundColorAttributeName
-                                     value:[Util UIColorForHexColor:@"199cd4"]
+                                     value:[Util UIColorForHexColor:@"3face4"]
                                      range:[highLightedText rangeOfString:sub]];
             
             [attributedString addAttribute:NSFontAttributeName
