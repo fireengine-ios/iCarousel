@@ -280,16 +280,16 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 		taskInProgress = NO;
 		rotationTransform = CGAffineTransformIdentity;
         
-        UIView *customContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 155, 155)];
+        UIView *customContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
         customContainer.center = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
         
         UIImageView *customImgView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"default_loading_bg.png"]] autorelease];
-        customImgView.frame = CGRectMake(0, 0, 150, 150);
+        customImgView.frame = CGRectMake(0, 0, 75, 75);
         customImgView.center = CGPointMake(customContainer.frame.size.width/2, customContainer.frame.size.height/2);
         [customContainer addSubview:customImgView];
 
         windowProgress = 0.0f;
-        annularIndicator = [[MBRoundProgressView alloc] initWithFrame:CGRectMake(0, 0, 155, 155)];
+        annularIndicator = [[MBRoundProgressView alloc] initWithFrame:CGRectMake(3, 3, 74, 74)];
         [annularIndicator setAnnular:YES];
         annularIndicator.progress = windowProgress;
         [customContainer addSubview:annularIndicator];

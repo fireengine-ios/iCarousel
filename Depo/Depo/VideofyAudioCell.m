@@ -62,6 +62,8 @@
     [super layoutSubviews];
     titleLabel.frame = CGRectMake(50, 15, self.frame.size.width - 100, 20);
     separator.frame = CGRectMake(10, self.frame.size.height - 1, self.frame.size.width - 20, 1);
+    playButton.frame = CGRectMake(self.frame.size.width - 40, 10, 30, 30);
+    pauseButton.frame = CGRectMake(self.frame.size.width - 40, 10, 30, 30);
 }
 
 - (void) playClicked {

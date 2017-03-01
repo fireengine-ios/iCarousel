@@ -10,6 +10,10 @@
 #import "Util.h"
 #import "AppConstants.h"
 
+@interface LoginTextfield ()
+@property (nonatomic, strong) CALayer *border;
+@end
+
 @implementation LoginTextfield
 
 - (id)initWithFrame:(CGRect)frame withPlaceholder:(NSString *) placeholderText {
@@ -20,14 +24,14 @@
         self.borderStyle = UITextBorderStyleNone;
         self.textAlignment = NSTextAlignmentLeft;
         
-        CALayer *border = [CALayer layer];
-        border.contents = (id)[UIImage imageNamed:@"textline_1240.png"].CGImage;
+//        self.border = [CALayer layer];
+//        self.border.contents = (id)[UIImage imageNamed:@"textline_1240.png"].CGImage;
 //        CGFloat borderWidth = 2;
 //        border.borderColor = [UIColor darkGrayColor].CGColor;
-        border.frame = CGRectMake(0, self.frame.size.height - 2 , self.frame.size.width, 2);
+//        self.border.frame = CGRectMake(0, self.frame.size.height - 2 , self.frame.size.width, 2);
         
         //border.borderWidth = borderWidth;
-        [self.layer addSublayer:border];
+//        [self.layer addSublayer:self.border];
         //self.layer.masksToBounds = YES;
         
         
@@ -46,6 +50,17 @@
     return self;
 }
 
+- (void)setFrame:(CGRect)frame {
+    [self.border removeFromSuperlayer];
+    
+    self.border = [CALayer layer];
+    self.border.contents = (id)[UIImage imageNamed:@"textline_1240.png"].CGImage;
+    self.border.frame = CGRectMake(0, frame.size.height - 2 , frame.size.width, 2);
+    [self.layer addSublayer:self.border];
+    
+    [super setFrame:frame];
+}
+
 - (id)initSecureWithFrame:(CGRect)frame withPlaceholder:(NSString *) placeholderText {
     self = [super initWithFrame:frame];
     if (self) {
@@ -54,14 +69,14 @@
         self.textAlignment = NSTextAlignmentLeft;
         self.secureTextEntry = YES;
         
-        CALayer *border = [CALayer layer];
-        border.contents = (id)[UIImage imageNamed:@"textline_1240.png"].CGImage;
-        //        CGFloat borderWidth = 2;
-        //        border.borderColor = [UIColor darkGrayColor].CGColor;
-        border.frame = CGRectMake(0, self.frame.size.height - 2 , self.frame.size.width, 2);
-        
-        //border.borderWidth = borderWidth;
-        [self.layer addSublayer:border];
+//        CALayer *border = [CALayer layer];
+//        border.contents = (id)[UIImage imageNamed:@"textline_1240.png"].CGImage;
+//        //        CGFloat borderWidth = 2;
+//        //        border.borderColor = [UIColor darkGrayColor].CGColor;
+//        border.frame = CGRectMake(0, self.frame.size.height - 2 , self.frame.size.width, 2);
+//        
+//        //border.borderWidth = borderWidth;
+//        [self.layer addSublayer:border];
         //self.layer.masksToBounds = YES;
         
         UIFont *currentFont = [UIFont fontWithName:@"TurkcellSaturaBol" size:15];

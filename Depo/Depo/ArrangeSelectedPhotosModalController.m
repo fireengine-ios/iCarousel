@@ -108,7 +108,7 @@
     
     int imagePerLine = 3;
     
-    float imageWidth = 100;
+    float imageWidth = (self.view.frame.size.width - 20) / 3;
     float interImageMargin = 5;
     
     if(IS_IPAD) {

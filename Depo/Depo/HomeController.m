@@ -131,6 +131,10 @@
         usageChart.accessibilityIdentifier = @"usageChartHome";
         [self.view addSubview:usageChart];
 
+        CGPoint center = usageChart.center;
+        center.x = self.view.center.x;
+        usageChart.center = center;
+        
         NSString *lastSyncTitle = @"";
         if([SyncUtil readLastSyncDate] != nil) {
             lastSyncTitle = [NSString stringWithFormat:NSLocalizedString(@"LastSyncFormat", @""), [AppUtil readDueDateInReadableFormat:[SyncUtil readLastSyncDate]]];
@@ -260,16 +264,25 @@
     usageSummaryView.accessibilityIdentifier = @"usageSummaryViewHome";
     [usageChart addSubview:usageSummaryView];
     
+    CGPoint center = usageSummaryView.center;
+    center.x = self.view.center.x;
+    usageSummaryView.center = center;
+    
     UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(20, moreStorageButton.frame.origin.y + moreStorageButton.frame.size.height + (IS_IPAD ? 50 : IS_IPHONE_4_OR_LESS ? 10: 20), self.view.frame.size.width - 40, 1)];
     separator.backgroundColor = [Util UIColorForHexColor:@"ebebed"];
     separator.isAccessibilityElement = YES;
     separator.accessibilityIdentifier = @"separatorHome";
     [self.view addSubview:separator];
     
-    CGRect imageRect = CGRectMake(20, separator.frame.origin.y + (IS_IPHONE_4_OR_LESS ? 11 : 41), 75, 60);
-    CGRect musicRect = CGRectMake(122, separator.frame.origin.y + (IS_IPHONE_4_OR_LESS ? 11 : 41), 75, 60);
-    CGRect otherRect = CGRectMake(225, separator.frame.origin.y + (IS_IPHONE_4_OR_LESS ? 11 : 41), 75, 60);
+    CGRect musicRect = CGRectMake(0, separator.frame.origin.y + (IS_IPHONE_4_OR_LESS ? 11 : 41), 75, 60);
+    musicRect.origin.x = self.view.center.x - musicRect.size.width/2;
     
+    CGRect imageRect = CGRectMake(0, separator.frame.origin.y + (IS_IPHONE_4_OR_LESS ? 11 : 41), 75, 60);
+    imageRect.origin.x = musicRect.origin.x - 20 - musicRect.size.width;
+    
+    CGRect otherRect = CGRectMake(0, separator.frame.origin.y + (IS_IPHONE_4_OR_LESS ? 11 : 41), 75, 60);
+    otherRect.origin.x = musicRect.origin.x + 20 + musicRect.size.width;
+
     if(IS_IPAD) {
         float leftMarginForIpad = 100;
         float buttonSliceWidth = (self.view.frame.size.width - (leftMarginForIpad*2))/3;
