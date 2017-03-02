@@ -377,11 +377,17 @@
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(IS_IPAD) {
-        return 102;
-    } else {
-        return 69;
+    //    if(IS_IPAD) {
+    //        return 102;
+    //    } else {
+    //        return 69;
+    //    }
+    
+    if(indexPath.row == 0) {
+        return ((pageContentTable.frame.size.height - 40) / 9) + 10;
     }
+    
+    return (pageContentTable.frame.size.height - 50) / 9;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
