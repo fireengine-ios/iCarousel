@@ -26,6 +26,7 @@
 @interface RevisitedGroupedPhotoView() {
     int tableUpdateCounter;
     int listOffset;
+    int packageSize;
     BOOL isLoading;
     int photoCount;
     int groupSequence;
@@ -218,7 +219,7 @@
         
         [self addOngoingGroup];
         
-        int packageSize = GROUP_PACKAGE_SIZE;
+        packageSize = GROUP_PACKAGE_SIZE;
         if([[Util deviceType] isEqualToString:@"iPhone 6 Plus"] || [[Util deviceType] isEqualToString:@"iPhone 6S Plus"]) {
             packageSize = 60;
         }
@@ -471,10 +472,6 @@
 
 - (void) dynamicallyLoadNextPage {
     listOffset ++;
-    int packageSize = GROUP_PACKAGE_SIZE;
-    if([[Util deviceType] isEqualToString:@"iPhone 6 Plus"] || [[Util deviceType] isEqualToString:@"iPhone 6S Plus"]) {
-        packageSize = 60;
-    }
     [readDao requestPhotosAndVideosForPage:listOffset andSize:packageSize andSortType:SortTypeDateDesc];
 }
 
@@ -486,7 +483,7 @@
             listToPass = row.fileInfo;
         }
     }
-    [delegate revisitedGroupedPhotoDidSelectFile:fileSelected withList:listToPass];
+    [delegate revisitedGroupedPhotoDidSelectFile:fileSelected withList:listToPass withListOffset:listOffset withPackageSize:packageSize];
 }
 
 - (void) revisitedUploadingPhotoCollCellImageWasSelectedForFile:(MetaFile *) fileSelected forGroupWithKey:(NSString *) groupKey {
@@ -981,20 +978,22 @@
 }
 
 - (void) rawPhotoCollCellImageWasSelectedForFile:(MetaFile *) fileSelected forGroupWithKey:(NSString *) groupKey {
-    NSMutableArray *listToPass = [[NSMutableArray alloc] init];
-    [listToPass addObject:fileSelected];
-    
-    for(FileInfoGroup *row in self.groups) {
-        if([row.groupKey isEqualToString:groupKey]) {
-            for(id obj in row.fileInfo) {
-                if([obj isKindOfClass:[RawTypeFile class]]) {
-                    RawTypeFile *castedObj = (RawTypeFile *) obj;
-                    [listToPass addObject:castedObj.fileRef];
-                }
-            }
-        }
-    }
-    [delegate revisitedGroupedPhotoDidSelectFile:fileSelected withList:listToPass];
+//    NSMutableArray *listToPass = [[NSMutableArray alloc] init];
+//    [listToPass addObject:fileSelected];
+//    
+//    for(FileInfoGroup *row in self.groups) {
+//        if([row.groupKey isEqualToString:groupKey]) {
+//            for(id obj in row.fileInfo) {
+//                if([obj isKindOfClass:[RawTypeFile class]]) {
+//                    RawTypeFile *castedObj = (RawTypeFile *) obj;
+//                    [listToPass addObject:castedObj.fileRef];
+//                }
+//            }
+//        }
+//    }
+//    [delegate revisitedGroupedPhotoDidSelectFile:fileSelected withList:listToPass];
+    // send with all files, listoffset and package size
+    [delegate revisitedGroupedPhotoDidSelectFile:fileSelected withList:self.files withListOffset:listOffset withPackageSize:packageSize];
 }
 
 - (void) rawPhotoCollCellImageWasMarkedForFile:(MetaFile *) fileSelected {

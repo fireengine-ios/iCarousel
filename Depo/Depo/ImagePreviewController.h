@@ -50,6 +50,7 @@
 @property (nonatomic, strong) PhotoAlbum *album;
 @property (nonatomic, strong) NSMutableArray *files;
 @property int cursor;
+@property int packageSize;
 
 - (id)initWithFile:(MetaFile *) _file;
 - (id)initWithFile:(MetaFile *) _file withAlbum:(PhotoAlbum *) _album withFiles:(NSArray *)_files isFileInsertedToBegining:(BOOL)isFileInsertedTwice;

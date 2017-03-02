@@ -33,7 +33,7 @@
 @class RevisitedGroupedPhotoView;
 
 @protocol RevisitedGroupedPhotoDelegate <NSObject>
-- (void) revisitedGroupedPhotoDidSelectFile:(MetaFile *) fileSelected withList:(NSArray *) containingList;
+- (void) revisitedGroupedPhotoDidSelectFile:(MetaFile *) fileSelected withList:(NSArray *) containingList withListOffset:(int)listOffset withPackageSize:(int)packageSize;
 - (void) revisitedGroupedPhotoDidFinishLoading;
 //- (void) revisitedGroupedPhotoDidFinishDeleting;
 - (void) revisitedGroupedPhotoDidFinishDeletingOrMoving;

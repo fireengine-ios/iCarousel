@@ -214,25 +214,25 @@
 
 #pragma mark RevisitedGroupPhotoDelegate methods
 
-- (void) revisitedGroupedPhotoDidSelectFile:(MetaFile *) fileSelected withList:(NSArray *) containingList {
+- (void) revisitedGroupedPhotoDidSelectFile:(MetaFile *) fileSelected withList:(NSArray *) containingList withListOffset:(int)listOffset withPackageSize:(int)packageSize {
     if(fileSelected.contentType == ContentTypePhoto || fileSelected.contentType == ContentTypeVideo) {
         NSMutableArray *filteredPhotoList = [[NSMutableArray alloc] init];
         [filteredPhotoList addObject:fileSelected];
         
-        ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFiles:containingList withImage:fileSelected withListOffset:0 isFileInsertedToBegining:true];
+//        ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFiles:containingList withImage:fileSelected withListOffset:listOffset isFileInsertedToBegining:true];
+        ImagePreviewController *detail = [[ImagePreviewController alloc] initWithFiles:containingList
+                                                                             withImage:fileSelected
+                                                                        withListOffset:listOffset
+                                                                          printEnabled:true
+                                                                         pagingEnabled:true
+                                                              isFileInsertedToBegining:true];
         detail.delegate = self;
+        detail.packageSize = packageSize;
         
         MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
         detail.nav = modalNav;
         [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
     }
-//    else if(fileSelected.contentType == ContentTypeVideo) {
-//        VideoPreviewController *detail = [[VideoPreviewController alloc] initWithFile:fileSelected];
-//        detail.delegate = self;
-//        MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
-//        detail.nav = modalNav;
-//        [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
-//    }
 }
 
 - (void) revisitedGroupedPhotoDidFinishLoading {

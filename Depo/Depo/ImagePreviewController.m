@@ -28,6 +28,7 @@
 @property (atomic) NSInteger defaultPage;
 @property (atomic) int fileCursor;
 @property (nonatomic) UITapGestureRecognizer *singleTap;
+@property (atomic) BOOL isNextSectionLoading;
 
 @end
 
@@ -55,6 +56,7 @@
     self = [super init];
     if (self) {
         self.files = [_files mutableCopy];
+        _packageSize = 21;
         if (isFileInsertedTwice) {
             [self.files removeObjectAtIndex:0];
         }
@@ -88,21 +90,22 @@
 }
 
 - (id) initWithFiles:(NSArray *)_files withImage:(MetaFile *)_file withListOffset:(int)offset printEnabled:(BOOL) printEnabledFlag isFileInsertedToBegining:(BOOL)isFileInsertedTwice {
-    return [self initWithFiles:_files withImage:_file withListOffset:offset printEnabled:printEnabledFlag pagingEnabled:YES isFileInsertedToBegining:isFileInsertedTwice];
+    return [self initWithFiles:_files withImage:_file withListOffset:offset printEnabled:printEnabledFlag pagingEnabled:NO isFileInsertedToBegining:isFileInsertedTwice];
 }
 
 - (id) initWithFiles:(NSArray *)_files withImage:(MetaFile *)_file withListOffset:(int)offset printEnabled:(BOOL) printEnabledFlag pagingEnabled:(BOOL) pagingEnabled isFileInsertedToBegining:(BOOL)isFileInsertedTwice {
     self = [super init];
     if (self) {
         self.files = [_files mutableCopy];
+        pagingEnabledFlag = pagingEnabled;
+        listOffSet = offset;
+        _packageSize = 21;
         
         if (isFileInsertedTwice) {
             [self.files removeObjectAtIndex:0];
         }
         self.file = _file;
-        // TODO: fileCursor ile farklarina bakip gereksizler temizlenecek
         cursor = [self findCursorValue];
-        pagingEnabledFlag = pagingEnabled;
         
         [self configureCommonDaos];
         
@@ -158,7 +161,6 @@
     mainScroll.delegate = self;
     mainScroll.showsVerticalScrollIndicator = false;
     mainScroll.showsHorizontalScrollIndicator = false;
-//    mainScroll.backgroundColor = [UIColor blueColor];
     [self.view addSubview:mainScroll];
     
     // add gestures
@@ -286,16 +288,6 @@
     _singleTap.numberOfTapsRequired = 1;
     
     [mainScroll addGestureRecognizer:_singleTap];
-    
-//    if (swipeEnabled) {
-//        UISwipeGestureRecognizer * swipeleft=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeLeft:)];
-//        swipeleft.direction=UISwipeGestureRecognizerDirectionLeft;
-//        [self.view addGestureRecognizer:swipeleft];
-//        
-//        UISwipeGestureRecognizer * swiperight=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeRight:)];
-//        swiperight.direction=UISwipeGestureRecognizerDirectionRight;
-//        [self.view addGestureRecognizer:swiperight];
-//    }
 }
 
 - (CGRect) calculateZoomRect:(UIGestureRecognizer *)gesture zoomScale:(CGFloat)scale {
@@ -322,118 +314,6 @@
     }
 }
 
-//- (void) swipeLeft:(UISwipeGestureRecognizer*) gestureRecognizer  {
-//    if (cursor == [self.files count]) {
-//        return;
-//    }
-//    else{
-//        [self seekPhotoInFiles:YES];
-//        [self loadImageView:self.file];
-//    }
-//}
-//
-//- (void) swipeRight :(UISwipeGestureRecognizer *) gestureRecognizer {
-//    if (cursor == 0) {
-//        return;
-//    }
-//    else{
-//        [self seekPhotoInFiles:NO];
-//        [self loadImageView:self.file];
-//    }
-//}
-
-#pragma mark - Photo swipe actions
-
-- (void) loadImageView:(MetaFile *) image {
-    NSString *imgUrlStr = [image.tempDownloadUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    if(image.detail && image.detail.thumbLargeUrl) {
-        imgUrlStr = [image.detail.thumbLargeUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    }
-    [self showLoading];
-    __weak ImagePreviewController *weakSelf = self;
-    [imgView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:imgUrlStr]] placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-        [weakSelf mirrorRotation:[[UIApplication sharedApplication] statusBarOrientation]];
-        [weakSelf hideLoading];
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-        [weakSelf hideLoading];
-    }];
-    
-    self.title = self.file.name;
-}
-
-- (int) findCursorValue {
-    
-    MetaFile *tempFile = [MetaFile alloc];
-    for (int i = 0; i<[self.files count]; i++) {
-        if([[self.files objectAtIndex:i] isKindOfClass:[MetaFile class]]) {
-            tempFile = [self.files objectAtIndex:i];
-            if ([tempFile.uuid isEqualToString:self.file.uuid]) {
-                return i;
-            }
-        }
-    }
-    return 0;
-}
-
-- (BOOL) checkFileIsPhoto:(MetaFile *) isPhoto {
-    if (isPhoto.contentType == ContentTypePhoto) {
-        return YES;
-    }
-    else
-        return NO;
-}
-
-- (void) seekPhotoInFiles:(BOOL) isLeftSwipe {
-    if (!isLeftSwipe) {
-        if (cursor == 0) {
-            return;
-        }else {
-            cursor--;
-            MetaFile *tempFile = [self.files objectAtIndex:cursor];
-            if ([self checkFileIsPhoto:tempFile]) {
-                self.file = tempFile;
-            }
-            else {
-                [self seekPhotoInFiles:NO];
-            }
-        }
-    }
-    else {
-        
-        if (cursor == [self.files count]-1) {
-            if(pagingEnabledFlag) {
-                [self dynamicallyLoadNextPage];
-                [self loadImageView:self.file];
-            }
-        } else{
-            cursor++;
-            MetaFile *tempFile = [self.files objectAtIndex:cursor];
-            if ([self checkFileIsPhoto:tempFile]) {
-                self.file = tempFile;
-            }
-            else {
-                [self seekPhotoInFiles:YES];
-            }
-            
-        }
-    }
-}
-
-- (void) dynamicallyLoadNextPage {
-    listOffSet ++;
-    [elasticSearchDao requestPhotosAndVideosForPage:listOffSet andSize:21 andSortType:APPDELEGATE.session.sortType];
-}
-
-- (void) photoListSuccessCallback:(NSArray *) moreFiles {
-    [self hideLoading];
-    [self.files addObjectsFromArray:moreFiles];
-}
-
-- (void) photoListFailCallback:(NSString *) errorMessage {
-    [self hideLoading];
-    [self showErrorAlertWithMessage:errorMessage];
-}
-
 #pragma mark - UIScrollViewDelegate Functions
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
@@ -450,45 +330,58 @@
             [(VideoView*)view stopVideoAndReCreateView];
         }
         
-        // to right
+        NSString *direction = @"";
+        // to left
         if (_defaultPage > page) {
-            NSLog(@"left");
+            direction = @"left";
             _fileCursor--;
             [self addPageToLeft];
             
-        // to left
+        // to right
         } else {
-            NSLog(@"right");
-            // TODO: burada array bounds check kontrolu yapilabilir
+            direction = @"right";
             _fileCursor++;
             [self addPageToRight];
+            if (pagingEnabledFlag && (_fileCursor +2) >= self.files.count && !_isNextSectionLoading) {
+                _isNextSectionLoading = true;
+                [self dynamicallyLoadNextPage];
+            }
         }
-        NSLog(@"file cursor %i", _fileCursor);
+        
+        // log
+        NSString *log = [NSString stringWithFormat:@"ImagePreviewController: Page Changed=%@, Cursor=%i, File Count=%lu", direction, _fileCursor, self.files.count];
+        IGLog(log);
         
         // set page
         self.file = self.files[_fileCursor];
         self.title = self.file.visibleName;
         
-        // resize
-        CGFloat topOffset = 0;
-        if (!_isFullScreen) {
-            CGFloat navbarheight = self.navigationController.navigationBar.frame.size.height;
-            CGFloat statusbarheight = 0.0f;
-            if (UIInterfaceOrientationIsPortrait(self.previousOrientation)) {
-                statusbarheight = 20.0f;
-            }
-            topOffset = navbarheight + statusbarheight;
-        }
-        
-        CGRect frame = CGRectMake(0, -1 * topOffset, self.view.frame.size.width, self.view.frame.size.height + topOffset);
-        [self resizeMainScrollWithGap:PhotosGap viewFrame:frame];
-        if (!_isFullScreen) {
-            [UIView animateWithDuration:0.3f animations:^{
-               [self resizeFooterWithIsVisible:(self.file.contentType == ContentTypePhoto)]; 
-            }];
-        }
+        [self resizeMainScroll];
     }
 }
+
+- (void)resizeMainScroll {
+    // resize
+    CGFloat topOffset = 0;
+    if (!_isFullScreen) {
+        CGFloat navbarheight = self.navigationController.navigationBar.frame.size.height;
+        CGFloat statusbarheight = 0.0f;
+        if (UIInterfaceOrientationIsPortrait(self.previousOrientation)) {
+            statusbarheight = 20.0f;
+        }
+        topOffset = navbarheight + statusbarheight;
+    }
+    
+    CGRect frame = CGRectMake(0, -1 * topOffset, self.view.frame.size.width, self.view.frame.size.height + topOffset);
+    [self resizeMainScrollWithGap:PhotosGap viewFrame:frame];
+    if (!_isFullScreen) {
+        [UIView animateWithDuration:0.3f animations:^{
+            [self resizeFooterWithIsVisible:(self.file.contentType == ContentTypePhoto)];
+        }];
+    }
+}
+
+#pragma mark - Photo Infinite Scroll Functions
 
 - (void)addPageToLeft {
     // eger ilk sayfa ise
@@ -503,7 +396,7 @@
     
     // seek file
     int cur = _fileCursor - 1;
-    NSLog(@"l->%i", cur);
+//    NSLog(@"l->%i", cur);
     if (cur < 0 || self.files.count <= cur) {
         return;
     }
@@ -534,7 +427,7 @@
     
     // seek file
     int cur = _fileCursor + 1;
-    NSLog(@"r->%i", cur);
+//    NSLog(@"r->%i", cur);
     if (cur < 0 || self.files.count <= cur) {
         return;
     }
@@ -552,6 +445,41 @@
     // add to end
     [mainScroll addSubview:zp];
     [_pages addObject:zp];
+}
+
+// load next section
+- (void) dynamicallyLoadNextPage {
+    listOffSet ++;
+    IGLog(@"ImagePreviewController dynamicallyLoadNextPage: Started");
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:true];
+    [elasticSearchDao requestPhotosAndVideosForPage:listOffSet andSize:_packageSize andSortType:APPDELEGATE.session.sortType];
+}
+
+- (void) photoListSuccessCallback:(NSArray *) moreFiles {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:false];
+    
+    if (moreFiles.count > 0) {
+        MetaFile *lastFile = self.files[self.files.count -1];
+        
+        [self.files addObjectsFromArray:moreFiles];
+        
+        // add page if mainscroll is in the end
+        if (self.file.uuid == lastFile.uuid) {
+            [self addPageToRight];
+            [self resizeMainScroll];
+        }
+    }
+    
+    _isNextSectionLoading = false;
+    NSString *log = [NSString stringWithFormat:@"ImagePreviewController dynamicallyLoadNextPage: Succeeded, %lu more file loaded, total=%lu", moreFiles.count, self.files.count];
+    IGLog(log);
+}
+
+- (void) photoListFailCallback:(NSString *) errorMessage {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:false];
+    [self showErrorAlertWithMessage:errorMessage];
+    _isNextSectionLoading = false;
+    IGLog(@"ImagePreviewController dynamicallyLoadNextPage: Failed");
 }
 
 - (void)enterFullScreen {
@@ -601,15 +529,26 @@
     }];
 }
 
-- (void) playVideo:(UIButton*)sender {
-    NSLog(@"Play the video");
-    VideoPreviewController *detail = [[VideoPreviewController alloc] initWithFile:self.file];
-    // TODO
-//    detail.delegate = self;
-    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
-    detail.nav = modalNav;
-//    [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
-    [self presentViewController:modalNav animated:true completion:nil];
+- (int) findCursorValue {
+    
+    MetaFile *tempFile = [MetaFile alloc];
+    for (int i = 0; i<[self.files count]; i++) {
+        if([[self.files objectAtIndex:i] isKindOfClass:[MetaFile class]]) {
+            tempFile = [self.files objectAtIndex:i];
+            if ([tempFile.uuid isEqualToString:self.file.uuid]) {
+                return i;
+            }
+        }
+    }
+    return 0;
+}
+
+- (BOOL) checkFileIsPhoto:(MetaFile *) isPhoto {
+    if (isPhoto.contentType == ContentTypePhoto) {
+        return YES;
+    }
+    else
+        return NO;
 }
 
 #pragma mark - VideoViewDelegate
