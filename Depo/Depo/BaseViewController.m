@@ -1027,7 +1027,7 @@
 }
 
 - (void) triggerInnerSearch {
-    [self callCleanBeforeChange];
+//    [self callCleanBeforeChange];
     
     [MPush hitTag:@"search"];
     [MPush hitEvent:@"search"];
