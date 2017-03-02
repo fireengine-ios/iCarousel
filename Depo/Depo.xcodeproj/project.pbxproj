@@ -881,6 +881,7 @@
 		56D842B01E2E48D300028002 /* SyncRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 56D842A21E2E48D300028002 /* SyncRecord.m */; };
 		56D842B11E2E48D300028002 /* SyncSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 56D842A41E2E48D300028002 /* SyncSettings.m */; };
 		56D842B21E2E48D300028002 /* SyncStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 56D842A61E2E48D300028002 /* SyncStatus.m */; };
+		56F3031A1E6851AD00C11376 /* Icon_167.png in Resources */ = {isa = PBXBuildFile; fileRef = 56F303191E6851AD00C11376 /* Icon_167.png */; };
 		56FCFDD51A9C7DDA00AC041C /* info_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 56FCFDD31A9C7DDA00AC041C /* info_icon.png */; };
 		56FCFDD61A9C7DDA00AC041C /* info_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56FCFDD41A9C7DDA00AC041C /* info_icon@2x.png */; };
 		6308E46D1E64C0E800BB32A0 /* VideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6308E46C1E64C0E800BB32A0 /* VideoView.m */; };
@@ -2487,6 +2488,7 @@
 		56D842A41E2E48D300028002 /* SyncSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncSettings.m; sourceTree = "<group>"; };
 		56D842A51E2E48D300028002 /* SyncStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncStatus.h; sourceTree = "<group>"; };
 		56D842A61E2E48D300028002 /* SyncStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncStatus.m; sourceTree = "<group>"; };
+		56F303191E6851AD00C11376 /* Icon_167.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_167.png; sourceTree = "<group>"; };
 		56FCFDD31A9C7DDA00AC041C /* info_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info_icon.png; sourceTree = "<group>"; };
 		56FCFDD41A9C7DDA00AC041C /* info_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "info_icon@2x.png"; sourceTree = "<group>"; };
 		6308E46B1E64C0E800BB32A0 /* VideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoView.h; sourceTree = "<group>"; };
@@ -3993,6 +3995,7 @@
 		0589060219CC226500A9E517 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				56F303191E6851AD00C11376 /* Icon_167.png */,
 				56A0DE401E5C28BF00553462 /* progress_bg_pattern@3x.png */,
 				56A0DE411E5C28C000553462 /* progress_fill_pattern@3x.png */,
 				56A0DE3C1E5C28AA00553462 /* progress_bg_pattern@2x.png */,
@@ -5753,6 +5756,7 @@
 				94FBAEF71D5B924300C8E6F1 /* img_lifebox@2x.png in Resources */,
 				56A0DE3F1E5C28AA00553462 /* progress_fill_pattern@2x.png in Resources */,
 				5695E6E31E1B6F8D00351109 /* icon_kapakresmi@2x.png in Resources */,
+				56F3031A1E6851AD00C11376 /* Icon_167.png in Resources */,
 				0526448C19D5A26400B63759 /* help_icon.png in Resources */,
 				0589062519CC226D00A9E517 /* logout_icon.png in Resources */,
 				94B2F33D1D373E48009CD8B1 /* icon_ig_aktar.png in Resources */,
