@@ -219,14 +219,17 @@
                      completion:^(BOOL finished) {
                          menuOpen = !menuOpen;
                          transparentView.hidden = !menuOpen;
-                         if(menuOpen && /*APPDELEGATE.session.usage.imageCount > 0 &&*/ [AppUtil readLoginCount] >= 5) {
-                             if(![AppUtil readDoNotShowAgainFlagForKey:TUTORIAL_MENU_KEY] && !APPDELEGATE.session.menuTipShown) {
-                                 TutorialView *tutorialView = [[TutorialView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) withBgImageName:@"img_baski_1.jpg" withTitle:@"" withKey:TUTORIAL_MENU_KEY doNotShowFlag:NO];
-                                 [self.view addSubview:tutorialView];
-                                 APPDELEGATE.session.menuTipShown = YES;
-                                 [AppUtil writeDoNotShowAgainFlagForKey:TUTORIAL_MENU_KEY];
-                             }
-                         }
+                         
+                         // Sol menuden baski al kaldirildigi icin walkthrough da kaldirildi.
+                         
+//                         if(menuOpen && [AppUtil readLoginCount] >= 5) {
+//                             if(![AppUtil readDoNotShowAgainFlagForKey:TUTORIAL_MENU_KEY] && !APPDELEGATE.session.menuTipShown) {
+//                                 TutorialView *tutorialView = [[TutorialView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) withBgImageName:@"img_baski_1.jpg" withTitle:@"" withKey:TUTORIAL_MENU_KEY doNotShowFlag:NO];
+//                                 [self.view addSubview:tutorialView];
+//                                 APPDELEGATE.session.menuTipShown = YES;
+//                                 [AppUtil writeDoNotShowAgainFlagForKey:TUTORIAL_MENU_KEY];
+//                             }
+//                         }
                      }];
 }
 
