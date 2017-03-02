@@ -225,7 +225,7 @@
                                                                         withListOffset:listOffset
                                                                           printEnabled:true
                                                                          pagingEnabled:true
-                                                              isFileInsertedToBegining:true];
+                                                              isFileInsertedToBegining:false];
         detail.delegate = self;
         detail.packageSize = packageSize;
         
