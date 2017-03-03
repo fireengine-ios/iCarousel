@@ -124,6 +124,8 @@
         collView.showsVerticalScrollIndicator = NO;
         collView.backgroundColor = [UIColor whiteColor];
         [collView registerClass:[RevisitedRawPhotoCollCell class] forCellWithReuseIdentifier:@"COLL_PHOTO_CELL"];
+        [collView registerClass:[RevisitedRawPhotoCollCell class] forCellWithReuseIdentifier:@"COLL_PHOTO_CELL_DEPO"];
+        [collView registerClass:[RevisitedRawPhotoCollCell class] forCellWithReuseIdentifier:@"COLL_PHOTO_CELL_CLIENT"];
         [collView registerClass:[RevisitedUploadingPhotoCollCell class] forCellWithReuseIdentifier:@"COLL_UPLOADING_PHOTO_CELL"];
         [collView registerClass:[GroupPhotoSectionView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"group_photo_header"];
         [collView setContentInset:UIEdgeInsetsMake(60, 0, 0, 0)];
@@ -782,7 +784,12 @@
             id rowItem = [sectionGroup.fileInfo objectAtIndex:indexPath.row];
             if([rowItem isKindOfClass:[RawTypeFile class]]) {
                 RawTypeFile *castedRow = (RawTypeFile *) rowItem;
-                RevisitedRawPhotoCollCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"COLL_PHOTO_CELL" forIndexPath:indexPath];
+                RevisitedRawPhotoCollCell *cell;
+                if (castedRow.rawType == RawFileTypeDepo) {
+                    cell = [cv dequeueReusableCellWithReuseIdentifier:@"COLL_PHOTO_CELL_DEPO" forIndexPath:indexPath];
+                } else if(castedRow.rawType == RawFileTypeClient) {
+                    cell = [cv dequeueReusableCellWithReuseIdentifier:@"COLL_PHOTO_CELL_CLIENT" forIndexPath:indexPath];
+                }
                 cell.delegate = self;
                 [cell loadContent:castedRow isSelectible:self.isSelectible withImageWidth:imageWidth withGroupKey:sectionGroup.groupKey isSelected:(castedRow.rawType == RawFileTypeDepo ? [selectedFileList containsObject:castedRow.fileRef.uuid] : NO)];
                 return cell;
