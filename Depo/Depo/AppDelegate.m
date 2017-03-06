@@ -97,6 +97,11 @@
     IGLog(@"AppDelegate didFinishLaunchingWithOptions");
     NSLog(@"AppDelegate didFinishLaunchingWithOptions");
     
+    if(SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"9.0")) {
+        [[UIView appearance] setSemanticContentAttribute:UISemanticContentAttributeForceLeftToRight];    [[UIView appearanceWhenContainedIn:[UIAlertController class], nil] setSemanticContentAttribute:UISemanticContentAttributeUnspecified];
+        [[UIView appearanceWhenContainedIn:[UIAlertView class], nil] setSemanticContentAttribute:UISemanticContentAttributeUnspecified];
+    }
+    
 #ifdef LOG2FILE
     
     [self logToFiles];
