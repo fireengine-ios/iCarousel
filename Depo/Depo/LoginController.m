@@ -187,27 +187,90 @@
        // CGRect loginButtonFrame = CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 50);
         
         if(IS_IPAD) {
-            msisdnLabel.frame = CGRectMake((self.view.frame.size.width - 320)/2 + 5, (self.view.frame.size.height - 300)/2 - 100, 320, msisdnLabel.frame.size.height);
-            msisdnField.frame = CGRectMake((self.view.frame.size.width - 320)/2, msisdnLabel.frame.origin.y + msisdnLabel.frame.size.height + 10, 320, msisdnField.frame.size.height);
-            passLabel.frame = CGRectMake((self.view.frame.size.width - 320)/2 + 5, msisdnField.frame.origin.y + msisdnField.frame.size.height + 20, 320, passLabel.frame.size.height);
-            passField.frame = CGRectMake((self.view.frame.size.width - 320)/2, passLabel.frame.origin.y + passLabel.frame.size.height + 10, 320, passField.frame.size.height);
-            rememberMe.frame = CGRectMake((self.view.frame.size.width - 320)/2 + 5, passField.frame.origin.y + passField.frame.size.height + 30, 120, rememberMe.frame.size.height);
-//            loginButton.frame = CGRectMake((self.view.frame.size.width - 320)/2, rememberMe.frame.origin.y + rememberMe.frame.size.height + 30, 320, loginButton.frame.size.height);
+            CGRect logoFrame = logoImgView.frame;
+            logoFrame.origin.y = 200;
+            logoImgView.frame = logoFrame;
+            
+            
+            
+            NSMutableArray *viewArray = [@[] mutableCopy];
+            
+            
+            msisdnLabel.frame = CGRectMake(0,//(self.view.frame.size.width - 320)/2 + 5,
+                                           (self.view.frame.size.height - 300)/2 - 100,
+                                           480,
+                                           msisdnLabel.frame.size.height);
+            [viewArray addObject:msisdnLabel];
+            
+            msisdnField.frame = CGRectMake(0,//(self.view.frame.size.width - 320)/2,
+                                           msisdnLabel.frame.origin.y + msisdnLabel.frame.size.height + 10,
+                                           480,
+                                           msisdnField.frame.size.height);
+            [viewArray addObject:msisdnField];
+            
+            passLabel.frame = CGRectMake(0,//(self.view.frame.size.width - 320)/2 + 5,
+                                         msisdnField.frame.origin.y + msisdnField.frame.size.height + 20,
+                                         480,
+                                         passLabel.frame.size.height);
+            [viewArray addObject:passLabel];
+            
+            passField.frame = CGRectMake(0,//(self.view.frame.size.width - 320)/2,
+                                         passLabel.frame.origin.y + passLabel.frame.size.height + 10,
+                                         480,
+                                         passField.frame.size.height);
+            [viewArray addObject:passField];
+            
+            rememberMe.frame = CGRectMake(0,//(self.view.frame.size.width - 320)/2 + 5,
+                                          passField.frame.origin.y + passField.frame.size.height + 30,
+                                          480,
+                                          rememberMe.frame.size.height);
+            [viewArray addObject:rememberMe];
             
             //workaround
             [loginButton removeFromSuperview];
-            loginButton = [[SimpleButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 320)/2, rememberMe.frame.origin.y + rememberMe.frame.size.height + 30, 320, loginButton.frame.size.height) withTitle:NSLocalizedString(@"Login", @"") withTitleColor:[Util UIColorForHexColor:@"FFFFFF"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"3FB0E8"] withBgColor:[Util UIColorForHexColor:@"3FB0E8"] withCornerRadius:5];
+            loginButton = [[SimpleButton alloc] initWithFrame:
+                           CGRectMake(0,//(self.view.frame.size.width - 320)/2,
+                                      rememberMe.frame.origin.y + rememberMe.frame.size.height + 30,
+                                      480,
+                                      loginButton.frame.size.height)
+                                                    withTitle:NSLocalizedString(@"Login", @"")
+                                               withTitleColor:[Util UIColorForHexColor:@"FFFFFF"]
+                                                withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18]
+                                              withBorderColor:[Util UIColorForHexColor:@"3FB0E8"]
+                                                  withBgColor:[Util UIColorForHexColor:@"3FB0E8"]
+                                             withCornerRadius:5];
             [loginButton addTarget:self action:@selector(loginClicked) forControlEvents:UIControlEventTouchUpInside];
             loginButton.isAccessibilityElement = YES;
             loginButton.accessibilityIdentifier = @"loginButtonForPAD";
             [container addSubview:loginButton];
+            
+            [viewArray addObject:loginButton];
             //workaround
             
-            forgotPassView.frame = CGRectMake((self.view.frame.size.width - forgotPassView.frame.size.width)/2 , loginButton.frame.origin.y + loginButton.frame.size.height + 30, forgotPassView.frame.size.width, forgotPassView.frame.size.height);
+            forgotPassView.frame = CGRectMake(0,//(self.view.frame.size.width - forgotPassView.frame.size.width)/2 ,
+                                              loginButton.frame.origin.y + loginButton.frame.size.height + 30,
+                                              forgotPassView.frame.size.width,
+                                              forgotPassView.frame.size.height);
+            [viewArray addObject:forgotPassView];
             
-            captchaContainer.frame = CGRectMake((self.view.frame.size.width - 320)/2 , rememberMe.frame.origin.y + rememberMe.frame.size.height + 30, 320, captchaContainer.frame.size.height);
+            captchaContainer.frame = CGRectMake(0,//(self.view.frame.size.width - 320)/2,
+                                                rememberMe.frame.origin.y + rememberMe.frame.size.height + 30,
+                                                480,
+                                                captchaContainer.frame.size.height);
+            [viewArray addObject:captchaContainer];
             
-            captchaField.frame = CGRectMake(captchaField.frame.origin.x , captchaField.frame.origin.y, 320, captchaField.frame.size.height);
+            captchaField.frame = CGRectMake(0,//captchaField.frame.origin.x,
+                                            captchaField.frame.origin.y,
+                                            480,
+                                            captchaField.frame.size.height);
+            [viewArray addObject:captchaField];
+            
+            
+            for (UIView *view in viewArray) {
+                CGPoint center = view.center;
+                center.x = self.view.center.x;
+                view.center = center;
+            }
         }
         
 //        loginButton = [[SimpleButton alloc] initWithFrame:loginButtonFrame withTitle:NSLocalizedString(@"Login", @"") withTitleColor:[Util UIColorForHexColor:@"FFFFFF"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"3FB0E8"] withBgColor:[Util UIColorForHexColor:@"3FB0E8"] withCornerRadius:5];

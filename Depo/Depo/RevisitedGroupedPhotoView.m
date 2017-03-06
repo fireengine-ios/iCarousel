@@ -679,7 +679,7 @@
 }
 
 - (void) footerActionMenuDidSelectPrint:(FooterActionsMenuView *)menu {
-    [delegate revisitedGroupedPhotoShouldPrintWithFileList:selectedFileList];
+    [delegate revisitedGroupedPhotoShouldPrintWithFileList:selectedMetaFiles];
 }
 
 - (void) destinationAlbumChosenWithUuid:(NSString *) chosenAlbumUuid {

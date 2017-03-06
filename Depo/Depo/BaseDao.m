@@ -682,6 +682,7 @@
 
 - (void) tokenRevisitedSuccessCallback {
     if(APPDELEGATE.session.authToken) {
+        self.tokenAlreadyRevisitedFlag = NO;
         if (self.currentTask.currentRequest) {
             [self reCallRequest];
         }

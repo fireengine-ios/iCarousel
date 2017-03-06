@@ -34,9 +34,17 @@
         
         if(IS_IPAD) {
             totalUsageLabel.frame = CGRectMake(0, 100, self.frame.size.width, 80);
+            CGPoint totalUsageLabelCenter = totalUsageLabel.center;
+            totalUsageLabelCenter.y = frame.size.height / 2;
+            totalUsageLabel.center = totalUsageLabelCenter;
+            
             totalUsageLabel.font = [UIFont fontWithName:@"TurkcellSaturaBol" size:72];
             
             totalStorageLabel.frame = CGRectMake(0, 200, self.frame.size.width, 40);
+            CGPoint totalStorageLabelCenter = totalStorageLabel.center;
+            totalStorageLabelCenter.y = frame.size.height / 2 + 60;
+            totalStorageLabel.center = totalStorageLabelCenter;
+            
             totalStorageLabel.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:32];
         }
 

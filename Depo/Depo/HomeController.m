@@ -146,10 +146,15 @@
     separator.accessibilityIdentifier = @"separatorHome";
     [self.view addSubview:separator];
     
-    CGRect imageRect = CGRectMake(20, separator.frame.origin.y + (IS_IPHONE_4_OR_LESS ? 11 : 41), 75, 60);
-    CGRect musicRect = CGRectMake(122, separator.frame.origin.y + (IS_IPHONE_4_OR_LESS ? 11 : 41), 75, 60);
-    CGRect otherRect = CGRectMake(225, separator.frame.origin.y + (IS_IPHONE_4_OR_LESS ? 11 : 41), 75, 60);
+    CGRect musicRect = CGRectMake(0, separator.frame.origin.y + (IS_IPHONE_4_OR_LESS ? 11 : 41), 75, 60);
+    musicRect.origin.x = self.view.center.x - musicRect.size.width/2;
     
+    CGRect imageRect = CGRectMake(0, separator.frame.origin.y + (IS_IPHONE_4_OR_LESS ? 11 : 41), 75, 60);
+    imageRect.origin.x = musicRect.origin.x - 20 - musicRect.size.width;
+    
+    CGRect otherRect = CGRectMake(0, separator.frame.origin.y + (IS_IPHONE_4_OR_LESS ? 11 : 41), 75, 60);
+    otherRect.origin.x = musicRect.origin.x + 20 + musicRect.size.width;
+
     if(IS_IPAD) {
         float leftMarginForIpad = 100;
         float buttonSliceWidth = (self.view.frame.size.width - (leftMarginForIpad*2))/3;

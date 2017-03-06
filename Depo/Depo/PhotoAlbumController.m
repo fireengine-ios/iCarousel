@@ -136,7 +136,7 @@
     topBgView.hidden = YES;
     [self.view addSubview:topBgView];
     
-    CustomButton *customBackButton = [[CustomButton alloc] initWithFrame:CGRectMake(10, 30, 20, 34) withImageName:@"white_left_arrow.png"];
+    CustomButton *customBackButton = [[CustomButton alloc] initWithFrame:CGRectMake(5, 30, 34, 34) withImageName:@"white_left_arrow.png"];
     [customBackButton addTarget:self action:@selector(triggerBack) forControlEvents:UIControlEventTouchUpInside];
     customBackButton.isAccessibilityElement = YES;
     customBackButton.accessibilityIdentifier = @"backButtonPhotoAlbum";
@@ -246,10 +246,10 @@
     }
     int counter = (int)[photoList count];
 
-    int imagePerLine = 3;
+    int imagePerLine = 4;
     
-    float imageWidth = 100;
-    float interImageMargin = 5;
+    float imageWidth = (self.view.frame.size.width - 10) / 4;
+    float interImageMargin = 2;
     
     if(IS_IPAD) {
         imagePerLine = 5;

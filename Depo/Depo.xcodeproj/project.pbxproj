@@ -157,15 +157,13 @@
 		051DE37219CC140100F27C85 /* CustomAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 051DE36F19CC140100F27C85 /* CustomAlertView.m */; };
 		051DE37319CC140100F27C85 /* CustomConfirmView.m in Sources */ = {isa = PBXBuildFile; fileRef = 051DE37119CC140100F27C85 /* CustomConfirmView.m */; };
 		051DE37619CC162700F27C85 /* HomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 051DE37519CC162700F27C85 /* HomeController.m */; };
-		051E1DF719CAC2F900FD1E03 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1DF619CAC2F900FD1E03 /* Foundation.framework */; };
 		051E1DF919CAC2F900FD1E03 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1DF819CAC2F900FD1E03 /* CoreGraphics.framework */; };
-		051E1DFB19CAC2F900FD1E03 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1DFA19CAC2F900FD1E03 /* UIKit.framework */; };
+		051E1DFB19CAC2F900FD1E03 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1DFA19CAC2F900FD1E03 /* UIKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		051E1E0119CAC2F900FD1E03 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 051E1DFF19CAC2F900FD1E03 /* InfoPlist.strings */; };
 		051E1E0319CAC2F900FD1E03 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 051E1E0219CAC2F900FD1E03 /* main.m */; };
 		051E1E0719CAC2F900FD1E03 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 051E1E0619CAC2F900FD1E03 /* AppDelegate.m */; };
 		051E1E0919CAC2F900FD1E03 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 051E1E0819CAC2F900FD1E03 /* Images.xcassets */; };
 		051E1E1019CAC2F900FD1E03 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1E0F19CAC2F900FD1E03 /* XCTest.framework */; };
-		051E1E1119CAC2F900FD1E03 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1DF619CAC2F900FD1E03 /* Foundation.framework */; };
 		051E1E1219CAC2F900FD1E03 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1DFA19CAC2F900FD1E03 /* UIKit.framework */; };
 		051E1E1A19CAC2F900FD1E03 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 051E1E1819CAC2F900FD1E03 /* InfoPlist.strings */; };
 		051E1E1C19CAC2F900FD1E03 /* DepoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 051E1E1B19CAC2F900FD1E03 /* DepoTests.m */; };
@@ -202,7 +200,6 @@
 		051E1E9319CACA0900FD1E03 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1E9219CACA0900FD1E03 /* AddressBook.framework */; };
 		051E1E9519CACA2D00FD1E03 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1E9419CACA2D00FD1E03 /* libsqlite3.dylib */; };
 		051E1E9719CACA4E00FD1E03 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1E9619CACA4E00FD1E03 /* QuartzCore.framework */; };
-		051E1E9919CACA5300FD1E03 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1E9819CACA5300FD1E03 /* CFNetwork.framework */; };
 		051E1EA219CB206500FD1E03 /* SlidingMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 051E1EA119CB206500FD1E03 /* SlidingMenu.m */; };
 		051E1EA719CB209F00FD1E03 /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 051E1EA419CB209F00FD1E03 /* MenuCell.m */; };
 		051E1EAB19CB20AD00FD1E03 /* MenuProfileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 051E1EAA19CB20AD00FD1E03 /* MenuProfileCell.m */; };
@@ -531,7 +528,6 @@
 		0592FC341ACEC6740083A6C6 /* Depo-Enterprise.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 0592FC321ACEC6740083A6C6 /* Depo-Enterprise.entitlements */; };
 		0592FC371ACEC7200083A6C6 /* AutoSyncWidget-AppStore.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 0592FC351ACEC7200083A6C6 /* AutoSyncWidget-AppStore.entitlements */; };
 		0592FC381ACEC7200083A6C6 /* AutoSyncWidget-Enterprise.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 0592FC361ACEC7200083A6C6 /* AutoSyncWidget-Enterprise.entitlements */; };
-		0592FC3B1ACEC7580083A6C6 /* Info-AppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0592FC391ACEC7580083A6C6 /* Info-AppStore.plist */; };
 		0592FC3C1ACEC7580083A6C6 /* Info-Enterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0592FC3A1ACEC7580083A6C6 /* Info-Enterprise.plist */; };
 		059785BD1A0525B600A101EF /* FooterActionsMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 059785BC1A0525B600A101EF /* FooterActionsMenuView.m */; };
 		05994F971A0B57080081F000 /* music_backward.png in Resources */ = {isa = PBXBuildFile; fileRef = 05994F931A0B57080081F000 /* music_backward.png */; };
@@ -886,6 +882,10 @@
 		56FCFDD61A9C7DDA00AC041C /* info_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56FCFDD41A9C7DDA00AC041C /* info_icon@2x.png */; };
 		6308E46D1E64C0E800BB32A0 /* VideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6308E46C1E64C0E800BB32A0 /* VideoView.m */; };
 		63608CD91E5C1EEA00B8FC66 /* ZPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63608CD81E5C1EEA00B8FC66 /* ZPhotoView.m */; };
+		672F866F1E6027EF00229F58 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 672F866E1E6027EF00229F58 /* LaunchScreen.storyboard */; };
+		67C29C6E1E66E02300B2C442 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1DF619CAC2F900FD1E03 /* Foundation.framework */; };
+		67C29C6F1E66E02900B2C442 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1E9819CACA5300FD1E03 /* CFNetwork.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		67C29C701E66E06400B2C442 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1DF619CAC2F900FD1E03 /* Foundation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		94112A981CCA7DE00050E9B1 /* DropboxStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94112A971CCA7DE00050E9B1 /* DropboxStatusCell.m */; };
 		941496611CCF559D008A8D0C /* GroupedPhotosAndVideosController.m in Sources */ = {isa = PBXBuildFile; fileRef = 941496601CCF559D008A8D0C /* GroupedPhotosAndVideosController.m */; };
 		941496641CCF5E51008A8D0C /* GroupedPhotosCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 941496631CCF5E51008A8D0C /* GroupedPhotosCell.m */; };
@@ -2503,6 +2503,7 @@
 		6308E46C1E64C0E800BB32A0 /* VideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoView.m; sourceTree = "<group>"; };
 		63608CD71E5C1EEA00B8FC66 /* ZPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZPhotoView.h; sourceTree = "<group>"; };
 		63608CD81E5C1EEA00B8FC66 /* ZPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZPhotoView.m; sourceTree = "<group>"; };
+		672F866E1E6027EF00229F58 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		94112A961CCA7DE00050E9B1 /* DropboxStatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxStatusCell.h; sourceTree = "<group>"; };
 		94112A971CCA7DE00050E9B1 /* DropboxStatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropboxStatusCell.m; sourceTree = "<group>"; };
 		9414965F1CCF559D008A8D0C /* GroupedPhotosAndVideosController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupedPhotosAndVideosController.h; sourceTree = "<group>"; };
@@ -2949,17 +2950,17 @@
 				05BBE71619E07DA600805215 /* MediaPlayer.framework in Frameworks */,
 				563A98CB1E52F0A200D24B7E /* Bolts.framework in Frameworks */,
 				05224A9719DC345B00214767 /* AssetsLibrary.framework in Frameworks */,
-				051E1E9919CACA5300FD1E03 /* CFNetwork.framework in Frameworks */,
 				051E1E9719CACA4E00FD1E03 /* QuartzCore.framework in Frameworks */,
 				051E1E9519CACA2D00FD1E03 /* libsqlite3.dylib in Frameworks */,
 				051E1E9319CACA0900FD1E03 /* AddressBook.framework in Frameworks */,
 				051E1E9119CAC9FE00FD1E03 /* Security.framework in Frameworks */,
 				051E1E8F19CAC9F400FD1E03 /* libz.dylib in Frameworks */,
+				67C29C6F1E66E02900B2C442 /* CFNetwork.framework in Frameworks */,
+				67C29C701E66E06400B2C442 /* Foundation.framework in Frameworks */,
 				945900E61D143A4A000B2DE2 /* Crashlytics.framework in Frameworks */,
 				051E1DF919CAC2F900FD1E03 /* CoreGraphics.framework in Frameworks */,
 				563A98CC1E52F0A200D24B7E /* FBSDKCoreKit.framework in Frameworks */,
 				051E1DFB19CAC2F900FD1E03 /* UIKit.framework in Frameworks */,
-				051E1DF719CAC2F900FD1E03 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2968,8 +2969,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				051E1E1019CAC2F900FD1E03 /* XCTest.framework in Frameworks */,
+				67C29C6E1E66E02300B2C442 /* Foundation.framework in Frameworks */,
 				051E1E1219CAC2F900FD1E03 /* UIKit.framework in Frameworks */,
-				051E1E1119CAC2F900FD1E03 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3112,6 +3113,7 @@
 				051E1DFF19CAC2F900FD1E03 /* InfoPlist.strings */,
 				051E1E0219CAC2F900FD1E03 /* main.m */,
 				051E1E0419CAC2F900FD1E03 /* Depo-Prefix.pch */,
+				672F866E1E6027EF00229F58 /* LaunchScreen.storyboard */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -5177,6 +5179,7 @@
 				949BB5CB1D707F8800BED9DB /* lifebox_teaser.mp4 in Resources */,
 				056F29D21C4E8071001DD486 /* icon_verif_audio@3x.png in Resources */,
 				94B3BE251D81E3260086D05E /* icon_locationperm@2x.png in Resources */,
+				56F303181E68130C00C11376 /* Icon_167.png in Resources */,
 				059AD37E1A1E26A000AA41BD /* circle_doc_icon.png in Resources */,
 				94328BD81CC3E03C00599CEE /* img_baski_1.jpg in Resources */,
 				05A7CE5E1A7FC0FD00020B6F /* yuvarlakbulut.png in Resources */,
@@ -5201,6 +5204,7 @@
 				94FAE0E81D2F7E7800BC9F77 /* icon_select.png in Resources */,
 				569B5CB41DEF9AB7008153F5 /* icon_captcha_refresh@2x.png in Resources */,
 				0589066419CC524900A9E517 /* TurkcellSaturaMedIta.ttf in Resources */,
+				672F866F1E6027EF00229F58 /* LaunchScreen.storyboard in Resources */,
 				051CB41119D2F71200E5FC88 /* check_unchecked_icon@2x.png in Resources */,
 				944A09E41DA570A400FC1BBD /* icon_search.png in Resources */,
 				949BB5A51D6F1FB100BED9DB /* vect_mtour_2@2x.png in Resources */,
@@ -5900,7 +5904,6 @@
 				05AD7F891AD801B20052153A /* added_tick@2x.png in Resources */,
 				0592FC381ACEC7200083A6C6 /* AutoSyncWidget-Enterprise.entitlements in Resources */,
 				05BB0EB11ACD897500D90C98 /* TurkcellSaturaMedIta.ttf in Resources */,
-				0592FC3B1ACEC7580083A6C6 /* Info-AppStore.plist in Resources */,
 				05BB0EAC1ACD897500D90C98 /* TurkcellSaturaBolIta.ttf in Resources */,
 				0592FC371ACEC7200083A6C6 /* AutoSyncWidget-AppStore.entitlements in Resources */,
 			);

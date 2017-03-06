@@ -24,6 +24,7 @@
 @synthesize captchaField;
 @synthesize captchaView;
 @synthesize refreshButton;
+@synthesize okButton;
 
 - (id) init {
     if(self = [super init]) {
@@ -42,24 +43,19 @@
         forgotPassDao.successMethod = @selector(forgotPassSuccessCallback:);
         forgotPassDao.failMethod = @selector(forgotPassFailCallback:);
         
-        float containerWidth = 280;
+        float containerWidth = self.view.frame.size.width - 40;
+        float logoPaddingTop = 20;
+        if (IS_IPAD) {
+            containerWidth = 480;
+            logoPaddingTop = 200;
+        }
         float containerLeftMargin = (self.view.frame.size.width - containerWidth)/2;
         
         container = [[UIScrollView alloc] initWithFrame:self.view.bounds];
         [self.view addSubview:container];
         
-        /*
-        CustomLabel *topInfoLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaReg" size:15] withColor:[Util UIColorForHexColor:@"3E3E3E"] withText:NSLocalizedString(@"AlmostThere", @"") withAlignment:NSTextAlignmentCenter];
-        [self.view addSubview:topInfoLabel];
-        
-        UIImage *iconImg = [UIImage imageNamed:@"icon_dialog_positive.png"];
-        UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - iconImg.size.width)/2, topInfoLabel.frame.origin.y + topInfoLabel.frame.size.height + 10, iconImg.size.width, iconImg.size.height)];
-        iconView.image = iconImg;
-        [self.view addSubview:iconView];
-         */
-        
         UIImage *logoImage = [UIImage imageNamed:@"icon_lifebox.png"];
-        UIImageView *logoImgView = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - logoImage.size.width)/2, 20, logoImage.size.width, logoImage.size.height)];
+        UIImageView *logoImgView = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - logoImage.size.width)/2, logoPaddingTop, logoImage.size.width, logoImage.size.height)];
         logoImgView.image = logoImage;
 //        [self.view addSubview:logoImgView];
         [container addSubview:logoImgView];
@@ -67,7 +63,8 @@
 //        CustomLabel *subInfoLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 20, self.view.frame.size.width-40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaReg" size:15] withColor:[Util UIColorForHexColor:@"3E3E3E"] withText:NSLocalizedString(@"EmailFieldRegistrationInfo", @"") withAlignment:NSTextAlignmentCenter];
 //        [self.view addSubview:subInfoLabel];
         
-        CustomLabel *emailLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(containerLeftMargin, logoImgView.frame.origin.y + logoImgView.frame.size.height + 10, containerWidth, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"FormEmailTitle", @"")];
+        CustomLabel *emailLabel = [[CustomLabel alloc] initWithFrame:
+                                   CGRectMake(containerLeftMargin, logoImgView.frame.origin.y + logoImgView.frame.size.height + 10, containerWidth, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"FormEmailTitle", @"")];
 //        [self.view addSubview:emailLabel];
         [container addSubview:emailLabel];
         
@@ -119,7 +116,7 @@
 //        [self.view addSubview:smsInfoLabel];
         [container addSubview:smsInfoLabel];
         
-        SimpleButton *okButton = [[SimpleButton alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60) withTitle:NSLocalizedString(@"OK", @"") withTitleColor:[Util UIColorForHexColor:@"ffffff"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"3FB0E8"] withBgColor:[Util UIColorForHexColor:@"3FB0E8"] withCornerRadius:0];
+        okButton = [[SimpleButton alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60) withTitle:NSLocalizedString(@"OK", @"") withTitleColor:[Util UIColorForHexColor:@"ffffff"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"3FB0E8"] withBgColor:[Util UIColorForHexColor:@"3FB0E8"] withCornerRadius:0];
         [okButton addTarget:self action:@selector(forgotPassClicked) forControlEvents:UIControlEventTouchUpInside];
 //        [self.view addSubview:okButton];
         okButton.isAccessibilityElement = YES;
@@ -258,11 +255,17 @@
 
 -(void)setViewMovedUp:(BOOL)movedUp {
     if (movedUp) {
-        container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + 280);
-        [container setContentOffset:CGPointMake(0, 70) animated:YES];
+//        container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + 300);
+//        [container setContentOffset:CGPointMake(0, 230) animated:YES];
+        
+        CGRect okFrame = okButton.frame;
+        okFrame.origin.y = self.view.frame.size.height - 280;
+        okButton.frame = okFrame;
+        
     } else {
-        container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
-        [container setContentOffset:CGPointZero animated:YES];
+//        container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
+//        [container setContentOffset:CGPointZero animated:YES];
+        okButton.frame = CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60);
     }
 }
 
