@@ -40,7 +40,9 @@
 
 #define ACCOUNT_INFO_URL BASE_URL@"/account/info"
 
-#define TTY_CONTACT_COUNT_URL @"https://adepo.turkcell.com.tr/ttyapi/contact/count"
+//#define TTY_CONTACT_COUNT_URL @"https://adepo.turkcell.com.tr/ttyapi/contact/count"
+
+#define TTY_CONTACT_COUNT_URL @"https://contactsync.turkcell.com.tr/ttyapi/contact/count"
 
 #define CONSTANTS_URL BASE_URL@"/info/constants"
 
