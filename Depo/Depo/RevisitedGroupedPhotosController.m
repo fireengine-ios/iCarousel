@@ -321,6 +321,9 @@
 }
 
 - (void) revisitedGroupedPhotoShowErrorMessage:(NSString *)errorMessage {
+    if ([errorMessage isEqualToString:FORBIDDEN_ERROR_MESSAGE]) {
+        return;
+    }
     [self showErrorAlertWithMessage:errorMessage];
 }
 
