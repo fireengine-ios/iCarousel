@@ -19,5 +19,6 @@
 @property (nonatomic, strong) MetaFile *postFile;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier  withUploadRef:(UploadRef *) ref atFolder:(NSString *) folderName;
-
+- (void)uploadManagerDidFinishUploadingForAsset:(NSString *)assetToUpload withFinalFile:(MetaFile *)finalFile;
+- (void) updateProgressByWidth:(NSNumber *)newWidth;
 @end
