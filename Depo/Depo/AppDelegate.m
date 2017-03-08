@@ -206,6 +206,8 @@
 //    // [AppRater sharedInstance].preferredLanguage = @"en";
 //    [[AppRater sharedInstance] appLaunched];
     
+    [self handleURLCache];
+    
     // Cancel all notifications that is scheduled before
     if(![AppUtil readAppFirstLaunchFlag]) {
         [[UIApplication sharedApplication] cancelAllLocalNotifications];
@@ -214,6 +216,14 @@
 
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (void)handleURLCache {
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
+    NSURLCache *URLCache = [[NSURLCache alloc] initWithMemoryCapacity:4 * 1024 * 1024
+                                                         diskCapacity:20 * 1024 * 1024
+                                                             diskPath:nil];
+    [NSURLCache setSharedURLCache:URLCache];
 }
 
 - (void) assignNotificationActionByLaunchOptions:(NSDictionary *)launchOptions {
