@@ -291,7 +291,12 @@
                 ((AbstractFileFolderCell *) cell).delegate = self;
             } else {
                 UploadRef *refAtIndex = (UploadRef *) objAtIndex;
-                cell = [[UploadingImageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withUploadRef:refAtIndex atFolder:[self.folder name]];
+                UploadingImageCell *cell = [[UploadingImageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withUploadRef:refAtIndex atFolder:[self.folder name]];
+                if (refAtIndex.hasFinished) {
+                    [cell uploadManagerDidFinishUploadingForAsset:@"" withFinalFile:cell.postFile];
+                    [cell updateProgressByWidth:@(self.view.frame.size.width)];
+                }
+                return cell;
             }
         }
     }
