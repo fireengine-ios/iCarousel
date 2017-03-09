@@ -22,6 +22,7 @@
 #import "RememberMeEmailViewController.h"
 #import "MPush.h"
 #import "AppUtil.h"
+#import "CountrySelectionController.h"
 
 #define kOFFSET_FOR_KEYBOARD 200.0
 
@@ -29,15 +30,17 @@
     UIScrollView* container;
 }
 
+@property (nonatomic) CountrySelectionController *countrySelectionController;
+
 @end
 
 @implementation LoginController
 
-@synthesize mainScroll;
 @synthesize loginButton;
 //@synthesize refreshButton;
 @synthesize captchaView;
 @synthesize captchaContainer;
+@synthesize countryCodeButton;
 @synthesize msisdnField;
 @synthesize passField;
 @synthesize captchaField;
@@ -62,32 +65,40 @@
         
         container = [[UIScrollView alloc] initWithFrame:self.view.bounds];
         [self.view addSubview:container];
-
-        mainScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-        mainScroll.scrollEnabled = YES;
-        //[self.view addSubview:mainScroll];
         
         int scrollYIndex = 20;
         
         UIImage *logoImage = [UIImage imageNamed:@"icon_lifebox.png"];
         UIImageView *logoImgView = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - logoImage.size.width)/2, scrollYIndex, logoImage.size.width, logoImage.size.height)];
         logoImgView.image = logoImage;
-//        [mainScroll addSubview:logoImgView];
         [container addSubview:logoImgView];
         
         scrollYIndex += logoImage.size.height+50;
         
         
         CustomLabel *msisdnLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"MsisdnEmailTitle", @"")];
-//        [mainScroll addSubview:msisdnLabel];
         [container addSubview:msisdnLabel];
         
         scrollYIndex += 5;
+
+        countryCodeButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        [countryCodeButton setFrame:CGRectMake(20, scrollYIndex +11, 68, 32)];
+        [countryCodeButton setBackgroundImage:[UIImage imageNamed:@"combobg.png"] forState:UIControlStateNormal];
+        [countryCodeButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [countryCodeButton addTarget:self action:@selector(goCountryCodepage:) forControlEvents:UIControlEventTouchUpInside];
+        [container addSubview:countryCodeButton];
+        [countryCodeButton setTitle:@"+90" forState:UIControlStateNormal];
         
-        msisdnField = [[LoginTextfield alloc] initWithFrame:CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 43) withPlaceholder:@""/*NSLocalizedString(@"MsisdnEmailPlaceholder", @"")*/];
+        UIImageView *arrow = [[UIImageView alloc] initWithFrame:CGRectMake(24, 0, 8, 4)];
+        CGPoint center = arrow.center;
+        center.y = countryCodeButton.center.y;
+        arrow.center = center;
+        arrow.image = [UIImage imageNamed:@"icon_dropdown.png"];
+        [container addSubview:arrow];
+        
+        msisdnField = [[LoginTextfield alloc] initWithFrame:CGRectMake(88, scrollYIndex, self.view.frame.size.width - 108, 43) withPlaceholder:@""/*NSLocalizedString(@"MsisdnEmailPlaceholder", @"")*/];
         msisdnField.delegate = self;
         [msisdnField addTarget:self action:@selector(msisdnFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-//        [mainScroll addSubview:msisdnField];
         msisdnField.isAccessibilityElement = YES;
         msisdnField.accessibilityIdentifier = @"msisdnFieldLogin";
         [container addSubview:msisdnField];
@@ -98,14 +109,12 @@
         scrollYIndex += 55;
 
         CustomLabel *passLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"PasswordTitle", @"")];
-//        [mainScroll addSubview:passLabel];
         [container addSubview:passLabel];
         
         scrollYIndex += 5;
 
         passField = [[LoginTextfield alloc] initSecureWithFrame:CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 43) withPlaceholder:/*NSLocalizedString(@"PasswordPlaceholder", @"")*/ @""];
         passField.delegate = self;
-//        [mainScroll addSubview:passField];
         passField.isAccessibilityElement = YES;
         passField.accessibilityIdentifier = @"passFieldLogin";
         [container addSubview:passField];
@@ -113,7 +122,6 @@
         scrollYIndex += 65;
 
         rememberMe = [[CheckButton alloc] initWithFrame:CGRectMake(25, scrollYIndex, 120, 25) withTitle:NSLocalizedString(@"RememberMe", @"") isInitiallyChecked:YES];
-//        [mainScroll addSubview:rememberMe];
         rememberMe.isAccessibilityElement = YES;
         rememberMe.accessibilityIdentifier = @"rememberMe";
         [container addSubview:rememberMe];
@@ -153,13 +161,10 @@
         captchaField.accessibilityIdentifier = @"loginCaptchaField";
         [captchaContainer addSubview:captchaField];
         
-       // scrollYIndex += 20;
-        
         scrollYIndex += 40;
         
         loginButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 50) withTitle:NSLocalizedString(@"Login", @"") withTitleColor:[Util UIColorForHexColor:@"FFFFFF"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"3FB0E8"] withBgColor:[Util UIColorForHexColor:@"3FB0E8"] withCornerRadius:5];
         [loginButton addTarget:self action:@selector(loginClicked) forControlEvents:UIControlEventTouchUpInside];
-//        [mainScroll addSubview:loginButton];
         loginButton.isAccessibilityElement = YES;
         loginButton.accessibilityIdentifier = @"loginButton";
         [container addSubview:loginButton];
@@ -174,17 +179,14 @@
         UIImage *newPassIcon = [UIImage imageNamed:@"icon_newpass.png"];
         UIImageView *passIconImgView = [[UIImageView alloc] initWithFrame:CGRectMake( 5, 0, newPassIcon.size.width, newPassIcon.size.height)];
         passIconImgView.image = newPassIcon;
-//        [mainScroll addSubview:passIconImgView];
         [forgotPassView addSubview:passIconImgView];
         
         SimpleButton *forgotPass = [[SimpleButton alloc] initWithFrame:CGRectMake(0, 4, 130, 25) withTitle:NSLocalizedString(@"ForgotPassButton", @"")];
         [forgotPass addTarget:self action:@selector(forgotMeClicked) forControlEvents:UIControlEventTouchUpInside];
-//        [mainScroll addSubview:forgotPass];
         forgotPass.isAccessibilityElement = YES;
         forgotPass.accessibilityIdentifier = @"forgotPassButton";
         [forgotPassView addSubview:forgotPass];
 
-       // CGRect loginButtonFrame = CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 50);
         
         if(IS_IPAD) {
             CGRect logoFrame = logoImgView.frame;
@@ -294,8 +296,6 @@
         registerButton.accessibilityIdentifier = @"registerButton";
         [container addSubview:registerButton];
         
-        mainScroll.contentSize = CGSizeMake(mainScroll.frame.size.width, scrollYIndex + 120);
-
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow) name:UIKeyboardWillShowNotification object:nil];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide) name:UIKeyboardWillHideNotification object:nil];
@@ -307,6 +307,12 @@
         [self.view addGestureRecognizer:tapGestureRecognizer];
     }
     return self;
+}
+
+- (void)goCountryCodepage:(id)sender {
+    _countrySelectionController = [[CountrySelectionController alloc] init];
+    MyNavigationController *nav = [[MyNavigationController alloc] initWithRootViewController:_countrySelectionController];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
