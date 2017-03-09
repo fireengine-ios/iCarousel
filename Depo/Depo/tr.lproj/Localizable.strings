@@ -489,8 +489,8 @@
 "ContactBackupButtonTitle"="lifebox'a Yükle";
 "ContactRestoreButtonTitle"="Telefonuma İndir";
 
-"ContactResultBackupSectionTitle"="lifebox'ta";
-"ContactResultRestoreSectionTitle"="Telefonda";
+"ContactResultBackupSectionTitle"="lifebox";
+"ContactResultRestoreSectionTitle"="Telefon";
 
 "AutoSyncStatusInfo"="Yükleniyor (%d/%d%@)";
 

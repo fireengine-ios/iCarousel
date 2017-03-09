@@ -36,33 +36,72 @@
         self.view.backgroundColor = [UIColor whiteColor];
         self.title = NSLocalizedString(@"ContactSyncTitle", @"");
         
-        float topIndex = IS_IPAD ? 50 : 10;
-        float buttonHeight = IS_IPAD ? 80 : 50;
+        float topIndex = IS_IPAD ? 50 : 20;
+        float buttonHeight = IS_IPAD ? 70 : 40;
+        float bgHeight = (10 + buttonHeight + 10 + 20 + 10);
+        float buttonWidth = buttonHeight * 4;
+        float verticalPadding = IS_IPAD ? 50 : 20;
         
-        backupButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, topIndex, self.view.frame.size.width - 40, buttonHeight) withTitle:NSLocalizedString(@"ContactBackupButtonTitle", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
+        UIView *bgViewBackup = [[UIView alloc] initWithFrame:CGRectMake(20, topIndex, self.view.frame.size.width - 40, bgHeight)];
+        bgViewBackup.backgroundColor = [Util UIColorForHexColor:@"f7f6f3"];
+        [self.view addSubview:bgViewBackup];
+        
+        backupButton = [[SimpleButton alloc] initWithFrame:CGRectMake((bgViewBackup.frame.size.width - buttonWidth) /2,
+                                                                      10,
+                                                                      buttonWidth,
+                                                                      buttonHeight)
+                                                 withTitle:NSLocalizedString(@"ContactBackupButtonTitle", @"")
+                                            withTitleColor:[Util UIColorForHexColor:@"363e4f"]
+                                             withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18]
+                                           withBorderColor:[Util UIColorForHexColor:@"ffe000"]
+                                               withBgColor:[Util UIColorForHexColor:@"ffe000"]
+                                          withCornerRadius:15];
         [backupButton addTarget:self action:@selector(backupClicked) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:backupButton];
-
-        topIndex += IS_IPAD ? (buttonHeight + 10) : buttonHeight;
-
-        CustomLabel *backupLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(10, topIndex, 300, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"888888"] withText:NSLocalizedString(@"ContactBackupInfo", @"") withAlignment:NSTextAlignmentCenter];
+        [bgViewBackup addSubview:backupButton];
+        
+        CustomLabel *backupLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(10,
+                                                                                 buttonHeight + 20,
+                                                                                 bgViewBackup.frame.size.width - 20,
+                                                                                 20)
+                                                             withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15]
+                                                            withColor:[Util UIColorForHexColor:@"888888"]
+                                                             withText:NSLocalizedString(@"ContactBackupInfo", @"")
+                                                        withAlignment:NSTextAlignmentLeft];
         backupLabel.adjustsFontSizeToFitWidth = YES;
-        [self.view addSubview:backupLabel];
-
-        topIndex += IS_IPAD ? 45 : 30;
+        [bgViewBackup addSubview:backupLabel];
         
-        restoreButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, topIndex, self.view.frame.size.width - 40, buttonHeight) withTitle:NSLocalizedString(@"ContactRestoreButtonTitle", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:5];
+        topIndex = topIndex + bgHeight + verticalPadding;
+        
+        UIView *bgViewRestore = [[UIView alloc] initWithFrame:CGRectMake(20, topIndex, self.view.frame.size.width - 40, bgHeight)];
+        bgViewRestore.backgroundColor = [Util UIColorForHexColor:@"f7f6f3"];
+        [self.view addSubview:bgViewRestore];
+        
+        restoreButton = [[SimpleButton alloc] initWithFrame:CGRectMake((bgViewBackup.frame.size.width - buttonWidth) /2,
+                                                                       10,
+                                                                       buttonWidth,
+                                                                       buttonHeight)
+                                                  withTitle:NSLocalizedString(@"ContactRestoreButtonTitle", @"")
+                                             withTitleColor:[Util UIColorForHexColor:@"363e4f"]
+                                              withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18]
+                                            withBorderColor:[Util UIColorForHexColor:@"ffe000"]
+                                                withBgColor:[Util UIColorForHexColor:@"ffe000"]
+                                           withCornerRadius:15];
         [restoreButton addTarget:self action:@selector(restoreClicked) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:restoreButton];
+        [bgViewRestore addSubview:restoreButton];
         
-        topIndex += IS_IPAD ? (buttonHeight + 10) : buttonHeight;
-        
-        CustomLabel *restoreLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, topIndex, 280, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"888888"] withText:NSLocalizedString(@"ContactRestoreInfo", @"") withAlignment:NSTextAlignmentCenter];
+        CustomLabel *restoreLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(10,
+                                                                                  buttonHeight + 20,
+                                                                                  bgViewRestore.frame.size.width - 20,
+                                                                                  20)
+                                                              withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15]
+                                                             withColor:[Util UIColorForHexColor:@"888888"]
+                                                              withText:NSLocalizedString(@"ContactRestoreInfo", @"")
+                                                         withAlignment:NSTextAlignmentLeft];
         restoreLabel.adjustsFontSizeToFitWidth = YES;
-        [self.view addSubview:restoreLabel];
-
-        topIndex += IS_IPAD ? 60 : 40;
-
+        [bgViewRestore addSubview:restoreLabel];
+        
+        topIndex = topIndex + bgHeight + verticalPadding;
+        
         NSString *lastSyncTitle = [NSString stringWithFormat:NSLocalizedString(@"ContactLastSyncDateTitle", @""), NSLocalizedString(@"NoneTitle", @"")];
         if([SyncUtil readLastContactSyncDate] != nil) {
             NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
@@ -71,6 +110,7 @@
         }
         lastSyncDateLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, topIndex, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:16] withColor:[Util UIColorForHexColor:@"363e4f"] withText:lastSyncTitle withAlignment:NSTextAlignmentLeft];
         [self.view addSubview:lastSyncDateLabel];
+        NSLog(@"%@", lastSyncTitle);
         
         topIndex += IS_IPAD ? 45 : 30;
         
@@ -84,10 +124,10 @@
         [self.view addSubview:lastSyncDetailTable];
         
         if([SyncUtil readLastContactSyncDate] == nil) {
-            lastSyncDateLabel.hidden = YES;
-            lastSyncDetailTable.hidden = YES;
+//            lastSyncDateLabel.hidden = YES;
+//            lastSyncDetailTable.hidden = YES;
         }
-
+        
         [SyncSettings shared].token = APPDELEGATE.session.authToken;
         [SyncSettings shared].url = CONTACT_SYNC_SERVER_URL;
         [SyncSettings shared].debug = YES;
@@ -122,7 +162,7 @@
             }
             [self manualSyncFinalized];
         };
-    
+        
     }
     return self;
 }
@@ -181,9 +221,9 @@
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40)];
     headerView.backgroundColor = [Util UIColorForHexColor:@"f4f5f8"];
     
-    CustomLabel *headerLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 10, 280, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:14] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"ContactLastSyncDetailTitle", @"") withAlignment:NSTextAlignmentLeft];
+    CustomLabel *headerLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 10, 280, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:14] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"ContactLastSyncDetailTitle", @"") withAlignment:NSTextAlignmentCenter];
     [headerView addSubview:headerLabel];
-
+    
     return headerView;
 }
 
@@ -194,15 +234,15 @@
         return [[ContactSyncResultTitleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withTitle:sectionTitle];
     } else if(indexPath.row == 1) {
         int syncVal = [APPDELEGATE.session.syncResult syncType] == ContactSyncTypeBackup ? [APPDELEGATE.session.syncResult serverUpdateCount] : [APPDELEGATE.session.syncResult clientUpdateCount];
-//        return [[ContactSyncResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withTitle:NSLocalizedString(@"ContactLastSyncDetailUpdateTitle", @"") withClientVal:[APPDELEGATE.session.syncResult clientUpdateCount] withServerVal:[APPDELEGATE.session.syncResult serverUpdateCount]];
+        //        return [[ContactSyncResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withTitle:NSLocalizedString(@"ContactLastSyncDetailUpdateTitle", @"") withClientVal:[APPDELEGATE.session.syncResult clientUpdateCount] withServerVal:[APPDELEGATE.session.syncResult serverUpdateCount]];
         return [[ContactSyncResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withTitle:NSLocalizedString(@"ContactLastSyncDetailUpdateTitle", @"") withVal:syncVal];
     } else if(indexPath.row == 2) {
         int syncVal = [APPDELEGATE.session.syncResult syncType] == ContactSyncTypeBackup ? [APPDELEGATE.session.syncResult serverNewCount] : [APPDELEGATE.session.syncResult clientNewCount];
-//        return [[ContactSyncResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withTitle:NSLocalizedString(@"ContactLastSyncDetailNewTitle", @"") withClientVal:[APPDELEGATE.session.syncResult clientNewCount] withServerVal:[APPDELEGATE.session.syncResult serverNewCount]];
+        //        return [[ContactSyncResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withTitle:NSLocalizedString(@"ContactLastSyncDetailNewTitle", @"") withClientVal:[APPDELEGATE.session.syncResult clientNewCount] withServerVal:[APPDELEGATE.session.syncResult serverNewCount]];
         return [[ContactSyncResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withTitle:NSLocalizedString(@"ContactLastSyncDetailNewTitle", @"") withVal:syncVal];
     } else {
         int syncVal = [APPDELEGATE.session.syncResult syncType] == ContactSyncTypeBackup ? [APPDELEGATE.session.syncResult serverDeleteCount] : [APPDELEGATE.session.syncResult clientDeleteCount];
-//        return [[ContactSyncResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withTitle:NSLocalizedString(@"ContactLastSyncDetailDeleteTitle", @"") withClientVal:[APPDELEGATE.session.syncResult clientDeleteCount] withServerVal:[APPDELEGATE.session.syncResult serverDeleteCount]];
+        //        return [[ContactSyncResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withTitle:NSLocalizedString(@"ContactLastSyncDetailDeleteTitle", @"") withClientVal:[APPDELEGATE.session.syncResult clientDeleteCount] withServerVal:[APPDELEGATE.session.syncResult serverDeleteCount]];
         return [[ContactSyncResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withTitle:NSLocalizedString(@"ContactLastSyncDetailDeleteTitle", @"") withVal:syncVal];
     }
 }
@@ -221,15 +261,15 @@
 - (void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     /*
-    if (autoSyncSwitch.isOn) {
-        [CacheUtil writeCachedSettingSyncContacts:EnableOptionAuto];
-        if (oldSyncOption == EnableOptionOff) {
-            [SyncUtil startContactAutoSync];
-        }
-    } else {
-        [CacheUtil writeCachedSettingSyncContacts:EnableOptionOff];
-        [SyncUtil stopContactAutoSync];
-    }
+     if (autoSyncSwitch.isOn) {
+     [CacheUtil writeCachedSettingSyncContacts:EnableOptionAuto];
+     if (oldSyncOption == EnableOptionOff) {
+     [SyncUtil startContactAutoSync];
+     }
+     } else {
+     [CacheUtil writeCachedSettingSyncContacts:EnableOptionOff];
+     [SyncUtil stopContactAutoSync];
+     }
      */
 }
 
