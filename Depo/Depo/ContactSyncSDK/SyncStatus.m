@@ -112,6 +112,9 @@
     _deletedContactsOnDevice = [NSMutableArray new];
     _deletedContactsOnServer = [NSMutableArray new];
     
+    _totalContactOnClient = 0;
+    _totalContactOnServer = 0;
+    
     _status = SYNC_RESULT_INITIAL;
     _lastError = nil;
 }

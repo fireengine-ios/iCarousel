@@ -24,10 +24,10 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [UIColor whiteColor];
         
-        clientTitleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(160, 10, 80, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:16] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"ContactLastSyncDetailClientTitle", @"") withAlignment:NSTextAlignmentCenter];
+        clientTitleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(160, 10, 80, 20) withFont:[UIFont fontWithName:@"TurkcellSatura" size:16] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"ContactLastSyncDetailClientTitle", @"") withAlignment:NSTextAlignmentCenter];
         [self addSubview:clientTitleLabel];
         
-        serverTitleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(240, 10, 80, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:16] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"ContactLastSyncDetailServerTitle", @"") withAlignment:NSTextAlignmentCenter];
+        serverTitleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(240, 10, 80, 20) withFont:[UIFont fontWithName:@"TurkcellSatura" size:16] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"ContactLastSyncDetailServerTitle", @"") withAlignment:NSTextAlignmentCenter];
         [self addSubview:serverTitleLabel];
         
     }

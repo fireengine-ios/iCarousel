@@ -18,8 +18,11 @@
 #import "AppDelegate.h"
 #import "AppSession.h"
 #import "AppConstants.h"
+#import "BaseViewController.h"
 
-@interface ContactSyncController ()
+@interface ContactSyncController () {
+    ProcessFooterView *processView;
+}
 
 @end
 
@@ -40,7 +43,16 @@
         float buttonHeight = IS_IPAD ? 70 : 40;
         float bgHeight = (10 + buttonHeight + 10 + 20 + 10);
         float buttonWidth = buttonHeight * 4;
-        float verticalPadding = IS_IPAD ? 50 : 20;
+        float verticalPadding;
+        if (IS_IPHONE_4_OR_LESS) {
+            verticalPadding = 10;
+        } else if (IS_IPAD) {
+            verticalPadding = 50;
+        } else if (IS_IPHONE_6P_OR_HIGHER) {
+            verticalPadding = 30;
+        } else {
+            verticalPadding = 20;
+        }
         
         UIView *bgViewBackup = [[UIView alloc] initWithFrame:CGRectMake(20, topIndex, self.view.frame.size.width - 40, bgHeight)];
         bgViewBackup.backgroundColor = [Util UIColorForHexColor:@"f7f6f3"];
@@ -100,7 +112,7 @@
         restoreLabel.adjustsFontSizeToFitWidth = YES;
         [bgViewRestore addSubview:restoreLabel];
         
-        topIndex = topIndex + bgHeight + verticalPadding;
+        topIndex = topIndex + bgHeight + (IS_IPHONE_5? 10 : verticalPadding);
         
         NSString *lastSyncTitle = [NSString stringWithFormat:NSLocalizedString(@"ContactLastSyncDateTitle", @""), NSLocalizedString(@"NoneTitle", @"")];
         if([SyncUtil readLastContactSyncDate] != nil) {
@@ -124,8 +136,8 @@
         [self.view addSubview:lastSyncDetailTable];
         
         if([SyncUtil readLastContactSyncDate] == nil) {
-//            lastSyncDateLabel.hidden = YES;
-//            lastSyncDetailTable.hidden = YES;
+            lastSyncDateLabel.hidden = YES;
+            lastSyncDetailTable.hidden = YES;
         }
         
         [SyncSettings shared].token = APPDELEGATE.session.authToken;
@@ -142,6 +154,8 @@
                     currentSyncResult.serverNewCount = (int)status.createdContactsSent.count;
                     currentSyncResult.clientDeleteCount = (int)status.deletedContactsOnDevice.count;
                     currentSyncResult.serverDeleteCount = (int)status.deletedContactsOnServer.count;
+                    currentSyncResult.totalContactOnClient = (int)status.totalContactOnClient;
+                    currentSyncResult.totalContactOnServer = (int)status.totalContactOnServer;
                     currentSyncResult.syncType = APPDELEGATE.session.syncType;
                     APPDELEGATE.session.syncResult = currentSyncResult;
                     [SyncUtil writeLastContactSyncResult:currentSyncResult];
@@ -162,7 +176,6 @@
             }
             [self manualSyncFinalized];
         };
-        
     }
     return self;
 }
@@ -170,17 +183,17 @@
 - (void) backupClicked {
     APPDELEGATE.session.syncType = ContactSyncTypeBackup;
     [ContactSyncSDK doSync:SYNCBackup];
-    [self showLoading];
+    [self showProcessView];
 }
 
 - (void) restoreClicked {
     APPDELEGATE.session.syncType = ContactSyncTypeRestore;
     [ContactSyncSDK doSync:SYNCRestore];
-    [self showLoading];
+    [self showProcessView];
 }
 
 - (void) manualSyncFinalized {
-    [self hideLoading];
+    [self hideProcessView];
     
     [SyncUtil updateLastContactSyncDate];
     NSString *lastSyncTitle = [NSString stringWithFormat:NSLocalizedString(@"ContactLastSyncDateTitle", @""), NSLocalizedString(@"NoneTitle", @"")];
@@ -202,7 +215,7 @@
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return 5;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -221,7 +234,7 @@
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40)];
     headerView.backgroundColor = [Util UIColorForHexColor:@"f4f5f8"];
     
-    CustomLabel *headerLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 10, 280, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:14] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"ContactLastSyncDetailTitle", @"") withAlignment:NSTextAlignmentCenter];
+    CustomLabel *headerLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 10, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:14] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"ContactLastSyncDetailTitle", @"") withAlignment:NSTextAlignmentCenter];
     [headerView addSubview:headerLabel];
     
     return headerView;
@@ -235,23 +248,49 @@
     } else if(indexPath.row == 1) {
         int syncVal = [APPDELEGATE.session.syncResult syncType] == ContactSyncTypeBackup ? [APPDELEGATE.session.syncResult serverUpdateCount] : [APPDELEGATE.session.syncResult clientUpdateCount];
         //        return [[ContactSyncResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withTitle:NSLocalizedString(@"ContactLastSyncDetailUpdateTitle", @"") withClientVal:[APPDELEGATE.session.syncResult clientUpdateCount] withServerVal:[APPDELEGATE.session.syncResult serverUpdateCount]];
-        return [[ContactSyncResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withTitle:NSLocalizedString(@"ContactLastSyncDetailUpdateTitle", @"") withVal:syncVal];
+        return [[ContactSyncResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withTitle:NSLocalizedString(@"ContactLastSyncDetailUpdateTitle", @"") withVal:syncVal isBold:NO];
     } else if(indexPath.row == 2) {
         int syncVal = [APPDELEGATE.session.syncResult syncType] == ContactSyncTypeBackup ? [APPDELEGATE.session.syncResult serverNewCount] : [APPDELEGATE.session.syncResult clientNewCount];
         //        return [[ContactSyncResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withTitle:NSLocalizedString(@"ContactLastSyncDetailNewTitle", @"") withClientVal:[APPDELEGATE.session.syncResult clientNewCount] withServerVal:[APPDELEGATE.session.syncResult serverNewCount]];
-        return [[ContactSyncResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withTitle:NSLocalizedString(@"ContactLastSyncDetailNewTitle", @"") withVal:syncVal];
-    } else {
+        return [[ContactSyncResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withTitle:NSLocalizedString(@"ContactLastSyncDetailNewTitle", @"") withVal:syncVal isBold:NO];
+    } else if(indexPath.row == 3) {
         int syncVal = [APPDELEGATE.session.syncResult syncType] == ContactSyncTypeBackup ? [APPDELEGATE.session.syncResult serverDeleteCount] : [APPDELEGATE.session.syncResult clientDeleteCount];
         //        return [[ContactSyncResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withTitle:NSLocalizedString(@"ContactLastSyncDetailDeleteTitle", @"") withClientVal:[APPDELEGATE.session.syncResult clientDeleteCount] withServerVal:[APPDELEGATE.session.syncResult serverDeleteCount]];
-        return [[ContactSyncResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withTitle:NSLocalizedString(@"ContactLastSyncDetailDeleteTitle", @"") withVal:syncVal];
+        return [[ContactSyncResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withTitle:NSLocalizedString(@"ContactLastSyncDetailDeleteTitle", @"") withVal:syncVal isBold:NO];
+    } else {
+        int syncVal = [APPDELEGATE.session.syncResult syncType] == ContactSyncTypeBackup ? [APPDELEGATE.session.syncResult totalContactOnServer] : [APPDELEGATE.session.syncResult totalContactOnClient];
+        return [[ContactSyncResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withTitle:NSLocalizedString(@"ContactLastSyncDetailTotalTitle", @"") withVal:syncVal isBold:YES];
     }
 }
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     if([ContactSyncSDK isRunning]) {
-        [self showLoading];
+        [self showProcessView];
     }
+}
+
+- (void)showProcessView {
+    BaseViewController *base = APPDELEGATE.base;
+    processView = [[ProcessFooterView alloc] initWithFrame:CGRectMake(0, base.view.frame.size.height - 60, base.view.frame.size.width, 60)
+                                        withProcessMessage:@"İşleminiz devam ediyor. Lütfen uygulamayı kapatmayın."
+                                          withFinalMessage:@""
+                                           withFailMessage:@""];
+    processView.delegate = self;
+    
+    [base.view addSubview:processView];
+    [processView startLoading];
+}
+
+- (void)hideProcessView {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [processView dismissWithSuccessMessage];
+        processView = nil;
+    });
+}
+
+- (void) processFooterShouldDismissWithButtonKey:(NSString *) postButtonKeyVal {
+    [self hideProcessView];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -260,6 +299,13 @@
 
 - (void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if (self.view.superview == nil) {
+            [self hideProcessView];
+        }
+    });
+    
     /*
      if (autoSyncSwitch.isOn) {
      [CacheUtil writeCachedSettingSyncContacts:EnableOptionAuto];

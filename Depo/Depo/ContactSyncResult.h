@@ -17,6 +17,9 @@
 @property (nonatomic) int serverNewCount;
 @property (nonatomic) int clientDeleteCount;
 @property (nonatomic) int serverDeleteCount;
+@property (nonatomic) int totalContactOnServer;
+@property (nonatomic) int totalContactOnClient;
+
 @property (nonatomic) ContactSyncType syncType;
 
 @end

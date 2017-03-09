@@ -441,6 +441,7 @@
 "ContactLastSyncDetailUpdateTitle"="Güncellenen";
 "ContactLastSyncDetailNewTitle"="Oluşturulan";
 "ContactLastSyncDetailDeleteTitle"="Silinen";
+"ContactLastSyncDetailTotalTitle"="Toplam";
 "ManualSyncTitle"="Yedeklemeyi Başlat";
 "ManualSyncTitleOnSync"="Yedekleme devam ediyor...";
 
