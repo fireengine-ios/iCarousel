@@ -384,13 +384,13 @@
     
     for (FileInfoGroup *fileInfoGroup in self.groups) {
         for (RawTypeFile *fileType in fileInfoGroup.fileInfo) {
+            
+//            [SDWebImageManager sharedManager].imageDownloader.executionOrder = SDWebImageDownloaderLIFOExecutionOrder;
+            
             [[SDWebImageManager sharedManager] loadImageWithURL:
              [NSURL URLWithString:fileType.fileRef.detail.thumbMediumUrl]
-                                                        options:SDWebImageCacheMemoryOnly
-                                                       progress:
-             ^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
-                 
-             }
+                                                        options:SDWebImageCacheMemoryOnly | SDWebImageHighPriority
+                                                       progress:nil
                                                       completed:
              ^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
                  
