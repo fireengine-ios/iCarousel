@@ -387,14 +387,16 @@
             
 //            [SDWebImageManager sharedManager].imageDownloader.executionOrder = SDWebImageDownloaderLIFOExecutionOrder;
             
-            [[SDWebImageManager sharedManager] loadImageWithURL:
-             [NSURL URLWithString:fileType.fileRef.detail.thumbMediumUrl]
-                                                        options:SDWebImageCacheMemoryOnly | SDWebImageHighPriority
-                                                       progress:nil
-                                                      completed:
-             ^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
-                 
-             }];
+            if ([fileType isKindOfClass:[RawTypeFile class]]) {
+                [[SDWebImageManager sharedManager] loadImageWithURL:
+                 [NSURL URLWithString:fileType.fileRef.detail.thumbMediumUrl]
+                                                            options:SDWebImageCacheMemoryOnly | SDWebImageHighPriority
+                                                           progress:nil
+                                                          completed:
+                 ^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
+                     
+                 }];
+            }
 //            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:
 //                                            [NSURL URLWithString:fileType.fileRef.detail.thumbMediumUrl]];
 //            [request setHTTPShouldHandleCookies:NO];
