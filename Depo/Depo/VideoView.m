@@ -8,7 +8,7 @@
 
 #import "VideoView.h"
 #import "AppDelegate.h"
-#import "UIImageView+AFNetworking.h"
+#import "UIImageView+WebCache.h"
 
 @interface VideoView ()
 
@@ -47,7 +47,7 @@
         _thumbailImage.contentMode = UIViewContentModeScaleAspectFit;
         
         NSString *imgUrlStr = [self.file.detail.thumbLargeUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        [_thumbailImage setImageWithURL:[NSURL URLWithString:imgUrlStr] ];
+        [_thumbailImage sd_setImageWithURL:[NSURL URLWithString:imgUrlStr] ];
         [self addSubview:_thumbailImage];
         
         // play button

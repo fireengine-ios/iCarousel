@@ -7,7 +7,7 @@
 //
 
 #import "PhotoAlbumController.h"
-#import "UIImageView+AFNetworking.h"
+#import "UIImageView+WebCache.h"
 #import "CustomButton.h"
 #import "CustomLabel.h"
 #import "MetaFile.h"
@@ -119,7 +119,7 @@
         bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, mainImageHeight)];
         [bgImgView setClipsToBounds:YES];
         bgImgView.contentMode = UIViewContentModeScaleAspectFill;
-        [bgImgView setImageWithURL:[NSURL URLWithString:self.album.cover.detail.thumbLargeUrl]];
+        [bgImgView sd_setImageWithURL:[NSURL URLWithString:self.album.cover.detail.thumbLargeUrl]];
         [self.view addSubview:bgImgView];
         
         UIImageView *maskImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, mainImageHeight)];
@@ -235,7 +235,7 @@
         subTitleLabel.text = subTitleVal;
     }
     
-    [bgImgView setImageWithURL:[NSURL URLWithString:self.album.cover.detail.thumbLargeUrl]];
+    [bgImgView sd_setImageWithURL:[NSURL URLWithString:self.album.cover.detail.thumbLargeUrl]];
 }
 
 - (void) albumDetailSuccessCallback:(PhotoAlbum *) albumWithUpdatedContent {
@@ -423,7 +423,7 @@
 }
 
 - (void) coverPhotoDidChange {
-    [bgImgView setImageWithURL:[NSURL URLWithString:self.album.cover.detail.thumbLargeUrl]];
+    [bgImgView sd_setImageWithURL:[NSURL URLWithString:self.album.cover.detail.thumbLargeUrl]];
 }
 
 #pragma mark MoreMenuDelegate

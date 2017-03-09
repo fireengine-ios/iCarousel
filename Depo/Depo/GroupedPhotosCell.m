@@ -10,7 +10,7 @@
 #import "CustomLabel.h"
 #import "Util.h"
 #import "MetaFile.h"
-#import "UIImageView+AFNetworking.h"
+#import "UIImageView+WebCache.h"
 #import "UploadRef.h"
 #import "SquareImageView.h"
 
@@ -81,7 +81,7 @@
                     counter++;
                 } else {
                     UIImageView *rowImgView = [[UIImageView alloc] initWithFrame:CGRectMake((counter%imageForRow)*imageItemSize, floorf(counter/imageForRow)*imageItemSize, imageItemSize, imageItemSize)];
-                    [rowImgView setNoCachedImageWithURL:[NSURL URLWithString:row.detail.thumbMediumUrl]];
+                    [rowImgView sd_setImageWithURL:[NSURL URLWithString:row.detail.thumbMediumUrl]];
                     [imageContainer addSubview:rowImgView];
                     counter++;
                 }

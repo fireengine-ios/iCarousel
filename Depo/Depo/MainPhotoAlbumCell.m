@@ -7,7 +7,7 @@
 //
 
 #import "MainPhotoAlbumCell.h"
-#import "UIImageView+AFNetworking.h"
+#import "UIImageView+WebCache.h"
 #import "CustomLabel.h"
 
 @interface MainPhotoAlbumCell() {
@@ -39,7 +39,7 @@
             bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 160)];
             bgImgView.contentMode = UIViewContentModeScaleAspectFill;
             bgImgView.clipsToBounds = YES;
-            [bgImgView setImageWithURL:[NSURL URLWithString:self.album.cover.detail.thumbLargeUrl]];
+            [bgImgView sd_setImageWithURL:[NSURL URLWithString:self.album.cover.detail.thumbLargeUrl]];
             [self addSubview:bgImgView];
             
             maskImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 160)];

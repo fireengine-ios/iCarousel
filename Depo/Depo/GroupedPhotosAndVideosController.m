@@ -16,7 +16,7 @@
 #import "MapUtil.h"
 #import "UploadingImagePreviewController.h"
 #import "PrintWebViewController.h"
-#import "UIImageView+AFNetworking.h"
+#import "UIImageView+WebCache.h"
 #import "NoItemView.h"
 #import "GroupedPhotosCell.h"
 #import "UploadingImagePreviewController.h"
@@ -981,7 +981,7 @@
 
 - (void) dealloc {
     //mahir
-    [UIImageView clearImageCaches];
+//    [UIImageView clearImageCaches];
 }
 
 - (void) groupedPhotoCellImageWasSelectedForFile:(MetaFile *) fileSelected forGroupWithKey:(NSString *) groupKey {

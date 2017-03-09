@@ -219,11 +219,11 @@
 }
 
 - (void)handleURLCache {
-    [[NSURLCache sharedURLCache] removeAllCachedResponses];
-    NSURLCache *URLCache = [[NSURLCache alloc] initWithMemoryCapacity:4 * 1024 * 1024
-                                                         diskCapacity:20 * 1024 * 1024
-                                                             diskPath:nil];
-    [NSURLCache setSharedURLCache:URLCache];
+//    [[NSURLCache sharedURLCache] removeAllCachedResponses];
+//    NSURLCache *URLCache = [[NSURLCache alloc] initWithMemoryCapacity:4 * 1024 * 1024
+//                                                         diskCapacity:20 * 1024 * 1024
+//                                                             diskPath:nil];
+//    [NSURLCache setSharedURLCache:URLCache];
 }
 
 - (void) assignNotificationActionByLaunchOptions:(NSDictionary *)launchOptions {

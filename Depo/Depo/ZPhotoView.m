@@ -7,7 +7,7 @@
 //
 
 #import "ZPhotoView.h"
-#import "UIImageView+AFNetworking.h"
+#import "UIImageView+WebCache.h"
 
 @interface ZPhotoView ()
 
@@ -48,11 +48,15 @@
         _imgView.contentMode = UIViewContentModeScaleAspectFit;
         
         [self showLoading];
-        [_imgView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:imgUrlStr]] placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-            [weakSelf resizeScrollView];
-            [weakSelf hideLoading];
-        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-            [weakSelf hideLoading];
+        [_imgView sd_setImageWithURL:[NSURL URLWithString:imgUrlStr]
+                           completed:
+         ^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weakSelf hideLoading];
+                if (!error) {
+                    [weakSelf resizeScrollView];
+                }
+            });
         }];
         
         [self addSubview:_imgView];

@@ -8,7 +8,7 @@
 
 #import "ImagePreviewController.h"
 #import "Util.h"
-#import "UIImageView+AFNetworking.h"
+#import "UIImageView+WebCache.h"
 #import "AppDelegate.h"
 #import "BaseViewController.h"
 #import "PrintWebViewController.h"

@@ -20,7 +20,7 @@
 #import "SettingsHelpController.h"
 #import "SettingsAboutUsController.h"
 #import "CustomButton.h"
-#import "UIImageView+AFNetworking.h"
+#import "UIImageView+WebCache.h"
 #import "ChangePassController.h"
 #import "UpdateMsisdnController.h"
 #import "MPush.h"

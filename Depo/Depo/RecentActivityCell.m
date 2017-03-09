@@ -9,7 +9,7 @@
 #import "RecentActivityCell.h"
 #import "Util.h"
 #import "AppUtil.h"
-#import "UIImageView+AFNetworking.h"
+#import "UIImageView+WebCache.h"
 
 @implementation RecentActivityCell
 
@@ -47,7 +47,7 @@
             for(MetaFile *file in self.activity.actionItemList) {
                 if(counter < 3) {
                     UIImageView *fileImgView = [[UIImageView alloc] initWithFrame:CGRectMake(95 + counter * 35, 30, 30, 30)];
-                    [fileImgView setImageWithURL:[NSURL URLWithString:file.detail.thumbSmallUrl]];
+                    [fileImgView sd_setImageWithURL:[NSURL URLWithString:file.detail.thumbSmallUrl]];
                     [self addSubview:fileImgView];
                 }
                 counter ++;

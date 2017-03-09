@@ -9,7 +9,7 @@
 #import "GroupedView.h"
 #import "CustomLabel.h"
 #import "Util.h"
-#import "UIImageView+AFNetworking.h"
+#import "UIImageView+WebCache.h"
 #import "CustomButton.h"
 
 @interface GroupedView() {

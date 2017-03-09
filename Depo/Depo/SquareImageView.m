@@ -7,7 +7,7 @@
 //
 
 #import "SquareImageView.h"
-#import "UIImageView+AFNetworking.h"
+#import "UIImageView+WebCache.h"
 #import "CustomLabel.h"
 #import "AppDelegate.h"
 #import "AppSession.h"
@@ -51,12 +51,12 @@
         imgView.contentMode = UIViewContentModeScaleAspectFill;
         imgView.clipsToBounds = YES;
         if(cacheFlag) {
-            [imgView setImageWithURL:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:nil];
+            [imgView sd_setImageWithURL:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:nil];
         } else {
             if(manualQuality) {
-                [imgView setNoCachedImageWithBetterQualityForUrl:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:nil];
+                [imgView sd_setImageWithURL:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:nil];
             } else {
-                [imgView setNoCachedImageWithURL:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:nil];
+                [imgView sd_setImageWithURL:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:nil];
             }
         }
         [self addSubview:imgView];
@@ -105,7 +105,7 @@
         imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
         imgView.contentMode = UIViewContentModeScaleAspectFill;
         imgView.clipsToBounds = YES;
-        [imgView setFinalNoCachedImageWithBetterQualityForUrl:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:nil withMaxWidth:imgMaxWidth withMaxHeight:imgMaxWidth forCompressQaulity:0.8f];
+        [imgView sd_setImageWithURL:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:nil];
         [self addSubview:imgView];
         
         if(self.file.contentType == ContentTypeVideo) {
@@ -147,7 +147,7 @@
         imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
         imgView.contentMode = UIViewContentModeScaleAspectFill;
         imgView.clipsToBounds = YES;
-        [imgView setFinalCachedImageWithBetterQualityForUrl:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:nil withMaxWidth:imgMaxWidth withMaxHeight:imgMaxWidth forCompressQaulity:0.8f];
+        [imgView sd_setImageWithURL:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:nil];
         [self addSubview:imgView];
         
         if(self.file.contentType == ContentTypeVideo) {
@@ -182,7 +182,7 @@
     if(IS_IPAD) {
         imgMaxWidth = 600;
     }
-    [imgView setFinalCachedImageWithBetterQualityForUrl:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:nil withMaxWidth:imgMaxWidth withMaxHeight:imgMaxWidth forCompressQaulity:0.8f];
+    [imgView sd_setImageWithURL:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:nil];
 
     if(self.file.contentType == ContentTypeVideo) {
         if(!playIconView) {
@@ -524,7 +524,7 @@
             imgView = [[UIImageView alloc] initWithFrame:CGRectMake(-1, -1, self.frame.size.width+2, self.frame.size.height+2)];
             imgView.contentMode = UIViewContentModeScaleAspectFill;
             imgView.clipsToBounds = YES;
-            [imgView setFinalNoCachedImageWithBetterQualityForUrl:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:nil withMaxWidth:200 withMaxHeight:200 forCompressQaulity:0.8f];
+            [imgView sd_setImageWithURL:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:nil];
             [self addSubview:imgView];
         }
     }

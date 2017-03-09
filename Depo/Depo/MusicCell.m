@@ -7,7 +7,7 @@
 //
 
 #import "MusicCell.h"
-#import "UIImageView+AFNetworking.h"
+#import "UIImageView+WebCache.h"
 
 @interface MusicCell () {
     CustomLabel *nameLabel;
@@ -34,7 +34,7 @@
         self.imgView.image = iconImg;
         if(self.fileFolder.detail && self.fileFolder.detail.thumbMediumUrl && [self.fileFolder.detail.thumbMediumUrl length] > 0) {
             self.imgView.frame = CGRectMake(leftIndex + 2, 16, 35, 35);
-            [self.imgView setImageWithURL:[NSURL URLWithString:self.fileFolder.detail.thumbMediumUrl]];
+            [self.imgView sd_setImageWithURL:[NSURL URLWithString:self.fileFolder.detail.thumbMediumUrl]];
         }
         [self addSubview:self.imgView];
         
@@ -68,7 +68,7 @@
         self.imgView.image = iconImg;
         if(self.fileFolder.detail && self.fileFolder.detail.thumbMediumUrl && [self.fileFolder.detail.thumbMediumUrl length] > 0) {
             self.imgView.frame = CGRectMake(17, 16, 35, 35);
-            [self.imgView setImageWithURL:[NSURL URLWithString:self.fileFolder.detail.thumbMediumUrl]];
+            [self.imgView sd_setImageWithURL:[NSURL URLWithString:self.fileFolder.detail.thumbMediumUrl]];
         }
         [self addSubview:self.imgView];
         
@@ -112,7 +112,7 @@
         self.imgView.image = iconImg;
         if(self.fileFolder.detail && self.fileFolder.detail.thumbMediumUrl && [self.fileFolder.detail.thumbMediumUrl length] > 0) {
             self.imgView.frame = CGRectMake(17, 16, 35, 35);
-            [self.imgView setImageWithURL:[NSURL URLWithString:self.fileFolder.detail.thumbMediumUrl]];
+            [self.imgView sd_setImageWithURL:[NSURL URLWithString:self.fileFolder.detail.thumbMediumUrl]];
         }
         [self addSubview:self.imgView];
         

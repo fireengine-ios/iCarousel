@@ -16,7 +16,7 @@
 #import "MapUtil.h"
 #import "UploadingImagePreviewController.h"
 #import "PrintWebViewController.h"
-#import "UIImageView+AFNetworking.h"
+#import "UIImageView+WebCache.h"
 #import "NoItemView.h"
 #import "MPush.h"
 
@@ -1108,7 +1108,7 @@
 
 - (void) dealloc {
     //mahir
-    [UIImageView clearImageCaches];
+//    [UIImageView clearImageCaches];
 }
 
 @end

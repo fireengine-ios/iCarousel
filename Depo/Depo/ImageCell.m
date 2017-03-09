@@ -7,7 +7,7 @@
 //
 
 #import "ImageCell.h"
-#import "UIImageView+AFNetworking.h"
+#import "UIImageView+WebCache.h"
 
 @interface ImageCell () {
     CustomLabel *nameLabel;
@@ -30,7 +30,7 @@
         int leftIndex = self.isSelectible ? 50 : 15;
         
         self.imgView = [[UIImageView alloc] initWithFrame:CGRectMake(leftIndex, 16, 35, 35)];
-        [self.imgView setNoCachedImageWithURL:[NSURL URLWithString:self.fileFolder.detail.thumbMediumUrl]];
+        [self.imgView sd_setImageWithURL:[NSURL URLWithString:self.fileFolder.detail.thumbMediumUrl]];
         [self addSubview:self.imgView];
 
         CGRect nameFieldRect = CGRectMake(leftIndex + 55, 13, self.frame.size.width - 80, 22);
@@ -59,7 +59,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier withFileFolder:_fileFolder isSelectible:NO];
     if (self) {
         self.imgView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 16, 35, 35)];
-        [self.imgView setNoCachedImageWithURL:[NSURL URLWithString:self.fileFolder.detail.thumbMediumUrl]];
+        [self.imgView sd_setImageWithURL:[NSURL URLWithString:self.fileFolder.detail.thumbMediumUrl]];
         [self addSubview:self.imgView];
         
         CGRect nameFieldRect = CGRectMake(70, 13, self.frame.size.width - 80, 22);
@@ -97,7 +97,7 @@
         self.isSwipeable = NO;
 
         self.imgView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 16, 35, 35)];
-        [self.imgView setNoCachedImageWithURL:[NSURL URLWithString:self.fileFolder.detail.thumbMediumUrl]];
+        [self.imgView sd_setImageWithURL:[NSURL URLWithString:self.fileFolder.detail.thumbMediumUrl]];
         [self addSubview:self.imgView];
         
         CGRect nameFieldRect = CGRectMake(70, 13, self.frame.size.width - 120, 22);

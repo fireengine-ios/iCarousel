@@ -16,6 +16,7 @@
 #import "ReachabilityManager.h"
 #import "Reachability.h"
 #import "GroupPhotoSectionView.h"
+#import "UIImageView+WebCache.h"
 
 #define GROUP_PACKAGE_SIZE (IS_IPAD ? 60 : IS_IPHONE_6P_OR_HIGHER ? 60 : 48)
 #define GROUP_IMG_COUNT_PER_ROW (IS_IPAD ? 6 : IS_IPHONE_6P_OR_HIGHER ? 6 : 4)
@@ -380,6 +381,45 @@
     
     isLoading = NO;
     [refreshControl endRefreshing];
+    
+    for (FileInfoGroup *fileInfoGroup in self.groups) {
+        for (RawTypeFile *fileType in fileInfoGroup.fileInfo) {
+            [[SDWebImageManager sharedManager] loadImageWithURL:
+             [NSURL URLWithString:fileType.fileRef.detail.thumbMediumUrl]
+                                                        options:SDWebImageCacheMemoryOnly
+                                                       progress:
+             ^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+                 
+             }
+                                                      completed:
+             ^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
+                 
+             }];
+//            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:
+//                                            [NSURL URLWithString:fileType.fileRef.detail.thumbMediumUrl]];
+//            [request setHTTPShouldHandleCookies:NO];
+//            [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
+//            if(APPDELEGATE.session.authToken) {
+//                [request addValue:APPDELEGATE.session.authToken forHTTPHeaderField:@"X-Auth-Token"];
+//            }
+//            
+//            UIImage *cachedImage = [[UIImageView af_sharedImageCache] cachedImageForRequest:request];
+//            if (cachedImage) {
+//            } else {
+//                @autoreleasepool {
+//                    
+//                    AFImageRequestOperation *requestOperation = [[AFImageRequestOperation alloc] initWithRequest:request];
+//                    [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                        [[UIImageView af_sharedImageCache] cacheImage:responseObject forRequest:request];
+//                    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                    }];
+//                    
+//                    
+//                    [[UIImageView af_sharedImageRequestOperationQueue] addOperation:requestOperation];
+//                }
+//            }
+        }
+    }
     
     /*
     if ([files count] == 0 && !anyOngoingPresent) {
