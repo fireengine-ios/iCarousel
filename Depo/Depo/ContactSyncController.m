@@ -138,6 +138,8 @@
         if([SyncUtil readLastContactSyncDate] == nil) {
             lastSyncDateLabel.hidden = YES;
             lastSyncDetailTable.hidden = YES;
+        } else {
+            APPDELEGATE.session.syncResult = [ContactSyncResult loadData];;
         }
         
         [SyncSettings shared].token = APPDELEGATE.session.authToken;
@@ -157,6 +159,7 @@
                     currentSyncResult.totalContactOnClient = [status.totalContactOnClient intValue];
                     currentSyncResult.totalContactOnServer = [status.totalContactOnServer intValue];
                     currentSyncResult.syncType = APPDELEGATE.session.syncType;
+                    [currentSyncResult saveData];
                     APPDELEGATE.session.syncResult = currentSyncResult;
                     [SyncUtil writeLastContactSyncResult:currentSyncResult];
                 }
@@ -273,9 +276,9 @@
 - (void)showProcessView {
     BaseViewController *base = APPDELEGATE.base;
     processView = [[ProcessFooterView alloc] initWithFrame:CGRectMake(0, base.view.frame.size.height - 60, base.view.frame.size.width, 60)
-                                        withProcessMessage:@"İşleminiz devam ediyor. Lütfen uygulamayı kapatmayın."
-                                          withFinalMessage:@""
-                                           withFailMessage:@""];
+                                        withProcessMessage:@"Rehberiniz yedekleniyor, lütfen uygulamayı kapatmayın."
+                                          withFinalMessage:@"Telefon rehberiniz lifebox’a yedeklenmiştir."
+                                           withFailMessage:@"Yedekleme sırasında hata oluştu, lütfen tekrar deneyiniz."];
     processView.delegate = self;
     
     [base.view addSubview:processView];
