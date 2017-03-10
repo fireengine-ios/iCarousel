@@ -716,6 +716,10 @@
 }
 
 - (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {
+    if ([delegate respondsToSelector:@selector(revisitedGroupedPhoto:triggerShareForFiles:withUUID:)]) {
+        [delegate revisitedGroupedPhoto:self triggerShareForFiles:selectedMetaFiles withUUID:selectedFileList];
+        return;
+    }
     [delegate revisitedGroupedPhoto:self triggerShareForFiles:selectedMetaFiles];
     // [APPDELEGATE.base triggerShareForFiles:selectedFileList];
 }

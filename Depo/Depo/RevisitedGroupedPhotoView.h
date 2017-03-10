@@ -48,6 +48,9 @@
 - (void) revisitedGroupedPhotoChangeTitleTo:(NSString *) pageTitle;
 - (void) revisitedGroupedPhotoShowPhotoAlbums:(RevisitedGroupedPhotoView *)view;
 - (void) revisitedGroupedPhoto:(RevisitedGroupedPhotoView *)view triggerShareForFiles:(NSArray *) uuidList;
+
+- (void) revisitedGroupedPhoto:(RevisitedGroupedPhotoView *)view triggerShareForFiles:(NSArray *)fileList withUUID:(NSArray *) uuidList;
+
 -(void)revisitedGroupedPhoto:(RevisitedGroupedPhotoView *)view downloadSelectedFiles:(NSArray *)selectedFiles;
 - (BOOL) checkInternet;
 @end

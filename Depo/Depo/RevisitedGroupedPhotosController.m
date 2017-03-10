@@ -23,9 +23,11 @@
 
 #import "AppRater.h"
 
-@interface RevisitedGroupedPhotosController () {
+@interface RevisitedGroupedPhotosController () <UIActionSheetDelegate> {
     MyNavigationController *printNav;
 }
+@property (nonatomic, copy) NSArray *fileUUIDToShare;
+@property (nonatomic, copy) NSArray *fileListToShare;
 @end
 
 @implementation RevisitedGroupedPhotosController
@@ -279,8 +281,8 @@
     [MoreMenuView presentPhotoAlbumsFromController:self.nav delegateOwner:self];
 }
 
-- (void) revisitedGroupedPhoto:(RevisitedGroupedPhotoView *)view triggerShareForFiles:(NSArray *) uuidList {
-    [self triggerShareForFiles:uuidList];
+- (void) revisitedGroupedPhoto:(RevisitedGroupedPhotoView *)view triggerShareForFiles:(NSArray *)fileList withUUID:(NSArray *) uuidList {
+    [self triggerShareForFiles:fileList udidList:uuidList];
 }
 
 -(void)revisitedGroupedPhoto:(RevisitedGroupedPhotoView *)view downloadSelectedFiles:(NSArray *)selectedFiles {
@@ -337,24 +339,43 @@
 
 #pragma mark - Share
 
-- (void) triggerShareForFiles:(NSArray *) fileUuidList {
-//    [shareDao requestLinkForFiles:fileUuidList];
-    
-    __block NSInteger imagesCount = fileUuidList.count;
+- (void)shareImageFiles:(BOOL)originalSize {
+//    __block NSInteger imagesCount = fileUuidList.count;
     __block NSMutableArray *allImages = [@[] mutableCopy];
     
-    for (MetaFile *file in fileUuidList) {
+    [self showLoading];
+    
+    for (MetaFile *file in self.fileListToShare) {
+        NSString *endPoint = file.detail.thumbLargeUrl;
+        if (originalSize) {
+            endPoint = file.tempDownloadUrl;
+        }
+        if (file.contentType == ContentTypeVideo) {
+            endPoint = file.tempDownloadUrl;
+        }
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:
-                                        [NSURL URLWithString:file.detail.thumbLargeUrl]];
+                                        [NSURL URLWithString:endPoint]];
         [NSURLConnection sendAsynchronousRequest:request
                                            queue:[[NSOperationQueue alloc] init]
                                completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-                                   if ( !error )
-                                   {
-                                       UIImage *image = [[UIImage alloc] initWithData:data];
-                                       
-                                       [allImages addObject:image];
-                                       if (allImages.count == imagesCount) {
+                                   if (!error) {
+                                       if (file.contentType == ContentTypeVideo) {
+                                           NSURL *url = [NSURL fileURLWithPath:
+                                                         [NSTemporaryDirectory() stringByAppendingString:file.name]];
+                                           [data writeToURL:url atomically:NO];
+                                           [allImages addObject:url];
+                                       } else {
+                                           if (originalSize) {
+                                               NSURL *url = [NSURL fileURLWithPath:
+                                                             [NSTemporaryDirectory() stringByAppendingString:file.name]];
+                                               [data writeToURL:url atomically:NO];
+                                               [allImages addObject:url];
+                                           } else {
+                                               UIImage *image = [[UIImage alloc] initWithData:data];
+                                               [allImages addObject:image];
+                                           }
+                                       }
+                                       if (allImages.count == self.fileListToShare.count) {
                                            NSLog(@"downloaded all images to share");
                                            
                                            dispatch_async(dispatch_get_main_queue(), ^{
@@ -375,8 +396,41 @@
                                    }
                                }];
     }
-    
-    [self showLoading];
+
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    [self cancelClicked];
+    switch (buttonIndex) {
+        case 0:
+            [self shareImageFiles:NO];
+            break;
+        case 1:
+            [self shareImageFiles:YES];
+            break;
+        case 2:
+            [shareDao requestLinkForFiles:self.fileUUIDToShare];
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)presentSharePopup {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@""
+                                                             delegate:self
+                                                    cancelButtonTitle:NSLocalizedString(@"CancelButtonTittle", nil)
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:NSLocalizedString(@"Küçük boyut", nil), NSLocalizedString(@"Gerçek boyut", nil), NSLocalizedString(@"Link", nil),
+                                  nil];
+    [actionSheet showInView:self.view];
+}
+
+- (void) triggerShareForFiles:(NSArray *)filesList udidList:(NSArray *)fileUuidList {
+    self.fileUUIDToShare = fileUuidList;
+    self.fileListToShare = filesList;
+    [self presentSharePopup];
+//    [self showLoading];
 }
 
 #pragma mark ShareLinkDao Delegate Methods
