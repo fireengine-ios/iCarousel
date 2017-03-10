@@ -449,6 +449,12 @@
 "ContactSyncApiError"="Yedekleme esnasında genel bir hata oluştu.";
 "ContactSyncNetworkError"="Yedekleme esnasında genel bir hata oluştu.";
 "ContactSyncGeneralError"="Yedekleme esnasında genel bir hata oluştu.";
+"ContactSyncBackupProgresssMessage"="Rehberiniz yedekleniyor, lütfen uygulamayı kapatmayın.";
+"ContactSyncBackupSuccessMessage"="Telefon rehberiniz lifebox’a yedeklenmiştir.";
+"ContactSyncBackupFailMessage"="Yedekleme sırasında hata oluştu, lütfen tekrar deneyiniz.";
+"ContactSyncRestoreProgresssMessage"="Rehberiniz telefonunuza indiriliyor, lütfen uygulamayı kapatmayın";
+"ContactSyncRestoreSuccessMessage"="Lifebox’taki rehberiniz telefonunuza kaydedilmiştir.";
+"ContactSyncRestoreFailMessage"="Rehberiniz telefonunuza indirilken bir hata oluştu, lütfen tekrar deneyiniz.";
 
 "PreLoginInfo1"="Fotoğraflarınız, hatıralarınız hep yanınızda, hep güvende.";
 "PreLoginInfo2"="lifebox'unuzdaki saklama alanınız ile daha çok fotoğraf ve video çekebilirsiniz, hiçbir hatıranızı silmek zorunda kalmazsınız.";

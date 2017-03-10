@@ -275,10 +275,22 @@
 
 - (void)showProcessView {
     BaseViewController *base = APPDELEGATE.base;
+    
+    NSString *processMessage, *successMessage, *failMessage;
+    if (APPDELEGATE.session.syncType == ContactSyncTypeBackup) {
+        processMessage = NSLocalizedString(@"ContactSyncBackupProgresssMessage", "");
+        successMessage = NSLocalizedString(@"ContactSyncBackupSuccessMessage", "");
+        failMessage = NSLocalizedString(@"ContactSyncBackupFailMessage", "");
+    } else {
+        processMessage = NSLocalizedString(@"ContactSyncRestoreProgresssMessage", "");
+        successMessage = NSLocalizedString(@"ContactSyncRestoreSuccessMessage", "");
+        failMessage = NSLocalizedString(@"ContactSyncRestoreFailMessage", "");
+    }
+    
     processView = [[ProcessFooterView alloc] initWithFrame:CGRectMake(0, base.view.frame.size.height - 60, base.view.frame.size.width, 60)
-                                        withProcessMessage:@"Rehberiniz yedekleniyor, lütfen uygulamayı kapatmayın."
-                                          withFinalMessage:@"Telefon rehberiniz lifebox’a yedeklenmiştir."
-                                           withFailMessage:@"Yedekleme sırasında hata oluştu, lütfen tekrar deneyiniz."];
+                                        withProcessMessage:processMessage
+                                          withFinalMessage:successMessage
+                                           withFailMessage:failMessage];
     processView.delegate = self;
     
     [base.view addSubview:processView];
