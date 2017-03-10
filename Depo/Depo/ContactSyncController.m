@@ -20,6 +20,10 @@
 #import "AppConstants.h"
 #import "BaseViewController.h"
 
+#define tableViewHeaderHeight 40.0f
+#define tableViewRowHeight 40.0f
+#define tableViewRowCount 5
+
 @interface ContactSyncController () {
     ProcessFooterView *processView;
 }
@@ -126,7 +130,9 @@
         
         topIndex += IS_IPAD ? 45 : 30;
         
-        lastSyncDetailTable = [[UITableView alloc] initWithFrame:CGRectMake(0, topIndex, self.view.frame.size.width, self.view.frame.size.height - topIndex - 60) style:UITableViewStylePlain];
+        CGFloat tableViewHeight = MIN(self.view.frame.size.height - topIndex - 60, (tableViewRowCount * tableViewRowHeight) + tableViewHeaderHeight);
+        lastSyncDetailTable = [[UITableView alloc] initWithFrame:CGRectMake(0, topIndex, self.view.frame.size.width, tableViewHeight) style:UITableViewStylePlain];
+        
         lastSyncDetailTable.backgroundColor = [UIColor clearColor];
         lastSyncDetailTable.backgroundView = nil;
         lastSyncDetailTable.delegate = self;
@@ -218,19 +224,15 @@
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return tableViewRowCount;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.row == 0) {
-        return 40;
-    } else {
-        return 40;
-    }
+    return tableViewRowHeight;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 40;
+    return tableViewHeaderHeight;
 }
 
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
