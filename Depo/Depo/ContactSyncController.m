@@ -154,8 +154,8 @@
                     currentSyncResult.serverNewCount = (int)status.createdContactsSent.count;
                     currentSyncResult.clientDeleteCount = (int)status.deletedContactsOnDevice.count;
                     currentSyncResult.serverDeleteCount = (int)status.deletedContactsOnServer.count;
-                    currentSyncResult.totalContactOnClient = (int)status.totalContactOnClient;
-                    currentSyncResult.totalContactOnServer = (int)status.totalContactOnServer;
+                    currentSyncResult.totalContactOnClient = [status.totalContactOnClient intValue];
+                    currentSyncResult.totalContactOnServer = [status.totalContactOnServer intValue];
                     currentSyncResult.syncType = APPDELEGATE.session.syncType;
                     APPDELEGATE.session.syncResult = currentSyncResult;
                     [SyncUtil writeLastContactSyncResult:currentSyncResult];
