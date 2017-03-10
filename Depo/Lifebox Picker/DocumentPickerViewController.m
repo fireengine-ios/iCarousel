@@ -19,6 +19,14 @@
 #define EXT_REMEMBER_ME_URL @"https://adepo.turkcell.com.tr/api/auth/rememberMe"
 //#define EXT_REMEMBER_ME_URL @"http://tcloudstb.turkcell.com.tr/api/auth/rememberMe"
 
+#ifdef PLATFORM_STORE
+#define GROUP_NAME_SUITE_NSUSERDEFAULTS @"group.com.turkcell.akillidepo"
+#elif defined PLATFORM_ICT
+#define GROUP_NAME_SUITE_NSUSERDEFAULTS @"group.com.turkcell.akillideponew.ent"
+#else
+#define GROUP_NAME_SUITE_NSUSERDEFAULTS @"group.com.rdc.lifebox2.Depo"
+#endif
+
 @interface DocumentPickerViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *docTable;
 
@@ -68,7 +76,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    NSURL *groupURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.rdc.lifebox2"];
+//    NSURL *groupURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.rdc.lifebox2"];
+    NSURL *groupURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:GROUP_NAME_SUITE_NSUSERDEFAULTS];
     NSString *groupPath = [groupURL path];
     storagePath = [groupPath stringByAppendingPathComponent:@"File Provider Storage"];
     [[NSFileManager defaultManager] createDirectoryAtPath:storagePath withIntermediateDirectories:NO attributes:nil error:nil];
