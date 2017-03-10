@@ -311,6 +311,9 @@
 
 - (void)goCountryCodepage:(id)sender {
     _countrySelectionController = [[CountrySelectionController alloc] init];
+    _countrySelectionController.completion = ^(NSDictionary *selectedCountry) {
+        NSLog(@"selected country = %@", selectedCountry);
+    };
     MyNavigationController *nav = [[MyNavigationController alloc] initWithRootViewController:_countrySelectionController];
     [self presentViewController:nav animated:YES completion:nil];
 }

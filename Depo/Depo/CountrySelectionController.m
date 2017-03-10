@@ -31,11 +31,10 @@ static const CGFloat topOffset = 64; // use 20 if there's no navigation bar, or 
     [_searchBar setBarTintColor:[UIColor colorWithRed:245.0f/255.0f green:245/255.0f blue:245/255.0f alpha:1.0f]];
     _searchBar.placeholder = @"Ara";
     _searchBar.delegate = self;
-    self.tableView.tableHeaderView = self.searchBar;
-    
+    self.tableView.tableHeaderView = _searchBar;
+        
     [self.tableView setShowsHorizontalScrollIndicator:NO];
     [self.tableView setShowsVerticalScrollIndicator:NO];
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cellIdentifier"];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSString *filePath = [[NSBundle mainBundle] pathForResource:@"countryCodes" ofType:@"json"];
@@ -97,6 +96,15 @@ static const CGFloat topOffset = 64; // use 20 if there's no navigation bar, or 
     return resultDic;
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    NSLog(@"y=%lf", scrollView.contentOffset.y);
+    
+    UIView *view = self.tableView.tableHeaderView.subviews[0];
+    CGRect rect = view.bounds;
+    rect.origin.y = MAX(0, -scrollView.contentOffset.y);
+    self.tableView.tableHeaderView.bounds = rect;
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -119,14 +127,14 @@ static const CGFloat topOffset = 64; // use 20 if there's no navigation bar, or 
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellIdentifier" forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellIdentifier"];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellIdentifier"];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cellIdentifier"];
     }
     if (_filteredCountryDict) {
-        NSDictionary * countryDic = [_filteredCountryDict valueForKey:[_keys objectAtIndex:[indexPath section]]][indexPath.row];
-        [cell.textLabel setFont:[UIFont systemFontOfSize:15]];
-        [cell.textLabel setText:countryDic[@"country_name"]];
+        NSDictionary *country = [_filteredCountryDict valueForKey:[_keys objectAtIndex:[indexPath section]]][indexPath.row];
+        [cell.textLabel setText:country[@"country_name"]];
+        [cell.detailTextLabel setText:country[@"phone_code"]];
         return cell;
     }
     return cell;;

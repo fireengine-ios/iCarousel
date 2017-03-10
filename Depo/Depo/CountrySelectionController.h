@@ -10,6 +10,6 @@
 
 @interface CountrySelectionController : UITableViewController <UISearchBarDelegate>
 
-@property (nonatomic) void(^completion)(id);
+@property (nonatomic) void(^completion)(NSDictionary*);
 
 @end
