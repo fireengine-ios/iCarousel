@@ -19,7 +19,8 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 
 @interface PhotoAlbumController ()
-
+@property (nonatomic, copy) NSArray *fileUUIDToShare;
+@property (nonatomic, copy) NSArray *fileListToShare;
 @end
 
 @implementation PhotoAlbumController
@@ -46,6 +47,7 @@
         
         [self initDaoModels];
         selectedFileList = [[NSMutableArray alloc] init];
+        self.selectedFiles = [@[] mutableCopy];
         photoList = [[NSMutableArray alloc] init];
         [photoList addObjectsFromArray:[[UploadQueue sharedInstance] uploadImageRefsForAlbum:self.album.uuid]];
         
@@ -488,6 +490,7 @@
 - (void) squareImageWasMarkedForFile:(MetaFile *)fileSelected {
     if(![selectedFileList containsObject:fileSelected.uuid]) {
         [selectedFileList addObject:fileSelected.uuid];
+        [self.selectedFiles addObject:fileSelected];
     }
     [self updateFooterMenuAndTitle];
         titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]];
@@ -496,6 +499,7 @@
 - (void) squareImageWasUnmarkedForFile:(MetaFile *)fileSelected {
     if([selectedFileList containsObject:fileSelected.uuid]) {
         [selectedFileList removeObject:fileSelected.uuid];
+        [self.selectedFiles removeObject:fileSelected];
     }
     [self updateFooterMenuAndTitle];
 }
@@ -559,7 +563,7 @@
     }
     
     [selectedFileList removeAllObjects];
-    
+    [self.selectedFiles removeAllObjects];
     [self setSelectibleStatusForSquareImages:YES];
 }
 
@@ -574,7 +578,7 @@
     isSelectible = NO;
      [self createRefreshControl];
     [selectedFileList removeAllObjects];
-    
+    [self.selectedFiles removeAllObjects];
     if(!self.album.isReadOnly && !footerActionMenuDidSelect) {
         [APPDELEGATE.base immediateShowAddButton];
     }
@@ -661,7 +665,7 @@
         [self triggerShareForFileObjects:@[shareObject]];
         //[APPDELEGATE.base triggerShareForFileObjects:@[shareObject]];
     } else {
-        [self triggerShareForFiles:selectedFileList];
+        [self triggerShareForFiles:self.selectedFiles withUUID:selectedFileList];
         //[APPDELEGATE.base triggerShareForFiles:selectedFileList];
     }
     //[APPDELEGATE.base triggerShareForFiles:selectedFileList];
@@ -690,6 +694,20 @@
 
 - (void) closePrintPage {
     [printNav dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)showLoading {
+    [self.progress removeFromSuperview];
+    
+    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+    [window addSubview:self.progress];
+    [self.progress show:YES];
+}
+
+- (void)hideLoading {
+    [self.progress hide:YES];
+    [self.progress removeFromSuperview];
+    [self.view insertSubview:self.progress atIndex:0];
 }
 
 #pragma mark - Share
@@ -864,11 +882,100 @@
     [MPush hitTag:@"ImageCapture" withValue:@"true"];
 }
 
-- (void) triggerShareForFiles:(NSArray *) fileUuidList {
-    [shareDao requestLinkForFiles:fileUuidList];
-    [self showLoading];
+- (void) triggerShareForFiles:(NSArray *)fileList withUUID:(NSArray *) fileUuidList {
+//    [shareDao requestLinkForFiles:fileUuidList];
+//    [self showLoading];
+    self.fileUUIDToShare = fileUuidList;
+    self.fileListToShare = self.selectedFiles;
+    [self presentSharePopup];
 }
 
+- (void)presentSharePopup {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@""
+                                                             delegate:self
+                                                    cancelButtonTitle:NSLocalizedString(@"CancelButtonTittle", nil)
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:NSLocalizedString(@"Küçük boyut", nil), NSLocalizedString(@"Gerçek boyut", nil), NSLocalizedString(@"Link", nil),
+                                  nil];
+    [actionSheet showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    [self setToUnselectible];
+    switch (buttonIndex) {
+        case 0:
+            [self shareImageFiles:NO];
+            break;
+        case 1:
+            [self shareImageFiles:YES];
+            break;
+        case 2:
+            [shareDao requestLinkForFiles:self.fileUUIDToShare];
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)shareImageFiles:(BOOL)originalSize {
+    //    __block NSInteger imagesCount = fileUuidList.count;
+    __block NSMutableArray *allImages = [@[] mutableCopy];
+    
+    [self showLoading];
+    
+    for (MetaFile *file in self.fileListToShare) {
+        NSString *endPoint = file.detail.thumbLargeUrl;
+        if (originalSize) {
+            endPoint = file.tempDownloadUrl;
+        }
+        if (file.contentType == ContentTypeVideo) {
+            endPoint = file.tempDownloadUrl;
+        }
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:
+                                        [NSURL URLWithString:endPoint]];
+        [NSURLConnection sendAsynchronousRequest:request
+                                           queue:[[NSOperationQueue alloc] init]
+                               completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                                   if (!error) {
+                                       if (file.contentType == ContentTypeVideo) {
+                                           NSURL *url = [NSURL fileURLWithPath:
+                                                         [NSTemporaryDirectory() stringByAppendingString:file.name]];
+                                           [data writeToURL:url atomically:NO];
+                                           [allImages addObject:url];
+                                       } else {
+                                           if (originalSize) {
+                                               NSURL *url = [NSURL fileURLWithPath:
+                                                             [NSTemporaryDirectory() stringByAppendingString:file.name]];
+                                               [data writeToURL:url atomically:NO];
+                                               [allImages addObject:url];
+                                           } else {
+                                               UIImage *image = [[UIImage alloc] initWithData:data];
+                                               [allImages addObject:image];
+                                           }
+                                       }
+                                       if (allImages.count == self.fileListToShare.count) {
+                                           NSLog(@"downloaded all images to share");
+                                           
+                                           dispatch_async(dispatch_get_main_queue(), ^{
+                                               [self hideLoading];
+                                               UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:allImages applicationActivities:nil];
+                                               [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
+                                               activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+                                               
+                                               if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+                                                   [self presentViewController:activityViewController animated:YES completion:nil];
+                                               } else {
+                                                   UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
+                                                   [popup presentPopoverFromRect:CGRectMake(self.view.frame.size.width-240, self.view.frame.size.height-40, 240, 300)inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+                                               }
+                                           });
+                                       }
+                                   } else{
+                                   }
+                               }];
+    }
+    
+}
 
 #pragma mark ImagePreviewDelegate methods
 - (void) previewedImageWasDeleted:(MetaFile *)deletedFile {

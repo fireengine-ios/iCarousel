@@ -59,8 +59,9 @@
 @property (nonatomic, strong) MainSearchTextfield *searchField;
 @property (nonatomic, strong) UITableView *fileTable;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
-@property (nonatomic, strong) NSArray *fileList;
+@property (nonatomic, strong) NSArray *fileLists;
 @property (nonatomic, strong) NSMutableArray *selectedFileList;
+@property (nonatomic, strong) NSMutableArray *selectedFiles;
 @property (nonatomic, strong) FooterActionsMenuView *footerActionMenu;
 @property (nonatomic, strong) NSString *longSelectFileUuid;
 @property (nonatomic, strong) NSArray *uuidListToBeDeleted;
