@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CountrySelectionController : UITableViewController
+@interface CountrySelectionController : UITableViewController <UISearchBarDelegate>
+
+@property (nonatomic) void(^completion)(id);
 
 @end
