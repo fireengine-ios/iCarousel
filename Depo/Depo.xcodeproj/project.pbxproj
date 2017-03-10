@@ -7110,8 +7110,8 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.documentpicker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "akilli depo app store document picker extension";
-				PROVISIONING_PROFILE_SPECIFIER = "akilli depo app store document picker extension";
+				PROVISIONING_PROFILE = "dd77b80d-8e52-4a68-92c5-4ef74248c7e5";
+				PROVISIONING_PROFILE_SPECIFIER = "dd77b80d-8e52-4a68-92c5-4ef74248c7e5";
 				SKIP_INSTALL = YES;
 			};
 			name = AppStore;
@@ -7139,8 +7139,8 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent.documentpicker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "akilli depo doc share ext";
-				PROVISIONING_PROFILE_SPECIFIER = "akilli depo doc share ext";
+				PROVISIONING_PROFILE = "0275d411-5d80-418d-a8bf-4a2467bea7b1";
+				PROVISIONING_PROFILE_SPECIFIER = "0275d411-5d80-418d-a8bf-4a2467bea7b1";
 				SKIP_INSTALL = YES;
 			};
 			name = Enterprise;
