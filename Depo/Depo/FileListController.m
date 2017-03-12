@@ -991,7 +991,10 @@
                                                              delegate:self
                                                     cancelButtonTitle:NSLocalizedString(@"CancelButtonTittle", nil)
                                                destructiveButtonTitle:nil
-                                                    otherButtonTitles:NSLocalizedString(@"Küçük boyut", nil), NSLocalizedString(@"Gerçek boyut", nil), NSLocalizedString(@"Link", nil),
+                                                    otherButtonTitles:
+                                  NSLocalizedString(@"ShareSmallSize", nil),
+                                  NSLocalizedString(@"ShareOriginalSize", nil),
+                                  NSLocalizedString(@"ShareViaLink", nil),
                                   nil];
     [actionSheet showInView:self.view];
 }
