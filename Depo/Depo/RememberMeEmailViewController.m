@@ -265,7 +265,7 @@
     } else {
 //        container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
 //        [container setContentOffset:CGPointZero animated:YES];
-        okButton.frame = CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60);
+        okButton.frame = CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60);
     }
 }
 

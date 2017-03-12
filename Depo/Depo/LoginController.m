@@ -172,14 +172,14 @@
         [container addSubview:forgotPassView];
         
         UIImage *newPassIcon = [UIImage imageNamed:@"icon_newpass.png"];
-        UIImageView *passIconImgView = [[UIImageView alloc] initWithFrame:CGRectMake( 5, 0, newPassIcon.size.width, newPassIcon.size.height)];
+        UIImageView *passIconImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, newPassIcon.size.width, newPassIcon.size.height)];
         passIconImgView.image = newPassIcon;
 //        [mainScroll addSubview:passIconImgView];
         [forgotPassView addSubview:passIconImgView];
         
-        SimpleButton *forgotPass = [[SimpleButton alloc] initWithFrame:CGRectMake(0, 4, 130, 25) withTitle:NSLocalizedString(@"ForgotPassButton", @"")];
+        SimpleButton *forgotPass = [[SimpleButton alloc] initWithFrame:CGRectMake(newPassIcon.size.width + 5, 4, 130, 25) withTitle:NSLocalizedString(@"ForgotPassButton", @"") withTextAlignment:NSTextAlignmentLeft];
         [forgotPass addTarget:self action:@selector(forgotMeClicked) forControlEvents:UIControlEventTouchUpInside];
-//        [mainScroll addSubview:forgotPass];
+        //        [mainScroll addSubview:forgotPass];
         forgotPass.isAccessibilityElement = YES;
         forgotPass.accessibilityIdentifier = @"forgotPassButton";
         [forgotPassView addSubview:forgotPass];
