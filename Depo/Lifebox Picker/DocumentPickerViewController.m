@@ -24,7 +24,7 @@
 #elif defined PLATFORM_ICT
 #define GROUP_NAME_SUITE_NSUSERDEFAULTS @"group.com.turkcell.akillideponew.ent"
 #else
-#define GROUP_NAME_SUITE_NSUSERDEFAULTS @"group.com.rdc.lifebox2.Depo"
+#define GROUP_NAME_SUITE_NSUSERDEFAULTS @"group.com.rdc.lifebox2"
 #endif
 
 @interface DocumentPickerViewController ()
