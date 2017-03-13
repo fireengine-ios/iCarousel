@@ -965,14 +965,11 @@
                                                [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
                                                activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
                                                
-                                               activityViewController.completionWithItemsHandler =
-                                               ^(UIActivityType activityType,
-                                                 BOOL completed, NSArray *returnedItems,
-                                                 NSError *activityError) {
+                                               [activityViewController setCompletionHandler:^(NSString *activityType, BOOL completed) {
                                                    if (completed) {
                                                        [self setToUnselectible];
                                                    }
-                                               };
+                                               }];
                                                
                                                if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
                                                    [self presentViewController:activityViewController animated:YES completion:nil];
