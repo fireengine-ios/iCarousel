@@ -14,6 +14,7 @@
 - (id)initWithFrame:(CGRect)frame withTitle:(NSString *) titleVal withTitleColor:(UIColor *) titleColor withTitleFont:(UIFont *) titleFont withBorderColor:(UIColor *) borderColor withBgColor:(UIColor *) bgColor withCornerRadius:(float) cornerRadius;
 - (id)initWithFrame:(CGRect)frame withTitle:(NSString *) titleVal withTitleColor:(UIColor *) titleColor withTitleFont:(UIFont *) titleFont withBorderColor:(UIColor *) borderColor withBgColor:(UIColor *) bgColor withCornerRadius:(float) cornerRadius withIconName:(NSString *) iconName withIconFrame:(CGRect) iconFrame;
 - (id) initWithFrame:(CGRect)frame withTitle:(NSString *)titleVal;
+- (id) initWithFrame:(CGRect)frame withTitle:(NSString *)titleVal withTextAlignment:(NSTextAlignment) alignment;
 - (id) initWithFrame:(CGRect)frame withTitle:(NSString *)titleVal withAlignment:(NSTextAlignment) alignment isUnderlined:(BOOL) underlineFlag;
 - (id)initWithFrame:(CGRect)frame withTitle:(NSString *) titleVal withTitleColor:(UIColor *) titleColor withTitleFont:(UIFont *) titleFont isUnderline:(BOOL) underlineFlag withUnderlineColor:(UIColor *) underlineColor;
 - (id)initWithFrame:(CGRect)frame withTitle:(NSString *) titleVal withTitleColor:(UIColor *) titleColor withTitleFont:(UIFont *) titleFont withBorderColor:(UIColor *) borderColor withBgColor:(UIColor *) bgColor withCornerRadius:(float) cornerRadius adjustFont:(BOOL) adjustFontFlag;

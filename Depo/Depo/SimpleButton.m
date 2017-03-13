@@ -74,6 +74,19 @@
     return self;
 }
 
+- (id) initWithFrame:(CGRect)frame withTitle:(NSString *)titleVal withTextAlignment:(NSTextAlignment) alignment {
+    if(self = [super initWithFrame:frame]) {
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, (self.frame.size.height - 15)/2, self.frame.size.width, 15)];
+        titleLabel.text = titleVal;
+        titleLabel.backgroundColor = [UIColor clearColor];
+        titleLabel.font = [UIFont fontWithName:@"TurkcellSaturaDem" size:11];
+        titleLabel.textAlignment = alignment;
+        titleLabel.textColor = [Util UIColorForHexColor:@"363e4f"];
+        [self addSubview:titleLabel];
+    }
+    return self;
+}
+
 - (id) initWithFrame:(CGRect)frame withTitle:(NSString *)titleVal withAlignment:(NSTextAlignment) alignment isUnderlined:(BOOL) underlineFlag {
     if(self = [super initWithFrame:frame]) {
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, (self.frame.size.height - 15)/2, self.frame.size.width, 15)];

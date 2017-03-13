@@ -345,8 +345,12 @@
 
 -(void)setViewMovedUp:(BOOL)movedUp {
     if (movedUp) {
-        container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + 280);
-        [container setContentOffset:CGPointMake(0,  112) animated:YES];
+        container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + 290);
+        if ([passwordField isFirstResponder] || [passwordRepeatField isFirstResponder]) {
+            [container setContentOffset:CGPointMake(0,  225) animated:YES];
+        } else {
+            [container setContentOffset:CGPointMake(0,  112) animated:YES];
+        }
     }
     else {
         container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
