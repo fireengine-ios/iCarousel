@@ -673,6 +673,9 @@
 
 - (void)reCallRequest {
     NSMutableURLRequest *req = [self.currentTask.currentRequest mutableCopy];
+    if (req == nil) {
+        return;
+    }
     [req setValue:APPDELEGATE.session.authToken forHTTPHeaderField:@"X-Auth-Token"];
     self.currentTask = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:req completionHandler:self.taskCompletionHandler];
     //        NSURLSessionDataTask *newTask = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:req completionHandler:taskCompletionHandler];

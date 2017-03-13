@@ -10,6 +10,7 @@
 
 @interface CountrySelectionController ()
 
+@property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic) NSDictionary *countryDict;
 @property (nonatomic) NSMutableDictionary *filteredCountryDict;
@@ -19,7 +20,7 @@
 
 @implementation CountrySelectionController
 
-static const CGFloat topOffset = 64; // use 20 if there's no navigation bar, or zero if there's no status bar either
+static const CGFloat topOffset = 40;
 
 - (void)viewDidLoad
 {
@@ -27,14 +28,18 @@ static const CGFloat topOffset = 64; // use 20 if there's no navigation bar, or 
     
     self.title = @"Country Selection";
     
-    _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, topOffset, self.view.frame.size.width, 40)];
+    _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40)];
     [_searchBar setBarTintColor:[UIColor colorWithRed:245.0f/255.0f green:245/255.0f blue:245/255.0f alpha:1.0f]];
     _searchBar.placeholder = @"Ara";
     _searchBar.delegate = self;
-    self.tableView.tableHeaderView = _searchBar;
-        
+    [self.view addSubview:_searchBar];
+    
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, topOffset, self.view.frame.size.width, self.view.frame.size.height)];
+    _tableView.dataSource = self;
+    _tableView.delegate = self;
     [self.tableView setShowsHorizontalScrollIndicator:NO];
     [self.tableView setShowsVerticalScrollIndicator:NO];
+    [self.view addSubview:_tableView];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSString *filePath = [[NSBundle mainBundle] pathForResource:@"countryCodes" ofType:@"json"];
@@ -111,14 +116,14 @@ static const CGFloat topOffset = 64; // use 20 if there's no navigation bar, or 
     if (_filteredCountryDict) {
         return [_filteredCountryDict count];
     }
-    return [super numberOfSectionsInTableView:tableView];
+    return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (_filteredCountryDict) {
         return [[_filteredCountryDict valueForKey: [_keys objectAtIndex:section]] count];
     }
-    return [super tableView:tableView numberOfRowsInSection:section];
+    return 0;
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -151,6 +156,10 @@ static const CGFloat topOffset = 64; // use 20 if there's no navigation bar, or 
     }
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
+
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+//    return _searchBar;
+//}
 
 #pragma mark - UISearch Bar Delegate
 

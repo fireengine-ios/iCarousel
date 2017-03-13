@@ -57,6 +57,7 @@
 @property (nonatomic, strong) UIImageView *bgImgView;
 
 @property (nonatomic, strong) NSMutableArray *selectedFileList;
+@property (nonatomic, strong) NSMutableArray *selectedFiles;
 @property (nonatomic, strong) NSMutableArray *selectedFileLinkList;
 @property (nonatomic, strong) FooterActionsMenuView *footerActionMenu;
 @property (nonatomic, strong) UIRefreshControl *refreshControlPhotos;

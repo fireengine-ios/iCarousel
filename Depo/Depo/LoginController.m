@@ -73,21 +73,30 @@
         logoImgView.image = logoImage;
         [container addSubview:logoImgView];
         
-        scrollYIndex += logoImage.size.height+50;
-        
-        
-        CustomLabel *msisdnLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"MsisdnEmailTitle", @"")];
-        [container addSubview:msisdnLabel];
-        
-        scrollYIndex += 5;
+        scrollYIndex += logoImage.size.height + 80;
 
-        countryCodeButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        [countryCodeButton setFrame:CGRectMake(20, scrollYIndex +11, 68, 32)];
-        [countryCodeButton setBackgroundImage:[UIImage imageNamed:@"combobg.png"] forState:UIControlStateNormal];
-        [countryCodeButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [countryCodeButton addTarget:self action:@selector(goCountryCodepage:) forControlEvents:UIControlEventTouchUpInside];
-        [container addSubview:countryCodeButton];
-        [countryCodeButton setTitle:@"+90" forState:UIControlStateNormal];
+        //------
+//        countryCodeButton = [UIButton buttonWithType:UIButtonTypeSystem];
+//        [countryCodeButton setFrame:CGRectMake(20, scrollYIndex +11, 68, 32)];
+//        [countryCodeButton setBackgroundImage:[UIImage imageNamed:@"combobg.png"] forState:UIControlStateNormal];
+//        [countryCodeButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//        [countryCodeButton addTarget:self action:@selector(goCountryCodepage:) forControlEvents:UIControlEventTouchUpInside];
+//        [container addSubview:countryCodeButton];
+//        
+//        NSString *currentCode;
+//        NSString *currentLocale = [Util readLocaleCode];
+//        if([currentLocale isEqualToString:@"uk"] || [currentLocale isEqualToString:@"ru"]) {
+//            [countryCodeButton setTitle:@"+90" forState:UIControlStateNormal];
+//            currentCode = @"+380";
+//        } else if ([currentLocale isEqualToString:@"ar"]) {
+//            currentCode = @"+966";
+//        } else if ([currentLocale isEqualToString:@"de"]) {
+//            currentCode = @"+49";
+//        } else {
+//            currentCode = @"+90";
+//        }
+//        [countryCodeButton setTitle:currentCode forState:UIControlStateNormal];
+        //------
         
         UIImageView *arrow = [[UIImageView alloc] initWithFrame:CGRectMake(24, 0, 8, 4)];
         CGPoint center = arrow.center;
@@ -96,24 +105,16 @@
         arrow.image = [UIImage imageNamed:@"icon_dropdown.png"];
         [container addSubview:arrow];
         
-        msisdnField = [[LoginTextfield alloc] initWithFrame:CGRectMake(88, scrollYIndex, self.view.frame.size.width - 108, 43) withPlaceholder:@""/*NSLocalizedString(@"MsisdnEmailPlaceholder", @"")*/];
+        msisdnField = [[LoginTextfield alloc] initWithFrame:CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 50) withPlaceholder:NSLocalizedString(@"MsisdnEmailPlaceholder", @"")];
         msisdnField.delegate = self;
         [msisdnField addTarget:self action:@selector(msisdnFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
         msisdnField.isAccessibilityElement = YES;
         msisdnField.accessibilityIdentifier = @"msisdnFieldLogin";
         [container addSubview:msisdnField];
-//        if([[Util readLocaleCode] isEqualToString:@"tr"]) {
-//            msisdnField.placeholder = @"5XX XXX XX XX";
-//        }
 
-        scrollYIndex += 55;
-
-        CustomLabel *passLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"PasswordTitle", @"")];
-        [container addSubview:passLabel];
+        scrollYIndex += 70;
         
-        scrollYIndex += 5;
-
-        passField = [[LoginTextfield alloc] initSecureWithFrame:CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 43) withPlaceholder:/*NSLocalizedString(@"PasswordPlaceholder", @"")*/ @""];
+        passField = [[LoginTextfield alloc] initSecureWithFrame:CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 50) withPlaceholder:NSLocalizedString(@"PasswordPlaceholder", @"")];
         passField.delegate = self;
         passField.isAccessibilityElement = YES;
         passField.accessibilityIdentifier = @"passFieldLogin";
@@ -177,11 +178,11 @@
         [container addSubview:forgotPassView];
         
         UIImage *newPassIcon = [UIImage imageNamed:@"icon_newpass.png"];
-        UIImageView *passIconImgView = [[UIImageView alloc] initWithFrame:CGRectMake( 5, 0, newPassIcon.size.width, newPassIcon.size.height)];
+        UIImageView *passIconImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, newPassIcon.size.width, newPassIcon.size.height)];
         passIconImgView.image = newPassIcon;
         [forgotPassView addSubview:passIconImgView];
         
-        SimpleButton *forgotPass = [[SimpleButton alloc] initWithFrame:CGRectMake(0, 4, 130, 25) withTitle:NSLocalizedString(@"ForgotPassButton", @"")];
+        SimpleButton *forgotPass = [[SimpleButton alloc] initWithFrame:CGRectMake(newPassIcon.size.width + 5, 4, 130, 25) withTitle:NSLocalizedString(@"ForgotPassButton", @"") withTextAlignment:NSTextAlignmentLeft];
         [forgotPass addTarget:self action:@selector(forgotMeClicked) forControlEvents:UIControlEventTouchUpInside];
         forgotPass.isAccessibilityElement = YES;
         forgotPass.accessibilityIdentifier = @"forgotPassButton";
@@ -197,27 +198,14 @@
             
             NSMutableArray *viewArray = [@[] mutableCopy];
             
-            
-            msisdnLabel.frame = CGRectMake(0,//(self.view.frame.size.width - 320)/2 + 5,
-                                           (self.view.frame.size.height - 300)/2 - 100,
-                                           480,
-                                           msisdnLabel.frame.size.height);
-            [viewArray addObject:msisdnLabel];
-            
             msisdnField.frame = CGRectMake(0,//(self.view.frame.size.width - 320)/2,
-                                           msisdnLabel.frame.origin.y + msisdnLabel.frame.size.height + 10,
+                                           (self.view.frame.size.height - 300)/2 - 100,
                                            480,
                                            msisdnField.frame.size.height);
             [viewArray addObject:msisdnField];
             
-            passLabel.frame = CGRectMake(0,//(self.view.frame.size.width - 320)/2 + 5,
-                                         msisdnField.frame.origin.y + msisdnField.frame.size.height + 20,
-                                         480,
-                                         passLabel.frame.size.height);
-            [viewArray addObject:passLabel];
-            
             passField.frame = CGRectMake(0,//(self.view.frame.size.width - 320)/2,
-                                         passLabel.frame.origin.y + passLabel.frame.size.height + 10,
+                                         msisdnField.frame.origin.y + msisdnField.frame.size.height + 20,
                                          480,
                                          passField.frame.size.height);
             [viewArray addObject:passField];
@@ -311,8 +299,10 @@
 
 - (void)goCountryCodepage:(id)sender {
     _countrySelectionController = [[CountrySelectionController alloc] init];
+    __weak UIButton *weakCountryButton = countryCodeButton;
     _countrySelectionController.completion = ^(NSDictionary *selectedCountry) {
         NSLog(@"selected country = %@", selectedCountry);
+        [weakCountryButton setTitle:selectedCountry[@"phone_code"] forState:UIControlStateNormal];
     };
     MyNavigationController *nav = [[MyNavigationController alloc] initWithRootViewController:_countrySelectionController];
     [self presentViewController:nav animated:YES completion:nil];
@@ -412,31 +402,7 @@
     }
 }
 
-//- (void) textFieldDidEndEditing:(UITextField *)textField {
-//    [msisdnField resignFirstResponder];
-//    [passField resignFirstResponder];
-//    [captchaField resignFirstResponder];
-//    
-//    if(!textField.secureTextEntry) {
-//        NSRange range = [textField.text rangeOfString:@")" options:NSBackwardsSearch];
-//        if (range.location != NSNotFound) {
-//            NSString *callingCode = [textField.text substringToIndex:range.location + 1];
-//            if([callingCode isEqualToString:@"+(90)"]) {
-//                NSString *number = [textField.text substringFromIndex:range.location + range.length];
-//                if ([number hasPrefix:@"0"] && [number length] > 1) {
-//                    number = [number substringFromIndex:1];
-//                    NSString *editedNumber = [callingCode stringByAppendingString:number];
-//                    textField.text = editedNumber;
-//                }
-//            }
-//        }
-//    }
-//}
-
 - (void) textFieldDidEndEditing:(UITextField *)textField {
-//    [msisdnField resignFirstResponder];
-//    [passField resignFirstResponder];
-//    [captchaField resignFirstResponder];
     
     if([textField isEqual:msisdnField]) {
         if([[Util readLocaleCode] isEqualToString:@"tr"] || [[Util readLocaleCode] isEqualToString:@"en"]) {
@@ -480,9 +446,7 @@
     
     [self.view endEditing:YES];
     
-    NSString *trimmedString = [[msisdnField.text stringByReplacingOccurrencesOfString:@"(" withString:@""] stringByReplacingOccurrencesOfString:@")" withString:@""];
-    
-    msisdnValue = trimmedString;
+    msisdnValue = [[msisdnField.text stringByReplacingOccurrencesOfString:@"(" withString:@""] stringByReplacingOccurrencesOfString:@")" withString:@""];
     /*
     if ([msisdnValue length] > 0)
         msisdnValue = [[msisdnValue substringToIndex:1] isEqualToString:@"0"] ? [msisdnValue substringFromIndex:1] : msisdnValue;
@@ -573,27 +537,8 @@
 }
 
 -(void)keyboardWillHide {
-//    if (self.view.frame.origin.y < 0) {
-        [self setViewMovedUp:NO];
-//    }
+    [self setViewMovedUp:NO];
 }
-
-//-(void)setViewMovedUp:(BOOL)movedUp {
-//    [UIView beginAnimations:nil context:NULL];
-//    [UIView setAnimationDuration:0.2];
-//    
-//    CGRect rect = self.view.frame;
-//    if (movedUp) {
-//        rect.origin.y -= kOFFSET_FOR_KEYBOARD;
-//        rect.size.height += kOFFSET_FOR_KEYBOARD;
-//    } else {
-//        rect.origin.y += kOFFSET_FOR_KEYBOARD;
-//        rect.size.height -= kOFFSET_FOR_KEYBOARD;
-//    }
-//    self.view.frame = rect;
-//    
-//    [UIView commitAnimations];
-//}
 
 -(void)setViewMovedUp:(BOOL)movedUp {
     if (movedUp) {

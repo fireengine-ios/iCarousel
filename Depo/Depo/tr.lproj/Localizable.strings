@@ -834,3 +834,7 @@
 
 "AutoSyncOffInfoTop"="Fotoğraflar yüklenme için bekliyor";
 "AutoSyncOffInfoBottom"="Bir Wi-fi'a bağlanın ya da Ayarlardan oto yüklemeyi açın";
+
+"ShareOriginalSize" = "Orjinal Boyut";
+"ShareSmallSize" = "Küçük Boyut";
+"ShareViaLink" = "Link ile paylaş";

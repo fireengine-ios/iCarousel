@@ -24,7 +24,8 @@
 #import "MPush.h"
 
 @interface FileListController ()
-
+@property (nonatomic, copy) NSArray *fileUUIDToShare;
+@property (nonatomic, copy) NSArray *fileListToShare;
 @end
 
 @implementation FileListController
@@ -34,7 +35,7 @@
 @synthesize searchField;
 @synthesize fileTable;
 @synthesize refreshControl;
-@synthesize fileList;
+@synthesize fileLists;
 @synthesize selectedFileList;
 @synthesize footerActionMenu;
 @synthesize folderModificationFlag;
@@ -54,7 +55,7 @@
         }
 
         selectedFileList = [[NSMutableArray alloc] init];
-        
+        self.selectedFiles = [@[] mutableCopy];
         shareDao = [[ShareLinkDao alloc] init];
         shareDao.delegate = self;
         shareDao.successMethod = @selector(shareSuccessCallback:);
@@ -207,7 +208,7 @@
     if(refreshControl) {
         [refreshControl endRefreshing];
     }
-    self.fileList = [[[UploadQueue sharedInstance] uploadRefsForFolder:[self.folder uuid]] arrayByAddingObjectsFromArray:files];
+    self.fileLists = [[[UploadQueue sharedInstance] uploadRefsForFolder:[self.folder uuid]] arrayByAddingObjectsFromArray:files];
     self.tableUpdateCounter ++;
     [fileTable reloadData];
 }
@@ -227,7 +228,7 @@
     if(refreshControl) {
         [refreshControl endRefreshing];
     }
-    self.fileList = [fileList arrayByAddingObjectsFromArray:files];
+    self.fileLists = [fileLists arrayByAddingObjectsFromArray:files];
     isLoading = NO;
 //    self.tableUpdateCounter ++;
     [fileTable reloadData];
@@ -260,12 +261,12 @@
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if(fileList == nil) {
+    if(fileLists == nil) {
         return 0;
-    } else if([fileList count] == 0) {
+    } else if([fileLists count] == 0) {
         return 1;
     } else {
-        return [fileList count];
+        return [fileLists count];
     }
 }
 
@@ -274,7 +275,7 @@
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(fileList == nil || [fileList count] == 0) {
+    if(fileLists == nil || [fileLists count] == 0) {
         if(IS_IPAD) {
             return 420;
         } else {
@@ -293,10 +294,10 @@
     NSString *cellIdentifier = [NSString stringWithFormat:@"FILE_CELL_%d_%d", (int)indexPath.row, self.tableUpdateCounter];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if(!cell) {
-        if(fileList == nil || [fileList count] == 0) {
+        if(fileLists == nil || [fileLists count] == 0) {
             cell = [[FolderEmptyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withFolderTitle:self.folder.visibleName];
         } else {
-            id objAtIndex = [fileList objectAtIndex:indexPath.row];
+            id objAtIndex = [fileLists objectAtIndex:indexPath.row];
             if([objAtIndex isKindOfClass:[MetaFile class]]) {
                 MetaFile *fileAtIndex = (MetaFile *) objAtIndex;
                 switch (fileAtIndex.contentType) {
@@ -362,7 +363,7 @@
         }
     }
 
-    MetaFile *fileAtIndex = [fileList objectAtIndex:indexPath.row];
+    MetaFile *fileAtIndex = [fileLists objectAtIndex:indexPath.row];
     [self navigateToFileDetail:fileAtIndex];
 }
 
@@ -408,8 +409,8 @@
 
 - (NSArray*) getImageFiles {
     NSMutableArray *tmp = [NSMutableArray new];
-    for (int i = 0; i < fileList.count; i++) {
-        id objAtIndex = [fileList objectAtIndex:i];
+    for (int i = 0; i < fileLists.count; i++) {
+        id objAtIndex = [fileLists objectAtIndex:i];
         if([objAtIndex isKindOfClass:[MetaFile class]]) {
             MetaFile *meta = (MetaFile*)objAtIndex;
             if (meta.contentType == ContentTypePhoto || meta.contentType == ContentTypeVideo) {
@@ -499,6 +500,7 @@
 - (void) fileFolderCellDidSelectFile:(MetaFile *)fileSelected {
     if(![selectedFileList containsObject:fileSelected.uuid]) {
         [selectedFileList addObject:fileSelected.uuid];
+        [self.selectedFiles addObject:fileSelected];
     }
     if([selectedFileList count] > 0) {
         [self showFooterMenu];
@@ -512,6 +514,7 @@
 - (void) fileFolderCellDidUnselectFile:(MetaFile *)fileSelected {
     if([selectedFileList containsObject:fileSelected.uuid]) {
         [selectedFileList removeObject:fileSelected.uuid];
+        [self.selectedFiles removeAllObjects];
     }
     if([selectedFileList count] > 0) {
         [self showFooterMenu];
@@ -620,7 +623,7 @@
         
         isSelectible = NO;
         [selectedFileList removeAllObjects];
-        
+        [self.selectedFiles removeAllObjects];
         if(footerActionMenu) {
             [footerActionMenu removeFromSuperview];
         }
@@ -665,7 +668,7 @@
         
         isSelectible = NO;
         [selectedFileList removeAllObjects];
-        
+        [self.selectedFiles removeAllObjects];
         if(footerActionMenu) {
             [footerActionMenu removeFromSuperview];
         }
@@ -756,7 +759,7 @@
     [uploadManager configureUploadFileForPath:filePath atFolder:self.folder withFileName:fileName];
     [[UploadQueue sharedInstance] addNewUploadTask:uploadManager];
     
-    fileList = [@[uploadRef] arrayByAddingObjectsFromArray:fileList];
+    fileLists = [@[uploadRef] arrayByAddingObjectsFromArray:fileLists];
     self.tableUpdateCounter++;
     [self.fileTable reloadData];
 
@@ -787,7 +790,7 @@
             [manager configureUploadAsset:ref.filePath atFolder:self.folder];
             [[UploadQueue sharedInstance] addNewUploadTask:manager];
         }
-        fileList = [assetUrls arrayByAddingObjectsFromArray:fileList];
+        fileLists = [assetUrls arrayByAddingObjectsFromArray:fileLists];
         self.tableUpdateCounter++;
         [self.fileTable reloadData];
         
@@ -805,7 +808,7 @@
             [manager configureUploadAsset:ref.filePath atFolder:self.folder];
             [[UploadQueue sharedInstance] addNewUploadTask:manager];
         }
-        fileList = [assetUrls arrayByAddingObjectsFromArray:fileList];
+        fileLists = [assetUrls arrayByAddingObjectsFromArray:fileLists];
         self.tableUpdateCounter++;
         [self.fileTable reloadData];
 
@@ -861,7 +864,7 @@
     [APPDELEGATE.base immediateHideAddButton];
     
     [selectedFileList removeAllObjects];
-    
+    [self.selectedFiles removeAllObjects];
     if(longSelectFileUuid != nil) {
 //TODO aç        [selectedFileList addObject:longSelectFileUuid];
         longSelectFileUuid = nil;
@@ -890,7 +893,7 @@
 
     isSelectible = NO;
     [selectedFileList removeAllObjects];
-    
+    [self.selectedFiles removeAllObjects];
     [APPDELEGATE.base immediateShowAddButton];
 
     self.tableUpdateCounter++;
@@ -953,7 +956,7 @@
 - (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {
     MetaFile *shareObject = [[MetaFile alloc] init];
     if ([selectedFileList count] == 1) {
-        for (id fileIndex in fileList) {
+        for (id fileIndex in fileLists) {
             if ([fileIndex isKindOfClass:[MetaFile class]]) {
                 MetaFile *tempFile = (MetaFile *) fileIndex;
                 if ([tempFile.uuid isEqualToString:[selectedFileList objectAtIndex:0]]) {
@@ -964,9 +967,115 @@
         [self triggerShareForFileObjects:@[shareObject]];
         //[APPDELEGATE.base triggerShareForFileObjects:@[shareObject]];
     } else {
-        [self triggerShareForFiles:selectedFileList];
+        
+        BOOL folderSelected = NO;
+        
+        for (MetaFile *file in self.selectedFiles) {
+            if (file.folder) {
+                folderSelected = YES;
+                break;
+            }
+        }
+        if (folderSelected) {
+            [self triggerShareForFiles:selectedFileList];
+        } else {
+            [self presentSharePopup];
+        }
+//
         //[APPDELEGATE.base triggerShareForFiles:selectedFileList];
     }
+}
+
+- (void)presentSharePopup {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@""
+                                                             delegate:self
+                                                    cancelButtonTitle:NSLocalizedString(@"CancelButtonTittle", nil)
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:
+                                  NSLocalizedString(@"ShareSmallSize", nil),
+                                  NSLocalizedString(@"ShareOriginalSize", nil),
+                                  NSLocalizedString(@"ShareViaLink", nil),
+                                  nil];
+    [actionSheet showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0:
+            [self shareImageFiles:NO];
+            break;
+        case 1:
+            [self shareImageFiles:YES];
+            break;
+        case 2: {
+            [self setToUnselectible];
+            [shareDao requestLinkForFiles:self.fileUUIDToShare];
+        } break;
+        default:
+            break;
+    }
+}
+
+- (void)shareImageFiles:(BOOL)originalSize {
+    self.fileListToShare = self.selectedFiles;
+    [self setToUnselectible];
+    //    __block NSInteger imagesCount = fileUuidList.count;
+    __block NSMutableArray *allImages = [@[] mutableCopy];
+    
+    [self showLoading];
+    
+    for (MetaFile *file in self.fileListToShare) {
+        NSString *endPoint = file.detail.thumbLargeUrl;
+        if (originalSize) {
+            endPoint = file.tempDownloadUrl;
+        }
+        if (file.contentType == ContentTypeVideo) {
+            endPoint = file.tempDownloadUrl;
+        }
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:
+                                        [NSURL URLWithString:endPoint]];
+        [NSURLConnection sendAsynchronousRequest:request
+                                           queue:[[NSOperationQueue alloc] init]
+                               completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                                   if (!error) {
+                                       if (file.contentType == ContentTypeVideo) {
+                                           NSURL *url = [NSURL fileURLWithPath:
+                                                         [NSTemporaryDirectory() stringByAppendingString:file.name]];
+                                           [data writeToURL:url atomically:NO];
+                                           [allImages addObject:url];
+                                       } else {
+                                           if (originalSize) {
+                                               NSURL *url = [NSURL fileURLWithPath:
+                                                             [NSTemporaryDirectory() stringByAppendingString:file.name]];
+                                               [data writeToURL:url atomically:NO];
+                                               [allImages addObject:url];
+                                           } else {
+                                               UIImage *image = [[UIImage alloc] initWithData:data];
+                                               [allImages addObject:image];
+                                           }
+                                       }
+                                       if (allImages.count == self.fileListToShare.count) {
+                                           NSLog(@"downloaded all images to share");
+                                           
+                                           dispatch_async(dispatch_get_main_queue(), ^{
+                                               [self hideLoading];
+                                               UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:allImages applicationActivities:nil];
+                                               [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
+                                               activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+                                               
+                                               if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+                                                   [self presentViewController:activityViewController animated:YES completion:nil];
+                                               } else {
+                                                   UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
+                                                   [popup presentPopoverFromRect:CGRectMake(self.view.frame.size.width-240, self.view.frame.size.height-40, 240, 300)inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+                                               }
+                                           });
+                                       }
+                                   } else{
+                                   }
+                               }];
+    }
+    
 }
 
 - (void) searchTapped {

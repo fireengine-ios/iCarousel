@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CountrySelectionController : UITableViewController <UISearchBarDelegate>
+@interface CountrySelectionController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
 @property (nonatomic) void(^completion)(NSDictionary*);
 
