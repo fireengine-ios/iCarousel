@@ -773,6 +773,7 @@
 #pragma mark ShareLinkDao Delegate Methods
 - (void) shareSuccessCallback:(NSString *) linkToShare {
     [self hideLoading];
+    [self setToUnselectible];
     [APPDELEGATE.base hideBaseLoading];
     NSArray *activityItems = [NSArray arrayWithObjects:linkToShare, nil];
     
@@ -904,7 +905,6 @@
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    [self setToUnselectible];
     switch (buttonIndex) {
         case 0:
             [self shareImageFiles:NO];
@@ -964,6 +964,15 @@
                                                UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:allImages applicationActivities:nil];
                                                [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
                                                activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+                                               
+                                               activityViewController.completionWithItemsHandler =
+                                               ^(UIActivityType activityType,
+                                                 BOOL completed, NSArray *returnedItems,
+                                                 NSError *activityError) {
+                                                   if (completed) {
+                                                       [self setToUnselectible];
+                                                   }
+                                               };
                                                
                                                if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
                                                    [self presentViewController:activityViewController animated:YES completion:nil];

@@ -383,7 +383,14 @@
                                                UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:allImages applicationActivities:nil];
                                                [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
                                                activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-                                               
+                                               activityViewController.completionWithItemsHandler =
+                                               ^(UIActivityType activityType,
+                                                 BOOL completed, NSArray *returnedItems,
+                                                 NSError *activityError) {
+                                                   if (completed) {
+                                                       [self cancelClicked];
+                                                   }
+                                               };
                                                if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
                                                    [self presentViewController:activityViewController animated:YES completion:nil];
                                                } else {
@@ -400,7 +407,6 @@
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    [self cancelClicked];
     switch (buttonIndex) {
         case 0:
             [self shareImageFiles:NO];
@@ -439,6 +445,7 @@
 #pragma mark ShareLinkDao Delegate Methods
 - (void) shareSuccessCallback:(NSString *) linkToShare {
     [self hideLoading];
+    [self cancelClicked];
     NSArray *activityItems = [NSArray arrayWithObjects:linkToShare, nil];
     
     UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];

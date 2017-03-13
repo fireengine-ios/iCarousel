@@ -588,6 +588,7 @@
 #pragma mark ShareLinkDao Delegate Methods
 - (void) shareSuccessCallback:(NSString *) linkToShare {
     [self hideLoading];
+    [self setToUnselectible];
     NSArray *activityItems = [NSArray arrayWithObjects:linkToShare, nil];
     
     UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
@@ -979,6 +980,7 @@
         if (folderSelected) {
             [self triggerShareForFiles:selectedFileList];
         } else {
+            self.fileUUIDToShare = selectedFileList;
             [self presentSharePopup];
         }
 //
@@ -1008,7 +1010,6 @@
             [self shareImageFiles:YES];
             break;
         case 2: {
-            [self setToUnselectible];
             [shareDao requestLinkForFiles:self.fileUUIDToShare];
         } break;
         default:
@@ -1018,7 +1019,7 @@
 
 - (void)shareImageFiles:(BOOL)originalSize {
     self.fileListToShare = self.selectedFiles;
-    [self setToUnselectible];
+//    [self setToUnselectible];
     //    __block NSInteger imagesCount = fileUuidList.count;
     __block NSMutableArray *allImages = [@[] mutableCopy];
     
@@ -1062,7 +1063,14 @@
                                                UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:allImages applicationActivities:nil];
                                                [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
                                                activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-                                               
+                                               activityViewController.completionWithItemsHandler =
+                                               ^(UIActivityType activityType,
+                                                 BOOL completed, NSArray *returnedItems,
+                                                 NSError *activityError) {
+                                                   if (completed) {
+                                                       [self setToUnselectible];
+                                                   }
+                                               };
                                                if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
                                                    [self presentViewController:activityViewController animated:YES completion:nil];
                                                } else {
