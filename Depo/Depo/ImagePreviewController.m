@@ -16,6 +16,7 @@
 #import "TutorialView.h"
 #import "ZPhotoView.h"
 #import "VideoPreviewController.h"
+#import "SyncUtil.h"
 
 #define PhotosGap 30.0f
 #define FooterHeight 60.0f
@@ -792,7 +793,12 @@
                  if (succeeded) {
                      dispatch_async(dispatch_get_main_queue(), ^{
                          ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-                         [library writeImageDataToSavedPhotosAlbum:imageData metadata:nil completionBlock:nil];
+                         [library writeImageDataToSavedPhotosAlbum:imageData metadata:nil completionBlock:^(NSURL *assetURL, NSError *error) {
+                             NSLog(@"%@", assetURL);
+                             NSString *localHash = [SyncUtil md5StringOfString:[assetURL absoluteString]];
+                             [SyncUtil cacheSyncHashLocally:localHash];
+                             [SyncUtil increaseAutoSyncIndex];
+                         }];
                          [self image:image didFinishSavingWithError:nil contextInfo:nil];
                      });
                  }

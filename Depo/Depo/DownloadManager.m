@@ -220,6 +220,13 @@
                                                                               [NSURL fileURLWithPath:tempPath]];
                                        PHObjectPlaceholder *assetPlaceHolder = [changeRequest placeholderForCreatedAsset];
                                        localizedAssetIdentifier = assetPlaceHolder.localIdentifier;
+                                       
+//                                       NSString *normalizedIdentifier = [NSString stringWithFormat:@"assets-library://asset/asset.JPG?id=%@&ext=JPG",
+//                                                                         assetPlaceHolder.localIdentifier];
+//                                       NSString *localHash = [SyncUtil md5StringOfString:normalizedIdentifier];
+//                                       NSLog(@"saved file localHash: %@ - identifier: %@", localHash, normalizedIdentifier);
+//                                       [SyncUtil cacheSyncHashLocally:localHash];
+//                                       [SyncUtil increaseAutoSyncIndex];
                                    } completionHandler:^(BOOL success, NSError *error) {
                                        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
                                        NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -229,6 +236,14 @@
                                                              [self contentTypeForImageData:imageData]];
                                        [[NSFileManager defaultManager] removeItemAtPath:tempPath error:&error];
                                        if (success) {
+                                           
+                                           NSArray *seperateds = [localizedAssetIdentifier componentsSeparatedByString:@"/"];
+                                           NSString *normalizedIdentifier = [NSString stringWithFormat:@"assets-library://asset/asset.JPG?id=%@&ext=JPG", seperateds[0]];
+                                           NSString *localHash = [SyncUtil md5StringOfString:normalizedIdentifier];
+                                           NSLog(@"saved file localHash: %@ - identifier: %@", localHash, normalizedIdentifier);
+                                           [SyncUtil cacheSyncHashLocally:localHash];
+                                           [SyncUtil increaseAutoSyncIndex];
+                                           
                                            [weakSelf saveFileToCameraRoll:file localizedIdentifier:localizedAssetIdentifier];
                                            NSLog(@"Save Image To CameraRoll Success");
                                        }
