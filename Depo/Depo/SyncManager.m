@@ -145,9 +145,9 @@
                             length = (int)[group numberOfAssets] - startIndex;
                         }
                         NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(startIndex, length)];
-                        if (indexSet.lastIndex > [group numberOfAssets]) {
-                            indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(startIndex, [group numberOfAssets])];
-                        }
+//                        if (indexSet.lastIndex > [group numberOfAssets]) {
+//                            indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(startIndex, [group numberOfAssets])];
+//                        }
                         
                         [[CurioSDK shared] sendEvent:@"FirstSyncStarted" eventValue:[NSString stringWithFormat:@"start index: %d", startIndex]];
                         [MPush hitTag:@"FirstSyncStarted" withValue:[NSString stringWithFormat:@"start index: %d", startIndex]];
