@@ -488,6 +488,8 @@
         [self.navigationController setNavigationBarHidden:true animated:true];
         [[UIApplication sharedApplication] setStatusBarHidden:true];
         
+        // update process view
+        self.processView.frame = CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60);
         // update footer
         footer.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 60);
         [footer updateInnerViews];
@@ -509,6 +511,8 @@
             [[UIApplication sharedApplication] setStatusBarHidden:false];
         }
         
+        // update process view
+        self.processView.frame = CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60);
         // update footer
         if (self.file.contentType == ContentTypePhoto) {
             footer.frame = CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60);
