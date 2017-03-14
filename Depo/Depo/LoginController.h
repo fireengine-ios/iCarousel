@@ -28,7 +28,6 @@
     CheckButton *rememberMe;
 }
 
-@property (nonatomic, strong) UIScrollView *mainScroll;
 @property (nonatomic, strong) SimpleButton *loginButton;
 @property (nonatomic, strong) UIView* captchaContainer;
 @property (nonatomic, strong) UIImageView *captchaView;

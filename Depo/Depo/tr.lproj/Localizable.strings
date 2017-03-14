@@ -291,6 +291,7 @@
 "PostLoginRoamingDesc"="Yurtdışındayken otomatik yükle";
 
 "MsisdnPlaceholder"="GSM Numarasını Girin";
+"MsisdnPlaceholderNew"="Telefon";
 "PasswordPlaceholder"="Şifre";
 "MsisdnTitle"="GSM NUMARASI";
 "PasswordTitle"="ŞİFRE";
@@ -573,6 +574,7 @@
 "EmailTitle"="E-MAİL ADRESİ";
 "PasswordRepeatTitle"="ŞİFRE TEKRAR";
 "EmailPlaceholder"="E-Mail";
+"EmailPlaceholderNew"="E-Posta";
 "PasswordRepeatPlaceholder"="Şifre tekrar";
 "SignUp"="Kayıt Ol";
 "SignUpButton"="Gönder";
@@ -635,6 +637,7 @@
 
 "MsisdnEmailTitle"="GSM NUMARASI veya E-POSTA ADRESİ";
 "MsisdnEmailPlaceholder"="GSM Numarası veya E-Posta Adresi";
+"MsisdnEmailPlaceholderNew"="Telefon veya E-Posta";
 "MsisdnEmailFormatErrorMessage"="GSM numarasını/E-Mail adresini kontrol ediniz";
 
 "LocForAutoSyncError"="Otomatik yüklemenin başarıyla çalışabilmesi için konum servisinin açık olması gerekmektedir";
