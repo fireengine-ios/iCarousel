@@ -7,6 +7,7 @@
 //
 
 #import "SimpleMusicCell.h"
+#import "UIImageView+WebCache.h"
 
 @interface SimpleMusicCell () {
     CustomLabel *nameLabel;
@@ -32,8 +33,24 @@
         
         int leftIndex = self.isSelectible ? 50 : 15;
         
-        CGRect nameFieldRect = CGRectMake(leftIndex + 15, 13, self.frame.size.width - 30, 22);
-        CGRect detailFieldRect = CGRectMake(leftIndex + 15, 35, self.frame.size.width - 30, 20);
+        UIImage *iconImg = [UIImage imageNamed:[AppUtil iconNameByContentType:ContentTypeMusic]];
+        
+        self.imgView  = [[UIImageView alloc] initWithFrame:CGRectMake(leftIndex + (40 - iconImg.size.width)/2, (68 - iconImg.size.height)/2, iconImg.size.width, iconImg.size.height)];
+        
+        [self.imgView sd_setImageWithURL:[NSURL URLWithString:_fileFolder.detail.thumbMediumUrl]
+                        placeholderImage:iconImg];
+        
+//        self.imgView.image = iconImg;
+        [self addSubview:self.imgView];
+        
+        CGRect nameFieldRect = CGRectMake(self.imgView.frame.origin.x + self.imgView.frame.size.width + 15,
+                                          13,
+                                          self.frame.size.width - 60 - self.imgView.frame.size.width,
+                                          22);
+        CGRect detailFieldRect = CGRectMake(self.imgView.frame.origin.x + self.imgView.frame.size.width + 15,
+                                            35,
+                                            self.frame.size.width - 60 - self.imgView.frame.size.width,
+                                            20);
         
         UIFont *nameFont = [self readNameFont];
         UIFont *detailFont = [self readDetailFont];
@@ -67,12 +84,18 @@
 }
 
 - (void) layoutSubviews {
-    int leftIndex = self.isSelectible ? 50 : 15;
+//    int leftIndex = self.isSelectible ? 50 : 15;
     if(self.checkButton) {
         self.checkButton.frame = CGRectMake(15, (self.frame.size.height - 20)/2, 21, 20);
     }
-    CGRect nameFieldRect = CGRectMake(leftIndex + 15, self.frame.size.height/2 - 22, self.frame.size.width - 30, 22);
-    CGRect detailFieldRect = CGRectMake(leftIndex + 15, self.frame.size.height/2, self.frame.size.width - 30, 20);
+    CGRect nameFieldRect = CGRectMake(self.imgView.frame.origin.x + self.imgView.frame.size.width + 15,
+                                      self.frame.size.height/2 - 22,
+                                      self.frame.size.width - 60 - self.imgView.frame.size.width,
+                                      22);
+    CGRect detailFieldRect = CGRectMake(self.imgView.frame.origin.x + self.imgView.frame.size.width + 15,
+                                        self.frame.size.height/2,
+                                        self.frame.size.width - 60 - self.imgView.frame.size.width,
+                                        20);
     if(nameLabel) {
         nameLabel.frame = nameFieldRect;
     }
