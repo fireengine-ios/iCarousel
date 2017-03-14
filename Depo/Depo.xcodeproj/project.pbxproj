@@ -910,6 +910,8 @@
 		790B9D8A1E71762100DD7DA0 /* icon_dropdown@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 790B9D881E71762100DD7DA0 /* icon_dropdown@3x.png */; };
 		790B9D8D1E7179C300DD7DA0 /* CountrySelectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 790B9D8C1E7179C300DD7DA0 /* CountrySelectionController.m */; };
 		790B9D951E726E8300DD7DA0 /* countryCodes.json in Resources */ = {isa = PBXBuildFile; fileRef = 790B9D941E726E8300DD7DA0 /* countryCodes.json */; };
+		790B9D981E7690BD00DD7DA0 /* buttonbg_720_w@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 790B9D961E7690BD00DD7DA0 /* buttonbg_720_w@2x.png */; };
+		790B9D991E7690BD00DD7DA0 /* buttonbg_720_w@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 790B9D971E7690BD00DD7DA0 /* buttonbg_720_w@3x.png */; };
 		94112A981CCA7DE00050E9B1 /* DropboxStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94112A971CCA7DE00050E9B1 /* DropboxStatusCell.m */; };
 		941496611CCF559D008A8D0C /* GroupedPhotosAndVideosController.m in Sources */ = {isa = PBXBuildFile; fileRef = 941496601CCF559D008A8D0C /* GroupedPhotosAndVideosController.m */; };
 		941496641CCF5E51008A8D0C /* GroupedPhotosCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 941496631CCF5E51008A8D0C /* GroupedPhotosCell.m */; };
@@ -2576,6 +2578,8 @@
 		790B9D8B1E7179C300DD7DA0 /* CountrySelectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountrySelectionController.h; sourceTree = "<group>"; };
 		790B9D8C1E7179C300DD7DA0 /* CountrySelectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountrySelectionController.m; sourceTree = "<group>"; };
 		790B9D941E726E8300DD7DA0 /* countryCodes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countryCodes.json; sourceTree = "<group>"; };
+		790B9D961E7690BD00DD7DA0 /* buttonbg_720_w@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "buttonbg_720_w@2x.png"; path = "images/login-signup/buttonbg_720_w@2x.png"; sourceTree = "<group>"; };
+		790B9D971E7690BD00DD7DA0 /* buttonbg_720_w@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "buttonbg_720_w@3x.png"; path = "images/login-signup/buttonbg_720_w@3x.png"; sourceTree = "<group>"; };
 		94112A961CCA7DE00050E9B1 /* DropboxStatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxStatusCell.h; sourceTree = "<group>"; };
 		94112A971CCA7DE00050E9B1 /* DropboxStatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropboxStatusCell.m; sourceTree = "<group>"; };
 		9414965F1CCF559D008A8D0C /* GroupedPhotosAndVideosController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupedPhotosAndVideosController.h; sourceTree = "<group>"; };
@@ -5129,6 +5133,8 @@
 		790B9D821E7174A500DD7DA0 /* login-signup */ = {
 			isa = PBXGroup;
 			children = (
+				790B9D961E7690BD00DD7DA0 /* buttonbg_720_w@2x.png */,
+				790B9D971E7690BD00DD7DA0 /* buttonbg_720_w@3x.png */,
 				790B9D871E71762100DD7DA0 /* icon_dropdown@2x.png */,
 				790B9D881E71762100DD7DA0 /* icon_dropdown@3x.png */,
 				790B9D831E71750E00DD7DA0 /* combobg@2x.png */,
@@ -5384,6 +5390,7 @@
 				05440ADD19D4363D009803D7 /* green_music_icon@2x.png in Resources */,
 				0526448B19D5A26400B63759 /* camera_icon@2x.png in Resources */,
 				24FE7B0F1B6A5A98007B53A0 /* white_print_icon@2x.png in Resources */,
+				790B9D981E7690BD00DD7DA0 /* buttonbg_720_w@2x.png in Resources */,
 				058219D81A3850E2001FA679 /* close_icon.png in Resources */,
 				051CB3F619D2F71200E5FC88 /* document_icon.png in Resources */,
 				94B2F33F1D373E48009CD8B1 /* icon_sm.png in Resources */,
@@ -5930,6 +5937,7 @@
 				05B1847F1A24C07E00FDA023 /* nav_download_icon@2x.png in Resources */,
 				94E5E65C1E24F8D8008B0216 /* icon_notsync@2x.png in Resources */,
 				055A3F4C19E7F9D6004A0121 /* photo_header_with_flap_first@2x.png in Resources */,
+				790B9D991E7690BD00DD7DA0 /* buttonbg_720_w@3x.png in Resources */,
 				05C3F60B1A3902E0001954E8 /* check_icon@2x.png in Resources */,
 				94E549141CC6BA27003CB5DC /* icon_complaint.png in Resources */,
 				949BB5C91D7046A300BED9DB /* icon_hp_sonislemler@3x.png in Resources */,

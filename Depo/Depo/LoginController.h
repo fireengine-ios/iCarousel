@@ -32,7 +32,6 @@
 @property (nonatomic, strong) UIView* captchaContainer;
 @property (nonatomic, strong) UIImageView *captchaView;
 //@property (nonatomic, strong) CustomButton *refreshButton;
-@property (nonatomic, strong) UIButton *countryCodeButton;
 @property (nonatomic, strong) LoginTextfield *msisdnField;
 @property (nonatomic, strong) LoginTextfield *passField;
 @property (nonatomic, strong) LoginTextfield *captchaField;

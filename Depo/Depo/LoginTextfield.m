@@ -10,6 +10,8 @@
 #import "Util.h"
 #import "AppConstants.h"
 
+#define bottomOffset 7.0f
+
 @interface LoginTextfield ()
 @property (nonatomic, strong) CALayer *border;
 @end
@@ -36,7 +38,7 @@
         
         
         UIFont *currentFont = [UIFont fontWithName:@"TurkcellSaturaMed" size:19];
-        UIColor *color = [UIColor colorWithRed:165.0f/255.0f green:165.0f/255.0f blue:169.0f/255.0f alpha:1.0f];
+        UIColor *color = [UIColor blackColor];
         self.textColor = color;
         self.font = currentFont;
         self.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
@@ -80,7 +82,7 @@
         //self.layer.masksToBounds = YES;
         
         UIFont *currentFont = [UIFont fontWithName:@"TurkcellSaturaMed" size:19];
-        UIColor *color = [UIColor colorWithRed:165.0f/255.0f green:165.0f/255.0f blue:169.0f/255.0f alpha:1.0f];
+        UIColor *color = [UIColor blackColor];
         self.textColor = color;
         self.font = currentFont;
         self.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
@@ -96,11 +98,11 @@
 
 - (CGRect)placeholderRectForBounds:(CGRect)bounds {
     if ([self respondsToSelector:@selector(setAttributedPlaceholder:)]) {
-        UIColor *color = [UIColor blackColor];
+        UIColor *color = [UIColor colorWithRed:165.0f/255.0f green:165.0f/255.0f blue:169.0f/255.0f alpha:1.0f];
         self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.placeholder attributes:@{NSForegroundColorAttributeName: color}];
     }
     
-    return [super placeholderRectForBounds:CGRectMake(0, bounds.origin.y , bounds.size.width - 10 , bounds.size.height - 7)];
+    return [super placeholderRectForBounds:CGRectMake(0, bounds.origin.y , bounds.size.width - 10 , bounds.size.height - bottomOffset)];
 }
 
 - (void) drawPlaceholderInRect:(CGRect)rect {
@@ -108,11 +110,11 @@
 }
 
 - (CGRect)textRectForBounds:(CGRect)bounds {
-    return [super textRectForBounds:CGRectMake(0, bounds.origin.y + 10 , bounds.size.width - 10 , bounds.size.height - 7)];
+    return [super textRectForBounds:CGRectMake(0, bounds.origin.y + 10 , bounds.size.width - 10 , bounds.size.height - bottomOffset)];
 }
 
 - (CGRect)editingRectForBounds:(CGRect)bounds {
-    return [super textRectForBounds:CGRectMake(0, bounds.origin.y + 10 , bounds.size.width - 10 , bounds.size.height - 7)];
+    return [super textRectForBounds:CGRectMake(0, bounds.origin.y + 10 , bounds.size.width - 10 , bounds.size.height - bottomOffset)];
 }
 
 /*

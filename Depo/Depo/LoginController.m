@@ -22,15 +22,13 @@
 #import "RememberMeEmailViewController.h"
 #import "MPush.h"
 #import "AppUtil.h"
-#import "CountrySelectionController.h"
 
 #define kOFFSET_FOR_KEYBOARD 200.0
+#define verticalPadding 40.0f
 
 @interface LoginController () {
     UIScrollView* container;
 }
-
-@property (nonatomic) CountrySelectionController *countrySelectionController;
 
 @end
 
@@ -40,7 +38,6 @@
 //@synthesize refreshButton;
 @synthesize captchaView;
 @synthesize captchaContainer;
-@synthesize countryCodeButton;
 @synthesize msisdnField;
 @synthesize passField;
 @synthesize captchaField;
@@ -73,37 +70,11 @@
         logoImgView.image = logoImage;
         [container addSubview:logoImgView];
         
-        scrollYIndex += logoImage.size.height + 80;
-
-        //------
-//        countryCodeButton = [UIButton buttonWithType:UIButtonTypeSystem];
-//        [countryCodeButton setFrame:CGRectMake(20, scrollYIndex +11, 68, 32)];
-//        [countryCodeButton setBackgroundImage:[UIImage imageNamed:@"combobg.png"] forState:UIControlStateNormal];
-//        [countryCodeButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//        [countryCodeButton addTarget:self action:@selector(goCountryCodepage:) forControlEvents:UIControlEventTouchUpInside];
-//        [container addSubview:countryCodeButton];
-//        
-//        NSString *currentCode;
-//        NSString *currentLocale = [Util readLocaleCode];
-//        if([currentLocale isEqualToString:@"uk"] || [currentLocale isEqualToString:@"ru"]) {
-//            [countryCodeButton setTitle:@"+90" forState:UIControlStateNormal];
-//            currentCode = @"+380";
-//        } else if ([currentLocale isEqualToString:@"ar"]) {
-//            currentCode = @"+966";
-//        } else if ([currentLocale isEqualToString:@"de"]) {
-//            currentCode = @"+49";
-//        } else {
-//            currentCode = @"+90";
-//        }
-//        [countryCodeButton setTitle:currentCode forState:UIControlStateNormal];
-        //------
-        
-        UIImageView *arrow = [[UIImageView alloc] initWithFrame:CGRectMake(24, 0, 8, 4)];
-        CGPoint center = arrow.center;
-        center.y = countryCodeButton.center.y;
-        arrow.center = center;
-        arrow.image = [UIImage imageNamed:@"icon_dropdown.png"];
-        [container addSubview:arrow];
+        if (IS_IPHONE_5) {
+            scrollYIndex += logoImage.size.height + 60;
+        } else {
+            scrollYIndex += logoImage.size.height + 80;
+        }
         
         msisdnField = [[LoginTextfield alloc] initWithFrame:CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 50) withPlaceholder:NSLocalizedString(@"MsisdnEmailPlaceholder", @"")];
         msisdnField.delegate = self;
@@ -112,7 +83,7 @@
         msisdnField.accessibilityIdentifier = @"msisdnFieldLogin";
         [container addSubview:msisdnField];
 
-        scrollYIndex += 70;
+        scrollYIndex += verticalPadding + 20.0f;
         
         passField = [[LoginTextfield alloc] initSecureWithFrame:CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 50) withPlaceholder:NSLocalizedString(@"PasswordPlaceholder", @"")];
         passField.delegate = self;
@@ -120,7 +91,7 @@
         passField.accessibilityIdentifier = @"passFieldLogin";
         [container addSubview:passField];
 
-        scrollYIndex += 65;
+        scrollYIndex += verticalPadding + 25.0f;
 
         rememberMe = [[CheckButton alloc] initWithFrame:CGRectMake(25, scrollYIndex, 120, 25) withTitle:NSLocalizedString(@"RememberMe", @"") isInitiallyChecked:YES];
         rememberMe.isAccessibilityElement = YES;
@@ -162,17 +133,30 @@
         captchaField.accessibilityIdentifier = @"loginCaptchaField";
         [captchaContainer addSubview:captchaField];
         
-        scrollYIndex += 40;
+        scrollYIndex += verticalPadding;
         
-        loginButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 50) withTitle:NSLocalizedString(@"Login", @"") withTitleColor:[Util UIColorForHexColor:@"FFFFFF"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"3FB0E8"] withBgColor:[Util UIColorForHexColor:@"3FB0E8"] withCornerRadius:5];
+        loginButton = [[SimpleButton alloc] initWithFrame:CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 50)
+                                                withTitle:[NSLocalizedString(@"Login", @"") uppercaseString]
+                                           withTitleColor:[Util UIColorForHexColor:@"FFFFFF"]
+                                            withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18]
+                                          withBorderColor:[Util UIColorForHexColor:@"3FB0E8"]
+                                              withBgColor:[Util UIColorForHexColor:@"3FB0E8"]
+                                         withCornerRadius:2];
         [loginButton addTarget:self action:@selector(loginClicked) forControlEvents:UIControlEventTouchUpInside];
         loginButton.isAccessibilityElement = YES;
         loginButton.accessibilityIdentifier = @"loginButton";
         [container addSubview:loginButton];
         
-        scrollYIndex += 60;
+        if (IS_IPHONE_5) {
+            scrollYIndex += loginButton.frame.size.height + 30.0f;
+        } else {
+            scrollYIndex += loginButton.frame.size.height + 40.0f;
+        }
         
-        forgotPassView = [[UIView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 130)/2, scrollYIndex + loginButton.frame.size.height, 130, 25) ];
+        forgotPassView = [[UIView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 130)/2,
+                                                                  scrollYIndex,
+                                                                  130,
+                                                                  25) ];
         forgotPassView.isAccessibilityElement = YES;
         forgotPassView.accessibilityIdentifier = @"forgotPassView";
         [container addSubview:forgotPassView];
@@ -263,22 +247,21 @@
             }
         }
         
-//        loginButton = [[SimpleButton alloc] initWithFrame:loginButtonFrame withTitle:NSLocalizedString(@"Login", @"") withTitleColor:[Util UIColorForHexColor:@"FFFFFF"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"3FB0E8"] withBgColor:[Util UIColorForHexColor:@"3FB0E8"] withCornerRadius:5];
-//        [loginButton addTarget:self action:@selector(loginClicked) forControlEvents:UIControlEventTouchUpInside];
-//        [mainScroll addSubview:loginButton];
-//
-//        scrollYIndex += 60;
+        CGFloat btnWidth = 180.0f, btnHeight = 40.0f;
+        CGRect registerButtonFrame = CGRectMake((self.view.frame.size.width - btnWidth) /2,
+                                                self.view.frame.size.height - (btnHeight * 2) - 64,
+                                                btnWidth,
+                                                btnHeight);
+        SimpleButton *registerButton = [[SimpleButton alloc] initWithFrame:registerButtonFrame
+                                                                 withTitle:[NSLocalizedString(@"SignUpButtonTitle", @"") uppercaseString]
+                                                            withTitleColor:[UIColor blackColor]
+                                                             withTitleFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:16]
+                                                           withBorderColor:[UIColor clearColor]
+                                                               withBgColor:[UIColor whiteColor]
+                                                          withCornerRadius:2];
         
-        /*
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-            SmsForPassButton *smsButton = [[SmsForPassButton alloc] initWithFrame:CGRectMake(20, loginButton.frame.origin.y + loginButton.frame.size.height + 10, 280, 40)];
-            [smsButton addTarget:self action:@selector(triggerSms) forControlEvents:UIControlEventTouchUpInside];
-            [self.view addSubview:smsButton];
-            
-        }
-         */
+        [registerButton setBackgroundImage:[UIImage imageNamed:@"buttonbg_720_w"] forState:UIControlStateNormal];
 
-        SimpleButton *registerButton = [[SimpleButton alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60) withTitle:NSLocalizedString(@"SignUpButtonTitle", @"") withTitleColor:[UIColor whiteColor] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withBorderColor:[Util UIColorForHexColor:@"3FB0E8"] withBgColor:[Util UIColorForHexColor:@"3FB0E8"] withCornerRadius:0];
         [registerButton addTarget:self action:@selector(registerClicked) forControlEvents:UIControlEventTouchUpInside];
         registerButton.isAccessibilityElement = YES;
         registerButton.accessibilityIdentifier = @"registerButton";
@@ -295,17 +278,6 @@
         [self.view addGestureRecognizer:tapGestureRecognizer];
     }
     return self;
-}
-
-- (void)goCountryCodepage:(id)sender {
-    _countrySelectionController = [[CountrySelectionController alloc] init];
-    __weak UIButton *weakCountryButton = countryCodeButton;
-    _countrySelectionController.completion = ^(NSDictionary *selectedCountry) {
-        NSLog(@"selected country = %@", selectedCountry);
-        [weakCountryButton setTitle:selectedCountry[@"phone_code"] forState:UIControlStateNormal];
-    };
-    MyNavigationController *nav = [[MyNavigationController alloc] initWithRootViewController:_countrySelectionController];
-    [self presentViewController:nav animated:YES completion:nil];
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
