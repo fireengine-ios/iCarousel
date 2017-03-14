@@ -76,7 +76,7 @@
 }
 
 - (void) photoListSuccessCallback:(NSArray *) files {
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^(void) {
         NSMutableArray *summaryArray = [[NSMutableArray alloc] init];
         NSMutableArray *hashArray = [[NSMutableArray alloc] init];
         for(MetaFile *row in files) {
@@ -130,7 +130,7 @@
         NSArray *remoteSummaryList = [SyncUtil readSyncFileSummaries];
         
         autoSyncIterationInProgress = YES;
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^(void) {
             [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
                 if(group) {
                     [group setAssetsFilter:[ALAssetsFilter allPhotos]];
@@ -261,7 +261,7 @@
         [MPush hitTag:@"BackgroundSync" withValue:@"started"];
 
         autoSyncIterationInProgress = YES;
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+//        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^(void) {
             [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
                 if(group) {
                     [group setAssetsFilter:[ALAssetsFilter allPhotos]];
@@ -320,7 +320,7 @@
                 }
             } failureBlock:^(NSError *error) {
             }];
-        });
+//        });
     }
 }
 
@@ -329,7 +329,7 @@
     NSArray *remoteHashList = [SyncUtil readSyncHashRemotely];
     NSArray *remoteSummaryList = [SyncUtil readSyncFileSummaries];
     
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^(void) {
         __block int waitingInQueueCount = 0;
         [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
             
@@ -453,7 +453,9 @@
                     [self startFirstTimeSync];
                 } else {
                     IGLog(@"SyncManager calling manuallyCheckIfAlbumChanged");
-                    [self manuallyCheckIfAlbumChanged];
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                        [self manuallyCheckIfAlbumChanged];
+                    });
                 }
             }
         }
