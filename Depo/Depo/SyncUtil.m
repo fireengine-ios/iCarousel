@@ -123,7 +123,7 @@
 + (void) cacheSyncHashLocally:(NSString *) hash {
     if(hash == nil)
         return;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0ul), ^(void) {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^(void) {
         NSArray *result = [SyncUtil readSyncHashLocally];
         if(![result containsObject:hash]) {
             NSArray *updatedArray = [result arrayByAddingObject:hash];
@@ -190,7 +190,7 @@
 }
 
 + (void) cacheSyncFileSummary:(MetaFileSummary *) summary {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0ul), ^(void) {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^(void) {
         NSArray *result = [SyncUtil readSyncFileSummaries];
         if(![result containsObject:summary]) {
             NSArray *updatedArray = [result arrayByAddingObject:summary];
@@ -216,7 +216,7 @@
     if (arrData != nil) {
         result = [NSKeyedUnarchiver unarchiveObjectWithData:arrData];
     }
-    return result;
+    return nil;
 }
 
 + (void) writeFirstTimeSyncFlag {
