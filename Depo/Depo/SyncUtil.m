@@ -216,7 +216,7 @@
     if (arrData != nil) {
         result = [NSKeyedUnarchiver unarchiveObjectWithData:arrData];
     }
-    return nil;
+    return result;
 }
 
 + (void) writeFirstTimeSyncFlag {
