@@ -56,6 +56,13 @@
         eulaDao.successMethod = @selector(eulaReadSuccessCallback:);
         eulaDao.failMethod = @selector(eulaReadFailCallback:);
         
+        CGFloat verticalPadding = 70.0f;
+        if (IS_IPHONE_5) {
+            verticalPadding = 50.0f;
+        } else if (IS_IPHONE_4_OR_LESS) {
+            verticalPadding = 30.0f;
+        }
+        
         float topIndex = IS_IPAD ? (self.view.frame.size.height - 300)/2 - 100 : (IS_IPHONE_4_OR_LESS ? 10 : 20);
         float fieldWidth = self.view.frame.size.width - 40;
         if (IS_IPAD) {
@@ -70,16 +77,11 @@
         logoImgView.image = logoImage;
         [container addSubview:logoImgView];
         
-        topIndex += logoImage.size.height + (IS_IPHONE_4_OR_LESS ? 20 : 50);
-        
-//        CustomLabel *msisdnLabel = [[CustomLabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2, topIndex, fieldWidth, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"MsisdnTitle", @"")];
-//        [container addSubview:msisdnLabel];
-        
-        topIndex += 5;
+        topIndex += logoImage.size.height + (IS_IPHONE_4_OR_LESS ? 20 : verticalPadding);
         
         
         _countryCodeButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        [_countryCodeButton setFrame:CGRectMake(20, topIndex +11, 68, 32)];
+        [_countryCodeButton setFrame:CGRectMake(18, topIndex +11, 68, 32)];
         [_countryCodeButton setBackgroundImage:[UIImage imageNamed:@"combobg.png"] forState:UIControlStateNormal];
         [_countryCodeButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_countryCodeButton addTarget:self action:@selector(goCountryCodepage:) forControlEvents:UIControlEventTouchUpInside];
@@ -111,7 +113,7 @@
                                                                        topIndex,
                                                                        fieldWidth -68,
                                                                        43)
-                                            withPlaceholder:NSLocalizedString(@"MsisdnPlaceholder", @"")];
+                                            withPlaceholder:NSLocalizedString(@"MsisdnPlaceholderNew", @"")];
         msisdnField.delegate = self;
         [msisdnField addTarget:self action:@selector(msisdnFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
 //        msisdnField.placeholder = @"5xxxxxxxxx";
@@ -120,27 +122,23 @@
         msisdnField.accessibilityIdentifier = @"msisdnFieldSignUp";
         [container addSubview:msisdnField];
 
-        topIndex += 55;
+        topIndex += verticalPadding;
 
 //        CustomLabel *emailLabel = [[CustomLabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2, topIndex, fieldWidth, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"FormEmailTitle", @"")];
 //        [container addSubview:emailLabel];
 
-        topIndex += 5;
-
         emailField = [[LoginTextfield alloc] initWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2, topIndex, fieldWidth, 43)
-                                           withPlaceholder:NSLocalizedString(@"EmailPlaceholder", @"")];
+                                           withPlaceholder:NSLocalizedString(@"EmailPlaceholderNew", @"")];
         emailField.delegate = self;
         emailField.keyboardType = UIKeyboardTypeEmailAddress;
         emailField.isAccessibilityElement = YES;
         emailField.accessibilityIdentifier = @"emailFieldSignUp";
         [container addSubview:emailField];
 
-        topIndex += 55;
+        topIndex += verticalPadding;
 
 //        CustomLabel *passLabel = [[CustomLabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2, topIndex, fieldWidth, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"PasswordTitle", @"")];
 //        [container addSubview:passLabel];
-        
-        topIndex += 5;
 
         passwordField = [[LoginTextfield alloc] initSecureWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2,
                                                                                topIndex,
@@ -152,18 +150,16 @@
         passwordField.accessibilityIdentifier = @"passwordFieldSignUp";
         [container addSubview:passwordField];
 
-        topIndex += 55;
+        topIndex += verticalPadding;
 
 //        CustomLabel *passRepeatLabel = [[CustomLabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2, topIndex, fieldWidth, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"PasswordRepeatTitle", @"")];
 //        [container addSubview:passRepeatLabel];
-
-        topIndex += 5;
 
         passwordRepeatField = [[LoginTextfield alloc] initSecureWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2,
                                                                                      topIndex,
                                                                                      fieldWidth,
                                                                                      43)
-                                                          withPlaceholder:NSLocalizedString(@"PasswordRepeatPlaceholder", @"")];
+                                                          withPlaceholder:[NSLocalizedString(@"PasswordRepeatPlaceholder", @"") capitalizedString]];
         passwordRepeatField.delegate = self;
         passwordRepeatField.isAccessibilityElement = YES;
         passwordRepeatField.accessibilityIdentifier = @"passwordRepeatFieldSignUp";
@@ -171,7 +167,9 @@
 
         topIndex += IS_IPHONE_4_OR_LESS ? 50 : 65;
 
-        eulaCheck = [[CheckButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2 + 5, topIndex, 25, 25) isInitiallyChecked:NO];
+        eulaCheck = [[CheckButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - fieldWidth)/2 + 5, topIndex, 25, 25)
+                                             withTitle:@""
+                                    isInitiallyChecked:NO];
         eulaCheck.checkDelegate = self;
         eulaCheck.isAccessibilityElement = YES;
         eulaCheck.accessibilityIdentifier = @"eulaCheck";
@@ -388,7 +386,7 @@
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    CustomButton *customBackButton = [[CustomButton alloc] initWithFrame:CGRectMake(10, 0, 20, 34) withImageName:@"icon_ustbar_back.png"];
+    CustomButton *customBackButton = [[CustomButton alloc] initWithFrame:CGRectMake(10, 0, 24, 24) withImageName:@"icon_ustbar_back.png"];
     [customBackButton addTarget:self action:@selector(innerTriggerBack) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:customBackButton];
     self.navigationItem.leftBarButtonItem = backButton;
@@ -449,7 +447,14 @@
 }
 
 - (void) textFieldDidEndEditing:(UITextField *)textField {
-//    [msisdnField resignFirstResponder];
+    
+    if([textField isEqual:msisdnField]) {
+        if([_countryCodeButton.titleLabel.text isEqualToString:@"+90"]) {
+            if ([msisdnField.text hasPrefix:@"0"] && [msisdnField.text length] > 1) {
+                msisdnField.text = [msisdnField.text substringFromIndex:1];
+            }
+        }
+    }
     
 //    if([textField isEqual:msisdnField]) {
 //        if([[Util readLocaleCode] isEqualToString:@"tr"] || [[Util readLocaleCode] isEqualToString:@"en"]) {

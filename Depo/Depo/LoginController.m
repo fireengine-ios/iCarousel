@@ -70,13 +70,15 @@
         logoImgView.image = logoImage;
         [container addSubview:logoImgView];
         
-        if (IS_IPHONE_5) {
-            scrollYIndex += logoImage.size.height + 60;
+        if (IS_IPHONE_4_OR_LESS) {
+            scrollYIndex += logoImage.size.height + 30;
+        } else if (IS_IPHONE_5) {
+            scrollYIndex += logoImage.size.height + 50;
         } else {
             scrollYIndex += logoImage.size.height + 80;
         }
         
-        msisdnField = [[LoginTextfield alloc] initWithFrame:CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 50) withPlaceholder:NSLocalizedString(@"MsisdnEmailPlaceholder", @"")];
+        msisdnField = [[LoginTextfield alloc] initWithFrame:CGRectMake(20, scrollYIndex, self.view.frame.size.width - 40, 50) withPlaceholder:NSLocalizedString(@"MsisdnEmailPlaceholderNew", @"")];
         msisdnField.delegate = self;
         [msisdnField addTarget:self action:@selector(msisdnFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
         msisdnField.isAccessibilityElement = YES;

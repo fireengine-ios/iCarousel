@@ -34,7 +34,10 @@ static const CGFloat topOffset = 40;
     _searchBar.delegate = self;
     [self.view addSubview:_searchBar];
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, topOffset, self.view.frame.size.width, self.view.frame.size.height)];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,
+                                                               topOffset,
+                                                               self.view.frame.size.width,
+                                                               self.view.frame.size.height - topOffset - 64)];
     _tableView.dataSource = self;
     _tableView.delegate = self;
     [self.tableView setShowsHorizontalScrollIndicator:NO];
@@ -99,15 +102,6 @@ static const CGFloat topOffset = 40;
         }
     }
     return resultDic;
-}
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    NSLog(@"y=%lf", scrollView.contentOffset.y);
-    
-    UIView *view = self.tableView.tableHeaderView.subviews[0];
-    CGRect rect = view.bounds;
-    rect.origin.y = MAX(0, -scrollView.contentOffset.y);
-    self.tableView.tableHeaderView.bounds = rect;
 }
 
 #pragma mark - Table view data source
