@@ -901,6 +901,8 @@
 		67AC3FB01E71231E00DDC28C /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC3F9A1E71231E00DDC28C /* UIImageView+WebCache.m */; };
 		67AC3FB11E71231E00DDC28C /* UIView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC3F9C1E71231E00DDC28C /* UIView+WebCache.m */; };
 		67AC3FB21E71231E00DDC28C /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC3F9E1E71231E00DDC28C /* UIView+WebCacheOperation.m */; };
+		67AC3FB71E7928F200DDC28C /* allFilesIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 67AC3FB41E7928F200DDC28C /* allFilesIcon@2x.png */; };
+		67AC3FB81E7928F200DDC28C /* allFilesIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 67AC3FB51E7928F200DDC28C /* allFilesIcon@3x.png */; };
 		67C29C6E1E66E02300B2C442 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1DF619CAC2F900FD1E03 /* Foundation.framework */; };
 		67C29C6F1E66E02900B2C442 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1E9819CACA5300FD1E03 /* CFNetwork.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		67C29C701E66E06400B2C442 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1DF619CAC2F900FD1E03 /* Foundation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -2571,6 +2573,8 @@
 		67AC3F9C1E71231E00DDC28C /* UIView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCache.m"; sourceTree = "<group>"; };
 		67AC3F9D1E71231E00DDC28C /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		67AC3F9E1E71231E00DDC28C /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		67AC3FB41E7928F200DDC28C /* allFilesIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "allFilesIcon@2x.png"; sourceTree = "<group>"; };
+		67AC3FB51E7928F200DDC28C /* allFilesIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "allFilesIcon@3x.png"; sourceTree = "<group>"; };
 		790B9D831E71750E00DD7DA0 /* combobg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "combobg@2x.png"; path = "images/login-signup/combobg@2x.png"; sourceTree = "<group>"; };
 		790B9D841E71750E00DD7DA0 /* combobg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "combobg@3x.png"; path = "images/login-signup/combobg@3x.png"; sourceTree = "<group>"; };
 		790B9D871E71762100DD7DA0 /* icon_dropdown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_dropdown@2x.png"; path = "images/login-signup/icon_dropdown@2x.png"; sourceTree = "<group>"; };
@@ -4728,6 +4732,8 @@
 				0589061819CC226D00A9E517 /* blue_bg.png */,
 				0589061919CC226D00A9E517 /* menu_icon.png */,
 				0589061A19CC226D00A9E517 /* menu_icon@2x.png */,
+				67AC3FB41E7928F200DDC28C /* allFilesIcon@2x.png */,
+				67AC3FB51E7928F200DDC28C /* allFilesIcon@3x.png */,
 			);
 			name = images;
 			sourceTree = "<group>";
@@ -5822,6 +5828,7 @@
 				949BB58D1D6F1FA100BED9DB /* vect_mtour_4.png in Resources */,
 				051CB3B119D2F6F700E5FC88 /* white_delete_icon.png in Resources */,
 				0589063619CC2A0400A9E517 /* fav_icon@2x.png in Resources */,
+				67AC3FB81E7928F200DDC28C /* allFilesIcon@3x.png in Resources */,
 				051CB41419D2F71200E5FC88 /* mini_play_icon@2x.png in Resources */,
 				051CB41D19D2F71200E5FC88 /* big_plus_icon@2x.png in Resources */,
 				051CB3F719D2F71200E5FC88 /* check_unchecked_icon.png in Resources */,
@@ -5942,6 +5949,7 @@
 				94E549141CC6BA27003CB5DC /* icon_complaint.png in Resources */,
 				949BB5C91D7046A300BED9DB /* icon_hp_sonislemler@3x.png in Resources */,
 				94884C931C90AFCC006722F7 /* buttonbg_blue@2x.png in Resources */,
+				67AC3FB71E7928F200DDC28C /* allFilesIcon@2x.png in Resources */,
 				051CB41A19D2F71200E5FC88 /* blue_add_photo_icon@2x.png in Resources */,
 				051CB3B019D2F6F700E5FC88 /* white_left_arrow.png in Resources */,
 				569B5CA21DEF7B94008153F5 /* checkbox_active@3x.png in Resources */,
