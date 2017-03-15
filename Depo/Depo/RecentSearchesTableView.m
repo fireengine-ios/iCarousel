@@ -118,10 +118,12 @@
     else {
         searchHistory = [self.suggestions objectAtIndex:indexPath.row];
     }
-    [searchField setText:searchHistory.searchText];
+    NSString *searchText = [[searchHistory.searchText stringByReplacingOccurrencesOfString:@"<m>" withString:@""]
+                            stringByReplacingOccurrencesOfString:@"</m>" withString:@""];
+    [searchField setText:searchText];
     [searchField resignFirstResponder];
     [self hideTableView];
-    SuppressPerformSelectorLeakWarning([ownerController performSelector:searchMethod withObject:searchHistory.searchText]);
+    SuppressPerformSelectorLeakWarning([ownerController performSelector:searchMethod withObject:searchText]);
 }
 
 - (void)crossButtonAction {
