@@ -369,6 +369,16 @@
             callingCode = [callingCode stringByAppendingString:textField.text];
             msisdnField.text = callingCode;
         }
+        else if([[Util readLocaleCode] isEqualToString:@"de"]) {
+            callingCode = @"+(49)";
+            callingCode = [callingCode stringByAppendingString:textField.text];
+            msisdnField.text = callingCode;
+        }
+        else if([[Util readLocaleCode] isEqualToString:@"ar"]) {
+            callingCode = @"+(966)";
+            callingCode = [callingCode stringByAppendingString:textField.text];
+            msisdnField.text = callingCode;
+        }
         else {
             callingCode = [callingCode stringByAppendingString:textField.text];
             msisdnField.text = callingCode;
