@@ -32,7 +32,9 @@
         infoLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, (self.frame.size.height - 16)/2, 120, 16) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:14] withColor:[Util UIColorForHexColor:@"8d8a85"] withText:NSLocalizedString(@"SyncInProgressHeaderTitle", @"") withAlignment:NSTextAlignmentLeft];
         [self addSubview:infoLabel];
         
-        progressBg = [[UIView alloc] initWithFrame:CGRectMake(infoLabel.frame.origin.x + infoLabel.frame.size.width + 5, (self.frame.size.height - 16)/2, 140, 16)];
+        float maxProgressWidth = self.frame.size.width - infoLabel.frame.size.width - 100;
+        
+        progressBg = [[UIView alloc] initWithFrame:CGRectMake(infoLabel.frame.origin.x + infoLabel.frame.size.width + 5, (self.frame.size.height - 16)/2, maxProgressWidth, 16)];
         progressBg.layer.cornerRadius = 8;
         progressBg.backgroundColor = [Util UIColorForHexColor:@"058ba9"];
         [self addSubview:progressBg];
@@ -42,7 +44,7 @@
         progress.backgroundColor = [Util UIColorForHexColor:@"00aadf"];
         [self addSubview:progress];
         
-        thumbView = [[UIImageView alloc] initWithFrame:CGRectMake(progressBg.frame.origin.x + progressBg.frame.size.width + 20, (self.frame.size.height - 40)/2, 40, 40)];
+        thumbView = [[UIImageView alloc] initWithFrame:CGRectMake(self.frame.size.width - 60, (self.frame.size.height - 40)/2, 40, 40)];
         thumbView.contentMode = UIViewContentModeScaleAspectFill;
         thumbView.clipsToBounds = YES;
         thumbView.backgroundColor = [UIColor grayColor];
