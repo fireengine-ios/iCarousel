@@ -73,6 +73,14 @@ static const CGFloat topOffset = 40;
     // Dispose of any resources that can be recreated.
 }
 
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
+-(NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationPortrait;
+}
+
 - (NSArray*)getSortedKeysFromDict:(NSDictionary*)dict {
     return [[dict allKeys] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
         return [obj1 compare:obj2 options:NSNumericSearch];
