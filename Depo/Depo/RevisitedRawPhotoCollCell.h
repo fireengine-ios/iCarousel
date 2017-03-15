@@ -12,6 +12,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 
 @protocol RawPhotoCollCellDelegate <NSObject>
+
 - (void) rawPhotoCollCellImageWasSelectedForFile:(MetaFile *) fileSelected forGroupWithKey:(NSString *) groupKey;
 - (void) rawPhotoCollCellImageWasMarkedForFile:(MetaFile *) fileSelected;
 - (void) rawPhotoCollCellImageWasUnmarkedForFile:(MetaFile *) fileSelected;
@@ -22,6 +23,17 @@
 - (void) rawPhotoCollCellImageWasSelectedForView:(SquareImageView *) ref;
 - (void) rawPhotoCollCellAssetDidBecomeSelected:(ALAsset *) selectedAsset;
 - (void) rawPhotoCollCellAssetDidBecomeDeselected:(ALAsset *) deselectedAsset;
+
+@optional
+
+- (void) rawPhotoCollCellImageWasSelectedForAsset:(ALAsset *) fileSelected;
+- (void) rawPhotoCollCellImageWasMarkedForAsset:(ALAsset *) fileSelected;
+- (void) rawPhotoCollCellImageWasUnmarkedForAsset:(ALAsset *) fileSelected;
+- (void) rawPhotoCollCellImageUploadFinishedForAsset:(ALAsset *) fileSelected;
+- (void) rawPhotoCollCellImageWasLongPressedForAsset:(ALAsset *) fileSelected;
+- (void) rawPhotoCollCellImageUploadQuotaErrorForAsset:(ALAsset *) fileSelected;
+- (void) rawPhotoCollCellImageUploadLoginErrorForAsset:(ALAsset *) fileSelected;
+
 @end
 
 @interface RevisitedRawPhotoCollCell : UICollectionViewCell <SquareImageDelegate>

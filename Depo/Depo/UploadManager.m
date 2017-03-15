@@ -27,6 +27,7 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 @implementation UploadManager
 
 @synthesize delegate;
+@synthesize headerDelegate;
 @synthesize queueDelegate;
 @synthesize uploadTask;
 @synthesize uploadRef;
@@ -58,6 +59,9 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         
         self.uploadRef.hasFinished = YES;
         [delegate uploadManagerDidFailUploadingForAsset:self.uploadRef.assetUrl];
+        if(headerDelegate) {
+            [headerDelegate uploadManagerDidFailUploadingForAsset:self.uploadRef.assetUrl];
+        }
         [queueDelegate uploadManager:self didFinishUploadingWithSuccess:NO];
         if(self.uploadRef.autoSyncFlag) {
             [SyncUtil increaseAutoSyncIndex];
@@ -118,6 +122,9 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
                     //fail case. queueda olan bir asset icin dosya galeriden silinmis
                     self.uploadRef.hasFinished = YES;
                     [delegate uploadManagerDidFailUploadingForAsset:self.uploadRef.assetUrl];
+                    if(headerDelegate) {
+                        [headerDelegate uploadManagerDidFailUploadingForAsset:self.uploadRef.assetUrl];
+                    }
                     [queueDelegate uploadManager:self didFinishUploadingWithSuccess:NO];
                     if(self.uploadRef.autoSyncFlag) {
                         [SyncUtil increaseAutoSyncIndex];
@@ -147,6 +154,9 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
         } else {
             self.uploadRef.hasFinished = YES;
             [delegate uploadManagerDidFailUploadingForAsset:self.uploadRef.assetUrl];
+            if(headerDelegate) {
+                [headerDelegate uploadManagerDidFailUploadingForAsset:self.uploadRef.assetUrl];
+            }
             [queueDelegate uploadManager:self didFinishUploadingWithSuccess:NO];
             [SyncUtil increaseAutoSyncIndex];
         }
@@ -160,6 +170,9 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
             IGLog(@"UploadManager continueAssetUpload SyncUtil localHashListContainsHash check returns YES");
             self.uploadRef.hasFinished = YES;
             [delegate uploadManagerDidFailUploadingForAsset:self.uploadRef.assetUrl];
+            if(headerDelegate) {
+                [headerDelegate uploadManagerDidFailUploadingForAsset:self.uploadRef.assetUrl];
+            }
             [queueDelegate uploadManager:self didFinishUploadingWithSuccess:NO];
             [SyncUtil increaseAutoSyncIndex];
             return;
@@ -317,6 +330,9 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     } else {
         self.uploadRef.hasFinished = YES;
         [delegate uploadManagerDidFailUploadingForAsset:self.uploadRef.assetUrl];
+        if(headerDelegate) {
+            [headerDelegate uploadManagerDidFailUploadingForAsset:self.uploadRef.assetUrl];
+        }
         [queueDelegate uploadManager:self didFinishUploadingWithSuccess:NO];
         if(self.uploadRef.autoSyncFlag) {
             [SyncUtil increaseAutoSyncIndex];
@@ -404,6 +420,9 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
     } else {
         self.uploadRef.hasFinished = YES;
         [delegate uploadManagerDidFinishUploadingForAsset:self.uploadRef.assetUrl withFinalFile:self.uploadRef.finalFile];
+        if(headerDelegate) {
+            [headerDelegate uploadManagerDidFinishUploadingForAsset:self.uploadRef.assetUrl withFinalFile:self.uploadRef.finalFile];
+        }
         [queueDelegate uploadManager:self didFinishUploadingWithSuccess:YES];
     }
 }
@@ -411,6 +430,9 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 - (void) uploadNotifyFailCallback:(NSString *) errorMessage {
     self.uploadRef.hasFinished = YES;
     [delegate uploadManagerDidFailUploadingForAsset:self.uploadRef.assetUrl];
+    if(headerDelegate) {
+        [headerDelegate uploadManagerDidFailUploadingForAsset:self.uploadRef.assetUrl];
+    }
     [queueDelegate uploadManager:self didFinishUploadingWithSuccess:NO];
 }
 
@@ -426,12 +448,18 @@ typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
 - (void) notifyAlbumSuccessCallback {
     self.uploadRef.hasFinished = YES;
     [delegate uploadManagerDidFinishUploadingForAsset:self.uploadRef.assetUrl withFinalFile:self.uploadRef.finalFile];
+    if(headerDelegate) {
+        [headerDelegate uploadManagerDidFinishUploadingForAsset:self.uploadRef.assetUrl withFinalFile:self.uploadRef.finalFile];
+    }
     [queueDelegate uploadManager:self didFinishUploadingWithSuccess:YES];
 }
 
 - (void) notifyAlbumFailCallback:(NSString *) errorMessage {
     self.uploadRef.hasFinished = YES;
     [delegate uploadManagerDidFinishUploadingForAsset:self.uploadRef.assetUrl withFinalFile:self.uploadRef.finalFile];
+    if(headerDelegate) {
+        [headerDelegate uploadManagerDidFinishUploadingForAsset:self.uploadRef.assetUrl withFinalFile:self.uploadRef.finalFile];
+    }
     [queueDelegate uploadManager:self didFinishUploadingWithSuccess:NO];
 }
 

@@ -10,10 +10,12 @@
 #import "MetaFile.h"
 #import "UploadManager.h"
 #import "UploadRef.h"
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @class SquareImageView;
 
 @protocol SquareImageDelegate <NSObject>
+
 - (void) squareImageWasSelectedForFile:(MetaFile *) fileSelected;
 - (void) squareImageWasMarkedForFile:(MetaFile *) fileSelected;
 - (void) squareImageWasUnmarkedForFile:(MetaFile *) fileSelected;
@@ -22,6 +24,17 @@
 - (void) squareImageUploadQuotaError:(MetaFile *) fileSelected;
 - (void) squareImageUploadLoginError:(MetaFile *) fileSelected;
 - (void) squareImageWasSelectedForView:(SquareImageView *) ref;
+
+@optional
+- (void) squareLocalImageWasSelectedForAsset:(ALAsset *) fileSelected;
+- (void) squareLocalImageWasMarkedForAsset:(ALAsset *) fileSelected;
+- (void) squareLocalImageWasUnmarkedForAsset:(ALAsset *) fileSelected;
+- (void) squareLocalImageUploadFinishedForAsset:(ALAsset *) fileSelected;
+- (void) squareLocalImageWasLongPressedForAsset:(ALAsset *) fileSelected;
+- (void) squareLocalImageUploadQuotaError:(ALAsset *) fileSelected;
+- (void) squareLocalImageUploadLoginError:(ALAsset *) fileSelected;
+- (void) squareLocalImageWasSelectedForView:(SquareImageView *) ref;
+
 @end
 
 @interface SquareImageView : UIView <UploadManagerDelegate, UIGestureRecognizerDelegate> {
@@ -35,6 +48,7 @@
 
 @property (nonatomic, weak) id<SquareImageDelegate> delegate;
 @property (nonatomic, strong) MetaFile *file;
+@property (nonatomic, strong) ALAsset *asset;
 @property (nonatomic, strong) UploadRef *uploadRef;
 @property (nonatomic, strong) UILongPressGestureRecognizer *longPressGesture;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
@@ -47,6 +61,9 @@
 - (id)initWithFrame:(CGRect)frame withFile:(MetaFile *) _file withSelectibleStatus:(BOOL) selectibleStatus shouldCache:(BOOL) cacheFlag manualQuality:(BOOL) manualQuality;
 - (id) initFinalWithFrame:(CGRect)frame withFile:(MetaFile *) _file withSelectibleStatus:(BOOL) selectibleStatus;
 - (id) initCachedFinalWithFrame:(CGRect)frame withFile:(MetaFile *) _file withSelectibleStatus:(BOOL) selectibleStatus;
+
+- (id) initLocalWithFrame:(CGRect)frame withAsset:(ALAsset *) _asset withSelectibleStatus:(BOOL) selectibleStatus;
+
 - (void) setNewStatus:(BOOL) newStatus;
 - (void) showProgressMask;
 - (void) manuallySelect;
@@ -57,5 +74,7 @@
 - (void) refresh:(UploadRef *)ref;
 - (void) refreshContent:(MetaFile *) fileToRefresh;
 - (void) recheckAndDrawProgress;
+
+- (void) refreshLocalContent:(ALAsset *) newAsset;
 
 @end

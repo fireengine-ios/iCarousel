@@ -42,23 +42,17 @@
         } else {
             [sqImageView refreshContent:content.fileRef];
         }
-        [sqImageView setNewStatus:selectFlag];
-        
-        if(selectedFlag) {
-            [sqImageView manuallySelect];
-        } else {
-            [sqImageView manuallyDeselect];
-        }
     } else {
-        //TODO
-        if(!imgView) {
-            imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-            imgView.contentMode = UIViewContentModeScaleAspectFill;
-            imgView.clipsToBounds = YES;
-            [self addSubview:imgView];
+        if(!sqImageView) {
+            sqImageView = [[SquareImageView alloc] initLocalWithFrame:CGRectMake(0, 0, imageWidth, imageWidth) withAsset:content.assetRef withSelectibleStatus:isSelectible];
+            sqImageView.delegate = self;
+            sqImageView.imgView.image = [UIImage imageWithCGImage:[content.assetRef aspectRatioThumbnail]];
+            [self addSubview:sqImageView];
+        } else {
+            [sqImageView refreshLocalContent:content.assetRef];
+            sqImageView.imgView.image = [UIImage imageWithCGImage:[content.assetRef aspectRatioThumbnail]];
         }
-        imgView.image = [UIImage imageWithCGImage:[content.assetRef aspectRatioThumbnail]];
-        
+
         /*
         if(!playIconView) {
             if ([[content.assetRef valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
@@ -87,6 +81,13 @@
         }
         
         maskView.hidden = !self.isSelected;
+    }
+    [sqImageView setNewStatus:selectFlag];
+    
+    if(selectedFlag) {
+        [sqImageView manuallySelect];
+    } else {
+        [sqImageView manuallyDeselect];
     }
 }
 
@@ -121,6 +122,38 @@
 
 - (void) squareImageWasSelectedForView:(SquareImageView *) ref {
     [delegate rawPhotoCollCellImageWasSelectedForView:ref];
+}
+
+- (void) squareLocalImageWasSelectedForAsset:(ALAsset *) fileSelected {
+    [delegate rawPhotoCollCellImageWasSelectedForAsset:fileSelected];
+}
+
+- (void) squareLocalImageWasMarkedForAsset:(ALAsset *) fileSelected {
+    [delegate rawPhotoCollCellImageWasMarkedForAsset:fileSelected];
+}
+
+- (void) squareLocalImageWasUnmarkedForAsset:(ALAsset *) fileSelected {
+    [delegate rawPhotoCollCellImageWasUnmarkedForAsset:fileSelected];
+}
+
+- (void) squareLocalImageUploadFinishedForAsset:(ALAsset *) fileSelected {
+    [delegate rawPhotoCollCellImageUploadFinishedForAsset:fileSelected];
+}
+
+- (void) squareLocalImageWasLongPressedForAsset:(ALAsset *) fileSelected {
+    [sqImageView setNewStatus:YES];
+    [delegate rawPhotoCollCellImageWasLongPressedForAsset:fileSelected];
+}
+
+- (void) squareLocalImageUploadQuotaError:(ALAsset *) fileSelected {
+    [delegate rawPhotoCollCellImageUploadQuotaErrorForAsset:fileSelected];
+}
+
+- (void) squareLocalImageUploadLoginError:(ALAsset *) fileSelected {
+    [delegate rawPhotoCollCellImageUploadLoginErrorForAsset:fileSelected];
+}
+
+- (void) squareLocalImageWasSelectedForView:(SquareImageView *) ref {
 }
 
 @end

@@ -49,6 +49,7 @@
 @synthesize photoDetailTipShown;
 @synthesize videofyTutorialCountChecked;
 @synthesize appRaterFlag;
+@synthesize photosSyncHeaderShownFlag;
 @synthesize loggedOutManually;
 
 - (id) init {

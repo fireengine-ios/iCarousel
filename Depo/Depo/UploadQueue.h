@@ -35,5 +35,6 @@
 - (void) manualAutoSyncIterationFinished;
 - (int) remainingCount;
 - (void) cleanAlreadyFinishedManagers;
+- (UploadManager *) activeManager;
 
 @end

@@ -14,6 +14,7 @@
 @protocol FooterActionsDelegate <NSObject>
 - (void) footerActionMenuDidSelectDelete:(FooterActionsMenuView *) menu;
 - (void) footerActionMenuDidSelectRemove:(FooterActionsMenuView *) menu;
+- (void) footerActionMenuDidSelectSync:(FooterActionsMenuView *) menu;
 - (void) footerActionMenuDidSelectMove:(FooterActionsMenuView *) menu;
 - (void) footerActionMenuDidSelectDownload:(FooterActionsMenuView *) menu;
 - (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu;
@@ -26,10 +27,12 @@
 @property (nonatomic, weak) id<FooterActionsDelegate> delegate;
 @property (nonatomic, strong) CustomButton *shareButton;
 @property (nonatomic, strong) CustomButton *moveButton;
+@property (nonatomic, strong) CustomButton *syncButton;
 @property (nonatomic, strong) CustomButton *downloadButton;
 @property (nonatomic, strong) CustomButton *deleteButton;
 @property (nonatomic,strong) CustomButton *printButton;
 @property (nonatomic,strong) CustomButton *removeButton;
+@property (nonatomic,strong) CustomButton *moreButton;
 
 - (id) initWithFrame:(CGRect)frame shouldShowShare:(BOOL) shareFlag shouldShowMove:(BOOL) moveFlag shouldShowDelete:(BOOL) deleteFlag shouldShowDownload:(BOOL)downloadFlag shouldShowPrint:(BOOL) printFlag;
 - (id) initWithFrame:(CGRect)frame shouldShowShare:(BOOL) shareFlag shouldShowMove:(BOOL) moveFlag shouldShowDelete:(BOOL) deleteFlag shouldShowPrint:(BOOL)printFlag ;
@@ -38,6 +41,8 @@
 - (id) initWithFrame:(CGRect)frame shouldShowShare:(BOOL) shareFlag shouldShowMove:(BOOL) moveFlag shouldShowDelete:(BOOL) deleteFlag shouldShowPrint:(BOOL)printFlag isMoveAlbum:(BOOL) moveRename;
 
 -(id)initForPhotosTabWithFrame:(CGRect)frame shouldShowShare:(BOOL) shareFlag shouldShowMove:(BOOL) moveFlag shouldShowDownload:(BOOL) downloadFlag shouldShowDelete:(BOOL) deleteFlag shouldShowPrint:(BOOL)printFlag isMoveAlbum:(BOOL) moveRename;
+
+-(id)initForPhotosTabWithFrame:(CGRect)frame shouldShowShare:(BOOL) shareFlag shouldShowMove:(BOOL) moveFlag shouldShowDownload:(BOOL) downloadFlag shouldShowDelete:(BOOL) deleteFlag shouldShowPrint:(BOOL)printFlag shouldShowSync:(BOOL) syncFlag isMoveAlbum:(BOOL) moveRename;
 
 - (void) hidePrintIcon;
 

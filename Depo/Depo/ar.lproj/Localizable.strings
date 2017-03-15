@@ -874,6 +874,7 @@
 "RemainingQuota" = "المتبقي";
 "UsageInfo" = "معلومات الاستخدام";
 "AutoSyncOffInfoTop" = "الصور التي في انتظار أن تتم مزامنتها";
+"AutoSyncOffInfoTopWifi"="الصور التي في انتظار أن تتم مزامنتها";
 "AutoSyncOffInfoBottom" = "قم بالإتصال واي فاي أو تشغيل النسخ الاحتياطي النقال في الإعدادات";
 "DownloadUnsupportedVideoFailMessage" = "";
 "ServerError500" = "";
@@ -881,3 +882,7 @@
 "RemainingQuotaTitle" = "";
 "RenewalDateInfo" = "";
 "DataRoamingInfo" = "";
+
+"SyncInProgressHeaderTitle"="Syncing photos...";
+"SyncFooterTitle"="Sync";
+"DeleteFooterTitle"="Delete";

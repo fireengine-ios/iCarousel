@@ -29,6 +29,8 @@
 #import "SyncManager.h"
 #import "RevisitedRawPhotoCollCell.h"
 #import "RawTypeFile.h"
+#import "GroupPhotoSectionView.h"
+#import "PhotosHeaderSyncView.h"
 
 @class RevisitedGroupedPhotoView;
 
@@ -37,6 +39,7 @@
 - (void) revisitedGroupedPhotoDidFinishLoading;
 //- (void) revisitedGroupedPhotoDidFinishDeleting;
 - (void) revisitedGroupedPhotoDidFinishDeletingOrMoving;
+- (void) revisitedGroupedPhotoDidFinishUpdate;
 //- (void) revisitedGroupedPhotoDidFinishMoving;
 - (void) revisitedGroupedPhotoShouldConfirmForDeleting;
 - (void) revisitedGroupedPhotoDidChangeToSelectState;
@@ -55,13 +58,14 @@
 - (BOOL) checkInternet;
 @end
 
-@interface RevisitedGroupedPhotoView : UIView <FooterActionsDelegate, UITextFieldDelegate, CustomConfirmDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, RevisitedPhotoCollCellDelegate, RevisitedUploadingPhotoCollCellDelegate, AutoSyncOffHeaderDelegate, SyncManagerInfoDelegate, RawPhotoCollCellDelegate> {
+@interface RevisitedGroupedPhotoView : UIView <FooterActionsDelegate, UITextFieldDelegate, CustomConfirmDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, RevisitedPhotoCollCellDelegate, RevisitedUploadingPhotoCollCellDelegate, AutoSyncOffHeaderDelegate, SyncManagerInfoDelegate, RawPhotoCollCellDelegate, GroupPhotoSectionViewDelegate, PhotosHeaderSyncViewDelegate> {
 }
 
 @property (nonatomic, weak) id<RevisitedGroupedPhotoDelegate> delegate;
 @property (nonatomic, strong) NSMutableArray *files;
 @property (nonatomic, strong) NSMutableArray *selectedFileList;
 @property (nonatomic, strong) NSMutableArray *selectedMetaFiles;
+@property (nonatomic, strong) NSMutableArray *selectedAssets;
 @property (nonatomic, strong) UIView *verticalIndicator;
 @property (nonatomic, strong) CustomLabel *sectionIndicator;
 
@@ -80,6 +84,7 @@
 @property (nonatomic, strong) NoItemView *noItemView;
 
 @property (nonatomic, strong) NSMutableArray *groups;
+@property (nonatomic, strong) NSMutableArray *selectedSectionNames;
 @property (nonatomic, strong) UICollectionView *collView;
 
 @property (nonatomic, strong) AutoSyncOffHeaderView *syncInfoHeaderView;

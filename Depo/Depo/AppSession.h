@@ -64,6 +64,7 @@
 @property (nonatomic) BOOL photoDetailTipShown;
 @property (nonatomic) BOOL videofyTutorialCountChecked;
 @property (nonatomic) BOOL appRaterFlag;
+@property (nonatomic) BOOL photosSyncHeaderShownFlag;
 
 @property (nonatomic) BOOL loggedOutManually;
 

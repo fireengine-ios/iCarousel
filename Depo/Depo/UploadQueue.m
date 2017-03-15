@@ -391,6 +391,9 @@
     NSLog(@"BYTES SENT FOR TASK: %ld", task.taskIdentifier);
     if(currentManager != nil) {
         [currentManager.delegate uploadManagerDidSendData:(long)totalBytesSent inTotal:(long)totalBytesExpectedToSend];
+        if(currentManager.headerDelegate) {
+            [currentManager.headerDelegate uploadManagerDidSendData:(long)totalBytesSent inTotal:(long)totalBytesExpectedToSend];
+        }
         // mahir: bir kere paket yollanmışsa tekrar invalid token'a düşme ihtimaline karşı flag tekrar NO'ya çekiliyor.
         if(currentManager.uploadRef.retryDoneForTokenFlag) {
             currentManager.uploadRef.retryDoneForTokenFlag = NO;
@@ -435,6 +438,9 @@
                         [SyncUtil removeLocalHash:task.taskDescription];
                     }
                     [currentManager.delegate uploadManagerLoginRequiredForAsset:currentManager.uploadRef.assetUrl];
+                    if(currentManager.headerDelegate) {
+                        [currentManager.headerDelegate uploadManagerLoginRequiredForAsset:currentManager.uploadRef.assetUrl];
+                    }
                     [self uploadManager:currentManager didFinishUploadingWithSuccess:NO];
                 }
             } else {
@@ -455,6 +461,9 @@
                 currentManager.uploadRef.hasFinishedWithError = YES;
                 [currentManager removeTemporaryFile];
                 [currentManager.delegate uploadManagerQuotaExceedForAsset:currentManager.uploadRef.assetUrl];
+                if(currentManager.headerDelegate) {
+                    [currentManager.headerDelegate uploadManagerQuotaExceedForAsset:currentManager.uploadRef.assetUrl];
+                }
                 [self uploadManager:currentManager didFinishUploadingWithSuccess:NO];
             } else {
                 //TODO: tek dosya uploadu oldugu icin upload bitiminde documents folder altindaki temp dosyalarinin hepsini temizliyoruz. Eger paralel upload sayisi 1'den fazla olursa bu kismin silinmesi gerekiyor.
@@ -470,6 +479,9 @@
                 currentManager.uploadRef.hasFinishedWithError = YES;
                 [currentManager removeTemporaryFile];
                 [currentManager.delegate uploadManagerDidFailUploadingForAsset:currentManager.uploadRef.assetUrl];
+                if(currentManager.headerDelegate) {
+                    [currentManager.headerDelegate uploadManagerDidFailUploadingForAsset:currentManager.uploadRef.assetUrl];
+                }
                 [self uploadManager:currentManager didFinishUploadingWithSuccess:NO];
             } else {
                 //TODO: tek dosya uploadu oldugu icin upload bitiminde documents folder altindaki temp dosyalarinin hepsini temizliyoruz. Eger paralel upload sayisi 1'den fazla olursa bu kismin silinmesi gerekiyor.
@@ -522,6 +534,9 @@
         currentManager.uploadRef.hasFinished = YES;
         [currentManager removeTemporaryFile];
         [currentManager.delegate uploadManagerLoginRequiredForAsset:currentManager.uploadRef.assetUrl];
+        if(currentManager.headerDelegate) {
+            [currentManager.headerDelegate uploadManagerLoginRequiredForAsset:currentManager.uploadRef.assetUrl];
+        }
         [self uploadManager:currentManager didFinishUploadingWithSuccess:NO];
     }
 }
@@ -630,6 +645,15 @@
             completionHandler();
         }];
     }
+}
+
+- (UploadManager *) activeManager {
+    for(UploadManager *row in self.uploadManagers) {
+        if([activeTaskIds containsObject:[row uniqueUrl]]) {
+            return row;
+        }
+    }
+    return nil;
 }
 
 @end

@@ -24,6 +24,7 @@
 @synthesize delegate;
 @synthesize imgView;
 @synthesize file;
+@synthesize asset;
 @synthesize uploadRef;
 @synthesize longPressGesture;
 @synthesize tapGesture;
@@ -202,6 +203,63 @@
         if(playIconView){
             playIconView.hidden = YES;
             durationLabel.hidden = YES;
+        }
+    }
+}
+
+- (id) initLocalWithFrame:(CGRect)frame withAsset:(ALAsset *)_asset withSelectibleStatus:(BOOL)selectibleStatus {
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.file = nil;
+        self.asset = _asset;
+        self.backgroundColor = [Util UIColorForHexColor:@"E3E3E3"];
+        isSelectible = selectibleStatus;
+        
+        imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+        imgView.contentMode = UIViewContentModeScaleAspectFill;
+        imgView.clipsToBounds = YES;
+        [self addSubview:imgView];
+        
+        progressSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height-6, 1, 6)];
+        progressSeparator.backgroundColor = [Util UIColorForHexColor:@"3fb0e8"];
+        progressSeparator.alpha = 0.75f;
+        [self addSubview:progressSeparator];
+
+        longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressed:)];
+        longPressGesture.minimumPressDuration = 1.0f;
+        longPressGesture.allowableMovement = 10.0f;
+        longPressGesture.delegate = self;
+        [self addGestureRecognizer:longPressGesture];
+        
+        tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapped)];
+        tapGesture.numberOfTapsRequired = 1;
+        tapGesture.delegate = self;
+        [tapGesture requireGestureRecognizerToFail:longPressGesture];
+        [self addGestureRecognizer:tapGesture];
+
+        [self refreshManagerDelegateByAsset];
+    }
+    return self;
+}
+
+- (void) refreshLocalContent:(ALAsset *) newAsset {
+    self.file = nil;
+    self.asset = newAsset;
+    [imgView setImage:nil];
+    if(playIconView){
+        playIconView.hidden = YES;
+        durationLabel.hidden = YES;
+    }
+    [self refreshManagerDelegateByAsset];
+}
+
+- (void) refreshManagerDelegateByAsset {
+    if(self.asset != nil) {
+        NSMutableArray *managersArray = [[UploadQueue sharedInstance].uploadManagers copy];
+        for(UploadManager *manager in managersArray) {
+            if(!manager.uploadRef.hasFinished && [[manager uniqueUrl] isEqualToString:[self.asset.defaultRepresentation.url absoluteString]]) {
+                manager.delegate = self;
+            }
         }
     }
 }
@@ -386,7 +444,11 @@
         if(isSelectible) {
             [self imageTapped];
         } else {
-            [delegate squareImageWasLongPressedForFile:self.file];
+            if(self.file != nil) {
+                [delegate squareImageWasLongPressedForFile:self.file];
+            } else if(self.asset != nil) {
+                [delegate squareLocalImageWasLongPressedForAsset:self.asset];
+            }
             //TODO bunu check et. 0.0'ı arttırdığımızda başka resim check'leniyor!
             [self performSelector:@selector(imageTapped) withObject:nil afterDelay:0.0f];
         }
@@ -397,14 +459,26 @@
     if(self.uploadRef != nil) {
         if(self.file == nil) {
             if(uploadErrorType == UploadErrorTypeQuota) {
-                [delegate squareImageUploadQuotaError:self.file];
+                if(self.file != nil) {
+                    [delegate squareImageUploadQuotaError:self.file];
+                } else if(self.asset != nil) {
+                    [delegate squareLocalImageUploadQuotaError:self.asset];
+                }
                 return;
             } else if(uploadErrorType == UploadErrorTypeLogin) {
-                [delegate squareImageUploadLoginError:self.file];
+                if(self.file != nil) {
+                    [delegate squareImageUploadLoginError:self.file];
+                } else if(self.asset != nil) {
+                    [delegate squareLocalImageUploadLoginError:self.asset];
+                }
                 return;
             }
         }
-        [delegate squareImageWasSelectedForView:self];
+        if(self.file != nil) {
+            [delegate squareImageWasSelectedForView:self];
+        } else if(self.asset != nil) {
+            [delegate squareLocalImageWasSelectedForView:self];
+        }
     } else {
         if(isSelectible) {
             isMarked = !isMarked;
@@ -418,6 +492,8 @@
                 }
                 if(self.file != nil) {
                     [delegate squareImageWasMarkedForFile:self.file];
+                } else if(self.asset != nil) {
+                    [delegate squareLocalImageWasMarkedForAsset:self.asset];
                 }
             } else {
                 if(maskView) {
@@ -425,10 +501,16 @@
                 }
                 if(self.file != nil) {
                     [delegate squareImageWasUnmarkedForFile:self.file];
+                } else if(self.asset != nil) {
+                    [delegate squareLocalImageWasUnmarkedForAsset:self.asset];
                 }
             }
         } else {
-            [delegate squareImageWasSelectedForFile:self.file];
+            if(self.file != nil) {
+                [delegate squareImageWasSelectedForFile:self.file];
+            } else if(self.asset != nil) {
+                [delegate squareLocalImageWasSelectedForAsset:self.asset];
+            }
         }
     }
 }
@@ -478,7 +560,11 @@
     progressSeparator.backgroundColor = [Util UIColorForHexColor:@"67d74b"];
     imgView.alpha = 1.0f;
     if([delegate respondsToSelector:@selector(squareImageUploadFinishedForFile:)]) {
-        [delegate squareImageUploadFinishedForFile:self.uploadRef.fileUuid];
+        if(self.uploadRef != nil) {
+            [delegate squareImageUploadFinishedForFile:self.uploadRef.fileUuid];
+        } else if(self.asset != nil) {
+            [delegate squareLocalImageUploadFinishedForAsset:self.asset];
+        }
     }
 }
 

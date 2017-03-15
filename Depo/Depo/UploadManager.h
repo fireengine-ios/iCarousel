@@ -34,6 +34,7 @@
 @interface UploadManager : NSObject
 
 @property (nonatomic, strong) id<UploadManagerDelegate> delegate;
+@property (nonatomic, weak) id<UploadManagerDelegate> headerDelegate;
 @property (nonatomic, strong) id<UploadManagerQueueDelegate> queueDelegate;
 
 @property (nonatomic, strong) NSURLSessionUploadTask *uploadTask;

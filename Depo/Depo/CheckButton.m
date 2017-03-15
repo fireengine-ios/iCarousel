@@ -9,6 +9,11 @@
 #import "CheckButton.h"
 #import "Util.h"
 
+@interface CheckButton() {
+    BOOL stateImgSet;
+}
+@end
+
 @implementation CheckButton
 
 @synthesize isChecked;
@@ -32,6 +37,7 @@
         } else {
             [self setImage:self.uncheckedImage forState:UIControlStateNormal];
         }
+        stateImgSet = YES;
         
         if(actionFlag) {
             [self addTarget:self action:@selector(toggle) forControlEvents:UIControlEventTouchUpInside];
@@ -55,6 +61,7 @@
         } else {
             bgImgView.image = self.uncheckedImage;
         }
+        stateImgSet = NO;
 
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(bgImgView.frame.size.width + 10, (self.frame.size.height - 16)/2, self.frame.size.width - bgImgView.frame.size.width - 10, 17)];
         titleLabel.text = title;
@@ -92,12 +99,20 @@
 
 - (void) manuallyCheck {
     isChecked = YES;
-    bgImgView.image = self.checkedImage;
+    if(stateImgSet) {
+        [self setImage:self.checkedImage forState:UIControlStateNormal];
+    } else {
+        bgImgView.image = self.checkedImage;
+    }
 }
 
 - (void) manuallyUncheck {
     isChecked = NO;
-    bgImgView.image = self.uncheckedImage;
+    if(stateImgSet) {
+        [self setImage:self.uncheckedImage forState:UIControlStateNormal];
+    } else {
+        bgImgView.image = self.uncheckedImage;
+    }
 }
 
 /*

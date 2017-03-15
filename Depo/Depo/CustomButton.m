@@ -140,18 +140,19 @@
     if (self) {
         self.backgroundColor = [UIColor clearColor];
         
-        UIImage *bgImg = [UIImage imageNamed:imageName];
-        UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake((self.frame.size.width - bgImg.size.width)/2, 0, bgImg.size.width, bgImg.size.height)];
-        bgImgView.image = bgImg;
-        [self addSubview:bgImgView];
-        
-        titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, bgImgView.frame.size.height, self.frame.size.width, font.lineHeight  + 5)];
+        titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.frame.size.height-(font.lineHeight  + 5), self.frame.size.width, font.lineHeight  + 5)];
         titleLabel.text = title;
         titleLabel.backgroundColor = [UIColor clearColor];
         titleLabel.font = font;
         titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.textColor = textColor;
         [self addSubview:titleLabel];
+
+        UIImage *bgImg = [UIImage imageNamed:imageName];
+        UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake((self.frame.size.width - bgImg.size.width)/2, ((self.frame.size.height - titleLabel.frame.size.height) - bgImg.size.height)/2, bgImg.size.width, bgImg.size.height)];
+        bgImgView.image = bgImg;
+        [self addSubview:bgImgView];
+        
     }
     return self;
 }

@@ -10,6 +10,12 @@
 #import "Util.h"
 #import "MPush.h"
 
+@interface FooterActionsMenuView() {
+    BOOL isExpanded;
+    CGRect originalFrame;
+}
+@end
+
 @implementation FooterActionsMenuView
 
 @synthesize delegate;
@@ -19,6 +25,8 @@
 @synthesize deleteButton;
 @synthesize printButton;
 @synthesize removeButton;
+@synthesize syncButton;
+@synthesize moreButton;
 
 - (id) initWithFrame:(CGRect)frame {
     return [self initWithFrame:frame shouldShowShare:YES shouldShowMove:YES shouldShowDelete:YES shouldShowPrint:NO];
@@ -146,11 +154,18 @@
 
 // Revisited Grouped Photos Controller footer view new design
 -(id)initForPhotosTabWithFrame:(CGRect)frame shouldShowShare:(BOOL) shareFlag shouldShowMove:(BOOL) moveFlag shouldShowDownload:(BOOL) downloadFlag shouldShowDelete:(BOOL) deleteFlag shouldShowPrint:(BOOL)printFlag isMoveAlbum:(BOOL) moveRename {
+    return [self initForPhotosTabWithFrame:frame shouldShowShare:shareFlag shouldShowMove:moveFlag shouldShowDownload:downloadFlag shouldShowDelete:deleteFlag shouldShowPrint:printFlag shouldShowSync:NO isMoveAlbum:moveRename];
+}
+
+-(id)initForPhotosTabWithFrame:(CGRect)frame shouldShowShare:(BOOL) shareFlag shouldShowMove:(BOOL) moveFlag shouldShowDownload:(BOOL) downloadFlag shouldShowDelete:(BOOL) deleteFlag shouldShowPrint:(BOOL)printFlag shouldShowSync:(BOOL) syncFlag isMoveAlbum:(BOOL) moveRename {
     if(self = [super initWithFrame:frame]) {
-        self.backgroundColor = [Util UIColorForHexColor:@"363e4f"];
+        originalFrame = frame;
+        
+        self.backgroundColor = [Util UIColorForHexColor:@"314249"];
+        
         UIFont *font = [UIFont fontWithName:@"TurkcellSaturaBol" size:15];
         UIColor *whiteColor = [UIColor whiteColor];
-        CGFloat height = self.frame.size.height;
+        CGFloat height = 40;
         CGFloat xOffset = 10;
         int buttonCount = 0;
         if (shareFlag) buttonCount++;
@@ -158,62 +173,152 @@
         if (downloadFlag) buttonCount++;
         if (deleteFlag) buttonCount++;
         if (printFlag) buttonCount++;
-        
+        if (syncFlag) buttonCount++;
         
         CGFloat buttonWidth = (self.frame.size.width - 20) / buttonCount;
+        if(buttonCount > 5) {
+            buttonWidth = (self.frame.size.width - 20) / 5;
+        }
+
+        BOOL secondRowAvailable = NO;
+        int placedButtonCount = 0;
+        
         if(shareFlag) {
-            shareButton = [[CustomButton alloc] initWithFrame:CGRectMake(xOffset, 0, buttonWidth, height)
-                                                withImageName:@"white_share_icon.png"
-                                               withBelowTitle:NSLocalizedString(@"ShareTitle", @"")
-                                                     withFont:font
-                                                withTextColor:whiteColor];
+            shareButton = [[CustomButton alloc] initWithFrame:CGRectMake(xOffset, (self.frame.size.height - height)/2, buttonWidth, height) withImageName:@"white_share_icon.png" withTitleBelow:NSLocalizedString(@"ShareTitle", @"") withFont:font withColor:whiteColor];
             [shareButton addTarget:self action:@selector(shareClicked) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:shareButton];
             xOffset += buttonWidth;
+            placedButtonCount ++;
+
+            UIView *verticalSeparator = [[UIView alloc] initWithFrame:CGRectMake(xOffset, 0, 2, self.frame.size.height)];
+            verticalSeparator.backgroundColor = [Util UIColorForHexColor:@"253341"];
+            [self addSubview:verticalSeparator];
         }
         
         if(moveFlag) {
-            moveButton = [[CustomButton alloc] initWithFrame:CGRectMake(xOffset, 0, buttonWidth, height)
+            moveButton = [[CustomButton alloc] initWithFrame:CGRectMake(xOffset, (self.frame.size.height - height)/2, buttonWidth, height)
                                                withImageName:@"white_move_icon.png"
-                                              withBelowTitle:NSLocalizedString(@"MoveTitle", @"")
+                                              withTitleBelow:NSLocalizedString(@"MoveTitle", @"")
                                                     withFont:font
-                                               withTextColor:whiteColor];
+                                               withColor:whiteColor];
             [moveButton addTarget:self action:@selector(moveClicked) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:moveButton];
             xOffset += buttonWidth;
+            placedButtonCount ++;
+
+            UIView *verticalSeparator = [[UIView alloc] initWithFrame:CGRectMake(xOffset, 0, 2, self.frame.size.height)];
+            verticalSeparator.backgroundColor = [Util UIColorForHexColor:@"253341"];
+            [self addSubview:verticalSeparator];
         }
         
+        if(syncFlag) {
+            syncButton = [[CustomButton alloc] initWithFrame:CGRectMake(xOffset, (self.frame.size.height - height)/2, buttonWidth, height) withImageName:@"icon_bottom_sync.png" withTitleBelow:NSLocalizedString(@"SyncFooterTitle", @"") withFont:font withColor:whiteColor];
+            [syncButton addTarget:self action:@selector(syncClicked) forControlEvents:UIControlEventTouchUpInside];
+            [self addSubview:syncButton];
+            xOffset += buttonWidth;
+            placedButtonCount ++;
+
+            UIView *verticalSeparator = [[UIView alloc] initWithFrame:CGRectMake(xOffset, 0, 2, self.frame.size.height)];
+            verticalSeparator.backgroundColor = [Util UIColorForHexColor:@"253341"];
+            [self addSubview:verticalSeparator];
+        }
+
         if(downloadFlag) {
-            downloadButton = [[CustomButton alloc] initWithFrame:CGRectMake(xOffset, 0, buttonWidth + 10, height)
-                                                   withImageName:@"icon_bottom_indir.png"
-                                                  withBelowTitle:NSLocalizedString(@"DownloadTitle", @"")
-                                                        withFont:font
-                                                   withTextColor:whiteColor];
+            downloadButton = [[CustomButton alloc] initWithFrame:CGRectMake(xOffset, (self.frame.size.height - height)/2, buttonWidth, height) withImageName:@"icon_bottom_indir.png" withTitleBelow:NSLocalizedString(@"DownloadTitle", @"") withFont:font withColor:whiteColor];
             [downloadButton addTarget:self action:@selector(downloadClicked) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:downloadButton];
             xOffset += buttonWidth + 10;
+            placedButtonCount ++;
+
+            UIView *verticalSeparator = [[UIView alloc] initWithFrame:CGRectMake(xOffset, 0, 2, self.frame.size.height)];
+            verticalSeparator.backgroundColor = [Util UIColorForHexColor:@"253341"];
+            [self addSubview:verticalSeparator];
         }
         
         if(deleteFlag) {
-            deleteButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - buttonWidth, 0, buttonWidth, 50) withCenteredImageName:@"white_delete_icon.png"];
+            CGRect buttonRect = CGRectZero;
+            CGRect separatorRect = CGRectZero;
+            if(buttonCount > 5 && placedButtonCount == 4) {
+                secondRowAvailable = YES;
+                buttonRect = CGRectMake(10, self.frame.size.height + (self.frame.size.height - height)/2, buttonWidth, height);
+                xOffset = buttonWidth + 10;
+                separatorRect = CGRectMake(xOffset, self.frame.size.height, 2, self.frame.size.height);
+            } else {
+                buttonRect = CGRectMake(xOffset, (self.frame.size.height - height)/2, buttonWidth, height);
+                xOffset += buttonWidth + 10;
+                separatorRect = CGRectMake(xOffset, 0, 2, self.frame.size.height);
+            }
+            deleteButton = [[CustomButton alloc] initWithFrame:buttonRect withImageName:@"white_delete_icon.png" withTitleBelow:NSLocalizedString(@"DeleteFooterTitle", @"") withFont:font withColor:whiteColor];
             [deleteButton addTarget:self action:@selector(deleteClicked) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:deleteButton];
+            placedButtonCount ++;
+
+            UIView *verticalSeparator = [[UIView alloc] initWithFrame:separatorRect];
+            verticalSeparator.backgroundColor = [Util UIColorForHexColor:@"253341"];
+            [self addSubview:verticalSeparator];
         }
         if (printFlag) {
-            printButton = [[CustomButton alloc] initWithFrame:CGRectMake(xOffset, 0, buttonWidth, height)
-                                                withImageName:@"white_print_icon.png"
-                                               withBelowTitle:NSLocalizedString(@"PrintTitle", @"")
-                                                     withFont:font
-                                                withTextColor:whiteColor];
+            CGRect buttonRect = CGRectZero;
+            CGRect separatorRect = CGRectZero;
+            if(secondRowAvailable) {
+                buttonRect = CGRectMake(xOffset, self.frame.size.height + (self.frame.size.height - height)/2, buttonWidth, height);
+                xOffset += buttonWidth;
+                separatorRect = CGRectMake(xOffset, self.frame.size.height, 2, self.frame.size.height);
+            } else if(buttonCount > 5 && placedButtonCount >= 4) {
+                secondRowAvailable = YES;
+                buttonRect = CGRectMake(10, self.frame.size.height + (self.frame.size.height - height)/2, buttonWidth, height);
+                xOffset = buttonWidth + 10;
+                separatorRect = CGRectMake(xOffset, self.frame.size.height, 2, self.frame.size.height);
+            } else {
+                buttonRect = CGRectMake(xOffset, (self.frame.size.height - height)/2, buttonWidth, height);
+                xOffset += buttonWidth + 10;
+                separatorRect = CGRectMake(xOffset, 0, 2, self.frame.size.height);
+            }
+            printButton = [[CustomButton alloc] initWithFrame:buttonRect withImageName:@"white_print_icon.png" withTitleBelow:NSLocalizedString(@"PrintTitle", @"") withFont:font withColor:whiteColor];
             [printButton addTarget:self action:@selector(printClicked) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:printButton];
             xOffset += buttonWidth;
+            placedButtonCount ++;
+
+            UIView *verticalSeparator = [[UIView alloc] initWithFrame:separatorRect];
+            verticalSeparator.backgroundColor = [Util UIColorForHexColor:@"253341"];
+            [self addSubview:verticalSeparator];
         }
+        
+        if(secondRowAvailable) {
+            moreButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - buttonWidth, (self.frame.size.height - height)/2, buttonWidth, height) withImageName:@"white_left_arrow.png"];
+            [moreButton addTarget:self action:@selector(moreClicked) forControlEvents:UIControlEventTouchUpInside];
+            moreButton.transform = CGAffineTransformMakeRotation(-90 * M_PI/180);
+            [self addSubview:moreButton];
+        }
+        
+        UIView *horizontalSeparator = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height-1, self.frame.size.width, 2)];
+        horizontalSeparator.backgroundColor = [Util UIColorForHexColor:@"253341"];
+        [self addSubview:horizontalSeparator];
         
     }
     return self;
 }
 
+- (void) moreClicked {
+    [UIView animateWithDuration:0.4 animations:^{
+        if(isExpanded) {
+            self.frame = originalFrame;
+            moreButton.transform = CGAffineTransformMakeRotation(-90 * M_PI/180);
+        } else {
+            self.frame = CGRectMake(originalFrame.origin.x, originalFrame.origin.y - originalFrame.size.height, originalFrame.size.width, originalFrame.size.height*2);
+            moreButton.transform = CGAffineTransformIdentity;
+        }
+    }];
+    isExpanded = !isExpanded;
+}
+
+- (void) syncClicked {
+    [MPush hitTag:@"sync_button_clicked"];
+    [MPush hitEvent:@"sync_button_clicked"];
+    
+    [delegate footerActionMenuDidSelectSync:self];
+}
 
 - (void) shareClicked {
     [MPush hitTag:@"share_button_clicked"];

@@ -7,9 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CheckButton.h"
 
-@interface GroupPhotoSectionView : UICollectionReusableView
+@protocol GroupPhotoSectionViewDelegate <NSObject>
+- (void) groupPhotoSectionViewCheckboxChecked:(NSString *) titleVal;
+- (void) groupPhotoSectionViewCheckboxUnchecked:(NSString *) titleVal;
+@end
 
-- (void) loadSectionWithTitle:(NSString *) titleVal;
+@interface GroupPhotoSectionView : UICollectionReusableView <CheckButtonDelegate>
+
+@property (nonatomic, weak) id<GroupPhotoSectionViewDelegate> checkDelegate;
+
+- (void) loadSectionWithTitle:(NSString *) titleVal isSelectible:(BOOL) selectibleFlag isSelected:(BOOL) selectedFlag;
 
 @end

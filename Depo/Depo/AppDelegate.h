@@ -61,5 +61,6 @@
 - (void) cancelRequestsWithTags:(NSArray *) tags;
 - (BOOL) isTurkcell;
 - (void) initAudioSession;
+- (void) triggerSyncSettings;
 
 @end

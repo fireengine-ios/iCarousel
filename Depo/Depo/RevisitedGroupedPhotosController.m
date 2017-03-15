@@ -256,6 +256,21 @@
     [albumView pullData];
 }
 
+- (void) revisitedGroupedPhotoDidFinishUpdate {
+    [segmentView enableNavigate];
+    
+    self.title = NSLocalizedString(@"PhotosTitle", @"");
+    self.navigationItem.leftBarButtonItem = previousButtonRef;
+    
+    [albumView setToUnselectiblePriorToRefresh];
+    [groupView setToUnselectiblePriorToRefresh];
+    
+    [APPDELEGATE.base immediateShowAddButton];
+    
+    [groupView pullData];
+    [albumView pullData];
+}
+
 //- (void) revisitedGroupedPhotoDidFinishMoving {
 //    [self revisitedAlbumListDidFinishDeleting];
 //    [segmentView enableNavigate];

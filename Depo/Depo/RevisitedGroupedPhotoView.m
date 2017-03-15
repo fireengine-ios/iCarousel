@@ -16,6 +16,11 @@
 #import "ReachabilityManager.h"
 #import "Reachability.h"
 #import "GroupPhotoSectionView.h"
+#import "UploadQueue.h"
+#import <CommonCrypto/CommonDigest.h>
+#import "ALAssetRepresentation+MD5.h"
+#import <MobileCoreServices/MobileCoreServices.h>
+#import "SyncUtil.h"
 #import "UIImageView+WebCache.h"
 
 #define GROUP_PACKAGE_SIZE (IS_IPAD ? 60 : IS_IPHONE_6P_OR_HIGHER ? 60 : 48)
@@ -43,6 +48,8 @@
     
     NSArray *localAssets;
     NSDate *lastCheckedDate;
+    
+    PhotosHeaderSyncView *syncView;
 }
 @end
 
@@ -52,6 +59,7 @@
 @synthesize files;
 @synthesize selectedFileList;
 @synthesize selectedMetaFiles;
+@synthesize selectedAssets;
 @synthesize refreshControl;
 @synthesize readDao;
 @synthesize deleteDao;
@@ -63,6 +71,7 @@
 @synthesize noItemView;
 @synthesize verticalIndicator;
 @synthesize sectionIndicator;
+@synthesize selectedSectionNames;
 
 @synthesize groups;
 @synthesize collView;
@@ -72,6 +81,8 @@
 - (id) initWithFrame:(CGRect)frame {
     if(self = [super initWithFrame:frame]) {
         self.backgroundColor = [Util UIColorForHexColor:@"FFFFFF"];
+        
+        selectedSectionNames = [[NSMutableArray alloc] init];
         
         readDao = [[ElasticSearchDao alloc] init];
         readDao.delegate = self;
@@ -106,20 +117,48 @@
         files = [[NSMutableArray alloc] init];
         selectedFileList = [[NSMutableArray alloc] init];
         selectedMetaFiles = [[NSMutableArray alloc] init];
+        selectedAssets = [[NSMutableArray alloc] init];
         
-        BOOL isSyncHeaderVisible = YES;
+        BOOL isSyncHeaderVisible = NO;
+        BOOL isSyncProgressVisible = NO;
+        BOOL waitingForWifi = NO;
+        if(!APPDELEGATE.session.photosSyncHeaderShownFlag) {
+            EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
+            if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
+                ConnectionOption connectionOption = (ConnectionOption)[CacheUtil readCachedSettingSyncingConnectionType];
+                if([ReachabilityManager isReachableViaWWAN]) {
+                    if(connectionOption == ConnectionOptionWifi) {
+                        isSyncHeaderVisible = YES;
+                        waitingForWifi = YES;
+                    }
+                }
+            } else {
+                isSyncHeaderVisible = YES;
+            }
+        }
         
         if(isSyncHeaderVisible) {
-            syncInfoHeaderView = [[AutoSyncOffHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 50)];
+            syncInfoHeaderView = [[AutoSyncOffHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 50) withWifiFlag:waitingForWifi];
             syncInfoHeaderView.delegate = self;
             [self addSubview:syncInfoHeaderView];
+        } else {
+            UploadManager *activeManRef = [[UploadQueue sharedInstance] activeManager];
+            if(activeManRef != nil) {
+                syncView = [[PhotosHeaderSyncView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 50)];
+                activeManRef.headerDelegate = syncView;
+                syncView.delegate = self;
+                [syncView loadAsset:activeManRef.uploadRef.assetUrl];
+                [self addSubview:syncView];
+                
+                isSyncProgressVisible = YES;
+            }
         }
         
         yIndex = 0;
         
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         
-        collView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, isSyncHeaderVisible ? 50 : 0, self.frame.size.width, self.frame.size.height - (isSyncHeaderVisible ? 50 : 0)) collectionViewLayout:layout];
+        collView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, isSyncHeaderVisible || isSyncProgressVisible ? 50 : 0, self.frame.size.width, self.frame.size.height - (isSyncHeaderVisible || isSyncProgressVisible ? 50 : 0)) collectionViewLayout:layout];
         collView.dataSource = self;
         collView.delegate = self;
         collView.showsVerticalScrollIndicator = NO;
@@ -152,9 +191,9 @@
         tapGestureRecognizer.enabled = YES;
         [searchContainer addGestureRecognizer:tapGestureRecognizer];
         
-//        refreshControl = [[UIRefreshControl alloc] init];
-//        [refreshControl addTarget:self action:@selector(pullData) forControlEvents:UIControlEventValueChanged];
-//        [collView addSubview:refreshControl];
+        //        refreshControl = [[UIRefreshControl alloc] init];
+        //        [refreshControl addTarget:self action:@selector(pullData) forControlEvents:UIControlEventValueChanged];
+        //        [collView addSubview:refreshControl];
         [self createRefreshControl];
         
         progress = [[MBProgressHUD alloc] initWithFrame:self.frame];
@@ -181,7 +220,11 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(autoQueueFinished) name:AUTO_SYNC_QUEUE_FINISHED_NOTIFICATION object:nil];
         
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(autoQueueChanged) name:AUTO_SYNC_QUEUE_CHANGED_NOTIFICATION object:nil];
+        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCollectionViewData) name:UIApplicationDidBecomeActiveNotification object:nil];
+        
+        
     }
     return self;
 }
@@ -210,17 +253,16 @@
     if([delegate checkInternet]) {
         listOffset = 0;
         groupSequence = 0;
+        lastCheckedDate = nil;
         
         [groups removeAllObjects];
         [files removeAllObjects];
         
-        [self.collView performSelectorOnMainThread:@selector(reloadData)
-                                        withObject:nil
-                                     waitUntilDone:NO];
+        [self.collView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
         
         yIndex = 60;
         
-        [self addOngoingGroup];
+        //        [self addOngoingGroup];
         
         packageSize = GROUP_PACKAGE_SIZE;
         if([[Util deviceType] isEqualToString:@"iPhone 6 Plus"] || [[Util deviceType] isEqualToString:@"iPhone 6S Plus"]) {
@@ -305,6 +347,7 @@
         [self removeRefreshControl];
         [selectedFileList removeAllObjects];
         [selectedMetaFiles removeAllObjects];
+        [selectedAssets removeAllObjects];
         
         [collView reloadData];
     }
@@ -314,7 +357,9 @@
     isSelectible = NO;
     [self createRefreshControl];
     [selectedFileList removeAllObjects];
+    [selectedSectionNames removeAllObjects];
     [selectedMetaFiles removeAllObjects];
+    [selectedAssets removeAllObjects];
     
     if(imgFooterActionMenu) {
         [imgFooterActionMenu removeFromSuperview];
@@ -385,7 +430,7 @@
     for (FileInfoGroup *fileInfoGroup in self.groups) {
         for (RawTypeFile *fileType in fileInfoGroup.fileInfo) {
             
-//            [SDWebImageManager sharedManager].imageDownloader.executionOrder = SDWebImageDownloaderLIFOExecutionOrder;
+            //            [SDWebImageManager sharedManager].imageDownloader.executionOrder = SDWebImageDownloaderLIFOExecutionOrder;
             
             if ([fileType isKindOfClass:[RawTypeFile class]]) {
                 [[SDWebImageManager sharedManager] loadImageWithURL:
@@ -397,41 +442,41 @@
                      
                  }];
             }
-//            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:
-//                                            [NSURL URLWithString:fileType.fileRef.detail.thumbMediumUrl]];
-//            [request setHTTPShouldHandleCookies:NO];
-//            [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
-//            if(APPDELEGATE.session.authToken) {
-//                [request addValue:APPDELEGATE.session.authToken forHTTPHeaderField:@"X-Auth-Token"];
-//            }
-//            
-//            UIImage *cachedImage = [[UIImageView af_sharedImageCache] cachedImageForRequest:request];
-//            if (cachedImage) {
-//            } else {
-//                @autoreleasepool {
-//                    
-//                    AFImageRequestOperation *requestOperation = [[AFImageRequestOperation alloc] initWithRequest:request];
-//                    [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-//                        [[UIImageView af_sharedImageCache] cacheImage:responseObject forRequest:request];
-//                    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//                    }];
-//                    
-//                    
-//                    [[UIImageView af_sharedImageRequestOperationQueue] addOperation:requestOperation];
-//                }
-//            }
+            //            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:
+            //                                            [NSURL URLWithString:fileType.fileRef.detail.thumbMediumUrl]];
+            //            [request setHTTPShouldHandleCookies:NO];
+            //            [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
+            //            if(APPDELEGATE.session.authToken) {
+            //                [request addValue:APPDELEGATE.session.authToken forHTTPHeaderField:@"X-Auth-Token"];
+            //            }
+            //
+            //            UIImage *cachedImage = [[UIImageView af_sharedImageCache] cachedImageForRequest:request];
+            //            if (cachedImage) {
+            //            } else {
+            //                @autoreleasepool {
+            //
+            //                    AFImageRequestOperation *requestOperation = [[AFImageRequestOperation alloc] initWithRequest:request];
+            //                    [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+            //                        [[UIImageView af_sharedImageCache] cacheImage:responseObject forRequest:request];
+            //                    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //                    }];
+            //
+            //
+            //                    [[UIImageView af_sharedImageRequestOperationQueue] addOperation:requestOperation];
+            //                }
+            //            }
         }
     }
     
     /*
-    if ([files count] == 0 && !anyOngoingPresent) {
-        if (noItemView == nil) {
-            noItemView = [[NoItemView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, collView.frame.size.height) imageName:@"no_photo_icon" titleText:NSLocalizedString(@"EmptyPhotosVideosTitle", @"") descriptionText:NSLocalizedString(@"EmptyPhotosVideosDescription", @"")];
-            [self addSubview:noItemView];
-        }
-    } else if (noItemView != nil) {
-        [noItemView removeFromSuperview];
-    }
+     if ([files count] == 0 && !anyOngoingPresent) {
+     if (noItemView == nil) {
+     noItemView = [[NoItemView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, collView.frame.size.height) imageName:@"no_photo_icon" titleText:NSLocalizedString(@"EmptyPhotosVideosTitle", @"") descriptionText:NSLocalizedString(@"EmptyPhotosVideosDescription", @"")];
+     [self addSubview:noItemView];
+     }
+     } else if (noItemView != nil) {
+     [noItemView removeFromSuperview];
+     }
      */
     
     //TODO yukaridaki comment'li logic'i oturttuktan sonra bu if'i silebilirsin
@@ -441,11 +486,9 @@
     
     if(!initialLoadDone) {
         initialLoadDone = YES;
-        [SyncManager sharedInstance].infoDelegate = self;
-        [[SyncManager sharedInstance] listOfUnsyncedImages];
-    } else {
-        [self addUnsyncedFiles];
     }
+    [SyncManager sharedInstance].infoDelegate = self;
+    [[SyncManager sharedInstance] listOfUnsyncedImages];
 }
 
 - (void) readFailCallback:(NSString *) errorMessage {
@@ -490,7 +533,7 @@
                 IGLog(log);
             }
         }
-
+        
     }
 }
 
@@ -590,7 +633,7 @@
     if(imgFooterActionMenu) {
         imgFooterActionMenu.hidden = NO;
     } else {
-        imgFooterActionMenu = [[FooterActionsMenuView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 70, self.frame.size.width, 60) shouldShowShare:YES shouldShowMove:YES shouldShowDelete:YES shouldShowDownload:YES shouldShowPrint:YES];
+        imgFooterActionMenu = [[FooterActionsMenuView alloc] initForPhotosTabWithFrame:CGRectMake(0, self.frame.size.height - 70, self.frame.size.width, 60) shouldShowShare:YES shouldShowMove:YES shouldShowDownload:YES shouldShowDelete:YES shouldShowPrint:YES shouldShowSync:YES isMoveAlbum:YES];
         /* imgFooterActionMenu = [[FooterActionsMenuView alloc] initForPhotosTabWithFrame:frame
          shouldShowShare:YES
          shouldShowMove:YES
@@ -710,6 +753,61 @@
     }
 }
 
+- (void) footerActionMenuDidSelectSync:(FooterActionsMenuView *) menu {
+    if([selectedAssets count] > 0) {
+        for(ALAsset *row in selectedAssets) {
+            NSString *mimeType = (__bridge_transfer NSString*)UTTypeCopyPreferredTagWithClass
+            ((__bridge CFStringRef)[row.defaultRepresentation UTI], kUTTagClassMIMEType);
+            
+            UploadRef *ref = [[UploadRef alloc] init];
+            ref.fileName = row.defaultRepresentation.filename;
+            ref.filePath = [row.defaultRepresentation.url absoluteString];
+            ref.mimeType = mimeType;
+            if ([[row valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
+                ref.contentType = ContentTypeVideo;
+            } else {
+                ref.contentType = ContentTypePhoto;
+            }
+            NSDictionary *metadataDict = [row.defaultRepresentation metadata];
+            if(metadataDict) {
+                NSDictionary *tiffDict = [metadataDict objectForKey:@"{TIFF}"];
+                if(tiffDict) {
+                    NSString *softwareVal = [tiffDict objectForKey:@"Software"];
+                    if(softwareVal) {
+                        if([SPECIAL_LOCAL_ALBUM_NAMES containsObject:softwareVal]) {
+                            ref.referenceFolderName = softwareVal;
+                        }
+                    }
+                }
+            }
+            ref.ownerPage = UploadStarterPagePhotos;
+            ref.folderUuid = APPDELEGATE.session.user.mobileUploadFolderUuid;
+            
+            UploadManager *manager = [[UploadManager alloc] initWithUploadInfo:ref];
+            [manager configureUploadAsset:ref.filePath atFolder:nil];
+            [[UploadQueue sharedInstance] addNewUploadTask:manager];
+        }
+        
+        if(syncView == nil) {
+            UploadManager *activeManRef = [[UploadQueue sharedInstance] activeManager];
+            if(activeManRef != nil) {
+                syncView = [[PhotosHeaderSyncView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 50)];
+                activeManRef.headerDelegate = syncView;
+                syncView.delegate = self;
+                [syncView loadAsset:activeManRef.uploadRef.assetUrl];
+                [self addSubview:syncView];
+                
+                if(collView.frame.origin.y == 0) {
+                    [UIView animateWithDuration:0.4 animations:^{
+                        collView.frame = CGRectMake(collView.frame.origin.x, collView.frame.origin.y + 50, collView.frame.size.width, collView.frame.size.height - 50);
+                    }];
+                }
+            }
+        }
+        [delegate revisitedGroupedPhotoDidFinishUpdate];
+    }
+}
+
 - (void) footerActionMenuDidSelectMove:(FooterActionsMenuView *) menu {
     [delegate revisitedGroupedPhotoShowPhotoAlbums:self];
     //[APPDELEGATE.base showPhotoAlbums];
@@ -769,14 +867,14 @@
 }
 
 - (void) cancelRequests {
-//    [readDao cancelRequest];
-//    readDao = nil;
-//    
-//    [deleteDao cancelRequest];
-//    deleteDao = nil;
-//    
-//    [albumAddPhotosDao cancelRequest];
-//    albumAddPhotosDao = nil;
+    //    [readDao cancelRequest];
+    //    readDao = nil;
+    //
+    //    [deleteDao cancelRequest];
+    //    deleteDao = nil;
+    //
+    //    [albumAddPhotosDao cancelRequest];
+    //    albumAddPhotosDao = nil;
 }
 
 - (void) neutralizeSearchBar {
@@ -797,7 +895,16 @@
     IGLog(@"At RevisitedGroupedPhotoView autoQueueFinished");
     if([[UploadQueue sharedInstance] remainingCount] == 0) {
         IGLog(@"At RevisitedGroupedPhotoView autoQueueFinished pullData will be called");
-        [self pullData];
+        
+        if(syncView) {
+            [syncView removeFromSuperview];
+        }
+        if(collView.frame.origin.y > 0) {
+            [UIView animateWithDuration:0.4 animations:^{
+                collView.frame = CGRectMake(collView.frame.origin.x, collView.frame.origin.y - 50, collView.frame.size.width, collView.frame.size.height + 50);
+            }];
+        }
+        [delegate revisitedGroupedPhotoDidFinishUpdate];
     }
 }
 
@@ -823,7 +930,7 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-//    UICollectionViewCell * c = [cv dequeueReusableCellWithReuseIdentifier:@"COLL_PHOTO_CELL" forIndexPath:indexPath];
+    //    UICollectionViewCell * c = [cv dequeueReusableCellWithReuseIdentifier:@"COLL_PHOTO_CELL" forIndexPath:indexPath];
     if(self.groups.count > indexPath.section) {
         FileInfoGroup *sectionGroup = [self.groups objectAtIndex:indexPath.section];
         if(sectionGroup.fileInfo.count > indexPath.row) {
@@ -837,7 +944,7 @@
                     cell = [cv dequeueReusableCellWithReuseIdentifier:@"COLL_PHOTO_CELL_CLIENT" forIndexPath:indexPath];
                 }
                 cell.delegate = self;
-                [cell loadContent:castedRow isSelectible:self.isSelectible withImageWidth:imageWidth withGroupKey:sectionGroup.groupKey isSelected:(castedRow.rawType == RawFileTypeDepo ? [selectedFileList containsObject:castedRow.fileRef.uuid] : NO)];
+                [cell loadContent:castedRow isSelectible:self.isSelectible withImageWidth:imageWidth withGroupKey:sectionGroup.groupKey isSelected:(castedRow.rawType == RawFileTypeDepo ? [selectedFileList containsObject:castedRow.fileRef.uuid] : [selectedFileList containsObject:[castedRow.assetRef.defaultRepresentation.url absoluteString]])];
                 return cell;
             } else {
                 UploadRef *castedRow = (UploadRef *) rowItem;
@@ -889,8 +996,8 @@
     if(kind == UICollectionElementKindSectionHeader && initialLoadDone) {
         if(self.groups.count > theIndexPath.section) {
             FileInfoGroup *sectionGroup = [self.groups objectAtIndex:theIndexPath.section];
-            
-            [collFooterView loadSectionWithTitle:sectionGroup.customTitle];
+            collFooterView.checkDelegate = self;
+            [collFooterView loadSectionWithTitle:sectionGroup.customTitle isSelectible:isSelectible isSelected:[selectedSectionNames containsObject:sectionGroup.customTitle]];
             return collFooterView;
         }
         collFooterView.frame = CGRectZero;
@@ -930,9 +1037,11 @@
             collView.frame = CGRectMake(collView.frame.origin.x, collView.frame.origin.y - 50, collView.frame.size.width, collView.frame.size.height + 50);
         }];
     }
+    APPDELEGATE.session.photosSyncHeaderShownFlag = YES;
 }
 
 - (void) autoSyncOffHeaderViewSettingsClicked {
+    [APPDELEGATE triggerSyncSettings];
 }
 
 - (void) syncManagerUnsyncedImageList:(NSArray *)unsyncedAssets {
@@ -998,11 +1107,11 @@
             }
         }
     }
-
+    
     if(lastFile != nil) {
         lastCheckedDate = lastFile.lastModified;
     }
-
+    
     NSArray *tempGroups = [tempDict allValues];
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"sequence" ascending:YES];
     NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
@@ -1031,20 +1140,20 @@
 }
 
 - (void) rawPhotoCollCellImageWasSelectedForFile:(MetaFile *) fileSelected forGroupWithKey:(NSString *) groupKey {
-//    NSMutableArray *listToPass = [[NSMutableArray alloc] init];
-//    [listToPass addObject:fileSelected];
-//    
-//    for(FileInfoGroup *row in self.groups) {
-//        if([row.groupKey isEqualToString:groupKey]) {
-//            for(id obj in row.fileInfo) {
-//                if([obj isKindOfClass:[RawTypeFile class]]) {
-//                    RawTypeFile *castedObj = (RawTypeFile *) obj;
-//                    [listToPass addObject:castedObj.fileRef];
-//                }
-//            }
-//        }
-//    }
-//    [delegate revisitedGroupedPhotoDidSelectFile:fileSelected withList:listToPass];
+    //    NSMutableArray *listToPass = [[NSMutableArray alloc] init];
+    //    [listToPass addObject:fileSelected];
+    //
+    //    for(FileInfoGroup *row in self.groups) {
+    //        if([row.groupKey isEqualToString:groupKey]) {
+    //            for(id obj in row.fileInfo) {
+    //                if([obj isKindOfClass:[RawTypeFile class]]) {
+    //                    RawTypeFile *castedObj = (RawTypeFile *) obj;
+    //                    [listToPass addObject:castedObj.fileRef];
+    //                }
+    //            }
+    //        }
+    //    }
+    //    [delegate revisitedGroupedPhotoDidSelectFile:fileSelected withList:listToPass];
     // send with all files, listoffset and package size
     [delegate revisitedGroupedPhotoDidSelectFile:fileSelected withList:self.files withListOffset:listOffset withPackageSize:packageSize];
 }
@@ -1117,6 +1226,138 @@
 }
 
 - (void) rawPhotoCollCellAssetDidBecomeDeselected:(ALAsset *) deselectedAsset {
+}
+
+- (void) rawPhotoCollCellImageWasSelectedForAsset:(ALAsset *) fileSelected {
+}
+
+- (void) rawPhotoCollCellImageWasMarkedForAsset:(ALAsset *) fileSelected {
+    NSString *assetUrl = [fileSelected.defaultRepresentation.url absoluteString];
+    if(![selectedFileList containsObject:assetUrl]) {
+        [selectedFileList addObject:assetUrl];
+        [selectedAssets addObject:fileSelected];
+    }
+    
+    if([selectedFileList count] > 0) {
+        [self showImgFooterMenu];
+        [delegate revisitedGroupedPhotoChangeTitleTo:[NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]]];
+    } else {
+        [self hideImgFooterMenu];
+        [delegate revisitedGroupedPhotoChangeTitleTo:NSLocalizedString(@"SelectFilesTitle", @"")];
+    }
+    
+    photoCount++;
+    [imgFooterActionMenu showPrintIcon];
+}
+
+- (void) rawPhotoCollCellImageWasUnmarkedForAsset:(ALAsset *) fileSelected {
+    NSString *assetUrl = [fileSelected.defaultRepresentation.url absoluteString];
+    if([selectedFileList containsObject:assetUrl]) {
+        [selectedFileList removeObject:assetUrl];
+        [selectedAssets removeObject:fileSelected];
+    }
+    if([selectedFileList count] > 0) {
+        [self showImgFooterMenu];
+        [delegate revisitedGroupedPhotoChangeTitleTo:[NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]]];
+    } else {
+        [self hideImgFooterMenu];
+        [delegate revisitedGroupedPhotoChangeTitleTo:NSLocalizedString(@"SelectFilesTitle", @"")];
+    }
+    
+    photoCount--;
+    
+    if (photoCount == 0) {
+        [imgFooterActionMenu hidePrintIcon];
+    }
+}
+
+- (void) rawPhotoCollCellImageUploadFinishedForAsset:(ALAsset *) fileSelected {
+}
+
+- (void) rawPhotoCollCellImageWasLongPressedForAsset:(ALAsset *) fileSelected {
+    [self setToSelectible];
+    [delegate revisitedGroupedPhotoDidChangeToSelectState];
+}
+
+- (void) rawPhotoCollCellImageUploadQuotaErrorForAsset:(ALAsset *) fileSelected {
+}
+
+- (void) rawPhotoCollCellImageUploadLoginErrorForAsset:(ALAsset *) fileSelected {
+}
+
+- (void) groupPhotoSectionViewCheckboxChecked:(NSString *) titleVal {
+    if(![selectedSectionNames containsObject:titleVal]) {
+        [selectedSectionNames addObject:titleVal];
+        
+        NSArray *selectedGroupList = nil;
+        int index = 0;
+        for(FileInfoGroup *row in self.groups) {
+            if([row.customTitle isEqualToString:titleVal]) {
+                selectedGroupList = row.fileInfo;
+                break;
+            }
+            index ++;
+        }
+        if(selectedGroupList != nil) {
+            for(id rowItem in selectedGroupList) {
+                if([rowItem isKindOfClass:[RawTypeFile class]]) {
+                    RawTypeFile *castedRow = (RawTypeFile *) rowItem;
+                    if (castedRow.rawType == RawFileTypeDepo) {
+                        if(![selectedFileList containsObject:castedRow.fileRef.uuid]) {
+                            [selectedFileList addObject:castedRow.fileRef.uuid];
+                            [selectedMetaFiles addObject:castedRow.fileRef];
+                        }
+                    } else {
+                        NSString *assetUrl = [castedRow.assetRef.defaultRepresentation.url absoluteString];
+                        if(![selectedFileList containsObject:assetUrl]) {
+                            [selectedFileList addObject:assetUrl];
+                            [selectedAssets addObject:castedRow.assetRef];
+                        }
+                    }
+                }
+            }
+            if([selectedFileList count] > 0) {
+                [self showImgFooterMenu];
+                [delegate revisitedGroupedPhotoChangeTitleTo:[NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]]];
+            } else {
+                [self hideImgFooterMenu];
+                [delegate revisitedGroupedPhotoChangeTitleTo:NSLocalizedString(@"SelectFilesTitle", @"")];
+            }
+        }
+        [self.collView reloadSections:[NSIndexSet indexSetWithIndex:index]];
+    }
+}
+
+- (void) groupPhotoSectionViewCheckboxUnchecked:(NSString *) titleVal {
+    if([selectedSectionNames containsObject:titleVal]) {
+        [selectedSectionNames removeObject:titleVal];
+    }
+}
+
+- (void) photosHeaderSyncFinishedForAssetUrl:(NSString *)urlVal {
+    NSString *localHash = [SyncUtil md5StringOfString:urlVal];
+    [SyncUtil cacheSyncHashLocally:localHash];
+}
+
+- (void) autoQueueChanged {
+    if(syncView) {
+        [syncView removeFromSuperview];
+    }
+    
+    UploadManager *activeManRef = [[UploadQueue sharedInstance] activeManager];
+    if(activeManRef != nil) {
+        syncView = [[PhotosHeaderSyncView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 50)];
+        activeManRef.headerDelegate = syncView;
+        syncView.delegate = self;
+        [syncView loadAsset:activeManRef.uploadRef.assetUrl];
+        [self addSubview:syncView];
+    } else {
+        if(collView.frame.origin.y > 0) {
+            [UIView animateWithDuration:0.4 animations:^{
+                collView.frame = CGRectMake(collView.frame.origin.x, collView.frame.origin.y - 50, collView.frame.size.width, collView.frame.size.height + 50);
+            }];
+        }
+    }
 }
 
 @end
