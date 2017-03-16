@@ -223,10 +223,10 @@
             [self addSubview:verticalSeparator];
         }
 
-        if(downloadFlag) {
-            downloadButton = [[CustomButton alloc] initWithFrame:CGRectMake(xOffset, (self.frame.size.height - height)/2, buttonWidth, height) withImageName:@"icon_bottom_indir.png" withTitleBelow:NSLocalizedString(@"DownloadTitle", @"") withFont:font withColor:whiteColor];
-            [downloadButton addTarget:self action:@selector(downloadClicked) forControlEvents:UIControlEventTouchUpInside];
-            [self addSubview:downloadButton];
+        if(deleteFlag) {
+            deleteButton = [[CustomButton alloc] initWithFrame:CGRectMake(xOffset, (self.frame.size.height - height)/2, buttonWidth, height) withImageName:@"white_delete_icon.png" withTitleBelow:NSLocalizedString(@"DeleteFooterTitle", @"") withFont:font withColor:whiteColor];
+            [deleteButton addTarget:self action:@selector(deleteClicked) forControlEvents:UIControlEventTouchUpInside];
+            [self addSubview:deleteButton];
             xOffset += buttonWidth + 10;
             placedButtonCount ++;
 
@@ -235,7 +235,7 @@
             [self addSubview:verticalSeparator];
         }
         
-        if(deleteFlag) {
+        if(printFlag) {
             CGRect buttonRect = CGRectZero;
             CGRect separatorRect = CGRectZero;
             if(buttonCount > 5 && placedButtonCount == 4) {
@@ -248,16 +248,16 @@
                 xOffset += buttonWidth + 10;
                 separatorRect = CGRectMake(xOffset, 0, 2, self.frame.size.height);
             }
-            deleteButton = [[CustomButton alloc] initWithFrame:buttonRect withImageName:@"white_delete_icon.png" withTitleBelow:NSLocalizedString(@"DeleteFooterTitle", @"") withFont:font withColor:whiteColor];
-            [deleteButton addTarget:self action:@selector(deleteClicked) forControlEvents:UIControlEventTouchUpInside];
-            [self addSubview:deleteButton];
+            printButton = [[CustomButton alloc] initWithFrame:buttonRect withImageName:@"white_print_icon.png" withTitleBelow:NSLocalizedString(@"PrintTitle", @"") withFont:font withColor:whiteColor];
+            [printButton addTarget:self action:@selector(printClicked) forControlEvents:UIControlEventTouchUpInside];
+            [self addSubview:printButton];
             placedButtonCount ++;
 
             UIView *verticalSeparator = [[UIView alloc] initWithFrame:separatorRect];
             verticalSeparator.backgroundColor = [Util UIColorForHexColor:@"253341"];
             [self addSubview:verticalSeparator];
         }
-        if (printFlag) {
+        if (downloadFlag) {
             CGRect buttonRect = CGRectZero;
             CGRect separatorRect = CGRectZero;
             if(secondRowAvailable) {
@@ -274,9 +274,9 @@
                 xOffset += buttonWidth + 10;
                 separatorRect = CGRectMake(xOffset, 0, 2, self.frame.size.height);
             }
-            printButton = [[CustomButton alloc] initWithFrame:buttonRect withImageName:@"white_print_icon.png" withTitleBelow:NSLocalizedString(@"PrintTitle", @"") withFont:font withColor:whiteColor];
-            [printButton addTarget:self action:@selector(printClicked) forControlEvents:UIControlEventTouchUpInside];
-            [self addSubview:printButton];
+            downloadButton = [[CustomButton alloc] initWithFrame:buttonRect withImageName:@"icon_bottom_indir.png" withTitleBelow:NSLocalizedString(@"DownloadTitle", @"") withFont:font withColor:whiteColor];
+            [downloadButton addTarget:self action:@selector(downloadClicked) forControlEvents:UIControlEventTouchUpInside];
+            [self addSubview:downloadButton];
             xOffset += buttonWidth;
             placedButtonCount ++;
 

@@ -18,5 +18,6 @@
 @property (nonatomic, strong) UploadRef *uploadRef;
 @property (nonatomic, strong) ALAsset *assetRef;
 @property (nonatomic, strong) MetaFile *fileRef;
+@property (nonatomic, strong) NSDate *refDate;
 
 @end

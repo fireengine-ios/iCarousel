@@ -147,7 +147,11 @@
                 syncView = [[PhotosHeaderSyncView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 50)];
                 activeManRef.headerDelegate = syncView;
                 syncView.delegate = self;
-                [syncView loadAsset:activeManRef.uploadRef.assetUrl];
+                if(activeManRef.uploadRef.taskType == UploadTaskTypeAsset) {
+                    [syncView loadAsset:activeManRef.uploadRef.assetUrl];
+                } else if(activeManRef.uploadRef.taskType == UploadTaskTypeFile) {
+                    [syncView loadLocalFileForCamUpload:activeManRef.uploadRef.tempUrl];
+                }
                 [self addSubview:syncView];
                 
                 isSyncProgressVisible = YES;
@@ -332,8 +336,10 @@
     }
     if(initialRow != nil) {
         [initialRow.fileInfo addObjectsFromArray:group.fileInfo];
+        initialRow.fileInfo = [self sortRawArrayByDateDesc:initialRow.fileInfo];
         [self.groups replaceObjectAtIndex:counter withObject:initialRow];
     } else {
+        group.fileInfo = [self sortRawArrayByDateDesc:group.fileInfo];
         [self.groups addObject:group];
     }
     
@@ -1147,10 +1153,20 @@
     });
 }
 
+- (NSMutableArray *) sortRawArrayByDateDesc:(NSArray *) rawArray {
+    NSArray *sortedArray = [rawArray sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+        NSDate *first = [(RawTypeFile *) a refDate];
+        NSDate *second = [(RawTypeFile *)b refDate];
+        return [second compare:first];
+    }];
+    return [sortedArray mutableCopy];
+}
+
 - (RawTypeFile *) rawFileForAsset:(ALAsset *) assetRef {
     RawTypeFile *result = [[RawTypeFile alloc] init];
     result.assetRef = assetRef;
     result.rawType = RawFileTypeClient;
+    result.refDate = [assetRef valueForProperty:ALAssetPropertyDate];
     return result;
 }
 
@@ -1158,6 +1174,7 @@
     RawTypeFile *result = [[RawTypeFile alloc] init];
     result.fileRef = fileRef;
     result.rawType = RawFileTypeDepo;
+    result.refDate = fileRef.lastModified;
     return result;
 }
 
@@ -1368,13 +1385,17 @@
     }
     
     UploadManager *activeManRef = [[UploadQueue sharedInstance] activeManager];
-    if(activeManRef != nil && activeManRef.uploadRef.taskType == UploadTaskTypeAsset) {
+    if(activeManRef != nil) {
         IGLog(@"RevisitedGroupedPhotoView autoQueueChanged initializing PhotosHeaderSyncView");
         syncView = [[PhotosHeaderSyncView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 50)];
         activeManRef.headerDelegate = syncView;
         syncView.delegate = self;
-        [syncView loadAsset:activeManRef.uploadRef.assetUrl];
         [self addSubview:syncView];
+        if(activeManRef.uploadRef.taskType == UploadTaskTypeAsset) {
+            [syncView loadAsset:activeManRef.uploadRef.assetUrl];
+        } else if(activeManRef.uploadRef.taskType == UploadTaskTypeFile) {
+            [syncView loadLocalFileForCamUpload:activeManRef.uploadRef.tempUrl];
+        }
     } else {
         IGLog(@"RevisitedGroupedPhotoView autoQueueChanged no need to initialize PhotosHeaderSyncView");
         if(collView.frame.origin.y > 0) {

@@ -13,5 +13,6 @@
 @synthesize uploadRef;
 @synthesize assetRef;
 @synthesize fileRef;
+@synthesize refDate;
 
 @end

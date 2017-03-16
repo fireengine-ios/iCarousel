@@ -18,5 +18,6 @@
 @property (nonatomic, weak) id<PhotosHeaderSyncViewDelegate> delegate;
 
 - (void) loadAsset:(NSString *) assetUrlStr;
+- (void) loadLocalFileForCamUpload:(NSString *) localTempUrl;
 
 @end

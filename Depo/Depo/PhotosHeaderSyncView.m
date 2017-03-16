@@ -64,6 +64,11 @@
     } failureBlock:nil];
 }
 
+- (void) loadLocalFileForCamUpload:(NSString *) localTempUrl {
+    UIImage *thumbImageFromCam = [UIImage imageWithContentsOfFile:localTempUrl];
+    thumbView.image = [Util imageWithImage:thumbImageFromCam scaledToFillSize:CGSizeMake(40, 40)];
+}
+
 - (void) uploadManagerDidSendData:(long)sentBytes inTotal:(long)totalBytes {
     int progressWidth = sentBytes*progressBg.frame.size.width/totalBytes;
     [self performSelectorOnMainThread:@selector(updateProgressByWidth:) withObject:[NSNumber numberWithInt:progressWidth] waitUntilDone:NO];

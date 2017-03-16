@@ -178,11 +178,17 @@
 
 - (void) refreshContent:(MetaFile *) fileToRefresh {
     self.file = fileToRefresh;
+    [imgView setImage:nil];
 
+    if(progressSeparator) {
+        progressSeparator.hidden = YES;
+    }
+    
     float imgMaxWidth = 400;
     if(IS_IPAD) {
         imgMaxWidth = 600;
     }
+
     [imgView sd_setImageWithURL:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:nil];
 
     if(self.file.contentType == ContentTypeVideo) {
@@ -250,18 +256,29 @@
         playIconView.hidden = YES;
         durationLabel.hidden = YES;
     }
-    [self refreshManagerDelegateByAsset];
+    BOOL isDelegateSet = [self refreshManagerDelegateByAsset];
+    if(!isDelegateSet) {
+        if(progressSeparator) {
+            progressSeparator.hidden = YES;
+        }
+    } else {
+        if(progressSeparator) {
+            progressSeparator.hidden = NO;
+        }
+    }
 }
 
-- (void) refreshManagerDelegateByAsset {
+- (BOOL) refreshManagerDelegateByAsset {
     if(self.asset != nil) {
         NSMutableArray *managersArray = [[UploadQueue sharedInstance].uploadManagers copy];
         for(UploadManager *manager in managersArray) {
             if(!manager.uploadRef.hasFinished && [[manager uniqueUrl] isEqualToString:[self.asset.defaultRepresentation.url absoluteString]]) {
                 manager.delegate = self;
+                return YES;
             }
         }
     }
+    return NO;
 }
 
 - (id)initWithFrame:(CGRect)frame withUploadRef:(UploadRef *)ref {
