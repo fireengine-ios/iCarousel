@@ -912,6 +912,7 @@
 		790B9D951E726E8300DD7DA0 /* countryCodes.json in Resources */ = {isa = PBXBuildFile; fileRef = 790B9D941E726E8300DD7DA0 /* countryCodes.json */; };
 		790B9D981E7690BD00DD7DA0 /* buttonbg_720_w@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 790B9D961E7690BD00DD7DA0 /* buttonbg_720_w@2x.png */; };
 		790B9D991E7690BD00DD7DA0 /* buttonbg_720_w@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 790B9D971E7690BD00DD7DA0 /* buttonbg_720_w@3x.png */; };
+		790B9E151E7A84F700DD7DA0 /* CountrySelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 790B9E141E7A84F700DD7DA0 /* CountrySelectionCell.m */; };
 		94112A981CCA7DE00050E9B1 /* DropboxStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94112A971CCA7DE00050E9B1 /* DropboxStatusCell.m */; };
 		941496611CCF559D008A8D0C /* GroupedPhotosAndVideosController.m in Sources */ = {isa = PBXBuildFile; fileRef = 941496601CCF559D008A8D0C /* GroupedPhotosAndVideosController.m */; };
 		941496641CCF5E51008A8D0C /* GroupedPhotosCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 941496631CCF5E51008A8D0C /* GroupedPhotosCell.m */; };
@@ -2579,6 +2580,8 @@
 		790B9D941E726E8300DD7DA0 /* countryCodes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countryCodes.json; sourceTree = "<group>"; };
 		790B9D961E7690BD00DD7DA0 /* buttonbg_720_w@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "buttonbg_720_w@2x.png"; path = "images/login-signup/buttonbg_720_w@2x.png"; sourceTree = "<group>"; };
 		790B9D971E7690BD00DD7DA0 /* buttonbg_720_w@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "buttonbg_720_w@3x.png"; path = "images/login-signup/buttonbg_720_w@3x.png"; sourceTree = "<group>"; };
+		790B9E131E7A84F700DD7DA0 /* CountrySelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountrySelectionCell.h; sourceTree = "<group>"; };
+		790B9E141E7A84F700DD7DA0 /* CountrySelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountrySelectionCell.m; sourceTree = "<group>"; };
 		94112A961CCA7DE00050E9B1 /* DropboxStatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxStatusCell.h; sourceTree = "<group>"; };
 		94112A971CCA7DE00050E9B1 /* DropboxStatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropboxStatusCell.m; sourceTree = "<group>"; };
 		9414965F1CCF559D008A8D0C /* GroupedPhotosAndVideosController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupedPhotosAndVideosController.h; sourceTree = "<group>"; };
@@ -3501,6 +3504,8 @@
 				6308E46C1E64C0E800BB32A0 /* VideoView.m */,
 				94B03AE11E76CA740026C87C /* PhotosHeaderSyncView.h */,
 				94B03AE21E76CA740026C87C /* PhotosHeaderSyncView.m */,
+				790B9E131E7A84F700DD7DA0 /* CountrySelectionCell.h */,
+				790B9E141E7A84F700DD7DA0 /* CountrySelectionCell.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -6495,6 +6500,7 @@
 				9433BD0B1D21E48300991483 /* PromotionEntryController.m in Sources */,
 				058BC2421A30E7100007F4DE /* AuthResponse.m in Sources */,
 				050D4C321A31E17200809A01 /* PostLoginSyncPhotoController.m in Sources */,
+				790B9E151E7A84F700DD7DA0 /* CountrySelectionCell.m in Sources */,
 				0515F2FF1C469A3C0098081C /* RevisitedStorageController.m in Sources */,
 				94FAE0B11D2F119300BC9F77 /* VideofyFooterView.m in Sources */,
 				05144B611A090B8000B2A414 /* SimpleDocCell.m in Sources */,
