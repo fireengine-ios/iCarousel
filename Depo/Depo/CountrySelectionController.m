@@ -26,7 +26,7 @@ static const CGFloat topOffset = 40;
 {
     [super viewDidLoad];
     
-    self.title = @"Country Selection";
+    self.title = NSLocalizedString(@"Select Country", "");
     
     _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40)];
     [_searchBar setBarTintColor:[UIColor colorWithRed:245.0f/255.0f green:245/255.0f blue:245/255.0f alpha:1.0f]];
@@ -71,6 +71,14 @@ static const CGFloat topOffset = 40;
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
+-(NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationPortrait;
 }
 
 - (NSArray*)getSortedKeysFromDict:(NSDictionary*)dict {

@@ -293,12 +293,10 @@
         
         [self bringSubviewToFront:progress];
         [progress show:YES];
-    }
-    else {
+    } else {
         [refreshControl endRefreshing];
     }
-    
-    
+    IGLog(@"At end of RevisitedGroupedPhotoView pullData");
 }
 
 - (void) addOngoingGroup {
@@ -394,6 +392,7 @@
 
 - (void) readSuccessCallback:(NSArray *) fileList {
     [progress hide:YES];
+    IGLog(@"RevisitedGroupedPhotoView readSuccessCallback called");
     
     if([fileList count] > 0) {
         [files addObjectsFromArray:fileList];
@@ -507,6 +506,7 @@
     if(!initialLoadDone) {
         initialLoadDone = YES;
     }
+    IGLog(@"RevisitedGroupedPhotoView readSuccessCallback calling SyncManager listOfUnsyncedImages");
     [SyncManager sharedInstance].infoDelegate = self;
     [[SyncManager sharedInstance] listOfUnsyncedImages];
 }
@@ -1065,6 +1065,7 @@
 }
 
 - (void) syncManagerUnsyncedImageList:(NSArray *)unsyncedAssets {
+    IGLog(@"RevisitedGroupedPhotoView syncManagerUnsyncedImageList called");
     localAssets = [unsyncedAssets sortedArrayUsingComparator:^NSComparisonResult(ALAsset *first, ALAsset *second) {
         NSDate * date1 = [first valueForProperty:ALAssetPropertyDate];
         NSDate * date2 = [second valueForProperty:ALAssetPropertyDate];
@@ -1074,6 +1075,7 @@
 }
 
 - (void) addUnsyncedFiles {
+    IGLog(@"RevisitedGroupedPhotoView addUnsyncedFiles called");
     MetaFile *lastFile = nil;
     if([files count] > 0) {
         lastFile = files.lastObject;
@@ -1360,18 +1362,21 @@
 }
 
 - (void) autoQueueChanged {
+    IGLog(@"RevisitedGroupedPhotoView autoQueueChanged called");
     if(syncView) {
         [syncView removeFromSuperview];
     }
     
     UploadManager *activeManRef = [[UploadQueue sharedInstance] activeManager];
-    if(activeManRef != nil) {
+    if(activeManRef != nil && activeManRef.uploadRef.taskType == UploadTaskTypeAsset) {
+        IGLog(@"RevisitedGroupedPhotoView autoQueueChanged initializing PhotosHeaderSyncView");
         syncView = [[PhotosHeaderSyncView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 50)];
         activeManRef.headerDelegate = syncView;
         syncView.delegate = self;
         [syncView loadAsset:activeManRef.uploadRef.assetUrl];
         [self addSubview:syncView];
     } else {
+        IGLog(@"RevisitedGroupedPhotoView autoQueueChanged no need to initialize PhotosHeaderSyncView");
         if(collView.frame.origin.y > 0) {
             [UIView animateWithDuration:0.4 animations:^{
                 collView.frame = CGRectMake(collView.frame.origin.x, collView.frame.origin.y - 50, collView.frame.size.width, collView.frame.size.height + 50);

@@ -639,6 +639,7 @@
 }
 
 - (void) cameraCapturaModalDidCaptureAndStoreImageToPath:(NSString *)filePath withName:(NSString *)fileName {
+    IGLog(@"At RevisitedGroupedPhotosController cameraCapturaModalDidCaptureAndStoreImageToPath");
     UploadRef *uploadRef = [[UploadRef alloc] init];
     uploadRef.tempUrl = filePath;
     uploadRef.fileName = fileName;
