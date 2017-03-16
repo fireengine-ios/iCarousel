@@ -248,11 +248,11 @@
     //    moreButton.hidden = NO;
     
     [albumView setToUnselectiblePriorToRefresh];
-    [groupView setToUnselectiblePriorToRefresh];
+//    [groupView setToUnselectiblePriorToRefresh];
     
     [APPDELEGATE.base immediateShowAddButton];
 
-    [groupView pullData];
+    [groupView reloadContent];
     [albumView pullData];
 }
 

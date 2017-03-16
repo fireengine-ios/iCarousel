@@ -90,6 +90,7 @@
 @property (nonatomic, strong) AutoSyncOffHeaderView *syncInfoHeaderView;
 
 - (void) pullData;
+- (void) reloadContent;
 - (void) setToSelectible;
 - (void) setToUnselectible;
 - (void) setToUnselectiblePriorToRefresh;

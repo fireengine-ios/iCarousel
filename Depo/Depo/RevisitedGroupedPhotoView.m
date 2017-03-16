@@ -248,6 +248,26 @@
     refreshControl = nil;
 }
 
+- (void)reloadContent {
+    
+    for (MetaFile *selectedFile in selectedMetaFiles) {
+        for (FileInfoGroup *fileInfoGroup in self.groups) {
+            NSMutableArray *discardedItems = [@[] mutableCopy];
+            for (RawTypeFile *object in fileInfoGroup.fileInfo) {
+                if ([selectedFile isEqual:object.fileRef]) {
+                    [discardedItems addObject:object];
+                }
+            }
+            [fileInfoGroup.fileInfo removeObjectsInArray:discardedItems];
+        }
+    }
+    [self setToUnselectiblePriorToRefresh];
+    [self.collView performBatchUpdates:^{
+        [self.collView reloadSections:
+         [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, self.collView.numberOfSections)]];
+    } completion:nil];
+}
+
 - (void) pullData {
     
     if([delegate checkInternet]) {
@@ -266,7 +286,7 @@
         
         packageSize = GROUP_PACKAGE_SIZE;
         if([[Util deviceType] isEqualToString:@"iPhone 6 Plus"] || [[Util deviceType] isEqualToString:@"iPhone 6S Plus"]) {
-            packageSize = 60;
+            packageSize = 100;
         }
         [readDao requestPhotosAndVideosForPage:listOffset andSize:packageSize andSortType:SortTypeDateDesc];
         isLoading = YES;
@@ -435,7 +455,7 @@
             if ([fileType isKindOfClass:[RawTypeFile class]]) {
                 [[SDWebImageManager sharedManager] loadImageWithURL:
                  [NSURL URLWithString:fileType.fileRef.detail.thumbMediumUrl]
-                                                            options:SDWebImageCacheMemoryOnly | SDWebImageHighPriority
+                                                            options:SDWebImageCacheMemoryOnly
                                                            progress:nil
                                                           completed:
                  ^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
