@@ -454,7 +454,7 @@
             if ([fileType isKindOfClass:[RawTypeFile class]]) {
                 [[SDWebImageManager sharedManager] loadImageWithURL:
                  [NSURL URLWithString:fileType.fileRef.detail.thumbMediumUrl]
-                                                            options:SDWebImageCacheMemoryOnly
+                                                            options:0
                                                            progress:nil
                                                           completed:
                  ^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
