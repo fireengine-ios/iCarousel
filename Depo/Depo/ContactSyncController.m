@@ -192,17 +192,25 @@
 - (void) backupClicked {
     APPDELEGATE.session.syncType = ContactSyncTypeBackup;
     [ContactSyncSDK doSync:SYNCBackup];
+    
     [self showProcessView];
+    backupButton.enabled = NO;
+    restoreButton.enabled = NO;
 }
 
 - (void) restoreClicked {
     APPDELEGATE.session.syncType = ContactSyncTypeRestore;
     [ContactSyncSDK doSync:SYNCRestore];
+    
     [self showProcessView];
+    backupButton.enabled = NO;
+    restoreButton.enabled = NO;
 }
 
 - (void) manualSyncFinalized {
     [self hideProcessView];
+    backupButton.enabled = YES;
+    restoreButton.enabled = YES;
     
     [SyncUtil updateLastContactSyncDate];
     NSString *lastSyncTitle = [NSString stringWithFormat:NSLocalizedString(@"ContactLastSyncDateTitle", @""), NSLocalizedString(@"NoneTitle", @"")];
@@ -272,6 +280,11 @@
     [super viewDidAppear:animated];
     if([ContactSyncSDK isRunning]) {
         [self showProcessView];
+        backupButton.enabled = NO;
+        restoreButton.enabled = NO;
+    } else {
+        backupButton.enabled = YES;
+        restoreButton.enabled = YES;
     }
 }
 
