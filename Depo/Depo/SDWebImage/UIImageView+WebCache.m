@@ -47,7 +47,7 @@
                  completed:(nullable SDExternalCompletionBlock)completedBlock {
     [self sd_internalSetImageWithURL:url
                     placeholderImage:placeholder
-                             options:SDWebImageCacheMemoryOnly
+                             options:options
                         operationKey:nil
                        setImageBlock:nil
                             progress:progressBlock

@@ -215,27 +215,27 @@ FOUNDATION_STATIC_INLINE NSUInteger SDCacheCostForImage(UIImage *image) {
         [self.memCache setObject:image forKey:key cost:cost];
     }
     
-//    if (toDisk) {
-//        dispatch_async(self.ioQueue, ^{
-//            NSData *data = imageData;
-//            
-//            if (!data && image) {
-//                SDImageFormat imageFormatFromData = [NSData sd_imageFormatForImageData:data];
-//                data = [image sd_imageDataAsFormat:imageFormatFromData];
-//            }
-//            
-//            [self storeImageDataToDisk:data forKey:key];
-//            if (completionBlock) {
-//                dispatch_async(dispatch_get_main_queue(), ^{
-//                    completionBlock();
-//                });
-//            }
-//        });
-//    } else {
+    if (toDisk) {
+        dispatch_async(self.ioQueue, ^{
+            NSData *data = imageData;
+            
+            if (!data && image) {
+                SDImageFormat imageFormatFromData = [NSData sd_imageFormatForImageData:data];
+                data = [image sd_imageDataAsFormat:imageFormatFromData];
+            }
+            
+            [self storeImageDataToDisk:data forKey:key];
+            if (completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completionBlock();
+                });
+            }
+        });
+    } else {
         if (completionBlock) {
             completionBlock();
         }
-//    }
+    }
 }
 
 - (void)storeImageDataToDisk:(nullable NSData *)imageData forKey:(nullable NSString *)key {
