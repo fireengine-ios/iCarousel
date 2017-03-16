@@ -25,6 +25,7 @@
 #define tableViewRowCount 5
 
 @interface ContactSyncController () {
+//    sayfa degistirildiginde 1 saniyeligine daha ekran kalmasi icin super view'deki kullanilmadi
     ProcessFooterView *processView;
 }
 
@@ -194,8 +195,7 @@
     [ContactSyncSDK doSync:SYNCBackup];
     
     [self showProcessView];
-    backupButton.enabled = NO;
-    restoreButton.enabled = NO;
+    [self makeButtonsPassive];
 }
 
 - (void) restoreClicked {
@@ -203,14 +203,12 @@
     [ContactSyncSDK doSync:SYNCRestore];
     
     [self showProcessView];
-    backupButton.enabled = NO;
-    restoreButton.enabled = NO;
+    [self makeButtonsPassive];
 }
 
 - (void) manualSyncFinalized {
     [self hideProcessView];
-    backupButton.enabled = YES;
-    restoreButton.enabled = YES;
+    [self makeButtonsActive];
     
     [SyncUtil updateLastContactSyncDate];
     NSString *lastSyncTitle = [NSString stringWithFormat:NSLocalizedString(@"ContactLastSyncDateTitle", @""), NSLocalizedString(@"NoneTitle", @"")];
@@ -280,11 +278,9 @@
     [super viewDidAppear:animated];
     if([ContactSyncSDK isRunning]) {
         [self showProcessView];
-        backupButton.enabled = NO;
-        restoreButton.enabled = NO;
+        [self makeButtonsPassive];
     } else {
-        backupButton.enabled = YES;
-        restoreButton.enabled = YES;
+        [self makeButtonsActive];
     }
 }
 
@@ -320,7 +316,7 @@
 }
 
 - (void) processFooterShouldDismissWithButtonKey:(NSString *) postButtonKeyVal {
-    [self hideProcessView];
+//    [self hideProcessView];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -332,7 +328,9 @@
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if (self.view.superview == nil) {
-            [self hideProcessView];
+            [UIView animateWithDuration:0.3 animations:^{
+                processView.hidden = YES;
+            }];
         }
     });
     
@@ -359,6 +357,20 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
+}
+
+- (void)makeButtonsPassive {
+    backupButton.enabled = NO;
+    restoreButton.enabled = NO;
+    backupButton.alpha = 0.5f;
+    restoreButton.alpha = 0.5f;
+}
+
+- (void)makeButtonsActive {
+    backupButton.enabled = YES;
+    restoreButton.enabled = YES;
+    backupButton.alpha = 1.0f;
+    restoreButton.alpha = 1.0f;
 }
 
 @end
