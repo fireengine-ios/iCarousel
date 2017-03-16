@@ -7,6 +7,7 @@
 //
 
 #import "CountrySelectionController.h"
+#import "CountrySelectionCell.h"
 
 @interface CountrySelectionController ()
 
@@ -136,11 +137,12 @@ static const CGFloat topOffset = 40;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellIdentifier"];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cellIdentifier"];
+        cell = [[CountrySelectionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellIdentifier"];
     }
     if (_filteredCountryDict) {
         NSDictionary *country = [_filteredCountryDict valueForKey:[_keys objectAtIndex:[indexPath section]]][indexPath.row];
         [cell.textLabel setText:country[@"country_name"]];
+        cell.textLabel.adjustsFontSizeToFitWidth = YES;
         [cell.detailTextLabel setText:country[@"phone_code"]];
         return cell;
     }
@@ -170,19 +172,22 @@ static const CGFloat topOffset = 40;
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    //TODO: CountryDict harfli sectionlara ayrildigi icin bu index kullanilark asagidaki algoritma daha da gelistirilebilir
+    //TODO: CountryDict harfli sectionlara ayrildigi icin bu index ndj asagidaki algoritma daha da gelistirilebilir
     _filteredCountryDict = [NSMutableDictionary new];
     for (NSString *key in [_countryDict allKeys]) {
         NSArray *items = _countryDict[key];
         
         NSMutableArray *section = [NSMutableArray new];
         for (NSDictionary *item in items) {
+            if ([searchText length] > [item[@"country_name"] length]) {
+                continue;
+            }
             NSComparisonResult result = [item[@"country_name"] compare:searchText
                                                                options:(NSCaseInsensitiveSearch|NSDiacriticInsensitiveSearch)
                                                                  range:NSMakeRange(0, [searchText length])];
             
             if (result == NSOrderedSame) {
-                NSLog(@"item= %@", item[@"country_name"]);
+//                NSLog(@"item= %@", item[@"country_name"]);
                 [section addObject:item];
             }
         }
@@ -199,6 +204,10 @@ static const CGFloat topOffset = 40;
     _searchBar.text = @"";
     _searchBar.showsCancelButton = NO;
     [_searchBar resignFirstResponder];
+    
+    _filteredCountryDict = [NSMutableDictionary dictionaryWithDictionary:_countryDict];
+    _keys = [self getSortedKeysFromDict:_filteredCountryDict];
+    [_tableView reloadData];
 }
 
 
