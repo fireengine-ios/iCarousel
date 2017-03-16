@@ -384,13 +384,13 @@
     [self showErrorAlertWithMessage:errorMessage];
 }
 
-- (void) viewDidAppear:(BOOL)animated {
+- (void) viewWillAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
     CustomButton *customBackButton = [[CustomButton alloc] initWithFrame:CGRectMake(10, 0, 24, 24) withImageName:@"icon_ustbar_back.png"];
     [customBackButton addTarget:self action:@selector(innerTriggerBack) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:customBackButton];
     self.navigationItem.leftBarButtonItem = backButton;
-
 }
 
 - (void)viewDidLoad {
