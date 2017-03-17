@@ -56,6 +56,11 @@
 
 -(void)revisitedGroupedPhoto:(RevisitedGroupedPhotoView *)view downloadSelectedFiles:(NSArray *)selectedFiles;
 - (BOOL) checkInternet;
+
+@optional
+- (void) revisitedGroupedPhotoWantsToShowLoading;
+- (void) revisitedGroupedPhotoWantsToHideLoading;
+
 @end
 
 @interface RevisitedGroupedPhotoView : UIView <FooterActionsDelegate, UITextFieldDelegate, CustomConfirmDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, RevisitedPhotoCollCellDelegate, RevisitedUploadingPhotoCollCellDelegate, AutoSyncOffHeaderDelegate, SyncManagerInfoDelegate, RawPhotoCollCellDelegate, GroupPhotoSectionViewDelegate, PhotosHeaderSyncViewDelegate> {

@@ -129,6 +129,7 @@
 
 - (void) updateProgressByWidth:(NSNumber *) newWidth {
     progressView.frame = CGRectMake(0, self.view.frame.size.height-50, [newWidth intValue], 2);
+    progressView.backgroundColor = [Util UIColorForHexColor:@"3fb0e8"];
     int percent = [newWidth intValue] * 100 / self.view.frame.size.width;
     progressLabel.text = [NSString stringWithFormat:NSLocalizedString(@"UploadingPhotoCompleteStatus", @""), percent];
 }

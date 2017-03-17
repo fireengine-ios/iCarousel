@@ -465,13 +465,12 @@
 - (void) listOfUnsyncedImages {
     IGLog(@"SyncManager listOfUnsyncedImages");
 
-    NSMutableArray *unsycedResult = [[NSMutableArray alloc] init];
-    
-    NSArray *localHashList = [SyncUtil readSyncHashLocally];
-    NSArray *remoteHashList = [SyncUtil readSyncHashRemotely];
-    NSArray *remoteSummaryList = [SyncUtil readSyncFileSummaries];
-    
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^(void) {
+        NSMutableArray *unsycedResult = [[NSMutableArray alloc] init];
+        
+        NSArray *localHashList = [SyncUtil readSyncHashLocally];
+        NSArray *remoteHashList = [SyncUtil readSyncHashRemotely];
+        NSArray *remoteSummaryList = [SyncUtil readSyncFileSummaries];
         [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
             if(group) {
                 [group setAssetsFilter:[ALAssetsFilter allPhotos]];
@@ -498,10 +497,14 @@
                 }];
             } else {
                 IGLog(@"SyncManager listOfUnsyncedImages group enumeration finished");
-                [infoDelegate syncManagerUnsyncedImageList:unsycedResult];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [infoDelegate syncManagerUnsyncedImageList:unsycedResult];
+                });
             }
         } failureBlock:^(NSError *error) {
-            [infoDelegate syncManagerUnsyncedImageList:unsycedResult];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [infoDelegate syncManagerUnsyncedImageList:unsycedResult];
+            });
         }];
     });
 }

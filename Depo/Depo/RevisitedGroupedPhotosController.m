@@ -113,6 +113,14 @@
     [APPDELEGATE.base modifyAddButtonWithList:addTypesForController];
 }
 
+- (void) revisitedGroupedPhotoWantsToShowLoading {
+    [self showLoading];
+}
+
+- (void) revisitedGroupedPhotoWantsToHideLoading {
+    [self hideLoading];
+}
+
 - (void) setToSelectionState {
     [segmentView disableNavigate];
 

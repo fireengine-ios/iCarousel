@@ -488,6 +488,7 @@
     IGLog(@"RevisitedGroupedPhotoView readSuccessCallback calling SyncManager listOfUnsyncedImages");
     [SyncManager sharedInstance].infoDelegate = self;
     [[SyncManager sharedInstance] listOfUnsyncedImages];
+    [delegate revisitedGroupedPhotoWantsToShowLoading];
 }
 
 - (void) readFailCallback:(NSString *) errorMessage {
@@ -1044,6 +1045,7 @@
 }
 
 - (void) syncManagerUnsyncedImageList:(NSArray *)unsyncedAssets {
+    [delegate revisitedGroupedPhotoWantsToHideLoading];
     IGLog(@"RevisitedGroupedPhotoView syncManagerUnsyncedImageList called");
     localAssets = [unsyncedAssets sortedArrayUsingComparator:^NSComparisonResult(ALAsset *first, ALAsset *second) {
         NSDate * date1 = [first valueForProperty:ALAssetPropertyDate];
@@ -1056,8 +1058,10 @@
 - (void) addUnsyncedFiles {
     IGLog(@"RevisitedGroupedPhotoView addUnsyncedFiles called");
     MetaFile *lastFile = nil;
+    BOOL noFilesFlag = YES;
     if([files count] > 0) {
         lastFile = files.lastObject;
+        noFilesFlag = NO;
     }
     NSMutableDictionary *tempDict = [[NSMutableDictionary alloc] init];
     for(ALAsset *row in localAssets) {
@@ -1065,7 +1069,7 @@
         
         BOOL shouldShow = YES;
         if(lastFile != nil) {
-            if([assetDate compare:lastFile.lastModified] == NSOrderedAscending) {
+            if([assetDate compare:lastFile.detail.imageDate] == NSOrderedAscending) {
                 shouldShow = NO;
             }
         }
@@ -1075,7 +1079,7 @@
             }
         }
         
-        if(shouldShow) {
+        if(noFilesFlag || shouldShow) {
             NSString *dateStr = [dateCompareFormat stringFromDate:assetDate];
             if([[tempDict allKeys] count] == 0) {
                 FileInfoGroup *newGroup = [[FileInfoGroup alloc] init];
@@ -1110,7 +1114,7 @@
     }
     
     if(lastFile != nil) {
-        lastCheckedDate = lastFile.lastModified;
+        lastCheckedDate = lastFile.detail.imageDate;
     }
     
     NSArray *tempGroups = [tempDict allValues];
@@ -1147,7 +1151,7 @@
     RawTypeFile *result = [[RawTypeFile alloc] init];
     result.fileRef = fileRef;
     result.rawType = RawFileTypeDepo;
-    result.refDate = fileRef.lastModified;
+    result.refDate = fileRef.detail.imageDate;
     return result;
 }
 
@@ -1244,10 +1248,12 @@
 }
 
 - (void) rawPhotoCollCellImageWasMarkedForAsset:(ALAsset *) fileSelected {
-    NSString *assetUrl = [fileSelected.defaultRepresentation.url absoluteString];
-    if(![selectedFileList containsObject:assetUrl]) {
-        [selectedFileList addObject:assetUrl];
-        [selectedAssets addObject:fileSelected];
+    if(fileSelected != nil) {
+        NSString *assetUrl = [fileSelected.defaultRepresentation.url absoluteString];
+        if(![selectedFileList containsObject:assetUrl]) {
+            [selectedFileList addObject:assetUrl];
+            [selectedAssets addObject:fileSelected];
+        }
     }
     
     if([selectedFileList count] > 0) {
@@ -1263,10 +1269,12 @@
 }
 
 - (void) rawPhotoCollCellImageWasUnmarkedForAsset:(ALAsset *) fileSelected {
-    NSString *assetUrl = [fileSelected.defaultRepresentation.url absoluteString];
-    if([selectedFileList containsObject:assetUrl]) {
-        [selectedFileList removeObject:assetUrl];
-        [selectedAssets removeObject:fileSelected];
+    if(fileSelected != nil) {
+        NSString *assetUrl = [fileSelected.defaultRepresentation.url absoluteString];
+        if([selectedFileList containsObject:assetUrl]) {
+            [selectedFileList removeObject:assetUrl];
+            [selectedAssets removeObject:fileSelected];
+        }
     }
     if([selectedFileList count] > 0) {
         [self showImgFooterMenu];
@@ -1347,8 +1355,10 @@
 }
 
 - (void) photosHeaderSyncFinishedForAssetUrl:(NSString *)urlVal {
-    NSString *localHash = [SyncUtil md5StringOfString:urlVal];
-    [SyncUtil cacheSyncHashLocally:localHash];
+    if(urlVal) {
+        NSString *localHash = [SyncUtil md5StringOfString:urlVal];
+        [SyncUtil cacheSyncHashLocally:localHash];
+    }
 }
 
 - (void) autoQueueChanged {
