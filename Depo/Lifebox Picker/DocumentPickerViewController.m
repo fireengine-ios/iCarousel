@@ -15,6 +15,8 @@
 #import "ShareDocCell.h"
 #import "Util.h"
 #import "Reachability.h"
+#import "CustomLabel.h"
+#import <MobileCoreServices/MobileCoreServices.h>
 
 #define EXT_REMEMBER_ME_URL @"https://adepo.turkcell.com.tr/api/auth/rememberMe"
 //#define EXT_REMEMBER_ME_URL @"http://tcloudstb.turkcell.com.tr/api/auth/rememberMe"
@@ -45,6 +47,7 @@
 - (void) viewDidLoad {
     [super viewDidLoad];
     
+    
     indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     indicator.color = [UIColor darkGrayColor];
     indicator.center = self.view.center;
@@ -55,10 +58,13 @@
     
     NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
     if(networkStatus == kReachableViaWiFi || networkStatus == kReachableViaWWAN) {
-        [self requestForDocs:0 completion:^(NSMutableArray *list, NSError *error) {
+        [self requestForDocs:self.folderUUID pageNum:0 completion:^(NSMutableArray *list, NSError *error) {
             if (!error) {
                 docList = list;
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    if ([list count] == 0) {
+                        [self showFileIsEmpty];
+                    }
                     [self.docTable reloadData];
                 });
             }
@@ -76,6 +82,19 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    if (self.validFileTypes.count == 0) {
+        self.validFileTypes = self.validTypes;
+    }
+    
+    if (self.rootFolderName) {
+        self.title = self.rootFolderName;
+    } else {
+        self.title = @"lifebox";
+    }
+    
+    
+    
 //    NSURL *groupURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.rdc.lifebox2"];
     NSURL *groupURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:GROUP_NAME_SUITE_NSUSERDEFAULTS];
     NSString *groupPath = [groupURL path];
@@ -98,70 +117,98 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-//    UITableViewCell *cell = [self.docTable dequeueReusableCellWithIdentifier:@"DOC_CELL" forIndexPath:indexPath];
-//    Document *doc = [docList objectAtIndex:indexPath.row];
-//    cell.textLabel.text = doc.docName;
-//    NSString *docSizeString = [Util transformedSizeValue:doc.docSize];
-//    cell.detailTextLabel.text = docSizeString;
-    
-//    NSString *identifier = [NSString stringWithFormat:@"DOC_CELL_%d", (int)indexPath.row];
-//    ShareDocCell *cell = [self.docTable dequeueReusableCellWithIdentifier:identifier];
-//    
-//    if (!cell) {
-//        Document *doc = [docList objectAtIndex:indexPath.row];
-//        cell.titleLabel.text = doc.docName;
-//        NSString *docSizeString = [Util transformedSizeValue:doc.docSize];
-//        cell.subTitleLabel.text = docSizeString;
-//        
-//        if (![self validFile:doc.docName]) {
-//            [cell setUserInteractionEnabled:NO];
-//            cell.backgroundColor = [UIColor grayColor];
-//        }
-//    }
-    
     ShareDocCell *cell;
-    Document *doc = [docList objectAtIndex:indexPath.row];
+    MetaFile *file = [docList objectAtIndex:indexPath.row];
     
-    if ([self validFile:doc.docName]) {
-        cell = [self.docTable dequeueReusableCellWithIdentifier:@"DOC_CELL_ENABLED" forIndexPath:indexPath];
+    if (file.contentType == ContentTypeFolder) {
+        cell = [self.docTable dequeueReusableCellWithIdentifier:@"FOLDER_CELL" forIndexPath:indexPath];
+        cell.titleLabel.text = file.name;
+        NSString *docSizeString = [NSString stringWithFormat:NSLocalizedString(@"FolderSubTitle", @""), file.itemCount];
+        cell.subTitleLabel.text = docSizeString;
+        [cell.thumbnailImageView setImage:[UIImage imageNamed:@"folder_icon.png"]];
+        return cell;
+    } else if (file.contentType == ContentTypePhoto || file.contentType == ContentTypeVideo) {
+        if([self validFile:file.name]) {
+            cell = [self.docTable dequeueReusableCellWithIdentifier:@"PHOTO_CELL_ENABLED" forIndexPath:indexPath];
+        } else {
+            cell = [self.docTable dequeueReusableCellWithIdentifier:@"PHOTO_CELL_DISABLED" forIndexPath:indexPath];
+        }
+    } else if (file.contentType == ContentTypeMusic) {
+        if([self validFile:file.name]) {
+            cell = [self.docTable dequeueReusableCellWithIdentifier:@"MUSIC_CELL_ENABLED" forIndexPath:indexPath];
+        } else {
+            cell = [self.docTable dequeueReusableCellWithIdentifier:@"MUSIC_CELL_DISABLED" forIndexPath:indexPath];
+        }
     } else {
-        cell = [self.docTable dequeueReusableCellWithIdentifier:@"DOC_CELL_DISABLED" forIndexPath:indexPath];
+        if([self validFile:file.name]) {
+            cell = [self.docTable dequeueReusableCellWithIdentifier:@"DOC_CELL_ENABLED" forIndexPath:indexPath];
+        } else {
+            cell = [self.docTable dequeueReusableCellWithIdentifier:@"DOC_CELL_DISABLED" forIndexPath:indexPath];
+        }
     }
     
-    cell.titleLabel.text = doc.docName;
-    NSString *docSizeString = [Util transformedSizeValue:doc.docSize];
-    cell.subTitleLabel.text = docSizeString;
-    
+    cell.titleLabel.text = file.name;
+    NSString *fileSizeString = [Util transformedSizeValue:file.bytes];
+    cell.subTitleLabel.text = fileSizeString;
+    if (file.detail.thumbMediumUrl == nil) {
+        if (file.contentType == ContentTypeMusic) {
+            [cell.thumbnailImageView setImage:[UIImage imageNamed:@"green_music_icon.png"]];
+        } else {
+            [cell.thumbnailImageView setImage:[UIImage imageNamed:@"document_icon.png"]];
+        }
+    } else {
+        NSURL *url = [NSURL URLWithString:file.detail.thumbMediumUrl];
+        NSURLSessionTask *task = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            if(data) {
+                UIImage *image = [UIImage imageWithData:data];
+                if (image) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        cell.thumbnailImageView.image = image;
+                    });
+                }
+            }
+        }];
+        [task resume];
+    }
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [indicator startAnimating];
-    self.docTable.allowsSelection = NO;
-    
-    Document *doc = docList[indexPath.row];
-    NSURL *url = [NSURL URLWithString:doc.tempDownloadURL];
-    NSURLRequest *downloadRequest = [NSURLRequest requestWithURL:url];
-    NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
-    NSURLSession *urlSession = [NSURLSession sessionWithConfiguration:sessionConfig delegate:self delegateQueue:nil];
-    NSURLSessionTask *downloadTask = [urlSession downloadTaskWithRequest:downloadRequest completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        
-        [indicator stopAnimating];
-        if (!error) {
-            self.docTable.allowsSelection = YES;
+    MetaFile *file = docList[indexPath.row];
+    if (file.contentType == ContentTypeFolder) {
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MainInterface" bundle:nil];
+        DocumentPickerViewController *dpvcViewController = (DocumentPickerViewController *)[sb instantiateViewControllerWithIdentifier:@"dpvc_identifier"];
+        dpvcViewController.folderUUID = file.uuid;
+        dpvcViewController.rootFolderName = file.name;
+        dpvcViewController.validFileTypes = self.validFileTypes;
+        [self.navigationController pushViewController:dpvcViewController animated:YES];
+    } else {
+        self.docTable.allowsSelection = NO;
+        [indicator startAnimating];
+        MetaFile *doc = docList[indexPath.row];
+        NSURL *url = [NSURL URLWithString:doc.tempDownloadUrl];
+        NSURLRequest *downloadRequest = [NSURLRequest requestWithURL:url];
+        NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
+        NSURLSession *urlSession = [NSURLSession sessionWithConfiguration:sessionConfig delegate:self delegateQueue:nil];
+        NSURLSessionTask *downloadTask = [urlSession downloadTaskWithRequest:downloadRequest completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             
-            NSData *downloadedData = [NSData dataWithContentsOfURL:location];
-            
-            NSString *filePath = [storagePath stringByAppendingPathComponent:doc.docName];
-            NSURL *fileUrl = [NSURL fileURLWithPath:filePath];
-            
-            if([downloadedData writeToFile:filePath atomically:YES]) {
-                [self dismissGrantingAccessToURL:fileUrl];
+            [indicator stopAnimating];
+            if (!error) {
+                self.docTable.allowsSelection = YES;
+                
+                NSData *downloadedData = [NSData dataWithContentsOfURL:location];
+                
+                NSString *filePath = [storagePath stringByAppendingPathComponent:doc.name];
+                NSURL *fileUrl = [NSURL fileURLWithPath:filePath];
+                
+                if([downloadedData writeToFile:filePath atomically:YES]) {
+                    [self dismissGrantingAccessToURL:fileUrl];
+                }
             }
-        }
-    }];
-    
-    [downloadTask resume];
+        }];
+        
+        [downloadTask resume];
+    }
 }
 
 //- (IBAction)openDocument:(id)sender {
@@ -175,10 +222,10 @@
     // TODO: present a view controller appropriate for picker mode here
 }
 
--(void) requestForDocs:(int)pageNum completion:(void (^)(NSMutableArray *docList, NSError *error))completion {
-    NSString *parentListingUrl = [NSString stringWithFormat:ELASTIC_LISTING_MAIN_URL, @"content_type", @"application%20OR%20text%20NOT%20directory", @"",@"DESC", pageNum, 21];
-    NSURL *url = [NSURL URLWithString:parentListingUrl];
+-(void) requestForDocs:(NSString *) folderUUID pageNum:(int) pageNum completion:(void (^)(NSMutableArray *docList, NSError *error))completion {
     
+    NSString *parentListingUrl = [NSString stringWithFormat:FILE_LISTING_MAIN_URL, folderUUID, @"createdDate",@"DESC", pageNum, 21];
+    NSURL *url = [NSURL URLWithString:parentListingUrl];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     [request setHTTPMethod:@"GET"];
     [request setTimeoutInterval:30];
@@ -195,33 +242,30 @@
         if (!error) {
             NSHTTPURLResponse *request = (NSHTTPURLResponse *) response;
             if ([request statusCode] == 200) {
-                if(data) {
-                    Document *doc;
-                    NSArray *mainArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-                    
-                    NSMutableArray *list = [[NSMutableArray alloc] init];
-                    if(mainArray != nil && [mainArray isKindOfClass:[NSArray class]]) {
-                        for(NSDictionary *fileDict in mainArray) {
-                            if([fileDict isKindOfClass:[NSDictionary class]]) {
-                                doc = [[Document alloc] init];
-                                doc.docName = [fileDict objectForKey:@"name"];
-                                doc.tempDownloadURL = [fileDict objectForKey:@"tempDownloadURL"];
-                                NSNumber *docSize = [fileDict objectForKey:@"bytes"];
-                                doc.docSize = [docSize longValue];
-                                [list addObject:doc];
+                if (data) {
+                    NSDictionary *mainDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+                    NSDictionary *mainArray = [mainDict objectForKey:@"fileList"];
+                    if (mainArray != nil || [mainArray isKindOfClass:[NSNull class]]) {
+                        NSMutableArray *result = [[NSMutableArray alloc] init];
+                        
+                        if(mainArray != nil && ![mainArray isKindOfClass:[NSNull class]]) {
+                            for(NSDictionary *fileDict in mainArray) {
+                                MetaFile *parsedFile = [self parseFile:fileDict];
+                                [result addObject:parsedFile];
                             }
+                            completion(result,nil);
                         }
-                        completion(list,nil);
+                    } else {
+                        completion(nil,nil);
                     }
-                }
-                else {
+                } else {
                     completion(nil,nil);
                 }
             }
             else {
                 [self handleResponse:response completionHandler:^(NSError * _Nullable error) {
                     if(!error) {
-                        [self requestForDocs:pageNum completion:^(NSMutableArray *list, NSError *error) {
+                        [self requestForDocs:folderUUID pageNum:pageNum completion:^(NSMutableArray *list, NSError *error) {
                             completion(list,nil);
                         }];
                     } else {
@@ -302,31 +346,13 @@
     [task resume];
 }
 
-//-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
-//    
-//    CGFloat currentOffset = self.docTable.contentOffset.y;
-//    CGFloat maximumOffset = self.docTable.contentSize.height - self.docTable.frame.size.height;
-//    
-//    if(currentOffset - maximumOffset >= 0.0) {
-//        page++;
-//        [self requestForDocs:page completion:^(NSMutableArray *list, NSError *error) {
-//            if(!error) {
-//                [docList addObjectsFromArray:list];
-//                dispatch_async(dispatch_get_main_queue(), ^(){
-//                    [self.docTable reloadData];
-//                });
-//            }
-//        }];
-//    }
-//}
-
 -(void) scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     CGFloat currentOffset = self.docTable.contentOffset.y;
     CGFloat maximumOffset = self.docTable.contentSize.height - self.docTable.frame.size.height;
     
     if(currentOffset - maximumOffset >= 0.0) {
         page++;
-        [self requestForDocs:page completion:^(NSMutableArray *list, NSError *error) {
+        [self requestForDocs:self.folderUUID pageNum:page completion:^(NSMutableArray *list, NSError *error) {
             if(!error) {
                 [docList addObjectsFromArray:list];
                 dispatch_async(dispatch_get_main_queue(), ^(){
@@ -348,28 +374,111 @@
 -(void) didDismissCustomAlert:(CustomAlertView *)alertView {
 }
 
-// check validity of document type
+// check validity of file type
 - (BOOL)validFile:(NSString *)file {
-    NSArray *extensionArray = @[@"doc",@"docx",@"pdf",@"ppt",@"pptx",@"xls",@"xlsx"];
-    NSString *extension = [file pathExtension];
-    for (NSString *UTI in self.validTypes) {
-        if ([UTI isEqualToString:@"public.content"]) {
+    NSString * UTI = (__bridge NSString *)UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension,
+                                                                       (__bridge CFStringRef)[file pathExtension],
+                                                                       NULL);
+    for (NSString *UTIType in self.validFileTypes) {
+        if (UTTypeConformsTo((__bridge CFStringRef _Nonnull)(UTI),(__bridge CFStringRef _Nonnull)(UTIType))) {
             return YES;
-        } else if ([UTI isEqualToString:@"public.text"]) {
-            if ([extension isEqualToString:@"txt"]) {
-                return YES;
-            }
-        } else if ([UTI isEqualToString:@"public.html"]) {
-            if ([extension isEqualToString:@"html"]) {
-                return YES;
-            }
-        } else {
-            if ([extensionArray containsObject:extension]) {
-                return YES;
-            }
         }
+    }
+    if ([self.validFileTypes containsObject:@"public.content"]) {
+        return YES;
     }
     return NO;
 }
+
+- (MetaFile *) parseFile:(NSDictionary *) dict {
+    NSString *uuid = [dict objectForKey:@"uuid"];
+    NSString *name = [dict objectForKey:@"name"];
+    NSNumber *bytes = [dict objectForKey:@"bytes"];
+    NSNumber *folder = [dict objectForKey:@"folder"];
+    NSNumber *childCount = [dict objectForKey:@"childCount"];
+    NSString *tempDownloadURL = [dict objectForKey:@"tempDownloadURL"];
+    NSString *content_type = [dict objectForKey:@"content_type"];
+    
+    MetaFile *file = [[MetaFile alloc] init];
+    if (uuid != nil || [uuid isKindOfClass:[NSNull class]]) {
+        file.uuid = uuid;
+    }
+    if (name != nil || [name isKindOfClass:[NSNull class]]) {
+        file.name = name;
+    }
+    if (bytes != nil || [bytes isKindOfClass:[NSNull class]]) {
+        file.bytes = [bytes longValue];
+    }
+    if (folder != nil || [folder isKindOfClass:[NSNull class]]) {
+        file.folder = [folder boolValue];
+    }
+    if (childCount != nil || [childCount isKindOfClass:[NSNull class]]) {
+        file.itemCount = [childCount intValue];
+    }
+    if (tempDownloadURL != nil || [tempDownloadURL isKindOfClass:[NSNull class]]) {
+        file.tempDownloadUrl = tempDownloadURL;
+    }
+    if (content_type != nil || [content_type isKindOfClass:[NSNull class]]) {
+        file.rawContentType = content_type;
+    }
+    file.contentType = [self contentTypeByRawValue:file];
+    
+    NSDictionary *detailDict = [dict objectForKey:@"metadata"];
+    if(detailDict != nil && ![detailDict isKindOfClass:[NSNull class]]) {
+        NSString *thumbLarge = [detailDict objectForKey:@"Thumbnail-Large"];
+        NSString *thumbMedium = [detailDict objectForKey:@"Thumbnail-Medium"];
+        NSString *thumbSmall = [detailDict objectForKey:@"Thumbnail-Small"];
+        NSString *videoPreview = [detailDict objectForKey:@"Video-Preview"];
+        NSString *songTitle = [detailDict objectForKey:@"Title"];
+        
+        FileDetail *detail = [[FileDetail alloc] init];
+        detail.thumbLargeUrl = thumbLarge;
+        detail.thumbMediumUrl = thumbMedium;
+        detail.thumbSmallUrl = thumbSmall;
+        
+        if (songTitle != nil || [songTitle isKindOfClass:[NSNull class]]) {
+            detail.songTitle = songTitle;
+        }
+        if (videoPreview != nil || [videoPreview isKindOfClass:[NSNull class]]) {
+            file.videoPreviewUrl = videoPreview;
+        }
+        
+        file.detail = detail;
+    }
+    return file;
+}
+
+- (ContentType) contentTypeByRawValue:(MetaFile *) metaFile {
+    if(metaFile.folder) {
+        return ContentTypeFolder;
+    }
+    if([metaFile.rawContentType isEqualToString:CONTENT_TYPE_JPEG_VALUE] || [metaFile.rawContentType isEqualToString:CONTENT_TYPE_JPG_VALUE] || [metaFile.rawContentType isEqualToString:CONTENT_TYPE_PNG_VALUE]) {
+        return ContentTypePhoto;
+        //    } else if([metaFile.rawContentType isEqualToString:CONTENT_TYPE_AUDIO_MP3_VALUE] || [metaFile.rawContentType isEqualToString:CONTENT_TYPE_AUDIO_MPEG_VALUE]) {
+        //            return ContentTypeMusic;
+    } else if([metaFile.rawContentType hasPrefix:@"audio/"]) {
+        return ContentTypeMusic;
+    } else if([metaFile.rawContentType hasPrefix:@"video/"]) {
+        return ContentTypeVideo;
+    } else if ([metaFile.rawContentType hasPrefix:@"album/photo"]) {
+        return ContentTypeAlbumPhoto;
+    }else if([metaFile.rawContentType isEqualToString:CONTENT_TYPE_PDF_VALUE] || [metaFile.rawContentType isEqualToString:CONTENT_TYPE_DOC_VALUE] || [metaFile.rawContentType isEqualToString:CONTENT_TYPE_TXT_VALUE] || [metaFile.rawContentType isEqualToString:CONTENT_TYPE_HTML_VALUE]) {
+        return ContentTypeDoc;
+    }
+    return ContentTypeOther;
+}
+
+-(void) showFileIsEmpty {
+    UIImage *emptyImg = [UIImage imageNamed:@"empty_state_icon.png"];
+    UIImageView *emptyImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, (self.view.frame.size.height - 130)/2, self.view.frame.size.width, 130)];
+    emptyImgView.contentMode = UIViewContentModeScaleAspectFit;
+    emptyImgView.image = emptyImg;
+    [self.view addSubview:emptyImgView];
+    
+    CustomLabel *titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, emptyImgView.frame.origin.y + emptyImgView.frame.size.height + 10, self.view.frame.size.width, 24) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:20] withColor:[Util UIColorForHexColor:@"363E4F"] withText:[NSString stringWithFormat:NSLocalizedString(@"FolderEmptyMessage", @""), self.rootFolderName == nil ? NSLocalizedString(@"FilesTitle", @"") : self.rootFolderName]];
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:titleLabel];
+}
+
 
 @end

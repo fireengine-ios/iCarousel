@@ -15,6 +15,13 @@
 @property (nonatomic, strong) NSMutableArray *docList;
 @property (nonatomic, strong) NSString *storagePath;
 @property (nonatomic, strong) UIActivityIndicatorView *indicator;
+@property (nonatomic, strong) NSString *folderUUID;
+@property (nonatomic, strong) NSString *rootFolderName;
+@property (nonatomic, strong) NSArray *validFileTypes;
+
+
 @property int page;
 
 @end
+
+static NSArray *validFileTypes;

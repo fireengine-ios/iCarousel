@@ -723,6 +723,14 @@
 		05F178471BFBB4A70014B2BD /* yellow_cropy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05F178431BFBB4A70014B2BD /* yellow_cropy@2x.png */; };
 		05F4AA281A2F7692000F41B8 /* ActivityUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F4AA271A2F7692000F41B8 /* ActivityUtil.m */; };
 		05F931881C160E2F00858223 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05F931871C160E2F00858223 /* Accelerate.framework */; };
+		070A21431E77D3D2002385F7 /* MetaFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 0557C73719D1C905005E9F6B /* MetaFile.m */; };
+		070A21441E77D3D9002385F7 /* FileDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 0524E32819D955FA00E2698E /* FileDetail.m */; };
+		070A21451E77E099002385F7 /* folder_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 051CB3BD19D2F71200E5FC88 /* folder_icon.png */; };
+		070A21461E77E099002385F7 /* folder_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 051CB3EB19D2F71200E5FC88 /* folder_icon@2x.png */; };
+		070A21491E7A706F002385F7 /* empty_state_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 051CB3BE19D2F71200E5FC88 /* empty_state_icon.png */; };
+		070A214A1E7A706F002385F7 /* empty_state_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 051CB3CC19D2F71200E5FC88 /* empty_state_icon@2x.png */; };
+		070A217D1E7BBE35002385F7 /* green_music_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 05440ADA19D4363D009803D7 /* green_music_icon.png */; };
+		070A217E1E7BBE35002385F7 /* green_music_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05440ADB19D4363D009803D7 /* green_music_icon@2x.png */; };
 		2443E1541B6BB0C5001C274D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2443E1531B6BB0C5001C274D /* AudioToolbox.framework */; };
 		2443E1571B6BB5F3001C274D /* AudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2443E1561B6BB5F3001C274D /* AudioManager.m */; };
 		247268911B7CC29900804E56 /* CustomAdvertisementView.m in Sources */ = {isa = PBXBuildFile; fileRef = 247268901B7CC29900804E56 /* CustomAdvertisementView.m */; };
@@ -5855,6 +5863,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				070A217D1E7BBE35002385F7 /* green_music_icon.png in Resources */,
+				070A217E1E7BBE35002385F7 /* green_music_icon@2x.png in Resources */,
+				070A21491E7A706F002385F7 /* empty_state_icon.png in Resources */,
+				070A214A1E7A706F002385F7 /* empty_state_icon@2x.png in Resources */,
+				070A21451E77E099002385F7 /* folder_icon.png in Resources */,
+				070A21461E77E099002385F7 /* folder_icon@2x.png in Resources */,
 				56E1FF4A1E702909001FA412 /* document_icon@2x.png in Resources */,
 				56E1FF491E7028ED001FA412 /* document_icon.png in Resources */,
 				56E1FF471E6FF85B001FA412 /* Localizable.strings in Resources */,
@@ -6375,6 +6389,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				070A21441E77D3D9002385F7 /* FileDetail.m in Sources */,
+				070A21431E77D3D2002385F7 /* MetaFile.m in Sources */,
 				56E1FF481E6FFA05001FA412 /* Reachability.m in Sources */,
 				56E1FF3E1E6FEA3D001FA412 /* SimpleButton.m in Sources */,
 				56E1FF3D1E6FE749001FA412 /* CustomAlertView.m in Sources */,
@@ -6565,7 +6581,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rdc.lifebox2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5eba9f17-4fe9-463b-bea4-54510ea60135";
+				PROVISIONING_PROFILE = "533defd0-a874-4d19-ad00-009728b8ab03";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -6851,7 +6867,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rdc.lifebox2.ShareExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "51f2a261-57a8-4ead-9406-c167fb63f26d";
+				PROVISIONING_PROFILE = "f571024f-83b2-44f8-9429-6faf568a096d";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -6953,7 +6969,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rdc.lifebox2.AutoSyncWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "860057a1-587e-4d09-9a34-1b2d9682b357";
+				PROVISIONING_PROFILE = "f96fbaf1-5135-4292-ab67-9d1279dad0ad";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
