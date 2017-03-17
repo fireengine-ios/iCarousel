@@ -255,15 +255,12 @@
 
 -(void)setViewMovedUp:(BOOL)movedUp {
     if (movedUp) {
-//        container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + 300);
+        
+        container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + (IS_IPHONE_5 ? 280 : 290));
 //        [container setContentOffset:CGPointMake(0, 230) animated:YES];
         
-        CGRect okFrame = okButton.frame;
-        okFrame.origin.y = self.view.frame.size.height - 280;
-        okButton.frame = okFrame;
-        
     } else {
-//        container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
+        container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
 //        [container setContentOffset:CGPointZero animated:YES];
         okButton.frame = CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60);
     }
