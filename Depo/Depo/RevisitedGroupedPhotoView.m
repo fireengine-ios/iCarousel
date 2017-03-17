@@ -253,17 +253,18 @@
     refreshControl = nil;
 }
 
-- (void)reloadContent {
-    
-    for (MetaFile *selectedFile in selectedMetaFiles) {
-        for (FileInfoGroup *fileInfoGroup in self.groups) {
-            NSMutableArray *discardedItems = [@[] mutableCopy];
-            for (RawTypeFile *object in fileInfoGroup.fileInfo) {
-                if ([selectedFile isEqual:object.fileRef]) {
-                    [discardedItems addObject:object];
+- (void)reloadContent:(BOOL)forDelete {
+    if (forDelete) {
+        for (MetaFile *selectedFile in selectedMetaFiles) {
+            for (FileInfoGroup *fileInfoGroup in self.groups) {
+                NSMutableArray *discardedItems = [@[] mutableCopy];
+                for (RawTypeFile *object in fileInfoGroup.fileInfo) {
+                    if ([selectedFile isEqual:object.fileRef]) {
+                        [discardedItems addObject:object];
+                    }
                 }
+                [fileInfoGroup.fileInfo removeObjectsInArray:discardedItems];
             }
-            [fileInfoGroup.fileInfo removeObjectsInArray:discardedItems];
         }
     }
     [self setToUnselectiblePriorToRefresh];
@@ -354,7 +355,7 @@
 - (void) deleteSuccessCallback {
     IGLog(@"RevisitedGroupedPhotoView deleteSuccessCallback");
     [progress hide:YES];
-    [delegate revisitedGroupedPhotoDidFinishDeletingOrMoving];
+    [delegate revisitedGroupedPhotoDidFinishDeletingOrMoving:YES];
     //    [self proceedSuccessForProgressViewWithAddButtonKey:@"PhotoTab"];
 }
 
@@ -456,7 +457,10 @@
     for (FileInfoGroup *fileInfoGroup in self.groups) {
         for (RawTypeFile *fileType in fileInfoGroup.fileInfo) {
             if ([fileType isKindOfClass:[RawTypeFile class]]) {
-                [urlsToPrefetch addObject:[NSURL URLWithString:fileType.fileRef.detail.thumbMediumUrl]];
+                NSURL *thumbnailURL = [NSURL URLWithString:fileType.fileRef.detail.thumbMediumUrl];
+                if (thumbnailURL != nil) {
+                    [urlsToPrefetch addObject:thumbnailURL];
+                }
             }
         }
     }
@@ -830,7 +834,7 @@
 
 - (void) photosAddedSuccessCallback {
     [progress hide:YES];
-    [delegate revisitedGroupedPhotoDidFinishDeletingOrMoving];
+    [delegate revisitedGroupedPhotoDidFinishDeletingOrMoving:NO];
 }
 
 - (void) photosAddedFailCallback:(NSString *) errorMessage {

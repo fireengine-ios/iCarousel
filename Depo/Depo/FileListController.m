@@ -131,7 +131,7 @@
         
         self.topIndex+=1;
 
-        fileTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex) style:UITableViewStylePlain];
+        fileTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topIndex, self.view.frame.size.width, self.view.frame.size.height - self.bottomIndex - 50) style:UITableViewStylePlain];
         fileTable.delegate = self;
         fileTable.dataSource = self;
         fileTable.backgroundColor = [UIColor clearColor];
