@@ -38,14 +38,14 @@
 @end
 
 @interface SquareImageView : UIView <UploadManagerDelegate, UIGestureRecognizerDelegate> {
-    UIView *progressSeparator;
+    
     UIImageView *maskView;
     BOOL isSelectible;
     BOOL isMarked;
     BOOL wasUnloaded;
     UploadErrorType uploadErrorType;
 }
-
+@property (nonatomic, strong) UIView *progressSeparator;
 @property (nonatomic, weak) id<SquareImageDelegate> delegate;
 @property (nonatomic, strong) MetaFile *file;
 @property (nonatomic, strong) ALAsset *asset;
