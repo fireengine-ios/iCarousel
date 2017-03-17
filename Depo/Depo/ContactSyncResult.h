@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "AppConstants.h"
 
-@interface ContactSyncResult : NSObject
+@interface ContactSyncResult : NSObject <NSCoding>
 
 @property (nonatomic) int clientUpdateCount;
 @property (nonatomic) int serverUpdateCount;
@@ -17,6 +17,12 @@
 @property (nonatomic) int serverNewCount;
 @property (nonatomic) int clientDeleteCount;
 @property (nonatomic) int serverDeleteCount;
+@property (nonatomic) int totalContactOnServer;
+@property (nonatomic) int totalContactOnClient;
+
 @property (nonatomic) ContactSyncType syncType;
+
++ (instancetype)loadData;
+- (void)saveData;
 
 @end

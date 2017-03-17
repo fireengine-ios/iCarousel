@@ -560,6 +560,8 @@ static bool syncing = false;
                 
                 NSNumber *timestamp = data[@"timestamp"];
                 NSString *resultString = data[@"result"];
+                NSNumber *totalCount = data[@"totalCount"];
+                
                 NSData *data = [resultString dataUsingEncoding:NSUTF8StringEncoding];
                 NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
                 SYNC_Log(@"Results:%@", result);
@@ -625,6 +627,9 @@ static bool syncing = false;
                 [[SyncStatus shared] addEmpty:deleted state:SYNC_INFO_DELETED_ON_SERVER];
                 [[SyncStatus shared] addEmpty:updated state:SYNC_INFO_UPDATED_ON_SERVER];
 
+                [SyncStatus shared].totalContactOnClient = [NSNumber numberWithInteger:0];
+                [SyncStatus shared].totalContactOnServer = totalCount;
+                
                 if (!SYNC_NUMBER_IS_NULL_OR_ZERO(timestamp)){
                     [ContactSyncSDK setLastSyncTime:timestamp]; // Store client last sync time
                 }
@@ -863,7 +868,10 @@ static bool syncing = false;
                 SYNC_Log(@"After processing RESTORE");
                 [[ContactUtil shared] printContacts];
                 [[SyncDBUtils shared] printRecords];
-    
+                
+                [SyncStatus shared].totalContactOnServer = [NSNumber numberWithInteger:0];
+                [SyncStatus shared].totalContactOnClient = [NSNumber numberWithInteger:[[ContactUtil shared] getContactCount]];
+                
                 [self endOfSyncCycle:SYNC_RESULT_SUCCESS];
             } else if ([@"ERROR" isEqualToString:data[@"status"]]) {
                 [defaults removeObjectForKey:SYNC_KEY_CONTACT_STORE_DELETED];

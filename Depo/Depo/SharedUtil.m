@@ -13,7 +13,7 @@
 #elif defined PLATFORM_ICT
 #define SHARED_GROUP_NAME @"group.com.turkcell.akillideponew.ent"
 #else
-#define SHARED_GROUP_NAME @"group.com.igones"
+#define SHARED_GROUP_NAME @"group.com.rdc.lifebox2"
 #endif
 #define SHARED_TOKEN_KEY @"SHARED_TOKEN_KEY"
 #define SHARED_REMEMBER_ME_TOKEN_KEY @"SHARED_REMEMBER_ME_TOKEN_KEY"

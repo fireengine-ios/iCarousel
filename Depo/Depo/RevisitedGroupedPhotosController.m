@@ -488,18 +488,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    if(!APPDELEGATE.session.appRaterFlag) {
-        // App Rater
-        [AppRater sharedInstance].daysUntilPrompt = 5;
-        [AppRater sharedInstance].launchesUntilPrompt = 10;
-        [AppRater sharedInstance].remindMeDaysUntilPrompt = 15;
-        [AppRater sharedInstance].remindMeLaunchesUntilPrompt = 10;
-        // [AppRater sharedInstance].preferredLanguage = @"en";
-        [[AppRater sharedInstance] appLaunched];
-        
-        APPDELEGATE.session.appRaterFlag = YES;
-    }
-
     IGLog(@"RevisitedGroupedPhotosController viewDidLoad");
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appGoesToBg) name:UIApplicationDidEnterBackgroundNotification object:nil];
@@ -519,6 +507,18 @@
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 
+    if(!APPDELEGATE.session.appRaterFlag) {
+        // App Rater
+        [AppRater sharedInstance].daysUntilPrompt = 5;
+        [AppRater sharedInstance].launchesUntilPrompt = 10;
+        [AppRater sharedInstance].remindMeDaysUntilPrompt = 15;
+        [AppRater sharedInstance].remindMeLaunchesUntilPrompt = 10;
+        // [AppRater sharedInstance].preferredLanguage = @"en";
+        [[AppRater sharedInstance] appLaunched];
+        
+        APPDELEGATE.session.appRaterFlag = YES;
+    }
+    
     NSArray *addTypesForController = [APPDELEGATE.mapUtil readAddTypesByController:@"PhotoTab"];
     if(!albumView.hidden) {
         addTypesForController = [APPDELEGATE.mapUtil readAddTypesByController:@"AlbumTab"];
