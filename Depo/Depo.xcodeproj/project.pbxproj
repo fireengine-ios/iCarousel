@@ -722,6 +722,14 @@
 		05F178471BFBB4A70014B2BD /* yellow_cropy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05F178431BFBB4A70014B2BD /* yellow_cropy@2x.png */; };
 		05F4AA281A2F7692000F41B8 /* ActivityUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F4AA271A2F7692000F41B8 /* ActivityUtil.m */; };
 		05F931881C160E2F00858223 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05F931871C160E2F00858223 /* Accelerate.framework */; };
+		070A21431E77D3D2002385F7 /* MetaFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 0557C73719D1C905005E9F6B /* MetaFile.m */; };
+		070A21441E77D3D9002385F7 /* FileDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 0524E32819D955FA00E2698E /* FileDetail.m */; };
+		070A21451E77E099002385F7 /* folder_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 051CB3BD19D2F71200E5FC88 /* folder_icon.png */; };
+		070A21461E77E099002385F7 /* folder_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 051CB3EB19D2F71200E5FC88 /* folder_icon@2x.png */; };
+		070A21491E7A706F002385F7 /* empty_state_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 051CB3BE19D2F71200E5FC88 /* empty_state_icon.png */; };
+		070A214A1E7A706F002385F7 /* empty_state_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 051CB3CC19D2F71200E5FC88 /* empty_state_icon@2x.png */; };
+		070A217D1E7BBE35002385F7 /* green_music_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 05440ADA19D4363D009803D7 /* green_music_icon.png */; };
+		070A217E1E7BBE35002385F7 /* green_music_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05440ADB19D4363D009803D7 /* green_music_icon@2x.png */; };
 		2443E1541B6BB0C5001C274D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2443E1531B6BB0C5001C274D /* AudioToolbox.framework */; };
 		2443E1571B6BB5F3001C274D /* AudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2443E1561B6BB5F3001C274D /* AudioManager.m */; };
 		247268911B7CC29900804E56 /* CustomAdvertisementView.m in Sources */ = {isa = PBXBuildFile; fileRef = 247268901B7CC29900804E56 /* CustomAdvertisementView.m */; };
@@ -824,6 +832,9 @@
 		568FEFEB1E2D6CAE00AF4FFB /* icon_m_createstory.png in Resources */ = {isa = PBXBuildFile; fileRef = 568FEFEA1E2D6CAE00AF4FFB /* icon_m_createstory.png */; };
 		568FEFED1E2D6CBB00AF4FFB /* icon_m_createstory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 568FEFEC1E2D6CBB00AF4FFB /* icon_m_createstory@2x.png */; };
 		568FEFF11E2D6CE000AF4FFB /* icon_m_createstory@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 568FEFF01E2D6CE000AF4FFB /* icon_m_createstory@3x.png */; };
+		5694628E1E6D3D860043FC67 /* DocumentPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5694628D1E6D3D860043FC67 /* DocumentPickerViewController.m */; };
+		569462911E6D3D860043FC67 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5694628F1E6D3D860043FC67 /* MainInterface.storyboard */; };
+		569462A41E6D3D870043FC67 /* Lifebox Picker.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 569462881E6D3D850043FC67 /* Lifebox Picker.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5695E6E31E1B6F8D00351109 /* icon_kapakresmi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5695E6E01E1B6F8D00351109 /* icon_kapakresmi@2x.png */; };
 		5695E6E41E1B6F8D00351109 /* icon_kapakresmi@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5695E6E11E1B6F8D00351109 /* icon_kapakresmi@3x.png */; };
 		5695E6E51E1B6F8D00351109 /* icon_kapakresmi.png in Resources */ = {isa = PBXBuildFile; fileRef = 5695E6E21E1B6F8D00351109 /* icon_kapakresmi.png */; };
@@ -834,6 +845,8 @@
 		569749641DEEF999005C0460 /* textline_1240.png in Resources */ = {isa = PBXBuildFile; fileRef = 569749631DEEF999005C0460 /* textline_1240.png */; };
 		569749661DEEF9B1005C0460 /* textline_1240@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 569749651DEEF9B1005C0460 /* textline_1240@2x.png */; };
 		569749681DEEF9C9005C0460 /* textline_1240@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 569749671DEEF9C9005C0460 /* textline_1240@3x.png */; };
+		5697DFA61E71798C000A37AC /* Info-Enterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5697DFA51E71798C000A37AC /* Info-Enterprise.plist */; };
+		5697DFA81E7179D2000A37AC /* Info-AppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5697DFA71E7179D2000A37AC /* Info-AppStore.plist */; };
 		569B5C931DEF5D0D008153F5 /* icon_lifebox.png in Resources */ = {isa = PBXBuildFile; fileRef = 569B5C921DEF5D0D008153F5 /* icon_lifebox.png */; };
 		569B5C951DEF5D1F008153F5 /* icon_lifebox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 569B5C941DEF5D1F008153F5 /* icon_lifebox@2x.png */; };
 		569B5C971DEF5D2C008153F5 /* icon_lifebox@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 569B5C961DEF5D2C008153F5 /* icon_lifebox@3x.png */; };
@@ -877,6 +890,25 @@
 		56D842B11E2E48D300028002 /* SyncSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 56D842A41E2E48D300028002 /* SyncSettings.m */; };
 		56D842B21E2E48D300028002 /* SyncStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 56D842A61E2E48D300028002 /* SyncStatus.m */; };
 		56F3031A1E6851AD00C11376 /* Icon_167.png in Resources */ = {isa = PBXBuildFile; fileRef = 56F303191E6851AD00C11376 /* Icon_167.png */; };
+		56E1FF391E6F5D17001FA412 /* ShareDocCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 56E1FF381E6F5D17001FA412 /* ShareDocCell.m */; };
+		56E1FF3B1E6F6399001FA412 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 051E1E3119CAC57400FD1E03 /* Util.m */; };
+		56E1FF3C1E6F63A2001FA412 /* CustomLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0589066C19CC560100A9E517 /* CustomLabel.m */; };
+		56E1FF3D1E6FE749001FA412 /* CustomAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 051DE36F19CC140100F27C85 /* CustomAlertView.m */; };
+		56E1FF3E1E6FEA3D001FA412 /* SimpleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0555EF1C19F91ACA0068F4CC /* SimpleButton.m */; };
+		56E1FF3F1E6FF821001FA412 /* TurkcellSaturaReg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0589065B19CC51EC00A9E517 /* TurkcellSaturaReg.ttf */; };
+		56E1FF401E6FF821001FA412 /* TurkcellSaturaMedIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0589065C19CC51EC00A9E517 /* TurkcellSaturaMedIta.ttf */; };
+		56E1FF411E6FF821001FA412 /* TurkcellSaturaMed.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0589065D19CC51EC00A9E517 /* TurkcellSaturaMed.ttf */; };
+		56E1FF421E6FF821001FA412 /* TurkcellSaturaIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0589065E19CC51EC00A9E517 /* TurkcellSaturaIta.ttf */; };
+		56E1FF431E6FF821001FA412 /* TurkcellSaturaDemIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0589065F19CC51EC00A9E517 /* TurkcellSaturaDemIta.ttf */; };
+		56E1FF441E6FF821001FA412 /* TurkcellSaturaDem.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0589066019CC51EC00A9E517 /* TurkcellSaturaDem.ttf */; };
+		56E1FF451E6FF821001FA412 /* TurkcellSaturaBolIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0589066119CC51EC00A9E517 /* TurkcellSaturaBolIta.ttf */; };
+		56E1FF461E6FF821001FA412 /* TurkcellSaturaBol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0589066219CC51EC00A9E517 /* TurkcellSaturaBol.ttf */; };
+		56E1FF471E6FF85B001FA412 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 053EC45919DAA2BF000C2B77 /* Localizable.strings */; };
+		56E1FF481E6FFA05001FA412 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 051E1E5D19CAC92700FD1E03 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		56E1FF491E7028ED001FA412 /* document_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 051CB3C119D2F71200E5FC88 /* document_icon.png */; };
+		56E1FF4A1E702909001FA412 /* document_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 051CB3EA19D2F71200E5FC88 /* document_icon@2x.png */; };
+		56ED58F91E6DF26B004ACE10 /* SharedUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 05028CD21B5A9866000F2D09 /* SharedUtil.m */; };
+		56ED59011E6DFBD9004ACE10 /* Document.m in Sources */ = {isa = PBXBuildFile; fileRef = 56ED59001E6DFBD9004ACE10 /* Document.m */; };
 		56FCFDD51A9C7DDA00AC041C /* info_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 56FCFDD31A9C7DDA00AC041C /* info_icon.png */; };
 		56FCFDD61A9C7DDA00AC041C /* info_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56FCFDD41A9C7DDA00AC041C /* info_icon@2x.png */; };
 		6308E46D1E64C0E800BB32A0 /* VideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6308E46C1E64C0E800BB32A0 /* VideoView.m */; };
@@ -1265,6 +1297,13 @@
 			remoteGlobalIDString = 05C850A01ACD63F700F976DE;
 			remoteInfo = AutoSyncWidget;
 		};
+		569462A21E6D3D870043FC67 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 569462871E6D3D850043FC67;
+			remoteInfo = "Lifebox Picker";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -1276,6 +1315,7 @@
 			files = (
 				05C3A3841B57DFAB002AB49A /* DepoShareExtension.appex in Embed App Extensions */,
 				05C850AE1ACD63F700F976DE /* AutoSyncWidget.appex in Embed App Extensions */,
+				569462A41E6D3D870043FC67 /* Lifebox Picker.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2439,6 +2479,11 @@
 		568FEFEA1E2D6CAE00AF4FFB /* icon_m_createstory.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_m_createstory.png; sourceTree = "<group>"; };
 		568FEFEC1E2D6CBB00AF4FFB /* icon_m_createstory@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_m_createstory@2x.png"; sourceTree = "<group>"; };
 		568FEFF01E2D6CE000AF4FFB /* icon_m_createstory@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_m_createstory@3x.png"; sourceTree = "<group>"; };
+		569462881E6D3D850043FC67 /* Lifebox Picker.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Lifebox Picker.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5694628C1E6D3D860043FC67 /* DocumentPickerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DocumentPickerViewController.h; sourceTree = "<group>"; };
+		5694628D1E6D3D860043FC67 /* DocumentPickerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DocumentPickerViewController.m; sourceTree = "<group>"; };
+		569462901E6D3D860043FC67 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		569462921E6D3D860043FC67 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5695E6E01E1B6F8D00351109 /* icon_kapakresmi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_kapakresmi@2x.png"; sourceTree = "<group>"; };
 		5695E6E11E1B6F8D00351109 /* icon_kapakresmi@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_kapakresmi@3x.png"; sourceTree = "<group>"; };
 		5695E6E21E1B6F8D00351109 /* icon_kapakresmi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_kapakresmi.png; sourceTree = "<group>"; };
@@ -2449,6 +2494,11 @@
 		569749631DEEF999005C0460 /* textline_1240.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = textline_1240.png; sourceTree = "<group>"; };
 		569749651DEEF9B1005C0460 /* textline_1240@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "textline_1240@2x.png"; sourceTree = "<group>"; };
 		569749671DEEF9C9005C0460 /* textline_1240@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "textline_1240@3x.png"; sourceTree = "<group>"; };
+		5697DFA51E71798C000A37AC /* Info-Enterprise.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Enterprise.plist"; sourceTree = "<group>"; };
+		5697DFA71E7179D2000A37AC /* Info-AppStore.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-AppStore.plist"; sourceTree = "<group>"; };
+		5697DFA91E718588000A37AC /* Lifebox_Picker-AppStore.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "Lifebox_Picker-AppStore.entitlements"; sourceTree = "<group>"; };
+		5697DFAA1E7185BC000A37AC /* Lifebox_Picker-Enterprise.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "Lifebox_Picker-Enterprise.entitlements"; sourceTree = "<group>"; };
+		5697DFAC1E7276DC000A37AC /* Lifebox_Picker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Lifebox_Picker.entitlements; sourceTree = "<group>"; };
 		569B5C921DEF5D0D008153F5 /* icon_lifebox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_lifebox.png; sourceTree = "<group>"; };
 		569B5C941DEF5D1F008153F5 /* icon_lifebox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_lifebox@2x.png"; sourceTree = "<group>"; };
 		569B5C961DEF5D2C008153F5 /* icon_lifebox@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_lifebox@3x.png"; sourceTree = "<group>"; };
@@ -2521,6 +2571,10 @@
 		56D842A51E2E48D300028002 /* SyncStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncStatus.h; sourceTree = "<group>"; };
 		56D842A61E2E48D300028002 /* SyncStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncStatus.m; sourceTree = "<group>"; };
 		56F303191E6851AD00C11376 /* Icon_167.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_167.png; sourceTree = "<group>"; };
+		56E1FF381E6F5D17001FA412 /* ShareDocCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareDocCell.m; sourceTree = "<group>"; };
+		56E1FF3A1E6F5D2B001FA412 /* ShareDocCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareDocCell.h; sourceTree = "<group>"; };
+		56ED58FF1E6DFBC0004ACE10 /* Document.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Document.h; sourceTree = "<group>"; };
+		56ED59001E6DFBD9004ACE10 /* Document.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Document.m; sourceTree = "<group>"; };
 		56FCFDD31A9C7DDA00AC041C /* info_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info_icon.png; sourceTree = "<group>"; };
 		56FCFDD41A9C7DDA00AC041C /* info_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "info_icon@2x.png"; sourceTree = "<group>"; };
 		6308E46B1E64C0E800BB32A0 /* VideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoView.h; sourceTree = "<group>"; };
@@ -3072,6 +3126,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		569462851E6D3D850043FC67 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -3101,6 +3162,7 @@
 				051E1E1519CAC2F900FD1E03 /* DepoTests */,
 				05C850A41ACD63F700F976DE /* AutoSyncWidget */,
 				05C3A37A1B57DFAB002AB49A /* DepoShareExtension */,
+				569462891E6D3D860043FC67 /* Lifebox Picker */,
 				051E1DF519CAC2F900FD1E03 /* Frameworks */,
 				051E1DF419CAC2F900FD1E03 /* Products */,
 			);
@@ -3113,6 +3175,7 @@
 				051E1E0E19CAC2F900FD1E03 /* DepoTests.xctest */,
 				05C850A11ACD63F700F976DE /* AutoSyncWidget.appex */,
 				05C3A3791B57DFAB002AB49A /* DepoShareExtension.appex */,
+				569462881E6D3D850043FC67 /* Lifebox Picker.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -5084,6 +5147,34 @@
 			path = ADJAdditions;
 			sourceTree = "<group>";
 		};
+		569462891E6D3D860043FC67 /* Lifebox Picker */ = {
+			isa = PBXGroup;
+			children = (
+				5697DFAC1E7276DC000A37AC /* Lifebox_Picker.entitlements */,
+				5697DFA91E718588000A37AC /* Lifebox_Picker-AppStore.entitlements */,
+				5697DFAA1E7185BC000A37AC /* Lifebox_Picker-Enterprise.entitlements */,
+				5694628C1E6D3D860043FC67 /* DocumentPickerViewController.h */,
+				5694628D1E6D3D860043FC67 /* DocumentPickerViewController.m */,
+				5694628F1E6D3D860043FC67 /* MainInterface.storyboard */,
+				5694628A1E6D3D860043FC67 /* Supporting Files */,
+				56ED58FF1E6DFBC0004ACE10 /* Document.h */,
+				56ED59001E6DFBD9004ACE10 /* Document.m */,
+				56E1FF381E6F5D17001FA412 /* ShareDocCell.m */,
+				56E1FF3A1E6F5D2B001FA412 /* ShareDocCell.h */,
+			);
+			path = "Lifebox Picker";
+			sourceTree = "<group>";
+		};
+		5694628A1E6D3D860043FC67 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5697DFA71E7179D2000A37AC /* Info-AppStore.plist */,
+				5697DFA51E71798C000A37AC /* Info-Enterprise.plist */,
+				569462921E6D3D860043FC67 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		56B9E92B1DED750600DE1011 /* AppRater */ = {
 			isa = PBXGroup;
 			children = (
@@ -5186,6 +5277,7 @@
 			dependencies = (
 				05C850AD1ACD63F700F976DE /* PBXTargetDependency */,
 				05C3A3831B57DFAB002AB49A /* PBXTargetDependency */,
+				569462A31E6D3D870043FC67 /* PBXTargetDependency */,
 			);
 			name = Depo;
 			productName = Depo;
@@ -5244,6 +5336,23 @@
 			productReference = 05C850A11ACD63F700F976DE /* AutoSyncWidget.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		569462871E6D3D850043FC67 /* Lifebox Picker */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 569462AE1E6D3D870043FC67 /* Build configuration list for PBXNativeTarget "Lifebox Picker" */;
+			buildPhases = (
+				569462841E6D3D850043FC67 /* Sources */,
+				569462851E6D3D850043FC67 /* Frameworks */,
+				569462861E6D3D850043FC67 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Lifebox Picker";
+			productName = "Lifebox Picker";
+			productReference = 569462881E6D3D850043FC67 /* Lifebox Picker.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -5291,6 +5400,16 @@
 							};
 						};
 					};
+					569462871E6D3D850043FC67 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = PT569ZA878;
+						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
 				};
 			};
 			buildConfigurationList = 051E1DEE19CAC2F900FD1E03 /* Build configuration list for PBXProject "Depo" */;
@@ -5314,6 +5433,7 @@
 				051E1E0D19CAC2F900FD1E03 /* DepoTests */,
 				05C850A01ACD63F700F976DE /* AutoSyncWidget */,
 				05C3A3781B57DFAB002AB49A /* DepoShareExtension */,
+				569462871E6D3D850043FC67 /* Lifebox Picker */,
 			);
 		};
 /* End PBXProject section */
@@ -6064,6 +6184,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		569462861E6D3D850043FC67 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				070A217D1E7BBE35002385F7 /* green_music_icon.png in Resources */,
+				070A217E1E7BBE35002385F7 /* green_music_icon@2x.png in Resources */,
+				070A21491E7A706F002385F7 /* empty_state_icon.png in Resources */,
+				070A214A1E7A706F002385F7 /* empty_state_icon@2x.png in Resources */,
+				070A21451E77E099002385F7 /* folder_icon.png in Resources */,
+				070A21461E77E099002385F7 /* folder_icon@2x.png in Resources */,
+				56E1FF4A1E702909001FA412 /* document_icon@2x.png in Resources */,
+				56E1FF491E7028ED001FA412 /* document_icon.png in Resources */,
+				56E1FF471E6FF85B001FA412 /* Localizable.strings in Resources */,
+				56E1FF3F1E6FF821001FA412 /* TurkcellSaturaReg.ttf in Resources */,
+				5697DFA81E7179D2000A37AC /* Info-AppStore.plist in Resources */,
+				5697DFA61E71798C000A37AC /* Info-Enterprise.plist in Resources */,
+				56E1FF401E6FF821001FA412 /* TurkcellSaturaMedIta.ttf in Resources */,
+				56E1FF411E6FF821001FA412 /* TurkcellSaturaMed.ttf in Resources */,
+				56E1FF421E6FF821001FA412 /* TurkcellSaturaIta.ttf in Resources */,
+				56E1FF431E6FF821001FA412 /* TurkcellSaturaDemIta.ttf in Resources */,
+				56E1FF441E6FF821001FA412 /* TurkcellSaturaDem.ttf in Resources */,
+				56E1FF451E6FF821001FA412 /* TurkcellSaturaBolIta.ttf in Resources */,
+				56E1FF461E6FF821001FA412 /* TurkcellSaturaBol.ttf in Resources */,
+				569462911E6D3D860043FC67 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -6591,6 +6738,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		569462841E6D3D850043FC67 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				070A21441E77D3D9002385F7 /* FileDetail.m in Sources */,
+				070A21431E77D3D2002385F7 /* MetaFile.m in Sources */,
+				56E1FF481E6FFA05001FA412 /* Reachability.m in Sources */,
+				56E1FF3E1E6FEA3D001FA412 /* SimpleButton.m in Sources */,
+				56E1FF3D1E6FE749001FA412 /* CustomAlertView.m in Sources */,
+				56E1FF3C1E6F63A2001FA412 /* CustomLabel.m in Sources */,
+				56E1FF3B1E6F6399001FA412 /* Util.m in Sources */,
+				56ED59011E6DFBD9004ACE10 /* Document.m in Sources */,
+				56ED58F91E6DF26B004ACE10 /* SharedUtil.m in Sources */,
+				56E1FF391E6F5D17001FA412 /* ShareDocCell.m in Sources */,
+				5694628E1E6D3D860043FC67 /* DocumentPickerViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -6608,6 +6773,11 @@
 			isa = PBXTargetDependency;
 			target = 05C850A01ACD63F700F976DE /* AutoSyncWidget */;
 			targetProxy = 05C850AC1ACD63F700F976DE /* PBXContainerItemProxy */;
+		};
+		569462A31E6D3D870043FC67 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 569462871E6D3D850043FC67 /* Lifebox Picker */;
+			targetProxy = 569462A21E6D3D870043FC67 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -6662,6 +6832,14 @@
 				633238D31E6D99260064939E /* ar */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		5694628F1E6D3D860043FC67 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				569462901E6D3D860043FC67 /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -6742,8 +6920,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Omer Burak Kir (7BESVJQ8SV)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Omer Burak Kir (7BESVJQ8SV)";
+				CODE_SIGN_ENTITLEMENTS = Depo/Depo.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Turan Yilmaz (4B9BE7D75V)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Turan Yilmaz (4B9BE7D75V)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -7043,8 +7222,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Omer Burak Kir (7BESVJQ8SV)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Omer Burak Kir (7BESVJQ8SV)";
+				CODE_SIGN_ENTITLEMENTS = DepoShareExtension/DepoShareExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Turan Yilmaz (4B9BE7D75V)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Turan Yilmaz (4B9BE7D75V)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -7226,7 +7406,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_ENTITLEMENTS = AutoSyncWidget/AutoSyncWidget.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "AutoSyncWidget/AutoSyncWidget-Enterprise.entitlements";
 				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]" = "AutoSyncWidget/AutoSyncWidget-Enterprise.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
@@ -7244,6 +7424,128 @@
 				PROVISIONING_PROFILE_SPECIFIER = LifeboxAutoSyncWidgetDevelopment_20161228;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Enterprise;
+		};
+		569462A51E6D3D870043FC67 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = "Lifebox Picker/Lifebox_Picker.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Turan Yilmaz (4B9BE7D75V)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Turan Yilmaz (4B9BE7D75V)";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = PT569ZA878;
+				ENABLE_BITCODE = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					"PLATFORM_LOCAL=1",
+				);
+				INFOPLIST_FILE = "Lifebox Picker/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rdc.lifebox2.DocumentPicker;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "8bc577eb-f0e6-4f03-af73-310602d58d47";
+				PROVISIONING_PROFILE_SPECIFIER = LifeboxDocumentPicker_20170310;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		569462A61E6D3D870043FC67 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = "Lifebox Picker/Lifebox_Picker.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Omer Burak Kir (7BESVJQ8SV)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_BITCODE = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "PLATFORM_STORE=1";
+				INFOPLIST_FILE = "Lifebox Picker/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rdc.lifebox2.DocumentPicker;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		569462A71E6D3D870043FC67 /* AppStore */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = "Lifebox Picker/Lifebox_Picker-AppStore.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_BITCODE = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "PLATFORM_STORE=1";
+				INFOPLIST_FILE = "Lifebox Picker/Info-AppStore.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.documentpicker;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "dd77b80d-8e52-4a68-92c5-4ef74248c7e5";
+				PROVISIONING_PROFILE_SPECIFIER = "dd77b80d-8e52-4a68-92c5-4ef74248c7e5";
+				SKIP_INSTALL = YES;
+			};
+			name = AppStore;
+		};
+		569462A81E6D3D870043FC67 /* Enterprise */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = "Lifebox Picker/Lifebox_Picker-Enterprise.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_BITCODE = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "PLATFORM_ICT=1";
+				INFOPLIST_FILE = "Lifebox Picker/Info-Enterprise.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent.documentpicker;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "0275d411-5d80-418d-a8bf-4a2467bea7b1";
+				PROVISIONING_PROFILE_SPECIFIER = "0275d411-5d80-418d-a8bf-4a2467bea7b1";
+				SKIP_INSTALL = YES;
 			};
 			name = Enterprise;
 		};
@@ -7301,6 +7603,17 @@
 				05C850B01ACD63F700F976DE /* Release */,
 				05C850B11ACD63F700F976DE /* AppStore */,
 				05C850B21ACD63F700F976DE /* Enterprise */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		569462AE1E6D3D870043FC67 /* Build configuration list for PBXNativeTarget "Lifebox Picker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				569462A51E6D3D870043FC67 /* Debug */,
+				569462A61E6D3D870043FC67 /* Release */,
+				569462A71E6D3D870043FC67 /* AppStore */,
+				569462A81E6D3D870043FC67 /* Enterprise */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

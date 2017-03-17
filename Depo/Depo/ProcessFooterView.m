@@ -50,6 +50,7 @@
         [self addSubview:failImgView];
         
         messageLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(60, (self.frame.size.height - 20)/2, self.frame.size.width - 70, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:17] withColor:[UIColor whiteColor] withText:@""];
+        messageLabel.adjustsFontSizeToFitWidth = true;
         [self addSubview:messageLabel];
         
         UITapGestureRecognizer * singleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(messageClicked)];
@@ -90,6 +91,7 @@
     [defaultIndicator stopAnimating];
     defaultIndicator.hidden = YES;
     successImgView.hidden = NO;
+    failImgView.hidden = YES;
     [self performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:2.0f];
 }
 
@@ -99,7 +101,8 @@
     messageLabel.text = self.failMsg;
     [defaultIndicator stopAnimating];
     defaultIndicator.hidden = YES;
-    successImgView.hidden = NO;
+    successImgView.hidden = YES;
+    failImgView.hidden = NO;
     [self performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:2.0f];
 }
 

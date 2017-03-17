@@ -234,7 +234,7 @@
 #elif defined PLATFORM_ICT
 #define GROUP_NAME_SUITE_NSUSERDEFAULTS @"group.com.turkcell.akillideponew.ent"
 #else
-#define GROUP_NAME_SUITE_NSUSERDEFAULTS @"group.com.igones.Depo"
+#define GROUP_NAME_SUITE_NSUSERDEFAULTS @"group.com.rdc.lifebox2"
 #endif
 
 #define EXTENSION_WORMHOLE_DIR @"WORMHOLE_DIR"
@@ -246,8 +246,9 @@
 #define SPECIAL_LOCAL_ALBUM_NAMES @[@"Instagram", @"Picasa", @"Whatsapp", @"Facebook", @"Twitter", @"Snapchat", @"BIP", @"Bip"]
 
 //TODO test->prod
-//#define CONTACT_SYNC_SERVER_URL @"https://adepo.turkcell.com.tr/ttyapi/"
-#define CONTACT_SYNC_SERVER_URL @"https://tcloudstb.turkcell.com.tr/ttyapi/"
+//#define CONTACT_SYNC_SERVER_URL @"https://adepo.turkcell.com.tr/ttyapi/"      Eski URL
+#define CONTACT_SYNC_SERVER_URL @"https://contactsync.turkcell.com.tr/ttyapi/";
+//#define CONTACT_SYNC_SERVER_URL @"https://tcloudstb.turkcell.com.tr/ttyapi/"
 
 //#define UPDATER_SDK_URL @"http://www.igones.com/adepo/ios_igones.json"
 #define UPDATER_SDK_URL @"https://adepo.turkcell.com.tr/download/update_ios.json"
