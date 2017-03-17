@@ -60,6 +60,9 @@
 }
 
 - (void) pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateActive) {
+        return;
+    }
     [super pushViewController:viewController animated:animated];
     
     if([self viewControllers]) {
