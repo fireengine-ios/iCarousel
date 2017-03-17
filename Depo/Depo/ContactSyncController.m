@@ -19,6 +19,9 @@
 #import "AppSession.h"
 #import "AppConstants.h"
 #import "BaseViewController.h"
+#import "RequestTokenDao.h"
+#import "RadiusDao.h"
+#import "Reachability.h"
 
 #define tableViewHeaderHeight 40.0f
 #define tableViewRowHeight 40.0f
@@ -27,7 +30,13 @@
 @interface ContactSyncController () {
 //    sayfa degistirildiginde 1 saniyeligine daha ekran kalmasi icin super view'deki kullanilmadi
     ProcessFooterView *processView;
+    SYNCMode syncMode;
 }
+
+@property (nonatomic, assign) BOOL triedAgain;
+@property (nonatomic) NSString* errMessage;
+@property (nonatomic) RequestTokenDao *tokenDao;
+@property (nonatomic) RadiusDao *radiusDao;
 
 @end
 
@@ -174,15 +183,26 @@
                 case SYNC_RESULT_ERROR_PERMISSION_ADDRESS_BOOK:
                     [self showErrorAlertWithMessage:NSLocalizedString(@"AddressBookGrantError", @"")];
                     break;
+                    
+                    
                 case SYNC_RESULT_ERROR_REMOTE_SERVER:
-                    [self showErrorAlertWithMessage:NSLocalizedString(@"ContactSyncApiError", @"")];
-                    break;
+                    _errMessage = @"ContactSyncApiError";
+                    
                 case SYNC_RESULT_ERROR_NETWORK:
-                    [self showErrorAlertWithMessage:NSLocalizedString(@"ContactSyncNetworkError", @"")];
-                    break;
+                    _errMessage = @"ContactSyncGeneralError";
+                    
                 default:
-                    [self showErrorAlertWithMessage:NSLocalizedString(@"ContactSyncGeneralError", @"")];
-                    break;
+                    if (_triedAgain == NO) {
+                        APPDELEGATE.session.authToken = nil;
+                        _triedAgain = YES;
+                        [self triggerNewToken];
+                    } else {
+                        [self showErrorAlertWithMessage:NSLocalizedString(_errMessage, @"")];
+                        [processView dismissWithFailureMessage];
+                        [self makeButtonsActive];
+                    }
+                    
+                    return;
             }
             [self manualSyncFinalized];
         };
@@ -191,22 +211,53 @@
 }
 
 - (void) backupClicked {
-    APPDELEGATE.session.syncType = ContactSyncTypeBackup;
-    [ContactSyncSDK doSync:SYNCBackup];
-    
+    IGLog(@"ContactSync backup started");
     [self showProcessView];
     [self makeButtonsPassive];
+    
+    [ContactSyncSDK hasContactForBackup:^(SYNCResultType resultType) {
+        switch (resultType) {
+            case SYNC_RESULT_SUCCESS: {
+                APPDELEGATE.session.syncType = ContactSyncTypeBackup;
+                _triedAgain = NO;
+                [ContactSyncSDK doSync:SYNCBackup];
+                syncMode = SYNCBackup;
+            }
+                break;
+                
+            case SYNC_RESULT_FAIL: {
+                [self showErrorAlertWithMessage:NSLocalizedString(@"ContactThereIsNoContact", @"")];
+                [processView dismissWithFailureMessage];
+                [self makeButtonsActive];
+            }
+                break;
+                
+            case SYNC_RESULT_ERROR_PERMISSION_ADDRESS_BOOK: {
+                [self showErrorAlertWithMessage:NSLocalizedString(@"AddressBookGrantError", @"")];
+                [processView dismissWithFailureMessage];
+                [self makeButtonsActive];
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }];
 }
 
 - (void) restoreClicked {
+    IGLog(@"ContactSync restore started");
     APPDELEGATE.session.syncType = ContactSyncTypeRestore;
+    _triedAgain = NO;
     [ContactSyncSDK doSync:SYNCRestore];
+    syncMode = SYNCRestore;
     
     [self showProcessView];
     [self makeButtonsPassive];
 }
 
 - (void) manualSyncFinalized {
+    IGLog(@"ContactSync sync successfully finished");
     [self hideProcessView];
     [self makeButtonsActive];
     
@@ -317,6 +368,55 @@
 
 - (void) processFooterShouldDismissWithButtonKey:(NSString *) postButtonKeyVal {
 //    [self hideProcessView];
+}
+
+#pragma mark - RequestTokenDao
+
+- (void) triggerNewToken {
+    IGLog(@"ContactSync at triggerNewToken");
+    NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
+    if(networkStatus == kReachableViaWiFi || networkStatus == kReachableViaWWAN) {
+        IGLog(@"ContactSync at triggerNewToken kReachableViaWiFi || kReachableViaWWAN");
+        if([CacheUtil readRememberMeToken] != nil) {
+            IGLog(@"ContactSync at triggerNewToken readRememberMeToken not null");
+            _tokenDao = [[RequestTokenDao alloc] init];
+            _tokenDao.delegate = self;
+            _tokenDao.successMethod = @selector(tokenRevisitedSuccessCallback);
+            _tokenDao.failMethod = @selector(tokenRevisitedFailCallback:);
+            [_tokenDao requestTokenByRememberMe];
+        } else {
+            if(networkStatus == kReachableViaWiFi) {
+                IGLog(@"ContactSync at triggerNewToken readRememberMeToken null - kReachableViaWiFi");
+                //            [self shouldReturnFailWithMessage:LOGIN_REQ_ERROR_MESSAGE];
+                //                NSLog(@"Login Required Triggered within triggerNewToken instead of fail method: %@", NSStringFromSelector(failMethod));
+                [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_REQ_NOTIFICATION object:nil userInfo:nil];
+            } else {
+                IGLog(@"ContactSync at triggerNewToken readRememberMeToken null - not kReachableViaWiFi -  calling radiusDao");
+                _radiusDao = [[RadiusDao alloc] init];
+                _radiusDao.delegate = self;
+                _radiusDao.successMethod = @selector(tokenRevisitedSuccessCallback);
+                _radiusDao.failMethod = @selector(tokenRevisitedFailCallback:);
+                [_radiusDao requestRadiusLogin];
+            }
+        }
+    } else {
+        [self showErrorAlertWithMessage:NSLocalizedString(@"NoConnErrorMessage", @"")];
+        [self hideProcessView];
+        [self makeButtonsActive];
+    }
+}
+
+- (void) tokenRevisitedSuccessCallback {
+    IGLog(@"ContactSync token request successed");
+    [SyncSettings shared].token = APPDELEGATE.session.authToken;
+    [ContactSyncSDK doSync:syncMode];
+}
+
+- (void) tokenRevisitedFailCallback:(NSString *) errorMessage {
+    IGLog(@"ContactSync token request failed");
+    [self showErrorAlertWithMessage:NSLocalizedString(_errMessage, @"")];
+    [self hideProcessView];
+    [self makeButtonsActive];
 }
 
 - (void) viewWillAppear:(BOOL)animated {

@@ -91,6 +91,7 @@
     [defaultIndicator stopAnimating];
     defaultIndicator.hidden = YES;
     successImgView.hidden = NO;
+    failImgView.hidden = YES;
     [self performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:2.0f];
 }
 
@@ -100,7 +101,8 @@
     messageLabel.text = self.failMsg;
     [defaultIndicator stopAnimating];
     defaultIndicator.hidden = YES;
-    successImgView.hidden = NO;
+    successImgView.hidden = YES;
+    failImgView.hidden = NO;
     [self performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:2.0f];
 }
 
