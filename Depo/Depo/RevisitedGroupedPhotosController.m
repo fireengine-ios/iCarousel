@@ -239,7 +239,7 @@
 - (void) revisitedGroupedPhotoDidFinishLoading {
 }
 
-- (void) revisitedGroupedPhotoDidFinishDeletingOrMoving {
+- (void) revisitedGroupedPhotoDidFinishDeletingOrMoving:(BOOL)deleteOperation {
     [segmentView enableNavigate];
     
     self.title = NSLocalizedString(@"PhotosTitle", @"");
@@ -251,7 +251,7 @@
     
     [APPDELEGATE.base immediateShowAddButton];
 
-    [groupView reloadContent];
+    [groupView reloadContent:deleteOperation];
     [albumView pullData];
 }
 

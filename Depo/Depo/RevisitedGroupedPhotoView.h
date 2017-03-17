@@ -38,7 +38,7 @@
 - (void) revisitedGroupedPhotoDidSelectFile:(MetaFile *) fileSelected withList:(NSArray *) containingList withListOffset:(int)listOffset withPackageSize:(int)packageSize;
 - (void) revisitedGroupedPhotoDidFinishLoading;
 //- (void) revisitedGroupedPhotoDidFinishDeleting;
-- (void) revisitedGroupedPhotoDidFinishDeletingOrMoving;
+- (void) revisitedGroupedPhotoDidFinishDeletingOrMoving:(BOOL)deleteOperation;
 - (void) revisitedGroupedPhotoDidFinishUpdate;
 //- (void) revisitedGroupedPhotoDidFinishMoving;
 - (void) revisitedGroupedPhotoShouldConfirmForDeleting;
@@ -90,7 +90,7 @@
 @property (nonatomic, strong) AutoSyncOffHeaderView *syncInfoHeaderView;
 
 - (void) pullData;
-- (void) reloadContent;
+- (void)reloadContent:(BOOL)forDelete;
 - (void) setToSelectible;
 - (void) setToUnselectible;
 - (void) setToUnselectiblePriorToRefresh;
