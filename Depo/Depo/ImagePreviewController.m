@@ -25,11 +25,12 @@
 
 @property (nonatomic, assign) UIInterfaceOrientation previousOrientation;
 @property (nonatomic) NSMutableArray *pages;
-@property (atomic) BOOL isFullScreen;
-@property (atomic) NSInteger defaultPage;
-@property (atomic) int fileCursor;
+@property (nonatomic) BOOL isFullScreen;
+@property (nonatomic) NSInteger defaultPage;
+@property (nonatomic) int fileCursor;
 @property (nonatomic) UITapGestureRecognizer *singleTap;
-@property (atomic) BOOL isNextSectionLoading;
+@property (nonatomic) BOOL isNextSectionLoading;
+@property (nonatomic) CustomConfirmView *confirmDialog;
 
 @end
 
@@ -282,6 +283,13 @@
     
     footer.frame = CGRectMake(0, self.view.frame.size.height - yIndex, self.view.frame.size.width, FooterHeight);
     [footer updateInnerViews];
+    
+    if (self.processView) {
+        // update process view
+        self.processView.frame = CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60);
+        [self.view bringSubviewToFront:self.processView];
+    }
+
 }
 
 - (void) addGesturesWithSwipeEnabled:(BOOL)swipeEnabled {
@@ -890,16 +898,24 @@
 
 - (void) confirmDeleteDidConfirm {
     if(self.file.addedAlbumUuids != nil && [self.file.addedAlbumUuids count] > 0 && !self.album) {
-        CustomConfirmView *confirm = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"ButtonCancel", @"") withApproveTitle:NSLocalizedString(@"OK", @"") withMessage:NSLocalizedString(@"DeleteFileInAlbumAlert", @"") withModalType:ModalTypeApprove];
-        confirm.delegate = self;
-        [APPDELEGATE showCustomConfirm:confirm];
+        // 0.1 sn sonra acilmasi ekran orientation degisikleri sirasinda yasanabilecek hatadan koruyor.
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self showDeleteConfirmDialog];
+        });
     } else {
         [deleteDao requestDeleteFiles:@[self.file.uuid]];
         [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
     }
 }
 
+- (void) showDeleteConfirmDialog {
+    _confirmDialog = [[CustomConfirmView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Info", @"") withCancelTitle:NSLocalizedString(@"ButtonCancel", @"") withApproveTitle:NSLocalizedString(@"OK", @"") withMessage:NSLocalizedString(@"DeleteFileInAlbumAlert", @"") withModalType:ModalTypeApprove];
+    _confirmDialog.delegate = self;
+    [APPDELEGATE showCustomConfirm:_confirmDialog];
+}
+
 - (void) confirmRemoveDidCancel {
+    
 }
 
 
@@ -956,6 +972,11 @@
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    if (self.processView) {
+        // update process view
+        self.processView.frame = CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60);
+        [self.view bringSubviewToFront:self.processView];
+    }
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
@@ -1084,6 +1105,12 @@
         // resize mainScroll
         [self resizeMainScrollWithGap:30 viewFrame:frame];
         [self resizeFooterWithIsVisible:(self.file.contentType == ContentTypePhoto)];
+        
+        // resize confirm dialog if exists
+        if(_confirmDialog != nil) {
+            [_confirmDialog removeFromSuperview];
+            [self showDeleteConfirmDialog];
+        }
     });
 }
 
@@ -1106,9 +1133,11 @@
 }
 
 - (void) didRejectCustomAlert:(CustomConfirmView *) alertView {
+    _confirmDialog = nil;
 }
 
 - (void) didApproveCustomAlert:(CustomConfirmView *) alertView {
+    _confirmDialog = nil;
     [deleteDao requestDeleteFiles:@[self.file.uuid]];
     [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DeleteProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DeleteSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DeleteFailMessage", @"")];
 }

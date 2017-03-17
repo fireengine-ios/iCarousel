@@ -37,7 +37,8 @@
                                                                         detailLabelWidth,
                                                                         f.size.height - 10)
                                                     withFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:17]
-                                                   withColor:[UIColor darkGrayColor]
+//                                                   withColor:[UIColor darkGrayColor]
+                                                   withColor:[UIColor colorWithRed:174.0/255.0 green:174.0/255.0 blue:174.0/255.0 alpha:1.0]
                                                     withText:@""];
         [self addSubview:detailTextLabel];
     }
