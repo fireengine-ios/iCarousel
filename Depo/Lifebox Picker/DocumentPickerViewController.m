@@ -372,6 +372,7 @@
 }
 
 -(void) didDismissCustomAlert:(CustomAlertView *)alertView {
+    [self dismissGrantingAccessToURL:nil];
 }
 
 // check validity of file type
