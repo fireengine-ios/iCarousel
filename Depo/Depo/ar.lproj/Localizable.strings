@@ -886,3 +886,8 @@
 "SyncInProgressHeaderTitle"="Syncing photos...";
 "SyncFooterTitle"="Sync";
 "DeleteFooterTitle"="Delete";
+
+"SelectCountry"="Select Country";
+"MsisdnEmailPlaceholderNew"="Phone or E-Mail";
+"MsisdnPlaceholderNew"="Phone";
+"EmailPlaceholderNew"="E-Mail";
