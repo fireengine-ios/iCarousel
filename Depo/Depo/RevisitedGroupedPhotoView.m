@@ -457,7 +457,10 @@
     for (FileInfoGroup *fileInfoGroup in self.groups) {
         for (RawTypeFile *fileType in fileInfoGroup.fileInfo) {
             if ([fileType isKindOfClass:[RawTypeFile class]]) {
-                [urlsToPrefetch addObject:[NSURL URLWithString:fileType.fileRef.detail.thumbMediumUrl]];
+                NSURL *thumbnailURL = [NSURL URLWithString:fileType.fileRef.detail.thumbMediumUrl];
+                if (thumbnailURL != nil) {
+                    [urlsToPrefetch addObject:thumbnailURL];
+                }
             }
         }
     }
