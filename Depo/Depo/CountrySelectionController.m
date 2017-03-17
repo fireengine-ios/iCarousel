@@ -135,7 +135,7 @@ static const CGFloat topOffset = 40;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellIdentifier"];
+    CountrySelectionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellIdentifier"];
     if (!cell) {
         cell = [[CountrySelectionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellIdentifier"];
     }
@@ -155,10 +155,23 @@ static const CGFloat topOffset = 40;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (_completion) {
-        _completion([_filteredCountryDict valueForKey:[_keys objectAtIndex:[indexPath section]]][indexPath.row]);
-    }
-    [self dismissViewControllerAnimated:YES completion:NULL];
+    CountrySelectionCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    UIImageView *tickImageV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"added_tick.png"]];
+    tickImageV.frame = CGRectMake(cell.detailTextLabel.frame.origin.x - 40,
+                                       10,
+                                       25,
+                                       25);
+    tickImageV.backgroundColor = [UIColor redColor];
+    [cell addSubview:tickImageV];
+    tableView.userInteractionEnabled = NO;
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if (_completion) {
+            _completion([_filteredCountryDict valueForKey:[_keys objectAtIndex:[indexPath section]]][indexPath.row]);
+        }
+        [self dismissViewControllerAnimated:YES completion:NULL];
+    });
 }
 
 //- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{

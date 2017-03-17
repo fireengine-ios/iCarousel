@@ -11,7 +11,7 @@
 
 @interface CountrySelectionCell : UITableViewCell
 
-@property (nonatomic, readwrite) CustomLabel *textLabel;
-@property (nonatomic, readwrite) CustomLabel *detailTextLabel;
+@property (nonatomic, strong) CustomLabel *textLabel;
+@property (nonatomic, strong) CustomLabel *detailTextLabel;
 
 @end

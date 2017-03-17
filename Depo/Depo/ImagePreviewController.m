@@ -311,10 +311,7 @@
 #pragma mark gesture recognizers methods
 
 - (void) onSingleTap:(UIGestureRecognizer *)gesture {
-    // video fullscreen status controlled with controlVisibilityChanged
-    if (self.file.contentType == ContentTypeVideo) {
-        return;
-    }
+    // note: video fullscreen status also controlled with controlVisibilityChanged
     
     if (_isFullScreen) {
         [self exitFullScreen];
