@@ -29,7 +29,7 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [UIColor whiteColor];
         
-        rowTitleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 15, 140, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[Util UIColorForHexColor:@"363e4f"] withText:titleVal withAlignment:NSTextAlignmentLeft];
+        rowTitleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 15, 140, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:16] withColor:[Util UIColorForHexColor:@"363e4f"] withText:titleVal withAlignment:NSTextAlignmentLeft];
         [self addSubview:rowTitleLabel];
 
         NSString *clientValStr = @"";
@@ -39,32 +39,41 @@
             serverValStr = [NSString stringWithFormat:@"%d", serverVal];
         }
         
-        clientValLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(160, 15, 80, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[Util UIColorForHexColor:@"888888"] withText:clientValStr withAlignment:NSTextAlignmentCenter];
+        clientValLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(160, 15, 80, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:16] withColor:[Util UIColorForHexColor:@"888888"] withText:clientValStr withAlignment:NSTextAlignmentCenter];
         [self addSubview:clientValLabel];
 
-        serverValLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(240, 15, 80, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[Util UIColorForHexColor:@"888888"] withText:serverValStr withAlignment:NSTextAlignmentCenter];
+        serverValLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(240, 15, 80, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:16] withColor:[Util UIColorForHexColor:@"888888"] withText:serverValStr withAlignment:NSTextAlignmentCenter];
         [self addSubview:serverValLabel];
 
     }
     return self;
 }
 
-- (id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withTitle:(NSString *) titleVal withVal:(int) val {
+- (id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withTitle:(NSString *) titleVal withVal:(int) val isBold:(BOOL)isBold {
     if(self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [UIColor whiteColor];
         
-        titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 10, 140, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[Util UIColorForHexColor:@"363e4f"] withText:titleVal withAlignment:NSTextAlignmentLeft];
-        [self addSubview:titleLabel];
+        if (isBold) {
+            titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 10, 140, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:17] withColor:[Util UIColorForHexColor:@"363e4f"] withText:titleVal withAlignment:NSTextAlignmentLeft];
+            [self addSubview:titleLabel];
+        } else {
+            titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 10, 140, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:16] withColor:[Util UIColorForHexColor:@"363e4f"] withText:titleVal withAlignment:NSTextAlignmentLeft];
+            [self addSubview:titleLabel];
+        }
         
         NSString *valStr = @"";
         if(APPDELEGATE.session.syncResult != nil) {
             valStr = [NSString stringWithFormat:@"%d", val];
         }
         
-        valLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(160, 15, 160, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18] withColor:[Util UIColorForHexColor:@"888888"] withText:valStr withAlignment:NSTextAlignmentCenter];
-        [self addSubview:valLabel];
-        
+        if (isBold) {
+            valLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(160, 15, 160, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaRegBol" size:17] withColor:[Util UIColorForHexColor:@"888888"] withText:valStr withAlignment:NSTextAlignmentCenter];
+            [self addSubview:valLabel];
+        } else {
+            valLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(160, 15, 160, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaRegMed" size:16] withColor:[Util UIColorForHexColor:@"888888"] withText:valStr withAlignment:NSTextAlignmentCenter];
+            [self addSubview:valLabel];
+        }
     }
     return self;
 }

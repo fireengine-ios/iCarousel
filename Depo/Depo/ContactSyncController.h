@@ -8,8 +8,9 @@
 
 #import "MyViewController.h"
 #import "CustomLabel.h"
+#import "ProcessFooterView.h"
 
-@interface ContactSyncController : MyViewController <UITableViewDataSource, UITableViewDelegate>
+@interface ContactSyncController : MyViewController <UITableViewDataSource, UITableViewDelegate, ProcessFooterDelegate>
 
 @property (nonatomic) EnableOption oldSyncOption;
 @property (nonatomic, strong) SimpleButton *backupButton;

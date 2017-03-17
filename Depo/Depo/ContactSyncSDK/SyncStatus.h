@@ -51,6 +51,9 @@ typedef NS_ENUM(NSUInteger, SYNCInfoStateType) {
 @property (strong) NSMutableArray *deletedContactsOnDevice;
 @property (strong) NSMutableArray *deletedContactsOnServer;
 
+@property (strong) NSNumber *totalContactOnServer;
+@property (strong) NSNumber *totalContactOnClient;
+
 @property SYNCResultType status;
 @property (strong) NSError *lastError;
 
