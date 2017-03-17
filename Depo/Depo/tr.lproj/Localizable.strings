@@ -444,6 +444,7 @@
 "ContactLastSyncDetailTotalTitle"="Toplam";
 "ManualSyncTitle"="Yedeklemeyi Başlat";
 "ManualSyncTitleOnSync"="Yedekleme devam ediyor...";
+"ContactThereIsNoContact"="Telefon rehberinizde kayıt bulunmadığından, yedekleme işlemi gerçekleşmemiştir.";
 
 "AddressBookGrantError"="Rehber kullanımına izin vermeniz gerekmektedir.";
 "ContactSyncApiError"="Yedekleme esnasında genel bir hata oluştu.";

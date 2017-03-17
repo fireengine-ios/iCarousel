@@ -198,7 +198,7 @@
                         [self triggerNewToken];
                     } else {
                         [self showErrorAlertWithMessage:NSLocalizedString(_errMessage, @"")];
-                        [self hideProcessView];
+                        [processView dismissWithFailureMessage];
                         [self makeButtonsActive];
                     }
                     
@@ -212,13 +212,37 @@
 
 - (void) backupClicked {
     IGLog(@"ContactSync backup started");
-    APPDELEGATE.session.syncType = ContactSyncTypeBackup;
-    _triedAgain = NO;
-    [ContactSyncSDK doSync:SYNCBackup];
-    syncMode = SYNCBackup;
-    
     [self showProcessView];
     [self makeButtonsPassive];
+    
+    [ContactSyncSDK hasContactForBackup:^(SYNCResultType resultType) {
+        switch (resultType) {
+            case SYNC_RESULT_SUCCESS: {
+                APPDELEGATE.session.syncType = ContactSyncTypeBackup;
+                _triedAgain = NO;
+                [ContactSyncSDK doSync:SYNCBackup];
+                syncMode = SYNCBackup;
+            }
+                break;
+                
+            case SYNC_RESULT_FAIL: {
+                [self showErrorAlertWithMessage:NSLocalizedString(@"ContactThereIsNoContact", @"")];
+                [processView dismissWithFailureMessage];
+                [self makeButtonsActive];
+            }
+                break;
+                
+            case SYNC_RESULT_ERROR_PERMISSION_ADDRESS_BOOK: {
+                [self showErrorAlertWithMessage:NSLocalizedString(@"AddressBookGrantError", @"")];
+                [processView dismissWithFailureMessage];
+                [self makeButtonsActive];
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }];
 }
 
 - (void) restoreClicked {
