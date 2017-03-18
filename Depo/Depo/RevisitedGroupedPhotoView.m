@@ -35,6 +35,7 @@
     int listOffset;
     int packageSize;
     BOOL isLoading;
+    BOOL endOfFiles;
     int photoCount;
     int groupSequence;
     NSDateFormatter *dateCompareFormat;
@@ -415,6 +416,11 @@
     IGLog(@"RevisitedGroupedPhotoView readSuccessCallback called");
     
     if([fileList count] > 0) {
+        if([fileList count] < packageSize) {
+            endOfFiles = YES;
+        } else {
+            endOfFiles = NO;
+        }
         [files addObjectsFromArray:fileList];
         
         NSMutableDictionary *tempDict = [[NSMutableDictionary alloc] init];
@@ -473,6 +479,8 @@
         for(FileInfoGroup *row in tempGroups) {
             [self addOrUpdateGroup:row];
         }
+    } else {
+        endOfFiles = YES;
     }
     
     isLoading = NO;
@@ -528,7 +536,7 @@
             CGFloat currentOffset = collView.contentOffset.y;
             CGFloat maximumOffset = collView.contentSize.height - collView.frame.size.height;
             
-            if (maximumOffset > 0.0f && currentOffset - maximumOffset >= 0.0f) {
+            if (maximumOffset > 0.0f && currentOffset - maximumOffset >= 0.0f && !endOfFiles) {
                 isLoading = YES;
                 [self dynamicallyLoadNextPage];
             }
@@ -741,10 +749,16 @@
 }
 
 - (void) footerActionMenuDidSelectDownload:(FooterActionsMenuView *) menu {
+    if([selectedMetaFiles count] == 0)
+        return;
+
     [delegate revisitedGroupedPhoto:self downloadSelectedFiles:selectedMetaFiles];
 }
 
 - (void) footerActionMenuDidSelectDelete:(FooterActionsMenuView *) menu {
+    if([selectedMetaFiles count] == 0)
+        return;
+
     IGLog(@"RevisitedGroupedPhotoView footerActionMenuDidSelectDelete called");
     if([CacheUtil showConfirmDeletePageFlag]) {
         IGLog(@"RevisitedGroupedPhotoView footerActionMenuDidSelectDelete CacheUtil showConfirmDeletePageFlag returns YES");
@@ -807,6 +821,7 @@
             }
             ref.ownerPage = UploadStarterPagePhotos;
             ref.folderUuid = APPDELEGATE.session.user.mobileUploadFolderUuid;
+            ref.autoSyncFlag = YES; //TODO
             
             UploadManager *manager = [[UploadManager alloc] initWithUploadInfo:ref];
             [manager configureUploadAsset:ref.filePath atFolder:nil];
@@ -834,11 +849,16 @@
 }
 
 - (void) footerActionMenuDidSelectMove:(FooterActionsMenuView *) menu {
+    if([selectedMetaFiles count] == 0)
+        return;
     [delegate revisitedGroupedPhotoShowPhotoAlbums:self];
     //[APPDELEGATE.base showPhotoAlbums];
 }
 
 - (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {
+    if([selectedMetaFiles count] == 0)
+        return;
+    
     if ([delegate respondsToSelector:@selector(revisitedGroupedPhoto:triggerShareForFiles:withUUID:)]) {
         [delegate revisitedGroupedPhoto:self triggerShareForFiles:selectedMetaFiles withUUID:selectedFileList];
         return;
@@ -848,6 +868,9 @@
 }
 
 - (void) footerActionMenuDidSelectPrint:(FooterActionsMenuView *)menu {
+    if([selectedMetaFiles count] == 0)
+        return;
+
     [delegate revisitedGroupedPhotoShouldPrintWithFileList:selectedMetaFiles];
 }
 
@@ -924,7 +947,7 @@
         if(syncView) {
             [syncView removeFromSuperview];
         }
-        if(collView.frame.origin.y > 0) {
+        if(collView.frame.origin.y > 0 && !syncInfoHeaderView) {
             [UIView animateWithDuration:0.4 animations:^{
                 collView.frame = CGRectMake(collView.frame.origin.x, collView.frame.origin.y - 50, collView.frame.size.width, collView.frame.size.height + 50);
             }];
@@ -1105,7 +1128,7 @@
             }
         }
         
-        if(noFilesFlag || shouldShow) {
+        if(noFilesFlag || shouldShow || endOfFiles) {
             NSString *dateStr = [dateCompareFormat stringFromDate:assetDate];
             NSString *rowLocalHash = [SyncUtil md5StringOfString:[row.defaultRepresentation.url absoluteString]];
             if([[tempDict allKeys] count] == 0) {
@@ -1438,7 +1461,7 @@
         }
     } else {
         IGLog(@"RevisitedGroupedPhotoView autoQueueChanged no need to initialize PhotosHeaderSyncView");
-        if(collView.frame.origin.y > 0) {
+        if(collView.frame.origin.y > 0 && !syncInfoHeaderView) {
             [UIView animateWithDuration:0.4 animations:^{
                 collView.frame = CGRectMake(collView.frame.origin.x, collView.frame.origin.y - 50, collView.frame.size.width, collView.frame.size.height + 50);
             }];
