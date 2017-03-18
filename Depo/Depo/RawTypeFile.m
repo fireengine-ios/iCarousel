@@ -14,5 +14,6 @@
 @synthesize assetRef;
 @synthesize fileRef;
 @synthesize refDate;
+@synthesize hashRef;
 
 @end

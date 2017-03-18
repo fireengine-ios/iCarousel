@@ -463,14 +463,15 @@
 }
 
 - (void) listOfUnsyncedImages {
+    NSLog(@"listOfUnsyncedImages start");
     IGLog(@"SyncManager listOfUnsyncedImages");
 
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^(void) {
         NSMutableArray *unsycedResult = [[NSMutableArray alloc] init];
         
-        NSArray *localHashList = [SyncUtil readSyncHashLocally];
-        NSArray *remoteHashList = [SyncUtil readSyncHashRemotely];
-        NSArray *remoteSummaryList = [SyncUtil readSyncFileSummaries];
+//        NSArray *localHashList = [SyncUtil readSyncHashLocally];
+//        NSArray *remoteHashList = [SyncUtil readSyncHashRemotely];
+//        NSArray *remoteSummaryList = [SyncUtil readSyncFileSummaries];
         [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
             if(group) {
                 [group setAssetsFilter:[ALAssetsFilter allPhotos]];
@@ -481,28 +482,30 @@
                         if(repUrl != nil) {
                             NSString *localHash = [SyncUtil md5StringOfString:repUrl];
                             
-                            BOOL shouldStartUpload = ![localHashList containsObject:localHash] && ![remoteHashList containsObject:localHash];
+//                            BOOL shouldStartUpload = ![localHashList containsObject:localHash] && ![remoteHashList containsObject:localHash];
                             
-                            if(shouldStartUpload) {
-                                MetaFileSummary *assetSummary = [[MetaFileSummary alloc] init];
-                                assetSummary.bytes = [defaultRep size];
-                                assetSummary.fileName = [defaultRep filename];
-                                shouldStartUpload = ![remoteSummaryList containsObject:assetSummary];
-                            }
-                            if(shouldStartUpload) {
+//                            if(shouldStartUpload) {
+//                                MetaFileSummary *assetSummary = [[MetaFileSummary alloc] init];
+//                                assetSummary.bytes = [defaultRep size];
+//                                assetSummary.fileName = [defaultRep filename];
+//                                shouldStartUpload = ![remoteSummaryList containsObject:assetSummary];
+//                            }
+//                            if(shouldStartUpload) {
                                 [unsycedResult addObject:asset];
-                            }
+//                            }
                         }
                     }
                 }];
             } else {
                 IGLog(@"SyncManager listOfUnsyncedImages group enumeration finished");
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    NSLog(@"listOfUnsyncedImages end");
                     [infoDelegate syncManagerUnsyncedImageList:unsycedResult];
                 });
             }
         } failureBlock:^(NSError *error) {
             dispatch_async(dispatch_get_main_queue(), ^{
+                NSLog(@"listOfUnsyncedImages end");
                 [infoDelegate syncManagerUnsyncedImageList:unsycedResult];
             });
         }];

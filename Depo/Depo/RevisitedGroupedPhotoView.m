@@ -323,6 +323,17 @@
     }
 }
 
+- (FileInfoGroup *) groupByKey:(NSString *) groupKey {
+    FileInfoGroup *initialRow = nil;
+    for(FileInfoGroup *row in self.groups) {
+        if([row.groupKey isEqualToString:groupKey]) {
+            initialRow = row;
+            break;
+        }
+    }
+    return initialRow;
+}
+
 - (void) addOrUpdateGroup:(FileInfoGroup *) group {
     if (noItemView != nil)
         [noItemView removeFromSuperview];
@@ -339,6 +350,7 @@
     if(initialRow != nil) {
         [initialRow.fileInfo addObjectsFromArray:group.fileInfo];
         initialRow.fileInfo = [self sortRawArrayByDateDesc:initialRow.fileInfo];
+        [initialRow.fileHashList addObjectsFromArray:group.fileHashList];
         [self.groups replaceObjectAtIndex:counter withObject:initialRow];
     } else {
         group.fileInfo = [self sortRawArrayByDateDesc:group.fileInfo];
@@ -415,7 +427,11 @@
                     newGroup.locationInfo = @"";
                     newGroup.refDate = row.detail.fileDate;
                     newGroup.fileInfo = [[NSMutableArray alloc] init];
-                    [newGroup.fileInfo addObject:[self rawFileForFile:row]];
+                    RawTypeFile *rawFile = [self rawFileForFile:row];
+                    [newGroup.fileInfo addObject:rawFile];
+                    if(rawFile.hashRef) {
+                        [newGroup.fileHashList addObject:rawFile.hashRef];
+                    }
                     newGroup.sequence = groupSequence;
                     newGroup.groupKey = dateStr;
                     [tempDict setObject:newGroup forKey:dateStr];
@@ -424,14 +440,22 @@
                 } else {
                     FileInfoGroup *currentGroup = [tempDict objectForKey:dateStr];
                     if(currentGroup != nil) {
-                        [currentGroup.fileInfo addObject:[self rawFileForFile:row]];
+                        RawTypeFile *rawFile = [self rawFileForFile:row];
+                        [currentGroup.fileInfo addObject:rawFile];
+                        if(rawFile.hashRef) {
+                            [currentGroup.fileHashList addObject:rawFile.hashRef];
+                        }
                     } else {
                         FileInfoGroup *newGroup = [[FileInfoGroup alloc] init];
                         newGroup.customTitle = dateStr;
                         newGroup.locationInfo = @"";
                         newGroup.refDate = row.detail.fileDate;
                         newGroup.fileInfo = [[NSMutableArray alloc] init];
-                        [newGroup.fileInfo addObject:[self rawFileForFile:row]];
+                        RawTypeFile *rawFile = [self rawFileForFile:row];
+                        [newGroup.fileInfo addObject:rawFile];
+                        if(rawFile.hashRef) {
+                            [newGroup.fileHashList addObject:rawFile.hashRef];
+                        }
                         newGroup.sequence = groupSequence;
                         newGroup.groupKey = dateStr;
                         [tempDict setObject:newGroup forKey:dateStr];
@@ -762,6 +786,7 @@
             UploadRef *ref = [[UploadRef alloc] init];
             ref.fileName = row.defaultRepresentation.filename;
             ref.filePath = [row.defaultRepresentation.url absoluteString];
+            ref.localHash = [SyncUtil md5StringOfString:[row.defaultRepresentation.url absoluteString]];
             ref.mimeType = mimeType;
             if ([[row valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
                 ref.contentType = ContentTypeVideo;
@@ -1057,6 +1082,7 @@
 
 - (void) addUnsyncedFiles {
     IGLog(@"RevisitedGroupedPhotoView addUnsyncedFiles called");
+    NSLog(@"RevisitedGroupedPhotoView addUnsyncedFiles called");
     MetaFile *lastFile = nil;
     BOOL noFilesFlag = YES;
     if([files count] > 0) {
@@ -1081,13 +1107,24 @@
         
         if(noFilesFlag || shouldShow) {
             NSString *dateStr = [dateCompareFormat stringFromDate:assetDate];
+            NSString *rowLocalHash = [SyncUtil md5StringOfString:[row.defaultRepresentation.url absoluteString]];
             if([[tempDict allKeys] count] == 0) {
                 FileInfoGroup *newGroup = [[FileInfoGroup alloc] init];
+                FileInfoGroup *legacyGroup = [self groupByKey:dateStr];
+                if(legacyGroup) {
+                    newGroup.fileHashList = legacyGroup.fileHashList;
+                }
                 newGroup.customTitle = dateStr;
                 newGroup.refDate = assetDate;
                 newGroup.locationInfo = @"";
                 newGroup.fileInfo = [[NSMutableArray alloc] init];
-                [newGroup.fileInfo addObject:[self rawFileForAsset:row]];
+                if(![newGroup.fileHashList containsObject:rowLocalHash]) {
+                    RawTypeFile *rawFile = [self rawFileForAsset:row];
+                    [newGroup.fileInfo addObject:rawFile];
+                    if(rawFile.hashRef) {
+                        [newGroup.fileHashList addObject:rawFile.hashRef];
+                    }
+                }
                 newGroup.sequence = groupSequence;
                 newGroup.groupKey = dateStr;
                 [tempDict setObject:newGroup forKey:dateStr];
@@ -1096,14 +1133,30 @@
             } else {
                 FileInfoGroup *currentGroup = [tempDict objectForKey:dateStr];
                 if(currentGroup != nil) {
-                    [currentGroup.fileInfo addObject:[self rawFileForAsset:row]];
+                    if(![currentGroup.fileHashList containsObject:rowLocalHash]) {
+                        RawTypeFile *rawFile = [self rawFileForAsset:row];
+                        [currentGroup.fileInfo addObject:rawFile];
+                        if(rawFile.hashRef) {
+                            [currentGroup.fileHashList addObject:rawFile.hashRef];
+                        }
+                    }
                 } else {
                     FileInfoGroup *newGroup = [[FileInfoGroup alloc] init];
+                    FileInfoGroup *legacyGroup = [self groupByKey:dateStr];
+                    if(legacyGroup) {
+                        newGroup.fileHashList = legacyGroup.fileHashList;
+                    }
                     newGroup.customTitle = dateStr;
                     newGroup.refDate = assetDate;
                     newGroup.locationInfo = @"";
                     newGroup.fileInfo = [[NSMutableArray alloc] init];
-                    [newGroup.fileInfo addObject:[self rawFileForAsset:row]];
+                    if(![newGroup.fileHashList containsObject:rowLocalHash]) {
+                        RawTypeFile *rawFile = [self rawFileForAsset:row];
+                        [newGroup.fileInfo addObject:rawFile];
+                        if(rawFile.hashRef) {
+                            [newGroup.fileHashList addObject:rawFile.hashRef];
+                        }
+                    }
                     newGroup.sequence = groupSequence;
                     newGroup.groupKey = dateStr;
                     [tempDict setObject:newGroup forKey:dateStr];
@@ -1126,6 +1179,7 @@
         [self addOrUpdateGroup:row];
     }
     dispatch_async(dispatch_get_main_queue(), ^{
+        NSLog(@"RevisitedGroupedPhotoView addUnsyncedFiles ended");
         [collView reloadData];
     });
 }
@@ -1144,6 +1198,8 @@
     result.assetRef = assetRef;
     result.rawType = RawFileTypeClient;
     result.refDate = [assetRef valueForProperty:ALAssetPropertyDate];
+    result.hashRef = [SyncUtil md5StringOfString:[assetRef.defaultRepresentation.url absoluteString]];
+    NSLog(@"LOCAL META HASH: %@", result.hashRef);
     return result;
 }
 
@@ -1152,6 +1208,7 @@
     result.fileRef = fileRef;
     result.rawType = RawFileTypeDepo;
     result.refDate = fileRef.detail.imageDate;
+    result.hashRef = fileRef.metaHash;
     return result;
 }
 

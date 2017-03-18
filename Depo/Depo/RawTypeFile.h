@@ -19,5 +19,6 @@
 @property (nonatomic, strong) ALAsset *assetRef;
 @property (nonatomic, strong) MetaFile *fileRef;
 @property (nonatomic, strong) NSDate *refDate;
+@property (nonatomic, strong) NSString *hashRef;
 
 @end
