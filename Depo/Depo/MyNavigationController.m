@@ -61,7 +61,7 @@
 
 - (void) pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
     if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateActive) {
-        return;
+        animated = NO;
     }
     [super pushViewController:viewController animated:animated];
     
