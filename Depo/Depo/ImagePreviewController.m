@@ -17,6 +17,7 @@
 #import "ZPhotoView.h"
 #import "VideoPreviewController.h"
 #import "SyncUtil.h"
+#import "ShareActivity.h"
 
 #define PhotosGap 30.0f
 #define FooterHeight 60.0f
@@ -1017,11 +1018,16 @@
                 
                 NSArray *activityItems = @[url];
                 
-                UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+                ShareActivity *activity = [[ShareActivity alloc] init];
+                activity.sourceViewController = self;
+                
+                UIActivityViewController *activityViewController = [[UIActivityViewController alloc]
+                                                                    initWithActivityItems:activityItems
+                                                                    applicationActivities:@[activity]];
                 [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
                 activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
                 
-                activityViewController.excludedActivityTypes = @[@"com.igones.adepo.DepoShareExtension"];
+                activityViewController.excludedActivityTypes = @[@"com.igones.adepo.DepoShareExtension", UIActivityTypePostToFacebook];
                 
                 if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
                     [self presentViewController:activityViewController animated:YES completion:nil];
