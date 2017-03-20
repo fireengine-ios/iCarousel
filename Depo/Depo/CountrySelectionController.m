@@ -166,7 +166,7 @@ static const CGFloat topOffset = 40;
     [cell addSubview:tickImageV];
     tableView.userInteractionEnabled = NO;
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if (_completion) {
             _completion([_filteredCountryDict valueForKey:[_keys objectAtIndex:[indexPath section]]][indexPath.row]);
         }
