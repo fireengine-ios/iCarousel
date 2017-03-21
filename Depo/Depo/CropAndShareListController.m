@@ -624,25 +624,35 @@
             if([tempToShare isKindOfClass:[MetaFile class]]) {
                 [self showLoading];
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-                    [self downloadImageWithURL:[NSURL URLWithString:tempToShare.tempDownloadUrl] completionBlock:^(BOOL succeeded, UIImage *image, NSData *imageData) {
+                    [self downloadImageWithURL:[NSURL URLWithString:tempToShare.tempDownloadUrl]
+                               completionBlock:
+                     ^(BOOL succeeded, UIImage *image, NSData *imageData) {
                         if (succeeded) {
                             [self hideLoading];
-//                            NSArray *activityItems = [NSArray arrayWithObjects:image, nil];
+                            
                             NSURL *url = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingString:tempToShare.name]];
                             [imageData writeToURL:url atomically:NO];
                             
-                            ShareActivity *activity = [[ShareActivity alloc] init];
-                            activity.sourceViewController = self;
+                            BOOL thisIsAnImage = tempToShare.contentType == ContentTypePhoto;
+                            
+                            NSArray *applicationActivities = nil;
+                            if (thisIsAnImage) {
+                                ShareActivity *activity = [[ShareActivity alloc] init];
+                                activity.sourceViewController = self;
+                                
+                                applicationActivities = @[activity];
+                            }
                             
                             NSArray *activityItems = @[url];
                             UIActivityViewController *activityViewController = [[UIActivityViewController alloc]
                                                                                 initWithActivityItems:activityItems
-                                                                                applicationActivities:@[activity]];
+                                                                                applicationActivities:applicationActivities];
                             [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"")
                                                   forKeyPath:@"subject"];
                             activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-                            activityViewController.excludedActivityTypes = @[UIActivityTypePostToFacebook];
-                            
+                            if (thisIsAnImage) {
+                                activityViewController.excludedActivityTypes = @[UIActivityTypePostToFacebook];
+                            }
                             if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
                                 [self presentViewController:activityViewController animated:YES completion:nil];
                             } else {
@@ -683,13 +693,20 @@
 #pragma mark ShareLinkDao Delegate Methods
 - (void) shareSuccessCallback:(NSString *) linkToShare {
     [self hideLoading];
-    NSArray *activityItems = [NSArray arrayWithObjects:linkToShare, nil];
+    NSArray *activityItems = [NSArray arrayWithObjects:
+                              [NSURL URLWithString:linkToShare], nil];
     
-    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
-    [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
+    ShareActivity *activity = [[ShareActivity alloc] init];
+    activity.sourceViewController = self;
+    
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc]
+                                                        initWithActivityItems:activityItems
+                                                        applicationActivities:@[activity]];
+    [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"")
+                          forKeyPath:@"subject"];
     activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     
-    //    activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll];
+    activityViewController.excludedActivityTypes = @[UIActivityTypePostToFacebook];
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         [self presentViewController:activityViewController animated:YES completion:nil];

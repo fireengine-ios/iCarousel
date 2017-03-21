@@ -8,6 +8,12 @@
 
 #import "ShareActivity.h"
 #import <FBSDKShareKit/FBSDKShareKit.h>
+#import <AssetsLibrary/AssetsLibrary.h>
+#import <Photos/Photos.h>
+
+@interface ShareActivity ()
+//@property (nonatomic, strong) NSMutableArray *videoAlAssetURLS;
+@end
 
 @implementation ShareActivity
 
@@ -35,12 +41,7 @@
             return YES;
         }
         if ([item isKindOfClass:[NSURL class]]) {
-            NSData *data=[NSData dataWithContentsOfURL:item];
-            UIImage *image=[UIImage imageWithData:data];
-            if (image != nil) {
-                return YES;
-            }
-            return NO;
+            return YES;
         }
     }
     return NO;
@@ -60,6 +61,8 @@
     
     NSMutableArray *itemsToShare = [@[] mutableCopy];
     
+    BOOL notLocalImageFileURL = NO;
+    
     if ([firstItem isKindOfClass:[UIImage class]]) {
         for (UIImage *image in self.activityItems) {
             FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
@@ -69,21 +72,35 @@
         }
     } else if ([firstItem isKindOfClass:[NSURL class]]) {
         for (NSURL *url in self.activityItems) {
+            if ([url.absoluteString rangeOfString:@"mylifebox.com"].location != NSNotFound) {
+                notLocalImageFileURL = YES;
+                break;
+            }
             UIImage *image = [UIImage imageWithData:
                               [NSData dataWithContentsOfURL:url]];
-            FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
-            photo.image = image;
-            photo.userGenerated = YES;
-            [itemsToShare addObject:photo];
+            if (image != nil) {
+                FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
+                photo.image = image;
+                photo.userGenerated = YES;
+                [itemsToShare addObject:photo];
+            }
         }
     }
     
-    FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
-    content.photos = [itemsToShare copy];
-    
-    [FBSDKShareDialog showFromViewController:self.sourceViewController
-                                 withContent:content
-                                    delegate:nil];
+    if (notLocalImageFileURL) {
+        FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
+        content.contentURL = self.activityItems[0];
+        [FBSDKShareDialog showFromViewController:self.sourceViewController
+                                     withContent:content
+                                        delegate:nil];
+    } else {
+        FBSDKShareMediaContent *content = [[FBSDKShareMediaContent alloc] init];
+        content.media = [itemsToShare copy];
+        
+        [FBSDKShareDialog showFromViewController:self.sourceViewController
+                                     withContent:content
+                                        delegate:nil];
+    }
     [self activityDidFinish:YES];
 }
 

@@ -15,6 +15,7 @@
 #import "PreviewUnavailableController.h"
 #import "BaseViewController.h"
 #import "NoItemCell.h"
+#import "ShareActivity.h"
 
 @interface DocListController ()
 
@@ -332,13 +333,21 @@
 #pragma mark ShareLinkDao Delegate Methods
 - (void) shareSuccessCallback:(NSString *) linkToShare {
     [self hideLoading];
-    NSArray *activityItems = [NSArray arrayWithObjects:linkToShare, nil];
+    NSArray *activityItems = [NSArray arrayWithObjects:
+                              [NSURL URLWithString:linkToShare], nil];
     
-    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+    ShareActivity *activity = [[ShareActivity alloc] init];
+    activity.sourceViewController = self;
+    
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc]
+                                                        initWithActivityItems:activityItems
+                                                        applicationActivities:@[activity]];
+    
     [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
+    
     activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     
-    //    activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll];
+    activityViewController.excludedActivityTypes = @[UIActivityTypePostToFacebook];
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         [self presentViewController:activityViewController animated:YES completion:nil];

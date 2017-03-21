@@ -1000,8 +1000,45 @@
 }
 
 - (void) triggerShareForFiles:(NSArray *) fileUuidList {
-    [shareDao requestLinkForFiles:fileUuidList];
+//    [shareDao requestLinkForFiles:fileUuidList];
     [self showLoading];
+    
+    [self downloadImageWithURL:[NSURL URLWithString:self.file.tempDownloadUrl]
+               completionBlock:^(BOOL succeeded, UIImage *image, NSData *imageData) {
+                   if (succeeded) {
+                       [self hideLoading];
+                       
+                       NSURL *url = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingString:self.file.name]];
+                       [imageData writeToURL:url atomically:NO];
+                       
+                       NSArray *activityItems = @[url];
+                       
+                       BOOL thisIsAnImage = self.file.contentType == ContentTypePhoto;
+                       
+                       NSArray *applicationActivities = nil;
+                       if (thisIsAnImage) {
+                           ShareActivity *activity = [[ShareActivity alloc] init];
+                           activity.sourceViewController = self;
+                           applicationActivities = @[activity];
+                       }
+                       
+                       UIActivityViewController *activityViewController = [[UIActivityViewController alloc]
+                                                                           initWithActivityItems:activityItems
+                                                                           applicationActivities:applicationActivities];
+                       [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
+                       activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+                       if (thisIsAnImage) {
+                           activityViewController.excludedActivityTypes = @[@"com.igones.adepo.DepoShareExtension", UIActivityTypePostToFacebook];
+                       }
+                       if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+                           [self presentViewController:activityViewController animated:YES completion:nil];
+                       } else {
+                           UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
+                           [popup presentPopoverFromRect:CGRectMake(self.view.frame.size.width-240, self.view.frame.size.height-40, 240, 300)inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+                       }
+                       
+                   }
+               }];
 }
 
 #pragma mark - ShareLinkDao Delegate Methods

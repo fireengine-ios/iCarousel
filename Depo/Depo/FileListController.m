@@ -542,21 +542,29 @@
                         if (succeeded) {
                             [self hideLoading];
 //                            NSArray *activityItems = [NSArray arrayWithObjects:image, nil];
-                            NSURL *url = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingString:tempToShare.name]];
+                            NSURL *url = [NSURL fileURLWithPath:[NSTemporaryDirectory()
+                                                                 stringByAppendingString:tempToShare.name]];
                             [imageData writeToURL:url atomically:NO];
                             
-                            NSArray *activityItems = @[url];
+                            BOOL thisIsAnImage = tempToShare.contentType == ContentTypePhoto;
                             
-                            ShareActivity *activity = [[ShareActivity alloc] init];
-                            activity.sourceViewController = self;
+                            NSArray *applicationActivities = nil;
+                            if (thisIsAnImage) {
+                                ShareActivity *activity = [[ShareActivity alloc] init];
+                                activity.sourceViewController = self;
+                                
+                                applicationActivities = @[activity];
+                            }
+                            NSArray *activityItems = @[url];
                             
                             UIActivityViewController *activityViewController = [[UIActivityViewController alloc]
                                                                                 initWithActivityItems:activityItems
-                                                                                applicationActivities:@[activity]];
+                                                                                applicationActivities:applicationActivities];
                             [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
                             activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-                            
-                            activityViewController.excludedActivityTypes = @[UIActivityTypePostToFacebook];
+                            if (thisIsAnImage) {
+                                activityViewController.excludedActivityTypes = @[UIActivityTypePostToFacebook];
+                            }
                             
                             if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
                                 [self presentViewController:activityViewController animated:YES completion:nil];
@@ -599,13 +607,21 @@
 - (void) shareSuccessCallback:(NSString *) linkToShare {
     [self hideLoading];
     [self setToUnselectible];
-    NSArray *activityItems = [NSArray arrayWithObjects:linkToShare, nil];
+    NSArray *activityItems = [NSArray arrayWithObjects:
+                              [NSURL URLWithString:linkToShare], nil];
     
-    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+    ShareActivity *activity = [[ShareActivity alloc] init];
+    activity.sourceViewController = self;
+    
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc]
+                                                        initWithActivityItems:activityItems
+                                                        applicationActivities:@[activity]];
+    
     [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
+    
     activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     
-    //    activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll];
+    activityViewController.excludedActivityTypes = @[UIActivityTypePostToFacebook];
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         [self presentViewController:activityViewController animated:YES completion:nil];
@@ -1035,12 +1051,16 @@
     
     [self showLoading];
     
+    BOOL thereIsOneVideo = NO;
+    
     for (MetaFile *file in self.fileListToShare) {
+        
         NSString *endPoint = file.detail.thumbLargeUrl;
         if (originalSize) {
             endPoint = file.tempDownloadUrl;
         }
         if (file.contentType == ContentTypeVideo) {
+            thereIsOneVideo = YES;
             endPoint = file.tempDownloadUrl;
         }
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:
@@ -1071,13 +1091,22 @@
                                            dispatch_async(dispatch_get_main_queue(), ^{
                                                [self hideLoading];
                                                
-                                               ShareActivity *activity = [[ShareActivity alloc] init];
-                                               activity.sourceViewController = self;
+                                               NSArray *applicationActivities = nil;
                                                
-                                               UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:allImages applicationActivities:@[activity]];
+                                               if (!thereIsOneVideo) {
+                                                   ShareActivity *activity = [[ShareActivity alloc] init];
+                                                   activity.sourceViewController = self;
+                                                   applicationActivities = @[activity];
+                                               }
+                                               
+                                               UIActivityViewController *activityViewController = [[UIActivityViewController alloc]
+                                                                                                   initWithActivityItems:allImages
+                                                                                                   applicationActivities:applicationActivities];
                                                [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
                                                activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-                                               activityViewController.excludedActivityTypes = @[UIActivityTypePostToFacebook];
+                                               if (!thereIsOneVideo) {
+                                                   activityViewController.excludedActivityTypes = @[UIActivityTypePostToFacebook];
+                                               }
                                                [activityViewController setCompletionHandler:^(NSString *activityType, BOOL completed) {
                                                    if (completed) {
                                                        [self setToUnselectible];
