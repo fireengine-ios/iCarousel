@@ -35,7 +35,11 @@
         
         UIImage *iconImg = [UIImage imageNamed:[AppUtil iconNameByContentType:ContentTypeMusic]];
         
-        self.imgView  = [[UIImageView alloc] initWithFrame:CGRectMake(leftIndex + (40 - iconImg.size.width)/2, (68 - iconImg.size.height)/2, iconImg.size.width, iconImg.size.height)];
+        self.imgView  = [[UIImageView alloc] initWithFrame:CGRectMake(leftIndex +
+                                                                      (40 - iconImg.size.width)/2,
+                                                                      (68 - iconImg.size.height)/2,
+                                                                      iconImg.size.width,
+                                                                      iconImg.size.height)];
         
         [self.imgView sd_setImageWithURL:[NSURL URLWithString:_fileFolder.detail.thumbMediumUrl]
                         placeholderImage:iconImg];
@@ -84,6 +88,15 @@
 }
 
 - (void) layoutSubviews {
+    int leftIndex = self.isSelectible ? 50 : 15;
+    
+    float imgWidth = self.frame.size.height - 32;
+    float maxWidth = IS_IPAD ? 70 : 40;
+    
+    if(self.imgView) {
+        self.imgView.frame = CGRectMake(leftIndex + (maxWidth - imgWidth)/2, (self.frame.size.height - imgWidth)/2, imgWidth, imgWidth);
+    }
+    
 //    int leftIndex = self.isSelectible ? 50 : 15;
     if(self.checkButton) {
         self.checkButton.frame = CGRectMake(15, (self.frame.size.height - 20)/2, 21, 20);
