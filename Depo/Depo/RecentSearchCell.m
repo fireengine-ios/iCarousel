@@ -25,7 +25,7 @@
                 iconImg = [UIImage imageNamed:@"icon_location"];
             }
             if ([history.type isEqualToString:@"CATEGORY"]) {
-                iconImg = [UIImage imageNamed:@"icon_bottom_sync_purple"];
+                iconImg = [UIImage imageNamed:@"allFilesIcon"];
             }
             UIImageView* imageView = [[UIImageView alloc] initWithFrame:CGRectMake(left, 7, iconImg.size.width, iconImg.size.height)];
             imageView.image = iconImg;

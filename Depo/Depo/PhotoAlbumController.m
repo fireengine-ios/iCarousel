@@ -17,6 +17,7 @@
 #import "PrintWebViewController.h"
 #import "MPush.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "ShareActivity.h"
 
 @interface PhotoAlbumController ()
 @property (nonatomic, copy) NSArray *fileUUIDToShare;
@@ -729,10 +730,16 @@
                             [imageData writeToURL:url atomically:NO];
                             
                             NSArray *activityItems = @[url];
-                            UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+                            
+                            ShareActivity *activity = [[ShareActivity alloc] init];
+                            activity.sourceViewController = self;
+                            
+                            UIActivityViewController *activityViewController = [[UIActivityViewController alloc]
+                                                                                initWithActivityItems:activityItems
+                                                                                applicationActivities:@[activity]];
                             [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
                             activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-                            
+                            activityViewController.excludedActivityTypes = @[UIActivityTypePostToFacebook];
                             if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
                                 [self presentViewController:activityViewController animated:YES completion:nil];
                             } else {
@@ -961,10 +968,14 @@
                                            
                                            dispatch_async(dispatch_get_main_queue(), ^{
                                                [self hideLoading];
-                                               UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:allImages applicationActivities:nil];
+                                               
+                                               ShareActivity *activity = [[ShareActivity alloc] init];
+                                               activity.sourceViewController = self;
+                                               
+                                               UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:allImages applicationActivities:@[activity]];
                                                [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
                                                activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-                                               
+                                               activityViewController.excludedActivityTypes = @[UIActivityTypePostToFacebook];
                                                [activityViewController setCompletionHandler:^(NSString *activityType, BOOL completed) {
                                                    if (completed) {
                                                        [self setToUnselectible];

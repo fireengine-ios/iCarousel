@@ -19,6 +19,7 @@
 #import "UIImageView+WebCache.h"
 #import "NoItemView.h"
 #import "MPush.h"
+#import "ShareActivity.h"
 
 #define IMG_FOOTER_TAG 111
 #define ALBUM_FOOTER_TAG 222
@@ -961,10 +962,13 @@
                             
                             NSArray *activityItems = @[url];
                             
-                            UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+                            ShareActivity *activity = [[ShareActivity alloc] init];
+                            activity.sourceViewController = self;
+                            
+                            UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:@[activity]];
                             [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
                             activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-                            
+                            activityViewController.excludedActivityTypes = @[UIActivityTypePostToFacebook];
                             if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
                                 [self presentViewController:activityViewController animated:YES completion:nil];
                             } else {

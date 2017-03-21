@@ -28,6 +28,7 @@
 #import "PreviewUnavailableController.h"
 #import "AppDelegate.h"
 #import "BaseViewController.h"
+#import "ShareActivity.h"
 
 @interface SearchModalController ()  {
 #define searchResultCount 6
@@ -577,10 +578,15 @@
                     
                     NSArray *activityItems = @[url];
                     
-                    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+                    ShareActivity *activity = [[ShareActivity alloc] init];
+                    activity.sourceViewController = self;
+                    
+                    UIActivityViewController *activityViewController = [[UIActivityViewController alloc]
+                                                                        initWithActivityItems:activityItems
+                                                                        applicationActivities:@[activity]];
                     [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
                     activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-                    
+                    activityViewController.excludedActivityTypes = @[UIActivityTypePostToFacebook];
                     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
                         [self presentViewController:activityViewController animated:YES completion:nil];
                     } else {

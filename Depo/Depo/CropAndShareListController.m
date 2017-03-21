@@ -15,6 +15,7 @@
 #import "UploadingImagePreviewController.h"
 #import "PrintWebViewController.h"
 #import "MPush.h"
+#import "ShareActivity.h"
 
 @interface CropAndShareListController ()
 
@@ -630,10 +631,17 @@
                             NSURL *url = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingString:tempToShare.name]];
                             [imageData writeToURL:url atomically:NO];
                             
+                            ShareActivity *activity = [[ShareActivity alloc] init];
+                            activity.sourceViewController = self;
+                            
                             NSArray *activityItems = @[url];
-                            UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
-                            [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
+                            UIActivityViewController *activityViewController = [[UIActivityViewController alloc]
+                                                                                initWithActivityItems:activityItems
+                                                                                applicationActivities:@[activity]];
+                            [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"")
+                                                  forKeyPath:@"subject"];
                             activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+                            activityViewController.excludedActivityTypes = @[UIActivityTypePostToFacebook];
                             
                             if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
                                 [self presentViewController:activityViewController animated:YES completion:nil];
