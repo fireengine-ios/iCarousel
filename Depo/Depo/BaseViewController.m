@@ -306,6 +306,42 @@
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
+    EnableOption currentSyncPhotosVideosSetting = (int)[CacheUtil readCachedSettingSyncPhotosVideos];
+    ConnectionOption currentConnectionSetting = (int)[CacheUtil readCachedSettingSyncingConnectionType];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if(currentSyncPhotosVideosSetting == EnableOptionOn || currentSyncPhotosVideosSetting == EnableOptionAuto) {
+            if(currentConnectionSetting == ConnectionOptionWifi) {
+                [MPush hitTag:@"autosync" withValue:@"wifi"];
+                [MPush hitEvent:@"autosync_wifi"];
+            } else {
+                [MPush hitTag:@"autosync" withValue:@"4g"];
+                [MPush hitEvent:@"autosync_wifi3g"];
+            }
+        } else {
+            [MPush hitTag:@"autosync" withValue:@"off"];
+            [MPush hitEvent:@"autosync_off"];
+        }
+        
+        // TODO: needs to be tested on real device and tags?
+        NSLog(@"disk usage %lf", [Util getDiskUsage]);
+        if ([Util getDiskUsage] > 0.995) {
+            if ([[NSUserDefaults standardUserDefaults] objectForKey:@"diskusage_status100_control"] == nil) {
+                [MPush hitTag:@"diskusage_status100"];
+                //                [MPush hitEvent:@"diskusage_status100"];
+                [[NSUserDefaults standardUserDefaults] setObject:@"true" forKey:@"diskusage_status100_control"];
+            }
+        } else if ([Util getDiskUsage] > 0.95) {
+            if ([[NSUserDefaults standardUserDefaults] objectForKey:@"diskusage_status95_control"] == nil) {
+                [MPush hitTag:@"diskusage_status95"];
+                //                [MPush hitEvent:@"diskusage_status95"];
+                [[NSUserDefaults standardUserDefaults] setObject:@"true" forKey:@"diskusage_status95_control"];
+            }
+        } else {
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"diskusage_status100_control"];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"diskusage_status95_control"];
+        }
+    });
 }
 
 - (void) viewDidDisappear:(BOOL)animated {

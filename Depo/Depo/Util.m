@@ -274,4 +274,24 @@
     }
 }
 
++ (double) getDiskUsage {
+    double totalSpace = 0;
+    double totalFreeSpace = 0;
+    NSError *error = nil;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSDictionary *dictionary = [[NSFileManager defaultManager] attributesOfFileSystemForPath:[paths lastObject] error: &error];
+    
+    if (dictionary && error == nil) {
+        NSNumber *fileSystemSizeInBytes = [dictionary objectForKey: NSFileSystemSize];
+        NSNumber *freeFileSystemSizeInBytes = [dictionary objectForKey:NSFileSystemFreeSize];
+        totalSpace = [fileSystemSizeInBytes doubleValue];
+        totalFreeSpace = [freeFileSystemSizeInBytes doubleValue];
+    } else {
+        NSString *log = [NSString stringWithFormat:@"Error Obtaining System Memory Info: Domain = %@, Code = %ld", [error domain], (long)[error code]];
+        NSLog(@"getDiskUsage %@", log);
+    }
+    
+    return 1 - ((totalFreeSpace/1024ll)/1024ll) / ((totalSpace/1024ll)/1024ll);
+}
+
 @end

@@ -15,6 +15,7 @@
 #import "AppConstants.h"
 #import "SyncUtil.h"
 #import "PromotionEntryController.h"
+#import "MPush.h"
 
 @interface RevisitedStorageController ()
 
@@ -168,6 +169,20 @@
 }
 
 - (void) purchasingDone {
+    NSString *formattedQuotaString = [Util transformedHugeSizeValueDecimalIfNecessary:purchaseView.toBuyOffer.quota];
+    NSString *tagName = nil;
+    if([formattedQuotaString isEqualToString:@"50 GB"]) {
+        tagName = @"newpackage50gb";
+    } else if([formattedQuotaString isEqualToString:@"500 GB"]) {
+        tagName = @"newpackage500gb";
+    } else if([formattedQuotaString isEqualToString:@"2.5 TB"]) {
+        tagName = @"newpackage25tb";
+    }
+    if(tagName) {
+        [MPush hitTag:tagName];
+        [MPush hitEvent:tagName];
+    }
+    
     if(purchaseView) {
         [purchaseView removeFromSuperview];
         purchaseView = nil;
@@ -349,6 +364,27 @@
     [self refreshTable];
 
     [accountDaoToLearnIsJobExists requestIsJobExists];
+    
+    // TODO: menloworks ekibine sorulduktan sonra daha uygun bir yere tasinacak.
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSMutableArray *sortedSub = [NSMutableArray arrayWithArray:subscriptions];
+        [sortedSub sortUsingComparator:^NSComparisonResult(Subscription* _Nonnull obj1, Subscription* _Nonnull obj2) {
+            return obj1.plan.quota < obj2.plan.quota;
+        }];
+        
+        NSUInteger subLength = [sortedSub count];
+        for (int i = 0; i < 5; i++) {
+            NSString *packageName = [NSString stringWithFormat:@"user_package_%i", i];
+            NSString *displayName;
+            
+            if (i < subLength) {
+                Subscription *sub = sortedSub[i];
+                displayName = sub.plan.displayName;
+            }
+            
+            [MPush hitTag:packageName withValue:displayName];
+        }
+    });
 }
 
 - (void) loadCurrentSubscriptionFailCallback:(NSString *) errorMessage {

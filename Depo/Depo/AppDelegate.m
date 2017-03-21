@@ -66,6 +66,15 @@
 #import "BaseBgController.h"
 #import "AppRater.h"
 #import "SDImageCache.h"
+#import "MusicListController.h"
+#import "DocListController.h"
+#import "ContactSyncController.h"
+#import "ReachUsController.h"
+#import "EmailChangeController.h"
+#import "DropboxExportController.h"
+#import "SettingsSocialController.h"
+#import "SettingsHelpController.h"
+
 //TODO info'larda version update
 
 #define NO_CONN_ALERT_TAG 111
@@ -240,20 +249,6 @@
             actionString = [localNotification userInfo][@"action"];
         }
         
-//        if ([actionString isEqualToString:@"main"]) {
-//            self.notificationAction = NotificationActionMain;
-//        } else if ([actionString isEqualToString:@"sync_settings"]) {
-//            self.notificationAction = NotificationActionSyncSettings;
-//        } else if ([actionString isEqualToString:@"floating_menu"]) {
-//            self.notificationAction = NotificationActionFloatingMenu;
-//        } else if ([actionString isEqualToString:@"packages"]) {
-//            self.notificationAction = NotificationActionPackages;
-//        } else if ([actionString isEqualToString:@"photos_videos"]) {
-//            self.notificationAction = NotificationActionPhotos;
-//        } else if([actionString hasPrefix:@"http"]) {
-//            self.notificationAction = NotificationActionWeb;
-//            self.notificationActionUrl = actionString;
-//        }
         
         if ([actionString isEqualToString:@"main"]) {
             APPDELEGATE.session.notificationAction = NotificationActionMain;
@@ -265,6 +260,36 @@
             APPDELEGATE.session.notificationAction = NotificationActionPackages;
         } else if ([actionString isEqualToString:@"photos_videos"]) {
             APPDELEGATE.session.notificationAction = NotificationActionPhotos;
+        } else if ([actionString isEqualToString:@"photos_albums"]) {
+            APPDELEGATE.session.notificationAction = NotificationActionAlbums;
+        } else if ([actionString isEqualToString:@"all_files"]) {
+            APPDELEGATE.session.notificationAction = NotificationActionAllFiles;
+        } else if ([actionString isEqualToString:@"music"]) {
+            APPDELEGATE.session.notificationAction = NotificationActionMusic;
+        } else if ([actionString isEqualToString:@"documents"]) {
+            APPDELEGATE.session.notificationAction = NotificationActionDocuments;
+        } else if ([actionString isEqualToString:@"contact_sync"]) {
+            APPDELEGATE.session.notificationAction = NotificationActionContactSync;
+        } else if ([actionString isEqualToString:@"favourites"]) {
+            APPDELEGATE.session.notificationAction = NotificationActionFavourites;
+        } else if ([actionString isEqualToString:@"create_story"]) {
+            APPDELEGATE.session.notificationAction = NotificationActionCreateStory;
+        } else if ([actionString isEqualToString:@"contact_us"]) {
+            APPDELEGATE.session.notificationAction = NotificationActionContactUs;
+        } else if ([actionString isEqualToString:@"usage_info"]) {
+            APPDELEGATE.session.notificationAction = NotificationActionUsageInfo;
+        } else if ([actionString isEqualToString:@"auto_upload"]) {
+            APPDELEGATE.session.notificationAction = NotificationActionAutoUpload;
+        } else if ([actionString isEqualToString:@"recent_activities"]) {
+            APPDELEGATE.session.notificationAction = NotificationActionRecentActivities;
+        } else if ([actionString isEqualToString:@"email"]) {
+            APPDELEGATE.session.notificationAction = NotificationActionEmail;
+        } else if ([actionString isEqualToString:@"import_dropbox"]) {
+            APPDELEGATE.session.notificationAction = NotificationActionImportDropbox;
+        } else if ([actionString isEqualToString:@"social_media"]) {
+            APPDELEGATE.session.notificationAction = NotificationActionSocialMedia;
+        } else if ([actionString isEqualToString:@"faq"]) {
+            APPDELEGATE.session.notificationAction = NotificationActionFAQ;
         } else if([actionString hasPrefix:@"http"]) {
             APPDELEGATE.session.notificationAction = NotificationActionWeb;
             self.notificationActionUrl = actionString;
@@ -379,6 +404,36 @@
             [self triggerFloatingMenu];
         } else if (APPDELEGATE.session.notificationAction == NotificationActionPhotos) {
             [self triggerPhotosAndVideos];
+        } else if (APPDELEGATE.session.notificationAction == NotificationActionAlbums) {
+            [self triggerAlbums];
+        } else if (APPDELEGATE.session.notificationAction == NotificationActionAllFiles) {
+            [self triggerAllFiles];
+        } else if (APPDELEGATE.session.notificationAction == NotificationActionMusic) {
+            [self triggerMusic];
+        } else if (APPDELEGATE.session.notificationAction == NotificationActionDocuments) {
+            [self triggerDocuments];
+        } else if (APPDELEGATE.session.notificationAction == NotificationActionContactSync) {
+            [self triggerCreateContactSync];
+        } else if (APPDELEGATE.session.notificationAction == NotificationActionFavourites) {
+            [self triggerFavourites];
+        } else if (APPDELEGATE.session.notificationAction == NotificationActionCreateStory) {
+            [self triggerCreateStory];
+        } else if (APPDELEGATE.session.notificationAction == NotificationActionContactUs) {
+            [self triggerCreateContactUs];
+        } else if (APPDELEGATE.session.notificationAction == NotificationActionUsageInfo) {
+            [self triggerUsageInfo];
+        } else if (APPDELEGATE.session.notificationAction == NotificationActionAutoUpload) {
+            [self triggerAutoUpload];
+        } else if (APPDELEGATE.session.notificationAction == NotificationActionRecentActivities) {
+            [self triggerRecentActivities];
+        } else if (APPDELEGATE.session.notificationAction == NotificationActionEmail) {
+            [self triggerEmail];
+        } else if (APPDELEGATE.session.notificationAction == NotificationActionImportDropbox) {
+            [self triggerImportDropbox];
+        } else if (APPDELEGATE.session.notificationAction == NotificationActionSocialMedia) {
+            [self triggerSocialMedia];
+        } else if (APPDELEGATE.session.notificationAction == NotificationActionFAQ) {
+            [self triggerFAQ];
         } else if (APPDELEGATE.session.notificationAction == NotificationActionWeb){
             if(notificationActionUrl != nil && [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:notificationActionUrl]]) {
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:notificationActionUrl]];
@@ -390,6 +445,129 @@
     } else {
         [self triggerHome];
     }
+}
+
+- (void) triggerAllFiles {
+    FileListController *file = [[FileListController alloc] initForFolder:nil];
+    self.base = [[BaseViewController alloc] initWithRootViewController:file];
+    file.nav = self.base.nav;
+    file.myDelegate = self.base;
+    [self.window setRootViewController:base];
+}
+
+- (void) triggerMusic {
+    MusicListController *music = [[MusicListController alloc] init];
+    self.base = [[BaseViewController alloc] initWithRootViewController:music];
+    music.nav = self.base.nav;
+    music.myDelegate = self.base;
+    [self.window setRootViewController:base];
+}
+
+- (void) triggerDocuments {
+    DocListController *doc = [[DocListController alloc] init];
+    self.base = [[BaseViewController alloc] initWithRootViewController:doc];
+    doc.nav = self.base.nav;
+    doc.myDelegate = self.base;
+    [self.window setRootViewController:base];
+}
+
+- (void) triggerFavourites {
+    FavouriteListController *cont = [[FavouriteListController alloc] init];
+    self.base = [[BaseViewController alloc] initWithRootViewController:cont];
+    cont.nav = self.base.nav;
+    cont.myDelegate = self.base;
+    [self.window setRootViewController:base];
+}
+
+- (void) triggerCreateStory {
+    [self triggerHome];
+    [self.base didTriggerCreateStory];
+}
+
+- (void) triggerCreateContactSync {
+    [self.base didTriggerContactSync];
+    ContactSyncController *cont = [[ContactSyncController alloc] init];
+    self.base = [[BaseViewController alloc] initWithRootViewController:cont];
+    cont.nav = self.base.nav;
+    cont.myDelegate = self.base;
+    [self.window setRootViewController:base];
+}
+
+- (void) triggerCreateContactUs {
+    ReachUsController *cont = [[ReachUsController alloc] init];
+    self.base = [[BaseViewController alloc] initWithRootViewController:cont];
+    cont.nav = self.base.nav;
+    cont.myDelegate = self.base;
+    [self.window setRootViewController:base];
+}
+
+- (void) triggerUsageInfo {
+    MyViewController *settingsController = [[SettingsController alloc] init];
+    self.base = [[BaseViewController alloc] initWithRootViewController:settingsController];
+    [self.window setRootViewController:base];
+    
+    HomeController *home = [[HomeController alloc] init];
+    home.nav = self.base.nav;
+    home.myDelegate = self.base;
+    [settingsController.nav pushViewController:home animated:NO];
+}
+
+- (void) triggerAutoUpload {
+    MyViewController *settingsController = [[SettingsController alloc] init];
+    self.base = [[BaseViewController alloc] initWithRootViewController:settingsController];
+    [self.window setRootViewController:base];
+    
+    SettingsUploadController *cont = [[SettingsUploadController alloc] init];
+    cont.nav = self.base.nav;
+    [settingsController.nav pushViewController:cont animated:NO];
+}
+
+- (void) triggerRecentActivities {
+    MyViewController *settingsController = [[SettingsController alloc] init];
+    self.base = [[BaseViewController alloc] initWithRootViewController:settingsController];
+    [self.window setRootViewController:base];
+    
+    [MoreMenuView presentRecentActivitesFromController:self.base.nav];
+}
+
+- (void) triggerEmail {
+    MyViewController *settingsController = [[SettingsController alloc] init];
+    self.base = [[BaseViewController alloc] initWithRootViewController:settingsController];
+    [self.window setRootViewController:base];
+    
+    EmailChangeController *cont = [[EmailChangeController alloc] init];
+    cont.nav = self.base.nav;
+    [settingsController.nav pushViewController:cont animated:NO];
+}
+
+- (void) triggerImportDropbox {
+    MyViewController *settingsController = [[SettingsController alloc] init];
+    self.base = [[BaseViewController alloc] initWithRootViewController:settingsController];
+    [self.window setRootViewController:base];
+    
+    DropboxExportController *cont = [[DropboxExportController alloc] init];
+    cont.nav = self.base.nav;
+    [settingsController.nav pushViewController:cont animated:NO];
+}
+
+- (void) triggerSocialMedia {
+    MyViewController *settingsController = [[SettingsController alloc] init];
+    self.base = [[BaseViewController alloc] initWithRootViewController:settingsController];
+    [self.window setRootViewController:base];
+    
+    SettingsSocialController *cont = [[SettingsSocialController alloc] init];
+    cont.nav = self.base.nav;
+    [settingsController.nav pushViewController:cont animated:NO];
+}
+
+- (void) triggerFAQ {
+    MyViewController *settingsController = [[SettingsController alloc] init];
+    self.base = [[BaseViewController alloc] initWithRootViewController:settingsController];
+    [self.window setRootViewController:base];
+    
+    SettingsHelpController *cont = [[SettingsHelpController alloc] init];
+    cont.nav = self.base.nav;
+    [settingsController.nav pushViewController:cont animated:NO];
 }
 
 - (void) triggerHome {
@@ -411,6 +589,14 @@
     MyViewController *photosController = [[RevisitedGroupedPhotosController alloc] init];
     self.base = [[BaseViewController alloc] initWithRootViewController:photosController];
     [self.window setRootViewController:base];
+}
+
+- (void) triggerAlbums {
+    RevisitedGroupedPhotosController *photosController = [[RevisitedGroupedPhotosController alloc] init];
+    self.base = [[BaseViewController alloc] initWithRootViewController:photosController];
+    [self.window setRootViewController:base];
+    
+    [photosController.segmentView albumClicked];
 }
 
 - (void) triggerSyncSettings {

@@ -305,16 +305,15 @@
     [CacheUtil writeCachedSettingSyncPhotosVideos:EnableOptionOn];
     
     [[CurioSDK shared] sendEvent:@"SyncOpened" eventValue:@"true"];
-    [MPush hitTag:@"SyncOpened" withValue:@"true"];
     
     if(selectedOption == ConnectionOptionWifi3G) {
         [[CurioSDK shared] sendEvent:@"FirstAutoSyncPref" eventValue:@"any"];
-        [MPush hitTag:@"firstautosync_wifi3g"];
-        [MPush hitEvent:@"firstautosync_wifi3g"];
+        [MPush hitTag:@"firstautosync" withValue:@"4g"];
+        [MPush hitEvent:@"first_autosyncwifi3g"];
     } else {
         [[CurioSDK shared] sendEvent:@"FirstAutoSyncPref" eventValue:@"wifi"];
-        [MPush hitTag:@"firstautosync_wifi"];
-        [MPush hitEvent:@"firstautosync_wifi"];
+        [MPush hitTag:@"firstautosync" withValue:@"wifi"];
+        [MPush hitEvent:@"first_autosyncwifi"];
     }
     
     [CacheUtil writeCachedSettingSyncingConnectionType:selectedOption];
@@ -374,11 +373,10 @@
     [CacheUtil writeCachedSettingSyncContacts:EnableOptionOff];
     
     [[CurioSDK shared] sendEvent:@"SyncClosed" eventValue:@"true"];
-    [MPush hitTag:@"SyncClosed" withValue:@"true"];
     [[CurioSDK shared] sendEvent:@"FirstAutoSyncPref" eventValue:@"closed"];
     
-    [MPush hitTag:@"firstautosync_off"];
-    [MPush hitEvent:@"firstautosync_off"];
+    [MPush hitTag:@"firstautosync" withValue:@"off"];
+    [MPush hitEvent:@"first_autosyncoff"];
     
     [CacheUtil writeCachedSettingSyncingConnectionType:selectedOption];
     [CacheUtil writeCachedSettingDataRoaming:NO];

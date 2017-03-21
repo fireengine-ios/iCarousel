@@ -27,5 +27,6 @@
 + (BOOL) isValidEmail:(NSString *)checkString;
 + (NSString *) readLocaleCode;
 + (NSString *)deviceType;
++ (double)getDiskUsage;
 
 @end

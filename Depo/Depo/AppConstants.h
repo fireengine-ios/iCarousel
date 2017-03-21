@@ -484,7 +484,23 @@ typedef enum {
     NotificationActionFloatingMenu,
     NotificationActionPackages,
     NotificationActionPhotos,
-    NotificationActionWeb
+    NotificationActionAlbums,
+    NotificationActionWeb,
+    NotificationActionAllFiles,
+    NotificationActionMusic,
+    NotificationActionDocuments,
+    NotificationActionContactSync,
+    NotificationActionFavourites,
+    NotificationActionCreateStory,
+    NotificationActionContactUs,
+    // Settings
+    NotificationActionUsageInfo,
+    NotificationActionAutoUpload,
+    NotificationActionRecentActivities,
+    NotificationActionEmail,
+    NotificationActionImportDropbox,
+    NotificationActionSocialMedia,
+    NotificationActionFAQ
 } NotificationAction;
 
 typedef enum {
