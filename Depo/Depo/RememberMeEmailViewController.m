@@ -177,6 +177,15 @@
     // Do any additional setup after loading the view.
 }
 
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    CustomButton *customBackButton = [[CustomButton alloc] initWithFrame:CGRectMake(10, 0, 24, 24) withImageName:@"icon_ustbar_back.png"];
+    [customBackButton addTarget:self action:@selector(innerTriggerBack) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:customBackButton];
+    self.navigationItem.leftBarButtonItem = backButton;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -252,6 +261,10 @@
 //    
 //    [UIView commitAnimations];
 //}
+
+- (void) innerTriggerBack {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 -(void)setViewMovedUp:(BOOL)movedUp {
     if (movedUp) {
