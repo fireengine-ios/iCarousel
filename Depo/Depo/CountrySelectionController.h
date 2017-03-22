@@ -10,6 +10,7 @@
 
 @interface CountrySelectionController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
+@property (nonatomic) NSString *selectedCountry;
 @property (nonatomic) void(^completion)(NSDictionary*);
 
 @end

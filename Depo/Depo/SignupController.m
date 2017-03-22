@@ -29,6 +29,7 @@
 }
 @property (nonatomic) CountrySelectionController *countrySelectionController;
 @property (nonatomic, strong) UIButton *countryCodeButton;
+@property (nonatomic) NSString *selectedCountry;
 @end
 
 @implementation SignupController
@@ -92,12 +93,16 @@
         if([currentLocale isEqualToString:@"uk"] || [currentLocale isEqualToString:@"ru"]) {
             [_countryCodeButton setTitle:@"+90" forState:UIControlStateNormal];
             currentCode = @"+380";
+            self.selectedCountry = @"UK";
         } else if ([currentLocale isEqualToString:@"ar"]) {
             currentCode = @"+966";
+            self.selectedCountry = @"AR";
         } else if ([currentLocale isEqualToString:@"de"]) {
             currentCode = @"+49";
+            self.selectedCountry = @"DE";
         } else {
             currentCode = @"+90";
+            self.selectedCountry = @"TR";
         }
         [_countryCodeButton setTitle:currentCode forState:UIControlStateNormal];
 
@@ -187,7 +192,7 @@
         eulaButton.accessibilityIdentifier = @"eulaButtonSignUp";
         [container addSubview:eulaButton];
 
-        CGFloat btnWidth = 180.0f, btnHeight = 40.0f;
+        CGFloat btnWidth = 200.0f, btnHeight = 40.0f;
         CGRect signupButtonRect = CGRectMake((self.view.frame.size.width - btnWidth) /2,
                                              self.view.frame.size.height - (btnHeight * 2) - 64,
                                              btnWidth,
@@ -199,13 +204,13 @@
         }
         
         signupButton = [[SimpleButton alloc] initWithFrame:signupButtonRect
-                                                 withTitle:[NSLocalizedString(@"SignUpButtonTitle", @"") capitalizedString]
-                                            withTitleColor:[UIColor blackColor]
+                                                 withTitle:[NSLocalizedString(@"SignUpButtonTitle", @"") uppercaseString]
+                                            withTitleColor:[UIColor whiteColor]
                                              withTitleFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:16]
                                            withBorderColor:[UIColor clearColor]
                                                withBgColor:[UIColor whiteColor]
                                           withCornerRadius:0];
-        [signupButton setBackgroundImage:[UIImage imageNamed:@"buttonbg_720_w"] forState:UIControlStateNormal];
+        [signupButton setBackgroundImage:[UIImage imageNamed:@"signup_button"] forState:UIControlStateNormal];
         [signupButton addTarget:self action:@selector(signupClicked) forControlEvents:UIControlEventTouchUpInside];
         signupButton.isAccessibilityElement = YES;
         signupButton.accessibilityIdentifier = @"submitButtonSignUp";
@@ -229,11 +234,16 @@
 
 - (void)goCountryCodepage:(id)sender {
     _countrySelectionController = [[CountrySelectionController alloc] init];
+    self.countrySelectionController.selectedCountry = self.selectedCountry;
     __weak UIButton *weakCountryButton = _countryCodeButton;
+    __weak SignupController *weakSelf = self;
+    
     _countrySelectionController.completion = ^(NSDictionary *selectedCountry) {
         NSLog(@"selected country = %@", selectedCountry);
+        weakSelf.selectedCountry = selectedCountry[@"country_code"];
         [weakCountryButton setTitle:selectedCountry[@"phone_code"] forState:UIControlStateNormal];
     };
+    
     MyNavigationController *nav = [[MyNavigationController alloc] initWithRootViewController:_countrySelectionController];
     [self presentViewController:nav animated:YES completion:nil];
 }

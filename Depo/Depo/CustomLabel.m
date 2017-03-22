@@ -22,6 +22,7 @@
         self.textColor = colorRef;
         self.text = textRef;
         self.textAlignment = alignmentRef;
+        self.adjustsFontSizeToFitWidth = true;
     }
     return self;
 }

@@ -168,7 +168,9 @@
         passIconImgView.image = newPassIcon;
         [forgotPassView addSubview:passIconImgView];
         
-        SimpleButton *forgotPass = [[SimpleButton alloc] initWithFrame:CGRectMake(newPassIcon.size.width + 5, 4, 130, 25) withTitle:NSLocalizedString(@"ForgotPassButton", @"") withTextAlignment:NSTextAlignmentLeft];
+        SimpleButton *forgotPass = [[SimpleButton alloc] initWithFrame:CGRectMake(newPassIcon.size.width + 5, 4, 130, 25)
+                                                             withTitle:NSLocalizedString(@"ForgotPassButton", @"")
+                                                     withTextAlignment:NSTextAlignmentLeft];
         [forgotPass addTarget:self action:@selector(forgotMeClicked) forControlEvents:UIControlEventTouchUpInside];
         forgotPass.isAccessibilityElement = YES;
         forgotPass.accessibilityIdentifier = @"forgotPassButton";
@@ -249,24 +251,25 @@
             }
         }
         
-        CGFloat btnWidth = 180.0f, btnHeight = 40.0f;
+        CGFloat btnWidth = 200.0f, btnHeight = 40.0f;
         CGRect registerButtonFrame = CGRectMake((self.view.frame.size.width - btnWidth) /2,
                                                 self.view.frame.size.height - (btnHeight * 2) - 64,
                                                 btnWidth,
                                                 btnHeight);
         SimpleButton *registerButton = [[SimpleButton alloc] initWithFrame:registerButtonFrame
                                                                  withTitle:[NSLocalizedString(@"SignUpButtonTitle", @"") uppercaseString]
-                                                            withTitleColor:[UIColor blackColor]
+                                                            withTitleColor:[UIColor whiteColor]
                                                              withTitleFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:16]
                                                            withBorderColor:[UIColor clearColor]
                                                                withBgColor:[UIColor whiteColor]
                                                           withCornerRadius:2];
         
-        [registerButton setBackgroundImage:[UIImage imageNamed:@"buttonbg_720_w"] forState:UIControlStateNormal];
+        [registerButton setBackgroundImage:[UIImage imageNamed:@"signup_button"] forState:UIControlStateNormal];
 
         [registerButton addTarget:self action:@selector(registerClicked) forControlEvents:UIControlEventTouchUpInside];
         registerButton.isAccessibilityElement = YES;
         registerButton.accessibilityIdentifier = @"registerButton";
+        
         [container addSubview:registerButton];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow) name:UIKeyboardWillShowNotification object:nil];

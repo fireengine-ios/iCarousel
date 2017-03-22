@@ -13,5 +13,9 @@
 
 @property (nonatomic, strong) CustomLabel *textLabel;
 @property (nonatomic, strong) CustomLabel *detailTextLabel;
+@property (nonatomic, strong) UIImageView *tickImageV;
+
+- (void) addGreenTickIcon;
+- (void) removeGreenTickIcon;
 
 @end

@@ -28,6 +28,7 @@ static const CGFloat topOffset = 40;
     [super viewDidLoad];
     
     self.title = NSLocalizedString(@"Select Country", "");
+    NSLog(@"selected country = %@", self.selectedCountry);
     
     _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40)];
     [_searchBar setBarTintColor:[UIColor colorWithRed:245.0f/255.0f green:245/255.0f blue:245/255.0f alpha:1.0f]];
@@ -46,27 +47,46 @@ static const CGFloat topOffset = 40;
     [self.view addSubview:_tableView];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"countryCodes" ofType:@"json"];
-        NSData *jsonData = [[NSData alloc] initWithContentsOfFile:filePath];
-        NSArray *countryArray = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                          options:kNilOptions
-                                                            error:nil];
-
+        
+        NSArray *countryArray = [self getLocales];
         _countryDict = [self sortCountryArray:countryArray];
         _filteredCountryDict = [NSMutableDictionary dictionaryWithDictionary:_countryDict];
         _keys = [self getSortedKeysFromDict:_filteredCountryDict];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithTitle:@"X"
+            UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_ustbar_close"]
                                                                           style:UIBarButtonItemStylePlain
                                                                          target:self
                                                                          action:@selector(back:)];
+            
             barButton.tintColor = [UIColor whiteColor];
             [self.navigationItem setRightBarButtonItem:barButton];
             [self.tableView reloadData];
         });
     });
     
+}
+
+- (NSArray*)getLocales {
+    NSMutableArray *resultArr = [NSMutableArray new];
+    
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"countryiso" ofType:@"json"];
+    NSData *jsonData = [[NSData alloc] initWithContentsOfFile:filePath];
+    NSDictionary *countryIsoPhone = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                            options:kNilOptions
+                                                              error:nil];
+    for (NSString *isoCode in [NSLocale ISOCountryCodes]) {
+        NSString *phoneCode = countryIsoPhone[[isoCode uppercaseString]];
+        if (phoneCode) {
+            [resultArr addObject:@{
+                                   @"country_name": [[NSLocale systemLocale] displayNameForKey:NSLocaleCountryCode value:isoCode],
+                                   @"phone_code": phoneCode,
+                                   @"country_code": isoCode
+                                   }];
+        }
+    }
+    
+    return resultArr;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -99,16 +119,28 @@ static const CGFloat topOffset = 40;
     }];
     
     NSMutableDictionary * resultDic = [NSMutableDictionary dictionary];
-    for (unichar firstChar = 'A'; firstChar <= 'Z'; firstChar ++) {
-        [resultDic setObject:[NSMutableArray array] forKey:[NSString stringWithFormat:@"%C",firstChar]];
-    }
-    for (NSDictionary * dic in sourceArray) {
-        [resultDic[[dic[@"country_name"] substringToIndex:1]] addObject:dic];
-    }
-    for (NSString * key in [resultDic allKeys]) {
-        if ([resultDic[key] count] == 0) {
-            [resultDic removeObjectForKey:key];
+    
+    for (NSDictionary *item in sourceArray) {
+        NSString *firstLetter = [[item[@"country_name"] substringToIndex:1]
+                                 uppercaseString];
+        
+        NSMutableArray *mutableArray = resultDic[firstLetter];
+        if (mutableArray == nil) {
+            mutableArray = [@[] mutableCopy];
         }
+        
+        // eger secilmis ulke ise ilk harfe ait section'in ilk objesi olarak ekle
+        if ([self.selectedCountry isEqualToString: [item[@"country_code"] uppercaseString] ]) {
+            NSDictionary *tmpFirstItem = sourceArray[0];
+            NSString *tmpFirstLetter = [[tmpFirstItem[@"country_name"] substringToIndex:1] uppercaseString];
+            NSMutableArray *tmpSectionArray = resultDic[tmpFirstLetter];
+            [tmpSectionArray insertObject:item atIndex:0];
+            
+        } else {
+            [mutableArray addObject:item];
+        }
+        
+        [resultDic setValue:mutableArray forKey:firstLetter];
     }
     return resultDic;
 }
@@ -129,21 +161,30 @@ static const CGFloat topOffset = 40;
     return 0;
 }
 
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    return [_keys objectAtIndex:section];
-}
+//-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+//{
+//    return [_keys objectAtIndex:section];
+//}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CountrySelectionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellIdentifier"];
-    if (!cell) {
+//    if (!cell) {
         cell = [[CountrySelectionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellIdentifier"];
-    }
+//    }
     if (_filteredCountryDict) {
-        NSDictionary *country = [_filteredCountryDict valueForKey:[_keys objectAtIndex:[indexPath section]]][indexPath.row];
+        NSDictionary *country;
+        country = [_filteredCountryDict valueForKey:[_keys objectAtIndex:[indexPath section]]][indexPath.row];
+        
         [cell.textLabel setText:country[@"country_name"]];
         cell.textLabel.adjustsFontSizeToFitWidth = YES;
         [cell.detailTextLabel setText:country[@"phone_code"]];
+        
+        // eger secilmis ulke ise tick ikonunu ekle
+        if ([self.selectedCountry isEqualToString:[country[@"country_code"] uppercaseString] ]) {
+            [cell addGreenTickIcon];
+        } else {
+            [cell removeGreenTickIcon];
+        }
         return cell;
     }
     return cell;;
@@ -157,15 +198,15 @@ static const CGFloat topOffset = 40;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     CountrySelectionCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
-    UIImageView *tickImageV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"added_tick.png"]];
-    tickImageV.frame = CGRectMake(cell.detailTextLabel.frame.origin.x - 40,
-                                       10,
-                                       25,
-                                       25);
-    tickImageV.backgroundColor = [UIColor redColor];
-    [cell addSubview:tickImageV];
+    // Onceki secimi kaldir
+    CountrySelectionCell *firstCell = [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    [firstCell removeGreenTickIcon];
+    
+    // yeni secim icin tick ekle
+    [cell addGreenTickIcon];
     tableView.userInteractionEnabled = NO;
     
+    // geri don
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if (_completion) {
             _completion([_filteredCountryDict valueForKey:[_keys objectAtIndex:[indexPath section]]][indexPath.row]);
