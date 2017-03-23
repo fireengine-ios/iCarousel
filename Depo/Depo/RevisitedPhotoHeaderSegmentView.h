@@ -25,4 +25,7 @@
 - (void) enableNavigate;
 - (void) disableNavigate;
 
+- (void) photoClicked;
+- (void) albumClicked;
+
 @end
