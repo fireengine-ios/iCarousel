@@ -421,6 +421,8 @@
                                                    ShareActivity *activity = [[ShareActivity alloc] init];
                                                    activity.sourceViewController = self;
                                                    applicationActivities = @[activity];
+                                               } else {
+                                                   [allImages insertObject:@"#lifebox" atIndex:0];
                                                }
                                                
                                                UIActivityViewController *activityViewController = [[UIActivityViewController alloc]

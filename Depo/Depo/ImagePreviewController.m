@@ -1020,6 +1020,8 @@
                            ShareActivity *activity = [[ShareActivity alloc] init];
                            activity.sourceViewController = self;
                            applicationActivities = @[activity];
+                       } else {
+                           activityItems = @[@"#lifebox", url];
                        }
                        
                        UIActivityViewController *activityViewController = [[UIActivityViewController alloc]
