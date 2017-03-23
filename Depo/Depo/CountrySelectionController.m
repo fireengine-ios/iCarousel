@@ -89,6 +89,13 @@ static const CGFloat topOffset = 40;
     return resultArr;
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
+                                animated:NO
+                          scrollPosition:UITableViewScrollPositionNone];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -168,9 +175,9 @@ static const CGFloat topOffset = 40;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CountrySelectionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellIdentifier"];
-//    if (!cell) {
+    if (!cell) {
         cell = [[CountrySelectionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellIdentifier"];
-//    }
+    }
     if (_filteredCountryDict) {
         NSDictionary *country;
         country = [_filteredCountryDict valueForKey:[_keys objectAtIndex:[indexPath section]]][indexPath.row];
@@ -178,13 +185,6 @@ static const CGFloat topOffset = 40;
         [cell.textLabel setText:country[@"country_name"]];
         cell.textLabel.adjustsFontSizeToFitWidth = YES;
         [cell.detailTextLabel setText:country[@"phone_code"]];
-        
-        // eger secilmis ulke ise tick ikonunu ekle
-        if ([self.selectedCountry isEqualToString:[country[@"country_code"] uppercaseString] ]) {
-            [cell addGreenTickIcon];
-        } else {
-            [cell removeGreenTickIcon];
-        }
         return cell;
     }
     return cell;;
@@ -196,14 +196,7 @@ static const CGFloat topOffset = 40;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    CountrySelectionCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    
-    // Onceki secimi kaldir
-    CountrySelectionCell *firstCell = [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    [firstCell removeGreenTickIcon];
-    
-    // yeni secim icin tick ekle
-    [cell addGreenTickIcon];
+    // tableview kilitle
     tableView.userInteractionEnabled = NO;
     
     // geri don
@@ -226,7 +219,6 @@ static const CGFloat topOffset = 40;
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    //TODO: CountryDict harfli sectionlara ayrildigi icin bu index ndj asagidaki algoritma daha da gelistirilebilir
     _filteredCountryDict = [NSMutableDictionary new];
     for (NSString *key in [_countryDict allKeys]) {
         NSArray *items = _countryDict[key];

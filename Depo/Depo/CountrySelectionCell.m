@@ -20,23 +20,19 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         CGRect f = self.frame;
         f.size.width = f.size.width + rightPadding;
         
-        textLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20,
-                                                                  0,
-                                                                  f.size.width - detailLabelWidth - 25,
-                                                                  f.size.height)
+        textLabel = [[CustomLabel alloc] initWithFrame:[self getFrameForTextLabel]
 //                                              withFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:17]
                                               withFont:[UIFont systemFontOfSize:17]
                                              withColor:[UIColor blackColor]
                                               withText:@""];
         [self addSubview:textLabel];
         
-        detailTextLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(f.size.width - detailLabelWidth,
-                                                                        10,
-                                                                        detailLabelWidth,
-                                                                        f.size.height - 10)
+        detailTextLabel = [[CustomLabel alloc] initWithFrame:[self getFrameForDetailTextLabel]
 //                                                    withFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:17]
                                                     withFont:[UIFont systemFontOfSize:17]
 //                                                   withColor:[UIColor darkGrayColor]
@@ -47,9 +43,23 @@
     return self;
 }
 
+- (CGRect)getFrameForTextLabel {
+    return CGRectMake(20,
+                      0,
+                      self.frame.size.width - detailLabelWidth -20 -5 -20,
+                      self.frame.size.height);
+}
+
+- (CGRect)getFrameForDetailTextLabel {
+    return CGRectMake(self.frame.size.width - detailLabelWidth - 20,
+               10,
+               detailLabelWidth,
+               self.frame.size.height - 10);
+}
+
 - (void) addGreenTickIcon {
     self.tickImageV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_selected.png"]];
-    self.tickImageV.frame = CGRectMake(self.detailTextLabel.frame.origin.x - 40,
+    self.tickImageV.frame = CGRectMake(self.detailTextLabel.frame.origin.x - 30,
                                   10,
                                   25,
                                   25);
@@ -69,8 +79,15 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+    if (selected) {
+        [self addGreenTickIcon];
+    } else {
+        [self removeGreenTickIcon];
+        
+        // update frames
+        self.textLabel.frame = [self getFrameForTextLabel];
+        self.detailTextLabel.frame = [self getFrameForDetailTextLabel];
+    }
 }
 
 @end
