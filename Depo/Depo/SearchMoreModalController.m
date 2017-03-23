@@ -28,7 +28,7 @@
 #import "ShareActivity.h"
 
 @interface SearchMoreModalController ()
-
+@property (nonatomic, assign) BOOL isLoading;
 @end
 
 @implementation SearchMoreModalController
@@ -104,17 +104,24 @@
     [self startSearch];
 }
 
+- (void)previewedImageWasDeleted:(MetaFile *)deletedFile {
+}
+
 - (void)startSearch {
     if (!refreshControl) {
         [super showLoading];
         [super fadeOut:searchResultsTable duration:0.01];
     }
-    listOffset = 0;
+//    listOffset = 0;
     [fileList removeAllObjects];
     
     
     tableUpdateCounter++;
-    [searchDao requestMetadata:searchText andPage:0 andSize:NO_OF_FILES_PER_PAGE andSortType:APPDELEGATE.session.sortType andSearchListType:searchListType];
+    [searchDao requestMetadata:searchText
+                       andPage:0
+                       andSize:NO_OF_FILES_PER_PAGE + (listOffset * NO_OF_FILES_PER_PAGE)
+                   andSortType:APPDELEGATE.session.sortType
+             andSearchListType:searchListType];
 }
 
 - (void) searchListSuccessCallback:(NSArray *) files {
@@ -125,7 +132,7 @@
 
     [fileList addObjectsFromArray:files];
     
-    isLoading = NO;
+    self.isLoading = NO;
     tableUpdateCounter++;
     [searchResultsTable reloadData];
     
@@ -145,7 +152,7 @@
 
 - (void) loadMoreSuccessCallback:(NSArray *) files {
     [fileList addObjectsFromArray:files];
-    isLoading = NO;
+    self.isLoading = NO;
 //    tableUpdateCounter++;
     [searchResultsTable reloadData];
     
@@ -157,19 +164,35 @@
 }
 
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (!isLoading) {
+    if (!self.isLoading) {
         CGFloat currentOffset = searchResultsTable.contentOffset.y;
         CGFloat maximumOffset = searchResultsTable.contentSize.height - searchResultsTable.frame.size.height;
         if (currentOffset - maximumOffset >= 0.0) {
-            isLoading = YES;
+            self.isLoading = YES;
             [self dynamicallyLoadNextPage];
         }
     }
 }
 
+//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+//    if (!self.isLoading) {
+//        CGFloat currentOffset = searchResultsTable.contentOffset.y;
+//        CGFloat maximumOffset = searchResultsTable.contentSize.height - searchResultsTable.frame.size.height;
+//        if (currentOffset - maximumOffset >= 0.0) {
+//            self.isLoading = YES;
+//            [self dynamicallyLoadNextPage];
+//        }
+//    }
+//}
+
 - (void) dynamicallyLoadNextPage {
     listOffset++;
-    [loadMoreDao requestMetadata:searchText andPage:listOffset*NO_OF_FILES_PER_PAGE andSize:NO_OF_FILES_PER_PAGE andSortType:APPDELEGATE.session.sortType andSearchListType:searchListType];
+        
+    [loadMoreDao requestMetadata:searchText
+                         andPage:listOffset
+                         andSize:NO_OF_FILES_PER_PAGE
+                     andSortType:APPDELEGATE.session.sortType
+               andSearchListType:searchListType];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -282,6 +305,7 @@
 
 - (void) viewDidLoad {
     [super viewDidLoad];
+    listOffset = 0;
     IGLog(@"SearchMoreModalController viewDidLoad");
 }
 

@@ -83,9 +83,17 @@
     return self;
 }
 
-- (void) reloadLists {
+- (void)reloadListsForMetaFile:(MetaFile *)metaFile {
     [albumView pullData];
-    [groupView pullData];
+    if (metaFile == nil) {
+        [groupView pullData];
+    } else {
+        [groupView reloadContent:YES forMetaFile:metaFile];
+    }
+}
+
+- (void) reloadLists {
+    [self reloadListsForMetaFile:nil];
 }
 
 - (void) revisitedPhotoHeaderSegmentPhotoChosen {
@@ -413,6 +421,8 @@
                                                    ShareActivity *activity = [[ShareActivity alloc] init];
                                                    activity.sourceViewController = self;
                                                    applicationActivities = @[activity];
+                                               } else {
+                                                   [allImages insertObject:@"#lifebox" atIndex:0];
                                                }
                                                
                                                UIActivityViewController *activityViewController = [[UIActivityViewController alloc]
@@ -602,11 +612,11 @@
 }
 
 - (void) previewedImageWasDeleted:(MetaFile *) deletedFile {
-    [self reloadLists];
+    [self reloadListsForMetaFile:deletedFile];
 }
 
 - (void) previewedVideoWasDeleted:(MetaFile *) deletedFile {
-    [self reloadLists];
+    [self reloadListsForMetaFile:deletedFile];
 }
 
 - (void) confirmDeleteDidCancel {

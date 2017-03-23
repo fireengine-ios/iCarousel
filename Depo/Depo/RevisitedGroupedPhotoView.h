@@ -96,6 +96,7 @@
 
 - (void) pullData;
 - (void)reloadContent:(BOOL)forDelete;
+- (void)reloadContent:(BOOL)forDelete forMetaFile:(MetaFile *)metaFile;
 - (void) setToSelectible;
 - (void) setToUnselectible;
 - (void) setToUnselectiblePriorToRefresh;

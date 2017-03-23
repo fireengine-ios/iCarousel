@@ -636,14 +636,17 @@
                             BOOL thisIsAnImage = tempToShare.contentType == ContentTypePhoto;
                             
                             NSArray *applicationActivities = nil;
+                            NSArray *activityItems = @[url];
+                            
                             if (thisIsAnImage) {
                                 ShareActivity *activity = [[ShareActivity alloc] init];
                                 activity.sourceViewController = self;
                                 
                                 applicationActivities = @[activity];
+                            } else {
+                                activityItems = @[@"#lifebox", url];
                             }
                             
-                            NSArray *activityItems = @[url];
                             UIActivityViewController *activityViewController = [[UIActivityViewController alloc]
                                                                                 initWithActivityItems:activityItems
                                                                                 applicationActivities:applicationActivities];

@@ -739,6 +739,8 @@
                                 activity.sourceViewController = self;
                                 
                                 applicationActivities = @[activity];
+                            } else {
+                                activityItems = @[@"#lifebox", url];
                             }
                             
                             UIActivityViewController *activityViewController = [[UIActivityViewController alloc]
@@ -995,6 +997,8 @@
                                                    ShareActivity *activity = [[ShareActivity alloc] init];
                                                    activity.sourceViewController = self;
                                                    applicationActivities = @[activity];
+                                               } else {
+                                                   [allImages insertObject:@"#lifebox" atIndex:0];
                                                }
                                                
                                                UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:allImages applicationActivities:applicationActivities];

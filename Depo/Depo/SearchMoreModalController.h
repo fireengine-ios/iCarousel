@@ -25,7 +25,7 @@
     int searchListType;
     NSString *searchText;
     int fileCount;
-    BOOL isLoading;
+    
     
     SearchDao *loadMoreDao;
     DeleteDao *deleteDao;
