@@ -336,7 +336,7 @@
 - (void) tokenDaoFailCallback:(NSString *) errorMessage {
     [self hideLoading];
     [[CurioSDK shared] sendEvent:@"Login" eventValue:@"Fail"];
-    [MPush hitTag:@"Login" withValue:@"Fail"];
+//    [MPush hitTag:@"Login" withValue:@"Fail"];
 
     if([errorMessage isEqualToString:CAPTCHA_ERROR_MESSAGE]) {
         [self showErrorAlertWithMessage:NSLocalizedString(@"CaptchaRequiredErrorMessage", @"")];
@@ -475,7 +475,7 @@
 
     IGLog(@"LoginController viewDidLoad");
 
-    [MPush hitTag:@"logged_in" withValue:@"0"];
+//    [MPush hitTag:@"logged_in" withValue:@"0"];
 }
 
 - (void) viewDidAppear:(BOOL)animated {

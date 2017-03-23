@@ -175,11 +175,11 @@
         [SharedUtil writeSharedToken:authToken];
         
         [[CurioSDK shared] sendEvent:@"LoginSuccess" eventValue:@"true"];
-        [MPush hitTag:@"LoginSuccess" withValue:@"true"];
+//        [MPush hitTag:@"LoginSuccess" withValue:@"true"];
         
         IGLog(@"RequestTokenDao request finished successfully");
-        [MPush hitTag:@"logged_in" withValue:@"1"];
-        [MPush hitEvent:@"logged_in"];
+//        [MPush hitTag:@"logged_in" withValue:@"1"];
+//        [MPush hitEvent:@"logged_in"];
         dispatch_async(dispatch_get_main_queue(), ^{
             SuppressPerformSelectorLeakWarning([delegate performSelector:successMethod]);
         });

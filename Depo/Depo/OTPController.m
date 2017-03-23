@@ -446,7 +446,7 @@
     
     [[CurioSDK shared] sendEvent:@"LoginSuccess" eventValue:@"true"];
     [[CurioSDK shared] sendEvent:@"Login" eventValue:@"Success"];
-    [MPush hitTag:@"Login" withValue:@"Success"];
+//    [MPush hitTag:@"Login" withValue:@"Success"];
 
     [[CurioSDK shared] sendEvent:@"Mnc" eventValue:[AppUtil readCurrentMobileNetworkCode]];
     [MPush hitTag:@"Mnc" withValue:[AppUtil readCurrentMobileNetworkCode]];
@@ -457,7 +457,7 @@
 - (void) tokenDaoFailCallback:(NSString *) errorMessage {
     [self hideLoading];
     [[CurioSDK shared] sendEvent:@"Login" eventValue:@"Fail"];
-    [MPush hitTag:@"Login" withValue:@"Fail"];
+//    [MPush hitTag:@"Login" withValue:@"Fail"];
     
     if([errorMessage isEqualToString:CAPTCHA_ERROR_MESSAGE]) {
         [self showErrorAlertWithMessage:NSLocalizedString(@"CaptchaRequiredErrorMessage", @"")];

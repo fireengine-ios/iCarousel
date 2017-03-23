@@ -150,7 +150,6 @@
                         }
                         
                         [[CurioSDK shared] sendEvent:@"FirstSyncStarted" eventValue:[NSString stringWithFormat:@"start index: %d", startIndex]];
-                        [MPush hitTag:@"FirstSyncStarted" withValue:[NSString stringWithFormat:@"start index: %d", startIndex]];
                         
                         [group enumerateAssetsAtIndexes:indexSet options:0 usingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
                             NSString *referenceAlbumName = nil;//[group valueForProperty:ALAssetsGroupPropertyName];
@@ -258,7 +257,6 @@
         NSArray *remoteSummaryList = [SyncUtil readSyncFileSummaries];
         
         [[CurioSDK shared] sendEvent:@"BackgroundSync" eventValue:@"started"];
-        [MPush hitTag:@"BackgroundSync" withValue:@"started"];
 
         autoSyncIterationInProgress = YES;
 //        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^(void) {
@@ -316,7 +314,6 @@
                     [[UploadQueue sharedInstance] manualAutoSyncIterationFinished];
                     [[NSNotificationCenter defaultCenter] postNotificationName:AUTO_ITERATION_FINISHED_NOT_KEY object:nil];
                     [[CurioSDK shared] sendEvent:@"BackgroundSync" eventValue:@"ended"];
-                    [MPush hitTag:@"BackgroundSync" withValue:@"ended"];
                 }
             } failureBlock:^(NSError *error) {
             }];

@@ -1222,7 +1222,7 @@
     result.rawType = RawFileTypeClient;
     result.refDate = [assetRef valueForProperty:ALAssetPropertyDate];
     result.hashRef = [SyncUtil md5StringOfString:[assetRef.defaultRepresentation.url absoluteString]];
-    NSLog(@"LOCAL META HASH: %@", result.hashRef);
+//    NSLog(@"LOCAL META HASH: %@", result.hashRef);
     return result;
 }
 
