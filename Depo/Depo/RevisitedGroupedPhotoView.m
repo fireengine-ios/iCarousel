@@ -255,16 +255,32 @@
 }
 
 - (void)reloadContent:(BOOL)forDelete {
-    if (forDelete) {
-        for (MetaFile *selectedFile in selectedMetaFiles) {
-            for (FileInfoGroup *fileInfoGroup in self.groups) {
-                NSMutableArray *discardedItems = [@[] mutableCopy];
-                for (RawTypeFile *object in fileInfoGroup.fileInfo) {
-                    if ([selectedFile isEqual:object.fileRef]) {
-                        [discardedItems addObject:object];
-                    }
+    [self reloadContent:forDelete forMetaFile:nil];
+}
+
+- (void)reloadContent:(BOOL)forDelete forMetaFile:(MetaFile *)metaFile {
+    if (metaFile != nil) {
+        for (FileInfoGroup *fileInfoGroup in self.groups) {
+            NSMutableArray *discardedItems = [@[] mutableCopy];
+            for (RawTypeFile *object in fileInfoGroup.fileInfo) {
+                if ([metaFile isEqual:object.fileRef]) {
+                    [discardedItems addObject:object];
                 }
-                [fileInfoGroup.fileInfo removeObjectsInArray:discardedItems];
+            }
+            [fileInfoGroup.fileInfo removeObjectsInArray:discardedItems];
+        }
+    } else {
+        if (forDelete) {
+            for (MetaFile *selectedFile in selectedMetaFiles) {
+                for (FileInfoGroup *fileInfoGroup in self.groups) {
+                    NSMutableArray *discardedItems = [@[] mutableCopy];
+                    for (RawTypeFile *object in fileInfoGroup.fileInfo) {
+                        if ([selectedFile isEqual:object.fileRef]) {
+                            [discardedItems addObject:object];
+                        }
+                    }
+                    [fileInfoGroup.fileInfo removeObjectsInArray:discardedItems];
+                }
             }
         }
     }

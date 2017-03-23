@@ -104,17 +104,24 @@
     [self startSearch];
 }
 
+- (void)previewedImageWasDeleted:(MetaFile *)deletedFile {
+}
+
 - (void)startSearch {
     if (!refreshControl) {
         [super showLoading];
         [super fadeOut:searchResultsTable duration:0.01];
     }
-    listOffset = 0;
+//    listOffset = 0;
     [fileList removeAllObjects];
     
     
     tableUpdateCounter++;
-    [searchDao requestMetadata:searchText andPage:0 andSize:NO_OF_FILES_PER_PAGE andSortType:APPDELEGATE.session.sortType andSearchListType:searchListType];
+    [searchDao requestMetadata:searchText
+                       andPage:0
+                       andSize:NO_OF_FILES_PER_PAGE + (listOffset * NO_OF_FILES_PER_PAGE)
+                   andSortType:APPDELEGATE.session.sortType
+             andSearchListType:searchListType];
 }
 
 - (void) searchListSuccessCallback:(NSArray *) files {
@@ -282,6 +289,7 @@
 
 - (void) viewDidLoad {
     [super viewDidLoad];
+    listOffset = 0;
     IGLog(@"SearchMoreModalController viewDidLoad");
 }
 

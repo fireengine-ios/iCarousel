@@ -83,9 +83,17 @@
     return self;
 }
 
-- (void) reloadLists {
+- (void)reloadListsForMetaFile:(MetaFile *)metaFile {
     [albumView pullData];
-    [groupView pullData];
+    if (metaFile == nil) {
+        [groupView pullData];
+    } else {
+        [groupView reloadContent:YES forMetaFile:metaFile];
+    }
+}
+
+- (void) reloadLists {
+    [self reloadListsForMetaFile:nil];
 }
 
 - (void) revisitedPhotoHeaderSegmentPhotoChosen {
@@ -602,11 +610,11 @@
 }
 
 - (void) previewedImageWasDeleted:(MetaFile *) deletedFile {
-    [self reloadLists];
+    [self reloadListsForMetaFile:deletedFile];
 }
 
 - (void) previewedVideoWasDeleted:(MetaFile *) deletedFile {
-    [self reloadLists];
+    [self reloadListsForMetaFile:deletedFile];
 }
 
 - (void) confirmDeleteDidCancel {
