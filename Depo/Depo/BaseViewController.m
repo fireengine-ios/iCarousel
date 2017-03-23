@@ -60,6 +60,8 @@
 
 @interface BaseViewController ()
 
+@property (nonatomic) AccountDao *accountDaoToGetCurrentSubscription;
+
 @end
 
 @implementation BaseViewController
@@ -91,6 +93,12 @@
         shareDao.delegate = self;
         shareDao.successMethod = @selector(shareSuccessCallback:);
         shareDao.failMethod = @selector(shareFailCallback:);
+        
+        self.accountDaoToGetCurrentSubscription = [[AccountDao alloc]init];
+        self.accountDaoToGetCurrentSubscription.delegate = self;
+        self.accountDaoToGetCurrentSubscription.successMethod = @selector(loadCurrentSubscriptionCallback:);
+        self.accountDaoToGetCurrentSubscription.failMethod = @selector(loadCurrentSubscriptionFailCallback:);
+        [self.accountDaoToGetCurrentSubscription requestActiveSubscriptions];
 
         scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
         scroll.scrollEnabled = NO;
@@ -170,6 +178,34 @@
     }
     return self;
 }
+
+#pragma mark - AcoountDao
+
+- (void) loadCurrentSubscriptionCallback:(NSArray *) subscriptions {
+    NSMutableArray *sortedSub = [NSMutableArray arrayWithArray:subscriptions];
+    [sortedSub sortUsingComparator:^NSComparisonResult(Subscription* _Nonnull obj1, Subscription* _Nonnull obj2) {
+        return obj1.plan.quota < obj2.plan.quota;
+    }];
+    
+    NSUInteger subLength = [sortedSub count];
+    for (int i = 0; i < 5; i++) {
+        NSString *packageName = [NSString stringWithFormat:@"user_package_%i", i];
+        NSString *displayName = @"";
+        
+        if (i < subLength) {
+            Subscription *sub = sortedSub[i];
+            displayName = sub.plan.displayName;
+        }
+        
+        [MPush hitTag:packageName withValue:displayName];
+    }
+}
+
+- (void) loadCurrentSubscriptionFailCallback:(NSString *) errorMessage {
+    IGLog(@"BaseViewController: Getting current subscription information failed");
+}
+
+#pragma mark - Gestures
 
 - (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     UIView *view = touch.view;
@@ -323,23 +359,17 @@
             [MPush hitEvent:@"autosync_off"];
         }
         
-        // TODO: needs to be tested on real device and tags?
-        NSLog(@"disk usage %lf", [Util getDiskUsage]);
-        if ([Util getDiskUsage] > 0.995) {
-            if ([[NSUserDefaults standardUserDefaults] objectForKey:@"diskusage_status100_control"] == nil) {
-                [MPush hitTag:@"diskusage_status100"];
-                //                [MPush hitEvent:@"diskusage_status100"];
-                [[NSUserDefaults standardUserDefaults] setObject:@"true" forKey:@"diskusage_status100_control"];
+        // 
+        double usage = [Util getDiskUsage];
+        if (usage != -1) {
+            NSLog(@"disk usage %lf", usage);
+            if ([Util getDiskUsage] > 0.998) {
+                [MPush hitTag:@"device_storage_exceeded_100_perc"];
+                [MPush hitEvent:@"device_storage_exceeded_100_perc"];
+            } else if ([Util getDiskUsage] > 0.95) {
+                [MPush hitTag:@"device_storage_exceeded_95_perc"];
+                [MPush hitEvent:@"device_storage_exceeded_95_perc"];
             }
-        } else if ([Util getDiskUsage] > 0.95) {
-            if ([[NSUserDefaults standardUserDefaults] objectForKey:@"diskusage_status95_control"] == nil) {
-                [MPush hitTag:@"diskusage_status95"];
-                //                [MPush hitEvent:@"diskusage_status95"];
-                [[NSUserDefaults standardUserDefaults] setObject:@"true" forKey:@"diskusage_status95_control"];
-            }
-        } else {
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"diskusage_status100_control"];
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"diskusage_status95_control"];
         }
     });
 }
@@ -1055,8 +1085,8 @@
 }
 
 - (void) didApproveCustomAlert:(CustomConfirmView *) alertView {
-    [MPush hitTag:@"logged_out"];
-    [MPush hitEvent:@"logged_out"];
+//    [MPush hitTag:@"logged_out"];
+//    [MPush hitEvent:@"logged_out"];
     
     APPDELEGATE.session.loggedOutManually = YES;
     [APPDELEGATE triggerLogout];

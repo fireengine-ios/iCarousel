@@ -702,8 +702,8 @@
 }
     
 - (void) didApproveCustomAlert:(CustomConfirmView *) alertView {
-    [MPush hitTag:@"logged_out"];
-    [MPush hitEvent:@"logged_out"];
+//    [MPush hitTag:@"logged_out"];
+//    [MPush hitEvent:@"logged_out"];
     
     APPDELEGATE.session.loggedOutManually = YES;
     [APPDELEGATE triggerLogout];

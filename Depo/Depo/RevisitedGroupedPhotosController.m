@@ -710,32 +710,29 @@
     if(percentUsageVal >= 80) {
         if(!APPDELEGATE.session.quotaExceed80EventFlag) {
             [[CurioSDK shared] sendEvent:@"quota_exceeded_80_perc" eventValue:[NSString stringWithFormat:@"current: %.2f", percentUsageVal]];
-//            [MPush hitTag:@"quota_exceeded_80_perc" withValue:[NSString stringWithFormat:@"current: %.2f", percentUsageVal]];
+            [MPush hitTag:@"quota_exceeded_80_perc" withValue:[NSString stringWithFormat:@"current: %.2f", percentUsageVal]];
             APPDELEGATE.session.quotaExceed80EventFlag = YES;
         }
     }
     
+    NSString *eventValue = nil;
     if(percentUsageVal >= 100) {
+        eventValue = @"quota_full";
         [MPush hitEvent:@"quota_status100"];
+    } else if(percentUsageVal >= 99.0) {
+        eventValue = @"quota_99_percent_full";
     } else if(percentUsageVal >= 95.0) {
-        [MPush hitEvent:@"quota_status95"];
+        eventValue = @"quota_status95";
+    } else if(percentUsageVal >= 90.0) {
+        eventValue = @"quota_90_percent_full";
+    } else if(percentUsageVal >= 80.0) {
+        eventValue = @"quota_80_percent_full";
+    }
+    if(eventValue) {
+        [MPush hitEvent:eventValue];
     }
     
     [MPush hitTag:@"quota_status" withValue:[NSString stringWithFormat:@"%.0f", percentUsageVal]];
-    
-//    NSString *eventValue = nil;
-//    if(percentUsageVal >= 100) {
-//        eventValue = @"quota_full";
-//    } else if(percentUsageVal >= 99.0) {
-//        eventValue = @"quota_99_percent_full";
-//    } else if(percentUsageVal >= 90.0) {
-//        eventValue = @"quota_90_percent_full";
-//    } else if(percentUsageVal >= 80.0) {
-//        eventValue = @"quota_80_percent_full";
-//    }
-//    if(eventValue) {
-//        [MPush hitEvent:eventValue];
-//    }
     
     if(APPDELEGATE.session.usage.totalStorage > 0) {
         if(APPDELEGATE.session.usage.totalStorage - APPDELEGATE.session.usage.usedStorage <= 5242880) {

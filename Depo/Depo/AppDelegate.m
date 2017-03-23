@@ -334,6 +334,7 @@
 }
 
 - (void) triggerLogin {
+    [MPush hitTag:@"loginstatus" withValue:@"No"];
     if([ReachabilityManager isReachableViaWiFi] || ![self isTurkcell]) {
         IGLog(@"AppDelegate Welcome Screen triggered");
         //WelcomeController *welcomePage = [[WelcomeController alloc] init];
@@ -377,6 +378,7 @@
 }
 
 - (void) startOpeningPage {
+    [MPush hitTag:@"loginstatus" withValue:@"Yes"];
     /*
      [APPDELEGATE.uploadQueue.session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
      if(uploadTasks) {

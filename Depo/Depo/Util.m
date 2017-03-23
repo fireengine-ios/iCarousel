@@ -289,9 +289,10 @@
     } else {
         NSString *log = [NSString stringWithFormat:@"Error Obtaining System Memory Info: Domain = %@, Code = %ld", [error domain], (long)[error code]];
         NSLog(@"getDiskUsage %@", log);
+        return -1;
     }
     
-    return 1 - ((totalFreeSpace/1024ll)/1024ll) / ((totalSpace/1024ll)/1024ll);
+    return 1 - totalFreeSpace / totalSpace;
 }
 
 @end

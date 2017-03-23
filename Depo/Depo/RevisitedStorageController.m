@@ -156,6 +156,21 @@
 }
 
 - (void) activatePurchasing:(Offer *) chosenOffer {
+    
+    NSString *formattedQuotaString = [Util transformedHugeSizeValueDecimalIfNecessary:chosenOffer.quota];
+    NSString *tagName = nil;
+    if([formattedQuotaString isEqualToString:@"50 GB"]) {
+        tagName = @"Satınalındı50GB";
+    } else if([formattedQuotaString isEqualToString:@"500 GB"]) {
+        tagName = @"Satınalındı500GB";
+    } else if([formattedQuotaString isEqualToString:@"2.5 TB"]) {
+        tagName = @"Satınalındı25TB";
+    }
+    if(tagName) {
+        [MPush hitTag:tagName];
+        [MPush hitEvent:tagName];
+    }
+    
     selectedOffer = chosenOffer;
     if(selectedOffer.offerType == OfferTypeTurkcell) {
         [self activateOffer:selectedOffer];
@@ -375,7 +390,7 @@
         NSUInteger subLength = [sortedSub count];
         for (int i = 0; i < 5; i++) {
             NSString *packageName = [NSString stringWithFormat:@"user_package_%i", i];
-            NSString *displayName;
+            NSString *displayName = @"";
             
             if (i < subLength) {
                 Subscription *sub = sortedSub[i];
