@@ -122,7 +122,7 @@
         msisdnField.delegate = self;
         [msisdnField addTarget:self action:@selector(msisdnFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
 //        msisdnField.placeholder = @"5xxxxxxxxx";
-//        msisdnField.keyboardType = UIKeyboardTypePhonePad;
+        msisdnField.keyboardType = UIKeyboardTypePhonePad;
         msisdnField.isAccessibilityElement = YES;
         msisdnField.accessibilityIdentifier = @"msisdnFieldSignUp";
         [container addSubview:msisdnField];
@@ -204,7 +204,7 @@
         }
         
         signupButton = [[SimpleButton alloc] initWithFrame:signupButtonRect
-                                                 withTitle:[NSLocalizedString(@"SignUpButtonTitle", @"") uppercaseString]
+                                                 withTitle:NSLocalizedString(@"NewSignUpButtonTitle", @"")
                                             withTitleColor:[UIColor whiteColor]
                                              withTitleFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:16]
                                            withBorderColor:[UIColor clearColor]

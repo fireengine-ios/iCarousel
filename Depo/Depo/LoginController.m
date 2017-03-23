@@ -257,7 +257,7 @@
                                                 btnWidth,
                                                 btnHeight);
         SimpleButton *registerButton = [[SimpleButton alloc] initWithFrame:registerButtonFrame
-                                                                 withTitle:[NSLocalizedString(@"SignUpButtonTitle", @"") uppercaseString]
+                                                                 withTitle:NSLocalizedString(@"NewSignUpButtonTitle", @"")
                                                             withTitleColor:[UIColor whiteColor]
                                                              withTitleFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:16]
                                                            withBorderColor:[UIColor clearColor]

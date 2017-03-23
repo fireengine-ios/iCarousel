@@ -558,6 +558,7 @@
 
 /*Fuzzy*/
 "SignUpButtonTitle" = "قم بإنشاء حساب جديد";
+"NewSignUpButtonTitle" = "قم بإنشاء حساب جديد";
 "ForgotPassButton" = "هل نسيت كلمة المرور؟";
 "OTPTopInfo" = "التحقق من رقم الهاتف الخاص بك";
 "OTPSubInfo" = "أدخل رمز التحقق";
