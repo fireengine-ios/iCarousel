@@ -62,6 +62,7 @@
 @property (nonatomic, strong) NSArray *fileLists;
 @property (nonatomic, strong) NSMutableArray *selectedFileList;
 @property (nonatomic, strong) NSMutableArray *selectedFiles;
+@property (nonatomic, strong) NSArray *deletedFiles;
 @property (nonatomic, strong) FooterActionsMenuView *footerActionMenu;
 @property (nonatomic, strong) NSString *longSelectFileUuid;
 @property (nonatomic, strong) NSArray *uuidListToBeDeleted;

@@ -196,11 +196,13 @@
         return;
     }
     
+    
+    NSInteger numberOfItems = (listOffset * NO_OF_FILES_PER_PAGE) + NO_OF_FILES_PER_PAGE;
     listOffset = 0;
     if(self.folder) {
-        [fileListDao requestFileListingForFolder:self.folder.uuid andForPage:listOffset andSize:NO_OF_FILES_PER_PAGE sortBy:APPDELEGATE.session.sortType];
+        [fileListDao requestFileListingForFolder:self.folder.uuid andForPage:listOffset andSize:numberOfItems sortBy:APPDELEGATE.session.sortType];
     } else {
-        [fileListDao requestFileListingForParentForPage:listOffset andSize:NO_OF_FILES_PER_PAGE sortBy:APPDELEGATE.session.sortType];
+        [fileListDao requestFileListingForParentForPage:listOffset andSize:listOffset sortBy:APPDELEGATE.session.sortType];
     }
 }
 
@@ -639,6 +641,7 @@
 
 - (void) deleteSuccessCallback {
 //    [self hideLoading];
+    self.deletedFiles = [self.selectedFiles copy];
     if(isSelectible) {
         if(self.folder) {
             self.title = self.folder.visibleName;
@@ -662,6 +665,13 @@
     [self triggerRefresh];
 
     self.folderModificationFlag = YES;
+}
+
+- (void)reloadContent {
+    NSMutableArray *mutableAllFiles = [fileLists mutableCopy];
+    [mutableAllFiles removeObjectsInArray:self.deletedFiles];
+    fileLists = [mutableAllFiles copy];
+    [fileTable reloadData];
 }
 
 - (void) deleteFailCallback:(NSString *) errorMessage {
