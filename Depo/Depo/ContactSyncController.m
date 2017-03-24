@@ -182,8 +182,8 @@
                     break;
                 case SYNC_RESULT_ERROR_PERMISSION_ADDRESS_BOOK:
                     [self showErrorAlertWithMessage:NSLocalizedString(@"AddressBookGrantError", @"")];
+                    IGLog(@"ContactSync sync failed with AddressBookGrantError");
                     break;
-                    
                     
                 case SYNC_RESULT_ERROR_REMOTE_SERVER:
                     _errMessage = @"ContactSyncApiError";
@@ -200,6 +200,9 @@
                         [self showErrorAlertWithMessage:NSLocalizedString(_errMessage, @"")];
                         [processView dismissWithFailureMessage];
                         [self makeButtonsActive];
+                        
+                        NSString *log = [NSString stringWithFormat:@"ContactSync sync failed with %@", _errMessage];
+                        IGLog(log);
                     }
                     
                     return;
@@ -211,14 +214,19 @@
 }
 
 - (void) backupClicked {
+    if ([ContactSyncSDK isRunning]) {
+        IGLog(@"ContactSync backup request is rejected because it is running");
+        return;
+    }
+    
     IGLog(@"ContactSync backup started");
+    APPDELEGATE.session.syncType = ContactSyncTypeBackup;
     [self showProcessView];
     [self makeButtonsPassive];
     
     [ContactSyncSDK hasContactForBackup:^(SYNCResultType resultType) {
         switch (resultType) {
             case SYNC_RESULT_SUCCESS: {
-                APPDELEGATE.session.syncType = ContactSyncTypeBackup;
                 _triedAgain = NO;
                 [ContactSyncSDK doSync:SYNCBackup];
                 syncMode = SYNCBackup;
@@ -246,6 +254,11 @@
 }
 
 - (void) restoreClicked {
+    if ([ContactSyncSDK isRunning]) {
+        IGLog(@"ContactSync restore request is rejected because it is running");
+        return;
+    }
+    
     IGLog(@"ContactSync restore started");
     APPDELEGATE.session.syncType = ContactSyncTypeRestore;
     _triedAgain = NO;
