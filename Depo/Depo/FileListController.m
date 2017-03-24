@@ -548,28 +548,28 @@
                                                                  stringByAppendingString:tempToShare.name]];
                             [imageData writeToURL:url atomically:NO];
                             
-                            BOOL thisIsAnImage = tempToShare.contentType == ContentTypePhoto;
+//                            BOOL thisIsAnImage = tempToShare.contentType == ContentTypePhoto;
                             
                             NSArray *applicationActivities = nil;
                             NSArray *activityItems = @[url];
                             
-                            if (thisIsAnImage) {
+//                            if (thisIsAnImage) {
                                 ShareActivity *activity = [[ShareActivity alloc] init];
                                 activity.sourceViewController = self;
                                 
                                 applicationActivities = @[activity];
-                            } else {
-                                activityItems = @[@"#lifebox", url];
-                            }
+//                            } else {
+//                                activityItems = @[@"#lifebox", url];
+//                            }
                             
                             UIActivityViewController *activityViewController = [[UIActivityViewController alloc]
                                                                                 initWithActivityItems:activityItems
                                                                                 applicationActivities:applicationActivities];
                             [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
                             activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-                            if (thisIsAnImage) {
+//                            if (thisIsAnImage) {
                                 activityViewController.excludedActivityTypes = @[UIActivityTypePostToFacebook];
-                            }
+//                            }
                             
                             if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
                                 [self presentViewController:activityViewController animated:YES completion:nil];
@@ -1064,7 +1064,7 @@
     
     [self showLoading];
     
-    BOOL thereIsOneVideo = NO;
+//    BOOL thereIsOneVideo = NO;
     
     for (MetaFile *file in self.fileListToShare) {
         
@@ -1073,7 +1073,7 @@
             endPoint = file.tempDownloadUrl;
         }
         if (file.contentType == ContentTypeVideo) {
-            thereIsOneVideo = YES;
+//            thereIsOneVideo = YES;
             endPoint = file.tempDownloadUrl;
         }
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:
@@ -1106,22 +1106,22 @@
                                                
                                                NSArray *applicationActivities = nil;
                                                
-                                               if (!thereIsOneVideo) {
+//                                               if (!thereIsOneVideo) {
                                                    ShareActivity *activity = [[ShareActivity alloc] init];
                                                    activity.sourceViewController = self;
                                                    applicationActivities = @[activity];
-                                               } else {
-                                                   [allImages insertObject:@"#lifebox" atIndex:0];
-                                               }
+//                                               } else {
+//                                                   [allImages insertObject:@"#lifebox" atIndex:0];
+//                                               }
                                                
                                                UIActivityViewController *activityViewController = [[UIActivityViewController alloc]
                                                                                                    initWithActivityItems:allImages
                                                                                                    applicationActivities:applicationActivities];
                                                [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
                                                activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-                                               if (!thereIsOneVideo) {
+//                                               if (!thereIsOneVideo) {
                                                    activityViewController.excludedActivityTypes = @[UIActivityTypePostToFacebook];
-                                               }
+//                                               }
                                                [activityViewController setCompletionHandler:^(NSString *activityType, BOOL completed) {
                                                    if (completed) {
                                                        [self setToUnselectible];

@@ -1013,25 +1013,25 @@
                        
                        NSArray *activityItems = @[url];
                        
-                       BOOL thisIsAnImage = self.file.contentType == ContentTypePhoto;
+//                       BOOL thisIsAnImage = self.file.contentType == ContentTypePhoto;
                        
                        NSArray *applicationActivities = nil;
-                       if (thisIsAnImage) {
+//                       if (thisIsAnImage) {
                            ShareActivity *activity = [[ShareActivity alloc] init];
                            activity.sourceViewController = self;
                            applicationActivities = @[activity];
-                       } else {
-                           activityItems = @[@"#lifebox", url];
-                       }
+//                       } else {
+//                           activityItems = @[@"#lifebox", url];
+//                       }
                        
                        UIActivityViewController *activityViewController = [[UIActivityViewController alloc]
                                                                            initWithActivityItems:activityItems
                                                                            applicationActivities:applicationActivities];
                        [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
                        activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-                       if (thisIsAnImage) {
+//                       if (thisIsAnImage) {
                            activityViewController.excludedActivityTypes = @[@"com.igones.adepo.DepoShareExtension", UIActivityTypePostToFacebook];
-                       }
+//                       }
                        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
                            [self presentViewController:activityViewController animated:YES completion:nil];
                        } else {

@@ -56,22 +56,21 @@
 }
 
 - (void)performActivity {
-    
-    id firstItem = self.activityItems[0];
-    
+        
     NSMutableArray *itemsToShare = [@[] mutableCopy];
     
     BOOL notLocalImageFileURL = NO;
+    BOOL containsVideo = NO;
     
-    if ([firstItem isKindOfClass:[UIImage class]]) {
-        for (UIImage *image in self.activityItems) {
+    for (id sharedItem in self.activityItems) {
+        if ([sharedItem isKindOfClass:[UIImage class]]) {
+            UIImage *image = (UIImage *)sharedItem;
             FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
             photo.image = image;
             photo.userGenerated = YES;
             [itemsToShare addObject:photo];
-        }
-    } else if ([firstItem isKindOfClass:[NSURL class]]) {
-        for (NSURL *url in self.activityItems) {
+        } else if ([sharedItem isKindOfClass:[NSURL class]]) {
+            NSURL *url = (NSURL *)sharedItem;
             if ([url.absoluteString rangeOfString:@"mylifebox.com"].location != NSNotFound) {
                 notLocalImageFileURL = YES;
                 break;
@@ -83,25 +82,54 @@
                 photo.image = image;
                 photo.userGenerated = YES;
                 [itemsToShare addObject:photo];
+            } else {
+                containsVideo = YES;
+                ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+                ALAssetsLibraryWriteVideoCompletionBlock videoWriteCompletionBlock =
+                ^(NSURL *newURL, NSError *error) {
+                    if (error) {
+                        NSLog( @"Error writing image with metadata to Photo Library: %@", error.localizedDescription);
+                    } else {
+                        NSLog( @"Wrote image with metadata to Photo Library %@", newURL.absoluteString);
+                        FBSDKShareVideo *video = [[FBSDKShareVideo alloc] init];
+                        video.videoURL = newURL;
+                        [itemsToShare addObject:video];
+                        if (itemsToShare.count == self.activityItems.count) {
+                            FBSDKShareMediaContent *content = [[FBSDKShareMediaContent alloc] init];
+                            content.media = [itemsToShare copy];
+                            
+                            [FBSDKShareDialog showFromViewController:self.sourceViewController
+                                                         withContent:content
+                                                            delegate:nil];
+                            [self activityDidFinish:YES];
+                        }
+                    }
+                };
+                if ([library videoAtPathIsCompatibleWithSavedPhotosAlbum:url]) {
+                    [library writeVideoAtPathToSavedPhotosAlbum:url
+                                                completionBlock:videoWriteCompletionBlock];
+                }
             }
         }
     }
-    
-    if (notLocalImageFileURL) {
-        FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
-        content.contentURL = self.activityItems[0];
-        [FBSDKShareDialog showFromViewController:self.sourceViewController
-                                     withContent:content
-                                        delegate:nil];
-    } else {
-        FBSDKShareMediaContent *content = [[FBSDKShareMediaContent alloc] init];
-        content.media = [itemsToShare copy];
-        
-        [FBSDKShareDialog showFromViewController:self.sourceViewController
-                                     withContent:content
-                                        delegate:nil];
+
+    if (!containsVideo) {
+        if (notLocalImageFileURL) {
+            FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
+            content.contentURL = self.activityItems[0];
+            [FBSDKShareDialog showFromViewController:self.sourceViewController
+                                         withContent:content
+                                            delegate:nil];
+        } else {
+            FBSDKShareMediaContent *content = [[FBSDKShareMediaContent alloc] init];
+            content.media = [itemsToShare copy];
+            
+            [FBSDKShareDialog showFromViewController:self.sourceViewController
+                                         withContent:content
+                                            delegate:nil];
+        }
+        [self activityDidFinish:YES];
     }
-    [self activityDidFinish:YES];
 }
 
 @end

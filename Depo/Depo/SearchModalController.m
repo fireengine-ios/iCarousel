@@ -576,28 +576,28 @@
                     NSURL *url = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingString:fileSelected.name]];
                     [imageData writeToURL:url atomically:NO];
                     
-                    BOOL thisIsAnImage = fileSelected.contentType == ContentTypePhoto;
+//                    BOOL thisIsAnImage = fileSelected.contentType == ContentTypePhoto;
                     
                     NSArray *applicationActivities = nil;
                     NSArray *activityItems = @[url];
                     
-                    if (thisIsAnImage) {
+//                    if (thisIsAnImage) {
                         ShareActivity *activity = [[ShareActivity alloc] init];
                         activity.sourceViewController = self;
                         
                         applicationActivities = @[activity];
-                    } else {
-                        activityItems = @[@"#lifebox", url];
-                    }
+//                    } else {
+//                        activityItems = @[@"#lifebox", url];
+//                    }
                     
                     UIActivityViewController *activityViewController = [[UIActivityViewController alloc]
                                                                         initWithActivityItems:activityItems
                                                                         applicationActivities:applicationActivities];
                     [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
                     activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-                    if (thisIsAnImage) {
+//                    if (thisIsAnImage) {
                         activityViewController.excludedActivityTypes = @[UIActivityTypePostToFacebook];
-                    }
+//                    }
                     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
                         [self presentViewController:activityViewController animated:YES completion:nil];
                     } else {
