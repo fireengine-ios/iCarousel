@@ -42,6 +42,7 @@
 @synthesize passField;
 @synthesize captchaField;
 @synthesize forgotPassView;
+@synthesize registerButton;
 
 - (id) init {
     if(self = [super init]) {
@@ -256,7 +257,7 @@
                                                 self.view.frame.size.height - (btnHeight * 2) - 64,
                                                 btnWidth,
                                                 btnHeight);
-        SimpleButton *registerButton = [[SimpleButton alloc] initWithFrame:registerButtonFrame
+        registerButton = [[SimpleButton alloc] initWithFrame:registerButtonFrame
                                                                  withTitle:NSLocalizedString(@"NewSignUpButtonTitle", @"")
                                                             withTitleColor:[UIColor whiteColor]
                                                              withTitleFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:16]
@@ -504,9 +505,20 @@
     captchaView.image = captchaImg;
     
     if(captchaContainer.isHidden) {
-        loginButton.frame = CGRectMake(loginButton.frame.origin.x, captchaContainer.frame.origin.y + captchaContainer.frame.size.height + 20, loginButton.frame.size.width, loginButton.frame.size.height);
+        loginButton.frame = CGRectMake(loginButton.frame.origin.x,
+                                       captchaContainer.frame.origin.y + captchaContainer.frame.size.height + 20,
+                                       loginButton.frame.size.width,
+                                       loginButton.frame.size.height);
         
-        forgotPassView.frame = CGRectMake(forgotPassView.frame.origin.x, loginButton.frame.origin.y + loginButton.frame.size.height + 60 , forgotPassView.frame.size.width, forgotPassView.frame.size.height);
+        forgotPassView.frame = CGRectMake(forgotPassView.frame.origin.x,
+                                          loginButton.frame.origin.y + loginButton.frame.size.height + 60 ,
+                                          forgotPassView.frame.size.width,
+                                          forgotPassView.frame.size.height);
+        
+        registerButton.frame = CGRectMake(registerButton.frame.origin.x,
+                                          forgotPassView.frame.origin.y + forgotPassView.frame.size.height + 60 ,
+                                          registerButton.frame.size.width,
+                                          registerButton.frame.size.height);
         
         if(!IS_IPAD) {
             container.contentSize = CGSizeMake(container.contentSize.width, self.view.frame.size.height);

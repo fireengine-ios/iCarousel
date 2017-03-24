@@ -244,6 +244,16 @@ static const CGFloat topOffset = 40;
     
     _keys = [self getSortedKeysFromDict:_filteredCountryDict];
     [self.tableView reloadData];
+    
+    // keep selected country with check mark
+    if ([_keys count] > 0) {
+        NSDictionary *firstObject = self.filteredCountryDict[self.keys[0]][0];
+        if ([self.selectedCountry isEqualToString:firstObject[@"country_code"] ]) {
+            [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
+                                        animated:NO
+                                  scrollPosition:UITableViewScrollPositionNone];
+        }
+    }
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
