@@ -79,6 +79,7 @@
 @synthesize collView;
 
 @synthesize syncInfoHeaderView;
+@synthesize lockMaskView;
 
 - (id) initWithFrame:(CGRect)frame {
     if(self = [super initWithFrame:frame]) {
@@ -484,6 +485,12 @@
                         groupSequence ++;
                     }
                 }
+                if(isSelectible && [selectedSectionNames containsObject:dateStr]) {
+                    if(![selectedFileList containsObject:row.uuid]) {
+                        [selectedFileList addObject:row.uuid];
+                        [selectedMetaFiles addObject:row];
+                    }
+                }
             }
         }
         
@@ -767,14 +774,14 @@
 - (void) footerActionMenuDidSelectDownload:(FooterActionsMenuView *) menu {
     if([selectedMetaFiles count] == 0)
         return;
-
+    
     [delegate revisitedGroupedPhoto:self downloadSelectedFiles:selectedMetaFiles];
 }
 
 - (void) footerActionMenuDidSelectDelete:(FooterActionsMenuView *) menu {
     if([selectedMetaFiles count] == 0)
         return;
-
+    
     IGLog(@"RevisitedGroupedPhotoView footerActionMenuDidSelectDelete called");
     if([CacheUtil showConfirmDeletePageFlag]) {
         IGLog(@"RevisitedGroupedPhotoView footerActionMenuDidSelectDelete CacheUtil showConfirmDeletePageFlag returns YES");
@@ -864,9 +871,27 @@
     }
 }
 
+- (void) addLockMask {
+    if(!lockMaskView) {
+        lockMaskView = [[SyncMaskView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height)];
+        lockMaskView.delegate = self;
+        [APPDELEGATE.window addSubview:lockMaskView];
+    }
+}
+
+- (void) syncMaskViewShouldClose {
+    if(lockMaskView) {
+        [lockMaskView removeFromSuperview];
+    }
+    [[UploadQueue sharedInstance] cancelAllUploads];
+    //TODO check if pullData needed...
+}
+
 - (void) footerActionMenuDidSelectMove:(FooterActionsMenuView *) menu {
-    if([selectedMetaFiles count] == 0)
-        return;
+    if([selectedAssets count] > 0) {
+        [self addLockMask];
+    }
+    
     [delegate revisitedGroupedPhotoShowPhotoAlbums:self];
     //[APPDELEGATE.base showPhotoAlbums];
 }
@@ -886,7 +911,7 @@
 - (void) footerActionMenuDidSelectPrint:(FooterActionsMenuView *)menu {
     if([selectedMetaFiles count] == 0)
         return;
-
+    
     [delegate revisitedGroupedPhotoShouldPrintWithFileList:selectedMetaFiles];
 }
 
@@ -1238,7 +1263,7 @@
     result.rawType = RawFileTypeClient;
     result.refDate = [assetRef valueForProperty:ALAssetPropertyDate];
     result.hashRef = [SyncUtil md5StringOfString:[assetRef.defaultRepresentation.url absoluteString]];
-//    NSLog(@"LOCAL META HASH: %@", result.hashRef);
+    NSLog(@"LOCAL META HASH: %@", result.hashRef);
     return result;
 }
 
@@ -1295,6 +1320,8 @@
         photoCount++;
         [imgFooterActionMenu showPrintIcon];
     }
+    
+    [self toggleFooterRemoteButtons];
 }
 
 - (void) rawPhotoCollCellImageWasUnmarkedForFile:(MetaFile *) fileSelected {
@@ -1315,6 +1342,8 @@
     if (photoCount == 0) {
         [imgFooterActionMenu hidePrintIcon];
     }
+    
+    [self toggleFooterRemoteButtons];
 }
 
 - (void) rawPhotoCollCellImageUploadFinishedForFile:(NSString *) fileSelectedUuid {
@@ -1341,6 +1370,7 @@
 }
 
 - (void) rawPhotoCollCellImageWasSelectedForAsset:(ALAsset *) fileSelected {
+    [delegate revisitedGroupedPhotoDidSelectAsset:fileSelected];
 }
 
 - (void) rawPhotoCollCellImageWasMarkedForAsset:(ALAsset *) fileSelected {
@@ -1362,6 +1392,31 @@
     
     photoCount++;
     [imgFooterActionMenu showPrintIcon];
+    
+    [self toggleFooterSyncButton];
+    [self toggleFooterRemoteButtons];
+}
+
+- (void) toggleFooterSyncButton {
+    if([selectedAssets count] > 0) {
+        [imgFooterActionMenu enableSyncButton];
+    } else {
+        [imgFooterActionMenu disableSyncButton];
+    }
+}
+
+- (void) toggleFooterRemoteButtons {
+    if([selectedMetaFiles count] > 0) {
+        [imgFooterActionMenu enableDeleteButton];
+        [imgFooterActionMenu enableMoveButton];
+        [imgFooterActionMenu enablePrintButton];
+        [imgFooterActionMenu enableDownloadButton];
+    } else {
+        [imgFooterActionMenu disableDeleteButton];
+        [imgFooterActionMenu disableMoveButton];
+        [imgFooterActionMenu disablePrintButton];
+        [imgFooterActionMenu disableDownloadButton];
+    }
 }
 
 - (void) rawPhotoCollCellImageWasUnmarkedForAsset:(ALAsset *) fileSelected {
@@ -1385,6 +1440,9 @@
     if (photoCount == 0) {
         [imgFooterActionMenu hidePrintIcon];
     }
+    
+    [self toggleFooterSyncButton];
+    [self toggleFooterRemoteButtons];
 }
 
 - (void) rawPhotoCollCellImageUploadFinishedForAsset:(ALAsset *) fileSelected {
@@ -1447,6 +1505,43 @@
 - (void) groupPhotoSectionViewCheckboxUnchecked:(NSString *) titleVal {
     if([selectedSectionNames containsObject:titleVal]) {
         [selectedSectionNames removeObject:titleVal];
+        
+        NSArray *unselectedGroupList = nil;
+        int index = 0;
+        for(FileInfoGroup *row in self.groups) {
+            if([row.customTitle isEqualToString:titleVal]) {
+                unselectedGroupList = row.fileInfo;
+                break;
+            }
+            index ++;
+        }
+        if(unselectedGroupList != nil) {
+            for(id rowItem in unselectedGroupList) {
+                if([rowItem isKindOfClass:[RawTypeFile class]]) {
+                    RawTypeFile *castedRow = (RawTypeFile *) rowItem;
+                    if (castedRow.rawType == RawFileTypeDepo) {
+                        if([selectedFileList containsObject:castedRow.fileRef.uuid]) {
+                            [selectedFileList removeObject:castedRow.fileRef.uuid];
+                            [selectedMetaFiles removeObject:castedRow.fileRef];
+                        }
+                    } else {
+                        NSString *assetUrl = [castedRow.assetRef.defaultRepresentation.url absoluteString];
+                        if([selectedFileList containsObject:assetUrl]) {
+                            [selectedFileList removeObject:assetUrl];
+                            [selectedAssets removeObject:castedRow.assetRef];
+                        }
+                    }
+                }
+            }
+            if([selectedFileList count] > 0) {
+                [self showImgFooterMenu];
+                [delegate revisitedGroupedPhotoChangeTitleTo:[NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]]];
+            } else {
+                [self hideImgFooterMenu];
+                [delegate revisitedGroupedPhotoChangeTitleTo:NSLocalizedString(@"SelectFilesTitle", @"")];
+            }
+        }
+        [self.collView reloadSections:[NSIndexSet indexSetWithIndex:index]];
     }
 }
 

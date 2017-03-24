@@ -364,6 +364,13 @@
     self.title = pageTitle;
 }
 
+- (void) revisitedGroupedPhotoDidSelectAsset:(ALAsset *)assetSelected {
+    ImagePreviewController *detail = [[ImagePreviewController alloc] initWithAsset:assetSelected];
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
+    detail.nav = modalNav;
+    [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
+}
+
 - (void) closePrintPage {
     [printNav dismissViewControllerAnimated:YES completion:nil];
 }

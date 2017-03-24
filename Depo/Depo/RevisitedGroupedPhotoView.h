@@ -31,6 +31,7 @@
 #import "RawTypeFile.h"
 #import "GroupPhotoSectionView.h"
 #import "PhotosHeaderSyncView.h"
+#import "SyncMaskView.h"
 
 @class RevisitedGroupedPhotoView;
 
@@ -60,10 +61,11 @@
 @optional
 - (void) revisitedGroupedPhotoWantsToShowLoading;
 - (void) revisitedGroupedPhotoWantsToHideLoading;
+- (void) revisitedGroupedPhotoDidSelectAsset:(ALAsset *) assetSelected;
 
 @end
 
-@interface RevisitedGroupedPhotoView : UIView <FooterActionsDelegate, UITextFieldDelegate, CustomConfirmDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, RevisitedPhotoCollCellDelegate, RevisitedUploadingPhotoCollCellDelegate, AutoSyncOffHeaderDelegate, SyncManagerInfoDelegate, RawPhotoCollCellDelegate, GroupPhotoSectionViewDelegate, PhotosHeaderSyncViewDelegate> {
+@interface RevisitedGroupedPhotoView : UIView <FooterActionsDelegate, UITextFieldDelegate, CustomConfirmDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, RevisitedPhotoCollCellDelegate, RevisitedUploadingPhotoCollCellDelegate, AutoSyncOffHeaderDelegate, SyncManagerInfoDelegate, RawPhotoCollCellDelegate, GroupPhotoSectionViewDelegate, PhotosHeaderSyncViewDelegate, SyncMaskViewDelegate> {
 }
 
 @property (nonatomic, weak) id<RevisitedGroupedPhotoDelegate> delegate;
@@ -93,6 +95,7 @@
 @property (nonatomic, strong) UICollectionView *collView;
 
 @property (nonatomic, strong) AutoSyncOffHeaderView *syncInfoHeaderView;
+@property (nonatomic, strong) SyncMaskView *lockMaskView;
 
 - (void) pullData;
 - (void)reloadContent:(BOOL)forDelete;

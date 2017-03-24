@@ -585,6 +585,12 @@ typedef enum {
     RawFileTypeClient
 } RawFileType;
 
+typedef enum {
+    NextProcessTypeShare,
+    NextProcessTypePrint
+} NextProcessType;
+
+
 @interface AppConstants : NSObject
 
 @end
