@@ -577,8 +577,8 @@
     
     [AccurateLocationManager sharedInstance].delegate = self;
     [[AccurateLocationManager sharedInstance] startLocationManager];
-//    [self showBaseLoading];
-    [self triggerCapturaScreen];
+    [self showBaseLoading];
+//    [self triggerCapturaScreen];
 }
 
 - (void) accurateLocationManagerPermissionDenied {
@@ -594,8 +594,8 @@
 }
 
 - (void) accurateLocationManagerDidReceiveLocation {
-//    [self hideBaseLoading];
-//    [self triggerCapturaScreen];
+    [self hideBaseLoading];
+    [self triggerCapturaScreen];
     [[AccurateLocationManager sharedInstance] stopLocationManager];
 }
 
