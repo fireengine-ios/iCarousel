@@ -66,6 +66,8 @@
 
 #define FAVORITE_URL BASE_URL@"/filesystem/metadata"
 
+#define DETAILS_URL BASE_URL@"/filesystem/details"
+
 #define SHARE_LINK_URL BASE_URL@"/share/public/v2"
 
 //#define ADVANCED_SEARCH_URL BASE_URL@"/search/advancedSearch?name=%@&sortBy=%@&sortOrder=%@&from=%d&size=%d"

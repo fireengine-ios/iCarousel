@@ -1251,6 +1251,7 @@
 		94F130C71D2496D40086BDBB /* FacebookController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F130C61D2496D40086BDBB /* FacebookController.m */; };
 		94F130CA1D24970D0086BDBB /* InstagramController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F130C91D24970D0086BDBB /* InstagramController.m */; };
 		94F130CD1D2497460086BDBB /* SocialBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F130CC1D2497460086BDBB /* SocialBaseController.m */; };
+		94F43B291E8692E200B32814 /* FileDetailsDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F43B281E8692E100B32814 /* FileDetailsDao.m */; };
 		94FAE0B11D2F119300BC9F77 /* VideofyFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94FAE0B01D2F119300BC9F77 /* VideofyFooterView.m */; };
 		94FAE0B41D2F11A400BC9F77 /* VideofyMusicListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94FAE0B31D2F11A400BC9F77 /* VideofyMusicListController.m */; };
 		94FAE0B61D2F1B3400BC9F77 /* icon_bottom_addmusic.png in Resources */ = {isa = PBXBuildFile; fileRef = 94FAE0B51D2F1B3400BC9F77 /* icon_bottom_addmusic.png */; };
@@ -3040,6 +3041,8 @@
 		94F130C91D24970D0086BDBB /* InstagramController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstagramController.m; sourceTree = "<group>"; };
 		94F130CB1D2497460086BDBB /* SocialBaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialBaseController.h; sourceTree = "<group>"; };
 		94F130CC1D2497460086BDBB /* SocialBaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialBaseController.m; sourceTree = "<group>"; };
+		94F43B271E8692E100B32814 /* FileDetailsDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileDetailsDao.h; sourceTree = "<group>"; };
+		94F43B281E8692E100B32814 /* FileDetailsDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileDetailsDao.m; sourceTree = "<group>"; };
 		94FAE0AF1D2F119300BC9F77 /* VideofyFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideofyFooterView.h; sourceTree = "<group>"; };
 		94FAE0B01D2F119300BC9F77 /* VideofyFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideofyFooterView.m; sourceTree = "<group>"; };
 		94FAE0B21D2F11A400BC9F77 /* VideofyMusicListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideofyMusicListController.h; sourceTree = "<group>"; };
@@ -3786,6 +3789,8 @@
 				567408B31E080118003DF541 /* CoverPhotoDao.m */,
 				523E9C4F1E0A69E300C2DFE7 /* SuggestDao.h */,
 				523E9C501E0A69E300C2DFE7 /* SuggestDao.m */,
+				94F43B271E8692E100B32814 /* FileDetailsDao.h */,
+				94F43B281E8692E100B32814 /* FileDetailsDao.m */,
 			);
 			name = http;
 			sourceTree = "<group>";
@@ -6738,6 +6743,7 @@
 				05E8113819DF27690063F99A /* MusicListModalController.m in Sources */,
 				05D5E5A51B09D5F800A22957 /* OfferContainer.m in Sources */,
 				059C9EC71A07DC60000C54D9 /* FolderDetailModalController.m in Sources */,
+				94F43B291E8692E200B32814 /* FileDetailsDao.m in Sources */,
 				05D2B19D19E67C6900FC309D /* MainPhotoAlbumCell.m in Sources */,
 				05A484591A6C610400793A90 /* UIImage+Resize.m in Sources */,
 				563A98B71E52ECF800D24B7E /* ADJKeychain.m in Sources */,

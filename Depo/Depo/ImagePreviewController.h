@@ -22,6 +22,7 @@
 #import "ConfirmRemoveModalController.h"
 #import "VideoView.h"
 #import "SyncMaskView.h"
+#import "FileDetailsDao.h"
 
 @protocol ImagePreviewDelegate <NSObject>
 - (void) previewedImageWasDeleted:(MetaFile *) deletedFile;
@@ -49,6 +50,7 @@
     BOOL uploadNeeded;
     NextProcessType postProcess;
     NSString *uploadingUuid;
+    FileDetailsDao *detailDao;
 }
 
 @property (nonatomic, weak) id<ImagePreviewDelegate> delegate;

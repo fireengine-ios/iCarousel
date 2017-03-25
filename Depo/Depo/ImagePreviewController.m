@@ -140,7 +140,12 @@
         _isFullScreen = false;
         
         [self configureCommonDaos];
-        
+
+        detailDao = [[FileDetailsDao alloc] init];
+        detailDao.delegate = self;
+        detailDao.successMethod = @selector(detailSuccessCallback:);
+        detailDao.failMethod = @selector(detailFailCallback:);
+
         CustomButton *customBackButton = [[CustomButton alloc] initWithFrame:CGRectMake(10, 0, 20, 34) withImageName:@"white_left_arrow.png"];
         [customBackButton addTarget:self action:@selector(triggerDismiss) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:customBackButton];
@@ -159,6 +164,7 @@
         NSArray *uploadingImageRefArray = [[UploadQueue sharedInstance] uploadImageRefs];
         for(UploadRef *manRef in uploadingImageRefArray) {
             if([manRef.localHash isEqualToString:assetPathMd5]) {
+                uploadingUuid = manRef.fileUuid;
                 [footer showMaskWithMessage:NSLocalizedString(@"UploadInProgressInDetail", @"")];
                 break;
             }
@@ -1315,6 +1321,9 @@
 - (void) uploadManagerDidFinishUploadingForAsset:(NSString *) assetUrl withFinalFile:(MetaFile *) finalFile {
     [self removeSyncMaskIfAny];
     uploadNeeded = NO;
+    if(uploadingUuid) {
+        [detailDao requestFileDetails:@[uploadingUuid]];
+    }
     //TODO netleşince açılacak    [self postUploadProcess];
 }
 
@@ -1363,6 +1372,13 @@
         [syncMaskView removeFromSuperview];
     }
     [[UploadQueue sharedInstance] cancelAllUploads];
+}
+
+- (void) detailSuccessCallback:(NSArray *) fileList {
+    NSLog(@"Resulting file list: %@", fileList);
+}
+
+- (void) detailFailCallback:(NSString *) errorMessage {
 }
 
 @end
