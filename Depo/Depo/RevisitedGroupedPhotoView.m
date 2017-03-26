@@ -52,6 +52,7 @@
     NSDate *lastCheckedDate;
     
     PhotosHeaderSyncView *syncView;
+    NextProcessType postUploadProcessType;
 }
 @end
 
@@ -81,6 +82,9 @@
 @synthesize syncInfoHeaderView;
 @synthesize lockMaskView;
 
+@synthesize detailDao;
+@synthesize uploadingUuids;
+
 - (id) initWithFrame:(CGRect)frame {
     if(self = [super initWithFrame:frame]) {
         self.backgroundColor = [Util UIColorForHexColor:@"FFFFFF"];
@@ -102,6 +106,11 @@
         albumAddPhotosDao.successMethod = @selector(photosAddedSuccessCallback);
         albumAddPhotosDao.failMethod = @selector(photosAddedFailCallback:);
         
+        detailDao = [[FileDetailsDao alloc] init];
+        detailDao.delegate = self;
+        detailDao.successMethod = @selector(detailSuccessCallback:);
+        detailDao.failMethod = @selector(detailFailCallback:);
+
         tableUpdateCounter = 0;
         listOffset = 0;
         photoCount = 0;
@@ -121,6 +130,7 @@
         selectedFileList = [[NSMutableArray alloc] init];
         selectedMetaFiles = [[NSMutableArray alloc] init];
         selectedAssets = [[NSMutableArray alloc] init];
+        uploadingUuids = [[NSMutableArray alloc] init];
         
         BOOL isSyncHeaderVisible = NO;
         BOOL isSyncProgressVisible = NO;
@@ -814,42 +824,48 @@
     }
 }
 
-- (void) footerActionMenuDidSelectSync:(FooterActionsMenuView *) menu {
-    if([selectedAssets count] > 0) {
-        for(ALAsset *row in selectedAssets) {
-            NSString *mimeType = (__bridge_transfer NSString*)UTTypeCopyPreferredTagWithClass
-            ((__bridge CFStringRef)[row.defaultRepresentation UTI], kUTTagClassMIMEType);
-            
-            UploadRef *ref = [[UploadRef alloc] init];
-            ref.fileName = row.defaultRepresentation.filename;
-            ref.filePath = [row.defaultRepresentation.url absoluteString];
-            ref.localHash = [SyncUtil md5StringOfString:[row.defaultRepresentation.url absoluteString]];
-            ref.mimeType = mimeType;
-            if ([[row valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
-                ref.contentType = ContentTypeVideo;
-            } else {
-                ref.contentType = ContentTypePhoto;
-            }
-            NSDictionary *metadataDict = [row.defaultRepresentation metadata];
-            if(metadataDict) {
-                NSDictionary *tiffDict = [metadataDict objectForKey:@"{TIFF}"];
-                if(tiffDict) {
-                    NSString *softwareVal = [tiffDict objectForKey:@"Software"];
-                    if(softwareVal) {
-                        if([SPECIAL_LOCAL_ALBUM_NAMES containsObject:softwareVal]) {
-                            ref.referenceFolderName = softwareVal;
-                        }
+- (void) startUploadForSelectedAssets {
+    for(ALAsset *row in selectedAssets) {
+        NSString *mimeType = (__bridge_transfer NSString*)UTTypeCopyPreferredTagWithClass
+        ((__bridge CFStringRef)[row.defaultRepresentation UTI], kUTTagClassMIMEType);
+        
+        UploadRef *ref = [[UploadRef alloc] init];
+        ref.fileName = row.defaultRepresentation.filename;
+        ref.filePath = [row.defaultRepresentation.url absoluteString];
+        ref.localHash = [SyncUtil md5StringOfString:[row.defaultRepresentation.url absoluteString]];
+        ref.mimeType = mimeType;
+        if ([[row valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
+            ref.contentType = ContentTypeVideo;
+        } else {
+            ref.contentType = ContentTypePhoto;
+        }
+        NSDictionary *metadataDict = [row.defaultRepresentation metadata];
+        if(metadataDict) {
+            NSDictionary *tiffDict = [metadataDict objectForKey:@"{TIFF}"];
+            if(tiffDict) {
+                NSString *softwareVal = [tiffDict objectForKey:@"Software"];
+                if(softwareVal) {
+                    if([SPECIAL_LOCAL_ALBUM_NAMES containsObject:softwareVal]) {
+                        ref.referenceFolderName = softwareVal;
                     }
                 }
             }
-            ref.ownerPage = UploadStarterPagePhotos;
-            ref.folderUuid = APPDELEGATE.session.user.mobileUploadFolderUuid;
-            ref.autoSyncFlag = YES; //TODO
-            
-            UploadManager *manager = [[UploadManager alloc] initWithUploadInfo:ref];
-            [manager configureUploadAsset:ref.filePath atFolder:nil];
-            [[UploadQueue sharedInstance] addNewUploadTask:manager];
         }
+        ref.ownerPage = UploadStarterPagePhotos;
+        ref.folderUuid = APPDELEGATE.session.user.mobileUploadFolderUuid;
+        ref.autoSyncFlag = YES; //TODO
+        
+        UploadManager *manager = [[UploadManager alloc] initWithUploadInfo:ref];
+        [manager configureUploadAsset:ref.filePath atFolder:nil];
+        [uploadingUuids addObject:manager.uploadRef.fileUuid];
+        [[UploadQueue sharedInstance] addNewUploadTask:manager];
+    }
+}
+
+- (void) footerActionMenuDidSelectSync:(FooterActionsMenuView *) menu {
+    if([selectedAssets count] > 0) {
+        [self startUploadForSelectedAssets];
+        postUploadProcessType = NextProcessTypeRefresh;
         
         if(syncView == nil) {
             UploadManager *activeManRef = [[UploadQueue sharedInstance] activeManager];
@@ -879,10 +895,14 @@
     }
 }
 
-- (void) syncMaskViewShouldClose {
+- (void) removeLockMask {
     if(lockMaskView) {
         [lockMaskView removeFromSuperview];
     }
+}
+
+- (void) syncMaskViewShouldClose {
+    [self removeLockMask];
     [[UploadQueue sharedInstance] cancelAllUploads];
     //TODO check if pullData needed...
 }
@@ -890,22 +910,27 @@
 - (void) footerActionMenuDidSelectMove:(FooterActionsMenuView *) menu {
     if([selectedAssets count] > 0) {
         [self addLockMask];
+        postUploadProcessType = NextProcessTypeMove;
+        [self startUploadForSelectedAssets];
+    } else {
+        [delegate revisitedGroupedPhotoShowPhotoAlbums:self];
+        //[APPDELEGATE.base showPhotoAlbums];
     }
-    
-    [delegate revisitedGroupedPhotoShowPhotoAlbums:self];
-    //[APPDELEGATE.base showPhotoAlbums];
 }
 
 - (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {
-    if([selectedMetaFiles count] == 0)
-        return;
-    
-    if ([delegate respondsToSelector:@selector(revisitedGroupedPhoto:triggerShareForFiles:withUUID:)]) {
-        [delegate revisitedGroupedPhoto:self triggerShareForFiles:selectedMetaFiles withUUID:selectedFileList];
-        return;
+    if([selectedAssets count] > 0) {
+        [self addLockMask];
+        postUploadProcessType = NextProcessTypeShare;
+        [self startUploadForSelectedAssets];
+    } else {
+        if ([delegate respondsToSelector:@selector(revisitedGroupedPhoto:triggerShareForFiles:withUUID:)]) {
+            [delegate revisitedGroupedPhoto:self triggerShareForFiles:selectedMetaFiles withUUID:selectedFileList];
+            return;
+        }
+        [delegate revisitedGroupedPhoto:self triggerShareForFiles:selectedMetaFiles];
+        // [APPDELEGATE.base triggerShareForFiles:selectedFileList];
     }
-    [delegate revisitedGroupedPhoto:self triggerShareForFiles:selectedMetaFiles];
-    // [APPDELEGATE.base triggerShareForFiles:selectedFileList];
 }
 
 - (void) footerActionMenuDidSelectPrint:(FooterActionsMenuView *)menu {
@@ -994,6 +1019,10 @@
             }];
         }
         [delegate revisitedGroupedPhotoDidFinishUpdate];
+        if([uploadingUuids count] > 0) {
+            [detailDao requestFileDetails:uploadingUuids];
+            [delegate revisitedGroupedPhotoWantsToShowLoading];
+        }
     }
 }
 
@@ -1578,6 +1607,40 @@
             }];
         }
     }
+}
+
+- (void) detailSuccessCallback:(NSArray *) fileList {
+    NSLog(@"Resulting file list: %@", fileList);
+    [self removeLockMask];
+    [delegate revisitedGroupedPhotoWantsToHideLoading];
+    [uploadingUuids removeAllObjects];
+    if([fileList count] > 0) {
+        for(MetaFile *file in fileList) {
+            if(![selectedFileList containsObject:file.uuid]) {
+                [selectedFileList addObject:file.uuid];
+                [selectedMetaFiles addObject:file];
+            }
+        }
+        if(postUploadProcessType == NextProcessTypeShare) {
+            if ([delegate respondsToSelector:@selector(revisitedGroupedPhoto:triggerShareForFiles:withUUID:)]) {
+                [delegate revisitedGroupedPhoto:self triggerShareForFiles:selectedMetaFiles withUUID:selectedFileList];
+                return;
+            }
+            [delegate revisitedGroupedPhoto:self triggerShareForFiles:selectedMetaFiles];
+            // [APPDELEGATE.base triggerShareForFiles:selectedFileList];
+        } else if(postUploadProcessType == NextProcessTypeMove) {
+            [delegate revisitedGroupedPhotoShowPhotoAlbums:self];
+            //[APPDELEGATE.base showPhotoAlbums];
+        } else if(postUploadProcessType == NextProcessTypeRefresh) {
+            //TODO is pullData needed?
+        }
+    }
+}
+
+- (void) detailFailCallback:(NSString *) errorMessage {
+    [self removeLockMask];
+    [delegate revisitedGroupedPhotoWantsToHideLoading];
+    [uploadingUuids removeAllObjects];
 }
 
 @end

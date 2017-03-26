@@ -587,7 +587,9 @@ typedef enum {
 
 typedef enum {
     NextProcessTypeShare,
-    NextProcessTypePrint
+    NextProcessTypePrint,
+    NextProcessTypeMove,
+    NextProcessTypeRefresh
 } NextProcessType;
 
 

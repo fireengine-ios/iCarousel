@@ -32,6 +32,7 @@
 #import "GroupPhotoSectionView.h"
 #import "PhotosHeaderSyncView.h"
 #import "SyncMaskView.h"
+#import "FileDetailsDao.h"
 
 @class RevisitedGroupedPhotoView;
 
@@ -81,6 +82,7 @@
 @property (nonatomic, strong) ElasticSearchDao *readDao;
 @property (nonatomic, strong) DeleteDao *deleteDao;
 @property (nonatomic, strong) AlbumAddPhotosDao *albumAddPhotosDao;
+@property (nonatomic, strong) FileDetailsDao *detailDao;
 
 @property (nonatomic, strong) FooterActionsMenuView *imgFooterActionMenu;
 @property (nonatomic) BOOL isSelectible;
@@ -96,6 +98,7 @@
 
 @property (nonatomic, strong) AutoSyncOffHeaderView *syncInfoHeaderView;
 @property (nonatomic, strong) SyncMaskView *lockMaskView;
+@property (nonatomic, strong) NSMutableArray *uploadingUuids;
 
 - (void) pullData;
 - (void)reloadContent:(BOOL)forDelete;

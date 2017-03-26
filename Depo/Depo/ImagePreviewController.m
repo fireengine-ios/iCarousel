@@ -1319,12 +1319,10 @@
 }
 
 - (void) uploadManagerDidFinishUploadingForAsset:(NSString *) assetUrl withFinalFile:(MetaFile *) finalFile {
-    [self removeSyncMaskIfAny];
     uploadNeeded = NO;
     if(uploadingUuid) {
         [detailDao requestFileDetails:@[uploadingUuid]];
     }
-    //TODO netleşince açılacak    [self postUploadProcess];
 }
 
 - (void) uploadManagerDidFailUploadingForAsset:(NSString *) assetUrl {
@@ -1354,9 +1352,8 @@
 }
 
 - (void) postUploadProcess {
-    //TODO file'ı doldur!!
     if(postProcess == NextProcessTypeShare) {
-        [self triggerShareForFiles:@[uploadingUuid]];
+        [self triggerShareForFiles:@[self.file.uuid]];
     } else if(postProcess == NextProcessTypePrint) {
         NSArray *tempArr = [NSArray arrayWithObject:file];
         PrintWebViewController *printController = [[PrintWebViewController alloc] initWithUrl:@"http://akillidepo.cellograf.com/" withFileList:tempArr];
@@ -1375,10 +1372,16 @@
 }
 
 - (void) detailSuccessCallback:(NSArray *) fileList {
+    [self removeSyncMaskIfAny];
     NSLog(@"Resulting file list: %@", fileList);
+    if([fileList count] > 0) {
+        self.file = [fileList objectAtIndex:0];
+        [self postUploadProcess];
+    }
 }
 
 - (void) detailFailCallback:(NSString *) errorMessage {
+    [self removeSyncMaskIfAny];
 }
 
 @end
