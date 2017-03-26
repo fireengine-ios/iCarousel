@@ -387,7 +387,8 @@
     
     for (MetaFile *file in self.fileListToShare) {
         NSString *endPoint = file.detail.thumbLargeUrl;
-        if (originalSize) {
+        //TODO !endPoint kısmını check et. Upload sonrası thumbLargeUrl gelmiyor. O yüzden eklendi.
+        if (originalSize || !endPoint) {
             endPoint = file.tempDownloadUrl;
         }
         if (file.contentType == ContentTypeVideo) {

@@ -60,6 +60,7 @@
 
 @synthesize delegate;
 @synthesize files;
+@synthesize fileHashList;
 @synthesize selectedFileList;
 @synthesize selectedMetaFiles;
 @synthesize selectedAssets;
@@ -127,6 +128,7 @@
         
         groups = [[NSMutableArray alloc] init];
         files = [[NSMutableArray alloc] init];
+        fileHashList = [[NSMutableArray alloc] init];
         selectedFileList = [[NSMutableArray alloc] init];
         selectedMetaFiles = [[NSMutableArray alloc] init];
         selectedAssets = [[NSMutableArray alloc] init];
@@ -311,6 +313,7 @@
         
         [groups removeAllObjects];
         [files removeAllObjects];
+        [fileHashList removeAllObjects];
         
         [self.collView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
         
@@ -378,7 +381,7 @@
     if(initialRow != nil) {
         [initialRow.fileInfo addObjectsFromArray:group.fileInfo];
         initialRow.fileInfo = [self sortRawArrayByDateDesc:initialRow.fileInfo];
-        [initialRow.fileHashList addObjectsFromArray:group.fileHashList];
+//        [initialRow.fileHashList addObjectsFromArray:group.fileHashList];
         [self.groups replaceObjectAtIndex:counter withObject:initialRow];
     } else {
         group.fileInfo = [self sortRawArrayByDateDesc:group.fileInfo];
@@ -422,10 +425,10 @@
 - (void) setToUnselectiblePriorToRefresh {
     isSelectible = NO;
     [self createRefreshControl];
-    [selectedFileList removeAllObjects];
-    [selectedSectionNames removeAllObjects];
-    [selectedMetaFiles removeAllObjects];
-    [selectedAssets removeAllObjects];
+//    [selectedFileList removeAllObjects];
+//    [selectedSectionNames removeAllObjects];
+//    [selectedMetaFiles removeAllObjects];
+//    [selectedAssets removeAllObjects];
     
     if(imgFooterActionMenu) {
         [imgFooterActionMenu removeFromSuperview];
@@ -463,7 +466,7 @@
                     RawTypeFile *rawFile = [self rawFileForFile:row];
                     [newGroup.fileInfo addObject:rawFile];
                     if(rawFile.hashRef) {
-                        [newGroup.fileHashList addObject:rawFile.hashRef];
+                        [fileHashList addObject:rawFile.hashRef];
                     }
                     newGroup.sequence = groupSequence;
                     newGroup.groupKey = dateStr;
@@ -476,7 +479,7 @@
                         RawTypeFile *rawFile = [self rawFileForFile:row];
                         [currentGroup.fileInfo addObject:rawFile];
                         if(rawFile.hashRef) {
-                            [currentGroup.fileHashList addObject:rawFile.hashRef];
+                            [fileHashList addObject:rawFile.hashRef];
                         }
                     } else {
                         FileInfoGroup *newGroup = [[FileInfoGroup alloc] init];
@@ -487,7 +490,7 @@
                         RawTypeFile *rawFile = [self rawFileForFile:row];
                         [newGroup.fileInfo addObject:rawFile];
                         if(rawFile.hashRef) {
-                            [newGroup.fileHashList addObject:rawFile.hashRef];
+                            [fileHashList addObject:rawFile.hashRef];
                         }
                         newGroup.sequence = groupSequence;
                         newGroup.groupKey = dateStr;
@@ -1203,19 +1206,15 @@
             NSString *rowLocalHash = [SyncUtil md5StringOfString:[row.defaultRepresentation.url absoluteString]];
             if([[tempDict allKeys] count] == 0) {
                 FileInfoGroup *newGroup = [[FileInfoGroup alloc] init];
-                FileInfoGroup *legacyGroup = [self groupByKey:dateStr];
-                if(legacyGroup) {
-                    newGroup.fileHashList = legacyGroup.fileHashList;
-                }
                 newGroup.customTitle = dateStr;
                 newGroup.refDate = assetDate;
                 newGroup.locationInfo = @"";
                 newGroup.fileInfo = [[NSMutableArray alloc] init];
-                if(![newGroup.fileHashList containsObject:rowLocalHash]) {
+                if(![fileHashList containsObject:rowLocalHash]) {
                     RawTypeFile *rawFile = [self rawFileForAsset:row];
                     [newGroup.fileInfo addObject:rawFile];
                     if(rawFile.hashRef) {
-                        [newGroup.fileHashList addObject:rawFile.hashRef];
+                        [fileHashList addObject:rawFile.hashRef];
                     }
                 }
                 newGroup.sequence = groupSequence;
@@ -1226,28 +1225,24 @@
             } else {
                 FileInfoGroup *currentGroup = [tempDict objectForKey:dateStr];
                 if(currentGroup != nil) {
-                    if(![currentGroup.fileHashList containsObject:rowLocalHash]) {
+                    if(![fileHashList containsObject:rowLocalHash]) {
                         RawTypeFile *rawFile = [self rawFileForAsset:row];
                         [currentGroup.fileInfo addObject:rawFile];
                         if(rawFile.hashRef) {
-                            [currentGroup.fileHashList addObject:rawFile.hashRef];
+                            [fileHashList addObject:rawFile.hashRef];
                         }
                     }
                 } else {
                     FileInfoGroup *newGroup = [[FileInfoGroup alloc] init];
-                    FileInfoGroup *legacyGroup = [self groupByKey:dateStr];
-                    if(legacyGroup) {
-                        newGroup.fileHashList = legacyGroup.fileHashList;
-                    }
                     newGroup.customTitle = dateStr;
                     newGroup.refDate = assetDate;
                     newGroup.locationInfo = @"";
                     newGroup.fileInfo = [[NSMutableArray alloc] init];
-                    if(![newGroup.fileHashList containsObject:rowLocalHash]) {
+                    if(![fileHashList containsObject:rowLocalHash]) {
                         RawTypeFile *rawFile = [self rawFileForAsset:row];
                         [newGroup.fileInfo addObject:rawFile];
                         if(rawFile.hashRef) {
-                            [newGroup.fileHashList addObject:rawFile.hashRef];
+                            [fileHashList addObject:rawFile.hashRef];
                         }
                     }
                     newGroup.sequence = groupSequence;
