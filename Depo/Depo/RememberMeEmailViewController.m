@@ -269,8 +269,9 @@
 -(void)setViewMovedUp:(BOOL)movedUp {
     if (movedUp) {
         
-        container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + (IS_IPHONE_5 ? 280 : 290));
+        container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + (IS_IPHONE_6P_OR_HIGHER ? 0 : 280));
 //        [container setContentOffset:CGPointMake(0, 230) animated:YES];
+        okButton.frame = CGRectMake(0, self.view.frame.size.height - (IS_IPHONE_6P_OR_HIGHER ? 285 : 60), self.view.frame.size.width, 60);
         
     } else {
         container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
