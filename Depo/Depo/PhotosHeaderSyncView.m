@@ -10,10 +10,12 @@
 #import "AppConstants.h"
 #import "Util.h"
 #import "CustomLabel.h"
+#import "UploadQueue.h"
 
 @interface PhotosHeaderSyncView() {
     CustomLabel *infoLabel;
     CustomLabel *countLabel;
+    CustomLabel *progressLabel;
     UIView *progress;
     UIView *progressBg;
     UIImageView *thumbView;
@@ -29,10 +31,11 @@
     if(self = [super initWithFrame:frame]) {
         self.backgroundColor = [Util UIColorForHexColor:@"f9f9f8"];
         
-        infoLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, (self.frame.size.height - 16)/2, 120, 16) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:14] withColor:[Util UIColorForHexColor:@"8d8a85"] withText:NSLocalizedString(@"SyncInProgressHeaderTitle", @"") withAlignment:NSTextAlignmentLeft];
+        infoLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, (self.frame.size.height - 16)/2, 100, 16) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:14] withColor:[Util UIColorForHexColor:@"8d8a85"] withText:NSLocalizedString(@"SyncInProgressHeaderTitle", @"") withAlignment:NSTextAlignmentLeft];
+        infoLabel.adjustsFontSizeToFitWidth = YES;
         [self addSubview:infoLabel];
         
-        float maxProgressWidth = self.frame.size.width - infoLabel.frame.size.width - 100;
+        float maxProgressWidth = self.frame.size.width - infoLabel.frame.size.width - 130;
         
         progressBg = [[UIView alloc] initWithFrame:CGRectMake(infoLabel.frame.origin.x + infoLabel.frame.size.width + 5, (self.frame.size.height - 16)/2, maxProgressWidth, 16)];
         progressBg.layer.cornerRadius = 8;
@@ -43,6 +46,9 @@
         progress.layer.cornerRadius = 8;
         progress.backgroundColor = [Util UIColorForHexColor:@"00aadf"];
         [self addSubview:progress];
+        
+        progressLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(progressBg.frame.origin.x + progressBg.frame.size.width + 5, (self.frame.size.height - 16)/2, 40, 16) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:14] withColor:[Util UIColorForHexColor:@"8d8a85"] withText:@"" withAlignment:NSTextAlignmentLeft];
+        [self addSubview:progressLabel];
         
         thumbView = [[UIImageView alloc] initWithFrame:CGRectMake(self.frame.size.width - 60, (self.frame.size.height - 40)/2, 40, 40)];
         thumbView.contentMode = UIViewContentModeScaleAspectFill;
@@ -62,6 +68,7 @@
             thumbView.image = [UIImage imageWithCGImage:[myAsset aspectRatioThumbnail]];
         }
     } failureBlock:nil];
+    [self checkProgressInfo];
 }
 
 - (void) loadLocalFileForCamUpload:(NSString *) localTempUrl {
@@ -111,6 +118,13 @@
 
 - (void) dismissView {
     [delegate photosHeaderSyncFinishedForAssetUrl:assetUrlRef];
+}
+
+- (void) checkProgressInfo {
+    int totalAutoSyncCount = [[UploadQueue sharedInstance] totalAutoSyncCount];
+    int finishedAutoSyncCount = [[UploadQueue sharedInstance] finishedAutoSyncCount];
+    NSString *infoMessage = [NSString stringWithFormat:@"%d/%d%@", finishedAutoSyncCount + 1, totalAutoSyncCount > AUTO_SYNC_ASSET_COUNT ? AUTO_SYNC_ASSET_COUNT : totalAutoSyncCount, ((totalAutoSyncCount%AUTO_SYNC_ASSET_COUNT==0) || totalAutoSyncCount > AUTO_SYNC_ASSET_COUNT) ? @"+" : @""];
+    progressLabel.text = infoMessage;
 }
 
 @end

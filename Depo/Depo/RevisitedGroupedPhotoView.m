@@ -23,6 +23,7 @@
 #import "SyncUtil.h"
 #import "UIImageView+WebCache.h"
 #import "SDWebImagePrefetcher.h"
+#import "CustomAlertView.h"
 
 #define GROUP_PACKAGE_SIZE (IS_IPAD ? 60 : IS_IPHONE_6P_OR_HIGHER ? 60 : 48)
 #define GROUP_IMG_COUNT_PER_ROW (IS_IPAD ? 6 : IS_IPHONE_6P_OR_HIGHER ? 6 : 4)
@@ -556,7 +557,7 @@
     IGLog(@"RevisitedGroupedPhotoView readSuccessCallback calling SyncManager listOfUnsyncedImages");
     [SyncManager sharedInstance].infoDelegate = self;
     [[SyncManager sharedInstance] listOfUnsyncedImages];
-    [delegate revisitedGroupedPhotoWantsToShowLoading];
+//    [delegate revisitedGroupedPhotoWantsToShowLoading];
 }
 
 - (void) readFailCallback:(NSString *) errorMessage {
@@ -886,7 +887,9 @@
                 }
             }
         }
-        [delegate revisitedGroupedPhotoDidFinishUpdate];
+        //TODO check
+        [collView reloadData];
+//        [delegate revisitedGroupedPhotoDidFinishUpdate];
     }
 }
 
@@ -901,6 +904,7 @@
 - (void) removeLockMask {
     if(lockMaskView) {
         [lockMaskView removeFromSuperview];
+        lockMaskView = nil;
     }
 }
 
@@ -940,7 +944,13 @@
     if([selectedMetaFiles count] == 0)
         return;
     
-    [delegate revisitedGroupedPhotoShouldPrintWithFileList:selectedMetaFiles];
+    if([selectedAssets count] > 0) {
+        CustomAlertView *alert = [[CustomAlertView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Error", @"") withMessage:NSLocalizedString(@"UnsyncPrintError", @"") withModalType:ModalTypeError];
+        [APPDELEGATE showCustomAlert:alert];
+        [self setToUnselectiblePriorToRefresh];
+    } else {
+        [delegate revisitedGroupedPhotoShouldPrintWithFileList:selectedMetaFiles];
+    }
 }
 
 - (void) destinationAlbumChosenWithUuid:(NSString *) chosenAlbumUuid {
@@ -1021,10 +1031,11 @@
                 collView.frame = CGRectMake(collView.frame.origin.x, collView.frame.origin.y - 50, collView.frame.size.width, collView.frame.size.height + 50);
             }];
         }
-        [delegate revisitedGroupedPhotoDidFinishUpdate];
         if([uploadingUuids count] > 0) {
             [detailDao requestFileDetails:uploadingUuids];
             [delegate revisitedGroupedPhotoWantsToShowLoading];
+        } else {
+            [delegate revisitedGroupedPhotoDidFinishUpdate];
         }
     }
 }
@@ -1106,7 +1117,12 @@
     if(!initialLoadDone) {
         return CGSizeZero;
     } else {
-        return CGSizeMake(self.frame.size.width, 40);
+        FileInfoGroup *sectionGroup = [self.groups objectAtIndex:section];
+        if([sectionGroup.fileInfo count] > 0) {
+            return CGSizeMake(self.frame.size.width, 40);
+        } else {
+            return CGSizeZero;
+        }
     }
 }
 
@@ -1166,7 +1182,7 @@
 }
 
 - (void) syncManagerUnsyncedImageList:(NSArray *)unsyncedAssets {
-    [delegate revisitedGroupedPhotoWantsToHideLoading];
+//    [delegate revisitedGroupedPhotoWantsToHideLoading];
     IGLog(@"RevisitedGroupedPhotoView syncManagerUnsyncedImageList called");
     localAssets = [unsyncedAssets sortedArrayUsingComparator:^NSComparisonResult(ALAsset *first, ALAsset *second) {
         NSDate * date1 = [first valueForProperty:ALAssetPropertyDate];
@@ -1174,6 +1190,12 @@
         return [date2 compare:date1];
     }];
     [self addUnsyncedFiles];
+}
+
+- (void) syncManagerNumberOfImagesWaitingForUpload:(int) imgCount {
+    if(syncInfoHeaderView) {
+        [syncInfoHeaderView updateBottomLabelWithCount:imgCount];
+    }
 }
 
 - (void) addUnsyncedFiles {
@@ -1608,6 +1630,7 @@
     NSLog(@"Resulting file list: %@", fileList);
     [self removeLockMask];
     [delegate revisitedGroupedPhotoWantsToHideLoading];
+    [delegate revisitedGroupedPhotoDidFinishUpdate];
     [uploadingUuids removeAllObjects];
     if([fileList count] > 0) {
         for(MetaFile *file in fileList) {
@@ -1635,6 +1658,7 @@
 - (void) detailFailCallback:(NSString *) errorMessage {
     [self removeLockMask];
     [delegate revisitedGroupedPhotoWantsToHideLoading];
+    [delegate revisitedGroupedPhotoDidFinishUpdate];
     [uploadingUuids removeAllObjects];
 }
 

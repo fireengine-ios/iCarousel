@@ -156,7 +156,7 @@
         assetImgView.image = [UIImage imageWithCGImage:self.asset.defaultRepresentation.fullScreenImage];
         [self.view addSubview:assetImgView];
         
-        footer = [[FileDetailFooter alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60) withPrintEnabled:YES withDeleteEnabled:NO withSyncEnabled:YES withDownloadEnabled:NO withAlbum:nil];
+        footer = [[FileDetailFooter alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60) withPrintEnabled:NO withDeleteEnabled:NO withSyncEnabled:YES withDownloadEnabled:NO withAlbum:nil];
         footer.delegate = self;
         [self.view addSubview:footer];
         

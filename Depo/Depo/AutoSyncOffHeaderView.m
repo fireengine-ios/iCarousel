@@ -11,6 +11,11 @@
 #import "CustomButton.h"
 #import "Util.h"
 
+@interface AutoSyncOffHeaderView() {
+    CustomLabel *bottomLabel;
+}
+@end
+
 @implementation AutoSyncOffHeaderView
 
 @synthesize delegate;
@@ -31,7 +36,7 @@
         CustomLabel *topLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(textXIndex, self.frame.size.height/2 - 20, self.frame.size.width - textXIndex - settingsButtonImg.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:13] withColor:[Util UIColorForHexColor:@"555555"] withText:wifiFlag ? NSLocalizedString(@"AutoSyncOffInfoTopWifi", @"") : NSLocalizedString(@"AutoSyncOffInfoTop", @"") withAlignment:NSTextAlignmentLeft];
         [self addSubview:topLabel];
 
-        CustomLabel *bottomLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(textXIndex, self.frame.size.height/2, self.frame.size.width - textXIndex - settingsButtonImg.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:12] withColor:[Util UIColorForHexColor:@"555555"] withText:NSLocalizedString(@"AutoSyncOffInfoBottom", @"") withAlignment:NSTextAlignmentLeft];
+        bottomLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(textXIndex, self.frame.size.height/2, self.frame.size.width - textXIndex - settingsButtonImg.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:12] withColor:[Util UIColorForHexColor:@"555555"] withText:NSLocalizedString(@"AutoSyncOffInfoBottom", @"") withAlignment:NSTextAlignmentLeft];
         bottomLabel.adjustsFontSizeToFitWidth = YES;
         [self addSubview:bottomLabel];
         
@@ -55,6 +60,10 @@
         [self addSubview:closeButton];
     }
     return self;
+}
+
+- (void) updateBottomLabelWithCount:(int) count {
+    bottomLabel.text = [NSString stringWithFormat:NSLocalizedString(@"AutoSyncOffInfoBottomWithCount", @""), count];
 }
 
 - (void) settingsClicked {

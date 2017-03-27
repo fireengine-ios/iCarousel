@@ -16,6 +16,8 @@
 
 @protocol SyncManagerInfoDelegate <NSObject>
 - (void) syncManagerUnsyncedImageList:(NSArray *) unsyncedAssets;
+@optional
+- (void) syncManagerNumberOfImagesWaitingForUpload:(int) imgCount;
 @end
 
 @interface SyncManager : NSObject

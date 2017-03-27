@@ -894,3 +894,5 @@
 "EmailPlaceholderNew"="E-Mail";
 
 "UploadInProgressInDetail"="Upload in progress. Please try again later";
+"UnsyncPrintError"="In order to use the print feature, all the selected images should be uploaded to the lifebox";
+"AutoSyncOffInfoBottomWithCount"="%d photos waiting to be synced";

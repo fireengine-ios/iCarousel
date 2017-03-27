@@ -18,5 +18,6 @@
 @property (nonatomic, weak) id<AutoSyncOffHeaderDelegate> delegate;
 
 - (id) initWithFrame:(CGRect)frame withWifiFlag:(BOOL) wifiFlag;
+- (void) updateBottomLabelWithCount:(int) count;
 
 @end

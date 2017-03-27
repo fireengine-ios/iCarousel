@@ -466,9 +466,11 @@
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^(void) {
         NSMutableArray *unsycedResult = [[NSMutableArray alloc] init];
         
-//        NSArray *localHashList = [SyncUtil readSyncHashLocally];
-//        NSArray *remoteHashList = [SyncUtil readSyncHashRemotely];
-//        NSArray *remoteSummaryList = [SyncUtil readSyncFileSummaries];
+        NSArray *localHashList = [SyncUtil readSyncHashLocally];
+        NSArray *remoteHashList = [SyncUtil readSyncHashRemotely];
+
+        __block int waitCount = 0;
+        
         [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
             if(group) {
                 [group setAssetsFilter:[ALAssetsFilter allPhotos]];
@@ -479,7 +481,7 @@
                         if(repUrl != nil) {
                             NSString *localHash = [SyncUtil md5StringOfString:repUrl];
                             
-//                            BOOL shouldStartUpload = ![localHashList containsObject:localHash] && ![remoteHashList containsObject:localHash];
+                            BOOL shouldStartUpload = ![localHashList containsObject:localHash] && ![remoteHashList containsObject:localHash];
                             
 //                            if(shouldStartUpload) {
 //                                MetaFileSummary *assetSummary = [[MetaFileSummary alloc] init];
@@ -487,9 +489,10 @@
 //                                assetSummary.fileName = [defaultRep filename];
 //                                shouldStartUpload = ![remoteSummaryList containsObject:assetSummary];
 //                            }
-//                            if(shouldStartUpload) {
+                            if(shouldStartUpload) {
                                 [unsycedResult addObject:asset];
-//                            }
+                                waitCount ++;
+                            }
                         }
                     }
                 }];
@@ -498,6 +501,7 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                     NSLog(@"listOfUnsyncedImages end");
                     [infoDelegate syncManagerUnsyncedImageList:unsycedResult];
+                    [infoDelegate syncManagerNumberOfImagesWaitingForUpload:waitCount];
                 });
             }
         } failureBlock:^(NSError *error) {
