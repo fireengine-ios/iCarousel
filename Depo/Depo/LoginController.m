@@ -242,7 +242,7 @@
                                             captchaField.frame.origin.y,
                                             480,
                                             captchaField.frame.size.height);
-            [viewArray addObject:captchaField];
+//            [viewArray addObject:captchaField];
             
             
             for (UIView *view in viewArray) {
@@ -270,10 +270,11 @@
         [registerButton addTarget:self action:@selector(registerClicked) forControlEvents:UIControlEventTouchUpInside];
         registerButton.isAccessibilityElement = YES;
         registerButton.accessibilityIdentifier = @"registerButton";
+        container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height - 64);
         
         [container addSubview:registerButton];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow) name:UIKeyboardWillShowNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide) name:UIKeyboardWillHideNotification object:nil];
 
@@ -511,17 +512,19 @@
                                        loginButton.frame.size.height);
         
         forgotPassView.frame = CGRectMake(forgotPassView.frame.origin.x,
-                                          loginButton.frame.origin.y + loginButton.frame.size.height + 60 ,
+                                          loginButton.frame.origin.y + loginButton.frame.size.height + 30 ,
                                           forgotPassView.frame.size.width,
                                           forgotPassView.frame.size.height);
         
-        registerButton.frame = CGRectMake(registerButton.frame.origin.x,
-                                          forgotPassView.frame.origin.y + forgotPassView.frame.size.height + 60 ,
-                                          registerButton.frame.size.width,
-                                          registerButton.frame.size.height);
-        
-        if(!IS_IPAD) {
+        if(IS_IPAD) {
             container.contentSize = CGSizeMake(container.contentSize.width, self.view.frame.size.height);
+        } else {
+            registerButton.frame = CGRectMake(registerButton.frame.origin.x,
+                                              forgotPassView.frame.origin.y + forgotPassView.frame.size.height + 60 ,
+                                              registerButton.frame.size.width,
+                                              registerButton.frame.size.height);
+            
+            container.contentSize = CGSizeMake(container.contentSize.width, registerButton.frame.origin.y + 60.0);
         }
         captchaContainer.hidden = NO;
     }
@@ -531,17 +534,25 @@
     [self showErrorAlertWithMessage:errorMessage];
 }
 
--(void)keyboardWillShow {
-    [self setViewMovedUp:YES];
+- (void)keyboardWillShow:(NSNotification*)notification {
+    NSDictionary* keyboardInfo = [notification userInfo];
+    NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
+    CGRect keyboardFrameBeginRect = [keyboardFrameBegin CGRectValue];
+    
+    [self setViewMovedUp:YES keyboardSize:keyboardFrameBeginRect.size];
 }
 
--(void)keyboardWillHide {
-    [self setViewMovedUp:NO];
+- (void)keyboardWillHide {
+    [self setViewMovedUp:NO keyboardSize:CGSizeZero];
 }
 
--(void)setViewMovedUp:(BOOL)movedUp {
+-(void)setViewMovedUp:(BOOL)movedUp keyboardSize:(CGSize)ksize {
     if (movedUp) {
-        container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + 280);
+        //
+        CGRect f = container.frame;
+        f.size.height = self.view.frame.size.height - ksize.height;
+        container.frame = f;
+        
         if(captchaContainer.isHidden) {
             [container setContentOffset:CGPointMake(0, 85) animated:YES];
         }
@@ -549,12 +560,7 @@
             [container setContentOffset:CGPointMake(0, 75) animated:YES];
         }
     } else {
-        if(captchaContainer.isHidden) {
-            container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
-        }
-        else {
-            container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
-        }
+        container.frame = self.view.bounds;
         [container setContentOffset:CGPointZero animated:YES];
     }
 }
