@@ -18,6 +18,9 @@
 #import "VideoPreviewController.h"
 #import "SyncUtil.h"
 #import "ShareActivity.h"
+#import "LocalImageDetailModalController.h"
+#import "ALAssetRepresentation+MD5.h"
+#import <MobileCoreServices/MobileCoreServices.h>
 
 #define PhotosGap 30.0f
 #define FooterHeight 60.0f
@@ -39,6 +42,7 @@
 
 @synthesize delegate;
 @synthesize file;
+@synthesize asset;
 @synthesize files;
 @synthesize cursor;
 @synthesize album;
@@ -122,6 +126,53 @@
     return self;
 }
 
+- (id)initWithAsset:(ALAsset *) _asset {
+    if(self = [super init]) {
+        self.asset = _asset;
+        
+        self.view.backgroundColor = [Util UIColorForHexColor:@"191e24"];
+        self.view.autoresizesSubviews = YES;
+        self.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        
+        pagingEnabledFlag = NO;
+        uploadNeeded = YES;
+        
+        _isFullScreen = false;
+        
+        [self configureCommonDaos];
+
+        detailDao = [[FileDetailsDao alloc] init];
+        detailDao.delegate = self;
+        detailDao.successMethod = @selector(detailSuccessCallback:);
+        detailDao.failMethod = @selector(detailFailCallback:);
+
+        CustomButton *customBackButton = [[CustomButton alloc] initWithFrame:CGRectMake(10, 0, 20, 34) withImageName:@"white_left_arrow.png"];
+        [customBackButton addTarget:self action:@selector(triggerDismiss) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:customBackButton];
+        self.navigationItem.leftBarButtonItem = backButton;
+        
+        UIImageView *assetImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-60)];
+        assetImgView.contentMode = UIViewContentModeScaleAspectFit;
+        assetImgView.image = [UIImage imageWithCGImage:self.asset.defaultRepresentation.fullScreenImage];
+        [self.view addSubview:assetImgView];
+        
+        footer = [[FileDetailFooter alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60) withPrintEnabled:YES withDeleteEnabled:NO withSyncEnabled:YES withDownloadEnabled:NO withAlbum:nil];
+        footer.delegate = self;
+        [self.view addSubview:footer];
+        
+        NSString *assetPathMd5 = [SyncUtil md5StringOfString:[self.asset.defaultRepresentation.url absoluteString]];
+        NSArray *uploadingImageRefArray = [[UploadQueue sharedInstance] uploadImageRefs];
+        for(UploadRef *manRef in uploadingImageRefArray) {
+            if([manRef.localHash isEqualToString:assetPathMd5]) {
+                uploadingUuid = manRef.fileUuid;
+                [footer showMaskWithMessage:NSLocalizedString(@"UploadInProgressInDetail", @"")];
+                break;
+            }
+        }
+    }
+    return self;
+}
+
 - (void) configureCommonDaos {
     deleteDao = [[DeleteDao alloc] init];
     deleteDao.delegate = self;
@@ -149,7 +200,7 @@
     self.view.backgroundColor = [Util UIColorForHexColor:@"191e24"];
     self.view.autoresizesSubviews = YES;
     self.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-
+    
     _isFullScreen = false;
     
     // main scroll
@@ -178,13 +229,13 @@
     int cur = [self findCursorValue];
     
     // debug log
-//    NSLog(@"file cursor %i", _fileCursor);
-//    NSLog(@"cfile -> %@", self.file.uuid);
-//    for (MetaFile *f in self.files) {
-//        NSLog(@"%@", f.uuid);
-//    }
+    //    NSLog(@"file cursor %i", _fileCursor);
+    //    NSLog(@"cfile -> %@", self.file.uuid);
+    //    for (MetaFile *f in self.files) {
+    //        NSLog(@"%@", f.uuid);
+    //    }
     
-//    ZPhotoView *zp1, *zp2, *zp3;
+    //    ZPhotoView *zp1, *zp2, *zp3;
     _pages = [NSMutableArray new];
     
     // previous photo
@@ -290,7 +341,7 @@
         self.processView.frame = CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60);
         [self.view bringSubviewToFront:self.processView];
     }
-
+    
 }
 
 - (void) addGesturesWithSwipeEnabled:(BOOL)swipeEnabled {
@@ -344,7 +395,7 @@
             _fileCursor--;
             [self addPageToLeft];
             
-        // to right
+            // to right
         } else {
             direction = @"right";
             _fileCursor++;
@@ -403,7 +454,7 @@
     
     // seek file
     int cur = _fileCursor - 1;
-//    NSLog(@"l->%i", cur);
+    //    NSLog(@"l->%i", cur);
     if (cur < 0 || self.files.count <= cur) {
         return;
     }
@@ -434,7 +485,7 @@
     
     // seek file
     int cur = _fileCursor + 1;
-//    NSLog(@"r->%i", cur);
+    //    NSLog(@"r->%i", cur);
     if (cur < 0 || self.files.count <= cur) {
         return;
     }
@@ -607,7 +658,12 @@
 }
 
 - (void) fileDetailFooterDidTriggerShare {
-    [self triggerShareForFiles:@[self.file.uuid]];
+    if(uploadNeeded && self.asset) {
+        postProcess = NextProcessTypeShare;
+        [self startInitialUpload];
+    } else {
+        [self triggerShareForFiles:@[self.file.uuid]];
+    }
 }
 
 - (void) fileDetailFooterDidTriggerDownload {
@@ -615,11 +671,22 @@
 }
 
 - (void) fileDetailFooterDidTriggerPrint {
-    NSArray *tempArr = [NSArray arrayWithObject:file];
-    PrintWebViewController *printController = [[PrintWebViewController alloc] initWithUrl:@"http://akillidepo.cellograf.com/" withFileList:tempArr];
-    printNav = [[MyNavigationController alloc] initWithRootViewController:printController];
-    
-    [self presentViewController:printNav animated:YES completion:nil];
+    if(uploadNeeded && self.asset) {
+        postProcess = NextProcessTypePrint;
+        [self startInitialUpload];
+    } else {
+        NSArray *tempArr = [NSArray arrayWithObject:file];
+        PrintWebViewController *printController = [[PrintWebViewController alloc] initWithUrl:@"http://akillidepo.cellograf.com/" withFileList:tempArr];
+        printNav = [[MyNavigationController alloc] initWithRootViewController:printController];
+        
+        [self presentViewController:printNav animated:YES completion:nil];
+    }
+}
+
+- (void) fileDetailFooterDidTriggerSync {
+    if(uploadNeeded && self.asset) {
+        [self startInitialUpload];
+    }
 }
 
 - (void) closePrintPage {
@@ -638,6 +705,10 @@
         if (self.album) {
             list = @[[NSNumber numberWithInt:MoreMenuTypeVideoDetail], [NSNumber numberWithInt:MoreMenuTypeShare], self.file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDownloadImage], [NSNumber numberWithInt:MoreMenuTypeRemoveFromAlbum], [NSNumber numberWithInt:MoreMenuTypeSetCoverPhoto]] ;
         }
+    }
+    
+    if(self.asset) {
+        list = @[[NSNumber numberWithInt:MoreMenuTypeImageDetail]];
     }
     
     [self presentMoreMenuWithList:list withFileFolder:self.file];
@@ -746,7 +817,13 @@
 #pragma mark - MoreMenuDelegate
 
 - (void) moreMenuDidSelectImageDetail {
-    [MoreMenuView presentFileDetailForFile:file fromController:self.nav delegateOwner:self];
+    if(self.asset) {
+        LocalImageDetailModalController *localDetail = [[LocalImageDetailModalController alloc] initWithAsset:self.asset];
+        MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:localDetail];
+        [self.nav presentViewController:modalNav animated:YES completion:nil];
+    } else {
+        [MoreMenuView presentFileDetailForFile:file fromController:self.nav delegateOwner:self];
+    }
 }
 
 - (void) moreMenuDidSelectVideoDetail {
@@ -1000,7 +1077,7 @@
 }
 
 - (void) triggerShareForFiles:(NSArray *) fileUuidList {
-//    [shareDao requestLinkForFiles:fileUuidList];
+    //    [shareDao requestLinkForFiles:fileUuidList];
     [self showLoading];
     
     [self downloadImageWithURL:[NSURL URLWithString:self.file.tempDownloadUrl]
@@ -1020,8 +1097,6 @@
                            ShareActivity *activity = [[ShareActivity alloc] init];
                            activity.sourceViewController = self;
                            applicationActivities = @[activity];
-//                       } else {
-//                           activityItems = @[@"#lifebox", url];
 //                       }
                        
                        UIActivityViewController *activityViewController = [[UIActivityViewController alloc]
@@ -1049,34 +1124,34 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         [self downloadImageWithURL:[NSURL URLWithString:self.file.tempDownloadUrl]
                    completionBlock:^(BOOL succeeded, UIImage *image, NSData *imageData) {
-            if (succeeded) {
-                [self hideLoading];
-                
-                NSURL *url = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingString:self.file.name]];
-                [imageData writeToURL:url atomically:NO];
-                
-                NSArray *activityItems = @[url];
-                
-                ShareActivity *activity = [[ShareActivity alloc] init];
-                activity.sourceViewController = self;
-                
-                UIActivityViewController *activityViewController = [[UIActivityViewController alloc]
-                                                                    initWithActivityItems:activityItems
-                                                                    applicationActivities:@[activity]];
-                [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
-                activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-                
-                activityViewController.excludedActivityTypes = @[@"com.igones.adepo.DepoShareExtension", UIActivityTypePostToFacebook];
-                
-                if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-                    [self presentViewController:activityViewController animated:YES completion:nil];
-                } else {
-                    UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
-                    [popup presentPopoverFromRect:CGRectMake(self.view.frame.size.width-240, self.view.frame.size.height-40, 240, 300)inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-                }
-                
-            }
-        }];
+                       if (succeeded) {
+                           [self hideLoading];
+                           
+                           NSURL *url = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingString:self.file.name]];
+                           [imageData writeToURL:url atomically:NO];
+                           
+                           NSArray *activityItems = @[url];
+                           
+                           ShareActivity *activity = [[ShareActivity alloc] init];
+                           activity.sourceViewController = self;
+                           
+                           UIActivityViewController *activityViewController = [[UIActivityViewController alloc]
+                                                                               initWithActivityItems:activityItems
+                                                                               applicationActivities:@[activity]];
+                           [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
+                           activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+                           
+                           activityViewController.excludedActivityTypes = @[@"com.igones.adepo.DepoShareExtension", UIActivityTypePostToFacebook];
+                           
+                           if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+                               [self presentViewController:activityViewController animated:YES completion:nil];
+                           } else {
+                               UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
+                               [popup presentPopoverFromRect:CGRectMake(self.view.frame.size.width-240, self.view.frame.size.height-40, 240, 300)inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+                           }
+                           
+                       }
+                   }];
     });
 }
 
@@ -1133,7 +1208,7 @@
         statusbarheight = 20.0f;
     }
     CGFloat topOffset = navbarheight + statusbarheight;
-
+    
     CGRect frame = CGRectMake(0, -1 * topOffset, self.view.frame.size.width, self.view.frame.size.height + topOffset);
     if (_isFullScreen) {
         frame.size.height = self.view.frame.size.height;
@@ -1146,7 +1221,7 @@
         
         // resize mainScroll
         [self resizeMainScrollWithGap:30 viewFrame:frame];
-        [self resizeFooterWithIsVisible:(self.file.contentType == ContentTypePhoto)];
+        [self resizeFooterWithIsVisible:(self.file.contentType == ContentTypePhoto || self.asset != nil)];
         
         // resize confirm dialog if exists
         if(_confirmDialog != nil) {
@@ -1196,6 +1271,117 @@
     
     [shareDao cancelRequest];
     shareDao = nil;
+}
+
+- (void) startInitialUpload {
+    syncMaskView = [[SyncMaskView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height)];
+    syncMaskView.delegate = self;
+    [APPDELEGATE.window addSubview:syncMaskView];
+    
+    NSString *mimeType = (__bridge_transfer NSString*)UTTypeCopyPreferredTagWithClass
+    ((__bridge CFStringRef)[self.asset.defaultRepresentation UTI], kUTTagClassMIMEType);
+    
+    UploadRef *ref = [[UploadRef alloc] init];
+    ref.fileName = self.asset.defaultRepresentation.filename;
+    ref.filePath = [self.asset.defaultRepresentation.url absoluteString];
+    ref.localHash = [SyncUtil md5StringOfString:[self.asset.defaultRepresentation.url absoluteString]];
+    ref.mimeType = mimeType;
+    if ([[self.asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
+        ref.contentType = ContentTypeVideo;
+    } else {
+        ref.contentType = ContentTypePhoto;
+    }
+    NSDictionary *metadataDict = [self.asset.defaultRepresentation metadata];
+    if(metadataDict) {
+        NSDictionary *tiffDict = [metadataDict objectForKey:@"{TIFF}"];
+        if(tiffDict) {
+            NSString *softwareVal = [tiffDict objectForKey:@"Software"];
+            if(softwareVal) {
+                if([SPECIAL_LOCAL_ALBUM_NAMES containsObject:softwareVal]) {
+                    ref.referenceFolderName = softwareVal;
+                }
+            }
+        }
+    }
+    ref.ownerPage = UploadStarterPagePhotos;
+    ref.folderUuid = APPDELEGATE.session.user.mobileUploadFolderUuid;
+    ref.autoSyncFlag = YES;
+    
+    UploadManager *manager = [[UploadManager alloc] initWithUploadInfo:ref];
+    [manager configureUploadAsset:ref.filePath atFolder:nil];
+    manager.delegate = self;
+    uploadingUuid = manager.uploadRef.fileUuid;
+    [[UploadQueue sharedInstance] addNewUploadTask:manager];
+}
+
+
+- (void) uploadManagerDidSendData:(long) sentBytes inTotal:(long) totalBytes {
+}
+
+- (void) uploadManagerDidFinishUploadingForAsset:(NSString *) assetUrl withFinalFile:(MetaFile *) finalFile {
+    uploadNeeded = NO;
+    if(uploadingUuid) {
+        [detailDao requestFileDetails:@[uploadingUuid]];
+    }
+}
+
+- (void) uploadManagerDidFailUploadingForAsset:(NSString *) assetUrl {
+    [self removeSyncMaskIfAny];
+}
+
+- (void) uploadManagerQuotaExceedForAsset:(NSString *) assetUrl {
+    [self removeSyncMaskIfAny];
+}
+
+- (void) uploadManagerLoginRequiredForAsset:(NSString *) assetUrl {
+    [self removeSyncMaskIfAny];
+}
+
+- (void) uploadManagerDidFinishUploadingAsData {
+    [self removeSyncMaskIfAny];
+}
+
+- (void) uploadManagerDidFailUploadingAsData {
+    [self removeSyncMaskIfAny];
+}
+
+- (void) removeSyncMaskIfAny {
+    if(syncMaskView) {
+        [syncMaskView removeFromSuperview];
+    }
+}
+
+- (void) postUploadProcess {
+    if(postProcess == NextProcessTypeShare) {
+        [self triggerShareForFiles:@[self.file.uuid]];
+    } else if(postProcess == NextProcessTypePrint) {
+        NSArray *tempArr = [NSArray arrayWithObject:file];
+        PrintWebViewController *printController = [[PrintWebViewController alloc] initWithUrl:@"http://akillidepo.cellograf.com/" withFileList:tempArr];
+        printNav = [[MyNavigationController alloc] initWithRootViewController:printController];
+        
+        [self presentViewController:printNav animated:YES completion:nil];
+    }
+    
+}
+
+- (void) syncMaskViewShouldClose {
+    if(syncMaskView) {
+        [syncMaskView removeFromSuperview];
+    }
+    [[UploadQueue sharedInstance] cancelAllUploads];
+}
+
+- (void) detailSuccessCallback:(NSArray *) fileList {
+    [self removeSyncMaskIfAny];
+    NSLog(@"Resulting file list: %@", fileList);
+    if([fileList count] > 0) {
+        self.file = [fileList objectAtIndex:0];
+        [self postUploadProcess];
+    }
+}
+
+- (void) detailFailCallback:(NSString *) errorMessage {
+    [self removeSyncMaskIfAny];
 }
 
 @end

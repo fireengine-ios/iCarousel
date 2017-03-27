@@ -31,6 +31,8 @@
 #import "RawTypeFile.h"
 #import "GroupPhotoSectionView.h"
 #import "PhotosHeaderSyncView.h"
+#import "SyncMaskView.h"
+#import "FileDetailsDao.h"
 
 @class RevisitedGroupedPhotoView;
 
@@ -60,14 +62,16 @@
 @optional
 - (void) revisitedGroupedPhotoWantsToShowLoading;
 - (void) revisitedGroupedPhotoWantsToHideLoading;
+- (void) revisitedGroupedPhotoDidSelectAsset:(ALAsset *) assetSelected;
 
 @end
 
-@interface RevisitedGroupedPhotoView : UIView <FooterActionsDelegate, UITextFieldDelegate, CustomConfirmDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, RevisitedPhotoCollCellDelegate, RevisitedUploadingPhotoCollCellDelegate, AutoSyncOffHeaderDelegate, SyncManagerInfoDelegate, RawPhotoCollCellDelegate, GroupPhotoSectionViewDelegate, PhotosHeaderSyncViewDelegate> {
+@interface RevisitedGroupedPhotoView : UIView <FooterActionsDelegate, UITextFieldDelegate, CustomConfirmDelegate, UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, RevisitedPhotoCollCellDelegate, RevisitedUploadingPhotoCollCellDelegate, AutoSyncOffHeaderDelegate, SyncManagerInfoDelegate, RawPhotoCollCellDelegate, GroupPhotoSectionViewDelegate, PhotosHeaderSyncViewDelegate, SyncMaskViewDelegate> {
 }
 
 @property (nonatomic, weak) id<RevisitedGroupedPhotoDelegate> delegate;
 @property (nonatomic, strong) NSMutableArray *files;
+@property (nonatomic, strong) NSMutableArray *fileHashList;
 @property (nonatomic, strong) NSMutableArray *selectedFileList;
 @property (nonatomic, strong) NSMutableArray *selectedMetaFiles;
 @property (nonatomic, strong) NSMutableArray *selectedAssets;
@@ -79,6 +83,7 @@
 @property (nonatomic, strong) ElasticSearchDao *readDao;
 @property (nonatomic, strong) DeleteDao *deleteDao;
 @property (nonatomic, strong) AlbumAddPhotosDao *albumAddPhotosDao;
+@property (nonatomic, strong) FileDetailsDao *detailDao;
 
 @property (nonatomic, strong) FooterActionsMenuView *imgFooterActionMenu;
 @property (nonatomic) BOOL isSelectible;
@@ -93,6 +98,8 @@
 @property (nonatomic, strong) UICollectionView *collView;
 
 @property (nonatomic, strong) AutoSyncOffHeaderView *syncInfoHeaderView;
+@property (nonatomic, strong) SyncMaskView *lockMaskView;
+@property (nonatomic, strong) NSMutableArray *uploadingUuids;
 
 - (void) pullData;
 - (void)reloadContent:(BOOL)forDelete;

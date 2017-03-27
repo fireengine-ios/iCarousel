@@ -892,3 +892,5 @@
 "MsisdnEmailPlaceholderNew"="Phone or E-Mail";
 "MsisdnPlaceholderNew"="Phone";
 "EmailPlaceholderNew"="E-Mail";
+
+"UploadInProgressInDetail"="Upload in progress. Please try again later";

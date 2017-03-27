@@ -84,7 +84,7 @@
     }
     [sqImageView setNewStatus:selectFlag];
     
-    if(selectedFlag) {
+    if(selectFlag && selectedFlag) {
         [sqImageView manuallySelect];
     } else {
         [sqImageView manuallyDeselect];

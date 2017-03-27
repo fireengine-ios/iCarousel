@@ -48,4 +48,19 @@
 
 - (void) showPrintIcon;
 
+- (void) disableSyncButton;
+- (void) enableSyncButton;
+
+- (void) disableDeleteButton;
+- (void) enableDeleteButton;
+
+- (void) disableMoveButton;
+- (void) enableMoveButton;
+
+- (void) disablePrintButton;
+- (void) enablePrintButton;
+
+- (void) disableDownloadButton;
+- (void) enableDownloadButton;
+
 @end

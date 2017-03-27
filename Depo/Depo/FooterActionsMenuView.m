@@ -212,7 +212,8 @@
         }
         
         if(syncFlag) {
-            syncButton = [[CustomButton alloc] initWithFrame:CGRectMake(xOffset, (self.frame.size.height - height)/2, buttonWidth, height) withImageName:@"icon_bottom_sync.png" withTitleBelow:NSLocalizedString(@"SyncFooterTitle", @"") withFont:font withColor:whiteColor];
+            syncButton = [[CustomButton alloc] initWithFrame:CGRectMake(xOffset, (self.frame.size.height - height)/2, buttonWidth, height) withImageName:@"icon_bottom_sync_purple.png" withTitleBelow:NSLocalizedString(@"SyncFooterTitle", @"") withFont:font withColor:[Util UIColorForHexColor:@"737884"]];
+            syncButton.enabled = NO;
             [syncButton addTarget:self action:@selector(syncClicked) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:syncButton];
             xOffset += buttonWidth;
@@ -371,6 +372,79 @@
     }
 }
 
+- (void) disableSyncButton {
+    if(syncButton && syncButton.isEnabled) {
+        syncButton.enabled = NO;
+        [syncButton updateTopImage:@"icon_bottom_sync_purple.png"];
+        [syncButton changeTextColor:[Util UIColorForHexColor:@"737884"]];
+    }
+}
+
+- (void) enableSyncButton {
+    if(syncButton && !syncButton.isEnabled) {
+        syncButton.enabled = YES;
+        [syncButton updateTopImage:@"icon_bottom_sync.png"];
+        [syncButton changeTextColor:[UIColor whiteColor]];
+    }
+}
+
+- (void) disableDeleteButton {
+    if(deleteButton && deleteButton.isEnabled) {
+        deleteButton.enabled = NO;
+        [deleteButton updateTopImage:@"icon_bottom_delete_purple.png"];
+        [deleteButton changeTextColor:[Util UIColorForHexColor:@"737884"]];
+    }
+}
+
+- (void) enableDeleteButton {
+    if(deleteButton && !deleteButton.isEnabled) {
+        deleteButton.enabled = YES;
+        [deleteButton updateTopImage:@"white_delete_icon.png"];
+        [deleteButton changeTextColor:[UIColor whiteColor]];
+    }
+}
+
+- (void) disableMoveButton {
+    if(moveButton && moveButton.isEnabled) {
+        moveButton.enabled = NO;
+        moveButton.alpha = 0.4f;
+    }
+}
+
+- (void) enableMoveButton {
+    if(moveButton && !moveButton.isEnabled) {
+        moveButton.enabled = YES;
+        moveButton.alpha = 1.0f;
+    }
+}
+
+- (void) disablePrintButton {
+    if(printButton && printButton.isEnabled) {
+        printButton.enabled = NO;
+        printButton.alpha = 0.4f;
+    }
+}
+
+- (void) enablePrintButton {
+    if(printButton && !printButton.isEnabled) {
+        printButton.enabled = YES;
+        printButton.alpha = 1.0f;
+    }
+}
+
+- (void) disableDownloadButton {
+    if(downloadButton && downloadButton.isEnabled) {
+        downloadButton.enabled = NO;
+        downloadButton.alpha = 0.4f;
+    }
+}
+
+- (void) enableDownloadButton {
+    if(downloadButton && !downloadButton.isEnabled) {
+        downloadButton.enabled = YES;
+        downloadButton.alpha = 1.0f;
+    }
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.

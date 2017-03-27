@@ -21,12 +21,14 @@
 #import "CustomConfirmView.h"
 #import "ConfirmRemoveModalController.h"
 #import "VideoView.h"
+#import "SyncMaskView.h"
+#import "FileDetailsDao.h"
 
 @protocol ImagePreviewDelegate <NSObject>
 - (void) previewedImageWasDeleted:(MetaFile *) deletedFile;
 @end
 
-@interface ImagePreviewController : MyViewController <UIScrollViewDelegate, FileDetailFooterDelegate, CustomConfirmDelegate, ConfirmRemoveDelegate, VideoViewDelegate> {
+@interface ImagePreviewController : MyViewController <UIScrollViewDelegate, FileDetailFooterDelegate, CustomConfirmDelegate, ConfirmRemoveDelegate, VideoViewDelegate, UploadManagerDelegate, SyncMaskViewDelegate> {
     UIImageView *imgView;
     FileDetailFooter *footer;
     CustomButton *moreButton;
@@ -43,10 +45,17 @@
     int pagingEnabledFlag;
     MyNavigationController *printNav;
     //    BOOL refFromAlbumFlag;
+    
+    SyncMaskView *syncMaskView;
+    BOOL uploadNeeded;
+    NextProcessType postProcess;
+    NSString *uploadingUuid;
+    FileDetailsDao *detailDao;
 }
 
 @property (nonatomic, weak) id<ImagePreviewDelegate> delegate;
 @property (nonatomic, strong) MetaFile *file;
+@property (nonatomic, strong) ALAsset *asset;
 @property (nonatomic, strong) PhotoAlbum *album;
 @property (nonatomic, strong) NSMutableArray *files;
 @property int cursor;
@@ -57,6 +66,6 @@
 - (id)initWithFiles:(NSArray *) _files withImage:(MetaFile *) _file withListOffset:(int) offset isFileInsertedToBegining:(BOOL)isFileInsertedTwice;
 - (id) initWithFiles:(NSArray *)_files withImage:(MetaFile *)_file withListOffset:(int)offset printEnabled:(BOOL) printEnabledFlag isFileInsertedToBegining:(BOOL)isFileInsertedTwice;
 - (id) initWithFiles:(NSArray *)_files withImage:(MetaFile *)_file withListOffset:(int)offset printEnabled:(BOOL) printEnabledFlag pagingEnabled:(BOOL) pagingEnabled isFileInsertedToBegining:(BOOL)isFileInsertedTwice;
-
+- (id)initWithAsset:(ALAsset *) _asset;
 
 @end

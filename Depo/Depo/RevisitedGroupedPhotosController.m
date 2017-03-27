@@ -364,6 +364,13 @@
     self.title = pageTitle;
 }
 
+- (void) revisitedGroupedPhotoDidSelectAsset:(ALAsset *)assetSelected {
+    ImagePreviewController *detail = [[ImagePreviewController alloc] initWithAsset:assetSelected];
+    MyNavigationController *modalNav = [[MyNavigationController alloc] initWithRootViewController:detail];
+    detail.nav = modalNav;
+    [APPDELEGATE.base presentViewController:modalNav animated:YES completion:nil];
+}
+
 - (void) closePrintPage {
     [printNav dismissViewControllerAnimated:YES completion:nil];
 }
@@ -380,7 +387,8 @@
     
     for (MetaFile *file in self.fileListToShare) {
         NSString *endPoint = file.detail.thumbLargeUrl;
-        if (originalSize) {
+        //TODO !endPoint kısmını check et. Upload sonrası thumbLargeUrl gelmiyor. O yüzden eklendi.
+        if (originalSize || !endPoint) {
             endPoint = file.tempDownloadUrl;
         }
         if (file.contentType == ContentTypeVideo) {

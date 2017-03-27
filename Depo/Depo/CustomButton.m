@@ -149,9 +149,9 @@
         [self addSubview:titleLabel];
 
         UIImage *bgImg = [UIImage imageNamed:imageName];
-        UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake((self.frame.size.width - bgImg.size.width)/2, ((self.frame.size.height - titleLabel.frame.size.height) - bgImg.size.height)/2, bgImg.size.width, bgImg.size.height)];
-        bgImgView.image = bgImg;
-        [self addSubview:bgImgView];
+        topImgView = [[UIImageView alloc] initWithFrame:CGRectMake((self.frame.size.width - bgImg.size.width)/2, ((self.frame.size.height - titleLabel.frame.size.height) - bgImg.size.height)/2, bgImg.size.width, bgImg.size.height)];
+        topImgView.image = bgImg;
+        [self addSubview:topImgView];
         
     }
     return self;
@@ -163,6 +163,10 @@
 
 - (void) updateImage:(NSString *) newImgName {
     [self setImage:[UIImage imageNamed:newImgName] forState:UIControlStateNormal];
+}
+
+- (void) updateTopImage:(NSString *) newImgName {
+    topImgView.image = [UIImage imageNamed:newImgName];
 }
 
 /*

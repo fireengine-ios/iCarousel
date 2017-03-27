@@ -21,14 +21,12 @@
 @synthesize locationInfo;
 @synthesize customTitle;
 @synthesize fileInfo;
-@synthesize fileHashList;
 @synthesize groupKey;
 @synthesize sequence;
 @synthesize groupType;
 
 - (id) init {
     if(self = [super init]) {
-        self.fileHashList = [[NSMutableArray alloc] init];
     }
     return self;
 }

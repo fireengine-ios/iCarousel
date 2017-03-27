@@ -10,6 +10,7 @@
 
 @interface CustomButton : UIButton {
     UILabel *titleLabel;
+    UIImageView *topImgView;
 }
 
 - (id)initWithFrame:(CGRect)frame withImageName:(NSString *) imageName;
@@ -25,4 +26,6 @@
 - (void) updateImage:(NSString *) newImgName;
 - (id)initWithFrame:(CGRect)frame withImageName:(NSString *) imageName withTitle:(NSString *) title withFont:(UIFont *) font withColor:(UIColor *) textColor isMultipleLine:(BOOL) multiple ;
 - (id)initWithFrame:(CGRect)frame withImageName:(NSString *) imageName withTitleBelow:(NSString *) title withFont:(UIFont *) font withColor:(UIColor *) textColor;
+- (void) updateTopImage:(NSString *) newImgName;
+
 @end

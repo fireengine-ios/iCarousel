@@ -16,6 +16,8 @@
 - (void) fileDetailFooterDidTriggerRemoveFromAlbum;
 - (void) fileDetailFooterDidTriggerShare;
 - (void) fileDetailFooterDidTriggerPrint;
+@optional
+- (void) fileDetailFooterDidTriggerSync;
 @end
 
 @interface FileDetailFooter : UIView
@@ -26,10 +28,16 @@
 @property (nonatomic, strong) CustomButton *downloadButton;
 @property (nonatomic, strong) CustomButton *removeButton;
 @property (nonatomic, strong) CustomButton *printButton;
+@property (nonatomic, strong) CustomButton *syncButton;
 @property (nonatomic, strong) UIView *separatorView;
+@property (nonatomic, strong) UIView *maskView;
 
 - (id)initWithFrame:(CGRect)frame  withAlbum:(PhotoAlbum*)album;
 - (id)initWithFrame:(CGRect)frame withPrintEnabled:(BOOL) printEnabledFlag withAlbum:(PhotoAlbum*)album;
+- (id)initWithFrame:(CGRect)frame withPrintEnabled:(BOOL) printEnabledFlag withDeleteEnabled:(BOOL) deleteEnabledFlag withSyncEnabled:(BOOL) syncEnabledFlag withDownloadEnabled:(BOOL) downloadEnabledFlag withAlbum:(PhotoAlbum*)album;
 - (void) updateInnerViews;
+
+- (void) showMaskWithMessage:(NSString *) maskMsg;
+- (void) hideMask;
 
 @end

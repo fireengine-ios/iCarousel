@@ -52,6 +52,7 @@
     NSDate *lastCheckedDate;
     
     PhotosHeaderSyncView *syncView;
+    NextProcessType postUploadProcessType;
 }
 @end
 
@@ -59,6 +60,7 @@
 
 @synthesize delegate;
 @synthesize files;
+@synthesize fileHashList;
 @synthesize selectedFileList;
 @synthesize selectedMetaFiles;
 @synthesize selectedAssets;
@@ -79,6 +81,10 @@
 @synthesize collView;
 
 @synthesize syncInfoHeaderView;
+@synthesize lockMaskView;
+
+@synthesize detailDao;
+@synthesize uploadingUuids;
 
 - (id) initWithFrame:(CGRect)frame {
     if(self = [super initWithFrame:frame]) {
@@ -101,6 +107,11 @@
         albumAddPhotosDao.successMethod = @selector(photosAddedSuccessCallback);
         albumAddPhotosDao.failMethod = @selector(photosAddedFailCallback:);
         
+        detailDao = [[FileDetailsDao alloc] init];
+        detailDao.delegate = self;
+        detailDao.successMethod = @selector(detailSuccessCallback:);
+        detailDao.failMethod = @selector(detailFailCallback:);
+
         tableUpdateCounter = 0;
         listOffset = 0;
         photoCount = 0;
@@ -117,9 +128,11 @@
         
         groups = [[NSMutableArray alloc] init];
         files = [[NSMutableArray alloc] init];
+        fileHashList = [[NSMutableArray alloc] init];
         selectedFileList = [[NSMutableArray alloc] init];
         selectedMetaFiles = [[NSMutableArray alloc] init];
         selectedAssets = [[NSMutableArray alloc] init];
+        uploadingUuids = [[NSMutableArray alloc] init];
         
         BOOL isSyncHeaderVisible = NO;
         BOOL isSyncProgressVisible = NO;
@@ -300,6 +313,7 @@
         
         [groups removeAllObjects];
         [files removeAllObjects];
+        [fileHashList removeAllObjects];
         
         [self.collView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
         
@@ -367,7 +381,7 @@
     if(initialRow != nil) {
         [initialRow.fileInfo addObjectsFromArray:group.fileInfo];
         initialRow.fileInfo = [self sortRawArrayByDateDesc:initialRow.fileInfo];
-        [initialRow.fileHashList addObjectsFromArray:group.fileHashList];
+//        [initialRow.fileHashList addObjectsFromArray:group.fileHashList];
         [self.groups replaceObjectAtIndex:counter withObject:initialRow];
     } else {
         group.fileInfo = [self sortRawArrayByDateDesc:group.fileInfo];
@@ -411,10 +425,10 @@
 - (void) setToUnselectiblePriorToRefresh {
     isSelectible = NO;
     [self createRefreshControl];
-    [selectedFileList removeAllObjects];
-    [selectedSectionNames removeAllObjects];
-    [selectedMetaFiles removeAllObjects];
-    [selectedAssets removeAllObjects];
+//    [selectedFileList removeAllObjects];
+//    [selectedSectionNames removeAllObjects];
+//    [selectedMetaFiles removeAllObjects];
+//    [selectedAssets removeAllObjects];
     
     if(imgFooterActionMenu) {
         [imgFooterActionMenu removeFromSuperview];
@@ -452,7 +466,7 @@
                     RawTypeFile *rawFile = [self rawFileForFile:row];
                     [newGroup.fileInfo addObject:rawFile];
                     if(rawFile.hashRef) {
-                        [newGroup.fileHashList addObject:rawFile.hashRef];
+                        [fileHashList addObject:rawFile.hashRef];
                     }
                     newGroup.sequence = groupSequence;
                     newGroup.groupKey = dateStr;
@@ -465,7 +479,7 @@
                         RawTypeFile *rawFile = [self rawFileForFile:row];
                         [currentGroup.fileInfo addObject:rawFile];
                         if(rawFile.hashRef) {
-                            [currentGroup.fileHashList addObject:rawFile.hashRef];
+                            [fileHashList addObject:rawFile.hashRef];
                         }
                     } else {
                         FileInfoGroup *newGroup = [[FileInfoGroup alloc] init];
@@ -476,12 +490,18 @@
                         RawTypeFile *rawFile = [self rawFileForFile:row];
                         [newGroup.fileInfo addObject:rawFile];
                         if(rawFile.hashRef) {
-                            [newGroup.fileHashList addObject:rawFile.hashRef];
+                            [fileHashList addObject:rawFile.hashRef];
                         }
                         newGroup.sequence = groupSequence;
                         newGroup.groupKey = dateStr;
                         [tempDict setObject:newGroup forKey:dateStr];
                         groupSequence ++;
+                    }
+                }
+                if(isSelectible && [selectedSectionNames containsObject:dateStr]) {
+                    if(![selectedFileList containsObject:row.uuid]) {
+                        [selectedFileList addObject:row.uuid];
+                        [selectedMetaFiles addObject:row];
                     }
                 }
             }
@@ -767,14 +787,14 @@
 - (void) footerActionMenuDidSelectDownload:(FooterActionsMenuView *) menu {
     if([selectedMetaFiles count] == 0)
         return;
-
+    
     [delegate revisitedGroupedPhoto:self downloadSelectedFiles:selectedMetaFiles];
 }
 
 - (void) footerActionMenuDidSelectDelete:(FooterActionsMenuView *) menu {
     if([selectedMetaFiles count] == 0)
         return;
-
+    
     IGLog(@"RevisitedGroupedPhotoView footerActionMenuDidSelectDelete called");
     if([CacheUtil showConfirmDeletePageFlag]) {
         IGLog(@"RevisitedGroupedPhotoView footerActionMenuDidSelectDelete CacheUtil showConfirmDeletePageFlag returns YES");
@@ -807,42 +827,48 @@
     }
 }
 
-- (void) footerActionMenuDidSelectSync:(FooterActionsMenuView *) menu {
-    if([selectedAssets count] > 0) {
-        for(ALAsset *row in selectedAssets) {
-            NSString *mimeType = (__bridge_transfer NSString*)UTTypeCopyPreferredTagWithClass
-            ((__bridge CFStringRef)[row.defaultRepresentation UTI], kUTTagClassMIMEType);
-            
-            UploadRef *ref = [[UploadRef alloc] init];
-            ref.fileName = row.defaultRepresentation.filename;
-            ref.filePath = [row.defaultRepresentation.url absoluteString];
-            ref.localHash = [SyncUtil md5StringOfString:[row.defaultRepresentation.url absoluteString]];
-            ref.mimeType = mimeType;
-            if ([[row valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
-                ref.contentType = ContentTypeVideo;
-            } else {
-                ref.contentType = ContentTypePhoto;
-            }
-            NSDictionary *metadataDict = [row.defaultRepresentation metadata];
-            if(metadataDict) {
-                NSDictionary *tiffDict = [metadataDict objectForKey:@"{TIFF}"];
-                if(tiffDict) {
-                    NSString *softwareVal = [tiffDict objectForKey:@"Software"];
-                    if(softwareVal) {
-                        if([SPECIAL_LOCAL_ALBUM_NAMES containsObject:softwareVal]) {
-                            ref.referenceFolderName = softwareVal;
-                        }
+- (void) startUploadForSelectedAssets {
+    for(ALAsset *row in selectedAssets) {
+        NSString *mimeType = (__bridge_transfer NSString*)UTTypeCopyPreferredTagWithClass
+        ((__bridge CFStringRef)[row.defaultRepresentation UTI], kUTTagClassMIMEType);
+        
+        UploadRef *ref = [[UploadRef alloc] init];
+        ref.fileName = row.defaultRepresentation.filename;
+        ref.filePath = [row.defaultRepresentation.url absoluteString];
+        ref.localHash = [SyncUtil md5StringOfString:[row.defaultRepresentation.url absoluteString]];
+        ref.mimeType = mimeType;
+        if ([[row valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
+            ref.contentType = ContentTypeVideo;
+        } else {
+            ref.contentType = ContentTypePhoto;
+        }
+        NSDictionary *metadataDict = [row.defaultRepresentation metadata];
+        if(metadataDict) {
+            NSDictionary *tiffDict = [metadataDict objectForKey:@"{TIFF}"];
+            if(tiffDict) {
+                NSString *softwareVal = [tiffDict objectForKey:@"Software"];
+                if(softwareVal) {
+                    if([SPECIAL_LOCAL_ALBUM_NAMES containsObject:softwareVal]) {
+                        ref.referenceFolderName = softwareVal;
                     }
                 }
             }
-            ref.ownerPage = UploadStarterPagePhotos;
-            ref.folderUuid = APPDELEGATE.session.user.mobileUploadFolderUuid;
-            ref.autoSyncFlag = YES; //TODO
-            
-            UploadManager *manager = [[UploadManager alloc] initWithUploadInfo:ref];
-            [manager configureUploadAsset:ref.filePath atFolder:nil];
-            [[UploadQueue sharedInstance] addNewUploadTask:manager];
         }
+        ref.ownerPage = UploadStarterPagePhotos;
+        ref.folderUuid = APPDELEGATE.session.user.mobileUploadFolderUuid;
+        ref.autoSyncFlag = YES; //TODO
+        
+        UploadManager *manager = [[UploadManager alloc] initWithUploadInfo:ref];
+        [manager configureUploadAsset:ref.filePath atFolder:nil];
+        [uploadingUuids addObject:manager.uploadRef.fileUuid];
+        [[UploadQueue sharedInstance] addNewUploadTask:manager];
+    }
+}
+
+- (void) footerActionMenuDidSelectSync:(FooterActionsMenuView *) menu {
+    if([selectedAssets count] > 0) {
+        [self startUploadForSelectedAssets];
+        postUploadProcessType = NextProcessTypeRefresh;
         
         if(syncView == nil) {
             UploadManager *activeManRef = [[UploadQueue sharedInstance] activeManager];
@@ -864,29 +890,56 @@
     }
 }
 
+- (void) addLockMask {
+    if(!lockMaskView) {
+        lockMaskView = [[SyncMaskView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height)];
+        lockMaskView.delegate = self;
+        [APPDELEGATE.window addSubview:lockMaskView];
+    }
+}
+
+- (void) removeLockMask {
+    if(lockMaskView) {
+        [lockMaskView removeFromSuperview];
+    }
+}
+
+- (void) syncMaskViewShouldClose {
+    [self removeLockMask];
+    [[UploadQueue sharedInstance] cancelAllUploads];
+    //TODO check if pullData needed...
+}
+
 - (void) footerActionMenuDidSelectMove:(FooterActionsMenuView *) menu {
-    if([selectedMetaFiles count] == 0)
-        return;
-    [delegate revisitedGroupedPhotoShowPhotoAlbums:self];
-    //[APPDELEGATE.base showPhotoAlbums];
+    if([selectedAssets count] > 0) {
+        [self addLockMask];
+        postUploadProcessType = NextProcessTypeMove;
+        [self startUploadForSelectedAssets];
+    } else {
+        [delegate revisitedGroupedPhotoShowPhotoAlbums:self];
+        //[APPDELEGATE.base showPhotoAlbums];
+    }
 }
 
 - (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {
-    if([selectedMetaFiles count] == 0)
-        return;
-    
-    if ([delegate respondsToSelector:@selector(revisitedGroupedPhoto:triggerShareForFiles:withUUID:)]) {
-        [delegate revisitedGroupedPhoto:self triggerShareForFiles:selectedMetaFiles withUUID:selectedFileList];
-        return;
+    if([selectedAssets count] > 0) {
+        [self addLockMask];
+        postUploadProcessType = NextProcessTypeShare;
+        [self startUploadForSelectedAssets];
+    } else {
+        if ([delegate respondsToSelector:@selector(revisitedGroupedPhoto:triggerShareForFiles:withUUID:)]) {
+            [delegate revisitedGroupedPhoto:self triggerShareForFiles:selectedMetaFiles withUUID:selectedFileList];
+            return;
+        }
+        [delegate revisitedGroupedPhoto:self triggerShareForFiles:selectedMetaFiles];
+        // [APPDELEGATE.base triggerShareForFiles:selectedFileList];
     }
-    [delegate revisitedGroupedPhoto:self triggerShareForFiles:selectedMetaFiles];
-    // [APPDELEGATE.base triggerShareForFiles:selectedFileList];
 }
 
 - (void) footerActionMenuDidSelectPrint:(FooterActionsMenuView *)menu {
     if([selectedMetaFiles count] == 0)
         return;
-
+    
     [delegate revisitedGroupedPhotoShouldPrintWithFileList:selectedMetaFiles];
 }
 
@@ -969,6 +1022,10 @@
             }];
         }
         [delegate revisitedGroupedPhotoDidFinishUpdate];
+        if([uploadingUuids count] > 0) {
+            [detailDao requestFileDetails:uploadingUuids];
+            [delegate revisitedGroupedPhotoWantsToShowLoading];
+        }
     }
 }
 
@@ -1149,19 +1206,15 @@
             NSString *rowLocalHash = [SyncUtil md5StringOfString:[row.defaultRepresentation.url absoluteString]];
             if([[tempDict allKeys] count] == 0) {
                 FileInfoGroup *newGroup = [[FileInfoGroup alloc] init];
-                FileInfoGroup *legacyGroup = [self groupByKey:dateStr];
-                if(legacyGroup) {
-                    newGroup.fileHashList = legacyGroup.fileHashList;
-                }
                 newGroup.customTitle = dateStr;
                 newGroup.refDate = assetDate;
                 newGroup.locationInfo = @"";
                 newGroup.fileInfo = [[NSMutableArray alloc] init];
-                if(![newGroup.fileHashList containsObject:rowLocalHash]) {
+                if(![fileHashList containsObject:rowLocalHash]) {
                     RawTypeFile *rawFile = [self rawFileForAsset:row];
                     [newGroup.fileInfo addObject:rawFile];
                     if(rawFile.hashRef) {
-                        [newGroup.fileHashList addObject:rawFile.hashRef];
+                        [fileHashList addObject:rawFile.hashRef];
                     }
                 }
                 newGroup.sequence = groupSequence;
@@ -1172,28 +1225,24 @@
             } else {
                 FileInfoGroup *currentGroup = [tempDict objectForKey:dateStr];
                 if(currentGroup != nil) {
-                    if(![currentGroup.fileHashList containsObject:rowLocalHash]) {
+                    if(![fileHashList containsObject:rowLocalHash]) {
                         RawTypeFile *rawFile = [self rawFileForAsset:row];
                         [currentGroup.fileInfo addObject:rawFile];
                         if(rawFile.hashRef) {
-                            [currentGroup.fileHashList addObject:rawFile.hashRef];
+                            [fileHashList addObject:rawFile.hashRef];
                         }
                     }
                 } else {
                     FileInfoGroup *newGroup = [[FileInfoGroup alloc] init];
-                    FileInfoGroup *legacyGroup = [self groupByKey:dateStr];
-                    if(legacyGroup) {
-                        newGroup.fileHashList = legacyGroup.fileHashList;
-                    }
                     newGroup.customTitle = dateStr;
                     newGroup.refDate = assetDate;
                     newGroup.locationInfo = @"";
                     newGroup.fileInfo = [[NSMutableArray alloc] init];
-                    if(![newGroup.fileHashList containsObject:rowLocalHash]) {
+                    if(![fileHashList containsObject:rowLocalHash]) {
                         RawTypeFile *rawFile = [self rawFileForAsset:row];
                         [newGroup.fileInfo addObject:rawFile];
                         if(rawFile.hashRef) {
-                            [newGroup.fileHashList addObject:rawFile.hashRef];
+                            [fileHashList addObject:rawFile.hashRef];
                         }
                     }
                     newGroup.sequence = groupSequence;
@@ -1238,7 +1287,7 @@
     result.rawType = RawFileTypeClient;
     result.refDate = [assetRef valueForProperty:ALAssetPropertyDate];
     result.hashRef = [SyncUtil md5StringOfString:[assetRef.defaultRepresentation.url absoluteString]];
-//    NSLog(@"LOCAL META HASH: %@", result.hashRef);
+    NSLog(@"LOCAL META HASH: %@", result.hashRef);
     return result;
 }
 
@@ -1295,6 +1344,8 @@
         photoCount++;
         [imgFooterActionMenu showPrintIcon];
     }
+    
+    [self toggleFooterRemoteButtons];
 }
 
 - (void) rawPhotoCollCellImageWasUnmarkedForFile:(MetaFile *) fileSelected {
@@ -1315,6 +1366,8 @@
     if (photoCount == 0) {
         [imgFooterActionMenu hidePrintIcon];
     }
+    
+    [self toggleFooterRemoteButtons];
 }
 
 - (void) rawPhotoCollCellImageUploadFinishedForFile:(NSString *) fileSelectedUuid {
@@ -1341,6 +1394,7 @@
 }
 
 - (void) rawPhotoCollCellImageWasSelectedForAsset:(ALAsset *) fileSelected {
+    [delegate revisitedGroupedPhotoDidSelectAsset:fileSelected];
 }
 
 - (void) rawPhotoCollCellImageWasMarkedForAsset:(ALAsset *) fileSelected {
@@ -1362,6 +1416,31 @@
     
     photoCount++;
     [imgFooterActionMenu showPrintIcon];
+    
+    [self toggleFooterSyncButton];
+    [self toggleFooterRemoteButtons];
+}
+
+- (void) toggleFooterSyncButton {
+    if([selectedAssets count] > 0) {
+        [imgFooterActionMenu enableSyncButton];
+    } else {
+        [imgFooterActionMenu disableSyncButton];
+    }
+}
+
+- (void) toggleFooterRemoteButtons {
+    if([selectedMetaFiles count] > 0) {
+        [imgFooterActionMenu enableDeleteButton];
+        [imgFooterActionMenu enableMoveButton];
+        [imgFooterActionMenu enablePrintButton];
+        [imgFooterActionMenu enableDownloadButton];
+    } else {
+        [imgFooterActionMenu disableDeleteButton];
+        [imgFooterActionMenu disableMoveButton];
+        [imgFooterActionMenu disablePrintButton];
+        [imgFooterActionMenu disableDownloadButton];
+    }
 }
 
 - (void) rawPhotoCollCellImageWasUnmarkedForAsset:(ALAsset *) fileSelected {
@@ -1385,6 +1464,9 @@
     if (photoCount == 0) {
         [imgFooterActionMenu hidePrintIcon];
     }
+    
+    [self toggleFooterSyncButton];
+    [self toggleFooterRemoteButtons];
 }
 
 - (void) rawPhotoCollCellImageUploadFinishedForAsset:(ALAsset *) fileSelected {
@@ -1447,6 +1529,43 @@
 - (void) groupPhotoSectionViewCheckboxUnchecked:(NSString *) titleVal {
     if([selectedSectionNames containsObject:titleVal]) {
         [selectedSectionNames removeObject:titleVal];
+        
+        NSArray *unselectedGroupList = nil;
+        int index = 0;
+        for(FileInfoGroup *row in self.groups) {
+            if([row.customTitle isEqualToString:titleVal]) {
+                unselectedGroupList = row.fileInfo;
+                break;
+            }
+            index ++;
+        }
+        if(unselectedGroupList != nil) {
+            for(id rowItem in unselectedGroupList) {
+                if([rowItem isKindOfClass:[RawTypeFile class]]) {
+                    RawTypeFile *castedRow = (RawTypeFile *) rowItem;
+                    if (castedRow.rawType == RawFileTypeDepo) {
+                        if([selectedFileList containsObject:castedRow.fileRef.uuid]) {
+                            [selectedFileList removeObject:castedRow.fileRef.uuid];
+                            [selectedMetaFiles removeObject:castedRow.fileRef];
+                        }
+                    } else {
+                        NSString *assetUrl = [castedRow.assetRef.defaultRepresentation.url absoluteString];
+                        if([selectedFileList containsObject:assetUrl]) {
+                            [selectedFileList removeObject:assetUrl];
+                            [selectedAssets removeObject:castedRow.assetRef];
+                        }
+                    }
+                }
+            }
+            if([selectedFileList count] > 0) {
+                [self showImgFooterMenu];
+                [delegate revisitedGroupedPhotoChangeTitleTo:[NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]]];
+            } else {
+                [self hideImgFooterMenu];
+                [delegate revisitedGroupedPhotoChangeTitleTo:NSLocalizedString(@"SelectFilesTitle", @"")];
+            }
+        }
+        [self.collView reloadSections:[NSIndexSet indexSetWithIndex:index]];
     }
 }
 
@@ -1483,6 +1602,40 @@
             }];
         }
     }
+}
+
+- (void) detailSuccessCallback:(NSArray *) fileList {
+    NSLog(@"Resulting file list: %@", fileList);
+    [self removeLockMask];
+    [delegate revisitedGroupedPhotoWantsToHideLoading];
+    [uploadingUuids removeAllObjects];
+    if([fileList count] > 0) {
+        for(MetaFile *file in fileList) {
+            if(![selectedFileList containsObject:file.uuid]) {
+                [selectedFileList addObject:file.uuid];
+                [selectedMetaFiles addObject:file];
+            }
+        }
+        if(postUploadProcessType == NextProcessTypeShare) {
+            if ([delegate respondsToSelector:@selector(revisitedGroupedPhoto:triggerShareForFiles:withUUID:)]) {
+                [delegate revisitedGroupedPhoto:self triggerShareForFiles:selectedMetaFiles withUUID:selectedFileList];
+                return;
+            }
+            [delegate revisitedGroupedPhoto:self triggerShareForFiles:selectedMetaFiles];
+            // [APPDELEGATE.base triggerShareForFiles:selectedFileList];
+        } else if(postUploadProcessType == NextProcessTypeMove) {
+            [delegate revisitedGroupedPhotoShowPhotoAlbums:self];
+            //[APPDELEGATE.base showPhotoAlbums];
+        } else if(postUploadProcessType == NextProcessTypeRefresh) {
+            //TODO is pullData needed?
+        }
+    }
+}
+
+- (void) detailFailCallback:(NSString *) errorMessage {
+    [self removeLockMask];
+    [delegate revisitedGroupedPhotoWantsToHideLoading];
+    [uploadingUuids removeAllObjects];
 }
 
 @end
