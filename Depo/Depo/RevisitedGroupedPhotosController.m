@@ -623,6 +623,10 @@
     [self reloadListsForMetaFile:deletedFile];
 }
 
+- (void) previewedImageWasSynced {
+    [self reloadListsForMetaFile:nil];
+}
+
 - (void) previewedVideoWasDeleted:(MetaFile *) deletedFile {
     [self reloadListsForMetaFile:deletedFile];
 }

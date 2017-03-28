@@ -685,6 +685,7 @@
 
 - (void) fileDetailFooterDidTriggerSync {
     if(uploadNeeded && self.asset) {
+        postProcess = NextProcessTypeNone;
         [self startInitialUpload];
     }
 }
@@ -1361,7 +1362,6 @@
         
         [self presentViewController:printNav animated:YES completion:nil];
     }
-    
 }
 
 - (void) syncMaskViewShouldClose {
@@ -1373,6 +1373,7 @@
 
 - (void) detailSuccessCallback:(NSArray *) fileList {
     [self removeSyncMaskIfAny];
+    [delegate previewedImageWasSynced];
     NSLog(@"Resulting file list: %@", fileList);
     if([fileList count] > 0) {
         self.file = [fileList objectAtIndex:0];
@@ -1382,6 +1383,7 @@
 
 - (void) detailFailCallback:(NSString *) errorMessage {
     [self removeSyncMaskIfAny];
+    [delegate previewedImageWasSynced];
 }
 
 @end

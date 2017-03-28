@@ -1023,20 +1023,25 @@
     if([[UploadQueue sharedInstance] remainingCount] == 0) {
         IGLog(@"At RevisitedGroupedPhotoView autoQueueFinished pullData will be called");
         
-        if(syncView) {
-            [syncView removeFromSuperview];
-        }
-        if(collView.frame.origin.y > 0 && !syncInfoHeaderView) {
-            [UIView animateWithDuration:0.4 animations:^{
-                collView.frame = CGRectMake(collView.frame.origin.x, collView.frame.origin.y - 50, collView.frame.size.width, collView.frame.size.height + 50);
-            }];
-        }
-        if([uploadingUuids count] > 0) {
-            [detailDao requestFileDetails:uploadingUuids];
-            [delegate revisitedGroupedPhotoWantsToShowLoading];
-        } else {
-            [delegate revisitedGroupedPhotoDidFinishUpdate];
-        }
+        //refresh is postponed for 2 secs for the server to generate thumbnails.. will revisit here
+        [self performSelector:@selector(postQueueEmpty) withObject:nil afterDelay:2.0f];
+    }
+}
+
+- (void) postQueueEmpty {
+    if(syncView) {
+        [syncView removeFromSuperview];
+    }
+    if(collView.frame.origin.y > 0 && !syncInfoHeaderView) {
+        [UIView animateWithDuration:0.4 animations:^{
+            collView.frame = CGRectMake(collView.frame.origin.x, collView.frame.origin.y - 50, collView.frame.size.width, collView.frame.size.height + 50);
+        }];
+    }
+    if([uploadingUuids count] > 0) {
+        [detailDao requestFileDetails:uploadingUuids];
+        [delegate revisitedGroupedPhotoWantsToShowLoading];
+    } else {
+        [delegate revisitedGroupedPhotoDidFinishUpdate];
     }
 }
 

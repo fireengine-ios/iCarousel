@@ -26,6 +26,8 @@
 
 @protocol ImagePreviewDelegate <NSObject>
 - (void) previewedImageWasDeleted:(MetaFile *) deletedFile;
+@optional
+- (void) previewedImageWasSynced;
 @end
 
 @interface ImagePreviewController : MyViewController <UIScrollViewDelegate, FileDetailFooterDelegate, CustomConfirmDelegate, ConfirmRemoveDelegate, VideoViewDelegate, UploadManagerDelegate, SyncMaskViewDelegate> {
