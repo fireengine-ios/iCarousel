@@ -131,8 +131,6 @@
         self.asset = _asset;
         
         self.view.backgroundColor = [Util UIColorForHexColor:@"191e24"];
-        self.view.autoresizesSubviews = YES;
-        self.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         
         pagingEnabledFlag = NO;
         uploadNeeded = YES;
@@ -151,7 +149,7 @@
         UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:customBackButton];
         self.navigationItem.leftBarButtonItem = backButton;
         
-        UIImageView *assetImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-60)];
+        assetImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-60)];
         assetImgView.contentMode = UIViewContentModeScaleAspectFit;
         assetImgView.image = [UIImage imageWithCGImage:self.asset.defaultRepresentation.fullScreenImage];
         [self.view addSubview:assetImgView];
@@ -300,6 +298,13 @@
         return vid;
     } else {
         return nil;
+    }
+}
+
+- (void) resizeLocalPhotoWithGap:(CGFloat)gap viewFrame:(CGRect)frame {
+    if(assetImgView) {
+        CGRect assetImgFrame = CGRectMake(-(gap / 2.0f), frame.origin.y, frame.size.width + gap, frame.size.height);
+        assetImgView.frame = assetImgFrame;
     }
 }
 
@@ -706,9 +711,7 @@
         if (self.album) {
             list = @[[NSNumber numberWithInt:MoreMenuTypeVideoDetail], [NSNumber numberWithInt:MoreMenuTypeShare], self.file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDownloadImage], [NSNumber numberWithInt:MoreMenuTypeRemoveFromAlbum], [NSNumber numberWithInt:MoreMenuTypeSetCoverPhoto]] ;
         }
-    }
-    
-    if(self.asset) {
+    } else if(self.asset) {
         list = @[[NSNumber numberWithInt:MoreMenuTypeImageDetail]];
     }
     
@@ -1180,14 +1183,18 @@
 
 - (void)orientationChanged:(NSNotification *)notification {
     
-    [UIView beginAnimations:@"" context:NULL];
-    if(self.moreMenuView) {
-        [super dismissMoreMenu];
-        [self moreClicked];
-    }
-    
-    [self mirrorRotation:[[UIApplication sharedApplication] statusBarOrientation]];
-    [UIView commitAnimations];
+    __block BOOL reorientingMoreMenu = NO;
+    [UIView animateWithDuration:0.5f animations:^{
+        if(self.moreMenuView) {
+            [super dismissMoreMenu];
+            reorientingMoreMenu = YES;
+        }
+        [self mirrorRotation:[[UIApplication sharedApplication] statusBarOrientation]];
+    } completion:^(BOOL finished) {
+        if(reorientingMoreMenu) {
+            [self moreClicked];
+        }
+    }];
 }
 
 - (void) mirrorRotation:(UIInterfaceOrientation) orientation {
@@ -1219,6 +1226,8 @@
         // exit full screeen without resizing mainScroll
         [self.navigationController setNavigationBarHidden:false];
         _isFullScreen = false;
+        
+        [self resizeLocalPhotoWithGap:30 viewFrame:frame];
         
         // resize mainScroll
         [self resizeMainScrollWithGap:30 viewFrame:frame];
@@ -1322,8 +1331,12 @@
 - (void) uploadManagerDidFinishUploadingForAsset:(NSString *) assetUrl withFinalFile:(MetaFile *) finalFile {
     uploadNeeded = NO;
     if(uploadingUuid) {
-        [detailDao requestFileDetails:@[uploadingUuid]];
+        [self performSelector:@selector(postUploadCheck) withObject:nil afterDelay:2.0f];
     }
+}
+
+- (void) postUploadCheck {
+    [detailDao requestFileDetails:@[uploadingUuid]];
 }
 
 - (void) uploadManagerDidFailUploadingForAsset:(NSString *) assetUrl {
@@ -1376,7 +1389,16 @@
     [delegate previewedImageWasSynced];
     NSLog(@"Resulting file list: %@", fileList);
     if([fileList count] > 0) {
-        self.file = [fileList objectAtIndex:0];
+        MetaFile *fileSynced = [fileList objectAtIndex:0];
+        self.file = fileSynced;
+
+        CGRect currentFooterRect = footer.frame;
+        [footer removeFromSuperview];
+
+        footer = [[FileDetailFooter alloc] initWithFrame:currentFooterRect withPrintEnabled:YES withAlbum:self.album];
+        footer.delegate = self;
+        [self.view addSubview:footer];
+
         [self postUploadProcess];
     }
 }

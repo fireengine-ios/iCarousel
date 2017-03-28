@@ -53,6 +53,7 @@
     NextProcessType postProcess;
     NSString *uploadingUuid;
     FileDetailsDao *detailDao;
+    UIImageView *assetImgView;
 }
 
 @property (nonatomic, weak) id<ImagePreviewDelegate> delegate;

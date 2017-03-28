@@ -574,13 +574,16 @@
             CGFloat maximumOffset = collView.contentSize.height - collView.frame.size.height;
             
             if (maximumOffset > 0.0f && currentOffset - maximumOffset >= 0.0f && !endOfFiles) {
+                IGLog(@"RevisitedGroupedPhotoView scrollViewDidScroll triggering dynamicallyLoadNextPage");
                 isLoading = YES;
                 [self dynamicallyLoadNextPage];
             }
             if(cleanedFlag) {
+                IGLog(@"RevisitedGroupedPhotoView scrollViewDidScroll cleanedFlag is true");
                 if(fabs(currentOffset - lastCheckYIndex) <= IMAGE_SCROLL_THRESHOLD/2) {
                     NSNumber *startOffset = [NSNumber numberWithFloat:self.collView.contentOffset.y];
                     NSDictionary* userInfo = @{@"startOffset": startOffset};
+                    IGLog(@"RevisitedGroupedPhotoView scrollViewDidScroll posting notification IMAGE_SCROLL_RELOAD_DATA_AFTER_WARNING");
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"IMAGE_SCROLL_RELOAD_DATA_AFTER_WARNING" object:self userInfo:userInfo];
                 }
             }
