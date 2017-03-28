@@ -131,7 +131,7 @@
     NSString *accountWarning = [headerParams objectForKey:@"X-Account-Warning"];
     
     //        NSLog(@"Auth Token Response Headers: %@", headerParams);
-    NSLog(@"TOKEN: %@", authToken);
+    //NSLog(@"TOKEN: %@", authToken);
     
     if(newUserFlag != nil && ![newUserFlag isKindOfClass:[NSNull class]]) {
         APPDELEGATE.session.newUserFlag = [newUserFlag boolValue];

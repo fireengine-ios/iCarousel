@@ -716,7 +716,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     IGLog(@"AppDelegate applicationDidBecomeActive");
-    NSLog(@"AppDelegate applicationDidBecomeActive");
+    //NSLog(@"AppDelegate applicationDidBecomeActive");
     //TODO contact sync ile aç
     /*
      if(session != nil) {
