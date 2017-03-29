@@ -242,6 +242,7 @@
                                            NSString *localHash = [SyncUtil md5StringOfString:normalizedIdentifier];
                                            NSLog(@"saved file localHash: %@ - identifier: %@", localHash, normalizedIdentifier);
                                            [SyncUtil cacheSyncHashLocally:localHash];
+                                           [SyncUtil cacheSyncHashRemotely:localHash];
                                            [SyncUtil increaseAutoSyncIndex];
                                            
                                            [weakSelf saveFileToCameraRoll:file localizedIdentifier:localizedAssetIdentifier];
@@ -629,6 +630,7 @@
              NSString *localHash = [SyncUtil md5StringOfString:normalizedIdentifier];
              NSLog(@"saved file localHash: %@ - identifier: %@", localHash, normalizedIdentifier);
              [SyncUtil cacheSyncHashLocally:localHash];
+             [SyncUtil cacheSyncHashRemotely:localHash];
              [SyncUtil increaseAutoSyncIndex];
          }];
     }];

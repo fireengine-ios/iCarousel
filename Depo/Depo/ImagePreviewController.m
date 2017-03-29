@@ -889,6 +889,7 @@
                              NSLog(@"%@", assetURL);
                              NSString *localHash = [SyncUtil md5StringOfString:[assetURL absoluteString]];
                              [SyncUtil cacheSyncHashLocally:localHash];
+                             [SyncUtil cacheSyncHashRemotely:localHash];
                              [SyncUtil increaseAutoSyncIndex];
                          }];
                          [self image:image didFinishSavingWithError:nil contextInfo:nil];
