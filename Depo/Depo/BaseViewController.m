@@ -362,7 +362,7 @@
         // 
         double usage = [Util getDiskUsage];
         if (usage != -1) {
-            NSLog(@"disk usage %lf", usage);
+//            NSLog(@"disk usage %lf", usage);
             if ([Util getDiskUsage] > 0.998) {
                 [MPush hitTag:@"device_storage_exceeded_100_perc"];
                 [MPush hitEvent:@"device_storage_exceeded_100_perc"];

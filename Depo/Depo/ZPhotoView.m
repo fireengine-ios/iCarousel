@@ -11,7 +11,6 @@
 
 @interface ZPhotoView ()
 
-@property (nonatomic) UIImageView *imgView;
 @property (nonatomic) UITapGestureRecognizer *doubleTap;
 @property (atomic) BOOL isZoomEnabled;
 
@@ -31,33 +30,36 @@
         
         // file
         self.file = metaFile;
-        NSString *imgUrlStr = [self.file.tempDownloadUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        if(self.file.detail && self.file.detail.thumbLargeUrl) {
-            imgUrlStr = [self.file.detail.thumbLargeUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        }
         
         // scrollview
         __weak ZPhotoView *weakSelf = self;
         self.delegate = self;
         self.minimumZoomScale = 1.0f;
         self.maximumZoomScale = 5.0f;
-//        self.backgroundColor = [UIColor redColor];
         
         // image view
         _imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         _imgView.contentMode = UIViewContentModeScaleAspectFit;
         
         [self showLoading];
-        [_imgView sd_setImageWithURL:[NSURL URLWithString:imgUrlStr]
-                           completed:
-         ^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [weakSelf hideLoading];
-                if (!error) {
-                    [weakSelf resizeScrollView];
-                }
-            });
-        }];
+        
+        if (self.file) {
+            NSString *imgUrlStr = [self.file.tempDownloadUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            if(self.file.detail && self.file.detail.thumbLargeUrl) {
+                imgUrlStr = [self.file.detail.thumbLargeUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            }
+            
+            [_imgView sd_setImageWithURL:[NSURL URLWithString:imgUrlStr]
+                               completed:
+             ^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                     [weakSelf hideLoading];
+                     if (!error) {
+                         [weakSelf resizeScrollView];
+                     }
+                 });
+             }];
+        }
         
         [self addSubview:_imgView];
         self.contentSize = _imgView.frame.size;

@@ -23,6 +23,7 @@
 #import "VideoView.h"
 #import "SyncMaskView.h"
 #import "FileDetailsDao.h"
+#import "ZPhotoView.h"
 
 @protocol ImagePreviewDelegate <NSObject>
 - (void) previewedImageWasDeleted:(MetaFile *) deletedFile;
@@ -53,7 +54,7 @@
     NextProcessType postProcess;
     NSString *uploadingUuid;
     FileDetailsDao *detailDao;
-    UIImageView *assetImgView;
+    ZPhotoView *assetImgView;
 }
 
 @property (nonatomic, weak) id<ImagePreviewDelegate> delegate;

@@ -14,7 +14,6 @@
 #import "PrintWebViewController.h"
 #import "AppUtil.h"
 #import "TutorialView.h"
-#import "ZPhotoView.h"
 #import "VideoPreviewController.h"
 #import "SyncUtil.h"
 #import "ShareActivity.h"
@@ -131,6 +130,7 @@
         self.asset = _asset;
         
         self.view.backgroundColor = [Util UIColorForHexColor:@"191e24"];
+        self.title = self.asset.defaultRepresentation.filename;
         
         pagingEnabledFlag = NO;
         uploadNeeded = YES;
@@ -149,10 +149,14 @@
         UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:customBackButton];
         self.navigationItem.leftBarButtonItem = backButton;
         
-        assetImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-60)];
+        assetImgView = [[ZPhotoView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-60)
+                                               imageFile:nil
+                                           isZoomEnabled:YES];
         assetImgView.contentMode = UIViewContentModeScaleAspectFit;
-        assetImgView.image = [UIImage imageWithCGImage:self.asset.defaultRepresentation.fullScreenImage];
+        assetImgView.imgView.image = [UIImage imageWithCGImage:self.asset.defaultRepresentation.fullScreenImage];
         [self.view addSubview:assetImgView];
+        
+        [assetImgView resizeScrollView];
         
         footer = [[FileDetailFooter alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 124, self.view.frame.size.width, 60) withPrintEnabled:NO withDeleteEnabled:NO withSyncEnabled:YES withDownloadEnabled:NO withAlbum:nil];
         footer.delegate = self;
@@ -305,6 +309,7 @@
     if(assetImgView) {
         CGRect assetImgFrame = CGRectMake(-(gap / 2.0f), frame.origin.y, frame.size.width + gap, frame.size.height);
         assetImgView.frame = assetImgFrame;
+        [assetImgView resizeScrollView];
     }
 }
 

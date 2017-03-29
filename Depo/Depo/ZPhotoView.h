@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) MBProgressHUD *progress;
 @property (nonatomic) MetaFile *file;
+@property (nonatomic) UIImageView *imgView;
 
 - (id)initWithFrame:(CGRect)frame imageFile:(MetaFile *)metaFile isZoomEnabled:(BOOL)zoomEnabled;
 // resize view when frame changed
