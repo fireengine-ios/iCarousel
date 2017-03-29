@@ -66,5 +66,4 @@ NSString *logFormat = [NSString stringWithFormat:@"ContactSyncSDK: %s [Line %d] 
 #define SYNC_JSON_PARAP_SERVER_TIMESTAMP @"serverTimestamp"
 
 
-
 #endif

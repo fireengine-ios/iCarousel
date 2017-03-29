@@ -242,17 +242,22 @@
     
     void (^success)(id responseObject) = ^(id responseObject){
         SYNC_Log(@"url response: %@ %@", url, responseObject);
-        if (callback)
-            callback(responseObject, TRUE);
+        
+        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            if (callback)
+                callback(responseObject, TRUE);
+        });
     };
     
     void (^fail)(id responseObject, NSError *error) = ^(id responseObject, NSError *error){
         SYNC_Log(@"Error: %@", error);
-        
-        [SyncStatus handleNSError:error];
-        
-        if (callback)
-            callback(responseObject, FALSE);
+
+        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            [SyncStatus handleNSError:error];
+            
+            if (callback)
+                callback(responseObject, FALSE);
+        });
     };
     
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
