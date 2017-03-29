@@ -67,6 +67,7 @@
 @synthesize selectedAssets;
 @synthesize refreshControl;
 @synthesize readDao;
+@synthesize bulkReadDao;
 @synthesize deleteDao;
 @synthesize albumAddPhotosDao;
 @synthesize imgFooterActionMenu;
@@ -112,7 +113,12 @@
         detailDao.delegate = self;
         detailDao.successMethod = @selector(detailSuccessCallback:);
         detailDao.failMethod = @selector(detailFailCallback:);
-
+        
+        bulkReadDao = [[ElasticSearchDao alloc] init];
+        bulkReadDao.delegate = self;
+        bulkReadDao.successMethod = @selector(bulkReadSuccessCallback:);
+        bulkReadDao.failMethod = @selector(bulkReadFailCallback:);
+        
         tableUpdateCounter = 0;
         listOffset = 0;
         photoCount = 0;
@@ -315,6 +321,7 @@
         [groups removeAllObjects];
         [files removeAllObjects];
         [fileHashList removeAllObjects];
+        localAssets = nil;
         
         [self.collView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
         
@@ -382,7 +389,7 @@
     if(initialRow != nil) {
         [initialRow.fileInfo addObjectsFromArray:group.fileInfo];
         initialRow.fileInfo = [self sortRawArrayByDateDesc:initialRow.fileInfo];
-//        [initialRow.fileHashList addObjectsFromArray:group.fileHashList];
+        //        [initialRow.fileHashList addObjectsFromArray:group.fileHashList];
         [self.groups replaceObjectAtIndex:counter withObject:initialRow];
     } else {
         group.fileInfo = [self sortRawArrayByDateDesc:group.fileInfo];
@@ -426,10 +433,10 @@
 - (void) setToUnselectiblePriorToRefresh {
     isSelectible = NO;
     [self createRefreshControl];
-//    [selectedFileList removeAllObjects];
-//    [selectedSectionNames removeAllObjects];
-//    [selectedMetaFiles removeAllObjects];
-//    [selectedAssets removeAllObjects];
+    //    [selectedFileList removeAllObjects];
+    //    [selectedSectionNames removeAllObjects];
+    //    [selectedMetaFiles removeAllObjects];
+    //    [selectedAssets removeAllObjects];
     
     if(imgFooterActionMenu) {
         [imgFooterActionMenu removeFromSuperview];
@@ -555,9 +562,13 @@
         initialLoadDone = YES;
     }
     IGLog(@"RevisitedGroupedPhotoView readSuccessCallback calling SyncManager listOfUnsyncedImages");
-    [SyncManager sharedInstance].infoDelegate = self;
-    [[SyncManager sharedInstance] listOfUnsyncedImages];
-//    [delegate revisitedGroupedPhotoWantsToShowLoading];
+    if(localAssets == nil || [localAssets count] == 0) {
+        [SyncManager sharedInstance].infoDelegate = self;
+        [[SyncManager sharedInstance] listOfUnsyncedImages];
+    } else {
+        [self addUnsyncedFiles];
+    }
+    //    [delegate revisitedGroupedPhotoWantsToShowLoading];
 }
 
 - (void) readFailCallback:(NSString *) errorMessage {
@@ -569,11 +580,11 @@
 
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView {
     if([ReachabilityManager isReachable]) {
-        if(!isLoading) {
+        if(!isLoading && !endOfFiles) {
             CGFloat currentOffset = collView.contentOffset.y;
             CGFloat maximumOffset = collView.contentSize.height - collView.frame.size.height;
             
-            if (maximumOffset > 0.0f && currentOffset - maximumOffset >= 0.0f && !endOfFiles) {
+            if (maximumOffset > 0.0f && currentOffset - maximumOffset >= 0.0f) {
                 IGLog(@"RevisitedGroupedPhotoView scrollViewDidScroll triggering dynamicallyLoadNextPage");
                 isLoading = YES;
                 [self dynamicallyLoadNextPage];
@@ -782,7 +793,7 @@
         [APPDELEGATE showCustomConfirm:confirm];
     } else {
         IGLog(@"RevisitedGroupedPhotoView shouldContinueDelete deleteDao requestDeleteFiles called");
-        [deleteDao requestDeleteFiles:selectedFileList];
+        [deleteDao requestDeleteFiles:[self uuidsOfOnlyDepoFiles]];
         [self bringSubviewToFront:progress];
         [progress show:YES];
     }
@@ -820,7 +831,7 @@
             [APPDELEGATE showCustomConfirm:confirm];
         } else {
             IGLog(@"RevisitedGroupedPhotoView footerActionMenuDidSelectDelete deleteDao requestDeleteFiles called");
-            [deleteDao requestDeleteFiles:selectedFileList];
+            [deleteDao requestDeleteFiles:[self uuidsOfOnlyDepoFiles]];
             [self bringSubviewToFront:progress];
             [progress show:YES];
         }
@@ -892,7 +903,7 @@
         }
         //TODO check
         [collView reloadData];
-//        [delegate revisitedGroupedPhotoDidFinishUpdate];
+        //        [delegate revisitedGroupedPhotoDidFinishUpdate];
     }
 }
 
@@ -991,9 +1002,17 @@
 
 - (void) didApproveCustomAlert:(CustomConfirmView *) alertView {
     IGLog(@"RevisitedGroupedPhotoView didApproveCustomAlert deleteDao requestDeleteFiles called");
-    [deleteDao requestDeleteFiles:selectedFileList];
+    [deleteDao requestDeleteFiles:[self uuidsOfOnlyDepoFiles]];
     [self bringSubviewToFront:progress];
     [progress show:YES];
+}
+
+- (NSMutableArray *) uuidsOfOnlyDepoFiles {
+    NSMutableArray *result = [[NSMutableArray alloc] init];
+    for(MetaFile *row in selectedMetaFiles) {
+        [result addObject:row.uuid];
+    }
+    return result;
 }
 
 - (void) cancelRequests {
@@ -1190,7 +1209,7 @@
 }
 
 - (void) syncManagerUnsyncedImageList:(NSArray *)unsyncedAssets {
-//    [delegate revisitedGroupedPhotoWantsToHideLoading];
+    //    [delegate revisitedGroupedPhotoWantsToHideLoading];
     IGLog(@"RevisitedGroupedPhotoView syncManagerUnsyncedImageList called");
     localAssets = [unsyncedAssets sortedArrayUsingComparator:^NSComparisonResult(ALAsset *first, ALAsset *second) {
         NSDate * date1 = [first valueForProperty:ALAssetPropertyDate];
@@ -1214,6 +1233,11 @@
     if([files count] > 0) {
         lastFile = files.lastObject;
         noFilesFlag = NO;
+        
+        if(lastCheckedDate != nil) {
+            if([lastCheckedDate compare:lastFile.detail.imageDate] == NSOrderedSame)
+                return;
+        }
     }
     NSMutableDictionary *tempDict = [[NSMutableDictionary alloc] init];
     for(ALAsset *row in localAssets) {
@@ -1296,6 +1320,7 @@
     for(FileInfoGroup *row in tempGroups) {
         [self addOrUpdateGroup:row];
     }
+    [bulkReadDao requestPhotosAndVideosForPage:0 andSize:300000 andSortType:SortTypeAlphaAsc isMinimal:YES];
     dispatch_async(dispatch_get_main_queue(), ^{
         NSLog(@"RevisitedGroupedPhotoView addUnsyncedFiles ended");
         [collView reloadData];
@@ -1317,7 +1342,6 @@
     result.rawType = RawFileTypeClient;
     result.refDate = [assetRef valueForProperty:ALAssetPropertyDate];
     result.hashRef = [SyncUtil md5StringOfString:[assetRef.defaultRepresentation.url absoluteString]];
-    NSLog(@"LOCAL META HASH: %@", result.hashRef);
     return result;
 }
 
@@ -1668,6 +1692,35 @@
     [delegate revisitedGroupedPhotoWantsToHideLoading];
     [delegate revisitedGroupedPhotoDidFinishUpdate];
     [uploadingUuids removeAllObjects];
+}
+
+
+#pragma mark BulkRead delegate methods for header unsync image count
+
+- (void) bulkReadSuccessCallback:(NSArray *) bulkFiles {
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^(void) {
+        NSMutableArray *hashArray = [[NSMutableArray alloc] init];
+        int unsyncCount = 0;
+        for(MetaFile *row in bulkFiles) {
+            if(row.metaHash != nil) {
+                [hashArray addObject:row.metaHash];
+            }
+        }
+        for(ALAsset *anyAsset in localAssets) {
+            NSString *anyLocalHash = [SyncUtil md5StringOfString:[anyAsset.defaultRepresentation.url absoluteString]];
+            if(![hashArray containsObject:anyLocalHash]) {
+                unsyncCount ++;
+            }
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if(syncInfoHeaderView) {
+                [syncInfoHeaderView updateBottomLabelWithCount:unsyncCount];
+            }
+        });
+    });
+}
+
+- (void) bulkReadFailCallback:(NSString *) errorMessage {
 }
 
 @end
