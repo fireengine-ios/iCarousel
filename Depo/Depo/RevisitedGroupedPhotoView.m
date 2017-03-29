@@ -141,6 +141,8 @@
         selectedAssets = [[NSMutableArray alloc] init];
         uploadingUuids = [[NSMutableArray alloc] init];
         
+        [SyncManager sharedInstance].infoDelegate = self;
+
         BOOL isSyncHeaderVisible = NO;
         BOOL isSyncProgressVisible = NO;
         BOOL waitingForWifi = NO;
@@ -527,7 +529,6 @@
         endOfFiles = YES;
     }
     
-    isLoading = NO;
     [refreshControl endRefreshing];
     NSMutableArray *urlsToPrefetch = [@[] mutableCopy];
     for (FileInfoGroup *fileInfoGroup in self.groups) {
@@ -563,7 +564,6 @@
     }
     IGLog(@"RevisitedGroupedPhotoView readSuccessCallback calling SyncManager listOfUnsyncedImages");
     if(localAssets == nil || [localAssets count] == 0) {
-        [SyncManager sharedInstance].infoDelegate = self;
         [[SyncManager sharedInstance] listOfUnsyncedImages];
     } else {
         [self addUnsyncedFiles];
@@ -1232,8 +1232,10 @@
         noFilesFlag = NO;
         
         if(lastCheckedDate != nil) {
-            if([lastCheckedDate compare:lastFile.detail.imageDate] == NSOrderedSame)
+            if([lastCheckedDate compare:lastFile.detail.imageDate] == NSOrderedSame) {
+                isLoading = NO;
                 return;
+            }
         }
     }
     NSMutableDictionary *tempDict = [[NSMutableDictionary alloc] init];
@@ -1317,7 +1319,13 @@
     for(FileInfoGroup *row in tempGroups) {
         [self addOrUpdateGroup:row];
     }
-    [bulkReadDao requestPhotosAndVideosForPage:0 andSize:300000 andSortType:SortTypeAlphaAsc isMinimal:YES];
+    
+//    [bulkReadDao requestPhotosAndVideosForPage:0 andSize:300000 andSortType:SortTypeAlphaAsc isMinimal:YES];
+    
+    isLoading = NO;
+    
+    [[SyncManager sharedInstance] numberOfUnsyncedImages];
+
     dispatch_async(dispatch_get_main_queue(), ^{
         NSLog(@"RevisitedGroupedPhotoView addUnsyncedFiles ended");
         [collView reloadData];

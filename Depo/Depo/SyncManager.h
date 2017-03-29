@@ -35,5 +35,6 @@
 - (void) decideAndStartAutoSync;
 - (void) remainingQueueCount;
 - (void) listOfUnsyncedImages;
+- (void) numberOfUnsyncedImages;
 
 @end

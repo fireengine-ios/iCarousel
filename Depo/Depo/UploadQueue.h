@@ -36,5 +36,7 @@
 - (int) remainingCount;
 - (void) cleanAlreadyFinishedManagers;
 - (UploadManager *) activeManager;
+- (int) totalUploadCount;
+- (int) finishedUploadCount;
 
 @end

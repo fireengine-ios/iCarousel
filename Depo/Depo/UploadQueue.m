@@ -578,12 +578,48 @@
     }
 }
 
+- (int) totalUploadCount {
+    @synchronized(uploadManagers) {
+        int count = 0;
+        @try {
+            for(UploadManager *row in uploadManagers) {
+                if(!row.uploadRef.hasFinished) {
+                    count++;
+                }
+            }
+        }
+        @catch (NSException *exception) {
+        }
+        @finally {
+        }
+        return count;
+    }
+}
+
 - (int) finishedAutoSyncCount {
     @synchronized(uploadManagers) {
         int count = 0;
         @try {
             for(UploadManager *row in uploadManagers) {
                 if(row.uploadRef.hasFinished && row.uploadRef.autoSyncFlag) {
+                    count++;
+                }
+            }
+        }
+        @catch (NSException *exception) {
+        }
+        @finally {
+        }
+        return count;
+    }
+}
+
+- (int) finishedUploadCount {
+    @synchronized(uploadManagers) {
+        int count = 0;
+        @try {
+            for(UploadManager *row in uploadManagers) {
+                if(row.uploadRef.hasFinished) {
                     count++;
                 }
             }

@@ -121,9 +121,9 @@
 }
 
 - (void) checkProgressInfo {
-    int totalAutoSyncCount = [[UploadQueue sharedInstance] totalAutoSyncCount];
-    int finishedAutoSyncCount = [[UploadQueue sharedInstance] finishedAutoSyncCount];
-    NSString *infoMessage = [NSString stringWithFormat:@"%d/%d%@", finishedAutoSyncCount + 1, totalAutoSyncCount > AUTO_SYNC_ASSET_COUNT ? AUTO_SYNC_ASSET_COUNT : totalAutoSyncCount, ((totalAutoSyncCount%AUTO_SYNC_ASSET_COUNT==0) || totalAutoSyncCount > AUTO_SYNC_ASSET_COUNT) ? @"+" : @""];
+    int totalUploadCount = [[UploadQueue sharedInstance] totalUploadCount];
+    int finishedUploadCount = [[UploadQueue sharedInstance] finishedUploadCount];
+    NSString *infoMessage = [NSString stringWithFormat:@"%d/%d%@", finishedUploadCount + 1, totalUploadCount > AUTO_SYNC_ASSET_COUNT ? AUTO_SYNC_ASSET_COUNT : totalUploadCount, ((totalUploadCount%AUTO_SYNC_ASSET_COUNT==0) || totalUploadCount > AUTO_SYNC_ASSET_COUNT) ? @"+" : @""];
     progressLabel.text = infoMessage;
 }
 
