@@ -30,5 +30,6 @@
 @property (nonatomic,strong) XYPieChart *myPieChart;
 @property (nonatomic) int processPercent;
 @property (nonatomic,strong) CustomLabel *syncTargetLabel;
+@property (nonatomic,strong) UIView *footerContainer;
 
 @end

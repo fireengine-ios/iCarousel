@@ -14,5 +14,6 @@
 - (id) initWithFrame:(CGRect)frame;
 
 @property (nonatomic,strong) CustomLabel *totalCountLabel;
+@property (nonatomic,strong) CustomLabel *label;
 
 @end

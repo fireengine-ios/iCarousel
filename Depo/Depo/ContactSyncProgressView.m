@@ -19,14 +19,14 @@
         float circleProgressWidth = IS_IPAD ? 350 : frame.size.width - 80;
         float progressLabelWidth = self.frame.size.width - 40;
         
-        self.progressLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 10, progressLabelWidth, 40) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:16] withColor:[Util UIColorForHexColor:@"363e4f"] withText:@"" withAlignment:NSTextAlignmentCenter numberOfLines:2];
+        self.progressLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 40, progressLabelWidth, 40) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:16] withColor:[Util UIColorForHexColor:@"363e4f"] withText:@"" withAlignment:NSTextAlignmentCenter numberOfLines:2];
         [self addSubview:self.progressLabel];
         
         
 //        self.pieChart = [[XYPieChart alloc] initWithFrame:CGRectMake((frame.size.width-circleProgressWidth)/2, (frame.size.height - circleProgressWidth)/2, circleProgressWidth, circleProgressWidth)];
 //        [self addSubview:self.pieChart];
         
-        self.progressBar = [[CircleProgressBar alloc] initWithFrame:CGRectMake((frame.size.width-circleProgressWidth)/2, (self.progressLabel.frame.origin.y + self.progressLabel.frame.size.height) + (IS_IPAD ? 90 : 20), circleProgressWidth, circleProgressWidth)];
+        self.progressBar = [[CircleProgressBar alloc] initWithFrame:CGRectMake((frame.size.width-circleProgressWidth)/2, (self.progressLabel.frame.origin.y + self.progressLabel.frame.size.height) + (IS_IPAD ? 90 : 40), circleProgressWidth, circleProgressWidth)];
         self.progressBar.progressBarWidth = 5.0;
         self.progressBar.progressBarProgressColor = [Util UIColorForHexColor:@"3fb0e8"];
         self.progressBar.progressBarTrackColor = [UIColor clearColor];

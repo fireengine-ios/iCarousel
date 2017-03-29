@@ -78,10 +78,9 @@
             APPDELEGATE.session.syncResult = [ContactSyncResult loadData];;
         }
         
-        CustomLabel *backupTitleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, 14, (self.view.frame.size.width - 40), 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:20] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"ContactSyncBackupTitle", @"") withAlignment:NSTextAlignmentCenter];
-        [self.view addSubview:backupTitleLabel];
         
-        self.topContainer = [[UIView alloc] initWithFrame:CGRectMake(20, 40, self.view.frame.size.width-40, (self.view.frame.size.height/5)*(IS_IPAD ? 3.5 : 2.5))];
+        
+        self.topContainer = [[UIView alloc] initWithFrame:CGRectMake(20, IS_IPHONE_6P_OR_HIGHER ? 40 : 20, self.view.frame.size.width-40, (self.view.frame.size.height/5)*(IS_IPAD ? 3.5 : 2.5))];
 //        self.topContainer.backgroundColor = [UIColor yellowColor];
         [self.view addSubview:self.topContainer];
         
@@ -119,6 +118,31 @@
         progressView.pieChart.labelShadowColor = [UIColor blackColor];
         
         
+        
+        
+        
+        
+        
+        // Footer Elements
+        
+        self.footerContainer = [[UIView alloc] initWithFrame:CGRectMake(20, self.topContainer.frame.origin.y + self.topContainer.frame.size.height + (IS_IPHONE_6P_OR_HIGHER ? 60 : 20), self.view.frame.size.width - 40, 20)];
+        [self.view addSubview:self.footerContainer];
+        
+        UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width - 40, 1)];
+        separator.backgroundColor = [Util UIColorForHexColor:@"D4D4D4"];
+        [self.footerContainer addSubview:separator];
+        
+        totalContactElement = [[ContactSyncFooterElement alloc] initWithFrame:CGRectMake(0, 20, self.footerContainer.frame.size.width/3, self.footerContainer.frame.size.height) withTitle:NSLocalizedString(@"ContactLastSyncDetailContactsTitle", @"")];
+        [self.footerContainer addSubview:totalContactElement];
+        
+        cleanContactElement = [[ContactSyncFooterElement alloc] initWithFrame:CGRectMake(totalContactElement.frame.size.width + 10, totalContactElement.frame.origin.y, self.footerContainer.frame.size.width/3, self.footerContainer.frame.size.height) withTitle:NSLocalizedString(@"ContactLastSyncDetailUpdateTitle", @"")];
+        [self.footerContainer addSubview:cleanContactElement];
+        
+        deleteContactElement = [[ContactSyncFooterElement alloc] initWithFrame:CGRectMake(cleanContactElement.frame.origin.x + cleanContactElement.frame.size.width + 10, totalContactElement.frame.origin.y, self.footerContainer.frame.size.width/3, self.footerContainer.frame.size.height) withTitle:NSLocalizedString(@"ContactLastSyncDetailDeleteTitle", @"")];
+        [self.footerContainer addSubview:deleteContactElement];
+        
+        [self refreshSyncResult:APPDELEGATE.session.syncResult.syncType];
+        
         // Last Sync Date Label
         
         NSString *lastSyncTitle = [NSString stringWithFormat:NSLocalizedString(@"ContactLastSyncDateTitle", @""), NSLocalizedString(@"NoneTitle", @"")];
@@ -127,35 +151,9 @@
             [dateFormat setDateFormat:@"dd.MM.yyyy HH:mm"];
             lastSyncTitle = [NSString stringWithFormat:NSLocalizedString(@"ContactLastSyncDateTitle", @""), [dateFormat stringFromDate:[SyncUtil readLastContactSyncDate]]];
         }
-        lastSyncDateLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, (self.topContainer.frame.origin.y + self.topContainer.frame.size.height) + (IS_IPHONE_6P_OR_HIGHER ? 30 : 10), self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:12] withColor:[Util UIColorForHexColor:@"363e4f"] withText:lastSyncTitle withAlignment:NSTextAlignmentCenter];
+        lastSyncDateLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(((self.view.frame.size.width - (self.view.frame.size.width - 40))/2), self.view.frame.size.height - 110, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:12] withColor:[Util UIColorForHexColor:@"363e4f"] withText:lastSyncTitle withAlignment:NSTextAlignmentCenter];
         [self.view addSubview:lastSyncDateLabel];
         NSLog(@"%@", lastSyncTitle);
-        
-        
-        UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(20, lastSyncDateLabel.frame.origin.y + 40 , self.view.frame.size.width - 40, 1)];
-        separator.backgroundColor = [Util UIColorForHexColor:@"D4D4D4"];
-        [self.view addSubview:separator];
-        
-        // Sync Target Label
-        
-        self.syncTargetLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, separator.frame.origin.y + 20, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:(IS_IPHONE_6P_OR_HIGHER ? 20 : 15)] withColor:[Util UIColorForHexColor:@"363e4f"] withText:@"" withAlignment:NSTextAlignmentCenter];
-        [self.view addSubview:self.syncTargetLabel];
-        
-        // Footer Elements
-        
-        UIView *footerContainer = [[UIView alloc] initWithFrame:CGRectMake(20, self.syncTargetLabel.frame.origin.y + (IS_IPHONE_6P_OR_HIGHER ? 50 : 22), self.view.frame.size.width - 40, 50)];
-        [self.view addSubview:footerContainer];
-        
-        totalContactElement = [[ContactSyncFooterElement alloc] initWithFrame:CGRectMake(0, 0, footerContainer.frame.size.width/3, footerContainer.frame.size.height) withTitle:@"Total Contacts"];
-        [footerContainer addSubview:totalContactElement];
-        
-        cleanContactElement = [[ContactSyncFooterElement alloc] initWithFrame:CGRectMake(totalContactElement.frame.size.width + 10, 0, footerContainer.frame.size.width/3, footerContainer.frame.size.height) withTitle:@"Contacts after you clean"];
-        [footerContainer addSubview:cleanContactElement];
-        
-        deleteContactElement = [[ContactSyncFooterElement alloc] initWithFrame:CGRectMake(cleanContactElement.frame.origin.x + cleanContactElement.frame.size.width + 10, 0, footerContainer.frame.size.width/3, footerContainer.frame.size.height) withTitle:@"Delete"];
-        [footerContainer addSubview:deleteContactElement];
-        
-        [self refreshSyncResult:APPDELEGATE.session.syncResult.syncType];
         
         
         // Sync Callback
@@ -297,6 +295,7 @@
     
     [self changeViews:syncView nextView:progressView];
     progressView.progressLabel.text = NSLocalizedString(@"ContactSyncProgressOnServerText", @"");
+    syncResultView.label.text = [NSLocalizedString(@"ContactSyncBackupResultTitle", @"") uppercaseString];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [ContactSyncSDK hasContactForBackup:^(SYNCResultType resultType) {
@@ -343,6 +342,7 @@
     [ContactSyncSDK doSync:SYNCRestore];
     [self changeViews:syncView nextView:progressView];
     progressView.progressLabel.text = NSLocalizedString(@"ContactSyncProgressOnClientText", @"");
+    syncResultView.label.text = [NSLocalizedString(@"ContactSyncRestoreResultTitle", @"") uppercaseString];
     syncMode = SYNCRestore;
     
 //    [self showProcessView];
@@ -471,11 +471,15 @@
     [super viewWillAppear:animated];
     
     if ([ContactSyncSDK isRunning]) {
+        IGLog(@"ContactSync viewWillAppear isRunning : YES");
         [self.topContainer addSubview:progressView];
+        [self.footerContainer setHidden:YES];
         if (APPDELEGATE.session.syncType == ContactSyncTypeRestore) {
             progressView.progressLabel.text = NSLocalizedString(@"ContactSyncProgressOnClientText", @"");
+            syncResultView.label.text = [NSLocalizedString(@"ContactSyncRestoreResultTitle", @"") uppercaseString];
         } else {
             progressView.progressLabel.text = NSLocalizedString(@"ContactSyncProgressOnServerText", @"");
+            syncResultView.label.text = [NSLocalizedString(@"ContactSyncBackupResultTitle", @"") uppercaseString];
         }
         [self reloadProgressBar:self.processPercent];
         return;
@@ -565,6 +569,12 @@
 }
 
 - (void) changeViews:(UIView *) currentView nextView:(UIView *) nextView {
+    
+    if ([nextView isKindOfClass:[ContactSyncProgressView class]]) {
+        [self.footerContainer setHidden:YES];
+    } else {
+        [self.footerContainer setHidden:NO];
+    }
     
     CGRect newFrame = nextView.frame;
     newFrame.origin = CGPointMake(self.view.frame.size.width + 50, nextView.frame.origin.y);

@@ -30,7 +30,7 @@
         [self addSubview:contactsIconIV];
         
         self.backupButton = [[SimpleButton alloc] initWithFrame:CGRectMake(self.frame.size.width/2 - buttonWidth - 5,
-                                                                           circleProgressIV.frame.origin.y + circleProgressIV.frame.size.height + (IS_IPAD ? 70 : 40),
+                                                                           circleProgressIV.frame.origin.y + circleProgressIV.frame.size.height + (IS_IPAD ? 70 : 50),
                                                                       buttonWidth,
                                                                       buttonHeight)
                                                  withTitle:[NSLocalizedString(@"ContactBackupButtonTitle", @"") uppercaseString]
@@ -44,7 +44,7 @@
         
         
         self.restoreButton = [[SimpleButton alloc] initWithFrame:CGRectMake(self.frame.size.width/2 + 5,
-                                                                       circleProgressIV.frame.origin.y + circleProgressIV.frame.size.height + (IS_IPAD ? 70 : 40),
+                                                                       circleProgressIV.frame.origin.y + circleProgressIV.frame.size.height + (IS_IPAD ? 70 : 50),
                                                                        buttonWidth,
                                                                        buttonHeight)
                                                   withTitle:[NSLocalizedString(@"ContactRestoreButtonTitle", @"") uppercaseString]
