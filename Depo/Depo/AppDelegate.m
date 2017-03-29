@@ -20,7 +20,7 @@
 #import "RevisitedStorageController.h"
 #import "OTPController.h"
 #import "SignupController.h"
-
+#import "RememberMeEmailViewController.h"
 #import "FileListController.h"
 #import "MapUtil.h"
 #import "AppUtil.h"
@@ -716,7 +716,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     IGLog(@"AppDelegate applicationDidBecomeActive");
-    NSLog(@"AppDelegate applicationDidBecomeActive");
+    //NSLog(@"AppDelegate applicationDidBecomeActive");
     //TODO contact sync ile aç
     /*
      if(session != nil) {
@@ -738,6 +738,9 @@
                 shouldContinue = NO;
             }
             if([[castedCtrl.viewControllers lastObject] isKindOfClass:[SignupController class]]) {
+                shouldContinue = NO;
+            }
+            if([[castedCtrl.viewControllers lastObject] isKindOfClass:[RememberMeEmailViewController class]]) {
                 shouldContinue = NO;
             }
         }

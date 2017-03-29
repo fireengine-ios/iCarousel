@@ -6552,8 +6552,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Depo/Depo.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Turan Yilmaz (4B9BE7D75V)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Turan Yilmaz (4B9BE7D75V)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Omer Burak Kir (7BESVJQ8SV)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Omer Burak Kir (7BESVJQ8SV)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -6581,7 +6581,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rdc.lifebox2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "533defd0-a874-4d19-ad00-009728b8ab03";
+				PROVISIONING_PROFILE = "5a820945-d25b-44c5-a898-0c4ec6ece99d";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -6850,8 +6850,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = DepoShareExtension/DepoShareExtension.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Turan Yilmaz (4B9BE7D75V)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Turan Yilmaz (4B9BE7D75V)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Omer Burak Kir (7BESVJQ8SV)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Omer Burak Kir (7BESVJQ8SV)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -6867,7 +6867,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rdc.lifebox2.ShareExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f571024f-83b2-44f8-9429-6faf568a096d";
+				PROVISIONING_PROFILE = "4ace2ce8-8ca8-496e-89d6-893057d745b8";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -6955,8 +6955,8 @@
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = AutoSyncWidget/AutoSyncWidget.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Turan Yilmaz (4B9BE7D75V)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Turan Yilmaz (4B9BE7D75V)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Omer Burak Kir (7BESVJQ8SV)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Omer Burak Kir (7BESVJQ8SV)";
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -6969,7 +6969,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rdc.lifebox2.AutoSyncWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f96fbaf1-5135-4292-ab67-9d1279dad0ad";
+				PROVISIONING_PROFILE = "b1fa0d18-6d78-4783-b5e6-a0642a02374d";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -7056,8 +7056,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = "Lifebox Picker/Lifebox_Picker.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Turan Yilmaz (4B9BE7D75V)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Turan Yilmaz (4B9BE7D75V)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Omer Burak Kir (7BESVJQ8SV)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Omer Burak Kir (7BESVJQ8SV)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = PT569ZA878;
 				ENABLE_BITCODE = NO;
