@@ -300,7 +300,7 @@
                                         if(shouldStartUpload) {
                                             NSString *logInfo = [NSString stringWithFormat:@"SyncManager manuallyCheckIfAlbumChanged sync starting for asset: %@", [defaultRep filename]];
                                             IGLog(logInfo);
-                                            NSLog(@"%@ and hash: %@", logInfo, localHash);
+                                            //NSLog(@"%@ and hash: %@", logInfo, localHash);
                                             [[SyncManager sharedInstance] startUploadForAsset:asset withReferenceAlbumName:referenceAlbumName andLocalHash:localHash];
                                         }
                                     }
