@@ -955,9 +955,6 @@
 }
 
 - (void) footerActionMenuDidSelectPrint:(FooterActionsMenuView *)menu {
-    if([selectedMetaFiles count] == 0)
-        return;
-    
     if([selectedAssets count] > 0) {
         CustomAlertView *alert = [[CustomAlertView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Error", @"") withMessage:NSLocalizedString(@"UnsyncPrintError", @"") withModalType:ModalTypeError];
         [APPDELEGATE showCustomAlert:alert];
@@ -1487,12 +1484,12 @@
     if([selectedMetaFiles count] > 0) {
         [imgFooterActionMenu enableDeleteButton];
         [imgFooterActionMenu enableMoveButton];
-        [imgFooterActionMenu enablePrintButton];
+//        [imgFooterActionMenu enablePrintButton];
         [imgFooterActionMenu enableDownloadButton];
     } else {
         [imgFooterActionMenu disableDeleteButton];
         [imgFooterActionMenu disableMoveButton];
-        [imgFooterActionMenu disablePrintButton];
+//        [imgFooterActionMenu disablePrintButton];
         [imgFooterActionMenu disableDownloadButton];
     }
 }
