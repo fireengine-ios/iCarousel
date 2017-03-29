@@ -445,6 +445,7 @@
         file.contentLengthDisplay = durationVal;
         
         file.detail = detail;
+        NSLog(@"META HASH: %@", [self strByRawVal:metaHash]);
         
         file.metaHash = [self strByRawVal:metaHash];
     }

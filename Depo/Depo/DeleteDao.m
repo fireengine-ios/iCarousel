@@ -30,12 +30,7 @@
         else {
             if (![self checkResponseHasError:response]) {
                 [self requestFinished:data];
-            } else {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
-                });
             }
-
         }
     }]];
     [task resume];
