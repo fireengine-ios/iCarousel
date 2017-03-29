@@ -28,11 +28,11 @@ static const CGFloat topOffset = 40;
     [super viewDidLoad];
     
     self.title = NSLocalizedString(@"Select Country", "");
-    NSLog(@"selected country = %@", self.selectedCountry);
+//    NSLog(@"selected country = %@", self.selectedCountry);
     
     _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40)];
     [_searchBar setBarTintColor:[UIColor colorWithRed:245.0f/255.0f green:245/255.0f blue:245/255.0f alpha:1.0f]];
-    _searchBar.placeholder = @"Ara";
+    _searchBar.placeholder = NSLocalizedString(@"SearchTitle", "");
     _searchBar.delegate = self;
     [self.view addSubview:_searchBar];
     
@@ -264,6 +264,9 @@ static const CGFloat topOffset = 40;
     _filteredCountryDict = [NSMutableDictionary dictionaryWithDictionary:_countryDict];
     _keys = [self getSortedKeysFromDict:_filteredCountryDict];
     [_tableView reloadData];
+    [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
+                                animated:NO
+                          scrollPosition:UITableViewScrollPositionNone];
 }
 
 
