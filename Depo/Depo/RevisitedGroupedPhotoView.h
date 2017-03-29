@@ -84,6 +84,7 @@
 @property (nonatomic, strong) DeleteDao *deleteDao;
 @property (nonatomic, strong) AlbumAddPhotosDao *albumAddPhotosDao;
 @property (nonatomic, strong) FileDetailsDao *detailDao;
+@property (nonatomic, strong) ElasticSearchDao *bulkReadDao;
 
 @property (nonatomic, strong) FooterActionsMenuView *imgFooterActionMenu;
 @property (nonatomic) BOOL isSelectible;
