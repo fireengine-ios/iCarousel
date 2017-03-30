@@ -284,7 +284,11 @@
     if(metaFile.folder) {
         return ContentTypeFolder;
     }
-    if([metaFile.rawContentType isEqualToString:CONTENT_TYPE_JPEG_VALUE] || [metaFile.rawContentType isEqualToString:CONTENT_TYPE_JPG_VALUE] || [metaFile.rawContentType isEqualToString:CONTENT_TYPE_PNG_VALUE]) {
+    if([metaFile.rawContentType isEqualToString:CONTENT_TYPE_JPEG_VALUE] ||
+       [metaFile.rawContentType isEqualToString:CONTENT_TYPE_JPG_VALUE] ||
+       [metaFile.rawContentType isEqualToString:CONTENT_TYPE_PNG_VALUE] ||
+       [metaFile.rawContentType isEqualToString:CONTENT_TYPE_BMP_VALUE] ||
+       [metaFile.rawContentType isEqualToString:CONTENT_TYPE_GIF_VALUE]) {
         return ContentTypePhoto;
 //    } else if([metaFile.rawContentType isEqualToString:CONTENT_TYPE_AUDIO_MP3_VALUE] || [metaFile.rawContentType isEqualToString:CONTENT_TYPE_AUDIO_MPEG_VALUE]) {
 //            return ContentTypeMusic;

@@ -950,9 +950,7 @@
     if (isPhoto == nil)
         return NO;
     
-    // workaround: bmp files comes wrong contenttype (ContentTypeOther)
-    NSString *extension = [[isPhoto.name substringFromIndex:[isPhoto.name length] -4] lowercaseString];
-    if (isPhoto.contentType == ContentTypePhoto || [extension isEqualToString:@".bmp"]) {
+    if (isPhoto.contentType == ContentTypePhoto) {
         return YES;
     }
     else

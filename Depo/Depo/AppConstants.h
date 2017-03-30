@@ -137,6 +137,10 @@
 
 #define CONTENT_TYPE_PNG_VALUE @"image/png"
 
+#define CONTENT_TYPE_BMP_VALUE @"image/bmp"
+
+#define CONTENT_TYPE_GIF_VALUE @"image/gif"
+
 #define CONTENT_TYPE_AUDIO_MP3_VALUE @"audio/mp3"
 
 #define CONTENT_TYPE_AUDIO_MPEG_VALUE @"audio/mpeg"
