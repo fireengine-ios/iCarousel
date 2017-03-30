@@ -22,7 +22,7 @@
 
 @interface FileDetailFooter : UIView
 
-@property (nonatomic, strong) id<FileDetailFooterDelegate> delegate;
+@property (nonatomic, weak) id<FileDetailFooterDelegate> delegate;
 @property (nonatomic, strong) CustomButton *shareButton;
 @property (nonatomic, strong) CustomButton *deleteButton;
 @property (nonatomic, strong) CustomButton *downloadButton;
