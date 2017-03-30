@@ -335,6 +335,16 @@
 }
 
 - (void) revisitedGroupedPhotoShouldPrintWithFileList:(NSArray *)fileListToPrint {
+    if (fileListToPrint == nil) {
+        [segmentView enableNavigate];
+        
+        self.title = NSLocalizedString(@"PhotosTitle", @"");
+        self.navigationItem.leftBarButtonItem = previousButtonRef;
+        [groupView reloadContent:NO];
+        
+        [APPDELEGATE.base immediateShowAddButton];
+        return;
+    }
     PrintWebViewController *printController = [[PrintWebViewController alloc] initWithUrl:@"http://akillidepo.cellograf.com/" withFileList:fileListToPrint];
     printNav = [[MyNavigationController alloc] initWithRootViewController:printController];
     

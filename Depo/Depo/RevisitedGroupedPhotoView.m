@@ -971,6 +971,7 @@
         CustomAlertView *alert = [[CustomAlertView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Error", @"") withMessage:NSLocalizedString(@"UnsyncPrintError", @"") withModalType:ModalTypeError];
         [APPDELEGATE showCustomAlert:alert];
         [self setToUnselectiblePriorToRefresh];
+        [delegate revisitedGroupedPhotoShouldPrintWithFileList:nil];
     } else {
         [delegate revisitedGroupedPhotoShouldPrintWithFileList:selectedMetaFiles];
     }
