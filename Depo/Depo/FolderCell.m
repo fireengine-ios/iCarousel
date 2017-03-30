@@ -39,6 +39,7 @@
         UIFont *detailFont = [self readDetailFont];
         
         nameLabel = [[CustomLabel alloc] initWithFrame:nameFieldRect withFont:nameFont withColor:[self readNameColor] withText:self.fileFolder.visibleName];
+        nameLabel.adjustsFontSizeToFitWidth = NO;
         [self addSubview:nameLabel];
 
         detailLabel = [[CustomLabel alloc] initWithFrame:detailFieldRect withFont:detailFont withColor:[self readDetailColor] withText:[NSString stringWithFormat:NSLocalizedString(@"FolderSubTitle", @""), _fileFolder.itemCount]];

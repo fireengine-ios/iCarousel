@@ -64,6 +64,7 @@
             nameVal = self.fileFolder.detail.songTitle;
         }
         nameLabel = [[CustomLabel alloc] initWithFrame:nameFieldRect withFont:nameFont withColor:[self readNameColor] withText:nameVal];
+        nameLabel.adjustsFontSizeToFitWidth = NO;
         [self addSubview:nameLabel];
         
         NSString *detailVal = @"";
