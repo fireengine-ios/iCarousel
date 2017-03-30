@@ -32,13 +32,19 @@
         self.navigationItem.rightBarButtonItem = doneItem;
 
         float yIndex = self.topIndex + (IS_IPAD ? 100 : 40);
+        int width = self.view.frame.size.width;
+        int height = self.view.frame.size.height;
+        if(UIInterfaceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation])) {
+            width = self.view.frame.size.height;
+            height = self.view.frame.size.width;
+        }
         
-        CustomLabel *titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, yIndex, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:12] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"FileDetailNameTitle", @"")];
+        CustomLabel *titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20, yIndex, width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:12] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"FileDetailNameTitle", @"")];
         [self.view addSubview:titleLabel];
         
         yIndex += 20;
         
-        GeneralTextField *nameField = [[GeneralTextField alloc] initWithFrame:CGRectMake(20, yIndex, self.view.frame.size.width - 40, 43) withPlaceholder:NSLocalizedString(@"FileNamePlaceholder", @"")];
+        GeneralTextField *nameField = [[GeneralTextField alloc] initWithFrame:CGRectMake(20, yIndex, width - 40, 43) withPlaceholder:NSLocalizedString(@"FileNamePlaceholder", @"")];
         nameField.text = [self.asset.defaultRepresentation filename];
         nameField.enabled = NO;
         nameField.isAccessibilityElement = YES;
@@ -50,7 +56,7 @@
         CustomLabel *sizeLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(30, yIndex, 175, 25) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:20] withColor:[Util UIColorForHexColor:@"363e4f"] withText:NSLocalizedString(@"FileDetailSize", @"")];
         [self.view addSubview:sizeLabel];
         
-        CustomLabel *sizeValueLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 125, yIndex, 95, 25) withFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:20] withColor:[Util UIColorForHexColor:@"707a8f"] withText:[Util transformedSizeValue:[self.asset.defaultRepresentation size]]];
+        CustomLabel *sizeValueLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(width - 125, yIndex, 95, 25) withFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:20] withColor:[Util UIColorForHexColor:@"707a8f"] withText:[Util transformedSizeValue:[self.asset.defaultRepresentation size]]];
         sizeValueLabel.textAlignment = NSTextAlignmentRight;
         [self.view addSubview:sizeValueLabel];
         
