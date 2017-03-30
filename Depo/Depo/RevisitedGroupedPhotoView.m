@@ -136,6 +136,7 @@
         groups = [[NSMutableArray alloc] init];
         files = [[NSMutableArray alloc] init];
         fileHashList = [[NSMutableArray alloc] init];
+        [fileHashList addObjectsFromArray:[SyncUtil readSyncHashLocally]];
         selectedFileList = [[NSMutableArray alloc] init];
         selectedMetaFiles = [[NSMutableArray alloc] init];
         selectedAssets = [[NSMutableArray alloc] init];
@@ -323,6 +324,7 @@
         [groups removeAllObjects];
         [files removeAllObjects];
         [fileHashList removeAllObjects];
+        [fileHashList addObjectsFromArray:[SyncUtil readSyncHashLocally]];
         localAssets = nil;
         
         [self.collView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
@@ -391,7 +393,6 @@
     if(initialRow != nil) {
         [initialRow.fileInfo addObjectsFromArray:group.fileInfo];
         initialRow.fileInfo = [self sortRawArrayByDateDesc:initialRow.fileInfo];
-        //        [initialRow.fileHashList addObjectsFromArray:group.fileHashList];
         [self.groups replaceObjectAtIndex:counter withObject:initialRow];
     } else {
         group.fileInfo = [self sortRawArrayByDateDesc:group.fileInfo];
