@@ -289,10 +289,10 @@
 }
 
 - (UIView*) createMetaFileViewWithFile:(MetaFile*)mfile viewFrame:(CGRect)frame {
-    if ([self checkFileIsPhoto:mfile]) {
+    if ([AppUtil checkIfFileIsPhoto:mfile]) {
         ZPhotoView *zp = [[ZPhotoView alloc] initWithFrame:frame
                                                  imageFile:mfile
-                                             isZoomEnabled:[self checkFileIsPhoto:mfile]];
+                                             isZoomEnabled:YES];
         [_singleTap requireGestureRecognizerToFail:[zp getDoubleTapGestureRecognizer]];
         return zp;
         
@@ -301,7 +301,11 @@
         vid.delegate = self;
         return vid;
     } else {
-        return nil;
+        UIImageView *unknown = [[UIImageView alloc] initWithFrame:frame];
+        unknown.backgroundColor = [UIColor blackColor];
+        unknown.image = [UIImage imageNamed:@"no_photo_icon.png"];
+        unknown.contentMode = UIViewContentModeCenter;
+        return unknown;
     }
 }
 
@@ -444,7 +448,7 @@
     [self resizeMainScrollWithGap:PhotosGap viewFrame:frame];
     if (!_isFullScreen) {
         [UIView animateWithDuration:0.3f animations:^{
-            [self resizeFooterWithIsVisible:(self.file.contentType == ContentTypePhoto)];
+            [self resizeFooterWithIsVisible:([AppUtil checkIfFileIsPhoto:self.file])];
         }];
     }
 }
@@ -582,7 +586,7 @@
         // update process view
         self.processView.frame = CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60);
         // update footer
-        if (self.file.contentType == ContentTypePhoto) {
+        if ([AppUtil checkIfFileIsPhoto:self.file]) {
             footer.frame = CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60);
             [footer updateInnerViews];
         }
@@ -613,14 +617,6 @@
         }
     }
     return 0;
-}
-
-- (BOOL) checkFileIsPhoto:(MetaFile *) isPhoto {
-    if (isPhoto.contentType == ContentTypePhoto) {
-        return YES;
-    }
-    else
-        return NO;
 }
 
 #pragma mark - VideoViewDelegate
@@ -706,7 +702,7 @@
 
 - (void) moreClicked {
     NSArray* list = @[];
-    if (self.file.contentType == ContentTypePhoto) {
+    if ([AppUtil checkIfFileIsPhoto:self.file]) {
         list = @[[NSNumber numberWithInt:MoreMenuTypeImageDetail], [NSNumber numberWithInt:MoreMenuTypeShare], self.file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDownloadImage], [NSNumber numberWithInt:MoreMenuTypeDelete]] ;
         if (self.album) {
             list = @[[NSNumber numberWithInt:MoreMenuTypeImageDetail], [NSNumber numberWithInt:MoreMenuTypeShare], self.file.detail.favoriteFlag ? [NSNumber numberWithInt:MoreMenuTypeUnfav] : [NSNumber numberWithInt:MoreMenuTypeFav], [NSNumber numberWithInt:MoreMenuTypeDownloadImage], [NSNumber numberWithInt:MoreMenuTypeRemoveFromAlbum], [NSNumber numberWithInt:MoreMenuTypeSetCoverPhoto]] ;
@@ -778,7 +774,7 @@
     [self resizeMainScrollWithGap:PhotosGap viewFrame:frame];
     if (!_isFullScreen) {
         [UIView animateWithDuration:0.3f animations:^{
-            [self resizeFooterWithIsVisible:(self.file.contentType == ContentTypePhoto)];
+            [self resizeFooterWithIsVisible:([AppUtil checkIfFileIsPhoto:self.file])];
         }];
     }
 }
@@ -876,7 +872,7 @@
 }
 
 - (void) moreMenuDidSelectDownloadImage {
-    if (self.file.contentType == ContentTypePhoto) {
+    if ([AppUtil checkIfFileIsPhoto:self.file]) {
         [self pushProgressViewWithProcessMessage:NSLocalizedString(@"DownloadImageProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"DownloadImageSuccessMessage", @"") andFailMessage:NSLocalizedString(@"DownloadImageFailMessage", @"")];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             [self downloadImageWithURL:[NSURL URLWithString:self.file.tempDownloadUrl]
@@ -1100,7 +1096,7 @@
                        
                        NSArray *activityItems = @[url];
                        
-//                       BOOL thisIsAnImage = self.file.contentType == ContentTypePhoto;
+//                       BOOL thisIsAnImage = [self checkFileIsPhoto:self.file];
                        
                        NSArray *applicationActivities = nil;
 //                       if (thisIsAnImage) {
@@ -1188,6 +1184,10 @@
 }
 
 - (void)orientationChanged:(NSNotification *)notification {
+    // return if orientation is same
+    if (self.previousOrientation == [[UIApplication sharedApplication] statusBarOrientation]) {
+        return;
+    }
     
     __block BOOL reorientingMoreMenu = NO;
     [UIView animateWithDuration:0.5f animations:^{
@@ -1237,7 +1237,7 @@
         
         // resize mainScroll
         [self resizeMainScrollWithGap:30 viewFrame:frame];
-        [self resizeFooterWithIsVisible:(self.file.contentType == ContentTypePhoto || self.asset != nil)];
+        [self resizeFooterWithIsVisible:([AppUtil checkIfFileIsPhoto:self.file] || self.asset != nil)];
         
         // resize confirm dialog if exists
         if(_confirmDialog != nil) {

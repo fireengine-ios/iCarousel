@@ -233,7 +233,7 @@
 #pragma mark RevisitedGroupPhotoDelegate methods
 
 - (void) revisitedGroupedPhotoDidSelectFile:(MetaFile *) fileSelected withList:(NSArray *) containingList withListOffset:(int)listOffset withPackageSize:(int)packageSize {
-    if(fileSelected.contentType == ContentTypePhoto || fileSelected.contentType == ContentTypeVideo) {
+    if([AppUtil checkIfFileIsPhoto:fileSelected] || fileSelected.contentType == ContentTypeVideo) {
         NSMutableArray *filteredPhotoList = [[NSMutableArray alloc] init];
         [filteredPhotoList addObject:fileSelected];
         

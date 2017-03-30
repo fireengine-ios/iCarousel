@@ -946,4 +946,17 @@
     return [[NSUserDefaults standardUserDefaults] boolForKey:APP_FIRST_LAUNCH_FLAG];
 }
 
++ (BOOL) checkIfFileIsPhoto:(MetaFile *) isPhoto {
+    if (isPhoto == nil)
+        return NO;
+    
+    // workaround: bmp files comes wrong contenttype (ContentTypeOther)
+    NSString *extension = [[isPhoto.name substringFromIndex:[isPhoto.name length] -4] lowercaseString];
+    if (isPhoto.contentType == ContentTypePhoto || [extension isEqualToString:@".bmp"]) {
+        return YES;
+    }
+    else
+        return NO;
+}
+
 @end

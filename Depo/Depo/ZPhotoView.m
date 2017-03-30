@@ -41,9 +41,9 @@
         _imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         _imgView.contentMode = UIViewContentModeScaleAspectFit;
         
-        [self showLoading];
-        
         if (self.file) {
+            [self showLoading];
+            
             NSString *imgUrlStr = [self.file.tempDownloadUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
             if(self.file.detail && self.file.detail.thumbLargeUrl) {
                 imgUrlStr = [self.file.detail.thumbLargeUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];

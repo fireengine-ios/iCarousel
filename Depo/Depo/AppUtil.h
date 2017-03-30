@@ -87,4 +87,5 @@
 + (void) writeAppFirstLaunchFlag;
 + (BOOL) readAppFirstLaunchFlag;
 
++ (BOOL) checkIfFileIsPhoto:(MetaFile *) isPhoto;
 @end
