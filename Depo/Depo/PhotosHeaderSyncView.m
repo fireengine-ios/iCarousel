@@ -121,7 +121,7 @@
 }
 
 - (void) checkProgressInfo {
-    int totalUploadCount = [[UploadQueue sharedInstance] totalUploadCount];
+    int totalUploadCount = (int) [[[UploadQueue sharedInstance] uploadManagers] count];
     int finishedUploadCount = [[UploadQueue sharedInstance] finishedUploadCount];
     NSString *infoMessage = [NSString stringWithFormat:@"%d/%d%@", finishedUploadCount + 1, totalUploadCount > AUTO_SYNC_ASSET_COUNT ? AUTO_SYNC_ASSET_COUNT : totalUploadCount, ((totalUploadCount%AUTO_SYNC_ASSET_COUNT==0) || totalUploadCount > AUTO_SYNC_ASSET_COUNT) ? @"+" : @""];
     progressLabel.text = infoMessage;

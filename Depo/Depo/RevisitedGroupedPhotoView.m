@@ -1333,12 +1333,14 @@
         [self addOrUpdateGroup:row];
     }
     
-//    [bulkReadDao requestPhotosAndVideosForPage:0 andSize:300000 andSortType:SortTypeAlphaAsc isMinimal:YES];
+    if([[SyncUtil readSyncHashRemotely] count] > 0) {
+        [[SyncManager sharedInstance] numberOfUnsyncedImages];
+    } else {
+        [bulkReadDao requestPhotosAndVideosForPage:0 andSize:300000 andSortType:SortTypeAlphaAsc isMinimal:YES];
+    }
     
     isLoading = NO;
     
-    [[SyncManager sharedInstance] numberOfUnsyncedImages];
-
     dispatch_async(dispatch_get_main_queue(), ^{
         NSLog(@"RevisitedGroupedPhotoView addUnsyncedFiles ended");
         [collView reloadData];
@@ -1718,23 +1720,13 @@
 - (void) bulkReadSuccessCallback:(NSArray *) bulkFiles {
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^(void) {
         NSMutableArray *hashArray = [[NSMutableArray alloc] init];
-        int unsyncCount = 0;
         for(MetaFile *row in bulkFiles) {
             if(row.metaHash != nil) {
                 [hashArray addObject:row.metaHash];
             }
         }
-        for(ALAsset *anyAsset in localAssets) {
-            NSString *anyLocalHash = [SyncUtil md5StringOfString:[anyAsset.defaultRepresentation.url absoluteString]];
-            if(![hashArray containsObject:anyLocalHash]) {
-                unsyncCount ++;
-            }
-        }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if(syncInfoHeaderView) {
-                [syncInfoHeaderView updateBottomLabelWithCount:unsyncCount];
-            }
-        });
+        [SyncUtil cacheSyncHashesRemotely:hashArray];
+        [[SyncManager sharedInstance] numberOfUnsyncedImages];
     });
 }
 
