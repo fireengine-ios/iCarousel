@@ -20,6 +20,7 @@
 - (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu;
 - (void) footerActionMenuDidSelectPrint:(FooterActionsMenuView *)menu;
 - (void) footerActionMenuDidSelectDownload:(FooterActionsMenuView *) menu;
+- (void) footerActionMenuDidSelectMore:(FooterActionsMenuView *) menu;
 @end
 
 @interface FooterActionsMenuView : UIView

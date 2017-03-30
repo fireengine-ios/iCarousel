@@ -311,7 +311,9 @@
             moreButton.transform = CGAffineTransformIdentity;
         }
     }];
+    
     isExpanded = !isExpanded;
+    [delegate footerActionMenuDidSelectMore:self];
 }
 
 - (void) syncClicked {

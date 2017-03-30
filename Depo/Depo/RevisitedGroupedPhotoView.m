@@ -54,6 +54,8 @@
     
     PhotosHeaderSyncView *syncView;
     NextProcessType postUploadProcessType;
+    
+    float collViewOriginalHeight;
 }
 @end
 
@@ -201,6 +203,7 @@
         collView.alwaysBounceVertical = YES;
         collView.isAccessibilityElement = YES;
         collView.accessibilityIdentifier = @"collViewRevGroupedPhoto";
+        collViewOriginalHeight = collView.frame.size.height;
         [self addSubview:collView];
         
         UIView *searchContainer = [[UIView alloc] initWithFrame:CGRectMake(0, -60, collView.frame.size.width, 60)];
@@ -444,6 +447,7 @@
     if(imgFooterActionMenu) {
         [imgFooterActionMenu removeFromSuperview];
         imgFooterActionMenu = nil;
+        [self resizeCollViewHeightForFooterMenu];
     }
 }
 
@@ -734,10 +738,13 @@
         imgFooterActionMenu.delegate = self;
         [self addSubview:imgFooterActionMenu];
     }
+    
+    [self resizeCollViewHeightForFooterMenu];
 }
 
 - (void) hideImgFooterMenu {
     imgFooterActionMenu.hidden = YES;
+    [self resizeCollViewHeightForFooterMenu];
 }
 
 - (void) revisitedPhotoCollCellImageUploadFinishedForFile:(NSString *) fileSelectedUuid {
@@ -798,6 +805,10 @@
         [self bringSubviewToFront:progress];
         [progress show:YES];
     }
+}
+
+- (void) footerActionMenuDidSelectMore:(FooterActionsMenuView *)menu {
+    [self resizeCollViewHeightForFooterMenu];
 }
 
 - (void) footerActionMenuDidSelectDownload:(FooterActionsMenuView *) menu {
@@ -1727,6 +1738,20 @@
 }
 
 - (void) bulkReadFailCallback:(NSString *) errorMessage {
+}
+
+- (void) resizeCollViewHeightForFooterMenu {
+    
+    if (!imgFooterActionMenu.isHidden) {
+        CGRect frame = collView.frame;
+        frame.size = CGSizeMake(frame.size.width, collViewOriginalHeight - imgFooterActionMenu.frame.size.height);
+        collView.frame = frame;
+    }
+    else if (imgFooterActionMenu.isHidden || imgFooterActionMenu == nil) {
+        CGRect frame = collView.frame;
+        frame.size = CGSizeMake(frame.size.width, collViewOriginalHeight);
+        collView.frame = frame;
+    }
 }
 
 @end
