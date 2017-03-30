@@ -138,7 +138,7 @@
         groups = [[NSMutableArray alloc] init];
         files = [[NSMutableArray alloc] init];
         fileHashList = [[NSMutableArray alloc] init];
-        [fileHashList addObjectsFromArray:[SyncUtil readSyncHashLocally]];
+//        [fileHashList addObjectsFromArray:[SyncUtil readSyncHashLocally]];
         selectedFileList = [[NSMutableArray alloc] init];
         selectedMetaFiles = [[NSMutableArray alloc] init];
         selectedAssets = [[NSMutableArray alloc] init];
@@ -327,7 +327,7 @@
         [groups removeAllObjects];
         [files removeAllObjects];
         [fileHashList removeAllObjects];
-        [fileHashList addObjectsFromArray:[SyncUtil readSyncHashLocally]];
+//        [fileHashList addObjectsFromArray:[SyncUtil readSyncHashLocally]];
         localAssets = nil;
         
         [self.collView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
@@ -1342,7 +1342,7 @@
     isLoading = NO;
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSLog(@"RevisitedGroupedPhotoView addUnsyncedFiles ended");
+        IGLog(@"RevisitedGroupedPhotoView addUnsyncedFiles ended");
         [collView reloadData];
     });
 }
