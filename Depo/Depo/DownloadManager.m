@@ -241,6 +241,7 @@
                                            NSString *normalizedIdentifier = [NSString stringWithFormat:@"assets-library://asset/asset.JPG?id=%@&ext=JPG", seperateds[0]];
                                            NSString *localHash = [SyncUtil md5StringOfString:normalizedIdentifier];
                                            NSLog(@"saved file localHash: %@ - identifier: %@", localHash, normalizedIdentifier);
+                                           [SyncUtil cacheLocallySavedFile:localHash];
                                            [SyncUtil cacheSyncHashLocally:localHash];
                                            [SyncUtil cacheSyncHashRemotely:localHash];
                                            [SyncUtil increaseAutoSyncIndex];
@@ -629,6 +630,7 @@
              }
              NSString *localHash = [SyncUtil md5StringOfString:normalizedIdentifier];
              NSLog(@"saved file localHash: %@ - identifier: %@", localHash, normalizedIdentifier);
+             [SyncUtil cacheLocallySavedFile:localHash];
              [SyncUtil cacheSyncHashLocally:localHash];
              [SyncUtil cacheSyncHashRemotely:localHash];
              [SyncUtil increaseAutoSyncIndex];

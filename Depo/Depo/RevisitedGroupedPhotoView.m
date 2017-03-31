@@ -138,7 +138,7 @@
         groups = [[NSMutableArray alloc] init];
         files = [[NSMutableArray alloc] init];
         fileHashList = [[NSMutableArray alloc] init];
-//        [fileHashList addObjectsFromArray:[SyncUtil readSyncHashLocally]];
+        [fileHashList addObjectsFromArray:[SyncUtil readLocallySavedFiles]];
         selectedFileList = [[NSMutableArray alloc] init];
         selectedMetaFiles = [[NSMutableArray alloc] init];
         selectedAssets = [[NSMutableArray alloc] init];
@@ -327,7 +327,7 @@
         [groups removeAllObjects];
         [files removeAllObjects];
         [fileHashList removeAllObjects];
-//        [fileHashList addObjectsFromArray:[SyncUtil readSyncHashLocally]];
+        [fileHashList addObjectsFromArray:[SyncUtil readLocallySavedFiles]];
         localAssets = nil;
         
         [self.collView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];

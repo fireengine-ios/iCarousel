@@ -475,12 +475,12 @@
                 }];
             } else {
                 IGLog(@"SyncManager listOfUnsyncedImages group enumeration finished");
-                dispatch_async(dispatch_get_main_queue(), ^{
+                //dispatch_async(dispatch_get_main_queue(), ^{
                     IGLog(@"SyncManager listOfUnsyncedImages ends with success");
                     if(infoDelegate) {
                         [infoDelegate syncManagerUnsyncedImageList:unsycedResult];
                     }
-                });
+                //});
             }
         } failureBlock:^(NSError *error) {
             dispatch_async(dispatch_get_main_queue(), ^{

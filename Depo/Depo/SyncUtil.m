@@ -159,6 +159,38 @@
     return result;
 }
 
++ (NSArray *) readLocallySavedFiles {
+    NSArray *result = [[NSArray alloc] init];
+    NSData *arrData = [[NSUserDefaults standardUserDefaults] objectForKey:LOCAL_FILES_HASHES_KEY];
+    //    NSLog(@"LOCAL HASH KEY:%@", [NSString stringWithFormat:SYNCED_LOCAL_HASHES_KEY, [SyncUtil readBaseUrlConstant]]);
+    if (arrData != nil && [arrData isKindOfClass:[NSData class]]) {
+        result = [NSKeyedUnarchiver unarchiveObjectWithData:arrData];
+    }
+    return result;
+}
+
++ (void) cacheLocallySavedFile:(NSString *) hash {
+    NSArray *result = [SyncUtil readLocallySavedFiles];
+    if(![result containsObject:hash]) {
+        NSArray *updatedArray = [result arrayByAddingObject:hash];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray]
+                                                  forKey:LOCAL_FILES_HASHES_KEY];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
++ (void) removeLocallySavedFile:(NSString *) hash {
+    if(hash == nil)
+        return;
+    NSArray *result = [SyncUtil readLocallySavedFiles];
+    if([result containsObject:hash]) {
+        NSMutableArray *updatedArray = [result mutableCopy];
+        [updatedArray removeObject:hash];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray] forKey:LOCAL_FILES_HASHES_KEY];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
 + (BOOL) localHashListContainsHash:(NSString *) hash {
     IGLog(@"SyncUtil localHashListContainsHash");
     return [[SyncUtil readSyncHashLocally] containsObject:hash];

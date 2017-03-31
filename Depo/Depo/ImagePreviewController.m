@@ -884,6 +884,7 @@
                          [library writeImageDataToSavedPhotosAlbum:imageData metadata:nil completionBlock:^(NSURL *assetURL, NSError *error) {
                              NSLog(@"%@", assetURL);
                              NSString *localHash = [SyncUtil md5StringOfString:[assetURL absoluteString]];
+                             [SyncUtil cacheLocallySavedFile:localHash];
                              [SyncUtil cacheSyncHashLocally:localHash];
                              [SyncUtil cacheSyncHashRemotely:localHash];
                              [SyncUtil increaseAutoSyncIndex];

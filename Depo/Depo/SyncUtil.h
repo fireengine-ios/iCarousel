@@ -93,4 +93,7 @@
 +(void)updateLoadedFiles:(NSArray *)files inAlbum:(NSString *)albumName;
 +(void)updateLoadedFilesInCameraRoll:(NSArray *)files;
 
++ (NSArray *) readLocallySavedFiles;
++ (void) cacheLocallySavedFile:(NSString *) hash;
+
 @end
