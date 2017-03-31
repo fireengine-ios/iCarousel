@@ -1247,6 +1247,7 @@
         if(lastCheckedDate != nil) {
             if([lastCheckedDate compare:lastFile.detail.imageDate] == NSOrderedSame) {
                 isLoading = NO;
+                [collView reloadData];
                 return;
             }
         }
