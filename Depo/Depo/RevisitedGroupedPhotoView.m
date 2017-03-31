@@ -460,43 +460,20 @@
     [progress hide:YES];
     IGLog(@"RevisitedGroupedPhotoView readSuccessCallback called");
     
-    if([fileList count] > 0) {
-        if([fileList count] < packageSize) {
-            endOfFiles = YES;
-        } else {
-            endOfFiles = NO;
-        }
-        [files addObjectsFromArray:fileList];
-        
-        NSMutableDictionary *tempDict = [[NSMutableDictionary alloc] init];
-        for(MetaFile *row in fileList) {
-            if(row.detail.fileDate) {
-                NSString *dateStr = [dateCompareFormat stringFromDate:row.detail.fileDate];
-                if([[tempDict allKeys] count] == 0) {
-                    FileInfoGroup *newGroup = [[FileInfoGroup alloc] init];
-                    newGroup.customTitle = dateStr;
-                    newGroup.locationInfo = @"";
-                    newGroup.refDate = row.detail.fileDate;
-                    newGroup.fileInfo = [[NSMutableArray alloc] init];
-                    RawTypeFile *rawFile = [self rawFileForFile:row];
-                    [newGroup.fileInfo addObject:rawFile];
-                    if(rawFile.hashRef) {
-                        [fileHashList addObject:rawFile.hashRef];
-                    }
-                    newGroup.sequence = groupSequence;
-                    newGroup.groupKey = dateStr;
-                    [tempDict setObject:newGroup forKey:dateStr];
-                    
-                    groupSequence ++;
-                } else {
-                    FileInfoGroup *currentGroup = [tempDict objectForKey:dateStr];
-                    if(currentGroup != nil) {
-                        RawTypeFile *rawFile = [self rawFileForFile:row];
-                        [currentGroup.fileInfo addObject:rawFile];
-                        if(rawFile.hashRef) {
-                            [fileHashList addObject:rawFile.hashRef];
-                        }
-                    } else {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        if([fileList count] > 0) {
+            if([fileList count] < packageSize) {
+                endOfFiles = YES;
+            } else {
+                endOfFiles = NO;
+            }
+            [files addObjectsFromArray:fileList];
+            
+            NSMutableDictionary *tempDict = [[NSMutableDictionary alloc] init];
+            for(MetaFile *row in fileList) {
+                if(row.detail.fileDate) {
+                    NSString *dateStr = [dateCompareFormat stringFromDate:row.detail.fileDate];
+                    if([[tempDict allKeys] count] == 0) {
                         FileInfoGroup *newGroup = [[FileInfoGroup alloc] init];
                         newGroup.customTitle = dateStr;
                         newGroup.locationInfo = @"";
@@ -510,70 +487,95 @@
                         newGroup.sequence = groupSequence;
                         newGroup.groupKey = dateStr;
                         [tempDict setObject:newGroup forKey:dateStr];
+                        
                         groupSequence ++;
+                    } else {
+                        FileInfoGroup *currentGroup = [tempDict objectForKey:dateStr];
+                        if(currentGroup != nil) {
+                            RawTypeFile *rawFile = [self rawFileForFile:row];
+                            [currentGroup.fileInfo addObject:rawFile];
+                            if(rawFile.hashRef) {
+                                [fileHashList addObject:rawFile.hashRef];
+                            }
+                        } else {
+                            FileInfoGroup *newGroup = [[FileInfoGroup alloc] init];
+                            newGroup.customTitle = dateStr;
+                            newGroup.locationInfo = @"";
+                            newGroup.refDate = row.detail.fileDate;
+                            newGroup.fileInfo = [[NSMutableArray alloc] init];
+                            RawTypeFile *rawFile = [self rawFileForFile:row];
+                            [newGroup.fileInfo addObject:rawFile];
+                            if(rawFile.hashRef) {
+                                [fileHashList addObject:rawFile.hashRef];
+                            }
+                            newGroup.sequence = groupSequence;
+                            newGroup.groupKey = dateStr;
+                            [tempDict setObject:newGroup forKey:dateStr];
+                            groupSequence ++;
+                        }
+                    }
+                    if(isSelectible && [selectedSectionNames containsObject:dateStr]) {
+                        if(![selectedFileList containsObject:row.uuid]) {
+                            [selectedFileList addObject:row.uuid];
+                            [selectedMetaFiles addObject:row];
+                        }
                     }
                 }
-                if(isSelectible && [selectedSectionNames containsObject:dateStr]) {
-                    if(![selectedFileList containsObject:row.uuid]) {
-                        [selectedFileList addObject:row.uuid];
-                        [selectedMetaFiles addObject:row];
+            }
+            
+            NSArray *tempGroups = [tempDict allValues];
+            NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"refDate" ascending:NO];
+            NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+            tempGroups = [tempGroups sortedArrayUsingDescriptors:sortDescriptors];
+            
+            for(FileInfoGroup *row in tempGroups) {
+                [self addOrUpdateGroup:row];
+            }
+        } else {
+            endOfFiles = YES;
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+           [refreshControl endRefreshing];
+        });
+        NSMutableArray *urlsToPrefetch = [@[] mutableCopy];
+        for (FileInfoGroup *fileInfoGroup in self.groups) {
+            for (RawTypeFile *fileType in fileInfoGroup.fileInfo) {
+                if ([fileType isKindOfClass:[RawTypeFile class]]) {
+                    NSURL *thumbnailURL = [NSURL URLWithString:fileType.fileRef.detail.thumbMediumUrl];
+                    if (thumbnailURL != nil) {
+                        [urlsToPrefetch addObject:thumbnailURL];
                     }
                 }
             }
         }
-        
-        NSArray *tempGroups = [tempDict allValues];
-        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"refDate" ascending:NO];
-        NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-        tempGroups = [tempGroups sortedArrayUsingDescriptors:sortDescriptors];
-        
-        for(FileInfoGroup *row in tempGroups) {
-            [self addOrUpdateGroup:row];
-        }
-    } else {
-        endOfFiles = YES;
-    }
-    
-    [refreshControl endRefreshing];
-    NSMutableArray *urlsToPrefetch = [@[] mutableCopy];
-    for (FileInfoGroup *fileInfoGroup in self.groups) {
-        for (RawTypeFile *fileType in fileInfoGroup.fileInfo) {
-            if ([fileType isKindOfClass:[RawTypeFile class]]) {
-                NSURL *thumbnailURL = [NSURL URLWithString:fileType.fileRef.detail.thumbMediumUrl];
-                if (thumbnailURL != nil) {
-                    [urlsToPrefetch addObject:thumbnailURL];
-                }
+        [[SDWebImagePrefetcher sharedImagePrefetcher] setMaxConcurrentDownloads:10];
+        [[SDWebImagePrefetcher sharedImagePrefetcher] prefetchURLs:urlsToPrefetch];
+        /*
+         if ([files count] == 0 && !anyOngoingPresent) {
+         if (noItemView == nil) {
+         noItemView = [[NoItemView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, collView.frame.size.height) imageName:@"no_photo_icon" titleText:NSLocalizedString(@"EmptyPhotosVideosTitle", @"") descriptionText:NSLocalizedString(@"EmptyPhotosVideosDescription", @"")];
+         [self addSubview:noItemView];
+         }
+         } else if (noItemView != nil) {
+         [noItemView removeFromSuperview];
+         }
+         */
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //TODO yukaridaki comment'li logic'i oturttuktan sonra bu if'i silebilirsin
+            if (noItemView != nil) {
+                [noItemView removeFromSuperview];
             }
+        });
+        if(!initialLoadDone) {
+            initialLoadDone = YES;
         }
-    }
-    [[SDWebImagePrefetcher sharedImagePrefetcher] setMaxConcurrentDownloads:10];
-    [[SDWebImagePrefetcher sharedImagePrefetcher] prefetchURLs:urlsToPrefetch];
-    /*
-     if ([files count] == 0 && !anyOngoingPresent) {
-     if (noItemView == nil) {
-     noItemView = [[NoItemView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, collView.frame.size.height) imageName:@"no_photo_icon" titleText:NSLocalizedString(@"EmptyPhotosVideosTitle", @"") descriptionText:NSLocalizedString(@"EmptyPhotosVideosDescription", @"")];
-     [self addSubview:noItemView];
-     }
-     } else if (noItemView != nil) {
-     [noItemView removeFromSuperview];
-     }
-     */
-    
-    //TODO yukaridaki comment'li logic'i oturttuktan sonra bu if'i silebilirsin
-    if (noItemView != nil) {
-        [noItemView removeFromSuperview];
-    }
-    
-    if(!initialLoadDone) {
-        initialLoadDone = YES;
-    }
-    IGLog(@"RevisitedGroupedPhotoView readSuccessCallback calling SyncManager listOfUnsyncedImages");
-    if(localAssets == nil || [localAssets count] == 0) {
-        [[SyncManager sharedInstance] listOfUnsyncedImages];
-    } else {
-        [self addUnsyncedFiles];
-    }
-    //    [delegate revisitedGroupedPhotoWantsToShowLoading];
+        IGLog(@"RevisitedGroupedPhotoView readSuccessCallback calling SyncManager listOfUnsyncedImages");
+        if(localAssets == nil || [localAssets count] == 0) {
+            [[SyncManager sharedInstance] listOfUnsyncedImages];
+        } else {
+            [self addUnsyncedFiles];
+        }
+    });
 }
 
 - (void) readFailCallback:(NSString *) errorMessage {
@@ -1231,7 +1233,9 @@
 
 - (void) syncManagerNumberOfImagesWaitingForUpload:(int) imgCount {
     if(syncInfoHeaderView) {
-        [syncInfoHeaderView updateBottomLabelWithCount:imgCount];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [syncInfoHeaderView updateBottomLabelWithCount:imgCount];
+        });
     }
 }
 

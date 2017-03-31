@@ -462,7 +462,7 @@
 - (void) listOfUnsyncedImages {
     IGLog(@"SyncManager listOfUnsyncedImages started");
     
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^(void) {
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^(void) {
         NSMutableArray *unsycedResult = [[NSMutableArray alloc] init];
         
         [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
@@ -498,7 +498,7 @@
     NSLog(@"numberOfUnsyncedImages start");
     IGLog(@"SyncManager numberOfUnsyncedImages started");
     
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^(void) {
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^(void) {
         NSArray *localHashList = [SyncUtil readSyncHashLocally];
         NSArray *remoteHashList = [SyncUtil readSyncHashRemotely];
         
@@ -525,12 +525,12 @@
                 }];
             } else {
                 IGLog(@"SyncManager numberOfUnsyncedImages group enumeration finished");
-                dispatch_async(dispatch_get_main_queue(), ^{
+                //dispatch_async(dispatch_get_main_queue(), ^{
                     IGLog(@"SyncManager numberOfUnsyncedImages ends with success");
                     if(infoDelegate) {
                         [infoDelegate syncManagerNumberOfImagesWaitingForUpload:waitCount];
                     }
-                });
+                //});
             }
         } failureBlock:^(NSError *error) {
             IGLog(@"SyncManager numberOfUnsyncedImages ends with failure");
