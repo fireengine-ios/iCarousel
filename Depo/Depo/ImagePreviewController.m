@@ -1077,6 +1077,8 @@
             [(VideoView*)view stopVideo];
         }
     }
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
 }
 
 - (void) triggerDismiss {
