@@ -907,6 +907,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 	self = [super initWithFrame:frame];
 	if (self) {
 		self.backgroundColor = [UIColor clearColor];
+        self.layer.shouldRasterize = YES;
 		self.opaque = NO;
 		_progress = 0.f;
 		_annular = NO;
@@ -930,6 +931,10 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 
 - (void)drawRect:(CGRect)rect {
 	
+    if (self.isHidden) {
+        return;
+    }
+    
 	CGRect allRect = self.bounds;
 	CGRect circleRect = CGRectInset(allRect, 2.0f, 2.0f);
 	CGContextRef context = UIGraphicsGetCurrentContext();
