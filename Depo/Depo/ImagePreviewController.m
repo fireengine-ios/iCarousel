@@ -723,6 +723,7 @@
 - (void) deleteSuccessCallback {
     [self proceedSuccessForProgressView];
     // previewedVideoWasDeleted delegate metdod does the same
+    [SyncUtil removeLocalHash:self.file.metaHash];
     [delegate previewedImageWasDeleted:self.file];
     [self performSelector:@selector(postDelete) withObject:nil afterDelay:1.0f];
 }

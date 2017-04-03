@@ -291,6 +291,7 @@
             for (RawTypeFile *object in fileInfoGroup.fileInfo) {
                 if ([metaFile isEqual:object.fileRef]) {
                     [discardedItems addObject:object];
+                    [SyncUtil removeLocalHash:object.fileRef.metaHash];
                 }
             }
             [fileInfoGroup.fileInfo removeObjectsInArray:discardedItems];
@@ -303,6 +304,7 @@
                     for (RawTypeFile *object in fileInfoGroup.fileInfo) {
                         if ([selectedFile isEqual:object.fileRef]) {
                             [discardedItems addObject:object];
+                            [SyncUtil removeLocalHash:object.fileRef.metaHash];
                         }
                     }
                     [fileInfoGroup.fileInfo removeObjectsInArray:discardedItems];
@@ -405,8 +407,9 @@
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"refDate" ascending:NO];
     NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     self.groups = [[self.groups sortedArrayUsingDescriptors:sortDescriptors] mutableCopy];
-    
-    [self neutralizeSearchBar];
+    dispatch_async(dispatch_get_main_queue(), ^{
+       [self neutralizeSearchBar]; 
+    });
 }
 
 - (void) deleteSuccessCallback {
