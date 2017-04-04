@@ -128,12 +128,14 @@
         profileImgView.accessibilityIdentifier = @"profileImgViewSettings";
         [profileInfoArea addSubview:profileImgView];
         
+    }
+    
         UITapGestureRecognizer *imageTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapped)];
         imageTap.enabled = YES;
         imageTap.numberOfTapsRequired = 1;
         imageTap.isAccessibilityElement = YES;
         [profileImageView addGestureRecognizer:imageTap];
-    }
+    
     
     /*
      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul), ^(void) {
