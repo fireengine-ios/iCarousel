@@ -38,7 +38,8 @@
                                                   withTitleFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:IS_IPHONE_6P_OR_HIGHER ? 16 : 14]
                                            withBorderColor:[Util UIColorForHexColor:@"ffe000"]
                                                withBgColor:[Util UIColorForHexColor:@"ffe000"]
-                                          withCornerRadius:5];
+                                          withCornerRadius:5
+                                            adjustFont:YES];
         [self.backupButton addTarget:self action:@selector(backupClicked) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.backupButton];
         
@@ -52,7 +53,8 @@
                                               withTitleFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:IS_IPHONE_6P_OR_HIGHER ? 16 : 14]
                                             withBorderColor:[Util UIColorForHexColor:@"ffe000"]
                                                 withBgColor:[Util UIColorForHexColor:@"ffe000"]
-                                           withCornerRadius:5];
+                                           withCornerRadius:5
+                                            adjustFont:YES];
         [self.restoreButton addTarget:self action:@selector(restoreClicked) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.restoreButton];
         

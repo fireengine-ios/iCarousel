@@ -23,9 +23,6 @@
         [self addSubview:self.progressLabel];
         
         
-//        self.pieChart = [[XYPieChart alloc] initWithFrame:CGRectMake((frame.size.width-circleProgressWidth)/2, (frame.size.height - circleProgressWidth)/2, circleProgressWidth, circleProgressWidth)];
-//        [self addSubview:self.pieChart];
-        
         self.progressBar = [[CircleProgressBar alloc] initWithFrame:CGRectMake((frame.size.width-circleProgressWidth)/2, (self.progressLabel.frame.origin.y + self.progressLabel.frame.size.height) + (IS_IPAD ? 90 : 40), circleProgressWidth, circleProgressWidth)];
         self.progressBar.progressBarWidth = 5.0;
         self.progressBar.progressBarProgressColor = [Util UIColorForHexColor:@"3fb0e8"];
@@ -35,14 +32,12 @@
         self.progressBar.backgroundColor = [UIColor clearColor];
         [self addSubview:self.progressBar];
         
-//        UIImageView *pieChartBG = [[UIImageView alloc] initWithFrame:CGRectMake((frame.size.width - 300)/2, 10, 300, 300)];
-        UIImageView *pieChartBG = [[UIImageView alloc] initWithFrame:CGRectMake((frame.size.width - (self.progressBar.frame.size.width))/2, self.progressBar.frame.origin.y, self.progressBar.frame.size.width, self.progressBar.frame.size.width)];
-        pieChartBG.image = [UIImage imageNamed:@"contact_progress.png"];
-//        pieChartBG.backgroundColor = [UIColor redColor];
-        pieChartBG.contentMode = UIViewContentModeScaleAspectFit;
-        pieChartBG.clipsToBounds = YES;
-        [pieChartBG.layer setCornerRadius:pieChartBG.frame.size.width/2];
-        [self addSubview:pieChartBG];
+        UIImageView *progressBarBG = [[UIImageView alloc] initWithFrame:CGRectMake((frame.size.width - (self.progressBar.frame.size.width))/2, self.progressBar.frame.origin.y, self.progressBar.frame.size.width, self.progressBar.frame.size.width)];
+        progressBarBG.image = [UIImage imageNamed:@"contact_progress.png"];
+        progressBarBG.contentMode = UIViewContentModeScaleAspectFit;
+        progressBarBG.clipsToBounds = YES;
+        [progressBarBG.layer setCornerRadius:progressBarBG.frame.size.width/2];
+        [self addSubview:progressBarBG];
         
         [self bringSubviewToFront:self.progressBar];
         
@@ -66,14 +61,6 @@
         
         self.percentLabel = [[CustomLabel alloc] initWithFrame:CGRectMake((labelIconContainer.frame.size.width-60)/2, (labelIconContainer.frame.size.height/2) + 5, 60, 40) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:32] withColor:[Util UIColorForHexColor:@"363e4f"] withText:@"% 0" withAlignment:NSTextAlignmentCenter];
         [labelIconContainer addSubview:self.percentLabel];
-        
-        
-        
-        
-        
-        
-        
-        
     }
     return self;
 }

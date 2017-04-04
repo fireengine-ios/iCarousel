@@ -39,7 +39,7 @@
         self.totalCountLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, 0, 100, 40) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:36] withColor:[Util UIColorForHexColor:@"3fb0e8"] withText:@"0"];
         [container addSubview:self.totalCountLabel];
         
-        self.label = [[CustomLabel alloc] initWithFrame:CGRectMake(0, self.totalCountLabel.frame.size.height, 107, 100) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:20] withColor:[Util UIColorForHexColor:@"3fb0e8"] withText:@"" withAlignment:NSTextAlignmentLeft numberOfLines:7];
+        self.label = [[CustomLabel alloc] initWithFrame:CGRectMake(0, self.totalCountLabel.frame.size.height, frame.size.width/2, 100) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:20] withColor:[Util UIColorForHexColor:@"3fb0e8"] withText:@"" withAlignment:NSTextAlignmentLeft numberOfLines:7];
         self.label.lineBreakMode = NSLineBreakByWordWrapping;
         [container addSubview:self.label];
         [self wrapSubviews:container];

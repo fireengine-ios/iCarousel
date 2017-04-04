@@ -47,6 +47,7 @@
 @property (nonatomic) ContactSyncFooterElement *totalContactElement;
 @property (nonatomic) ContactSyncFooterElement *cleanContactElement;
 @property (nonatomic) ContactSyncFooterElement *deleteContactElement;
+@property (nonatomic) NSString *syncProcessStepToLog;
 
 @end
 
@@ -68,43 +69,26 @@
         self.view.backgroundColor = [UIColor whiteColor];
         self.title = NSLocalizedString(@"ContactSyncTitle", @"");
         
-        
-        
         // Get Last Sync Results
-        
         if([SyncUtil readLastContactSyncDate] == nil) {
             lastSyncDateLabel.hidden = YES;
         } else {
             APPDELEGATE.session.syncResult = [ContactSyncResult loadData];;
         }
         
-        
-        
         self.topContainer = [[UIView alloc] initWithFrame:CGRectMake(20, IS_IPHONE_6P_OR_HIGHER ? 40 : 20, self.view.frame.size.width-40, (self.view.frame.size.height/5)*(IS_IPAD ? 3.5 : 2.5))];
 //        self.topContainer.backgroundColor = [UIColor yellowColor];
         [self.view addSubview:self.topContainer];
         
         // Contact Progress View
-        
         progressView = [[ContactSyncProgressView alloc] initWithFrame:CGRectMake(0, 0, self.topContainer.frame.size.width, self.topContainer.frame.size.height)];
-//        [self.topContainer addSubview:progressView];
-        
-        
         
         // Contact Sync View
-        
         syncView = [[ContactSyncView alloc] initWithFrame:CGRectMake(0, 20, self.topContainer.frame.size.width, self.topContainer.frame.size.height)];
         syncView.delegate = self;
-//        [self.topContainer addSubview:syncView];
-        
         
         // Contact Sync Result View
-        
         syncResultView = [[ContactSyncResultView alloc] initWithFrame:CGRectMake(0, 20, self.topContainer.frame.size.width, self.topContainer.frame.size.height)];
-//        [self.topContainer addSubview:syncResultView];
-        
-        
-        
         
         progressView.pieChart.dataSource = self;
         progressView.pieChart.delegate = self;
@@ -118,13 +102,7 @@
         progressView.pieChart.labelShadowColor = [UIColor blackColor];
         
         
-        
-        
-        
-        
-        
         // Footer Elements
-        
         self.footerContainer = [[UIView alloc] initWithFrame:CGRectMake(20, self.topContainer.frame.origin.y + self.topContainer.frame.size.height + (IS_IPHONE_6P_OR_HIGHER ? 60 : 20), self.view.frame.size.width - 40, 20)];
         [self.view addSubview:self.footerContainer];
         
@@ -172,7 +150,6 @@
                     break;
                 }
                 case SYNC_STEP_CHECK_SERVER_STATUS:{
-                    
                     step = @"Reading server info";
                     NSLog(@"progress : %@ %d",step,[[SyncStatus shared].progress intValue]);
                     break;
@@ -189,42 +166,18 @@
                 }
             }
             
-            
+            if (![step isEqualToString:self.syncProcessStepToLog]) {
+                self.syncProcessStepToLog = step;
+                NSString *log = [NSString stringWithFormat:@"ContactSync current progress - %@",self.syncProcessStepToLog];
+                IGLog(log);
+            }
             
             self.processPercent = [[SyncStatus shared].progress floatValue];
             
-//            int y = [[SyncStatus shared].progress intValue];
-//            
-//            
-//            if (self.processPercent >= 100) {
-//                
-//                if (self.processPercent % 100 == 0) {
-//                    self.constant = self.processPercent;
-//                }
-//                self.processPercent = self.constant + y;
-//            }
-//            else {
-//                self.processPercent = y;
-//            }
-//            
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                [self reloadPieChart:self.processPercent/4];
-//                APPDELEGATE.session.contactSyncValue = self.processPercent;
-//            });
-        
-
-        
-            
-            
             dispatch_async(dispatch_get_main_queue(), ^{
-//                [self reloadPieChart:self.processPercent];
                 [self reloadProgressBar:self.processPercent];
             });
         };
-        
-        
-        
-        
         
         [SyncSettings shared].token = APPDELEGATE.session.authToken;
         [SyncSettings shared].url = CONTACT_SYNC_SERVER_URL;
@@ -608,21 +561,6 @@
     
 }
 
-//- (void) reloadPieChart:(int) value {
-//    NSMutableArray *array = [NSMutableArray arrayWithCapacity:2];
-//    [array addObject:[NSNumber numberWithInt:value]];
-//    [array addObject:[NSNumber numberWithInt:100-value]];
-//    
-//    self.statusList = array;
-//    
-//    self.statusColors = [NSArray arrayWithObjects:
-//                         [Util UIColorForHexColor:@"3fb0e8"],
-//                         [UIColor clearColor], nil];
-//    
-//    [progressView.pieChart reloadData];
-//    progressView.percentLabel.text = [NSString stringWithFormat:@"%% %d",value];
-//}
-
 - (void) reloadProgressBar:(CGFloat) value {
     BOOL animate = YES;
     if (value == 0) {
@@ -656,7 +594,7 @@
     totalContactElement.countLabel.text = [NSString stringWithFormat:@"%d",totalContact];
     cleanContactElement.countLabel.text = [NSString stringWithFormat:@"%d",updatedContact];
     deleteContactElement.countLabel.text = [NSString stringWithFormat:@"%d",deletedContact];
-    syncResultView.totalCountLabel.text = [NSString stringWithFormat:@"%d",totalContact];
+    syncResultView.totalCountLabel.text = [NSString stringWithFormat:@"%d",updatedContact];
 }
 
 @end
