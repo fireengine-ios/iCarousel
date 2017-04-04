@@ -22,6 +22,7 @@
 - (NSArray *) uploadRefsForFolder:(NSString *) folderUuid;
 - (UploadRef *) uploadRefForAsset:(NSString *) assetUrl;
 - (NSArray *) uploadImageRefs;
+- (NSArray *) uploadRefHashes;
 - (NSArray *) uploadImageRefsForAlbum:(NSString *) albumUuid;
 - (void) addNewUploadTask:(UploadManager *) newManager;
 - (void) addOnlyNewUploadTask:(UploadManager *) newManager;
@@ -35,6 +36,7 @@
 - (void) manualAutoSyncIterationFinished;
 - (int) remainingCount;
 - (void) cleanAlreadyFinishedManagers;
+- (void) cleanAlreadyFinishedManagersNoReferenceToAutoSync;
 - (UploadManager *) activeManager;
 - (int) totalUploadCount;
 - (int) finishedUploadCount;

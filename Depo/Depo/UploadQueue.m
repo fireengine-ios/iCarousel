@@ -107,6 +107,20 @@
     return result;
 }
 
+- (NSArray *) uploadRefHashes {
+    NSMutableArray *result = [[NSMutableArray alloc] init];
+    @synchronized(uploadManagers) {
+        for(UploadManager *manager in uploadManagers) {
+            if(!manager.uploadRef.hasFinished) {
+                if(manager.uploadRef.localHash != nil) {
+                    [result addObject:manager.uploadRef.localHash];
+                }
+            }
+        }
+    }
+    return result;
+}
+
 - (UploadRef *) uploadRefForAsset:(NSString *) assetUrl {
     @synchronized(uploadManagers) {
         for(UploadManager *manager in uploadManagers) {
@@ -553,6 +567,18 @@
         NSMutableArray *itemsToRemove = [[NSMutableArray alloc] init];
         for(UploadManager *row in uploadManagers) {
             if(row.uploadRef.autoSyncFlag && row.uploadRef.hasFinished) {
+                [itemsToRemove addObject:row];
+            }
+        }
+        [uploadManagers removeObjectsInArray:itemsToRemove];
+    }
+}
+
+- (void) cleanAlreadyFinishedManagersNoReferenceToAutoSync {
+    @synchronized(uploadManagers) {
+        NSMutableArray *itemsToRemove = [[NSMutableArray alloc] init];
+        for(UploadManager *row in uploadManagers) {
+            if(row.uploadRef.hasFinished) {
                 [itemsToRemove addObject:row];
             }
         }

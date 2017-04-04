@@ -1060,6 +1060,8 @@
     if([[UploadQueue sharedInstance] remainingCount] == 0) {
         IGLog(@"At RevisitedGroupedPhotoView autoQueueFinished pullData will be called");
         
+        [[UploadQueue sharedInstance] cleanAlreadyFinishedManagersNoReferenceToAutoSync];
+
         //refresh is postponed for 2 secs for the server to generate thumbnails.. will revisit here
         [self performSelector:@selector(postQueueEmpty) withObject:nil afterDelay:2.0f];
     }
@@ -1260,6 +1262,7 @@
         }
     }
     NSMutableDictionary *tempDict = [[NSMutableDictionary alloc] init];
+//    NSArray *currentUploadingRefHashes = [[UploadQueue sharedInstance] uploadRefHashes];
     for(ALAsset *row in localAssets) {
         NSDate *assetDate = [row valueForProperty:ALAssetPropertyDate];
         
@@ -1274,10 +1277,17 @@
                 shouldShow = NO;
             }
         }
+
+        NSString *rowLocalHash = [SyncUtil md5StringOfString:[row.defaultRepresentation.url absoluteString]];
+
+//        if(shouldShow) {
+//            if([currentUploadingRefHashes containsObject:rowLocalHash]) {
+//                shouldShow = NO;
+//            }
+//        }
         
         if(noFilesFlag || shouldShow || endOfFiles) {
             NSString *dateStr = [dateCompareFormat stringFromDate:assetDate];
-            NSString *rowLocalHash = [SyncUtil md5StringOfString:[row.defaultRepresentation.url absoluteString]];
             if([[tempDict allKeys] count] == 0) {
                 FileInfoGroup *newGroup = [[FileInfoGroup alloc] init];
                 newGroup.customTitle = dateStr;
