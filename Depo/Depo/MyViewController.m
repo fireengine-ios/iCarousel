@@ -20,6 +20,8 @@
 
 @interface MyViewController ()
 
+@property (nonatomic) BOOL willRemoveLoading;
+
 @end
 
 @implementation MyViewController
@@ -71,30 +73,30 @@
         
         UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithCustomView:listButton];
         self.navigationItem.leftBarButtonItem = leftButton;
-        
-        progress = [[MBProgressHUD alloc] initWithFrame:self.view.frame];
-        progress.opacity = 0.4f;
-        [self.view addSubview:progress];
     }
     return self;
 }
 
 - (void) showLoading {
+    self.willRemoveLoading = NO;
+    progress = [[MBProgressHUD alloc] initWithFrame:self.view.frame];
+    progress.opacity = 0.4f;
+    [self.view addSubview:progress];
+    
     [progress show:YES];
     [self.view bringSubviewToFront:progress];
-    /*
-    loadingView.hidden = NO;
-    [self.view bringSubviewToFront:loadingView];
-    [loadingView startAnimation];
-     */
 }
 
 - (void) hideLoading {
     [progress hide:YES];
-    /*
-    loadingView.hidden = YES;
-    [loadingView stopAnimation];
-     */
+    _willRemoveLoading = YES;
+    // remove after animationr
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if (_willRemoveLoading) {
+            [progress removeFromSuperview];
+            progress = nil;
+        }
+    });
 }
 
 - (void) menuClicked {

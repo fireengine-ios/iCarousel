@@ -23,11 +23,6 @@
     if (self) {
         _isZoomEnabled = zoomEnabled;
         
-        // progress view
-        self.progress = [[MBProgressHUD alloc] initWithFrame:self.frame];
-        self.progress.opacity = 0.4f;
-        [self addSubview:self.progress];
-        
         // file
         self.file = metaFile;
         
@@ -56,6 +51,7 @@
                      [weakSelf hideLoading];
                      if (!error) {
                          [weakSelf resizeScrollView];
+                         [self bringSubviewToFront:self.progress];
                      }
                  });
              }];
@@ -112,21 +108,22 @@
 }
 
 - (void) showLoading {
-    [_progress show:YES];
-    [self bringSubviewToFront:_progress];
-    /*
-     loadingView.hidden = NO;
-     [self.view bringSubviewToFront:loadingView];
-     [loadingView startAnimation];
-     */
+    // progress view
+    self.progress = [[MBProgressHUD alloc] initWithFrame:self.frame];
+    self.progress.opacity = 0.4f;
+    [self addSubview:self.progress];
+    
+    [self.progress show:YES];
+    [self bringSubviewToFront:self.progress];
 }
 
 - (void) hideLoading {
-    [_progress hide:YES];
-    /*
-     loadingView.hidden = YES;
-     [loadingView stopAnimation];
-     */
+    [self.progress hide:YES];
+    // remove after animation
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.progress removeFromSuperview];
+        self.progress = nil;
+    });
 }
 
 #pragma mark - UIScrolView Delegate Functions

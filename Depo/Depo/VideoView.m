@@ -37,11 +37,6 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoIsReady:) name:VIDEO_READY_TO_PLAY_NOTIFICATION object:nil];
         
-        // progress view
-        _progress = [[MBProgressHUD alloc] initWithFrame:self.frame];
-        _progress.opacity = 0.4f;
-        [self addSubview:_progress];
-        
         // thumbail image
         _thumbailImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         _thumbailImage.contentMode = UIViewContentModeScaleAspectFit;
@@ -113,21 +108,22 @@
 #pragma mark - Loading Functions
 
 - (void) showLoading {
+    // progress view
+    _progress = [[MBProgressHUD alloc] initWithFrame:self.frame];
+    _progress.opacity = 0.4f;
+    [self addSubview:_progress];
+    
     [_progress show:YES];
     [self bringSubviewToFront:_progress];
-    /*
-     loadingView.hidden = NO;
-     [self.view bringSubviewToFront:loadingView];
-     [loadingView startAnimation];
-     */
 }
 
 - (void) hideLoading {
-    [_progress hide:YES];
-    /*
-     loadingView.hidden = YES;
-     [loadingView stopAnimation];
-     */
+    [_progress hide:NO];
+    // remove after animation
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.progress removeFromSuperview];
+        _progress = nil;
+    });
 }
 
 #pragma mark - CustomAVPlayerDelegate

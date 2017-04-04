@@ -325,7 +325,9 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 - (void)dealloc {
 	[self unregisterFromNotifications];
 	[self unregisterFromKVO];
+    [annularIndicator removeFromSuperview];
 #if !__has_feature(objc_arc)
+    [annularIndicator release];
 	[color release];
 	[indicator release];
 	[label release];
@@ -404,6 +406,17 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 	}
 	// ... otherwise hide the HUD immediately
 	[self hideUsingAnimation:useAnimation];
+}
+
+- (void)willMoveToSuperview:(UIView *)newSuperview {
+    if (newSuperview == nil) {
+        if (self.graceTimer)
+            [self.graceTimer invalidate];
+        if (minShowTimer)
+            [minShowTimer invalidate];
+        if (frameTimer)
+            [frameTimer invalidate];
+    }
 }
 
 - (void) invalidateWindowTimer {
