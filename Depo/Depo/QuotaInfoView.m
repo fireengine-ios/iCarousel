@@ -48,9 +48,6 @@
              usedQuotaPercentage = (double)usage.usedStorage/(double)usage.totalStorage;
          }
          
-         
-         
-         
          //Package Name Label
          
          CustomLabel *packageLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 15) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withColor:[Util UIColorForHexColor:@"363e4f"] withText:@"" withAlignment:NSTextAlignmentLeft numberOfLines:1];
@@ -65,8 +62,6 @@
              [self addSubview:packageDateLabel];
          }
          
-         
-         
          //Package Usage Bar
          
          packageUsageBar = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
@@ -80,7 +75,7 @@
          
          //Package Rest Label
          
-         CustomLabel *packageRestLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, packageUsageBar.frame.origin.y - 17, 50, 12) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:12] withColor:[Util UIColorForHexColor:@"7b8497"] withText:NSLocalizedString(@"RemainingQuotaTitle", @"") withAlignment:NSTextAlignmentLeft numberOfLines:1];
+         CustomLabel *packageRestLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, packageUsageBar.frame.origin.y - 17, 60, 12) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:12] withColor:[Util UIColorForHexColor:@"7b8497"] withText:NSLocalizedString(@"RemainingQuotaTitle", @"") withAlignment:NSTextAlignmentLeft numberOfLines:1];
          [self addSubview:packageRestLabel];
          
          //Package Usage Label Container
@@ -155,23 +150,14 @@
     NSString *totalStorage = [Util transformedHugeSizeValueDecimalIfNecessary:usage.totalStorage];
     NSArray *myArray = [totalStorage componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]];
     
-    
-    
     NSString *usedStorage = [Util transformedHugeSizeValue:[usage usedStorage]];
     NSArray *myArray2 = [usedStorage componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]];
-    
-    
 
     return [myArray arrayByAddingObjectsFromArray:myArray2];
     
 }
 
 - (NSString *) getExpireDate:(long long) timeInMiliseconds {
-    
-//    NSTimeInterval timeInMiliseconds = [[NSDate date] timeIntervalSince1970];
-//    NSDate *date = [[NSDate date] dateByAddingTimeInterval:timeInMiliseconds];
-    
-//    NSDate* date = [NSDate dateWithTimeIntervalSinceReferenceDate:timeInMiliseconds];
     
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:((double)timeInMiliseconds / 1000)];
     
