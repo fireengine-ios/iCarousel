@@ -8,6 +8,7 @@
 #import "ContactSyncSDK.h"
 #import "ContactUtil.h"
 #import "SyncConstants.h"
+#import <sys/utsname.h>
 
 @interface SyncHelper : NSObject
 
@@ -102,6 +103,12 @@ static bool syncing = false;
         [defaults synchronize];
     }
     SYNC_Log(@"UUID [Device ID]:%@", _deviceId);
+    
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    
+    SYNC_Log(@"Device Info:%@", [NSString stringWithCString:systemInfo.machine
+                                                  encoding:NSUTF8StringEncoding]);
     
     if (!SYNC_IS_NULL(self.updateId)){
         _startNewSync = YES;
@@ -326,12 +333,13 @@ static bool syncing = false;
         [_deletedLocalContactRemoteIds addObject:record.remoteId];
     }
     
-    for(NSNumber *objectID in _dirtyRemoteContacts){
+    for(NSNumber *objectID in [_dirtyRemoteContacts allKeys]){
         Contact *contact = [_dirtyRemoteContacts objectForKey:objectID];
         if( [_deletedLocalContactRemoteIds containsObject:contact.remoteId] ){  // It will return Yes or No
             [_dirtyRemoteContacts removeObjectForKey:contact.objectId];
         }
     }
+    
     [self notifyProgress:@100];
     
     [self submitDirtyRecordsForBackup];

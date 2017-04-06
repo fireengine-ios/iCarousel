@@ -335,7 +335,7 @@
         contact.hasPhoneNumber = YES;
         
         ContactPhone *phone = (ContactPhone *)[[ContactPhone alloc] initWithValue:phoneNumber andType:type];
-        if (![self isAdded:contact value:phone]) {
+        if (![self isAdded:contact value:phone] && phoneNumber.length <= 255) {
             SYNC_Log(@"%@ %@ %@ %@ phone :%@ %@", contact.firstName, contact.middleName, contact.nickName, contact.lastName, phoneNumber, type);
             [contact.devices addObject:phone];
         }
@@ -365,7 +365,7 @@
         }
         
         ContactEmail *newMail = [[ContactEmail alloc] initWithValue:mailAddress andType:type];
-        if (![self isAdded:contact value:newMail]) {
+        if (![self isAdded:contact value:newMail] && mailAddress.length <= 255) {
             SYNC_Log(@"%@ %@ %@ %@ emai :%@ %@", contact.firstName, contact.middleName, contact.nickName, contact.lastName, mailAddress, type);
             [contact.devices addObject:newMail];
         }

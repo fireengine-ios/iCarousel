@@ -139,6 +139,12 @@
         }
     }
     
+    [self addHeader:@"Accept" value:@"application/json" request:request];
+    [self addHeader:@"X-Requested-With" value:@"XMLHttpRequest" request:request];
+    [self addHeader:@"User-Agent" value:SYNC_USER_AGENT request:request];
+    [self addHeader:SYNC_HEADER_AUTH_TOKEN value:[SyncSettings shared].token request:request];
+    [self addHeader:SYNC_HEADER_CLIENT_VERSION value:SYNC_VERSION request:request];
+    
     void (^success)(id responseObject) = ^(id responseObject){
         NSLog(@"url response: %@ %@", url, responseObject);
         if (callback)
