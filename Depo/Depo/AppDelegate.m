@@ -735,9 +735,7 @@
         }];
         
         [progress hide:NO];
-        [self.window.rootViewController presentViewController:se
-                                                     animated:YES
-                                                   completion:nil];
+        [self.window setRootViewController:se];
         // set key
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:key];
     }
