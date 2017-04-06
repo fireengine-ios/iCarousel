@@ -27,7 +27,7 @@ static const CGFloat topOffset = 40;
 {
     [super viewDidLoad];
     
-    self.title = NSLocalizedString(@"Select Country", "");
+    self.title = NSLocalizedString(@"SelectCountry", "");
 //    NSLog(@"selected country = %@", self.selectedCountry);
     
     _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40)];
