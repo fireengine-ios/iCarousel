@@ -74,6 +74,7 @@
 #import "DropboxExportController.h"
 #import "SettingsSocialController.h"
 #import "SettingsHelpController.h"
+#import "SyncExperienceController.h"
 
 //TODO info'larda version update
 
@@ -720,7 +721,26 @@
 
 - (void) tokenManagerDidReceiveToken {
     IGLog(@"AppDelegate tokenManagerDidReceiveToken");
-    [tokenManager requestUserInfo];
+    
+    NSString *key = [NSString stringWithFormat:@"new-sync-experience-%@", [CacheUtil readCachedMsisdnForPostMigration]];
+    
+    // did this user saw the new sync experience page?
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:key]) {
+        [tokenManager requestUserInfo];
+    } else {
+        // show splash page
+        SyncExperienceController *se = [[SyncExperienceController alloc] initWithCompletion:^{
+            [progress show:YES];
+            [tokenManager requestUserInfo];
+        }];
+        
+        [progress hide:NO];
+        [self.window.rootViewController presentViewController:se
+                                                     animated:YES
+                                                   completion:nil];
+        // set key
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:key];
+    }
 }
 
 - (void) tokenManagerDidReceiveUserInfo {
