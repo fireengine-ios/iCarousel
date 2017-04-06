@@ -8,6 +8,7 @@
 #import "ContactSyncSDK.h"
 #import "ContactUtil.h"
 #import "SyncConstants.h"
+#import <sys/utsname.h>
 
 @interface SyncHelper : NSObject
 
@@ -79,6 +80,8 @@ static bool syncing = false;
     [[SyncLogger shared] startLogging:
      [NSString stringWithFormat:@"%@-%@",[SyncSettings shared].token,[@(mode) stringValue]]];
     
+    [self notifyProgress:@0];
+    
     [[ContactUtil shared] reset];
     self.initialContactCount = -1;
     self.updateId = nil;
@@ -100,6 +103,12 @@ static bool syncing = false;
         [defaults synchronize];
     }
     SYNC_Log(@"UUID [Device ID]:%@", _deviceId);
+    
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    
+    SYNC_Log(@"Device Info:%@", [NSString stringWithCString:systemInfo.machine
+                                                  encoding:NSUTF8StringEncoding]);
     
     if (!SYNC_IS_NULL(self.updateId)){
         _startNewSync = YES;
@@ -139,9 +148,12 @@ static bool syncing = false;
     SYNC_Log(@"Before BACKUP");
     [[ContactUtil shared] printContacts];
     
+    [self notifyProgress:SYNC_STEP_READ_LOCAL_CONTACTS progress:0];
+    
     NSMutableArray *contacts = [[ContactUtil shared] fetchContacts];
     self.initialContactCount = [contacts count];
     if (!SYNC_IS_NULL(contacts) && [contacts count]>0){
+        int i = 0;
         for (Contact *contact in contacts){
             if (!SYNC_IS_NULL(contact) && ![_localContactIds containsObject:[contact objectId]]){
                 // localContactIds is used to find removed contacts from phone using "NOT IN" in local database.
@@ -200,6 +212,10 @@ static bool syncing = false;
                         }
                     }
             }
+            if (++i%100==0){
+                double progress = ((double)i*100)/[contacts count];
+                [self notifyProgress:@(progress)];
+            }
         }
     }
     _deletedLocalContactRemoteIds = [NSMutableSet setWithSet:_remoteUpdatedContactRemoteIds];
@@ -212,64 +228,70 @@ static bool syncing = false;
     self.deletedContactIds = [NSMutableDictionary new];
     self.createdLocalContacts = [NSMutableDictionary new];
     
-        SYNC_Log(@"Before RESTORE");
-        [[ContactUtil shared] printContacts];
-        [[SyncDBUtils shared] printRecords];
-        
+    SYNC_Log(@"Before RESTORE");
+    [[ContactUtil shared] printContacts];
+    [[SyncDBUtils shared] printRecords];
+    
+    [self notifyProgress:SYNC_STEP_READ_LOCAL_CONTACTS progress:0];
+    
 
-        NSMutableArray *contacts = [[ContactUtil shared] fetchContacts];
-        self.initialContactCount = [contacts count];
-        if (!SYNC_IS_NULL(contacts) && [contacts count]>0){
-            for (Contact *contact in contacts){
-                
-                if (!SYNC_IS_NULL(contact) && ![_localContactIds containsObject:[contact objectId]]){
-                    [_localContactIds addObject:[contact objectId]];    // localContactIds is used to find removed contacts from phone using "NOT IN" in local database.
-                    SyncRecord *rec =[_db isRecorded:contact]; // Is the record in the local database? If record is exist then add add remoteId into the contact.
-                    if ( SYNC_IS_NULL(rec) ){   // Is the record in the local database?
-                        SYNC_Log(@"Record not exists : %@",[contact objectId]);
-                        /*
-                         * Contact is not in the local database.
-                         */
-                        [[ContactUtil shared] fetchNumbers:contact];
-                        [[ContactUtil shared] fetchEmails:contact];
-                        if (contact.hasName || contact.hasPhoneNumber){
-                            [_createdLocalContacts setObject:contact forKey:contact.objectId];
-                        } else { //ignore contact if it has neither name nor phone number
-                            SYNC_Log(@"Ignore contact : %@",[contact objectId]);
-                            [_localContactIds removeObject:[contact objectId]];
-                        }
-                        
-                    }
-                    else{
-                        /*
-                         * Contact is in the local database.
-                         */
-                        
-                        if ([contact.localUpdateDate longLongValue] > [rec.localUpdateDate longLongValue]){
-                            /*
-                             * Fetch devices to calculate md5 hash. Not only localupdate time but also check hash value to understand change
-                             */
-                            [[ContactUtil shared] fetchNumbers:contact];
-                            [[ContactUtil shared] fetchEmails:contact];
-                            NSString *checksum = [contact toMD5];
-                            if ( ![checksum isEqualToString:rec.checksum]){
-                                SYNC_Log(@"modifiedContactIds : %@ %@ => %@ %@ %@ %@",rec.remoteId,rec.localId,contact.localUpdateDate,rec.localUpdateDate, checksum, rec.checksum);
-                                [_modifiedContactIds setObject:rec.remoteId forKey:rec.localId];
-                            } else {
-                                /*
-                                 * Update timestamp to prevent contact for being a dirty contact.
-                                 */
-                                rec.localUpdateDate = contact.localUpdateDate;
-                                [_db save:rec status:UPDATED_CONTACT];
-                            }
-
-                        }
+    NSMutableArray *contacts = [[ContactUtil shared] fetchContacts];
+    self.initialContactCount = [contacts count];
+    if (!SYNC_IS_NULL(contacts) && [contacts count]>0){
+        int i = 0;
+        for (Contact *contact in contacts){
+            
+            if (!SYNC_IS_NULL(contact) && ![_localContactIds containsObject:[contact objectId]]){
+                [_localContactIds addObject:[contact objectId]];    // localContactIds is used to find removed contacts from phone using "NOT IN" in local database.
+                SyncRecord *rec =[_db isRecorded:contact]; // Is the record in the local database? If record is exist then add add remoteId into the contact.
+                if ( SYNC_IS_NULL(rec) ){   // Is the record in the local database?
+                    SYNC_Log(@"Record not exists : %@",[contact objectId]);
+                    /*
+                     * Contact is not in the local database.
+                     */
+                    [[ContactUtil shared] fetchNumbers:contact];
+                    [[ContactUtil shared] fetchEmails:contact];
+                    if (contact.hasName || contact.hasPhoneNumber){
+                        [_createdLocalContacts setObject:contact forKey:contact.objectId];
+                    } else { //ignore contact if it has neither name nor phone number
+                        SYNC_Log(@"Ignore contact : %@",[contact objectId]);
+                        [_localContactIds removeObject:[contact objectId]];
                     }
                     
                 }
+                else{
+                    /*
+                     * Contact is in the local database.
+                     */
+                    
+                    if ([contact.localUpdateDate longLongValue] > [rec.localUpdateDate longLongValue]){
+                        /*
+                         * Fetch devices to calculate md5 hash. Not only localupdate time but also check hash value to understand change
+                         */
+                        [[ContactUtil shared] fetchNumbers:contact];
+                        [[ContactUtil shared] fetchEmails:contact];
+                        NSString *checksum = [contact toMD5];
+                        if ( ![checksum isEqualToString:rec.checksum]){
+                            SYNC_Log(@"modifiedContactIds : %@ %@ => %@ %@ %@ %@",rec.remoteId,rec.localId,contact.localUpdateDate,rec.localUpdateDate, checksum, rec.checksum);
+                            [_modifiedContactIds setObject:rec.remoteId forKey:rec.localId];
+                        } else {
+                            /*
+                             * Update timestamp to prevent contact for being a dirty contact.
+                             */
+                            rec.localUpdateDate = contact.localUpdateDate;
+                            [_db save:rec status:UPDATED_CONTACT];
+                        }
+
+                    }
+                }
+                if (++i%100==0){
+                    double progress = ((double)i*100)/[contacts count];
+                    [self notifyProgress:@(progress)];
+                }
             }
         }
-        [self findDeletedRecordsRestore];
+    }
+    [self findDeletedRecordsRestore];
 
 }
 
@@ -279,22 +301,24 @@ static bool syncing = false;
  */
 - (void)getUpdatedContactsFromServerForBackup
 {
-        [SyncAdapter getUpdatedContacts:[ContactSyncSDK lastSyncTime] deviceId:_deviceId callback:^(id response, BOOL success) {
-            if (success){
-                NSDictionary *data = response[SYNC_JSON_PARAM_DATA];
-                NSArray *updatedList = data[SYNC_JSON_PARAM_UPDATED];
-                NSNumber *lastSyncTime = data[SYNC_JSON_PARAP_SERVER_TIMESTAMP];
-                [self setLastSync:lastSyncTime.longLongValue];
-                for (NSArray *updatedRemoteID in updatedList){
-                    if(![_remoteUpdatedContactRemoteIds containsObject:updatedRemoteID]){
-                        [_remoteUpdatedContactRemoteIds addObject:updatedRemoteID];
-                    }
+    [self notifyProgress:SYNC_STEP_CHECK_SERVER_STATUS progress:@0];
+    [SyncAdapter getUpdatedContacts:[ContactSyncSDK lastSyncTime] deviceId:_deviceId callback:^(id response, BOOL success) {
+        if (success){
+            NSDictionary *data = response[SYNC_JSON_PARAM_DATA];
+            NSArray *updatedList = data[SYNC_JSON_PARAM_UPDATED];
+            NSNumber *lastSyncTime = data[SYNC_JSON_PARAP_SERVER_TIMESTAMP];
+            [self setLastSync:lastSyncTime.longLongValue];
+            for (NSArray *updatedRemoteID in updatedList){
+                if(![_remoteUpdatedContactRemoteIds containsObject:updatedRemoteID]){
+                    [_remoteUpdatedContactRemoteIds addObject:updatedRemoteID];
                 }
-                [self fetchLocalContactsForBackup];
-            } else {
-                [self endOfSyncCycle:response==nil?SYNC_RESULT_ERROR_REMOTE_SERVER:SYNC_RESULT_ERROR_NETWORK];
             }
-        }];
+            [self notifyProgress:@100];
+            [self fetchLocalContactsForBackup];
+        } else {
+            [self endOfSyncCycle:response==nil?SYNC_RESULT_ERROR_REMOTE_SERVER:SYNC_RESULT_ERROR_NETWORK];
+        }
+    }];
 }
 
 
@@ -309,13 +333,18 @@ static bool syncing = false;
         [_deletedLocalContactRemoteIds addObject:record.remoteId];
     }
     
-    for(NSNumber *objectID in _dirtyRemoteContacts){
+    for(NSNumber *objectID in [_dirtyRemoteContacts allKeys]){
         Contact *contact = [_dirtyRemoteContacts objectForKey:objectID];
         if( [_deletedLocalContactRemoteIds containsObject:contact.remoteId] ){  // It will return Yes or No
             [_dirtyRemoteContacts removeObjectForKey:contact.objectId];
         }
     }
+    
+    [self notifyProgress:@100];
+    
     [self submitDirtyRecordsForBackup];
+    
+    
 }
 
 
@@ -329,7 +358,12 @@ static bool syncing = false;
     for (SyncRecord *record in records){
         [_deletedContactIds setObject:record.remoteId forKey:record.localId];
     }
+    
+    [self notifyProgress:@100];
+    
     [self submitDirtyRecordsForRestore];
+    
+    
 
 }
 
@@ -352,7 +386,7 @@ static bool syncing = false;
     SYNC_Log(@"New Contacts: %@", array);
     
     NSArray *modifiedContactIDs = [deletedContactIDs arrayByAddingObjectsFromArray:updatedContactIDs];
-    
+    [self notifyProgress:SYNC_STEP_SERVER_IN_PROGRESS progress:@0];
     [SyncAdapter restoreContactsWithTimestamp:[[ContactSyncSDK lastSyncTime] longLongValue] deviceId:_deviceId modifiedContactIDs:modifiedContactIDs newContacts:newContacts callback:^(id response, BOOL isSuccess) {
         if (isSuccess){
             NSMutableArray *storeDeleted = [NSMutableArray new];
@@ -550,6 +584,8 @@ static bool syncing = false;
             }
             NSString *status = data[@"status"];
             if ([@"COMPLETED" isEqualToString:status]){
+                [self notifyProgress:SYNC_STEP_SERVER_IN_PROGRESS progress:@100];
+                
                 NSArray *contactsDirty = [self restoreRecordsFromUserDefaultsForBackup:SYNC_KEY_CONTACT_STORE_DIRTY];
                 NSArray *contactsDeleted = [self restoreRecordsFromUserDefaultsForBackup:SYNC_KEY_CONTACT_STORE_DELETED];
                 
@@ -596,6 +632,7 @@ static bool syncing = false;
                 if(!SYNC_IS_NULL(remoteIDs))
                     remoteIdsCount = [remoteIDs count];
                 
+                [self notifyProgress:SYNC_STEP_PROCESSING_RESPONSE progress:@0];
                 for (int i=0;i<remoteIdsCount;i++){      // Update Remote IDs.
                     NSNumber *item = remoteIDs[i];
                     if (!SYNC_NUMBER_IS_NULL_OR_ZERO(item)){
@@ -617,6 +654,11 @@ static bool syncing = false;
 
                         [_db save:record];
                     }
+                    
+                    if (i%100==0){
+                        double progress = ((double)i*100)/remoteIdsCount;
+                        [self notifyProgress:@(progress)];
+                    }
                 }
                 
                 NSNumber *created = stats[@"created"];
@@ -637,6 +679,8 @@ static bool syncing = false;
                 SYNC_Log(@"After processing BACKUP");
                 [[ContactUtil shared] printContacts];
                 
+                [self notifyProgress:@100];
+                
                 [self endOfSyncCycle:SYNC_RESULT_SUCCESS];
             } else if ([@"ERROR" isEqualToString:data[@"status"]]) {
                 [defaults removeObjectForKey:SYNC_KEY_CONTACT_STORE_DELETED];
@@ -654,7 +698,12 @@ static bool syncing = false;
                     [self endOfSyncCycle:SYNC_RESULT_ERROR_REMOTE_SERVER messages:result];
                 }
             } else {
-                [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(checkProgressStatusForBackup) userInfo:nil repeats:NO];
+                if (!SYNC_NUMBER_IS_NULL_OR_ZERO(data[@"progress"])){
+                    [self notifyProgress:SYNC_STEP_SERVER_IN_PROGRESS progress:data[@"progress"]];
+                }
+                dispatch_async( dispatch_get_main_queue(), ^{
+                    [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(checkProgressStatusForBackup) userInfo:nil repeats:NO];
+                });
             }
         } else {
             [self endOfSyncCycle:response==nil?SYNC_RESULT_ERROR_REMOTE_SERVER:SYNC_RESULT_ERROR_NETWORK];
@@ -682,6 +731,8 @@ static bool syncing = false;
             }
             NSString *status = data[@"status"];
             if ([@"COMPLETED" isEqualToString:status]){
+                [self notifyProgress:SYNC_STEP_SERVER_IN_PROGRESS progress:@100];
+                
                 SYNC_Log(@"Before processing RESTORE");
                 [[ContactUtil shared] printContacts];
                 
@@ -698,6 +749,8 @@ static bool syncing = false;
                 NSDictionary *resultOut = [NSJSONSerialization JSONObjectWithData:dataResultOut options:0 error:nil];
                 SYNC_Log(@"Results:%@", resultOut);
                 
+                [self notifyProgress:SYNC_STEP_PROCESSING_RESPONSE progress:@0];
+                
                 NSArray *allRecords = [_db fetch];
                 //fetch records from database and cache them
                 NSMutableDictionary *recordSet = [NSMutableDictionary new]; // remoteID, dbRecord
@@ -708,8 +761,11 @@ static bool syncing = false;
                     }
                 }
                 
+                [self notifyProgress:@5];
+                
                 NSMutableArray *newRecords = [NSMutableArray new];
                 NSDate *now;
+
                 for (NSDictionary *item in resultOut[@"result"]){
                     Contact *remoteContact = [[Contact alloc] initWithDictionary:item];
                     SYNCContactStatus contactStatus;
@@ -792,8 +848,9 @@ static bool syncing = false;
                     if (!SYNC_IS_NULL(remoteContact.objectId)) {
                         [_localContactIds addObject:remoteContact.objectId];
                     }
-                    
                 }
+                
+                [self notifyProgress:@10];
                 
                 /*
                  * At the end of the adding contacts into the phone, the result should be apply.
@@ -834,9 +891,15 @@ static bool syncing = false;
                     if (success){    // Add record to the database. If it will return success then add record to recordSet cache.
                         SYNC_SET_DICT_IF_NOT_NIL(recordSet, record, record.remoteId);
                     }
+                    
+                    if (i%100==0){
+                        double progress = ((double)i*80)/recordCounter;
+                        [self notifyProgress:@(10+progress)];
+                    }
                 }
                 
                 now = [NSDate date];
+                int i = 0;
                 for (NSDictionary *item in resultOut[@"newDuplicateContacts"]){
                     SYNCContactStatus contactStatus = NEW_CONTACT;
                     Contact *remoteContact = [[Contact alloc] initWithDictionary:item];
@@ -856,6 +919,11 @@ static bool syncing = false;
                         contactStatus = UPDATED_CONTACT;
                     }
                     [_db save:record status:contactStatus];
+                    
+                    if (++i%100==0){
+                        double progress = ((double)i*10)/recordCounter;
+                        [self notifyProgress:@(90+progress)];
+                    }
                 }
                 
                 NSArray *deletedList = resultOut[@"deleted"];
@@ -868,6 +936,8 @@ static bool syncing = false;
                 SYNC_Log(@"After processing RESTORE");
                 [[ContactUtil shared] printContacts];
                 [[SyncDBUtils shared] printRecords];
+                
+                [self notifyProgress:@100];
                 
                 [SyncStatus shared].totalContactOnServer = [NSNumber numberWithInteger:0];
                 [SyncStatus shared].totalContactOnClient = [NSNumber numberWithInteger:[[ContactUtil shared] getContactCount]];
@@ -889,7 +959,12 @@ static bool syncing = false;
                     [self endOfSyncCycle:SYNC_RESULT_ERROR_REMOTE_SERVER messages:result];
                 }
             } else {
-                [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(checkProgressStatusForRestore) userInfo:nil repeats:NO];
+                if (!SYNC_NUMBER_IS_NULL_OR_ZERO(data[@"progress"])){
+                    [self notifyProgress:SYNC_STEP_SERVER_IN_PROGRESS progress:data[@"progress"]];
+                }
+                dispatch_async( dispatch_get_main_queue(), ^{
+                    [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(checkProgressStatusForRestore) userInfo:nil repeats:NO];
+                });
             }
         } else {
             [self endOfSyncCycle:response==nil?SYNC_RESULT_ERROR_REMOTE_SERVER:SYNC_RESULT_ERROR_NETWORK];
@@ -919,12 +994,42 @@ static bool syncing = false;
     
     void (^callback)(id) = [SyncSettings shared].callback;
     if (callback){
-        callback(messages);
+        dispatch_async( dispatch_get_main_queue(), ^{
+            callback(messages);
+            
+            if (_startNewSync){
+                _startNewSync = NO;
+                
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    [self startSyncing:_mode];
+                });
+            }
+        });
     }
     
-    if (_startNewSync){
-        _startNewSync = NO;
-        [self startSyncing:_mode];
+    
+}
+
+- (void)notifyProgress:(NSNumber*)progress
+{
+    SyncStatus *status = [SyncStatus shared];
+    status.progress = progress;
+    
+    void (^callback)(void) = [SyncSettings shared].progressCallback;
+    if (callback){
+        callback();
+    }
+}
+
+- (void)notifyProgress:(SYNCStep)step progress:(NSNumber*)progress
+{
+    SyncStatus *status = [SyncStatus shared];
+    status.step = step;
+    status.progress = progress;
+    
+    void (^callback)(void) = [SyncSettings shared].progressCallback;
+    if (callback){
+        callback();
     }
 }
 
@@ -965,25 +1070,37 @@ static bool syncing = false;
                 for (Contact *contact in contacts){
                     if (!SYNC_IS_NULL(contact)){
                         if (contact.hasName){
-                            if (callback!=nil)
-                                callback(SYNC_RESULT_SUCCESS);
+                            if (callback!=nil){
+                                dispatch_async( dispatch_get_main_queue(), ^{
+                                    callback(SYNC_RESULT_SUCCESS);
+                                });
+                            }
                             return;
                         }
                         [[ContactUtil shared] fetchNumbers:contact];
                         if (contact.hasPhoneNumber){
-                            if (callback!=nil)
-                                callback(SYNC_RESULT_SUCCESS);
+                            if (callback!=nil){
+                                dispatch_async( dispatch_get_main_queue(), ^{
+                                    callback(SYNC_RESULT_SUCCESS);
+                                });
+                            }
                             return;
                         }
                     }
                 }
             }
-            if (callback!=nil)
-                callback(SYNC_RESULT_FAIL);
+            if (callback!=nil){
+                dispatch_async( dispatch_get_main_queue(), ^{
+                    callback(SYNC_RESULT_FAIL);
+                });
+            }
             return;
         } else {
-            if (callback!=nil)
-                callback(SYNC_RESULT_ERROR_PERMISSION_ADDRESS_BOOK);
+            if (callback!=nil){
+                dispatch_async( dispatch_get_main_queue(), ^{
+                    callback(SYNC_RESULT_ERROR_PERMISSION_ADDRESS_BOOK);
+                });
+            }
             return;
         }
     }];

@@ -139,6 +139,12 @@
         }
     }
     
+    [self addHeader:@"Accept" value:@"application/json" request:request];
+    [self addHeader:@"X-Requested-With" value:@"XMLHttpRequest" request:request];
+    [self addHeader:@"User-Agent" value:SYNC_USER_AGENT request:request];
+    [self addHeader:SYNC_HEADER_AUTH_TOKEN value:[SyncSettings shared].token request:request];
+    [self addHeader:SYNC_HEADER_CLIENT_VERSION value:SYNC_VERSION request:request];
+    
     void (^success)(id responseObject) = ^(id responseObject){
         NSLog(@"url response: %@ %@", url, responseObject);
         if (callback)
@@ -242,17 +248,22 @@
     
     void (^success)(id responseObject) = ^(id responseObject){
         SYNC_Log(@"url response: %@ %@", url, responseObject);
-        if (callback)
-            callback(responseObject, TRUE);
+        
+        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            if (callback)
+                callback(responseObject, TRUE);
+        });
     };
     
     void (^fail)(id responseObject, NSError *error) = ^(id responseObject, NSError *error){
         SYNC_Log(@"Error: %@", error);
-        
-        [SyncStatus handleNSError:error];
-        
-        if (callback)
-            callback(responseObject, FALSE);
+
+        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            [SyncStatus handleNSError:error];
+            
+            if (callback)
+                callback(responseObject, FALSE);
+        });
     };
     
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {

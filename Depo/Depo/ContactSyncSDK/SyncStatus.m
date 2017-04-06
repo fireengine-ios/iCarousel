@@ -117,6 +117,9 @@
     
     _status = SYNC_RESULT_INITIAL;
     _lastError = nil;
+    
+    _step = SYNC_STEP_INITIAL;
+    _progress = 0;
 }
 
 + (SYNC_INSTANCETYPE) shared {

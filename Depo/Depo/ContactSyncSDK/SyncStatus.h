@@ -29,6 +29,14 @@ typedef NS_ENUM(NSUInteger, SYNCInfoStateType) {
     SYNC_INFO_DELETED_ON_SERVER
 };
 
+typedef NS_ENUM(NSUInteger, SYNCStep) {
+    SYNC_STEP_INITIAL,
+    SYNC_STEP_CHECK_SERVER_STATUS,
+    SYNC_STEP_READ_LOCAL_CONTACTS,
+    SYNC_STEP_SERVER_IN_PROGRESS,
+    SYNC_STEP_PROCESSING_RESPONSE,
+};
+
 @interface SyncInfo : NSObject
 
 @property SYNCInfoStateType state;
@@ -57,6 +65,9 @@ typedef NS_ENUM(NSUInteger, SYNCInfoStateType) {
 @property SYNCResultType status;
 @property (strong) NSError *lastError;
 
+@property SYNCStep step;
+@property NSNumber *progress;
+
 + (SYNC_INSTANCETYPE) shared;
 + (void)handleNSError:(NSError*)error;
 - (void)reset;
@@ -64,5 +75,6 @@ typedef NS_ENUM(NSUInteger, SYNCInfoStateType) {
 - (void)addContact:(Contact*)contact state:(SYNCInfoStateType)state;
 - (void)addRecord:(SyncRecord*)record state:(SYNCInfoStateType)state;
 - (void)addEmpty:(NSNumber *)count state:(SYNCInfoStateType)state;
+
 
 @end

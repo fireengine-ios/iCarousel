@@ -18,7 +18,7 @@
 #endif
 #endif
 
-#define SYNC_VERSION @"1.0.0"
+#define SYNC_VERSION @"1.0.0-060407"
 #define SYNC_USER_AGENT @"iOS ContactSync SDK"
 
 #define SYNC_HEADER_AUTH_TOKEN @"X-Auth-Token"
@@ -64,7 +64,6 @@ NSString *logFormat = [NSString stringWithFormat:@"ContactSyncSDK: %s [Line %d] 
 #define SYNC_JSON_PARAM_TOTAL_COUNT @"totalCount"
 #define SYNC_JSON_PARAM_PAGE_COUNT @"numOfPages"
 #define SYNC_JSON_PARAP_SERVER_TIMESTAMP @"serverTimestamp"
-
 
 
 #endif
