@@ -434,6 +434,7 @@
         [selectedFileList removeAllObjects];
         [selectedMetaFiles removeAllObjects];
         [selectedAssets removeAllObjects];
+        [selectedSectionNames removeAllObjects];
         
         [collView reloadData];
     }
@@ -1614,6 +1615,9 @@
                 [delegate revisitedGroupedPhotoChangeTitleTo:NSLocalizedString(@"SelectFilesTitle", @"")];
             }
         }
+        [self toggleFooterSyncButton];
+        [self toggleFooterRemoteButtons];
+
         [self.collView reloadSections:[NSIndexSet indexSetWithIndex:index]];
     }
 }
@@ -1657,6 +1661,9 @@
                 [delegate revisitedGroupedPhotoChangeTitleTo:NSLocalizedString(@"SelectFilesTitle", @"")];
             }
         }
+        [self toggleFooterSyncButton];
+        [self toggleFooterRemoteButtons];
+
         [self.collView reloadSections:[NSIndexSet indexSetWithIndex:index]];
     }
 }
