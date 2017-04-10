@@ -170,6 +170,13 @@
 
 #pragma mark - ScrollView Delegate Functions
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    NSInteger page = lround(self.mainScroll.contentOffset.x / self.mainScroll.frame.size.width);
+    // change bullets
+    self.bullets.image = [UIImage imageNamed:[NSString stringWithFormat:@"Bullets 1.%li.png", page +1]];
+}
+
+
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     NSInteger page = lround(self.mainScroll.contentOffset.x / self.mainScroll.frame.size.width);
     NSLog(@"page is %li", page);
@@ -192,9 +199,6 @@
     self.currentPlayer = self.players[page];
     [self.currentPlayer seekToTime:kCMTimeZero];
     [self.currentPlayer play];
-    
-    // change bullets
-    self.bullets.image = [UIImage imageNamed:[NSString stringWithFormat:@"Bullets 1.%li.png", self.currentPage +1]];
 }
 
 

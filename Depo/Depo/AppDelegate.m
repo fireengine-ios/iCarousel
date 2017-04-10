@@ -721,17 +721,22 @@
 
 - (void) tokenManagerDidReceiveToken {
     IGLog(@"AppDelegate tokenManagerDidReceiveToken");
-    
-    NSString *key = [NSString stringWithFormat:@"new-sync-experience-%@", [CacheUtil readCachedMsisdnForPostMigration]];
+    [tokenManager requestUserInfo];
+}
+
+- (void) tokenManagerDidReceiveUserInfo {
+    IGLog(@"AppDelegate tokenManagerDidReceiveUserInfo");
+//    NSLog(@"APPDELEGATE.session.user.phoneNumber %@", APPDELEGATE.session.user.phoneNumber);
+    NSString *key = [NSString stringWithFormat:@"new-sync-experience-%@", APPDELEGATE.session.user.phoneNumber];
     
     // did this user saw the new sync experience page?
     if ([[NSUserDefaults standardUserDefaults] boolForKey:key]) {
-        [tokenManager requestUserInfo];
+        [tokenManager requestBaseUrl];
     } else {
         // show splash page
         SyncExperienceController *se = [[SyncExperienceController alloc] initWithCompletion:^{
             [progress show:YES];
-            [tokenManager requestUserInfo];
+            [tokenManager requestBaseUrl];
         }];
         
         [progress hide:NO];
@@ -739,11 +744,6 @@
         // set key
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:key];
     }
-}
-
-- (void) tokenManagerDidReceiveUserInfo {
-    IGLog(@"AppDelegate tokenManagerDidReceiveUserInfo");
-    [tokenManager requestBaseUrl];
 }
 
 - (void) tokenManagerDidFailReceivingUserInfo {
