@@ -726,7 +726,6 @@
 
 - (void) tokenManagerDidReceiveUserInfo {
     IGLog(@"AppDelegate tokenManagerDidReceiveUserInfo");
-//    NSLog(@"APPDELEGATE.session.user.phoneNumber %@", APPDELEGATE.session.user.phoneNumber);
     NSString *key = [NSString stringWithFormat:@"new-sync-experience-%@", APPDELEGATE.session.user.phoneNumber];
     
     // did this user saw the new sync experience page?
@@ -737,12 +736,12 @@
         SyncExperienceController *se = [[SyncExperienceController alloc] initWithCompletion:^{
             [progress show:YES];
             [tokenManager requestBaseUrl];
+            // set key
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:key];
         }];
         
         [progress hide:NO];
         [self.window setRootViewController:se];
-        // set key
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:key];
     }
 }
 
