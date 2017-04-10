@@ -1408,6 +1408,9 @@
         footer = [[FileDetailFooter alloc] initWithFrame:currentFooterRect withPrintEnabled:YES withAlbum:self.album];
         footer.delegate = self;
         [self.view addSubview:footer];
+        
+        [self pushProgressViewWithProcessMessage:@"" andSuccessMessage:NSLocalizedString(@"UploadingPhotoFinishedSuccessfully", @"") andFailMessage:NSLocalizedString(@"UploadingPhotoFinishedWithError", @"")];
+        [self proceedSuccessForProgressView];
 
         [self postUploadProcess];
     }
