@@ -302,7 +302,7 @@
 }
 
 - (void) moreClicked {
-    [UIView animateWithDuration:0.4 animations:^{
+    [UIView animateWithDuration:Footer_Animation_Duration animations:^{
         if(isExpanded) {
             self.frame = originalFrame;
             moreButton.transform = CGAffineTransformMakeRotation(-90 * M_PI/180);

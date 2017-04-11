@@ -25,6 +25,8 @@
 
 @interface FooterActionsMenuView : UIView
 
+#define Footer_Animation_Duration 0.4
+
 @property (nonatomic, weak) id<FooterActionsDelegate> delegate;
 @property (nonatomic, strong) CustomButton *shareButton;
 @property (nonatomic, strong) CustomButton *moveButton;
