@@ -206,8 +206,20 @@
                     IGLog(@"ContactSync sync failed with AddressBookGrantError");
                     break;
                     
-                case SYNC_RESULT_ERROR_REMOTE_SERVER:
+                case SYNC_RESULT_ERROR_REMOTE_SERVER: {
                     _errMessage = @"ContactSyncApiError";
+                    if (data != nil) {
+                        NSArray *mainArray = (NSArray*) data;
+                        NSDictionary *mainDict = mainArray[0];
+                        int errorCode = [[mainDict objectForKey:@"code"] intValue];
+                        NSString *errorMessage = [mainDict objectForKey:@"message"];
+                        
+                        if (errorCode == 3000) {
+                            [self showErrorAlertWithMessage:errorMessage];
+                            break;
+                        }
+                    }
+                }
                     
                 case SYNC_RESULT_ERROR_NETWORK:
                     _errMessage = @"ContactSyncGeneralError";
