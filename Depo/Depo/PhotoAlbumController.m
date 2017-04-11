@@ -918,7 +918,7 @@
 }
 
 - (void)presentSharePopup {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@""
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
                                                              delegate:self
                                                     cancelButtonTitle:NSLocalizedString(@"CancelButtonTittle", nil)
                                                destructiveButtonTitle:nil

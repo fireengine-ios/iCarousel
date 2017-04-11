@@ -865,11 +865,16 @@
         NSString *mimeType = (__bridge_transfer NSString*)UTTypeCopyPreferredTagWithClass
         ((__bridge CFStringRef)[row.defaultRepresentation UTI], kUTTagClassMIMEType);
         
+        MetaFileSummary *summary = [[MetaFileSummary alloc] init];
+        summary.fileName = [row.defaultRepresentation filename];
+        summary.bytes = [row.defaultRepresentation size];
+        
         UploadRef *ref = [[UploadRef alloc] init];
         ref.fileName = row.defaultRepresentation.filename;
         ref.filePath = [row.defaultRepresentation.url absoluteString];
         ref.localHash = [SyncUtil md5StringOfString:[row.defaultRepresentation.url absoluteString]];
         ref.mimeType = mimeType;
+        ref.summary = summary;
         if ([[row valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
             ref.contentType = ContentTypeVideo;
         } else {
