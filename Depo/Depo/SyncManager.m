@@ -516,6 +516,13 @@
                             
                             BOOL shouldStartUpload = ![localHashList containsObject:localHash] && ![remoteHashList containsObject:localHash];
                             
+                            if (shouldStartUpload) {
+                                MetaFileSummary *assetSummary = [[MetaFileSummary alloc] init];
+                                assetSummary.bytes = [defaultRep size];
+                                assetSummary.fileName = [defaultRep filename];
+                                shouldStartUpload = ![[SyncUtil readSyncFileSummaries] containsObject:assetSummary];
+                            }
+                            
                             if(shouldStartUpload) {
                                 waitCount ++;
                             }
