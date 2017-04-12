@@ -589,6 +589,8 @@
     [delegate revisitedGroupedPhotoShowErrorMessage:errorMessage];
 }
 
+#pragma mark - UIScrollViewDelegate Methods
+
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView {
     if([ReachabilityManager isReachable]) {
         if(!isLoading && !endOfFiles) {
@@ -650,6 +652,8 @@
 - (void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     [self performSelector:@selector(hideVerticalIndicator) withObject:nil afterDelay:1.8f];
 }
+
+#pragma mark -
 
 - (void) dynamicallyLoadNextPage {
     listOffset ++;
@@ -926,7 +930,7 @@
         }
         //TODO check
         [collView reloadData];
-        //        [delegate revisitedGroupedPhotoDidFinishUpdate];
+//        [delegate revisitedGroupedPhotoDidFinishUpdate];
     }
 }
 
@@ -1005,6 +1009,8 @@
     [delegate revisitedGroupedPhotoDidFailMovingWithError:errorMessage];
 }
 
+#pragma mark - UITextFieldDelegate
+
 - (void) textFieldDidEndEditing:(UITextField *) _textField {
     [searchField resignFirstResponder];
 }
@@ -1014,9 +1020,13 @@
     return YES;
 }
 
+#pragma mark -
+
 - (void) searchTapped {
     [APPDELEGATE.base triggerInnerSearch];
 }
+
+#pragma mark - CustomConfirmDelegate Methods
 
 - (void) didRejectCustomAlert:(CustomConfirmView *) alertView {
 }
@@ -1027,6 +1037,8 @@
     [self bringSubviewToFront:progress];
     [progress show:YES];
 }
+
+#pragma mark -
 
 - (NSMutableArray *) uuidsOfOnlyDepoFiles {
     NSMutableArray *result = [[NSMutableArray alloc] init];
@@ -1102,6 +1114,8 @@
      */
 }
 
+#pragma mark - UICollectionViewDataSource Methods
+
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
     FileInfoGroup *sectionGroup = [self.groups objectAtIndex:section];
     return [sectionGroup.fileInfo count];
@@ -1141,11 +1155,13 @@
     return [cv dequeueReusableCellWithReuseIdentifier:@"COLL_PHOTO_CELL" forIndexPath:indexPath];
 }
 
+# pragma mark - UICollectionViewDelegate Methods
+
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     //    RevisitedPhotoCollCell *cell = (RevisitedPhotoCollCell *) [collectionView cellForItemAtIndexPath:indexPath];
 }
 
-#pragma mark – UICollectionViewDelegateFlowLayout
+#pragma mark - UICollectionViewDelegateFlowLayout Methods
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return CGSizeMake(imageWidth, imageWidth);
@@ -1194,9 +1210,13 @@
     return collFooterView;
 }
 
+#pragma mark -
+
 - (void) dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
+#pragma mark - View Operations
 
 - (void) showVerticalIndicator {
     if(verticalIndicator.isHidden) {
@@ -1217,6 +1237,8 @@
     }];
 }
 
+#pragma mark - AutoSyncOffHeaderDelegate Methods
+
 - (void) autoSyncOffHeaderViewCloseClicked {
     if(syncInfoHeaderView) {
         [syncInfoHeaderView removeFromSuperview];
@@ -1230,6 +1252,8 @@
 - (void) autoSyncOffHeaderViewSettingsClicked {
     [APPDELEGATE triggerSyncSettings];
 }
+
+#pragma mark - SyncManagerInfoDelegate Methods
 
 - (void) syncManagerUnsyncedImageList:(NSArray *)unsyncedAssets {
     //    [delegate revisitedGroupedPhotoWantsToHideLoading];
@@ -1397,6 +1421,8 @@
     result.hashRef = fileRef.metaHash;
     return result;
 }
+
+#pragma mark - RawPhotoCollCellDelegate Methods
 
 - (void) rawPhotoCollCellImageWasSelectedForFile:(MetaFile *) fileSelected forGroupWithKey:(NSString *) groupKey {
     //    NSMutableArray *listToPass = [[NSMutableArray alloc] init];
@@ -1581,6 +1607,8 @@
 - (void) rawPhotoCollCellImageUploadLoginErrorForAsset:(ALAsset *) fileSelected {
 }
 
+#pragma mark - GroupPhotoSectionViewDelegate Methods
+
 - (void) groupPhotoSectionViewCheckboxChecked:(NSString *) titleVal {
     if(![selectedSectionNames containsObject:titleVal]) {
         [selectedSectionNames addObject:titleVal];
@@ -1673,6 +1701,8 @@
     }
 }
 
+#pragma mark -
+
 - (void) photosHeaderSyncFinishedForAssetUrl:(NSString *)urlVal {
     if(urlVal) {
         NSString *localHash = [SyncUtil md5StringOfString:urlVal];
@@ -1682,6 +1712,7 @@
 
 - (void) autoQueueChanged {
     IGLog(@"RevisitedGroupedPhotoView autoQueueChanged called");
+    
     if(syncView) {
         [syncView removeFromSuperview];
     }
@@ -1745,7 +1776,7 @@
 }
 
 
-#pragma mark BulkRead delegate methods for header unsync image count
+#pragma mark - BulkRead delegate methods for header unsync image count
 
 - (void) bulkReadSuccessCallback:(NSArray *) bulkFiles {
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^(void) {
@@ -1764,11 +1795,18 @@
 }
 
 - (void) resizeCollViewHeightForFooterMenu {
-    
     if (!imgFooterActionMenu.isHidden) {
         CGRect frame = collView.frame;
         frame.size = CGSizeMake(frame.size.width, collViewOriginalHeight - imgFooterActionMenu.frame.size.height);
-        collView.frame = frame;
+
+        if (collView.frame.size.height < frame.size.height) {
+            collView.frame = frame;
+        } else {
+            // uiview animation collview ile duzgun calismiyor. Workaround cozum uygulandi.
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(Footer_Animation_Duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                collView.frame = frame;
+            });
+        }
     }
     else if (imgFooterActionMenu.isHidden || imgFooterActionMenu == nil) {
         CGRect frame = collView.frame;
