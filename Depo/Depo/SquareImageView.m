@@ -13,6 +13,8 @@
 #import "AppSession.h"
 #import "Util.h"
 
+#define Long_Press_Duration 0.5f
+
 @interface SquareImageView() {
     UIImageView *playIconView;
     CustomLabel *durationLabel;
@@ -77,7 +79,7 @@
         [self addSubview:maskView];
 
         longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressed:)];
-        longPressGesture.minimumPressDuration = 1.0f;
+        longPressGesture.minimumPressDuration = Long_Press_Duration;
         longPressGesture.allowableMovement = 10.0f;
         longPressGesture.delegate = self;
         [self addGestureRecognizer:longPressGesture];
@@ -119,7 +121,7 @@
         }
         
         longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressed:)];
-        longPressGesture.minimumPressDuration = 1.0f;
+        longPressGesture.minimumPressDuration = Long_Press_Duration;
         longPressGesture.allowableMovement = 10.0f;
         longPressGesture.delegate = self;
         [self addGestureRecognizer:longPressGesture];
@@ -162,7 +164,7 @@
         }
         
         longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressed:)];
-        longPressGesture.minimumPressDuration = 1.0f;
+        longPressGesture.minimumPressDuration = Long_Press_Duration;
         longPressGesture.allowableMovement = 10.0f;
         longPressGesture.delegate = self;
         [self addGestureRecognizer:longPressGesture];
@@ -232,7 +234,7 @@
         [self addSubview:self.progressSeparator];
 
         longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressed:)];
-        longPressGesture.minimumPressDuration = 1.0f;
+        longPressGesture.minimumPressDuration = Long_Press_Duration;
         longPressGesture.allowableMovement = 10.0f;
         longPressGesture.delegate = self;
         [self addGestureRecognizer:longPressGesture];
@@ -457,7 +459,7 @@
 }
 
 - (void) longPressed:(UILongPressGestureRecognizer*)sender {
-    if (sender.state == UIGestureRecognizerStateEnded) {
+    if (sender.state == UIGestureRecognizerStateBegan) {
         if(isSelectible) {
             [self imageTapped];
         } else {
@@ -467,7 +469,9 @@
                 [delegate squareLocalImageWasLongPressedForAsset:self.asset];
             }
             //TODO bunu check et. 0.0'ı arttırdığımızda başka resim check'leniyor!
-            [self performSelector:@selector(imageTapped) withObject:nil afterDelay:0.0f];
+            //EDIT: 0.0 durumunda da yanlis fotograf secebiliyodu. Direk cagirmak recognizerstate degisikligi ile sorunu cozmus gorunuyor.
+//            [self performSelector:@selector(imageTapped) withObject:nil afterDelay:0.0f];
+            [self imageTapped];
         }
     }
 }

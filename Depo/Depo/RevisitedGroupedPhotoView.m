@@ -1245,6 +1245,7 @@
         [UIView animateWithDuration:0.4 animations:^{
             collView.frame = CGRectMake(collView.frame.origin.x, collView.frame.origin.y - 50, collView.frame.size.width, collView.frame.size.height + 50);
         }];
+        collViewOriginalHeight = collViewOriginalHeight + 50;
     }
     APPDELEGATE.session.photosSyncHeaderShownFlag = YES;
 }
@@ -1804,7 +1805,9 @@
         } else {
             // uiview animation collview ile duzgun calismiyor. Workaround cozum uygulandi.
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(Footer_Animation_Duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                collView.frame = frame;
+                if([selectedFileList count] > 0) { // footer hala gorunuyorsa ata
+                    collView.frame = frame;
+                }
             });
         }
     }
