@@ -191,7 +191,7 @@
                         NSArray *mainArray = (NSArray*) data;
                         NSDictionary *mainDict = mainArray[0];
                         int errorCode = [[mainDict objectForKey:@"code"] intValue];
-                        NSString *errorMessage = [mainDict objectForKey:@"message"];
+                        NSString *errorMessage = NSLocalizedString(@"ContactSync5000LimitError", @"");
                         
                         if (errorCode == 3000) {
                             [self showErrorAlertWithMessage:errorMessage];

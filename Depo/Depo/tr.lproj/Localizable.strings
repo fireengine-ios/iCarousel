@@ -446,6 +446,7 @@
 "ManualSyncTitleOnSync"="Yedekleme devam ediyor...";
 "ContactThereIsNoContact"="Telefon rehberinizde kayıt bulunmadığından, yedekleme işlemi gerçekleşmemiştir.";
 
+"ContactSync5000LimitError"="En fazla 5000 kontak kaydedilebilir";
 "AddressBookGrantError"="Rehber kullanımına izin vermeniz gerekmektedir.";
 "ContactSyncApiError"="Yedekleme esnasında genel bir hata oluştu.";
 "ContactSyncNetworkError"="Yedekleme esnasında genel bir hata oluştu.";
