@@ -234,8 +234,8 @@
 
 - (void)handleURLCache {
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
-    SDImageCache *imageCache = [SDImageCache sharedImageCache];
-    [imageCache clearDiskOnCompletion:nil];
+//    SDImageCache *imageCache = [SDImageCache sharedImageCache];
+//    [imageCache clearDiskOnCompletion:nil];
 //    NSURLCache *URLCache = [[NSURLCache alloc] initWithMemoryCapacity:4 * 1024 * 1024
 //                                                         diskCapacity:20 * 1024 * 1024
 //                                                             diskPath:nil];
