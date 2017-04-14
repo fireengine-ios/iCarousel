@@ -29,10 +29,12 @@
 #import "AppDelegate.h"
 #import "BaseViewController.h"
 #import "ShareActivity.h"
+#import "RDActivityViewController.h"
 
-@interface SearchModalController ()  {
+@interface SearchModalController () <RDActivityViewControllerDelegate>  {
 #define searchResultCount 6
 }
+@property (nonatomic, strong) NSArray *imagesToShare;
 
 @end
 
@@ -562,6 +564,26 @@
     [self showErrorAlertWithMessage:errorMessage];
 }
 
+- (NSArray *)activityViewController:(NSArray *)activityViewController itemsForActivityType:(NSString *)activityType {
+    if ([activityType isEqualToString:@"net.whatsapp.WhatsApp.ShareExtension"]) {
+        NSMutableArray *images = [@[] mutableCopy];
+        for (NSURL *url in self.imagesToShare) {
+            UIImage *image = [UIImage imageWithData:
+                              [NSData dataWithContentsOfURL:url]];
+            if (image == nil) {
+                [images addObject:url];
+            } else {
+                [images addObject:image];
+            }
+        }
+        
+        return images;
+    } else {
+        return self.imagesToShare;
+    }
+}
+
+
 - (void) fileFolderCellShouldShareForFile:(MetaFile *)fileSelected {
     [self showLoading];
     if (fileSelected.contentType != ContentTypePhoto) {
@@ -571,33 +593,24 @@
             [self downloadImageWithURL:[NSURL URLWithString:fileSelected.tempDownloadUrl] completionBlock:^(BOOL succeeded, UIImage *image, NSData *imageData) {
                 if (succeeded) {
                     [self hideLoading];
-//                    NSArray *activityItems = [NSArray arrayWithObjects:image, nil];
                     
                     NSURL *url = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingString:fileSelected.name]];
                     [imageData writeToURL:url atomically:NO];
                     
-//                    BOOL thisIsAnImage = fileSelected.contentType == ContentTypePhoto;
-                    
                     NSArray *applicationActivities = nil;
-                    NSArray *activityItems = @[url];
+                    self.imagesToShare = @[url];
+                    ShareActivity *activity = [[ShareActivity alloc] init];
+                    activity.sourceViewController = self;
                     
-//                    if (thisIsAnImage) {
-                        ShareActivity *activity = [[ShareActivity alloc] init];
-                        activity.sourceViewController = self;
-                        
-                        applicationActivities = @[activity];
-//                    } else {
-//                        activityItems = @[@"#lifebox", url];
-//                    }
+                    applicationActivities = @[activity];
                     
-                    UIActivityViewController *activityViewController = [[UIActivityViewController alloc]
-                                                                        initWithActivityItems:activityItems
-                                                                        applicationActivities:applicationActivities];
+                    RDActivityViewController *activityViewController = [[RDActivityViewController alloc] initWithDelegate:self
+                                                                                                     maximumNumberOfItems:self.imagesToShare.count
+                                                                                                    applicationActivities:applicationActivities
+                                                                                                          placeholderItem:[UIImage new]];
                     [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
                     activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-//                    if (thisIsAnImage) {
-                        activityViewController.excludedActivityTypes = @[UIActivityTypePostToFacebook];
-//                    }
+                    activityViewController.excludedActivityTypes = @[UIActivityTypePostToFacebook];
                     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
                         [self presentViewController:activityViewController animated:YES completion:nil];
                     } else {

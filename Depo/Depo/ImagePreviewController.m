@@ -20,6 +20,7 @@
 #import "LocalImageDetailModalController.h"
 #import "ALAssetRepresentation+MD5.h"
 #import <MobileCoreServices/MobileCoreServices.h>
+#import "RDActivityViewController.h"
 
 #define PhotosGap 30.0f
 #define FooterHeight 60.0f
@@ -34,6 +35,7 @@
 @property (nonatomic) UITapGestureRecognizer *singleTap;
 @property (nonatomic) BOOL isNextSectionLoading;
 @property (nonatomic) CustomConfirmView *confirmDialog;
+@property (nonatomic, strong) NSArray *imagesToShare;
 
 @end
 
@@ -1086,46 +1088,62 @@
     [APPDELEGATE.base checkAndShowAddButton];
 }
 
+- (NSArray *)activityViewController:(NSArray *)activityViewController itemsForActivityType:(NSString *)activityType {
+    if ([activityType isEqualToString:@"net.whatsapp.WhatsApp.ShareExtension"]) {
+        NSMutableArray *images = [@[] mutableCopy];
+        for (NSURL *url in self.imagesToShare) {
+            UIImage *image = [UIImage imageWithData:
+                              [NSData dataWithContentsOfURL:url]];
+            if (image == nil) {
+                [images addObject:url];
+            } else {
+                [images addObject:image];
+            }
+        }
+        
+        return images;
+    } else {
+        return self.imagesToShare;
+    }
+}
+
+
 - (void) triggerShareForFiles:(NSArray *) fileUuidList {
     //    [shareDao requestLinkForFiles:fileUuidList];
     [self showLoading];
     
     [self downloadImageWithURL:[NSURL URLWithString:self.file.tempDownloadUrl]
-               completionBlock:^(BOOL succeeded, UIImage *image, NSData *imageData) {
-                   if (succeeded) {
-                       [self hideLoading];
-                       
-                       NSURL *url = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingString:self.file.name]];
-                       [imageData writeToURL:url atomically:NO];
-                       
-                       NSArray *activityItems = @[url];
-                       
-//                       BOOL thisIsAnImage = [self checkFileIsPhoto:self.file];
-                       
-                       NSArray *applicationActivities = nil;
-//                       if (thisIsAnImage) {
-                           ShareActivity *activity = [[ShareActivity alloc] init];
-                           activity.sourceViewController = self;
-                           applicationActivities = @[activity];
-//                       }
-                       
-                       UIActivityViewController *activityViewController = [[UIActivityViewController alloc]
-                                                                           initWithActivityItems:activityItems
-                                                                           applicationActivities:applicationActivities];
-                       [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
-                       activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-//                       if (thisIsAnImage) {
-                           activityViewController.excludedActivityTypes = @[@"com.igones.adepo.DepoShareExtension", UIActivityTypePostToFacebook];
-//                       }
-                       if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-                           [self presentViewController:activityViewController animated:YES completion:nil];
-                       } else {
-                           UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
-                           [popup presentPopoverFromRect:CGRectMake(self.view.frame.size.width-240, self.view.frame.size.height-40, 240, 300)inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-                       }
-                       
-                   }
-               }];
+               completionBlock:
+     ^(BOOL succeeded, UIImage *image, NSData *imageData) {
+         if (succeeded) {
+             [self hideLoading];
+             
+             NSURL *url = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingString:self.file.name]];
+             [imageData writeToURL:url atomically:NO];
+             
+             self.imagesToShare = @[url];
+             
+             NSArray *applicationActivities = nil;
+             ShareActivity *activity = [[ShareActivity alloc] init];
+             activity.sourceViewController = self;
+             applicationActivities = @[activity];
+             
+             RDActivityViewController *activityViewController = [[RDActivityViewController alloc] initWithDelegate:self
+                                                                                              maximumNumberOfItems:self.imagesToShare.count
+                                                                                             applicationActivities:applicationActivities
+                                                                                                   placeholderItem:[UIImage new]];
+             [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
+             activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+             activityViewController.excludedActivityTypes = @[@"com.igones.adepo.DepoShareExtension", UIActivityTypePostToFacebook];
+             if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+                 [self presentViewController:activityViewController animated:YES completion:nil];
+             } else {
+                 UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
+                 [popup presentPopoverFromRect:CGRectMake(self.view.frame.size.width-240, self.view.frame.size.height-40, 240, 300)inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+             }
+             
+         }
+     }];
 }
 
 #pragma mark - ShareLinkDao Delegate Methods

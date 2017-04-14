@@ -458,7 +458,7 @@
                          applicationActivities = @[activity];
 
                          RDActivityViewController *activityViewController = [[RDActivityViewController alloc] initWithDelegate:self
-                                                                                                          maximumNumberOfItems:15
+                                                                                                          maximumNumberOfItems:self.imagesToShare.count
                                                                                                          applicationActivities:applicationActivities
                                                                                                                placeholderItem:[UIImage new]];
                          [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
