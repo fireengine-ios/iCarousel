@@ -269,6 +269,11 @@
         ABRecordRef ref = CFArrayGetValueAtIndex( allPeople, i );
         Contact *contact = [[Contact alloc] initWithRecordRef:ref];
 
+        NSString *displayName = contact.generateDisplayName;
+        if(!SYNC_STRING_IS_NULL_OR_EMPTY(displayName) && displayName.length > 1000){
+            continue;
+        }
+        
         if (!SYNC_STRING_IS_NULL_OR_EMPTY(contact.firstName) || !SYNC_STRING_IS_NULL_OR_EMPTY(contact.middleName) || !SYNC_STRING_IS_NULL_OR_EMPTY(contact.lastName) || !SYNC_STRING_IS_NULL_OR_EMPTY(contact.nickName)){
             contact.hasName = YES;
         } else {
@@ -332,11 +337,11 @@
             CFRelease(phoneTypeRef);
         }
         
-        contact.hasPhoneNumber = YES;
         
         ContactPhone *phone = (ContactPhone *)[[ContactPhone alloc] initWithValue:phoneNumber andType:type];
-        if (![self isAdded:contact value:phone] && phoneNumber.length <= 255) {
+        if (![self isAdded:contact value:phone] && !SYNC_STRING_IS_NULL_OR_EMPTY(phoneNumber) && phoneNumber.length <= 255) {
             SYNC_Log(@"%@ %@ %@ %@ phone :%@ %@", contact.firstName, contact.middleName, contact.nickName, contact.lastName, phoneNumber, type);
+            contact.hasPhoneNumber = YES;
             [contact.devices addObject:phone];
         }
 
@@ -365,7 +370,7 @@
         }
         
         ContactEmail *newMail = [[ContactEmail alloc] initWithValue:mailAddress andType:type];
-        if (![self isAdded:contact value:newMail] && mailAddress.length <= 255) {
+        if (![self isAdded:contact value:newMail] && !SYNC_STRING_IS_NULL_OR_EMPTY(mailAddress) && mailAddress.length <= 255) {
             SYNC_Log(@"%@ %@ %@ %@ emai :%@ %@", contact.firstName, contact.middleName, contact.nickName, contact.lastName, mailAddress, type);
             [contact.devices addObject:newMail];
         }
