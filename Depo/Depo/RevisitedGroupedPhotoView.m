@@ -912,6 +912,8 @@
         [self startUploadForSelectedAssets];
         postUploadProcessType = NextProcessTypeRefresh;
         
+        [imgFooterActionMenu disableSyncButton];
+
         if(syncView == nil) {
             UploadManager *activeManRef = [[UploadQueue sharedInstance] activeManager];
             if(activeManRef != nil) {
