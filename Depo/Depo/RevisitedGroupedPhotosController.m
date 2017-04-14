@@ -21,14 +21,15 @@
 #import "EmailEntryController.h"
 #import "ReachabilityManager.h"
 #import "ShareActivity.h"
-
+#import "RDActivityViewController.h"
 #import "AppRater.h"
 
-@interface RevisitedGroupedPhotosController () <UIActionSheetDelegate> {
+@interface RevisitedGroupedPhotosController () <UIActionSheetDelegate, RDActivityViewControllerDelegate> {
     MyNavigationController *printNav;
 }
 @property (nonatomic, copy) NSArray *fileUUIDToShare;
 @property (nonatomic, copy) NSArray *fileListToShare;
+@property (nonatomic, strong) NSArray *imagesToShare;
 @end
 
 @implementation RevisitedGroupedPhotosController
@@ -387,13 +388,30 @@
 
 #pragma mark - Share
 
+- (NSArray *)activityViewController:(NSArray *)activityViewController itemsForActivityType:(NSString *)activityType {
+    if ([activityType isEqualToString:@"net.whatsapp.WhatsApp.ShareExtension"]) {
+        NSMutableArray *images = [@[] mutableCopy];
+        for (NSURL *url in self.imagesToShare) {
+            UIImage *image = [UIImage imageWithData:
+                              [NSData dataWithContentsOfURL:url]];
+            if (image == nil) {
+                [images addObject:url];
+            } else {
+                [images addObject:image];
+            }
+        }
+        
+        return images;
+    } else {
+        return self.imagesToShare;
+    }
+}
+
 - (void)shareImageFiles:(BOOL)originalSize {
 //    __block NSInteger imagesCount = fileUuidList.count;
     __block NSMutableArray *allImages = [@[] mutableCopy];
     
     [self showLoading];
-    
-//    BOOL thereIsOneVideo = NO;
     
     for (MetaFile *file in self.fileListToShare) {
         NSString *endPoint = file.detail.thumbLargeUrl;
@@ -403,72 +421,67 @@
         }
         if (file.contentType == ContentTypeVideo) {
             endPoint = file.tempDownloadUrl;
-//            thereIsOneVideo = YES;
+            if (!originalSize) {
+                if (file.videoPreviewUrl != nil) {
+                    endPoint = file.videoPreviewUrl;
+                }
+            }
         }
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:
                                         [NSURL URLWithString:endPoint]];
         [NSURLConnection sendAsynchronousRequest:request
                                            queue:[[NSOperationQueue alloc] init]
-                               completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-                                   if (!error) {
-                                       if (file.contentType == ContentTypeVideo) {
-                                           NSURL *url = [NSURL fileURLWithPath:
-                                                         [NSTemporaryDirectory() stringByAppendingString:file.name]];
-                                           [data writeToURL:url atomically:NO];
-                                           [allImages addObject:url];
-                                       } else {
-                                           if (originalSize) {
-                                               NSURL *url = [NSURL fileURLWithPath:
-                                                             [NSTemporaryDirectory() stringByAppendingString:file.name]];
-                                               [data writeToURL:url atomically:NO];
-                                               [allImages addObject:url];
-                                           } else {
-                                               UIImage *image = [[UIImage alloc] initWithData:data];
-                                               [allImages addObject:image];
-                                           }
-                                       }
-                                       if (allImages.count == self.fileListToShare.count) {
-                                           NSLog(@"downloaded all images to share");
-                                           
-                                           dispatch_async(dispatch_get_main_queue(), ^{
-                                               [self hideLoading];
-                                               
-                                               NSArray *applicationActivities = nil;
-                                               
-//                                               if (!thereIsOneVideo) {
-                                                   ShareActivity *activity = [[ShareActivity alloc] init];
-                                                   activity.sourceViewController = self;
-                                                   applicationActivities = @[activity];
-//                                               } else {
-//                                                   [allImages insertObject:@"#lifebox" atIndex:0];
-//                                               }
-                                               
-                                               UIActivityViewController *activityViewController = [[UIActivityViewController alloc]
-                                                                                                   initWithActivityItems:allImages
-                                                                                                   applicationActivities:applicationActivities];
-                                               [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
-                                               activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-//                                               if (!thereIsOneVideo) {
-                                                   activityViewController.excludedActivityTypes = @[UIActivityTypePostToFacebook];
-//                                               }
-                                               [activityViewController setCompletionHandler:^(NSString *activityType, BOOL completed) {
-                                                   if (completed) {
-                                                       [self cancelClicked];
-                                                   }
-                                               }];
-                                               if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-                                                   [self presentViewController:activityViewController animated:YES completion:nil];
-                                               } else {
-                                                   UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
-                                                   [popup presentPopoverFromRect:CGRectMake(self.view.frame.size.width-240, self.view.frame.size.height-40, 240, 300)inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-                                               }
-                                           });
-                                       }
-                                   } else{
-                                   }
-                               }];
-    }
+                               completionHandler:
+         ^(NSURLResponse *response, NSData *data, NSError *error) {
+             if (!error) {
+                 if (file.contentType == ContentTypeVideo) {
+                     NSURL *url = [NSURL fileURLWithPath:
+                                   [NSTemporaryDirectory() stringByAppendingString:file.name]];
+                     [data writeToURL:url atomically:NO];
+                     [allImages addObject:url];
+                 } else {
+                     NSURL *url = [NSURL fileURLWithPath:
+                                   [NSTemporaryDirectory() stringByAppendingString:file.name]];
+                     [data writeToURL:url atomically:NO];
+                     [allImages addObject:url];
+                 }
+                 if (allImages.count == self.fileListToShare.count) {
+                     NSLog(@"downloaded all images to share");
+                     self.imagesToShare = [allImages copy];
+                     dispatch_async(dispatch_get_main_queue(), ^{
+                         [self hideLoading];
+                         
+                         NSArray *applicationActivities = nil;
+                         
+                         ShareActivity *activity = [[ShareActivity alloc] init];
+                         activity.sourceViewController = self;
+                         applicationActivities = @[activity];
 
+                         RDActivityViewController *activityViewController = [[RDActivityViewController alloc] initWithDelegate:self
+                                                                                                          maximumNumberOfItems:15
+                                                                                                         applicationActivities:applicationActivities
+                                                                                                               placeholderItem:[UIImage new]];
+                         [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
+                         activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+                         activityViewController.excludedActivityTypes = @[UIActivityTypePostToFacebook];
+                         [activityViewController setCompletionHandler:^(NSString *activityType, BOOL completed) {
+                             if (completed) {
+                                 [self cancelClicked];
+                             }
+                         }];
+                         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+                             [self presentViewController:activityViewController animated:YES completion:nil];
+                         } else {
+                             UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
+                             [popup presentPopoverFromRect:CGRectMake(self.view.frame.size.width-240, self.view.frame.size.height-40, 240, 300)inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+                         }
+                     });
+                 }
+             } else{
+             }
+         }];
+    }
+    
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {

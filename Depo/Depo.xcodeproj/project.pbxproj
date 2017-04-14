@@ -928,6 +928,7 @@
 		6308E46D1E64C0E800BB32A0 /* VideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6308E46C1E64C0E800BB32A0 /* VideoView.m */; };
 		63608CD91E5C1EEA00B8FC66 /* ZPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63608CD81E5C1EEA00B8FC66 /* ZPhotoView.m */; };
 		672F866F1E6027EF00229F58 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 672F866E1E6027EF00229F58 /* LaunchScreen.storyboard */; };
+		67955C2D1EA0993200705083 /* RDActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67955C2B1EA0993200705083 /* RDActivityViewController.m */; };
 		67AC3FA01E71231E00DDC28C /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC3F791E71231E00DDC28C /* MKAnnotationView+WebCache.m */; };
 		67AC3FA11E71231E00DDC28C /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC3F7B1E71231E00DDC28C /* NSData+ImageContentType.m */; };
 		67AC3FA21E71231E00DDC28C /* NSImage+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC3F7D1E71231E00DDC28C /* NSImage+WebCache.m */; };
@@ -2664,6 +2665,9 @@
 		63608CD71E5C1EEA00B8FC66 /* ZPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZPhotoView.h; sourceTree = "<group>"; };
 		63608CD81E5C1EEA00B8FC66 /* ZPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZPhotoView.m; sourceTree = "<group>"; };
 		672F866E1E6027EF00229F58 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		67955C2A1EA0993200705083 /* RDActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDActivityViewController.h; sourceTree = "<group>"; };
+		67955C2B1EA0993200705083 /* RDActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDActivityViewController.m; sourceTree = "<group>"; };
+		67955C2C1EA0993200705083 /* RDActivityViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDActivityViewControllerDelegate.h; sourceTree = "<group>"; };
 		67AC3F781E71231E00DDC28C /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		67AC3F791E71231E00DDC28C /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
 		67AC3F7A1E71231E00DDC28C /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
@@ -4091,6 +4095,7 @@
 		051E1E3A19CAC8EA00FD1E03 /* out */ = {
 			isa = PBXGroup;
 			children = (
+				67955C291EA0993200705083 /* RDActivityViewController */,
 				070A221C1E8AEB0E002385F7 /* CircleProgressBar */,
 				563A98661E52ECF800D24B7E /* Adjust */,
 				56B9E92B1DED750600DE1011 /* AppRater */,
@@ -5355,6 +5360,16 @@
 				56B9E9291DEC47A600DE1011 /* AppRater.m */,
 			);
 			name = AppRater;
+			sourceTree = "<group>";
+		};
+		67955C291EA0993200705083 /* RDActivityViewController */ = {
+			isa = PBXGroup;
+			children = (
+				67955C2A1EA0993200705083 /* RDActivityViewController.h */,
+				67955C2B1EA0993200705083 /* RDActivityViewController.m */,
+				67955C2C1EA0993200705083 /* RDActivityViewControllerDelegate.h */,
+			);
+			path = RDActivityViewController;
 			sourceTree = "<group>";
 		};
 		67AC3F741E71231E00DDC28C /* SDWebImage */ = {
@@ -6651,6 +6666,7 @@
 				563A98AC1E52ECF800D24B7E /* NSString+ADJAdditions.m in Sources */,
 				9433BD021D21DF6C00991483 /* VideofyCreateDao.m in Sources */,
 				057C9D7D1A2B5611001DDDEC /* MusicDetailModalController.m in Sources */,
+				67955C2D1EA0993200705083 /* RDActivityViewController.m in Sources */,
 				05127EC319E19775002C2228 /* FileDetailInWebViewController.m in Sources */,
 				05EA75B819DC78C800AC77AB /* UploadDao.m in Sources */,
 				059A46DC1A6D3E2000935023 /* Offer.m in Sources */,
