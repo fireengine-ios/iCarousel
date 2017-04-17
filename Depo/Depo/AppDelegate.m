@@ -623,10 +623,13 @@
 }
 
 - (void) triggerFloatingMenu {
-    MyViewController *fileListController = [[FileListController alloc] init];
-    self.base = [[BaseViewController alloc] initWithRootViewController:fileListController];
+    FileListController *file = [[FileListController alloc] initForFolder:nil];
+    self.base = [[BaseViewController alloc] initWithRootViewController:file];
+    file.nav = self.base.nav;
+    file.myDelegate = self.base;
     [self.window setRootViewController:base];
-    [base floatingAddButtonDidOpenMenu];
+    
+    [base.addButton buttonClicked];
 }
 
 - (void) triggerAutoSynchronization {

@@ -20,5 +20,6 @@
 @property (nonatomic, strong) id<FloatingAddButtonDelegate> delegate;
 
 - (void) immediateReset;
+- (void) buttonClicked;
 
 @end
