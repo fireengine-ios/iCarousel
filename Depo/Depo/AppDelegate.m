@@ -75,6 +75,8 @@
 #import "SettingsSocialController.h"
 #import "SettingsHelpController.h"
 #import "SyncExperienceController.h"
+#import "SDWebImageDownloader.h"
+#import "SDImageCache.h"
 
 //TODO info'larda version update
 
@@ -225,6 +227,8 @@
     }
 
     [self.window makeKeyAndVisible];
+    
+    [[SDWebImageDownloader sharedDownloader] setShouldDecompressImages:NO];
     
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
