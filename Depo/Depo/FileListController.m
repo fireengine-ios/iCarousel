@@ -1091,6 +1091,11 @@
         if (file.contentType == ContentTypeVideo) {
 //            thereIsOneVideo = YES;
             endPoint = file.tempDownloadUrl;
+            if (!originalSize) {
+                if (file.videoPreviewUrl != nil) {
+                    endPoint = file.videoPreviewUrl;
+                }
+            }
         }
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:
                                         [NSURL URLWithString:endPoint]];

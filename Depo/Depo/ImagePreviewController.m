@@ -670,7 +670,7 @@
         postProcess = NextProcessTypeShare;
         [self startInitialUpload];
     } else {
-        [self triggerShareForFiles:@[self.file.uuid]];
+        [self presentSharePopup];
     }
 }
 
@@ -871,7 +871,7 @@
 }
 
 - (void) moreMenuDidSelectShare {
-    [self triggerShareForFiles:@[self.file.uuid]];
+    [self presentSharePopup];
 }
 
 - (void) moreMenuDidSelectDownloadImage {
@@ -1107,12 +1107,53 @@
     }
 }
 
+- (void)presentSharePopup {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                             delegate:self
+                                                    cancelButtonTitle:NSLocalizedString(@"CancelButtonTittle", nil)
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:
+                                  NSLocalizedString(@"ShareSmallSize", nil),
+                                  NSLocalizedString(@"ShareOriginalSize", nil),
+                                  NSLocalizedString(@"ShareViaLink", nil),
+                                  nil];
+    [actionSheet showInView:self.view];
+}
 
-- (void) triggerShareForFiles:(NSArray *) fileUuidList {
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0:
+            [self triggerShareForFiles:NO];
+            break;
+        case 1:
+            [self triggerShareForFiles:YES];
+            break;
+        case 2:
+            [shareDao requestLinkForFiles:@[self.file.uuid]];
+            break;
+        default:
+            break;
+    }
+}
+
+- (void) triggerShareForFiles:(BOOL) originalSize {
     //    [shareDao requestLinkForFiles:fileUuidList];
     [self showLoading];
     
-    [self downloadImageWithURL:[NSURL URLWithString:self.file.tempDownloadUrl]
+    NSString *endPoint = file.detail.thumbLargeUrl;
+    if (originalSize) {
+        endPoint = file.tempDownloadUrl;
+    }
+    if (file.contentType == ContentTypeVideo) {
+        endPoint = file.tempDownloadUrl;
+        if (!originalSize) {
+            if (file.videoPreviewUrl != nil) {
+                endPoint = file.videoPreviewUrl;
+            }
+        }
+    }
+    
+    [self downloadImageWithURL:[NSURL URLWithString:endPoint]
                completionBlock:
      ^(BOOL succeeded, UIImage *image, NSData *imageData) {
          if (succeeded) {
@@ -1148,39 +1189,29 @@
 
 #pragma mark - ShareLinkDao Delegate Methods
 - (void) shareSuccessCallback:(NSString *) linkToShare {
-    [self showLoading];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        [self downloadImageWithURL:[NSURL URLWithString:self.file.tempDownloadUrl]
-                   completionBlock:^(BOOL succeeded, UIImage *image, NSData *imageData) {
-                       if (succeeded) {
-                           [self hideLoading];
-                           
-                           NSURL *url = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingString:self.file.name]];
-                           [imageData writeToURL:url atomically:NO];
-                           
-                           NSArray *activityItems = @[url];
-                           
-                           ShareActivity *activity = [[ShareActivity alloc] init];
-                           activity.sourceViewController = self;
-                           
-                           UIActivityViewController *activityViewController = [[UIActivityViewController alloc]
-                                                                               initWithActivityItems:activityItems
-                                                                               applicationActivities:@[activity]];
-                           [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
-                           activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-                           
-                           activityViewController.excludedActivityTypes = @[@"com.igones.adepo.DepoShareExtension", UIActivityTypePostToFacebook];
-                           
-                           if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-                               [self presentViewController:activityViewController animated:YES completion:nil];
-                           } else {
-                               UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
-                               [popup presentPopoverFromRect:CGRectMake(self.view.frame.size.width-240, self.view.frame.size.height-40, 240, 300)inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-                           }
-                           
-                       }
-                   }];
-    });
+    [self hideLoading];
+    NSArray *activityItems = [NSArray arrayWithObjects:
+                              [NSURL URLWithString:linkToShare], nil];
+    
+    ShareActivity *activity = [[ShareActivity alloc] init];
+    activity.sourceViewController = self;
+    
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc]
+                                                        initWithActivityItems:activityItems
+                                                        applicationActivities:@[activity]];
+    
+    [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
+    
+    activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    
+    activityViewController.excludedActivityTypes = @[UIActivityTypePostToFacebook];
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        [self presentViewController:activityViewController animated:YES completion:nil];
+    } else {
+        UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
+        [popup presentPopoverFromRect:CGRectMake(self.view.frame.size.width-240, self.view.frame.size.height-40, 240, 300)inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
 }
 
 - (void)downloadImageWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, UIImage *image, NSData *imageData))completionBlock {
@@ -1400,7 +1431,7 @@
 
 - (void) postUploadProcess {
     if(postProcess == NextProcessTypeShare) {
-        [self triggerShareForFiles:@[self.file.uuid]];
+        [self presentSharePopup];
     } else if(postProcess == NextProcessTypePrint) {
         NSArray *tempArr = [NSArray arrayWithObject:file];
         PrintWebViewController *printController = [[PrintWebViewController alloc] initWithUrl:@"http://akillidepo.cellograf.com/" withFileList:tempArr];
