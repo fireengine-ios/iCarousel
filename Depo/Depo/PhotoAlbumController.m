@@ -656,22 +656,22 @@
 
 
 - (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {
-    MetaFile *shareObject = [[MetaFile alloc] init];
-    if ([selectedFileList count] == 1) {
-        for (id fileIndex in photoList) {
-            if ([fileIndex isKindOfClass:[MetaFile class]]) {
-                MetaFile *tempFile = (MetaFile *) fileIndex;
-                if ([tempFile.uuid isEqualToString:[selectedFileList objectAtIndex:0]]) {
-                    shareObject = tempFile;
-                }
-            }
-        }
-        [self triggerShareForFileObjects:@[shareObject]];
-        //[APPDELEGATE.base triggerShareForFileObjects:@[shareObject]];
-    } else {
+//    MetaFile *shareObject = [[MetaFile alloc] init];
+//    if ([selectedFileList count] == 1) {
+//        for (id fileIndex in photoList) {
+//            if ([fileIndex isKindOfClass:[MetaFile class]]) {
+//                MetaFile *tempFile = (MetaFile *) fileIndex;
+//                if ([tempFile.uuid isEqualToString:[selectedFileList objectAtIndex:0]]) {
+//                    shareObject = tempFile;
+//                }
+//            }
+//        }
+//        [self triggerShareForFiles:@[shareObject] withUUID:selectedFileList];
+//        //[APPDELEGATE.base triggerShareForFileObjects:@[shareObject]];
+//    } else {
         [self triggerShareForFiles:self.selectedFiles withUUID:selectedFileList];
         //[APPDELEGATE.base triggerShareForFiles:selectedFileList];
-    }
+//    }
     //[APPDELEGATE.base triggerShareForFiles:selectedFileList];
 }
 
