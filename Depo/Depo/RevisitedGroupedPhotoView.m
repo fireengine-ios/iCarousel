@@ -330,6 +330,9 @@
         [files removeAllObjects];
         [fileHashList removeAllObjects];
         [fileHashList addObjectsFromArray:[SyncUtil readLocallySavedFiles]];
+        
+        [[SDWebImagePrefetcher sharedImagePrefetcher] cancelPrefetching];
+        [[SDWebImageManager sharedManager].imageCache clearMemory];
         localAssets = nil;
         
         [self.collView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
@@ -553,6 +556,7 @@
             }
         }
         [[SDWebImagePrefetcher sharedImagePrefetcher] setMaxConcurrentDownloads:10];
+        [[SDWebImagePrefetcher sharedImagePrefetcher].manager.imageCache.config setShouldDecompressImages:NO];
         [[SDWebImagePrefetcher sharedImagePrefetcher] prefetchURLs:urlsToPrefetch];
         /*
          if ([files count] == 0 && !anyOngoingPresent) {
@@ -1142,7 +1146,11 @@
                     cell = [cv dequeueReusableCellWithReuseIdentifier:@"COLL_PHOTO_CELL_CLIENT" forIndexPath:indexPath];
                 }
                 cell.delegate = self;
-                [cell loadContent:castedRow isSelectible:self.isSelectible withImageWidth:imageWidth withGroupKey:sectionGroup.groupKey isSelected:(castedRow.rawType == RawFileTypeDepo ? [selectedFileList containsObject:castedRow.fileRef.uuid] : [selectedFileList containsObject:[castedRow.assetRef.defaultRepresentation.url absoluteString]])];
+                [cell loadContent:castedRow
+                     isSelectible:self.isSelectible
+                   withImageWidth:imageWidth
+                     withGroupKey:sectionGroup.groupKey
+                       isSelected:(castedRow.rawType == RawFileTypeDepo ? [selectedFileList containsObject:castedRow.fileRef.uuid] : [selectedFileList containsObject:[castedRow.assetRef.defaultRepresentation.url absoluteString]])];
                 return cell;
             } else {
                 UploadRef *castedRow = (UploadRef *) rowItem;

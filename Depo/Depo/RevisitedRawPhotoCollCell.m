@@ -46,12 +46,18 @@
         if(!sqImageView) {
             sqImageView = [[SquareImageView alloc] initLocalWithFrame:CGRectMake(0, 0, imageWidth, imageWidth) withAsset:content.assetRef withSelectibleStatus:isSelectible];
             sqImageView.delegate = self;
-            sqImageView.imgView.image = [UIImage imageWithCGImage:[content.assetRef aspectRatioThumbnail]];
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                CGImageRef thumbnailImageRef = [content.assetRef aspectRatioThumbnail];
+                __block UIImage *thumbnailImage = [UIImage imageWithCGImage:thumbnailImageRef];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    sqImageView.imgView.image = thumbnailImage;
+                });
+            });            
             [self addSubview:sqImageView];
         } else {
             [sqImageView refreshLocalContent:content.assetRef];
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-               
                 CGImageRef thumbnailImageRef = [content.assetRef aspectRatioThumbnail];
                 __block UIImage *thumbnailImage = [UIImage imageWithCGImage:thumbnailImageRef];
                dispatch_async(dispatch_get_main_queue(), ^{
