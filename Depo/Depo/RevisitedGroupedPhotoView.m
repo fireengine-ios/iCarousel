@@ -1572,7 +1572,7 @@
         [imgFooterActionMenu enableDownloadButton];
     } else {
         [imgFooterActionMenu disableDeleteButton];
-        [imgFooterActionMenu disableMoveButton];
+//        [imgFooterActionMenu disableMoveButton];
 //        [imgFooterActionMenu disablePrintButton];
         [imgFooterActionMenu disableDownloadButton];
     }
