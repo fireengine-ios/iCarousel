@@ -756,6 +756,26 @@
 		070A22181E8AB807002385F7 /* Line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 070A22151E8AB807002385F7 /* Line@2x.png */; };
 		070A22191E8AB807002385F7 /* Line@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 070A22161E8AB807002385F7 /* Line@3x.png */; };
 		070A221F1E8AEB34002385F7 /* CircleProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 070A221E1E8AEB34002385F7 /* CircleProgressBar.m */; };
+		073762191EA09E5200A1A4BC /* ImageScale.m in Sources */ = {isa = PBXBuildFile; fileRef = 073762181EA09E5200A1A4BC /* ImageScale.m */; };
+		07547CF11EA4B4140012F4FE /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC3F791E71231E00DDC28C /* MKAnnotationView+WebCache.m */; };
+		07547CF21EA4B4140012F4FE /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC3F7B1E71231E00DDC28C /* NSData+ImageContentType.m */; };
+		07547CF31EA4B4140012F4FE /* NSImage+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC3F7D1E71231E00DDC28C /* NSImage+WebCache.m */; };
+		07547CF41EA4B4140012F4FE /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC3F7F1E71231E00DDC28C /* SDImageCache.m */; };
+		07547CF51EA4B4140012F4FE /* SDImageCacheConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC3F811E71231E00DDC28C /* SDImageCacheConfig.m */; };
+		07547CF61EA4B4140012F4FE /* SDWebImageCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC3F831E71231E00DDC28C /* SDWebImageCompat.m */; };
+		07547CF71EA4B4140012F4FE /* SDWebImageDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC3F851E71231E00DDC28C /* SDWebImageDecoder.m */; };
+		07547CF81EA4B4140012F4FE /* SDWebImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC3F871E71231E00DDC28C /* SDWebImageDownloader.m */; };
+		07547CF91EA4B4140012F4FE /* SDWebImageDownloaderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC3F891E71231E00DDC28C /* SDWebImageDownloaderOperation.m */; };
+		07547CFA1EA4B4140012F4FE /* SDWebImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC3F8B1E71231E00DDC28C /* SDWebImageManager.m */; };
+		07547CFB1EA4B4140012F4FE /* SDWebImagePrefetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC3F8E1E71231E00DDC28C /* SDWebImagePrefetcher.m */; };
+		07547CFC1EA4B4140012F4FE /* UIButton+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC3F901E71231E00DDC28C /* UIButton+WebCache.m */; };
+		07547CFD1EA4B4140012F4FE /* UIImage+GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC3F921E71231E00DDC28C /* UIImage+GIF.m */; };
+		07547CFE1EA4B4140012F4FE /* UIImage+MultiFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC3F941E71231E00DDC28C /* UIImage+MultiFormat.m */; };
+		07547CFF1EA4B4140012F4FE /* UIImage+WebP.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC3F961E71231E00DDC28C /* UIImage+WebP.m */; };
+		07547D001EA4B4140012F4FE /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC3F981E71231E00DDC28C /* UIImageView+HighlightedWebCache.m */; };
+		07547D011EA4B4140012F4FE /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC3F9A1E71231E00DDC28C /* UIImageView+WebCache.m */; };
+		07547D021EA4B4140012F4FE /* UIView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC3F9C1E71231E00DDC28C /* UIView+WebCache.m */; };
+		07547D031EA4B4140012F4FE /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC3F9E1E71231E00DDC28C /* UIView+WebCacheOperation.m */; };
 		2443E1541B6BB0C5001C274D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2443E1531B6BB0C5001C274D /* AudioToolbox.framework */; };
 		2443E1571B6BB5F3001C274D /* AudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2443E1561B6BB5F3001C274D /* AudioManager.m */; };
 		247268911B7CC29900804E56 /* CustomAdvertisementView.m in Sources */ = {isa = PBXBuildFile; fileRef = 247268901B7CC29900804E56 /* CustomAdvertisementView.m */; };
@@ -2423,6 +2443,8 @@
 		070A22161E8AB807002385F7 /* Line@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Line@3x.png"; sourceTree = "<group>"; };
 		070A221D1E8AEB34002385F7 /* CircleProgressBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleProgressBar.h; sourceTree = "<group>"; };
 		070A221E1E8AEB34002385F7 /* CircleProgressBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleProgressBar.m; sourceTree = "<group>"; };
+		073762171EA09E5200A1A4BC /* ImageScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageScale.h; sourceTree = "<group>"; };
+		073762181EA09E5200A1A4BC /* ImageScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageScale.m; sourceTree = "<group>"; };
 		2443E1531B6BB0C5001C274D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		2443E1551B6BB5F3001C274D /* AudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioManager.h; sourceTree = "<group>"; };
 		2443E1561B6BB5F3001C274D /* AudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioManager.m; sourceTree = "<group>"; };
@@ -5071,6 +5093,8 @@
 				05C3A37B1B57DFAB002AB49A /* Supporting Files */,
 				05028CBE1B595440000F2D09 /* ExtensionUploadManager.h */,
 				05028CBF1B595440000F2D09 /* ExtensionUploadManager.m */,
+				073762171EA09E5200A1A4BC /* ImageScale.h */,
+				073762181EA09E5200A1A4BC /* ImageScale.m */,
 			);
 			path = DepoShareExtension;
 			sourceTree = "<group>";
@@ -7019,17 +7043,37 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07547CFE1EA4B4140012F4FE /* UIImage+MultiFormat.m in Sources */,
+				07547CFF1EA4B4140012F4FE /* UIImage+WebP.m in Sources */,
 				05028CC01B595440000F2D09 /* ExtensionUploadManager.m in Sources */,
+				07547CFA1EA4B4140012F4FE /* SDWebImageManager.m in Sources */,
 				05C3A37F1B57DFAB002AB49A /* ShareViewController.m in Sources */,
+				073762191EA09E5200A1A4BC /* ImageScale.m in Sources */,
 				05028D2A1B5CE9D7000F2D09 /* Reachability.m in Sources */,
+				07547CF81EA4B4140012F4FE /* SDWebImageDownloader.m in Sources */,
+				07547CF21EA4B4140012F4FE /* NSData+ImageContentType.m in Sources */,
+				07547CF51EA4B4140012F4FE /* SDImageCacheConfig.m in Sources */,
 				94B3BE301D826F0F0086D05E /* LoggerUtil.m in Sources */,
+				07547D031EA4B4140012F4FE /* UIView+WebCacheOperation.m in Sources */,
 				05028CC31B5A315F000F2D09 /* CustomAlertView.m in Sources */,
+				07547CF41EA4B4140012F4FE /* SDImageCache.m in Sources */,
 				05028CD41B5A9887000F2D09 /* SharedUtil.m in Sources */,
 				05028CC41B5A3184000F2D09 /* SimpleButton.m in Sources */,
+				07547CFD1EA4B4140012F4FE /* UIImage+GIF.m in Sources */,
+				07547CFC1EA4B4140012F4FE /* UIButton+WebCache.m in Sources */,
 				0544A1001B661A18006EB9B5 /* ExifContainer.m in Sources */,
+				07547CFB1EA4B4140012F4FE /* SDWebImagePrefetcher.m in Sources */,
+				07547CF71EA4B4140012F4FE /* SDWebImageDecoder.m in Sources */,
 				0544A1011B661A1B006EB9B5 /* UIImage+Exif.m in Sources */,
+				07547CF61EA4B4140012F4FE /* SDWebImageCompat.m in Sources */,
+				07547CF11EA4B4140012F4FE /* MKAnnotationView+WebCache.m in Sources */,
 				05028CC11B595915000F2D09 /* Util.m in Sources */,
+				07547CF91EA4B4140012F4FE /* SDWebImageDownloaderOperation.m in Sources */,
 				05028CC51B5A319A000F2D09 /* CustomLabel.m in Sources */,
+				07547D021EA4B4140012F4FE /* UIView+WebCache.m in Sources */,
+				07547D011EA4B4140012F4FE /* UIImageView+WebCache.m in Sources */,
+				07547D001EA4B4140012F4FE /* UIImageView+HighlightedWebCache.m in Sources */,
+				07547CF31EA4B4140012F4FE /* NSImage+WebCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7225,8 +7269,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Depo/Depo.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Omer Burak Kir (7BESVJQ8SV)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Omer Burak Kir (7BESVJQ8SV)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Turan Yilmaz (4B9BE7D75V)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Turan Yilmaz (4B9BE7D75V)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -7254,7 +7298,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rdc.lifebox2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5a820945-d25b-44c5-a898-0c4ec6ece99d";
+				PROVISIONING_PROFILE = "533defd0-a874-4d19-ad00-009728b8ab03";
 				PROVISIONING_PROFILE_SPECIFIER = LifeboxDevelopment_20161228;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -7527,8 +7571,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = DepoShareExtension/DepoShareExtension.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Omer Burak Kir (7BESVJQ8SV)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Omer Burak Kir (7BESVJQ8SV)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Turan Yilmaz (4B9BE7D75V)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Turan Yilmaz (4B9BE7D75V)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -7544,7 +7588,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rdc.lifebox2.ShareExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4ace2ce8-8ca8-496e-89d6-893057d745b8";
+				PROVISIONING_PROFILE = "f571024f-83b2-44f8-9429-6faf568a096d";
 				PROVISIONING_PROFILE_SPECIFIER = LifeboxShareExtensionDevelopment_20161228;
 				SKIP_INSTALL = YES;
 			};
@@ -7635,8 +7679,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Omer Burak Kir (7BESVJQ8SV)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Omer Burak Kir (7BESVJQ8SV)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Turan Yilmaz (4B9BE7D75V)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Turan Yilmaz (4B9BE7D75V)";
 				ENABLE_BITCODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -7649,7 +7693,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rdc.lifebox2.AutoSyncWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b1fa0d18-6d78-4783-b5e6-a0642a02374d";
+				PROVISIONING_PROFILE = "f96fbaf1-5135-4292-ab67-9d1279dad0ad";
 				PROVISIONING_PROFILE_SPECIFIER = LifeboxAutoSyncWidgetDevelopment_20161228;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -7740,8 +7784,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = "Lifebox Picker/Lifebox_Picker.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Omer Burak Kir (7BESVJQ8SV)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Omer Burak Kir (7BESVJQ8SV)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Turan Yilmaz (4B9BE7D75V)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Turan Yilmaz (4B9BE7D75V)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = PT569ZA878;
 				ENABLE_BITCODE = NO;
