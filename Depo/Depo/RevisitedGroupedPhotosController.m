@@ -23,6 +23,7 @@
 #import "ShareActivity.h"
 #import "RDActivityViewController.h"
 #import "AppRater.h"
+#import "SettingsUploadController.h"
 
 @interface RevisitedGroupedPhotosController () <UIActionSheetDelegate, RDActivityViewControllerDelegate> {
     MyNavigationController *printNav;
@@ -162,6 +163,11 @@
     footerActionMenuDidSelect = NO;
     
 //    [APPDELEGATE.base immediateShowAddButton];
+}
+
+- (void) triggerSyncSettings {
+    SettingsUploadController *settingsUploadController = [[SettingsUploadController alloc] init];
+    [self.nav pushViewController:settingsUploadController animated:YES];
 }
 
 #pragma mark RevisitedAlbumListDelegate methods
