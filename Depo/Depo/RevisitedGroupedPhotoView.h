@@ -58,6 +58,7 @@
 
 -(void)revisitedGroupedPhoto:(RevisitedGroupedPhotoView *)view downloadSelectedFiles:(NSArray *)selectedFiles;
 - (BOOL) checkInternet;
+- (void) triggerSyncSettings;
 
 @optional
 - (void) revisitedGroupedPhotoWantsToShowLoading;

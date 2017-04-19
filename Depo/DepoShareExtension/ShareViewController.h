@@ -11,7 +11,7 @@
 #import "CustomAlertView.h"
 #import "ExtensionUploadManager.h"
 
-@interface ShareViewController : UIViewController <ExtensionUploadManagerDelegate, CustomAlertDelegate>
+@interface ShareViewController : UIViewController <ExtensionUploadManagerDelegate, CustomAlertDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (nonatomic, weak) IBOutlet UIButton *cancelButton;
 @property (nonatomic, weak) IBOutlet UIImageView *previewView;
@@ -21,10 +21,10 @@
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *imageLoadingIndicator;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *uploadIndicator;
 @property (nonatomic, weak) IBOutlet UILabel *uploadingLabel;
-@property (nonatomic, weak) IBOutlet UIScrollView *imagesScroll;
 @property (nonatomic, strong) CustomAlertView *alertView;
 @property (nonatomic, strong) NSURLSession *httpSession;
 @property (nonatomic, strong) NSMutableArray *urlsToUpload;
-@property (nonatomic) int currentUploadIndex;
+@property (nonatomic) NSInteger currentUploadIndex;
+@property (weak, nonatomic) IBOutlet UICollectionView *imagesCollectionView;
 
 @end

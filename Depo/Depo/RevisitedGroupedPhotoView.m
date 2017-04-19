@@ -1261,7 +1261,8 @@
 }
 
 - (void) autoSyncOffHeaderViewSettingsClicked {
-    [APPDELEGATE triggerSyncSettings];
+//    [APPDELEGATE triggerSyncSettings];
+    [delegate triggerSyncSettings];
 }
 
 #pragma mark - SyncManagerInfoDelegate Methods

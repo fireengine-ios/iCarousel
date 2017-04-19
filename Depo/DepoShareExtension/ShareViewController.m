@@ -13,6 +13,8 @@
 #import <AVFoundation/AVFoundation.h>
 #import "Reachability.h"
 #import "SharedUtil.h"
+#import "ImageScale.h"
+#import "UIImageView+WebCache.h"
 
 //TODO test -> prod
 #define EXT_REMEMBER_ME_URL @"https://adepo.turkcell.com.tr/api/auth/rememberMe"
@@ -29,7 +31,8 @@
 @interface ShareViewController () {
     double totalSize;
 }
-
+@property (nonatomic, strong) NSMutableArray *originalImages;
+@property (nonatomic, strong) NSMutableArray *originalImagesForCV;
 @end
 
 @implementation ShareViewController
@@ -41,7 +44,6 @@
 @synthesize progressView;
 @synthesize alertView;
 @synthesize imageLoadingIndicator;
-@synthesize imagesScroll;
 @synthesize uploadIndicator;
 @synthesize uploadingLabel;
 @synthesize httpSession;
@@ -50,7 +52,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-
+    
     self.view.transform = CGAffineTransformMakeTranslation(0, self.view.frame.size.height);
     [UIView animateWithDuration:0.25 animations:^{
         self.view.transform = CGAffineTransformIdentity;
@@ -62,7 +64,8 @@
 - (void) uploadFrames {
     cancelButton.frame = CGRectMake(self.view.frame.size.width - 40, cancelButton.frame.origin.y, cancelButton.frame.size.width, cancelButton.frame.size.height);
     previewView.frame = CGRectMake(20, 110, self.view.frame.size.width - 40, (self.view.frame.size.width - 40)*2/3);
-    imagesScroll.frame = CGRectMake(20, previewView.frame.origin.y + previewView.frame.size.height + 30, self.view.frame.size.width - 40, 50);
+    //    imagesScroll.frame = CGRectMake(20, previewView.frame.origin.y + previewView.frame.size.height + 30, self.view.frame.size.width - 40, 50);
+    self.imagesCollectionView.frame = CGRectMake(20, previewView.frame.origin.y + previewView.frame.size.height + 30, self.view.frame.size.width - 40, 50);
     imageLoadingIndicator.center = previewView.center;
     uploadButton.frame = CGRectMake(20, previewView.frame.origin.y + previewView.frame.size.height + 110, self.view.frame.size.width - 40, 50);
     loadingView.frame = CGRectMake(20, previewView.frame.origin.y + previewView.frame.size.height + 110, self.view.frame.size.width - 40, 50);
@@ -88,17 +91,6 @@
                 [alertView reorientateModalView:self.view.center];
                 [self.view addSubview:alertView];
                 [self.view bringSubviewToFront:alertView];
-                
-                //INFO - ADC 1440 kapsamında radius login in engellenmesi istendi.
-//                if(networkStatus == kReachableViaWiFi) {
-//                    alertView = [[CustomAlertView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) withTitle:NSLocalizedString(@"Error", @"") withMessage:NSLocalizedString(@"ExtLoginRequiredMessage", @"") withModalType:ModalTypeError];
-//                    alertView.delegate = self;
-//                    [alertView reorientateModalView:self.view.center];
-//                    [self.view addSubview:alertView];
-//                    [self.view bringSubviewToFront:alertView];
-//                } else {
-//                    [self requestRadius];
-//                }
             }
         } else {
             alertView = [[CustomAlertView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) withTitle:NSLocalizedString(@"Error", @"") withMessage:NSLocalizedString(@"ConnectionErrorWarning", @"") withModalType:ModalTypeError];
@@ -116,12 +108,16 @@
 
 - (IBAction) startUpload {
     
+    if (currentUploadIndex == NSNotFound) {
+        currentUploadIndex = 0;
+    }
+    
     NSDictionary *dict = [urlsToUpload objectAtIndex:currentUploadIndex];
     if(dict != nil) {
         BOOL isPhoto = [[dict objectForKey:@"isPhoto"] boolValue];
         BOOL isMedia = [[dict objectForKey:@"isMedia"] boolValue];
         id item = [dict objectForKey:@"item"];
-
+        
         [ExtensionUploadManager sharedInstance].delegate = self;
         if(isMedia) {
             if(isPhoto) {
@@ -129,10 +125,12 @@
             } else {
                 NSURL *moviePath = item;
                 
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    NSData *assetData = [NSData dataWithContentsOfURL:moviePath];
-                    [[ExtensionUploadManager sharedInstance] startUploadForVideoData:assetData];
-                });
+                //                NSData *assetData = [NSData dataWithContentsOfURL:moviePath];
+                NSError *error = nil;
+                NSData *assetData = [[NSData alloc] initWithContentsOfFile:[moviePath path]
+                                                                   options:NSDataReadingMappedIfSafe
+                                                                     error:&error];
+                [[ExtensionUploadManager sharedInstance] startUploadForVideoData:assetData];
             }
         } else {
             NSURL *docPath = item;
@@ -140,40 +138,44 @@
             NSString *contentType = [dict objectForKey:@"contentType"];
             NSString *extension = [dict objectForKey:@"extension"];
             
-            dispatch_async(dispatch_get_main_queue(), ^{
-                NSData *assetData = [NSData dataWithContentsOfURL:docPath];
-                [[ExtensionUploadManager sharedInstance] startUploadForDoc:assetData withContentType:contentType withExt:extension];
-            });
+            
+            NSData *assetData = [NSData dataWithContentsOfURL:docPath];
+            [[ExtensionUploadManager sharedInstance] startUploadForDoc:assetData withContentType:contentType withExt:extension];
+            
         }
-        uploadButton.hidden = YES;
-        uploadButton.enabled = NO;
-        loadingView.hidden = NO;
-        
-        uploadingLabel.text = NSLocalizedString(@"UploadInProgress", @"");
-        [self checkAndSharpenCurrentUploadInScroll];
-        [self uploadFrames];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            uploadButton.hidden = YES;
+            uploadButton.enabled = NO;
+            loadingView.hidden = NO;
+            
+            uploadingLabel.text = NSLocalizedString(@"UploadInProgress", @"");
+            [self checkAndSharpenCurrentUploadInScroll];
+            [self uploadFrames];
+        });
     }
 }
 
 - (void) checkAndSharpenCurrentUploadInScroll {
-    for(UIView *subView in [imagesScroll subviews]) {
-        if([subView isKindOfClass:[UIImageView class]]) {
-            if(subView.tag == currentUploadIndex) {
-                subView.alpha = 1.0f;
-                imagesScroll.contentOffset = CGPointMake(subView.frame.origin.x, imagesScroll.contentOffset.y);
-            } else {
-                subView.alpha = 0.6f;
-            }
-        }
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.imagesCollectionView reloadData];
+        [self.imagesCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:currentUploadIndex inSection:0]
+                                          atScrollPosition:UICollectionViewScrollPositionLeft
+                                                  animated:YES];
+    });
 }
 
 - (void) viewDidLoad {
     [super viewDidLoad];
     
+    self.imagesCollectionView.delegate = self;
+    self.imagesCollectionView.dataSource = self;
+    
+    self.originalImages = [[NSMutableArray alloc] init];
+    self.originalImagesForCV = [[NSMutableArray alloc] init];
+    
     [SharedUtil writeSharedToken:nil];
     
-    currentUploadIndex = 0;
+    currentUploadIndex = NSNotFound;
     
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     self.httpSession = [NSURLSession sessionWithConfiguration:configuration delegate:nil delegateQueue:nil];
@@ -243,10 +245,10 @@
                     NSString *absStr = [path absoluteString];
                     NSArray *items = [absStr componentsSeparatedByString:@"."];
                     NSString *extension = [items objectAtIndex:[items count]-1];
-
+                    
                     NSString *logData = [NSString stringWithFormat:@"ShareViewController loadItemForTypeIdentifier:public.data path found with path:%@ and extension:%@", path, extension];
                     IGLog(logData);
-
+                    
                     NSDictionary *dict;
                     if([[extension lowercaseString] hasSuffix:@"mp4"] || [[extension lowercaseString] hasSuffix:@"mpeg"]) {
                         dict = [NSDictionary dictionaryWithObjects:@[path, @"NO", @"YES"] forKeys:@[@"item", @"isPhoto", @"isMedia"]];
@@ -267,6 +269,7 @@
 - (void) postUrlListConstruction {
     totalSize = 0;
     if(urlsToUpload != nil && urlsToUpload.count > 0) {
+        //        NSMutableArray *images = [@[] mutableCopy];
         for(int counter = 0; counter < urlsToUpload.count; counter ++) {
             NSDictionary *dict = [urlsToUpload objectAtIndex:counter];
             BOOL isMedia = [[dict objectForKey:@"isMedia"] boolValue];
@@ -274,7 +277,11 @@
             id item = [dict objectForKey:@"item"];
             if(isMedia) {
                 if(isPhoto) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.originalImagesForCV addObject:[[NSObject alloc] init]];
+                    NSDictionary *dict = [NSDictionary dictionaryWithObjects:@[item, @"YES"] forKeys:@[@"item", @"isPhoto"]];
+                    [self.originalImages addObject:dict];
+                    
+                    if(counter == 0) {
                         UIImage *sharedImage = nil;
                         
                         if([(NSObject*)item isKindOfClass:[NSURL class]]) {
@@ -285,63 +292,33 @@
                         if([(NSObject*)item isKindOfClass:[UIImage class]]) {
                             sharedImage = (UIImage*)item;
                         }
-                        
-//                        if (counter == urlsToUpload.count -1)  {
-//                            NSLog(@"Size of Images(bytes):%f", totalSize);
-//                            if (totalSize > 5610019) { // 5.35013 mb
-//                                alertView = [[CustomAlertView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) withTitle:NSLocalizedString(@"Error", @"") withMessage:NSLocalizedString(@"MaxSizeLimitExceeded", @"") withModalType:ModalTypeError];
-//                                alertView.delegate = self;
-//                                [alertView reorientateModalView:self.view.center];
-//                                [self.view addSubview:alertView];
-//                                [self.view bringSubviewToFront:alertView];
-//                                return;
-//                            }
-//                        }
-                        
-                        if(counter == 0) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
                             previewView.image = sharedImage;
                             uploadButton.enabled = YES;
                             imageLoadingIndicator.hidden = YES;
                             previewView.hidden = NO;
                             [self uploadFrames];
-                        }
-                        
-                        UIImageView *scrollableImgView = [[UIImageView alloc] initWithFrame:CGRectMake(counter * 60, 0, 50, 50)];
-                        scrollableImgView.image = sharedImage;
-                        scrollableImgView.alpha = 0.6;
-                        scrollableImgView.tag = counter;
-                        [imagesScroll addSubview:scrollableImgView];
-                    });
+                        });
+                    }
+                    
                 } else {
-                    dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.originalImagesForCV addObject:[[NSObject alloc] init]];
+                    if(counter == 0) {
+                        
                         NSURL *moviePath = item;
+                        UIImage *thumb = [self getVideoThumbnail:moviePath];
                         
-                        AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:moviePath options:nil];
-                        AVAssetImageGenerator *gen = [[AVAssetImageGenerator alloc] initWithAsset:asset];
-                        gen.appliesPreferredTrackTransform = YES;
-                        CMTime time = CMTimeMakeWithSeconds(0.0, 600);
-                        NSError *error = nil;
-                        CMTime actualTime;
-                        
-                        CGImageRef image = [gen copyCGImageAtTime:time actualTime:&actualTime error:&error];
-                        UIImage *thumb = [[UIImage alloc] initWithCGImage:image];
-                        CGImageRelease(image);
-                        
-                        if(counter == 0) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
                             previewView.image = thumb;
                             uploadButton.enabled = YES;
                             imageLoadingIndicator.hidden = YES;
                             previewView.hidden = NO;
                             [self uploadFrames];
-                        }
-                        
-                        UIImageView *scrollableImgView = [[UIImageView alloc] initWithFrame:CGRectMake(counter * 60, 0, 50, 50)];
-                        scrollableImgView.image = thumb;
-                        scrollableImgView.alpha = 0.6;
-                        scrollableImgView.tag = counter;
-                        [imagesScroll addSubview:scrollableImgView];
-                        
-                    });
+                        });
+                    }
+                    
+                    NSDictionary *dict = [NSDictionary dictionaryWithObjects:@[item, @"NO"] forKeys:@[@"item", @"isPhoto"]];
+                    [self.originalImages addObject:dict];
                 }
             } else {
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -353,16 +330,61 @@
                         [self uploadFrames];
                     }
                     
-                    UIImageView *scrollableImgView = [[UIImageView alloc] initWithFrame:CGRectMake(counter * 60, 0, 38, 50)];
-                    scrollableImgView.image = [UIImage imageNamed:@"documents_icon.png"];
-                    scrollableImgView.alpha = 0.6;
-                    scrollableImgView.tag = counter;
-                    [imagesScroll addSubview:scrollableImgView];
+                    [self.originalImages addObject:[UIImage imageNamed:@"documents_icon.png"]];
                 });
             }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.imagesCollectionView reloadData];
+            });
+            
         }
     }
-    imagesScroll.contentSize = CGSizeMake(60 * (urlsToUpload.count + 1), imagesScroll.frame.size.height);
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.originalImagesForCV.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoCellIdentifier" forIndexPath:indexPath];
+    UIImageView *imageView = [cell viewWithTag:100];
+    
+    id placeholder = self.originalImagesForCV[indexPath.row];
+    
+    if ([placeholder isKindOfClass:[UIImage class]]) {
+        imageView.image = placeholder;
+    } else {
+        UIImage *sharedImage = nil;
+        NSDictionary *dict = self.originalImages[indexPath.row];
+        id item = [dict objectForKey:@"item"];
+        BOOL isPhoto = [[dict objectForKey:@"isPhoto"] boolValue];
+        if([(NSObject*)item isKindOfClass:[NSURL class]]) {
+            if (!isPhoto) {
+                NSURL *moviePath = item;
+                
+                sharedImage = [self getVideoThumbnail:moviePath];
+            }
+            else {
+                sharedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:item]];
+            }
+        }
+        if([(NSObject*)item isKindOfClass:[UIImage class]]) {
+            sharedImage = item;
+        }
+        UIImage *newImage = [ImageScale imageWithImage:sharedImage
+                                          scaledToSize:CGSizeMake(100, 100)];
+        
+        [self.originalImagesForCV replaceObjectAtIndex:indexPath.row
+                                            withObject:newImage];
+        imageView.image = newImage;
+    }
+    imageView.alpha = 0.6f;
+    if (currentUploadIndex == indexPath.row) {
+        imageView.alpha = 1.f;
+    }
+    
+    return cell;
 }
 
 - (BOOL)isContentValid {
@@ -385,23 +407,29 @@
 #pragma mark ExtensionUploadManagerDelegate
 
 - (void) extensionUploadHasFailed:(NSError *)error {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if(currentUploadIndex < urlsToUpload.count - 1) {
-            progressView.frame = CGRectMake(progressView.frame.origin.x, progressView.frame.origin.y, 0, progressView.frame.size.height);
-            
-            currentUploadIndex ++;
-            
-            for(UIView *subView in [imagesScroll subviews]) {
-                if([subView isKindOfClass:[UIImageView class]]) {
-                    UIImageView *imgSubView = (UIImageView *) subView;
-                    if(subView.tag == currentUploadIndex) {
-                        previewView.image = imgSubView.image;
-                    }
-                }
-            }
-            
-            [self startUpload];
-        } else {
+    
+    if(currentUploadIndex < urlsToUpload.count - 1) {
+        progressView.frame = CGRectMake(progressView.frame.origin.x, progressView.frame.origin.y, 0, progressView.frame.size.height);
+        
+        currentUploadIndex ++;
+        
+        NSDictionary *dict = self.originalImages[currentUploadIndex];
+        id item = [dict objectForKey:@"item"];
+        
+        UIImage *image = nil;
+        
+        if ([item isKindOfClass:[NSURL class]]) {
+            image = [UIImage imageWithData:[NSData dataWithContentsOfURL:item]];
+        } else if ([item isKindOfClass:[UIImage class]]) {
+            image = item;
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            previewView.image = image;
+        });
+        
+        [self startUpload];
+    } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
             uploadingLabel.text = NSLocalizedString(@"UploadFinishedPlaceholder", @"");
             [uploadIndicator stopAnimating];
             uploadIndicator.hidden = YES;
@@ -417,28 +445,38 @@
             [alertView reorientateModalView:self.view.center];
             [self.view addSubview:alertView];
             [self.view bringSubviewToFront:alertView];
-        }
-    });
+        });
+    }
 }
 
 - (void) extensionUploadHasFinished {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if(currentUploadIndex < urlsToUpload.count - 1) {
-            progressView.frame = CGRectMake(progressView.frame.origin.x, progressView.frame.origin.y, 0, progressView.frame.size.height);
-            
-            currentUploadIndex ++;
-            
-            for(UIView *subView in [imagesScroll subviews]) {
-                if([subView isKindOfClass:[UIImageView class]]) {
-                    UIImageView *imgSubView = (UIImageView *) subView;
-                    if(subView.tag == currentUploadIndex) {
-                        previewView.image = imgSubView.image;
-                    }
-                }
+    if(currentUploadIndex < urlsToUpload.count - 1) {
+        progressView.frame = CGRectMake(progressView.frame.origin.x, progressView.frame.origin.y, 0, progressView.frame.size.height);
+        
+        currentUploadIndex ++;
+        
+        NSDictionary *dict = self.originalImages[currentUploadIndex];
+        id item = [dict objectForKey:@"item"];
+        BOOL isPhoto = [[dict objectForKey:@"isPhoto"] boolValue];
+        UIImage *image = nil;
+        if ([item isKindOfClass:[NSURL class]]) {
+            if (!isPhoto) {
+                NSURL *moviePath = item;
+                image = [self getVideoThumbnail:moviePath];
             }
+            else {
+                image = [UIImage imageWithData:[NSData dataWithContentsOfURL:item]];
+            }
+        } else if ([item isKindOfClass:[UIImage class]]) {
+            image = item;
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            previewView.image = image;
+        });
+        [self startUpload];
+    } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
             
-            [self startUpload];
-        } else {
             uploadingLabel.text = NSLocalizedString(@"UploadFinishedPlaceholder", @"");
             [uploadIndicator stopAnimating];
             uploadIndicator.hidden = YES;
@@ -454,8 +492,8 @@
             [alertView reorientateModalView:self.view.center];
             [self.view addSubview:alertView];
             [self.view bringSubviewToFront:alertView];
-        }
-    });
+        });
+    }
 }
 
 - (void) extensionUploadIsAtPercent:(int)percent {
@@ -561,9 +599,7 @@
             if(jsonDict != nil && ![jsonDict isKindOfClass:[NSNull class]] && [jsonDict objectForKey:@"value"] != nil) {
                 NSString *baseUrl = [jsonDict objectForKey:@"value"];
                 [SharedUtil writeSharedBaseUrl:baseUrl];
-                dispatch_async(dispatch_get_main_queue(), ^(){
-                    [self startUpload];
-                });
+                [self startUpload];
             } else {
                 dispatch_async(dispatch_get_main_queue(), ^(){
                     alertView = [[CustomAlertView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) withTitle:NSLocalizedString(@"Error", @"") withMessage:NSLocalizedString(@"LoginError", @"") withModalType:ModalTypeError];
@@ -597,9 +633,9 @@
     [postRequest setValue:@"application/json; encoding=utf-8" forHTTPHeaderField:@"Content-Type"];
     [postRequest setHTTPMethod:@"POST"];
     [postRequest setHTTPBody:jsonData];
-//    if([SharedUtil readSharedToken]) {
-//        [postRequest setValue:[SharedUtil readSharedToken] forHTTPHeaderField:@"X-Auth-Token"];
-//    }
+    //    if([SharedUtil readSharedToken]) {
+    //        [postRequest setValue:[SharedUtil readSharedToken] forHTTPHeaderField:@"X-Auth-Token"];
+    //    }
     
     NSURLSessionDataTask *task = [self.httpSession dataTaskWithRequest:postRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if(error) {
@@ -637,6 +673,24 @@
 
 - (void) didDismissCustomAlert:(CustomAlertView *)alertView {
     [self dismiss];
+}
+
+- (UIImage*) getVideoThumbnail:(NSURL*) url {
+    UIImage *image = nil;
+    NSURL *moviePath = url;
+    
+    AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:moviePath options:nil];
+    AVAssetImageGenerator *gen = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+    gen.appliesPreferredTrackTransform = YES;
+    CMTime time = CMTimeMakeWithSeconds(0.0, 600);
+    NSError *error = nil;
+    CMTime actualTime;
+    
+    CGImageRef img = [gen copyCGImageAtTime:time actualTime:&actualTime error:&error];
+    image = [[UIImage alloc] initWithCGImage:img];
+    CGImageRelease(img);
+    
+    return image;
 }
 
 @end
