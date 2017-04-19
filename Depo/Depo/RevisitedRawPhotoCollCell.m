@@ -8,60 +8,57 @@
 
 #import "RevisitedRawPhotoCollCell.h"
 
-@interface RevisitedRawPhotoCollCell() {
-    UIImageView *maskView;
-    UIImageView *imgView;
-    UIImageView *playIconView;
-    UIImageView *notSyncedImgView;
-    SquareImageView *sqImageView;
-    NSString *groupKey;
-    BOOL isSelectible;
-}
+@interface RevisitedRawPhotoCollCell()
+@property (nonatomic, strong) UIImageView *maskView;
+@property (nonatomic, strong) UIImageView *imgView;
+@property (nonatomic, strong) UIImageView *playIconView;
+@property (nonatomic, strong) UIImageView *notSyncedImgView;
+@property (nonatomic, strong) NSString *groupKey;
+@property (nonatomic, assign) BOOL isSelectible;
+@property (nonatomic, strong) SquareImageView *sqImageView;
 @end
 
 @implementation RevisitedRawPhotoCollCell
 
-@synthesize delegate;
-@synthesize rawData;
 
-- (void) loadContent:(RawTypeFile *) content isSelectible:(BOOL) selectFlag withImageWidth:(float) imageWidth withGroupKey:(NSString *) _groupKey isSelected:(BOOL) selectedFlag {
+- (void) loadContent:(RawTypeFile *) content isSelectible:(BOOL) selectFlag withImageWidth:(float) imageWidth withGroupKey:(NSString *) groupKey isSelected:(BOOL) selectedFlag {
     self.rawData = content;
 
-    isSelectible = selectFlag;
-    groupKey = _groupKey;
+    self.isSelectible = selectFlag;
+    self.groupKey = groupKey;
     
     if(content.rawType == RawFileTypeDepo) {
-        if(notSyncedImgView) {
-            [notSyncedImgView removeFromSuperview];
-            notSyncedImgView = nil;
+        if(self.notSyncedImgView) {
+            [self.notSyncedImgView removeFromSuperview];
+            self.notSyncedImgView = nil;
         }
-        if(!sqImageView) {
-            sqImageView = [[SquareImageView alloc] initCachedFinalWithFrame:CGRectMake(0, 0, imageWidth, imageWidth) withFile:content.fileRef withSelectibleStatus:isSelectible];
-            sqImageView.delegate = self;
-            [self addSubview:sqImageView];
+        if(!self.sqImageView) {
+            self.sqImageView = [[SquareImageView alloc] initCachedFinalWithFrame:CGRectMake(0, 0, imageWidth, imageWidth) withFile:content.fileRef withSelectibleStatus:self.isSelectible];
+            self.sqImageView.delegate = self;
+            [self addSubview:self.sqImageView];
         } else {
-            [sqImageView refreshContent:content.fileRef];
+            [self.sqImageView refreshContent:content.fileRef];
         }
     } else {
-        if(!sqImageView) {
-            sqImageView = [[SquareImageView alloc] initLocalWithFrame:CGRectMake(0, 0, imageWidth, imageWidth) withAsset:content.assetRef withSelectibleStatus:isSelectible];
-            sqImageView.delegate = self;
+        if(!self.sqImageView) {
+            self.sqImageView = [[SquareImageView alloc] initLocalWithFrame:CGRectMake(0, 0, imageWidth, imageWidth) withAsset:content.assetRef withSelectibleStatus:self.isSelectible];
+            self.sqImageView.delegate = self;
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
                 CGImageRef thumbnailImageRef = [content.assetRef aspectRatioThumbnail];
                 __block UIImage *thumbnailImage = [UIImage imageWithCGImage:thumbnailImageRef];
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    sqImageView.imgView.image = thumbnailImage;
+                    self.sqImageView.imgView.image = thumbnailImage;
                 });
             });            
-            [self addSubview:sqImageView];
+            [self addSubview:self.sqImageView];
         } else {
-            [sqImageView refreshLocalContent:content.assetRef];
+            [self.sqImageView refreshLocalContent:content.assetRef];
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
                 CGImageRef thumbnailImageRef = [content.assetRef aspectRatioThumbnail];
                 __block UIImage *thumbnailImage = [UIImage imageWithCGImage:thumbnailImageRef];
                dispatch_async(dispatch_get_main_queue(), ^{
-                   sqImageView.imgView.image = thumbnailImage;
+                   self.sqImageView.imgView.image = thumbnailImage;
                });
             });
         }
@@ -81,89 +78,89 @@
         }
          */
         
-        if(!notSyncedImgView) {
-            notSyncedImgView = [[UIImageView alloc] initWithFrame:CGRectMake(self.frame.size.width - 20, self.frame.size.height - 20, 16, 16)];
-            notSyncedImgView.image = [UIImage imageNamed:@"icon_notsync"];
-            [self addSubview:notSyncedImgView];
+        if(!self.notSyncedImgView) {
+            self.notSyncedImgView = [[UIImageView alloc] initWithFrame:CGRectMake(self.frame.size.width - 20, self.frame.size.height - 20, 16, 16)];
+            self.notSyncedImgView.image = [UIImage imageNamed:@"icon_notsync"];
+            [self addSubview:self.notSyncedImgView];
         }
 
-        if(!maskView) {
-            maskView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-            maskView.image = [UIImage imageNamed:@"selected_mask.png"];
-            [self addSubview:maskView];
+        if(!self.maskView) {
+            self.maskView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+            self.maskView.image = [UIImage imageNamed:@"selected_mask.png"];
+            [self addSubview:self.maskView];
         }
         
-        maskView.hidden = !self.isSelected;
+        self.maskView.hidden = !self.isSelected;
     }
-    [sqImageView setNewStatus:selectFlag];
+    [self.sqImageView setNewStatus:selectFlag];
     
     if(selectFlag && selectedFlag) {
-        [sqImageView manuallySelect];
+        [self.sqImageView manuallySelect];
     } else {
-        [sqImageView manuallyDeselect];
+        [self.sqImageView manuallyDeselect];
     }
 }
 
 - (void) squareImageWasSelectedForFile:(MetaFile *) fileSelected {
-    [delegate rawPhotoCollCellImageWasSelectedForFile:fileSelected forGroupWithKey:groupKey];
+    [self.delegate rawPhotoCollCellImageWasSelectedForFile:fileSelected forGroupWithKey:self.groupKey];
 }
 
 - (void) squareImageWasMarkedForFile:(MetaFile *) fileSelected {
-    [delegate rawPhotoCollCellImageWasMarkedForFile:fileSelected];
+    [self.delegate rawPhotoCollCellImageWasMarkedForFile:fileSelected];
 }
 
 - (void) squareImageWasUnmarkedForFile:(MetaFile *) fileSelected {
-    [delegate rawPhotoCollCellImageWasUnmarkedForFile:fileSelected];
+    [self.delegate rawPhotoCollCellImageWasUnmarkedForFile:fileSelected];
 }
 
 - (void) squareImageUploadFinishedForFile:(NSString *) fileSelectedUuid {
-    [delegate rawPhotoCollCellImageUploadFinishedForFile:fileSelectedUuid];
+    [self.delegate rawPhotoCollCellImageUploadFinishedForFile:fileSelectedUuid];
 }
 
 - (void) squareImageWasLongPressedForFile:(MetaFile *) fileSelected {
-    [sqImageView setNewStatus:YES];
-    [delegate rawPhotoCollCellImageWasLongPressedForFile:fileSelected];
+    [self.sqImageView setNewStatus:YES];
+    [self.delegate rawPhotoCollCellImageWasLongPressedForFile:fileSelected];
 }
 
 - (void) squareImageUploadQuotaError:(MetaFile *) fileSelected {
-    [delegate rawPhotoCollCellImageUploadQuotaError:fileSelected];
+    [self.delegate rawPhotoCollCellImageUploadQuotaError:fileSelected];
 }
 
 - (void) squareImageUploadLoginError:(MetaFile *) fileSelected {
-    [delegate rawPhotoCollCellImageUploadLoginError:fileSelected];
+    [self.delegate rawPhotoCollCellImageUploadLoginError:fileSelected];
 }
 
 - (void) squareImageWasSelectedForView:(SquareImageView *) ref {
-    [delegate rawPhotoCollCellImageWasSelectedForView:ref];
+    [self.delegate rawPhotoCollCellImageWasSelectedForView:ref];
 }
 
 - (void) squareLocalImageWasSelectedForAsset:(ALAsset *) fileSelected {
-    [delegate rawPhotoCollCellImageWasSelectedForAsset:fileSelected];
+    [self.delegate rawPhotoCollCellImageWasSelectedForAsset:fileSelected];
 }
 
 - (void) squareLocalImageWasMarkedForAsset:(ALAsset *) fileSelected {
-    [delegate rawPhotoCollCellImageWasMarkedForAsset:fileSelected];
+    [self.delegate rawPhotoCollCellImageWasMarkedForAsset:fileSelected];
 }
 
 - (void) squareLocalImageWasUnmarkedForAsset:(ALAsset *) fileSelected {
-    [delegate rawPhotoCollCellImageWasUnmarkedForAsset:fileSelected];
+    [self.delegate rawPhotoCollCellImageWasUnmarkedForAsset:fileSelected];
 }
 
 - (void) squareLocalImageUploadFinishedForAsset:(ALAsset *) fileSelected {
-    [delegate rawPhotoCollCellImageUploadFinishedForAsset:fileSelected];
+    [self.delegate rawPhotoCollCellImageUploadFinishedForAsset:fileSelected];
 }
 
 - (void) squareLocalImageWasLongPressedForAsset:(ALAsset *) fileSelected {
-    [sqImageView setNewStatus:YES];
-    [delegate rawPhotoCollCellImageWasLongPressedForAsset:fileSelected];
+    [self.sqImageView setNewStatus:YES];
+    [self.delegate rawPhotoCollCellImageWasLongPressedForAsset:fileSelected];
 }
 
 - (void) squareLocalImageUploadQuotaError:(ALAsset *) fileSelected {
-    [delegate rawPhotoCollCellImageUploadQuotaErrorForAsset:fileSelected];
+    [self.delegate rawPhotoCollCellImageUploadQuotaErrorForAsset:fileSelected];
 }
 
 - (void) squareLocalImageUploadLoginError:(ALAsset *) fileSelected {
-    [delegate rawPhotoCollCellImageUploadLoginErrorForAsset:fileSelected];
+    [self.delegate rawPhotoCollCellImageUploadLoginErrorForAsset:fileSelected];
 }
 
 - (void) squareLocalImageWasSelectedForView:(SquareImageView *) ref {

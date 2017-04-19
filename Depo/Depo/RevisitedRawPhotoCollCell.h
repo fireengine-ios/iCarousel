@@ -42,6 +42,6 @@
 
 @property (nonatomic, strong) RawTypeFile *rawData;
 
-- (void) loadContent:(RawTypeFile *) content isSelectible:(BOOL) selectFlag withImageWidth:(float) imageWidth withGroupKey:(NSString *) _groupKey isSelected:(BOOL) selectedFlag;
+- (void) loadContent:(RawTypeFile *) content isSelectible:(BOOL) selectFlag withImageWidth:(float) imageWidth withGroupKey:(NSString *) groupKey isSelected:(BOOL) selectedFlag;
 
 @end
