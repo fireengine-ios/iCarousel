@@ -16,8 +16,8 @@
 @property (nonatomic, copy) id placeholderItem;
 
 - (id)initWithDelegate:(id <RDActivityViewControllerDelegate>)delegate;
-- (id)initWithDelegate:(id)delegate maximumNumberOfItems:(int)maximumNumberOfItems;
-- (id)initWithDelegate:(id)delegate maximumNumberOfItems:(int)maximumNumberOfItems applicationActivities:(NSArray *)applicationActivities;
-- (id)initWithDelegate:(id)delegate maximumNumberOfItems:(int)maximumNumberOfItems applicationActivities:(NSArray *)applicationActivities placeholderItem:(id)placeholderItem;
+- (id)initWithDelegate:(id)delegate maximumNumberOfItems:(NSInteger)maximumNumberOfItems;
+- (id)initWithDelegate:(id)delegate maximumNumberOfItems:(NSInteger)maximumNumberOfItems applicationActivities:(NSArray *)applicationActivities;
+- (id)initWithDelegate:(id)delegate maximumNumberOfItems:(NSInteger)maximumNumberOfItems applicationActivities:(NSArray *)applicationActivities placeholderItem:(id)placeholderItem;
 
 @end

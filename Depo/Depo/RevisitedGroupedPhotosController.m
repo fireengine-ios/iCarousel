@@ -392,12 +392,16 @@
     if ([activityType isEqualToString:@"net.whatsapp.WhatsApp.ShareExtension"]) {
         NSMutableArray *images = [@[] mutableCopy];
         for (NSURL *url in self.imagesToShare) {
-            UIImage *image = [UIImage imageWithData:
-                              [NSData dataWithContentsOfURL:url]];
-            if (image == nil) {
-                [images addObject:url];
+            if ([url isKindOfClass:[NSString class]]) {
+                
             } else {
-                [images addObject:image];
+                UIImage *image = [UIImage imageWithData:
+                                  [NSData dataWithContentsOfURL:url]];
+                if (image == nil) {
+                    [images addObject:url];
+                } else {
+                    [images addObject:image];
+                }
             }
         }
         
@@ -413,6 +417,8 @@
     
     [self showLoading];
     
+    __block NSInteger numberOfVideos = 0;
+    
     for (MetaFile *file in self.fileListToShare) {
         NSString *endPoint = file.detail.thumbLargeUrl;
         //TODO !endPoint kısmını check et. Upload sonrası thumbLargeUrl gelmiyor. O yüzden eklendi.
@@ -420,6 +426,7 @@
             endPoint = file.tempDownloadUrl;
         }
         if (file.contentType == ContentTypeVideo) {
+            numberOfVideos++;
             endPoint = file.tempDownloadUrl;
             if (!originalSize) {
                 if (file.videoPreviewUrl != nil) {
@@ -453,17 +460,23 @@
                          
                          NSArray *applicationActivities = nil;
                          
-                         ShareActivity *activity = [[ShareActivity alloc] init];
-                         activity.sourceViewController = self;
-                         applicationActivities = @[activity];
-
+                         if (numberOfVideos < 2) {
+                             ShareActivity *activity = [[ShareActivity alloc] init];
+                             activity.sourceViewController = self;
+                             applicationActivities = @[activity];
+                         } else {
+                             [allImages addObject:@"#lifebox"];
+                             self.imagesToShare = [allImages copy];
+                         }
                          RDActivityViewController *activityViewController = [[RDActivityViewController alloc] initWithDelegate:self
                                                                                                           maximumNumberOfItems:self.imagesToShare.count
                                                                                                          applicationActivities:applicationActivities
                                                                                                                placeholderItem:[UIImage new]];
                          [activityViewController setValue:NSLocalizedString(@"AppTitleRef", @"") forKeyPath:@"subject"];
                          activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-                         activityViewController.excludedActivityTypes = @[UIActivityTypePostToFacebook];
+                         if (numberOfVideos < 2) {
+                             activityViewController.excludedActivityTypes = @[UIActivityTypePostToFacebook];
+                         }
                          [activityViewController setCompletionHandler:^(NSString *activityType, BOOL completed) {
                              if (completed) {
                                  [self cancelClicked];

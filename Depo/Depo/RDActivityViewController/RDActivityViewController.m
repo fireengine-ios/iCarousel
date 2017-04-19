@@ -10,7 +10,7 @@
 
 @interface RDActivityViewController () {
     NSMutableDictionary *_itemsMapping;
-    int _maximumNumberOfItems;
+    NSInteger _maximumNumberOfItems;
 }
 
 @end
@@ -24,15 +24,15 @@
     return [self initWithDelegate:delegate maximumNumberOfItems:10 applicationActivities:nil placeholderItem:nil];
 }
 
-- (id)initWithDelegate:(id)delegate maximumNumberOfItems:(int)maximumNumberOfItems {
+- (id)initWithDelegate:(id)delegate maximumNumberOfItems:(NSInteger)maximumNumberOfItems {
     return [self initWithDelegate:delegate maximumNumberOfItems:maximumNumberOfItems applicationActivities:nil placeholderItem:nil];
 }
 
-- (id)initWithDelegate:(id)delegate maximumNumberOfItems:(int)maximumNumberOfItems applicationActivities:(NSArray *)applicationActivities {
+- (id)initWithDelegate:(id)delegate maximumNumberOfItems:(NSInteger)maximumNumberOfItems applicationActivities:(NSArray *)applicationActivities {
     return [self initWithDelegate:delegate maximumNumberOfItems:maximumNumberOfItems applicationActivities:applicationActivities placeholderItem:nil];
 }
 
-- (id)initWithDelegate:(id)delegate maximumNumberOfItems:(int)maximumNumberOfItems applicationActivities:(NSArray *)applicationActivities placeholderItem:(id)placeholderItem {
+- (id)initWithDelegate:(id)delegate maximumNumberOfItems:(NSInteger)maximumNumberOfItems applicationActivities:(NSArray *)applicationActivities placeholderItem:(id)placeholderItem {
     _delegate = delegate;
     _maximumNumberOfItems = maximumNumberOfItems;
     _placeholderItem = placeholderItem;
@@ -66,7 +66,7 @@
     }
     
     // Get the item
-    int index = [[activity objectForKey:@"index"] integerValue];
+    NSInteger index = [[activity objectForKey:@"index"] integerValue];
     id item = nil;
     
     if (index < [items count]) {
@@ -75,7 +75,7 @@
     
     // Increase the index, and reset
     index = (index + 1) % _maximumNumberOfItems;
-    [activity setObject:[NSNumber numberWithInt:index] forKey:@"index"];
+    [activity setObject:[NSNumber numberWithInteger:index] forKey:@"index"];
     
     return item;
 }
