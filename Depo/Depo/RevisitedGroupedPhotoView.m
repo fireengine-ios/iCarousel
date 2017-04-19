@@ -525,6 +525,10 @@
                         if(![selectedFileList containsObject:row.uuid]) {
                             [selectedFileList addObject:row.uuid];
                             [selectedMetaFiles addObject:row];
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                [delegate revisitedGroupedPhotoChangeTitleTo:[NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]]];
+                            });
+                            
                         }
                     }
                 }
