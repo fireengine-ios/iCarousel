@@ -40,18 +40,31 @@
         bottomLabel.adjustsFontSizeToFitWidth = YES;
         [self addSubview:bottomLabel];
         
-        CustomButton *settingsButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - settingsButtonImg.size.width - 40, (self.frame.size.height - settingsButtonImg.size.height)/2, settingsButtonImg.size.width, settingsButtonImg.size.height) withImageName:@"buttonbg_224_yellow.png"];
-        [settingsButton addTarget:self action:@selector(settingsClicked) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:settingsButton];
+//        CustomButton *settingsButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - settingsButtonImg.size.width - 40, (self.frame.size.height - settingsButtonImg.size.height)/2, settingsButtonImg.size.width + 10, settingsButtonImg.size.height + 10) withImageName:@"buttonbg_224_yellow.png"];
+//        [settingsButton addTarget:self action:@selector(settingsClicked) forControlEvents:UIControlEventTouchUpInside];
+//        settingsButton.backgroundColor = [UIColor redColor];
+//        [self addSubview:settingsButton];
+        
+        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(settingsClicked)];
+        singleTap.numberOfTapsRequired = 1;
+        
+        float settingButtonIVWidth = settingsButtonImg.size.width + 22;
+        float settingButtonIVHeight = settingsButtonImg.size.height + 13;
+        
+        UIImageView *settingsButtonIV = [[UIImageView alloc] initWithFrame:CGRectMake(self.frame.size.width - settingButtonIVWidth - 40, (self.frame.size.height - settingButtonIVHeight)/2, settingButtonIVWidth, settingButtonIVHeight)];
+        settingsButtonIV.image = settingsButtonImg;
+        [settingsButtonIV setUserInteractionEnabled:YES];
+        [settingsButtonIV addGestureRecognizer:singleTap];
+        [self addSubview:settingsButtonIV];
 
-        UIImageView *innerIconImgView = [[UIImageView alloc] initWithFrame:CGRectMake(8, (settingsButton.frame.size.height - 10)/2, 10, 10)];
+        UIImageView *innerIconImgView = [[UIImageView alloc] initWithFrame:CGRectMake(15, (settingsButtonIV.frame.size.height - 10)/2, 10, 10)];
         innerIconImgView.image = [UIImage imageNamed:@"icon_button_settings.png"];
         innerIconImgView.contentMode = UIViewContentModeScaleAspectFill;
-        [settingsButton addSubview:innerIconImgView];
+        [settingsButtonIV addSubview:innerIconImgView];
 
-        CustomLabel *innerSettingsLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(innerIconImgView.frame.origin.x + innerIconImgView.frame.size.width + 3, (settingsButton.frame.size.height - 12)/2, settingsButton.frame.size.width - (innerIconImgView.frame.origin.x + innerIconImgView.frame.size.width + 12), 12) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:11] withColor:[Util UIColorForHexColor:@"555555"] withText:NSLocalizedString(@"SettingsTitle", @"") withAlignment:NSTextAlignmentLeft];
+        CustomLabel *innerSettingsLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(innerIconImgView.frame.origin.x + innerIconImgView.frame.size.width + 3, (settingsButtonIV.frame.size.height - 12)/2, settingsButtonIV.frame.size.width - (innerIconImgView.frame.origin.x + innerIconImgView.frame.size.width + 12), 12) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:13] withColor:[Util UIColorForHexColor:@"555555"] withText:NSLocalizedString(@"SettingsTitle", @"") withAlignment:NSTextAlignmentLeft];
         innerSettingsLabel.adjustsFontSizeToFitWidth = YES;
-        [settingsButton addSubview:innerSettingsLabel];
+        [settingsButtonIV addSubview:innerSettingsLabel];
 
         UIImage *closeButtonImg = [UIImage imageNamed:@"close_icon.png"];
         
