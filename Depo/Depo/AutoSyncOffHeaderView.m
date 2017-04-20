@@ -55,6 +55,8 @@
         settingsButtonIV.image = settingsButtonImg;
         [settingsButtonIV setUserInteractionEnabled:YES];
         [settingsButtonIV addGestureRecognizer:singleTap];
+        settingsButtonIV.isAccessibilityElement = YES;
+        settingsButtonIV.accessibilityIdentifier = @"AutoSyncSettingsButton";
         [self addSubview:settingsButtonIV];
 
         UIImageView *innerIconImgView = [[UIImageView alloc] initWithFrame:CGRectMake(15, (settingsButtonIV.frame.size.height - 10)/2, 10, 10)];
@@ -70,6 +72,8 @@
         
         CustomButton *closeButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - closeButtonImg.size.width - 10, (self.frame.size.height - closeButtonImg.size.height)/2, closeButtonImg.size.width, closeButtonImg.size.height) withImageName:@"close_icon.png"];
         [closeButton addTarget:self action:@selector(closeClicked) forControlEvents:UIControlEventTouchUpInside];
+        closeButton.isAccessibilityElement = YES;
+        closeButton.accessibilityIdentifier = @"SyncHeaderCloseButton";
         [self addSubview:closeButton];
     }
     return self;

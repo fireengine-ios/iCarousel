@@ -52,6 +52,8 @@
         if(shareFlag) {
             shareButton = [[CustomButton alloc] initWithFrame:CGRectMake(left, top, 50, 45) withImageName:@"white_share_icon.png" withTitleBelow:NSLocalizedString(@"ShareTitle", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[UIColor whiteColor] ];
             [shareButton addTarget:self action:@selector(shareClicked) forControlEvents:UIControlEventTouchUpInside];
+            shareButton.isAccessibilityElement = YES;
+            shareButton.accessibilityIdentifier = @"FooterMenuShare";
             [self addSubview:shareButton];
             left = shareButton.frame.origin.x+shareButton.frame.size.width+5;
             [currentButtons addObject:shareButton];
@@ -60,6 +62,8 @@
         if(moveFlag) {
             moveButton = [[CustomButton alloc] initWithFrame:CGRectMake(left, top + 2 , 50, 43) withImageName:@"white_move_icon.png" withTitleBelow:NSLocalizedString(@"MoveTitle", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[UIColor whiteColor]];
             [moveButton addTarget:self action:@selector(moveClicked) forControlEvents:UIControlEventTouchUpInside];
+            moveButton.isAccessibilityElement = YES;
+            moveButton.accessibilityIdentifier = @"FooterMenuMove";
             [self addSubview:moveButton];
             left = moveButton.frame.origin.x+moveButton.frame.size.width+7;
             
@@ -69,6 +73,8 @@
         if (downloadFlag) {
             downloadButton = [[CustomButton alloc] initWithFrame:CGRectMake(left, shareButton.frame.origin.y - 1, 60, 43) withImageName:@"icon_bottom_indir.png" withTitleBelow:NSLocalizedString(@"DownloadTitle", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[UIColor whiteColor] ];
             [downloadButton addTarget:self action:@selector(downloadClicked) forControlEvents:UIControlEventTouchUpInside];
+            downloadButton.isAccessibilityElement = YES;
+            downloadButton.accessibilityIdentifier = @"FooterMenuDownload";
             [self addSubview:downloadButton];
             left = downloadButton.frame.origin.x+downloadButton.frame.size.width+7;
             [currentButtons addObject:downloadButton];
@@ -82,6 +88,8 @@
                                                     withColor:[UIColor whiteColor] ];
             [printButton addTarget:self action:@selector(printClicked)
                   forControlEvents:UIControlEventTouchUpInside];
+            printButton.isAccessibilityElement = YES;
+            printButton.accessibilityIdentifier = @"FooterMenuPrint";
             [self addSubview:printButton];
             [currentButtons addObject:printButton];
         }
@@ -95,6 +103,8 @@
                                                      withColor:[UIColor whiteColor]];
             [removeButton addTarget:self action:@selector(removeClicked)
                    forControlEvents:UIControlEventTouchUpInside];
+            removeButton.isAccessibilityElement = YES;
+            removeButton.accessibilityIdentifier = @"FooterMenuRemove";
             [self addSubview:removeButton];
             [currentButtons addObject:removeButton];
         }
@@ -103,6 +113,8 @@
             deleteButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 35, 5, 20, 44)
                                                  withImageName:@"white_delete_icon.png"];
             [deleteButton addTarget:self action:@selector(deleteClicked) forControlEvents:UIControlEventTouchUpInside];
+            deleteButton.isAccessibilityElement = YES;
+            deleteButton.accessibilityIdentifier = @"FooterMenuDelete";
             [self addSubview:deleteButton];
             [currentButtons addObject:deleteButton];
         }
@@ -126,6 +138,8 @@
         if(shareFlag) {
             shareButton = [[CustomButton alloc] initWithFrame:CGRectMake(15, 19, 80, 22) withImageName:@"white_share_icon.png" withSideTitle:NSLocalizedString(@"ShareTitle", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[UIColor whiteColor]];
             [shareButton addTarget:self action:@selector(shareClicked) forControlEvents:UIControlEventTouchUpInside];
+            shareButton.isAccessibilityElement = YES;
+            shareButton.accessibilityIdentifier = @"FooterMenuShare";
             [self addSubview:shareButton];
         }
         
@@ -133,17 +147,23 @@
             CGFloat width = [Util calculateWidthForText:NSLocalizedString(@"MoveToAlbum", @"") forHeight:20 forFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15]];
             moveButton = [[CustomButton alloc] initWithFrame:CGRectMake(shareButton.frame.size.width+5,20 , width+30,20 ) withImageName:@"white_move_icon.png" withSideTitle:NSLocalizedString(@"AddToAlbumTitle", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[UIColor whiteColor]];
             [moveButton addTarget:self action:@selector(moveClicked) forControlEvents:UIControlEventTouchUpInside];
+            moveButton.isAccessibilityElement = YES;
+            moveButton.accessibilityIdentifier = @"FooterMenuMove";
             [self addSubview:moveButton];
         }
         
         if(deleteFlag) {
             deleteButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 35, 19, 20, 21) withImageName:@"white_delete_icon.png"];
             [deleteButton addTarget:self action:@selector(deleteClicked) forControlEvents:UIControlEventTouchUpInside];
+            deleteButton.isAccessibilityElement = YES;
+            deleteButton.accessibilityIdentifier = @"FooterMenuDelete";
             [self addSubview:deleteButton];
         }
         if (printFlag) {
             printButton = [[CustomButton alloc] initWithFrame:CGRectMake(moveButton.frame.origin.x+moveButton.frame.size.width+5, 20, 80, 20) withImageName:@"white_print_icon.png" withSideTitle:NSLocalizedString(@"PrintTitle", @"") withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15] withColor:[UIColor whiteColor] ];
             [printButton addTarget:self action:@selector(printClicked) forControlEvents:UIControlEventTouchUpInside];
+            printButton.isAccessibilityElement = YES;
+            printButton.accessibilityIdentifier = @"FooterMenuPrint";
             [self addSubview:printButton];
         }
         
@@ -186,6 +206,8 @@
         if(shareFlag) {
             shareButton = [[CustomButton alloc] initWithFrame:CGRectMake(xOffset, (self.frame.size.height - height)/2, buttonWidth, height) withImageName:@"white_share_icon.png" withTitleBelow:NSLocalizedString(@"ShareTitle", @"") withFont:font withColor:whiteColor];
             [shareButton addTarget:self action:@selector(shareClicked) forControlEvents:UIControlEventTouchUpInside];
+            shareButton.isAccessibilityElement = YES;
+            shareButton.accessibilityIdentifier = @"FooterMenuShare";
             [self addSubview:shareButton];
             xOffset += buttonWidth;
             placedButtonCount ++;
@@ -202,6 +224,8 @@
                                                     withFont:font
                                                withColor:whiteColor];
             [moveButton addTarget:self action:@selector(moveClicked) forControlEvents:UIControlEventTouchUpInside];
+            moveButton.isAccessibilityElement = YES;
+            moveButton.accessibilityIdentifier = @"FooterMenuMove";
             [self addSubview:moveButton];
             xOffset += buttonWidth;
             placedButtonCount ++;
@@ -215,6 +239,8 @@
             syncButton = [[CustomButton alloc] initWithFrame:CGRectMake(xOffset, (self.frame.size.height - height)/2, buttonWidth, height) withImageName:@"icon_bottom_sync_purple.png" withTitleBelow:NSLocalizedString(@"SyncFooterTitle", @"") withFont:font withColor:[Util UIColorForHexColor:@"737884"]];
             syncButton.enabled = NO;
             [syncButton addTarget:self action:@selector(syncClicked) forControlEvents:UIControlEventTouchUpInside];
+            syncButton.isAccessibilityElement = YES;
+            syncButton.accessibilityIdentifier = @"FooterMenuSync";
             [self addSubview:syncButton];
             xOffset += buttonWidth;
             placedButtonCount ++;
@@ -227,6 +253,8 @@
         if(deleteFlag) {
             deleteButton = [[CustomButton alloc] initWithFrame:CGRectMake(xOffset, (self.frame.size.height - height)/2, buttonWidth, height) withImageName:@"white_delete_icon.png" withTitleBelow:NSLocalizedString(@"DeleteFooterTitle", @"") withFont:font withColor:whiteColor];
             [deleteButton addTarget:self action:@selector(deleteClicked) forControlEvents:UIControlEventTouchUpInside];
+            deleteButton.isAccessibilityElement = YES;
+            deleteButton.accessibilityIdentifier = @"FooterMenuDelete";
             [self addSubview:deleteButton];
             xOffset += buttonWidth + 10;
             placedButtonCount ++;
@@ -251,6 +279,8 @@
             }
             printButton = [[CustomButton alloc] initWithFrame:buttonRect withImageName:@"white_print_icon.png" withTitleBelow:NSLocalizedString(@"PrintTitle", @"") withFont:font withColor:whiteColor];
             [printButton addTarget:self action:@selector(printClicked) forControlEvents:UIControlEventTouchUpInside];
+            printButton.isAccessibilityElement = YES;
+            printButton.accessibilityIdentifier = @"FooterMenuPrint";
             [self addSubview:printButton];
             placedButtonCount ++;
 
@@ -277,6 +307,8 @@
             }
             downloadButton = [[CustomButton alloc] initWithFrame:buttonRect withImageName:@"icon_bottom_indir.png" withTitleBelow:NSLocalizedString(@"DownloadTitle", @"") withFont:font withColor:whiteColor];
             [downloadButton addTarget:self action:@selector(downloadClicked) forControlEvents:UIControlEventTouchUpInside];
+            downloadButton.isAccessibilityElement = YES;
+            downloadButton.accessibilityIdentifier = @"FooterMenuDownload";
             [self addSubview:downloadButton];
             xOffset += buttonWidth;
             placedButtonCount ++;
@@ -290,6 +322,8 @@
             moreButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - buttonWidth, (self.frame.size.height - height)/2, buttonWidth, height) withImageName:@"white_left_arrow.png"];
             [moreButton addTarget:self action:@selector(moreClicked) forControlEvents:UIControlEventTouchUpInside];
             moreButton.transform = CGAffineTransformMakeRotation(-90 * M_PI/180);
+            moreButton.isAccessibilityElement = YES;
+            moreButton.accessibilityIdentifier = @"FooterMenuMore";
             [self addSubview:moreButton];
         }
         
