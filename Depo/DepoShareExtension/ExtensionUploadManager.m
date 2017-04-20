@@ -82,6 +82,7 @@ static const NSUInteger ExtBufferSize = 1024*1024;
 
     NSURLSessionUploadTask *uploadTask = [[ExtensionUploadManager sharedInstance].session uploadTaskWithRequest:request fromFile:[NSURL fileURLWithPath:tempPath]];
     uploadTask.taskDescription = tempPath;
+    self.currentTask = uploadTask;
     [uploadTask resume];
 }
 
@@ -148,6 +149,7 @@ static const NSUInteger ExtBufferSize = 1024*1024;
             
             NSURLSessionUploadTask *uploadTask = [[ExtensionUploadManager sharedInstance].session uploadTaskWithRequest:request fromFile:tempUrl];
             uploadTask.taskDescription = tempPath;
+            self.currentTask = uploadTask;
             [uploadTask resume];
         }
     } failureBlock:^(NSError *error) {
@@ -189,6 +191,7 @@ static const NSUInteger ExtBufferSize = 1024*1024;
     
     NSURLSessionUploadTask *uploadTask = [[ExtensionUploadManager sharedInstance].session uploadTaskWithRequest:request fromFile:[NSURL fileURLWithPath:tempPath]];
     uploadTask.taskDescription = tempPath;
+    self.currentTask = uploadTask;
     [uploadTask resume];
 }
 
@@ -233,7 +236,22 @@ static const NSUInteger ExtBufferSize = 1024*1024;
         
         NSURLSessionUploadTask *uploadTask = [[ExtensionUploadManager sharedInstance].session uploadTaskWithRequest:request fromFile:[NSURL fileURLWithPath:tempPath]];
         uploadTask.taskDescription = tempPath;
+        self.currentTask = uploadTask;
         [uploadTask resume];
+    }
+}
+
+- (void) cancelTask {
+    [self.currentTask cancel];
+    if(self.currentTask.taskDescription) {
+        @try {
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            [fileManager removeItemAtPath:self.currentTask.taskDescription error:nil];
+        }
+        @catch (NSException *exception) {
+        }
+        @finally {
+        }
     }
 }
 
@@ -255,7 +273,7 @@ static const NSUInteger ExtBufferSize = 1024*1024;
     if(task.taskDescription) {
         @try {
             NSFileManager *fileManager = [NSFileManager defaultManager];
-            [fileManager removeItemAtPath:task.description error:nil];
+            [fileManager removeItemAtPath:task.taskDescription error:nil];
         }
         @catch (NSException *exception) {
         }
@@ -294,8 +312,8 @@ static const NSUInteger ExtBufferSize = 1024*1024;
 }
 
 - (void) URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didSendBodyData:(int64_t)bytesSent totalBytesSent:(int64_t)totalBytesSent totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend {
-    int progressPercentage = (int) totalBytesSent*100/totalBytesExpectedToSend;
-    [delegate extensionUploadIsAtPercent:progressPercentage];
+    int64_t progressPercentage = (int64_t) totalBytesSent*100/totalBytesExpectedToSend;
+    [delegate extensionUploadIsAtPercent:(int)progressPercentage];
 
 }
 

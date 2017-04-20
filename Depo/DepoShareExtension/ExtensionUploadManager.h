@@ -23,6 +23,7 @@
 
 @property (nonatomic, strong) NSURLSession *session;
 @property (nonatomic, weak) id<ExtensionUploadManagerDelegate> delegate;
+@property (nonatomic, strong) NSURLSessionTask *currentTask;
 
 + (ExtensionUploadManager *) sharedInstance;
 - (void) startUploadForImage:(UIImage *) img;
@@ -30,5 +31,6 @@
 - (void) startUploadForVideoData:(NSData *) videoData withExtension:(NSString *) ext;
 - (void) startUploadForDoc:(NSData *) docData withContentType:(NSString *) contentType withExt:(NSString *) ext;
 - (void) startUploadForVideoLink:(NSURL *) assetUrl;
+- (void) cancelTask;
 
 @end

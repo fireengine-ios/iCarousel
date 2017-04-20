@@ -76,6 +76,7 @@
         self.view.transform = CGAffineTransformMakeTranslation(0, self.view.frame.size.height);
     } completion:^(BOOL finished) {
         [self.extensionContext completeRequestReturningItems:nil completionHandler:nil];
+        [[ExtensionUploadManager sharedInstance] cancelTask];
     }];
 }
 
@@ -114,6 +115,17 @@
     
     NSDictionary *dict = [urlsToUpload objectAtIndex:currentUploadIndex];
     if(dict != nil) {
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            uploadButton.hidden = YES;
+            uploadButton.enabled = NO;
+            loadingView.hidden = NO;
+            
+            uploadingLabel.text = NSLocalizedString(@"UploadInProgress", @"");
+            [self checkAndSharpenCurrentUploadInScroll];
+            [self uploadFrames];
+        });
+        
         BOOL isPhoto = [[dict objectForKey:@"isPhoto"] boolValue];
         BOOL isMedia = [[dict objectForKey:@"isMedia"] boolValue];
         id item = [dict objectForKey:@"item"];
@@ -143,15 +155,6 @@
             [[ExtensionUploadManager sharedInstance] startUploadForDoc:assetData withContentType:contentType withExt:extension];
             
         }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            uploadButton.hidden = YES;
-            uploadButton.enabled = NO;
-            loadingView.hidden = NO;
-            
-            uploadingLabel.text = NSLocalizedString(@"UploadInProgress", @"");
-            [self checkAndSharpenCurrentUploadInScroll];
-            [self uploadFrames];
-        });
     }
 }
 
