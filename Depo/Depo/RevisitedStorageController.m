@@ -380,7 +380,6 @@
 
     [accountDaoToLearnIsJobExists requestIsJobExists];
     
-    // TODO: menloworks ekibine sorulduktan sonra daha uygun bir yere tasinacak.
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSMutableArray *sortedSub = [NSMutableArray arrayWithArray:subscriptions];
         [sortedSub sortUsingComparator:^NSComparisonResult(Subscription* _Nonnull obj1, Subscription* _Nonnull obj2) {
@@ -390,7 +389,7 @@
         NSUInteger subLength = [sortedSub count];
         for (int i = 0; i < 5; i++) {
             NSString *packageName = [NSString stringWithFormat:@"user_package_%i", i];
-            NSString *displayName = @"";
+            NSString *displayName = @"__no_package__";
             
             if (i < subLength) {
                 Subscription *sub = sortedSub[i];

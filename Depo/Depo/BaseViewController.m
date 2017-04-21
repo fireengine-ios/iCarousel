@@ -190,7 +190,7 @@
     NSUInteger subLength = [sortedSub count];
     for (int i = 0; i < 5; i++) {
         NSString *packageName = [NSString stringWithFormat:@"user_package_%i", i];
-        NSString *displayName = @"";
+        NSString *displayName = @"__no_package__";
         
         if (i < subLength) {
             Subscription *sub = sortedSub[i];

@@ -303,14 +303,14 @@
 //            }
         }
     }
-    int counter = 1;
-    for(Subscription *subsc in subscriptions) {
-        if(subsc.plan != nil && subsc.plan.displayName != nil) {
-            NSString *tagName = [NSString stringWithFormat:@"user_package_%d", counter];
-            [MPush hitTag:tagName withValue:subsc.plan.displayName];
-            counter ++;
-        }
-    }
+//    int counter = 1;
+//    for(Subscription *subsc in subscriptions) {
+//        if(subsc.plan != nil && subsc.plan.displayName != nil) {
+//            NSString *tagName = [NSString stringWithFormat:@"user_package_%d", counter];
+//            [MPush hitTag:tagName withValue:subsc.plan.displayName];
+//            counter ++;
+//        }
+//    }
 }
 
 
