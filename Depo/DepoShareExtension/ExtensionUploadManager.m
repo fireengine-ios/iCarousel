@@ -43,16 +43,12 @@ static const NSUInteger ExtBufferSize = 1024*1024;
     return sharedInstance;
 }
 
-- (void) startUploadForVideoData:(NSData *) videoData {
-    [self startUploadForVideoData:videoData withExtension:@"mpeg"];
-}
-
-- (void) startUploadForVideoData:(NSData *) videoData withExtension:(NSString *) ext {
+- (void) startUploadForVideoData:(NSData *) videoData forPath:(NSURL *)path {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     
     NSString *randomVal = [NSString stringWithFormat:@"%.0f%d", [[NSDate date] timeIntervalSince1970], arc4random_uniform(99)];
-    NSString *tempVideoName = [NSString stringWithFormat:@"/%@_EXT.%@", randomVal, ext];
+    NSString *tempVideoName = [NSString stringWithFormat:@"/%@_EXT.%@", randomVal, [[path.absoluteString componentsSeparatedByString:@"."] lastObject]];
     NSString *tempPath = [documentsDirectory stringByAppendingString:tempVideoName];
     
     BOOL shouldContinueUpload = YES;
@@ -97,7 +93,7 @@ static const NSUInteger ExtBufferSize = 1024*1024;
             NSString *documentsDirectory = [paths objectAtIndex:0];
             
             NSString *randomVal = [NSString stringWithFormat:@"%.0f%d", [[NSDate date] timeIntervalSince1970], arc4random_uniform(99)];
-            NSString *tempVideoName = [NSString stringWithFormat:@"/%@_EXT.mpeg", randomVal];
+            NSString *tempVideoName = [NSString stringWithFormat:@"/%@_%@", randomVal, asset.defaultRepresentation.filename];
             NSString *tempPath = [documentsDirectory stringByAppendingString:tempVideoName];
             
             NSURL *tempUrl = [NSURL fileURLWithPath:tempPath];

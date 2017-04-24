@@ -142,7 +142,7 @@
                 NSData *assetData = [[NSData alloc] initWithContentsOfFile:[moviePath path]
                                                                    options:NSDataReadingMappedIfSafe
                                                                      error:&error];
-                [[ExtensionUploadManager sharedInstance] startUploadForVideoData:assetData];
+                [[ExtensionUploadManager sharedInstance] startUploadForVideoData:assetData forPath:moviePath];
             }
         } else {
             NSURL *docPath = item;
