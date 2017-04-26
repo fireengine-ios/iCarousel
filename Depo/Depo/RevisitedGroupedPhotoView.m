@@ -1736,10 +1736,10 @@
     UploadManager *activeManRef = [[UploadQueue sharedInstance] activeManager];
     if(activeManRef != nil) {
         IGLog(@"RevisitedGroupedPhotoView autoQueueChanged initializing PhotosHeaderSyncView");
+        syncView = [[PhotosHeaderSyncView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 50)];
+        activeManRef.headerDelegate = syncView;
+        syncView.delegate = self;
         dispatch_async(dispatch_get_main_queue(), ^{
-            syncView = [[PhotosHeaderSyncView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 50)];
-            activeManRef.headerDelegate = syncView;
-            syncView.delegate = self;
             [self addSubview:syncView];
             if(activeManRef.uploadRef.taskType == UploadTaskTypeAsset) {
                 [syncView loadAsset:activeManRef.uploadRef.assetUrl];

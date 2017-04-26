@@ -51,7 +51,8 @@
                      [weakSelf hideLoading];
                      if (!error) {
                          [weakSelf resizeScrollView];
-                         [self bringSubviewToFront:self.progress];
+                         // for progress disappear animation
+                         [weakSelf bringSubviewToFront:weakSelf.progress];
                      }
                  });
              }];
