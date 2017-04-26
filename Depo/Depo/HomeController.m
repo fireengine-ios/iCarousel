@@ -363,7 +363,7 @@
     if (APPDELEGATE.session.newUserFlag) {
         if (currentSubscription.plan.cometOfferId.intValue == 581803) {
             if ( [AppUtil checkAndSetFlags:DIALOGUE_P1_FLAG]) {
-                [self loadAdvertisementView:NSLocalizedString(@"WelcomePackage1GB", @"") withOption:NO withTitle:nil];
+                [self loadAdvertisementView:NSLocalizedString(@"WelcomePackage5GB", @"") withOption:NO withTitle:nil];
             }
         } else if (currentSubscription.plan.cometOfferId.intValue == 581814){
             if ([AppUtil checkAndSetFlags:DIALOGUE_P2_FLAG]) {

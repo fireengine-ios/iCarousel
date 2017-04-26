@@ -517,7 +517,7 @@
 "MoveSuccessMessageNew" = "تمت إضافة الصور إلى ألبوم";
 
 /*Fuzzy*/
-"WelcomePackage1GB" = "مساحة التخزين المجانية بسعة 1 جيجا بايت الخاصة بك جاهزة للاستخدام!";
+"WelcomePackage5GB" = "مساحة التخزين المجانية بسعة 5 جيجا بايت الخاصة بك جاهزة للاستخدام!";
 "PlatinPackage500GBTitle" = "الإمتياز البلاتيني";
 
 /*Fuzzy*/
@@ -558,7 +558,6 @@
 
 /*Fuzzy*/
 "SignUpButtonTitle" = "قم بإنشاء حساب جديد";
-"NewSignUpButtonTitle" = "قم بإنشاء حساب جديد";
 "ForgotPassButton" = "هل نسيت كلمة المرور؟";
 "OTPTopInfo" = "التحقق من رقم الهاتف الخاص بك";
 "OTPSubInfo" = "أدخل رمز التحقق";
@@ -872,27 +871,34 @@
 "CanNotDeleteReadonlyAlbums" = "يتم إنشاء ألبوم الفيديو تلقائياً، وبالتالي لا يمكن حذفه.";
 "SuggestionsTitle" = "الإقتراحات";
 "ConnectionLostErrorMessage" = "الرجاء التحقق من تفعيل اتصال الإنترنت الخاص بك.";
-"RemainingQuota" = "المتبقي";
 "UsageInfo" = "معلومات الاستخدام";
 "AutoSyncOffInfoTop" = "الصور التي في انتظار أن تتم مزامنتها";
-"AutoSyncOffInfoTopWifi"="الصور التي في انتظار أن تتم مزامنتها";
 "AutoSyncOffInfoBottom" = "قم بالإتصال واي فاي أو تشغيل النسخ الاحتياطي النقال في الإعدادات";
-"DownloadUnsupportedVideoFailMessage" = "";
-"ServerError500" = "";
-"QuotaInfoTitle" = "";
-"RemainingQuotaTitle" = "";
-"RenewalDateInfo" = "";
-"DataRoamingInfo" = "";
-
-"SyncInProgressHeaderTitle"="Syncing photos...";
-"SyncFooterTitle"="Sync";
-"DeleteFooterTitle"="Delete";
-
-"SelectCountry"="Select Country";
-"MsisdnEmailPlaceholderNew"="Phone or E-Mail";
-"MsisdnPlaceholderNew"="Phone";
-"EmailPlaceholderNew"="E-Mail";
-
-"UploadInProgressInDetail"="Upload in progress. Please try again later";
-"UnsyncPrintError"="In order to use the print feature, all the selected images should be uploaded to the lifebox";
-"AutoSyncOffInfoBottomWithCount"="%d photos waiting to be synced";
+"DownloadUnsupportedVideoFailMessage" = "خطأ – صيغة فيديو غير مدعومة";
+"ServerError500" = "حدث خطأ مؤقت، يرجى إعادة المحاولة";
+"QuotaInfoTitle" = "معلومات الحصة";
+"RemainingQuotaTitle" = "المتبقي";
+"MsisdnPlaceholderNew" = "الهاتف";
+"EmailPlaceholderNew" = "البريد الالكترونى";
+"MsisdnEmailPlaceholderNew" = "الهاتف أو البريد الالكترونى";
+"AutoSyncOffInfoTopWifi" = "فى انتظار WIFI";
+"SyncInProgressHeaderTitle" = "مزامنة الصور...";
+"SyncFooterTitle" = "مزامنة";
+"DeleteFooterTitle" = "مسح";
+"ShareOriginalSize" = "الحجم الاصلى";
+"ShareSmallSize" = "الحجم الصغير";
+"ShareViaLink" = "المشاركة عبر الرابط";
+"SelectCountry" = "حدد الدولة";
+"ContactLastSyncDetailContactsTitle" = "جهات اتصالى";
+"ContactSyncRestoreResultTitle" = "تحميل جهات الاتصال الى هاتفك";
+"ContactSyncBackupResultTitle" = "مزامنة جهات الاتصال الى لايف بوكس";
+"ContactSync5000LimitError" = "بحد اقصى يمكن الاحتفاظ بنسخة احتياطية لـ 5000 جهة اتصال";
+"ContactSyncProgressOnServerText" = "يتم مزامنة جهات اتصالك، من فضلك لا تغلق التطبيق";
+"ContactSyncProgressOnClientText" = "يتم تحميل جهات اتصالك الى هاتفك، من فضلك لا تغلق التطبيق";
+"ContactSyncBackupTitle" = "النسخ الاحتياطى لجهات الاتصال";
+"NewSignUpButtonTitle" = "انشاء جهة اتصال جديدة";
+"AutoSyncOffInfoBottomWithCount" = "%d من الصور تنتظر المزامنة";
+"UploadInProgressInDetail" = "يتم الرفع الآن، من فضلك حاول مرة اخرى";
+"UnsyncPrintError" = "لكى تستخدم ميزة الطباعة، كل الصور المختارة يجب رفعها الى لايف بوكس";
+"GetStarted" = "أبدأ";
+"ContactThereIsNoContact" = "لا يوجد شىء فى قائمة جهات الاتصال الخاصة بك، لم يتم النسخ الاحتياطى.";
