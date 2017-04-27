@@ -1728,33 +1728,34 @@
 
 - (void) autoQueueChanged {
     IGLog(@"RevisitedGroupedPhotoView autoQueueChanged called");
-    
-    if(syncView) {
-        [syncView removeFromSuperview];
-    }
-    
-    UploadManager *activeManRef = [[UploadQueue sharedInstance] activeManager];
-    if(activeManRef != nil) {
-        IGLog(@"RevisitedGroupedPhotoView autoQueueChanged initializing PhotosHeaderSyncView");
-        syncView = [[PhotosHeaderSyncView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 50)];
-        activeManRef.headerDelegate = syncView;
-        syncView.delegate = self;
-        dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if(syncView) {
+            [syncView removeFromSuperview];
+        }
+        __weak RevisitedGroupedPhotoView *weakSelf = self;
+        UploadManager *activeManRef = [[UploadQueue sharedInstance] activeManager];
+        if(activeManRef != nil) {
+            IGLog(@"RevisitedGroupedPhotoView autoQueueChanged initializing PhotosHeaderSyncView");
+            syncView = [[PhotosHeaderSyncView alloc] initWithFrame:CGRectMake(0, 0, weakSelf.frame.size.width, 50)];
+            activeManRef.headerDelegate = syncView;
+            syncView.delegate = weakSelf;
+            
             [self addSubview:syncView];
             if(activeManRef.uploadRef.taskType == UploadTaskTypeAsset) {
                 [syncView loadAsset:activeManRef.uploadRef.assetUrl];
             } else if(activeManRef.uploadRef.taskType == UploadTaskTypeFile) {
                 [syncView loadLocalFileForCamUpload:activeManRef.uploadRef.tempUrl];
             }
-        });
-    } else {
-        IGLog(@"RevisitedGroupedPhotoView autoQueueChanged no need to initialize PhotosHeaderSyncView");
-        if(collView.frame.origin.y > 0 && !syncInfoHeaderView) {
-            [UIView animateWithDuration:0.4 animations:^{
-                collView.frame = CGRectMake(collView.frame.origin.x, collView.frame.origin.y - 50, collView.frame.size.width, collView.frame.size.height + 50);
-            }];
+            
+        } else {
+            IGLog(@"RevisitedGroupedPhotoView autoQueueChanged no need to initialize PhotosHeaderSyncView");
+            if(collView.frame.origin.y > 0 && !syncInfoHeaderView) {
+                [UIView animateWithDuration:0.4 animations:^{
+                    collView.frame = CGRectMake(collView.frame.origin.x, collView.frame.origin.y - 50, collView.frame.size.width, collView.frame.size.height + 50);
+                }];
+            }
         }
-    }
+    });
 }
 
 - (void) detailSuccessCallback:(NSArray *) fileList {
