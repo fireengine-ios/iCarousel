@@ -981,14 +981,23 @@ static bool syncing = false;
 {
     syncing = false;
     [SyncStatus shared].status = result;
-    
 
     NSInteger finalCount = [[ContactUtil shared] getContactCount];
+    
+    NSString *errorCode = nil;
+    for (id item in messages)
+    {
+        errorCode = item[@"code"];
+    }
+    
     [SyncAdapter sendStats:self.updateId start:self.initialContactCount
                                         result:finalCount
                                         created:[[SyncStatus shared].createdContactsReceived count]
                                         updated:[[SyncStatus shared].updatedContactsReceived count]
-                                        deleted:[[SyncStatus shared].deletedContactsOnDevice count]];
+                                        deleted:[[SyncStatus shared].deletedContactsOnDevice count]
+                                        status: (result == SYNC_RESULT_SUCCESS ? 1 : 0)
+                                        errorCode: errorCode
+                                        errorMsg:(result == SYNC_RESULT_SUCCESS ? nil : [[SyncStatus shared] resultTypeToString:result])];
     
     [[SyncLogger shared] stopLogging];
     

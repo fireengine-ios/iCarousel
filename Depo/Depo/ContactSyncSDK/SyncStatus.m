@@ -136,4 +136,36 @@
     return instance;
 }
 
+- (NSString*) resultTypeToString:(SYNCResultType) type {
+    NSString *result = nil;
+    
+    switch(type) {
+        case SYNC_RESULT_SUCCESS:
+            result = @"SUCCESS";
+            break;
+        case SYNC_RESULT_FAIL:
+            result = @"RESULT_FAIL";
+            break;
+        case SYNC_RESULT_INITIAL:
+            result = @"INITIAL";
+            break;
+        case SYNC_RESULT_ERROR_NETWORK:
+            result = @"NETWORK_ERROR";
+            break;
+        case SYNC_RESULT_ERROR_INTERNAL:
+            result = @"INTERNAL_ERROR";
+            break;
+        case SYNC_RESULT_ERROR_REMOTE_SERVER:
+            result = @"SERVER_ERROR";
+            break;
+        case SYNC_RESULT_ERROR_PERMISSION_ADDRESS_BOOK:
+            result = @"PERMISSION";
+            break;
+        default:
+            result = @"";
+    }
+    
+    return result;
+}
+
 @end

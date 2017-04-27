@@ -75,6 +75,7 @@ typedef NS_ENUM(NSUInteger, SYNCStep) {
 - (void)addContact:(Contact*)contact state:(SYNCInfoStateType)state;
 - (void)addRecord:(SyncRecord*)record state:(SYNCInfoStateType)state;
 - (void)addEmpty:(NSNumber *)count state:(SYNCInfoStateType)state;
+- (NSString*)resultTypeToString:(SYNCResultType) type;
 
 
 @end
