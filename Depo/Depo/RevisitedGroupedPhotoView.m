@@ -1355,7 +1355,9 @@
             } else {
                 FileInfoGroup *currentGroup = [tempDict objectForKey:dateStr];
                 if(currentGroup != nil) {
-                    if(![fileHashList containsObject:rowLocalHash]) {
+                    NSMutableArray *arrayToEnumerate = [fileHashList mutableCopy];
+                    
+                    if(![arrayToEnumerate containsObject:rowLocalHash]) {
                         RawTypeFile *rawFile = [self rawFileForAsset:row];
                         [currentGroup.fileInfo addObject:rawFile];
                         if(rawFile.hashRef) {
