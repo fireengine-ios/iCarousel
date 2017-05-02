@@ -587,26 +587,28 @@
 
 - (void) refreshSyncResult:(ContactSyncType) syncType {
     
-    int totalContact,updatedContact,deletedContact;
+    int totalContact,updatedContact,deletedContact,newContact;
     ContactSyncResult *syncResult = APPDELEGATE.session.syncResult;
     
     if (syncType == ContactSyncTypeBackup) {
         totalContact = syncResult.totalContactOnServer;
         updatedContact = syncResult.serverUpdateCount;
         deletedContact = syncResult.serverDeleteCount;
+        newContact = syncResult.serverNewCount;
         self.syncTargetLabel.text = NSLocalizedString(@"ContactResultBackupSectionTitle", @"");
     }
     else {
         totalContact = syncResult.totalContactOnClient;
         updatedContact = syncResult.clientUpdateCount;
         deletedContact = syncResult.clientDeleteCount;
+        newContact = syncResult.clientNewCount;
         self.syncTargetLabel.text = NSLocalizedString(@"ContactResultRestoreSectionTitle", @"");
     }
     
     totalContactElement.countLabel.text = [NSString stringWithFormat:@"%d",totalContact];
     cleanContactElement.countLabel.text = [NSString stringWithFormat:@"%d",updatedContact];
     deleteContactElement.countLabel.text = [NSString stringWithFormat:@"%d",deletedContact];
-    syncResultView.totalCountLabel.text = [NSString stringWithFormat:@"%d",updatedContact];
+    syncResultView.totalCountLabel.text = [NSString stringWithFormat:@"%d",newContact];
 }
 
 @end
