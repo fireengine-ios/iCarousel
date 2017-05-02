@@ -643,6 +643,12 @@
         [AppUtil increaseVideofyTutorialCount];
         APPDELEGATE.session.videofyTutorialCountChecked = YES;
     }
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(statusBarTappedAction:)
+                                                 name:@"statusBarTappedNotification"
+                                               object:nil];
+    [self.groupView showSyncHeaderIfNeeded];
 }
 
 - (BOOL)shouldAutorotate {

@@ -90,7 +90,7 @@
 }
 
 - (void) uploadManagerQuotaExceedForAsset:(NSString *) assetToUpload {
-    [self updateProgressByWidth:[NSNumber numberWithLong:self.frame.size.width]];
+    [self updateProgressByWidth:[NSNumber numberWithLong:progressBg.frame.size.width]];
     progress.backgroundColor = [Util UIColorForHexColor:@"ad3110"];
 }
 

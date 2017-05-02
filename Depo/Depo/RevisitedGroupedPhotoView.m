@@ -164,27 +164,6 @@
             }
         }
         
-        if(isSyncHeaderVisible) {
-            syncInfoHeaderView = [[AutoSyncOffHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 50) withWifiFlag:waitingForWifi];
-            syncInfoHeaderView.delegate = self;
-            [self addSubview:syncInfoHeaderView];
-        } else {
-            UploadManager *activeManRef = [[UploadQueue sharedInstance] activeManager];
-            if(activeManRef != nil) {
-                syncView = [[PhotosHeaderSyncView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 50)];
-                activeManRef.headerDelegate = syncView;
-                syncView.delegate = self;
-                if(activeManRef.uploadRef.taskType == UploadTaskTypeAsset) {
-                    [syncView loadAsset:activeManRef.uploadRef.assetUrl];
-                } else if(activeManRef.uploadRef.taskType == UploadTaskTypeFile) {
-                    [syncView loadLocalFileForCamUpload:activeManRef.uploadRef.tempUrl];
-                }
-                [self addSubview:syncView];
-                
-                isSyncProgressVisible = YES;
-            }
-        }
-        
         yIndex = 0;
         
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
@@ -256,9 +235,70 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCollectionViewData) name:UIApplicationDidBecomeActiveNotification object:nil];
         
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityDidChange) name:kReachabilityChangedNotification object:nil];
+        
         
     }
     return self;
+}
+
+- (void) showSyncHeaderIfNeeded {
+    BOOL isSyncHeaderVisible = NO;
+    BOOL isSyncProgressVisible = NO;
+    BOOL waitingForWifi = NO;
+    if(!APPDELEGATE.session.photosSyncHeaderShownFlag) {
+        EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
+        if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
+            ConnectionOption connectionOption = (ConnectionOption)[CacheUtil readCachedSettingSyncingConnectionType];
+            if([ReachabilityManager isReachableViaWWAN]) {
+                if(connectionOption == ConnectionOptionWifi) {
+                    isSyncHeaderVisible = YES;
+                    waitingForWifi = YES;
+                }
+            }
+        } else {
+            isSyncHeaderVisible = YES;
+        }
+    }
+    
+    if(isSyncHeaderVisible) {
+        if (syncInfoHeaderView) {
+            [syncInfoHeaderView removeFromSuperview];
+        }
+        syncInfoHeaderView = [[AutoSyncOffHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 50) withWifiFlag:waitingForWifi];
+        syncInfoHeaderView.delegate = self;
+        [self addSubview:syncInfoHeaderView];
+        
+        // collection view'i asagi kaydir
+        self.collView.frame = CGRectMake(0, isSyncHeaderVisible || isSyncProgressVisible ? 50 : 0, self.frame.size.width, self.frame.size.height - (isSyncHeaderVisible || isSyncProgressVisible ? 50 : 0));
+    } else {
+        // info headeri sakla, collection view'i yukari kaydir, ama bayragi no'ya cek. cunku bu kullanici kapama butonuna basmadi
+        [self autoSyncOffHeaderViewCloseClicked];
+        APPDELEGATE.session.photosSyncHeaderShownFlag = NO;
+        
+        UploadManager *activeManRef = [[UploadQueue sharedInstance] activeManager];
+        if(activeManRef != nil) {
+            if (syncView) {
+                [syncView removeFromSuperview];
+                syncView = nil;
+            }
+            syncView = [[PhotosHeaderSyncView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 50)];
+            activeManRef.headerDelegate = syncView;
+            syncView.delegate = self;
+            if(activeManRef.uploadRef.taskType == UploadTaskTypeAsset) {
+                [syncView loadAsset:activeManRef.uploadRef.assetUrl];
+            } else if(activeManRef.uploadRef.taskType == UploadTaskTypeFile) {
+                [syncView loadLocalFileForCamUpload:activeManRef.uploadRef.tempUrl];
+            }
+            [self addSubview:syncView];
+            
+            isSyncProgressVisible = YES;
+        }
+    }
+}
+
+- (void)reachabilityDidChange {
+    [self showSyncHeaderIfNeeded];
 }
 
 - (void) checkCollectionViewData {
@@ -326,10 +366,10 @@
         groupSequence = 0;
         lastCheckedDate = nil;
         
-        [groups removeAllObjects];
-        [files removeAllObjects];
-        [fileHashList removeAllObjects];
-        [fileHashList addObjectsFromArray:[SyncUtil readLocallySavedFiles]];
+        [self.groups removeAllObjects];
+        [self.files removeAllObjects];
+        [self.fileHashList removeAllObjects];
+        [self.fileHashList addObjectsFromArray:[SyncUtil readLocallySavedFiles]];
         
         [[SDWebImagePrefetcher sharedImagePrefetcher] cancelPrefetching];
         [[SDWebImageManager sharedManager].imageCache clearMemory];
@@ -1254,10 +1294,11 @@
 #pragma mark - AutoSyncOffHeaderDelegate Methods
 
 - (void) autoSyncOffHeaderViewCloseClicked {
-    if(syncInfoHeaderView) {
-        [syncInfoHeaderView removeFromSuperview];
+    if(self.syncInfoHeaderView) {
+        [self.syncInfoHeaderView removeFromSuperview];
+        self.syncInfoHeaderView = nil;
         [UIView animateWithDuration:0.4 animations:^{
-            collView.frame = CGRectMake(collView.frame.origin.x, collView.frame.origin.y - 50, collView.frame.size.width, collView.frame.size.height + 50);
+            self.collView.frame = CGRectMake(self.collView.frame.origin.x, self.collView.frame.origin.y - 50, self.collView.frame.size.width, self.collView.frame.size.height + 50);
         }];
         collViewOriginalHeight = collViewOriginalHeight + 50;
     }

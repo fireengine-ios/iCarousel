@@ -114,5 +114,6 @@
 - (void) cancelRequests;
 - (void) neutralizeSearchBar;
 - (void) didReceiveMemoryWarning;
+- (void) showSyncHeaderIfNeeded;
 
 @end
