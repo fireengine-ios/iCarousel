@@ -72,7 +72,7 @@
 
 @property (nonatomic, weak) id<RevisitedGroupedPhotoDelegate> delegate;
 @property (nonatomic, strong) NSMutableArray *files;
-@property (nonatomic, strong) NSMutableArray *fileHashList;
+@property (nonatomic, strong) NSArray *fileHashList;
 @property (nonatomic, strong) NSMutableArray *selectedFileList;
 @property (nonatomic, strong) NSMutableArray *selectedMetaFiles;
 @property (nonatomic, strong) NSMutableArray *selectedAssets;
