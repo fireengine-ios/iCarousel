@@ -59,7 +59,7 @@
         settingsButtonIV.accessibilityIdentifier = @"AutoSyncSettingsButton";
         [self addSubview:settingsButtonIV];
 
-        UIImageView *innerIconImgView = [[UIImageView alloc] initWithFrame:CGRectMake(15, (settingsButtonIV.frame.size.height - 10)/2, 10, 10)];
+        UIImageView *innerIconImgView = [[UIImageView alloc] initWithFrame:CGRectMake(15, (settingsButtonIV.frame.size.height - 10)/2 -0.5, 10, 10)];
         innerIconImgView.image = [UIImage imageNamed:@"icon_button_settings.png"];
         innerIconImgView.contentMode = UIViewContentModeScaleAspectFill;
         [settingsButtonIV addSubview:innerIconImgView];
