@@ -13,6 +13,7 @@
 #import "NSMutableArray_Shuffling.h"
 #import "MetaFile.h"
 #import "Usage.h"
+#import "Quota.h"
 #import "ContactSyncResult.h"
 #import <MediaPlayer/MediaPlayer.h>
 
@@ -34,6 +35,7 @@
 @property (nonatomic) BOOL migrationUserFlag;
 
 @property (nonatomic, strong) Usage *usage;
+@property (nonatomic, strong) Quota *quota;
 @property (nonatomic, strong) ContactSyncResult *syncResult;
 @property (nonatomic, strong) UIImage *profileImageRef;
 

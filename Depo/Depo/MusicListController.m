@@ -107,7 +107,7 @@
         [self.view addSubview:musicTable];
         
         UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(shouldMoveToSelectionState:)];
-        longPressGesture.minimumPressDuration = 1.0;
+//        longPressGesture.minimumPressDuration = 1.0;
         [musicTable addGestureRecognizer:longPressGesture];
 
         refreshControl = [[UIRefreshControl alloc] init];

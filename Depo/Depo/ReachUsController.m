@@ -248,7 +248,7 @@
                 [packageInfo appendString:[NSString stringWithFormat:@"%@\n", row.plan.displayName]];
             }
         }
-        NSString *clientInfo = [NSString stringWithFormat:@"Application Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS:%@\nLanguage:%@\nNetwork Status:%@\nTotal Storage:%lld\nUsed Storage:%lld\nPackages:%@\n", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"], APPDELEGATE.session.user.phoneNumber, [AppUtil operatorName], [UIDevice currentDevice].model, [[UIDevice currentDevice] systemVersion], [Util readLocaleCode], [ReachabilityManager isReachableViaWWAN] ? @"WWAN" : @"WIFI", APPDELEGATE.session.usage.totalStorage, APPDELEGATE.session.usage.usedStorage, packageInfo];
+        NSString *clientInfo = [NSString stringWithFormat:@"Application Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS:%@\nLanguage:%@\nNetwork Status:%@\nTotal Storage:%lld\nUsed Storage:%lld\nPackages:%@\n", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"], APPDELEGATE.session.user.phoneNumber, [AppUtil operatorName], [UIDevice currentDevice].model, [[UIDevice currentDevice] systemVersion], [Util readLocaleCode], [ReachabilityManager isReachableViaWWAN] ? @"WWAN" : @"WIFI", APPDELEGATE.session.quota.quotaBytes, APPDELEGATE.session.quota.bytesUsed, packageInfo];
 
         NSString *messageBody = [NSString stringWithFormat:@"%@\n\n%@\n\n%@", textView.text, NSLocalizedString(@"MailWarning", @""), clientInfo];
         

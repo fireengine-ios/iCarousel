@@ -24,6 +24,8 @@
 #import "RDActivityViewController.h"
 #import "AppRater.h"
 #import "SettingsUploadController.h"
+#import "QuotaInfoDao.h"
+#import "Quota.h"
 
 @interface RevisitedGroupedPhotosController () <UIActionSheetDelegate, RDActivityViewControllerDelegate> {
     MyNavigationController *printNav;
@@ -31,6 +33,7 @@
 @property (nonatomic, copy) NSArray *fileUUIDToShare;
 @property (nonatomic, copy) NSArray *fileListToShare;
 @property (nonatomic, strong) NSArray *imagesToShare;
+@property (nonatomic) QuotaInfoDao *quotaDao;
 @end
 
 @implementation RevisitedGroupedPhotosController
@@ -40,7 +43,6 @@
 @synthesize albumView;
 @synthesize previousButtonRef;
 @synthesize moreButton;
-@synthesize usageDao;
 @synthesize accountDao;
 
 - (id) init {
@@ -51,11 +53,11 @@
         shareDao.delegate = self;
         shareDao.successMethod = @selector(shareSuccessCallback:);
         shareDao.failMethod = @selector(shareFailCallback:);
-
-        usageDao = [[UsageInfoDao alloc] init];
-        usageDao.delegate = self;
-        usageDao.successMethod = @selector(usageSuccessCallback:);
-        usageDao.failMethod = @selector(usageFailCallback:);
+        
+        self.quotaDao = [[QuotaInfoDao alloc] init];
+        self.quotaDao.delegate = self;
+        self.quotaDao.successMethod = @selector(quotaInfoSuccessCallback:);
+        self.quotaDao.failMethod = @selector(quotaInfoFailCallback:);
 
         accountDao = [[AccountDao alloc] init];
         accountDao.delegate = self;
@@ -75,7 +77,7 @@
         albumView.delegate = self;
         [self.view addSubview:albumView];
         
-        [usageDao requestUsageInfo];
+        [self.quotaDao requestQuotaInfo];
         [accountDao requestActiveSubscriptions];
         
         previousButtonRef = self.navigationItem.leftBarButtonItem;
@@ -643,6 +645,12 @@
         [AppUtil increaseVideofyTutorialCount];
         APPDELEGATE.session.videofyTutorialCountChecked = YES;
     }
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(statusBarTappedAction:)
+                                                 name:@"statusBarTappedNotification"
+                                               object:nil];
+    [self.groupView showSyncHeaderIfNeeded];
 }
 
 - (BOOL)shouldAutorotate {
@@ -770,19 +778,18 @@
 }
 
 - (void) cancelRequests {
-    [usageDao cancelRequest];
-    usageDao = nil;
+    [self.quotaDao cancelRequest];
+    self.quotaDao = nil;
     
     [groupView cancelRequests];
     [albumView cancelRequests];
 }
 
-- (void) usageSuccessCallback:(Usage *) _usage {
-    APPDELEGATE.session.usage = _usage;
-
+- (void) quotaInfoSuccessCallback:(Quota *) quota {
+    APPDELEGATE.session.quota = quota;
     double percentUsageVal = 0;
-    if(APPDELEGATE.session.usage.totalStorage > 0) {
-        percentUsageVal = 100 * ((double)APPDELEGATE.session.usage.usedStorage/(double)APPDELEGATE.session.usage.totalStorage);
+    if(quota.quotaBytes > 0) {
+        percentUsageVal = 100 * ((double)quota.bytesUsed/(double)quota.quotaBytes);
     }
     
     if(isnan(percentUsageVal)) {
@@ -818,14 +825,14 @@
     
     [MPush hitTag:@"quota_status" withValue:[NSString stringWithFormat:@"%.0f", percentUsageVal]];
     
-    if(APPDELEGATE.session.usage.totalStorage > 0) {
-        if(APPDELEGATE.session.usage.totalStorage - APPDELEGATE.session.usage.usedStorage <= 5242880) {
+    if(quota.quotaBytes > 0) {
+        if(quota.quotaBytes - quota.bytesUsed <= 5242880) {
             [MPush hitTag:@"quota_5_mb_left"];
         }
     }
 }
 
-- (void) usageFailCallback:(NSString *) errorMessage {
+- (void) quotaInfoFailCallback:(NSString *) errorMessage {
 }
 
 //- (void) accountSuccessCallback:(NSArray *) subscriptions {
