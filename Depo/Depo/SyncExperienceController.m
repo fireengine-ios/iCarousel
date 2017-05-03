@@ -9,14 +9,16 @@
 #import "SyncExperienceController.h"
 #import <AVFoundation/AVFoundation.h>
 #import "CustomLabel.h"
+#import "Util.h"
+#import "AppConstants.h"
 
-#define pageCount 6
+#define pageCount 5
 
 @interface SyncExperienceController ()
 
 @property (nonatomic, strong, nullable) void (^completion)(void);
 @property (nonatomic, strong) UIScrollView *mainScroll;
-@property (nonatomic, strong) UIImageView *bullets;
+@property (nonatomic, strong) UIPageControl *pageControl;
 @property (nonatomic, strong) NSMutableArray *players;
 @property (nonatomic, strong) AVPlayer *currentPlayer;
 @property (nonatomic) NSInteger currentPage;
@@ -36,7 +38,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    IGLog(@"Sync Experince page opened");
     
     // dont assign if you want to loading view in window subview (!)
     self.players = [NSMutableArray new];
@@ -53,40 +55,52 @@
     // common frames and sizes
     CGSize scrollSize = self.mainScroll.frame.size;
     
+    NSString *locale = [[Util readLocaleCode] isEqualToString:@"tr"] ? @"tr" : @"en";
+    
     // page 1
     UIView *page1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, scrollSize.width, scrollSize.height)];
-    [self addVideoToPage:page1 videoName:@"1.1 onboarding"];
-    [self addLabelToPage:page1 title:@"Easy way to sync your photos" subtitle:@"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit"];
+    [self addVideoToPage:page1 videoName:[NSString stringWithFormat:@"%@1.1", locale]];
+    [self addLabelToPage:page1
+                   title:NSLocalizedString(@"SyncExperincePage1Title", @"")
+                subtitle:NSLocalizedString(@"SyncExperincePage1SubTitle", @"")];
     [self.mainScroll addSubview:page1];
     
     // page 2
     UIView *page2 = [[UIView alloc] initWithFrame:CGRectMake(scrollSize.width, 0, scrollSize.width, scrollSize.height)];
-    [self addVideoToPage:page2 videoName:@"1.2 onboarding"];
-    [self addLabelToPage:page2 title:@"Easy way to sync your photos" subtitle:@"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit"];
+    [self addVideoToPage:page2 videoName:[NSString stringWithFormat:@"%@1.2", locale]];
+    [self addLabelToPage:page2
+                   title:NSLocalizedString(@"SyncExperincePage2Title", @"")
+                subtitle:NSLocalizedString(@"SyncExperincePage2SubTitle", @"")];
     [self.mainScroll addSubview:page2];
     
     // page 3
     UIView *page3 = [[UIView alloc] initWithFrame:CGRectMake(2 * scrollSize.width, 0, scrollSize.width, scrollSize.height)];
-    [self addVideoToPage:page3 videoName:@"1.3 onboarding"];
-    [self addLabelToPage:page3 title:@"Easy way to sync your photos" subtitle:@"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit"];
+    [self addVideoToPage:page3 videoName:[NSString stringWithFormat:@"%@1.3", locale]];
+    [self addLabelToPage:page3
+                   title:NSLocalizedString(@"SyncExperincePage3Title", @"")
+                subtitle:NSLocalizedString(@"SyncExperincePage3SubTitle", @"")];
     [self.mainScroll addSubview:page3];
     
-    // page 4
-    UIView *page4 = [[UIView alloc] initWithFrame:CGRectMake(3 * scrollSize.width, 0, scrollSize.width, scrollSize.height)];
-    [self addVideoToPage:page4 videoName:@"1.4 onboarding"];
-    [self addLabelToPage:page4 title:@"Easy way to sync your photos" subtitle:@"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit"];
-    [self.mainScroll addSubview:page4];
+    // page 4 iptal
+//    UIView *page4 = [[UIView alloc] initWithFrame:CGRectMake(3 * scrollSize.width, 0, scrollSize.width, scrollSize.height)];
+//    [self addVideoToPage:page4 videoName:[NSString stringWithFormat:@"%@1.4", @"tr"]];
+//    [self addLabelToPage:page4 title:@"Easy way to sync your photos" subtitle:@"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit"];
+//    [self.mainScroll addSubview:page4];
     
     // page 5
-    UIView *page5 = [[UIView alloc] initWithFrame:CGRectMake(4 * scrollSize.width, 0, scrollSize.width, scrollSize.height)];
-    [self addVideoToPage:page5 videoName:@"1.5 onboarding"];
-    [self addLabelToPage:page5 title:@"Easy way to sync your photos" subtitle:@"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit"];
+    UIView *page5 = [[UIView alloc] initWithFrame:CGRectMake(3 * scrollSize.width, 0, scrollSize.width, scrollSize.height)];
+    [self addVideoToPage:page5 videoName:[NSString stringWithFormat:@"%@1.5", locale]];
+    [self addLabelToPage:page5
+                   title:NSLocalizedString(@"SyncExperincePage4Title", @"")
+                subtitle:NSLocalizedString(@"SyncExperincePage4SubTitle", @"")];
     [self.mainScroll addSubview:page5];
     
     // page 6
-    UIView *page6 = [[UIView alloc] initWithFrame:CGRectMake(5 * scrollSize.width, 0, scrollSize.width, scrollSize.height)];
-    [self addVideoToPage:page6 videoName:@"1.6 onboarding"];
-    [self addLabelToPage:page6 title:@"Easy way to sync your photos" subtitle:@"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit"];
+    UIView *page6 = [[UIView alloc] initWithFrame:CGRectMake(4 * scrollSize.width, 0, scrollSize.width, scrollSize.height)];
+    [self addVideoToPage:page6 videoName:[NSString stringWithFormat:@"%@1.6", locale]];
+    [self addLabelToPage:page6
+                   title:NSLocalizedString(@"SyncExperincePage5Title", @"")
+                subtitle:NSLocalizedString(@"SyncExperincePage5SubTitle", @"")];
     [self.mainScroll addSubview:page6];
     
     // getStarted button
@@ -102,13 +116,16 @@
     [getStartedButton.titleLabel setFont:[UIFont systemFontOfSize:13]];
     [page6 addSubview:getStartedButton];
     
-    // page indicator bullets
-    self.bullets = [[UIImageView alloc] initWithFrame:CGRectMake((scrollSize.width - 116) / 2.0,
-                                                                 getStartedButton.frame.origin.y - 15 -11,
-                                                                 116,
-                                                                 11)];
-    self.bullets.image = [UIImage imageNamed:@"Bullets 1.1.png"];
-    [self.view addSubview:self.bullets];
+    // page control
+    self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake((scrollSize.width - 116) / 2.0,
+                                                                           getStartedButton.frame.origin.y - 15 -10,
+                                                                           116,
+                                                                           10)];
+    self.pageControl.numberOfPages = pageCount;
+    self.pageControl.pageIndicatorTintColor = [Util UIColorForHexColor:@"BAD6EE"];
+    self.pageControl.currentPageIndicatorTintColor = [Util UIColorForHexColor:@"26B5EE"];
+    self.pageControl.transform = CGAffineTransformMakeScale(1.5, 1.5);
+    [self.view addSubview:self.pageControl];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -173,7 +190,7 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     NSInteger page = lround(self.mainScroll.contentOffset.x / self.mainScroll.frame.size.width);
     // change bullets
-    self.bullets.image = [UIImage imageNamed:[NSString stringWithFormat:@"Bullets 1.%li.png", page +1]];
+    self.pageControl.currentPage = page;
 }
 
 
