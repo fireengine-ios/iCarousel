@@ -994,6 +994,21 @@
 		792233581EB910FC00955F90 /* tr1.3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 7922334E1EB910FC00955F90 /* tr1.3.mp4 */; };
 		792233591EB910FC00955F90 /* tr1.5.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 7922334F1EB910FC00955F90 /* tr1.5.mp4 */; };
 		7922335A1EB910FC00955F90 /* tr1.6.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 792233501EB910FC00955F90 /* tr1.6.mp4 */; };
+		792233871EBAF9F500955F90 /* Lifebox-0 Eng@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7922337A1EBAF9F500955F90 /* Lifebox-0 Eng@3x.png */; };
+		792233881EBAF9F500955F90 /* Lifebox-1 Eng@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7922337B1EBAF9F500955F90 /* Lifebox-1 Eng@3x.png */; };
+		792233891EBAF9F500955F90 /* Lifebox-1.0 Eng@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7922337C1EBAF9F500955F90 /* Lifebox-1.0 Eng@3x.png */; };
+		7922338A1EBAF9F500955F90 /* Lifebox-2 Eng@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7922337D1EBAF9F500955F90 /* Lifebox-2 Eng@3x.png */; };
+		7922338B1EBAF9F500955F90 /* Lifebox-3 Eng@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7922337E1EBAF9F500955F90 /* Lifebox-3 Eng@3x.png */; };
+		7922338C1EBAF9F500955F90 /* Lifebox-3.0 Eng@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7922337F1EBAF9F500955F90 /* Lifebox-3.0 Eng@3x.png */; };
+		7922338D1EBAF9F500955F90 /* Lifebox-0@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 792233811EBAF9F500955F90 /* Lifebox-0@3x.png */; };
+		7922338E1EBAF9F500955F90 /* Lifebox-1.0@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 792233821EBAF9F500955F90 /* Lifebox-1.0@3x.png */; };
+		7922338F1EBAF9F500955F90 /* Lifebox-1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 792233831EBAF9F500955F90 /* Lifebox-1@3x.png */; };
+		792233901EBAF9F500955F90 /* Lifebox-2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 792233841EBAF9F500955F90 /* Lifebox-2@3x.png */; };
+		792233911EBAF9F500955F90 /* Lifebox-3.0@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 792233851EBAF9F500955F90 /* Lifebox-3.0@3x.png */; };
+		792233921EBAF9F500955F90 /* Lifebox-3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 792233861EBAF9F500955F90 /* Lifebox-3@3x.png */; };
+		792233951EBB020000955F90 /* ContactSyncTutorialView.m in Sources */ = {isa = PBXBuildFile; fileRef = 792233941EBB020000955F90 /* ContactSyncTutorialView.m */; };
+		7922339B1EBB18AB00955F90 /* ContactSyncSplashController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7922339A1EBB18AB00955F90 /* ContactSyncSplashController.m */; };
+		792233A41EBB27F600955F90 /* InteractiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 792233A31EBB27F600955F90 /* InteractiveViewController.m */; };
 		79BDD58D1E8268C800765599 /* signup_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BDD58A1E8268C800765599 /* signup_button.png */; };
 		79BDD58E1E8268C800765599 /* signup_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BDD58B1E8268C800765599 /* signup_button@2x.png */; };
 		79BDD58F1E8268C800765599 /* signup_button@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BDD58C1E8268C800765599 /* signup_button@3x.png */; };
@@ -2741,6 +2756,24 @@
 		7922334E1EB910FC00955F90 /* tr1.3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = tr1.3.mp4; sourceTree = "<group>"; };
 		7922334F1EB910FC00955F90 /* tr1.5.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = tr1.5.mp4; sourceTree = "<group>"; };
 		792233501EB910FC00955F90 /* tr1.6.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = tr1.6.mp4; sourceTree = "<group>"; };
+		7922337A1EBAF9F500955F90 /* Lifebox-0 Eng@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Lifebox-0 Eng@3x.png"; sourceTree = "<group>"; };
+		7922337B1EBAF9F500955F90 /* Lifebox-1 Eng@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Lifebox-1 Eng@3x.png"; sourceTree = "<group>"; };
+		7922337C1EBAF9F500955F90 /* Lifebox-1.0 Eng@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Lifebox-1.0 Eng@3x.png"; sourceTree = "<group>"; };
+		7922337D1EBAF9F500955F90 /* Lifebox-2 Eng@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Lifebox-2 Eng@3x.png"; sourceTree = "<group>"; };
+		7922337E1EBAF9F500955F90 /* Lifebox-3 Eng@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Lifebox-3 Eng@3x.png"; sourceTree = "<group>"; };
+		7922337F1EBAF9F500955F90 /* Lifebox-3.0 Eng@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Lifebox-3.0 Eng@3x.png"; sourceTree = "<group>"; };
+		792233811EBAF9F500955F90 /* Lifebox-0@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Lifebox-0@3x.png"; sourceTree = "<group>"; };
+		792233821EBAF9F500955F90 /* Lifebox-1.0@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Lifebox-1.0@3x.png"; sourceTree = "<group>"; };
+		792233831EBAF9F500955F90 /* Lifebox-1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Lifebox-1@3x.png"; sourceTree = "<group>"; };
+		792233841EBAF9F500955F90 /* Lifebox-2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Lifebox-2@3x.png"; sourceTree = "<group>"; };
+		792233851EBAF9F500955F90 /* Lifebox-3.0@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Lifebox-3.0@3x.png"; sourceTree = "<group>"; };
+		792233861EBAF9F500955F90 /* Lifebox-3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Lifebox-3@3x.png"; sourceTree = "<group>"; };
+		792233931EBB020000955F90 /* ContactSyncTutorialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactSyncTutorialView.h; sourceTree = "<group>"; };
+		792233941EBB020000955F90 /* ContactSyncTutorialView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactSyncTutorialView.m; sourceTree = "<group>"; };
+		792233991EBB18AB00955F90 /* ContactSyncSplashController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactSyncSplashController.h; sourceTree = "<group>"; };
+		7922339A1EBB18AB00955F90 /* ContactSyncSplashController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactSyncSplashController.m; sourceTree = "<group>"; };
+		792233A21EBB27F600955F90 /* InteractiveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteractiveViewController.h; sourceTree = "<group>"; };
+		792233A31EBB27F600955F90 /* InteractiveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InteractiveViewController.m; sourceTree = "<group>"; };
 		79BDD58A1E8268C800765599 /* signup_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = signup_button.png; path = "images/login-signup/signup_button.png"; sourceTree = "<group>"; };
 		79BDD58B1E8268C800765599 /* signup_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "signup_button@2x.png"; path = "images/login-signup/signup_button@2x.png"; sourceTree = "<group>"; };
 		79BDD58C1E8268C800765599 /* signup_button@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "signup_button@3x.png"; path = "images/login-signup/signup_button@3x.png"; sourceTree = "<group>"; };
@@ -3444,6 +3477,8 @@
 				05144B5D1A090A5900B2A414 /* DocListController.m */,
 				059C046A1A85256B007B18BE /* ContactSyncController.h */,
 				059C046B1A85256B007B18BE /* ContactSyncController.m */,
+				792233991EBB18AB00955F90 /* ContactSyncSplashController.h */,
+				7922339A1EBB18AB00955F90 /* ContactSyncSplashController.m */,
 				053D0ED619DAC959006A13E0 /* MyModalController.h */,
 				053D0ED719DAC959006A13E0 /* MyModalController.m */,
 				053EC44F19DA99C4000C2B77 /* NewFolderModalController.h */,
@@ -3659,6 +3694,8 @@
 				94EF279B1C982B460087EFBE /* NoItemView.m */,
 				94328BDE1CC3E0B900599CEE /* TutorialView.h */,
 				94328BDF1CC3E0B900599CEE /* TutorialView.m */,
+				792233931EBB020000955F90 /* ContactSyncTutorialView.h */,
+				792233941EBB020000955F90 /* ContactSyncTutorialView.m */,
 				94C7CEFB1D2CE67E0040897A /* SquareSequencedPictureView.h */,
 				94C7CEFC1D2CE67E0040897A /* SquareSequencedPictureView.m */,
 				94FAE0AF1D2F119300BC9F77 /* VideofyFooterView.h */,
@@ -4120,6 +4157,8 @@
 				056E2A121A28BC1E00C24904 /* XYPieChart */,
 				052A221D19F67FB5000C3C75 /* MBProgressHUD.h */,
 				052A221E19F67FB5000C3C75 /* MBProgressHUD.m */,
+				792233A21EBB27F600955F90 /* InteractiveViewController.h */,
+				792233A31EBB27F600955F90 /* InteractiveViewController.m */,
 				67AC3F741E71231E00DDC28C /* SDWebImage */,
 				051E1E5B19CAC91300FD1E03 /* SBJSON+ASI */,
 				051E1E3B19CAC8F800FD1E03 /* AFNetworking */,
@@ -4302,6 +4341,7 @@
 		0589060219CC226500A9E517 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				792233781EBAF9F500955F90 /* Contact_sync_walkthrough */,
 				79C774F61E9623280008FB09 /* sync-experience */,
 				070A22141E8AB807002385F7 /* Line.png */,
 				070A22151E8AB807002385F7 /* Line@2x.png */,
@@ -5458,6 +5498,41 @@
 			path = "tr-mp4";
 			sourceTree = "<group>";
 		};
+		792233781EBAF9F500955F90 /* Contact_sync_walkthrough */ = {
+			isa = PBXGroup;
+			children = (
+				792233791EBAF9F500955F90 /* İngilizce */,
+				792233801EBAF9F500955F90 /* Türkçe */,
+			);
+			path = Contact_sync_walkthrough;
+			sourceTree = "<group>";
+		};
+		792233791EBAF9F500955F90 /* İngilizce */ = {
+			isa = PBXGroup;
+			children = (
+				7922337A1EBAF9F500955F90 /* Lifebox-0 Eng@3x.png */,
+				7922337B1EBAF9F500955F90 /* Lifebox-1 Eng@3x.png */,
+				7922337C1EBAF9F500955F90 /* Lifebox-1.0 Eng@3x.png */,
+				7922337D1EBAF9F500955F90 /* Lifebox-2 Eng@3x.png */,
+				7922337E1EBAF9F500955F90 /* Lifebox-3 Eng@3x.png */,
+				7922337F1EBAF9F500955F90 /* Lifebox-3.0 Eng@3x.png */,
+			);
+			path = "İngilizce";
+			sourceTree = "<group>";
+		};
+		792233801EBAF9F500955F90 /* Türkçe */ = {
+			isa = PBXGroup;
+			children = (
+				792233811EBAF9F500955F90 /* Lifebox-0@3x.png */,
+				792233821EBAF9F500955F90 /* Lifebox-1.0@3x.png */,
+				792233831EBAF9F500955F90 /* Lifebox-1@3x.png */,
+				792233841EBAF9F500955F90 /* Lifebox-2@3x.png */,
+				792233851EBAF9F500955F90 /* Lifebox-3.0@3x.png */,
+				792233861EBAF9F500955F90 /* Lifebox-3@3x.png */,
+			);
+			path = "Türkçe";
+			sourceTree = "<group>";
+		};
 		79C774F61E9623280008FB09 /* sync-experience */ = {
 			isa = PBXGroup;
 			children = (
@@ -5702,6 +5777,7 @@
 				94E549351CC6BA43003CB5DC /* icon_select_on@3x.png in Resources */,
 				94884C941C90AFCC006722F7 /* buttonbg_yellow@2x.png in Resources */,
 				94E5E6731E24FB8F008B0216 /* icon_bottom_sync_purple@3x.png in Resources */,
+				792233881EBAF9F500955F90 /* Lifebox-1 Eng@3x.png in Resources */,
 				051CB3F419D2F71200E5FC88 /* dummy_profilePhoto.png in Resources */,
 				94FAE0E81D2F7E7800BC9F77 /* icon_select.png in Resources */,
 				569B5CB41DEF9AB7008153F5 /* icon_captcha_refresh@2x.png in Resources */,
@@ -5712,6 +5788,7 @@
 				949BB5A51D6F1FB100BED9DB /* vect_mtour_2@2x.png in Resources */,
 				568FEFD31E2C957100AF4FFB /* icon_settings_cikis@2x.png in Resources */,
 				569749641DEEF999005C0460 /* textline_1240.png in Resources */,
+				7922338A1EBAF9F500955F90 /* Lifebox-2 Eng@3x.png in Resources */,
 				94E5E6671E24FB70008B0216 /* icon_bottom_sync_purple@2x.png in Resources */,
 				0526447A19D5A26400B63759 /* toggle_on@2x.png in Resources */,
 				05A7CE711A7FC27300020B6F /* karebg@2x.png in Resources */,
@@ -5739,6 +5816,7 @@
 				949414F21CC8BCD8008904E2 /* icon_m_yardim_w@3x.png in Resources */,
 				569B5CAF1DEF9782008153F5 /* bg_captcha@3x.png in Resources */,
 				0526444519D5445700B63759 /* FloatingMapping.plist in Resources */,
+				7922338B1EBAF9F500955F90 /* Lifebox-3 Eng@3x.png in Resources */,
 				05C3F60A1A3902E0001954E8 /* check_icon.png in Resources */,
 				057C9D6A1A2B48E6001DDDEC /* contacts_icon.png in Resources */,
 				949BB5891D6F1FA100BED9DB /* logo_lifebox.png in Resources */,
@@ -5759,6 +5837,7 @@
 				24FE7B0F1B6A5A98007B53A0 /* white_print_icon@2x.png in Resources */,
 				790B9D981E7690BD00DD7DA0 /* buttonbg_720_w@2x.png in Resources */,
 				058219D81A3850E2001FA679 /* close_icon.png in Resources */,
+				7922338E1EBAF9F500955F90 /* Lifebox-1.0@3x.png in Resources */,
 				051CB3F619D2F71200E5FC88 /* document_icon.png in Resources */,
 				94B2F33F1D373E48009CD8B1 /* icon_sm.png in Resources */,
 				9498C0051D537B34009AF159 /* divider_horizontal@2x.png in Resources */,
@@ -5919,6 +5998,7 @@
 				055A3F5919E81C3D004A0121 /* no_album_icon@2x.png in Resources */,
 				94FBAEF51D5B923C00C8E6F1 /* img_lifebox.png in Resources */,
 				05AF7CA01A1CC08E00F5011A /* activity_bullet@2x.png in Resources */,
+				792233911EBAF9F500955F90 /* Lifebox-3.0@3x.png in Resources */,
 				05A7CE721A7FC27300020B6F /* karebg@3x.png in Resources */,
 				05994F9D1A0B572D0081F000 /* music_play_icon.png in Resources */,
 				055A3F4419E7F628004A0121 /* album_mask@2x.png in Resources */,
@@ -5973,6 +6053,7 @@
 				055A3F5A19E81C3D004A0121 /* album_selected_mask@2x.png in Resources */,
 				051E1E0119CAC2F900FD1E03 /* InfoPlist.strings in Resources */,
 				05C4E4A51C4D5EAF005B28E9 /* bg_verif_digit.png in Resources */,
+				792233901EBAF9F500955F90 /* Lifebox-2@3x.png in Resources */,
 				05AF7CAC1A1CC0A200F5011A /* circle_photos_icon@2x.png in Resources */,
 				051CB3EE19D2F71200E5FC88 /* nav_delete_icon.png in Resources */,
 				0589062F19CC226D00A9E517 /* nav_favourite_icon@2x.png in Resources */,
@@ -5986,6 +6067,7 @@
 				057C9D811A2B89BD001DDDEC /* shuffle@2x.png in Resources */,
 				052A222C19F6846B000C3C75 /* default_loading_bg.png in Resources */,
 				051CB3F319D2F71200E5FC88 /* empty_state_icon.png in Resources */,
+				792233871EBAF9F500955F90 /* Lifebox-0 Eng@3x.png in Resources */,
 				053F993B19E1C40900928F22 /* unable_file_icon@2x.png in Resources */,
 				94FAE0B61D2F1B3400BC9F77 /* icon_bottom_addmusic.png in Resources */,
 				949BB5C11D6F1FC300BED9DB /* vect_mtour_4@3x.png in Resources */,
@@ -6117,6 +6199,7 @@
 				0515F2FC1C4674830098081C /* temp_green_tick_icon@2x.png in Resources */,
 				0592FC331ACEC6740083A6C6 /* Depo-AppStore.entitlements in Resources */,
 				94FE82B31D4A85C600F62EF4 /* button_play.png in Resources */,
+				792233921EBAF9F500955F90 /* Lifebox-3@3x.png in Resources */,
 				058337FF19EDA08200DCF0C5 /* player_progress@2x.png in Resources */,
 				790B9D861E71750E00DD7DA0 /* combobg@3x.png in Resources */,
 				058337F719EDA04A00DCF0C5 /* bttn-player-handle@2x.png in Resources */,
@@ -6153,6 +6236,7 @@
 				056F29D81C4E8128001DD486 /* icon_verif_refresh.png in Resources */,
 				949BB5BA1D6F1FC300BED9DB /* bg_mtour_4@3x.jpg in Resources */,
 				0589063119CC226D00A9E517 /* menu_icon.png in Resources */,
+				7922338D1EBAF9F500955F90 /* Lifebox-0@3x.png in Resources */,
 				94328BD91CC3E03C00599CEE /* img_baski_2.jpg in Resources */,
 				051CB3F819D2F71200E5FC88 /* check_checked_icon.png in Resources */,
 				94884C971C90AFD5006722F7 /* buttonbg_blue@3x.png in Resources */,
@@ -6197,6 +6281,7 @@
 				94B2F3471D373E53009CD8B1 /* icon_ig_aktar@2x.png in Resources */,
 				79BDD5931E826D7700765599 /* icon_selected@3x.png in Resources */,
 				0569C8391A8A324A000E0486 /* Icon_180.png in Resources */,
+				792233891EBAF9F500955F90 /* Lifebox-1.0 Eng@3x.png in Resources */,
 				055F527C1B1CD6570052C854 /* Icon_76.png in Resources */,
 				94427C551DFEF18700FC28B5 /* bg_label.png in Resources */,
 				051CB40419D2F71200E5FC88 /* nav_sort_icon@2x.png in Resources */,
@@ -6352,6 +6437,7 @@
 				051412A219D46393000EAE63 /* Default-568h_old@2x.png in Resources */,
 				79BDD58F1E8268C800765599 /* signup_button@3x.png in Resources */,
 				569B5CB51DEF9AB7008153F5 /* icon_captcha_refresh@3x.png in Resources */,
+				7922338F1EBAF9F500955F90 /* Lifebox-1@3x.png in Resources */,
 				567408B11DFFC17E003DF541 /* overlay_wt_tr.png in Resources */,
 				79C7752D1E9623280008FB09 /* Button@2x.png in Resources */,
 				0589062619CC226D00A9E517 /* logout_icon@2x.png in Resources */,
@@ -6359,6 +6445,7 @@
 				051CB40719D2F71200E5FC88 /* nav_detail_icon@2x.png in Resources */,
 				05DEB1CE1A80EA28007793DD /* terms.html in Resources */,
 				792233551EB910FC00955F90 /* en1.6.mp4 in Resources */,
+				7922338C1EBAF9F500955F90 /* Lifebox-3.0 Eng@3x.png in Resources */,
 				94E549251CC6BA34003CB5DC /* icon_menu_bizeulasin@2x.png in Resources */,
 				94E5E6571E24F8CD008B0216 /* buttonbg_224_yellow.png in Resources */,
 				533215121DEF439B00FE7289 /* icon_bottom_indir@2x.png in Resources */,
@@ -6746,6 +6833,7 @@
 				070234951EA08E1400716C27 /* SyncDBUtils.m in Sources */,
 				942FD7D91D751EFB00EA81D3 /* MainSearchTextfield.m in Sources */,
 				05E8112F19DF09DB0063F99A /* AlbumListModalController.m in Sources */,
+				792233A41EBB27F600955F90 /* InteractiveViewController.m in Sources */,
 				056F29E41C4FD68D001DD486 /* UpdateEmailDao.m in Sources */,
 				563A98B81E52ECF800D24B7E /* ADJLogger.m in Sources */,
 				051E1E5419CAC90700FD1E03 /* AFImageRequestOperation.m in Sources */,
@@ -6785,6 +6873,7 @@
 				051CB39219D2DD7C00E5FC88 /* PhotoListController.m in Sources */,
 				05E0705F1AB977850038BE68 /* ConstantsDao.m in Sources */,
 				05AF7C981A1CA22200F5011A /* RecentActivityHeaderView.m in Sources */,
+				792233951EBB020000955F90 /* ContactSyncTutorialView.m in Sources */,
 				94FAE0C31D2F2B4300BC9F77 /* VideofyFinalInfoController.m in Sources */,
 				052644B219D5A2A600B63759 /* SettingsUploadController.m in Sources */,
 				05C6C7011B3C123C00CB6CE5 /* TTTAttributedLabel.m in Sources */,
@@ -6812,6 +6901,7 @@
 				058B328B1A14ABBE00A291C4 /* DeleteAlbumsDao.m in Sources */,
 				941496641CCF5E51008A8D0C /* GroupedPhotosCell.m in Sources */,
 				058219C51A384CC6001FA679 /* SearchMoreModalController.m in Sources */,
+				7922339B1EBB18AB00955F90 /* ContactSyncSplashController.m in Sources */,
 				052644AD19D5A2A600B63759 /* SettingsContactsController.m in Sources */,
 				94B3BE331D847F560086D05E /* GroupedView.m in Sources */,
 				05C7CB6A1ABC91B200A7BF8E /* MetaFileSummary.m in Sources */,
