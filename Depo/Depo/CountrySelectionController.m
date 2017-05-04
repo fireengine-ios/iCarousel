@@ -60,6 +60,8 @@ static const CGFloat topOffset = 40;
                                                                          action:@selector(back:)];
             
             barButton.tintColor = [UIColor whiteColor];
+            barButton.isAccessibilityElement = YES;
+            barButton.accessibilityIdentifier = @"cancelButtonCountrySelectionController";
             [self.navigationItem setRightBarButtonItem:barButton];
             [self.tableView reloadData];
         });
