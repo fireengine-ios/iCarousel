@@ -14,7 +14,7 @@
 #import "ContactSyncView.h"
 #import "ContactSyncResultView.h"
 
-@interface ContactSyncController : MyViewController <ProcessFooterDelegate, XYPieChartDelegate, XYPieChartDataSource, ContactSyncViewDelegate>
+@interface ContactSyncController : MyViewController <ProcessFooterDelegate, XYPieChartDelegate, XYPieChartDataSource, ContactSyncViewDelegate, ContactSyncResultViewDelegate>
 
 @property (nonatomic) EnableOption oldSyncOption;
 @property (nonatomic, strong) SimpleButton *backupButton;

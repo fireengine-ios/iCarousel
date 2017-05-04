@@ -11,11 +11,15 @@
 #import "CustomLabel.h"
 #import "Util.h"
 #import "AppConstants.h"
+#import "SimpleButton.h"
 
 @implementation ContactSyncResultView
 
 - (id) initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
+        
+        float buttonHeight = IS_IPAD ? 54 : IS_IPHONE_6P_OR_HIGHER ? 44 : 36;
+        float buttonWidth = IS_IPAD ? 250 : IS_IPHONE_6P_OR_HIGHER ? 150 : 120;
         
         UIView *rootContainer = [[UIView alloc] init];
         [self addSubview:rootContainer];
@@ -46,8 +50,30 @@
         [self alignViewToCenter:container toView:lineImageView onCoordinate:@"y"];
         
         
+        
         [self wrapSubviews:rootContainer];
         [self alignViewToCenter:rootContainer toView:self onCoordinate:@"x"];
+        
+        SimpleButton *continueButton = [[SimpleButton alloc] initWithFrame:CGRectMake((frame.size.width - buttonWidth)/2,
+                                                       (rootContainer.frame.origin.y + rootContainer.frame.size.height) + (IS_IPAD ? 100 : IS_IPHONE_6P_OR_HIGHER ? 60 : 30),
+                                                       buttonWidth,
+                                                       buttonHeight)
+                                  withTitle:[NSLocalizedString(@"ContactContinueButtonTitle", @"") uppercaseString]
+                             withTitleColor:[Util UIColorForHexColor:@"363e4f"]
+                              withTitleFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:IS_IPHONE_6P_OR_HIGHER ? 16 : 14]
+                            withBorderColor:[Util UIColorForHexColor:@"ffe000"]
+                                withBgColor:[Util UIColorForHexColor:@"ffe000"]
+                           withCornerRadius:5
+                                 adjustFont:YES];
+        [continueButton addTarget:self action:@selector(continueButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+        continueButton.isAccessibilityElement = YES;
+        continueButton.accessibilityIdentifier = @"ContactContinueButton";
+        [self addSubview:continueButton];
+        [self bringSubviewToFront:continueButton];
+        [self setUserInteractionEnabled:YES];
+        
+        
+
         
     }
     return self;
@@ -76,6 +102,10 @@
         tempCenter.y = secondView.center.y;
     }
     view.center = tempCenter;
+}
+
+- (void) continueButtonClicked {
+    [self.delegate continueButtonClicked];
 }
 
 @end

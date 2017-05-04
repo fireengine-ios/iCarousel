@@ -77,7 +77,6 @@
         }
         
         self.topContainer = [[UIView alloc] initWithFrame:CGRectMake(20, IS_IPHONE_6P_OR_HIGHER ? 40 : 20, self.view.frame.size.width-40, (self.view.frame.size.height/5)*(IS_IPAD ? 3.5 : 2.5))];
-//        self.topContainer.backgroundColor = [UIColor yellowColor];
         [self.view addSubview:self.topContainer];
         
         // Contact Progress View
@@ -89,6 +88,7 @@
         
         // Contact Sync Result View
         syncResultView = [[ContactSyncResultView alloc] initWithFrame:CGRectMake(0, 20, self.topContainer.frame.size.width, self.topContainer.frame.size.height)];
+        syncResultView.delegate = self;
         
         progressView.pieChart.dataSource = self;
         progressView.pieChart.delegate = self;
@@ -571,6 +571,10 @@
                          
                      }];
     
+}
+
+- (void) continueButtonClicked {
+    [self changeViews:syncResultView nextView:syncView];
 }
 
 - (void) reloadProgressBar:(CGFloat) value {

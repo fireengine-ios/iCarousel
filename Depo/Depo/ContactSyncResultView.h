@@ -9,10 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "CustomLabel.h"
 
+@protocol ContactSyncResultViewDelegate <NSObject>
+
+- (void) continueButtonClicked;
+
+@end
+
 @interface ContactSyncResultView : UIView
 
 - (id) initWithFrame:(CGRect)frame;
 
+@property (nonatomic, strong) id<ContactSyncResultViewDelegate> delegate;
 @property (nonatomic,strong) CustomLabel *totalCountLabel;
 @property (nonatomic,strong) CustomLabel *label;
 
