@@ -375,8 +375,10 @@
         if([(NSObject*)item isKindOfClass:[UIImage class]]) {
             sharedImage = item;
         }
-        UIImage *newImage = [ImageScale imageWithImage:sharedImage
-                                          scaledToSize:CGSizeMake(100, 100)];
+//        UIImage *newImage = [ImageScale imageWithImage:sharedImage
+//                                          scaledToSize:CGSizeMake(100, 100)];
+        
+        UIImage *newImage = [self imageResize:sharedImage andResizeTo:CGSizeMake(100, 100)];
         
         [self.originalImagesForCV replaceObjectAtIndex:indexPath.row
                                             withObject:newImage];
@@ -694,6 +696,17 @@
     CGImageRelease(img);
     
     return image;
+}
+
+- (UIImage *)imageResize :(UIImage*)img andResizeTo:(CGSize)newSize {
+    CGFloat scale = [[UIScreen mainScreen]scale];
+    /*You can remove the below comment if you dont want to scale the image in retina   device .Dont forget to comment UIGraphicsBeginImageContextWithOptions*/
+    //UIGraphicsBeginImageContext(newSize);
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, scale);
+    [img drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
 }
 
 @end
