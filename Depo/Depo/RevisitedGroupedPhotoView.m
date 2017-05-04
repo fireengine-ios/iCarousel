@@ -1270,7 +1270,8 @@
         if(self.groups.count > theIndexPath.section) {
             FileInfoGroup *sectionGroup = [self.groups objectAtIndex:theIndexPath.section];
             collFooterView.checkDelegate = self;
-            [collFooterView loadSectionWithTitle:sectionGroup.customTitle isSelectible:isSelectible isSelected:[selectedSectionNames containsObject:sectionGroup.customTitle]];
+//            [collFooterView loadSectionWithTitle:sectionGroup.customTitle isSelectible:isSelectible isSelected:[selectedSectionNames containsObject:sectionGroup.customTitle]];
+            [collFooterView loadSectionWithTitle:sectionGroup.customTitle isSelectible:NO isSelected:[selectedSectionNames containsObject:sectionGroup.customTitle]];
             return collFooterView;
         }
         collFooterView.frame = CGRectZero;
