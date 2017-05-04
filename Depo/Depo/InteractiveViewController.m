@@ -47,8 +47,16 @@
     case DismissDirectionTop:
             self.topConstraint.constant = -self.view.bounds.size.height;
             break;
-    default:
+    case DismissDirectionBottom:
             self.topConstraint.constant = self.view.bounds.size.height;
+            break;
+    case DismissDirectionLeft:
+            self.leftConstraint.constant = -self.view.bounds.size.width;
+            break;
+    case DismissDirectionRight:
+            self.leftConstraint.constant = self.view.bounds.size.width;
+            break;
+    default:
             break;
     }
     
@@ -93,16 +101,17 @@
     self.topConstraint = [vc.view.topAnchor constraintEqualToAnchor:self.window.topAnchor];
     NSLayoutConstraint *heightAnchor = [vc.view.heightAnchor
                                         constraintEqualToConstant:self.window.bounds.size.height];
-    NSLayoutConstraint *leftAnchor = [vc.view.leadingAnchor
+    self.leftConstraint = [vc.view.leadingAnchor
                                       constraintEqualToAnchor:self.window.leadingAnchor];
     NSLayoutConstraint *rightAnchor = [vc.view.trailingAnchor
                                        constraintEqualToAnchor:self.window.trailingAnchor];
     
-    [self.window addConstraints:@[self.topConstraint, heightAnchor, leftAnchor, rightAnchor]];
+    [self.window addConstraints:@[self.topConstraint, heightAnchor, self.leftConstraint, rightAnchor]];
 }
 
-- (void)didPan:(CGFloat)y {
+- (void)didPan:(CGFloat)x yMovement:(CGFloat)y {
     self.topConstraint.constant = y;
+    self.leftConstraint.constant = x;
     if (self.maskType == InteractiveMaskTypeBlack && self.window != nil) {
         CGFloat alpha = fabs(self.view.bounds.size.height/2 - self.view.center.y) /
         (self.view.bounds.size.height/2);
@@ -112,6 +121,7 @@
 
 - (void)resetWindow {
     self.topConstraint.constant = 0;
+    self.leftConstraint.constant = 0;
     
     [UIView animateWithDuration:0.25 animations:^{
         if (self.maskType == InteractiveMaskTypeBlack) {
@@ -128,15 +138,22 @@
     
     if (sender == self.intractiveGesture) {
         CGFloat yMovement = [sender translationInView:self.view].y;
+        CGFloat xMovement = [sender translationInView:self.view].x;
         
         if (!self.directionLock) {
-            [self didPan:yMovement];
+            [self didPan:xMovement yMovement:yMovement];
         }
         else if (self.allowedDismissDirection == DismissDirectionTop && yMovement < 0 ){
-            [self didPan:yMovement];
+            [self didPan:xMovement yMovement:yMovement];
         }
         else if (self.allowedDismissDirection == DismissDirectionBottom && yMovement > 0) {
-            [self didPan:yMovement];
+            [self didPan:xMovement yMovement:yMovement];
+        }
+        else if (self.allowedDismissDirection == DismissDirectionLeft && xMovement < 0 ){
+            [self didPan:xMovement yMovement:yMovement];
+        }
+        else if (self.allowedDismissDirection == DismissDirectionRight && xMovement > 0) {
+            [self didPan:xMovement yMovement:yMovement];
         }
         
         if (sender.state == UIGestureRecognizerStateEnded) {
@@ -147,6 +164,12 @@
             }
             else if (velocity.y > 100  && self.allowedDismissDirection != DismissDirectionTop) {
                 [self dismissWindowDirection:DismissDirectionBottom completion:nil];
+            }
+            else if (velocity.x < -100 && self.allowedDismissDirection != DismissDirectionLeft) {
+                [self dismissWindowDirection:DismissDirectionLeft completion:nil];
+            }
+            else if (velocity.x > 100  && self.allowedDismissDirection != DismissDirectionRight) {
+                [self dismissWindowDirection:DismissDirectionRight completion:nil];
             } else {
                 [self resetWindow];
             }

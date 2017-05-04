@@ -10,6 +10,8 @@
 typedef NS_ENUM(NSUInteger, DismissDirection) {
     DismissDirectionBottom,
     DismissDirectionTop,
+    DismissDirectionLeft,
+    DismissDirectionRight,
     DismissDirectionBoth,
     DismissDirectionNone,
 };
@@ -27,7 +29,9 @@ typedef NS_ENUM(NSUInteger, InteractiveMaskType) {
 
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) NSLayoutConstraint *topConstraint;
+@property (nonatomic, strong) NSLayoutConstraint *leftConstraint;
 @property (nonatomic, strong) UIPanGestureRecognizer *intractiveGesture;
 
 - (void)showInteractive;
+- (void)dismissWindowDirection:(DismissDirection)direction completion:(void (^)(void))completion;
 @end

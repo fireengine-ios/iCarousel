@@ -35,7 +35,6 @@
     
     // common frames and sizes
     CGSize scrollSize = self.mainScroll.frame.size;
-    
     NSString *locale = [[Util readLocaleCode] isEqualToString:@"tr"] ? @"tr" : @"en";
     
     // page 1
@@ -96,6 +95,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+
 #pragma mark - ScrollView Delegate Functions
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -103,10 +103,8 @@
     // change bullets
     self.pageControl.currentPage = page;
     
-    if (page == 4) {
-        self.allowedDismissDirection = DismissDirectionBottom;
-    } else {
-        self.allowedDismissDirection = DismissDirectionNone;
+    if (self.mainScroll.contentOffset.x > (self.mainScroll.frame.size.width * 4) + 40) {
+        [self dismissWindowDirection:DismissDirectionLeft completion:nil];
     }
 }
 
