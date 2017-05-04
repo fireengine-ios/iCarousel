@@ -1028,15 +1028,15 @@
         //[APPDELEGATE.base triggerShareForFileObjects:@[shareObject]];
     } else {
         
-        BOOL folderSelected = NO;
+        BOOL showSharePopup = YES;
         
         for (MetaFile *file in self.selectedFiles) {
-            if (file.folder) {
-                folderSelected = YES;
+            if (file.contentType == ContentTypeDoc || file.contentType == ContentTypeMusic || file.contentType == ContentTypeOther || file.contentType == ContentTypeFolder) {
+                showSharePopup = NO;
                 break;
             }
         }
-        if (folderSelected) {
+        if (!showSharePopup) {
             [self triggerShareForFiles:selectedFileList];
         } else {
             self.fileUUIDToShare = selectedFileList;
