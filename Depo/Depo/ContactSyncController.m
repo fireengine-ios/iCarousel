@@ -27,6 +27,7 @@
 #import "ContactSyncFooterElement.h"
 #import <QuartzCore/QuartzCore.h>
 #import <UIKit/UIKit.h>
+#import "ContactSyncSplashController.h"
 
 #define tableViewHeaderHeight 40.0f
 #define tableViewRowHeight 40.0f
@@ -450,6 +451,17 @@
         return;
     }
     [self.topContainer addSubview:syncView];
+    
+    NSString *key = [NSString stringWithFormat:@"contact-sync-splash-%@", APPDELEGATE.session.user.phoneNumber];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:key] == NO) {
+        IGLog(@"Contact Sync Splash page presented");
+        ContactSyncSplashController *splash = [[ContactSyncSplashController alloc] init];
+        splash.allowedDismissDirection = DismissDirectionNone;
+        splash.directionLock = YES;
+        [splash showInteractive];
+        
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:key];
+    }
 }
 
 - (void) viewWillDisappear:(BOOL)animated {

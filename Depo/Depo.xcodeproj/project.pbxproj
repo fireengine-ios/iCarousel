@@ -1007,6 +1007,8 @@
 		792233911EBAF9F500955F90 /* Lifebox-3.0@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 792233851EBAF9F500955F90 /* Lifebox-3.0@3x.png */; };
 		792233921EBAF9F500955F90 /* Lifebox-3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 792233861EBAF9F500955F90 /* Lifebox-3@3x.png */; };
 		792233951EBB020000955F90 /* ContactSyncTutorialView.m in Sources */ = {isa = PBXBuildFile; fileRef = 792233941EBB020000955F90 /* ContactSyncTutorialView.m */; };
+		7922339B1EBB18AB00955F90 /* ContactSyncSplashController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7922339A1EBB18AB00955F90 /* ContactSyncSplashController.m */; };
+		792233A41EBB27F600955F90 /* InteractiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 792233A31EBB27F600955F90 /* InteractiveViewController.m */; };
 		79BDD58D1E8268C800765599 /* signup_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BDD58A1E8268C800765599 /* signup_button.png */; };
 		79BDD58E1E8268C800765599 /* signup_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BDD58B1E8268C800765599 /* signup_button@2x.png */; };
 		79BDD58F1E8268C800765599 /* signup_button@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79BDD58C1E8268C800765599 /* signup_button@3x.png */; };
@@ -2768,6 +2770,10 @@
 		792233861EBAF9F500955F90 /* Lifebox-3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Lifebox-3@3x.png"; sourceTree = "<group>"; };
 		792233931EBB020000955F90 /* ContactSyncTutorialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactSyncTutorialView.h; sourceTree = "<group>"; };
 		792233941EBB020000955F90 /* ContactSyncTutorialView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactSyncTutorialView.m; sourceTree = "<group>"; };
+		792233991EBB18AB00955F90 /* ContactSyncSplashController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactSyncSplashController.h; sourceTree = "<group>"; };
+		7922339A1EBB18AB00955F90 /* ContactSyncSplashController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactSyncSplashController.m; sourceTree = "<group>"; };
+		792233A21EBB27F600955F90 /* InteractiveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteractiveViewController.h; sourceTree = "<group>"; };
+		792233A31EBB27F600955F90 /* InteractiveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InteractiveViewController.m; sourceTree = "<group>"; };
 		79BDD58A1E8268C800765599 /* signup_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = signup_button.png; path = "images/login-signup/signup_button.png"; sourceTree = "<group>"; };
 		79BDD58B1E8268C800765599 /* signup_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "signup_button@2x.png"; path = "images/login-signup/signup_button@2x.png"; sourceTree = "<group>"; };
 		79BDD58C1E8268C800765599 /* signup_button@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "signup_button@3x.png"; path = "images/login-signup/signup_button@3x.png"; sourceTree = "<group>"; };
@@ -3471,6 +3477,8 @@
 				05144B5D1A090A5900B2A414 /* DocListController.m */,
 				059C046A1A85256B007B18BE /* ContactSyncController.h */,
 				059C046B1A85256B007B18BE /* ContactSyncController.m */,
+				792233991EBB18AB00955F90 /* ContactSyncSplashController.h */,
+				7922339A1EBB18AB00955F90 /* ContactSyncSplashController.m */,
 				053D0ED619DAC959006A13E0 /* MyModalController.h */,
 				053D0ED719DAC959006A13E0 /* MyModalController.m */,
 				053EC44F19DA99C4000C2B77 /* NewFolderModalController.h */,
@@ -4149,6 +4157,8 @@
 				056E2A121A28BC1E00C24904 /* XYPieChart */,
 				052A221D19F67FB5000C3C75 /* MBProgressHUD.h */,
 				052A221E19F67FB5000C3C75 /* MBProgressHUD.m */,
+				792233A21EBB27F600955F90 /* InteractiveViewController.h */,
+				792233A31EBB27F600955F90 /* InteractiveViewController.m */,
 				67AC3F741E71231E00DDC28C /* SDWebImage */,
 				051E1E5B19CAC91300FD1E03 /* SBJSON+ASI */,
 				051E1E3B19CAC8F800FD1E03 /* AFNetworking */,
@@ -6823,6 +6833,7 @@
 				070234951EA08E1400716C27 /* SyncDBUtils.m in Sources */,
 				942FD7D91D751EFB00EA81D3 /* MainSearchTextfield.m in Sources */,
 				05E8112F19DF09DB0063F99A /* AlbumListModalController.m in Sources */,
+				792233A41EBB27F600955F90 /* InteractiveViewController.m in Sources */,
 				056F29E41C4FD68D001DD486 /* UpdateEmailDao.m in Sources */,
 				563A98B81E52ECF800D24B7E /* ADJLogger.m in Sources */,
 				051E1E5419CAC90700FD1E03 /* AFImageRequestOperation.m in Sources */,
@@ -6890,6 +6901,7 @@
 				058B328B1A14ABBE00A291C4 /* DeleteAlbumsDao.m in Sources */,
 				941496641CCF5E51008A8D0C /* GroupedPhotosCell.m in Sources */,
 				058219C51A384CC6001FA679 /* SearchMoreModalController.m in Sources */,
+				7922339B1EBB18AB00955F90 /* ContactSyncSplashController.m in Sources */,
 				052644AD19D5A2A600B63759 /* SettingsContactsController.m in Sources */,
 				94B3BE331D847F560086D05E /* GroupedView.m in Sources */,
 				05C7CB6A1ABC91B200A7BF8E /* MetaFileSummary.m in Sources */,

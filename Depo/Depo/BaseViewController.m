@@ -57,6 +57,7 @@
 #import "CustomInfoWithIconView.h"
 #import "SelectiblePhotoListModalController.h"
 #import "Story.h"
+#import "ContactSyncTutorialView.h"
 
 @interface BaseViewController ()
 
@@ -255,6 +256,20 @@
                      completion:^(BOOL finished) {
                          menuOpen = !menuOpen;
                          transparentView.hidden = !menuOpen;
+                         
+                         // contact sync walkthrough
+                         NSString *key = [NSString stringWithFormat:@"contact-sync-walkthrough-%@", APPDELEGATE.session.user.phoneNumber];
+                         if ([[NSUserDefaults standardUserDefaults] boolForKey:key] == NO) {
+                             IGLog(@"Contact Sync tutorial page presented");
+                             
+                             ContactSyncTutorialView *tutorialView = [[ContactSyncTutorialView alloc]
+                                                                      initWithFrame:CGRectMake(0,
+                                                                                               0,
+                                                                                               APPDELEGATE.window.frame.size.width,
+                                                                                               APPDELEGATE.window.frame.size.height)];
+                             [APPDELEGATE.window addSubview:tutorialView];
+                             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:key];
+                         }
                          
                          // Sol menuden baski al kaldirildigi icin walkthrough da kaldirildi.
                          

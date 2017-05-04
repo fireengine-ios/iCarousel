@@ -17,7 +17,6 @@
 #import "MapUtil.h"
 #import "CurioSDK.h"
 #import "MPush.h"
-#import "ContactSyncTutorialView.h"
 
 @interface MyViewController ()
 
@@ -102,22 +101,6 @@
 
 - (void) menuClicked {
     [myDelegate shouldToggleMenu];
-    
-    // menu acilma animasyonundan sonra goster
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        // contact sync walkthrough yapildi mi
-        NSString *key = [NSString stringWithFormat:@"contact-sync-walkthrough-%@", APPDELEGATE.session.user.phoneNumber];
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:key] == NO) {
-            NSLog(@"Show contact sync walkthrough");
-            
-            ContactSyncTutorialView *tutorialView = [[ContactSyncTutorialView alloc] initWithFrame:CGRectMake(0,
-                                                                                                      0,
-                                                                                                      APPDELEGATE.window.frame.size.width,
-                                                                                                      APPDELEGATE.window.frame.size.height)];
-            [APPDELEGATE.window addSubview:tutorialView];
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:key];
-        }
-    });
 }
 
 - (void) showErrorAlertWithMessage:(NSString *) errMessage {
