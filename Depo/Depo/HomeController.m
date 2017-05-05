@@ -33,7 +33,7 @@
 #import "MPush.h"
 #import "GroupedPhotosAndVideosController.h"
 #import "RevisitedGroupedPhotosController.h"
-#import "QuotaInfoView.h"
+#import "QuotaInfoCell.h"
 
 #include <math.h>
 
@@ -57,8 +57,8 @@
 @synthesize advertisementView;
 @synthesize packageContainer;
 @synthesize quotaContainer;
-@synthesize packageInfoView;
-@synthesize quotaInfoView;
+//@synthesize packageInfoView;
+//@synthesize quotaInfoView;
 
 - (id)init {
     self = [super init];
@@ -95,6 +95,8 @@
         [self.view addSubview:footer];
          */
         
+        
+        
         [usageDao requestUsageInfo];
         [self showLoading];
         
@@ -121,18 +123,11 @@
     float remainingStorage = APPDELEGATE.session.usage.totalStorage - APPDELEGATE.session.usage.usedStorage;
     
     
-    [packageInfoView removeFromSuperview];
-    [quotaInfoView removeFromSuperview];
-    [self drawPackageSection:APPDELEGATE.session.usage];
+//    [packageInfoView removeFromSuperview];
+//    [quotaInfoView removeFromSuperview];
+//    [self drawPackageSection:APPDELEGATE.session.usage];
     
-    moreStorageButton = [[SimpleButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 150)/2, quotaInfoView.frame.origin.y + quotaInfoView.frame.size.height + (IS_IPAD ? 50 : IS_IPHONE_5 ? 20 : 20), 150, 44) withTitle:NSLocalizedString(@"GetMoreStorageButtonTitle", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:22];
-    moreStorageButton.hidden = YES;
-    [moreStorageButton addTarget:self action:@selector(triggerStoragePage) forControlEvents:UIControlEventTouchUpInside];
-    moreStorageButton.isAccessibilityElement = YES;
-    moreStorageButton.accessibilityIdentifier = @"moreStorageButtonHome";
-    [self.view addSubview:moreStorageButton];
     
-
     self.usages = [NSMutableArray arrayWithCapacity:5];
     [usages addObject:[NSNumber numberWithLongLong:(APPDELEGATE.session.usage.imageUsage + APPDELEGATE.session.usage.videoUsage)]];
     [usages addObject:[NSNumber numberWithLongLong:APPDELEGATE.session.usage.musicUsage]];
@@ -140,29 +135,28 @@
     [usages addObject:[NSNumber numberWithLongLong:0ll]];
     [usages addObject:[NSNumber numberWithLongLong:APPDELEGATE.session.usage.remainingStorage]];
     
-    UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(20, moreStorageButton.frame.origin.y + moreStorageButton.frame.size.height + (IS_IPAD ? 50 : IS_IPHONE_4_OR_LESS ? 10: 20), self.view.frame.size.width - 40, 1)];
-    separator.backgroundColor = [Util UIColorForHexColor:@"ebebed"];
-    separator.isAccessibilityElement = YES;
-    separator.accessibilityIdentifier = @"separatorHome";
-    [self.view addSubview:separator];
     
-    CGRect musicRect = CGRectMake(0, separator.frame.origin.y + (IS_IPHONE_4_OR_LESS ? 11 : 41), 75, 60);
+    
+    CGRect musicRect = CGRectMake(0, 0, 75, 60);
     musicRect.origin.x = self.view.center.x - musicRect.size.width/2;
+    musicRect.origin.y = (self.view.frame.size.height - musicRect.size.height) - 16;
     
-    CGRect imageRect = CGRectMake(0, separator.frame.origin.y + (IS_IPHONE_4_OR_LESS ? 11 : 41), 75, 60);
-    imageRect.origin.x = musicRect.origin.x - 20 - musicRect.size.width;
+    CGRect imageRect = CGRectMake(0, 0, 75, 60);
+    imageRect.origin.x = musicRect.origin.x - 40 - musicRect.size.width;
+    imageRect.origin.y = (self.view.frame.size.height - imageRect.size.height) - 16;
     
-    CGRect otherRect = CGRectMake(0, separator.frame.origin.y + (IS_IPHONE_4_OR_LESS ? 11 : 41), 75, 60);
-    otherRect.origin.x = musicRect.origin.x + 20 + musicRect.size.width;
+    CGRect otherRect = CGRectMake(0, 0, 75, 60);
+    otherRect.origin.x = musicRect.origin.x + 40 + musicRect.size.width;
+    otherRect.origin.y = (self.view.frame.size.height - otherRect.size.height) - 16;
 
-    if(IS_IPAD) {
-        float leftMarginForIpad = 100;
-        float buttonSliceWidth = (self.view.frame.size.width - (leftMarginForIpad*2))/3;
-        
-        imageRect = CGRectMake(leftMarginForIpad, separator.frame.origin.y + 51, buttonSliceWidth, 100);
-        musicRect = CGRectMake(self.view.frame.size.width/2 - buttonSliceWidth/2, separator.frame.origin.y + 51, buttonSliceWidth, 100);
-        otherRect = CGRectMake(self.view.frame.size.width - leftMarginForIpad - buttonSliceWidth, separator.frame.origin.y + 51, buttonSliceWidth, 100);
-    }
+//    if(IS_IPAD) {
+//        float leftMarginForIpad = 100;
+//        float buttonSliceWidth = (self.view.frame.size.width - (leftMarginForIpad*2))/3;
+//        
+//        imageRect = CGRectMake(leftMarginForIpad, separator.frame.origin.y + 51, buttonSliceWidth, 100);
+//        musicRect = CGRectMake(self.view.frame.size.width/2 - buttonSliceWidth/2, separator.frame.origin.y + 51, buttonSliceWidth, 100);
+//        otherRect = CGRectMake(self.view.frame.size.width - leftMarginForIpad - buttonSliceWidth, separator.frame.origin.y + 51, buttonSliceWidth, 100);
+//    }
     
     imageButton = [[UsageButton alloc] initWithFrame:imageRect withUsage:UsageTypeImage withStorage:(APPDELEGATE.session.usage.imageUsage + APPDELEGATE.session.usage.videoUsage) withFileCount:(APPDELEGATE.session.usage.imageCount + APPDELEGATE.session.usage.videoCount)];
     [imageButton addTarget:self action:@selector(triggerPhotosPage) forControlEvents:UIControlEventTouchUpInside];
@@ -181,6 +175,21 @@
     otherButton.isAccessibilityElement = YES;
     otherButton.accessibilityIdentifier = @"otherButtonHome";
     [self.view addSubview:otherButton];
+    
+    UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(20, musicButton.frame.origin.y - (IS_IPHONE_4_OR_LESS ? 11: 41), self.view.frame.size.width - 40, 1)];
+    separator.backgroundColor = [Util UIColorForHexColor:@"ebebed"];
+    separator.isAccessibilityElement = YES;
+    separator.accessibilityIdentifier = @"separatorHome";
+    [self.view addSubview:separator];
+    
+    moreStorageButton = [[SimpleButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 150)/2, separator.frame.origin.y - (IS_IPAD ? 50 : IS_IPHONE_4_OR_LESS ? 10: 20) - 44, 150, 44) withTitle:NSLocalizedString(@"GetMoreStorageButtonTitle", @"") withTitleColor:[Util UIColorForHexColor:@"363e4f"] withTitleFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withBorderColor:[Util UIColorForHexColor:@"ffe000"] withBgColor:[Util UIColorForHexColor:@"ffe000"] withCornerRadius:22];
+    moreStorageButton.hidden = YES;
+    [moreStorageButton addTarget:self action:@selector(triggerStoragePage) forControlEvents:UIControlEventTouchUpInside];
+    moreStorageButton.isAccessibilityElement = YES;
+    moreStorageButton.accessibilityIdentifier = @"moreStorageButtonHome";
+    [self.view addSubview:moreStorageButton];
+    
+    tableViewHeight = moreStorageButton.frame.origin.y - 20;
     
     /* contacts commented out
     contactButton = [[UsageButton alloc] initWithFrame:CGRectMake(230, separator.frame.origin.y + (IS_IPHONE_5 ? 41 : 11), 75, 60) withUsage:UsageTypeContact withCountValue:@""];
@@ -211,6 +220,15 @@
         }
     }
 
+    packagesArray = [[NSMutableArray alloc] init];
+    
+    for (InternetDataUsage *idu in _usage.internetDataUsageArray) {
+        [packagesArray addObject:idu];
+    }
+    [packagesArray addObject:_usage];
+    
+    [self drawTableView];
+    [self.packagesTable reloadData];
     
 // contacts commented out //    [contactCountDao requestContactCount];
 }
@@ -539,23 +557,106 @@
     accountDao = nil;
 }
 
-- (void) drawPackageSection:(Usage *) packageUsage {
+//- (void) drawPackageSection:(Usage *) packageUsage {
+//    
+//    UIView *separator;
+//    
+//    if(packageUsage.internetDataUsage != nil && ![packageUsage.internetDataUsage isKindOfClass:[NSNull class]]) {
+//        packageInfoView = [[QuotaInfoView alloc] initWithFrame:CGRectMake(20, 30, self.view.frame.size.width - 40, 85) withTitle:@"4.5G Lifebox Standart Internet" withUsage:packageUsage withControllerView:self.view showInternetData:YES];
+//        [self.view addSubview:packageInfoView];
+//        
+//        //Container Separator
+//        
+//        separator = [[UIView alloc] initWithFrame:CGRectMake(20, packageInfoView.frame.origin.y + packageInfoView.frame.size.height + (IS_IPAD ? 50 : IS_IPHONE_4_OR_LESS ? 10: 32), self.view.frame.size.width - 40, 1)];
+//        separator.backgroundColor = [Util UIColorForHexColor:@"ebebed"];
+//        [self.view addSubview:separator];
+//    }
+//    
+//    quotaInfoView = [[QuotaInfoView alloc] initWithFrame:CGRectMake(20, separator.frame.origin.y + 30, self.view.frame.size.width - 40, 85) withTitle:NSLocalizedString(@"QuotaInfoTitle", @"") withUsage:packageUsage withControllerView:self.view showInternetData:NO];
+//    [self.view addSubview:quotaInfoView];
+//}
+
+- (void) drawTableView {
+    self.packagesTable = [[UITableView alloc] initWithFrame:CGRectMake(20, 0, self.view.frame.size.width - 40, tableViewHeight)];
+    self.packagesTable.delegate = self;
+    self.packagesTable.dataSource = self;
+    self.packagesTable.backgroundColor = [UIColor clearColor];
+    self.packagesTable.backgroundView = nil;
+    self.packagesTable.bounces = NO;
+    self.packagesTable.allowsSelection = NO;
+    [self.packagesTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    [self.view addSubview:self.packagesTable];
+}
+
+#pragma mark TableView Delegate Methods
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return packagesArray.count;
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    UIView *separator;
+    return 1;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    if(packageUsage.internetDataUsage != nil && ![packageUsage.internetDataUsage isKindOfClass:[NSNull class]]) {
-        packageInfoView = [[QuotaInfoView alloc] initWithFrame:CGRectMake(20, 30, self.view.frame.size.width - 40, 85) withTitle:@"4.5G Lifebox Standart Internet" withUsage:packageUsage withControllerView:self.view showInternetData:YES];
-        [self.view addSubview:packageInfoView];
-        
-        //Container Separator
-        
-        separator = [[UIView alloc] initWithFrame:CGRectMake(20, packageInfoView.frame.origin.y + packageInfoView.frame.size.height + (IS_IPAD ? 50 : IS_IPHONE_4_OR_LESS ? 10: 32), self.view.frame.size.width - 40, 1)];
+    if (packagesArray.count >= 3) {
+        return 20;
+    }
+    return 40;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    CGFloat headerHeight = [self tableView:tableView heightForHeaderInSection:indexPath.section];
+    
+    if (packagesArray.count == 4 || packagesArray.count == 5) {
+        return (tableViewHeight - (packagesArray.count * headerHeight)) / (packagesArray.count);
+    } else if (packagesArray.count > 5) {
+        return IS_IPHONE_5 ? 60 : IS_IPAD ? 120 : 100;
+    }
+    return IS_IPHONE_5 ? 60 : IS_IPAD ? 120 : 100;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    CGFloat headerHeight = [self tableView:tableView heightForHeaderInSection:section];
+    
+    UIView *v = [UIView new];
+    [v setBackgroundColor:[UIColor clearColor]];
+    
+    if (section != 0) {
+        UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(0, headerHeight/2, self.view.frame.size.width - 40, 1)];
         separator.backgroundColor = [Util UIColorForHexColor:@"ebebed"];
-        [self.view addSubview:separator];
+        [v addSubview:separator];
     }
     
-    quotaInfoView = [[QuotaInfoView alloc] initWithFrame:CGRectMake(20, separator.frame.origin.y + 30, self.view.frame.size.width - 40, 85) withTitle:NSLocalizedString(@"QuotaInfoTitle", @"") withUsage:packageUsage withControllerView:self.view showInternetData:NO];
-    [self.view addSubview:quotaInfoView];
+    return v;
 }
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSString *cellIdentifier = [NSString stringWithFormat:@"PACKAGE_CELL_%d", (int)indexPath.row];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    
+    CGRect frame = [tableView rectForRowAtIndexPath:indexPath];
+    
+    id package = [packagesArray objectAtIndex:indexPath.section];
+    
+    if (!cell) {
+        if ([package isKindOfClass:[Usage class]]) {
+            cell = [[QuotaInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withTitle:NSLocalizedString(@"QuotaInfoTitle", @"") withUsage:package withCellRect:frame showInternetData:NO];
+        }
+        else if ([package isKindOfClass:[InternetDataUsage class]]) {
+            cell = [[QuotaInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier withTitle:@"" withUsage:package withCellRect:frame showInternetData:YES];
+        }
+    }
+    
+    return cell;
+}
+
+
 
 @end

@@ -918,7 +918,7 @@
 		56A0DE3F1E5C28AA00553462 /* progress_fill_pattern@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56A0DE3D1E5C28AA00553462 /* progress_fill_pattern@2x.png */; };
 		56A0DE421E5C28C000553462 /* progress_bg_pattern@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56A0DE401E5C28BF00553462 /* progress_bg_pattern@3x.png */; };
 		56A0DE431E5C28C000553462 /* progress_fill_pattern@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56A0DE411E5C28C000553462 /* progress_fill_pattern@3x.png */; };
-		56A0DE471E5E239900553462 /* QuotaInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 56A0DE461E5E239900553462 /* QuotaInfoView.m */; };
+		56A0DE471E5E239900553462 /* QuotaInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 56A0DE461E5E239900553462 /* QuotaInfoCell.m */; };
 		56A0DE4E1E6445D800553462 /* InternetDataUsage.m in Sources */ = {isa = PBXBuildFile; fileRef = 56A0DE4D1E6445D800553462 /* InternetDataUsage.m */; };
 		56B9E92A1DEC47A600DE1011 /* AppRater.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B9E9291DEC47A600DE1011 /* AppRater.m */; };
 		56B9E92D1DED752600DE1011 /* AppRater.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 56B9E92C1DED752600DE1011 /* AppRater.bundle */; };
@@ -2651,8 +2651,8 @@
 		56A0DE3D1E5C28AA00553462 /* progress_fill_pattern@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "progress_fill_pattern@2x.png"; sourceTree = "<group>"; };
 		56A0DE401E5C28BF00553462 /* progress_bg_pattern@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "progress_bg_pattern@3x.png"; sourceTree = "<group>"; };
 		56A0DE411E5C28C000553462 /* progress_fill_pattern@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "progress_fill_pattern@3x.png"; sourceTree = "<group>"; };
-		56A0DE461E5E239900553462 /* QuotaInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuotaInfoView.m; sourceTree = "<group>"; };
-		56A0DE481E5E23B400553462 /* QuotaInfoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuotaInfoView.h; sourceTree = "<group>"; };
+		56A0DE461E5E239900553462 /* QuotaInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuotaInfoCell.m; sourceTree = "<group>"; };
+		56A0DE481E5E23B400553462 /* QuotaInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuotaInfoCell.h; sourceTree = "<group>"; };
 		56A0DE491E600FCC00553462 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		56A0DE4A1E600FCD00553462 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		56A0DE4B1E600FCD00553462 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -3726,8 +3726,8 @@
 				94E5E6531E24F68C008B0216 /* RevisitedRawPhotoCollCell.m */,
 				94E5E6611E24FA2E008B0216 /* AutoSyncOffHeaderView.h */,
 				94E5E6621E24FA2E008B0216 /* AutoSyncOffHeaderView.m */,
-				56A0DE461E5E239900553462 /* QuotaInfoView.m */,
-				56A0DE481E5E23B400553462 /* QuotaInfoView.h */,
+				56A0DE461E5E239900553462 /* QuotaInfoCell.m */,
+				56A0DE481E5E23B400553462 /* QuotaInfoCell.h */,
 				63608CD71E5C1EEA00B8FC66 /* ZPhotoView.h */,
 				63608CD81E5C1EEA00B8FC66 /* ZPhotoView.m */,
 				6308E46B1E64C0E800BB32A0 /* VideoView.h */,
@@ -6619,7 +6619,7 @@
 				94BF90DD1D5A0E5E000078FD /* RevisitedAlbumListView.m in Sources */,
 				05B01D9C1AC2E2D000D5B827 /* NSDate+Utilities.m in Sources */,
 				94F130C31D2496C10086BDBB /* SettingsSocialController.m in Sources */,
-				56A0DE471E5E239900553462 /* QuotaInfoView.m in Sources */,
+				56A0DE471E5E239900553462 /* QuotaInfoCell.m in Sources */,
 				0526444819D546BB00B63759 /* MapUtil.m in Sources */,
 				070234911EA08E1400716C27 /* ContactUtil.m in Sources */,
 				0514A6291BF4D1030084E0AB /* BaseBgController.m in Sources */,
@@ -7311,8 +7311,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Depo/Depo.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Metin Güler (TVW6JVQFBH)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Metin Güler (TVW6JVQFBH)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Turan Yilmaz (4B9BE7D75V)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Turan Yilmaz (4B9BE7D75V)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -7613,8 +7613,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = DepoShareExtension/DepoShareExtension.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Metin Güler (TVW6JVQFBH)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Metin Güler (TVW6JVQFBH)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Turan Yilmaz (4B9BE7D75V)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Turan Yilmaz (4B9BE7D75V)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -7721,8 +7721,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Metin Güler (TVW6JVQFBH)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Metin Güler (TVW6JVQFBH)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Turan Yilmaz (4B9BE7D75V)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Turan Yilmaz (4B9BE7D75V)";
 				ENABLE_BITCODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -7826,8 +7826,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = "Lifebox Picker/Lifebox_Picker.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Metin Güler (TVW6JVQFBH)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Metin Güler (TVW6JVQFBH)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Turan Yilmaz (4B9BE7D75V)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Turan Yilmaz (4B9BE7D75V)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = PT569ZA878;
 				ENABLE_BITCODE = NO;

@@ -24,6 +24,6 @@
 @synthesize videoCount;
 @synthesize audioCount;
 @synthesize othersCount;
-@synthesize internetDataUsage;
+@synthesize internetDataUsageArray;
 
 @end
