@@ -55,18 +55,20 @@
 
 - (void) webViewDidStartLoad:(UIWebView *)webView {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    [self showLoading];
 }
 
 - (void) webViewDidFinishLoad:(UIWebView *)webView {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    [self hideLoading];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self hideLoading];
+    });
     
-    if ([contentView respondsToSelector:@selector(scrollView)]) {
-        UIScrollView *scroll = [contentView scrollView];
-        float zoom = contentView.bounds.size.width/scroll.contentSize.width;
-        [scroll setZoomScale:zoom animated:YES];
-    }
+    // yaziyi ekranin yarisina fit edecek sekilde problem yarattigi icin kaldirildi
+//    if ([contentView respondsToSelector:@selector(scrollView)]) {
+//        UIScrollView *scroll = [contentView scrollView];
+//        float zoom = contentView.bounds.size.width/scroll.contentSize.width;
+//        [scroll setZoomScale:zoom animated:YES];
+//    }
 }
 
 - (void) webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
