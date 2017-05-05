@@ -14,7 +14,7 @@
 @interface UploadQueue : NSObject <UploadManagerQueueDelegate, NSURLSessionDelegate, NSURLSessionTaskDelegate, TokenManagerWithinProcessDelegate, SyncManagerQueueCountDelegate>
 
 @property (nonatomic, strong) NSMutableSet *activeTaskIds;
-@property (nonatomic, strong) NSMutableArray *uploadManagers;
+@property (nonatomic, strong) NSArray <UploadManager *>*uploadManagers;
 @property (nonatomic, strong) NSURLSession *session;
 @property (nonatomic, copy) void (^backgroundSessionCompletionHandler)(void);
 

@@ -140,7 +140,7 @@
                     if(startIndex >= [group numberOfAssets]) {
                         [SyncUtil writeFirstTimeSyncFinishedFlag];
                     } else {
-                        int length = AUTO_SYNC_ASSET_COUNT;
+                        int length = AUTO_SYNC_ASSET_COUNT * 100;
                         if(startIndex + length > [group numberOfAssets]) {
                             length = (int)[group numberOfAssets] - startIndex;
                         }

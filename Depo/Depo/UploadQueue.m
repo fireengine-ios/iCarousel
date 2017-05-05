@@ -25,7 +25,6 @@
 @implementation UploadQueue
 
 @synthesize activeTaskIds;
-@synthesize uploadManagers;
 @synthesize session;
 
 + (UploadQueue *) sharedInstance {
@@ -77,10 +76,28 @@
     return self;
 }
 
+- (void)addObjectToUploadManagersArray:(UploadManager *)uploadManager {
+    NSMutableArray *mutableArray = [self.uploadManagers mutableCopy];
+    [mutableArray addObject:uploadManager];
+    self.uploadManagers = [mutableArray copy];
+}
+
+- (void)removeObjectFromUploadManagersArray:(UploadManager *)uploadManager {
+    NSMutableArray *mutableArray = [self.uploadManagers mutableCopy];
+    [mutableArray removeObject:uploadManager];
+    self.uploadManagers = [mutableArray copy];
+}
+
+- (void)removeObjectsFromUploadManagersArray:(NSArray *)uploadManagerArray {
+    NSMutableArray *mutableArray = [self.uploadManagers mutableCopy];
+    [mutableArray removeObjectsInArray:uploadManagerArray];
+    self.uploadManagers = [mutableArray copy];
+}
+
 - (NSArray *) uploadRefsForFolder:(NSString *) folderUuid {
     NSMutableArray *result = [[NSMutableArray alloc] init];
-    @synchronized(uploadManagers) {
-        for(UploadManager *manager in uploadManagers) {
+    @synchronized(self.uploadManagers) {
+        for(UploadManager *manager in self.uploadManagers) {
             if(!manager.uploadRef.hasFinished) {
                 if(manager.uploadRef.folderUuid == nil && folderUuid == nil) {
                     [result addObject:manager.uploadRef];
@@ -95,8 +112,8 @@
 
 - (NSArray *) uploadImageRefs {
     NSMutableArray *result = [[NSMutableArray alloc] init];
-    @synchronized(uploadManagers) {
-        for(UploadManager *manager in uploadManagers) {
+    @synchronized(self.uploadManagers) {
+        for(UploadManager *manager in self.uploadManagers) {
             if(!manager.uploadRef.hasFinished) {
                 if(manager.uploadRef.contentType == ContentTypePhoto || manager.uploadRef.contentType == ContentTypeVideo) {
                     [result addObject:manager.uploadRef];
@@ -109,8 +126,8 @@
 
 - (NSArray *) uploadRefHashes {
     NSMutableArray *result = [[NSMutableArray alloc] init];
-    @synchronized(uploadManagers) {
-        for(UploadManager *manager in uploadManagers) {
+    @synchronized(self.uploadManagers) {
+        for(UploadManager *manager in self.uploadManagers) {
             if(!manager.uploadRef.hasFinished) {
                 if(manager.uploadRef.localHash != nil) {
                     [result addObject:manager.uploadRef.localHash];
@@ -122,8 +139,8 @@
 }
 
 - (UploadRef *) uploadRefForAsset:(NSString *) assetUrl {
-    @synchronized(uploadManagers) {
-        for(UploadManager *manager in uploadManagers) {
+    @synchronized(self.uploadManagers) {
+        for(UploadManager *manager in self.uploadManagers) {
             if([manager.uploadRef.assetUrl isEqualToString:assetUrl]) {
                 return manager.uploadRef;
             }
@@ -134,8 +151,8 @@
 
 - (NSArray *) uploadImageRefsForAlbum:(NSString *) albumUuid {
     NSMutableArray *result = [[NSMutableArray alloc] init];
-    @synchronized(uploadManagers) {
-        for(UploadManager *manager in uploadManagers) {
+    @synchronized(self.uploadManagers) {
+        for(UploadManager *manager in self.uploadManagers) {
             if(!manager.uploadRef.hasFinished && [manager.uploadRef.albumUuid isEqualToString:albumUuid]) {
                 if(manager.uploadRef.contentType == ContentTypePhoto || manager.uploadRef.contentType == ContentTypeVideo) {
                     [result addObject:manager.uploadRef];
@@ -148,9 +165,9 @@
 
 - (UploadManager *) findNextTask {
     UploadManager *nextTask = nil;
-    @synchronized(uploadManagers) {
+    @synchronized(self.uploadManagers) {
         @try {
-            for(UploadManager *row in uploadManagers) {
+            for(UploadManager *row in self.uploadManagers) {
                 if(!row.uploadRef.hasFinished && row.uploadRef.isReady && ![activeTaskIds containsObject:[row uniqueUrl]]) {
                     if(nextTask == nil) {
                         nextTask = row;
@@ -172,9 +189,9 @@
 
 - (int) remainingCount {
     int count = 0;
-    @synchronized(uploadManagers) {
+    @synchronized(self.uploadManagers) {
         @try {
-            for(UploadManager *row in uploadManagers) {
+            for(UploadManager *row in self.uploadManagers) {
                 if(!row.uploadRef.hasFinished && row.uploadRef.isReady) {
                     count++;
                 }
@@ -194,9 +211,9 @@
 
 - (void) cancelAllUploadsUpdateReferences:(BOOL) updateReferencesFlag {
     [self cancelRemainingUploadsUpdateReferences:updateReferencesFlag];
-    @synchronized(uploadManagers) {
+    @synchronized(self.uploadManagers) {
         @try {
-            for(UploadManager *row in uploadManagers) {
+            for(UploadManager *row in self.uploadManagers) {
                 if(row.uploadTask) {
                     [row.uploadTask cancel];
                 }
@@ -205,7 +222,7 @@
         @catch (NSException *exception) {
         }
         @finally {
-            [self.uploadManagers removeAllObjects];
+            self.uploadManagers = @[];
             [self.activeTaskIds removeAllObjects];
         }
 
@@ -229,9 +246,9 @@
 
 - (void) cancelRemainingUploadsUpdateReferences:(BOOL) updateReferencesFlag {
     NSMutableArray *cleanArray = [[NSMutableArray alloc] init];
-    @synchronized(uploadManagers) {
+    @synchronized(self.uploadManagers) {
         @try {
-            for(UploadManager *row in uploadManagers) {
+            for(UploadManager *row in self.uploadManagers) {
                 if(!row.uploadRef.autoSyncFlag || [activeTaskIds containsObject:[row uniqueUrl]]) {
                     [cleanArray addObject:row];
                 }
@@ -251,8 +268,8 @@
 }
 
 - (void) addOnlyNewUploadTask:(UploadManager *) newManager {
-    @synchronized(uploadManagers) {
-        [uploadManagers addObject:newManager];
+    @synchronized(self.uploadManagers) {
+        [self addObjectToUploadManagersArray:newManager];
     }
 }
 
@@ -272,10 +289,10 @@
 }
 
 - (void) addNewUploadTask:(UploadManager *) newManager {
-    @synchronized(uploadManagers) {
-        if(![uploadManagers containsObject:newManager]) {
+    @synchronized(self.uploadManagers) {
+        if(![self.uploadManagers containsObject:newManager]) {
             newManager.queueDelegate = self;
-            [uploadManagers addObject:newManager];
+            [self addObjectToUploadManagersArray:newManager];
 
             if(newManager.uploadRef.autoSyncFlag) {
                 [SyncUtil lockAutoSyncBlockInProgress];
@@ -356,8 +373,8 @@
 
 - (void) uploadManagerIsReadToStartTask:(UploadManager *)manRef {
     if([activeTaskIds count] < MAX_CONCURRENT_UPLOAD_TASKS) {
-        @synchronized(uploadManagers) {
-            for(UploadManager *row in uploadManagers) {
+        @synchronized(self.uploadManagers) {
+            for(UploadManager *row in self.uploadManagers) {
                 if([[row uniqueUrl] isEqualToString:[manRef uniqueUrl]]) {
                     [activeTaskIds addObject:[row uniqueUrl]];
                     [row startTask];
@@ -371,31 +388,31 @@
 - (void) uploadManagerTaskIsInitialized:(UploadManager *)manRef {
     if([activeTaskIds containsObject:[manRef uniqueUrl]]) {
         UploadManager *oldMan = nil;
-        @synchronized(uploadManagers) {
-            for(UploadManager *row in uploadManagers) {
+        @synchronized(self.uploadManagers) {
+            for(UploadManager *row in self.uploadManagers) {
                 if([[row uniqueUrl] isEqualToString:[manRef uniqueUrl]]) {
                     oldMan = row;
                     break;
                 }
             }
             manRef.queueDelegate = self;
-            [self.uploadManagers removeObject:oldMan];
-            [self.uploadManagers addObject:manRef];
+            [self removeObjectFromUploadManagersArray:oldMan];
+            [self addObjectToUploadManagersArray:manRef];
         }
     }
 }
 
 - (void) removeUploadManagerReferenceAfterFail:(UploadManager *)manToRemove {
-    @synchronized(uploadManagers) {
+    @synchronized(self.uploadManagers) {
         UploadManager *rowToDelete = nil;
-        for(UploadManager *row in uploadManagers) {
+        for(UploadManager *row in self.uploadManagers) {
             if([[row uniqueUrl] isEqualToString:[manToRemove uniqueUrl]]) {
                 rowToDelete = row;
                 break;
             }
         }
         if(rowToDelete != nil) {
-            [self.uploadManagers removeObject:rowToDelete];
+            [self removeObjectFromUploadManagersArray:rowToDelete];
         }
     }
 }
@@ -528,9 +545,9 @@
 }
 
 - (UploadManager *) findByTaskId:(long) taskId {
-    @synchronized(uploadManagers) {
+    @synchronized(self.uploadManagers) {
         if(self.uploadManagers != nil) {
-            for(UploadManager *row in uploadManagers) {
+            for(UploadManager *row in self.uploadManagers) {
                 if(row.uploadTask.taskIdentifier == taskId) {
                     return row;
                 }
@@ -563,34 +580,34 @@
 }
 
 - (void) cleanAlreadyFinishedManagers {
-    @synchronized(uploadManagers) {
+    @synchronized(self.uploadManagers) {
         NSMutableArray *itemsToRemove = [[NSMutableArray alloc] init];
-        for(UploadManager *row in uploadManagers) {
+        for(UploadManager *row in self.uploadManagers) {
             if(row.uploadRef.autoSyncFlag && row.uploadRef.hasFinished) {
                 [itemsToRemove addObject:row];
             }
         }
-        [uploadManagers removeObjectsInArray:itemsToRemove];
+        [self removeObjectsFromUploadManagersArray:itemsToRemove];
     }
 }
 
 - (void) cleanAlreadyFinishedManagersNoReferenceToAutoSync {
-    @synchronized(uploadManagers) {
+    @synchronized(self.uploadManagers) {
         NSMutableArray *itemsToRemove = [[NSMutableArray alloc] init];
-        for(UploadManager *row in uploadManagers) {
+        for(UploadManager *row in self.uploadManagers) {
             if(row.uploadRef.hasFinished) {
                 [itemsToRemove addObject:row];
             }
         }
-        [uploadManagers removeObjectsInArray:itemsToRemove];
+        [self removeObjectsFromUploadManagersArray:itemsToRemove];
     }
 }
 
 - (int) totalAutoSyncCount {
-    @synchronized(uploadManagers) {
+    @synchronized(self.uploadManagers) {
         int count = 0;
         @try {
-            for(UploadManager *row in uploadManagers) {
+            for(UploadManager *row in self.uploadManagers) {
                 if(row.uploadRef.autoSyncFlag) {
                     count++;
                 }
@@ -605,10 +622,10 @@
 }
 
 - (int) totalUploadCount {
-    @synchronized(uploadManagers) {
+    @synchronized(self.uploadManagers) {
         int count = 0;
         @try {
-            for(UploadManager *row in uploadManagers) {
+            for(UploadManager *row in self.uploadManagers) {
                 if(!row.uploadRef.hasFinished) {
                     count++;
                 }
@@ -623,10 +640,10 @@
 }
 
 - (int) finishedAutoSyncCount {
-    @synchronized(uploadManagers) {
+    @synchronized(self.uploadManagers) {
         int count = 0;
         @try {
-            for(UploadManager *row in uploadManagers) {
+            for(UploadManager *row in self.uploadManagers) {
                 if(row.uploadRef.hasFinished && row.uploadRef.autoSyncFlag) {
                     count++;
                 }
@@ -641,10 +658,10 @@
 }
 
 - (int) finishedUploadCount {
-    @synchronized(uploadManagers) {
+    @synchronized(self.uploadManagers) {
         int count = 0;
         @try {
-            for(UploadManager *row in uploadManagers) {
+            for(UploadManager *row in self.uploadManagers) {
                 if(row.uploadRef.hasFinished) {
                     count++;
                 }
