@@ -1474,10 +1474,11 @@
     NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     tempGroups = [tempGroups sortedArrayUsingDescriptors:sortDescriptors];
     
-    for(FileInfoGroup *row in tempGroups) {
-        [self addOrUpdateGroup:row];
+    @synchronized (self) {
+        for(FileInfoGroup *row in tempGroups) {
+            [self addOrUpdateGroup:row];
+        }
     }
-    
     if([[SyncUtil readSyncHashRemotely] count] > 0) {
         [[SyncManager sharedInstance] numberOfUnsyncedImages];
     } else {
