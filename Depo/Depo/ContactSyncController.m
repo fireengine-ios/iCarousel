@@ -28,6 +28,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import <UIKit/UIKit.h>
 #import "ContactSyncSplashController.h"
+#import "MPush.h"
 
 #define tableViewHeaderHeight 40.0f
 #define tableViewRowHeight 40.0f
