@@ -359,7 +359,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:AUTO_SYNC_QUEUE_CHANGED_NOTIFICATION object:nil userInfo:nil];
     [self updateGroupUserDefaults];
 
-    [MPush hitEvent:@"photo_uploaded"];
+//    [MPush hitEvent:@"photo_uploaded"];
     
     if(![AppUtil readFirstUploadFlag]) {
         firstUploadFlagDao = [[FirstUploadFlagDao alloc] init];

@@ -90,7 +90,7 @@
             [MPush hitEvent:@"autosync_wifi"];
         } else {
             [MPush hitTag:@"autosync" withValue:@"4g"];
-            [MPush hitEvent:@"autosync_wifi3g"];
+            [MPush hitEvent:@"autosync_4g"];
         }
     } else {
         [MPush hitTag:@"autosync" withValue:@"off"];

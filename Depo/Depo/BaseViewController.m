@@ -190,7 +190,7 @@
     
     NSUInteger subLength = [sortedSub count];
     for (int i = 0; i < 5; i++) {
-        NSString *packageName = [NSString stringWithFormat:@"user_package_%i", i];
+        NSString *packageName = [NSString stringWithFormat:@"user_package_%i", i +1];
         NSString *displayName = @"__no_package__";
         
         if (i < subLength) {
@@ -367,7 +367,7 @@
                 [MPush hitEvent:@"autosync_wifi"];
             } else {
                 [MPush hitTag:@"autosync" withValue:@"4g"];
-                [MPush hitEvent:@"autosync_wifi3g"];
+                [MPush hitEvent:@"autosync_4g"];
             }
         } else {
             [MPush hitTag:@"autosync" withValue:@"off"];

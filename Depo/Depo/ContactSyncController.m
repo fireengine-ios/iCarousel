@@ -28,6 +28,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import <UIKit/UIKit.h>
 #import "ContactSyncSplashController.h"
+#import "MPush.h"
 
 #define tableViewHeaderHeight 40.0f
 #define tableViewRowHeight 40.0f
@@ -200,6 +201,12 @@
                     [currentSyncResult saveData];
                     APPDELEGATE.session.syncResult = currentSyncResult;
                     [SyncUtil writeLastContactSyncResult:currentSyncResult];
+                    
+                    if (syncMode == SYNCBackup) {
+                        [MPush hitTag:@"contact_sync_upload_done"];
+                    } else if (syncMode == SYNCRestore) {
+                        [MPush hitTag:@"contact_sync_download_done"];
+                    }
                 }
                     break;
                 case SYNC_RESULT_ERROR_PERMISSION_ADDRESS_BOOK:
@@ -337,6 +344,8 @@
 - (void) viewDidLoad {
     [super viewDidLoad];
     
+    [MPush hitTag:@"contact_sync_page"];
+    [MPush hitEvent:@"contact_sync_page"];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
