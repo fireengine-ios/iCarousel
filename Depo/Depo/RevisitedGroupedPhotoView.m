@@ -57,6 +57,7 @@
     
     float collViewOriginalHeight;
 }
+@property (nonatomic, assign) BOOL refreshInProgress;
 @end
 
 @implementation RevisitedGroupedPhotoView
@@ -1360,6 +1361,11 @@
 }
 
 - (void) addUnsyncedFiles {
+    
+    if (self.refreshInProgress) {
+        return;
+    }
+    self.refreshInProgress = YES;
     IGLog(@"RevisitedGroupedPhotoView addUnsyncedFiles called");
     NSLog(@"RevisitedGroupedPhotoView addUnsyncedFiles called");
     MetaFile *lastFile = nil;
@@ -1409,7 +1415,7 @@
                 newGroup.refDate = assetDate;
                 newGroup.locationInfo = @"";
                 newGroup.fileInfo = [[NSMutableArray alloc] init];
-                if(![fileHashList containsObject:rowLocalHash]) {
+                if(![[fileHashList copy] containsObject:rowLocalHash]) {
                     RawTypeFile *rawFile = [self rawFileForAsset:row];
                     [newGroup.fileInfo addObject:rawFile];
                     if(rawFile.hashRef) {
@@ -1424,7 +1430,7 @@
             } else {
                 FileInfoGroup *currentGroup = [tempDict objectForKey:dateStr];
                 if(currentGroup != nil) {
-                    if(![fileHashList containsObject:rowLocalHash]) {
+                    if(![[fileHashList copy] containsObject:rowLocalHash]) {
                         RawTypeFile *rawFile = [self rawFileForAsset:row];
                         [currentGroup.fileInfo addObject:rawFile];
                         if(rawFile.hashRef) {
@@ -1437,7 +1443,7 @@
                     newGroup.refDate = assetDate;
                     newGroup.locationInfo = @"";
                     newGroup.fileInfo = [[NSMutableArray alloc] init];
-                    if(![fileHashList containsObject:rowLocalHash]) {
+                    if(![[fileHashList copy] containsObject:rowLocalHash]) {
                         RawTypeFile *rawFile = [self rawFileForAsset:row];
                         [newGroup.fileInfo addObject:rawFile];
                         if(rawFile.hashRef) {
@@ -1476,6 +1482,7 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
         IGLog(@"RevisitedGroupedPhotoView addUnsyncedFiles ended");
+        self.refreshInProgress = NO;
         [collView reloadData];
     });
 }
