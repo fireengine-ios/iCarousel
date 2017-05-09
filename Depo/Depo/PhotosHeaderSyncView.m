@@ -59,6 +59,10 @@
     return self;
 }
 
+- (void)resetProgress {
+    progress.backgroundColor = [Util UIColorForHexColor:@"00aadf"];
+}
+
 - (void) loadAsset:(NSString *) assetUrlStr {
     assetUrlRef = assetUrlStr;
     NSURL *assetUrl = [NSURL URLWithString:assetUrlStr];

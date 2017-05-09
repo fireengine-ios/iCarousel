@@ -52,11 +52,12 @@
     NSArray *localAssets;
     NSDate *lastCheckedDate;
     
-    PhotosHeaderSyncView *syncView;
+//
     NextProcessType postUploadProcessType;
     
     float collViewOriginalHeight;
 }
+@property (nonatomic, strong) PhotosHeaderSyncView *syncView;
 @property (nonatomic, assign) BOOL refreshInProgress;
 @end
 
@@ -283,54 +284,38 @@
             [self.syncInfoHeaderView removeFromSuperview];
             self.syncInfoHeaderView = nil;
         }
-
         [self showSyncProgressHeader];
-//        UploadManager *activeManRef = [[UploadQueue sharedInstance] activeManager];
-//        if(activeManRef != nil) {
-//            if (syncView) {
-//                [syncView removeFromSuperview];
-//                syncView = nil;
-//            }
-//            syncView = [[PhotosHeaderSyncView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 50)];
-//            activeManRef.headerDelegate = syncView;
-//            syncView.delegate = self;
-//            if(activeManRef.uploadRef.taskType == UploadTaskTypeAsset) {
-//                [syncView loadAsset:activeManRef.uploadRef.assetUrl];
-//            } else if(activeManRef.uploadRef.taskType == UploadTaskTypeFile) {
-//                [syncView loadLocalFileForCamUpload:activeManRef.uploadRef.tempUrl];
-//            }
-//            [self addSubview:syncView];
-//        }
     }
 }
 
 - (void)showSyncProgressHeader {
-    __weak RevisitedGroupedPhotoView *weakSelf = self;
-    
+    if (self.syncView == nil) {
+        self.syncView = [[PhotosHeaderSyncView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 50)];
+        self.syncView.delegate = self;
+        [self addSubview:self.syncView];
+    }
+    if (self.syncView.superview == nil) {
+        [self addSubview:self.syncView];
+    }
     UploadManager *activeManRef = [[UploadQueue sharedInstance] activeManager];
+    activeManRef.headerDelegate = self.syncView;
+    [self.syncView resetProgress];
     if(activeManRef != nil) {
-        if (syncView) {
-            [syncView removeFromSuperview];
-            syncView = nil;
-        }
-        syncView = [[PhotosHeaderSyncView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 50)];
-        activeManRef.headerDelegate = syncView;
-        syncView.delegate = self;
-        
-        if(activeManRef.uploadRef.taskType == UploadTaskTypeAsset) {
-            [syncView loadAsset:activeManRef.uploadRef.assetUrl];
-        } else if(activeManRef.uploadRef.taskType == UploadTaskTypeFile) {
-            [syncView loadLocalFileForCamUpload:activeManRef.uploadRef.tempUrl];
-        }
-        
         if(collView.frame.origin.y == 0) {
             [UIView animateWithDuration:0.4 animations:^{
-                collView.frame = CGRectMake(collView.frame.origin.x, collView.frame.origin.y + 50, collView.frame.size.width, collView.frame.size.height - 50);
+                collView.frame = CGRectMake(collView.frame.origin.x,
+                                            collView.frame.origin.y + 50,
+                                            collView.frame.size.width,
+                                            collView.frame.size.height - 50);
             }];
         }
-        
-        [self addSubview:syncView];
-        
+        if(activeManRef.uploadRef.taskType == UploadTaskTypeAsset) {
+            [self.syncView loadAsset:activeManRef.uploadRef.assetUrl];
+        } else if(activeManRef.uploadRef.taskType == UploadTaskTypeFile) {
+            [self.syncView loadLocalFileForCamUpload:activeManRef.uploadRef.tempUrl];
+        }
+    } else {
+        [self.syncView removeFromSuperview];
     }
 }
 
@@ -1003,9 +988,9 @@
         
         [imgFooterActionMenu disableSyncButton];
 
-        if(syncView == nil) {
+//        if(syncView == nil) {
             [self showSyncProgressHeader];
-        }
+//        }
         //TODO check
         [collView reloadData];
 //        [delegate revisitedGroupedPhotoDidFinishUpdate];
@@ -1164,9 +1149,7 @@
 }
 
 - (void) postQueueEmpty {
-    if(syncView) {
-        [syncView removeFromSuperview];
-    }
+    [self.syncView removeFromSuperview];
     if(collView.frame.origin.y > 0 && !syncInfoHeaderView) {
         [UIView animateWithDuration:0.4 animations:^{
             collView.frame = CGRectMake(collView.frame.origin.x, collView.frame.origin.y - 50, collView.frame.size.width, collView.frame.size.height + 50);
@@ -1805,10 +1788,6 @@
 - (void) autoQueueChanged {
     IGLog(@"RevisitedGroupedPhotoView autoQueueChanged called");
     dispatch_async(dispatch_get_main_queue(), ^{
-        if(syncView) {
-            [syncView removeFromSuperview];
-        }
-        __weak RevisitedGroupedPhotoView *weakSelf = self;
         UploadManager *activeManRef = [[UploadQueue sharedInstance] activeManager];
         if(activeManRef != nil) {
             IGLog(@"RevisitedGroupedPhotoView autoQueueChanged initializing PhotosHeaderSyncView");

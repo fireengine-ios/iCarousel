@@ -19,5 +19,5 @@
 
 - (void) loadAsset:(NSString *) assetUrlStr;
 - (void) loadLocalFileForCamUpload:(NSString *) localTempUrl;
-
+- (void)resetProgress;
 @end
