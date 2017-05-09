@@ -417,7 +417,7 @@
     double cellHeight = 69;
     
     if (indexPath.row == 0) {
-        NSLog(@"USAGE:%lld and %lld", quota.bytesUsed, quota.quotaBytes);
+//        NSLog(@"USAGE:%lld and %lld", quota.bytesUsed, quota.quotaBytes);
         double percentUsageVal = 100 * ((double)quota.bytesUsed/(double)quota.quotaBytes);
         percentUsageVal = isnan(percentUsageVal) ? 0 : (percentUsageVal > 0 && percentUsageVal < 1) ? 1 : percentUsageVal;
         NSString *subTitle = [NSString stringWithFormat: NSLocalizedString(@"StorageUsageInfo", @""), [NSString stringWithFormat:@"%d", (int)floor(percentUsageVal+0.5f)], [Util transformedHugeSizeValueDecimalIfNecessary:quota.quotaBytes]];
