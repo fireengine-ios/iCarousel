@@ -739,12 +739,14 @@
 }
 
 - (UploadManager *) activeManager {
-    for(UploadManager *row in self.uploadManagers) {
-        if([activeTaskIds containsObject:[row uniqueUrl]]) {
-            return row;
+    @synchronized (self.uploadManagers) {
+        for(UploadManager *row in self.uploadManagers) {
+            if([activeTaskIds containsObject:[row uniqueUrl]]) {
+                return row;
+            }
         }
+        return nil;
     }
-    return nil;
 }
 
 @end
