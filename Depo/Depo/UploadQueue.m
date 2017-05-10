@@ -250,7 +250,9 @@
         @try {
             for(UploadManager *row in self.uploadManagers) {
                 if(!row.uploadRef.autoSyncFlag || [activeTaskIds containsObject:[row uniqueUrl]]) {
-                    [cleanArray addObject:row];
+                    if (![self.uploadManagers containsObject:row]) {
+                        [cleanArray addObject:row];
+                    }
                 }
             }
         }
@@ -305,6 +307,8 @@
                     [newManager startTask];
                 }
             }
+            NSLog(@"starting upload for file: %@ and hash: %@", [newManager.asset defaultRepresentation].filename, newManager.uploadRef.localHash);
+            
             [[NSNotificationCenter defaultCenter] postNotificationName:AUTO_SYNC_QUEUE_CHANGED_NOTIFICATION object:nil userInfo:nil];
         }
         /*
@@ -420,7 +424,7 @@
 
 - (void) URLSession:(NSURLSession *) _session task:(NSURLSessionTask *)task didSendBodyData:(int64_t)bytesSent totalBytesSent:(int64_t)totalBytesSent totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend {
     UploadManager *currentManager = [self findByTaskId:task.taskIdentifier];
-    NSLog(@"BYTES SENT FOR TASK: %ld", task.taskIdentifier);
+    //NSLog(@"BYTES SENT FOR TASK: %ld", task.taskIdentifier);
     if(currentManager != nil) {
         [currentManager.delegate uploadManagerDidSendData:(long)totalBytesSent inTotal:(long)totalBytesExpectedToSend];
         if(currentManager.headerDelegate) {
@@ -437,6 +441,11 @@
     UploadManager *currentManager = [self findByTaskId:task.taskIdentifier];
     NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) task.response;
     
+    if (error == nil && httpResp == nil) {
+        NSLog(@"status unknown do nothing");
+        return;
+    }
+    
     if (!error && httpResp.statusCode == 201) {
         if(currentManager != nil) {
             if(currentManager.uploadRef.summary != nil) {
@@ -445,6 +454,8 @@
             [currentManager removeTemporaryFile];
             currentManager.uploadRef.hasFinished = YES;
             [currentManager notifyUpload];
+            
+            NSLog(@"upload finished for hash: %@", currentManager.uploadRef.localHash);
         } else {
             //TODO: tek dosya uploadu oldugu icin upload bitiminde documents folder altindaki temp dosyalarinin hepsini temizliyoruz. Eger paralel upload sayisi 1'den fazla olursa bu kismin silinmesi gerekiyor.
             [APPDELEGATE removeAllMediaFiles];

@@ -323,8 +323,10 @@
 }
 
 - (void) checkCollectionViewData {
-    if ([self.groups count] < 1 || [self.files count] < 1) {
-        [self pullData];
+    if ([CacheUtil readRememberMeToken] != nil) {
+        if ([self.groups count] < 1 || [self.files count] < 1) {
+            [self pullData];
+        }
     }
 }
 

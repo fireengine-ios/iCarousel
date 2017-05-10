@@ -252,10 +252,6 @@
     
     if(triggerSyncing) {
         IGLog(@"SyncManager manuallyCheckIfAlbumChanged at triggerSyncing");
-        NSArray *localHashList = [SyncUtil readSyncHashLocally];
-        NSArray *remoteHashList = [SyncUtil readSyncHashRemotely];
-        NSArray *remoteSummaryList = [SyncUtil readSyncFileSummaries];
-        
         [[CurioSDK shared] sendEvent:@"BackgroundSync" eventValue:@"started"];
         
         autoSyncIterationInProgress = YES;
@@ -277,15 +273,18 @@
                                     }
                                 }
                             }
-                        }
                         EnableOption photoSyncFlag = (EnableOption)[CacheUtil readCachedSettingSyncPhotosVideos];
                         if(photoSyncFlag == EnableOptionAuto || photoSyncFlag == EnableOptionOn) {
                             ConnectionOption connectionOption = (ConnectionOption)[CacheUtil readCachedSettingSyncingConnectionType];
                             if([ReachabilityManager isReachableViaWiFi] || ([ReachabilityManager isReachableViaWWAN] && connectionOption == ConnectionOptionWifi3G)) {
-                                
+
                                 ALAssetRepresentation *defaultRep = [asset defaultRepresentation];
                                 NSString *repUrl = [defaultRep.url absoluteString];
                                 if(repUrl != nil) {
+                                    NSArray *localHashList = [SyncUtil readSyncHashLocally];
+                                    NSArray *remoteHashList = [SyncUtil readSyncHashRemotely];
+                                    NSArray *remoteSummaryList = [SyncUtil readSyncFileSummaries];
+                                    
                                     NSString *localHash = [SyncUtil md5StringOfString:repUrl];
                                     
                                     BOOL shouldStartUpload = ![localHashList containsObject:localHash] && ![remoteHashList containsObject:localHash];
@@ -299,11 +298,12 @@
                                     if(shouldStartUpload) {
                                         NSString *logInfo = [NSString stringWithFormat:@"SyncManager manuallyCheckIfAlbumChanged sync starting for asset: %@", [defaultRep filename]];
                                         IGLog(logInfo);
-                                        NSLog(@"%@", logInfo);
+                                        //NSLog(@"%@ and hash: %@", logInfo, localHash);
                                         [[SyncManager sharedInstance] startUploadForAsset:asset withReferenceAlbumName:referenceAlbumName andLocalHash:localHash];
                                     }
                                 }
                             }
+                        }
                         }
                     }
                 }];
