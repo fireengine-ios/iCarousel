@@ -434,28 +434,33 @@
             IGLog(@"SyncManager loop ignored by 413 lock");
             return;
         }
-        if(![SyncUtil readFirstTimeSyncFlag]) {
-            IGLog(@"SyncManager starting first time sync");
-            [self startFirstTimeSync];
-        } else if(![SyncUtil readFirstTimeSyncFinishedFlag]) {
-            if(![SyncUtil readAutoSyncBlockInProgress]) {
-                IGLog(@"SyncManager initializing next auto sync package");
-                [self initializeNextAutoSyncPackage];
-            }
-        } else {
-            IGLog(@"SyncManager before calling manuallyCheckIfAlbumChanged");
-            if(![SyncUtil readAutoSyncBlockInProgress]) {
-                if(![SyncUtil readOneTimeSyncFlag]) {
-                    IGLog(@"SyncManager calling elastic search for one more time");
-                    [self startFirstTimeSync];
-                } else {
-                    IGLog(@"SyncManager calling manuallyCheckIfAlbumChanged");
-                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-                        [self manuallyCheckIfAlbumChanged];
-                    });
-                }
-            }
-        }
+        IGLog(@"SyncManager calling manuallyCheckIfAlbumChanged");
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            [self manuallyCheckIfAlbumChanged];
+        });
+//        
+//        if(![SyncUtil readFirstTimeSyncFlag]) {
+//            IGLog(@"SyncManager starting first time sync");
+//            [self startFirstTimeSync];
+//        } else if(![SyncUtil readFirstTimeSyncFinishedFlag]) {
+//            if(![SyncUtil readAutoSyncBlockInProgress]) {
+//                IGLog(@"SyncManager initializing next auto sync package");
+//                [self initializeNextAutoSyncPackage];
+//            }
+//        } else {
+//            IGLog(@"SyncManager before calling manuallyCheckIfAlbumChanged");
+//            if(![SyncUtil readAutoSyncBlockInProgress]) {
+//                if(![SyncUtil readOneTimeSyncFlag]) {
+//                    IGLog(@"SyncManager calling elastic search for one more time");
+//                    [self startFirstTimeSync];
+//                } else {
+//                    IGLog(@"SyncManager calling manuallyCheckIfAlbumChanged");
+//                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+//                        [self manuallyCheckIfAlbumChanged];
+//                    });
+//                }
+//            }
+//        }
     }
 }
 

@@ -58,7 +58,6 @@
     float collViewOriginalHeight;
 }
 @property (nonatomic, strong) PhotosHeaderSyncView *syncView;
-@property (nonatomic, assign) BOOL refreshInProgress;
 @end
 
 @implementation RevisitedGroupedPhotoView
@@ -448,33 +447,35 @@
 }
 
 - (void) addOrUpdateGroup:(FileInfoGroup *) group {
+    
     if (noItemView != nil)
         [noItemView removeFromSuperview];
-    
-    FileInfoGroup *initialRow = nil;
-    int counter = 0;
-    for(FileInfoGroup *row in self.groups) {
-        if([row.groupKey isEqualToString:group.groupKey]) {
-            initialRow = row;
-            break;
+    @synchronized (self.groups) {
+        FileInfoGroup *initialRow = nil;
+        int counter = 0;
+        for(FileInfoGroup *row in self.groups) {
+            if([row.groupKey isEqualToString:group.groupKey]) {
+                initialRow = row;
+                break;
+            }
+            counter ++;
         }
-        counter ++;
+        if(initialRow != nil) {
+            [initialRow.fileInfo addObjectsFromArray:group.fileInfo];
+            initialRow.fileInfo = [self sortRawArrayByDateDesc:initialRow.fileInfo];
+            [self.groups replaceObjectAtIndex:counter withObject:initialRow];
+        } else {
+            group.fileInfo = [self sortRawArrayByDateDesc:group.fileInfo];
+            [self.groups addObject:group];
+        }
+        
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"refDate" ascending:NO];
+        NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+        self.groups = [[self.groups sortedArrayUsingDescriptors:sortDescriptors] mutableCopy];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self neutralizeSearchBar]; 
+        });
     }
-    if(initialRow != nil) {
-        [initialRow.fileInfo addObjectsFromArray:group.fileInfo];
-        initialRow.fileInfo = [self sortRawArrayByDateDesc:initialRow.fileInfo];
-        [self.groups replaceObjectAtIndex:counter withObject:initialRow];
-    } else {
-        group.fileInfo = [self sortRawArrayByDateDesc:group.fileInfo];
-        [self.groups addObject:group];
-    }
-    
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"refDate" ascending:NO];
-    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-    self.groups = [[self.groups sortedArrayUsingDescriptors:sortDescriptors] mutableCopy];
-    dispatch_async(dispatch_get_main_queue(), ^{
-       [self neutralizeSearchBar]; 
-    });
 }
 
 - (void) deleteSuccessCallback {
@@ -1345,10 +1346,6 @@
 
 - (void) addUnsyncedFiles {
     
-    if (self.refreshInProgress) {
-        return;
-    }
-    self.refreshInProgress = YES;
     IGLog(@"RevisitedGroupedPhotoView addUnsyncedFiles called");
     NSLog(@"RevisitedGroupedPhotoView addUnsyncedFiles called");
     MetaFile *lastFile = nil;
@@ -1465,7 +1462,6 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
         IGLog(@"RevisitedGroupedPhotoView addUnsyncedFiles ended");
-        self.refreshInProgress = NO;
         [collView reloadData];
     });
 }

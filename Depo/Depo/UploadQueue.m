@@ -257,6 +257,7 @@
         @catch (NSException *exception) {
         }
         @finally {
+            [self.activeTaskIds removeAllObjects];
         }
         self.uploadManagers = cleanArray;
     }
