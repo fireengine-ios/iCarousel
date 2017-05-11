@@ -134,7 +134,7 @@
         
         self.groups = [[NSMutableArray alloc] init];
         self.files = [[NSMutableArray alloc] init];
-        self.fileHashList = [[NSMutableArray alloc] init];
+        self.fileHashList = [[[NSMutableArray alloc] init] threadSafe_init];
         NSArray *locallySavedFiles = [SyncUtil readLocallySavedFiles];
         if (locallySavedFiles.count > 0) {
             for (NSString *localHash in locallySavedFiles) {
@@ -1346,7 +1346,12 @@
         NSDate * date2 = [second valueForProperty:ALAssetPropertyDate];
         return [date2 compare:date1];
     }];
-    [self addUnsyncedFiles];
+    
+//    for (int i = 0; i < 2; i++) {
+//     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+         [self addUnsyncedFiles];
+//     });
+//    }
 }
 
 - (void) syncManagerNumberOfImagesWaitingForUpload:(int) imgCount {
