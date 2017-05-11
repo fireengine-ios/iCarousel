@@ -975,6 +975,8 @@
 		67C29C6E1E66E02300B2C442 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1DF619CAC2F900FD1E03 /* Foundation.framework */; };
 		67C29C6F1E66E02900B2C442 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1E9819CACA5300FD1E03 /* CFNetwork.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		67C29C701E66E06400B2C442 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1DF619CAC2F900FD1E03 /* Foundation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		67FDC4311EC47CEF00AADDD8 /* NSMutableArray+GCDThreadSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 67FDC4301EC47CEF00AADDD8 /* NSMutableArray+GCDThreadSafe.m */; };
+		67FDC4341EC47D7D00AADDD8 /* NSObject+GCDThreadSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 67FDC4331EC47D7D00AADDD8 /* NSObject+GCDThreadSafe.m */; };
 		790B9D851E71750E00DD7DA0 /* combobg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 790B9D831E71750E00DD7DA0 /* combobg@2x.png */; };
 		790B9D861E71750E00DD7DA0 /* combobg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 790B9D841E71750E00DD7DA0 /* combobg@3x.png */; };
 		790B9D891E71762100DD7DA0 /* icon_dropdown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 790B9D871E71762100DD7DA0 /* icon_dropdown@2x.png */; };
@@ -2735,6 +2737,10 @@
 		67B0DD501E7FCB4D00BAD640 /* ShareActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareActivity.h; sourceTree = "<group>"; };
 		67B0DD511E7FCB4D00BAD640 /* ShareActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareActivity.m; sourceTree = "<group>"; };
 		67B0DD531E7FCB5B00BAD640 /* facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook.png; sourceTree = "<group>"; };
+		67FDC42F1EC47CEF00AADDD8 /* NSMutableArray+GCDThreadSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+GCDThreadSafe.h"; sourceTree = "<group>"; };
+		67FDC4301EC47CEF00AADDD8 /* NSMutableArray+GCDThreadSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+GCDThreadSafe.m"; sourceTree = "<group>"; };
+		67FDC4321EC47D7D00AADDD8 /* NSObject+GCDThreadSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+GCDThreadSafe.h"; sourceTree = "<group>"; };
+		67FDC4331EC47D7D00AADDD8 /* NSObject+GCDThreadSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+GCDThreadSafe.m"; sourceTree = "<group>"; };
 		790B9D831E71750E00DD7DA0 /* combobg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "combobg@2x.png"; path = "images/login-signup/combobg@2x.png"; sourceTree = "<group>"; };
 		790B9D841E71750E00DD7DA0 /* combobg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "combobg@3x.png"; path = "images/login-signup/combobg@3x.png"; sourceTree = "<group>"; };
 		790B9D871E71762100DD7DA0 /* icon_dropdown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_dropdown@2x.png"; path = "images/login-signup/icon_dropdown@2x.png"; sourceTree = "<group>"; };
@@ -3751,6 +3757,10 @@
 		051E1E2719CAC53500FD1E03 /* util */ = {
 			isa = PBXGroup;
 			children = (
+				67FDC4321EC47D7D00AADDD8 /* NSObject+GCDThreadSafe.h */,
+				67FDC4331EC47D7D00AADDD8 /* NSObject+GCDThreadSafe.m */,
+				67FDC42F1EC47CEF00AADDD8 /* NSMutableArray+GCDThreadSafe.h */,
+				67FDC4301EC47CEF00AADDD8 /* NSMutableArray+GCDThreadSafe.m */,
 				67B0DD501E7FCB4D00BAD640 /* ShareActivity.h */,
 				67B0DD511E7FCB4D00BAD640 /* ShareActivity.m */,
 				051E1E3519CAC7D400FD1E03 /* AppConstants.h */,
@@ -6607,6 +6617,7 @@
 				94FAE0C91D2F6EC500BC9F77 /* FBConnectDao.m in Sources */,
 				9433BD081D21E45500991483 /* PromotionsController.m in Sources */,
 				056090E41AC5A44000710211 /* ReachabilityManager.m in Sources */,
+				67FDC4341EC47D7D00AADDD8 /* NSObject+GCDThreadSafe.m in Sources */,
 				05403F1919F5584300AED10A /* ElasticSearchDao.m in Sources */,
 				94DCA1031D3CB3FC000965AE /* CellographMainController.m in Sources */,
 				053D0ED819DAC959006A13E0 /* MyModalController.m in Sources */,
@@ -6805,6 +6816,7 @@
 				94EF279C1C982B460087EFBE /* NoItemView.m in Sources */,
 				563A98BD1E52ECF900D24B7E /* ADJSdkClickHandler.m in Sources */,
 				056F29C91C4E715A001DD486 /* RequestCaptchaDao.m in Sources */,
+				67FDC4311EC47CEF00AADDD8 /* NSMutableArray+GCDThreadSafe.m in Sources */,
 				051E1EAB19CB20AD00FD1E03 /* MenuProfileCell.m in Sources */,
 				051DE35E19CC128600F27C85 /* BaseViewController.m in Sources */,
 				070234901EA08E1400716C27 /* ContactSyncSDK.m in Sources */,
@@ -7311,8 +7323,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Depo/Depo.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Metin Güler (TVW6JVQFBH)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Metin Güler (TVW6JVQFBH)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Omer Burak Kir (7BESVJQ8SV)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Omer Burak Kir (7BESVJQ8SV)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -7613,8 +7625,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = DepoShareExtension/DepoShareExtension.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Metin Güler (TVW6JVQFBH)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Metin Güler (TVW6JVQFBH)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Omer Burak Kir (7BESVJQ8SV)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Omer Burak Kir (7BESVJQ8SV)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -7721,8 +7733,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Metin Güler (TVW6JVQFBH)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Metin Güler (TVW6JVQFBH)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Omer Burak Kir (7BESVJQ8SV)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Omer Burak Kir (7BESVJQ8SV)";
 				ENABLE_BITCODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -7826,8 +7838,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = "Lifebox Picker/Lifebox_Picker.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Metin Güler (TVW6JVQFBH)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Metin Güler (TVW6JVQFBH)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Omer Burak Kir (7BESVJQ8SV)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Omer Burak Kir (7BESVJQ8SV)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = PT569ZA878;
 				ENABLE_BITCODE = NO;

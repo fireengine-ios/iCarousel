@@ -25,6 +25,8 @@
 #import "SDWebImagePrefetcher.h"
 #import "CustomAlertView.h"
 
+#import "NSMutableArray+GCDThreadSafe.h"
+
 #define GROUP_PACKAGE_SIZE (IS_IPAD ? 60 : IS_IPHONE_6P_OR_HIGHER ? 60 : 48)
 #define GROUP_IMG_COUNT_PER_ROW (IS_IPAD ? 6 : IS_IPHONE_6P_OR_HIGHER ? 6 : 4)
 
@@ -63,11 +65,6 @@
 @implementation RevisitedGroupedPhotoView
 
 @synthesize delegate;
-@synthesize files;
-@synthesize fileHashList;
-@synthesize selectedFileList;
-@synthesize selectedMetaFiles;
-@synthesize selectedAssets;
 @synthesize refreshControl;
 @synthesize readDao;
 @synthesize bulkReadDao;
@@ -82,7 +79,6 @@
 @synthesize sectionIndicator;
 @synthesize selectedSectionNames;
 
-@synthesize groups;
 @synthesize collView;
 
 @synthesize syncInfoHeaderView;
@@ -136,13 +132,18 @@
         dateCompareFormat = [[NSDateFormatter alloc] init];
         [dateCompareFormat setDateFormat:@"MMM yyyy"];
         
-        groups = [[NSMutableArray alloc] init];
-        files = [[NSMutableArray alloc] init];
-        fileHashList = [[NSMutableArray alloc] init];
-        [fileHashList addObjectsFromArray:[SyncUtil readLocallySavedFiles]];
-        selectedFileList = [[NSMutableArray alloc] init];
-        selectedMetaFiles = [[NSMutableArray alloc] init];
-        selectedAssets = [[NSMutableArray alloc] init];
+        self.groups = [[NSMutableArray alloc] init];
+        self.files = [[NSMutableArray alloc] init];
+        self.fileHashList = [[NSMutableArray alloc] init];
+        NSArray *locallySavedFiles = [SyncUtil readLocallySavedFiles];
+        if (locallySavedFiles.count > 0) {
+            for (NSString *localHash in locallySavedFiles) {
+                [self.fileHashList threadSafe_addObject:localHash];
+            }
+        }
+        self.selectedFileList = [[NSMutableArray alloc] init];
+        self.selectedMetaFiles = [[NSMutableArray alloc] init];
+        self.selectedAssets = [[NSMutableArray alloc] init];
         uploadingUuids = [[NSMutableArray alloc] init];
         
         [SyncManager sharedInstance].infoDelegate = self;
@@ -361,7 +362,7 @@
         }
     } else {
         if (forDelete) {
-            for (MetaFile *selectedFile in selectedMetaFiles) {
+            for (MetaFile *selectedFile in self.selectedMetaFiles) {
                 for (FileInfoGroup *fileInfoGroup in self.groups) {
                     NSMutableArray *discardedItems = [@[] mutableCopy];
                     for (RawTypeFile *object in fileInfoGroup.fileInfo) {
@@ -389,10 +390,16 @@
         groupSequence = 0;
         lastCheckedDate = nil;
         
-        [groups removeAllObjects];
-        [files removeAllObjects];
-        [fileHashList removeAllObjects];
-        [fileHashList addObjectsFromArray:[SyncUtil readLocallySavedFiles]];
+        [self.groups removeAllObjects];
+        [self.files removeAllObjects];
+        [self.fileHashList threadSafe_removeAllObjects];
+        
+        NSArray *locallySavedFiles = [SyncUtil readLocallySavedFiles];
+        if (locallySavedFiles.count > 0) {
+            for (NSString *localHash in locallySavedFiles) {
+                [self.fileHashList threadSafe_addObject:localHash];
+            }
+        }
         
         [[SDWebImagePrefetcher sharedImagePrefetcher] cancelPrefetching];
         [[SDWebImageManager sharedManager].imageCache clearMemory];
@@ -465,7 +472,11 @@
         if(initialRow != nil) {
             [initialRow.fileInfo addObjectsFromArray:group.fileInfo];
             initialRow.fileInfo = [self sortRawArrayByDateDesc:initialRow.fileInfo];
-            [self.groups replaceObjectAtIndex:counter withObject:initialRow];
+            if (counter == 0 && self.groups.count == 0) {
+                [self.groups addObject:initialRow];
+            } else {
+                [self.groups replaceObjectAtIndex:counter withObject:initialRow];
+            }
         } else {
             group.fileInfo = [self sortRawArrayByDateDesc:group.fileInfo];
             [self.groups addObject:group];
@@ -499,9 +510,9 @@
     if(!isSelectible) {
         isSelectible = YES;
         [self removeRefreshControl];
-        [selectedFileList removeAllObjects];
-        [selectedMetaFiles removeAllObjects];
-        [selectedAssets removeAllObjects];
+        [self.selectedFileList removeAllObjects];
+        [self.selectedMetaFiles removeAllObjects];
+        [self.selectedAssets removeAllObjects];
         [selectedSectionNames removeAllObjects];
         
         [collView reloadData];
@@ -539,7 +550,7 @@
             } else {
                 endOfFiles = NO;
             }
-            [files addObjectsFromArray:fileList];
+            [self.files addObjectsFromArray:fileList];
             
             NSMutableDictionary *tempDict = [[NSMutableDictionary alloc] init];
             for(MetaFile *row in fileList) {
@@ -554,7 +565,7 @@
                         RawTypeFile *rawFile = [self rawFileForFile:row];
                         [newGroup.fileInfo addObject:rawFile];
                         if(rawFile.hashRef) {
-                            [fileHashList addObject:rawFile.hashRef];
+                            [self.fileHashList threadSafe_addObject:rawFile.hashRef];
                         }
                         newGroup.sequence = groupSequence;
                         newGroup.groupKey = dateStr;
@@ -567,7 +578,7 @@
                             RawTypeFile *rawFile = [self rawFileForFile:row];
                             [currentGroup.fileInfo addObject:rawFile];
                             if(rawFile.hashRef) {
-                                [fileHashList addObject:rawFile.hashRef];
+                                [self.fileHashList threadSafe_addObject:rawFile.hashRef];
                             }
                         } else {
                             FileInfoGroup *newGroup = [[FileInfoGroup alloc] init];
@@ -578,7 +589,7 @@
                             RawTypeFile *rawFile = [self rawFileForFile:row];
                             [newGroup.fileInfo addObject:rawFile];
                             if(rawFile.hashRef) {
-                                [fileHashList addObject:rawFile.hashRef];
+                                [self.fileHashList threadSafe_addObject:rawFile.hashRef];
                             }
                             newGroup.sequence = groupSequence;
                             newGroup.groupKey = dateStr;
@@ -587,11 +598,11 @@
                         }
                     }
                     if(isSelectible && [selectedSectionNames containsObject:dateStr]) {
-                        if(![selectedFileList containsObject:row.uuid]) {
-                            [selectedFileList addObject:row.uuid];
-                            [selectedMetaFiles addObject:row];
+                        if(![self.selectedFileList containsObject:row.uuid]) {
+                            [self.selectedFileList addObject:row.uuid];
+                            [self.selectedMetaFiles addObject:row];
                             dispatch_async(dispatch_get_main_queue(), ^{
-                                [delegate revisitedGroupedPhotoChangeTitleTo:[NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]]];
+                                [delegate revisitedGroupedPhotoChangeTitleTo:[NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [self.selectedFileList count]]];
                             });
                             
                         }
@@ -753,14 +764,14 @@
 
 - (void) revisitedPhotoCollCellImageWasMarkedForFile:(MetaFile *) fileSelected {
     if(fileSelected.uuid) {
-        if(![selectedFileList containsObject:fileSelected.uuid]) {
-            [selectedFileList addObject:fileSelected.uuid];
-            [selectedMetaFiles addObject:fileSelected];
+        if(![self.selectedFileList containsObject:fileSelected.uuid]) {
+            [self.selectedFileList addObject:fileSelected.uuid];
+            [self.selectedMetaFiles addObject:fileSelected];
         }
     }
-    if([selectedFileList count] > 0) {
+    if([self.selectedFileList count] > 0) {
         [self showImgFooterMenu];
-        [delegate revisitedGroupedPhotoChangeTitleTo:[NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]]];
+        [delegate revisitedGroupedPhotoChangeTitleTo:[NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [self.selectedFileList count]]];
     } else {
         [self hideImgFooterMenu];
         [delegate revisitedGroupedPhotoChangeTitleTo:NSLocalizedString(@"SelectFilesTitle", @"")];
@@ -782,13 +793,13 @@
 }
 
 - (void) revisitedPhotoCollCellImageWasUnmarkedForFile:(MetaFile *) fileSelected {
-    if([selectedFileList containsObject:fileSelected.uuid]) {
-        [selectedFileList removeObject:fileSelected.uuid];
-        [selectedMetaFiles removeObject:fileSelected];
+    if([self.selectedFileList containsObject:fileSelected.uuid]) {
+        [self.selectedFileList removeObject:fileSelected.uuid];
+        [self.selectedMetaFiles removeObject:fileSelected];
     }
-    if([selectedFileList count] > 0) {
+    if([self.selectedFileList count] > 0) {
         [self showImgFooterMenu];
-        [delegate revisitedGroupedPhotoChangeTitleTo:[NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]]];
+        [delegate revisitedGroupedPhotoChangeTitleTo:[NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [self.selectedFileList count]]];
     } else {
         [self hideImgFooterMenu];
         [delegate revisitedGroupedPhotoChangeTitleTo:NSLocalizedString(@"SelectFilesTitle", @"")];
@@ -874,7 +885,7 @@
     for(id row in self.files) {
         if([row isKindOfClass:[MetaFile class]]) {
             MetaFile *castedRow = (MetaFile *) row;
-            if([selectedFileList containsObject:castedRow.uuid]) {
+            if([self.selectedFileList containsObject:castedRow.uuid]) {
                 if(castedRow.addedAlbumUuids != nil && [castedRow.addedAlbumUuids count] > 0) {
                     anyInAlbum = YES;
                 }
@@ -899,14 +910,14 @@
 }
 
 - (void) footerActionMenuDidSelectDownload:(FooterActionsMenuView *) menu {
-    if([selectedMetaFiles count] == 0)
+    if([self.selectedMetaFiles count] == 0)
         return;
     
-    [delegate revisitedGroupedPhoto:self downloadSelectedFiles:selectedMetaFiles];
+    [delegate revisitedGroupedPhoto:self downloadSelectedFiles:self.selectedMetaFiles];
 }
 
 - (void) footerActionMenuDidSelectDelete:(FooterActionsMenuView *) menu {
-    if([selectedMetaFiles count] == 0)
+    if([self.selectedMetaFiles count] == 0)
         return;
     
     IGLog(@"RevisitedGroupedPhotoView footerActionMenuDidSelectDelete called");
@@ -916,7 +927,7 @@
         for(id row in self.files) {
             if([row isKindOfClass:[MetaFile class]]) {
                 MetaFile *castedRow = (MetaFile *) row;
-                if([selectedFileList containsObject:castedRow.uuid]) {
+                if([self.selectedFileList containsObject:castedRow.uuid]) {
                     if(castedRow.addedAlbumUuids != nil && [castedRow.addedAlbumUuids count] > 0) {
                         anyInAlbum = YES;
                     }
@@ -942,7 +953,7 @@
 }
 
 - (void) startUploadForSelectedAssets {
-    for(ALAsset *row in selectedAssets) {
+    for(ALAsset *row in self.selectedAssets) {
         NSString *mimeType = (__bridge_transfer NSString*)UTTypeCopyPreferredTagWithClass
         ((__bridge CFStringRef)[row.defaultRepresentation UTI], kUTTagClassMIMEType);
         
@@ -985,7 +996,7 @@
 }
 
 - (void) footerActionMenuDidSelectSync:(FooterActionsMenuView *) menu {
-    if([selectedAssets count] > 0) {
+    if([self.selectedAssets count] > 0) {
         [self startUploadForSelectedAssets];
         postUploadProcessType = NextProcessTypeRefresh;
         
@@ -1022,7 +1033,7 @@
 }
 
 - (void) footerActionMenuDidSelectMove:(FooterActionsMenuView *) menu {
-    if([selectedAssets count] > 0) {
+    if([self.selectedAssets count] > 0) {
         [self addLockMask];
         postUploadProcessType = NextProcessTypeMove;
         [self startUploadForSelectedAssets];
@@ -1033,33 +1044,33 @@
 }
 
 - (void) footerActionMenuDidSelectShare:(FooterActionsMenuView *) menu {
-    if([selectedAssets count] > 0) {
+    if([self.selectedAssets count] > 0) {
         [self addLockMask];
         postUploadProcessType = NextProcessTypeShare;
         [self startUploadForSelectedAssets];
     } else {
         if ([delegate respondsToSelector:@selector(revisitedGroupedPhoto:triggerShareForFiles:withUUID:)]) {
-            [delegate revisitedGroupedPhoto:self triggerShareForFiles:selectedMetaFiles withUUID:selectedFileList];
+            [delegate revisitedGroupedPhoto:self triggerShareForFiles:self.selectedMetaFiles withUUID:self.selectedFileList];
             return;
         }
-        [delegate revisitedGroupedPhoto:self triggerShareForFiles:selectedMetaFiles];
+        [delegate revisitedGroupedPhoto:self triggerShareForFiles:self.selectedMetaFiles];
         // [APPDELEGATE.base triggerShareForFiles:selectedFileList];
     }
 }
 
 - (void) footerActionMenuDidSelectPrint:(FooterActionsMenuView *)menu {
-    if([selectedAssets count] > 0) {
+    if([self.selectedAssets count] > 0) {
         CustomAlertView *alert = [[CustomAlertView alloc] initWithFrame:CGRectMake(0, 0, APPDELEGATE.window.frame.size.width, APPDELEGATE.window.frame.size.height) withTitle:NSLocalizedString(@"Error", @"") withMessage:NSLocalizedString(@"UnsyncPrintError", @"") withModalType:ModalTypeError];
         [APPDELEGATE showCustomAlert:alert];
         [self setToUnselectiblePriorToRefresh];
         [delegate revisitedGroupedPhotoShouldPrintWithFileList:nil];
     } else {
-        [delegate revisitedGroupedPhotoShouldPrintWithFileList:selectedMetaFiles];
+        [delegate revisitedGroupedPhotoShouldPrintWithFileList:self.selectedMetaFiles];
     }
 }
 
 - (void) destinationAlbumChosenWithUuid:(NSString *) chosenAlbumUuid {
-    [albumAddPhotosDao requestAddPhotos:selectedFileList toAlbum:chosenAlbumUuid];
+    [albumAddPhotosDao requestAddPhotos:self.selectedFileList toAlbum:chosenAlbumUuid];
     [self bringSubviewToFront:progress];
     [progress show:YES];
     //TODO    [self pushProgressViewWithProcessMessage:NSLocalizedString(@"AlbumMovePhotoProgressMessage", @"") andSuccessMessage:NSLocalizedString(@"MoveSuccessMessageNew", @"") andFailMessage:NSLocalizedString(@"AlbumMovePhotoFailMessage", @"")];
@@ -1108,7 +1119,7 @@
 
 - (NSMutableArray *) uuidsOfOnlyDepoFiles {
     NSMutableArray *result = [[NSMutableArray alloc] init];
-    for(MetaFile *row in selectedMetaFiles) {
+    for(MetaFile *row in self.selectedMetaFiles) {
         [result addObject:row.uuid];
     }
     return result;
@@ -1208,7 +1219,7 @@
                      isSelectible:self.isSelectible
                    withImageWidth:imageWidth
                      withGroupKey:sectionGroup.groupKey
-                       isSelected:(castedRow.rawType == RawFileTypeDepo ? [selectedFileList containsObject:castedRow.fileRef.uuid] : [selectedFileList containsObject:[castedRow.assetRef.defaultRepresentation.url absoluteString]])];
+                       isSelected:(castedRow.rawType == RawFileTypeDepo ? [self.selectedFileList containsObject:castedRow.fileRef.uuid] : [self.selectedFileList containsObject:[castedRow.assetRef.defaultRepresentation.url absoluteString]])];
                 return cell;
             } else {
                 UploadRef *castedRow = (UploadRef *) rowItem;
@@ -1352,8 +1363,8 @@
     NSLog(@"RevisitedGroupedPhotoView addUnsyncedFiles called");
     MetaFile *lastFile = nil;
     BOOL noFilesFlag = YES;
-    if([files count] > 0) {
-        lastFile = files.lastObject;
+    if([self.files count] > 0) {
+        lastFile = self.files.lastObject;
         noFilesFlag = NO;
         
         if(lastCheckedDate != nil) {
@@ -1397,11 +1408,11 @@
                 newGroup.refDate = assetDate;
                 newGroup.locationInfo = @"";
                 newGroup.fileInfo = [[NSMutableArray alloc] init];
-                if(![[fileHashList copy] containsObject:rowLocalHash]) {
+                if(![self.fileHashList threadSafe_containsObject:rowLocalHash]) {
                     RawTypeFile *rawFile = [self rawFileForAsset:row];
                     [newGroup.fileInfo addObject:rawFile];
                     if(rawFile.hashRef) {
-                        [fileHashList addObject:rawFile.hashRef];
+                        [self.fileHashList threadSafe_addObject:rawFile.hashRef];
                     }
                 }
                 newGroup.sequence = groupSequence;
@@ -1412,11 +1423,11 @@
             } else {
                 FileInfoGroup *currentGroup = [tempDict objectForKey:dateStr];
                 if(currentGroup != nil) {
-                    if(![[fileHashList copy] containsObject:rowLocalHash]) {
+                    if(![self.fileHashList threadSafe_containsObject:rowLocalHash]) {
                         RawTypeFile *rawFile = [self rawFileForAsset:row];
                         [currentGroup.fileInfo addObject:rawFile];
                         if(rawFile.hashRef) {
-                            [fileHashList addObject:rawFile.hashRef];
+                            [self.fileHashList threadSafe_addObject:rawFile.hashRef];
                         }
                     }
                 } else {
@@ -1425,11 +1436,11 @@
                     newGroup.refDate = assetDate;
                     newGroup.locationInfo = @"";
                     newGroup.fileInfo = [[NSMutableArray alloc] init];
-                    if(![[fileHashList copy] containsObject:rowLocalHash]) {
+                    if(![self.fileHashList threadSafe_containsObject:rowLocalHash]) {
                         RawTypeFile *rawFile = [self rawFileForAsset:row];
                         [newGroup.fileInfo addObject:rawFile];
                         if(rawFile.hashRef) {
-                            [fileHashList addObject:rawFile.hashRef];
+                            [self.fileHashList threadSafe_addObject:rawFile.hashRef];
                         }
                     }
                     newGroup.sequence = groupSequence;
@@ -1518,14 +1529,14 @@
 
 - (void) rawPhotoCollCellImageWasMarkedForFile:(MetaFile *) fileSelected {
     if(fileSelected.uuid) {
-        if(![selectedFileList containsObject:fileSelected.uuid]) {
-            [selectedFileList addObject:fileSelected.uuid];
-            [selectedMetaFiles addObject:fileSelected];
+        if(![self.selectedFileList containsObject:fileSelected.uuid]) {
+            [self.selectedFileList addObject:fileSelected.uuid];
+            [self.selectedMetaFiles addObject:fileSelected];
         }
     }
-    if([selectedFileList count] > 0) {
+    if([self.selectedFileList count] > 0) {
         [self showImgFooterMenu];
-        [delegate revisitedGroupedPhotoChangeTitleTo:[NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]]];
+        [delegate revisitedGroupedPhotoChangeTitleTo:[NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [self.selectedFileList count]]];
     } else {
         [self hideImgFooterMenu];
         [delegate revisitedGroupedPhotoChangeTitleTo:NSLocalizedString(@"SelectFilesTitle", @"")];
@@ -1546,13 +1557,13 @@
 }
 
 - (void) rawPhotoCollCellImageWasUnmarkedForFile:(MetaFile *) fileSelected {
-    if([selectedFileList containsObject:fileSelected.uuid]) {
-        [selectedFileList removeObject:fileSelected.uuid];
-        [selectedMetaFiles removeObject:fileSelected];
+    if([self.selectedFileList containsObject:fileSelected.uuid]) {
+        [self.selectedFileList removeObject:fileSelected.uuid];
+        [self.selectedMetaFiles removeObject:fileSelected];
     }
-    if([selectedFileList count] > 0) {
+    if([self.selectedFileList count] > 0) {
         [self showImgFooterMenu];
-        [delegate revisitedGroupedPhotoChangeTitleTo:[NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]]];
+        [delegate revisitedGroupedPhotoChangeTitleTo:[NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [self.selectedFileList count]]];
     } else {
         [self hideImgFooterMenu];
         [delegate revisitedGroupedPhotoChangeTitleTo:NSLocalizedString(@"SelectFilesTitle", @"")];
@@ -1597,15 +1608,15 @@
 - (void) rawPhotoCollCellImageWasMarkedForAsset:(ALAsset *) fileSelected {
     if(fileSelected != nil) {
         NSString *assetUrl = [fileSelected.defaultRepresentation.url absoluteString];
-        if(![selectedFileList containsObject:assetUrl]) {
-            [selectedFileList addObject:assetUrl];
-            [selectedAssets addObject:fileSelected];
+        if(![self.selectedFileList containsObject:assetUrl]) {
+            [self.selectedFileList addObject:assetUrl];
+            [self.selectedAssets addObject:fileSelected];
         }
     }
     
-    if([selectedFileList count] > 0) {
+    if([self.selectedFileList count] > 0) {
         [self showImgFooterMenu];
-        [delegate revisitedGroupedPhotoChangeTitleTo:[NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]]];
+        [delegate revisitedGroupedPhotoChangeTitleTo:[NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [self.selectedFileList count]]];
     } else {
         [self hideImgFooterMenu];
         [delegate revisitedGroupedPhotoChangeTitleTo:NSLocalizedString(@"SelectFilesTitle", @"")];
@@ -1619,7 +1630,7 @@
 }
 
 - (void) toggleFooterSyncButton {
-    if([selectedAssets count] > 0) {
+    if([self.selectedAssets count] > 0) {
         [imgFooterActionMenu enableSyncButton];
     } else {
         [imgFooterActionMenu disableSyncButton];
@@ -1627,7 +1638,7 @@
 }
 
 - (void) toggleFooterRemoteButtons {
-    if([selectedMetaFiles count] > 0) {
+    if([self.selectedMetaFiles count] > 0) {
         [imgFooterActionMenu enableDeleteButton];
         [imgFooterActionMenu enableMoveButton];
 //        [imgFooterActionMenu enablePrintButton];
@@ -1643,14 +1654,14 @@
 - (void) rawPhotoCollCellImageWasUnmarkedForAsset:(ALAsset *) fileSelected {
     if(fileSelected != nil) {
         NSString *assetUrl = [fileSelected.defaultRepresentation.url absoluteString];
-        if([selectedFileList containsObject:assetUrl]) {
-            [selectedFileList removeObject:assetUrl];
-            [selectedAssets removeObject:fileSelected];
+        if([self.selectedFileList containsObject:assetUrl]) {
+            [self.selectedFileList removeObject:assetUrl];
+            [self.selectedAssets removeObject:fileSelected];
         }
     }
-    if([selectedFileList count] > 0) {
+    if([self.selectedFileList count] > 0) {
         [self showImgFooterMenu];
-        [delegate revisitedGroupedPhotoChangeTitleTo:[NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]]];
+        [delegate revisitedGroupedPhotoChangeTitleTo:[NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [self.selectedFileList count]]];
     } else {
         [self hideImgFooterMenu];
         [delegate revisitedGroupedPhotoChangeTitleTo:NSLocalizedString(@"SelectFilesTitle", @"")];
@@ -1700,22 +1711,22 @@
                 if([rowItem isKindOfClass:[RawTypeFile class]]) {
                     RawTypeFile *castedRow = (RawTypeFile *) rowItem;
                     if (castedRow.rawType == RawFileTypeDepo) {
-                        if(![selectedFileList containsObject:castedRow.fileRef.uuid]) {
-                            [selectedFileList addObject:castedRow.fileRef.uuid];
-                            [selectedMetaFiles addObject:castedRow.fileRef];
+                        if(![self.selectedFileList containsObject:castedRow.fileRef.uuid]) {
+                            [self.selectedFileList addObject:castedRow.fileRef.uuid];
+                            [self.selectedMetaFiles addObject:castedRow.fileRef];
                         }
                     } else {
                         NSString *assetUrl = [castedRow.assetRef.defaultRepresentation.url absoluteString];
-                        if(![selectedFileList containsObject:assetUrl]) {
-                            [selectedFileList addObject:assetUrl];
-                            [selectedAssets addObject:castedRow.assetRef];
+                        if(![self.selectedFileList containsObject:assetUrl]) {
+                            [self.selectedFileList addObject:assetUrl];
+                            [self.selectedAssets addObject:castedRow.assetRef];
                         }
                     }
                 }
             }
-            if([selectedFileList count] > 0) {
+            if([self.selectedFileList count] > 0) {
                 [self showImgFooterMenu];
-                [delegate revisitedGroupedPhotoChangeTitleTo:[NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]]];
+                [delegate revisitedGroupedPhotoChangeTitleTo:[NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [self.selectedFileList count]]];
             } else {
                 [self hideImgFooterMenu];
                 [delegate revisitedGroupedPhotoChangeTitleTo:NSLocalizedString(@"SelectFilesTitle", @"")];
@@ -1746,22 +1757,22 @@
                 if([rowItem isKindOfClass:[RawTypeFile class]]) {
                     RawTypeFile *castedRow = (RawTypeFile *) rowItem;
                     if (castedRow.rawType == RawFileTypeDepo) {
-                        if([selectedFileList containsObject:castedRow.fileRef.uuid]) {
-                            [selectedFileList removeObject:castedRow.fileRef.uuid];
-                            [selectedMetaFiles removeObject:castedRow.fileRef];
+                        if([self.selectedFileList containsObject:castedRow.fileRef.uuid]) {
+                            [self.selectedFileList removeObject:castedRow.fileRef.uuid];
+                            [self.selectedMetaFiles removeObject:castedRow.fileRef];
                         }
                     } else {
                         NSString *assetUrl = [castedRow.assetRef.defaultRepresentation.url absoluteString];
-                        if([selectedFileList containsObject:assetUrl]) {
-                            [selectedFileList removeObject:assetUrl];
-                            [selectedAssets removeObject:castedRow.assetRef];
+                        if([self.selectedFileList containsObject:assetUrl]) {
+                            [self.selectedFileList removeObject:assetUrl];
+                            [self.selectedAssets removeObject:castedRow.assetRef];
                         }
                     }
                 }
             }
-            if([selectedFileList count] > 0) {
+            if([self.selectedFileList count] > 0) {
                 [self showImgFooterMenu];
-                [delegate revisitedGroupedPhotoChangeTitleTo:[NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [selectedFileList count]]];
+                [delegate revisitedGroupedPhotoChangeTitleTo:[NSString stringWithFormat:NSLocalizedString(@"FilesSelectedTitle", @""), [self.selectedFileList count]]];
             } else {
                 [self hideImgFooterMenu];
                 [delegate revisitedGroupedPhotoChangeTitleTo:NSLocalizedString(@"SelectFilesTitle", @"")];
@@ -1810,17 +1821,17 @@
     [uploadingUuids removeAllObjects];
     if([fileList count] > 0) {
         for(MetaFile *file in fileList) {
-            if(![selectedFileList containsObject:file.uuid]) {
-                [selectedFileList addObject:file.uuid];
-                [selectedMetaFiles addObject:file];
+            if(![self.selectedFileList containsObject:file.uuid]) {
+                [self.selectedFileList addObject:file.uuid];
+                [self.selectedMetaFiles addObject:file];
             }
         }
         if(postUploadProcessType == NextProcessTypeShare) {
             if ([delegate respondsToSelector:@selector(revisitedGroupedPhoto:triggerShareForFiles:withUUID:)]) {
-                [delegate revisitedGroupedPhoto:self triggerShareForFiles:selectedMetaFiles withUUID:selectedFileList];
+                [delegate revisitedGroupedPhoto:self triggerShareForFiles:self.selectedMetaFiles withUUID:self.selectedFileList];
                 return;
             }
-            [delegate revisitedGroupedPhoto:self triggerShareForFiles:selectedMetaFiles];
+            [delegate revisitedGroupedPhoto:self triggerShareForFiles:self.selectedMetaFiles];
             // [APPDELEGATE.base triggerShareForFiles:selectedFileList];
         } else if(postUploadProcessType == NextProcessTypeMove) {
             [delegate revisitedGroupedPhotoShowPhotoAlbums:self];
@@ -1867,7 +1878,7 @@
         } else {
             // uiview animation collview ile duzgun calismiyor. Workaround cozum uygulandi.
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(Footer_Animation_Duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                if([selectedFileList count] > 0) { // footer hala gorunuyorsa ata
+                if([self.selectedFileList count] > 0) { // footer hala gorunuyorsa ata
                     collView.frame = frame;
                 }
             });
