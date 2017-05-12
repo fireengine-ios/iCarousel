@@ -132,7 +132,7 @@
         dateCompareFormat = [[NSDateFormatter alloc] init];
         [dateCompareFormat setDateFormat:@"MMM yyyy"];
         
-        self.groups = [[NSMutableArray alloc] init];
+        self.groups = [[[NSMutableArray alloc] init] threadSafe_init];
         self.files = [[NSMutableArray alloc] init];
         self.fileHashList = [[[NSMutableArray alloc] init] threadSafe_init];
         NSArray *locallySavedFiles = [SyncUtil readLocallySavedFiles];
@@ -473,18 +473,22 @@
             [initialRow.fileInfo addObjectsFromArray:group.fileInfo];
             initialRow.fileInfo = [self sortRawArrayByDateDesc:initialRow.fileInfo];
             if (counter == 0 && self.groups.count == 0) {
-                [self.groups addObject:initialRow];
+                if (![self.groups threadSafe_containsObject:group]) {
+                    [self.groups threadSafe_addObject:initialRow];
+                }
             } else {
-                [self.groups replaceObjectAtIndex:counter withObject:initialRow];
+                [self.groups threadSafe_replaceObjectAtIndex:counter withObject:initialRow];
             }
         } else {
             group.fileInfo = [self sortRawArrayByDateDesc:group.fileInfo];
-            [self.groups addObject:group];
+            if (![self.groups threadSafe_containsObject:group]) {
+                [self.groups threadSafe_addObject:group];
+            }
         }
         
         NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"refDate" ascending:NO];
         NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-        self.groups = [[self.groups sortedArrayUsingDescriptors:sortDescriptors] mutableCopy];
+        [self.groups sortUsingDescriptors:sortDescriptors];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self neutralizeSearchBar]; 
         });
@@ -1346,12 +1350,7 @@
         NSDate * date2 = [second valueForProperty:ALAssetPropertyDate];
         return [date2 compare:date1];
     }];
-    
-//    for (int i = 0; i < 2; i++) {
-//     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-         [self addUnsyncedFiles];
-//     });
-//    }
+    [self addUnsyncedFiles];
 }
 
 - (void) syncManagerNumberOfImagesWaitingForUpload:(int) imgCount {
@@ -1398,12 +1397,6 @@
         }
 
         NSString *rowLocalHash = [SyncUtil md5StringOfString:[row.defaultRepresentation.url absoluteString]];
-
-//        if(shouldShow) {
-//            if([currentUploadingRefHashes containsObject:rowLocalHash]) {
-//                shouldShow = NO;
-//            }
-//        }
         
         if(noFilesFlag || shouldShow || endOfFiles) {
             NSString *dateStr = [dateCompareFormat stringFromDate:assetDate];
@@ -1858,7 +1851,7 @@
 #pragma mark - BulkRead delegate methods for header unsync image count
 
 - (void) bulkReadSuccessCallback:(NSArray *) bulkFiles {
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^(void) {
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^(void) {
         NSMutableArray *hashArray = [[NSMutableArray alloc] init];
         for(MetaFile *row in bulkFiles) {
             if(row.metaHash != nil) {
