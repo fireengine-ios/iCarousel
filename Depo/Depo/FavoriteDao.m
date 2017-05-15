@@ -58,7 +58,8 @@
     NSURLSessionDataTask *task = [[DepoHttpManager sharedInstance].urlSession dataTaskWithRequest:request completionHandler:[self createCompletionHandlerWithCompletion:^(NSData *data, NSURLResponse *response, NSError *error) {
         if ([self checkResponseHasError:response]) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
+                [self requestFailed:response];
+//                [self shouldReturnFailWithMessage:GENERAL_ERROR_MESSAGE];
             });
             return ;
         }
