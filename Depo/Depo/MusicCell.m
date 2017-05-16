@@ -157,11 +157,15 @@
     float imgWidth = self.frame.size.height - 32;
     float maxWidth = IS_IPAD ? 70 : 40;
     float totalLeftIndex = leftIndex + maxWidth + 15;
+    float rightIndex = totalLeftIndex;
+    if(self.independentFavButton) {
+        rightIndex = 120;
+    }
 
     if(self.imgView) {
         self.imgView.frame = CGRectMake(leftIndex + (maxWidth - imgWidth)/2, (self.frame.size.height - imgWidth)/2, imgWidth, imgWidth);
     }
-    CGRect nameFieldRect = CGRectMake(totalLeftIndex, self.frame.size.height/2 - 22, self.frame.size.width - totalLeftIndex, 22);
+    CGRect nameFieldRect = CGRectMake(totalLeftIndex, self.frame.size.height/2 - 22, self.frame.size.width - rightIndex, 22);
     CGRect detailFieldRect = CGRectMake(totalLeftIndex, self.frame.size.height/2, self.frame.size.width - totalLeftIndex, 20);
     if(nameLabel) {
         nameLabel.frame = nameFieldRect;
