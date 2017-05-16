@@ -256,70 +256,82 @@
 }
 
 - (void) backupClicked {
-    if ([ContactSyncSDK isRunning]) {
-        IGLog(@"ContactSync backup request is rejected because it is running");
-        return;
+    
+    NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
+    if(networkStatus == kReachableViaWiFi || networkStatus == kReachableViaWWAN) {
+        if ([ContactSyncSDK isRunning]) {
+            IGLog(@"ContactSync backup request is rejected because it is running");
+            return;
+        }
+        
+        IGLog(@"ContactSync backup started");
+        APPDELEGATE.session.syncType = ContactSyncTypeBackup;
+        //    [self showProcessView];
+        //    [self makeButtonsPassive];
+        
+        [self changeViews:syncView nextView:progressView];
+        progressView.progressLabel.text = NSLocalizedString(@"ContactSyncProgressOnServerText", @"");
+        syncResultView.label.text = [NSLocalizedString(@"ContactSyncBackupResultTitle", @"") uppercaseString];
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [ContactSyncSDK hasContactForBackup:^(SYNCResultType resultType) {
+                switch (resultType) {
+                    case SYNC_RESULT_SUCCESS: {
+                        _triedAgain = NO;
+                        [ContactSyncSDK doSync:SYNCBackup];
+                        syncMode = SYNCBackup;
+                    }
+                        break;
+                        
+                    case SYNC_RESULT_FAIL: {
+                        [self showErrorAlertWithMessage:NSLocalizedString(@"ContactThereIsNoContact", @"")];
+                        //                    [processView dismissWithFailureMessage];
+                        //                    [self makeButtonsActive];
+                    }
+                        break;
+                        
+                    case SYNC_RESULT_ERROR_PERMISSION_ADDRESS_BOOK: {
+                        [self showErrorAlertWithMessage:NSLocalizedString(@"AddressBookGrantError", @"")];
+                        //                    [processView dismissWithFailureMessage];
+                        //                    [self makeButtonsActive];
+                    }
+                        break;
+                        
+                    default:
+                        break;
+                }
+            }];
+        });
     }
-    
-    IGLog(@"ContactSync backup started");
-    APPDELEGATE.session.syncType = ContactSyncTypeBackup;
-//    [self showProcessView];
-//    [self makeButtonsPassive];
-    
-    [self changeViews:syncView nextView:progressView];
-    progressView.progressLabel.text = NSLocalizedString(@"ContactSyncProgressOnServerText", @"");
-    syncResultView.label.text = [NSLocalizedString(@"ContactSyncBackupResultTitle", @"") uppercaseString];
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [ContactSyncSDK hasContactForBackup:^(SYNCResultType resultType) {
-            switch (resultType) {
-                case SYNC_RESULT_SUCCESS: {
-                    _triedAgain = NO;
-                    [ContactSyncSDK doSync:SYNCBackup];
-                    syncMode = SYNCBackup;
-                }
-                    break;
-                    
-                case SYNC_RESULT_FAIL: {
-                    [self showErrorAlertWithMessage:NSLocalizedString(@"ContactThereIsNoContact", @"")];
-//                    [processView dismissWithFailureMessage];
-//                    [self makeButtonsActive];
-                }
-                    break;
-                    
-                case SYNC_RESULT_ERROR_PERMISSION_ADDRESS_BOOK: {
-                    [self showErrorAlertWithMessage:NSLocalizedString(@"AddressBookGrantError", @"")];
-//                    [processView dismissWithFailureMessage];
-//                    [self makeButtonsActive];
-                }
-                    break;
-                    
-                default:
-                    break;
-            }
-        }];
-    });
-    
-    
+    else {
+        [self showErrorAlertWithMessage:NSLocalizedString(@"NoConnErrorMessage", @"")];
+    }
 }
 
 - (void) restoreClicked {
-    if ([ContactSyncSDK isRunning]) {
-        IGLog(@"ContactSync restore request is rejected because it is running");
-        return;
+    
+    NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
+    if(networkStatus == kReachableViaWiFi || networkStatus == kReachableViaWWAN) {
+        if ([ContactSyncSDK isRunning]) {
+            IGLog(@"ContactSync restore request is rejected because it is running");
+            return;
+        }
+        
+        IGLog(@"ContactSync restore started");
+        APPDELEGATE.session.syncType = ContactSyncTypeRestore;
+        _triedAgain = NO;
+        [ContactSyncSDK doSync:SYNCRestore];
+        [self changeViews:syncView nextView:progressView];
+        progressView.progressLabel.text = NSLocalizedString(@"ContactSyncProgressOnClientText", @"");
+        syncResultView.label.text = [NSLocalizedString(@"ContactSyncRestoreResultTitle", @"") uppercaseString];
+        syncMode = SYNCRestore;
+        
+        //    [self showProcessView];
+        //    [self makeButtonsPassive];
     }
-    
-    IGLog(@"ContactSync restore started");
-    APPDELEGATE.session.syncType = ContactSyncTypeRestore;
-    _triedAgain = NO;
-    [ContactSyncSDK doSync:SYNCRestore];
-    [self changeViews:syncView nextView:progressView];
-    progressView.progressLabel.text = NSLocalizedString(@"ContactSyncProgressOnClientText", @"");
-    syncResultView.label.text = [NSLocalizedString(@"ContactSyncRestoreResultTitle", @"") uppercaseString];
-    syncMode = SYNCRestore;
-    
-//    [self showProcessView];
-//    [self makeButtonsPassive];
+    else {
+        [self showErrorAlertWithMessage:NSLocalizedString(@"NoConnErrorMessage", @"")];
+    }
 }
 
 - (void) manualSyncFinalized {
