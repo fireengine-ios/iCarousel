@@ -15,6 +15,7 @@
 #import "SharedUtil.h"
 #import "ImageScale.h"
 #import "UIImageView+WebCache.h"
+#import "ALAssetRepresentation+MD5.h"
 
 //TODO test -> prod
 #define EXT_REMEMBER_ME_URL @"https://adepo.turkcell.com.tr/api/auth/rememberMe"
@@ -30,6 +31,7 @@
 
 @interface ShareViewController () {
     double totalSize;
+    NSData *currentImgData;
 }
 @property (nonatomic, strong) NSMutableArray *originalImages;
 @property (nonatomic, strong) NSMutableArray *originalImagesForCV;
@@ -133,7 +135,8 @@
         [ExtensionUploadManager sharedInstance].delegate = self;
         if(isMedia) {
             if(isPhoto) {
-                [[ExtensionUploadManager sharedInstance] startUploadForImage:previewView.image];
+                NSString *fileName = ((NSURL *) item).lastPathComponent;
+                [[ExtensionUploadManager sharedInstance] startUploadForImage:previewView.image withData:currentImgData fileName:fileName];
             } else {
                 NSURL *moviePath = item;
                 
@@ -169,6 +172,8 @@
 
 - (void) viewDidLoad {
     [super viewDidLoad];
+    
+    
     
     self.imagesCollectionView.delegate = self;
     self.imagesCollectionView.dataSource = self;
@@ -289,6 +294,7 @@
                         
                         if([(NSObject*)item isKindOfClass:[NSURL class]]) {
                             NSData* imgData = [NSData dataWithContentsOfURL:(NSURL*)item];
+                            currentImgData = imgData;
                             totalSize += imgData.length;
                             sharedImage = [UIImage imageWithData:imgData];
                         }
@@ -455,8 +461,19 @@
 }
 
 - (void) extensionUploadHasFinished {
+    
+    NSDictionary *dictt = self.originalImages[currentUploadIndex];
+    id itemm = [dictt objectForKey:@"item"];
+    NSString *fileName = ((NSURL *) itemm).lastPathComponent;
+    MetaFileSummary *summary = [[MetaFileSummary alloc] init];
+    summary.fileName = fileName;
+    summary.bytes = currentImgData.length;
+    [SharedUtil cacheSyncFileSummary:summary];
+    
+    
     if(currentUploadIndex < urlsToUpload.count - 1) {
         progressView.frame = CGRectMake(progressView.frame.origin.x, progressView.frame.origin.y, 0, progressView.frame.size.height);
+        
         
         currentUploadIndex ++;
         
@@ -470,6 +487,8 @@
                 image = [self getVideoThumbnail:moviePath];
             }
             else {
+                NSData *imgData = [NSData dataWithContentsOfURL:item];
+                currentImgData = imgData;
                 image = [UIImage imageWithData:[NSData dataWithContentsOfURL:item]];
             }
         } else if ([item isKindOfClass:[UIImage class]]) {

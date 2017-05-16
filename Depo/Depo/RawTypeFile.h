@@ -11,6 +11,7 @@
 #import "UploadRef.h"
 #import "MetaFile.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "MetaFileSummary.h"
 
 @interface RawTypeFile : NSObject
 
@@ -20,5 +21,6 @@
 @property (nonatomic, strong) MetaFile *fileRef;
 @property (nonatomic, strong) NSDate *refDate;
 @property (nonatomic, strong) NSString *hashRef;
+@property (nonatomic, strong) MetaFileSummary *summaryRef;
 
 @end

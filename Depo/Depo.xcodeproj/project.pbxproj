@@ -756,6 +756,7 @@
 		070A22181E8AB807002385F7 /* Line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 070A22151E8AB807002385F7 /* Line@2x.png */; };
 		070A22191E8AB807002385F7 /* Line@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 070A22161E8AB807002385F7 /* Line@3x.png */; };
 		070A221F1E8AEB34002385F7 /* CircleProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 070A221E1E8AEB34002385F7 /* CircleProgressBar.m */; };
+		0715C0551EC1D3EC00D38BEA /* MetaFileSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C7CB691ABC91B200A7BF8E /* MetaFileSummary.m */; };
 		073762191EA09E5200A1A4BC /* ImageScale.m in Sources */ = {isa = PBXBuildFile; fileRef = 073762181EA09E5200A1A4BC /* ImageScale.m */; };
 		07547CF11EA4B4140012F4FE /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC3F791E71231E00DDC28C /* MKAnnotationView+WebCache.m */; };
 		07547CF21EA4B4140012F4FE /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC3F7B1E71231E00DDC28C /* NSData+ImageContentType.m */; };
@@ -5682,7 +5683,7 @@
 				ORGANIZATIONNAME = com.igones;
 				TargetAttributes = {
 					051E1DF219CAC2F900FD1E03 = {
-						DevelopmentTeam = DB3TU6GTY2;
+						DevelopmentTeam = PT569ZA878;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -5703,7 +5704,7 @@
 					};
 					05C3A3781B57DFAB002AB49A = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = DB3TU6GTY2;
+						DevelopmentTeam = PT569ZA878;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -7098,6 +7099,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				07547CFE1EA4B4140012F4FE /* UIImage+MultiFormat.m in Sources */,
+				0715C0551EC1D3EC00D38BEA /* MetaFileSummary.m in Sources */,
 				07547CFF1EA4B4140012F4FE /* UIImage+WebP.m in Sources */,
 				05028CC01B595440000F2D09 /* ExtensionUploadManager.m in Sources */,
 				07547CFA1EA4B4140012F4FE /* SDWebImageManager.m in Sources */,
@@ -7326,6 +7328,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Omer Burak Kir (7BESVJQ8SV)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Omer Burak Kir (7BESVJQ8SV)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
+				DEVELOPMENT_TEAM = PT569ZA878;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7628,6 +7631,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Omer Burak Kir (7BESVJQ8SV)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Omer Burak Kir (7BESVJQ8SV)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = PT569ZA878;
 				ENABLE_BITCODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;

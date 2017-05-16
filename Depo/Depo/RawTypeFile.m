@@ -15,5 +15,6 @@
 @synthesize fileRef;
 @synthesize refDate;
 @synthesize hashRef;
+@synthesize summaryRef;
 
 @end

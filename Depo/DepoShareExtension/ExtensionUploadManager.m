@@ -191,17 +191,19 @@ static const NSUInteger ExtBufferSize = 1024*1024;
     [uploadTask resume];
 }
 
-- (void) startUploadForImage:(UIImage *) img {
-    ExifContainer *container = [[ExifContainer alloc] init];
-    [container addCreationDate:[NSDate date]];
+- (void) startUploadForImage:(UIImage *) img withData:(NSData *) imageData fileName:(NSString *) name {
+//    ExifContainer *container = [[ExifContainer alloc] init];
+//    [container addCreationDate:[NSDate date]];
     
-    NSData *data = [img addExif:container];
+//    NSData *data = [img addExif:container];
+    NSData *data = imageData;
 
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     
-    NSString *randomVal = [NSString stringWithFormat:@"%.0f%d", [[NSDate date] timeIntervalSince1970], arc4random_uniform(99)];
-    NSString *tempImgName = [NSString stringWithFormat:@"/%@_EXT.jpeg", randomVal];
+//    NSString *randomVal = [NSString stringWithFormat:@"%.0f%d", [[NSDate date] timeIntervalSince1970], arc4random_uniform(99)];
+//    NSString *tempImgName = [NSString stringWithFormat:@"/%@_EXT.jpeg", randomVal];
+    NSString *tempImgName = [NSString stringWithFormat:@"/%@",name];
     NSString *tempPath = [documentsDirectory stringByAppendingString:tempImgName];
     
     BOOL shouldContinueUpload = YES;

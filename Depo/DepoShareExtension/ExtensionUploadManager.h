@@ -26,7 +26,7 @@
 @property (nonatomic, strong) NSURLSessionTask *currentTask;
 
 + (ExtensionUploadManager *) sharedInstance;
-- (void) startUploadForImage:(UIImage *) img;
+- (void) startUploadForImage:(UIImage *) img withData:(NSData *) imageData fileName:(NSString *) name;
 - (void) startUploadForVideoData:(NSData *)videoData forPath:(NSURL *)path;
 //- (void) startUploadForVideoData:(NSData *) videoData withExtension:(NSString *) ext;
 - (void) startUploadForDoc:(NSData *) docData withContentType:(NSString *) contentType withExt:(NSString *) ext;

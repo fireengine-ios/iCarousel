@@ -226,8 +226,9 @@
         if(![result containsObject:summary]) {
             NSArray *updatedArray = [result arrayByAddingObject:summary];
             NSString *baseUrlConstant = [SyncUtil readBaseUrlConstant] != nil ? [SyncUtil readBaseUrlConstant] : @"";
-            [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray] forKey:[NSString stringWithFormat:SYNCED_REMOTE_FILES_SUMMARY_KEY, baseUrlConstant]];
-            [[NSUserDefaults standardUserDefaults] synchronize];
+            NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:GROUP_NAME_SUITE_NSUSERDEFAULTS];
+            [sharedDefaults setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray] forKey:[NSString stringWithFormat:SYNCED_REMOTE_FILES_SUMMARY_KEY, baseUrlConstant]];
+            [sharedDefaults synchronize];
         }
     });
 }
@@ -236,11 +237,25 @@
     NSArray *result = [SyncUtil readSyncFileSummaries];
     NSArray *updatedArray = [result arrayByAddingObjectsFromArray:newArray];
     NSString *baseUrlConstant = [SyncUtil readBaseUrlConstant] != nil ? [SyncUtil readBaseUrlConstant] : @"";
-    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray] forKey:[NSString stringWithFormat:SYNCED_REMOTE_FILES_SUMMARY_KEY, baseUrlConstant]];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:GROUP_NAME_SUITE_NSUSERDEFAULTS];
+    [sharedDefaults setObject:[NSKeyedArchiver archivedDataWithRootObject:updatedArray] forKey:[NSString stringWithFormat:SYNCED_REMOTE_FILES_SUMMARY_KEY, baseUrlConstant]];
+    [sharedDefaults synchronize];
 }
 
 + (NSArray *) readSyncFileSummaries {
+    NSArray *result = [[NSArray alloc] init];
+    NSString *baseUrlConstant = [SyncUtil readBaseUrlConstant] != nil ? [SyncUtil readBaseUrlConstant] : @"";
+    NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:GROUP_NAME_SUITE_NSUSERDEFAULTS];
+    NSData *arrData = [sharedDefaults objectForKey:[NSString stringWithFormat:SYNCED_REMOTE_FILES_SUMMARY_KEY, baseUrlConstant]];
+    if (arrData != nil) {
+        result = [NSKeyedUnarchiver unarchiveObjectWithData:arrData];
+    }
+    
+    NSArray *oldSyncFileSummaries = [self readOldSyncFileSummaries];
+    return ([result arrayByAddingObjectsFromArray:oldSyncFileSummaries]);
+}
+
++ (NSArray *) readOldSyncFileSummaries {
     NSArray *result = [[NSArray alloc] init];
     NSString *baseUrlConstant = [SyncUtil readBaseUrlConstant] != nil ? [SyncUtil readBaseUrlConstant] : @"";
     NSData *arrData = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:SYNCED_REMOTE_FILES_SUMMARY_KEY, baseUrlConstant]];

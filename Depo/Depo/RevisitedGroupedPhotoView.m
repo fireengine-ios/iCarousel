@@ -65,6 +65,7 @@
 @implementation RevisitedGroupedPhotoView
 
 @synthesize delegate;
+
 @synthesize refreshControl;
 @synthesize readDao;
 @synthesize bulkReadDao;
@@ -144,6 +145,9 @@
         self.selectedFileList = [[NSMutableArray alloc] init];
         self.selectedMetaFiles = [[NSMutableArray alloc] init];
         self.selectedAssets = [[NSMutableArray alloc] init];
+
+        self.fileSummariesList = [[NSMutableArray alloc] init];
+
         uploadingUuids = [[NSMutableArray alloc] init];
         
         [SyncManager sharedInstance].infoDelegate = self;
@@ -401,6 +405,7 @@
                 [self.fileHashList threadSafe_addObject:localHash];
             }
         }
+        [self.fileSummariesList removeAllObjects];
         
         [[SDWebImagePrefetcher sharedImagePrefetcher] cancelPrefetching];
         [[SDWebImageManager sharedManager].imageCache clearMemory];
@@ -571,7 +576,8 @@
                         [newGroup.fileInfo addObject:rawFile];
                         if(rawFile.hashRef) {
                             [self.fileHashList threadSafe_addObject:rawFile.hashRef];
-                        }
+
+                        } else {[self.fileSummariesList addObject:rawFile.summaryRef];}
                         newGroup.sequence = groupSequence;
                         newGroup.groupKey = dateStr;
                         [tempDict setObject:newGroup forKey:dateStr];
@@ -584,7 +590,7 @@
                             [currentGroup.fileInfo addObject:rawFile];
                             if(rawFile.hashRef) {
                                 [self.fileHashList threadSafe_addObject:rawFile.hashRef];
-                            }
+                            } else {[self.fileSummariesList addObject:rawFile.summaryRef];}
                         } else {
                             FileInfoGroup *newGroup = [[FileInfoGroup alloc] init];
                             newGroup.customTitle = dateStr;
@@ -595,7 +601,7 @@
                             [newGroup.fileInfo addObject:rawFile];
                             if(rawFile.hashRef) {
                                 [self.fileHashList threadSafe_addObject:rawFile.hashRef];
-                            }
+                            } else {[self.fileSummariesList addObject:rawFile.summaryRef];}
                             newGroup.sequence = groupSequence;
                             newGroup.groupKey = dateStr;
                             [tempDict setObject:newGroup forKey:dateStr];
@@ -1366,6 +1372,13 @@
     
     IGLog(@"RevisitedGroupedPhotoView addUnsyncedFiles called");
     NSLog(@"RevisitedGroupedPhotoView addUnsyncedFiles called");
+    
+    NSSet *hashSet = [[NSSet alloc] initWithArray:self.fileHashList];
+    NSMutableDictionary *sumDict = [[NSMutableDictionary alloc] init];
+    for (MetaFileSummary *sum in self.fileSummariesList) {
+        [sumDict setObject:[NSNumber numberWithLongLong:sum.bytes] forKey:sum.fileName];
+    }
+    
     MetaFile *lastFile = nil;
     BOOL noFilesFlag = YES;
     if([self.files count] > 0) {
@@ -1398,6 +1411,12 @@
         }
 
         NSString *rowLocalHash = [SyncUtil md5StringOfString:[row.defaultRepresentation.url absoluteString]];
+
+//        if(shouldShow) {
+//            if([currentUploadingRefHashes containsObject:rowLocalHash]) {
+//                shouldShow = NO;
+//            }
+//        }
         
         if(noFilesFlag || shouldShow || endOfFiles) {
             NSString *dateStr = [dateCompareFormat stringFromDate:assetDate];
@@ -1407,7 +1426,7 @@
                 newGroup.refDate = assetDate;
                 newGroup.locationInfo = @"";
                 newGroup.fileInfo = [[NSMutableArray alloc] init];
-                if(![self.fileHashList threadSafe_containsObject:rowLocalHash]) {
+                if(![hashSet member:rowLocalHash] && ![self searchFileInSummary:row summaryDict:sumDict]) {
                     RawTypeFile *rawFile = [self rawFileForAsset:row];
                     [newGroup.fileInfo addObject:rawFile];
                     if(rawFile.hashRef) {
@@ -1422,7 +1441,7 @@
             } else {
                 FileInfoGroup *currentGroup = [tempDict objectForKey:dateStr];
                 if(currentGroup != nil) {
-                    if(![self.fileHashList threadSafe_containsObject:rowLocalHash]) {
+                    if(![hashSet member:rowLocalHash] && ![self searchFileInSummary:row summaryDict:sumDict]) {
                         RawTypeFile *rawFile = [self rawFileForAsset:row];
                         [currentGroup.fileInfo addObject:rawFile];
                         if(rawFile.hashRef) {
@@ -1435,7 +1454,7 @@
                     newGroup.refDate = assetDate;
                     newGroup.locationInfo = @"";
                     newGroup.fileInfo = [[NSMutableArray alloc] init];
-                    if(![self.fileHashList threadSafe_containsObject:rowLocalHash]) {
+                    if(![hashSet member:rowLocalHash] && ![self searchFileInSummary:row summaryDict:sumDict]) {
                         RawTypeFile *rawFile = [self rawFileForAsset:row];
                         [newGroup.fileInfo addObject:rawFile];
                         if(rawFile.hashRef) {
@@ -1478,6 +1497,16 @@
     });
 }
 
+- (BOOL)searchFileInSummary:(ALAsset*)asset summaryDict:(NSDictionary*)sumDict {
+    NSNumber *num = [sumDict objectForKey:asset.defaultRepresentation.filename];
+    if (num != nil) {
+        if ([num longLongValue] == asset.defaultRepresentation.size) {
+            return true;
+        }
+    }
+    return false;
+}
+
 - (NSMutableArray *) sortRawArrayByDateDesc:(NSArray *) rawArray {
     NSArray *sortedArray = [rawArray sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
         NSDate *first = [(RawTypeFile *) a refDate];
@@ -1502,6 +1531,10 @@
     result.rawType = RawFileTypeDepo;
     result.refDate = fileRef.detail.imageDate;
     result.hashRef = fileRef.metaHash;
+    MetaFileSummary *summary = [[MetaFileSummary alloc] init];
+    summary.fileName = fileRef.name;
+    summary.bytes = fileRef.bytes;
+    result.summaryRef = summary;
     return result;
 }
 
@@ -1854,11 +1887,19 @@
 - (void) bulkReadSuccessCallback:(NSArray *) bulkFiles {
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^(void) {
         NSMutableArray *hashArray = [[NSMutableArray alloc] init];
+        NSMutableArray *summaryArray = [[NSMutableArray alloc] init];
         for(MetaFile *row in bulkFiles) {
             if(row.metaHash != nil) {
                 [hashArray addObject:row.metaHash];
             }
+            else {
+                MetaFileSummary *fileSummary = [[MetaFileSummary alloc] init];
+                fileSummary.bytes = row.bytes;
+                fileSummary.fileName = row.name;
+                [summaryArray addObject:fileSummary];
+            }
         }
+        [SyncUtil cacheSyncFileSummaries:summaryArray];
         [SyncUtil cacheSyncHashesRemotely:hashArray];
         [[SyncManager sharedInstance] numberOfUnsyncedImages];
     });

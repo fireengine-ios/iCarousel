@@ -31,6 +31,7 @@
                     APPDELEGATE.session.baseUrl = [self strByRawVal:baseUrlValue];
                     APPDELEGATE.session.baseUrlConstant = [AppUtil userUniqueValueByBaseUrl:[self strByRawVal:baseUrlValue]];
                     [SharedUtil writeSharedBaseUrl:APPDELEGATE.session.baseUrl];
+                    [SharedUtil writeSharedBaseUrlConstant:APPDELEGATE.session.baseUrlConstant];
                     [SyncUtil writeBaseUrlConstant:APPDELEGATE.session.baseUrlConstant];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self shouldReturnSuccess];
