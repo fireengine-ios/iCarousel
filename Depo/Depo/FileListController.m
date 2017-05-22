@@ -521,7 +521,7 @@
 - (void) fileFolderCellDidUnselectFile:(MetaFile *)fileSelected {
     if([selectedFileList containsObject:fileSelected.uuid]) {
         [selectedFileList removeObject:fileSelected.uuid];
-        [self.selectedFiles removeAllObjects];
+        [self.selectedFiles removeObject:fileSelected];
     }
     if([selectedFileList count] > 0) {
         [self showFooterMenu];
@@ -591,6 +591,12 @@
                              activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
                              activityViewController.excludedActivityTypes = @[UIActivityTypePostToFacebook];
                              
+                             [activityViewController setCompletionHandler:^(NSString *activityType, BOOL completed) {
+                                 if (completed) {
+                                     [self setToUnselectible];
+                                 }
+                             }];
+                             
                              if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
                                  [self presentViewController:activityViewController animated:YES completion:nil];
                              } else {
@@ -631,7 +637,6 @@
 #pragma mark ShareLinkDao Delegate Methods
 - (void) shareSuccessCallback:(NSString *) linkToShare {
     [self hideLoading];
-    [self setToUnselectible];
     NSArray *activityItems = [NSArray arrayWithObjects:
                               [NSURL URLWithString:linkToShare], nil];
     
@@ -647,6 +652,12 @@
     activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     
     activityViewController.excludedActivityTypes = @[UIActivityTypePostToFacebook];
+    
+    [activityViewController setCompletionHandler:^(NSString *activityType, BOOL completed) {
+        if (completed) {
+            [self setToUnselectible];
+        }
+    }];
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         [self presentViewController:activityViewController animated:YES completion:nil];
