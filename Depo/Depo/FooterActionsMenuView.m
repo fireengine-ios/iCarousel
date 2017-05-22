@@ -110,8 +110,13 @@
         }
 
         if(deleteFlag) {
-            deleteButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 35, 5, 20, 44)
-                                                 withImageName:@"white_delete_icon.png"];
+//            deleteButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 35, 5, 20, 44)
+//                                                 withImageName:@"white_delete_icon.png"];
+            deleteButton = [[CustomButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 35, top + 2, 20, 44)
+                                                 withImageName:@"white_delete_icon.png"
+                                                withTitleBelow:NSLocalizedString(@"DeleteFooterTitle", @"")
+                                                      withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:15]
+                                                     withColor:[UIColor whiteColor]];
             [deleteButton addTarget:self action:@selector(deleteClicked) forControlEvents:UIControlEventTouchUpInside];
             deleteButton.isAccessibilityElement = YES;
             deleteButton.accessibilityIdentifier = @"FooterMenuDelete";
