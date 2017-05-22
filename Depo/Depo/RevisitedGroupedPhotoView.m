@@ -263,7 +263,10 @@
                 }
             }
         } else {
-            isSyncHeaderVisible = YES;
+            UploadManager *activeManRef = [[UploadQueue sharedInstance] activeManager];
+            if (activeManRef == nil) {
+                isSyncHeaderVisible = YES;
+            }
         }
     }
     
