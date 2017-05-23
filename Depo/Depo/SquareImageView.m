@@ -53,12 +53,36 @@
         self.imgView.contentMode = UIViewContentModeScaleAspectFill;
         self.imgView.clipsToBounds = YES;
         if(cacheFlag) {
-            [self.imgView sd_setImageWithURL:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:nil];
+            [self.imgView sd_setImageWithURL:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:nil completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+                if (cacheType == SDImageCacheTypeNone) {
+                    self.imgView.alpha = 0;
+                    __weak SquareImageView *wSelf = self;
+                    [UIView animateWithDuration:0.2 animations:^{
+                        wSelf.imgView.alpha = 1;
+                    }];
+                }
+            }];
         } else {
             if(manualQuality) {
-                [self.imgView sd_setImageWithURL:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:nil];
+                [self.imgView sd_setImageWithURL:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:nil completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+                    if (cacheType == SDImageCacheTypeNone) {
+                        self.imgView.alpha = 0;
+                        __weak SquareImageView *wSelf = self;
+                        [UIView animateWithDuration:0.2 animations:^{
+                            wSelf.imgView.alpha = 1;
+                        }];
+                    }
+                }];
             } else {
-                [self.imgView sd_setImageWithURL:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:nil];
+                [self.imgView sd_setImageWithURL:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:nil completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+                    if (cacheType == SDImageCacheTypeNone) {
+                        self.imgView.alpha = 0;
+                        __weak SquareImageView *wSelf = self;
+                        [UIView animateWithDuration:0.2 animations:^{
+                            wSelf.imgView.alpha = 1;
+                        }];
+                    }
+                }];
             }
         }
         [self addSubview:self.imgView];
@@ -107,7 +131,15 @@
         self.imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
         self.imgView.contentMode = UIViewContentModeScaleAspectFill;
         self.imgView.clipsToBounds = YES;
-        [self.imgView sd_setImageWithURL:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:nil];
+        [self.imgView sd_setImageWithURL:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:nil completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+            if (cacheType == SDImageCacheTypeNone) {
+                self.imgView.alpha = 0;
+                __weak SquareImageView *wSelf = self;
+                [UIView animateWithDuration:0.2 animations:^{
+                    wSelf.imgView.alpha = 1;
+                }];
+            }
+        }];
         [self addSubview:self.imgView];
         
         if(self.file.contentType == ContentTypeVideo) {
@@ -150,7 +182,19 @@
         self.imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
         self.imgView.contentMode = UIViewContentModeScaleAspectFill;
         self.imgView.clipsToBounds = YES;
-        [self.imgView sd_setImageWithURL:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:nil options:SDWebImageHighPriority];
+        [self.imgView sd_setImageWithURL:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]
+                        placeholderImage:nil
+                                 options:SDWebImageHighPriority
+                               completed:
+         ^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+             if (cacheType == SDImageCacheTypeNone) {
+                 self.imgView.alpha = 0;
+                 __weak SquareImageView *wSelf = self;
+                 [UIView animateWithDuration:0.2 animations:^{
+                     wSelf.imgView.alpha = 1;
+                 }];
+             }
+         }];
         [self addSubview:self.imgView];
         
         if(self.file.contentType == ContentTypeVideo) {
@@ -191,7 +235,15 @@
         imgMaxWidth = 600;
     }
     
-    [self.imgView sd_setImageWithURL:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:nil];
+    [self.imgView sd_setImageWithURL:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:nil completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        if (cacheType == SDImageCacheTypeNone) {
+            self.imgView.alpha = 0;
+            __weak SquareImageView *wSelf = self;
+            [UIView animateWithDuration:0.2 animations:^{
+                wSelf.imgView.alpha = 1;
+            }];
+        }
+    }];
 
     if(self.file.contentType == ContentTypeVideo) {
         if(!playIconView) {
@@ -631,7 +683,15 @@
             self.imgView = [[UIImageView alloc] initWithFrame:CGRectMake(-1, -1, self.frame.size.width+2, self.frame.size.height+2)];
             self.imgView.contentMode = UIViewContentModeScaleAspectFill;
             self.imgView.clipsToBounds = YES;
-            [self.imgView sd_setImageWithURL:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:nil];
+            [self.imgView sd_setImageWithURL:[NSURL URLWithString:[self.file.detail.thumbMediumUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] placeholderImage:nil completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+                if (cacheType == SDImageCacheTypeNone) {
+                    self.imgView.alpha = 0;
+                    __weak SquareImageView *wSelf = self;
+                    [UIView animateWithDuration:0.2 animations:^{
+                        wSelf.imgView.alpha = 1;
+                    }];
+                }
+            }];
             [self addSubview:self.imgView];
         }
     }
