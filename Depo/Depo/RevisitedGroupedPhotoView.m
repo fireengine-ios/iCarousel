@@ -392,14 +392,18 @@
 }
 
 - (void) pullData {
+    if (isLoading) {
+        [refreshControl endRefreshing];
+        return;
+    }
     
     if([delegate checkInternet]) {
         listOffset = 0;
         groupSequence = 0;
         lastCheckedDate = nil;
         
-        [self.groups removeAllObjects];
-        [self.files removeAllObjects];
+        [self.groups threadSafe_removeAllObjects];
+        [self.files threadSafe_removeAllObjects];
         [self.fileHashList threadSafe_removeAllObjects];
         
         NSArray *locallySavedFiles = [SyncUtil readLocallySavedFiles];
@@ -471,7 +475,8 @@
     @synchronized (self.groups) {
         FileInfoGroup *initialRow = nil;
         int counter = 0;
-        for(FileInfoGroup *row in self.groups) {
+        for (int i=0; i<[self.groups threadSafe_count]; i++) {
+            FileInfoGroup *row = [self.groups threadSafe_objectAtIndex:i];
             if([row.groupKey isEqualToString:group.groupKey]) {
                 initialRow = row;
                 break;
@@ -717,7 +722,7 @@
             @try {
                 NSIndexPath *visibleIndexPath = [collView indexPathForItemAtPoint:CGPointMake(30, currentOffset)];
                 if(visibleIndexPath && (self.groups.count > visibleIndexPath.section)) {
-                    FileInfoGroup *visibleGroup = [self.groups objectAtIndex:visibleIndexPath.section];
+                    FileInfoGroup *visibleGroup = [self.groups threadSafe_objectAtIndex:visibleIndexPath.section];
                     if([visibleGroup.customTitle isEqualToString:NSLocalizedString(@"ImageGroupTypeInProgress", @"")]) {
                         sectionIndicator.text = @"";
                         [self hideVerticalIndicator];
@@ -738,7 +743,7 @@
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     NSIndexPath *visibleIndexPath = [collView indexPathForItemAtPoint:CGPointMake(30, collView.contentOffset.y)];
     if(visibleIndexPath) {
-        FileInfoGroup *visibleGroup = [self.groups objectAtIndex:visibleIndexPath.section];
+        FileInfoGroup *visibleGroup = [self.groups threadSafe_objectAtIndex:visibleIndexPath.section];
         if(![visibleGroup.customTitle isEqualToString:NSLocalizedString(@"ImageGroupTypeInProgress", @"")]) {
             [self showVerticalIndicator];
         }
@@ -1160,7 +1165,9 @@
     IGLog(@"At RevisitedGroupedPhotoView autoIterationFinished");
     if([[UploadQueue sharedInstance] remainingCount] > 0) {
         IGLog(@"At RevisitedGroupedPhotoView autoIterationFinished pullData will be called");
-        [self pullData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self pullData];
+        });
     }
 }
 
@@ -1206,7 +1213,7 @@
 #pragma mark - UICollectionViewDataSource Methods
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
-    FileInfoGroup *sectionGroup = [self.groups objectAtIndex:section];
+    FileInfoGroup *sectionGroup = [self.groups threadSafe_objectAtIndex:section];
     return [sectionGroup.fileInfo count];
 }
 
@@ -1217,7 +1224,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     //    UICollectionViewCell * c = [cv dequeueReusableCellWithReuseIdentifier:@"COLL_PHOTO_CELL" forIndexPath:indexPath];
     if(self.groups.count > indexPath.section) {
-        FileInfoGroup *sectionGroup = [self.groups objectAtIndex:indexPath.section];
+        FileInfoGroup *sectionGroup = [self.groups threadSafe_objectAtIndex:indexPath.section];
         if(sectionGroup.fileInfo.count > indexPath.row) {
             id rowItem = [sectionGroup.fileInfo objectAtIndex:indexPath.row];
             if([rowItem isKindOfClass:[RawTypeFile class]]) {
@@ -1276,7 +1283,7 @@
     if(!initialLoadDone) {
         return CGSizeZero;
     } else {
-        FileInfoGroup *sectionGroup = [self.groups objectAtIndex:section];
+        FileInfoGroup *sectionGroup = [self.groups threadSafe_objectAtIndex:section];
         if([sectionGroup.fileInfo count] > 0) {
             return CGSizeMake(self.frame.size.width, 40);
         } else {
@@ -1291,7 +1298,7 @@
                                                                                          forIndexPath:theIndexPath];
     if(kind == UICollectionElementKindSectionHeader && initialLoadDone) {
         if(self.groups.count > theIndexPath.section) {
-            FileInfoGroup *sectionGroup = [self.groups objectAtIndex:theIndexPath.section];
+            FileInfoGroup *sectionGroup = [self.groups threadSafe_objectAtIndex:theIndexPath.section];
             collFooterView.checkDelegate = self;
 //            [collFooterView loadSectionWithTitle:sectionGroup.customTitle isSelectible:isSelectible isSelected:[selectedSectionNames containsObject:sectionGroup.customTitle]];
             [collFooterView loadSectionWithTitle:sectionGroup.customTitle isSelectible:NO isSelected:[selectedSectionNames containsObject:sectionGroup.customTitle]];
