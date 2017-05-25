@@ -20,7 +20,8 @@
         
         NSString *imageName = [locale isEqualToString:@"tr"] ? @"Lifebox-0@3x.png" : @"Lifebox-0 Eng@3x.png";
         
-        UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+        // +2 fotografin en altindaki beyaz cizgiyi kapatmak icin
+        UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height +2)];
         bgImgView.image = [UIImage imageNamed:imageName];
         bgImgView.contentMode = UIViewContentModeScaleToFill;
         [self addSubview:bgImgView];
