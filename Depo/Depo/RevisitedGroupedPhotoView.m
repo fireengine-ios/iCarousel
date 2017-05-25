@@ -398,6 +398,11 @@
     }
     
     if([delegate checkInternet]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self bringSubviewToFront:progress];
+            [progress show:YES];
+        });
+        
         listOffset = 0;
         groupSequence = 0;
         lastCheckedDate = nil;
@@ -430,9 +435,6 @@
         }
         [readDao requestPhotosAndVideosForPage:listOffset andSize:packageSize andSortType:SortTypeDateDesc];
         isLoading = YES;
-        
-        [self bringSubviewToFront:progress];
-        [progress show:YES];
     } else {
         [refreshControl endRefreshing];
     }
@@ -559,7 +561,7 @@
 }
 
 - (void) readSuccessCallback:(NSArray *) fileList {
-    [progress hide:YES];
+//    [progress hide:YES];
     IGLog(@"RevisitedGroupedPhotoView readSuccessCallback called");
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
@@ -1401,7 +1403,10 @@
         if(lastCheckedDate != nil) {
             if([lastCheckedDate compare:lastFile.detail.imageDate] == NSOrderedSame) {
                 isLoading = NO;
-                [collView reloadData];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [progress hide:YES];
+                    [collView reloadData];
+                });
                 return;
             }
         }
@@ -1506,6 +1511,7 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
         IGLog(@"RevisitedGroupedPhotoView addUnsyncedFiles ended");
+        [progress hide:YES];
         [collView reloadData];
     });
 }
