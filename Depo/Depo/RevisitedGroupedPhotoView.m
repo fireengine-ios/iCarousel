@@ -1051,8 +1051,29 @@
 }
 
 - (void) syncMaskViewShouldClose {
-    [self removeLockMask];
-    [[UploadQueue sharedInstance] cancelAllUploads];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self removeLockMask]; 
+    });
+    
+    if ([[UploadQueue sharedInstance] uploadManagers].count > self.selectedAssets.count) {
+        [[UploadQueue sharedInstance] cancelRemainingUploads];
+        [[UploadQueue sharedInstance] cancelAllUploads];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [[SyncManager sharedInstance] manuallyCheckIfAlbumChanged];
+        });
+    } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[UploadQueue sharedInstance] cancelAllUploads];
+            if (self.syncView) {
+                [self.syncView removeFromSuperview];
+                if(collView.frame.origin.y > 0 && !syncInfoHeaderView) {
+                    [UIView animateWithDuration:0.4 animations:^{
+                        collView.frame = CGRectMake(collView.frame.origin.x, collView.frame.origin.y - 50, collView.frame.size.width, collView.frame.size.height + 50);
+                    }];
+                }
+            }
+        });
+    }
     //TODO check if pullData needed...
 }
 
