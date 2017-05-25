@@ -491,7 +491,8 @@
                     [self.groups threadSafe_addObject:initialRow];
                 }
             } else {
-                [self.groups threadSafe_replaceObjectAtIndex:counter withObject:initialRow];
+                if (self.groups.count > counter)
+                    [self.groups threadSafe_replaceObjectAtIndex:counter withObject:initialRow];
             }
         } else {
             group.fileInfo = [self sortRawArrayByDateDesc:group.fileInfo];
@@ -718,9 +719,11 @@
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"IMAGE_SCROLL_RELOAD_DATA_AFTER_WARNING" object:self userInfo:userInfo];
                 }
             }
+        }
+        if(!isLoading) {
             // Bu bölümde 'indexPathForItemAtPoint' fonksiyonu zaman zaman 'index out of bound' hatası verebiliyor. Bu hata iOS 8 cihazlarda olmaktadır.
             @try {
-                NSIndexPath *visibleIndexPath = [collView indexPathForItemAtPoint:CGPointMake(30, currentOffset)];
+                NSIndexPath *visibleIndexPath = [collView indexPathForItemAtPoint:CGPointMake(30, collView.contentOffset.y)];
                 if(visibleIndexPath && (self.groups.count > visibleIndexPath.section)) {
                     FileInfoGroup *visibleGroup = [self.groups threadSafe_objectAtIndex:visibleIndexPath.section];
                     if([visibleGroup.customTitle isEqualToString:NSLocalizedString(@"ImageGroupTypeInProgress", @"")]) {
