@@ -328,13 +328,21 @@
 }
 
 - (void)reachabilityDidChange {
-    [self showSyncHeaderIfNeeded];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (self != nil && self.superview != nil) {
+            [self showSyncHeaderIfNeeded];
+        }
+    });
 }
 
 - (void) checkCollectionViewData {
-    if ([CacheUtil readRememberMeToken] != nil) {
+    if ([CacheUtil readRememberMeToken] != nil && self != nil && self.superview != nil) {
         if ([self.groups count] < 1 || [self.files count] < 1) {
-            [self pullData];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self pullData];
+            });
+            
         }
     }
 }
@@ -423,7 +431,11 @@
         [[SDWebImageManager sharedManager].imageCache clearMemory];
         localAssets = nil;
         
-        [self.collView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+        __weak RevisitedGroupedPhotoView *weakSelf = self;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [weakSelf.collView reloadData];
+        });
+
         
         yIndex = 60;
         
@@ -1191,8 +1203,9 @@
     IGLog(@"At RevisitedGroupedPhotoView autoIterationFinished");
     if([[UploadQueue sharedInstance] remainingCount] > 0) {
         IGLog(@"At RevisitedGroupedPhotoView autoIterationFinished pullData will be called");
+        __weak RevisitedGroupedPhotoView *wself = self;
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self pullData];
+            [wself pullData];
         });
     }
 }
@@ -1205,7 +1218,12 @@
         [[UploadQueue sharedInstance] cleanAlreadyFinishedManagersNoReferenceToAutoSync];
 
         //refresh is postponed for 2 secs for the server to generate thumbnails.. will revisit here
-        [self performSelector:@selector(postQueueEmpty) withObject:nil afterDelay:2.0f];
+//        [self performSelector:@selector(postQueueEmpty) withObject:nil afterDelay:2.0f];
+        
+        __weak RevisitedGroupedPhotoView *wself = self;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [wself postQueueEmpty];
+        });
     }
 }
 
@@ -1868,17 +1886,18 @@
 
 - (void) autoQueueChanged {
     IGLog(@"RevisitedGroupedPhotoView autoQueueChanged called");
+    __weak RevisitedGroupedPhotoView *wself = self;
     dispatch_async(dispatch_get_main_queue(), ^{
         UploadManager *activeManRef = [[UploadQueue sharedInstance] activeManager];
         if(activeManRef != nil) {
             IGLog(@"RevisitedGroupedPhotoView autoQueueChanged initializing PhotosHeaderSyncView");
-            [self showSyncProgressHeader];
+            [wself showSyncProgressHeader];
             
         } else {
             IGLog(@"RevisitedGroupedPhotoView autoQueueChanged no need to initialize PhotosHeaderSyncView");
-            if(collView.frame.origin.y > 0 && !syncInfoHeaderView) {
+            if(wself.collView.frame.origin.y > 0 && !wself.syncInfoHeaderView) {
                 [UIView animateWithDuration:0.4 animations:^{
-                    collView.frame = CGRectMake(collView.frame.origin.x, collView.frame.origin.y - 50, collView.frame.size.width, collView.frame.size.height + 50);
+                    wself.collView.frame = CGRectMake(wself.collView.frame.origin.x, wself.collView.frame.origin.y - 50, wself.collView.frame.size.width, wself.collView.frame.size.height + 50);
                 }];
             }
         }
