@@ -43,18 +43,18 @@
             internetDataUsage.usedStorage = ((idu.total - idu.remaining) * 1024) * 1024;
             QuotaInfoArray = [self parseQuotaString:internetDataUsage];
             title = idu.offerName;
-            //             usedQuotaPercentage = (double)(usage.internetDataUsage.total - usage.internetDataUsage.remaining) / (double)usage.internetDataUsage.total;
+            // usedQuotaPercentage = (double)(usage.internetDataUsage.total - usage.internetDataUsage.remaining) / (double)usage.internetDataUsage.total;
             usedQuotaPercentage = (double)(idu.remaining) / (double)idu.total;
         } else {
             Usage *tempUsage = usage;
             QuotaInfoArray = [self parseQuotaString:tempUsage];
-            //             usedQuotaPercentage = (double)usage.usedStorage/(double)usage.totalStorage;
+            // usedQuotaPercentage = (double)usage.usedStorage/(double)usage.totalStorage;
             usedQuotaPercentage = (double)tempUsage.remainingStorage/(double)tempUsage.totalStorage;
         }
         
         //Package Name Label
         
-        CustomLabel *packageLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 15) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:16] withColor:[Util UIColorForHexColor:@"363e4f"] withText:@"" withAlignment:NSTextAlignmentLeft numberOfLines:1];
+        CustomLabel *packageLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, IS_IPAD ? 22 : 15) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size: IS_IPAD ? 22 : 16] withColor:[Util UIColorForHexColor:@"363e4f"] withText:@"" withAlignment:NSTextAlignmentLeft numberOfLines:1];
         packageLabel.text = title;
         [self addSubview:packageLabel];
         
@@ -62,7 +62,7 @@
         
         if(shouldShow) {
             InternetDataUsage *idu = usage;
-            CustomLabel *packageDateLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, packageLabel.frame.size.height + 5, self.frame.size.width, 15) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:12] withColor:[Util UIColorForHexColor:@"7b8497"] withText:@"" withAlignment:NSTextAlignmentLeft numberOfLines:1];
+            CustomLabel *packageDateLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, packageLabel.frame.size.height + 5, self.frame.size.width, IS_IPAD ? 20 : 15) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size: IS_IPAD ? 16 : 12] withColor:[Util UIColorForHexColor:@"7b8497"] withText:@"" withAlignment:NSTextAlignmentLeft numberOfLines:1];
             packageDateLabel.text = [self getExpireDate:idu.expiryDate];
             [self addSubview:packageDateLabel];
         }
@@ -71,7 +71,7 @@
         
         packageUsageBar = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
         packageUsageBar.frame = CGRectMake(0, cellRect.size.height - packageUsageBar.frame.size.height, cellRect.size.width, packageUsageBar.frame.size.height);
-        CGAffineTransform transform = CGAffineTransformMakeScale(1.0f, 4.0f);
+        CGAffineTransform transform = CGAffineTransformMakeScale(1.0f, IS_IPAD ? 6.0f : 4.0f);
         packageUsageBar.transform = transform;
         packageUsageBar.progressImage = [UIImage imageNamed:@"progress_fill_pattern.png"];
         packageUsageBar.trackImage = [UIImage imageNamed:@"progress_bg_pattern.png"];
@@ -80,7 +80,8 @@
         
         //Package Rest Label
         
-        CustomLabel *packageRestLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, packageUsageBar.frame.origin.y - 17, 60, 12) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:12] withColor:[Util UIColorForHexColor:@"7b8497"] withText:NSLocalizedString(@"RemainingQuotaTitle", @"") withAlignment:NSTextAlignmentLeft numberOfLines:1];
+        CustomLabel *packageRestLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, packageUsageBar.frame.origin.y - (IS_IPAD ? 20 : 17), 60, IS_IPAD ? 16 : 12) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size: IS_IPAD ? 16 : 12] withColor:[Util UIColorForHexColor:@"7b8497"] withText:NSLocalizedString(@"RemainingQuotaTitle", @"") withAlignment:NSTextAlignmentLeft numberOfLines:1];
+        [packageRestLabel sizeToFit];
         [self addSubview:packageRestLabel];
         
         //Package Usage Label Container
@@ -91,13 +92,13 @@
         
         //Package Size Of Used Label
         
-        sizeOfUsedPackageLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0,2,0,0) withFont:[UIFont fontWithName:@"TurkcellSaturaReg" size:25] withColor:[Util UIColorForHexColor:@"EC2182"] withText:@"" withAlignment:NSTextAlignmentLeft numberOfLines:0];
+        sizeOfUsedPackageLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0,2,0,0) withFont:[UIFont fontWithName:@"TurkcellSaturaReg" size:IS_IPAD ? 29 : 25] withColor:[Util UIColorForHexColor:@"EC2182"] withText:@"" withAlignment:NSTextAlignmentLeft numberOfLines:0];
         sizeOfUsedPackageLabel.text = QuotaInfoArray[2];
         [sizeOfUsedPackageLabel sizeToFit];
         //             sizeOfUsedPackageLabel.backgroundColor = [UIColor yellowColor];
         [packageUsageContainer addSubview:sizeOfUsedPackageLabel];
         
-        CustomLabel *sizeUnitLabel2 = [[CustomLabel alloc] initWithFrame:CGRectMake(sizeOfUsedPackageLabel.frame.origin.x + sizeOfUsedPackageLabel.frame.size.width + 3,1,0,0) withFont:[UIFont fontWithName:@"TurkcellSaturaReg" size:15] withColor:[Util UIColorForHexColor:@"7b8497"] withText:@""];
+        CustomLabel *sizeUnitLabel2 = [[CustomLabel alloc] initWithFrame:CGRectMake(sizeOfUsedPackageLabel.frame.origin.x + sizeOfUsedPackageLabel.frame.size.width + 3,1,0,0) withFont:[UIFont fontWithName:@"TurkcellSaturaReg" size: IS_IPAD ? 19 : 15] withColor:[Util UIColorForHexColor:@"7b8497"] withText:@""];
         sizeUnitLabel2.text = QuotaInfoArray[3];
         [sizeUnitLabel2 sizeToFit];
         sizeUnitLabel2.frame = CGRectMake(sizeOfUsedPackageLabel.frame.size.width + sizeOfUsedPackageLabel.frame.origin.x + 3,sizeOfUsedPackageLabel.frame.size.height - sizeUnitLabel2.frame.size.height,sizeUnitLabel2.frame.size.width, sizeUnitLabel2.frame.size.height);
@@ -116,7 +117,7 @@
         
         //Package - Size of Package
         
-        sizeOfPackageLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(packageSeparator.frame.origin.x + packageSeparator.frame.size.width + 7,2,0,0) withFont:[UIFont fontWithName:@"TurkcellSaturaReg" size:25] withColor:[Util UIColorForHexColor:@"5a5859"] withText:@""];
+        sizeOfPackageLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(packageSeparator.frame.origin.x + packageSeparator.frame.size.width + 7,2,0,0) withFont:[UIFont fontWithName:@"TurkcellSaturaReg" size: IS_IPAD ? 29 : 25] withColor:[Util UIColorForHexColor:@"5a5859"] withText:@""];
         sizeOfPackageLabel.text = QuotaInfoArray[0];
         [sizeOfPackageLabel sizeToFit];
         //    sizeOfPackageLabel.backgroundColor = [UIColor yellowColor];
@@ -126,7 +127,7 @@
         
         //Package Size Unit Label 2
         
-        sizeUnitLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(sizeOfPackageLabel.frame.origin.x + sizeOfPackageLabel.frame.size.width + 3,1,0,0) withFont:[UIFont fontWithName:@"TurkcellSaturaReg" size:15] withColor:[Util UIColorForHexColor:@"7b8497"] withText:@""];
+        sizeUnitLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(sizeOfPackageLabel.frame.origin.x + sizeOfPackageLabel.frame.size.width + 3,1,0,0) withFont:[UIFont fontWithName:@"TurkcellSaturaReg" size:IS_IPAD ? 19 : 15] withColor:[Util UIColorForHexColor:@"7b8497"] withText:@""];
         sizeUnitLabel.text = QuotaInfoArray[1];
         [sizeUnitLabel sizeToFit];
         sizeUnitLabel.frame = CGRectMake(sizeOfPackageLabel.frame.size.width + sizeOfPackageLabel.frame.origin.x + 3,sizeOfPackageLabel.frame.size.height - sizeUnitLabel.frame.size.height,sizeUnitLabel.frame.size.width, sizeUnitLabel.frame.size.height);

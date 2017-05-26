@@ -126,6 +126,11 @@
         msisdnField.isAccessibilityElement = YES;
         msisdnField.accessibilityIdentifier = @"msisdnFieldSignUp";
         [container addSubview:msisdnField];
+        
+        if (IS_IPAD) {
+            _countryCodeButton.frame = CGRectMake((msisdnField.frame.origin.x - _countryCodeButton.frame.size.width), _countryCodeButton.frame.origin.y, _countryCodeButton.frame.size.width, _countryCodeButton.frame.size.height);
+            arrow.frame = CGRectMake((_countryCodeButton.frame.origin.x + 6), arrow.frame.origin.y, arrow.frame.size.width, arrow.frame.size.height);
+        }
 
         topIndex += verticalPadding;
 

@@ -494,7 +494,7 @@
                              [self presentViewController:activityViewController animated:YES completion:nil];
                          } else {
                              UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
-                             [popup presentPopoverFromRect:CGRectMake(self.view.frame.size.width-240, self.view.frame.size.height-40, 240, 300)inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+                             [popup presentPopoverFromRect:CGRectMake(IS_IPAD ? (self.view.frame.size.width - 240)/2 : self.view.frame.size.width-240, self.view.frame.size.height-40, 240, 300)inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
                          }
                      });
                  }
@@ -565,7 +565,7 @@
         [self presentViewController:activityViewController animated:YES completion:nil];
     } else {
         UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
-        [popup presentPopoverFromRect:CGRectMake(self.view.frame.size.width-240, self.view.frame.size.height-40, 240, 300)inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        [popup presentPopoverFromRect:CGRectMake(IS_IPAD ? (self.view.frame.size.width - 240)/2 : self.view.frame.size.width-240, self.view.frame.size.height-40, 240, 300)inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
 }
 

@@ -139,15 +139,15 @@
     
     CGRect musicRect = CGRectMake(0, 0, 75, 60);
     musicRect.origin.x = self.view.center.x - musicRect.size.width/2;
-    musicRect.origin.y = (self.view.frame.size.height - musicRect.size.height) - 16;
+    musicRect.origin.y = (self.view.frame.size.height - musicRect.size.height) - (IS_IPAD ? 36 : 16);
     
     CGRect imageRect = CGRectMake(0, 0, 75, 60);
     imageRect.origin.x = musicRect.origin.x - 40 - musicRect.size.width;
-    imageRect.origin.y = (self.view.frame.size.height - imageRect.size.height) - 16;
+    imageRect.origin.y = (self.view.frame.size.height - imageRect.size.height) - (IS_IPAD ? 36 : 16);
     
     CGRect otherRect = CGRectMake(0, 0, 75, 60);
     otherRect.origin.x = musicRect.origin.x + 40 + musicRect.size.width;
-    otherRect.origin.y = (self.view.frame.size.height - otherRect.size.height) - 16;
+    otherRect.origin.y = (self.view.frame.size.height - otherRect.size.height) - (IS_IPAD ? 36 : 16);
 
 //    if(IS_IPAD) {
 //        float leftMarginForIpad = 100;

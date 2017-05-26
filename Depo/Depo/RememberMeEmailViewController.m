@@ -123,7 +123,7 @@
         okButton.accessibilityIdentifier = @"okButtonForgotPass";
         [container addSubview:okButton];
 
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow) name:UIKeyboardWillShowNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide) name:UIKeyboardWillHideNotification object:nil];
 
@@ -235,13 +235,16 @@
     return YES;
 }
 
--(void)keyboardWillShow {
-    [self setViewMovedUp:YES];
+-(void)keyboardWillShow:(NSNotification*)notification {
+    NSDictionary* keyboardInfo = [notification userInfo];
+    NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
+    CGRect keyboardFrameBeginRect = [keyboardFrameBegin CGRectValue];
+    [self setViewMovedUp:YES keyboardSize:keyboardFrameBeginRect.size];
 }
 
 -(void)keyboardWillHide {
 //    if (self.view.frame.origin.y < 0) {
-        [self setViewMovedUp:NO];
+        [self setViewMovedUp:NO keyboardSize:CGSizeZero];
 //    }
 }
 
@@ -266,12 +269,12 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(void)setViewMovedUp:(BOOL)movedUp {
+-(void)setViewMovedUp:(BOOL)movedUp keyboardSize:(CGSize)ksize {
     if (movedUp) {
         
-        container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + (IS_IPHONE_6P_OR_HIGHER ? 0 : 280));
+        container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + (IS_IPHONE_6P_OR_HIGHER ? 0 : IS_IPAD ? 0 : 280));
 //        [container setContentOffset:CGPointMake(0, 230) animated:YES];
-        okButton.frame = CGRectMake(0, self.view.frame.size.height - (IS_IPHONE_6P_OR_HIGHER ? 285 : 60), self.view.frame.size.width, 60);
+        okButton.frame = CGRectMake(0, self.view.frame.size.height - (IS_IPHONE_6P_OR_HIGHER ? 285 : IS_IPAD ? (ksize.height + 60) : 60), self.view.frame.size.width, 60);
         
     } else {
         container.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);

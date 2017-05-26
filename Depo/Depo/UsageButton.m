@@ -28,10 +28,10 @@
         [self addSubview:bgImgView];
         
         NSString *titleText = storage > 0.0f ? [Util transformedHugeSizeValue:storage] : @"--";
-        CustomLabel *titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, self.frame.size.height - (IS_IPAD ? 48 : 32), self.frame.size.width, IS_IPAD ? 24 : 16) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:IS_IPAD ? 22 : 15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:titleText withAlignment:NSTextAlignmentCenter];
+        CustomLabel *titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, self.frame.size.height - (IS_IPAD ? 20 : 32), self.frame.size.width, IS_IPAD ? 24 : 16) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:IS_IPAD ? 22 : 15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:titleText withAlignment:NSTextAlignmentCenter];
         [self addSubview:titleLabel];
 
-        countLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, self.frame.size.height - (IS_IPAD ? 24 : 16), self.frame.size.width, IS_IPAD ? 24 : 16) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:IS_IPAD ? 22 : 15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:[NSString stringWithFormat:@"(%d %@)", fileCount, fileCount == 1 ? NSLocalizedString(@"ItemTitle", @"") : NSLocalizedString(@"ItemsTitle", @"")] withAlignment:NSTextAlignmentCenter];
+        countLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0, self.frame.size.height - (IS_IPAD ? 0 : 16), self.frame.size.width, IS_IPAD ? 24 : 16) withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:IS_IPAD ? 22 : 15] withColor:[Util UIColorForHexColor:@"363e4f"] withText:[NSString stringWithFormat:@"(%d %@)", fileCount, fileCount == 1 ? NSLocalizedString(@"ItemTitle", @"") : NSLocalizedString(@"ItemsTitle", @"")] withAlignment:NSTextAlignmentCenter];
         [self addSubview:countLabel];
     }
     return self;
