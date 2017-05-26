@@ -61,7 +61,7 @@
         if (IS_IPHONE_5) {
             verticalPadding = 50.0f;
         } else if (IS_IPHONE_4_OR_LESS) {
-            verticalPadding = 30.0f;
+            verticalPadding = 50.0f;
         }
         
         float topIndex = IS_IPAD ? (self.view.frame.size.height - 300)/2 - 100 : (IS_IPHONE_4_OR_LESS ? 10 : 20);

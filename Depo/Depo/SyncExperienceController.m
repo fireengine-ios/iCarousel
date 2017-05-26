@@ -62,7 +62,8 @@
     [self addVideoToPage:page1 videoName:[NSString stringWithFormat:@"%@1.1", locale]];
     [self addLabelToPage:page1
                    title:NSLocalizedString(@"SyncExperincePage1Title", @"")
-                subtitle:NSLocalizedString(@"SyncExperincePage1SubTitle", @"")];
+                subtitle:NSLocalizedString(@"SyncExperincePage1SubTitle", @"")
+                  isLast:NO];
     [self.mainScroll addSubview:page1];
     
     // page 2
@@ -70,7 +71,8 @@
     [self addVideoToPage:page2 videoName:[NSString stringWithFormat:@"%@1.2", locale]];
     [self addLabelToPage:page2
                    title:NSLocalizedString(@"SyncExperincePage2Title", @"")
-                subtitle:NSLocalizedString(@"SyncExperincePage2SubTitle", @"")];
+                subtitle:NSLocalizedString(@"SyncExperincePage2SubTitle", @"")
+                  isLast:NO];
     [self.mainScroll addSubview:page2];
     
     // page 3
@@ -78,7 +80,8 @@
     [self addVideoToPage:page3 videoName:[NSString stringWithFormat:@"%@1.3", locale]];
     [self addLabelToPage:page3
                    title:NSLocalizedString(@"SyncExperincePage3Title", @"")
-                subtitle:NSLocalizedString(@"SyncExperincePage3SubTitle", @"")];
+                subtitle:NSLocalizedString(@"SyncExperincePage3SubTitle", @"")
+                  isLast:NO];
     [self.mainScroll addSubview:page3];
     
     // page 4 iptal
@@ -92,7 +95,8 @@
     [self addVideoToPage:page5 videoName:[NSString stringWithFormat:@"%@1.5", locale]];
     [self addLabelToPage:page5
                    title:NSLocalizedString(@"SyncExperincePage4Title", @"")
-                subtitle:NSLocalizedString(@"SyncExperincePage4SubTitle", @"")];
+                subtitle:NSLocalizedString(@"SyncExperincePage4SubTitle", @"")
+                  isLast:NO];
     [self.mainScroll addSubview:page5];
     
     // page 6
@@ -100,7 +104,8 @@
     [self addVideoToPage:page6 videoName:[NSString stringWithFormat:@"%@1.6", locale]];
     [self addLabelToPage:page6
                    title:NSLocalizedString(@"SyncExperincePage5Title", @"")
-                subtitle:NSLocalizedString(@"SyncExperincePage5SubTitle", @"")];
+                subtitle:NSLocalizedString(@"SyncExperincePage5SubTitle", @"")
+                  isLast:YES];
     [self.mainScroll addSubview:page6];
     
     // getStarted button
@@ -117,8 +122,13 @@
     [page6 addSubview:getStartedButton];
     
     // page control
+    
+    CGFloat pageControlY = getStartedButton.frame.origin.y - 15 -10;
+    if (IS_IPHONE_4_OR_LESS) {
+        pageControlY = self.view.frame.size.height -12;
+    }
     self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake((scrollSize.width - 116) / 2.0,
-                                                                           getStartedButton.frame.origin.y - 15 -10,
+                                                                           pageControlY,
                                                                            116,
                                                                            10)];
     self.pageControl.numberOfPages = pageCount;
@@ -155,9 +165,9 @@
     [page.layer addSublayer:playerLayer];
 }
 
-- (void)addLabelToPage:(UIView*)page title:(NSString*)title subtitle:(NSString*)subtitle {
+- (void)addLabelToPage:(UIView*)page title:(NSString*)title subtitle:(NSString*)subtitle isLast:(BOOL)isLast {
     CustomLabel *titleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(0,
-                                                                       self.view.frame.size.width, // player height
+                                                                       self.view.frame.size.width - (isLast && IS_IPHONE_4_OR_LESS?20:0), // player height
                                                                        page.frame.size.width,
                                                                        60)
                                                    withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:18]
@@ -167,7 +177,7 @@
     [page addSubview:titleLabel];
     
     CustomLabel *subTitleLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(20,
-                                                                          titleLabel.frame.origin.y + titleLabel.frame.size.height,
+                                                                          titleLabel.frame.origin.y + titleLabel.frame.size.height - (isLast&&IS_IPHONE_4_OR_LESS?10:0),
                                                                           page.frame.size.width - 40,
                                                                           60)
                                                       withFont:[UIFont fontWithName:@"TurkcellSaturaMed" size:18]

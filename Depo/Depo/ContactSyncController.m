@@ -108,7 +108,10 @@
         self.footerContainer = [[UIView alloc] initWithFrame:CGRectMake(20, self.topContainer.frame.origin.y + self.topContainer.frame.size.height + (IS_IPHONE_6P_OR_HIGHER ? 60 : 20), self.view.frame.size.width - 40, 20)];
         [self.view addSubview:self.footerContainer];
         
-        UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width - 40, 1)];
+        UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(0,
+                                                                     IS_IPHONE_4_OR_LESS?25:0,
+                                                                     self.view.frame.size.width - 40,
+                                                                     1)];
         separator.backgroundColor = [Util UIColorForHexColor:@"D4D4D4"];
         [self.footerContainer addSubview:separator];
         
@@ -131,7 +134,15 @@
             [dateFormat setDateFormat:@"dd.MM.yyyy HH:mm"];
             lastSyncTitle = [NSString stringWithFormat:NSLocalizedString(@"ContactLastSyncDateTitle", @""), [dateFormat stringFromDate:[SyncUtil readLastContactSyncDate]]];
         }
-        lastSyncDateLabel = [[CustomLabel alloc] initWithFrame:CGRectMake(((self.view.frame.size.width - (self.view.frame.size.width - 40))/2), self.view.frame.size.height - 110, self.view.frame.size.width - 40, 20) withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:12] withColor:[Util UIColorForHexColor:@"363e4f"] withText:lastSyncTitle withAlignment:NSTextAlignmentCenter];
+        lastSyncDateLabel = [[CustomLabel alloc] initWithFrame:
+                             CGRectMake(((self.view.frame.size.width - (self.view.frame.size.width - 40))/2),
+                                        self.view.frame.size.height - 110 + (IS_IPHONE_4_OR_LESS?15:0),
+                                        self.view.frame.size.width - 40,
+                                        20)
+                                                      withFont:[UIFont fontWithName:@"TurkcellSaturaBol" size:12]
+                                                     withColor:[Util UIColorForHexColor:@"363e4f"]
+                                                      withText:lastSyncTitle
+                                                 withAlignment:NSTextAlignmentCenter];
         [self.view addSubview:lastSyncDateLabel];
         NSLog(@"%@", lastSyncTitle);
         

@@ -72,7 +72,7 @@
         [container addSubview:logoImgView];
         
         if (IS_IPHONE_4_OR_LESS) {
-            scrollYIndex += logoImage.size.height + 30;
+            scrollYIndex += logoImage.size.height + 10;
         } else if (IS_IPHONE_5) {
             scrollYIndex += logoImage.size.height + 50;
         } else {
@@ -150,7 +150,9 @@
         loginButton.accessibilityIdentifier = @"loginButton";
         [container addSubview:loginButton];
         
-        if (IS_IPHONE_5) {
+        if (IS_IPHONE_4_OR_LESS) {
+            scrollYIndex += loginButton.frame.size.height + 10.0f;
+        } else if (IS_IPHONE_5) {
             scrollYIndex += loginButton.frame.size.height + 30.0f;
         } else {
             scrollYIndex += loginButton.frame.size.height + 40.0f;
@@ -252,9 +254,10 @@
             }
         }
         
+        CGFloat registerBottomPadding = IS_IPHONE_4_OR_LESS? 30:64;
         CGFloat btnWidth = 200.0f, btnHeight = 40.0f;
         CGRect registerButtonFrame = CGRectMake((self.view.frame.size.width - btnWidth) /2,
-                                                self.view.frame.size.height - (btnHeight * 2) - 64,
+                                                self.view.frame.size.height - (btnHeight * 2) - registerBottomPadding,
                                                 btnWidth,
                                                 btnHeight);
         registerButton = [[SimpleButton alloc] initWithFrame:registerButtonFrame

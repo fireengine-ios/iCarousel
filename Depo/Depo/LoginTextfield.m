@@ -38,16 +38,12 @@
         
         
         UIFont *currentFont = [UIFont fontWithName:@"TurkcellSaturaMed" size:19];
-        UIColor *color = [UIColor blackColor];
-        self.textColor = color;
+        UIColor *color = [UIColor colorWithRed:165.0f/255.0f green:165.0f/255.0f blue:169.0f/255.0f alpha:1.0f];
+        self.textColor = [UIColor blackColor];
         self.font = currentFont;
         self.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
 
-        if(!IS_BELOW_6) {
-            self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholderText attributes:@{NSForegroundColorAttributeName: color, NSFontAttributeName: currentFont}];
-        } else {
-            self.placeholder = placeholderText;
-        }
+        self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholderText attributes:@{NSForegroundColorAttributeName: color, NSFontAttributeName: currentFont}];
     }
     return self;
 }
@@ -82,32 +78,23 @@
         //self.layer.masksToBounds = YES;
         
         UIFont *currentFont = [UIFont fontWithName:@"TurkcellSaturaMed" size:19];
-        UIColor *color = [UIColor blackColor];
-        self.textColor = color;
+        UIColor *color = [UIColor colorWithRed:165.0f/255.0f green:165.0f/255.0f blue:169.0f/255.0f alpha:1.0f];
+        self.textColor = [UIColor blackColor];
         self.font = currentFont;
         self.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
 
-        if(!IS_BELOW_6) {
-            self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholderText attributes:@{NSForegroundColorAttributeName: color, NSFontAttributeName: currentFont}];
-        } else {
-            self.placeholder = placeholderText;
-        }
+        self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholderText attributes:@{NSForegroundColorAttributeName: color, NSFontAttributeName: currentFont}];
     }
     return self;
 }
 
 - (CGRect)placeholderRectForBounds:(CGRect)bounds {
-    if ([self respondsToSelector:@selector(setAttributedPlaceholder:)]) {
-        UIColor *color = [UIColor colorWithRed:165.0f/255.0f green:165.0f/255.0f blue:169.0f/255.0f alpha:1.0f];
-        self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.placeholder attributes:@{NSForegroundColorAttributeName: color}];
-    }
-    
     return [super placeholderRectForBounds:CGRectMake(0, bounds.origin.y , bounds.size.width - 10 , bounds.size.height - bottomOffset)];
 }
 
-- (void) drawPlaceholderInRect:(CGRect)rect {
-    [super drawPlaceholderInRect:rect];
-}
+//- (void) drawPlaceholderInRect:(CGRect)rect {
+//    [super drawPlaceholderInRect:rect];
+//}
 
 - (CGRect)textRectForBounds:(CGRect)bounds {
     return [super textRectForBounds:CGRectMake(0, bounds.origin.y + 10 , bounds.size.width - 10 , bounds.size.height - bottomOffset)];
