@@ -39,7 +39,7 @@
                 topYIndex = 23;
                 topInfo = [NSString stringWithFormat:NSLocalizedString(@"WelcomePackageName", @""), [Util transformedHugeSizeValueDecimalIfNecessary:subscription.plan.quota]];
             } else {
-                topInfo = [NSString stringWithFormat:@"%@ %.1f TL/%@", [Util transformedHugeSizeValueDecimalIfNecessary:subscription.plan.quota], subscription.plan.price, [subscription.plan.period isEqualToString:@"MONTH"] ? NSLocalizedString(@"MonthlyShort", "") : NSLocalizedString(@"YearlyShort", "")];
+                topInfo = [NSString stringWithFormat:@"%@ %.2f TL/%@", [Util transformedHugeSizeValueDecimalIfNecessary:subscription.plan.quota], subscription.plan.price, [subscription.plan.period isEqualToString:@"MONTH"] ? NSLocalizedString(@"MonthlyShort", "") : NSLocalizedString(@"YearlyShort", "")];
             }
         }
 
