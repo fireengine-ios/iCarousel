@@ -517,7 +517,7 @@
 "MoveSuccessMessageNew" = "تمت إضافة الصور إلى ألبوم";
 
 /*Fuzzy*/
-"WelcomePackage5GB" = "مساحة التخزين المجانية بسعة 5 جيجا بايت الخاصة بك جاهزة للاستخدام!";
+"WelcomePackage1GB" = "مساحة التخزين المجانية بسعة 1 جيجا بايت الخاصة بك جاهزة للاستخدام!";
 "PlatinPackage500GBTitle" = "الإمتياز البلاتيني";
 
 /*Fuzzy*/
@@ -902,3 +902,15 @@
 "UnsyncPrintError" = "لكى تستخدم ميزة الطباعة، كل الصور المختارة يجب رفعها الى لايف بوكس";
 "GetStarted" = "أبدأ";
 "ContactThereIsNoContact" = "لا يوجد شىء فى قائمة جهات الاتصال الخاصة بك، لم يتم النسخ الاحتياطى.";
+"ContactContinueButtonTitle" = "تابع";
+"WelcomePackage5GB" = "مساحة التخزين 5 GB الخاصة بك جاهزة للاستخدام";
+"SyncExperincePage1Title" = "طريقة سهلة لمزامنة صورك";
+"SyncExperincePage1SubTitle" = "يمكنك مزامنة صورك تلقائيا عند تفعيل المزامنة التلقائية من الإعدادات.";
+"SyncExperincePage2Title" = "كن مواكبا لجميع الأصول الخاصة بك";
+"SyncExperincePage2SubTitle" = "يمكنك مزامنة جميع الملفات والصور يدويا.";
+"SyncExperincePage3Title" = "تابع العملية الخاصة بك بسهولة";
+"SyncExperincePage3SubTitle" = "يمكنك بسهولة رؤية عملية المزامنة من شريط الحالة.";
+"SyncExperincePage4Title" = "حافظ على تحديث ملفاتك";
+"SyncExperincePage4SubTitle" = "يمكنك التحقق بسهولة من حالة الملفات والمجلدات الخاصة بك إذا كانت على سحابة أم لا.";
+"SyncExperincePage5Title" = "يمكنك إجراء نسخ احتياطي لجهات الاتصال الخاصة بك إلى لايف بوكس بسهولة";
+"SyncExperincePage5SubTitle" = "بغض النظر عن ما يحدث لهاتفك، يمكنك الحفاظ على جهات الاتصال الخاصة بك آمنة.";
