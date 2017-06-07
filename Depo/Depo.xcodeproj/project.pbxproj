@@ -633,7 +633,6 @@
 		05C244331A0243BE000D65D0 /* SortTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C244321A0243BE000D65D0 /* SortTypeCell.m */; };
 		05C2A0391A79832200EE4D78 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C2A0381A79832200EE4D78 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		05C2A03B1A79832600EE4D78 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C2A03A1A79832600EE4D78 /* iAd.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		05C2A0441A79882100EE4D78 /* libGoogleConversionTracking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C2A0421A79882100EE4D78 /* libGoogleConversionTracking.a */; };
 		05C2A0491A7989CD00EE4D78 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C2A0481A7989CD00EE4D78 /* CoreTelephony.framework */; };
 		05C3A37F1B57DFAB002AB49A /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C3A37E1B57DFAB002AB49A /* ShareViewController.m */; };
 		05C3A3811B57DFAB002AB49A /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05C3A3801B57DFAB002AB49A /* MainInterface.storyboard */; };
@@ -797,38 +796,6 @@
 		535FD9741DF3FE3A005AB4E7 /* DownloadedFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 535FD9731DF3FE3A005AB4E7 /* DownloadedFile.m */; };
 		53FA9CE21DE86071008DCF93 /* QuotaInfoDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 53FA9CE11DE86071008DCF93 /* QuotaInfoDao.m */; };
 		53FA9CE51DE8607D008DCF93 /* Quota.m in Sources */ = {isa = PBXBuildFile; fileRef = 53FA9CE41DE8607D008DCF93 /* Quota.m */; };
-		563A98A71E52ECF800D24B7E /* ADJActivityHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 563A98681E52ECF800D24B7E /* ADJActivityHandler.m */; };
-		563A98A81E52ECF800D24B7E /* ADJActivityKind.m in Sources */ = {isa = PBXBuildFile; fileRef = 563A986A1E52ECF800D24B7E /* ADJActivityKind.m */; };
-		563A98A91E52ECF800D24B7E /* ADJActivityPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = 563A986C1E52ECF800D24B7E /* ADJActivityPackage.m */; };
-		563A98AA1E52ECF800D24B7E /* ADJActivityState.m in Sources */ = {isa = PBXBuildFile; fileRef = 563A986E1E52ECF800D24B7E /* ADJActivityState.m */; };
-		563A98AB1E52ECF800D24B7E /* NSData+ADJAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 563A98711E52ECF800D24B7E /* NSData+ADJAdditions.m */; };
-		563A98AC1E52ECF800D24B7E /* NSString+ADJAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 563A98731E52ECF800D24B7E /* NSString+ADJAdditions.m */; };
-		563A98AD1E52ECF800D24B7E /* UIDevice+ADJAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 563A98751E52ECF800D24B7E /* UIDevice+ADJAdditions.m */; };
-		563A98AE1E52ECF800D24B7E /* ADJAdjustFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 563A98771E52ECF800D24B7E /* ADJAdjustFactory.m */; };
-		563A98AF1E52ECF800D24B7E /* ADJAttribution.m in Sources */ = {isa = PBXBuildFile; fileRef = 563A98791E52ECF800D24B7E /* ADJAttribution.m */; };
-		563A98B01E52ECF800D24B7E /* ADJAttributionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 563A987B1E52ECF800D24B7E /* ADJAttributionHandler.m */; };
-		563A98B11E52ECF800D24B7E /* ADJBackoffStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 563A987D1E52ECF800D24B7E /* ADJBackoffStrategy.m */; };
-		563A98B21E52ECF800D24B7E /* ADJConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 563A987F1E52ECF800D24B7E /* ADJConfig.m */; };
-		563A98B31E52ECF800D24B7E /* ADJDeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 563A98811E52ECF800D24B7E /* ADJDeviceInfo.m */; };
-		563A98B41E52ECF800D24B7E /* ADJEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 563A98831E52ECF800D24B7E /* ADJEvent.m */; };
-		563A98B51E52ECF800D24B7E /* ADJEventFailure.m in Sources */ = {isa = PBXBuildFile; fileRef = 563A98851E52ECF800D24B7E /* ADJEventFailure.m */; };
-		563A98B61E52ECF800D24B7E /* ADJEventSuccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 563A98871E52ECF800D24B7E /* ADJEventSuccess.m */; };
-		563A98B71E52ECF800D24B7E /* ADJKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 563A98891E52ECF800D24B7E /* ADJKeychain.m */; };
-		563A98B81E52ECF800D24B7E /* ADJLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 563A988B1E52ECF800D24B7E /* ADJLogger.m */; };
-		563A98B91E52ECF800D24B7E /* ADJPackageBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 563A988D1E52ECF800D24B7E /* ADJPackageBuilder.m */; };
-		563A98BA1E52ECF800D24B7E /* ADJPackageHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 563A988F1E52ECF800D24B7E /* ADJPackageHandler.m */; };
-		563A98BB1E52ECF800D24B7E /* ADJRequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 563A98911E52ECF800D24B7E /* ADJRequestHandler.m */; };
-		563A98BC1E52ECF800D24B7E /* ADJResponseData.m in Sources */ = {isa = PBXBuildFile; fileRef = 563A98931E52ECF800D24B7E /* ADJResponseData.m */; };
-		563A98BD1E52ECF900D24B7E /* ADJSdkClickHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 563A98951E52ECF800D24B7E /* ADJSdkClickHandler.m */; };
-		563A98BE1E52ECF900D24B7E /* ADJSessionFailure.m in Sources */ = {isa = PBXBuildFile; fileRef = 563A98971E52ECF800D24B7E /* ADJSessionFailure.m */; };
-		563A98BF1E52ECF900D24B7E /* ADJSessionParameters.m in Sources */ = {isa = PBXBuildFile; fileRef = 563A98991E52ECF800D24B7E /* ADJSessionParameters.m */; };
-		563A98C01E52ECF900D24B7E /* ADJSessionSuccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 563A989B1E52ECF800D24B7E /* ADJSessionSuccess.m */; };
-		563A98C11E52ECF900D24B7E /* ADJSystemProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 563A989D1E52ECF800D24B7E /* ADJSystemProfile.m */; };
-		563A98C21E52ECF900D24B7E /* ADJTimerCycle.m in Sources */ = {isa = PBXBuildFile; fileRef = 563A989F1E52ECF800D24B7E /* ADJTimerCycle.m */; };
-		563A98C31E52ECF900D24B7E /* ADJTimerOnce.m in Sources */ = {isa = PBXBuildFile; fileRef = 563A98A11E52ECF800D24B7E /* ADJTimerOnce.m */; };
-		563A98C41E52ECF900D24B7E /* Adjust.m in Sources */ = {isa = PBXBuildFile; fileRef = 563A98A31E52ECF800D24B7E /* Adjust.m */; };
-		563A98C51E52ECF900D24B7E /* ADJUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 563A98A51E52ECF800D24B7E /* ADJUtil.m */; };
-		563A98C61E52ECF900D24B7E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 563A98A61E52ECF800D24B7E /* Info.plist */; };
 		563FB1BD1AA5EB030066F8E6 /* settings_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 563FB1BB1AA5EB030066F8E6 /* settings_icon.png */; };
 		563FB1BE1AA5EB030066F8E6 /* settings_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 563FB1BC1AA5EB030066F8E6 /* settings_icon@2x.png */; };
 		563FB1C11AA5EC990066F8E6 /* circle_welcome_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 563FB1BF1AA5EC990066F8E6 /* circle_welcome_icon.png */; };
@@ -2244,10 +2211,6 @@
 		05C244321A0243BE000D65D0 /* SortTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SortTypeCell.m; sourceTree = "<group>"; };
 		05C2A0381A79832200EE4D78 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		05C2A03A1A79832600EE4D78 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
-		05C2A03D1A79882100EE4D78 /* ACTReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACTReporter.h; sourceTree = "<group>"; };
-		05C2A03F1A79882100EE4D78 /* GoogleConversionPing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleConversionPing.h; sourceTree = "<group>"; };
-		05C2A0411A79882100EE4D78 /* DCTReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCTReporter.h; sourceTree = "<group>"; };
-		05C2A0421A79882100EE4D78 /* libGoogleConversionTracking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleConversionTracking.a; sourceTree = "<group>"; };
 		05C2A0481A7989CD00EE4D78 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		05C3A3791B57DFAB002AB49A /* DepoShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DepoShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		05C3A37C1B57DFAB002AB49A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -2473,69 +2436,6 @@
 		53FA9CE11DE86071008DCF93 /* QuotaInfoDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuotaInfoDao.m; sourceTree = "<group>"; };
 		53FA9CE31DE8607D008DCF93 /* Quota.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quota.h; sourceTree = "<group>"; };
 		53FA9CE41DE8607D008DCF93 /* Quota.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Quota.m; sourceTree = "<group>"; };
-		563A98671E52ECF800D24B7E /* ADJActivityHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJActivityHandler.h; sourceTree = "<group>"; };
-		563A98681E52ECF800D24B7E /* ADJActivityHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJActivityHandler.m; sourceTree = "<group>"; };
-		563A98691E52ECF800D24B7E /* ADJActivityKind.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJActivityKind.h; sourceTree = "<group>"; };
-		563A986A1E52ECF800D24B7E /* ADJActivityKind.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJActivityKind.m; sourceTree = "<group>"; };
-		563A986B1E52ECF800D24B7E /* ADJActivityPackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJActivityPackage.h; sourceTree = "<group>"; };
-		563A986C1E52ECF800D24B7E /* ADJActivityPackage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJActivityPackage.m; sourceTree = "<group>"; };
-		563A986D1E52ECF800D24B7E /* ADJActivityState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJActivityState.h; sourceTree = "<group>"; };
-		563A986E1E52ECF800D24B7E /* ADJActivityState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJActivityState.m; sourceTree = "<group>"; };
-		563A98701E52ECF800D24B7E /* NSData+ADJAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ADJAdditions.h"; sourceTree = "<group>"; };
-		563A98711E52ECF800D24B7E /* NSData+ADJAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+ADJAdditions.m"; sourceTree = "<group>"; };
-		563A98721E52ECF800D24B7E /* NSString+ADJAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ADJAdditions.h"; sourceTree = "<group>"; };
-		563A98731E52ECF800D24B7E /* NSString+ADJAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ADJAdditions.m"; sourceTree = "<group>"; };
-		563A98741E52ECF800D24B7E /* UIDevice+ADJAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+ADJAdditions.h"; sourceTree = "<group>"; };
-		563A98751E52ECF800D24B7E /* UIDevice+ADJAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+ADJAdditions.m"; sourceTree = "<group>"; };
-		563A98761E52ECF800D24B7E /* ADJAdjustFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJAdjustFactory.h; sourceTree = "<group>"; };
-		563A98771E52ECF800D24B7E /* ADJAdjustFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJAdjustFactory.m; sourceTree = "<group>"; };
-		563A98781E52ECF800D24B7E /* ADJAttribution.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJAttribution.h; sourceTree = "<group>"; };
-		563A98791E52ECF800D24B7E /* ADJAttribution.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJAttribution.m; sourceTree = "<group>"; };
-		563A987A1E52ECF800D24B7E /* ADJAttributionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJAttributionHandler.h; sourceTree = "<group>"; };
-		563A987B1E52ECF800D24B7E /* ADJAttributionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJAttributionHandler.m; sourceTree = "<group>"; };
-		563A987C1E52ECF800D24B7E /* ADJBackoffStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJBackoffStrategy.h; sourceTree = "<group>"; };
-		563A987D1E52ECF800D24B7E /* ADJBackoffStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJBackoffStrategy.m; sourceTree = "<group>"; };
-		563A987E1E52ECF800D24B7E /* ADJConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJConfig.h; sourceTree = "<group>"; };
-		563A987F1E52ECF800D24B7E /* ADJConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJConfig.m; sourceTree = "<group>"; };
-		563A98801E52ECF800D24B7E /* ADJDeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJDeviceInfo.h; sourceTree = "<group>"; };
-		563A98811E52ECF800D24B7E /* ADJDeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJDeviceInfo.m; sourceTree = "<group>"; };
-		563A98821E52ECF800D24B7E /* ADJEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJEvent.h; sourceTree = "<group>"; };
-		563A98831E52ECF800D24B7E /* ADJEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJEvent.m; sourceTree = "<group>"; };
-		563A98841E52ECF800D24B7E /* ADJEventFailure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJEventFailure.h; sourceTree = "<group>"; };
-		563A98851E52ECF800D24B7E /* ADJEventFailure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJEventFailure.m; sourceTree = "<group>"; };
-		563A98861E52ECF800D24B7E /* ADJEventSuccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJEventSuccess.h; sourceTree = "<group>"; };
-		563A98871E52ECF800D24B7E /* ADJEventSuccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJEventSuccess.m; sourceTree = "<group>"; };
-		563A98881E52ECF800D24B7E /* ADJKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJKeychain.h; sourceTree = "<group>"; };
-		563A98891E52ECF800D24B7E /* ADJKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJKeychain.m; sourceTree = "<group>"; };
-		563A988A1E52ECF800D24B7E /* ADJLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJLogger.h; sourceTree = "<group>"; };
-		563A988B1E52ECF800D24B7E /* ADJLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJLogger.m; sourceTree = "<group>"; };
-		563A988C1E52ECF800D24B7E /* ADJPackageBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJPackageBuilder.h; sourceTree = "<group>"; };
-		563A988D1E52ECF800D24B7E /* ADJPackageBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJPackageBuilder.m; sourceTree = "<group>"; };
-		563A988E1E52ECF800D24B7E /* ADJPackageHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJPackageHandler.h; sourceTree = "<group>"; };
-		563A988F1E52ECF800D24B7E /* ADJPackageHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJPackageHandler.m; sourceTree = "<group>"; };
-		563A98901E52ECF800D24B7E /* ADJRequestHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJRequestHandler.h; sourceTree = "<group>"; };
-		563A98911E52ECF800D24B7E /* ADJRequestHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJRequestHandler.m; sourceTree = "<group>"; };
-		563A98921E52ECF800D24B7E /* ADJResponseData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJResponseData.h; sourceTree = "<group>"; };
-		563A98931E52ECF800D24B7E /* ADJResponseData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJResponseData.m; sourceTree = "<group>"; };
-		563A98941E52ECF800D24B7E /* ADJSdkClickHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJSdkClickHandler.h; sourceTree = "<group>"; };
-		563A98951E52ECF800D24B7E /* ADJSdkClickHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJSdkClickHandler.m; sourceTree = "<group>"; };
-		563A98961E52ECF800D24B7E /* ADJSessionFailure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJSessionFailure.h; sourceTree = "<group>"; };
-		563A98971E52ECF800D24B7E /* ADJSessionFailure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJSessionFailure.m; sourceTree = "<group>"; };
-		563A98981E52ECF800D24B7E /* ADJSessionParameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJSessionParameters.h; sourceTree = "<group>"; };
-		563A98991E52ECF800D24B7E /* ADJSessionParameters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJSessionParameters.m; sourceTree = "<group>"; };
-		563A989A1E52ECF800D24B7E /* ADJSessionSuccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJSessionSuccess.h; sourceTree = "<group>"; };
-		563A989B1E52ECF800D24B7E /* ADJSessionSuccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJSessionSuccess.m; sourceTree = "<group>"; };
-		563A989C1E52ECF800D24B7E /* ADJSystemProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJSystemProfile.h; sourceTree = "<group>"; };
-		563A989D1E52ECF800D24B7E /* ADJSystemProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJSystemProfile.m; sourceTree = "<group>"; };
-		563A989E1E52ECF800D24B7E /* ADJTimerCycle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJTimerCycle.h; sourceTree = "<group>"; };
-		563A989F1E52ECF800D24B7E /* ADJTimerCycle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJTimerCycle.m; sourceTree = "<group>"; };
-		563A98A01E52ECF800D24B7E /* ADJTimerOnce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJTimerOnce.h; sourceTree = "<group>"; };
-		563A98A11E52ECF800D24B7E /* ADJTimerOnce.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJTimerOnce.m; sourceTree = "<group>"; };
-		563A98A21E52ECF800D24B7E /* Adjust.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Adjust.h; sourceTree = "<group>"; };
-		563A98A31E52ECF800D24B7E /* Adjust.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Adjust.m; sourceTree = "<group>"; };
-		563A98A41E52ECF800D24B7E /* ADJUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJUtil.h; sourceTree = "<group>"; };
-		563A98A51E52ECF800D24B7E /* ADJUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJUtil.m; sourceTree = "<group>"; };
-		563A98A61E52ECF800D24B7E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		563FB1BB1AA5EB030066F8E6 /* settings_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings_icon.png; sourceTree = "<group>"; };
 		563FB1BC1AA5EB030066F8E6 /* settings_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings_icon@2x.png"; sourceTree = "<group>"; };
 		563FB1BF1AA5EC990066F8E6 /* circle_welcome_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle_welcome_icon.png; sourceTree = "<group>"; };
@@ -3233,7 +3133,6 @@
 				2443E1541B6BB0C5001C274D /* AudioToolbox.framework in Frameworks */,
 				053685FF1AA990DF007EBB23 /* MobileCoreServices.framework in Frameworks */,
 				05C2A0491A7989CD00EE4D78 /* CoreTelephony.framework in Frameworks */,
-				05C2A0441A79882100EE4D78 /* libGoogleConversionTracking.a in Frameworks */,
 				05C2A03B1A79832600EE4D78 /* iAd.framework in Frameworks */,
 				05C2A0391A79832200EE4D78 /* AdSupport.framework in Frameworks */,
 				05BBE71619E07DA600805215 /* MediaPlayer.framework in Frameworks */,
@@ -4129,7 +4028,6 @@
 				79B973911ED84E4B00E9F2FA /* MissingAnchors */,
 				67955C291EA0993200705083 /* RDActivityViewController */,
 				070A221C1E8AEB0E002385F7 /* CircleProgressBar */,
-				563A98661E52ECF800D24B7E /* Adjust */,
 				56B9E92B1DED750600DE1011 /* AppRater */,
 				94B9D2281CA86C4300FC28F2 /* libMPush.a */,
 				94B9D2291CA86C4300FC28F2 /* MPush.h */,
@@ -4146,7 +4044,6 @@
 				05B01D9B1AC2E2D000D5B827 /* NSDate+Utilities.m */,
 				562FB3D71AA48C4400F9EFBD /* CurioSDK */,
 				05DEB1D31A81775F007793DD /* ContactSyncSDK */,
-				05C2A03C1A79882100EE4D78 /* GoogleConversionTrackingSDK */,
 				05A484571A6C610400793A90 /* UIImage+Resize.h */,
 				05A484581A6C610400793A90 /* UIImage+Resize.m */,
 				05A4845A1A6C614300793A90 /* UIImage+Alpha.m */,
@@ -5024,33 +4921,6 @@
 			name = out;
 			sourceTree = "<group>";
 		};
-		05C2A03C1A79882100EE4D78 /* GoogleConversionTrackingSDK */ = {
-			isa = PBXGroup;
-			children = (
-				05C2A03D1A79882100EE4D78 /* ACTReporter.h */,
-				05C2A03E1A79882100EE4D78 /* Deprecated */,
-				05C2A0401A79882100EE4D78 /* DoubleClick */,
-				05C2A0421A79882100EE4D78 /* libGoogleConversionTracking.a */,
-			);
-			path = GoogleConversionTrackingSDK;
-			sourceTree = "<group>";
-		};
-		05C2A03E1A79882100EE4D78 /* Deprecated */ = {
-			isa = PBXGroup;
-			children = (
-				05C2A03F1A79882100EE4D78 /* GoogleConversionPing.h */,
-			);
-			path = Deprecated;
-			sourceTree = "<group>";
-		};
-		05C2A0401A79882100EE4D78 /* DoubleClick */ = {
-			isa = PBXGroup;
-			children = (
-				05C2A0411A79882100EE4D78 /* DCTReporter.h */,
-			);
-			path = DoubleClick;
-			sourceTree = "<group>";
-		};
 		05C3A37A1B57DFAB002AB49A /* DepoShareExtension */ = {
 			isa = PBXGroup;
 			children = (
@@ -5238,84 +5108,6 @@
 				5247D61D1DDDD0F600FFE63E /* CurioUtil.m */,
 			);
 			path = CurioSDK;
-			sourceTree = "<group>";
-		};
-		563A98661E52ECF800D24B7E /* Adjust */ = {
-			isa = PBXGroup;
-			children = (
-				563A98671E52ECF800D24B7E /* ADJActivityHandler.h */,
-				563A98681E52ECF800D24B7E /* ADJActivityHandler.m */,
-				563A98691E52ECF800D24B7E /* ADJActivityKind.h */,
-				563A986A1E52ECF800D24B7E /* ADJActivityKind.m */,
-				563A986B1E52ECF800D24B7E /* ADJActivityPackage.h */,
-				563A986C1E52ECF800D24B7E /* ADJActivityPackage.m */,
-				563A986D1E52ECF800D24B7E /* ADJActivityState.h */,
-				563A986E1E52ECF800D24B7E /* ADJActivityState.m */,
-				563A986F1E52ECF800D24B7E /* ADJAdditions */,
-				563A98761E52ECF800D24B7E /* ADJAdjustFactory.h */,
-				563A98771E52ECF800D24B7E /* ADJAdjustFactory.m */,
-				563A98781E52ECF800D24B7E /* ADJAttribution.h */,
-				563A98791E52ECF800D24B7E /* ADJAttribution.m */,
-				563A987A1E52ECF800D24B7E /* ADJAttributionHandler.h */,
-				563A987B1E52ECF800D24B7E /* ADJAttributionHandler.m */,
-				563A987C1E52ECF800D24B7E /* ADJBackoffStrategy.h */,
-				563A987D1E52ECF800D24B7E /* ADJBackoffStrategy.m */,
-				563A987E1E52ECF800D24B7E /* ADJConfig.h */,
-				563A987F1E52ECF800D24B7E /* ADJConfig.m */,
-				563A98801E52ECF800D24B7E /* ADJDeviceInfo.h */,
-				563A98811E52ECF800D24B7E /* ADJDeviceInfo.m */,
-				563A98821E52ECF800D24B7E /* ADJEvent.h */,
-				563A98831E52ECF800D24B7E /* ADJEvent.m */,
-				563A98841E52ECF800D24B7E /* ADJEventFailure.h */,
-				563A98851E52ECF800D24B7E /* ADJEventFailure.m */,
-				563A98861E52ECF800D24B7E /* ADJEventSuccess.h */,
-				563A98871E52ECF800D24B7E /* ADJEventSuccess.m */,
-				563A98881E52ECF800D24B7E /* ADJKeychain.h */,
-				563A98891E52ECF800D24B7E /* ADJKeychain.m */,
-				563A988A1E52ECF800D24B7E /* ADJLogger.h */,
-				563A988B1E52ECF800D24B7E /* ADJLogger.m */,
-				563A988C1E52ECF800D24B7E /* ADJPackageBuilder.h */,
-				563A988D1E52ECF800D24B7E /* ADJPackageBuilder.m */,
-				563A988E1E52ECF800D24B7E /* ADJPackageHandler.h */,
-				563A988F1E52ECF800D24B7E /* ADJPackageHandler.m */,
-				563A98901E52ECF800D24B7E /* ADJRequestHandler.h */,
-				563A98911E52ECF800D24B7E /* ADJRequestHandler.m */,
-				563A98921E52ECF800D24B7E /* ADJResponseData.h */,
-				563A98931E52ECF800D24B7E /* ADJResponseData.m */,
-				563A98941E52ECF800D24B7E /* ADJSdkClickHandler.h */,
-				563A98951E52ECF800D24B7E /* ADJSdkClickHandler.m */,
-				563A98961E52ECF800D24B7E /* ADJSessionFailure.h */,
-				563A98971E52ECF800D24B7E /* ADJSessionFailure.m */,
-				563A98981E52ECF800D24B7E /* ADJSessionParameters.h */,
-				563A98991E52ECF800D24B7E /* ADJSessionParameters.m */,
-				563A989A1E52ECF800D24B7E /* ADJSessionSuccess.h */,
-				563A989B1E52ECF800D24B7E /* ADJSessionSuccess.m */,
-				563A989C1E52ECF800D24B7E /* ADJSystemProfile.h */,
-				563A989D1E52ECF800D24B7E /* ADJSystemProfile.m */,
-				563A989E1E52ECF800D24B7E /* ADJTimerCycle.h */,
-				563A989F1E52ECF800D24B7E /* ADJTimerCycle.m */,
-				563A98A01E52ECF800D24B7E /* ADJTimerOnce.h */,
-				563A98A11E52ECF800D24B7E /* ADJTimerOnce.m */,
-				563A98A21E52ECF800D24B7E /* Adjust.h */,
-				563A98A31E52ECF800D24B7E /* Adjust.m */,
-				563A98A41E52ECF800D24B7E /* ADJUtil.h */,
-				563A98A51E52ECF800D24B7E /* ADJUtil.m */,
-				563A98A61E52ECF800D24B7E /* Info.plist */,
-			);
-			path = Adjust;
-			sourceTree = "<group>";
-		};
-		563A986F1E52ECF800D24B7E /* ADJAdditions */ = {
-			isa = PBXGroup;
-			children = (
-				563A98701E52ECF800D24B7E /* NSData+ADJAdditions.h */,
-				563A98711E52ECF800D24B7E /* NSData+ADJAdditions.m */,
-				563A98721E52ECF800D24B7E /* NSString+ADJAdditions.h */,
-				563A98731E52ECF800D24B7E /* NSString+ADJAdditions.m */,
-				563A98741E52ECF800D24B7E /* UIDevice+ADJAdditions.h */,
-				563A98751E52ECF800D24B7E /* UIDevice+ADJAdditions.m */,
-			);
-			path = ADJAdditions;
 			sourceTree = "<group>";
 		};
 		569462891E6D3D860043FC67 /* Lifebox Picker */ = {
@@ -5875,7 +5667,6 @@
 				051CB3F619D2F71200E5FC88 /* document_icon.png in Resources */,
 				94B2F33F1D373E48009CD8B1 /* icon_sm.png in Resources */,
 				9498C0051D537B34009AF159 /* divider_horizontal@2x.png in Resources */,
-				563A98C61E52ECF900D24B7E /* Info.plist in Resources */,
 				05A9382E1AF6AE9100AE2892 /* updater_strings.plist in Resources */,
 				057C9D881A2B8D68001DDDEC /* music_next.png in Resources */,
 				050A7B2019F7CBB600B084B9 /* volume_level@2x.png in Resources */,
@@ -6822,9 +6613,7 @@
 				9433BCFC1D21DC7500991483 /* PromoCodeActivateDao.m in Sources */,
 				5247D6231DDDD0F600FFE63E /* CurioLocationData.m in Sources */,
 				94E549031CC6348E003CB5DC /* DropboxStartDao.m in Sources */,
-				563A98C31E52ECF900D24B7E /* ADJTimerOnce.m in Sources */,
 				058337D919ED9C1600DCF0C5 /* CustomAVPlayer.m in Sources */,
-				563A98B11E52ECF800D24B7E /* ADJBackoffStrategy.m in Sources */,
 				94BF90DD1D5A0E5E000078FD /* RevisitedAlbumListView.m in Sources */,
 				05B01D9C1AC2E2D000D5B827 /* NSDate+Utilities.m in Sources */,
 				94F130C31D2496C10086BDBB /* SettingsSocialController.m in Sources */,
@@ -6833,7 +6622,6 @@
 				070234911EA08E1400716C27 /* ContactUtil.m in Sources */,
 				0514A6291BF4D1030084E0AB /* BaseBgController.m in Sources */,
 				94FAE0CF1D2F6EDF00BC9F77 /* FBStatusDao.m in Sources */,
-				563A98AE1E52ECF800D24B7E /* ADJAdjustFactory.m in Sources */,
 				05A9382D1AF6AE9100AE2892 /* UpdateCheck.m in Sources */,
 				05754C141AC711EA00727B42 /* SyncInfoHeaderView.m in Sources */,
 				052644AF19D5A2A600B63759 /* SettingsDocumentsController.m in Sources */,
@@ -6847,8 +6635,6 @@
 				05AF7C8A1A1C8F4200F5011A /* RecentActivityCell.m in Sources */,
 				944D0E2F1DF373FC000333FF /* DepoHttpManager.m in Sources */,
 				05AD502B1A7ED75500C40777 /* TermsController.m in Sources */,
-				563A98C01E52ECF900D24B7E /* ADJSessionSuccess.m in Sources */,
-				563A98B21E52ECF800D24B7E /* ADJConfig.m in Sources */,
 				051E1E5919CAC90700FD1E03 /* AFXMLRequestOperation.m in Sources */,
 				94C5D08C1E830F840067E89D /* LocalImageDetailModalController.m in Sources */,
 				05144B5E1A090A5900B2A414 /* DocListController.m in Sources */,
@@ -6861,8 +6647,6 @@
 				051CB3A119D2E42300E5FC88 /* DocCell.m in Sources */,
 				944C07B51D4FE7CB00D45B61 /* RevisitedGroupedPhotosController.m in Sources */,
 				05A938261AF6AE9100AE2892 /* CustomIOS7AlertView.m in Sources */,
-				563A98C51E52ECF900D24B7E /* ADJUtil.m in Sources */,
-				563A98B41E52ECF800D24B7E /* ADJEvent.m in Sources */,
 				0579424A1C3FDC0C00899923 /* SignupController.m in Sources */,
 				94E7B4B21CB2D12300385016 /* ReachUsController.m in Sources */,
 				070234961EA08E1400716C27 /* SyncLogger.m in Sources */,
@@ -6876,7 +6660,6 @@
 				94A375291D31C1D600D06A0C /* VideofyDepoMusicModalController.m in Sources */,
 				67AC3FA01E71231E00DDC28C /* MKAnnotationView+WebCache.m in Sources */,
 				051E1EAE19CB20D500FD1E03 /* MenuSearchCell.m in Sources */,
-				563A98A81E52ECF800D24B7E /* ADJActivityKind.m in Sources */,
 				058219CE1A384D75001FA679 /* TableHeaderView.m in Sources */,
 				948EEE671CE9BEB600E27A6D /* AccurateLocationManager.m in Sources */,
 				052160A619E308380007B321 /* UploadingImageCell.m in Sources */,
@@ -6905,7 +6688,6 @@
 				94FB09871DE2065B00DA666D /* GroupPhotoSectionView.m in Sources */,
 				051E1E5319CAC90700FD1E03 /* AFHTTPRequestOperation.m in Sources */,
 				944C07B81D4FE81400D45B61 /* RevisitedPhotoHeaderSegmentView.m in Sources */,
-				563A98C11E52ECF900D24B7E /* ADJSystemProfile.m in Sources */,
 				9454FA661CAA822300BF1288 /* CurrentPhotoListModalController.m in Sources */,
 				070A21E21E87D0E0002385F7 /* ContactSyncProgressView.m in Sources */,
 				94C7CEFA1D2CE1510040897A /* ArrangeSelectedPhotosModalController.m in Sources */,
@@ -6921,7 +6703,6 @@
 				5247D6241DDDD0F600FFE63E /* CurioLocationManager.m in Sources */,
 				94E549091CC63718003CB5DC /* DropboxExportController.m in Sources */,
 				058B44DB1A4C0D89005B1590 /* SyncUtil.m in Sources */,
-				563A98C21E52ECF900D24B7E /* ADJTimerCycle.m in Sources */,
 				070234921EA08E1400716C27 /* GZIP.m in Sources */,
 				67AC3FA51E71231E00DDC28C /* SDWebImageCompat.m in Sources */,
 				057942501C3FDCF900899923 /* EmailValidationController.m in Sources */,
@@ -6929,7 +6710,6 @@
 				94DCA10F1D3D9B34000965AE /* CellographOrdersDao.m in Sources */,
 				056AC8FB19D15DBB00AC96C3 /* TokenManager.m in Sources */,
 				051E1E2F19CAC56A00FD1E03 /* AppUtil.m in Sources */,
-				563A98AC1E52ECF800D24B7E /* NSString+ADJAdditions.m in Sources */,
 				9433BD021D21DF6C00991483 /* VideofyCreateDao.m in Sources */,
 				057C9D7D1A2B5611001DDDEC /* MusicDetailModalController.m in Sources */,
 				67955C2D1EA0993200705083 /* RDActivityViewController.m in Sources */,
@@ -6956,7 +6736,6 @@
 				5247D6271DDDD0F600FFE63E /* CurioPostOffice.m in Sources */,
 				051E1E5119CAC90700FD1E03 /* UIButton+AFNetworking.m in Sources */,
 				05823AFB1A066FCD005869F6 /* MoveDao.m in Sources */,
-				563A98AB1E52ECF800D24B7E /* NSData+ADJAdditions.m in Sources */,
 				051E1EB419CB2D1300FD1E03 /* AppSession.m in Sources */,
 				059A46E61A6D3F4800935023 /* SettingsAboutUsController.m in Sources */,
 				05AF7C841A1C8D6D00F5011A /* Activity.m in Sources */,
@@ -6968,15 +6747,12 @@
 				94E549001CC63480003CB5DC /* DropboxConnectDao.m in Sources */,
 				05AF7C8D1A1C9C5800F5011A /* RecentActivityLinkerFooter.m in Sources */,
 				05224A9519DC1CBC00214767 /* PhotoListModalController.m in Sources */,
-				563A98C41E52ECF900D24B7E /* Adjust.m in Sources */,
 				94FBAEF31D5B883C00C8E6F1 /* NewFeatureInfoController.m in Sources */,
-				563A98BF1E52ECF900D24B7E /* ADJSessionParameters.m in Sources */,
 				942972C31D1B91FF00A4616C /* EmailChangeController.m in Sources */,
 				0546992C19F4E9EA00A87840 /* FileDetailFooter.m in Sources */,
 				67AC3FB21E71231E00DDC28C /* UIView+WebCacheOperation.m in Sources */,
 				5247D62A1DDDD0F600FFE63E /* CurioResourceUtil.m in Sources */,
 				05A4845F1A6C614300793A90 /* UIImage+RoundedCorner.m in Sources */,
-				563A98BB1E52ECF800D24B7E /* ADJRequestHandler.m in Sources */,
 				79B973B21ED84E4B00E9F2FA /* NSLayoutAnchor_Private.m in Sources */,
 				051E1E0719CAC2F900FD1E03 /* AppDelegate.m in Sources */,
 				070A221F1E8AEB34002385F7 /* CircleProgressBar.m in Sources */,
@@ -7008,7 +6784,6 @@
 				058BC22B1A30893C0007F4DE /* PreLoginController.m in Sources */,
 				53FA9CE51DE8607D008DCF93 /* Quota.m in Sources */,
 				94EF279C1C982B460087EFBE /* NoItemView.m in Sources */,
-				563A98BD1E52ECF900D24B7E /* ADJSdkClickHandler.m in Sources */,
 				056F29C91C4E715A001DD486 /* RequestCaptchaDao.m in Sources */,
 				67FDC4311EC47CEF00AADDD8 /* NSMutableArray+GCDThreadSafe.m in Sources */,
 				051E1EAB19CB20AD00FD1E03 /* MenuProfileCell.m in Sources */,
@@ -7039,12 +6814,10 @@
 				05E8112F19DF09DB0063F99A /* AlbumListModalController.m in Sources */,
 				792233A41EBB27F600955F90 /* InteractiveViewController.m in Sources */,
 				056F29E41C4FD68D001DD486 /* UpdateEmailDao.m in Sources */,
-				563A98B81E52ECF800D24B7E /* ADJLogger.m in Sources */,
 				051E1E5419CAC90700FD1E03 /* AFImageRequestOperation.m in Sources */,
 				05A9382B1AF6AE9100AE2892 /* MessageView.m in Sources */,
 				05D5E5A21B09D5EC00A22957 /* OfferRedesignCell.m in Sources */,
 				0544A0FE1B6619E7006EB9B5 /* ExifContainer.m in Sources */,
-				563A98A91E52ECF800D24B7E /* ADJActivityPackage.m in Sources */,
 				05A938281AF6AE9100AE2892 /* FLImageView.m in Sources */,
 				94C7CEE51D2C3A0A0040897A /* CustomEntryPopupView.m in Sources */,
 				94C7CEF71D2C49190040897A /* Story.m in Sources */,
@@ -7090,13 +6863,11 @@
 				94FAE0CC1D2F6ED200BC9F77 /* FBStartDao.m in Sources */,
 				05E8113219DF0ACB0063F99A /* MetaAlbum.m in Sources */,
 				05AF7C871A1C8EEB00F5011A /* RecentActivitiesDao.m in Sources */,
-				563A98BC1E52ECF800D24B7E /* ADJResponseData.m in Sources */,
 				050D4C351A31E17F00809A01 /* PostLoginSyncContactController.m in Sources */,
 				051DE35C19CC128600F27C85 /* MyNavigationController.m in Sources */,
 				05A9382F1AF6AE9100AE2892 /* UpdaterController.m in Sources */,
 				67AC3FAE1E71231E00DDC28C /* UIImage+WebP.m in Sources */,
 				051DE37219CC140100F27C85 /* CustomAlertView.m in Sources */,
-				563A98BE1E52ECF900D24B7E /* ADJSessionFailure.m in Sources */,
 				059E9A021A35DB5F00922A77 /* SmsForPassButton.m in Sources */,
 				058B328B1A14ABBE00A291C4 /* DeleteAlbumsDao.m in Sources */,
 				941496641CCF5E51008A8D0C /* GroupedPhotosCell.m in Sources */,
@@ -7122,8 +6893,6 @@
 				94C7CEFD1D2CE67E0040897A /* SquareSequencedPictureView.m in Sources */,
 				0526444E19D5625E00B63759 /* MoreMenuView.m in Sources */,
 				94FB09861DE2065B00DA666D /* DevicePhotosModalController.m in Sources */,
-				563A98B31E52ECF800D24B7E /* ADJDeviceInfo.m in Sources */,
-				563A98B51E52ECF800D24B7E /* ADJEventFailure.m in Sources */,
 				05DEB1C61A80C161007793DD /* ProvisionDao.m in Sources */,
 				67AC3FAB1E71231E00DDC28C /* UIButton+WebCache.m in Sources */,
 				05BCA2FB19EE89EE00AF2FE2 /* MusicPreviewController.m in Sources */,
@@ -7145,8 +6914,6 @@
 				94FAE0B41D2F11A400BC9F77 /* VideofyMusicListController.m in Sources */,
 				79B973B01ED84E4B00E9F2FA /* NSArray+MissingAnchors.m in Sources */,
 				057942411C3EEF8700899923 /* SignupDao.m in Sources */,
-				563A98A71E52ECF800D24B7E /* ADJActivityHandler.m in Sources */,
-				563A98AF1E52ECF800D24B7E /* ADJAttribution.m in Sources */,
 				05C244301A023F5C000D65D0 /* SortModalController.m in Sources */,
 				05C0E1FE1A0698C5005E1E92 /* MusicListController.m in Sources */,
 				0526444B19D5578C00B63759 /* FolderEmptyCell.m in Sources */,
@@ -7155,7 +6922,6 @@
 				051E1EB719CB2DAC00FD1E03 /* User.m in Sources */,
 				5247D62C1DDDD0F600FFE63E /* CurioSettings.m in Sources */,
 				051E1E5219CAC90700FD1E03 /* AFHTTPClient.m in Sources */,
-				563A98AD1E52ECF800D24B7E /* UIDevice+ADJAdditions.m in Sources */,
 				67AC3FAA1E71231E00DDC28C /* SDWebImagePrefetcher.m in Sources */,
 				055A3F5D19E82B2C004A0121 /* PhotoAlbumController.m in Sources */,
 				051DE36719CC12FD00F27C85 /* CustomButton.m in Sources */,
@@ -7189,20 +6955,16 @@
 				5247D6281DDDD0F600FFE63E /* CurioPushData.m in Sources */,
 				050A7B2319F7DFBD00B084B9 /* VolumeLevelIndicator.m in Sources */,
 				059CE5471A87D45100F6CFAE /* ContactSyncResult.m in Sources */,
-				563A98B61E52ECF800D24B7E /* ADJEventSuccess.m in Sources */,
 				058BC23C1A30E5370007F4DE /* ValidateAuthTokenDao.m in Sources */,
 				055A3F5219E819B6004A0121 /* NoItemCell.m in Sources */,
 				057DF50519D02E100005A389 /* SettingsController.m in Sources */,
 				94680E041D405CB000DC5227 /* TitleWithSwitchCell.m in Sources */,
 				058219C81A384D31001FA679 /* RecentSearchesTableView.m in Sources */,
-				563A98AA1E52ECF800D24B7E /* ADJActivityState.m in Sources */,
 				05D5E59C1B09D5DD00A22957 /* FailurePurchasingView.m in Sources */,
 				79B973AB1ED84E4B00E9F2FA /* ABLayoutAnchor.m in Sources */,
-				563A98BA1E52ECF800D24B7E /* ADJPackageHandler.m in Sources */,
 				523E9C511E0A69E300C2DFE7 /* SuggestDao.m in Sources */,
 				53FA9CE21DE86071008DCF93 /* QuotaInfoDao.m in Sources */,
 				058BC2321A30CD650007F4DE /* LastTwoDigitController.m in Sources */,
-				563A98B91E52ECF800D24B7E /* ADJPackageBuilder.m in Sources */,
 				051DE36819CC12FD00F27C85 /* ToggleButton.m in Sources */,
 				058219BC1A384AB0001FA679 /* FavouriteListController.m in Sources */,
 				057942531C3FDD0A00899923 /* EmailValidationResultController.m in Sources */,
@@ -7240,7 +7002,6 @@
 				94F43B291E8692E200B32814 /* FileDetailsDao.m in Sources */,
 				05D2B19D19E67C6900FC309D /* MainPhotoAlbumCell.m in Sources */,
 				05A484591A6C610400793A90 /* UIImage+Resize.m in Sources */,
-				563A98B71E52ECF800D24B7E /* ADJKeychain.m in Sources */,
 				05C7145C1A7823C400C467D9 /* RadiusDao.m in Sources */,
 				05DEB1C91A80C16B007793DD /* MigrateDao.m in Sources */,
 				9458AABF1E23A55E008DFCE7 /* RawTypeFile.m in Sources */,
@@ -7266,7 +7027,6 @@
 				5332150D1DEC276800FE7289 /* AlbumCell.m in Sources */,
 				0515706719E5B34100C62B98 /* SquareImageView.m in Sources */,
 				05E8113519DF10340063F99A /* RefAlbumCell.m in Sources */,
-				563A98B01E52ECF800D24B7E /* ADJAttributionHandler.m in Sources */,
 				94DCA10C1D3D8F67000965AE /* TaggedFileListDao.m in Sources */,
 				5247D5E71DD342B900FFE63E /* ConfirmRemoveModalController.m in Sources */,
 				94B3BE2F1D81F7C40086D05E /* FaqUrlDao.m in Sources */,
