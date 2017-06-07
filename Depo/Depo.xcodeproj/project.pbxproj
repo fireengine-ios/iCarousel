@@ -851,10 +851,6 @@
 		563A98C41E52ECF900D24B7E /* Adjust.m in Sources */ = {isa = PBXBuildFile; fileRef = 563A98A31E52ECF800D24B7E /* Adjust.m */; };
 		563A98C51E52ECF900D24B7E /* ADJUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 563A98A51E52ECF800D24B7E /* ADJUtil.m */; };
 		563A98C61E52ECF900D24B7E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 563A98A61E52ECF800D24B7E /* Info.plist */; };
-		563A98CB1E52F0A200D24B7E /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 563A98C71E52F0A200D24B7E /* Bolts.framework */; };
-		563A98CC1E52F0A200D24B7E /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 563A98C81E52F0A200D24B7E /* FBSDKCoreKit.framework */; };
-		563A98CD1E52F0A200D24B7E /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 563A98C91E52F0A200D24B7E /* FBSDKLoginKit.framework */; };
-		563A98CE1E52F0A200D24B7E /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 563A98CA1E52F0A200D24B7E /* FBSDKShareKit.framework */; };
 		563FB1BD1AA5EB030066F8E6 /* settings_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 563FB1BB1AA5EB030066F8E6 /* settings_icon.png */; };
 		563FB1BE1AA5EB030066F8E6 /* settings_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 563FB1BC1AA5EB030066F8E6 /* settings_icon@2x.png */; };
 		563FB1C11AA5EC990066F8E6 /* circle_welcome_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 563FB1BF1AA5EC990066F8E6 /* circle_welcome_icon.png */; };
@@ -2600,10 +2596,6 @@
 		563A98A41E52ECF800D24B7E /* ADJUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADJUtil.h; sourceTree = "<group>"; };
 		563A98A51E52ECF800D24B7E /* ADJUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADJUtil.m; sourceTree = "<group>"; };
 		563A98A61E52ECF800D24B7E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		563A98C71E52F0A200D24B7E /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "../../../Desktop/FacebookSDKs-iOS-4.19.0/Bolts.framework"; sourceTree = "<group>"; };
-		563A98C81E52F0A200D24B7E /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../../Desktop/FacebookSDKs-iOS-4.19.0/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
-		563A98C91E52F0A200D24B7E /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../../../Desktop/FacebookSDKs-iOS-4.19.0/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
-		563A98CA1E52F0A200D24B7E /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "../../../Desktop/FacebookSDKs-iOS-4.19.0/FBSDKShareKit.framework"; sourceTree = "<group>"; };
 		563FB1BB1AA5EB030066F8E6 /* settings_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings_icon.png; sourceTree = "<group>"; };
 		563FB1BC1AA5EB030066F8E6 /* settings_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings_icon@2x.png"; sourceTree = "<group>"; };
 		563FB1BF1AA5EC990066F8E6 /* circle_welcome_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle_welcome_icon.png; sourceTree = "<group>"; };
@@ -3292,7 +3284,6 @@
 			files = (
 				523E9C651E13B16300C2DFE7 /* Photos.framework in Frameworks */,
 				94E548FD1CC624ED003CB5DC /* DropboxSDK.framework in Frameworks */,
-				563A98CE1E52F0A200D24B7E /* FBSDKShareKit.framework in Frameworks */,
 				94B9D22A1CA86C4300FC28F2 /* libMPush.a in Frameworks */,
 				05033BE11C24B22900FA2E5C /* StoreKit.framework in Frameworks */,
 				05F931881C160E2F00858223 /* Accelerate.framework in Frameworks */,
@@ -3303,10 +3294,8 @@
 				05C2A0491A7989CD00EE4D78 /* CoreTelephony.framework in Frameworks */,
 				05C2A0441A79882100EE4D78 /* libGoogleConversionTracking.a in Frameworks */,
 				05C2A03B1A79832600EE4D78 /* iAd.framework in Frameworks */,
-				563A98CD1E52F0A200D24B7E /* FBSDKLoginKit.framework in Frameworks */,
 				05C2A0391A79832200EE4D78 /* AdSupport.framework in Frameworks */,
 				05BBE71619E07DA600805215 /* MediaPlayer.framework in Frameworks */,
-				563A98CB1E52F0A200D24B7E /* Bolts.framework in Frameworks */,
 				05224A9719DC345B00214767 /* AssetsLibrary.framework in Frameworks */,
 				051E1E9719CACA4E00FD1E03 /* QuartzCore.framework in Frameworks */,
 				051E1E9519CACA2D00FD1E03 /* libsqlite3.dylib in Frameworks */,
@@ -3316,7 +3305,6 @@
 				67C29C6F1E66E02900B2C442 /* CFNetwork.framework in Frameworks */,
 				67C29C701E66E06400B2C442 /* Foundation.framework in Frameworks */,
 				051E1DF919CAC2F900FD1E03 /* CoreGraphics.framework in Frameworks */,
-				563A98CC1E52F0A200D24B7E /* FBSDKCoreKit.framework in Frameworks */,
 				051E1DFB19CAC2F900FD1E03 /* UIKit.framework in Frameworks */,
 				C83540F50BF5FC991CD2F25E /* libPods-Depo.a in Frameworks */,
 			);
@@ -3408,10 +3396,6 @@
 		051E1DF519CAC2F900FD1E03 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				563A98C71E52F0A200D24B7E /* Bolts.framework */,
-				563A98C81E52F0A200D24B7E /* FBSDKCoreKit.framework */,
-				563A98C91E52F0A200D24B7E /* FBSDKLoginKit.framework */,
-				563A98CA1E52F0A200D24B7E /* FBSDKShareKit.framework */,
 				5332150F1DEEAB0E00FE7289 /* Photos.framework */,
 				94E548FC1CC624ED003CB5DC /* DropboxSDK.framework */,
 				05033BE01C24B22900FA2E5C /* StoreKit.framework */,
