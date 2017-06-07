@@ -85,7 +85,7 @@
 - (IBAction) preUploadCheck {
     if([SharedUtil readSharedToken] == nil) {
         NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
-        if(networkStatus == kReachableViaWiFi || networkStatus == kReachableViaWWAN) {
+        if(networkStatus == ReachableViaWiFi || networkStatus == ReachableViaWWAN) {
             if([SharedUtil readSharedRememberMeToken] != nil) {
                 [self requestToken];
             } else {
@@ -528,11 +528,11 @@
 
 - (void) extensionUploadShouldRelogin {
     NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
-    if(networkStatus == kReachableViaWiFi || networkStatus == kReachableViaWWAN) {
+    if(networkStatus == ReachableViaWiFi || networkStatus == ReachableViaWWAN) {
         if([SharedUtil readSharedRememberMeToken] != nil) {
             [self requestToken];
         } else {
-            if(networkStatus == kReachableViaWiFi) {
+            if(networkStatus == ReachableViaWiFi) {
                 alertView = [[CustomAlertView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) withTitle:NSLocalizedString(@"Error", @"") withMessage:NSLocalizedString(@"ExtLoginRequiredMessage", @"") withModalType:ModalTypeError];
                 alertView.delegate = self;
                 [alertView reorientateModalView:self.view.center];

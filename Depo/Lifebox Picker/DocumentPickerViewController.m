@@ -57,7 +57,7 @@
     self.docTable.dataSource = self;
     
     NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
-    if(networkStatus == kReachableViaWiFi || networkStatus == kReachableViaWWAN) {
+    if(networkStatus == ReachableViaWiFi || networkStatus == ReachableViaWWAN) {
         [self requestForDocs:self.folderUUID pageNum:0 completion:^(NSMutableArray *list, NSError *error) {
             if (!error) {
                 docList = list;

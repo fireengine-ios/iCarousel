@@ -269,7 +269,7 @@
 - (void) backupClicked {
     
     NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
-    if(networkStatus == kReachableViaWiFi || networkStatus == kReachableViaWWAN) {
+    if(networkStatus == ReachableViaWiFi || networkStatus == ReachableViaWWAN) {
         if ([ContactSyncSDK isRunning]) {
             IGLog(@"ContactSync backup request is rejected because it is running");
             return;
@@ -322,7 +322,7 @@
 - (void) restoreClicked {
     
     NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
-    if(networkStatus == kReachableViaWiFi || networkStatus == kReachableViaWWAN) {
+    if(networkStatus == ReachableViaWiFi || networkStatus == ReachableViaWWAN) {
         if ([ContactSyncSDK isRunning]) {
             IGLog(@"ContactSync restore request is rejected because it is running");
             return;
@@ -421,7 +421,7 @@
 - (void) triggerNewToken {
     IGLog(@"ContactSync at triggerNewToken");
     NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
-    if(networkStatus == kReachableViaWiFi || networkStatus == kReachableViaWWAN) {
+    if(networkStatus == ReachableViaWiFi || networkStatus == ReachableViaWWAN) {
         IGLog(@"ContactSync at triggerNewToken kReachableViaWiFi || kReachableViaWWAN");
         if([CacheUtil readRememberMeToken] != nil) {
             IGLog(@"ContactSync at triggerNewToken readRememberMeToken not null");
@@ -431,7 +431,7 @@
             _tokenDao.failMethod = @selector(tokenRevisitedFailCallback:);
             [_tokenDao requestTokenByRememberMe];
         } else {
-            if(networkStatus == kReachableViaWiFi) {
+            if(networkStatus == ReachableViaWiFi) {
                 IGLog(@"ContactSync at triggerNewToken readRememberMeToken null - kReachableViaWiFi");
                 //            [self shouldReturnFailWithMessage:LOGIN_REQ_ERROR_MESSAGE];
                 //                NSLog(@"Login Required Triggered within triggerNewToken instead of fail method: %@", NSStringFromSelector(failMethod));

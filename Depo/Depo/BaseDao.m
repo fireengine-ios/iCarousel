@@ -649,7 +649,7 @@
 - (void) triggerNewToken {
     IGLog(@"BaseDao at triggerNewToken");
     NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
-    if(networkStatus == kReachableViaWiFi || networkStatus == kReachableViaWWAN) {
+    if(networkStatus == ReachableViaWiFi || networkStatus == ReachableViaWWAN) {
         IGLog(@"BaseDao at triggerNewToken kReachableViaWiFi || kReachableViaWWAN");
         if([CacheUtil readRememberMeToken] != nil) {
             IGLog(@"BaseDao at triggerNewToken readRememberMeToken not null");
@@ -659,7 +659,7 @@
             tokenDao.failMethod = @selector(tokenRevisitedFailCallback:);
             [tokenDao requestTokenByRememberMe];
         } else {
-            if(networkStatus == kReachableViaWiFi) {
+            if(networkStatus == ReachableViaWiFi) {
                 IGLog(@"BaseDao at triggerNewToken readRememberMeToken null - kReachableViaWiFi");
                 //            [self shouldReturnFailWithMessage:LOGIN_REQ_ERROR_MESSAGE];
 //                NSLog(@"Login Required Triggered within triggerNewToken instead of fail method: %@", NSStringFromSelector(failMethod));

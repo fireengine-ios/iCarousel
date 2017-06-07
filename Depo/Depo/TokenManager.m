@@ -183,7 +183,7 @@
     NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
     if([CacheUtil readRememberMeToken] != nil) {
         [tokenWithinProcessDao requestTokenByRememberMe];
-    } else if(networkStatus == kReachableViaWWAN) {
+    } else if(networkStatus == ReachableViaWWAN) {
         [radiusWithinProcessDao requestRadiusLogin];
     }
 }
