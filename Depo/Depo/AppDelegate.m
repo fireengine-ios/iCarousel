@@ -207,17 +207,6 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityDidChange) name:kReachabilityChangedNotification object:nil];
     
-    //    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
-    //    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
-
-//    // App Rater
-//    [AppRater sharedInstance].daysUntilPrompt = 5;
-//    [AppRater sharedInstance].launchesUntilPrompt = 10;
-//    [AppRater sharedInstance].remindMeDaysUntilPrompt = 15;
-//    [AppRater sharedInstance].remindMeLaunchesUntilPrompt = 10;
-//    // [AppRater sharedInstance].preferredLanguage = @"en";
-//    [[AppRater sharedInstance] appLaunched];
-    
     [self handleURLCache];
     
     // Cancel all notifications that is scheduled before
@@ -232,7 +221,7 @@
     
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
-    
+        
     return YES;
 }
 

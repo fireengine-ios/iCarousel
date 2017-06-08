@@ -3083,6 +3083,7 @@
 		ABE98EEA0ADECA5F8D994CBE /* Pods-Lifebox Picker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lifebox Picker.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lifebox Picker/Pods-Lifebox Picker.release.xcconfig"; sourceTree = "<group>"; };
 		C0E7C8A905CBF89702F18211 /* Pods-DepoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DepoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DepoTests/Pods-DepoTests.release.xcconfig"; sourceTree = "<group>"; };
 		CBF0B3F0018BAF98A072C67E /* Pods-DepoTests.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DepoTests.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-DepoTests/Pods-DepoTests.enterprise.xcconfig"; sourceTree = "<group>"; };
+		CEB362021EE94AE10019EFE1 /* Depo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Depo-Bridging-Header.h"; sourceTree = "<group>"; };
 		D4C8F4F05CE1353BA41D6D3D /* Pods-AutoSyncWidget.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutoSyncWidget.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-AutoSyncWidget/Pods-AutoSyncWidget.appstore.xcconfig"; sourceTree = "<group>"; };
 		E73401209409A25DD66BA718 /* Pods-DepoShareExtension.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DepoShareExtension.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-DepoShareExtension/Pods-DepoShareExtension.appstore.xcconfig"; sourceTree = "<group>"; };
 		E844113A243E98F5843100EA /* Pods-Lifebox Picker.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lifebox Picker.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-Lifebox Picker/Pods-Lifebox Picker.enterprise.xcconfig"; sourceTree = "<group>"; };
@@ -3267,6 +3268,8 @@
 		051E1DFD19CAC2F900FD1E03 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CEB362021EE94AE10019EFE1 /* Depo-Bridging-Header.h */,
+				051E1E0419CAC2F900FD1E03 /* Depo-Prefix.pch */,
 				790B9E161E7ABC5E00DD7DA0 /* countryiso.json */,
 				05DEB1CF1A80EBA6007793DD /* terms.txt */,
 				949BB5CA1D707B2800BED9DB /* lifebox_teaser.mp4 */,
@@ -3284,7 +3287,6 @@
 				051E1DFE19CAC2F900FD1E03 /* Depo-Info.plist */,
 				051E1DFF19CAC2F900FD1E03 /* InfoPlist.strings */,
 				051E1E0219CAC2F900FD1E03 /* main.m */,
-				051E1E0419CAC2F900FD1E03 /* Depo-Prefix.pch */,
 				672F866E1E6027EF00229F58 /* LaunchScreen.storyboard */,
 			);
 			name = "Supporting Files";
@@ -5444,6 +5446,7 @@
 				TargetAttributes = {
 					051E1DF219CAC2F900FD1E03 = {
 						DevelopmentTeam = PT569ZA878;
+						LastSwiftMigration = 0830;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -7224,9 +7227,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8ABF89FF6605635ADBC2E20B /* Pods-Depo.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Depo/Depo.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Metin Güler (TVW6JVQFBH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Metin Güler (TVW6JVQFBH)";
@@ -7247,6 +7251,7 @@
 				);
 				INFOPLIST_FILE = "Depo/Depo-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo/**",
@@ -7261,6 +7266,9 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5a820945-d25b-44c5-a898-0c4ec6ece99d";
 				PROVISIONING_PROFILE_SPECIFIER = LifeboxDevelopment_20161228;
+				SWIFT_OBJC_BRIDGING_HEADER = "Depo/Depo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -7270,9 +7278,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9931E7D51C7D9D14A47A2DC0 /* Pods-Depo.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Depo/Depo.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: metin.guler@rdc.com.tr (L2KFTSHMPR)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: metin.guler@rdc.com.tr (L2KFTSHMPR)";
@@ -7288,6 +7297,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "PLATFORM_STORE=1";
 				INFOPLIST_FILE = "Depo/Depo-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo/**",
@@ -7302,6 +7312,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "bea1bda0-fadb-4c10-974c-465aa05b7d4b";
 				PROVISIONING_PROFILE_SPECIFIER = LifeboxDevelopment_20161228;
+				SWIFT_OBJC_BRIDGING_HEADER = "Depo/Depo-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -7399,9 +7411,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 643835B23E5FE22939F4D239 /* Pods-Depo.appstore.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Depo/Depo-AppStore.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
@@ -7416,6 +7429,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "PLATFORM_STORE=1";
 				INFOPLIST_FILE = "Depo/Depo-AppStore-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo/**",
@@ -7430,6 +7444,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "c7326830-eaca-4f1e-9bbb-765e70c0d2fc";
 				PROVISIONING_PROFILE_SPECIFIER = LifeboxDevelopment_20161228;
+				SWIFT_OBJC_BRIDGING_HEADER = "Depo/Depo-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -7500,9 +7516,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 849AE724A4CD02D1BB1D73F2 /* Pods-Depo.enterprise.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Depo/Depo-Enterprise.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
@@ -7518,6 +7535,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "PLATFORM_ICT=1";
 				INFOPLIST_FILE = "Depo/Depo-Enterprise-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo/**",
@@ -7532,6 +7550,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "3d2683f7-410b-4d3d-82ee-4404d6095878";
 				PROVISIONING_PROFILE_SPECIFIER = LifeboxDevelopment_20161228;
+				SWIFT_OBJC_BRIDGING_HEADER = "Depo/Depo-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};

@@ -10,7 +10,6 @@
 #import "Util.h"
 #import "AppDelegate.h"
 #import "BaseViewController.h"
-#import "AFNetworking.h"
 
 @interface VideofyPreviewController ()
 
@@ -69,27 +68,28 @@
     [request addValue:@"application/json; encoding=utf-8" forHTTPHeaderField:@"Content-Type"];
     [request setValue:APPDELEGATE.session.authToken forHTTPHeaderField:@"X-Auth-Token"];
     
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *path = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"VIDEOFY_PREVIEW_FILENAME.mp4"];
-    operation.outputStream = [NSOutputStream outputStreamToFileAtPath:path append:NO];
-    
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"Successfully downloaded file to %@", path);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self hideLoading];
-            [self loadVideoForPath:path];
-        });
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self showErrorAlertWithMessage:NSLocalizedString(@"VideofyPreviewDownloadError", @"")];
-            [self hideLoading];
-        });
-    }];
-    
-    [operation start];
+//   TODO: REWRITE REQUEST
+//    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+//    
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *path = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"VIDEOFY_PREVIEW_FILENAME.mp4"];
+//    operation.outputStream = [NSOutputStream outputStreamToFileAtPath:path append:NO];
+//    
+//    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSLog(@"Successfully downloaded file to %@", path);
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [self hideLoading];
+//            [self loadVideoForPath:path];
+//        });
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        NSLog(@"Error: %@", error);
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [self showErrorAlertWithMessage:NSLocalizedString(@"VideofyPreviewDownloadError", @"")];
+//            [self hideLoading];
+//        });
+//    }];
+//    
+//    [operation start];
 }
 
 - (void) loadVideoForPath:(NSString *) path {
