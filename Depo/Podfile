@@ -15,9 +15,11 @@ target 'Depo' do
     pod 'FBSDKLoginKit'
     pod 'FBSDKShareKit'
     pod 'Reachability'
+    pod 'SDWebImage'
     
     pod 'GoogleConversionTracking'
     pod 'Adjust'
+    
 
   target 'DepoTests' do
     inherit! :search_paths
