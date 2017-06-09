@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="Depo" customModuleProvider="target">
+            <connections>
+                <outlet property="bacgroungImageView" destination="VaL-qI-xdB" id="hqJ-RD-mZj"/>
+                <outlet property="tableView" destination="ZUi-xv-OhT" id="7ag-Oo-ICO"/>
+                <outlet property="view" destination="iN0-l3-epB" id="jim-su-1hB"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VaL-qI-xdB">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                </imageView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZUi-xv-OhT">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="sectionIndexBackgroundColor" red="0.023596025971353463" green="0.0" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="K51-ck-HJ4"/>
+                        <outlet property="delegate" destination="-1" id="N3Y-tg-mZh"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="0.38853236607142855" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="VaL-qI-xdB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="E1p-bi-3TG"/>
+                <constraint firstItem="VaL-qI-xdB" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ERl-Gf-ZtY"/>
+                <constraint firstItem="ZUi-xv-OhT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="EXi-js-7Gf"/>
+                <constraint firstAttribute="bottom" secondItem="ZUi-xv-OhT" secondAttribute="bottom" id="bsN-Bv-kFb"/>
+                <constraint firstAttribute="trailing" secondItem="VaL-qI-xdB" secondAttribute="trailing" id="g8T-rg-Qu4"/>
+                <constraint firstAttribute="bottom" secondItem="VaL-qI-xdB" secondAttribute="bottom" id="rDi-bM-Mv5"/>
+                <constraint firstItem="ZUi-xv-OhT" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="uPJ-9e-V16"/>
+                <constraint firstAttribute="trailing" secondItem="ZUi-xv-OhT" secondAttribute="trailing" id="yik-of-nsK"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+            <point key="canvasLocation" x="24.5" y="51.5"/>
+        </view>
+    </objects>
+</document>

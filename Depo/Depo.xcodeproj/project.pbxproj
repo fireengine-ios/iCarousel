@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02F9F1A2896C72E1D47EACB8 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36AE0654866DE2BD8525961 /* LoginPresenter.swift */; };
 		05028CBB1B58F694000F2D09 /* yellow_close_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 051CB3E319D2F71200E5FC88 /* yellow_close_button@2x.png */; };
 		05028CBC1B58F697000F2D09 /* yellow_close_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 051CB3A219D2F6F700E5FC88 /* yellow_close_button.png */; };
 		05028CBD1B58F7FD000F2D09 /* yellow_button_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 051CB3DB19D2F71200E5FC88 /* yellow_button_bg.png */; };
@@ -747,6 +748,7 @@
 		07547D011EA4B4140012F4FE /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC3F9A1E71231E00DDC28C /* UIImageView+WebCache.m */; };
 		07547D021EA4B4140012F4FE /* UIView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC3F9C1E71231E00DDC28C /* UIView+WebCache.m */; };
 		07547D031EA4B4140012F4FE /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 67AC3F9E1E71231E00DDC28C /* UIView+WebCacheOperation.m */; };
+		14A7B3998B725BCAE734756E /* LoginInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2623C92385DDF4010B0A7B34 /* LoginInteractorInput.swift */; };
 		2443E1541B6BB0C5001C274D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2443E1531B6BB0C5001C274D /* AudioToolbox.framework */; };
 		2443E1571B6BB5F3001C274D /* AudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2443E1561B6BB5F3001C274D /* AudioManager.m */; };
 		247268911B7CC29900804E56 /* CustomAdvertisementView.m in Sources */ = {isa = PBXBuildFile; fileRef = 247268901B7CC29900804E56 /* CustomAdvertisementView.m */; };
@@ -877,7 +879,9 @@
 		56FCFDD51A9C7DDA00AC041C /* info_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 56FCFDD31A9C7DDA00AC041C /* info_icon.png */; };
 		56FCFDD61A9C7DDA00AC041C /* info_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56FCFDD41A9C7DDA00AC041C /* info_icon@2x.png */; };
 		5A9F7AD21A6AD38C1CAAECA4 /* Pods_DepoShareExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F5B2B3236E8C7524B328BB3 /* Pods_DepoShareExtension.framework */; };
+		5AB1B6F935D3B693B7C226FC /* LoginRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63DC8B59E033F4F42353C72 /* LoginRouterInput.swift */; };
 		5C14795325A085EE7E069554 /* Pods_Depo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C390612A5109C2A9E5E35AB /* Pods_Depo.framework */; };
+		5C7007AE7BEC89281EF6B2F2 /* LoginInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1051ED2206D78745432B7950 /* LoginInitializer.swift */; };
 		6308E46D1E64C0E800BB32A0 /* VideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6308E46C1E64C0E800BB32A0 /* VideoView.m */; };
 		63608CD91E5C1EEA00B8FC66 /* ZPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63608CD81E5C1EEA00B8FC66 /* ZPhotoView.m */; };
 		672F866F1E6027EF00229F58 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 672F866E1E6027EF00229F58 /* LaunchScreen.storyboard */; };
@@ -965,7 +969,18 @@
 		79C7752C1E9623280008FB09 /* Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 79C775111E9623280008FB09 /* Button.png */; };
 		79C7752D1E9623280008FB09 /* Button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79C775121E9623280008FB09 /* Button@2x.png */; };
 		79C7752E1E9623280008FB09 /* Button@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79C775131E9623280008FB09 /* Button@3x.png */; };
+		7A7C4BF94747A5F383083F80 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66CBF165BF20A50536664DC /* LoginRouter.swift */; };
+		7C2B2931E4DE56DD8846C72A /* LoginInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFDA32802F129477A8BC789 /* LoginInteractorOutput.swift */; };
+		7C3BE7BE1EEAD0F6005A6266 /* BottomLoginTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BE7BC1EEAD0F6005A6266 /* BottomLoginTableViewCell.swift */; };
+		7C3BE7BF1EEAD0F6005A6266 /* BottomLoginTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3BE7BD1EEAD0F6005A6266 /* BottomLoginTableViewCell.xib */; };
+		7C3BE7C11EEAD26E005A6266 /* SwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BE7C01EEAD26E005A6266 /* SwitchButton.swift */; };
+		7CAFF3B01EE9750C00F3C9B7 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CAFF3AF1EE9750C00F3C9B7 /* LoginViewController.xib */; };
+		7CAFF3B61EE98BFB00F3C9B7 /* LoginTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAFF3B41EE98BFB00F3C9B7 /* LoginTableViewCell.swift */; };
+		7CAFF3B71EE98BFB00F3C9B7 /* LoginTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CAFF3B51EE98BFB00F3C9B7 /* LoginTableViewCell.xib */; };
+		7CEF19EF1EEA776A00D932F4 /* TextInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEF19EE1EEA776A00D932F4 /* TextInputView.swift */; };
+		7CEF19F11EEA777E00D932F4 /* TextInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CEF19F01EEA777E00D932F4 /* TextInputView.xib */; };
 		83AFF9A2BBEF449448186DBB /* Pods_Lifebox_Picker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F8D57D36EF6E476E6752F2C /* Pods_Lifebox_Picker.framework */; };
+		86BC080BE2A7482A01B02D59 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329B94107BA8D7F87F900320 /* LoginInteractor.swift */; };
 		94112A981CCA7DE00050E9B1 /* DropboxStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94112A971CCA7DE00050E9B1 /* DropboxStatusCell.m */; };
 		941496611CCF559D008A8D0C /* GroupedPhotosAndVideosController.m in Sources */ = {isa = PBXBuildFile; fileRef = 941496601CCF559D008A8D0C /* GroupedPhotosAndVideosController.m */; };
 		941496641CCF5E51008A8D0C /* GroupedPhotosCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 941496631CCF5E51008A8D0C /* GroupedPhotosCell.m */; };
@@ -1208,6 +1223,7 @@
 		94DCA1091D3D8F03000965AE /* FileTagDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94DCA1081D3D8F03000965AE /* FileTagDao.m */; };
 		94DCA10C1D3D8F67000965AE /* TaggedFileListDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94DCA10B1D3D8F67000965AE /* TaggedFileListDao.m */; };
 		94DCA10F1D3D9B34000965AE /* CellographOrdersDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94DCA10E1D3D9B34000965AE /* CellographOrdersDao.m */; };
+		94E09DE85364A93FF86A0608 /* LoginConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FC2E62D288EC1DEF182BF9 /* LoginConfigurator.swift */; };
 		94E548FD1CC624ED003CB5DC /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94E548FC1CC624ED003CB5DC /* DropboxSDK.framework */; };
 		94E549001CC63480003CB5DC /* DropboxConnectDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E548FF1CC63480003CB5DC /* DropboxConnectDao.m */; };
 		94E549031CC6348E003CB5DC /* DropboxStartDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E549021CC6348E003CB5DC /* DropboxStartDao.m */; };
@@ -1299,6 +1315,10 @@
 		94FE82B11D4A85BC00F62EF4 /* button_play@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94FE82B01D4A85BC00F62EF4 /* button_play@3x.png */; };
 		94FE82B31D4A85C600F62EF4 /* button_play.png in Resources */ = {isa = PBXBuildFile; fileRef = 94FE82B21D4A85C600F62EF4 /* button_play.png */; };
 		CE2E598F1EE941DD0002A492 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 051E1E0819CAC2F900FD1E03 /* Images.xcassets */; };
+		DBBAD24966A9CD3374A9A4E4 /* LoginViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3CA4353AEE301DB2405631 /* LoginViewInput.swift */; };
+		E91C8A857C4875379D2EC9F3 /* LoginModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C4BC67FE705ECCCD182537 /* LoginModuleInput.swift */; };
+		F9CEAA630EAB2E8FADA60456 /* LoginViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E870D66F0EE2FD9401267997 /* LoginViewOutput.swift */; };
+		FDC6469294EE1711E7227597 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A298EDF7A5E50C34DBDF1B85 /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -2333,6 +2353,8 @@
 		070A221E1E8AEB34002385F7 /* CircleProgressBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleProgressBar.m; sourceTree = "<group>"; };
 		073762171EA09E5200A1A4BC /* ImageScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageScale.h; sourceTree = "<group>"; };
 		073762181EA09E5200A1A4BC /* ImageScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageScale.m; sourceTree = "<group>"; };
+		1051ED2206D78745432B7950 /* LoginInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LoginInitializer.swift; sourceTree = "<group>"; };
+		13C4BC67FE705ECCCD182537 /* LoginModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LoginModuleInput.swift; sourceTree = "<group>"; };
 		17545413B405154400F3AF17 /* Pods-AutoSyncWidget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutoSyncWidget.release.xcconfig"; path = "Pods/Target Support Files/Pods-AutoSyncWidget/Pods-AutoSyncWidget.release.xcconfig"; sourceTree = "<group>"; };
 		1C390612A5109C2A9E5E35AB /* Pods_Depo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Depo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F8D57D36EF6E476E6752F2C /* Pods_Lifebox_Picker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lifebox_Picker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2347,11 +2369,15 @@
 		24FE7B0A1B6A539D007B53A0 /* PrintWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrintWebViewController.m; sourceTree = "<group>"; };
 		24FE7B0C1B6A5A98007B53A0 /* white_print_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white_print_icon.png; sourceTree = "<group>"; };
 		24FE7B0D1B6A5A98007B53A0 /* white_print_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "white_print_icon@2x.png"; sourceTree = "<group>"; };
+		2623C92385DDF4010B0A7B34 /* LoginInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LoginInteractorInput.swift; sourceTree = "<group>"; };
 		26C781F988B2B5E741F70753 /* Pods_AutoSyncWidget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AutoSyncWidget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		329B94107BA8D7F87F900320 /* LoginInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
 		3548B2E6E62148AE1CE31A20 /* Pods-DepoShareExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DepoShareExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-DepoShareExtension/Pods-DepoShareExtension.release.xcconfig"; sourceTree = "<group>"; };
 		3A570FBC82798DEEDCBB44C3 /* Pods-DepoTests.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DepoTests.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-DepoTests/Pods-DepoTests.appstore.xcconfig"; sourceTree = "<group>"; };
+		3C3CA4353AEE301DB2405631 /* LoginViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LoginViewInput.swift; sourceTree = "<group>"; };
 		4506CAFF4D0E7AC665C195BA /* Pods-DepoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DepoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DepoTests/Pods-DepoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		48EF517FDFCB486165A308AF /* Pods-DepoShareExtension.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DepoShareExtension.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-DepoShareExtension/Pods-DepoShareExtension.enterprise.xcconfig"; sourceTree = "<group>"; };
+		4AFDA32802F129477A8BC789 /* LoginInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LoginInteractorOutput.swift; sourceTree = "<group>"; };
 		4F5B2B3236E8C7524B328BB3 /* Pods_DepoShareExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DepoShareExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		523E9C4F1E0A69E300C2DFE7 /* SuggestDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuggestDao.h; sourceTree = "<group>"; };
 		523E9C501E0A69E300C2DFE7 /* SuggestDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuggestDao.m; sourceTree = "<group>"; };
@@ -2566,6 +2592,7 @@
 		67B0DD501E7FCB4D00BAD640 /* ShareActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareActivity.h; sourceTree = "<group>"; };
 		67B0DD511E7FCB4D00BAD640 /* ShareActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareActivity.m; sourceTree = "<group>"; };
 		67B0DD531E7FCB5B00BAD640 /* facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook.png; sourceTree = "<group>"; };
+		67FC2E62D288EC1DEF182BF9 /* LoginConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LoginConfigurator.swift; sourceTree = "<group>"; };
 		67FDC42F1EC47CEF00AADDD8 /* NSMutableArray+GCDThreadSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+GCDThreadSafe.h"; sourceTree = "<group>"; };
 		67FDC4301EC47CEF00AADDD8 /* NSMutableArray+GCDThreadSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+GCDThreadSafe.m"; sourceTree = "<group>"; };
 		67FDC4321EC47D7D00AADDD8 /* NSObject+GCDThreadSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+GCDThreadSafe.h"; sourceTree = "<group>"; };
@@ -2644,6 +2671,14 @@
 		79C775111E9623280008FB09 /* Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Button.png; sourceTree = "<group>"; };
 		79C775121E9623280008FB09 /* Button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button@2x.png"; sourceTree = "<group>"; };
 		79C775131E9623280008FB09 /* Button@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button@3x.png"; sourceTree = "<group>"; };
+		7C3BE7BC1EEAD0F6005A6266 /* BottomLoginTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomLoginTableViewCell.swift; sourceTree = "<group>"; };
+		7C3BE7BD1EEAD0F6005A6266 /* BottomLoginTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BottomLoginTableViewCell.xib; sourceTree = "<group>"; };
+		7C3BE7C01EEAD26E005A6266 /* SwitchButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchButton.swift; sourceTree = "<group>"; };
+		7CAFF3AF1EE9750C00F3C9B7 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		7CAFF3B41EE98BFB00F3C9B7 /* LoginTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginTableViewCell.swift; sourceTree = "<group>"; };
+		7CAFF3B51EE98BFB00F3C9B7 /* LoginTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginTableViewCell.xib; sourceTree = "<group>"; };
+		7CEF19EE1EEA776A00D932F4 /* TextInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInputView.swift; sourceTree = "<group>"; };
+		7CEF19F01EEA777E00D932F4 /* TextInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextInputView.xib; sourceTree = "<group>"; };
 		7F142A19BE346559FCF5E378 /* Pods-Lifebox Picker.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lifebox Picker.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Lifebox Picker/Pods-Lifebox Picker.appstore.xcconfig"; sourceTree = "<group>"; };
 		849AE724A4CD02D1BB1D73F2 /* Pods-Depo.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Depo.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-Depo/Pods-Depo.enterprise.xcconfig"; sourceTree = "<group>"; };
 		8ABF89FF6605635ADBC2E20B /* Pods-Depo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Depo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Depo/Pods-Depo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -3079,16 +3114,21 @@
 		94FE82B01D4A85BC00F62EF4 /* button_play@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_play@3x.png"; sourceTree = "<group>"; };
 		94FE82B21D4A85C600F62EF4 /* button_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_play.png; sourceTree = "<group>"; };
 		9931E7D51C7D9D14A47A2DC0 /* Pods-Depo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Depo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Depo/Pods-Depo.release.xcconfig"; sourceTree = "<group>"; };
+		A298EDF7A5E50C34DBDF1B85 /* LoginViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A7DCF0A18045DBBE4B2C523E /* Pods-AutoSyncWidget.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutoSyncWidget.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-AutoSyncWidget/Pods-AutoSyncWidget.enterprise.xcconfig"; sourceTree = "<group>"; };
 		ABE98EEA0ADECA5F8D994CBE /* Pods-Lifebox Picker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lifebox Picker.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lifebox Picker/Pods-Lifebox Picker.release.xcconfig"; sourceTree = "<group>"; };
+		B36AE0654866DE2BD8525961 /* LoginPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		C0E7C8A905CBF89702F18211 /* Pods-DepoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DepoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DepoTests/Pods-DepoTests.release.xcconfig"; sourceTree = "<group>"; };
 		CBF0B3F0018BAF98A072C67E /* Pods-DepoTests.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DepoTests.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-DepoTests/Pods-DepoTests.enterprise.xcconfig"; sourceTree = "<group>"; };
 		CEB362021EE94AE10019EFE1 /* Depo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Depo-Bridging-Header.h"; sourceTree = "<group>"; };
 		D4C8F4F05CE1353BA41D6D3D /* Pods-AutoSyncWidget.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutoSyncWidget.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-AutoSyncWidget/Pods-AutoSyncWidget.appstore.xcconfig"; sourceTree = "<group>"; };
+		E63DC8B59E033F4F42353C72 /* LoginRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LoginRouterInput.swift; sourceTree = "<group>"; };
 		E73401209409A25DD66BA718 /* Pods-DepoShareExtension.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DepoShareExtension.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-DepoShareExtension/Pods-DepoShareExtension.appstore.xcconfig"; sourceTree = "<group>"; };
 		E844113A243E98F5843100EA /* Pods-Lifebox Picker.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lifebox Picker.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-Lifebox Picker/Pods-Lifebox Picker.enterprise.xcconfig"; sourceTree = "<group>"; };
+		E870D66F0EE2FD9401267997 /* LoginViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LoginViewOutput.swift; sourceTree = "<group>"; };
 		E9E6BDC205798EB090D76132 /* Pods-AutoSyncWidget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutoSyncWidget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AutoSyncWidget/Pods-AutoSyncWidget.debug.xcconfig"; sourceTree = "<group>"; };
 		EF5A0456884CB344B29AD02F /* Pods-DepoShareExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DepoShareExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DepoShareExtension/Pods-DepoShareExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		F66CBF165BF20A50536664DC /* LoginRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3261,6 +3301,7 @@
 				051E1E0619CAC2F900FD1E03 /* AppDelegate.m */,
 				051E1E0819CAC2F900FD1E03 /* Images.xcassets */,
 				051E1DFD19CAC2F900FD1E03 /* Supporting Files */,
+				C015140EFDE9F430668FE9A1 /* Classes */,
 			);
 			path = Depo;
 			sourceTree = "<group>";
@@ -4973,6 +5014,27 @@
 			name = CircleProgressBar;
 			sourceTree = "<group>";
 		};
+		44334E6E94111AB818B59B7F /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				958F8C79F34F36EAAEE75389 /* View */,
+				5261639FF3B279DB56576297 /* Presenter */,
+				53D10AE7146AE2BD7B1AB64D /* Interactor */,
+				D2BA9F685BB0910AC35F6B48 /* Router */,
+				895CBB6917693516D7D449EA /* Configurator */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		5261639FF3B279DB56576297 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				13C4BC67FE705ECCCD182537 /* LoginModuleInput.swift */,
+				B36AE0654866DE2BD8525961 /* LoginPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
 		5332150B1DEC274700FE7289 /* Album */ = {
 			isa = PBXGroup;
 			children = (
@@ -4998,6 +5060,16 @@
 				535FD9731DF3FE3A005AB4E7 /* DownloadedFile.m */,
 			);
 			name = DownloadedFile;
+			sourceTree = "<group>";
+		};
+		53D10AE7146AE2BD7B1AB64D /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				2623C92385DDF4010B0A7B34 /* LoginInteractorInput.swift */,
+				4AFDA32802F129477A8BC789 /* LoginInteractorOutput.swift */,
+				329B94107BA8D7F87F900320 /* LoginInteractor.swift */,
+			);
+			path = Interactor;
 			sourceTree = "<group>";
 		};
 		53FA9CCC1DE830B1008DCF93 /* QuotaInfo */ = {
@@ -5287,6 +5359,36 @@
 			path = Button;
 			sourceTree = "<group>";
 		};
+		7CAFF3B31EE98AEB00F3C9B7 /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				7CAFF3B41EE98BFB00F3C9B7 /* LoginTableViewCell.swift */,
+				7CAFF3B51EE98BFB00F3C9B7 /* LoginTableViewCell.xib */,
+				7C3BE7BC1EEAD0F6005A6266 /* BottomLoginTableViewCell.swift */,
+				7C3BE7BD1EEAD0F6005A6266 /* BottomLoginTableViewCell.xib */,
+			);
+			path = TableViewCell;
+			sourceTree = "<group>";
+		};
+		7CEF19ED1EEA76A700D932F4 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				7CEF19EE1EEA776A00D932F4 /* TextInputView.swift */,
+				7CEF19F01EEA777E00D932F4 /* TextInputView.xib */,
+				7C3BE7C01EEAD26E005A6266 /* SwitchButton.swift */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
+		895CBB6917693516D7D449EA /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				67FC2E62D288EC1DEF182BF9 /* LoginConfigurator.swift */,
+				1051ED2206D78745432B7950 /* LoginInitializer.swift */,
+			);
+			path = Configurator;
+			sourceTree = "<group>";
+		};
 		94F130C41D2496C70086BDBB /* social */ = {
 			isa = PBXGroup;
 			children = (
@@ -5300,6 +5402,44 @@
 				94E549081CC63718003CB5DC /* DropboxExportController.m */,
 			);
 			name = social;
+			sourceTree = "<group>";
+		};
+		958F8C79F34F36EAAEE75389 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7CAFF3B31EE98AEB00F3C9B7 /* TableViewCell */,
+				3C3CA4353AEE301DB2405631 /* LoginViewInput.swift */,
+				E870D66F0EE2FD9401267997 /* LoginViewOutput.swift */,
+				A298EDF7A5E50C34DBDF1B85 /* LoginViewController.swift */,
+				7CAFF3AF1EE9750C00F3C9B7 /* LoginViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C015140EFDE9F430668FE9A1 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				DE01921E81DB5FCEDF9167A0 /* Modules */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		D2BA9F685BB0910AC35F6B48 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				E63DC8B59E033F4F42353C72 /* LoginRouterInput.swift */,
+				F66CBF165BF20A50536664DC /* LoginRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		DE01921E81DB5FCEDF9167A0 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				7CEF19ED1EEA76A700D932F4 /* SubViews */,
+				44334E6E94111AB818B59B7F /* Login */,
+			);
+			path = Modules;
 			sourceTree = "<group>";
 		};
 		FA9ABBCB19DCF3FFE7B413C8 /* Pods */ = {
@@ -5956,6 +6096,7 @@
 				070A22171E8AB807002385F7 /* Line.png in Resources */,
 				05C4E4A91C4D5ED1005B28E9 /* bg_verif_digit@3x.png in Resources */,
 				070A21D41E87B099002385F7 /* new_contacts_icon.png in Resources */,
+				7C3BE7BF1EEAD0F6005A6266 /* BottomLoginTableViewCell.xib in Resources */,
 				94FAE0E01D2F7E6300BC9F77 /* icon_select@3x.png in Resources */,
 				059AD37C1A1E26A000AA41BD /* circle_contact_icon.png in Resources */,
 				05440ADC19D4363D009803D7 /* green_music_icon.png in Resources */,
@@ -6040,6 +6181,7 @@
 				942972BF1D1B8B0D00A4616C /* email_icon.png in Resources */,
 				949BB58A1D6F1FA100BED9DB /* vect_mtour_1.png in Resources */,
 				569B5CA71DEF8B33008153F5 /* icon_ustbar_back.png in Resources */,
+				7CEF19F11EEA777E00D932F4 /* TextInputView.xib in Resources */,
 				051CB40619D2F71200E5FC88 /* nav_share_icon@2x.png in Resources */,
 				949BB5BD1D6F1FC300BED9DB /* logo_lifebox@3x.png in Resources */,
 				0589064D19CC2B9500A9E517 /* yellow_music_icon.png in Resources */,
@@ -6070,6 +6212,7 @@
 				050833451AC6C3FA0087B88F /* square_placeholder@2x.png in Resources */,
 				051CB41819D2F71200E5FC88 /* yellow_close_button@2x.png in Resources */,
 				94E549361CC6BA43003CB5DC /* icon_suggestion@3x.png in Resources */,
+				7CAFF3B01EE9750C00F3C9B7 /* LoginViewController.xib in Resources */,
 				058BC2391A30D46C0007F4DE /* textfield_bg.png in Resources */,
 				0589063A19CC2A5600A9E517 /* file_icon@2x.png in Resources */,
 				563FB1C21AA5EC990066F8E6 /* circle_welcome_icon@2x.png in Resources */,
@@ -6146,6 +6289,7 @@
 				94C7CEEB1D2C48320040897A /* icon_ustbar_close.png in Resources */,
 				0526449319D5A26400B63759 /* syncing_icon@2x.png in Resources */,
 				949BB5BB1D6F1FC300BED9DB /* bg_mtour_5@3x.jpg in Resources */,
+				7CAFF3B71EE98BFB00F3C9B7 /* LoginTableViewCell.xib in Resources */,
 				058219DE1A386829001FA679 /* nav_favourite_active_icon.png in Resources */,
 				24FE7B0E1B6A5A98007B53A0 /* white_print_icon.png in Resources */,
 				949414E11CC8BCC4008904E2 /* icon_m_baskial.png in Resources */,
@@ -6637,6 +6781,7 @@
 				94C7CEFA1D2CE1510040897A /* ArrangeSelectedPhotosModalController.m in Sources */,
 				054730C019FA39C300F913FF /* DeleteDao.m in Sources */,
 				943751F71CCAB3A7003A76A9 /* DropboxTokenDao.m in Sources */,
+				7C3BE7BE1EEAD0F6005A6266 /* BottomLoginTableViewCell.swift in Sources */,
 				05868DEC1A275FA000CFE360 /* AudioMenuFooterView.m in Sources */,
 				056F29DE1C4FA786001DD486 /* SendVerificationSMSDao.m in Sources */,
 				05836FCB1A05703A001D7346 /* MoveListModalController.m in Sources */,
@@ -6706,6 +6851,7 @@
 				67AC3FA61E71231E00DDC28C /* SDWebImageDecoder.m in Sources */,
 				79B973B11ED84E4B00E9F2FA /* NSLayoutAnchor+MissingAnchors.m in Sources */,
 				05C0E2011A06ABD7005E1E92 /* MoveModalFooterView.m in Sources */,
+				7CEF19EF1EEA776A00D932F4 /* TextInputView.swift in Sources */,
 				56A0DE4E1E6445D800553462 /* InternetDataUsage.m in Sources */,
 				94C7CEE81D2C42C50040897A /* SelectiblePhotoListModalController.m in Sources */,
 				057942471C3EEFB500899923 /* SendVerificationEmailDao.m in Sources */,
@@ -6777,6 +6923,7 @@
 				94680E071D416F5700DC5227 /* FBStopDao.m in Sources */,
 				2443E1571B6BB5F3001C274D /* AudioManager.m in Sources */,
 				051E1EB119CB20FC00FD1E03 /* MetaMenu.m in Sources */,
+				7C3BE7C11EEAD26E005A6266 /* SwitchButton.swift in Sources */,
 				058911161A139DAF00BF6A52 /* PhotoAlbumListModalController.m in Sources */,
 				053D0ED119DAC2BC006A13E0 /* GeneralTextField.m in Sources */,
 				94E549061CC6349C003CB5DC /* DropboxStatusDao.m in Sources */,
@@ -6953,6 +7100,7 @@
 				05D2B19719E676BF00FC309D /* AlbumListDao.m in Sources */,
 				567408B41E08011B003DF541 /* CoverPhotoDao.m in Sources */,
 				94DCA1061D3CB6AB000965AE /* CellographSegmentView.m in Sources */,
+				7CAFF3B61EE98BFB00F3C9B7 /* LoginTableViewCell.swift in Sources */,
 				056BEC781A8AA55000BA0805 /* PreLoginInfoView.m in Sources */,
 				0524E32919D955FA00E2698E /* FileDetail.m in Sources */,
 				94FAE0C61D2F2BAA00BC9F77 /* FBPermissionDao.m in Sources */,
@@ -6972,6 +7120,18 @@
 				56B9E92A1DEC47A600DE1011 /* AppRater.m in Sources */,
 				67AC3FA71E71231E00DDC28C /* SDWebImageDownloader.m in Sources */,
 				050D4C2F1A31E12F00809A01 /* PostLoginSyncPrefController.m in Sources */,
+				DBBAD24966A9CD3374A9A4E4 /* LoginViewInput.swift in Sources */,
+				F9CEAA630EAB2E8FADA60456 /* LoginViewOutput.swift in Sources */,
+				FDC6469294EE1711E7227597 /* LoginViewController.swift in Sources */,
+				E91C8A857C4875379D2EC9F3 /* LoginModuleInput.swift in Sources */,
+				02F9F1A2896C72E1D47EACB8 /* LoginPresenter.swift in Sources */,
+				14A7B3998B725BCAE734756E /* LoginInteractorInput.swift in Sources */,
+				7C2B2931E4DE56DD8846C72A /* LoginInteractorOutput.swift in Sources */,
+				86BC080BE2A7482A01B02D59 /* LoginInteractor.swift in Sources */,
+				5AB1B6F935D3B693B7C226FC /* LoginRouterInput.swift in Sources */,
+				7A7C4BF94747A5F383083F80 /* LoginRouter.swift in Sources */,
+				94E09DE85364A93FF86A0608 /* LoginConfigurator.swift in Sources */,
+				5C7007AE7BEC89281EF6B2F2 /* LoginInitializer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
