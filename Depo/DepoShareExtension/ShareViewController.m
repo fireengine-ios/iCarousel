@@ -14,7 +14,6 @@
 #import "Reachability.h"
 #import "SharedUtil.h"
 #import "ImageScale.h"
-#import "UIImageView+WebCache.h"
 #import "ALAssetRepresentation+MD5.h"
 
 //TODO test -> prod

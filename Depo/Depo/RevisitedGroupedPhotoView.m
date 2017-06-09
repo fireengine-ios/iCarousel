@@ -674,7 +674,8 @@
             }
         }
         [[SDWebImagePrefetcher sharedImagePrefetcher] setMaxConcurrentDownloads:10];
-        [[SDWebImagePrefetcher sharedImagePrefetcher].manager.imageCache.config setShouldDecompressImages:NO];
+        // TODO: disable afte move SDWebImage to pod 
+//        [[SDWebImagePrefetcher sharedImagePrefetcher].manager.imageCache.config setShouldDecompressImages:NO];
         [[SDWebImagePrefetcher sharedImagePrefetcher] prefetchURLs:urlsToPrefetch];
         /*
          if ([files count] == 0 && !anyOngoingPresent) {
