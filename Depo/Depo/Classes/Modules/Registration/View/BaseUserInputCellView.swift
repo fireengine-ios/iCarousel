@@ -10,9 +10,10 @@ import UIKit
 
 class BaseUserInputCellView: UITableViewCell {
     
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var textInputField: UITextField!
     
     func setupCell() {
-        debugPrint("setup cell exe")
+        
     }
 }

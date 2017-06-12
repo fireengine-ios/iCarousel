@@ -980,6 +980,10 @@
 		7E17BA74388D3670D1FEEBBA /* RegistrationViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF1643276D50FAE9FC2305 /* RegistrationViewInput.swift */; };
 		80BAF3AEB6623B739C0F967F /* RegistrationInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42B02A7891F46EEC97D1662 /* RegistrationInitializer.swift */; };
 		83AFF9A2BBEF449448186DBB /* Pods_Lifebox_Picker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F8D57D36EF6E476E6752F2C /* Pods_Lifebox_Picker.framework */; };
+		8C049C581EEC7DC60086DA84 /* RegistrationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C571EEC7DC60086DA84 /* RegistrationDataSource.swift */; };
+		8C049C5B1EEC83420086DA84 /* BaseCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C5A1EEC83420086DA84 /* BaseCellModel.swift */; };
+		8C049C5D1EEC85DD0086DA84 /* ValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C5C1EEC85DD0086DA84 /* ValidationService.swift */; };
+		8C049C611EED63BC0086DA84 /* DataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C601EED63BC0086DA84 /* DataStorage.swift */; };
 		8C2044621EEA8E4100642627 /* BaseUserInputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C2044611EEA8E4100642627 /* BaseUserInputCell.xib */; };
 		8C2044641EEA8E6900642627 /* BaseUserInputCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2044631EEA8E6900642627 /* BaseUserInputCellView.swift */; };
 		8C4A9D0F1EEAD99B001D2465 /* TermsAndServicesScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C4A9D0E1EEAD99B001D2465 /* TermsAndServicesScreen.xib */; };
@@ -2683,6 +2687,10 @@
 		849AE724A4CD02D1BB1D73F2 /* Pods-Depo.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Depo.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-Depo/Pods-Depo.enterprise.xcconfig"; sourceTree = "<group>"; };
 		8ABF89FF6605635ADBC2E20B /* Pods-Depo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Depo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Depo/Pods-Depo.debug.xcconfig"; sourceTree = "<group>"; };
 		8AE369B2C07D755F2883043F /* RegistrationRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationRouter.swift; sourceTree = "<group>"; };
+		8C049C571EEC7DC60086DA84 /* RegistrationDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationDataSource.swift; sourceTree = "<group>"; };
+		8C049C5A1EEC83420086DA84 /* BaseCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCellModel.swift; sourceTree = "<group>"; };
+		8C049C5C1EEC85DD0086DA84 /* ValidationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationService.swift; sourceTree = "<group>"; };
+		8C049C601EED63BC0086DA84 /* DataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStorage.swift; sourceTree = "<group>"; };
 		8C2044611EEA8E4100642627 /* BaseUserInputCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseUserInputCell.xib; sourceTree = "<group>"; };
 		8C2044631EEA8E6900642627 /* BaseUserInputCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseUserInputCellView.swift; sourceTree = "<group>"; };
 		8C4A9D0E1EEAD99B001D2465 /* TermsAndServicesScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TermsAndServicesScreen.xib; sourceTree = "<group>"; };
@@ -5054,6 +5062,7 @@
 		38C2DB007FEA2337954B8ECD /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				8C049C591EEC82F00086DA84 /* Enteties */,
 				8C2044601EEA7A3B00642627 /* Services */,
 				FF3D38F0C7EEF61373827F8A /* RegistrationInteractorInput.swift */,
 				A8CEE7F449AB04C7F484C5F1 /* RegistrationInteractorOutput.swift */,
@@ -5426,9 +5435,19 @@
 			path = Button;
 			sourceTree = "<group>";
 		};
+		8C049C591EEC82F00086DA84 /* Enteties */ = {
+			isa = PBXGroup;
+			children = (
+				8C049C5A1EEC83420086DA84 /* BaseCellModel.swift */,
+			);
+			name = Enteties;
+			sourceTree = "<group>";
+		};
 		8C2044601EEA7A3B00642627 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				8C049C5C1EEC85DD0086DA84 /* ValidationService.swift */,
+				8C049C601EED63BC0086DA84 /* DataStorage.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -5502,6 +5521,7 @@
 				8C8387F71EE9767C00AB89B9 /* RegistrationScreen.xib */,
 				8C2044611EEA8E4100642627 /* BaseUserInputCell.xib */,
 				8C2044631EEA8E6900642627 /* BaseUserInputCellView.swift */,
+				8C049C571EEC7DC60086DA84 /* RegistrationDataSource.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -6837,6 +6857,7 @@
 				05D2B19A19E679E500FC309D /* PhotoAlbum.m in Sources */,
 				052160A919E30D640007B321 /* UploadRef.m in Sources */,
 				051E1EA219CB206500FD1E03 /* SlidingMenu.m in Sources */,
+				8C049C5D1EEC85DD0086DA84 /* ValidationService.swift in Sources */,
 				94FB09871DE2065B00DA666D /* GroupPhotoSectionView.m in Sources */,
 				944C07B81D4FE81400D45B61 /* RevisitedPhotoHeaderSegmentView.m in Sources */,
 				9454FA661CAA822300BF1288 /* CurrentPhotoListModalController.m in Sources */,
@@ -6974,6 +6995,7 @@
 				94E5E6541E24F68C008B0216 /* RevisitedRawPhotoCollCell.m in Sources */,
 				67AC3FB01E71231E00DDC28C /* UIImageView+WebCache.m in Sources */,
 				052A221F19F67FB5000C3C75 /* MBProgressHUD.m in Sources */,
+				8C049C5B1EEC83420086DA84 /* BaseCellModel.swift in Sources */,
 				9454FA631CAA821200BF1288 /* CurrentDocumentListModalController.m in Sources */,
 				056F29E11C4FC112001DD486 /* EmailEntryController.m in Sources */,
 				94BF90E01D5A1027000078FD /* RevisitedCollectionView.m in Sources */,
@@ -7024,6 +7046,7 @@
 				79B973AC1ED84E4B00E9F2FA /* UIView+ABLayoutAnchor.m in Sources */,
 				052644AD19D5A2A600B63759 /* SettingsContactsController.m in Sources */,
 				94B3BE331D847F560086D05E /* GroupedView.m in Sources */,
+				8C049C581EEC7DC60086DA84 /* RegistrationDataSource.swift in Sources */,
 				05C7CB6A1ABC91B200A7BF8E /* MetaFileSummary.m in Sources */,
 				94AF7DD51DF857A3000D425B /* SearchContainerCollCell.m in Sources */,
 				051E1EA719CB209F00FD1E03 /* MenuCell.m in Sources */,
@@ -7066,6 +7089,7 @@
 				05C0E1FE1A0698C5005E1E92 /* MusicListController.m in Sources */,
 				0526444B19D5578C00B63759 /* FolderEmptyCell.m in Sources */,
 				5247D6291DDDD0F600FFE63E /* CurioReachabilityEx.m in Sources */,
+				8C049C611EED63BC0086DA84 /* DataStorage.swift in Sources */,
 				8C2044641EEA8E6900642627 /* BaseUserInputCellView.swift in Sources */,
 				070A21DE1E87B814002385F7 /* ContactSyncView.m in Sources */,
 				051E1EB719CB2DAC00FD1E03 /* User.m in Sources */,

@@ -336,12 +336,15 @@
         
         
         RegistrationModuleInitializer *registrConfigurator = [[RegistrationModuleInitializer alloc] init];
+        
         RegistrationViewController *registerVC = [[RegistrationViewController alloc] initWithNibName: @"RegistrationScreen" bundle: nil];
         registrConfigurator.registrationViewController = registerVC;
-        [registrConfigurator awakeFromNib];
+        [registrConfigurator setupVC];
+        
         MyNavigationController *welcomeNav = [[MyNavigationController alloc] initWithRootViewController: registrConfigurator.registrationViewController];//loginController];
         self.window.rootViewController = welcomeNav;
-        NSLog(@"tatat");
+        
+        
     } else if([ReachabilityManager isReachableViaWWAN]) {
         IGLog(@"AppDelegate Radius Login triggered");
         [self.window.rootViewController.view removeFromSuperview];
