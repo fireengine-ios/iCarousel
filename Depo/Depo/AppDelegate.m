@@ -301,8 +301,15 @@
 }
 
 - (void) triggerPreLogin {
-    PreLoginController *preLogin = [[PreLoginController alloc] init];
-    self.window.rootViewController = preLogin;
+    //PreLoginController *preLogin = [[PreLoginController alloc] init];
+    //self.window.rootViewController = preLogin;
+    
+    IntroduceModuleInitializer * introduceConfigurator = [[IntroduceModuleInitializer alloc] init];
+    IntroduceViewController * introduceVC = [[IntroduceViewController alloc] initWithNibName:@"IntroduceViewController" bundle:nil];
+    introduceConfigurator.introduceViewController = introduceVC;
+    [introduceConfigurator setupVC];
+    
+    self.window.rootViewController = introduceVC;
 }
 
 - (void) triggerPostTermsAndMigration {
