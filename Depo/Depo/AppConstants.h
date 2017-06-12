@@ -16,10 +16,6 @@
 
 #define IS_IPHONE_5 ([[UIScreen mainScreen] bounds].size.height == 568.0f)
 
-#define IS_BELOW_7 ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0)
-
-#define IS_BELOW_6 ([[[UIDevice currentDevice] systemVersion] floatValue] < 6.0)
-
 #define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 
 #define IS_IPAD ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)

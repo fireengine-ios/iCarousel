@@ -150,9 +150,7 @@
         loginButton.accessibilityIdentifier = @"loginButton";
         [container addSubview:loginButton];
         
-        if (IS_IPHONE_4_OR_LESS) {
-            scrollYIndex += loginButton.frame.size.height + 10.0f;
-        } else if (IS_IPHONE_5) {
+        if (IS_IPHONE_5) {
             scrollYIndex += loginButton.frame.size.height + 30.0f;
         } else {
             scrollYIndex += loginButton.frame.size.height + 40.0f;

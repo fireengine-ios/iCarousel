@@ -49,19 +49,11 @@
 - (id)init {
     self = [super init];
     if (self) {
-        if(IS_BELOW_7) {
-            navBarHeight = 44;
-        } else {
-            navBarHeight = 64;
-        }
+        
+        navBarHeight = 64;
+        topIndex = 0;
+        bottomIndex = 64;
 
-        if(IS_BELOW_7) {
-            topIndex = 0;
-            bottomIndex = 44;
-        } else {
-            topIndex = 0;
-            bottomIndex = 64;
-        }
         
         pageOffset = 1;
         tableUpdateCounter = 0;
