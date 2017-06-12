@@ -10,13 +10,12 @@ target 'Depo' do
     use_frameworks!
     pod 'Fabric'
     pod 'Crashlytics'
-    pod 'Bolts'
     pod 'FBSDKCoreKit'
     pod 'FBSDKLoginKit'
     pod 'FBSDKShareKit'
     pod 'Reachability'
     pod 'SDWebImage'
-    
+    pod 'MBProgressHUD','~> 1.0.0'
     pod 'GoogleConversionTracking'
     pod 'Adjust'
     
@@ -31,11 +30,13 @@ end
 target 'DepoShareExtension' do
     use_frameworks!
     pod 'Reachability'
+    pod 'MBProgressHUD','~> 1.0.0'
 
 end
 
 target 'Lifebox Picker' do
     use_frameworks!
     pod 'Reachability'
+    pod 'MBProgressHUD','~> 1.0.0'
 
 end

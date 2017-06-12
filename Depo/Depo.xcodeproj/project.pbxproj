@@ -256,7 +256,6 @@
 		052644BD19D5A32300B63759 /* TitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 052644B719D5A32300B63759 /* TitleCell.m */; };
 		052644BE19D5A32300B63759 /* HeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 052644B919D5A32300B63759 /* HeaderCell.m */; };
 		052644BF19D5A32300B63759 /* TextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 052644BB19D5A32300B63759 /* TextCell.m */; };
-		052A221F19F67FB5000C3C75 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 052A221E19F67FB5000C3C75 /* MBProgressHUD.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		052A222619F682CA000C3C75 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 052A222419F682CA000C3C75 /* Default-568h@2x.png */; };
 		052A222719F682CA000C3C75 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 052A222519F682CA000C3C75 /* Default.png */; };
 		052A222919F682D1000C3C75 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 052A222819F682D1000C3C75 /* Default@2x.png */; };
@@ -1621,8 +1620,6 @@
 		052644BB19D5A32300B63759 /* TextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextCell.m; sourceTree = "<group>"; };
 		052644BC19D5A32300B63759 /* TitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleCell.h; sourceTree = "<group>"; };
 		052644C019D5A3A400B63759 /* SettingsDocumentsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsDocumentsController.h; sourceTree = "<group>"; };
-		052A221D19F67FB5000C3C75 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
-		052A221E19F67FB5000C3C75 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		052A222419F682CA000C3C75 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		052A222519F682CA000C3C75 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		052A222819F682D1000C3C75 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
@@ -3951,8 +3948,6 @@
 				05DA564A1A56D5B3007D2B1D /* ALAssetRepresentation+MD5.h */,
 				05DA564B1A56D5B3007D2B1D /* ALAssetRepresentation+MD5.m */,
 				056E2A121A28BC1E00C24904 /* XYPieChart */,
-				052A221D19F67FB5000C3C75 /* MBProgressHUD.h */,
-				052A221E19F67FB5000C3C75 /* MBProgressHUD.m */,
 				792233A21EBB27F600955F90 /* InteractiveViewController.h */,
 				792233A31EBB27F600955F90 /* InteractiveViewController.m */,
 			);
@@ -6639,7 +6634,6 @@
 				94C7CEF71D2C49190040897A /* Story.m in Sources */,
 				052644B419D5A2A600B63759 /* SettingsConnectedDevicesController.m in Sources */,
 				94E5E6541E24F68C008B0216 /* RevisitedRawPhotoCollCell.m in Sources */,
-				052A221F19F67FB5000C3C75 /* MBProgressHUD.m in Sources */,
 				9454FA631CAA821200BF1288 /* CurrentDocumentListModalController.m in Sources */,
 				056F29E11C4FC112001DD486 /* EmailEntryController.m in Sources */,
 				94BF90E01D5A1027000078FD /* RevisitedCollectionView.m in Sources */,
@@ -7005,6 +6999,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEFINES_MODULE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -7052,6 +7047,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				DEFINES_MODULE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -7236,6 +7232,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				DEFINES_MODULE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -7341,6 +7338,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				DEFINES_MODULE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
