@@ -19,6 +19,9 @@ target 'Depo' do
     pod 'GoogleConversionTracking'
     pod 'Adjust'
     
+    pod 'SimpleExif'
+    pod 'XYPieChart'
+    pod 'CircleProgressBar', '~> 0.32’
 
   target 'DepoTests' do
     inherit! :search_paths
@@ -31,6 +34,7 @@ target 'DepoShareExtension' do
     use_frameworks!
     pod 'Reachability'
     pod 'MBProgressHUD','~> 1.0.0'
+    pod 'SimpleExif'
 
 end
 
