@@ -860,8 +860,6 @@
 		67C29C6E1E66E02300B2C442 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1DF619CAC2F900FD1E03 /* Foundation.framework */; };
 		67C29C6F1E66E02900B2C442 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1E9819CACA5300FD1E03 /* CFNetwork.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		67C29C701E66E06400B2C442 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1DF619CAC2F900FD1E03 /* Foundation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		67FDC4311EC47CEF00AADDD8 /* NSMutableArray+GCDThreadSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 67FDC4301EC47CEF00AADDD8 /* NSMutableArray+GCDThreadSafe.m */; };
-		67FDC4341EC47D7D00AADDD8 /* NSObject+GCDThreadSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 67FDC4331EC47D7D00AADDD8 /* NSObject+GCDThreadSafe.m */; };
 		782E8524AE692D0334552509 /* Pods_AutoSyncWidget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26C781F988B2B5E741F70753 /* Pods_AutoSyncWidget.framework */; };
 		790B9D851E71750E00DD7DA0 /* combobg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 790B9D831E71750E00DD7DA0 /* combobg@2x.png */; };
 		790B9D861E71750E00DD7DA0 /* combobg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 790B9D841E71750E00DD7DA0 /* combobg@3x.png */; };
@@ -2454,10 +2452,6 @@
 		67B0DD501E7FCB4D00BAD640 /* ShareActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareActivity.h; sourceTree = "<group>"; };
 		67B0DD511E7FCB4D00BAD640 /* ShareActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareActivity.m; sourceTree = "<group>"; };
 		67B0DD531E7FCB5B00BAD640 /* facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook.png; sourceTree = "<group>"; };
-		67FDC42F1EC47CEF00AADDD8 /* NSMutableArray+GCDThreadSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+GCDThreadSafe.h"; sourceTree = "<group>"; };
-		67FDC4301EC47CEF00AADDD8 /* NSMutableArray+GCDThreadSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+GCDThreadSafe.m"; sourceTree = "<group>"; };
-		67FDC4321EC47D7D00AADDD8 /* NSObject+GCDThreadSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+GCDThreadSafe.h"; sourceTree = "<group>"; };
-		67FDC4331EC47D7D00AADDD8 /* NSObject+GCDThreadSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+GCDThreadSafe.m"; sourceTree = "<group>"; };
 		7178010CFB1121D7DCD56A4C /* Pods_DepoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DepoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		790B9D831E71750E00DD7DA0 /* combobg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "combobg@2x.png"; path = "images/login-signup/combobg@2x.png"; sourceTree = "<group>"; };
 		790B9D841E71750E00DD7DA0 /* combobg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "combobg@3x.png"; path = "images/login-signup/combobg@3x.png"; sourceTree = "<group>"; };
@@ -3487,10 +3481,6 @@
 		051E1E2719CAC53500FD1E03 /* util */ = {
 			isa = PBXGroup;
 			children = (
-				67FDC4321EC47D7D00AADDD8 /* NSObject+GCDThreadSafe.h */,
-				67FDC4331EC47D7D00AADDD8 /* NSObject+GCDThreadSafe.m */,
-				67FDC42F1EC47CEF00AADDD8 /* NSMutableArray+GCDThreadSafe.h */,
-				67FDC4301EC47CEF00AADDD8 /* NSMutableArray+GCDThreadSafe.m */,
 				67B0DD501E7FCB4D00BAD640 /* ShareActivity.h */,
 				67B0DD511E7FCB4D00BAD640 /* ShareActivity.m */,
 				051E1E3519CAC7D400FD1E03 /* AppConstants.h */,
@@ -6310,7 +6300,6 @@
 				94FAE0C91D2F6EC500BC9F77 /* FBConnectDao.m in Sources */,
 				9433BD081D21E45500991483 /* PromotionsController.m in Sources */,
 				056090E41AC5A44000710211 /* ReachabilityManager.m in Sources */,
-				67FDC4341EC47D7D00AADDD8 /* NSObject+GCDThreadSafe.m in Sources */,
 				05403F1919F5584300AED10A /* ElasticSearchDao.m in Sources */,
 				94DCA1031D3CB3FC000965AE /* CellographMainController.m in Sources */,
 				053D0ED819DAC959006A13E0 /* MyModalController.m in Sources */,
@@ -6468,7 +6457,6 @@
 				53FA9CE51DE8607D008DCF93 /* Quota.m in Sources */,
 				94EF279C1C982B460087EFBE /* NoItemView.m in Sources */,
 				056F29C91C4E715A001DD486 /* RequestCaptchaDao.m in Sources */,
-				67FDC4311EC47CEF00AADDD8 /* NSMutableArray+GCDThreadSafe.m in Sources */,
 				051E1EAB19CB20AD00FD1E03 /* MenuProfileCell.m in Sources */,
 				051DE35E19CC128600F27C85 /* BaseViewController.m in Sources */,
 				070234901EA08E1400716C27 /* ContactSyncSDK.m in Sources */,

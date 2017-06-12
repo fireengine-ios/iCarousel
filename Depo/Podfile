@@ -22,6 +22,8 @@ target 'Depo' do
     pod 'SimpleExif'
     pod 'XYPieChart'
     pod 'CircleProgressBar', '~> 0.32’
+    pod 'UIImage-Categories'
+    
 
   target 'DepoTests' do
     inherit! :search_paths

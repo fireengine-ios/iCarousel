@@ -25,7 +25,8 @@
 #import "SDWebImagePrefetcher.h"
 #import "CustomAlertView.h"
 
-#import "NSMutableArray+GCDThreadSafe.h"
+// TODO : WARNING remove "NSMutableArray+GCDThreadSafe.h"
+// 
 
 #define GROUP_PACKAGE_SIZE (IS_IPAD ? 60 : IS_IPHONE_6P_OR_HIGHER ? 60 : 48)
 #define GROUP_IMG_COUNT_PER_ROW (IS_IPAD ? 6 : IS_IPHONE_6P_OR_HIGHER ? 6 : 4)
@@ -133,13 +134,13 @@
         dateCompareFormat = [[NSDateFormatter alloc] init];
         [dateCompareFormat setDateFormat:@"MMM yyyy"];
         
-        self.groups = [[[NSMutableArray alloc] init] threadSafe_init];
+        self.groups = [[NSMutableArray alloc] init];
         self.files = [[NSMutableArray alloc] init];
-        self.fileHashList = [[[NSMutableArray alloc] init] threadSafe_init];
+        self.fileHashList = [[NSMutableArray alloc] init];
         NSArray *locallySavedFiles = [SyncUtil readLocallySavedFiles];
         if (locallySavedFiles.count > 0) {
             for (NSString *localHash in locallySavedFiles) {
-                [self.fileHashList threadSafe_addObject:localHash];
+                [self.fileHashList addObject:localHash];
             }
         }
         self.selectedFileList = [[NSMutableArray alloc] init];
@@ -415,14 +416,14 @@
         groupSequence = 0;
         lastCheckedDate = nil;
         
-        [self.groups threadSafe_removeAllObjects];
-        [self.files threadSafe_removeAllObjects];
-        [self.fileHashList threadSafe_removeAllObjects];
+        [self.groups removeAllObjects];
+        [self.files removeAllObjects];
+        [self.fileHashList removeAllObjects];
         
         NSArray *locallySavedFiles = [SyncUtil readLocallySavedFiles];
         if (locallySavedFiles.count > 0) {
             for (NSString *localHash in locallySavedFiles) {
-                [self.fileHashList threadSafe_addObject:localHash];
+                [self.fileHashList addObject:localHash];
             }
         }
         [self.fileSummariesList removeAllObjects];
@@ -489,8 +490,8 @@
     @synchronized (self.groups) {
         FileInfoGroup *initialRow = nil;
         int counter = 0;
-        for (int i=0; i<[self.groups threadSafe_count]; i++) {
-            FileInfoGroup *row = [self.groups threadSafe_objectAtIndex:i];
+        for (int i=0; i<[self.groups count]; i++) {
+            FileInfoGroup *row = [self.groups objectAtIndex:i];
             if([row.groupKey isEqualToString:group.groupKey]) {
                 initialRow = row;
                 break;
@@ -501,17 +502,17 @@
             [initialRow.fileInfo addObjectsFromArray:group.fileInfo];
             initialRow.fileInfo = [self sortRawArrayByDateDesc:initialRow.fileInfo];
             if (counter == 0 && self.groups.count == 0) {
-                if (![self.groups threadSafe_containsObject:group]) {
-                    [self.groups threadSafe_addObject:initialRow];
+                if (![self.groups containsObject:group]) {
+                    [self.groups addObject:initialRow];
                 }
             } else {
                 if (self.groups.count > counter)
-                    [self.groups threadSafe_replaceObjectAtIndex:counter withObject:initialRow];
+                    [self.groups replaceObjectAtIndex:counter withObject:initialRow];
             }
         } else {
             group.fileInfo = [self sortRawArrayByDateDesc:group.fileInfo];
-            if (![self.groups threadSafe_containsObject:group]) {
-                [self.groups threadSafe_addObject:group];
+            if (![self.groups containsObject:group]) {
+                [self.groups addObject:group];
             }
         }
         
@@ -598,7 +599,7 @@
                         RawTypeFile *rawFile = [self rawFileForFile:row];
                         [newGroup.fileInfo addObject:rawFile];
                         if(rawFile.hashRef) {
-                            [self.fileHashList threadSafe_addObject:rawFile.hashRef];
+                            [self.fileHashList addObject:rawFile.hashRef];
 
                         } else {[self.fileSummariesList addObject:rawFile.summaryRef];}
                         newGroup.sequence = groupSequence;
@@ -612,7 +613,7 @@
                             RawTypeFile *rawFile = [self rawFileForFile:row];
                             [currentGroup.fileInfo addObject:rawFile];
                             if(rawFile.hashRef) {
-                                [self.fileHashList threadSafe_addObject:rawFile.hashRef];
+                                [self.fileHashList addObject:rawFile.hashRef];
                             } else {[self.fileSummariesList addObject:rawFile.summaryRef];}
                         } else {
                             FileInfoGroup *newGroup = [[FileInfoGroup alloc] init];
@@ -623,7 +624,7 @@
                             RawTypeFile *rawFile = [self rawFileForFile:row];
                             [newGroup.fileInfo addObject:rawFile];
                             if(rawFile.hashRef) {
-                                [self.fileHashList threadSafe_addObject:rawFile.hashRef];
+                                [self.fileHashList addObject:rawFile.hashRef];
                             } else {[self.fileSummariesList addObject:rawFile.summaryRef];}
                             newGroup.sequence = groupSequence;
                             newGroup.groupKey = dateStr;
@@ -740,7 +741,7 @@
             @try {
                 NSIndexPath *visibleIndexPath = [collView indexPathForItemAtPoint:CGPointMake(30, collView.contentOffset.y)];
                 if(visibleIndexPath && (self.groups.count > visibleIndexPath.section)) {
-                    FileInfoGroup *visibleGroup = [self.groups threadSafe_objectAtIndex:visibleIndexPath.section];
+                    FileInfoGroup *visibleGroup = [self.groups objectAtIndex:visibleIndexPath.section];
                     if([visibleGroup.customTitle isEqualToString:NSLocalizedString(@"ImageGroupTypeInProgress", @"")]) {
                         sectionIndicator.text = @"";
                         [self hideVerticalIndicator];
@@ -761,7 +762,7 @@
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     NSIndexPath *visibleIndexPath = [collView indexPathForItemAtPoint:CGPointMake(30, collView.contentOffset.y)];
     if(visibleIndexPath) {
-        FileInfoGroup *visibleGroup = [self.groups threadSafe_objectAtIndex:visibleIndexPath.section];
+        FileInfoGroup *visibleGroup = [self.groups objectAtIndex:visibleIndexPath.section];
         if(![visibleGroup.customTitle isEqualToString:NSLocalizedString(@"ImageGroupTypeInProgress", @"")]) {
             [self showVerticalIndicator];
         }
@@ -1258,7 +1259,7 @@
 #pragma mark - UICollectionViewDataSource Methods
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
-    FileInfoGroup *sectionGroup = [self.groups threadSafe_objectAtIndex:section];
+    FileInfoGroup *sectionGroup = [self.groups objectAtIndex:section];
     return [sectionGroup.fileInfo count];
 }
 
@@ -1269,7 +1270,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     //    UICollectionViewCell * c = [cv dequeueReusableCellWithReuseIdentifier:@"COLL_PHOTO_CELL" forIndexPath:indexPath];
     if(self.groups.count > indexPath.section) {
-        FileInfoGroup *sectionGroup = [self.groups threadSafe_objectAtIndex:indexPath.section];
+        FileInfoGroup *sectionGroup = [self.groups objectAtIndex:indexPath.section];
         if(sectionGroup.fileInfo.count > indexPath.row) {
             id rowItem = [sectionGroup.fileInfo objectAtIndex:indexPath.row];
             if([rowItem isKindOfClass:[RawTypeFile class]]) {
@@ -1328,7 +1329,7 @@
     if(!initialLoadDone) {
         return CGSizeZero;
     } else {
-        FileInfoGroup *sectionGroup = [self.groups threadSafe_objectAtIndex:section];
+        FileInfoGroup *sectionGroup = [self.groups objectAtIndex:section];
         if([sectionGroup.fileInfo count] > 0) {
             return CGSizeMake(self.frame.size.width, 40);
         } else {
@@ -1343,7 +1344,7 @@
                                                                                          forIndexPath:theIndexPath];
     if(kind == UICollectionElementKindSectionHeader && initialLoadDone) {
         if(self.groups.count > theIndexPath.section) {
-            FileInfoGroup *sectionGroup = [self.groups threadSafe_objectAtIndex:theIndexPath.section];
+            FileInfoGroup *sectionGroup = [self.groups objectAtIndex:theIndexPath.section];
             collFooterView.checkDelegate = self;
 //            [collFooterView loadSectionWithTitle:sectionGroup.customTitle isSelectible:isSelectible isSelected:[selectedSectionNames containsObject:sectionGroup.customTitle]];
             [collFooterView loadSectionWithTitle:sectionGroup.customTitle isSelectible:NO isSelected:[selectedSectionNames containsObject:sectionGroup.customTitle]];
@@ -1488,7 +1489,7 @@
                     RawTypeFile *rawFile = [self rawFileForAsset:row];
                     [newGroup.fileInfo addObject:rawFile];
                     if(rawFile.hashRef) {
-                        [self.fileHashList threadSafe_addObject:rawFile.hashRef];
+                        [self.fileHashList addObject:rawFile.hashRef];
                     }
                 }
                 newGroup.sequence = groupSequence;
@@ -1503,7 +1504,7 @@
                         RawTypeFile *rawFile = [self rawFileForAsset:row];
                         [currentGroup.fileInfo addObject:rawFile];
                         if(rawFile.hashRef) {
-                            [self.fileHashList threadSafe_addObject:rawFile.hashRef];
+                            [self.fileHashList addObject:rawFile.hashRef];
                         }
                     }
                 } else {
@@ -1516,7 +1517,7 @@
                         RawTypeFile *rawFile = [self rawFileForAsset:row];
                         [newGroup.fileInfo addObject:rawFile];
                         if(rawFile.hashRef) {
-                            [self.fileHashList threadSafe_addObject:rawFile.hashRef];
+                            [self.fileHashList addObject:rawFile.hashRef];
                         }
                     }
                     newGroup.sequence = groupSequence;
