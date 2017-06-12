@@ -530,9 +530,6 @@
 		059E9A051A35DBB300922A77 /* sms_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 059E9A031A35DBB300922A77 /* sms_icon.png */; };
 		059E9A061A35DBB300922A77 /* sms_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 059E9A041A35DBB300922A77 /* sms_icon@2x.png */; };
 		059E9A091A35DC2500922A77 /* MyMessageComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 059E9A081A35DC2500922A77 /* MyMessageComposeViewController.m */; };
-		05A484591A6C610400793A90 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A484581A6C610400793A90 /* UIImage+Resize.m */; };
-		05A4845E1A6C614300793A90 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A4845A1A6C614300793A90 /* UIImage+Alpha.m */; };
-		05A4845F1A6C614300793A90 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A4845B1A6C614300793A90 /* UIImage+RoundedCorner.m */; };
 		05A7CE581A7FBD3E00020B6F /* percent.png in Resources */ = {isa = PBXBuildFile; fileRef = 05A7CE551A7FBD3E00020B6F /* percent.png */; };
 		05A7CE591A7FBD3E00020B6F /* percent@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05A7CE561A7FBD3E00020B6F /* percent@2x.png */; };
 		05A7CE5A1A7FBD3E00020B6F /* percent@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05A7CE571A7FBD3E00020B6F /* percent@3x.png */; };
@@ -1989,12 +1986,6 @@
 		059E9A041A35DBB300922A77 /* sms_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sms_icon@2x.png"; sourceTree = "<group>"; };
 		059E9A071A35DC2500922A77 /* MyMessageComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMessageComposeViewController.h; sourceTree = "<group>"; };
 		059E9A081A35DC2500922A77 /* MyMessageComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMessageComposeViewController.m; sourceTree = "<group>"; };
-		05A484571A6C610400793A90 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
-		05A484581A6C610400793A90 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
-		05A4845A1A6C614300793A90 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
-		05A4845B1A6C614300793A90 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
-		05A4845C1A6C614300793A90 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
-		05A4845D1A6C614300793A90 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
 		05A7CE551A7FBD3E00020B6F /* percent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = percent.png; sourceTree = "<group>"; };
 		05A7CE561A7FBD3E00020B6F /* percent@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "percent@2x.png"; sourceTree = "<group>"; };
 		05A7CE571A7FBD3E00020B6F /* percent@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "percent@3x.png"; sourceTree = "<group>"; };
@@ -3888,12 +3879,6 @@
 				05B01D9B1AC2E2D000D5B827 /* NSDate+Utilities.m */,
 				562FB3D71AA48C4400F9EFBD /* CurioSDK */,
 				05DEB1D31A81775F007793DD /* ContactSyncSDK */,
-				05A484571A6C610400793A90 /* UIImage+Resize.h */,
-				05A484581A6C610400793A90 /* UIImage+Resize.m */,
-				05A4845A1A6C614300793A90 /* UIImage+Alpha.m */,
-				05A4845B1A6C614300793A90 /* UIImage+RoundedCorner.m */,
-				05A4845C1A6C614300793A90 /* UIImage+Alpha.h */,
-				05A4845D1A6C614300793A90 /* UIImage+RoundedCorner.h */,
 				05DA564A1A56D5B3007D2B1D /* ALAssetRepresentation+MD5.h */,
 				05DA564B1A56D5B3007D2B1D /* ALAssetRepresentation+MD5.m */,
 				792233A21EBB27F600955F90 /* InteractiveViewController.h */,
@@ -6456,7 +6441,6 @@
 				942972C31D1B91FF00A4616C /* EmailChangeController.m in Sources */,
 				0546992C19F4E9EA00A87840 /* FileDetailFooter.m in Sources */,
 				5247D62A1DDDD0F600FFE63E /* CurioResourceUtil.m in Sources */,
-				05A4845F1A6C614300793A90 /* UIImage+RoundedCorner.m in Sources */,
 				051E1E0719CAC2F900FD1E03 /* AppDelegate.m in Sources */,
 				05033BDF1C24B21600FA2E5C /* IAPManager.m in Sources */,
 				24FE7B0B1B6A539D007B53A0 /* PrintWebViewController.m in Sources */,
@@ -6681,7 +6665,6 @@
 				059C9EC71A07DC60000C54D9 /* FolderDetailModalController.m in Sources */,
 				94F43B291E8692E200B32814 /* FileDetailsDao.m in Sources */,
 				05D2B19D19E67C6900FC309D /* MainPhotoAlbumCell.m in Sources */,
-				05A484591A6C610400793A90 /* UIImage+Resize.m in Sources */,
 				05C7145C1A7823C400C467D9 /* RadiusDao.m in Sources */,
 				05DEB1C91A80C16B007793DD /* MigrateDao.m in Sources */,
 				9458AABF1E23A55E008DFCE7 /* RawTypeFile.m in Sources */,
@@ -6702,7 +6685,6 @@
 				05B73E7F1A5EC04B005D24BE /* UsageInfoDao.m in Sources */,
 				052644B619D5A2A600B63759 /* SettingsHelpController.m in Sources */,
 				058219CB1A384D50001FA679 /* RecentSearchCell.m in Sources */,
-				05A4845E1A6C614300793A90 /* UIImage+Alpha.m in Sources */,
 				5332150D1DEC276800FE7289 /* AlbumCell.m in Sources */,
 				0515706719E5B34100C62B98 /* SquareImageView.m in Sources */,
 				05E8113519DF10340063F99A /* RefAlbumCell.m in Sources */,
