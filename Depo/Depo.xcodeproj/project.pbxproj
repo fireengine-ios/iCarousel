@@ -988,6 +988,10 @@
 		8C2044641EEA8E6900642627 /* BaseUserInputCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2044631EEA8E6900642627 /* BaseUserInputCellView.swift */; };
 		8C4A9D0F1EEAD99B001D2465 /* TermsAndServicesScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C4A9D0E1EEAD99B001D2465 /* TermsAndServicesScreen.xib */; };
 		8C8387F81EE9767C00AB89B9 /* RegistrationScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C8387F71EE9767C00AB89B9 /* RegistrationScreen.xib */; };
+		8CFA182B1EEEB77000AF236E /* CountryPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA182A1EEEB77000AF236E /* CountryPickerView.swift */; };
+		8CFA182D1EEEB78800AF236E /* CountryPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CFA182C1EEEB78800AF236E /* CountryPicker.xib */; };
+		8CFA182F1EEEC47900AF236E /* GSMUserInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA182E1EEEC47900AF236E /* GSMUserInputCell.swift */; };
+		8CFA18311EEEC9FD00AF236E /* CellTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA18301EEEC9FD00AF236E /* CellTypes.swift */; };
 		94112A981CCA7DE00050E9B1 /* DropboxStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94112A971CCA7DE00050E9B1 /* DropboxStatusCell.m */; };
 		941496611CCF559D008A8D0C /* GroupedPhotosAndVideosController.m in Sources */ = {isa = PBXBuildFile; fileRef = 941496601CCF559D008A8D0C /* GroupedPhotosAndVideosController.m */; };
 		941496641CCF5E51008A8D0C /* GroupedPhotosCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 941496631CCF5E51008A8D0C /* GroupedPhotosCell.m */; };
@@ -2695,6 +2699,10 @@
 		8C2044631EEA8E6900642627 /* BaseUserInputCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseUserInputCellView.swift; sourceTree = "<group>"; };
 		8C4A9D0E1EEAD99B001D2465 /* TermsAndServicesScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TermsAndServicesScreen.xib; sourceTree = "<group>"; };
 		8C8387F71EE9767C00AB89B9 /* RegistrationScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistrationScreen.xib; sourceTree = "<group>"; };
+		8CFA182A1EEEB77000AF236E /* CountryPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryPickerView.swift; sourceTree = "<group>"; };
+		8CFA182C1EEEB78800AF236E /* CountryPicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CountryPicker.xib; sourceTree = "<group>"; };
+		8CFA182E1EEEC47900AF236E /* GSMUserInputCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSMUserInputCell.swift; sourceTree = "<group>"; };
+		8CFA18301EEEC9FD00AF236E /* CellTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellTypes.swift; sourceTree = "<group>"; };
 		90C97731562E4ACF6D86E22E /* TermsAndServicesInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesInteractorInput.swift; sourceTree = "<group>"; };
 		931900C1D8314FD173F701DC /* TermsAndServicesRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesRouterInput.swift; sourceTree = "<group>"; };
 		94112A961CCA7DE00050E9B1 /* DropboxStatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxStatusCell.h; sourceTree = "<group>"; };
@@ -5452,6 +5460,19 @@
 			name = Services;
 			sourceTree = "<group>";
 		};
+		8CFA18291EEEB73400AF236E /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				8CFA18301EEEC9FD00AF236E /* CellTypes.swift */,
+				8C2044611EEA8E4100642627 /* BaseUserInputCell.xib */,
+				8C2044631EEA8E6900642627 /* BaseUserInputCellView.swift */,
+				8CFA182E1EEEC47900AF236E /* GSMUserInputCell.swift */,
+				8CFA182C1EEEB78800AF236E /* CountryPicker.xib */,
+				8CFA182A1EEEB77000AF236E /* CountryPickerView.swift */,
+			);
+			name = SubViews;
+			sourceTree = "<group>";
+		};
 		94F130C41D2496C70086BDBB /* social */ = {
 			isa = PBXGroup;
 			children = (
@@ -5515,12 +5536,11 @@
 		F6726BE035768C2FD9A85010 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8CFA18291EEEB73400AF236E /* SubViews */,
 				04CF1643276D50FAE9FC2305 /* RegistrationViewInput.swift */,
 				A44DB6B541540CC3F60A6E22 /* RegistrationViewController.swift */,
 				2B4738D31A12B7DD8C76B4E7 /* RegistrationViewOutput.swift */,
 				8C8387F71EE9767C00AB89B9 /* RegistrationScreen.xib */,
-				8C2044611EEA8E4100642627 /* BaseUserInputCell.xib */,
-				8C2044631EEA8E6900642627 /* BaseUserInputCellView.swift */,
 				8C049C571EEC7DC60086DA84 /* RegistrationDataSource.swift */,
 			);
 			path = View;
@@ -6227,6 +6247,7 @@
 				0526448719D5A26400B63759 /* remove_icon@2x.png in Resources */,
 				5695E6E91E1D11F000351109 /* icon_location@3x.png in Resources */,
 				0589064A19CC2B9500A9E517 /* yellow_fav_icon.png in Resources */,
+				8CFA182D1EEEB78800AF236E /* CountryPicker.xib in Resources */,
 				94E5E6601E24F8E4008B0216 /* icon_notsync@3x.png in Resources */,
 				94E549221CC6BA34003CB5DC /* icon_complaint@2x.png in Resources */,
 				79BDD58E1E8268C800765599 /* signup_button@2x.png in Resources */,
@@ -6783,6 +6804,7 @@
 				056090E41AC5A44000710211 /* ReachabilityManager.m in Sources */,
 				67FDC4341EC47D7D00AADDD8 /* NSObject+GCDThreadSafe.m in Sources */,
 				05403F1919F5584300AED10A /* ElasticSearchDao.m in Sources */,
+				8CFA182F1EEEC47900AF236E /* GSMUserInputCell.swift in Sources */,
 				94DCA1031D3CB3FC000965AE /* CellographMainController.m in Sources */,
 				053D0ED819DAC959006A13E0 /* MyModalController.m in Sources */,
 				9433BCFC1D21DC7500991483 /* PromoCodeActivateDao.m in Sources */,
@@ -7149,6 +7171,7 @@
 				9433BD0B1D21E48300991483 /* PromotionEntryController.m in Sources */,
 				058BC2421A30E7100007F4DE /* AuthResponse.m in Sources */,
 				050D4C321A31E17200809A01 /* PostLoginSyncPhotoController.m in Sources */,
+				8CFA18311EEEC9FD00AF236E /* CellTypes.swift in Sources */,
 				790B9E151E7A84F700DD7DA0 /* CountrySelectionCell.m in Sources */,
 				0515F2FF1C469A3C0098081C /* RevisitedStorageController.m in Sources */,
 				94FAE0B11D2F119300BC9F77 /* VideofyFooterView.m in Sources */,
@@ -7172,6 +7195,7 @@
 				059C9EC71A07DC60000C54D9 /* FolderDetailModalController.m in Sources */,
 				94F43B291E8692E200B32814 /* FileDetailsDao.m in Sources */,
 				05D2B19D19E67C6900FC309D /* MainPhotoAlbumCell.m in Sources */,
+				8CFA182B1EEEB77000AF236E /* CountryPickerView.swift in Sources */,
 				05A484591A6C610400793A90 /* UIImage+Resize.m in Sources */,
 				05C7145C1A7823C400C467D9 /* RadiusDao.m in Sources */,
 				05DEB1C91A80C16B007793DD /* MigrateDao.m in Sources */,

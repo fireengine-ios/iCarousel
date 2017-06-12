@@ -17,6 +17,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RegistrationViewController" customModule="Depo" customModuleProvider="target">
             <connections>
                 <outlet property="nextBtn" destination="pdV-lc-PZm" id="dFy-WB-W6I"/>
+                <outlet property="pickerBottomConstraint" destination="Mmb-vD-xV3" id="lP4-e8-aH0"/>
                 <outlet property="userRegistrationTable" destination="TYi-I0-oIL" id="vtv-3a-7kt"/>
                 <outlet property="view" destination="iN0-l3-epB" id="lpg-ri-NHJ"/>
             </connections>
@@ -54,6 +55,13 @@
                         <constraint firstAttribute="height" constant="400" id="IBb-RC-IZr"/>
                     </constraints>
                 </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4l6-KR-Kcg" customClass="CountryPickerView" customModule="Depo" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="666.5" width="375" height="261.5"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="261.39999999999998" id="O6E-vh-hvG"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -64,8 +72,11 @@
                 <constraint firstItem="DWV-5a-Udx" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Gl9-fl-g2f"/>
                 <constraint firstAttribute="bottom" secondItem="pdV-lc-PZm" secondAttribute="bottom" constant="35" id="JlS-CV-zuS"/>
                 <constraint firstItem="TYi-I0-oIL" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="30" id="LZs-Xd-mPV"/>
+                <constraint firstAttribute="trailing" secondItem="4l6-KR-Kcg" secondAttribute="trailing" id="Mfa-Lj-dOO"/>
+                <constraint firstAttribute="bottom" secondItem="4l6-KR-Kcg" secondAttribute="bottom" constant="-261" id="Mmb-vD-xV3"/>
                 <constraint firstItem="TYi-I0-oIL" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="53" id="XL5-nL-ZWc"/>
                 <constraint firstAttribute="bottom" secondItem="DWV-5a-Udx" secondAttribute="bottom" id="qnI-L7-H6X"/>
+                <constraint firstItem="4l6-KR-Kcg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="sKw-9T-CWo"/>
             </constraints>
             <point key="canvasLocation" x="26.5" y="51.5"/>
         </view>

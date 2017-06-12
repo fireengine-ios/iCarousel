@@ -31,12 +31,19 @@ class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSour
     }
     
     private func setupCell(withCell cell: UITableViewCell, atIndex index: Int) {
+//        if let cell = cell as? BaseUserInputCellView {
+//            debugPrint("cell is ", cell)
+//        } else if let cell = cell as? GSMUserInputCell {
+//            debugPrint("cell is ", cell)
+//        }
         guard let cell = cell as? BaseUserInputCellView else {
             return
         }
         if cells.count > 0 {
             let model = cells[index]
-            cell.titleLabel.text = model.title
+//            cell.titleLabel.text = model.title
+//            cell.textInputField.text = model.inputText
+            cell.setupCell(withTitle: model.title, inputText: model.inputText, cellType: model.type)
         }
     }
 }

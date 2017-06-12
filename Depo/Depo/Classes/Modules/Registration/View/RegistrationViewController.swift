@@ -15,6 +15,8 @@ class RegistrationViewController: UIViewController, RegistrationViewInput {
     var output: RegistrationViewOutput!
     let dataSource = RegistrationDataSource()
 
+    @IBOutlet weak var pickerBottomConstraint: NSLayoutConstraint!
+    
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +29,7 @@ class RegistrationViewController: UIViewController, RegistrationViewInput {
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.userRegistrationTable.register(UINib(nibName: "BaseUserInputCell", bundle: nil), forCellReuseIdentifier: "BaseUserInputCell")
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -16,6 +16,22 @@ class RegistrationInteractor: RegistrationInteractorInput {
     }
     
     func prepareModels() {
+//        NSString *currentCode;
+//        NSString *currentLocale = [Util readLocaleCode];
+//        if([currentLocale isEqualToString:@"uk"] || [currentLocale isEqualToString:@"ru"]) {
+//            [_countryCodeButton setTitle:@"+90" forState:UIControlStateNormal];
+//            currentCode = @"+380";
+//            self.selectedCountry = @"UK";
+//        } else if ([currentLocale isEqualToString:@"ar"]) {
+//            currentCode = @"+966";
+//            self.selectedCountry = @"AR";
+//        } else if ([currentLocale isEqualToString:@"de"]) {
+//            currentCode = @"+49";
+//            self.selectedCountry = @"DE";
+//        } else {
+//            currentCode = @"+90";
+//            self.selectedCountry = @"TR";
+//        }
         //PREPERes models here and call output
         self.output.prepearedModels(models: dataStorage.getModels())
     }
