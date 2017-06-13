@@ -992,6 +992,12 @@
 		7C032B7D1EEEB792006532C8 /* IntroduceSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B7C1EEEB792006532C8 /* IntroduceSubView.swift */; };
 		7C032B7F1EEEB7A8006532C8 /* IntroduceSubView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C032B7E1EEEB7A8006532C8 /* IntroduceSubView.xib */; };
 		7C032B821EEFE465006532C8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B811EEFE465006532C8 /* Constants.swift */; };
+		7C032B841EEFF8CB006532C8 /* LoginDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B831EEFF8CB006532C8 /* LoginDataSource.swift */; };
+		7C032B891EEFFD39006532C8 /* SwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B861EEFFD39006532C8 /* SwitchButton.swift */; };
+		7C032B8A1EEFFD39006532C8 /* TextInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B871EEFFD39006532C8 /* TextInputView.swift */; };
+		7C032B8B1EEFFD39006532C8 /* TextInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C032B881EEFFD39006532C8 /* TextInputView.xib */; };
+		7C032B8D1EEFFF25006532C8 /* ButtonWithCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B8C1EEFFF25006532C8 /* ButtonWithCorner.swift */; };
+		7C032B901EF014E9006532C8 /* LoginDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B8F1EF014E9006532C8 /* LoginDataStorage.swift */; };
 		7E17BA74388D3670D1FEEBBA /* RegistrationViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF1643276D50FAE9FC2305 /* RegistrationViewInput.swift */; };
 		80BAF3AEB6623B739C0F967F /* RegistrationInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42B02A7891F46EEC97D1662 /* RegistrationInitializer.swift */; };
 		83AFF9A2BBEF449448186DBB /* Pods_Lifebox_Picker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F8D57D36EF6E476E6752F2C /* Pods_Lifebox_Picker.framework */; };
@@ -1000,9 +1006,6 @@
 		8C049C5B1EEC83420086DA84 /* BaseCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C5A1EEC83420086DA84 /* BaseCellModel.swift */; };
 		8C049C5D1EEC85DD0086DA84 /* ValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C5C1EEC85DD0086DA84 /* ValidationService.swift */; };
 		8C049C611EED63BC0086DA84 /* DataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C601EED63BC0086DA84 /* DataStorage.swift */; };
-		8C049C6A1EEE8E690086DA84 /* SwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C671EEE8E690086DA84 /* SwitchButton.swift */; };
-		8C049C6B1EEE8E690086DA84 /* TextInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C681EEE8E690086DA84 /* TextInputView.swift */; };
-		8C049C6C1EEE8E690086DA84 /* TextInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C049C691EEE8E690086DA84 /* TextInputView.xib */; };
 		8C049C851EEE8E7F0086DA84 /* LoginConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C6F1EEE8E7F0086DA84 /* LoginConfigurator.swift */; };
 		8C049C861EEE8E7F0086DA84 /* LoginInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C701EEE8E7F0086DA84 /* LoginInitializer.swift */; };
 		8C049C871EEE8E7F0086DA84 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C721EEE8E7F0086DA84 /* LoginInteractor.swift */; };
@@ -2731,6 +2734,12 @@
 		7C032B7C1EEEB792006532C8 /* IntroduceSubView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroduceSubView.swift; sourceTree = "<group>"; };
 		7C032B7E1EEEB7A8006532C8 /* IntroduceSubView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroduceSubView.xib; sourceTree = "<group>"; };
 		7C032B811EEFE465006532C8 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		7C032B831EEFF8CB006532C8 /* LoginDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginDataSource.swift; sourceTree = "<group>"; };
+		7C032B861EEFFD39006532C8 /* SwitchButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchButton.swift; sourceTree = "<group>"; };
+		7C032B871EEFFD39006532C8 /* TextInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInputView.swift; sourceTree = "<group>"; };
+		7C032B881EEFFD39006532C8 /* TextInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextInputView.xib; sourceTree = "<group>"; };
+		7C032B8C1EEFFF25006532C8 /* ButtonWithCorner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonWithCorner.swift; sourceTree = "<group>"; };
+		7C032B8F1EF014E9006532C8 /* LoginDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginDataStorage.swift; sourceTree = "<group>"; };
 		7C0EFB4EB989796A6FE4FDA8 /* IntroduceInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceInteractorInput.swift; sourceTree = "<group>"; };
 		7F142A19BE346559FCF5E378 /* Pods-Lifebox Picker.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lifebox Picker.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Lifebox Picker/Pods-Lifebox Picker.appstore.xcconfig"; sourceTree = "<group>"; };
 		849AE724A4CD02D1BB1D73F2 /* Pods-Depo.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Depo.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-Depo/Pods-Depo.enterprise.xcconfig"; sourceTree = "<group>"; };
@@ -2741,9 +2750,6 @@
 		8C049C5A1EEC83420086DA84 /* BaseCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCellModel.swift; sourceTree = "<group>"; };
 		8C049C5C1EEC85DD0086DA84 /* ValidationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationService.swift; sourceTree = "<group>"; };
 		8C049C601EED63BC0086DA84 /* DataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStorage.swift; sourceTree = "<group>"; };
-		8C049C671EEE8E690086DA84 /* SwitchButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchButton.swift; sourceTree = "<group>"; };
-		8C049C681EEE8E690086DA84 /* TextInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInputView.swift; sourceTree = "<group>"; };
-		8C049C691EEE8E690086DA84 /* TextInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextInputView.xib; sourceTree = "<group>"; };
 		8C049C6F1EEE8E7F0086DA84 /* LoginConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginConfigurator.swift; sourceTree = "<group>"; };
 		8C049C701EEE8E7F0086DA84 /* LoginInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginInitializer.swift; sourceTree = "<group>"; };
 		8C049C721EEE8E7F0086DA84 /* LoginInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
@@ -5358,6 +5364,7 @@
 		69141665E4FEDA59B07584CE /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				7C032B851EEFFC1A006532C8 /* SubViews */,
 				7C032B801EEFE408006532C8 /* Constants */,
 				C206234150DD1B9E1424D61C /* Modules */,
 			);
@@ -5568,22 +5575,31 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
+		7C032B851EEFFC1A006532C8 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				7C032B861EEFFD39006532C8 /* SwitchButton.swift */,
+				7C032B871EEFFD39006532C8 /* TextInputView.swift */,
+				7C032B881EEFFD39006532C8 /* TextInputView.xib */,
+				7C032B8C1EEFFF25006532C8 /* ButtonWithCorner.swift */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
+		7C032B8E1EF0123B006532C8 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				7C032B8F1EF014E9006532C8 /* LoginDataStorage.swift */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
 		8C049C591EEC82F00086DA84 /* Enteties */ = {
 			isa = PBXGroup;
 			children = (
 				8C049C5A1EEC83420086DA84 /* BaseCellModel.swift */,
 			);
 			name = Enteties;
-			sourceTree = "<group>";
-		};
-		8C049C661EEE8E690086DA84 /* SubViews */ = {
-			isa = PBXGroup;
-			children = (
-				8C049C671EEE8E690086DA84 /* SwitchButton.swift */,
-				8C049C681EEE8E690086DA84 /* TextInputView.swift */,
-				8C049C691EEE8E690086DA84 /* TextInputView.xib */,
-			);
-			path = SubViews;
 			sourceTree = "<group>";
 		};
 		8C049C6D1EEE8E7F0086DA84 /* Login */ = {
@@ -5610,6 +5626,7 @@
 		8C049C711EEE8E7F0086DA84 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				7C032B8E1EF0123B006532C8 /* Services */,
 				8C049C721EEE8E7F0086DA84 /* LoginInteractor.swift */,
 				8C049C731EEE8E7F0086DA84 /* LoginInteractorInput.swift */,
 				8C049C741EEE8E7F0086DA84 /* LoginInteractorOutput.swift */,
@@ -5642,6 +5659,7 @@
 				8C049C7D1EEE8E7F0086DA84 /* LoginViewController.xib */,
 				8C049C7E1EEE8E7F0086DA84 /* LoginViewInput.swift */,
 				8C049C7F1EEE8E7F0086DA84 /* LoginViewOutput.swift */,
+				7C032B831EEFF8CB006532C8 /* LoginDataSource.swift */,
 				8C049C801EEE8E7F0086DA84 /* TableViewCell */,
 			);
 			path = View;
@@ -5734,7 +5752,6 @@
 			isa = PBXGroup;
 			children = (
 				8C049C6D1EEE8E7F0086DA84 /* Login */,
-				8C049C661EEE8E690086DA84 /* SubViews */,
 				2B39FB04635CDE7B54750A4C /* Registration */,
 				762FCEFD487BFE9A7ACC832D /* TermsAndServices */,
 				E106596B4B7DAC3DE7CFA644 /* Introduce */,
@@ -6067,7 +6084,6 @@
 				56B9E92D1DED752600DE1011 /* AppRater.bundle in Resources */,
 				052D415919EC1A25001B4088 /* empty_album_header_bg@2x.png in Resources */,
 				94C7CEE21D2B97520040897A /* icon_createstory@3x.png in Resources */,
-				8C049C6C1EEE8E690086DA84 /* TextInputView.xib in Resources */,
 				05D5E58D1B09D56A00A22957 /* icon_settings_arrow.png in Resources */,
 				05F178441BFBB4A70014B2BD /* cropy@2x.png in Resources */,
 				568FEFD11E2C956100AF4FFB /* icon_settings_cikis.png in Resources */,
@@ -6168,6 +6184,7 @@
 				05A7CE5F1A7FC0FD00020B6F /* yuvarlakbulut@2x.png in Resources */,
 				05144B641A091CA800B2A414 /* no_music_icon.png in Resources */,
 				05A7CE701A7FC27300020B6F /* karebg.png in Resources */,
+				7C032B8B1EEFFD39006532C8 /* TextInputView.xib in Resources */,
 				058337E719ED9FEB00DCF0C5 /* bttn-video-play@2x.png in Resources */,
 				052AE42D1A1D08260039DD7F /* cloud_icon@2x.png in Resources */,
 				790B9D891E71762100DD7DA0 /* icon_dropdown@2x.png in Resources */,
@@ -7053,6 +7070,7 @@
 				056090E41AC5A44000710211 /* ReachabilityManager.m in Sources */,
 				67FDC4341EC47D7D00AADDD8 /* NSObject+GCDThreadSafe.m in Sources */,
 				05403F1919F5584300AED10A /* ElasticSearchDao.m in Sources */,
+				7C032B8A1EEFFD39006532C8 /* TextInputView.swift in Sources */,
 				94DCA1031D3CB3FC000965AE /* CellographMainController.m in Sources */,
 				053D0ED819DAC959006A13E0 /* MyModalController.m in Sources */,
 				9433BCFC1D21DC7500991483 /* PromoCodeActivateDao.m in Sources */,
@@ -7065,6 +7083,7 @@
 				56A0DE471E5E239900553462 /* QuotaInfoCell.m in Sources */,
 				0526444819D546BB00B63759 /* MapUtil.m in Sources */,
 				070234911EA08E1400716C27 /* ContactUtil.m in Sources */,
+				7C032B841EEFF8CB006532C8 /* LoginDataSource.swift in Sources */,
 				0514A6291BF4D1030084E0AB /* BaseBgController.m in Sources */,
 				94FAE0CF1D2F6EDF00BC9F77 /* FBStatusDao.m in Sources */,
 				05A9382D1AF6AE9100AE2892 /* UpdateCheck.m in Sources */,
@@ -7205,6 +7224,7 @@
 				79B973B21ED84E4B00E9F2FA /* NSLayoutAnchor_Private.m in Sources */,
 				051E1E0719CAC2F900FD1E03 /* AppDelegate.m in Sources */,
 				070A221F1E8AEB34002385F7 /* CircleProgressBar.m in Sources */,
+				7C032B8D1EEFFF25006532C8 /* ButtonWithCorner.swift in Sources */,
 				05033BDF1C24B21600FA2E5C /* IAPManager.m in Sources */,
 				24FE7B0B1B6A539D007B53A0 /* PrintWebViewController.m in Sources */,
 				79B973AF1ED84E4B00E9F2FA /* ABLayoutSizeDimension.m in Sources */,
@@ -7222,7 +7242,6 @@
 				94FB09891DE2065B00DA666D /* DevicePhotoCell.m in Sources */,
 				0556EA571A19EA0700123A14 /* SearchHistory.m in Sources */,
 				052160A319E2E56B0007B321 /* DepoUploadTask.m in Sources */,
-				8C049C6A1EEE8E690086DA84 /* SwitchButton.swift in Sources */,
 				05BBE71119E06FB100805215 /* CameraCaptureModalController.m in Sources */,
 				051DE37319CC140100F27C85 /* CustomConfirmView.m in Sources */,
 				059A46DA1A6D3E2000935023 /* SubscriptionPlan.m in Sources */,
@@ -7384,6 +7403,7 @@
 				05BBE71419E07D0400805215 /* RefSongCell.m in Sources */,
 				059C046C1A85256B007B18BE /* ContactSyncController.m in Sources */,
 				0579424D1C3FDCC400899923 /* OTPController.m in Sources */,
+				7C032B901EF014E9006532C8 /* LoginDataStorage.swift in Sources */,
 				053D0EDB19DAEA29006A13E0 /* ProcessFooterView.m in Sources */,
 				9454FA601CAA81FD00BF1288 /* CurrentMusicListModalController.m in Sources */,
 				052E36ED1ACA8AFE009A2F13 /* UploadingImagePreviewController.m in Sources */,
@@ -7403,6 +7423,7 @@
 				8C049C891EEE8E7F0086DA84 /* LoginInteractorOutput.swift in Sources */,
 				79B973AE1ED84E4B00E9F2FA /* ABLayoutEdgesAnchor.m in Sources */,
 				94DCA1091D3D8F03000965AE /* FileTagDao.m in Sources */,
+				7C032B891EEFFD39006532C8 /* SwitchButton.swift in Sources */,
 				058B32971A15E8A300A291C4 /* AlbumDetailModalController.m in Sources */,
 				059E9A091A35DC2500922A77 /* MyMessageComposeViewController.m in Sources */,
 				5247D6261DDDD0F600FFE63E /* CurioNotificationManager.m in Sources */,
@@ -7435,7 +7456,6 @@
 				79B973B31ED84E4B00E9F2FA /* UIView+MissingAnchors.m in Sources */,
 				9433BD0B1D21E48300991483 /* PromotionEntryController.m in Sources */,
 				058BC2421A30E7100007F4DE /* AuthResponse.m in Sources */,
-				8C049C6B1EEE8E690086DA84 /* TextInputView.swift in Sources */,
 				050D4C321A31E17200809A01 /* PostLoginSyncPhotoController.m in Sources */,
 				8C049C8E1EEE8E7F0086DA84 /* LoginViewController.swift in Sources */,
 				790B9E151E7A84F700DD7DA0 /* CountrySelectionCell.m in Sources */,

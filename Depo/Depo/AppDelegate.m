@@ -308,7 +308,7 @@
     IntroduceViewController * introduceVC = [[IntroduceViewController alloc] initWithNibName:@"IntroduceViewController" bundle:nil];
     UINavigationController * nController = [[UINavigationController alloc] initWithRootViewController:introduceVC];
     nController.navigationBar.opaque = YES;
-    nController.navigationBar.translucent = YES;
+    nController.navigationBar.translucent = NO;
     nController.navigationBar.hidden = YES;
     introduceConfigurator.introduceViewController = introduceVC;
     [introduceConfigurator setupVC];

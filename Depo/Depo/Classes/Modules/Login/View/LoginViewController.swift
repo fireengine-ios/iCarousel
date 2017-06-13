@@ -8,76 +8,72 @@
 
 import UIKit
 
-class LoginViewController: UIViewController, LoginViewInput, UITableViewDelegate, UITableViewDataSource {
+class LoginViewController: UIViewController, LoginViewInput {
 
     var output: LoginViewOutput!
+    var dataSource: LoginDataSource = LoginDataSource()
     
     var tableDataMArray:Array<UITableViewCell> = Array()
     
     @IBOutlet weak var bacgroungImageView: UIImageView!
-    @IBOutlet weak var tableView:UITableView!
+    @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var cantLoginButton: ButtonWithCorner!
+    @IBOutlet weak var rememberLoginLabel: UILabel!
 
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        //output.viewIsReady()
         
-        //let nib = UINib(nibName: "LoginTableViewCell", bundle: nil)
-        //self.tableView.register(nib, forCellReuseIdentifier: "LoginTableViewCell")
+        self.tableView.delegate = self.dataSource
+        self.tableView.dataSource = self.dataSource
+        self.dataSource.setupTableView(tableView: self.tableView)
         
-        self.tableView.backgroundColor = UIColor.clear
+        self.configurateView()
         
-        var cell = LoginTableViewCell.initFromNib()
-        cell.configurateWithType(cellType: TextInputView.TextInputViewType.Text)
-        self.tableDataMArray.append(cell)
-        
-        cell = LoginTableViewCell.initFromNib()
-        cell.configurateWithType(cellType: TextInputView.TextInputViewType.Password)
-        self.tableDataMArray.append(cell)
-        
-        let cell2 = BottomLoginTableViewCell.initFromNib()
-        self.tableDataMArray.append(cell2)
+        output.viewIsReady()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    func configurateView(){
+        self.tableView.backgroundColor = UIColor.clear
         
-        self.tableView.contentInset = UIEdgeInsetsMake(50.0, 0.0, 0.0, 0.0)
+        self.loginButton.backgroundColor = ColorConstants.whiteColor
+        self.loginButton.setTitle(NSLocalizedString("Login", comment: ""), for: UIControlState.normal)
+        self.loginButton.setTitleColor(ColorConstants.blueColor, for: UIControlState.normal)
+        self.loginButton.layer.cornerRadius = self.loginButton.frame.size.height * 0.5
+        self.loginButton.titleLabel?.font = UIFont(name: FontNamesConstant.turkcellSaturaBol, size: 20)
+        
+        self.cantLoginButton.setTitleColor(ColorConstants.whiteColor, for: UIControlState.normal)
+        self.cantLoginButton.setTitle(NSLocalizedString("I can't login", comment: ""), for: UIControlState.normal)
+        self.cantLoginButton.titleLabel?.font = UIFont(name: FontNamesConstant.turkcellSaturaBol, size: 12)
+        
+        self.rememberLoginLabel.text = NSLocalizedString("Remember my credentials", comment: "")
+        self.rememberLoginLabel.textColor = ColorConstants.whiteColor
+        self.rememberLoginLabel.font = UIFont(name: FontNamesConstant.turkcellSaturaBol, size: 15)
+    }
+    
+    // MARK: Buttons action
+    
+    @IBAction func onLoginButton(){
+        
+    }
+    
+    @IBAction func onCantLoginButton(){
+        
+    }
+    
+    @IBAction func onSaveMyLoginButton(){
+        
     }
 
     // MARK: LoginViewInput
-    func setupInitialState(array :Array<UITableViewCell>) {
-        self.tableDataMArray.removeAll()
-        self.tableDataMArray.insert(contentsOf: array, at: 0)
-        self.tableView.reloadData()
+    func setupInitialState(array :[BaseCellModel]){
+        self.dataSource.setupCellsWithModels(models: array)
     }
     
     func showCapcha(){
         
-    }
-    
-    
-//MARC: UITableView delegate
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.tableDataMArray.count
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if (indexPath.row == self.tableDataMArray.count - 1){
-            return 254.0
-        }
-        return LoginTableViewCell.cellH()
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "LoginTableViewCell", for: indexPath)
-//        return cell
-        return self.tableDataMArray[indexPath.row]
     }
     
 }

@@ -9,5 +9,10 @@
 class LoginInteractor: LoginInteractorInput {
 
     weak var output: LoginInteractorOutput!
-
+    var dataStorage = LoginDataStorage()
+    
+    func prepareModels(){
+        self.output.models(models: self.dataStorage.getModels())
+    }
+    
 }

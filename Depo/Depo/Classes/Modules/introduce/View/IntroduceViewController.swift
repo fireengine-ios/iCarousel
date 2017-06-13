@@ -15,7 +15,7 @@ class IntroduceViewController: UIViewController, IntroduceViewInput {
     var dataSource = IntroduceDataSource()
     
     @IBOutlet weak var startUsingLifeBoxButton: UIButton!
-    @IBOutlet weak var haveAccountButton: UIButton!
+    @IBOutlet weak var haveAccountButton: ButtonWithCorner!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var pageControll: UIPageControl!
 
@@ -38,6 +38,8 @@ class IntroduceViewController: UIViewController, IntroduceViewInput {
     }
     
     func configurateView(){
+        self.navigationController?.navigationBar.isHidden = true
+        
         self.startUsingLifeBoxButton.setTitle(NSLocalizedString(TextConstants.itroViewGoToRegisterButtonText, comment: ""), for: UIControlState.normal)
         self.startUsingLifeBoxButton.backgroundColor = ColorConstants.whiteColor
         self.startUsingLifeBoxButton.setTitleColor(ColorConstants.blueColor, for: UIControlState.normal)
@@ -48,10 +50,6 @@ class IntroduceViewController: UIViewController, IntroduceViewInput {
         self.haveAccountButton.backgroundColor = UIColor.clear
         self.haveAccountButton.setTitleColor(ColorConstants.whiteColor, for: UIControlState.normal)
         self.haveAccountButton.titleLabel?.font = UIFont(name: "TurkcellSaturaBol", size: 12)
-        self.haveAccountButton.layer.borderWidth = 1.0
-        self.haveAccountButton.layer.borderColor = ColorConstants.whiteColor.cgColor
-        self.haveAccountButton.layer.cornerRadius = 3.0
-        self.haveAccountButton.layer.masksToBounds = true
     }
 
 

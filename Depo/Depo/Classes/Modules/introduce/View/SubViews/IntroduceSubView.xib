@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -20,16 +20,30 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="364"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xls-xm-keo">
-                    <rect key="frame" x="60" y="261.5" width="255" height="92.5"/>
+                    <rect key="frame" x="75" y="262" width="225.5" height="92"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VGD-2f-pjN">
-                    <rect key="frame" x="67" y="0.0" width="240" height="261.5"/>
+                    <rect key="frame" x="67" y="0.0" width="240" height="262"/>
                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="240" id="cdC-K3-rw5"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lju-uK-JQ1">
+                    <rect key="frame" x="0.0" y="262" width="75" height="102"/>
+                    <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="102" id="V2A-Lp-HKs"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="raU-b9-eqP">
+                    <rect key="frame" x="300.5" y="262" width="74.5" height="102"/>
+                    <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="102" id="O5h-7q-Rsl"/>
                     </constraints>
                 </view>
             </subviews>
@@ -37,15 +51,21 @@
             <constraints>
                 <constraint firstItem="bNG-B1-la9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="1H7-R1-5T5"/>
                 <constraint firstItem="VGD-2f-pjN" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="HEQ-ea-3wu"/>
+                <constraint firstItem="Xls-xm-keo" firstAttribute="width" secondItem="Lju-uK-JQ1" secondAttribute="width" multiplier="3" id="HIm-bb-Ur8"/>
+                <constraint firstItem="raU-b9-eqP" firstAttribute="leading" secondItem="Xls-xm-keo" secondAttribute="trailing" id="IVy-CF-YkE"/>
+                <constraint firstAttribute="trailing" secondItem="raU-b9-eqP" secondAttribute="trailing" id="LCu-Nt-bPn"/>
+                <constraint firstAttribute="bottom" secondItem="Lju-uK-JQ1" secondAttribute="bottom" id="N0s-5w-ssg"/>
+                <constraint firstItem="Lju-uK-JQ1" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="NqI-BK-KMb"/>
                 <constraint firstItem="VGD-2f-pjN" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="OOx-Aq-flD"/>
-                <constraint firstAttribute="trailing" secondItem="Xls-xm-keo" secondAttribute="trailing" constant="60" id="UoC-PT-QCE"/>
                 <constraint firstItem="Xls-xm-keo" firstAttribute="height" secondItem="VGD-2f-pjN" secondAttribute="height" multiplier="0.35" id="WWz-65-J6W"/>
-                <constraint firstItem="Xls-xm-keo" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="60" id="YGc-0Y-xLX"/>
+                <constraint firstItem="Xls-xm-keo" firstAttribute="leading" secondItem="Lju-uK-JQ1" secondAttribute="trailing" id="Ykk-YQ-mZT"/>
                 <constraint firstItem="Xls-xm-keo" firstAttribute="top" secondItem="VGD-2f-pjN" secondAttribute="bottom" id="cUj-t9-t4S"/>
                 <constraint firstAttribute="bottom" secondItem="Xls-xm-keo" secondAttribute="bottom" constant="10" id="caJ-Q6-o27"/>
                 <constraint firstItem="bNG-B1-la9" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="fxW-VK-qNM"/>
+                <constraint firstAttribute="bottom" secondItem="raU-b9-eqP" secondAttribute="bottom" id="hId-fO-cT0"/>
                 <constraint firstAttribute="bottom" secondItem="bNG-B1-la9" secondAttribute="bottom" id="kap-Cv-Xsc"/>
                 <constraint firstAttribute="trailing" secondItem="bNG-B1-la9" secondAttribute="trailing" id="lPU-rv-SM9"/>
+                <constraint firstItem="Lju-uK-JQ1" firstAttribute="width" secondItem="raU-b9-eqP" secondAttribute="width" id="zsz-ht-9jz"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

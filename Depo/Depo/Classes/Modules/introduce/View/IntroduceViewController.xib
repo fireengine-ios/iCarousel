@@ -57,7 +57,7 @@
                         <constraint firstAttribute="trailing" secondItem="j2P-V1-ajw" secondAttribute="trailing" id="tnr-AZ-94Y"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="STK-bc-GEv">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="STK-bc-GEv" customClass="ButtonWithCorner" customModule="Depo" customModuleProvider="target">
                     <rect key="frame" x="111" y="620" width="152" height="26"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="26" id="GPS-RI-Ueo"/>

@@ -9,5 +9,7 @@
 import Foundation
 
 protocol LoginInteractorOutput: class {
-
+    
+    func models(models:[BaseCellModel])
+    
 }

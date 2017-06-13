@@ -15,7 +15,7 @@ protocol LoginViewInput: class {
         Setup initial state of the view
     */
 
-    func setupInitialState(array :Array<UITableViewCell>)
+    func setupInitialState(array :[BaseCellModel])
     func showCapcha()
     
 }

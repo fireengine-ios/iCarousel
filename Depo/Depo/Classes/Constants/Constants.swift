@@ -19,6 +19,10 @@ struct TextConstants {
     static let introViewGoToLoginButtonText = "I have an account, let me log in"
 }
 
+struct FontNamesConstant {
+    static let turkcellSaturaBol = "TurkcellSaturaBol"
+}
+
 class Constants: NSObject {
 
 }
