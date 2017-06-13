@@ -991,6 +991,7 @@
 		7C032B7A1EEEB198006532C8 /* IntroduceDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B791EEEB198006532C8 /* IntroduceDataStorage.swift */; };
 		7C032B7D1EEEB792006532C8 /* IntroduceSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B7C1EEEB792006532C8 /* IntroduceSubView.swift */; };
 		7C032B7F1EEEB7A8006532C8 /* IntroduceSubView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C032B7E1EEEB7A8006532C8 /* IntroduceSubView.xib */; };
+		7C032B821EEFE465006532C8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B811EEFE465006532C8 /* Constants.swift */; };
 		7E17BA74388D3670D1FEEBBA /* RegistrationViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF1643276D50FAE9FC2305 /* RegistrationViewInput.swift */; };
 		80BAF3AEB6623B739C0F967F /* RegistrationInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42B02A7891F46EEC97D1662 /* RegistrationInitializer.swift */; };
 		83AFF9A2BBEF449448186DBB /* Pods_Lifebox_Picker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F8D57D36EF6E476E6752F2C /* Pods_Lifebox_Picker.framework */; };
@@ -2729,6 +2730,7 @@
 		7C032B791EEEB198006532C8 /* IntroduceDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroduceDataStorage.swift; sourceTree = "<group>"; };
 		7C032B7C1EEEB792006532C8 /* IntroduceSubView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroduceSubView.swift; sourceTree = "<group>"; };
 		7C032B7E1EEEB7A8006532C8 /* IntroduceSubView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroduceSubView.xib; sourceTree = "<group>"; };
+		7C032B811EEFE465006532C8 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		7C0EFB4EB989796A6FE4FDA8 /* IntroduceInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceInteractorInput.swift; sourceTree = "<group>"; };
 		7F142A19BE346559FCF5E378 /* Pods-Lifebox Picker.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lifebox Picker.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Lifebox Picker/Pods-Lifebox Picker.appstore.xcconfig"; sourceTree = "<group>"; };
 		849AE724A4CD02D1BB1D73F2 /* Pods-Depo.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Depo.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-Depo/Pods-Depo.enterprise.xcconfig"; sourceTree = "<group>"; };
@@ -5356,6 +5358,7 @@
 		69141665E4FEDA59B07584CE /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				7C032B801EEFE408006532C8 /* Constants */,
 				C206234150DD1B9E1424D61C /* Modules */,
 			);
 			path = Classes;
@@ -5555,6 +5558,14 @@
 			);
 			name = SubViews;
 			path = ../../introduce/View/SubViews;
+			sourceTree = "<group>";
+		};
+		7C032B801EEFE408006532C8 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				7C032B811EEFE465006532C8 /* Constants.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 		8C049C591EEC82F00086DA84 /* Enteties */ = {
@@ -7057,6 +7068,7 @@
 				0514A6291BF4D1030084E0AB /* BaseBgController.m in Sources */,
 				94FAE0CF1D2F6EDF00BC9F77 /* FBStatusDao.m in Sources */,
 				05A9382D1AF6AE9100AE2892 /* UpdateCheck.m in Sources */,
+				7C032B821EEFE465006532C8 /* Constants.swift in Sources */,
 				05754C141AC711EA00727B42 /* SyncInfoHeaderView.m in Sources */,
 				052644AF19D5A2A600B63759 /* SettingsDocumentsController.m in Sources */,
 				5247D62B1DDDD0F600FFE63E /* CurioSDK.m in Sources */,
