@@ -21,10 +21,10 @@ class IntroducePresenter: IntroduceModuleInput, IntroduceViewOutput, IntroduceIn
     }
     
     func onStartUsingLifeBox(){
-        
+        self.router.onGoToRegister()
     }
     
     func onLoginButton(){
-        
+        self.router.onGoToLogin()
     }
 }

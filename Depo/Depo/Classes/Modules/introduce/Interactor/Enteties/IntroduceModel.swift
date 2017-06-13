@@ -10,5 +10,5 @@ import UIKit
 
 class IntroduceModel: NSObject {
     var imageName: String! = ""
-    var text: String! = ""
+    var text: NSAttributedString! = NSAttributedString()
 }

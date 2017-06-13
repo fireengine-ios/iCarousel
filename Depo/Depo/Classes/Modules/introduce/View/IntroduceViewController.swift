@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import QuartzCore
 
 class IntroduceViewController: UIViewController, IntroduceViewInput {
 
@@ -42,12 +43,16 @@ class IntroduceViewController: UIViewController, IntroduceViewInput {
         let color = UIColor(red: 68/255, green: 204/255, blue: 208/255, alpha: 1)
         self.startUsingLifeBoxButton.setTitleColor(color, for: UIControlState.normal)
         self.startUsingLifeBoxButton.titleLabel?.font = UIFont(name: "TurkcellSaturaBol", size: 20)
-        
+        self.startUsingLifeBoxButton.layer.cornerRadius = self.startUsingLifeBoxButton.frame.size.height * 0.5
         
         self.haveAccountButton.setTitle(NSLocalizedString("I have an account, let me log in", comment: ""), for: UIControlState.normal)
         self.haveAccountButton.backgroundColor = UIColor.clear
         self.haveAccountButton.setTitleColor(UIColor.white, for: UIControlState.normal)
         self.haveAccountButton.titleLabel?.font = UIFont(name: "TurkcellSaturaBol", size: 12)
+        self.haveAccountButton.layer.borderWidth = 1.0
+        self.haveAccountButton.layer.borderColor = UIColor.white.cgColor
+        self.haveAccountButton.layer.cornerRadius = 3.0
+        self.haveAccountButton.layer.masksToBounds = true
     }
 
 
