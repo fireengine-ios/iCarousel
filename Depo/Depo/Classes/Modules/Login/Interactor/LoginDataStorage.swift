@@ -16,7 +16,7 @@ class LoginDataStorage: NSObject {
                      NSLocalizedString("Password", comment: "")]
         
         for i in 1...names.count{
-            let model = BaseCellModel(withTitle: names[i - 1])
+            let model = BaseCellModel(withTitle: names[i - 1], initialText: "", cellType: CellTypes.base)
             loginModels.append(model)
         }
     }

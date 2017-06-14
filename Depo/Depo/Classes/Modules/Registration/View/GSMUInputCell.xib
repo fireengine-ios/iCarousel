@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="TurkcellSaturaBol.ttf">
+            <string>TurkcellSaturaBol</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="GSMUserInputCellID" rowHeight="80" id="9AT-rz-3fC" customClass="GSMUserInputCell" customModule="Depo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="81"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9AT-rz-3fC" id="3lL-lm-8s2">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="80.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8fu-Cm-8Bt">
+                        <rect key="frame" x="30" y="5" width="33.5" height="19"/>
+                        <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="16"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="0.8985445205479452" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="m2A-Yc-sXL">
+                        <rect key="frame" x="87" y="42" width="288" height="38"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gTC-xV-eJp">
+                        <rect key="frame" x="30" y="39.5" width="54" height="41"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rif-Oc-MH3">
+                                <rect key="frame" x="0.0" y="8.5" width="49" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="rif-Oc-MH3" firstAttribute="leading" secondItem="gTC-xV-eJp" secondAttribute="leading" id="Uji-Hu-FFi"/>
+                            <constraint firstAttribute="width" constant="54" id="bWu-TH-pif"/>
+                            <constraint firstAttribute="height" constant="41" id="eNm-Vj-Vx4"/>
+                            <constraint firstItem="rif-Oc-MH3" firstAttribute="centerY" secondItem="gTC-xV-eJp" secondAttribute="centerY" id="o01-uA-NXK"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstItem="8fu-Cm-8Bt" firstAttribute="leading" secondItem="3lL-lm-8s2" secondAttribute="leading" constant="30" id="6Mu-30-XTs"/>
+                    <constraint firstItem="gTC-xV-eJp" firstAttribute="leading" secondItem="3lL-lm-8s2" secondAttribute="leading" constant="30" id="stV-dv-HNo"/>
+                    <constraint firstItem="8fu-Cm-8Bt" firstAttribute="top" secondItem="3lL-lm-8s2" secondAttribute="top" constant="5" id="t0k-lh-s6U"/>
+                    <constraint firstAttribute="bottom" secondItem="gTC-xV-eJp" secondAttribute="bottom" id="x07-wt-UJO"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="gsmCodeContainerView" destination="gTC-xV-eJp" id="bxr-gd-Z1l"/>
+                <outlet property="gsmCountryCodeLabel" destination="rif-Oc-MH3" id="ZPp-x1-hmT"/>
+                <outlet property="textInputField" destination="m2A-Yc-sXL" id="H3Y-tg-mQv"/>
+                <outlet property="titleLabel" destination="8fu-Cm-8Bt" id="33c-Lb-2HG"/>
+            </connections>
+            <point key="canvasLocation" x="17.5" y="0.5"/>
+        </tableViewCell>
+    </objects>
+</document>

@@ -12,4 +12,6 @@ protocol RegistrationInteractorInput {
     
     func requestTitle()
     func prepareModels()
+    func requestGSMCountryCodes()
+    func signUPUser(email: String, phone: String, passport: String, repassword: String)
 }

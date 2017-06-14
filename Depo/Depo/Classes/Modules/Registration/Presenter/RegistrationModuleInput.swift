@@ -7,7 +7,5 @@
 //
 
 protocol RegistrationModuleInput: class {
-
-//    func setupModels(models: [BaseCellModel])
     
 }

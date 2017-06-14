@@ -1027,6 +1027,13 @@
 		8C2044641EEA8E6900642627 /* BaseUserInputCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2044631EEA8E6900642627 /* BaseUserInputCellView.swift */; };
 		8C4A9D0F1EEAD99B001D2465 /* TermsAndServicesScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C4A9D0E1EEAD99B001D2465 /* TermsAndServicesScreen.xib */; };
 		8C8387F81EE9767C00AB89B9 /* RegistrationScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C8387F71EE9767C00AB89B9 /* RegistrationScreen.xib */; };
+		8CFA182B1EEEB77000AF236E /* CountryPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA182A1EEEB77000AF236E /* CountryPickerView.swift */; };
+		8CFA182D1EEEB78800AF236E /* CountryPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CFA182C1EEEB78800AF236E /* CountryPicker.xib */; };
+		8CFA182F1EEEC47900AF236E /* GSMUserInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA182E1EEEC47900AF236E /* GSMUserInputCell.swift */; };
+		8CFA18311EEEC9FD00AF236E /* CellTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA18301EEEC9FD00AF236E /* CellTypes.swift */; };
+		8CFA18331EEFBB4800AF236E /* GSMUInputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CFA18321EEFBB4800AF236E /* GSMUInputCell.xib */; };
+		8CFA183C1EF0089A00AF236E /* GSMCodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA183B1EF0089A00AF236E /* GSMCodeModel.swift */; };
+		8CFA183E1EF00A1000AF236E /* CountiesGSMCodeCompositor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA183D1EF00A1000AF236E /* CountiesGSMCodeCompositor.swift */; };
 		94112A981CCA7DE00050E9B1 /* DropboxStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94112A971CCA7DE00050E9B1 /* DropboxStatusCell.m */; };
 		941496611CCF559D008A8D0C /* GroupedPhotosAndVideosController.m in Sources */ = {isa = PBXBuildFile; fileRef = 941496601CCF559D008A8D0C /* GroupedPhotosAndVideosController.m */; };
 		941496641CCF5E51008A8D0C /* GroupedPhotosCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 941496631CCF5E51008A8D0C /* GroupedPhotosCell.m */; };
@@ -2772,6 +2779,13 @@
 		8C4A9D0E1EEAD99B001D2465 /* TermsAndServicesScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TermsAndServicesScreen.xib; sourceTree = "<group>"; };
 		8C8387F71EE9767C00AB89B9 /* RegistrationScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistrationScreen.xib; sourceTree = "<group>"; };
 		8CDC6A3281516662EEFBF8A5 /* IntroduceViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceViewInput.swift; sourceTree = "<group>"; };
+		8CFA182A1EEEB77000AF236E /* CountryPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryPickerView.swift; sourceTree = "<group>"; };
+		8CFA182C1EEEB78800AF236E /* CountryPicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CountryPicker.xib; sourceTree = "<group>"; };
+		8CFA182E1EEEC47900AF236E /* GSMUserInputCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSMUserInputCell.swift; sourceTree = "<group>"; };
+		8CFA18301EEEC9FD00AF236E /* CellTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellTypes.swift; sourceTree = "<group>"; };
+		8CFA18321EEFBB4800AF236E /* GSMUInputCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GSMUInputCell.xib; sourceTree = "<group>"; };
+		8CFA183B1EF0089A00AF236E /* GSMCodeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSMCodeModel.swift; sourceTree = "<group>"; };
+		8CFA183D1EF00A1000AF236E /* CountiesGSMCodeCompositor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountiesGSMCodeCompositor.swift; sourceTree = "<group>"; };
 		90C97731562E4ACF6D86E22E /* TermsAndServicesInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesInteractorInput.swift; sourceTree = "<group>"; };
 		931900C1D8314FD173F701DC /* TermsAndServicesRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesRouterInput.swift; sourceTree = "<group>"; };
 		94112A961CCA7DE00050E9B1 /* DropboxStatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxStatusCell.h; sourceTree = "<group>"; };
@@ -5598,6 +5612,7 @@
 			isa = PBXGroup;
 			children = (
 				8C049C5A1EEC83420086DA84 /* BaseCellModel.swift */,
+				8CFA183B1EF0089A00AF236E /* GSMCodeModel.swift */,
 			);
 			name = Enteties;
 			sourceTree = "<group>";
@@ -5681,8 +5696,47 @@
 			children = (
 				8C049C5C1EEC85DD0086DA84 /* ValidationService.swift */,
 				8C049C601EED63BC0086DA84 /* DataStorage.swift */,
+				8CFA183D1EF00A1000AF236E /* CountiesGSMCodeCompositor.swift */,
 			);
 			name = Services;
+			sourceTree = "<group>";
+		};
+		8CFA18291EEEB73400AF236E /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				8CFA18361EEFBC5500AF236E /* Cells */,
+				8CFA182C1EEEB78800AF236E /* CountryPicker.xib */,
+				8CFA182A1EEEB77000AF236E /* CountryPickerView.swift */,
+			);
+			name = SubViews;
+			sourceTree = "<group>";
+		};
+		8CFA18341EEFBC0200AF236E /* BaseInputCell */ = {
+			isa = PBXGroup;
+			children = (
+				8C2044611EEA8E4100642627 /* BaseUserInputCell.xib */,
+				8C2044631EEA8E6900642627 /* BaseUserInputCellView.swift */,
+			);
+			name = BaseInputCell;
+			sourceTree = "<group>";
+		};
+		8CFA18351EEFBC2B00AF236E /* GSMInputCell */ = {
+			isa = PBXGroup;
+			children = (
+				8CFA182E1EEEC47900AF236E /* GSMUserInputCell.swift */,
+				8CFA18321EEFBB4800AF236E /* GSMUInputCell.xib */,
+			);
+			name = GSMInputCell;
+			sourceTree = "<group>";
+		};
+		8CFA18361EEFBC5500AF236E /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				8CFA18301EEEC9FD00AF236E /* CellTypes.swift */,
+				8CFA18351EEFBC2B00AF236E /* GSMInputCell */,
+				8CFA18341EEFBC0200AF236E /* BaseInputCell */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 		94F130C41D2496C70086BDBB /* social */ = {
@@ -5796,12 +5850,11 @@
 		F6726BE035768C2FD9A85010 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8CFA18291EEEB73400AF236E /* SubViews */,
 				04CF1643276D50FAE9FC2305 /* RegistrationViewInput.swift */,
 				A44DB6B541540CC3F60A6E22 /* RegistrationViewController.swift */,
 				2B4738D31A12B7DD8C76B4E7 /* RegistrationViewOutput.swift */,
 				8C8387F71EE9767C00AB89B9 /* RegistrationScreen.xib */,
-				8C2044611EEA8E4100642627 /* BaseUserInputCell.xib */,
-				8C2044631EEA8E6900642627 /* BaseUserInputCellView.swift */,
 				8C049C571EEC7DC60086DA84 /* RegistrationDataSource.swift */,
 			);
 			path = View;
@@ -6298,6 +6351,7 @@
 				94884C9D1C90C63D006722F7 /* icon_set_pass@2x.png in Resources */,
 				051CB3B319D2F6F700E5FC88 /* preloader_icon.png in Resources */,
 				052AE42C1A1D08260039DD7F /* cloud_icon.png in Resources */,
+				8CFA18331EEFBB4800AF236E /* GSMUInputCell.xib in Resources */,
 				94E549311CC6BA43003CB5DC /* icon_dialog_success@3x.png in Resources */,
 				058337EE19EDA01300DCF0C5 /* bttn-video-pause.png in Resources */,
 				051CB3F019D2F71200E5FC88 /* mini_play_icon.png in Resources */,
@@ -6512,6 +6566,7 @@
 				0526448719D5A26400B63759 /* remove_icon@2x.png in Resources */,
 				5695E6E91E1D11F000351109 /* icon_location@3x.png in Resources */,
 				0589064A19CC2B9500A9E517 /* yellow_fav_icon.png in Resources */,
+				8CFA182D1EEEB78800AF236E /* CountryPicker.xib in Resources */,
 				94E5E6601E24F8E4008B0216 /* icon_notsync@3x.png in Resources */,
 				94E549221CC6BA34003CB5DC /* icon_complaint@2x.png in Resources */,
 				79BDD58E1E8268C800765599 /* signup_button@2x.png in Resources */,
@@ -7071,6 +7126,7 @@
 				67FDC4341EC47D7D00AADDD8 /* NSObject+GCDThreadSafe.m in Sources */,
 				05403F1919F5584300AED10A /* ElasticSearchDao.m in Sources */,
 				7C032B8A1EEFFD39006532C8 /* TextInputView.swift in Sources */,
+				8CFA182F1EEEC47900AF236E /* GSMUserInputCell.swift in Sources */,
 				94DCA1031D3CB3FC000965AE /* CellographMainController.m in Sources */,
 				053D0ED819DAC959006A13E0 /* MyModalController.m in Sources */,
 				9433BCFC1D21DC7500991483 /* PromoCodeActivateDao.m in Sources */,
@@ -7234,6 +7290,7 @@
 				05C0E2011A06ABD7005E1E92 /* MoveModalFooterView.m in Sources */,
 				56A0DE4E1E6445D800553462 /* InternetDataUsage.m in Sources */,
 				94C7CEE81D2C42C50040897A /* SelectiblePhotoListModalController.m in Sources */,
+				8CFA183C1EF0089A00AF236E /* GSMCodeModel.swift in Sources */,
 				057942471C3EEFB500899923 /* SendVerificationEmailDao.m in Sources */,
 				057942441C3EEFA500899923 /* VerifyPhoneDao.m in Sources */,
 				05A938241AF6AE9100AE2892 /* Configuration.m in Sources */,
@@ -7321,6 +7378,7 @@
 				05E0705F1AB977850038BE68 /* ConstantsDao.m in Sources */,
 				05AF7C981A1CA22200F5011A /* RecentActivityHeaderView.m in Sources */,
 				792233951EBB020000955F90 /* ContactSyncTutorialView.m in Sources */,
+				8CFA183E1EF00A1000AF236E /* CountiesGSMCodeCompositor.swift in Sources */,
 				94FAE0C31D2F2B4300BC9F77 /* VideofyFinalInfoController.m in Sources */,
 				052644B219D5A2A600B63759 /* SettingsUploadController.m in Sources */,
 				05C6C7011B3C123C00CB6CE5 /* TTTAttributedLabel.m in Sources */,
@@ -7458,6 +7516,7 @@
 				058BC2421A30E7100007F4DE /* AuthResponse.m in Sources */,
 				050D4C321A31E17200809A01 /* PostLoginSyncPhotoController.m in Sources */,
 				8C049C8E1EEE8E7F0086DA84 /* LoginViewController.swift in Sources */,
+				8CFA18311EEEC9FD00AF236E /* CellTypes.swift in Sources */,
 				790B9E151E7A84F700DD7DA0 /* CountrySelectionCell.m in Sources */,
 				0515F2FF1C469A3C0098081C /* RevisitedStorageController.m in Sources */,
 				94FAE0B11D2F119300BC9F77 /* VideofyFooterView.m in Sources */,
@@ -7481,6 +7540,7 @@
 				059C9EC71A07DC60000C54D9 /* FolderDetailModalController.m in Sources */,
 				94F43B291E8692E200B32814 /* FileDetailsDao.m in Sources */,
 				05D2B19D19E67C6900FC309D /* MainPhotoAlbumCell.m in Sources */,
+				8CFA182B1EEEB77000AF236E /* CountryPickerView.swift in Sources */,
 				05A484591A6C610400793A90 /* UIImage+Resize.m in Sources */,
 				05C7145C1A7823C400C467D9 /* RadiusDao.m in Sources */,
 				05DEB1C91A80C16B007793DD /* MigrateDao.m in Sources */,

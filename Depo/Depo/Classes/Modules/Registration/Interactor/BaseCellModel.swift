@@ -10,10 +10,13 @@ import Foundation
 
 class BaseCellModel {
     var title = ""
-    var inputField = ""
+    var inputText = ""
+    var type: CellTypes = .base
     
-    init(withTitle title: String) {
+    init(withTitle title: String, initialText text: String, cellType type: CellTypes) {
         self.title = title
+        self.inputText = text
+        self.type = type
     }
     
 }
