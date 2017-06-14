@@ -16,8 +16,8 @@ class LoginDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     func setupTableView(tableView: UITableView){
         self.tableView = tableView
-        let nib = UINib(nibName: "BaseUserInputCell", bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: "BaseUserInputCell")
+        let nib = UINib(nibName: "inputCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: "BaseUserInputCellViewID")
     }
     
     func setupCellsWithModels(models:[BaseCellModel]){
@@ -41,7 +41,7 @@ class LoginDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "BaseUserInputCell", for: indexPath) as! BaseUserInputCellView
+        let cell = tableView.dequeueReusableCell(withIdentifier: "BaseUserInputCellViewID", for: indexPath) as! BaseUserInputCellView
         let model = self.tableDataMArray[indexPath.row]
         cell.titleLabel.text = model.title
         cell.textInputField.text = ""

@@ -21,11 +21,6 @@ class CountryPickerView: UIView {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-//        debugPrint("here we go ",Bundle.main.loadNibNamed("CountryPicker", owner: self, options: nil))
-//        if let subview = Bundle.main.loadNibNamed("CountryPicker", owner: self, options: nil)?.first as? UIView {
-//            self.addSubview(subview)
-//        }
-        
     }
     
 }
