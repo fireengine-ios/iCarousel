@@ -17,7 +17,11 @@ protocol RegistrationViewInput: class {
 
     func setupInitialState(withModels: [BaseCellModel])
 
-    func validationResults(forRow: Int, withValue: String, result: NSError?)
+//    func validationResults(forRow: Int, withValue: String, result: NSError?)
+    
+    func setupPicker(withModels: [GSMCodeModel])
+    
+    func prepareNavController()
     
 //    func setupRow(forRowIdex rowIndex: Int, withTitle title: String)
 }

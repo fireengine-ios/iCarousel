@@ -19,6 +19,7 @@ class RegistrationPresenter: RegistrationModuleInput, RegistrationViewOutput, Re
     
     func prepareCells() {
         self.interactor.prepareModels()
+        self.interactor.requestGSMCountryCodes()
     }
     
     func userInputed(forRow:Int, withValue: String) {
@@ -29,22 +30,6 @@ class RegistrationPresenter: RegistrationModuleInput, RegistrationViewOutput, Re
         self.view.setupInitialState(withModels: models)
     }
     
-//    func isValid(forPhone: String?) -> Bool {
-//        return true
-//    }
-//    
-//    func getTitle(forIndex index: Int) -> String? {
-//        return nil
-//    }
-//    
-//    func getRowHeight(forIndex index: Int) -> CGFloat {
-//        return 80
-//    }
-//    
-//    func getNumberOfRows() -> Int {
-//        return 5 
-//    }
-    
     func setupModels(models: [BaseCellModel]) {
         
     }
@@ -53,18 +38,25 @@ class RegistrationPresenter: RegistrationModuleInput, RegistrationViewOutput, Re
         debugPrint("titile is ", title)
     }
     
-    func handleNextAction() {
-        //test----
-        self.interactor.requestTitle()//for row, now just for test
-        //----test
+    func nextButtonPressed(withNavController navController: UINavigationController, email: String, phone: String, password: String, repassword: String) {
+        self.interactor.signUPUser(email: email, phone: phone, passport: password, repassword: repassword)
         
-        //in actuality - validate all info?
-        //send router message to change vc
-        self.router.routNextVC()
+//self.router.routNextVC(wihtNavigationController: navController)
     }
     
-    func handleTermsAndServices(withNavController navController: UINavigationController) {
+    func validatedUserInfo(withResult result: String) {
+        self.view.prepareNavController()
+    }
+    
+    func readyForPassing(withNavController navController: UINavigationController) {
         self.router.routNextVC(wihtNavigationController: navController)
     }
     
+    func validatedUserInfo(withResult result: Bool) {
+        
+    }
+    
+    func composedGSMCCodes(models:[GSMCodeModel]) {
+        self.view.setupPicker(withModels: models)
+    }
 }

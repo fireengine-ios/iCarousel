@@ -14,6 +14,11 @@ class BaseUserInputCellView: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var textInputField: UITextField!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.textInputField.becomeFirstResponder()
+    }
+    
     func setupCell(withTitle title: String, inputText text: String, cellType type: CellTypes) {
         self.titleLabel.text = title
         self.textInputField.text = text

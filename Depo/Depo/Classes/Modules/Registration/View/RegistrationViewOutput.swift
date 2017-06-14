@@ -20,14 +20,8 @@ protocol RegistrationViewOutput {
     func prepareCells()
     
     func userInputed(forRow:Int, withValue: String)
-//    func isValid(forPhone: String?) -> Bool
-//    
-//    func getTitle(forIndex index: Int) -> String?
-//    func getNumberOfRows() -> Int
-//    func getRowHeight(forIndex index: Int) -> CGFloat
-    
-    func handleNextAction()
-    
-    func handleTermsAndServices(withNavController navController: UINavigationController)
+
+    func readyForPassing(withNavController navController: UINavigationController)
+    func nextButtonPressed(withNavController navController: UINavigationController, email: String, phone: String, password: String, repassword: String)
     
 }

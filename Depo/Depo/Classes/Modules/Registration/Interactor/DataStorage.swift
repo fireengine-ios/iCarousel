@@ -12,10 +12,12 @@ class DataStorage {
     
     let numberOfModels = 4
     let titles = ["E-Mail", "GSM Number", "Password", "Re-Enter Password"]//TODO: LOCALISE!
-    let initialTexts = ["You have to fill in your mail", "", "You have to fill in a password", "You have to fill in a password"]//TODO: Localise as well
+    let initialTexts = ["   You have to fill in your mail", "", "   You have to fill in a password", "  You have to fill in a password"]//TODO: Localise as well
     let cellTypes: [CellTypes] = [.base, .phone, .base, .base]
     
     var models: [BaseCellModel] = []
+    var gsmModels: [GSMCodeModel] = []
+    
     
     func getModels() -> [BaseCellModel] {
         if self.models.count == 0 {
