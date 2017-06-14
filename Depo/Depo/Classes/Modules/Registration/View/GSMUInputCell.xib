@@ -34,7 +34,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                        <textInputTraits key="textInputTraits" keyboardType="namePhonePad"/>
+                        <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="done"/>
                     </textField>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gTC-xV-eJp">
                         <rect key="frame" x="30" y="32" width="54" height="41"/>

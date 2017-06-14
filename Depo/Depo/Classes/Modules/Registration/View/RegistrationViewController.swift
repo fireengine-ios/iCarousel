@@ -125,18 +125,8 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
         if let cell = cell as? BaseUserInputCellView {
             return cell.textInputField.text!
         }
-//        switch cell {
-//        case is BaseUserInputCellView:
-//            return cell.textInputField.text
-//        case is GSMUserInputCell:
-//            let gsmCodeWithPhone = self.dataSource.getGSMCode(forRow: forRow) + cell.textFieldValue!
-//            return gsmCodeWithPhone
-////        case <#pattern#>: password cell
-////            <#code#>
-//        default:
-//            break
-//        }
-        return ""//textFieldValue!
+
+        return ""
     }
     
     func prepareNavController() {

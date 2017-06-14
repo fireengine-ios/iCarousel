@@ -9,5 +9,9 @@
 class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
 
     weak var output: PhoneVereficationInteractorOutput!
-
+    
+    func setupTimer() {
+        
+    }
+    
 }

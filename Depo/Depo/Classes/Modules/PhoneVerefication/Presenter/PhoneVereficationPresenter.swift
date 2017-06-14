@@ -13,6 +13,6 @@ class PhoneVereficationPresenter: PhoneVereficationModuleInput, PhoneVereficatio
     var router: PhoneVereficationRouterInput!
 
     func viewIsReady() {
-
+//        setupTimer
     }
 }

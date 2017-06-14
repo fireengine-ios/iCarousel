@@ -24,6 +24,7 @@ class GSMUserInputCell: UITableViewCell {//BaseUserInputCellView {
     override func awakeFromNib() {
         super.awakeFromNib()
         gsmCodeContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(GSMUserInputCell.codeViewTouched)))
+        self.textInputField.delegate = self
     }
     
     func setupCell(withTitle title: String, inputText text: String, cellType type: CellTypes) {
@@ -37,5 +38,12 @@ class GSMUserInputCell: UITableViewCell {//BaseUserInputCellView {
     
     func codeViewTouched() {
         self.delegate?.codeViewGotTapped()
+    }
+}
+
+extension GSMUserInputCell: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.textInputField.resignFirstResponder()
+        return false
     }
 }
