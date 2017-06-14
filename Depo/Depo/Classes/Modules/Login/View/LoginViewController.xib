@@ -28,8 +28,11 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZUi-xv-OhT">
-                    <rect key="frame" x="0.0" y="64" width="375" height="349"/>
+                    <rect key="frame" x="0.0" y="213" width="375" height="200"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="200" id="d2Y-ww-jWd"/>
+                    </constraints>
                     <color key="sectionIndexBackgroundColor" red="0.023596025971353463" green="0.0" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F62-WO-wVy">
@@ -103,7 +106,7 @@
                 <constraint firstAttribute="trailing" secondItem="F62-WO-wVy" secondAttribute="trailing" id="dRb-aZ-lf7"/>
                 <constraint firstAttribute="trailing" secondItem="VaL-qI-xdB" secondAttribute="trailing" id="g8T-rg-Qu4"/>
                 <constraint firstAttribute="bottom" secondItem="VaL-qI-xdB" secondAttribute="bottom" id="rDi-bM-Mv5"/>
-                <constraint firstItem="ZUi-xv-OhT" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="64" id="uPJ-9e-V16"/>
+                <constraint firstItem="ZUi-xv-OhT" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="top" constant="64" id="uPJ-9e-V16"/>
                 <constraint firstAttribute="trailing" secondItem="ZUi-xv-OhT" secondAttribute="trailing" id="yik-of-nsK"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
