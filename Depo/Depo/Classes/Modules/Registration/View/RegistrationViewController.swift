@@ -17,22 +17,21 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
 
     @IBOutlet weak var pickerBottomConstraint: NSLayoutConstraint!
     
-    @IBOutlet var picker: CountryPickerView!
+    @IBOutlet weak var pickerView: UIPickerView!
+    
     
     @IBOutlet weak var pickerContainer: UIView!
     
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+//        Bundle.main.loadNibNamed("CountryPicker", owner: self, options: nil)
+        self.pickerView.dataSource = self.dataSource
+        self.pickerView.delegate = self.dataSource
         
-        self.navigationItem.title = NSLocalizedString(TextConstants.registerTitle, comment: "")
-//        output.viewIsReady()
-        Bundle.main.loadNibNamed("CountryPicker", owner: self, options: nil)
-        self.picker.pickerView.dataSource = self.dataSource
-        self.picker.pickerView.delegate = self.dataSource
+//        picker.frame = CGRect(x: 0, y: 0, width: self.pickerContainer.bounds.width, height: self.pickerContainer.bounds.height)
+//        self.pickerContainer.addSubview(self.picker)
         
-        picker.frame = CGRect(x: 0, y: 0, width: self.pickerContainer.bounds.width, height: self.pickerContainer.bounds.height)
-        self.pickerContainer.addSubview(picker)
         self.dataSource.output = self
         self.userRegistrationTable.dataSource = self.dataSource
         self.userRegistrationTable.delegate = self.dataSource
@@ -41,8 +40,45 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.userRegistrationTable.register(UINib(nibName: "BaseUserInputCell", bundle: nil), forCellReuseIdentifier: "BaseUserInputCell")
+        self.userRegistrationTable.register(UINib(nibName: "inputCell", bundle: nil), forCellReuseIdentifier: "BaseUserInputCellViewID")
         self.userRegistrationTable.register(UINib(nibName: "GSMUInputCell", bundle: nil), forCellReuseIdentifier: "GSMUserInputCellID")
+//        self.setupConstraintsForPicker()
+    }
+    
+    private func setupConstraintsForPicker() {
+
+//        let firstView = self.picker.pickerView//self.pickerContainer
+//        let secondView = self.pickerContainer//self.picker.superview
+//        let topConstraint = NSLayoutConstraint(item: firstView,
+//                                               attribute: .top,
+//                                               relatedBy: .equal,
+//                                               toItem: secondView,
+//                                               attribute: .top,
+//                                               multiplier: 1,
+//                                               constant: 0)
+//        let botConstraint = NSLayoutConstraint(item: firstView,
+//                                               attribute: .bottom,
+//                                               relatedBy: .equal,
+//                                               toItem: secondView,
+//                                               attribute: .bottom,
+//                                               multiplier: 1,
+//                                               constant: 0)
+//        let leadingConstraint = NSLayoutConstraint(item: firstView,
+//                                               attribute: .leading,
+//                                               relatedBy: .equal,
+//                                               toItem: secondView,
+//                                               attribute: .leading,
+//                                               multiplier: 1,
+//                                               constant: 0)
+//        let trailingConstraint = NSLayoutConstraint(item: firstView,
+//                                               attribute: .trailing,
+//                                               relatedBy: .equal,
+//                                               toItem: secondView,
+//                                               attribute: .trailing,
+//                                               multiplier: 1,
+//                                               constant: 0)
+//        self.picker.addConstraint(trailingConstraint)
+////        self.picker.addConstraints([topConstraint, botConstraint, leadingConstraint, trailingConstraint])
         
     }
     
@@ -67,7 +103,7 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
     func setupPicker(withModels: [GSMCodeModel]) {
         
         self.dataSource.setupPickerCells(withModels: withModels)
-        self.picker.pickerView.reloadAllComponents()
+        self.pickerView.reloadAllComponents()
     }
     
     @IBAction func nextActionHandler(_ sender: Any) {
@@ -79,17 +115,18 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
     }
     
     private func getTextFieldValue(forRow: Int) -> String {
-
-        guard let baseCell = self.userRegistrationTable.cellForRow(at: IndexPath(item: forRow, section: 0)) as? BaseUserInputCellView else {
+        guard let cell = self.userRegistrationTable.cellForRow(at: IndexPath(item: forRow, section: 0)) else {
             return ""
         }
-        let textFieldValue = baseCell.textInputField.text
-        if baseCell is GSMUserInputCell {
-            let gsmCodeWithPhone = self.dataSource.getGSMCode(forRow: forRow) + textFieldValue!
+        if let cell = cell as? GSMUserInputCell {
+            let gsmCodeWithPhone = self.dataSource.getGSMCode(forRow: forRow) + cell.textInputField.text!
             return gsmCodeWithPhone
         }
+        if let cell = cell as? BaseUserInputCellView {
+            return cell.textInputField.text!
+        }
 
-        return textFieldValue!
+        return ""
     }
     
     func prepareNavController() {
@@ -102,9 +139,10 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
     //MARK: - DataSource output
     @IBAction func pickerChoosePressed(_ sender: Any) {
         self.pickerBottomConstraint.constant = -271
-        let currentRow = self.picker.pickerView.selectedRow(inComponent: 0)
+        self.view.layoutIfNeeded()
+        let currentRow = self.pickerView.selectedRow(inComponent: 0)
         self.dataSource.changeGSMCodeLabel(withRow: currentRow)
-        self.userRegistrationTable.reloadRows(at: [IndexPath(item: 1, section: 0)], with: UITableViewRowAnimation.automatic)
+        self.userRegistrationTable.reloadRows(at: [IndexPath(item: 1, section: 0)], with: UITableViewRowAnimation.none)
 //        self.dataSource.current
         
     }

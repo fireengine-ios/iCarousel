@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16D30" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,15 +15,15 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" id="hd8-AZ-F7L" customClass="CountryPickerView" customModule="Depo" customModuleProvider="target">
+        <view contentMode="scaleAspectFit" preservesSuperviewLayoutMargins="YES" id="hd8-AZ-F7L" customClass="CountryPickerView" customModule="Depo" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="287"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MhF-0c-J4B">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="54"/>
+                <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="MhF-0c-J4B">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="shc-PV-Sv5">
-                            <rect key="frame" x="296" y="10.5" width="59" height="33"/>
+                            <rect key="frame" x="301" y="-1.5" width="59" height="33"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <state key="normal" title="Choose">
@@ -35,26 +34,28 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="1" alpha="0.8985445205479452" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="1" alpha="0.95331228595890416" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="shc-PV-Sv5" secondAttribute="trailing" constant="20" id="2fv-rv-TiT"/>
-                        <constraint firstItem="shc-PV-Sv5" firstAttribute="centerY" secondItem="MhF-0c-J4B" secondAttribute="centerY" id="n9C-jK-RGC"/>
-                        <constraint firstAttribute="height" constant="54" id="vb0-LM-s5h"/>
+                        <constraint firstItem="shc-PV-Sv5" firstAttribute="centerY" secondItem="MhF-0c-J4B" secondAttribute="centerY" id="T6S-Ff-qMh"/>
+                        <constraint firstAttribute="height" constant="30" id="h2F-9G-EDO"/>
+                        <constraint firstAttribute="trailing" secondItem="shc-PV-Sv5" secondAttribute="trailing" constant="15" id="nqR-vd-wST"/>
                     </constraints>
                 </view>
-                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BAa-MF-p3c">
-                    <rect key="frame" x="-8" y="54" width="391" height="233"/>
+                <pickerView contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="BAa-MF-p3c">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="287"/>
                 </pickerView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="BAa-MF-p3c" secondAttribute="bottom" id="IgW-Qd-pac"/>
-                <constraint firstItem="BAa-MF-p3c" firstAttribute="top" secondItem="MhF-0c-J4B" secondAttribute="bottom" id="JCa-t9-Xsy"/>
-                <constraint firstAttribute="trailing" secondItem="MhF-0c-J4B" secondAttribute="trailing" id="KCm-7D-AyA"/>
-                <constraint firstItem="BAa-MF-p3c" firstAttribute="leadingMargin" secondItem="hd8-AZ-F7L" secondAttribute="leading" id="P7Y-14-Qjf"/>
-                <constraint firstItem="MhF-0c-J4B" firstAttribute="leading" secondItem="hd8-AZ-F7L" secondAttribute="leading" id="ZiM-qb-kI2"/>
-                <constraint firstAttribute="trailing" secondItem="BAa-MF-p3c" secondAttribute="trailingMargin" id="lDY-g7-448"/>
-                <constraint firstItem="MhF-0c-J4B" firstAttribute="top" secondItem="hd8-AZ-F7L" secondAttribute="top" id="znA-Hf-4kF"/>
+                <constraint firstAttribute="trailing" secondItem="BAa-MF-p3c" secondAttribute="trailing" id="1qc-M9-dEc"/>
+                <constraint firstAttribute="trailing" secondItem="MhF-0c-J4B" secondAttribute="trailing" id="8jW-NB-jH7"/>
+                <constraint firstAttribute="trailing" secondItem="BAa-MF-p3c" secondAttribute="trailing" id="NDI-rd-S8g"/>
+                <constraint firstAttribute="bottom" secondItem="BAa-MF-p3c" secondAttribute="bottom" id="Nth-li-i8X"/>
+                <constraint firstItem="BAa-MF-p3c" firstAttribute="centerY" secondItem="hd8-AZ-F7L" secondAttribute="centerY" id="SbV-pp-heD"/>
+                <constraint firstItem="MhF-0c-J4B" firstAttribute="top" secondItem="hd8-AZ-F7L" secondAttribute="top" id="T7C-Wt-aBT"/>
+                <constraint firstItem="MhF-0c-J4B" firstAttribute="leading" secondItem="hd8-AZ-F7L" secondAttribute="leading" id="ja3-Qa-wC6"/>
+                <constraint firstItem="BAa-MF-p3c" firstAttribute="leading" secondItem="hd8-AZ-F7L" secondAttribute="leading" id="kbV-3H-Tp0"/>
+                <constraint firstItem="BAa-MF-p3c" firstAttribute="leading" secondItem="hd8-AZ-F7L" secondAttribute="leading" id="rwc-nm-Tf4"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

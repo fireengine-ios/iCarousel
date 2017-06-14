@@ -12,25 +12,23 @@ protocol GSMCodeCellDelegate {
     func codeViewGotTapped()
 }
 
-class GSMUserInputCell: BaseUserInputCellView {
+class GSMUserInputCell: UITableViewCell {//BaseUserInputCellView {
 
     @IBOutlet weak var gsmCountryCodeLabel: UILabel!
     @IBOutlet weak var gsmCodeContainerView: UIView!
+    @IBOutlet weak var textInputField: UITextField!
+    @IBOutlet weak var titleLabel: UILabel!
     
     var delegate: GSMCodeCellDelegate?
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         gsmCodeContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(GSMUserInputCell.codeViewTouched)))
+        self.textInputField.delegate = self
     }
     
-    override func setupCell(withTitle title: String, inputText text: String, cellType type: CellTypes) {
+    func setupCell(withTitle title: String, inputText text: String, cellType type: CellTypes) {
         self.titleLabel.text = title
-//        self.gsmCountryCodeLabel.text = "+376"
     }
     
     func setupGSMCode(code: String) {
@@ -39,14 +37,13 @@ class GSMUserInputCell: BaseUserInputCellView {
     }
     
     func codeViewTouched() {
-        debugPrint("TAP TAP TAP")
         self.delegate?.codeViewGotTapped()
     }
-    
-//    func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        <#code#>
-//    }
-//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        self.events?.viewTapped()
-//    }
+}
+
+extension GSMUserInputCell: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.textInputField.resignFirstResponder()
+        return false
+    }
 }

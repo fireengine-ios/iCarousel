@@ -51,7 +51,7 @@ class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSour
         if indexPath.row == 1 {
             tempoRow = tableView.dequeueReusableCell(withIdentifier: "GSMUserInputCellID", for: indexPath)
         } else {
-            tempoRow = tableView.dequeueReusableCell(withIdentifier: "BaseUserInputCell", for: indexPath)
+            tempoRow = tableView.dequeueReusableCell(withIdentifier: "BaseUserInputCellViewID", for: indexPath)
         }
         
         self.setupCell(withCell: tempoRow, atIndex: indexPath.row)
@@ -59,27 +59,32 @@ class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSour
         return tempoRow
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.needsUpdateConstraints()
+        cell.layoutIfNeeded()
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
     
     private func setupCell(withCell cell: UITableViewCell, atIndex index: Int) {
+        if cells.count < 1 {
+            return
+        }
+        let model = cells[index]
+        
         if let cell = cell as? GSMUserInputCell {
             cell.delegate = self
             cell.setupGSMCode(code: currentGSMCode)
-        }
-        guard let cell = cell as? BaseUserInputCellView else {
-            return
-        }
-        if cells.count > 0 {
-            let model = cells[index]
             cell.setupCell(withTitle: model.title, inputText: model.inputText, cellType: model.type)
+        } else if let cell = cell as? BaseUserInputCellView {
+            cell.setupBaseCell(withTitle: model.title, inputText: model.inputText, cellType: model.type)
         }
     }
     
     func codeViewGotTapped() {
         self.output?.pickerGotTapped()
-        
     }
     
 }
