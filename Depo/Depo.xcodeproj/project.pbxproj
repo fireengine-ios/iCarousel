@@ -55,9 +55,6 @@
 		050D4C411A31E77F00809A01 /* sync_prefs@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 050D4C3F1A31E77F00809A01 /* sync_prefs@2x.png */; };
 		050F4CCC1AB3267F008B0B96 /* VolumeSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050F4CCB1AB3267F008B0B96 /* VolumeSliderView.m */; };
 		05127EC319E19775002C2228 /* FileDetailInWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05127EC219E19775002C2228 /* FileDetailInWebViewController.m */; };
-		051412A019D46393000EAE63 /* Default_old.png in Resources */ = {isa = PBXBuildFile; fileRef = 0514129D19D46393000EAE63 /* Default_old.png */; };
-		051412A119D46393000EAE63 /* Default_old@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0514129E19D46393000EAE63 /* Default_old@2x.png */; };
-		051412A219D46393000EAE63 /* Default-568h_old@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0514129F19D46393000EAE63 /* Default-568h_old@2x.png */; };
 		051412A519D46748000EAE63 /* FloatingAddMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 051412A419D46748000EAE63 /* FloatingAddMenu.m */; };
 		051412A819D46A84000EAE63 /* AddTypeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 051412A719D46A84000EAE63 /* AddTypeButton.m */; };
 		05144B5B1A0905FA00B2A414 /* SimpleMusicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05144B5A1A0905FA00B2A414 /* SimpleMusicCell.m */; };
@@ -65,7 +62,6 @@
 		05144B611A090B8000B2A414 /* SimpleDocCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05144B601A090B8000B2A414 /* SimpleDocCell.m */; };
 		05144B641A091CA800B2A414 /* no_music_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 05144B621A091CA800B2A414 /* no_music_icon.png */; };
 		05144B651A091CA800B2A414 /* no_music_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05144B631A091CA800B2A414 /* no_music_icon@2x.png */; };
-		0514A6291BF4D1030084E0AB /* BaseBgController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0514A6261BF4D1030084E0AB /* BaseBgController.m */; };
 		0514A62A1BF4D1030084E0AB /* CropAndShareListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0514A6281BF4D1030084E0AB /* CropAndShareListController.m */; };
 		0515706419E5AC2600C62B98 /* PhotoHeaderSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0515706319E5AC2600C62B98 /* PhotoHeaderSegmentView.m */; };
 		0515706719E5B34100C62B98 /* SquareImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0515706619E5B34100C62B98 /* SquareImageView.m */; };
@@ -256,9 +252,6 @@
 		052644BD19D5A32300B63759 /* TitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 052644B719D5A32300B63759 /* TitleCell.m */; };
 		052644BE19D5A32300B63759 /* HeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 052644B919D5A32300B63759 /* HeaderCell.m */; };
 		052644BF19D5A32300B63759 /* TextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 052644BB19D5A32300B63759 /* TextCell.m */; };
-		052A222619F682CA000C3C75 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 052A222419F682CA000C3C75 /* Default-568h@2x.png */; };
-		052A222719F682CA000C3C75 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 052A222519F682CA000C3C75 /* Default.png */; };
-		052A222919F682D1000C3C75 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 052A222819F682D1000C3C75 /* Default@2x.png */; };
 		052A222C19F6846B000C3C75 /* default_loading_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 052A222A19F6846B000C3C75 /* default_loading_bg.png */; };
 		052A222D19F6846B000C3C75 /* default_loading_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 052A222B19F6846B000C3C75 /* default_loading_bg@2x.png */; };
 		052A223019F6853C000C3C75 /* inner_loading_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 052A222E19F6853C000C3C75 /* inner_loading_bg@2x.png */; };
@@ -721,7 +714,6 @@
 		2443E1541B6BB0C5001C274D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2443E1531B6BB0C5001C274D /* AudioToolbox.framework */; };
 		2443E1571B6BB5F3001C274D /* AudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2443E1561B6BB5F3001C274D /* AudioManager.m */; };
 		247268911B7CC29900804E56 /* CustomAdvertisementView.m in Sources */ = {isa = PBXBuildFile; fileRef = 247268901B7CC29900804E56 /* CustomAdvertisementView.m */; };
-		24B268BB1BCE7A8600FA8E58 /* BgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B268BA1BCE7A8600FA8E58 /* BgViewController.m */; };
 		24FE7B0B1B6A539D007B53A0 /* PrintWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24FE7B0A1B6A539D007B53A0 /* PrintWebViewController.m */; };
 		24FE7B0E1B6A5A98007B53A0 /* white_print_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 24FE7B0C1B6A5A98007B53A0 /* white_print_icon.png */; };
 		24FE7B0F1B6A5A98007B53A0 /* white_print_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24FE7B0D1B6A5A98007B53A0 /* white_print_icon@2x.png */; };
@@ -1102,8 +1094,6 @@
 		94B3BE1B1D7FC8440086D05E /* icon_settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B3BE191D7FC8440086D05E /* icon_settings@2x.png */; };
 		94B3BE1E1D7FC84D0086D05E /* icon_m_cellograph@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B3BE1C1D7FC84D0086D05E /* icon_m_cellograph@3x.png */; };
 		94B3BE1F1D7FC84D0086D05E /* icon_settings@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B3BE1D1D7FC84D0086D05E /* icon_settings@3x.png */; };
-		94B3BE221D810EFA0086D05E /* Default_750.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B3BE201D810EFA0086D05E /* Default_750.png */; };
-		94B3BE231D810EFA0086D05E /* Default_1242.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B3BE211D810EFA0086D05E /* Default_1242.png */; };
 		94B3BE251D81E3260086D05E /* icon_locationperm@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B3BE241D81E3260086D05E /* icon_locationperm@2x.png */; };
 		94B3BE271D81E32D0086D05E /* icon_locationperm@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B3BE261D81E32D0086D05E /* icon_locationperm@3x.png */; };
 		94B3BE291D81E3340086D05E /* icon_locationperm.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B3BE281D81E3340086D05E /* icon_locationperm.png */; };
@@ -1329,9 +1319,6 @@
 		050F4CCB1AB3267F008B0B96 /* VolumeSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VolumeSliderView.m; sourceTree = "<group>"; };
 		05127EC119E19775002C2228 /* FileDetailInWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileDetailInWebViewController.h; sourceTree = "<group>"; };
 		05127EC219E19775002C2228 /* FileDetailInWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileDetailInWebViewController.m; sourceTree = "<group>"; };
-		0514129D19D46393000EAE63 /* Default_old.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default_old.png; sourceTree = "<group>"; };
-		0514129E19D46393000EAE63 /* Default_old@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default_old@2x.png"; sourceTree = "<group>"; };
-		0514129F19D46393000EAE63 /* Default-568h_old@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h_old@2x.png"; sourceTree = "<group>"; };
 		051412A319D46748000EAE63 /* FloatingAddMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FloatingAddMenu.h; sourceTree = "<group>"; };
 		051412A419D46748000EAE63 /* FloatingAddMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FloatingAddMenu.m; sourceTree = "<group>"; };
 		051412A619D46A84000EAE63 /* AddTypeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTypeButton.h; sourceTree = "<group>"; };
@@ -1344,8 +1331,6 @@
 		05144B601A090B8000B2A414 /* SimpleDocCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleDocCell.m; sourceTree = "<group>"; };
 		05144B621A091CA800B2A414 /* no_music_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = no_music_icon.png; sourceTree = "<group>"; };
 		05144B631A091CA800B2A414 /* no_music_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no_music_icon@2x.png"; sourceTree = "<group>"; };
-		0514A6251BF4D1030084E0AB /* BaseBgController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseBgController.h; sourceTree = "<group>"; };
-		0514A6261BF4D1030084E0AB /* BaseBgController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseBgController.m; sourceTree = "<group>"; };
 		0514A6271BF4D1030084E0AB /* CropAndShareListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropAndShareListController.h; sourceTree = "<group>"; };
 		0514A6281BF4D1030084E0AB /* CropAndShareListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CropAndShareListController.m; sourceTree = "<group>"; };
 		0515706219E5AC2600C62B98 /* PhotoHeaderSegmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoHeaderSegmentView.h; sourceTree = "<group>"; };
@@ -1600,9 +1585,6 @@
 		052644BB19D5A32300B63759 /* TextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextCell.m; sourceTree = "<group>"; };
 		052644BC19D5A32300B63759 /* TitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleCell.h; sourceTree = "<group>"; };
 		052644C019D5A3A400B63759 /* SettingsDocumentsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsDocumentsController.h; sourceTree = "<group>"; };
-		052A222419F682CA000C3C75 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		052A222519F682CA000C3C75 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		052A222819F682D1000C3C75 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		052A222A19F6846B000C3C75 /* default_loading_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default_loading_bg.png; sourceTree = "<group>"; };
 		052A222B19F6846B000C3C75 /* default_loading_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default_loading_bg@2x.png"; sourceTree = "<group>"; };
 		052A222E19F6853C000C3C75 /* inner_loading_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inner_loading_bg@2x.png"; sourceTree = "<group>"; };
@@ -2266,8 +2248,6 @@
 		2443E1561B6BB5F3001C274D /* AudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioManager.m; sourceTree = "<group>"; };
 		2472688F1B7CC29900804E56 /* CustomAdvertisementView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAdvertisementView.h; sourceTree = "<group>"; };
 		247268901B7CC29900804E56 /* CustomAdvertisementView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAdvertisementView.m; sourceTree = "<group>"; };
-		24B268B91BCE7A8600FA8E58 /* BgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BgViewController.h; sourceTree = "<group>"; };
-		24B268BA1BCE7A8600FA8E58 /* BgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BgViewController.m; sourceTree = "<group>"; };
 		24FE7B091B6A539D007B53A0 /* PrintWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrintWebViewController.h; sourceTree = "<group>"; };
 		24FE7B0A1B6A539D007B53A0 /* PrintWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrintWebViewController.m; sourceTree = "<group>"; };
 		24FE7B0C1B6A5A98007B53A0 /* white_print_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white_print_icon.png; sourceTree = "<group>"; };
@@ -2745,8 +2725,6 @@
 		94B3BE191D7FC8440086D05E /* icon_settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_settings@2x.png"; sourceTree = "<group>"; };
 		94B3BE1C1D7FC84D0086D05E /* icon_m_cellograph@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_m_cellograph@3x.png"; sourceTree = "<group>"; };
 		94B3BE1D1D7FC84D0086D05E /* icon_settings@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_settings@3x.png"; sourceTree = "<group>"; };
-		94B3BE201D810EFA0086D05E /* Default_750.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default_750.png; sourceTree = "<group>"; };
-		94B3BE211D810EFA0086D05E /* Default_1242.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default_1242.png; sourceTree = "<group>"; };
 		94B3BE241D81E3260086D05E /* icon_locationperm@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_locationperm@2x.png"; sourceTree = "<group>"; };
 		94B3BE261D81E32D0086D05E /* icon_locationperm@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_locationperm@3x.png"; sourceTree = "<group>"; };
 		94B3BE281D81E3340086D05E /* icon_locationperm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_locationperm.png; sourceTree = "<group>"; };
@@ -2943,7 +2921,11 @@
 		ABE98EEA0ADECA5F8D994CBE /* Pods-Lifebox Picker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lifebox Picker.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lifebox Picker/Pods-Lifebox Picker.release.xcconfig"; sourceTree = "<group>"; };
 		C0E7C8A905CBF89702F18211 /* Pods-DepoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DepoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DepoTests/Pods-DepoTests.release.xcconfig"; sourceTree = "<group>"; };
 		CBF0B3F0018BAF98A072C67E /* Pods-DepoTests.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DepoTests.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-DepoTests/Pods-DepoTests.enterprise.xcconfig"; sourceTree = "<group>"; };
-		CEB362021EE94AE10019EFE1 /* Depo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Depo-Bridging-Header.h"; sourceTree = "<group>"; };
+		CEF5C5E01EF13B5C004B8027 /* DepoTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DepoTests-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		CEF5C5E11EF13B5C004B8027 /* AutoSyncWidget-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AutoSyncWidget-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		CEF5C5E21EF13B5C004B8027 /* DepoShareExtension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DepoShareExtension-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		CEF5C5E31EF13B5C004B8027 /* Lifebox Picker-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lifebox Picker-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		CEF5C5EA1EF14C46004B8027 /* Depo-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Depo-Bridging-Header.h"; sourceTree = "<group>"; };
 		D4C8F4F05CE1353BA41D6D3D /* Pods-AutoSyncWidget.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutoSyncWidget.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-AutoSyncWidget/Pods-AutoSyncWidget.appstore.xcconfig"; sourceTree = "<group>"; };
 		E73401209409A25DD66BA718 /* Pods-DepoShareExtension.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DepoShareExtension.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-DepoShareExtension/Pods-DepoShareExtension.appstore.xcconfig"; sourceTree = "<group>"; };
 		E844113A243E98F5843100EA /* Pods-Lifebox Picker.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lifebox Picker.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-Lifebox Picker/Pods-Lifebox Picker.enterprise.xcconfig"; sourceTree = "<group>"; };
@@ -3129,7 +3111,7 @@
 		051E1DFD19CAC2F900FD1E03 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				CEB362021EE94AE10019EFE1 /* Depo-Bridging-Header.h */,
+				CEF5C5EA1EF14C46004B8027 /* Depo-Bridging-Header.h */,
 				051E1E0419CAC2F900FD1E03 /* Depo-Prefix.pch */,
 				790B9E161E7ABC5E00DD7DA0 /* countryiso.json */,
 				05DEB1CF1A80EBA6007793DD /* terms.txt */,
@@ -3165,6 +3147,7 @@
 		051E1E1619CAC2F900FD1E03 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CEF5C5E01EF13B5C004B8027 /* DepoTests-Bridging-Header.h */,
 				051E1E1719CAC2F900FD1E03 /* DepoTests-Info.plist */,
 				051E1E1819CAC2F900FD1E03 /* InfoPlist.strings */,
 			);
@@ -3176,8 +3159,6 @@
 			children = (
 				94FB097B1DE2065B00DA666D /* DevicePhotosModalController.m */,
 				94FB09831DE2065B00DA666D /* DevicePhotosModalController.h */,
-				0514A6251BF4D1030084E0AB /* BaseBgController.h */,
-				0514A6261BF4D1030084E0AB /* BaseBgController.m */,
 				0514A6271BF4D1030084E0AB /* CropAndShareListController.h */,
 				0514A6281BF4D1030084E0AB /* CropAndShareListController.m */,
 				052160AA19E31AA70007B321 /* profile */,
@@ -3277,8 +3258,6 @@
 				05AD502D1A7ED76200C40777 /* MigrateStatusController.m */,
 				24FE7B091B6A539D007B53A0 /* PrintWebViewController.h */,
 				24FE7B0A1B6A539D007B53A0 /* PrintWebViewController.m */,
-				24B268B91BCE7A8600FA8E58 /* BgViewController.h */,
-				24B268BA1BCE7A8600FA8E58 /* BgViewController.m */,
 				057942481C3FDC0C00899923 /* SignupController.h */,
 				057942491C3FDC0C00899923 /* SignupController.m */,
 				0579424B1C3FDCC400899923 /* OTPController.h */,
@@ -4073,8 +4052,6 @@
 				569749671DEEF9C9005C0460 /* textline_1240@3x.png */,
 				569749651DEEF9B1005C0460 /* textline_1240@2x.png */,
 				569749631DEEF999005C0460 /* textline_1240.png */,
-				94B3BE201D810EFA0086D05E /* Default_750.png */,
-				94B3BE211D810EFA0086D05E /* Default_1242.png */,
 				533215111DEF439B00FE7289 /* icon_bottom_indir@2x.png */,
 				533215131DEF43A600FE7289 /* icon_bottom_indir@3x.png */,
 				944A09E21DA570A300FC1BBD /* icon_search.png */,
@@ -4438,9 +4415,6 @@
 				050A7B1419F7CBB600B084B9 /* volume_mute@2x.png */,
 				050A7B1519F7CBB600B084B9 /* volume_current_level@2x.png */,
 				050A7B1619F7CBB600B084B9 /* volume_level@2x.png */,
-				052A222819F682D1000C3C75 /* Default@2x.png */,
-				052A222419F682CA000C3C75 /* Default-568h@2x.png */,
-				052A222519F682CA000C3C75 /* Default.png */,
 				052A222A19F6846B000C3C75 /* default_loading_bg.png */,
 				052A222B19F6846B000C3C75 /* default_loading_bg@2x.png */,
 				058337E019ED9EEA00DCF0C5 /* airplay_icon.png */,
@@ -4529,9 +4503,6 @@
 				051CB3B819D2F71200E5FC88 /* nav_detail_icon.png */,
 				051CB3B919D2F71200E5FC88 /* nav_delete_icon.png */,
 				051CB3BA19D2F71200E5FC88 /* nav_blue_tick.png */,
-				0514129D19D46393000EAE63 /* Default_old.png */,
-				0514129E19D46393000EAE63 /* Default_old@2x.png */,
-				0514129F19D46393000EAE63 /* Default-568h_old@2x.png */,
 				051CB3BB19D2F71200E5FC88 /* mini_play_icon.png */,
 				051CB3BC19D2F71200E5FC88 /* green_check_icon.png */,
 				051CB3BD19D2F71200E5FC88 /* folder_icon.png */,
@@ -4721,6 +4692,7 @@
 		05C3A37B1B57DFAB002AB49A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CEF5C5E21EF13B5C004B8027 /* DepoShareExtension-Bridging-Header.h */,
 				0576F7E21B5F878E00BD271B /* Info-AppStore.plist */,
 				0576F7E31B5F878E00BD271B /* Info-Enterprise.plist */,
 				05C3A37C1B57DFAB002AB49A /* Info.plist */,
@@ -4747,6 +4719,7 @@
 		05C850A51ACD63F700F976DE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CEF5C5E11EF13B5C004B8027 /* AutoSyncWidget-Bridging-Header.h */,
 				05AD7F861AD801B20052153A /* added_tick.png */,
 				05AD7F871AD801B20052153A /* added_tick@2x.png */,
 				0592FC391ACEC7580083A6C6 /* Info-AppStore.plist */,
@@ -4908,6 +4881,7 @@
 		5694628A1E6D3D860043FC67 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CEF5C5E31EF13B5C004B8027 /* Lifebox Picker-Bridging-Header.h */,
 				5697DFA71E7179D2000A37AC /* Info-AppStore.plist */,
 				5697DFA51E71798C000A37AC /* Info-Enterprise.plist */,
 				569462921E6D3D860043FC67 /* Info.plist */,
@@ -5210,11 +5184,13 @@
 						};
 					};
 					051E1E0D19CAC2F900FD1E03 = {
+						LastSwiftMigration = 0830;
 						TestTargetID = 051E1DF219CAC2F900FD1E03;
 					};
 					05C3A3781B57DFAB002AB49A = {
 						CreatedOnToolsVersion = 6.3.1;
 						DevelopmentTeam = PT569ZA878;
+						LastSwiftMigration = 0830;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -5224,6 +5200,7 @@
 					05C850A01ACD63F700F976DE = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = DB3TU6GTY2;
+						LastSwiftMigration = 0830;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -5233,6 +5210,7 @@
 					569462871E6D3D850043FC67 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = PT569ZA878;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -5283,7 +5261,6 @@
 				05A7CE5E1A7FC0FD00020B6F /* yuvarlakbulut.png in Resources */,
 				9433BD0F1D21EB8200991483 /* icon_dbtasi@2x.png in Resources */,
 				0526448F19D5A26400B63759 /* notifications_icon@2x.png in Resources */,
-				051412A119D46393000EAE63 /* Default_old@2x.png in Resources */,
 				058337FE19EDA08200DCF0C5 /* player_progress.png in Resources */,
 				94C7CEFF1D2CE8300040897A /* overlay_grid_blank.png in Resources */,
 				059C04691A8521C5007B18BE /* contact_sync_icon@2x.png in Resources */,
@@ -5318,7 +5295,6 @@
 				05224AB619DC4A2D00214767 /* added_tick@2x.png in Resources */,
 				058337EB19EDA00200DCF0C5 /* video-player-bckgrnd@2x.png in Resources */,
 				9433BD1D1D22070B00991483 /* img_dbtasi.png in Resources */,
-				052A222619F682CA000C3C75 /* Default-568h@2x.png in Resources */,
 				051CB40B19D2F71200E5FC88 /* action_bar_preloader@2x.png in Resources */,
 				070A21DC1E87B0AB002385F7 /* contact_progress@3x.png in Resources */,
 				9498C0071D537B34009AF159 /* icon_more@2x.png in Resources */,
@@ -5635,9 +5611,7 @@
 				057C9D771A2B494E001DDDEC /* docs_icon@2x.png in Resources */,
 				0526448419D5A26400B63759 /* tick_icon.png in Resources */,
 				051CB40519D2F71200E5FC88 /* nav_delete_icon@2x.png in Resources */,
-				94B3BE231D810EFA0086D05E /* Default_1242.png in Resources */,
 				0589062719CC226D00A9E517 /* pause_icon.png in Resources */,
-				051412A019D46393000EAE63 /* Default_old.png in Resources */,
 				94884C8A1C907B02006722F7 /* welcome_cloud.png in Resources */,
 				051CB3FB19D2F71200E5FC88 /* blue_add_music_icon.png in Resources */,
 				070A21DA1E87B0AB002385F7 /* contact_progress.png in Resources */,
@@ -5674,7 +5648,6 @@
 				949BB5BC1D6F1FC300BED9DB /* bg_mtour_6@3x.jpg in Resources */,
 				0526449619D5A26400B63759 /* cellphone_icon.png in Resources */,
 				94884CA31C91A243006722F7 /* icon_editnum@2x.png in Resources */,
-				052A222719F682CA000C3C75 /* Default.png in Resources */,
 				567408B01DFFC17E003DF541 /* overlay_wt_en.png in Resources */,
 				0589061F19CC226D00A9E517 /* photos_icon.png in Resources */,
 				94C7CEDE1D2B97420040897A /* icon_createstory.png in Resources */,
@@ -5859,7 +5832,6 @@
 				949BB5831D6F1FA100BED9DB /* bg_mtour_1.jpg in Resources */,
 				056BEC831A8AA7CF00BA0805 /* pre_login_info1.png in Resources */,
 				79BDD5961E826DBC00765599 /* icon_ustbar_close@2x.png in Resources */,
-				052A222919F682D1000C3C75 /* Default@2x.png in Resources */,
 				058219E11A386829001FA679 /* nav_favourite_inactive_icon@2x.png in Resources */,
 				94E549161CC6BA27003CB5DC /* icon_menu_bizeulasin_w.png in Resources */,
 				05C6C7161B3C212A00CB6CE5 /* tamam@3x.png in Resources */,
@@ -5902,7 +5874,6 @@
 				94FAE0E11D2F7E6300BC9F77 /* minibutton_pause@3x.png in Resources */,
 				0589062319CC226D00A9E517 /* documents_icon.png in Resources */,
 				790B9D8A1E71762100DD7DA0 /* icon_dropdown@3x.png in Resources */,
-				94B3BE221D810EFA0086D05E /* Default_750.png in Resources */,
 				94E549321CC6BA43003CB5DC /* icon_menu_bizeulasin_w@3x.png in Resources */,
 				94FBAEF71D5B924300C8E6F1 /* img_lifebox@2x.png in Resources */,
 				56A0DE3F1E5C28AA00553462 /* progress_fill_pattern@2x.png in Resources */,
@@ -5953,7 +5924,6 @@
 				94B2F3491D373E53009CD8B1 /* icon_sm@2x.png in Resources */,
 				94FAE0E71D2F7E7800BC9F77 /* icon_list_circle.png in Resources */,
 				0589063519CC2A0400A9E517 /* fav_icon.png in Resources */,
-				051412A219D46393000EAE63 /* Default-568h_old@2x.png in Resources */,
 				79BDD58F1E8268C800765599 /* signup_button@3x.png in Resources */,
 				569B5CB51DEF9AB7008153F5 /* icon_captcha_refresh@3x.png in Resources */,
 				7922338F1EBAF9F500955F90 /* Lifebox-1@3x.png in Resources */,
@@ -6313,7 +6283,6 @@
 				56A0DE471E5E239900553462 /* QuotaInfoCell.m in Sources */,
 				0526444819D546BB00B63759 /* MapUtil.m in Sources */,
 				070234911EA08E1400716C27 /* ContactUtil.m in Sources */,
-				0514A6291BF4D1030084E0AB /* BaseBgController.m in Sources */,
 				94FAE0CF1D2F6EDF00BC9F77 /* FBStatusDao.m in Sources */,
 				05A9382D1AF6AE9100AE2892 /* UpdateCheck.m in Sources */,
 				05754C141AC711EA00727B42 /* SyncInfoHeaderView.m in Sources */,
@@ -6404,7 +6373,6 @@
 				051E1E3919CAC85100FD1E03 /* BaseDao.m in Sources */,
 				94F130CA1D24970D0086BDBB /* InstagramController.m in Sources */,
 				056AC8FE19D15EA200AC96C3 /* CacheUtil.m in Sources */,
-				24B268BB1BCE7A8600FA8E58 /* BgViewController.m in Sources */,
 				070A220F1E89322B002385F7 /* ContactSyncFooterElement.m in Sources */,
 				05B4F4E51A74524100F3A7EC /* AccountInfoDao.m in Sources */,
 				050F4CCC1AB3267F008B0B96 /* VolumeSliderView.m in Sources */,
@@ -6917,7 +6885,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8ABF89FF6605635ADBC2E20B /* Pods-Depo.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -6956,7 +6923,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5a820945-d25b-44c5-a898-0c4ec6ece99d";
 				PROVISIONING_PROFILE_SPECIFIER = LifeboxDevelopment_20161228;
-				SWIFT_OBJC_BRIDGING_HEADER = "Depo/Depo-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Depo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -6968,7 +6935,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9931E7D51C7D9D14A47A2DC0 /* Pods-Depo.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -7002,7 +6968,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "bea1bda0-fadb-4c10-974c-465aa05b7d4b";
 				PROVISIONING_PROFILE_SPECIFIER = LifeboxDevelopment_20161228;
-				SWIFT_OBJC_BRIDGING_HEADER = "Depo/Depo-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Depo-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -7014,6 +6980,7 @@
 			baseConfigurationReference = 4506CAFF4D0E7AC665C195BA /* Pods-DepoTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Depo.app/Depo";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Mahir Kemal Tarlan (R2478SCTN5)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -7027,9 +6994,13 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "DepoTests/DepoTests-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.igones.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5c66594a-9b29-4508-b075-fa999f7b8ac0";
+				SWIFT_OBJC_BRIDGING_HEADER = "DepoTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -7040,6 +7011,7 @@
 			baseConfigurationReference = C0E7C8A905CBF89702F18211 /* Pods-DepoTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Depo.app/Depo";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Mahir Kemal Tarlan (AQ3G89KT47)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -7049,9 +7021,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/Depo-Prefix.pch";
 				INFOPLIST_FILE = "DepoTests/DepoTests-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.igones.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8918983d-d48a-4fa6-8df7-a18e2747765c";
+				SWIFT_OBJC_BRIDGING_HEADER = "DepoTests-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -7102,7 +7077,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 643835B23E5FE22939F4D239 /* Pods-Depo.appstore.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -7135,7 +7109,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "c7326830-eaca-4f1e-9bbb-765e70c0d2fc";
 				PROVISIONING_PROFILE_SPECIFIER = LifeboxDevelopment_20161228;
-				SWIFT_OBJC_BRIDGING_HEADER = "Depo/Depo-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Depo-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -7147,6 +7121,7 @@
 			baseConfigurationReference = 3A570FBC82798DEEDCBB44C3 /* Pods-DepoTests.appstore.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Depo.app/Depo";
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -7155,9 +7130,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/Depo-Prefix.pch";
 				INFOPLIST_FILE = "DepoTests/DepoTests-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.igones.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "17f5dfc5-c650-490f-9658-b3191d40a262";
+				SWIFT_OBJC_BRIDGING_HEADER = "DepoTests-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -7208,7 +7186,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 849AE724A4CD02D1BB1D73F2 /* Pods-Depo.enterprise.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -7242,7 +7219,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "3d2683f7-410b-4d3d-82ee-4404d6095878";
 				PROVISIONING_PROFILE_SPECIFIER = LifeboxDevelopment_20161228;
-				SWIFT_OBJC_BRIDGING_HEADER = "Depo/Depo-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Depo-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -7254,6 +7231,7 @@
 			baseConfigurationReference = CBF0B3F0018BAF98A072C67E /* Pods-DepoTests.enterprise.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Depo.app/Depo";
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -7262,9 +7240,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Depo/Depo-Prefix.pch";
 				INFOPLIST_FILE = "DepoTests/DepoTests-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.igones.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5910c814-1c2d-4395-b8f8-abe8da320e00";
+				SWIFT_OBJC_BRIDGING_HEADER = "DepoTests-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -7276,6 +7257,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = DepoShareExtension/DepoShareExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Metin Güler (TVW6JVQFBH)";
@@ -7299,6 +7281,9 @@
 				PROVISIONING_PROFILE = "4ace2ce8-8ca8-496e-89d6-893057d745b8";
 				PROVISIONING_PROFILE_SPECIFIER = LifeboxShareExtensionDevelopment_20161228;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "DepoShareExtension-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -7308,6 +7293,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = DepoShareExtension/DepoShareExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Omer Burak Kir (7BESVJQ8SV)";
@@ -7327,6 +7313,8 @@
 				PROVISIONING_PROFILE = "0aac4bf1-b2ac-4805-a609-0e3e7103584e";
 				PROVISIONING_PROFILE_SPECIFIER = LifeboxShareExtensionDevelopment_20161228;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "DepoShareExtension-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -7336,6 +7324,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = "DepoShareExtension/DepoShareExtension-AppStore.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Teknoloji (7YZS5NTGYH)";
@@ -7355,6 +7344,8 @@
 				PROVISIONING_PROFILE = "e9952454-e231-4aec-bcde-c65838f462c5";
 				PROVISIONING_PROFILE_SPECIFIER = LifeboxShareExtensionDevelopment_20161228;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "DepoShareExtension-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = AppStore;
 		};
@@ -7364,6 +7355,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = "DepoShareExtension/DepoShareExtension-Enterprise.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
@@ -7383,6 +7375,8 @@
 				PROVISIONING_PROFILE = "28015523-0160-4d5a-a6fe-ca542c23e12a";
 				PROVISIONING_PROFILE_SPECIFIER = LifeboxShareExtensionDevelopment_20161228;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "DepoShareExtension-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Enterprise;
 		};
@@ -7390,6 +7384,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E9E6BDC205798EB090D76132 /* Pods-AutoSyncWidget.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Metin Güler (TVW6JVQFBH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Metin Güler (TVW6JVQFBH)";
@@ -7408,6 +7403,9 @@
 				PROVISIONING_PROFILE = "b1fa0d18-6d78-4783-b5e6-a0642a02374d";
 				PROVISIONING_PROFILE_SPECIFIER = LifeboxAutoSyncWidgetDevelopment_20161228;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "AutoSyncWidget-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -7416,6 +7414,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 17545413B405154400F3AF17 /* Pods-AutoSyncWidget.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = AutoSyncWidget/AutoSyncWidget.entitlements;
 				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]" = "";
@@ -7434,6 +7433,8 @@
 				PROVISIONING_PROFILE = "377a0435-8b47-471b-8a0b-0d78b7a81d5c";
 				PROVISIONING_PROFILE_SPECIFIER = LifeboxAutoSyncWidgetDevelopment_20161228;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "AutoSyncWidget-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -7442,6 +7443,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D4C8F4F05CE1353BA41D6D3D /* Pods-AutoSyncWidget.appstore.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = "AutoSyncWidget/AutoSyncWidget-AppStore.entitlements";
 				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]" = "AutoSyncWidget/AutoSyncWidget-AppStore.entitlements";
@@ -7460,6 +7462,8 @@
 				PROVISIONING_PROFILE = "e19f8959-ec7f-4af7-851b-b8c39fc8de90";
 				PROVISIONING_PROFILE_SPECIFIER = LifeboxAutoSyncWidgetDevelopment_20161228;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "AutoSyncWidget-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = AppStore;
@@ -7468,6 +7472,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A7DCF0A18045DBBE4B2C523E /* Pods-AutoSyncWidget.enterprise.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = "AutoSyncWidget/AutoSyncWidget-Enterprise.entitlements";
 				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]" = "AutoSyncWidget/AutoSyncWidget-Enterprise.entitlements";
@@ -7486,6 +7491,8 @@
 				PROVISIONING_PROFILE = "d508c49a-e11e-4c93-b749-190ea8e720d2";
 				PROVISIONING_PROFILE_SPECIFIER = LifeboxAutoSyncWidgetDevelopment_20161228;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "AutoSyncWidget-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Enterprise;
@@ -7495,6 +7502,7 @@
 			baseConfigurationReference = 59DF3A544E79D5BF457D76AD /* Pods-Lifebox Picker.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
@@ -7522,6 +7530,9 @@
 				PROVISIONING_PROFILE = "8bc577eb-f0e6-4f03-af73-310602d58d47";
 				PROVISIONING_PROFILE_SPECIFIER = LifeboxDocumentPicker_20170310;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Lifebox Picker-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -7530,6 +7541,7 @@
 			baseConfigurationReference = ABE98EEA0ADECA5F8D994CBE /* Pods-Lifebox Picker.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
@@ -7551,6 +7563,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.rdc.lifebox2.DocumentPicker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Lifebox Picker-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -7559,6 +7573,7 @@
 			baseConfigurationReference = 7F142A19BE346559FCF5E378 /* Pods-Lifebox Picker.appstore.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
@@ -7582,6 +7597,8 @@
 				PROVISIONING_PROFILE = "dd77b80d-8e52-4a68-92c5-4ef74248c7e5";
 				PROVISIONING_PROFILE_SPECIFIER = "dd77b80d-8e52-4a68-92c5-4ef74248c7e5";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Lifebox Picker-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = AppStore;
 		};
@@ -7590,6 +7607,7 @@
 			baseConfigurationReference = E844113A243E98F5843100EA /* Pods-Lifebox Picker.enterprise.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
@@ -7613,6 +7631,8 @@
 				PROVISIONING_PROFILE = "0275d411-5d80-418d-a8bf-4a2467bea7b1";
 				PROVISIONING_PROFILE_SPECIFIER = "0275d411-5d80-418d-a8bf-4a2467bea7b1";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Lifebox Picker-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Enterprise;
 		};
