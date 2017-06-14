@@ -18,6 +18,8 @@
 #import "FileInfoGroup.h"
 #import "DepoHttpManager.h"
 
+@class Eula;
+
 //TODO test -> prod
 //#define BASE_URL @"https://adepo.turkcell.com.tr/api"
 #define BASE_URL @"https://tcloudstb.turkcell.com.tr/api"
@@ -220,6 +222,11 @@
 #define OSP_USER @"proxyuser"
 
 #define OSP_PASS @"proxyuser2013"
+
+@protocol DaoDelegate <NSObject>
+- (void)onSucces:(NSObject *)successObject;
+- (void)onFail:(NSString *)failString;
+@end
 
 @interface BaseDao : NSObject {
 	SEL successMethod;

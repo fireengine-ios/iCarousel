@@ -37,13 +37,15 @@ class LoginDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100.0
+        return 81.0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BaseUserInputCell", for: indexPath) as! BaseUserInputCellView
+        cell.selectionStyle = UITableViewCellSelectionStyle.none
         let model = self.tableDataMArray[indexPath.row]
         cell.titleLabel.text = model.title
+        cell.warningImage.isHidden = true
         cell.textInputField.text = ""
         return cell
     }

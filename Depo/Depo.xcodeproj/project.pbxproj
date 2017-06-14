@@ -998,6 +998,8 @@
 		7C032B8B1EEFFD39006532C8 /* TextInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C032B881EEFFD39006532C8 /* TextInputView.xib */; };
 		7C032B8D1EEFFF25006532C8 /* ButtonWithCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B8C1EEFFF25006532C8 /* ButtonWithCorner.swift */; };
 		7C032B901EF014E9006532C8 /* LoginDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B8F1EF014E9006532C8 /* LoginDataStorage.swift */; };
+		7C032B941EF12414006532C8 /* EULA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B931EF12414006532C8 /* EULA.swift */; };
+		7C032B961EF1260A006532C8 /* EULAProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B951EF1260A006532C8 /* EULAProtocol.swift */; };
 		7E17BA74388D3670D1FEEBBA /* RegistrationViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF1643276D50FAE9FC2305 /* RegistrationViewInput.swift */; };
 		80BAF3AEB6623B739C0F967F /* RegistrationInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42B02A7891F46EEC97D1662 /* RegistrationInitializer.swift */; };
 		83AFF9A2BBEF449448186DBB /* Pods_Lifebox_Picker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F8D57D36EF6E476E6752F2C /* Pods_Lifebox_Picker.framework */; };
@@ -2747,6 +2749,8 @@
 		7C032B881EEFFD39006532C8 /* TextInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextInputView.xib; sourceTree = "<group>"; };
 		7C032B8C1EEFFF25006532C8 /* ButtonWithCorner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonWithCorner.swift; sourceTree = "<group>"; };
 		7C032B8F1EF014E9006532C8 /* LoginDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginDataStorage.swift; sourceTree = "<group>"; };
+		7C032B931EF12414006532C8 /* EULA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EULA.swift; sourceTree = "<group>"; };
+		7C032B951EF1260A006532C8 /* EULAProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EULAProtocol.swift; sourceTree = "<group>"; };
 		7C0EFB4EB989796A6FE4FDA8 /* IntroduceInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceInteractorInput.swift; sourceTree = "<group>"; };
 		7F142A19BE346559FCF5E378 /* Pods-Lifebox Picker.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lifebox Picker.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Lifebox Picker/Pods-Lifebox Picker.appstore.xcconfig"; sourceTree = "<group>"; };
 		849AE724A4CD02D1BB1D73F2 /* Pods-Depo.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Depo.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-Depo/Pods-Depo.enterprise.xcconfig"; sourceTree = "<group>"; };
@@ -5378,6 +5382,7 @@
 		69141665E4FEDA59B07584CE /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				7C032B911EF123AB006532C8 /* Services */,
 				7C032B851EEFFC1A006532C8 /* SubViews */,
 				7C032B801EEFE408006532C8 /* Constants */,
 				C206234150DD1B9E1424D61C /* Modules */,
@@ -5606,6 +5611,15 @@
 				7C032B8F1EF014E9006532C8 /* LoginDataStorage.swift */,
 			);
 			name = Services;
+			sourceTree = "<group>";
+		};
+		7C032B911EF123AB006532C8 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				7C032B951EF1260A006532C8 /* EULAProtocol.swift */,
+				7C032B931EF12414006532C8 /* EULA.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		8C049C591EEC82F00086DA84 /* Enteties */ = {
@@ -7119,6 +7133,7 @@
 				94FB09851DE2065B00DA666D /* DevicePhotoFooterView.m in Sources */,
 				058219BF1A384AF0001FA679 /* MessageCell.m in Sources */,
 				79B973AD1ED84E4B00E9F2FA /* ABLayoutAnchor+MissingAnchors.m in Sources */,
+				7C032B961EF1260A006532C8 /* EULAProtocol.swift in Sources */,
 				94A1D3C41C969F330066D92F /* UpdatePassDao.m in Sources */,
 				94FAE0C91D2F6EC500BC9F77 /* FBConnectDao.m in Sources */,
 				9433BD081D21E45500991483 /* PromotionsController.m in Sources */,
@@ -7270,6 +7285,7 @@
 				94B03AE31E76CA740026C87C /* PhotosHeaderSyncView.m in Sources */,
 				94E549001CC63480003CB5DC /* DropboxConnectDao.m in Sources */,
 				05AF7C8D1A1C9C5800F5011A /* RecentActivityLinkerFooter.m in Sources */,
+				7C032B941EF12414006532C8 /* EULA.swift in Sources */,
 				05224A9519DC1CBC00214767 /* PhotoListModalController.m in Sources */,
 				94FBAEF31D5B883C00C8E6F1 /* NewFeatureInfoController.m in Sources */,
 				942972C31D1B91FF00A4616C /* EmailChangeController.m in Sources */,

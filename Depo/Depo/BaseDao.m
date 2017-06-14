@@ -309,11 +309,19 @@
 }
 
 - (void) shouldReturnSuccessWithObject:(id) obj {
-    SuppressPerformSelectorLeakWarning([delegate performSelector:successMethod withObject:obj]);
+    if ([self.delegate respondsToSelector:@selector(onSucces:)]){
+        [self.delegate onSucces:obj];
+    }else{
+        SuppressPerformSelectorLeakWarning([delegate performSelector:successMethod withObject:obj]);
+    }
 }
 
 - (void) shouldReturnFailWithMessage:(NSString *) errorMessage {
-    SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:errorMessage]);
+    if ([self.delegate respondsToSelector:@selector(onFail:)]){
+        [self.delegate onFail:errorMessage];
+    }else{
+        SuppressPerformSelectorLeakWarning([delegate performSelector:failMethod withObject:errorMessage]);
+    }
 }
 
 - (void) shouldReturnFailWithParam:(id) param {

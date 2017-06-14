@@ -41,12 +41,13 @@
                         <fontDescription key="fontDescription" name="TurkcellSaturaIta" family="TurkcellSaturaIta" pointSize="18"/>
                         <textInputTraits key="textInputTraits" returnKeyType="done"/>
                     </textField>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i6X-dd-wW8">
-                        <rect key="frame" x="315" y="11" width="34" height="19"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r3F-8Z-TKx">
+                        <rect key="frame" x="315" y="5" width="34" height="31"/>
                         <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="16"/>
-                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                        <state key="normal" title="Show">
+                            <color key="titleColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                    </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="combinedShape" translatesAutoresizingMaskIntoConstraints="NO" id="Psc-Tq-Vo2">
                         <rect key="frame" x="329" y="41.5" width="20" height="20"/>
                     </imageView>
@@ -65,9 +66,9 @@
                     <constraint firstAttribute="bottom" secondItem="og3-cw-Vbk" secondAttribute="bottom" constant="0.5" id="PIg-Z6-bZx"/>
                     <constraint firstItem="JdG-vC-vml" firstAttribute="top" secondItem="vr7-1T-aWT" secondAttribute="top" constant="20" id="SJY-AX-8W6"/>
                     <constraint firstItem="FHx-Et-Hjd" firstAttribute="top" secondItem="vr7-1T-aWT" secondAttribute="topMargin" constant="2.5" id="VzD-4W-ln6"/>
-                    <constraint firstItem="i6X-dd-wW8" firstAttribute="centerY" secondItem="FHx-Et-Hjd" secondAttribute="centerY" id="aID-80-63h"/>
+                    <constraint firstItem="r3F-8Z-TKx" firstAttribute="centerY" secondItem="FHx-Et-Hjd" secondAttribute="centerY" id="XfK-vz-WWg"/>
+                    <constraint firstAttribute="trailing" secondItem="r3F-8Z-TKx" secondAttribute="trailing" constant="30" id="Yex-fj-ndX"/>
                     <constraint firstItem="JdG-vC-vml" firstAttribute="leading" secondItem="vr7-1T-aWT" secondAttribute="leading" constant="30" id="bWw-4i-p3V"/>
-                    <constraint firstAttribute="trailing" secondItem="i6X-dd-wW8" secondAttribute="trailing" constant="30" id="kS6-PG-hwS"/>
                     <constraint firstItem="og3-cw-Vbk" firstAttribute="leading" secondItem="vr7-1T-aWT" secondAttribute="leading" constant="30" id="nDh-y9-24J"/>
                     <constraint firstAttribute="bottomMargin" secondItem="Psc-Tq-Vo2" secondAttribute="centerY" constant="10" id="oxX-5e-9ac"/>
                     <constraint firstItem="FHx-Et-Hjd" firstAttribute="leading" secondItem="vr7-1T-aWT" secondAttribute="leading" constant="30" id="rWk-dl-X7K"/>
@@ -79,8 +80,10 @@
             <connections>
                 <outlet property="editingAccessoryView" destination="JdG-vC-vml" id="STn-Zy-zgi"/>
                 <outlet property="inputFieldLeadingConstraint" destination="bWw-4i-p3V" id="JAX-k6-htS"/>
+                <outlet property="showPasswordButton" destination="r3F-8Z-TKx" id="a5r-k6-trB"/>
                 <outlet property="textInputField" destination="JdG-vC-vml" id="NKv-Zu-ZZh"/>
                 <outlet property="titleLabel" destination="FHx-Et-Hjd" id="4TY-Js-ugu"/>
+                <outlet property="warningImage" destination="Psc-Tq-Vo2" id="AyE-ov-Ic1"/>
             </connections>
             <point key="canvasLocation" x="129.5" y="177"/>
         </tableViewCell>
