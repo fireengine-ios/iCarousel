@@ -14,4 +14,5 @@ protocol TermsAndServicesViewOutput {
     */
 
     func viewIsReady()
+    func termsApplied()
 }

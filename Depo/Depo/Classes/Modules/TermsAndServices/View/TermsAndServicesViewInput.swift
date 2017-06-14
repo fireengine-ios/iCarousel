@@ -14,4 +14,7 @@ protocol TermsAndServicesViewInput: class {
     */
 
     func setupInitialState()
+    
+    func showLoadedTermsAndUses(eula: Eula)
+    func failLoadTermsAndUses(errorString:String)
 }

@@ -9,5 +9,5 @@
 import Foundation
 
 protocol TermsAndServicesInteractorInput {
-
+    func loadTermsAndUses()
 }

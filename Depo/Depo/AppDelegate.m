@@ -301,24 +301,36 @@
 }
 
 - (void) triggerPreLogin {
-    //PreLoginController *preLogin = [[PreLoginController alloc] init];
-    //self.window.rootViewController = preLogin;
-    TermsAndServicesModuleInitializer * conf = [[TermsAndServicesModuleInitializer alloc] init];
-    TermsAndServicesViewController * contr = [[TermsAndServicesViewController alloc] initWithNibName:@"TermsAndServicesScreen" bundle:nil];
-    conf.termsandservicesViewController = contr;
-    [conf setupConfig];
-    [self.window setRootViewController:contr];
+    PreLoginController *preLogin = [[PreLoginController alloc] init];
+    self.window.rootViewController = preLogin;
     
-//    IntroduceModuleInitializer * introduceConfigurator = [[IntroduceModuleInitializer alloc] init];
-//    IntroduceViewController * introduceVC = [[IntroduceViewController alloc] initWithNibName:@"IntroduceViewController" bundle:nil];
-//    UINavigationController * nController = [[UINavigationController alloc] initWithRootViewController:introduceVC];
-//    nController.navigationBar.opaque = YES;
-//    nController.navigationBar.translucent = NO;
-//    nController.navigationBar.hidden = YES;
-//    introduceConfigurator.introduceViewController = introduceVC;
-//    [introduceConfigurator setupVC];
+//    TermsAndServicesModuleInitializer * conf = [[TermsAndServicesModuleInitializer alloc] init];
+//    TermsAndServicesViewController * contr = [[TermsAndServicesViewController alloc] initWithNibName:@"TermsAndServicesScreen" bundle:nil];
+//    conf.termsandservicesViewController = contr;
+//    [conf setupConfig];
+//    UINavigationController * nController = [[UINavigationController alloc] initWithRootViewController:contr];
+//        nController.navigationBar.opaque = YES;
+//        nController.navigationBar.translucent = YES;
+//        nController.navigationBar.hidden = NO;
+//    [self.window setRootViewController:nController];
     
-   // self.window.rootViewController = nController;
+    
+    IntroduceModuleInitializer * introduceConfigurator = [[IntroduceModuleInitializer alloc] init];
+    IntroduceViewController * introduceVC = [[IntroduceViewController alloc] initWithNibName:@"IntroduceViewController" bundle:nil];
+    UINavigationController * nController = [[UINavigationController alloc] initWithRootViewController:introduceVC];
+    
+    [nController.navigationBar setBackgroundImage:[UIImage new]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    nController.navigationBar.shadowImage = [UIImage new];
+    nController.navigationBar.translucent = YES;
+    nController.view.backgroundColor = [UIColor clearColor];
+    nController.navigationBar.tintColor = [UIColor whiteColor];
+    [nController.navigationBar setTitleTextAttributes: @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    
+    introduceConfigurator.introduceViewController = introduceVC;
+    [introduceConfigurator setupVC];
+    
+    self.window.rootViewController = nController;
 }
 
 - (void) triggerPostTermsAndMigration {
@@ -357,7 +369,7 @@
         registrConfigurator.registrationViewController = registerVC;
         [registrConfigurator setupVC];
         
-        MyNavigationController *welcomeNav = [[MyNavigationController alloc] initWithRootViewController: registrConfigurator.registrationViewController];//loginController];
+        MyNavigationController *welcomeNav = [[MyNavigationController alloc] initWithRootViewController: /*registrConfigurator.registrationViewController];//*/loginController];
         self.window.rootViewController = welcomeNav;
         
         

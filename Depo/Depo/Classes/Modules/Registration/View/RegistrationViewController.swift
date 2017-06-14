@@ -24,7 +24,8 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.navigationItem.title = NSLocalizedString(TextConstants.registerTitle, comment: "")
 //        output.viewIsReady()
         Bundle.main.loadNibNamed("CountryPicker", owner: self, options: nil)
         self.picker.pickerView.dataSource = self.dataSource

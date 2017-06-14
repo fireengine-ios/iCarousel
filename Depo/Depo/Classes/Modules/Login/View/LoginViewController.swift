@@ -26,6 +26,8 @@ class LoginViewController: UIViewController, LoginViewInput {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.title = NSLocalizedString(TextConstants.loginTitle, comment: "")
+        
         self.tableView.delegate = self.dataSource
         self.tableView.dataSource = self.dataSource
         self.dataSource.setupTableView(tableView: self.tableView)

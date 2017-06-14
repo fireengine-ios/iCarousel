@@ -17,6 +17,14 @@ struct ColorConstants {
 struct TextConstants {
     static let itroViewGoToRegisterButtonText = "Start using Lifebox now!"
     static let introViewGoToLoginButtonText = "I have an account, let me log in"
+    
+    static let termsAndUsesTitile = "Register"
+    static let termsAndUsesApplyButtonText = "Accept  Terms"
+    
+    static let loginTitle = "Login"
+    
+    static let registerTitle = "Register"
+    
 }
 
 struct FontNamesConstant {

@@ -334,7 +334,6 @@
 		0569C8391A8A324A000E0486 /* Icon_180.png in Resources */ = {isa = PBXBuildFile; fileRef = 0569C8371A8A324A000E0486 /* Icon_180.png */; };
 		056AC8FB19D15DBB00AC96C3 /* TokenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 056AC8FA19D15DBB00AC96C3 /* TokenManager.m */; };
 		056AC8FE19D15EA200AC96C3 /* CacheUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 056AC8FD19D15EA200AC96C3 /* CacheUtil.m */; };
-		056B38551A841866009292BA /* terms_old.htm in Resources */ = {isa = PBXBuildFile; fileRef = 056B38541A841866009292BA /* terms_old.htm */; };
 		056BEC781A8AA55000BA0805 /* PreLoginInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 056BEC771A8AA55000BA0805 /* PreLoginInfoView.m */; };
 		056BEC831A8AA7CF00BA0805 /* pre_login_info1.png in Resources */ = {isa = PBXBuildFile; fileRef = 056BEC791A8AA7CF00BA0805 /* pre_login_info1.png */; };
 		056BEC841A8AA7CF00BA0805 /* pre_login_info1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 056BEC7A1A8AA7CF00BA0805 /* pre_login_info1@2x.png */; };
@@ -677,8 +676,6 @@
 		05DEB1C61A80C161007793DD /* ProvisionDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DEB1C51A80C161007793DD /* ProvisionDao.m */; };
 		05DEB1C91A80C16B007793DD /* MigrateDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DEB1C81A80C16B007793DD /* MigrateDao.m */; };
 		05DEB1CC1A80C175007793DD /* MigrateStatusDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DEB1CB1A80C175007793DD /* MigrateStatusDao.m */; };
-		05DEB1CE1A80EA28007793DD /* terms.html in Resources */ = {isa = PBXBuildFile; fileRef = 05DEB1CD1A80EA28007793DD /* terms.html */; };
-		05DEB1D01A80EBA6007793DD /* terms.txt in Resources */ = {isa = PBXBuildFile; fileRef = 05DEB1CF1A80EBA6007793DD /* terms.txt */; };
 		05DEB1D21A8169D1007793DD /* CurioMapping.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05DEB1D11A8169D1007793DD /* CurioMapping.plist */; };
 		05E0705F1AB977850038BE68 /* ConstantsDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E0705E1AB977850038BE68 /* ConstantsDao.m */; };
 		05E8112F19DF09DB0063F99A /* AlbumListModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8112E19DF09DB0063F99A /* AlbumListModalController.m */; };
@@ -1105,7 +1102,6 @@
 		9454FA601CAA81FD00BF1288 /* CurrentMusicListModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9454FA5F1CAA81FD00BF1288 /* CurrentMusicListModalController.m */; };
 		9454FA631CAA821200BF1288 /* CurrentDocumentListModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9454FA621CAA821200BF1288 /* CurrentDocumentListModalController.m */; };
 		9454FA661CAA822300BF1288 /* CurrentPhotoListModalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9454FA651CAA822300BF1288 /* CurrentPhotoListModalController.m */; };
-		9456A03A1C9BECD200058896 /* terms.htm in Resources */ = {isa = PBXBuildFile; fileRef = 9456A0391C9BECD200058896 /* terms.htm */; };
 		9458AABF1E23A55E008DFCE7 /* RawTypeFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 9458AABE1E23A55E008DFCE7 /* RawTypeFile.m */; };
 		94680E041D405CB000DC5227 /* TitleWithSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94680E031D405CB000DC5227 /* TitleWithSwitchCell.m */; };
 		94680E071D416F5700DC5227 /* FBStopDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 94680E061D416F5700DC5227 /* FBStopDao.m */; };
@@ -1857,7 +1853,6 @@
 		056AC8FA19D15DBB00AC96C3 /* TokenManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TokenManager.m; sourceTree = "<group>"; };
 		056AC8FC19D15EA200AC96C3 /* CacheUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CacheUtil.h; sourceTree = "<group>"; };
 		056AC8FD19D15EA200AC96C3 /* CacheUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CacheUtil.m; sourceTree = "<group>"; };
-		056B38541A841866009292BA /* terms_old.htm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = terms_old.htm; sourceTree = "<group>"; };
 		056BEC761A8AA55000BA0805 /* PreLoginInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreLoginInfoView.h; sourceTree = "<group>"; };
 		056BEC771A8AA55000BA0805 /* PreLoginInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreLoginInfoView.m; sourceTree = "<group>"; };
 		056BEC791A8AA7CF00BA0805 /* pre_login_info1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pre_login_info1.png; sourceTree = "<group>"; };
@@ -2345,8 +2340,6 @@
 		05DEB1C81A80C16B007793DD /* MigrateDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MigrateDao.m; sourceTree = "<group>"; };
 		05DEB1CA1A80C175007793DD /* MigrateStatusDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MigrateStatusDao.h; sourceTree = "<group>"; };
 		05DEB1CB1A80C175007793DD /* MigrateStatusDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MigrateStatusDao.m; sourceTree = "<group>"; };
-		05DEB1CD1A80EA28007793DD /* terms.html */ = {isa = PBXFileReference; fileEncoding = 14; lastKnownFileType = text.html; lineEnding = 2; path = terms.html; sourceTree = "<group>"; };
-		05DEB1CF1A80EBA6007793DD /* terms.txt */ = {isa = PBXFileReference; fileEncoding = 2147483683; lastKnownFileType = text; path = terms.txt; sourceTree = "<group>"; };
 		05DEB1D11A8169D1007793DD /* CurioMapping.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CurioMapping.plist; sourceTree = "<group>"; };
 		05E0705D1AB977850038BE68 /* ConstantsDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstantsDao.h; sourceTree = "<group>"; };
 		05E0705E1AB977850038BE68 /* ConstantsDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstantsDao.m; sourceTree = "<group>"; };
@@ -2884,7 +2877,6 @@
 		9454FA621CAA821200BF1288 /* CurrentDocumentListModalController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentDocumentListModalController.m; sourceTree = "<group>"; };
 		9454FA641CAA822300BF1288 /* CurrentPhotoListModalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentPhotoListModalController.h; sourceTree = "<group>"; };
 		9454FA651CAA822300BF1288 /* CurrentPhotoListModalController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentPhotoListModalController.m; sourceTree = "<group>"; };
-		9456A0391C9BECD200058896 /* terms.htm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = terms.htm; sourceTree = "<group>"; };
 		9458AABD1E23A55E008DFCE7 /* RawTypeFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawTypeFile.h; sourceTree = "<group>"; };
 		9458AABE1E23A55E008DFCE7 /* RawTypeFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawTypeFile.m; sourceTree = "<group>"; };
 		94680E021D405CB000DC5227 /* TitleWithSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleWithSwitchCell.h; sourceTree = "<group>"; };
@@ -3438,11 +3430,7 @@
 				CEB362021EE94AE10019EFE1 /* Depo-Bridging-Header.h */,
 				051E1E0419CAC2F900FD1E03 /* Depo-Prefix.pch */,
 				790B9E161E7ABC5E00DD7DA0 /* countryiso.json */,
-				05DEB1CF1A80EBA6007793DD /* terms.txt */,
 				949BB5CA1D707B2800BED9DB /* lifebox_teaser.mp4 */,
-				9456A0391C9BECD200058896 /* terms.htm */,
-				05DEB1CD1A80EA28007793DD /* terms.html */,
-				056B38541A841866009292BA /* terms_old.htm */,
 				948C834D1DABFE2B0020DAF3 /* lifebox_EN.mp4 */,
 				948C834E1DABFE2B0020DAF3 /* lifebox_TR.mp4 */,
 				0555EF2A19F938DA0068F4CC /* Depo-AppStore-Info.plist */,
@@ -6412,7 +6400,6 @@
 				94B2F34F1D373E5C009CD8B1 /* icon_fb_aktar@3x.png in Resources */,
 				05AF7C911A1C9FE800F5011A /* recent_activity_icon@2x.png in Resources */,
 				94427C631DFEF19800FC28B5 /* scroll_pointer@3x.png in Resources */,
-				056B38551A841866009292BA /* terms_old.htm in Resources */,
 				05224AAC19DC4A2D00214767 /* selected_mask.png in Resources */,
 				944A09E81DA570BA00FC1BBD /* icon_search@2x.png in Resources */,
 				057C9D811A2B89BD001DDDEC /* shuffle@2x.png in Resources */,
@@ -6461,7 +6448,6 @@
 				05C4E4A11C4D5E8A005B28E9 /* icon_dialog_positive@2x.png in Resources */,
 				05C6C7141B3C212A00CB6CE5 /* tamam@1x.png in Resources */,
 				568FEFE91E2CF01700AF4FFB /* progress_bg_pattern.png in Resources */,
-				9456A03A1C9BECD200058896 /* terms.htm in Resources */,
 				564A318D1A933FE300C5B755 /* profile_icon.png in Resources */,
 				057C9D771A2B494E001DDDEC /* docs_icon@2x.png in Resources */,
 				0526448419D5A26400B63759 /* tick_icon.png in Resources */,
@@ -6757,7 +6743,6 @@
 				94427C5D1DFEF19000FC28B5 /* scroll_pointer@2x.png in Resources */,
 				058337E319ED9EEA00DCF0C5 /* airplay_icon@2x.png in Resources */,
 				9433BD111D21EB8900991483 /* icon_dbtasi@3x.png in Resources */,
-				05DEB1D01A80EBA6007793DD /* terms.txt in Resources */,
 				67B0DD541E7FCB5B00BAD640 /* facebook.png in Resources */,
 				058337FA19EDA07600DCF0C5 /* player_track.png in Resources */,
 				05224AB819DC4A2D00214767 /* selected_mask@2x.png in Resources */,
@@ -6798,7 +6783,6 @@
 				0589062619CC226D00A9E517 /* logout_icon@2x.png in Resources */,
 				05AF7C941A1CA04E00F5011A /* white_right_arrow_icon.png in Resources */,
 				051CB40719D2F71200E5FC88 /* nav_detail_icon@2x.png in Resources */,
-				05DEB1CE1A80EA28007793DD /* terms.html in Resources */,
 				792233551EB910FC00955F90 /* en1.6.mp4 in Resources */,
 				7922338C1EBAF9F500955F90 /* Lifebox-3.0 Eng@3x.png in Resources */,
 				94E549251CC6BA34003CB5DC /* icon_menu_bizeulasin@2x.png in Resources */,
