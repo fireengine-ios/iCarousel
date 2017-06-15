@@ -8,9 +8,12 @@
 
 import UIKit
 
+typealias SuccesEULABlock = (_ eula:Eula ) -> Swift.Void
+typealias FailBlock = (_ fail:String) -> Swift.Void
+
 protocol EULAProtocol {
     
-    func requestEulaForLocale(success:@escaping (Eula)-> (), fail:@escaping (String)->())
+    func requestEulaForLocale(localeString: String, success: @escaping SuccesEULABlock, fail:@escaping FailBlock)
     
 }
 

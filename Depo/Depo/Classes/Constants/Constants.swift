@@ -20,6 +20,7 @@ struct TextConstants {
     
     static let termsAndUsesTitile = "Register"
     static let termsAndUsesApplyButtonText = "Accept  Terms"
+    static let termsAndUseTextFormat = "<html><body text=\"#FFFFFF\" face=\"Bookman Old Style, Book Antiqua, Garamond\" size=\"5\">%@</body></html>"
     
     static let loginTitle = "Login"
     

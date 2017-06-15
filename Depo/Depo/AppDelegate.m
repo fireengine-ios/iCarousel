@@ -330,7 +330,7 @@
     introduceConfigurator.introduceViewController = introduceVC;
     [introduceConfigurator setupVC];
     
-    self.window.rootViewController = nController;
+    self.window.rootViewController = preLogin;
 }
 
 - (void) triggerPostTermsAndMigration {

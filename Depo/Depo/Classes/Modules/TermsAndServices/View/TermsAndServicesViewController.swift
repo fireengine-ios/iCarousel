@@ -27,7 +27,7 @@ class TermsAndServicesViewController: UIViewController, TermsAndServicesViewInpu
         
         let applyButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 44))
         applyButton.titleLabel?.textColor = ColorConstants.whiteColor
-        applyButton.titleLabel?.font = UIFont(name: FontNamesConstant.turkcellSaturaBol, size: 18)
+        applyButton.titleLabel?.font = UIFont(name: FontNamesConstant.turkcellSaturaBol, size: 17)
         applyButton.setTitle(NSLocalizedString(TextConstants.termsAndUsesApplyButtonText, comment: ""), for: UIControlState.normal)
         applyButton.backgroundColor = UIColor.clear
         applyButton.addTarget(self, action: #selector(onApplyButton), for: UIControlEvents.touchUpInside)
@@ -55,7 +55,9 @@ class TermsAndServicesViewController: UIViewController, TermsAndServicesViewInpu
     
     func showLoadedTermsAndUses(eula: Eula){
         self.spiner.stopAnimating()
-        self.webView.loadHTMLString(eula.content, baseURL: nil)
+        
+        let string = String(format: TextConstants.termsAndUseTextFormat, eula.content)
+        self.webView.loadHTMLString(string, baseURL: nil)
     }
     
     func failLoadTermsAndUses(errorString:String){

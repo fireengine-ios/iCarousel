@@ -13,7 +13,7 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
 
     func loadTermsAndUses(){
         weak var weakSelf = self
-        eula.requestEulaForLocale(success: { (eula) in
+        eula.requestEulaForLocale(localeString: Util.readLocaleCode(), success: { (eula) in
             DispatchQueue.main.async {
                 weakSelf?.output.showLoadedTermsAndUses(eula: eula)
             }

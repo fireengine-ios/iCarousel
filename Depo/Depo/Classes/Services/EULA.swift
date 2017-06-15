@@ -11,31 +11,29 @@ import UIKit
 class EULA: NSObject, EULAProtocol, DaoDelegate {
     
     let eulaDao = EulaDao()
-    var success:((Eula)->())?
-    var fail:((String)->())?
     
-    func requestEulaForLocale(success:@escaping (Eula)-> (), fail:@escaping (String)->()){
+    var success: SuccesEULABlock?
+    var fail: FailBlock?
+    
+    func requestEulaForLocale(localeString: String, success: @escaping SuccesEULABlock, fail:@escaping FailBlock){
         self.eulaDao.delegate = self
         self.success = success
         self.fail = fail
-        self.eulaDao.requestEula(forLocale: Util.readLocaleCode())
+        self.eulaDao.requestEula(forLocale: localeString)
     }
     
     //MARK: EULADao delegate
     
     func onSucces(_ successObject: NSObject!) {
-        let eula = successObject as! Eula
-        guard let s:((Eula) ->()) = self.success else {
+        guard let eula = successObject as? Eula else{
+            self.fail?("wrong type of answer")
             return
         }
-        s(eula)
+        self.success?(eula)
     }
     
     func onFail(_ failString: String!) {
-        guard let f:((String) ->()) = self.fail else {
-            return
-        }
-        f(failString)
+        self.fail?(failString)
     }
     
 }
