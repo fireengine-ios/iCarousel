@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="NO" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <development version="7000" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -15,14 +19,38 @@
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.24705882352941178" green="0.69019607843137254" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="ecH-D9-HgV">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchImageLogo" translatesAutoresizingMaskIntoConstraints="NO" id="TOf-6H-Klj">
+                                <rect key="frame" x="142" y="334" width="130" height="129"/>
+                            </imageView>
+                        </subviews>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="TOf-6H-Klj" firstAttribute="width" secondItem="ecH-D9-HgV" secondAttribute="height" multiplier="65:368" id="0ik-01-dSs"/>
+                            <constraint firstItem="ecH-D9-HgV" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="0x8-gb-7DY"/>
+                            <constraint firstItem="TOf-6H-Klj" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="30.5" id="5jv-Re-DNz"/>
+                            <constraint firstItem="TOf-6H-Klj" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="M4c-d6-VRf"/>
+                            <constraint firstAttribute="trailing" secondItem="ecH-D9-HgV" secondAttribute="trailing" id="WIp-kq-C4c"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="ecH-D9-HgV" secondAttribute="bottom" id="XOy-SY-70G"/>
+                            <constraint firstItem="ecH-D9-HgV" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" id="pMy-Rz-W55"/>
+                        </constraints>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="-100.00000000000001" y="306.52173913043481"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Background" width="375" height="667"/>
+        <image name="LaunchImageLogo" width="130" height="129"/>
+    </resources>
 </document>

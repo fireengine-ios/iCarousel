@@ -7,7 +7,6 @@
 //
 
 #import "InteractiveViewController.h"
-#import "MissingAnchors.h"
 
 @interface InteractiveViewController () <UIGestureRecognizerDelegate>
 

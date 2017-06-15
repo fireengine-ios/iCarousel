@@ -48,7 +48,6 @@
 
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
-#import "BgViewController.h"
 #import "WelcomeController.h"
 
 #import <CoreTelephony/CTCarrier.h>
@@ -63,7 +62,6 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "Reachability.h"
 
-#import "BaseBgController.h"
 #import "AppRater.h"
 #import "SDImageCache.h"
 #import "MusicListController.h"
@@ -92,7 +90,6 @@
 @synthesize wormhole;
 @synthesize activatedFromBackground;
 @synthesize loginInProgress;
-//@synthesize notificationAction;
 @synthesize notificationActionUrl;
 @synthesize locInfoPopup;
 @synthesize noConnPopupShown;
@@ -101,13 +98,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
-        [application setStatusBarStyle:UIStatusBarStyleLightContent];
-    }
-    [self.window setRootViewController:[BgViewController alloc]];
+    [application setStatusBarStyle:UIStatusBarStyleLightContent];
     
     IGLog(@"AppDelegate didFinishLaunchingWithOptions");
-    NSLog(@"AppDelegate didFinishLaunchingWithOptions");
     
     if(SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"9.0")) {
         [[UIView appearance] setSemanticContentAttribute:UISemanticContentAttributeForceLeftToRight];    [[UIView appearanceWhenContainedIn:[UIAlertController class], nil] setSemanticContentAttribute:UISemanticContentAttributeUnspecified];
@@ -115,9 +108,7 @@
     }
     
 #ifdef LOG2FILE
-    
     [self logToFiles];
-    
 #endif
     
     [Fabric with:@[[Crashlytics class]]];
@@ -129,23 +120,19 @@
     //mahir: loc update geldiğinden bg fetch cikarildi simdilik    [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     
     //Adjust initialization
-    ADJConfig *adjustConfig = [ADJConfig configWithAppToken:@"hlqdgtbmrdb9" environment:ADJEnvironmentProduction];
-    [Adjust appDidLaunch:adjustConfig];
+//    ADJConfig *adjustConfig = [ADJConfig configWithAppToken:@"hlqdgtbmrdb9" environment:ADJEnvironmentProduction];
+//    [Adjust appDidLaunch:adjustConfig];
     
     //Google Conversion initialization
-    [ACTConversionReporter reportWithConversionID:@"946883454" label:@"gJYdCOLv4wcQ_pbBwwM" value:@"0.00" isRepeatable:NO];
+    //  [ACTConversionReporter reportWithConversionID:@"946883454" label:@"gJYdCOLv4wcQ_pbBwwM" value:@"0.00" isRepeatable:NO];
     
     //TODO BugSense integration
     //    [[Mint sharedInstance] initAndStartSession:@"13ceffcf"];
     
     
     NSInteger types;
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.f) {
-        types = UIUserNotificationTypeBadge | UIUserNotificationTypeAlert | UIUserNotificationTypeSound;
-    } else {
-        types = UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeBadge;
-    }
-    
+    types = UIUserNotificationTypeBadge | UIUserNotificationTypeAlert | UIUserNotificationTypeSound;
+        
     //    [MPush setShouldShowDebugLogs:YES];
     if(![AppUtil readFirstVisitOverFlag]) {
         [MPush setLocationEnabled:NO];
@@ -170,7 +157,6 @@
     DBSession *dbSession = [[DBSession alloc] initWithAppKey:@"422fptod5dlxrn8" appSecret:@"umjclqg3juoyihd" root:kDBRootDropbox]; // initWithAppKey:@"zeddgylajxc1op8" appSecret:@"kn9u1e77bzlk103"
     [DBSession setSharedSession:dbSession];
     
-    [self addInitialBgImage];
     
     progress = [[MBProgressHUD alloc] initWithWindow:self.window];
     progress.opacity = 0.4f;
@@ -214,14 +200,16 @@
         [[UIApplication sharedApplication] cancelAllLocalNotifications];
         [AppUtil writeAppFirstLaunchFlag];
     }
-
-    [self.window makeKeyAndVisible];
     
     [[SDWebImageDownloader sharedDownloader] setShouldDecompressImages:NO];
     
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
-        
+    
+    PreLoginController *preLogin = [[PreLoginController alloc] init];
+    self.window.rootViewController = preLogin;
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
@@ -411,19 +399,7 @@
 
 - (void) startOpeningPage {
     [MPush hitTag:@"loginstatus" withValue:@"Yes"];
-    /*
-     [APPDELEGATE.uploadQueue.session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
-     if(uploadTasks) {
-     for(NSURLSessionUploadTask *task in uploadTasks) {
-     if([task.originalRequest.URL absoluteString]) {
-     [APPDELEGATE.session addBgOngoingTaskUrl:[task.originalRequest.URL absoluteString]];
-     }
-     }
-     }
-     [self triggerAutoSynchronization];
-     }];
-     */
-    
+
     [[UploadQueue sharedInstance].session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
     }];
     
@@ -676,11 +652,6 @@
     
     IGLog(@"AppDelegate Logged out");
     
-    //    for (ASIHTTPRequest *req in ASIHTTPRequest.sharedQueue.operations) {
-    //        [req cancel];
-    //        [req setDelegate:nil];
-    //    }
-    
     [self.session stopAudioItem];
     [self.session cleanoutAfterLogout];
     [CacheUtil resetRememberMeToken];
@@ -704,7 +675,8 @@
     
     [self hideMainLoading];
     if([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground) {
-        [self.window setRootViewController:[[BaseBgController alloc] init]];
+        NSLog(@"S");
+//        [self.window setRootViewController:[[BaseBgController alloc] init]];
     } else {
         //        WelcomeController *welcomePage = [[WelcomeController alloc] init];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -849,16 +821,6 @@
     [AppUtil resetPeriodicLocInfoPopupIdleFlag];
 }
 
-- (void) addInitialBgImage {
-    UIImage *bgImg = [UIImage imageNamed:@"Default.png"];
-    if(IS_IPHONE_5) {
-        bgImg = [UIImage imageNamed:@"Default-568h@2x.png"];
-    }
-    UIImageView *bgImgView = [[UIImageView alloc] initWithImage:bgImg];
-    bgImgView.frame = CGRectMake(0, 0, self.window.frame.size.width, self.window.frame.size.height);
-    [self.window addSubview:bgImgView];
-}
-
 - (void) showCustomAlert:(CustomAlertView *) alertView {
     [self.window addSubview:alertView];
     [self.window bringSubviewToFront:alertView];
@@ -921,22 +883,7 @@
 }
 
 - (void) application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-    /*
-     if(self.uploadQueue && self.uploadQueue.session) {
-     [self.uploadQueue.session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
-     if(uploadTasks) {
-     for(NSURLSessionUploadTask *task in uploadTasks) {
-     if([task.originalRequest.URL absoluteString]) {
-     [APPDELEGATE.session addBgOngoingTaskUrl:[task.originalRequest.URL absoluteString]];
-     }
-     }
-     }
-     [self triggerAutoSynchronization];
-     }];
-     } else {
-     [self triggerAutoSynchronization];
-     }
-     */
+
     
     [[UploadQueue sharedInstance].session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
     }];
@@ -1014,35 +961,16 @@
                 if([CacheUtil readRememberMeToken] != nil) {
                     IGLog(@"AppDelegate should relogin after from background RememberMeToken not null");
                     loginInProgress = YES;
-                    [self addInitialBgImage];
                     [tokenManager requestToken];
                     [self showMainLoading];
                 } else if([ReachabilityManager isReachableViaWWAN]) {
                     IGLog(@"AppDelegate should relogin after from background trying radius login");
                     loginInProgress = YES;
-                    [self addInitialBgImage];
                     [tokenManager requestRadiusLogin];
                     [self showMainLoading];
                 }
             }
         }
-        /*
-         [APPDELEGATE.uploadQueue.session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
-         if(uploadTasks) {
-         for(NSURLSessionUploadTask *task in uploadTasks) {
-         if([task.originalRequest.URL absoluteString]) {
-         [APPDELEGATE.session addBgOngoingTaskUrl:[task.originalRequest.URL absoluteString]];
-         }
-         }
-         }
-         [self triggerAutoSynchronization];
-         }];
-         */
-        
-        /*
-         [[UploadQueue sharedInstance].session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
-         }];
-         */
         
     } else {
         IGLog(@"AppDelegate activatedFromBackground && !backgroundReloginInProgress else'ine girdi");
@@ -1190,25 +1118,6 @@ void uncaughtExceptionHandler(NSException *exception) {
 }
 
 - (void)customIDSent:(NSDictionary *)responseDictionary {
-}
-
-- (void) cancelRequestsWithTag:(int) tag {
-    //    NSOperationQueue * temp = ASIHTTPRequest.sharedQueue;
-    //    for (ASIHTTPRequest *req in ASIHTTPRequest.sharedQueue.operations) {
-    //        if(req.tag == tag) {
-    //            [req cancel];
-    //            [req setDelegate:nil];
-    //        }
-    //    }
-}
-
-- (void) cancelRequestsWithTags:(NSArray *) tags {
-    //    for (ASIHTTPRequest *req in ASIHTTPRequest.sharedQueue.operations) {
-    //        if([tags containsObject:[NSNumber numberWithInteger:req.tag]]) {
-    //            [req cancel];
-    //            [req setDelegate:nil];
-    //        }
-    //    }
 }
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url sourceApplication:(NSString *)source annotation:(id)annotation {
