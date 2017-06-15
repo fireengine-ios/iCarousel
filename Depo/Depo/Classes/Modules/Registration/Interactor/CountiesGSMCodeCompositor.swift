@@ -24,14 +24,13 @@ class CounrtiesGSMCodeCompositor {
          return []
         }
         for isoCode in NSLocale.isoCountryCodes {
-            if let phoneCode = countyIsoPhone?[isoCode.uppercased()] as? String {
-                if let countryName = (NSLocale.system as NSLocale).displayName(forKey:NSLocale.Key.countryCode, value: isoCode) {
-                    
-                    resulArray.append(self.composeModel(withCountryName: countryName, phoneCode: phoneCode, countryCode: isoCode))
-                }
+            if let phoneCode = countyIsoPhone?[isoCode.uppercased()] as? String,
+                let countryName = (NSLocale.system as NSLocale).displayName(forKey:NSLocale.Key.countryCode, value: isoCode) {
+                
+                resulArray.append(self.composeModel(withCountryName: countryName, phoneCode: phoneCode, countryCode: isoCode))
+                
             }
         }
-        
         return resulArray
     }
     

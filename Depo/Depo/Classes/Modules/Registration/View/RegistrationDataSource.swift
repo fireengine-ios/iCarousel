@@ -34,6 +34,13 @@ class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSour
         self.currentGSMCode = gsmModel.code
         
     }
+    
+    func changeGSMCode(withCode code: String) {
+        self.currentGSMCode = code
+        //setup picker here
+        
+    }
+    
     func getGSMCode(forRow row: Int) -> String {
         let gsmModel = self.gsmModels[row]
         return gsmModel.code
@@ -92,12 +99,10 @@ class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSour
     }
     
     func phoneNumberChanged(toNumber number: String) {
-        debugPrint("NEW number is ", number)
         let phoneModel = self.cells[1]
         phoneModel.inputText = number
     }
 
-    
 }
 
 extension RegistrationDataSource: UIPickerViewDataSource, UIPickerViewDelegate {

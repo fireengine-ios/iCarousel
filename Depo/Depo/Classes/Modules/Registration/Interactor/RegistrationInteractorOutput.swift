@@ -9,7 +9,6 @@
 import Foundation
 
 protocol RegistrationInteractorOutput: class {
-    func pass(title: String, forRowIndex: Int)
     
     func prepearedModels(models:[BaseCellModel])
     func composedGSMCCodes(models:[GSMCodeModel])

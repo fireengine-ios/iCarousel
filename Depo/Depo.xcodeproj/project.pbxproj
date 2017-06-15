@@ -1037,6 +1037,7 @@
 		8C0572DB1EF1BE4E005C69DA /* PasswordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C0572DA1EF1BE4E005C69DA /* PasswordCell.xib */; };
 		8C2044641EEA8E6900642627 /* BaseUserInputCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2044631EEA8E6900642627 /* BaseUserInputCellView.swift */; };
 		8C4A9D0F1EEAD99B001D2465 /* TermsAndServicesScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C4A9D0E1EEAD99B001D2465 /* TermsAndServicesScreen.xib */; };
+		8C69B2E61EF280B2005B6A28 /* SimCardInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C69B2E51EF280B2005B6A28 /* SimCardInfo.swift */; };
 		8C8387F81EE9767C00AB89B9 /* RegistrationScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C8387F71EE9767C00AB89B9 /* RegistrationScreen.xib */; };
 		8CFA182F1EEEC47900AF236E /* GSMUserInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA182E1EEEC47900AF236E /* GSMUserInputCell.swift */; };
 		8CFA18311EEEC9FD00AF236E /* CellTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA18301EEEC9FD00AF236E /* CellTypes.swift */; };
@@ -2800,6 +2801,7 @@
 		8C0572DA1EF1BE4E005C69DA /* PasswordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PasswordCell.xib; sourceTree = "<group>"; };
 		8C2044631EEA8E6900642627 /* BaseUserInputCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseUserInputCellView.swift; sourceTree = "<group>"; };
 		8C4A9D0E1EEAD99B001D2465 /* TermsAndServicesScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TermsAndServicesScreen.xib; sourceTree = "<group>"; };
+		8C69B2E51EF280B2005B6A28 /* SimCardInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimCardInfo.swift; sourceTree = "<group>"; };
 		8C8387F71EE9767C00AB89B9 /* RegistrationScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistrationScreen.xib; sourceTree = "<group>"; };
 		8CDC6A3281516662EEFBF8A5 /* IntroduceViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceViewInput.swift; sourceTree = "<group>"; };
 		8CFA182E1EEEC47900AF236E /* GSMUserInputCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSMUserInputCell.swift; sourceTree = "<group>"; };
@@ -5202,6 +5204,7 @@
 				8C049C591EEC82F00086DA84 /* Enteties */,
 				8C2044601EEA7A3B00642627 /* Services */,
 				A8CEE7F449AB04C7F484C5F1 /* RegistrationInteractorOutput.swift */,
+				FF3D38F0C7EEF61373827F8A /* RegistrationInteractorInput.swift */,
 				D47258744D443C841AC3A4A0 /* RegistrationInteractor.swift */,
 			);
 			path = Interactor;
@@ -5764,7 +5767,7 @@
 				8C049C5C1EEC85DD0086DA84 /* ValidationService.swift */,
 				8C049C601EED63BC0086DA84 /* DataStorage.swift */,
 				8CFA183D1EF00A1000AF236E /* CountiesGSMCodeCompositor.swift */,
-				FF3D38F0C7EEF61373827F8A /* RegistrationInteractorInput.swift */,
+				8C69B2E51EF280B2005B6A28 /* SimCardInfo.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -7277,6 +7280,7 @@
 				944C07B51D4FE7CB00D45B61 /* RevisitedGroupedPhotosController.m in Sources */,
 				05A938261AF6AE9100AE2892 /* CustomIOS7AlertView.m in Sources */,
 				0579424A1C3FDC0C00899923 /* SignupController.m in Sources */,
+				8C69B2E61EF280B2005B6A28 /* SimCardInfo.swift in Sources */,
 				94E7B4B21CB2D12300385016 /* ReachUsController.m in Sources */,
 				070234961EA08E1400716C27 /* SyncLogger.m in Sources */,
 				057DF50B19D04EDF0005A389 /* RequestBaseUrlDao.m in Sources */,

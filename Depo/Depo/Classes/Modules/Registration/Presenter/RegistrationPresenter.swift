@@ -15,13 +15,11 @@ class RegistrationPresenter: RegistrationModuleInput, RegistrationViewOutput, Re
 
     func viewIsReady() {
         //request info here
-    }
-    
-    func prepareCells() {
         self.interactor.prepareModels()
         self.interactor.requestGSMCountryCodes()
+        self.interactor.acquireCurrentGSMCode()
     }
-    
+
     func userInputed(forRow:Int, withValue: String) {
         // VALIDATE INFO FIRST then call validation results
     }
@@ -34,14 +32,8 @@ class RegistrationPresenter: RegistrationModuleInput, RegistrationViewOutput, Re
         
     }
     
-    func pass(title: String, forRowIndex: Int) {
-        debugPrint("titile is ", title)
-    }
-    
     func nextButtonPressed(withNavController navController: UINavigationController, email: String, phone: String, password: String, repassword: String) {
         self.interactor.signUPUser(email: email, phone: phone, passport: password, repassword: repassword)
-        
-//self.router.routNextVC(wihtNavigationController: navController)
     }
     
     func validatedUserInfo(withResult result: String) {

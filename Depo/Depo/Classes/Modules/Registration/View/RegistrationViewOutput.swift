@@ -16,8 +16,6 @@ protocol RegistrationViewOutput {
     */
 
     func viewIsReady()
-
-    func prepareCells()
     
     func userInputed(forRow:Int, withValue: String)
 
