@@ -27,11 +27,11 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
         super.viewDidLoad()
         self.setupDelegates()
 
-        self.output.prepareCells()
+        self.output.viewIsReady()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        super.viewWillAppear(animated)
         self.userRegistrationTable.register(UINib(nibName: "inputCell", bundle: nil), forCellReuseIdentifier: "BaseUserInputCellViewID")
         self.userRegistrationTable.register(UINib(nibName: "GSMUInputCell", bundle: nil), forCellReuseIdentifier: "GSMUserInputCellID")
         self.userRegistrationTable.register(UINib(nibName: "PasswordCell", bundle: nil), forCellReuseIdentifier: "PasswordCellID")
@@ -54,44 +54,7 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
     private func hideKeyboard() {
         view.endEditing(true)
     }
-    
-    private func setupConstraintsForPicker() {
-
-//        let firstView = self.picker.pickerView//self.pickerContainer
-//        let secondView = self.pickerContainer//self.picker.superview
-//        let topConstraint = NSLayoutConstraint(item: firstView,
-//                                               attribute: .top,
-//                                               relatedBy: .equal,
-//                                               toItem: secondView,
-//                                               attribute: .top,
-//                                               multiplier: 1,
-//                                               constant: 0)
-//        let botConstraint = NSLayoutConstraint(item: firstView,
-//                                               attribute: .bottom,
-//                                               relatedBy: .equal,
-//                                               toItem: secondView,
-//                                               attribute: .bottom,
-//                                               multiplier: 1,
-//                                               constant: 0)
-//        let leadingConstraint = NSLayoutConstraint(item: firstView,
-//                                               attribute: .leading,
-//                                               relatedBy: .equal,
-//                                               toItem: secondView,
-//                                               attribute: .leading,
-//                                               multiplier: 1,
-//                                               constant: 0)
-//        let trailingConstraint = NSLayoutConstraint(item: firstView,
-//                                               attribute: .trailing,
-//                                               relatedBy: .equal,
-//                                               toItem: secondView,
-//                                               attribute: .trailing,
-//                                               multiplier: 1,
-//                                               constant: 0)
-//        self.picker.addConstraint(trailingConstraint)
-////        self.picker.addConstraints([topConstraint, botConstraint, leadingConstraint, trailingConstraint])
-        
-    }
-    
+  
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
@@ -111,9 +74,14 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
     }
     
     func setupPicker(withModels: [GSMCodeModel]) {
-        
         self.dataSource.setupPickerCells(withModels: withModels)
         self.pickerView.reloadAllComponents()
+    }
+    
+    func setupCurrentGSMCode(toGSMCode gsmCode: String) {
+//        self.setupCurrentGSMCode = gsmCode
+        self.dataSource.changeGSMCode(withCode: gsmCode)
+        self.reloadGSMCell()
     }
     
     @IBAction func nextActionHandler(_ sender: Any) {
@@ -121,6 +89,10 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
             return
         }
         self.output.nextButtonPressed(withNavController: navController, email: self.getTextFieldValue(forRow: 0), phone: self.getTextFieldValue(forRow: 1), password: self.getTextFieldValue(forRow: 2), repassword: self.getTextFieldValue(forRow: 3))
+    }
+    
+    private func reloadGSMCell() {
+        self.userRegistrationTable.reloadRows(at: [IndexPath(item: 1, section: 0)], with: UITableViewRowAnimation.none)
     }
     
     private func getTextFieldValue(forRow: Int) -> String {
@@ -157,11 +129,9 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
         })
         let currentRow = self.pickerView.selectedRow(inComponent: 0)
         self.dataSource.changeGSMCodeLabel(withRow: currentRow)
-//        let model = dataSource.cells[1]//gsm cell model
-//        model.inputText = 
-        self.userRegistrationTable.reloadRows(at: [IndexPath(item: 1, section: 0)], with: UITableViewRowAnimation.none)
-        
+        self.reloadGSMCell()
     }
+    
     func pickerGotTapped() {
         self.hideKeyboard()
         self.pickerBottomConstraint.constant = 0

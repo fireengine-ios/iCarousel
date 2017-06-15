@@ -20,7 +20,7 @@ class UserValidator {
             self.showAlert(withText: NSLocalizedString("PassFormatErrorMessage", comment: ""))
             return false
         }
-        if mail.characters.count == 0 && Util.isValidEmail(mail) == false, Util.isValidEmail(mail) == false {
+        if mail.characters.count == 0 && !Util.isValidEmail(mail) {
             self.showAlert(withText: NSLocalizedString("EmailFormatErrorMessage", comment: ""))
             return false
         }
@@ -43,11 +43,6 @@ class UserValidator {
                                            height: window!.frame.size.height),
                              withTitle: "ERROR", withMessage: text, with: ModalTypeError)
         (appDelegate as! AppDelegate).showCustomAlert(customAlert)
-        
-//        appDelegate.show
-//        let alert = UIAlertController(title: "Alert", message: "Message", preferredStyle: UIAlertControllerStyle.alert)
-//        alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
-//        self.present(alert, animated: true, completion: nil)
     }
     
 }

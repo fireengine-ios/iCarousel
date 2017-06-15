@@ -28,10 +28,7 @@
     if (self) {
         self.backgroundColor = [Util UIColorForHexColor:@"1a1e24"];
         
-        int topIndex = 10;
-        if(!IS_BELOW_7) {
-            topIndex = 30;
-        }
+        int topIndex = 30;
         
         tableUpdateCounter = 1;
         [self updateMenuByLoginStatus];

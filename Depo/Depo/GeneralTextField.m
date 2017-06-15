@@ -27,32 +27,13 @@
         self.font = currentFont;
         self.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         
-        if(!IS_BELOW_6) {
-            self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholderVal attributes:@{NSForegroundColorAttributeName: placeHolderColor, NSFontAttributeName: currentFont}];
-        } else {
-            self.placeholder = placeholderVal;
-        }
+        
+        self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholderVal attributes:@{NSForegroundColorAttributeName: placeHolderColor, NSFontAttributeName: currentFont}];
+        
     }
     return self;
 }
 
-- (CGRect)placeholderRectForBounds:(CGRect)bounds {
-    if(IS_BELOW_6) {
-        CGSize size = [[self placeholder] sizeWithFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:15]];
-        return CGRectMake( (bounds.size.width - size.width)/2 , bounds.origin.y , bounds.size.width , bounds.size.height);
-    } else {
-        return [super placeholderRectForBounds:bounds];
-    }
-}
-
-- (void) drawPlaceholderInRect:(CGRect)rect {
-    if(IS_BELOW_6) {
-        [[Util UIColorForHexColor:@"363e4f"] setFill];
-        [[self placeholder] drawInRect:rect withFont:[UIFont fontWithName:@"TurkcellSaturaDem" size:15]];
-    } else {
-        [super drawPlaceholderInRect:rect];
-    }
-}
 
 - (CGRect)textRectForBounds:(CGRect)bounds {
     return CGRectMake(bounds.origin.x + 20, bounds.origin.y + 10,

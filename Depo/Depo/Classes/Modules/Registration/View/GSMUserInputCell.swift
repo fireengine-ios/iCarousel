@@ -21,6 +21,7 @@ class GSMUserInputCell: UITableViewCell {//BaseUserInputCellView {
     @IBOutlet weak var titleLabel: UILabel!
     
     var delegate: GSMCodeCellDelegate?
+    var notAvailableChracterSet: CharacterSet = CharacterSet(charactersIn: "1234567890")
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -49,8 +50,13 @@ extension GSMUserInputCell: UITextFieldDelegate {
         self.textInputField.resignFirstResponder()
         return false
     }
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
-        debugPrint("END Editing")
         self.delegate?.phoneNumberChanged(toNumber: self.textInputField.text!)
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        return (string.rangeOfCharacter(from: notAvailableChracterSet) != nil)
     }
 }

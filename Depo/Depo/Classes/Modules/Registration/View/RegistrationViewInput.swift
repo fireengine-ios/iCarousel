@@ -23,5 +23,7 @@ protocol RegistrationViewInput: class {
     
     func prepareNavController()
     
+    func setupCurrentGSMCode(toGSMCode gsmCode: String)
+    
 //    func setupRow(forRowIdex rowIndex: Int, withTitle title: String)
 }

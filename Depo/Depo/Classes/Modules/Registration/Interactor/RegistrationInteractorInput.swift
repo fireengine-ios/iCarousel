@@ -10,8 +10,9 @@ import Foundation
 
 protocol RegistrationInteractorInput {
     
-    func requestTitle()
     func prepareModels()
     func requestGSMCountryCodes()
+//    func detectSimCard()
+    func acquireCurrentGSMCode()
     func signUPUser(email: String, phone: String, passport: String, repassword: String)
 }
