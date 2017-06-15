@@ -17,10 +17,8 @@ class LoginDataStorage: NSObject {
         let defaultTexts = [TextConstants.loginCellEmailPlaceholder,
                             TextConstants.loginCellPasswordPlaceholder]
         
-        let cellTypes = [CellTypes.base, CellTypes.base]
-        
         for i in 0...names.count - 1{
-            let model = BaseCellModel(withTitle: names[i], initialText: defaultTexts[i], cellType: cellTypes[i])
+            let model = BaseCellModel(withTitle: names[i], initialText: defaultTexts[i])
             loginModels.append(model)
         }
     }

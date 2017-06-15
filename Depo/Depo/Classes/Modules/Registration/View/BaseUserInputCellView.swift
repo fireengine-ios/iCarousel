@@ -21,7 +21,7 @@ class BaseUserInputCellView: UITableViewCell {
         self.titleLabel.textColor = ColorConstants.yellowColor
     }
     
-    func setupBaseCell(withTitle title: String, inputText text: String, cellType type: CellTypes) {
+    func setupBaseCell(withTitle title: String, inputText text: String) {
         self.titleLabel.text = title
         if self.textInputField.attributedPlaceholder?.string != text {
             self.textInputField.attributedPlaceholder = NSAttributedString(string: text, attributes: [NSForegroundColorAttributeName: ColorConstants.yellowColor])

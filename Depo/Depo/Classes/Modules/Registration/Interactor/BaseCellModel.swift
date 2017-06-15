@@ -8,15 +8,14 @@
 
 import Foundation
 
-class BaseCellModel {
-    var title = ""
-    var inputText = ""
-    var type: CellTypes = .base
+struct BaseCellModel {
+    let title: String
+    let inputText: String
     
-    init(withTitle title: String, initialText text: String, cellType type: CellTypes) {
+    
+    init(withTitle title: String, initialText text: String) {
         self.title = title
         self.inputText = text
-        self.type = type
     }
     
 }

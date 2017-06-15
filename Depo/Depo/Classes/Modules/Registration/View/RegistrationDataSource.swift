@@ -31,19 +31,18 @@ class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSour
     
     func changeGSMCodeLabel(withRow row: Int) {
         let gsmModel = self.gsmModels[row]
-        self.currentGSMCode = gsmModel.code
-        
+        self.currentGSMCode = gsmModel.gsmCode
     }
     
     func changeGSMCode(withCode code: String) {
         self.currentGSMCode = code
-        //setup picker here
+        //TOFO: setup picker here on row with taht code
         
     }
     
     func getGSMCode(forRow row: Int) -> String {
         let gsmModel = self.gsmModels[row]
-        return gsmModel.code
+        return gsmModel.gsmCode
     }
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 //        return 100//self.output.getRowHeight(forIndex: indexPath.row)
@@ -55,6 +54,7 @@ class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var tempoRow: UITableViewCell
+        
         if indexPath.row == 1 {
             tempoRow = tableView.dequeueReusableCell(withIdentifier: "GSMUserInputCellID", for: indexPath)
         } else if indexPath.row == 0 {
@@ -86,9 +86,9 @@ class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSour
         if let cell = cell as? GSMUserInputCell {
             cell.delegate = self
             cell.setupGSMCode(code: currentGSMCode)
-            cell.setupCell(withTitle: model.title, inputText: model.inputText, cellType: model.type)
+            cell.setupCell(withTitle: model.title, inputText: model.inputText)
         } else if let cell = cell as? BaseUserInputCellView {
-            cell.setupBaseCell(withTitle: model.title, inputText: model.inputText, cellType: model.type)
+            cell.setupBaseCell(withTitle: model.title, inputText: model.inputText)
         } else if let cell = cell as? PasswordCell {
             cell.setupInitialState(withLabelTitle: model.title, placeHolderText: model.inputText)
         }
@@ -99,8 +99,10 @@ class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSour
     }
     
     func phoneNumberChanged(toNumber number: String) {
-        let phoneModel = self.cells[1]
-        phoneModel.inputText = number
+        let oldPhoneModel = self.cells[1]
+//        phoneModel.inputText = number
+        let newPhoneModel = BaseCellModel(withTitle: oldPhoneModel.title, initialText: number)
+        self.cells[1] = newPhoneModel
     }
 
 }
@@ -120,7 +122,7 @@ extension RegistrationDataSource: UIPickerViewDataSource, UIPickerViewDelegate {
             return ""
         }
         let model = gsmModels[row]
-        let pickerTitle = model.code + "    " + model.countryName
+        let pickerTitle = model.gsmCode + "    " + model.countryName
         return pickerTitle
     }
 }

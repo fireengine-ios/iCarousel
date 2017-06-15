@@ -12,7 +12,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
     let dataStorage = DataStorage()
     
     func prepareModels() {
-        //PREPERes models here and call output
+        //PREPEaRe models here and call output
         self.output.prepearedModels(models: dataStorage.getModels())
     }
     

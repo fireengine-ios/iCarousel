@@ -35,10 +35,7 @@ class CounrtiesGSMCodeCompositor {
     }
     
     func composeModel(withCountryName countryName: String, phoneCode: String, countryCode: String) -> GSMCodeModel{
-        let model = GSMCodeModel()
-        model.countryName = countryName
-        model.countryCode = countryCode
-        model.code = phoneCode
+        let model = GSMCodeModel(withCountry: countryName, withCountryCode: countryCode, withGSMCode: phoneCode)
         return model
     }
 }

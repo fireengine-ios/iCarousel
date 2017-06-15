@@ -10,39 +10,29 @@ import Foundation
 
 class DataStorage {
     
-    let numberOfModels = 4
-    let titles = [TextConstants.registrationCellTitleEmail,
-                  TextConstants.registrationCellTitleGSMNumber,
-                  TextConstants.registrationCellTitlePassword,
-                  TextConstants.registrationCellInitialTextReFillPassword]
-    let initialTexts = [TextConstants.registrationCellInitialTextEmail,
-                        "",
-                        TextConstants.registrationCellInitialTextFillPassword,
-                        TextConstants.registrationCellInitialTextReFillPassword]
-    
-    let cellTypes: [CellTypes] = [.base, .phone, .base, .base]
-    
     var models: [BaseCellModel] = []
     var gsmModels: [GSMCodeModel] = []
     
+    init() {
+        models = [BaseCellModel(withTitle: TextConstants.registrationCellTitleEmail,
+                                initialText: TextConstants.registrationCellInitialTextEmail),
+        BaseCellModel(withTitle: TextConstants.registrationCellTitleGSMNumber,
+                      initialText: ""),
+        BaseCellModel(withTitle: TextConstants.registrationCellTitlePassword,
+                      initialText: TextConstants.registrationCellTitlePassword),
+        BaseCellModel(withTitle: TextConstants.registrationCellInitialTextReFillPassword,
+                      initialText: TextConstants.registrationCellInitialTextReFillPassword)]
+    }
     
     func getModels() -> [BaseCellModel] {
-        if self.models.count == 0 {
-            self.createInitialStateModels()
-        }
         return models
     }
     
     func configurateModel(forIndex index: Int, withValue value: String) {
         let model = models[index]
-        model.inputText = value
+        let newModel = BaseCellModel(withTitle: model.title, initialText: value)//inputText = value
+        models[index] = newModel
         debugPrint("models are ", self.models)
-    }
-    
-    private func createInitialStateModels() {
-        for i in 0..<numberOfModels {
-            models.append(BaseCellModel(withTitle: titles[i], initialText: initialTexts[i], cellType: cellTypes[i]))
-        }
     }
     
 }

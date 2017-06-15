@@ -972,8 +972,8 @@
 		8C4A9D0F1EEAD99B001D2465 /* TermsAndServicesScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C4A9D0E1EEAD99B001D2465 /* TermsAndServicesScreen.xib */; };
 		8C69B2E61EF280B2005B6A28 /* SimCardInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C69B2E51EF280B2005B6A28 /* SimCardInfo.swift */; };
 		8C8387F81EE9767C00AB89B9 /* RegistrationScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C8387F71EE9767C00AB89B9 /* RegistrationScreen.xib */; };
+		8CA0D9E01EF2A0E20054544D /* CellTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA0D9DF1EF2A0E20054544D /* CellTypes.swift */; };
 		8CFA182F1EEEC47900AF236E /* GSMUserInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA182E1EEEC47900AF236E /* GSMUserInputCell.swift */; };
-		8CFA18311EEEC9FD00AF236E /* CellTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA18301EEEC9FD00AF236E /* CellTypes.swift */; };
 		8CFA18331EEFBB4800AF236E /* GSMUInputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CFA18321EEFBB4800AF236E /* GSMUInputCell.xib */; };
 		8CFA183C1EF0089A00AF236E /* GSMCodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA183B1EF0089A00AF236E /* GSMCodeModel.swift */; };
 		8CFA183E1EF00A1000AF236E /* CountiesGSMCodeCompositor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA183D1EF00A1000AF236E /* CountiesGSMCodeCompositor.swift */; };
@@ -2645,9 +2645,9 @@
 		8C4A9D0E1EEAD99B001D2465 /* TermsAndServicesScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TermsAndServicesScreen.xib; sourceTree = "<group>"; };
 		8C69B2E51EF280B2005B6A28 /* SimCardInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimCardInfo.swift; sourceTree = "<group>"; };
 		8C8387F71EE9767C00AB89B9 /* RegistrationScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistrationScreen.xib; sourceTree = "<group>"; };
+		8CA0D9DF1EF2A0E20054544D /* CellTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellTypes.swift; sourceTree = "<group>"; };
 		8CDC6A3281516662EEFBF8A5 /* IntroduceViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceViewInput.swift; sourceTree = "<group>"; };
 		8CFA182E1EEEC47900AF236E /* GSMUserInputCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSMUserInputCell.swift; sourceTree = "<group>"; };
-		8CFA18301EEEC9FD00AF236E /* CellTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellTypes.swift; sourceTree = "<group>"; };
 		8CFA18321EEFBB4800AF236E /* GSMUInputCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GSMUInputCell.xib; sourceTree = "<group>"; };
 		8CFA183B1EF0089A00AF236E /* GSMCodeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSMCodeModel.swift; sourceTree = "<group>"; };
 		8CFA183D1EF00A1000AF236E /* CountiesGSMCodeCompositor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountiesGSMCodeCompositor.swift; sourceTree = "<group>"; };
@@ -5527,7 +5527,7 @@
 		8CFA18361EEFBC5500AF236E /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				8CFA18301EEEC9FD00AF236E /* CellTypes.swift */,
+				8CA0D9DF1EF2A0E20054544D /* CellTypes.swift */,
 				8C0572D71EF154D0005C69DA /* Password */,
 				8CFA18351EEFBC2B00AF236E /* GSMInputCell */,
 				8CFA18341EEFBC0200AF236E /* BaseInputCell */,
@@ -7314,13 +7314,13 @@
 				051CB39519D2E3F200E5FC88 /* AbstractFileFolderCell.m in Sources */,
 				058BC2351A30D2A90007F4DE /* LoginController.m in Sources */,
 				94884CAA1C91A469006722F7 /* UpdateMsisdnController.m in Sources */,
+				8CA0D9E01EF2A0E20054544D /* CellTypes.swift in Sources */,
 				0589066D19CC560100A9E517 /* CustomLabel.m in Sources */,
 				94FB09841DE2065B00DA666D /* RevisitedPhotoCollCell.m in Sources */,
 				9433BD0B1D21E48300991483 /* PromotionEntryController.m in Sources */,
 				058BC2421A30E7100007F4DE /* AuthResponse.m in Sources */,
 				050D4C321A31E17200809A01 /* PostLoginSyncPhotoController.m in Sources */,
 				8C049C8E1EEE8E7F0086DA84 /* LoginViewController.swift in Sources */,
-				8CFA18311EEEC9FD00AF236E /* CellTypes.swift in Sources */,
 				790B9E151E7A84F700DD7DA0 /* CountrySelectionCell.m in Sources */,
 				0515F2FF1C469A3C0098081C /* RevisitedStorageController.m in Sources */,
 				94FAE0B11D2F119300BC9F77 /* VideofyFooterView.m in Sources */,

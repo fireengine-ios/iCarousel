@@ -21,7 +21,6 @@ class GSMUserInputCell: UITableViewCell {//BaseUserInputCellView {
     @IBOutlet weak var titleLabel: UILabel!
     
     var delegate: GSMCodeCellDelegate?
-    var notAvailableChracterSet: CharacterSet = CharacterSet(charactersIn: "1234567890")
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,7 +28,7 @@ class GSMUserInputCell: UITableViewCell {//BaseUserInputCellView {
         self.textInputField.delegate = self
     }
     
-    func setupCell(withTitle title: String, inputText text: String, cellType type: CellTypes) {
+    func setupCell(withTitle title: String, inputText text: String) {
         self.textInputField.text = text
         self.titleLabel.text = title
     }
@@ -56,7 +55,7 @@ extension GSMUserInputCell: UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
-        return (string.rangeOfCharacter(from: notAvailableChracterSet) != nil)
+        let notAvailableCharacterSet = CharacterSet(charactersIn: "1234567890")
+        return (string.rangeOfCharacter(from: notAvailableCharacterSet) != nil)
     }
 }

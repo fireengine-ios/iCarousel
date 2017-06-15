@@ -6,8 +6,14 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
-class GSMCodeModel {
-    var countryName = "Turkey"
-    var countryCode = ""
-    var code = "+90"
+struct GSMCodeModel {
+    var countryName: String
+    var countryCode: String
+    var gsmCode: String
+    
+    init(withCountry country: String = "Turkey", withCountryCode countryCode: String = "", withGSMCode gsmCode: String = "+90") {
+        self.countryName = country
+        self.countryCode = countryCode
+        self.gsmCode = gsmCode
+    }
 }
