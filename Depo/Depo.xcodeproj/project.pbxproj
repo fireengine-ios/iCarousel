@@ -1033,7 +1033,8 @@
 		8C049C951EEE8E7F0086DA84 /* LoginTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C049C841EEE8E7F0086DA84 /* LoginTableViewCell.xib */; };
 		8C0572D41EF1331C005C69DA /* PhoneVereficationScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C0572D31EF1331C005C69DA /* PhoneVereficationScreen.xib */; };
 		8C0572D61EF14C20005C69DA /* inputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C0572D51EF14C20005C69DA /* inputCell.xib */; };
-		8C2044621EEA8E4100642627 /* BaseUserInputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C2044611EEA8E4100642627 /* BaseUserInputCell.xib */; };
+		8C0572D91EF1A723005C69DA /* PasswordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0572D81EF1A723005C69DA /* PasswordCell.swift */; };
+		8C0572DB1EF1BE4E005C69DA /* PasswordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C0572DA1EF1BE4E005C69DA /* PasswordCell.xib */; };
 		8C2044641EEA8E6900642627 /* BaseUserInputCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2044631EEA8E6900642627 /* BaseUserInputCellView.swift */; };
 		8C4A9D0F1EEAD99B001D2465 /* TermsAndServicesScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C4A9D0E1EEAD99B001D2465 /* TermsAndServicesScreen.xib */; };
 		8C8387F81EE9767C00AB89B9 /* RegistrationScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C8387F71EE9767C00AB89B9 /* RegistrationScreen.xib */; };
@@ -2795,7 +2796,8 @@
 		8C049C841EEE8E7F0086DA84 /* LoginTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginTableViewCell.xib; sourceTree = "<group>"; };
 		8C0572D31EF1331C005C69DA /* PhoneVereficationScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhoneVereficationScreen.xib; sourceTree = "<group>"; };
 		8C0572D51EF14C20005C69DA /* inputCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = inputCell.xib; sourceTree = "<group>"; };
-		8C2044611EEA8E4100642627 /* BaseUserInputCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseUserInputCell.xib; sourceTree = "<group>"; };
+		8C0572D81EF1A723005C69DA /* PasswordCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordCell.swift; sourceTree = "<group>"; };
+		8C0572DA1EF1BE4E005C69DA /* PasswordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PasswordCell.xib; sourceTree = "<group>"; };
 		8C2044631EEA8E6900642627 /* BaseUserInputCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseUserInputCellView.swift; sourceTree = "<group>"; };
 		8C4A9D0E1EEAD99B001D2465 /* TermsAndServicesScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TermsAndServicesScreen.xib; sourceTree = "<group>"; };
 		8C8387F71EE9767C00AB89B9 /* RegistrationScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistrationScreen.xib; sourceTree = "<group>"; };
@@ -5199,7 +5201,6 @@
 			children = (
 				8C049C591EEC82F00086DA84 /* Enteties */,
 				8C2044601EEA7A3B00642627 /* Services */,
-				FF3D38F0C7EEF61373827F8A /* RegistrationInteractorInput.swift */,
 				A8CEE7F449AB04C7F484C5F1 /* RegistrationInteractorOutput.swift */,
 				D47258744D443C841AC3A4A0 /* RegistrationInteractor.swift */,
 			);
@@ -5751,6 +5752,8 @@
 		8C0572D71EF154D0005C69DA /* Password */ = {
 			isa = PBXGroup;
 			children = (
+				8C0572D81EF1A723005C69DA /* PasswordCell.swift */,
+				8C0572DA1EF1BE4E005C69DA /* PasswordCell.xib */,
 			);
 			name = Password;
 			sourceTree = "<group>";
@@ -5761,6 +5764,7 @@
 				8C049C5C1EEC85DD0086DA84 /* ValidationService.swift */,
 				8C049C601EED63BC0086DA84 /* DataStorage.swift */,
 				8CFA183D1EF00A1000AF236E /* CountiesGSMCodeCompositor.swift */,
+				FF3D38F0C7EEF61373827F8A /* RegistrationInteractorInput.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -5776,7 +5780,6 @@
 		8CFA18341EEFBC0200AF236E /* BaseInputCell */ = {
 			isa = PBXGroup;
 			children = (
-				8C2044611EEA8E4100642627 /* BaseUserInputCell.xib */,
 				8C0572D51EF14C20005C69DA /* inputCell.xib */,
 				8C2044631EEA8E6900642627 /* BaseUserInputCellView.swift */,
 			);
@@ -5795,8 +5798,8 @@
 		8CFA18361EEFBC5500AF236E /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				8C0572D71EF154D0005C69DA /* Password */,
 				8CFA18301EEEC9FD00AF236E /* CellTypes.swift */,
+				8C0572D71EF154D0005C69DA /* Password */,
 				8CFA18351EEFBC2B00AF236E /* GSMInputCell */,
 				8CFA18341EEFBC0200AF236E /* BaseInputCell */,
 			);
@@ -6591,7 +6594,6 @@
 				9433BD241D220D3200991483 /* bg_cloud_big@3x.png in Resources */,
 				05C4E49F1C4D5E7B005B28E9 /* icon_dialog_positive.png in Resources */,
 				051CB3B619D2F6F700E5FC88 /* nav_share_icon.png in Resources */,
-				8C2044621EEA8E4100642627 /* BaseUserInputCell.xib in Resources */,
 				944A09E51DA570A400FC1BBD /* icon_searchB.png in Resources */,
 				052A223019F6853C000C3C75 /* inner_loading_bg@2x.png in Resources */,
 				949BB5871D6F1FA100BED9DB /* bg_mtour_5.jpg in Resources */,
@@ -6862,6 +6864,7 @@
 				05B1847F1A24C07E00FDA023 /* nav_download_icon@2x.png in Resources */,
 				94E5E65C1E24F8D8008B0216 /* icon_notsync@2x.png in Resources */,
 				055A3F4C19E7F9D6004A0121 /* photo_header_with_flap_first@2x.png in Resources */,
+				8C0572DB1EF1BE4E005C69DA /* PasswordCell.xib in Resources */,
 				790B9D991E7690BD00DD7DA0 /* buttonbg_720_w@3x.png in Resources */,
 				05C3F60B1A3902E0001954E8 /* check_icon@2x.png in Resources */,
 				792233521EB910FC00955F90 /* en1.2.mp4 in Resources */,
@@ -7676,6 +7679,7 @@
 				0515706719E5B34100C62B98 /* SquareImageView.m in Sources */,
 				05E8113519DF10340063F99A /* RefAlbumCell.m in Sources */,
 				94DCA10C1D3D8F67000965AE /* TaggedFileListDao.m in Sources */,
+				8C0572D91EF1A723005C69DA /* PasswordCell.swift in Sources */,
 				5247D5E71DD342B900FFE63E /* ConfirmRemoveModalController.m in Sources */,
 				94B3BE2F1D81F7C40086D05E /* FaqUrlDao.m in Sources */,
 				56B9E92A1DEC47A600DE1011 /* AppRater.m in Sources */,
