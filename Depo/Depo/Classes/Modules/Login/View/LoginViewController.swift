@@ -21,6 +21,8 @@ class LoginViewController: UIViewController, LoginViewInput {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var cantLoginButton: ButtonWithCorner!
     @IBOutlet weak var rememberLoginLabel: UILabel!
+    @IBOutlet weak var viewForCaptcha: UIView!
+    @IBOutlet weak var captchaViewH: NSLayoutConstraint!
 
     // MARK: Life cycle
     override func viewDidLoad() {
@@ -53,6 +55,14 @@ class LoginViewController: UIViewController, LoginViewInput {
         self.rememberLoginLabel.text = NSLocalizedString("Remember my credentials", comment: "")
         self.rememberLoginLabel.textColor = ColorConstants.whiteColor
         self.rememberLoginLabel.font = UIFont(name: FontNamesConstant.turkcellSaturaBol, size: 15)
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.hideKeyboard()
+    }
+    
+    private func hideKeyboard() {
+        view.endEditing(true)
     }
     
     // MARK: Buttons action

@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,10 +13,12 @@
             <connections>
                 <outlet property="bacgroungImageView" destination="VaL-qI-xdB" id="hqJ-RD-mZj"/>
                 <outlet property="cantLoginButton" destination="sKm-UQ-Thl" id="8qA-wp-4nS"/>
+                <outlet property="captchaViewH" destination="pok-rb-ldH" id="TY7-b2-0JJ"/>
                 <outlet property="loginButton" destination="eTQ-k6-noA" id="UeN-S5-r3J"/>
                 <outlet property="rememberLoginLabel" destination="Y7j-Im-F5o" id="Zcb-Ai-dcm"/>
                 <outlet property="tableView" destination="ZUi-xv-OhT" id="7ag-Oo-ICO"/>
                 <outlet property="view" destination="iN0-l3-epB" id="jim-su-1hB"/>
+                <outlet property="viewForCaptcha" destination="crD-Uh-f0U" id="eXv-0K-5gA"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -27,14 +30,21 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZUi-xv-OhT">
-                    <rect key="frame" x="0.0" y="213" width="375" height="200"/>
+                    <rect key="frame" x="0.0" y="251" width="375" height="162"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="200" id="d2Y-ww-jWd"/>
+                        <constraint firstAttribute="height" constant="162" id="d2Y-ww-jWd"/>
                     </constraints>
                     <color key="sectionIndexBackgroundColor" red="0.023596025971353463" green="0.0" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                 </tableView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F62-WO-wVy">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="crD-Uh-f0U" userLabel="view for captcha">
+                    <rect key="frame" x="0.0" y="413" width="375" height="0.0"/>
+                    <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" id="pok-rb-ldH"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F62-WO-wVy" userLabel="bottom view ">
                     <rect key="frame" x="0.0" y="413" width="375" height="254"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xqD-Ug-1FL" customClass="SwitchButton" customModule="Depo" customModuleProvider="target">
@@ -96,14 +106,17 @@
             </subviews>
             <color key="backgroundColor" red="0.38853236607142855" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="crD-Uh-f0U" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Ag3-Rx-eHX"/>
                 <constraint firstItem="F62-WO-wVy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="C4O-uV-GRH"/>
                 <constraint firstItem="VaL-qI-xdB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="E1p-bi-3TG"/>
                 <constraint firstItem="VaL-qI-xdB" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ERl-Gf-ZtY"/>
                 <constraint firstItem="ZUi-xv-OhT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="EXi-js-7Gf"/>
-                <constraint firstItem="F62-WO-wVy" firstAttribute="top" secondItem="ZUi-xv-OhT" secondAttribute="bottom" id="afE-1v-jJD"/>
                 <constraint firstAttribute="bottom" secondItem="F62-WO-wVy" secondAttribute="bottom" id="bE8-M1-igL"/>
                 <constraint firstAttribute="trailing" secondItem="F62-WO-wVy" secondAttribute="trailing" id="dRb-aZ-lf7"/>
                 <constraint firstAttribute="trailing" secondItem="VaL-qI-xdB" secondAttribute="trailing" id="g8T-rg-Qu4"/>
+                <constraint firstItem="crD-Uh-f0U" firstAttribute="top" secondItem="ZUi-xv-OhT" secondAttribute="bottom" id="hHl-BK-F4W"/>
+                <constraint firstAttribute="trailing" secondItem="crD-Uh-f0U" secondAttribute="trailing" id="n93-Sc-pqR"/>
+                <constraint firstItem="F62-WO-wVy" firstAttribute="top" secondItem="crD-Uh-f0U" secondAttribute="bottom" id="o2h-wH-U5J"/>
                 <constraint firstAttribute="bottom" secondItem="VaL-qI-xdB" secondAttribute="bottom" id="rDi-bM-Mv5"/>
                 <constraint firstItem="ZUi-xv-OhT" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="top" constant="64" id="uPJ-9e-V16"/>
                 <constraint firstAttribute="trailing" secondItem="ZUi-xv-OhT" secondAttribute="trailing" id="yik-of-nsK"/>

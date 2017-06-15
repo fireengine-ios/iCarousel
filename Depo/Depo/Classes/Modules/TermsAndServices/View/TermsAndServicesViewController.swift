@@ -61,6 +61,7 @@ class TermsAndServicesViewController: UIViewController, TermsAndServicesViewInpu
     
     func failLoadTermsAndUses(errorString:String){
         self.spiner.stopAnimating()
+        //TO-DO show error
     }
     
     // MARK: UIWebViewDelegate

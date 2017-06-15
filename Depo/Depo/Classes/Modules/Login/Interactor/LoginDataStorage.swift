@@ -14,9 +14,12 @@ class LoginDataStorage: NSObject {
     override init(){
         let names = [NSLocalizedString("E-Mail or GSM Number", comment: ""),
                      NSLocalizedString("Password", comment: "")]
+        let defaultTexts = [NSLocalizedString("E-Mail or GSM Number", comment: ""),
+                            NSLocalizedString("", comment: "")]
+        let cellTypes = [CellTypes.base, CellTypes.base]
         
-        for i in 1...names.count{
-            let model = BaseCellModel(withTitle: names[i - 1], initialText: "", cellType: CellTypes.base)
+        for i in 0...names.count - 1{
+            let model = BaseCellModel(withTitle: names[i], initialText: defaultTexts[i], cellType: cellTypes[i])
             loginModels.append(model)
         }
     }

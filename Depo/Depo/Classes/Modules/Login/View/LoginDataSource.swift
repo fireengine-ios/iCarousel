@@ -16,8 +16,11 @@ class LoginDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     func setupTableView(tableView: UITableView){
         self.tableView = tableView
-        let nib = UINib(nibName: "inputCell", bundle: nil)
+        var nib = UINib(nibName: "inputCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "BaseUserInputCellViewID")
+        
+        nib = UINib(nibName: "PasswordCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: "PasswordCellID")
     }
     
     func setupCellsWithModels(models:[BaseCellModel]){
@@ -41,12 +44,23 @@ class LoginDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "BaseUserInputCellViewID", for: indexPath) as! BaseUserInputCellView
-        let model = self.tableDataMArray[indexPath.row]
-        cell.titleLabel.text = model.title
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
-        cell.textInputField.text = ""
-        return cell
+        if (indexPath.row == 0){
+            let cell = tableView.dequeueReusableCell(withIdentifier: "BaseUserInputCellViewID", for: indexPath) as! BaseUserInputCellView
+            let model = self.tableDataMArray[indexPath.row]
+            cell.titleLabel.text = model.title
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.textInputField.text = model.inputText
+            return cell
+        }else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "PasswordCellID", for: indexPath) as! PasswordCell
+            let model = self.tableDataMArray[indexPath.row]
+            cell.titleLabel.text = model.title
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.textInput.text = model.inputText
+            return cell
+        }
+        
+        
     }
     
     
