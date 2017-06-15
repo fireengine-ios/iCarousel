@@ -23,6 +23,7 @@ class PhoneVereficationViewController: UIViewController, PhoneVereficationViewIn
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = TextConstants.registerTitle
         output.viewIsReady()
         self.setupTimer()
     }

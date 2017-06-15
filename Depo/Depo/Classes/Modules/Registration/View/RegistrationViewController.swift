@@ -25,8 +25,9 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = TextConstants.registerTitle
+        
         self.setupDelegates()
-
         self.output.viewIsReady()
     }
     
