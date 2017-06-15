@@ -12,7 +12,7 @@ class IntroduceInteractor: IntroduceInteractorInput {
     let introduceDataStorage = IntroduceDataStorage()
     
     func PrepareModels(){
-        self.output.models(models: self.introduceDataStorage.getModels())
+        output.models(models: self.introduceDataStorage.getModels())
     }
     
 }

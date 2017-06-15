@@ -10,15 +10,15 @@ import UIKit
 
 class EULA: NSObject, EULAProtocol, DaoDelegate {
     
-    let eulaDao = EulaDao()
+    private let eulaDao = EulaDao()
     
-    var success: SuccesEULABlock?
-    var fail: FailBlock?
+    internal var successBl: SuccesEULABlock?
+    internal var failBl: FailBlock?
     
     func requestEulaForLocale(localeString: String, success: @escaping SuccesEULABlock, fail:@escaping FailBlock){
         self.eulaDao.delegate = self
-        self.success = success
-        self.fail = fail
+        successBl = success
+        failBl = fail
         self.eulaDao.requestEula(forLocale: localeString)
     }
     
@@ -26,14 +26,14 @@ class EULA: NSObject, EULAProtocol, DaoDelegate {
     
     func onSucces(_ successObject: NSObject!) {
         guard let eula = successObject as? Eula else{
-            self.fail?("wrong type of answer")
+            failBl?(NSLocalizedString(TextConstants.serverResponceError, comment: ""))
             return
         }
-        self.success?(eula)
+        successBl?(eula)
     }
     
     func onFail(_ failString: String!) {
-        self.fail?(failString)
+        failBl?(failString)
     }
     
 }

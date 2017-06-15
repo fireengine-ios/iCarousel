@@ -25,14 +25,14 @@ class IntroduceSubView: UIView {
     }
     
     func configurateView(){
-        self.titleLabel.numberOfLines = 10
-        self.titleLabel.font = UIFont(name: "TurkcellSaturaBol", size: 10)
-        self.titleLabel.textColor = ColorConstants.whiteColor
+        titleLabel.numberOfLines = 10
+        titleLabel.font = UIFont(name: "TurkcellSaturaBol", size: 10)
+        titleLabel.textColor = ColorConstants.whiteColor
     }
     
     func setModel(model: IntroduceModel){
-        self.imageView.image = UIImage(named: model.imageName)
-        self.titleLabel.attributedText = model.text
+        imageView.image = UIImage(named: model.imageName)
+        titleLabel.attributedText = model.text
     }
 
 }

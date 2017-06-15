@@ -14,9 +14,9 @@ class IntroduceDataSource: NSObject, UIScrollViewDelegate {
     @IBOutlet weak var pageControll:UIPageControl!
     
     func configurateScrollViewWithModels(models:[IntroduceModel]){
-        let w = self.scrollView.frame.size.width
-        let h = self.scrollView.frame.size.height
-        for view in self.scrollView.subviews{
+        let w = scrollView.frame.size.width
+        let h = scrollView.frame.size.height
+        for view in scrollView.subviews{
             view.removeFromSuperview()
         }
         var x: CGFloat = 0
@@ -26,31 +26,31 @@ class IntroduceDataSource: NSObject, UIScrollViewDelegate {
             subView.frame = CGRect(x: x, y: 0, width: w, height: h)
             x = x + w
             subView.setModel(model: model)
-            self.scrollView.addSubview(subView)
+            scrollView.addSubview(subView)
         }
         
-        self.scrollView.contentSize = CGSize(width: x, height: h)
-        self.pageControll.numberOfPages = models.count
-        self.pageControll.currentPage = 0
+        scrollView.contentSize = CGSize(width: x, height: h)
+        pageControll.numberOfPages = models.count
+        pageControll.currentPage = 0
         
-        self.pageControll.addTarget(self, action: #selector(valueChanged), for: UIControlEvents.valueChanged)
+        pageControll.addTarget(self, action: #selector(valueChanged), for: UIControlEvents.valueChanged)
         
         if (models.count <= 1){
-            self.pageControll.isHidden = true
+            pageControll.isHidden = true
         }
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let x = scrollView.contentOffset.x
-        let page = x / self.scrollView.frame.size.width
-        self.pageControll.currentPage = Int(page)
+        let page = x / scrollView.frame.size.width
+        pageControll.currentPage = Int(page)
     }
     
     func valueChanged(){
-        let page = self.pageControll.currentPage
-        let x = CGFloat(page) * self.scrollView.frame.size.width
-        let rect = CGRect(x: x, y: 0, width: self.scrollView.frame.size.width, height: self.scrollView.frame.size.height)
-        self.scrollView.scrollRectToVisible(rect, animated: true)
+        let page = pageControll.currentPage
+        let x = CGFloat(page) * scrollView.frame.size.width
+        let rect = CGRect(x: x, y: 0, width: scrollView.frame.size.width, height: scrollView.frame.size.height)
+        scrollView.scrollRectToVisible(rect, animated: true)
     }
     
 }

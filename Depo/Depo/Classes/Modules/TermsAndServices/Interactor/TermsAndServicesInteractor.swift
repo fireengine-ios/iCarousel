@@ -9,17 +9,16 @@
 class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
 
     weak var output: TermsAndServicesInteractorOutput!
-    var eula = EULA()
 
     func loadTermsAndUses(){
-        weak var weakSelf = self
-        eula.requestEulaForLocale(localeString: Util.readLocaleCode(), success: { (eula) in
+        let eula = EULA()
+        eula.requestEulaForLocale(localeString: Util.readLocaleCode(), success: {[weak self] (eula) in
             DispatchQueue.main.async {
-                weakSelf?.output.showLoadedTermsAndUses(eula: eula)
+                self?.output.showLoadedTermsAndUses(eula: eula)
             }
-        }) { (failString) in
+        }) { [weak self] (failString) in
             DispatchQueue.main.async {
-                weakSelf?.output.failLoadTermsAndUses(errorString: failString)
+                self?.output.failLoadTermsAndUses(errorString: failString)
             }
         }
     }

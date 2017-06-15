@@ -24,9 +24,9 @@ class LoginDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     }
     
     func setupCellsWithModels(models:[BaseCellModel]){
-        self.tableDataMArray.removeAll()
-        self.tableDataMArray.insert(contentsOf: models, at: 0)
-        self.tableView.reloadData()
+        tableDataMArray.removeAll()
+        tableDataMArray.insert(contentsOf: models, at: 0)
+        tableView.reloadData()
     }
 
     //MARC: UITableView delegate
@@ -36,7 +36,7 @@ class LoginDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.tableDataMArray.count
+        return tableDataMArray.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -46,14 +46,14 @@ class LoginDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.row == 0){
             let cell = tableView.dequeueReusableCell(withIdentifier: "BaseUserInputCellViewID", for: indexPath) as! BaseUserInputCellView
-            let model = self.tableDataMArray[indexPath.row]
+            let model = tableDataMArray[indexPath.row]
             cell.titleLabel.text = model.title
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             cell.textInputField.text = model.inputText
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "PasswordCellID", for: indexPath) as! PasswordCell
-            let model = self.tableDataMArray[indexPath.row]
+            let model = tableDataMArray[indexPath.row]
             cell.titleLabel.text = model.title
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             cell.textInput.text = model.inputText

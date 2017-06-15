@@ -13,20 +13,20 @@ class IntroducePresenter: IntroduceModuleInput, IntroduceViewOutput, IntroduceIn
     var router: IntroduceRouterInput!
 
     func viewIsReady() {
-        self.interactor.PrepareModels()
+        interactor.PrepareModels()
     }
     
     func models(models: [IntroduceModel]) {
-        self.view.setupInitialState(models: models)
+        view.setupInitialState(models: models)
     }
     
     //MARK: router
     
     func onStartUsingLifeBox(){
-        self.router.onGoToRegister()
+        router.onGoToRegister()
     }
     
     func onLoginButton(){
-        self.router.onGoToLogin()
+        router.onGoToLogin()
     }
 }

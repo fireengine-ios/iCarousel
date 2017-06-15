@@ -28,37 +28,37 @@ class LoginViewController: UIViewController, LoginViewInput {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = NSLocalizedString(TextConstants.loginTitle, comment: "")
+        navigationItem.title = TextConstants.loginTitle
         
-        self.tableView.delegate = self.dataSource
-        self.tableView.dataSource = self.dataSource
-        self.dataSource.setupTableView(tableView: self.tableView)
+        tableView.delegate = dataSource
+        tableView.dataSource = dataSource
+        dataSource.setupTableView(tableView: tableView)
         
-        self.configurateView()
+        configurateView()
         
         output.viewIsReady()
     }
     
     func configurateView(){
-        self.tableView.backgroundColor = UIColor.clear
+        tableView.backgroundColor = UIColor.clear
         
-        self.loginButton.backgroundColor = ColorConstants.whiteColor
-        self.loginButton.setTitle(NSLocalizedString("Login", comment: ""), for: UIControlState.normal)
-        self.loginButton.setTitleColor(ColorConstants.blueColor, for: UIControlState.normal)
-        self.loginButton.layer.cornerRadius = self.loginButton.frame.size.height * 0.5
-        self.loginButton.titleLabel?.font = UIFont(name: FontNamesConstant.turkcellSaturaBol, size: 20)
+        loginButton.backgroundColor = ColorConstants.whiteColor
+        loginButton.setTitle(TextConstants.loginTitle, for: UIControlState.normal)
+        loginButton.setTitleColor(ColorConstants.blueColor, for: UIControlState.normal)
+        loginButton.layer.cornerRadius = loginButton.frame.size.height * 0.5
+        loginButton.titleLabel?.font = UIFont(name: FontNamesConstant.turkcellSaturaBol, size: 20)
         
-        self.cantLoginButton.setTitleColor(ColorConstants.whiteColor, for: UIControlState.normal)
-        self.cantLoginButton.setTitle(NSLocalizedString("I can't login", comment: ""), for: UIControlState.normal)
-        self.cantLoginButton.titleLabel?.font = UIFont(name: FontNamesConstant.turkcellSaturaBol, size: 12)
+        cantLoginButton.setTitleColor(ColorConstants.whiteColor, for: UIControlState.normal)
+        cantLoginButton.setTitle(TextConstants.loginCantLoginButtonTitle, for: UIControlState.normal)
+        cantLoginButton.titleLabel?.font = UIFont(name: FontNamesConstant.turkcellSaturaBol, size: 12)
         
-        self.rememberLoginLabel.text = NSLocalizedString("Remember my credentials", comment: "")
-        self.rememberLoginLabel.textColor = ColorConstants.whiteColor
-        self.rememberLoginLabel.font = UIFont(name: FontNamesConstant.turkcellSaturaBol, size: 15)
+        rememberLoginLabel.text = TextConstants.loginRememberMyCredential
+        rememberLoginLabel.textColor = ColorConstants.whiteColor
+        rememberLoginLabel.font = UIFont(name: FontNamesConstant.turkcellSaturaBol, size: 15)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.hideKeyboard()
+        hideKeyboard()
     }
     
     private func hideKeyboard() {
@@ -81,7 +81,7 @@ class LoginViewController: UIViewController, LoginViewInput {
 
     // MARK: LoginViewInput
     func setupInitialState(array :[BaseCellModel]){
-        self.dataSource.setupCellsWithModels(models: array)
+        dataSource.setupCellsWithModels(models: array)
     }
     
     func showCapcha(){

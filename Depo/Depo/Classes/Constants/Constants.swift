@@ -19,15 +19,31 @@ struct TextConstants {
     static let itroViewGoToRegisterButtonText = "Start using Lifebox now!"
     static let introViewGoToLoginButtonText = "I have an account, let me log in"
     
+    static let registrationCellTitleEmail = NSLocalizedString("EmailTitle", comment: "")
+    static let registrationCellTitleGSMNumber = "GSM Number"
+    static let registrationCellTitlePassword = NSLocalizedString("PasswordPlaceholder", comment: "")
+    static let registrationCellTitleReEnterPassword = "Re-Enter Password"
+    static let registrationCellInitialTextEmail = "   You have to fill in your mail"
+    static let registrationCellInitialTextFillPassword = "   You have to fill in a password"
+    static let registrationCellInitialTextReFillPassword = "  You have to fill in a password"
+    
     static let termsAndUsesTitile = "Register"
     static let termsAndUsesApplyButtonText = "Accept  Terms"
     static let termsAndUseTextFormat = "<html><body text=\"#FFFFFF\" face=\"Bookman Old Style, Book Antiqua, Garamond\" size=\"5\">%@</body></html>"
     
-    static let loginTitle = "Login"
+    static let loginTitle = NSLocalizedString("Login", comment: "")
+    static let loginCantLoginButtonTitle = "I can't login"
+    static let loginRememberMyCredential = "Remember my credentials"
+    static let loginCellTitleEmail = "E-Mail or GSM Number"
+    static let loginCellTitlePassword = NSLocalizedString("PasswordPlaceholder", comment: "")
+    static let loginCellEmailPlaceholder = "E-Mail or GSM Number"
+    static let loginCellPasswordPlaceholder = ""
     
     static let registerTitle = "Register"
     
+    static let serverResponceError = "Wrong type of answer"
 }
+
 
 struct FontNamesConstant {
     static let turkcellSaturaBol = "TurkcellSaturaBol"

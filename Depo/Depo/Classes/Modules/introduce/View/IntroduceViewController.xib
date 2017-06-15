@@ -61,7 +61,7 @@
                     <rect key="frame" x="111" y="620" width="152" height="26"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="26" id="GPS-RI-Ueo"/>
-                        <constraint firstAttribute="width" constant="152" id="Vyz-va-tIh"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="152" id="Vyz-va-tIh"/>
                     </constraints>
                     <state key="normal" title="Button"/>
                     <connections>
@@ -71,7 +71,7 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N29-gd-nz6">
                     <rect key="frame" x="69" y="543" width="236" height="47"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="236" id="0QQ-jr-zZ0"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="236" id="0QQ-jr-zZ0"/>
                         <constraint firstAttribute="height" constant="47" id="s5i-Oo-O1V"/>
                     </constraints>
                     <state key="normal" title="Button"/>

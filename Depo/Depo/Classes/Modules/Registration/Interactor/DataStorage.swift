@@ -11,8 +11,15 @@ import Foundation
 class DataStorage {
     
     let numberOfModels = 4
-    let titles = ["E-Mail", "GSM Number", "Password", "Re-Enter Password"]//TODO: LOCALISE!
-    let initialTexts = ["   You have to fill in your mail", "", "   You have to fill in a password", "  You have to fill in a password"]//TODO: Localise as well
+    let titles = [TextConstants.registrationCellTitleEmail,
+                  TextConstants.registrationCellTitleGSMNumber,
+                  TextConstants.registrationCellTitlePassword,
+                  TextConstants.registrationCellInitialTextReFillPassword]
+    let initialTexts = [TextConstants.registrationCellInitialTextEmail,
+                        "",
+                        TextConstants.registrationCellInitialTextFillPassword,
+                        TextConstants.registrationCellInitialTextReFillPassword]
+    
     let cellTypes: [CellTypes] = [.base, .phone, .base, .base]
     
     var models: [BaseCellModel] = []

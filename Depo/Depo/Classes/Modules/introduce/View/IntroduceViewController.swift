@@ -22,14 +22,14 @@ class IntroduceViewController: UIViewController, IntroduceViewInput {
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.scrollView.delegate = self.dataSource
-        self.dataSource.scrollView = self.scrollView
-        self.dataSource.pageControll = self.pageControll
+        scrollView.delegate = dataSource
+        dataSource.scrollView = scrollView
+        dataSource.pageControll = pageControll
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.configurateView()
+        configurateView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -38,34 +38,36 @@ class IntroduceViewController: UIViewController, IntroduceViewInput {
     }
     
     func configurateView(){
-        self.navigationController?.navigationBar.isHidden = true
+        navigationController?.navigationBar.isHidden = true
         
-        self.startUsingLifeBoxButton.setTitle(NSLocalizedString(TextConstants.itroViewGoToRegisterButtonText, comment: ""), for: UIControlState.normal)
-        self.startUsingLifeBoxButton.backgroundColor = ColorConstants.whiteColor
-        self.startUsingLifeBoxButton.setTitleColor(ColorConstants.blueColor, for: UIControlState.normal)
-        self.startUsingLifeBoxButton.titleLabel?.font = UIFont(name: "TurkcellSaturaBol", size: 20)
-        self.startUsingLifeBoxButton.layer.cornerRadius = self.startUsingLifeBoxButton.frame.size.height * 0.5
+        startUsingLifeBoxButton.setTitle(TextConstants.itroViewGoToRegisterButtonText,
+                                              for: UIControlState.normal)
+        startUsingLifeBoxButton.backgroundColor = ColorConstants.whiteColor
+        startUsingLifeBoxButton.setTitleColor(ColorConstants.blueColor,
+                                                   for: UIControlState.normal)
+        startUsingLifeBoxButton.titleLabel?.font = UIFont(name: FontNamesConstant.turkcellSaturaBol, size: 20)
+        startUsingLifeBoxButton.layer.cornerRadius = startUsingLifeBoxButton.frame.size.height * 0.5
         
-        self.haveAccountButton.setTitle(NSLocalizedString(TextConstants.introViewGoToLoginButtonText, comment: ""), for: UIControlState.normal)
-        self.haveAccountButton.backgroundColor = UIColor.clear
-        self.haveAccountButton.setTitleColor(ColorConstants.whiteColor, for: UIControlState.normal)
-        self.haveAccountButton.titleLabel?.font = UIFont(name: "TurkcellSaturaBol", size: 12)
+        haveAccountButton.setTitle(TextConstants.introViewGoToLoginButtonText, for: UIControlState.normal)
+        haveAccountButton.backgroundColor = UIColor.clear
+        haveAccountButton.setTitleColor(ColorConstants.whiteColor, for: UIControlState.normal)
+        haveAccountButton.titleLabel?.font = UIFont(name: FontNamesConstant.turkcellSaturaBol, size: 12)
     }
 
 
     // MARK: IntroduceViewInput
     func setupInitialState(models : [IntroduceModel]){
-        self.dataSource.configurateScrollViewWithModels(models: models)
+        dataSource.configurateScrollViewWithModels(models: models)
     }
     
     // MARK: Actions
     
     @IBAction func onStartUsingLifeBoxButton(){
-        self.output.onStartUsingLifeBox()
+        output.onStartUsingLifeBox()
     }
     
     @IBAction func onHaveAccountButton(){
-        self.output.onLoginButton()
+        output.onLoginButton()
     }
     
 }

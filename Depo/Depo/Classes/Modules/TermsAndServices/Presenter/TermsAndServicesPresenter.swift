@@ -14,20 +14,20 @@ class TermsAndServicesPresenter: TermsAndServicesModuleInput, TermsAndServicesVi
 
     // MARK: IN
     func viewIsReady() {
-        self.interactor.loadTermsAndUses()
+        interactor.loadTermsAndUses()
     }
     
     func termsApplied(){
-        self.router.goToRegister()
+        router.goToRegister()
     }
     
     // MARK: OUT
     
     func showLoadedTermsAndUses(eula: Eula){
-        self.view.showLoadedTermsAndUses(eula: eula)
+        view.showLoadedTermsAndUses(eula: eula)
     }
     
     func failLoadTermsAndUses(errorString:String){
-        self.view.failLoadTermsAndUses(errorString: errorString)
+        view.failLoadTermsAndUses(errorString: errorString)
     }
 }
