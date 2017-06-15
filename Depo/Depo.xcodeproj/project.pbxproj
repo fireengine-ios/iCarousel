@@ -2609,6 +2609,7 @@
 		7C0EFB4EB989796A6FE4FDA8 /* IntroduceInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceInteractorInput.swift; sourceTree = "<group>"; };
 		7CA6C6A11EF2A5F400D21EBE /* EULA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EULA.swift; sourceTree = "<group>"; };
 		7CA6C6A21EF2A5F400D21EBE /* EULAProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EULAProtocol.swift; sourceTree = "<group>"; };
+		7CA6C6A51EF2AABF00D21EBE /* Depo-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Depo-Bridging-Header.h"; sourceTree = "<group>"; };
 		7F142A19BE346559FCF5E378 /* Pods-Lifebox Picker.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lifebox Picker.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Lifebox Picker/Pods-Lifebox Picker.appstore.xcconfig"; sourceTree = "<group>"; };
 		81884BEAD2F49EAE4DC12C88 /* PhoneVereficationInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationInteractorOutput.swift; sourceTree = "<group>"; };
 		849AE724A4CD02D1BB1D73F2 /* Pods-Depo.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Depo.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-Depo/Pods-Depo.enterprise.xcconfig"; sourceTree = "<group>"; };
@@ -3100,7 +3101,6 @@
 		C14662373D7DDA7928074D3C /* IntroduceConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceConfigurator.swift; sourceTree = "<group>"; };
 		C2287D169D831E3173413D01 /* IntroduceRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceRouterInput.swift; sourceTree = "<group>"; };
 		CBF0B3F0018BAF98A072C67E /* Pods-DepoTests.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DepoTests.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-DepoTests/Pods-DepoTests.enterprise.xcconfig"; sourceTree = "<group>"; };
-		CECB93441EF2A62F0011F95E /* Depo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Depo-Bridging-Header.h"; sourceTree = "<group>"; };
 		CECE955F1EF2A09D008AC124 /* DepoTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DepoTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		CECE95601EF2A09D008AC124 /* AutoSyncWidget-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AutoSyncWidget-Bridging-Header.h"; sourceTree = "<group>"; };
 		CECE95611EF2A09D008AC124 /* DepoShareExtension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DepoShareExtension-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -3308,7 +3308,7 @@
 		051E1DFD19CAC2F900FD1E03 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				CECB93441EF2A62F0011F95E /* Depo-Bridging-Header.h */,
+				7CA6C6A51EF2AABF00D21EBE /* Depo-Bridging-Header.h */,
 				051E1E0419CAC2F900FD1E03 /* Depo-Prefix.pch */,
 				790B9E161E7ABC5E00DD7DA0 /* countryiso.json */,
 				05DEB1CF1A80EBA6007793DD /* terms.txt */,
