@@ -150,21 +150,20 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
     
     //MARK: - DataSource output
     @IBAction func pickerChoosePressed(_ sender: Any) {
-//        self.view
         self.pickerBottomConstraint.constant = -271
         UIView.animate(withDuration: 0.25, animations: {
             self.view.layoutIfNeeded()
             
         })
-       
-//        self.view.layoutIfNeeded()
         let currentRow = self.pickerView.selectedRow(inComponent: 0)
         self.dataSource.changeGSMCodeLabel(withRow: currentRow)
+//        let model = dataSource.cells[1]//gsm cell model
+//        model.inputText = 
         self.userRegistrationTable.reloadRows(at: [IndexPath(item: 1, section: 0)], with: UITableViewRowAnimation.none)
-//        self.dataSource.current
         
     }
     func pickerGotTapped() {
+        self.hideKeyboard()
         self.pickerBottomConstraint.constant = 0
         UIView.animate(withDuration: 0.25, animations: {
             self.view.layoutIfNeeded()

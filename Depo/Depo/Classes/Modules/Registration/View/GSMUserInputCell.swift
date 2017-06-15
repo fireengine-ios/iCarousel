@@ -10,6 +10,7 @@ import UIKit
 
 protocol GSMCodeCellDelegate {
     func codeViewGotTapped()
+    func phoneNumberChanged(toNumber number: String)
 }
 
 class GSMUserInputCell: UITableViewCell {//BaseUserInputCellView {
@@ -28,6 +29,7 @@ class GSMUserInputCell: UITableViewCell {//BaseUserInputCellView {
     }
     
     func setupCell(withTitle title: String, inputText text: String, cellType type: CellTypes) {
+        self.textInputField.text = text
         self.titleLabel.text = title
     }
     
@@ -37,6 +39,7 @@ class GSMUserInputCell: UITableViewCell {//BaseUserInputCellView {
     }
     
     func codeViewTouched() {
+        self.delegate?.phoneNumberChanged(toNumber: self.textInputField.text!)
         self.delegate?.codeViewGotTapped()
     }
 }
@@ -45,5 +48,9 @@ extension GSMUserInputCell: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.textInputField.resignFirstResponder()
         return false
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        debugPrint("END Editing")
+        self.delegate?.phoneNumberChanged(toNumber: self.textInputField.text!)
     }
 }

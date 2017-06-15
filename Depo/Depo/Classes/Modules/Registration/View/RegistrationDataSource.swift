@@ -91,6 +91,13 @@ class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSour
         self.output?.pickerGotTapped()
     }
     
+    func phoneNumberChanged(toNumber number: String) {
+        debugPrint("NEW number is ", number)
+        let phoneModel = self.cells[1]
+        phoneModel.inputText = number
+    }
+
+    
 }
 
 extension RegistrationDataSource: UIPickerViewDataSource, UIPickerViewDelegate {

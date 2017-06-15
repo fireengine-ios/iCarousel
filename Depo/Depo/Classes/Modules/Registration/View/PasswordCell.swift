@@ -21,6 +21,7 @@ class PasswordCell: UITableViewCell {
     }
     
     func setupInitialState(withLabelTitle title: String, placeHolderText placeholder: String) {
+        titleLabel.text = title
         if self.textInput.attributedPlaceholder?.string != placeholder {
             self.textInput.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSForegroundColorAttributeName: ColorConstants.yellowColor])
         }
