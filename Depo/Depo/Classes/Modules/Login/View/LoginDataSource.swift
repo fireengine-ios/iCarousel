@@ -49,7 +49,7 @@ class LoginDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
             let model = tableDataMArray[indexPath.row]
             cell.titleLabel.text = model.title
             cell.selectionStyle = UITableViewCellSelectionStyle.none
-            cell.textInputField.text = model.inputText
+            cell.textInputField.attributedPlaceholder = NSAttributedString(string: model.inputText, attributes: [NSForegroundColorAttributeName: ColorConstants.whiteColor])
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "PasswordCellID", for: indexPath) as! PasswordCell
