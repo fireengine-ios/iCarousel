@@ -1,0 +1,31 @@
+//
+//  PhotoHeaderSegmentView.h
+//  Depo
+//
+//  Created by Mahir on 10/8/14.
+//  Copyright (c) 2014 com.igones. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+#import "CustomButton.h"
+
+@protocol PhotoHeaderSegmentDelegate <NSObject>
+- (void) photoHeaderDidSelectPhotosSegment;
+- (void) photoHeaderDidSelectAlbumsSegment;
+@end
+
+@interface PhotoHeaderSegmentView : UIView {
+    UIImageView *bgView;
+}
+
+@property (nonatomic, weak) id<PhotoHeaderSegmentDelegate> delegate;
+@property (nonatomic, strong) CustomButton *photoButton;
+@property (nonatomic, strong) CustomButton *albumButton;
+@property (nonatomic, strong) UIImage *firstBgImg;
+@property (nonatomic, strong) UIImage *secondBgImg;
+@property (nonatomic) BOOL deactivated;
+
+- (void) deactivate;
+- (void) reactivate;
+
+@end

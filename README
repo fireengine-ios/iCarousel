@@ -1,0 +1,6 @@
+1. install coocapods (run in console)
+ sudo gem install cocoapods
+
+2. pod install 
+
+3. use  DEPO.xcworkspace
