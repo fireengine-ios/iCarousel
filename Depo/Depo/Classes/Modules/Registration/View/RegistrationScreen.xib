@@ -50,11 +50,11 @@
                         <action selector="nextActionHandler:" destination="-1" eventType="touchUpInside" id="ppa-VO-Chr"/>
                     </connections>
                 </button>
-                <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFill" bounces="NO" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="80" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="TYi-I0-oIL">
-                    <rect key="frame" x="0.0" y="60" width="375" height="400"/>
+                <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" bounces="NO" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="80" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="TYi-I0-oIL">
+                    <rect key="frame" x="0.0" y="70" width="375" height="320"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="400" id="OtQ-Q8-f2q"/>
+                        <constraint firstAttribute="height" constant="320" id="OtQ-Q8-f2q"/>
                     </constraints>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4l6-KR-Kcg">
@@ -106,7 +106,7 @@
                 <constraint firstItem="TYi-I0-oIL" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="LZs-Xd-mPV"/>
                 <constraint firstAttribute="trailing" secondItem="4l6-KR-Kcg" secondAttribute="trailing" id="Mfa-Lj-dOO"/>
                 <constraint firstAttribute="bottom" secondItem="4l6-KR-Kcg" secondAttribute="bottom" constant="-261" id="Mmb-vD-xV3"/>
-                <constraint firstItem="TYi-I0-oIL" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="60" id="XL5-nL-ZWc"/>
+                <constraint firstItem="TYi-I0-oIL" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="70" id="XL5-nL-ZWc"/>
                 <constraint firstItem="4l6-KR-Kcg" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="dsX-JN-Nra"/>
                 <constraint firstAttribute="bottom" secondItem="DWV-5a-Udx" secondAttribute="bottom" id="qnI-L7-H6X"/>
                 <constraint firstItem="4l6-KR-Kcg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="sKw-9T-CWo"/>

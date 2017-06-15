@@ -25,16 +25,8 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-//        Bundle.main.loadNibNamed("CountryPicker", owner: self, options: nil)
-        self.pickerView.dataSource = self.dataSource
-        self.pickerView.delegate = self.dataSource
-        
-//        picker.frame = CGRect(x: 0, y: 0, width: self.pickerContainer.bounds.width, height: self.pickerContainer.bounds.height)
-//        self.pickerContainer.addSubview(self.picker)
-        
-        self.dataSource.output = self
-        self.userRegistrationTable.dataSource = self.dataSource
-        self.userRegistrationTable.delegate = self.dataSource
+        self.setupDelegates()
+
         self.output.prepareCells()
     }
     
@@ -42,7 +34,25 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
         super.viewDidAppear(animated)
         self.userRegistrationTable.register(UINib(nibName: "inputCell", bundle: nil), forCellReuseIdentifier: "BaseUserInputCellViewID")
         self.userRegistrationTable.register(UINib(nibName: "GSMUInputCell", bundle: nil), forCellReuseIdentifier: "GSMUserInputCellID")
+        self.userRegistrationTable.register(UINib(nibName: "PasswordCell", bundle: nil), forCellReuseIdentifier: "PasswordCellID")
 //        self.setupConstraintsForPicker()
+    }
+    
+    private func setupDelegates() {
+        self.pickerView.dataSource = self.dataSource
+        self.pickerView.delegate = self.dataSource
+        
+        self.dataSource.output = self
+        self.userRegistrationTable.dataSource = self.dataSource
+        self.userRegistrationTable.delegate = self.dataSource
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.hideKeyboard()
+    }
+    
+    private func hideKeyboard() {
+        view.endEditing(true)
     }
     
     private func setupConstraintsForPicker() {
@@ -111,7 +121,6 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
             return
         }
         self.output.nextButtonPressed(withNavController: navController, email: self.getTextFieldValue(forRow: 0), phone: self.getTextFieldValue(forRow: 1), password: self.getTextFieldValue(forRow: 2), repassword: self.getTextFieldValue(forRow: 3))
-        //handleTermsAndServices(withNavController: navController)//handleNextAction()
     }
     
     private func getTextFieldValue(forRow: Int) -> String {
@@ -124,6 +133,9 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
         }
         if let cell = cell as? BaseUserInputCellView {
             return cell.textInputField.text!
+        }
+        if let cell = cell as? PasswordCell {
+            return cell.textInput.text!
         }
 
         return ""
@@ -138,8 +150,14 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
     
     //MARK: - DataSource output
     @IBAction func pickerChoosePressed(_ sender: Any) {
+//        self.view
         self.pickerBottomConstraint.constant = -271
-        self.view.layoutIfNeeded()
+        UIView.animate(withDuration: 0.25, animations: {
+            self.view.layoutIfNeeded()
+            
+        })
+       
+//        self.view.layoutIfNeeded()
         let currentRow = self.pickerView.selectedRow(inComponent: 0)
         self.dataSource.changeGSMCodeLabel(withRow: currentRow)
         self.userRegistrationTable.reloadRows(at: [IndexPath(item: 1, section: 0)], with: UITableViewRowAnimation.none)
@@ -148,5 +166,8 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
     }
     func pickerGotTapped() {
         self.pickerBottomConstraint.constant = 0
+        UIView.animate(withDuration: 0.25, animations: {
+            self.view.layoutIfNeeded()
+        })
     }
 }

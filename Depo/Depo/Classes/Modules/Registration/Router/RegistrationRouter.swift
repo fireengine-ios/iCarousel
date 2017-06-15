@@ -25,8 +25,8 @@ class RegistrationRouter: RegistrationRouterInput {
     }
     
     func routNextVC(wihtNavigationController navController: UINavigationController) {
-        let viewController = PhoneVereficationViewController(nibName: "PhoneVereficationScreen", bundle: nil)//TermsAndServicesViewController(nibName: "TermsAndServicesScreen", bundle: nil)
-        let configurator = PhoneVereficationModuleInitializer()//TermsAndServicesModuleInitializer()
+        let viewController = PhoneVereficationViewController(nibName: "PhoneVereficationScreen", bundle: nil)
+        let configurator = PhoneVereficationModuleInitializer()
         configurator.phonevereficationViewController = viewController
         configurator.setupConfig()
         navController.pushViewController(viewController, animated: true)
