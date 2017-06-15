@@ -50,8 +50,10 @@ class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSour
         var tempoRow: UITableViewCell
         if indexPath.row == 1 {
             tempoRow = tableView.dequeueReusableCell(withIdentifier: "GSMUserInputCellID", for: indexPath)
-        } else {
+        } else if indexPath.row == 0 {
             tempoRow = tableView.dequeueReusableCell(withIdentifier: "BaseUserInputCellViewID", for: indexPath)
+        } else {
+            tempoRow = tableView.dequeueReusableCell(withIdentifier: "PasswordCellID", for: indexPath)
         }
         
         self.setupCell(withCell: tempoRow, atIndex: indexPath.row)
@@ -80,6 +82,8 @@ class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSour
             cell.setupCell(withTitle: model.title, inputText: model.inputText, cellType: model.type)
         } else if let cell = cell as? BaseUserInputCellView {
             cell.setupBaseCell(withTitle: model.title, inputText: model.inputText, cellType: model.type)
+        } else if let cell = cell as? PasswordCell {
+            cell.setupInitialState(withLabelTitle: model.title, placeHolderText: model.inputText)
         }
     }
     

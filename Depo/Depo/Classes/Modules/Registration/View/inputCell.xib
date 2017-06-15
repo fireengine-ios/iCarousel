@@ -40,7 +40,7 @@
                         <fontDescription key="fontDescription" name="TurkcellSaturaIta" family="TurkcellSaturaIta" pointSize="16"/>
                         <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                     </textField>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="combinedShape" translatesAutoresizingMaskIntoConstraints="NO" id="8yZ-Au-6SG">
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="combinedShape" translatesAutoresizingMaskIntoConstraints="NO" id="8yZ-Au-6SG">
                         <rect key="frame" x="325" y="42" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="aLn-Jg-pnO"/>

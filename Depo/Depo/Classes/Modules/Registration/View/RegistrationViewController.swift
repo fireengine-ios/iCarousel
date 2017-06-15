@@ -25,16 +25,8 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-//        Bundle.main.loadNibNamed("CountryPicker", owner: self, options: nil)
-        self.pickerView.dataSource = self.dataSource
-        self.pickerView.delegate = self.dataSource
-        
-//        picker.frame = CGRect(x: 0, y: 0, width: self.pickerContainer.bounds.width, height: self.pickerContainer.bounds.height)
-//        self.pickerContainer.addSubview(self.picker)
-        
-        self.dataSource.output = self
-        self.userRegistrationTable.dataSource = self.dataSource
-        self.userRegistrationTable.delegate = self.dataSource
+        self.setupDelegates()
+
         self.output.prepareCells()
     }
     
@@ -44,6 +36,23 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
         self.userRegistrationTable.register(UINib(nibName: "GSMUInputCell", bundle: nil), forCellReuseIdentifier: "GSMUserInputCellID")
         self.userRegistrationTable.register(UINib(nibName: "PasswordCell", bundle: nil), forCellReuseIdentifier: "PasswordCellID")
 //        self.setupConstraintsForPicker()
+    }
+    
+    private func setupDelegates() {
+        self.pickerView.dataSource = self.dataSource
+        self.pickerView.delegate = self.dataSource
+        
+        self.dataSource.output = self
+        self.userRegistrationTable.dataSource = self.dataSource
+        self.userRegistrationTable.delegate = self.dataSource
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.hideKeyboard()
+    }
+    
+    private func hideKeyboard() {
+        view.endEditing(true)
     }
     
     private func setupConstraintsForPicker() {
@@ -124,6 +133,9 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
         }
         if let cell = cell as? BaseUserInputCellView {
             return cell.textInputField.text!
+        }
+        if let cell = cell as? PasswordCell {
+            return cell.textInput.text!
         }
 
         return ""

@@ -18,6 +18,7 @@ class BaseUserInputCellView: UITableViewCell {
         super.awakeFromNib()
 //        self.textInputField.becomeFirstResponder()
         self.textInputField.delegate = self
+        self.titleLabel.textColor = ColorConstants.yellowColor
     }
     
     func setupBaseCell(withTitle title: String, inputText text: String, cellType type: CellTypes) {
@@ -34,29 +35,29 @@ extension BaseUserInputCellView: UITextFieldDelegate {
         return false
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        self.textInputField.becomeFirstResponder()
-        if self.textInputField.text?.characters.count == 1 {
-            self.InfoImage.isHidden = true
-        }
-    }
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard let text = self.textInputField.text else {
-            return false
-        }
-//        let charactersCount =
-        if string.characters.count > 0, text.characters.count + 1 > 0 {
-            self.InfoImage.isHidden = true
-        } else if string.characters.count == 0, text.characters.count - 1 == 0 {
-            self.InfoImage.isHidden = false
-        }
-        return true
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if self.textInputField.text?.characters.count == 0 {
-            self.InfoImage.isHidden = false
-        }
-    }
+//    func textFieldDidBeginEditing(_ textField: UITextField) {
+//        self.textInputField.becomeFirstResponder()
+//        if self.textInputField.text?.characters.count == 1 {
+//            self.InfoImage.isHidden = true
+//        }
+//    }
+//    
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//        guard let text = self.textInputField.text else {
+//            return false
+//        }
+////        let charactersCount =
+//        if string.characters.count > 0, text.characters.count + 1 > 0 {
+//            self.InfoImage.isHidden = true
+//        } else if string.characters.count == 0, text.characters.count - 1 == 0 {
+//            self.InfoImage.isHidden = false
+//        }
+//        return true
+//    }
+//    
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+//        if self.textInputField.text?.characters.count == 0 {
+//            self.InfoImage.isHidden = false
+//        }
+//    }
 }
