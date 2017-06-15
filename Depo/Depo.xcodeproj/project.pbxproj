@@ -1004,8 +1004,8 @@
 		7C032B8B1EEFFD39006532C8 /* TextInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C032B881EEFFD39006532C8 /* TextInputView.xib */; };
 		7C032B8D1EEFFF25006532C8 /* ButtonWithCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B8C1EEFFF25006532C8 /* ButtonWithCorner.swift */; };
 		7C032B901EF014E9006532C8 /* LoginDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B8F1EF014E9006532C8 /* LoginDataStorage.swift */; };
-		7CA6C69E1EF1811100D21EBE /* EULA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6C69C1EF1811100D21EBE /* EULA.swift */; };
-		7CA6C69F1EF1811100D21EBE /* EULAProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6C69D1EF1811100D21EBE /* EULAProtocol.swift */; };
+		7CA6C6A31EF2A5F400D21EBE /* EULA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6C6A11EF2A5F400D21EBE /* EULA.swift */; };
+		7CA6C6A41EF2A5F400D21EBE /* EULAProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6C6A21EF2A5F400D21EBE /* EULAProtocol.swift */; };
 		7E17BA74388D3670D1FEEBBA /* RegistrationViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF1643276D50FAE9FC2305 /* RegistrationViewInput.swift */; };
 		80BAF3AEB6623B739C0F967F /* RegistrationInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42B02A7891F46EEC97D1662 /* RegistrationInitializer.swift */; };
 		83AFF9A2BBEF449448186DBB /* Pods_Lifebox_Picker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F8D57D36EF6E476E6752F2C /* Pods_Lifebox_Picker.framework */; };
@@ -2765,8 +2765,8 @@
 		7C032B8C1EEFFF25006532C8 /* ButtonWithCorner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonWithCorner.swift; sourceTree = "<group>"; };
 		7C032B8F1EF014E9006532C8 /* LoginDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginDataStorage.swift; sourceTree = "<group>"; };
 		7C0EFB4EB989796A6FE4FDA8 /* IntroduceInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceInteractorInput.swift; sourceTree = "<group>"; };
-		7CA6C69C1EF1811100D21EBE /* EULA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EULA.swift; sourceTree = "<group>"; };
-		7CA6C69D1EF1811100D21EBE /* EULAProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EULAProtocol.swift; sourceTree = "<group>"; };
+		7CA6C6A11EF2A5F400D21EBE /* EULA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EULA.swift; sourceTree = "<group>"; };
+		7CA6C6A21EF2A5F400D21EBE /* EULAProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EULAProtocol.swift; sourceTree = "<group>"; };
 		7F142A19BE346559FCF5E378 /* Pods-Lifebox Picker.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lifebox Picker.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Lifebox Picker/Pods-Lifebox Picker.appstore.xcconfig"; sourceTree = "<group>"; };
 		81884BEAD2F49EAE4DC12C88 /* PhoneVereficationInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationInteractorOutput.swift; sourceTree = "<group>"; };
 		849AE724A4CD02D1BB1D73F2 /* Pods-Depo.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Depo.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-Depo/Pods-Depo.enterprise.xcconfig"; sourceTree = "<group>"; };
@@ -5650,10 +5650,18 @@
 		7CA6C69B1EF1811100D21EBE /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				7CA6C69C1EF1811100D21EBE /* EULA.swift */,
-				7CA6C69D1EF1811100D21EBE /* EULAProtocol.swift */,
+				7CA6C6A01EF2A5B200D21EBE /* EulaServices */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		7CA6C6A01EF2A5B200D21EBE /* EulaServices */ = {
+			isa = PBXGroup;
+			children = (
+				7CA6C6A11EF2A5F400D21EBE /* EULA.swift */,
+				7CA6C6A21EF2A5F400D21EBE /* EULAProtocol.swift */,
+			);
+			path = EulaServices;
 			sourceTree = "<group>";
 		};
 		88624F2AE6A9AF52410B741C /* Interactor */ = {
@@ -7443,6 +7451,7 @@
 				94884C801C9078C6006722F7 /* WelcomeController.m in Sources */,
 				051DE35D19CC128600F27C85 /* MyViewController.m in Sources */,
 				535FD96B1DEF5F92005AB4E7 /* DownloadManager.m in Sources */,
+				7CA6C6A31EF2A5F400D21EBE /* EULA.swift in Sources */,
 				9433BCF91D219AE700991483 /* ProfilePhotoUploadDao.m in Sources */,
 				947CA2F11D68AEE00026772F /* GroupedCell.m in Sources */,
 				057DF50E19D050F00005A389 /* FileListDao.m in Sources */,
@@ -7572,7 +7581,7 @@
 				059C046C1A85256B007B18BE /* ContactSyncController.m in Sources */,
 				0579424D1C3FDCC400899923 /* OTPController.m in Sources */,
 				7C032B901EF014E9006532C8 /* LoginDataStorage.swift in Sources */,
-				7CA6C69F1EF1811100D21EBE /* EULAProtocol.swift in Sources */,
+				7CA6C6A41EF2A5F400D21EBE /* EULAProtocol.swift in Sources */,
 				053D0EDB19DAEA29006A13E0 /* ProcessFooterView.m in Sources */,
 				9454FA601CAA81FD00BF1288 /* CurrentMusicListModalController.m in Sources */,
 				052E36ED1ACA8AFE009A2F13 /* UploadingImagePreviewController.m in Sources */,
@@ -7699,7 +7708,6 @@
 				80BAF3AEB6623B739C0F967F /* RegistrationInitializer.swift in Sources */,
 				492FC69B2E30BC86F9E63D82 /* TermsAndServicesViewInput.swift in Sources */,
 				5AC8E1173BAB744B2EEB52D2 /* TermsAndServicesViewOutput.swift in Sources */,
-				7CA6C69E1EF1811100D21EBE /* EULA.swift in Sources */,
 				048B5422C45CF75431FB7C02 /* TermsAndServicesViewController.swift in Sources */,
 				9D047E9BA983FBB1419E2E85 /* TermsAndServicesModuleInput.swift in Sources */,
 				8C049C881EEE8E7F0086DA84 /* LoginInteractorInput.swift in Sources */,

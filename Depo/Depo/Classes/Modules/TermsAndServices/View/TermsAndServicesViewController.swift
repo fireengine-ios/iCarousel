@@ -25,11 +25,13 @@ class TermsAndServicesViewController: UIViewController, TermsAndServicesViewInpu
         
         navigationItem.title = NSLocalizedString(TextConstants.termsAndUsesTitile, comment: "")
         
-        let applyButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 44))
+        let applyButton = UIButton(frame: CGRect(x: 0.0, y: 0.0, width: 100.0, height: 44.0))
         applyButton.titleLabel?.font = UIFont(name: FontNamesConstant.turkcellSaturaBol, size: 17)
         applyButton.setTitle(NSLocalizedString(TextConstants.termsAndUsesApplyButtonText, comment: ""), for: UIControlState.normal)
         applyButton.backgroundColor = UIColor.clear
         applyButton.addTarget(self, action: #selector(onApplyButton), for: UIControlEvents.touchUpInside)
+        
+        //let retryB
         
         let barButton = UIBarButtonItem(customView: applyButton)
         applyTermsButton = barButton
