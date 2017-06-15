@@ -9,9 +9,9 @@
 class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
 
     weak var output: TermsAndServicesInteractorOutput!
-
+    let eula = EULA()
+    
     func loadTermsAndUses(){
-        let eula = EULA()
         eula.requestEulaForLocale(localeString: Util.readLocaleCode(), success: {[weak self] (eula) in
             DispatchQueue.main.async {
                 self?.output.showLoadedTermsAndUses(eula: eula)
