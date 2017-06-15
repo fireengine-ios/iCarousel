@@ -144,19 +144,19 @@
         }
     }
     
-    [MPush registerForRemoteNotificationTypes:types];
-    
-    [MPush applicationDidFinishLaunchingWithOptions:launchOptions];
-    
-    //Curio integrationc
-    [[CurioSDK shared] startSession:@"http://curio.turkcell.com.tr/api/v2" apiKey:@"cab314f33df2514764664e5544def586" trackingCode:@"KL2XNFIE" sessionTimeout:30 periodicDispatchEnabled:YES dispatchPeriod:5 maxCachedActivitiyCount:10 loggingEnabled:NO logLevel:0 registerForRemoteNotifications:NO notificationTypes:@"Sound,Badge,Alert" fetchLocationEnabled:NO maxValidLocationTimeInterval:600 delegate:self appLaunchOptions:launchOptions];
-    
-    [[CurioSDK shared] sendEvent:@"ApplicationStarted" eventValue:@"true"];
-    [MPush hitTag:@"ApplicationStarted" withValue:@"true"];
-    
-    DBSession *dbSession = [[DBSession alloc] initWithAppKey:@"422fptod5dlxrn8" appSecret:@"umjclqg3juoyihd" root:kDBRootDropbox]; // initWithAppKey:@"zeddgylajxc1op8" appSecret:@"kn9u1e77bzlk103"
-    [DBSession setSharedSession:dbSession];
-    
+//    [MPush registerForRemoteNotificationTypes:types];
+//
+//    [MPush applicationDidFinishLaunchingWithOptions:launchOptions];
+//
+//    //Curio integrationc
+//    [[CurioSDK shared] startSession:@"http://curio.turkcell.com.tr/api/v2" apiKey:@"cab314f33df2514764664e5544def586" trackingCode:@"KL2XNFIE" sessionTimeout:30 periodicDispatchEnabled:YES dispatchPeriod:5 maxCachedActivitiyCount:10 loggingEnabled:NO logLevel:0 registerForRemoteNotifications:NO notificationTypes:@"Sound,Badge,Alert" fetchLocationEnabled:NO maxValidLocationTimeInterval:600 delegate:self appLaunchOptions:launchOptions];
+//
+//    [[CurioSDK shared] sendEvent:@"ApplicationStarted" eventValue:@"true"];
+//    [MPush hitTag:@"ApplicationStarted" withValue:@"true"];
+//
+//    DBSession *dbSession = [[DBSession alloc] initWithAppKey:@"422fptod5dlxrn8" appSecret:@"umjclqg3juoyihd" root:kDBRootDropbox]; // initWithAppKey:@"zeddgylajxc1op8" appSecret:@"kn9u1e77bzlk103"
+//    [DBSession setSharedSession:dbSession];
+//
     
     progress = [[MBProgressHUD alloc] initWithWindow:self.window];
     progress.opacity = 0.4f;
@@ -206,8 +206,7 @@
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
     
-    PreLoginController *preLogin = [[PreLoginController alloc] init];
-    self.window.rootViewController = preLogin;
+    [self triggerPreLogin];
     [self.window makeKeyAndVisible];
     
     return YES;
@@ -215,12 +214,6 @@
 
 - (void)handleURLCache {
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
-//    SDImageCache *imageCache = [SDImageCache sharedImageCache];
-//    [imageCache clearDiskOnCompletion:nil];
-//    NSURLCache *URLCache = [[NSURLCache alloc] initWithMemoryCapacity:4 * 1024 * 1024
-//                                                         diskCapacity:20 * 1024 * 1024
-//                                                             diskPath:nil];
-//    [NSURLCache setSharedURLCache:URLCache];
 }
 
 - (void) assignNotificationActionByLaunchOptions:(NSDictionary *)launchOptions {
@@ -923,16 +916,9 @@
     NSLog(@"AppDelegate applicationWillEnterForeground");
     activatedFromBackground = YES;
 }
-
+/*
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     IGLog(@"AppDelegate applicationDidBecomeActive");
-    //NSLog(@"AppDelegate applicationDidBecomeActive");
-    //TODO contact sync ile aç
-    /*
-     if(session != nil) {
-     [session checkLatestContactSyncStatus];
-     }
-     */
     
     NSLog(@".... %@", NSStringFromClass([self.window.rootViewController class]));
     if(activatedFromBackground && !loginInProgress && !self.session.loggedOutManually) {
@@ -980,16 +966,16 @@
                 [self removeAllMediaFiles];
             }
         }];
-        // eğer backgrounddan gelmiyorsa bir sonraki auto sync bloğununun okunmasını engelleyen lock kaldırılıyor
-        //        [SyncUtil unlockAutoSyncBlockInProgress];
+         eğer backgrounddan gelmiyorsa bir sonraki auto sync bloğununun okunmasını engelleyen lock kaldırılıyor
+                [SyncUtil unlockAutoSyncBlockInProgress];
     }
     
-    //    [SyncUtil unlockAutoSyncBlockInProgress];
+        [SyncUtil unlockAutoSyncBlockInProgress];
     
     if([SyncUtil readFirstTimeSyncFinishedFlag]) {
         [SyncUtil unlockAutoSyncBlockInProgress];
     }
-
+    
     [self triggerAutoSynchronization];
     
     [[UIDevice currentDevice] setBatteryMonitoringEnabled:YES];
@@ -998,7 +984,7 @@
     }
     [FBSDKAppEvents activateApp];
 }
-
+*/
 - (void)applicationWillTerminate:(UIApplication *)application {
     IGLog(@"AppDelegate applicationWillTerminate");
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
