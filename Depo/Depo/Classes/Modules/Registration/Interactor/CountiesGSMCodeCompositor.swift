@@ -20,7 +20,8 @@ class CounrtiesGSMCodeCompositor {
         let filePath = Bundle.main.path(forResource: "countryiso", ofType: "json")
         let pathURL = URL(fileURLWithPath: filePath!)
 
-        guard let jsonData = try? Data(contentsOf: pathURL), let countyIsoPhone = try? JSONSerialization.jsonObject(with: jsonData, options: []) as? [String : Any] else {
+        guard let jsonData = try? Data(contentsOf: pathURL),
+              let countyIsoPhone = try? JSONSerialization.jsonObject(with: jsonData, options: []) as? [String : Any] else {
          return []
         }
         for isoCode in NSLocale.isoCountryCodes {

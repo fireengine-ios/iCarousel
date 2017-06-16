@@ -32,11 +32,9 @@ class TextInputView: UIView, UITextFieldDelegate {
     
 // MARK: Configuratin
     
-    func configurateViewWithType(viewType:TextInputViewType){
-        self.titleLabel.font = UIFont(name: "TurkcellSaturaBol", size: 10)
-        //self.titleLabel.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
-        
-        self.textField.font = UIFont(name: "TurkcellSaturaBol", size: 14)
+    func configurateViewWithType(viewType:TextInputViewType){ 
+        self.titleLabel.font = UIFont(name: FontNamesConstant.turkcellSaturaBol, size: 10)
+        self.textField.font = UIFont(name: FontNamesConstant.turkcellSaturaBol, size: 14)
         
         switch viewType {
         case TextInputViewType.Text:

@@ -42,6 +42,13 @@ struct TextConstants {
     static let registerTitle = "Register"
     
     static let serverResponceError = "Wrong type of answer"
+    
+    // MARK: Authification Cells
+    static let showPassword = "Show"
+    static let hidePassword = "Hide"
+    
+    
+    // MARK:
 }
 
 
@@ -49,6 +56,3 @@ struct FontNamesConstant {
     static let turkcellSaturaBol = "TurkcellSaturaBol"
 }
 
-class Constants: NSObject {
-
-}

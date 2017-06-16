@@ -22,7 +22,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="ecH-D9-HgV">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="ecH-D9-HgV">
                                 <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchImageLogo" translatesAutoresizingMaskIntoConstraints="NO" id="TOf-6H-Klj">
@@ -50,7 +50,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Background" width="375" height="667"/>
         <image name="LaunchImageLogo" width="130" height="129"/>
-        <image name="background" width="375" height="667"/>
     </resources>
 </document>

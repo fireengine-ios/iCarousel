@@ -10,39 +10,25 @@ import UIKit
 
 
 class UserValidator {
-    
+    // TODO : Incorrect logic need return to Presenter !!!!
     func isUserInfoValid(mail: String, phone: String, password: String, repassword: String) -> Bool {
+        
         if phone.characters.count < 10 {
-            self.showAlert(withText: NSLocalizedString("MsisdnFormatErrorMessage", comment: ""))
+//            self.showAlert(withText: NSLocalizedString("MsisdnFormatErrorMessage", comment: ""))
             return false
         }
         if password.characters.count == 0 {
-            self.showAlert(withText: NSLocalizedString("PassFormatErrorMessage", comment: ""))
+//            self.showAlert(withText: NSLocalizedString("PassFormatErrorMessage", comment: ""))
             return false
         }
         if mail.characters.count == 0 && !Util.isValidEmail(mail) {
-            self.showAlert(withText: NSLocalizedString("EmailFormatErrorMessage", comment: ""))
+//            self.showAlert(withText: NSLocalizedString("EmailFormatErrorMessage", comment: ""))
             return false
         }
         if password != repassword {
-            self.showAlert(withText: NSLocalizedString("PassMismatchErrorMessage", comment: ""))
+//            self.showAlert(withText: NSLocalizedString("PassMismatchErrorMessage", comment: ""))
             return false
         }
         return true
     }
-    
-    private func showAlert(withText text: String) {
-        guard let appDelegate = UIApplication.shared.delegate else {
-            return
-        }
-        guard let window = appDelegate.window else {
-            return
-        }
-        let customAlert = CustomAlertView.init(frame: CGRect(x:0, y:0,
-                                           width: window!.frame.size.width,
-                                           height: window!.frame.size.height),
-                             withTitle: "ERROR", withMessage: text, with: ModalTypeError)
-        (appDelegate as! AppDelegate).showCustomAlert(customAlert)
-    }
-    
 }

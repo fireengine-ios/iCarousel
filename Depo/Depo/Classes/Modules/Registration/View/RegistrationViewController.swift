@@ -33,10 +33,13 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.userRegistrationTable.register(UINib(nibName: "inputCell", bundle: nil), forCellReuseIdentifier: "BaseUserInputCellViewID")
-        self.userRegistrationTable.register(UINib(nibName: "GSMUInputCell", bundle: nil), forCellReuseIdentifier: "GSMUserInputCellID")
-        self.userRegistrationTable.register(UINib(nibName: "PasswordCell", bundle: nil), forCellReuseIdentifier: "PasswordCellID")
-//        self.setupConstraintsForPicker()
+        
+        self.userRegistrationTable.register(UINib(nibName: "inputCell", bundle: nil),
+                                            forCellReuseIdentifier: CellsIdConstants.baseUserInputCellViewID)
+        self.userRegistrationTable.register(UINib(nibName: "GSMUInputCell", bundle: nil),
+                                            forCellReuseIdentifier: CellsIdConstants.gSMUserInputCellID)
+        self.userRegistrationTable.register(UINib(nibName: "PasswordCell", bundle: nil),
+                                            forCellReuseIdentifier: CellsIdConstants.passwordCellID)
     }
     
     private func setupDelegates() {

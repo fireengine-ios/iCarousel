@@ -12,7 +12,7 @@ class LoginInteractor: LoginInteractorInput {
     var dataStorage = LoginDataStorage()
     
     func prepareModels(){
-        self.output.models(models: self.dataStorage.getModels())
+        output.models(models: dataStorage.getModels())
     }
     
 }

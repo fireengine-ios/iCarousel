@@ -12,15 +12,14 @@ class LoginDataStorage: NSObject {
     var loginModels:[BaseCellModel] = []
     
     override init(){
-        let names = [TextConstants.loginCellTitleEmail,
-                     TextConstants.loginCellTitlePassword]
-        let defaultTexts = [TextConstants.loginCellEmailPlaceholder,
-                            TextConstants.loginCellPasswordPlaceholder]
         
-        for i in 0...names.count - 1{
-            let model = BaseCellModel(withTitle: names[i], initialText: defaultTexts[i])
-            loginModels.append(model)
-        }
+        loginModels.append(BaseCellModel(withTitle: TextConstants.loginCellTitleEmail,
+                                         initialText: TextConstants.loginCellEmailPlaceholder))
+        
+        loginModels.append(BaseCellModel(withTitle: TextConstants.loginCellTitlePassword,
+                                         initialText: TextConstants.loginCellPasswordPlaceholder))
+        
+        super.init()
     }
     
     func getModels()->[BaseCellModel]{

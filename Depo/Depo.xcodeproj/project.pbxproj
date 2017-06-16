@@ -932,7 +932,6 @@
 		7C032B7F1EEEB7A8006532C8 /* IntroduceSubView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C032B7E1EEEB7A8006532C8 /* IntroduceSubView.xib */; };
 		7C032B821EEFE465006532C8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B811EEFE465006532C8 /* Constants.swift */; };
 		7C032B841EEFF8CB006532C8 /* LoginDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B831EEFF8CB006532C8 /* LoginDataSource.swift */; };
-		7C032B891EEFFD39006532C8 /* SwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B861EEFFD39006532C8 /* SwitchButton.swift */; };
 		7C032B8A1EEFFD39006532C8 /* TextInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B871EEFFD39006532C8 /* TextInputView.swift */; };
 		7C032B8B1EEFFD39006532C8 /* TextInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C032B881EEFFD39006532C8 /* TextInputView.xib */; };
 		7C032B8D1EEFFF25006532C8 /* ButtonWithCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B8C1EEFFF25006532C8 /* ButtonWithCorner.swift */; };
@@ -960,10 +959,6 @@
 		8C049C8F1EEE8E7F0086DA84 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C049C7D1EEE8E7F0086DA84 /* LoginViewController.xib */; };
 		8C049C901EEE8E7F0086DA84 /* LoginViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C7E1EEE8E7F0086DA84 /* LoginViewInput.swift */; };
 		8C049C911EEE8E7F0086DA84 /* LoginViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C7F1EEE8E7F0086DA84 /* LoginViewOutput.swift */; };
-		8C049C921EEE8E7F0086DA84 /* BottomLoginTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C811EEE8E7F0086DA84 /* BottomLoginTableViewCell.swift */; };
-		8C049C931EEE8E7F0086DA84 /* BottomLoginTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C049C821EEE8E7F0086DA84 /* BottomLoginTableViewCell.xib */; };
-		8C049C941EEE8E7F0086DA84 /* LoginTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C831EEE8E7F0086DA84 /* LoginTableViewCell.swift */; };
-		8C049C951EEE8E7F0086DA84 /* LoginTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C049C841EEE8E7F0086DA84 /* LoginTableViewCell.xib */; };
 		8C0572D41EF1331C005C69DA /* PhoneVereficationScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C0572D31EF1331C005C69DA /* PhoneVereficationScreen.xib */; };
 		8C0572D61EF14C20005C69DA /* inputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C0572D51EF14C20005C69DA /* inputCell.xib */; };
 		8C0572D91EF1A723005C69DA /* PasswordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0572D81EF1A723005C69DA /* PasswordCell.swift */; };
@@ -1317,6 +1312,8 @@
 		B172EE37128C8144C1C9C92C /* RegistrationInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3D38F0C7EEF61373827F8A /* RegistrationInteractorInput.swift */; };
 		B3B44FC4DE4318FC8CCECE4D /* PhoneVereficationInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F258EA9A743F8B1B2D574E /* PhoneVereficationInteractorInput.swift */; };
 		C46B427B1F2D3D3F1EE2DAA6 /* PhoneVereficationViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39582799B29F58A62C1236E /* PhoneVereficationViewOutput.swift */; };
+		CE0327961EF408DB000A6795 /* CellsConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0327951EF408DB000A6795 /* CellsConstant.swift */; };
+		CE03279B1EF40C2D000A6795 /* MessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE03279A1EF40C2D000A6795 /* MessageService.swift */; };
 		CE2E598F1EE941DD0002A492 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 051E1E0819CAC2F900FD1E03 /* Images.xcassets */; };
 		CECE956A1EF2A2EC008AC124 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = CECE95691EF2A2EC008AC124 /* MBProgressHUD.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CF038E2B5949BF9CF841E2CB /* TermsAndServicesInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E7FFCEA7A1AF1C19244F11 /* TermsAndServicesInteractorOutput.swift */; };
@@ -2601,7 +2598,6 @@
 		7C032B7E1EEEB7A8006532C8 /* IntroduceSubView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroduceSubView.xib; sourceTree = "<group>"; };
 		7C032B811EEFE465006532C8 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		7C032B831EEFF8CB006532C8 /* LoginDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginDataSource.swift; sourceTree = "<group>"; };
-		7C032B861EEFFD39006532C8 /* SwitchButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchButton.swift; sourceTree = "<group>"; };
 		7C032B871EEFFD39006532C8 /* TextInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInputView.swift; sourceTree = "<group>"; };
 		7C032B881EEFFD39006532C8 /* TextInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextInputView.xib; sourceTree = "<group>"; };
 		7C032B8C1EEFFF25006532C8 /* ButtonWithCorner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonWithCorner.swift; sourceTree = "<group>"; };
@@ -2633,10 +2629,6 @@
 		8C049C7D1EEE8E7F0086DA84 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		8C049C7E1EEE8E7F0086DA84 /* LoginViewInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewInput.swift; sourceTree = "<group>"; };
 		8C049C7F1EEE8E7F0086DA84 /* LoginViewOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewOutput.swift; sourceTree = "<group>"; };
-		8C049C811EEE8E7F0086DA84 /* BottomLoginTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomLoginTableViewCell.swift; sourceTree = "<group>"; };
-		8C049C821EEE8E7F0086DA84 /* BottomLoginTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BottomLoginTableViewCell.xib; sourceTree = "<group>"; };
-		8C049C831EEE8E7F0086DA84 /* LoginTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginTableViewCell.swift; sourceTree = "<group>"; };
-		8C049C841EEE8E7F0086DA84 /* LoginTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginTableViewCell.xib; sourceTree = "<group>"; };
 		8C0572D31EF1331C005C69DA /* PhoneVereficationScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhoneVereficationScreen.xib; sourceTree = "<group>"; };
 		8C0572D51EF14C20005C69DA /* inputCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = inputCell.xib; sourceTree = "<group>"; };
 		8C0572D81EF1A723005C69DA /* PasswordCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordCell.swift; sourceTree = "<group>"; };
@@ -3101,6 +3093,8 @@
 		C14662373D7DDA7928074D3C /* IntroduceConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceConfigurator.swift; sourceTree = "<group>"; };
 		C2287D169D831E3173413D01 /* IntroduceRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceRouterInput.swift; sourceTree = "<group>"; };
 		CBF0B3F0018BAF98A072C67E /* Pods-DepoTests.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DepoTests.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-DepoTests/Pods-DepoTests.enterprise.xcconfig"; sourceTree = "<group>"; };
+		CE0327951EF408DB000A6795 /* CellsConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellsConstant.swift; sourceTree = "<group>"; };
+		CE03279A1EF40C2D000A6795 /* MessageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageService.swift; sourceTree = "<group>"; };
 		CECE955F1EF2A09D008AC124 /* DepoTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DepoTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		CECE95601EF2A09D008AC124 /* AutoSyncWidget-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AutoSyncWidget-Bridging-Header.h"; sourceTree = "<group>"; };
 		CECE95611EF2A09D008AC124 /* DepoShareExtension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DepoShareExtension-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -5345,6 +5339,7 @@
 			isa = PBXGroup;
 			children = (
 				7C032B811EEFE465006532C8 /* Constants.swift */,
+				CE0327951EF408DB000A6795 /* CellsConstant.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -5352,7 +5347,6 @@
 		7C032B851EEFFC1A006532C8 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
-				7C032B861EEFFD39006532C8 /* SwitchButton.swift */,
 				7C032B871EEFFD39006532C8 /* TextInputView.swift */,
 				7C032B881EEFFD39006532C8 /* TextInputView.xib */,
 				7C032B8C1EEFFF25006532C8 /* ButtonWithCorner.swift */,
@@ -5371,6 +5365,7 @@
 		7CA6C69B1EF1811100D21EBE /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				CE0327991EF40BD8000A6795 /* MessageService */,
 				7CA6C6A01EF2A5B200D21EBE /* EulaServices */,
 			);
 			path = Services;
@@ -5462,20 +5457,8 @@
 				8C049C7E1EEE8E7F0086DA84 /* LoginViewInput.swift */,
 				8C049C7F1EEE8E7F0086DA84 /* LoginViewOutput.swift */,
 				7C032B831EEFF8CB006532C8 /* LoginDataSource.swift */,
-				8C049C801EEE8E7F0086DA84 /* TableViewCell */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		8C049C801EEE8E7F0086DA84 /* TableViewCell */ = {
-			isa = PBXGroup;
-			children = (
-				8C049C811EEE8E7F0086DA84 /* BottomLoginTableViewCell.swift */,
-				8C049C821EEE8E7F0086DA84 /* BottomLoginTableViewCell.xib */,
-				8C049C831EEE8E7F0086DA84 /* LoginTableViewCell.swift */,
-				8C049C841EEE8E7F0086DA84 /* LoginTableViewCell.xib */,
-			);
-			path = TableViewCell;
 			sourceTree = "<group>";
 		};
 		8C0572D71EF154D0005C69DA /* Password */ = {
@@ -5621,6 +5604,14 @@
 				7C032B731EEEAE8C006532C8 /* IntroduceDataSource.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		CE0327991EF40BD8000A6795 /* MessageService */ = {
+			isa = PBXGroup;
+			children = (
+				CE03279A1EF40C2D000A6795 /* MessageService.swift */,
+			);
+			path = MessageService;
 			sourceTree = "<group>";
 		};
 		D00A82528405045A46751159 /* Configurator */ = {
@@ -6043,7 +6034,6 @@
 				94328BD41CC3E03300599CEE /* img_baski_1@2x.jpg in Resources */,
 				0526449519D5A26400B63759 /* stroge_icon@2x.png in Resources */,
 				94E549181CC6BA27003CB5DC /* icon_select_off.png in Resources */,
-				8C049C931EEE8E7F0086DA84 /* BottomLoginTableViewCell.xib in Resources */,
 				05224AB319DC4A2D00214767 /* added_tick.png in Resources */,
 				94E5491A1CC6BA27003CB5DC /* icon_suggestion.png in Resources */,
 				052A222D19F6846B000C3C75 /* default_loading_bg@2x.png in Resources */,
@@ -6208,7 +6198,6 @@
 				8C4A9D0F1EEAD99B001D2465 /* TermsAndServicesScreen.xib in Resources */,
 				94FE82AF1D4A85B400F62EF4 /* button_play@2x.png in Resources */,
 				94884C8F1C90AFC3006722F7 /* buttonbg_blue.png in Resources */,
-				8C049C951EEE8E7F0086DA84 /* LoginTableViewCell.xib in Resources */,
 				055A3F4B19E7F9D6004A0121 /* photo_header_with_flap_second@2x.png in Resources */,
 				67B0DD4F1E7FCA0E00BAD640 /* allFilesIcon@3x.png in Resources */,
 				0526448919D5A26400B63759 /* upload_icon@2x.png in Resources */,
@@ -6967,6 +6956,7 @@
 				94E549031CC6348E003CB5DC /* DropboxStartDao.m in Sources */,
 				058337D919ED9C1600DCF0C5 /* CustomAVPlayer.m in Sources */,
 				94BF90DD1D5A0E5E000078FD /* RevisitedAlbumListView.m in Sources */,
+				CE03279B1EF40C2D000A6795 /* MessageService.swift in Sources */,
 				05B01D9C1AC2E2D000D5B827 /* NSDate+Utilities.m in Sources */,
 				94F130C31D2496C10086BDBB /* SettingsSocialController.m in Sources */,
 				56A0DE471E5E239900553462 /* QuotaInfoCell.m in Sources */,
@@ -7042,7 +7032,6 @@
 				056F29DE1C4FA786001DD486 /* SendVerificationSMSDao.m in Sources */,
 				05836FCB1A05703A001D7346 /* MoveListModalController.m in Sources */,
 				051412A519D46748000EAE63 /* FloatingAddMenu.m in Sources */,
-				8C049C921EEE8E7F0086DA84 /* BottomLoginTableViewCell.swift in Sources */,
 				63608CD91E5C1EEA00B8FC66 /* ZPhotoView.m in Sources */,
 				94884C9B1C90C506006722F7 /* ChangePassController.m in Sources */,
 				8C049C8B1EEE8E7F0086DA84 /* LoginPresenter.swift in Sources */,
@@ -7080,6 +7069,7 @@
 				053F993719E1BE6F00928F22 /* PreviewUnavailableController.m in Sources */,
 				054206DB19DD399C0026771C /* UploadNotifyDao.m in Sources */,
 				051DE37619CC162700F27C85 /* HomeController.m in Sources */,
+				CE0327961EF408DB000A6795 /* CellsConstant.swift in Sources */,
 				5247D6271DDDD0F600FFE63E /* CurioPostOffice.m in Sources */,
 				05823AFB1A066FCD005869F6 /* MoveDao.m in Sources */,
 				051E1EB419CB2D1300FD1E03 /* AppSession.m in Sources */,
@@ -7090,7 +7080,6 @@
 				94112A981CCA7DE00050E9B1 /* DropboxStatusCell.m in Sources */,
 				052644BE19D5A32300B63759 /* HeaderCell.m in Sources */,
 				9433BD051D21DF9300991483 /* VideofyAudioListDao.m in Sources */,
-				8C049C941EEE8E7F0086DA84 /* LoginTableViewCell.swift in Sources */,
 				94B03AE31E76CA740026C87C /* PhotosHeaderSyncView.m in Sources */,
 				94E549001CC63480003CB5DC /* DropboxConnectDao.m in Sources */,
 				05AF7C8D1A1C9C5800F5011A /* RecentActivityLinkerFooter.m in Sources */,
@@ -7287,7 +7276,6 @@
 				052644B319D5A2A600B63759 /* SettingsStorageController.m in Sources */,
 				8C049C891EEE8E7F0086DA84 /* LoginInteractorOutput.swift in Sources */,
 				94DCA1091D3D8F03000965AE /* FileTagDao.m in Sources */,
-				7C032B891EEFFD39006532C8 /* SwitchButton.swift in Sources */,
 				058B32971A15E8A300A291C4 /* AlbumDetailModalController.m in Sources */,
 				059E9A091A35DC2500922A77 /* MyMessageComposeViewController.m in Sources */,
 				5247D6261DDDD0F600FFE63E /* CurioNotificationManager.m in Sources */,

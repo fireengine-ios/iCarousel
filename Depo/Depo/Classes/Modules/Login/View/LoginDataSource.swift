@@ -17,10 +17,10 @@ class LoginDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     func setupTableView(tableView: UITableView){
         self.tableView = tableView
         var nib = UINib(nibName: "inputCell", bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: "BaseUserInputCellViewID")
+        tableView.register(nib, forCellReuseIdentifier: CellsIdConstants.baseUserInputCellViewID)
         
         nib = UINib(nibName: "PasswordCell", bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: "PasswordCellID")
+        tableView.register(nib, forCellReuseIdentifier: CellsIdConstants.passwordCellID)
     }
     
     func setupCellsWithModels(models:[BaseCellModel]){
@@ -45,23 +45,21 @@ class LoginDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.row == 0){
-            let cell = tableView.dequeueReusableCell(withIdentifier: "BaseUserInputCellViewID", for: indexPath) as! BaseUserInputCellView
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.baseUserInputCellViewID,
+                                                     for: indexPath) as! BaseUserInputCellView
             let model = tableDataMArray[indexPath.row]
             cell.titleLabel.text = model.title
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             cell.textInputField.attributedPlaceholder = NSAttributedString(string: model.inputText, attributes: [NSForegroundColorAttributeName: ColorConstants.whiteColor])
             return cell
         }else{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "PasswordCellID", for: indexPath) as! PasswordCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.passwordCellID,
+                                                     for: indexPath) as! PasswordCell
             let model = tableDataMArray[indexPath.row]
             cell.titleLabel.text = model.title
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             cell.textInput.text = model.inputText
             return cell
         }
-        
-        
     }
-    
-    
 }

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-
 class LoginViewController: UIViewController, LoginViewInput {
 
     var output: LoginViewOutput!
@@ -15,7 +14,6 @@ class LoginViewController: UIViewController, LoginViewInput {
     
     var tableDataMArray:Array<UITableViewCell> = Array()
     
-    @IBOutlet weak var bacgroungImageView: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var loginButton: UIButton!
@@ -35,7 +33,6 @@ class LoginViewController: UIViewController, LoginViewInput {
         dataSource.setupTableView(tableView: tableView)
         
         configurateView()
-        
         output.viewIsReady()
     }
     
@@ -77,6 +74,13 @@ class LoginViewController: UIViewController, LoginViewInput {
     
     @IBAction func onSaveMyLoginButton(){
         
+    }
+    
+    @IBAction func rememberMe(_ sender: Any) {
+        guard let button = sender as? UIButton else {
+            return
+        }
+        button.isSelected = !button.isSelected;
     }
 
     // MARK: LoginViewInput

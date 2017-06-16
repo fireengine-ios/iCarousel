@@ -11,7 +11,7 @@ struct GSMCodeModel {
     var countryCode: String
     var gsmCode: String
     
-    init(withCountry country: String = "Turkey", withCountryCode countryCode: String = "", withGSMCode gsmCode: String = "+90") {
+    init(withCountry country: String, withCountryCode countryCode: String, withGSMCode gsmCode: String) {
         self.countryName = country
         self.countryCode = countryCode
         self.gsmCode = gsmCode
