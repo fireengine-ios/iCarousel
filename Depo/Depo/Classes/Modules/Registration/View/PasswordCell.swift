@@ -8,9 +8,13 @@
 
 import UIKit
 
-class PasswordCell: UITableViewCell {
+class PasswordCell: ProtoInputTextCell {
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var textInput: UITextField!
+    @IBOutlet weak var textInput: UITextField! {
+        didSet {
+            self.inputTextField = textInput
+        }
+    }
     @IBOutlet weak var showBtn: UIButton!
     @IBOutlet weak var infoImage: UIImageView!
     
@@ -42,12 +46,5 @@ class PasswordCell: UITableViewCell {
     
     @IBAction func showButtonPressed(_ sender: Any) {
         sequreTexieldAndMessage = !sequreTexieldAndMessage
-    }
-}
-
-extension PasswordCell: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.textInput.resignFirstResponder()
-        return false
     }
 }

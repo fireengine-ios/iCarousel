@@ -124,6 +124,10 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
         self.output.readyForPassing(withNavController: navController)
     }
     
+    private func findNextProtoCell(fromEditedCell editedCell: ProtoInputTextCell) {
+        AutoNextEditingRowPasser.passToNextEditingRow(withEditedCell: editedCell, inTable: self.userRegistrationTable)
+    }
+    
     //MARK: - DataSource output
     @IBAction func pickerChoosePressed(_ sender: Any) {
         self.pickerBottomConstraint.constant = -271
@@ -142,5 +146,9 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
         UIView.animate(withDuration: 0.25, animations: {
             self.view.layoutIfNeeded()
         })
+    }
+    
+    func protoCellTextFinishedEditing(cell: ProtoInputTextCell) {
+        self.findNextProtoCell(fromEditedCell: cell)
     }
 }

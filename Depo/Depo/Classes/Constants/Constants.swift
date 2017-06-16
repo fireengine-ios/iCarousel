@@ -41,6 +41,11 @@ struct TextConstants {
     
     static let registerTitle = "Register"
     
+    static let forgotPasswordTitle = "Forgot My Password"
+    static let forgotPasswordSubTitle = "If you registered with your Turkcell Number you can just send SIFRE LIFEBOX to 2222 to recieve a new password or enter your mail below."
+    static let forgotPasswordSendPassword = "Send password reset link"
+    static let forgotPasswordCellTitle = NSLocalizedString("EmailTitle", comment: "")
+    
     static let serverResponceError = "Wrong type of answer"
     
     // MARK: Authification Cells

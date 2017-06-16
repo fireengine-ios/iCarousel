@@ -23,4 +23,8 @@ class LoginPresenter: LoginModuleInput, LoginViewOutput, LoginInteractorOutput {
     func sendLoginAndPassword(login: String, password: String) {
         
     }
+    
+    func onCantLoginButton(){
+        self.router.goToForgotPassword()
+    }
 }

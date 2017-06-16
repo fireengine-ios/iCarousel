@@ -713,11 +713,13 @@
 		070A22191E8AB807002385F7 /* Line@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 070A22161E8AB807002385F7 /* Line@3x.png */; };
 		0715C0551EC1D3EC00D38BEA /* MetaFileSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C7CB691ABC91B200A7BF8E /* MetaFileSummary.m */; };
 		073762191EA09E5200A1A4BC /* ImageScale.m in Sources */ = {isa = PBXBuildFile; fileRef = 073762181EA09E5200A1A4BC /* ImageScale.m */; };
+		10A2877573EB6B2CD13350CA /* ForgotPasswordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B528C5E30EE44682526AD182 /* ForgotPasswordPresenter.swift */; };
 		1146A4243078B2F9ECCA7CA3 /* PhoneVereficationModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A02E3E36C52C1523CC0A1D /* PhoneVereficationModuleInput.swift */; };
 		140008215E0B255CE7A5CF41 /* RegistrationRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8F8172E806B037FD1D2E37 /* RegistrationRouterInput.swift */; };
 		1CD04C97DE9B9B1D3FF47686 /* IntroducePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797B0A89F74D79DE19756139 /* IntroducePresenter.swift */; };
 		1E03D063706EE7671A60E98F /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44DB6B541540CC3F60A6E22 /* RegistrationViewController.swift */; };
 		1F5833056717B6AC32870126 /* IntroduceRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52F5296568EE7BCE2BF46A4 /* IntroduceRouter.swift */; };
+		22374F006F9952BA2CCCBDE6 /* ForgotPasswordInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8335AE67CC88B914BA208EA7 /* ForgotPasswordInitializer.swift */; };
 		23DE78F8D74B30D937E2A376 /* PhoneVereficationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7D2D493926257E97EAFDE0 /* PhoneVereficationRouter.swift */; };
 		2443E1541B6BB0C5001C274D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2443E1531B6BB0C5001C274D /* AudioToolbox.framework */; };
 		2443E1571B6BB5F3001C274D /* AudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2443E1561B6BB5F3001C274D /* AudioManager.m */; };
@@ -731,6 +733,7 @@
 		3C02D568A82AEC60664B8B20 /* PhoneVereficationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB98FBD5D9F6A807D3E5698 /* PhoneVereficationPresenter.swift */; };
 		3C691D28A1EADBB76F4DD25A /* RegistrationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47258744D443C841AC3A4A0 /* RegistrationInteractor.swift */; };
 		3E296E13F16BA1227C99EB22 /* Pods_DepoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7178010CFB1121D7DCD56A4C /* Pods_DepoTests.framework */; };
+		467E332C455DC000C90B6711 /* ForgotPasswordConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C450B9D56ECE6334139BA0 /* ForgotPasswordConfigurator.swift */; };
 		492FC69B2E30BC86F9E63D82 /* TermsAndServicesViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70E4E2532914C44F1B96A96 /* TermsAndServicesViewInput.swift */; };
 		4EC785F4D289AAF22D7D7D1E /* PhoneVereficationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A02B1046915E8086459A15 /* PhoneVereficationViewController.swift */; };
 		523E9C511E0A69E300C2DFE7 /* SuggestDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 523E9C501E0A69E300C2DFE7 /* SuggestDao.m */; };
@@ -857,6 +860,7 @@
 		5A9F7AD21A6AD38C1CAAECA4 /* Pods_DepoShareExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F5B2B3236E8C7524B328BB3 /* Pods_DepoShareExtension.framework */; };
 		5AC8E1173BAB744B2EEB52D2 /* TermsAndServicesViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E099926470C9E12018BC6 /* TermsAndServicesViewOutput.swift */; };
 		5C14795325A085EE7E069554 /* Pods_Depo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C390612A5109C2A9E5E35AB /* Pods_Depo.framework */; };
+		5E5BBBA9789AFE73C4F8D86E /* ForgotPasswordInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95383081F9605943122914E0 /* ForgotPasswordInteractorInput.swift */; };
 		6308E46D1E64C0E800BB32A0 /* VideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6308E46C1E64C0E800BB32A0 /* VideoView.m */; };
 		63608CD91E5C1EEA00B8FC66 /* ZPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63608CD81E5C1EEA00B8FC66 /* ZPhotoView.m */; };
 		63CCC95F017AFABD3C9A5DC2 /* TermsAndServicesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E5A70D0BAB72F0D8679BB8 /* TermsAndServicesInteractor.swift */; };
@@ -938,10 +942,15 @@
 		7C032B901EF014E9006532C8 /* LoginDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B8F1EF014E9006532C8 /* LoginDataStorage.swift */; };
 		7CA6C6A31EF2A5F400D21EBE /* EULA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6C6A11EF2A5F400D21EBE /* EULA.swift */; };
 		7CA6C6A41EF2A5F400D21EBE /* EULAProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6C6A21EF2A5F400D21EBE /* EULAProtocol.swift */; };
+		7CA6C6A71EF2C7BD00D21EBE /* ForgotPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CA6C6A61EF2C7BD00D21EBE /* ForgotPasswordViewController.xib */; };
+		7CC8144E1EF41AD3001DFCF0 /* MessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8144D1EF41AD3001DFCF0 /* MessageService.swift */; };
+		7CC814501EF41AE0001DFCF0 /* CellsConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8144F1EF41AE0001DFCF0 /* CellsConstant.swift */; };
 		7E17BA74388D3670D1FEEBBA /* RegistrationViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF1643276D50FAE9FC2305 /* RegistrationViewInput.swift */; };
 		80BAF3AEB6623B739C0F967F /* RegistrationInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42B02A7891F46EEC97D1662 /* RegistrationInitializer.swift */; };
+		816746DD18231C54891F6683 /* ForgotPasswordInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB5AE431A5F5DC8973D4E47 /* ForgotPasswordInteractorOutput.swift */; };
 		83AFF9A2BBEF449448186DBB /* Pods_Lifebox_Picker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F8D57D36EF6E476E6752F2C /* Pods_Lifebox_Picker.framework */; };
 		88E47007474F6D5716B4C5AD /* IntroduceViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDC6A3281516662EEFBF8A5 /* IntroduceViewInput.swift */; };
+		896C0DCDB6F27E21E4D3251F /* ForgotPasswordViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1481F6939E81618738C7DE /* ForgotPasswordViewInput.swift */; };
 		8C049C581EEC7DC60086DA84 /* RegistrationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C571EEC7DC60086DA84 /* RegistrationDataSource.swift */; };
 		8C049C5B1EEC83420086DA84 /* BaseCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C5A1EEC83420086DA84 /* BaseCellModel.swift */; };
 		8C049C5D1EEC85DD0086DA84 /* ValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C5C1EEC85DD0086DA84 /* ValidationService.swift */; };
@@ -963,11 +972,12 @@
 		8C0572D61EF14C20005C69DA /* inputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C0572D51EF14C20005C69DA /* inputCell.xib */; };
 		8C0572D91EF1A723005C69DA /* PasswordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0572D81EF1A723005C69DA /* PasswordCell.swift */; };
 		8C0572DB1EF1BE4E005C69DA /* PasswordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C0572DA1EF1BE4E005C69DA /* PasswordCell.xib */; };
+		8C0B2F261EF314C200706DC0 /* ProtoInputTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0B2F251EF314C200706DC0 /* ProtoInputTextCell.swift */; };
+		8C0B2F281EF3AF8800706DC0 /* AutoNextEditingRowPasser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0B2F271EF3AF8800706DC0 /* AutoNextEditingRowPasser.swift */; };
 		8C2044641EEA8E6900642627 /* BaseUserInputCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2044631EEA8E6900642627 /* BaseUserInputCellView.swift */; };
 		8C4A9D0F1EEAD99B001D2465 /* TermsAndServicesScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C4A9D0E1EEAD99B001D2465 /* TermsAndServicesScreen.xib */; };
 		8C69B2E61EF280B2005B6A28 /* SimCardInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C69B2E51EF280B2005B6A28 /* SimCardInfo.swift */; };
 		8C8387F81EE9767C00AB89B9 /* RegistrationScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C8387F71EE9767C00AB89B9 /* RegistrationScreen.xib */; };
-		8CA0D9E01EF2A0E20054544D /* CellTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA0D9DF1EF2A0E20054544D /* CellTypes.swift */; };
 		8CFA182F1EEEC47900AF236E /* GSMUserInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA182E1EEEC47900AF236E /* GSMUserInputCell.swift */; };
 		8CFA18331EEFBB4800AF236E /* GSMUInputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CFA18321EEFBB4800AF236E /* GSMUInputCell.xib */; };
 		8CFA183C1EF0089A00AF236E /* GSMCodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA183B1EF0089A00AF236E /* GSMCodeModel.swift */; };
@@ -1303,20 +1313,24 @@
 		94FE82AF1D4A85B400F62EF4 /* button_play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94FE82AE1D4A85B400F62EF4 /* button_play@2x.png */; };
 		94FE82B11D4A85BC00F62EF4 /* button_play@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94FE82B01D4A85BC00F62EF4 /* button_play@3x.png */; };
 		94FE82B31D4A85C600F62EF4 /* button_play.png in Resources */ = {isa = PBXBuildFile; fileRef = 94FE82B21D4A85C600F62EF4 /* button_play.png */; };
+		99901AA03D383484C71A5D63 /* ForgotPasswordViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8210436C55034A653D4CEE9 /* ForgotPasswordViewOutput.swift */; };
 		9B475AA49ABDBB16DAB721AA /* RegistrationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA785FD67C48E257A4E2A03 /* RegistrationConfigurator.swift */; };
 		9D047E9BA983FBB1419E2E85 /* TermsAndServicesModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD733F7347C546BBBAE9DF7D /* TermsAndServicesModuleInput.swift */; };
 		A1B18BF7BC6B32BCD480055E /* TermsAndServicesInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C97731562E4ACF6D86E22E /* TermsAndServicesInteractorInput.swift */; };
 		A1DFA57CDD4A80126758F39B /* IntroduceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14662373D7DDA7928074D3C /* IntroduceConfigurator.swift */; };
 		A7297A2F2C70800EFD455BA4 /* RegistrationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4483DD5CFB766196E8A1ADB3 /* RegistrationPresenter.swift */; };
 		AB1EACE8ED166A1B336891F1 /* IntroduceInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB01CDF10CB058E76558146 /* IntroduceInteractor.swift */; };
+		AFFFAD25E0B39167C5E7177E /* ForgotPasswordRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B761C517C5341FD74BF00DF5 /* ForgotPasswordRouterInput.swift */; };
 		B172EE37128C8144C1C9C92C /* RegistrationInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3D38F0C7EEF61373827F8A /* RegistrationInteractorInput.swift */; };
 		B3B44FC4DE4318FC8CCECE4D /* PhoneVereficationInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F258EA9A743F8B1B2D574E /* PhoneVereficationInteractorInput.swift */; };
 		C46B427B1F2D3D3F1EE2DAA6 /* PhoneVereficationViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39582799B29F58A62C1236E /* PhoneVereficationViewOutput.swift */; };
-		CE0327961EF408DB000A6795 /* CellsConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0327951EF408DB000A6795 /* CellsConstant.swift */; };
-		CE03279B1EF40C2D000A6795 /* MessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE03279A1EF40C2D000A6795 /* MessageService.swift */; };
+		C5CEA90AD26E3F7F5C1534EA /* ForgotPasswordInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3309397E1E165E22E97EC338 /* ForgotPasswordInteractor.swift */; };
+		C992C8DAAF952288823C7FC5 /* ForgotPasswordRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F233973492D247406E39E96E /* ForgotPasswordRouter.swift */; };
 		CE2E598F1EE941DD0002A492 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 051E1E0819CAC2F900FD1E03 /* Images.xcassets */; };
 		CECE956A1EF2A2EC008AC124 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = CECE95691EF2A2EC008AC124 /* MBProgressHUD.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CF038E2B5949BF9CF841E2CB /* TermsAndServicesInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E7FFCEA7A1AF1C19244F11 /* TermsAndServicesInteractorOutput.swift */; };
+		D5DDA6479B2067CF53CCC812 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536B87BE9C6EA2601A4F42F3 /* ForgotPasswordViewController.swift */; };
+		D90BBF52E07A554C26C5FB6E /* ForgotPasswordModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C7CC7BE6988DA598BF0BE9 /* ForgotPasswordModuleInput.swift */; };
 		DA3EC56E00AF09E631B25D19 /* PhoneVereficationInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81884BEAD2F49EAE4DC12C88 /* PhoneVereficationInteractorOutput.swift */; };
 		DC3FD2A9535F2322DAB02CFB /* RegistrationViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4738D31A12B7DD8C76B4E7 /* RegistrationViewOutput.swift */; };
 		DD98BFC902FD68401D4518AC /* PhoneVereficationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D510E6399344E81392443CFD /* PhoneVereficationInteractor.swift */; };
@@ -2351,7 +2365,9 @@
 		24FE7B0D1B6A5A98007B53A0 /* white_print_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "white_print_icon@2x.png"; sourceTree = "<group>"; };
 		26C781F988B2B5E741F70753 /* Pods_AutoSyncWidget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AutoSyncWidget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B4738D31A12B7DD8C76B4E7 /* RegistrationViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationViewOutput.swift; sourceTree = "<group>"; };
+		3309397E1E165E22E97EC338 /* ForgotPasswordInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordInteractor.swift; sourceTree = "<group>"; };
 		3548B2E6E62148AE1CE31A20 /* Pods-DepoShareExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DepoShareExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-DepoShareExtension/Pods-DepoShareExtension.release.xcconfig"; sourceTree = "<group>"; };
+		35C450B9D56ECE6334139BA0 /* ForgotPasswordConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordConfigurator.swift; sourceTree = "<group>"; };
 		3A570FBC82798DEEDCBB44C3 /* Pods-DepoTests.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DepoTests.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-DepoTests/Pods-DepoTests.appstore.xcconfig"; sourceTree = "<group>"; };
 		3C0817D19161BF904D94191B /* RegistrationModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationModuleInput.swift; sourceTree = "<group>"; };
 		4483DD5CFB766196E8A1ADB3 /* RegistrationPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationPresenter.swift; sourceTree = "<group>"; };
@@ -2409,6 +2425,7 @@
 		535FD96F1DF01AA2005AB4E7 /* album_photo_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "album_photo_icon@3x.png"; sourceTree = "<group>"; };
 		535FD9721DF3FE2C005AB4E7 /* DownloadedFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadedFile.h; sourceTree = "<group>"; };
 		535FD9731DF3FE3A005AB4E7 /* DownloadedFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadedFile.m; sourceTree = "<group>"; };
+		536B87BE9C6EA2601A4F42F3 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		53FA9CE01DE86071008DCF93 /* QuotaInfoDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuotaInfoDao.h; sourceTree = "<group>"; };
 		53FA9CE11DE86071008DCF93 /* QuotaInfoDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuotaInfoDao.m; sourceTree = "<group>"; };
 		53FA9CE31DE8607D008DCF93 /* Quota.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quota.h; sourceTree = "<group>"; };
@@ -2514,6 +2531,7 @@
 		56FCFDD31A9C7DDA00AC041C /* info_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info_icon.png; sourceTree = "<group>"; };
 		56FCFDD41A9C7DDA00AC041C /* info_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "info_icon@2x.png"; sourceTree = "<group>"; };
 		59DF3A544E79D5BF457D76AD /* Pods-Lifebox Picker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lifebox Picker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Lifebox Picker/Pods-Lifebox Picker.debug.xcconfig"; sourceTree = "<group>"; };
+		5C1481F6939E81618738C7DE /* ForgotPasswordViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewInput.swift; sourceTree = "<group>"; };
 		6308E46B1E64C0E800BB32A0 /* VideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoView.h; sourceTree = "<group>"; };
 		6308E46C1E64C0E800BB32A0 /* VideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoView.m; sourceTree = "<group>"; };
 		633238D01E6D99250064939E /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -2606,8 +2624,12 @@
 		7CA6C6A11EF2A5F400D21EBE /* EULA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EULA.swift; sourceTree = "<group>"; };
 		7CA6C6A21EF2A5F400D21EBE /* EULAProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EULAProtocol.swift; sourceTree = "<group>"; };
 		7CA6C6A51EF2AABF00D21EBE /* Depo-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Depo-Bridging-Header.h"; sourceTree = "<group>"; };
+		7CA6C6A61EF2C7BD00D21EBE /* ForgotPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ForgotPasswordViewController.xib; path = Depo/Classes/Modules/forgotPassword/View/ForgotPasswordViewController.xib; sourceTree = SOURCE_ROOT; };
+		7CC8144D1EF41AD3001DFCF0 /* MessageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageService.swift; sourceTree = "<group>"; };
+		7CC8144F1EF41AE0001DFCF0 /* CellsConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellsConstant.swift; sourceTree = "<group>"; };
 		7F142A19BE346559FCF5E378 /* Pods-Lifebox Picker.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lifebox Picker.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Lifebox Picker/Pods-Lifebox Picker.appstore.xcconfig"; sourceTree = "<group>"; };
 		81884BEAD2F49EAE4DC12C88 /* PhoneVereficationInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationInteractorOutput.swift; sourceTree = "<group>"; };
+		8335AE67CC88B914BA208EA7 /* ForgotPasswordInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordInitializer.swift; sourceTree = "<group>"; };
 		849AE724A4CD02D1BB1D73F2 /* Pods-Depo.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Depo.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-Depo/Pods-Depo.enterprise.xcconfig"; sourceTree = "<group>"; };
 		86781F866B6A2923E2A27B5D /* IntroduceInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceInitializer.swift; sourceTree = "<group>"; };
 		8ABF89FF6605635ADBC2E20B /* Pods-Depo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Depo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Depo/Pods-Depo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -2633,11 +2655,12 @@
 		8C0572D51EF14C20005C69DA /* inputCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = inputCell.xib; sourceTree = "<group>"; };
 		8C0572D81EF1A723005C69DA /* PasswordCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordCell.swift; sourceTree = "<group>"; };
 		8C0572DA1EF1BE4E005C69DA /* PasswordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PasswordCell.xib; sourceTree = "<group>"; };
+		8C0B2F251EF314C200706DC0 /* ProtoInputTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProtoInputTextCell.swift; sourceTree = "<group>"; };
+		8C0B2F271EF3AF8800706DC0 /* AutoNextEditingRowPasser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoNextEditingRowPasser.swift; sourceTree = "<group>"; };
 		8C2044631EEA8E6900642627 /* BaseUserInputCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseUserInputCellView.swift; sourceTree = "<group>"; };
 		8C4A9D0E1EEAD99B001D2465 /* TermsAndServicesScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TermsAndServicesScreen.xib; sourceTree = "<group>"; };
 		8C69B2E51EF280B2005B6A28 /* SimCardInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimCardInfo.swift; sourceTree = "<group>"; };
 		8C8387F71EE9767C00AB89B9 /* RegistrationScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistrationScreen.xib; sourceTree = "<group>"; };
-		8CA0D9DF1EF2A0E20054544D /* CellTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellTypes.swift; sourceTree = "<group>"; };
 		8CDC6A3281516662EEFBF8A5 /* IntroduceViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceViewInput.swift; sourceTree = "<group>"; };
 		8CFA182E1EEEC47900AF236E /* GSMUserInputCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSMUserInputCell.swift; sourceTree = "<group>"; };
 		8CFA18321EEFBB4800AF236E /* GSMUInputCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GSMUInputCell.xib; sourceTree = "<group>"; };
@@ -3076,8 +3099,10 @@
 		94FE82AE1D4A85B400F62EF4 /* button_play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_play@2x.png"; sourceTree = "<group>"; };
 		94FE82B01D4A85BC00F62EF4 /* button_play@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_play@3x.png"; sourceTree = "<group>"; };
 		94FE82B21D4A85C600F62EF4 /* button_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_play.png; sourceTree = "<group>"; };
+		95383081F9605943122914E0 /* ForgotPasswordInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordInteractorInput.swift; sourceTree = "<group>"; };
 		9931E7D51C7D9D14A47A2DC0 /* Pods-Depo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Depo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Depo/Pods-Depo.release.xcconfig"; sourceTree = "<group>"; };
 		99A02E3E36C52C1523CC0A1D /* PhoneVereficationModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationModuleInput.swift; sourceTree = "<group>"; };
+		9EB5AE431A5F5DC8973D4E47 /* ForgotPasswordInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordInteractorOutput.swift; sourceTree = "<group>"; };
 		A0E7FFCEA7A1AF1C19244F11 /* TermsAndServicesInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesInteractorOutput.swift; sourceTree = "<group>"; };
 		A27FB35728F24100F410FBA2 /* TermsAndServicesInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesInitializer.swift; sourceTree = "<group>"; };
 		A44DB6B541540CC3F60A6E22 /* RegistrationViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
@@ -3087,14 +3112,15 @@
 		AE8F8172E806B037FD1D2E37 /* RegistrationRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationRouterInput.swift; sourceTree = "<group>"; };
 		AF3A47897745CE43F5742B92 /* IntroduceInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceInteractorOutput.swift; sourceTree = "<group>"; };
 		B172FFCC3EC70BEDB98BAE4C /* PhoneVereficationRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationRouterInput.swift; sourceTree = "<group>"; };
+		B528C5E30EE44682526AD182 /* ForgotPasswordPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordPresenter.swift; sourceTree = "<group>"; };
+		B761C517C5341FD74BF00DF5 /* ForgotPasswordRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordRouterInput.swift; sourceTree = "<group>"; };
 		BB2E099926470C9E12018BC6 /* TermsAndServicesViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesViewOutput.swift; sourceTree = "<group>"; };
 		BBB98FBD5D9F6A807D3E5698 /* PhoneVereficationPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationPresenter.swift; sourceTree = "<group>"; };
+		C0C7CC7BE6988DA598BF0BE9 /* ForgotPasswordModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordModuleInput.swift; sourceTree = "<group>"; };
 		C0E7C8A905CBF89702F18211 /* Pods-DepoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DepoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DepoTests/Pods-DepoTests.release.xcconfig"; sourceTree = "<group>"; };
 		C14662373D7DDA7928074D3C /* IntroduceConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceConfigurator.swift; sourceTree = "<group>"; };
 		C2287D169D831E3173413D01 /* IntroduceRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceRouterInput.swift; sourceTree = "<group>"; };
 		CBF0B3F0018BAF98A072C67E /* Pods-DepoTests.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DepoTests.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-DepoTests/Pods-DepoTests.enterprise.xcconfig"; sourceTree = "<group>"; };
-		CE0327951EF408DB000A6795 /* CellsConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellsConstant.swift; sourceTree = "<group>"; };
-		CE03279A1EF40C2D000A6795 /* MessageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageService.swift; sourceTree = "<group>"; };
 		CECE955F1EF2A09D008AC124 /* DepoTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DepoTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		CECE95601EF2A09D008AC124 /* AutoSyncWidget-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AutoSyncWidget-Bridging-Header.h"; sourceTree = "<group>"; };
 		CECE95611EF2A09D008AC124 /* DepoShareExtension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DepoShareExtension-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -3106,6 +3132,7 @@
 		D4C8F4F05CE1353BA41D6D3D /* Pods-AutoSyncWidget.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutoSyncWidget.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-AutoSyncWidget/Pods-AutoSyncWidget.appstore.xcconfig"; sourceTree = "<group>"; };
 		D510E6399344E81392443CFD /* PhoneVereficationInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationInteractor.swift; sourceTree = "<group>"; };
 		D6F285DAEBFD29EE3A3322FE /* IntroduceModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceModuleInput.swift; sourceTree = "<group>"; };
+		D8210436C55034A653D4CEE9 /* ForgotPasswordViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewOutput.swift; sourceTree = "<group>"; };
 		D9A02B1046915E8086459A15 /* PhoneVereficationViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationViewController.swift; sourceTree = "<group>"; };
 		D9D7B2B043E1B23B7911858D /* PhoneVereficationConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationConfigurator.swift; sourceTree = "<group>"; };
 		E52F5296568EE7BCE2BF46A4 /* IntroduceRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceRouter.swift; sourceTree = "<group>"; };
@@ -3116,6 +3143,7 @@
 		E9E6BDC205798EB090D76132 /* Pods-AutoSyncWidget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutoSyncWidget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AutoSyncWidget/Pods-AutoSyncWidget.debug.xcconfig"; sourceTree = "<group>"; };
 		EC7D2D493926257E97EAFDE0 /* PhoneVereficationRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationRouter.swift; sourceTree = "<group>"; };
 		EF5A0456884CB344B29AD02F /* Pods-DepoShareExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DepoShareExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DepoShareExtension/Pods-DepoShareExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		F233973492D247406E39E96E /* ForgotPasswordRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordRouter.swift; sourceTree = "<group>"; };
 		F39582799B29F58A62C1236E /* PhoneVereficationViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationViewOutput.swift; sourceTree = "<group>"; };
 		F42B02A7891F46EEC97D1662 /* RegistrationInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationInitializer.swift; sourceTree = "<group>"; };
 		F64007ACBE141535B47058DF /* IntroduceViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceViewController.swift; sourceTree = "<group>"; };
@@ -5013,6 +5041,27 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+		48D43A2C558A2593A97FE177 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5C1481F6939E81618738C7DE /* ForgotPasswordViewInput.swift */,
+				D8210436C55034A653D4CEE9 /* ForgotPasswordViewOutput.swift */,
+				536B87BE9C6EA2601A4F42F3 /* ForgotPasswordViewController.swift */,
+				7CA6C6A61EF2C7BD00D21EBE /* ForgotPasswordViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4B3744A5DF696D9B6DBB817D /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				95383081F9605943122914E0 /* ForgotPasswordInteractorInput.swift */,
+				9EB5AE431A5F5DC8973D4E47 /* ForgotPasswordInteractorOutput.swift */,
+				3309397E1E165E22E97EC338 /* ForgotPasswordInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
 		5332150B1DEC274700FE7289 /* Album */ = {
 			isa = PBXGroup;
 			children = (
@@ -5338,8 +5387,8 @@
 		7C032B801EEFE408006532C8 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
+				7CC8144F1EF41AE0001DFCF0 /* CellsConstant.swift */,
 				7C032B811EEFE465006532C8 /* Constants.swift */,
-				CE0327951EF408DB000A6795 /* CellsConstant.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -5347,6 +5396,7 @@
 		7C032B851EEFFC1A006532C8 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				8C0B2F231EF3142400706DC0 /* Cells */,
 				7C032B871EEFFD39006532C8 /* TextInputView.swift */,
 				7C032B881EEFFD39006532C8 /* TextInputView.xib */,
 				7C032B8C1EEFFF25006532C8 /* ButtonWithCorner.swift */,
@@ -5365,7 +5415,7 @@
 		7CA6C69B1EF1811100D21EBE /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				CE0327991EF40BD8000A6795 /* MessageService */,
+				7CC8144C1EF41AD3001DFCF0 /* MessageService */,
 				7CA6C6A01EF2A5B200D21EBE /* EulaServices */,
 			);
 			path = Services;
@@ -5378,6 +5428,14 @@
 				7CA6C6A21EF2A5F400D21EBE /* EULAProtocol.swift */,
 			);
 			path = EulaServices;
+			sourceTree = "<group>";
+		};
+		7CC8144C1EF41AD3001DFCF0 /* MessageService */ = {
+			isa = PBXGroup;
+			children = (
+				7CC8144D1EF41AD3001DFCF0 /* MessageService.swift */,
+			);
+			path = MessageService;
 			sourceTree = "<group>";
 		};
 		88624F2AE6A9AF52410B741C /* Interactor */ = {
@@ -5470,6 +5528,23 @@
 			name = Password;
 			sourceTree = "<group>";
 		};
+		8C0B2F221EF3140C00706DC0 /* ProtoTextInputCell */ = {
+			isa = PBXGroup;
+			children = (
+				8C0B2F251EF314C200706DC0 /* ProtoInputTextCell.swift */,
+				8C0B2F271EF3AF8800706DC0 /* AutoNextEditingRowPasser.swift */,
+			);
+			name = ProtoTextInputCell;
+			sourceTree = "<group>";
+		};
+		8C0B2F231EF3142400706DC0 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				8C0B2F221EF3140C00706DC0 /* ProtoTextInputCell */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
 		8C2044601EEA7A3B00642627 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -5492,8 +5567,8 @@
 		8CFA18341EEFBC0200AF236E /* BaseInputCell */ = {
 			isa = PBXGroup;
 			children = (
-				8C0572D51EF14C20005C69DA /* inputCell.xib */,
 				8C2044631EEA8E6900642627 /* BaseUserInputCellView.swift */,
+				8C0572D51EF14C20005C69DA /* inputCell.xib */,
 			);
 			name = BaseInputCell;
 			sourceTree = "<group>";
@@ -5510,12 +5585,20 @@
 		8CFA18361EEFBC5500AF236E /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				8CA0D9DF1EF2A0E20054544D /* CellTypes.swift */,
 				8C0572D71EF154D0005C69DA /* Password */,
 				8CFA18351EEFBC2B00AF236E /* GSMInputCell */,
 				8CFA18341EEFBC0200AF236E /* BaseInputCell */,
 			);
 			name = Cells;
+			sourceTree = "<group>";
+		};
+		90D1DDC61423899B10F5075D /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				C0C7CC7BE6988DA598BF0BE9 /* ForgotPasswordModuleInput.swift */,
+				B528C5E30EE44682526AD182 /* ForgotPasswordPresenter.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		94F130C41D2496C70086BDBB /* social */ = {
@@ -5531,6 +5614,15 @@
 				94E549081CC63718003CB5DC /* DropboxExportController.m */,
 			);
 			name = social;
+			sourceTree = "<group>";
+		};
+		992E6B5199B59ED8492AFD33 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				B761C517C5341FD74BF00DF5 /* ForgotPasswordRouterInput.swift */,
+				F233973492D247406E39E96E /* ForgotPasswordRouter.swift */,
+			);
+			path = Router;
 			sourceTree = "<group>";
 		};
 		9B571A21E8E33603A8159DE8 /* Configurator */ = {
@@ -5589,6 +5681,7 @@
 				762FCEFD487BFE9A7ACC832D /* TermsAndServices */,
 				E106596B4B7DAC3DE7CFA644 /* Introduce */,
 				E3F92B477C3B581616EAD04C /* PhoneVerefication */,
+				CB47E015BFEA75771011D20E /* ForgotPassword */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -5606,12 +5699,16 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		CE0327991EF40BD8000A6795 /* MessageService */ = {
+		CB47E015BFEA75771011D20E /* ForgotPassword */ = {
 			isa = PBXGroup;
 			children = (
-				CE03279A1EF40C2D000A6795 /* MessageService.swift */,
+				48D43A2C558A2593A97FE177 /* View */,
+				90D1DDC61423899B10F5075D /* Presenter */,
+				4B3744A5DF696D9B6DBB817D /* Interactor */,
+				992E6B5199B59ED8492AFD33 /* Router */,
+				F1F379D7533680E1193EA393 /* Configurator */,
 			);
-			path = MessageService;
+			path = ForgotPassword;
 			sourceTree = "<group>";
 		};
 		D00A82528405045A46751159 /* Configurator */ = {
@@ -5674,6 +5771,15 @@
 				4483DD5CFB766196E8A1ADB3 /* RegistrationPresenter.swift */,
 			);
 			path = Presenter;
+			sourceTree = "<group>";
+		};
+		F1F379D7533680E1193EA393 /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				35C450B9D56ECE6334139BA0 /* ForgotPasswordConfigurator.swift */,
+				8335AE67CC88B914BA208EA7 /* ForgotPasswordInitializer.swift */,
+			);
+			path = Configurator;
 			sourceTree = "<group>";
 		};
 		F6726BE035768C2FD9A85010 /* View */ = {
@@ -6605,6 +6711,7 @@
 				7922338F1EBAF9F500955F90 /* Lifebox-1@3x.png in Resources */,
 				567408B11DFFC17E003DF541 /* overlay_wt_tr.png in Resources */,
 				79C7752D1E9623280008FB09 /* Button@2x.png in Resources */,
+				7CA6C6A71EF2C7BD00D21EBE /* ForgotPasswordViewController.xib in Resources */,
 				0589062619CC226D00A9E517 /* logout_icon@2x.png in Resources */,
 				05AF7C941A1CA04E00F5011A /* white_right_arrow_icon.png in Resources */,
 				051CB40719D2F71200E5FC88 /* nav_detail_icon@2x.png in Resources */,
@@ -6956,7 +7063,6 @@
 				94E549031CC6348E003CB5DC /* DropboxStartDao.m in Sources */,
 				058337D919ED9C1600DCF0C5 /* CustomAVPlayer.m in Sources */,
 				94BF90DD1D5A0E5E000078FD /* RevisitedAlbumListView.m in Sources */,
-				CE03279B1EF40C2D000A6795 /* MessageService.swift in Sources */,
 				05B01D9C1AC2E2D000D5B827 /* NSDate+Utilities.m in Sources */,
 				94F130C31D2496C10086BDBB /* SettingsSocialController.m in Sources */,
 				56A0DE471E5E239900553462 /* QuotaInfoCell.m in Sources */,
@@ -7069,7 +7175,6 @@
 				053F993719E1BE6F00928F22 /* PreviewUnavailableController.m in Sources */,
 				054206DB19DD399C0026771C /* UploadNotifyDao.m in Sources */,
 				051DE37619CC162700F27C85 /* HomeController.m in Sources */,
-				CE0327961EF408DB000A6795 /* CellsConstant.swift in Sources */,
 				5247D6271DDDD0F600FFE63E /* CurioPostOffice.m in Sources */,
 				05823AFB1A066FCD005869F6 /* MoveDao.m in Sources */,
 				051E1EB419CB2D1300FD1E03 /* AppSession.m in Sources */,
@@ -7210,6 +7315,7 @@
 				05C7CB6A1ABC91B200A7BF8E /* MetaFileSummary.m in Sources */,
 				94AF7DD51DF857A3000D425B /* SearchContainerCollCell.m in Sources */,
 				051E1EA719CB209F00FD1E03 /* MenuCell.m in Sources */,
+				7CC814501EF41AE0001DFCF0 /* CellsConstant.swift in Sources */,
 				051E1E0319CAC2F900FD1E03 /* main.m in Sources */,
 				94FAE0C01D2F22EB00BC9F77 /* VideofyAudioCell.m in Sources */,
 				94F130CD1D2497460086BDBB /* SocialBaseController.m in Sources */,
@@ -7220,6 +7326,7 @@
 				051CB39819D2E3FF00E5FC88 /* FolderCell.m in Sources */,
 				0515F2F81C451E240098081C /* SingleCharField.m in Sources */,
 				9445B97E1C9F28FE000FDB80 /* PhotoListPopupController.m in Sources */,
+				8C0B2F261EF314C200706DC0 /* ProtoInputTextCell.swift in Sources */,
 				94BEABFB1CAD1BFE002E37A7 /* EulaApproveDao.m in Sources */,
 				94C7CEFD1D2CE67E0040897A /* SquareSequencedPictureView.m in Sources */,
 				0526444E19D5625E00B63759 /* MoreMenuView.m in Sources */,
@@ -7284,6 +7391,7 @@
 				051DE36919CC12FD00F27C85 /* CheckButton.m in Sources */,
 				5247D6281DDDD0F600FFE63E /* CurioPushData.m in Sources */,
 				050A7B2319F7DFBD00B084B9 /* VolumeLevelIndicator.m in Sources */,
+				7CC8144E1EF41AD3001DFCF0 /* MessageService.swift in Sources */,
 				059CE5471A87D45100F6CFAE /* ContactSyncResult.m in Sources */,
 				058BC23C1A30E5370007F4DE /* ValidateAuthTokenDao.m in Sources */,
 				055A3F5219E819B6004A0121 /* NoItemCell.m in Sources */,
@@ -7302,7 +7410,6 @@
 				051CB39519D2E3F200E5FC88 /* AbstractFileFolderCell.m in Sources */,
 				058BC2351A30D2A90007F4DE /* LoginController.m in Sources */,
 				94884CAA1C91A469006722F7 /* UpdateMsisdnController.m in Sources */,
-				8CA0D9E01EF2A0E20054544D /* CellTypes.swift in Sources */,
 				0589066D19CC560100A9E517 /* CustomLabel.m in Sources */,
 				94FB09841DE2065B00DA666D /* RevisitedPhotoCollCell.m in Sources */,
 				9433BD0B1D21E48300991483 /* PromotionEntryController.m in Sources */,
@@ -7314,6 +7421,7 @@
 				94FAE0B11D2F119300BC9F77 /* VideofyFooterView.m in Sources */,
 				05144B611A090B8000B2A414 /* SimpleDocCell.m in Sources */,
 				058B32911A14ABE500A291C4 /* AlbumAddPhotosDao.m in Sources */,
+				8C0B2F281EF3AF8800706DC0 /* AutoNextEditingRowPasser.swift in Sources */,
 				94BEABF51CAD1807002E37A7 /* EulaDao.m in Sources */,
 				94BB96E21E7940BD00123625 /* RevisitedGroupedPhotoView.m in Sources */,
 				05AF7C811A1C8CD100F5011A /* RecentActivitiesController.m in Sources */,
@@ -7410,6 +7518,18 @@
 				23DE78F8D74B30D937E2A376 /* PhoneVereficationRouter.swift in Sources */,
 				94D2D58D1889CAC192B4C711 /* PhoneVereficationConfigurator.swift in Sources */,
 				2CE3C5E7BAFFA24D39123256 /* PhoneVereficationInitializer.swift in Sources */,
+				896C0DCDB6F27E21E4D3251F /* ForgotPasswordViewInput.swift in Sources */,
+				99901AA03D383484C71A5D63 /* ForgotPasswordViewOutput.swift in Sources */,
+				D5DDA6479B2067CF53CCC812 /* ForgotPasswordViewController.swift in Sources */,
+				D90BBF52E07A554C26C5FB6E /* ForgotPasswordModuleInput.swift in Sources */,
+				10A2877573EB6B2CD13350CA /* ForgotPasswordPresenter.swift in Sources */,
+				5E5BBBA9789AFE73C4F8D86E /* ForgotPasswordInteractorInput.swift in Sources */,
+				816746DD18231C54891F6683 /* ForgotPasswordInteractorOutput.swift in Sources */,
+				C5CEA90AD26E3F7F5C1534EA /* ForgotPasswordInteractor.swift in Sources */,
+				AFFFAD25E0B39167C5E7177E /* ForgotPasswordRouterInput.swift in Sources */,
+				C992C8DAAF952288823C7FC5 /* ForgotPasswordRouter.swift in Sources */,
+				467E332C455DC000C90B6711 /* ForgotPasswordConfigurator.swift in Sources */,
+				22374F006F9952BA2CCCBDE6 /* ForgotPasswordInitializer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

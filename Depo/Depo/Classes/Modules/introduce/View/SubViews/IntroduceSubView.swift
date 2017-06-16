@@ -12,6 +12,7 @@ class IntroduceSubView: UIView {
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var textLabelW: NSLayoutConstraint!
     
     class func initFromNib() -> IntroduceSubView{
         let nibName = String(describing: self)
@@ -24,9 +25,17 @@ class IntroduceSubView: UIView {
         return introduceSubView
     }
     
+    override func layoutSubviews() {
+        let image = imageView.image
+        let coef = (image?.size.width)! / (image?.size.height)!
+        let textW = frame.size.height * coef * 0.8
+        textLabelW.constant = textW
+        layoutIfNeeded()
+    }
+    
     func configurateView(){
         titleLabel.numberOfLines = 10
-        titleLabel.font = UIFont(name: FontNamesConstant.turkcellSaturaBol, size: 10)
+        titleLabel.font = UIFont(name: FontNamesConstant.turkcellSaturaBol, size: 5)
         titleLabel.textColor = ColorConstants.whiteColor
     }
     

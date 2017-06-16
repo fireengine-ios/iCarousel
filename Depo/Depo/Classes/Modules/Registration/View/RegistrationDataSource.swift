@@ -11,9 +11,10 @@ import UIKit
 protocol DataSourceOutput {
 //    func userDidTapCell(forIndex: Int)
     func pickerGotTapped()
+    func protoCellTextFinishedEditing(cell: ProtoInputTextCell)
 }
 
-class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSource, GSMCodeCellDelegate {
+class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     var output: DataSourceOutput? = nil
     var cells: [BaseCellModel] = []
     var gsmModels: [GSMCodeModel] = []
@@ -56,11 +57,13 @@ class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSour
         var tempoRow: UITableViewCell
         
         if indexPath.row == 1 {
-            tempoRow = tableView.dequeueReusableCell(withIdentifier: "GSMUserInputCellID", for: indexPath)
+            tempoRow = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.gSMUserInputCellID, for: indexPath)
         } else if indexPath.row == 0 {
-            tempoRow = tableView.dequeueReusableCell(withIdentifier: "BaseUserInputCellViewID", for: indexPath)
+            tempoRow = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.baseUserInputCellViewID,
+                                                     for: indexPath)
         } else {
-            tempoRow = tableView.dequeueReusableCell(withIdentifier: "PasswordCellID", for: indexPath)
+            tempoRow = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.passwordCellID,
+                                                     for: indexPath)
         }
         
         self.setupCell(withCell: tempoRow, atIndex: indexPath.row)
@@ -78,21 +81,28 @@ class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSour
     }
     
     private func setupCell(withCell cell: UITableViewCell, atIndex index: Int) {
-        if cells.count < 1 {
+
+        guard let cell = cell as? ProtoInputTextCell, cells.count > 0  else {
             return
         }
+        cell.textDelegate = self
         let model = cells[index]
         
         if let cell = cell as? GSMUserInputCell {
             cell.delegate = self
             cell.setupGSMCode(code: currentGSMCode)
             cell.setupCell(withTitle: model.title, inputText: model.inputText)
+            
         } else if let cell = cell as? BaseUserInputCellView {
             cell.setupBaseCell(withTitle: model.title, inputText: model.inputText)
+            
         } else if let cell = cell as? PasswordCell {
             cell.setupInitialState(withLabelTitle: model.title, placeHolderText: model.inputText)
         }
     }
+}
+
+extension RegistrationDataSource: UIPickerViewDataSource, UIPickerViewDelegate, ProtoInputCellProtocol, GSMCodeCellDelegate {
     
     func codeViewGotTapped() {
         self.output?.pickerGotTapped()
@@ -100,14 +110,13 @@ class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSour
     
     func phoneNumberChanged(toNumber number: String) {
         let oldPhoneModel = self.cells[1]
-//        phoneModel.inputText = number
         let newPhoneModel = BaseCellModel(withTitle: oldPhoneModel.title, initialText: number)
         self.cells[1] = newPhoneModel
     }
-
-}
-
-extension RegistrationDataSource: UIPickerViewDataSource, UIPickerViewDelegate {
+    
+    func textFinishedEditing(withCell cell: ProtoInputTextCell) {
+        self.output?.protoCellTextFinishedEditing(cell: cell)
+    }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1

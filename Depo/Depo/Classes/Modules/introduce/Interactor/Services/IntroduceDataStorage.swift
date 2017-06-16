@@ -23,7 +23,6 @@ class IntroduceDataStorage: NSObject {
             let string = text as NSString
             let range = string.range(of: "\n\n")
             
-            
             let attributedText = NSMutableAttributedString(string: text)
             let font1 = UIFont(name: FontNamesConstant.turkcellSaturaBol, size: 18)
             let font2 = UIFont(name: FontNamesConstant.turkcellSaturaBol, size: 10)

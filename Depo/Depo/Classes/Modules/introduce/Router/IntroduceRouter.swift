@@ -11,22 +11,22 @@ import UIKit
 class IntroduceRouter: IntroduceRouterInput {
     
     func onGoToRegister(){
-//        let inicializer = RegistrationModuleInitializer()
-//        let registerController = RegistrationViewController(nibName: "RegistrationScreen", bundle:nil)
-//        inicializer.registrationViewController = registerController
-//        inicializer.setupVC()
-//        
-//        let nController = UIApplication.shared.keyWindow?.rootViewController as! UINavigationController
-//        nController.pushViewController(registerController, animated: true)
-//        nController.navigationBar.isHidden = false
+        let inicializer = RegistrationModuleInitializer()
+        let registerController = RegistrationViewController(nibName: "RegistrationScreen", bundle:nil)
+        inicializer.registrationViewController = registerController
+        inicializer.setupVC()
         
-        let inicializer = TermsAndServicesModuleInitializer()
-        let termsController = TermsAndServicesViewController(nibName: "TermsAndServicesScreen", bundle: nil)
-        inicializer.termsandservicesViewController = termsController
-        inicializer.setupConfig()
         let nController = UIApplication.shared.keyWindow?.rootViewController as! UINavigationController
-        nController.pushViewController(termsController, animated: true)
+        nController.pushViewController(registerController, animated: true)
         nController.navigationBar.isHidden = false
+        
+//        let inicializer = TermsAndServicesModuleInitializer()
+//        let termsController = TermsAndServicesViewController(nibName: "TermsAndServicesScreen", bundle: nil)
+//        inicializer.termsandservicesViewController = termsController
+//        inicializer.setupConfig()
+//        let nController = UIApplication.shared.keyWindow?.rootViewController as! UINavigationController
+//        nController.pushViewController(termsController, animated: true)
+//        nController.navigationBar.isHidden = false
     }
     
     func onGoToLogin(){

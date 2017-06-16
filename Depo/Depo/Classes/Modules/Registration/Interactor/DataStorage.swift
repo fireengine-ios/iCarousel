@@ -32,7 +32,7 @@ class DataStorage {
         let model = models[index]
         let newModel = BaseCellModel(withTitle: model.title, initialText: value)//inputText = value
         models[index] = newModel
-        debugPrint("models are ", self.models)
+//        debugPrint("models are ", self.models)
     }
     
 }

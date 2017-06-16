@@ -69,7 +69,7 @@ class LoginViewController: UIViewController, LoginViewInput {
     }
     
     @IBAction func onCantLoginButton(){
-        
+        self.output.onCantLoginButton()
     }
     
     @IBAction func onSaveMyLoginButton(){

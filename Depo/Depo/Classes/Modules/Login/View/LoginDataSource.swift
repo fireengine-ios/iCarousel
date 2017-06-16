@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
+class LoginDataSource: NSObject, UITableViewDelegate, UITableViewDataSource, ProtoInputCellProtocol {
     
     @IBOutlet weak var tableView: UITableView!
     var tableDataMArray: [BaseCellModel] = []
@@ -45,12 +45,14 @@ class LoginDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.row == 0){
-            let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.baseUserInputCellViewID,
-                                                     for: indexPath) as! BaseUserInputCellView
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.baseUserInputCellViewID, for: indexPath) as! BaseUserInputCellView
             let model = tableDataMArray[indexPath.row]
             cell.titleLabel.text = model.title
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             cell.textInputField.attributedPlaceholder = NSAttributedString(string: model.inputText, attributes: [NSForegroundColorAttributeName: ColorConstants.whiteColor])
+            
+            cell.textDelegate = self
+            
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.passwordCellID,
@@ -59,7 +61,19 @@ class LoginDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
             cell.titleLabel.text = model.title
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             cell.textInput.text = model.inputText
+            
+            cell.textDelegate = self
+            
             return cell
         }
+        
     }
+    
+    // MARK: ProtoInputCellProtocol
+    
+    func textFinishedEditing(withCell cell: ProtoInputTextCell){
+        AutoNextEditingRowPasser.passToNextEditingRow(withEditedCell: cell, inTable: tableView)
+        
+    }
+    
 }

@@ -13,11 +13,15 @@ protocol GSMCodeCellDelegate {
     func phoneNumberChanged(toNumber number: String)
 }
 
-class GSMUserInputCell: UITableViewCell {//BaseUserInputCellView {
+class GSMUserInputCell: ProtoInputTextCell {//BaseUserInputCellView {
 
     @IBOutlet weak var gsmCountryCodeLabel: UILabel!
     @IBOutlet weak var gsmCodeContainerView: UIView!
-    @IBOutlet weak var textInputField: UITextField!
+    @IBOutlet weak var textInputField: UITextField!{
+        didSet {
+            self.inputTextField = textInputField
+        }
+    }
     @IBOutlet weak var titleLabel: UILabel!
     
     var delegate: GSMCodeCellDelegate?
@@ -44,14 +48,11 @@ class GSMUserInputCell: UITableViewCell {//BaseUserInputCellView {
     }
 }
 
-extension GSMUserInputCell: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.textInputField.resignFirstResponder()
-        return false
-    }
+extension GSMUserInputCell {
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
+    override func textFieldDidEndEditing(_ textField: UITextField) {
         self.delegate?.phoneNumberChanged(toNumber: self.textInputField.text!)
+        self.textDelegate?.textFinishedEditing(withCell: self)
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
