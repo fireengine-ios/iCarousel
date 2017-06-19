@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>FileListController</key>
+        <string>All-Files</string>
+        <key>HomeController</key>
+        <string>Home</string>
+        <key>RecentActivitiesController</key>
+        <string>Recent-Activities</string>
+        <key>FavouriteListController</key>
+        <string>Favourite-List</string>
+        <key>PhotoListController</key>
+        <string>Photo-List</string>
+        <key>PhotoAlbumController</key>
+        <string>Album-Detail</string>
+        <key>MusicListController</key>
+        <string>Music-List</string>
+        <key>DocListController</key>
+        <string>Doc-List</string>
+        <key>ImagePreviewController</key>
+        <string>Image-Preview</string>
+        <key>VideoPreviewController</key>
+        <string>Video-Preview</string>
+        <key>MusicPreviewController</key>
+        <string>Music-Preview</string>
+        <key>SearchModalController</key>
+        <string>Search</string>
+        <key>LoginController</key>
+        <string>Login</string>
+        <key>SettingsController</key>
+        <string>Settings</string>
+        <key>SettingsStorageController</key>
+        <string>Settings-Packages</string>
+        <key>SettingsUploadController</key>
+        <string>Settings-Sync</string>
+        <key>SettingsConnectedDevicesController</key>
+        <string>Settings-ConnectedDevices</string>
+        <key>SearchMoreModalController</key>
+        <string>Search-Results</string>
+    </dict>
+</plist>

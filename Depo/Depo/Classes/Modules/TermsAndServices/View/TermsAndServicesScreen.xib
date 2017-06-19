@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16D30" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TermsAndServicesViewController" customModule="Depo" customModuleProvider="target">
+            <connections>
+                <outlet property="spiner" destination="3Nh-mu-fNi" id="ICc-vF-M7K"/>
+                <outlet property="view" destination="iN0-l3-epB" id="dBd-vg-Lh5"/>
+                <outlet property="webView" destination="dLS-x4-Wl9" id="37J-di-JTf"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="eZu-ok-HGO">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                </imageView>
+                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dLS-x4-Wl9">
+                    <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                    <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </webView>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="3Nh-mu-fNi">
+                    <rect key="frame" x="177" y="323.5" width="20" height="20"/>
+                </activityIndicatorView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="eZu-ok-HGO" secondAttribute="bottom" id="Cbi-zX-YYa"/>
+                <constraint firstAttribute="bottom" secondItem="dLS-x4-Wl9" secondAttribute="bottom" id="JSv-wx-l67"/>
+                <constraint firstItem="3Nh-mu-fNi" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="LIZ-3K-2e2"/>
+                <constraint firstAttribute="trailing" secondItem="eZu-ok-HGO" secondAttribute="trailing" id="QH7-Af-IGb"/>
+                <constraint firstItem="3Nh-mu-fNi" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="SCg-o8-u6q"/>
+                <constraint firstItem="dLS-x4-Wl9" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="64" id="gZh-Wz-Yfp"/>
+                <constraint firstAttribute="trailing" secondItem="dLS-x4-Wl9" secondAttribute="trailing" id="j6s-N1-yfe"/>
+                <constraint firstItem="eZu-ok-HGO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ki0-Et-dAe"/>
+                <constraint firstItem="dLS-x4-Wl9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="lUi-Qr-cFb"/>
+                <constraint firstItem="eZu-ok-HGO" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="rLH-Ob-ego"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <point key="canvasLocation" x="33.5" y="105.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Background" width="375" height="667"/>
+    </resources>
+</document>

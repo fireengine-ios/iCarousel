@@ -1,0 +1,60 @@
+AKILLI DEPO B‹REYSEL KULLANICI & G‹ZL‹L‹K SÖZLEﬁMES‹
+‹ﬂbu Gizlilik Politikas› Ak›ll› Depo Bireysel Hizmeti (bundan sonra “Ak›ll› Depo” olarak an›lacakt›r) kapsam›nda Turkcell ‹letiﬂim Hizmetleri A.ﬁ. (bundan sonra “TURKCELL” olarak an›lacakt›r) ve tüm Turkcell Grup ﬁirketleri’nin bilgilerinizin toplanmas›, kullan›lmas› ve aç›klanmas› politikalar›n› ve yöntemlerini sunmaktad›r.
+Kullan›c›lar Turkcell Ak›ll› Depo Hizmetine (Hizmet) www.turkcellakillidepo.com web sitesi, cihazlardaki uygulamalar, API’lar ve üçüncü taraflar arac›l›€›yla eriﬂebilir.
+“Cihaz” hizmetin sunumu için gereken hizmetlere eriﬂmek için kullan›labilen masaüstü, dizüstü bilgisayar, ak›ll› telefonlar, tablet veya tüketicilerin di€er elektronik cihazlar› dahil fakat bunlarla s›n›rl› olmamak üzere internete eriﬂebilen herhangi bir cihaz› ifade eder.
+“Dosya” hizmetin kullan›m›nda hizmete yükledi€iniz, saklad›€›n›z veya hizmetten indirdi€iniz Word, Powerpoint, Excel gibi bilgisayar uygulamalar›na ait veya video, müzik veya resim gibi bilgileri ifade eder.
+Bu Gizlilik Politikas›, hizmete eriﬂiminiz hangi cihazla olursa olsun eriﬂiminizi düzenler ve TURKCELL Hizmetlerini kullanarak bu Gizlilik Politikas› ile aç›klanan toplama, aktarma, iﬂleme, depolama, aç›klama ve baﬂka kullan›mlar, taraf›n›zdan kabul edilmiﬂ say›l›r.
+Aﬂa€›da aç›klanan tüm veri, içerik ve bilgi formlar›n›n tamam› hep birlikte “bilgi” olarak an›lacakt›r.
+1. TOPLANAN VE DEPOLANAN B‹LG‹LER:
+Ak›ll› Depo Hizmetinin sunumu s›ras›nda aﬂa€›daki bilgiler toplanabilir ve depolanabilir:
+Taraf›n›zdan Verilen Bilgiler
+Taraf›n›zdan hizmete abone olundu€u zaman ad›n›z, telefon numaran›z veya baﬂka fatura bilgileri, e-posta adresi ile ev ve iﬂ adresleriniz gibi baz› Kiﬂisel ve Tüzel bilgiler al›n›r. Üçüncü kiﬂi bilgilerini (örne€in e-posta hesab›n›) vererek, görüﬂtü€ünüz kiﬂilerin bilgilerinin TURKCELL taraf›ndan al›nmas›n› veya sosyal a€ hizmetleri üzerindeki hesab›n›za eriﬂim izni vererek sosyal a€ bilgilerinizi kullan›lmas›n› da isteyebilirsiniz.
+TURKCELL’in sayfas›n› kullanarak baﬂkalar›n› da hizmete kat›lmaya davet etti€iniz zaman o kiﬂilere bir kerelik bir e-posta mesaj› gönderilir. Görüﬂtü€ünüz kiﬂilerle klasörler veya dosyalar paylaﬂt›€›n›z zaman onlar›n e-posta adreslerini de vermiﬂ olabilirsiniz.
+Dosyalar
+Hizmet al›m› s›ras›nda indirdi€iniz, yükledi€iniz veya eriﬂti€iniz dosyalar TURKCELL taraf›ndan toplan›r ve depolan›r.
+Kütük Verileri
+TURKCELL hizmetini kulland›€›n›z zaman otomatik olarak cihaz›n›zdan, yaz›l›m›n›zdan ve hizmetleri kullanan faaliyetinizden bilgiler kaydedilir. Bu bilgiler kapsam›nda; cihaz›n›z›n ‹nternet Protokolü (“IP”) adresi, taray›c› türü, internet sitemize gelmeden önce ziyaret etti€iniz internet sayfas›, internet siteniz üzerinde araﬂt›rd›€›n›z bilgiler, yerel tercihler, cihaz›n›z, mobil taﬂ›y›c›n›zla iliﬂkili tan›t›m numaralar›, sistem yap›land›rma bilgileri, dosyalar›n›z hakk›ndaki ara bilgiler ile hizmetle di€er etkileﬂimleriniz olabilir.
+Çerezler
+Bilgi toplamak ve hizmetlerin geliﬂtirilmesi amac›yla “çerezler” de kullan›labilir. Çerez cihaz›n›za servis taraf›ndan iletilen küçük bir veri dosyas›d›r. Hizmete gelecekteki giriﬂleriniz için giriﬂ kimli€inizi ve giriﬂ parolan›z› saklamak için “inatç› çerezler” kullanabilir. Hizmetin baz› özelliklerini etkinleﬂtirebilmek, hizmet ile nas›l etkileﬂti€inizi anlamak ve toplam kullan›m ile hizmet üzerinde internet trafi€i yönlendirmesini izlemek için “oturum kimlik çerezleri” kullanabilir. Taray›c›n›z›n ayarlar›n› de€iﬂtirerek çerezleri engellemeyi ya da ziyaret etti€iniz internet sitelerinden bir çerez kabul etmeden önce size sormalar› yönünde talimat taraf›n›zdan verilebilir. Ancak çerezleri kabul etmezseniz hizmetin tüm yönlerini kullanamayabilirsiniz.
+2. K‹ﬁ‹SEL B‹LG‹LER‹N‹Z‹N KULLANIMI
+Kiﬂisel Bilgiler
+Hizmetin sunumu s›ras›nda taraf›n›zla iletiﬂim kurabilmek ve taraf›n›z› tan›mlamak için Kiﬂisel ve Tüzel bilgileriniz (“Kiﬂisel Bilgiler”; ad, soyad, kurum ismi, telefon numaras›, fatura bilgileri, e-posta adresi ile ev ve iﬂ adresleriniz gibi) toplanabilir. Kiﬂisel Bilgileriniz TURKCELL taraf›nda, mevzuata uygun olarak ve bu çerçevede belirlenmiﬂ kurallar ile korunur. TURKCELL’in faaliyet gösterdi€i elektronik haberleﬂme sektöründe düzenleyici ve denetleyici otorite olan Bilgi Teknolojileri ve ‹letiﬂim Kurumu’nun, ve/veya Kanun, yönetmelik veya bir mahkeme emri ile di€er kurumlar›n Kiﬂisel verilerin paylaﬂ›lmas›n› talep etti€i durumlarda, yasalara uygun olarak bilgiler paylaﬂ›l›r.
+TURKCELL, ilgili mevzuat uyar›nca yetkili k›l›nm›ﬂ olan ilgili kurum ve kuruluﬂlar› ve yasal merciler taraf›ndan talep edilmesi halinde, Kiﬂisel verilerinizi paylaﬂabilir.
+Kiﬂisel Bilgiler TURKCELL taraf›ndan;
+(i) Hizmetin sunumu ve geliﬂtirilmesi
+(ii) Hizmet kullan›m›n›z›n yönetilmesi,
+(iii) ‹htiyaçlar›n›z›n ve ilgilerinizin daha iyi anlaﬂ›lmas›,
+(iv) Hizmet deneyiminizin geliﬂtirilmesi ve
+(v) Yaz›l›m güncellemeleri ve ürün ilânlar›n›n verilmesi veya sunulmas› amac›yla kullan›l›r veya kullan›labilir.
+Hizmetten bir daha haber almak istemezseniz lütfen bu iletiﬂimlerin herhangi birinde bulunan “abonelikten ç›k›ﬂ” talimat›n› izleyin.
+Co€rafi Konum Bilgileri
+Baz› Cihazlar gerçek-zamanl› konum esasl› bilgilere (örne€in GPS) eriﬂme uygulamalar›n› mümkün k›lar. Bu politikan›n yürürlü€e girdi€i tarih itibar›yla Hizmete ait mobil uygulamalar›n› indirirken veya kullan›rken herhangi bir zamanda TURKCELL mobil cihaz›n›zdan bu bilgileri toplamaz. Ak›ll› Depo’ya koydu€unuz baz› foto€raflar ve videolarda kaydedilmiﬂ yer bilgileri bulunabilir.
+Çözümlemeler
+TURKCELL ve/veya TURKCELL taraf›ndan yetkilendirilen 3.kiﬂiler taraf›ndan günlük çerezler de kullan›larak, IP adresi gibi bazen Kiﬂisel Bilgilerle karﬂ›l›kl› iliﬂkisi olabilen baz› bilgiler› toplan›r. Bu bilgiler yukar›daki amaçlarla ve hizmetin teknik yönetimi, hizmetin iﬂlevselli€ini ve kullan›c› dostu olma özelli€ini art›rmak, hizmetin kullan›l›ﬂ›n› izlemek ve analiz etmek için ve kullan›c›lar›n taleplerini yerine getirebilmek için hizmetin ihtiyaç duydu€u izne sahip oldu€unu do€rulamak için TURKCELL taraf›ndan kullan›l›r
+3. K‹ﬁ‹SEL B‹LG‹LER‹N‹Z‹N PAYLAﬁIMI
+Sizin Kullan›m›n›z
+Ak›ll› Depo kullan›c› hesab› sayfan›zdaki ve baﬂka bir yerdeki Kiﬂisel ve Tüzel Bilgileri hesab›n›zda belirlenen tercihlere göre gösterilir. Vermeyi seçti€iniz bilgiler baﬂkalar›n›n hakk›n›zda ne kadar bilgi sahibi olmas›n› istedi€inizi yans›tmal›d›r. Lütfen kullan›c› hesab› sayfan›zda aç›klad›€›n›z bilgilerle arzulad›€›n›z gizlilik düzeyi konusunda dikkatli olun. Profil bilgilerinizi her zaman gözden geçirebilir ve düzeltebilirsiniz. Kiﬂisel ve Tüzel bilgilerinizi sizin r›zan›z olmadan üçüncü kiﬂilerle paylaﬂmay›z.. Bilgilerinizi sadece sizin r›zan›zla aç›klayabilir veya paylaﬂabiliriz, örne€in hesab›n›za eriﬂmek için bir üçüncü taraf uygulamas›n› (aﬂa€›ya bak›n) kullan›yorsan›z. Hizmetin belli özellikleri arac›l›€›yla baz› bilgilerinizi ortak hale getirme yetkiniz de olabilir. Ortak bilgiler geniﬂ ﬂekilde ve h›zla yay›labilir.
+Hizmet Sa€lay›c›lar, ‹ﬂ Ortaklar› ve Di€erleri.
+Hizmetin (veri depolama, bak›m hizmetleri, veritaban› yönetimi, internet çözümlemeleri, ödeme iﬂlemleri ve hizmetin özelliklerinin geliﬂtirilmesi dâhil fakat bunlarla s›n›rl› olmamak üzere) verilmesi, analiz edilmesi ve geliﬂtirilmesinde yard›mc› olmak üzere üçüncü taraf ﬂirketleri ve kiﬂileri TURKCELL taraf›ndan kullanabilir. Bu üçüncü taraflar›n kendilerine verilen görev amac›yla ve bu gizlilik politikas›ndakilere benzer yükümlülükler alt›nda bilgilerinize eriﬂimi olabilir.
+Yasalar ve Yasa Uygulama Taleplerine Uygunluk; Ak›ll› Depo Hizmeti Haklar›n›n Korunmas›
+Ak›ll› Depo hizmetinizde depolanan dosyalar›n›z› ve hakk›n›zdaki bilgileri;
+(a) Yetkili mahkemelerce taraf›m›za iletilen zorunlu yasal talebe uymak için;
+(b) Ola€anüstü bir durumda herhangi bir kiﬂinin ölümden veya ciddi bedensel zarar görmesinden korunmas› için;
+(c) Ak›ll› Depo veya kullan›c›lar›n› doland›r›c›l›k için veya kötü kullan›m›n› önlemek için gerekli hallerde üçüncü taraflara aç›klayabiliriz.
+Ak›ll› Depo dosyalar›n›z› yukar›da belirtildi€i gibi yasal uygulama makam›na taraf›m›zdan verildi€i zaman bunlar› yasa uygulama makam›na vermeden önce Ak›ll› Depo kullan›c› ﬂifreleri kald›r›l›r. Ancak e€er dosyalar›n›z Ak›ll› Depo’da depolamadan önce taraf›n›zdan ﬂifrelendiyse TURKCELL taraf›ndan bu ﬂifreler aç›lamaz.
+‹ﬂletme Devirleri.
+TURKCELL’in herhangi bir ﬂirketle birleﬂme, devir veya TURKCELL varl›klar›n›n sat›ﬂ› söz konusu olup, Kiﬂisel Bilgilerinizin veya Dosyalar›n›z›n kontrolünde veya kullan›m›nda bir de€iﬂiklik olacak olursa veya her ikisi farkl› bir Gizlilik Politikas›na tabi olacak olursa taraf›n›za bilgi (örne€in e-posta ile ve/veya internet sitemizde göze çarpan bir bildirimle) verilecektir.
+Gizlilik Garantisi.
+TURKCELL, Ak›ll› Depo hizmeti kapsam›ndaki tüm bilgilerinizi yukar›da belirtilen koﬂullar haricinde üçüncü ﬂah›slarla paylaﬂmayacak, ticari amaçla kullanmayacak olup verilerinizin gizlili€ini garanti edecektir.
+4. K‹ﬁ‹SEL B‹LG‹LER‹N‹Z‹N DE⁄‹ﬁT‹R‹LMES‹ VEYA S‹L‹NMES‹
+Kay›tl› kullan›c›lar›n kay›tlar›nda veya hesap profillerinde verdikleri bilgiler incelenebilir, bu bilgiler “hesap ayarlar›” de€iﬂtirilerek güncellenebilir, düzeltilebilir veya silinebilir.
+Kiﬂisel olarak tespit edilebilir bilgilerin de€iﬂtirilmesi arzu ediliyorsa hesap ayarlar› üzerinde de€iﬂiklik yap›larak güncelleme yap›labilir veya silinebilir. Baz› durumlarda yasal olarak gerekli ise bilgilerin kopyalar› TURKCELL taraf›ndan tutulabilir.
+Hizmetimiz hakk›nda Kiﬂisel Bilgileriniz konusunda sorular için lütfen akillidepo@turkcell.com.tr adresine baﬂvurun.
+5. B‹LG‹ SAKLAMA
+Aboneli€iniz aktif oldu€u süre boyunca Kiﬂisel bilgileriniz saklan›r. E€er taraf›n›zca aboneli€in iptali isteniyorsa veya hizmetin verilmesi için bilgilerin kullan›lmas› hususu taraf›n›zca kabul edilmiyorsa aboneli€iniz iptal edilebilir.
+Yasal yükümlülükler, uzlaﬂmazl›klar›n çözülmesi ve sözleﬂmelerin uygulanmas› gere€i için Kiﬂisel bilgileriniz taraf›m›zdan saklanabilir. Bu ﬂartlarla tutarl› olarak, taraf›n›z›n iptal ve hizmetin kullan›lmamas› hususundaki talebi üzerine bilgilerinizin h›zla silinmesi için gayret edilecektir.
+TURKCELL sunucular›ndan bilgilerin silinmesinde gecikme olabilece€ini ve silme iﬂleminden sonra yedeklenmiﬂ sürümlerde bilgiler bulunabilece€i göz önünde bulundurulmal›d›r. Bununla birlikte di€er kullan›c›larla ortak olarak bulunan dosyalar da sunuculardan silinmemektedir. Bilgileriniz tamamen silinene kadar TURKCELL bu bilgileri iﬂbu gizlilik politikas›n›n 3. maddesinde belirtilen koﬂullar haricinde üçüncü ﬂah›slarla paylaﬂmayacak, ticari amaçla kullanmayacak ve gizlili€ini garanti edecektir.
+6. F‹KR‹ MÜLK‹YET HAKLARI
+Ak›ll› Depo hizmetinizin ve bununla birlikte veya arac›l›€›yla elde edilen programlar ve eserler üzerindeki tüm fikri ve/veya s›nai mülkiyet haklar›n›n sahipleri; TURKCELL ve TURKCELL’in tüm ba€l› ﬂirketleri ve yan kuruluﬂlar› ve/veya TURKCELL’in içerik, ortam veya platform tedarikçileri alm›ﬂ olduklar› haklarla s›n›rl› ve fakat dahil olmak üzere, eserler üzerinde hak sahibi olan üçüncü kiﬂilerdir. Ak›ll› Depo hizmetinin kullan›lmas›, TURKCELL taraf›ndan taraf›n›za sa€lanmas›, taraf›n›za Ak›ll› Depo ürünü ile ilgili olarak hiçbir fikri ve s›nai mülkiyet hakk› vermez. Taraf›n›zdan TURKCELL ve/veya ba€l› ﬂirketleri ve yan kuruluﬂlar› ve/veya TURKCELL’in içerik, ortam veya platform tedarikçileri dahil olmak üzere eserler üzerinde hak sahibi üçüncü kiﬂilerin sahip oldu€u fikri ve/veya s›nai mülkiyet haklar›n› ihlal edecek faaliyetlerde bulunulmamal›d›r. Ak›ll› Depo hizmeti ile ilgili hukuka ayk›r› kopya eylemi ve iﬂlemler, Fikir ve Sanat Eserleri Kanunu, Borçlar Kanunu, Medeni Kanun, Türk Ticaret kanunu, Türk Ceza Kanunu ve ilgili mevzuat uyar›nca yapt›r›mlara ba€lanacakt›r.
+7. G‹ZL‹L‹K POL‹T‹KAMIZDA DE⁄‹ﬁ‹KL‹KLER
+‹ﬂbu Gizlilik Politikas› zaman içinde de€iﬂtirilebilir. TURKCELL’in iﬂbu gizlilik politikas›nda de€iﬂiklik yapma hakk› sakl›d›r. Bu de€iﬂiklik yap›ld›€› takdirde taraf›n›za bildirilecektir. De€iﬂiklikler yürürlü€e girdikten sonra da TURKCELL hizmetlerini kullanmaya devam etmeniz halinde gözden geçirilmiﬂ Gizlilik Politikam›zla ba€l› kal›nd›€› kabul edilir.

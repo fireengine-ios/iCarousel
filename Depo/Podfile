@@ -1,0 +1,46 @@
+platform :ios, ‘8.0’
+
+target 'AutoSyncWidget' do
+    use_frameworks!
+    pod 'Reachability'
+end
+
+target 'Depo' do
+    
+    use_frameworks!
+    pod 'Fabric'
+    pod 'Crashlytics'
+    pod 'FBSDKCoreKit'
+    pod 'FBSDKLoginKit'
+    pod 'FBSDKShareKit'
+    pod 'Reachability'
+    pod 'SDWebImage'
+    pod 'GoogleConversionTracking'
+    pod 'Adjust'
+    
+    pod 'SimpleExif'
+    pod 'XYPieChart'
+    pod 'CircleProgressBar', '~> 0.32’
+    pod 'UIImage-Categories'
+    
+
+  target 'DepoTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
+
+target 'DepoShareExtension' do
+    use_frameworks!
+    pod 'Reachability'
+    pod 'SimpleExif'
+
+end
+
+target 'Lifebox Picker' do
+    use_frameworks!
+    pod 'Reachability'
+    #    pod 'MBProgressHUD','~> 1.0.0'
+
+end
