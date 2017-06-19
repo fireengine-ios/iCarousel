@@ -8,15 +8,20 @@
 
 import UIKit
 
+protocol AutoSyncSwitcherTableViewCellDelegate {
+    
+    func onValueChanged(model: AutoSyncModel, cell : AutoSyncSwitcherTableViewCell)
+    
+}
+
 class AutoSyncSwitcherTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subTitleLabel: UILabel!
     @IBOutlet weak var switcher: UISwitch!
-
-    class func reUseID()-> String{
-        return "AutoSyncSwitcherTableViewCell"
-    }
+    var model:AutoSyncModel?
+    
+    var delegate: AutoSyncSwitcherTableViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,9 +40,16 @@ class AutoSyncSwitcherTableViewCell: UITableViewCell {
     }
     
     func configurateCellWith(model: AutoSyncModel){
+        self.model = model
         titleLabel.text = model.titleString
         subTitleLabel.text = model.subTitleString
         switcher.isSelected = model.isSelected
+    }
+    
+    @IBAction func onSwitcherValueChanged(){
+        let newModel = AutoSyncModel(model: self.model!, selected: self.switcher.isOn)
+        model = newModel
+        delegate?.onValueChanged(model: model!, cell: self)
     }
 
 }

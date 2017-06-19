@@ -50,7 +50,7 @@ struct TextConstants {
     static let autoSyncCellPhotos = NSLocalizedString("Photos&Videos", comment: "")
     static let autoSyncCellVideos = "Videos"
     static let autoSyncStartUsingLifebox = "Let’s start using Lifebox"
-    
+    static let autoSyncskipForNowButton = "Skip for now"
     
     static let registerTitle = "Register"
     

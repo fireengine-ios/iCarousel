@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AutoSyncViewController" customModule="Depo" customModuleProvider="target">
             <connections>
+                <outlet property="skipButton" destination="ytR-ZC-xBW" id="37d-Ig-Jmb"/>
                 <outlet property="startButton" destination="qlX-Jm-OtF" id="IZb-uB-Zag"/>
                 <outlet property="tableView" destination="eMi-2n-lOY" id="WhU-sp-KXD"/>
                 <outlet property="titleLabel" destination="NEu-DX-PF4" id="6tb-yu-wmm"/>
@@ -29,7 +30,7 @@
                     <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N0a-Fb-cdS">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="573"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="586"/>
                             <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NEu-DX-PF4">
@@ -59,19 +60,32 @@
                                 <action selector="onStartUsingButton" destination="-1" eventType="touchUpInside" id="TCs-YX-Si7"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ytR-ZC-xBW" customClass="ButtonWithCorner" customModule="Depo" customModuleProvider="target">
+                            <rect key="frame" x="112" y="543" width="152" height="26"/>
+                            <constraints>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="152" id="fIg-o5-sm2"/>
+                                <constraint firstAttribute="height" constant="26" id="zbt-Cl-Yqs"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <connections>
+                                <action selector="onSkipButtn" destination="-1" eventType="touchUpInside" id="BKh-Ie-Jad"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="N0a-Fb-cdS" secondAttribute="trailing" id="2wz-7y-7al"/>
                         <constraint firstAttribute="trailing" secondItem="eMi-2n-lOY" secondAttribute="trailing" id="3JY-sI-zQa"/>
                         <constraint firstItem="NEu-DX-PF4" firstAttribute="leading" secondItem="Qwb-4L-VLL" secondAttribute="leading" constant="23" id="AsN-GI-39t"/>
-                        <constraint firstAttribute="bottom" secondItem="qlX-Jm-OtF" secondAttribute="bottom" constant="47" id="BU4-8p-YPt"/>
+                        <constraint firstAttribute="bottom" secondItem="ytR-ZC-xBW" secondAttribute="bottom" constant="17" id="DST-U9-S8P"/>
                         <constraint firstItem="eMi-2n-lOY" firstAttribute="leading" secondItem="Qwb-4L-VLL" secondAttribute="leading" id="Guq-MV-Tzj"/>
                         <constraint firstAttribute="bottom" secondItem="N0a-Fb-cdS" secondAttribute="bottom" id="NVd-L8-Jkf"/>
                         <constraint firstItem="qlX-Jm-OtF" firstAttribute="centerX" secondItem="Qwb-4L-VLL" secondAttribute="centerX" id="P8l-cK-fre"/>
                         <constraint firstItem="qlX-Jm-OtF" firstAttribute="top" secondItem="eMi-2n-lOY" secondAttribute="bottom" constant="43" id="XWJ-uC-dzr"/>
                         <constraint firstItem="eMi-2n-lOY" firstAttribute="top" secondItem="NEu-DX-PF4" secondAttribute="bottom" constant="44" id="fbQ-yH-Jt9"/>
                         <constraint firstItem="NEu-DX-PF4" firstAttribute="top" secondItem="Qwb-4L-VLL" secondAttribute="top" constant="70" id="kwK-jo-ffO"/>
+                        <constraint firstItem="ytR-ZC-xBW" firstAttribute="top" secondItem="qlX-Jm-OtF" secondAttribute="bottom" constant="17" id="oiD-xE-KpU"/>
+                        <constraint firstItem="ytR-ZC-xBW" firstAttribute="centerX" secondItem="Qwb-4L-VLL" secondAttribute="centerX" id="pGM-4F-3AZ"/>
                         <constraint firstItem="N0a-Fb-cdS" firstAttribute="leading" secondItem="Qwb-4L-VLL" secondAttribute="leading" id="srd-uB-tNm"/>
                         <constraint firstAttribute="trailing" secondItem="NEu-DX-PF4" secondAttribute="trailing" constant="23" id="xhY-ZB-lip"/>
                         <constraint firstItem="N0a-Fb-cdS" firstAttribute="top" secondItem="Qwb-4L-VLL" secondAttribute="top" id="xu6-KO-lxb"/>

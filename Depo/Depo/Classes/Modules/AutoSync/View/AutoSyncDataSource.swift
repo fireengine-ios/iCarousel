@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource {
+class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource, AutoSyncSwitcherTableViewCellDelegate {
 
     @IBOutlet weak var tableView: UITableView?
     
@@ -20,11 +20,11 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource 
         tableView?.dataSource = self
         tableView?.backgroundColor = UIColor.clear
         
-        let nib1 = UINib(nibName: AutoSyncSwitcherTableViewCell.reUseID(), bundle: nil)
-        tableView?.register(nib1, forCellReuseIdentifier: AutoSyncSwitcherTableViewCell.reUseID())
+        let nib1 = UINib(nibName: CellsIdConstants.autoSyncSwitcherCellID, bundle: nil)
+        tableView?.register(nib1, forCellReuseIdentifier: CellsIdConstants.autoSyncSwitcherCellID)
         
-        let nib2 = UINib(nibName: AutoSyncInformTableViewCell.reUseID(), bundle: nil)
-        tableView?.register(nib2, forCellReuseIdentifier: AutoSyncInformTableViewCell.reUseID())
+        let nib2 = UINib(nibName: CellsIdConstants.autoSyncInformCellID, bundle: nil)
+        tableView?.register(nib2, forCellReuseIdentifier: CellsIdConstants.autoSyncInformCellID)
     }
     
     func showCellsFromModels(models:[AutoSyncModel]){
@@ -49,19 +49,27 @@ class AutoSyncDataSource: NSObject , UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let model = tableDataArray[indexPath.row]
         if (model.cellType == .typeSwitcher){
-            let cell = tableView.dequeueReusableCell(withIdentifier: AutoSyncSwitcherTableViewCell.reUseID(), for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.autoSyncSwitcherCellID, for: indexPath)
             cell.selectionStyle = .none
             let autoSyncCell = cell as! AutoSyncSwitcherTableViewCell
+            autoSyncCell.delegate = self
             autoSyncCell.configurateCellWith(model: model)
             return autoSyncCell
         }else{
-            let cell = tableView.dequeueReusableCell(withIdentifier: AutoSyncInformTableViewCell.reUseID(), for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.autoSyncInformCellID, for: indexPath)
             cell.selectionStyle = .none
             let autoSyncCell = cell as! AutoSyncInformTableViewCell
             autoSyncCell.configurateCellWith(model: model)
             return cell
         }
         
+    }
+    
+    // MARK: AutoSyncSwitcherTableViewCellDelegate
+    
+    func onValueChanged(model: AutoSyncModel, cell : AutoSyncSwitcherTableViewCell){
+        let indexPath = tableView?.indexPath(for: cell)
+        tableDataArray[(indexPath?.row)!] = model
     }
     
 }

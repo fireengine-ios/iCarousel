@@ -35,6 +35,7 @@ class TermsAndServicesViewController: UIViewController, TermsAndServicesViewInpu
         //let retryB
         
         let barButton = UIBarButtonItem(customView: applyButton)
+        self.navigationItem.rightBarButtonItem = barButton
         applyTermsButton = barButton
         spiner.startAnimating()
         

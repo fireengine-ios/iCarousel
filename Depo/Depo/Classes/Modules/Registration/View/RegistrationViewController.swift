@@ -13,6 +13,8 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
     @IBOutlet weak var shadowView: UIView!
     @IBOutlet weak var userRegistrationTable: UITableView!
     @IBOutlet weak var nextBtn: UIButton!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     var output: RegistrationViewOutput!
     let dataSource = RegistrationDataSource()
 
@@ -24,12 +26,18 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
     
     
     @IBOutlet weak var pickerContainer: UIView!
+    private var originBottomH:CGFloat = -1
     
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = TextConstants.registerTitle
         self.nextBtn.setTitleColor(ColorConstants.blueColor, for: .normal)
+
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(showKeyBoard),
+                                               name: NSNotification.Name.UIKeyboardWillShow,
+                                               object: nil)
         
         self.setupDelegates()
         self.output.viewIsReady()
@@ -48,7 +56,11 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        originBottomH = bottomConstraint.constant
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self);
     }
     
     private func setupDelegates() {
@@ -60,6 +72,21 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
         self.userRegistrationTable.delegate = self.dataSource
     }
     
+    func showKeyBoard(notification: NSNotification){
+        let userInfo:NSDictionary = notification.userInfo! as NSDictionary
+        let keyboardFrame:NSValue = userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
+        let keyboardRectangle = keyboardFrame.cgRectValue
+        let keyboardHeight = keyboardRectangle.height
+        
+        let tableH = scrollView.frame.origin.y + userRegistrationTable.frame.size.height
+        let dy = view.frame.size.height - tableH
+        if (dy < keyboardHeight){
+            let increaseH = abs((view.frame.size.height - keyboardHeight) - tableH)
+            bottomConstraint.constant = increaseH + originBottomH
+            view.layoutIfNeeded()
+        }
+    }
+    
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.hideKeyboard()
         self.hidePicker()
@@ -67,6 +94,8 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
     
     private func hideKeyboard() {
         view.endEditing(true)
+        bottomConstraint.constant = originBottomH
+        self.view.layoutIfNeeded()
     }
     
     private func handleNextAction() {
@@ -139,6 +168,10 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
         let currentRow = self.pickerView.selectedRow(inComponent: 0)
         self.dataSource.changeGSMCodeLabel(withRow: currentRow)
         self.reloadGSMCell()
+    }
+    
+    @IBAction func onHideKeyBoard(){
+        self.hideKeyboard()
     }
     
     

@@ -26,4 +26,11 @@ struct AutoSyncModel {
         isSelected = selected
     }
     
+    init(model: AutoSyncModel, selected: Bool){
+        titleString = model.titleString
+        subTitleString = model.subTitleString
+        cellType = model.cellType
+        isSelected = selected
+    }
+    
 }

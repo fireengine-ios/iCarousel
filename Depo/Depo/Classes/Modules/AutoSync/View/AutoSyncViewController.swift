@@ -15,6 +15,7 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var startButton: UIButton!
+    @IBOutlet weak var skipButton: ButtonWithCorner!
     
     let dataSource = AutoSyncDataSource()
 
@@ -34,6 +35,10 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput {
         startButton.setTitle(TextConstants.autoSyncStartUsingLifebox, for: .normal)
         startButton.layer.cornerRadius = startButton.frame.size.height * 0.5
         
+        skipButton.setTitle(TextConstants.autoSyncskipForNowButton, for: .normal)
+        skipButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
+        skipButton.titleLabel?.font = UIFont(name: FontNamesConstant.turkcellSaturaBol, size: 14)
+        
         dataSource.configurateTable(table: tableView)
         
         output.viewIsReady()
@@ -42,7 +47,11 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput {
     // MARK: buttons actions
     
     @IBAction func onStartUsingButton(){
+        //dataSource.tableDataArray -> result of user selection
+    }
     
+    @IBAction func onSkipButtn(){
+        
     }
 
     // MARK: AutoSyncViewInput

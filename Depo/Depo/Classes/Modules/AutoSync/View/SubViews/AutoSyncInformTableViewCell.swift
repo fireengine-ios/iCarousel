@@ -12,10 +12,6 @@ class AutoSyncInformTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel:UILabel!
     @IBOutlet weak var iconImageView: UIImageView!
-
-    class func reUseID()-> String{
-        return "AutoSyncInformTableViewCell"
-    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
