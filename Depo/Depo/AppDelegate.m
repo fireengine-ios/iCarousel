@@ -49,10 +49,6 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
 #import "WelcomeController.h"
-
-#import <CoreTelephony/CTCarrier.h>
-#import <CoreTelephony/CTTelephonyNetworkInfo.h>
-
 #import "MPush.h"
 
 #import <DropboxSDK/DropboxSDK.h>
@@ -273,12 +269,7 @@
 }
 
 - (BOOL) isTurkcell {
-    CTTelephonyNetworkInfo *networkInfo = [[CTTelephonyNetworkInfo alloc] init];
-    CTCarrier *carrier = [networkInfo subscriberCellularProvider];
-    
-    NSString *mcc = [carrier mobileCountryCode];
-    NSString *mnc = [carrier mobileNetworkCode];
-    return [mcc isEqualToString:@"286"] && [mnc isEqualToString:@"01"];
+    return [[[CoreTelephonyService alloc]init] isTurkcellOperator];
 }
 
 - (void) triggerPreLogin {

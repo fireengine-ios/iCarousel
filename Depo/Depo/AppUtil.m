@@ -11,8 +11,6 @@
 #import "AppDelegate.h"
 #import "AppSession.h"
 #import "User.h"
-#import <CoreTelephony/CTCarrier.h>
-#import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import "SyncUtil.h"
 #import "CacheUtil.h"
 
@@ -816,26 +814,11 @@
 }
 
 + (NSString *) operatorName {
-    CTTelephonyNetworkInfo *networkInfo = [[CTTelephonyNetworkInfo alloc] init];
-    CTCarrier *carrier = [networkInfo subscriberCellularProvider];
-    if([carrier.mobileCountryCode isEqualToString:@"286"]) {
-        if([carrier.mobileNetworkCode isEqualToString:@"01"]) {
-            return @"TURKCELL";
-        } else if([carrier.mobileNetworkCode isEqualToString:@"02"]) {
-            return @"VODAFONE";
-        } else if([carrier.mobileNetworkCode isEqualToString:@"03"]) {
-            return @"AVEA";
-        }
-    }
-    return [NSString stringWithFormat:@"%@-%@", carrier.mobileCountryCode, carrier.mobileNetworkCode];
+    return [[[CoreTelephonyService alloc]init] operatorName];
 }
 
 + (NSString *) readCurrentMobileNetworkCode {
-    CTTelephonyNetworkInfo *networkInfo = [[CTTelephonyNetworkInfo alloc] init];
-    CTCarrier *carrier = [networkInfo subscriberCellularProvider];
-    
-    NSString *mnc = [carrier mobileNetworkCode];
-    return mnc;
+    return [[[CoreTelephonyService alloc]init] mobileNetworkCode];
 }
 
 + (void) writeFeatureFlag {

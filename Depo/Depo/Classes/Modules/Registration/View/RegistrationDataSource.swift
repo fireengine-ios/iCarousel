@@ -19,7 +19,7 @@ class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSour
     var output: DataSourceOutput? = nil
     var cells: [BaseCellModel] = []
     var gsmModels: [GSMCodeModel] = []
-    var currentGSMCode = "+376"
+    var currentGSMCode = CoreTelephonyService().callingCountryCode()
     
     func setupCells(withModels models: [BaseCellModel]) {
         cells.removeAll()
