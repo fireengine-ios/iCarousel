@@ -943,8 +943,28 @@
 		7CA6C6A31EF2A5F400D21EBE /* EULA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6C6A11EF2A5F400D21EBE /* EULA.swift */; };
 		7CA6C6A41EF2A5F400D21EBE /* EULAProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6C6A21EF2A5F400D21EBE /* EULAProtocol.swift */; };
 		7CA6C6A71EF2C7BD00D21EBE /* ForgotPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CA6C6A61EF2C7BD00D21EBE /* ForgotPasswordViewController.xib */; };
-		7CC8144E1EF41AD3001DFCF0 /* MessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8144D1EF41AD3001DFCF0 /* MessageService.swift */; };
+		7CC8144E1EF41AD3001DFCF0 /* CustomPopUpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8144D1EF41AD3001DFCF0 /* CustomPopUpService.swift */; };
 		7CC814501EF41AE0001DFCF0 /* CellsConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8144F1EF41AE0001DFCF0 /* CellsConstant.swift */; };
+		7CC8146D1EF7A93E001DFCF0 /* AutoSyncConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814531EF7A93E001DFCF0 /* AutoSyncConfigurator.swift */; };
+		7CC8146E1EF7A93E001DFCF0 /* AutoSyncInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814541EF7A93E001DFCF0 /* AutoSyncInitializer.swift */; };
+		7CC8146F1EF7A93E001DFCF0 /* AutoSyncModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814561EF7A93E001DFCF0 /* AutoSyncModel.swift */; };
+		7CC814701EF7A93E001DFCF0 /* AutoSyncDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814581EF7A93E001DFCF0 /* AutoSyncDataStorage.swift */; };
+		7CC814711EF7A93E001DFCF0 /* AutoSyncInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814591EF7A93E001DFCF0 /* AutoSyncInteractor.swift */; };
+		7CC814721EF7A93E001DFCF0 /* AutoSyncInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8145A1EF7A93E001DFCF0 /* AutoSyncInteractorInput.swift */; };
+		7CC814731EF7A93E001DFCF0 /* AutoSyncInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8145B1EF7A93E001DFCF0 /* AutoSyncInteractorOutput.swift */; };
+		7CC814741EF7A93E001DFCF0 /* AutoSyncModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8145D1EF7A93E001DFCF0 /* AutoSyncModuleInput.swift */; };
+		7CC814751EF7A93E001DFCF0 /* AutoSyncPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8145E1EF7A93E001DFCF0 /* AutoSyncPresenter.swift */; };
+		7CC814761EF7A93F001DFCF0 /* AutoSyncRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814601EF7A93E001DFCF0 /* AutoSyncRouter.swift */; };
+		7CC814771EF7A93F001DFCF0 /* AutoSyncRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814611EF7A93E001DFCF0 /* AutoSyncRouterInput.swift */; };
+		7CC814781EF7A93F001DFCF0 /* AutoSyncDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814631EF7A93E001DFCF0 /* AutoSyncDataSource.swift */; };
+		7CC814791EF7A93F001DFCF0 /* AutoSyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814641EF7A93E001DFCF0 /* AutoSyncViewController.swift */; };
+		7CC8147A1EF7A93F001DFCF0 /* AutoSyncViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CC814651EF7A93E001DFCF0 /* AutoSyncViewController.xib */; };
+		7CC8147B1EF7A93F001DFCF0 /* AutoSyncViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814661EF7A93E001DFCF0 /* AutoSyncViewInput.swift */; };
+		7CC8147C1EF7A93F001DFCF0 /* AutoSyncViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814671EF7A93E001DFCF0 /* AutoSyncViewOutput.swift */; };
+		7CC8147D1EF7A93F001DFCF0 /* AutoSyncInformTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814691EF7A93E001DFCF0 /* AutoSyncInformTableViewCell.swift */; };
+		7CC8147E1EF7A93F001DFCF0 /* AutoSyncInformTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CC8146A1EF7A93E001DFCF0 /* AutoSyncInformTableViewCell.xib */; };
+		7CC8147F1EF7A93F001DFCF0 /* AutoSyncSwitcherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8146B1EF7A93E001DFCF0 /* AutoSyncSwitcherTableViewCell.swift */; };
+		7CC814801EF7A93F001DFCF0 /* AutoSyncSwitcherTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CC8146C1EF7A93E001DFCF0 /* AutoSyncSwitcherTableViewCell.xib */; };
 		7E17BA74388D3670D1FEEBBA /* RegistrationViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF1643276D50FAE9FC2305 /* RegistrationViewInput.swift */; };
 		80BAF3AEB6623B739C0F967F /* RegistrationInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42B02A7891F46EEC97D1662 /* RegistrationInitializer.swift */; };
 		816746DD18231C54891F6683 /* ForgotPasswordInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB5AE431A5F5DC8973D4E47 /* ForgotPasswordInteractorOutput.swift */; };
@@ -978,10 +998,16 @@
 		8C4A9D0F1EEAD99B001D2465 /* TermsAndServicesScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C4A9D0E1EEAD99B001D2465 /* TermsAndServicesScreen.xib */; };
 		8C69B2E61EF280B2005B6A28 /* SimCardInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C69B2E51EF280B2005B6A28 /* SimCardInfo.swift */; };
 		8C8387F81EE9767C00AB89B9 /* RegistrationScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C8387F71EE9767C00AB89B9 /* RegistrationScreen.xib */; };
+		8CBA3E941EF5D0B100072983 /* ValidationResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBA3E931EF5D0B100072983 /* ValidationResults.swift */; };
+		8CBA3E991EF694AF00072983 /* SignUpProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBA3E981EF694AF00072983 /* SignUpProtocol.swift */; };
+		8CBA3E9B1EF694D900072983 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBA3E9A1EF694D900072983 /* SignUp.swift */; };
+		8CBA3E9E1EF6C79500072983 /* RegistrationUserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBA3E9D1EF6C79500072983 /* RegistrationUserInfoModel.swift */; };
 		8CFA182F1EEEC47900AF236E /* GSMUserInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA182E1EEEC47900AF236E /* GSMUserInputCell.swift */; };
 		8CFA18331EEFBB4800AF236E /* GSMUInputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CFA18321EEFBB4800AF236E /* GSMUInputCell.xib */; };
 		8CFA183C1EF0089A00AF236E /* GSMCodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA183B1EF0089A00AF236E /* GSMCodeModel.swift */; };
 		8CFA183E1EF00A1000AF236E /* CountiesGSMCodeCompositor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA183D1EF00A1000AF236E /* CountiesGSMCodeCompositor.swift */; };
+		8CFA9DC51EF42635004B0FD9 /* PhoneVereficationScreen.xib.orig in Resources */ = {isa = PBXBuildFile; fileRef = 8CFA9DC31EF42635004B0FD9 /* PhoneVereficationScreen.xib.orig */; };
+		8CFA9DC61EF42635004B0FD9 /* SmartTimerLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFA9DC41EF42635004B0FD9 /* SmartTimerLabel.swift */; };
 		94112A981CCA7DE00050E9B1 /* DropboxStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94112A971CCA7DE00050E9B1 /* DropboxStatusCell.m */; };
 		941496611CCF559D008A8D0C /* GroupedPhotosAndVideosController.m in Sources */ = {isa = PBXBuildFile; fileRef = 941496601CCF559D008A8D0C /* GroupedPhotosAndVideosController.m */; };
 		941496641CCF5E51008A8D0C /* GroupedPhotosCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 941496631CCF5E51008A8D0C /* GroupedPhotosCell.m */; };
@@ -2625,8 +2651,28 @@
 		7CA6C6A21EF2A5F400D21EBE /* EULAProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EULAProtocol.swift; sourceTree = "<group>"; };
 		7CA6C6A51EF2AABF00D21EBE /* Depo-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Depo-Bridging-Header.h"; sourceTree = "<group>"; };
 		7CA6C6A61EF2C7BD00D21EBE /* ForgotPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ForgotPasswordViewController.xib; path = Depo/Classes/Modules/forgotPassword/View/ForgotPasswordViewController.xib; sourceTree = SOURCE_ROOT; };
-		7CC8144D1EF41AD3001DFCF0 /* MessageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageService.swift; sourceTree = "<group>"; };
+		7CC8144D1EF41AD3001DFCF0 /* CustomPopUpService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPopUpService.swift; sourceTree = "<group>"; };
 		7CC8144F1EF41AE0001DFCF0 /* CellsConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellsConstant.swift; sourceTree = "<group>"; };
+		7CC814531EF7A93E001DFCF0 /* AutoSyncConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncConfigurator.swift; sourceTree = "<group>"; };
+		7CC814541EF7A93E001DFCF0 /* AutoSyncInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncInitializer.swift; sourceTree = "<group>"; };
+		7CC814561EF7A93E001DFCF0 /* AutoSyncModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncModel.swift; sourceTree = "<group>"; };
+		7CC814581EF7A93E001DFCF0 /* AutoSyncDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncDataStorage.swift; sourceTree = "<group>"; };
+		7CC814591EF7A93E001DFCF0 /* AutoSyncInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncInteractor.swift; sourceTree = "<group>"; };
+		7CC8145A1EF7A93E001DFCF0 /* AutoSyncInteractorInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncInteractorInput.swift; sourceTree = "<group>"; };
+		7CC8145B1EF7A93E001DFCF0 /* AutoSyncInteractorOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncInteractorOutput.swift; sourceTree = "<group>"; };
+		7CC8145D1EF7A93E001DFCF0 /* AutoSyncModuleInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncModuleInput.swift; sourceTree = "<group>"; };
+		7CC8145E1EF7A93E001DFCF0 /* AutoSyncPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncPresenter.swift; sourceTree = "<group>"; };
+		7CC814601EF7A93E001DFCF0 /* AutoSyncRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncRouter.swift; sourceTree = "<group>"; };
+		7CC814611EF7A93E001DFCF0 /* AutoSyncRouterInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncRouterInput.swift; sourceTree = "<group>"; };
+		7CC814631EF7A93E001DFCF0 /* AutoSyncDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncDataSource.swift; sourceTree = "<group>"; };
+		7CC814641EF7A93E001DFCF0 /* AutoSyncViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncViewController.swift; sourceTree = "<group>"; };
+		7CC814651EF7A93E001DFCF0 /* AutoSyncViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoSyncViewController.xib; sourceTree = "<group>"; };
+		7CC814661EF7A93E001DFCF0 /* AutoSyncViewInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncViewInput.swift; sourceTree = "<group>"; };
+		7CC814671EF7A93E001DFCF0 /* AutoSyncViewOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncViewOutput.swift; sourceTree = "<group>"; };
+		7CC814691EF7A93E001DFCF0 /* AutoSyncInformTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncInformTableViewCell.swift; sourceTree = "<group>"; };
+		7CC8146A1EF7A93E001DFCF0 /* AutoSyncInformTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoSyncInformTableViewCell.xib; sourceTree = "<group>"; };
+		7CC8146B1EF7A93E001DFCF0 /* AutoSyncSwitcherTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncSwitcherTableViewCell.swift; sourceTree = "<group>"; };
+		7CC8146C1EF7A93E001DFCF0 /* AutoSyncSwitcherTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoSyncSwitcherTableViewCell.xib; sourceTree = "<group>"; };
 		7F142A19BE346559FCF5E378 /* Pods-Lifebox Picker.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lifebox Picker.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Lifebox Picker/Pods-Lifebox Picker.appstore.xcconfig"; sourceTree = "<group>"; };
 		81884BEAD2F49EAE4DC12C88 /* PhoneVereficationInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationInteractorOutput.swift; sourceTree = "<group>"; };
 		8335AE67CC88B914BA208EA7 /* ForgotPasswordInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordInitializer.swift; sourceTree = "<group>"; };
@@ -2661,11 +2707,17 @@
 		8C4A9D0E1EEAD99B001D2465 /* TermsAndServicesScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TermsAndServicesScreen.xib; sourceTree = "<group>"; };
 		8C69B2E51EF280B2005B6A28 /* SimCardInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimCardInfo.swift; sourceTree = "<group>"; };
 		8C8387F71EE9767C00AB89B9 /* RegistrationScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistrationScreen.xib; sourceTree = "<group>"; };
+		8CBA3E931EF5D0B100072983 /* ValidationResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationResults.swift; sourceTree = "<group>"; };
+		8CBA3E981EF694AF00072983 /* SignUpProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpProtocol.swift; sourceTree = "<group>"; };
+		8CBA3E9A1EF694D900072983 /* SignUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
+		8CBA3E9D1EF6C79500072983 /* RegistrationUserInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegistrationUserInfoModel.swift; path = ../../RegistrationUserInfoModel.swift; sourceTree = "<group>"; };
 		8CDC6A3281516662EEFBF8A5 /* IntroduceViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceViewInput.swift; sourceTree = "<group>"; };
 		8CFA182E1EEEC47900AF236E /* GSMUserInputCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSMUserInputCell.swift; sourceTree = "<group>"; };
 		8CFA18321EEFBB4800AF236E /* GSMUInputCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GSMUInputCell.xib; sourceTree = "<group>"; };
 		8CFA183B1EF0089A00AF236E /* GSMCodeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSMCodeModel.swift; sourceTree = "<group>"; };
 		8CFA183D1EF00A1000AF236E /* CountiesGSMCodeCompositor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountiesGSMCodeCompositor.swift; sourceTree = "<group>"; };
+		8CFA9DC31EF42635004B0FD9 /* PhoneVereficationScreen.xib.orig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PhoneVereficationScreen.xib.orig; sourceTree = "<group>"; };
+		8CFA9DC41EF42635004B0FD9 /* SmartTimerLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartTimerLabel.swift; sourceTree = "<group>"; };
 		8D1A269DABB161276D407E88 /* PhoneVereficationViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationViewInput.swift; sourceTree = "<group>"; };
 		90C97731562E4ACF6D86E22E /* TermsAndServicesInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesInteractorInput.swift; sourceTree = "<group>"; };
 		931900C1D8314FD173F701DC /* TermsAndServicesRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesRouterInput.swift; sourceTree = "<group>"; };
@@ -5415,7 +5467,8 @@
 		7CA6C69B1EF1811100D21EBE /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				7CC8144C1EF41AD3001DFCF0 /* MessageService */,
+				8CBA3E971EF6948F00072983 /* SignUpService */,
+				8CBA3E961EF5E60800072983 /* CustomUserInterfaceServises */,
 				7CA6C6A01EF2A5B200D21EBE /* EulaServices */,
 			);
 			path = Services;
@@ -5430,12 +5483,96 @@
 			path = EulaServices;
 			sourceTree = "<group>";
 		};
-		7CC8144C1EF41AD3001DFCF0 /* MessageService */ = {
+		7CC8144C1EF41AD3001DFCF0 /* CustomPopUpService */ = {
 			isa = PBXGroup;
 			children = (
-				7CC8144D1EF41AD3001DFCF0 /* MessageService.swift */,
+				7CC8144D1EF41AD3001DFCF0 /* CustomPopUpService.swift */,
 			);
+			name = CustomPopUpService;
 			path = MessageService;
+			sourceTree = "<group>";
+		};
+		7CC814511EF7A93E001DFCF0 /* AutoSync */ = {
+			isa = PBXGroup;
+			children = (
+				7CC814521EF7A93E001DFCF0 /* Configurator */,
+				7CC814571EF7A93E001DFCF0 /* Interactor */,
+				7CC8145C1EF7A93E001DFCF0 /* Presenter */,
+				7CC8145F1EF7A93E001DFCF0 /* Router */,
+				7CC814621EF7A93E001DFCF0 /* View */,
+			);
+			path = AutoSync;
+			sourceTree = "<group>";
+		};
+		7CC814521EF7A93E001DFCF0 /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				7CC814531EF7A93E001DFCF0 /* AutoSyncConfigurator.swift */,
+				7CC814541EF7A93E001DFCF0 /* AutoSyncInitializer.swift */,
+				7CC814551EF7A93E001DFCF0 /* Enteties */,
+			);
+			path = Configurator;
+			sourceTree = "<group>";
+		};
+		7CC814551EF7A93E001DFCF0 /* Enteties */ = {
+			isa = PBXGroup;
+			children = (
+				7CC814561EF7A93E001DFCF0 /* AutoSyncModel.swift */,
+			);
+			path = Enteties;
+			sourceTree = "<group>";
+		};
+		7CC814571EF7A93E001DFCF0 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				7CC814581EF7A93E001DFCF0 /* AutoSyncDataStorage.swift */,
+				7CC814591EF7A93E001DFCF0 /* AutoSyncInteractor.swift */,
+				7CC8145A1EF7A93E001DFCF0 /* AutoSyncInteractorInput.swift */,
+				7CC8145B1EF7A93E001DFCF0 /* AutoSyncInteractorOutput.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		7CC8145C1EF7A93E001DFCF0 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				7CC8145D1EF7A93E001DFCF0 /* AutoSyncModuleInput.swift */,
+				7CC8145E1EF7A93E001DFCF0 /* AutoSyncPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		7CC8145F1EF7A93E001DFCF0 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				7CC814601EF7A93E001DFCF0 /* AutoSyncRouter.swift */,
+				7CC814611EF7A93E001DFCF0 /* AutoSyncRouterInput.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		7CC814621EF7A93E001DFCF0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7CC814631EF7A93E001DFCF0 /* AutoSyncDataSource.swift */,
+				7CC814641EF7A93E001DFCF0 /* AutoSyncViewController.swift */,
+				7CC814651EF7A93E001DFCF0 /* AutoSyncViewController.xib */,
+				7CC814661EF7A93E001DFCF0 /* AutoSyncViewInput.swift */,
+				7CC814671EF7A93E001DFCF0 /* AutoSyncViewOutput.swift */,
+				7CC814681EF7A93E001DFCF0 /* SubViews */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7CC814681EF7A93E001DFCF0 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				7CC814691EF7A93E001DFCF0 /* AutoSyncInformTableViewCell.swift */,
+				7CC8146A1EF7A93E001DFCF0 /* AutoSyncInformTableViewCell.xib */,
+				7CC8146B1EF7A93E001DFCF0 /* AutoSyncSwitcherTableViewCell.swift */,
+				7CC8146C1EF7A93E001DFCF0 /* AutoSyncSwitcherTableViewCell.xib */,
+			);
+			path = SubViews;
 			sourceTree = "<group>";
 		};
 		88624F2AE6A9AF52410B741C /* Interactor */ = {
@@ -5451,6 +5588,7 @@
 		8C049C591EEC82F00086DA84 /* Enteties */ = {
 			isa = PBXGroup;
 			children = (
+				8CBA3E9D1EF6C79500072983 /* RegistrationUserInfoModel.swift */,
 				8C049C5A1EEC83420086DA84 /* BaseCellModel.swift */,
 				8CFA183B1EF0089A00AF236E /* GSMCodeModel.swift */,
 			);
@@ -5548,12 +5686,45 @@
 		8C2044601EEA7A3B00642627 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				8C049C5C1EEC85DD0086DA84 /* ValidationService.swift */,
+				8CBA3E951EF5D0B600072983 /* Validation */,
 				8C049C601EED63BC0086DA84 /* DataStorage.swift */,
 				8CFA183D1EF00A1000AF236E /* CountiesGSMCodeCompositor.swift */,
 				8C69B2E51EF280B2005B6A28 /* SimCardInfo.swift */,
 			);
 			name = Services;
+			sourceTree = "<group>";
+		};
+		8CBA3E951EF5D0B600072983 /* Validation */ = {
+			isa = PBXGroup;
+			children = (
+				8C049C5C1EEC85DD0086DA84 /* ValidationService.swift */,
+				8CBA3E931EF5D0B100072983 /* ValidationResults.swift */,
+			);
+			name = Validation;
+			sourceTree = "<group>";
+		};
+		8CBA3E961EF5E60800072983 /* CustomUserInterfaceServises */ = {
+			isa = PBXGroup;
+			children = (
+				7CC8144C1EF41AD3001DFCF0 /* CustomPopUpService */,
+			);
+			name = CustomUserInterfaceServises;
+			sourceTree = "<group>";
+		};
+		8CBA3E971EF6948F00072983 /* SignUpService */ = {
+			isa = PBXGroup;
+			children = (
+				8CBA3E981EF694AF00072983 /* SignUpProtocol.swift */,
+				8CBA3E9A1EF694D900072983 /* SignUp.swift */,
+			);
+			name = SignUpService;
+			sourceTree = "<group>";
+		};
+		8CBA3E9C1EF6C77300072983 /* Enteties */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Enteties;
 			sourceTree = "<group>";
 		};
 		8CFA18291EEEB73400AF236E /* SubViews */ = {
@@ -5676,6 +5847,8 @@
 		C206234150DD1B9E1424D61C /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				7CC814511EF7A93E001DFCF0 /* AutoSync */,
+				8CBA3E9C1EF6C77300072983 /* Enteties */,
 				8C049C6D1EEE8E7F0086DA84 /* Login */,
 				2B39FB04635CDE7B54750A4C /* Registration */,
 				762FCEFD487BFE9A7ACC832D /* TermsAndServices */,
@@ -5723,6 +5896,8 @@
 		DB8AB1D5D0B50391175D8FE3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8CFA9DC31EF42635004B0FD9 /* PhoneVereficationScreen.xib.orig */,
+				8CFA9DC41EF42635004B0FD9 /* SmartTimerLabel.swift */,
 				8C0572D31EF1331C005C69DA /* PhoneVereficationScreen.xib */,
 				8D1A269DABB161276D407E88 /* PhoneVereficationViewInput.swift */,
 				F39582799B29F58A62C1236E /* PhoneVereficationViewOutput.swift */,
@@ -6099,6 +6274,7 @@
 				792233511EB910FC00955F90 /* en1.1.mp4 in Resources */,
 				051CB41919D2F71200E5FC88 /* blue_add_camera_shot_icon@2x.png in Resources */,
 				792233561EB910FC00955F90 /* tr1.1.mp4 in Resources */,
+				7CC814801EF7A93F001DFCF0 /* AutoSyncSwitcherTableViewCell.xib in Resources */,
 				949BB59F1D6F1FB100BED9DB /* bg_mtour_3@2x.jpg in Resources */,
 				9433BD1B1D22070100991483 /* img_dbtasi@3x.png in Resources */,
 				05224AAF19DC4A2D00214767 /* photos_videos_icon@2x.png in Resources */,
@@ -6120,6 +6296,7 @@
 				058BC22F1A308ACB0007F4DE /* video_tour@2x.png in Resources */,
 				567408A81DFFC152003DF541 /* overlay_wt_en@3x.png in Resources */,
 				05F178451BFBB4A70014B2BD /* cropy.png in Resources */,
+				8CFA9DC51EF42635004B0FD9 /* PhoneVereficationScreen.xib.orig in Resources */,
 				05C6C7181B3C212A00CB6CE5 /* siyah_bg@2x.png in Resources */,
 				67B0DD4E1E7FCA0E00BAD640 /* allFilesIcon@2x.png in Resources */,
 				7922335A1EB910FC00955F90 /* tr1.6.mp4 in Resources */,
@@ -6237,6 +6414,7 @@
 				05AF7C9F1A1CC08E00F5011A /* activity_bullet.png in Resources */,
 				051CB42019D2F71200E5FC88 /* folder_icon@2x.png in Resources */,
 				05C6C7151B3C212A00CB6CE5 /* tamam@2x.png in Resources */,
+				7CC8147E1EF7A93F001DFCF0 /* AutoSyncInformTableViewCell.xib in Resources */,
 				9433BD191D2206F700991483 /* img_dbtasi@2x.png in Resources */,
 				949BB5C71D70469C00BED9DB /* icon_hp_sonislemler@2x.png in Resources */,
 				056F29D61C4E8120001DD486 /* icon_verif_refresh@2x.png in Resources */,
@@ -6354,6 +6532,7 @@
 				059AD37D1A1E26A000AA41BD /* circle_music_icon@2x.png in Resources */,
 				051CB40C19D2F71200E5FC88 /* white_delete_icon@2x.png in Resources */,
 				792233541EB910FC00955F90 /* en1.5.mp4 in Resources */,
+				7CC8147A1EF7A93F001DFCF0 /* AutoSyncViewController.xib in Resources */,
 				94FAE0DF1D2F7E6300BC9F77 /* icon_list_circle@3x.png in Resources */,
 				05C4E4A71C4D5EB9005B28E9 /* bg_verif_digit@2x.png in Resources */,
 				568FEFD91E2C99DA00AF4FFB /* icon_settings_kullanim@2x.png in Resources */,
@@ -7051,6 +7230,7 @@
 				058219BF1A384AF0001FA679 /* MessageCell.m in Sources */,
 				94A1D3C41C969F330066D92F /* UpdatePassDao.m in Sources */,
 				94FAE0C91D2F6EC500BC9F77 /* FBConnectDao.m in Sources */,
+				8CBA3E941EF5D0B100072983 /* ValidationResults.swift in Sources */,
 				9433BD081D21E45500991483 /* PromotionsController.m in Sources */,
 				056090E41AC5A44000710211 /* ReachabilityManager.m in Sources */,
 				05403F1919F5584300AED10A /* ElasticSearchDao.m in Sources */,
@@ -7065,6 +7245,7 @@
 				94BF90DD1D5A0E5E000078FD /* RevisitedAlbumListView.m in Sources */,
 				05B01D9C1AC2E2D000D5B827 /* NSDate+Utilities.m in Sources */,
 				94F130C31D2496C10086BDBB /* SettingsSocialController.m in Sources */,
+				7CC8147D1EF7A93F001DFCF0 /* AutoSyncInformTableViewCell.swift in Sources */,
 				56A0DE471E5E239900553462 /* QuotaInfoCell.m in Sources */,
 				0526444819D546BB00B63759 /* MapUtil.m in Sources */,
 				070234911EA08E1400716C27 /* ContactUtil.m in Sources */,
@@ -7094,6 +7275,7 @@
 				0579424A1C3FDC0C00899923 /* SignupController.m in Sources */,
 				8C69B2E61EF280B2005B6A28 /* SimCardInfo.swift in Sources */,
 				94E7B4B21CB2D12300385016 /* ReachUsController.m in Sources */,
+				7CC8147F1EF7A93F001DFCF0 /* AutoSyncSwitcherTableViewCell.swift in Sources */,
 				070234961EA08E1400716C27 /* SyncLogger.m in Sources */,
 				057DF50B19D04EDF0005A389 /* RequestBaseUrlDao.m in Sources */,
 				5247D6201DDDD0F600FFE63E /* CurioConstants.m in Sources */,
@@ -7130,9 +7312,11 @@
 				94FB09871DE2065B00DA666D /* GroupPhotoSectionView.m in Sources */,
 				944C07B81D4FE81400D45B61 /* RevisitedPhotoHeaderSegmentView.m in Sources */,
 				9454FA661CAA822300BF1288 /* CurrentPhotoListModalController.m in Sources */,
+				8CBA3E991EF694AF00072983 /* SignUpProtocol.swift in Sources */,
 				070A21E21E87D0E0002385F7 /* ContactSyncProgressView.m in Sources */,
 				94C7CEFA1D2CE1510040897A /* ArrangeSelectedPhotosModalController.m in Sources */,
 				054730C019FA39C300F913FF /* DeleteDao.m in Sources */,
+				7CC814771EF7A93F001DFCF0 /* AutoSyncRouterInput.swift in Sources */,
 				943751F71CCAB3A7003A76A9 /* DropboxTokenDao.m in Sources */,
 				05868DEC1A275FA000CFE360 /* AudioMenuFooterView.m in Sources */,
 				056F29DE1C4FA786001DD486 /* SendVerificationSMSDao.m in Sources */,
@@ -7144,6 +7328,7 @@
 				941496611CCF559D008A8D0C /* GroupedPhotosAndVideosController.m in Sources */,
 				5247D6241DDDD0F600FFE63E /* CurioLocationManager.m in Sources */,
 				94E549091CC63718003CB5DC /* DropboxExportController.m in Sources */,
+				7CC8147B1EF7A93F001DFCF0 /* AutoSyncViewInput.swift in Sources */,
 				058B44DB1A4C0D89005B1590 /* SyncUtil.m in Sources */,
 				070234921EA08E1400716C27 /* GZIP.m in Sources */,
 				057942501C3FDCF900899923 /* EmailValidationController.m in Sources */,
@@ -7210,7 +7395,9 @@
 				94FB09891DE2065B00DA666D /* DevicePhotoCell.m in Sources */,
 				0556EA571A19EA0700123A14 /* SearchHistory.m in Sources */,
 				052160A319E2E56B0007B321 /* DepoUploadTask.m in Sources */,
+				7CC814741EF7A93E001DFCF0 /* AutoSyncModuleInput.swift in Sources */,
 				05BBE71119E06FB100805215 /* CameraCaptureModalController.m in Sources */,
+				7CC814731EF7A93E001DFCF0 /* AutoSyncInteractorOutput.swift in Sources */,
 				051DE37319CC140100F27C85 /* CustomConfirmView.m in Sources */,
 				059A46DA1A6D3E2000935023 /* SubscriptionPlan.m in Sources */,
 				0515706419E5AC2600C62B98 /* PhotoHeaderSegmentView.m in Sources */,
@@ -7227,12 +7414,14 @@
 				051DE35E19CC128600F27C85 /* BaseViewController.m in Sources */,
 				070234901EA08E1400716C27 /* ContactSyncSDK.m in Sources */,
 				051412A819D46A84000EAE63 /* AddTypeButton.m in Sources */,
+				7CC8146F1EF7A93E001DFCF0 /* AutoSyncModel.swift in Sources */,
 				9433BCFF1D21DF3100991483 /* VideofyPreviewDao.m in Sources */,
 				053F993419E1B88100928F22 /* ImagePreviewController.m in Sources */,
 				052644B119D5A2A600B63759 /* SettingsBaseViewController.m in Sources */,
 				05A9382A1AF6AE9100AE2892 /* Message.m in Sources */,
 				790B9D8D1E7179C300DD7DA0 /* CountrySelectionController.m in Sources */,
 				054730C319FA3D5A00F913FF /* FavoriteDao.m in Sources */,
+				7CC8146E1EF7A93E001DFCF0 /* AutoSyncInitializer.swift in Sources */,
 				94E5E6631E24FA2E008B0216 /* AutoSyncOffHeaderView.m in Sources */,
 				057DF50819D038080005A389 /* RequestTokenDao.m in Sources */,
 				05A938301AF6AE9100AE2892 /* UpdateServerIntegration.m in Sources */,
@@ -7260,6 +7449,7 @@
 				94C7CEF71D2C49190040897A /* Story.m in Sources */,
 				052644B419D5A2A600B63759 /* SettingsConnectedDevicesController.m in Sources */,
 				94E5E6541E24F68C008B0216 /* RevisitedRawPhotoCollCell.m in Sources */,
+				7CC814701EF7A93E001DFCF0 /* AutoSyncDataStorage.swift in Sources */,
 				8C049C5B1EEC83420086DA84 /* BaseCellModel.swift in Sources */,
 				9454FA631CAA821200BF1288 /* CurrentDocumentListModalController.m in Sources */,
 				056F29E11C4FC112001DD486 /* EmailEntryController.m in Sources */,
@@ -7291,6 +7481,7 @@
 				052644B219D5A2A600B63759 /* SettingsUploadController.m in Sources */,
 				05C6C7011B3C123C00CB6CE5 /* TTTAttributedLabel.m in Sources */,
 				05440AE019D4445D009803D7 /* FloatingAddButton.m in Sources */,
+				7CC814711EF7A93E001DFCF0 /* AutoSyncInteractor.swift in Sources */,
 				058219C41A384CC6001FA679 /* SearchModalController.m in Sources */,
 				051CB38F19D2DD7100E5FC88 /* FileListController.m in Sources */,
 				5247D61F1DDDD0F600FFE63E /* CurioActionToolkit.m in Sources */,
@@ -7391,7 +7582,8 @@
 				051DE36919CC12FD00F27C85 /* CheckButton.m in Sources */,
 				5247D6281DDDD0F600FFE63E /* CurioPushData.m in Sources */,
 				050A7B2319F7DFBD00B084B9 /* VolumeLevelIndicator.m in Sources */,
-				7CC8144E1EF41AD3001DFCF0 /* MessageService.swift in Sources */,
+				7CC814791EF7A93F001DFCF0 /* AutoSyncViewController.swift in Sources */,
+				7CC8144E1EF41AD3001DFCF0 /* CustomPopUpService.swift in Sources */,
 				059CE5471A87D45100F6CFAE /* ContactSyncResult.m in Sources */,
 				058BC23C1A30E5370007F4DE /* ValidateAuthTokenDao.m in Sources */,
 				055A3F5219E819B6004A0121 /* NoItemCell.m in Sources */,
@@ -7427,7 +7619,9 @@
 				05AF7C811A1C8CD100F5011A /* RecentActivitiesController.m in Sources */,
 				05501F3819EBBB4600CA9F4E /* AlbumDetailDao.m in Sources */,
 				94BEABF81CAD1BF3002E37A7 /* EulaCheckDao.m in Sources */,
+				7CC814761EF7A93F001DFCF0 /* AutoSyncRouter.swift in Sources */,
 				05A938251AF6AE9100AE2892 /* Controller.m in Sources */,
+				7CC8146D1EF7A93E001DFCF0 /* AutoSyncConfigurator.swift in Sources */,
 				05028CD31B5A9866000F2D09 /* SharedUtil.m in Sources */,
 				05DA564C1A56D5B3007D2B1D /* ALAssetRepresentation+MD5.m in Sources */,
 				05AD7F851AD7FD160052153A /* MMWormhole.m in Sources */,
@@ -7447,16 +7641,20 @@
 				0702348F1EA08E1400716C27 /* ContactDevice.m in Sources */,
 				56BDE2501A8DEA8B0082F8B8 /* OfferCell.m in Sources */,
 				79C774651E9505980008FB09 /* SyncExperienceController.m in Sources */,
+				7CC814721EF7A93E001DFCF0 /* AutoSyncInteractorInput.swift in Sources */,
 				070A22131E8AADE1002385F7 /* ContactSyncResultView.m in Sources */,
 				05D2B19719E676BF00FC309D /* AlbumListDao.m in Sources */,
 				567408B41E08011B003DF541 /* CoverPhotoDao.m in Sources */,
 				94DCA1061D3CB6AB000965AE /* CellographSegmentView.m in Sources */,
 				056BEC781A8AA55000BA0805 /* PreLoginInfoView.m in Sources */,
+				7CC814781EF7A93F001DFCF0 /* AutoSyncDataSource.swift in Sources */,
 				0524E32919D955FA00E2698E /* FileDetail.m in Sources */,
 				94FAE0C61D2F2BAA00BC9F77 /* FBPermissionDao.m in Sources */,
+				8CBA3E9E1EF6C79500072983 /* RegistrationUserInfoModel.swift in Sources */,
 				05EA75B519DC6C2400AC77AB /* MultipleUploadFooterView.m in Sources */,
 				070234981EA08E1400716C27 /* SyncSettings.m in Sources */,
 				05B73E7F1A5EC04B005D24BE /* UsageInfoDao.m in Sources */,
+				7CC814751EF7A93E001DFCF0 /* AutoSyncPresenter.swift in Sources */,
 				052644B619D5A2A600B63759 /* SettingsHelpController.m in Sources */,
 				058219CB1A384D50001FA679 /* RecentSearchCell.m in Sources */,
 				7C032B771EEEB0F2006532C8 /* IntroduceModel.swift in Sources */,
@@ -7513,6 +7711,7 @@
 				3C02D568A82AEC60664B8B20 /* PhoneVereficationPresenter.swift in Sources */,
 				B3B44FC4DE4318FC8CCECE4D /* PhoneVereficationInteractorInput.swift in Sources */,
 				DA3EC56E00AF09E631B25D19 /* PhoneVereficationInteractorOutput.swift in Sources */,
+				8CFA9DC61EF42635004B0FD9 /* SmartTimerLabel.swift in Sources */,
 				DD98BFC902FD68401D4518AC /* PhoneVereficationInteractor.swift in Sources */,
 				6FADCA9EBD55F51F6902C4CF /* PhoneVereficationRouterInput.swift in Sources */,
 				23DE78F8D74B30D937E2A376 /* PhoneVereficationRouter.swift in Sources */,
@@ -7525,7 +7724,9 @@
 				10A2877573EB6B2CD13350CA /* ForgotPasswordPresenter.swift in Sources */,
 				5E5BBBA9789AFE73C4F8D86E /* ForgotPasswordInteractorInput.swift in Sources */,
 				816746DD18231C54891F6683 /* ForgotPasswordInteractorOutput.swift in Sources */,
+				7CC8147C1EF7A93F001DFCF0 /* AutoSyncViewOutput.swift in Sources */,
 				C5CEA90AD26E3F7F5C1534EA /* ForgotPasswordInteractor.swift in Sources */,
+				8CBA3E9B1EF694D900072983 /* SignUp.swift in Sources */,
 				AFFFAD25E0B39167C5E7177E /* ForgotPasswordRouterInput.swift in Sources */,
 				C992C8DAAF952288823C7FC5 /* ForgotPasswordRouter.swift in Sources */,
 				467E332C455DC000C90B6711 /* ForgotPasswordConfigurator.swift in Sources */,

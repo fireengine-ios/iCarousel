@@ -118,4 +118,8 @@ class ForgotPasswordViewController: UIViewController, ForgotPasswordViewInput, U
         endEditing()
     }
     
+    func textStartedEditing(withCell cell: ProtoInputTextCell) {
+        
+    }
+    
 }

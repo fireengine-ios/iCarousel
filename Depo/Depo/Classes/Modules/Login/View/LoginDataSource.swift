@@ -52,7 +52,7 @@ class LoginDataSource: NSObject, UITableViewDelegate, UITableViewDataSource, Pro
             cell.textInputField.attributedPlaceholder = NSAttributedString(string: model.inputText, attributes: [NSForegroundColorAttributeName: ColorConstants.whiteColor])
             
             cell.textDelegate = self
-            
+
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.passwordCellID,
@@ -76,4 +76,7 @@ class LoginDataSource: NSObject, UITableViewDelegate, UITableViewDataSource, Pro
         
     }
     
+    func textStartedEditing(withCell cell: ProtoInputTextCell) {
+        
+    }
 }

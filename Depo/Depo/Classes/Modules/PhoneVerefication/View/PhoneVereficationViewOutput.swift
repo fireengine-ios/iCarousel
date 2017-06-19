@@ -14,4 +14,11 @@ protocol PhoneVereficationViewOutput {
     */
 
     func viewIsReady()
+    func timerFinishedRunning()
+    func resendButtonPressed()
+    
+    func vereficationCodeEntered()
+    func nextButtonPressed(withVereficationCode vereficationCode: String)
+    func vereficationCodeNotReady()
+    
 }

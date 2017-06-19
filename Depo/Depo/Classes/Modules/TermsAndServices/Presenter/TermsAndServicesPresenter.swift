@@ -18,7 +18,7 @@ class TermsAndServicesPresenter: TermsAndServicesModuleInput, TermsAndServicesVi
     }
     
     func termsApplied(){
-        router.goToRegister()
+        router.goToAutoSync()
     }
     
     // MARK: OUT

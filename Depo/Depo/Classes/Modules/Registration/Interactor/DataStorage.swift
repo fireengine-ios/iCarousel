@@ -19,8 +19,8 @@ class DataStorage {
         BaseCellModel(withTitle: TextConstants.registrationCellTitleGSMNumber,
                       initialText: ""),
         BaseCellModel(withTitle: TextConstants.registrationCellTitlePassword,
-                      initialText: TextConstants.registrationCellTitlePassword),
-        BaseCellModel(withTitle: TextConstants.registrationCellInitialTextReFillPassword,
+                      initialText:TextConstants.registrationCellInitialTextReFillPassword),
+        BaseCellModel(withTitle: TextConstants.registrationCellTitlePassword,
                       initialText: TextConstants.registrationCellInitialTextReFillPassword)]
     }
     
@@ -34,5 +34,4 @@ class DataStorage {
         models[index] = newModel
 //        debugPrint("models are ", self.models)
     }
-    
 }

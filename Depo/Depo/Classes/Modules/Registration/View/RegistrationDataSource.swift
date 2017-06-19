@@ -12,6 +12,7 @@ protocol DataSourceOutput {
 //    func userDidTapCell(forIndex: Int)
     func pickerGotTapped()
     func protoCellTextFinishedEditing(cell: ProtoInputTextCell)
+    func protoCellTextStartedEditing(cell: ProtoInputTextCell)
 }
 
 class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
@@ -116,6 +117,10 @@ extension RegistrationDataSource: UIPickerViewDataSource, UIPickerViewDelegate, 
     
     func textFinishedEditing(withCell cell: ProtoInputTextCell) {
         self.output?.protoCellTextFinishedEditing(cell: cell)
+    }
+
+    func textStartedEditing(withCell cell: ProtoInputTextCell) {
+        self.output?.protoCellTextStartedEditing(cell: cell)
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

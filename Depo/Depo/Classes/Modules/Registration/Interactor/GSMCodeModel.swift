@@ -7,9 +7,9 @@
 //
 
 struct GSMCodeModel {
-    var countryName: String
-    var countryCode: String
-    var gsmCode: String
+    let countryName: String
+    let countryCode: String
+    let gsmCode: String
     
     init(withCountry country: String, withCountryCode countryCode: String, withGSMCode gsmCode: String) {
         self.countryName = country

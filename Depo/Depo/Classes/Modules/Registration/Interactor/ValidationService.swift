@@ -10,25 +10,24 @@ import UIKit
 
 
 class UserValidator {
-    // TODO : Incorrect logic need return to Presenter !!!!
-    func isUserInfoValid(mail: String, phone: String, password: String, repassword: String) -> Bool {
-        
+    
+    func validateUserInfo(mail: String, phone: String, password: String, repassword: String) -> UserValidationResults {
+        if mail.characters.count == 0 && !Util.isValidEmail(mail) {
+            //            self.showAlert(withText: NSLocalizedString("EmailFormatErrorMessage", comment: ""))
+            return .mailNotValid
+        }
         if phone.characters.count < 10 {
 //            self.showAlert(withText: NSLocalizedString("MsisdnFormatErrorMessage", comment: ""))
-            return false
+            return .phoneNotValid
         }
         if password.characters.count == 0 {
 //            self.showAlert(withText: NSLocalizedString("PassFormatErrorMessage", comment: ""))
-            return false
-        }
-        if mail.characters.count == 0 && !Util.isValidEmail(mail) {
-//            self.showAlert(withText: NSLocalizedString("EmailFormatErrorMessage", comment: ""))
-            return false
+            return .passwordNotValid
         }
         if password != repassword {
 //            self.showAlert(withText: NSLocalizedString("PassMismatchErrorMessage", comment: ""))
-            return false
+            return .passwodsNotMatch
         }
-        return true
+        return .allValid
     }
 }

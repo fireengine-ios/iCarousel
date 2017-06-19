@@ -17,5 +17,4 @@ class LoginRouter: LoginRouterInput {
         nController.pushViewController(controller, animated: true)
         nController.navigationBar.isHidden = false
     }
-    
 }

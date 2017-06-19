@@ -9,7 +9,7 @@
 import Foundation
 
 
-protocol MessageService {
+protocol CustomPopUpService {
     
     // TODO : refactor later !
     func showAlert(withText text: String)
@@ -17,7 +17,7 @@ protocol MessageService {
 }
 
 
-class Messanger: MessageService {
+class CustomPopUp: CustomPopUpService {
     
      func showAlert(withText text: String) {
         guard let appDelegate = UIApplication.shared.delegate else {

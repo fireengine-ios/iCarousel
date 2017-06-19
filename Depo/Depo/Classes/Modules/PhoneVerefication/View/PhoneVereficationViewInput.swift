@@ -14,4 +14,15 @@ protocol PhoneVereficationViewInput: class {
     */
 
     func setupInitialState()
+    
+    func showResendButton()
+    
+    func hideResendButton()
+    
+    func setupTimer()
+    
+    func disableNextButton()
+    
+    func enableNextButton()
+    
 }

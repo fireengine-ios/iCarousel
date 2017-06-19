@@ -7,14 +7,13 @@
 //
 
 class TermsAndServicesRouter: TermsAndServicesRouterInput {
-    func goToRegister(){
-        let inicializer = RegistrationModuleInitializer()
-        let registerController = RegistrationViewController(nibName: "RegistrationScreen", bundle:nil)
-        inicializer.registrationViewController = registerController
+    func goToAutoSync(){
+        let inicializer = AutoSyncModuleInitializer()
+        let controller = AutoSyncViewController(nibName: "AutoSyncViewController", bundle: nil)
+        inicializer.autosyncViewController = controller
         inicializer.setupVC()
-        
         let nController = UIApplication.shared.keyWindow?.rootViewController as! UINavigationController
-        nController.pushViewController(registerController, animated: true)
+        nController.pushViewController(controller, animated: true)
         nController.navigationBar.isHidden = false
     }
 }

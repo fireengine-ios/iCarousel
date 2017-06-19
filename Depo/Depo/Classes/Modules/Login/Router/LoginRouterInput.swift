@@ -9,5 +9,7 @@
 import Foundation
 
 protocol LoginRouterInput {
+
     func goToForgotPassword()
+
 }

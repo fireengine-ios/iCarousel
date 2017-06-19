@@ -14,5 +14,10 @@ protocol RegistrationInteractorInput {
     func requestGSMCountryCodes()
 //    func detectSimCard()
     func acquireCurrentGSMCode()
-    func signUPUser(email: String, phone: String, passport: String, repassword: String)
+    
+    func showCustomPopUp(withText text: String)
+    func validateUserInfo(email: String, phone: String, password: String, repassword: String)
+    func signUPUser(email: String, phone: String, password: String, repassword: String)
+    
+    func showLoadingIndicator()
 }

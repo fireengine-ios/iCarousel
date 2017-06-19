@@ -16,10 +16,10 @@ protocol RegistrationViewOutput {
     */
 
     func viewIsReady()
-    
-    func userInputed(forRow:Int, withValue: String)
 
     func readyForPassing(withNavController navController: UINavigationController)
-    func nextButtonPressed(withNavController navController: UINavigationController, email: String, phone: String, password: String, repassword: String)
+//    func nextButtonPressed(withNavController navController: UINavigationController, email: String, phone: String, password: String, repassword: String)
     
+    func nextButtonPressed()
+    func collectedUserInfo(email: String, phone: String, password: String, repassword: String)
 }

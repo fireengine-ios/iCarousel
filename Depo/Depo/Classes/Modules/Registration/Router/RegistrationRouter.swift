@@ -11,24 +11,13 @@ import UIKit
 class RegistrationRouter: RegistrationRouterInput {
     func routNextVC() {
         //init new here
-//        let configurator = TermsAndServicesModuleInitializer()
-//        let nextVC = TermsAndServicesViewController(nibName: "TermsAndServicesScreen", bundle: nil)
-//        configurator.termsandservicesViewController = nextVC
-//        
-//        guard let window1 = UIApplication.shared.delegate?.window else {
-//            return
-//        }
-//        guard let navBar = window1?.rootViewController?.navigationController else {
-//            return
-//        }
-//        navBar.pushViewController(configurator.termsandservicesViewController, animated: true)
         
-        let inicializer = TermsAndServicesModuleInitializer()
-        let termsController = TermsAndServicesViewController(nibName: "TermsAndServicesScreen", bundle: nil)
-        inicializer.termsandservicesViewController = termsController
+        let controller = PhoneVereficationViewController(nibName: "PhoneVereficationScreen", bundle: nil)
+        let inicializer = PhoneVereficationModuleInitializer()
+        inicializer.phonevereficationViewController = controller
         inicializer.setupConfig()
         let nController = UIApplication.shared.keyWindow?.rootViewController as! UINavigationController
-        nController.pushViewController(termsController, animated: true)
+        nController.pushViewController(controller, animated: true)
         nController.navigationBar.isHidden = false
         
     }

@@ -56,7 +56,13 @@ extension GSMUserInputCell {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let notAvailableCharacterSet = CharacterSet(charactersIn: "1234567890")
-        return (string.rangeOfCharacter(from: notAvailableCharacterSet) != nil)
+        let notAvailableCharacterSet = CharacterSet(charactersIn: "1234567890")//TODO: MAKE a Numeric text field class
+        
+//        let oldString: NSString? = textField.text as NSString?
+//        let newString = oldString?.replacingCharacters(in: range, with: string)//replacingCharacters(in: <#T##Range<String.Index>#>, with: string)//(in: range, with: string)
+        guard string.rangeOfCharacter(from: notAvailableCharacterSet) != nil || string == ""  else {
+            return false
+        }
+        return true//(string.rangeOfCharacter(from: notAvailableCharacterSet) != nil)
     }
 }

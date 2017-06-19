@@ -13,6 +13,8 @@ struct ColorConstants {
     static let blueColor = UIColor(red: 68/255, green: 204/255, blue: 208/255, alpha: 1)
     static let yellowColor = UIColor(red: 1, green: 240/255, blue: 149/255, alpha: 1)
     static let disableColor = UIColor.gray
+    static let switcherGrayColor = UIColor(red: 114/255, green: 114/255, blue: 114/255, alpha: 1)
+    static let switcherGreenColor = UIColor(red: 68/255, green: 219/255, blue: 94/255, alpha: 1)
 }
 
 struct TextConstants {
@@ -39,6 +41,17 @@ struct TextConstants {
     static let loginCellEmailPlaceholder = "E-Mail or GSM Number"
     static let loginCellPasswordPlaceholder = ""
     
+    static let autoSyncNavigationTitle = "Auto Sync"
+    static let autoSyncTitle = "Lifebox can sync your files automatically. Would you like to have this feature right now?"
+    static let autoSyncCellWiFiTile = NSLocalizedString("Wifi", comment: "")
+    static let autoSyncCellWiFiSubTitle = "When syncing via Wi-Fi, your photos and videos are uploaded by default."
+    static let autoSyncCellMobileDataTitle = "Mobile Data"
+    static let autoSyncCellMobileDataSubTitle = "When syncing via Wi-Fi, your photos and videos are uploaded by default."
+    static let autoSyncCellPhotos = NSLocalizedString("Photos&Videos", comment: "")
+    static let autoSyncCellVideos = "Videos"
+    static let autoSyncStartUsingLifebox = "Let’s start using Lifebox"
+    
+    
     static let registerTitle = "Register"
     
     static let forgotPasswordTitle = "Forgot My Password"
@@ -56,6 +69,12 @@ struct TextConstants {
     // MARK:
 }
 
+struct NumericConstants {
+    //verefy phone screen
+    static let vereficationCharacterLimit = 6
+    static let vereficationTimerLimit = 120//in seconds
+    //
+}
 
 struct FontNamesConstant {
     static let turkcellSaturaBol = "TurkcellSaturaBol"

@@ -311,6 +311,19 @@
     introduceConfigurator.introduceViewController = introduceVC;
     [introduceConfigurator setupVC];
     
+//    AutoSyncModuleInitializer * conf = [[AutoSyncModuleInitializer alloc] init];
+//    AutoSyncViewController * controller = [[AutoSyncViewController alloc] initWithNibName:@"AutoSyncViewController" bundle:nil];
+//    UINavigationController * nController = [[UINavigationController alloc] initWithRootViewController:controller];
+//    [nController.navigationBar setBackgroundImage:[UIImage new]
+//                                    forBarMetrics:UIBarMetricsDefault];
+//    nController.navigationBar.shadowImage = [UIImage new];
+//    nController.navigationBar.translucent = YES;
+//    nController.view.backgroundColor = [UIColor clearColor];
+//    nController.navigationBar.tintColor = [UIColor whiteColor];
+//    [nController.navigationBar setTitleTextAttributes: @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+//    conf.autosyncViewController = controller;
+//    [conf setupVC];
+    
     self.window.rootViewController = nController;
 }
 

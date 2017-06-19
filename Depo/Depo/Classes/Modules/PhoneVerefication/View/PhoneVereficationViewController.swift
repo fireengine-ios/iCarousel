@@ -14,53 +14,105 @@ class PhoneVereficationViewController: UIViewController, PhoneVereficationViewIn
 
     @IBOutlet weak var codeVereficationField: UITextField!
     
-    @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var timerLabel: SmartTimerLabel!
     
     @IBOutlet weak var resendButton: UIButton!
     
-    var timer: Timer?
-    var timerCycle: Int = 0
+    @IBOutlet weak var nextButton: UIButton!
+    
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = TextConstants.registerTitle
+    
         output.viewIsReady()
-        self.setupTimer()
-    }
-    
-    //test-----
-    private func setupTimer() {
-        self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.timerUpdate), userInfo: nil, repeats: true)
-    }
-    @objc private func timerUpdate() {
-        debugPrint("timer here")
-        self.timerCycle += 1
-//        let <#name#> = <#value#>
-        self.setupTimerLabel()
-//        self.timerLabel.text = ""
-        if self.timerCycle >= 10 {
-            self.timerLabel.text = "2:00"
-            debugPrint("timer invalid")
-            self.timerCycle = 0
-            self.timer?.invalidate()
-            self.resendButton.isHidden = false
-            self.resendButton.isEnabled = true
-        }
-    }
-    
-    private func setupTimerLabel() {
-        
-    }
-    //----test
-    
-    // MARK: PhoneVereficationViewInput
-    func setupInitialState() {
     }
     
     @IBAction func ResendCode(_ sender: Any) {
-        self.resendButton.isHidden = true
-        self.resendButton.isEnabled = false
-        self.setupTimer()
+        self.output.resendButtonPressed()
     }
     
+    @IBAction func NextAction(_ sender: Any) {
+        guard let code = codeVereficationField.text else {
+            return
+        }
+        self.output.nextButtonPressed(withVereficationCode: code)
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.hideKeyboard()
+    }
+    
+    private func hideKeyboard() {
+        view.endEditing(true)
+    }
+    
+    // MARK: PhoneVereficationViewInput
+    
+    func setupInitialState() {
+        self.navigationItem.title = TextConstants.registerTitle
+        self.codeVereficationField.delegate = self
+        self.resendButton.setTitleColor(ColorConstants.blueColor, for: .normal)
+        self.codeVereficationField.becomeFirstResponder()
+        self.nextButton.setTitleColor(ColorConstants.blueColor, for: .normal)
+//        nextButton.setTitle(<#T##title: String?##String?#>, for: <#T##UIControlState#>)//localise here
+    }
+    
+    func setupTimer() {
+        self.timerLabel.setupTimer(withTimeInterval: 1.0,
+                                   timerLimit: NumericConstants.vereficationTimerLimit)
+        self.timerLabel.delegate = self
+    }
+    
+    func showResendButton() {
+        self.resendButton.isHidden = false
+        self.resendButton.isEnabled = true
+    }
+    
+    func hideResendButton() {
+        self.resendButton.isHidden = true
+        self.resendButton.isEnabled = false
+    }
+    
+    func disableNextButton() {
+        if self.nextButton.isEnabled {
+            self.nextButton.isEnabled = false
+            self.nextButton.alpha = 0.5
+        }
+    }
+    
+    func enableNextButton() {
+        if !self.nextButton.isEnabled {
+            self.nextButton.isEnabled = true
+            self.nextButton.alpha = 1
+        }
+    }
+}
+
+extension PhoneVereficationViewController: UITextFieldDelegate, SmartTimerLabelDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let notAvailableCharacterSet = CharacterSet(charactersIn: "1234567890")
+        
+        guard let newString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string),
+            newString.characters.count <= NumericConstants.vereficationCharacterLimit,
+            string.rangeOfCharacter(from: notAvailableCharacterSet) != nil || string == "" else {
+            return false
+        }
+        
+        if newString.characters.count == NumericConstants.vereficationCharacterLimit, !self.timerLabel.isDead {
+            
+            self.output.vereficationCodeEntered()
+        } else {
+            self.output.vereficationCodeNotReady()
+        }
+        
+        let atributedString = NSAttributedString(string: textField.text!, attributes: [NSKernAttributeName: 10])
+        //        atributedString.addAttributes([NSKernAttributeName: 3], range: NSMakeRange(0, textField.text.lenght))
+        self.codeVereficationField.attributedText = atributedString
+        
+        return true
+    }
+
+    func timerDidFinishRunning() {
+        self.output.timerFinishedRunning()
+    }
 }

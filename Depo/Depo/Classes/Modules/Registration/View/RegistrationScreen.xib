@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16D30" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -20,6 +20,7 @@
                 <outlet property="pickerBottomConstraint" destination="Mmb-vD-xV3" id="lP4-e8-aH0"/>
                 <outlet property="pickerContainer" destination="4l6-KR-Kcg" id="4XX-sO-Ml0"/>
                 <outlet property="pickerView" destination="h68-Mh-k1S" id="ZKd-tA-hSg"/>
+                <outlet property="shadowView" destination="Rmp-60-G1Z" id="SKk-Rp-dmr"/>
                 <outlet property="userRegistrationTable" destination="TYi-I0-oIL" id="vtv-3a-7kt"/>
                 <outlet property="view" destination="iN0-l3-epB" id="lpg-ri-NHJ"/>
             </connections>
@@ -29,7 +30,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="DWV-5a-Udx">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testPngBG" translatesAutoresizingMaskIntoConstraints="NO" id="DWV-5a-Udx">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pdV-lc-PZm">
@@ -37,9 +38,7 @@
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="141" id="9TT-Wd-DJU"/>
-                        <constraint firstAttribute="width" constant="141" id="GOs-Yc-opq"/>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="55" id="T3I-QP-UFt"/>
-                        <constraint firstAttribute="height" constant="55" id="UYQ-Ci-vcM"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="22"/>
                     <state key="normal" title="Next"/>
@@ -57,6 +56,10 @@
                         <constraint firstAttribute="height" constant="320" id="OtQ-Q8-f2q"/>
                     </constraints>
                 </tableView>
+                <view userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rmp-60-G1Z">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4l6-KR-Kcg">
                     <rect key="frame" x="0.0" y="666" width="375" height="262"/>
                     <subviews>
@@ -99,6 +102,7 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="TYi-I0-oIL" secondAttribute="trailing" id="35i-Nf-vWd"/>
                 <constraint firstItem="pdV-lc-PZm" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="8bM-uH-bwR"/>
+                <constraint firstItem="Rmp-60-G1Z" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="C91-Po-1J1"/>
                 <constraint firstItem="DWV-5a-Udx" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Ego-oP-qfQ"/>
                 <constraint firstAttribute="trailing" secondItem="DWV-5a-Udx" secondAttribute="trailing" id="Epr-UV-gkU"/>
                 <constraint firstItem="DWV-5a-Udx" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Gl9-fl-g2f"/>
@@ -106,15 +110,18 @@
                 <constraint firstItem="TYi-I0-oIL" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="LZs-Xd-mPV"/>
                 <constraint firstAttribute="trailing" secondItem="4l6-KR-Kcg" secondAttribute="trailing" id="Mfa-Lj-dOO"/>
                 <constraint firstAttribute="bottom" secondItem="4l6-KR-Kcg" secondAttribute="bottom" constant="-261" id="Mmb-vD-xV3"/>
+                <constraint firstItem="Rmp-60-G1Z" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="VC1-AL-HZw"/>
                 <constraint firstItem="TYi-I0-oIL" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="70" id="XL5-nL-ZWc"/>
                 <constraint firstItem="4l6-KR-Kcg" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="dsX-JN-Nra"/>
+                <constraint firstAttribute="trailing" secondItem="Rmp-60-G1Z" secondAttribute="trailing" id="dzU-Pl-XtC"/>
                 <constraint firstAttribute="bottom" secondItem="DWV-5a-Udx" secondAttribute="bottom" id="qnI-L7-H6X"/>
                 <constraint firstItem="4l6-KR-Kcg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="sKw-9T-CWo"/>
+                <constraint firstAttribute="bottom" secondItem="Rmp-60-G1Z" secondAttribute="bottom" id="zSU-nu-LPT"/>
             </constraints>
             <point key="canvasLocation" x="26.5" y="51.5"/>
         </view>
     </objects>
     <resources>
-        <image name="Background" width="375" height="667"/>
+        <image name="testPngBG" width="375" height="667"/>
     </resources>
 </document>

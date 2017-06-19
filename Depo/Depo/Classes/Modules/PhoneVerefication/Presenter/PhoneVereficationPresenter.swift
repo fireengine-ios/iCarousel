@@ -13,6 +13,36 @@ class PhoneVereficationPresenter: PhoneVereficationModuleInput, PhoneVereficatio
     var router: PhoneVereficationRouterInput!
 
     func viewIsReady() {
-//        setupTimer
+        self.view.setupInitialState()
+        self.view.setupTimer()
+        self.view.disableNextButton()
+    }
+    
+    func timerFinishedRunning() {
+        self.view.disableNextButton()
+        self.view.showResendButton()
+    }
+    
+    func resendButtonPressed() {
+        self.view.hideResendButton()
+        self.view.setupTimer()
+    }
+    
+    func vereficationCodeEntered() {
+        self.view.enableNextButton()
+    }
+    
+    func vereficationCodeNotReady() {
+        self.view.disableNextButton()
+    }
+    
+    func nextButtonPressed(withVereficationCode vereficationCode: String) {
+        //TODO:
+        //Verify code
+        debugPrint("NEXT with code ", vereficationCode)
+        self.router.goToTermAndUses()
+        //wait for response from interactor
+        //change screen or show error
+        //in case of error show Error and disable nextButton
     }
 }

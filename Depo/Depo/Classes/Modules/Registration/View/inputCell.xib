@@ -38,9 +38,9 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="textColor" red="0.98039215686274506" green="1" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" name="TurkcellSaturaIta" family="TurkcellSaturaIta" pointSize="16"/>
-                        <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
                     </textField>
-                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="combinedShape" translatesAutoresizingMaskIntoConstraints="NO" id="8yZ-Au-6SG">
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info" translatesAutoresizingMaskIntoConstraints="NO" id="8yZ-Au-6SG">
                         <rect key="frame" x="325" y="42" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="aLn-Jg-pnO"/>
@@ -80,6 +80,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="combinedShape" width="20" height="20"/>
+        <image name="info" width="10" height="10"/>
     </resources>
 </document>

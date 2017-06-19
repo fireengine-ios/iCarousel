@@ -15,6 +15,7 @@ protocol LoginViewOutput {
 
     func viewIsReady()
     func sendLoginAndPassword(login: String, password: String)
+
     func onCantLoginButton()
     
 }

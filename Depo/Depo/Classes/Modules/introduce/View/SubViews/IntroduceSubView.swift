@@ -24,7 +24,13 @@ class IntroduceSubView: UIView {
         introduceSubView.configurateView()
         return introduceSubView
     }
-    
+
+    func configurateView(){
+        titleLabel.numberOfLines = 10
+        titleLabel.font = UIFont(name: FontNamesConstant.turkcellSaturaBol, size: 5)
+        titleLabel.textColor = ColorConstants.whiteColor
+    }
+
     override func layoutSubviews() {
         let image = imageView.image
         let coef = (image?.size.width)! / (image?.size.height)!
@@ -32,13 +38,7 @@ class IntroduceSubView: UIView {
         textLabelW.constant = textW
         layoutIfNeeded()
     }
-    
-    func configurateView(){
-        titleLabel.numberOfLines = 10
-        titleLabel.font = UIFont(name: FontNamesConstant.turkcellSaturaBol, size: 5)
-        titleLabel.textColor = ColorConstants.whiteColor
-    }
-    
+
     func setModel(model: IntroduceModel){
         imageView.image = UIImage(named: model.imageName)
         titleLabel.attributedText = model.text
