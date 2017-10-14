@@ -10,16 +10,18 @@ import UIKit
 
 class AutoSyncModuleConfigurator {
 
-    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController) {
+    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController, fromSettings: Bool = false) {
 
         if let viewController = viewInput as? AutoSyncViewController {
-            configure(viewController: viewController)
+            configure(viewController: viewController, fromSettings: fromSettings)
         }
     }
 
-    private func configure(viewController: AutoSyncViewController) {
+    private func configure(viewController: AutoSyncViewController, fromSettings: Bool = false) {
 
         let router = AutoSyncRouter()
+        
+        viewController.fromSettings = fromSettings
 
         let presenter = AutoSyncPresenter()
         presenter.view = viewController

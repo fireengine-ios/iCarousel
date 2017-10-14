@@ -27,8 +27,10 @@ class IntroduceSubView: UIView {
 
     func configurateView(){
         titleLabel.numberOfLines = 10
-        titleLabel.font = UIFont(name: FontNamesConstant.turkcellSaturaBol, size: 5)
+        titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 5)
         titleLabel.textColor = ColorConstants.whiteColor
+        titleLabel.minimumScaleFactor = 0.5
+        titleLabel.adjustsFontSizeToFitWidth = true;
     }
 
     override func layoutSubviews() {

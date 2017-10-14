@@ -9,26 +9,17 @@
 import UIKit
 
 class RegistrationRouter: RegistrationRouterInput {
-    func routNextVC() {
-        //init new here
+    
+    func phoneVerification(sigUpResponse:SignUpSuccessResponse, userInfo: RegistrationUserInfoModel) {
         
-        let controller = PhoneVereficationViewController(nibName: "PhoneVereficationScreen", bundle: nil)
-        let inicializer = PhoneVereficationModuleInitializer()
-        inicializer.phonevereficationViewController = controller
-        inicializer.setupConfig()
-        let nController = UIApplication.shared.keyWindow?.rootViewController as! UINavigationController
-        nController.pushViewController(controller, animated: true)
-        nController.navigationBar.isHidden = false
-        
+        let router = RouterVC()
+        let phoneVerification = router.phoneVereficationScreen(withSignUpSuccessResponse: sigUpResponse, userInfo: userInfo)
+        router.pushViewController(viewController: phoneVerification)
     }
     
-    func routNextVC(wihtNavigationController navController: UINavigationController) {
-        let viewController = PhoneVereficationViewController(nibName: "PhoneVereficationScreen", bundle: nil)
-        let configurator = PhoneVereficationModuleInitializer()
-        configurator.phonevereficationViewController = viewController
-        configurator.setupConfig()
-        navController.pushViewController(viewController, animated: true)
-        
+    func termsAndServices(with delegate: RegistrationViewDelegate?) {
+        let router = RouterVC()
+        let termsAndServices = router.termsAndServicesScreen(login: false, delegate: delegate)
+        router.pushViewController(viewController: termsAndServices)
     }
-    
 }

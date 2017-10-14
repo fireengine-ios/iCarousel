@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="TurkcellSaturaMed.ttf">
+            <string>TurkcellSaturaMed</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ActivityTimelineHeader" customModule="Depo_LifeTech" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="389" height="61"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9NW-qL-eHb">
+                    <rect key="frame" x="0.0" y="0.0" width="106" height="39"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="day" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qdQ-dK-kvu">
+                    <rect key="frame" x="14" y="22" width="84" height="17"/>
+                    <fontDescription key="fontDescription" name="TurkcellSaturaMed" family="TurkcellSaturaMed" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mdz-gi-bmd" customClass="RingView" customModule="Depo_LifeTech" customModuleProvider="target">
+                    <rect key="frame" x="106" y="18" width="24" height="24"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="24" id="Fat-ev-CCV"/>
+                        <constraint firstAttribute="height" constant="24" id="opd-jX-otz"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="mainColor">
+                            <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="qdQ-dK-kvu" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="GxQ-i2-VoD"/>
+                <constraint firstItem="9NW-qL-eHb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="IBS-vE-HSY"/>
+                <constraint firstItem="mdz-gi-bmd" firstAttribute="leading" secondItem="qdQ-dK-kvu" secondAttribute="trailing" constant="8" id="W7t-L6-Q7g"/>
+                <constraint firstItem="mdz-gi-bmd" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="WGY-Ol-0Qa"/>
+                <constraint firstItem="mdz-gi-bmd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="106" id="g67-Tf-okA"/>
+                <constraint firstItem="qdQ-dK-kvu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="14" id="gG1-N1-jNh"/>
+                <constraint firstItem="9NW-qL-eHb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="gKD-iP-Dm4"/>
+                <constraint firstItem="9NW-qL-eHb" firstAttribute="bottom" secondItem="qdQ-dK-kvu" secondAttribute="bottom" id="h3w-by-0xG"/>
+                <constraint firstItem="mdz-gi-bmd" firstAttribute="leading" secondItem="9NW-qL-eHb" secondAttribute="trailing" id="zDs-Jp-zeA"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="dayLabel" destination="qdQ-dK-kvu" id="mrd-eq-awL"/>
+            </connections>
+            <point key="canvasLocation" x="41.5" y="-248.5"/>
+        </view>
+    </objects>
+</document>

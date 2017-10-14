@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CaptchaViewController" customModule="Depo_LifeTech" customModuleProvider="target">
+            <connections>
+                <outlet property="activityIndicator" destination="nHl-Sw-k61" id="CvD-Ne-MCC"/>
+                <outlet property="image" destination="0nN-Ng-TMV" id="hZl-bF-JRL"/>
+                <outlet property="inputTextField" destination="4g6-uY-RRb" id="TPC-7C-Pn5"/>
+                <outlet property="view" destination="iN0-l3-epB" id="v7G-hG-AJR"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="277" height="128"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bBb-rw-22B">
+                    <rect key="frame" x="0.0" y="0.0" width="277" height="128"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0nN-Ng-TMV">
+                            <rect key="frame" x="15" y="13" width="129" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="129" id="ESg-H1-tse"/>
+                                <constraint firstAttribute="height" constant="60" id="mHu-KU-NkF"/>
+                            </constraints>
+                        </imageView>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="nHl-Sw-k61">
+                            <rect key="frame" x="69" y="33" width="20" height="20"/>
+                        </activityIndicatorView>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4g6-uY-RRb">
+                            <rect key="frame" x="15" y="88" width="247" height="30"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yxp-v2-t2S">
+                            <rect key="frame" x="150" y="28" width="49" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="refresh"/>
+                            <connections>
+                                <action selector="captchaRefresh:" destination="-1" eventType="touchUpInside" id="PJn-Sw-fvU"/>
+                            </connections>
+                        </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Duo-dp-Lhi">
+                            <rect key="frame" x="222" y="28" width="40" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Audio"/>
+                            <connections>
+                                <action selector="playAudioCaptcha:" destination="-1" eventType="touchUpInside" id="Koq-l2-GrW"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="4g6-uY-RRb" firstAttribute="leading" secondItem="bBb-rw-22B" secondAttribute="leading" constant="15" id="5tp-2j-Xjh"/>
+                        <constraint firstItem="0nN-Ng-TMV" firstAttribute="leading" secondItem="bBb-rw-22B" secondAttribute="leading" constant="15" id="FDA-vO-uli"/>
+                        <constraint firstItem="0nN-Ng-TMV" firstAttribute="top" secondItem="bBb-rw-22B" secondAttribute="top" constant="13" id="Fhq-jz-0Gq"/>
+                        <constraint firstAttribute="bottom" secondItem="4g6-uY-RRb" secondAttribute="bottom" priority="750" constant="10" id="I8P-pd-CZx"/>
+                        <constraint firstItem="nHl-Sw-k61" firstAttribute="centerY" secondItem="0nN-Ng-TMV" secondAttribute="centerY" id="PhY-6n-b7w"/>
+                        <constraint firstAttribute="trailing" secondItem="4g6-uY-RRb" secondAttribute="trailing" constant="15" id="g5s-lb-3FI"/>
+                        <constraint firstItem="nHl-Sw-k61" firstAttribute="centerX" secondItem="0nN-Ng-TMV" secondAttribute="centerX" id="rED-Kt-s4E"/>
+                        <constraint firstItem="4g6-uY-RRb" firstAttribute="top" secondItem="0nN-Ng-TMV" secondAttribute="bottom" constant="15" id="tjv-rg-uwm"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="bBb-rw-22B" secondAttribute="bottom" id="0e8-7e-4XF"/>
+                <constraint firstAttribute="trailing" secondItem="bBb-rw-22B" secondAttribute="trailing" id="UoP-sA-fyr"/>
+                <constraint firstItem="bBb-rw-22B" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="kSR-hC-CVm"/>
+                <constraint firstItem="bBb-rw-22B" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="tvu-MB-38J"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-24.5" y="-200"/>
+        </view>
+    </objects>
+</document>

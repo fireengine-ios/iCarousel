@@ -10,22 +10,33 @@ import UIKit
 
 class TermsAndServicesModuleConfigurator {
 
-    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController) {
+    weak var delegate: RegistrationViewDelegate?
+    
+    init(delegate: RegistrationViewDelegate?) {
+        self.delegate = delegate
+    }
+    
+    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController, fromLogin: Bool) {
 
         if let viewController = viewInput as? TermsAndServicesViewController {
-            configure(viewController: viewController)
+            configure(viewController: viewController, fromLogin: fromLogin)
         }
     }
 
-    private func configure(viewController: TermsAndServicesViewController) {
+    private func configure(viewController: TermsAndServicesViewController, fromLogin: Bool) {
 
         let router = TermsAndServicesRouter()
 
         let presenter = TermsAndServicesPresenter()
         presenter.view = viewController
         presenter.router = router
+        presenter.delegate = delegate
 
         let interactor = TermsAndServicesInteractor()
+        interactor.isFromLogin = fromLogin
+//        if !fromLogin {
+//            interactor.saveSignUpResponse(withResponse: withSignUpSuccessResponse!, andUserInfo: userInfo!)//unwrap
+//        }
         interactor.output = presenter
 
         presenter.interactor = interactor

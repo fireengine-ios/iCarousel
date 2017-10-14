@@ -9,5 +9,21 @@
 import Foundation
 
 protocol PhoneVereficationInteractorInput {
-    func setupTimer()
+    
+    func verifyCode(code: String)
+    func resendCode()
+    
+    func showPopUp(with text: String)
+    
+    func authificate(atachedCaptcha: CaptchaParametrAnswer?)
+    
+    var remainingTimeInMinutes: Int { get }
+    
+    var expectedInputLength: Int? { get }
+    
+    var phoneNumber: String {get}
+    
+    var email: String { get }
 }
+
+

@@ -9,17 +9,12 @@
 import UIKit
 
 protocol RegistrationViewOutput {
-
-    /**
-        @author AlexanderP
-        Notify presenter that view is ready
-    */
-
+    
     func viewIsReady()
-
-    func readyForPassing(withNavController navController: UINavigationController)
-//    func nextButtonPressed(withNavController navController: UINavigationController, email: String, phone: String, password: String, repassword: String)
     
     func nextButtonPressed()
-    func collectedUserInfo(email: String, phone: String, password: String, repassword: String)
+    
+    func collectedUserInfo(email: String, code: String, phone: String, password: String, repassword: String)
+    
+    func infoButtonGotPressed(with type: UserValidationResults)
 }

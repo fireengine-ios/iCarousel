@@ -13,55 +13,90 @@ protocol SmartTimerLabelDelegate: class {
 }
 
 class SmartTimerLabel: UILabel {
+    
     weak var delegate: SmartTimerLabelDelegate?
-    private var displayedMinutes: Int = 0
-    private var displayedSeconds: Int = 0
-    let secondsInMinute: Int = 60
+    
     private var timer: Timer?
-    private var lifeLimit: Int = 0//timer Life time
-    private var timerCycle: Int = 0//number of cycle
+    
+    //timer Life time
+    private var lifeLimit: Int = 0
+    
+    //number of cycle
+    private var timerCycle: Int = 0
+    
     var isDead: Bool = true
-    func setupTimer(withTimeInterval timeInterval: Float = 1.0, timerLimit lifetime: Int = 120, clearAtTheEnd clear: Bool = false) {
-        self.isDead = false
-        self.lifeLimit = lifetime
-        self.text = "0:00"
-        self.timer = Timer.scheduledTimer(timeInterval: TimeInterval(timeInterval),
+    
+    var startDate: Date?
+    
+    func setupTimer(withTimeInterval timeInterval: Float = 1.0, timerLimit lifetime: Int) {
+        stopTimer()
+        isDead = false
+        lifeLimit = lifetime
+        timerCycle = 0
+        stopTimer()
+        
+        timer = Timer.scheduledTimer(timeInterval: TimeInterval(timeInterval),
                                           target: self,
                                           selector: #selector(self.timerUpdate),
                                           userInfo: nil, repeats: true)
+        setupTimerLabel()
+        startDate = Date()
+        setupObserver()
     }
     
-    @objc private func timerUpdate() {
-        self.timerCycle += 1
-        self.setupTimerLabel()
-        self.checkLifeSpent()
+    func dropTimer() {
+        timerCycle = lifeLimit
         
     }
     
+    private func setupObserver() {
+        NotificationCenter.default.addObserver(forName: .UIApplicationWillEnterForeground, object: nil, queue: .main) { [weak self] _ in
+            guard let `self` = self, let startDateUnwraped = self.startDate else {
+                return
+            }
+            let currentDate = Date()
+            
+            let timeIntervalFromStartCurrentDate =  currentDate.timeIntervalSince(startDateUnwraped)
+            if Int(timeIntervalFromStartCurrentDate) > self.lifeLimit {
+                self.timerCycle = self.lifeLimit
+                return
+            }
+            self.timerCycle = Int(timeIntervalFromStartCurrentDate)
+            
+        }
+    }
+    
+    @objc private func timerUpdate() {
+        timerCycle += 1
+        setupTimerLabel()
+        checkLifeSpent()
+    }
+    
+    private func stopTimer() {
+        guard let curTimer = timer else  {
+            return
+        }
+        if curTimer.isValid {
+            curTimer.invalidate()
+            timer = nil
+        }
+    }
+    
     private func checkLifeSpent() {
-        if self.timerCycle >= lifeLimit {
-            self.isDead = true
-            self.timerCycle = 0
-            self.displayedMinutes = 0
-            self.displayedSeconds = 0
-            self.timer?.invalidate()
-            self.delegate?.timerDidFinishRunning()
+        if timerCycle >= lifeLimit {
+           isDead = true
+           stopTimer()
+           delegate?.timerDidFinishRunning()
         }
     }
     
     private func setupTimerLabel() {
-
-        self.displayedSeconds += 1
-        var additionalCharacter = ""
-        if self.timerCycle % 60 < 10 {
-            additionalCharacter = "0"
+        var spendTime = lifeLimit - timerCycle
+        if spendTime < 0 {
+            spendTime = 0
         }
-        if self.timerCycle % 60 == 0 {
-            self.displayedMinutes += 1
-            self.displayedSeconds = 0
-        }
-
-        self.text = String(displayedMinutes) + ":" + additionalCharacter + String(displayedSeconds)
+        let min = Int(spendTime) / 60
+        let sec = Int(spendTime) % 60
+        text = String(format:"%02i:%02i", min, sec)
     }
-    
 }

@@ -6,15 +6,13 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol TermsAndServicesViewInput: class {
-
-    /**
-        @author AlexanderP
-        Setup initial state of the view
-    */
+protocol TermsAndServicesViewInput: class, Waiting  {
 
     func setupInitialState()
     
-    func showLoadedTermsAndUses(eula: Eula)
+    func showLoadedTermsAndUses(eula: String)
+    
     func failLoadTermsAndUses(errorString:String)
+    
+    func popNavigationVC()
 }

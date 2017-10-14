@@ -9,6 +9,7 @@
 import UIKit
 
 class AutoNextEditingRowPasser {
+    
     static func  passToNextEditingRow(withEditedCell editedCell: ProtoInputTextCell, inTable table: UITableView) -> ProtoInputTextCell? {
         guard let editedRowIndexPath = table.indexPath(for: editedCell) else {
             return nil
@@ -17,7 +18,12 @@ class AutoNextEditingRowPasser {
             guard let cell = table.cellForRow(at: IndexPath(item: i, section: editedRowIndexPath.section)) as? ProtoInputTextCell else {
                 break
             }
+            
+            if i >= table.visibleCells.count - 1 {
+                cell.changeReturnKey(to: .done)
+            }
             cell.startEditing()
+            
             return cell
         }
         return nil

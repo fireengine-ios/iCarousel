@@ -11,23 +11,46 @@ import UIKit
 
 class UserValidator {
     
-    func validateUserInfo(mail: String, phone: String, password: String, repassword: String) -> UserValidationResults {
-        if mail.characters.count == 0 && !Util.isValidEmail(mail) {
-            //            self.showAlert(withText: NSLocalizedString("EmailFormatErrorMessage", comment: ""))
-            return .mailNotValid
+    let regularExpressionPassword = "^(?=.*\\d)(?=.*[a-zA-Z]).{5,16}$"//"^(?!\\D*\\d{3,}\\D*)(?![^A-Za-z]*[A-Za-z]{3,}[^A-Za-z]*).{5,16}$"
+    //"^(?=.*\\d)(?=.*[a-zA-Z]).{5,16}$" // At least one digit, one lowcase pr one uppercase latter, more than 6 less than 16
+    let regularExpressionMail = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{1,}$"
+    let regularExpressionSimplePass = "^(?=.).{5,16}$"
+    
+    func validateUserInfo(mail: String, code: String, phone: String, password: String, repassword: String) -> [UserValidationResults] {
+
+        let regularExpressionPassword: NSRegularExpression? = try? NSRegularExpression(pattern: self.regularExpressionSimplePass, options: .dotMatchesLineSeparators)
+        let regularExpressionMailVer: NSRegularExpression? = try? NSRegularExpression(pattern: self.regularExpressionMail, options: .dotMatchesLineSeparators)
+            
+        var warningsArray: [UserValidationResults] = []
+        
+        let mailLenght = mail.characters.count
+        if mail.characters.count == 0 {
+            warningsArray.append(.mailIsEmpty)
+        } else if (regularExpressionMailVer?.matches(in: mail, options: .reportCompletion, range: NSMakeRange(0, mailLenght)).count)! == 0 {
+            warningsArray.append(.mailNotValid)
         }
-        if phone.characters.count < 10 {
-//            self.showAlert(withText: NSLocalizedString("MsisdnFormatErrorMessage", comment: ""))
-            return .phoneNotValid
+        
+        if phone.characters.count == 0 || code.characters.count == 0 {//< 10 {
+            warningsArray.append(.phoneIsEmpty)//phoneNotValid)
         }
-        if password.characters.count == 0 {
-//            self.showAlert(withText: NSLocalizedString("PassFormatErrorMessage", comment: ""))
-            return .passwordNotValid
+        
+        let passwordLenght: Int = password.characters.count
+        if passwordLenght == 0 {
+            warningsArray.append(.passwordIsEmpty)
+        } else if regularExpressionPassword?.matches(in: password, options: .reportCompletion, range: NSMakeRange(0,passwordLenght)).count == 0 {
+            warningsArray.append(.passwordNotValid)
+
         }
-        if password != repassword {
-//            self.showAlert(withText: NSLocalizedString("PassMismatchErrorMessage", comment: ""))
-            return .passwodsNotMatch
+        
+        if repassword.characters.count == 0 {
+            warningsArray.append(.repasswordIsEmpty)
+        } else if password != repassword {
+            warningsArray.append(.passwodsNotMatch)
         }
-        return .allValid
+        
+        if warningsArray.count == 0 {
+            return []//.allValid
+        }
+        return warningsArray
     }
 }

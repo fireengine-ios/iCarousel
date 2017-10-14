@@ -9,5 +9,6 @@
 import Foundation
 
 protocol PhoneVereficationRouterInput {
-    func goToTermAndUses()
+//    func goToTermAndUses()
+    func goAutoSync()
 }

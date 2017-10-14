@@ -9,5 +9,8 @@
 import Foundation
 
 protocol ForgotPasswordInteractorOutput: class {
+    
+    func requestSucceed()
+    func requestFailed(withError error: String)
 
 }

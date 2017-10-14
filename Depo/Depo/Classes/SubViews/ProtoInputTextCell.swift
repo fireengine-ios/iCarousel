@@ -9,37 +9,52 @@
 import UIKit
 
 protocol ProtoInputCellProtocol: class  {
+    
     func textFinishedEditing(withCell cell: ProtoInputTextCell)
+    
     func textStartedEditing(withCell cell: ProtoInputTextCell)
 }
 
 class ProtoInputTextCell: UITableViewCell {
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        backgroundColor = UIColor.clear
+    }
     
     var inputTextField: UITextField? {
         didSet {
             inputTextField?.delegate = self
         } 
     }
+    
+    var placeholderText: String?
+    
     weak var textDelegate: ProtoInputCellProtocol?
     
     func startEditing() {
-        self.inputTextField?.becomeFirstResponder()
+        inputTextField?.becomeFirstResponder()
     }
     
+    func changeInfoButtonTo(hidden: Bool) {
+        
+    }
     
-    
+    func changeReturnKey(to key: UIReturnKeyType) {
+        inputTextField?.returnKeyType = key
+    }
 }
 
 extension ProtoInputTextCell: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.inputTextField?.resignFirstResponder()
         self.textDelegate?.textFinishedEditing(withCell: self)
+        self.inputTextField?.resignFirstResponder()
         return false
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-//        self.textDelegate?.textFinishedEditing(withCell: self)
+        
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {

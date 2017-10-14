@@ -9,16 +9,24 @@
 import UIKit
 
 class PhoneVereficationViewController: UIViewController, PhoneVereficationViewInput {
-
+    
     var output: PhoneVereficationViewOutput!
 
+    @IBOutlet weak var phoneCodeLabel: UILabel!
+    
     @IBOutlet weak var codeVereficationField: UITextField!
     
     @IBOutlet weak var timerLabel: SmartTimerLabel!
     
-    @IBOutlet weak var resendButton: UIButton!
+    @IBOutlet weak var resendButton: WhiteButtonWithRoundedCorner!
     
-    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var nextButton: WhiteButtonWithRoundedCorner!
+    
+    @IBOutlet weak var mainTitle: UILabel!
+    
+    @IBOutlet weak var infoTitle: UILabel!
+    
+    var inputTextLimit: Int = NumericConstants.vereficationCharacterLimit
     
     // MARK: Life cycle
     override func viewDidLoad() {
@@ -27,92 +35,161 @@ class PhoneVereficationViewController: UIViewController, PhoneVereficationViewIn
         output.viewIsReady()
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        visibleNavigationBarStyle()
+    }
+    
     @IBAction func ResendCode(_ sender: Any) {
-        self.output.resendButtonPressed()
+        output.resendButtonPressed()
     }
     
     @IBAction func NextAction(_ sender: Any) {
         guard let code = codeVereficationField.text else {
             return
         }
-        self.output.nextButtonPressed(withVereficationCode: code)
+        output.nextButtonPressed(withVereficationCode: code)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.hideKeyboard()
+        hideKeyboard()
     }
     
-    private func hideKeyboard() {
+    fileprivate func hideKeyboard() {
         view.endEditing(true)
     }
     
     // MARK: PhoneVereficationViewInput
     
     func setupInitialState() {
-        self.navigationItem.title = TextConstants.registerTitle
-        self.codeVereficationField.delegate = self
-        self.resendButton.setTitleColor(ColorConstants.blueColor, for: .normal)
-        self.codeVereficationField.becomeFirstResponder()
-        self.nextButton.setTitleColor(ColorConstants.blueColor, for: .normal)
-//        nextButton.setTitle(<#T##title: String?##String?#>, for: <#T##UIControlState#>)//localise here
-    }
-    
-    func setupTimer() {
-        self.timerLabel.setupTimer(withTimeInterval: 1.0,
-                                   timerLimit: NumericConstants.vereficationTimerLimit)
-        self.timerLabel.delegate = self
-    }
-    
-    func showResendButton() {
-        self.resendButton.isHidden = false
-        self.resendButton.isEnabled = true
-    }
-    
-    func hideResendButton() {
-        self.resendButton.isHidden = true
-        self.resendButton.isEnabled = false
-    }
-    
-    func disableNextButton() {
-        if self.nextButton.isEnabled {
-            self.nextButton.isEnabled = false
-            self.nextButton.alpha = 0.5
+        if !Device.isIpad {
+            setNavigationTitle(title: TextConstants.registerTitle)
         }
+        navigationItem.backBarButtonItem?.title = TextConstants.backTitle
+        codeVereficationField.delegate = self
+        resendButton.setTitle(TextConstants.registrationResendButtonText, for: .normal)
+        nextButton.setTitle(TextConstants.checkPhoneNextButtonText, for: .normal)
+        
+        mainTitle.font = UIFont.TurkcellSaturaBolFont(size: 18)
+        mainTitle.textColor = UIColor.white
+        mainTitle.text = TextConstants.phoneVereficationMainTitleText
+        infoTitle.font = UIFont.TurkcellSaturaRegFont(size: 18)
+        changeInfoTextState(state: true)
+        infoTitle.text = TextConstants.phoneVereficationInfoTitleText
+        
     }
     
-    func enableNextButton() {
-        if !self.nextButton.isEnabled {
-            self.nextButton.isEnabled = true
-            self.nextButton.alpha = 1
-        }
+    func changeInfoTextState(state: Bool) {
+        infoTitle.textColor = state ? UIColor.white : ColorConstants.yellowColor
     }
+    
+    func heighlightInfoTitle() {
+        codeVereficationField.text = ""
+        changeInfoTextState(state: false)
+    }
+    
+    func setupButtonsInitialState() {
+        resendButton.isHidden = true
+        resendButton.isEnabled = false
+//        nextButton.isEnabled = false
+//        nextButton.alpha = 0.5
+    }
+    
+    func setupTimer(withRemainingTime remainingTime: Int) {
+        timerLabel.setupTimer(withTimeInterval: 1.0,
+                                   timerLimit: remainingTime)
+        timerLabel.delegate = self
+    }
+    
+    func dropTimer() {
+        timerLabel.dropTimer()
+    }
+    
+    func addBarToKeyboard() {
+        
+        let doneButton = UIBarButtonItem(title: TextConstants.nextTitle,
+                                         style: .plain,
+                                         target: self,
+                                         action: #selector(nextBarButtonPressed(sender:)))
+        let toolBar = barButtonItemsWithRitht(button: doneButton)
+        
+        codeVereficationField.inputAccessoryView = toolBar
+    }
+    
+    @objc func nextBarButtonPressed(sender: Any?) {
+        codeVereficationField.resignFirstResponder()
+        guard let code = codeVereficationField.text, code.characters.count == 6 else {
+            return
+        }
+        output.nextButtonPressed(withVereficationCode: code)
+    }
+    
+    func resendButtonShow(show: Bool) {
+        resendButton.isHidden = !show
+        resendButton.isEnabled = show
+        codeVereficationField.text = show ? "" : codeVereficationField.text
+        codeVereficationField.isEnabled = !show
+    }
+    
+    func nextButtonEnable(enable: Bool) {
+        nextButton.isEnabled = enable
+//        nextButton.isHidden = !enable
+        nextButton.alpha = enable ? 1.0 : 0.6
+    }
+    
+    func setupTextLengh(lenght: Int) {
+         inputTextLimit = lenght
+    }
+    
+    func setupPhoneLable(with number: String) {
+        phoneCodeLabel.text = number
+    }
+    
 }
 
 extension PhoneVereficationViewController: UITextFieldDelegate, SmartTimerLabelDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        changeInfoTextState(state: true)
+    }
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let notAvailableCharacterSet = CharacterSet(charactersIn: "1234567890")
         
-        guard let newString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string),
-            newString.characters.count <= NumericConstants.vereficationCharacterLimit,
-            string.rangeOfCharacter(from: notAvailableCharacterSet) != nil || string == "" else {
+        
+        let notAvailableCharacterSet = CharacterSet.decimalDigits.inverted
+        let result = string.rangeOfCharacter(from: notAvailableCharacterSet)
+        if ( result != nil) {
             return false
         }
         
-        if newString.characters.count == NumericConstants.vereficationCharacterLimit, !self.timerLabel.isDead {
+        let resultStr = (textField.text as NSString?)?.replacingCharacters(in: range, with: string)
+        
+        if ((resultStr as String?)?.characters.count)! == inputTextLimit,
+                !timerLabel.isDead {
+
+            output.vereficationCodeEntered(code: resultStr ?? "")
             
-            self.output.vereficationCodeEntered()
+            DispatchQueue.main.async { [weak self] in
+                self?.codeVereficationField.resignFirstResponder()
+            }
+        } else if ((resultStr as String?)?.characters.count)! > inputTextLimit {
+            return false
         } else {
-            self.output.vereficationCodeNotReady()
+            output.vereficationCodeNotReady()
         }
         
-        let atributedString = NSAttributedString(string: textField.text!, attributes: [NSKernAttributeName: 10])
-        //        atributedString.addAttributes([NSKernAttributeName: 3], range: NSMakeRange(0, textField.text.lenght))
-        self.codeVereficationField.attributedText = atributedString
+        let atributedString = NSAttributedString(string: textField.text!, attributes: [NSAttributedStringKey.kern: 20])
+        codeVereficationField.attributedText = atributedString
+
         
         return true
     }
 
     func timerDidFinishRunning() {
-        self.output.timerFinishedRunning()
+        if (codeVereficationField.text?.lengthOfBytes(using: .utf8) == 0) {
+            self.hideKeyboard()
+        }
+        output.timerFinishedRunning()
     }
 }

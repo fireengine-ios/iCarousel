@@ -10,9 +10,18 @@ class AutoSyncInteractor: AutoSyncInteractorInput {
 
     weak var output: AutoSyncInteractorOutput!
     var dataStorage = AutoSyncDataStorage()
+    var uniqueUserID: String? = ""
 
     func prepareCellsModels(){
-        output.preperedCellsModels(models: dataStorage.getAutoSyncModels())
+        dataStorage.getAutoSyncModelForCurrentUser(success: { [weak self] (models, uniqueUserId) in
+            self?.output.preperedCellsModels(models: models)
+            self?.uniqueUserID = uniqueUserId
+        })
+    }
+    
+    func onSaveSettings(setting: SettingsAutoSyncModel){
+        dataStorage.saveAutoSyncModel(model: setting, uniqueUserId: uniqueUserID ?? "")
+        SyncService.default.updateSyncSettings(setting: setting)
     }
     
 }

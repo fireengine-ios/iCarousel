@@ -8,16 +8,39 @@
 
 import UIKit
 
-class LoginDataSource: NSObject, UITableViewDelegate, UITableViewDataSource, ProtoInputCellProtocol {
+protocol LoginDataSourceActionsDelegate: class {
+    func textStrtedEditing()
+    func loginCellFistEnteringPhonePlus()
+    func loginCellFistEnteringPhone()
+}
+
+class LoginDataSource: NSObject, UITableViewDelegate, UITableViewDataSource, ProtoInputCellProtocol, LoginPhoneMailCellActionProtocol {
+    
+    func firstCharacterIsPlus(fromCell cell: LoginPhoneMailCell, string: String) {
+        actionsDelegate?.loginCellFistEnteringPhonePlus()
+    }
+    
+    func firstCharacterIsNum(fromCell cell: LoginPhoneMailCell, string: String) {
+        actionsDelegate?.loginCellFistEnteringPhone()
+    }
+    
+    func textStartedEditing(withCell cell: ProtoInputTextCell) {
+        actionsDelegate?.textStrtedEditing()
+        
+    }
     
     @IBOutlet weak var tableView: UITableView!
     var tableDataMArray: [BaseCellModel] = []
     
+    weak var actionsDelegate: LoginDataSourceActionsDelegate?
     
     func setupTableView(tableView: UITableView){
         self.tableView = tableView
-        var nib = UINib(nibName: "inputCell", bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: CellsIdConstants.baseUserInputCellViewID)
+//        var nib = UINib(nibName: "inputCell", bundle: nil)
+//        tableView.register(nib, forCellReuseIdentifier: CellsIdConstants.baseUserInputCellViewID)
+        
+        var nib = UINib(nibName: "LoginPhoneMailCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: CellsIdConstants.loginPhoneMailCellID)
         
         nib = UINib(nibName: "PasswordCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: CellsIdConstants.passwordCellID)
@@ -40,43 +63,57 @@ class LoginDataSource: NSObject, UITableViewDelegate, UITableViewDataSource, Pro
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 81.0
+        return 101
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.row == 0){
-            let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.baseUserInputCellViewID, for: indexPath) as! BaseUserInputCellView
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.loginPhoneMailCellID, for: indexPath) as! LoginPhoneMailCell
+            cell.loginCellActionDelegate = self
             let model = tableDataMArray[indexPath.row]
             cell.titleLabel.text = model.title
             cell.selectionStyle = UITableViewCellSelectionStyle.none
-            cell.textInputField.attributedPlaceholder = NSAttributedString(string: model.inputText, attributes: [NSForegroundColorAttributeName: ColorConstants.whiteColor])
+            cell.textInputField.attributedPlaceholder = NSAttributedString(string: model.inputText, attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.whiteColor])
             
             cell.textDelegate = self
+            
+            #if DEBUG
+               cell.textInputField.text = "6257515test@gmail.com"
+                //"testasdasdMail@notRealMail.yep"//"Aleksandr.Pestriakov@life.com.by"//"6257515test@gmail.com"
+            #endif
 
             return cell
-        }else{
+        } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.passwordCellID,
                                                      for: indexPath) as! PasswordCell
             let model = tableDataMArray[indexPath.row]
             cell.titleLabel.text = model.title
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             cell.textInput.text = model.inputText
-            
+            cell.textInput.tag = 33
             cell.textDelegate = self
-            
+            #if DEBUG
+                cell.textInput.text = "Best6257515" //".FsddQ646"//".FsddQ646"//"Best6257515"
+            #endif
             return cell
         }
-        
     }
     
     // MARK: ProtoInputCellProtocol
     
     func textFinishedEditing(withCell cell: ProtoInputTextCell){
-        AutoNextEditingRowPasser.passToNextEditingRow(withEditedCell: cell, inTable: tableView)
-        
+        let _ = AutoNextEditingRowPasser.passToNextEditingRow(withEditedCell: cell, inTable: tableView)
     }
     
-    func textStartedEditing(withCell cell: ProtoInputTextCell) {
-        
+    func getLogin() -> String {
+        let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0))
+        let baseCell = cell as! BaseUserInputCellView
+        return baseCell.textInputField?.text ?? ""
+    }
+    
+    func getPassword() -> String {
+        let cell = tableView.cellForRow(at: IndexPath(row: 1, section: 0))
+        let baseCell = cell as! PasswordCell
+        return baseCell.textInput.text ?? ""
     }
 }

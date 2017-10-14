@@ -19,50 +19,99 @@ class GSMUserInputCell: ProtoInputTextCell {//BaseUserInputCellView {
     @IBOutlet weak var gsmCodeContainerView: UIView!
     @IBOutlet weak var textInputField: UITextField!{
         didSet {
-            self.inputTextField = textInputField
+            inputTextField = textInputField
         }
     }
     @IBOutlet weak var titleLabel: UILabel!
     
+    @IBOutlet weak var infoButton: UIButton!
+    @IBOutlet weak var infoIcon: UIImageView!
+    
     var delegate: GSMCodeCellDelegate?
+    weak var infoButtonDelegate: InfoButtonCellProtocol?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         gsmCodeContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(GSMUserInputCell.codeViewTouched)))
-        self.textInputField.delegate = self
+        textInputField.delegate = self
+        changeInfoButtonTo(hidden: true)
     }
     
     func setupCell(withTitle title: String, inputText text: String) {
-        self.textInputField.text = text
-        self.titleLabel.text = title
+        addBarToKeyboard()
+        textInputField.text = text
+        titleLabel.text = title
+    }
+    
+    func addBarToKeyboard() {
+        let toolBar = UIToolbar()
+        toolBar.barStyle = .default
+        toolBar.isTranslucent = true
+        toolBar.frame = CGRect(x: 0, y: 0, width: self.bounds.width, height: 50)
+        toolBar.sizeToFit()
+        let doneButton = UIBarButtonItem(title: TextConstants.nextTitle, style: .plain, target: self, action: #selector(nextButtonPressed(sender:)))
+        
+        let flex = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        
+        
+        toolBar.setItems([flex, doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        textInputField.inputAccessoryView = toolBar
+    }
+    
+    @objc func nextButtonPressed(sender: Any?) {
+        textDelegate?.textFinishedEditing(withCell: self)
+        inputTextField?.resignFirstResponder()
     }
     
     func setupGSMCode(code: String) {
-        self.gsmCountryCodeLabel.text = code
+        gsmCountryCodeLabel.text = code
         
     }
     
-    func codeViewTouched() {
-        self.delegate?.phoneNumberChanged(toNumber: self.textInputField.text!)
-        self.delegate?.codeViewGotTapped()
+    @objc func codeViewTouched() {
+        changeInfoButtonTo(hidden: true)
+        delegate?.phoneNumberChanged(toNumber: textInputField.text!)
+        delegate?.codeViewGotTapped()
+    }
+    
+    func changeTitleHeighlight(heighlight: Bool) {
+        if heighlight {
+            titleLabel.textColor = ColorConstants.whiteColor
+        } else {
+            titleLabel.textColor = ColorConstants.yellowColor
+        }
+    }
+    
+    override func changeInfoButtonTo(hidden: Bool) {
+//        infoButton.isEnabled = false//!hidden
+//        infoButton.isHidden = hidden
+        infoIcon.isHidden = hidden
+        changeTitleHeighlight(heighlight: hidden)
+    }
+    
+    @IBAction func infoButtonAction(_ sender: Any) {
+//        infoButtonDelegate?.infoButtonGotPressed(with: self, andType: .phoneNotValid)
     }
 }
 
 extension GSMUserInputCell {
     
     override func textFieldDidEndEditing(_ textField: UITextField) {
-        self.delegate?.phoneNumberChanged(toNumber: self.textInputField.text!)
-        self.textDelegate?.textFinishedEditing(withCell: self)
+        delegate?.phoneNumberChanged(toNumber: textInputField.text!)
+    }
+    
+    override func textFieldDidBeginEditing(_ textField: UITextField) {
+        super.textFieldDidBeginEditing(textField)
+        changeInfoButtonTo(hidden: true)
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let notAvailableCharacterSet = CharacterSet(charactersIn: "1234567890")//TODO: MAKE a Numeric text field class
-        
-//        let oldString: NSString? = textField.text as NSString?
-//        let newString = oldString?.replacingCharacters(in: range, with: string)//replacingCharacters(in: <#T##Range<String.Index>#>, with: string)//(in: range, with: string)
-        guard string.rangeOfCharacter(from: notAvailableCharacterSet) != nil || string == ""  else {
-            return false
-        }
-        return true//(string.rangeOfCharacter(from: notAvailableCharacterSet) != nil)
+        let notAvailableCharacterSet = CharacterSet.decimalDigits.inverted
+        let result = string.rangeOfCharacter(from: notAvailableCharacterSet)
+        return result == nil
     }
+    
+    
+    
 }

@@ -9,6 +9,19 @@
 import Foundation
 
 protocol TermsAndServicesInteractorOutput: class {
-    func showLoadedTermsAndUses(eula: Eula)
+    
+    func showLoadedTermsAndUses(eula: String)
+    
     func failLoadTermsAndUses(errorString:String)
+    
+    func signUpSuccessed()
+    
+    func popUpPressed()
+    
+    func signupFailed(errorResponce: ErrorResponse)
+    
+    func applyEulaFaild(errorResponce: ErrorResponse)
+    
+    func eulaApplied()
+
 }

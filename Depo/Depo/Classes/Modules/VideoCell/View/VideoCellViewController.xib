@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VideoCellViewController" customModule="Depo_LifeTech" customModuleProvider="target">
+            <connections>
+                <outlet property="cloudStatusImage" destination="5XU-Kj-IcV" id="7fB-I4-ho5"/>
+                <outlet property="videoLengthLabel" destination="VMM-l7-Roe" id="ZuY-iD-dFR"/>
+                <outlet property="videoPreviewImageView" destination="KfC-Jj-dyU" id="Irl-9D-0Xn"/>
+                <outlet property="view" destination="iN0-l3-epB" id="cCZ-e7-XU8"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="92" height="92"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KfC-Jj-dyU">
+                    <rect key="frame" x="0.0" y="0.0" width="92" height="92"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ObjectNotInCloud" translatesAutoresizingMaskIntoConstraints="NO" id="5XU-Kj-IcV">
+                    <rect key="frame" x="66" y="10" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="20" id="JL1-xK-RRv"/>
+                        <constraint firstAttribute="height" constant="20" id="gf3-io-RXA"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VMM-l7-Roe">
+                    <rect key="frame" x="0.0" y="57" width="92" height="35"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="DoK-9e-YSk"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="KfC-Jj-dyU" secondAttribute="trailing" id="6dY-Rc-E9V"/>
+                <constraint firstAttribute="trailing" secondItem="VMM-l7-Roe" secondAttribute="trailing" id="FbW-zR-0qW"/>
+                <constraint firstItem="5XU-Kj-IcV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="SQ9-UJ-7Nm"/>
+                <constraint firstItem="VMM-l7-Roe" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="YUw-t0-oms"/>
+                <constraint firstAttribute="trailing" secondItem="5XU-Kj-IcV" secondAttribute="trailing" constant="6" id="hlr-6R-Qya"/>
+                <constraint firstItem="KfC-Jj-dyU" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="loH-2Q-gXd"/>
+                <constraint firstAttribute="bottom" secondItem="VMM-l7-Roe" secondAttribute="bottom" id="pt8-fY-bv0"/>
+                <constraint firstAttribute="bottom" secondItem="KfC-Jj-dyU" secondAttribute="bottom" id="v78-3U-Uha"/>
+                <constraint firstItem="KfC-Jj-dyU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="vuh-Hy-UF9"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="25" y="-188"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ObjectNotInCloud" width="14" height="14"/>
+    </resources>
+</document>

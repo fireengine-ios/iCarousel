@@ -8,14 +8,19 @@
 
 protocol LoginViewOutput {
 
-    /**
-        @author Oleg
-        Notify presenter that view is ready
-    */
-
     func viewIsReady()
+    
     func sendLoginAndPassword(login: String, password: String)
+    
+    func sendLoginAndPasswordWithCaptcha(login: String, password: String, captchaID: String, captchaAnswer: String)
 
     func onCantLoginButton()
+    
+    func rememberMe(remember: Bool)
+    
+    func startedEnteringPhoneNumber()
+    func startedEnteringPhoneNumberPlus()
+    
+    func viewAppeared()
     
 }

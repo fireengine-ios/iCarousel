@@ -12,4 +12,8 @@ enum UserValidationResults {
     case passwordNotValid
     case passwodsNotMatch
     case phoneNotValid
+    case mailIsEmpty
+    case phoneIsEmpty
+    case passwordIsEmpty
+    case repasswordIsEmpty
 }

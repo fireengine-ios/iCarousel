@@ -9,10 +9,11 @@
 import UIKit
 
 protocol DataSourceOutput {
-//    func userDidTapCell(forIndex: Int)
     func pickerGotTapped()
     func protoCellTextFinishedEditing(cell: ProtoInputTextCell)
     func protoCellTextStartedEditing(cell: ProtoInputTextCell)
+    
+    func infoButtonGotPressed(withType: UserValidationResults)
 }
 
 class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
@@ -22,6 +23,7 @@ class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSour
     var currentGSMCode = CoreTelephonyService().callingCountryCode()
     
     func setupCells(withModels models: [BaseCellModel]) {
+        
         cells.removeAll()
         cells.append(contentsOf: models)
     }
@@ -32,23 +34,20 @@ class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSour
     }
     
     func changeGSMCodeLabel(withRow row: Int) {
-        let gsmModel = self.gsmModels[row]
-        self.currentGSMCode = gsmModel.gsmCode
+        let gsmModel = gsmModels[row]
+        currentGSMCode = gsmModel.gsmCode
     }
     
     func changeGSMCode(withCode code: String) {
-        self.currentGSMCode = code
+        currentGSMCode = code
         //TOFO: setup picker here on row with taht code
         
     }
     
     func getGSMCode(forRow row: Int) -> String {
-        let gsmModel = self.gsmModels[row]
+        let gsmModel = gsmModels[row]
         return gsmModel.gsmCode
     }
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 100//self.output.getRowHeight(forIndex: indexPath.row)
-//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cells.count
@@ -67,7 +66,7 @@ class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSour
                                                      for: indexPath)
         }
         
-        self.setupCell(withCell: tempoRow, atIndex: indexPath.row)
+        setupCell(withCell: tempoRow, atIndex: indexPath.row)
         
         return tempoRow
     }
@@ -81,6 +80,10 @@ class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSour
         
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 84
+    }
+    
     private func setupCell(withCell cell: UITableViewCell, atIndex index: Int) {
 
         guard let cell = cell as? ProtoInputTextCell, cells.count > 0  else {
@@ -91,36 +94,54 @@ class RegistrationDataSource: NSObject, UITableViewDelegate, UITableViewDataSour
         
         if let cell = cell as? GSMUserInputCell {
             cell.delegate = self
+            cell.infoButtonDelegate = self
             cell.setupGSMCode(code: currentGSMCode)
             cell.setupCell(withTitle: model.title, inputText: model.inputText)
             
+            #if DEBUG
+                cell.inputTextField?.text = "259092538"
+                cell.gsmCountryCodeLabel.text = "+375"
+                currentGSMCode = "+375"
+            #endif
         } else if let cell = cell as? BaseUserInputCellView {
+            cell.infoButtonDelegate = self
             cell.setupBaseCell(withTitle: model.title, inputText: model.inputText)
+            #if DEBUG
+               cell.inputTextField?.text = "testMail@notRealMail.yep"
+            #endif
             
         } else if let cell = cell as? PasswordCell {
+            cell.infoButtonDelegate = self
             cell.setupInitialState(withLabelTitle: model.title, placeHolderText: model.inputText)
+            if index == 3 {
+                cell.type = PasswordCell.PasswordCellType.reEnter
+                cell.textInput.tag = 33
+            }
+            #if DEBUG
+               cell.inputTextField?.text = ".FsddQ646"
+            #endif
         }
     }
 }
 
-extension RegistrationDataSource: UIPickerViewDataSource, UIPickerViewDelegate, ProtoInputCellProtocol, GSMCodeCellDelegate {
+extension RegistrationDataSource: UIPickerViewDataSource, UIPickerViewDelegate, ProtoInputCellProtocol, GSMCodeCellDelegate, InfoButtonCellProtocol {
     
     func codeViewGotTapped() {
-        self.output?.pickerGotTapped()
+        output?.pickerGotTapped()
     }
     
     func phoneNumberChanged(toNumber number: String) {
-        let oldPhoneModel = self.cells[1]
+        let oldPhoneModel = cells[1]
         let newPhoneModel = BaseCellModel(withTitle: oldPhoneModel.title, initialText: number)
-        self.cells[1] = newPhoneModel
+        cells[1] = newPhoneModel
     }
     
     func textFinishedEditing(withCell cell: ProtoInputTextCell) {
-        self.output?.protoCellTextFinishedEditing(cell: cell)
+        output?.protoCellTextFinishedEditing(cell: cell)
     }
 
     func textStartedEditing(withCell cell: ProtoInputTextCell) {
-        self.output?.protoCellTextStartedEditing(cell: cell)
+        output?.protoCellTextStartedEditing(cell: cell)
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -128,15 +149,28 @@ extension RegistrationDataSource: UIPickerViewDataSource, UIPickerViewDelegate, 
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return self.gsmModels.count
+        return gsmModels.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        guard self.gsmModels.count > 0 else {
+        guard gsmModels.count > 0 else {
             return ""
         }
         let model = gsmModels[row]
         let pickerTitle = model.gsmCode + "    " + model.countryName
         return pickerTitle
     }
+    
+    func infoButtonGotPressed(with sender: Any?, andType type: UserValidationResults) {
+//        debugPrint("sender is ", sender)
+        var errorType = type
+        if let cell = sender as? PasswordCell, cell.type == .reEnter {
+            errorType = .passwodsNotMatch
+        }
+        
+        output?.infoButtonGotPressed(withType: errorType)
+//        passwordNotValid
+    }
+    
+    
 }

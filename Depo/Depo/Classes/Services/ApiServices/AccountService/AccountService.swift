@@ -1,0 +1,81 @@
+//
+//  AccountService.swift
+//  Depo
+//
+//  Created by Alexander Gurin on 8/11/17.
+//  Copyright © 2017 com.igones. All rights reserved.
+//
+
+import Foundation
+
+protocol AccountServicePrl {
+    func usage(success: SuccessResponse?, fail: @escaping FailResponse)
+    func info(success: SuccessResponse?, fail:@escaping FailResponse)
+}
+
+class AccountService: BaseRequestService, AccountServicePrl {
+    
+    func info(success: SuccessResponse?, fail:@escaping FailResponse) {
+        let param = AccontInfo()
+        let handler = BaseResponseHandler<AccountInfoResponse, ObjectRequestResponse>(success: success, fail: fail)
+        executeGetRequest(param: param, handler: handler)
+    }
+    
+    func quotaInfo(success: SuccessResponse?, fail:@escaping FailResponse) {
+        let param = QuotaInfo()
+        let handler = BaseResponseHandler<QuotaInfoResponse, ObjectRequestResponse>(success: success, fail: fail)
+        executeGetRequest(param: param, handler: handler)
+    }
+    
+    func usage(success: SuccessResponse?, fail: @escaping FailResponse) {
+        let param = UsageParameters()
+        let handler = BaseResponseHandler<UsageResponse, ObjectRequestResponse>(success: success, fail: fail)
+        executeGetRequest(param: param, handler: handler)
+    }
+    
+    func provision() {
+        
+    }
+    
+    func language(success: SuccessResponse?, fail:@escaping FailResponse) {
+        let param = LanguageList()
+        let handler = BaseResponseHandler<LanguageListResponse, ObjectRequestResponse>(success: success, fail: fail)
+        executeGetRequest(param: param, handler: handler)
+    }
+    func updateLanguage(success: SuccessResponse?, fail:@escaping FailResponse) {
+        let param = LanguageListChange()
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: success, fail: fail)
+        executePostRequest(param: param, handler: handler)
+    }
+    
+    
+    // MARK: Profile photo
+    
+    func setProfilePhoto(param: UserPhoto, success: SuccessResponse?, fail:@escaping FailResponse) {
+        let handler = BaseResponseHandler<UserPhotoResponse, ObjectRequestResponse>(success: success, fail: fail)
+        executePutRequest(param: param, handler: handler)
+    }
+    
+    func deleteProfilePhoto(success: SuccessResponse?, fail:@escaping FailResponse) {
+        let param = UserPhoto()
+        let handler = BaseResponseHandler<UserPhotoResponse, ObjectRequestResponse>(success: success, fail: fail)
+        executeDeleteRequest(param: param, handler: handler)
+    }
+    
+    //MARK: - User Profile
+
+    func updateUserProfile(parameters: UserNameParameters, success: SuccessResponse?, fail: @escaping FailResponse) {
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: success, fail: fail)
+        executePostRequest(param: parameters, handler: handler)
+    }
+    
+    func updateUserEmail(parameters: UserEmailParameters, success: SuccessResponse?, fail: @escaping FailResponse) {
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: success, fail: fail)
+        executePostRequest(param: parameters, handler: handler)
+    }
+    
+    func updateUserPhone(parameters: UserPhoneNumberParameters, success: SuccessResponse?, fail: @escaping FailResponse) {
+        let handler = BaseResponseHandler<SignUpSuccessResponse, SignUpFailResponse>(success: success, fail: fail)
+        executePostRequest(param: parameters, handler: handler)
+    }
+}

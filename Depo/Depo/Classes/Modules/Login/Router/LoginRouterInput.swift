@@ -11,5 +11,13 @@ import Foundation
 protocol LoginRouterInput {
 
     func goToForgotPassword()
+    
+    func goToHomePage()
+    
+    func getCapcha() -> CaptchaViewController
+    
+    func goToTermsAndServices()
+    
+    func goToSyncSettingsView()
 
 }

@@ -14,7 +14,7 @@ class IntroduceViewController: UIViewController, IntroduceViewInput {
     var output: IntroduceViewOutput!
     var dataSource = IntroduceDataSource()
     
-    @IBOutlet weak var startUsingLifeBoxButton: UIButton!
+    @IBOutlet weak var startUsingLifeBoxButton: WhiteButtonWithRoundedCorner!
     @IBOutlet weak var haveAccountButton: ButtonWithCorner!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var pageControll: UIPageControl!
@@ -38,20 +38,14 @@ class IntroduceViewController: UIViewController, IntroduceViewInput {
     }
     
     func configurateView(){
-        navigationController?.navigationBar.isHidden = true
         
+        hidenNavigationBarStyle()
         startUsingLifeBoxButton.setTitle(TextConstants.itroViewGoToRegisterButtonText,
-                                              for: UIControlState.normal)
-        startUsingLifeBoxButton.backgroundColor = ColorConstants.whiteColor
-        startUsingLifeBoxButton.setTitleColor(ColorConstants.blueColor,
-                                                   for: UIControlState.normal)
-        startUsingLifeBoxButton.titleLabel?.font = UIFont(name: FontNamesConstant.turkcellSaturaBol, size: 20)
-        startUsingLifeBoxButton.layer.cornerRadius = startUsingLifeBoxButton.frame.size.height * 0.5
+                                         for: UIControlState.normal)
         
-        haveAccountButton.setTitle(TextConstants.introViewGoToLoginButtonText, for: UIControlState.normal)
-        haveAccountButton.backgroundColor = UIColor.clear
-        haveAccountButton.setTitleColor(ColorConstants.whiteColor, for: UIControlState.normal)
-        haveAccountButton.titleLabel?.font = UIFont(name: FontNamesConstant.turkcellSaturaBol, size: 12)
+        haveAccountButton.setTitle(TextConstants.introViewGoToLoginButtonText,
+                                   for: UIControlState.normal)
+        backButtonForNavigationItem(title: TextConstants.backTitle)
     }
 
 

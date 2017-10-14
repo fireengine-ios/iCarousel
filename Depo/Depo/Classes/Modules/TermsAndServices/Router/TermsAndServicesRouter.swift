@@ -7,13 +7,22 @@
 //
 
 class TermsAndServicesRouter: TermsAndServicesRouterInput {
+    
+    let routerVC = RouterVC()
+    
     func goToAutoSync(){
-        let inicializer = AutoSyncModuleInitializer()
-        let controller = AutoSyncViewController(nibName: "AutoSyncViewController", bundle: nil)
-        inicializer.autosyncViewController = controller
-        inicializer.setupVC()
-        let nController = UIApplication.shared.keyWindow?.rootViewController as! UINavigationController
-        nController.pushViewController(controller, animated: true)
-        nController.navigationBar.isHidden = false
+        routerVC.pushViewController(viewController: routerVC.synchronyseScreen!)
+    }
+    
+    func goToHomePage() {
+        routerVC.setNavigationController(controller: routerVC.homePageScreen)
+    }
+    
+    func goToPhoneVerefication(withSignUpSuccessResponse: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel) {
+        routerVC.pushViewController(viewController: routerVC.phoneVereficationScreen(withSignUpSuccessResponse: withSignUpSuccessResponse, userInfo: userInfo))
+    }
+    
+    func closeModule() {
+        routerVC.popViewController()
     }
 }

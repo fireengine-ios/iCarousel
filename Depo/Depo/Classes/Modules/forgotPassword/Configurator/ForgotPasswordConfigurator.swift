@@ -30,6 +30,12 @@ class ForgotPasswordModuleConfigurator {
 
         presenter.interactor = interactor
         viewController.output = presenter
+        
+        //capcha
+        
+//        let capchaModuleInitializer = CaptchaModuleInitializer()
+//        capchaModuleInitializer.setupModule()
+//        viewController.captchaModuleView = capchaModuleInitializer.captchaViewController
     }
 
 }

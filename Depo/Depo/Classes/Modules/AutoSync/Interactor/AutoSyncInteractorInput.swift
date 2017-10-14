@@ -10,4 +10,6 @@ import Foundation
 
 protocol AutoSyncInteractorInput {
     func prepareCellsModels()
+    
+    func onSaveSettings(setting: SettingsAutoSyncModel)
 }

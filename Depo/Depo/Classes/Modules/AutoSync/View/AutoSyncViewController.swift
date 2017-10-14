@@ -14,32 +14,68 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var startButton: UIButton!
+    @IBOutlet weak var startButton: WhiteButtonWithRoundedCorner!
     @IBOutlet weak var skipButton: ButtonWithCorner!
+    @IBOutlet weak var tableHConstaint: NSLayoutConstraint!
+    @IBOutlet weak var bacgroundImage: UIImageView!
+    
+    var fromSettings: Bool = false
+    
+    var saveBarButton: UIBarButtonItem? = nil
     
     let dataSource = AutoSyncDataSource()
 
     // MARK: Life cycle
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.hidesBackButton = !fromSettings
+        startButton.isHidden = fromSettings
+        bacgroundImage.isHidden = fromSettings
+        dataSource.isFromSettings = fromSettings
+        
+        if fromSettings {
+            view.backgroundColor = ColorConstants.whiteColor
+        } else {
+            view.backgroundColor = UIColor.lrTiffanyBlue
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if fromSettings {
+            navigationItem.rightBarButtonItem = saveBarButton!
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        navigationItem.title = TextConstants.autoSyncNavigationTitle
+        if !Device.isIpad {
+            setNavigationTitle(title: TextConstants.autoSyncNavigationTitle)
+        }
         
         titleLabel.text = TextConstants.autoSyncTitle
-        titleLabel.font = UIFont(name: FontNamesConstant.turkcellSaturaBol, size: 16)
-        titleLabel.textColor = ColorConstants.whiteColor
+        titleLabel.font = fromSettings ? UIFont.TurkcellSaturaDemFont(size: 16) : UIFont.TurkcellSaturaDemFont(size: 18)
+        titleLabel.textAlignment = .left
+        if Device.isIpad {
+            titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 22)
+            titleLabel.textAlignment = .center
+        }
         
-        startButton.titleLabel?.font = UIFont(name: FontNamesConstant.turkcellSaturaBol, size: 20)
-        startButton.backgroundColor = ColorConstants.whiteColor
-        startButton.setTitleColor(ColorConstants.blueColor, for: UIControlState.normal)
+        titleLabel.textColor = fromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
+        
         startButton.setTitle(TextConstants.autoSyncStartUsingLifebox, for: .normal)
-        startButton.layer.cornerRadius = startButton.frame.size.height * 0.5
-        
         skipButton.setTitle(TextConstants.autoSyncskipForNowButton, for: .normal)
-        skipButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
-        skipButton.titleLabel?.font = UIFont(name: FontNamesConstant.turkcellSaturaBol, size: 14)
         
-        dataSource.configurateTable(table: tableView)
+        dataSource.configurateTable(table: tableView, tableHConstraint: tableHConstaint)
+        
+        if fromSettings {
+            let button = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 44))
+            button.setTitle("Save", for: .normal)
+            button.setTitleColor(ColorConstants.whiteColor, for: .normal)
+            button.addTarget(self, action: #selector(onSaveButton), for: .touchUpInside)
+            saveBarButton = UIBarButtonItem(customView: button)
+            self.navigationItem.rightBarButtonItem = saveBarButton!
+        }
         
         output.viewIsReady()
     }
@@ -47,11 +83,14 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput {
     // MARK: buttons actions
     
     @IBAction func onStartUsingButton(){
-        //dataSource.tableDataArray -> result of user selection
+        let model = dataSource.createSettingsAutoSyncModel()
+        output.onSaveButton(setting: model)
+        
+        output.startLifeBoxPressed()
     }
     
     @IBAction func onSkipButtn(){
-        
+        output.skipForNowPressed()
     }
 
     // MARK: AutoSyncViewInput
@@ -62,4 +101,8 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput {
         dataSource.showCellsFromModels(models: models)
     }
     
+    @objc func onSaveButton(){
+        let model = dataSource.createSettingsAutoSyncModel()
+        output.onSaveButton(setting: model)
+    }
 }

@@ -46,7 +46,7 @@ class IntroduceDataSource: NSObject, UIScrollViewDelegate {
         pageControll.currentPage = Int(page)
     }
     
-    func valueChanged(){
+    @objc func valueChanged(){
         let page = pageControll.currentPage
         let x = CGFloat(page) * scrollView.frame.size.width
         let rect = CGRect(x: x, y: 0, width: scrollView.frame.size.width, height: scrollView.frame.size.height)

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class IntroduceModel: NSObject {
+class IntroduceModel {
     var imageName: String! = ""
     var text: NSAttributedString! = NSAttributedString()
 }

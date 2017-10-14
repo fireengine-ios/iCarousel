@@ -9,12 +9,32 @@
 class LoginRouter: LoginRouterInput {
     
     func goToForgotPassword(){
-        let inicializer = ForgotPasswordModuleInitializer()
-        let controller = ForgotPasswordViewController(nibName: "ForgotPasswordViewController", bundle: nil)
-        inicializer.forgotpasswordViewController = controller
-        inicializer.setupVC()
-        let nController = UIApplication.shared.keyWindow?.rootViewController as! UINavigationController
-        nController.pushViewController(controller, animated: true)
-        nController.navigationBar.isHidden = false
+        let router = RouterVC()
+        let forgotPassword = router.forgotPasswordScreen
+        router.pushViewController(viewController: forgotPassword!)
     }
+    
+    func goToHomePage() {
+        let router = RouterVC()
+        let homePage = router.tabBarScreen
+        router.setNavigationController(controller: homePage)
+    }
+    
+    func getCapcha() -> CaptchaViewController {
+        let router = RouterVC()
+        let capcha = router.capcha
+        return capcha as! CaptchaViewController
+    }
+    
+    func goToTermsAndServices() {
+        let router = RouterVC()
+        let temsAndServices = router.termsAndServicesScreen(login: true)
+        router.pushViewController(viewController: temsAndServices)
+    }
+    
+    func goToSyncSettingsView() {
+        let router = RouterVC()
+        router.pushViewController(viewController: router.synchronyseScreen!)
+    }
+    
 }

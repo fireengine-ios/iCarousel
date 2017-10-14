@@ -1,0 +1,246 @@
+//
+//  Favourites.swift
+//  Depo
+//
+//  Created by Alexander Gurin on 7/20/17.
+//  Copyright © 2017 com.igones. All rights reserved.
+//
+
+import Foundation
+
+typealias ListRemoveItems = ( [WrapData] ) -> Void
+
+typealias ListRemoveAlbums = ( [AlbumItem] ) -> Void
+
+typealias FailRemoteItems = () -> Void
+
+
+class RemoteItemsService {
+    
+    var requestSize: Int
+    
+    var currentPage: Int
+    
+    let contentType: SearchContentType
+    
+    let fieldValue : FieldValue
+    
+    let remote = SearchService()
+    
+    private let queueOperations: OperationQueue
+    
+    private var isFull = false
+    
+    init(requestSize:Int, fieldValue:FieldValue) {
+        
+        switch fieldValue {
+            case .favorite:
+                contentType = .favorite
+            case .cropy:
+                contentType = .cropy
+            case .albums:
+                contentType = .album
+            default:
+                contentType = .content_type
+        }
+        
+        self.fieldValue = fieldValue
+        self.requestSize = requestSize
+        currentPage = 0
+        queueOperations = OperationQueue()
+    }
+    
+    func reloadItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems? ) {
+        currentPage = 0
+        isFull = false
+        queueOperations.cancelAllOperations()
+        nextItems(sortBy: sortBy, sortOrder: sortOrder, success: success, fail: fail)
+    }
+    
+    func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail:FailRemoteItems? ) {
+        let serchParam = SearchByFieldParameters(fieldName: contentType,
+                                                 fieldValue: fieldValue,
+                                                 sortBy: sortBy,
+                                                 sortOrder: sortOrder,
+                                                 page: currentPage,
+                                                 size: requestSize)
+        
+        let executingOrWaiting = queueOperations.operations.filter {
+            ($0 as? NextPageOperation)?.requestParam == serchParam
+        }
+        
+        if executingOrWaiting.count == 0  {
+            
+            let nextPageOperation = NextPageOperation(requestParam: serchParam,
+                                                      success: { list in
+                                                        CoreDataStack.default.appendOnlyNewItems(items: list)
+                                                        self.currentPage = self.currentPage + 1
+                                                        success?(list)
+            },
+                                                      fail: fail)
+            
+            queueOperations.addOperation(nextPageOperation)
+        }
+    }
+    
+    func getSuggestion(text: String, success: @escaping ([SuggestionObject]) -> Void, fail: @escaping FailResponse) {
+        let parametrs = SuggestionParametrs(withText: text)
+        remote.suggestion(param: parametrs, success: { suggestList in
+            success((suggestList as! SuggestionResponse).list)
+        }) { (error) in
+            fail(error)
+        }
+    }
+    
+    class NextPageOperation: Operation {
+        
+        let searchService: SearchService
+        
+        let requestParam: SearchByFieldParameters
+        
+        let success: ListRemoveItems?
+        
+        let fail:FailRemoteItems?
+        
+        
+        init(requestParam: SearchByFieldParameters, success:ListRemoveItems?, fail:FailRemoteItems?) {
+            self.searchService = SearchService()
+            self.requestParam = requestParam
+            self.fail = fail
+            self.success = success
+        }
+        
+        override func main() {
+            
+            if isCancelled {
+                return
+            }
+            
+            searchService.searchByField(param: requestParam, success: { (response)  in
+                
+                guard let resultResponse = (response as? SearchResponse)?.list else {
+                    self.fail?()
+                    return
+                }
+                
+                let list = resultResponse.flatMap { WrapData(remote: $0) }
+                self.success?(list)
+                
+            }, fail: { _ in
+                self.fail?()
+            })
+        }
+    }
+}
+
+
+class MusicService: RemoteItemsService {
+    init(requestSize: Int) {
+        super.init(requestSize: requestSize, fieldValue: .audio)
+    }
+}
+
+
+class PhotoAndVideoService: RemoteItemsService {
+    
+    let localFileManager = FilesDataSource()
+    
+    init(requestSize: Int, type:FieldValue = .imageAndVideo) {
+        super.init(requestSize: requestSize, fieldValue: type)
+    }
+    
+     func allItems(sortBy: SortType, sortOrder: SortOrder, success: @escaping ListRemoveItems, fail:@escaping FailRemoteItems) {
+
+        nextItems(sortBy: sortBy, sortOrder: sortOrder, success: success, fail: fail)
+    }
+}
+
+class LocalPhotoAndVideoService: RemoteItemsService {
+    
+    let localFileManager = FilesDataSource()
+    
+    init(type:FieldValue = .imageAndVideo) {
+        super.init(requestSize: 100, fieldValue: type)
+    }
+    
+     func allItems(sortBy: SortType, sortOrder: SortOrder, success: @escaping ListRemoveItems, fail:@escaping FailRemoteItems) {
+        
+    }
+}
+
+class DocumentService: RemoteItemsService {
+    init(requestSize: Int) {
+        super.init(requestSize: requestSize, fieldValue: .document)
+    }
+}
+
+
+class FavouritesService: RemoteItemsService {
+    init(requestSize: Int) {
+        super.init(requestSize: requestSize, fieldValue: .favorite)
+    }
+}
+
+class FolderService: RemoteItemsService {
+    
+    let rootFolder: String
+
+    init(requestSize: Int, rootFolder: String = "") {
+        self.rootFolder = rootFolder
+        super.init(requestSize: requestSize, fieldValue: .document)
+    }
+    
+    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?) {
+        let  t = FileService()
+        t.filesList(rootFolder: rootFolder, sortBy: sortBy, sortOrder: sortOrder, folderOnly: true, success: success, fail: fail)
+    }
+}
+
+class FilesFromFolderService: RemoteItemsService {
+    
+    let rootFolder: String
+    
+    init(requestSize: Int, rootFolder: String = "") {
+        self.rootFolder = rootFolder
+        super.init(requestSize: requestSize, fieldValue: .document)
+    }
+    
+    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?) {
+        let  t = FileService()
+        t.filesList(rootFolder: rootFolder, sortBy: sortBy, sortOrder: sortOrder, folderOnly: true, success: success, fail: fail)
+    }
+}
+
+class AllFilesService: RemoteItemsService {
+    init(requestSize: Int) {
+        super.init(requestSize: requestSize, fieldValue: .imageAndVideo)
+    }
+    
+    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?) {
+        let  t = FileService()
+        t.filesList(sortBy: sortBy, sortOrder: sortOrder, success: success, fail: fail)
+    }
+}
+
+//
+
+class FacedRemoteItemsService {
+    
+    let fetchService: FetchService
+    
+    let remoteService: RemoteItemsService
+        
+    init(remoteService: RemoteItemsService) {
+        self.remoteService = remoteService
+        self.fetchService = FetchService(batchSize: 140, delegate: nil)
+    }
+    
+    func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail: FailRemoteItems?) {
+        remoteService.nextItems(sortBy: sortBy, sortOrder: sortOrder, success: success, fail: fail)
+    }
+    
+    func performFetch(sortingRules: SortedRules, filtes: [MoreActionsConfig.MoreActionsFileType]?) {
+//        var resultFilters = filtes
+//        fetchService.performFetch(sortingRules: sortingRules, filtes: resultFilters)
+    }
+}

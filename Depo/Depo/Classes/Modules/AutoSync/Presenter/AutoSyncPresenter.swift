@@ -6,17 +6,49 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class AutoSyncPresenter: AutoSyncModuleInput, AutoSyncViewOutput, AutoSyncInteractorOutput {
+class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput, AutoSyncInteractorOutput, CustomPopUpAlertActions {
 
     weak var view: AutoSyncViewInput!
     var interactor: AutoSyncInteractorInput!
     var router: AutoSyncRouterInput!
 
     func viewIsReady() {
+        startAsyncOperationDisableScreen()
         interactor.prepareCellsModels()
     }
     
     func preperedCellsModels(models:[AutoSyncModel]){
+         compliteAsyncOperationEnableScreen()
         view.preperedCellsModels(models: models)
     }
+    
+    func startLifeBoxPressed() {
+        //TODO: call interactor with collected data
+        router.routNextVC()
+    }
+    
+    func skipForNowPressed() {
+        CustomPopUp.sharedInstance.showCustomAlert(withTitle: TextConstants.autoSyncAlertTitle, titleAligment: .left, withText: TextConstants.autoSyncAlertText, warningTextAligment: .left, firstButtonText: TextConstants.autoSyncAlertNo, secondButtonText: TextConstants.autoSyncAlertYes, isShadowViewShown: true)
+        CustomPopUp.sharedInstance.delegate = self
+//
+    }
+    
+    func cancelationAction() {
+        
+    }
+    
+    func otherAction() {
+        router.routNextVC()
+    }
+    
+    func onSaveButton(setting: SettingsAutoSyncModel){
+        interactor.onSaveSettings(setting: setting)
+    }
+    
+    //MARK : BasePresenter
+    
+    override func outputView() -> Waiting? {
+        return view as? Waiting
+    }
+    
 }

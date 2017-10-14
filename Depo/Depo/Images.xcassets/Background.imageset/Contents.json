@@ -2,8 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "group3.pdf",
-      "compression-type" : "gpu-optimized-best"
+      "filename" : "group3.pdf"
     }
   ],
   "info" : {

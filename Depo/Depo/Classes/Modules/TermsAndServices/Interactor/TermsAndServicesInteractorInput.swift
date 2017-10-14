@@ -10,4 +10,15 @@ import Foundation
 
 protocol TermsAndServicesInteractorInput {
     func loadTermsAndUses()
+    
+    func signUpUser()
+
+    
+    var signUpSuccessResponse: SignUpSuccessResponse { get }
+    var userInfo: RegistrationUserInfoModel { get }
+    
+    var cameFromLogin: Bool { get }
+    
+    func applyEula()
+    
 }

@@ -8,24 +8,18 @@
 
 import Foundation
 
-protocol RegistrationViewInput: class {
-
-    /**
-        @author AlexanderP
-        Setup initial state of the view
-    */
-
+protocol RegistrationViewInput: class, Waiting, RegistrationViewDelegate {
+    
     func setupInitialState(withModels: [BaseCellModel])
-
-//    func validationResults(forRow: Int, withValue: String, result: NSError?)
     
     func setupPicker(withModels: [GSMCodeModel])
-    
-    func prepareNavController()
-    
+        
     func setupCurrentGSMCode(toGSMCode gsmCode: String)
     
-    func collectInputedUserInfo()//prepareUserInfo()
+    func collectInputedUserInfo()
+    
+    func showInfoButton(forType type: UserValidationResults)
+    
+    func showErrorTitle(withText: String)
 
-//    func setupRow(forRowIdex rowIndex: Int, withTitle title: String)
 }

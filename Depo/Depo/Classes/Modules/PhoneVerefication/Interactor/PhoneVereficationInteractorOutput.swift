@@ -10,4 +10,14 @@ import Foundation
 
 protocol PhoneVereficationInteractorOutput: class {
     
+    func verificationSucces()
+    func vereficationFailed(with error: CustomStringConvertible)
+    
+    func resendCodeRequestFailed(with error: ErrorResponse)
+    func resendCodeRequestSuccesed()
+    
+    func succesLogin()
+    func failLogin(message:String)
+    
+    func reachedMaxAttempts()
 }

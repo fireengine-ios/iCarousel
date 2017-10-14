@@ -11,17 +11,19 @@ import Foundation
 class DataStorage {
     
     var models: [BaseCellModel] = []
-    var gsmModels: [GSMCodeModel] = []
+    var gsmModels: [GSMCodeModel]!
+    
+    var userRegistrationInfo: RegistrationUserInfoModel!
     
     init() {
         models = [BaseCellModel(withTitle: TextConstants.registrationCellTitleEmail,
-                                initialText: TextConstants.registrationCellInitialTextEmail),
+                                initialText: TextConstants.registrationCellPlaceholderEmail),
         BaseCellModel(withTitle: TextConstants.registrationCellTitleGSMNumber,
                       initialText: ""),
         BaseCellModel(withTitle: TextConstants.registrationCellTitlePassword,
-                      initialText:TextConstants.registrationCellInitialTextReFillPassword),
-        BaseCellModel(withTitle: TextConstants.registrationCellTitlePassword,
-                      initialText: TextConstants.registrationCellInitialTextReFillPassword)]
+                      initialText:TextConstants.registrationCellPlaceholderPassword),
+        BaseCellModel(withTitle: TextConstants.registrationCellTitleReEnterPassword,
+                      initialText: TextConstants.registrationCellPlaceholderReFillPassword)]
     }
     
     func getModels() -> [BaseCellModel] {
@@ -30,8 +32,7 @@ class DataStorage {
     
     func configurateModel(forIndex index: Int, withValue value: String) {
         let model = models[index]
-        let newModel = BaseCellModel(withTitle: model.title, initialText: value)//inputText = value
+        let newModel = BaseCellModel(withTitle: model.title, initialText: value)
         models[index] = newModel
-//        debugPrint("models are ", self.models)
     }
 }

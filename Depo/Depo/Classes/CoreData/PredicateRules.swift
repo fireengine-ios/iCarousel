@@ -1,0 +1,129 @@
+//
+//  PredicateList.swift
+//  Depo
+//
+//  Created by Alexander Gurin on 9/10/17.
+//  Copyright © 2017 com.igones. All rights reserved.
+//
+
+import Foundation
+import CoreData
+
+class PredicateRules {
+    
+//    MARK: By file type
+    
+    var music: NSPredicate {
+        return PredicateRules.predicateFromFileType(type: .Music)!
+    }
+    
+    var video: NSPredicate {
+        return PredicateRules.predicateFromFileType(type: .Video)!
+    }
+    
+    var image: NSPredicate {
+        return PredicateRules.predicateFromFileType(type: .Photo)!
+    }
+    
+    var imageAndVideo: NSPredicate {
+        return NSCompoundPredicate(andPredicateWithSubpredicates: [image, video])
+    }
+    
+    var folder: NSPredicate {
+        return PredicateRules.predicateFromFileType(type: .Folder)!
+    }
+    
+    var document: NSPredicate {
+        
+        let start = FileType.application(.unknown).valueForCoreDataMapping() - 1
+        let end = FileType.application(.ppt).valueForCoreDataMapping() + 1
+        let list = [start, end]
+        
+        return NSPredicate(format: "fileTypeValue BETWEEN %@ ", list)
+    }
+    
+    var all: NSPredicate {
+        let list = [music, video, image, folder, document]
+        return NSCompoundPredicate(andPredicateWithSubpredicates: list)
+    }
+    
+    func folderContent(rootFolder:String) -> NSPredicate {
+        return NSPredicate(format: "== %@",rootFolder)
+    }
+    
+    
+    // MARK: By favorite staus
+    
+    var favorite: NSPredicate {
+        return NSPredicate(format: "favoritesValue == true")
+    }
+    
+    
+    // MARK: By sync status
+    
+    private static func predicateBySyncStatus(syncStatus: MoreActionsConfig.CellSyncType) -> NSPredicate {
+        switch syncStatus {
+        case .notSync, .sync :
+            return NSPredicate(format: "syncStatusValue = %d", syncStatus.convertToSyncWrapperedStatus().valueForCoreDataMapping())
+            
+        case .all :
+            let start = SyncWrapperedStatus.notSynced.valueForCoreDataMapping()
+            let end = SyncWrapperedStatus.synced.valueForCoreDataMapping()
+            return NSPredicate(format: "syncStatusValue BETWEEN {%d,%d}", start, end)
+        }
+    }
+    
+    private static func predicateFromFileType(type: MoreActionsConfig.MoreActionsFileType) -> NSPredicate? {
+        return NSPredicate(format: "fileTypeValue == %d", type.convertToFileType().valueForCoreDataMapping() )
+    }
+    
+    private func predicateFromGeneralFilterType(type: GeneralFilesFiltrationType) -> NSPredicate? {
+        switch type {
+        case .favoriteStatus(.all):
+            return nil
+        case .favoriteStatus(.favorites):
+            return NSPredicate(format: "favoritesValue == true")
+        case .favoriteStatus(.notFavorites):
+            return NSPredicate(format: "favoritesValue == false")
+        case .fileType(let specificType):
+            return NSPredicate(format: "fileTypeValue == %d", specificType.valueForCoreDataMapping())
+        case .syncStatus(let syncFlag):
+            return NSPredicate(format: "syncStatusValue == %i", syncFlag.valueForCoreDataMapping())
+        case .localStatus(let localFlag):
+            var stringBool = ""
+            switch localFlag {
+            case .nonLocal:
+                stringBool = "false"
+            case .local:
+                stringBool = "true"
+            case .all:
+                return nil
+            }
+            return NSPredicate(format: "isLocalItemValue == %@", stringBool)
+        case .duplicates:
+            let server = NSPredicate(format: "(isLocalItemValue == false) AND (fileTypeValue == %d)",  FileType.image.valueForCoreDataMapping() )
+            let serverList =  CoreDataStack.default.executeRequest(predicate: server, context: CoreDataStack.default.mainContext)
+            let list = serverList.map{ $0.md5Value}
+            let predicate = NSPredicate(format: "(isLocalItemValue == true) AND md5Value IN %@",  list)
+            return predicate
+        }
+        
+    }
+    
+    func predicate(filters: [GeneralFilesFiltrationType]? = nil) -> NSPredicate? {
+        
+        var filtersPredicates: [NSPredicate]?
+        filtersPredicates = filters?.flatMap {
+            self.predicateFromGeneralFilterType(type: $0)
+        }
+        
+        if let list = filtersPredicates,
+            list.count > 0  {
+            let fil = NSCompoundPredicate(orPredicateWithSubpredicates: list)
+            return fil
+        }
+        
+        return nil
+    }
+    
+}

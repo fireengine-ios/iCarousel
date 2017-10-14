@@ -12,9 +12,8 @@ protocol RegistrationInteractorOutput: class {
     func composedGSMCCodes(models:[GSMCodeModel])
     
     func userValid(email: String, phone: String, passpword: String)
-    func userInvalid(withResult result: UserValidationResults)
-    //email: String, phone: String, passport: String, withResult result: Bool)
+    func userInvalid(withResult result: [UserValidationResults])
     
-    func signUpBeingProcessed()
-    func signUpResult(withResult result: String)
+    func signUpFailed(withResult result: String?)
+    func signUpSucces(withResult result: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel)
 }

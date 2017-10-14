@@ -6,23 +6,24 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol PhoneVereficationViewInput: class {
-
-    /**
-        @author AlexanderP
-        Setup initial state of the view
-    */
+protocol PhoneVereficationViewInput: class, Waiting  {
 
     func setupInitialState()
     
-    func showResendButton()
+    func resendButtonShow(show: Bool)
     
-    func hideResendButton()
+    func setupTimer(withRemainingTime remainingTime: Int)
     
-    func setupTimer()
+    func dropTimer()
     
-    func disableNextButton()
+    func nextButtonEnable(enable: Bool)
     
-    func enableNextButton()
+    func setupTextLengh(lenght: Int)
+    
+    func setupPhoneLable(with number: String)
+    
+    func setupButtonsInitialState()
+    
+    func heighlightInfoTitle()
     
 }

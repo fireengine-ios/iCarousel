@@ -8,113 +8,245 @@
 
 import UIKit
 
+protocol RegistrationViewDelegate: class {
+    func show(errorString: String)
+}
+
 class RegistrationViewController: UIViewController, RegistrationViewInput, DataSourceOutput {
     
     @IBOutlet weak var shadowView: UIView!
     @IBOutlet weak var userRegistrationTable: UITableView!
-    @IBOutlet weak var nextBtn: UIButton!
+    @IBOutlet weak var nextBtn: WhiteButtonWithRoundedCorner!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var iPadTitleLabel: UILabel!
+    
+    @IBOutlet weak var spaceBetweenNextButtonAndTable :NSLayoutConstraint!
+    
     var output: RegistrationViewOutput!
     let dataSource = RegistrationDataSource()
 
-    var isPickerTapped = false
-    
-    @IBOutlet weak var pickerBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var pickerContainer: UIView!
     
     @IBOutlet weak var pickerView: UIPickerView!
     
+    @IBOutlet weak var pickerBottomConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak var pickerContainer: UIView!
+
+    @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet weak var errorLabelHeight: NSLayoutConstraint!
+
+    
     private var originBottomH:CGFloat = -1
+    private var originSpaceBetweenNextButtonAndTable: CGFloat = -1
+
+    
+    private let errorLabelConstraintOriginalHeight: CGFloat = 73
+    private let erroredSpaceBetweenNextButtonAndTable: CGFloat = 20
     
     // MARK: Life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = TextConstants.registerTitle
-        self.nextBtn.setTitleColor(ColorConstants.blueColor, for: .normal)
-
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(showKeyBoard),
-                                               name: NSNotification.Name.UIKeyboardWillShow,
-                                               object: nil)
+        if !Device.isIpad {
+            setNavigationTitle(title: TextConstants.registerTitle)
+        }
         
-        self.setupDelegates()
-        self.output.viewIsReady()
+        errorLabel.text = TextConstants.registrationPasswordError
+        errorLabel.textColor = ColorConstants.yellowColor
+        errorLabelHeight.constant = 0
+        errorLabel.font = UIFont.TurkcellSaturaMedFont(size: 18)
+        if (Device.isIpad){
+            navigationItem.title = ""
+            iPadTitleLabel.text = TextConstants.registrationTitleText
+            iPadTitleLabel.font = UIFont.TurkcellSaturaDemFont(size: 22)
+            errorLabel.font = UIFont.TurkcellSaturaMedFont(size: 22)
+        }
+        iPadTitleLabel.textColor = ColorConstants.whiteColor
+        
+        nextBtn.setTitle(TextConstants.registrationNextButtonText, for: .normal)
+
+        backButtonForNavigationItem(title:TextConstants.backTitle)
+
+        
+        let doneButton = UIBarButtonItem(title: TextConstants.chooseTitle,
+                                         style: .plain,
+                                         target: self,
+                                         action: #selector(donePicker(sender:)))
+        let pickerToolBar = barButtonItemsWithRitht(button: doneButton)
+        
+        
+        pickerContainer.addSubview(pickerToolBar)
+
+        scrollView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboardAndPicker)))
+        
+        setupDelegates()
+        output.viewIsReady()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self);
+    }
+    
+    @objc func donePicker(sender:AnyObject) {
+        chooseButtonPressed()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.userRegistrationTable.register(UINib(nibName: "inputCell", bundle: nil),
+        visibleNavigationBarStyle() 
+
+        
+        userRegistrationTable.register(UINib(nibName: "inputCell", bundle: nil),
                                             forCellReuseIdentifier: CellsIdConstants.baseUserInputCellViewID)
-        self.userRegistrationTable.register(UINib(nibName: "GSMUInputCell", bundle: nil),
+        userRegistrationTable.register(UINib(nibName: "GSMUInputCell", bundle: nil),
                                             forCellReuseIdentifier: CellsIdConstants.gSMUserInputCellID)
-        self.userRegistrationTable.register(UINib(nibName: "PasswordCell", bundle: nil),
+        userRegistrationTable.register(UINib(nibName: "PasswordCell", bundle: nil),
                                             forCellReuseIdentifier: CellsIdConstants.passwordCellID)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(showKeyBoard),
+                                               name: NSNotification.Name.UIKeyboardWillShow,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(hideKeyboard),
+                                               name: NSNotification.Name.UIKeyboardWillHide,
+                                               object: nil)
+    }
+    
+    func showErrorTitle(withText: String) {
+//        errorLabel.text = withText
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 3
+        errorLabel.attributedText = NSAttributedString(string: withText, attributes: [NSAttributedStringKey.paragraphStyle: paragraphStyle])
+        changeErrorLabelAppearance(status: true)
+//        if (Device.isIpad){
+//          errorLabelHeight.constant = errorLabelConstraintOriginalHeight * 1.5
+//        }
+    }
+    
+    func changeErrorLabelAppearance(status: Bool) {
+        errorLabelHeight.constant = status ? errorLabelConstraintOriginalHeight : 0
+        
+        if status {
+            hideKeyboardAndPicker()
+//            spaceBetweenNextButtonAndTable.constant = erroredSpaceBetweenNextButtonAndTable
+            
+//            let point = CGPoint(x: 0, y: 0)
+//            scrollView.setContentOffset(point, animated: true)
+        }
+        view.updateConstraints()
+        view.layoutIfNeeded()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         originBottomH = bottomConstraint.constant
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self);
+        originSpaceBetweenNextButtonAndTable = spaceBetweenNextButtonAndTable.constant
     }
     
     private func setupDelegates() {
-        self.pickerView.dataSource = self.dataSource
-        self.pickerView.delegate = self.dataSource
+        pickerView.dataSource = dataSource
+        pickerView.delegate = dataSource
         
-        self.dataSource.output = self
-        self.userRegistrationTable.dataSource = self.dataSource
-        self.userRegistrationTable.delegate = self.dataSource
+        dataSource.output = self
+        userRegistrationTable.dataSource = dataSource
+        userRegistrationTable.delegate = dataSource
     }
     
-    func showKeyBoard(notification: NSNotification){
+    @objc func showKeyBoard(notification: NSNotification){
         let userInfo:NSDictionary = notification.userInfo! as NSDictionary
         let keyboardFrame:NSValue = userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
         let keyboardHeight = keyboardRectangle.height
         
-        let tableH = scrollView.frame.origin.y + userRegistrationTable.frame.size.height
-        let dy = view.frame.size.height - tableH
-        if (dy < keyboardHeight){
-            let increaseH = abs((view.frame.size.height - keyboardHeight) - tableH)
-            bottomConstraint.constant = increaseH + originBottomH
+        let yNextButton = getMainYForView(view: nextBtn) + nextBtn.frame.size.height
+        if (view.frame.size.height - yNextButton < keyboardHeight){
+            
+            bottomConstraint.constant = keyboardHeight + 40.0
+            spaceBetweenNextButtonAndTable.constant = 5.0
             view.layoutIfNeeded()
+            
+            let textField = searchActiveTextField(view: self.view)
+            if (textField != nil){
+                var yOfTextField = getMainYForView(view: textField!) + textField!.frame.size.height + 20
+                if (textField!.tag == 33){
+                    yOfTextField = getMainYForView(view: nextBtn) + nextBtn.frame.size.height
+                }
+                if (yOfTextField > view.frame.size.height - keyboardHeight){
+                    let dy = yOfTextField - (view.frame.size.height - keyboardHeight)
+                    
+                    let point = CGPoint(x: 0, y: dy + 10)
+                    scrollView.setContentOffset(point, animated: true)
+                }
+            }
+        }
+    }
+    
+    
+    private func searchActiveTextField(view: UIView) -> UITextField? {
+        
+        if let textField = view as? UITextField {
+            if textField.isFirstResponder {
+                return textField
+            }
+        }
+        for subView in view.subviews {
+            let textField = searchActiveTextField(view: subView)
+            if (textField != nil){
+                return textField
+            }
+        }
+        return nil
+    }
+    
+    private func getMainYForView(view: UIView)->CGFloat{
+        if (view.superview == self.view){
+            return view.frame.origin.y
+        }else{
+            if (view.superview != nil){ 
+                return view.frame.origin.y + getMainYForView(view:view.superview!)
+            }else{
+                return 0
+            }
         }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.hideKeyboard()
-        self.hidePicker()
+        hideKeyboardAndPicker()
     }
     
-    private func hideKeyboard() {
+    @objc private func hideKeyboardAndPicker() {
+        hideKeyboard()
+        hidePicker()
+    }
+    
+    @objc private func hideKeyboard() {
         view.endEditing(true)
-        bottomConstraint.constant = originBottomH
+        self.bottomConstraint.constant = originBottomH//
+//        spaceBetweenNextButtonAndTable.constant = erroredSpaceBetweenNextButtonAndTable
+        
+        spaceBetweenNextButtonAndTable.constant = (errorLabelHeight.constant == 0) ? originSpaceBetweenNextButtonAndTable : erroredSpaceBetweenNextButtonAndTable
         self.view.layoutIfNeeded()
     }
     
     private func handleNextAction() {
-//        guard let navController = self.navigationController else {
-//            return
-//        }
-//        self.output.nextButtonPressed(withNavController: navController, email: self.getTextFieldValue(forRow: 0), phone: self.getTextFieldValue(forRow: 1), password: self.getTextFieldValue(forRow: 2), repassword: self.getTextFieldValue(forRow: 3))
+        hideKeyboardAndPicker()
+        output.nextButtonPressed()
     }
     
     private func reloadGSMCell() {
-        self.userRegistrationTable.reloadRows(at: [IndexPath(item: 1, section: 0)], with: UITableViewRowAnimation.none)
+        userRegistrationTable.reloadRows(at: [IndexPath(item: 1, section: 0)], with: UITableViewRowAnimation.none)
     }
     
     private func getTextFieldValue(forRow: Int) -> String {
-        guard let cell = self.userRegistrationTable.cellForRow(at: IndexPath(item: forRow, section: 0)) else {
+        guard let cell = userRegistrationTable.cellForRow(at: IndexPath(item: forRow, section: 0)) else {
             return ""
         }
         if let cell = cell as? GSMUserInputCell {
-            let gsmCodeWithPhone = self.dataSource.getGSMCode(forRow: forRow) + cell.textInputField.text!
+            let gsmCodeWithPhone = /*dataSource.currentGSMCode*//*getGSMCode(forRow: forRow)*/  cell.textInputField.text!
             return gsmCodeWithPhone
         }
         if let cell = cell as? BaseUserInputCellView {
@@ -128,93 +260,135 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
     }
     
     private func findNextProtoCell(fromEditedCell editedCell: ProtoInputTextCell) {
-        if AutoNextEditingRowPasser.passToNextEditingRow(withEditedCell: editedCell, inTable: self.userRegistrationTable) == nil {
-            self.handleNextAction()
-        }
+     let _ = AutoNextEditingRowPasser.passToNextEditingRow(withEditedCell: editedCell, inTable: userRegistrationTable)
     }
     
     private func hidePicker() {
-        self.shadowView.isHidden = true
-        self.shadowView.isUserInteractionEnabled = false
-        self.pickerBottomConstraint.constant = -271
-        UIView.animate(withDuration: 0.25, animations: {
-            self.view.layoutIfNeeded()
-            
-        })
+        changePickerState(state: false)
     }
     
     private func showPicker() {
-        self.shadowView.isHidden = false
-        self.shadowView.isUserInteractionEnabled = true
-        self.pickerBottomConstraint.constant = 0
-        UIView.animate(withDuration: 0.25, animations: {
+        changePickerState(state: true)
+    }
+    
+    private func changePickerState(state isActive: Bool) {
+        shadowView.isHidden = !isActive
+        shadowView.isUserInteractionEnabled = isActive
+        if isActive {
+            pickerBottomConstraint.constant = 0
+        } else {
+            pickerBottomConstraint.constant = -271
+        }
+        UIView.animate(withDuration: 0.3, animations: {
             self.view.layoutIfNeeded()
         })
     }
     
     func pickerGotTapped() {
-        self.hideKeyboard()
-        self.showPicker()
+        hideKeyboard()
+        showPicker()
     }
+    
+    func showInfoButton(forType type: UserValidationResults) {
+        switch type {//FIXME: change it to more reasanble way 
+        case .mailIsEmpty:
+            
+                guard let tempoCell = userRegistrationTable.cellForRow(at: IndexPath(item: 0, section: 0)) as? BaseUserInputCellView else {
+                    break
+                }
+                tempoCell.changeInfoButtonTo(hidden: false)
+        case .passwordIsEmpty:
+            
+                guard let tempoCell = userRegistrationTable.cellForRow(at: IndexPath(item: 2, section: 0)) as? PasswordCell else {
+                    break
+                }
+                tempoCell.changeInfoButtonTo(hidden: false)
+
+        case .phoneIsEmpty:
+            
+                guard let tempoCell = userRegistrationTable.cellForRow(at: IndexPath(item: 1, section: 0)) as? GSMUserInputCell else {
+                    break
+                }
+                tempoCell.changeInfoButtonTo(hidden: false)
+            
+        case .repasswordIsEmpty:
+            
+                guard let tempoCell = userRegistrationTable.cellForRow(at: IndexPath(item: 3, section: 0)) as? PasswordCell else {
+                    break
+                }
+                tempoCell.changeInfoButtonTo(hidden: false)
+            
+        default:
+            break
+        }
+    }
+    
     
     // MARK: - Actions
+    
     @IBAction func nextActionHandler(_ sender: Any) {
-//        self.handleNextAction()
-        self.output.nextButtonPressed()
-    }
-    
-    @IBAction func pickerChoosePressed(_ sender: Any) {
-        self.hidePicker()
-        let currentRow = self.pickerView.selectedRow(inComponent: 0)
-        self.dataSource.changeGSMCodeLabel(withRow: currentRow)
-        self.reloadGSMCell()
-    }
-    
-    @IBAction func onHideKeyBoard(){
-        self.hideKeyboard()
-    }
-    
-    
-    // MARK: RegistrationViewInput
-
-    func setupRow(forRowIdex rowIndex: Int, withTitle title: String) {
-        //setup row
+        handleNextAction()
     }
     
     func setupInitialState(withModels: [BaseCellModel]) {
-        self.shadowView.isHidden = true //TODO: create in popup service something like "show shadow view"
-        self.shadowView.isUserInteractionEnabled = false
-        self.dataSource.setupCells(withModels: withModels)
-        self.userRegistrationTable.reloadData()
+        shadowView.isHidden = true //TODO: create in popup service something like "show shadow view"
+        shadowView.isUserInteractionEnabled = false
+        dataSource.setupCells(withModels: withModels)
+        setupInitialtGSMCode()
+        userRegistrationTable.reloadData()
+    }
+    
+    private func setupInitialtGSMCode() {
+        let telephonyService = CoreTelephonyService()
+        let phoneCode = telephonyService.callingCountryCode()
+        if phoneCode == "" {
+            dataSource.currentGSMCode = telephonyService.countryCodeByLang()
+        }
     }
     
     func setupPicker(withModels: [GSMCodeModel]) {
-        self.dataSource.setupPickerCells(withModels: withModels)
-        self.pickerView.reloadAllComponents()
+        dataSource.setupPickerCells(withModels: withModels)
+        pickerView.reloadAllComponents()
     }
     
     func setupCurrentGSMCode(toGSMCode gsmCode: String) {
-        self.dataSource.changeGSMCode(withCode: gsmCode)
-        self.reloadGSMCell()
-    }
-
-    func prepareNavController() {
-        guard let navController = self.navigationController else {
-            return
-        }
-        self.output.readyForPassing(withNavController: navController)
+        dataSource.changeGSMCode(withCode: gsmCode)
+        reloadGSMCell()
     }
     
     func collectInputedUserInfo() {
-        self.output.collectedUserInfo(email: self.getTextFieldValue(forRow: 0), phone: self.getTextFieldValue(forRow: 1), password: self.getTextFieldValue(forRow: 2), repassword: self.getTextFieldValue(forRow: 3))
+        output.collectedUserInfo(email: getTextFieldValue(forRow: 0), code: dataSource.currentGSMCode, phone: getTextFieldValue(forRow: 1), password: getTextFieldValue(forRow: 2), repassword: getTextFieldValue(forRow: 3))
     }
     
+    
     //MARK: - DataSource output
+    
     func protoCellTextFinishedEditing(cell: ProtoInputTextCell) {
-        self.findNextProtoCell(fromEditedCell: cell)
+        findNextProtoCell(fromEditedCell: cell)
     }
     
     func protoCellTextStartedEditing(cell: ProtoInputTextCell) {
-        self.hidePicker()
+        changeErrorLabelAppearance(status: false)
+        hidePicker()
+    }
+    
+    func infoButtonGotPressed(withType: UserValidationResults) {
+        output.infoButtonGotPressed(with: withType)
+    }
+    
+    
+    //MARK: - Picker Choose
+    
+    func chooseButtonPressed() {
+        hidePicker()
+        let currentRow = pickerView.selectedRow(inComponent: 0)
+        dataSource.changeGSMCodeLabel(withRow: currentRow)
+        reloadGSMCell()
+    }
+}
+
+extension RegistrationViewController: RegistrationViewDelegate {
+    func show(errorString: String) {
+        showErrorTitle(withText: errorString)
     }
 }

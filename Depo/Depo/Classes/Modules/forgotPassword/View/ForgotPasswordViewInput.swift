@@ -6,13 +6,11 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol ForgotPasswordViewInput: class {
-
-    /**
-        @author Oleg
-        Setup initial state of the view
-    */
-
+protocol ForgotPasswordViewInput: class, Waiting {
+    
     func setupInitialState()
+    
     func showCapcha()
+    
+    func setupVisableSubTitle() 
 }

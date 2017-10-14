@@ -6,3 +6,8 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
+struct RegistrationUserInfoModel {
+    let mail: String
+    let phone: String
+    let password: String
+}

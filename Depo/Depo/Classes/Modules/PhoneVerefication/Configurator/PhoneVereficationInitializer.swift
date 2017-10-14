@@ -12,14 +12,9 @@ class PhoneVereficationModuleInitializer: NSObject {
 
     //Connect with object on storyboard
     @IBOutlet weak var phonevereficationViewController: PhoneVereficationViewController!
-
-    override func awakeFromNib() {
-
+    
+    func setupConfig(with: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel ) {
         let configurator = PhoneVereficationModuleConfigurator()
-        configurator.configureModuleForViewInput(viewInput: phonevereficationViewController)
-    }
-    func setupConfig() {
-        let configurator = PhoneVereficationModuleConfigurator()
-        configurator.configureModuleForViewInput(viewInput: phonevereficationViewController)
+        configurator.configureModuleForViewInput(viewInput: phonevereficationViewController, withResponse: with, userInfo:  userInfo)
     }
 }

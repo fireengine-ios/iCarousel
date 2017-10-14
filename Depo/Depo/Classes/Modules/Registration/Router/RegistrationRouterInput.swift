@@ -9,8 +9,6 @@
 import UIKit
 
 protocol RegistrationRouterInput {
-
-    func routNextVC()
-    func routNextVC(wihtNavigationController navController: UINavigationController)
-    
+    func phoneVerification(sigUpResponse: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel)
+    func termsAndServices(with delegate: RegistrationViewDelegate?)
 }

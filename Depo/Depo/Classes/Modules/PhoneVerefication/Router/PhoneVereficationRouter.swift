@@ -8,14 +8,21 @@
 
 class PhoneVereficationRouter: PhoneVereficationRouterInput {
     
-    func goToTermAndUses(){
-        let inicializer = TermsAndServicesModuleInitializer()
-        let termsController = TermsAndServicesViewController(nibName: "TermsAndServicesScreen", bundle: nil)
-        inicializer.termsandservicesViewController = termsController
-        inicializer.setupConfig()
-        let nController = UIApplication.shared.keyWindow?.rootViewController as! UINavigationController
-        nController.pushViewController(termsController, animated: true)
-        nController.navigationBar.isHidden = false
+//    func goToTermAndUses() {
+//        
+//        let router = RouterVC()
+//        let terms = router.termsAndServicesScreen
+//        router.pushViewController(viewController: terms)
+//    }
+    func goAutoSync() {
+        let router = RouterVC()
+        router.pushViewController(viewController: router.synchronyseScreen!)
+//        let inicializer = AutoSyncModuleInitializer()
+//        let controller = AutoSyncViewController(nibName: "AutoSyncViewController", bundle: nil)
+//        inicializer.autosyncViewController = controller
+//        inicializer.setupVC()
+//        let nController = UIApplication.shared.keyWindow?.rootViewController as! UINavigationController
+//        nController.pushViewController(controller, animated: true)
+//        nController.navigationBar.isHidden = false
     }
-    
 }

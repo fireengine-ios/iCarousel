@@ -8,4 +8,10 @@
 
 class AutoSyncRouter: AutoSyncRouterInput {
 
+    func routNextVC() {
+        let router = RouterVC()
+        let homePage = router.tabBarScreen
+        router.setNavigationController(controller: homePage)
+    }
+    
 }

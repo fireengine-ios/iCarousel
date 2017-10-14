@@ -9,23 +9,17 @@
 import UIKit
 
 class TermsAndServicesModuleInitializer: NSObject {
-
-    //Connect with object on storyboard
-    @IBOutlet weak var termsandservicesViewController: TermsAndServicesViewController!
-
-    override func awakeFromNib() {
-
-        let configurator = TermsAndServicesModuleConfigurator()
-        configurator.configureModuleForViewInput(viewInput: termsandservicesViewController)
+    
+    weak var delegate: RegistrationViewDelegate?
+    
+    init(delegate: RegistrationViewDelegate?) {
+        self.delegate = delegate
     }
-
-//    init(withNavigationController navController: UINavigationController) {
-//        
-//    }
-
-    func setupConfig() {
-        let configurator = TermsAndServicesModuleConfigurator()
-        configurator.configureModuleForViewInput(viewInput: termsandservicesViewController)
+    
+    func setupConfig(withViewController controller: TermsAndServicesViewController, fromLogin: Bool, withSignUpSuccessResponse: SignUpSuccessResponse? = nil, userInfo: RegistrationUserInfoModel? = nil) {
+        
+        let configurator = TermsAndServicesModuleConfigurator(delegate: delegate)
+        configurator.configureModuleForViewInput(viewInput: controller, fromLogin: fromLogin)
     }
     
 }

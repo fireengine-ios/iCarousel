@@ -8,27 +8,83 @@
 
 import UIKit
 
+protocol AutoSyncInformTableViewCellCheckBoxStateProtocol: class {
+    func checkBoxChangedState(state: Bool, model: AutoSyncModel, cell: AutoSyncInformTableViewCell)
+}
+
 class AutoSyncInformTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var separatorView: UIView!
+    
     @IBOutlet weak var titleLabel:UILabel!
+    
     @IBOutlet weak var iconImageView: UIImageView!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-        backgroundColor = UIColor.clear
-        
-        titleLabel.textColor = ColorConstants.whiteColor
-        titleLabel.font = UIFont(name: FontNamesConstant.turkcellSaturaBol, size: 14)
-    }
+    @IBOutlet weak var titleLabelTopConstraint: NSLayoutConstraint!
     
-    func configurateCellWith(model: AutoSyncModel){
-        titleLabel.text = model.titleString
-        if (model.isSelected){
-            iconImageView.image = UIImage(named: "AutoSyncIcon")
-        }else{
-            iconImageView.image = nil
+    @IBOutlet weak var descriptionLabel: UILabel!
+    
+    @IBOutlet weak var checkBoxButton: UIButton!
+    
+    weak var stateDelegate: AutoSyncInformTableViewCellCheckBoxStateProtocol?
+    
+    var model: AutoSyncModel?
+    
+    var descriptionLableText: String? {
+        didSet {
+            if descriptionLableText! == "" {
+                return
+            }
+            descriptionLabel.text = descriptionLableText!
+            titleLabelTopConstraint.constant = 15
         }
     }
     
-}
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        backgroundColor = UIColor.clear
+        
+        titleLabel.textColor = ColorConstants.whiteColor
+        titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 18)
+        
+        descriptionLabel.textColor = ColorConstants.whiteColor
+        descriptionLabel.font = UIFont.TurkcellSaturaRegFont(size: 14)
+    }
+    
+    func configurateCellWith(model: AutoSyncModel){
+        self.model = model
+        descriptionLableText = model.subTitleString
+        titleLabel.text = model.titleString
+        
+        separatorView.isHidden = model.titleString.characters.count == 0
+        
+        
+        checkBoxButton.isSelected = model.isSelected
+        configureCellsItemsWithModel()
+    }
+    
+    func setColors(isFromSettings: Bool){
+        titleLabel.textColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
+        descriptionLabel.textColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
+        separatorView.backgroundColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
+    }
+    
+    @IBAction func checkBoxButtonHandler(_ sender: Any) {
+        checkBoxButton.isSelected = !checkBoxButton.isSelected
+        let newModel = AutoSyncModel(model: model!, selected: checkBoxButton.isSelected)
+        model = newModel
+        configureCellsItemsWithModel()
+        stateDelegate?.checkBoxChangedState(state: checkBoxButton.isSelected,
+                                            model: newModel, cell: self)
+    }
+    
+    private func configureCellsItemsWithModel() {
+        let alpha = CGFloat(model!.isSelected ? 1.0 : 0.6)
+        configureCellsItemsTransparency(alpha: alpha)
+    }
+    
+    private func configureCellsItemsTransparency(alpha: CGFloat) {
+        titleLabel.alpha = alpha
+        descriptionLabel.alpha = alpha
+    }
+ }

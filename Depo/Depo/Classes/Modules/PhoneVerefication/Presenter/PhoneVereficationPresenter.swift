@@ -6,43 +6,92 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class PhoneVereficationPresenter: PhoneVereficationModuleInput, PhoneVereficationViewOutput, PhoneVereficationInteractorOutput {
+class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, PhoneVereficationViewOutput, PhoneVereficationInteractorOutput {
 
     weak var view: PhoneVereficationViewInput!
     var interactor: PhoneVereficationInteractorInput!
     var router: PhoneVereficationRouterInput!
 
     func viewIsReady() {
-        self.view.setupInitialState()
-        self.view.setupTimer()
-        self.view.disableNextButton()
+        view.setupInitialState()
+        configure()
+        view.setupButtonsInitialState()
+    }
+    
+    func configure() {
+        view.setupTimer(withRemainingTime: interactor.remainingTimeInMinutes * 60 )
+        view.setupTextLengh(lenght: interactor.expectedInputLength ?? 6 )
+        view.setupPhoneLable(with: interactor.phoneNumber)
     }
     
     func timerFinishedRunning() {
-        self.view.disableNextButton()
-        self.view.showResendButton()
+        view.resendButtonShow(show: true)
     }
     
     func resendButtonPressed() {
-        self.view.hideResendButton()
-        self.view.setupTimer()
+        view.resendButtonShow(show: false)
+        startAsyncOperationDisableScreen()
+        interactor.resendCode()
+        
     }
     
-    func vereficationCodeEntered() {
-        self.view.enableNextButton()
+    func vereficationCodeEntered(code: String) {
+        sendVereficationCode(code: code)
     }
     
     func vereficationCodeNotReady() {
-        self.view.disableNextButton()
+    }
+    
+    private func sendVereficationCode(code: String) {
+        startAsyncOperationDisableScreen()
+        interactor.verifyCode(code: code)
     }
     
     func nextButtonPressed(withVereficationCode vereficationCode: String) {
-        //TODO:
-        //Verify code
-        debugPrint("NEXT with code ", vereficationCode)
-        self.router.goToTermAndUses()
-        //wait for response from interactor
-        //change screen or show error
-        //in case of error show Error and disable nextButton
+        sendVereficationCode(code: vereficationCode)
     }
+    
+    func verificationSucces() {
+        interactor.authificate(atachedCaptcha: nil)
+    }
+    
+    func vereficationFailed(with error: CustomStringConvertible) {
+        view.heighlightInfoTitle()
+        compliteAsyncOperationEnableScreen()
+        CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: TextConstants.checkPhoneAlertTitle, withText: String(format: TextConstants.phoneVereficationNonValidCodeErrorText, interactor.email), okButtonText: TextConstants.ok)
+
+    }
+    
+    func resendCodeRequestFailed(with error: ErrorResponse) {
+        compliteAsyncOperationEnableScreen()
+        CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: TextConstants.checkPhoneAlertTitle, withText: String(format: TextConstants.phoneVereficationResendRequestFailedErrorText, interactor.email), okButtonText: TextConstants.ok)
+        view.resendButtonShow(show: true)
+    }
+    
+    func resendCodeRequestSuccesed() {
+        compliteAsyncOperationEnableScreen()
+        view.setupButtonsInitialState()
+        view.setupTimer(withRemainingTime: interactor.remainingTimeInMinutes * 60 )
+    }
+    
+    func succesLogin() {
+        compliteAsyncOperationEnableScreen()
+        view.dropTimer()
+        router.goAutoSync()//
+    }
+    
+    func failLogin(message: String) {
+        compliteAsyncOperationEnableScreen(errorMessage: message)
+    }
+    
+    func reachedMaxAttempts() {
+        view.resendButtonShow(show: true)
+        view.dropTimer()
+    }
+    
+    //MARK: - Basic Presenter override
+    override func outputView() -> Waiting? {
+        return view
+    }
+    
 }

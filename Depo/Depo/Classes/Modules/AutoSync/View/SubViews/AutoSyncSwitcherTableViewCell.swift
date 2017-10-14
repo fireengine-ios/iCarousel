@@ -15,10 +15,11 @@ protocol AutoSyncSwitcherTableViewCellDelegate {
 }
 
 class AutoSyncSwitcherTableViewCell: UITableViewCell {
+    @IBOutlet weak var separatorView: UIView!
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subTitleLabel: UILabel!
-    @IBOutlet weak var switcher: UISwitch!
+    @IBOutlet weak var switcher: CustomSwitch!
     var model:AutoSyncModel?
     
     var delegate: AutoSyncSwitcherTableViewCellDelegate?
@@ -28,22 +29,26 @@ class AutoSyncSwitcherTableViewCell: UITableViewCell {
         backgroundColor = UIColor.clear
         
         titleLabel.textColor = ColorConstants.whiteColor
-        titleLabel.font = UIFont(name: FontNamesConstant.turkcellSaturaBol, size: 18)
+        titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 18)
         
         subTitleLabel.textColor = ColorConstants.whiteColor
-        subTitleLabel.font = UIFont(name: FontNamesConstant.turkcellSaturaBol, size: 14)
+        subTitleLabel.font = UIFont.TurkcellSaturaBolFont(size: 14)
         
-        switcher.onTintColor = ColorConstants.switcherGreenColor
-        switcher.tintColor = ColorConstants.switcherGrayColor
-        switcher.layer.cornerRadius = 16
-        switcher.backgroundColor = ColorConstants.switcherGrayColor
+        separatorView.isHidden = true
     }
     
     func configurateCellWith(model: AutoSyncModel){
         self.model = model
+        switcher.isOn = model.isSelected
+        
         titleLabel.text = model.titleString
         subTitleLabel.text = model.subTitleString
         switcher.isSelected = model.isSelected
+    }
+    
+    func setColors(isFromSettings: Bool){
+        titleLabel.textColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
+        subTitleLabel.textColor = isFromSettings ? ColorConstants.textGrayColor : ColorConstants.whiteColor
     }
     
     @IBAction func onSwitcherValueChanged(){

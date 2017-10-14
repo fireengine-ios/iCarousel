@@ -13,51 +13,64 @@ class BaseUserInputCellView: ProtoInputTextCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var textInputField: UITextField!{
         didSet {
-            self.inputTextField = textInputField
+            inputTextField = textInputField
         }
     }
-    @IBOutlet weak var InfoImage: UIImageView!
+    @IBOutlet weak var infoImage: UIImageView!
+    @IBOutlet weak var infoButton: UIButton!
+    
+    weak var infoButtonDelegate: InfoButtonCellProtocol?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-//        self.textInputField.becomeFirstResponder()
-        self.textInputField.delegate = self
-        self.titleLabel.textColor = ColorConstants.yellowColor
+        textInputField.delegate = self
+        titleLabel.textColor = ColorConstants.whiteColor
+        changeInfoButtonTo(hidden: true)
     }
     
     func setupBaseCell(withTitle title: String, inputText text: String) {
-        self.titleLabel.text = title
-        if self.textInputField.attributedPlaceholder?.string != text {
-            self.textInputField.attributedPlaceholder = NSAttributedString(string: text, attributes: [NSForegroundColorAttributeName: ColorConstants.yellowColor])
+        titleLabel.text = title
+        placeholderText = text
+//        if textInputField.attributedPlaceholder?.string != text {
+//            textInputField.attributedPlaceholder = NSAttributedString(string: text, attributes: [NSForegroundColorAttributeName: ColorConstants.yellowColor])
+//        }
+    }
+    
+    func changeTitleHeighlight(heighlight: Bool) {
+        var placeholder = ""
+        if heighlight {
+            textInputField.font = UIFont.TurkcellSaturaBolFont(size: 21)
+            titleLabel.textColor = ColorConstants.whiteColor
+        } else {
+            titleLabel.textColor = ColorConstants.yellowColor
+            if let savedPlaceholder = placeholderText {
+                if textInputField.text?.characters.count == 0 {
+                    textInputField.font = UIFont.TurkcellSaturaBolFont(size: 16)
+                }
+                
+                placeholder = savedPlaceholder
+            }
         }
+        
+        
+        textInputField.attributedPlaceholder = NSAttributedString(string: placeholder,
+                                                                  attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.yellowColor])
+    }
+    
+    override func changeInfoButtonTo(hidden: Bool) {
+//        infoButton.isEnabled = false//!hidden
+//        infoButton.isHidden = hidden
+        infoImage.isHidden = hidden
+        changeTitleHeighlight(heighlight: hidden)
+    }
+    
+    @IBAction func infoButtonAction(_ sender: Any) {
+//        infoButtonDelegate?.infoButtonGotPressed(with: self, andType: .mailNotValid)
+    }
+    
+    override func textFieldDidBeginEditing(_ textField: UITextField) {
+        super.textFieldDidBeginEditing(textField)
+        changeInfoButtonTo(hidden: true)
     }
 }
 
-//extension BaseUserInputCellView {
-//    
-////    func textFieldDidBeginEditing(_ textField: UITextField) {
-////        self.textInputField.becomeFirstResponder()
-////        if self.textInputField.text?.characters.count == 1 {
-////            self.InfoImage.isHidden = true
-////        }
-////    }
-////    
-////    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-////        guard let text = self.textInputField.text else {
-////            return false
-////        }
-//////        let charactersCount =
-////        if string.characters.count > 0, text.characters.count + 1 > 0 {
-////            self.InfoImage.isHidden = true
-////        } else if string.characters.count == 0, text.characters.count - 1 == 0 {
-////            self.InfoImage.isHidden = false
-////        }
-////        return true
-////    }
-////    
-////    func textFieldDidEndEditing(_ textField: UITextField) {
-////        if self.textInputField.text?.characters.count == 0 {
-////            self.InfoImage.isHidden = false
-////        }
-////    }
-//}

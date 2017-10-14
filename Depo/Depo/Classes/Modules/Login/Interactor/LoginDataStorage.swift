@@ -11,6 +11,18 @@ import UIKit
 class LoginDataStorage: NSObject {
     var loginModels:[BaseCellModel] = []
     
+    var blockedUsers: NSMutableDictionary? {
+        get {
+            guard let blockedUsers = UserDefaults.standard.value(forKey: "BlockedUsers") as? NSMutableDictionary else {
+                return nil
+            }
+            return blockedUsers
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "BlockedUsers")
+        }
+    }
+    
     override init(){
         
         loginModels.append(BaseCellModel(withTitle: TextConstants.loginCellTitleEmail,

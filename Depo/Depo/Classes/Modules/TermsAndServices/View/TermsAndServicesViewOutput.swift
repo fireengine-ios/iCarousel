@@ -7,12 +7,8 @@
 //
 
 protocol TermsAndServicesViewOutput {
-
-    /**
-        @author AlexanderP
-        Notify presenter that view is ready
-    */
-
+    
     func viewIsReady()
+    
     func termsApplied()
 }

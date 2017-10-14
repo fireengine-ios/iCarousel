@@ -9,5 +9,5 @@
 import Foundation
 
 protocol AutoSyncRouterInput {
-
+    func routNextVC()
 }

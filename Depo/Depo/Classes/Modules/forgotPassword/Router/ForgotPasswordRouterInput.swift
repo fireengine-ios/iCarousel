@@ -9,5 +9,6 @@
 import Foundation
 
 protocol ForgotPasswordRouterInput {
-
+    func goToResetPassword()
+    func popBack()
 }

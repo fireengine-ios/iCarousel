@@ -8,11 +8,7 @@
 
 protocol ForgotPasswordViewOutput {
 
-    /**
-        @author Oleg
-        Notify presenter that view is ready
-    */
-
     func viewIsReady()
-    func onSendPassword()
+    
+    func onSendPassword(withEmail email: String, enteredCaptcha: String, captchaUDID: String)
 }

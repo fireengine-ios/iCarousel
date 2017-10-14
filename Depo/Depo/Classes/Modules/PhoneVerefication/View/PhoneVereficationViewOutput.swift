@@ -17,7 +17,7 @@ protocol PhoneVereficationViewOutput {
     func timerFinishedRunning()
     func resendButtonPressed()
     
-    func vereficationCodeEntered()
+    func vereficationCodeEntered(code: String)
     func nextButtonPressed(withVereficationCode vereficationCode: String)
     func vereficationCodeNotReady()
     

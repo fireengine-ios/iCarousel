@@ -8,10 +8,10 @@
 
 protocol AutoSyncViewOutput {
 
-    /**
-        @author Oleg
-        Notify presenter that view is ready
-    */
-
     func viewIsReady()
+    
+    func startLifeBoxPressed()
+    func skipForNowPressed()
+    
+    func onSaveButton(setting: SettingsAutoSyncModel)
 }

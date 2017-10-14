@@ -11,13 +11,10 @@ import Foundation
 protocol RegistrationInteractorInput {
     
     func prepareModels()
+    
     func requestGSMCountryCodes()
-//    func detectSimCard()
-    func acquireCurrentGSMCode()
     
-    func showCustomPopUp(withText text: String)
-    func validateUserInfo(email: String, phone: String, password: String, repassword: String)
-    func signUPUser(email: String, phone: String, password: String, repassword: String)
+    func validateUserInfo(email: String, code: String, phone: String, password: String, repassword: String)
     
-    func showLoadingIndicator()
+    func signUPUser(email: String, phone: String, password: String)
 }
