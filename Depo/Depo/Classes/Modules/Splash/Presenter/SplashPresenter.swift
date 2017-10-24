@@ -15,6 +15,7 @@ class SplashPresenter:BasePresenter, SplashModuleInput, SplashViewOutput, Splash
     var router: SplashRouterInput!
 
     func viewIsReady() {
+        interactor.clearAllPreviouslyStoredInfo()
         interactor.startLoginInBackroung()
     }
     

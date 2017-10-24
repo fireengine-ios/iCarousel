@@ -17,4 +17,6 @@ protocol CreateStoryPhotosOrderViewOutput {
     
     func onNextButton(array: [Item])
     
+    func onMusicSelection()
+    
 }

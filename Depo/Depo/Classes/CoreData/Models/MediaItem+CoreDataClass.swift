@@ -53,9 +53,11 @@ public class MediaItem: NSManagedObject {
         switch wrapData.patchToPreview {
         case let .remoteUrl(url):
             patchToPreviewValue =  url?.absoluteString
+            isLocalItemValue = false
         case let .localMediaContent(assetContent):
             localFileID = assetContent.asset.localIdentifier
             patchToPreviewValue = nil
+            isLocalItemValue = true
         }
         
 //        var duration: Double = 0
@@ -72,9 +74,14 @@ public class MediaItem: NSManagedObject {
         let textValue = dateValue?.getDateForSortingOfCollectionView()
         monthValue = textValue
         
+        let metaData = MediaItemsMetaData(metadata: wrapData.metaData,
+                                          context: context)
+        self.metadata = metaData
+        
 //        self.albums = wrapData
 //        isUploading
 //        PHAsset
+
     }
     
     var wrapedObject: WrapData {

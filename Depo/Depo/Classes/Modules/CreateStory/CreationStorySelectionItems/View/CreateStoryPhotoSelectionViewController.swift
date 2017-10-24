@@ -12,13 +12,12 @@ class CreateStoryPhotoSelectionViewController: BaseFilesGreedViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        configureNavBarActions()
     }
     
     override func configureNavBarActions(){
         navigationBarWithGradientStyle()
-        
-        self.setTitle(withString: TextConstants.createStoryPhotosTitle)
-        
+        setTitle(withString: TextConstants.createStoryPhotosTitle)
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
         button.setTitle(TextConstants.createStoryPhotosNext, for: .normal)
         button.setTitleColor(ColorConstants.whiteColor, for: .normal)
@@ -32,6 +31,4 @@ class CreateStoryPhotoSelectionViewController: BaseFilesGreedViewController {
     @objc func onNextButton(){
         output.onNextButton()
     }
-
-
 }

@@ -14,4 +14,6 @@ protocol CreateStoryPhotosOrderInteractorInput {
     
     func onNextButton(array: [Item])
     
+    func onMusicSelection()
+    
 }

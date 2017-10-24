@@ -42,6 +42,24 @@ class CreateStoryPhotosOrderPresenter: BasePresenter, CreateStoryPhotosOrderModu
                                    okButtonText: TextConstants.createStoryPhotosMaxCountAllertOK)
     }
     
+    func onMusicSelection(){
+        interactor.onMusicSelection()
+    }
+    
+    func goToAudioSelection(story: PhotoStory){
+        router.goToMusicSelection(story: story, navigationController: view.getNavigationControllet())
+    }
+    
+    func audioNotSelectedError(){
+        asyncOperationSucces()
+        custoPopUp.showCustomAlert(withText: TextConstants.createStoryNoSelectedAudioError, okButtonText: TextConstants.createFolderEmptyFolderButtonText)
+    }
+    
+    func goToStoryPreview(story: PhotoStory, responce: CreateStoryResponce){
+        asyncOperationSucces()
+        router.goToStoryPreviewViewController(forStory: story, responce: responce, navigationController: view.getNavigationControllet())
+    }
+    
     //MARK : Custom Pop Up
     
     func cancelationAction(){

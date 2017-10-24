@@ -143,6 +143,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
             
             leftSpaceForSmallmage.constant = BasicCollectionMultiFileCell.leftSpaceSmallCell
             
+            fileNameLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
             layoutIfNeeded()
         }
         

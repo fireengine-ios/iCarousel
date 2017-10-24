@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -63,7 +63,7 @@
                                             </connections>
                                         </button>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jBB-Ks-vlC">
-                                            <rect key="frame" x="33" y="83" width="214" height="40"/>
+                                            <rect key="frame" x="33" y="91" width="214" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="40h-vb-o5T"/>
                                             </constraints>
@@ -71,11 +71,17 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m8e-Nt-zMz" customClass="BlueButtonWithWhiteText" customModule="Depo_LifeTech" customModuleProvider="target">
-                                            <rect key="frame" x="44.5" y="158" width="191" height="40"/>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xdk-Zd-uWi">
+                                            <rect key="frame" x="0.0" y="178" width="280" height="1"/>
+                                            <color key="backgroundColor" red="0.26666666666666666" green="0.80000000000000004" blue="0.81176470588235294" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="40" id="FWR-eC-lLP"/>
-                                                <constraint firstAttribute="width" constant="191" id="yAn-nM-ef5"/>
+                                                <constraint firstAttribute="height" constant="1" id="Un0-Z2-CzC"/>
+                                            </constraints>
+                                        </view>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m8e-Nt-zMz">
+                                            <rect key="frame" x="0.0" y="179" width="280" height="47"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="47" id="FWR-eC-lLP"/>
                                             </constraints>
                                             <state key="normal" title="Button"/>
                                             <connections>
@@ -86,11 +92,12 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="jBB-Ks-vlC" firstAttribute="leading" secondItem="7wd-Td-Gu6" secondAttribute="leading" constant="33" id="1yd-8W-mJx"/>
+                                        <constraint firstItem="m8e-Nt-zMz" firstAttribute="top" secondItem="xdk-Zd-uWi" secondAttribute="bottom" id="2hb-Df-qWm"/>
                                         <constraint firstAttribute="trailing" secondItem="gig-LL-M0d" secondAttribute="trailing" id="43b-mO-N9a"/>
-                                        <constraint firstAttribute="bottom" secondItem="m8e-Nt-zMz" secondAttribute="bottom" constant="28" id="43g-rQ-R9f"/>
+                                        <constraint firstAttribute="bottom" secondItem="m8e-Nt-zMz" secondAttribute="bottom" id="43g-rQ-R9f"/>
                                         <constraint firstAttribute="bottom" secondItem="gig-LL-M0d" secondAttribute="bottom" id="9U2-xK-Gxb"/>
-                                        <constraint firstItem="jBB-Ks-vlC" firstAttribute="top" secondItem="Hl7-Ec-aVa" secondAttribute="bottom" constant="13" id="DGR-0R-V6N"/>
-                                        <constraint firstItem="m8e-Nt-zMz" firstAttribute="centerX" secondItem="7wd-Td-Gu6" secondAttribute="centerX" id="GXE-JA-Nh1"/>
+                                        <constraint firstItem="jBB-Ks-vlC" firstAttribute="top" secondItem="Hl7-Ec-aVa" secondAttribute="bottom" constant="21" id="DGR-0R-V6N"/>
+                                        <constraint firstItem="xdk-Zd-uWi" firstAttribute="leading" secondItem="7wd-Td-Gu6" secondAttribute="leading" id="I0k-BY-4GA"/>
                                         <constraint firstAttribute="trailing" secondItem="Hl7-Ec-aVa" secondAttribute="trailing" constant="10" id="KHl-ld-Lsa"/>
                                         <constraint firstItem="Hl7-Ec-aVa" firstAttribute="top" secondItem="7wd-Td-Gu6" secondAttribute="top" constant="49" id="awR-ZD-EFR"/>
                                         <constraint firstAttribute="height" constant="226" id="e95-Im-gc4"/>
@@ -98,6 +105,9 @@
                                         <constraint firstAttribute="trailing" secondItem="jBB-Ks-vlC" secondAttribute="trailing" constant="33" id="kjO-m1-vR8"/>
                                         <constraint firstItem="gig-LL-M0d" firstAttribute="top" secondItem="7wd-Td-Gu6" secondAttribute="top" id="lIR-Ug-yNH"/>
                                         <constraint firstAttribute="width" constant="280" id="nyM-N9-s8i"/>
+                                        <constraint firstItem="m8e-Nt-zMz" firstAttribute="leading" secondItem="7wd-Td-Gu6" secondAttribute="leading" id="o3j-11-pMI"/>
+                                        <constraint firstAttribute="trailing" secondItem="m8e-Nt-zMz" secondAttribute="trailing" id="osk-ho-4i7"/>
+                                        <constraint firstAttribute="trailing" secondItem="xdk-Zd-uWi" secondAttribute="trailing" id="tZm-Ae-mhu"/>
                                         <constraint firstAttribute="trailing" secondItem="VSv-UW-jx3" secondAttribute="trailing" constant="9" id="uaY-yo-dp5"/>
                                         <constraint firstItem="VSv-UW-jx3" firstAttribute="top" secondItem="7wd-Td-Gu6" secondAttribute="top" constant="9" id="uoe-qN-aqV"/>
                                         <constraint firstItem="gig-LL-M0d" firstAttribute="leading" secondItem="7wd-Td-Gu6" secondAttribute="leading" id="xyp-vm-DtC"/>

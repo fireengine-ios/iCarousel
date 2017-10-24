@@ -55,7 +55,7 @@ class SingleSong: NSObject {
         }
         return list.index(of: unwrapedCurrentItem)
     }
-
+    
     override init() {
         player = AVPlayer()
         volume = 1.0
@@ -65,22 +65,6 @@ class SingleSong: NSObject {
         try? AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, with: [])
         UIApplication.shared.beginReceivingRemoteControlEvents()
     }
-
-//    override func remoteControlReceived(with event: UIEvent?) { // *
-//        let rc = event!.subtype
-//        let p = self.player//.player!
-//        print("received remote control \(rc.rawValue)") // 101 = pause, 100 = play
-//        switch rc {
-//        case .remoteControlTogglePlayPause:
-//            if p.isPlayerPlaying { p.pause() } else { p.play() }
-//        case .remoteControlPlay:
-//            p.play()
-//        case .remoteControlPause:
-//            p.pause()
-//        default:break
-//        }
-//    }
-//    func remoteControlReceivedWithEvent
     
     private func setupProgressObserving() {
         musicProgressClousure = { [weak self] time in
@@ -144,15 +128,11 @@ class SingleSong: NSObject {
         let url = item.urlToFile
         let playerItem = AVPlayerItem(url:url!)
         
+        self.player.replaceCurrentItem(with: playerItem)
 //        player = AVPlayer(playerItem: playerItem)
-        player.replaceCurrentItem(with: playerItem)
-        
-        
-//        player.prepareToPlay()
-        
         player.volume = volume
-
         player.play()
+        
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(self.currentItemFinishedPlaying(notification:)),
@@ -163,15 +143,15 @@ class SingleSong: NSObject {
         let mpic = MPNowPlayingInfoCenter.default()
         var musicName = "TEST"
         var artistName = "TEST"
-        if let metadata = item.metaData, let actualMeta = metadata.medaData as? MusicMetaData {
+        if let metadata = item.metaData {
             
-            if let name = actualMeta.title {
+            if let name = metadata.title {
                 musicName = name
             }
-            if let artist = actualMeta.artist {
+            if let artist = metadata.artist {
                 artistName = artist
             }
-            _ = actualMeta.duration
+            _ = metadata.duration
         }
         
         let artwork = UIImage(named: "headphone1")
@@ -186,14 +166,32 @@ class SingleSong: NSObject {
     }
     
     func playWithItems(list: [Item], startItem: Item) {
-        self.list.removeAll()
-        self.list.append(contentsOf: list)
+        self.list = list
         
         playItem(item: startItem)
         
         NotificationCenter.default.post(name:
             NSNotification.Name(rawValue: TabBarViewController.notificationMusicStartedPlaying),
                                         object: nil)
+    }
+    
+    func remove(items: [Item]) {
+        list = list.filter { listItem in
+            for item in items {
+                if item.urlToFile == listItem.urlToFile {
+                    return false
+                }
+            }
+            return true
+        }
+        
+        if let currentItem = currentItemModel, let _ = items.first(where: { $0.urlToFile == currentItem.urlToFile }) {
+            if list.count > 0 {
+                playItem(item: list[0])
+                delegate?.trackChanged()
+            }
+            stop()
+        }
     }
     
     func playTrack(fromIndex itemIndex: Int) {
@@ -211,6 +209,8 @@ class SingleSong: NSObject {
     @objc func pause() {
         isPlayerPlaying = false
         player.pause()
+        let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationMusicStop)
+        NotificationCenter.default.post(name: notificationName, object: nil)
     }
     
     @objc func play() {
@@ -219,9 +219,8 @@ class SingleSong: NSObject {
     }
     
     @objc func stop() {
-        isPlayerPlaying = false
         player.seek(to: CMTime(seconds: 0, preferredTimescale: 1))
-        player.pause()
+        pause()
     }
     
     func changePosition(to time: Double, play: Bool) {

@@ -11,7 +11,7 @@ import UIKit
 class DocumentsGreedPresenter: BaseFilesGreedPresenter {
     
     override func viewIsReady(collectionView: UICollectionView) {
-        interactor.viewIsReady()
+        //interactor.viewIsReady()
         sortedRule = .lettersAZ
         dataSource.setPreferedCellReUseID(reUseID: CollectionViewCellsIdsConstant.baseMultiFileCell)
         dataSource.displayingType = .list

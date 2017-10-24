@@ -14,6 +14,8 @@ import Photos
 class PhotoVideoDetailViewController: UIViewController, PhotoVideoDetailViewInput, BaseFileContentViewDeleGate {
     
     typealias Item = WrapData
+    
+    let player: MediaPlayer = factory.resolve()
 
     var output: PhotoVideoDetailViewOutput!
     var interactor: PhotoVideoDetailInteractor?
@@ -22,7 +24,7 @@ class PhotoVideoDetailViewController: UIViewController, PhotoVideoDetailViewInpu
     var isAnimating = false
     var objects = [Item]()
     let customPopUp = CustomPopUp()
-    var player: AVPlayer?
+    var localPlayer: AVPlayer?
     var playerController: AVPlayerViewController?
     let floatingView = FloatingView()
     
@@ -275,14 +277,16 @@ class PhotoVideoDetailViewController: UIViewController, PhotoVideoDetailViewInpu
             guard let url = file.urlToFile else{
                 return
             }
-            SingleSong.default.pause()
+            
+//            SingleSong.default.pause()
+            player.pause()
             
             playerController?.player = nil
             playerController?.removeFromParentViewController()
             playerController = nil
-            player?.pause()
-            player = nil
-            player = AVPlayer()
+            localPlayer?.pause()
+            localPlayer = nil
+            localPlayer = AVPlayer()
             
             switch file.patchToPreview {
             case let .localMediaContent(local):
@@ -299,10 +303,10 @@ class PhotoVideoDetailViewController: UIViewController, PhotoVideoDetailViewInpu
                             self?.output.stopCreatingAVAsset()
                             
                             let plauerItem = AVPlayerItem(asset: avAsset!)
-                            self?.player!.replaceCurrentItem(with: plauerItem)
+                            self?.localPlayer!.replaceCurrentItem(with: plauerItem)
                             let plController = AVPlayerViewController()
                             self?.playerController = plController
-                            self?.playerController!.player = self?.player!
+                            self?.playerController!.player = self?.localPlayer!
                             self?.present(plController, animated: true) {
                                 self?.playerController?.player!.play()
                             }
@@ -321,9 +325,9 @@ class PhotoVideoDetailViewController: UIViewController, PhotoVideoDetailViewInpu
             case .remoteUrl(_):
                 
                 let plauerItem = AVPlayerItem(url:url)
-                player!.replaceCurrentItem(with: plauerItem)
+                localPlayer!.replaceCurrentItem(with: plauerItem)
                 playerController = AVPlayerViewController()
-                playerController!.player = player!
+                playerController!.player = localPlayer!
                 self.present(playerController!, animated: true) {[weak playerController] in
                     playerController?.player!.play()
                 }
@@ -413,6 +417,10 @@ class PhotoVideoDetailViewController: UIViewController, PhotoVideoDetailViewInpu
                 }
             })
         }
+    }
+    
+    func getNavigationController() -> UINavigationController?{
+        return navigationController
     }
     
 }

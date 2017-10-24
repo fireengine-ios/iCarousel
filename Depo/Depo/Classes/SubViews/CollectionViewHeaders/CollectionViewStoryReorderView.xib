@@ -24,18 +24,21 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="orderingImage" translatesAutoresizingMaskIntoConstraints="NO" id="c8N-5y-0AY">
-                    <rect key="frame" x="270" y="12" width="30" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YIp-pM-QCv">
+                    <rect key="frame" x="250" y="0.0" width="70" height="53"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="30" id="8p7-RS-x5N"/>
-                        <constraint firstAttribute="width" constant="30" id="Qob-rl-cyS"/>
+                        <constraint firstAttribute="width" constant="70" id="Mii-xz-Wa7"/>
                     </constraints>
-                </imageView>
+                    <state key="normal" image="orderingImage"/>
+                    <connections>
+                        <action selector="onSelectMusicButton" destination="U6b-Vx-4bR" eventType="touchUpInside" id="XOd-qw-Qoq"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
-                <constraint firstItem="c8N-5y-0AY" firstAttribute="leading" secondItem="PDa-fm-Ef9" secondAttribute="trailing" constant="17" id="Ckr-hu-9aw"/>
-                <constraint firstAttribute="trailing" secondItem="c8N-5y-0AY" secondAttribute="trailing" constant="20" id="DPb-QA-C50"/>
-                <constraint firstItem="c8N-5y-0AY" firstAttribute="centerY" secondItem="U6b-Vx-4bR" secondAttribute="centerY" id="FEX-Qi-TxH"/>
+                <constraint firstAttribute="bottom" secondItem="YIp-pM-QCv" secondAttribute="bottom" id="GqQ-0g-LGK"/>
+                <constraint firstAttribute="trailing" secondItem="YIp-pM-QCv" secondAttribute="trailing" id="OH0-R6-zYa"/>
+                <constraint firstItem="YIp-pM-QCv" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="aqX-xQ-3kS"/>
                 <constraint firstItem="PDa-fm-Ef9" firstAttribute="centerY" secondItem="U6b-Vx-4bR" secondAttribute="centerY" id="h35-Od-VDk"/>
                 <constraint firstItem="PDa-fm-Ef9" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" constant="18" id="u5U-KG-8PW"/>
             </constraints>

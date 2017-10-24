@@ -22,6 +22,12 @@ class CreateStoryPhotosOrderInteractor: CreateStoryPhotosOrderInteractorInput {
         guard let story_ = story else{
             return
         }
+        
+        if story_.music == nil{
+            output.audioNotSelectedError()
+            return
+        }
+        
         story_.storyPhotos.removeAll()
         story_.storyPhotos.append(contentsOf: array)
         
@@ -29,31 +35,57 @@ class CreateStoryPhotosOrderInteractor: CreateStoryPhotosOrderInteractorInput {
         
         let parameter = story_.photoStoryRequestParameter()
         if let parameter_ = parameter {
-            CreateStoryService().createStory(createStory: parameter_, success: {[weak self] in
-                let t = CreateStoryPreview(name: parameter_.title, imageuuid: parameter_.imageUUids, musicUUID: parameter_.audioUuid, musicId: parameter_.musicId)
-                CreateStoryService().getPreview(preview: t, success: {
-                    if let self_ = self {
-                        DispatchQueue.main.async {
-                            self_.output.storyCreated()
-                        }
+            let t = CreateStoryPreview(name: parameter_.title,
+                                       imageuuid: parameter_.imageUUids,
+                                       musicUUID: parameter_.audioUuid,
+                                       musicId: parameter_.musicId)
+            CreateStoryService().getPreview(preview: t, success: { [weak self] (responce) in
+                if let self_ = self {
+                    DispatchQueue.main.async {
+                        self_.output.goToStoryPreview(story: story_, responce: responce)
                     }
-                }, fail: { (d) in
-                    if let self_ = self {
-                        DispatchQueue.main.async {
-                            self_.output.storyCreatedWithError()
-                        }
+                }
+            }, fail: { [weak self] (fail) in
+                if let self_ = self {
+                    DispatchQueue.main.async {
+                        self_.output.storyCreatedWithError()
                     }
-                })
-                
-                }, fail: {[weak self] (error) in
-                    if let self_ = self {
-                        DispatchQueue.main.async {
-                            self_.output.storyCreatedWithError()
-                        }
-                    }
+                }
             })
         }
         
+        
+        //            CreateStoryService().createStory(createStory: parameter_, success: {[weak self] in
+        //                let t = CreateStoryPreview(name: parameter_.title, imageuuid: parameter_.imageUUids, musicUUID: parameter_.audioUuid, musicId: parameter_.musicId)
+        //                CreateStoryService().getPreview(preview: t, success: {
+        //                    if let self_ = self {
+        //                        DispatchQueue.main.async {
+        //                            self_.output.storyCreated()
+        //                        }
+        //                    }
+        //                }, fail: { (d) in
+        //                    if let self_ = self {
+        //                        DispatchQueue.main.async {
+        //                            self_.output.storyCreatedWithError()
+        //                        }
+        //                    }
+        //                })
+        //
+        //                }, fail: {[weak self] (error) in
+        //                    if let self_ = self {
+        //                        DispatchQueue.main.async {
+        //                            self_.output.storyCreatedWithError()
+        //                        }
+        //                    }
+        //            })
+        
+    }
+    
+    func onMusicSelection(){
+        guard let story_ = story else {
+            return
+        }
+        output.goToAudioSelection(story: story_)
     }
     
 }

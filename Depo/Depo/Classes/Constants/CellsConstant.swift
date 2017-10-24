@@ -27,6 +27,7 @@ struct CollectionViewCellsIdsConstant {
     static let homeLikeFiture = "HomeCollectionViewCellLikeFiture"
     static let cellForController = "CollectionViewCellForController"
     static let cellForImage = "CollectionViewCellForPhoto"
+    static let cellForStoryImage = "CollectionViewCellForStoryPhoto"
     static let cellForVideo = "CollectionViewCellForVideo"
     static let cellForAudio = "CollectionViewCellForAudio"
     static let baseMultiFileCell = "BasicCollectionMultiFileCell"

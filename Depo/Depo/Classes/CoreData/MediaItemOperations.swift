@@ -14,11 +14,16 @@ extension CoreDataStack {
         
         let uuidList = items.map{ $0.uuid }
         let predicateForRemoteFile = NSPredicate(format: "uuidValue IN %@", uuidList)
- 
-        let inCoreData = executeRequest(predicate: predicateForRemoteFile, context:rootBackgroundContext).flatMap{ $0.uuidValue }
         
         let childrenContext = self.newChildBackgroundContext
-        let appendItems = items.filter{ !inCoreData.contains($0.uuid) }
+ 
+        let alreadySavedMediaItems = executeRequest(predicate: predicateForRemoteFile, context: childrenContext)
+        
+        updateSavedItems(savedItems: alreadySavedMediaItems, remoteItems: items, context: childrenContext)
+        
+        let inCoreData = alreadySavedMediaItems.flatMap{ $0.uuidValue }
+        
+        let appendItems = items.filter { !inCoreData.contains($0.uuid) }
         
         if appendItems.count == 0 {
             return
@@ -31,6 +36,26 @@ extension CoreDataStack {
         saveDataForContext(context: childrenContext, saveAndWait: true)
     }
     
+    func updateSavedItems(savedItems: [MediaItem], remoteItems: [WrapData], context: NSManagedObjectContext) {
+        guard savedItems.count > 0 else {
+            return
+        }
+        for savedMediaItem in savedItems {
+            for remoteWrapedItem in remoteItems {
+                if savedMediaItem.uuidValue == remoteWrapedItem.uuid {
+                    savedMediaItem.urlToFileValue = remoteWrapedItem.urlToFile?.absoluteString
+                    savedMediaItem.metadata?.largeUrl = remoteWrapedItem.metaData?.largeUrl?.absoluteString
+                    savedMediaItem.metadata?.mediumUrl = remoteWrapedItem.metaData?.mediumUrl?.absoluteString
+                    savedMediaItem.metadata?.smalURl = remoteWrapedItem.metaData?.smalURl?.absoluteString
+                    savedMediaItem.favoritesValue = remoteWrapedItem.favorites
+                    break
+                }
+            }
+        }
+        
+        
+        saveDataForContext(context: context)
+    }
     
     func removeFromStorage(wrapData: [WrapData]) {
         

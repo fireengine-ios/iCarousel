@@ -8,9 +8,15 @@
 
 import UIKit
 
+protocol CollectionViewStoryReorderViewDelegate: class {
+    func goToSelectionMusick()
+}
+
 class CollectionViewStoryReorderView: UICollectionReusableView {
     
     @IBOutlet weak var titleLabel: UILabel!
+    
+    weak var delegate: CollectionViewStoryReorderViewDelegate? = nil
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -19,6 +25,13 @@ class CollectionViewStoryReorderView: UICollectionReusableView {
         titleLabel.text = TextConstants.createStoryPhotosOrderTitle
         titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
         titleLabel.textColor = ColorConstants.lightGrayColor
+    }
+    
+    @IBAction func onSelectMusicButton(){
+        guard let unwrappedDelegate = delegate else {
+            return
+        }
+        unwrappedDelegate.goToSelectionMusick()
     }
     
 }

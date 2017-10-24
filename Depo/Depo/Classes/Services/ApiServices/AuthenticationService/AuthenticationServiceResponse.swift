@@ -10,9 +10,9 @@ import Foundation
 import SwiftyJSON
 
 class ObjectRequestResponse: ObjectFromRequestResponse {
-    let json: JSON?
-    let response: HTTPURLResponse?
-    var jsonString:String?
+    var json: JSON?
+    var response: HTTPURLResponse?
+    var jsonString: String?
     
     required init(json: Data?, headerResponse: HTTPURLResponse?) {
         if let data = json {
@@ -35,6 +35,10 @@ class ObjectRequestResponse: ObjectFromRequestResponse {
         self.json = withJSON
         self.response = nil
         mapping()
+    }
+    
+    init() {
+
     }
     
     func mapping() {}

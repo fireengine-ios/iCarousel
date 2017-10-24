@@ -19,4 +19,6 @@ protocol UserProfileViewInput: class {
     
     func setEditButtonEnable(enable: Bool)
     
+    func getNavigationController() -> UINavigationController?
+    
 }

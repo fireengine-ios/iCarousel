@@ -14,6 +14,6 @@ protocol PhotoVideoDetailRouterInput {
     
     func onInfo(object: Item)
     
-    func goBack()
+    func goBack(navigationConroller: UINavigationController?)
     
 }

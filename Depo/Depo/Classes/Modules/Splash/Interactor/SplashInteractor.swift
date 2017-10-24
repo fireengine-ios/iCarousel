@@ -61,4 +61,8 @@ class SplashInteractor: SplashInteractorInput {
             }
         }
     }
+    
+    func clearAllPreviouslyStoredInfo() {
+        CoreDataStack.default.clearDataBase()
+    }
 }

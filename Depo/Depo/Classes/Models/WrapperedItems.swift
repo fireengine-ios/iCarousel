@@ -483,43 +483,39 @@ class WrapData: BaseDataSourceItem, Wrappered {
         var url:URL?
         
         if (fileType == .image) {
-            let metadata = remote.metadata?.medaData as? ImageAndVideoMetaData
             switch previewIconSize {
-            case .little : url = metadata?.smalURl
-            case .medium : url = metadata?.mediumUrl
-            case .large  : url = metadata?.largeUrl
+            case .little : url = remote.metadata?.smalURl
+            case .medium : url = remote.metadata?.mediumUrl
+            case .large  : url = remote.metadata?.largeUrl
             }
             if (url == nil) {
                 url = remote.tempDownloadURL
             }
         }
         
-        if (fileType == .audio){
-            if let methadata = remote.metadata?.medaData as? MusicMetaData{
-                duration = WrapData.getDuration(duration: methadata.duration)
-            }
+        if (fileType == .audio) {
+            duration = WrapData.getDuration(duration: remote.metadata?.duration)
         }
         
         if (fileType == .video){
-            if let methadata = remote.metadata?.medaData as? ImageAndVideoMetaData{
-                duration = WrapData.getDuration(duration: methadata.duration)
-                
-                switch previewIconSize {
-                case .little : url = methadata.smalURl
-                case .medium : url = methadata.mediumUrl
-                case .large  : url = methadata.largeUrl
-                }
-                if (url == nil) {
-                    url = remote.tempDownloadURL
-                }
+            
+            duration = WrapData.getDuration(duration: remote.metadata?.duration)
+            
+            switch previewIconSize {
+            case .little : url = remote.metadata?.smalURl
+            case .medium : url = remote.metadata?.mediumUrl
+            case .large  : url = remote.metadata?.largeUrl
+            }
+            if (url == nil) {
+                url = remote.tempDownloadURL
             }
         }
         
-        uuid = remote.uuid ?? UUID().description
+        uuid = remote.uuid ?? ""//UUID().description
         
         metaData = remote.metadata
         favorites = remote.metadata?.favourite ?? false
-       
+        
         md5 = remote.hash ?? ""
         patchToPreview = .remoteUrl(url)
         id = remote.id
@@ -565,13 +561,34 @@ class WrapData: BaseDataSourceItem, Wrappered {
         id = mediaItem.idValue
         super.init()
         md5 = mediaItem.md5Value ?? "not md5"
-        uuid = mediaItem.uuidValue ?? UUID().description
+        uuid = mediaItem.uuidValue ?? ""//UUID().description
         isLocalItem = mediaItem.isLocalItemValue
         name = mediaItem.nameValue
         creationDate = mediaItem.creationDateValue as Date?
         lastModifiDate = mediaItem.lastModifiDateValue as Date?
         syncStatus =  SyncWrapperedStatus(value: mediaItem.syncStatusValue)
         fileType = FileType(value: mediaItem.fileTypeValue)
+        
+        metaData = BaseMetaData()
+        
+        /// metaData filling
+        metaData?.favourite = mediaItem.favoritesValue
+        metaData?.album = mediaItem.metadata?.album
+        metaData?.artist = mediaItem.metadata?.artist
+        metaData?.duration = mediaItem.metadata?.duration
+        metaData?.genre = mediaItem.metadata?.genre ?? []
+        metaData?.height = mediaItem.metadata?.height
+        metaData?.title = mediaItem.metadata?.title
+        
+        if let largeUrl = mediaItem.metadata?.largeUrl {
+            metaData?.largeUrl = URL(string: largeUrl)
+        }
+        if let mediumUrl = mediaItem.metadata?.mediumUrl {
+            metaData?.mediumUrl = URL(string: mediumUrl)
+        }
+        if let smalURl = mediaItem.metadata?.smalURl {
+            metaData?.smalURl = URL(string: smalURl)
+        }
     }
     
     private class func getDuration(duration: Double?) -> String {

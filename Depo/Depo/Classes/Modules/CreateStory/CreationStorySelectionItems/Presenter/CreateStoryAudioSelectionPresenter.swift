@@ -40,17 +40,22 @@ class CreateStoryAudioSelectionPresenter: DocumentsGreedPresenter, CreateStorySe
                 return
             }
             story.music = music
-            if let rout = router as? CreateStorySelectionRouter{
-                rout.goToSelectionOrderPhotosFor(story: story)
+            if let viewController = view as? CreateStoryAudioSelectionViewController{
+               viewController.hideView()
             }
         }else{
             custoPopUp.showCustomAlert(withText: TextConstants.createStoryNoSelectedAudioError, okButtonText: TextConstants.createFolderEmptyFolderButtonText)
         }
-        SingleSong.default.stop()
+        
+//        SingleSong.default.stop()
+        player.stop()
     }
     
     func configurateWithPhotoStory(story: PhotoStory){
         photoStory = story
+        if let music = story.music{
+            dataSource.onSelectObject(object: music)
+        }
     }
     
     override func getCellSizeForList() -> CGSize{

@@ -16,4 +16,10 @@ protocol CreateStoryPhotosOrderInteractorOutput: class {
     
     func storyCreatedWithError()
     
+    func goToAudioSelection(story: PhotoStory)
+    
+    func audioNotSelectedError()
+    
+    func goToStoryPreview(story: PhotoStory, responce: CreateStoryResponce)
+    
 }

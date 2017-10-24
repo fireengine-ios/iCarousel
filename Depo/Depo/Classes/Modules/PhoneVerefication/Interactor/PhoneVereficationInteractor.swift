@@ -16,9 +16,9 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
     
 //    let customPopUP = CustomPopUp()
     
-    private var attempts: Int = 0
+    var attempts: Int = 0
     
-    private let MaxAttemps: Int = 3
+    let MaxAttemps: Int = 3
     
     func saveSignUpResponse(withResponse response: SignUpSuccessResponse, andUserInfo userInfo: RegistrationUserInfoModel) {
         dataStorage.signUpResponse = response

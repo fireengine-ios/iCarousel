@@ -62,57 +62,77 @@ class UserProfileInteractor: UserProfileInteractorInput {
     
     func onEditButton(name: String, email: String, number: String){
         
-        let group = DispatchGroup()
-        var isRequestStarted = false
+        updateNameIfNeed(name: name, email: email, number: number)
+    }
+    
+    func updateNameIfNeed(name: String, email: String, number: String){
         if (isNameChanged(name: name)){
-            
-            group.enter()
-            isRequestStarted = true
-            
             let names = getSepareteName(nameString: name)
-            
             let parameters = UserNameParameters(userName: names.name, userSurName: names.surName)
-            AccountService().updateUserProfile(parameters: parameters, success: {(responce) in
-                group.leave()
-            }, fail: { (error) in
-                group.leave()
+            AccountService().updateUserProfile(parameters: parameters,
+                                               success: {[weak self] (responce) in
+                self?.updateEmailIfNeed(email: email, number: number)
+            }, fail: { [weak self] (error) in
+                self?.fail(error: error.description)
             })
+        }else{
+            updateEmailIfNeed(email: email, number: number)
         }
-        
+    }
+    
+    func updateEmailIfNeed(email: String, number: String){
         if (isEmailChanged(email: email)){
-            group.enter()
-            isRequestStarted = true
             let parameters = UserEmailParameters(userEmail: email)
-            AccountService().updateUserEmail(parameters: parameters, success: { (responce) in
-                group.leave()
-            }, fail: { (error) in
-                group.leave()
+            AccountService().updateUserEmail(parameters: parameters,
+                                             success: { [weak self] (responce) in
+                self?.updatePhoneIfNeed(number: number)
+            }, fail: { [weak self] (error) in
+                self?.fail(error: error.description)
             })
-            
+        }else{
+            updatePhoneIfNeed(number: number)
         }
-        
+    }
+    
+    func updatePhoneIfNeed(number: String){
         if (isPhoneChanged(phone: number)){
-            group.enter()
-            isRequestStarted = true
             let parameters = UserPhoneNumberParameters(phoneNumber: number)
-            AccountService().updateUserPhone(parameters: parameters, success: { (responce) in
-                group.leave()
-            }, fail: { (error) in
-                group.leave()
+            AccountService().updateUserPhone(parameters: parameters,
+                                             success: { [weak self] (responce) in
+                
+                                                if let resp = responce as? SignUpSuccessResponse{
+                                                    self?.needSendOTP(responce: resp)
+                                                }else{
+                                                    self?.fail(error: TextConstants.errorUnknown)
+                                                }
+                
+            }, fail: { [weak self] (error) in
+                self?.fail(error: error.description)
             })
+        }else{
+            allUpdated()
         }
-        
-        if (isRequestStarted){
-            self.output.startNetworkOperation()
-        }
-        
-        group.notify(queue: .main) { [weak self] in
-            DispatchQueue.main.async {
-                self?.output.stopNetworkOperation()
-                self?.output.setEditButtonEnable(enable: false)
+    }
+    
+    func needSendOTP(responce: SignUpSuccessResponse){
+        DispatchQueue.main.async { [weak self] in
+            if let info = self?.userInfo{
+                self?.output?.needSendOTP(responce: responce, userInfo: info)
             }
         }
-        
+    }
+    
+    func allUpdated(){
+        DispatchQueue.main.async { [weak self] in
+            self?.output.stopNetworkOperation()
+        }
+    }
+    
+    func fail(error: String){
+        DispatchQueue.main.async { [weak self] in
+            self?.output.stopNetworkOperation()
+            self?.output.showError(error: error)
+        }
     }
     
 }

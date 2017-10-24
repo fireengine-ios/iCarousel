@@ -142,6 +142,9 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
         }
     }
     
+    func getNavigationController() -> UINavigationController?{
+        return navigationController
+    }
     
     // MARK: ButtonsAction
     

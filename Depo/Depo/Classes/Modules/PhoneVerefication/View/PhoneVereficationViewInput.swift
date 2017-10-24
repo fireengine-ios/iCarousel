@@ -26,4 +26,6 @@ protocol PhoneVereficationViewInput: class, Waiting  {
     
     func heighlightInfoTitle()
     
+    func getNavigationController() -> UINavigationController?
+    
 }

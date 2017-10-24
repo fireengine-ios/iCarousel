@@ -26,6 +26,8 @@ class PhoneVereficationViewController: UIViewController, PhoneVereficationViewIn
     
     @IBOutlet weak var infoTitle: UILabel!
     
+    @IBOutlet weak var bacgroundImageView: UIImageView!
+    
     var inputTextLimit: Int = NumericConstants.vereficationCharacterLimit
     
     // MARK: Life cycle
@@ -144,6 +146,10 @@ class PhoneVereficationViewController: UIViewController, PhoneVereficationViewIn
     
     func setupPhoneLable(with number: String) {
         phoneCodeLabel.text = number
+    }
+    
+    func getNavigationController() -> UINavigationController?{
+        return self.navigationController
     }
     
 }

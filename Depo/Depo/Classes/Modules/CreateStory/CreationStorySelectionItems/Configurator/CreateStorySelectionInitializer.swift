@@ -20,7 +20,7 @@ class CreateStoryModuleInitializer: BaseFilesGreedModuleInitializer {
     }
     
     class func initializeAudioSelectionViewControllerForStory(with nibName:String, story:PhotoStory) -> UIViewController {
-        let viewController = CreateStoryPhotoSelectionViewController(nibName: nibName, bundle: nil)
+        let viewController = CreateStoryAudioSelectionViewController(nibName: nibName, bundle: nil)
         let configurator = CreateStorySelectionConfigurator()
 
         configurator.configure(viewController: viewController, remoteServices: CreateStoryMusicService(),

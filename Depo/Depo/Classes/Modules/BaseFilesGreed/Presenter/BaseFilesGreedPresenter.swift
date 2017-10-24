@@ -10,6 +10,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     typealias Item = WrapData
     
+    let player: MediaPlayer = factory.resolve()
+    
     var dataSource = BaseDataSourceForCollectionView()
 
     weak var view: BaseFilesGreedViewInput!
@@ -143,10 +145,14 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         if item.fileType.isUnSupportedOpenType {
             if interactor.remoteItems is MusicService {
                 guard let array = data as? [[Item]],
-                    let wrappered = item as? Item else{
-                    return
-                }
-                SingleSong.default.playWithItems(list: array.flatMap({$0}), startItem: wrappered)
+                    let wrappered = item as? Item
+                    else { return }
+                
+                let list = array.flatMap{ $0 }
+                guard let startIndex = list.index(of: wrappered) else { return }
+                player.play(list: list, startAt: startIndex)
+                player.play()
+//                SingleSong.default.playWithItems(list: array.flatMap({$0}), startItem: wrappered)
             } else {
                 router.onItemSelected(item: item, from: data)
             }
@@ -228,7 +234,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         }
         alertSheetModule?.showSpecifiedAlertSheet(with: item,
                                                   presentedBy: sender,
-                                                  onSourceView: nil)
+                                                  onSourceView: nil,
+                                                  viewController: nil)
     }
     
     func onMaxSelectionExeption(){
@@ -277,12 +284,27 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func moreActionsPressed(sender: Any) {
-        dataSource.isInSelectionMode() ?
-            alertSheetModule?.showAlertSheet(with: (interactor.alerSheetMoreActionsConfig?.selectionModeTypes ?? []),
-                                             items: dataSource.getSelectedItems(),
-                                             presentedBy: sender, onSourceView: nil) :
-            alertSheetModule?.showAlertSheet(with: (interactor.alerSheetMoreActionsConfig?.initialTypes ?? []),
-                                             presentedBy: sender, onSourceView: nil)
+        
+        let selectionMode = dataSource.isInSelectionMode()
+        var type = (interactor.alerSheetMoreActionsConfig?.selectionModeTypes ?? [])
+        if selectionMode {
+            let list = Array(dataSource.selectedItemsArray)
+            let selectedItems = CoreDataStack.default.mediaItemByUUIDs(uuidList: list)
+            let items = selectedItems.filter{ $0.isLocalItem == false}
+            if !items.isEmpty {
+                type.append(.addToCmeraRoll)
+            }
+            alertSheetModule?.showAlertSheet(with: type,
+                                             items: selectedItems,
+                                             presentedBy: sender,
+                                             onSourceView: nil)
+        } else {
+            type  = (interactor.alerSheetMoreActionsConfig?.initialTypes ?? [])
+            alertSheetModule?.showAlertSheet(with: type,
+                                             presentedBy: sender,
+                                             onSourceView: nil)
+        }
+        
     }
     
     

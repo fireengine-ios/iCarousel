@@ -78,6 +78,7 @@ class BaseDataSourceForCollectionView: NSObject, UICollectionViewDataSource, UIC
                                 withReuseIdentifier: CollectionViewSuplementaryConstants.baseDataSourceForCollectionViewReuseID)
         
         let registreList = [CollectionViewCellsIdsConstant.cellForImage,
+                            CollectionViewCellsIdsConstant.cellForStoryImage,
                             CollectionViewCellsIdsConstant.cellForVideo,
                             CollectionViewCellsIdsConstant.cellForAudio,
                             CollectionViewCellsIdsConstant.baseMultiFileCell,
@@ -242,6 +243,7 @@ class BaseDataSourceForCollectionView: NSObject, UICollectionViewDataSource, UIC
         }
     
         cell_.updating()
+        let selected = isObjctSelected(object: unwrapedObject)
         cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjctSelected(object: unwrapedObject))
         cell_.confireWithWrapperd(wrappedObj: unwrapedObject)
         cell_.setDelegateObject(delegateObject: self)
@@ -251,7 +253,6 @@ class BaseDataSourceForCollectionView: NSObject, UICollectionViewDataSource, UIC
         }
         
         fileDataSource.getImage(patch: wraped.patchToPreview) { [weak self] (image) in
-        
             let contains = self?.collectionView.indexPathsForVisibleItems.contains(indexPath)
             if let value = contains,
                value == true {
@@ -259,7 +260,6 @@ class BaseDataSourceForCollectionView: NSObject, UICollectionViewDataSource, UIC
                 return
             }
         }
-        
 //        let countRow:Int = self.collectionView(collectionView, numberOfItemsInSection: indexPath.section)
 //        let isLastSection = Bool((numberOfSections(in: collectionView) - 1) == indexPath.section)
 //        let isLastCell = Bool((countRow - 1) == indexPath.row)

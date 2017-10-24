@@ -59,28 +59,8 @@
 }
 
 - (void)remoteControlReceivedWithEvent:(UIEvent *)receivedEvent {
-    
     if (receivedEvent.type == UIEventTypeRemoteControl) {
-        SingleSong *song = [SingleSong default];
-        switch (receivedEvent.subtype) {
-                
-            case  UIEventSubtypeRemoteControlPlay:
-                [song play];
-                break;
-            case   UIEventSubtypeRemoteControlPause:
-                [song pause];
-                break;
-            case UIEventSubtypeRemoteControlTogglePlayPause:
-                break;
-            case UIEventSubtypeRemoteControlPreviousTrack:
-                [song playBefore];
-                break;
-            case UIEventSubtypeRemoteControlNextTrack:
-                [song playNext];
-                break;
-            default:
-                break;
-        }
+        [FactoryMain.mediaPlayer handleWithEvent:receivedEvent];
     }
 }
 @end

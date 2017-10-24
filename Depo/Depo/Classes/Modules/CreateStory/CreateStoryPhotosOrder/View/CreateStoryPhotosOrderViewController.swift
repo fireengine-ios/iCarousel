@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateStoryPhotosOrderViewController: UIViewController, CreateStoryPhotosOrderViewInput, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class CreateStoryPhotosOrderViewController: UIViewController, CreateStoryPhotosOrderViewInput, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CollectionViewStoryReorderViewDelegate {
 
     var output: CreateStoryPhotosOrderViewOutput!
     
@@ -24,6 +24,8 @@ class CreateStoryPhotosOrderViewController: UIViewController, CreateStoryPhotosO
     // MARK: Life cycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationBarWithGradientStyle()
+        setTitle(withString: TextConstants.createStory, andSubTitle: nil)
     }
     
     override func viewDidLoad() {
@@ -114,6 +116,10 @@ class CreateStoryPhotosOrderViewController: UIViewController, CreateStoryPhotosO
         collectionView.reloadData()
     }
     
+    func getNavigationControllet() -> UINavigationController?{
+        return navigationController
+    }
+    
     
     //MARK: UICollectionView delegate
     
@@ -129,6 +135,9 @@ class CreateStoryPhotosOrderViewController: UIViewController, CreateStoryPhotosO
         switch kind {
         case UICollectionElementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: CollectionViewSuplementaryConstants.collectionViewStoryReorderView, for: indexPath)
+            if let header = headerView as? CollectionViewStoryReorderView{
+                header.delegate = self
+            }
             return headerView
             
         default:
@@ -247,5 +256,11 @@ class CreateStoryPhotosOrderViewController: UIViewController, CreateStoryPhotosO
                 }
             }
         }
+    }
+    
+    //MARK: CollectionViewStoryReorderViewDelegate
+    
+    func goToSelectionMusick() {
+        output.onMusicSelection()
     }
 }

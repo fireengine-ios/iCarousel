@@ -30,7 +30,8 @@ class HomePageRouter: HomePageRouterInput {
             controller = router.syncContacts
         }
         
-        router.tabBarVC?.pushViewController(controller!, animated: true)
+        router.pushViewController(viewController: controller!)
+//        router.tabBarVC?.pushViewController(controller!, animated: true)
     }
     
     func moveToAllFilesPage() {

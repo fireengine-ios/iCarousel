@@ -15,7 +15,7 @@ extension CoreDataStack {
         let queue = DispatchQueue(label: "Append Local Item ")
         queue.async {
             let localMediaStorage = LocalMediaStorage.default
-            localMediaStorage.askPermissionForPhotoFramework{ status in
+            localMediaStorage.askPermissionForPhotoFramework { status in
                 if status == .authorized {
                     self.insertFromPhotoFramework()
                 }
@@ -55,6 +55,9 @@ extension CoreDataStack {
         let alredySaved:[MediaItem] = executeRequest(predicate: predicate, context:rootBackgroundContext)
         
         let result = alredySaved.flatMap{ $0.localFileID }
+        
+        checkLocalFilesExistence(actualPhotoLibItemsIds: list)
+        
         return allList.filter { !result.contains( $0.localIdentifier )}
     }
         
@@ -68,6 +71,9 @@ extension CoreDataStack {
     }
         
     func removeLocalMediaItemswithAssetID(list: [String]) {
+        guard list.count > 0 else {
+            return
+        }
         let context = newChildBackgroundContext
         let predicate = NSPredicate(format: "localFileID IN %@", list)
         let items:[MediaItem] = executeRequest(predicate: predicate, context:context)
@@ -95,5 +101,15 @@ extension CoreDataStack {
         let predicate = NSPredicate(format: "NOT (md5Value IN %@) AND (isLocalItemValue == true) AND (fileTypeValue IN %@)",  md5Array, filesTypesArray)
         let items: [MediaItem] =  executeRequest(predicate: predicate, context:context)
         return items.flatMap{ $0.wrapedObject }
+    }
+    
+    func checkLocalFilesExistence(actualPhotoLibItemsIds: [String]) {
+        let predicate = NSPredicate(format: "localFileID != Nil")
+        let allSavedLocalFileIDs: [MediaItem] = executeRequest(predicate: predicate,
+                                                            context:rootBackgroundContext)
+        allSavedLocalFileIDs.forEach {
+            rootBackgroundContext.delete($0)
+        }
+        
     }
 }

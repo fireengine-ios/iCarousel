@@ -8,4 +8,10 @@
 
 class UserProfileRouter: UserProfileRouterInput {
 
+    func needSendOTP(responce: SignUpSuccessResponse, userInfo: AccountInfoResponse, navigationController: UINavigationController){
+        let router = RouterVC()
+        let controller = router.otpView(responce: responce, userInfo: userInfo)
+        navigationController.pushViewController(controller, animated: true)
+    }
+    
 }

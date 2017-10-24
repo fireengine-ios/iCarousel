@@ -9,60 +9,53 @@
 import UIKit
 import iCarousel
 import SDWebImage
+import MediaPlayer
 
 protocol VisualMusicPlayerViewControllerDelegate: class {
     func playPauseButtonGotSelected(selected: Bool)
 }
 
 class VisualMusicPlayerViewController: UIViewController, VisualMusicPlayerViewInput {
-    
     var output: VisualMusicPlayerViewOutput!
     
-    @IBOutlet weak var playPauseButton: UIButton!
+    private let player: MediaPlayer = factory.resolve()
+    private let alert = AlertFilesActionsSheetPresenterModuleInitialiser().createModule()
+    private let carouselItemFrameWidth: CGFloat = 232
     
-    @IBOutlet weak var playBackButton: UIButton!
-    
-    @IBOutlet weak var playForwardButton: UIButton!
-    
-    @IBOutlet weak var volumeSlider: UISlider!
-    
-    @IBOutlet weak var carouselView: iCarousel!
-    
-    @IBOutlet weak var musicSlider: UISlider!
-   
-    @IBOutlet weak var currentMusicOffseetLabel: UILabel!
-    
-    @IBOutlet weak var totalDurationLabel: UILabel!
+    @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var playbackSlider: UISlider!
+    @IBOutlet weak var passedTimeLabel: UILabel!
+    @IBOutlet weak var leftTimeLabel: UILabel!
     
     @IBOutlet weak var musicName: UILabel!
-    
     @IBOutlet weak var artistName: UILabel!
+    @IBOutlet weak var carouselView: iCarousel!
     
-    var isPlaying: Bool = true
-    
-    weak var delegate: VisualMusicPlayerViewControllerDelegate?
-    
-    var currentItemDuration: Double {
-        return SingleSong.default.getCurrentItemDuration() ?? 0
+    let shuffleButtonOffColor = UIColor.lightGray
+    @IBOutlet weak var shuffleButton: UIButton! {
+        didSet {
+            shuffleButton.tintColor = shuffleButtonOffColor
+        }
     }
     
-    let carouselItemFrameWidth: CGFloat = 232
+    var currentDuration: Float = 0 {
+        didSet {
+            playbackSlider.maximumValue = currentDuration - 1
+            passedTimeLabel.text = "00:00"
+            leftTimeLabel.text = currentDuration.minutesSecondsString
+        }
+    }
     
-    // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-//        output.viewIsReady()
-        setupInitialConfig()
-    }
-    
-    private func setupInitialConfig() {
-        volumeSlider.addTarget(self, action: #selector(volumeSliderValueChanged(slider:)), for: .valueChanged)
-        musicSlider.addTarget(self, action: #selector(musicSliderValueChanged(slider:)), for: .valueChanged)
-        
-        volumeSlider.setValue(SingleSong.default.volume, animated: false)
         
         setupCarousel()
+        playButton.isSelected = !player.isPlaying
+        player.delegates.add(self)
         
+        currentDuration = player.duration
+        musicName.text = player.currentMusicName
+        artistName.text = player.currentArtist
     }
     
     private func setupCarousel() {
@@ -70,120 +63,72 @@ class VisualMusicPlayerViewController: UIViewController, VisualMusicPlayerViewIn
         carouselView.delegate = self
         carouselView.dataSource = self
         carouselView.isPagingEnabled = true
+        carouselView.scrollToItem(at: player.currentIndex, animated: false)
     }
     
-    func setupPlayerConfig() {
-        
-        setupUI()
-        
-//        carouselView.currentItemIndex = SingleSong.default.getCurrentItemIndex() ?? 0
-        let playerItemIndex = SingleSong.default.getCurrentItemIndex() ?? 0
-        if carouselView.currentItemIndex != playerItemIndex {
-            carouselView.scrollToItem(at: playerItemIndex, animated: true)
+    @IBAction func actionPlayButton(_ sender: UIButton) {
+        player.togglePlayPause()
+    }
+    @IBAction func actionNextButton(_ sender: UIButton) {
+        if player.playNext() {
+            carouselView.scrollToItem(at: player.currentIndex, animated: true)
         }
     }
-
-    fileprivate func setupUI() {
-        
-        if SingleSong.default.itemsInStack().count != carouselView.numberOfItems {
-            carouselView.reloadData()
-        }
-        
-        playPauseButton.isSelected = !SingleSong.default.isPlaying()
-        
-        guard let currentItem = SingleSong.default.getCurrentItemModel() else {
-            return
-        }
-        if let totatlDuration = currentItem.duration {
-            totalDurationLabel.text = totatlDuration
-        }
-        if let metadata = currentItem.metaData, let actualMeta = metadata.medaData as? MusicMetaData {
-            
-            if let name = actualMeta.title {
-                musicName.text = name
-            }
-            if let artist = actualMeta.artist {
-                artistName.text = artist
-            }
-            
-        }
-        
-        //TODO: if there is only one track in the stack - disable forward and backword buttons
-        
-    }
-    
-    func setProgress(secondsPassed: Double) {
-        if musicSlider == nil { //FIXME: find another architecture solution
-            return
-        }
-        let persantage = secondsPassed/self.currentItemDuration
-        self.musicSlider.setValue(Float(persantage), animated: false)
-        
-        let min = Int(secondsPassed) / 60
-        let sec = Int(secondsPassed) % 60
-        self.currentMusicOffseetLabel.text = String(format: "%02i:%02i", min, sec)
-    }
-    
-
-    fileprivate func centeredItemStill() {
-        SingleSong.default.playTrack(fromIndex: carouselView.currentItemIndex)
-    }
-    
-    
-    //MARK: - Sliders
-    
-    @objc private func volumeSliderValueChanged(slider: UISlider) {
-        SingleSong.default.volume = slider.value
-    }
-    
-    @objc private func musicSliderValueChanged(slider: UISlider) {
-        var newPosition: Double = 0
-
-        let totalValue = slider.maximumValue - slider.minimumValue
-        let persantage = slider.value/totalValue
-        let persantageToDuration = currentItemDuration*Double(fabs(persantage))
-        
-        newPosition = persantageToDuration
-        
-        SingleSong.default.changePosition(to: newPosition, play: !playPauseButton.isSelected)
-    }
-    
-    
-    // MARK: - VisualMusicPlayerViewInput
-    
-    func setupInitialState() {
-        
-    }
-    
-    
-    //MARK: - Button Actions
-    
-    private func changePlayPauseStatus() {
-        
-        playPauseButton.isSelected = !playPauseButton.isSelected
-        delegate?.playPauseButtonGotSelected(selected: playPauseButton.isSelected)
-        if !playPauseButton.isSelected {
-            SingleSong.default.play()
-        } else {
-            SingleSong.default.pause()
+    @IBAction func actionPrevButton(_ sender: UIButton) {
+        if player.playPrevious() {
+            carouselView.scrollToItem(at: player.currentIndex, animated: true)
         }
     }
-    
-    @IBAction func pausePlayAction(_ sender: Any) {
-        changePlayPauseStatus()
+    @IBAction func playbackSliderDidEndChanging(_ sender: UISlider) {
+        player.seek(to: sender.value)
     }
-    
-    @IBAction func forwardAction(_ sender: Any) {
-        SingleSong.default.playNext()
+    @IBAction func playbackSliderDidChanged(_ sender: UISlider) {
+        passedTimeLabel.text = sender.value.minutesSecondsString
+        leftTimeLabel.text = (sender.value - currentDuration).minutesSecondsString
     }
-    
-    @IBAction func backAction(_ sender: Any) {
-        SingleSong.default.playBefore()
-    }
-    
     @IBAction func cancelAction(_ sender: Any) {
-        
         dismiss(animated: true, completion: nil)
+    }
+    @IBAction func actionShareButton(_ sender: UIButton) {
+        guard let item = player.currentItem, let url = item.urlToFile else { return }
+        let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        activityVC.popoverPresentationController?.sourceView = sender
+        present(activityVC, animated: true, completion: nil)
+    }
+    @IBAction func actionMoreButton(_ sender: UIButton) {
+        guard let item = player.currentItem else { return }
+        alert.showSpecifiedAlertSheet(with: item, presentedBy: sender, onSourceView: nil, viewController: self)
+    }
+    @IBAction func actionShuffleButton(_ sender: UIButton) {
+//        sender.isSelected = !sender.isSelected
+        sender.tintColor = (sender.tintColor == shuffleButtonOffColor) ? UIColor.white : shuffleButtonOffColor
+        player.togglePlayMode()
+        carouselView.reloadData()
+        carouselView.scrollToItem(at: player.currentIndex, animated: true)
+    }
+}
+extension VisualMusicPlayerViewController: MediaPlayerDelegate {
+    func mediaPlayer(_ mediaPlayer: MediaPlayer, didStartItemWith duration: Float) {
+        currentDuration = duration
+        musicName.text = player.currentMusicName
+        artistName.text = player.currentArtist
+        carouselView.scrollToItem(at: player.currentIndex, animated: true)
+    }
+    func mediaPlayer(_ musicPlayer: MediaPlayer, changedCurrentTime time: Float) {
+        if playbackSlider.state == .normal { /// highlighted
+            playbackSlider.setValue(time, animated: true)
+            passedTimeLabel.text = time.minutesSecondsString
+            leftTimeLabel.text = (time - currentDuration).minutesSecondsString
+        }
+    }
+    func didStartMediaPlayer(_ mediaPlayer: MediaPlayer) {
+        playButton.isSelected = false
+    }
+    func didStopMediaPlayer(_ mediaPlayer: MediaPlayer) {
+        playButton.isSelected = true
+    }
+    func changedListItemsInMediaPlayer(_ mediaPlayer: MediaPlayer) {
+        carouselView.reloadData()
     }
 }
 
@@ -193,34 +138,26 @@ class VisualMusicPlayerViewController: UIViewController, VisualMusicPlayerViewIn
 extension VisualMusicPlayerViewController: iCarouselDataSource, iCarouselDelegate {
 
     func numberOfItems(in carousel: iCarousel) -> Int {
-        return SingleSong.default.itemsInStack().count
+        return player.list.count
     }
     
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
-    
-        var currentURL: URL? = URL(string: "")
         
-        switch SingleSong.default.itemsInStack()[index].patchToPreview {
-        case .remoteUrl(let remotrURL):
-            currentURL = remotrURL
-        default:
-            break
-        }
+        let itemView = UIImageView(frame: CGRect(x: 0, y: 0, width: carouselItemFrameWidth, height: carouselItemFrameWidth))
+        itemView.contentMode = .scaleAspectFit
+        let image = UIImage(named: "headphone1")
         
-        let itemView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: carouselItemFrameWidth, height: carouselItemFrameWidth))
-//        itemView.backgroundColor = UIColor.white
-        
-        if currentURL == nil {
-            itemView.image = UIImage(named: "headphone1")
+        if let url = player.list[index].metaData?.mediumUrl {
+            itemView.sd_setImage(with: url, placeholderImage: image)
         } else {
-            itemView.sd_setImage(with: currentURL, placeholderImage: UIImage(named: "headphone1"))
+            itemView.image = image
         }
         
         return itemView
     }
     
     func carouselDidEndDecelerating(_ carousel: iCarousel) {
-        centeredItemStill()
+        player.play(at: carousel.currentItemIndex)
     }
     
     func carousel(_ carousel: iCarousel, itemTransformForOffset offset: CGFloat, baseTransform transform: CATransform3D) -> CATransform3D {
@@ -230,16 +167,28 @@ extension VisualMusicPlayerViewController: iCarouselDataSource, iCarouselDelegat
     }
     
     func carouselItemWidth(_ carousel: iCarousel) -> CGFloat {
-        return carouselItemFrameWidth * 1.3
+        return carouselItemFrameWidth
     }
     
     func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
-//        if (option == .spacing) {
-//            return value * 1.1
-//        }
+        if (option == .spacing) {
+            return value * 1.1
+        }
         if (option == .visibleItems) {
             return 5
         }
         return value
+    }
+}
+
+
+private extension Float {
+    var minutesSecondsString: String {
+        let s = Int(abs(self))
+        let seconds = s % 60
+        let minutes = s / 60
+        let format = minutes < 100 ? "%02i:%02i" : "%i:%02i"
+        let result = self < 0 ? "-\(format)" : format
+        return String(format: result, minutes, seconds)
     }
 }

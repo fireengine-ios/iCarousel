@@ -116,7 +116,7 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
     }
     
     func configurateAudioMethadataFor(object: Item){
-        if let musickMethadata = object.metaData?.medaData as? MusicMetaData{
+        if let musickMethadata = object.metaData {
             var string = ""
             if let album = musickMethadata.album {
                 string.append(TextConstants.fileInfoAlbumTitle)

@@ -8,6 +8,7 @@
 
 class AudioSelectionDataSource: ArrayDataSourceForCollectionView, AudioSelectionCollectionViewCellDelegate {
     
+    let player: MediaPlayer = factory.resolve()
     let smallPlayer = SmallBasePlayer()
     
     override func setupCollectionView(collectionView: UICollectionView, filters: [GeneralFilesFiltrationType]?){
@@ -37,7 +38,8 @@ class AudioSelectionDataSource: ArrayDataSourceForCollectionView, AudioSelection
             return
         }
         
-        SingleSong.default.stop()
+//        SingleSong.default.stop()
+        player.stop()
         
         
         inCell.playingButton.isSelected ? smallPlayer.stop() : smallPlayer.playWithItem(object: unwrapedObject)

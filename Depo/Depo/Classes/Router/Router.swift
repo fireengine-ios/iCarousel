@@ -391,6 +391,15 @@ class RouterVC: NSObject {
         return controller
     }
     
+    //MARK: CreateStory preview
+    
+    func storyPreview(forStory story: PhotoStory, responce: CreateStoryResponce) -> UIViewController {
+        let controller = CreateStoryPreviewModuleInitializer.initializePreviewViewControllerForStory(with: "CreateStoryPreviewViewController",
+                                                                                                   story: story,
+                                                                                                   responce: responce)
+        return controller
+    }
+    
     //MARK: Upload All files
     
     func uploadAllFiles(searchService: RemoteItemsService) -> UIViewController {
@@ -487,6 +496,13 @@ class RouterVC: NSObject {
     
     var usageInfo: UIViewController? {
         let controller = UsageInfoInitializer.initializeViewController(with: "UsageInfoViewController")
+        return controller
+    }
+    
+    // MARK: OTP
+    
+    func otpView(responce: SignUpSuccessResponse, userInfo: AccountInfoResponse) -> UIViewController {
+        let controller = OTPViewModuleInitializer.viewController(responce: responce, userInfo: userInfo)
         return controller
     }
     

@@ -60,54 +60,42 @@ struct SearchJsonKey {
 }
 
 class BaseMetaData: ObjectRequestResponse {
-    var favourite: Bool
-    var medaData: BaseMetaData?
     
-    required init(withJSON: JSON?, contentType: String) {
-
-        favourite = withJSON?[SearchJsonKey.favourite].boolFromString ?? false
-
-        super.init(withJSON: withJSON)
-        
-        if contentType.hasPrefix("image") {
-            medaData = ImageAndVideoMetaData(withJSON: self.json, contentType: "")
-            return
-        }
-        if contentType.hasPrefix("video") {
-            medaData = ImageAndVideoMetaData(withJSON: self.json, contentType: "")
-            return
-        }
-        
-        if contentType.hasPrefix("audio") {
-            medaData = MusicMetaData(withJSON: self.json, contentType: "")
-            return
-        }
-        
-        if contentType.hasPrefix("application") {
-            medaData = DocumentMetaData(withJSON: self.json, contentType: "")
-            return
-        }
-    }
+    var favourite: Bool?
     
-    required init(json: Data?, headerResponse: HTTPURLResponse?) {
-        fatalError("init(json:headerResponse:) has not been implemented")
-    }
-    
-    required init(withJSON: JSON?) {
-        fatalError("init(withJSON:) has not been implemented")
-    }
-}
-
-class ImageAndVideoMetaData: BaseMetaData {
+    // photo and video
     var height: Int16?
     var width: Int16?
     var uploadDate: Date?
     var largeUrl: URL?
     var mediumUrl: URL?
     var smalURl: URL?
+    
+    // music
+    var artist: String?
+    
+    var album: String?
+    var title: String?
+    var genre =  [String]()
+    
+    // music & video
     var duration: Double?
     
+    required init(withJSON: JSON?) {
+        super.init(withJSON: withJSON)
+    }
+    
+    required init(json: Data?, headerResponse: HTTPURLResponse?) {
+        fatalError("init(json:headerResponse:) has not been implemented")
+    }
+    
+    override init() {
+        super.init()
+    }
+    
     override func mapping() {
+        favourite = json?[SearchJsonKey.favourite].boolFromString ?? false
+        
         height = json?[SearchJsonKey.ImageHeight].int16
         width = json?[SearchJsonKey.ImageWidth].int16
         uploadDate = json?[SearchJsonKey.ImageDateTime].date
@@ -115,21 +103,6 @@ class ImageAndVideoMetaData: BaseMetaData {
         mediumUrl = json?[SearchJsonKey.Thumbnail_Medium].url
         smalURl = json?[SearchJsonKey.ThumbnailSmall].url
         
-        if let durStr = json?[SearchJsonKey.Duration].stringValue,
-            (durStr.characters.count > 0) {
-            duration = Double( Double(durStr)! / 1000.0)
-        }
-    }
-}
-
-class MusicMetaData: BaseMetaData {
-    var artist: String?
-    var album: String?
-    var title: String?
-    var duration: Double?
-    var genre =  [String]()
-    
-    override func mapping() {
         artist = json?[SearchJsonKey.Artist].string
         album = json?[SearchJsonKey.Album].string
         title = json?[SearchJsonKey.Title].string
@@ -145,9 +118,6 @@ class MusicMetaData: BaseMetaData {
     }
 }
 
-class DocumentMetaData: BaseMetaData {
-    
-}
 
 class SearchItemResponse: ObjectRequestResponse {
     
@@ -173,17 +143,13 @@ class SearchItemResponse: ObjectRequestResponse {
         // it upload date
         createdDate = json?[SearchJsonKey.createdDate].date
         lastModifiedDate = json?[SearchJsonKey.lastModifiedDate].date
-        
         id = json?[SearchJsonKey.id].int64
         hash = json?[SearchJsonKey.hash].string
         name = json?[SearchJsonKey.name].string
-        
         uuid = json?[SearchJsonKey.uuid].string
         bytes = json?[SearchJsonKey.bytes].int64
         contentType = json?[SearchJsonKey.content_type].string
-        metadata = BaseMetaData(withJSON: json?[SearchJsonKey.metadata],
-                                contentType: contentType ?? "")
-        
+        metadata = BaseMetaData(withJSON: json?[SearchJsonKey.metadata])
         folder = json?[SearchJsonKey.folder].bool
         uploaderDeviceType = json?[SearchJsonKey.uploaderDeviceType].string
         parent = json?[SearchJsonKey.parent].string
@@ -191,14 +157,6 @@ class SearchItemResponse: ObjectRequestResponse {
         status = json?[SearchJsonKey.status].string
         subordinates = json?[SearchJsonKey.subordinates].array
         album = json?[SearchJsonKey.album].array
-        
-        if metadata?.medaData is ImageAndVideoMetaData{
-            let meta = metadata?.medaData as! ImageAndVideoMetaData
-            if let date = meta.uploadDate{
-                createdDate = date
-            }
-        }
-        
     }
 }
 

@@ -35,7 +35,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         presentAlertSheet(with: actions, presentedBy: sender)
     }
     
-    func showSpecifiedAlertSheet(with item: BaseDataSourceItem, presentedBy sender: Any?, onSourceView sourceView: UIView?) {
+    func showSpecifiedAlertSheet(with item: BaseDataSourceItem, presentedBy sender: Any?, onSourceView sourceView: UIView?, viewController: UIViewController? = nil) {
         
         let headerAction = UIAlertAction(title: item.name ?? "file", style: .default, handler: {_ in
             
@@ -53,7 +53,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         
         let actions = constractActions(with: types, for: [item])
         
-        presentAlertSheet(with: [headerAction] + actions, presentedBy: sender)
+        presentAlertSheet(with: [headerAction] + actions, presentedBy: sender, viewController: viewController)
     }
     
     private func adjastActionTypes(for items: [Item]) -> [ElementTypes] {
@@ -291,11 +291,21 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         }
     }
     
-    private func presentAlertSheet(with actions: [UIAlertAction], presentedBy sender: Any?, onSourceView sourceView: UIView? = nil) {
-        let routerVC = RouterVC()
-        guard let rootVC = routerVC.rootViewController as? UINavigationController else {
-            return
+    private func presentAlertSheet(with actions: [UIAlertAction], presentedBy sender: Any?, onSourceView sourceView: UIView? = nil, viewController: UIViewController? = nil) {
+        
+        let vc: UIViewController
+        
+        if let unwrapedVC = viewController {
+            vc = unwrapedVC
+            
+        } else {
+            guard let rootVC = RouterVC().rootViewController as? UINavigationController else {
+                return
+            }
+            vc = rootVC
         }
+        
+        
         let cancellAction = UIAlertAction(title: TextConstants.actionSheetCancel, style: .cancel, handler: { _ in
             
         })
@@ -306,11 +316,11 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         actionsWithCancell.forEach({actionSheetVC.addAction($0)})
         actionSheetVC.view.tintColor = UIColor.black
         
-        actionSheetVC.popoverPresentationController?.sourceView = rootVC.view
+        actionSheetVC.popoverPresentationController?.sourceView = vc.view
         
         if let pressedBarButton = sender as? UIButton {
-            var sourceRectFrame = pressedBarButton.convert(pressedBarButton.frame, to: rootVC.view)
-            if sourceRectFrame.origin.x > rootVC.view.bounds.width {
+            var sourceRectFrame = pressedBarButton.convert(pressedBarButton.frame, to: vc.view)
+            if sourceRectFrame.origin.x > vc.view.bounds.width {
                 sourceRectFrame = CGRect(origin: CGPoint(x: pressedBarButton.frame.origin.x, y: pressedBarButton.frame.origin.y + 20), size: pressedBarButton.frame.size)
             }
             
@@ -319,6 +329,6 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             //FIXME: use actionSheetVC.popoverPresentationController?.barButtonItem instead
             actionSheetVC.popoverPresentationController?.sourceRect = rightButtonBox
         }
-        rootVC.present(actionSheetVC, animated: true, completion: {})
+        vc.present(actionSheetVC, animated: true, completion: {})
     }
 }

@@ -40,6 +40,10 @@ extension UIViewController {
         return 45634
     }
     
+    private var tagTitleView: Int {
+        return 787878
+    }
+    
     func defaultNavBarStyle(backgroundImg: UIImage = UIImage()) {
         navBar?.setBackgroundImage(backgroundImg,for: UIBarMetrics.default)
         navBar?.shadowImage = UIImage()
@@ -113,43 +117,6 @@ extension UIViewController {
         }
     }
     
-    func setNavigationTitle(title:String, subtitle: String) -> UIView {
-        
-        let titleLabel = UILabel(frame: CGRect(x:0, y:-5, width:0, height:0))
-        
-        titleLabel.backgroundColor = UIColor.clear
-        titleLabel.textColor = UIColor.gray
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 17)
-        titleLabel.text = title
-        titleLabel.sizeToFit()
-        
-        let subtitleLabel = UILabel(frame: CGRect(x:0, y:18, width:0, height:0))
-        subtitleLabel.backgroundColor = UIColor.clear
-        subtitleLabel.textColor = UIColor.black
-        subtitleLabel.font = UIFont.systemFont(ofSize: 12)
-        subtitleLabel.text = subtitle
-        subtitleLabel.sizeToFit()
-        
-        let titleView = UIView(frame: CGRect(x:0, y:0, width:max(titleLabel.frame.size.width, subtitleLabel.frame.size.width), height:30))
-        titleView.addSubview(titleLabel)
-        titleView.addSubview(subtitleLabel)
-        
-        let widthDiff = subtitleLabel.frame.size.width - titleLabel.frame.size.width
-        
-        if widthDiff > 0 {
-            var frame = titleLabel.frame
-            frame.origin.x = widthDiff / 2
-            titleLabel.frame = frame.integral
-        } else {
-            var frame = subtitleLabel.frame
-            frame.origin.x = abs(widthDiff) / 2
-            titleLabel.frame = frame.integral
-        }
-        
-        return  titleView
-    }
-    
-    
     //MARK : ToolBar
     
     func barButtonItemsWithRitht(button: UIBarButtonItem) -> UIToolbar {
@@ -170,24 +137,28 @@ extension UIViewController {
     }
     
     func setTitle(withString title: String, andSubTitle subTitle: String! = nil) {
-        self.navBar?.topItem?.backBarButtonItem = UIBarButtonItem(title: TextConstants.backTitle, style: .plain, target: nil, action: nil)
+        
+        navBar?.topItem?.backBarButtonItem = UIBarButtonItem(title: TextConstants.backTitle, style: .plain, target: nil, action: nil)
+        
         if let _ = subTitle {
-            self.navigationItem.title = nil
-            self.navBar?.subviews[0].viewWithTag(787878)?.removeFromSuperview()
-            let mainTitleLabel = UILabel(frame: CGRect(x: 0, y: 20, width: Device.winSize.width, height: 40))
+            navigationItem.title = nil
+            navBar?.subviews[0].viewWithTag(tagTitleView)?.removeFromSuperview()
+            let delta: CGFloat = 50.0
+            let weihth = Device.winSize.width - delta*2.0
+            let mainTitleLabel = UILabel(frame: CGRect(x: delta, y: 20, width: weihth, height: 40))
             mainTitleLabel.backgroundColor = UIColor.clear
             mainTitleLabel.numberOfLines = 2
             mainTitleLabel.textAlignment = .center
             mainTitleLabel.textColor = UIColor.white
+            
             let attributtedText = NSMutableAttributedString(string: title + "\n" + subTitle)
             attributtedText.addAttributes([NSAttributedStringKey.font : UIFont.TurkcellSaturaDemFont(size: 19.0)], range: NSMakeRange(0, (title as NSString).length))
             attributtedText.addAttributes([NSAttributedStringKey.font : UIFont.TurkcellSaturaMedFont(size: 12.0)], range: NSMakeRange((title as NSString).length + 1, (subTitle as NSString).length))
             mainTitleLabel.attributedText = attributtedText
-//            mainTitleLabel.isEnabled = false
-            mainTitleLabel.tag = 787878
-            self.navBar?.subviews[0].addSubview(mainTitleLabel)
+            mainTitleLabel.tag = tagTitleView
+            navBar?.subviews[0].addSubview(mainTitleLabel)
         } else {
-            self.navBar?.subviews[0].viewWithTag(787878)?.removeFromSuperview()
+            self.navBar?.subviews[0].viewWithTag(tagTitleView)?.removeFromSuperview()
             self.navigationItem.title = title
         }
     }

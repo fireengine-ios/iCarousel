@@ -14,4 +14,5 @@ protocol SplashInteractorInput {
     
     func checkEULA()
     
+    func clearAllPreviouslyStoredInfo()
 }

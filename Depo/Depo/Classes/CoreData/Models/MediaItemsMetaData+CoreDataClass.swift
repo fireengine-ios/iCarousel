@@ -11,5 +11,23 @@ import CoreData
 
 
 public class MediaItemsMetaData: NSManagedObject {
+    
+    static let Identifier = "MediaItemsMetaData"
+    
+    convenience init(metadata: BaseMetaData?, context: NSManagedObjectContext) {
+        let entityDescr = NSEntityDescription.entity(forEntityName: MediaItemsMetaData.Identifier,
+                                                     in: context)!
+        self.init(entity: entityDescr, insertInto: context)
+        self.album = metadata?.album
+        self.artist = metadata?.artist
+        self.duration = metadata?.duration ?? Double(-1.0)
+        self.genre = metadata?.genre
+        self.height = metadata?.height ?? Int16(0)
+        self.width = metadata?.width ?? Int16(0)
+        self.largeUrl = metadata?.largeUrl?.absoluteString
+        self.mediumUrl = metadata?.mediumUrl?.absoluteString
+        self.smalURl = metadata?.smalURl?.absoluteString
+        self.title = metadata?.title
+    }
 
 }

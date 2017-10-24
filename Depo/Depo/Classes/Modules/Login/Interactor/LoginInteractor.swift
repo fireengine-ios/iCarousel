@@ -53,10 +53,10 @@ class LoginInteractor: LoginInteractorInput {
         
         authenticationService.login(user: user, sucess: { [weak self] in
             
-            PhotoAndVideoService(requestSize: 999999).nextItems(sortBy: .name,
-                                                                sortOrder: .asc,
-                                                                success: nil,
-                                                                fail: nil)
+//            PhotoAndVideoService(requestSize: 999999).nextItems(sortBy: .name,
+//                                                                sortOrder: .asc,
+//                                                                success: nil,
+//                                                                fail: nil)
             guard let `self` = self else {
                 return
             }

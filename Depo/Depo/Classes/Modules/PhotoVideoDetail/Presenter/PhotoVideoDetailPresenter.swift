@@ -92,7 +92,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     }
     
     func goBack(){
-        router.goBack()
+        router.goBack(navigationConroller: view.getNavigationController())
     }
     
     func updateItems(objects: [Item], selectedIndex: Int){

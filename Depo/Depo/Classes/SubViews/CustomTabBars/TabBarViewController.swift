@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TabBarViewController: UIViewController, UITabBarDelegate {
+final class TabBarViewController: UIViewController, UITabBarDelegate {
     
     @IBOutlet weak var tabBar: CustomTabBar!
     
@@ -32,6 +32,7 @@ class TabBarViewController: UIViewController, UITabBarDelegate {
     static let notificationShowTabBar = "ShowMainTabBarNotification"
     static let notificationMusicStartedPlaying = "MusicStartedPlaying"
     static let notificationMusicDrop = "MusicDrop"
+    static let notificationMusicStop = "MusicStop"
     
     let originalPlusBotttomConstraint: CGFloat = 10
     
@@ -44,6 +45,7 @@ class TabBarViewController: UIViewController, UITabBarDelegate {
     fileprivate var folderBtn: SubPlussButtonView!
 
     let musicBar = MusicBar.initFromXib()
+    let player: MediaPlayer = factory.resolve()
     
     var customNavigationControllers: [UINavigationController] = []
     
@@ -106,6 +108,11 @@ class TabBarViewController: UIViewController, UITabBarDelegate {
         
         setupObserving()
         
+        player.delegates.add(self)
+    }
+    
+    deinit {
+        player.delegates.remove(self)
     }
     
 //    override func viewWillAppear(_ animated: Bool) {
@@ -137,14 +144,16 @@ class TabBarViewController: UIViewController, UITabBarDelegate {
                                                selector: #selector(self.showTabBar(_:)),
                                                name: NSNotification.Name(rawValue: TabBarViewController.notificationShowTabBar),
                                                object: nil)
+//        NotificationCenter.default.addObserver(self,
+//                                               selector: #selector(self.showMusicBar(_:)),
+//                                               name: NSNotification.Name(rawValue: TabBarViewController.notificationMusicStartedPlaying),
+//                                               object: nil)
+//
+        
+        let dropNotificationName = NSNotification.Name(rawValue: TabBarViewController.notificationMusicDrop)
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.showMusicBar(_:)),
-                                               name: NSNotification.Name(rawValue: TabBarViewController.notificationMusicStartedPlaying),
-                                               object: nil)
-
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.hideMusicBar(_:)),
-                                               name: NSNotification.Name(rawValue: TabBarViewController.notificationMusicDrop),
+                                               selector: #selector(hideMusicBar),
+                                               name: dropNotificationName,
                                                object: nil)
     }
     
@@ -324,7 +333,7 @@ class TabBarViewController: UIViewController, UITabBarDelegate {
     }
 }
 
-extension TabBarViewController: SubPlussButtonViewDelegate,  UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func buttonGotPressed(button: SubPlussButtonView) {
         changeViewState(state: false)
@@ -398,4 +407,13 @@ extension TabBarViewController: SubPlussButtonViewDelegate,  UIImagePickerContro
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController){
         picker.dismiss(animated: true, completion: nil)
     }
+}
+
+extension TabBarViewController: MediaPlayerDelegate {
+    func mediaPlayer(_ mediaPlayer: MediaPlayer, didStartItemWith duration: Float) {
+        showMusicBar(())
+    }
+    func mediaPlayer(_ musicPlayer: MediaPlayer, changedCurrentTime time: Float) {}
+    func didStartMediaPlayer(_ mediaPlayer: MediaPlayer) {}
+    func didStopMediaPlayer(_ mediaPlayer: MediaPlayer) {}
 }

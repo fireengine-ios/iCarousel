@@ -17,4 +17,5 @@ class PhoneVereficationModuleInitializer: NSObject {
         let configurator = PhoneVereficationModuleConfigurator()
         configurator.configureModuleForViewInput(viewInput: phonevereficationViewController, withResponse: with, userInfo:  userInfo)
     }
+    
 }

@@ -18,9 +18,11 @@ class PhotoVideoDetailRouter: PhotoVideoDetailRouterInput {
         fileInfo.interactor.setObject(object: object)
     }
     
-    func goBack(){
-        let router = RouterVC()
-        router.popViewControllerFromTableViewNavBar()
+    func goBack(navigationConroller: UINavigationController?){
+        guard let nController = navigationConroller else{
+            return
+        }
+        nController.popViewController(animated: true)
     }
     
 }

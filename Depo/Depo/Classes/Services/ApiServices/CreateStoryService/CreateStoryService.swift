@@ -11,12 +11,25 @@ import SwiftyJSON
 
 struct CreateStoryPath {
     
-    static let createStory = "/api/slideshow/create"
+    static let createStory  = "/api/slideshow/create"
     
-    static let preview = "/api/slideshow/preview"
+    static let preview      = "/api/slideshow/previewUrl"
     
-    static let audioList = "api/slideshow/audio/list?language=%@"
+    static let audioList    = "api/slideshow/audio/list?language=%@"
     
+}
+
+struct CreateStoryPropertyName {
+    static let imageUUIDs   = "imageUUIDs"
+    static let name         = "name"
+    static let audioId      = "audioId"
+    static let audioUUID    = "audioUUID"
+    static let idString     = "id"
+    static let fileName     = "fileName"
+    static let type         = "type"
+    static let path         = "path"
+    static let downloadUrl  = "downloadUrl"
+    static let uuid         = "uuid"
 }
 
 class CreateStory: BaseRequestParametrs {
@@ -33,13 +46,13 @@ class CreateStory: BaseRequestParametrs {
     }
     
     override var requestParametrs: Any {
-        var param:[String : Any] =  ["imageUUIDs":imageUUids,
-                                     "name"    :title]
+        var param:[String : Any] =  [CreateStoryPropertyName.imageUUIDs: imageUUids,
+                                     CreateStoryPropertyName.name    :title]
         if let id = musicId {
-            param = param + ["audioId":id]
+            param = param + [CreateStoryPropertyName.audioId :id]
         }
         if let id = audioUuid {
-            param = param + ["audioUUID":id]
+            param = param + [CreateStoryPropertyName.audioUUID :id]
         }
         return param
     }
@@ -89,10 +102,10 @@ class CreateStoryMusicItem: ObjectRequestResponse  {
     var path: URL?
     
     override func mapping() {
-        id = json?["id"].int64
-        fileName = json?["fileName"].string
-        type = json?["type"].string
-        path = json?["path"].url
+        id          = json?[CreateStoryPropertyName.idString].int64
+        fileName    = json?[CreateStoryPropertyName.fileName].string
+        type        = json?[CreateStoryPropertyName.type].string
+        path        = json?[CreateStoryPropertyName.path].url
     }
 }
 
@@ -115,6 +128,7 @@ class PreviewResponse: ObjectRequestResponse  {
     required init(withJSON: JSON?) {
         fatalError("init(withJSON:) has not been implemented")
     }
+    
 }
 
 class CreateStoryMusicService: RemoteItemsService {
@@ -147,7 +161,7 @@ class CreateStoryMusicService: RemoteItemsService {
 }
 
 typealias CreateStorSuccess = () -> Swift.Void
-typealias GetPreviewStorrySyccess = () -> Swift.Void
+typealias GetPreviewStorrySyccess = (_ responce: CreateStoryResponce) -> Swift.Void
 
 class CreateStoryService: BaseRequestService {
     
@@ -161,13 +175,18 @@ class CreateStoryService: BaseRequestService {
                 let erorr: Error = NSError(domain: "Create story ", code: -6000, userInfo: nil)
                 fail?(.error(erorr))
             }
-            }, fail: fail)
+        }, fail: fail)
         executePostRequest(param: createStory, handler: handler)
     }
     
     func getPreview(preview: CreateStoryPreview, success: @escaping GetPreviewStorrySyccess, fail: @escaping FailResponse ) {
-        let  handler = BaseResponseHandler< PreviewResponse, ObjectRequestResponse>(success: {  resp  in
-            success()
+        let  handler = BaseResponseHandler<CreateStoryResponce , ObjectRequestResponse>(success: {  resp  in
+            if let responce = resp as? CreateStoryResponce{
+                success(responce)
+            }else{
+                let erorr: Error = NSError(domain: "Create story ", code: -6000, userInfo: nil)
+                fail(.error(erorr))
+            }
         }, fail: { _  in
             let erorr: Error = NSError(domain: "Create story ", code: -6000, userInfo: nil)
             fail(.error(erorr))

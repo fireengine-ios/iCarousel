@@ -30,6 +30,16 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
         asyncOperationSucces()
     }
     
+    func needSendOTP(responce: SignUpSuccessResponse, userInfo: AccountInfoResponse){
+        if let navigationController = view.getNavigationController(){
+            router.needSendOTP(responce: responce, userInfo: userInfo, navigationController: navigationController)
+        }
+    }
+    
+    func showError(error: String){
+        CustomPopUp.sharedInstance.showCustomAlert(withText: error, okButtonText: TextConstants.ok)
+    }
+    
     //view out
     
     func viewIsReady() {

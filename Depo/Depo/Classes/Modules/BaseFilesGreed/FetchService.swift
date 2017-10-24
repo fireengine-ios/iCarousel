@@ -64,12 +64,7 @@ class FetchService: NSObject {
         fetchRequest_.sortDescriptors = sortingAgrifate.sortDescriptors
         fetchRequest_.predicate = prediicate
         
-        //FIXME: this implementation just a walk around, not a solution
-        var keyPathName: String? = nil
-        if ProcessInfo().isOperatingSystemAtLeast(OperatingSystemVersion(majorVersion: 9, minorVersion: 0, patchVersion: 0)) {
-            keyPathName = sortingAgrifate.section
-        }
-        //
+        let keyPathName = sortingAgrifate.section
         
         let context = CoreDataStack.default.mainContext
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest_,
@@ -88,7 +83,7 @@ class FetchService: NSObject {
         }
     }
     
-    func performFetch(sortingRules : SortedRules,
+    func performFetch(sortingRules: SortedRules,
                       filtes:[GeneralFilesFiltrationType]? = nil,
                       delegate:NSFetchedResultsControllerDelegate? = nil) {
         

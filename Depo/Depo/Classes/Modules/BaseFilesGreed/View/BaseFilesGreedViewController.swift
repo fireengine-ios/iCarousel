@@ -101,15 +101,15 @@ class BaseFilesGreedViewController: UIViewController, BaseFilesGreedViewInput, G
         editingTabBar?.view.layoutIfNeeded()
         
         if mainTitle != "" {
-            self.subTitle = output.getSortTypeString()
+            subTitle = output.getSortTypeString()
         }
         output.viewWillAppear()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        WrapItemOperatonManager.default.addViewForNotification(view: scrolliblePopUpView)
         homePageNavigationBarStyle()
         configureNavBarActions()
+        WrapItemOperatonManager.default.addViewForNotification(view: scrolliblePopUpView)
     }
 
     override func viewWillDisappear(_ animated: Bool) {

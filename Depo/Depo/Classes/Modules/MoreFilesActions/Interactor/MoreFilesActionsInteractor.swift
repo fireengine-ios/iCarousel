@@ -10,6 +10,8 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
     
     weak var output: MoreFilesActionsInteractorOutput?
     private var fileService = WrapItemFileService()
+    
+    let player: MediaPlayer = factory.resolve()
 
     typealias FailResponse = (_ value: ErrorResponse) -> Swift.Void
     
@@ -55,6 +57,8 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
     
     private func deleteItems(items: [Item]) {
         output?.operationStarted(type: .delete)
+        player.remove(listItems: items)
+//        SingleSong.default.remove(items: items)
         fileService.delete(deleteFiles: items,
                            success: succesAction(elementType: .delete),
                            fail: failAction(elementType: .delete))
@@ -179,7 +183,9 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
     // Photo Action
     
     func addToAlbum(items: [BaseDataSourceItem]) {
-        
+        let router = RouterVC()
+        let vc = router.addPhotosToAlbum(photos: items)
+        router.pushViewController(viewController: vc)
     }
     
     func backUp(items: [BaseDataSourceItem]) {
@@ -239,7 +245,7 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
     }
     
     func downloadToCmeraRoll(items: [BaseDataSourceItem]) {
-        
+        download(item: items)
     }
     
     func succesAction(elementType: ElementTypes) -> FileOperation {

@@ -78,4 +78,9 @@ class AccountService: BaseRequestService, AccountServicePrl {
         let handler = BaseResponseHandler<SignUpSuccessResponse, SignUpFailResponse>(success: success, fail: fail)
         executePostRequest(param: parameters, handler: handler)
     }
+    
+    func verifyPhoneNumber(parameters: VerifyPhoneNumberParameter, success: SuccessResponse?, fail: @escaping FailResponse) {
+        let handler = BaseResponseHandler<SignUpSuccessResponse, SignUpFailResponse>(success: success, fail: fail)
+        executePostRequest(param: parameters, handler: handler)
+    }
 }

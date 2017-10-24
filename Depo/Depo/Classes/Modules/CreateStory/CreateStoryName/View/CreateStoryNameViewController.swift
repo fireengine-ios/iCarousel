@@ -15,7 +15,7 @@ class CreateStoryNameViewController: BaseViewController, CreateStoryNameViewInpu
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var storyNameTextField: UITextField!
-    @IBOutlet weak var saveButton: BlueButtonWithWhiteText!
+    @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
 
     // MARK: Life cycle
@@ -32,6 +32,8 @@ class CreateStoryNameViewController: BaseViewController, CreateStoryNameViewInpu
         storyNameTextField.font = UIFont.TurkcellSaturaRegFont(size: 20)
         
         saveButton.setTitle(TextConstants.createStoryNameSave, for: .normal)
+        saveButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
+        saveButton.setTitleColor(ColorConstants.blueColor, for: .normal)
         
         output.viewIsReady()
     }
@@ -80,8 +82,8 @@ class CreateStoryNameViewController: BaseViewController, CreateStoryNameViewInpu
             let dy = keyboardHeight - (view.frame.size.height - y)
             scrollView.contentInset = UIEdgeInsetsMake(0, 0, dy + 10, 0)
             
-            let yText = storyNameTextField.frame.size.height + getMainYForView(view: storyNameTextField)
-            let dyText = keyboardHeight - (view.frame.size.height - yText) + 10
+            //let yText = storyNameTextField.frame.size.height + getMainYForView(view: storyNameTextField)
+            let dyText = keyboardHeight - (view.frame.size.height - y) + 10
             if (dyText > 0){
                 let point = CGPoint(x: 0, y: dyText)
                 scrollView.setContentOffset(point, animated: true)

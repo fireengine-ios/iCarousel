@@ -13,5 +13,5 @@ protocol VisualMusicPlayerViewInput: class {
         Setup initial state of the view
     */
 
-    func setupInitialState()
+//    func setupInitialState()
 }

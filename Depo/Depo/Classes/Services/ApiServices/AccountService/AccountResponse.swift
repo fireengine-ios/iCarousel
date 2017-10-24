@@ -25,6 +25,8 @@ struct AccountJSONConstants {
     static let emailVerified = "emailVerified"
     static let username = "username"
     static let url = "url"
+    static let otp = "otp"
+    static let referenceToken = "referenceToken"
     
     static let quotaBytes = "quotaBytes"
     static let quotaExceeded = "quotaExceeded"

@@ -22,6 +22,7 @@ struct AccountPath {
     static let updateUserName = accountBase + "nameSurname"
     static let updateUserEmail = accountBase + "email"
     static let updatePhoneNumber = accountBase + "updatePhoneNumber"
+    static let verifyPhoneNumber = accountBase + "verifyPhoneNumberToUpdate"
     
     static let updateLanguage = accountBase + "language"
     static let languageList = updateLanguage + "/list"
@@ -85,6 +86,27 @@ class UserPhoneNumberParameters: BaseRequestParametrs{
     override var patch: URL {
         return URL(string: AccountPath.updatePhoneNumber, relativeTo:super.patch)!
     }
+}
+
+class VerifyPhoneNumberParameter: BaseRequestParametrs{
+    let otp: String?
+    let referenceToken: String?
+    
+    init(otp: String, referenceToken: String){
+        self.otp = otp
+        self.referenceToken = referenceToken
+    }
+    
+    override var requestParametrs: Any{
+        let dict: [String: String] = [AccountJSONConstants.otp: otp ?? "",
+                                      AccountJSONConstants.referenceToken: referenceToken ?? ""]
+        return dict
+    }
+    
+    override var patch: URL {
+        return URL(string: AccountPath.verifyPhoneNumber, relativeTo:super.patch)!
+    }
+    
 }
 
 class LanguageList: BaseRequestParametrs {

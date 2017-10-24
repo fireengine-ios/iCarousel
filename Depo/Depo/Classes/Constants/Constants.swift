@@ -312,8 +312,9 @@ struct TextConstants {
     //MARK: Create story Name
     static let createStoryNameTitle = "Create a Name"
     static let createStoryNamePlaceholder = "Name"
-    static let createStoryNameSave = "Save"
+    static let createStoryNameSave = "SAVE"
     static let createStoryEmptyTextError = "Sorry, but story name should not be empty"
+    static let createStorySelectAudioButton = "Continue"
     
     //MARK: Create story Photos
     static let createStoryPhotosTitle = "Photo selection"
@@ -326,9 +327,12 @@ struct TextConstants {
     
     //MARK: Create story Audio
     static let createStoryNoSelectedAudioError = "Sorry, but story audio should not be empty"
+    static let createStoryAudioSelected = "Add Music"
+
     
     //MARK: Create story Photo Order
     static let createStoryPhotosOrderNextButton = "Create"
+    static let createStorySave = "Save"
     static let createStoryPhotosOrderTitle = "You can change the sequence "
     
     //MARK: Upload 
@@ -344,6 +348,7 @@ struct TextConstants {
     static let selectFolderBackButton = "Back"
     static let selectFolderEmptySelectionError = "Need to select folder"
     static let selectFolderEmptySelectionErrorOK = "Ok"
+    static let selectFolderTitle = "Choose a destination folder"
 
      //MARK: - TabBar tab lables
     static let home = "Home"
@@ -486,6 +491,11 @@ struct TextConstants {
     static let offersOk = "OK"
     static let offersSettings = "Settings"
     static let offersPrice = "%f ₺ / month"
+    
+    // MARK: - OTP
+    static let otpNextButton = "Next"
+    static let otpResendButton = "Resend"
+    static let otpTitleText = "Enter the verification code\nsent to your number %@"
     
     // MARK: - Errors
     static let errorEmptyEmail = "Indicates that the e-mail parameter is sent blank."

@@ -21,5 +21,6 @@ class FileListResponse: ObjectRequestResponse {
             return
         }
         fileList = list.flatMap{ WrapData(remote: SearchItemResponse(withJSON: $0) ) }
+        CoreDataStack.default.appendOnlyNewItems(items: fileList)
     }
 }

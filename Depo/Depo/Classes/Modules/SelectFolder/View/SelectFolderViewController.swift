@@ -43,23 +43,16 @@ class SelectFolderViewController: BaseFilesGreedChildrenViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        navigationItem.leftBarButtonItem = nil
-        if let folder = selectedFolder {
-            if let name = folder.name{
-                navigationItem.titleView = setNavigationTitle(title: name, subtitle: "")
-            }
-        }
         
+        setTitle(withString: TextConstants.selectFolderTitle, andSubTitle: selectedFolder?.name)
         
-        if (cancelSelectBlock != nil){
-            
+        if (cancelSelectBlock != nil) {
+            navigationItem.leftBarButtonItem = nil
             let barButtonLeft = UIBarButtonItem(customView: cancelButton)
-            
             navigationItem.leftBarButtonItem = barButtonLeft
-        }else{
-            showBackButton()
         }
-        if (selectedFolder != nil){
+        
+        if (selectedFolder != nil) {
             showRightButton()
         }
     }

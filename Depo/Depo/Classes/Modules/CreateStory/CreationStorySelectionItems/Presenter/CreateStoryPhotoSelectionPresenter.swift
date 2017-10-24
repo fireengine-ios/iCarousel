@@ -17,6 +17,7 @@ class CreateStoryPhotoSelectionPresenter: BaseFilesGreedPresenter, CreateStorySe
         dataSource.enableSelectionOnHeader = false
         dataSource.setSelectionState(selectionState: true)
         dataSource.updateDisplayngType(type: .greed)
+        dataSource.preferedCellReUseID = CollectionViewCellsIdsConstant.cellForStoryImage
     }
     
     override func viewWillDisappear() {
@@ -45,7 +46,7 @@ class CreateStoryPhotoSelectionPresenter: BaseFilesGreedPresenter, CreateStorySe
             story.storyPhotos = wrapArray
             
             if let rout = router as? CreateStorySelectionRouter{
-                rout.goToSelectionAudioFor(story: story)
+                rout.goToSelectionOrderPhotosFor(story: story)
             }
         }else{
             custoPopUp.showCustomAlert(withText: TextConstants.createStoryNoSelectedPhotosError, okButtonText: TextConstants.createFolderEmptyFolderButtonText)

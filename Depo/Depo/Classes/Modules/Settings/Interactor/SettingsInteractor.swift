@@ -22,7 +22,8 @@ class SettingsInteractor: SettingsInteractorInput {
     func onLogout(){
         let authService = AuthenticationService()
         authService.logout {
-            DispatchQueue.main.async {[weak self] in
+            DispatchQueue.main.async { [weak self] in
+                CoreDataStack.default.clearDataBase()
                 self?.output.goToOnboarding()
             }
         }

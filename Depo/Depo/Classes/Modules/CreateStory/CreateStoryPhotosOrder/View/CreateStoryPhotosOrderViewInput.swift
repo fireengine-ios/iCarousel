@@ -17,4 +17,6 @@ protocol CreateStoryPhotosOrderViewInput: class {
     
     func showStory(story: PhotoStory)
     
+    func getNavigationControllet() -> UINavigationController?
+    
 }

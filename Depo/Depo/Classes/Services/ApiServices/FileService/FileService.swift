@@ -274,7 +274,6 @@ class FileService: BaseRequestService {
     }
     
     func delete(deleteFiles: DeleteFiles, success: FileOperation?, fail:FailResponse?) {
-        
         let handler = BaseResponseHandler<ObjectRequestResponse,ObjectRequestResponse>(success: { _  in
             success?()
         }, fail: fail)

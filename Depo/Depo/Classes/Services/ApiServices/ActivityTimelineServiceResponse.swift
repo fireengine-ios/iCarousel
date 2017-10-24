@@ -24,6 +24,10 @@ class ActivityTimelineServiceResponse: ObjectRequestResponse {
         static let fileSize = "fileSize"
         static let isFolder = "isFolder"
         static let deviceUUID = "deviceUUID"
+        
+        static let fileInfo = "fileInfo"
+        static let contentType = "content_type"
+        
     }
     
     var id: Int?
@@ -46,9 +50,15 @@ class ActivityTimelineServiceResponse: ObjectRequestResponse {
         if let type = json?[ActivityTimelineJsonKey.activityType].string {
             activityType = ActivityType(rawValue: type)
         }
-        if let fileType = json?[ActivityTimelineJsonKey.activityFileType].string {
+
+        if let fileType = json?[ActivityTimelineJsonKey.fileInfo][ActivityTimelineJsonKey.contentType].string {
             activityFileType = ActivityFileType(rawValue: fileType)
         }
+        
+        if activityFileType == nil, let fileType = json?[ActivityTimelineJsonKey.activityFileType].string {
+            activityFileType = ActivityFileType(rawValue: fileType)
+        }
+        
         fileUUID = json?[ActivityTimelineJsonKey.fileUUID].string
         parentFolderUUID = json?[ActivityTimelineJsonKey.parentFolderUUID].string
         targetFolderUUID = json?[ActivityTimelineJsonKey.targetFolderUUID].string
@@ -58,6 +68,11 @@ class ActivityTimelineServiceResponse: ObjectRequestResponse {
         fileSize = json?[ActivityTimelineJsonKey.fileSize].int
         isFolder = json?[ActivityTimelineJsonKey.isFolder].bool
         deviceUUID = json?[ActivityTimelineJsonKey.deviceUUID].string
+        
+        if name == nil {
+            name = json?[ActivityTimelineJsonKey.fileInfo][ActivityTimelineJsonKey.name].string
+        }
+        
     }
 }
 

@@ -49,7 +49,7 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
                         self?.output.getContentWithSuccess()
                     }
                 }
-            }, fail: { })
+            }, fail: { self.output.asyncOperationFail(errorMessage: nil) })
     }
 
     func needShowNoFileView()-> Bool{
