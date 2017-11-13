@@ -10,4 +10,6 @@ protocol MoreFilesActionsInteractorOutput: class {
     func operationFinished(type: ElementTypes)//add type?
     func operationFailed(type: ElementTypes, message: String)
     func operationStarted(type: ElementTypes)
+    
+    func dismiss(animated: Bool)
 }
