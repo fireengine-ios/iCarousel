@@ -156,10 +156,10 @@ extension UIViewController {
         
         if let _ = subTitle {
             navigationItem.title = nil
-            navBar?.subviews[0].viewWithTag(tagTitleView)?.removeFromSuperview()
+            navBar?.viewWithTag(tagTitleView)?.removeFromSuperview()
             let delta: CGFloat = 50.0
             let weihth = Device.winSize.width - delta*2.0
-            let mainTitleLabel = UILabel(frame: CGRect(x: delta, y: 20, width: weihth, height: 40))
+            let mainTitleLabel = UILabel(frame: CGRect(x: delta, y: 0, width: weihth, height: 40))
             mainTitleLabel.backgroundColor = UIColor.clear
             mainTitleLabel.numberOfLines = 2
             mainTitleLabel.textAlignment = .center
@@ -170,9 +170,9 @@ extension UIViewController {
             attributtedText.addAttributes([NSAttributedStringKey.font : UIFont.TurkcellSaturaMedFont(size: 12.0)], range: NSMakeRange((title as NSString).length + 1, (subTitle as NSString).length))
             mainTitleLabel.attributedText = attributtedText
             mainTitleLabel.tag = tagTitleView
-            navBar?.subviews[0].addSubview(mainTitleLabel)
+            navBar?.addSubview(mainTitleLabel)
         } else {
-            self.navBar?.subviews[0].viewWithTag(tagTitleView)?.removeFromSuperview()
+            self.navBar?.viewWithTag(tagTitleView)?.removeFromSuperview()
             self.navigationItem.title = title
         }
     }
