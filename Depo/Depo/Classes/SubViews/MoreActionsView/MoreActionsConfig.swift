@@ -25,13 +25,15 @@ enum SortedRules: Int {
     case sizeZA = 6
     case albumlettersAZ = 7
     case albumlettersZA = 8
+    case timeUpWithoutSection = 9
+    case timeDownWithoutSection = 10
     
     var stringValue: String {
         switch self {
-        case .timeUp:
+        case .timeUp, .timeUpWithoutSection:
             return TextConstants.sortTimeNewOldTitle
             
-        case .timeDown:
+        case .timeDown, .timeDownWithoutSection:
             return TextConstants.sortTimeOldNewTitle
             
         case .lettersAZ:
@@ -56,7 +58,7 @@ enum SortedRules: Int {
     
     var sortingRules: SortType{
         switch self {
-        case .timeUp, .timeDown:
+        case .timeUp, .timeDown, .timeUpWithoutSection, .timeDownWithoutSection:
             return .date
         case .lettersAZ, .lettersZA:
             return .name
@@ -69,9 +71,9 @@ enum SortedRules: Int {
     
     var sortOder: SortOrder{
         switch self {
-        case .timeUp, .lettersAZ, .sizeAZ, .albumlettersAZ:
+        case .timeUp, .timeUpWithoutSection, .lettersAZ, .sizeAZ, .albumlettersAZ:
             return .desc
-        case .timeDown, .lettersZA, .sizeZA, .albumlettersZA:
+        case .timeDown, .timeDownWithoutSection, .lettersZA, .sizeZA, .albumlettersZA:
             return .asc
         }
     }
@@ -99,12 +101,12 @@ class MoreActionsConfig {
         func convertToSyncWrapperedStatus() -> SyncWrapperedStatus {
             
             switch self {
-                case .notSync:
-                    return .notSynced
-                case .sync:
-                    return .synced
-                case.all:
-                    return .synced
+            case .notSync:
+                return .notSynced
+            case .sync:
+                return .synced
+            case.all:
+                return .synced
             }
         }
     }
@@ -227,8 +229,8 @@ class MoreActionsConfig {
                 return TextConstants.fileTypeDocsTitle
             case .Photo:
                 return TextConstants.fileTypePhotosTitle
-//            case .All:
-//                return TextConstants.file
+                //            case .All:
+            //                return TextConstants.file
             case .Album:
                 return TextConstants.fileTypeAlbumTitle
             case .Folder:
@@ -254,9 +256,9 @@ class MoreActionsConfig {
                 return .folder
                 
             case .Docs:
-                // don't use only 
+                // don't use only
                 return .unknown
-            
+                
             case .All:
                 return .unknown
                 
