@@ -189,7 +189,7 @@ class PhotoVideoDetailViewController: UIViewController, PhotoVideoDetailViewInpu
     
     func setupTitle(){
         let obj = objects[selectedIndex]
-        self.navigationItem.title = obj.name
+        self.setTitle(withString: obj.name ?? "")
     }
     
     func setVisibilityOfNotVisibleViws(visibility: Bool){
