@@ -7,112 +7,64 @@
 //
 
 import Foundation
-import SwiftyJSON
+import ObjectiveDropboxOfficial
 
-enum DropboxStatusValue: String  {
-    case pending = "PENDING"
-    case running = "RUNNING"
-    case failed = "FAILED"
-    case waitingAction = "WAITING_ACTION"
-    case scheduled = "SCHEDULED"
-    case finished = "FINISHED"
-    case cancelled = "CANCELLED"
-    case none = ""
+enum DropboxManagerResult {
+    case success(String)
+    case cancel
+    case failed(String)
 }
-struct DropboxStatusResponseKey {
-    static let quotaValid = "quotaValid"
-    static let connected = "connected"
-    static let failedSize = "failedSize"
-    static let failedCount = "failedCount"
-    static let progress = "progress"
-    static let successSize = "successSize"
-    static let successCount = "successCount"
-    static let skippedCount = "skippedCount"
-    static let totalSize = "totalSize"
-    static let status = "status"
-    static let date = "date"
-}
+typealias DropboxLoginHandler = (DropboxManagerResult) -> Void
 
-class DropboxStatusObject: ObjectRequestResponse {
-    var isQuotaValid: Bool?
-    var connected: Bool?
-    var failedSize: Int?
-    var failedCount: Int?
-    var successSize: Int?
-    var successCount: Int?
-    var progress: Int?
-    var skippedCount: Int?
-    var totalSize: Int?
-    var status: DropboxStatusValue!
-    var date: Date?
+final class DropboxManager {
     
-    override func mapping() {
-        isQuotaValid = json?[DropboxStatusResponseKey.quotaValid].bool
-        connected = json?[DropboxStatusResponseKey.connected].bool
-        failedSize = json?[DropboxStatusResponseKey.failedSize].int
-        failedCount = json?[DropboxStatusResponseKey.failedCount].int
-        progress = json?[DropboxStatusResponseKey.progress].int
-        successSize = json?[DropboxStatusResponseKey.successSize].int
-        successCount = json?[DropboxStatusResponseKey.successCount].int
-        skippedCount = json?[DropboxStatusResponseKey.skippedCount].int
-        totalSize = json?[DropboxStatusResponseKey.totalSize].int
-        status = DropboxStatusValue(rawValue: (json?[DropboxStatusResponseKey.status].string) ?? "")
-        date = json?[DropboxStatusResponseKey.date].date
-    }
-}
-
-class DropboxAuth: BaseRequestParametrs {
-    private let consumerKey: String
-    private let currentToken: String
-    private let appSecret: String
-    private let authTokenSecret: String
-    
-    override var patch: URL {
-        return RouteRequests.dropboxAuthUrl
+    func start() {
+        DBClientsManager.setup(withAppKey: "422fptod5dlxrn8")
     }
     
-    override var header: RequestHeaderParametrs {
-        let param = String(format: "OAuth oauth_version=\"1.0\", oauth_signature_method=\"PLAINTEXT\", oauth_consumer_key=\"%@\", oauth_token=\"%@\", oauth_signature=\"%@&%@\"", consumerKey, currentToken, appSecret, authTokenSecret)
-        return [HeaderConstant.Authorization :param]
+    func handleRedirect(url: URL) -> Bool {
+        guard let dbResult = DBClientsManager.handleRedirectURL(url) else {
+            return false
+        }
+        
+        print(dbResult)
+        if dbResult.isSuccess() {
+            handler?(.success(dbResult.accessToken.accessToken))
+            print("Success! User is logged into Dropbox.")
+        } else if dbResult.isCancel() {
+            handler?(.cancel)
+            print("Authorization flow was manually canceled by user!")
+        } else if dbResult.isError() {
+            handler?(.failed(dbResult.description()))
+            print("Error: \(dbResult)")
+        }
+        
+        return true
     }
     
-    init(withCurrentToken currentToken: String, withConsumerKey consumerKey: String, withAppSecret appSecret: String, withAuthTokenSecret authTokenSecret: String) {
-        self.consumerKey = consumerKey
-        self.currentToken = currentToken
-        self.appSecret = appSecret
-        self.authTokenSecret = authTokenSecret
-    }
-}
-
-class DropboxConnect: BaseRequestParametrs {
-    private let token: String
+    var handler: DropboxLoginHandler?
     
-    override var patch: URL {
-        let patch_ = String(format: RouteRequests.dropboxConnect, token)
-        return  URL(string: patch_, relativeTo:RouteRequests.BaseUrl)!
+    func login(handler: @escaping DropboxLoginHandler) {
+        if let token = DBOAuthManager.shared()?.retrieveFirstAccessToken()?.accessToken {
+            handler(.success(token))
+            return
+        }
+        self.handler = handler
+        guard let vc = (UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController else {
+            return
+        }
+        DBClientsManager.authorize(fromController: UIApplication.shared, controller: vc) { url in
+            UIApplication.shared.openURL(url)
+        }
     }
     
-    init(withToken token: String) {
-        self.token = token
-    }
-}
-
-class DropboxStatus: BaseRequestParametrs {
-    
-    override var patch: URL {
-        return URL(string: RouteRequests.dropboxStatus, relativeTo: super.patch)!
-    }
-}
-
-class DropboxStart: BaseRequestParametrs {
-    
-    override var patch: URL {
-        return URL(string: RouteRequests.dropboxStart, relativeTo: super.patch)!
+    func logout() {
+        DBOAuthManager.shared()?.clearStoredAccessTokens()
     }
 }
 
 class DropboxService: BaseRequestService {
-   
+    
     func requestToken(withCurrentToken currentToken: String, withConsumerKey consumerKey: String, withAppSecret appSecret: String, withAuthTokenSecret authTokenSecret: String, success: SuccessResponse?, fail: FailResponse?) {
         let dropbox = DropboxAuth(withCurrentToken: currentToken, withConsumerKey: consumerKey, withAppSecret: appSecret, withAuthTokenSecret: authTokenSecret)
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: success, fail: fail)

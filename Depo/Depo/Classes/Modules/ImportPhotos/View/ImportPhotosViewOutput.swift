@@ -11,35 +11,27 @@ import Foundation
 // MARK: - Facebook
 
 protocol ImportFromFBViewOutput {
-    
-    func requestPermissions()
-
-    func requestToken(permissions: [String])
-    
-    func requestConnect(withToken token: String)
-        
-    func requestStatus()
-    
-    func requestStart()
-
-    func requestStop()
-
-    func onLogout()
+    func viewIsReady()
+    func startFacebook()
+    func stopFacebook()
 }
 
 // MARK: - Dropbox
 
 protocol ImportFromDropboxViewOutput {
     
-    func requestToken(withCurrentToken currentToken: String, withConsumerKey consumerKey: String, withAppSecret appSecret: String, withAuthTokenSecret authTokenSecret: String)
+    func viewIsReady()
+    func startDropbox()
     
-    func requestConnect(withToken token: String)
-    
-    func requestStatusForStart()
-    
-    func requestStatus()
-    
-    func requestStart()
-    
-    func onLogout()
+//    func requestToken(withCurrentToken currentToken: String, withConsumerKey consumerKey: String, withAppSecret appSecret: String, withAuthTokenSecret authTokenSecret: String)
+//
+//    func requestConnect(withToken token: String)
+//
+//    func requestStatusForStart()
+//
+//    func requestStatus()
+//
+//    func requestStart()
+//
+//    func onLogout()
 }

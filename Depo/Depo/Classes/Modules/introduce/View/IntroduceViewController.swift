@@ -25,26 +25,14 @@ class IntroduceViewController: UIViewController, IntroduceViewInput {
         scrollView.delegate = dataSource
         dataSource.scrollView = scrollView
         dataSource.pageControll = pageControll
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         configurateView()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         output.viewIsReady()
     }
     
     func configurateView(){
-        
         hidenNavigationBarStyle()
-        startUsingLifeBoxButton.setTitle(TextConstants.itroViewGoToRegisterButtonText,
-                                         for: UIControlState.normal)
-        
-        haveAccountButton.setTitle(TextConstants.introViewGoToLoginButtonText,
-                                   for: UIControlState.normal)
+        startUsingLifeBoxButton.setTitle(TextConstants.itroViewGoToRegisterButtonText, for: .normal)
+        haveAccountButton.setTitle(TextConstants.introViewGoToLoginButtonText, for: .normal)
         backButtonForNavigationItem(title: TextConstants.backTitle)
     }
 

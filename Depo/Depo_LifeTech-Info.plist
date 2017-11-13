@@ -34,7 +34,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.4.2</string>
+	<string>1.5.6</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -55,9 +55,9 @@
 	<string>lifebox</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
-		<string>fbapi</string>
 		<string>dbapi-2</string>
 		<string>dbapi-8-emm</string>
+        <string>fbapi</string>
 		<string>fb-messenger-api</string>
 		<string>fbauth2</string>
 		<string>fbshareextension</string>
@@ -85,6 +85,8 @@
 	<string></string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Your location will be used for background syncing</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Need access to save your photo</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string></string>
 	<key>UIAppFonts</key>

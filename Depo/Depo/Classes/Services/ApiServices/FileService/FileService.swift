@@ -22,6 +22,8 @@ struct FilePatch  {
     static let metaData = "/api/filesystem/metadata"
 }
 
+
+
 class CreatesFolder: BaseRequestParametrs {
     
     let folderName: String
@@ -382,48 +384,6 @@ class FileService: BaseRequestService {
         }
     }
     
-    class DownLoadOperation: Operation {
-
-        let success: FileOperation?
-        
-        let fail: FailResponse?
-        
-        let param: BaseDownloadRequestParametrs
-        
-        private let semaphore: DispatchSemaphore
-        
-        init(downloadParam: BaseDownloadRequestParametrs, success: FileOperation?, fail:FailResponse?) {
-            self.param = downloadParam
-            self.success = success
-            self.fail = fail
-            self.semaphore = DispatchSemaphore(value: 0)
-            super.init()
-        }
-        
-        override func main() {
-            
-            if isCancelled {
-                return
-            }
-            FileService().downloadToCameraRoll(downloadParam: param, success: {
-                self.customSuccess()
-            }) { (error) in
-                self.customFail(error)
-            }
-            semaphore.wait()
-        }
-        
-        func customSuccess(){
-            success?()
-            semaphore.signal()
-        }
-        
-        func customFail(_ value: ErrorResponse){
-            fail?(value)
-            semaphore.signal()
-        }
-    }
-    
     func detail(uuids: String, success: FileOperation?, fail:FailResponse?) {
         let param = FileDetail(uuid: uuids)
         let handler = BaseResponseHandler<DetailResponse, ObjectRequestResponse>(success: {  detail  in
@@ -453,13 +413,18 @@ class FileService: BaseRequestService {
         executePostRequest(param: param, handler: handler)
     }
     
-    func filesList(rootFolder:String = "", sortBy: SortType, sortOrder: SortOrder, folderOnly: Bool = false, success: ListRemoveItems?, fail: FailRemoteItems?) {
-        
-        let requestParam = FileList(rootDir:rootFolder,
+    private var page = 0
+    private let size = 100
+    
+    func filesList(rootFolder: String = "", sortBy: SortType, sortOrder: SortOrder,
+                   folderOnly: Bool = false, remoteServicePage: Int,
+                   success: ListRemoveItems?, fail: FailRemoteItems?) {
+        page = remoteServicePage
+        let requestParam = FileList(rootDir: rootFolder,
                                     sortBy: sortBy,
                                     sortOrder: sortOrder,
-                                    page: 0,
-                                    size: 9999,
+                                    page: page,
+                                    size: size,
                                     folderOnly: folderOnly)
         let handler = BaseResponseHandler<FileListResponse, ObjectRequestResponse>(success: { (response) in
             guard let resultResponse = (response as? FileListResponse)?.fileList else {
@@ -467,11 +432,53 @@ class FileService: BaseRequestService {
                 return
             }
             success?(resultResponse)
-        },
-                                                                       fail: { (error) in
-                                                                        fail?()
+//            self.page += 1
+        }, fail: { (error) in
+            fail?()
         })
         
         executeGetRequest(param: requestParam, handler: handler)
+    }
+}
+
+class DownLoadOperation: Operation {
+    
+    let success: FileOperation?
+    
+    let fail: FailResponse?
+    
+    let param: BaseDownloadRequestParametrs
+    
+    private let semaphore: DispatchSemaphore
+    
+    init(downloadParam: BaseDownloadRequestParametrs, success: FileOperation?, fail:FailResponse?) {
+        self.param = downloadParam
+        self.success = success
+        self.fail = fail
+        self.semaphore = DispatchSemaphore(value: 0)
+        super.init()
+    }
+    
+    override func main() {
+        
+        if isCancelled {
+            return
+        }
+        FileService().downloadToCameraRoll(downloadParam: param, success: {
+            self.customSuccess()
+        }) { (error) in
+            self.customFail(error)
+        }
+        semaphore.wait()
+    }
+    
+    func customSuccess(){
+        success?()
+        semaphore.signal()
+    }
+    
+    func customFail(_ value: ErrorResponse){
+        fail?(value)
+        semaphore.signal()
     }
 }

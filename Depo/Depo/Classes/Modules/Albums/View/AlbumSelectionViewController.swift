@@ -32,6 +32,9 @@ class AlbumSelectionViewController: BaseFilesGreedChildrenViewController {
         
     }
     
+    ///need override this method for correct configuration UINavigationBar
+    override func configureNavBarActions() {}
+    
     @objc func onNextButton(){
         output.onNextButton()
     }

@@ -8,11 +8,16 @@
 
 import Foundation
 
+protocol SearchModuleOutput: class {
+    func cancelSearch()
+    func previewSearchResultsHide()
+}
+
 class SearchViewInitializer {
-    class func initializeAllFilesViewController(with nibName:String) -> UIViewController {
+    class func initializeAllFilesViewController(with nibName:String, output: SearchModuleOutput?) -> UIViewController {
         let viewController = SearchViewController(nibName: nibName, bundle: nil)
         let configurator = SearchViewConfigurator()
-        configurator.configure(viewController: viewController, remoteServices: RemoteSearchService(requestSize: 100))
+        configurator.configure(viewController: viewController, remoteServices: RemoteSearchService(requestSize: 100), output: output)
         return viewController
     }
 }

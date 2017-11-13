@@ -55,6 +55,28 @@ class LoadingImageView: UIImageView {
         }
     }
     
+    func loadImage(with object: Item?, isOriginalImage: Bool) {
+        
+        self.image = nil
+        guard let object = object else {
+            checkIsNeedCancelRequest()
+            activity.stopAnimating()
+            return
+        }
+        
+        activity.startAnimating()
+        let path_: PathForItem = PathForItem.remoteUrl(url)
+        path = path_
+        FilesDataSource().getImage(for: object, isOriginal: isOriginalImage) { [weak self] image in
+            if self?.path == path_{
+                self?.activity.stopAnimating()
+                self?.image = image
+                self?.path = nil
+                self?.delegate?.onImageLoaded()
+            }
+        }
+    }
+    
     func loadImageByURL(url: URL?){
         self.image = nil
         if (url == nil) {

@@ -68,7 +68,35 @@ enum FileType: Equatable {
     case folder
     case photoAlbum
     case musicPlayList
+    case allDocs
     case application(ApplicationType)
+    
+    var convertedToSearchFieldValue: FieldValue {
+        
+        switch self {
+//        case unknown:
+//        case folder:
+        case .image:
+            return .image
+        case .video:
+            return .video
+        case .audio:
+            return .audio
+        
+            
+        case .photoAlbum:
+            return .albums
+        case .musicPlayList:
+            return .playLists
+        case .allDocs:
+            return .document
+        case .application(_):
+            return .document //FIXME: temporary documents
+        default:
+            return .all
+        }
+        
+    }
     
     var isApplication: Bool {
         return true
@@ -270,6 +298,8 @@ enum FileType: Equatable {
             return 17
         case .application(.ppt):
             return 18
+        case .allDocs:
+            return 19
         }
     }
     
@@ -366,7 +396,7 @@ protocol  Wrappered  {
     
     var md5: String { get set }
     
-    var album: [String]? { get set}
+    var albums: [String]? { get set }
 }
 
 
@@ -384,7 +414,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
     
     var duration: String?
     
-    var album: [String]?
+    var albums: [String]?
 
     var metaData: BaseMetaData?
     
@@ -397,7 +427,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         return tmpDownloadUrl
     }
     
-    var asset:PHAsset? {
+    var asset: PHAsset? {
         
         switch patchToPreview  {
             
@@ -407,6 +437,10 @@ class WrapData: BaseDataSourceItem, Wrappered {
             return nil
         }
     }
+    
+    var parent: String?
+    
+    var isFolder: Bool?
     
     init(musicForCreateStory: CreateStoryMusicItem) {
         id = musicForCreateStory.id
@@ -445,6 +479,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
         creationDate = baseModel.dateOfCreation
         lastModifiDate = baseModel.lastModifiedDate
         syncStatus = .notSynced
+        
+        isFolder = false
     }
     
     override func getCellReUseID() -> String {
@@ -473,16 +509,23 @@ class WrapData: BaseDataSourceItem, Wrappered {
         super.init()
         md5 = remote.hash ?? "not hash "
         
+        albums = remote.albums
+        
         name = remote.name
         isLocalItem = false
         creationDate = remote.createdDate
         lastModifiDate = remote.lastModifiedDate
         fileType = FileType(type: remote.contentType, fileName: name)
+        isFolder = remote.folder
         syncStatus = .synced
         
-        var url:URL?
+        parent = remote.parent
         
-        if (fileType == .image) {
+        var url: URL?
+        
+        switch fileType { //Do we even need this????
+        case .image, .audio, .video:
+            duration = WrapData.getDuration(duration: remote.metadata?.duration)
             switch previewIconSize {
             case .little : url = remote.metadata?.smalURl
             case .medium : url = remote.metadata?.mediumUrl
@@ -491,24 +534,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
             if (url == nil) {
                 url = remote.tempDownloadURL
             }
-        }
-        
-        if (fileType == .audio) {
-            duration = WrapData.getDuration(duration: remote.metadata?.duration)
-        }
-        
-        if (fileType == .video){
-            
-            duration = WrapData.getDuration(duration: remote.metadata?.duration)
-            
-            switch previewIconSize {
-            case .little : url = remote.metadata?.smalURl
-            case .medium : url = remote.metadata?.mediumUrl
-            case .large  : url = remote.metadata?.largeUrl
-            }
-            if (url == nil) {
-                url = remote.tempDownloadURL
-            }
+        default:
+            break
         }
         
         uuid = remote.uuid ?? ""//UUID().description
@@ -521,6 +548,12 @@ class WrapData: BaseDataSourceItem, Wrappered {
         id = remote.id
     }
     
+    convenience init (remote: SearchItemResponse, parendfolderUUID: String?) {
+        self.init(remote: remote)
+        if let unwrapedFolderUUID = parendfolderUUID {
+            parent = unwrapedFolderUUID
+        }
+    }
     
     init(mediaItem: MediaItem) {
         coreDataObject = mediaItem
@@ -532,6 +565,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
             url = URL(string: url_)
         }
         tmpDownloadUrl =  url
+        
+        parent = mediaItem.parent
         
         if let assetId = mediaItem.localFileID,
            let url = mediaItem.urlToFileValue {
@@ -568,6 +603,9 @@ class WrapData: BaseDataSourceItem, Wrappered {
         lastModifiDate = mediaItem.lastModifiDateValue as Date?
         syncStatus =  SyncWrapperedStatus(value: mediaItem.syncStatusValue)
         fileType = FileType(value: mediaItem.fileTypeValue)
+        isFolder = mediaItem.isFolder
+        
+        albums = mediaItem.albumsUUIDs
         
         metaData = BaseMetaData()
         

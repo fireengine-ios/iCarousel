@@ -28,6 +28,10 @@ class RouterVC: NSObject {
         get {
             if let navController = rootViewController as? UINavigationController {
                 return navController
+            }else{
+                if let n = rootViewController as? TabBarViewController {
+                    return n.activeNavigationController
+                }
             }
             return nil
         }
@@ -39,7 +43,15 @@ class RouterVC: NSObject {
             if let n = top as? TabBarViewController {
                 return n.activeNavigationController
             }
+            if let n = rootViewController as? TabBarViewController {
+                return n.activeNavigationController
+            }
+        }else{
+            if let n = rootViewController as? TabBarViewController {
+                return n.activeNavigationController
+            }
         }
+        
         return nil 
     }
     
@@ -59,6 +71,7 @@ class RouterVC: NSObject {
     
     func pushViewControllertoTableViewNavBar(viewController: UIViewController) {
         if let tabBarVc = tabBarVC {
+            
             tabBarVc.pushViewController(viewController, animated: true)
             return
         }
@@ -72,8 +85,12 @@ class RouterVC: NSObject {
     }
     
     func pushViewController(viewController: UIViewController) {
+        let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationHideTabBar)
+        NotificationCenter.default.post(name: notificationName, object: nil)
+        
         navigationController?.pushViewController(viewController, animated: true)
         viewController.navigationController?.isNavigationBarHidden = false
+        
     }
     
     func pushViewControllerWithoutAnimation(viewController: UIViewController) {
@@ -236,7 +253,7 @@ class RouterVC: NSObject {
     
     var tabBarScreen: UIViewController? {
         let controller = TabBarViewController(nibName: "TabBarView", bundle: nil)
-        return createRootNavigationController(controller: controller)
+        return controller
     }
     
     
@@ -362,8 +379,8 @@ class RouterVC: NSObject {
     
     // MARK: - SearchView
     
-    var searchView: UIViewController {
-        let controller = SearchViewInitializer.initializeAllFilesViewController(with: "SearchView")
+    func searchView(output: SearchModuleOutput? = nil) -> UIViewController {
+        let controller = SearchViewInitializer.initializeAllFilesViewController(with: "SearchView", output: output)
         return controller
     }
     
@@ -411,6 +428,12 @@ class RouterVC: NSObject {
     
     func uploadPhotos() -> UIViewController {
         let controller = UploadFilesSelectionModuleInitializer.initializeUploadPhotosViewController()
+        //UploadFilesSelectionModuleInitializer.initializeViewController(with: "BaseFilesGreedViewController")
+        return controller
+    }
+    
+    func uploadPhotos(rootUUID: String) -> UIViewController {
+        let controller = UploadFilesSelectionModuleInitializer.initializeUploadPhotosViewController(rootUUID: rootUUID)
         //UploadFilesSelectionModuleInitializer.initializeViewController(with: "BaseFilesGreedViewController")
         return controller
     }
@@ -501,8 +524,8 @@ class RouterVC: NSObject {
     
     // MARK: OTP
     
-    func otpView(responce: SignUpSuccessResponse, userInfo: AccountInfoResponse) -> UIViewController {
-        let controller = OTPViewModuleInitializer.viewController(responce: responce, userInfo: userInfo)
+    func otpView(responce: SignUpSuccessResponse, userInfo: AccountInfoResponse, phoneNumber: String) -> UIViewController {
+        let controller = OTPViewModuleInitializer.viewController(responce: responce, userInfo: userInfo, phoneNumber: phoneNumber)
         return controller
     }
     

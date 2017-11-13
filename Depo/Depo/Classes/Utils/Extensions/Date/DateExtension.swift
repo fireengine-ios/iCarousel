@@ -35,7 +35,7 @@ extension Date: Components {
         return formatter.string(from: self)
     }
     
-    func getDateForSortingOfCollectionView() -> String{
+    func getDateForSortingOfCollectionView() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy MM"
         return formatter.string(from: self)

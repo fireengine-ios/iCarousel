@@ -43,6 +43,16 @@ extension CoreDataStack {
         for savedMediaItem in savedItems {
             for remoteWrapedItem in remoteItems {
                 if savedMediaItem.uuidValue == remoteWrapedItem.uuid {
+                    if let unwrapedParent = remoteWrapedItem.parent {
+                        savedMediaItem.parent = unwrapedParent
+                    }
+                    if let unwrapedAlbumbs = remoteWrapedItem.albums {
+                        //LR-2356
+                        let albums = unwrapedAlbumbs.map({ (albumUuid) -> MediaItemsAlbum in
+                            return MediaItemsAlbum(uuid: albumUuid, context: context)
+                        })
+                        savedMediaItem.albums = NSOrderedSet(array: albums)
+                    }
                     savedMediaItem.urlToFileValue = remoteWrapedItem.urlToFile?.absoluteString
                     savedMediaItem.metadata?.largeUrl = remoteWrapedItem.metaData?.largeUrl?.absoluteString
                     savedMediaItem.metadata?.mediumUrl = remoteWrapedItem.metaData?.mediumUrl?.absoluteString

@@ -8,30 +8,16 @@
 
 class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
 
-
-    func uploadItems(items: [BaseDataSourceItem]){
-        
-        let uploadItem = items as! [WrapData]
-        UploadService.default.uploadFileList(items: uploadItem,
-                                             uploadType: .fromHomePage,
-                                             uploadStategy: .WithoutConflictControl,
-                                             uploadTo: .MOBILE_UPLOAD,
-                                             folder: "",
-                                             success: { [weak self] in
-                                                self?.compliteAsyncOpertion()
-        },
-                                             fail: { [weak self]  (error) in
-                                                self?.compliteAsyncOpertion()
-        })
-            
-    }
+    var uploadOutput: UploadFilesSelectionInteractorOutput?
+    var rootUIID: String?
     
-    private func compliteAsyncOpertion() {
-        
-        DispatchQueue.main.async {
-            self.output.asyncOperationSucces()
-        }
+    func addToUploadOnDemandItems(items: [BaseDataSourceItem]){
+        let uploadItems = items as! [WrapData]
+        UploadService.default.uploadOnDemandFileList(items: uploadItems,
+                                                     uploadType: .autoSync,
+                                                     uploadStategy: .WithoutConflictControl,
+                                                     uploadTo: .MOBILE_UPLOAD,
+                                                     folder: rootUIID ?? "")
     }
-    
 }
 

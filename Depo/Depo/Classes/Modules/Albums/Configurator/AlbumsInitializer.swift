@@ -9,9 +9,14 @@
 import UIKit
 
 class AlbumsModuleInitializer: NSObject {
+    
+    static var albumsSortTypes: [MoreActionsConfig.SortRullesType] {
+        return [.AlphaBetricAZ,.AlphaBetricZA, .TimeNewOld, .TimeOldNew]
+    }
 
     class func initializeAlbumsController(with nibName:String) -> BaseFilesGreedChildrenViewController {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
+        viewController.needShowTabBar = true
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share,.delete],
                                                style: .default, tintColor: nil)
@@ -19,13 +24,24 @@ class AlbumsModuleInitializer: NSObject {
         let presentor = AlbumsPresenter()
         
         
-        let interactor = AlbumsInteractor(remoteItems: AlbumService(requestSize: 9999))
+        let interactor = AlbumsInteractor(remoteItems: AlbumService(requestSize: 140))
+        
+        let gridListTopBarConfig = GridListTopBarConfig(
+            defaultGridListViewtype: .Grid,
+            availableSortTypes: albumsSortTypes,
+            defaultSortType: .TimeNewOld,
+            availableFilter: false,
+            showGridListButton: true
+        )
+        
         
         configurator.configure(viewController: viewController,
                                bottomBarConfig: bottomBarConfig, router: AlbumsRouter(),
                                presenter: presentor, interactor: interactor,
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select, .selectAll],
-                                                                                     selectionModeTypes: [.albumDetails]))
+                                                                                     selectionModeTypes: [.albumDetails]),
+                               topBarConfig: gridListTopBarConfig)
+        
         
         viewController.mainTitle = TextConstants.albumsTitle
         
@@ -35,20 +51,21 @@ class AlbumsModuleInitializer: NSObject {
     class func initializeSelectAlbumsController(with nibName:String, photos:[BaseDataSourceItem]) -> AlbumSelectionViewController {
         let viewController = AlbumSelectionViewController(nibName: nibName, bundle: nil)
         let configurator = BaseFilesGreedModuleConfigurator()
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share,.delete],
-                                               style: .default, tintColor: nil)
+        //let bottomBarConfig = EditingBarConfig(elementsConfig: [],
+        //                                       style: .default, tintColor: nil)
         
         let presentor = AlbumSelectionPresenter()
         
         
-        let interactor = AlbumsInteractor(remoteItems: AlbumService(requestSize: 9999))
+        let interactor = AlbumsInteractor(remoteItems: AlbumService(requestSize: 140))
         interactor.photos = photos
         
         configurator.configure(viewController: viewController,
-                               bottomBarConfig: bottomBarConfig, router: AlbumsRouter(),
+                               bottomBarConfig: nil, router: AlbumsRouter(),
                                presenter: presentor, interactor: interactor,
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [],
-                                                                                     selectionModeTypes: []))
+                                                                                     selectionModeTypes: []),
+                               topBarConfig: nil)
         
         viewController.mainTitle = TextConstants.albumsTitle
         

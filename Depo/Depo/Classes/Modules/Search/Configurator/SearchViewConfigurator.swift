@@ -9,11 +9,12 @@
 import Foundation
 
 class SearchViewConfigurator {
-    func configure(viewController: SearchViewController, remoteServices: RemoteSearchService) {
+    func configure(viewController: SearchViewController, remoteServices: RemoteSearchService, output: SearchModuleOutput?) {
         let router = SeacrhViewRouter()
         
         let presenter = SearchViewPresenter()
         
+        presenter.moduleOutput = output
         presenter.view = viewController
         presenter.router = router
         

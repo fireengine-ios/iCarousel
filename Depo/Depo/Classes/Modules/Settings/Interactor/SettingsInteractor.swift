@@ -11,10 +11,15 @@ class SettingsInteractor: SettingsInteractorInput {
     weak var output: SettingsInteractorOutput!
     
     func getCellsData(){
-        let array = [[TextConstants.settingsViewCellBeckup, TextConstants.settingsViewCellImportPhotos, TextConstants.settingsViewCellAutoUpload],
-                     [TextConstants.settingsViewCellActivityTimline, TextConstants.settingsViewCellRecentlyDeletedFiles, TextConstants.settingsViewCellUsageInfo, TextConstants.settingsViewCellPasscode],
-                     [TextConstants.settingsViewCellHelp, TextConstants.settingsViewCellLogout]
-        ]
+        let array = [[TextConstants.settingsViewCellBeckup,
+                      TextConstants.settingsViewCellImportPhotos,
+                      TextConstants.settingsViewCellAutoUpload],
+                     [TextConstants.settingsViewCellActivityTimline,
+                      TextConstants.settingsViewCellRecentlyDeletedFiles,
+                      TextConstants.settingsViewCellUsageInfo,
+                      TextConstants.settingsViewCellPasscode],
+                     [TextConstants.settingsViewCellHelp,
+                      TextConstants.settingsViewCellLogout]]
         
         output.cellsDataForSettings(array: array)
     }

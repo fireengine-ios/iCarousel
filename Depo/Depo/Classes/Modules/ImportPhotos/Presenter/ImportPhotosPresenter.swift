@@ -10,200 +10,145 @@ import Foundation
 
 // MARK: - Facebook
 
-class ImportFromFBPresenter: BasePresenter, ImportFromFBViewOutput, ImportFromFBInteractorOutput {
-    weak var view: ImportFromFBViewInput!
+/**
+ [Facebook flow](https://wiki.life.com.by/display/LTFizy/Facebook+Import+flow)
+
+ [Facebook profile settings (To test facebook login)](https://web.facebook.com/settings?tab=applications)
+ */
+class ImportFromFBPresenter: BasePresenter {
+    
+    weak var view: ImportFromFBViewInput?
     var interactor: ImportFromFBInteractorInput!
     var router: ImportFromFBRouterInput!
     
-    func onLogout() {
-        startAsyncOperation()
-        interactor.onLogout()
-    }
+    var facebookStatus: FBStatusObject?
+}
+
+// MARK: - ImportFromFBViewOutput
+extension ImportFromFBPresenter: ImportFromFBViewOutput {
     
-    // Permissions for FB
-    
-    func requestPermissions() {
-        interactor.requestPermissions()
-    }
-    
-    func permissionsSuccessCallback(permissions: FBPermissionsObject) {
-        view.fbPermissionsSuccessCallback(permissions: permissions)
-    }
-    
-    func permissionsFailureCallback(errorMessage: String) {
-        view.fbPermissionsFailureCallback(errorMessage: errorMessage)
-    }
-    
-    // MARK: - Token For FB
-    
-    func requestToken(permissions: [String]) {
-        interactor.requestToken(permissions: permissions)
-    }
-    
-    func tokenSuccessCallback(token: String) {
-        view.fbTokenSuccessCallback(token: token)
-    }
-    
-    func tokenFailureCallback(errorMessage: String) {
-        view.fbTokenFailureCallback(errorMessage: errorMessage)
-    }
-    
-    // MARK: - Connect to FB with token
-    
-    func requestConnect(withToken token: String) {
-        interactor.requestConnect(withToken: token)
-    }
-    
-    func connectSuccessCallback() {
-        view.fbConnectSuccessCallback()
-    }
-    
-    func connectFailureCallback(errorMessage: String) {
-        view.fbConnectFailureCallback(errorMessage: errorMessage)
-    }
-    
-    // MARK: - Get Status of sync with FB
-    
-    func requestStatus() {
+    func viewIsReady() {
+        view?.startActivityIndicator()
         interactor.requestStatus()
     }
     
-    func statusSuccessCallback(status: FBStatusObject) {
-        view.fbStatusSuccessCallback(status: status)
+    func startFacebook() {
+        guard let fbStatus = facebookStatus else { return }
+        if fbStatus.connected == true {
+            interactor.requestStart()
+        } else {
+            interactor.requestPermissions()
+        }
     }
     
-    func statusFailureCallback(errorMessage: String) {
-        view.fbStatusFailureCallback(errorMessage: errorMessage)
-    }
-    
-    // MARK: - Start to sync with FB
-    
-    func requestStart() {
-        interactor.requestStart()
-    }
-    
-    func startSuccessCallback() {
-        view.fbStartSuccessCallback()
-    }
-    
-    func startFailureCallback(errorMessage: String) {
-        view.fbStartFailureCallback(errorMessage: errorMessage)
-    }
-    
-    // MARK: - Stop to sync with FB
-    
-    func requestStop() {
-        interactor.requestStop()
-    }
-    
-    func stopSuccessCallback() {
-        view.fbStopSuccessCallback()
-    }
-    
-    func stopFailureCallback(errorMessage: String) {
-        view.fbStopFailureCallback(errorMessage: errorMessage)
-    }
-    
-    // MARK: -
-    
-    func goToOnboarding() {
-        router.goToOnboarding()
+    func stopFacebook() {
+        guard let fbStatus = facebookStatus else { return }
+        if fbStatus.connected == true {
+            interactor.requestStop()
+        }
     }
 }
 
-// MARK: - Dropbox
-
-class ImportFromDropboxPresenter: BasePresenter, ImportFromDropboxViewOutput, ImportFromDropboxInteractorOutput {
+// MARK: - ImportFromFBInteractorOutput
+extension ImportFromFBPresenter: ImportFromFBInteractorOutput {
     
-    weak var view: ImportFromDropboxViewInput!
-    var interactor: ImportFromDropboxInteractorInput!
-    var router: ImportFromDropboxRouterInput!
+    // MARK: Status
     
-    func onLogout() {
-        startAsyncOperation()
-        interactor.onLogout()
-    }
-    
-    // MARK: - Token For DB
-    
-    func requestToken(withCurrentToken currentToken: String, withConsumerKey consumerKey: String, withAppSecret appSecret: String, withAuthTokenSecret authTokenSecret: String) {
-        interactor.requestToken(withCurrentToken: currentToken, withConsumerKey: consumerKey, withAppSecret: appSecret, withAuthTokenSecret: authTokenSecret)
-    }
-    func tokenSuccessCallback(token: String) {
-        if let _ = view {
-            view.dbTokenSuccessCallback(token: token)
+    func statusSuccessCallback(status: FBStatusObject) {
+        facebookStatus = status
+        if status.connected == true, status.syncEnabled == true {
+            view?.succeedFacebookStart()
+        } else {
+            view?.succeedFacebookStop()
         }
-    }
-    
-    func tokenFailureCallback(errorMessage: String) {
-        view.dbTokenFailureCallback(errorMassage: errorMessage)
-    }
-    
-    // MARK: - Connect to DB with token
-    
-    func requestConnect(withToken token: String) {
-        interactor.requestConnect(withToken: token)
-    }
-    
-    func connectSuccessCallback() {
-        if let _ = view {
-            view.dbConnectSuccessCallback()
-        }
-    }
-    
-    func connectFailureCallback(errorMessage: String) {
-        view.dbConnectFailureCallback(errorMassage: errorMessage)
-    }
-    
-    // MARK: - Get status of DB for start
-    
-    func requestStatusForStart() {
-        interactor.requestStatusForStart()
-    }
-    
-    func statusForStartSuccessCallback(status: DropboxStatusObject) {
-        if let _ = view {
-            view.dbStatusForStartSuccessCallback(status: status)
-        }
-    }
-    
-    func statusForStartFailureCallback(errorMessage: String) {
-        view.dbStatusForStartFaillureCallback(errorMessage: errorMessage)
-    }
-    
-    // MARK: - Start to sync with DB
-    
-    func requestStart() {
-        interactor.requestStart()
-    }
-    
-    func startSuccessCallback() {
-        if let _ = view {
-            view.dbStartSuccessCallback()
-        }
-    }
-    
-    func startFailureCallback(errorMessage: String) {
-        view.dbStartFailureCallback(errorMessage: errorMessage)
-    }
-    
-    // MARK: - Get Status of sync with DB
-    
-    func requestStatus() {
-        interactor.requestStatus()
-    }
-    
-    func statusSuccessCallback(status: DropboxStatusObject) {
-        if let _ = view {
-            view.dbStatusSuccessCallback(status: status)
-        }
+        view?.stopActivityIndicator()
     }
     
     func statusFailureCallback(errorMessage: String) {
-        view.dbStatusFailureCallback(errorMessage: errorMessage)
+        view?.failedFacebookStatus(errorMessage: errorMessage)
+        view?.stopActivityIndicator()
     }
+    
+    // MARK: Start
+    
+    func startSuccessCallback() {
+        view?.succeedFacebookStart()
+    }
+    
+    func startFailureCallback(errorMessage: String) {
+        view?.failedFacebookStart(errorMessage: errorMessage)
+        interactor.requestStatus()
+    }
+    
+    // MARK: Stop
+    
+    func stopSuccessCallback() {
+        view?.succeedFacebookStop()
+    }
+    
+    func stopFailureCallback(errorMessage: String) {
+        view?.failedFacebookStop(errorMessage: errorMessage)
+        interactor.requestStatus()
+    }
+    
+    // MARK: Permissions
+    
+    func permissionsSuccessCallback(permissions: FBPermissionsObject) {
+        view?.startActivityIndicator()
+        var perms = [String]()
+        if let readPerms = permissions.read {
+            perms += readPerms
+        }
+        /// MAYBE WILL BE NEED
+        //if let writePerms = permissions.write {
+        //    perms += writePerms
+        //}
+        interactor.requestToken(permissions: perms)
+    }
+    
+    func permissionsFailureCallback(errorMessage: String) {
+        view?.failedFacebookStart(errorMessage: errorMessage)
+        interactor.requestStatus()
+    }
+    
+    // MARK: Permissions
+    
+    func tokenSuccessCallback(token: String) {
+        interactor.requestConnect(withToken: token)
+    }
+    
+    func tokenFailureCallback(errorMessage: String) {
+        view?.failedFacebookStart(errorMessage: errorMessage)
+        interactor.requestStatus()
+    }
+    
+    // MARK: Connect
+    
+    func connectSuccessCallback() {
+        interactor.requestStart()
+        interactor.requestStatus()
+    }
+    
+    func connectFailureCallback(errorMessage: String) {
+        view?.failedFacebookStart(errorMessage: errorMessage)
+    }
+    
+    // MARK: Router
     
     func goToOnboarding() {
         router.goToOnboarding()
     }
+    
+    
+    /// MAYBE WILL BE NEED
+    // MARK: - Start to sync with FB
+    
+    //    func success(socialStatus: SocialStatusResponse) {
+    //        compliteAsyncOperationEnableScreen()
+    //    }
+    //
+    //    func failed(with errorMessage: String) {
+    //        compliteAsyncOperationEnableScreen()
+    ////        view.show(error: errorMessage)
+    //    }
 }

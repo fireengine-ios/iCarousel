@@ -34,6 +34,8 @@ class CollectionSortingRules {
             
         case .sizeZA:
             rule = CollectionSortingRules.sortByFileSize(ascending: true)
+        case .albumlettersAZ, .albumlettersZA:
+            rule = CollectionSortingRules.sortByFileSize(ascending: true)//FIXME: albumbs are not currently supported
         }
     }
     

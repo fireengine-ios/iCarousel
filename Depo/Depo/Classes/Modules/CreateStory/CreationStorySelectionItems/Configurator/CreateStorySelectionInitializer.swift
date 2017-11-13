@@ -15,7 +15,7 @@ class CreateStoryModuleInitializer: BaseFilesGreedModuleInitializer {
         let configurator = CreateStorySelectionConfigurator()
 
         configurator.configure(viewController: viewController, remoteServices: PhotoAndVideoService(requestSize: 100, type: .image),
-                               filters: [.fileType(.image)], story: story)
+                               filters: [.localStatus(.nonLocal), .fileType(.image)], story: story)
         return viewController
     }
     

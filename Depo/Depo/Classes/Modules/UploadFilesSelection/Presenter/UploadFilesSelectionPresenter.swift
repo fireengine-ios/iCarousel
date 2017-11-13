@@ -19,21 +19,35 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
     
     override func onNextButton(){
         if (dataSource.selectedItemsArray.count > 0){
-            startAsyncOperation()
-            if let interactor_ = interactor as? UploadFilesSelectionInteractor{
+//            startAsyncOperation()
+            if let interactor_ = interactor as? UploadFilesSelectionInteractor {
                 //!!!!!!!!!!!!!
                 //interactor_.uploadItems(items: Array(dataSource.selectedItemsArray))
                 let list = Array(dataSource.selectedItemsArray)
                 let array = CoreDataStack.default.mediaItemByUUIDs(uuidList: list)
-                interactor_.uploadItems(items: array)
+                interactor_.addToUploadOnDemandItems(items: array)
+                guard let uploadVC = view as? UploadFilesSelectionViewInput else {
+                    return
+                }
+                uploadVC.currentVC.navigationController?.popViewController(animated: true)
             }
-        }else{
+        } else {
             custoPopUp.showCustomAlert(withText: TextConstants.uploadFilesNothingUploadError, okButtonText: TextConstants.uploadFilesNothingUploadOk)
         }
+    }
+    
+    override func uploadData(_ searchText: String! = nil) {
+        debugPrint("upload uploadData presenter override")
+    }
+    
+    override func getNextItems() {
+        debugPrint("upload getNextItems presenter override")
     }
     
     func networkOperationStopped(){
         asyncOperationSucces()
     }
+
+    override func onLongPressInCell() {}
     
 }

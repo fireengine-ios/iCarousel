@@ -22,13 +22,18 @@ class AlbumSelectionPresenter: AlbumsPresenter {
     
     override func onNextButton() {
         if let interact = interactor as? AlbumsInteractor {
-            if (dataSource.selectedItemsArray.count > 0){
+            if (dataSource.selectedItemsArray.count > 0)  {
                 ///!!!!!!!!!!!
-                let list = Array(dataSource.selectedItemsArray)
-                let array = CoreDataStack.default.mediaItemByUUIDs(uuidList: list)
-                interact.onAddPhotosToAlbum(selectedAlbum: array.first!)
+                let first = Array(dataSource.getSelectedItems()).first
+                //let array = CoreDataStack.default.mediaItemByUUIDs(uuidList: list)
+                interact.onAddPhotosToAlbum(selectedAlbum: first as! AlbumItem)
                 
             }
         }
     }
+    
+    func photoAddedToAlbum(_ album: AlbumItem){
+        router.openAlbumDetail(album)
+    }
+
 }

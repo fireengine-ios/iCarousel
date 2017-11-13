@@ -117,6 +117,24 @@ class RequestService {
         let task = defaultSession.uploadTask(with: request,
                                              fromFile: fromFile,
                                              completionHandler: response)
+        
         return task
+    }
+    
+    public func uploadFileRequestTask(path:URL,
+                                      headerParametrs: RequestHeaderParametrs,
+                                      fileData: Data,
+                                      method: RequestMethod,
+                                      timeoutInterval: TimeInterval,
+                                      response: @escaping RequestFileUploadResponse ) -> URLSessionUploadTask {
+        
+        var request: URLRequest = URLRequest(url: path)
+        request.timeoutInterval = timeoutInterval
+        request.httpMethod = method.rawValue
+        request.allHTTPHeaderFields = headerParametrs
+        
+        debugPrint("REQUEST: \(request)")
+        
+        return defaultSession.uploadTask(with: request, from: fileData, completionHandler: response)
     }
 }

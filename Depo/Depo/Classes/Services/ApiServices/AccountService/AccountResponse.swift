@@ -33,6 +33,7 @@ struct AccountJSONConstants {
     static let quotaCount = "quotaCount"
     static let bytesUsed = "bytesUsed"
     static let objectCount = "objectCount"
+    static let projectID = "projectId"
 }
 
 class AccountInfoResponse: ObjectRequestResponse {
@@ -52,6 +53,7 @@ class AccountInfoResponse: ObjectRequestResponse {
     var username:String?
     var dob:String?
     var urlForPhoto: URL?
+    var projectID: String?
     
     override func mapping() {
         mobileUploadsSpecialFolderUuid = json?[AccountJSONConstants.mobileUploadsSpecialFolderUuid].string
@@ -69,6 +71,7 @@ class AccountInfoResponse: ObjectRequestResponse {
         email = json?[AccountJSONConstants.email].string
         emailVerified =  json?[AccountJSONConstants.emailVerified].bool
         urlForPhoto = json?[AccountJSONConstants.url].url
+        projectID = json?[AccountJSONConstants.projectID].string
     }
 }
 

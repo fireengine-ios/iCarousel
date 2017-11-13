@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13240" systemVersion="16G29" minimumToolsVersion="Xcode 9.0" sourceLanguage="Swift" userDefinedModelVersionIdentifier="Model_1">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13240" systemVersion="16G1036" minimumToolsVersion="Xcode 9.0" sourceLanguage="Swift" userDefinedModelVersionIdentifier="Model_1">
     <entity name="MediaItem" representedClassName=".MediaItem" syncable="YES">
-        <attribute name="albumsValue" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="creationDateValue" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="favoritesValue" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="fileNameFirstChar" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="fileSizeValue" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="fileTypeValue" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="idValue" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isFolder" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="isLocalItemValue" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="lastModifiDateValue" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="localFileID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="md5Value" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="monthValue" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="nameValue" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="parent" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="patchToPreviewValue" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="syncStatusValue" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="urlToFileValue" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uuidValue" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="albums" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MediaItemsAlbum" inverseName="items" inverseEntity="MediaItemsAlbum" syncable="YES"/>
-        <relationship name="metadata" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MediaItemsMetaData" inverseName="item" inverseEntity="MediaItemsMetaData" syncable="YES"/>
+        <relationship name="albums" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="MediaItemsAlbum" inverseName="items" inverseEntity="MediaItemsAlbum" syncable="YES"/>
+        <relationship name="metadata" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="MediaItemsMetaData" inverseName="item" inverseEntity="MediaItemsMetaData" syncable="YES"/>
         <relationship name="session" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Session" inverseName="items" inverseEntity="Session" syncable="YES"/>
     </entity>
     <entity name="MediaItemsAlbum" representedClassName=".MediaItemsAlbum" syncable="YES">
@@ -33,7 +34,7 @@
         <attribute name="uploadDateValue" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="videoCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MediaItem" inverseName="albums" inverseEntity="MediaItem" syncable="YES"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="MediaItem" inverseName="albums" inverseEntity="MediaItem" syncable="YES"/>
     </entity>
     <entity name="MediaItemsMetaData" representedClassName=".MediaItemsMetaData" syncable="YES">
         <attribute name="album" optional="YES" attributeType="String" syncable="YES"/>
@@ -56,8 +57,8 @@
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MediaItem" inverseName="session" inverseEntity="MediaItem" syncable="YES"/>
     </entity>
     <elements>
-        <element name="MediaItem" positionX="-126" positionY="-270" width="162" height="343"/>
-        <element name="MediaItemsAlbum" positionX="-432" positionY="-333" width="153" height="208"/>
+        <element name="MediaItem" positionX="-126" positionY="-270" width="162" height="360"/>
+        <element name="MediaItemsAlbum" positionX="-432" positionY="-333" width="153" height="210"/>
         <element name="MediaItemsMetaData" positionX="-441" positionY="-108" width="153" height="210"/>
         <element name="Session" positionX="-405" positionY="135" width="153" height="118"/>
     </elements>

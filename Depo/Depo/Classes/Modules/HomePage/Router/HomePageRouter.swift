@@ -36,12 +36,12 @@ class HomePageRouter: HomePageRouterInput {
     
     func moveToAllFilesPage() {
         let allFiles = router.allFiles!
-        router.pushViewControllertoTableViewNavBar(viewController: allFiles)
+        router.pushViewController(viewController: allFiles)
     }
     
     func moveToFavouritsFilesPage() {
         let favourites = router.favorites!
-        router.pushViewControllertoTableViewNavBar(viewController: favourites)
+        router.pushViewController(viewController: favourites)
     }
     
     func moveToCreationStory(){

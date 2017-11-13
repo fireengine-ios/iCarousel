@@ -9,17 +9,19 @@
 class AlbumsPresenter: BaseFilesGreedPresenter {
 
     override func viewIsReady(collectionView: UICollectionView) {
+        dataSource = ArrayDataSourceForCollectionView()
         interactor.viewIsReady()
         sortedRule = .timeUp
         dataSource.displayingType = .list
         dataSource.setPreferedCellReUseID(reUseID: nil)
         
         super.viewIsReady(collectionView: collectionView)
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
     }
 
     override func uploadData(_ searchText: String! = nil) {
-        
-        interactor.nextItems(searchText, sortBy: .date, sortOrder: .asc)
+        interactor.getAllItems(sortBy: sortedRule)
     }
     
     override func getCellSizeForList() -> CGSize {
@@ -35,4 +37,49 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
 //        let cellW: CGFloat = (w - NumericConstants.iPhoneGreedInset * 2 - NumericConstants.iPhoneGreedHorizontalSpace * NumericConstants.numerCellInLineOnIphone)/NumericConstants.numerCellInLineOnIphone
 //        return CGSize(width: cellW, height: cellW)
     }
+    
+    override func sortedPushed(with rule: SortedRules){
+        //sortedRule = rule
+        sortedRule = rule
+        interactor.getAllItems(sortBy: rule)
+        view.changeSortingRepresentation(sortType: rule)
+        
+        
+//        dataSource.fetchService.performFetch(sortingRules: sortedRule,
+//                                             filtes: filters)
+//        dataSource.reloadData()
+    }
+    
+    override func reloadData() {
+        startAsyncOperation()
+        interactor.getAllItems(sortBy: sortedRule)
+    }
+    
+    override func sortedPushedTopBar(with rule:  MoreActionsConfig.SortRullesType) {
+        
+        var sortRule: SortedRules
+        switch rule {
+        case .AlphaBetricAZ:
+            sortRule = .albumlettersAZ
+        case .AlphaBetricZA:
+            sortRule = .albumlettersZA
+        case .TimeNewOld:
+            sortRule = .timeUp
+        case .TimeOldNew:
+            sortRule = .timeDown
+        case .Largest:
+            sortRule = .sizeAZ
+        case .Smallest:
+            sortRule = .sizeZA
+        default:
+            sortRule = .timeUp
+        }
+        sortedPushed(with: sortRule)
+    }
+
+    //  override func getNextItems() { //TODO: implement pagination
+//        interactor.nextItems(nil, sortBy: .albumName,
+//                         sortOrder: .asc)
+//
+//    }
 }

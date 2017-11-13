@@ -14,7 +14,6 @@ class CoreDataStack: NSObject {
     
     @objc static let `default` = CoreDataStack()
     
-    
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         
         guard let modelURL = Bundle.main.url(forResource: "LifeBoxModel",
@@ -39,44 +38,53 @@ class CoreDataStack: NSObject {
         return coordinator
     }()
     
-    var rootBackgroundContext: NSManagedObjectContext
     
     var mainContext: NSManagedObjectContext
     
     var newChildBackgroundContext: NSManagedObjectContext {
         let children =  NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-//        children.persistentStoreCoordinator = persistentStoreCoordinator
         children.parent = mainContext
         return children
     }
     
     override init() {
-        
-        rootBackgroundContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
 
         mainContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         
         super.init()
-        rootBackgroundContext.persistentStoreCoordinator = persistentStoreCoordinator
-//        mainContext.parent = rootBackgroundContext
+//        rootBackgroundContext.persistentStoreCoordinator = persistentStoreCoordinator
         mainContext.persistentStoreCoordinator = persistentStoreCoordinator
         
-        let name = NSNotification.Name.NSManagedObjectContextDidSave
-        let selector = #selector(managedObjectContextObjectsDidSave)
-        NotificationCenter.default.addObserver(self,
-                                               selector: selector,
-                                               name: name,
-                                               object: nil)
+//        let name = NSNotification.Name.NSManagedObjectContextDidSave
+//        let selector = #selector(managedObjectContextObjectsDidSave)
+//        NotificationCenter.default.addObserver(self,
+//                                               selector: selector,
+//                                               name: name,
+//                                               object: nil)
     }
     
     func clearDataBase() {
         deleteRemoteFiles()
     }
     
-    private func deleteRemoteFiles() {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MediaItem.Identifier)
+    func deleteRemoteFiles() {
+        // Album has remote status by default for now
+        let albumFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MediaItemsAlbum.Identifier)
+        
+        let mediaItemFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MediaItem.Identifier)
         let predicateRules = PredicateRules()
         guard let predicate = predicateRules.predicate(filters: [.localStatus(.nonLocal)]) else {
+            return
+        }
+        mediaItemFetchRequest.predicate = predicate
+        
+        self.deleteObjects(fromFetches: [albumFetchRequest, mediaItemFetchRequest])
+    }
+
+    func deleteLocalFiles(){
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MediaItem.Identifier)
+        let predicateRules = PredicateRules()
+        guard let predicate = predicateRules.predicate(filters: [.localStatus(.local)]) else {
             return
         }
         fetchRequest.predicate = predicate
@@ -94,6 +102,12 @@ class CoreDataStack: NSObject {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
         fetchRequest.entity = entity
         deleteObjects(fromFetch: fetchRequest)
+    }
+    
+    private func deleteObjects(fromFetches fetchRequests: [NSFetchRequest<NSFetchRequestResult>]) {
+        for fetchRequest in fetchRequests {
+            self.deleteObjects(fromFetch: fetchRequest)
+        }
     }
     
     private func deleteObjects(fromFetch fetchRequest: NSFetchRequest<NSFetchRequestResult>) {
@@ -122,13 +136,15 @@ class CoreDataStack: NSObject {
         let saveBlock: () -> Void = {
             do {
                 try context.save()
+                debugPrint("!!!!Number of saved MediaItem ",
+                           try?
+                            CoreDataStack.default.mainContext.fetch(NSFetchRequest(entityName: "MediaItem")).count)
             } catch {
                 print("Error saving context ___ ")
             }
         }
         
         if context.hasChanges {
-            
             if (saveAndWait) {
                 context.performAndWait(saveBlock)
             } else {
@@ -136,12 +152,14 @@ class CoreDataStack: NSObject {
             }
         }
         
-//        if context.parent == mainContext {
-//            DispatchQueue.main.async {
-//                self.saveMainContext()
-//            }
-//            return
-//        }
+        if context.parent == mainContext, context != mainContext {
+            DispatchQueue.main.async {
+//                try? self.mainContext.save()
+                self.saveMainContext()
+
+            }
+            return
+        }
     }
     
 //    func appendNewRemmoteFiles(items:[SearchItemResponse]) { //AlexGurin
@@ -159,16 +177,20 @@ class CoreDataStack: NSObject {
 //        saveDataForContext(context: childrenContext, saveAndWait: true)
 //    }
     
-    @objc func managedObjectContextObjectsDidSave(notification: Notification) {
+//    @objc func managedObjectContextObjectsDidSave(notification: Notification) {
+    
+//        if let context = notification.object as? NSManagedObjectContext,
+//            let parent = context.parent,
+//            parent == mainContext {
+//            try? parent.save()
+////            print("SAVE MAIN CONTEXT %@ ", Date() )
+////            parent.mergeChanges(fromContextDidSave: notification)
+////            if parent == rootBackgroundContext {
+////                print("SAVE MAIN CONTEXT %@ ", Date() )
+////            }
+//        }
         
-        if let context = notification.object as? NSManagedObjectContext,
-            let parent = context.parent {
-            parent.mergeChanges(fromContextDidSave: notification)
-            if parent == rootBackgroundContext {
-                print("SAVE MAIN CONTEXT %@ ", Date() )
-            }
-        }
   
-    }
+//    }
     
 }

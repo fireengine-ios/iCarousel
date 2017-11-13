@@ -1,3 +1,4 @@
+
 //
 //  BaseFilesGreedPresenter.swift
 //  Depo
@@ -6,7 +7,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFilesGreedViewOutput, BaseFilesGreedInteractorOutput, BaseDataSourceForCollectionViewDelegate {    
+class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFilesGreedViewOutput, BaseFilesGreedInteractorOutput, BaseDataSourceForCollectionViewDelegate {
     
     typealias Item = WrapData
     
@@ -38,15 +39,19 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func viewIsReady(collectionView: UICollectionView) {
         interactor.viewIsReady()
-        
+        if let unwrapedFilters = interactor.originalFilesTypeFilter {
+            filters = unwrapedFilters
+        }
         dataSource.setupCollectionView(collectionView: collectionView,
                                        filters: interactor.originalFilesTypeFilter)
 
         dataSource.delegate = self
         
         view.setupInitialState()
-        getContent()
         setupTopBar()
+        
+        getContent()
+        
     }
     
     func searchByText(searchText: String) {
@@ -54,7 +59,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func onReloadData(){
-        uploadData()
+        dataSource.isPaginationDidEnd = false
+        reloadData()
     }
     
     func onStartCreatingPhotoAndVideos(){
@@ -62,46 +68,109 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func getContent() {
-        uploadData()
+//        uploadData()
     }
     
-    func uploadData(_ searchText: String! = nil){
-        startAsyncOperation()
+    private func getFileFilter() -> FieldValue {
+        for type in self.filters {
+            switch type {
+            case .fileType(let type):
+                return type.convertedToSearchFieldValue
+            case .favoriteStatus(.favorites):
+                return .favorite
+            default:
+                break
+            }
+        }
+        return .all
+    }
+    
+    private func compoundAllFiltersAndNextItems(searchText: String? = nil) {
         interactor.nextItems(searchText,
-                             sortBy: .name,
-                             sortOrder: .asc)
+                             sortBy: sortedRule.sortingRules,
+                             sortOrder: sortedRule.sortOder, newFieldValue: getFileFilter())
+    }
+    
+    func reloadData() {
+        startAsyncOperation()
+        interactor.reloadItems(nil,
+                               sortBy: sortedRule.sortingRules,
+                               sortOrder: sortedRule.sortOder, newFieldValue: getFileFilter())
+    }
+    
+    func uploadData(_ searchText: String? = nil){
+        startAsyncOperation()
+        compoundAllFiltersAndNextItems(searchText: searchText)
+//        filters.convertToSearchRequestFieldValue()
+//        interactor.nextItems(searchText,
+//                             sortBy: .name,
+//                             sortOrder: .asc, newFieldValue: nil)
     }
     
     func onNextButton(){
         
     }
     
-    func getContentWithFail(errorString: String) {
-        
+    func getContentWithFail(errorString: String?) {
+        debugPrint("???getContentWithFail()")
+        asyncOperationFail(errorMessage: errorString)
     }
     
     func serviceAreNotAvalible() {
         
     }
     
+    func getContentWithSuccessEnd() {
+        debugPrint("???getContentWithSuccessEnd()")
+        asyncOperationSucces()
+        dataSource.isPaginationDidEnd = true
+        view?.stopRefresher()
+        dataSource.fetchService.performFetch(sortingRules: sortedRule,
+                                             filtes: filters,
+                                             delegate: dataSource)
+        dataSource.reloadData()
+    }
+    
     func getContentWithSuccess(){
         if (view == nil){
             return
         }
-        //
+        debugPrint("???getContentWithSuccess()")
         asyncOperationSucces()
         view.stopRefresher()
-        dataSource.reloadData()
-        // TODO: 
+//        dataSource.reloadData()
+        // TODO:
 //        let sectionsCount = dataSource.numberOfSections(in: dataSource.collectionView!)
 //        let  needShow = (sectionsCount == 0) ? interactor.needShowNoFileView() : false
 //
 //        view.setCollectionViewVisibilityStatus(visibilityStatus: needShow)
+        
+//        dataSource.fetchService.controller.delegate = dataSource
+        dataSource.fetchService.performFetch(sortingRules: sortedRule,
+                                             filtes: filters,
+                                             delegate: dataSource)
+        dataSource.reloadData()
+    }
+    
+    func getContentWithSuccess(array: [[BaseDataSourceItem]]){
+        if (view == nil){
+            return
+        }
+        debugPrint("???getContentWithSuccessEnd()")
+        //
+        asyncOperationSucces()
+        view.stopRefresher()
+        if let dataSourceForArray = dataSource as? ArrayDataSourceForCollectionView{
+            dataSourceForArray.configurateWithArray(array: array)
+        }else{
+            dataSource.reloadData()
+        }
     }
     
     func getNextItems() {
-        interactor.nextItems(nil, sortBy: .name,
-                             sortOrder: .asc)
+//        interactor.nextItems(nil, sortBy: .name,
+//                             sortOrder: .asc, newFieldValue: <#FieldValue?#>)
+        compoundAllFiltersAndNextItems()
     }
     
     func showCustomPopUpWithInformationAboutAccessToMediaLibrary(){
@@ -187,6 +256,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             return
         }
         view.setupUnderNavBarBar(withConfig: unwrapedConfig)
+        sortedRule = unwrapedConfig.defaultSortType.sortedRulesConveted
     }
     
     // MARK: Bottom Bar
@@ -201,7 +271,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
 
     private func stopEditing() {
         bottomBarPresenter?.dismiss(animated: true)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowTabBar), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
         view.setupSelectionStyle(isSelection: false)
         dataSource.setSelectionState(selectionState: false)
     }
@@ -209,7 +279,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func onChangeSelectedItemsCount(selectedItemsCount: Int) {
         if (selectedItemsCount == 0){
             bottomBarPresenter?.dismiss(animated: true)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowTabBar), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
         }else{
             bottomBarPresenter?.show(animated: true, onView: nil)
         }
@@ -257,8 +327,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         sortedRule = rule
         view.changeSortingRepresentation(sortType: rule)
         dataSource.fetchService.performFetch(sortingRules: sortedRule,
-                                             filtes: filters)
+                                             filtes: self.filters,
+                                             delegate: dataSource)
         dataSource.reloadData()
+        reloadData()
     }
     
     func selectPressed(type: MoreActionsConfig.SelectedType) {
@@ -281,6 +353,17 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         if dataSource.selectedItemsArray.count > 0 {
             bottomBarPresenter?.show(animated: true, onView: nil)
         }
+        
+        UploadService.default.uploadOnDemand(success: {
+            DispatchQueue.main.async {
+                CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: "", withText: TextConstants.uploadSuccessful, okButtonText: TextConstants.ok)
+            }
+            print("Upload success")
+        }) { (errorResponse) in
+            print("Upload fail")
+        }
+        
+        reloadData()
     }
     
     func moreActionsPressed(sender: Any) {
@@ -338,10 +421,13 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func filtersTopBar(cahngedTo filters: [MoreActionsConfig.MoreActionsFileType]) {
         self.filters = filters.map{ $0.convertToGeneralFilterFileType() }
-        dataSource.fetchService.controller.delegate = dataSource
-        dataSource.fetchService.performFetch(sortingRules: sortedRule,
-                                             filtes: self.filters)
-        dataSource.reloadData()
+//        dataSource.fetchService.controller.delegate = dataSource
+//        dataSource.fetchService.performFetch(sortingRules: sortedRule,
+//                                             filtes: self.filters)
+//        dataSource.reloadData()
+        
+        stopEditing()
+        reloadData()
     }
     
     
@@ -353,10 +439,16 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
 
     func operationFinished(withType type: ElementTypes, response: Any?) {
         debugPrint("finished")
+        dataSource.setSelectionState(selectionState: false)
+        view.setupSelectionStyle(isSelection: false)
+        reloadData()
     }
     
     func operationFailed(withType type: ElementTypes) {
         debugPrint("failed")
+        dataSource.setSelectionState(selectionState: false)
+        view.setupSelectionStyle(isSelection: false)
+        reloadData()
     }
     
     func selectModeSelected() {

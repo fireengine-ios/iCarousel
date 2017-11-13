@@ -43,7 +43,7 @@ class ForgotPasswordViewController: UIViewController, ForgotPasswordViewInput, U
         
         viewForCapcha.addSubview(captchaModuleView.view)
         captchaModuleView.view.frame = viewForCapcha.bounds
-        capchaViewH.constant = 150
+        capchaViewH.constant = 132
         
         output.viewIsReady()
     }

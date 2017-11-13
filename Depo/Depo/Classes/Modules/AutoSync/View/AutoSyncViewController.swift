@@ -38,6 +38,16 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput {
         } else {
             view.backgroundColor = UIColor.lrTiffanyBlue
         }
+        
+        if fromSettings {
+            saveBarButton = UIBarButtonItem(title: TextConstants.autoSyncSaveButton,
+                                            style: .plain,
+                                            target: self,
+                                            action: #selector(onSaveButton))
+            saveBarButton!.setTitleTextAttributes([NSAttributedStringKey.font: UIFont.TurkcellSaturaRegFont(size: 19), NSAttributedStringKey.foregroundColor: UIColor.white], for: .normal)
+            
+            splitViewController?.navigationController?.viewControllers.last?.navigationItem.rightBarButtonItem = saveBarButton!
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -67,15 +77,6 @@ class AutoSyncViewController: UIViewController, AutoSyncViewInput {
         skipButton.setTitle(TextConstants.autoSyncskipForNowButton, for: .normal)
         
         dataSource.configurateTable(table: tableView, tableHConstraint: tableHConstaint)
-        
-        if fromSettings {
-            let button = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 44))
-            button.setTitle("Save", for: .normal)
-            button.setTitleColor(ColorConstants.whiteColor, for: .normal)
-            button.addTarget(self, action: #selector(onSaveButton), for: .touchUpInside)
-            saveBarButton = UIBarButtonItem(customView: button)
-            self.navigationItem.rightBarButtonItem = saveBarButton!
-        }
         
         output.viewIsReady()
     }

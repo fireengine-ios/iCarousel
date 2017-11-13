@@ -62,18 +62,18 @@ class CreateStoryAudioSelectionPresenter: DocumentsGreedPresenter, CreateStorySe
         return CGSize(width: view.getCollectionViewWidth(), height: 46)
     }
     
-    func getContentWithSuccess(array: [[WrapData]]){
-        if (view == nil){
-            return
-        }
-        //
-        asyncOperationSucces()
-        view.stopRefresher()
-        if let dataSourceForArray = dataSource as? ArrayDataSourceForCollectionView{
-            dataSourceForArray.configurateWithArray(array: array)
-        }else{
-            dataSource.reloadData()
-        }
-    }
+//    override func getContentWithSuccess(array: [[WrapData]]){
+//        if (view == nil){
+//            return
+//        }
+//        //
+//        asyncOperationSucces()
+//        view.stopRefresher()
+//        if let dataSourceForArray = dataSource as? ArrayDataSourceForCollectionView{
+//            dataSourceForArray.configurateWithArray(array: array)
+//        }else{
+//            dataSource.reloadData()
+//        }
+//    }
 
 }

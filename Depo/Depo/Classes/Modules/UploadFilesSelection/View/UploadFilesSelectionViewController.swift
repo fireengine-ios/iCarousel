@@ -12,7 +12,6 @@ class UploadFilesSelectionViewController: BaseFilesGreedChildrenViewController, 
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationBarWithGradientStyle()
         
         navigationItem.rightBarButtonItems = NavigationBarConfigurator().rightItems
         
@@ -27,9 +26,15 @@ class UploadFilesSelectionViewController: BaseFilesGreedChildrenViewController, 
         navigationItem.rightBarButtonItem = barButton
         
     }
+    
+    ///need override this method for correct configuration UINavigationBar
+    override func configureNavBarActions() {}
 
     @objc func onNextButton(){
         output.onNextButton()
     }
     
+    var currentVC: UIViewController {
+        return self//.navigationController?.popViewController(animated: true)
+    }
 }

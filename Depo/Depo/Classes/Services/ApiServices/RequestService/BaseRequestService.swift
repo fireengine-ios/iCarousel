@@ -50,8 +50,11 @@ protocol  RequestParametrs {
 }
 
 protocol UploadRequestParametrs: RequestParametrs {
-    
-    var urlToLocalFile: URL {get}
+    var urlToLocalFile: URL { get }
+}
+
+protocol UploadDataRequestParametrs: RequestParametrs {
+    var data: Data { get }
 }
 
 protocol DownloadRequestParametrs: RequestParametrs {
@@ -226,7 +229,7 @@ class BaseRequestService {
         task.resume()
     }
     
-    func executeUploadRequest(param: UploadRequestParametrs, response:@escaping RequestFileUploadResponse) {
+    func executeUploadRequest(param: UploadRequestParametrs, response:@escaping RequestFileUploadResponse) -> URLSessionUploadTask{
         
         let task = requestService.uploadFileRequestTask(patch: param.patch,
                                                         headerParametrs: param.header,
@@ -236,5 +239,19 @@ class BaseRequestService {
                                                         response: response)
         
         task.resume()
+        return task
+    }
+    
+    func executeUploadDataRequest(param: UploadDataRequestParametrs, response:@escaping RequestFileUploadResponse) -> URLSessionUploadTask{
+        
+        let task = requestService.uploadFileRequestTask(path: param.patch,
+                                                        headerParametrs: param.header,
+                                                        fileData: param.data,
+                                                        method: RequestMethod.Put,
+                                                        timeoutInterval: 2000,
+                                                        response: response)
+        
+        task.resume()
+        return task
     }
 }

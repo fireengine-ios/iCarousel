@@ -12,7 +12,11 @@ protocol BaseFilesGreedInteractorOutput: class, BaseAsyncOperationInteractorOutp
     
     func getContentWithSuccess()
     
-    func getContentWithFail(errorString: String)
+    func getContentWithSuccessEnd()
+    
+    func getContentWithSuccess(array: [[BaseDataSourceItem]])
+    
+    func getContentWithFail(errorString: String?)
     
     func serviceAreNotAvalible()
     

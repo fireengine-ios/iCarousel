@@ -119,7 +119,7 @@ class GridListTopBar: UIViewController {
         sortingTable.setup(withTitles: titles, selectedIndex: selectedSort)
        
         let router = RouterVC()
-        let rootVC = router.tabBarVC?.visibleViewController
+        let rootVC = router.tabBarVC
 
         let popUpHeight = sortingTable.defaultCellHeight*CGFloat(titles.count)
         

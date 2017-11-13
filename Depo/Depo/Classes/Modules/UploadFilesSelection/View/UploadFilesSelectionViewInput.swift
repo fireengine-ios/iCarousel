@@ -14,4 +14,6 @@ protocol UploadFilesSelectionViewInput: class {
     */
 
     func setupInitialState()
+    
+    var currentVC: UIViewController {get}
 }

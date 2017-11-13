@@ -14,6 +14,7 @@ class ApplicationSession: NSObject, NSCoding {
     
     var session : Sesssion
     var signUpInfo: RegistrationUserInfoModel?
+    lazy var dropboxManager: DropboxManager = factory.resolve()
     
     override init() {
         session = Sesssion()
@@ -26,9 +27,9 @@ class ApplicationSession: NSObject, NSCoding {
         session.authToken = loginData.token
         saveData()
         
-        
+    
         FBSDKLoginManager().logOut()
-        DBSession.shared().unlinkAll()
+        dropboxManager.logout()
     }
     
     // MARK: NSCoding

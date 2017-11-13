@@ -10,5 +10,5 @@ protocol LBAlbumLikePreviewSliderViewInput: class {
 
     func setupInitialState()
     
-    func setupCarousel()//withItems items: [Item])
+    func setupCollectionView()//withItems items: [Item])
 }

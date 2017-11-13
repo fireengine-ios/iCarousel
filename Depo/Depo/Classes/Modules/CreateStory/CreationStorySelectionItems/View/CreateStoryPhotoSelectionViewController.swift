@@ -31,4 +31,9 @@ class CreateStoryPhotoSelectionViewController: BaseFilesGreedViewController {
     @objc func onNextButton(){
         output.onNextButton()
     }
+    
+    override func isNeedShowTabBar() -> Bool{
+        return false
+    }
+    
 }

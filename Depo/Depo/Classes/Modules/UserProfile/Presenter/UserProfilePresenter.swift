@@ -18,10 +18,6 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
         view.configurateUserInfo(userInfo: userInfo)
     }
     
-    func setEditButtonEnable(enable: Bool){
-        view.setEditButtonEnable(enable: enable)
-    }
-    
     func startNetworkOperation(){
         startAsyncOperation()
     }
@@ -32,7 +28,7 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
     
     func needSendOTP(responce: SignUpSuccessResponse, userInfo: AccountInfoResponse){
         if let navigationController = view.getNavigationController(){
-            router.needSendOTP(responce: responce, userInfo: userInfo, navigationController: navigationController)
+            router.needSendOTP(responce: responce, userInfo: userInfo, navigationController: navigationController, phoneNumber: view.getPhoneNumber())
         }
     }
     
@@ -44,14 +40,19 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
     
     func viewIsReady() {
         interactor.viewIsReady()
+        view.setupEditState(false)
     }
     
-    func fieldsValueChanged(name: String, email: String, number: String){
-        interactor.fieldsValueChanged(name: name, email: email, number: number)
+    func tapEditButton() {
+        view.setupEditState(true)
     }
     
-    func onEditButton(name: String, email: String, number: String){
-        interactor.onEditButton(name: name, email: email, number: number)
+    func tapReadyButton(name: String, email: String, number: String) {
+        interactor.changeTo(name: name, email: email, number: number)
+    }
+    
+    func dataWasUpdate() {
+        view.setupEditState(false)
     }
     
     //MARK : BasePresenter

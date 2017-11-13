@@ -14,9 +14,9 @@ protocol BaseFilesGreedInteractorInput {
     
     var remoteItems: RemoteItemsService { get }
     
-    func nextItems(_ searchText: String!, sortBy: SortType, sortOrder: SortOrder)
+    func nextItems(_ searchText: String!, sortBy: SortType, sortOrder: SortOrder, newFieldValue: FieldValue?)
     
-    func reloadItems (_ searchText: String!, sortBy: SortType, sortOrder: SortOrder)
+    func reloadItems (_ searchText: String!, sortBy: SortType, sortOrder: SortOrder, newFieldValue: FieldValue?)
         
     func needShowNoFileView()-> Bool
     
@@ -35,5 +35,7 @@ protocol BaseFilesGreedInteractorInput {
     var alerSheetMoreActionsConfig: AlertFilesActionsSheetInitialConfig? { get }
     
     var originalFilesTypeFilter: [GeneralFilesFiltrationType]? { get }
+    
+    func getAllItems(sortBy: SortedRules)
     
 }

@@ -10,6 +10,7 @@ class OTPViewInteractor: PhoneVereficationInteractor {
     
     var responce: SignUpSuccessResponse? = nil
     var userInfo: AccountInfoResponse? = nil
+    var phoneNumberString: String? = nil
     
     override var remainingTimeInMinutes: Int {
         if let resp = responce{
@@ -27,8 +28,8 @@ class OTPViewInteractor: PhoneVereficationInteractor {
     }
     
     override var phoneNumber: String {
-        if let info = userInfo{
-            return info.phoneNumber ?? ""
+        if let phone = phoneNumberString{
+            return phone ?? ""
         }
         
         return ""
@@ -48,12 +49,13 @@ class OTPViewInteractor: PhoneVereficationInteractor {
         }
         
         let parameters = VerifyPhoneNumberParameter(otp: code, referenceToken: responce!.referenceToken ?? "")
-        AccountService().verifyPhoneNumber(parameters: parameters, success: { (responce) in
-            DispatchQueue.main.async { [weak self] in
+        AccountService().verifyPhoneNumber(parameters: parameters, success: {[weak self] (responce) in
+            DispatchQueue.main.async {
+                self?.userInfo?.phoneNumber = self?.phoneNumber
                 self?.output.verificationSucces()
             }
-        }) { (errorRespose) in
-            DispatchQueue.main.async { [weak self] in
+        }) { [weak self] (errorRespose) in
+            DispatchQueue.main.async {
                 guard let `self` = self else {
                     return
                 }
@@ -72,12 +74,12 @@ class OTPViewInteractor: PhoneVereficationInteractor {
             return
         }
         authService.resendVerificationSMS(resendVerification: ResendVerificationSMS(refreshToken: referenceToken), sucess: { [weak self] _ in
-            DispatchQueue.main.async { [weak self] in
+            DispatchQueue.main.async {
                 self?.output.resendCodeRequestSuccesed()
                 
             }
             }, fail: { [weak self] errorResponse in
-                DispatchQueue.main.async { [weak self] in
+                DispatchQueue.main.async {
                     self?.output.resendCodeRequestFailed(with: errorResponse)
                 }
         })

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LBAlbumLikePreviewSliderViewController" customModule="Depo_LifeTech" customModuleProvider="target">
             <connections>
-                <outlet property="carousel" destination="z9V-PL-9LJ" id="va5-7y-3BS"/>
+                <outlet property="collectionView" destination="Lsf-tT-Cem" id="iZk-jp-ue8"/>
                 <outlet property="titleLabel" destination="jh0-1c-UAF" id="sm6-4R-9iP"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Axe-KV-JPN"/>
             </connections>
@@ -21,25 +21,38 @@
             <rect key="frame" x="0.0" y="0.0" width="428" height="128"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z9V-PL-9LJ" customClass="iCarousel">
-                    <rect key="frame" x="0.0" y="43" width="428" height="85"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jh0-1c-UAF">
                     <rect key="frame" x="15" y="12" width="44" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="kJm-UE-9Fi"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Lsf-tT-Cem">
+                    <rect key="frame" x="10" y="33" width="408" height="95"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="20" minimumInteritemSpacing="0.0" id="MHc-Oz-ERZ">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="ZdJ-a3-Grl"/>
+                        <outlet property="delegate" destination="-1" id="GGz-0v-hw1"/>
+                    </connections>
+                </collectionView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="z9V-PL-9LJ" secondAttribute="bottom" id="7dZ-U1-vBK"/>
+                <constraint firstItem="Lsf-tT-Cem" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="BWY-qp-Idi"/>
                 <constraint firstItem="jh0-1c-UAF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="12" id="LbM-Mb-eP9"/>
-                <constraint firstAttribute="trailing" secondItem="z9V-PL-9LJ" secondAttribute="trailing" id="Nwr-yQ-jAl"/>
                 <constraint firstItem="jh0-1c-UAF" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="WxV-mG-UHm"/>
-                <constraint firstItem="z9V-PL-9LJ" firstAttribute="top" secondItem="jh0-1c-UAF" secondAttribute="bottom" constant="10" id="blB-Zy-3Bf"/>
-                <constraint firstItem="z9V-PL-9LJ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="mua-gd-1n5"/>
+                <constraint firstItem="Lsf-tT-Cem" firstAttribute="top" secondItem="jh0-1c-UAF" secondAttribute="bottom" id="i8d-4c-AGL"/>
+                <constraint firstAttribute="trailing" secondItem="Lsf-tT-Cem" secondAttribute="trailing" constant="10" id="k86-4Z-iWA"/>
+                <constraint firstAttribute="bottom" secondItem="Lsf-tT-Cem" secondAttribute="bottom" id="xbE-Zy-18g"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>

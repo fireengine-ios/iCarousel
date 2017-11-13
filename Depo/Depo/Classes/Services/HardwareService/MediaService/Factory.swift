@@ -12,11 +12,18 @@ let factory: Factory = FactoryMain()
 
 protocol Factory {
     func resolve() -> MediaPlayer
+    func resolve() -> DropboxManager
 }
 
 final class FactoryMain: NSObject, Factory {
     @objc static let mediaPlayer = MediaPlayer() /// when will be appdelegate on swift, make it private
     func resolve() -> MediaPlayer {
         return FactoryMain.mediaPlayer
+    }
+    
+    
+    private static let dropboxManager = DropboxManager()
+    func resolve() -> DropboxManager {
+        return FactoryMain.dropboxManager
     }
 }

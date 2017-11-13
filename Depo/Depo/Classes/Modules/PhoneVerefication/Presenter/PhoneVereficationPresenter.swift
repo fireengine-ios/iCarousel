@@ -70,6 +70,7 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
     
     func resendCodeRequestSuccesed() {
         compliteAsyncOperationEnableScreen()
+        asyncOperationSucces()
         view.setupButtonsInitialState()
         view.setupTimer(withRemainingTime: interactor.remainingTimeInMinutes * 60 )
     }
@@ -81,6 +82,7 @@ class PhoneVereficationPresenter: BasePresenter, PhoneVereficationModuleInput, P
     }
     
     func failLogin(message: String) {
+        asyncOperationSucces()
         compliteAsyncOperationEnableScreen(errorMessage: message)
     }
     

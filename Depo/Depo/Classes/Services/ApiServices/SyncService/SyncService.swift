@@ -17,6 +17,7 @@ class SyncService: NSObject {
     private var isSyncing: Bool = false
     private var itemsFromServer = [WrapData]()
     private let numberElementsInRequest = 100
+    private var photoVideoService : PhotoAndVideoService? = nil
     
     override init() {
         operations = OperationQueue()
@@ -36,15 +37,15 @@ class SyncService: NSObject {
         
         isSyncing = true
         itemsFromServer.removeAll()
-        let photoVideoService = PhotoAndVideoService(requestSize: numberElementsInRequest)
-        getAllServerObjects(photoVideoService: photoVideoService, success: {
+        self.photoVideoService = PhotoAndVideoService(requestSize: numberElementsInRequest)
+        getAllServerObjects(success: {
             
             let serverObjectHash = self.itemsFromServer.map({$0.md5})
-            
+
             let notSyncedItems = self.allLocalNotSyncItems(md5Array: serverObjectHash,
                                                            video: isWiFi ? true : !videoViaWiFiOnly,
                                                            image: isWiFi ? true : !imageViaWiFiOnly)
-            
+
             if (notSyncedItems.count > 0){
                 UploadService.default.uploadFileList(items: notSyncedItems,
                                                      uploadType: .autoSync,
@@ -80,12 +81,16 @@ class SyncService: NSObject {
         }
     }
     
-    private func getAllServerObjects(photoVideoService: RemoteItemsService, success: @escaping ()-> Swift.Void, fail: @escaping ()-> Swift.Void){
-        photoVideoService.nextItems(sortBy: .date, sortOrder: .asc, success: { (items) in
+    private func getAllServerObjects(success: @escaping ()-> Swift.Void, fail: @escaping ()-> Swift.Void){
+        guard let service = self.photoVideoService else{
+            fail()
+            return
+        }
+        service.nextItems(sortBy: .date, sortOrder: .asc, success: { (items) in
             self.itemsFromServer.append(contentsOf: items)
             
             if (items.count == self.numberElementsInRequest){
-                self.getAllServerObjects(photoVideoService: photoVideoService, success: {
+                self.getAllServerObjects(success: {
                     success()
                 }, fail: {
                     fail()
@@ -93,13 +98,18 @@ class SyncService: NSObject {
             }else{
                 success()
             }
-        }) {
+        }, fail: {
             fail()
-        }
+        }, newFieldValue: nil)
+       
     }
     
     func stopSync() {
-    
+        if (isSyncing){
+            photoVideoService?.stopAllOperations()
+            UploadService.default.cancelOperations()
+            isSyncing = false
+        }
     }
     
     func pause() {
@@ -117,6 +127,8 @@ class SyncService: NSObject {
     }
     
     func updateSyncSettings(setting: SettingsAutoSyncModel) {
+        stopSync()
+        
         if setting.isAutoSyncEnable {
             startSync(imageViaWiFiOnly: !setting.mobileDataPhotos, videoViaWiFiOnly: !setting.mobileDataVideo)
         } else {

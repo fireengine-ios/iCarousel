@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SelectNameViewController: UIViewController, SelectNameViewInput, UITextFieldDelegate {
+class SelectNameViewController: BaseViewController, SelectNameViewInput, UITextFieldDelegate {
 
     var output: SelectNameViewOutput!
     
@@ -46,6 +46,8 @@ class SelectNameViewController: UIViewController, SelectNameViewInput, UITextFie
         
         textField.becomeFirstResponder()
     }
+    
+    
 
 
     // MARK: SelectNameViewInput

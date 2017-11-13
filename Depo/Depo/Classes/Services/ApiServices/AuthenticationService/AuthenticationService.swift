@@ -287,7 +287,7 @@ class AuthenticationService: BaseRequestService {
     }
     
     func logout(success:SuccessLogout?) {
-        let param = LogoutUser()
+        SingletonStorage.shared().accountInfo = nil
         let successResponse  =  {
             let s = LoginResponse(withJSON: nil)
             /// in LoginResponse(withJSON: nil)

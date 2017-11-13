@@ -12,6 +12,8 @@ class BaseViewController: UIViewController {
 
     var keyboardHeight: CGFloat = 0
     
+    var needShowTabBar: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,6 +25,12 @@ class BaseViewController: UIViewController {
                                                selector: #selector(hideKeyboard),
                                                name: NSNotification.Name.UIKeyboardWillHide,
                                                object: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        showTabBarIfNeed()
     }
     
     func getMainYForView(view: UIView)->CGFloat{
@@ -62,6 +70,17 @@ class BaseViewController: UIViewController {
             }
         }
         return nil
+    }
+    
+    func showTabBarIfNeed() {
+        if isNeedShowTabBar(){
+            let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationShowTabBar)
+            NotificationCenter.default.post(name: notificationName, object: nil)
+        }
+    }
+    
+    func isNeedShowTabBar() -> Bool{
+        return needShowTabBar
     }
     
 }

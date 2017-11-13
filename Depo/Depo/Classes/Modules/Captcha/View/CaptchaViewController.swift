@@ -10,6 +10,8 @@ import UIKit
 
 class CaptchaViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var captchaPlaceholderLabel: UILabel!
+    @IBOutlet weak var imageBackground: UIView!
     
     var currenrtCapthcaID: String = ""
     
@@ -31,6 +33,8 @@ class CaptchaViewController: UIViewController {
         super.viewDidLoad()
         activityIndicator.startAnimating()
         getCaptcha(withType: .image)
+        captchaPlaceholderLabel.text = TextConstants.captchaPlaceholder
+        imageBackground.layer.cornerRadius = 5
     }
     
     @IBAction func captchaRefresh(_ sender: Any) {

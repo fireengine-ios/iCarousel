@@ -11,5 +11,11 @@ import CoreData
 
 
 public class MediaItemsAlbum: NSManagedObject {
-
+    convenience init(uuid: String?, context: NSManagedObjectContext) {
+        let entityDescr = NSEntityDescription.entity(forEntityName: MediaItemsAlbum.Identifier,
+                                                     in: context)!
+        self.init(entity: entityDescr, insertInto: context)
+        
+        self.uuid = uuid
+    }
 }

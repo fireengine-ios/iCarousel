@@ -22,7 +22,8 @@ class UploadFilesSelectionModuleInitializer: NSObject {
                                presenter: UploadFilesSelectionPresenter(),
                                interactor: UploadFilesSelectionInteractor(remoteItems: searchService),
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [],
-                                                                                     selectionModeTypes: []))
+                                                                                     selectionModeTypes: []),
+                               topBarConfig: nil)
         viewController.mainTitle = ""
         return viewController
     }
@@ -38,26 +39,32 @@ class UploadFilesSelectionModuleInitializer: NSObject {
                                presenter: UploadFilesSelectionPresenter(),
                                interactor: UploadFilesSelectionInteractor(remoteItems: service),
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [],
-                                                                                     selectionModeTypes: []))
+                                                                                     selectionModeTypes: []),
+                               topBarConfig: nil)
         
         viewController.mainTitle = ""
         return viewController
     }
 
-    class func initializeUploadPhotosViewController() -> UIViewController {
+    class func initializeUploadPhotosViewController(rootUUID: String = "") -> UIViewController {
 //
         let viewController = UploadFilesSelectionViewController(nibName: "BaseFilesGreedViewController", bundle: nil)
         let configurator = BaseFilesGreedModuleConfigurator()
         let service = LocalPhotoAndVideoService()
+        let interactor = UploadFilesSelectionInteractor(remoteItems: service)
+        interactor.rootUIID = rootUUID
+        
+        
         
         configurator.configure(viewController: viewController,
-                               fileFilters: [.localStatus(.local), .syncStatus(.notSynced)],//[.duplicates],//
+                               fileFilters: [.localStatus(.local)],//[.duplicates],//
                                bottomBarConfig: nil,
                                router: BaseFilesGreedRouter(),
                                presenter: UploadFilesSelectionPresenter(),
-                               interactor: UploadFilesSelectionInteractor(remoteItems: service),
+                               interactor: interactor,
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [],
-                                                                                     selectionModeTypes: []))
+                                                                                     selectionModeTypes: []),
+                               topBarConfig: nil)
         
         viewController.mainTitle = ""
         return viewController

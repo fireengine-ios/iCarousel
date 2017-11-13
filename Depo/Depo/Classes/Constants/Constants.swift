@@ -68,6 +68,7 @@ struct TextConstants {
     static let autoSyncAlertText = "You’re skipping auto-sync setting turned off. You can activate this later in preferences."
     static let autoSyncAlertYes = "Skip Auto-Sync"
     static let autoSyncAlertNo = "Cancel"
+    static let autoSyncSaveButton = "Save"
     
     static let registerTitle = "Sign Up"
     
@@ -75,6 +76,8 @@ struct TextConstants {
     static let forgotPasswordSubTitle = "If you are already a Turkcell subscriber, you can retrieve your password by sending SMS to 2222"//"If you registered with your Turkcell Number you can just send SIFRE LIFEBOX to 2222 to recieve a new password or enter your mail below."
     static let forgotPasswordSendPassword = "Send password reset link"
     static let forgotPasswordCellTitle = NSLocalizedString("EmailTitle", comment: "")
+    
+    static let captchaPlaceholder = "Type the text"
     
     static let checkPhoneResendCodeButtonText = NSLocalizedString("ResendButton", comment: "")
     static let checkPhoneNextButtonText = "Next"
@@ -244,9 +247,10 @@ struct TextConstants {
     static let settingsViewCellPasscode = "Lifebox Touch ID and Passcode"
     static let settingsViewCellHelp = "Help & Support"
     static let settingsViewCellLogout = "Logout"
-    
+    static let settingsViewLogoutCheckMessage = "Are you sure you want to exit the application?"
     
     //MARK: Import photos
+    static let importPhotos = "Import Photos"
     static let importFromDB = "Import From Dropbox"
     static let importFromFB = "Import From Facebook"
     static let importFromInstagram = "Import From Instagram"
@@ -260,7 +264,10 @@ struct TextConstants {
     static let userProfileBottomLabelText2 = "We promise, we won’t sent you spam."
     static let userProfileWhantToChangePasswordButton = "I want to change my password"
     static let userProfileEditButton = "Edit"
-    
+    static let userProfileDoneButton = "Done"
+    static let userProfileDataNotСhanged = "Data did not changed"
+    static let userProfileDataNotCorrect = "Data is not correct"
+
     //MARK: fileInfo
     static let fileInfoFileNameTitle = "File Name"
     static let fileInfoInfoTitle = "File Info"
@@ -341,6 +348,9 @@ struct TextConstants {
     static let uploadFilesMultipleHeader = "Items Selected"
     static let uploadFilesNothingUploadError = "Nothing to upload"
     static let uploadFilesNothingUploadOk = "Ok"
+    static let uploadSuccessful = "Upload was successful"
+    static let uploadFailed = "Upload failed"
+    
     
     //MARK: Select Folder
     static let selectFolderNextButton = "Select"
@@ -420,6 +430,11 @@ struct TextConstants {
     static let actionSheetMove = "Move"
     static let actionSheetSync = "Sync"
     static let actionSheetDownload = "Download"
+    
+    static let actionSheetShareSmallSize = "Small Size"
+    static let actionSheetShareOriginalSize = "Original Size"
+    static let actionSheetShareShareViaLink = "Share Via Link"
+    static let actionSheetShareCancel = "Cancel"
  
     static let actionSheetCreateStory = "Create a Story"
     static let actionSheetCopy = "Copy"

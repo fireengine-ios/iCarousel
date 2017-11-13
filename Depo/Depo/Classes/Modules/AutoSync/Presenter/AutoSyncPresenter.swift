@@ -11,6 +11,8 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
     weak var view: AutoSyncViewInput!
     var interactor: AutoSyncInteractorInput!
     var router: AutoSyncRouterInput!
+    
+    let customPopUp = CustomPopUp()
 
     func viewIsReady() {
         startAsyncOperationDisableScreen()
@@ -28,9 +30,14 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
     }
     
     func skipForNowPressed() {
-        CustomPopUp.sharedInstance.showCustomAlert(withTitle: TextConstants.autoSyncAlertTitle, titleAligment: .left, withText: TextConstants.autoSyncAlertText, warningTextAligment: .left, firstButtonText: TextConstants.autoSyncAlertNo, secondButtonText: TextConstants.autoSyncAlertYes, isShadowViewShown: true)
-        CustomPopUp.sharedInstance.delegate = self
-//
+        customPopUp.delegate = self
+        customPopUp.showCustomAlert(withTitle: TextConstants.autoSyncAlertTitle,
+                                    titleAligment: .left,
+                                    withText: TextConstants.autoSyncAlertText,
+                                    warningTextAligment: .left,
+                                    firstButtonText: TextConstants.autoSyncAlertNo,
+                                    secondButtonText: TextConstants.autoSyncAlertYes,
+                                    isShadowViewShown: true)
     }
     
     func cancelationAction() {

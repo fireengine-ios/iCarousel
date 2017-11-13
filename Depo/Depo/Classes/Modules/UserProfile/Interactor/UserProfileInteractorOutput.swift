@@ -11,9 +11,7 @@ import Foundation
 protocol UserProfileInteractorOutput: class {
     
     func configurateUserInfo(userInfo: AccountInfoResponse)
-    
-    func setEditButtonEnable(enable: Bool)
-    
+        
     func startNetworkOperation()
     
     func stopNetworkOperation()
@@ -22,4 +20,5 @@ protocol UserProfileInteractorOutput: class {
     
     func showError(error: String)
     
+    func dataWasUpdate()
 }

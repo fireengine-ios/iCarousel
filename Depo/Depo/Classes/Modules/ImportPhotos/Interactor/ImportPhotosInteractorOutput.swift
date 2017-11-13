@@ -31,17 +31,23 @@ protocol ImportFromFBInteractorOutput {
     func stopFailureCallback(errorMessage: String)
     
     func goToOnboarding()
+    
+//    func success(socialStatus: SocialStatusResponse)
+//    func failed(with errorMessage: String)
 }
 
 // MARK: - Dropbox
 
 protocol ImportFromDropboxInteractorOutput {
     
-    func tokenSuccessCallback(token: String)
-    func tokenFailureCallback(errorMessage: String)
+    func loginSuccessCallback(token: String)
+    func loginFailureCallback(errorMessage: String)
     
     func connectSuccessCallback()
     func connectFailureCallback(errorMessage: String)
+
+    func statusSuccessCallback(status: DropboxStatusObject)
+    func statusFailureCallback(errorMessage: String)
     
     func statusForStartSuccessCallback(status: DropboxStatusObject)
     func statusForStartFailureCallback(errorMessage: String)
@@ -49,8 +55,8 @@ protocol ImportFromDropboxInteractorOutput {
     func startSuccessCallback()
     func startFailureCallback(errorMessage: String)
     
-    func statusSuccessCallback(status: DropboxStatusObject)
-    func statusFailureCallback(errorMessage: String)
-    
-    func goToOnboarding()
+//    func statusSuccessCallback(status: DropboxStatusObject)
+//    func statusFailureCallback(errorMessage: String)
+//    
+//    func goToOnboarding()
 }

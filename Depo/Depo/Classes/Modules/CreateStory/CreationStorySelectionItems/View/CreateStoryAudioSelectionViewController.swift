@@ -59,4 +59,8 @@ class CreateStoryAudioSelectionViewController: BaseFilesGreedChildrenViewControl
         }
     }
     
+    override func isNeedShowTabBar() -> Bool{
+        return false
+    }
+    
 }

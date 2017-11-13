@@ -57,7 +57,7 @@ class BottomSelectionTabBarViewController: UIViewController, BottomSelectionTabB
     }
     
     func hideBar(animated: Bool) {
-        editingBar.dismiss(animated: animated)
+        editingBar?.dismiss(animated: animated)
     }
     
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
@@ -65,6 +65,10 @@ class BottomSelectionTabBarViewController: UIViewController, BottomSelectionTabB
             return
         }
         output.bottomBarSelectedItem(index: selectedItemIndex, sender: item)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + NumericConstants.durationOfAnimation) {[weak self] in
+            self?.unselectAll()
+        }
     }
     
     func unselectAll() {

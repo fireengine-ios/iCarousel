@@ -86,19 +86,20 @@ class SearchViewController: UIViewController, UISearchBarDelegate, SearchViewInp
     // MARK: - UISearchbarDelegate
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        self.view.endEditing(true)
-        self.dismiss(animated: true, completion: nil)
+        view.endEditing(true)
+        dismiss(animated: true, completion: nil)
+        output.tapCancel()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if searchBar.text! != "" {
-            let customAllowedSet =  NSCharacterSet(charactersIn:"=\"#%/<>?@\\^`{|}&").inverted
+            let customAllowedSet =  CharacterSet(charactersIn:"=\"#%/<>?@\\^`{|}&").inverted
             output.searchWith(searchText: searchBar.text!.addingPercentEncoding(withAllowedCharacters: customAllowedSet)!, sortBy: SortType.date, sortOrder: SortOrder.asc)
         } else {
-            self.collectionView.isHidden = true
+            collectionView.isHidden = true
         }
-        self.view.endEditing(true)
-        self.suggestTableView.isHidden = true
+        view.endEditing(true)
+        suggestTableView.isHidden = true
     }
     
     var timerToSearch = Timer()

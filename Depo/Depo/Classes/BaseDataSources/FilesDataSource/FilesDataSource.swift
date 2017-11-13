@@ -81,14 +81,30 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
     //MARK: AsynImage
     
     func getImage(patch: PathForItem, compliteImage: @escaping RemoteImage) {
-        
         switch patch {
         case let .localMediaContent(local):
             localManager.getPreviewImage(asset: local.asset, image: compliteImage)
-            
         case let .remoteUrl(url):
             getImageServise.getImage(patch: url, compliteImage: compliteImage)
         }
-        
+    }
+    
+    func getImage(for item: Item, isOriginal: Bool, compliteImage: @escaping RemoteImage) {
+        if isOriginal {
+            switch item.patchToPreview {
+            case let .localMediaContent(local):
+                localManager.getPreviewMaxImage(asset: local.asset, image: compliteImage)
+                
+            case let .remoteUrl(url):
+                if let largeUrl = item.metaData?.largeUrl {
+                    getImageServise.getImage(patch: largeUrl, compliteImage: compliteImage)
+                } else {
+                    getImageServise.getImage(patch: url, compliteImage: compliteImage)
+                }
+            }
+            
+        } else {
+            getImage(patch: item.patchToPreview, compliteImage: compliteImage)
+        }
     }
 }

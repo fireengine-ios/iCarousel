@@ -9,227 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-enum UploadPriority {
-   
-    case low
-    
-    case normal
-    
-    case critical
-}
-
-class UploadBaseURL: BaseRequestParametrs {
-    
-    
-    override var requestParametrs: Any {
-        return Data()
-    }
-    
-    override var patch: URL {
-        return URL(string: UploadServiceConstant.baseUrl, relativeTo:super.patch)!
-    }
-}
-
-typealias UploadServiceBaseUrlResponse  = (_ resonse: UploadBaseURLResponse?) -> Swift.Void
-
-struct UploadServiceConstant {
-    
-    static let baseUrl = "/api/container/baseUrl"
-    
-    static let uploadNotify = "/api/notification/onFileUpload?parentFolderUuid=%@&fileName=%@"
-    
-}
-
-class UploadBaseURLResponse: ObjectRequestResponse {
-    
-    var url: URL?
-    
-    var uniqueValueByBaseUrl: String = ""
-    
-    override func mapping() {
-        url = json?["value"].url
-        let list =  json?["value"].string?
-            .components(separatedBy: "/")
-            .filter{ $0.hasPrefix("AUTH_")}
-        uniqueValueByBaseUrl = list?.first ?? ""
-    }
-}
-
-enum MetaSpesialFolder: String {
-    
-    case MOBILE_UPLOAD = "MOBILE_UPLOAD"
-    
-    case CROPY = "CROPY"
-    
-    case none = ""
-}
-
-enum UploadType {
-    
-    case fromHomePage
-    
-    case autoSync
-    
-    case other
-}
-
-enum MetaStrategy: String {
-    
-    case ConflictControl = "0"
-    
-    case WithoutConflictControl = "1"
-}
-
-class Upload: UploadRequestParametrs {
-    
-    private let item: WrapData
-    
-    private let uploadType:UploadType
-    
-    private let uploadStrategy: MetaStrategy
-    
-    private let uploadTo: MetaSpesialFolder
-    
-    private let rootFolder: String
-    
-    private let destitantionURL: URL
-    
-    var contentType: String {
-        switch item.fileType {
-        
-        case .image :
-            return "image/jpg"
-            
-        case .video :
-            return "video/mp4"
-            
-        default:
-            return "unknown"
-        }
-    }
-    
-    var contentLenght:String {
-        return String(format: "%lu", item.fileSize)
-    }
-    
-    var fileName: String {
-        return item.name ?? "unknown"
-    }
-    
-    var md5: String {
-        return item.md5
-    }
-    
-    var urlToLocalFile: URL {
-        return tmpLocation
-    }
-    
-    lazy var tmpLocation: URL = {
-       return LocalMediaStorage.default.copyAssetToDocument(asset: self.item.asset!)
-    }()
-    
-    let  tmpUUId: String
-    
-    init(item: WrapData, destitantion: URL, uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, rootFolder: String) {
-        
-        self.item = item
-        self.uploadType = uploadType
-        self.rootFolder = rootFolder
-        self.uploadStrategy = uploadStategy
-        self.uploadTo = uploadTo
-        self.destitantionURL = destitantion
-        self.tmpUUId = UUID().description
-    }
-    
-     var requestParametrs: Any {
-        return Data()
-    }
-    var header: RequestHeaderParametrs {
-        var header  = RequestHeaders.authification()
-        
-        header = header + [ HeaderConstant.ContentType : contentType,
-                  HeaderConstant.ContentLength         : contentLenght,
-                  HeaderConstant.XMetaStrategy         : uploadStrategy.rawValue,
-                  HeaderConstant.XMetaRecentServerHash : "s",
-                  HeaderConstant.XObjectMetaFileName   : fileName,
-                  HeaderConstant.XObjectMetaParentUuid : rootFolder,
-                  HeaderConstant.XObjectMetaSpecialFolder:uploadTo.rawValue,
-                  HeaderConstant.XObjectMetaAlbumLabel  : "",
-                  HeaderConstant.XObjectMetaFolderLabel : "",
-                  HeaderConstant.Expect                 : "100-continue",
-                  HeaderConstant.Etag                   : md5]
-        return header
-    }
-    
-    var patch: URL {
-        return URL(string: destitantionURL.absoluteString
-                                          .appending("/")
-                                          .appending(tmpUUId))!
-    }
-}
-
-
-class UploadNotify: BaseRequestParametrs {
-    
-    let parentUUID: String
-    
-    let fileUUID: String
-    
-    init(parentUUID: String, fileUUID: String) {
-        self.parentUUID = parentUUID
-        self.fileUUID = fileUUID
-        super.init()
-    }
-    
-    override var patch: URL {
-        let str = String(format: UploadServiceConstant.uploadNotify,
-                         parentUUID, fileUUID)
-        return URL(string: str, relativeTo:super.patch)!
-    }
-}
-
-
-class UploadNotifyResponse: ObjectRequestResponse {
-    
-    var itemResponse : SearchItemResponse?
-    
-    override func mapping() {
-        itemResponse = SearchItemResponse(withJSON: self.json)
-    }
-}
-
-
-class UploadResponse: ObjectRequestResponse {
-    
-    var url: URL?
-    
-    var userUniqueValue: String?
-    
-    override func mapping() {
-        
-        if let st = json?["value"].string, isOkStatus {
-            
-            url = json?["value"].url
-            
-            userUniqueValue = st.components(separatedBy: "/")
-                                .filter{ $0.hasPrefix("AUTH_")}
-                                .first
-        }
-    }
-}
-
-
-class UloadSuccess: ObjectRequestResponse {
-    
-    override func mapping() {
-        print("A")
-    }
-}
-
-typealias FileUploadOperationSucces = (_ item: WrapData) -> Swift.Void
-
-
-class UploadService: BaseRequestService {
+final class UploadService: BaseRequestService {
     
     static let `default` = UploadService()
     
@@ -237,20 +17,98 @@ class UploadService: BaseRequestService {
     
     private let syncQueue: OperationQueue
     private let uploadQueue: OperationQueue
+    private var uploadOperations = [UploadOperations]()
+    private var uploadOnDemandOperations = [UploadOperations]()
     
     override init() {
         
         uploadQueue = OperationQueue()
         uploadQueue.maxConcurrentOperationCount = 1
-        
         syncQueue = OperationQueue()
         syncQueue.maxConcurrentOperationCount = 1
         
         dispatchQueue = DispatchQueue(label: "Upload Queue")
         super.init()
     }
+
+    func upload(imageData: Data, handler: @escaping (Result<Void>) -> Void) {
+        baseUrl(success: { [weak self] urlResponse in
+            
+            guard let url = urlResponse?.url else {
+                return handler(.failed(CustomErrors.unknown))
+            }
+            
+            let uploadParam = UploadDataParametrs(data: imageData, url: url)
+            
+            _ = self?.executeUploadDataRequest(param: uploadParam, response: { [weak self]
+                (data, response, error) in
+                
+                if let error = error {
+                    return handler(.failed(error))
+                }
+                if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode >= 300 {
+                    return handler(.failed(ServerError(code: httpResponse.statusCode, data: data)))
+                }
+                guard let _ = data else {
+                    return handler(.failed(CustomErrors.unknown))
+                }
+                
+                let uploadNotifParam = UploadNotify(parentUUID: "",
+                                                    fileUUID: uploadParam.tmpUUId )
+
+                self?.uploadNotify(param: uploadNotifParam, success: { baseurlResponse in
+                    /// MAYBE WILL BE NEED
+                    //guard let response = baseurlResponse as? UploadNotifyResponse else {
+                    //    return handler(.failed(CustomErrors.unknown))
+                    //}
+                    //print(response.itemResponse ?? "")
+                    handler(.success(()))
+                }, fail: { errorResponse in
+                    handler(.failed(CustomErrors.text(errorResponse.description)))
+                })
+            })
+        }, fail: { errorResponse in
+            handler(.failed(CustomErrors.text(errorResponse.description)))
+        })
+    }
+    
+    
+    // MARK: - Upload on demand
+    
+    func uploadOnDemandFileList(items: [WrapData], uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String) {
+            WrapItemOperatonManager.default.startOperationWith(type: .upload, allOperations: items.count, completedOperations: 0)
+            let allOperationCount = items.count
+            var completedOperationCount = 0
+            let operations: [UploadOperations] = items.flatMap {
+                UploadOperations(item: $0, uploadType: uploadType, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, success: {
+                    completedOperationCount = completedOperationCount + 1
+                    WrapItemOperatonManager.default.setProgressForOperationWith(type: .upload, allOperations: allOperationCount, completedOperations: completedOperationCount)
+                }, fail: { (error) in
+                    completedOperationCount = completedOperationCount + 1
+                    //TODO: Error alert
+                })
+            }
+            uploadOnDemandOperations.append(contentsOf: operations)
+    }
+    
+    func uploadOnDemand(success: FileOperationSucces?, fail: FailResponse?) {
+        guard !self.uploadOnDemandOperations.isEmpty else {
+            return
+        }
+        
+        dispatchQueue.async {
+            self.uploadQueue.addOperations(self.uploadOnDemandOperations, waitUntilFinished: true)
+            self.uploadOnDemandOperations.removeAll()
+            success?()
+            WrapItemOperatonManager.default.stopOperationWithType(type: .upload)
+        }
+    }
+    
+    //MARK: -
+    
     
     func uploadFileList(items: [WrapData], uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", success: FileOperationSucces?, fail: FailResponse? ) {
+
         WrapItemOperatonManager.default.startOperationWith(type: .upload, allOperations: items.count, completedOperations: 0)
         let allOperationCount = items.count
         var completedOperationCount = 0
@@ -259,9 +117,11 @@ class UploadService: BaseRequestService {
                 completedOperationCount = completedOperationCount + 1
                 WrapItemOperatonManager.default.setProgressForOperationWith(type: .upload, allOperations: allOperationCount, completedOperations: completedOperationCount)
             }, fail: { (error) in
-                
+                completedOperationCount = completedOperationCount + 1
+                //WrapItemOperatonManager.default.setProgressForOperationWith(type: .upload, allOperations: allOperationCount, completedOperations: completedOperationCount)
             })
         }
+        uploadOperations.append(contentsOf: operations)
         
         dispatchQueue.async {
             self.uploadQueue.addOperations(operations, waitUntilFinished: true)
@@ -270,10 +130,15 @@ class UploadService: BaseRequestService {
         }
     }
     
-    func upload(uploadParam: Upload, success: FileOperationSucces?, fail: FailResponse? ) {
+    func cancelOperations(){
+        uploadOperations.forEach { $0.cancel() }
+        uploadOperations.removeAll()
+        WrapItemOperatonManager.default.stopOperationWithType(type: .upload)
+    }
     
-        executeUploadRequest(param: uploadParam,
-                             response: { (data, response, error) in
+    func upload(uploadParam: Upload, success: FileOperationSucces?, fail: FailResponse? ) -> URLSessionUploadTask {
+    
+        let request = executeUploadRequest(param: uploadParam, response: { (data, response, error) in
                             
             if let httpResponse = response as? HTTPURLResponse {
                 if 200...299 ~= httpResponse.statusCode {
@@ -287,10 +152,11 @@ class UploadService: BaseRequestService {
                                 
             fail?(.string("Error upload"))
         })
+        
+        return request
     }
     
     func baseUrl(success: @escaping UploadServiceBaseUrlResponse, fail:FailResponse?) {
-        
         let param = UploadBaseURL()
         let handler = BaseResponseHandler<UploadBaseURLResponse, ObjectRequestResponse>(success: { result in
            success(result as? UploadBaseURLResponse)
@@ -300,111 +166,123 @@ class UploadService: BaseRequestService {
     }
     
     func uploadNotify(param: UploadNotify, success: @escaping SuccessResponse, fail:FailResponse?) {
-        
         let handler = BaseResponseHandler<UploadNotifyResponse, ObjectRequestResponse>(success: success, fail: fail)
-        
         executeGetRequest(param: param, handler: handler)
-    }
-    
-    
-    private class UploadOperations: Operation {
-        
-        let item: WrapData
-        let uploadType: UploadType
-        let uploadStategy: MetaStrategy
-        let uploadTo: MetaSpesialFolder
-        let folder: String
-        let success: FileOperationSucces?
-        let fail: FailResponse?
-        
-        private let semaphore: DispatchSemaphore
-        
-        init(item: WrapData, uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", success: FileOperationSucces?, fail: FailResponse?) {
-            
-            self.item = item
-            self.uploadType = uploadType
-            self.uploadTo = uploadTo
-            self.uploadStategy = uploadStategy
-            self.folder = folder
-            self.success = success
-            self.fail = fail
-            self.semaphore = DispatchSemaphore(value: 0)
-        }
-        
-        override func main() {
-            
-            if isCancelled {
-                return
-            }
-            
-            let customSucces: FileOperationSucces = {
-                self.success?()
-                self.semaphore.signal()
-            }
-            
-            let customFail: FailResponse = { value in
-                self.fail?(value)
-                self.semaphore.signal()
-            }
-            
-            baseUrl(success: { baseurlResponse in
-                
-                let uploadParam  = Upload(item: self.item,
-                                         destitantion: (baseurlResponse?.url!)!,
-                                         uploadType: self.uploadType,
-                                         uploadStategy: self.uploadStategy,
-                                         uploadTo: self.uploadTo,
-                                         rootFolder: self.folder)
-                self.upload(uploadParam: uploadParam, success: {
-                    
-                    let uploadNotifParam = UploadNotify(parentUUID: "",
-                                                        fileUUID:uploadParam.tmpUUId )
-                    
-                    self.uploadNotify(param: uploadNotifParam, success: { baseurlResponse in
-                
-                        let url = uploadParam.urlToLocalFile
-                        
-                        do {
-                            try FileManager.default.removeItem(at: url)
-                            
-                            if let response = baseurlResponse as? UploadNotifyResponse,
-                                let uploadedFileDetail = response.itemResponse {
-                                let wrapDataValue = WrapData(remote: uploadedFileDetail)
-                                CoreDataStack.default.appendOnlyNewItems(items: [wrapDataValue])
-                            }
-                            
-                        } catch {
-                           print("not remove")
-                        }
-                        
-                        customSucces()
-                        
-                    }, fail: customFail)
-                    
-                }, fail: customFail)
-                
-            }, fail: customFail)
-            
-            semaphore.wait()
-        }
-        
-        private func baseUrl(success: @escaping UploadServiceBaseUrlResponse, fail:FailResponse?) {
-            UploadService.default.baseUrl(success: success, fail: fail)
-        }
-        
-        private func upload(uploadParam: Upload, success: FileOperationSucces?, fail: FailResponse? ) {
-            UploadService.default.upload(uploadParam: uploadParam,
-                                         success: success,
-                                         fail: fail)
-        }
-        
-        private func uploadNotify(param: UploadNotify, success: @escaping SuccessResponse, fail:FailResponse?) {
-            
-            UploadService.default.uploadNotify(param: param,
-                                               success: success,
-                                               fail: fail)
-        }
-        
     }
 }
 
+private class UploadOperations: Operation {
+    
+    let item: WrapData
+    let uploadType: UploadType
+    let uploadStategy: MetaStrategy
+    let uploadTo: MetaSpesialFolder
+    let folder: String
+    let success: FileOperationSucces?
+    let fail: FailResponse?
+    var requestObject: URLSessionUploadTask?
+    var isRealCancel = false
+    
+    private let semaphore: DispatchSemaphore
+    
+    init(item: WrapData, uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", success: FileOperationSucces?, fail: FailResponse?) {
+        
+        self.item = item
+        self.uploadType = uploadType
+        self.uploadTo = uploadTo
+        self.uploadStategy = uploadStategy
+        self.folder = folder
+        self.success = success
+        self.fail = fail
+        self.semaphore = DispatchSemaphore(value: 0)
+    }
+    
+    override func cancel() {
+        if let req = requestObject {
+            if (req.state == .running) || (req.state == .suspended){
+                req.cancel()
+                isRealCancel = true
+            }
+        }else{
+            isRealCancel = true
+        }
+    }
+    
+    override func main() {
+        
+        if isRealCancel {
+            if let req = requestObject {
+                req.cancel()
+            }
+            
+            if let fail_ = self.fail{
+                fail_(ErrorResponse.string("Cancelled"))
+            }
+            
+            self.semaphore.signal()
+            return
+        }
+        
+        let customSucces: FileOperationSucces = {
+            self.success?()
+            self.semaphore.signal()
+        }
+        
+        let customFail: FailResponse = { value in
+            self.fail?(value)
+            self.semaphore.signal()
+        }
+        
+        baseUrl(success: { [weak self] baseurlResponse in
+            guard let `self` = self else{
+                customFail(ErrorResponse.string("Unknown error"))
+                return
+            }
+            
+            let uploadParam  = Upload(item: self.item,
+                                      destitantion: (baseurlResponse?.url!)!,
+                                      uploadType: self.uploadType,
+                                      uploadStategy: self.uploadStategy,
+                                      uploadTo: self.uploadTo,
+                                      rootFolder: self.folder)
+            self.requestObject = self.upload(uploadParam: uploadParam, success: { [weak self] in
+                
+                let uploadNotifParam = UploadNotify(parentUUID: "",
+                                                    fileUUID:uploadParam.tmpUUId )
+                
+                self?.uploadNotify(param: uploadNotifParam, success: { baseurlResponse in
+                    try? FileManager.default.removeItem(at: uploadParam.urlToLocalFile)
+                    
+                    if let response = baseurlResponse as? UploadNotifyResponse,
+                        let uploadedFileDetail = response.itemResponse {
+                        let wrapDataValue = WrapData(remote: uploadedFileDetail)
+                        CoreDataStack.default.appendOnlyNewItems(items: [wrapDataValue])
+                    }
+                    
+                    customSucces()
+                    
+                }, fail: customFail)
+                
+                }, fail: customFail)
+            
+            }, fail: customFail)
+        
+        semaphore.wait()
+    }
+    
+    private func baseUrl(success: @escaping UploadServiceBaseUrlResponse, fail:FailResponse?) {
+        UploadService.default.baseUrl(success: success, fail: fail)
+    }
+    
+    private func upload(uploadParam: Upload, success: FileOperationSucces?, fail: FailResponse? )-> URLSessionUploadTask {
+        return UploadService.default.upload(uploadParam: uploadParam,
+                                            success: success,
+                                            fail: fail)
+    }
+    
+    private func uploadNotify(param: UploadNotify, success: @escaping SuccessResponse, fail:FailResponse?) {
+        UploadService.default.uploadNotify(param: param,
+                                           success: success,
+                                           fail: fail)
+    }
+}

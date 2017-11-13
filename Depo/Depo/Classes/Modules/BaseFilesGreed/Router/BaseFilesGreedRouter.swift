@@ -42,4 +42,7 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
             router.pushViewController(viewController: controller)
         }
     }
+    
+    func openAlbumDetail(_ album: AlbumItem) {}
+    
 }

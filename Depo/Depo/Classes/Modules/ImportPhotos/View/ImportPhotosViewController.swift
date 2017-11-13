@@ -7,12 +7,11 @@
 //
 
 import UIKit
-import FBSDKLoginKit
-
-private let kImportFromFBEnabled = "kImportFromFBEnabled"
-private let kImportFromDBEnabled = "kImportFromDBEnabled"
 
 class ImportPhotosViewController: UIViewController {
+    var fbOutput: ImportFromFBViewOutput!
+    var dbOutput: ImportFromDropboxViewOutput!
+    
     @IBOutlet weak fileprivate var importDropboxLabel: UILabel!
     @IBOutlet weak fileprivate var importFacebookLabel: UILabel!
     @IBOutlet weak fileprivate var importInstagramLabel: UILabel!
@@ -22,29 +21,17 @@ class ImportPhotosViewController: UIViewController {
     @IBOutlet weak fileprivate var importInstagramSwitch: UISwitch!
     @IBOutlet weak fileprivate var importCropySwitch: UISwitch!
     
-    var fbOutput: ImportFromFBViewOutput!
-    var dbOutput: ImportFromDropboxViewOutput!
-    var accountInfoClient: DBRestClient!
-
-    let defaultPermissions = ["public_profile", "user_photos", "user_videos", "user_birthday"]
+    lazy var activityManager = ActivityIndicatorManager()
     
-    var isFBConnected: Bool {
-        get {
-           return UserDefaults.standard.bool(forKey: kImportFromFBEnabled)
-        } set {
-            importFacebookSwitch.isOn = newValue
-            UserDefaults.standard.set(newValue, forKey: kImportFromFBEnabled)
-            UserDefaults.standard.synchronize()
+    var isFBConnected: Bool = false {
+        didSet {
+            importFacebookSwitch.setOn(isFBConnected, animated: true)
         }
     }
     
-    var isDBConnected: Bool {
-        get {
-            return UserDefaults.standard.bool(forKey: kImportFromDBEnabled)
-        } set {
-            importDropboxSwitch.isOn = newValue
-            UserDefaults.standard.set(newValue, forKey: kImportFromDBEnabled)
-            UserDefaults.standard.synchronize()
+    var isDBConnected: Bool = false {
+        didSet {
+            importDropboxSwitch.setOn(isDBConnected, animated: true)
         }
     }
     
@@ -53,23 +40,18 @@ class ImportPhotosViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureLayout()
-        subscribeToNotifications()
+        activityManager.delegate = self
+        configureLabels()
+        configureSwitches()
+        fbOutput.viewIsReady()
+        dbOutput.viewIsReady()
     }
     
     // MARK: - Helpers
     
-    fileprivate func configureLayout() {
-        title = "Import Photos"
-        
-        self.navigationController?.navigationBar.topItem?.backBarButtonItem?.title = TextConstants.backTitle
-        
-        configureLabels()
-        
-        configureSwitches()
-    }
-    
     fileprivate func configureLabels() {
+        setTitle(withString: TextConstants.importPhotos)
+        navigationController?.navigationItem.title = TextConstants.backTitle
         importDropboxLabel.text = TextConstants.importFromDB
         importFacebookLabel.text = TextConstants.importFromFB
         importInstagramLabel.text = TextConstants.importFromInstagram
@@ -77,9 +59,6 @@ class ImportPhotosViewController: UIViewController {
     }
     
     fileprivate func configureSwitches() {
-        importDropboxSwitch.isOn = isDBConnected
-        importFacebookSwitch.isOn = isFBConnected
-        
         importInstagramSwitch.isOn = false
         importInstagramSwitch.isEnabled = false
         
@@ -87,83 +66,21 @@ class ImportPhotosViewController: UIViewController {
         importCropySwitch.isEnabled = false
     }
     
-    fileprivate func subscribeToNotifications() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(dropboxDidLogin),
-                                               name: NSNotification.Name(rawValue: "DBDidLogin"),
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(dropboxDidNotLogin),
-                                               name: NSNotification.Name(rawValue: "DBDidNotLogin"),
-                                               object: nil)
-    }
-    
-    // MARK: - Notifications
-    
-    @objc func dropboxDidLogin() {
-        accountInfoClient = DBRestClient(session: DBSession.shared())
-        accountInfoClient.delegate = self
-        accountInfoClient.loadAccountInfo()
-    }
-    
-    @objc func dropboxDidNotLogin() {
-        importDropboxSwitch.isOn = false
-        isDBConnected = false
-    }
-    
-    // MARK: - Facebook
-    
-    fileprivate func triggerFacebookStart() {
-        showSpiner()
-        
-        fbOutput.requestStatus()
-    }
-    
-    fileprivate func triggerFacebookStop() {
-        showSpiner()
-        
-        FBSDKLoginManager().logOut()
-        fbOutput.requestStop()
-        
-        isFBConnected = false
-    }
-    
-    fileprivate func triggerFacebookLogin(permissions: FBPermissionsObject?) {
-        showSpiner()
-        
-        fbOutput.requestToken(permissions: permissions?.read ?? defaultPermissions)
-    }
-    
-    fileprivate func facebookLogout() {
-        FBSDKLoginManager().logOut()
-        importFacebookSwitch.isOn = false
-    }
-    
     // MARK: - IBActions
     
     @IBAction fileprivate func importFromDropboxSwitchValueChanged(_ sender: UISwitch) {
-        if sender.isOn != isDBConnected {
-            if sender.isOn {
-                if DBSession.shared().isLinked() == true {
-                    dropboxDidLogin()
-                } else {
-                    DBSession.shared().link(from: self)
-                }
-            } else {
-                DBSession.shared().unlinkAll()
-            }
-            
-            isDBConnected = sender.isOn
+        if sender.isOn {
+            dbOutput.startDropbox()
+        } else {
+            /// nothing here
         }
     }
     
     @IBAction fileprivate func importFromFacebookSwitchValueChanged(_ sender: UISwitch) {
-        if sender.isOn != isFBConnected {
-            if sender.isOn {
-                triggerFacebookStart()
-            } else {
-                triggerFacebookStop()
-            }
+        if sender.isOn {
+            fbOutput.startFacebook()
+        } else {
+            fbOutput.stopFacebook()
         }
     }
     
@@ -176,166 +93,76 @@ class ImportPhotosViewController: UIViewController {
     }
 }
 
+// MARK: - ActivityIndicator
+extension ImportPhotosViewController: ActivityIndicator {
+    func startActivityIndicator() {
+        activityManager.start()
+    }
+    
+    func stopActivityIndicator() {
+        activityManager.stop()
+    }
+}
+
+// MARK: - ImportFromFBViewInput
 extension ImportPhotosViewController: ImportFromFBViewInput {
-    // permissions
-    func fbPermissionsSuccessCallback(permissions: FBPermissionsObject) {
-        hideSpiner()
-        
-        triggerFacebookLogin(permissions: permissions)
-    }
     
-    func fbPermissionsFailureCallback(errorMessage: String) {
-        hideSpiner()
-        
-        print(errorMessage)
-        
-        triggerFacebookLogin(permissions: nil)
-    }
-    
-    // token
-    func fbTokenSuccessCallback(token: String) {
-        fbOutput.requestConnect(withToken: token)
-    }
-    
-    func fbTokenFailureCallback(errorMessage: String) {
-        print(errorMessage)
-        
-        triggerFacebookStop()
-    }
-    
-    // connect
-    func fbConnectSuccessCallback() {
-        fbOutput.requestStart()
-    }
-    
-    func fbConnectFailureCallback(errorMessage: String) {
-        hideSpiner()
-        
-        FBSDKLoginManager().logOut()
-        importFacebookSwitch.isOn = false
-        
+    func failedFacebookStatus(errorMessage: String) {
+        isFBConnected = false
         print(errorMessage)
     }
     
-    // start
-    func fbStartSuccessCallback() {
-        hideSpiner()
-        
+    func succeedFacebookStart() {
         isFBConnected = true
     }
     
-    func fbStartFailureCallback(errorMessage: String) {
-        hideSpiner()
-        
+    func failedFacebookStart(errorMessage: String) {
+        isFBConnected = false
         print(errorMessage)
     }
     
-    // stop
-    func fbStopSuccessCallback() {
-        hideSpiner()
+    func succeedFacebookStop() {
+        isFBConnected = false
     }
     
-    func fbStopFailureCallback(errorMessage: String) {
-        hideSpiner()
-        
+    func failedFacebookStop(errorMessage: String) {
+        isFBConnected = true
         print(errorMessage)
-    }
-    
-    // status
-    func fbStatusSuccessCallback(status: FBStatusObject) {
-        if status.connected == true {
-            fbOutput.requestStart()
-        } else {
-            fbOutput.requestPermissions()
-        }
-    }
-    
-    func fbStatusFailureCallback(errorMessage: String) {
-        hideSpiner()
-        
-        print(errorMessage)
-        
-        fbOutput.requestPermissions()
     }
 }
 
+// MARK: - ImportFromDropboxViewInput
 extension ImportPhotosViewController: ImportFromDropboxViewInput {
     
-    func dbTokenSuccessCallback(token: String) {
-        dbOutput.requestConnect(withToken: token)
-    }
-    
-    func dbTokenFailureCallback(errorMassage: String) {
-        // error
-    }
-    
-    func dbConnectSuccessCallback() {
-        dbOutput.requestStatusForStart()
-    }
-    
-    func dbConnectFailureCallback(errorMassage: String) {
-        // error
-    }
-    
-    func dbStatusForStartSuccessCallback(status: DropboxStatusObject) {
-        if status.isQuotaValid! {
-            dbOutput.requestStart()
-        } else {
-            // write that all is sync
-        }
-    }
-    
-    func dbStatusForStartFaillureCallback(errorMessage: String) {
-        // error
-        if (DBSession.shared().isLinked()) {
-            DBSession.shared().unlinkAll()
-        }
-    }
-    
-    func dbStartSuccessCallback() {
-        perform(#selector(scheduleStatusQuery), with: nil, afterDelay: 2.0)
-    }
-    
-    func dbStartFailureCallback(errorMessage: String) {
-        // error
-    }
+    // MARK: Status
     
     func dbStatusSuccessCallback(status: DropboxStatusObject) {
         if status.connected == true {
-            if (status.status == .finished || status.status == .failed || status.status == .cancelled) {
-                // all sync
-            }
-            if (status.status == .running || status.status == .pending || status.status == .scheduled) {
-                // continue sync
-                perform(#selector(scheduleStatusQuery), with: nil, afterDelay: 2.0)
-            }
+            isDBConnected = true
+        } else {
+            isDBConnected = false
         }
+        //switch status.status {
+        //case .finished, .failed, .cancelled:
+        //    isDBConnected = false
+        //case .running, .pending, .scheduled:
+        //    isDBConnected = true
+        //case .none, .some(_):
+        //   isDBConnected = false
+        //}
     }
     
-    func dbStatusFailureCallback(errorMessage: String) {
-        // error
-        if (DBSession.shared().isLinked()) {
-            DBSession.shared().unlinkAll()
-        }
+    func dbStatusFailureCallback() {
+        isDBConnected = false
     }
     
-    @objc func scheduleStatusQuery() {
-        dbOutput.requestStatus()
-    }
-}
-
-extension ImportPhotosViewController: DBRestClientDelegate {
+    // MARK: Start
     
-    func restClient(_ client: DBRestClient!, loadedAccountInfo info: DBAccountInfo!) {
-        if let accountInfo = info {
-            let credentials = DBSession.shared().credentialStore(forUserId: accountInfo.userId)
-            if let token = credentials?.accessToken {
-                print(token)
-                dbOutput.requestToken(withCurrentToken: token,
-                                      withConsumerKey: (credentials?.consumerKey)!,
-                                      withAppSecret: "umjclqg3juoyihd",
-                                      withAuthTokenSecret: (credentials?.accessTokenSecret)!)
-            }
-        }
+    /// nothing. maybe will be toast message
+    func dbStartSuccessCallback() {}
+    
+    func failedDropboxStart(errorMessage: String) {
+        isDBConnected = false
+        print(errorMessage)
     }
 }

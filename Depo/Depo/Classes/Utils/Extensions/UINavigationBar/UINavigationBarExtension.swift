@@ -88,9 +88,16 @@ extension UIViewController {
         defaultNavBarStyle()
         self.setTitle(withString: "")
         navBar?.backgroundColor = UIColor.white
+        
+        if #available(iOS 11.0, *) {
+            let image = UIImage(named: "NavigationBarBackground")
+            navBar?.setBackgroundImage(image, for: .default)
+        }
+        
         if let view = customNavBarView {
             view.hideLogo = false
             navBar?.insertSubview(view, at: 0)
+            navBar?.addSubview(view)
         }
     }
     
@@ -99,8 +106,15 @@ extension UIViewController {
     }
  
     func navigationBarWithGradientStyle() {
+        navigationController?.setNavigationBarHidden(false, animated: false)
         defaultNavBarStyle()
         navBar?.backgroundColor = UIColor.white
+        
+        if #available(iOS 11.0, *) {
+            let image = UIImage(named: "NavigationBarBackground")
+            navBar?.setBackgroundImage(image, for: .default)
+        }
+        
         if let view = customNavBarView {
             view.hideLogo = true
             view.frame = CGRect(x: 0,

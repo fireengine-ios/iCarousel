@@ -20,6 +20,8 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
     
     var alertSheetConfig: AlertFilesActionsSheetInitialConfig?
     
+    var isUpdating: Bool = false
+    
     init(remoteItems: RemoteItemsService) {
         self.remoteItems = remoteItems
     }
@@ -28,28 +30,56 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
         
     }
     
-    func reloadItems(_ searchText: String!, sortBy: SortType, sortOrder: SortOrder) {
-        
-        remoteItems.reloadItems(sortBy: sortBy, sortOrder: sortOrder, success: nil, fail: nil)
+    func reloadItems(_ searchText: String!, sortBy: SortType, sortOrder: SortOrder, newFieldValue: FieldValue?) {
+        guard isUpdating == false else {
+            return
+        }
+        isUpdating = true
+        remoteItems.reloadItems(sortBy: sortBy, sortOrder: sortOrder, success: { [weak self] items in
+            DispatchQueue.main.async {
+                self?.isUpdating = false
+                if items.count == 0 {
+                    self?.output.getContentWithSuccessEnd()
+                } else if let out = self?.output as? CreateStorySelectionInteractorOutput {
+                    var array = [[WrapData]]()
+                    array.append(items)
+                    out.getContentWithSuccess(array: array)
+                } else if items.count > 0 {
+                    self?.output.getContentWithSuccess()
+                }
+            }
+            }, fail: { [weak self] in
+                self?.isUpdating = false
+                self?.output.getContentWithFail(errorString: nil)//asyncOperationFail(errorMessage: nil)
+            },
+               newFieldValue: newFieldValue)
     }
     
-    func nextItems(_ searchText: String! = nil, sortBy: SortType, sortOrder: SortOrder ) {
-        
+    func nextItems(_ searchText: String! = nil, sortBy: SortType, sortOrder: SortOrder, newFieldValue: FieldValue?) {
+        guard isUpdating == false else {
+            return
+        }
+        isUpdating = true
         remoteItems.nextItems(sortBy: sortBy,
                               sortOrder: sortOrder,
                               success:
-            {
-                [weak self] item in
-                DispatchQueue.main.async { [weak self] in
-                    if let out = self?.output as? CreateStorySelectionInteractorOutput {
+            { [weak self] items in
+                DispatchQueue.main.async {
+                    self?.isUpdating = false
+                    if items.count == 0 {
+                        self?.output.getContentWithSuccessEnd()
+                    } else if let out = self?.output as? CreateStorySelectionInteractorOutput {
                         var array = [[WrapData]]()
-                        array.append(item)
+                        array.append(items)
                         out.getContentWithSuccess(array: array)
-                    }else{
+                    } else if items.count > 0 {
                         self?.output.getContentWithSuccess()
                     }
                 }
-            }, fail: { self.output.asyncOperationFail(errorMessage: nil) })
+            }, fail: { [weak self] in
+                self?.isUpdating = false
+                self?.output.asyncOperationFail(errorMessage: nil)
+        }, newFieldValue: newFieldValue)
     }
 
     func needShowNoFileView()-> Bool{
@@ -106,5 +136,9 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
     
     var originalFilesTypeFilter: [GeneralFilesFiltrationType]? {
         return originalFilters
+    }
+    
+    func getAllItems(sortBy: SortedRules) {
+        
     }
 }

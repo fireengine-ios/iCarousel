@@ -26,7 +26,7 @@ class MoreFilesActionsPresenter: BasePresenter, MoreFilesActionsModuleInput, Mor
             case .image:
                 actionTypes = [.createStory, .move]
                 actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-                actionTypes.append((item.album != nil) ? .removeFromAlbum : .addToAlbum)
+                actionTypes.append((item.albums != nil) ? .removeFromAlbum : .addToAlbum)
                 actionTypes.append((item.syncStatus == .notSynced) ? .backUp : .addToCmeraRoll)
             case .video:
                 actionTypes = [.move]

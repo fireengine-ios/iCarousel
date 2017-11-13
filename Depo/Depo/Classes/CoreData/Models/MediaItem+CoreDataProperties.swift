@@ -16,7 +16,6 @@ extension MediaItem {
         return NSFetchRequest<MediaItem>(entityName: MediaItem.Identifier)
     }
 
-    @NSManaged public var albumsValue: String?
     @NSManaged public var creationDateValue: NSDate?
     @NSManaged public var favoritesValue: Bool
     @NSManaged public var fileNameFirstChar: String?
@@ -30,14 +29,23 @@ extension MediaItem {
     @NSManaged public var monthValue: String?
     @NSManaged public var nameValue: String?
     @NSManaged public var patchToPreviewValue: String?
+    @NSManaged public var parent: String?
     @NSManaged public var syncStatusValue: Int16
     @NSManaged public var urlToFileValue: String?
     @NSManaged public var uuidValue: String?
-    @NSManaged public var albums: NSSet?
+    @NSManaged public var albums: NSOrderedSet?
     @NSManaged public var metadata: MediaItemsMetaData?
-    
+    @NSManaged public var isFolder: Bool
 }
 
+
+extension MediaItem {
+    public var albumsUUIDs: [String] {
+        return self.albums?.flatMap({ (album) -> String? in
+            return (album as? MediaItemsAlbum)?.uuid
+        }) ?? []
+    }
+}
 
 // MARK: Generated accessors for albums
 

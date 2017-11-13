@@ -20,14 +20,15 @@ class AlbumDetailModuleInitializer: NSObject {
         let presentor = AlbumDetailPresenter()
         
         
-        let interactor = AlbumDetailInteractor(remoteItems: AlbumDetailService(requestSize: 9999))
+        let interactor = AlbumDetailInteractor(remoteItems: AlbumDetailService(requestSize: 140))
         interactor.album = album
         
-        configurator.configure(viewController: viewController,
+        configurator.configure(viewController: viewController, fileFilters: [.rootAlbum(album.uuid)],
                                bottomBarConfig: bottomBarConfig, router: BaseFilesGreedRouter(),
                                presenter: presentor, interactor: interactor,
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [],
-                                                                                     selectionModeTypes: []))
+                                                                                     selectionModeTypes: []),
+                               topBarConfig: nil)
         
         viewController.mainTitle = album.name
         

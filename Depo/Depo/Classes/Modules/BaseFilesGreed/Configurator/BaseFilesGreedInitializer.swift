@@ -19,6 +19,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
     
     class func initializePhotoVideosViewController(with nibName:String) -> UIViewController {
         let viewController = BaseFilesGreedViewController(nibName: nibName, bundle: nil)
+        viewController.needShowTabBar = true
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share,.move,.delete, .sync, .download, .addToAlbum],
                                                style: .default, tintColor: nil)
@@ -33,7 +34,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
                                                                   selectionModeTypes: [.delete, .createStory, .print])
 
         configurator.configure(viewController: viewController, remoteServices: PhotoAndVideoService(requestSize: 100),
-                               fileFilters: [.fileType(.image)], //+ .fileType(.video)
+                               fileFilters: [.fileType(.image)],
                                bottomBarConfig: bottomBarConfig, visibleSlider: true,
                                topBarConfig: gridListTopBarConfig,
                                alertSheetConfig: alertSheetConfig)
@@ -43,6 +44,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
     
     class func initializeMusicViewController(with nibName:String) -> UIViewController {
         let viewController = BaseFilesGreedViewController(nibName: nibName, bundle: nil)
+        viewController.needShowTabBar = true
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share,.move,.delete],
                                                style: .default, tintColor: nil)
@@ -65,6 +67,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
     
     class func initializeDocumentsViewController(with nibName:String) -> UIViewController {
         let viewController = BaseFilesGreedViewController(nibName: nibName, bundle: nil)
+        viewController.needShowTabBar = true
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share,.move,.delete],
                                                style: .default, tintColor: nil)
@@ -76,9 +79,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
             showGridListButton: true
         )
         configurator.configure(viewController: viewController, remoteServices: DocumentService(requestSize: 100),
-                               fileFilters: [.fileType(.application(.doc)), .fileType(.application(.txt)),
-                                             .fileType(.application(.pdf)), .fileType(.application(.xls)),
-                                             .fileType(.application(.html)), .fileType(.application(.ppt))],
+                               fileFilters: [.fileType(.allDocs)],
                                bottomBarConfig: bottomBarConfig,
                                topBarConfig: gridListTopBarConfig,
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [],
@@ -89,6 +90,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
     
     class func initializeAllFilesViewController(with nibName:String) -> UIViewController {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
+        viewController.needShowTabBar = true
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share,.move,.delete],
                                                style: .default, tintColor: nil)
@@ -100,7 +102,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
             showGridListButton: true
         )
         configurator.configure(viewController: viewController, remoteServices: AllFilesService(requestSize: 100),
-                               fileFilters: [.syncStatus(.synced)],
+                               fileFilters: [.localStatus(.nonLocal), .parentless ],
                                bottomBarConfig: bottomBarConfig,
                                topBarConfig: gridListTopBarConfig,
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select, .selectAll],
@@ -111,6 +113,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
     
     class func initializeFavoritesViewController(with nibName:String) -> UIViewController {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
+        viewController.needShowTabBar = true
         viewController.isFavorites = true
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share,.move,.delete, .sync, .download],
@@ -134,6 +137,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
     
     class func initializeFilesFromFolderViewController(with nibName:String, folder: Item) -> UIViewController {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
+        viewController.needShowTabBar = true
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share,.move,.delete, .sync, .download],
                                                style: .default, tintColor: nil)
@@ -142,11 +146,12 @@ class BaseFilesGreedModuleInitializer: NSObject {
         let interactor = BaseFilesGreedInteractor(remoteItems: FilesFromFolderService(requestSize: 999, rootFolder: folder.uuid))
         interactor.folder = folder
         
-        configurator.configure(viewController: viewController,
+        configurator.configure(viewController: viewController, fileFilters: [.rootFolder(folder.uuid)],
                                bottomBarConfig: bottomBarConfig, router: BaseFilesGreedRouter(),
                                presenter: presenter, interactor: interactor,
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select, .selectAll],
-                                                                                     selectionModeTypes: []))
+                                                                                     selectionModeTypes: []),
+                               topBarConfig: nil)
         viewController.mainTitle = folder.name
         return viewController
     }

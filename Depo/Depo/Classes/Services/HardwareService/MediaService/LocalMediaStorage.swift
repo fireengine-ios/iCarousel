@@ -47,6 +47,8 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     private let getDetailQueue = OperationQueue()
     
+    static let notificationPhotoLibraryDidChange = "notificationPhotoLibraryDidChange"
+    
     static let defaultUrl = URL(string: "http://Not.url.com")!
     
     static let noneMD5 = "NONE MD5"
@@ -74,14 +76,16 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         }
     }
     
+    var fetchResult: PHFetchResult<PHAsset>!
     func getAllImagesAndVideoAssets() -> [PHAsset] {
         
         let options = PHFetchOptions()
-        let result = PHAsset.fetchAssets(with: options)
+        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+        fetchResult = PHAsset.fetchAssets(with: options)
         
         var mediaContent = [PHAsset]()
         
-        result.enumerateObjects({ (avalibleAset, index, a) in
+        fetchResult.enumerateObjects({ (avalibleAset, index, a) in
             mediaContent.append(avalibleAset)
         })
         
@@ -92,16 +96,22 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     // MARK: Image
     
+    func getPreviewMaxImage(asset: PHAsset, image: @escaping FileDataSorceImg) {
+        getImage(asset: asset,
+                 contentSize: PHImageManagerMaximumSize,
+                 image: image)
+    }
+    
     func getPreviewImage(asset: PHAsset, image: @escaping FileDataSorceImg) {
         getImage(asset: asset,
-                 contentSize: CGSize(width: 768.0, height: 768.0),
+                 contentSize: CGSize(width: asset.pixelWidth, height: asset.pixelHeight),
                  convertToSize: CGSize(width: 300, height: 300),
                  image: image)
     }
     
     func getBigImageFromFile(asset: PHAsset, image: @escaping FileDataSorceImg) {
         getImage(asset: asset,
-                 contentSize: CGSize(width: 768.0, height: 768.0),
+                 contentSize: CGSize(width: asset.pixelWidth, height: asset.pixelHeight),
                  convertToSize: CGSize(width: 768.0, height: 768.0),
                  image: image)
     }
@@ -109,7 +119,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     func getImage(asset: PHAsset, contentSize: CGSize, convertToSize: CGSize, image: @escaping FileDataSorceImg) -> Void {
         
         let scalling: PhotoManagerCallBack = { input, dict in
-            
             let newImg = input?.resizeImage(rect: contentSize)
             
             DispatchQueue.main.async {
@@ -121,6 +130,19 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                                           asset: asset,
                                           targetSize: convertToSize,
                                           callback: scalling)
+        queue.addOperation(operation)
+    }
+    
+    func getImage(asset: PHAsset, contentSize: CGSize, image: @escaping FileDataSorceImg) -> Void {
+        let callBack: PhotoManagerCallBack = { (newImg, _) in
+            DispatchQueue.main.async {
+                image(newImg)
+            }
+        }
+        let operation = GetImageOperation(photoManager: photoManger,
+                                          asset: asset,
+                                          targetSize: contentSize,
+                                          callback: callBack)
         queue.addOperation(operation)
     }
     
@@ -257,24 +279,23 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         let semaphore = DispatchSemaphore(value: 0)
         
         let operation = GetOriginalVideoOperation(photoManager: self.photoManger, asset: asset) { (avAsset, aVAudioMix, Dict) in
-            
             if let urlToFile = (avAsset as? AVURLAsset)?.url {
-            
-            do {
-                md5 = MD5().hexMD5fromFileUrl(urlToFile)
-                url = urlToFile
-                size = try (FileManager.default.attributesOfItem(atPath: urlToFile.path)[.size] as! NSNumber).uint64Value
-                
-                semaphore.signal()
-
-            } catch  {
+                do {
+                    md5 = MD5().hexMD5fromFileUrl(urlToFile)
+                    url = urlToFile
+                    size = try (FileManager.default.attributesOfItem(atPath: urlToFile.path)[.size] as! NSNumber).uint64Value
+                    semaphore.signal()
+                } catch  {
+                    semaphore.signal()
+                }
+            } else {
                 semaphore.signal()
             }
-          }
         }
     
         getDetailQueue.addOperation(operation)
-        semaphore.wait()
+        /// added timeout bcz callback from "requestAVAsset(forVideo" may not come
+        _ = semaphore.wait(timeout: .now() + .seconds(40))
         return (url: url, size: size, md5: md5)
     }
     
@@ -287,12 +308,13 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         let semaphore = DispatchSemaphore(value: 0)
         let operation = GetOriginalImageOperation(photoManager: self.photoManger,
                                                   asset: asset) { (data, string, orientation, dict) in
-            if let wrapDict = dict,
-               let dataValue  = data {
+            if let wrapDict = dict, let dataValue  = data {
                 
                 url = wrapDict["PHImageFileURLKey"] as! URL
                 md5 = MD5().hexMD5fromData(dataValue)
                 size = UInt64(dataValue.count)
+                semaphore.signal()
+            } else {
                 semaphore.signal()
             }
         }
@@ -343,7 +365,7 @@ class GetImageOperation: Operation {
         }
         
         let options = PHImageRequestOptions()
-        options.version = .original
+        options.version = .current
         options.resizeMode = .none
         options.deliveryMode = .highQualityFormat
         options.isSynchronous = true
@@ -380,11 +402,11 @@ class GetOriginalImageOperation: Operation {
         }
         
         let options = PHImageRequestOptions()
-        options.version = .original
+        options.version = .current
         options.deliveryMode = .highQualityFormat
         options.isSynchronous = true
         options.isNetworkAccessAllowed = true
-
+        
         photoManager.requestImageData(for: asset, options: options, resultHandler: callback)
     }
 }
@@ -413,8 +435,7 @@ class GetOriginalVideoOperation: Operation {
         let options = PHVideoRequestOptions()
         options.version = .original
         options.deliveryMode = .highQualityFormat
-        options.isNetworkAccessAllowed = false
-        
+        options.isNetworkAccessAllowed = true
         photoManager.requestAVAsset(forVideo: asset, options: options, resultHandler: callback)
     }
 }

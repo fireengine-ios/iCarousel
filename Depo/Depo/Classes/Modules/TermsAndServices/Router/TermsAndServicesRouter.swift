@@ -15,7 +15,7 @@ class TermsAndServicesRouter: TermsAndServicesRouterInput {
     }
     
     func goToHomePage() {
-        routerVC.setNavigationController(controller: routerVC.homePageScreen)
+        routerVC.setNavigationController(controller: routerVC.tabBarScreen)
     }
     
     func goToPhoneVerefication(withSignUpSuccessResponse: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel) {

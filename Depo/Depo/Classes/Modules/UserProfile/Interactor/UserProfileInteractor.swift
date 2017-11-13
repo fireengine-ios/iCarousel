@@ -20,17 +20,6 @@ class UserProfileInteractor: UserProfileInteractorInput {
         output.configurateUserInfo(userInfo: userInfo_)
     }
     
-    func fieldsValueChanged(name: String, email: String, number: String){
-        if ((name.characters.count == 0) || (email.characters.count == 0) || (number.characters.count == 0)){
-            output.setEditButtonEnable(enable: false)
-            return
-        }
-        
-        let flag = isNameChanged(name: name) || isEmailChanged(email: email) || isPhoneChanged(phone: number)
-        output.setEditButtonEnable(enable: flag)
-        
-    }
-    
     private func isNameChanged(name: String) -> Bool{
         let array = name.components(separatedBy: " ")
         let name_ = array[0]
@@ -60,7 +49,16 @@ class UserProfileInteractor: UserProfileInteractorInput {
         return (name_, surname_)
     }
     
-    func onEditButton(name: String, email: String, number: String){
+    func changeTo(name: String, email: String, number: String){
+        if ((name.count == 0) || (email.count == 0) || (number.count == 0)){
+            output.showError(error: TextConstants.userProfileDataNotСhanged)
+            return
+        }
+        
+        let isChanged = isNameChanged(name: name) || isEmailChanged(email: email) || isPhoneChanged(phone: number)
+        if !isChanged {
+            output.showError(error: TextConstants.userProfileDataNotCorrect)
+        }
         
         updateNameIfNeed(name: name, email: email, number: number)
     }
@@ -117,6 +115,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
     func needSendOTP(responce: SignUpSuccessResponse){
         DispatchQueue.main.async { [weak self] in
             if let info = self?.userInfo{
+                self?.output?.stopNetworkOperation()
                 self?.output?.needSendOTP(responce: responce, userInfo: info)
             }
         }
@@ -124,6 +123,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
     
     func allUpdated(){
         DispatchQueue.main.async { [weak self] in
+            self?.output.dataWasUpdate()
             self?.output.stopNetworkOperation()
         }
     }

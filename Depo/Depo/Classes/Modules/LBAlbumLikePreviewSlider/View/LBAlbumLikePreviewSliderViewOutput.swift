@@ -15,4 +15,7 @@ protocol LBAlbumLikePreviewSliderViewOutput {
     func sliderTitlePressed()
     
     func onSelectAlbumAt(index: Int)
+    
+    func reloadData()
+
 }

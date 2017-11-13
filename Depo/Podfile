@@ -10,10 +10,14 @@ target 'Depo_LifeTech' do
     pod 'FBSDKCoreKit'
     pod 'FBSDKLoginKit'
     pod 'FBSDKShareKit'
+    
     pod 'SDWebImage'
     pod 'GoogleConversionTracking'
     pod 'Adjust'
     #pod 'ActiveLabel'
+
+    pod 'ObjectiveDropboxOfficial'
+
 
     pod 'SimpleExif'
     pod 'XYPieChart'
@@ -24,7 +28,7 @@ target 'Depo_LifeTech' do
     
     # json
     pod 'SwiftyJSON'
-    pod 'ReachabilitySwift'
+    pod 'ReachabilitySwift', '~> 3'
     pod 'MBProgressHUD', '~> 1.0.0'
     pod 'ExpandableTableViewController'
 

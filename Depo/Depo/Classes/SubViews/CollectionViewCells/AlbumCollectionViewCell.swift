@@ -14,11 +14,13 @@ class AlbumCollectionViewCell: BaseCollectionViewCell {
     @IBOutlet weak var listViewIcon: LoadingImageView!
     @IBOutlet weak var listViewTitle: UILabel!
     @IBOutlet weak var listSelectionIcon: UIImageView!
+    @IBOutlet weak var listShadowView: ShadowView!
     
     @IBOutlet weak var greedView: UIView!
     @IBOutlet weak var greedViewIcon: LoadingImageView!
     @IBOutlet weak var greedViewTitle: UILabel!
     @IBOutlet weak var greedSelectionIcon: UIImageView!
+    @IBOutlet weak var greedShadowView: ShadowView!
     
     private func isBigSize() -> Bool{
         return frame.size.height > NumericConstants.albumCellListHeight

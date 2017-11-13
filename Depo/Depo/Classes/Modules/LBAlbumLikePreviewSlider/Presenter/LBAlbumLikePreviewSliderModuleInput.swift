@@ -9,5 +9,5 @@
 protocol LBAlbumLikePreviewSliderModuleInput: class {
 
     func setup(withItems items: [AlbumItem])
-    
+    func reload()
 }

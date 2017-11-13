@@ -15,4 +15,6 @@ protocol SearchViewInteractorOutput: class {
     func getContentWithSuccess()
     
     func successWithSuggestList(list: [SuggestionObject])
+    
+    func failedSearch()
 }

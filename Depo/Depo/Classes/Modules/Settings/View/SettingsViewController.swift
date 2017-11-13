@@ -9,7 +9,6 @@
 import UIKit
 
 protocol SettingsDelegate: class{
-    
     func goToContactSync()
     
     func goToIportPhotos()
@@ -53,15 +52,17 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
         tableView.backgroundColor = UIColor.clear
         
         userInfoSubView.actionsDelegate = self
-        
         output.viewIsReady()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationBarWithGradientStyle()
-        
-        self.setTitle(withString: "Settings")
+        if (Device.isIpad){
+            splitViewController?.navigationController?.viewControllers.last?.title = "Settings"
+        } else {
+            self.setTitle(withString: "Settings")
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -138,6 +139,8 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
         tableView.scrollRectToVisible(tableView.rectForRow(at: indexPath), animated: true)
         if (!Device.isIpad){
             tableView.deselectRow(at: indexPath, animated: true)
+        } else {
+            splitViewController?.navigationController?.viewControllers.last?.navigationItem.rightBarButtonItem = nil
         }
         
         switch indexPath.section {
@@ -217,7 +220,6 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
         let cancellAction = UIAlertAction(title: TextConstants.actionSheetCancel, style: .cancel, handler: { _ in
             
         })
-        cancellAction.setValuesForKeys(["titleTextColor": UIColor.black])
         
         let actionPhoto = UIAlertAction(title: TextConstants.actionSheetTakeAPhoto, style: .default, handler: { _ in
             self.output.onChooseFromPhotoCamera(onViewController: self)

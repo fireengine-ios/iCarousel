@@ -12,6 +12,6 @@ protocol CreateStorySelectionInteractorOutput: class {
     
     func configurateWithPhotoStory(story: PhotoStory)
     
-    func getContentWithSuccess(array: [[WrapData]])
+    func getContentWithSuccess(array: [[BaseDataSourceItem]])
     
 }

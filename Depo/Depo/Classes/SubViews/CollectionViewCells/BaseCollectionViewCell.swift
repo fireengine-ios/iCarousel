@@ -76,5 +76,4 @@ class BaseCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDelegate,
     func updating(){
         isAlreadyConfigured = false
     }
-    
 }

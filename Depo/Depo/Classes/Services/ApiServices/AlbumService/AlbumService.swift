@@ -114,17 +114,14 @@ class AlbumService: RemoteItemsService {
                                          page: currentPage,
                                          size: requestSize)
         
-        remote.searchAlbums(param: serchParam, success: { (response)
-            in
-            guard let resultResponse = (response as? AlbumResponse)?.list else {
-                fail()
-                return
+        remote.searchAlbums(param: serchParam, success: { [weak self] response in
+            guard let resultResponse = response as? AlbumResponse else {
+                return fail()
             }
             
-            let list = resultResponse.flatMap { AlbumItem(remote: $0) }
-            self.currentPage = self.currentPage + 1
+            self?.currentPage += 1
+            let list = resultResponse.list.flatMap { AlbumItem(remote: $0) }
             success(list)
-            
         }, fail: { _ in
             fail()
         })

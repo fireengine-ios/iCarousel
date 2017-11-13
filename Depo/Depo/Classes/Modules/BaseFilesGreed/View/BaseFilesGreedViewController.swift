@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseFilesGreedViewController: UIViewController, BaseFilesGreedViewInput, GridListTopBarDelegate, ViewForPopUpDelegate {
+class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput, GridListTopBarDelegate, ViewForPopUpDelegate {
 
     var output: BaseFilesGreedViewOutput!
     
@@ -55,6 +55,7 @@ class BaseFilesGreedViewController: UIViewController, BaseFilesGreedViewInput, G
     
     let underNavBarBarHeight: CGFloat = 53
     
+    @IBOutlet private weak var topCarouselConstraint: NSLayoutConstraint!
     // MARK: Life cycle
     
     override func viewDidLoad() {
@@ -94,19 +95,35 @@ class BaseFilesGreedViewController: UIViewController, BaseFilesGreedViewInput, G
         }
         
         carouselContainer.setHConstraint(hConstraint: floatingHeaderContainerHeightConstraint)
+        
+//        if #available(iOS 11.0, *) {
+//            topCarouselConstraint.constant = underNavBarBarHeight//0
+//        }
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(loadData),
+                                               name: NSNotification.Name(rawValue: LocalMediaStorage.notificationPhotoLibraryDidChange),
+                                               object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         editingTabBar?.view.layoutIfNeeded()
         
         if mainTitle != "" {
             subTitle = output.getSortTypeString()
         }
+        if let unwrapedSlider = contentSlider { //FIXME: shiwt reload mechanic to presenter, so modules would speak as normal
+            unwrapedSlider.reloadAllData()
+        }
         output.viewWillAppear()
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        configurateNavigationBar()
+    }
+    
+    func configurateNavigationBar(){
         homePageNavigationBarStyle()
         configureNavBarActions()
         WrapItemOperatonManager.default.addViewForNotification(view: scrolliblePopUpView)
@@ -120,15 +137,15 @@ class BaseFilesGreedViewController: UIViewController, BaseFilesGreedViewInput, G
     
     deinit{
          WrapItemOperatonManager.default.removeViewForNotification(view: scrolliblePopUpView)
+         NotificationCenter.default.removeObserver(self)
     }
-    
     
     // MARK: - SearchBarButtonPressed
     
    func configureNavBarActions() {
         let search = NavBarWithAction(navItem: NavigationBarList().search, action: { (_) in
             let router = RouterVC()
-            let searchViewController = router.searchView
+            let searchViewController = router.searchView()
             searchViewController.modalPresentationStyle = .overCurrentContext
             searchViewController.modalTransitionStyle = .crossDissolve
             router.rootViewController?.present(searchViewController, animated: true, completion: nil)
@@ -163,8 +180,7 @@ class BaseFilesGreedViewController: UIViewController, BaseFilesGreedViewInput, G
     
     @objc func loadData() {
         output.onReloadData()
-        //TODO: refresh slider here Pestryakov
-//        contentSlider
+        contentSlider?.reloadAllData()
     }
     
     func stopRefresher() {
@@ -188,6 +204,7 @@ class BaseFilesGreedViewController: UIViewController, BaseFilesGreedViewInput, G
             self.navigationItem.leftBarButtonItem = nil
             homePageNavigationBarStyle()
         }
+        configureNavBarActions()
     }
     
     @objc func onCancelSelectionButton(){

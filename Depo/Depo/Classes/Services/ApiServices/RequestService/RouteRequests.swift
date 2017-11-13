@@ -48,6 +48,9 @@ struct RouteRequests {
     static let fbStart       = "api/migration/facebook/start"
     static let fbStop        = "api/migration/facebook/stop"
     
+    static let socialStatus = "api/share/social/status"
+    
+    
     // MARK: Captcha
     
     static let captcha = "/api/captcha/%@/%@"

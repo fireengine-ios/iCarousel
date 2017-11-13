@@ -86,7 +86,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     
     func dismiss(animated: Bool) {
         view.hideBar(animated: animated)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowTabBar), object: nil)
+        //NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
         debugPrint("Editing bar Dismiss")
     }
     
@@ -101,7 +101,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         } else {
             shownSourceView = rootVC.view
         }
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationHideTabBar), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationHidePlusTabBar), object: nil)
         view.showBar(animated: animated, onView: shownSourceView)
         debugPrint("Show")
     }
@@ -168,7 +168,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             
         })
         headerAction.isEnabled = false
-        headerAction.setValuesForKeys(["titleTextColor": UIColor.black])
         
         var types: [ElementTypes] = [.info, .share, .move]
         
@@ -199,7 +198,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             case .image:
                 actionTypes = [.createStory, .move]
                 actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-                actionTypes.append((item.album != nil) ? .removeFromAlbum : .addToAlbum)
+                actionTypes.append((item.albums != nil) ? .removeFromAlbum : .addToAlbum)
                 actionTypes.append((item.syncStatus == .notSynced) ? .backUp : .addToCmeraRoll)
             case .video:
                 actionTypes = [.move]
@@ -380,7 +379,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     
                 })
             }
-            action.setValuesForKeys(["titleTextColor": UIColor.black])
             return action
         }
     }
@@ -393,7 +391,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         let cancellAction = UIAlertAction(title: TextConstants.actionSheetCancel, style: .cancel, handler: { _ in
             
         })
-        cancellAction.setValuesForKeys(["titleTextColor": UIColor.black])
         let actionsWithCancell: [UIAlertAction] = actions + [cancellAction]
         
         let actionSheetVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)

@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput, SettingsInteractorOutput {
+class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput, SettingsInteractorOutput, CustomPopUpAlertActions {
     
     weak var view: SettingsViewInput!
     
@@ -14,6 +14,7 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     
     var router: SettingsRouterInput!
 
+    let customPopUp = CustomPopUp()
     
     func viewIsReady() {
         interactor.getCellsData()
@@ -24,8 +25,12 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     }
     
     func onLogout(){
-        startAsyncOperation()
-        interactor.onLogout()
+        customPopUp.delegate = self
+        customPopUp.showCustomAlert(withTitle: "",
+                                    withText: TextConstants.settingsViewLogoutCheckMessage,
+                                    firstButtonText: TextConstants.ok,
+                                    secondButtonText: TextConstants.cancel)
+        
     }
     
     func goToOnboarding(){
@@ -96,5 +101,17 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     
     func profilePhotoUploadFailed(){
         view.profileWontChange()
+    }
+
+    //MARK: - CustomPopUpAlertActions
+
+    func cancelationAction() {
+        // Logout
+        startAsyncOperation()
+        interactor.onLogout()
+    }
+    
+    func otherAction() {
+        
     }
 }

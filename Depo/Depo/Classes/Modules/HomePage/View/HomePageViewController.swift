@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomePageViewController: UIViewController, HomePageViewInput, BaseCollectionViewDataSourceDelegate, UICollectionViewDelegate {
+class HomePageViewController: UIViewController, HomePageViewInput, BaseCollectionViewDataSourceDelegate, UICollectionViewDelegate, SearchModuleOutput {
 
     var output: HomePageViewOutput!
     
@@ -23,6 +23,25 @@ class HomePageViewController: UIViewController, HomePageViewInput, BaseCollectio
     let homePageDataSource = BaseCollectionViewDataSource()
     
     var navBarConfigurator = NavigationBarConfigurator()
+    
+    private var _searchViewController: UIViewController?
+    private var searchViewController: UIViewController! {
+        get {
+            if let svc = _searchViewController {
+                return svc
+            } else {
+                let router = RouterVC()
+                let searchViewController = router.searchView(output: self)
+                searchViewController.modalPresentationStyle = .overCurrentContext
+                searchViewController.modalTransitionStyle = .crossDissolve
+                _searchViewController = searchViewController
+                return _searchViewController!
+            }
+        }
+        set (new) {
+            _searchViewController = new
+        }
+    }
     
     private var homepageIsActiveAndVisible: Bool {
         var result = false
@@ -73,7 +92,16 @@ class HomePageViewController: UIViewController, HomePageViewInput, BaseCollectio
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationShowTabBar)
+        NotificationCenter.default.post(name: notificationName, object: nil)
+        
         output.viewIsReady()
+        
+        if _searchViewController != nil {
+            let router = RouterVC()
+            router.rootViewController?.present(self.searchViewController, animated: false, completion: nil)
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -99,12 +127,12 @@ class HomePageViewController: UIViewController, HomePageViewInput, BaseCollectio
     // MARK: - SearchBarButtonPressed
     
     func configureNavBarActions() {
-        let search = NavBarWithAction(navItem: NavigationBarList().search, action: { (_) in
+        let search = NavBarWithAction(navItem: NavigationBarList().search, action: { [weak self] (_) in
+            guard let `self` = self else {
+                return
+            }
             let router = RouterVC()
-            let searchViewController = router.searchView
-            searchViewController.modalPresentationStyle = .overCurrentContext
-            searchViewController.modalTransitionStyle = .crossDissolve
-            router.rootViewController?.present(searchViewController, animated: true, completion: nil)
+            router.rootViewController?.present(self.searchViewController, animated: true, completion: nil)
         })
         let setting = NavBarWithAction(navItem: NavigationBarList().settings, action: { [weak self] _ in
             self?.output.showSettings()
@@ -158,6 +186,12 @@ class HomePageViewController: UIViewController, HomePageViewInput, BaseCollectio
             return UICollectionReusableView()
         }
     }
+    
+    func cancelSearch() {
+        searchViewController = nil
+    }
+    
+    func previewSearchResultsHide() { }
 }
 
 

@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum SortType:  CustomStringConvertible {
+enum SortType: CustomStringConvertible {
     typealias RawValue = Int
     
     case name
@@ -17,10 +17,12 @@ enum SortType:  CustomStringConvertible {
     case album
     case date
     case imageDate
+    case albumName
     
     var description: String {
         switch self {
         case .name      : return "name"
+        case .albumName : return "label"
         case .size      : return "bytes"
         case .artist    : return "artist"
         case .album     : return "album"

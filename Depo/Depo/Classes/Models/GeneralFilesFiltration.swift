@@ -11,9 +11,11 @@ enum GeneralFilesFiltrationType {
     case syncStatus(SyncWrapperedStatus)
     case favoriteStatus(FavoriteGeneralFilter)
     case localStatus(LocalGeneralFilter)
-    
-    //
+    case rootFolder(String)
+    case rootAlbum(String)
+    case parentless //not owned by folder
     case duplicates
+    case name(String)
 }
 
 enum LocalGeneralFilter {
@@ -27,6 +29,10 @@ enum FavoriteGeneralFilter {
     case notFavorites
     case all
 }
+
+//enum Foler {
+//    case roo
+//}
 
 //struct GeneralFilesFiltrationTypeConfig {
 //    let fileTypes: [FileType]

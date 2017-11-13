@@ -19,7 +19,7 @@ class BaseFileContentView: UIView {
     var delegate:BaseFileContentViewDeleGate?
     var index: Int = -1
 
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var imageView: LoadingImageView!
     
     @IBOutlet weak var activity: UIActivityIndicatorView!
     
@@ -42,20 +42,11 @@ class BaseFileContentView: UIView {
         webView.isHidden = true
         imageView.image = nil
         playVideoButton.isHidden = true
-        activity.startAnimating()
         self.index = index
         
-        if object.fileType == .video ||
-            object.fileType == .image {
-            
-            FilesDataSource().getImage(patch: object.patchToPreview, compliteImage: {[weak self] (image) in
-                if (self?.index == index){
-                    self?.imageView.image = image
-                    self?.activity.stopAnimating()
-                }
-            })
+        if object.fileType == .video || object.fileType == .image {
+            imageView.loadImage(with: object, isOriginalImage: true)
             playVideoButton.isHidden = !(object.fileType == FileType.video)
-            
         } else if object.fileType != .audio {
             if object.fileType.isUnSupportedOpenType {
                 

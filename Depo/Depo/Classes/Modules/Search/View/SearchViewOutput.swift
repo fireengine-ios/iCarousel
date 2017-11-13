@@ -13,4 +13,5 @@ protocol SearchViewOutput {
     func viewIsReady(collectionView: UICollectionView)
     func isShowedSpinner() -> Bool
     func getSuggestion(text: String)
+    func tapCancel()
 }

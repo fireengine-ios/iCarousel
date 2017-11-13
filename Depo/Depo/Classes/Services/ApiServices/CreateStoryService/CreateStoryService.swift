@@ -133,7 +133,12 @@ class PreviewResponse: ObjectRequestResponse  {
 
 class CreateStoryMusicService: RemoteItemsService {
     
+    /// server request don't have pagination
+    /// but we need this logic for the same logic
+    private var isGotAll = false
+    
     init() {
+        /// 9999 is any number
         super.init(requestSize: 9999, fieldValue: .audio)
     }
     
@@ -141,9 +146,14 @@ class CreateStoryMusicService: RemoteItemsService {
      
         let requestService = BaseRequestService()
         let  handler = BaseResponseHandler< CreateStoryMusicListResponse, ObjectRequestResponse>(success: {  resp  in
+            if self.isGotAll {
+                success?([])
+                return
+            }
             if let response = resp as? CreateStoryMusicListResponse,
                 let list = response.list  {
                 let result = list.flatMap { WrapData(musicForCreateStory: $0) }
+                self.isGotAll = true
                 success?(result)
             } else {
                 fail?()
@@ -155,7 +165,7 @@ class CreateStoryMusicService: RemoteItemsService {
         requestService.executeGetRequest(param: CreateStoryMusicList(), handler: handler)
     }
     
-    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success:  ListRemoveItems?, fail:  FailRemoteItems?) {
+    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail:FailRemoteItems?, newFieldValue: FieldValue? = nil) {
         allItems(success: success, fail: fail)
     }
 }

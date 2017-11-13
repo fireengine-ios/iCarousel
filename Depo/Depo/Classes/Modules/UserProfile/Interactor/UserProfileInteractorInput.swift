@@ -11,9 +11,7 @@ import Foundation
 protocol UserProfileInteractorInput {
     
     func viewIsReady()
-    
-    func fieldsValueChanged(name: String, email: String, number: String)
-    
-    func onEditButton(name: String, email: String, number: String)
+        
+    func changeTo(name: String, email: String, number: String)
     
 }

@@ -23,6 +23,8 @@ enum SortedRules: Int {
     case lettersZA = 4
     case sizeAZ = 5
     case sizeZA = 6
+    case albumlettersAZ = 7
+    case albumlettersZA = 8
     
     var stringValue: String {
         switch self {
@@ -43,8 +45,37 @@ enum SortedRules: Int {
             
         case .sizeAZ:
             return TextConstants.sortTimeSizeTitle
+            
+        case .albumlettersAZ:
+            return TextConstants.sortTypeAlphabeticAZTitle
+            
+        case .albumlettersZA:
+            return TextConstants.sortTypeAlphabeticZATitle
         }
     }
+    
+    var sortingRules: SortType{
+        switch self {
+        case .timeUp, .timeDown:
+            return .date
+        case .lettersAZ, .lettersZA:
+            return .name
+        case .sizeAZ, .sizeZA:
+            return .size
+        case .albumlettersAZ, .albumlettersZA:
+            return .albumName
+        }
+    }
+    
+    var sortOder: SortOrder{
+        switch self {
+        case .timeUp, .lettersAZ, .sizeAZ, .albumlettersAZ:
+            return .desc
+        case .timeDown, .lettersZA, .sizeZA, .albumlettersZA:
+            return .asc
+        }
+    }
+    
 }
 
 class MoreActionsConfig {
@@ -150,6 +181,25 @@ class MoreActionsConfig {
                 return "None"
             }
         }
+        
+        var sortedRulesConveted: SortedRules {
+            switch self {
+            case .AlphaBetricAZ:
+                return .lettersAZ
+            case .AlphaBetricZA:
+                return .lettersZA
+            case .TimeNewOld:
+                return .timeUp
+            case .TimeOldNew:
+                return .timeDown
+            case .Largest:
+                return .sizeAZ
+            case .Smallest:
+                return .sizeZA
+            default:
+                return .timeUp
+            }
+        }
     }
     
     enum MoreActionsFileType: CustomStringConvertible {
@@ -244,6 +294,17 @@ class MoreActionsConfig {
                 
             default:
                 return .fileType(.unknown)
+            }
+        }
+        
+        func convertToSearchRequestFieldValue() -> FieldValue? {
+            switch self {
+            case .Video:
+                return .video
+            case .Photo:
+                return .image
+            default:
+                return nil//.all
             }
         }
     }

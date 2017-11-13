@@ -11,6 +11,8 @@ class SyncContactsPresenter: SyncContactsModuleInput, SyncContactsViewOutput, Sy
     weak var view: SyncContactsViewInput!
     var interactor: SyncContactsInteractorInput!
     var router: SyncContactsRouterInput!
+    
+    let customPopUp = CustomPopUp()
 
     var backupAvailable: Bool = false
     
@@ -25,9 +27,11 @@ class SyncContactsPresenter: SyncContactsModuleInput, SyncContactsViewOutput, Sy
     
     func startOperation(operationType: SyncOperationType){
         if operationType == .backup, backupAvailable {
-            
-            CustomPopUp.sharedInstance.showCustomAlert(withTitle: TextConstants.errorAlerTitleBackupAlreadyExist, withText: TextConstants.errorAlertTextBackupAlreadyExist, firstButtonText: TextConstants.errorAlertNopeBtnBackupAlreadyExist, secondButtonText: TextConstants.errorAlertYesBtnBackupAlreadyExist)
-            CustomPopUp.sharedInstance.delegate = self //TODO: Pestryakov make it into clousure
+            customPopUp.delegate = self
+            customPopUp.showCustomAlert(withTitle: TextConstants.errorAlerTitleBackupAlreadyExist,
+                                        withText: TextConstants.errorAlertTextBackupAlreadyExist,
+                                        firstButtonText: TextConstants.errorAlertNopeBtnBackupAlreadyExist,
+                                        secondButtonText: TextConstants.errorAlertYesBtnBackupAlreadyExist)
             return
         }
         

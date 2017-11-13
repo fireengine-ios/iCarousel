@@ -15,10 +15,12 @@ protocol UserProfileViewInput: class {
 
     func setupInitialState()
     
+    func setupEditState(_ isEdit: Bool)
+
     func configurateUserInfo(userInfo: AccountInfoResponse)
-    
-    func setEditButtonEnable(enable: Bool)
-    
+        
     func getNavigationController() -> UINavigationController?
+    
+    func getPhoneNumber() -> String
     
 }

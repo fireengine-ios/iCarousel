@@ -34,21 +34,26 @@ class LBAlbumLikePreviewSliderPresenter: LBAlbumLikePreviewSliderModuleInput, LB
         router.goToAlbumDetailView(album: interactor.currentItems[index])
     }
     
-    
+    func reloadData() {
+        interactor.requestAlbumbs()
+    }
     
     //MARK: - Presenter input
     
     func setup(withItems items: [AlbumItem]) {
         interactor.currentItems = items
         
-        view.setupCarousel()//withItems: items)
+        view.setupCollectionView()//withItems: items)
     }
     
+    func reload() {
+        interactor.requestAlbumbs()
+    }
     
     //MARK: - Iteractor output
     
     func operationSuccessed() {
-        
+        view.setupCollectionView()
     }
     
     func operationFailed() {
@@ -63,7 +68,7 @@ class LBAlbumLikePreviewSliderPresenter: LBAlbumLikePreviewSliderModuleInput, LB
     //MARK: - Internal
     
     private func setupCarousel() {
-        view.setupCarousel()
+        view.setupCollectionView()
     }
     
     

@@ -57,7 +57,7 @@ class CreateStoryPhotoSelectionPresenter: BaseFilesGreedPresenter, CreateStorySe
         photoStory = story
     }
     
-    func getContentWithSuccess(array: [[WrapData]]){
+    override func getContentWithSuccess(array: [[BaseDataSourceItem]]){
         super.getContentWithSuccess()
     }
 }

@@ -9,16 +9,11 @@
 import Foundation
 
 class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractorOutput, BaseDataSourceForCollectionViewDelegate {
-
-
-    func getNextItems() {
-        
-    }
-
-    
     weak var view: SearchViewInput!
     var interactor: SearchViewInteractorInput!
     var router: SearchViewRouterInput!
+    
+    var moduleOutput: SearchModuleOutput?
     
     var dataSource = BaseDataSourceForCollectionView()
     var showedSpinner = false
@@ -35,9 +30,9 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     }
     
     func viewIsReady(collectionView: UICollectionView) {
-        interactor.viewIsReady()
         dataSource.setupCollectionView(collectionView: collectionView, filters: nil)
         dataSource.delegate = self
+        interactor.viewIsReady()
     }
 
     func searchWith(searchText: String, sortBy: SortType, sortOrder: SortOrder) {
@@ -54,6 +49,11 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     
     func successWithSuggestList(list: [SuggestionObject]) {
         view.successWithSuggestList(list: list)
+    }
+    
+    func failedSearch() {
+        showedSpinner = false
+        self.outputView()?.hideSpiner()
     }
     
     func isShowedSpinner() -> Bool {
@@ -79,7 +79,12 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     }
     
     func endSearchRequestWith(text: String) {
-        self.view.endSearchRequestWith(text: text)
+        showedSpinner = false
+        outputView()?.hideSpiner()
+        view.endSearchRequestWith(text: text)
+        
+        dataSource.fetchService.performFetch(sortingRules: .timeUp, filtes: [.name(text)])
+        dataSource.reloadData()
     }
     
     // MARK: - BaseDataSourceForCollectionViewDelegate
@@ -88,9 +93,14 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         // 
     }
     
+    func tapCancel() {
+        moduleOutput?.cancelSearch()
+    }
+    
     func onItemSelected(item: BaseDataSourceItem, from data:[[BaseDataSourceItem]]) {
         router.onItemSelected(item: item, from: data)
         self.view.dismissController()
+        moduleOutput?.previewSearchResultsHide()
     }
     
     func getCellSizeForList() -> CGSize {
@@ -127,4 +137,8 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     func onChangeSelectedItemsCount(selectedItemsCount: Int) {}
     func onMaxSelectionExeption() {}
     func onMoreActions(ofItem: Item?, sender: Any) {}
+    
+    func getNextItems() {
+        
+    }
 }

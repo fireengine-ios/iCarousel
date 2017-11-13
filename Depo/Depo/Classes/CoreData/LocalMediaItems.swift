@@ -19,6 +19,9 @@ extension CoreDataStack {
                 if status == .authorized {
                     self.insertFromPhotoFramework()
                 }
+                if status == .denied{
+                    self.deleteLocalFiles()
+                }
             }
         }
     }
@@ -29,36 +32,45 @@ extension CoreDataStack {
         if (localStorageIsAvalible) {
             let assetsList = localMediaStorage.getAllImagesAndVideoAssets()
             
-            let notSaved = listAssetIdIsNotSaved(allList: assetsList)
             let newBgcontext = newChildBackgroundContext
+            let notSaved = listAssetIdIsNotSaved(allList: assetsList, context: newBgcontext)
             
+            debugPrint("number of not saved  ", notSaved.count)
+            
+            var i = 0
             notSaved.forEach {
-                
+                i += 1
+                debugPrint("local ", i)
                 let info = localMediaStorage.fullInfoAboutAsset(asset: $0)
                 
                 let baseMediaContent = BaseMediaContent(curentAsset: $0,
                                                         urlToFile: info.url,
                                                         size: info.size,
                                                         md5: info.md5)
-                
+
                 let wrapData = WrapData(baseModel: baseMediaContent)
-                _ = MediaItem(wrapData: wrapData, context:newBgcontext )
+                _ = MediaItem(wrapData: wrapData, context:newBgcontext)
+                debugPrint(i)
+                
+                if i % 10 == 0 {
+                    saveDataForContext(context: newBgcontext, saveAndWait: true)
+                }
             }
             
             saveDataForContext(context: newBgcontext, saveAndWait: true)
         }
     }
     
-    private func listAssetIdIsNotSaved(allList:[PHAsset]) -> [PHAsset] {
-        let list:[String] = allList.flatMap{ $0.localIdentifier }
-        let predicate = NSPredicate(format: "localFileID IN %@", list)
-        let alredySaved:[MediaItem] = executeRequest(predicate: predicate, context:rootBackgroundContext)
+    private func listAssetIdIsNotSaved(allList: [PHAsset], context: NSManagedObjectContext) -> [PHAsset] {
+        let currentlyInLibriaryIDs: [String] = allList.flatMap{ $0.localIdentifier }
+        let predicate = NSPredicate(format: "localFileID IN %@", currentlyInLibriaryIDs)
+        let alredySaved: [MediaItem] = executeRequest(predicate: predicate, context: context)
         
-        let result = alredySaved.flatMap{ $0.localFileID }
+        let alredySavedIDs = alredySaved.flatMap{ $0.localFileID }
         
-        checkLocalFilesExistence(actualPhotoLibItemsIds: list)
+        checkLocalFilesExistence(actualPhotoLibItemsIDs: currentlyInLibriaryIDs, context:context)
         
-        return allList.filter { !result.contains( $0.localIdentifier )}
+        return allList.filter { !alredySavedIDs.contains( $0.localIdentifier )}
     }
         
     func localStorageContains(assetId: String) -> Bool {
@@ -100,15 +112,20 @@ extension CoreDataStack {
         let context = mainContext
         let predicate = NSPredicate(format: "NOT (md5Value IN %@) AND (isLocalItemValue == true) AND (fileTypeValue IN %@)",  md5Array, filesTypesArray)
         let items: [MediaItem] =  executeRequest(predicate: predicate, context:context)
-        return items.flatMap{ $0.wrapedObject }
+        let sortedItems = items.sorted { (item1, item2) -> Bool in
+            //< correct
+            return item1.fileSizeValue < item2.fileSizeValue
+        }
+        return sortedItems.flatMap{ $0.wrapedObject }
     }
     
-    func checkLocalFilesExistence(actualPhotoLibItemsIds: [String]) {
-        let predicate = NSPredicate(format: "localFileID != Nil")
-        let allSavedLocalFileIDs: [MediaItem] = executeRequest(predicate: predicate,
-                                                            context:rootBackgroundContext)
-        allSavedLocalFileIDs.forEach {
-            rootBackgroundContext.delete($0)
+    func checkLocalFilesExistence(actualPhotoLibItemsIDs: [String], context: NSManagedObjectContext) {
+        let predicate = NSPredicate(format: "localFileID != Nil AND NOT (localFileID IN %@)", actualPhotoLibItemsIDs)
+        let allNonAccurateSavedLocalFiles: [MediaItem] = executeRequest(predicate: predicate,
+                                                            context:context)
+        
+        allNonAccurateSavedLocalFiles.forEach {
+            context.delete($0)
         }
         
     }

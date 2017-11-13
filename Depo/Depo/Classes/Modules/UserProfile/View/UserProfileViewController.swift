@@ -25,7 +25,7 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
     @IBOutlet weak var gsmNumberTextField: UITextField!
     
     var editButton: UIBarButtonItem?
-
+    var readyButton: UIBarButtonItem?
     
     // MARK: Life cycle
     override func viewDidLoad() {
@@ -52,10 +52,15 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
         gsmNumberTextField.textColor = ColorConstants.textGrayColor
         gsmNumberTextField.font = UIFont.TurkcellSaturaBolFont(size: 21)
         
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 44))
-        button.setTitle(TextConstants.userProfileEditButton, for: .normal)
-        button.addTarget(self, action: #selector(onEditButton), for: .touchUpInside)
-        editButton = UIBarButtonItem(customView: button)
+        let editButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 44))
+        editButton.setTitle(TextConstants.userProfileEditButton, for: .normal)
+        editButton.addTarget(self, action: #selector(onEditButtonAction), for: .touchUpInside)
+        self.editButton = UIBarButtonItem(customView: editButton)
+        
+        let readyButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 44))
+        readyButton.setTitle(TextConstants.userProfileDoneButton, for: .normal)
+        readyButton.addTarget(self, action: #selector(onReadyButtonAction), for: .touchUpInside)
+        self.readyButton = UIBarButtonItem(customView: readyButton)
         
         let text = TextConstants.userProfileBottomLabelText1 + "\n\n" + TextConstants.userProfileBottomLabelText2
         let string = text as NSString
@@ -72,7 +77,7 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
         attributedText.addAttribute(NSAttributedStringKey.font, value: font2, range: r2)
         
         scrollView.contentInset = UIEdgeInsets(top: -64, left: 0, bottom: 0, right: 0)
-        
+                
         output.viewIsReady()
     }
     
@@ -115,6 +120,17 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
         
     }
     
+    func setupEditState(_ isEdit: Bool) {
+        if isEdit {
+            self.navigationItem.rightBarButtonItem = readyButton
+        } else {
+            self.navigationItem.rightBarButtonItem = editButton
+        }
+        nameTextField.isUserInteractionEnabled = isEdit
+        emailTextField.isUserInteractionEnabled = isEdit
+        gsmNumberTextField.isUserInteractionEnabled = isEdit
+    }
+    
     func configurateUserInfo(userInfo: AccountInfoResponse){
         var string: String = ""
         if let name_ = userInfo.name{
@@ -122,7 +138,7 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
         }
         
         if let surName_ = userInfo.surname{
-            if (string.characters.count > 0){
+            if (string.count > 0){
                 string = string + " "
             }
             string = string + surName_
@@ -134,26 +150,25 @@ class UserProfileViewController: BaseViewController, UserProfileViewInput, UITex
         gsmNumberTextField.text = userInfo.phoneNumber
     }
     
-    func setEditButtonEnable(enable: Bool){
-        if (enable){
-            self.navigationItem.rightBarButtonItem = editButton
-        }else{
-            self.navigationItem.rightBarButtonItem = nil
-        }
-    }
-    
     func getNavigationController() -> UINavigationController?{
         return navigationController
     }
     
-    // MARK: ButtonsAction
-    
-    @IBAction func onValueChanged(){
-        output.fieldsValueChanged(name: nameTextField.text ?? "", email: emailTextField.text ?? "", number: gsmNumberTextField.text ?? "")
+    func getPhoneNumber() -> String{
+        return gsmNumberTextField.text ?? ""
     }
     
-    @objc func onEditButton(){
-        output.onEditButton(name: nameTextField.text ?? "", email: emailTextField.text ?? "", number: gsmNumberTextField.text ?? "")
+    // MARK: ButtonsAction
+    
+    @IBAction func onValueChanged() {}
+    
+    @objc func onEditButtonAction() {
+        nameTextField.becomeFirstResponder()
+        output.tapEditButton()
+    }
+    
+    @objc func onReadyButtonAction() {
+        output.tapReadyButton(name: nameTextField.text ?? "", email: emailTextField.text ?? "", number: gsmNumberTextField.text ?? "")
     }
     
     @IBAction func onHideKeyboardButton(){

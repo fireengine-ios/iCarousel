@@ -12,7 +12,7 @@ class LoginInteractor: LoginInteractorInput {
     
     var dataStorage = LoginDataStorage()
     
-    private var rememberMe: Bool = false
+    private var rememberMe: Bool = true
     
     private var attempts: Int = 0
     

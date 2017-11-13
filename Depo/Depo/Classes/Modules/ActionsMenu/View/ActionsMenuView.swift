@@ -53,7 +53,7 @@ class ActionsMenuView: UIView, ActionsMenuViewInput, UITableViewDelegate, UITabl
         var w: CGFloat = 320.0
         if (!Device.isIpad){
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            w = appDelegate.window.frame.size.width
+            w = appDelegate.window?.frame.size.width ?? 0
         }
         return CGSize(width: w, height: h)
     }

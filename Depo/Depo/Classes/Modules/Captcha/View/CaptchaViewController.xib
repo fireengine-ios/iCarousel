@@ -1,73 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="TurkcellSaturaBol.ttf">
+            <string>TurkcellSaturaBol</string>
+        </array>
+        <array key="TurkcellSaturaIta.ttf">
+            <string>TurkcellSaturaIta</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CaptchaViewController" customModule="Depo_LifeTech" customModuleProvider="target">
             <connections>
                 <outlet property="activityIndicator" destination="nHl-Sw-k61" id="CvD-Ne-MCC"/>
+                <outlet property="captchaPlaceholderLabel" destination="v6K-dc-32x" id="b9a-87-aD1"/>
                 <outlet property="image" destination="0nN-Ng-TMV" id="hZl-bF-JRL"/>
+                <outlet property="imageBackground" destination="yWL-Kr-uB5" id="BVV-fR-Eva"/>
                 <outlet property="inputTextField" destination="4g6-uY-RRb" id="TPC-7C-Pn5"/>
                 <outlet property="view" destination="iN0-l3-epB" id="v7G-hG-AJR"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="277" height="128"/>
+            <rect key="frame" x="0.0" y="0.0" width="277" height="141"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bBb-rw-22B">
-                    <rect key="frame" x="0.0" y="0.0" width="277" height="128"/>
+                    <rect key="frame" x="0.0" y="0.0" width="277" height="141"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0nN-Ng-TMV">
-                            <rect key="frame" x="15" y="13" width="129" height="60"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="129" id="ESg-H1-tse"/>
-                                <constraint firstAttribute="height" constant="60" id="mHu-KU-NkF"/>
-                            </constraints>
-                        </imageView>
-                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="nHl-Sw-k61">
-                            <rect key="frame" x="69" y="33" width="20" height="20"/>
-                        </activityIndicatorView>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4g6-uY-RRb">
-                            <rect key="frame" x="15" y="88" width="247" height="30"/>
-                            <nil key="textColor"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </textField>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yxp-v2-t2S">
-                            <rect key="frame" x="150" y="28" width="49" height="30"/>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="nHl-Sw-k61">
+                            <rect key="frame" x="110.5" y="33" width="20" height="20"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="refresh"/>
+                        </activityIndicatorView>
+                        <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WgY-yd-Tx6" userLabel="separator">
+                            <rect key="frame" x="30" y="139" width="217" height="1"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="bkl-de-Ci4"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type the text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="v6K-dc-32x">
+                            <rect key="frame" x="30" y="80" width="217" height="23.5"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="16"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yxp-v2-t2S">
+                            <rect key="frame" x="221" y="27" width="26" height="26"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="Yxp-v2-t2S" secondAttribute="height" multiplier="1:1" id="ARe-PC-1A2"/>
+                                <constraint firstAttribute="width" constant="26" id="TLj-bS-1dp"/>
+                            </constraints>
+                            <state key="normal" image="icon_captcha_refresh"/>
                             <connections>
                                 <action selector="captchaRefresh:" destination="-1" eventType="touchUpInside" id="PJn-Sw-fvU"/>
                             </connections>
                         </button>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Duo-dp-Lhi">
-                            <rect key="frame" x="222" y="28" width="40" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Audio"/>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Duo-dp-Lhi">
+                            <rect key="frame" x="247" y="23" width="0.0" height="34"/>
+                            <constraints>
+                                <constraint firstAttribute="width" id="uhg-9F-LS5"/>
+                            </constraints>
                             <connections>
                                 <action selector="playAudioCaptcha:" destination="-1" eventType="touchUpInside" id="Koq-l2-GrW"/>
                             </connections>
                         </button>
+                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yWL-Kr-uB5">
+                            <rect key="frame" x="30" y="8" width="171" height="64"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0nN-Ng-TMV">
+                                    <rect key="frame" x="4" y="2" width="167" height="60"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="0nN-Ng-TMV" firstAttribute="top" secondItem="yWL-Kr-uB5" secondAttribute="top" constant="2" id="0BS-bO-tmQ"/>
+                                <constraint firstAttribute="bottom" secondItem="0nN-Ng-TMV" secondAttribute="bottom" constant="2" id="6sa-N4-2rS"/>
+                                <constraint firstAttribute="trailing" secondItem="0nN-Ng-TMV" secondAttribute="trailing" id="9yc-BG-Kvk"/>
+                                <constraint firstAttribute="height" constant="64" id="ddV-hx-2Om"/>
+                                <constraint firstItem="0nN-Ng-TMV" firstAttribute="leading" secondItem="yWL-Kr-uB5" secondAttribute="leading" constant="4" id="lb4-3a-fvd"/>
+                            </constraints>
+                        </view>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4g6-uY-RRb">
+                            <rect key="frame" x="30" y="111.5" width="217" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="nlI-qo-EsX"/>
+                            </constraints>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" name="TurkcellSaturaIta" family="TurkcellSaturaIta" pointSize="18"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="4g6-uY-RRb" firstAttribute="leading" secondItem="bBb-rw-22B" secondAttribute="leading" constant="15" id="5tp-2j-Xjh"/>
-                        <constraint firstItem="0nN-Ng-TMV" firstAttribute="leading" secondItem="bBb-rw-22B" secondAttribute="leading" constant="15" id="FDA-vO-uli"/>
-                        <constraint firstItem="0nN-Ng-TMV" firstAttribute="top" secondItem="bBb-rw-22B" secondAttribute="top" constant="13" id="Fhq-jz-0Gq"/>
-                        <constraint firstAttribute="bottom" secondItem="4g6-uY-RRb" secondAttribute="bottom" priority="750" constant="10" id="I8P-pd-CZx"/>
-                        <constraint firstItem="nHl-Sw-k61" firstAttribute="centerY" secondItem="0nN-Ng-TMV" secondAttribute="centerY" id="PhY-6n-b7w"/>
-                        <constraint firstAttribute="trailing" secondItem="4g6-uY-RRb" secondAttribute="trailing" constant="15" id="g5s-lb-3FI"/>
-                        <constraint firstItem="nHl-Sw-k61" firstAttribute="centerX" secondItem="0nN-Ng-TMV" secondAttribute="centerX" id="rED-Kt-s4E"/>
-                        <constraint firstItem="4g6-uY-RRb" firstAttribute="top" secondItem="0nN-Ng-TMV" secondAttribute="bottom" constant="15" id="tjv-rg-uwm"/>
+                        <constraint firstItem="v6K-dc-32x" firstAttribute="top" secondItem="yWL-Kr-uB5" secondAttribute="bottom" constant="8" id="0Kt-74-W73"/>
+                        <constraint firstItem="4g6-uY-RRb" firstAttribute="leading" secondItem="bBb-rw-22B" secondAttribute="leading" constant="30" id="5tp-2j-Xjh"/>
+                        <constraint firstItem="WgY-yd-Tx6" firstAttribute="leading" secondItem="bBb-rw-22B" secondAttribute="leading" constant="30" id="81e-UR-kvf"/>
+                        <constraint firstItem="WgY-yd-Tx6" firstAttribute="top" secondItem="4g6-uY-RRb" secondAttribute="bottom" constant="7.5" id="9HH-sP-WQP"/>
+                        <constraint firstItem="v6K-dc-32x" firstAttribute="leading" secondItem="bBb-rw-22B" secondAttribute="leading" constant="30" id="CJV-LE-hIK"/>
+                        <constraint firstItem="yWL-Kr-uB5" firstAttribute="leading" secondItem="bBb-rw-22B" secondAttribute="leading" constant="30" id="CsT-Fc-meX"/>
+                        <constraint firstItem="Duo-dp-Lhi" firstAttribute="centerY" secondItem="yWL-Kr-uB5" secondAttribute="centerY" id="Fms-Kd-al3"/>
+                        <constraint firstAttribute="trailing" secondItem="Duo-dp-Lhi" secondAttribute="trailing" constant="30" id="HPz-m5-3lj"/>
+                        <constraint firstItem="Duo-dp-Lhi" firstAttribute="centerY" secondItem="Yxp-v2-t2S" secondAttribute="centerY" id="KMi-K2-8sm"/>
+                        <constraint firstAttribute="trailing" secondItem="WgY-yd-Tx6" secondAttribute="trailing" constant="30" id="LEw-Za-JMh"/>
+                        <constraint firstAttribute="trailing" secondItem="v6K-dc-32x" secondAttribute="trailing" constant="30" id="Ytf-dg-fdk"/>
+                        <constraint firstAttribute="trailing" secondItem="4g6-uY-RRb" secondAttribute="trailing" constant="30" id="g5s-lb-3FI"/>
+                        <constraint firstItem="Yxp-v2-t2S" firstAttribute="leading" secondItem="yWL-Kr-uB5" secondAttribute="trailing" constant="20" id="gmY-YS-JgZ"/>
+                        <constraint firstItem="4g6-uY-RRb" firstAttribute="top" secondItem="v6K-dc-32x" secondAttribute="bottom" constant="8" id="iXA-5Z-a9y"/>
+                        <constraint firstAttribute="bottom" secondItem="WgY-yd-Tx6" secondAttribute="bottom" priority="750" constant="1" id="pLU-zK-tuX"/>
+                        <constraint firstItem="yWL-Kr-uB5" firstAttribute="top" secondItem="bBb-rw-22B" secondAttribute="top" constant="8" id="pOh-99-2OR"/>
+                        <constraint firstItem="Duo-dp-Lhi" firstAttribute="leading" secondItem="Yxp-v2-t2S" secondAttribute="trailing" id="piO-ic-fYs"/>
                     </constraints>
                 </view>
             </subviews>
@@ -82,7 +133,10 @@
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-24.5" y="-200"/>
+            <point key="canvasLocation" x="-24.5" y="-196.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="icon_captcha_refresh" width="26" height="26"/>
+    </resources>
 </document>

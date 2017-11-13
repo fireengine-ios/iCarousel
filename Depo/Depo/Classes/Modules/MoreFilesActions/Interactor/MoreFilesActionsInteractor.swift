@@ -15,12 +15,99 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
 
     typealias FailResponse = (_ value: ErrorResponse) -> Swift.Void
     
+    var sharingItems = [BaseDataSourceItem]()
+    
     func share(item: [BaseDataSourceItem], sourceRect: CGRect?) {
+        if (item.count == 0){
+            return
+        }
+        sharingItems.removeAll()
+        sharingItems.append(contentsOf: item)
+        
+        selectShareType(sourceRect: sourceRect)
+        
+    }
+    
+    func selectShareType(sourceRect: CGRect?){
+        let controler = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        controler.view.tintColor = ColorConstants.darcBlueColor
+        
+        let smallAction = UIAlertAction(title: TextConstants.actionSheetShareSmallSize, style: .default) { (action) in
+            self.shareSmallSize(sourceRect: sourceRect)
+        }
+        
+        controler.addAction(smallAction)
+        
+        let originalAction = UIAlertAction(title: TextConstants.actionSheetShareOriginalSize, style: .default) { (action) in
+            self.shareOrignalSize(sourceRect: sourceRect)
+        }
+        controler.addAction(originalAction)
+        
+        let shareViaLinkAction = UIAlertAction(title: TextConstants.actionSheetShareShareViaLink, style: .default) { (action) in
+            self.shareViaLink(sourceRect: sourceRect)
+        }
+        controler.addAction(shareViaLinkAction)
+        
+        let cancelAction = UIAlertAction(title: TextConstants.actionSheetShareCancel, style: .cancel, handler: nil)
+        controler.addAction(cancelAction)
+        
+        if let tempoRect = sourceRect {//if ipad
+            controler.popoverPresentationController?.sourceRect = tempoRect
+        }
+        
+        let router = RouterVC()
+        router.presentViewController(controller: controler)
+
+    }
+    
+    func shareSmallSize(sourceRect: CGRect?){
+        if let array = sharingItems as? [WrapData]{
+            let imagesArray: [ImageForDowload] = array.flatMap({
+                let image = ImageForDowload()
+                image.downloadURL = $0.metaData?.smalURl
+                image.imageName = $0.name
+                return image
+            })
+            shareImagesByURLs(images: imagesArray, sourceRect: sourceRect)
+        }
+    }
+    
+    func shareOrignalSize(sourceRect: CGRect?){
+        if let array = sharingItems as? [WrapData]{
+            let imagesArray: [ImageForDowload] = array.flatMap({
+                let image = ImageForDowload()
+                image.downloadURL = $0.urlToFile
+                image.imageName = $0.name
+                return image
+            })
+            shareImagesByURLs(images: imagesArray, sourceRect: sourceRect)
+        }
+    }
+    
+    private func shareImagesByURLs(images: [ImageForDowload], sourceRect: CGRect?){
+        let downloader = ImageDownloder()
         output?.operationStarted(type: .share)
-        fileService.share(sharedFiles: item, success: {(url) in
-            
-            DispatchQueue.main.async { [weak self] in
+        
+        downloader.getImagesByImagesURLs(list: images) { [weak self] (imagesArray) in
+            DispatchQueue.main.async {
+                self?.output?.operationFinished(type: .share)
                 
+                let activityVC = UIActivityViewController(activityItems: imagesArray, applicationActivities: nil)
+                
+                if let tempoRect = sourceRect {//if ipad
+                    activityVC.popoverPresentationController?.sourceRect = tempoRect
+                }
+                
+                let router = RouterVC()
+                router.presentViewController(controller: activityVC)
+            }
+        }
+    }
+    
+    func shareViaLink(sourceRect: CGRect?){
+        output?.operationStarted(type: .share)
+        fileService.share(sharedFiles: sharingItems, success: {[weak self] (url) in
+            DispatchQueue.main.async {
                 self?.output?.operationFinished(type: .share)
                 
                 let objectsToShare = [url]

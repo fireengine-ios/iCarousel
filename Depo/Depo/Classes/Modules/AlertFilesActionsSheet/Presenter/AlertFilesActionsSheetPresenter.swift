@@ -41,7 +41,6 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             
         })
         headerAction.isEnabled = false
-//        headerAction.setValuesForKeys(["titleTextColor": UIColor.black])
         
         var types: [ElementTypes] = [.info, .share, .move]
         
@@ -72,7 +71,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             case .image:
                 actionTypes = [.createStory, .move]
                 actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-                actionTypes.append((item.album != nil) ? .removeFromAlbum : .addToAlbum)
+                actionTypes.append((item.albums != nil) ? .removeFromAlbum : .addToAlbum)
                 actionTypes.append((item.syncStatus == .notSynced) ? .backUp : .addToCmeraRoll)
             case .video:
                 actionTypes = [.move]
@@ -286,7 +285,6 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     
                 })
             }
-            action.setValuesForKeys(["titleTextColor": UIColor.black])
             return action
         }
     }
@@ -299,7 +297,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             vc = unwrapedVC
             
         } else {
-            guard let rootVC = RouterVC().rootViewController as? UINavigationController else {
+            guard let rootVC = RouterVC().navigationController else {
                 return
             }
             vc = rootVC
@@ -309,7 +307,6 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         let cancellAction = UIAlertAction(title: TextConstants.actionSheetCancel, style: .cancel, handler: { _ in
             
         })
-        cancellAction.setValuesForKeys(["titleTextColor": UIColor.black])
         let actionsWithCancell = actions + [cancellAction]
         
         let actionSheetVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)

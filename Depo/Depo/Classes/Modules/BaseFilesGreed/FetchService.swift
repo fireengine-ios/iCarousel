@@ -30,28 +30,13 @@ class FetchService: NSObject {
     
     let batchSize: Int
     
-    var controller: NSFetchedResultsController<MediaItem>
+    var controller = NSFetchedResultsController<MediaItem>()
     
     var sortingRules: SortedRules = .timeUp
     
-    var fetchedResultsControllerDelegate: NSFetchedResultsControllerDelegate? {
-        set {
-            controller.delegate = newValue
-        }
-        get {
-            return controller.delegate
-        }
-    }
-    
-    init(batchSize: Int, delegate:NSFetchedResultsControllerDelegate?) {
-
-        let agregate = CollectionSortingRules(sortingRules: .lettersAZ).rule
-        controller = FetchService.createController(batchSize: batchSize,
-                                           sortingAgrifate: agregate,
-                                           prediicate: nil,
-                                           delegate:delegate)
+    init(batchSize: Int) {
         self.batchSize = batchSize
-        super.init() 
+        super.init()
     }
     
     static func createController(batchSize: Int,
@@ -62,6 +47,10 @@ class FetchService: NSObject {
         let fetchRequest_ = NSFetchRequest<MediaItem>(entityName: MediaItem.Identifier)
         fetchRequest_.fetchBatchSize = batchSize
         fetchRequest_.sortDescriptors = sortingAgrifate.sortDescriptors
+        let folerAtTopPredicate = NSSortDescriptor(key: "isFolder", ascending: false)
+        
+        fetchRequest_.sortDescriptors?.insert(folerAtTopPredicate, at: 1)
+
         fetchRequest_.predicate = prediicate
         
         let keyPathName = sortingAgrifate.section
@@ -84,8 +73,8 @@ class FetchService: NSObject {
     }
     
     func performFetch(sortingRules: SortedRules,
-                      filtes:[GeneralFilesFiltrationType]? = nil,
-                      delegate:NSFetchedResultsControllerDelegate? = nil) {
+                      filtes: [GeneralFilesFiltrationType]? = nil,
+                      delegate: NSFetchedResultsControllerDelegate? = nil) {
         
         self.sortingRules = sortingRules
         let sortingAgregate = CollectionSortingRules(sortingRules: sortingRules).rule
@@ -118,7 +107,7 @@ class FetchService: NSObject {
         }
         
         switch sortingRules {
-        case .lettersAZ,.lettersZA:
+        case .lettersAZ,.lettersZA, .albumlettersAZ, .albumlettersZA:
             let char = (value.nameValue ?? " ").characters.first!
             let result = String(describing: char).uppercased()
             return result

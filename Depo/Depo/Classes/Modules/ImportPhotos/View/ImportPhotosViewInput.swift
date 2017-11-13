@@ -8,55 +8,31 @@
 
 import Foundation
 
+protocol ActivityIndicator {
+    func startActivityIndicator()
+    func stopActivityIndicator()
+}
+
 // MARK: - Facebook
 
-protocol ImportFromFBViewInput: class {
+protocol ImportFromFBViewInput: class, ActivityIndicator {
     
-    // MARK: - Permissions
-    func fbPermissionsSuccessCallback(permissions: FBPermissionsObject)
-    func fbPermissionsFailureCallback(errorMessage: String)
+    func succeedFacebookStart()
+    func failedFacebookStart(errorMessage: String)
     
-    // MARK: - Token
-    func fbTokenSuccessCallback(token: String)
-    func fbTokenFailureCallback(errorMessage: String)
+    func succeedFacebookStop()
+    func failedFacebookStop(errorMessage: String)
     
-    // MARK: - Connect to FB with token
-    func fbConnectSuccessCallback()
-    func fbConnectFailureCallback(errorMessage: String)
-    
-    // MARK: - Status of sync with FB
-    func fbStatusSuccessCallback(status: FBStatusObject)
-    func fbStatusFailureCallback(errorMessage: String)
-    
-    // MARK: - Start to sync with FB
-    func fbStartSuccessCallback()
-    func fbStartFailureCallback(errorMessage: String)
-    
-    // MARK: - Stop to sync with FB
-    func fbStopSuccessCallback()
-    func fbStopFailureCallback(errorMessage: String)
+    func failedFacebookStatus(errorMessage: String)
 }
 
 // MARK: - Dropbox
 
-protocol ImportFromDropboxViewInput: class {
-    // MARK: - Token
-    func dbTokenSuccessCallback(token: String)
-    func dbTokenFailureCallback(errorMassage: String)
+protocol ImportFromDropboxViewInput: class, ActivityIndicator {
     
-    // MARK: - Connect to DB with token
-    func dbConnectSuccessCallback()
-    func dbConnectFailureCallback(errorMassage: String)
-    
-    // MARK: - Status of DB for start
-    func dbStatusForStartSuccessCallback(status: DropboxStatusObject)
-    func dbStatusForStartFaillureCallback(errorMessage: String)
-    
-    // MARK: - Start to sync with DB
-    func dbStartSuccessCallback()
-    func dbStartFailureCallback(errorMessage: String)
-    
-    // MARK: - Status of sync with DB
     func dbStatusSuccessCallback(status: DropboxStatusObject)
-    func dbStatusFailureCallback(errorMessage: String)
+    func dbStatusFailureCallback()
+    
+    func dbStartSuccessCallback()
+    func failedDropboxStart(errorMessage: String)
 }

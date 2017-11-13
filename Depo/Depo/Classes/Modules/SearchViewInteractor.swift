@@ -23,12 +23,16 @@ class SearchViewInteractor: SearchViewInteractorInput {
     }
     
     func searchItems(by searchText: String, sortBy: SortType, sortOrder: SortOrder) {
-        
-        remoteItems.allItems(searchText, sortBy: sortBy, sortOrder: sortOrder, success: { [weak self] (items) in
-            self?.items(items: items)
-            self?.output.endSearchRequestWith(text: searchText)
+        remoteItems.allItems(searchText, sortBy: sortBy, sortOrder: sortOrder,
+             success: { [weak self] (items) in
+                self?.items(items: items)
+                DispatchQueue.main.async {
+                    self?.output.endSearchRequestWith(text: searchText)
+                }
             }, fail: {
-//                err in
+                DispatchQueue.main.async {
+                    self.output.failedSearch()
+                }
         })
     }
     

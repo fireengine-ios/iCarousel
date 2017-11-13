@@ -94,7 +94,8 @@ class BaseFilesGreedModuleConfigurator {
     func configure(viewController: BaseFilesGreedViewController, fileFilters: [GeneralFilesFiltrationType]? = nil,
                    bottomBarConfig: EditingBarConfig?, router: BaseFilesGreedRouter,
                    presenter: BaseFilesGreedPresenter, interactor: BaseFilesGreedInteractor,
-                   alertSheetConfig: AlertFilesActionsSheetInitialConfig?) {
+                   alertSheetConfig: AlertFilesActionsSheetInitialConfig?,
+                   topBarConfig: GridListTopBarConfig?) {
         
         presenter.bottomBarConfig = bottomBarConfig
         
@@ -115,6 +116,19 @@ class BaseFilesGreedModuleConfigurator {
             let alertModulePresenter = alertSheetModuleInitilizer.createModule()
             presenter.alertSheetModule = alertModulePresenter
             alertModulePresenter.basePassingPresenter = presenter
+        }
+        
+        if let underNavBarBarConfig = topBarConfig {
+            presenter.topBarConfig = underNavBarBarConfig
+            let gridListTopBar = GridListTopBar.initFromXib()
+            viewController.underNavBarBar = gridListTopBar
+            gridListTopBar.delegate = viewController
+            
+        }
+        
+        if let uploadPresenter = presenter as? UploadFilesSelectionPresenter,
+            let uploadInteracotor = interactor as? UploadFilesSelectionInteractor {
+            uploadInteracotor.uploadOutput = uploadPresenter
         }
         
         interactor.originalFilters = fileFilters

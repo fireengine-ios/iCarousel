@@ -37,6 +37,8 @@ enum BaseDataSourceDisplayingType{
 
 class BaseDataSourceForCollectionView: NSObject, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, LBCellsDelegate, BasicCollectionMultiFileCellActionDelegate, UIScrollViewDelegate {
     
+    var isPaginationDidEnd = false
+    
     internal weak var collectionView: UICollectionView!
     
     var displayingType: BaseDataSourceDisplayingType = .greed
@@ -81,18 +83,18 @@ class BaseDataSourceForCollectionView: NSObject, UICollectionViewDataSource, UIC
                             CollectionViewCellsIdsConstant.cellForStoryImage,
                             CollectionViewCellsIdsConstant.cellForVideo,
                             CollectionViewCellsIdsConstant.cellForAudio,
-                            CollectionViewCellsIdsConstant.baseMultiFileCell,
                             CollectionViewCellsIdsConstant.audioSelectionCell,
                             CollectionViewCellsIdsConstant.baseMultiFileCell,
                             CollectionViewCellsIdsConstant.photosOrderCell,
-                            CollectionViewCellsIdsConstant.folderSelectionCell]
+                            CollectionViewCellsIdsConstant.folderSelectionCell,
+                            CollectionViewCellsIdsConstant.albumCell]
         
         registreList.forEach {
             let listNib = UINib(nibName: $0, bundle: nil)
             collectionView.register(listNib, forCellWithReuseIdentifier: $0)
         }
         
-        fetchService = FetchService(batchSize: 140, delegate: self)
+        fetchService = FetchService(batchSize: 140)
         fetchService.performFetch(sortingRules: .timeUp, filtes: originalFilters, delegate: self)
     }
     
@@ -128,7 +130,7 @@ class BaseDataSourceForCollectionView: NSObject, UICollectionViewDataSource, UIC
         }
         
         for header in headers{
-            header.setSelectedState(selected: isHeaderSelected(section: header.tag), activateSelectionState: isSelectionStateActive && enableSelectionOnHeader)
+            header.setSelectedState(selected: isHeaderSelected(section: header.selectionView.tag), activateSelectionState: isSelectionStateActive && enableSelectionOnHeader)
         }
     }
     
@@ -169,9 +171,8 @@ class BaseDataSourceForCollectionView: NSObject, UICollectionViewDataSource, UIC
     }
     
     func reloadData() {
-        
         collectionView.reloadData()
-        fetchService.controller.delegate = self
+//        fetchService.controller.delegate = self
     }
     
     func updateDisplayngType(type: BaseDataSourceDisplayingType){
@@ -200,7 +201,7 @@ class BaseDataSourceForCollectionView: NSObject, UICollectionViewDataSource, UIC
     
     //MARK: collectionViewDataSource
     
-    internal func itemForIndexPath(indexPath: IndexPath) -> BaseDataSourceItem? {
+    func itemForIndexPath(indexPath: IndexPath) -> BaseDataSourceItem? {
         return fetchService.object(at: indexPath)
     }
     
@@ -243,7 +244,7 @@ class BaseDataSourceForCollectionView: NSObject, UICollectionViewDataSource, UIC
         }
     
         cell_.updating()
-        let selected = isObjctSelected(object: unwrapedObject)
+        //let selected = isObjctSelected(object: unwrapedObject)
         cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjctSelected(object: unwrapedObject))
         cell_.confireWithWrapperd(wrappedObj: unwrapedObject)
         cell_.setDelegateObject(delegateObject: self)
@@ -252,22 +253,20 @@ class BaseDataSourceForCollectionView: NSObject, UICollectionViewDataSource, UIC
             return
         }
         
-        fileDataSource.getImage(patch: wraped.patchToPreview) { [weak self] (image) in
-            let contains = self?.collectionView.indexPathsForVisibleItems.contains(indexPath)
-            if let value = contains,
-               value == true {
+        fileDataSource.getImage(patch: wraped.patchToPreview) { image in
+            let contains = self.collectionView?.indexPathsForVisibleItems.contains(indexPath)
+            if contains == true {
                 cell_.setImage(image: image)
                 return
             }
         }
-//        let countRow:Int = self.collectionView(collectionView, numberOfItemsInSection: indexPath.section)
-//        let isLastSection = Bool((numberOfSections(in: collectionView) - 1) == indexPath.section)
-//        let isLastCell = Bool((countRow - 1) == indexPath.row)
-//
-//        if isLastCell &&
-//            isLastSection {
-//            self.delegate?.getNextItems()
-//        }
+        let countRow:Int = self.collectionView(collectionView, numberOfItemsInSection: indexPath.section)
+        let isLastSection = Bool((numberOfSections(in: collectionView) - 1) == indexPath.section)
+        let isLastCell = Bool((countRow - 1) == indexPath.row)
+
+        if isLastCell, isLastSection, !isPaginationDidEnd {
+            self.delegate?.getNextItems()
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -417,14 +416,19 @@ class BaseDataSourceForCollectionView: NSObject, UICollectionViewDataSource, UIC
         }
         
         for header in headers{
-            header.setSelectedState(selected: isHeaderSelected(section: header.tag), activateSelectionState: isSelectionStateActive && enableSelectionOnHeader)
+            header.setSelectedState(selected: isHeaderSelected(section: header.selectionView.tag),
+                                    activateSelectionState: isSelectionStateActive && enableSelectionOnHeader)
         }
         
         updateSelectionCount()
     }
     
-    func isHeaderSelected(section: Int) -> Bool{
-        let array: [MediaItem] = fetchService.controller.sections?[section].objects as! [MediaItem]
+    func isHeaderSelected(section: Int) -> Bool {
+        guard let unwrapedSections = fetchService.controller.sections,
+            section < unwrapedSections.count else {
+            return false
+        }
+        let array: [MediaItem] = unwrapedSections[section].objects as! [MediaItem]
         let result: [String] = array.flatMap { $0.wrapedObject.uuid }
         let subSet = Set<String>(result)
         

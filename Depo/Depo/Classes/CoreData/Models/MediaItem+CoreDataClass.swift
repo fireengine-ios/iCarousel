@@ -23,19 +23,15 @@ public class MediaItem: NSManagedObject {
     
     static let Identifier = "MediaItem"
     
-    convenience init(wrapData: WrapData, context:NSManagedObjectContext) {
+    convenience init(wrapData: WrapData, context: NSManagedObjectContext) {
         
         let entityDescr = NSEntityDescription.entity(forEntityName: MediaItem.Identifier,
                                                      in: context)!
         self.init(entity: entityDescr, insertInto: context)
         
         idValue = wrapData.id ?? -1
-        
-        if (wrapData.name == nil) || (wrapData.name?.count == 0){
-            nameValue = " ".uppercased()
-        }else{
-            nameValue = wrapData.name
-        }
+
+        nameValue = wrapData.name
 
         let char: Character = (nameValue!).characters.first ?? " "
         
@@ -50,14 +46,18 @@ public class MediaItem: NSManagedObject {
         lastModifiDateValue = wrapData.lastModifiDate as NSDate?
         urlToFileValue = wrapData.urlToFile?.absoluteString
         
+        isFolder = wrapData.isFolder ?? false
+        
+        parent = wrapData.parent
+        
         switch wrapData.patchToPreview {
         case let .remoteUrl(url):
             patchToPreviewValue =  url?.absoluteString
-            isLocalItemValue = false
+//            isLocalItemValue = false
         case let .localMediaContent(assetContent):
             localFileID = assetContent.asset.localIdentifier
             patchToPreviewValue = nil
-            isLocalItemValue = true
+//            isLocalItemValue = true
         }
         
 //        var duration: Double = 0
@@ -71,14 +71,19 @@ public class MediaItem: NSManagedObject {
         md5Value = wrapData.md5
         
         let dateValue = self.creationDateValue as Date?
-        let textValue = dateValue?.getDateForSortingOfCollectionView()
-        monthValue = textValue
+        
+        monthValue = dateValue?.getDateForSortingOfCollectionView()
         
         let metaData = MediaItemsMetaData(metadata: wrapData.metaData,
                                           context: context)
         self.metadata = metaData
         
-//        self.albums = wrapData
+        //LR-2356
+        let albums = wrapData.albums?.map({ (albumUuid) -> MediaItemsAlbum in
+            return MediaItemsAlbum(uuid: albumUuid, context: context)
+        })
+        self.albums = NSOrderedSet(array: albums ?? [])
+
 //        isUploading
 //        PHAsset
 

@@ -22,13 +22,11 @@ class AlbumDetailService: RemoteItemsService {
     func nextItems(albumUUID: String, sortBy: SortType, sortOrder: SortOrder, success: @escaping ListRemoveItems, fail:@escaping FailRemoteItems ) {
         let serchParam = AlbumDetalParameters (albumUuid: albumUUID, sortBy: sortBy, sortOrder: sortOrder, page: currentPage, size: requestSize)
         
-        remote.searchContentAlbum(param: serchParam, success: { (response)
-            in
+        remote.searchContentAlbum(param: serchParam, success: { (response) in
             guard let resultResponse = (response as? AlbumDetailResponse)?.list else {
                 fail()
                 return
             }
-            
             let list = resultResponse.flatMap { WrapData(remote: $0) }
             self.currentPage = self.currentPage + 1
             success(list)

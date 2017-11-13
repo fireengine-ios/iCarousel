@@ -11,18 +11,16 @@ import SDWebImage
 
 class AppConfigurator: NSObject {
     
+    static let dropboxManager: DropboxManager = factory.resolve()
+    
     @objc class func applicationStarted(){
         ApplicationSessionManager.start()
-        
-        let dbSession = DBSession.init(appKey: "422fptod5dlxrn8", appSecret: "umjclqg3juoyihd", root: kDBRootDropbox)
-        DBSession.setShared(dbSession)
+        dropboxManager.start()
         
         CoreDataStack.default.appendLocalMediaItems()
         
         SDImageCache.shared().config.maxCacheSize = 100 * 1024 * 1024
         SDImageCache.shared().config.shouldCacheImagesInMemory = false
-        
-        LocationManager.shared().startUpdateLocation()
         
     }
     

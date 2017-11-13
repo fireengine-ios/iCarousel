@@ -119,6 +119,28 @@ class BaseMetaData: ObjectRequestResponse {
 }
 
 
+class BaseAlbumResponse: ObjectRequestResponse {
+    var uuid: String?
+    
+    
+    required init(withJSON: JSON?) {
+        super.init(withJSON: withJSON)
+    }
+    
+    required init(json: Data?, headerResponse: HTTPURLResponse?) {
+        fatalError("init(json:headerResponse:) has not been implemented")
+    }
+    
+    override init() {
+        super.init()
+    }
+    
+    override func mapping() {
+        uuid = json?[SearchJsonKey.uuid].string
+    }
+}
+
+
 class SearchItemResponse: ObjectRequestResponse {
     
     var createdDate: Date?
@@ -135,7 +157,7 @@ class SearchItemResponse: ObjectRequestResponse {
     var parent: String?
     var tempDownloadURL: URL?
     var metadata: BaseMetaData?
-    var album: Array<JSON>?
+    var albums: [String]?//Array<JSON>?
     var subordinates: Array<JSON>?
     var location: Any? // TODO Add!
     
@@ -156,7 +178,8 @@ class SearchItemResponse: ObjectRequestResponse {
         tempDownloadURL = json?[SearchJsonKey.tempDownloadURL].url
         status = json?[SearchJsonKey.status].string
         subordinates = json?[SearchJsonKey.subordinates].array
-        album = json?[SearchJsonKey.album].array
+        albums = json?[SearchJsonKey.album].array?.flatMap{ $0.string }
+        
     }
 }
 
@@ -166,7 +189,7 @@ class SearchResponse: ObjectRequestResponse {
     
     override func mapping() {
         let  tmpList = json?.array
-        if let result = tmpList?.flatMap( {SearchItemResponse(withJSON: $0)} ){
+        if let result = tmpList?.flatMap( {SearchItemResponse(withJSON: $0)}) {
             list = result
         }
     }

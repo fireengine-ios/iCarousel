@@ -10,9 +10,9 @@ import UIKit
 
 class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
     
-    var tableDataMArray = [[WrapData]]()
+    var tableDataMArray = [[BaseDataSourceItem]]()
     
-    func configurateWithArray(array: [[WrapData]]){
+    func configurateWithArray(array: [[BaseDataSourceItem]]){
         tableDataMArray.removeAll()
         tableDataMArray.append(contentsOf: array)
         collectionView.reloadData()
@@ -21,6 +21,10 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
     override internal func itemForIndexPath(indexPath: IndexPath) -> BaseDataSourceItem? {
         let array = tableDataMArray[indexPath.section]
         return array[indexPath.row]
+    }
+    
+    override func getAllObjects() -> [[BaseDataSourceItem]]{
+        return tableDataMArray
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -41,7 +45,7 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
     }
     
     override func getSelectedItems() -> [BaseDataSourceItem] {
-        var resultArray = [WrapData]()
+        var resultArray = [BaseDataSourceItem]()
         for array in tableDataMArray{
             for object in array{
                 if (selectedItemsArray.contains(object.uuid)){
@@ -50,6 +54,20 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
             }
         }
         return resultArray
+    }
+    
+    override func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat {
+        return 0
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize.zero
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.section < tableDataMArray.count, indexPath.row < tableDataMArray[indexPath.section].count {
+            super.collectionView(collectionView, didEndDisplaying: cell, forItemAt: indexPath)
+        }
     }
     
 }

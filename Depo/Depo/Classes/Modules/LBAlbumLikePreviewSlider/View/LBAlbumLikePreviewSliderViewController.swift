@@ -1,5 +1,5 @@
 //
-//  LBAlbumLikePreviewSliderLBAlbumLikePreviewSliderViewController.swift
+//  LBAlbumLikePreviewSliderViewController.swift
 //  Depo
 //
 //  Created by AlexanderP on 21/08/2017.
@@ -7,114 +7,73 @@
 //
 
 import UIKit
-import iCarousel
 
-class LBAlbumLikePreviewSliderViewController: UIViewController, LBAlbumLikePreviewSliderViewInput {
-
-    @IBOutlet weak var carousel: iCarousel!
-    
-    @IBOutlet weak var titleLabel: UILabel!
-    
+final class LBAlbumLikePreviewSliderViewController: UIViewController {
     var output: LBAlbumLikePreviewSliderViewOutput!
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var titleLabel: UILabel!
     
     class func initFromXIB() -> LBAlbumLikePreviewSliderViewController {
         return LBAlbumLikePreviewSliderViewController(nibName: "LBAlbumLikePreviewSliderViewController", bundle: nil)
     }
     
-    // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView.register(nibCell: AlbumCell.self)
         output.viewIsReady()
-        
     }
-
     
-    @objc func labelTouchRecognition(sender: Any) {
+    @objc func labelTouchRecognition(_ sender: Any) {
         output.sliderTitlePressed()
     }
     
-    
-    // MARK: LBAlbumLikePreviewSliderViewInput
-    
+    func reloadAllData() {
+        output.reloadData()
+    }
+}
+
+extension LBAlbumLikePreviewSliderViewController: LBAlbumLikePreviewSliderViewInput {
     func setupInitialState() {
         view.backgroundColor = UIColor.lrSkinTone
-        
-        carousel.type = .custom
-        carousel.delegate = self
-        carousel.dataSource = self
-        carousel.backgroundColor = UIColor.clear
         
         titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
         titleLabel.textColor = UIColor.gray
         titleLabel.alpha = 0.5
-        
         titleLabel.text = TextConstants.albumLikeSlidertitle
-        
-        
         titleLabel.isUserInteractionEnabled = true
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.labelTouchRecognition(sender:)))
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(labelTouchRecognition))
         titleLabel.addGestureRecognizer(tapGesture)
-        
-//        view.addGestureRecognizer(tapGesture)
     }
-    
-    func setupCarousel() {
-        carousel.reloadData()
+    func setupCollectionView() {
+        collectionView.reloadData()
     }
-    
-    func refreshTableContent() { //reload
-        
-    }
-    
 }
 
-extension LBAlbumLikePreviewSliderViewController: iCarouselDataSource, iCarouselDelegate {
-    
-    func numberOfItems(in carousel: iCarousel) -> Int {
+extension LBAlbumLikePreviewSliderViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return output.currentItems.count
     }
-    
-    func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
-        let albumItem = output.currentItems[index]
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeue(cell: AlbumCell.self, for: indexPath)
         
-        let cell = AlbumLikeCarousellCell.initFromXIB()
-        cell.frame = CGRect(x: 0, y: 0, width: 90, height: 90 + 24)
+        let albumItem = output.currentItems[indexPath.row]
         if let unwrapedItem = albumItem.preview {
-            
             cell.setup(forItem: unwrapedItem, titleText: albumItem.name ?? "Unnamed")
         }
-
-//        cell.backgroundColor = UIColor.clear
         return cell
     }
-    
-    func carousel(_ carousel: iCarousel, didSelectItemAt index: Int) {
-        //CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: "TEST", withText: "Sorry, \n currenly in developming", okButtonText: "¯\\_(ツ)_/¯")
-        output.onSelectAlbumAt(index: index)
+}
+
+extension LBAlbumLikePreviewSliderViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        output.onSelectAlbumAt(index: indexPath.row)
     }
-    
-    func carouselItemWidth(_ carousel: iCarousel) -> CGFloat {
-        let itemSpacing: CGFloat = 18 // 18/2
-        return 90 + itemSpacing
-    }
-    
-    func carousel(_ carousel: iCarousel, itemTransformForOffset offset: CGFloat, baseTransform transform: CATransform3D) -> CATransform3D {
-        let totalItems = CGFloat(carousel.numberOfItems)
-        let itemWidhWithSpacing = carousel.itemWidth
-        let itemDesirableStart: CGFloat = 15 - 9//9 is item natural spacing
-        
-        let halfViewWidth = view.bounds.width/2 - itemDesirableStart
-        let halfItemWidth = itemWidhWithSpacing/2
-        let tempoItemSpaceShift = (halfViewWidth - halfItemWidth)
-        
-        
-        let tempoOffset: CGFloat = carousel.scrollOffset * 2
-        let itemShiftToTotalItems = tempoItemSpaceShift/(totalItems-1)
-        let spacingShift = -tempoItemSpaceShift + itemShiftToTotalItems * tempoOffset
-        
-        let newOffset = carousel.itemWidth * offset + spacingShift
-        
-        return CATransform3DMakeTranslation( newOffset, 0, 1)
-        
+}
+
+extension LBAlbumLikePreviewSliderViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 90, height: 110)
     }
 }

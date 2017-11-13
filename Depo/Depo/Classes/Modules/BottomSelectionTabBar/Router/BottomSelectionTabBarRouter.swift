@@ -20,6 +20,6 @@ class BottomSelectionTabBarRouter: BottomSelectionTabBarRouterInput {
     func addToAlbum(items: [BaseDataSourceItem]){
         let router = RouterVC()
         let controller = router.addPhotosToAlbum(photos: items)
-        router.pushViewController(viewController: controller)
+        router.pushViewControllertoTableViewNavBar(viewController: controller)
     }
 }
