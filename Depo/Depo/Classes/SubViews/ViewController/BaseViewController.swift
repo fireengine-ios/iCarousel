@@ -77,6 +77,10 @@ class BaseViewController: UIViewController {
             let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationShowTabBar)
             NotificationCenter.default.post(name: notificationName, object: nil)
         }
+        else{
+            let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationHideTabBar)
+            NotificationCenter.default.post(name: notificationName, object: nil)
+        }
     }
     
     func isNeedShowTabBar() -> Bool{
