@@ -58,6 +58,7 @@ class CreateStoryPhotoSelectionPresenter: BaseFilesGreedPresenter, CreateStorySe
     }
     
     override func getContentWithSuccess(array: [[BaseDataSourceItem]]){
-        super.getContentWithSuccess()
+        //DBDROP
+        super.getContentWithSuccess(items: [])
     }
 }

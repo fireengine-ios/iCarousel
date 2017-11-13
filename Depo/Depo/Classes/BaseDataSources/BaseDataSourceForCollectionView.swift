@@ -35,7 +35,8 @@ enum BaseDataSourceDisplayingType{
     @objc optional func scrollViewDidScroll(scrollView: UIScrollView)
 }
 
-class BaseDataSourceForCollectionView: NSObject, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, LBCellsDelegate, BasicCollectionMultiFileCellActionDelegate, UIScrollViewDelegate {
+class BaseDataSourceForCollectionView: NSObject, LBCellsDelegate, BasicCollectionMultiFileCellActionDelegate, UIScrollViewDelegate,
+UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     var isPaginationDidEnd = false
     
@@ -61,9 +62,129 @@ class BaseDataSourceForCollectionView: NSObject, UICollectionViewDataSource, UIC
     
     var canReselect: Bool = false
     
-    var fetchService: FetchService!
+    var currentSortType: SortedRules = .timeUp
+    
+//    var fetchService: FetchService!
     
     var originalFilters: [GeneralFilesFiltrationType]? //DO I NEED THIS?
+    
+    var allFolders = [WrapData]()
+    var allMediaItems = [WrapData]()
+    var allItems = [[WrapData]]()
+    
+    private func compoundItems(appendedItems: [WrapData]) {
+        
+        
+        allMediaItems.append(contentsOf: appendedItems)
+        breakItemsIntoSections(breakingArray: appendedItems)
+//        allFolders.append(appendedItems.filter{$0})
+    }
+    
+    private func breakItemsIntoSections(breakingArray: [WrapData]){
+//        allItems.append(allMediaItems)
+//        var result: [[String]] = []
+//        var prevInitial: Character? = nil
+//        for name in names {
+//            let initial = name.characters.first
+//            if initial != prevInitial {  // We're starting a new letter
+//                result.append([])
+//                prevInitial = initial
+//            }
+//            result[result.endIndex - 1].append(name)
+//        }
+        debugPrint("new array count is ",breakingArray.count)
+        for item in breakingArray {
+            autoreleasepool {
+                if allItems.count > 0,
+                    let lastItem = allItems.last?.last {
+                    switch currentSortType {
+                    case .timeUp, .timeDown:
+                        addByDate(lastItem: lastItem, newItem: item)
+                    case .lettersAZ, .lettersZA, albumlettersAZ, albumlettersZA:
+                        addByName(lastItem: lastItem, newItem: item)
+                    case .sizeAZ, sizeZA:
+                        addBySize(lastItem: lastItem, newItem: item)
+                    default:
+                        break
+                    }
+                } else {
+                    allItems.append([item])
+                }
+                
+                
+            }
+        }
+//        debugPrint("new result sections count is ", breakingArray.count)
+        
+//        return [[]]
+    }
+    
+    private func addByDate(lastItem: WrapData, newItem: WrapData) {
+        if let lastItemCreatedDate = lastItem.creationDate,
+            let newItemCreationDate = newItem.creationDate {
+            if lastItemCreatedDate.getYear() == newItemCreationDate.getYear(),
+                lastItemCreatedDate.getMonth() == newItemCreationDate.getMonth() {
+                debugPrint("item appended to SECTION ", allItems.count - 1)
+                allItems[allItems.count - 1].append(newItem)
+                
+            } else {
+                allItems.append([newItem])
+            }
+            
+            
+            
+            //                       createdDate.get
+            //                       let dateComponent = calendar.
+        }
+        
+    }
+    
+    private func addByName(lastItem: WrapData, newItem: WrapData) {
+        if lastIt {
+            //                            if lastItemCreatedDate > newItemCreationDate {
+            //
+            //                            }
+            debugPrint("item appended to SECTION ", allItems.count - 1)
+            allItems[allItems.count - 1].append(newItem)
+            
+        } else {
+            allItems.append([newItem])
+        }
+    }
+    
+    private func addBySize(lastItem: WrapData, newItem: WrapData) {
+        
+    }
+    
+    
+    private func getHeaderText(indexPath: IndexPath) -> String {
+        
+        return "TESTO"
+    }
+//    func setupCollectionView(items: [WrapData]) {
+//
+//        registerHeaders()
+//        registerCells()
+//
+//        self.collectionView = collectionView
+//        collectionView.dataSource = self
+//        collectionView.delegate = self
+//        compoundItems(appendedItems: items)
+//    }
+    
+    func appendCollectionView(items: [WrapData]) {
+        compoundItems(appendedItems: items)
+        //TODO: Append local items alsohere
+        reloadData()
+    }
+    
+    func reloadCollectionView(items: [WrapData]) {
+        allFolders.removeAll()
+        allMediaItems.removeAll()
+        allItems.removeAll()
+        reloadData()
+        compoundItems(appendedItems: items)
+    }
     
     func setupCollectionView(collectionView: UICollectionView, filters: [GeneralFilesFiltrationType]?){
 
@@ -73,12 +194,14 @@ class BaseDataSourceForCollectionView: NSObject, UICollectionViewDataSource, UIC
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        let headerNib = UINib(nibName: CollectionViewSuplementaryConstants.baseDataSourceForCollectionViewReuseID,
-                              bundle: nil)
-        collectionView.register(headerNib,
-                                forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
-                                withReuseIdentifier: CollectionViewSuplementaryConstants.baseDataSourceForCollectionViewReuseID)
+        registerHeaders()
+        registerCells()
         
+//        fetchService = FetchService(batchSize: 140)
+//        fetchService.performFetch(sortingRules: .timeUp, filtes: originalFilters, delegate: self)
+    }
+    
+    private func registerCells() {
         let registreList = [CollectionViewCellsIdsConstant.cellForImage,
                             CollectionViewCellsIdsConstant.cellForStoryImage,
                             CollectionViewCellsIdsConstant.cellForVideo,
@@ -93,9 +216,14 @@ class BaseDataSourceForCollectionView: NSObject, UICollectionViewDataSource, UIC
             let listNib = UINib(nibName: $0, bundle: nil)
             collectionView.register(listNib, forCellWithReuseIdentifier: $0)
         }
-        
-        fetchService = FetchService(batchSize: 140)
-        fetchService.performFetch(sortingRules: .timeUp, filtes: originalFilters, delegate: self)
+    }
+    
+    private func registerHeaders() {
+        let headerNib = UINib(nibName: CollectionViewSuplementaryConstants.baseDataSourceForCollectionViewReuseID,
+                              bundle: nil)
+        collectionView.register(headerNib,
+                                forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
+                                withReuseIdentifier: CollectionViewSuplementaryConstants.baseDataSourceForCollectionViewReuseID)
     }
     
     func setPreferedCellReUseID(reUseID: String?){
@@ -136,35 +264,35 @@ class BaseDataSourceForCollectionView: NSObject, UICollectionViewDataSource, UIC
     
     func getAllObjects() -> [[BaseDataSourceItem]]{
         var array = [[BaseDataSourceItem]]()
-        let sections = fetchService.controller.sections
-        let sectionsCount = sections?.count ?? 0
-        for section in 0...sectionsCount - 1 {
-            let rowCount = sections?[section].numberOfObjects ?? 0
-            var subArray = [BaseDataSourceItem]()
-            for row in 0...rowCount - 1 {
-                let indexPath = IndexPath(row: row, section: section)
-                if let obj = itemForIndexPath(indexPath: indexPath) {
-                    subArray.append(obj)
-                }
-            }
-            array.append(subArray)
-        }
+//        let sections = fetchService.controller.sections
+//        let sectionsCount = sections?.count ?? 0
+//        for section in 0...sectionsCount - 1 {
+//            let rowCount = sections?[section].numberOfObjects ?? 0
+//            var subArray = [BaseDataSourceItem]()
+//            for row in 0...rowCount - 1 {
+//                let indexPath = IndexPath(row: row, section: section)
+//                if let obj = itemForIndexPath(indexPath: indexPath) {
+//                    subArray.append(obj)
+//                }
+//            }
+//            array.append(subArray)
+//        }
         return array
     }
     
     func selectAll(isTrue: Bool){
         if (isTrue) {
-            let sections = fetchService.controller.sections
-            let sectionsCount = sections?.count ?? 0
-            for section in 0...sectionsCount - 1 {
-                let rowCount = sections?[section].numberOfObjects ?? 0
-                for row in 0...rowCount - 1 {
-                    let indexPath = IndexPath(row: row, section: section)
-                    if let obj = itemForIndexPath(indexPath: indexPath) {
-                        selectedItemsArray.insert(obj.uuid)
-                    }
-                }
-            }
+//            let sections = fetchService.controller.sections
+//            let sectionsCount = sections?.count ?? 0
+//            for section in 0...sectionsCount - 1 {
+//                let rowCount = sections?[section].numberOfObjects ?? 0
+//                for row in 0...rowCount - 1 {
+//                    let indexPath = IndexPath(row: row, section: section)
+//                    if let obj = itemForIndexPath(indexPath: indexPath) {
+//                        selectedItemsArray.insert(obj.uuid)
+//                    }
+//                }
+//            }
         }else{
             selectedItemsArray.removeAll()
         }
@@ -172,7 +300,6 @@ class BaseDataSourceForCollectionView: NSObject, UICollectionViewDataSource, UIC
     
     func reloadData() {
         collectionView.reloadData()
-//        fetchService.controller.delegate = self
     }
     
     func updateDisplayngType(type: BaseDataSourceDisplayingType){
@@ -199,28 +326,160 @@ class BaseDataSourceForCollectionView: NSObject, UICollectionViewDataSource, UIC
     }
     
     
+    
+    //MARK: selection
+    
+    func updateSelectionCount(){
+        self.delegate?.onChangeSelectedItemsCount(selectedItemsCount: selectedItemsArray.count)
+    }
+    
+    func isObjctSelected(object: BaseDataSourceItem) -> Bool {
+        return selectedItemsArray.contains(object.uuid)
+    }
+    
+    func onSelectObject(object: BaseDataSourceItem){
+        if (isObjctSelected(object: object)){
+            selectedItemsArray.remove(object.uuid)
+        }else{
+            if (maxSelectionCount >= 0){
+                if (selectedItemsArray.count >= maxSelectionCount){
+                    if (canReselect){
+                        selectedItemsArray.removeFirst()
+                        updateVisibleCells()
+                    }else{
+                        delegate?.onMaxSelectionExeption()
+                        return
+                    }
+                }
+            }
+            selectedItemsArray.insert(object.uuid)
+        }
+        
+        for header in headers{
+            header.setSelectedState(selected: isHeaderSelected(section: header.selectionView.tag),
+                                    activateSelectionState: isSelectionStateActive && enableSelectionOnHeader)
+        }
+        
+        updateSelectionCount()
+    }
+    
+    func isHeaderSelected(section: Int) -> Bool {
+//        guard let unwrapedSections = fetchService.controller.sections,
+//            section < unwrapedSections.count else {
+//            return false
+//        }
+//        let array: [MediaItem] = unwrapedSections[section].objects as! [MediaItem]
+//        let result: [String] = array.flatMap { $0.wrapedObject.uuid }
+//        let subSet = Set<String>(result)
+//        
+//        return subSet.isSubset(of: selectedItemsArray)
+        return false 
+    }
+    
+    func selectSectionAt(section: Int){
+//        let array: [MediaItem] = fetchService.controller.sections?[section].objects as! [MediaItem]
+//        let objectsArray: [BaseDataSourceItem] = array.flatMap { $0.wrapedObject }
+//
+//        if (isHeaderSelected(section: section)){
+//            for obj in objectsArray {
+//                selectedItemsArray.remove(obj.uuid)
+//            }
+//        }else{
+//            for obj in objectsArray {
+//                selectedItemsArray.insert(obj.uuid)
+//            }
+//        }
+//
+//        let visibleCells = collectionView.visibleCells
+//        for cell in visibleCells {
+//            guard let cell_ = cell as? CollectionViewCellDataProtocol,
+//                  let indexPath = collectionView.indexPath(for: cell),
+//                  (indexPath.section == section),
+//                  let object = itemForIndexPath(indexPath: indexPath)
+//                else{
+//                continue
+//            }
+//
+//            cell_.setSelection(isSelectionActive: isSelectionStateActive,
+//                               isSelected: isObjctSelected(object: object))
+//            cell_.confireWithWrapperd(wrappedObj: object)
+//
+//        }
+//        if isSelectionStateActive {
+//            delegate?.onChangeSelectedItemsCount(selectedItemsCount: self.selectedItemsArray.count)
+//        }
+    }
+    
+    func updateVisibleCells(){
+        let array = collectionView.visibleCells
+        for cell in array {
+            guard let cell_ = cell as? CollectionViewCellDataProtocol else{
+                continue
+            }
+            
+            let indexPath = collectionView.indexPath(for: cell)
+            guard let indexPath_ = indexPath else {
+                continue
+            }
+            let object = itemForIndexPath(indexPath: indexPath_)
+            guard let unwrapedObject = object else {
+                return
+            }
+            cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjctSelected(object: unwrapedObject))
+            cell_.confireWithWrapperd(wrappedObj: unwrapedObject)
+        }
+    }
+    
+    @objc func onHeaderTap(_ sender: UITapGestureRecognizer){
+        if (!enableSelectionOnHeader ||
+            !isSelectionStateActive ) {
+            return
+        }
+        
+        let section = sender.view?.tag
+        selectSectionAt(section: section!)
+        let textHeader = sender.view?.superview as! CollectionViewSimpleHeaderWithText
+        textHeader.setSelectedState(selected: isHeaderSelected(section: section!), activateSelectionState: isSelectionStateActive)
+    }
+    
+    func morebuttonGotPressed(sender: Any, itemModel: Item?) {
+        delegate?.onMoreActions(ofItem: itemModel, sender: sender)
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        delegate?.scrollViewDidScroll?(scrollView: scrollView)
+    }
+    
+    func isInSelectionMode() -> Bool {
+        return isSelectionStateActive
+    }
+    
     //MARK: collectionViewDataSource
     
     func itemForIndexPath(indexPath: IndexPath) -> BaseDataSourceItem? {
-        return fetchService.object(at: indexPath)
+        return allItems[indexPath.section][indexPath.row]//fetchService.object(at: indexPath)
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return fetchService.controller.sections?.count ?? 0
+        debugPrint("NUMBER OF SECTION ", allItems.count)
+        return allItems.count//fetchService.controller.sections?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return fetchService.controller.sections?[section].numberOfObjects ?? 0
+        guard section < allItems.count else {
+            return 0
+        }
+        return allItems[section].count//fetchService.controller.sections?[section].numberOfObjects ?? 0
     }
     
-    func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat{
+    func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat {
         return 50
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let file = itemForIndexPath(indexPath: indexPath)
-
+        
         var cellReUseID = preferedCellReUseID
         if (cellReUseID == nil), let unwrapedFile = file {
             cellReUseID = unwrapedFile.getCellReUseID()
@@ -239,10 +498,10 @@ class BaseDataSourceForCollectionView: NSObject, UICollectionViewDataSource, UIC
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
         guard let unwrapedObject = itemForIndexPath(indexPath: indexPath),
-              let cell_ = cell as? CollectionViewCellDataProtocol else {
-            return
+            let cell_ = cell as? CollectionViewCellDataProtocol else {
+                return
         }
-    
+        
         cell_.updating()
         //let selected = isObjctSelected(object: unwrapedObject)
         cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjctSelected(object: unwrapedObject))
@@ -263,7 +522,7 @@ class BaseDataSourceForCollectionView: NSObject, UICollectionViewDataSource, UIC
         let countRow:Int = self.collectionView(collectionView, numberOfItemsInSection: indexPath.section)
         let isLastSection = Bool((numberOfSections(in: collectionView) - 1) == indexPath.section)
         let isLastCell = Bool((countRow - 1) == indexPath.row)
-
+        
         if isLastCell, isLastSection, !isPaginationDidEnd {
             self.delegate?.getNextItems()
         }
@@ -353,9 +612,9 @@ class BaseDataSourceForCollectionView: NSObject, UICollectionViewDataSource, UIC
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         var h: CGFloat = 50
-        if (!fetchService.needSeparateBySection()){
-            h = 0
-        }
+        //        if (!fetchService.needSeparateBySection()){
+        //            h = 0
+        //        }
         
         return CGSize(width: collectionView.contentSize.width, height: h)
     }
@@ -364,10 +623,10 @@ class BaseDataSourceForCollectionView: NSObject, UICollectionViewDataSource, UIC
         switch kind {
         case UICollectionElementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: CollectionViewSuplementaryConstants.baseDataSourceForCollectionViewReuseID, for: indexPath)
-           
+            
             let textHeader = headerView as! CollectionViewSimpleHeaderWithText
-            let title = fetchService.headerText(indexPath: indexPath)
-                textHeader.setText(text: title)
+            let title = "TEST HEADER"//fetchService.headerText(indexPath: indexPath)
+            textHeader.setText(text: title)
             
             textHeader.setSelectedState(selected: isHeaderSelected(section: indexPath.section), activateSelectionState: isSelectionStateActive && enableSelectionOnHeader)
             
@@ -387,129 +646,4 @@ class BaseDataSourceForCollectionView: NSObject, UICollectionViewDataSource, UIC
     }
     
     
-    //MARK: selection
-    
-    func updateSelectionCount(){
-        self.delegate?.onChangeSelectedItemsCount(selectedItemsCount: selectedItemsArray.count)
-    }
-    
-    func isObjctSelected(object: BaseDataSourceItem) -> Bool {
-        return selectedItemsArray.contains(object.uuid)
-    }
-    
-    func onSelectObject(object: BaseDataSourceItem){
-        if (isObjctSelected(object: object)){
-            selectedItemsArray.remove(object.uuid)
-        }else{
-            if (maxSelectionCount >= 0){
-                if (selectedItemsArray.count >= maxSelectionCount){
-                    if (canReselect){
-                        selectedItemsArray.removeFirst()
-                        updateVisibleCells()
-                    }else{
-                        delegate?.onMaxSelectionExeption()
-                        return
-                    }
-                }
-            }
-            selectedItemsArray.insert(object.uuid)
-        }
-        
-        for header in headers{
-            header.setSelectedState(selected: isHeaderSelected(section: header.selectionView.tag),
-                                    activateSelectionState: isSelectionStateActive && enableSelectionOnHeader)
-        }
-        
-        updateSelectionCount()
-    }
-    
-    func isHeaderSelected(section: Int) -> Bool {
-        guard let unwrapedSections = fetchService.controller.sections,
-            section < unwrapedSections.count else {
-            return false
-        }
-        let array: [MediaItem] = unwrapedSections[section].objects as! [MediaItem]
-        let result: [String] = array.flatMap { $0.wrapedObject.uuid }
-        let subSet = Set<String>(result)
-        
-        return subSet.isSubset(of: selectedItemsArray) 
-    }
-    
-    func selectSectionAt(section: Int){
-        let array: [MediaItem] = fetchService.controller.sections?[section].objects as! [MediaItem]
-        let objectsArray: [BaseDataSourceItem] = array.flatMap { $0.wrapedObject }
-        
-        if (isHeaderSelected(section: section)){
-            for obj in objectsArray {
-                selectedItemsArray.remove(obj.uuid)
-            }
-        }else{
-            for obj in objectsArray {
-                selectedItemsArray.insert(obj.uuid)
-            }
-        }
-        
-        let visibleCells = collectionView.visibleCells
-        for cell in visibleCells {
-            guard let cell_ = cell as? CollectionViewCellDataProtocol,
-                  let indexPath = collectionView.indexPath(for: cell),
-                  (indexPath.section == section),
-                  let object = itemForIndexPath(indexPath: indexPath)
-                else{
-                continue
-            }
-            
-            cell_.setSelection(isSelectionActive: isSelectionStateActive,
-                               isSelected: isObjctSelected(object: object))
-            cell_.confireWithWrapperd(wrappedObj: object)
-            
-        }
-        if isSelectionStateActive {
-            delegate?.onChangeSelectedItemsCount(selectedItemsCount: self.selectedItemsArray.count)
-        }
-    }
-    
-    func updateVisibleCells(){
-        let array = collectionView.visibleCells
-        for cell in array {
-            guard let cell_ = cell as? CollectionViewCellDataProtocol else{
-                continue
-            }
-            
-            let indexPath = collectionView.indexPath(for: cell)
-            guard let indexPath_ = indexPath else {
-                continue
-            }
-            let object = itemForIndexPath(indexPath: indexPath_)
-            guard let unwrapedObject = object else {
-                return
-            }
-            cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjctSelected(object: unwrapedObject))
-            cell_.confireWithWrapperd(wrappedObj: unwrapedObject)
-        }
-    }
-    
-    @objc func onHeaderTap(_ sender: UITapGestureRecognizer){
-        if (!enableSelectionOnHeader ||
-            !isSelectionStateActive ) {
-            return
-        }
-        
-        let section = sender.view?.tag
-        selectSectionAt(section: section!)
-        let textHeader = sender.view?.superview as! CollectionViewSimpleHeaderWithText
-        textHeader.setSelectedState(selected: isHeaderSelected(section: section!), activateSelectionState: isSelectionStateActive)
-    }
-    
-    func morebuttonGotPressed(sender: Any, itemModel: Item?) {
-        delegate?.onMoreActions(ofItem: itemModel, sender: sender)
-    }
-
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        delegate?.scrollViewDidScroll?(scrollView: scrollView)
-    }
-    
-    func isInSelectionMode() -> Bool {
-        return isSelectionStateActive
-    }
 }
