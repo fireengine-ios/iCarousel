@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SyncContactsViewController:UIViewController, SyncContactsViewInput {
+class SyncContactsViewController:BaseViewController, SyncContactsViewInput {
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var viewForLogo: UIView!

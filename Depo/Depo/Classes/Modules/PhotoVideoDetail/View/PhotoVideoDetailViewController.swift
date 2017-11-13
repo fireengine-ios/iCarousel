@@ -11,7 +11,7 @@ import AVKit
 import AVFoundation
 import Photos
 
-class PhotoVideoDetailViewController: UIViewController, PhotoVideoDetailViewInput, BaseFileContentViewDeleGate {
+class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewInput, BaseFileContentViewDeleGate {
     
     typealias Item = WrapData
     

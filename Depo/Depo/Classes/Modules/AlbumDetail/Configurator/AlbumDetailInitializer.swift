@@ -13,6 +13,7 @@ class AlbumDetailModuleInitializer: NSObject {
     //Connect with object on storyboard
     class func initializeAlbumDetailController(with nibName:String, album: AlbumItem) -> AlbumDetailViewController {
         let viewController = AlbumDetailViewController(nibName: nibName, bundle: nil)
+        viewController.needShowTabBar = true
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .addToAlbum, .sync, .removeFromAlbum],
                                                style: .default, tintColor: nil)
