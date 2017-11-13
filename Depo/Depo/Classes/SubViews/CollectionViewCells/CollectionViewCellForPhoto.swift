@@ -68,26 +68,32 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     }
 
     override func setImage(with pathForItem: PathForItem) {
+        imageView.contentMode = .center
         switch pathForItem {
         case let .localMediaContent(local):
             let path = local.urlToFile.path.replacingOccurrences(of: "/file:", with: "")
             SDImageCache.shared().addReadOnlyCachePath(path)
             let url = URL(fileURLWithPath: path)
-            imageView.sd_setImage(with: url, placeholderImage: nil, options: []) { [weak self] (image, error, cacheType, url) in
+            imageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "fileIconPhoto"), options: []) { [weak self] (image, error, cacheType, url) in
                 guard error == nil else {
                     print("SD_WebImage_setImage error: \(error!.localizedDescription)")
                     return
                 }
                 
                 if let `self` = self, let image = image {
+                    self.imageView.contentMode = .scaleAspectFill
                     self.imageView.image = image.resizeImage(rect: CGSize(width: 300, height: 300))
-                }
+                }`
             }
         case let .remoteUrl(url):
-            imageView.sd_setImage(with: url, placeholderImage: nil, options: []) { (image, error, cacheType, url) in
+            imageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "fileIconPhoto"), options: []) {[weak self] (image, error, cacheType, url) in
                 guard error == nil else {
                     print("SD_WebImage_setImage error: \(error!.localizedDescription)")
                     return
+                }
+                
+                if let `self` = self {
+                    self.imageView.contentMode = .scaleAspectFill
                 }
             }
         }
