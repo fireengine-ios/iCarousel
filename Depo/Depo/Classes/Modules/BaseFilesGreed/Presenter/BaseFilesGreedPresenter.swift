@@ -13,20 +13,20 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     let player: MediaPlayer = factory.resolve()
     
-    var dataSource = BaseDataSourceForCollectionView()
-
+    var dataSource: BaseDataSourceForCollectionView
+    
     weak var view: BaseFilesGreedViewInput!
-   
+    
     var interactor: BaseFilesGreedInteractorInput!
     
     var router: BaseFilesGreedRouterInput!
     
-    var sortedRule: SortedRules = .timeDown
+    var sortedRule: SortedRules
     
     var filters: [GeneralFilesFiltrationType] = []
     
     let custoPopUp = CustomPopUp()
-
+    
     var bottomBarConfig: EditingBarConfig?
     
     weak var bottomBarPresenter: BottomSelectionTabBarModuleInput?
@@ -37,6 +37,12 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     var alertSheetModule: AlertFilesActionsSheetModuleInput?
     
+    init(sortedRule: SortedRules = .timeDown) {
+        self.sortedRule = sortedRule
+        self.dataSource = BaseDataSourceForCollectionView(sortingRules: sortedRule)
+        super.init()
+    }
+    
     func viewIsReady(collectionView: UICollectionView) {
         interactor.viewIsReady()
         if let unwrapedFilters = interactor.originalFilesTypeFilter {
@@ -44,7 +50,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         }
         dataSource.setupCollectionView(collectionView: collectionView,
                                        filters: interactor.originalFilesTypeFilter)
-
+        
         dataSource.delegate = self
         
         view.setupInitialState()
@@ -68,7 +74,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func getContent() {
-//        uploadData()
+        //        uploadData()
     }
     
     private func getFileFilter() -> FieldValue {
@@ -101,10 +107,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func uploadData(_ searchText: String? = nil){
         startAsyncOperation()
         compoundAllFiltersAndNextItems(searchText: searchText)
-//        filters.convertToSearchRequestFieldValue()
-//        interactor.nextItems(searchText,
-//                             sortBy: .name,
-//                             sortOrder: .asc, newFieldValue: nil)
+        //        filters.convertToSearchRequestFieldValue()
+        //        interactor.nextItems(searchText,
+        //                             sortBy: .name,
+        //                             sortOrder: .asc, newFieldValue: nil)
     }
     
     func onNextButton(){
@@ -138,14 +144,14 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         debugPrint("???getContentWithSuccess()")
         asyncOperationSucces()
         view.stopRefresher()
-//        dataSource.reloadData()
+        //        dataSource.reloadData()
         // TODO:
-//        let sectionsCount = dataSource.numberOfSections(in: dataSource.collectionView!)
-//        let  needShow = (sectionsCount == 0) ? interactor.needShowNoFileView() : false
-//
-//        view.setCollectionViewVisibilityStatus(visibilityStatus: needShow)
+        //        let sectionsCount = dataSource.numberOfSections(in: dataSource.collectionView!)
+        //        let  needShow = (sectionsCount == 0) ? interactor.needShowNoFileView() : false
+        //
+        //        view.setCollectionViewVisibilityStatus(visibilityStatus: needShow)
         
-//        dataSource.fetchService.controller.delegate = dataSource
+        //        dataSource.fetchService.controller.delegate = dataSource
         dataSource.fetchService.performFetch(sortingRules: sortedRule,
                                              filtes: filters,
                                              delegate: dataSource)
@@ -168,8 +174,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func getNextItems() {
-//        interactor.nextItems(nil, sortBy: .name,
-//                             sortOrder: .asc, newFieldValue: <#FieldValue?#>)
+        //        interactor.nextItems(nil, sortBy: .name,
+        //                             sortOrder: .asc, newFieldValue: <#FieldValue?#>)
         compoundAllFiltersAndNextItems()
     }
     
@@ -221,7 +227,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 guard let startIndex = list.index(of: wrappered) else { return }
                 player.play(list: list, startAt: startIndex)
                 player.play()
-//                SingleSong.default.playWithItems(list: array.flatMap({$0}), startItem: wrappered)
+                //                SingleSong.default.playWithItems(list: array.flatMap({$0}), startItem: wrappered)
             } else {
                 router.onItemSelected(item: item, from: data)
             }
@@ -263,19 +269,19 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     private func startEditing() {
         //call tabbar
-
+        
         view.setupSelectionStyle(isSelection: true)
         dataSource.setSelectionState(selectionState: true)
     }
     
-
+    
     private func stopEditing() {
         bottomBarPresenter?.dismiss(animated: true)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
         view.setupSelectionStyle(isSelection: false)
         dataSource.setSelectionState(selectionState: false)
     }
-
+    
     func onChangeSelectedItemsCount(selectedItemsCount: Int) {
         if (selectedItemsCount == 0){
             bottomBarPresenter?.dismiss(animated: true)
@@ -289,10 +295,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     private func setupNewBottomBarConfig() {
-     
+        
         guard let barConfig = interactor.bottomBarConfig,
-              let array = dataSource.getSelectedItems() as? [Item] else {
-            return
+            let array = dataSource.getSelectedItems() as? [Item] else {
+                return
         }
         
         bottomBarPresenter?.setupTabBarWith(items: array, originalConfig: barConfig)
@@ -398,7 +404,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func sortedPushedTopBar(with rule:  MoreActionsConfig.SortRullesType) {
-
+        
         var sortRule: SortedRules
         switch rule {
         case .AlphaBetricAZ:
@@ -421,10 +427,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func filtersTopBar(cahngedTo filters: [MoreActionsConfig.MoreActionsFileType]) {
         self.filters = filters.map{ $0.convertToGeneralFilterFileType() }
-//        dataSource.fetchService.controller.delegate = dataSource
-//        dataSource.fetchService.performFetch(sortingRules: sortedRule,
-//                                             filtes: self.filters)
-//        dataSource.reloadData()
+        //        dataSource.fetchService.controller.delegate = dataSource
+        //        dataSource.fetchService.performFetch(sortingRules: sortedRule,
+        //                                             filtes: self.filters)
+        //        dataSource.reloadData()
         
         stopEditing()
         reloadData()
@@ -436,7 +442,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     var selectedItems: [BaseDataSourceItem] {
         return dataSource.getSelectedItems()
     }
-
+    
     func operationFinished(withType type: ElementTypes, response: Any?) {
         debugPrint("finished")
         dataSource.setSelectionState(selectionState: false)
@@ -469,3 +475,4 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         return self.sortedRule.stringValue
     }
 }
+

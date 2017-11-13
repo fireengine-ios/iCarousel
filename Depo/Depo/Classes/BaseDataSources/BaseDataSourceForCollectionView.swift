@@ -31,7 +31,7 @@ enum BaseDataSourceDisplayingType{
     func onMoreActions(ofItem: Item?, sender: Any)
     
     func getNextItems()
-
+    
     @objc optional func scrollViewDidScroll(scrollView: UIScrollView)
 }
 
@@ -65,8 +65,15 @@ class BaseDataSourceForCollectionView: NSObject, UICollectionViewDataSource, UIC
     
     var originalFilters: [GeneralFilesFiltrationType]? //DO I NEED THIS?
     
+    private var sortingRules: SortedRules
+    
+    init(sortingRules: SortedRules = .timeUp) {
+        self.sortingRules = sortingRules
+        super.init()
+    }
+    
     func setupCollectionView(collectionView: UICollectionView, filters: [GeneralFilesFiltrationType]?){
-
+        
         originalFilters = filters
         
         self.collectionView = collectionView
@@ -95,7 +102,7 @@ class BaseDataSourceForCollectionView: NSObject, UICollectionViewDataSource, UIC
         }
         
         fetchService = FetchService(batchSize: 140)
-        fetchService.performFetch(sortingRules: .timeUp, filtes: originalFilters, delegate: self)
+        fetchService.performFetch(sortingRules: sortingRules, filtes: originalFilters, delegate: self)
     }
     
     func setPreferedCellReUseID(reUseID: String?){
@@ -172,7 +179,7 @@ class BaseDataSourceForCollectionView: NSObject, UICollectionViewDataSource, UIC
     
     func reloadData() {
         collectionView.reloadData()
-//        fetchService.controller.delegate = self
+        //        fetchService.controller.delegate = self
     }
     
     func updateDisplayngType(type: BaseDataSourceDisplayingType){
@@ -220,7 +227,7 @@ class BaseDataSourceForCollectionView: NSObject, UICollectionViewDataSource, UIC
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let file = itemForIndexPath(indexPath: indexPath)
-
+        
         var cellReUseID = preferedCellReUseID
         if (cellReUseID == nil), let unwrapedFile = file {
             cellReUseID = unwrapedFile.getCellReUseID()
@@ -239,10 +246,10 @@ class BaseDataSourceForCollectionView: NSObject, UICollectionViewDataSource, UIC
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
         guard let unwrapedObject = itemForIndexPath(indexPath: indexPath),
-              let cell_ = cell as? CollectionViewCellDataProtocol else {
-            return
+            let cell_ = cell as? CollectionViewCellDataProtocol else {
+                return
         }
-    
+        
         cell_.updating()
         //let selected = isObjctSelected(object: unwrapedObject)
         cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjctSelected(object: unwrapedObject))
@@ -265,7 +272,7 @@ class BaseDataSourceForCollectionView: NSObject, UICollectionViewDataSource, UIC
         let countRow:Int = self.collectionView(collectionView, numberOfItemsInSection: indexPath.section)
         let isLastSection = Bool((numberOfSections(in: collectionView) - 1) == indexPath.section)
         let isLastCell = Bool((countRow - 1) == indexPath.row)
-
+        
         if isLastCell, isLastSection, !isPaginationDidEnd {
             self.delegate?.getNextItems()
         }
@@ -366,10 +373,10 @@ class BaseDataSourceForCollectionView: NSObject, UICollectionViewDataSource, UIC
         switch kind {
         case UICollectionElementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: CollectionViewSuplementaryConstants.baseDataSourceForCollectionViewReuseID, for: indexPath)
-           
+            
             let textHeader = headerView as! CollectionViewSimpleHeaderWithText
             let title = fetchService.headerText(indexPath: indexPath)
-                textHeader.setText(text: title)
+            textHeader.setText(text: title)
             
             textHeader.setSelectedState(selected: isHeaderSelected(section: indexPath.section), activateSelectionState: isSelectionStateActive && enableSelectionOnHeader)
             
@@ -428,13 +435,13 @@ class BaseDataSourceForCollectionView: NSObject, UICollectionViewDataSource, UIC
     func isHeaderSelected(section: Int) -> Bool {
         guard let unwrapedSections = fetchService.controller.sections,
             section < unwrapedSections.count else {
-            return false
+                return false
         }
         let array: [MediaItem] = unwrapedSections[section].objects as! [MediaItem]
         let result: [String] = array.flatMap { $0.wrapedObject.uuid }
         let subSet = Set<String>(result)
         
-        return subSet.isSubset(of: selectedItemsArray) 
+        return subSet.isSubset(of: selectedItemsArray)
     }
     
     func selectSectionAt(section: Int){
@@ -454,11 +461,11 @@ class BaseDataSourceForCollectionView: NSObject, UICollectionViewDataSource, UIC
         let visibleCells = collectionView.visibleCells
         for cell in visibleCells {
             guard let cell_ = cell as? CollectionViewCellDataProtocol,
-                  let indexPath = collectionView.indexPath(for: cell),
-                  (indexPath.section == section),
-                  let object = itemForIndexPath(indexPath: indexPath)
+                let indexPath = collectionView.indexPath(for: cell),
+                (indexPath.section == section),
+                let object = itemForIndexPath(indexPath: indexPath)
                 else{
-                continue
+                    continue
             }
             
             cell_.setSelection(isSelectionActive: isSelectionStateActive,
@@ -506,7 +513,7 @@ class BaseDataSourceForCollectionView: NSObject, UICollectionViewDataSource, UIC
     func morebuttonGotPressed(sender: Any, itemModel: Item?) {
         delegate?.onMoreActions(ofItem: itemModel, sender: sender)
     }
-
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         delegate?.scrollViewDidScroll?(scrollView: scrollView)
     }

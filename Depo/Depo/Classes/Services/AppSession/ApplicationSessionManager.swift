@@ -66,8 +66,10 @@ class ApplicationSessionManager: NSObject {
             let authService = AuthenticationService()
             authService.logout {
                 DispatchQueue.main.async {
-                    let router = RouterVC()
-                    router.setNavigationController(controller: router.onboardingScreen)
+                    if ApplicationSession.sharedSession.session.rememberMeToken != nil {
+                        let router = RouterVC()
+                        router.setNavigationController(controller: router.onboardingScreen)
+                    }
                 }
             }
         })

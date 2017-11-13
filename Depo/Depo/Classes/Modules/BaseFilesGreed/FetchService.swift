@@ -112,7 +112,7 @@ class FetchService: NSObject {
             let result = String(describing: char).uppercased()
             return result
             
-        case .sizeAZ, .sizeZA,.timeDown, .timeUp:
+        case .sizeAZ, .sizeZA,.timeDown, .timeUp, .timeDownWithoutSection, .timeUpWithoutSection:
             let date = value.creationDateValue! as Date
             return date.getDateInTextForCollectionViewHeader()
         }
