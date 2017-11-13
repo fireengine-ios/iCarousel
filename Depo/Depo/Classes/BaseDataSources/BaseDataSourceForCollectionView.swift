@@ -253,13 +253,15 @@ class BaseDataSourceForCollectionView: NSObject, UICollectionViewDataSource, UIC
             return
         }
         
-        fileDataSource.getImage(patch: wraped.patchToPreview) { image in
-            let contains = self.collectionView?.indexPathsForVisibleItems.contains(indexPath)
-            if contains == true {
-                cell_.setImage(image: image)
-                return
-            }
-        }
+        cell_.setImage(with: wraped.patchToPreview)
+        
+//        fileDataSource.getImage(patch: wraped.patchToPreview) { image in
+//            let contains = self.collectionView?.indexPathsForVisibleItems.contains(indexPath)
+//            if contains == true {
+//                cell_.setImage(image: image)
+//                return
+//            }
+//        }
         let countRow:Int = self.collectionView(collectionView, numberOfItemsInSection: indexPath.section)
         let isLastSection = Bool((numberOfSections(in: collectionView) - 1) == indexPath.section)
         let isLastCell = Bool((countRow - 1) == indexPath.row)
@@ -275,12 +277,12 @@ class BaseDataSourceForCollectionView: NSObject, UICollectionViewDataSource, UIC
             return
         }
         
-        fileDataSource.cancelImgeRequest(path: unwrapedObject.patchToPreview)
+//        fileDataSource.cancelImgeRequest(path: unwrapedObject.patchToPreview)
         
         guard let cell_ = cell as? CollectionViewCellDataProtocol else {
             return
         }
-        cell_.setImage(image: nil)
+//        cell_.setImage(image: nil)
         cell_.setSelection(isSelectionActive: isSelectionStateActive,
                            isSelected: isObjctSelected(object: unwrapedObject))
     }
