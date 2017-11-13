@@ -14,6 +14,8 @@ protocol CollectionViewCellDataProtocol {
     
     func setImage(image: UIImage?)
     
+    func setImage(with pathForItem: PathForItem)
+    
     func setSelection(isSelectionActive: Bool, isSelected: Bool)
     
     func setDelegateObject(delegateObject: LBCellsDelegate)

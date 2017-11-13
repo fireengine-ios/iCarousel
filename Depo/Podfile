@@ -27,7 +27,7 @@ target 'Depo_LifeTech' do
     pod 'SplunkMint'
     
     # json
-    pod 'SwiftyJSON'
+    pod 'SwiftyJSON', '~>3'
     pod 'ReachabilitySwift', '~> 3'
     pod 'MBProgressHUD', '~> 1.0.0'
     pod 'ExpandableTableViewController'

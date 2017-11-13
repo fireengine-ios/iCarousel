@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class CollectionViewCellForPhoto: BaseCollectionViewCell {
     @IBOutlet weak var favoriteIcon: UIImageView!
@@ -45,10 +46,10 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         }
         
         imageView.image = nil
-        activity.startAnimating()
+//        activity.startAnimating()
         if wrappered.isLocalItem {
             cloudStatusImage.image = UIImage(named: "objectNotInCloud")
-        }else{
+        } else {
             cloudStatusImage.image = UIImage()
         }
         
@@ -65,7 +66,42 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         self.backgroundColor = ColorConstants.fileGreedCellColor
         activity.stopAnimating()
     }
-    
+
+    override func setImage(with pathForItem: PathForItem) {
+        imageView.contentMode = .center
+        switch pathForItem {
+        case let .localMediaContent(local):
+            let path = local.urlToFile.path
+            SDImageCache.shared().addReadOnlyCachePath(path)
+            let url = URL(fileURLWithPath: path)
+            imageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "fileIconPhoto"), options: []) { [weak self] (image, error, cacheType, url) in
+                guard error == nil else {
+                    print("SD_WebImage_setImage error: \(error!.localizedDescription)")
+                    return
+                }
+                
+                if let `self` = self, let image = image {
+                    self.imageView.contentMode = .scaleAspectFill
+                    self.imageView.image = image.resizeImage(rect: CGSize(width: 300, height: 300))
+                }
+            }
+        case let .remoteUrl(url):
+            imageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "fileIconPhoto"), options: []) {[weak self] (image, error, cacheType, url) in
+                guard error == nil else {
+                    print("SD_WebImage_setImage error: \(error!.localizedDescription)")
+                    return
+                }
+                
+                if let `self` = self {
+                    self.imageView.contentMode = .scaleAspectFill
+                }
+            }
+        }
+        
+        isAlreadyConfigured = true
+        self.backgroundColor = ColorConstants.fileGreedCellColor
+    }
+
     override func setSelection(isSelectionActive: Bool, isSelected: Bool){
         favoriteIcon.alpha = isSelectionActive ? 0 : 1
         

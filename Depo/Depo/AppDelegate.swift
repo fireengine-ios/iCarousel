@@ -10,6 +10,7 @@ import UIKit
 import Fabric
 import Crashlytics
 import FBSDKCoreKit
+import SDWebImage
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -58,6 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillResignActive(_ application: UIApplication) {
     }
     func applicationDidEnterBackground(_ application: UIApplication) {
+        SDImageCache.shared().deleteOldFiles(completionBlock: nil)
     }
     func applicationWillEnterForeground(_ application: UIApplication) {
     }
@@ -65,6 +67,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ApplicationSessionManager.shared().checkSession()
     }
     func applicationWillTerminate(_ application: UIApplication) {
+    }
+    
+    func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
+        SDImageCache.shared().deleteOldFiles(completionBlock: nil)
     }
     
     // TODO: update for new app delegate
