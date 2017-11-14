@@ -106,6 +106,19 @@ class RouterVC: NSObject {
         navigationController?.popViewController(animated: true)
     }
     
+    func popCreateStory() {
+        if let viewControllers = navigationController?.viewControllers {
+            let index = viewControllers.index(where: ({ (viewController) -> Bool in
+                return viewController is CreateStoryPhotoSelectionViewController
+            }))
+            
+            if let ind = index, ind > 0 {
+                let viewController = viewControllers[ind - 1]
+                navigationController?.popToViewController(viewController, animated: true)
+            }
+        }
+    }
+    
     func presentViewController(controller: UIViewController){
         if let lastViewController = navigationController?.viewControllers.last{
             if controller.popoverPresentationController?.sourceView == nil,
