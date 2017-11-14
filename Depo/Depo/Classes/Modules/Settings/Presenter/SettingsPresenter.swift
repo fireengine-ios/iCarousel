@@ -68,6 +68,14 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     func goToPackages() {
         router.goToPackages()
     }
+    
+    func goToPasscode(delegate: PasscodeEnterDelegate?, type: PasscodeInputViewType) {
+        router.goToPasscode(delegate: delegate, type: type)
+    }
+    
+    func goToPasscodeSettings() {
+        router.goToPasscodeSettings()
+    }
 
     
     override func outputView() -> Waiting? {
@@ -113,5 +121,11 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     
     func otherAction() {
         
+    }
+}
+
+extension SettingsPresenter: PasscodeEnterDelegate {
+    func finishPasscode(with type: PasscodeInputViewType) {
+        router.closeEnterPasscode()
     }
 }

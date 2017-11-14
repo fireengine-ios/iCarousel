@@ -20,6 +20,10 @@ protocol SettingsDelegate: class{
     func goToUsageInfo()
     
     func goToActivityTimeline()
+    
+    func goToPasscode(delegate: PasscodeEnterDelegate?, type: PasscodeInputViewType)
+    
+    func goToPasscodeSettings()
 }
 
 class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDelegate, UITableViewDataSource {
@@ -188,8 +192,11 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
                 }
                 break
             case 3: //touch id
-                
-                break
+                if (settingsDelegate != nil){
+                    settingsDelegate!.goToPasscodeSettings()
+                }else{
+                    output.goToPasscodeSettings()
+                }
             default:
                 break
             }

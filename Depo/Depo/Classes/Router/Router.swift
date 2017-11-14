@@ -66,7 +66,8 @@ class RouterVC: NSObject {
             return
         }
         window.rootViewController = controller
-        window.makeKeyAndVisible()
+        window.isHidden = false
+//        window.makeKeyAndVisible()
     }
     
     func pushViewControllertoTableViewNavBar(viewController: UIViewController) {
@@ -570,5 +571,15 @@ class RouterVC: NSObject {
     
     var packages: UIViewController {
         return PackagesModuleInitializer.viewController
+    }
+    
+    // MARK: - Passcode
+    
+    func passcodeSettings() -> UIViewController {
+        return PasscodeSettingsModuleInitializer.viewController
+    }
+    
+    func passcode(delegate: PasscodeEnterDelegate?, type: PasscodeInputViewType) -> UIViewController {
+        return PasscodeEnterModuleInitializer(delegate: delegate, type: type).viewController
     }
 }
