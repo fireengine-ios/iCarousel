@@ -64,35 +64,21 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     var currentSortType: SortedRules = .timeUp
     
-//    var fetchService: FetchService!
-    
-    var originalFilters: [GeneralFilesFiltrationType]? //DO I NEED THIS?
+    var originalFilters: [GeneralFilesFiltrationType]?
     
     var allFolders = [WrapData]()
     var allMediaItems = [WrapData]()
     var allItems = [[WrapData]]()
     
     private func compoundItems(appendedItems: [WrapData]) {
-        
-        
         allMediaItems.append(contentsOf: appendedItems)
-        breakItemsIntoSections(breakingArray: appendedItems)
+        breakItemsIntoSections(breakingArray: allMediaItems)
 //        allFolders.append(appendedItems.filter{$0})
     }
     
     private func breakItemsIntoSections(breakingArray: [WrapData]){
-//        allItems.append(allMediaItems)
-//        var result: [[String]] = []
-//        var prevInitial: Character? = nil
-//        for name in names {
-//            let initial = name.characters.first
-//            if initial != prevInitial {  // We're starting a new letter
-//                result.append([])
-//                prevInitial = initial
-//            }
-//            result[result.endIndex - 1].append(name)
-//        }
         debugPrint("new array count is ",breakingArray.count)
+        allItems.removeAll()
         for item in breakingArray {
             autoreleasepool {
                 if allItems.count > 0,
@@ -100,23 +86,17 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
                     switch currentSortType {
                     case .timeUp, .timeDown:
                         addByDate(lastItem: lastItem, newItem: item)
-                    case .lettersAZ, .lettersZA, albumlettersAZ, albumlettersZA:
+                    case .lettersAZ, .lettersZA, .albumlettersAZ, .albumlettersZA:
                         addByName(lastItem: lastItem, newItem: item)
-                    case .sizeAZ, sizeZA:
+                    case .sizeAZ, .sizeZA:
                         addBySize(lastItem: lastItem, newItem: item)
-                    default:
-                        break
                     }
                 } else {
                     allItems.append([item])
                 }
-                
-                
             }
         }
-//        debugPrint("new result sections count is ", breakingArray.count)
         
-//        return [[]]
     }
     
     private func addByDate(lastItem: WrapData, newItem: WrapData) {
@@ -130,22 +110,20 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             } else {
                 allItems.append([newItem])
             }
-            
-            
-            
-            //                       createdDate.get
-            //                       let dateComponent = calendar.
+        } else {
+            allItems.append([newItem])
         }
         
     }
     
     private func addByName(lastItem: WrapData, newItem: WrapData) {
-        if lastIt {
-            //                            if lastItemCreatedDate > newItemCreationDate {
-            //
-            //                            }
+        if let lastItemName = lastItem.name, let newItemName = newItem.name {
+            if lastItemName.first == newItemName.first {
+                allItems[allItems.count - 1].append(newItem)
+            } else {
+                allItems.append([newItem])
+            }
             debugPrint("item appended to SECTION ", allItems.count - 1)
-            allItems[allItems.count - 1].append(newItem)
             
         } else {
             allItems.append([newItem])
@@ -156,34 +134,36 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         
     }
     
-    
     private func getHeaderText(indexPath: IndexPath) -> String {
         
         return "TESTO"
     }
-//    func setupCollectionView(items: [WrapData]) {
-//
-//        registerHeaders()
-//        registerCells()
-//
-//        self.collectionView = collectionView
-//        collectionView.dataSource = self
-//        collectionView.delegate = self
-//        compoundItems(appendedItems: items)
-//    }
+    
+    func getAllLocalItems() -> [WrapData] {
+        let fetchRequest = NSFetchRequest<MediaItem>(entityName: "MediaItem")
+        let predicate = PredicateRules().predicate(filters: [.localStatus(.local)])
+        let sortDescriptors = CollectionSortingRules(sortingRules: currentSortType).rule.sortDescriptors
+        
+        fetchRequest.predicate = predicate
+        fetchRequest.sortDescriptors = sortDescriptors
+        
+        guard let fetchResult = try? CoreDataStack.default.mainContext.fetch(fetchRequest) else {
+            return []
+        }
+        return fetchResult.map{ return WrapData(mediaItem: $0) }
+    }
     
     func appendCollectionView(items: [WrapData]) {
         compoundItems(appendedItems: items)
-        //TODO: Append local items alsohere
-        reloadData()
+        //TODO: Append local items also here
+//        reloadData()
     }
     
-    func reloadCollectionView(items: [WrapData]) {
-        allFolders.removeAll()
-        allMediaItems.removeAll()
+    func dropData() {
         allItems.removeAll()
+        allMediaItems.removeAll()
+        allFolders.removeAll()
         reloadData()
-        compoundItems(appendedItems: items)
     }
     
     func setupCollectionView(collectionView: UICollectionView, filters: [GeneralFilesFiltrationType]?){
@@ -196,9 +176,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         
         registerHeaders()
         registerCells()
-        
-//        fetchService = FetchService(batchSize: 140)
-//        fetchService.performFetch(sortingRules: .timeUp, filtes: originalFilters, delegate: self)
     }
     
     private func registerCells() {
@@ -457,6 +434,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     //MARK: collectionViewDataSource
     
     func itemForIndexPath(indexPath: IndexPath) -> BaseDataSourceItem? {
+        guard allItems.count > 0 else {
+            return nil
+        }
         return allItems[indexPath.section][indexPath.row]//fetchService.object(at: indexPath)
     }
     
@@ -469,6 +449,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         guard section < allItems.count else {
             return 0
         }
+        debugPrint("section \(section) number of items ", allItems[section].count)
         return allItems[section].count//fetchService.controller.sections?[section].numberOfObjects ?? 0
     }
     

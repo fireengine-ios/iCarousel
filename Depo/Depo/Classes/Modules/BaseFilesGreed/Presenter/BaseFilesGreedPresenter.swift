@@ -60,6 +60,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func onReloadData(){
         dataSource.isPaginationDidEnd = false
+        dataSource.dropData()
         reloadData()
     }
     
@@ -101,10 +102,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func uploadData(_ searchText: String? = nil){
         startAsyncOperation()
         compoundAllFiltersAndNextItems(searchText: searchText)
-//        filters.convertToSearchRequestFieldValue()
-//        interactor.nextItems(searchText,
-//                             sortBy: .name,
-//                             sortOrder: .asc, newFieldValue: nil)
     }
     
     func onNextButton(){
@@ -125,11 +122,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         asyncOperationSucces()
         dataSource.isPaginationDidEnd = true
         view?.stopRefresher()
-        //DBOUT
-//        dataSource.fetchService.performFetch(sortingRules: sortedRule,
-//                                             filtes: filters,
-//                                             delegate: dataSource)
-        dataSource.reloadData()
+
+//        dataSource.reloadData()
     }
     
     func getContentWithSuccess(items: [WrapData]){
@@ -139,20 +133,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         debugPrint("???getContentWithSuccess()")
         asyncOperationSucces()
         view.stopRefresher()
+        
         dataSource.appendCollectionView(items: items)
-//        dataSource.reloadData()
-        // TODO:
-//        let sectionsCount = dataSource.numberOfSections(in: dataSource.collectionView!)
-//        let  needShow = (sectionsCount == 0) ? interactor.needShowNoFileView() : false
-//
-//        view.setCollectionViewVisibilityStatus(visibilityStatus: needShow)
-        
-//        dataSource.fetchService.controller.delegate = dataSource
-        
-        //DBOUT
-//        dataSource.fetchService.performFetch(sortingRules: sortedRule,
-//                                             filtes: filters,
-//                                             delegate: dataSource)
         dataSource.reloadData()
     }
     
@@ -166,7 +148,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         view.stopRefresher()
         if let dataSourceForArray = dataSource as? ArrayDataSourceForCollectionView{
             dataSourceForArray.configurateWithArray(array: array)
-        }else{
+        }
+        else{
             dataSource.reloadData()
         }
     }
@@ -327,14 +310,11 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         }
     }
     
-    func sortedPushed(with rule: SortedRules){
+    func sortedPushed(with rule: SortedRules) {
         sortedRule = rule
         view.changeSortingRepresentation(sortType: rule)
-        
-        //DBOUT
-//        dataSource.fetchService.performFetch(sortingRules: sortedRule,
-//                                             filtes: self.filters,
-//                                             delegate: dataSource)
+        dataSource.dropData()
+        dataSource.currentSortType = rule
         dataSource.reloadData()
         reloadData()
     }
@@ -427,12 +407,9 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func filtersTopBar(cahngedTo filters: [MoreActionsConfig.MoreActionsFileType]) {
         self.filters = filters.map{ $0.convertToGeneralFilterFileType() }
-//        dataSource.fetchService.controller.delegate = dataSource
-//        dataSource.fetchService.performFetch(sortingRules: sortedRule,
-//                                             filtes: self.filters)
-//        dataSource.reloadData()
         
         stopEditing()
+        dataSource.dropData()
         reloadData()
     }
     
