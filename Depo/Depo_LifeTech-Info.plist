@@ -34,11 +34,11 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.5.6</string>
+	<string>1.6.2</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
-		<string>1f44a7d87ab7aa35a3293a3861d9feeb3817b08c</string>
+		<string>74412d8a38e9c5b44ca9993298b0ec4cba26289b</string>
 		<key>Kits</key>
 		<array>
 			<dict>
@@ -57,7 +57,7 @@
 	<array>
 		<string>dbapi-2</string>
 		<string>dbapi-8-emm</string>
-        <string>fbapi</string>
+		<string>fbapi</string>
 		<string>fb-messenger-api</string>
 		<string>fbauth2</string>
 		<string>fbshareextension</string>
@@ -74,18 +74,18 @@
 	<string>https://turkcell.menloworks.com</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
 			<key>http://adepo.turkcell.com.tr/api/auth/gsm/login</key>
 			<dict>
-				<key>NSIncludesSubdomains</key>
-				<true/>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSIncludesSubdomains</key>
 				<true/>
 			</dict>
 		</dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
 	<string></string>
