@@ -8,6 +8,7 @@
 
 import UIKit
 import SDWebImage
+import Photos
 
 class CollectionViewCellForPhoto: BaseCollectionViewCell {
     @IBOutlet weak var favoriteIcon: UIImageView!
@@ -71,19 +72,9 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         imageView.contentMode = .center
         switch pathForItem {
         case let .localMediaContent(local):
-            let path = local.urlToFile.path
-            SDImageCache.shared().addReadOnlyCachePath(path)
-            let url = URL(fileURLWithPath: path)
-            imageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "fileIconPhoto"), options: []) { [weak self] (image, error, cacheType, url) in
-                guard error == nil else {
-                    print("SD_WebImage_setImage error: \(error!.localizedDescription)")
-                    return
-                }
-                
-                if let `self` = self, let image = image {
-                    self.imageView.contentMode = .scaleAspectFill
-                    self.imageView.image = image.resizeImage(rect: CGSize(width: 300, height: 300))
-                }
+            self.imageView.contentMode = .scaleAspectFill
+            DispatchQueue.main.async {
+                self.imageView.image = FilesDataSource().getAssetThumbnail(asset: local.asset)
             }
         case let .remoteUrl(url):
             imageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "fileIconPhoto"), options: []) {[weak self] (image, error, cacheType, url) in

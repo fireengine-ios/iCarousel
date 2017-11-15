@@ -107,4 +107,17 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
             getImage(patch: item.patchToPreview, compliteImage: compliteImage)
         }
     }
+    
+    //Mark: - Sync Image
+    
+    func getAssetThumbnail(asset: PHAsset) -> UIImage {
+        let manager = PHImageManager.default()
+        let option = PHImageRequestOptions()
+        var thumbnail = UIImage()
+        option.isSynchronous = true
+        manager.requestImage(for: asset, targetSize: CGSize(width: 300, height: 300), contentMode: .aspectFill, options: option, resultHandler: {(result, info)->Void in
+            thumbnail = (result != nil) ? result! : #imageLiteral(resourceName: "fileIconPhoto")
+        })
+        return thumbnail
+    }
 }
