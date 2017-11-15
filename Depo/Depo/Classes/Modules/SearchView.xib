@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchViewController" customModule="Depo_LifeTech" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="1hH-31-UT2" id="tpf-st-dHZ"/>
+                <outlet property="containerViewBottomConstraint" destination="hG6-Qx-lnz" id="IgS-Nz-Zta"/>
+                <outlet property="musicBarContainer" destination="KvD-De-0PR" id="1ek-CL-FKi"/>
+                <outlet property="musicBarContainerHeightConstraint" destination="m4J-tT-zr0" id="Ana-4k-E7C"/>
                 <outlet property="navigationBar" destination="3f6-kH-dNq" id="GjJ-GJ-Wcd"/>
                 <outlet property="noFilesLabel" destination="tpr-ro-tFS" id="dxm-Tn-e7a"/>
                 <outlet property="noFilesView" destination="ve5-7k-qJd" id="Nd2-jD-VQX"/>
@@ -24,6 +27,13 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KvD-De-0PR">
+                    <rect key="frame" x="0.0" y="597" width="375" height="70"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="70" id="m4J-tT-zr0"/>
+                    </constraints>
+                </view>
                 <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hdy-4c-itc">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -70,6 +80,14 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Xpp-j0-kcB">
+                    <rect key="frame" x="0.0" y="64" width="375" height="387"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="Bvu-Ns-fD7"/>
+                        <outlet property="delegate" destination="-1" id="CYz-bB-zt0"/>
+                    </connections>
+                </tableView>
                 <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3f6-kH-dNq">
                     <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                     <constraints>
@@ -80,14 +98,6 @@
                         <navigationItem title="Title" id="wQh-dp-91g"/>
                     </items>
                 </navigationBar>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Xpp-j0-kcB">
-                    <rect key="frame" x="0.0" y="64" width="375" height="387"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="Bvu-Ns-fD7"/>
-                        <outlet property="delegate" destination="-1" id="CYz-bB-zt0"/>
-                    </connections>
-                </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -96,6 +106,8 @@
                 <constraint firstItem="ve5-7k-qJd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="64" id="92P-PO-Jo6"/>
                 <constraint firstItem="Hdy-4c-itc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Crd-rg-sFJ"/>
                 <constraint firstItem="Hdy-4c-itc" firstAttribute="top" secondItem="3f6-kH-dNq" secondAttribute="bottom" constant="-64" id="D6U-HZ-sGi"/>
+                <constraint firstAttribute="trailing" secondItem="KvD-De-0PR" secondAttribute="trailing" id="FD1-Rb-ahS"/>
+                <constraint firstItem="KvD-De-0PR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="FSj-p9-fuf"/>
                 <constraint firstAttribute="trailing" secondItem="Xpp-j0-kcB" secondAttribute="trailing" id="I53-me-NG8"/>
                 <constraint firstAttribute="trailing" secondItem="3f6-kH-dNq" secondAttribute="trailing" id="LcR-lZ-ewJ"/>
                 <constraint firstItem="3f6-kH-dNq" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Ool-HC-3hS"/>
@@ -105,10 +117,11 @@
                 <constraint firstAttribute="trailing" secondItem="1hH-31-UT2" secondAttribute="trailing" id="bNf-Vy-vXz"/>
                 <constraint firstAttribute="bottom" secondItem="Xpp-j0-kcB" secondAttribute="bottom" constant="216" id="e7y-pt-8ch"/>
                 <constraint firstItem="1hH-31-UT2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="eZb-ZN-nvb"/>
+                <constraint firstAttribute="bottom" secondItem="1hH-31-UT2" secondAttribute="bottom" id="hG6-Qx-lnz"/>
                 <constraint firstItem="Xpp-j0-kcB" firstAttribute="top" secondItem="3f6-kH-dNq" secondAttribute="bottom" id="oRg-r8-5In"/>
-                <constraint firstAttribute="bottom" secondItem="1hH-31-UT2" secondAttribute="bottom" id="qqm-Bt-13s"/>
                 <constraint firstItem="3f6-kH-dNq" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="rZl-Mi-rZW"/>
                 <constraint firstAttribute="trailing" secondItem="Hdy-4c-itc" secondAttribute="trailing" id="u3z-vU-Vdo"/>
+                <constraint firstAttribute="bottom" secondItem="KvD-De-0PR" secondAttribute="bottom" id="zLy-3L-WMz"/>
             </constraints>
             <point key="canvasLocation" x="42.5" y="89.5"/>
         </view>
