@@ -16,6 +16,8 @@ protocol LoginInteractorInput {
     
     func authificate(login:String, password:String, atachedCaptcha: CaptchaParametrAnswer?)
     
+    func authenticateUsingTurkcell()
+    
     func findCoutryPhoneCode(plus: Bool)
     
     func checkEULA()

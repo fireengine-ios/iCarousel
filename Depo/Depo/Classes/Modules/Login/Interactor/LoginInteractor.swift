@@ -26,6 +26,33 @@ class LoginInteractor: LoginInteractorInput {
         rememberMe = state
     }
     
+    func authenticateUsingTurkcell() {
+        let authenticationService = AuthenticationService()
+        authenticationService.authification(success: { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+            
+            ApplicationSession.sharedSession.session.rememberMe = self.rememberMe
+            ApplicationSession.sharedSession.saveData()
+            
+            DispatchQueue.main.async { [weak self] in
+                self?.output.succesLogin()
+            }
+            }, fail: {  [weak self] (errorResponse)  in
+                DispatchQueue.main.async { [weak self] in
+                    guard let `self` = self else {
+                        return
+                    }
+                    if (self.inNeedOfCaptcha(forResponse: errorResponse)) {
+                        self.attempts += 1
+                        self.output.needShowCaptcha()
+                    }
+                    self.output.failLogin(message: errorResponse.description)
+                }
+        })
+    }
+    
     func authificate(login: String, password: String, atachedCaptcha: CaptchaParametrAnswer?) {
         
         if login.isEmpty {

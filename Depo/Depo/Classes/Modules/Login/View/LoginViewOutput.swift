@@ -14,6 +14,8 @@ protocol LoginViewOutput {
     
     func sendLoginAndPasswordWithCaptcha(login: String, password: String, captchaID: String, captchaAnswer: String)
 
+    func sendTurkcellLogin()
+    
     func onCantLoginButton()
     
     func rememberMe(remember: Bool)

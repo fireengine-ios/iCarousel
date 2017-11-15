@@ -281,6 +281,8 @@ class AuthenticationService: BaseRequestService {
     }
     
     func turkcellAutification(user: Authentication3G, sucess:SuccessLogin?, fail: FailResponse?) {
+        self.success = sucess
+        self.fail = fail
         let handler = BaseResponseHandler<LoginResponse,FailLoginResponse>(success: successLogin, fail: fail)
         executePostRequest(param: user, handler: handler)
     }
@@ -341,10 +343,9 @@ class AuthenticationService: BaseRequestService {
         let rechability = ReachabilityService()
         if (rechability.isReachableViaWiFi || byRememberMe ){
             autificationByRememberMe(sucess: success, fail: fail)
-            
         } else {
             let user = Authentication3G()
-            self.turkcellAutification(user: user, sucess: success, fail: { [weak self] _ in
+            self.turkcellAutification(user: user, sucess: success, fail: { [weak self] error in
                 self?.authification(success: success, fail: fail, byRememberMe: true)
             })
         }
