@@ -96,9 +96,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         
         carouselContainer.setHConstraint(hConstraint: floatingHeaderContainerHeightConstraint)
         
-//        if #available(iOS 11.0, *) {
-//            topCarouselConstraint.constant = underNavBarBarHeight//0
-//        }
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(loadData),
                                                name: NSNotification.Name(rawValue: LocalMediaStorage.notificationPhotoLibraryDidChange),
@@ -120,6 +117,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         configurateNavigationBar()
     }
     

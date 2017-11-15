@@ -475,6 +475,13 @@ class RouterVC: NSObject {
         return controller
     }
     
+    //MARK: Free App Space
+    
+    func freeAppSpace() -> UIViewController{
+        let controller = FreeAppSpaceModuleInitializer.initializeFreeAppSpaceViewController(with: "FreeAppSpaceViewCotroller")
+        return controller
+    }
+    
     // MARK: SETTINGS
     
     var settings: UIViewController? {
@@ -560,10 +567,10 @@ class RouterVC: NSObject {
     
 
     
-    //MARK: FreeApSpace
+    //MARK: FreeAppSpace
     
     func showFreeAppSpace(){
-        let controller = FreeUpSpaceModuleInitializer.initializeViewController(with: "BaseFilesGreedViewController")
+        let controller = freeAppSpace()
         pushViewController(viewController: controller)
     }
     // MARK: - Packages

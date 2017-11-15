@@ -466,6 +466,9 @@ struct TextConstants {
     static let actionSheetShareAlbum = "Share Album"
     static let actionSheetDownloadToCameraRoll = "Download to Camera Roll"
     
+    // MARK: Free Up Space
+    static let freeAppSpaceTitle = "There are %d duplicated photos both in your device and lifebox. Clear some space by selecting the photos that you want to delete."
+    
     // MARK NAVBAR titles
     
     static let cancel = "Cancel"
@@ -556,5 +559,7 @@ struct NumericConstants {
     static let durationOfLifeSession: TimeInterval = 60 * 50 //50 min
     
     static let timeIntervalBetweenAutoSync: TimeInterval = 60*60
+    
+    static let freeAppSpaceLimit = 0.2
     
 }

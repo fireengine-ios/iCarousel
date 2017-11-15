@@ -9,5 +9,9 @@
 class HomePageInteractor: HomePageInteractorInput {
 
     weak var output: HomePageInteractorOutput!
+    
+    func homePagePresented(){
+        FreeAppSpace.default.checkFreeAppSpace()
+    }
 
 }
