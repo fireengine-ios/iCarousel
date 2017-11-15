@@ -138,7 +138,14 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
     }
     
     func info(item: [BaseDataSourceItem]) {
+        self.output?.operationFinished(type: .info)
         
+        let router = RouterVC()
+        
+        if let infoController = router.fileInfo as? FileInfoViewController, let object = item.first {
+            infoController.interactor.setObject(object: object)
+            router.pushViewController(viewController: infoController)
+        }
     }
     
     func edit(item: [BaseDataSourceItem]) {
