@@ -8,6 +8,10 @@
 
 class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelectionModuleInput, UploadFilesSelectionViewOutput, UploadFilesSelectionInteractorOutput {
     
+    init() {
+        super.init(sortedRule: .timeDownWithoutSection)
+    }
+
     override func viewIsReady(collectionView: UICollectionView) {
         
         super.viewIsReady(collectionView: collectionView)

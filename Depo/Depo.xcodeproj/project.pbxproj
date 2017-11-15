@@ -6996,6 +6996,7 @@
 				CE51AFFB1EF90853005DCEE0 /* ShellScript */,
 				82B2D76F0D1B2CE153F470BD /* [CP] Embed Pods Frameworks */,
 				06A2CFAB1619F4E52EEF03FF /* [CP] Copy Pods Resources */,
+				8C679AF51FBC244F00B78873 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -7297,6 +7298,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		8C679AF51FBC244F00B78873 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 74412d8a38e9c5b44ca9993298b0ec4cba26289b 23466683fd868f8140731ca083851a229b69fe7c806515ab6cc300e32cd5f388";
 		};
 		CE51AFFB1EF90853005DCEE0 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;

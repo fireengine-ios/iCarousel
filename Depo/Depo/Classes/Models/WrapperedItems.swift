@@ -574,8 +574,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
             let avalibleAsset = LocalMediaStorage.default.assetsCache.assetBy(identifier: assetId)
     
             if let asset = avalibleAsset {
-                
-                let urlToFile = URL(fileURLWithPath:  url)
+                let urlToFile = URL(string: url)!
                 let tmp  = LocalMediaContent(asset: asset,
                                              urlToFile: urlToFile)
                 patchToPreview = .localMediaContent(tmp)

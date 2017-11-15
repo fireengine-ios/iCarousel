@@ -17,6 +17,7 @@ class SyncService: NSObject {
     private var isSyncing: Bool = false
     private var itemsFromServer = [WrapData]()
     private let numberElementsInRequest = 100
+    private var allObjectsHaveBeenUploaded = false
     private var photoVideoService : PhotoAndVideoService? = nil
     
     override init() {
@@ -36,6 +37,7 @@ class SyncService: NSObject {
         }
         
         isSyncing = true
+        allObjectsHaveBeenUploaded = false
         itemsFromServer.removeAll()
         self.photoVideoService = PhotoAndVideoService(requestSize: numberElementsInRequest)
         getAllServerObjects(success: {
@@ -82,26 +84,29 @@ class SyncService: NSObject {
     }
     
     private func getAllServerObjects(success: @escaping ()-> Swift.Void, fail: @escaping ()-> Swift.Void){
-        guard let service = self.photoVideoService else{
+        guard let service = self.photoVideoService else {
             fail()
             return
         }
-        service.nextItems(sortBy: .date, sortOrder: .asc, success: { (items) in
-            self.itemsFromServer.append(contentsOf: items)
-            
-            if (items.count == self.numberElementsInRequest){
+        
+        guard !allObjectsHaveBeenUploaded else {
+            success()
+            return
+        }
+        
+        service.nextItemsWithoutDBChanges(sortBy: .date, sortOrder: .asc, success: { [weak self] (items) in
+            if let `self` = self {
+                self.itemsFromServer.append(contentsOf: items)
+                self.allObjectsHaveBeenUploaded = (items.count != self.numberElementsInRequest)
                 self.getAllServerObjects(success: {
-                    success()
+                    print("\(self.itemsFromServer.count)")
                 }, fail: {
                     fail()
                 })
-            }else{
-                success()
             }
-        }, fail: {
-            fail()
+            }, fail: {
+                fail()
         }, newFieldValue: nil)
-       
     }
     
     func stopSync() {

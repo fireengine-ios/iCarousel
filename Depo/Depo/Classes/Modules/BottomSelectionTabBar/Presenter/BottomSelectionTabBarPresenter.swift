@@ -84,7 +84,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         debugPrint("number of selected items ", items.count)
     }
     
-    func dismiss(animated: Bool) {
+    override func dismiss(animated: Bool) {
         view.hideBar(animated: animated)
         //NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
         debugPrint("Editing bar Dismiss")
@@ -134,7 +134,17 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         case .move:
             interactor.move(item: selectedItems, toPath: "")
         case .share:
-            interactor.share(item: selectedItems, sourceRect: middleTabBarRect)
+            var onlyLink = false
+            selectedItems.forEach({ (item) in
+                if item.fileType != .image {
+                    onlyLink = true
+                }
+            })
+            if onlyLink {
+                interactor.shareViaLink(item: selectedItems, sourceRect: middleTabBarRect)
+            } else {
+                interactor.share(item: selectedItems, sourceRect: middleTabBarRect)
+            }
         case .sync:
             interactor.sync(item: selectedItems)
         case .removeFromAlbum:
