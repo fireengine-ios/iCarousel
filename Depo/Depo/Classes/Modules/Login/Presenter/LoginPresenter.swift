@@ -16,7 +16,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     var captchaShowed: Bool = false
 
     func viewIsReady() {
-        sendTurkcellLogin()
+        tryToAuthenticate()
         interactor.prepareModels()
     }
     
@@ -34,9 +34,9 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
         interactor.authificate(login: login, password: password, atachedCaptcha: nil)
     }
     
-    func sendTurkcellLogin() {
+    func tryToAuthenticate() {
         onLogin()
-        interactor.authenticateUsingTurkcell()
+        interactor.tryToAuthenticate()
     }
     
     private func onLogin() {

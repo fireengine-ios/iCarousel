@@ -26,7 +26,7 @@ class LoginInteractor: LoginInteractorInput {
         rememberMe = state
     }
     
-    func authenticateUsingTurkcell() {
+    func tryToAuthenticate() {
         let authenticationService = AuthenticationService()
         authenticationService.authification(success: { [weak self] in
             guard let `self` = self else {

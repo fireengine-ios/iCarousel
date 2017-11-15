@@ -14,7 +14,7 @@ protocol LoginViewOutput {
     
     func sendLoginAndPasswordWithCaptcha(login: String, password: String, captchaID: String, captchaAnswer: String)
 
-    func sendTurkcellLogin()
+    func tryToAuthenticate()
     
     func onCantLoginButton()
     
