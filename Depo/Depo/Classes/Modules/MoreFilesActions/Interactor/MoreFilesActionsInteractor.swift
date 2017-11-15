@@ -33,17 +33,20 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
         controler.view.tintColor = ColorConstants.darcBlueColor
         
         let smallAction = UIAlertAction(title: TextConstants.actionSheetShareSmallSize, style: .default) { (action) in
+            self.output?.dismiss(animated: true)
             self.shareSmallSize(sourceRect: sourceRect)
         }
         
         controler.addAction(smallAction)
         
         let originalAction = UIAlertAction(title: TextConstants.actionSheetShareOriginalSize, style: .default) { (action) in
+            self.output?.dismiss(animated: true)
             self.shareOrignalSize(sourceRect: sourceRect)
         }
         controler.addAction(originalAction)
         
         let shareViaLinkAction = UIAlertAction(title: TextConstants.actionSheetShareShareViaLink, style: .default) { (action) in
+            self.output?.dismiss(animated: true)
             self.shareViaLink(sourceRect: sourceRect)
         }
         controler.addAction(shareViaLinkAction)

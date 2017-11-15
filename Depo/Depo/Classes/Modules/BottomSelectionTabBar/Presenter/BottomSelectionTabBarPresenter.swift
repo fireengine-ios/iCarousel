@@ -84,7 +84,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         debugPrint("number of selected items ", items.count)
     }
     
-    func dismiss(animated: Bool) {
+    override func dismiss(animated: Bool) {
         view.hideBar(animated: animated)
         //NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
         debugPrint("Editing bar Dismiss")
