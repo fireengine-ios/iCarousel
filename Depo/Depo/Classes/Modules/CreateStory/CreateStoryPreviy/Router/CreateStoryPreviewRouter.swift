@@ -14,6 +14,6 @@ class CreateStoryPreviewRouter {
 extension CreateStoryPreviewRouter: CreateStoryPreviewRouterInput {
     func goToMain(){
         let router = RouterVC()
-        router.popToRootViewController()
+        router.popCreateStory()
     }
 }

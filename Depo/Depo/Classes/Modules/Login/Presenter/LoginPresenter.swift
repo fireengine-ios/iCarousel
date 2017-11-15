@@ -16,6 +16,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     var captchaShowed: Bool = false
 
     func viewIsReady() {
+        tryToAuthenticate()
         interactor.prepareModels()
     }
     
@@ -31,6 +32,11 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     func sendLoginAndPassword(login: String, password: String) {
         onLogin()
         interactor.authificate(login: login, password: password, atachedCaptcha: nil)
+    }
+    
+    func tryToAuthenticate() {
+        onLogin()
+        interactor.tryToAuthenticate()
     }
     
     private func onLogin() {

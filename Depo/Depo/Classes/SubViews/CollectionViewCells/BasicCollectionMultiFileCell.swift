@@ -158,6 +158,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     
     override func setSelection(isSelectionActive: Bool, isSelected: Bool){
         smallCellSelectionView.isHidden = true
+        moreButton.isHidden = isSelectionActive
         smallContentImageView.isHidden = false
         
         if (isSelectionActive){

@@ -33,17 +33,20 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
         controler.view.tintColor = ColorConstants.darcBlueColor
         
         let smallAction = UIAlertAction(title: TextConstants.actionSheetShareSmallSize, style: .default) { (action) in
+            self.output?.dismiss(animated: true)
             self.shareSmallSize(sourceRect: sourceRect)
         }
         
         controler.addAction(smallAction)
         
         let originalAction = UIAlertAction(title: TextConstants.actionSheetShareOriginalSize, style: .default) { (action) in
+            self.output?.dismiss(animated: true)
             self.shareOrignalSize(sourceRect: sourceRect)
         }
         controler.addAction(originalAction)
         
         let shareViaLinkAction = UIAlertAction(title: TextConstants.actionSheetShareShareViaLink, style: .default) { (action) in
+            self.output?.dismiss(animated: true)
             self.shareViaLink(sourceRect: sourceRect)
         }
         controler.addAction(shareViaLinkAction)
@@ -102,6 +105,16 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
                 router.presentViewController(controller: activityVC)
             }
         }
+    }
+    
+    func shareViaLink(item: [BaseDataSourceItem], sourceRect: CGRect?) {
+        if (item.count == 0){
+            return
+        }
+        sharingItems.removeAll()
+        sharingItems.append(contentsOf: item)
+        
+        shareViaLink(sourceRect: sourceRect)
     }
     
     func shareViaLink(sourceRect: CGRect?){

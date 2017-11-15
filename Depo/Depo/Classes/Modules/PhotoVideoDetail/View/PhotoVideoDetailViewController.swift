@@ -11,7 +11,7 @@ import AVKit
 import AVFoundation
 import Photos
 
-class PhotoVideoDetailViewController: UIViewController, PhotoVideoDetailViewInput, BaseFileContentViewDeleGate {
+class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewInput, BaseFileContentViewDeleGate {
     
     typealias Item = WrapData
     
@@ -189,7 +189,7 @@ class PhotoVideoDetailViewController: UIViewController, PhotoVideoDetailViewInpu
     
     func setupTitle(){
         let obj = objects[selectedIndex]
-        self.navigationItem.title = obj.name
+        self.setTitle(withString: obj.name ?? "")
     }
     
     func setVisibilityOfNotVisibleViws(visibility: Bool){

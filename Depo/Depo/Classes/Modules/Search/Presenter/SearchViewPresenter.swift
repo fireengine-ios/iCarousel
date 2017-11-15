@@ -23,6 +23,8 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     
     var sortedRule: SortedRules = .timeDown
     
+    let custoPopUp = CustomPopUp()
+    
     //MARK : BasePresenter
     
     override func outputView() -> Waiting? {
@@ -98,9 +100,13 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     }
     
     func onItemSelected(item: BaseDataSourceItem, from data:[[BaseDataSourceItem]]) {
-        router.onItemSelected(item: item, from: data)
-        self.view.dismissController()
-        moduleOutput?.previewSearchResultsHide()
+        if item.fileType.isUnSupportedOpenType {
+            router.onItemSelected(item: item, from: data)
+            self.view.dismissController()
+            moduleOutput?.previewSearchResultsHide()
+        } else {
+            custoPopUp.showCustomInfoAlert(withTitle: TextConstants.warning, withText: TextConstants.theFileIsNotSupported, okButtonText: TextConstants.ok)
+        }
     }
     
     func getCellSizeForList() -> CGSize {

@@ -31,7 +31,7 @@ enum BaseDataSourceDisplayingType{
     func onMoreActions(ofItem: Item?, sender: Any)
     
     func getNextItems()
-
+    
     @objc optional func scrollViewDidScroll(scrollView: UIScrollView)
 }
 
@@ -95,6 +95,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
                         addByName(lastItem: lastItem, newItem: item)
                     case .sizeAZ, .sizeZA:
                         addBySize(lastItem: lastItem, newItem: item)
+                    case .timeUpWithoutSection, .timeDownWithoutSection:
+                        allItems.append(contentsOf: [breakingArray])
+                        return
                     }
                 } else {
                     allItems.append([item])
@@ -121,7 +124,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     }
     
     private func appendLocalItems(originalItemsArray: [WrapData]) -> [WrapData] {
-        var tempoArray = [WrapData]()//originalItemsArray
+        var tempoArray = [WrapData]()
         var tempoLocalArray = [WrapData]()
         
         if let unwrapedFilters = originalFilters, let specificFilters = getFileFilterType(filters: unwrapedFilters) {
@@ -137,57 +140,24 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         if tempoLocalArray.count == 0 {
             return originalItemsArray
         }
-        
-        
+
         var remoteItemsMD5List = tempoArray.map{return $0.md5}
-        let localItemsMD5List = allLocalItems.map{return $0.md5}
-        
-        
         for remoteItem in originalItemsArray {
-            //                guard remoteItem.fileType != .folder else {
-            //                    break
-            //                }
             for localItem in tempoLocalArray {
                 guard !remoteItemsMD5List.contains(localItem.md5) else {
                     break
                 }
                 tempoArray.append(localItem)
                 remoteItemsMD5List.append(localItem.md5)
-//                switch currentSortType {
-//                case .timeUp:
-//                    if let localItemDate = localItem.creationDate, let remoteItemDate = remoteItem.creationDate,
-//                        localItemDate > remoteItemDate {
-//                        debugPrint("!!! LOCAL ITEM APPENDED")
-//                        tempoArray.append(localItem)
-//                        remoteItemsMD5List.append(localItem.md5)
-//                    }
-//                case .timeDown:
-//                    if let localItemDate = localItem.creationDate, let remoteItemDate = remoteItem.creationDate,
-//                        localItemDate < remoteItemDate {
-//                        debugPrint("!!! LOCAL ITEM APPENDED")
-//                        tempoArray.append(localItem)
-//                        remoteItemsMD5List.append(localItem.md5)
-//                    }
-//                default:
-//                    break
-//                    ////                    if localItem < remoteItem
-//                    ////                addByDate(lastItem: lastItem, newItem: item)
-//                    //                case .lettersAZ, .lettersZA, .albumlettersAZ, .albumlettersZA:
-//                    //                    addByName(lastItem: lastItem, newItem: item)
-//                    //                case .sizeAZ, .sizeZA:
-//                    //                    addBySize(lastItem: lastItem, newItem: item)
-//                }
-//                //
             }
             
             tempoArray.append(remoteItem)
         }
         
-            
             switch currentSortType {
-            case .timeUp:
+            case .timeUp, .timeUpWithoutSection:
                 tempoArray.sort{$0.creationDate! > $1.creationDate!}
-            case .timeDown:
+            case .timeDown, .timeDownWithoutSection:
                 tempoArray.sort{$0.creationDate! < $1.creationDate!}
             case .lettersAZ, .albumlettersAZ:
                 tempoArray.sort{$0.name!.first! > $1.name!.first!}
@@ -197,8 +167,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
                 tempoArray.sort{$0.fileSize > $1.fileSize}
             case .sizeZA:
                 tempoArray.sort{$0.fileSize < $1.fileSize}
-                
-            }
+        }
             
         return tempoArray
     }
@@ -236,17 +205,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     private func addBySize(lastItem: WrapData, newItem: WrapData) {
         allItems[allItems.count-1].append(newItem)
-//        if let lastItemSize = lastItem.fileSize, let newItemSize = newItem.fileSize {
-//            if lastItemName.first == newItemName.first {
-//                allItems[allItems.count - 1].append(newItem)
-//            } else {
-//                allItems.append([newItem])
-//            }
-//            debugPrint("item appended to SECTION ", allItems.count - 1)
-//
-//        } else {
-//            allItems.append([newItem])
-//        }
     }
     
     private func getHeaderText(indexPath: IndexPath) -> String {
@@ -284,13 +242,22 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         reloadData()
     }
     
+    private var sortingRules: SortedRules
+    
+    init(sortingRules: SortedRules = .timeUp) {
+        self.sortingRules = sortingRules
+        super.init()
+    }
+    
     func setupCollectionView(collectionView: UICollectionView, filters: [GeneralFilesFiltrationType]?){
-
+        
         originalFilters = filters
         
         self.collectionView = collectionView
         collectionView.dataSource = self
         collectionView.delegate = self
+        
+        allLocalItems.append(contentsOf: getAllLocalItems())
         
         registerHeaders()
         registerCells()
@@ -311,6 +278,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             let listNib = UINib(nibName: $0, bundle: nil)
             collectionView.register(listNib, forCellWithReuseIdentifier: $0)
         }
+
     }
     
     private func registerHeaders() {
@@ -319,6 +287,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         collectionView.register(headerNib,
                                 forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
                                 withReuseIdentifier: CollectionViewSuplementaryConstants.baseDataSourceForCollectionViewReuseID)
+
     }
     
     func setPreferedCellReUseID(reUseID: String?){
@@ -461,14 +430,15 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func isHeaderSelected(section: Int) -> Bool {
 //        guard let unwrapedSections = fetchService.controller.sections,
 //            section < unwrapedSections.count else {
-//            return false
+//                return false
 //        }
 //        let array: [MediaItem] = unwrapedSections[section].objects as! [MediaItem]
 //        let result: [String] = array.flatMap { $0.wrapedObject.uuid }
 //        let subSet = Set<String>(result)
-//        
+//
 //        return subSet.isSubset(of: selectedItemsArray)
-        return false 
+        return false
+        
     }
     
     func selectSectionAt(section: Int){
@@ -488,11 +458,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 //        let visibleCells = collectionView.visibleCells
 //        for cell in visibleCells {
 //            guard let cell_ = cell as? CollectionViewCellDataProtocol,
-//                  let indexPath = collectionView.indexPath(for: cell),
-//                  (indexPath.section == section),
-//                  let object = itemForIndexPath(indexPath: indexPath)
+//                let indexPath = collectionView.indexPath(for: cell),
+//                (indexPath.section == section),
+//                let object = itemForIndexPath(indexPath: indexPath)
 //                else{
-//                continue
+//                    continue
 //            }
 //
 //            cell_.setSelection(isSelectionActive: isSelectionStateActive,
@@ -540,7 +510,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func morebuttonGotPressed(sender: Any, itemModel: Item?) {
         delegate?.onMoreActions(ofItem: itemModel, sender: sender)
     }
-
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         delegate?.scrollViewDidScroll?(scrollView: scrollView)
     }
@@ -559,7 +529,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        debugPrint("NUMBER OF SECTION ", allItems.count)
+        
         return allItems.count//fetchService.controller.sections?.count ?? 0
     }
     
@@ -567,7 +537,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         guard section < allItems.count else {
             return 0
         }
-        debugPrint("section \(section) number of items ", allItems[section].count)
+        
         return allItems[section].count//fetchService.controller.sections?[section].numberOfObjects ?? 0
     }
     
@@ -611,13 +581,15 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             return
         }
         
-        fileDataSource.getImage(patch: wraped.patchToPreview) { image in
-            let contains = self.collectionView?.indexPathsForVisibleItems.contains(indexPath)
-            if contains == true {
-                cell_.setImage(image: image)
-                return
-            }
-        }
+        cell_.setImage(with: wraped.patchToPreview)
+        
+//        fileDataSource.getImage(patch: wraped.patchToPreview) { image in
+//            let contains = self.collectionView?.indexPathsForVisibleItems.contains(indexPath)
+//            if contains == true {
+//                cell_.setImage(image: image)
+//                return
+//            }
+//        }
         let countRow:Int = self.collectionView(collectionView, numberOfItemsInSection: indexPath.section)
         let isLastSection = Bool((numberOfSections(in: collectionView) - 1) == indexPath.section)
         let isLastCell = Bool((countRow - 1) == indexPath.row)
@@ -633,12 +605,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             return
         }
         
-        fileDataSource.cancelImgeRequest(path: unwrapedObject.patchToPreview)
+//        fileDataSource.cancelImgeRequest(path: unwrapedObject.patchToPreview)
         
         guard let cell_ = cell as? CollectionViewCellDataProtocol else {
             return
         }
-        cell_.setImage(image: nil)
+//        cell_.setImage(image: nil)
         cell_.setSelection(isSelectionActive: isSelectionStateActive,
                            isSelected: isObjctSelected(object: unwrapedObject))
     }
@@ -724,7 +696,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: CollectionViewSuplementaryConstants.baseDataSourceForCollectionViewReuseID, for: indexPath)
             
             let textHeader = headerView as! CollectionViewSimpleHeaderWithText
+
             let title = "TEST HEADER"//fetchService.headerText(indexPath: indexPath)
+
             textHeader.setText(text: title)
             
             textHeader.setSelectedState(selected: isHeaderSelected(section: indexPath.section), activateSelectionState: isSelectionStateActive && enableSelectionOnHeader)
@@ -743,6 +717,4 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             return UICollectionReusableView()
         }
     }
-    
-    
 }

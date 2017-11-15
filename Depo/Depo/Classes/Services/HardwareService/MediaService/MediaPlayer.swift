@@ -361,6 +361,11 @@ final class MediaPlayer: NSObject {
         }
     }
     
+    func clearCurrentItem() {
+        currentItem = nil
+        player?.replaceCurrentItem(with: nil)
+    }
+    
     func seek(to time: Float) {
         let showingTime = CMTimeMake(Int64(time) * 1000, 1000)
         player.seek(to: showingTime)

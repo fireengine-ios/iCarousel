@@ -79,6 +79,35 @@ class RemoteItemsService {
             let nextPageOperation = NextPageOperation(requestParam: serchParam, success: { list in
                 CoreDataStack.default.appendOnlyNewItems(items: list)
                 self.currentPage = self.currentPage + 1
+                print("Current page \(self): \(self.currentPage)")
+                success?(list)
+            }, fail: fail)
+            
+            queueOperations.addOperation(nextPageOperation)
+        }
+    }
+    
+    func nextItemsWithoutDBChanges(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail:FailRemoteItems?, newFieldValue: FieldValue? = nil) {
+        if let unwrapedFieldValue = newFieldValue {
+            fieldValue = unwrapedFieldValue
+        }
+        
+        let serchParam = SearchByFieldParameters(fieldName: contentType,
+                                                 fieldValue: fieldValue,
+                                                 sortBy: sortBy,
+                                                 sortOrder: sortOrder,
+                                                 page: currentPage,
+                                                 size: requestSize)
+        
+        let executingOrWaiting = queueOperations.operations.filter {
+            ($0 as? NextPageOperation)?.requestParam == serchParam
+        }
+        
+        if executingOrWaiting.count == 0  {
+            
+            let nextPageOperation = NextPageOperation(requestParam: serchParam, success: { list in
+                self.currentPage = self.currentPage + 1
+                print("Current page \(self): \(self.currentPage)")
                 success?(list)
             }, fail: fail)
             
