@@ -69,10 +69,15 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     var allFolders = [WrapData]()
     var allMediaItems = [WrapData]()
     var allItems = [[WrapData]]()
+    var allLocalItems = [WrapData]()
     
     private func compoundItems(appendedItems: [WrapData]) {
         allMediaItems.append(contentsOf: appendedItems)
-        breakItemsIntoSections(breakingArray: allMediaItems)
+        var allItemsWithLocals = allMediaItems
+
+        
+         allItemsWithLocals = appendLocalItems(originalItemsArray: allMediaItems)
+        breakItemsIntoSections(breakingArray: allItemsWithLocals)
 //        allFolders.append(appendedItems.filter{$0})
     }
     
@@ -97,6 +102,105 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             }
         }
         
+    }
+    
+    private func getFileFilterType(filters: [GeneralFilesFiltrationType]) -> FileType? {
+        for filter in filters {
+            switch filter {
+            case  .fileType(.image):
+                return .image
+            case .fileType(.video):
+                return .video
+            default:
+                break
+            }
+
+        }
+        
+        return nil
+    }
+    
+    private func appendLocalItems(originalItemsArray: [WrapData]) -> [WrapData] {
+        var tempoArray = [WrapData]()//originalItemsArray
+        var tempoLocalArray = [WrapData]()
+        
+        if let unwrapedFilters = originalFilters, let specificFilters = getFileFilterType(filters: unwrapedFilters) {
+            switch specificFilters {
+            case .video:
+                tempoLocalArray = allLocalItems.filter{$0.fileType == .video}
+            case .image:
+                tempoLocalArray = allLocalItems.filter{$0.fileType == .image}
+            default:
+                break
+            }
+        }
+        if tempoLocalArray.count == 0 {
+            return originalItemsArray
+        }
+        
+        
+        var remoteItemsMD5List = tempoArray.map{return $0.md5}
+        let localItemsMD5List = allLocalItems.map{return $0.md5}
+        
+        
+        for remoteItem in originalItemsArray {
+            //                guard remoteItem.fileType != .folder else {
+            //                    break
+            //                }
+            for localItem in tempoLocalArray {
+                guard !remoteItemsMD5List.contains(localItem.md5) else {
+                    break
+                }
+                tempoArray.append(localItem)
+                remoteItemsMD5List.append(localItem.md5)
+//                switch currentSortType {
+//                case .timeUp:
+//                    if let localItemDate = localItem.creationDate, let remoteItemDate = remoteItem.creationDate,
+//                        localItemDate > remoteItemDate {
+//                        debugPrint("!!! LOCAL ITEM APPENDED")
+//                        tempoArray.append(localItem)
+//                        remoteItemsMD5List.append(localItem.md5)
+//                    }
+//                case .timeDown:
+//                    if let localItemDate = localItem.creationDate, let remoteItemDate = remoteItem.creationDate,
+//                        localItemDate < remoteItemDate {
+//                        debugPrint("!!! LOCAL ITEM APPENDED")
+//                        tempoArray.append(localItem)
+//                        remoteItemsMD5List.append(localItem.md5)
+//                    }
+//                default:
+//                    break
+//                    ////                    if localItem < remoteItem
+//                    ////                addByDate(lastItem: lastItem, newItem: item)
+//                    //                case .lettersAZ, .lettersZA, .albumlettersAZ, .albumlettersZA:
+//                    //                    addByName(lastItem: lastItem, newItem: item)
+//                    //                case .sizeAZ, .sizeZA:
+//                    //                    addBySize(lastItem: lastItem, newItem: item)
+//                }
+//                //
+            }
+            
+            tempoArray.append(remoteItem)
+        }
+        
+            
+            switch currentSortType {
+            case .timeUp:
+                tempoArray.sort{$0.creationDate! > $1.creationDate!}
+            case .timeDown:
+                tempoArray.sort{$0.creationDate! < $1.creationDate!}
+            case .lettersAZ, .albumlettersAZ:
+                tempoArray.sort{$0.name!.first! > $1.name!.first!}
+            case .lettersZA, .albumlettersZA:
+                tempoArray.sort{$0.name!.first! < $1.name!.first!}
+            case .sizeAZ:
+                tempoArray.sort{$0.fileSize > $1.fileSize}
+            case .sizeZA:
+                tempoArray.sort{$0.fileSize < $1.fileSize}
+                
+            }
+            
+        return tempoArray
     }
     
     private func addByDate(lastItem: WrapData, newItem: WrapData) {
@@ -131,7 +235,18 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     }
     
     private func addBySize(lastItem: WrapData, newItem: WrapData) {
-        
+        allItems[allItems.count-1].append(newItem)
+//        if let lastItemSize = lastItem.fileSize, let newItemSize = newItem.fileSize {
+//            if lastItemName.first == newItemName.first {
+//                allItems[allItems.count - 1].append(newItem)
+//            } else {
+//                allItems.append([newItem])
+//            }
+//            debugPrint("item appended to SECTION ", allItems.count - 1)
+//
+//        } else {
+//            allItems.append([newItem])
+//        }
     }
     
     private func getHeaderText(indexPath: IndexPath) -> String {
@@ -160,9 +275,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     }
     
     func dropData() {
+        allLocalItems.removeAll()
         allItems.removeAll()
         allMediaItems.removeAll()
         allFolders.removeAll()
+        
+        allLocalItems.append(contentsOf: getAllLocalItems())
         reloadData()
     }
     
