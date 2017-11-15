@@ -55,8 +55,7 @@ class AuthenticationUser: BaseRequestParametrs {
 class Authentication3G: BaseRequestParametrs {
     
     override var requestParametrs: Any {
-        let dict: [String: Any] = [LbRequestkeys.deviceInfo : Device.deviceInfo]
-        return dict
+        return Device.deviceInfo
     }
     
     override var patch: URL {
