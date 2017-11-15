@@ -107,6 +107,16 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
         }
     }
     
+    func shareViaLink(item: [BaseDataSourceItem], sourceRect: CGRect?) {
+        if (item.count == 0){
+            return
+        }
+        sharingItems.removeAll()
+        sharingItems.append(contentsOf: item)
+        
+        shareViaLink(sourceRect: sourceRect)
+    }
+    
     func shareViaLink(sourceRect: CGRect?){
         output?.operationStarted(type: .share)
         fileService.share(sharedFiles: sharingItems, success: {[weak self] (url) in
