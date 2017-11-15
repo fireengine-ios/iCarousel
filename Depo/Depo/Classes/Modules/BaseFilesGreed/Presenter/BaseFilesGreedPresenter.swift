@@ -93,6 +93,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     private func compoundAllFiltersAndNextItems(searchText: String? = nil) {
+//        startAsyncOperation()
         interactor.nextItems(searchText,
                              sortBy: sortedRule.sortingRules,
                              sortOrder: sortedRule.sortOder, newFieldValue: getFileFilter())

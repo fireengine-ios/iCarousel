@@ -66,7 +66,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     var originalFilters: [GeneralFilesFiltrationType]?
     
-    var allFolders = [WrapData]()
     var allMediaItems = [WrapData]()
     var allItems = [[WrapData]]()
     var allLocalItems = [WrapData]()
@@ -75,14 +74,32 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         allMediaItems.append(contentsOf: appendedItems)
         var allItemsWithLocals = allMediaItems
 
+//        if isLocalOnly() {
+//            allItems = [allLocalItems]
+//        } else {
+            allItemsWithLocals = appendLocalItems(originalItemsArray: allMediaItems)
+            breakItemsIntoSections(breakingArray: allItemsWithLocals)
+//        }
         
-         allItemsWithLocals = appendLocalItems(originalItemsArray: allMediaItems)
-        breakItemsIntoSections(breakingArray: allItemsWithLocals)
-//        allFolders.append(appendedItems.filter{$0})
+        
     }
     
-    private func breakItemsIntoSections(breakingArray: [WrapData]){
-        debugPrint("new array count is ",breakingArray.count)
+    private func isLocalOnly() -> Bool {
+        guard let unwrapedFilters = originalFilters else {
+            return false
+        }
+        for filter in unwrapedFilters {
+            switch filter{
+            case .localStatus(.local):
+                return true
+            default:
+                break
+            }
+        }
+        return false
+    }
+    
+    private func breakItemsIntoSections(breakingArray: [WrapData]) {
         allItems.removeAll()
         for item in breakingArray {
             autoreleasepool {
@@ -124,6 +141,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     }
     
     private func appendLocalItems(originalItemsArray: [WrapData]) -> [WrapData] {
+        //TODO: check only new "chunks"(pages) of files, not all every time!!!
         var tempoArray = [WrapData]()
         var tempoLocalArray = [WrapData]()
         
@@ -141,11 +159,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             return originalItemsArray
         }
 
-        var remoteItemsMD5List = tempoArray.map{return $0.md5}
+        var remoteItemsMD5List = originalItemsArray.map{return $0.md5}
         for remoteItem in originalItemsArray {
-            for localItem in tempoLocalArray {
+            innerLocalsLoop: for localItem in tempoLocalArray {
                 guard !remoteItemsMD5List.contains(localItem.md5) else {
-                    break
+                    continue innerLocalsLoop
                 }
                 tempoArray.append(localItem)
                 remoteItemsMD5List.append(localItem.md5)
@@ -160,9 +178,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             case .timeDown, .timeDownWithoutSection:
                 tempoArray.sort{$0.creationDate! < $1.creationDate!}
             case .lettersAZ, .albumlettersAZ:
-                tempoArray.sort{$0.name!.first! > $1.name!.first!}
+                tempoArray.sort{String($0.name!.first!).uppercased() > String($1.name!.first!).uppercased()}
             case .lettersZA, .albumlettersZA:
-                tempoArray.sort{$0.name!.first! < $1.name!.first!}
+                tempoArray.sort{String($0.name!.first!).uppercased() < String($1.name!.first!).uppercased()}
             case .sizeAZ:
                 tempoArray.sort{$0.fileSize > $1.fileSize}
             case .sizeZA:
@@ -177,7 +195,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             let newItemCreationDate = newItem.creationDate {
             if lastItemCreatedDate.getYear() == newItemCreationDate.getYear(),
                 lastItemCreatedDate.getMonth() == newItemCreationDate.getMonth() {
-                debugPrint("item appended to SECTION ", allItems.count - 1)
+                
                 allItems[allItems.count - 1].append(newItem)
                 
             } else {
@@ -190,8 +208,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     }
     
     private func addByName(lastItem: WrapData, newItem: WrapData) {
-        if let lastItemName = lastItem.name, let newItemName = newItem.name {
-            if lastItemName.first == newItemName.first {
+        if let lastItemNameChar = lastItem.name?.first,
+            let newItemNameChar = newItem.name?.first {
+            
+            if String(lastItemNameChar).uppercased() == String(newItemNameChar).uppercased() {
                 allItems[allItems.count - 1].append(newItem)
             } else {
                 allItems.append([newItem])
@@ -208,8 +228,22 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     }
     
     private func getHeaderText(indexPath: IndexPath) -> String {
+        var headerText = ""
         
-        return "TESTO"
+        switch currentSortType {
+        case .timeUp, .timeUpWithoutSection, .timeDown, .timeDownWithoutSection:
+            if let date = allItems[indexPath.section].first?.creationDate {
+                headerText = date.getDateInTextForCollectionViewHeader()
+            }
+        case .lettersAZ, .albumlettersAZ, .lettersZA, .albumlettersZA:
+            if let character = allItems[indexPath.section].first?.name?.first {
+                headerText = String(describing: character).uppercased()
+            }
+            
+        case .sizeAZ, .sizeZA:
+            headerText = ""
+        }
+        return headerText
     }
     
     func getAllLocalItems() -> [WrapData] {
@@ -236,9 +270,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         allLocalItems.removeAll()
         allItems.removeAll()
         allMediaItems.removeAll()
-        allFolders.removeAll()
         
         allLocalItems.append(contentsOf: getAllLocalItems())
+        if isLocalOnly() {
+            allItems = [allLocalItems]
+        }
         reloadData()
     }
     
@@ -261,6 +297,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         
         registerHeaders()
         registerCells()
+        
+        if isLocalOnly() {
+            allItems = [allLocalItems]
+            reloadData()
+        }
     }
     
     private func registerCells() {
@@ -630,12 +671,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjctSelected(object: unwrapedObject))
         }else{
             if  let forwardDelegate = self.delegate {
-                let object = itemForIndexPath(indexPath: indexPath)
-                guard let unwrapedObject = object else {
-                    return
-                }
-                
-                let array = getAllObjects()
+                let array = allItems//getAllObjects()
                 for subArray in array {
                     for obj in subArray{
                         if (obj.uuid == unwrapedObject.uuid){
@@ -697,7 +733,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             
             let textHeader = headerView as! CollectionViewSimpleHeaderWithText
 
-            let title = "TEST HEADER"//fetchService.headerText(indexPath: indexPath)
+            let title = getHeaderText(indexPath: indexPath)//fetchService.headerText(indexPath: indexPath)
 
             textHeader.setText(text: title)
             
