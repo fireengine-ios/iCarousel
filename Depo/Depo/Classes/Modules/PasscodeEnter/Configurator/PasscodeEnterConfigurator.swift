@@ -29,10 +29,10 @@ class PasscodeEnterModuleConfigurator {
         let router = PasscodeEnterRouter()
 
         let presenter = PasscodeEnterPresenter()
-        presenter.view = viewController
+//        presenter.view = viewController
         presenter.router = router
         presenter.delegate = delegate
-        presenter.type = type
+//        presenter.type = type
 
         let interactor = PasscodeEnterInteractor()
         interactor.output = presenter

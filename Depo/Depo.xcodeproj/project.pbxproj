@@ -529,6 +529,17 @@
 		CDE2227E3AD0825FD2B61890 /* BaseFilesGreedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43F31D403CF3A25954AE0EF /* BaseFilesGreedViewController.swift */; };
 		CE04525B1F2F1012001F8FA6 /* NavBarConfugurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04525A1F2F1012001F8FA6 /* NavBarConfugurator.swift */; };
 		CE09155E1F3870D000C82A44 /* WrapItemFileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09155D1F3870D000C82A44 /* WrapItemFileService.swift */; };
+		CE0ED96E1FBC0F5A00487632 /* TouchIdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED9631FBC0F5A00487632 /* TouchIdManager.swift */; };
+		CE0ED96F1FBC0F5A00487632 /* PasscodeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED9641FBC0F5A00487632 /* PasscodeController.swift */; };
+		CE0ED9701FBC0F5A00487632 /* PasscodeViewImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED9651FBC0F5A00487632 /* PasscodeViewImp.swift */; };
+		CE0ED9711FBC0F5A00487632 /* PasscodeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED9661FBC0F5A00487632 /* PasscodeState.swift */; };
+		CE0ED9721FBC0F5A00487632 /* PasscodeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED9671FBC0F5A00487632 /* PasscodeInputView.swift */; };
+		CE0ED9731FBC0F5A00487632 /* PasscodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED9681FBC0F5A00487632 /* PasscodeView.swift */; };
+		CE0ED9741FBC0F5A00487632 /* PasscodeSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED9691FBC0F5A00487632 /* PasscodeSettingsController.swift */; };
+		CE0ED9751FBC0F5A00487632 /* PasscodeViewImp.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE0ED96A1FBC0F5A00487632 /* PasscodeViewImp.xib */; };
+		CE0ED9761FBC0F5A00487632 /* PasscodeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED96B1FBC0F5A00487632 /* PasscodeStorage.swift */; };
+		CE0ED9771FBC0F5A00487632 /* PasscodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED96C1FBC0F5A00487632 /* PasscodeManager.swift */; };
+		CE0ED97D1FBC436600487632 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED97C1FBC436500487632 /* SwitchCell.swift */; };
 		CE19833F1FB48302001B329E /* ImportFromDropboxInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19833E1FB48302001B329E /* ImportFromDropboxInteractor.swift */; };
 		CE2469F51F3BF8F3008DF705 /* CreateStoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2469F41F3BF8F3008DF705 /* CreateStoryService.swift */; };
 		CE246A031F3C5B5E008DF705 /* UploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE246A021F3C5B5E008DF705 /* UploadService.swift */; };
@@ -874,13 +885,6 @@
 		CEC3C21C1FB9961900C3D67F /* PasscodeEnterModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3C2051FB9961900C3D67F /* PasscodeEnterModuleInput.swift */; };
 		CEC3C21D1FB9961900C3D67F /* PasscodeEnterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3C2061FB9961900C3D67F /* PasscodeEnterPresenter.swift */; };
 		CEC3C21E1FB9961900C3D67F /* PasscodeEnterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3C2081FB9961900C3D67F /* PasscodeEnterViewController.swift */; };
-		CEC3C21F1FB9961900C3D67F /* TouchIdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3C20A1FB9961900C3D67F /* TouchIdManager.swift */; };
-		CEC3C2201FB9961900C3D67F /* PasscodeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3C20B1FB9961900C3D67F /* PasscodeInputView.swift */; };
-		CEC3C2211FB9961900C3D67F /* PasscodeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC3C20C1FB9961900C3D67F /* PasscodeView.xib */; };
-		CEC3C2221FB9961900C3D67F /* PasscodeInputViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3C20D1FB9961900C3D67F /* PasscodeInputViewType.swift */; };
-		CEC3C2231FB9961900C3D67F /* PasscodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3C20E1FB9961900C3D67F /* PasscodeView.swift */; };
-		CEC3C2241FB9961900C3D67F /* PasscodeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3C20F1FB9961900C3D67F /* PasscodeStorage.swift */; };
-		CEC3C2251FB9961900C3D67F /* PasscodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3C2101FB9961900C3D67F /* PasscodeManager.swift */; };
 		CEC3C2261FB9961900C3D67F /* PasscodeEnterViewIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3C2111FB9961900C3D67F /* PasscodeEnterViewIO.swift */; };
 		CEC3C2271FB9961900C3D67F /* PasscodeEnterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC3C2121FB9961900C3D67F /* PasscodeEnterViewController.xib */; };
 		CEC3C2281FB9961900C3D67F /* PasscodeEnterInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3C2141FB9961900C3D67F /* PasscodeEnterInitializer.swift */; };
@@ -1790,6 +1794,17 @@
 		CDFFF80AD607CB90108A1537 /* FeedbackViewRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewRouterInput.swift; sourceTree = "<group>"; };
 		CE04525A1F2F1012001F8FA6 /* NavBarConfugurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavBarConfugurator.swift; sourceTree = "<group>"; };
 		CE09155D1F3870D000C82A44 /* WrapItemFileService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrapItemFileService.swift; sourceTree = "<group>"; };
+		CE0ED9631FBC0F5A00487632 /* TouchIdManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchIdManager.swift; sourceTree = "<group>"; };
+		CE0ED9641FBC0F5A00487632 /* PasscodeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeController.swift; sourceTree = "<group>"; };
+		CE0ED9651FBC0F5A00487632 /* PasscodeViewImp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeViewImp.swift; sourceTree = "<group>"; };
+		CE0ED9661FBC0F5A00487632 /* PasscodeState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeState.swift; sourceTree = "<group>"; };
+		CE0ED9671FBC0F5A00487632 /* PasscodeInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeInputView.swift; sourceTree = "<group>"; };
+		CE0ED9681FBC0F5A00487632 /* PasscodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeView.swift; sourceTree = "<group>"; };
+		CE0ED9691FBC0F5A00487632 /* PasscodeSettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeSettingsController.swift; sourceTree = "<group>"; };
+		CE0ED96A1FBC0F5A00487632 /* PasscodeViewImp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PasscodeViewImp.xib; sourceTree = "<group>"; };
+		CE0ED96B1FBC0F5A00487632 /* PasscodeStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeStorage.swift; sourceTree = "<group>"; };
+		CE0ED96C1FBC0F5A00487632 /* PasscodeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeManager.swift; sourceTree = "<group>"; };
+		CE0ED97C1FBC436500487632 /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
 		CE19833E1FB48302001B329E /* ImportFromDropboxInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFromDropboxInteractor.swift; sourceTree = "<group>"; };
 		CE2469F41F3BF8F3008DF705 /* CreateStoryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateStoryService.swift; sourceTree = "<group>"; };
 		CE246A021F3C5B5E008DF705 /* UploadService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadService.swift; sourceTree = "<group>"; };
@@ -1963,13 +1978,6 @@
 		CEC3C2051FB9961900C3D67F /* PasscodeEnterModuleInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeEnterModuleInput.swift; sourceTree = "<group>"; };
 		CEC3C2061FB9961900C3D67F /* PasscodeEnterPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeEnterPresenter.swift; sourceTree = "<group>"; };
 		CEC3C2081FB9961900C3D67F /* PasscodeEnterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeEnterViewController.swift; sourceTree = "<group>"; };
-		CEC3C20A1FB9961900C3D67F /* TouchIdManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchIdManager.swift; sourceTree = "<group>"; };
-		CEC3C20B1FB9961900C3D67F /* PasscodeInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeInputView.swift; sourceTree = "<group>"; };
-		CEC3C20C1FB9961900C3D67F /* PasscodeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PasscodeView.xib; sourceTree = "<group>"; };
-		CEC3C20D1FB9961900C3D67F /* PasscodeInputViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeInputViewType.swift; sourceTree = "<group>"; };
-		CEC3C20E1FB9961900C3D67F /* PasscodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeView.swift; sourceTree = "<group>"; };
-		CEC3C20F1FB9961900C3D67F /* PasscodeStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeStorage.swift; sourceTree = "<group>"; };
-		CEC3C2101FB9961900C3D67F /* PasscodeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeManager.swift; sourceTree = "<group>"; };
 		CEC3C2111FB9961900C3D67F /* PasscodeEnterViewIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeEnterViewIO.swift; sourceTree = "<group>"; };
 		CEC3C2121FB9961900C3D67F /* PasscodeEnterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PasscodeEnterViewController.xib; sourceTree = "<group>"; };
 		CEC3C2141FB9961900C3D67F /* PasscodeEnterInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeEnterInitializer.swift; sourceTree = "<group>"; };
@@ -5522,6 +5530,24 @@
 			path = WrapItemFileService;
 			sourceTree = "<group>";
 		};
+		CE0ED9621FBC0F5A00487632 /* Passcode */ = {
+			isa = PBXGroup;
+			children = (
+				CE0ED9631FBC0F5A00487632 /* TouchIdManager.swift */,
+				CE0ED9641FBC0F5A00487632 /* PasscodeController.swift */,
+				CE0ED9651FBC0F5A00487632 /* PasscodeViewImp.swift */,
+				CE0ED9661FBC0F5A00487632 /* PasscodeState.swift */,
+				CE0ED9671FBC0F5A00487632 /* PasscodeInputView.swift */,
+				CE0ED9681FBC0F5A00487632 /* PasscodeView.swift */,
+				CE0ED9691FBC0F5A00487632 /* PasscodeSettingsController.swift */,
+				CE0ED97C1FBC436500487632 /* SwitchCell.swift */,
+				CE0ED96A1FBC0F5A00487632 /* PasscodeViewImp.xib */,
+				CE0ED96B1FBC0F5A00487632 /* PasscodeStorage.swift */,
+				CE0ED96C1FBC0F5A00487632 /* PasscodeManager.swift */,
+			);
+			path = Passcode;
+			sourceTree = "<group>";
+		};
 		CE2469F31F3BF8F3008DF705 /* CreateStoryService */ = {
 			isa = PBXGroup;
 			children = (
@@ -6275,23 +6301,9 @@
 				CEC3C2121FB9961900C3D67F /* PasscodeEnterViewController.xib */,
 				CEC3C2081FB9961900C3D67F /* PasscodeEnterViewController.swift */,
 				CEC3C2111FB9961900C3D67F /* PasscodeEnterViewIO.swift */,
-				CEC3C2091FB9961900C3D67F /* PasscodeView */,
+				CE0ED9621FBC0F5A00487632 /* Passcode */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		CEC3C2091FB9961900C3D67F /* PasscodeView */ = {
-			isa = PBXGroup;
-			children = (
-				CEC3C20A1FB9961900C3D67F /* TouchIdManager.swift */,
-				CEC3C20B1FB9961900C3D67F /* PasscodeInputView.swift */,
-				CEC3C20C1FB9961900C3D67F /* PasscodeView.xib */,
-				CEC3C20D1FB9961900C3D67F /* PasscodeInputViewType.swift */,
-				CEC3C20E1FB9961900C3D67F /* PasscodeView.swift */,
-				CEC3C20F1FB9961900C3D67F /* PasscodeStorage.swift */,
-				CEC3C2101FB9961900C3D67F /* PasscodeManager.swift */,
-			);
-			path = PasscodeView;
 			sourceTree = "<group>";
 		};
 		CEC3C2131FB9961900C3D67F /* Configurator */ = {
@@ -7088,7 +7100,6 @@
 				8CF87D5D1F4AF3AC001FDB19 /* LBAlbumLikePreviewSliderViewController.xib in Resources */,
 				CEDFEC911F10C40C003D1A75 /* InfoPlist.strings in Resources */,
 				CEDFEC971F10C40C003D1A75 /* InfoPlist.strings in Resources */,
-				CEC3C2211FB9961900C3D67F /* PasscodeView.xib in Resources */,
 				CEDFEC961F10C40C003D1A75 /* Localizable.strings in Resources */,
 				7C3A743B1F04FFCA00124DF5 /* PhotoCellViewController.xib in Resources */,
 				CEAE3FF31EFD517300A405B2 /* TabBarView.xib in Resources */,
@@ -7170,6 +7181,7 @@
 				CE2F561F1F7552A900F49DA1 /* PackagesViewController.xib in Resources */,
 				8C5408491F62AD9100D4717A /* GridListTopBarSortingTableCell.xib in Resources */,
 				CEBBDE0B1F01E69B00CDF527 /* TurkcellSaturaIta.ttf in Resources */,
+				CE0ED9751FBC0F5A00487632 /* PasscodeViewImp.xib in Resources */,
 				8DCB21621F3C6C6500BAFE1E /* SearchView.xib in Resources */,
 				7C2F56FB1F1CC1CC0014870B /* ActionsMenuTableViewCell.xib in Resources */,
 				CE51AF921EF90853005DCEE0 /* IntroduceSubView.xib in Resources */,
@@ -7427,7 +7439,6 @@
 				CEC3C22C1FB9961900C3D67F /* PasscodeEnterRouterInput.swift in Sources */,
 				CEE1D1FE1F714F300008F4CF /* CoreDataStack.swift in Sources */,
 				CE9A8A1F1FB2F45500C0A5E1 /* DropboxStatusValue.swift in Sources */,
-				CEC3C2231FB9961900C3D67F /* PasscodeView.swift in Sources */,
 				CE51ABB51EF90853005DCEE0 /* AutoSyncInteractorOutput.swift in Sources */,
 				7CD1F91F1F0288DC0028F51A /* WelcomeViewOutput.swift in Sources */,
 				7C04350B1F4EF3DA00193C75 /* AlbumDetailService.swift in Sources */,
@@ -7517,7 +7528,6 @@
 				7C3A74521F079BDF00124DF5 /* CollectionViewSimpleHeaderWithText.swift in Sources */,
 				CEAE3FDD1EFD500B00A405B2 /* HomeViewTopView.swift in Sources */,
 				CE51AC351EF90853005DCEE0 /* CurioDB.m in Sources */,
-				CEC3C2221FB9961900C3D67F /* PasscodeInputViewType.swift in Sources */,
 				CE04525B1F2F1012001F8FA6 /* NavBarConfugurator.swift in Sources */,
 				7CD1F8FA1F0288CA0028F51A /* WiFiSyncRouter.swift in Sources */,
 				CEB1CEAA1F21E11200C9DD8F /* SwiftyJSONExtension.swift in Sources */,
@@ -7553,7 +7563,6 @@
 				CE51AC6C1EF90853005DCEE0 /* CurioPushData.m in Sources */,
 				8C6EF8811F348B5C002AC795 /* BottomSelectionTabBarViewController.swift in Sources */,
 				7C3A74361F04DEF000124DF5 /* BaseDataSourceForCollectionView.swift in Sources */,
-				CEC3C21F1FB9961900C3D67F /* TouchIdManager.swift in Sources */,
 				CE51AC6E1EF90853005DCEE0 /* AutoSyncViewController.swift in Sources */,
 				7CD1F8F31F0288CA0028F51A /* WiFiSyncConfigurator.swift in Sources */,
 				8C00971E1F6BDB0500FA069C /* AlertFilesActionsSheetInteractorInput.swift in Sources */,
@@ -7562,6 +7571,7 @@
 				CE51AC6F1EF90853005DCEE0 /* CustomPopUpService.swift in Sources */,
 				CE2F56151F7552A900F49DA1 /* PackagesConfigurator.swift in Sources */,
 				8CD8F4F71F1F407C00F1257B /* EmptyContainerNavVC.swift in Sources */,
+				CE0ED9701FBC0F5A00487632 /* PasscodeViewImp.swift in Sources */,
 				7CD1F8FC1F0288CA0028F51A /* WiFiSyncViewController.swift in Sources */,
 				8CFF866B1F0F874F00520D18 /* ApplicationSession.swift in Sources */,
 				CE51AC7E1EF90853005DCEE0 /* LoginInitializer.swift in Sources */,
@@ -7576,7 +7586,6 @@
 				CEE1D1F61F714DFE0008F4CF /* MediaItem+CoreDataProperties.swift in Sources */,
 				CE27C3211EF9515F00D4D156 /* AuthenticationService.swift in Sources */,
 				CE51AC871EF90853005DCEE0 /* LoginViewController.swift in Sources */,
-				CEC3C2201FB9961900C3D67F /* PasscodeInputView.swift in Sources */,
 				CE33DFFD1F021F4500706C40 /* ReachabilityService.swift in Sources */,
 				7C5722771F753581004FC596 /* ApplicationSessionManager.swift in Sources */,
 				CE51AC8D1EF90853005DCEE0 /* AutoNextEditingRowPasser.swift in Sources */,
@@ -7682,7 +7691,6 @@
 				CE51ACE11EF90853005DCEE0 /* IntroducePresenter.swift in Sources */,
 				CE2469F51F3BF8F3008DF705 /* CreateStoryService.swift in Sources */,
 				CE51ACE21EF90853005DCEE0 /* IntroduceInteractorInput.swift in Sources */,
-				CEC3C2251FB9961900C3D67F /* PasscodeManager.swift in Sources */,
 				7CFF0C8C1F4C0E6F00E72E6A /* AlbumServiceResponse.swift in Sources */,
 				CE51ACE31EF90853005DCEE0 /* IntroduceInteractorOutput.swift in Sources */,
 				CE51ACE41EF90853005DCEE0 /* IntroduceInteractor.swift in Sources */,
@@ -7690,6 +7698,7 @@
 				CE51ACE61EF90853005DCEE0 /* IntroduceRouter.swift in Sources */,
 				7C6E2F541F31BD2200536DB6 /* PhotoStory.swift in Sources */,
 				CE51ACE71EF90853005DCEE0 /* IntroduceConfigurator.swift in Sources */,
+				CE0ED9761FBC0F5A00487632 /* PasscodeStorage.swift in Sources */,
 				8C00971C1F6BDAF800FA069C /* AlertFilesActionsSheetInteractor.swift in Sources */,
 				CE8F44F11F6AC1550062C2E0 /* ActivityTimelineHeader.swift in Sources */,
 				CEDFECA71F10C77E003D1A75 /* UINavigationBarExtension.swift in Sources */,
@@ -7760,7 +7769,9 @@
 				7C1F89881F6FFE0300740177 /* ProgressPopUp.swift in Sources */,
 				CE51AD021EF90853005DCEE0 /* ForgotPasswordConfigurator.swift in Sources */,
 				CE51AD031EF90853005DCEE0 /* ForgotPasswordInitializer.swift in Sources */,
+				CE0ED9731FBC0F5A00487632 /* PasscodeView.swift in Sources */,
 				BE450FE40E4ED7E16FBD0140 /* CompleteProfileViewInput.swift in Sources */,
+				CE0ED96E1FBC0F5A00487632 /* TouchIdManager.swift in Sources */,
 				CEDEAB311FADA5D20046555F /* AlbumCell.swift in Sources */,
 				5281FA2AA99D79F4579298CD /* CompleteProfileViewOutput.swift in Sources */,
 				7CDABD161F1F912600C8CC16 /* WrapperedItemsSorting.swift in Sources */,
@@ -7782,8 +7793,8 @@
 				4BCD0211E6F3ED79A879D88B /* CompleteProfileInitializer.swift in Sources */,
 				5A7BE5A9A5770CBE069DFD99 /* LikeFilterViewInput.swift in Sources */,
 				7C6E2FA01F31FC6500536DB6 /* CreateStorySelectionInteractorOutput.swift in Sources */,
+				CE0ED9711FBC0F5A00487632 /* PasscodeState.swift in Sources */,
 				D543733920D27E30D6C2DE00 /* LikeFilterViewOutput.swift in Sources */,
-				CEC3C2241FB9961900C3D67F /* PasscodeStorage.swift in Sources */,
 				7CDABD051F1E3A6300C8CC16 /* UserProfileConfigurator.swift in Sources */,
 				1E85634C922D97D7DDCEC1B9 /* LikeFilterViewController.swift in Sources */,
 				B6EC22F9A78F97B7AC7E1F69 /* LikeFilterModuleInput.swift in Sources */,
@@ -7923,6 +7934,7 @@
 				859653E5FF07A2ABA4EE2FC1 /* VideoCellInteractorOutput.swift in Sources */,
 				82229E1FE7C3D52F39C061FA /* VideoCellInteractor.swift in Sources */,
 				81F055C0D4885E834A6A65F3 /* VideoCellRouterInput.swift in Sources */,
+				CE0ED97D1FBC436600487632 /* SwitchCell.swift in Sources */,
 				CE09155E1F3870D000C82A44 /* WrapItemFileService.swift in Sources */,
 				68841B40624E38248E0D235A /* VideoCellRouter.swift in Sources */,
 				36EC93F8805A68EE0F331143 /* VideoCellConfigurator.swift in Sources */,
@@ -7958,6 +7970,7 @@
 				AF744E3CD7A5DD8E7D6C30BB /* UserInfoSubViewViewController.swift in Sources */,
 				39BB6C52DD43D91D15C41982 /* UserInfoSubViewModuleInput.swift in Sources */,
 				8C0097101F6BDA2B00FA069C /* MoreFilesActionsInteractor.swift in Sources */,
+				CE0ED96F1FBC0F5A00487632 /* PasscodeController.swift in Sources */,
 				7C0EBD001F4C5B5100283ECF /* BaseDataSourceItem.swift in Sources */,
 				67539B0A8267DB7EEB08948D /* UserInfoSubViewPresenter.swift in Sources */,
 				09D1D10783F4E47C7E8089AA /* UserInfoSubViewInteractorInput.swift in Sources */,
@@ -7975,6 +7988,7 @@
 				CEF69DE51FB5861A00FCE6AB /* UploadHelpers.swift in Sources */,
 				7CDABD0D1F1E3A6300C8CC16 /* UserProfileRouterInput.swift in Sources */,
 				C5E5EC15332297CC6F59374A /* SyncContactsViewInput.swift in Sources */,
+				CE0ED9741FBC0F5A00487632 /* PasscodeSettingsController.swift in Sources */,
 				6DD3D05EE417EBF14476EB6F /* SyncContactsViewOutput.swift in Sources */,
 				2A1CBA93F5950F76EF480D84 /* SyncContactsViewController.swift in Sources */,
 				CEC3C2471FB99AF800C3D67F /* PasscodeSettingsInitializer.swift in Sources */,
@@ -7999,6 +8013,7 @@
 				8C6EF87C1F348B5C002AC795 /* BaseItemPassingProtocol.swift in Sources */,
 				2B5261513879D04FFE1D241C /* SettingsViewOutput.swift in Sources */,
 				7764E006C922DEA29D9C0744 /* SettingsViewController.swift in Sources */,
+				CE0ED9721FBC0F5A00487632 /* PasscodeInputView.swift in Sources */,
 				0BC0B9C638832D70DF19F6B3 /* SettingsModuleInput.swift in Sources */,
 				C9C861DC0DEC3C4584CBF425 /* SettingsPresenter.swift in Sources */,
 				5362D573ACB91FF20AF99896 /* SettingsInteractorInput.swift in Sources */,
@@ -8165,6 +8180,7 @@
 				CEAD5DC21F6FFD6500E6ADFB /* PullToRefreshKit+LifeBox.swift in Sources */,
 				33B696E2ADDE28FC3BD303F0 /* ActivityTimelineConfigurator.swift in Sources */,
 				6F604137FCE625E5C5E97B9A /* ActivityTimelineInitializer.swift in Sources */,
+				CE0ED9771FBC0F5A00487632 /* PasscodeManager.swift in Sources */,
 				E1EF047B466457A566760610 /* FreeUpSpaceViewController.swift in Sources */,
 				F05B61575758F7C684735D3F /* FreeUpSpacePresenter.swift in Sources */,
 				DF5BB8147307E7948369E7DC /* FreeUpSpaceInteractor.swift in Sources */,

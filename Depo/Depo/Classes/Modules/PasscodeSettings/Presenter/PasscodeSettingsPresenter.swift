@@ -24,7 +24,7 @@ extension PasscodeSettingsPresenter: PasscodeSettingsViewOutput {
     }
     
     func changePasscode() {
-        router.passcode(delegate: self, type: .setNew)
+//        router.passcode(delegate: self, type: .setNew)
     }
     
     func setTouchId(enable: Bool) {
@@ -32,11 +32,11 @@ extension PasscodeSettingsPresenter: PasscodeSettingsViewOutput {
     }
     
     func turnOffPasscode() {
-        router.passcode(delegate: self, type: .validate)
+//        router.passcode(delegate: self, type: .validate)
     }
     
     func setPasscode() {
-        router.passcode(delegate: self, type: .new)
+//        router.passcode(delegate: self, type: .new)
     }
 }
 
@@ -52,19 +52,19 @@ extension PasscodeSettingsPresenter: PasscodeSettingsModuleInput {
 
 // MARK: PasscodeEnterDelegate
 extension PasscodeSettingsPresenter: PasscodeEnterDelegate {
-    func finishPasscode(with type: PasscodeInputViewType) {
-        router.closePasscode()
-        switch type {
-        case .new:
-            view?.setup(state: .ready)
-        case .validate, .validateWithBiometrics:
-            PasscodeStorageDefaults().clearPasscode()
-            view?.setup(state: .set)
-        case .validateNew:
-            break
-        case .setNew:
-            break
-        }
-        
-    }
+//    func finishPasscode(with type: PasscodeInputViewType) {
+//        router.closePasscode()
+//        switch type {
+//        case .new:
+//            view?.setup(state: .ready)
+//        case .validate, .validateWithBiometrics:
+//            PasscodeStorageDefaults().clearPasscode()
+//            view?.setup(state: .set)
+//        case .validateNew:
+//            break
+//        case .setNew:
+//            break
+//        }
+//        
+//    }
 }

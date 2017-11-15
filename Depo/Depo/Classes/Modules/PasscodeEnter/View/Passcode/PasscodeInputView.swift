@@ -16,7 +16,7 @@ public protocol PasscodeInputViewDelegate: class {
 }
 
 //@IBDesignable
-public class PasscodeInputView: UIControl {
+public class PasscodeInputView: UIControl, PasscodeInput {
     
     @IBInspectable public var passcodeLength: Int = 4 {
         didSet { setNeedsDisplay() }
@@ -46,7 +46,7 @@ public class PasscodeInputView: UIControl {
         }
     }
     
-    private var passcode: Passcode = "" {
+    public var passcode: Passcode = "" {
         didSet { setNeedsDisplay() }
     }
     
@@ -56,7 +56,7 @@ public class PasscodeInputView: UIControl {
     
     public weak var delegate: PasscodeInputViewDelegate?
     
-    private var isAnimateingError = false
+    private var isAnimatingError = false
     
     override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
@@ -96,7 +96,7 @@ public class PasscodeInputView: UIControl {
             shapeLayer.path = circlePath.cgPath
             shapeLayer.lineWidth = dotWidth
             
-            if isAnimateingError {
+            if isAnimatingError {
                 shapeLayer.fillColor = errorColor.cgColor
                 shapeLayer.strokeColor = errorColor.cgColor
             } else {
@@ -120,11 +120,11 @@ public class PasscodeInputView: UIControl {
             initialSpringVelocity: 0,
             options: [],
             animations: {
-                self.isAnimateingError = true
+                self.isAnimatingError = true
                 self.setNeedsDisplay()
                 self.frame.origin.x = saveX
         }, completion: { _ in
-            self.isAnimateingError = false
+            self.isAnimatingError = false
             self.delegate?.finishErrorAnimation()
         })
     }

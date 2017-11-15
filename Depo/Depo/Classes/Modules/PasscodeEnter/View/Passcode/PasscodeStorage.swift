@@ -8,29 +8,37 @@
 
 import Foundation
 
-protocol PasscodeStorage {
+protocol PasscodeStorage: class {
     var isEmpty: Bool { get }
-    func isEqual(to passcode: String) -> Bool
-    func save(passcode: String)
+    func isEqual(to passcode: Passcode) -> Bool
+    func save(passcode: Passcode)
     func clearPasscode()
+    var passcode: Passcode { get }
+    var numberOfTries: Int { get set }
 }
 
-class PasscodeStorageDefaults {
-    private static let passcodeKey = "passcodeKey"
-    var passcode: String {
+final class PasscodeStorageDefaults {
+    static let passcodeKey = "passcodeKey"
+    var passcode: Passcode {
         get { return UserDefaults.standard.string(forKey: PasscodeStorageDefaults.passcodeKey) ?? "" }
         set { UserDefaults.standard.set(newValue, forKey: PasscodeStorageDefaults.passcodeKey) }
+    }
+    
+    static let numberOfTriesKey = "numberOfTriesKey"
+    var numberOfTries: Int {
+        get { return UserDefaults.standard.integer(forKey: PasscodeStorageDefaults.numberOfTriesKey) }
+        set { UserDefaults.standard.set(newValue, forKey: PasscodeStorageDefaults.numberOfTriesKey) }
     }
 }
 extension PasscodeStorageDefaults: PasscodeStorage {
     var isEmpty: Bool {
         return passcode.isEmpty
     }
-    func isEqual(to passcode: String) -> Bool {
+    func isEqual(to passcode: Passcode) -> Bool {
         return passcode == self.passcode
     }
     
-    func save(passcode: String) {
+    func save(passcode: Passcode) {
         self.passcode = passcode
     }
     

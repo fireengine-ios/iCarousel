@@ -9,9 +9,9 @@
 import Foundation
 
 protocol PasscodeEnterViewInput: class {
-    func setPasscode(type: PasscodeInputViewType)
+//    func setPasscode(type: PasscodeInputViewType)
 }
 
-protocol PasscodeEnterViewOutput: class, PasscodeViewDelegate {
+protocol PasscodeEnterViewOutput: class {
     func viewIsReady()
 }

@@ -7,7 +7,11 @@
 //
 
 protocol PasscodeEnterDelegate: class {
-    func finishPasscode(with type: PasscodeInputViewType)
+//    func finishPasscode(with type: PasscodeInputViewType)
+}
+
+enum PasscodeInputViewType {
+    case validate
 }
 
 class PasscodeEnterPresenter {
@@ -16,13 +20,13 @@ class PasscodeEnterPresenter {
     var router: PasscodeEnterRouterInput!
     
     weak var delegate: PasscodeEnterDelegate?
-    var type = PasscodeInputViewType.validate
+//    var type = PasscodeInputViewType.validate
 }
 
 // MARK: PasscodeEnterViewOutput
 extension PasscodeEnterPresenter: PasscodeEnterViewOutput {
     func viewIsReady() {
-        view?.setPasscode(type: type)
+//        view?.setPasscode(type: type)
     }
 }
 
@@ -37,17 +41,18 @@ extension PasscodeEnterPresenter: PasscodeEnterModuleInput {
 }
 
 // MARK: - PasscodeViewDelegate
-extension PasscodeEnterPresenter: PasscodeViewDelegate {
-    func finishSetNew(passcode: Passcode) {
-        interactor.save(passcode: passcode)
-        delegate?.finishPasscode(with: type)
-    }
-    func finishValidate() {
-        delegate?.finishPasscode(with: type)
-//        let v = view as! PasscodeEnterViewController
-//        v.passcodeView.resignFirstResponder()
-    }
-    func check(passcode: Passcode) -> Bool {
-        return interactor.isEqual(to: passcode)
-    }
-}
+//extension PasscodeEnterPresenter: PasscodeViewDelegate {
+//    func finishSetNew(passcode: Passcode) {
+//        interactor.save(passcode: passcode)
+//        delegate?.finishPasscode(with: type)
+//    }
+//    func finishValidate() {
+//        delegate?.finishPasscode(with: type)
+////        let v = view as! PasscodeEnterViewController
+////        v.passcodeView.resignFirstResponder()
+//    }
+//    func check(passcode: Passcode) -> Bool {
+//        return interactor.isEqual(to: passcode)
+//    }
+//}
+

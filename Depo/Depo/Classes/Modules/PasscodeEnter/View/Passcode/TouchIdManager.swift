@@ -21,11 +21,11 @@ final class TouchIdManager {
         return LAContext().canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
     }
     
-    func authenticate(handler: @escaping (Bool) -> Void) {
+    func authenticate(reason: String = "For passcode", handler: @escaping (Bool) -> Void) {
         if !isAvailable || !isEnabledTouchId {
             return handler(false)
         }
-        LAContext().evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "For passcode") { (success, error) in
+        LAContext().evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { (success, error) in
             DispatchQueue.main.async {
                 handler(success)
             }
