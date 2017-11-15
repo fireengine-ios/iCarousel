@@ -42,7 +42,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         })
         headerAction.isEnabled = false
         
-        var types: [ElementTypes] = [.info, .move]
+        var types: [ElementTypes] = [.info, .share, .move]
         
         guard let item = item as? Item else {
             return
