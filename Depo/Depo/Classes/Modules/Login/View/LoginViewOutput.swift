@@ -13,8 +13,6 @@ protocol LoginViewOutput {
     func sendLoginAndPassword(login: String, password: String)
     
     func sendLoginAndPasswordWithCaptcha(login: String, password: String, captchaID: String, captchaAnswer: String)
-
-    func tryToAuthenticate()
     
     func onCantLoginButton()
     
