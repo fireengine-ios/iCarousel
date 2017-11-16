@@ -621,15 +621,20 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             return
         }
         
-        cell_.setImage(with: wraped.patchToPreview)
+        switch wraped.patchToPreview {
+        case let .localMediaContent(local):
+            cell.tag = FilesDataSource().getAssetThumbnail(asset: local.asset, id: cell.tag, completion: { (image, tag) in
+                let cellToCheck = self.collectionView.cellForItem(at: indexPath)
+                if cell.tag == tag, cell == cellToCheck {
+                    cell_.setImage(image: image)
+                } else {
+                    cell_.setImage(image: nil)
+                }
+            })
+        case let .remoteUrl(url):
+            cell_.setImage(with: wraped.patchToPreview)
+        }
         
-//        fileDataSource.getImage(patch: wraped.patchToPreview) { image in
-//            let contains = self.collectionView?.indexPathsForVisibleItems.contains(indexPath)
-//            if contains == true {
-//                cell_.setImage(image: image)
-//                return
-//            }
-//        }
         let countRow:Int = self.collectionView(collectionView, numberOfItemsInSection: indexPath.section)
         let isLastSection = Bool((numberOfSections(in: collectionView) - 1) == indexPath.section)
         let isLastCell = Bool((countRow - 1) == indexPath.row)
