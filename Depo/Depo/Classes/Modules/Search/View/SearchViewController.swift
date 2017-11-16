@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, UISearchBarDelegate, SearchViewInput {
+class SearchViewController: UIViewController, UISearchBarDelegate, SearchViewInput, MusicBarDelegate {
     
     // MARK: - Outlets
     
@@ -23,6 +23,12 @@ class SearchViewController: UIViewController, UISearchBarDelegate, SearchViewInp
     @IBOutlet weak var noFilesImage: UIImageView!
     @IBOutlet weak var startCreatingFilesButton: BlueButtonWithWhiteText!
     
+    let musicBar = MusicBar.initFromXib()
+
+    @IBOutlet weak var musicBarContainer: UIView!
+    @IBOutlet weak var musicBarContainerHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var containerViewBottomConstraint: NSLayoutConstraint!
+
     // MARK: - Variables
     
     var output: SearchViewOutput!
@@ -38,7 +44,18 @@ class SearchViewController: UIViewController, UISearchBarDelegate, SearchViewInp
         self.collectionView.isHidden = true
         self.suggestTableView.isHidden = true
         self.noFilesLabel.text = "No results found for your query."
+        
+        setupMusicBar()
+        
+        let dropNotificationName = NSNotification.Name(rawValue: TabBarViewController.notificationMusicDrop)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(hideMusicBar),
+                                               name: dropNotificationName,
+                                               object: nil)
+        
+        musicBar.delegate = self
         configureNavigationBar()
+        setCurrentPlayState()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,6 +66,52 @@ class SearchViewController: UIViewController, UISearchBarDelegate, SearchViewInp
     
     override func viewWillDisappear(_ animated: Bool) {
         UIApplication.shared.setStatusBarStyle(.lightContent, animated: true)
+    }
+    
+    private func setupMusicBar() {
+        musicBarContainer.addSubview(musicBar)
+        let horisontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[item1]-(0)-|",
+                                                                   options: [], metrics: nil,
+                                                                   views: ["item1" : musicBar])
+        let verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[item1]-(0)-|",
+                                                                 options: [], metrics: nil,
+                                                                 views: ["item1" : musicBar])
+        
+        musicBarContainer.addConstraints(horisontalConstraints + verticalConstraints)
+        changeVisibleStatus(hidden: true)
+    }
+    
+    func showMusicBar() {
+        musicBar.configurateFromPLayer()
+        changeVisibleStatus(hidden: false)
+        containerViewBottomConstraint.constant = musicBarContainerHeightConstraint.constant
+    }
+    
+    @objc func hideMusicBar(_ sender: Any) {
+        containerViewBottomConstraint.constant = 0
+        changeVisibleStatus(hidden: true)
+        output.playerDidHide()
+    }
+    
+    private func setCurrentPlayState() {
+        var hidden = true
+        if collectionView.isHidden == true {
+            hidden = true
+        } else {
+            if output.player.isPlaying {
+                hidden = false
+            }
+        }
+        if !hidden {
+            showMusicBar()
+        } else {
+            hideMusicBar(self)
+        }
+    }
+    
+    private func changeVisibleStatus(hidden: Bool) {
+        musicBarContainer.isHidden = hidden
+        musicBarContainer.isUserInteractionEnabled = !hidden
     }
     
     // MARK: - Configuration
@@ -97,6 +160,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, SearchViewInp
             output.searchWith(searchText: searchBar.text!.addingPercentEncoding(withAllowedCharacters: customAllowedSet)!, sortBy: SortType.date, sortOrder: SortOrder.asc)
         } else {
             collectionView.isHidden = true
+            setCurrentPlayState()
         }
         view.endEditing(true)
         suggestTableView.isHidden = true
@@ -117,6 +181,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, SearchViewInp
     
     func endSearchRequestWith(text: String) {
         self.collectionView.isHidden = false
+        setCurrentPlayState()
         if let searchBar = self.navigationBar.topItem?.titleView {
             if text != (searchBar as! UISearchBar).text! {
                 self.timerToSearch.invalidate()
@@ -136,6 +201,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, SearchViewInp
         collectionView.isHidden = visibilityStatus
         noFilesView.isHidden = !visibilityStatus
         noFilesLabel.isHidden = !visibilityStatus
+        setCurrentPlayState()
     }
     
     func successWithSuggestList(list: [SuggestionObject]) {
@@ -183,4 +249,18 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         searchBar.text = self.suggestionList[indexPath.row].text!
         self.searchBarSearchButtonClicked(searchBar)
     }
+    
+    func musicBarZoomWillOpen() {
+        output.willDismissController()
+        dismissController()
+    }
+}
+
+extension SearchViewController: MediaPlayerDelegate {
+    func mediaPlayer(_ mediaPlayer: MediaPlayer, didStartItemWith duration: Float) {
+        showMusicBar()
+    }
+    func mediaPlayer(_ musicPlayer: MediaPlayer, changedCurrentTime time: Float) {}
+    func didStartMediaPlayer(_ mediaPlayer: MediaPlayer) {}
+    func didStopMediaPlayer(_ mediaPlayer: MediaPlayer) {}
 }

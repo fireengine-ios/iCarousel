@@ -15,4 +15,6 @@ protocol SearchViewInput: class {
     func successWithSuggestList(list: [SuggestionObject])
     func scrollViewDidScroll(scrollView: UIScrollView)
     func dismissController()
+    
+    func showMusicBar()
 }
