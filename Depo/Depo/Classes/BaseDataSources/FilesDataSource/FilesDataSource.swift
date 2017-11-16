@@ -117,10 +117,13 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
             manager.cancelImageRequest(requestId)
         }
         
-        let option = PHImageRequestOptions()
-        option.isSynchronous = false
-        option.deliveryMode = .highQualityFormat
-        return Int(manager.requestImage(for: asset, targetSize: CGSize(width: 300, height: 300), contentMode: .aspectFill, options: option, resultHandler: {(result, info)->Void in
+        let options = PHImageRequestOptions()
+        options.isNetworkAccessAllowed = false
+        options.isSynchronous = false
+        options.version = .current
+        options.deliveryMode = .highQualityFormat
+
+        return Int(manager.requestImage(for: asset, targetSize: CGSize(width: 300, height: 300), contentMode: .aspectFill, options: options, resultHandler: {(result, info)->Void in
             let tag = (info?[PHImageResultRequestIDKey] as? NSNumber)?.intValue
             completion(result, tag)
         }))

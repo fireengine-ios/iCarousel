@@ -69,7 +69,7 @@ class BaseCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDelegate,
         
     }
     
-    func setImage(with pathForItem: PathForItem) {
+    func setImage(with url: URL) {
         
     }
     

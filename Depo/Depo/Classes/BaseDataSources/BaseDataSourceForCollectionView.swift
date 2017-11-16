@@ -624,15 +624,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         switch wraped.patchToPreview {
         case let .localMediaContent(local):
             cell.tag = FilesDataSource().getAssetThumbnail(asset: local.asset, id: cell.tag, completion: { (image, tag) in
-                let cellToCheck = self.collectionView.cellForItem(at: indexPath)
-                if cell.tag == tag, cell == cellToCheck {
+                if self.collectionView.indexPathsForVisibleItems.contains(indexPath) {
                     cell_.setImage(image: image)
-                } else {
-                    cell_.setImage(image: nil)
                 }
             })
         case let .remoteUrl(url):
-            cell_.setImage(with: wraped.patchToPreview)
+            cell_.setImage(with: url!)
+            
         }
         
         let countRow:Int = self.collectionView(collectionView, numberOfItemsInSection: indexPath.section)
