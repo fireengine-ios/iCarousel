@@ -62,7 +62,7 @@ class PasscodeSettingsViewController: UIViewController {
     }
     
     @IBAction func actionPasscodeSwitch(_ sender: UISwitch) {
-        setup(state: .set)
+        setup(state: .set, animated: true)
         storage.clearPasscode()
 //        output.turnOffPasscode()
     }
@@ -70,6 +70,7 @@ class PasscodeSettingsViewController: UIViewController {
     @IBAction func actionTouchIdSwitch(_ sender: UISwitch) {
         output.setTouchId(enable: sender.isOn)
     }
+    
     @IBAction func actionSetPasscodeButton(_ sender: UIButton) {
         let vc = PasscodeEnterViewController.with(flow: .create)
         vc.success = {
@@ -82,20 +83,52 @@ class PasscodeSettingsViewController: UIViewController {
 
 // MARK: PasscodeSettingsViewInput
 extension PasscodeSettingsViewController: PasscodeSettingsViewInput {
-    func setup(state: PasscodeSettingsViewState) {
+//    func setup(state: PasscodeSettingsViewState) {
+//        
+//    }
+    func setup(state: PasscodeSettingsViewState, animated: Bool = false) {
+        
+        let animateTime = animated ? 0.3 : 0
         
         switch state {
         case .set:
-            passcodeView.isHidden = true
-            changePasscodeView.isHidden = true
-            touchIdView.isHidden = true
-            setPasscodeView.isHidden = false
+            let views: [UIView] = [passcodeView, changePasscodeView, touchIdView]
+            views.forEach {
+                $0.transform = .identity
+                $0.alpha = 1
+            }
+            self.setPasscodeView.transform = CGAffineTransform(translationX: 0, y: 50)
+            self.setPasscodeView.alpha = 0
+            self.touchIdView.isHidden = !self.isAvailableTouchId
+            
+            UIView.animate(withDuration: animateTime) {
+                views.forEach {
+                    $0.transform = CGAffineTransform(translationX: 0, y: 50)
+                    $0.alpha = 0
+                }
+                self.setPasscodeView.transform = .identity
+                self.setPasscodeView.alpha = 1
+            }
             
         case .ready:
-            passcodeView.isHidden = false
-            changePasscodeView.isHidden = false
-            touchIdView.isHidden = !isAvailableTouchId
-            setPasscodeView.isHidden = true
+            
+            let views: [UIView] = [passcodeView, changePasscodeView, touchIdView]
+            views.forEach {
+                $0.transform = CGAffineTransform(translationX: 0, y: 50)
+                $0.alpha = 0
+            }
+            self.setPasscodeView.transform = .identity
+            self.setPasscodeView.alpha = 1
+            self.touchIdView.isHidden = !self.isAvailableTouchId
+            
+            UIView.animate(withDuration: animateTime) {
+                views.forEach {
+                    $0.transform = .identity
+                    $0.alpha = 1
+                }
+                self.setPasscodeView.transform = CGAffineTransform(translationX: 0, y: 50)
+                self.setPasscodeView.alpha = 0
+            }
         }
     }
 }

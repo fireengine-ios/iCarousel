@@ -29,6 +29,14 @@ class PasscodeEnterViewController: UIViewController {
         passcodeManager = PasscodeManagerImp(passcodeView: passcodeViewImp, state: state)
         passcodeManager.delegate = self
     }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        if !TouchIdManager().isEnabledTouchId {
+//            passcodeViewImp.becomeResponder()
+//        }
+//    }
+
 }
 
 // MARK: PasscodeEnterViewInput

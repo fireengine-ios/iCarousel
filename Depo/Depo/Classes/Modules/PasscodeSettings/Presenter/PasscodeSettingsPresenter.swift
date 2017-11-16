@@ -16,11 +16,11 @@ class PasscodeSettingsPresenter {
 extension PasscodeSettingsPresenter: PasscodeSettingsViewOutput {
     
     func viewIsReady() {
-        if PasscodeStorageDefaults().isEmpty {
-            view?.setup(state: .set)
-        } else {
-            view?.setup(state: .ready)
-        }
+//        if PasscodeStorageDefaults().isEmpty {
+//            view?.setup(state: .set, animated: false)
+//        } else {
+//            view?.setup(state: .ready, animated: false)
+//        }
     }
     
     func changePasscode() {

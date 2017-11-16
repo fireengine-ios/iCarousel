@@ -9,7 +9,7 @@
 import Foundation
 
 protocol PasscodeSettingsViewInput: class {
-    func setup(state: PasscodeSettingsViewState)
+    func setup(state: PasscodeSettingsViewState, animated: Bool)
 }
 
 protocol PasscodeSettingsViewOutput: class {

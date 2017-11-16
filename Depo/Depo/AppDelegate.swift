@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
 //        PasscodeManager.shared.show()
-        PasscodeStorageDefaults().save(passcode: "2222")
+//        PasscodeStorageDefaults().save(passcode: "2222")
         
         return true
     }
@@ -68,7 +68,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     func applicationWillEnterForeground(_ application: UIApplication) {
         let topVC = UIApplication.topController()
-        if PasscodeStorageDefaults().isEmpty || topVC is PasscodeEnterViewController {
+        if topVC is PasscodeEnterViewController {
+//            RouterVC().navigationController?.popViewController(animated: false)
+            return
+        }
+        if PasscodeStorageDefaults().isEmpty {
             return
         }
         let vc = PasscodeEnterViewController.with(flow: .validate)
