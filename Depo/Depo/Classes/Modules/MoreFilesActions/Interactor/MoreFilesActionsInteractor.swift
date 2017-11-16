@@ -28,7 +28,15 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
         
     }
     
-    func selectShareType(sourceRect: CGRect?){
+    func selectShareType(sourceRect: CGRect?) {
+        if sharingItems.contains(where: { return $0.fileType != .image && $0.fileType != .video }) {
+            shareViaLink(sourceRect: sourceRect)
+        } else {
+            showSharingMenu(sourceRect: sourceRect)
+        }
+    }
+    
+    func showSharingMenu(sourceRect: CGRect?) {
         let controler = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         controler.view.tintColor = ColorConstants.darcBlueColor
         
@@ -60,7 +68,6 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
         
         let router = RouterVC()
         router.presentViewController(controller: controler)
-
     }
     
     func shareSmallSize(sourceRect: CGRect?){

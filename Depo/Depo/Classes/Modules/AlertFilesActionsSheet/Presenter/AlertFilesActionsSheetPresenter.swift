@@ -183,7 +183,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 })
             case .share:
                 action = UIAlertAction(title: TextConstants.actionSheetShare, style: .default, handler: { _ in
-//                    self.interactor.share(item: currentItems, sourceRect: self.middleTabBarRect)
+                    self.interactor.share(item: currentItems, sourceRect: nil)
                 })
             //Photos and albumbs
             case .photos:
