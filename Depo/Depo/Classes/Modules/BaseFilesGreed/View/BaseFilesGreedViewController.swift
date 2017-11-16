@@ -113,9 +113,9 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         if mainTitle != "" {
             subTitle = output.getSortTypeString()
         }
-        if let unwrapedSlider = contentSlider { //FIXME: shiwt reload mechanic to presenter, so modules would speak as normal
-            unwrapedSlider.reloadAllData()
-        }
+//        if let unwrapedSlider = contentSlider { //FIXME: shiwt reload mechanic to presenter, so modules would speak as normal
+//            unwrapedSlider.reloadAllData()
+//        }
         output.viewWillAppear()
     }
     

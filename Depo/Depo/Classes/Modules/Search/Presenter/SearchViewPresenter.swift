@@ -18,6 +18,8 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     var dataSource = BaseDataSourceForCollectionView()
     var showedSpinner = false
     
+    let player: MediaPlayer = factory.resolve()
+
     var filters: [MoreActionsConfig.MoreActionsFileType] = []
     var syncType: MoreActionsConfig.CellSyncType = MoreActionsConfig.CellSyncType.all
     
@@ -35,6 +37,14 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         dataSource.setupCollectionView(collectionView: collectionView, filters: nil)
         dataSource.delegate = self
         interactor.viewIsReady()
+        player.delegates.add(view as! MediaPlayerDelegate)
+    }
+    
+    deinit {
+        guard let view = view as? MediaPlayerDelegate else {
+            return
+        }
+        player.delegates.remove(view)
     }
 
     func searchWith(searchText: String, sortBy: SortType, sortOrder: SortOrder) {
@@ -84,8 +94,8 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         showedSpinner = false
         outputView()?.hideSpiner()
         view.endSearchRequestWith(text: text)
-        
-        dataSource.fetchService.performFetch(sortingRules: .timeUp, filtes: [.name(text)])
+        //DBOUT
+//        dataSource.fetchService.performFetch(sortingRules: .timeUp, filtes: [.name(text)])
         dataSource.reloadData()
     }
     
@@ -99,11 +109,30 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         moduleOutput?.cancelSearch()
     }
     
+    func playerDidHide() {
+        player.stop()
+    }
+    
+    func willDismissController() {
+        moduleOutput?.previewSearchResultsHide()
+    }
+    
     func onItemSelected(item: BaseDataSourceItem, from data:[[BaseDataSourceItem]]) {
         if item.fileType.isUnSupportedOpenType {
-            router.onItemSelected(item: item, from: data)
-            self.view.dismissController()
-            moduleOutput?.previewSearchResultsHide()
+            if item.fileType == .audio {
+                guard let array = data as? [[Item]],
+                    let wrappered = item as? Item
+                    else { return }
+                
+                let list = array.flatMap{ $0 }
+                guard let startIndex = list.index(of: wrappered) else { return }
+                player.play(list: list, startAt: startIndex)
+                player.play()
+            } else {
+                router.onItemSelected(item: item, from: data)
+                self.view.dismissController()
+                moduleOutput?.previewSearchResultsHide()
+            }
         } else {
             custoPopUp.showCustomInfoAlert(withTitle: TextConstants.warning, withText: TextConstants.theFileIsNotSupported, okButtonText: TextConstants.ok)
         }

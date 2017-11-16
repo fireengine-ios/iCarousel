@@ -54,7 +54,7 @@ class RemoteItemsService {
         currentPage = 0
         isFull = false
         queueOperations.cancelAllOperations()
-        CoreDataStack.default.deleteRemoteFiles()
+//        CoreDataStack.default.deleteRemoteFiles()
         nextItems(sortBy: sortBy, sortOrder: sortOrder, success: success, fail: fail, newFieldValue: newFieldValue)
     }
     
@@ -77,7 +77,7 @@ class RemoteItemsService {
         if executingOrWaiting.count == 0  {
             
             let nextPageOperation = NextPageOperation(requestParam: serchParam, success: { list in
-                CoreDataStack.default.appendOnlyNewItems(items: list)
+//                CoreDataStack.default.appendOnlyNewItems(items: list)
                 self.currentPage = self.currentPage + 1
                 print("Current page \(self): \(self.currentPage)")
                 success?(list)

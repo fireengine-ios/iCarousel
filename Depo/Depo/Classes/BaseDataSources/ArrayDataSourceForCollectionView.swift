@@ -16,6 +16,7 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
         tableDataMArray.removeAll()
         tableDataMArray.append(contentsOf: array)
         collectionView.reloadData()
+//        allItems.append(array.first! as [WrapData])
     }
     
     override internal func itemForIndexPath(indexPath: IndexPath) -> BaseDataSourceItem? {
