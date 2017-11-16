@@ -107,7 +107,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     }
     
     func bottomBarSelectedItem(index: Int, sender: UITabBarItem) {
-        
         guard let selectedItems = basePassingPresenter?.selectedItems else {
             return
         }

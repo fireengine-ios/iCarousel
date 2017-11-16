@@ -368,7 +368,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     }
     
     func getAllObjects() -> [[BaseDataSourceItem]]{
-        var array = [[BaseDataSourceItem]]()
 //        let sections = fetchService.controller.sections
 //        let sectionsCount = sections?.count ?? 0
 //        for section in 0...sectionsCount - 1 {
@@ -382,7 +381,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 //            }
 //            array.append(subArray)
 //        }
-        return array
+        return  allItems
     }
     
     func selectAll(isTrue: Bool){
@@ -413,8 +412,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     }
     
     func getSelectedItems() -> [BaseDataSourceItem] {
-        let array = CoreDataStack.default.mediaItemByUUIDs(uuidList: Array(selectedItemsArray))
-        return array
+        let selectedItemsTempo = allMediaItems.filter{ selectedItemsArray.contains($0.uuid) }
+//        let array = CoreDataStack.default.mediaItemByUUIDs(uuidList: Array(selectedItemsArray))
+//        return Array(selectedItemsArray)
+        return selectedItemsTempo
     }
     
     
@@ -469,51 +470,49 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     }
     
     func isHeaderSelected(section: Int) -> Bool {
-//        guard let unwrapedSections = fetchService.controller.sections,
-//            section < unwrapedSections.count else {
-//                return false
-//        }
-//        let array: [MediaItem] = unwrapedSections[section].objects as! [MediaItem]
-//        let result: [String] = array.flatMap { $0.wrapedObject.uuid }
-//        let subSet = Set<String>(result)
-//
-//        return subSet.isSubset(of: selectedItemsArray)
-        return false
-        
+        guard section < allItems.count else {
+                return false
+        }
+        let array = allItems[section]
+        let result: [String] = array.map { $0.uuid }
+        let subSet = Set<String>(result)
+
+        return subSet.isSubset(of: selectedItemsArray)
+
     }
     
     func selectSectionAt(section: Int){
-//        let array: [MediaItem] = fetchService.controller.sections?[section].objects as! [MediaItem]
-//        let objectsArray: [BaseDataSourceItem] = array.flatMap { $0.wrapedObject }
-//
-//        if (isHeaderSelected(section: section)){
-//            for obj in objectsArray {
-//                selectedItemsArray.remove(obj.uuid)
-//            }
-//        }else{
-//            for obj in objectsArray {
-//                selectedItemsArray.insert(obj.uuid)
-//            }
-//        }
-//
-//        let visibleCells = collectionView.visibleCells
-//        for cell in visibleCells {
-//            guard let cell_ = cell as? CollectionViewCellDataProtocol,
-//                let indexPath = collectionView.indexPath(for: cell),
-//                (indexPath.section == section),
-//                let object = itemForIndexPath(indexPath: indexPath)
-//                else{
-//                    continue
-//            }
-//
-//            cell_.setSelection(isSelectionActive: isSelectionStateActive,
-//                               isSelected: isObjctSelected(object: object))
-//            cell_.confireWithWrapperd(wrappedObj: object)
-//
-//        }
-//        if isSelectionStateActive {
-//            delegate?.onChangeSelectedItemsCount(selectedItemsCount: self.selectedItemsArray.count)
-//        }
+        
+        let objectsArray: [BaseDataSourceItem] = allItems[section]
+
+        if (isHeaderSelected(section: section)){
+            for obj in objectsArray {
+                selectedItemsArray.remove(obj.uuid)
+            }
+        }else{
+            for obj in objectsArray {
+                selectedItemsArray.insert(obj.uuid)
+            }
+        }
+
+        let visibleCells = collectionView.visibleCells
+        for cell in visibleCells {
+            guard let cell_ = cell as? CollectionViewCellDataProtocol,
+                let indexPath = collectionView.indexPath(for: cell),
+                (indexPath.section == section),
+                let object = itemForIndexPath(indexPath: indexPath)
+                else{
+                    continue
+            }
+
+            cell_.setSelection(isSelectionActive: isSelectionStateActive,
+                               isSelected: isObjctSelected(object: object))
+            cell_.confireWithWrapperd(wrappedObj: object)
+
+        }
+        if isSelectionStateActive {
+            delegate?.onChangeSelectedItemsCount(selectedItemsCount: self.selectedItemsArray.count)
+        }
     }
     
     func updateVisibleCells(){
@@ -671,7 +670,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjctSelected(object: unwrapedObject))
         }else{
             if  let forwardDelegate = self.delegate {
-                let array = allItems//getAllObjects()
+                let array = getAllObjects()
                 for subArray in array {
                     for obj in subArray{
                         if (obj.uuid == unwrapedObject.uuid){

@@ -20,10 +20,10 @@ class AlbumDetailResponse: ObjectRequestResponse {
         let  tmpList = json?[AlbumDetailJsonKey.albumDetailFiles].array
         if let result = tmpList?.flatMap({ SearchItemResponse(withJSON: $0)}){
             list = result
-            let wrapedItems: [WrapData] = result.map {
-               return WrapData(remote: $0)
-            }
-            CoreDataStack.default.appendOnlyNewItems(items: wrapedItems)
+//            let wrapedItems: [WrapData] = result.map {
+//               return WrapData(remote: $0)
+//            }
+//            CoreDataStack.default.appendOnlyNewItems(items: wrapedItems)
             
         }
     }

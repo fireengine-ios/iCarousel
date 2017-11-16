@@ -146,18 +146,16 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         dataSource.reloadData()
     }
     
-    func getContentWithSuccess(array: [[BaseDataSourceItem]]){
-        if (view == nil){
+    func getContentWithSuccess(array: [[BaseDataSourceItem]]) {
+        if (view == nil) {
             return
         }
         debugPrint("???getContentWithSuccessEnd()")
-        //
         asyncOperationSucces()
         view.stopRefresher()
         if let dataSourceForArray = dataSource as? ArrayDataSourceForCollectionView{
             dataSourceForArray.configurateWithArray(array: array)
-        }
-        else{
+        } else {
             dataSource.reloadData()
         }
     }
@@ -396,9 +394,9 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         var sortRule: SortedRules
         switch rule {
         case .AlphaBetricAZ:
-            sortRule = .lettersAZ
-        case .AlphaBetricZA:
             sortRule = .lettersZA
+        case .AlphaBetricZA:
+            sortRule = .lettersAZ
         case .TimeNewOld:
             sortRule = .timeUp
         case .TimeOldNew:
