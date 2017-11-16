@@ -22,6 +22,7 @@ class LoginPhoneMailCell: BaseUserInputCellView {
             return false
         } else if string.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil, textField.text?.characters.count == 0 {
             loginCellActionDelegate?.firstCharacterIsNum(fromCell: self, string: string)
+            if string == "0", CoreTelephonyService().isTurkcellOperator() { return false }
             debugPrint("First symbol is num!!!!!!47")
         }
 
