@@ -32,28 +32,51 @@ class PasscodeSettingsViewController: UIViewController {
         setTitle(withString: "Passcode")
         isAvailableTouchId = touchIdManager.isAvailable
         output.viewIsReady()
+        
+
     }
+    
+    let storage = PasscodeStorageDefaults()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        if storage.isEmpty {
+            setup(state: .set)
+        } else {
+            setup(state: .ready)
+        }
+        
         passcodeSwitch.isOn = !PasscodeStorageDefaults().isEmpty
         touchIdSwitch.isOn = touchIdManager.isEnabledTouchId
     }
 
     
     @IBAction func actionChangePasscodeButton(_ sender: UIButton) {
-        output.changePasscode()
+        let vc = PasscodeEnterViewController.with(flow: .setNew)
+        vc.success = {
+            RouterVC().navigationController?.popViewController(animated: true)
+        }
+        RouterVC().pushViewController(viewController: vc)
+//        output.changePasscode()
     }
     
     @IBAction func actionPasscodeSwitch(_ sender: UISwitch) {
-        output.turnOffPasscode()
+        setup(state: .set)
+        storage.clearPasscode()
+//        output.turnOffPasscode()
     }
     
     @IBAction func actionTouchIdSwitch(_ sender: UISwitch) {
         output.setTouchId(enable: sender.isOn)
     }
     @IBAction func actionSetPasscodeButton(_ sender: UIButton) {
-        output.setPasscode()
+        let vc = PasscodeEnterViewController.with(flow: .create)
+        vc.success = {
+            RouterVC().navigationController?.popViewController(animated: true)
+        }
+        RouterVC().pushViewController(viewController: vc)
+//        output.setPasscode()
     }
 }
 

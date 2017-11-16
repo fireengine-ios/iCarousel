@@ -192,11 +192,26 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
                 }
                 break
             case 3: //touch id
-                if (settingsDelegate != nil){
-                    settingsDelegate!.goToPasscodeSettings()
-                }else{
-                    output.goToPasscodeSettings()
+                let storage = PasscodeStorageDefaults()
+                if storage.isEmpty {
+                    if (settingsDelegate != nil){
+                        settingsDelegate!.goToPasscodeSettings()
+                    }else{
+                        output.goToPasscodeSettings()
+                    }
+                    return
                 }
+                
+                let vc = PasscodeEnterViewController.with(flow: .validate)
+                vc.success = {
+                    RouterVC().navigationController?.popViewController(animated: false)
+                    if self.settingsDelegate != nil {
+                        self.settingsDelegate!.goToPasscodeSettings()
+                    } else {
+                        self.output.goToPasscodeSettings()
+                    }
+                }
+                RouterVC().pushViewController(viewController: vc)
             default:
                 break
             }
