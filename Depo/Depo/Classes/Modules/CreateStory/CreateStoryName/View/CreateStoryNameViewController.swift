@@ -38,6 +38,23 @@ class CreateStoryNameViewController: BaseViewController, CreateStoryNameViewInpu
         output.viewIsReady()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        animateView()
+    }
+
+    private var isShown = false
+    private func animateView() {
+        if isShown {
+            return
+        }
+        isShown = true
+        contentView.transform = CGAffineTransform(scaleX: 0.0001, y: 0.0001)
+        UIView.animate(withDuration: NumericConstants.durationOfAnimation) {
+            self.contentView.transform = .identity
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -52,19 +69,15 @@ class CreateStoryNameViewController: BaseViewController, CreateStoryNameViewInpu
     
     @IBAction func onSaveButton() {
         output.onCreateStory(storyName: storyNameTextField.text)
-        
         view.removeFromSuperview()
     }
     
     @IBAction func onCloseButton(){
         UIView.animate(withDuration: NumericConstants.durationOfAnimation, animations: {
             self.view.alpha = 0
-        }) {[weak self] (flag) in
-            guard let self_ = self
-                else {
-                return
-            }
-            self_.view.removeFromSuperview()
+            self.contentView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+        }) { _ in
+            self.dismiss(animated: false, completion: nil)
         }
     }
     
@@ -75,8 +88,7 @@ class CreateStoryNameViewController: BaseViewController, CreateStoryNameViewInpu
     // MARK: keyboard 
     
     override func showKeyBoard(notification: NSNotification){
-        super .showKeyBoard(notification: notification)
-        
+        super.showKeyBoard(notification: notification)
         let y = contentView.frame.size.height + getMainYForView(view: contentView)
         if (view.frame.size.height - y) < keyboardHeight {
             let dy = keyboardHeight - (view.frame.size.height - y)

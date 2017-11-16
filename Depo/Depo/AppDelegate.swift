@@ -37,6 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
 //        PasscodeManager.shared.show()
+        PasscodeStorageDefaults().save(passcode: "2222")
         
         return true
     }
@@ -66,6 +67,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SDImageCache.shared().deleteOldFiles(completionBlock: nil)
     }
     func applicationWillEnterForeground(_ application: UIApplication) {
+        let topVC = UIApplication.topController()
+        if PasscodeStorageDefaults().isEmpty || topVC is PasscodeEnterViewController {
+            return
+        }
+        let vc = PasscodeEnterViewController.with(flow: .validate)
+        vc.success = {
+            topVC?.dismiss(animated: true, completion: nil)
+        }
+        topVC?.present(vc, animated: true,completion: nil)
     }
     func applicationDidBecomeActive(_ application: UIApplication) {
         ApplicationSessionManager.shared().checkSession()
@@ -82,5 +92,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if (event?.type == .remoteControl) {
             FactoryMain.mediaPlayer.handle(event: event)
         }
+    }
+}
+
+extension UIApplication {
+    
+    class func topController(controller: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+        if let navigationController = controller as? UINavigationController {
+            return topController(controller: navigationController.visibleViewController)
+        }
+        if let tabController = controller as? UITabBarController {
+            if let selected = tabController.selectedViewController {
+                return topController(controller: selected)
+            }
+        }
+        if let presented = controller?.presentedViewController {
+            return topController(controller: presented)
+        }
+        return controller
     }
 }

@@ -36,6 +36,14 @@ final class PasscodeViewImp: UIView, FromNib {
     }()
 }
 extension PasscodeViewImp: PasscodeView {
+    func becomeResponder() {
+        passcodeInputView.becomeFirstResponder()
+    }
+    
+    func resignResponder() {
+        passcodeInputView.resignFirstResponder()
+    }
+    
 //    var passcodeOutput: PasscodeOutput {
 //        return passcodeOutputLabel
 //    }

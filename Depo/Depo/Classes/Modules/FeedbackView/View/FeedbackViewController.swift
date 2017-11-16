@@ -118,11 +118,25 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
         }
     }
     
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let dy = (view.frame.size.height - allertView.frame.size.height) * 0.5
         bottomConstraint.constant = dy
         view.layoutIfNeeded()
+        animateView()
+    }
+    
+    private var isShown = false
+    private func animateView() {
+        if isShown {
+            return
+        }
+        isShown = true
+        allertView.transform = CGAffineTransform(scaleX: 0.0001, y: 0.0001)
+        UIView.animate(withDuration: NumericConstants.durationOfAnimation) {
+            self.allertView.transform = .identity
+        }
     }
 
     // MARK: Keboard
@@ -179,13 +193,13 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
         return UIImage(named:imageName)!.withRenderingMode(.alwaysTemplate)
     }
     
-    @IBAction func onCloseButton(){
+    @IBAction func onCloseButton() {
         UIView.animate(withDuration: NumericConstants.durationOfAnimation, animations: {
             self.view.alpha = 0
-        }) { (flag) in
-            self.view.removeFromSuperview()
+            self.allertView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+        }) { _ in
+            self.dismiss(animated: false, completion: nil)
         }
-        
     }
     
     @IBAction func onSuggestionButton(){

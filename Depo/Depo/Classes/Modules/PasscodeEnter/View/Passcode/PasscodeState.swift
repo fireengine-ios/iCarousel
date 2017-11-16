@@ -8,6 +8,23 @@
 
 import UIKit
 
+enum PasscodeFlow {
+    case validate
+    case create
+    case setNew
+    
+    var startState: PasscodeState {
+        switch self {
+        case .validate:
+            return ValidatePasscodeState()
+        case .create:
+            return CreatePasscodeState()
+        case .setNew:
+            return OldPasscodeState()
+        }
+    }
+}
+
 protocol PasscodeState {
     var title: String { get }
     var isBiometricsAllowed: Bool { get }

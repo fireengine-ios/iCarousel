@@ -209,7 +209,6 @@
 		7C5549FF1F6C11C300067F99 /* CollectionViewStoryReorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5549FD1F6C11C300067F99 /* CollectionViewStoryReorderView.swift */; };
 		7C554A001F6C11C300067F99 /* CollectionViewStoryReorderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C5549FE1F6C11C300067F99 /* CollectionViewStoryReorderView.xib */; };
 		7C5722771F753581004FC596 /* ApplicationSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5722761F753581004FC596 /* ApplicationSessionManager.swift */; };
-		7C5AFD6D1F6969CB00DBB9E7 /* SingletonRouterStorrage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5AFD6C1F6969CB00DBB9E7 /* SingletonRouterStorrage.swift */; };
 		7C5AFD701F69768300DBB9E7 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5AFD6F1F69768300DBB9E7 /* BaseViewController.swift */; };
 		7C634F9F1F0E6E7E00B5B93D /* BlueButtonWithWhiteText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C634F9E1F0E6E7E00B5B93D /* BlueButtonWithWhiteText.swift */; };
 		7C634FA11F0F7C2C00B5B93D /* UserInfoSubViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C634FA01F0F7C2C00B5B93D /* UserInfoSubViewViewController.xib */; };
@@ -530,7 +529,6 @@
 		CE04525B1F2F1012001F8FA6 /* NavBarConfugurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04525A1F2F1012001F8FA6 /* NavBarConfugurator.swift */; };
 		CE09155E1F3870D000C82A44 /* WrapItemFileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09155D1F3870D000C82A44 /* WrapItemFileService.swift */; };
 		CE0ED96E1FBC0F5A00487632 /* TouchIdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED9631FBC0F5A00487632 /* TouchIdManager.swift */; };
-		CE0ED96F1FBC0F5A00487632 /* PasscodeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED9641FBC0F5A00487632 /* PasscodeController.swift */; };
 		CE0ED9701FBC0F5A00487632 /* PasscodeViewImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED9651FBC0F5A00487632 /* PasscodeViewImp.swift */; };
 		CE0ED9711FBC0F5A00487632 /* PasscodeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED9661FBC0F5A00487632 /* PasscodeState.swift */; };
 		CE0ED9721FBC0F5A00487632 /* PasscodeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED9671FBC0F5A00487632 /* PasscodeInputView.swift */; };
@@ -1351,7 +1349,6 @@
 		7C5549FD1F6C11C300067F99 /* CollectionViewStoryReorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewStoryReorderView.swift; sourceTree = "<group>"; };
 		7C5549FE1F6C11C300067F99 /* CollectionViewStoryReorderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewStoryReorderView.xib; sourceTree = "<group>"; };
 		7C5722761F753581004FC596 /* ApplicationSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ApplicationSessionManager.swift; path = Depo/Classes/Services/AppSession/ApplicationSessionManager.swift; sourceTree = SOURCE_ROOT; };
-		7C5AFD6C1F6969CB00DBB9E7 /* SingletonRouterStorrage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingletonRouterStorrage.swift; sourceTree = "<group>"; };
 		7C5AFD6F1F69768300DBB9E7 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		7C634F9E1F0E6E7E00B5B93D /* BlueButtonWithWhiteText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlueButtonWithWhiteText.swift; sourceTree = "<group>"; };
 		7C634FA01F0F7C2C00B5B93D /* UserInfoSubViewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserInfoSubViewViewController.xib; sourceTree = "<group>"; };
@@ -1795,7 +1792,6 @@
 		CE04525A1F2F1012001F8FA6 /* NavBarConfugurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavBarConfugurator.swift; sourceTree = "<group>"; };
 		CE09155D1F3870D000C82A44 /* WrapItemFileService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrapItemFileService.swift; sourceTree = "<group>"; };
 		CE0ED9631FBC0F5A00487632 /* TouchIdManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchIdManager.swift; sourceTree = "<group>"; };
-		CE0ED9641FBC0F5A00487632 /* PasscodeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeController.swift; sourceTree = "<group>"; };
 		CE0ED9651FBC0F5A00487632 /* PasscodeViewImp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeViewImp.swift; sourceTree = "<group>"; };
 		CE0ED9661FBC0F5A00487632 /* PasscodeState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeState.swift; sourceTree = "<group>"; };
 		CE0ED9671FBC0F5A00487632 /* PasscodeInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeInputView.swift; sourceTree = "<group>"; };
@@ -4125,7 +4121,6 @@
 			isa = PBXGroup;
 			children = (
 				7CD1F8D41F014F150028F51A /* Router.swift */,
-				7C5AFD6C1F6969CB00DBB9E7 /* SingletonRouterStorrage.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -5534,7 +5529,6 @@
 			isa = PBXGroup;
 			children = (
 				CE0ED9631FBC0F5A00487632 /* TouchIdManager.swift */,
-				CE0ED9641FBC0F5A00487632 /* PasscodeController.swift */,
 				CE0ED9651FBC0F5A00487632 /* PasscodeViewImp.swift */,
 				CE0ED9661FBC0F5A00487632 /* PasscodeState.swift */,
 				CE0ED9671FBC0F5A00487632 /* PasscodeInputView.swift */,
@@ -7984,13 +7978,11 @@
 				AF744E3CD7A5DD8E7D6C30BB /* UserInfoSubViewViewController.swift in Sources */,
 				39BB6C52DD43D91D15C41982 /* UserInfoSubViewModuleInput.swift in Sources */,
 				8C0097101F6BDA2B00FA069C /* MoreFilesActionsInteractor.swift in Sources */,
-				CE0ED96F1FBC0F5A00487632 /* PasscodeController.swift in Sources */,
 				7C0EBD001F4C5B5100283ECF /* BaseDataSourceItem.swift in Sources */,
 				67539B0A8267DB7EEB08948D /* UserInfoSubViewPresenter.swift in Sources */,
 				09D1D10783F4E47C7E8089AA /* UserInfoSubViewInteractorInput.swift in Sources */,
 				205A9C8FDC29F8AABB22940E /* UserInfoSubViewInteractorOutput.swift in Sources */,
 				011111224BABABC38EFD0DAD /* UserInfoSubViewInteractor.swift in Sources */,
-				7C5AFD6D1F6969CB00DBB9E7 /* SingletonRouterStorrage.swift in Sources */,
 				956BFA2BDBD060B8C046A081 /* UserInfoSubViewRouterInput.swift in Sources */,
 				0817E8DE5620F2988297FF52 /* UserInfoSubViewRouter.swift in Sources */,
 				1356E354CDA8AA7567B09334 /* UserInfoSubViewConfigurator.swift in Sources */,

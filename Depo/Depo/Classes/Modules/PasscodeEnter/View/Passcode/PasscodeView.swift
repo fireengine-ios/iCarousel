@@ -12,6 +12,8 @@ protocol PasscodeView {
     var passcodeInput: PasscodeInput { get }
     var passcodeOutput: PasscodeOutput { get }
     func update(for state: PasscodeState) /// with default
+    func resignResponder()
+    func becomeResponder()
 }
 extension PasscodeView {
     func update(for state: PasscodeState) {

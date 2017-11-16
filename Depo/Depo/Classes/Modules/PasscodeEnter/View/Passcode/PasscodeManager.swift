@@ -29,8 +29,6 @@ final class PasscodeManagerImp {
     let view: PasscodeView
     let storage: PasscodeStorage
     
-    //    var passcode = ""
-    
     var state: PasscodeState
     lazy var touchIdManager = TouchIdManager()
     
@@ -65,6 +63,7 @@ extension PasscodeManagerImp: PasscodeManager {
     }
     
     func authenticateWithBiometrics() {
+        self.view.resignResponder()
         touchIdManager.authenticate(reason: state.title) { success in
             DispatchQueue.main.async {
                 if success {
@@ -73,6 +72,8 @@ extension PasscodeManagerImp: PasscodeManager {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                         self.state.finish(with: passcode, manager: self)
                     }
+                } else {
+                    self.view.becomeResponder()
                 }
             }
         }

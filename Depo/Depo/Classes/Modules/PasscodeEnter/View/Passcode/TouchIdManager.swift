@@ -21,10 +21,19 @@ final class TouchIdManager {
         return LAContext().canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
     }
     
+    var isAvailableFaceID: Bool {
+        if #available(iOS 11.0, *) {
+            return LAContext().biometryType == .typeFaceID
+        } else {
+            return false
+        }
+    }
+    
     func authenticate(reason: String = "For passcode", handler: @escaping (Bool) -> Void) {
         if !isAvailable || !isEnabledTouchId {
             return handler(false)
         }
+        
         LAContext().evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { (success, error) in
             DispatchQueue.main.async {
                 handler(success)
