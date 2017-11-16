@@ -10,7 +10,6 @@ import Foundation
 
 protocol BaseFilesGreedRouterInput {
     
-    func openAlbumDetail(_ album: AlbumItem)
     func onItemSelected(item: BaseDataSourceItem, from data:[[BaseDataSourceItem]])
 }
 
