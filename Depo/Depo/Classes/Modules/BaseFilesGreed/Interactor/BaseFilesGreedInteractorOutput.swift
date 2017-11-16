@@ -10,7 +10,7 @@ import Foundation
 
 protocol BaseFilesGreedInteractorOutput: class, BaseAsyncOperationInteractorOutput {
     
-    func getContentWithSuccess()
+    func getContentWithSuccess(items: [WrapData])
     
     func getContentWithSuccessEnd()
     

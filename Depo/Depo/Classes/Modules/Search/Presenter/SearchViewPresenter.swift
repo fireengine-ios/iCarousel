@@ -94,8 +94,8 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         showedSpinner = false
         outputView()?.hideSpiner()
         view.endSearchRequestWith(text: text)
-        
-        dataSource.fetchService.performFetch(sortingRules: .timeUp, filtes: [.name(text)])
+        //DBOUT
+//        dataSource.fetchService.performFetch(sortingRules: .timeUp, filtes: [.name(text)])
         dataSource.reloadData()
     }
     
