@@ -160,7 +160,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             switch $0 {
             case .info:
                 action = UIAlertAction(title: TextConstants.actionSheetInfo, style: .default, handler: { _ in
-//                    self.router.onInfo(object: currentItems.first!)
+                    self.interactor.info(item: currentItems)
 //                    self.view.unselectAll()
                 })
             case .edit:
