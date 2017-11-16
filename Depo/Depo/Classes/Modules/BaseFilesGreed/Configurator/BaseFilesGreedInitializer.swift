@@ -30,7 +30,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
             availableFilter: true,
             showGridListButton: false
         )
-        let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
+        let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: [],
                                                                   selectionModeTypes: [.delete, .createStory, .print])
 
         configurator.configure(viewController: viewController, remoteServices: PhotoAndVideoService(requestSize: 100),
@@ -129,7 +129,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
                                fileFilters: [.favoriteStatus(.favorites)],
                                 bottomBarConfig: bottomBarConfig,
                                 topBarConfig: gridListTopBarConfig,
-                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select, .selectAll],
+                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
                                                                                       selectionModeTypes: []))
         viewController.mainTitle = TextConstants.homeButtonFavorites
         return viewController

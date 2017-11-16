@@ -361,21 +361,36 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func moreActionsPressed(sender: Any) {
         
         let selectionMode = dataSource.isInSelectionMode()
-        var type = (interactor.alerSheetMoreActionsConfig?.selectionModeTypes ?? [])
+        var actionTypes = (interactor.alerSheetMoreActionsConfig?.selectionModeTypes ?? [])
         if selectionMode {
-            let list = Array(dataSource.selectedItemsArray)
-            let selectedItems = CoreDataStack.default.mediaItemByUUIDs(uuidList: list)
-            let items = selectedItems.filter{ $0.isLocalItem == false}
-            if !items.isEmpty {
-                type.append(.addToCmeraRoll)
+            let selectedItemsUUIDs = Array(dataSource.selectedItemsArray)
+            var selectedItems = [WrapData]()
+            
+            for items in dataSource.allItems {
+                selectedItems += items.filter { selectedItemsUUIDs.contains($0.uuid) }
             }
-            alertSheetModule?.showAlertSheet(with: type,
+            
+            let items = selectedItems.filter { $0.isLocalItem == false}
+
+            if items.contains(where: { return !($0.favorites) } ) {
+                actionTypes.append(.addToFavorites)
+            }
+            if items.contains(where: { return $0.favorites } ) {
+                actionTypes.append(.removeFromFavorites)
+            }
+            
+            if actionTypes.contains(.createStory) && items.contains(where: { return $0.fileType != .image } ) {
+                let index = actionTypes.index(where: { return $0 == .createStory})!
+                actionTypes.remove(at: index)
+            }
+            
+            alertSheetModule?.showAlertSheet(with: actionTypes,
                                              items: selectedItems,
                                              presentedBy: sender,
                                              onSourceView: nil)
         } else {
-            type  = (interactor.alerSheetMoreActionsConfig?.initialTypes ?? [])
-            alertSheetModule?.showAlertSheet(with: type,
+            actionTypes  = (interactor.alerSheetMoreActionsConfig?.initialTypes ?? [])
+            alertSheetModule?.showAlertSheet(with: actionTypes,
                                              presentedBy: sender,
                                              onSourceView: nil)
         }

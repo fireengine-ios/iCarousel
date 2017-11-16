@@ -135,7 +135,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 
             })
         }
-        filteredActionTypes.append(.selectAll)
+        
         return constractActions(with: filteredActionTypes, for: items)
     }
     
