@@ -13,5 +13,4 @@ class CreateStoryNameRouter: CreateStoryNameRouterInput {
         let controller = router.photoSelection(forStory: story)
         router.pushViewController(viewController: controller)
     }
-    
 }

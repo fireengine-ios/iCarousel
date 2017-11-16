@@ -15,6 +15,7 @@ class CreateStoryNameModuleInitializer: NSObject {
 
     class func initializeViewController(with nibName:String) -> UIViewController {
         let viewController = CreateStoryNameViewController(nibName: nibName, bundle: nil)
+        viewController.needShowTabBar = true
         let configurator = CreateStoryNameModuleConfigurator()
         configurator.configureModuleForViewInput(viewInput: viewController)
         return viewController

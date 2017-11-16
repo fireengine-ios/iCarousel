@@ -15,11 +15,13 @@ class CreateStoryNamePresenter: CreateStoryNameModuleInput, CreateStoryNameViewO
     let custoPopUp = CustomPopUp()
 
     func viewIsReady() {
-
+        
     }
     
     func showEmptyNamePopup(){
-        custoPopUp.showCustomAlert(withText: TextConstants.createStoryEmptyTextError, okButtonText: TextConstants.createFolderEmptyFolderButtonText)
+        custoPopUp.showCustomAlert(
+            withText: TextConstants.createStoryEmptyTextError,
+            okButtonText: TextConstants.createFolderEmptyFolderButtonText)
     }
     
     func onCreateStory(storyName: String?){
@@ -37,5 +39,4 @@ class CreateStoryNamePresenter: CreateStoryNameModuleInput, CreateStoryNameViewO
     func goToSelectionPhoto(forStory story: PhotoStory){
         router.goToSelectionPhotosForStory(story: story)
     }
-    
 }

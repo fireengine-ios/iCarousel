@@ -68,16 +68,21 @@ class CreateStoryNameViewController: BaseViewController, CreateStoryNameViewInpu
     }
     
     @IBAction func onSaveButton() {
-        output.onCreateStory(storyName: storyNameTextField.text)
-        view.removeFromSuperview()
+        closeAnimation {
+           self.output.onCreateStory(storyName: self.storyNameTextField.text)
+        }
     }
     
-    @IBAction func onCloseButton(){
+    @IBAction func onCloseButton() {
+        closeAnimation()
+    }
+    
+    private func closeAnimation(completion: (() -> Void)? = nil) {
         UIView.animate(withDuration: NumericConstants.durationOfAnimation, animations: {
             self.view.alpha = 0
             self.contentView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
         }) { _ in
-            self.dismiss(animated: false, completion: nil)
+            self.dismiss(animated: false, completion: completion)
         }
     }
     
