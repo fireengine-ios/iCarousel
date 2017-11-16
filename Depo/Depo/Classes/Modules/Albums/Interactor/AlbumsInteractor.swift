@@ -38,15 +38,15 @@ class AlbumsInteractor: BaseFilesGreedInteractor {
         })
     }
     
-    func onAddPhotosToAlbum(selectedAlbum: AlbumItem){
+    func onAddPhotosToAlbum(selectedAlbumUUID: String){
         output.startAsyncOperation()
-        let parameters = AddPhotosToAlbum(albumUUID: selectedAlbum.uuid, photos: photos as! [Item])
+        let parameters = AddPhotosToAlbum(albumUUID: selectedAlbumUUID, photos: photos as! [Item])
         PhotosAlbumService().addPhotosToAlbum(parameters: parameters, success: { [weak self] in
             DispatchQueue.main.async {
                 print("success")
                 self?.output.asyncOperationSucces()
                 if let presenter = self?.output as? AlbumSelectionPresenter{
-                    presenter.photoAddedToAlbum(selectedAlbum)
+                    presenter.photoAddedToAlbum()
                 }
             }
         }) { [weak self] (error) in

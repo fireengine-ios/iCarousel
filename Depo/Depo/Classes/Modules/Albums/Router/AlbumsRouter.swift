@@ -7,20 +7,6 @@
 //
 
 class AlbumsRouter: BaseFilesGreedRouter {
-
-    override func openAlbumDetail(_ album: AlbumItem) {
-        let router = RouterVC()
-        
-        guard let navigation = router.navigationController else {
-            return
-        }
-        
-        var viewControllers = navigation.viewControllers
-        if viewControllers.count > 0 {
-            viewControllers[viewControllers.count - 1] = router.albumDetailController(album: album)
-            navigation.viewControllers = viewControllers
-        }
-    }
     
     override func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]) {
         let router = RouterVC()
