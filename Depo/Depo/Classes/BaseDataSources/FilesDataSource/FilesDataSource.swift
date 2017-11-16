@@ -110,14 +110,19 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
     
     //Mark: - Sync Image
     
-    func getAssetThumbnail(asset: PHAsset) -> UIImage {
+    func getAssetThumbnail(asset: PHAsset, id: Int, completion: @escaping (_ image: UIImage?, _ requestId: Int?)->Void) -> Int {
         let manager = PHImageManager.default()
+        let requestId = PHImageRequestID(id)
+        if requestId != 0 {
+            manager.cancelImageRequest(requestId)
+        }
+        
         let option = PHImageRequestOptions()
-        var thumbnail = UIImage()
-        option.isSynchronous = true
-        manager.requestImage(for: asset, targetSize: CGSize(width: 300, height: 300), contentMode: .aspectFill, options: option, resultHandler: {(result, info)->Void in
-            thumbnail = (result != nil) ? result! : #imageLiteral(resourceName: "fileIconPhoto")
-        })
-        return thumbnail
+        option.isSynchronous = false
+        option.deliveryMode = .highQualityFormat
+        return Int(manager.requestImage(for: asset, targetSize: CGSize(width: 300, height: 300), contentMode: .aspectFill, options: option, resultHandler: {(result, info)->Void in
+            let tag = (info?[PHImageResultRequestIDKey] as? NSNumber)?.intValue
+            completion(result, tag)
+        }))
     }
 }

@@ -56,6 +56,12 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.imageView.image = nil
+    }
+    
     override func updating(){
         super.updating()
         self.backgroundColor = UIColor.white
@@ -72,10 +78,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         imageView.contentMode = .center
         switch pathForItem {
         case let .localMediaContent(local):
-            self.imageView.contentMode = .scaleAspectFill
-            DispatchQueue.main.async {
-                self.imageView.image = FilesDataSource().getAssetThumbnail(asset: local.asset)
-            }
+            break
         case let .remoteUrl(url):
             imageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "fileIconPhoto"), options: []) {[weak self] (image, error, cacheType, url) in
                 guard error == nil else {
