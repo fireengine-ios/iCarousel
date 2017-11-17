@@ -565,9 +565,9 @@ struct NumericConstants {
     
     static let topContentInset: CGFloat = 64
     
-    static let durationOfAnimation: Double = 0.3
+    static let animationDuration: Double = 0.3
     
-    static let durationOfLifeSession: TimeInterval = 60 * 50 //50 min
+    static let lifeSessionDuration: TimeInterval = 60 * 50 //50 min
     
     static let timeIntervalBetweenAutoSync: TimeInterval = 60*60
     

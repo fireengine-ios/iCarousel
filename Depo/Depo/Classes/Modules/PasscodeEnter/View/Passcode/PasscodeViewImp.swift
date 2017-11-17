@@ -74,14 +74,14 @@ final class PasscodeOutputImp: PasscodeOutput {
     func animateError(with text: String) {
         
         self.passcodeErrorLabel.alpha = 0
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: NumericConstants.animationDuration) {
             self.passcodeErrorLabel.alpha = 1
         }
         
         passcodeErrorLabel.text = text
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            UIView.animate(withDuration: 0.3) {
+            UIView.animate(withDuration: NumericConstants.animationDuration) {
                 self.passcodeErrorLabel.alpha = 0
             }
         }

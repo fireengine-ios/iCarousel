@@ -101,7 +101,7 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
     
     func languageRequestSended(text: String){
         if (Mail.canSendEmail()){
-            UIView.animate(withDuration: NumericConstants.durationOfAnimation, animations: {
+            UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                 self.view.alpha = 0
             }, completion: {[weak self] (flag) in
                 guard let self_ = self else{
@@ -134,7 +134,7 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
         }
         isShown = true
         allertView.transform = CGAffineTransform(scaleX: 0.0001, y: 0.0001)
-        UIView.animate(withDuration: NumericConstants.durationOfAnimation) {
+        UIView.animate(withDuration: NumericConstants.animationDuration) {
             self.allertView.transform = .identity
         }
     }
@@ -194,7 +194,7 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
     }
     
     @IBAction func onCloseButton() {
-        UIView.animate(withDuration: NumericConstants.durationOfAnimation, animations: {
+        UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
             self.view.alpha = 0
             self.allertView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
         }) { _ in

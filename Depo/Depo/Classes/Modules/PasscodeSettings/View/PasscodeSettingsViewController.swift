@@ -87,7 +87,7 @@ extension PasscodeSettingsViewController: PasscodeSettingsViewInput {
 //    }
     func setup(state: PasscodeSettingsViewState, animated: Bool = false) {
         
-        let animateTime = animated ? 0.3 : 0
+        let animateTime = animated ? NumericConstants.animationDuration : 0
         
         switch state {
         case .set:

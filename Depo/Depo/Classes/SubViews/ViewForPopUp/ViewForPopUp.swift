@@ -100,7 +100,7 @@ class ViewForPopUp: UIView, UITableViewDelegate, UITableViewDataSource, PopUpSwi
     private func updateH(){
         if hConstraint != nil {
             let h = calulateCurrentH()
-            UIView.animate(withDuration: NumericConstants.durationOfAnimation) {
+            UIView.animate(withDuration: NumericConstants.animationDuration) {
                 self.hConstraint?.constant = h
                 self.superview?.layoutIfNeeded()
             }

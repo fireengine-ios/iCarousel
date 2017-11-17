@@ -171,7 +171,7 @@ class ForgotPasswordViewController: UIViewController, ForgotPasswordViewInput, U
     }
     
     func showCapcha(){
-//        UIView.animate(withDuration: 0.3) {
+//        UIView.animate(withDuration: NumericConstants.animationDuration) {
 //            let dyTop = CGFloat(100.0)
 //            var dyBottom = CGFloat(0.0)
 //            if (self.subTitle.frame.origin.y < 164.0){

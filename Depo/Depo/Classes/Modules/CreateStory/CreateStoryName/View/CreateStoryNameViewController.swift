@@ -50,7 +50,7 @@ class CreateStoryNameViewController: BaseViewController, CreateStoryNameViewInpu
         }
         isShown = true
         contentView.transform = CGAffineTransform(scaleX: 0.0001, y: 0.0001)
-        UIView.animate(withDuration: NumericConstants.durationOfAnimation) {
+        UIView.animate(withDuration: NumericConstants.animationDuration) {
             self.contentView.transform = .identity
         }
     }
@@ -78,7 +78,7 @@ class CreateStoryNameViewController: BaseViewController, CreateStoryNameViewInpu
     }
     
     private func closeAnimation(completion: (() -> Void)? = nil) {
-        UIView.animate(withDuration: NumericConstants.durationOfAnimation, animations: {
+        UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
             self.view.alpha = 0
             self.contentView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
         }) { _ in

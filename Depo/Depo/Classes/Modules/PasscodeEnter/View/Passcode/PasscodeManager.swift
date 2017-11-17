@@ -72,7 +72,7 @@ extension PasscodeManagerImp: PasscodeManager {
                 if success {
                     let passcode = self.storage.passcode
                     self.view.passcodeInput.passcode = passcode
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + NumericConstants.animationDuration) {
                         self.state.finish(with: passcode, manager: self)
                     }
                 } else {
