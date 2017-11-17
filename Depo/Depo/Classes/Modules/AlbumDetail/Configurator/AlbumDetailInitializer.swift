@@ -27,8 +27,8 @@ class AlbumDetailModuleInitializer: NSObject {
         configurator.configure(viewController: viewController, fileFilters: [.rootAlbum(album.uuid)],
                                bottomBarConfig: bottomBarConfig, router: BaseFilesGreedRouter(),
                                presenter: presentor, interactor: interactor,
-                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [],
-                                                                                     selectionModeTypes: []),
+                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.shareAlbum, .download, .select],
+                                                                                     selectionModeTypes: [.createStory, .delete]),
                                topBarConfig: nil)
         
         viewController.mainTitle = album.name
