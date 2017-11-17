@@ -18,7 +18,7 @@ final class UploadService: BaseRequestService {
     private let syncQueue: OperationQueue
     private let uploadQueue: OperationQueue
     private var uploadOperations = [UploadOperations]()
-    private var uploadOnDemandOperations = [UploadOperations]()
+//    private var uploadOnDemandOperations = [UploadOperations]()
     
     override init() {
         
@@ -71,43 +71,7 @@ final class UploadService: BaseRequestService {
             handler(.failed(CustomErrors.text(errorResponse.description)))
         })
     }
-    
-    
-    // MARK: - Upload on demand
-    
-    func uploadOnDemandFileList(items: [WrapData], uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String) {
-            WrapItemOperatonManager.default.startOperationWith(type: .upload, allOperations: items.count, completedOperations: 0)
-            let allOperationCount = items.count
-            var completedOperationCount = 0
-            let operations: [UploadOperations] = items.flatMap {
-                UploadOperations(item: $0, uploadType: uploadType, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, success: { (finishedOperation) in
-                    completedOperationCount = completedOperationCount + 1
-                    
-                    for operationType in finishedOperation.uploadType {
-                        WrapItemOperatonManager.default.setProgressForOperationWith(type: UploadService.convertUploadType(uploadType: operationType),
-                                                                                    allOperations: allOperationCount,
-                                                                                    completedOperations: completedOperationCount)
-                    }
-                }, fail: { (error) in
-                    completedOperationCount = completedOperationCount + 1
-                    //TODO: Error alert
-                })
-            }
-            uploadOnDemandOperations.append(contentsOf: operations)
-    }
-    
-    func uploadOnDemand(success: FileOperationSucces?, fail: FailResponse?) {
-        guard !self.uploadOnDemandOperations.isEmpty else {
-            return
-        }
-        
-        dispatchQueue.async {
-            self.uploadQueue.addOperations(self.uploadOnDemandOperations, waitUntilFinished: true)
-            self.uploadOnDemandOperations.removeAll()
-            success?()
-            WrapItemOperatonManager.default.stopOperationWithType(type: .upload)
-        }
-    }
+
     
     //MARK: -
     class func convertUploadType(uploadType: UploadType) -> OperationType{
@@ -121,46 +85,54 @@ final class UploadService: BaseRequestService {
     
     func uploadFileList(items: [WrapData], uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", success: FileOperationSucces?, fail: FailResponse? ) {
         
-        var itemsForUpload = [WrapData]()
-        
-        for uploadItem in items {
-            var flag = true
-            for operation in self.uploadOperations {
-                if operation.item.md5 == uploadItem.md5{
-                    if (!operation.uploadType.contains(uploadType)){
-                        operation.uploadType.insert(uploadType)
-                        if (UploadService.convertUploadType(uploadType: uploadType) == .upload){
-                            operation.queuePriority = .high
-                        }
-                        flag = false
-                        break
-                    }
+        switch uploadType {
+        case .autoSync:
+            self.syncFileList(items: items, uploadStategy: uploadStategy, uploadTo: uploadTo, success: {
+                
+            }, fail: { (errorResponse) in
+                
+            })
+        default:
+            self.uploadFileList(items: items, uploadStategy: uploadStategy, uploadTo: uploadTo, success: {
+                
+            }, fail: { (errorResponse) in
+                
+            })
+            break
+        }
+    
+    }
+    
+    private func uploadFileList(items: [WrapData], uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", success: FileOperationSucces?, fail: FailResponse? ) {
+        // filter all items which md5's are not in the uploadOperations
+        let itemsToSync = items.filter { (item) -> Bool in
+            return (self.uploadOperations.first(where: { (operation) -> Bool in
+                if operation.item.md5 == item.md5 && operation.uploadType.contains(.autoSync) && !operation.isExecuting {
+                    operation.cancel()
+                    return true
                 }
-            }
-            if flag {
-                itemsForUpload.append(uploadItem)
-            }
+                return false
+            }) == nil)
         }
         
-        if (itemsForUpload.count == 0){
+        guard !itemsToSync.isEmpty else {
             return
         }
         
-        
-        WrapItemOperatonManager.default.startOperationWith(type: UploadService.convertUploadType(uploadType: uploadType), allOperations: items.count, completedOperations: 0)
-        let allOperationCount = itemsForUpload.count
+        WrapItemOperatonManager.default.startOperationWith(type: .upload, allOperations: itemsToSync.count, completedOperations: 0)
+        let allOperationCount = itemsToSync.count
         var completedOperationCount = 0
-        let operations: [UploadOperations] = itemsForUpload.flatMap {
-            UploadOperations(item: $0, uploadType: uploadType, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, success: { (finishedOperation) in
+        let operations: [UploadOperations] = itemsToSync.flatMap {
+            let operation = UploadOperations(item: $0, uploadType: .fromHomePage, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, success: { (finishedOperation) in
                 completedOperationCount = completedOperationCount + 1
-                for operationType in finishedOperation.uploadType {
-                    WrapItemOperatonManager.default.setProgressForOperationWith(type: UploadService.convertUploadType(uploadType: operationType),
-                                                                                allOperations: allOperationCount,
-                                                                                completedOperations: completedOperationCount)
-                }
+                WrapItemOperatonManager.default.setProgressForOperationWith(type: .upload,
+                                                                            allOperations: allOperationCount,
+                                                                            completedOperations: completedOperationCount)
             }, fail: { (fail) in
                 completedOperationCount = completedOperationCount + 1
             })
+            operation.queuePriority = .high
+            return operation
         }
         uploadOperations.append(contentsOf: operations)
         
@@ -169,6 +141,43 @@ final class UploadService: BaseRequestService {
             success?()
             WrapItemOperatonManager.default.stopOperationWithType(type: .upload)
         }
+    }
+    
+    private func syncFileList(items: [WrapData], uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", success: FileOperationSucces?, fail: FailResponse? ) {
+        // filter all items which md5's are not in the uploadOperations
+        let itemsToSync = items.filter { (item) -> Bool in
+            return (self.uploadOperations.first(where: { (operation) -> Bool in
+                return operation.item.md5 == item.md5
+            }) == nil)
+        }
+        
+        guard !itemsToSync.isEmpty else {
+            return
+        }
+        
+        WrapItemOperatonManager.default.startOperationWith(type: .sync, allOperations: itemsToSync.count, completedOperations: 0)
+        let allOperationCount = itemsToSync.count
+        var completedOperationCount = 0
+        let operations: [UploadOperations] = itemsToSync.flatMap {
+            let operation = UploadOperations(item: $0, uploadType: .autoSync, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, success: { (finishedOperation) in
+                completedOperationCount = completedOperationCount + 1
+                    WrapItemOperatonManager.default.setProgressForOperationWith(type: .sync,
+                                                                                allOperations: allOperationCount,
+                                                                                completedOperations: completedOperationCount)
+            }, fail: { (fail) in
+                completedOperationCount = completedOperationCount + 1
+            })
+            operation.queuePriority = .normal
+            return operation
+        }
+        uploadOperations.append(contentsOf: operations)
+        
+        dispatchQueue.async {
+            self.uploadQueue.addOperations(operations, waitUntilFinished: true)
+            success?()
+            WrapItemOperatonManager.default.stopOperationWithType(type: .sync)
+        }
+        
     }
     
     func cancelOperations(){
