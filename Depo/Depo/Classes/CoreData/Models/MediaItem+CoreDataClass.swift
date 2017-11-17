@@ -33,7 +33,7 @@ public class MediaItem: NSManagedObject {
 
         nameValue = wrapData.name
 
-        let char: Character = (nameValue!).characters.first ?? " "
+        let char: Character = nameValue?.first ?? " "
         
         fileNameFirstChar = String(describing: char).uppercased()
         

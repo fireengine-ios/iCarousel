@@ -16,14 +16,9 @@ class CoreDataStack: NSObject {
     
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         
-        guard let modelURL = Bundle.main.url(forResource: "LifeBoxModel",
-                                             withExtension:"momd"),
-        let mom = NSManagedObjectModel(contentsOf: modelURL)
-            else {
-                fatalError("Error loading model from bundle")
-        }
-        
-        
+        guard let modelURL = Bundle.main.url(forResource: "LifeBoxModel", withExtension:"momd"),
+            let mom = NSManagedObjectModel(contentsOf: modelURL)
+            else { fatalError("Error loading model from bundle") }
 
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: mom)
         
@@ -138,9 +133,6 @@ class CoreDataStack: NSObject {
         let saveBlock: () -> Void = {
             do {
                 try context.save()
-                debugPrint("!!!!Number of saved MediaItem ",
-                           try?
-                            CoreDataStack.default.mainContext.fetch(NSFetchRequest(entityName: "MediaItem")).count)
             } catch {
                 print("Error saving context ___ ")
             }
@@ -158,7 +150,6 @@ class CoreDataStack: NSObject {
             DispatchQueue.main.async {
 //                try? self.mainContext.save()
                 self.saveMainContext()
-
             }
             return
         }

@@ -93,7 +93,7 @@ class UserInfoSubViewViewController: UIViewController, UserInfoSubViewViewInput 
         }
         
         if let surName_ = userInfo.surname{
-            if (string.characters.count > 0){
+            if (string.count > 0){
                 string = string + " "
             }
             string = string + surName_

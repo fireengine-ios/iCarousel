@@ -121,7 +121,7 @@ class PhoneVereficationViewController: UIViewController, PhoneVereficationViewIn
     
     @objc func nextBarButtonPressed(sender: Any?) {
         codeVereficationField.resignFirstResponder()
-        guard let code = codeVereficationField.text, code.characters.count == 6 else {
+        guard let code = codeVereficationField.text, code.count == 6 else {
             return
         }
         output.nextButtonPressed(withVereficationCode: code)
@@ -171,7 +171,7 @@ extension PhoneVereficationViewController: UITextFieldDelegate, SmartTimerLabelD
         
         let resultStr = (textField.text as NSString?)?.replacingCharacters(in: range, with: string)
         
-        if ((resultStr as String?)?.characters.count)! == inputTextLimit,
+        if ((resultStr as String?)?.count)! == inputTextLimit,
                 !timerLabel.isDead {
 
             output.vereficationCodeEntered(code: resultStr ?? "")
@@ -179,7 +179,7 @@ extension PhoneVereficationViewController: UITextFieldDelegate, SmartTimerLabelD
             DispatchQueue.main.async { [weak self] in
                 self?.codeVereficationField.resignFirstResponder()
             }
-        } else if ((resultStr as String?)?.characters.count)! > inputTextLimit {
+        } else if ((resultStr as String?)?.count)! > inputTextLimit {
             return false
         } else {
             output.vereficationCodeNotReady()

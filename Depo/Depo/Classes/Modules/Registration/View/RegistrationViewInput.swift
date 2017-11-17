@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol RegistrationViewInput: class, Waiting, RegistrationViewDelegate {
+protocol RegistrationViewInput: class, RegistrationViewDelegate, Waiting {
     
     func setupInitialState(withModels: [BaseCellModel])
     

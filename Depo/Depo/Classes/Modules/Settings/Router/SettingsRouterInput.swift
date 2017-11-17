@@ -27,4 +27,10 @@ protocol SettingsRouterInput {
     func goToActivityTimeline()
     
     func goToPackages()
+    
+    func goToPasscode(delegate: PasscodeEnterDelegate?, type: PasscodeInputViewType)
+    
+    func goToPasscodeSettings()
+    
+    func closeEnterPasscode()
 }

@@ -22,11 +22,13 @@ class CreateStoryNamePresenter: CreateStoryNameModuleInput, CreateStoryNameViewO
     }
     
     func viewIsReady() {
-
+        
     }
     
     func showEmptyNamePopup(){
-        custoPopUp.showCustomAlert(withText: TextConstants.createStoryEmptyTextError, okButtonText: TextConstants.createFolderEmptyFolderButtonText)
+        custoPopUp.showCustomAlert(
+            withText: TextConstants.createStoryEmptyTextError,
+            okButtonText: TextConstants.createFolderEmptyFolderButtonText)
     }
     
     func onCreateStory(storyName: String?){

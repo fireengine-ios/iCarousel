@@ -71,7 +71,7 @@ class Sesssion: NSObject, NSCoding {
         didSet {
             if authToken != nil{
                 debugPrint("token is ", authToken!)
-                authTokenExpirationTime = Date().timeIntervalSince1970 + NumericConstants.durationOfLifeSession
+                authTokenExpirationTime = Date().timeIntervalSince1970 + NumericConstants.lifeSessionDuration
             }else{
                 debugPrint("token is empty")
             }

@@ -137,7 +137,7 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
             output.setSelectedItemIndex(selectedIndex: selectedIndex)
             
             setVisibilityOfNotVisibleViws(visibility: true)
-            UIView.animate(withDuration: 0.3, animations: {
+            UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                 for view in self.views{
                     view.frame = CGRect(x: view.frame.origin.x - self.viewForContent.frame.size.width, y: view.frame.origin.y, width: view.frame.size.width, height: view.frame.size.height)
                 }
@@ -169,7 +169,7 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
             selectedIndex = selectedIndex - 1
             output.setSelectedItemIndex(selectedIndex: selectedIndex)
             setVisibilityOfNotVisibleViws(visibility: true)
-            UIView.animate(withDuration: 0.3, animations: {
+            UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                 for view in self.views{
                     view.frame = CGRect(x: view.frame.origin.x + self.viewForContent.frame.size.width, y: view.frame.origin.y, width: view.frame.size.width, height: view.frame.size.height)
                 }

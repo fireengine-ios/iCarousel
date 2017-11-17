@@ -47,7 +47,7 @@ class PhotosOrderCollectionViewCell: UICollectionViewCell {
     }
     
     func setSelection(selection: Bool){
-        UIView.animate(withDuration: NumericConstants.durationOfAnimation) {
+        UIView.animate(withDuration: NumericConstants.animationDuration) {
             self.selectionView.alpha = selection ? 1 : 0
         }
     }
