@@ -11,8 +11,11 @@ class CreateStoryPhotoSelectionPresenter: BaseFilesGreedPresenter, CreateStorySe
     var photoStory: PhotoStory?
     
     override func viewIsReady(collectionView: UICollectionView) {
+        dataSource = PhotoSelectionDataSource()
+
         super.viewIsReady(collectionView: collectionView)
         
+        dataSource.canReselect = true
         dataSource.maxSelectionCount = NumericConstants.maxNumberPhotosInStory
         dataSource.enableSelectionOnHeader = false
         dataSource.setSelectionState(selectionState: true)
@@ -59,6 +62,6 @@ class CreateStoryPhotoSelectionPresenter: BaseFilesGreedPresenter, CreateStorySe
     
     override func getContentWithSuccess(array: [[BaseDataSourceItem]]){
         //DBDROP
-        super.getContentWithSuccess(items: [])
+        super.getContentWithSuccess(array: array)
     }
 }
