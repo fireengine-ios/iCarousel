@@ -15,7 +15,6 @@ final class UploadService: BaseRequestService {
     
     private let dispatchQueue: DispatchQueue
     
-    private let syncQueue: OperationQueue
     private let uploadQueue: OperationQueue
     private var uploadOperations = [UploadOperations]()
 //    private var uploadOnDemandOperations = [UploadOperations]()
@@ -24,8 +23,6 @@ final class UploadService: BaseRequestService {
         
         uploadQueue = OperationQueue()
         uploadQueue.maxConcurrentOperationCount = 1
-        syncQueue = OperationQueue()
-        syncQueue.maxConcurrentOperationCount = 1
         
         dispatchQueue = DispatchQueue(label: "Upload Queue")
         super.init()
@@ -105,39 +102,66 @@ final class UploadService: BaseRequestService {
     
     private func uploadFileList(items: [WrapData], uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", success: FileOperationSucces?, fail: FailResponse? ) {
         // filter all items which md5's are not in the uploadOperations
-        let itemsToSync = items.filter { (item) -> Bool in
+        let itemsToUpload = items.filter { (item) -> Bool in
             return (self.uploadOperations.first(where: { (operation) -> Bool in
                 if operation.item.md5 == item.md5 && operation.uploadType.contains(.autoSync) && !operation.isExecuting {
                     operation.cancel()
-                    return true
+                    
+                    if let index = self.uploadOperations.index(of: operation){
+                        self.uploadOperations.remove(at: index)
+                    }
+                    return false
                 }
-                return false
+                return operation.item.md5 == item.md5
             }) == nil)
         }
         
-        guard !itemsToSync.isEmpty else {
+        guard !itemsToUpload.isEmpty else {
             return
         }
         
-        WrapItemOperatonManager.default.startOperationWith(type: .upload, allOperations: itemsToSync.count, completedOperations: 0)
-        let allOperationCount = itemsToSync.count
+        WrapItemOperatonManager.default.startOperationWith(type: .upload, allOperations: itemsToUpload.count, completedOperations: 0)
+        let allOperationCount = itemsToUpload.count
         var completedOperationCount = 0
-        let operations: [UploadOperations] = itemsToSync.flatMap {
+        let operations: [UploadOperations] = itemsToUpload.flatMap {
             let operation = UploadOperations(item: $0, uploadType: .fromHomePage, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, success: { (finishedOperation) in
                 completedOperationCount = completedOperationCount + 1
                 WrapItemOperatonManager.default.setProgressForOperationWith(type: .upload,
                                                                             allOperations: allOperationCount,
                                                                             completedOperations: completedOperationCount)
+                
+                if let index = self.uploadOperations.index(of: finishedOperation){
+                    self.uploadOperations.remove(at: index)
+                }
             }, fail: { (fail) in
                 completedOperationCount = completedOperationCount + 1
             })
             operation.queuePriority = .high
             return operation
         }
-        uploadOperations.append(contentsOf: operations)
+        
+        if (operations.count > 1){
+            var i = 0
+            while i < operations.count - 1{
+                let first = operations[i]
+                let second = operations[i + 1]
+                second.addDependency(first)
+                i += 1
+            }
+        }
+        
+        if (self.uploadQueue.operations.count > 0) && (operations.count > 0) {
+            let lastUploadOperation = operations.last!
+            for operation in self.uploadQueue.operations {
+                operation.addDependency(lastUploadOperation)
+            }
+        }
+        
+        uploadOperations.insert(contentsOf: operations, at: 0)
         
         dispatchQueue.async {
             self.uploadQueue.addOperations(operations, waitUntilFinished: true)
+            
             success?()
             WrapItemOperatonManager.default.stopOperationWithType(type: .upload)
         }
@@ -164,14 +188,17 @@ final class UploadService: BaseRequestService {
                     WrapItemOperatonManager.default.setProgressForOperationWith(type: .sync,
                                                                                 allOperations: allOperationCount,
                                                                                 completedOperations: completedOperationCount)
+                if let index = self.uploadOperations.index(of: finishedOperation){
+                    self.uploadOperations.remove(at: index)
+                }
             }, fail: { (fail) in
                 completedOperationCount = completedOperationCount + 1
+                
             })
             operation.queuePriority = .normal
             return operation
         }
         uploadOperations.append(contentsOf: operations)
-        
         dispatchQueue.async {
             self.uploadQueue.addOperations(operations, waitUntilFinished: true)
             success?()
