@@ -14,4 +14,6 @@ protocol SettingsInteractorInput {
     func onLogout()
     
     func uploadPhoto(withPhoto photo: Data)
+    
+    func checkConnectedToNetwork()
 }
