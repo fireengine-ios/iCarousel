@@ -390,6 +390,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 actionTypes.remove(at: index)
             }
             
+            let noSyncItems = selectedItems.filter{ $0.syncStatus != SyncWrapperedStatus.synced }
+            if noSyncItems.isEmpty {
+                actionTypes.append(.print)
+            }
             alertSheetModule?.showAlertSheet(with: actionTypes,
                                              items: selectedItems,
                                              presentedBy: sender,
@@ -465,6 +469,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func selectModeSelected() {
         view.setupSelectionStyle(isSelection: true)
         dataSource.setSelectionState(selectionState: true)
+    }
+    
+    func printSelected() {
+        router.showPrint(items: selectedItems)
     }
     
     func selectAllModeSelected() {
