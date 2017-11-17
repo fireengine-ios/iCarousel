@@ -12,7 +12,11 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
         let uuids = FreeAppSpace.default.getServerUIDSForLocalitem(localItemsArray: selectedItems)
         
         FileService().details(uuids: uuids, success: { (objects) in
-            print(objects.count)
+            let localFilesForDelete = FreeAppSpace.default.getLocalFiesComaredWithServerObjects(serverObjects: objects, localObjects: selectedItems)
+            print(localFilesForDelete.count)
+            
+            //let list: [String] = localAssetsW.flatMap { $0.localIdentifier }
+            //CoreDataStack.default.removeLocalMediaItemswithAssetID(list: list)
         }) { (error) in
             
         }

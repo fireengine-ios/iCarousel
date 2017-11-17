@@ -168,6 +168,17 @@ class FreeAppSpace {
         return CoreDataStack.default.allLocalItem()
     }
     
+    func getLocalFiesComaredWithServerObjects(serverObjects: [WrapData], localObjects: [BaseDataSourceItem]) -> [BaseDataSourceItem]{
+        var comparedFiles = [BaseDataSourceItem]()
+        let localObjectMD5 = localObjects.map { $0.md5 }
+        for serverObject in serverObjects{
+            if let index = localObjectMD5.index(of: serverObject.md5) {
+                comparedFiles.append(localObjects[index])
+            }
+        }
+        return comparedFiles
+    }
+    
 }
 
 class FreeAppService: RemoteItemsService {
