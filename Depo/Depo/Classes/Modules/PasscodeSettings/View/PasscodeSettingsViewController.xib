@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PasscodeSettingsViewController" customModule="Depo_LifeTech" customModuleProvider="target">
             <connections>
+                <outlet property="biometricsLabel" destination="ydG-LF-VUl" id="Iit-gq-AIX"/>
+                <outlet property="biometricsSwitch" destination="4lc-iZ-AQB" id="qTv-q1-yde"/>
                 <outlet property="changePasscodeView" destination="jMc-IM-6FD" id="e53-kz-0sq"/>
                 <outlet property="passcodeSwitch" destination="INF-fe-wul" id="a1y-ih-KXM"/>
                 <outlet property="passcodeView" destination="QzT-aa-nxV" id="dRy-xX-3w4"/>
                 <outlet property="setPasscodeView" destination="H6p-r0-aNi" id="Gut-wD-KzX"/>
-                <outlet property="touchIdSwitch" destination="4lc-iZ-AQB" id="Tjq-az-j1v"/>
                 <outlet property="touchIdView" destination="52L-4V-mCz" id="X9O-H5-h27"/>
                 <outlet property="view" destination="iN0-l3-epB" id="8ZT-YB-rW4"/>
             </connections>
@@ -105,8 +106,8 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="52L-4V-mCz" userLabel="TouchID View">
                     <rect key="frame" x="0.0" y="188" width="375" height="62"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable Touch ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ydG-LF-VUl">
-                            <rect key="frame" x="15" y="20" width="123.5" height="21"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable biometrics" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ydG-LF-VUl">
+                            <rect key="frame" x="15" y="20" width="137" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -114,7 +115,7 @@
                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4lc-iZ-AQB">
                             <rect key="frame" x="307" y="15" width="51" height="31"/>
                             <connections>
-                                <action selector="actionTouchIdSwitch:" destination="-1" eventType="valueChanged" id="NGu-5G-Nc2"/>
+                                <action selector="actionBiometricsSwitch:" destination="-1" eventType="valueChanged" id="ecj-Bq-fLv"/>
                             </connections>
                         </switch>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ABE-K9-GpV" userLabel="line">

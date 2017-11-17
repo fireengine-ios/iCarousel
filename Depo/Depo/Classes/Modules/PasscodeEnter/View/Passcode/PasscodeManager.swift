@@ -51,7 +51,6 @@ extension PasscodeManagerImp: PasscodeManager {
         self.state = state
         view.update(for: state)
         view.passcodeInput.clearPasscode()
-        //storage.clearPasscode()
         
         if state.isBiometricsAllowed {
             authenticateWithBiometrics()
@@ -63,7 +62,11 @@ extension PasscodeManagerImp: PasscodeManager {
     }
     
     func authenticateWithBiometrics() {
-        self.view.resignResponder()
+        if !touchIdManager.isAvailable || !touchIdManager.isEnabledBiometrics {
+            return
+        }
+        view.resignResponder()
+        
         touchIdManager.authenticate(reason: state.title) { success in
             DispatchQueue.main.async {
                 if success {
@@ -83,7 +86,6 @@ extension PasscodeManagerImp: PasscodeManager {
 extension PasscodeManagerImp: PasscodeInputViewDelegate {
     func finish(with passcode: Passcode) {
         state.finish(with: passcode, manager: self)
-        //        storage.save(passcode: passcode)
     }
     func finishErrorAnimation() {
         view.passcodeInput.clearPasscode()

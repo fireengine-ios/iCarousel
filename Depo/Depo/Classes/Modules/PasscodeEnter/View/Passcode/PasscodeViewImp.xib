@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PasscodeViewImp" customModule="LifeBox_new" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PasscodeViewImp" customModule="Depo_LifeTech" customModuleProvider="target">
             <connections>
                 <outlet property="passcodeErrorLabel" destination="Ld8-b9-ejs" id="YVb-U8-PCT"/>
                 <outlet property="passcodeInputView" destination="czr-rG-Jde" id="2Fl-IW-56T"/>
@@ -24,10 +24,11 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="isq-lG-wUK">
                     <rect key="frame" x="0.0" y="0.0" width="210" height="234"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="czr-rG-Jde" customClass="PasscodeInputView" customModule="LifeBox_new" customModuleProvider="target">
-                            <rect key="frame" x="28" y="184" width="154" height="50"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="czr-rG-Jde" customClass="PasscodeInputView" customModule="Depo_LifeTech" customModuleProvider="target">
+                            <rect key="frame" x="25" y="184" width="160" height="50"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstAttribute="width" constant="160" id="5oK-NG-Qxa"/>
                                 <constraint firstAttribute="height" constant="50" id="RFx-IS-thL"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
@@ -43,20 +44,19 @@
                                 <userDefinedRuntimeAttribute type="color" keyPath="dotColor">
                                     <color key="value" red="0.38853236610000003" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="boolean" keyPath="isActive" value="YES"/>
                                 <userDefinedRuntimeAttribute type="color" keyPath="errorColor">
                                     <color key="value" red="1" green="0.34548132100000001" blue="0.3199073408" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4xx-Vi-aUo">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4xx-Vi-aUo" customClass="SpringLabel" customModule="Depo_LifeTech" customModuleProvider="target">
                             <rect key="frame" x="8" y="155" width="194" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ld8-b9-ejs">
-                            <rect key="frame" x="8" y="126.5" width="194" height="20.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ld8-b9-ejs">
+                            <rect key="frame" x="8" y="147" width="194" height="0.0"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -64,12 +64,11 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="czr-rG-Jde" firstAttribute="leading" secondItem="isq-lG-wUK" secondAttribute="leading" constant="28" id="2Jg-S4-sn7"/>
+                        <constraint firstItem="czr-rG-Jde" firstAttribute="centerX" secondItem="isq-lG-wUK" secondAttribute="centerX" id="1Qd-vd-J16"/>
                         <constraint firstAttribute="trailing" secondItem="4xx-Vi-aUo" secondAttribute="trailing" constant="8" id="4Vm-nV-cqg"/>
                         <constraint firstAttribute="trailing" secondItem="Ld8-b9-ejs" secondAttribute="trailing" constant="8" id="Kfw-ke-fY5"/>
                         <constraint firstItem="4xx-Vi-aUo" firstAttribute="top" secondItem="Ld8-b9-ejs" secondAttribute="bottom" constant="8" id="VDf-gg-FsZ"/>
                         <constraint firstAttribute="bottom" secondItem="czr-rG-Jde" secondAttribute="bottom" id="Z0s-yW-e0W"/>
-                        <constraint firstAttribute="trailing" secondItem="czr-rG-Jde" secondAttribute="trailing" constant="28" id="c72-MP-07I"/>
                         <constraint firstItem="4xx-Vi-aUo" firstAttribute="leading" secondItem="isq-lG-wUK" secondAttribute="leading" constant="8" id="dfz-i0-GTC"/>
                         <constraint firstItem="czr-rG-Jde" firstAttribute="top" secondItem="4xx-Vi-aUo" secondAttribute="bottom" constant="8" id="qYv-IO-Mth"/>
                         <constraint firstItem="Ld8-b9-ejs" firstAttribute="leading" secondItem="isq-lG-wUK" secondAttribute="leading" constant="8" id="vU9-rh-LnG"/>

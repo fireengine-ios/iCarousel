@@ -32,7 +32,7 @@ protocol PasscodeState {
 }
 
 final class ValidatePasscodeState: PasscodeState {
-    let title = "Enter the password"
+    let title = TextConstants.passcodeEnter
     let isBiometricsAllowed = true
     
     func finish(with passcode: Passcode, manager: PasscodeManager) {
@@ -41,7 +41,7 @@ final class ValidatePasscodeState: PasscodeState {
             manager.delegate?.passcodeLockDidSucceed(manager)
         } else {
             manager.storage.numberOfTries -= 1
-            if manager.storage.numberOfTries == 0 {
+            if manager.storage.numberOfTries <= 0 {
                 manager.delegate?.passcodeLockDidFailNumberOfTries(manager)
             }
             
@@ -51,7 +51,7 @@ final class ValidatePasscodeState: PasscodeState {
 }
 
 final class OldPasscodeState: PasscodeState {
-    let title = "Enter old password"
+    let title = TextConstants.passcodeEnterOld
     let isBiometricsAllowed = false
     
     func finish(with passcode: Passcode, manager: PasscodeManager) {
@@ -60,7 +60,7 @@ final class OldPasscodeState: PasscodeState {
             manager.changeState(to: SetNewPasscodeState())
         } else {
             manager.storage.numberOfTries -= 1
-            if manager.storage.numberOfTries == 0 {
+            if manager.storage.numberOfTries <= 0 {
                 manager.delegate?.passcodeLockDidFailNumberOfTries(manager)
             }
             
@@ -70,7 +70,7 @@ final class OldPasscodeState: PasscodeState {
 }
 
 class SetNewPasscodeState: PasscodeState {
-    let title = "Enter new password"
+    let title = TextConstants.passcodeEnterNew
     let isBiometricsAllowed = false
     
     func finish(with passcode: Passcode, manager: PasscodeManager) {
@@ -86,10 +86,8 @@ class CreatePasscodeState: SetNewPasscodeState {
     }
 }
 
-
-
 class ConfirmNewPasscodeState: PasscodeState {
-    let title = "Confirm password"
+    let title = TextConstants.passcodeConfirm
     let isBiometricsAllowed = false
     
     let passcode: Passcode
@@ -99,8 +97,14 @@ class ConfirmNewPasscodeState: PasscodeState {
     
     func finish(with passcode: Passcode, manager: PasscodeManager) {
         if self.passcode == passcode {
+            UIApplication.shared.beginIgnoringInteractionEvents()
             manager.storage.save(passcode: passcode)
-            manager.delegate?.passcodeLockDidSucceed(manager)
+            manager.view.passcodeOutput.animateError(with: TextConstants.passcodeChanged)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6 ) {
+                UIApplication.shared.endIgnoringInteractionEvents()
+                manager.delegate?.passcodeLockDidSucceed(manager)
+            }
+            
         } else {
             manager.changeState(to: OldPasscodeState())
             manager.delegate?.passcodeLockDidFail(manager)
@@ -111,14 +115,17 @@ class ConfirmNewPasscodeState: PasscodeState {
 class ConfirmCreateingNewPasscodeState: ConfirmNewPasscodeState {
     override func finish(with passcode: Passcode, manager: PasscodeManager) {
         if self.passcode == passcode {
+            UIApplication.shared.beginIgnoringInteractionEvents()
             manager.storage.save(passcode: passcode)
-            manager.delegate?.passcodeLockDidSucceed(manager)
+            manager.view.passcodeOutput.animateError(with: TextConstants.passcodeSet)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6 ) {
+                UIApplication.shared.endIgnoringInteractionEvents()
+                manager.delegate?.passcodeLockDidSucceed(manager)
+            }
+            
         } else {
             manager.changeState(to: CreatePasscodeState())
             manager.delegate?.passcodeLockDidFail(manager)
         }
     }
 }
-
-
-

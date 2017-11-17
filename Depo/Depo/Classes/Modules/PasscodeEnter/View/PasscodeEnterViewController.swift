@@ -26,37 +26,39 @@ class PasscodeEnterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setTitle(withString: TextConstants.passcodeEnterTitle)
         passcodeManager = PasscodeManagerImp(passcodeView: passcodeViewImp, state: state)
         passcodeManager.delegate = self
     }
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        if !TouchIdManager().isEnabledTouchId {
-//            passcodeViewImp.becomeResponder()
-//        }
-//    }
-
 }
 
 // MARK: PasscodeEnterViewInput
 extension PasscodeEnterViewController: PasscodeManagerDelegate {
     func passcodeLockDidFailNumberOfTries(_ lock: PasscodeManager) {
-        print("logout")
+        AuthenticationService().logout {
+            DispatchQueue.main.async {
+                CoreDataStack.default.clearDataBase()
+                let router = RouterVC()
+                router.setNavigationController(controller: router.onboardingScreen)
+                self.view.window?.endEditing(true)
+                self.passcodeManager.storage.clearPasscode()
+                self.passcodeManager.storage.numberOfTries = self.passcodeManager.maximumInccorectPasscodeAttempts
+            }
+        }
     }
     
     func passcodeLockDidSucceed(_ lock: PasscodeManager) {
+        lock.view.resignResponder()
         success?()
     }
     
     func passcodeLockDidFail(_ lock: PasscodeManager) {
-        print("- numberOfTries", lock.storage.numberOfTries)
         lock.view.passcodeInput.animateError()
         if lock.storage.numberOfTries != lock.maximumInccorectPasscodeAttempts {
             lock.view.passcodeOutput.animateError(with: lock.storage.numberOfTries)
         } else {
-            lock.view.passcodeOutput.animateError(with: "Passcodes don't match, please try again")
+            lock.view.passcodeOutput.animateError(with: TextConstants.passcodeDontMatch)
         }
     }
 }
-

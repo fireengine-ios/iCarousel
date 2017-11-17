@@ -85,6 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ApplicationSessionManager.shared().checkSession()
     }
     func applicationWillTerminate(_ application: UIApplication) {
+        UserDefaults.standard.synchronize()
     }
     
     func applicationDidReceiveMemoryWarning(_ application: UIApplication) {

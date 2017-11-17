@@ -22,10 +22,9 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lFW-LC-v1I" customClass="PasscodeViewImp" customModule="Depo_LifeTech" customModuleProvider="target">
-                    <rect key="frame" x="55" y="57" width="210" height="140"/>
+                    <rect key="frame" x="20" y="57" width="280" height="140"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="210" id="ZrU-Jo-Meo"/>
                         <constraint firstAttribute="height" constant="140" id="pE1-li-CSD"/>
                     </constraints>
                 </view>
@@ -42,7 +41,9 @@
                 <constraint firstItem="THb-wS-2Om" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="1:10" id="0Ye-yV-FyY"/>
                 <constraint firstItem="lFW-LC-v1I" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="5KE-51-E8k"/>
                 <constraint firstItem="THb-wS-2Om" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="W8r-wS-O4r"/>
+                <constraint firstAttribute="trailing" secondItem="lFW-LC-v1I" secondAttribute="trailing" constant="20" id="dfG-NU-o1P"/>
                 <constraint firstItem="THb-wS-2Om" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="hoH-aN-gja"/>
+                <constraint firstItem="lFW-LC-v1I" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="q25-ZL-ETe"/>
                 <constraint firstItem="lFW-LC-v1I" firstAttribute="top" secondItem="THb-wS-2Om" secondAttribute="bottom" id="wX9-eu-rcp"/>
             </constraints>
         </view>

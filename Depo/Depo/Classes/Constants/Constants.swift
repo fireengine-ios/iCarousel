@@ -528,6 +528,20 @@ struct TextConstants {
     static let errorInvalidPasswordBelowLimit = "The password consists of less number of characters than is allowed. The length allowed is provided in the value field of the response."
     static let errorManyRequest = "It indicates that sending OTP procedure is repeated numerously. It can be tried again later but a short amount of time should be spent before retry."
     static let errorUnknown = "Unknown error"
+    
+    static let passcode = "Passcode"
+    static let passcodeEnter = "Enter lifebox passcode"
+    static let passcodeEnterOld = "Enter old lifebox passcode"
+    static let passcodeEnterNew = "Enter new lifebox passcode"
+    static let passcodeConfirm = "Confirm lifebox passcode"
+    static let passcodeChanged = "Passcode is changed successfully"
+    static let passcodeSet = "You successfully set passcode"
+    static let passcodeDontMatch = "Passcodes don't match, please try again"
+    static let passcodeEnterTitle = "Enter passcode"
+    static let passcodeBiometricsDefault = "To enter passcode"
+    static let passcodeEnableFaceID = "Enable Face ID"
+    static let passcodeEnableTouchID = "Enable Touch ID"
+    static let passcodeNumberOfTries = "You have %@ attempts left"
 }
 
 

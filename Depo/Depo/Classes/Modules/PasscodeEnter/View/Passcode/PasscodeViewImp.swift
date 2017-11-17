@@ -26,6 +26,12 @@ final class PasscodeViewImp: UIView, FromNib {
     
     private func setup() {
         setupFromNib()
+        
+        passcodeInputView.becomeFirstResponder()
+        passcodeErrorLabel.backgroundColor = UIColor.darkGray
+        passcodeErrorLabel.textColor = UIColor.white
+        passcodeErrorLabel.layer.cornerRadius = 5
+        passcodeErrorLabel.layer.masksToBounds = true
     }
     
     lazy var passcodeOutput: PasscodeOutput = {
@@ -44,9 +50,6 @@ extension PasscodeViewImp: PasscodeView {
         passcodeInputView.resignFirstResponder()
     }
     
-//    var passcodeOutput: PasscodeOutput {
-//        return passcodeOutputLabel
-//    }
     var passcodeInput: PasscodeInput {
         return passcodeInputView
     }
@@ -64,13 +67,23 @@ final class PasscodeOutputImp: PasscodeOutput {
     }
     
     func animateError(with numberOfTries: Int) {
-        animateError(with: "\(numberOfTries)")
+        let text = String(format: TextConstants.passcodeNumberOfTries, numberOfTries)
+        animateError(with: text)
     }
     
     func animateError(with text: String) {
+        
+        self.passcodeErrorLabel.alpha = 0
+        UIView.animate(withDuration: 0.3) {
+            self.passcodeErrorLabel.alpha = 1
+        }
+        
         passcodeErrorLabel.text = text
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.passcodeErrorLabel.text = ""
+            UIView.animate(withDuration: 0.3) {
+                self.passcodeErrorLabel.alpha = 0
+            }
         }
     }
 }

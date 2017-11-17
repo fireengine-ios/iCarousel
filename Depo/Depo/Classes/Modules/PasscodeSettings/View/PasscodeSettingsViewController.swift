@@ -22,18 +22,21 @@ class PasscodeSettingsViewController: UIViewController {
     @IBOutlet weak var setPasscodeView: UIView!
     
     @IBOutlet weak var passcodeSwitch: UISwitch!
-    @IBOutlet weak var touchIdSwitch: UISwitch!
+    @IBOutlet weak var biometricsSwitch: UISwitch!
+    @IBOutlet weak var biometricsLabel: UILabel!
     
     var isAvailableTouchId = false
     let touchIdManager = TouchIdManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setTitle(withString: "Passcode")
+        
+        setTitle(withString: TextConstants.passcode)
         isAvailableTouchId = touchIdManager.isAvailable
         output.viewIsReady()
         
-
+        let biometricsText = touchIdManager.isAvailableFaceID ? TextConstants.passcodeEnableFaceID : TextConstants.passcodeEnableTouchID
+        biometricsLabel.text = biometricsText
     }
     
     let storage = PasscodeStorageDefaults()
@@ -41,14 +44,10 @@ class PasscodeSettingsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if storage.isEmpty {
-            setup(state: .set)
-        } else {
-            setup(state: .ready)
-        }
+        storage.isEmpty ? setup(state: .set) : setup(state: .ready)
         
         passcodeSwitch.isOn = !PasscodeStorageDefaults().isEmpty
-        touchIdSwitch.isOn = touchIdManager.isEnabledTouchId
+        biometricsSwitch.isOn = touchIdManager.isEnabledBiometrics
     }
 
     
@@ -67,7 +66,7 @@ class PasscodeSettingsViewController: UIViewController {
 //        output.turnOffPasscode()
     }
     
-    @IBAction func actionTouchIdSwitch(_ sender: UISwitch) {
+    @IBAction func actionBiometricsSwitch(_ sender: UISwitch) {
         output.setTouchId(enable: sender.isOn)
     }
     

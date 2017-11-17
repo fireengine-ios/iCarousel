@@ -28,7 +28,7 @@ extension PasscodeSettingsPresenter: PasscodeSettingsViewOutput {
     }
     
     func setTouchId(enable: Bool) {
-        TouchIdManager().isEnabledTouchId = enable
+        TouchIdManager().isEnabledBiometrics = enable
     }
     
     func turnOffPasscode() {

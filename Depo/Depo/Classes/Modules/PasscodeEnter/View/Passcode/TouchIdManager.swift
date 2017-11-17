@@ -12,7 +12,7 @@ import LocalAuthentication
 final class TouchIdManager {
     
     private static let isEnabledTouchIdKey = "isEnabledTouchIdKey"
-    var isEnabledTouchId: Bool {
+    var isEnabledBiometrics: Bool {
         get { return UserDefaults.standard.bool(forKey: TouchIdManager.isEnabledTouchIdKey) }
         set { UserDefaults.standard.set(newValue, forKey: TouchIdManager.isEnabledTouchIdKey) }
     }
@@ -29,8 +29,8 @@ final class TouchIdManager {
         }
     }
     
-    func authenticate(reason: String = "For passcode", handler: @escaping (Bool) -> Void) {
-        if !isAvailable || !isEnabledTouchId {
+    func authenticate(reason: String = TextConstants.passcodeBiometricsDefault, handler: @escaping (Bool) -> Void) {
+        if !isAvailable || !isEnabledBiometrics {
             return handler(false)
         }
         
