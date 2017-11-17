@@ -63,7 +63,7 @@ class SelectNameViewController: BaseViewController, SelectNameViewInput, UITextF
         
         var flag = false
         if let string = textField.text{
-            if (string.characters.count != 0) {
+            if (string.count != 0) {
                 output.onNextButton(name: string)
                 flag = true
             }

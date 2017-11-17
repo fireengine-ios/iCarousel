@@ -67,7 +67,7 @@ final class PasscodeOutputImp: PasscodeOutput {
     }
     
     func animateError(with numberOfTries: Int) {
-        let text = String(format: TextConstants.passcodeNumberOfTries, numberOfTries)
+        let text = String(format: TextConstants.passcodeNumberOfTries, numberOfTries.description)
         animateError(with: text)
     }
     

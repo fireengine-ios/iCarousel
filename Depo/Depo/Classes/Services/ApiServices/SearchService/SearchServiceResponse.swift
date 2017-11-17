@@ -107,8 +107,7 @@ class BaseMetaData: ObjectRequestResponse {
         album = json?[SearchJsonKey.Album].string
         title = json?[SearchJsonKey.Title].string
         
-        if let durStr = json?[SearchJsonKey.Duration].stringValue,
-            (durStr.characters.count > 0) {
+        if let durStr = json?[SearchJsonKey.Duration].stringValue, durStr.count > 0 {
             duration = Double( Double(durStr)! / 1000.0)
         }
         

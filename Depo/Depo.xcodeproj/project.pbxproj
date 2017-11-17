@@ -448,13 +448,13 @@
 		8CF87D5F1F4AFAFB001FDB19 /* LBAlbumLikePreviewSliderDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF87D5E1F4AFAFB001FDB19 /* LBAlbumLikePreviewSliderDataStorage.swift */; };
 		8CF89EF91F1351A800F1A2D0 /* LoginPhoneMailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF89EF81F1351A800F1A2D0 /* LoginPhoneMailCell.swift */; };
 		8CFF866B1F0F874F00520D18 /* ApplicationSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFF866A1F0F874F00520D18 /* ApplicationSession.swift */; };
-		8CFF86891F0F96E600520D18 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CFF86711F0F96E600520D18 /* Contact.m */; };
+		8CFF86891F0F96E600520D18 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CFF86711F0F96E600520D18 /* Contact.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		8CFF868A1F0F96E600520D18 /* ContactDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CFF86731F0F96E600520D18 /* ContactDevice.m */; };
-		8CFF868B1F0F96E600520D18 /* ContactSyncSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CFF86751F0F96E600520D18 /* ContactSyncSDK.m */; };
+		8CFF868B1F0F96E600520D18 /* ContactSyncSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CFF86751F0F96E600520D18 /* ContactSyncSDK.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		8CFF868C1F0F96E600520D18 /* ContactUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CFF86771F0F96E600520D18 /* ContactUtil.m */; };
 		8CFF868D1F0F96E600520D18 /* GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CFF86791F0F96E600520D18 /* GZIP.m */; };
 		8CFF868E1F0F96E600520D18 /* SyncAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CFF867B1F0F96E600520D18 /* SyncAdapter.m */; };
-		8CFF868F1F0F96E600520D18 /* SyncDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CFF867E1F0F96E600520D18 /* SyncDB.m */; };
+		8CFF868F1F0F96E600520D18 /* SyncDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CFF867E1F0F96E600520D18 /* SyncDB.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		8CFF86901F0F96E600520D18 /* SyncDBUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CFF86801F0F96E600520D18 /* SyncDBUtils.m */; };
 		8CFF86911F0F96E600520D18 /* SyncLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CFF86821F0F96E600520D18 /* SyncLogger.m */; };
 		8CFF86921F0F96E600520D18 /* SyncRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CFF86841F0F96E600520D18 /* SyncRecord.m */; };
@@ -667,7 +667,7 @@
 		CE51AC521EF90853005DCEE0 /* LoginDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B8F1EF014E9006532C8 /* LoginDataStorage.swift */; };
 		CE51AC591EF90853005DCEE0 /* IntroduceSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B7C1EEEB792006532C8 /* IntroduceSubView.swift */; };
 		CE51AC641EF90853005DCEE0 /* LoginInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C741EEE8E7F0086DA84 /* LoginInteractorOutput.swift */; };
-		CE51AC681EF90853005DCEE0 /* CurioNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D60F1DDDD0F600FFE63E /* CurioNotificationManager.m */; };
+		CE51AC681EF90853005DCEE0 /* CurioNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D60F1DDDD0F600FFE63E /* CurioNotificationManager.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		CE51AC6C1EF90853005DCEE0 /* CurioPushData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5247D6131DDDD0F600FFE63E /* CurioPushData.m */; };
 		CE51AC6E1EF90853005DCEE0 /* AutoSyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814641EF7A93E001DFCF0 /* AutoSyncViewController.swift */; };
 		CE51AC6F1EF90853005DCEE0 /* CustomPopUpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8144D1EF41AD3001DFCF0 /* CustomPopUpService.swift */; };

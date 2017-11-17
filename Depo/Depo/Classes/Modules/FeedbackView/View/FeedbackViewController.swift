@@ -219,7 +219,7 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
     }
     
     @IBAction func onSendButton(){
-        if (selectedLanguage != nil)&&(feedbackTextView.text.characters.count > 0){
+        if (selectedLanguage != nil)&&(feedbackTextView.text.count > 0){
             output.onSend(selectedLanguage: selectedLanguage!)
         }else{
             var string = ""
