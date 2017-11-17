@@ -8,10 +8,15 @@
 
 class CreateStoryNameRouter: CreateStoryNameRouterInput {
     
-    func goToSelectionPhotosForStory(story: PhotoStory){
+    func goToSelectionPhotosForStory(story: PhotoStory) {
         let router = RouterVC()
         let controller = router.photoSelection(forStory: story)
         router.pushViewController(viewController: controller)
     }
     
+    func goToPhotosOrderForStory(story: PhotoStory) {
+        let router = RouterVC()
+        let controller = router.photosOrder(forStory: story)
+        router.pushViewController(viewController: controller)
+    }
 }

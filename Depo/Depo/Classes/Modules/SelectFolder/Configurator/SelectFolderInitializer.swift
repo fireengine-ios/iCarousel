@@ -36,7 +36,7 @@ class SelectFolderModuleInitializer: NSObject {
                                fileFilters: filters, bottomBarConfig: bottomBarConfig,
                                router: BaseFilesGreedRouter(), presenter: presentor,
                                interactor: interactor,
-                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select, .selectAll],
+                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
                                                                                      selectionModeTypes: []),
                                topBarConfig: nil)
         if let folder_ = folder{

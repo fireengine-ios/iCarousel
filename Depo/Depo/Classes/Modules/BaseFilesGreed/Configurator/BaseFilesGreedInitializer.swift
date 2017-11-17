@@ -30,7 +30,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
             availableFilter: true,
             showGridListButton: false
         )
-        let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: [.select, .selectAll, .createAlbum],
+        let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: [],
                                                                   selectionModeTypes: [.delete, .createStory, .print])
 
         configurator.configure(viewController: viewController, remoteServices: PhotoAndVideoService(requestSize: 100),
@@ -59,7 +59,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
                                fileFilters: [.fileType(.audio)],
                                bottomBarConfig: bottomBarConfig,
                                topBarConfig: gridListTopBarConfig,
-                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select,.selectAll],
+                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
                                                                                      selectionModeTypes: []))
         viewController.mainTitle = ""
         return viewController
@@ -82,7 +82,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
                                fileFilters: [.fileType(.allDocs)],
                                bottomBarConfig: bottomBarConfig,
                                topBarConfig: gridListTopBarConfig,
-                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [],
+                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
                                                                                      selectionModeTypes: []))
         viewController.mainTitle = ""
         return viewController
@@ -105,7 +105,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
                                fileFilters: [.localStatus(.nonLocal), .parentless ],
                                bottomBarConfig: bottomBarConfig,
                                topBarConfig: gridListTopBarConfig,
-                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select, .selectAll],
+                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
                                                                                      selectionModeTypes: []))
         viewController.mainTitle = TextConstants.homeButtonAllFiles
         return viewController
@@ -129,7 +129,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
                                fileFilters: [.favoriteStatus(.favorites)],
                                 bottomBarConfig: bottomBarConfig,
                                 topBarConfig: gridListTopBarConfig,
-                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select, .selectAll],
+                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
                                                                                       selectionModeTypes: []))
         viewController.mainTitle = TextConstants.homeButtonFavorites
         return viewController
@@ -149,7 +149,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         configurator.configure(viewController: viewController, fileFilters: [.rootFolder(folder.uuid)],
                                bottomBarConfig: bottomBarConfig, router: BaseFilesGreedRouter(),
                                presenter: presenter, interactor: interactor,
-                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select, .selectAll],
+                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
                                                                                      selectionModeTypes: []),
                                topBarConfig: nil)
         viewController.mainTitle = folder.name

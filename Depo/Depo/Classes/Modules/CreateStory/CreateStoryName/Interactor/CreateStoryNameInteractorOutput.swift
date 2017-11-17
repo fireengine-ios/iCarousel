@@ -10,4 +10,5 @@ import Foundation
 
 protocol CreateStoryNameInteractorOutput: class {
     func goToSelectionPhoto(forStory story: PhotoStory)
+    func goToPhotosOrderForStory(story: PhotoStory)
 }
