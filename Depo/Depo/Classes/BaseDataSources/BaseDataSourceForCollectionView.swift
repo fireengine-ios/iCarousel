@@ -168,7 +168,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
                 innerLocalsLoop: for localItem in tempoLocalArray {
                     switch currentSortType {
                     case .timeUp, .timeUpWithoutSection:
+                        
                         if localItem.creationDate! < lastRemoteObject.creationDate! {
+                            debugPrint("!!!---localItem.creationDate! \(localItem.creationDate!), remote last is \(lastRemoteObject.creationDate!)")
                             break innerLocalsLoop
                         }
                     case .timeDown, .timeDownWithoutSection:
@@ -176,11 +178,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
                             break innerLocalsLoop
                         }
                     case .lettersAZ, .albumlettersAZ:
-                        if String(localItem.name!.first!).uppercased() > String(lastRemoteObject.name!.first!).uppercased() {
+                        if String(localItem.name!.first!).uppercased() < String(lastRemoteObject.name!.first!).uppercased() {
                             break innerLocalsLoop
                         }
                     case .lettersZA, .albumlettersZA:
-                        if String(localItem.name!.first!).uppercased() < String(lastRemoteObject.name!.first!).uppercased() {
+                        if String(localItem.name!.first!).uppercased() > String(lastRemoteObject.name!.first!).uppercased() {
                             break innerLocalsLoop
                         }
                     case .sizeAZ:
@@ -192,8 +194,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
                             break innerLocalsLoop
                         }
                     }
-                    
-                    
                     if remoteItemsMD5List.contains(localItem.md5) {
                         if let unwrpedIndex = allLocalItems.index(of: localItem) {
                             allLocalItems.remove(at: unwrpedIndex)
@@ -211,6 +211,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
                 tempoArray.append(remoteItem)
             }
         } else {
+            debugPrint("!!!???PAGINATION ENDED APPEND ALL LOCAL ITEMS")
             tempoArray.append(contentsOf: allLocalItems)
             allLocalItems.removeAll()
         }
