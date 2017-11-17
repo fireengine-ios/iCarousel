@@ -80,9 +80,14 @@ final class UploadService: BaseRequestService {
             let allOperationCount = items.count
             var completedOperationCount = 0
             let operations: [UploadOperations] = items.flatMap {
-                UploadOperations(item: $0, uploadType: uploadType, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, success: {
+                UploadOperations(item: $0, uploadType: uploadType, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, success: { (finishedOperation) in
                     completedOperationCount = completedOperationCount + 1
-                    WrapItemOperatonManager.default.setProgressForOperationWith(type: .upload, allOperations: allOperationCount, completedOperations: completedOperationCount)
+                    
+                    for operationType in finishedOperation.uploadType {
+                        WrapItemOperatonManager.default.setProgressForOperationWith(type: UploadService.convertUploadType(uploadType: operationType),
+                                                                                    allOperations: allOperationCount,
+                                                                                    completedOperations: completedOperationCount)
+                    }
                 }, fail: { (error) in
                     completedOperationCount = completedOperationCount + 1
                     //TODO: Error alert
@@ -105,20 +110,56 @@ final class UploadService: BaseRequestService {
     }
     
     //MARK: -
-    
+    class func convertUploadType(uploadType: UploadType) -> OperationType{
+        switch uploadType {
+        case .autoSync:
+            return .sync
+        default:
+            return .upload
+        }
+    }
     
     func uploadFileList(items: [WrapData], uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", success: FileOperationSucces?, fail: FailResponse? ) {
-
-        WrapItemOperatonManager.default.startOperationWith(type: .upload, allOperations: items.count, completedOperations: 0)
-        let allOperationCount = items.count
+        
+        var itemsForUpload = [WrapData]()
+        
+        for uploadItem in items {
+            var flag = true
+            for operation in self.uploadOperations {
+                if operation.item.md5 == uploadItem.md5{
+                    if (!operation.uploadType.contains(uploadType)){
+                        operation.uploadType.insert(uploadType)
+                        if (UploadService.convertUploadType(uploadType: uploadType) == .upload){
+                            operation.queuePriority = .high
+                        }
+                        flag = false
+                        break
+                    }
+                }
+            }
+            if flag {
+                itemsForUpload.append(uploadItem)
+            }
+        }
+        
+        if (itemsForUpload.count == 0){
+            return
+        }
+        
+        
+        WrapItemOperatonManager.default.startOperationWith(type: UploadService.convertUploadType(uploadType: uploadType), allOperations: items.count, completedOperations: 0)
+        let allOperationCount = itemsForUpload.count
         var completedOperationCount = 0
-        let operations: [UploadOperations] = items.flatMap {
-            UploadOperations(item: $0, uploadType: uploadType, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, success: {
+        let operations: [UploadOperations] = itemsForUpload.flatMap {
+            UploadOperations(item: $0, uploadType: uploadType, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, success: { (finishedOperation) in
                 completedOperationCount = completedOperationCount + 1
-                WrapItemOperatonManager.default.setProgressForOperationWith(type: .upload, allOperations: allOperationCount, completedOperations: completedOperationCount)
-            }, fail: { (error) in
+                for operationType in finishedOperation.uploadType {
+                    WrapItemOperatonManager.default.setProgressForOperationWith(type: UploadService.convertUploadType(uploadType: operationType),
+                                                                                allOperations: allOperationCount,
+                                                                                completedOperations: completedOperationCount)
+                }
+            }, fail: { (fail) in
                 completedOperationCount = completedOperationCount + 1
-                //WrapItemOperatonManager.default.setProgressForOperationWith(type: .upload, allOperations: allOperationCount, completedOperations: completedOperationCount)
             })
         }
         uploadOperations.append(contentsOf: operations)
@@ -171,30 +212,43 @@ final class UploadService: BaseRequestService {
     }
 }
 
-private class UploadOperations: Operation {
+typealias UploadOperationSuccess = (_ uploadOberation: UploadOperations) -> Swift.Void
+
+class UploadOperations: Operation {
     
     let item: WrapData
-    let uploadType: UploadType
+    var uploadType = Set<UploadType>()
     let uploadStategy: MetaStrategy
     let uploadTo: MetaSpesialFolder
     let folder: String
-    let success: FileOperationSucces?
+    let success: UploadOperationSuccess?
     let fail: FailResponse?
     var requestObject: URLSessionUploadTask?
     var isRealCancel = false
     
     private let semaphore: DispatchSemaphore
     
-    init(item: WrapData, uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", success: FileOperationSucces?, fail: FailResponse?) {
-        
+    init(item: WrapData, uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", success: UploadOperationSuccess?, fail: FailResponse?) {
         self.item = item
-        self.uploadType = uploadType
+        self.uploadType.insert(uploadType)
         self.uploadTo = uploadTo
         self.uploadStategy = uploadStategy
         self.folder = folder
         self.success = success
         self.fail = fail
         self.semaphore = DispatchSemaphore(value: 0)
+        
+        super.init()
+        
+        if self.queuePriority == .high{
+            return
+        }
+        if uploadType == .autoSync {
+            self.queuePriority = .normal
+        }else{
+            self.queuePriority = .high
+        }
+        
     }
     
     override func cancel() {
@@ -224,7 +278,7 @@ private class UploadOperations: Operation {
         }
         
         let customSucces: FileOperationSucces = {
-            self.success?()
+            self.success?(self)
             self.semaphore.signal()
         }
         
@@ -241,7 +295,6 @@ private class UploadOperations: Operation {
             
             let uploadParam  = Upload(item: self.item,
                                       destitantion: (baseurlResponse?.url!)!,
-                                      uploadType: self.uploadType,
                                       uploadStategy: self.uploadStategy,
                                       uploadTo: self.uploadTo,
                                       rootFolder: self.folder)

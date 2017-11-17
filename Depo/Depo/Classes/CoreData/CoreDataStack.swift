@@ -24,7 +24,7 @@ class CoreDataStack: NSObject {
         
         let mom = NSManagedObjectModel(contentsOf: modelURL)
 
-        let coordinator = NSPersistentStoreCoordinator(managedObjectModel: mom)
+        let coordinator = NSPersistentStoreCoordinator(managedObjectModel: mom!)
         
         do {
             let storeURL = Device.documentsFolderUrl(withComponent: "DataModel.sqlite")

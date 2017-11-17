@@ -557,4 +557,6 @@ struct NumericConstants {
     
     static let timeIntervalBetweenAutoSync: TimeInterval = 60*60
     
+    static let fourGigabytes = 4 * 1024 * 1024 * 1024
+    
 }
