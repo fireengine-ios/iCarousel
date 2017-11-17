@@ -27,7 +27,7 @@ class RemoteSearchService: RemoteItemsService{
             
             let list = resultResponse.flatMap { WrapData(remote: $0) }
             self.currentPage = self.currentPage + 1
-            CoreDataStack.default.appendOnlyNewItems(items: list)
+//            CoreDataStack.default.appendOnlyNewItems(items: list)
             success(list)
         }, fail: { error in
             fail()

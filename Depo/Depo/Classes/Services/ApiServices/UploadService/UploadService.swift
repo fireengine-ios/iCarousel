@@ -255,8 +255,8 @@ private class UploadOperations: Operation {
                     
                     if let response = baseurlResponse as? UploadNotifyResponse,
                         let uploadedFileDetail = response.itemResponse {
-                        let wrapDataValue = WrapData(remote: uploadedFileDetail)
-                        CoreDataStack.default.appendOnlyNewItems(items: [wrapDataValue])
+//                        let wrapDataValue = WrapData(remote: uploadedFileDetail)
+//                        CoreDataStack.default.appendOnlyNewItems(items: [wrapDataValue])
                     }
                     
                     customSucces()

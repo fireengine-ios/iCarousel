@@ -225,111 +225,112 @@ extension BaseDataSourceForCollectionView {
     }
 }
 
-extension BaseDataSourceForCollectionView: NSFetchedResultsControllerDelegate {
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        
-        guard controller == fetchService.controller,
-            let wrapedCollectionView = collectionView else {
-            return
-        }
-        
-        switch type {
-        case .insert:
-            if let newIndex = newIndexPath {
-                blockOperation.addExecutionBlock {
-                    wrapedCollectionView.insertItems(at: [newIndex])
-                }
-            }
-        case .update:
-            if let newIndex = newIndexPath {
-                blockOperation.addExecutionBlock {
-                    wrapedCollectionView.reloadItems(at: [newIndex])
-                }
-            }
-        case .move:
-            if let oldIndex = indexPath,
-               let newIndex = newIndexPath{
-                blockOperation.addExecutionBlock {
-                    wrapedCollectionView.moveItem(at: oldIndex, to: newIndex)
-                }
-            }
-            
-        case .delete:
-            if let newIndex = indexPath {
-                blockOperation.addExecutionBlock { [weak self] in
-                    wrapedCollectionView.deleteItems(at: [newIndex])
-                    guard let self_ = self else{
-                        return
-                    }
-                    self_.selectedItemsArray.removeAll()
-                    self_.updateSelectionCount()
-                }
-            }
-        }
-    }
-    
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
-        
-        
-        guard controller == fetchService.controller,
-              let wrapedCollectionView = collectionView else {
-            return
-        }
-        
-        switch type {
-        case .insert:
-            blockOperation.addExecutionBlock {
-                wrapedCollectionView.insertSections(IndexSet(integer: sectionIndex))
-            }
-            
-        case .delete:
-            blockOperation.addExecutionBlock { [weak self] in
-                wrapedCollectionView.deleteSections(IndexSet(integer: sectionIndex))
-                guard let self_ = self else{
-                    return
-                }
-                self_.selectedItemsArray.removeAll()
-                self_.updateSelectionCount()
-            }
-        
-        case .update:
-            blockOperation.addExecutionBlock {
-                wrapedCollectionView.reloadSections(IndexSet(integer: sectionIndex))
-            }
-       
-        case .move  :
-            blockOperation.addExecutionBlock {
-//                wrapedCollectionView.moveSection(<#T##section: Int##Int#>, toSection: <#T##Int#>)
-              //  wrapedCollectionView.moveSection(IndexPath.section, toSection: new)
-            }
-        }
-    }
-    
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        guard controller == fetchService.controller,
-             let _ = collectionView  else  {
-            return
-        }
-        
-       blockOperation = BlockOperation()
-    }
-    
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        
-        guard controller == fetchService.controller,
-             let unWrappedCollectionView = collectionView else {
-            return
-        }
-        unWrappedCollectionView.reloadData()
-        
-//        unWrappedCollectionView.performBatchUpdates({
-//            print("RELOAD ___")
-//            OperationQueue.main.addOperation(blockOperation)
-//
-//        }) {  complited in
-//            print("Did change content ", complited ?"yes":"false")
+//extension BaseDataSourceForCollectionView: NSFetchedResultsControllerDelegate {
+//    
+//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+//        
+//        guard controller == fetchService.controller,
+//            let wrapedCollectionView = collectionView else {
+//            return
 //        }
-    }
-}
+//        
+//        switch type {
+//        case .insert:
+//            if let newIndex = newIndexPath {
+//                blockOperation.addExecutionBlock {
+//                    wrapedCollectionView.insertItems(at: [newIndex])
+//                }
+//            }
+//        case .update:
+//            if let newIndex = newIndexPath {
+//                blockOperation.addExecutionBlock {
+//                    wrapedCollectionView.reloadItems(at: [newIndex])
+//                }
+//            }
+//        case .move:
+//            if let oldIndex = indexPath,
+//               let newIndex = newIndexPath{
+//                blockOperation.addExecutionBlock {
+//                    wrapedCollectionView.moveItem(at: oldIndex, to: newIndex)
+//                }
+//            }
+//            
+//        case .delete:
+//            if let newIndex = indexPath {
+//                blockOperation.addExecutionBlock { [weak self] in
+//                    wrapedCollectionView.deleteItems(at: [newIndex])
+//                    guard let self_ = self else{
+//                        return
+//                    }
+//                    self_.selectedItemsArray.removeAll()
+//                    self_.updateSelectionCount()
+//                }
+//            }
+//        }
+//    }
+//    
+//    
+//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+//        
+//        
+//        guard controller == fetchService.controller,
+//              let wrapedCollectionView = collectionView else {
+//            return
+//        }
+//        
+//        switch type {
+//        case .insert:
+//            blockOperation.addExecutionBlock {
+//                wrapedCollectionView.insertSections(IndexSet(integer: sectionIndex))
+//            }
+//            
+//        case .delete:
+//            blockOperation.addExecutionBlock { [weak self] in
+//                wrapedCollectionView.deleteSections(IndexSet(integer: sectionIndex))
+//                guard let self_ = self else{
+//                    return
+//                }
+//                self_.selectedItemsArray.removeAll()
+//                self_.updateSelectionCount()
+//            }
+//        
+//        case .update:
+//            blockOperation.addExecutionBlock {
+//                wrapedCollectionView.reloadSections(IndexSet(integer: sectionIndex))
+//            }
+//       
+//        case .move  :
+//            blockOperation.addExecutionBlock {
+////                wrapedCollectionView.moveSection(<#T##section: Int##Int#>, toSection: <#T##Int#>)
+//              //  wrapedCollectionView.moveSection(IndexPath.section, toSection: new)
+//            }
+//        }
+//    }
+//    
+//    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+//        guard controller == fetchService.controller,
+//             let _ = collectionView  else  {
+//            return
+//        }
+//        
+//       blockOperation = BlockOperation()
+//    }
+//    
+//    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+//        
+//        guard controller == fetchService.controller,
+//             let unWrappedCollectionView = collectionView else {
+//            return
+//        }
+//        unWrappedCollectionView.reloadData()
+//        
+////        unWrappedCollectionView.performBatchUpdates({
+////            print("RELOAD ___")
+////            OperationQueue.main.addOperation(blockOperation)
+////
+////        }) {  complited in
+////            print("Did change content ", complited ?"yes":"false")
+////        }
+//    }
+//}
+

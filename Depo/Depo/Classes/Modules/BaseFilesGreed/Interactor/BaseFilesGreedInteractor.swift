@@ -45,7 +45,7 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
                     array.append(items)
                     out.getContentWithSuccess(array: array)
                 } else if items.count > 0 {
-                    self?.output.getContentWithSuccess()
+                    self?.output.getContentWithSuccess(items: items)
                 }
             }
             }, fail: { [weak self] in
@@ -68,12 +68,13 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
                     self?.isUpdating = false
                     if items.count == 0 {
                         self?.output.getContentWithSuccessEnd()
-                    } else if let out = self?.output as? CreateStorySelectionInteractorOutput {
+                    }
+                    else if let out = self?.output as? CreateStorySelectionInteractorOutput {
                         var array = [[WrapData]]()
                         array.append(items)
                         out.getContentWithSuccess(array: array)
                     } else if items.count > 0 {
-                        self?.output.getContentWithSuccess()
+                        self?.output.getContentWithSuccess(items: items)
                     }
                 }
             }, fail: { [weak self] in

@@ -446,10 +446,14 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         /// IF WILL BE NEED TO SAVE FILE
         //UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
         
-        activityManager.start()
+        WrapItemOperatonManager.default.startOperationWith(type: .upload, allOperations: 1, completedOperations: 0)
+
+        //activityManager.start()
         UploadService.default.upload(imageData: data) { [weak self] result in
             DispatchQueue.main.async {
-                self?.activityManager.stop()
+                WrapItemOperatonManager.default.stopOperationWithType(type: .upload)
+
+                //self?.activityManager.stop()
                 switch result {
                 case .success(_):
                     CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: "Success", withText: "Photo uploaded", okButtonText: "OK")
