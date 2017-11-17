@@ -622,7 +622,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         }
         
         switch wraped.patchToPreview {
-        case let .localMediaContent(local):
+        case .localMediaContent(let local):
             cell.tag = FilesDataSource().getAssetThumbnail(asset: local.asset, id: cell.tag, completion: { (image, tag) in
                 let cellToCheck = self.collectionView.cellForItem(at: indexPath)
                 if cell.tag == tag, cell == cellToCheck {
@@ -631,7 +631,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
                     cell_.setImage(image: nil)
                 }
             })
-        case let .remoteUrl(url):
+        case .remoteUrl(_):
             cell_.setImage(with: wraped.patchToPreview)
         }
         
@@ -722,11 +722,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        var h: CGFloat = 50
-        //        if (!fetchService.needSeparateBySection()){
-        //            h = 0
-        //        }
-        
+        let h: CGFloat = 50
         return CGSize(width: collectionView.contentSize.width, height: h)
     }
     

@@ -16,15 +16,12 @@ import SDWebImage
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    lazy var dropboxManager: DropboxManager = factory.resolve()
+    private lazy var dropboxManager: DropboxManager = factory.resolve()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        
         application.isStatusBarHidden = false
         application.statusBarStyle = .lightContent
-        
-//        Fabric.with([Crashlytics.self])
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = RouterVC().vcForCurrentState()
@@ -35,9 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Fabric.with([Crashlytics.self])
             
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
-        
-//        PasscodeManager.shared.show()
-//        PasscodeStorageDefaults().save(passcode: "2222")
         
         return true
     }
@@ -63,21 +57,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillResignActive(_ application: UIApplication) {
     }
+    
+    private var firstResponder: UIResponder?
+    
     func applicationDidEnterBackground(_ application: UIApplication) {
+        firstResponder = application.firstResponder
         SDImageCache.shared().deleteOldFiles(completionBlock: nil)
     }
     func applicationWillEnterForeground(_ application: UIApplication) {
         let topVC = UIApplication.topController()
-        if topVC is PasscodeEnterViewController {
-//            RouterVC().navigationController?.popViewController(animated: false)
+        
+        /// don't show at all or new PasscodeEnterViewController
+        if PasscodeStorageDefaults().isEmpty || topVC is PasscodeEnterViewController {
             return
         }
-        if PasscodeStorageDefaults().isEmpty {
-            return
+        
+        /// remove PasscodeEnterViewController if was on the screen
+        if let tabBarVC = topVC as? TabBarViewController,
+            let navVC = tabBarVC.activeNavigationController,
+            navVC.topViewController is PasscodeEnterViewController
+        {
+            navVC.popViewController(animated: false)
         }
+        
+        /// present PasscodeEnterViewController
         let vc = PasscodeEnterViewController.with(flow: .validate)
         vc.success = {
-            topVC?.dismiss(animated: true, completion: nil)
+            topVC?.dismiss(animated: true, completion: {
+                self.firstResponder?.becomeFirstResponder()
+            })
         }
         topVC?.present(vc, animated: true,completion: nil)
     }
@@ -97,23 +105,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if (event?.type == .remoteControl) {
             FactoryMain.mediaPlayer.handle(event: event)
         }
-    }
-}
-
-extension UIApplication {
-    
-    class func topController(controller: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
-        if let navigationController = controller as? UINavigationController {
-            return topController(controller: navigationController.visibleViewController)
-        }
-        if let tabController = controller as? UITabBarController {
-            if let selected = tabController.selectedViewController {
-                return topController(controller: selected)
-            }
-        }
-        if let presented = controller?.presentedViewController {
-            return topController(controller: presented)
-        }
-        return controller
     }
 }
