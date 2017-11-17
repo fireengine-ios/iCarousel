@@ -70,17 +70,18 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     var allItems = [[WrapData]]()
     var allLocalItems = [WrapData]()
     
-    private func compoundItems(appendedItems: [WrapData]) {
-        allMediaItems.append(contentsOf: appendedItems)
-        var allItemsWithLocals = allMediaItems
+    private func compoundItems(pageItems: [WrapData]) {
+        debugPrint("!!!GOT NEW ITEMS!!!")
+        
+    
 
 //        if isLocalOnly() {
 //            allItems = [allLocalItems]
 //        } else {
-            allItemsWithLocals = appendLocalItems(originalItemsArray: allMediaItems)
-            breakItemsIntoSections(breakingArray: allItemsWithLocals)
+        allMediaItems.append(contentsOf: appendLocalItems(originalItemsArray: pageItems))
+        breakItemsIntoSections(breakingArray: allMediaItems)
 //        }
-        
+        debugPrint("!!!ALL NEW ITEMS SORTED!!!")
         
     }
     
@@ -159,34 +160,77 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             return originalItemsArray
         }
 
-        var remoteItemsMD5List = originalItemsArray.map{return $0.md5}
-        for remoteItem in originalItemsArray {
-            innerLocalsLoop: for localItem in tempoLocalArray {
-                guard !remoteItemsMD5List.contains(localItem.md5) else {
-                    continue innerLocalsLoop
+        ////-------HERE WE GO
+        if !isPaginationDidEnd, let lastRemoteObject = originalItemsArray.last {
+            var remoteItemsMD5List = originalItemsArray.map{return $0.md5}
+            for remoteItem in originalItemsArray {
+                
+                innerLocalsLoop: for localItem in tempoLocalArray {
+                    switch currentSortType {
+                    case .timeUp, .timeUpWithoutSection:
+                        
+                        if localItem.creationDate! < lastRemoteObject.creationDate! {
+                            debugPrint("!!!---localItem.creationDate! \(localItem.creationDate!), remote last is \(lastRemoteObject.creationDate!)")
+                            break innerLocalsLoop
+                        }
+                    case .timeDown, .timeDownWithoutSection:
+                        if localItem.creationDate! > lastRemoteObject.creationDate! {
+                            break innerLocalsLoop
+                        }
+                    case .lettersAZ, .albumlettersAZ:
+                        if String(localItem.name!.first!).uppercased() < String(lastRemoteObject.name!.first!).uppercased() {
+                            break innerLocalsLoop
+                        }
+                    case .lettersZA, .albumlettersZA:
+                        if String(localItem.name!.first!).uppercased() > String(lastRemoteObject.name!.first!).uppercased() {
+                            break innerLocalsLoop
+                        }
+                    case .sizeAZ:
+                        if localItem.fileSize > lastRemoteObject.fileSize {
+                            break innerLocalsLoop
+                        }
+                    case .sizeZA:
+                        if localItem.fileSize < lastRemoteObject.fileSize {
+                            break innerLocalsLoop
+                        }
+                    }
+                    if remoteItemsMD5List.contains(localItem.md5) {
+                        if let unwrpedIndex = allLocalItems.index(of: localItem) {
+                            allLocalItems.remove(at: unwrpedIndex)
+                        }
+                        continue innerLocalsLoop
+                    } else {
+                        tempoArray.append(localItem)
+                        remoteItemsMD5List.append(localItem.md5)
+                        if let unwrpedIndex = allLocalItems.index(of: localItem) {
+                            allLocalItems.remove(at: unwrpedIndex)
+                        }
+                    }
+                    
                 }
-                tempoArray.append(localItem)
-                remoteItemsMD5List.append(localItem.md5)
+                tempoArray.append(remoteItem)
             }
-            
-            tempoArray.append(remoteItem)
+        } else {
+            debugPrint("!!!???PAGINATION ENDED APPEND ALL LOCAL ITEMS")
+            tempoArray.append(contentsOf: allLocalItems)
+            allLocalItems.removeAll()
         }
         
-            switch currentSortType {
-            case .timeUp, .timeUpWithoutSection:
-                tempoArray.sort{$0.creationDate! > $1.creationDate!}
-            case .timeDown, .timeDownWithoutSection:
-                tempoArray.sort{$0.creationDate! < $1.creationDate!}
-            case .lettersAZ, .albumlettersAZ:
-                tempoArray.sort{String($0.name!.first!).uppercased() > String($1.name!.first!).uppercased()}
-            case .lettersZA, .albumlettersZA:
-                tempoArray.sort{String($0.name!.first!).uppercased() < String($1.name!.first!).uppercased()}
-            case .sizeAZ:
-                tempoArray.sort{$0.fileSize > $1.fileSize}
-            case .sizeZA:
-                tempoArray.sort{$0.fileSize < $1.fileSize}
+        switch currentSortType {
+        case .timeUp, .timeUpWithoutSection:
+            tempoArray.sort{$0.creationDate! > $1.creationDate!}
+        case .timeDown, .timeDownWithoutSection:
+            tempoArray.sort{$0.creationDate! < $1.creationDate!}
+        case .lettersAZ, .albumlettersAZ:
+            tempoArray.sort{String($0.name!.first!).uppercased() > String($1.name!.first!).uppercased()}
+        case .lettersZA, .albumlettersZA:
+            tempoArray.sort{String($0.name!.first!).uppercased() < String($1.name!.first!).uppercased()}
+        case .sizeAZ:
+            tempoArray.sort{$0.fileSize > $1.fileSize}
+        case .sizeZA:
+            tempoArray.sort{$0.fileSize < $1.fileSize}
         }
-            
+        debugPrint("!!!ALL LOCAL ITEMS SORTED APPENDED!!!")
         return tempoArray
     }
     
@@ -261,7 +305,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     }
     
     func appendCollectionView(items: [WrapData]) {
-        compoundItems(appendedItems: items)
+        compoundItems(pageItems: items)
         //TODO: Append local items also here
 //        reloadData()
     }
