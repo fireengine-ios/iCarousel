@@ -8,4 +8,14 @@
 
 class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
     
+    func onDeleteSelectedItems(selectedItems: [BaseDataSourceItem]){
+        let uuids = FreeAppSpace.default.getServerUIDSForLocalitem(localItemsArray: selectedItems)
+        
+        FileService().details(uuids: uuids, success: { (objects) in
+            print(objects.count)
+        }) { (error) in
+            
+        }
+    }
+    
 }

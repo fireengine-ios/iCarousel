@@ -10,16 +10,30 @@ import UIKit
 
 class FreeAppSpaceModuleConfigurator {
 
-    func configure(viewController: BaseFilesGreedViewController, remoteServices: RemoteItemsService) {
+    func configure(viewController: FreeAppSpaceViewController, remoteServices: RemoteItemsService) {
+        
+//        let gridListTopBarConfig = GridListTopBarConfig(
+//            defaultGridListViewtype: .Grid,
+//            availableSortTypes: [.AlphaBetricAZ,.AlphaBetricZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest],
+//            defaultSortType: .TimeNewOld,
+//            availableFilter: false,
+//            showGridListButton: true
+//        )
+//
+//        let gridListTopBar = GridListTopBar.initFromXib()
+//        viewController.underNavBarBar = gridListTopBar
+//        gridListTopBar.delegate = viewController
         
         let router = FreeAppSpaceRouter()
         
-        let presenter = FreeUpSpacePresenter()
+        let presenter = FreeAppSpacePresenter()
+        
+        //presenter.topBarConfig = gridListTopBarConfig
         
         presenter.view = viewController
         presenter.router = router
         
-        let interactor = FreeUpSpaceInteractor(remoteItems: remoteServices)
+        let interactor = FreeAppSpaceInteractor(remoteItems: remoteServices)
         interactor.output = presenter
         
         presenter.interactor = interactor

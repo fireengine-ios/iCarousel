@@ -133,6 +133,7 @@ struct TextConstants {
     static let moreBtnImgName = "more"
     static let cogBtnImgName = "cog"
     static let searchBtnImgName = "search"
+    static let deleteBtnImgName = "DeleteShareButton"
     
     // MARK: - Searchbar img name
     

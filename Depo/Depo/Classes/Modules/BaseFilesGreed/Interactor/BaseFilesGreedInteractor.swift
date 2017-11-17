@@ -37,13 +37,19 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
         isUpdating = true
         remoteItems.reloadItems(sortBy: sortBy, sortOrder: sortOrder, success: { [weak self] items in
             DispatchQueue.main.async {
+                
+                var isArrayPresenter = false
+                if let presenter = self?.output as? BaseFilesGreedPresenter{
+                    isArrayPresenter = presenter.isArrayDataSource()
+                }
+                
                 self?.isUpdating = false
                 if items.count == 0 {
                     self?.output.getContentWithSuccessEnd()
-                } else if let out = self?.output as? CreateStorySelectionInteractorOutput {
+                } else if isArrayPresenter {
                     var array = [[WrapData]]()
                     array.append(items)
-                    out.getContentWithSuccess(array: array)
+                    self?.output.getContentWithSuccess(array: array)
                 } else if items.count > 0 {
                     self?.output.getContentWithSuccess()
                 }

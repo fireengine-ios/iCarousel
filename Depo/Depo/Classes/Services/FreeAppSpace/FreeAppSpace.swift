@@ -19,6 +19,34 @@ class FreeAppSpace {
     private var localtemsArray = [WrapData]()
     private var localMD5Array = [String]()
     private var duplicaesArray = [WrapData]()
+    private var serverDuplicatesArray = [WrapData]()
+    
+    func getDuplicatesObjects() -> [WrapData]{
+        return duplicaesArray
+    }
+    
+    func getServerUIDSForLocalitem(localItemsArray: [BaseDataSourceItem]) -> [String]{
+        let serverHash = serverDuplicatesArray.map { $0.md5 }
+        var array = [String]()
+        for item in localItemsArray {
+            let index  = serverHash.index(of: item.md5)
+            if let index_ = index {
+                let serverObject = serverDuplicatesArray[index_]
+                array.append(serverObject.uuid)
+            }
+        }
+        return array
+    }
+    
+    func deleteDuplicates(serverItems: [BaseDataSourceItem]) {
+        var array = [WrapData]()
+        for serverObject in serverItems {
+            if let index = localMD5Array.index(of: serverObject.md5){
+                array.append(localtemsArray[index])
+                
+            }
+        }
+    }
     
     func checkFreeAppSpace(){
         let freeSpace = Device.getFreeDiskSpaceInPercent
@@ -52,6 +80,7 @@ class FreeAppSpace {
         localtemsArray.removeAll()
         localMD5Array.removeAll()
         duplicaesArray.removeAll()
+        serverDuplicatesArray.removeAll()
         
         isSearchRunning = true
         
@@ -112,6 +141,8 @@ class FreeAppSpace {
                 let serverObjectMD5 = item.md5
                 let index = self_.localMD5Array.index(of: serverObjectMD5)
                 if let index_ = index {
+                    
+                    self_.serverDuplicatesArray.append(item)
                     self_.duplicaesArray.append(self_.localtemsArray[index_])
                     self_.localtemsArray.remove(at: index_)
                     self_.localMD5Array.remove(at: index_)
@@ -137,4 +168,31 @@ class FreeAppSpace {
         return CoreDataStack.default.allLocalItem()
     }
     
+}
+
+class FreeAppService: RemoteItemsService {
+    
+    /// server request don't have pagination
+    /// but we need this logic for the same logic
+    private var isGotAll = false
+    
+    init() {
+        super.init(requestSize: 9999, fieldValue: .audio)
+    }
+    
+    func allItems(success: ListRemoveItems?, fail: FailRemoteItems?) {
+
+        if self.isGotAll {
+            success?([])
+            return
+        }else{
+            isGotAll = true
+            let array = FreeAppSpace.default.getDuplicatesObjects()
+            success?(array)
+        }
+    }
+    
+    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail:FailRemoteItems?, newFieldValue: FieldValue? = nil) {
+        allItems(success: success, fail: fail)
+    }
 }

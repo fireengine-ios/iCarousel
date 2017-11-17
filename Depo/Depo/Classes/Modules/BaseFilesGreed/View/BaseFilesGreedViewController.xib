@@ -11,13 +11,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BaseFilesGreedViewController" customModule="Depo_LifeTech" customModuleProvider="target">
             <connections>
-                <outlet property="carouselContainer" destination="Stl-Nh-W5a" id="jo0-2V-qYi"/>
                 <outlet property="collectionView" destination="0Sm-wn-Msc" id="6uf-wF-aXI"/>
                 <outlet property="floatingHeaderContainerHeightConstraint" destination="J3A-WS-4mi" id="c9c-o0-s47"/>
                 <outlet property="noFilesImage" destination="qz2-SP-6oQ" id="ywx-t2-jew"/>
                 <outlet property="noFilesLabel" destination="fdq-Cf-39W" id="DEz-xV-ETG"/>
                 <outlet property="noFilesView" destination="Umz-wA-WsK" id="vFx-KR-ju2"/>
                 <outlet property="startCreatingFilesButton" destination="UTy-IA-Avr" id="Sud-hD-HCs"/>
+                <outlet property="topBarContainer" destination="Stl-Nh-W5a" id="rEa-AX-y5Q"/>
                 <outlet property="topCarouselConstraint" destination="4Ku-N6-Bxb" id="eh8-Yy-iOw"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Mx3-n5-cYr"/>
             </connections>
@@ -92,7 +92,7 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Stl-Nh-W5a" userLabel="carouselContainer" customClass="ViewForPopUp" customModule="Depo_LifeTech" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Stl-Nh-W5a" userLabel="carouselContainer">
                     <rect key="frame" x="0.0" y="64" width="414" height="0.0"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>

@@ -134,7 +134,7 @@ class WrapItemFileService: WrapItemFileOperations {
         remoteFileService.detail(uuids: item.uuid, success: success, fail: fail)
     }
     
-    func details(items: [WrapData], success: FileOperation?, fail:FailResponse?) {
+    func details(items: [WrapData], success: ListRemoveItems?, fail:FailResponse?) {
         let items = remoteItemsUUID(files: items)
         remoteFileService.details(uuids: items, success: success, fail: fail)
     }

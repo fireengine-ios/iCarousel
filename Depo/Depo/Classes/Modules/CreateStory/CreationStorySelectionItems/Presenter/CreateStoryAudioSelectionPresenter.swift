@@ -22,6 +22,10 @@ class CreateStoryAudioSelectionPresenter: DocumentsGreedPresenter, CreateStorySe
         dataSource.updateDisplayngType(type: .list)
     }
     
+    override func isArrayDataSource() -> Bool{
+        return true
+    }
+    
     override func viewWillDisappear() {
 
     }

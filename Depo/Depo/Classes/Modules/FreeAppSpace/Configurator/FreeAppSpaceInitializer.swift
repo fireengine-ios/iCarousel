@@ -14,7 +14,7 @@ class FreeAppSpaceModuleInitializer: NSObject {
         let viewController = FreeAppSpaceViewController(nibName: nibName, bundle: nil)
         let configurator = FreeAppSpaceModuleConfigurator()
         
-        configurator.configure(viewController: viewController, remoteServices: PhotoAndVideoService(requestSize: 100, type: .image))
+        configurator.configure(viewController: viewController, remoteServices: FreeAppService())
         return viewController
     }
     
