@@ -13,7 +13,7 @@ enum PasscodeSettingsViewState {
     case ready
 }
 
-class PasscodeSettingsViewController: UIViewController {
+final class PasscodeSettingsViewController: UIViewController {
     var output: PasscodeSettingsViewOutput!
     
     @IBOutlet weak var passcodeView: UIView!
@@ -30,6 +30,8 @@ class PasscodeSettingsViewController: UIViewController {
             touchIdView.isHidden = !biometricsIsAvailable
         }
     }
+    
+    let storage = PasscodeStorageDefaults()
     let biometricsManager = BiometricsManager()
     
     override func viewDidLoad() {
@@ -42,8 +44,6 @@ class PasscodeSettingsViewController: UIViewController {
         biometricsLabel.text = biometricsText
     }
     
-    let storage = PasscodeStorageDefaults()
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -53,7 +53,6 @@ class PasscodeSettingsViewController: UIViewController {
         passcodeSwitch.isOn = !PasscodeStorageDefaults().isEmpty
         biometricsSwitch.isOn = biometricsManager.isEnabled
     }
-
     
     @IBAction func actionChangePasscodeButton(_ sender: UIButton) {
         let vc = PasscodeEnterViewController.with(flow: .setNew)
@@ -86,27 +85,25 @@ class PasscodeSettingsViewController: UIViewController {
 
 // MARK: PasscodeSettingsViewInput
 extension PasscodeSettingsViewController: PasscodeSettingsViewInput {
-//    func setup(state: PasscodeSettingsViewState) {
-//        
-//    }
     func setup(state: PasscodeSettingsViewState, animated: Bool = false) {
         
         let animateTime = animated ? NumericConstants.animationDuration : 0
+        let views: [UIView] = [passcodeView, changePasscodeView, touchIdView]
+        let animationTransform = CGAffineTransform(translationX: 0, y: 50)
         
         switch state {
         case .set:
-            let views: [UIView] = [passcodeView, changePasscodeView, touchIdView]
+            
             views.forEach {
                 $0.transform = .identity
                 $0.alpha = 1
             }
-            self.setPasscodeView.transform = CGAffineTransform(translationX: 0, y: 50)
+            self.setPasscodeView.transform = animationTransform
             self.setPasscodeView.alpha = 0
-//            self.touchIdView.isHidden = !self.isAvailableTouchId
             
             UIView.animate(withDuration: animateTime) {
                 views.forEach {
-                    $0.transform = CGAffineTransform(translationX: 0, y: 50)
+                    $0.transform = animationTransform
                     $0.alpha = 0
                 }
                 self.setPasscodeView.transform = .identity
@@ -115,21 +112,19 @@ extension PasscodeSettingsViewController: PasscodeSettingsViewInput {
             
         case .ready:
             
-            let views: [UIView] = [passcodeView, changePasscodeView, touchIdView]
             views.forEach {
-                $0.transform = CGAffineTransform(translationX: 0, y: 50)
+                $0.transform = animationTransform
                 $0.alpha = 0
             }
             self.setPasscodeView.transform = .identity
             self.setPasscodeView.alpha = 1
-//            self.touchIdView.isHidden = !self.isAvailableTouchId
             
             UIView.animate(withDuration: animateTime) {
                 views.forEach {
                     $0.transform = .identity
                     $0.alpha = 1
                 }
-                self.setPasscodeView.transform = CGAffineTransform(translationX: 0, y: 50)
+                self.setPasscodeView.transform = animationTransform
                 self.setPasscodeView.alpha = 0
             }
         }
