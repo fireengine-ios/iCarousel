@@ -25,17 +25,20 @@ class PasscodeSettingsViewController: UIViewController {
     @IBOutlet weak var biometricsSwitch: UISwitch!
     @IBOutlet weak var biometricsLabel: UILabel!
     
-    var isAvailableTouchId = false
-    let touchIdManager = TouchIdManager()
+    var biometricsIsAvailable = false {
+        didSet {
+            touchIdView.isHidden = !biometricsIsAvailable
+        }
+    }
+    let biometricsManager = BiometricsManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setTitle(withString: TextConstants.passcode)
-        isAvailableTouchId = touchIdManager.isAvailable
         output.viewIsReady()
         
-        let biometricsText = touchIdManager.isAvailableFaceID ? TextConstants.passcodeEnableFaceID : TextConstants.passcodeEnableTouchID
+        let biometricsText = biometricsManager.isAvailableFaceID ? TextConstants.passcodeEnableFaceID : TextConstants.passcodeEnableTouchID
         biometricsLabel.text = biometricsText
     }
     
@@ -46,8 +49,9 @@ class PasscodeSettingsViewController: UIViewController {
         
         storage.isEmpty ? setup(state: .set) : setup(state: .ready)
         
+        biometricsIsAvailable = biometricsManager.isAvailable
         passcodeSwitch.isOn = !PasscodeStorageDefaults().isEmpty
-        biometricsSwitch.isOn = touchIdManager.isEnabledBiometrics
+        biometricsSwitch.isOn = biometricsManager.isEnabled
     }
 
     
@@ -98,7 +102,7 @@ extension PasscodeSettingsViewController: PasscodeSettingsViewInput {
             }
             self.setPasscodeView.transform = CGAffineTransform(translationX: 0, y: 50)
             self.setPasscodeView.alpha = 0
-            self.touchIdView.isHidden = !self.isAvailableTouchId
+//            self.touchIdView.isHidden = !self.isAvailableTouchId
             
             UIView.animate(withDuration: animateTime) {
                 views.forEach {
@@ -118,7 +122,7 @@ extension PasscodeSettingsViewController: PasscodeSettingsViewInput {
             }
             self.setPasscodeView.transform = .identity
             self.setPasscodeView.alpha = 1
-            self.touchIdView.isHidden = !self.isAvailableTouchId
+//            self.touchIdView.isHidden = !self.isAvailableTouchId
             
             UIView.animate(withDuration: animateTime) {
                 views.forEach {

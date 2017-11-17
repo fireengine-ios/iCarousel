@@ -1,5 +1,5 @@
 //
-//  TouchIdManager.swift
+//  BiometricsManager.swift
 //  Depo_LifeTech
 //
 //  Created by Bondar Yaroslav on 10/4/17.
@@ -9,12 +9,12 @@
 import Foundation
 import LocalAuthentication
 
-final class TouchIdManager {
+final class BiometricsManager {
     
-    private static let isEnabledTouchIdKey = "isEnabledTouchIdKey"
-    var isEnabledBiometrics: Bool {
-        get { return UserDefaults.standard.bool(forKey: TouchIdManager.isEnabledTouchIdKey) }
-        set { UserDefaults.standard.set(newValue, forKey: TouchIdManager.isEnabledTouchIdKey) }
+    private static let isEnabledKey = "isEnabledKey"
+    var isEnabled: Bool {
+        get { return UserDefaults.standard.bool(forKey: BiometricsManager.isEnabledKey) }
+        set { UserDefaults.standard.set(newValue, forKey: BiometricsManager.isEnabledKey)}
     }
     
     var isAvailable: Bool {
@@ -30,7 +30,7 @@ final class TouchIdManager {
     }
     
     func authenticate(reason: String = TextConstants.passcodeBiometricsDefault, handler: @escaping (Bool) -> Void) {
-        if !isAvailable || !isEnabledBiometrics {
+        if !isAvailable || !isEnabled {
             return handler(false)
         }
         

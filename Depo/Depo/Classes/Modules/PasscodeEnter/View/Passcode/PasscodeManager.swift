@@ -14,7 +14,6 @@ protocol PasscodeManager: class {
     var storage: PasscodeStorage { get }
     func changeState(to state: PasscodeState)
     weak var delegate: PasscodeManagerDelegate? { get set }
-    var isTouchIDAllowed: Bool { get }
     func authenticateWithBiometrics()
     var maximumInccorectPasscodeAttempts: Int { get }
 }
@@ -30,7 +29,7 @@ final class PasscodeManagerImp {
     let storage: PasscodeStorage
     
     var state: PasscodeState
-    lazy var touchIdManager = TouchIdManager()
+    lazy var touchIdManager = BiometricsManager()
     
     weak var delegate: PasscodeManagerDelegate?
     
@@ -57,12 +56,8 @@ extension PasscodeManagerImp: PasscodeManager {
         }
     }
     
-    var isTouchIDAllowed: Bool {
-        return true
-    }
-    
     func authenticateWithBiometrics() {
-        if !touchIdManager.isAvailable || !touchIdManager.isEnabledBiometrics {
+        if !touchIdManager.isAvailable || !touchIdManager.isEnabled {
             return
         }
         view.resignResponder()
