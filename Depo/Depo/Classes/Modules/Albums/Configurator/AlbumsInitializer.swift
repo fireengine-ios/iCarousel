@@ -38,7 +38,7 @@ class AlbumsModuleInitializer: NSObject {
         configurator.configure(viewController: viewController,
                                bottomBarConfig: bottomBarConfig, router: AlbumsRouter(),
                                presenter: presentor, interactor: interactor,
-                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select, .selectAll],
+                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
                                                                                      selectionModeTypes: [.albumDetails]),
                                topBarConfig: gridListTopBarConfig)
         

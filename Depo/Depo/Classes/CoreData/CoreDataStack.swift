@@ -18,11 +18,13 @@ class CoreDataStack: NSObject {
         
         guard let modelURL = Bundle.main.url(forResource: "LifeBoxModel",
                                              withExtension:"momd"),
-              let mom = NSManagedObjectModel(contentsOf: modelURL)
+        let mom = NSManagedObjectModel(contentsOf: modelURL)
             else {
                 fatalError("Error loading model from bundle")
         }
         
+        
+
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: mom)
         
         do {

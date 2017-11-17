@@ -13,7 +13,7 @@ class CreateStoryNameModuleInitializer: NSObject {
     //Connect with object on storyboard
     @IBOutlet weak var createstorynameViewController: CreateStoryNameViewController!
 
-    class func initializeViewController(with nibName:String) -> UIViewController {
+    class func initializeViewController(with nibName:String) -> CreateStoryNameViewController {
         let viewController = CreateStoryNameViewController(nibName: nibName, bundle: nil)
         let configurator = CreateStoryNameModuleConfigurator()
         configurator.configureModuleForViewInput(viewInput: viewController)

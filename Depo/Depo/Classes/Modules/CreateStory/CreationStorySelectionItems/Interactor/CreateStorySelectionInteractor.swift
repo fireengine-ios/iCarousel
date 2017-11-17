@@ -18,7 +18,5 @@ class CreateStorySelectionInteractor: BaseFilesGreedInteractor {
             out.configurateWithPhotoStory(story: story)
         }
     }
-    
-     
 
 }
