@@ -371,12 +371,13 @@ class RouterVC: NSObject {
     
     //MARK: CreateStory name
     
-    func createStoryName() {
+    func createStoryName(items: [BaseDataSourceItem]? = nil) {
         let storrage = SingletonRouterStorrage.shared()
         storrage.dismisTopViewController()
 
         let controller = CreateStoryNameModuleInitializer.initializeViewController(with: "CreateStoryNameViewController")
         storrage.topViewController = controller
+        controller.output.items = items
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let win = appDelegate.window
         controller.view.frame = CGRect(x: 0, y: 0, width: win!.frame.size.width, height: win!.frame.size.height)

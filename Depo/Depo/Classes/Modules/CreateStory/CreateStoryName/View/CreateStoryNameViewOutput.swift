@@ -16,4 +16,6 @@ protocol CreateStoryNameViewOutput {
     func viewIsReady()
     
     func onCreateStory(storyName: String?)
+    
+    var items: [BaseDataSourceItem]? { get set }
 }

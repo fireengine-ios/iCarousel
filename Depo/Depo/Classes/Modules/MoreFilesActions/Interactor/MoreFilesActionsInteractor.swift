@@ -270,7 +270,8 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
     }
     
     func createStory(items: [BaseDataSourceItem]) {
-        
+        let router = RouterVC()
+        router.createStoryName(items: items)
     }
     
     func addToFavorites(items: [BaseDataSourceItem]) {
