@@ -65,7 +65,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func onReloadData(){
-        dataSource.isPaginationDidEnd = false
+        
         dataSource.dropData()
         reloadData()
     }
@@ -101,6 +101,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func reloadData() {
         startAsyncOperation()
+        dataSource.isPaginationDidEnd = false
         interactor.reloadItems(nil,
                                sortBy: sortedRule.sortingRules,
                                sortOrder: sortedRule.sortOder, newFieldValue: getFileFilter())
@@ -115,6 +116,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         
     }
     
+    //MARK:- Request OUTPUT
     func getContentWithFail(errorString: String?) {
         debugPrint("???getContentWithFail()")
         asyncOperationFail(errorMessage: errorString)
@@ -123,14 +125,14 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func serviceAreNotAvalible() {
         
     }
-    
+
     func getContentWithSuccessEnd() {
         debugPrint("???getContentWithSuccessEnd()")
         asyncOperationSucces()
         dataSource.isPaginationDidEnd = true
         view?.stopRefresher()
 
-//        dataSource.reloadData()
+        dataSource.reloadData()
     }
     
     func getContentWithSuccess(items: [WrapData]){
@@ -140,6 +142,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         debugPrint("???getContentWithSuccess()")
         asyncOperationSucces()
         view.stopRefresher()
+        
+        if items.count < interactor.requestPageSize {
+            dataSource.isPaginationDidEnd = true
+        }
         
         dataSource.appendCollectionView(items: items)
 
@@ -159,7 +165,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             dataSource.reloadData()
         }
     }
-    
+    //MARK:-
     func getNextItems() {
         //        interactor.nextItems(nil, sortBy: .name,
         //                             sortOrder: .asc, newFieldValue: <#FieldValue?#>)
