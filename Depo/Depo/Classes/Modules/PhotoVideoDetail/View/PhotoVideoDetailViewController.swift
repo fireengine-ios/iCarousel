@@ -20,9 +20,9 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
     var output: PhotoVideoDetailViewOutput!
     var interactor: PhotoVideoDetailInteractor?
     var views: [BaseFileContentView] = [BaseFileContentView]()
-    var selectedIndex: Int = -1
+    var selectedIndex: Int = -1 { didSet { configureNavigationBar() } }
     var isAnimating = false
-    var objects = [Item]()
+    var objects = [Item]() { didSet { configureNavigationBar() } }
     let customPopUp = CustomPopUp()
     var localPlayer: AVPlayer?
     var playerController: AVPlayerViewController?
@@ -61,6 +61,13 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         floatingView.hideView(animated: true)
         output.viewWillDisappear()
+    }
+    
+    private func configureNavigationBar() {
+        if objects.count > selectedIndex, selectedIndex >= 0 {
+            let item = objects[selectedIndex]
+            navigationItem.rightBarButtonItem?.isEnabled = item.syncStatus != .notSynced
+        }
     }
     
     func onBack(){
