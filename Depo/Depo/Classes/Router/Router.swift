@@ -66,7 +66,8 @@ class RouterVC: NSObject {
             return
         }
         window.rootViewController = controller
-        window.makeKeyAndVisible()
+        window.isHidden = false
+//        window.makeKeyAndVisible()
     }
     
     func pushViewControllertoTableViewNavBar(viewController: UIViewController) {
@@ -272,8 +273,8 @@ class RouterVC: NSObject {
     
     //MARK: Home Page
     var homePageScreen: UIViewController? {
-        if (!SingletonStorage.shared().isAppraterInited){
-            AppRater.sharedInstance().daysUntilPrompt = 5
+        if (!SingletonStorage.shared().isAppraterInited) {
+            AppRater.sharedInstance().daysUntilPrompt = 0
             AppRater.sharedInstance().launchesUntilPrompt = 10
             AppRater.sharedInstance().remindMeDaysUntilPrompt = 15
             AppRater.sharedInstance().remindMeLaunchesUntilPrompt = 10
@@ -371,24 +372,13 @@ class RouterVC: NSObject {
     
     //MARK: CreateStory name
     
-    func createStoryName() {
-        let storrage = SingletonRouterStorrage.shared()
-        storrage.dismisTopViewController()
-
+    func createStoryName(items: [BaseDataSourceItem]? = nil) {
         let controller = CreateStoryNameModuleInitializer.initializeViewController(with: "CreateStoryNameViewController")
-        storrage.topViewController = controller
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let win = appDelegate.window
-        controller.view.frame = CGRect(x: 0, y: 0, width: win!.frame.size.width, height: win!.frame.size.height)
-        controller.view.alpha = 0
-        win!.addSubview(controller.view)
-        UIView.animate(withDuration: NumericConstants.durationOfAnimation, animations: {
-            controller.view.alpha = 1
-        }) { (flag) in
-            
-        }
+        controller.output.items = items
+        controller.modalPresentationStyle = .overFullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        UIApplication.topController()?.present(controller, animated: true, completion: nil)
     }
-    
     
     // MARK: - SearchView
     
@@ -545,20 +535,10 @@ class RouterVC: NSObject {
     // MARK: feedback subView
     
     func showFeedbackSubView(){
-        let storage = SingletonRouterStorrage.shared()
-        storage.dismisTopViewController()
-        
         let controller = FeedbackViewModuleInitializer.initializeViewController(with: "FeedbackViewController")
-        storage.topViewController = controller
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let win = appDelegate.window
-        controller.view.frame = CGRect(x: 0, y: 0, width: win!.frame.size.width, height: win!.frame.size.height)
-        controller.view.alpha = 0
-        win!.addSubview(controller.view)
-        UIView.animate(withDuration: NumericConstants.durationOfAnimation, animations: {
-            controller.view.alpha = 1
-        }) { (flag) in
-        }
+        controller.modalPresentationStyle = .overFullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        UIApplication.topController()?.present(controller, animated: true, completion: nil)
     }
     
     @objc func vcForCurrentState() -> UIViewController? {
@@ -583,5 +563,15 @@ class RouterVC: NSObject {
     
     var packages: UIViewController {
         return PackagesModuleInitializer.viewController
+    }
+    
+    // MARK: - Passcode
+    
+    func passcodeSettings() -> UIViewController {
+        return PasscodeSettingsModuleInitializer.viewController
+    }
+    
+    func passcode(delegate: PasscodeEnterDelegate?, type: PasscodeInputViewType) -> UIViewController {
+        return PasscodeEnterModuleInitializer(delegate: delegate, type: type).viewController
     }
 }

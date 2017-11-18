@@ -108,7 +108,7 @@ class FetchService: NSObject {
         
         switch sortingRules {
         case .lettersAZ,.lettersZA, .albumlettersAZ, .albumlettersZA:
-            let char = (value.nameValue ?? " ").characters.first!
+            let char = (value.nameValue ?? " ").first!
             let result = String(describing: char).uppercased()
             return result
             

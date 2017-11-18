@@ -50,12 +50,12 @@ class BaseDataSourceItem: NSObject {
     }
     
     override var hashValue: Int {
-        if (isLocalItem){
+        if isLocalItem {
             return name!.hashValue
-        }else{
-            if (md5.characters.count == 0){
+        } else {
+            if md5.count == 0 {
                 return uuid.hashValue
-            }else{
+            } else {
                 return md5.hashValue
             }
         }

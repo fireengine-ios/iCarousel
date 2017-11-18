@@ -76,7 +76,7 @@ class FloatingView: UIViewController, UIPopoverPresentationControllerDelegate {
     }
     
     private func removeShadowView(animated: Bool) {
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
             self.shadowView.alpha = 0
         }, completion: { _ in
             self.shadowView.removeFromSuperview()
@@ -136,7 +136,7 @@ class FloatingView: UIViewController, UIPopoverPresentationControllerDelegate {
     private func animateViewWholeHeightVerticaly() {
         let endFrame = getEndYViewPositionFrame()
 
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
             self.view.frame = endFrame
         }, completion: { _ in
             if endFrame.origin.y < 0 {

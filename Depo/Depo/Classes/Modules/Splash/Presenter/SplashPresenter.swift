@@ -16,7 +16,21 @@ class SplashPresenter:BasePresenter, SplashModuleInput, SplashViewOutput, Splash
 
     func viewIsReady() {
         interactor.clearAllPreviouslyStoredInfo()
-        interactor.startLoginInBackroung()
+        
+        let window = (UIApplication.shared.delegate as! AppDelegate).window!
+        if PasscodeStorageDefaults().isEmpty || window.rootViewController?.presentedViewController is PasscodeEnterViewController {
+            interactor.startLoginInBackroung()
+            return
+        }
+        let vc = PasscodeEnterViewController.with(flow: .validate)
+        
+        vc.success = {
+            window.rootViewController?.dismiss(animated: true, completion: nil)
+            self.interactor.startLoginInBackroung()
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            window.rootViewController?.present(vc, animated: true,completion: nil)
+        }
     }
     
     

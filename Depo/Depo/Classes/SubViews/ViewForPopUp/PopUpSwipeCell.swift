@@ -119,7 +119,7 @@ class PopUpSwipeCell: UITableViewCell {
             needDeleteCell = true
         }
         
-        UIView.animate(withDuration: NumericConstants.durationOfAnimation, animations: {
+        UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
             self.contentView.frame = CGRect(x: endX, y: self.contentView.frame.origin.y, width: self.contentView.frame.size.width, height: self.contentView.frame.size.height)
         }) { (animate) in
             self.isTouch = false

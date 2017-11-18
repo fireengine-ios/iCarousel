@@ -10,4 +10,5 @@ import Foundation
 
 protocol CreateStoryNameInteractorInput {
     func onCreateStory(storyName: String)
+    func onCreateStory(storyName: String, items: [BaseDataSourceItem])
 }

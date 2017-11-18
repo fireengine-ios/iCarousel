@@ -279,7 +279,7 @@ class RegistrationViewController: UIViewController, RegistrationViewInput, DataS
         } else {
             pickerBottomConstraint.constant = -271
         }
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
             self.view.layoutIfNeeded()
         })
     }
