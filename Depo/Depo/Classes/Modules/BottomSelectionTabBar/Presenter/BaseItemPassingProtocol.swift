@@ -14,6 +14,8 @@ protocol BaseItemInputPassingProtocol: class {
     func selectModeSelected()
     func selectAllModeSelected()
     
+    func printSelected()
+    
     var selectedItems: [BaseDataSourceItem] { get }//FOR NOW
 }
 

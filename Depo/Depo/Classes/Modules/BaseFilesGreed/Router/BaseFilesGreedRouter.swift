@@ -42,5 +42,15 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
             router.pushViewController(viewController: controller)
         }
     }
+    
+    func showPrint(items: [BaseDataSourceItem]) {
+        guard let wrapperedArray = items as? [Item] else {
+            return
+        }
+        let router = RouterVC()
+        
+        let vc = PrintInitializer.viewController(data: wrapperedArray)
+        router.pushViewController(viewController: vc)
+    }
         
 }
