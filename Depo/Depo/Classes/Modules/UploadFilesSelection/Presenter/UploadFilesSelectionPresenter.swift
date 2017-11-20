@@ -21,6 +21,19 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
         dataSource.updateDisplayngType(type: .greed)
     }
     
+    override func viewWillAppear() {
+        
+    }
+    
+    override func reloadData() {
+        asyncOperationSucces()
+        dataSource.isPaginationDidEnd = true
+        dataSource.dropData()
+        dataSource.reloadData()
+        view?.stopRefresher()
+        
+    }
+    
     override func onNextButton(){
         if (dataSource.selectedItemsArray.count > 0){
 //            startAsyncOperation()
@@ -46,6 +59,10 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
     
     override func getNextItems() {
         debugPrint("upload getNextItems presenter override")
+    }
+    
+    override func getContentWithSuccessEnd() {
+        
     }
     
     func networkOperationStopped(){
