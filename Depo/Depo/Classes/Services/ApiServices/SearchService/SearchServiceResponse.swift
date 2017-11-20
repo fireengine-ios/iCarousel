@@ -66,7 +66,7 @@ class BaseMetaData: ObjectRequestResponse {
     // photo and video
     var height: Int16?
     var width: Int16?
-    var uploadDate: Date?
+    var takenDate: Date?
     var largeUrl: URL?
     var mediumUrl: URL?
     var smalURl: URL?
@@ -98,7 +98,7 @@ class BaseMetaData: ObjectRequestResponse {
         
         height = json?[SearchJsonKey.ImageHeight].int16
         width = json?[SearchJsonKey.ImageWidth].int16
-        uploadDate = json?[SearchJsonKey.ImageDateTime].date
+        takenDate = json?[SearchJsonKey.ImageDateTime].date
         largeUrl =  json?[SearchJsonKey.ThumbnailLarge].url
         mediumUrl = json?[SearchJsonKey.Thumbnail_Medium].url
         smalURl = json?[SearchJsonKey.ThumbnailSmall].url

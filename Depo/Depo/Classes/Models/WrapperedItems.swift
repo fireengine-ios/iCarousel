@@ -523,6 +523,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
         var url: URL?
         
+        metaData = remote.metadata
+        
         switch fileType { //Do we even need this????
         case .image, .audio, .video:
             duration = WrapData.getDuration(duration: remote.metadata?.duration)
@@ -534,13 +536,16 @@ class WrapData: BaseDataSourceItem, Wrappered {
             if (url == nil) {
                 url = remote.tempDownloadURL
             }
+            if let takenDate = remote.metadata?.takenDate {
+                creationDate = takenDate
+            }
         default:
             break
         }
         
         uuid = remote.uuid ?? ""//UUID().description
         
-        metaData = remote.metadata
+        
         favorites = remote.metadata?.favourite ?? false
         
         md5 = remote.hash ?? ""

@@ -529,6 +529,8 @@ struct TextConstants {
     static let errorManyRequest = "It indicates that sending OTP procedure is repeated numerously. It can be tried again later but a short amount of time should be spent before retry."
     static let errorUnknown = "Unknown error"
     
+    static let canceledOperationTextError = "Cancelled"
+    
     static let passcode = "Passcode"
     static let passcodeEnter = "Enter lifebox passcode"
     static let passcodeEnterOld = "Enter old lifebox passcode"
@@ -542,6 +544,7 @@ struct TextConstants {
     static let passcodeEnableFaceID = "Enable Face ID"
     static let passcodeEnableTouchID = "Enable Touch ID"
     static let passcodeNumberOfTries = "You have %@ attempts left"
+    static let errorConnectedToNetwork = "Please check your internet connection is active and Cellular Data is ON under Settings/lifebox."
 }
 
 
@@ -570,5 +573,7 @@ struct NumericConstants {
     static let lifeSessionDuration: TimeInterval = 60 * 50 //50 min
     
     static let timeIntervalBetweenAutoSync: TimeInterval = 60*60
+    
+    static let fourGigabytes: UInt64 = 4 * 1024 * 1024 * 1024
     
 }

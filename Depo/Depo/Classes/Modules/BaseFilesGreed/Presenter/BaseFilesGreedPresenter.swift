@@ -95,15 +95,29 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     private func compoundAllFiltersAndNextItems(searchText: String? = nil) {
 //        startAsyncOperation()
         interactor.nextItems(searchText,
-                             sortBy: sortedRule.sortingRules,
+                             sortBy: getSortedRuleByFilters(),
                              sortOrder: sortedRule.sortOder, newFieldValue: getFileFilter())
     }
-    
+    private func getSortedRuleByFilters() -> SortType {
+        
+            for filter in filters {
+                switch filter {
+                case .fileType(.image):
+                    if sortedRule == .timeDown || sortedRule == .timeUp {
+                         return .imageDate
+                    }
+                   break
+                default:
+                    break
+                }
+            }
+        return sortedRule.sortingRules
+    }
     func reloadData() {
         startAsyncOperation()
         dataSource.isPaginationDidEnd = false
         interactor.reloadItems(nil,
-                               sortBy: sortedRule.sortingRules,
+                               sortBy: getSortedRuleByFilters(),
                                sortOrder: sortedRule.sortOder, newFieldValue: getFileFilter())
     }
     
@@ -118,6 +132,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     //MARK:- Request OUTPUT
     func getContentWithFail(errorString: String?) {
+        view?.stopRefresher()
+        dataSource.isPaginationDidEnd = false
         debugPrint("???getContentWithFail()")
         asyncOperationFail(errorMessage: errorString)
     }
@@ -131,7 +147,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         asyncOperationSucces()
         dataSource.isPaginationDidEnd = true
         view?.stopRefresher()
-
+        dataSource.appendCollectionView(items: [])
         dataSource.reloadData()
     }
     
@@ -143,10 +159,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         asyncOperationSucces()
         view.stopRefresher()
         
-        if items.count < interactor.requestPageSize {
-            dataSource.isPaginationDidEnd = true
-        }
-        
+//        items.count < interactor.requestPageSize ? (dataSource.isPaginationDidEnd = true) : (dataSource.isPaginationDidEnd = false)
+
         dataSource.appendCollectionView(items: items)
 
         dataSource.reloadData()
@@ -351,15 +365,15 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         if dataSource.selectedItemsArray.count > 0 {
             bottomBarPresenter?.show(animated: true, onView: nil)
         }
-        UploadService.default.uploadOnDemand(success: {
-            DispatchQueue.main.async {
-                CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: "", withText: TextConstants.uploadSuccessful, okButtonText: TextConstants.ok)
-            }
-            print("Upload success")
-        }) { (errorResponse) in
-            print("Upload fail")
-        }
-        
+//        UploadService.default.uploadOnDemand(success: {
+//            DispatchQueue.main.async {
+//                CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: "", withText: TextConstants.uploadSuccessful, okButtonText: TextConstants.ok)
+//            }
+//            print("Upload success")
+//        }) { (errorResponse) in
+//            print("Upload fail")
+//        }
+//        
 //        reloadData()
 
     }
@@ -390,6 +404,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 actionTypes.remove(at: index)
             }
             
+            let noSyncItems = selectedItems.filter{ $0.syncStatus != SyncWrapperedStatus.synced }
+            if noSyncItems.isEmpty {
+                actionTypes.append(.print)
+            }
             alertSheetModule?.showAlertSheet(with: actionTypes,
                                              items: selectedItems,
                                              presentedBy: sender,
@@ -465,6 +483,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func selectModeSelected() {
         view.setupSelectionStyle(isSelection: true)
         dataSource.setSelectionState(selectionState: true)
+    }
+    
+    func printSelected() {
+        router.showPrint(items: selectedItems)
     }
     
     func selectAllModeSelected() {

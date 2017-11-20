@@ -108,17 +108,21 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     func profilePhotoUploadFailed(){
         view.profileWontChange()
     }
+    
+    func connectToNetworkFailed() {
+        asyncOperationSucces()
+        router.goToConnectedToNetworkFailed()
+    }
 
     //MARK: - CustomPopUpAlertActions
 
     func cancelationAction() {
         // Logout
         startAsyncOperation()
-        interactor.onLogout()
+        interactor.checkConnectedToNetwork()
     }
     
     func otherAction() {
-        
     }
     
     func openPasscode(handler: @escaping () -> Void) {

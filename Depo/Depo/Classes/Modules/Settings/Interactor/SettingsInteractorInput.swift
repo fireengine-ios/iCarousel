@@ -13,4 +13,5 @@ protocol SettingsInteractorInput {
     func onLogout()
     func uploadPhoto(withPhoto photo: Data)
     var isPasscodeEmpty: Bool { get }
+    func checkConnectedToNetwork()
 }

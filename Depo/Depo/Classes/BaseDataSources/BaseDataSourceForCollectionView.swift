@@ -72,9 +72,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     private func compoundItems(pageItems: [WrapData]) {
         debugPrint("!!!GOT NEW ITEMS!!!")
-        
-    
-
 //        if isLocalOnly() {
 //            allItems = [allLocalItems]
 //        } else {
@@ -82,7 +79,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         breakItemsIntoSections(breakingArray: allMediaItems)
 //        }
         debugPrint("!!!ALL NEW ITEMS SORTED!!!")
-        
     }
     
     private func isLocalOnly() -> Bool {
@@ -142,7 +138,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     }
     
     private func appendLocalItems(originalItemsArray: [WrapData]) -> [WrapData] {
-        //TODO: check only new "chunks"(pages) of files, not all every time!!!
         var tempoArray = [WrapData]()
         var tempoLocalArray = [WrapData]()
         
@@ -159,39 +154,41 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         if tempoLocalArray.count == 0 {
             return originalItemsArray
         }
-
+        
         ////-------HERE WE GO
-        if !isPaginationDidEnd, let lastRemoteObject = originalItemsArray.last {
+        if !isPaginationDidEnd {
             var remoteItemsMD5List = originalItemsArray.map{return $0.md5}
             for remoteItem in originalItemsArray {
                 
                 innerLocalsLoop: for localItem in tempoLocalArray {
+                    guard let lastRemoteObject = originalItemsArray.last else {
+                        return originalItemsArray
+                    }
                     switch currentSortType {
                     case .timeUp, .timeUpWithoutSection:
                         
                         if localItem.creationDate! < lastRemoteObject.creationDate! {
-                            debugPrint("!!!---localItem.creationDate! \(localItem.creationDate!), remote last is \(lastRemoteObject.creationDate!)")
-                            break innerLocalsLoop
+                            continue innerLocalsLoop
                         }
                     case .timeDown, .timeDownWithoutSection:
                         if localItem.creationDate! > lastRemoteObject.creationDate! {
-                            break innerLocalsLoop
+                            continue innerLocalsLoop
                         }
                     case .lettersAZ, .albumlettersAZ:
                         if String(localItem.name!.first!).uppercased() < String(lastRemoteObject.name!.first!).uppercased() {
-                            break innerLocalsLoop
+                            continue innerLocalsLoop
                         }
                     case .lettersZA, .albumlettersZA:
                         if String(localItem.name!.first!).uppercased() > String(lastRemoteObject.name!.first!).uppercased() {
-                            break innerLocalsLoop
+                            continue innerLocalsLoop
                         }
                     case .sizeAZ:
                         if localItem.fileSize > lastRemoteObject.fileSize {
-                            break innerLocalsLoop
+                            continue innerLocalsLoop
                         }
                     case .sizeZA:
                         if localItem.fileSize < lastRemoteObject.fileSize {
-                            break innerLocalsLoop
+                            continue innerLocalsLoop
                         }
                     }
                     if remoteItemsMD5List.contains(localItem.md5) {
@@ -260,7 +257,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             } else {
                 allItems.append([newItem])
             }
-            debugPrint("item appended to SECTION ", allItems.count - 1)
             
         } else {
             allItems.append([newItem])

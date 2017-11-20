@@ -1010,6 +1010,17 @@
 		EDD8CBFAF2355BDB13376953 /* ActivityTimelinePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBFD42348DB7E7086DFA5D8 /* ActivityTimelinePresenter.swift */; };
 		EF2EE1EEC26868913C9251BD /* FeedbackViewModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA23BA709900F6EF8480710 /* FeedbackViewModuleInput.swift */; };
 		EF9B85CF5585F042A8D5103F /* LikeFilterInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A4E83DDEBA92B2A944CD37 /* LikeFilterInteractorInput.swift */; };
+		EFA74F9E1FBF371200CF946E /* PrintService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA74F9D1FBF371100CF946E /* PrintService.swift */; };
+		EFA74FAE1FBF378F00CF946E /* PrintPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA74FA11FBF378F00CF946E /* PrintPresenter.swift */; };
+		EFA74FAF1FBF378F00CF946E /* PrintViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA74FA31FBF378F00CF946E /* PrintViewController.swift */; };
+		EFA74FB01FBF378F00CF946E /* PrintViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA74FA41FBF378F00CF946E /* PrintViewInput.swift */; };
+		EFA74FB11FBF378F00CF946E /* PrintViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFA74FA51FBF378F00CF946E /* PrintViewController.xib */; };
+		EFA74FB21FBF378F00CF946E /* PrintViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA74FA61FBF378F00CF946E /* PrintViewOutput.swift */; };
+		EFA74FB31FBF378F00CF946E /* PrintModuleConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA74FA81FBF378F00CF946E /* PrintModuleConfigurator.swift */; };
+		EFA74FB41FBF378F00CF946E /* PrintInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA74FA91FBF378F00CF946E /* PrintInitializer.swift */; };
+		EFA74FB51FBF378F00CF946E /* PrintInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA74FAB1FBF378F00CF946E /* PrintInteractorInput.swift */; };
+		EFA74FB61FBF378F00CF946E /* PrintInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA74FAC1FBF378F00CF946E /* PrintInteractorOutput.swift */; };
+		EFA74FB71FBF378F00CF946E /* PrintInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA74FAD1FBF378F00CF946E /* PrintInteractor.swift */; };
 		F05B61575758F7C684735D3F /* FreeUpSpacePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450D980AFCB44F5599D603D2 /* FreeUpSpacePresenter.swift */; };
 		F05F94EB8B3A970E994475FE /* SelectFolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C65BBC58B8393C6251C13D6 /* SelectFolderViewController.swift */; };
 		F2C69F643F8005F8666F6AAF /* UploadedItemsRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0834AFC75083AA1A9D733C5 /* UploadedItemsRouterInput.swift */; };
@@ -2102,6 +2113,17 @@
 		EDE8BFD15AF72B3992E638CF /* ExpandStorageConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ExpandStorageConfigurator.swift; sourceTree = "<group>"; };
 		EED76B8EC80CDF294DAF95F7 /* ActivityTimelineRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityTimelineRouter.swift; sourceTree = "<group>"; };
 		EEEFEDC411CE8C9592155BE8 /* UploadedItemsViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadedItemsViewInput.swift; sourceTree = "<group>"; };
+		EFA74F9D1FBF371100CF946E /* PrintService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintService.swift; sourceTree = "<group>"; };
+		EFA74FA11FBF378F00CF946E /* PrintPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintPresenter.swift; sourceTree = "<group>"; };
+		EFA74FA31FBF378F00CF946E /* PrintViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintViewController.swift; sourceTree = "<group>"; };
+		EFA74FA41FBF378F00CF946E /* PrintViewInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintViewInput.swift; sourceTree = "<group>"; };
+		EFA74FA51FBF378F00CF946E /* PrintViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrintViewController.xib; sourceTree = "<group>"; };
+		EFA74FA61FBF378F00CF946E /* PrintViewOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintViewOutput.swift; sourceTree = "<group>"; };
+		EFA74FA81FBF378F00CF946E /* PrintModuleConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintModuleConfigurator.swift; sourceTree = "<group>"; };
+		EFA74FA91FBF378F00CF946E /* PrintInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintInitializer.swift; sourceTree = "<group>"; };
+		EFA74FAB1FBF378F00CF946E /* PrintInteractorInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintInteractorInput.swift; sourceTree = "<group>"; };
+		EFA74FAC1FBF378F00CF946E /* PrintInteractorOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintInteractorOutput.swift; sourceTree = "<group>"; };
+		EFA74FAD1FBF378F00CF946E /* PrintInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintInteractor.swift; sourceTree = "<group>"; };
 		F233973492D247406E39E96E /* ForgotPasswordRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordRouter.swift; sourceTree = "<group>"; };
 		F29689BC4E4E515695101ED3 /* PhotoCellModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoCellModuleInput.swift; sourceTree = "<group>"; };
 		F2C8ED61D6F265F87FC23FBA /* FileInfoInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileInfoInteractor.swift; sourceTree = "<group>"; };
@@ -5457,6 +5479,7 @@
 				72836BFADA2D23CEF3EADB75 /* OTPView */,
 				CEC3C2301FB99AF800C3D67F /* PasscodeSettings */,
 				CEC3C2031FB9961900C3D67F /* PasscodeEnter */,
+				EFA74F9F1FBF378F00CF946E /* Print */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -5812,6 +5835,7 @@
 		CE51A0C61EF8ED38005DCEE0 /* ApiServices */ = {
 			isa = PBXGroup;
 			children = (
+				EFA74F9C1FBF371100CF946E /* PrintService */,
 				CE2F562A1F7553C800F49DA1 /* SubscriptionsService */,
 				CE2F56261F7553B500F49DA1 /* OffersService */,
 				7CFE92F21F5ED471008A3B72 /* FeedbackService */,
@@ -6842,6 +6866,63 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		EFA74F9C1FBF371100CF946E /* PrintService */ = {
+			isa = PBXGroup;
+			children = (
+				EFA74F9D1FBF371100CF946E /* PrintService.swift */,
+			);
+			path = PrintService;
+			sourceTree = "<group>";
+		};
+		EFA74F9F1FBF378F00CF946E /* Print */ = {
+			isa = PBXGroup;
+			children = (
+				EFA74FA01FBF378F00CF946E /* Presenter */,
+				EFA74FA21FBF378F00CF946E /* View */,
+				EFA74FA71FBF378F00CF946E /* Configurator */,
+				EFA74FAA1FBF378F00CF946E /* Interactor */,
+			);
+			path = Print;
+			sourceTree = "<group>";
+		};
+		EFA74FA01FBF378F00CF946E /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				EFA74FA11FBF378F00CF946E /* PrintPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		EFA74FA21FBF378F00CF946E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EFA74FA31FBF378F00CF946E /* PrintViewController.swift */,
+				EFA74FA41FBF378F00CF946E /* PrintViewInput.swift */,
+				EFA74FA51FBF378F00CF946E /* PrintViewController.xib */,
+				EFA74FA61FBF378F00CF946E /* PrintViewOutput.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		EFA74FA71FBF378F00CF946E /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				EFA74FA81FBF378F00CF946E /* PrintModuleConfigurator.swift */,
+				EFA74FA91FBF378F00CF946E /* PrintInitializer.swift */,
+			);
+			path = Configurator;
+			sourceTree = "<group>";
+		};
+		EFA74FAA1FBF378F00CF946E /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				EFA74FAB1FBF378F00CF946E /* PrintInteractorInput.swift */,
+				EFA74FAC1FBF378F00CF946E /* PrintInteractorOutput.swift */,
+				EFA74FAD1FBF378F00CF946E /* PrintInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
 		EFDCD56B92EE015AE1048E5E /* Router */ = {
 			isa = PBXGroup;
 			children = (
@@ -7073,6 +7154,7 @@
 				D47864021F3F330200EFDC6D /* SubscriptionPlanCollectionViewCell.xib in Resources */,
 				7C241EFA1F960E1C00322149 /* CollectionViewCellForStoryPhoto.xib in Resources */,
 				CEC05B671F05333800332EBA /* PhoneVereficationScreen~ipad.xib in Resources */,
+				EFA74FB11FBF378F00CF946E /* PrintViewController.xib in Resources */,
 				CE4140621F0A5F6D001924E1 /* CaptchaViewController.xib in Resources */,
 				CE51AE6C1EF90853005DCEE0 /* AutoSyncViewController.xib in Resources */,
 				7CEEC1BD1F3326C900BD433F /* CreateStoryPhotosOrderViewController.xib in Resources */,
@@ -7222,6 +7304,7 @@
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SimpleExif/SimpleExif.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/Typist/Typist.framework",
 				"${BUILT_PRODUCTS_DIR}/UIImage-Categories/UIImage_Categories.framework",
 				"${BUILT_PRODUCTS_DIR}/XYPieChart/XYPieChart.framework",
 				"${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework",
@@ -7242,6 +7325,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleExif.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Typist.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIImage_Categories.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XYPieChart.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iCarousel.framework",
@@ -7389,6 +7473,7 @@
 				7C6E2F971F31E4F800536DB6 /* CreateStoryNameViewController.swift in Sources */,
 				D498865A1F3EFBE200F50C95 /* ImportPhotosInteractorInput.swift in Sources */,
 				7C04350F1F50B6E200193C75 /* AlbumSelectionPresenter.swift in Sources */,
+				EFA74FB61FBF378F00CF946E /* PrintInteractorOutput.swift in Sources */,
 				CE51ABA11EF90853005DCEE0 /* CurioResourceUtil.m in Sources */,
 				8C6FB6901F0B9F7600B552A3 /* MoreActionsConfig.swift in Sources */,
 				8CFF868F1F0F96E600520D18 /* SyncDB.m in Sources */,
@@ -7445,6 +7530,7 @@
 				8DCB216E1F3C85CD00BAFE1E /* SearchViewInput.swift in Sources */,
 				CE95ED551F516736002F923A /* HelpAndSupportRouterInput.swift in Sources */,
 				CE51ABE91EF90853005DCEE0 /* AutoSyncDataStorage.swift in Sources */,
+				EFA74FB41FBF378F00CF946E /* PrintInitializer.swift in Sources */,
 				7CDABD061F1E3A6300C8CC16 /* UserProfileInitializer.swift in Sources */,
 				CE51ABEA1EF90853005DCEE0 /* BaseCellModel.swift in Sources */,
 				7CD1F9151F0288DC0028F51A /* WelcomeInteractor.swift in Sources */,
@@ -7659,6 +7745,7 @@
 				7CFF0C8C1F4C0E6F00E72E6A /* AlbumServiceResponse.swift in Sources */,
 				CE51ACE31EF90853005DCEE0 /* IntroduceInteractorOutput.swift in Sources */,
 				CE51ACE41EF90853005DCEE0 /* IntroduceInteractor.swift in Sources */,
+				EFA74FAE1FBF378F00CF946E /* PrintPresenter.swift in Sources */,
 				CE51ACE51EF90853005DCEE0 /* IntroduceRouterInput.swift in Sources */,
 				CE51ACE61EF90853005DCEE0 /* IntroduceRouter.swift in Sources */,
 				7C6E2F541F31BD2200536DB6 /* PhotoStory.swift in Sources */,
@@ -7666,6 +7753,7 @@
 				CE0ED9761FBC0F5A00487632 /* PasscodeStorage.swift in Sources */,
 				8C00971C1F6BDAF800FA069C /* AlertFilesActionsSheetInteractor.swift in Sources */,
 				CE8F44F11F6AC1550062C2E0 /* ActivityTimelineHeader.swift in Sources */,
+				EFA74FB01FBF378F00CF946E /* PrintViewInput.swift in Sources */,
 				CEDFECA71F10C77E003D1A75 /* UINavigationBarExtension.swift in Sources */,
 				D47863FD1F3F18FA00EFDC6D /* UsageInfoViewOutput.swift in Sources */,
 				CE51ACE81EF90853005DCEE0 /* IntroduceInitializer.swift in Sources */,
@@ -7676,6 +7764,7 @@
 				CE51ACE91EF90853005DCEE0 /* PhoneVereficationViewInput.swift in Sources */,
 				7C4485091F10FE09003AF631 /* SplitIpadViewContoller.swift in Sources */,
 				7CDB43301F8658A000789FA6 /* LocationManager.swift in Sources */,
+				EFA74F9E1FBF371200CF946E /* PrintService.swift in Sources */,
 				7CED0B141F23931C0016CE0C /* WrapperedItemUtil.swift in Sources */,
 				7C6E2F781F31E4C900536DB6 /* CreateStorySelectionRouter.swift in Sources */,
 				CE51ACEA1EF90853005DCEE0 /* PhoneVereficationViewOutput.swift in Sources */,
@@ -7691,6 +7780,7 @@
 				7C66E8A91F979C3300D98F27 /* CreateStoryPreviewConfigurator.swift in Sources */,
 				CE51ACF11EF90853005DCEE0 /* PhoneVereficationInteractor.swift in Sources */,
 				D47864001F3F30BD00EFDC6D /* RoundedProgressView.swift in Sources */,
+				EFA74FB71FBF378F00CF946E /* PrintInteractor.swift in Sources */,
 				CE51ACF21EF90853005DCEE0 /* PhoneVereficationRouterInput.swift in Sources */,
 				CE51ACF31EF90853005DCEE0 /* PhoneVereficationRouter.swift in Sources */,
 				CE51ACF41EF90853005DCEE0 /* PhoneVereficationConfigurator.swift in Sources */,
@@ -7783,6 +7873,7 @@
 				7CAC23BF1F4ABD3100607660 /* LoadingImageView.swift in Sources */,
 				CEC3C2431FB99AF800C3D67F /* PasscodeSettingsViewIO.swift in Sources */,
 				A1DBFD47F4260A0DF1C25486 /* ExpandStoragePresenter.swift in Sources */,
+				EFA74FAF1FBF378F00CF946E /* PrintViewController.swift in Sources */,
 				CEE005741F7B7DD0004FA8DE /* AssetsCash.swift in Sources */,
 				41F0D71415C8E8167E8B6AA3 /* ExpandStorageInteractorInput.swift in Sources */,
 				8C5408431F62895300D4717A /* GridListTopBarConfig.swift in Sources */,
@@ -7957,11 +8048,13 @@
 				97DC05B9B3DCF2CBAE060AF4 /* SyncContactsInteractorOutput.swift in Sources */,
 				555C0C8351470D02E705873D /* SyncContactsInteractor.swift in Sources */,
 				CE2F56181F7552A900F49DA1 /* PackagesInteractorInput.swift in Sources */,
+				EFA74FB31FBF378F00CF946E /* PrintModuleConfigurator.swift in Sources */,
 				B02F86BF64856149537A10F3 /* SyncContactsRouterInput.swift in Sources */,
 				8DCB21651F3C6FCF00BAFE1E /* SearchViewConfigurator.swift in Sources */,
 				8C77869E1F3F38EF005CB432 /* VisualMusicPlayerInitializer.swift in Sources */,
 				CECA95891F154E210054BDC0 /* ErrorsDescriotions.swift in Sources */,
 				CE95ED581F516736002F923A /* HelpAndSupportViewInput.swift in Sources */,
+				EFA74FB51FBF378F00CF946E /* PrintInteractorInput.swift in Sources */,
 				D49886611F3EFBE200F50C95 /* ImportPhotosViewInput.swift in Sources */,
 				8C0097161F6BDA8B00FA069C /* MoreFilesActionsModuleInput.swift in Sources */,
 				876B212A1A0511735B065186 /* SyncContactsRouter.swift in Sources */,
@@ -8056,6 +8149,7 @@
 				8C77869F1F3F38EF005CB432 /* VisualMusicPlayerInteractor.swift in Sources */,
 				08ACDB1ED67EACE17FB518FA /* SelectNameViewInput.swift in Sources */,
 				CE2F55FE1F7551CD00F49DA1 /* AccountParameters.swift in Sources */,
+				EFA74FB21FBF378F00CF946E /* PrintViewOutput.swift in Sources */,
 				CE2F56201F7552A900F49DA1 /* PackagesViewInput.swift in Sources */,
 				124B2508A085C281AB2765AF /* SelectNameViewOutput.swift in Sources */,
 				2108C2EF8209265F3A1A5B4D /* SelectNameViewController.swift in Sources */,
