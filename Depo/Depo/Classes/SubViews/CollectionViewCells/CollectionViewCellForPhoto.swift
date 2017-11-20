@@ -102,8 +102,6 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         selectionImageView.isHidden = !isSelectionActive
         selectionImageView.image = UIImage(named: isSelected ? "selected" : "notSelected")
         
-        cloudStatusImage.isHidden = isSelectionActive
-        
         let selection = isSelectionActive && isSelected
         UIView.animate(withDuration: NumericConstants.animationDuration) { 
             self.selectionView.alpha = selection ? 1 : 0
