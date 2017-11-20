@@ -131,9 +131,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             default:
                 break
             }
-
         }
-        
         return nil
     }
     
@@ -209,8 +207,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             }
         } else {
             debugPrint("!!!???PAGINATION ENDED APPEND ALL LOCAL ITEMS")
-            tempoArray.append(contentsOf: allLocalItems)
-            allLocalItems.removeAll()
+            tempoArray.append(contentsOf: tempoLocalArray)
+            tempoLocalArray.forEach{
+                if let unwrpedIndex = allLocalItems.index(of: $0) {
+                    allLocalItems.remove(at: unwrpedIndex)
+                }
+            }
+//            allLocalItems.removeAll()
         }
         
         switch currentSortType {

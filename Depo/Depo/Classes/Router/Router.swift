@@ -274,7 +274,7 @@ class RouterVC: NSObject {
     //MARK: Home Page
     var homePageScreen: UIViewController? {
         if (!SingletonStorage.shared().isAppraterInited) {
-            AppRater.sharedInstance().daysUntilPrompt = 0
+            AppRater.sharedInstance().daysUntilPrompt = 5
             AppRater.sharedInstance().launchesUntilPrompt = 10
             AppRater.sharedInstance().remindMeDaysUntilPrompt = 15
             AppRater.sharedInstance().remindMeLaunchesUntilPrompt = 10
