@@ -161,16 +161,19 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         }
 
         ////-------HERE WE GO
-        if !isPaginationDidEnd, let lastRemoteObject = originalItemsArray.last {
+        if !isPaginationDidEnd {
             var remoteItemsMD5List = originalItemsArray.map{return $0.md5}
             for remoteItem in originalItemsArray {
                 
                 innerLocalsLoop: for localItem in tempoLocalArray {
+                    guard let lastRemoteObject = originalItemsArray.last else {
+                        return originalItemsArray
+                    }
                     switch currentSortType {
                     case .timeUp, .timeUpWithoutSection:
                         
                         if localItem.creationDate! < lastRemoteObject.creationDate! {
-                            debugPrint("!!!---localItem.creationDate! \(localItem.creationDate!), remote last is \(lastRemoteObject.creationDate!)")
+//                            debugPrint("!!!---localItem.creationDate! \(localItem.creationDate!), remote last is \(lastRemoteObject.creationDate!)")
                             break innerLocalsLoop
                         }
                     case .timeDown, .timeDownWithoutSection:
@@ -260,7 +263,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             } else {
                 allItems.append([newItem])
             }
-            debugPrint("item appended to SECTION ", allItems.count - 1)
             
         } else {
             allItems.append([newItem])
