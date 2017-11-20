@@ -73,7 +73,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let topVC = UIApplication.topController()
         
         /// don't show at all or new PasscodeEnterViewController
-        if passcodeStorage.isEmpty || topVC is PasscodeEnterViewController {
+        if passcodeStorage.isEmpty {
+            return
+        }
+        
+        if let vc = topVC as? PasscodeEnterViewController {
+            vc.passcodeManager.authenticateWithBiometrics()
             return
         }
         

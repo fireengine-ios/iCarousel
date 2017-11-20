@@ -18,7 +18,7 @@ class PasscodeEnterViewController: UIViewController {
         return vc
     }
     
-    private var passcodeManager: PasscodeManager!
+    var passcodeManager: PasscodeManager!
     private lazy var biometricsManager: BiometricsManager = factory.resolve()
     
     var state: PasscodeState!
