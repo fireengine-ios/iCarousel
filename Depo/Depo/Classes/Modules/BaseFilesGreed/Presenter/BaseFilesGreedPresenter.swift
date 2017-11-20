@@ -494,6 +494,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         dataSource.selectAll(isTrue: true)
     }
     
+    func shareModeSelected() {
+         stopEditing() 
+    }
+    
     func getFolder() -> Item? {
         return interactor.getFolder()
     }

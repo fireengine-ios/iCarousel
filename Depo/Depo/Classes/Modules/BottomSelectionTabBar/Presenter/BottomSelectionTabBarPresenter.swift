@@ -150,6 +150,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             } else {
                 interactor.share(item: selectedItems, sourceRect: middleTabBarRect)
             }
+            basePassingPresenter?.shareModeSelected()
         case .sync:
             interactor.sync(item: selectedItems)
         case .removeFromAlbum:
