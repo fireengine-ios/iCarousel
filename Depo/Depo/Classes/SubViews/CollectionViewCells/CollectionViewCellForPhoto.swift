@@ -60,6 +60,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         super.prepareForReuse()
         
         self.imageView.image = nil
+        self.isAlreadyConfigured = false
     }
     
     override func updating(){
@@ -69,6 +70,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     
     override func setImage(image: UIImage?) {
         imageView.image = image
+        self.imageView.contentMode = .scaleAspectFill
         isAlreadyConfigured = true
         self.backgroundColor = ColorConstants.fileGreedCellColor
         activity.stopAnimating()

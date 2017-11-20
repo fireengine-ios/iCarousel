@@ -41,6 +41,8 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
     
     private let getImageServise = ImageDownloder()
     
+    private let assetCache = PHCachingImageManager()
+    
     
     // MARK: check acces to local media library
     
@@ -110,22 +112,23 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
     
     //Mark: - Sync Image
     
-    func getAssetThumbnail(asset: PHAsset, id: Int, completion: @escaping (_ image: UIImage?, _ requestId: Int?)->Void) -> Int {
+    func getAssetThumbnail(asset: PHAsset, indexPath: IndexPath, completion: @escaping (_ image: UIImage?, _ indexPath: IndexPath)->Void) {
         let manager = PHImageManager.default()
-        let requestId = PHImageRequestID(id)
-        if requestId != 0 {
-            manager.cancelImageRequest(requestId)
-        }
         
         let options = PHImageRequestOptions()
         options.isNetworkAccessAllowed = false
         options.isSynchronous = false
         options.version = .current
-        options.deliveryMode = .highQualityFormat
+        options.deliveryMode = .fastFormat
+        
+        let targetSize = CGSize(width: 300, height: 300)
 
-        return Int(manager.requestImage(for: asset, targetSize: CGSize(width: 300, height: 300), contentMode: .aspectFill, options: options, resultHandler: {(result, info)->Void in
-            let tag = (info?[PHImageResultRequestIDKey] as? NSNumber)?.intValue
-            completion(result, tag)
-        }))
+        manager.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFill, options: options, resultHandler: {(result, info)->Void in
+//            if let isDegaraded = (info?[PHImageResultIsDegradedKey] as? NSNumber)?.boolValue, !isDegaraded {
+                completion(result, indexPath)
+//            }
+        })
+        
+        assetCache.startCachingImages(for: [asset], targetSize: targetSize, contentMode: .aspectFill, options: options)
     }
 }
