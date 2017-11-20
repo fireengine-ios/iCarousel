@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     private lazy var dropboxManager: DropboxManager = factory.resolve()
+    private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -65,10 +66,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SDImageCache.shared().deleteOldFiles(completionBlock: nil)
     }
     func applicationWillEnterForeground(_ application: UIApplication) {
+        showPasscodeIfNeed()
+    }
+    
+    private func showPasscodeIfNeed() {
         let topVC = UIApplication.topController()
         
         /// don't show at all or new PasscodeEnterViewController
-        if PasscodeStorageDefaults().isEmpty || topVC is PasscodeEnterViewController {
+        if passcodeStorage.isEmpty || topVC is PasscodeEnterViewController {
             return
         }
         
@@ -89,9 +94,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         topVC?.present(vc, animated: true,completion: nil)
     }
+    
     func applicationDidBecomeActive(_ application: UIApplication) {
         ApplicationSessionManager.shared().checkSession()
     }
+    
     func applicationWillTerminate(_ application: UIApplication) {
         UserDefaults.standard.synchronize()
     }

@@ -10,8 +10,7 @@ import Foundation
 
 protocol SettingsInteractorInput {
     func getCellsData()
-    
     func onLogout()
-    
     func uploadPhoto(withPhoto photo: Data)
+    var isPasscodeEmpty: Bool { get }
 }

@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol SettingsViewOutput: PasscodeEnterDelegate {
+protocol SettingsViewOutput {
 
     func viewIsReady()
     
@@ -35,7 +35,9 @@ protocol SettingsViewOutput: PasscodeEnterDelegate {
     
     func goToPackages()
     
-    func goToPasscode(delegate: PasscodeEnterDelegate?, type: PasscodeInputViewType)
-    
     func goToPasscodeSettings()
+    
+    func openPasscode(handler: @escaping () -> Void)
+    
+    var isPasscodeEmpty: Bool { get }
 }

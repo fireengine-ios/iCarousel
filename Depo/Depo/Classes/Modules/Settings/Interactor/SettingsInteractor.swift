@@ -10,6 +10,12 @@ class SettingsInteractor: SettingsInteractorInput {
 
     weak var output: SettingsInteractorOutput!
     
+    private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
+    
+    var isPasscodeEmpty: Bool {
+        return passcodeStorage.isEmpty
+    }
+    
     func getCellsData(){
         let array = [[TextConstants.settingsViewCellBeckup,
                       TextConstants.settingsViewCellImportPhotos,

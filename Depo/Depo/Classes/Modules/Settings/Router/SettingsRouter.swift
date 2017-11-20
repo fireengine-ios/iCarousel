@@ -46,16 +46,21 @@ class SettingsRouter: SettingsRouterInput {
         router.pushViewController(viewController: router.packages)
     }
     
-    
-    func goToPasscode(delegate: PasscodeEnterDelegate?, type: PasscodeInputViewType) {
-        router.pushViewController(viewController: router.passcode(delegate: delegate, type: type))
-    }
-    
     func goToPasscodeSettings() {
         router.pushViewController(viewController: router.passcodeSettings())
     }
     
     func closeEnterPasscode() {
         router.popViewController()
+    }
+    
+    func openPasscode(handler: @escaping () -> Void) {
+        let vc = PasscodeEnterViewController.with(flow: .validate)
+        
+        vc.success = { [weak self] in
+            self?.router.navigationController?.popViewController(animated: false)
+            handler()
+        }
+        router.pushViewController(viewController: vc)
     }
 }

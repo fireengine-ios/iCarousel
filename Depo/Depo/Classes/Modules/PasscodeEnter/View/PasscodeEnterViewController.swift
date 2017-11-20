@@ -9,7 +9,6 @@
 import UIKit
 
 class PasscodeEnterViewController: UIViewController {
-    var output: PasscodeEnterViewOutput!
     
     @IBOutlet weak var passcodeViewImp: PasscodeViewImp!
     
