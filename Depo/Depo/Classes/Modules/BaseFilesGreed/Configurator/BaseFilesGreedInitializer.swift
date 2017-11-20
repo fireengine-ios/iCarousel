@@ -32,7 +32,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         )
 
         let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: [],
-                                                                  selectionModeTypes: [.delete, .createStory])
+                                                                  selectionModeTypes: [.createStory])
 
         configurator.configure(viewController: viewController, remoteServices: PhotoAndVideoService(requestSize: 100),
                                fileFilters: [.fileType(.image)],
