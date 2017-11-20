@@ -50,6 +50,10 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         types.append(item.favorites ? .removeFromFavorites : .addToFavorites)
         types.append(.delete)
         
+        if item.fileType == .image || item.fileType == .video {
+            types.append(.download)
+        }
+        
         let actions = constractActions(with: types, for: [item])
         
         presentAlertSheet(with: [headerAction] + actions, presentedBy: sender, viewController: viewController)
@@ -131,7 +135,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 
             })
         }
-        filteredActionTypes.append(.selectAll)
+        
         return constractActions(with: filteredActionTypes, for: items)
     }
     
@@ -278,7 +282,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 })
             case .print:
                 action = UIAlertAction(title: "Print", style: .default, handler: { _ in
-                    //TODO: will be implemented in the next package
+                    self.basePassingPresenter?.printSelected()
                 })
             default:
                 action = UIAlertAction(title: "TEST", style: .default, handler: { _ in

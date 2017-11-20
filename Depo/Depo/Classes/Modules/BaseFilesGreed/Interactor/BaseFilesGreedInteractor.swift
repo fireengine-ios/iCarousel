@@ -26,6 +26,10 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
         self.remoteItems = remoteItems
     }
     
+    var requestPageSize: Int {
+        return remoteItems.requestSize
+    }
+    
     func viewIsReady() {
         
     }

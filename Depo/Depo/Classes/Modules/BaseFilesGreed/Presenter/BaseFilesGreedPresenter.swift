@@ -65,7 +65,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func onReloadData(){
-        dataSource.isPaginationDidEnd = false
+        
         dataSource.dropData()
         reloadData()
     }
@@ -95,14 +95,29 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     private func compoundAllFiltersAndNextItems(searchText: String? = nil) {
 //        startAsyncOperation()
         interactor.nextItems(searchText,
-                             sortBy: sortedRule.sortingRules,
+                             sortBy: getSortedRuleByFilters(),
                              sortOrder: sortedRule.sortOder, newFieldValue: getFileFilter())
     }
-    
+    private func getSortedRuleByFilters() -> SortType {
+        
+            for filter in filters {
+                switch filter {
+                case .fileType(.image):
+                    if sortedRule == .timeDown || sortedRule == .timeUp {
+                         return .imageDate
+                    }
+                   break
+                default:
+                    break
+                }
+            }
+        return sortedRule.sortingRules
+    }
     func reloadData() {
         startAsyncOperation()
+        dataSource.isPaginationDidEnd = false
         interactor.reloadItems(nil,
-                               sortBy: sortedRule.sortingRules,
+                               sortBy: getSortedRuleByFilters(),
                                sortOrder: sortedRule.sortOder, newFieldValue: getFileFilter())
     }
     
@@ -115,7 +130,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         
     }
     
+    //MARK:- Request OUTPUT
     func getContentWithFail(errorString: String?) {
+        view?.stopRefresher()
+        dataSource.isPaginationDidEnd = false
         debugPrint("???getContentWithFail()")
         asyncOperationFail(errorMessage: errorString)
     }
@@ -123,14 +141,14 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func serviceAreNotAvalible() {
         
     }
-    
+
     func getContentWithSuccessEnd() {
         debugPrint("???getContentWithSuccessEnd()")
         asyncOperationSucces()
         dataSource.isPaginationDidEnd = true
         view?.stopRefresher()
-
-//        dataSource.reloadData()
+        dataSource.appendCollectionView(items: [])
+        dataSource.reloadData()
     }
     
     func getContentWithSuccess(items: [WrapData]){
@@ -141,6 +159,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         asyncOperationSucces()
         view.stopRefresher()
         
+//        items.count < interactor.requestPageSize ? (dataSource.isPaginationDidEnd = true) : (dataSource.isPaginationDidEnd = false)
+
         dataSource.appendCollectionView(items: items)
 
         dataSource.reloadData()
@@ -159,7 +179,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             dataSource.reloadData()
         }
     }
-    
+    //MARK:-
     func getNextItems() {
         //        interactor.nextItems(nil, sortBy: .name,
         //                             sortOrder: .asc, newFieldValue: <#FieldValue?#>)
@@ -345,15 +365,15 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         if dataSource.selectedItemsArray.count > 0 {
             bottomBarPresenter?.show(animated: true, onView: nil)
         }
-        UploadService.default.uploadOnDemand(success: {
-            DispatchQueue.main.async {
-                CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: "", withText: TextConstants.uploadSuccessful, okButtonText: TextConstants.ok)
-            }
-            print("Upload success")
-        }) { (errorResponse) in
-            print("Upload fail")
-        }
-        
+//        UploadService.default.uploadOnDemand(success: {
+//            DispatchQueue.main.async {
+//                CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: "", withText: TextConstants.uploadSuccessful, okButtonText: TextConstants.ok)
+//            }
+//            print("Upload success")
+//        }) { (errorResponse) in
+//            print("Upload fail")
+//        }
+//        
 //        reloadData()
 
     }
@@ -361,21 +381,40 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func moreActionsPressed(sender: Any) {
         
         let selectionMode = dataSource.isInSelectionMode()
-        var type = (interactor.alerSheetMoreActionsConfig?.selectionModeTypes ?? [])
+        var actionTypes = (interactor.alerSheetMoreActionsConfig?.selectionModeTypes ?? [])
         if selectionMode {
-            let list = Array(dataSource.selectedItemsArray)
-            let selectedItems = CoreDataStack.default.mediaItemByUUIDs(uuidList: list)
-            let items = selectedItems.filter{ $0.isLocalItem == false}
-            if !items.isEmpty {
-                type.append(.addToCmeraRoll)
+            let selectedItemsUUIDs = Array(dataSource.selectedItemsArray)
+            var selectedItems = [WrapData]()
+            
+            for items in dataSource.allItems {
+                selectedItems += items.filter { selectedItemsUUIDs.contains($0.uuid) }
             }
-            alertSheetModule?.showAlertSheet(with: type,
+            
+            let items = selectedItems.filter { $0.isLocalItem == false}
+
+            if items.contains(where: { return !($0.favorites) } ) {
+                actionTypes.append(.addToFavorites)
+            }
+            if items.contains(where: { return $0.favorites } ) {
+                actionTypes.append(.removeFromFavorites)
+            }
+            
+            if actionTypes.contains(.createStory) && items.contains(where: { return $0.fileType != .image } ) {
+                let index = actionTypes.index(where: { return $0 == .createStory})!
+                actionTypes.remove(at: index)
+            }
+            
+            let noSyncItems = selectedItems.filter{ $0.syncStatus != SyncWrapperedStatus.synced }
+            if noSyncItems.isEmpty {
+                actionTypes.append(.print)
+            }
+            alertSheetModule?.showAlertSheet(with: actionTypes,
                                              items: selectedItems,
                                              presentedBy: sender,
                                              onSourceView: nil)
         } else {
-            type  = (interactor.alerSheetMoreActionsConfig?.initialTypes ?? [])
-            alertSheetModule?.showAlertSheet(with: type,
+            actionTypes  = (interactor.alerSheetMoreActionsConfig?.initialTypes ?? [])
+            alertSheetModule?.showAlertSheet(with: actionTypes,
                                              presentedBy: sender,
                                              onSourceView: nil)
         }
@@ -444,6 +483,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func selectModeSelected() {
         view.setupSelectionStyle(isSelection: true)
         dataSource.setSelectionState(selectionState: true)
+    }
+    
+    func printSelected() {
+        router.showPrint(items: selectedItems)
     }
     
     func selectAllModeSelected() {

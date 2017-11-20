@@ -124,7 +124,7 @@ class EditinglBar: CustomTabBar {
     }
     
     private func animateAppearance(with newY: CGFloat, completionBlock: (()->Void)?) {
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
             self.frame.origin = CGPoint(x: 0, y: newY)
         }, completion: { _ in
             completionBlock?()

@@ -159,14 +159,8 @@ class WrapperedItemsSorting: NSObject {
         }
     }
     
-    private func getFirsLetter(string : String?) -> Character{
-        guard let str : String = string else{
-            return " "
-        }
-        if (str.characters.count > 0){
-            return str.uppercased().characters.first!
-        }
-        return " "
+    private func getFirsLetter(string: String?) -> Character{
+        return string?.uppercased().first ?? " "
     }
     
     private func sortedArrayUsingNameRule(array: [BaseDataSourceItem], bySortingRyles: SortedRules, items:@escaping([[BaseDataSourceItem]])->()){

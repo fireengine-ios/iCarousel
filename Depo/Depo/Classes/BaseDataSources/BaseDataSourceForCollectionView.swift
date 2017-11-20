@@ -70,17 +70,18 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     var allItems = [[WrapData]]()
     var allLocalItems = [WrapData]()
     
-    private func compoundItems(appendedItems: [WrapData]) {
-        allMediaItems.append(contentsOf: appendedItems)
-        var allItemsWithLocals = allMediaItems
+    private func compoundItems(pageItems: [WrapData]) {
+        debugPrint("!!!GOT NEW ITEMS!!!")
+        
+    
 
 //        if isLocalOnly() {
 //            allItems = [allLocalItems]
 //        } else {
-            allItemsWithLocals = appendLocalItems(originalItemsArray: allMediaItems)
-            breakItemsIntoSections(breakingArray: allItemsWithLocals)
+        allMediaItems.append(contentsOf: appendLocalItems(originalItemsArray: pageItems))
+        breakItemsIntoSections(breakingArray: allMediaItems)
 //        }
-        
+        debugPrint("!!!ALL NEW ITEMS SORTED!!!")
         
     }
     
@@ -141,7 +142,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     }
     
     private func appendLocalItems(originalItemsArray: [WrapData]) -> [WrapData] {
-        //TODO: check only new "chunks"(pages) of files, not all every time!!!
         var tempoArray = [WrapData]()
         var tempoLocalArray = [WrapData]()
         
@@ -158,35 +158,80 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         if tempoLocalArray.count == 0 {
             return originalItemsArray
         }
-
-        var remoteItemsMD5List = originalItemsArray.map{return $0.md5}
-        for remoteItem in originalItemsArray {
-            innerLocalsLoop: for localItem in tempoLocalArray {
-                guard !remoteItemsMD5List.contains(localItem.md5) else {
-                    continue innerLocalsLoop
+        
+        ////-------HERE WE GO
+        if !isPaginationDidEnd {
+            var remoteItemsMD5List = originalItemsArray.map{return $0.md5}
+            for remoteItem in originalItemsArray {
+                
+                innerLocalsLoop: for localItem in tempoLocalArray {
+                    guard let lastRemoteObject = originalItemsArray.last else {
+                        return originalItemsArray
+                    }
+                    switch currentSortType {
+                    case .timeUp, .timeUpWithoutSection:
+                        
+                        if localItem.creationDate! < lastRemoteObject.creationDate! {
+                            continue innerLocalsLoop
+                        }
+                    case .timeDown, .timeDownWithoutSection:
+                        if localItem.creationDate! > lastRemoteObject.creationDate! {
+                            continue innerLocalsLoop
+                        }
+                    case .lettersAZ, .albumlettersAZ:
+                        if String(localItem.name!.first!).uppercased() < String(lastRemoteObject.name!.first!).uppercased() {
+                            continue innerLocalsLoop
+                        }
+                    case .lettersZA, .albumlettersZA:
+                        if String(localItem.name!.first!).uppercased() > String(lastRemoteObject.name!.first!).uppercased() {
+                            continue innerLocalsLoop
+                        }
+                    case .sizeAZ:
+                        if localItem.fileSize > lastRemoteObject.fileSize {
+                            continue innerLocalsLoop
+                        }
+                    case .sizeZA:
+                        if localItem.fileSize < lastRemoteObject.fileSize {
+                            continue innerLocalsLoop
+                        }
+                    }
+                    if remoteItemsMD5List.contains(localItem.md5) {
+                        if let unwrpedIndex = allLocalItems.index(of: localItem) {
+                            allLocalItems.remove(at: unwrpedIndex)
+                        }
+                        continue innerLocalsLoop
+                    } else {
+                        tempoArray.append(localItem)
+                        remoteItemsMD5List.append(localItem.md5)
+                        if let unwrpedIndex = allLocalItems.index(of: localItem) {
+                            allLocalItems.remove(at: unwrpedIndex)
+                        }
+                    }
+                    
                 }
-                tempoArray.append(localItem)
-                remoteItemsMD5List.append(localItem.md5)
+                tempoArray.append(remoteItem)
             }
-            
-            tempoArray.append(remoteItem)
+        } else {
+            debugPrint("!!!???PAGINATION ENDED APPEND ALL LOCAL ITEMS")
+            tempoArray.append(contentsOf: allLocalItems)
+            allLocalItems.removeAll()
         }
         
-            switch currentSortType {
-            case .timeUp, .timeUpWithoutSection:
-                tempoArray.sort{$0.creationDate! > $1.creationDate!}
-            case .timeDown, .timeDownWithoutSection:
-                tempoArray.sort{$0.creationDate! < $1.creationDate!}
-            case .lettersAZ, .albumlettersAZ:
-                tempoArray.sort{String($0.name!.first!).uppercased() > String($1.name!.first!).uppercased()}
-            case .lettersZA, .albumlettersZA:
-                tempoArray.sort{String($0.name!.first!).uppercased() < String($1.name!.first!).uppercased()}
-            case .sizeAZ:
-                tempoArray.sort{$0.fileSize > $1.fileSize}
-            case .sizeZA:
-                tempoArray.sort{$0.fileSize < $1.fileSize}
+        switch currentSortType {
+        case .timeUp, .timeUpWithoutSection:
+            tempoArray.sort{$0.creationDate! > $1.creationDate!}
+        case .timeDown, .timeDownWithoutSection:
+            tempoArray.sort{$0.creationDate! < $1.creationDate!}
+        case .lettersAZ, .albumlettersAZ:
+            tempoArray.sort{String($0.name!.first!).uppercased() > String($1.name!.first!).uppercased()}
+        case .lettersZA, .albumlettersZA:
+            tempoArray.sort{String($0.name!.first!).uppercased() < String($1.name!.first!).uppercased()}
+        case .sizeAZ:
+            tempoArray.sort{$0.fileSize > $1.fileSize}
+        case .sizeZA:
+            tempoArray.sort{$0.fileSize < $1.fileSize}
         }
-            
+        debugPrint("!!!ALL LOCAL ITEMS SORTED APPENDED!!!")
         return tempoArray
     }
     
@@ -216,7 +261,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             } else {
                 allItems.append([newItem])
             }
-            debugPrint("item appended to SECTION ", allItems.count - 1)
             
         } else {
             allItems.append([newItem])
@@ -261,7 +305,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     }
     
     func appendCollectionView(items: [WrapData]) {
-        compoundItems(appendedItems: items)
+        compoundItems(pageItems: items)
         //TODO: Append local items also here
 //        reloadData()
     }
@@ -622,7 +666,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         }
         
         switch wraped.patchToPreview {
-        case let .localMediaContent(local):
+        case .localMediaContent(let local):
             cell.tag = FilesDataSource().getAssetThumbnail(asset: local.asset, id: cell.tag, completion: { (image, tag) in
                 if self.collectionView.indexPathsForVisibleItems.contains(indexPath) {
                     cell_.setImage(image: image)
@@ -630,7 +674,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             })
         case let .remoteUrl(url):
             cell_.setImage(with: url!)
-            
+
         }
         
         let countRow:Int = self.collectionView(collectionView, numberOfItemsInSection: indexPath.section)
@@ -720,11 +764,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        var h: CGFloat = 50
-        //        if (!fetchService.needSeparateBySection()){
-        //            h = 0
-        //        }
-        
+        let h: CGFloat = 50
         return CGSize(width: collectionView.contentSize.width, height: h)
     }
     

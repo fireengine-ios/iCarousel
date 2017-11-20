@@ -20,6 +20,10 @@ protocol SettingsDelegate: class{
     func goToUsageInfo()
     
     func goToActivityTimeline()
+    
+    func goToPasscode(delegate: PasscodeEnterDelegate?, type: PasscodeInputViewType)
+    
+    func goToPasscodeSettings()
 }
 
 class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDelegate, UITableViewDataSource {
@@ -188,8 +192,26 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
                 }
                 break
             case 3: //touch id
+                let storage = PasscodeStorageDefaults()
+                if storage.isEmpty {
+                    if (settingsDelegate != nil){
+                        settingsDelegate!.goToPasscodeSettings()
+                    }else{
+                        output.goToPasscodeSettings()
+                    }
+                    return
+                }
                 
-                break
+                let vc = PasscodeEnterViewController.with(flow: .validate)
+                vc.success = {
+                    RouterVC().navigationController?.popViewController(animated: false)
+                    if self.settingsDelegate != nil {
+                        self.settingsDelegate!.goToPasscodeSettings()
+                    } else {
+                        self.output.goToPasscodeSettings()
+                    }
+                }
+                RouterVC().pushViewController(viewController: vc)
             default:
                 break
             }

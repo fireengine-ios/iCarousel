@@ -14,12 +14,21 @@ class CreateStoryNamePresenter: CreateStoryNameModuleInput, CreateStoryNameViewO
     
     let custoPopUp = CustomPopUp()
 
+    private var _items: [BaseDataSourceItem]?
+    
+    var items: [BaseDataSourceItem]? {
+        get { return _items }
+        set { _items = newValue }
+    }
+    
     func viewIsReady() {
-
+        
     }
     
     func showEmptyNamePopup(){
-        custoPopUp.showCustomAlert(withText: TextConstants.createStoryEmptyTextError, okButtonText: TextConstants.createFolderEmptyFolderButtonText)
+        custoPopUp.showCustomAlert(
+            withText: TextConstants.createStoryEmptyTextError,
+            okButtonText: TextConstants.createFolderEmptyFolderButtonText)
     }
     
     func onCreateStory(storyName: String?){
@@ -29,8 +38,12 @@ class CreateStoryNamePresenter: CreateStoryNameModuleInput, CreateStoryNameViewO
         }
         if (text.isEmpty){
             showEmptyNamePopup()
-        }else{
-            interactor.onCreateStory(storyName: text)
+        } else {
+            if let items = items {
+                interactor.onCreateStory(storyName: text, items: items)
+            } else {
+                interactor.onCreateStory(storyName: text)
+            }
         }
     }
     
@@ -38,4 +51,7 @@ class CreateStoryNamePresenter: CreateStoryNameModuleInput, CreateStoryNameViewO
         router.goToSelectionPhotosForStory(story: story)
     }
     
+    func goToPhotosOrderForStory(story: PhotoStory) {
+        router.goToPhotosOrderForStory(story: story)
+    }
 }

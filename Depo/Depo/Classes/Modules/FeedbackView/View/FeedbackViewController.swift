@@ -101,7 +101,7 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
     
     func languageRequestSended(text: String){
         if (Mail.canSendEmail()){
-            UIView.animate(withDuration: NumericConstants.durationOfAnimation, animations: {
+            UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                 self.view.alpha = 0
             }, completion: {[weak self] (flag) in
                 guard let self_ = self else{
@@ -118,11 +118,25 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
         }
     }
     
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let dy = (view.frame.size.height - allertView.frame.size.height) * 0.5
         bottomConstraint.constant = dy
         view.layoutIfNeeded()
+        animateView()
+    }
+    
+    private var isShown = false
+    private func animateView() {
+        if isShown {
+            return
+        }
+        isShown = true
+        allertView.transform = CGAffineTransform(scaleX: 0.0001, y: 0.0001)
+        UIView.animate(withDuration: NumericConstants.animationDuration) {
+            self.allertView.transform = .identity
+        }
     }
 
     // MARK: Keboard
@@ -179,13 +193,13 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
         return UIImage(named:imageName)!.withRenderingMode(.alwaysTemplate)
     }
     
-    @IBAction func onCloseButton(){
-        UIView.animate(withDuration: NumericConstants.durationOfAnimation, animations: {
+    @IBAction func onCloseButton() {
+        UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
             self.view.alpha = 0
-        }) { (flag) in
-            self.view.removeFromSuperview()
+            self.allertView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+        }) { _ in
+            self.dismiss(animated: false, completion: nil)
         }
-        
     }
     
     @IBAction func onSuggestionButton(){
@@ -205,7 +219,7 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
     }
     
     @IBAction func onSendButton(){
-        if (selectedLanguage != nil)&&(feedbackTextView.text.characters.count > 0){
+        if (selectedLanguage != nil)&&(feedbackTextView.text.count > 0){
             output.onSend(selectedLanguage: selectedLanguage!)
         }else{
             var string = ""

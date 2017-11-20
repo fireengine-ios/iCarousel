@@ -48,4 +48,10 @@ class SettingsInteractor: SettingsInteractorInput {
         })
         
     }
+    
+    func checkConnectedToNetwork() {
+        let reachability = ReachabilityService()
+        let isWiFi = reachability.isReachable
+        isWiFi ? onLogout() : output.connectToNetworkFailed()
+    }
 }

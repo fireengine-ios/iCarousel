@@ -301,7 +301,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         }
         
         let calculatedH = h + sliderH
-        UIView.animate(withDuration: NumericConstants.durationOfAnimation) {
+        UIView.animate(withDuration: NumericConstants.animationDuration) {
             
             if let yConstr = self.contentSliderTopY {
                 yConstr.constant = -h - sliderH

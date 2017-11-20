@@ -49,6 +49,14 @@ class CustomPopUp {
         guard let customAlert = self.setupBaseAlert(withTitle: title, titleAligment: titleAligment, withWarningText: text, warningTextAligment: warningTextAligment) else {
             return
         }
+        
+        var firstCustomAction = firstCustomAction
+        if firstCustomAction == nil {
+            firstCustomAction = {
+                self.hideAll()
+            }
+        }
+        
         customAlert.setup(asType: .regular)
         self.setupMiddleButton(inCustomAlert: customAlert, withLabeltext: buttonText,
                                isShadowViewShown: isShadowViewShown, firstCustomAction: firstCustomAction)

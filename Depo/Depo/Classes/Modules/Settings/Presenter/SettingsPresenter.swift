@@ -68,6 +68,14 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     func goToPackages() {
         router.goToPackages()
     }
+    
+    func goToPasscode(delegate: PasscodeEnterDelegate?, type: PasscodeInputViewType) {
+        router.goToPasscode(delegate: delegate, type: type)
+    }
+    
+    func goToPasscodeSettings() {
+        router.goToPasscodeSettings()
+    }
 
     
     override func outputView() -> Waiting? {
@@ -102,16 +110,26 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     func profilePhotoUploadFailed(){
         view.profileWontChange()
     }
+    
+    func connectToNetworkFailed() {
+        asyncOperationSucces()
+        router.goToConnectedToNetworkFailed()
+    }
 
     //MARK: - CustomPopUpAlertActions
 
     func cancelationAction() {
         // Logout
         startAsyncOperation()
-        interactor.onLogout()
+        interactor.checkConnectedToNetwork()
     }
     
     func otherAction() {
-        
+    }
+}
+
+extension SettingsPresenter: PasscodeEnterDelegate {
+    func finishPasscode(with type: PasscodeInputViewType) {
+        router.closeEnterPasscode()
     }
 }

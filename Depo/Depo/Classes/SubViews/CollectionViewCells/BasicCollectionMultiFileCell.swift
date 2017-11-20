@@ -190,7 +190,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         if (isSelectionActive){
             selectionImageView.image = UIImage(named: isSelected ? "selected" : "notSelected")
             if (isBigSize()){
-                UIView.animate(withDuration: NumericConstants.durationOfAnimation, animations: {
+                UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                     self.bigSelectionView.alpha = isSelected ? 1 : 0
                 })
                 smallContentImageView.setSelection(selection: false, showSelectonBorder: false)
@@ -207,7 +207,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
             if (isBigSize()){
                 bgColor = ColorConstants.fileGreedCellColor
                 if (self.bigSelectionView.alpha != 0){
-                    UIView.animate(withDuration: NumericConstants.durationOfAnimation, animations: {
+                    UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                         self.bigSelectionView.alpha = 0
                     })
                 }
