@@ -196,13 +196,13 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         //tabBar.isHidden = false
         if (self.bottomTabBarConstraint.constant < 0){
             if #available(iOS 10.0, *) {
-                let obj = UIViewPropertyAnimator(duration: NumericConstants.durationOfAnimation, curve: .linear) {
+                let obj = UIViewPropertyAnimator(duration: NumericConstants.animationDuration, curve: .linear) {
                     self.bottomTabBarConstraint.constant = 0
                     self.tabBar.layoutIfNeeded()
                 }
                 obj.startAnimation()
             } else {
-                UIView.animate(withDuration: NumericConstants.durationOfAnimation) {
+                UIView.animate(withDuration: NumericConstants.animationDuration) {
                     self.bottomTabBarConstraint.constant = 0
                     self.tabBar.layoutIfNeeded()
                 }
@@ -214,13 +214,13 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         changeTabBarStatus(hidden: true)
         if (bottomTabBarConstraint.constant >= 0){
             if #available(iOS 10.0, *) {
-                let obj = UIViewPropertyAnimator(duration: NumericConstants.durationOfAnimation, curve: .linear) {
+                let obj = UIViewPropertyAnimator(duration: NumericConstants.animationDuration, curve: .linear) {
                     self.bottomTabBarConstraint.constant = -self.tabBar.frame.height
                     self.tabBar.layoutIfNeeded()
                 }
                 obj.startAnimation()
             } else {
-                UIView.animate(withDuration: NumericConstants.durationOfAnimation) {
+                UIView.animate(withDuration: NumericConstants.animationDuration) {
                     self.bottomTabBarConstraint.constant = -self.tabBar.frame.height
                     self.tabBar.layoutIfNeeded()
                 }
@@ -338,7 +338,7 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         storyBtn?.changeConstraints(asHidden: hidden)
         folderBtn?.changeConstraints(asHidden: hidden)
         
-        UIView.animate(withDuration: 0.3, delay: 0.0, options: .showHideTransitionViews, animations: {
+        UIView.animate(withDuration: NumericConstants.animationDuration, delay: 0.0, options: .showHideTransitionViews, animations: {
             self.view.layoutIfNeeded()
             self.photoBtn?.changeVisability(toHidden: hidden)
             self.uploadBtn?.changeVisability(toHidden: hidden)
@@ -446,10 +446,14 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         /// IF WILL BE NEED TO SAVE FILE
         //UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
         
-        activityManager.start()
+        WrapItemOperatonManager.default.startOperationWith(type: .upload, allOperations: 1, completedOperations: 0)
+
+        //activityManager.start()
         UploadService.default.upload(imageData: data) { [weak self] result in
             DispatchQueue.main.async {
-                self?.activityManager.stop()
+                WrapItemOperatonManager.default.stopOperationWithType(type: .upload)
+
+                //self?.activityManager.stop()
                 switch result {
                 case .success(_):
                     CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: "Success", withText: "Photo uploaded", okButtonText: "OK")

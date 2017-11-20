@@ -84,6 +84,9 @@ class MoreFilesActionsPresenter: BasePresenter, MoreFilesActionsModuleInput, Mor
         startAsyncOperationDisableScreen()
     }
     
+    func dismiss(animated: Bool) {
+        debugPrint("Dismiss")
+    }
     
     //MARK: - Base presenter
     

@@ -119,6 +119,24 @@ extension CoreDataStack {
         return sortedItems.flatMap{ $0.wrapedObject }
     }
     
+    func allLocalItemsForSync(video: Bool, image: Bool) -> [WrapData] {
+        var filesTypesArray = [Int16]()
+        if (video){
+            filesTypesArray.append(FileType.video.valueForCoreDataMapping())
+        }
+        if (image){
+            filesTypesArray.append(FileType.image.valueForCoreDataMapping())
+        }
+        let context = mainContext
+        let predicate = NSPredicate(format: "(isLocalItemValue == true) AND (fileTypeValue IN %@)", filesTypesArray)
+        let items: [MediaItem] =  executeRequest(predicate: predicate, context:context)
+        let sortedItems = items.sorted { (item1, item2) -> Bool in
+            //< correct
+            return item1.fileSizeValue < item2.fileSizeValue
+        }
+        return sortedItems.flatMap{ $0.wrapedObject }
+    }
+    
     func checkLocalFilesExistence(actualPhotoLibItemsIDs: [String], context: NSManagedObjectContext) {
         let predicate = NSPredicate(format: "localFileID != Nil AND NOT (localFileID IN %@)", actualPhotoLibItemsIDs)
         let allNonAccurateSavedLocalFiles: [MediaItem] = executeRequest(predicate: predicate,

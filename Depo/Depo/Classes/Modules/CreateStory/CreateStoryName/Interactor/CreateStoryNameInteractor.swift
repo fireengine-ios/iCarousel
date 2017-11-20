@@ -14,5 +14,22 @@ class CreateStoryNameInteractor: CreateStoryNameInteractorInput {
         let story = PhotoStory(name: storyName)
         output.goToSelectionPhoto(forStory: story)
     }
-
+    
+    func onCreateStory(storyName: String, items: [BaseDataSourceItem]) {
+        let story = PhotoStory(name: storyName)
+        
+        var storyItems = [Item]()
+        
+        for item in items {
+            if let storyItem = item as? Item {
+                storyItems.append(storyItem)
+            }
+        }
+        if storyItems.count > 0 {
+            story.storyPhotos = storyItems
+            output.goToPhotosOrderForStory(story: story)
+        } else {
+            output.goToSelectionPhoto(forStory: story)
+        }
+    }
 }

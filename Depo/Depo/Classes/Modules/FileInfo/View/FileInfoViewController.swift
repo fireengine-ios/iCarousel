@@ -110,7 +110,7 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
     }
     
     func addReturnIfNeed(string: inout String){
-        if (string.characters.count > 0){
+        if string.count > 0 {
             string.append("\n")
         }
     }

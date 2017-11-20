@@ -78,8 +78,7 @@ class LoginDataSource: NSObject, UITableViewDelegate, UITableViewDataSource, Pro
             cell.textDelegate = self
             
             #if DEBUG
-               cell.textInputField.text = "oleg.ridevsky@gmail.com"//"6257515test@gmail.com"
-                //"testasdasdMail@notRealMail.yep"//"Aleksandr.Pestriakov@life.com.by"//"6257515test@gmail.com"
+               cell.textInputField.text = "oleg.ridevsky@gmail.com"//"6257515test@gmail.com"// "testasdasdMail@notRealMail.yep"//"Aleksandr.Pestriakov@life.com.by"//"6257515test@gmail.com"
             #endif
 
             return cell

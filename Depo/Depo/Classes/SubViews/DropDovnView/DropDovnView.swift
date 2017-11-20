@@ -144,7 +144,7 @@ class DropDovnView: UIView, UITableViewDataSource, UITableViewDelegate {
         tableView!.isHidden = false
         let h = show ? self.maxTableViewH : self.originTableViewH
         
-        UIView.animate(withDuration: NumericConstants.durationOfAnimation, animations: {
+        UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
             self.constraint!.constant = h
             self.cornerView!.setNeedsUpdateConstraints()
         }) { [weak self] (flag) in

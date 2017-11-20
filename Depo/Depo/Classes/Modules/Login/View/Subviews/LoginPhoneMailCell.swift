@@ -16,12 +16,13 @@ class LoginPhoneMailCell: BaseUserInputCellView {
     weak var loginCellActionDelegate: LoginPhoneMailCellActionProtocol?
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if textField.text?.characters.count == 0, string == "+" {
+        if textField.text?.count == 0, string == "+" {
             loginCellActionDelegate?.firstCharacterIsPlus(fromCell: self, string: string)
 //            textField.text = 
             return false
-        } else if string.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil, textField.text?.characters.count == 0 {
+        } else if string.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil, textField.text?.count == 0 {
             loginCellActionDelegate?.firstCharacterIsNum(fromCell: self, string: string)
+            if string == "0", CoreTelephonyService().isTurkcellOperator() { return false }
             debugPrint("First symbol is num!!!!!!47")
         }
 

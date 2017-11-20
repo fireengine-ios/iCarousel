@@ -13,20 +13,20 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     let player: MediaPlayer = factory.resolve()
     
-    var dataSource = BaseDataSourceForCollectionView()
-
+    var dataSource: BaseDataSourceForCollectionView
+    
     weak var view: BaseFilesGreedViewInput!
-   
+    
     var interactor: BaseFilesGreedInteractorInput!
     
     var router: BaseFilesGreedRouterInput!
     
-    var sortedRule: SortedRules = .timeDown
+    var sortedRule: SortedRules
     
     var filters: [GeneralFilesFiltrationType] = []
     
     let custoPopUp = CustomPopUp()
-
+    
     var bottomBarConfig: EditingBarConfig?
     
     weak var bottomBarPresenter: BottomSelectionTabBarModuleInput?
@@ -37,6 +37,12 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     var alertSheetModule: AlertFilesActionsSheetModuleInput?
     
+    init(sortedRule: SortedRules = .timeDown) {
+        self.sortedRule = sortedRule
+        self.dataSource = BaseDataSourceForCollectionView(sortingRules: sortedRule)
+        super.init()
+    }
+    
     func viewIsReady(collectionView: UICollectionView) {
         interactor.viewIsReady()
         if let unwrapedFilters = interactor.originalFilesTypeFilter {
@@ -44,14 +50,14 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         }
         dataSource.setupCollectionView(collectionView: collectionView,
                                        filters: interactor.originalFilesTypeFilter)
-
+        
         dataSource.delegate = self
         
         view.setupInitialState()
         setupTopBar()
         
         getContent()
-        
+        reloadData()
     }
     
     func searchByText(searchText: String) {
@@ -59,7 +65,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func onReloadData(){
-        dataSource.isPaginationDidEnd = false
+        
+        dataSource.dropData()
         reloadData()
     }
     
@@ -68,7 +75,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func getContent() {
-//        uploadData()
+        //        uploadData()
     }
     
     private func getFileFilter() -> FieldValue {
@@ -86,32 +93,47 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     private func compoundAllFiltersAndNextItems(searchText: String? = nil) {
+//        startAsyncOperation()
         interactor.nextItems(searchText,
-                             sortBy: sortedRule.sortingRules,
+                             sortBy: getSortedRuleByFilters(),
                              sortOrder: sortedRule.sortOder, newFieldValue: getFileFilter())
     }
-    
+    private func getSortedRuleByFilters() -> SortType {
+        
+            for filter in filters {
+                switch filter {
+                case .fileType(.image):
+                    if sortedRule == .timeDown || sortedRule == .timeUp {
+                         return .imageDate
+                    }
+                   break
+                default:
+                    break
+                }
+            }
+        return sortedRule.sortingRules
+    }
     func reloadData() {
         startAsyncOperation()
+        dataSource.isPaginationDidEnd = false
         interactor.reloadItems(nil,
-                               sortBy: sortedRule.sortingRules,
+                               sortBy: getSortedRuleByFilters(),
                                sortOrder: sortedRule.sortOder, newFieldValue: getFileFilter())
     }
     
     func uploadData(_ searchText: String? = nil){
         startAsyncOperation()
         compoundAllFiltersAndNextItems(searchText: searchText)
-//        filters.convertToSearchRequestFieldValue()
-//        interactor.nextItems(searchText,
-//                             sortBy: .name,
-//                             sortOrder: .asc, newFieldValue: nil)
     }
     
     func onNextButton(){
         
     }
     
+    //MARK:- Request OUTPUT
     func getContentWithFail(errorString: String?) {
+        view?.stopRefresher()
+        dataSource.isPaginationDidEnd = false
         debugPrint("???getContentWithFail()")
         asyncOperationFail(errorMessage: errorString)
     }
@@ -119,50 +141,41 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func serviceAreNotAvalible() {
         
     }
-    
+
     func getContentWithSuccessEnd() {
         debugPrint("???getContentWithSuccessEnd()")
         asyncOperationSucces()
         dataSource.isPaginationDidEnd = true
         view?.stopRefresher()
-        dataSource.fetchService.performFetch(sortingRules: sortedRule,
-                                             filtes: filters,
-                                             delegate: dataSource)
+        dataSource.appendCollectionView(items: [])
         dataSource.reloadData()
     }
     
-    func getContentWithSuccess(){
+    func getContentWithSuccess(items: [WrapData]){
         if (view == nil){
             return
         }
         debugPrint("???getContentWithSuccess()")
         asyncOperationSucces()
         view.stopRefresher()
-//        dataSource.reloadData()
-        // TODO:
-//        let sectionsCount = dataSource.numberOfSections(in: dataSource.collectionView!)
-//        let  needShow = (sectionsCount == 0) ? interactor.needShowNoFileView() : false
-//
-//        view.setCollectionViewVisibilityStatus(visibilityStatus: needShow)
         
-//        dataSource.fetchService.controller.delegate = dataSource
-        dataSource.fetchService.performFetch(sortingRules: sortedRule,
-                                             filtes: filters,
-                                             delegate: dataSource)
+//        items.count < interactor.requestPageSize ? (dataSource.isPaginationDidEnd = true) : (dataSource.isPaginationDidEnd = false)
+
+        dataSource.appendCollectionView(items: items)
+
         dataSource.reloadData()
     }
     
-    func getContentWithSuccess(array: [[BaseDataSourceItem]]){
-        if (view == nil){
+    func getContentWithSuccess(array: [[BaseDataSourceItem]]) {
+        if (view == nil) {
             return
         }
         debugPrint("???getContentWithSuccessEnd()")
-        //
         asyncOperationSucces()
         view.stopRefresher()
         if let dataSourceForArray = dataSource as? ArrayDataSourceForCollectionView{
             dataSourceForArray.configurateWithArray(array: array)
-        }else{
+        } else {
             dataSource.reloadData()
         }
     }
@@ -172,8 +185,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func getNextItems() {
-//        interactor.nextItems(nil, sortBy: .name,
-//                             sortOrder: .asc, newFieldValue: <#FieldValue?#>)
+        //        interactor.nextItems(nil, sortBy: .name,
+        //                             sortOrder: .asc, newFieldValue: <#FieldValue?#>)
         compoundAllFiltersAndNextItems()
     }
     
@@ -225,7 +238,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 guard let startIndex = list.index(of: wrappered) else { return }
                 player.play(list: list, startAt: startIndex)
                 player.play()
-//                SingleSong.default.playWithItems(list: array.flatMap({$0}), startItem: wrappered)
+                //                SingleSong.default.playWithItems(list: array.flatMap({$0}), startItem: wrappered)
             } else {
                 router.onItemSelected(item: item, from: data)
             }
@@ -267,19 +280,19 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     private func startEditing() {
         //call tabbar
-
+        
         view.setupSelectionStyle(isSelection: true)
         dataSource.setSelectionState(selectionState: true)
     }
     
-
+    
     private func stopEditing() {
         bottomBarPresenter?.dismiss(animated: true)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
         view.setupSelectionStyle(isSelection: false)
         dataSource.setSelectionState(selectionState: false)
     }
-
+    
     func onChangeSelectedItemsCount(selectedItemsCount: Int) {
         if (selectedItemsCount == 0){
             bottomBarPresenter?.dismiss(animated: true)
@@ -293,10 +306,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     private func setupNewBottomBarConfig() {
-     
+        
         guard let barConfig = interactor.bottomBarConfig,
-              let array = dataSource.getSelectedItems() as? [Item] else {
-            return
+            let array = dataSource.getSelectedItems() as? [Item] else {
+                return
         }
         
         bottomBarPresenter?.setupTabBarWith(items: array, originalConfig: barConfig)
@@ -327,12 +340,11 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         }
     }
     
-    func sortedPushed(with rule: SortedRules){
+    func sortedPushed(with rule: SortedRules) {
         sortedRule = rule
         view.changeSortingRepresentation(sortType: rule)
-        dataSource.fetchService.performFetch(sortingRules: sortedRule,
-                                             filtes: self.filters,
-                                             delegate: dataSource)
+        dataSource.dropData()
+        dataSource.currentSortType = rule
         dataSource.reloadData()
         reloadData()
     }
@@ -357,37 +369,56 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         if dataSource.selectedItemsArray.count > 0 {
             bottomBarPresenter?.show(animated: true, onView: nil)
         }
-        
-        UploadService.default.uploadOnDemand(success: {
-            DispatchQueue.main.async {
-                CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: "", withText: TextConstants.uploadSuccessful, okButtonText: TextConstants.ok)
-            }
-            print("Upload success")
-        }) { (errorResponse) in
-            print("Upload fail")
-        }
-        
-        reloadData()
+//        UploadService.default.uploadOnDemand(success: {
+//            DispatchQueue.main.async {
+//                CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: "", withText: TextConstants.uploadSuccessful, okButtonText: TextConstants.ok)
+//            }
+//            print("Upload success")
+//        }) { (errorResponse) in
+//            print("Upload fail")
+//        }
+//        
+//        reloadData()
+
     }
     
     func moreActionsPressed(sender: Any) {
         
         let selectionMode = dataSource.isInSelectionMode()
-        var type = (interactor.alerSheetMoreActionsConfig?.selectionModeTypes ?? [])
+        var actionTypes = (interactor.alerSheetMoreActionsConfig?.selectionModeTypes ?? [])
         if selectionMode {
-            let list = Array(dataSource.selectedItemsArray)
-            let selectedItems = CoreDataStack.default.mediaItemByUUIDs(uuidList: list)
-            let items = selectedItems.filter{ $0.isLocalItem == false}
-            if !items.isEmpty {
-                type.append(.addToCmeraRoll)
+            let selectedItemsUUIDs = Array(dataSource.selectedItemsArray)
+            var selectedItems = [WrapData]()
+            
+            for items in dataSource.allItems {
+                selectedItems += items.filter { selectedItemsUUIDs.contains($0.uuid) }
             }
-            alertSheetModule?.showAlertSheet(with: type,
+            
+            let items = selectedItems.filter { $0.isLocalItem == false}
+
+            if items.contains(where: { return !($0.favorites) } ) {
+                actionTypes.append(.addToFavorites)
+            }
+            if items.contains(where: { return $0.favorites } ) {
+                actionTypes.append(.removeFromFavorites)
+            }
+            
+            if actionTypes.contains(.createStory) && items.contains(where: { return $0.fileType != .image } ) {
+                let index = actionTypes.index(where: { return $0 == .createStory})!
+                actionTypes.remove(at: index)
+            }
+            
+            let noSyncItems = selectedItems.filter{ $0.syncStatus != SyncWrapperedStatus.synced }
+            if noSyncItems.isEmpty {
+                actionTypes.append(.print)
+            }
+            alertSheetModule?.showAlertSheet(with: actionTypes,
                                              items: selectedItems,
                                              presentedBy: sender,
                                              onSourceView: nil)
         } else {
-            type  = (interactor.alerSheetMoreActionsConfig?.initialTypes ?? [])
-            alertSheetModule?.showAlertSheet(with: type,
+            actionTypes  = (interactor.alerSheetMoreActionsConfig?.initialTypes ?? [])
+            alertSheetModule?.showAlertSheet(with: actionTypes,
                                              presentedBy: sender,
                                              onSourceView: nil)
         }
@@ -402,13 +433,13 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func sortedPushedTopBar(with rule:  MoreActionsConfig.SortRullesType) {
-
+        
         var sortRule: SortedRules
         switch rule {
         case .AlphaBetricAZ:
-            sortRule = .lettersAZ
-        case .AlphaBetricZA:
             sortRule = .lettersZA
+        case .AlphaBetricZA:
+            sortRule = .lettersAZ
         case .TimeNewOld:
             sortRule = .timeUp
         case .TimeOldNew:
@@ -425,12 +456,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func filtersTopBar(cahngedTo filters: [MoreActionsConfig.MoreActionsFileType]) {
         self.filters = filters.map{ $0.convertToGeneralFilterFileType() }
-//        dataSource.fetchService.controller.delegate = dataSource
-//        dataSource.fetchService.performFetch(sortingRules: sortedRule,
-//                                             filtes: self.filters)
-//        dataSource.reloadData()
         
         stopEditing()
+        dataSource.dropData()
+        dataSource.originalFilters = self.filters
         reloadData()
     }
     
@@ -440,7 +469,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     var selectedItems: [BaseDataSourceItem] {
         return dataSource.getSelectedItems()
     }
-
+    
     func operationFinished(withType type: ElementTypes, response: Any?) {
         debugPrint("finished")
         dataSource.setSelectionState(selectionState: false)
@@ -460,6 +489,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         dataSource.setSelectionState(selectionState: true)
     }
     
+    func printSelected() {
+        router.showPrint(items: selectedItems)
+    }
+    
     func selectAllModeSelected() {
         view.setupSelectionStyle(isSelection: true)
         dataSource.selectAll(isTrue: true)
@@ -473,3 +506,4 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         return self.sortedRule.stringValue
     }
 }
+

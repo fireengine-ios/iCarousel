@@ -20,9 +20,9 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
     var output: PhotoVideoDetailViewOutput!
     var interactor: PhotoVideoDetailInteractor?
     var views: [BaseFileContentView] = [BaseFileContentView]()
-    var selectedIndex: Int = -1
+    var selectedIndex: Int = -1 { didSet { configureNavigationBar() } }
     var isAnimating = false
-    var objects = [Item]()
+    var objects = [Item]() { didSet { configureNavigationBar() } }
     let customPopUp = CustomPopUp()
     var localPlayer: AVPlayer?
     var playerController: AVPlayerViewController?
@@ -61,6 +61,13 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         floatingView.hideView(animated: true)
         output.viewWillDisappear()
+    }
+    
+    private func configureNavigationBar() {
+        if objects.count > selectedIndex, selectedIndex >= 0 {
+            let item = objects[selectedIndex]
+            navigationItem.rightBarButtonItem?.isEnabled = item.syncStatus != .notSynced
+        }
     }
     
     func onBack(){
@@ -130,7 +137,7 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
             output.setSelectedItemIndex(selectedIndex: selectedIndex)
             
             setVisibilityOfNotVisibleViws(visibility: true)
-            UIView.animate(withDuration: 0.3, animations: {
+            UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                 for view in self.views{
                     view.frame = CGRect(x: view.frame.origin.x - self.viewForContent.frame.size.width, y: view.frame.origin.y, width: view.frame.size.width, height: view.frame.size.height)
                 }
@@ -162,7 +169,7 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
             selectedIndex = selectedIndex - 1
             output.setSelectedItemIndex(selectedIndex: selectedIndex)
             setVisibilityOfNotVisibleViws(visibility: true)
-            UIView.animate(withDuration: 0.3, animations: {
+            UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                 for view in self.views{
                     view.frame = CGRect(x: view.frame.origin.x + self.viewForContent.frame.size.width, y: view.frame.origin.y, width: view.frame.size.width, height: view.frame.size.height)
                 }

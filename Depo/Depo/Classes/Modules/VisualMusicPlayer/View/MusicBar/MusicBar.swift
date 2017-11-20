@@ -6,10 +6,16 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
+protocol MusicBarDelegate: class {
+    func musicBarZoomWillOpen()
+}
+
 class MusicBar: UIView {
     
     let player: MediaPlayer = factory.resolve()
     
+    weak var delegate: MusicBarDelegate?
+
     @IBOutlet weak var gradientView: GradientView!
     @IBOutlet weak var artistLabel: UILabel!
     @IBOutlet weak var zoomUpButton: UIButton!
@@ -18,7 +24,8 @@ class MusicBar: UIView {
     @IBOutlet weak var progressViewContainer: UIView!
     
     @IBAction func actionZoomUpButton(_ sender: UIButton) {
-        RouterVC().rootViewController?.present(playerFullScreenVC, animated: true, completion: nil)
+        delegate?.musicBarZoomWillOpen()
+        RouterVC().rootViewController?.present(playerFullScreenVC, animated: delegate == nil ? true : false, completion: nil)
     }
     
     @IBAction func actionPlayPauseButton(_ sender: UIButton) {
@@ -85,7 +92,7 @@ class MusicBar: UIView {
     }
 
     private func removePlayer() {
-        player.stop()
+        player.clearCurrentItem()
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationMusicDrop), object: nil)
     }
 

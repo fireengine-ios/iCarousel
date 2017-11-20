@@ -72,7 +72,7 @@ class PasswordCell: ProtoInputTextCell {
         } else {
             titleLabel.textColor = ColorConstants.yellowColor
             if let savedPlaceholder = placeholderText {
-                if textInput.text?.characters.count == 0 {
+                if textInput.text?.count == 0 {
                     textInput.font = UIFont.TurkcellSaturaBolFont(size: 16)
                 }
                 placeholder = savedPlaceholder

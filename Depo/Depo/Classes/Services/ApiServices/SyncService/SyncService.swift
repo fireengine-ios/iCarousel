@@ -17,7 +17,11 @@ class SyncService: NSObject {
     private var isSyncing: Bool = false
     private var itemsFromServer = [WrapData]()
     private let numberElementsInRequest = 100
+    private var allObjectsHaveBeenUploaded = false
     private var photoVideoService : PhotoAndVideoService? = nil
+    
+    private var localItemsArray = [WrapData]()
+    private var localMD5Array = [String]()
     
     override init() {
         operations = OperationQueue()
@@ -35,35 +39,66 @@ class SyncService: NSObject {
             return
         }
         
+        localItemsArray.removeAll()
+        localMD5Array.removeAll()
+        
         isSyncing = true
+        allObjectsHaveBeenUploaded = false
         itemsFromServer.removeAll()
         self.photoVideoService = PhotoAndVideoService(requestSize: numberElementsInRequest)
-        getAllServerObjects(success: {
-            
-            let serverObjectHash = self.itemsFromServer.map({$0.md5})
-
-            let notSyncedItems = self.allLocalNotSyncItems(md5Array: serverObjectHash,
-                                                           video: isWiFi ? true : !videoViaWiFiOnly,
-                                                           image: isWiFi ? true : !imageViaWiFiOnly)
-
-            if (notSyncedItems.count > 0){
-                UploadService.default.uploadFileList(items: notSyncedItems,
-                                                     uploadType: .autoSync,
-                                                     uploadStategy: .WithoutConflictControl,
-                                                     uploadTo: .MOBILE_UPLOAD,
-                                                     success:{
-                                                        self.isSyncing = false
-                }, fail: { (error) in
-                    self.isSyncing = false
-                })
+        
+        let localItems = self.allLocalNotSyncItems(video: isWiFi ? true : !videoViaWiFiOnly,
+                                                   image: isWiFi ? true : !imageViaWiFiOnly)
+        var latestDate: Date? = nil
+        
+        for object in localItems {
+            if object.fileSize < NumericConstants.fourGigabytes {
+                localItemsArray.append(object)
+                if latestDate == nil {
+                    latestDate = object.creationDate
+                }else{
+                    guard let date = object.creationDate else{
+                        continue
+                    }
+                    if latestDate!.compare(date) == ComparisonResult.orderedDescending {
+                        latestDate = object.creationDate
+                    }
+                }
             }else{
-                self.isSyncing = false
+                //
             }
-            
-        }) {
-            self.isSyncing = false
+        }
+        localMD5Array.append(contentsOf: localItemsArray.map({ $0.md5 }))
+        
+        guard let dateForCheck = latestDate else {
+            isSyncing = false
+            return
+        }
+        
+        getUnsyncedObjects(latestDate: dateForCheck, success: { [weak self] in
+            if let self_ = self {
+                if self_.localItemsArray.count > 0 {
+                    UploadService.default.uploadFileList(items: self_.localItemsArray,
+                                                         uploadType: .autoSync,
+                                                         uploadStategy: .WithoutConflictControl,
+                                                         uploadTo: .MOBILE_UPLOAD,
+                                                         success:{
+                                                            self_.isSyncing = false
+                    }, fail: { (error) in
+                        self_.isSyncing = false
+                    })
+                }else{
+                    self_.isSyncing = false
+                }
+            }
+        }) {[weak self] in
+            if let self_ = self {
+                self_.isSyncing = false
+            }
         }
     }
+    
+    
     
     func startAutoSyncInBG(){
         let time = NSDate().timeIntervalSince1970
@@ -81,27 +116,49 @@ class SyncService: NSObject {
         }
     }
     
-    private func getAllServerObjects(success: @escaping ()-> Swift.Void, fail: @escaping ()-> Swift.Void){
+    private func getUnsyncedObjects(latestDate: Date,
+                                      success: @escaping ()-> Swift.Void,
+                                      fail: @escaping ()-> Swift.Void){
+        
         guard let service = self.photoVideoService else{
             fail()
             return
         }
-        service.nextItems(sortBy: .date, sortOrder: .asc, success: { (items) in
-            self.itemsFromServer.append(contentsOf: items)
+        var finished = false
+        
+        service.nextItems(sortBy: .date, sortOrder: .desc, success: { [weak self] (items) in
+            guard let self_ = self else{
+                fail()
+                return
+            }
             
-            if (items.count == self.numberElementsInRequest){
-                self.getAllServerObjects(success: {
-                    success()
-                }, fail: {
-                    fail()
-                })
+            for item in items{
+                if let date = item.creationDate, date.compare(latestDate) == ComparisonResult.orderedAscending{
+                    finished = true
+                    break
+                }
+                let serverObjectMD5 = item.md5
+                let index = self_.localMD5Array.index(of: serverObjectMD5)
+                if let index_ = index {
+                    
+                    self_.localItemsArray.remove(at: index_)
+                    self_.localMD5Array.remove(at: index_)
+                    
+                    if (self_.localItemsArray.count == 0){
+                        finished = true
+                        break
+                    }
+                }
+            }
+            
+            if (!finished) && (items.count == self_.numberElementsInRequest){
+                self_.getUnsyncedObjects(latestDate: latestDate, success: success, fail: fail)
             }else{
                 success()
             }
-        }, fail: {
-            fail()
+            }, fail: {
+                fail()
         }, newFieldValue: nil)
-       
     }
     
     func stopSync() {
@@ -120,10 +177,8 @@ class SyncService: NSObject {
         return CoreDataStack.default.allLocalItem()
     }
     
-    func allLocalNotSyncItems(md5Array: [String], video: Bool, image: Bool) -> [WrapData] {
-        return CoreDataStack.default.allLocalNotSyncedItems(md5Array: md5Array,
-                                                            video: video,
-                                                            image: image)
+    func allLocalNotSyncItems(video: Bool, image: Bool) -> [WrapData] {
+        return CoreDataStack.default.allLocalItemsForSync(video:video, image:image)
     }
     
     func updateSyncSettings(setting: SettingsAutoSyncModel) {

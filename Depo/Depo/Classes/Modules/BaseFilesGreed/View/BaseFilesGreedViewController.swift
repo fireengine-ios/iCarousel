@@ -110,9 +110,9 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         if mainTitle != "" {
             subTitle = output.getSortTypeString()
         }
-        if let unwrapedSlider = contentSlider { //FIXME: shiwt reload mechanic to presenter, so modules would speak as normal
-            unwrapedSlider.reloadAllData()
-        }
+//        if let unwrapedSlider = contentSlider { //FIXME: shiwt reload mechanic to presenter, so modules would speak as normal
+//            unwrapedSlider.reloadAllData()
+//        }
         output.viewWillAppear()
     }
     
@@ -310,7 +310,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         }
         
         let calculatedH = h + sliderH
-        UIView.animate(withDuration: NumericConstants.durationOfAnimation) {
+        UIView.animate(withDuration: NumericConstants.animationDuration) {
             
             if let yConstr = self.contentSliderTopY {
                 yConstr.constant = -h - sliderH

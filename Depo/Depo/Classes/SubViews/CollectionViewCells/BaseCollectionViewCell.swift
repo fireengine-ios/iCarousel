@@ -69,6 +69,10 @@ class BaseCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDelegate,
         
     }
     
+    func setImage(with pathForItem: PathForItem) {
+        
+    }
+    
     func setSelection(isSelectionActive: Bool, isSelected: Bool){
         
     }

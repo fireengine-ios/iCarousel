@@ -58,10 +58,11 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     }
     
     func setupTabBarWith(items: [BaseDataSourceItem], originalConfig: EditingBarConfig) {
-        if originalConfig.elementsConfig.contains(.sync), originalConfig.elementsConfig.contains(.download) {
+        if originalConfig.elementsConfig.contains(.sync), originalConfig.elementsConfig.contains(.download), originalConfig.elementsConfig.contains(.delete) {
             
             let downloadIndex = originalConfig.elementsConfig.index(of: .download)
             let syncIndex = originalConfig.elementsConfig.index(of: .sync)
+            let deleteIndex = originalConfig.elementsConfig.index(of: .delete)
             
             view.disableItems(atIntdex: [downloadIndex!, syncIndex!])
 //            if items.count < 1 {
@@ -76,6 +77,11 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     view.enableIems(atIndex: [downloadIndex!])
                 }
             })
+            if items.contains(where: { $0.syncStatus == .notSynced }) {
+                view.disableItems(atIntdex: [deleteIndex!])
+            } else {
+                view.enableIems(atIndex: [deleteIndex!])
+            }
         }
     }
     
@@ -84,7 +90,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         debugPrint("number of selected items ", items.count)
     }
     
-    func dismiss(animated: Bool) {
+    override func dismiss(animated: Bool) {
         view.hideBar(animated: animated)
         //NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
         debugPrint("Editing bar Dismiss")
@@ -107,7 +113,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     }
     
     func bottomBarSelectedItem(index: Int, sender: UITabBarItem) {
-        
         guard let selectedItems = basePassingPresenter?.selectedItems else {
             return
         }
@@ -134,7 +139,17 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         case .move:
             interactor.move(item: selectedItems, toPath: "")
         case .share:
-            interactor.share(item: selectedItems, sourceRect: middleTabBarRect)
+            var onlyLink = false
+            selectedItems.forEach({ (item) in
+                if item.fileType != .image {
+                    onlyLink = true
+                }
+            })
+            if onlyLink {
+                interactor.shareViaLink(item: selectedItems, sourceRect: middleTabBarRect)
+            } else {
+                interactor.share(item: selectedItems, sourceRect: middleTabBarRect)
+            }
         case .sync:
             interactor.sync(item: selectedItems)
         case .removeFromAlbum:

@@ -24,10 +24,16 @@ class CollectionSortingRules {
             rule = CollectionSortingRules.sortByFileName(ascending: false)
             
         case .timeUp:
-            rule = CollectionSortingRules.sortByCreateDate(ascending: false)
+            rule = CollectionSortingRules.sortByCreateDate(ascending: false, section: true)
+            
+        case .timeUpWithoutSection:
+            rule = CollectionSortingRules.sortByCreateDate(ascending: false, section: false)
             
         case .timeDown:
-            rule = CollectionSortingRules.sortByCreateDate(ascending: true)
+            rule = CollectionSortingRules.sortByCreateDate(ascending: true, section: true)
+            
+        case .timeDownWithoutSection:
+            rule = CollectionSortingRules.sortByCreateDate(ascending: true, section: false)
             
         case .sizeAZ:
             rule = CollectionSortingRules.sortByFileSize(ascending: false)
@@ -43,8 +49,8 @@ class CollectionSortingRules {
         return sorting(sortingFieldName: "nameValue", ascending: ascending, needSepareteBySection: true, sectionFieldName: "fileNameFirstChar")
     }
     
-    static func sortByCreateDate(ascending: Bool) -> SortingAgregate {
-        return sorting(sortingFieldName: "creationDateValue", ascending: ascending, needSepareteBySection: true, sectionFieldName: "monthValue")
+    static func sortByCreateDate(ascending: Bool,  section: Bool) -> SortingAgregate {
+        return sorting(sortingFieldName: "creationDateValue", ascending: ascending, needSepareteBySection: true, sectionFieldName: section ? "monthValue" : nil)
     }
     
     static func sortByFileSize(ascending: Bool) -> SortingAgregate {
@@ -56,12 +62,12 @@ class CollectionSortingRules {
         let sortDescr = NSSortDescriptor(key: sortingFieldName, ascending: ascending)
         array.append(sortDescr)
         
-        if needSepareteBySection {
+        if needSepareteBySection, let sectionFieldName = sectionFieldName {
             let firstSort = NSSortDescriptor(key: sectionFieldName, ascending: ascending)
             array.insert(firstSort, at: 0)
         }
         
-        let sectionName: String? = needSepareteBySection ? sectionFieldName : nil
+        let sectionName: String? = (needSepareteBySection && sectionFieldName != nil) ? sectionFieldName : nil
         return (array, sectionName)
     }
 }

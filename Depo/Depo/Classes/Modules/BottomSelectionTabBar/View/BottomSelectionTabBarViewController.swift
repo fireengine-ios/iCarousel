@@ -66,7 +66,7 @@ class BottomSelectionTabBarViewController: UIViewController, BottomSelectionTabB
         }
         output.bottomBarSelectedItem(index: selectedItemIndex, sender: item)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + NumericConstants.durationOfAnimation) {[weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + NumericConstants.animationDuration) {[weak self] in
             self?.unselectAll()
         }
     }

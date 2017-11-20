@@ -27,10 +27,15 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     func onShowSelectedItem(at index: Int, from items:[Item]) {
         view.onShowSelectedItem(at: index, from: items)
         var barConfig = interactor.bottomBarConfig
+        
+        if items[index].syncStatus != .notSynced {
+            barConfig = EditingBarConfig(elementsConfig: barConfig.elementsConfig + [.delete], style: .black, tintColor: nil)
+        }
+        
         if items[index].syncStatus == .notSynced {
-            barConfig = EditingBarConfig(elementsConfig: interactor.bottomBarConfig.elementsConfig + [.sync], style: .black, tintColor: nil)
+            barConfig = EditingBarConfig(elementsConfig: barConfig.elementsConfig + [.sync], style: .black, tintColor: nil)
         } else if items[index].syncStatus == .synced {
-            barConfig = EditingBarConfig(elementsConfig: interactor.bottomBarConfig.elementsConfig + [.download], style: .black, tintColor: nil)
+            barConfig = EditingBarConfig(elementsConfig: barConfig.elementsConfig + [.download], style: .black, tintColor: nil)
         }
 //        if items[index].fileType == .image {
 //            
@@ -106,6 +111,8 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     func selectAllModeSelected() {
         
     }
+    
+    func printSelected() { }
     
     
     //MARK : BasePresenter

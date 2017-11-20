@@ -56,7 +56,7 @@ class AutoSyncInformTableViewCell: UITableViewCell {
         descriptionLableText = model.subTitleString
         titleLabel.text = model.titleString
         
-        separatorView.isHidden = model.titleString.characters.count == 0
+        separatorView.isHidden = model.titleString.count == 0
         
         
         checkBoxButton.isSelected = model.isSelected

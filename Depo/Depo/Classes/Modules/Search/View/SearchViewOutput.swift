@@ -9,9 +9,14 @@
 import Foundation
 
 protocol SearchViewOutput {
+    var player: MediaPlayer { get }
+
     func searchWith(searchText: String, sortBy: SortType, sortOrder: SortOrder)
     func viewIsReady(collectionView: UICollectionView)
     func isShowedSpinner() -> Bool
     func getSuggestion(text: String)
     func tapCancel()
+    
+    func playerDidHide()
+    func willDismissController()
 }

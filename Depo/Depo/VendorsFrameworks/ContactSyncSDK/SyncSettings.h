@@ -58,7 +58,7 @@ typedef NS_ENUM(NSUInteger, SYNCMode) {
 
 @property (nonatomic, copy) void (^callback)(id data);
 
-@property (nonatomic, copy) void (^progressCallback)();
+@property (nonatomic, copy) void (^progressCallback)(void);
 
 + (SYNC_INSTANCETYPE) shared;
 

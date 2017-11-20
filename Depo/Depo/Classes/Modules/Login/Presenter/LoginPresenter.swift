@@ -106,7 +106,7 @@ class LoginPresenter: BasePresenter, LoginModuleInput, LoginViewOutput, LoginInt
     
     func foundCoutryPhoneCode(code: String, plus: Bool) {
         var countryCode = code
-        if code.characters.count == 0 {
+        if code.count == 0 {
             countryCode = "+"
         }
         plus ? view.enterPhoneCountryCode(countryCode: countryCode) : view.incertPhoneCountryCode(countryCode: code)

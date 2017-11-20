@@ -28,22 +28,33 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
         
     }
     
-    func selectShareType(sourceRect: CGRect?){
+    func selectShareType(sourceRect: CGRect?) {
+        if sharingItems.contains(where: { return $0.fileType != .image && $0.fileType != .video }) {
+            shareViaLink(sourceRect: sourceRect)
+        } else {
+            showSharingMenu(sourceRect: sourceRect)
+        }
+    }
+    
+    func showSharingMenu(sourceRect: CGRect?) {
         let controler = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         controler.view.tintColor = ColorConstants.darcBlueColor
         
         let smallAction = UIAlertAction(title: TextConstants.actionSheetShareSmallSize, style: .default) { (action) in
+            self.output?.dismiss(animated: true)
             self.shareSmallSize(sourceRect: sourceRect)
         }
         
         controler.addAction(smallAction)
         
         let originalAction = UIAlertAction(title: TextConstants.actionSheetShareOriginalSize, style: .default) { (action) in
+            self.output?.dismiss(animated: true)
             self.shareOrignalSize(sourceRect: sourceRect)
         }
         controler.addAction(originalAction)
         
         let shareViaLinkAction = UIAlertAction(title: TextConstants.actionSheetShareShareViaLink, style: .default) { (action) in
+            self.output?.dismiss(animated: true)
             self.shareViaLink(sourceRect: sourceRect)
         }
         controler.addAction(shareViaLinkAction)
@@ -57,7 +68,6 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
         
         let router = RouterVC()
         router.presentViewController(controller: controler)
-
     }
     
     func shareSmallSize(sourceRect: CGRect?){
@@ -104,6 +114,16 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
         }
     }
     
+    func shareViaLink(item: [BaseDataSourceItem], sourceRect: CGRect?) {
+        if (item.count == 0){
+            return
+        }
+        sharingItems.removeAll()
+        sharingItems.append(contentsOf: item)
+        
+        shareViaLink(sourceRect: sourceRect)
+    }
+    
     func shareViaLink(sourceRect: CGRect?){
         output?.operationStarted(type: .share)
         fileService.share(sharedFiles: sharingItems, success: {[weak self] (url) in
@@ -125,7 +145,14 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
     }
     
     func info(item: [BaseDataSourceItem]) {
+        self.output?.operationFinished(type: .info)
         
+        let router = RouterVC()
+        
+        if let infoController = router.fileInfo as? FileInfoViewController, let object = item.first {
+            infoController.interactor.setObject(object: object)
+            router.pushViewController(viewController: infoController)
+        }
     }
     
     func edit(item: [BaseDataSourceItem]) {
@@ -243,7 +270,8 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
     }
     
     func createStory(items: [BaseDataSourceItem]) {
-        
+        let router = RouterVC()
+        router.createStoryName(items: items)
     }
     
     func addToFavorites(items: [BaseDataSourceItem]) {

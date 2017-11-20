@@ -43,6 +43,14 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
         }
     }
     
-    func openAlbumDetail(_ album: AlbumItem) {}
-    
+    func showPrint(items: [BaseDataSourceItem]) {
+        guard let wrapperedArray = items as? [Item] else {
+            return
+        }
+        let router = RouterVC()
+        
+        let vc = PrintInitializer.viewController(data: wrapperedArray)
+        router.pushViewController(viewController: vc)
+    }
+        
 }

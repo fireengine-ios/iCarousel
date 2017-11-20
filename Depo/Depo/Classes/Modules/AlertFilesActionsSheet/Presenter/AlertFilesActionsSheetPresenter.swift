@@ -50,6 +50,10 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         types.append(item.favorites ? .removeFromFavorites : .addToFavorites)
         types.append(.delete)
         
+        if item.fileType == .image || item.fileType == .video {
+            types.append(.download)
+        }
+        
         let actions = constractActions(with: types, for: [item])
         
         presentAlertSheet(with: [headerAction] + actions, presentedBy: sender, viewController: viewController)
@@ -131,7 +135,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 
             })
         }
-        filteredActionTypes.append(.selectAll)
+        
         return constractActions(with: filteredActionTypes, for: items)
     }
     
@@ -160,7 +164,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             switch $0 {
             case .info:
                 action = UIAlertAction(title: TextConstants.actionSheetInfo, style: .default, handler: { _ in
-//                    self.router.onInfo(object: currentItems.first!)
+                    self.interactor.info(item: currentItems)
 //                    self.view.unselectAll()
                 })
             case .edit:
@@ -183,7 +187,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 })
             case .share:
                 action = UIAlertAction(title: TextConstants.actionSheetShare, style: .default, handler: { _ in
-//                    self.interactor.share(item: currentItems, sourceRect: self.middleTabBarRect)
+                    self.interactor.share(item: currentItems, sourceRect: nil)
                 })
             //Photos and albumbs
             case .photos:
@@ -278,7 +282,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 })
             case .print:
                 action = UIAlertAction(title: "Print", style: .default, handler: { _ in
-                    //TODO: will be implemented in the next package
+                    self.basePassingPresenter?.printSelected()
                 })
             default:
                 action = UIAlertAction(title: "TEST", style: .default, handler: { _ in

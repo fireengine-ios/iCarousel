@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SDWebImage
+import Photos
 
 class CollectionViewCellForPhoto: BaseCollectionViewCell {
     @IBOutlet weak var favoriteIcon: UIImageView!
@@ -45,13 +47,19 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         }
         
         imageView.image = nil
-        activity.startAnimating()
+//        activity.startAnimating()
         if wrappered.isLocalItem {
             cloudStatusImage.image = UIImage(named: "objectNotInCloud")
-        }else{
+        } else {
             cloudStatusImage.image = UIImage()
         }
         
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.imageView.image = nil
     }
     
     override func updating(){
@@ -65,17 +73,37 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         self.backgroundColor = ColorConstants.fileGreedCellColor
         activity.stopAnimating()
     }
-    
+
+    override func setImage(with pathForItem: PathForItem) {
+        imageView.contentMode = .center
+        switch pathForItem {
+        case let .localMediaContent(local):
+            break
+        case let .remoteUrl(url):
+            imageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "fileIconPhoto"), options: []) {[weak self] (image, error, cacheType, url) in
+                guard error == nil else {
+                    print("SD_WebImage_setImage error: \(error!.localizedDescription)")
+                    return
+                }
+                
+                if let `self` = self {
+                    self.imageView.contentMode = .scaleAspectFill
+                }
+            }
+        }
+        
+        isAlreadyConfigured = true
+        self.backgroundColor = ColorConstants.fileGreedCellColor
+    }
+
     override func setSelection(isSelectionActive: Bool, isSelected: Bool){
         favoriteIcon.alpha = isSelectionActive ? 0 : 1
         
         selectionImageView.isHidden = !isSelectionActive
         selectionImageView.image = UIImage(named: isSelected ? "selected" : "notSelected")
         
-        cloudStatusImage.isHidden = isSelectionActive
-        
         let selection = isSelectionActive && isSelected
-        UIView.animate(withDuration: NumericConstants.durationOfAnimation) { 
+        UIView.animate(withDuration: NumericConstants.animationDuration) { 
             self.selectionView.alpha = selection ? 1 : 0
         }
         

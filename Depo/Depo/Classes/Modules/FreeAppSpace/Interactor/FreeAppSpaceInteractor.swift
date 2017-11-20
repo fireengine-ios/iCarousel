@@ -15,6 +15,15 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
             let localFilesForDelete = FreeAppSpace.default.getLocalFiesComaredWithServerObjects(serverObjects: objects, localObjects: selectedItems)
             print(localFilesForDelete.count)
             
+            /*
+             var fileService = WrapItemFileService()
+             fileService.delete(deleteFiles: localFilesForDelete, success: {
+             
+             }, fail: { (error) in
+             
+             })
+             */
+            
             //let list: [String] = localAssetsW.flatMap { $0.localIdentifier }
             //CoreDataStack.default.removeLocalMediaItemswithAssetID(list: list)
         }) { (error) in

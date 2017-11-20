@@ -47,23 +47,3 @@ extension UITableView {
         return self.dequeueReusableHeaderFooterView(withIdentifier: identifierString) as! T
     }
 }
-
-
-extension UITableView {
-
-    func removeEmptyCells() {
-        tableFooterView = UIView()
-    }
-
-    func removeSeparatorInsetsForEmptyCells() {
-        separatorInset = UIEdgeInsets.zero
-    }
-
-    func scrollToBottomAnimated(animated: Bool) {
-        let row = numberOfRows(inSection: 0) - 1
-        if row >= 0 {
-            let indexPath = IndexPath(row: row, section: 0)
-            scrollToRow(at: indexPath, at: .bottom, animated: animated)
-        }
-    }
-}

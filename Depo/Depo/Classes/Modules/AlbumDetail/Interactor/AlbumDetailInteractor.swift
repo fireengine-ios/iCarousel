@@ -47,7 +47,7 @@ class AlbumDetailInteractor: BaseFilesGreedInteractor {
                                     if items.count == 0 {
                                         self?.output.getContentWithSuccessEnd()
                                     } else {
-                                        self?.output.getContentWithSuccess()
+                                        self?.output.getContentWithSuccess(items: items)
                                     }
                                 }
             }, fail: { [weak self] in

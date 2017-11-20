@@ -1,0 +1,94 @@
+PODS:
+  - Adjust (4.11.5):
+    - Adjust/Core (= 4.11.5)
+  - Adjust/Core (4.11.5)
+  - Bolts (1.8.4):
+    - Bolts/AppLinks (= 1.8.4)
+    - Bolts/Tasks (= 1.8.4)
+  - Bolts/AppLinks (1.8.4):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.8.4)
+  - CircleProgressBar (0.32)
+  - Crashlytics (3.9.3):
+    - Fabric (~> 1.7.2)
+  - ExpandableTableViewController (2.1)
+  - Fabric (1.7.2)
+  - FBSDKCoreKit (4.28.0):
+    - Bolts (~> 1.7)
+  - FBSDKLoginKit (4.28.0):
+    - FBSDKCoreKit
+  - FBSDKShareKit (4.28.0):
+    - FBSDKCoreKit
+  - GoogleConversionTracking (3.4.0)
+  - iCarousel (1.8.3)
+  - MBProgressHUD (1.0.0)
+  - ObjectiveDropboxOfficial (3.0.15)
+  - PullToRefreshKit (0.6.0)
+  - ReachabilitySwift (3)
+  - SDWebImage (4.2.2):
+    - SDWebImage/Core (= 4.2.2)
+  - SDWebImage/Core (4.2.2)
+  - SimpleExif (0.0.1)
+  - SplunkMint (5.2.2)
+  - SwiftyJSON (3.1.4)
+  - UIImage-Categories (1.0.0)
+  - XYPieChart (0.2)
+
+DEPENDENCIES:
+  - Adjust
+  - CircleProgressBar (~> 0.32)
+  - Crashlytics
+  - ExpandableTableViewController
+  - Fabric
+  - FBSDKCoreKit
+  - FBSDKLoginKit
+  - FBSDKShareKit
+  - GoogleConversionTracking
+  - iCarousel
+  - MBProgressHUD (~> 1.0.0)
+  - ObjectiveDropboxOfficial
+  - PullToRefreshKit (from `https://github.com/bonyadmitr/PullToRefreshKit`, branch `swift-4`)
+  - ReachabilitySwift (~> 3)
+  - SDWebImage
+  - SimpleExif
+  - SplunkMint
+  - SwiftyJSON (~> 3)
+  - UIImage-Categories
+  - XYPieChart
+
+EXTERNAL SOURCES:
+  PullToRefreshKit:
+    :branch: swift-4
+    :git: https://github.com/bonyadmitr/PullToRefreshKit
+
+CHECKOUT OPTIONS:
+  PullToRefreshKit:
+    :commit: a5cac4d1a73c0b48be1f85439152eeee498b8fbd
+    :git: https://github.com/bonyadmitr/PullToRefreshKit
+
+SPEC CHECKSUMS:
+  Adjust: 4d8e3830da125a270705188250c3ba86b544ebb7
+  Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  CircleProgressBar: 3920079be5224b62b3d9ed6eeb23ac01c835b681
+  Crashlytics: dbb07d01876c171c5ccbdf7826410380189e452c
+  ExpandableTableViewController: 7a97b8cf60f044b588255a01176cafa5ce2b7438
+  Fabric: 9cd6a848efcf1b8b07497e0b6a2e7d336353ba15
+  FBSDKCoreKit: ca961e279113f691fd83dc634c0bbad9d4e3f370
+  FBSDKLoginKit: b077381c27d800f21661757e8140cf2c80a91e4a
+  FBSDKShareKit: 4f525556e0df4cf0f574cb3f01c675434f29d477
+  GoogleConversionTracking: ca8c89abda2bd28bb6472b316eeb4ece9264e279
+  iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
+  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
+  ObjectiveDropboxOfficial: 69d6d3831e41cf4918e0374b0d1fcb620b238791
+  PullToRefreshKit: f62243564c7f9631e6810485f1a9440bc2aec391
+  ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
+  SDWebImage: 89a9d32cd520bbb46eb14e541d5109b3564af198
+  SimpleExif: 61ba6dce666641dc4b925d9d26a2694e68ebbf4b
+  SplunkMint: 8c22ce314fd7a36ee584f2e40d239e19d9fa174d
+  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+  UIImage-Categories: a0593f6a7991c99016b9ecadfbd38b3717ff1a73
+  XYPieChart: 0efd8069d26c25d20ab74c01b5ad455f1fc48153
+
+PODFILE CHECKSUM: 5633de990078408cca553b0e259ad42e59173aef
+
+COCOAPODS: 1.2.1

@@ -33,7 +33,7 @@ class AudioSelectionCollectionViewCell: BaseCollectionViewCell {
         if (isSelectionActive){
             
             UIView.transition(with: selectionImage,
-                              duration: NumericConstants.durationOfAnimation,
+                              duration: NumericConstants.animationDuration,
                               options: .transitionCrossDissolve,
                               animations: {
                 let image = UIImage(named: isSelected ? "selectedList": "pselected")

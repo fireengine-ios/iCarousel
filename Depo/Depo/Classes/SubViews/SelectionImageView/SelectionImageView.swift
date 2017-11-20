@@ -41,12 +41,12 @@ class SelectionImageView: UIImageView {
         }
         
         if (showSelectonBorder){
-            UIView.animate(withDuration: NumericConstants.durationOfAnimation, animations: {
+            UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                 self.cornerView.alpha = selection ? 1 : 0
             })
             addSubview(selectionImageView)
         }else{
-            UIView.animate(withDuration: NumericConstants.durationOfAnimation, animations: {
+            UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                 self.cornerView.alpha = 0
             })
             selectionImageView.removeFromSuperview()

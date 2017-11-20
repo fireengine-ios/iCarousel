@@ -176,7 +176,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         PHPhotoLibrary.shared().performChanges({
             switch type {
                 case .image:
-                     PHAssetChangeRequest.creationRequestForAssetFromImage(atFileURL: fileUrl)
+                    self.createRequestAppendImageToAlbum(fileUrl: fileUrl)
                 case .video:
                     PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: fileUrl)
                 default:
@@ -193,6 +193,18 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         })
     }
     
+    fileprivate func createRequestAppendImageToAlbum(fileUrl: URL) {
+        do {
+            if let image = try UIImage(data: Data(contentsOf: fileUrl)),
+               let data = UIImageJPEGRepresentation(image, 1) {
+                try data.write(to: fileUrl)
+                PHAssetChangeRequest.creationRequestForAssetFromImage(atFileURL: fileUrl)
+            }
+            
+        } catch let e {
+            print(e.localizedDescription)
+        }
+    }
     
     // MARK: Copy Assets
     

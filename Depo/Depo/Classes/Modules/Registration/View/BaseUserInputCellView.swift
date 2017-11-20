@@ -44,7 +44,7 @@ class BaseUserInputCellView: ProtoInputTextCell {
         } else {
             titleLabel.textColor = ColorConstants.yellowColor
             if let savedPlaceholder = placeholderText {
-                if textInputField.text?.characters.count == 0 {
+                if textInputField.text?.count == 0 {
                     textInputField.font = UIFont.TurkcellSaturaBolFont(size: 16)
                 }
                 

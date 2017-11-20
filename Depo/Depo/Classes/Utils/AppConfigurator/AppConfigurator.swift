@@ -19,9 +19,13 @@ class AppConfigurator {
         
         CoreDataStack.default.appendLocalMediaItems()
         
-        SDImageCache.shared().config.maxCacheSize = 100 * 1024 * 1024
+        self.configureSDWebImage()
+    }
+    
+    class private func configureSDWebImage() {
+        SDImageCache.shared().config.maxCacheSize = 100 * 1024 * 1024   // 100Mb
+        SDImageCache.shared().config.maxCacheAge = 7 * 24 * 60 * 60     // 7 days
         SDImageCache.shared().config.shouldCacheImagesInMemory = false
-        
     }
     
 }
