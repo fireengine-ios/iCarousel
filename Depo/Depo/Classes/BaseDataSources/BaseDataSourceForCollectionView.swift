@@ -142,7 +142,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     }
     
     private func appendLocalItems(originalItemsArray: [WrapData]) -> [WrapData] {
-        //TODO: check only new "chunks"(pages) of files, not all every time!!!
         var tempoArray = [WrapData]()
         var tempoLocalArray = [WrapData]()
         
@@ -159,7 +158,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         if tempoLocalArray.count == 0 {
             return originalItemsArray
         }
-
+        
         ////-------HERE WE GO
         if !isPaginationDidEnd {
             var remoteItemsMD5List = originalItemsArray.map{return $0.md5}
@@ -173,28 +172,27 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
                     case .timeUp, .timeUpWithoutSection:
                         
                         if localItem.creationDate! < lastRemoteObject.creationDate! {
-//                            debugPrint("!!!---localItem.creationDate! \(localItem.creationDate!), remote last is \(lastRemoteObject.creationDate!)")
-                            break innerLocalsLoop
+                            continue innerLocalsLoop
                         }
                     case .timeDown, .timeDownWithoutSection:
                         if localItem.creationDate! > lastRemoteObject.creationDate! {
-                            break innerLocalsLoop
+                            continue innerLocalsLoop
                         }
                     case .lettersAZ, .albumlettersAZ:
                         if String(localItem.name!.first!).uppercased() < String(lastRemoteObject.name!.first!).uppercased() {
-                            break innerLocalsLoop
+                            continue innerLocalsLoop
                         }
                     case .lettersZA, .albumlettersZA:
                         if String(localItem.name!.first!).uppercased() > String(lastRemoteObject.name!.first!).uppercased() {
-                            break innerLocalsLoop
+                            continue innerLocalsLoop
                         }
                     case .sizeAZ:
                         if localItem.fileSize > lastRemoteObject.fileSize {
-                            break innerLocalsLoop
+                            continue innerLocalsLoop
                         }
                     case .sizeZA:
                         if localItem.fileSize < lastRemoteObject.fileSize {
-                            break innerLocalsLoop
+                            continue innerLocalsLoop
                         }
                     }
                     if remoteItemsMD5List.contains(localItem.md5) {
