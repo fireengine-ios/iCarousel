@@ -33,4 +33,7 @@ protocol SettingsRouterInput {
     func goToPasscodeSettings()
     
     func closeEnterPasscode()
+
+    func goToConnectedToNetworkFailed()
+
 }

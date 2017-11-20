@@ -46,7 +46,6 @@ class SettingsRouter: SettingsRouterInput {
         router.pushViewController(viewController: router.packages)
     }
     
-    
     func goToPasscode(delegate: PasscodeEnterDelegate?, type: PasscodeInputViewType) {
         router.pushViewController(viewController: router.passcode(delegate: delegate, type: type))
     }
@@ -57,5 +56,12 @@ class SettingsRouter: SettingsRouterInput {
     
     func closeEnterPasscode() {
         router.popViewController()
+
     }
+    
+    func goToConnectedToNetworkFailed() {
+        CustomPopUp.sharedInstance.showCustomAlert(withText: TextConstants.errorConnectedToNetwork,
+                                                   okButtonText:TextConstants.ok)
+    }
+    
 }
