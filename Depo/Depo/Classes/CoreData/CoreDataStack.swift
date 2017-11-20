@@ -20,7 +20,7 @@ class CoreDataStack: NSObject {
             let mom = NSManagedObjectModel(contentsOf: modelURL)
             else { fatalError("Error loading model from bundle") }
 
-        let coordinator = NSPersistentStoreCoordinator(managedObjectModel: mom!)
+        let coordinator = NSPersistentStoreCoordinator(managedObjectModel: mom)
         
         do {
             let storeURL = Device.documentsFolderUrl(withComponent: "DataModel.sqlite")

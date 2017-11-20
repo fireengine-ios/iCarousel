@@ -154,7 +154,21 @@ final class UploadService: BaseRequestService {
                 }
             }, fail: { (fail) in
                 self.finishedUploadOperationsCount += 1
+                
+                if self.allUploadOperationsCount == self.finishedUploadOperationsCount {
+                    self.finishedUploadOperationsCount = 0
+                    self.allUploadOperationsCount = 0
+                    self.uploadOperations = self.uploadOperations.flatMap({
+                        if $0.uploadType == .autoSync {
+                            return $0
+                        }
+                        return nil
+                    })
+                    WrapItemOperatonManager.default.stopOperationWithType(type: .upload)
+                    success?()
+                }
             })
+            operation.queuePriority = .high
             return operation
         }
         
@@ -200,9 +214,25 @@ final class UploadService: BaseRequestService {
                 }
                 
             }, fail: { (fail) in
-                self.finishedSyncOperationsCount += 1
+                if fail.description != TextConstants.canceledOperationTextError{
+                    self.finishedSyncOperationsCount += 1
+                }
+                
+                if self.allSyncOperationsCount == self.finishedSyncOperationsCount {
+                    self.finishedSyncOperationsCount = 0
+                    self.allSyncOperationsCount = 0
+                    self.uploadOperations = self.uploadOperations.flatMap({
+                        if $0.uploadType != .autoSync {
+                            return $0
+                        }
+                        return nil
+                    })
+                    WrapItemOperatonManager.default.stopOperationWithType(type: .sync)
+                    success?()
+                }
                 
             })
+            operation.queuePriority = .normal
             return operation
         }
         uploadOperations.append(contentsOf: operations)
@@ -305,7 +335,7 @@ class UploadOperations: Operation {
             }
             
             if let fail_ = self.fail{
-                fail_(ErrorResponse.string("Cancelled"))
+                fail_(ErrorResponse.string(TextConstants.canceledOperationTextError))
             }
             
             self.semaphore.signal()

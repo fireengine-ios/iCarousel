@@ -529,6 +529,8 @@ struct TextConstants {
     static let errorManyRequest = "It indicates that sending OTP procedure is repeated numerously. It can be tried again later but a short amount of time should be spent before retry."
     static let errorUnknown = "Unknown error"
     
+    static let canceledOperationTextError = "Cancelled"
+    
     static let passcode = "Passcode"
     static let passcodeEnter = "Enter lifebox passcode"
     static let passcodeEnterOld = "Enter old lifebox passcode"
