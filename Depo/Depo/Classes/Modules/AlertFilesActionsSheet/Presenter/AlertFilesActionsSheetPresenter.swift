@@ -282,7 +282,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 })
             case .print:
                 action = UIAlertAction(title: "Print", style: .default, handler: { _ in
-                    //TODO: will be implemented in the next package
+                    self.basePassingPresenter?.printSelected()
                 })
             default:
                 action = UIAlertAction(title: "TEST", style: .default, handler: { _ in

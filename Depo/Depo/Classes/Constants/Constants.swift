@@ -542,6 +542,7 @@ struct TextConstants {
     static let passcodeEnableFaceID = "Enable Face ID"
     static let passcodeEnableTouchID = "Enable Touch ID"
     static let passcodeNumberOfTries = "You have %@ attempts left"
+    static let errorConnectedToNetwork = "Please check your internet connection is active and Cellular Data is ON under Settings/lifebox."
 }
 
 

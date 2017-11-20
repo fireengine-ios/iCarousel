@@ -18,4 +18,6 @@ protocol SettingsInteractorOutput: class {
     
     func profilePhotoUploadSuccessed()
     func profilePhotoUploadFailed()
+    
+    func connectToNetworkFailed()
 }
