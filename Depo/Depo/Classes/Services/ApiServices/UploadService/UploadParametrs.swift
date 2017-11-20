@@ -22,8 +22,6 @@ class Upload: UploadRequestParametrs {
     
     private let item: WrapData
     
-    private let uploadType: UploadType
-    
     private let uploadStrategy: MetaStrategy
     
     private let uploadTo: MetaSpesialFolder
@@ -68,10 +66,10 @@ class Upload: UploadRequestParametrs {
     
     let  tmpUUId: String
     
-    init(item: WrapData, destitantion: URL, uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, rootFolder: String) {
+    init(item: WrapData, destitantion: URL, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, rootFolder: String) {
         
         self.item = item
-        self.uploadType = uploadType
+        //self.uploadType = uploadType
         self.rootFolder = rootFolder
         self.uploadStrategy = uploadStategy
         self.uploadTo = uploadTo

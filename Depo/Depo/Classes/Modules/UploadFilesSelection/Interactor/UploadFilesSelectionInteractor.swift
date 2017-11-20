@@ -13,11 +13,16 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
     
     func addToUploadOnDemandItems(items: [BaseDataSourceItem]){
         let uploadItems = items as! [WrapData]
-        UploadService.default.uploadOnDemandFileList(items: uploadItems,
-                                                     uploadType: .autoSync,
-                                                     uploadStategy: .WithoutConflictControl,
-                                                     uploadTo: .MOBILE_UPLOAD,
-                                                     folder: rootUIID ?? "")
+        UploadService.default.uploadFileList(items: uploadItems, uploadType: .fromHomePage, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, success: {
+            
+        }) { (errorResponse) in
+            
+        }
+//        UploadService.default.uploadOnDemandFileList(items: uploadItems,
+//                                                     uploadType: .autoSync,
+//                                                     uploadStategy: .WithoutConflictControl,
+//                                                     uploadTo: .MOBILE_UPLOAD,
+//                                                     folder: rootUIID ?? "")
     }
 }
 
