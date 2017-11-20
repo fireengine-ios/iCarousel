@@ -16,6 +16,7 @@ class PasscodeSettingsInteractor {
 // MARK: PasscodeSettingsInteractorInput
 extension PasscodeSettingsInteractor: PasscodeSettingsInteractorInput {
     func clearPasscode() {
+        biometricsManager.isEnabled = false
         passcodeStorage.clearPasscode()
     }
     

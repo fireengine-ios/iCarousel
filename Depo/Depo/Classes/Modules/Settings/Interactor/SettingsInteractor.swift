@@ -11,6 +11,7 @@ class SettingsInteractor: SettingsInteractorInput {
     weak var output: SettingsInteractorOutput!
     
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
+    private lazy var biometricsManager: BiometricsManager = factory.resolve()
     
     var isPasscodeEmpty: Bool {
         return passcodeStorage.isEmpty
@@ -30,10 +31,12 @@ class SettingsInteractor: SettingsInteractorInput {
         output.cellsDataForSettings(array: array)
     }
     
-    func onLogout(){
+    func onLogout() {
         let authService = AuthenticationService()
         authService.logout {
             DispatchQueue.main.async { [weak self] in
+                self?.passcodeStorage.clearPasscode()
+                self?.biometricsManager.isEnabled = false
                 CoreDataStack.default.clearDataBase()
                 self?.output.goToOnboarding()
             }

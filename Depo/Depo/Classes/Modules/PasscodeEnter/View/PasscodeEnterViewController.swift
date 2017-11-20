@@ -19,6 +19,7 @@ class PasscodeEnterViewController: UIViewController {
     }
     
     private var passcodeManager: PasscodeManager!
+    private lazy var biometricsManager: BiometricsManager = factory.resolve()
     
     var state: PasscodeState!
     var success: (() -> Void)?
@@ -43,6 +44,7 @@ extension PasscodeEnterViewController: PasscodeManagerDelegate {
                 self.view.window?.endEditing(true)
                 self.passcodeManager.storage.clearPasscode()
                 self.passcodeManager.storage.numberOfTries = self.passcodeManager.maximumInccorectPasscodeAttempts
+                self.biometricsManager.isEnabled = false
             }
         }
     }

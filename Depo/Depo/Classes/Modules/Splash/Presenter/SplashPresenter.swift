@@ -18,12 +18,12 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     }
     
     private func showPasscodeIfNeed() {
-        guard
-            let window = (UIApplication.shared.delegate as? AppDelegate)?.window,
+        guard let window = (UIApplication.shared.delegate as? AppDelegate)?.window,
             let rootVC = window.rootViewController,
-            interactor.isPasscodeEmpty || rootVC.presentedViewController is PasscodeEnterViewController
+            !interactor.isPasscodeEmpty
         else {
-            return interactor.startLoginInBackroung()
+            interactor.startLoginInBackroung()
+            return
         }
         
         let vc = PasscodeEnterViewController.with(flow: .validate)
