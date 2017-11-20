@@ -147,7 +147,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         asyncOperationSucces()
         dataSource.isPaginationDidEnd = true
         view?.stopRefresher()
-
+        dataSource.appendCollectionView(items: [])
         dataSource.reloadData()
     }
     

@@ -22,8 +22,6 @@ class Upload: UploadRequestParametrs {
     
     private let item: WrapData
     
-    //private let uploadType:UploadType
-    
     private let uploadStrategy: MetaStrategy
     
     private let uploadTo: MetaSpesialFolder
