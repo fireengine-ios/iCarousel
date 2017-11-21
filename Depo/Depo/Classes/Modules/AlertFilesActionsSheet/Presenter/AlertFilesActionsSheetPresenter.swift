@@ -136,7 +136,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             })
         }
         
-        if !(items?.contains(where: { return $0.isLocalItem }) ?? false) {
+        if (items?.contains(where: { return !$0.isLocalItem }) ?? false) {
             filteredActionTypes.append(.delete)
         }
         
