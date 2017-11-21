@@ -79,7 +79,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     override func setImage(with url: URL) {
         imageView.contentMode = .center
         
-        imageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "fileIconPhoto"), options: []) {[weak self] (image, error, cacheType, url) in
+        imageView.sd_setImage(with: url, placeholderImage: self.placeholderImage(), options: []) {[weak self] (image, error, cacheType, url) in
             guard error == nil else {
                 print("SD_WebImage_setImage error: \(error!.localizedDescription)")
                 return
@@ -105,6 +105,10 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
             self.selectionView.alpha = selection ? 1 : 0
         }
         
+    }
+    
+    override func placeholderImage() -> UIImage? {
+        return ActivityFileType.image.image
     }
     
     class func getCellSise()->CGSize{

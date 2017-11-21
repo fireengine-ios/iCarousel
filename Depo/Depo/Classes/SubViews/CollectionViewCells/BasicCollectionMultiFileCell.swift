@@ -94,8 +94,10 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     }
     
     override func setImage(with url: URL) {
-        UIImageView().sd_setImage(with: url, placeholderImage: nil, options: [.avoidAutoSetImage]) { (image, error, cacheType, url) in
-            self.setImage(image: image)
+        if let imageView = isBigSize() ? self.bigContentImageView : self.smallContentImageView {
+            imageView.sd_setImage(with: url, placeholderImage: nil, options: []) { (image, error, cacheType, url) in
+                self.setImage(image: image)
+            }
         }
     }
     

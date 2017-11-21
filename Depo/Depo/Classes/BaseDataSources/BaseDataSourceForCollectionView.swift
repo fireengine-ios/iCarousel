@@ -673,7 +673,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             })
             
         case let .remoteUrl(url):
-            cell_.setImage(with: url!)
+            if let url = url {
+                cell_.setImage(with: url)
+            } else {
+                cell_.setImage(image: nil)
+            }
 
         }
         

@@ -66,7 +66,9 @@ class BaseCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDelegate,
     }
     
     func setImage(image: UIImage?){
-        
+        if image == nil, let placeholder = self.placeholderImage() {
+            self.setImage(image: placeholder)
+        }
     }
     
     func setImage(with url: URL) {
@@ -75,6 +77,10 @@ class BaseCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDelegate,
     
     func setSelection(isSelectionActive: Bool, isSelected: Bool){
         
+    }
+    
+    func placeholderImage() -> UIImage? {
+        return nil
     }
     
     func updating(){
