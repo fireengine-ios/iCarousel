@@ -26,7 +26,20 @@ class SyncService: NSObject {
     override init() {
         operations = OperationQueue()
         operations.maxConcurrentOperationCount = 1
+        
         super.init()
+        
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(startSyncImmediately),
+                                               name: NSNotification.Name(rawValue: LocalMediaStorage.notificationPhotoLibraryDidChange),
+                                               object: nil)
+    }
+    
+    @objc func startSyncImmediately() {
+        timeLastAutoSync = NSDate().timeIntervalSince1970
+        
+        self.startAutoSync()
     }
     
     func startSync(imageViaWiFiOnly: Bool, videoViaWiFiOnly: Bool) {
@@ -100,19 +113,23 @@ class SyncService: NSObject {
     
     
     
+    fileprivate func startAutoSync() {
+        AutoSyncDataStorage().getAutoSyncModelForCurrentUser(success: { [weak self] (models, uniqueUserId) in
+            let autoSyncEnable = models[SettingsAutoSyncModel.autoSyncEnableIndex]
+            if (autoSyncEnable.isSelected){
+                let imageSyncViaWiFi = !models[SettingsAutoSyncModel.mobileDataPhotosIndex].isSelected
+                let videoSyncViaWiFi = !models[SettingsAutoSyncModel.mobileDataVideoIndex].isSelected
+                self?.startSync(imageViaWiFiOnly: imageSyncViaWiFi, videoViaWiFiOnly: videoSyncViaWiFi)
+            }
+        })
+    }
+    
     func startAutoSyncInBG(){
         let time = NSDate().timeIntervalSince1970
         if time - timeLastAutoSync > NumericConstants.timeIntervalBetweenAutoSync{
             timeLastAutoSync = time
             
-            AutoSyncDataStorage().getAutoSyncModelForCurrentUser(success: { [weak self] (models, uniqueUserId) in
-                let autoSyncEnable = models[SettingsAutoSyncModel.autoSyncEnableIndex]
-                if (autoSyncEnable.isSelected){
-                    let imageSyncViaWiFi = !models[SettingsAutoSyncModel.mobileDataPhotosIndex].isSelected
-                    let videoSyncViaWiFi = !models[SettingsAutoSyncModel.mobileDataVideoIndex].isSelected
-                    self?.startSync(imageViaWiFiOnly: imageSyncViaWiFi, videoViaWiFiOnly: videoSyncViaWiFi)
-                }
-            })
+            startAutoSync()
         }
     }
     
