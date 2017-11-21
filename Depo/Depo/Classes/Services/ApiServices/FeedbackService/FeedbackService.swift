@@ -56,7 +56,9 @@ class FeedbackLanguagesListResponse: ObjectRequestResponse {
             return
         }
         for obj in objects{
-            languagesList.append(LanguageModel(json: obj))
+            if let model = LanguageModel(json: obj) {
+                languagesList.append(model)
+            }
         }
     }
     
