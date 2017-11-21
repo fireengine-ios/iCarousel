@@ -8,20 +8,19 @@
 
 class SplashRouter: SplashRouterInput {
 
+    let router = RouterVC()
+    
     func navigateToApplication(){
-        let router = RouterVC()
         let settings = router.tabBarScreen
         router.setNavigationController(controller: settings)
     }
     
     func navigateToOnboarding(){
-        let router = RouterVC()
         let settings = router.onboardingScreen
         router.setNavigationController(controller: settings)
     }
     
     func navigateToTermsAndService() {
-        let router = RouterVC()
         let temsAndServices = router.termsAndServicesScreen(login: true)
         router.setNavigationController(controller: router.onboardingScreen)
         router.pushViewControllerWithoutAnimation(viewController: temsAndServices)
