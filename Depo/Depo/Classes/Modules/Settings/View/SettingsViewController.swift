@@ -21,8 +21,6 @@ protocol SettingsDelegate: class{
     
     func goToActivityTimeline()
     
-    func goToPasscode(delegate: PasscodeEnterDelegate?, type: PasscodeInputViewType)
-    
     func goToPasscodeSettings()
 }
 
@@ -191,27 +189,8 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
                     output.goToUsageInfo()
                 }
                 break
-            case 3: //touch id
-                let storage = PasscodeStorageDefaults()
-                if storage.isEmpty {
-                    if (settingsDelegate != nil){
-                        settingsDelegate!.goToPasscodeSettings()
-                    }else{
-                        output.goToPasscodeSettings()
-                    }
-                    return
-                }
-                
-                let vc = PasscodeEnterViewController.with(flow: .validate)
-                vc.success = {
-                    RouterVC().navigationController?.popViewController(animated: false)
-                    if self.settingsDelegate != nil {
-                        self.settingsDelegate!.goToPasscodeSettings()
-                    } else {
-                        self.output.goToPasscodeSettings()
-                    }
-                }
-                RouterVC().pushViewController(viewController: vc)
+            case 3: /// passcode
+                showPasscodeOrPasscodeSettings()
             default:
                 break
             }
@@ -227,15 +206,30 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
                 break
             case 1:
                 output.onLogout()
-                break
             default:
-                
                 break
             }
             
         default:
             break
         }
+    }
+    
+    private func showPasscodeOrPasscodeSettings() {
+        let routerBlock = { [weak self] in
+            if let settingsDelegate = self?.settingsDelegate {
+                settingsDelegate.goToPasscodeSettings()
+            } else {
+                self?.output.goToPasscodeSettings()
+            }
+        }
+        
+        if output.isPasscodeEmpty {
+            routerBlock()
+            return
+        }
+        
+        output.openPasscode(handler: routerBlock)
     }
     
     func showPhotoAlertSheet() {

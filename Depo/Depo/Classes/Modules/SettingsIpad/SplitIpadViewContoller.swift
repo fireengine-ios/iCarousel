@@ -76,13 +76,6 @@ class SplitIpadViewContoller: NSObject, UISplitViewControllerDelegate, SettingsD
         configurateWithControllers(leftViewController: left, controllers: [RouterVC().vcActivityTimeline])
     }
     
-    func goToPasscode(delegate: PasscodeEnterDelegate?, type: PasscodeInputViewType) {
-        if let left = leftController{
-            let navVC = UINavigationController(rootViewController: RouterVC().passcode(delegate: delegate, type: type))
-            configurateWithControllers(leftViewController: left, controllers: [navVC])
-        }
-    }
-    
     func goToPasscodeSettings() {
         if let left = leftController{
             configurateWithControllers(leftViewController: left, controllers: [RouterVC().passcodeSettings()])

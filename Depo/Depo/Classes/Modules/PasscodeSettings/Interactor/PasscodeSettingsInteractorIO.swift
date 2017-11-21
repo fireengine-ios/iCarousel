@@ -9,7 +9,11 @@
 import Foundation
 
 protocol PasscodeSettingsInteractorInput: class {
-
+    func clearPasscode()
+    var isPasscodeEmpty: Bool { get }
+    var isBiometricsAvailable: Bool { get }
+    var isBiometricsEnabled: Bool { get set }
+    var isAvailableFaceID: Bool { get }
 }
 
 protocol PasscodeSettingsInteractorOutput: class {

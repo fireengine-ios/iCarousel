@@ -9,12 +9,21 @@
 import Foundation
 import LocalAuthentication
 
-final class BiometricsManager {
+typealias AuthenticateHandler = (Bool) -> Void
+
+protocol BiometricsManager {
+    var isEnabled: Bool { get set }
+    var isAvailable: Bool { get }
+    var isAvailableFaceID: Bool { get }
+    func authenticate(reason: String, handler: @escaping AuthenticateHandler)
+}
+
+final class BiometricsManagerImp: BiometricsManager {
     
     private static let isEnabledKey = "isEnabledKey"
     var isEnabled: Bool {
-        get { return UserDefaults.standard.bool(forKey: BiometricsManager.isEnabledKey) }
-        set { UserDefaults.standard.set(newValue, forKey: BiometricsManager.isEnabledKey)}
+        get { return UserDefaults.standard.bool(forKey: BiometricsManagerImp.isEnabledKey) }
+        set { UserDefaults.standard.set(newValue, forKey: BiometricsManagerImp.isEnabledKey) }
     }
     
     var isAvailable: Bool {
@@ -29,7 +38,7 @@ final class BiometricsManager {
         }
     }
     
-    func authenticate(reason: String = TextConstants.passcodeBiometricsDefault, handler: @escaping (Bool) -> Void) {
+    func authenticate(reason: String = TextConstants.passcodeBiometricsDefault, handler: @escaping AuthenticateHandler) {
         if !isAvailable || !isEnabled {
             return handler(false)
         }
