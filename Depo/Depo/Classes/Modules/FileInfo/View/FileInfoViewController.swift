@@ -126,20 +126,19 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
         
         dateModifiedLabel.text = object.lastModifiDate?.getDateInFormat(format: "dd MMMM yyyy")
         
-        if object.syncStatus == .synced, let createdDate = object.creationDate {
-            uploadDateLabel.text = createdDate.getDateInFormat(format: "dd MMMM yyyy")
-            
-            if let takenDate = object.takenDate, takenDate != createdDate {
-                takenDateLabel.text = takenDate.getDateInFormat(format: "dd MMMM yyyy")
+        if object.syncStatus == .synced, let takenDate = object.takenDate {
+            takenDateLabel.text = takenDate.getDateInFormat(format: "dd MMMM yyyy")
+            if let createdDate = object.creationDate, createdDate == takenDate {
+                uploadDateLabel.text = createdDate.getDateInFormat(format: "dd MMMM yyyy")
             } else {
-                takenDateLabel.isHidden = true
-                takenDateTitle.isHidden = true
+                uploadDateLabel.isHidden = true
+                uploadDateTitle.isHidden = true
             }
         } else {
-            uploadDateLabel.isHidden = true
-            uploadDateTitle.isHidden = true
             takenDateLabel.isHidden = true
             takenDateTitle.isHidden = true
+            uploadDateLabel.isHidden = true
+            uploadDateTitle.isHidden = true
         }
     }
     
