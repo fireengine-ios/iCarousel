@@ -51,7 +51,7 @@ class ApplicationSessionManager: NSObject {
             }
         }
         
-        isNeedUpdateToken = true
+//        isNeedUpdateToken = true
         
         if (isNeedUpdateToken){
             updateSession()
