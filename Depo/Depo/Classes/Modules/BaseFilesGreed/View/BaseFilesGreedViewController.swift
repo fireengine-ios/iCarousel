@@ -96,14 +96,9 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         
         //carouselContainer.setHConstraint(hConstraint: floatingHeaderContainerHeightConstraint)
         
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(loadData),
-                                               name: NSNotification.Name(rawValue: LocalMediaStorage.notificationPhotoLibraryDidChange),
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(loadData),
-                                               name: NSNotification.Name(rawValue: UploadService.notificatioUploadServiceDidUpload),
-                                               object: nil)
+//        if #available(iOS 11.0, *) {
+//            topCarouselConstraint.constant = underNavBarBarHeight//0
+//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
