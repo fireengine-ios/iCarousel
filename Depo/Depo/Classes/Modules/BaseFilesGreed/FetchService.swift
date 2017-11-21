@@ -101,21 +101,21 @@ class FetchService: NSObject {
  
     func headerText(indexPath: IndexPath) -> String {
         
-        guard let value = mediaItemObject(at: indexPath)
-            else {
+//        guard let value = mediaItemObject(at: indexPath)
+//            else {
             return ""
-        }
-        
-        switch sortingRules {
-        case .lettersAZ,.lettersZA, .albumlettersAZ, .albumlettersZA:
-            let char = (value.nameValue ?? " ").first!
-            let result = String(describing: char).uppercased()
-            return result
-            
-        case .sizeAZ, .sizeZA,.timeDown, .timeUp, .timeDownWithoutSection, .timeUpWithoutSection:
-            let date = value.creationDateValue! as Date
-            return date.getDateInTextForCollectionViewHeader()
-        }
+//        }
+//
+//        switch sortingRules {
+//        case .lettersAZ,.lettersZA, .albumlettersAZ, .albumlettersZA:
+//            let char = (value.nameValue ?? " ").first!
+//            let result = String(describing: char).uppercased()
+//            return result
+//
+//        case .sizeAZ, .sizeZA,.timeDown, .timeUp, .timeDownWithoutSection, .timeUpWithoutSection:
+//            let date = value.creationDateValue! as Date
+//            return date.getDateInTextForCollectionViewHeader()
+//        }
     }
     
     func needSeparateBySection() -> Bool{

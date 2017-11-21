@@ -50,12 +50,12 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         }
         dataSource.setupCollectionView(collectionView: collectionView,
                                        filters: interactor.originalFilesTypeFilter)
-        
+       
         dataSource.delegate = self
         
         view.setupInitialState()
         setupTopBar()
-        
+        dataSource.currentSortType = sortedRule
         getContent()
         reloadData()
     }
@@ -95,29 +95,15 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     private func compoundAllFiltersAndNextItems(searchText: String? = nil) {
 //        startAsyncOperation()
         interactor.nextItems(searchText,
-                             sortBy: getSortedRuleByFilters(),
+                             sortBy: sortedRule.sortingRules,
                              sortOrder: sortedRule.sortOder, newFieldValue: getFileFilter())
     }
-    private func getSortedRuleByFilters() -> SortType {
-        
-            for filter in filters {
-                switch filter {
-                case .fileType(.image):
-                    if sortedRule == .timeDown || sortedRule == .timeUp {
-                         return .imageDate
-                    }
-                   break
-                default:
-                    break
-                }
-            }
-        return sortedRule.sortingRules
-    }
+
     func reloadData() {
         startAsyncOperation()
         dataSource.isPaginationDidEnd = false
         interactor.reloadItems(nil,
-                               sortBy: getSortedRuleByFilters(),
+                               sortBy: sortedRule.sortingRules,
                                sortOrder: sortedRule.sortOder, newFieldValue: getFileFilter())
     }
     
@@ -429,25 +415,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func sortedPushedTopBar(with rule:  MoreActionsConfig.SortRullesType) {
-        
-        var sortRule: SortedRules
-        switch rule {
-        case .AlphaBetricAZ:
-            sortRule = .lettersZA
-        case .AlphaBetricZA:
-            sortRule = .lettersAZ
-        case .TimeNewOld:
-            sortRule = .timeUp
-        case .TimeOldNew:
-            sortRule = .timeDown
-        case .Largest:
-            sortRule = .sizeAZ
-        case .Smallest:
-            sortRule = .sizeZA
-        default:
-            sortRule = .timeUp
-        }
-        sortedPushed(with: sortRule)
+        sortedPushed(with: rule.sortedRulesConveted)
     }
     
     func filtersTopBar(cahngedTo filters: [MoreActionsConfig.MoreActionsFileType]) {

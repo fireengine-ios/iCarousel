@@ -25,8 +25,8 @@ class BaseFilesGreedModuleInitializer: NSObject {
                                                style: .default, tintColor: nil)
         let gridListTopBarConfig = GridListTopBarConfig(
             defaultGridListViewtype: .Grid,
-            availableSortTypes: baseSortTypes,
-            defaultSortType: .TimeNewOld,
+            availableSortTypes: [.AlphaBetricAZ, .AlphaBetricZA, .metaDataTimeNewOld, .metaDataTimeOldNew, .Largest, .Smallest],
+            defaultSortType: .metaDataTimeNewOld,
             availableFilter: true,
             showGridListButton: false
         )
