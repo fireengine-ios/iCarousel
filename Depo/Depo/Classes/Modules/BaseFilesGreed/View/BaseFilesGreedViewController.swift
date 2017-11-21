@@ -99,10 +99,10 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
 //        if #available(iOS 11.0, *) {
 //            topCarouselConstraint.constant = underNavBarBarHeight//0
 //        }
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(loadData),
-                                               name: NSNotification.Name(rawValue: LocalMediaStorage.notificationPhotoLibraryDidChange),
-                                               object: nil)
+//        NotificationCenter.default.addObserver(self,
+//                                               selector: #selector(loadData),
+//                                               name: NSNotification.Name(rawValue: LocalMediaStorage.notificationPhotoLibraryDidChange),
+//                                               object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {

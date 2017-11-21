@@ -27,13 +27,15 @@ enum SortedRules: Int {
     case albumlettersZA = 8
     case timeUpWithoutSection = 9
     case timeDownWithoutSection = 10
+    case metaDataTimeUp = 11
+    case metaDataTimeDown = 12
     
     var stringValue: String {
         switch self {
-        case .timeUp, .timeUpWithoutSection:
+        case .timeUp, .timeUpWithoutSection, .metaDataTimeUp:
             return TextConstants.sortTimeNewOldTitle
             
-        case .timeDown, .timeDownWithoutSection:
+        case .timeDown, .timeDownWithoutSection, .metaDataTimeDown:
             return TextConstants.sortTimeOldNewTitle
             
         case .lettersAZ:
@@ -60,6 +62,8 @@ enum SortedRules: Int {
         switch self {
         case .timeUp, .timeDown, .timeUpWithoutSection, .timeDownWithoutSection:
             return .date
+        case .metaDataTimeUp, .metaDataTimeDown:
+            return .imageDate
         case .lettersAZ, .lettersZA:
             return .name
         case .sizeAZ, .sizeZA:
@@ -71,9 +75,9 @@ enum SortedRules: Int {
     
     var sortOder: SortOrder{
         switch self {
-        case .timeUp, .timeUpWithoutSection, .lettersAZ, .sizeAZ, .albumlettersAZ:
+        case .timeUp, .timeUpWithoutSection, .lettersAZ, .sizeAZ, .albumlettersAZ, .metaDataTimeUp:
             return .desc
-        case .timeDown, .timeDownWithoutSection, .lettersZA, .sizeZA, .albumlettersZA:
+        case .timeDown, .timeDownWithoutSection, .lettersZA, .sizeZA, .albumlettersZA, .metaDataTimeDown:
             return .asc
         }
     }
@@ -161,6 +165,8 @@ class MoreActionsConfig {
         case AlphaBetricZA
         case TimeNewOld
         case TimeOldNew
+        case metaDataTimeNewOld
+        case metaDataTimeOldNew
         case Largest
         case Smallest
         case None
@@ -171,9 +177,9 @@ class MoreActionsConfig {
                 return TextConstants.sortTypeAlphabeticAZTitle
             case .AlphaBetricZA:
                 return TextConstants.sortTypeAlphabeticZATitle
-            case .TimeNewOld:
+            case .TimeNewOld, .metaDataTimeNewOld:
                 return TextConstants.sortTimeNewOldTitle
-            case .TimeOldNew:
+            case .TimeOldNew, .metaDataTimeOldNew:
                 return TextConstants.sortTimeOldNewTitle
             case .Largest:
                 return TextConstants.sortTimeSizeLargestTitle
@@ -198,6 +204,10 @@ class MoreActionsConfig {
                 return .sizeAZ
             case .Smallest:
                 return .sizeZA
+            case .metaDataTimeNewOld:
+                return .metaDataTimeUp
+            case .metaDataTimeOldNew:
+                return .metaDataTimeDown
             default:
                 return .timeUp
             }

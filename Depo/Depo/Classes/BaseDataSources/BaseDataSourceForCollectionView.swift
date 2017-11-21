@@ -76,13 +76,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     private func compoundItems(pageItems: [WrapData]) {
         debugPrint("!!!GOT NEW ITEMS!!!")
-//        if isLocalOnly() {
-//            allItems = [allLocalItems]
-//        } else {
         allMediaItems.append(contentsOf: appendLocalItems(originalItemsArray: pageItems))
         isHeaderless ? allItems.append(allMediaItems) : breakItemsIntoSections(breakingArray: allMediaItems)
-        
-//        }
         debugPrint("!!!ALL NEW ITEMS SORTED!!!")
     }
     
@@ -91,7 +86,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             return false
         }
         for filter in unwrapedFilters {
-            switch filter{
+            switch filter {
             case .localStatus(.local):
                 return true
             default:
@@ -115,7 +110,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
                     let lastItem = allItems.last?.last {
                     switch currentSortType {
                     case .timeUp, .timeDown:
-                        addByDate(lastItem: lastItem, newItem: item)
+                        addByDate(lastItem: lastItem, newItem: item, isMetaDate: false)
                     case .lettersAZ, .lettersZA, .albumlettersAZ, .albumlettersZA:
                         addByName(lastItem: lastItem, newItem: item)
                     case .sizeAZ, .sizeZA:
@@ -123,6 +118,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
                     case .timeUpWithoutSection, .timeDownWithoutSection:
                         allItems.append(contentsOf: [breakingArray])
                         return
+                    case .metaDataTimeUp, .metaDataTimeDown:
+                        addByDate(lastItem: lastItem, newItem: item, isMetaDate: true)
                     }
                 } else {
                     allItems.append([item])
@@ -198,6 +195,17 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
                         if localItem.fileSize < lastRemoteObject.fileSize {
                             continue innerLocalsLoop
                         }
+                    case .metaDataTimeUp:
+                        if let lastObjectMetaDate = lastRemoteObject.metaData?.takenDate,
+                            localItem.creationDate! < lastObjectMetaDate {
+                            continue innerLocalsLoop
+                        }
+                    case .metaDataTimeDown:
+                        if let lastObjectMetaDate = lastRemoteObject.metaData?.takenDate,
+                            localItem.creationDate! > lastObjectMetaDate {
+
+                            continue innerLocalsLoop
+                        }
                     }
                     if remoteItemsMD5List.contains(localItem.md5) {
                         if let unwrpedIndex = allLocalItems.index(of: localItem) {
@@ -239,14 +247,30 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             tempoArray.sort{$0.fileSize > $1.fileSize}
         case .sizeZA:
             tempoArray.sort{$0.fileSize < $1.fileSize}
+        case .metaDataTimeUp:
+            tempoArray.sort{
+                if let firstMetaDate = $0.metaData?.takenDate,
+                    let secondMetaDate = $1.metaData?.takenDate{
+                    return firstMetaDate > secondMetaDate
+                } else {
+                    return $0.creationDate! > $1.creationDate!
+                }
+                }
+        case .metaDataTimeDown:
+            tempoArray.sort{$0.creationDate! < $1.creationDate!}
         }
         debugPrint("!!!ALL LOCAL ITEMS SORTED APPENDED!!!")
         return tempoArray
     }
     
-    private func addByDate(lastItem: WrapData, newItem: WrapData) {
-        if let lastItemCreatedDate = lastItem.creationDate,
-            let newItemCreationDate = newItem.creationDate {
+    private func addByDate(lastItem: WrapData, newItem: WrapData, isMetaDate: Bool) {
+        if var lastItemCreatedDate = lastItem.creationDate,
+            var newItemCreationDate = newItem.creationDate {
+            if isMetaDate, let lastItemMetaDate = lastItem.metaData?.takenDate,
+                let newItemMetaDate = newItem.metaData?.takenDate {
+                lastItemCreatedDate =  lastItemMetaDate
+                newItemCreationDate = newItemMetaDate
+            }
             if lastItemCreatedDate.getYear() == newItemCreationDate.getYear(),
                 lastItemCreatedDate.getMonth() == newItemCreationDate.getMonth() {
                 
@@ -292,9 +316,14 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             if let character = allItems[indexPath.section].first?.name?.first {
                 headerText = String(describing: character).uppercased()
             }
-            
         case .sizeAZ, .sizeZA:
             headerText = ""
+        case .metaDataTimeUp, .metaDataTimeDown:
+            if let date = allItems[indexPath.section].first?.metaData?.takenDate {
+                headerText = date.getDateInTextForCollectionViewHeader()
+            } else if let date = allItems[indexPath.section].first?.creationDate {
+                headerText = date.getDateInTextForCollectionViewHeader()
+            }
         }
         return headerText
     }
@@ -662,16 +691,22 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         
         switch wraped.patchToPreview {
         case .localMediaContent(let local):
-            cell.tag = FilesDataSource().getAssetThumbnail(asset: local.asset, id: cell.tag, completion: { (image, tag) in
-                let cellToCheck = self.collectionView.cellForItem(at: indexPath)
-                if cell.tag == tag, cell == cellToCheck {
-                    cell_.setImage(image: image)
-                } else {
-                    cell_.setImage(image: nil)
+            print("Local: indexPath: \(indexPath), assetId: \(local.asset.localIdentifier)")
+            FilesDataSource().getAssetThumbnail(asset: local.asset, indexPath: indexPath, completion: { (image, path) in
+                if let cellToChange = self.collectionView.cellForItem(at: path) as? CollectionViewCellDataProtocol{
+                    DispatchQueue.main.async {
+                        cellToChange.setImage(image: image)
+                    }
                 }
             })
-        case .remoteUrl(_):
-            cell_.setImage(with: wraped.patchToPreview)
+            
+        case let .remoteUrl(url):
+            if let url = url {
+                cell_.setImage(with: url)
+            } else {
+                cell_.setImage(image: nil)
+            }
+
         }
         
         let countRow:Int = self.collectionView(collectionView, numberOfItemsInSection: indexPath.section)

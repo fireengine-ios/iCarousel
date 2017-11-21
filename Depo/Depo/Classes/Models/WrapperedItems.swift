@@ -533,7 +533,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
             case .medium : url = remote.metadata?.mediumUrl
             case .large  : url = remote.metadata?.largeUrl
             }
-            if (url == nil) {
+            if url == nil, fileType == .image {
                 url = remote.tempDownloadURL
             }
 //            if let takenDate = remote.metadata?.takenDate {
