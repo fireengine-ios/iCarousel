@@ -13,6 +13,7 @@ struct SearchJsonKey {
     
     static let createdDate = "createdDate"
     static let lastModifiedDate = "lastModifiedDate"
+    static let takenDate = "Image-DateTime"
     static let id = "id"
     static let hash = "hash"
     static let iOSMetaHash = "X-Object-Meta-Ios-Metadata-Hash"
@@ -144,6 +145,7 @@ class SearchItemResponse: ObjectRequestResponse {
     
     var createdDate: Date?
     var lastModifiedDate: Date?
+    var takenDate: Date?
     var id: Int64?
     var hash: String?
     var name: String?
@@ -164,6 +166,7 @@ class SearchItemResponse: ObjectRequestResponse {
         // it upload date
         createdDate = json?[SearchJsonKey.createdDate].date
         lastModifiedDate = json?[SearchJsonKey.lastModifiedDate].date
+        takenDate = json?[SearchJsonKey.metadata][SearchJsonKey.takenDate].date
         id = json?[SearchJsonKey.id].int64
         hash = json?[SearchJsonKey.hash].string
         name = json?[SearchJsonKey.name].string
