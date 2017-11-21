@@ -72,9 +72,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     private func compoundItems(pageItems: [WrapData]) {
         debugPrint("!!!GOT NEW ITEMS!!!")
-        
-    
-
 //        if isLocalOnly() {
 //            allItems = [allLocalItems]
 //        } else {
@@ -82,7 +79,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         breakItemsIntoSections(breakingArray: allMediaItems)
 //        }
         debugPrint("!!!ALL NEW ITEMS SORTED!!!")
-        
     }
     
     private func isLocalOnly() -> Bool {

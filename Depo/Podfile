@@ -16,6 +16,9 @@ target 'Depo_LifeTech' do
     pod 'Adjust'
     #pod 'ActiveLabel'
 
+    #Keyboard
+    pod 'Typist'
+
     pod 'ObjectiveDropboxOfficial'
 
 

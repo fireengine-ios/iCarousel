@@ -18,4 +18,9 @@ protocol PasscodeSettingsViewOutput: class {
     func setTouchId(enable: Bool)
     func turnOffPasscode()
     func setPasscode()
+    
+    var isPasscodeEmpty: Bool { get }
+    var isBiometricsAvailable: Bool { get }
+    var isBiometricsEnabled: Bool { get }
+    var isAvailableFaceID: Bool { get }
 }

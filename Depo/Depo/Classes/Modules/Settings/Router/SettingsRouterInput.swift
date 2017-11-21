@@ -28,12 +28,11 @@ protocol SettingsRouterInput {
     
     func goToPackages()
     
-    func goToPasscode(delegate: PasscodeEnterDelegate?, type: PasscodeInputViewType)
-    
     func goToPasscodeSettings()
     
     func closeEnterPasscode()
+    
+    func openPasscode(handler: @escaping () -> Void)
 
     func goToConnectedToNetworkFailed()
-
 }
