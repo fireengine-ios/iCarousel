@@ -466,7 +466,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     }
     
     func reloadData() {
-        collectionView.reloadData()
+        collectionView?.reloadData()
     }
     
     func updateDisplayngType(type: BaseDataSourceDisplayingType){

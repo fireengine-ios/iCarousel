@@ -100,6 +100,10 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
                                                selector: #selector(loadData),
                                                name: NSNotification.Name(rawValue: LocalMediaStorage.notificationPhotoLibraryDidChange),
                                                object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(loadData),
+                                               name: NSNotification.Name(rawValue: UploadService.notificatioUploadServiceDidUpload),
+                                               object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
