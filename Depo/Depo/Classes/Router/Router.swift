@@ -570,8 +570,4 @@ class RouterVC: NSObject {
     func passcodeSettings() -> UIViewController {
         return PasscodeSettingsModuleInitializer.viewController
     }
-    
-    func passcode(delegate: PasscodeEnterDelegate?, type: PasscodeInputViewType) -> UIViewController {
-        return PasscodeEnterModuleInitializer(delegate: delegate, type: type).viewController
-    }
 }

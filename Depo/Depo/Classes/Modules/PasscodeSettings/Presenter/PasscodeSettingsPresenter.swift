@@ -16,27 +16,40 @@ class PasscodeSettingsPresenter {
 extension PasscodeSettingsPresenter: PasscodeSettingsViewOutput {
     
     func viewIsReady() {
-//        if PasscodeStorageDefaults().isEmpty {
-//            view?.setup(state: .set, animated: false)
-//        } else {
-//            view?.setup(state: .ready, animated: false)
-//        }
     }
     
     func changePasscode() {
-//        router.passcode(delegate: self, type: .setNew)
+        router.changePasscode()
     }
     
     func setTouchId(enable: Bool) {
-        BiometricsManager().isEnabled = enable
+        isBiometricsEnabled = enable
     }
     
     func turnOffPasscode() {
-//        router.passcode(delegate: self, type: .validate)
+        interactor.clearPasscode()
+        view?.setup(state: .set, animated: true)
     }
     
     func setPasscode() {
-//        router.passcode(delegate: self, type: .new)
+        router.setPasscode()
+    }
+    
+    var isPasscodeEmpty: Bool {
+        return interactor.isPasscodeEmpty
+    }
+    
+    var isBiometricsAvailable: Bool {
+        return interactor.isBiometricsAvailable
+    }
+    
+    var isBiometricsEnabled: Bool {
+        get { return interactor.isBiometricsEnabled }
+        set { interactor.isBiometricsEnabled = newValue }
+    }
+    
+    var isAvailableFaceID: Bool {
+        return interactor.isAvailableFaceID
     }
 }
 
@@ -48,23 +61,4 @@ extension PasscodeSettingsPresenter: PasscodeSettingsInteractorOutput {
 // MARK: PasscodeSettingsModuleInput
 extension PasscodeSettingsPresenter: PasscodeSettingsModuleInput {
 
-}
-
-// MARK: PasscodeEnterDelegate
-extension PasscodeSettingsPresenter: PasscodeEnterDelegate {
-//    func finishPasscode(with type: PasscodeInputViewType) {
-//        router.closePasscode()
-//        switch type {
-//        case .new:
-//            view?.setup(state: .ready)
-//        case .validate, .validateWithBiometrics:
-//            PasscodeStorageDefaults().clearPasscode()
-//            view?.setup(state: .set)
-//        case .validateNew:
-//            break
-//        case .setNew:
-//            break
-//        }
-//        
-//    }
 }

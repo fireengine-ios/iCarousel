@@ -13,12 +13,25 @@ class PasscodeSettingsRouter {
 // MARK: PasscodeSettingsRouterInput
 extension PasscodeSettingsRouter: PasscodeSettingsRouterInput {
     
-    func passcode(delegate: PasscodeEnterDelegate?, type: PasscodeInputViewType) {
-        let vc = router.passcode(delegate: delegate, type: type)
-        router.pushViewController(viewController: vc)
-    }
-    
     func closePasscode() {
         router.popViewController()
+    }
+    
+    func changePasscode() {
+        let vc = PasscodeEnterViewController.with(flow: .setNew)
+        let routerVC = RouterVC()
+        vc.success = {
+            routerVC.navigationController?.popViewController(animated: true)
+        }
+        routerVC.pushViewController(viewController: vc)
+    }
+    
+    func setPasscode() {
+        let vc = PasscodeEnterViewController.with(flow: .create)
+        let routerVC = RouterVC()
+        vc.success = {
+            routerVC.navigationController?.popViewController(animated: true)
+        }
+        routerVC.pushViewController(viewController: vc)
     }
 }
