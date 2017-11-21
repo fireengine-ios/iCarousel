@@ -393,11 +393,19 @@ class FileService: BaseRequestService {
                         handler: handler)
     }
     
-    func details(uuids: [String], success: FileOperation?, fail:FailResponse?) {
+    func details(uuids: [String], success: ListRemoveItems?, fail:FailResponse?) {
         
         let param = FileDetails(uuids: uuids)
-        let handler = BaseResponseHandler<DetailsResponse,ObjectRequestResponse>(success: { details  in
-            print("s")
+        let handler = BaseResponseHandler<SearchResponse, ObjectRequestResponse>(success: { (responce) in
+            guard let resultResponse = (responce as? SearchResponse)?.list else {
+                let error = ErrorResponse.string("Unknown error")
+                fail?(error)
+                return
+            }
+            
+            let list = resultResponse.flatMap { WrapData(remote: $0) }
+            CoreDataStack.default.appendOnlyNewItems(items: list)
+            success?(list)
         }, fail: fail)
         self.executePostRequest(param: param, handler: handler)
     }

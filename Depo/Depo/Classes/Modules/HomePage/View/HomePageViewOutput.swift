@@ -10,6 +10,8 @@ protocol HomePageViewOutput {
 
     func viewIsReady()
     
+    func homePagePresented()
+    
     func showSettings()
     
     func onSyncContacts()

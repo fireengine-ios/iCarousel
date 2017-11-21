@@ -32,10 +32,10 @@
 		0D3A5AC196CA4CBF0837C33C /* CompleteProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8E974936A7389CB85B79AA /* CompleteProfilePresenter.swift */; };
 		0D9510CB65B6DA6F2D661754 /* LBAlbumLikePreviewSliderInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8325E4AA32B488A637E3E308 /* LBAlbumLikePreviewSliderInteractorInput.swift */; };
 		0E221DE499E4E51040E5550A /* SettingsRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFFF44F88C9F0080E5FADF47 /* SettingsRouterInput.swift */; };
+		10CC7D3FA3B7A3A380C4E7D2 /* FreeAppSpaceInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEB2D95F1B425231C9C7DE7 /* FreeAppSpaceInteractor.swift */; };
 		124B2508A085C281AB2765AF /* SelectNameViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F148DB3DB2A1D9676FE239 /* SelectNameViewOutput.swift */; };
 		1356E354CDA8AA7567B09334 /* UserInfoSubViewConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CCB3146C622ADE6CFE961E /* UserInfoSubViewConfigurator.swift */; };
 		142A29D90D8A7CF39AC8F82C /* UploadedItemsViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEFEDC411CE8C9592155BE8 /* UploadedItemsViewInput.swift */; };
-		15BEDF417A72872CB89F79B5 /* FreeUpSpaceInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8416C0E520996F9659C7F479 /* FreeUpSpaceInitializer.swift */; };
 		1C8FDD0A3C795F7711BC5822 /* FeedbackViewRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFFF80AD607CB90108A1537 /* FeedbackViewRouterInput.swift */; };
 		1DB68FAB905B6E98B07736B7 /* HomeHeaderConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE59D416A67AC6A99671E6B3 /* HomeHeaderConfigurator.swift */; };
 		1DCD5F3C1611CAA42850AF7B /* ExpandStorageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DFBE20B4A76B3C0EDC0E13 /* ExpandStorageViewController.swift */; };
@@ -54,6 +54,7 @@
 		25F2EEBED80FA9650DB66A1A /* UploadedItemsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25BF60A65135F0C80BD118B /* UploadedItemsConfigurator.swift */; };
 		265478F6639B1332E1AD5E9E /* CompleteProfileInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABC13B5A20B007574AC5D1A /* CompleteProfileInteractorInput.swift */; };
 		2707E599FD33C24153437398 /* VideoCellViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7725EDECCE29F02528BCBC53 /* VideoCellViewInput.swift */; };
+		29F301A021F9712D24CB97EE /* FreeAppSpaceInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FEEC14B3D3808D6425359A /* FreeAppSpaceInitializer.swift */; };
 		2A1CBA93F5950F76EF480D84 /* SyncContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DC6D877F96EAC0DCE038CA /* SyncContactsViewController.swift */; };
 		2B2BF4C237C2D4869CCB8F24 /* FeedbackViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AA59CD6753DDEFC61D0212 /* FeedbackViewInput.swift */; };
 		2B45A3B6B6A0554F1589EB54 /* AlbumDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282E581C729D5E96D07CE3D1 /* AlbumDetailRouter.swift */; };
@@ -137,12 +138,10 @@
 		7374931E259CC9D3738FE42E /* PhotoCellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B4D0E48C237E69E8C20A1D /* PhotoCellViewController.swift */; };
 		745E2B63A07B865C70D88553 /* ExpandStorageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C665F7190FD02A64929A765 /* ExpandStorageInteractor.swift */; };
 		759BB6DB00ECA61DBDBBB0B9 /* OTPViewInteractorIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7C949A95C197C80ACC503C /* OTPViewInteractorIO.swift */; };
-		762E5E96DFA12096A8DBBFC6 /* FreeUpSpaceRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3969A12B14548FFA443F46 /* FreeUpSpaceRouterInput.swift */; };
 		7764E006C922DEA29D9C0744 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5BEC48C5ED3B8650FB2FB3 /* SettingsViewController.swift */; };
 		77CF7B297D6D1B75D73CACBC /* SelectNamePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E829DBD8933CDFA043AFECB2 /* SelectNamePresenter.swift */; };
 		7829FEBDBF0B8DD3EEBBC34A /* LBAlbumLikePreviewSliderViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A18BA44717122453DCA565 /* LBAlbumLikePreviewSliderViewOutput.swift */; };
 		786AA87724BCB7349231EF0C /* HomeHeaderInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5C72DCCEC8922AEA678B57 /* HomeHeaderInteractor.swift */; };
-		79D3733BAD962DDAB44FC011 /* FreeUpSpaceRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754853ADEF3A9150B259916C /* FreeUpSpaceRouter.swift */; };
 		7A3DC2411860465D7AB44D69 /* LBAlbumLikePreviewSliderConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B8A42DEA3660A297877591 /* LBAlbumLikePreviewSliderConfigurator.swift */; };
 		7C00FE191F5957570041D041 /* AppRater.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7C00FE161F5957570041D041 /* AppRater.bundle */; };
 		7C00FE1A1F5957570041D041 /* AppRater.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C00FE181F5957570041D041 /* AppRater.m */; };
@@ -266,6 +265,8 @@
 		7CAC23BC1F45718700607660 /* RemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAC23BB1F45718700607660 /* RemoteService.swift */; };
 		7CAC23BF1F4ABD3100607660 /* LoadingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAC23BE1F4ABD3100607660 /* LoadingImageView.swift */; };
 		7CAC23C21F4ADC3900607660 /* RemoteSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAC23C11F4ADC3900607660 /* RemoteSearchService.swift */; };
+		7CB2E30E1FB9CB4C009CF813 /* FreeAppSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB2E30D1FB9CB4C009CF813 /* FreeAppSpace.swift */; };
+		7CB2E3121FBC35ED009CF813 /* FreeAppSpaceViewCotroller.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CB2E3111FBC35ED009CF813 /* FreeAppSpaceViewCotroller.xib */; };
 		7CBF50241F44723D00D67BF3 /* AlbumService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBF50231F44723D00D67BF3 /* AlbumService.swift */; };
 		7CD1F8CF1F0140900028F51A /* BaseCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1F8CE1F0140900028F51A /* BaseCollectionViewController.swift */; };
 		7CD1F8D21F014EF90028F51A /* CustomSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1F8D11F014EF90028F51A /* CustomSwitch.swift */; };
@@ -319,6 +320,7 @@
 		7CDB43301F8658A000789FA6 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDB432F1F8658A000789FA6 /* LocationManager.swift */; };
 		7CDB43321F865B0B00789FA6 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CDB43311F865B0B00789FA6 /* CoreLocation.framework */; };
 		7CDB43351F86678D00789FA6 /* AppConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDB43341F86678D00789FA6 /* AppConfigurator.swift */; };
+		7CE68EEF1FC46389006CE7BB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CE68EEE1FC46389006CE7BB /* Images.xcassets */; };
 		7CE779B11F43235C00CFDB2B /* SelectNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CE779B01F43235C00CFDB2B /* SelectNameViewController.xib */; };
 		7CE825BE1F823D9700356AD2 /* FreeUpSpacePopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE825BD1F823D9700356AD2 /* FreeUpSpacePopUp.swift */; };
 		7CE825C01F823DA600356AD2 /* FreeUpSpacePopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CE825BF1F823DA600356AD2 /* FreeUpSpacePopUp.xib */; };
@@ -362,6 +364,7 @@
 		85AAD0E4BD93A160437B1236 /* AlbumSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832B26F8B87F6C1957D4A0FE /* AlbumSelectionViewController.swift */; };
 		865630C8BE985198C2339934 /* ActivityTimelineRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED76B8EC80CDF294DAF95F7 /* ActivityTimelineRouter.swift */; };
 		86593D52883EC28AF112A281 /* UploadFilesSelectionInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82180F7E73B665AC7BA7EE23 /* UploadFilesSelectionInteractorInput.swift */; };
+		868B89BA3A01CCDC66E16667 /* FreeAppSpaceRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BCED48F4E9B72F1A00F2BB /* FreeAppSpaceRouter.swift */; };
 		872D8C119282747BDC9A55C6 /* ActivityTimelineInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1FF28B20122B510C14A5A2 /* ActivityTimelineInteractorInput.swift */; };
 		8766D2FF1FBDB06600316F46 /* PhotoSelectiondDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8766D2FE1FBDB06600316F46 /* PhotoSelectiondDataSource.swift */; };
 		876B212A1A0511735B065186 /* SyncContactsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245B0B417FC8FE0BAF38799E /* SyncContactsRouter.swift */; };
@@ -482,6 +485,7 @@
 		956BFA2BDBD060B8C046A081 /* UserInfoSubViewRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F9CA614F6A1DD5CFEFFAFD /* UserInfoSubViewRouterInput.swift */; };
 		97DC05B9B3DCF2CBAE060AF4 /* SyncContactsInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC08749C42535A16BE62A26 /* SyncContactsInteractorOutput.swift */; };
 		97E245036F6119CDFA534B88 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD920B02D55872C2278EC4BE /* SplashViewController.swift */; };
+		980738277831905CE1389C42 /* FreeAppSpaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D745EAC5C08D7738B982A9FE /* FreeAppSpaceViewController.swift */; };
 		9A81FCAA4207C751B3A60DEB /* FeedbackViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FC663D1385AB04CA228302 /* FeedbackViewOutput.swift */; };
 		9B7D4F1273F59B2A4EE63B7D /* FileInfoModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CCDE3B214014B82E82994E /* FileInfoModuleInput.swift */; };
 		9BBF662583E415D3BC0ED486 /* PhotoVideoDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40655AE864D2491AF9B181A /* PhotoVideoDetailPresenter.swift */; };
@@ -508,6 +512,7 @@
 		B3B5A5509A09A51F47A9AA34 /* SelectNameRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669AB32EC041C5277B6D63E3 /* SelectNameRouter.swift */; };
 		B6EC22F9A78F97B7AC7E1F69 /* LikeFilterModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFEC5B817C9C02047F7D9C32 /* LikeFilterModuleInput.swift */; };
 		B73973BC5864F1C639D252EA /* SyncContactsModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC575D9B71AAF95E3625985 /* SyncContactsModuleInput.swift */; };
+		B7C673A176A577E30FAB824E /* FreeAppSpaceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAE2114672AE2BCD019F2E4 /* FreeAppSpaceConfigurator.swift */; };
 		B89728CAE994F4F93C31E016 /* LBAlbumLikePreviewSliderPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350E5B07CCA1DEE8EE3F7BCD /* LBAlbumLikePreviewSliderPresenter.swift */; };
 		BA527EDC7876722B487A0428 /* FileInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412F2AB0A215CE40568819D5 /* FileInfoPresenter.swift */; };
 		BA593E311D8B7ABB01ABB7B7 /* PhotoCellRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4380582AC66F470018BC99A8 /* PhotoCellRouter.swift */; };
@@ -780,7 +785,6 @@
 		CE51AF921EF90853005DCEE0 /* IntroduceSubView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C032B7E1EEEB7A8006532C8 /* IntroduceSubView.xib */; };
 		CE51AFB71EF90853005DCEE0 /* PasswordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C0572DA1EF1BE4E005C69DA /* PasswordCell.xib */; };
 		CE51AFD11EF90853005DCEE0 /* ForgotPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CA6C6A61EF2C7BD00D21EBE /* ForgotPasswordViewController.xib */; };
-		CE51B0091EF92C16005DCEE0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE51B0031EF90E15005DCEE0 /* Images.xcassets */; };
 		CE52011E1FB4348900C11DD0 /* ActivityIndicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52011D1FB4348900C11DD0 /* ActivityIndicatorManager.swift */; };
 		CE6BD9CC1FBEF8D5008FA8A1 /* InsetsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6BD9CB1FBEF8D5008FA8A1 /* InsetsLabel.swift */; };
 		CE6FBFBC1FB2DC3F008FC18C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6FBFBB1FB2DC3F008FC18C /* AppDelegate.swift */; };
@@ -947,6 +951,7 @@
 		CEF7F1A01F87C44300EA26CA /* FBParametrs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF7F19F1F87C44300EA26CA /* FBParametrs.swift */; };
 		CEF7F1A21F87C51500EA26CA /* FBResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF7F1A11F87C51500EA26CA /* FBResponses.swift */; };
 		D143F1B72DFAC4DD04CF11B7 /* OTPViewRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CCC54F08E7CC06501222ED /* OTPViewRouterInput.swift */; };
+		D1F7307987DD553C63317B99 /* FreeAppSpacePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC2BA6DE6B4E15B0260F638 /* FreeAppSpacePresenter.swift */; };
 		D3C1B14F5945B690203921F1 /* UploadedItemsInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A5A59232059F8E376C0A2D /* UploadedItemsInitializer.swift */; };
 		D47863F11F3F18FA00EFDC6D /* UsageInfoConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47863E01F3F18FA00EFDC6D /* UsageInfoConfigurator.swift */; };
 		D47863F21F3F18FA00EFDC6D /* UsageInfoInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47863E11F3F18FA00EFDC6D /* UsageInfoInitializer.swift */; };
@@ -994,10 +999,8 @@
 		DD99F320480D3A98D286DB95 /* PhotoVideoDetailRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE7FB78D23D9EC5719125BB /* PhotoVideoDetailRouterInput.swift */; };
 		DE10EF65DE653E0EDBEC8C17 /* BaseFilesGreedViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D21B416D68E0EDD1E1DB16 /* BaseFilesGreedViewInput.swift */; };
 		DEE642813D2C3E1B9FDC7D3C /* PhotoVideoDetailViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC47E8ECC19A0C3CC7C7CCEF /* PhotoVideoDetailViewOutput.swift */; };
-		DF5BB8147307E7948369E7DC /* FreeUpSpaceInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3784877C2EC8D8DF9100C1B9 /* FreeUpSpaceInteractor.swift */; };
 		E121576F506E3512DE62F2BF /* UploadedItemsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D7EE8C0AFD8D04FB0C5CDC /* UploadedItemsPresenter.swift */; };
 		E197FC956A2CBF90DCEB2E3D /* SelectNameInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5972C1527D3AC05E1DB65B4B /* SelectNameInteractorOutput.swift */; };
-		E1EF047B466457A566760610 /* FreeUpSpaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290FC558E84B806AEDBA5466 /* FreeUpSpaceViewController.swift */; };
 		E28A08D61045AD9087BF7F5C /* ExpandStorageInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B1A822B7BCC165EA81C54D /* ExpandStorageInteractorOutput.swift */; };
 		E7C61128665828354AB0EBDC /* SplashViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B73FE0148359D56DBAC42C /* SplashViewOutput.swift */; };
 		EAF4B177768EB4A5DC564BD8 /* ExpandStorageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D599D85FD1A89BB1AC5EE4B /* ExpandStorageRouter.swift */; };
@@ -1021,7 +1024,7 @@
 		EFA74FB51FBF378F00CF946E /* PrintInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA74FAB1FBF378F00CF946E /* PrintInteractorInput.swift */; };
 		EFA74FB61FBF378F00CF946E /* PrintInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA74FAC1FBF378F00CF946E /* PrintInteractorOutput.swift */; };
 		EFA74FB71FBF378F00CF946E /* PrintInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA74FAD1FBF378F00CF946E /* PrintInteractor.swift */; };
-		F05B61575758F7C684735D3F /* FreeUpSpacePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450D980AFCB44F5599D603D2 /* FreeUpSpacePresenter.swift */; };
+		F05B61575758F7C684735D3F /* (null) in Sources */ = {isa = PBXBuildFile; };
 		F05F94EB8B3A970E994475FE /* SelectFolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C65BBC58B8393C6251C13D6 /* SelectFolderViewController.swift */; };
 		F2C69F643F8005F8666F6AAF /* UploadedItemsRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0834AFC75083AA1A9D733C5 /* UploadedItemsRouterInput.swift */; };
 		F3E679ACEE5BB82BEA6E79CC /* SelectNameInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088E9D4D411FE756F92A449 /* SelectNameInitializer.swift */; };
@@ -1115,6 +1118,7 @@
 		097F4E84C509D07D9BC4F909 /* SettingsConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsConfigurator.swift; sourceTree = "<group>"; };
 		09A6A5A047D25FE5E736FC54 /* LBAlbumLikePreviewSliderInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LBAlbumLikePreviewSliderInitializer.swift; sourceTree = "<group>"; };
 		0AEEA430A2A4A92D35185388 /* AlbumsInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AlbumsInitializer.swift; sourceTree = "<group>"; };
+		0CAE2114672AE2BCD019F2E4 /* FreeAppSpaceConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FreeAppSpaceConfigurator.swift; sourceTree = "<group>"; };
 		0E1CC5DC67F2371ACE4EC131 /* UserInfoSubViewInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserInfoSubViewInteractorInput.swift; sourceTree = "<group>"; };
 		0EC8C528F82167DC7208C077 /* ExpandStorageViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ExpandStorageViewInput.swift; sourceTree = "<group>"; };
 		0F1FF28B20122B510C14A5A2 /* ActivityTimelineInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityTimelineInteractorInput.swift; sourceTree = "<group>"; };
@@ -1128,6 +1132,7 @@
 		1A2448EE9B34B3649082BE9E /* UploadedItemsRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadedItemsRouter.swift; sourceTree = "<group>"; };
 		1A579EF08735401E788B9391 /* LikeFilterRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LikeFilterRouterInput.swift; sourceTree = "<group>"; };
 		1AB80F562E2E268C766082D5 /* SettingsInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsInitializer.swift; sourceTree = "<group>"; };
+		1AEB2D95F1B425231C9C7DE7 /* FreeAppSpaceInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FreeAppSpaceInteractor.swift; sourceTree = "<group>"; };
 		1BCD54E34E004AFFD765CE3B /* SplashPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashPresenter.swift; sourceTree = "<group>"; };
 		20B8A42DEA3660A297877591 /* LBAlbumLikePreviewSliderConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LBAlbumLikePreviewSliderConfigurator.swift; sourceTree = "<group>"; };
 		20BCBDB527895B614215B1EC /* BaseFilesGreedInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedInteractor.swift; sourceTree = "<group>"; };
@@ -1146,7 +1151,6 @@
 		280772DCBEA04537379B5124 /* VideoCellInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = VideoCellInteractor.swift; sourceTree = "<group>"; };
 		282E581C729D5E96D07CE3D1 /* AlbumDetailRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AlbumDetailRouter.swift; sourceTree = "<group>"; };
 		284E2CF83DB7FBCE9558A617 /* UserInfoSubViewPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserInfoSubViewPresenter.swift; sourceTree = "<group>"; };
-		290FC558E84B806AEDBA5466 /* FreeUpSpaceViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FreeUpSpaceViewController.swift; sourceTree = "<group>"; };
 		2944E4D7E97575567829EB5C /* HomeHeaderInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HomeHeaderInteractorOutput.swift; sourceTree = "<group>"; };
 		2B4738D31A12B7DD8C76B4E7 /* RegistrationViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationViewOutput.swift; sourceTree = "<group>"; };
 		2B67E3929C50D3031AE4A70F /* CompleteProfileViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CompleteProfileViewController.swift; sourceTree = "<group>"; };
@@ -1165,7 +1169,6 @@
 		35C6583C7BEFBA369D630046 /* FileInfoInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileInfoInteractorInput.swift; sourceTree = "<group>"; };
 		35C71D6E2FCFC8C34611820B /* FileInfoViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileInfoViewController.swift; sourceTree = "<group>"; };
 		361CEF99599CB6D50ED90150 /* LBAlbumLikePreviewSliderRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LBAlbumLikePreviewSliderRouterInput.swift; sourceTree = "<group>"; };
-		3784877C2EC8D8DF9100C1B9 /* FreeUpSpaceInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FreeUpSpaceInteractor.swift; sourceTree = "<group>"; };
 		38BCF2B48577C5A8E5B52F4F /* SplashInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashInteractor.swift; sourceTree = "<group>"; };
 		3A570FBC82798DEEDCBB44C3 /* Pods-DepoTests.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DepoTests.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-DepoTests/Pods-DepoTests.appstore.xcconfig"; sourceTree = "<group>"; };
 		3B18AA434F2832CFC8076AAA /* ActivityTimelineModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityTimelineModuleInput.swift; sourceTree = "<group>"; };
@@ -1177,7 +1180,6 @@
 		4380582AC66F470018BC99A8 /* PhotoCellRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoCellRouter.swift; sourceTree = "<group>"; };
 		4483DD5CFB766196E8A1ADB3 /* RegistrationPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationPresenter.swift; sourceTree = "<group>"; };
 		4506CAFF4D0E7AC665C195BA /* Pods-DepoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DepoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DepoTests/Pods-DepoTests.debug.xcconfig"; sourceTree = "<group>"; };
-		450D980AFCB44F5599D603D2 /* FreeUpSpacePresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FreeUpSpacePresenter.swift; sourceTree = "<group>"; };
 		46D21B416D68E0EDD1E1DB16 /* BaseFilesGreedViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedViewInput.swift; sourceTree = "<group>"; };
 		4777BF7378346F081CC034A1 /* Pods-Depo_LifeTech.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Depo_LifeTech.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech.debug.xcconfig"; sourceTree = "<group>"; };
 		492FFCA73A2AFF885199E9CF /* FeedbackViewInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewInteractorOutput.swift; sourceTree = "<group>"; };
@@ -1266,7 +1268,6 @@
 		73B2E11E4CDC11532B17CCF0 /* FeedbackViewInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewInteractor.swift; sourceTree = "<group>"; };
 		73CCC54F08E7CC06501222ED /* OTPViewRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewRouterInput.swift; sourceTree = "<group>"; };
 		748BF436130100053881AD46 /* FileInfoInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileInfoInteractorOutput.swift; sourceTree = "<group>"; };
-		754853ADEF3A9150B259916C /* FreeUpSpaceRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FreeUpSpaceRouter.swift; sourceTree = "<group>"; };
 		76464C9E441C036AD8B15D78 /* TermsAndServicesPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesPresenter.swift; sourceTree = "<group>"; };
 		77017DBA00D0813CC1CCA884 /* ExpandStorageRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ExpandStorageRouterInput.swift; sourceTree = "<group>"; };
 		7725EDECCE29F02528BCBC53 /* VideoCellViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = VideoCellViewInput.swift; sourceTree = "<group>"; };
@@ -1415,6 +1416,8 @@
 		7CAC23BB1F45718700607660 /* RemoteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteService.swift; sourceTree = "<group>"; };
 		7CAC23BE1F4ABD3100607660 /* LoadingImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingImageView.swift; sourceTree = "<group>"; };
 		7CAC23C11F4ADC3900607660 /* RemoteSearchService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteSearchService.swift; sourceTree = "<group>"; };
+		7CB2E30D1FB9CB4C009CF813 /* FreeAppSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeAppSpace.swift; sourceTree = "<group>"; };
+		7CB2E3111FBC35ED009CF813 /* FreeAppSpaceViewCotroller.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FreeAppSpaceViewCotroller.xib; sourceTree = "<group>"; };
 		7CBF50231F44723D00D67BF3 /* AlbumService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumService.swift; sourceTree = "<group>"; };
 		7CC8144D1EF41AD3001DFCF0 /* CustomPopUpService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPopUpService.swift; sourceTree = "<group>"; };
 		7CC8144F1EF41AE0001DFCF0 /* CellsConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellsConstant.swift; sourceTree = "<group>"; };
@@ -1490,6 +1493,7 @@
 		7CDB432F1F8658A000789FA6 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		7CDB43311F865B0B00789FA6 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		7CDB43341F86678D00789FA6 /* AppConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigurator.swift; sourceTree = "<group>"; };
+		7CE68EEE1FC46389006CE7BB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "Depo/Supporting Files/Images.xcassets"; sourceTree = SOURCE_ROOT; };
 		7CE779B01F43235C00CFDB2B /* SelectNameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectNameViewController.xib; sourceTree = "<group>"; };
 		7CE825BD1F823D9700356AD2 /* FreeUpSpacePopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeUpSpacePopUp.swift; sourceTree = "<group>"; };
 		7CE825BF1F823DA600356AD2 /* FreeUpSpacePopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FreeUpSpacePopUp.xib; sourceTree = "<group>"; };
@@ -1534,7 +1538,6 @@
 		8325E4AA32B488A637E3E308 /* LBAlbumLikePreviewSliderInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LBAlbumLikePreviewSliderInteractorInput.swift; sourceTree = "<group>"; };
 		832B26F8B87F6C1957D4A0FE /* AlbumSelectionViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AlbumSelectionViewController.swift; sourceTree = "<group>"; };
 		8335AE67CC88B914BA208EA7 /* ForgotPasswordInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordInitializer.swift; sourceTree = "<group>"; };
-		8416C0E520996F9659C7F479 /* FreeUpSpaceInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FreeUpSpaceInitializer.swift; sourceTree = "<group>"; };
 		84B4D0E48C237E69E8C20A1D /* PhotoCellViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoCellViewController.swift; sourceTree = "<group>"; };
 		85A4E83DDEBA92B2A944CD37 /* LikeFilterInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LikeFilterInteractorInput.swift; sourceTree = "<group>"; };
 		85F47BDFE9C7A5963725FFA1 /* UserInfoSubViewViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserInfoSubViewViewOutput.swift; sourceTree = "<group>"; };
@@ -1730,7 +1733,6 @@
 		9C665F7190FD02A64929A765 /* ExpandStorageInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ExpandStorageInteractor.swift; sourceTree = "<group>"; };
 		9D2FD9ED30E838052B7A7D71 /* BaseFilesGreedRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedRouter.swift; sourceTree = "<group>"; };
 		9EB5AE431A5F5DC8973D4E47 /* ForgotPasswordInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordInteractorOutput.swift; sourceTree = "<group>"; };
-		9F3969A12B14548FFA443F46 /* FreeUpSpaceRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FreeUpSpaceRouterInput.swift; sourceTree = "<group>"; };
 		9FDC8B6304E88519C6887C09 /* UploadedItemsModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadedItemsModuleInput.swift; sourceTree = "<group>"; };
 		A0E7FFCEA7A1AF1C19244F11 /* TermsAndServicesInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesInteractorOutput.swift; sourceTree = "<group>"; };
 		A15117ECCA82CB6599B24AAD /* HomeHeaderPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HomeHeaderPresenter.swift; sourceTree = "<group>"; };
@@ -1767,6 +1769,7 @@
 		B889664B5BCF5EDBAC69D0C0 /* PhotoVideoDetailInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailInteractor.swift; sourceTree = "<group>"; };
 		B8A49674B0414C103A1DC6FE /* PhotoCellInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoCellInteractorInput.swift; sourceTree = "<group>"; };
 		B8AE89F708D1ADDEB03BE70E /* BaseFilesGreedInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedInteractorOutput.swift; sourceTree = "<group>"; };
+		B8BCED48F4E9B72F1A00F2BB /* FreeAppSpaceRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FreeAppSpaceRouter.swift; sourceTree = "<group>"; };
 		BAF33FDE763AFBAF8B14EC86 /* SelectNameViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNameViewInput.swift; sourceTree = "<group>"; };
 		BB2E099926470C9E12018BC6 /* TermsAndServicesViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesViewOutput.swift; sourceTree = "<group>"; };
 		BB3D81D8F4441B332E687B17 /* BaseFilesGreedInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedInitializer.swift; sourceTree = "<group>"; };
@@ -1782,6 +1785,7 @@
 		C0E7C8A905CBF89702F18211 /* Pods-DepoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DepoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DepoTests/Pods-DepoTests.release.xcconfig"; sourceTree = "<group>"; };
 		C14662373D7DDA7928074D3C /* IntroduceConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceConfigurator.swift; sourceTree = "<group>"; };
 		C2287D169D831E3173413D01 /* IntroduceRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceRouterInput.swift; sourceTree = "<group>"; };
+		C2FEEC14B3D3808D6425359A /* FreeAppSpaceInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FreeAppSpaceInitializer.swift; sourceTree = "<group>"; };
 		C4A00B9575D3535660EB20D3 /* SelectNameViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNameViewController.swift; sourceTree = "<group>"; };
 		C4A98EA438594E6B7C21041F /* UploadedItemsInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadedItemsInteractorOutput.swift; sourceTree = "<group>"; };
 		C652BD5847C176C6493C93C4 /* ActivityTimelineInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityTimelineInitializer.swift; sourceTree = "<group>"; };
@@ -1876,7 +1880,6 @@
 		CE51A0D21EF8F308005DCEE0 /* RequestService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestService.swift; sourceTree = "<group>"; };
 		CE51A0D41EF8F44D005DCEE0 /* RouteRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteRequests.swift; sourceTree = "<group>"; };
 		CE51B0011EF90853005DCEE0 /* Depo_LifeTech.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Depo_LifeTech.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		CE51B0031EF90E15005DCEE0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CE51B0051EF91596005DCEE0 /* Depo_LifeTech.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Depo_LifeTech.entitlements; sourceTree = "<group>"; };
 		CE52011D1FB4348900C11DD0 /* ActivityIndicatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorManager.swift; sourceTree = "<group>"; };
 		CE6BD9CB1FBEF8D5008FA8A1 /* InsetsLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetsLabel.swift; sourceTree = "<group>"; };
@@ -2083,6 +2086,7 @@
 		D510E6399344E81392443CFD /* PhoneVereficationInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationInteractor.swift; sourceTree = "<group>"; };
 		D6249B52DD4A8E3987667D30 /* SelectFolderPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectFolderPresenter.swift; sourceTree = "<group>"; };
 		D6F285DAEBFD29EE3A3322FE /* IntroduceModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceModuleInput.swift; sourceTree = "<group>"; };
+		D745EAC5C08D7738B982A9FE /* FreeAppSpaceViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FreeAppSpaceViewController.swift; sourceTree = "<group>"; };
 		D8210436C55034A653D4CEE9 /* ForgotPasswordViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewOutput.swift; sourceTree = "<group>"; };
 		D95FAF8E46E2D2359F5FB7BE /* SelectNameInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNameInteractorInput.swift; sourceTree = "<group>"; };
 		D9A02B1046915E8086459A15 /* PhoneVereficationViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVereficationViewController.swift; sourceTree = "<group>"; };
@@ -2145,6 +2149,7 @@
 		FBF703F8C0F19668138D30BD /* UserInfoSubViewInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserInfoSubViewInteractorOutput.swift; sourceTree = "<group>"; };
 		FD5BEC48C5ED3B8650FB2FB3 /* SettingsViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		FD733F7347C546BBBAE9DF7D /* TermsAndServicesModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesModuleInput.swift; sourceTree = "<group>"; };
+		FEC2BA6DE6B4E15B0260F638 /* FreeAppSpacePresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FreeAppSpacePresenter.swift; sourceTree = "<group>"; };
 		FF3D38F0C7EEF61373827F8A /* RegistrationInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationInteractorInput.swift; sourceTree = "<group>"; };
 		FFEC5B817C9C02047F7D9C32 /* LikeFilterModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LikeFilterModuleInput.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -2279,7 +2284,6 @@
 			isa = PBXGroup;
 			children = (
 				CEBBDDD91F01E4CF00CDF527 /* Resources */,
-				CE51B0031EF90E15005DCEE0 /* Images.xcassets */,
 				7CA6C6A51EF2AABF00D21EBE /* Depo-Bridging-Header.h */,
 				051E1E0419CAC2F900FD1E03 /* Depo-Prefix.pch */,
 				0555EF2A19F938DA0068F4CC /* Depo-AppStore-Info.plist */,
@@ -2399,18 +2403,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		0E0F6D14F5E18A260B0B776E /* FreeUpSpace */ = {
-			isa = PBXGroup;
-			children = (
-				643819B960599405C0F89D15 /* View */,
-				82019DA6FBCE40E5FEF64F84 /* Presenter */,
-				5D1B48DEBF3D85054A1A34CF /* Interactor */,
-				A7672EED8F35FE0818A337BA /* Router */,
-				5BDD51E04D8A06D427120F55 /* Configurator */,
-			);
-			path = FreeUpSpace;
-			sourceTree = "<group>";
-		};
 		0EF572E69D74C918C201B7C4 /* CompleteProfile */ = {
 			isa = PBXGroup;
 			children = (
@@ -2520,6 +2512,15 @@
 				24A5A59232059F8E376C0A2D /* UploadedItemsInitializer.swift */,
 			);
 			path = Configurator;
+			sourceTree = "<group>";
+		};
+		1E019F3D4A4B96389B42C8FA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7CB2E3111FBC35ED009CF813 /* FreeAppSpaceViewCotroller.xib */,
+				D745EAC5C08D7738B982A9FE /* FreeAppSpaceViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		1FFBE2A6FBBEA028772BBA97 /* ExpandStorage */ = {
@@ -2719,6 +2720,15 @@
 				F62E6075722A7C68AB366E0F /* SelectNameInteractor.swift */,
 			);
 			path = Interactor;
+			sourceTree = "<group>";
+		};
+		34932498D2615BCA4BC41310 /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				0CAE2114672AE2BCD019F2E4 /* FreeAppSpaceConfigurator.swift */,
+				C2FEEC14B3D3808D6425359A /* FreeAppSpaceInitializer.swift */,
+			);
+			path = Configurator;
 			sourceTree = "<group>";
 		};
 		35466CD131154C1D21C7C31C /* PhotoVideoDetail */ = {
@@ -3158,22 +3168,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		5BDD51E04D8A06D427120F55 /* Configurator */ = {
-			isa = PBXGroup;
-			children = (
-				8416C0E520996F9659C7F479 /* FreeUpSpaceInitializer.swift */,
-			);
-			path = Configurator;
-			sourceTree = "<group>";
-		};
-		5D1B48DEBF3D85054A1A34CF /* Interactor */ = {
-			isa = PBXGroup;
-			children = (
-				3784877C2EC8D8DF9100C1B9 /* FreeUpSpaceInteractor.swift */,
-			);
-			path = Interactor;
-			sourceTree = "<group>";
-		};
 		5D436D6E22C1C7A7941F8C16 /* Configurator */ = {
 			isa = PBXGroup;
 			children = (
@@ -3230,14 +3224,6 @@
 				A9B1D50E619BC7CF3AF63CEF /* CompleteProfileRouter.swift */,
 			);
 			path = Router;
-			sourceTree = "<group>";
-		};
-		643819B960599405C0F89D15 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				290FC558E84B806AEDBA5466 /* FreeUpSpaceViewController.swift */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		66C15BD55C42AC0966C2B87C /* Interactor */ = {
@@ -3986,6 +3972,7 @@
 		7CA6C69B1EF1811100D21EBE /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				7CB2E30C1FB9CB26009CF813 /* FreeAppSpace */,
 				7C1663F31F793C53006DC87C /* AutoSyncSettingStorrage */,
 				7C33885F1F5952B7006B46B8 /* SingletonStorage */,
 				8DCB21531F345F6200BAFE1E /* DropboxService */,
@@ -4018,11 +4005,12 @@
 			path = RemoteSearchService;
 			sourceTree = "<group>";
 		};
-		7CBF50221F44720A00D67BF3 /* PlayListService */ = {
+		7CB2E30C1FB9CB26009CF813 /* FreeAppSpace */ = {
 			isa = PBXGroup;
 			children = (
+				7CB2E30D1FB9CB4C009CF813 /* FreeAppSpace.swift */,
 			);
-			path = PlayListService;
+			path = FreeAppSpace;
 			sourceTree = "<group>";
 		};
 		7CC8144C1EF41AD3001DFCF0 /* CustomPopUpService */ = {
@@ -4438,14 +4426,6 @@
 				2DB3C638A36C929AD6FB818D /* Configurator */,
 			);
 			path = SelectName;
-			sourceTree = "<group>";
-		};
-		82019DA6FBCE40E5FEF64F84 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-				450D980AFCB44F5599D603D2 /* FreeUpSpacePresenter.swift */,
-			);
-			path = Presenter;
 			sourceTree = "<group>";
 		};
 		84EB08032B7E347D9AB71A6D /* Presenter */ = {
@@ -5163,6 +5143,18 @@
 			path = UserInfoSubView;
 			sourceTree = "<group>";
 		};
+		93E92ABFC04D8544F8D821E6 /* FreeAppSpace */ = {
+			isa = PBXGroup;
+			children = (
+				1E019F3D4A4B96389B42C8FA /* View */,
+				C61382065FDD5DD89632A1B9 /* Presenter */,
+				9A71067F56FFB23AF51D6FD6 /* Interactor */,
+				F0489169C282E817A0D35646 /* Router */,
+				34932498D2615BCA4BC41310 /* Configurator */,
+			);
+			path = FreeAppSpace;
+			sourceTree = "<group>";
+		};
 		943B33C6E5BAACBCAAA6748C /* Router */ = {
 			isa = PBXGroup;
 			children = (
@@ -5197,6 +5189,14 @@
 				F233973492D247406E39E96E /* ForgotPasswordRouter.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		9A71067F56FFB23AF51D6FD6 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				1AEB2D95F1B425231C9C7DE7 /* FreeAppSpaceInteractor.swift */,
+			);
+			path = Interactor;
 			sourceTree = "<group>";
 		};
 		9AB7D6151BB0A4ADD3ADE65B /* Interactor */ = {
@@ -5291,15 +5291,6 @@
 				F42B02A7891F46EEC97D1662 /* RegistrationInitializer.swift */,
 			);
 			path = Configurator;
-			sourceTree = "<group>";
-		};
-		A7672EED8F35FE0818A337BA /* Router */ = {
-			isa = PBXGroup;
-			children = (
-				754853ADEF3A9150B259916C /* FreeUpSpaceRouter.swift */,
-				9F3969A12B14548FFA443F46 /* FreeUpSpaceRouterInput.swift */,
-			);
-			path = Router;
 			sourceTree = "<group>";
 		};
 		A981DAC5F519E2A31F7DC6B4 /* Albums */ = {
@@ -5469,8 +5460,8 @@
 				387B628AF67B5E2E2A29B58E /* AlbumDetail */,
 				5E26BCF377F078459F09451C /* FeedbackView */,
 				D68883816EC3361501EB6861 /* ActivityTimeline */,
-				0E0F6D14F5E18A260B0B776E /* FreeUpSpace */,
 				72836BFADA2D23CEF3EADB75 /* OTPView */,
+				93E92ABFC04D8544F8D821E6 /* FreeAppSpace */,
 				CEC3C2301FB99AF800C3D67F /* PasscodeSettings */,
 				CEC3C2031FB9961900C3D67F /* PasscodeEnter */,
 				EFA74F9F1FBF378F00CF946E /* Print */,
@@ -5496,6 +5487,14 @@
 				A4585DD65822E56FFEB2B707 /* CompleteProfileInteractor.swift */,
 			);
 			path = Interactor;
+			sourceTree = "<group>";
+		};
+		C61382065FDD5DD89632A1B9 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				FEC2BA6DE6B4E15B0260F638 /* FreeAppSpacePresenter.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		C7EF66C623C833B469A51536 /* View */ = {
@@ -5833,7 +5832,6 @@
 				CE2F56261F7553B500F49DA1 /* OffersService */,
 				7CFE92F21F5ED471008A3B72 /* FeedbackService */,
 				CE95ED2B1F516225002F923A /* FaqUrlService */,
-				7CBF50221F44720A00D67BF3 /* PlayListService */,
 				7CE779B21F4471AA00CFDB2B /* AlbumService */,
 				CE246A131F3D2D76008DF705 /* AccountService */,
 				CE246A0C1F3D2CDE008DF705 /* SyncService */,
@@ -6251,6 +6249,7 @@
 		CEBBDDD91F01E4CF00CDF527 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7CE68EEE1FC46389006CE7BB /* Images.xcassets */,
 				CEDFEC781F10C40C003D1A75 /* ar.lproj */,
 				CEDFEC7D1F10C40C003D1A75 /* de.lproj */,
 				CEDFEC821F10C40C003D1A75 /* en.lproj */,
@@ -6919,6 +6918,14 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+		F0489169C282E817A0D35646 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				B8BCED48F4E9B72F1A00F2BB /* FreeAppSpaceRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 		F1F379D7533680E1193EA393 /* Configurator */ = {
 			isa = PBXGroup;
 			children = (
@@ -7112,7 +7119,6 @@
 				CEAE3F931EFD4D7C00A405B2 /* SubPlusButtons.xib in Resources */,
 				8C6FB6861F0B9F7600B552A3 /* BasicCollectionController.xib in Resources */,
 				7C634FAB1F0F936700B5B93D /* SettingsTableViewCell.xib in Resources */,
-				CE51B0091EF92C16005DCEE0 /* Images.xcassets in Resources */,
 				7C00FE191F5957570041D041 /* AppRater.bundle in Resources */,
 				CE51AD3C1EF90853005DCEE0 /* LaunchScreen.storyboard in Resources */,
 				8C6EF8821F348B5C002AC795 /* BottomSelectionTabBarViewController.xib in Resources */,
@@ -7182,10 +7188,12 @@
 				CEBBDE0A1F01E69B00CDF527 /* TurkcellSaturaDemIta.ttf in Resources */,
 				7CED0B111F21ECDE0016CE0C /* BasicCollectionMultiFileCell.xib in Resources */,
 				CEDFEC951F10C40C003D1A75 /* InfoPlist.strings in Resources */,
+				7CB2E3121FBC35ED009CF813 /* FreeAppSpaceViewCotroller.xib in Resources */,
 				CE8F44FE1F6BB21C0062C2E0 /* ActivityTimelineFileCell.xib in Resources */,
 				7CD1F8DB1F024DCF0028F51A /* LikeFilterViewController.xib in Resources */,
 				8C6EF8911F348B77002AC795 /* EditinglBar.xib in Resources */,
 				7C0435081F4DBAAF00193C75 /* AlbumCollectionViewCell.xib in Resources */,
+				7CE68EEF1FC46389006CE7BB /* Images.xcassets in Resources */,
 				CEAE3FEE1EFD517300A405B2 /* CustomNavBar~ipad.xib in Resources */,
 				CE51AF5F1EF90853005DCEE0 /* IntroduceViewController.xib in Resources */,
 				7CDABD131F1E434100C8CC16 /* FileInfoViewController.xib in Resources */,
@@ -7268,7 +7276,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		82B2D76F0D1B2CE153F470BD /* [CP] Embed Pods Frameworks */ = {
@@ -7581,6 +7589,7 @@
 				7CD1F8FB1F0288CA0028F51A /* WiFiSyncRouterInput.swift in Sources */,
 				7C83B6F01F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.swift in Sources */,
 				CE51AC461EF90853005DCEE0 /* CurioReachabilityEx.m in Sources */,
+				7CB2E30E1FB9CB4C009CF813 /* FreeAppSpace.swift in Sources */,
 				7C83B6F31F3D916F006D05E3 /* SettingsAutoSyncModel.swift in Sources */,
 				CE51AC471EF90853005DCEE0 /* DataStorage.swift in Sources */,
 				CE51AC481EF90853005DCEE0 /* BaseUserInputCellView.swift in Sources */,
@@ -8221,14 +8230,9 @@
 				33B696E2ADDE28FC3BD303F0 /* ActivityTimelineConfigurator.swift in Sources */,
 				6F604137FCE625E5C5E97B9A /* ActivityTimelineInitializer.swift in Sources */,
 				CE0ED9771FBC0F5A00487632 /* PasscodeManager.swift in Sources */,
-				E1EF047B466457A566760610 /* FreeUpSpaceViewController.swift in Sources */,
-				F05B61575758F7C684735D3F /* FreeUpSpacePresenter.swift in Sources */,
-				DF5BB8147307E7948369E7DC /* FreeUpSpaceInteractor.swift in Sources */,
-				79D3733BAD962DDAB44FC011 /* FreeUpSpaceRouter.swift in Sources */,
+				F05B61575758F7C684735D3F /* (null) in Sources */,
 				CEF69DE11FB5851E00FCE6AB /* UploadParametrs.swift in Sources */,
 				CEC9F4AC1FB46D7000362B8C /* ImportFromDropboxPresenter.swift in Sources */,
-				762E5E96DFA12096A8DBBFC6 /* FreeUpSpaceRouterInput.swift in Sources */,
-				15BEDF417A72872CB89F79B5 /* FreeUpSpaceInitializer.swift in Sources */,
 				0B7649A4654AF442656E21DF /* OTPViewController.swift in Sources */,
 				D66872AC6631A25FA11EB409 /* OTPViewIO.swift in Sources */,
 				8518B9D1741BF6B4470BCD73 /* OTPViewPresenter.swift in Sources */,
@@ -8239,6 +8243,12 @@
 				D143F1B72DFAC4DD04CF11B7 /* OTPViewRouterInput.swift in Sources */,
 				46DCABF967D788D30B3ECEE1 /* OTPViewConfigurator.swift in Sources */,
 				7F27470E56D2B8E0764CFF33 /* OTPViewInitializer.swift in Sources */,
+				980738277831905CE1389C42 /* FreeAppSpaceViewController.swift in Sources */,
+				D1F7307987DD553C63317B99 /* FreeAppSpacePresenter.swift in Sources */,
+				10CC7D3FA3B7A3A380C4E7D2 /* FreeAppSpaceInteractor.swift in Sources */,
+				868B89BA3A01CCDC66E16667 /* FreeAppSpaceRouter.swift in Sources */,
+				B7C673A176A577E30FAB824E /* FreeAppSpaceConfigurator.swift in Sources */,
+				29F301A021F9712D24CB97EE /* FreeAppSpaceInitializer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

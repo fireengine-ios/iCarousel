@@ -165,7 +165,11 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             dataSource.reloadData()
         }
     }
-    //MARK:-
+    
+    func isArrayDataSource() -> Bool{
+        return false
+    }
+    
     func getNextItems() {
         //        interactor.nextItems(nil, sortBy: .name,
         //                             sortOrder: .asc, newFieldValue: <#FieldValue?#>)
@@ -460,6 +464,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func selectAllModeSelected() {
         view.setupSelectionStyle(isSelection: true)
         dataSource.selectAll(isTrue: true)
+    }
+    
+    func shareModeSelected() {
+         stopEditing() 
     }
     
     func getFolder() -> Item? {

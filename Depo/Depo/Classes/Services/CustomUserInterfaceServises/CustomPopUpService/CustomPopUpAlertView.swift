@@ -18,6 +18,7 @@ class CustomPopUpAlert: UIView {
     enum CustomPopUpAlertType {
         case info
         case regular
+        case success
     }
     
     static let nibName = "CustomPopUpAlert"
@@ -81,6 +82,11 @@ class CustomPopUpAlert: UIView {
             infoImageTop.constant = infoImageTopOriginalconstant
             addConstraint(NSLayoutConstraint(item: self, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: iPhoneWeightInfo))
 
+        case .success:
+            infoImageHeight.constant = infoImageHeightOriginalconstant
+            infoImageTop.constant = infoImageTopOriginalconstant
+            addConstraint(NSLayoutConstraint(item: self, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: iPhoneWeightInfo))
+            infoImageView.image = UIImage(named: "CustomPopUpSuccess")
         }
         layoutIfNeeded()
     }
