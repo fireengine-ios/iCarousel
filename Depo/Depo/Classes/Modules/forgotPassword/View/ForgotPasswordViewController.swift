@@ -151,7 +151,6 @@ class ForgotPasswordViewController: UIViewController, ForgotPasswordViewInput, U
 //            self.capchaViewH.constant = dyTop
 //            self.view.layoutIfNeeded()
 //        }
-        
     }
     
     //MARK: Buttons actions 

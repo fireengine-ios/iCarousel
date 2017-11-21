@@ -15,6 +15,7 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
     override func viewIsReady(collectionView: UICollectionView) {
         
         super.viewIsReady(collectionView: collectionView)
+        dataSource.isHeaderless = true
         dataSource.canReselect = true
         dataSource.enableSelectionOnHeader = true
         dataSource.setSelectionState(selectionState: true)

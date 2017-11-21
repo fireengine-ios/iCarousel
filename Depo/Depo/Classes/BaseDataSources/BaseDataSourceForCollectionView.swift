@@ -66,9 +66,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     var originalFilters: [GeneralFilesFiltrationType]?
     
+    var isHeaderless = false
+    
     var allMediaItems = [WrapData]()
     var allItems = [[WrapData]]()
     var allLocalItems = [WrapData]()
+    
+    
     
     private func compoundItems(pageItems: [WrapData]) {
         debugPrint("!!!GOT NEW ITEMS!!!")
@@ -76,7 +80,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 //            allItems = [allLocalItems]
 //        } else {
         allMediaItems.append(contentsOf: appendLocalItems(originalItemsArray: pageItems))
-        breakItemsIntoSections(breakingArray: allMediaItems)
+        isHeaderless ? allItems.append(allMediaItems) : breakItemsIntoSections(breakingArray: allMediaItems)
+        
 //        }
         debugPrint("!!!ALL NEW ITEMS SORTED!!!")
     }
@@ -131,9 +136,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             default:
                 break
             }
-
         }
-        
         return nil
     }
     
@@ -155,7 +158,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             return originalItemsArray
         }
         
-        ////-------HERE WE GO
         if !isPaginationDidEnd {
             var remoteItemsMD5List = originalItemsArray.map{return $0.md5}
             for remoteItem in originalItemsArray {
@@ -209,8 +211,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             }
         } else {
             debugPrint("!!!???PAGINATION ENDED APPEND ALL LOCAL ITEMS")
-            tempoArray.append(contentsOf: allLocalItems)
-            allLocalItems.removeAll()
+            tempoArray.append(contentsOf: tempoLocalArray)
+            tempoLocalArray.forEach{
+                if let unwrpedIndex = allLocalItems.index(of: $0) {
+                    allLocalItems.remove(at: unwrpedIndex)
+                }
+            }
+//            allLocalItems.removeAll()
         }
         
         switch currentSortType {
@@ -302,7 +309,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func appendCollectionView(items: [WrapData]) {
         compoundItems(pageItems: items)
-        //TODO: Append local items also here
+        
 //        reloadData()
     }
     
@@ -325,7 +332,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         super.init()
     }
     
-    func setupCollectionView(collectionView: UICollectionView, filters: [GeneralFilesFiltrationType]?){
+    func setupCollectionView(collectionView: UICollectionView, filters: [GeneralFilesFiltrationType]? = nil){
         
         originalFilters = filters
         
@@ -407,20 +414,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         }
     }
     
-    func getAllObjects() -> [[BaseDataSourceItem]]{
-//        let sections = fetchService.controller.sections
-//        let sectionsCount = sections?.count ?? 0
-//        for section in 0...sectionsCount - 1 {
-//            let rowCount = sections?[section].numberOfObjects ?? 0
-//            var subArray = [BaseDataSourceItem]()
-//            for row in 0...rowCount - 1 {
-//                let indexPath = IndexPath(row: row, section: section)
-//                if let obj = itemForIndexPath(indexPath: indexPath) {
-//                    subArray.append(obj)
-//                }
-//            }
-//            array.append(subArray)
-//        }
+    func getAllObjects() -> [[BaseDataSourceItem]] {
         return  allItems
     }
     
@@ -605,24 +599,23 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         guard allItems.count > 0 else {
             return nil
         }
-        return allItems[indexPath.section][indexPath.row]//fetchService.object(at: indexPath)
+        return allItems[indexPath.section][indexPath.row]
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         
-        return allItems.count//fetchService.controller.sections?.count ?? 0
+        return allItems.count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard section < allItems.count else {
             return 0
         }
-        
-        return allItems[section].count//fetchService.controller.sections?[section].numberOfObjects ?? 0
+        return allItems[section].count
     }
     
     func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat {
-        return 50
+        return isHeaderless ? 0 : 50
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -762,7 +755,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        let h: CGFloat = 50
+        let h: CGFloat = isHeaderless ? 0 : 50
         return CGSize(width: collectionView.contentSize.width, height: h)
     }
     
