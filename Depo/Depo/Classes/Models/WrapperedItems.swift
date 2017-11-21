@@ -636,7 +636,6 @@ class WrapData: BaseDataSourceItem, Wrappered {
     private class func getDuration(duration: Double?) -> String {
         if let d = duration{
             var s: CGFloat = CGFloat(d)
-            s = s / 1000
             let seconds = Int(s) % 60
             let minutes = Int(s) / 60
             
