@@ -583,9 +583,9 @@ struct NumericConstants {
     static let lifeSessionDuration: TimeInterval = 60 * 50 //50 min
     
     static let timeIntervalBetweenAutoSync: TimeInterval = 60*60
-    
+
     static let freeAppSpaceLimit = 0.2
     
-    static let fourGigabytes = 4 * 1024 * 1024 * 1024
+    static let fourGigabytes: UInt64 = 4 * 1024 * 1024 * 1024
     
 }

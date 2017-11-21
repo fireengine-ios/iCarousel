@@ -15,10 +15,24 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
     override func viewIsReady(collectionView: UICollectionView) {
         
         super.viewIsReady(collectionView: collectionView)
+        dataSource.isHeaderless = true
         dataSource.canReselect = true
         dataSource.enableSelectionOnHeader = true
         dataSource.setSelectionState(selectionState: true)
         dataSource.updateDisplayngType(type: .greed)
+    }
+    
+    override func viewWillAppear() {
+        
+    }
+    
+    override func reloadData() {
+        asyncOperationSucces()
+        dataSource.isPaginationDidEnd = true
+        dataSource.dropData()
+        dataSource.reloadData()
+        view?.stopRefresher()
+        
     }
     
     override func onNextButton(){
@@ -46,6 +60,10 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
     
     override func getNextItems() {
         debugPrint("upload getNextItems presenter override")
+    }
+    
+    override func getContentWithSuccessEnd() {
+        
     }
     
     func networkOperationStopped(){

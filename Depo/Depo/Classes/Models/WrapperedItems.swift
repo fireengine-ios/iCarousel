@@ -533,7 +533,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
             case .medium : url = remote.metadata?.mediumUrl
             case .large  : url = remote.metadata?.largeUrl
             }
-            if (url == nil) {
+            if url == nil, fileType == .image {
                 url = remote.tempDownloadURL
             }
             if let takenDate = remote.metadata?.takenDate {
@@ -636,7 +636,6 @@ class WrapData: BaseDataSourceItem, Wrappered {
     private class func getDuration(duration: Double?) -> String {
         if let d = duration{
             var s: CGFloat = CGFloat(d)
-            s = s / 1000
             let seconds = Int(s) % 60
             let minutes = Int(s) / 60
             

@@ -28,4 +28,8 @@ class CollectionViewCellForVideo: CollectionViewCellForPhoto {
         videoLengthLabel.text = wrappered.duration
         super.confireWithWrapperd(wrappedObj: wrappered)
     }
+    
+    override func placeholderImage() -> UIImage? {
+        return ActivityFileType.video.image 
+    }
 }

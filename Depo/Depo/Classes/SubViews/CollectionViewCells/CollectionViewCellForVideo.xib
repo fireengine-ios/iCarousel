@@ -43,10 +43,9 @@
                         <rect key="frame" x="35" y="35" width="20" height="20"/>
                     </activityIndicatorView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vty-wj-zHS">
-                        <rect key="frame" x="24" y="65" width="42" height="21"/>
+                        <rect key="frame" x="24" y="68" width="42" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="D4h-Rz-Itg"/>
-                            <constraint firstAttribute="width" constant="42" id="zBO-aE-yd9"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -57,6 +56,13 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="12" id="VKV-e4-PLr"/>
                             <constraint firstAttribute="width" constant="13" id="zFw-JM-MCE"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play" translatesAutoresizingMaskIntoConstraints="NO" id="Tgi-g8-grY">
+                        <rect key="frame" x="40" y="33" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="Lvl-tQ-j2j"/>
+                            <constraint firstAttribute="height" constant="20" id="rX2-VJ-Y1u"/>
                         </constraints>
                     </imageView>
                 </subviews>
@@ -70,15 +76,17 @@
                 <constraint firstItem="32d-zc-raV" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Msf-LT-G79"/>
                 <constraint firstItem="32d-zc-raV" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="NFr-R3-l3Z"/>
                 <constraint firstAttribute="bottom" secondItem="uip-Zv-Lj0" secondAttribute="bottom" id="PSa-Qx-1RX"/>
+                <constraint firstItem="Vty-wj-zHS" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="S1x-lJ-QjA"/>
                 <constraint firstItem="LGC-Nm-9e9" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="Xsr-dZ-rMV"/>
+                <constraint firstItem="Tgi-g8-grY" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" constant="-2" id="Y0M-PJ-Br9"/>
                 <constraint firstItem="EFu-Rx-2DV" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="YZI-dU-X04"/>
-                <constraint firstItem="Vty-wj-zHS" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="24" id="cO3-gD-jbX"/>
                 <constraint firstAttribute="bottom" secondItem="32d-zc-raV" secondAttribute="bottom" id="dIL-Dc-EKM"/>
                 <constraint firstItem="EFu-Rx-2DV" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="eBQ-RI-ROZ"/>
                 <constraint firstItem="LGC-Nm-9e9" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="6" id="fvC-qT-sXd"/>
                 <constraint firstItem="uip-Zv-Lj0" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="lCZ-MQ-bDz"/>
                 <constraint firstAttribute="trailing" secondItem="uip-Zv-Lj0" secondAttribute="trailing" id="oR2-TF-Y6S"/>
-                <constraint firstAttribute="bottom" secondItem="Vty-wj-zHS" secondAttribute="bottom" constant="4" id="vif-We-1bV"/>
+                <constraint firstItem="Tgi-g8-grY" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" constant="5" id="tip-AI-Xkh"/>
+                <constraint firstAttribute="bottom" secondItem="Vty-wj-zHS" secondAttribute="bottom" constant="1" id="vif-We-1bV"/>
                 <constraint firstAttribute="trailing" secondItem="NtU-N7-Qtp" secondAttribute="trailing" constant="5" id="vsi-Qa-QHS"/>
             </constraints>
             <connections>
@@ -94,5 +102,6 @@
     </objects>
     <resources>
         <image name="favoriteStar" width="13" height="12"/>
+        <image name="play" width="32" height="36"/>
     </resources>
 </document>

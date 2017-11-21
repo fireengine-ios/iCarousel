@@ -9,6 +9,7 @@
 import Foundation
 
 protocol PasscodeSettingsRouterInput {
-    func passcode(delegate: PasscodeEnterDelegate?, type: PasscodeInputViewType)
     func closePasscode()
+    func changePasscode()
+    func setPasscode()
 }

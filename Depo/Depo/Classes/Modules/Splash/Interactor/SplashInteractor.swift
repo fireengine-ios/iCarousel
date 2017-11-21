@@ -9,15 +9,19 @@
 class SplashInteractor: SplashInteractorInput {
 
     weak var output: SplashInteractorOutput!
+    
+    private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
+    
+    var isPasscodeEmpty: Bool {
+        return passcodeStorage.isEmpty
+    }
 
     func startLoginInBackroung(){
-        
         if ApplicationSession.sharedSession.session.rememberMe {
             authByRememberMe()
         } else {
             output.onFailLogin()
         }
-        
     }
     
     private func authByRememberMe() {

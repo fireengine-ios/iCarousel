@@ -16,6 +16,10 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
 
     let customPopUp = CustomPopUp()
     
+    var isPasscodeEmpty: Bool {
+        return interactor.isPasscodeEmpty
+    }
+    
     func viewIsReady() {
         interactor.getCellsData()
     }
@@ -69,14 +73,9 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         router.goToPackages()
     }
     
-    func goToPasscode(delegate: PasscodeEnterDelegate?, type: PasscodeInputViewType) {
-        router.goToPasscode(delegate: delegate, type: type)
-    }
-    
     func goToPasscodeSettings() {
         router.goToPasscodeSettings()
     }
-
     
     override func outputView() -> Waiting? {
         return view as? Waiting
@@ -98,7 +97,6 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     
     func onChooseFromPhotoCamera(onViewController viewController: UIViewController){
         CameraService().showCamera(onViewController: viewController)
-        
     }
     
     //MARK: - interactor output PhotoRelated
@@ -126,10 +124,8 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     
     func otherAction() {
     }
-}
-
-extension SettingsPresenter: PasscodeEnterDelegate {
-    func finishPasscode(with type: PasscodeInputViewType) {
-        router.closeEnterPasscode()
+    
+    func openPasscode(handler: @escaping () -> Void) {
+        router.openPasscode(handler: handler)
     }
 }

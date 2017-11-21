@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Typist
 
 class ForgotPasswordViewController: UIViewController, ForgotPasswordViewInput, UITableViewDelegate, UITableViewDataSource, ProtoInputCellProtocol {
 
@@ -23,6 +24,8 @@ class ForgotPasswordViewController: UIViewController, ForgotPasswordViewInput, U
     var captchaModuleView = CaptchaViewController.initFromXib()
     
     private var originBottomH:CGFloat = -1
+
+    fileprivate let keyboard = Typist.shared
 
     // MARK: Life cycle
     override func viewDidLoad() {
@@ -46,26 +49,15 @@ class ForgotPasswordViewController: UIViewController, ForgotPasswordViewInput, U
         capchaViewH.constant = 132
         
         output.viewIsReady()
+        
+        configureKeyboard()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         visibleNavigationBarStyle()
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(showKeyBoard),
-                                               name: NSNotification.Name.UIKeyboardWillShow,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(hideKeyboard),
-                                               name: NSNotification.Name.UIKeyboardWillHide,
-                                               object: nil)
     }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-         NotificationCenter.default.removeObserver(self);
-    }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -104,58 +96,36 @@ class ForgotPasswordViewController: UIViewController, ForgotPasswordViewInput, U
         }
     }
     
-    @objc func showKeyBoard(notification: NSNotification){
-        let userInfo:NSDictionary = notification.userInfo! as NSDictionary
-        let keyboardFrame:NSValue = userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
-        let keyboardRectangle = keyboardFrame.cgRectValue
-        let keyboardHeight = keyboardRectangle.height
+    deinit {
+        keyboard.stop()
+    }
+    
+    fileprivate func configureKeyboard() {
         
-        let yNextButton = getMainYForView(view: sendPasswordButton) + sendPasswordButton.frame.size.height
-        if (view.frame.size.height - yNextButton < keyboardHeight){
+        keyboard.on(event: .didChangeFrame) { [weak self] (options) in
+            guard let wSelf = self else {
+                return
+            }
+            let insets = UIEdgeInsets(top: 0, left: 0, bottom: options.endFrame.height + UIScreen.main.bounds.height - options.endFrame.maxY, right: 0)
+            wSelf.scrollView.contentInset = insets
+            wSelf.scrollView.scrollIndicatorInsets = insets
             
-            bottomSpace.constant = keyboardHeight + 40.0
-            view.layoutIfNeeded()
-            
-            
-            let textField = searchActiveTextField(view: self.view)
-            if (textField != nil){
-                let yOfTextField = getMainYForView(view: textField!) + textField!.frame.size.height + 20
-                if (yOfTextField > view.frame.size.height - keyboardHeight){
-                    let dy = yOfTextField - (view.frame.size.height - keyboardHeight)
-                    
-                    let point = CGPoint(x: 0, y: dy + 10)
-                    scrollView.setContentOffset(point, animated: true)
+            let bottomOffset = CGPoint(x: 0, y: wSelf.scrollView.contentSize.height - wSelf.scrollView.bounds.size.height + wSelf.scrollView.contentInset.bottom)
+            if(bottomOffset.y > 0) {
+                wSelf.scrollView.setContentOffset(bottomOffset, animated: true)
+            }
+            }
+            .on(event: .willHide) { [weak self] (_) in
+                guard let wSelf = self else {
+                    return
                 }
+                var inset = wSelf.scrollView.contentInset
+                inset.bottom = 0
+
+                wSelf.scrollView.contentInset = inset
+                wSelf.scrollView.setContentOffset(CGPoint.zero, animated: true)
             }
-        }
-    }
-    
-    private func searchActiveTextField(view: UIView) -> UITextField? {
-        
-        if let textField = view as? UITextField {
-            if textField.isFirstResponder {
-                return textField
-            }
-        }
-        for subView in view.subviews {
-            let textField = searchActiveTextField(view: subView)
-            if (textField != nil){
-                return textField
-            }
-        }
-        return nil
-    }
-    
-    private func getMainYForView(view: UIView)->CGFloat{
-        if (view.superview == self.view){
-            return view.frame.origin.y
-        }else{
-            if (view.superview != nil){
-                return view.frame.origin.y + getMainYForView(view:view.superview!)
-            }else{
-                return 0
-            }
-        }
+            .start()
     }
     
     @objc private func hideKeyboard() {
@@ -181,7 +151,6 @@ class ForgotPasswordViewController: UIViewController, ForgotPasswordViewInput, U
 //            self.capchaViewH.constant = dyTop
 //            self.view.layoutIfNeeded()
 //        }
-        
     }
     
     //MARK: Buttons actions 

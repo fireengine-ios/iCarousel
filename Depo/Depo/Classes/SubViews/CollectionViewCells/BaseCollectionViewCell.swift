@@ -66,15 +66,21 @@ class BaseCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDelegate,
     }
     
     func setImage(image: UIImage?){
-        
+        if image == nil, let placeholder = self.placeholderImage() {
+            self.setImage(image: placeholder)
+        }
     }
     
-    func setImage(with pathForItem: PathForItem) {
+    func setImage(with url: URL) {
         
     }
     
     func setSelection(isSelectionActive: Bool, isSelected: Bool){
         
+    }
+    
+    func placeholderImage() -> UIImage? {
+        return nil
     }
     
     func updating(){

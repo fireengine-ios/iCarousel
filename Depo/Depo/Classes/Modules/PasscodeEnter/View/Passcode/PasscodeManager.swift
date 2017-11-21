@@ -27,16 +27,20 @@ protocol PasscodeManagerDelegate: class {
 final class PasscodeManagerImp {
     let view: PasscodeView
     let storage: PasscodeStorage
-    
     var state: PasscodeState
-    lazy var touchIdManager = BiometricsManager()
+    let biometricsManager: BiometricsManager
     
     weak var delegate: PasscodeManagerDelegate?
     
-    init(passcodeView: PasscodeView, state: PasscodeState, passcodeStorage: PasscodeStorage = PasscodeStorageDefaults()) {
+    init(passcodeView: PasscodeView,
+         state: PasscodeState,
+         passcodeStorage: PasscodeStorage = factory.resolve(),
+         biometricsManager: BiometricsManager = factory.resolve()
+    ) {
         self.view = passcodeView
         self.storage = passcodeStorage
         self.state = state
+        self.biometricsManager = biometricsManager
         passcodeView.passcodeInput.delegate = self
         changeState(to: state)
     }
@@ -57,21 +61,23 @@ extension PasscodeManagerImp: PasscodeManager {
     }
     
     func authenticateWithBiometrics() {
-        if !touchIdManager.isAvailable || !touchIdManager.isEnabled {
+        if !biometricsManager.isAvailable || !biometricsManager.isEnabled {
             return
         }
         view.resignResponder()
         
-        touchIdManager.authenticate(reason: state.title) { success in
+        biometricsManager.authenticate(reason: state.title) { success in
             DispatchQueue.main.async {
                 if success {
                     let passcode = self.storage.passcode
                     self.view.passcodeInput.passcode = passcode
-                    DispatchQueue.main.asyncAfter(deadline: .now() + NumericConstants.animationDuration) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         self.state.finish(with: passcode, manager: self)
                     }
                 } else {
-                    self.view.becomeResponder()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        self.view.becomeResponder()
+                    }
                 }
             }
         }

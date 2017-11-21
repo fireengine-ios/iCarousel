@@ -93,6 +93,14 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         return frame.size.height > BasicCollectionMultiFileCell.frameSize
     }
     
+    override func setImage(with url: URL) {
+        if let imageView = isBigSize() ? self.bigContentImageView : self.smallContentImageView {
+            imageView.sd_setImage(with: url, placeholderImage: nil, options: []) { (image, error, cacheType, url) in
+                self.setImage(image: image)
+            }
+        }
+    }
+    
     override func confireWithWrapperd(wrappedObj: BaseDataSourceItem) {
         guard let wrappered = wrappedObj as? Item else{
             return

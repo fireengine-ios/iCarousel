@@ -25,48 +25,33 @@ final class PasscodeSettingsViewController: UIViewController {
     @IBOutlet weak var biometricsSwitch: UISwitch!
     @IBOutlet weak var biometricsLabel: UILabel!
     
-    var biometricsIsAvailable = false {
-        didSet {
-            touchIdView.isHidden = !biometricsIsAvailable
-        }
-    }
-    
-    let storage = PasscodeStorageDefaults()
-    let biometricsManager = BiometricsManager()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setTitle(withString: TextConstants.passcode)
-        output.viewIsReady()
         
-        let biometricsText = biometricsManager.isAvailableFaceID ? TextConstants.passcodeEnableFaceID : TextConstants.passcodeEnableTouchID
+        let biometricsText = output.isAvailableFaceID ? TextConstants.passcodeEnableFaceID : TextConstants.passcodeEnableTouchID
         biometricsLabel.text = biometricsText
+        
+        output.viewIsReady()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        storage.isEmpty ? setup(state: .set) : setup(state: .ready)
+        output.isPasscodeEmpty ? setup(state: .set) : setup(state: .ready)
         
-        biometricsIsAvailable = biometricsManager.isAvailable
-        passcodeSwitch.isOn = !PasscodeStorageDefaults().isEmpty
-        biometricsSwitch.isOn = biometricsManager.isEnabled
+        touchIdView.isHidden = !output.isBiometricsAvailable
+        passcodeSwitch.isOn = !output.isPasscodeEmpty
+        biometricsSwitch.isOn = output.isBiometricsEnabled
     }
     
     @IBAction func actionChangePasscodeButton(_ sender: UIButton) {
-        let vc = PasscodeEnterViewController.with(flow: .setNew)
-        vc.success = {
-            RouterVC().navigationController?.popViewController(animated: true)
-        }
-        RouterVC().pushViewController(viewController: vc)
-//        output.changePasscode()
+        output.changePasscode()
     }
     
     @IBAction func actionPasscodeSwitch(_ sender: UISwitch) {
-        setup(state: .set, animated: true)
-        storage.clearPasscode()
-//        output.turnOffPasscode()
+        output.turnOffPasscode()
     }
     
     @IBAction func actionBiometricsSwitch(_ sender: UISwitch) {
@@ -74,12 +59,7 @@ final class PasscodeSettingsViewController: UIViewController {
     }
     
     @IBAction func actionSetPasscodeButton(_ sender: UIButton) {
-        let vc = PasscodeEnterViewController.with(flow: .create)
-        vc.success = {
-            RouterVC().navigationController?.popViewController(animated: true)
-        }
-        RouterVC().pushViewController(viewController: vc)
-//        output.setPasscode()
+        output.setPasscode()
     }
 }
 
