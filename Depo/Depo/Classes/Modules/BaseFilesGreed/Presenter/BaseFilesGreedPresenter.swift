@@ -179,7 +179,11 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             dataSource.reloadData()
         }
     }
-    //MARK:-
+    
+    func isArrayDataSource() -> Bool{
+        return false
+    }
+    
     func getNextItems() {
         //        interactor.nextItems(nil, sortBy: .name,
         //                             sortOrder: .asc, newFieldValue: <#FieldValue?#>)

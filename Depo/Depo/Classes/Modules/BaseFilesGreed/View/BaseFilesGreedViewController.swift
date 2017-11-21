@@ -38,7 +38,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     @IBOutlet weak var startCreatingFilesButton: BlueButtonWithWhiteText!
     
-    @IBOutlet weak var carouselContainer: ViewForPopUp!
+    @IBOutlet weak var topBarContainer: UIView!
     
     var scrolliblePopUpView = ViewForPopUp()
     
@@ -94,11 +94,8 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
             noFilesImage.image = output.imageForNoFileImageView()
         }
         
-        carouselContainer.setHConstraint(hConstraint: floatingHeaderContainerHeightConstraint)
+        //carouselContainer.setHConstraint(hConstraint: floatingHeaderContainerHeightConstraint)
         
-//        if #available(iOS 11.0, *) {
-//            topCarouselConstraint.constant = underNavBarBarHeight//0
-//        }
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(loadData),
                                                name: NSNotification.Name(rawValue: LocalMediaStorage.notificationPhotoLibraryDidChange),
@@ -120,6 +117,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         configurateNavigationBar()
     }
     
@@ -154,6 +152,14 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
             self?.output.moreActionsPressed(sender: NavigationBarList().more)
         })
         navBarConfigurator.configure(right: [more, search], left: [])
+        navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
+    }
+    
+    func configurateDeleteNavBarActions(deleteAction: @escaping () -> Swift.Void) {
+        let delete = NavBarWithAction(navItem: NavigationBarList().delete, action: { (_) in
+            deleteAction()
+        })
+        navBarConfigurator.configure(right: [delete], left: [])
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
     }
     
@@ -335,7 +341,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         }
         unwrapedTopBar.view.translatesAutoresizingMaskIntoConstraints = false
         unwrapedTopBar.setupWithConfig(config: config)
-        carouselContainer.addSubview(unwrapedTopBar.view)
+        topBarContainer.addSubview(unwrapedTopBar.view)
         
         setupUnderNavBarBarConstraints(underNavBarBar: unwrapedTopBar)
     }
@@ -350,7 +356,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
                                                                  views: ["topBar" : underNavBarBar.view])
         let heightConstraint = NSLayoutConstraint(item: underNavBarBar.view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: underNavBarBarHeight)
         
-        carouselContainer.addConstraints(horisontalConstraints + verticalConstraints + [heightConstraint])
+        topBarContainer.addConstraints(horisontalConstraints + verticalConstraints + [heightConstraint])
         
         floatingHeaderContainerHeightConstraint.constant = underNavBarBarHeight
     }

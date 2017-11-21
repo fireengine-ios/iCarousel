@@ -23,6 +23,10 @@ class CreateStoryPhotoSelectionPresenter: BaseFilesGreedPresenter, CreateStorySe
         dataSource.preferedCellReUseID = CollectionViewCellsIdsConstant.cellForStoryImage
     }
     
+    override func isArrayDataSource() -> Bool{
+        return true
+    }
+    
     override func viewWillDisappear() {
         
     }

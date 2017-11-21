@@ -86,7 +86,7 @@ extension CoreDataStack {
         guard list.count > 0 else {
             return
         }
-        let context = newChildBackgroundContext
+        let context = mainContext//newChildBackgroundContext
         let predicate = NSPredicate(format: "localFileID IN %@", list)
         let items:[MediaItem] = executeRequest(predicate: predicate, context:context)
         items.forEach { context.delete($0) }
