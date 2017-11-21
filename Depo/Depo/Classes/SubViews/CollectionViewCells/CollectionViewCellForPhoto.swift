@@ -60,6 +60,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         super.prepareForReuse()
         
         self.imageView.image = nil
+        self.isAlreadyConfigured = false
     }
     
     override func updating(){
@@ -69,26 +70,23 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     
     override func setImage(image: UIImage?) {
         imageView.image = image
+        self.imageView.contentMode = .scaleAspectFill
         isAlreadyConfigured = true
         self.backgroundColor = ColorConstants.fileGreedCellColor
         activity.stopAnimating()
     }
 
-    override func setImage(with pathForItem: PathForItem) {
+    override func setImage(with url: URL) {
         imageView.contentMode = .center
-        switch pathForItem {
-        case let .localMediaContent(local):
-            break
-        case let .remoteUrl(url):
-            imageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "fileIconPhoto"), options: []) {[weak self] (image, error, cacheType, url) in
-                guard error == nil else {
-                    print("SD_WebImage_setImage error: \(error!.localizedDescription)")
-                    return
-                }
-                
-                if let `self` = self {
-                    self.imageView.contentMode = .scaleAspectFill
-                }
+        
+        imageView.sd_setImage(with: url, placeholderImage: self.placeholderImage(), options: []) {[weak self] (image, error, cacheType, url) in
+            guard error == nil else {
+                print("SD_WebImage_setImage error: \(error!.localizedDescription)")
+                return
+            }
+            
+            if let `self` = self {
+                self.imageView.contentMode = .scaleAspectFill
             }
         }
         
@@ -107,6 +105,10 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
             self.selectionView.alpha = selection ? 1 : 0
         }
         
+    }
+    
+    override func placeholderImage() -> UIImage? {
+        return ActivityFileType.image.image
     }
     
     class func getCellSise()->CGSize{

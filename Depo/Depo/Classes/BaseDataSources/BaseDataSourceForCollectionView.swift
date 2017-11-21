@@ -656,16 +656,22 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         
         switch wraped.patchToPreview {
         case .localMediaContent(let local):
-            cell.tag = FilesDataSource().getAssetThumbnail(asset: local.asset, id: cell.tag, completion: { (image, tag) in
-                let cellToCheck = self.collectionView.cellForItem(at: indexPath)
-                if cell.tag == tag, cell == cellToCheck {
-                    cell_.setImage(image: image)
-                } else {
-                    cell_.setImage(image: nil)
+            print("Local: indexPath: \(indexPath), assetId: \(local.asset.localIdentifier)")
+            FilesDataSource().getAssetThumbnail(asset: local.asset, indexPath: indexPath, completion: { (image, path) in
+                if let cellToChange = self.collectionView.cellForItem(at: path) as? CollectionViewCellDataProtocol{
+                    DispatchQueue.main.async {
+                        cellToChange.setImage(image: image)
+                    }
                 }
             })
-        case .remoteUrl(_):
-            cell_.setImage(with: wraped.patchToPreview)
+            
+        case let .remoteUrl(url):
+            if let url = url {
+                cell_.setImage(with: url)
+            } else {
+                cell_.setImage(image: nil)
+            }
+
         }
         
         let countRow:Int = self.collectionView(collectionView, numberOfItemsInSection: indexPath.section)
