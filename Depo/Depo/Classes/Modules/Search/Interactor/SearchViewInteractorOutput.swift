@@ -12,7 +12,7 @@ protocol SearchViewInteractorOutput: class {
     
     func endSearchRequestWith(text: String)
     
-    func getContentWithSuccess()
+    func getContentWithSuccess(items: [Item])
     
     func successWithSuggestList(list: [SuggestionObject])
     

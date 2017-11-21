@@ -39,7 +39,7 @@ class SearchViewInteractor: SearchViewInteractorInput {
     private func items(items: [Item]) {
         DispatchQueue.main.async { [weak self] in
             if let wraperdOutput = self?.output {
-                wraperdOutput.getContentWithSuccess()
+                wraperdOutput.getContentWithSuccess(items: items)
             }
         }
     }

@@ -26,17 +26,45 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
-    private var selectedLanguage: LanguageModel? = nil
+    private var selectedLanguage = LanguageModel() {
+        didSet {
+            self.setupTexts()
+        }
+    }
     private var languagesArray = [LanguageModel]()
 
     var output: FeedbackViewOutput!
     
-    var suggeston: Bool = false
+    var suggeston: Bool = true
     var complaint: Bool = false
 
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.languagesArray.append(self.selectedLanguage)
+        
+        self.setupTexts()
+        
+        feedbackSubView.layer.cornerRadius = 4
+        feedbackTextView.layer.cornerRadius = 4
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(showKeyBoard),
+                                               name: NSNotification.Name.UIKeyboardWillShow,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(hideKeyboard),
+                                               name: NSNotification.Name.UIKeyboardWillHide,
+                                               object: nil)
+        
+        dropDovnView.delegate = self
+        
+        output.viewIsReady()
+    }
+    
+    private func setupTexts() {
+        //TODO: use self.selectedLanguage
         
         titleLabel.text = TextConstants.feedbackViewTitle
         titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
@@ -68,28 +96,14 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
         complaintButton.setImage(getImageForChecbox(isSelected: false), for: .normal)
         complaintButton.setImage(getImageForChecbox(isSelected: true), for: .selected)
         complaintButton.tintColor = ColorConstants.blueColor
-        
-        feedbackSubView.layer.cornerRadius = 4
-        feedbackTextView.layer.cornerRadius = 4
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(showKeyBoard),
-                                               name: NSNotification.Name.UIKeyboardWillShow,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(hideKeyboard),
-                                               name: NSNotification.Name.UIKeyboardWillHide,
-                                               object: nil)
-        
-        dropDovnView.delegate = self
-        
-        output.viewIsReady()
     }
     
     func languagesUploaded(lanuages:[LanguageModel]){
         languagesArray.removeAll()
         languagesArray.append(contentsOf: lanuages)
-        let array = lanuages.map({ (object) -> String in
+        let array = lanuages.sorted { (first, _) -> Bool in
+            return first.languageCode == self.selectedLanguage.languageCode
+            }.map({ (object) -> String in
             object.displayLanguage ?? ""
         })
         dropDovnView!.setTableDataObjects(objects: array)
@@ -219,15 +233,11 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
     }
     
     @IBAction func onSendButton(){
-        if (selectedLanguage != nil)&&(feedbackTextView.text.count > 0){
-            output.onSend(selectedLanguage: selectedLanguage!)
-        }else{
-            var string = ""
-            if (selectedLanguage == nil){
-                string = TextConstants.feedbackErrorLanguageError
-            }else{
-                string = TextConstants.feedbackErrorTextError
-            }
+        if feedbackTextView.text.count > 0 {
+            output.onSend(selectedLanguage: selectedLanguage)
+        } else {
+            let string = TextConstants.feedbackErrorTextError
+            
             let controller = UIAlertController(title: TextConstants.feedbackErrorEmptyDataTitle, message: string, preferredStyle: .alert)
 
             let action = UIAlertAction(title: TextConstants.ok, style: .cancel, handler: { (action) in

@@ -122,10 +122,15 @@ class DropDovnView: UIView, UITableViewDataSource, UITableViewDelegate {
         NSLayoutConstraint.activate(constraints)
         
     }
-    
+
     func setTableDataObjects(objects: [String]){
         tableDataArray.removeAll()
         tableDataArray.append(contentsOf: objects)
+        if let titleLabelText = titleLabel?.text{
+            if !self.tableDataArray.contains(titleLabelText) {
+                titleLabel?.text = self.tableDataArray.first
+            }
+        }
         tableView?.reloadData()
     }
     
@@ -181,7 +186,7 @@ class DropDovnView: UIView, UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 20
+        return 32
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
