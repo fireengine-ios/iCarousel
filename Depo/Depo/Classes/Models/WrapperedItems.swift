@@ -536,9 +536,9 @@ class WrapData: BaseDataSourceItem, Wrappered {
             if url == nil, fileType == .image {
                 url = remote.tempDownloadURL
             }
-            if let takenDate = remote.metadata?.takenDate {
-                creationDate = takenDate
-            }
+//            if let takenDate = remote.metadata?.takenDate {
+//                creationDate = takenDate
+//            }
         default:
             break
         }
