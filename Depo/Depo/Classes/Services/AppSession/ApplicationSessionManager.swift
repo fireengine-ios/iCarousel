@@ -38,7 +38,8 @@ class ApplicationSessionManager: NSObject {
     }
     
     @objc func checkSession(){
-        guard ApplicationSession.sharedSession.session.authToken != nil else{
+        let isReachability = ReachabilityService().isReachable
+        guard ApplicationSession.sharedSession.session.authToken != nil, isReachability else{
             return
         }
         
