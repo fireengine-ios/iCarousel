@@ -60,6 +60,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         super.prepareForReuse()
         
         self.imageView.image = nil
+        self.imageView.sd_cancelCurrentImageLoad()
         self.isAlreadyConfigured = false
     }
     
