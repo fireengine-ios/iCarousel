@@ -469,6 +469,12 @@ struct TextConstants {
     
     // MARK: Free Up Space
     static let freeAppSpaceTitle = "There are %d duplicated photos both in your device and lifebox. Clear some space by selecting the photos that you want to delete."
+    static let freeAppSpaceAlertTitle = "Allow lifebox to delete %d photos?"
+    static let freeAppSpaceAlertText = "Some photos will also be deleted from an album."
+    static let freeAppSpaceAlertCancel = "Cancel"
+    static let freeAppSpaceAlertDelete = "Delete"
+    static let freeAppSpaceAlertSuccesTitle = "You have free space for %d more items."
+    static let freeAppSpaceAlertSuccesButton = "OK"
     
     // MARK NAVBAR titles
     

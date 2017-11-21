@@ -41,6 +41,20 @@ class CustomPopUp {
         customAlert.alertLabel.font = UIFont.TurkcellSaturaDemFont(size: 20)
     }
     
+    func showCustomSuccessAlert(withTitle title: String, titleAligment: NSTextAlignment = .center,
+                             withText text: String, warningTextAligment: NSTextAlignment = .center,
+                             okButtonText buttonText: String,
+                             isShadowViewShown: Bool = true,
+                             firstCustomAction: UIButtonCustomAction? = nil) {
+        
+        guard let customAlert = self.setupBaseAlert(withTitle: title, titleAligment: titleAligment, withWarningText: text, warningTextAligment: warningTextAligment) else {
+            return
+        }
+        self.setupMiddleButton(inCustomAlert: customAlert, withLabeltext: buttonText, isShadowViewShown: isShadowViewShown, firstCustomAction: firstCustomAction)
+        customAlert.setup(asType: .success)
+        customAlert.alertLabel.font = UIFont.TurkcellSaturaDemFont(size: 20)
+    }
+    
     func showCustomAlert(withTitle title: String = TextConstants.errorAlert, titleAligment: NSTextAlignment = .left,
                          withText text: String, warningTextAligment: NSTextAlignment = .left,
                          okButtonText buttonText: String, isShadowViewShown: Bool = true,

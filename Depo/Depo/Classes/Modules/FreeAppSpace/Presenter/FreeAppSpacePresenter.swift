@@ -6,7 +6,9 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class FreeAppSpacePresenter: BaseFilesGreedPresenter{
+class FreeAppSpacePresenter: BaseFilesGreedPresenter, CustomPopUpAlertActions{
+    
+    let customPopUp = CustomPopUp()
 
     override func viewIsReady(collectionView: UICollectionView) {
         dataSource = ArrayDataSourceForCollectionView()
@@ -22,8 +24,46 @@ class FreeAppSpacePresenter: BaseFilesGreedPresenter{
     }
     
     override func onNextButton() {
+        if (dataSource.selectedItemsArray.count == 0){
+            return
+        }
+        customPopUp.delegate = self
+        let titleSting = String(format: TextConstants.freeAppSpaceAlertTitle, dataSource.selectedItemsArray.count)
+        customPopUp.showCustomAlert(withTitle: titleSting,
+                                    withText: TextConstants.freeAppSpaceAlertText,
+                                    firstButtonText: TextConstants.freeAppSpaceAlertCancel,
+                                    secondButtonText: TextConstants.freeAppSpaceAlertDelete)
+        
+    }
+    
+    func goBack(){
+        if let router_ = router as? FreeAppSpaceRouter {
+            router_.onBack()
+        }
+    }
+    
+    func onItemDeleted(){
+        let count = dataSource.selectedItemsArray.count
+        dataSource.selectedItemsArray.removeAll()
+        dataSource.updateSelectionCount()
+        
+        
+        let titleSting = String(format: TextConstants.freeAppSpaceAlertSuccesTitle, count)
+        CustomPopUp.sharedInstance.showCustomSuccessAlert(withTitle: "", withText: titleSting, okButtonText: TextConstants.freeAppSpaceAlertSuccesButton)
+    }
+    
+    //MARK: - CustomPopUpAlertActions
+    
+    func cancelationAction() {
+        
+    }
+    
+    func otherAction() {
+        startAsyncOperation()
         if let int = interactor as? FreeAppSpaceInteractor {
-            int.onDeleteSelectedItems(selectedItems: dataSource.getSelectedItems())
+            if let array = dataSource.getSelectedItems() as? [WrapData]{
+                int.onDeleteSelectedItems(selectedItems: array)
+            }
         }
     }
     

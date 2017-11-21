@@ -8,4 +8,8 @@
 
 class FreeAppSpaceRouter: BaseFilesGreedRouter {
     
+    func onBack(){
+        RouterVC().popViewController()
+    }
+    
 }

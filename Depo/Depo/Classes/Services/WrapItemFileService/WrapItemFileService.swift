@@ -58,13 +58,13 @@ class WrapItemFileService: WrapItemFileOperations {
                 localAssetsW.count > 0 {
                 LocalMediaStorage.default.removeAssets(deleteAsset: localAssetsW, success:  {
 
-//                    let list: [String] = localAssetsW.flatMap { $0.localIdentifier }
-//                    CoreDataStack.default.removeLocalMediaItemswithAssetID(list: list)
+                    let list: [String] = localAssetsW.flatMap { $0.localIdentifier }
+                    CoreDataStack.default.removeLocalMediaItemswithAssetID(list: list)
                     success?()
                 }, fail: fail)
                 
             } else {
-//                CoreDataStack.default.removeFromStorage(wrapData: deleteFiles)
+
                 success?()
             }
         }

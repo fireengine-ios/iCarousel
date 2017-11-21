@@ -71,6 +71,19 @@ class FreeAppSpace {
         }
     }
     
+    func deleteDeletedLocalPhotos(deletedPhotos:[WrapData]){
+        var array = duplicaesArray.map { $0.md5 }
+        for object in deletedPhotos {
+            if let index = array.index(of: object.md5){
+                array.remove(at: index)
+                duplicaesArray.remove(at: index)
+            }
+        }
+    }
+    
+    func isDuplicatesNotAvailable() -> Bool{
+        return duplicaesArray.count == 0
+    }
     
     func startSearchDuplicates(finished: @escaping() -> Swift.Void) {
         if (isSearchRunning){
@@ -168,8 +181,8 @@ class FreeAppSpace {
         return CoreDataStack.default.allLocalItem()
     }
     
-    func getLocalFiesComaredWithServerObjects(serverObjects: [WrapData], localObjects: [BaseDataSourceItem]) -> [BaseDataSourceItem]{
-        var comparedFiles = [BaseDataSourceItem]()
+    func getLocalFiesComaredWithServerObjects(serverObjects: [WrapData], localObjects: [WrapData]) -> [WrapData]{
+        var comparedFiles = [WrapData]()
         let localObjectMD5 = localObjects.map { $0.md5 }
         for serverObject in serverObjects{
             if let index = localObjectMD5.index(of: serverObject.md5) {
@@ -178,7 +191,6 @@ class FreeAppSpace {
         }
         return comparedFiles
     }
-    
 }
 
 class FreeAppService: RemoteItemsService {
@@ -205,5 +217,9 @@ class FreeAppService: RemoteItemsService {
     
     override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoveItems?, fail:FailRemoteItems?, newFieldValue: FieldValue? = nil) {
         allItems(success: success, fail: fail)
+    }
+    
+    func clear(){
+        isGotAll = false
     }
 }
