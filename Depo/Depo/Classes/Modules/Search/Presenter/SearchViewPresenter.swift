@@ -38,6 +38,9 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         dataSource.delegate = self
         interactor.viewIsReady()
         player.delegates.add(view as! MediaPlayerDelegate)
+        dataSource.isHeaderless = true
+//        sortedRule = .albumlettersAZ
+//        dataSource.currentSortType = sortedRule
     }
     
     deinit {
@@ -72,21 +75,23 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         return showedSpinner
     }
     
-    func getContentWithSuccess(){
-//        if (view == nil){
-//            return
-//        }
-//        asyncOperationSucces()
-//        
-//        self.showedSpinner = false
+    func getContentWithSuccess(items: [Item]) {
+        if (view == nil){
+            return
+        }
+        asyncOperationSucces()
+        
+        self.showedSpinner = false
+        //items.sorted(by: {$0.creationDate! > $1.creationDate!})
+        dataSource.appendCollectionView(items: items)
 //        dataSource.configurateWithSimpleData(collectionData: files, sortingRules: sortedRule, types: filters, syncType: syncType)
         
-//        if (files.count == 0){
-//            let flag = interactor.needShowNoFileView()
-//            view.setCollectionViewVisibilityStatus(visibilityStatus: flag)
-//        }else{
-//            view.setCollectionViewVisibilityStatus(visibilityStatus: false)
-//        }
+        if (items.count == 0){
+            let flag = interactor.needShowNoFileView()
+            view.setCollectionViewVisibilityStatus(visibilityStatus: flag)
+        }else{
+            view.setCollectionViewVisibilityStatus(visibilityStatus: false)
+        }
         
     }
     
