@@ -11,7 +11,7 @@ import Photos
 
 extension CoreDataStack {
     
-    @objc func appendLocalMediaItems() {
+    @objc func appendLocalMediaItems(_ end: (() -> Void)?) {
         let queue = DispatchQueue(label: "Append Local Item ")
         queue.async {
             let localMediaStorage = LocalMediaStorage.default
@@ -22,6 +22,7 @@ extension CoreDataStack {
                 if status == .denied{
                     self.deleteLocalFiles()
                 }
+                end?()
             }
         }
     }

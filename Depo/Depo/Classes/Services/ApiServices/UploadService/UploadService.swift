@@ -13,6 +13,8 @@ final class UploadService: BaseRequestService {
     
     static let `default` = UploadService()
     
+    static let notificatioUploadServiceDidUpload = "notificatioUploadServiceDidUpload"
+
     private let dispatchQueue: DispatchQueue
 //    private let syncDispatchQueue: DispatchQueue
     
@@ -69,6 +71,9 @@ final class UploadService: BaseRequestService {
                     //    return handler(.failed(CustomErrors.unknown))
                     //}
                     //print(response.itemResponse ?? "")
+                    
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: UploadService.notificatioUploadServiceDidUpload),
+                                                    object: nil)
                     handler(.success(()))
                 }, fail: { errorResponse in
                     handler(.failed(CustomErrors.text(errorResponse.description)))
@@ -152,6 +157,9 @@ final class UploadService: BaseRequestService {
                     WrapItemOperatonManager.default.stopOperationWithType(type: .upload)
                     success?()
                 }
+                
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: UploadService.notificatioUploadServiceDidUpload),
+                                                object: nil)
             }, fail: { (fail) in
                 self.finishedUploadOperationsCount += 1
                 

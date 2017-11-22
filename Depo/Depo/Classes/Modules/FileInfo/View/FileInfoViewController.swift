@@ -21,7 +21,11 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
     @IBOutlet weak var moreFileInfoLabel: UILabel!
     @IBOutlet weak var dateModifiedTitle: UILabel!
     @IBOutlet weak var dateModifiedLabel: UILabel!
-
+    @IBOutlet weak var uploadDateTitle: UILabel!
+    @IBOutlet weak var uploadDateLabel: UILabel!
+    @IBOutlet weak var takenDateTitle: UILabel!
+    @IBOutlet weak var takenDateLabel: UILabel!
+    
     var output: FileInfoViewOutput!
     var interactor: FileInfoInteractor!
 
@@ -65,6 +69,20 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
         moreFileInfoLabel.textColor = ColorConstants.textGrayColor
         moreFileInfoLabel.font = UIFont.TurkcellSaturaRegFont(size: 19)
         
+        uploadDateTitle.text = TextConstants.fileInfoUploadDateTitle
+        uploadDateTitle.textColor = ColorConstants.textGrayColor
+        uploadDateTitle.font = UIFont.TurkcellSaturaRegFont(size: 19)
+        
+        uploadDateLabel.textColor = ColorConstants.textGrayColor
+        uploadDateLabel.font = UIFont.TurkcellSaturaRegFont(size: 19)
+        
+        
+        takenDateTitle.text = TextConstants.fileInfoTakenDateTitle
+        takenDateTitle.textColor = ColorConstants.textGrayColor
+        takenDateTitle.font = UIFont.TurkcellSaturaRegFont(size: 19)
+        
+        takenDateLabel.textColor = ColorConstants.textGrayColor
+        takenDateLabel.font = UIFont.TurkcellSaturaRegFont(size: 19)
         
         output.viewIsReady()
     }
@@ -106,7 +124,22 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
             view.layoutSubviews()
         }
         
-        dateModifiedLabel.text = object.creationDate?.getDateInFormat(format: "dd MMMM yyyy")
+        dateModifiedLabel.text = object.lastModifiDate?.getDateInFormat(format: "dd MMMM yyyy")
+        
+        if let obj = object as? WrapData, obj.syncStatus == .synced, let takenDate = obj.metaData?.takenDate {
+            takenDateLabel.text = takenDate.getDateInFormat(format: "dd MMMM yyyy")
+            if let createdDate = object.creationDate, createdDate == takenDate {
+                uploadDateLabel.text = createdDate.getDateInFormat(format: "dd MMMM yyyy")
+            } else {
+                uploadDateLabel.isHidden = true
+                uploadDateTitle.isHidden = true
+            }
+        } else {
+            takenDateLabel.isHidden = true
+            takenDateTitle.isHidden = true
+            uploadDateLabel.isHidden = true
+            uploadDateTitle.isHidden = true
+        }
     }
     
     func addReturnIfNeed(string: inout String){

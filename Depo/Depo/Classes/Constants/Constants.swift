@@ -276,6 +276,8 @@ struct TextConstants {
     static let fileInfoFileSizeTitle = "File size"
     static let fileInfoDurationTitle = "Duration"
     static let fileInfoDateModifiedTitle = "Date modified"
+    static let fileInfoUploadDateTitle = "Upload date"
+    static let fileInfoTakenDateTitle = "Taken date"
     static let fileInfoAlbumTitle = "Album"
     static let fileInfoArtistTitle = "Artist"
     static let fileInfoTitleTitle = "Title"
