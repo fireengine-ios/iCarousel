@@ -66,7 +66,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func onReloadData(){
         
-        dataSource.dropData()
+//        dataSource.dropData()
         reloadData()
     }
     
@@ -100,6 +100,9 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
 
     func reloadData() {
+        dataSource.dropData()
+        dataSource.currentSortType = sortedRule
+        dataSource.reloadData()
         startAsyncOperation()
         dataSource.isPaginationDidEnd = false
         interactor.reloadItems(nil,
@@ -329,9 +332,9 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func sortedPushed(with rule: SortedRules) {
         sortedRule = rule
         view.changeSortingRepresentation(sortType: rule)
-        dataSource.dropData()
+//        dataSource.dropData()
         dataSource.currentSortType = rule
-        dataSource.reloadData()
+//        dataSource.reloadData()
         reloadData()
     }
     
@@ -426,7 +429,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         self.filters = filters.map{ $0.convertToGeneralFilterFileType() }
         
         stopEditing()
-        dataSource.dropData()
+//        dataSource.dropData()
         dataSource.originalFilters = self.filters
         reloadData()
     }
@@ -442,14 +445,14 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         debugPrint("finished")
         dataSource.setSelectionState(selectionState: false)
         view.setupSelectionStyle(isSelection: false)
-        reloadData()
+//        reloadData()
     }
     
     func operationFailed(withType type: ElementTypes) {
         debugPrint("failed")
         dataSource.setSelectionState(selectionState: false)
         view.setupSelectionStyle(isSelection: false)
-        reloadData()
+//        reloadData()
     }
     
     func selectModeSelected() {

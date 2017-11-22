@@ -96,12 +96,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         return false
     }
     
-    private func getFileDate(item: Item) -> Date {
-//        if isLocalOnly() {
-//
-//        }
-    }
-    
     private func breakItemsIntoSections(breakingArray: [WrapData]) {
         allItems.removeAll()
         for item in breakingArray {
