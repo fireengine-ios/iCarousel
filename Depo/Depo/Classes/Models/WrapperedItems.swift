@@ -518,7 +518,6 @@ class WrapData: BaseDataSourceItem, Wrappered {
         fileType = FileType(type: remote.contentType, fileName: name)
         isFolder = remote.folder
         syncStatus = .synced
-        takenDate = remote.takenDate
         creationDate = remote.createdDate
         
         parent = remote.parent

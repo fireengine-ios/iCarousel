@@ -18,8 +18,6 @@ class BaseDataSourceItem: NSObject {
     
     var lastModifiDate: Date? = nil
     
-    var takenDate: Date? = nil
-    
     var fileType: FileType = .application(.unknown)
     
     var syncStatus: SyncWrapperedStatus = .notSynced
