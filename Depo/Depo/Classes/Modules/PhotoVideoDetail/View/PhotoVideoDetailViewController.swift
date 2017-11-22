@@ -66,7 +66,7 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
     private func configureNavigationBar() {
         if objects.count > selectedIndex, selectedIndex >= 0 {
             let item = objects[selectedIndex]
-            navigationItem.rightBarButtonItem?.isEnabled = item.syncStatus != .notSynced
+            navigationItem.rightBarButtonItem?.customView?.isHidden = item.syncStatus == .notSynced
         }
     }
     
