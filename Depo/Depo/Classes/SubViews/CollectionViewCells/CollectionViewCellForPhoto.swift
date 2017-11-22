@@ -70,11 +70,14 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     }
     
     override func setImage(image: UIImage?) {
-        imageView.image = image
-        self.imageView.contentMode = .scaleAspectFill
-        isAlreadyConfigured = true
-        self.backgroundColor = ColorConstants.fileGreedCellColor
-        activity.stopAnimating()
+        super.setImage(image: image)
+        if image != nil {
+            imageView.image = image
+            self.imageView.contentMode = .scaleAspectFill
+            isAlreadyConfigured = true
+            self.backgroundColor = ColorConstants.fileGreedCellColor
+            activity.stopAnimating()
+        }
     }
 
     override func setImage(with url: URL) {

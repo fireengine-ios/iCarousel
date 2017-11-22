@@ -85,6 +85,8 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
                 smallCellSelectionView.isHidden = true
                 
             }
+        } else {
+            super.setImage(image: image)
         }
         stopAnimation()
     }
@@ -93,9 +95,20 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         return frame.size.height > BasicCollectionMultiFileCell.frameSize
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        if let imageView = isBigSize() ? self.bigContentImageView : self.smallContentImageView {
+            imageView.sd_cancelCurrentImageLoad()
+        }
+    }
+    
     override func setImage(with url: URL) {
         if let imageView = isBigSize() ? self.bigContentImageView : self.smallContentImageView {
             imageView.sd_setImage(with: url, placeholderImage: nil, options: []) { (image, error, cacheType, url) in
+                if image != nil {
+                    imageView.contentMode = .scaleAspectFill
+                }
                 self.setImage(image: image)
             }
         }
