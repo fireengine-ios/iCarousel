@@ -67,7 +67,9 @@ class BaseCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDelegate,
     
     func setImage(image: UIImage?){
         if image == nil, let placeholder = self.placeholderImage() {
-            self.setImage(image: placeholder)
+            DispatchQueue.main.async {
+                self.setImage(image: placeholder)
+            }
         }
     }
     
