@@ -41,10 +41,12 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
 //            
 //        }
         bottomBarPresenter?.setupTabBarWith(config: barConfig)
+        view.onItemSelected(at: index, from: items)
     }
     
     func setSelectedItemIndex(selectedIndex: Int) {
         interactor.setSelectedItemIndex(selectedIndex: selectedIndex)
+        view.onItemSelected(at: selectedIndex, from: interactor.allItems)
     }
     
     func onInfo(object: Item){
