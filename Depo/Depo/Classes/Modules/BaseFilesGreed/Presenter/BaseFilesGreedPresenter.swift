@@ -482,7 +482,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func getSortTypeString() -> String {
-        return self.sortedRule.stringValue
+        return self.sortedRule.descriptionForTitle
     }
 }
 
