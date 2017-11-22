@@ -109,7 +109,9 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
                 if image != nil {
                     imageView.contentMode = .scaleAspectFill
                 }
-                self.setImage(image: image)
+                DispatchQueue.main.async {
+                    self.setImage(image: image)
+                }
             }
         }
     }
