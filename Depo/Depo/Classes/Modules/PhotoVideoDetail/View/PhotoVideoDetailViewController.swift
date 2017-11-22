@@ -20,7 +20,12 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
     var output: PhotoVideoDetailViewOutput!
     var interactor: PhotoVideoDetailInteractor?
     var views: [BaseFileContentView] = [BaseFileContentView]()
-    var selectedIndex: Int = -1 { didSet { configureNavigationBar() } }
+    var selectedIndex: Int = -1 {
+        didSet {
+            configureNavigationBar()
+            configureEditingTabBar()
+        }
+    }
     var isAnimating = false
     var objects = [Item]() { didSet { configureNavigationBar() } }
     let customPopUp = CustomPopUp()
@@ -66,7 +71,20 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
     private func configureNavigationBar() {
         if objects.count > selectedIndex, selectedIndex >= 0 {
             let item = objects[selectedIndex]
-            navigationItem.rightBarButtonItem?.isEnabled = item.syncStatus != .notSynced
+            navigationItem.rightBarButtonItem?.customView?.isHidden = item.syncStatus == .notSynced
+        }
+    }
+    
+    private func configureEditingTabBar() {
+        if objects.count > selectedIndex, selectedIndex >= 0,
+           let editIndex = interactor?.bottomBarOriginalConfig.elementsConfig.index(of: .edit) {
+            let item = objects[selectedIndex]
+            
+            if item.syncStatus == .notSynced {
+                editingTabBar.disableItems(atIntdex: [editIndex])
+            } else {
+                editingTabBar.enableIems(atIndex: [editIndex])
+            }
         }
     }
     
