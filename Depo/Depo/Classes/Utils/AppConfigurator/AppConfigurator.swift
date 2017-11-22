@@ -9,11 +9,11 @@
 import UIKit
 import SDWebImage
 
-class AppConfigurator: NSObject {
+class AppConfigurator {
     
     static let dropboxManager: DropboxManager = factory.resolve()
     
-    @objc class func applicationStarted(){
+    class func applicationStarted(){
         ApplicationSessionManager.start()
         dropboxManager.start()
         

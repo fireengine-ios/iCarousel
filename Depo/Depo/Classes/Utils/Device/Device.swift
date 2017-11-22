@@ -51,6 +51,23 @@ class Device {
          return totalFreeSpace
     }
     
+    static var getFreeDiskSpaceInPercent: Double {
+        var totalFreeSpace: Double = 0
+        var totalSpace: Double = 0
+        
+        do {
+            let dict = try FileManager.default.attributesOfFileSystem(forPath: Device.homeFolderString())
+            
+            totalFreeSpace = (dict[.systemFreeSize] as! NSNumber).doubleValue
+            totalSpace = (dict[.systemSize] as! NSNumber).doubleValue
+            
+        } catch {
+            print("Can't calculate file size")
+        }
+        let t = totalFreeSpace / totalSpace
+        return t
+    }
+    
     static var deviceInfo:[String:Any] {
         
         var result : [String:Any] = [:]

@@ -58,13 +58,13 @@ class WrapItemFileService: WrapItemFileOperations {
                 localAssetsW.count > 0 {
                 LocalMediaStorage.default.removeAssets(deleteAsset: localAssetsW, success:  {
 
-//                    let list: [String] = localAssetsW.flatMap { $0.localIdentifier }
-//                    CoreDataStack.default.removeLocalMediaItemswithAssetID(list: list)
+                    let list: [String] = localAssetsW.flatMap { $0.localIdentifier }
+                    CoreDataStack.default.removeLocalMediaItemswithAssetID(list: list)
                     success?()
                 }, fail: fail)
                 
             } else {
-//                CoreDataStack.default.removeFromStorage(wrapData: deleteFiles)
+
                 success?()
             }
         }
@@ -134,7 +134,7 @@ class WrapItemFileService: WrapItemFileOperations {
         remoteFileService.detail(uuids: item.uuid, success: success, fail: fail)
     }
     
-    func details(items: [WrapData], success: FileOperation?, fail:FailResponse?) {
+    func details(items: [WrapData], success: ListRemoveItems?, fail:FailResponse?) {
         let items = remoteItemsUUID(files: items)
         remoteFileService.details(uuids: items, success: success, fail: fail)
     }

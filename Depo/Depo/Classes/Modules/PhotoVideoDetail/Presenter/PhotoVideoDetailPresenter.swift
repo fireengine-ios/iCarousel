@@ -113,6 +113,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     }
     
     func printSelected() { }
+    func shareModeSelected() { }
     
     
     //MARK : BasePresenter

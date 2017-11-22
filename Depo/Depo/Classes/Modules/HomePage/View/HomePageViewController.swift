@@ -88,6 +88,8 @@ class HomePageViewController: UIViewController, HomePageViewInput, BaseCollectio
             controllersArray.append(viewContr5)
         }
         homePageDataSource.configurateWith(collectionView: collectionView, viewController: self, data: controllersArray, delegate: self)
+        
+        output.homePagePresented()
     }
     
     override func viewWillAppear(_ animated: Bool) {

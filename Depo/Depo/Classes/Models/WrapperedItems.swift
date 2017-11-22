@@ -537,7 +537,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
             if url == nil, fileType == .image {
                 url = remote.tempDownloadURL
             }
-  
+
         default:
             break
         }
