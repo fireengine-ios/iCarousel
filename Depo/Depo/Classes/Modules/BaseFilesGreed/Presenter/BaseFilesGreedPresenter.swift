@@ -383,18 +383,22 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 selectedItems += items.filter { selectedItemsUUIDs.contains($0.uuid) }
             }
             
-            let items = selectedItems.filter { $0.isLocalItem == false}
+            let remoteItems = selectedItems.filter { $0.isLocalItem == false}
 
-            if items.contains(where: { return !($0.favorites) } ) {
+            if remoteItems.contains(where: { return !($0.favorites) } ) {
                 actionTypes.append(.addToFavorites)
             }
-            if items.contains(where: { return $0.favorites } ) {
+            if remoteItems.contains(where: { return $0.favorites } ) {
                 actionTypes.append(.removeFromFavorites)
             }
             
-            if actionTypes.contains(.createStory) && items.contains(where: { return $0.fileType != .image } ) {
+            if actionTypes.contains(.createStory) && remoteItems.contains(where: { return $0.fileType != .image } ) {
                 let index = actionTypes.index(where: { return $0 == .createStory})!
                 actionTypes.remove(at: index)
+            }
+            
+            if selectedItems.count == 1 {
+                actionTypes.append(.rename)
             }
             
             let noSyncItems = selectedItems.filter{ $0.syncStatus != SyncWrapperedStatus.synced }
