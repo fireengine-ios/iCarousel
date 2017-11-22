@@ -23,6 +23,10 @@ class SearchViewController: UIViewController, UISearchBarDelegate, SearchViewInp
     @IBOutlet weak var noFilesImage: UIImageView!
     @IBOutlet weak var startCreatingFilesButton: BlueButtonWithWhiteText!
     
+    @IBOutlet weak var topBarContainer: UIView!
+    @IBOutlet weak var floatingHeaderContainerHeightConstraint: NSLayoutConstraint!
+     let underNavBarBarHeight: CGFloat = 53
+    
     let musicBar = MusicBar.initFromXib()
 
     @IBOutlet weak var musicBarContainer: UIView!
@@ -30,30 +34,24 @@ class SearchViewController: UIViewController, UISearchBarDelegate, SearchViewInp
     @IBOutlet weak var containerViewBottomConstraint: NSLayoutConstraint!
 
     // MARK: - Variables
-    
+    var underNavBarBar: GridListTopBar?
     var output: SearchViewOutput!
     
     var suggestionList = [SuggestionObject]()
     
     // MARK: - Life Cicle
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.isOpaque = false
         self.view.backgroundColor = ColorConstants.searchShadowColor
         self.collectionView.isHidden = true
         self.suggestTableView.isHidden = true
-        self.noFilesLabel.text = "No results found for your query."
+        self.noFilesLabel.text = TextConstants.noFilesFoundInSearch
         
         setupMusicBar()
-        
-        let dropNotificationName = NSNotification.Name(rawValue: TabBarViewController.notificationMusicDrop)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(hideMusicBar),
-                                               name: dropNotificationName,
-                                               object: nil)
-        
-        musicBar.delegate = self
+        subscribeToNotifications()
         configureNavigationBar()
         setCurrentPlayState()
     }
@@ -68,6 +66,23 @@ class SearchViewController: UIViewController, UISearchBarDelegate, SearchViewInp
         UIApplication.shared.setStatusBarStyle(.lightContent, animated: true)
     }
     
+    deinit {
+        self.unSubscribeFromNotifications()
+    }
+    
+    fileprivate func subscribeToNotifications() {
+        let dropNotificationName = NSNotification.Name(rawValue: TabBarViewController.notificationMusicDrop)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(hideMusicBar),
+                                               name: dropNotificationName,
+                                               object: nil)
+    }
+    
+    fileprivate func unSubscribeFromNotifications() {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    
     private func setupMusicBar() {
         musicBarContainer.addSubview(musicBar)
         let horisontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[item1]-(0)-|",
@@ -79,7 +94,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate, SearchViewInp
         
         musicBarContainer.addConstraints(horisontalConstraints + verticalConstraints)
         changeVisibleStatus(hidden: true)
+        musicBar.delegate = self
     }
+    
     
     func showMusicBar() {
         musicBar.configurateFromPLayer()
@@ -221,6 +238,35 @@ class SearchViewController: UIViewController, UISearchBarDelegate, SearchViewInp
     func dismissController() {
         self.dismiss(animated: false, completion: nil)
     }
+    
+    
+    //MARK: - Under nav bar
+    
+    func setupUnderNavBarBar(withConfig config: GridListTopBarConfig) {
+        guard let unwrapedTopBar = underNavBarBar else {
+            return
+        }
+        unwrapedTopBar.view.translatesAutoresizingMaskIntoConstraints = false
+        unwrapedTopBar.setupWithConfig(config: config)
+        topBarContainer.addSubview(unwrapedTopBar.view)
+        
+        setupUnderNavBarBarConstraints(underNavBarBar: unwrapedTopBar)
+    }
+    
+    private func setupUnderNavBarBarConstraints(underNavBarBar: GridListTopBar) {
+        let horisontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[topBar]-(0)-|",
+                                                                   options: [], metrics: nil,
+                                                                   views: ["topBar" : underNavBarBar.view])
+        
+        let verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[topBar]",
+                                                                 options: [], metrics: nil,
+                                                                 views: ["topBar" : underNavBarBar.view])
+        let heightConstraint = NSLayoutConstraint(item: underNavBarBar.view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: underNavBarBarHeight)
+        
+        topBarContainer.addConstraints(horisontalConstraints + verticalConstraints + [heightConstraint])
+        
+        floatingHeaderContainerHeightConstraint.constant = underNavBarBarHeight
+    }
 }
 
 //MARK: - UITableViewDelagate & DataSource 
@@ -264,3 +310,30 @@ extension SearchViewController: MediaPlayerDelegate {
     func didStartMediaPlayer(_ mediaPlayer: MediaPlayer) {}
     func didStopMediaPlayer(_ mediaPlayer: MediaPlayer) {}
 }
+
+
+extension SearchViewController: GridListTopBarDelegate {
+    func filterChanged(filter: MoreActionsConfig.MoreActionsFileType) {
+        output.filtersTopBar(cahngedTo: [filter])
+    }
+    
+    func sortingRuleChanged(rule: MoreActionsConfig.SortRullesType) {
+        output.sortedPushedTopBar(with: rule)
+    }
+    
+    func representationChanged(viewType: MoreActionsConfig.ViewType) {
+        var asGrid: Bool
+        viewType == .Grid ? (asGrid = true) : (asGrid = false)
+        output.viewAppearanceChangedTopBar(asGrid: asGrid)
+    }
+    
+    
+}
+
+
+
+
+
+
+
+

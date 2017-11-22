@@ -9,7 +9,7 @@
 import Foundation
 
 class SearchViewConfigurator {
-    func configure(viewController: SearchViewController, remoteServices: RemoteSearchService, output: SearchModuleOutput?) {
+    func configure(viewController: SearchViewController, remoteServices: RemoteSearchService, output: SearchModuleOutput?, topBarConfig: GridListTopBarConfig?) {
         let router = SeacrhViewRouter()
         
         let presenter = SearchViewPresenter()
@@ -17,6 +17,14 @@ class SearchViewConfigurator {
         presenter.moduleOutput = output
         presenter.view = viewController
         presenter.router = router
+        
+        if let underNavBarBarConfig = topBarConfig {
+            presenter.topBarConfig = underNavBarBarConfig
+            let gridListTopBar = GridListTopBar.initFromXib()
+            viewController.underNavBarBar = gridListTopBar
+            gridListTopBar.delegate = viewController
+            
+        }
         
         let interactor = SearchViewInteractor(remoteItems: remoteServices)
         interactor.output = presenter

@@ -9,11 +9,14 @@
 import Foundation
 
 class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractorOutput, BaseDataSourceForCollectionViewDelegate {
+    
     weak var view: SearchViewInput!
     var interactor: SearchViewInteractorInput!
     var router: SearchViewRouterInput!
     
     var moduleOutput: SearchModuleOutput?
+    
+    var topBarConfig: GridListTopBarConfig?
     
     var dataSource = BaseDataSourceForCollectionView()
     var showedSpinner = false
@@ -38,7 +41,11 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         dataSource.delegate = self
         interactor.viewIsReady()
         player.delegates.add(view as! MediaPlayerDelegate)
-        dataSource.isHeaderless = true
+        dataSource.displayingType = .list
+        dataSource.setPreferedCellReUseID(reUseID: CollectionViewCellsIdsConstant.baseMultiFileCell)
+        dataSource.isHeaderless = false
+        
+        setupTopBar()
 //        sortedRule = .albumlettersAZ
 //        dataSource.currentSortType = sortedRule
     }
@@ -48,6 +55,16 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
             return
         }
         player.delegates.remove(view)
+    }
+    
+    //MARK: - UnderNavBarBar/TopBar
+    
+    private func setupTopBar() {
+        guard let unwrapedConfig = topBarConfig else {
+            return
+        }
+        view.setupUnderNavBarBar(withConfig: unwrapedConfig)
+        sortedRule = unwrapedConfig.defaultSortType.sortedRulesConveted
     }
 
     func searchWith(searchText: String, sortBy: SortType, sortOrder: SortOrder) {
@@ -181,4 +198,29 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     func getNextItems() {
         
     }
+    
+    //MARK: - View output/TopBar/UnderNavBarBar Delegates
+    
+    func viewAppearanceChangedTopBar(asGrid: Bool) {
+        viewAppearanceChanged(asGrid: asGrid)
+    }
+    
+    func sortedPushedTopBar(with rule:  MoreActionsConfig.SortRullesType) {
+//        sortedPushed(with: rule.sortedRulesConveted)
+    }
+    
+    func filtersTopBar(cahngedTo filters: [MoreActionsConfig.MoreActionsFileType]) {
+        
+    }
+    
+    //MARK: - MoreActionsViewDelegate
+    
+    func viewAppearanceChanged(asGrid: Bool){
+        if (asGrid){
+            dataSource.updateDisplayngType(type: .greed)
+        }else{
+            dataSource.updateDisplayngType(type: .list)
+        }
+    }
+    
 }
