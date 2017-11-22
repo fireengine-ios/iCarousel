@@ -70,27 +70,28 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
     }
     
     override func setImage(image: UIImage?) {
-        super.setImage(image: image)
         if image != nil {
-            imageView.image = image
             self.imageView.contentMode = .scaleAspectFill
+            imageView.image = image
             isAlreadyConfigured = true
             self.backgroundColor = ColorConstants.fileGreedCellColor
             activity.stopAnimating()
+        } else {
+            self.imageView.contentMode = .center
+            super.setImage(image: image)
         }
     }
 
     override func setImage(with url: URL) {
-        imageView.contentMode = .center
-        
-        imageView.sd_setImage(with: url, placeholderImage: self.placeholderImage(), options: []) {[weak self] (image, error, cacheType, url) in
+        self.imageView.contentMode = .center
+        imageView.sd_setImage(with: url, placeholderImage: self.placeholderImage(), options: [.avoidAutoSetImage]) {[weak self] (image, error, cacheType, url) in
             guard error == nil else {
                 print("SD_WebImage_setImage error: \(error!.localizedDescription)")
                 return
             }
             
-            if let `self` = self {
-                self.imageView.contentMode = .scaleAspectFill
+            DispatchQueue.main.async {
+                self?.setImage(image: image)
             }
         }
         
