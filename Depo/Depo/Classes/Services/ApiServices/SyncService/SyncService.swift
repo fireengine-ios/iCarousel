@@ -62,6 +62,12 @@ class SyncService: NSObject {
         
         let localItems = self.allLocalNotSyncItems(video: isWiFi ? true : !videoViaWiFiOnly,
                                                    image: isWiFi ? true : !imageViaWiFiOnly)
+        
+        if (localItems.count == 0){
+            isSyncing = false
+            return
+        }
+        
         var latestDate: Date? = nil
         
         for object in localItems {
@@ -157,6 +163,10 @@ class SyncService: NSObject {
                 let serverObjectMD5 = item.md5
                 let index = self_.localMD5Array.index(of: serverObjectMD5)
                 if let index_ = index {
+                    
+                    let localItem = self_.localItemsArray[index_]
+                    localItem.syncStatus = .synced
+                    CoreDataStack.default.updateLocalItemSyncStatus(item: localItem)
                     
                     self_.localItemsArray.remove(at: index_)
                     self_.localMD5Array.remove(at: index_)

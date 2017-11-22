@@ -15,7 +15,7 @@ extension CoreDataStack {
         let uuidList = items.map{ $0.uuid }
         let predicateForRemoteFile = NSPredicate(format: "uuidValue IN %@", uuidList)
         
-        let childrenContext = self.newChildBackgroundContext
+        let childrenContext = backgroundContext
  
         let alreadySavedMediaItems = executeRequest(predicate: predicateForRemoteFile, context: childrenContext)
         
@@ -58,13 +58,24 @@ extension CoreDataStack {
                     savedMediaItem.metadata?.mediumUrl = remoteWrapedItem.metaData?.mediumUrl?.absoluteString
                     savedMediaItem.metadata?.smalURl = remoteWrapedItem.metaData?.smalURl?.absoluteString
                     savedMediaItem.favoritesValue = remoteWrapedItem.favorites
+                    
+                    
                     break
                 }
             }
         }
-        
-        
         saveDataForContext(context: context)
+    }
+    
+    func updateLocalItemSyncStatus(item: Item) {
+        let predicateForRemoteFile = NSPredicate(format: "uuidValue == %@", item.uuid)
+        let alreadySavedMediaItems = executeRequest(predicate: predicateForRemoteFile, context: backgroundContext)
+        
+        alreadySavedMediaItems.forEach({ savedItem in
+            //for locals
+            savedItem.syncStatusValue = item.syncStatus.valueForCoreDataMapping()
+        })
+        saveDataForContext(context: backgroundContext)
     }
     
     func removeFromStorage(wrapData: [WrapData]) {

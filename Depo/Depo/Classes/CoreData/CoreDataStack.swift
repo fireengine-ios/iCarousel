@@ -44,20 +44,25 @@ class CoreDataStack: NSObject {
         return children
     }
     
+    var backgroundContext: NSManagedObjectContext
+    
     override init() {
 
         mainContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        backgroundContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        
         
         super.init()
 //        rootBackgroundContext.persistentStoreCoordinator = persistentStoreCoordinator
         mainContext.persistentStoreCoordinator = persistentStoreCoordinator
-        
+        backgroundContext.parent = mainContext
 //        let name = NSNotification.Name.NSManagedObjectContextDidSave
 //        let selector = #selector(managedObjectContextObjectsDidSave)
 //        NotificationCenter.default.addObserver(self,
 //                                               selector: selector,
 //                                               name: name,
 //                                               object: nil)
+        
     }
     
     func clearDataBase() {

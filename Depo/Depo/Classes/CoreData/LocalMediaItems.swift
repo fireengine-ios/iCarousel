@@ -129,7 +129,7 @@ extension CoreDataStack {
             filesTypesArray.append(FileType.image.valueForCoreDataMapping())
         }
         let context = mainContext
-        let predicate = NSPredicate(format: "(isLocalItemValue == true) AND (fileTypeValue IN %@)", filesTypesArray)
+        let predicate = NSPredicate(format: "(isLocalItemValue == true) AND (fileTypeValue IN %@) AND (syncStatusValue == 0)", filesTypesArray)
         let items: [MediaItem] =  executeRequest(predicate: predicate, context:context)
         let sortedItems = items.sorted { (item1, item2) -> Bool in
             //< correct
