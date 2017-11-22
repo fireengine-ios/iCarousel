@@ -164,12 +164,10 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
     
     func delete(item: [BaseDataSourceItem]) {
         if let items = item as? [Item] {
-            deleteItems(items: items)
+            deleteItems(items: items.filter({ !$0.isLocalItem }))
         } else if let albumbs = item as? [AlbumItem] {
             deleteAlbumbs(albumbs: albumbs)
         }
-        
-        
     }
     
     private func deleteItems(items: [Item]) {
