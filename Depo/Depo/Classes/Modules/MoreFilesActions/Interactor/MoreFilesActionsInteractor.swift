@@ -6,7 +6,7 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
-class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
+class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {    
     
     weak var output: MoreFilesActionsInteractorOutput?
     private var fileService = WrapItemFileService()
@@ -144,7 +144,7 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
         }, fail: failAction(elementType: .share))
     }
     
-    func info(item: [BaseDataSourceItem]) {
+    func info(item: [BaseDataSourceItem], isRenameMode: Bool) {
         self.output?.operationFinished(type: .info)
         
         let router = RouterVC()
@@ -152,6 +152,9 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
         if let infoController = router.fileInfo as? FileInfoViewController, let object = item.first {
             infoController.interactor.setObject(object: object)
             router.pushViewController(viewController: infoController)
+            if isRenameMode {
+                infoController.startRenaming()
+            }
         }
     }
     

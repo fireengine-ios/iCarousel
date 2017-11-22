@@ -164,7 +164,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             switch $0 {
             case .info:
                 action = UIAlertAction(title: TextConstants.actionSheetInfo, style: .default, handler: { _ in
-                    self.interactor.info(item: currentItems)
+                    self.interactor.info(item: currentItems, isRenameMode: false)
 //                    self.view.unselectAll()
                 })
             case .edit:
@@ -283,6 +283,10 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             case .print:
                 action = UIAlertAction(title: "Print", style: .default, handler: { _ in
                     self.basePassingPresenter?.printSelected()
+                })
+            case .rename:
+                action = UIAlertAction(title: TextConstants.actionSheetRename, style: .default, handler: { _ in
+                    self.interactor.info(item: currentItems, isRenameMode: true)
                 })
             default:
                 action = UIAlertAction(title: "TEST", style: .default, handler: { _ in
