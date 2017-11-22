@@ -13,7 +13,7 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
     }
 
     override func viewIsReady(collectionView: UICollectionView) {
-        
+        dataSource = ArrayDataSourceForCollectionView()
         super.viewIsReady(collectionView: collectionView)
         dataSource.isHeaderless = true
         dataSource.canReselect = true
@@ -27,26 +27,24 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
     }
     
     override func reloadData() {
+        interactor.getAllItems(sortBy: sortedRule)
         asyncOperationSucces()
         dataSource.isPaginationDidEnd = true
         dataSource.dropData()
         dataSource.reloadData()
         view?.stopRefresher()
-        
     }
     
     override func onNextButton(){
         if (dataSource.selectedItemsArray.count > 0){
-//            startAsyncOperation()
-            if let interactor_ = interactor as? UploadFilesSelectionInteractor {
-                //!!!!!!!!!!!!!
-                //interactor_.uploadItems(items: Array(dataSource.selectedItemsArray))
-                let list = Array(dataSource.selectedItemsArray)
-                let array = CoreDataStack.default.mediaItemByUUIDs(uuidList: list)
-                interactor_.addToUploadOnDemandItems(items: array)
+            startAsyncOperation()
+            if let interactor_ = interactor as? UploadFilesSelectionInteractor, let dataSource = dataSource as? ArrayDataSourceForCollectionView {
+
+                interactor_.addToUploadOnDemandItems(items: dataSource.getSelectedItems())
                 guard let uploadVC = view as? UploadFilesSelectionViewInput else {
                     return
                 }
+                
                 uploadVC.currentVC.navigationController?.popViewController(animated: true)
             }
         } else {

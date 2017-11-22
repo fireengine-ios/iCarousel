@@ -401,7 +401,7 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         if (button == uploadBtn){
 //            debugPrint("root UUID is ", getFolderUUID())
             let router = RouterVC()
-            let controller = router.uploadPhotos(rootUUID: getFolderUUID() ?? "")
+            let controller = router.uploadPhotos()
             router.pushViewController(viewController: controller)
             return
         }

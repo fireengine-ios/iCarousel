@@ -93,6 +93,36 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         return mediaContent
     }
     
+    func getAllAlbums() -> [AlbumItem] {
+        let fetchResult = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .albumRegular, options: nil)
+        
+        var albums = [AlbumItem]()
+        fetchResult.enumerateObjects { (object, index, stop) in
+            let item = AlbumItem(uuid: object.localIdentifier,
+                                          name: object.localizedTitle,
+                                          creationDate: nil,
+                                          lastModifiDate: nil,
+                                          fileType: .photoAlbum,
+                                          syncStatus: .unknown,
+                                          isLocalItem: true)
+            let fetchOptions = PHFetchOptions()
+            fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+            fetchOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
+            if let asset = PHAsset.fetchAssets(in: object, options: fetchOptions).firstObject {
+                let info = self.fullInfoAboutAsset(asset: asset)
+                
+                let baseMediaContent = BaseMediaContent(curentAsset: asset,
+                                                        urlToFile: info.url,
+                                                        size: info.size,
+                                                        md5: info.md5)
+                item.preview = WrapData(baseModel: baseMediaContent)
+            }
+            
+            albums.append(item)
+        }
+
+        return albums
+    }
     
     // MARK: Image
     

@@ -42,6 +42,15 @@ class AlbumItem: BaseDataSourceItem {
         isLocalItem = false
     }
     
+    override init(uuid: String?, name: String?, creationDate: Date?, lastModifiDate: Date?, fileType: FileType, syncStatus: SyncWrapperedStatus, isLocalItem: Bool) {
+        imageCount = 0
+        videoCount = 0
+        audioCount = 0
+        preview = nil
+        readOnly = false
+        super.init(uuid: uuid, name: name, creationDate: creationDate, lastModifiDate: lastModifiDate, fileType: fileType, syncStatus: syncStatus, isLocalItem: isLocalItem)
+    }
+    
     override func getCellReUseID() -> String {
         return CollectionViewCellsIdsConstant.albumCell
     }
