@@ -77,6 +77,9 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
                 actionTypes.append((item.albums != nil) ? .removeFromAlbum : .addToAlbum)
                 actionTypes.append((item.syncStatus == .notSynced) ? .backUp : .addToCmeraRoll)
+                if item.syncStatus == .synced {
+                    actionTypes.append(.delete)
+                }
             case .video:
                 actionTypes = [.move]
                 actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
