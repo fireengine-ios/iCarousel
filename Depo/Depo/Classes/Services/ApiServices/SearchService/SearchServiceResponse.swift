@@ -13,6 +13,7 @@ struct SearchJsonKey {
     
     static let createdDate = "createdDate"
     static let lastModifiedDate = "lastModifiedDate"
+    static let takenDate = "Image-DateTime"
     static let id = "id"
     static let hash = "hash"
     static let iOSMetaHash = "X-Object-Meta-Ios-Metadata-Hash"
