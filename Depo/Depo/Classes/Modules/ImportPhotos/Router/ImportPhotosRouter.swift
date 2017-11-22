@@ -9,15 +9,24 @@
 import Foundation
 
 class ImportFromFBRouter: ImportFromFBRouterInput {
-    func goToOnboarding(){
+    func goToOnboarding() {
         let router = RouterVC()
         router.setNavigationController(controller: router.onboardingScreen)
     }
 }
 
 class ImportFromDropboxRouter: ImportFromDropboxRouterInput {
-    func goToOnboarding(){
+    func goToOnboarding() {
         let router = RouterVC()
         router.setNavigationController(controller: router.onboardingScreen)
+    }
+}
+
+class ImportFromInstagramRouter: ImportFromInstagramRouterInput {
+    func goToOnboarding(param: InstagramConfigResponse) {
+//        let router = RouterVC()
+//        let controller = router.instagramAuth as! InstagramAuthViewController
+//        controller.configure(clientId: param.clientID!, authpath: param.authURL!)
+//        router.pushViewController(viewController: controller)
     }
 }

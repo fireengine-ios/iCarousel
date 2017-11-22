@@ -823,6 +823,9 @@
 		CE9A8A1D1FB2F43300C0A5E1 /* DropboxResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9A8A1C1FB2F43300C0A5E1 /* DropboxResponse.swift */; };
 		CE9A8A1F1FB2F45500C0A5E1 /* DropboxStatusValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9A8A1E1FB2F45500C0A5E1 /* DropboxStatusValue.swift */; };
 		CEA84C231F7CE8F7009B0769 /* UIApplication+Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA84C221F7CE8F7009B0769 /* UIApplication+Settings.swift */; };
+		CEA9033D1FC4302A0037DC23 /* InstagramService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA9033C1FC4302A0037DC23 /* InstagramService.swift */; };
+		CEA9033F1FC4306D0037DC23 /* InstagramParametrs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA9033E1FC4306D0037DC23 /* InstagramParametrs.swift */; };
+		CEA903411FC430930037DC23 /* InstagramResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA903401FC430930037DC23 /* InstagramResponses.swift */; };
 		CEACBEA11F6C0EEA003BE328 /* RingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEACBEA01F6C0EEA003BE328 /* RingView.swift */; };
 		CEACBEA31F6C1110003BE328 /* ActivityTimelineTableBackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEACBEA21F6C1110003BE328 /* ActivityTimelineTableBackView.xib */; };
 		CEACBEA51F6C1120003BE328 /* ActivityTimelineTableBackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEACBEA41F6C1120003BE328 /* ActivityTimelineTableBackView.swift */; };
@@ -936,6 +939,8 @@
 		CEE9B4EC1F78FD85002DAF81 /* InternetDataUsageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9B4EA1F78FD85002DAF81 /* InternetDataUsageCell.swift */; };
 		CEE9B4ED1F78FD85002DAF81 /* InternetDataUsageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE9B4EB1F78FD85002DAF81 /* InternetDataUsageCell.xib */; };
 		CEEF886B1FBEC5D0005867D6 /* SpringLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF886A1FBEC5D0005867D6 /* SpringLabel.swift */; };
+		CEF0C2841FC5493200105C31 /* ImportFromInstagramPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0C2831FC5493200105C31 /* ImportFromInstagramPresenter.swift */; };
+		CEF0C2861FC549C400105C31 /* ImportFromInstagramInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0C2851FC549C400105C31 /* ImportFromInstagramInteractor.swift */; };
 		CEF619EC1F79222600BECF03 /* AccountType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF619EB1F79222600BECF03 /* AccountType.swift */; };
 		CEF69DDD1FB584CD00FCE6AB /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DDC1FB584CD00FCE6AB /* Result.swift */; };
 		CEF69DDF1FB584F700FCE6AB /* UploadResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DDE1FB584F700FCE6AB /* UploadResponse.swift */; };
@@ -1921,6 +1926,9 @@
 		CE9A8A1C1FB2F43300C0A5E1 /* DropboxResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropboxResponse.swift; sourceTree = "<group>"; };
 		CE9A8A1E1FB2F45500C0A5E1 /* DropboxStatusValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropboxStatusValue.swift; sourceTree = "<group>"; };
 		CEA84C221F7CE8F7009B0769 /* UIApplication+Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Settings.swift"; sourceTree = "<group>"; };
+		CEA9033C1FC4302A0037DC23 /* InstagramService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramService.swift; sourceTree = "<group>"; };
+		CEA9033E1FC4306D0037DC23 /* InstagramParametrs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramParametrs.swift; sourceTree = "<group>"; };
+		CEA903401FC430930037DC23 /* InstagramResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramResponses.swift; sourceTree = "<group>"; };
 		CEACBEA01F6C0EEA003BE328 /* RingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingView.swift; sourceTree = "<group>"; };
 		CEACBEA21F6C1110003BE328 /* ActivityTimelineTableBackView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityTimelineTableBackView.xib; sourceTree = "<group>"; };
 		CEACBEA41F6C1120003BE328 /* ActivityTimelineTableBackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTimelineTableBackView.swift; sourceTree = "<group>"; };
@@ -2035,6 +2043,8 @@
 		CEE9B4EA1F78FD85002DAF81 /* InternetDataUsageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetDataUsageCell.swift; sourceTree = "<group>"; };
 		CEE9B4EB1F78FD85002DAF81 /* InternetDataUsageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InternetDataUsageCell.xib; sourceTree = "<group>"; };
 		CEEF886A1FBEC5D0005867D6 /* SpringLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpringLabel.swift; sourceTree = "<group>"; };
+		CEF0C2831FC5493200105C31 /* ImportFromInstagramPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFromInstagramPresenter.swift; sourceTree = "<group>"; };
+		CEF0C2851FC549C400105C31 /* ImportFromInstagramInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFromInstagramInteractor.swift; sourceTree = "<group>"; };
 		CEF619EB1F79222600BECF03 /* AccountType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountType.swift; sourceTree = "<group>"; };
 		CEF69DDC1FB584CD00FCE6AB /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		CEF69DDE1FB584F700FCE6AB /* UploadResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadResponse.swift; sourceTree = "<group>"; };
@@ -3986,6 +3996,7 @@
 		7CA6C69B1EF1811100D21EBE /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				CEA9033B1FC4301F0037DC23 /* InstagramService */,
 				7C1663F31F793C53006DC87C /* AutoSyncSettingStorrage */,
 				7C33885F1F5952B7006B46B8 /* SingletonStorage */,
 				8DCB21531F345F6200BAFE1E /* DropboxService */,
@@ -6045,6 +6056,16 @@
 			path = URL;
 			sourceTree = "<group>";
 		};
+		CEA9033B1FC4301F0037DC23 /* InstagramService */ = {
+			isa = PBXGroup;
+			children = (
+				CEA9033C1FC4302A0037DC23 /* InstagramService.swift */,
+				CEA9033E1FC4306D0037DC23 /* InstagramParametrs.swift */,
+				CEA903401FC430930037DC23 /* InstagramResponses.swift */,
+			);
+			path = InstagramService;
+			sourceTree = "<group>";
+		};
 		CEACBEA61F6C1134003BE328 /* ActivityTimelineTableBackView */ = {
 			isa = PBXGroup;
 			children = (
@@ -6702,6 +6723,7 @@
 			children = (
 				D498864A1F3EFBE200F50C95 /* ImportPhotosInteractor.swift */,
 				CE19833E1FB48302001B329E /* ImportFromDropboxInteractor.swift */,
+				CEF0C2851FC549C400105C31 /* ImportFromInstagramInteractor.swift */,
 				D498864B1F3EFBE200F50C95 /* ImportPhotosInteractorInput.swift */,
 				D498864C1F3EFBE200F50C95 /* ImportPhotosInteractorOutput.swift */,
 			);
@@ -6713,6 +6735,7 @@
 			children = (
 				D498864E1F3EFBE200F50C95 /* ImportPhotosPresenter.swift */,
 				CEC9F4AB1FB46D7000362B8C /* ImportFromDropboxPresenter.swift */,
+				CEF0C2831FC5493200105C31 /* ImportFromInstagramPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -7363,6 +7386,7 @@
 				CEADDA9E1F234920001DDA8A /* FileServiceResponse.swift in Sources */,
 				7C66E8AD1F979C3300D98F27 /* CreateStoryPreviewModuleInput.swift in Sources */,
 				7C49881D1F3320420039C5F2 /* CreateStoryPhotosOrderViewController.swift in Sources */,
+				CEA903411FC430930037DC23 /* InstagramResponses.swift in Sources */,
 				7CDABD0B1F1E3A6300C8CC16 /* UserProfilePresenter.swift in Sources */,
 				8CFF868E1F0F96E600520D18 /* SyncAdapter.m in Sources */,
 				CEC3C2421FB99AF800C3D67F /* PasscodeSettingsPresenter.swift in Sources */,
@@ -7468,6 +7492,7 @@
 				7C6E2F911F31E4F800536DB6 /* CreateStoryNameInteractorInput.swift in Sources */,
 				CEAE3FB51EFD4F0D00A405B2 /* HomePageModuleInput.swift in Sources */,
 				CE51ABAA1EF90853005DCEE0 /* GSMCodeModel.swift in Sources */,
+				CEA9033D1FC4302A0037DC23 /* InstagramService.swift in Sources */,
 				CE2F55F71F75518F00F49DA1 /* PlanType.swift in Sources */,
 				8DCB21671F3C7CBF00BAFE1E /* SearchViewInitializer.swift in Sources */,
 				CE51ABAD1EF90853005DCEE0 /* Configuration.m in Sources */,
@@ -7633,6 +7658,7 @@
 				CE51AC941EF90853005DCEE0 /* Controller.m in Sources */,
 				CEAE3FB01EFD4F0D00A405B2 /* HomePageConfigurator.swift in Sources */,
 				7C49881C1F3320420039C5F2 /* CreateStoryPhotosOrderRouterInput.swift in Sources */,
+				CEA9033F1FC4306D0037DC23 /* InstagramParametrs.swift in Sources */,
 				7C6E2F961F31E4F800536DB6 /* CreateStoryNameRouterInput.swift in Sources */,
 				CE51AC951EF90853005DCEE0 /* AutoSyncConfigurator.swift in Sources */,
 				7C4988151F3320420039C5F2 /* CreateStoryPhotosOrderInitializer.swift in Sources */,
@@ -7791,12 +7817,14 @@
 				CE51ACFB1EF90853005DCEE0 /* ForgotPasswordInteractorInput.swift in Sources */,
 				CE51ACFC1EF90853005DCEE0 /* ForgotPasswordInteractorOutput.swift in Sources */,
 				CE51ACFD1EF90853005DCEE0 /* AutoSyncViewOutput.swift in Sources */,
+				CEF0C2861FC549C400105C31 /* ImportFromInstagramInteractor.swift in Sources */,
 				CE51ACFE1EF90853005DCEE0 /* ForgotPasswordInteractor.swift in Sources */,
 				CE2F56331F7554A600F49DA1 /* OffersService.swift in Sources */,
 				7CA2A7B01F14CE3F00F37E2C /* LocalMediaStorage.swift in Sources */,
 				8C6EF8841F348B5C002AC795 /* BottomSelectionTabBarViewOutput.swift in Sources */,
 				CE8F44E81F6AB5CB0062C2E0 /* ActivityTimelineServiceResponse.swift in Sources */,
 				7CDB43351F86678D00789FA6 /* AppConfigurator.swift in Sources */,
+				CEF0C2841FC5493200105C31 /* ImportFromInstagramPresenter.swift in Sources */,
 				D47863F51F3F18FA00EFDC6D /* UsageInfoInteractorOutput.swift in Sources */,
 				CE246A0E1F3D2CDE008DF705 /* SyncService.swift in Sources */,
 				CEB996CF1F0770470074E264 /* RequestsKey.swift in Sources */,

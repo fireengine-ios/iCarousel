@@ -60,3 +60,9 @@ protocol ImportFromDropboxInteractorOutput {
 //    
 //    func goToOnboarding()
 }
+
+// MARK: - Instagram
+
+protocol ImportFromInstagramInteractorOutput {
+    
+}
