@@ -155,8 +155,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             return originalItemsArray
         }
         
+        var remoteItemsMD5List = originalItemsArray.map{return $0.md5}
         if !isPaginationDidEnd {
-            var remoteItemsMD5List = originalItemsArray.map{return $0.md5}
+            
             for remoteItem in originalItemsArray {
                 
                 innerLocalsLoop: for localItem in tempoLocalArray {
@@ -219,11 +220,20 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             }
         } else {
             debugPrint("!!!???PAGINATION ENDED APPEND ALL LOCAL ITEMS")
-            tempoArray.append(contentsOf: tempoLocalArray)
+//            tempoArray.append(contentsOf: tempoLocalArray)
             tempoLocalArray.forEach{
-                if let unwrpedIndex = allLocalItems.index(of: $0) {
-                    allLocalItems.remove(at: unwrpedIndex)
+                if !remoteItemsMD5List.contains($0.md5) {
+                    tempoArray.append(contentsOf: tempoLocalArray)
+                    remoteItemsMD5List.append($0.md5)
+                    if let unwrpedIndex = allLocalItems.index(of: $0) {
+                        allLocalItems.remove(at: unwrpedIndex)
+                    }
+                } else {
+                    if let unwrpedIndex = allLocalItems.index(of: $0) {
+                        allLocalItems.remove(at: unwrpedIndex)
+                    }
                 }
+                
             }
 //            allLocalItems.removeAll()
         }
@@ -251,7 +261,14 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
                 }
                 }
         case .metaDataTimeDown:
-            tempoArray.sort{$0.creationDate! < $1.creationDate!}
+            tempoArray.sort{
+                if let firstMetaDate = $0.metaData?.takenDate,
+                    let secondMetaDate = $1.metaData?.takenDate{
+                    return firstMetaDate < secondMetaDate
+                } else {
+                    return $0.creationDate! > $1.creationDate!
+                }
+            }
         }
         debugPrint("!!!ALL LOCAL ITEMS SORTED APPENDED!!!")
         return tempoArray
