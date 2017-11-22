@@ -139,6 +139,9 @@ final class UploadService: BaseRequestService {
         self.allUploadOperationsCount += itemsToUpload.count
         let operations: [UploadOperations] = itemsToUpload.flatMap {
             let operation = UploadOperations(item: $0, uploadType: .fromHomePage, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, success: { (finishedOperation) in
+                finishedOperation.item.syncStatus = .synced
+                CoreDataStack.default.appendOnlyNewItems(items: [finishedOperation.item])
+                
                 guard self.allUploadOperationsCount != 0 else {
                     return
                 }
@@ -203,9 +206,14 @@ final class UploadService: BaseRequestService {
         self.allSyncOperationsCount += itemsToSync.count
         let operations: [UploadOperations] = itemsToSync.flatMap {
             let operation = UploadOperations(item: $0, uploadType: .autoSync, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, success: { (finishedOperation) in
+                
+                finishedOperation.item.syncStatus = .synced
+                CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item)//appendOnlyNewItems(items: [finishedOperation.item])
+                
                 guard self.allSyncOperationsCount != 0 else {
                     return
                 }
+                
                 self.finishedSyncOperationsCount += 1
                 WrapItemOperatonManager.default.setProgressForOperationWith(type: .sync,
                                                                             allOperations: self.allSyncOperationsCount,
