@@ -10,14 +10,14 @@ import UIKit
 
 class PhotoVideoDetailModuleConfigurator {
 
-    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController, bottomBarConfig: EditingBarConfig) {
+    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController, photoVideoBottomBarConfig: EditingBarConfig, documentsBottomBarConfig: EditingBarConfig) {
 
         if let viewController = viewInput as? PhotoVideoDetailViewController {
-            configure(viewController: viewController, bottomBarConfig: bottomBarConfig)
+            configure(viewController: viewController, photoVideoBottomBarConfig: photoVideoBottomBarConfig, documentsBottomBarConfig: documentsBottomBarConfig)
         }
     }
 
-    private func configure(viewController: PhotoVideoDetailViewController, bottomBarConfig: EditingBarConfig) {
+    private func configure(viewController: PhotoVideoDetailViewController, photoVideoBottomBarConfig: EditingBarConfig, documentsBottomBarConfig: EditingBarConfig) {
 
         let router = PhotoVideoDetailRouter()
 
@@ -27,10 +27,11 @@ class PhotoVideoDetailModuleConfigurator {
 
         let interactor = PhotoVideoDetailInteractor()
         interactor.output = presenter
-        interactor.bottomBarOriginalConfig = bottomBarConfig
+        interactor.photoVideoBottomBarConfig = photoVideoBottomBarConfig
+        interactor.documentsBottomBarConfig = documentsBottomBarConfig
         //BotomBar Module Setup
         let bottomBarVCmodule = BottomSelectionTabBarModuleInitializer()
-        let botvarBarVC = bottomBarVCmodule.setupModule(config: bottomBarConfig, settablePresenter: BottomSelectionTabBarPresenter())
+        let botvarBarVC = bottomBarVCmodule.setupModule(config: photoVideoBottomBarConfig, settablePresenter: BottomSelectionTabBarPresenter())
         viewController.editingTabBar = botvarBarVC
         presenter.bottomBarPresenter = bottomBarVCmodule.presenter
         bottomBarVCmodule.presenter?.basePassingPresenter = presenter

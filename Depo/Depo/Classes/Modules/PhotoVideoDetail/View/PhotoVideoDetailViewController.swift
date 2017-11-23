@@ -52,7 +52,6 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         editingTabBar?.view.layoutIfNeeded()
         output.viewIsReady(view: view)
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -77,7 +76,7 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
     
     private func configureEditingTabBar() {
         if objects.count > selectedIndex, selectedIndex >= 0,
-           let editIndex = interactor?.bottomBarOriginalConfig.elementsConfig.index(of: .edit) {
+           let editIndex = interactor?.bottomBarConfig.elementsConfig.index(of: .edit) {
             let item = objects[selectedIndex]
             
             if item.syncStatus == .notSynced {
@@ -299,7 +298,6 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
             } else {
                 editingTabBar.enableIems(atIndex: [editButtonIndex])
             }
-            
         }
     }
     
