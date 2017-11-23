@@ -221,7 +221,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     func changeSortingRepresentation(sortType type: SortedRules) {
         if self.mainTitle != "" {
-            self.setTitle(withString: self.mainTitle, andSubTitle: type.stringValue)
+            self.setTitle(withString: self.mainTitle, andSubTitle: type.descriptionForTitle)
         }
     }
     
