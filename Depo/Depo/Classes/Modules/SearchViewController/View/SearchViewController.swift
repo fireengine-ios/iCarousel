@@ -49,6 +49,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, SearchViewInp
         self.collectionView.isHidden = true
         self.suggestTableView.isHidden = true
         self.noFilesLabel.text = TextConstants.noFilesFoundInSearch
+        self.topBarContainer.isHidden = true
         
         setupMusicBar()
         subscribeToNotifications()
@@ -205,6 +206,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate, SearchViewInp
                 self.timerToSearch = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(self.searchTimerIsOver(timer:)), userInfo: (searchBar as! UISearchBar).text!, repeats: false)
             }
         }
+        
+        self.topBarContainer.isHidden = false
     }
     
     // MARK: - SearchViewInput
