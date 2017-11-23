@@ -133,6 +133,7 @@ struct TextConstants {
     static let moreBtnImgName = "more"
     static let cogBtnImgName = "cog"
     static let searchBtnImgName = "search"
+    static let deleteBtnImgName = "DeleteShareButton"
     
     // MARK: - Searchbar img name
     
@@ -275,6 +276,8 @@ struct TextConstants {
     static let fileInfoFileSizeTitle = "File size"
     static let fileInfoDurationTitle = "Duration"
     static let fileInfoDateModifiedTitle = "Date modified"
+    static let fileInfoUploadDateTitle = "Upload date"
+    static let fileInfoTakenDateTitle = "Taken date"
     static let fileInfoAlbumTitle = "Album"
     static let fileInfoArtistTitle = "Artist"
     static let fileInfoTitleTitle = "Title"
@@ -456,6 +459,8 @@ struct TextConstants {
     static let actionSheetSelect = "Select"
     static let actionSheetSelectAll = "Select All"
     
+    static let actionSheetRename = "Rename"
+    
     static let actionSheetDocumentDetails = "Document Details"
     
     static let actionSheetAddToPlaylist = "Share Album"
@@ -465,6 +470,15 @@ struct TextConstants {
     static let actionSheetAlbumDetails = "Album Details"
     static let actionSheetShareAlbum = "Share Album"
     static let actionSheetDownloadToCameraRoll = "Download to Camera Roll"
+    
+    // MARK: Free Up Space
+    static let freeAppSpaceTitle = "There are %d duplicated photos both in your device and lifebox. Clear some space by selecting the photos that you want to delete."
+    static let freeAppSpaceAlertTitle = "Allow lifebox to delete %d photos?"
+    static let freeAppSpaceAlertText = "Some photos will also be deleted from an album."
+    static let freeAppSpaceAlertCancel = "Cancel"
+    static let freeAppSpaceAlertDelete = "Delete"
+    static let freeAppSpaceAlertSuccesTitle = "You have free space for %d more items."
+    static let freeAppSpaceAlertSuccesButton = "OK"
     
     // MARK NAVBAR titles
     
@@ -573,6 +587,8 @@ struct NumericConstants {
     static let lifeSessionDuration: TimeInterval = 60 * 50 //50 min
     
     static let timeIntervalBetweenAutoSync: TimeInterval = 60*60
+
+    static let freeAppSpaceLimit = 0.2
     
     static let fourGigabytes: UInt64 = 4 * 1024 * 1024 * 1024
     

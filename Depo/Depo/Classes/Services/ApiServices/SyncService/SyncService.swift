@@ -26,7 +26,20 @@ class SyncService: NSObject {
     override init() {
         operations = OperationQueue()
         operations.maxConcurrentOperationCount = 1
+        
         super.init()
+        
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(startSyncImmediately),
+                                               name: NSNotification.Name(rawValue: LocalMediaStorage.notificationPhotoLibraryDidChange),
+                                               object: nil)
+    }
+    
+    @objc func startSyncImmediately() {
+        timeLastAutoSync = NSDate().timeIntervalSince1970
+        
+        self.startAutoSync()
     }
     
     func startSync(imageViaWiFiOnly: Bool, videoViaWiFiOnly: Bool) {
@@ -49,6 +62,12 @@ class SyncService: NSObject {
         
         let localItems = self.allLocalNotSyncItems(video: isWiFi ? true : !videoViaWiFiOnly,
                                                    image: isWiFi ? true : !imageViaWiFiOnly)
+        
+        if (localItems.count == 0){
+            isSyncing = false
+            return
+        }
+        
         var latestDate: Date? = nil
         
         for object in localItems {
@@ -100,19 +119,23 @@ class SyncService: NSObject {
     
     
     
+    fileprivate func startAutoSync() {
+        AutoSyncDataStorage().getAutoSyncModelForCurrentUser(success: { [weak self] (models, uniqueUserId) in
+            let autoSyncEnable = models[SettingsAutoSyncModel.autoSyncEnableIndex]
+            if (autoSyncEnable.isSelected){
+                let imageSyncViaWiFi = !models[SettingsAutoSyncModel.mobileDataPhotosIndex].isSelected
+                let videoSyncViaWiFi = !models[SettingsAutoSyncModel.mobileDataVideoIndex].isSelected
+                self?.startSync(imageViaWiFiOnly: imageSyncViaWiFi, videoViaWiFiOnly: videoSyncViaWiFi)
+            }
+        })
+    }
+    
     func startAutoSyncInBG(){
         let time = NSDate().timeIntervalSince1970
         if time - timeLastAutoSync > NumericConstants.timeIntervalBetweenAutoSync{
             timeLastAutoSync = time
             
-            AutoSyncDataStorage().getAutoSyncModelForCurrentUser(success: { [weak self] (models, uniqueUserId) in
-                let autoSyncEnable = models[SettingsAutoSyncModel.autoSyncEnableIndex]
-                if (autoSyncEnable.isSelected){
-                    let imageSyncViaWiFi = !models[SettingsAutoSyncModel.mobileDataPhotosIndex].isSelected
-                    let videoSyncViaWiFi = !models[SettingsAutoSyncModel.mobileDataVideoIndex].isSelected
-                    self?.startSync(imageViaWiFiOnly: imageSyncViaWiFi, videoViaWiFiOnly: videoSyncViaWiFi)
-                }
-            })
+            startAutoSync()
         }
     }
     
@@ -140,6 +163,10 @@ class SyncService: NSObject {
                 let serverObjectMD5 = item.md5
                 let index = self_.localMD5Array.index(of: serverObjectMD5)
                 if let index_ = index {
+                    
+                    let localItem = self_.localItemsArray[index_]
+                    localItem.syncStatus = .synced
+                    CoreDataStack.default.updateLocalItemSyncStatus(item: localItem)
                     
                     self_.localItemsArray.remove(at: index_)
                     self_.localMD5Array.remove(at: index_)

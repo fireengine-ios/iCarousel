@@ -40,8 +40,15 @@ class CollectionSortingRules {
             
         case .sizeZA:
             rule = CollectionSortingRules.sortByFileSize(ascending: true)
+        
         case .albumlettersAZ, .albumlettersZA:
             rule = CollectionSortingRules.sortByFileSize(ascending: true)//FIXME: albumbs are not currently supported
+        
+        case .metaDataTimeUp:
+            rule = CollectionSortingRules.sortByCreateDate(ascending: false, section: false)
+
+        case .metaDataTimeDown:
+            rule = CollectionSortingRules.sortByCreateDate(ascending: true, section: true)
         }
     }
     

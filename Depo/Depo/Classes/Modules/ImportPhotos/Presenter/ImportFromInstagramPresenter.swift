@@ -9,10 +9,10 @@
 import UIKit
 
 /**
-    will help for testing
+    Will help for testing
     https://www.instagram.com/dmitriytester/
  
-    requests and info in
+    Requests and info in
     Package9_19_2 TT_v5.docx
 */
 class ImportFromInstagramPresenter: BasePresenter {

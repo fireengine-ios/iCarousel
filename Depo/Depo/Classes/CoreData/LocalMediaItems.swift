@@ -11,7 +11,7 @@ import Photos
 
 extension CoreDataStack {
     
-    @objc func appendLocalMediaItems() {
+    @objc func appendLocalMediaItems(_ end: (() -> Void)?) {
         let queue = DispatchQueue(label: "Append Local Item ")
         queue.async {
             let localMediaStorage = LocalMediaStorage.default
@@ -22,6 +22,7 @@ extension CoreDataStack {
                 if status == .denied{
                     self.deleteLocalFiles()
                 }
+                end?()
             }
         }
     }
@@ -86,7 +87,7 @@ extension CoreDataStack {
         guard list.count > 0 else {
             return
         }
-        let context = newChildBackgroundContext
+        let context = mainContext//newChildBackgroundContext
         let predicate = NSPredicate(format: "localFileID IN %@", list)
         let items:[MediaItem] = executeRequest(predicate: predicate, context:context)
         items.forEach { context.delete($0) }
@@ -128,7 +129,7 @@ extension CoreDataStack {
             filesTypesArray.append(FileType.image.valueForCoreDataMapping())
         }
         let context = mainContext
-        let predicate = NSPredicate(format: "(isLocalItemValue == true) AND (fileTypeValue IN %@)", filesTypesArray)
+        let predicate = NSPredicate(format: "(isLocalItemValue == true) AND (fileTypeValue IN %@) AND (syncStatusValue == 0)", filesTypesArray)
         let items: [MediaItem] =  executeRequest(predicate: predicate, context:context)
         let sortedItems = items.sorted { (item1, item2) -> Bool in
             //< correct

@@ -16,6 +16,7 @@ enum ElementTypes {
     case sync
     case download
     case undetermend
+    case rename
     
     //used only in alert sheet:
     //photos:

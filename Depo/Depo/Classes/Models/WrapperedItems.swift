@@ -518,6 +518,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         fileType = FileType(type: remote.contentType, fileName: name)
         isFolder = remote.folder
         syncStatus = .synced
+        creationDate = remote.createdDate
         
         parent = remote.parent
         
@@ -536,9 +537,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
             if url == nil, fileType == .image {
                 url = remote.tempDownloadURL
             }
-            if let takenDate = remote.metadata?.takenDate {
-                creationDate = takenDate
-            }
+
         default:
             break
         }

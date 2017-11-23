@@ -19,6 +19,8 @@ class NavigationBarList {
     
     let more: UIBarButtonItem
     
+    let delete: UIBarButtonItem
+    
     init(){
         settings = UIBarButtonItem(image: UIImage(named: TextConstants.cogBtnImgName),
                              style: .plain,
@@ -32,6 +34,11 @@ class NavigationBarList {
                         style: .plain,
                         target: nil,
                         action: nil)
+        
+        delete = UIBarButtonItem(image: UIImage(named: TextConstants.deleteBtnImgName),
+                                 style: .plain,
+                                 target: nil,
+                                 action: nil)
         
         // upload 
         // create

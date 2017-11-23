@@ -15,7 +15,7 @@ protocol FileInfoViewInput: class {
     
     typealias Item = WrapData
 
-    func setupInitialState()
+    func startRenaming()
     
     func setObject(object: BaseDataSourceItem)
 }

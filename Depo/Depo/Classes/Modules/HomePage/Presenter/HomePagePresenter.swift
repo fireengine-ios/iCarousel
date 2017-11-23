@@ -16,6 +16,10 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
         view.setupInitialState()
     }
     
+    func homePagePresented(){
+        interactor.homePagePresented()
+    }
+    
     func showSettings() {
         router.moveToSettingsScreen()
     }

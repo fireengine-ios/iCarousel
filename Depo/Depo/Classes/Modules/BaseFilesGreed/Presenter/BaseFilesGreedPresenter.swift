@@ -50,12 +50,12 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         }
         dataSource.setupCollectionView(collectionView: collectionView,
                                        filters: interactor.originalFilesTypeFilter)
-        
+       
         dataSource.delegate = self
         
         view.setupInitialState()
         setupTopBar()
-        
+        dataSource.currentSortType = sortedRule
         getContent()
         reloadData()
     }
@@ -66,7 +66,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func onReloadData(){
         
-        dataSource.dropData()
+//        dataSource.dropData()
         reloadData()
     }
     
@@ -95,29 +95,18 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     private func compoundAllFiltersAndNextItems(searchText: String? = nil) {
 //        startAsyncOperation()
         interactor.nextItems(searchText,
-                             sortBy: getSortedRuleByFilters(),
+                             sortBy: sortedRule.sortingRules,
                              sortOrder: sortedRule.sortOder, newFieldValue: getFileFilter())
     }
-    private func getSortedRuleByFilters() -> SortType {
-        
-            for filter in filters {
-                switch filter {
-                case .fileType(.image):
-                    if sortedRule == .timeDown || sortedRule == .timeUp {
-                         return .imageDate
-                    }
-                   break
-                default:
-                    break
-                }
-            }
-        return sortedRule.sortingRules
-    }
+
     func reloadData() {
+        dataSource.dropData()
+        dataSource.currentSortType = sortedRule
+        dataSource.reloadData()
         startAsyncOperation()
         dataSource.isPaginationDidEnd = false
         interactor.reloadItems(nil,
-                               sortBy: getSortedRuleByFilters(),
+                               sortBy: sortedRule.sortingRules,
                                sortOrder: sortedRule.sortOder, newFieldValue: getFileFilter())
     }
     
@@ -179,7 +168,11 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             dataSource.reloadData()
         }
     }
-    //MARK:-
+    
+    func isArrayDataSource() -> Bool{
+        return false
+    }
+    
     func getNextItems() {
         //        interactor.nextItems(nil, sortBy: .name,
         //                             sortOrder: .asc, newFieldValue: <#FieldValue?#>)
@@ -339,9 +332,9 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func sortedPushed(with rule: SortedRules) {
         sortedRule = rule
         view.changeSortingRepresentation(sortType: rule)
-        dataSource.dropData()
+//        dataSource.dropData()
         dataSource.currentSortType = rule
-        dataSource.reloadData()
+//        dataSource.reloadData()
         reloadData()
     }
     
@@ -390,18 +383,22 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 selectedItems += items.filter { selectedItemsUUIDs.contains($0.uuid) }
             }
             
-            let items = selectedItems.filter { $0.isLocalItem == false}
+            let remoteItems = selectedItems.filter { $0.isLocalItem == false}
 
-            if items.contains(where: { return !($0.favorites) } ) {
+            if remoteItems.contains(where: { return !($0.favorites) } ) {
                 actionTypes.append(.addToFavorites)
             }
-            if items.contains(where: { return $0.favorites } ) {
+            if remoteItems.contains(where: { return $0.favorites } ) {
                 actionTypes.append(.removeFromFavorites)
             }
             
-            if actionTypes.contains(.createStory) && items.contains(where: { return $0.fileType != .image } ) {
+            if actionTypes.contains(.createStory) && remoteItems.contains(where: { return $0.fileType != .image } ) {
                 let index = actionTypes.index(where: { return $0 == .createStory})!
                 actionTypes.remove(at: index)
+            }
+            
+            if selectedItems.count == 1 {
+                actionTypes.append(.rename)
             }
             
             let noSyncItems = selectedItems.filter{ $0.syncStatus != SyncWrapperedStatus.synced }
@@ -429,32 +426,14 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func sortedPushedTopBar(with rule:  MoreActionsConfig.SortRullesType) {
-        
-        var sortRule: SortedRules
-        switch rule {
-        case .AlphaBetricAZ:
-            sortRule = .lettersZA
-        case .AlphaBetricZA:
-            sortRule = .lettersAZ
-        case .TimeNewOld:
-            sortRule = .timeUp
-        case .TimeOldNew:
-            sortRule = .timeDown
-        case .Largest:
-            sortRule = .sizeAZ
-        case .Smallest:
-            sortRule = .sizeZA
-        default:
-            sortRule = .timeUp
-        }
-        sortedPushed(with: sortRule)
+        sortedPushed(with: rule.sortedRulesConveted)
     }
     
     func filtersTopBar(cahngedTo filters: [MoreActionsConfig.MoreActionsFileType]) {
         self.filters = filters.map{ $0.convertToGeneralFilterFileType() }
         
         stopEditing()
-        dataSource.dropData()
+//        dataSource.dropData()
         dataSource.originalFilters = self.filters
         reloadData()
     }
@@ -470,14 +449,14 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         debugPrint("finished")
         dataSource.setSelectionState(selectionState: false)
         view.setupSelectionStyle(isSelection: false)
-        reloadData()
+//        reloadData()
     }
     
     func operationFailed(withType type: ElementTypes) {
         debugPrint("failed")
         dataSource.setSelectionState(selectionState: false)
         view.setupSelectionStyle(isSelection: false)
-        reloadData()
+//        reloadData()
     }
     
     func selectModeSelected() {
@@ -492,6 +471,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func selectAllModeSelected() {
         view.setupSelectionStyle(isSelection: true)
         dataSource.selectAll(isTrue: true)
+    }
+    
+    func shareModeSelected() {
+         stopEditing() 
     }
     
     func getFolder() -> Item? {
