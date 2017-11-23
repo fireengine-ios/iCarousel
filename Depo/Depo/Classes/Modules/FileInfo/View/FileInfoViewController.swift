@@ -175,8 +175,12 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
 
 
     // MARK: FileInfoViewInput
-    func setupInitialState() {
-        
+    
+    func startRenaming() {
+        if fileName == nil {
+            let _ = view
+        }
+        fileName.becomeFirstResponder()
     }
     
     

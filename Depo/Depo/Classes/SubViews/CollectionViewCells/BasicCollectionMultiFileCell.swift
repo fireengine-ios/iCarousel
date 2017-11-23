@@ -77,14 +77,18 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         if (image != nil){
             isAlreadyConfigured = true
             if (isBigSize()){
+                bigContentImageView.contentMode = .scaleAspectFill
                 bigContentImageView.image = image
-            }else{
+            } else {
+                smallContentImageView.contentMode = .scaleAspectFit
                 smallContentImageView.configured = true
                 smallContentImageView.setImage(image: image)
                 smallContentImageView.isHidden = false
                 smallCellSelectionView.isHidden = true
                 
             }
+        } else {
+            super.setImage(image: image)
         }
         stopAnimation()
     }
@@ -93,10 +97,20 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         return frame.size.height > BasicCollectionMultiFileCell.frameSize
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.bigContentImageView.sd_cancelCurrentImageLoad()
+        self.smallContentImageView.sd_cancelCurrentImageLoad()
+    }
+    
     override func setImage(with url: URL) {
         if let imageView = isBigSize() ? self.bigContentImageView : self.smallContentImageView {
-            imageView.sd_setImage(with: url, placeholderImage: nil, options: []) { (image, error, cacheType, url) in
-                self.setImage(image: image)
+            imageView.contentMode = .center
+            imageView.sd_setImage(with: url, placeholderImage: self.placeholderImage(), options: [.avoidAutoSetImage]) { (image, error, cacheType, url) in
+                DispatchQueue.main.async {
+                    self.setImage(image: image)
+                }
             }
         }
     }

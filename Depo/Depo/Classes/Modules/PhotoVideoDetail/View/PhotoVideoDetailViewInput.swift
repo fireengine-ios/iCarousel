@@ -12,10 +12,12 @@ protocol PhotoVideoDetailViewInput: class {
     
     func setupInitialState()
     
-    func onShowSelectedItem(at index: Int, from items:[Item])
+    func onShowSelectedItem(at index: Int, from items: [Item])
     
     func updateItems(objectsArray: [Item], selectedIndex: Int)
     
     func getNavigationController() -> UINavigationController?
+    
+    func onItemSelected(at index: Int, from items: [Item])
     
 }

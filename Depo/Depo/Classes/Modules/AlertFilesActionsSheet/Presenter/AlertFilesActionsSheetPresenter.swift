@@ -7,6 +7,7 @@
 //
 
 class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActionsSheetModuleInput {
+
     
     let rightButtonBox = CGRect(x: Device.winSize.width - 50, y: 64, width: 10, height: 10)
     //MARK: Module Input
@@ -28,10 +29,17 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         presentAlertSheet(with: actions, presentedBy: sender)
     }
     
-    func showAlertSheet(with types: [ElementTypes], items: [BaseDataSourceItem],
-                        presentedBy sender: Any?, onSourceView sourceView: UIView?) {
+    func showAlertSheet(with types: [ElementTypes], items: [BaseDataSourceItem], presentedBy sender: Any?, onSourceView sourceView: UIView?) {
+        showAlertSheet(with: types, items: items, presentedBy: sender, onSourceView: sourceView, excludeTypes: [ElementTypes]())
+    }
+    
+    func showAlertSheet(with types: [ElementTypes],
+                        items: [BaseDataSourceItem],
+                        presentedBy sender: Any?,
+                        onSourceView sourceView: UIView?,
+                        excludeTypes: [ElementTypes]) {
         
-        let actions = constractSpecifiedActions(with: types, for: items)
+        let actions = constractSpecifiedActions(with: types, for: items, excludeTypes: excludeTypes)
         presentAlertSheet(with: actions, presentedBy: sender)
     }
     
@@ -77,6 +85,9 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
                 actionTypes.append((item.albums != nil) ? .removeFromAlbum : .addToAlbum)
                 actionTypes.append((item.syncStatus == .notSynced) ? .backUp : .addToCmeraRoll)
+                if item.syncStatus == .synced {
+                    actionTypes.append(.delete)
+                }
             case .video:
                 actionTypes = [.move]
                 actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
@@ -119,7 +130,8 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
     }
     
     private func constractSpecifiedActions(with types: [ElementTypes],
-                                           for items: [BaseDataSourceItem]?) -> [UIAlertAction] {
+                                           for items: [BaseDataSourceItem]?,
+                                           excludeTypes: [ElementTypes] = [ElementTypes]()) -> [UIAlertAction] {
         var filteredActionTypes = types
         if let unwrapedItems = items as? [Item] {
             unwrapedItems.forEach({
@@ -135,6 +147,12 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 
             })
         }
+        
+        if (items?.contains(where: { return !$0.isLocalItem }) ?? false) {
+            filteredActionTypes.append(.delete)
+        }
+        
+        filteredActionTypes = filteredActionTypes.filter({ !excludeTypes.contains($0) })
         
         return constractActions(with: filteredActionTypes, for: items)
     }
@@ -164,7 +182,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             switch $0 {
             case .info:
                 action = UIAlertAction(title: TextConstants.actionSheetInfo, style: .default, handler: { _ in
-                    self.interactor.info(item: currentItems)
+                    self.interactor.info(item: currentItems, isRenameMode: false)
 //                    self.view.unselectAll()
                 })
             case .edit:
@@ -283,6 +301,10 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             case .print:
                 action = UIAlertAction(title: "Print", style: .default, handler: { _ in
                     self.basePassingPresenter?.printSelected()
+                })
+            case .rename:
+                action = UIAlertAction(title: TextConstants.actionSheetRename, style: .default, handler: { _ in
+                    self.interactor.info(item: currentItems, isRenameMode: true)
                 })
             default:
                 action = UIAlertAction(title: "TEST", style: .default, handler: { _ in

@@ -461,6 +461,8 @@ struct TextConstants {
     static let actionSheetSelect = "Select"
     static let actionSheetSelectAll = "Select All"
     
+    static let actionSheetRename = "Rename"
+    
     static let actionSheetDocumentDetails = "Document Details"
     
     static let actionSheetAddToPlaylist = "Share Album"
