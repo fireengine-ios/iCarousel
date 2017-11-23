@@ -21,5 +21,6 @@ class ActionSheetPredetermendConfigs {
     static let musicActions: [ElementTypes] = [.select, .selectAll]
     static let musicListSelectedActions: [ElementTypes] = [.addToPlaylist, .addToFavorites]
     static let photoVideoDetailActions: [ElementTypes] = [.info, .addToAlbum]
+    static let documetsDetailActions: [ElementTypes] = []
     
 }
