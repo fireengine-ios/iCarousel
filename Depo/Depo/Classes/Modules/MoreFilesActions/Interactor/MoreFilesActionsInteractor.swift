@@ -199,14 +199,22 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
     private func deleteFromAlbums(items: [BaseDataSourceItem]){
         self.output?.operationStarted(type: .removeFromAlbum)
         
-        let parameters = DeletePhotosFromAlbum(albumUUID: "", photos: items as! [Item])
+        var album = ""
+        
+        for item in items {
+            if let item = item as? WrapData, let albumID = item.albums?.first {
+                album = albumID
+                break
+            }
+        }
+        
+        let parameters = DeletePhotosFromAlbum(albumUUID: album, photos: items as! [Item])
         PhotosAlbumService().deletePhotosFromAlbum(parameters: parameters, success: {
             DispatchQueue.main.async { [weak self] in
                 self?.output?.operationFinished(type: .removeFromAlbum)
             }
         }) { (errorRespone) in
             DispatchQueue.main.async { [weak self] in
-                
                 self?.output?.operationFailed(type: .removeFromAlbum, message: errorRespone.description)
             }
         }
