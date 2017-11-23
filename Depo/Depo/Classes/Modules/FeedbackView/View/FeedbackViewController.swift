@@ -117,9 +117,11 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
         if (Mail.canSendEmail()){
             let stringForLetter = String(format: "%@\n\n%@", self.feedbackTextView!.text, text)
             self.dismiss(animated: true, completion: nil)
-            Mail.shared().sendEmail(emailBody: stringForLetter,
-                                    subject: self.getSubject(),
-                                    emails: [TextConstants.feedbackEmail])
+            Mail.shared().sendEmail(emailBody: stringForLetter, subject: self.getSubject(), emails: [TextConstants.feedbackEmail], success: {
+                //
+            }, fail: { (error) in
+                CustomPopUp.sharedInstance.showCustomAlert(withText: error?.localizedDescription ?? TextConstants.feedbackEmailError, okButtonText: TextConstants.ok)
+            })
         } else {
             CustomPopUp.sharedInstance.showCustomAlert(withText: TextConstants.feedbackEmailError, okButtonText: TextConstants.ok)
         }
