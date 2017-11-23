@@ -442,6 +442,15 @@ class WrapData: BaseDataSourceItem, Wrappered {
     
     var isFolder: Bool?
     
+    var metaDate: Date {
+        if let unwrapedMetaDate = metaData?.takenDate {
+            return unwrapedMetaDate
+        } else if let unwrapedCreatedDate = creationDate {
+            return unwrapedCreatedDate
+        }
+        return Date()
+    }
+    
     init(musicForCreateStory: CreateStoryMusicItem) {
         id = musicForCreateStory.id
         tmpDownloadUrl = musicForCreateStory.path
@@ -472,8 +481,12 @@ class WrapData: BaseDataSourceItem, Wrappered {
         favorites = false
         super.init()
         md5 = baseModel.md5
-
+        
         name = baseModel.name
+        if let fileName = name {
+            md5 = String(format: "%@%i", fileName, fileSize)
+        }
+        debugPrint("--LOCAL md5 is ", md5)
         fileType = baseModel.fileType
         isLocalItem = true
         creationDate = baseModel.dateOfCreation
@@ -546,8 +559,10 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
         
         favorites = remote.metadata?.favourite ?? false
+        if let fileName = name {
+            md5 = String(format: "%@%i", fileName, fileSize)//remote.hash ?? ""
+        }
         
-        md5 = remote.hash ?? ""
         patchToPreview = .remoteUrl(url)
         id = remote.id
     }

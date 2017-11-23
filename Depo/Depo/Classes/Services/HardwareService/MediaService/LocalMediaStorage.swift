@@ -293,9 +293,11 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         let operation = GetOriginalVideoOperation(photoManager: self.photoManger, asset: asset) { (avAsset, aVAudioMix, Dict) in
             if let urlToFile = (avAsset as? AVURLAsset)?.url {
                 do {
-                    md5 = MD5().hexMD5fromFileUrl(urlToFile)
                     url = urlToFile
                     size = try (FileManager.default.attributesOfItem(atPath: urlToFile.path)[.size] as! NSNumber).uint64Value
+//                    if let fileName = asset.value(forKey: "filename") as? String {
+//                        md5 = String(format: "%@%i", fileName, size) //MD5().hexMD5fromFileUrl(urlToFile)
+//                    }
                     semaphore.signal()
                 } catch  {
                     semaphore.signal()
