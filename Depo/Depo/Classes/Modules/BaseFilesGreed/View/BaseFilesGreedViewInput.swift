@@ -28,4 +28,6 @@ protocol BaseFilesGreedViewInput: class {
     
     func setupUnderNavBarBar(withConfig config: GridListTopBarConfig)
     
+    func setThreeDotsMenu(active isActive: Bool)
+    
 }

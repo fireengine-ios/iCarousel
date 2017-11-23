@@ -43,5 +43,12 @@ class ReachabilityService: ReachabilityProtocol {
         self.reachability.whenUnreachable = { (Reachability) in
             //
         }
+        
+        do {
+            try self.reachability.startNotifier()
+        } catch {
+            print("Can't start REACHABILITY_NOTIFIER")
+        }
     }
 }
+

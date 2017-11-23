@@ -17,8 +17,10 @@ class PhotoVideoDetailModuleConfigurator {
         }
     }
 
-    private func configure(viewController: PhotoVideoDetailViewController, photoVideoBottomBarConfig: EditingBarConfig, documentsBottomBarConfig: EditingBarConfig) {
-
+    private func configure(viewController: PhotoVideoDetailViewController,
+                           photoVideoBottomBarConfig: EditingBarConfig,
+                           documentsBottomBarConfig: EditingBarConfig,
+                           alertSheetConfig: AlertFilesActionsSheetInitialConfig? = nil) {
         let router = PhotoVideoDetailRouter()
 
         let presenter = PhotoVideoDetailPresenter()
@@ -29,6 +31,7 @@ class PhotoVideoDetailModuleConfigurator {
         interactor.output = presenter
         interactor.photoVideoBottomBarConfig = photoVideoBottomBarConfig
         interactor.documentsBottomBarConfig = documentsBottomBarConfig
+        
         //BotomBar Module Setup
         let bottomBarVCmodule = BottomSelectionTabBarModuleInitializer()
         let botvarBarVC = bottomBarVCmodule.setupModule(config: photoVideoBottomBarConfig, settablePresenter: BottomSelectionTabBarPresenter())
