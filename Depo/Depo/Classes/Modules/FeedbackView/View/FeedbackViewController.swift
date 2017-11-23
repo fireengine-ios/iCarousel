@@ -89,13 +89,13 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
         sendButton.setTitle(TextConstants.feedbackViewSendButton, for: .normal)
         sendButton.titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 14)
         
-        suggestionButton.setImage(getImageForChecbox(isSelected: false), for: .normal)
-        suggestionButton.setImage(getImageForChecbox(isSelected: true), for: .selected)
+        suggestionButton.setImage(getImageForChecbox(isSelected: suggeston), for: .normal)
         suggestionButton.tintColor = ColorConstants.blueColor
         
-        complaintButton.setImage(getImageForChecbox(isSelected: false), for: .normal)
-        complaintButton.setImage(getImageForChecbox(isSelected: true), for: .selected)
+        complaintButton.setImage(getImageForChecbox(isSelected: complaint), for: .normal)
         complaintButton.tintColor = ColorConstants.blueColor
+        
+        feedbackTextView.textAlignment = .natural
     }
     
     func languagesUploaded(lanuages:[LanguageModel]){
@@ -115,19 +115,12 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
     
     func languageRequestSended(text: String){
         if (Mail.canSendEmail()){
-            UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
-                self.view.alpha = 0
-            }, completion: {[weak self] (flag) in
-                guard let self_ = self else{
-                    return
-                }
-                let stringForLetter = String(format: "%@\n\n%@", self_.feedbackTextView!.text, text)
-                Mail.shared().sendEmail(emailBody: stringForLetter,
-                                        subject: self_.getSubject(),
-                                        emails: [TextConstants.feedbackEmail])
-                self_.view.removeFromSuperview()
-            })
-        }else{
+            let stringForLetter = String(format: "%@\n\n%@", self.feedbackTextView!.text, text)
+            self.dismiss(animated: true, completion: nil)
+            Mail.shared().sendEmail(emailBody: stringForLetter,
+                                    subject: self.getSubject(),
+                                    emails: [TextConstants.feedbackEmail])
+        } else {
             CustomPopUp.sharedInstance.showCustomAlert(withText: TextConstants.feedbackEmailError, okButtonText: TextConstants.ok)
         }
     }
@@ -240,11 +233,7 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
             
             let controller = UIAlertController(title: TextConstants.feedbackErrorEmptyDataTitle, message: string, preferredStyle: .alert)
 
-            let action = UIAlertAction(title: TextConstants.ok, style: .cancel, handler: { (action) in
-                self.dismiss(animated: true, completion: {
-                    
-                })
-            })
+            let action = UIAlertAction(title: TextConstants.ok, style: .cancel, handler: nil)
             controller.addAction(action)
             self.present(controller, animated: true, completion: {})
         }
