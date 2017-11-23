@@ -72,11 +72,21 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
 
     func moreButtonPressed(sender: Any?) {
         let currentItem = interactor.allItems[interactor.currentItemIndex]
+        var actions = [ElementTypes]()
         
-        alertSheetModule?.showAlertSheet(with: [currentItem], presentedBy: sender, onSourceView: nil)
-
-//        bottomBarPresenter?.showAlertSheet(withItems: [currentItem], presentedBy: sender, onSourceView: nil)
-        //(withTypes: [.createStory, .move, .addToFavorites, .removeFromAlbum, .backUp], presentedBy: sender)
+        switch currentItem.fileType {
+        case .audio, .video:
+            actions = ActionSheetPredetermendConfigs.photoVideoDetailActions
+        case .allDocs:
+            actions = ActionSheetPredetermendConfigs.documetsDetailActions
+        default:
+            break
+        }
+        alertSheetModule?.showAlertSheet(with: actions,
+                                         items: [currentItem],
+                                         presentedBy: sender,
+                                         onSourceView: nil,
+                                         excludeTypes: [.delete])
     }
     
     //MARK: presenter output
@@ -88,10 +98,15 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     
 
     func operationFinished(withType type: ElementTypes, response: Any?) {
-        if (type == .delete){
+        switch type {
+        case .delete:
             interactor.deleteSelectedItem()
+        case .removeFromFavorites, .addToFavorites:
+            interactor.onViewIsReady()
+        default:
+            break
         }
-        debugPrint("finished")
+        
     }
     
     func operationFailed(withType type: ElementTypes) {

@@ -205,11 +205,15 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
             self.navigationItem.leftBarButtonItem = cancelSelectionButton!
             setTitle(withString: "1 Selected")
             navigationBarWithGradientStyle()
-        }else{
+        } else {
             self.navigationItem.leftBarButtonItem = nil
             homePageNavigationBarStyle()
         }
         configureNavBarActions()
+    }
+    
+    func setThreeDotsMenu(active isActive: Bool) {
+        navigationItem.rightBarButtonItem?.isEnabled = isActive
     }
     
     @objc func onCancelSelectionButton(){
@@ -221,7 +225,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     func changeSortingRepresentation(sortType type: SortedRules) {
         if self.mainTitle != "" {
-            self.setTitle(withString: self.mainTitle, andSubTitle: type.stringValue)
+            self.setTitle(withString: self.mainTitle, andSubTitle: type.descriptionForTitle)
         }
     }
     

@@ -100,15 +100,15 @@ final class UploadService: BaseRequestService {
         switch uploadType {
         case .autoSync:
             self.syncFileList(items: items, uploadStategy: uploadStategy, uploadTo: uploadTo, success: {
-                
+                success?()
             }, fail: { (errorResponse) in
-                
+                fail?(errorResponse)
             })
         default:
             self.uploadFileList(items: items, uploadStategy: uploadStategy, uploadTo: uploadTo, success: {
-                
+                success?()
             }, fail: { (errorResponse) in
-                
+                fail?(errorResponse)
             })
             break
         }
@@ -137,6 +137,9 @@ final class UploadService: BaseRequestService {
         
         WrapItemOperatonManager.default.startOperationWith(type: .upload, allOperations: itemsToUpload.count, completedOperations: 0)
         self.allUploadOperationsCount += itemsToUpload.count
+        WrapItemOperatonManager.default.setProgressForOperationWith(type: .upload,
+                                                                    allOperations: self.allUploadOperationsCount,
+                                                                    completedOperations: self.finishedUploadOperationsCount)
         let operations: [UploadOperations] = itemsToUpload.flatMap {
             let operation = UploadOperations(item: $0, uploadType: .fromHomePage, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, success: { (finishedOperation) in
                 finishedOperation.item.syncStatus = .synced
@@ -155,8 +158,7 @@ final class UploadService: BaseRequestService {
                 }
                 
                 if self.allUploadOperationsCount == self.finishedUploadOperationsCount {
-                    self.finishedUploadOperationsCount = 0
-                    self.allUploadOperationsCount = 0
+                    self.clearUlpoadCounters()
                     WrapItemOperatonManager.default.stopOperationWithType(type: .upload)
                     success?()
                 }
@@ -167,8 +169,7 @@ final class UploadService: BaseRequestService {
                 self.finishedUploadOperationsCount += 1
                 
                 if self.allUploadOperationsCount == self.finishedUploadOperationsCount {
-                    self.finishedUploadOperationsCount = 0
-                    self.allUploadOperationsCount = 0
+                    self.clearUlpoadCounters()
                     self.uploadOperations = self.uploadOperations.flatMap({
                         if $0.uploadType == .autoSync {
                             return $0
@@ -204,6 +205,9 @@ final class UploadService: BaseRequestService {
         
         WrapItemOperatonManager.default.startOperationWith(type: .sync, allOperations: itemsToSync.count, completedOperations: 0)
         self.allSyncOperationsCount += itemsToSync.count
+        WrapItemOperatonManager.default.setProgressForOperationWith(type: .sync,
+                                                                    allOperations: self.allSyncOperationsCount,
+                                                                    completedOperations: self.finishedSyncOperationsCount)
         let operations: [UploadOperations] = itemsToSync.flatMap {
             let operation = UploadOperations(item: $0, uploadType: .autoSync, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, success: { (finishedOperation) in
                 
@@ -223,8 +227,7 @@ final class UploadService: BaseRequestService {
                 }
                 
                 if self.allSyncOperationsCount == self.finishedSyncOperationsCount {
-                    self.finishedSyncOperationsCount = 0
-                    self.allSyncOperationsCount = 0
+                    self.clearSyncCounters()
                     WrapItemOperatonManager.default.stopOperationWithType(type: .sync)
                     success?()
                 }
@@ -235,8 +238,7 @@ final class UploadService: BaseRequestService {
                 }
                 
                 if self.allSyncOperationsCount == self.finishedSyncOperationsCount {
-                    self.finishedSyncOperationsCount = 0
-                    self.allSyncOperationsCount = 0
+                    self.clearSyncCounters()
                     self.uploadOperations = self.uploadOperations.flatMap({
                         if $0.uploadType != .autoSync {
                             return $0
@@ -262,8 +264,22 @@ final class UploadService: BaseRequestService {
     func cancelOperations(){
         uploadOperations.forEach { $0.cancel() }
         uploadOperations.removeAll()
+        
+        clearUlpoadCounters()
+        clearSyncCounters()
+        
         WrapItemOperatonManager.default.stopOperationWithType(type: .upload)
         WrapItemOperatonManager.default.stopOperationWithType(type: .sync)
+    }
+    
+    private func clearUlpoadCounters() {
+        allUploadOperationsCount = 0
+        finishedUploadOperationsCount = 0
+    }
+    
+    private func clearSyncCounters() {
+        allSyncOperationsCount = 0
+        finishedSyncOperationsCount = 0
     }
     
     func upload(uploadParam: Upload, success: FileOperationSucces?, fail: FailResponse? ) -> URLSessionUploadTask {

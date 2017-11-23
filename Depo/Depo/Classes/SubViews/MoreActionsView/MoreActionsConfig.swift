@@ -58,6 +58,19 @@ enum SortedRules: Int {
         }
     }
     
+    var descriptionForTitle: String {
+        switch self {
+        case .lettersAZ, .lettersZA, .albumlettersAZ, .albumlettersZA:
+            return TextConstants.sortHeaderAlphabetic
+        case .timeUp, .timeUpWithoutSection, .metaDataTimeUp, .timeDown, .timeDownWithoutSection, .metaDataTimeDown :
+            return TextConstants.sortHeaderTime
+        case .sizeZA, .sizeAZ:
+            return TextConstants.sortHeaderSize
+        default:
+            return "None"
+        }
+    }
+    
     var sortingRules: SortType{
         switch self {
         case .timeUp, .timeDown, .timeUpWithoutSection, .timeDownWithoutSection:
