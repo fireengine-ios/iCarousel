@@ -43,7 +43,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         player.delegates.add(view as! MediaPlayerDelegate)
         dataSource.displayingType = .list
         dataSource.setPreferedCellReUseID(reUseID: CollectionViewCellsIdsConstant.baseMultiFileCell)
-        dataSource.isHeaderless = false
+        dataSource.isHeaderless = true
         
         setupTopBar()
 //        sortedRule = .albumlettersAZ
@@ -100,6 +100,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         
         self.showedSpinner = false
         //items.sorted(by: {$0.creationDate! > $1.creationDate!})
+        dataSource.dropData()
         dataSource.appendCollectionView(items: items)
 //        dataSource.configurateWithSimpleData(collectionData: files, sortingRules: sortedRule, types: filters, syncType: syncType)
         
@@ -164,15 +165,16 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         return CGSize(width: view.getCollectionViewWidth(), height: 65)
     }
     
+    
     func getCellSizeForGreed() -> CGSize {
         if (Device.isIpad){
-            return CGSize(width: 90, height: 90)
+            return CGSize(width: 180, height: 180)
+        }else{
+            let w: CGFloat = (view.getCollectionViewWidth() - NumericConstants.iPhoneGreedHorizontalSpace * 3)/NumericConstants.numerCellInDocumentLineOnIphone
+            return CGSize(width: w, height: w)
         }
-        
-        let w = view.getCollectionViewWidth()
-        let cellW: CGFloat = (w - NumericConstants.iPhoneGreedInset * 2 - NumericConstants.iPhoneGreedHorizontalSpace * NumericConstants.numerCellInLineOnIphone)/NumericConstants.numerCellInLineOnIphone
-        return CGSize(width: cellW, height: cellW)
     }
+    
     
     func onLongPressInCell() {
         startEditing()
