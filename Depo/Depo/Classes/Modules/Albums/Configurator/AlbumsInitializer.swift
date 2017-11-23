@@ -18,7 +18,7 @@ class AlbumsModuleInitializer: NSObject {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
         viewController.needShowTabBar = true
         let configurator = BaseFilesGreedModuleConfigurator()
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share,.delete],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .delete],
                                                style: .default, tintColor: nil)
         
         let presentor = AlbumsPresenter()

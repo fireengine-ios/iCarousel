@@ -15,7 +15,7 @@ class AlbumDetailModuleInitializer: NSObject {
         let viewController = AlbumDetailViewController(nibName: nibName, bundle: nil)
         viewController.needShowTabBar = true
         let configurator = BaseFilesGreedModuleConfigurator()
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .addToAlbum, .sync, .removeFromAlbum],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .addToAlbum, .print, .removeFromAlbum],
                                                style: .default, tintColor: nil)
         
         let presentor = AlbumDetailPresenter()
