@@ -426,7 +426,7 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
     func updateItems(objectsArray: [Item], selectedIndex: Int){
         self.selectedIndex = selectedIndex
         
-        if (selectedIndex == objectsArray.count - 1){
+        if (selectedIndex == objectsArray.count - 1) {
             self.swipeRight(competition: {[weak self] in
                 if let self_ = self{
                     self_.objects.removeAll()
@@ -437,7 +437,7 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
                     view.setObject(object: self_.objects[selectedIndex - 1], index: selectedIndex - 1)
                 }
             })
-        }else{
+        } else {
             self.swipeLeft(competition: {[weak self] in
                 if let self_ = self{
                     self_.objects.removeAll()

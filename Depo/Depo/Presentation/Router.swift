@@ -448,8 +448,7 @@ class RouterVC: NSObject {
         return controller
     }
     
-    func  filesDetailViewController(fileObject:WrapData, from items:[[WrapData]]) -> UIViewController {
-        
+    func filesDetailViewController(fileObject:WrapData, from items:[[WrapData]]) -> UIViewController {
         let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController")
         let c = controller as! PhotoVideoDetailViewController
         c.interactor!.onSelectItem(fileObject: fileObject, from: items)
