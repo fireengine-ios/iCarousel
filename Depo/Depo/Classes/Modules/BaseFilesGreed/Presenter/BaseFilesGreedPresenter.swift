@@ -401,8 +401,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 actionTypes.append(.rename)
             }
             
-            let noSyncItems = selectedItems.filter{ $0.syncStatus != SyncWrapperedStatus.synced }
-            if noSyncItems.isEmpty {
+            let syncItems = selectedItems.filter{ $0.syncStatus == SyncWrapperedStatus.synced }
+            if !syncItems.isEmpty {
                 actionTypes.append(.print)
             }
             alertSheetModule?.showAlertSheet(with: actionTypes,
@@ -465,7 +465,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func printSelected() {
-        router.showPrint(items: selectedItems)
+        let syncItems = selectedItems.filter{ $0.syncStatus == SyncWrapperedStatus.synced }
+        if !syncItems.isEmpty {
+            router.showPrint(items: syncItems)
+        }
     }
     
     func selectAllModeSelected() {
