@@ -269,8 +269,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     private func startEditing() {
         //call tabbar
-        
         view.setupSelectionStyle(isSelection: true)
+        view.setThreeDotsMenu(active: dataSource.selectedItemsArray.count > 0)
         dataSource.setSelectionState(selectionState: true)
     }
     
@@ -280,6 +280,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
         view.setupSelectionStyle(isSelection: false)
         dataSource.setSelectionState(selectionState: false)
+        view.setThreeDotsMenu(active: true)
     }
     
     func onChangeSelectedItemsCount(selectedItemsCount: Int) {
@@ -291,6 +292,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         }
         
         setupNewBottomBarConfig()
+        view.setThreeDotsMenu(active: dataSource.selectedItemsArray.count > 0)
         self.view.selectedItemsCountChange(with: selectedItemsCount)
     }
     
@@ -460,8 +462,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func selectModeSelected() {
-        view.setupSelectionStyle(isSelection: true)
-        dataSource.setSelectionState(selectionState: true)
+        startEditing()
     }
     
     func printSelected() {
