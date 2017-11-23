@@ -11,6 +11,7 @@ protocol AlertFilesActionsSheetModuleInput: class {
     func showSelectionsAlertSheet()
     
     func showAlertSheet(with types: [ElementTypes], items: [BaseDataSourceItem], presentedBy sender: Any?, onSourceView sourceView: UIView?)
+    func showAlertSheet(with types: [ElementTypes], items: [BaseDataSourceItem], presentedBy sender: Any?, onSourceView sourceView: UIView?, excludeTypes: [ElementTypes])
     
     func showAlertSheet(with types: [ElementTypes], presentedBy sender: Any?, onSourceView sourceView: UIView?)
     

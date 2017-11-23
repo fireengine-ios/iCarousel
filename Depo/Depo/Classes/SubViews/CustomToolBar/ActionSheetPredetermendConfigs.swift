@@ -20,5 +20,6 @@ class ActionSheetPredetermendConfigs {
     static let photosSelectActionsSync: [ElementTypes] = [.createStory, .copy, .addToFavorites, .addToAlbum, .makeAlbumCover, .download]
     static let musicActions: [ElementTypes] = [.select, .selectAll]
     static let musicListSelectedActions: [ElementTypes] = [.addToPlaylist, .addToFavorites]
-
+    static let photoVideoDetailActions: [ElementTypes] = [.info, .addToAlbum]
+    
 }
