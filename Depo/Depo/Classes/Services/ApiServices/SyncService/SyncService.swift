@@ -7,14 +7,17 @@
 //
 
 import Foundation
+import ReachabilitySwift
 
 class SyncService: NSObject {
     
     static let `default` = SyncService()
     
+    private let reachabilityService = ReachabilityService()
     private let operations: OperationQueue
     private var timeLastAutoSync: TimeInterval = 0
     private var isSyncing: Bool = false
+    private var hasNewItemsToSync: Bool = false
     private var itemsFromServer = [WrapData]()
     private let numberElementsInRequest = 100
     private var allObjectsHaveBeenUploaded = false
@@ -29,17 +32,43 @@ class SyncService: NSObject {
         
         super.init()
         
+        self.subscribeForNotifications()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    private func subscribeForNotifications() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self,
+                                       selector: #selector(startSyncImmediately),
+                                       name: NSNotification.Name(rawValue: LocalMediaStorage.notificationPhotoLibraryDidChange),
+                                       object: nil)
         
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(startSyncImmediately),
-                                               name: NSNotification.Name(rawValue: LocalMediaStorage.notificationPhotoLibraryDidChange),
-                                               object: nil)
+        notificationCenter.addObserver(self,
+                                       selector: #selector(onReachabilityChanged),
+                                       name: ReachabilityChangedNotification,
+                                       object: nil)
     }
     
     @objc func startSyncImmediately() {
         timeLastAutoSync = NSDate().timeIntervalSince1970
-        
+        if (isSyncing) {
+            hasNewItemsToSync = true
+        }
         self.startAutoSync()
+    }
+    
+    @objc func onReachabilityChanged() {
+        if isSyncing {
+            if !reachabilityService.isReachable {
+                hasNewItemsToSync = true
+                stopSync()
+            }
+        } else {
+            startSyncImmediately()
+        }
     }
     
     func startSync(imageViaWiFiOnly: Bool, videoViaWiFiOnly: Bool) {
@@ -51,6 +80,8 @@ class SyncService: NSObject {
         if (!isWiFi && imageViaWiFiOnly && videoViaWiFiOnly){
             return
         }
+        
+        print("Starting auto sync")
         
         localItemsArray.removeAll()
         localMD5Array.removeAll()
@@ -103,6 +134,10 @@ class SyncService: NSObject {
                                                          uploadTo: .MOBILE_UPLOAD,
                                                          success:{
                                                             self_.isSyncing = false
+                                                            if self_.hasNewItemsToSync {
+                                                                self_.hasNewItemsToSync = false
+                                                                self_.startSyncImmediately()
+                                                            }
                     }, fail: { (error) in
                         self_.isSyncing = false
                     })
