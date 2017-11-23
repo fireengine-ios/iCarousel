@@ -6,7 +6,7 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol InstagramAuthViewControllerDelegate: class {
     func instagramAuthSuccess()
@@ -25,20 +25,24 @@ class InstagramAuthViewController: UIViewController{
     
     weak var delegate: InstagramAuthViewControllerDelegate?
     
-    func configure(clientId: String, authpath: URL){
+    func configure(clientId: String, authpath: URL) {
         self.clientID = clientId
         self.authPath = authpath
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setTitle(withString: "Instagram login")
+        webView.backgroundColor = UIColor.white
+        webView.isOpaque = false
         webView.delegate = self
 
-        let request = URLRequest(url: self.authPath!)
+        let request = URLRequest(url: authPath!)
         webView.loadRequest(request)
     }
     
-    override func viewWillDisappear(_ animated : Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         handleBackButton()
     }
@@ -53,7 +57,6 @@ class InstagramAuthViewController: UIViewController{
 extension InstagramAuthViewController: UIWebViewDelegate{
 
     func webViewDidStartLoad(_ webView: UIWebView) {
-        
     }
     
     func webViewDidFinishLoad(_ webView: UIWebView) {

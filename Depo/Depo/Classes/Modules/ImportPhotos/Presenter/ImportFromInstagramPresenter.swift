@@ -8,6 +8,13 @@
 
 import UIKit
 
+/**
+    will help for testing
+    https://www.instagram.com/dmitriytester/
+ 
+    requests and info in
+    Package9_19_2 TT_v5.docx
+*/
 class ImportFromInstagramPresenter: BasePresenter {
     weak var view: ImportFromInstagramViewInput?
     var interactor: ImportFromInstagramInteractorInput!
@@ -27,7 +34,10 @@ extension ImportFromInstagramPresenter: ImportFromInstagramViewOutput {
     }
     
     func stopInstagram() {
-        stop()
+        view?.startActivityIndicator()
+        view?.startActivityIndicator()
+        interactor.setAsync(status: false)
+        interactor.cancelUpload()
     }
     
     private func start() {
@@ -35,13 +45,6 @@ extension ImportFromInstagramPresenter: ImportFromInstagramViewOutput {
         view?.startActivityIndicator()
         interactor.setAsync(status: true)
         interactor.uploadCurrent()
-    }
-    
-    private func stop() {
-        view?.startActivityIndicator()
-        view?.startActivityIndicator()
-        interactor.setAsync(status: false)
-        interactor.cancelUpload()
     }
 }
 

@@ -128,7 +128,7 @@
                         <constraint firstItem="27s-Lf-hqu" firstAttribute="leading" secondItem="lug-sc-2GG" secondAttribute="leading" id="vfg-4J-mFQ"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9py-wk-Ufk">
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9py-wk-Ufk">
                     <rect key="frame" x="29" y="303.5" width="326" height="31"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cropy" translatesAutoresizingMaskIntoConstraints="NO" id="wWT-6u-WhK">
