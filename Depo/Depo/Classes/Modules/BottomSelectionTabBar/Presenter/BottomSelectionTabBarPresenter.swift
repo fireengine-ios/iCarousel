@@ -71,13 +71,13 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
 //            }
             
             items.forEach({
-                if $0.syncStatus != .synced {
+                if $0.isLocalItem == true {
                     view.enableIems(atIndex: [syncIndex!])
                 } else {
                     view.enableIems(atIndex: [downloadIndex!])
                 }
             })
-            if items.contains(where: { $0.syncStatus == .synced }) {
+            if items.contains(where: { $0.isLocalItem != true }) {
                 view.enableIems(atIndex: [deleteIndex!])
             } else {
                 view.disableItems(atIntdex: [deleteIndex!])
