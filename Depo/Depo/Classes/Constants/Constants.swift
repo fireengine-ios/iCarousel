@@ -235,6 +235,9 @@ struct TextConstants {
     static let audioViewNoAudioButtonText = "Start adding your music"
 
     //MARK: settings
+    static let backPrintTitle = "Back to Lifebox"
+
+    //MARK: settings
     
     static let settingsViewUploadPhotoLabel = "Upload Photo"
     static let settingsViewLeaveFeedback = "Leave feedback"
