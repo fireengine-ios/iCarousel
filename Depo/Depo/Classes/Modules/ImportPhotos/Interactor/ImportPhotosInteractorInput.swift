@@ -30,5 +30,10 @@ protocol ImportFromDropboxInteractorInput {
 }
 
 protocol ImportFromInstagramInteractorInput {
-    
+    func getConnectionStatus()
+    func getConnection()
+    func getConfig()
+    func setAsync(status: Bool)
+    func uploadCurrent()
+    func cancelUpload()
 }

@@ -941,6 +941,8 @@
 		CEEF886B1FBEC5D0005867D6 /* SpringLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF886A1FBEC5D0005867D6 /* SpringLabel.swift */; };
 		CEF0C2841FC5493200105C31 /* ImportFromInstagramPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0C2831FC5493200105C31 /* ImportFromInstagramPresenter.swift */; };
 		CEF0C2861FC549C400105C31 /* ImportFromInstagramInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0C2851FC549C400105C31 /* ImportFromInstagramInteractor.swift */; };
+		CEF0C28A1FC594E300105C31 /* InstagramAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0C2881FC594E300105C31 /* InstagramAuthViewController.swift */; };
+		CEF0C28B1FC594E300105C31 /* InstagramAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF0C2891FC594E300105C31 /* InstagramAuthViewController.xib */; };
 		CEF619EC1F79222600BECF03 /* AccountType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF619EB1F79222600BECF03 /* AccountType.swift */; };
 		CEF69DDD1FB584CD00FCE6AB /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DDC1FB584CD00FCE6AB /* Result.swift */; };
 		CEF69DDF1FB584F700FCE6AB /* UploadResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DDE1FB584F700FCE6AB /* UploadResponse.swift */; };
@@ -2045,6 +2047,8 @@
 		CEEF886A1FBEC5D0005867D6 /* SpringLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpringLabel.swift; sourceTree = "<group>"; };
 		CEF0C2831FC5493200105C31 /* ImportFromInstagramPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFromInstagramPresenter.swift; sourceTree = "<group>"; };
 		CEF0C2851FC549C400105C31 /* ImportFromInstagramInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFromInstagramInteractor.swift; sourceTree = "<group>"; };
+		CEF0C2881FC594E300105C31 /* InstagramAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramAuthViewController.swift; sourceTree = "<group>"; };
+		CEF0C2891FC594E300105C31 /* InstagramAuthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InstagramAuthViewController.xib; sourceTree = "<group>"; };
 		CEF619EB1F79222600BECF03 /* AccountType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountType.swift; sourceTree = "<group>"; };
 		CEF69DDC1FB584CD00FCE6AB /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		CEF69DDE1FB584F700FCE6AB /* UploadResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadResponse.swift; sourceTree = "<group>"; };
@@ -6554,6 +6558,15 @@
 			path = InternetDataUsageCell;
 			sourceTree = "<group>";
 		};
+		CEF0C2871FC594E300105C31 /* InstagramAuth */ = {
+			isa = PBXGroup;
+			children = (
+				CEF0C2881FC594E300105C31 /* InstagramAuthViewController.swift */,
+				CEF0C2891FC594E300105C31 /* InstagramAuthViewController.xib */,
+			);
+			path = InstagramAuth;
+			sourceTree = "<group>";
+		};
 		CF539B0CC93BBDEBCE241308 /* Router */ = {
 			isa = PBXGroup;
 			children = (
@@ -6700,11 +6713,11 @@
 		D49886451F3EFBE200F50C95 /* ImportPhotos */ = {
 			isa = PBXGroup;
 			children = (
-				D49886461F3EFBE200F50C95 /* Configurator */,
-				D49886491F3EFBE200F50C95 /* Interactor */,
-				D498864D1F3EFBE200F50C95 /* Presenter */,
-				D498864F1F3EFBE200F50C95 /* Router */,
 				D49886521F3EFBE200F50C95 /* View */,
+				D498864D1F3EFBE200F50C95 /* Presenter */,
+				D49886491F3EFBE200F50C95 /* Interactor */,
+				D498864F1F3EFBE200F50C95 /* Router */,
+				D49886461F3EFBE200F50C95 /* Configurator */,
 			);
 			path = ImportPhotos;
 			sourceTree = "<group>";
@@ -6756,6 +6769,7 @@
 				D49886531F3EFBE200F50C95 /* ImportPhotosViewController.swift */,
 				D49886551F3EFBE200F50C95 /* ImportPhotosViewInput.swift */,
 				D49886561F3EFBE200F50C95 /* ImportPhotosViewOutput.swift */,
+				CEF0C2871FC594E300105C31 /* InstagramAuth */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -7176,6 +7190,7 @@
 				7C5358111F9492DA00EABBAF /* OTPViewController~ipad.xib in Resources */,
 				CE8F44F31F6AC1660062C2E0 /* ActivityTimelineHeader.xib in Resources */,
 				CE51AE7B1EF90853005DCEE0 /* PhoneVereficationScreen~iphone.xib in Resources */,
+				CEF0C28B1FC594E300105C31 /* InstagramAuthViewController.xib in Resources */,
 				CEBBDE0C1F01E69B00CDF527 /* TurkcellSaturaMed.ttf in Resources */,
 				7C3A745A1F07C28D00124DF5 /* BaseFileContentView.xib in Resources */,
 				CE51AEC41EF90853005DCEE0 /* RegistrationScreen.xib in Resources */,
@@ -7876,6 +7891,7 @@
 				CEADDA9D1F23491D001DDA8A /* FileService.swift in Sources */,
 				8C0097181F6BDACA00FA069C /* AlertFilesActionsSheetPresenter.swift in Sources */,
 				D84C23019EE0CEEBAA60F740 /* LikeFilterRouterInput.swift in Sources */,
+				CEF0C28A1FC594E300105C31 /* InstagramAuthViewController.swift in Sources */,
 				01A8A6AAF5D40C126B7FF5B4 /* LikeFilterRouter.swift in Sources */,
 				0B6F11656084378F43A09462 /* LikeFilterConfigurator.swift in Sources */,
 				7CD1F9191F0288DC0028F51A /* WelcomePresenter.swift in Sources */,

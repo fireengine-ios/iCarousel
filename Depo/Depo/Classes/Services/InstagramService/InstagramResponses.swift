@@ -31,7 +31,7 @@ final class SocialStatusResponse: ObjectRequestResponse {
     }
 }
 
-final class InstagramConfigResponse: ObjectRequestResponse{
+final class InstagramConfigResponse: ObjectRequestResponse {
     
     private struct InstagramConfigKeys {
         static let clientId = "clientId"
@@ -47,7 +47,7 @@ final class InstagramConfigResponse: ObjectRequestResponse{
     }
 }
 
-final class SocialSyncStatusResponse: ObjectRequestResponse{
+final class SocialSyncStatusResponse: ObjectRequestResponse {
     
     var status: Bool?
     
@@ -56,7 +56,13 @@ final class SocialSyncStatusResponse: ObjectRequestResponse{
     }
 }
 
-final class CreateMigrationResponse: ObjectRequestResponse{
+final class SendSocialSyncStatusResponse: ObjectRequestResponse {
+    override func mapping() {
+        
+    }
+}
+
+final class CreateMigrationResponse: ObjectRequestResponse {
     
     private struct CreateMigrationKeys {
         static let createDate = "createDate"
@@ -120,7 +126,7 @@ final class CreateMigrationResponse: ObjectRequestResponse{
     }
 }
 
-final class CancelMigrationResponse: ObjectRequestResponse{
+final class CancelMigrationResponse: ObjectRequestResponse {
     override func mapping() {
         
     }

@@ -29,9 +29,15 @@ final class SocialSyncStatusParametrs: BaseRequestParametrs {
     }
     
     override var requestParametrs: Any {
-        return status ? "true": "false"
+        return status ? "true" : "false"
     }
     
+    override var patch: URL {
+        return URL(string: RouteRequests.instagramSyncStatus, relativeTo: super.patch)!
+    }
+}
+
+final class SocialSyncStatusGetParametrs: BaseRequestParametrs {
     override var patch: URL {
         return URL(string: RouteRequests.instagramSyncStatus, relativeTo: super.patch)!
     }

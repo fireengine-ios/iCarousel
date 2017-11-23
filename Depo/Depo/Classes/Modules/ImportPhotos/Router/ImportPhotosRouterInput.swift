@@ -17,15 +17,5 @@ protocol ImportFromDropboxRouterInput {
 }
 
 protocol ImportFromInstagramRouterInput {
-    //    func goToOnboarding(param:    /// MAYBE WILL BE NEED
-    // MARK: - Start to sync with FB
-    
-    //    func success(socialStatus: SocialStatusResponse) {
-    //        compliteAsyncOperationEnableScreen()
-    //    }
-    //
-    //    func failed(with errorMessage: String) {
-    //        compliteAsyncOperationEnableScreen()
-    ////        view.show(error: errorMessage)
-    //    } InstagramConfigResponse)
+    func openInstagramAuth(param: InstagramConfigResponse, delegate: InstagramAuthViewControllerDelegate?)
 }

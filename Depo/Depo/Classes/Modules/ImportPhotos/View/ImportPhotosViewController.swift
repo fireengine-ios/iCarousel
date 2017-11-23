@@ -36,6 +36,12 @@ class ImportPhotosViewController: UIViewController {
         }
     }
     
+    var isInstagramConnected: Bool = false {
+        didSet {
+            importInstagramSwitch.setOn(isInstagramConnected, animated: true)
+        }
+    }
+    
     // MARK: - LifeCicle
     
     override func viewDidLoad() {
@@ -46,6 +52,7 @@ class ImportPhotosViewController: UIViewController {
         configureSwitches()
         fbOutput.viewIsReady()
         dbOutput.viewIsReady()
+        instOutput.viewIsReady()
     }
     
     // MARK: - Helpers
@@ -85,11 +92,10 @@ class ImportPhotosViewController: UIViewController {
     
     @IBAction fileprivate func importFromInstagramSwitchValueChanged(_ sender: UISwitch) {
         if sender.isOn {
-//            fbOutput.startFacebook()
+            instOutput.startInstagram()
         } else {
-//            fbOutput.stopFacebook()
+            instOutput.stopInstagram()
         }
-        // Coming soon
     }
     
     @IBAction fileprivate func importFromCropySwitchValueChanged(_ sender: UISwitch) {
@@ -174,4 +180,35 @@ extension ImportPhotosViewController: ImportFromDropboxViewInput {
 
 extension ImportPhotosViewController: ImportFromInstagramViewInput {
     
+    // MARK: Status
+    
+    func instagramStatusSuccess() {
+        isInstagramConnected = true
+    }
+    
+    func instagramStatusFailure() {
+        isInstagramConnected = false
+    }
+    
+    // MARK: Start
+    
+    func instagramStartSuccess() {
+        isInstagramConnected = true
+    }
+    
+    func instagramStartFailure(errorMessage: String) {
+        isInstagramConnected = false
+        print(errorMessage)
+    }
+    
+    // MARK: Stop
+    
+    func instagramStopSuccess() {
+        isInstagramConnected = false
+    }
+    
+    func instagramStopFailure(errorMessage: String) {
+        isInstagramConnected = true
+        print(errorMessage)
+    }
 }

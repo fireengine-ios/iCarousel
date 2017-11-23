@@ -23,14 +23,14 @@ final class InstagramService: BaseRequestService {
     }
     
     func getSyncStatus(success: SuccessResponse?, fail: FailResponse?){
-        let parameters = BaseRequestParametrs()
+        let parameters = SocialSyncStatusGetParametrs()
         let handler = BaseResponseHandler<SocialSyncStatusResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param:parameters, handler: handler)
     }
     
     func setSyncStatus(param: SocialSyncStatusParametrs, success: SuccessResponse?, fail: FailResponse?){
-        let handler = BaseResponseHandler<SocialSyncStatusResponse, ObjectRequestResponse>(success: success, fail: fail)
-        executePostRequest(param:param, handler: handler)
+        let handler = BaseResponseHandler<SendSocialSyncStatusResponse, ObjectRequestResponse>(success: success, fail: fail)
+        executePostRequest(param: param, handler: handler)
     }
     
     func createMigration(success: SuccessResponse?, fail: FailResponse?){
@@ -44,25 +44,25 @@ final class InstagramService: BaseRequestService {
         let handler = BaseResponseHandler<CancelMigrationResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param:parameters, handler: handler)
     }
-    
-    func setSyncStatusAndCreateMigration(success: SuccessResponse?, fail: FailResponse?){
-        
-        let params = SocialSyncStatusParametrs(status:true)
-        setSyncStatus(param: params, success: { objectFromRequestResponse in
-            self.createMigration(success: { objectFromRequestResponse in
-                success?(objectFromRequestResponse)
-            }, fail: { errorResponse in
-                fail?(errorResponse)
-            })
-        }) { errorResponse in
-            fail?(errorResponse)
-        }
-        //                    self.createMigration(success: { (ObjectFromRequestResponse) in
-        //                        successResponse?(ObjectFromRequestResponse)
-        //                    }, fail: { (ErrorResponse) in
-        //                        failResponse?(ErrorResponse)
-        //                    })
-    }
-    
+//
+//    func setSyncStatusAndCreateMigration(success: SuccessResponse?, fail: FailResponse?){
+//
+//        let params = SocialSyncStatusParametrs(status:true)
+//        setSyncStatus(param: params, success: { objectFromRequestResponse in
+//            self.createMigration(success: { objectFromRequestResponse in
+//                success?(objectFromRequestResponse)
+//            }, fail: { errorResponse in
+//                fail?(errorResponse)
+//            })
+//        }) { errorResponse in
+//            fail?(errorResponse)
+//        }
+//        //                    self.createMigration(success: { (ObjectFromRequestResponse) in
+//        //                        successResponse?(ObjectFromRequestResponse)
+//        //                    }, fail: { (ErrorResponse) in
+//        //                        failResponse?(ErrorResponse)
+//        //                    })
+//    }
+//
 }
 

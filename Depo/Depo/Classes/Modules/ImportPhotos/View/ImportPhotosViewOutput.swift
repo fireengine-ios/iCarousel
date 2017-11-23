@@ -23,6 +23,10 @@ protocol ImportFromDropboxViewOutput {
     func startDropbox()
 }
 
+// MARK: - Instagram
+
 protocol ImportFromInstagramViewOutput {
-    
+    func viewIsReady()
+    func startInstagram()
+    func stopInstagram()
 }

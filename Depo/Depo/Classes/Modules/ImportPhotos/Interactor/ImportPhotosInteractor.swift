@@ -87,19 +87,4 @@ class ImportFromFBInteractor: ImportFromFBInteractorInput {
             }
         }
     }
-    
-    /// MAYBE WILL BE NEED
-//    func sucialStatus() {
-//        dbService.socialStatus(
-//            success: { [weak self] response in
-//                guard let response = response as? SocialStatusResponse else { return }
-//                DispatchQueue.main.async {
-//                    self?.output.success(socialStatus: response)
-//                }
-//            }, fail: { [weak self] errorResponse in
-//                DispatchQueue.main.async {
-//                    self?.output.failed(with: errorResponse.description)
-//                }
-//        })
-//    }
 }

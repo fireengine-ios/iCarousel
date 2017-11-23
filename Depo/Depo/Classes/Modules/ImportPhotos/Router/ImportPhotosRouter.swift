@@ -23,10 +23,11 @@ class ImportFromDropboxRouter: ImportFromDropboxRouterInput {
 }
 
 class ImportFromInstagramRouter: ImportFromInstagramRouterInput {
-    func goToOnboarding(param: InstagramConfigResponse) {
-//        let router = RouterVC()
-//        let controller = router.instagramAuth as! InstagramAuthViewController
-//        controller.configure(clientId: param.clientID!, authpath: param.authURL!)
-//        router.pushViewController(viewController: controller)
+    func openInstagramAuth(param: InstagramConfigResponse, delegate: InstagramAuthViewControllerDelegate?) {
+        let router = RouterVC()
+        let controller = router.instagramAuth as! InstagramAuthViewController
+        controller.configure(clientId: param.clientID!, authpath: param.authURL!)
+        controller.delegate = delegate
+        router.pushViewController(viewController: controller)
     }
 }

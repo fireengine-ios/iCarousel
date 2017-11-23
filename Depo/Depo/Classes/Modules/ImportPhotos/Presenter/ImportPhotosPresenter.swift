@@ -111,7 +111,7 @@ extension ImportFromFBPresenter: ImportFromFBInteractorOutput {
         interactor.requestStatus()
     }
     
-    // MARK: Permissions
+    // MARK: Token
     
     func tokenSuccessCallback(token: String) {
         interactor.requestConnect(withToken: token)

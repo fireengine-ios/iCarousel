@@ -525,6 +525,10 @@ class RouterVC: NSObject {
         return controller
     }
     
+    var instagramAuth: UIViewController {
+        return InstagramAuthViewController()
+    }
+    
     // MARK: OTP
     
     func otpView(responce: SignUpSuccessResponse, userInfo: AccountInfoResponse, phoneNumber: String) -> UIViewController {
