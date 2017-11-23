@@ -509,8 +509,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             let path = collectionView.indexPath(for: cell),
             let object = itemForIndexPath(indexPath: path) {
             
-            onSelectObject(object: object)
-            forwardDelegate.onLongPressInCell()
+            if !isObjctSelected(object: object){
+                onSelectObject(object: object)
+                forwardDelegate.onLongPressInCell()
+            }
         }
     }
     

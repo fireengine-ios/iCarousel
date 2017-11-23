@@ -32,4 +32,10 @@ class DocumentsGreedPresenter: BaseFilesGreedPresenter {
         }
     }
     
+    override func operationFinished(withType type: ElementTypes, response: Any?) {
+        if type == .delete {
+            onReloadData()  
+        }
+    }
+    
 }

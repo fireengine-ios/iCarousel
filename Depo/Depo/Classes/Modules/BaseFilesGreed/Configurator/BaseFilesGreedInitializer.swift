@@ -31,7 +31,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
             showGridListButton: false
         )
 
-        let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: [],
+        let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
                                                                   selectionModeTypes: [.createStory])
 
         configurator.configure(viewController: viewController, remoteServices: PhotoAndVideoService(requestSize: 100),
