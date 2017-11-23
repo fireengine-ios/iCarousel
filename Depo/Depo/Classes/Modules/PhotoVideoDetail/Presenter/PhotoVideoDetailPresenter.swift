@@ -72,11 +72,11 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
 
     func moreButtonPressed(sender: Any?) {
         let currentItem = interactor.allItems[interactor.currentItemIndex]
-        
-        alertSheetModule?.showAlertSheet(with: [currentItem], presentedBy: sender, onSourceView: nil)
-
-//        bottomBarPresenter?.showAlertSheet(withItems: [currentItem], presentedBy: sender, onSourceView: nil)
-        //(withTypes: [.createStory, .move, .addToFavorites, .removeFromAlbum, .backUp], presentedBy: sender)
+        alertSheetModule?.showAlertSheet(with: ActionSheetPredetermendConfigs.photoVideoDetailActions,
+                                         items: [currentItem],
+                                         presentedBy: sender,
+                                         onSourceView: nil,
+                                         excludeTypes: [.delete])
     }
     
     //MARK: presenter output
