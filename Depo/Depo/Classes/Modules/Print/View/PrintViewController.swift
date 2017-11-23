@@ -17,10 +17,18 @@ class PrintViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationBarWithGradientStyle()
         output.viewIsReady()
+
+        let backButton = UIBarButtonItem()
+        backButton.title = TextConstants.backPrintTitle
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationBarWithGradientStyle()
+    }
 }
 
 // MARK: - PrintInteractorOutput

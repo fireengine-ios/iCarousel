@@ -165,6 +165,10 @@ struct TextConstants {
     static let sortTimeSizeLargestTitle = "Largest"
     static let sortTimeSizeSmallestTitle = "Smallest"
     
+    static let sortHeaderAlphabetic = "Alphabetically Sorted"
+    static let sortHeaderTime = "Sorted by Time"
+    static let sortHeaderSize = "Sorted by Size"
+    
     static let fileTypeVideoTitle = "Video"
     static let fileTypeDocsTitle = "Docs"
     static let fileTypeMusicTitle = "Music"
@@ -235,6 +239,9 @@ struct TextConstants {
     //MARK: AudioView
     static let audioViewNoAudioTitleText = "You don’t have any music on your Lifebox yet."
     static let audioViewNoAudioButtonText = "Start adding your music"
+
+    //MARK: settings
+    static let backPrintTitle = "Back to Lifebox"
 
     //MARK: settings
     

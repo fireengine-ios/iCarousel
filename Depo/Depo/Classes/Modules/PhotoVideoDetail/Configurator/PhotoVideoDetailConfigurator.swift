@@ -9,7 +9,7 @@
 import UIKit
 
 class PhotoVideoDetailModuleConfigurator {
-
+    
     func configureModuleForViewInput<UIViewController>(viewInput: UIViewController, bottomBarConfig: EditingBarConfig) {
 
         if let viewController = viewInput as? PhotoVideoDetailViewController {
@@ -17,7 +17,7 @@ class PhotoVideoDetailModuleConfigurator {
         }
     }
 
-    private func configure(viewController: PhotoVideoDetailViewController, bottomBarConfig: EditingBarConfig) {
+    private func configure(viewController: PhotoVideoDetailViewController, bottomBarConfig: EditingBarConfig, alertSheetConfig: AlertFilesActionsSheetInitialConfig? = nil) {
 
         let router = PhotoVideoDetailRouter()
 
@@ -28,6 +28,7 @@ class PhotoVideoDetailModuleConfigurator {
         let interactor = PhotoVideoDetailInteractor()
         interactor.output = presenter
         interactor.bottomBarOriginalConfig = bottomBarConfig
+        
         //BotomBar Module Setup
         let bottomBarVCmodule = BottomSelectionTabBarModuleInitializer()
         let botvarBarVC = bottomBarVCmodule.setupModule(config: bottomBarConfig, settablePresenter: BottomSelectionTabBarPresenter())
