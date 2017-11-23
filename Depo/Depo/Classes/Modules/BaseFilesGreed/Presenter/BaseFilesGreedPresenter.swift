@@ -400,9 +400,9 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             if selectedItems.count == 1 {
                 actionTypes.append(.rename)
             }
-            
-            let syncItems = selectedItems.filter{ $0.syncStatus == SyncWrapperedStatus.synced }
-            if !syncItems.isEmpty {
+
+            let syncPhotos = selectedItems.filter{ $0.syncStatus == SyncWrapperedStatus.synced && $0.fileType == .image }
+            if !syncPhotos.isEmpty {
                 actionTypes.append(.print)
             }
             alertSheetModule?.showAlertSheet(with: actionTypes,
@@ -465,9 +465,9 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func printSelected() {
-        let syncItems = selectedItems.filter{ $0.syncStatus == SyncWrapperedStatus.synced }
-        if !syncItems.isEmpty {
-            router.showPrint(items: syncItems)
+        let syncPhotos = selectedItems.filter{ $0.syncStatus == SyncWrapperedStatus.synced && $0.fileType == .image }
+        if !syncPhotos.isEmpty {
+            router.showPrint(items: syncPhotos)
         }
     }
     
