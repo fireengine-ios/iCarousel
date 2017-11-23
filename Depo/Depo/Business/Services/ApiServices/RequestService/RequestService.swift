@@ -13,7 +13,7 @@ typealias RequestResponse = (Data?, URLResponse?, Error?) -> Swift.Void
 typealias RequestFileDownloadResponse = (URL?, URLResponse?, Error?) -> Swift.Void
 typealias RequestFileUploadResponse =  (Data?, URLResponse?, Error?) -> Swift.Void
 
-enum RequestMethod : String {
+enum RequestMethod: String {
     case Post   = "POST"
     case Get    = "GET"
     case Delete = "DELETE"
@@ -24,10 +24,7 @@ enum RequestMethod : String {
 class RequestService {
     
     static let `default` = RequestService()
-    
     private let defaultSession: URLSession
-    
-    private let backgroundSession: URLSession
     
     init() {
         
@@ -35,11 +32,6 @@ class RequestService {
         defaultSession = URLSession(configuration: configuration,
                                     delegate: nil,
                                     delegateQueue: nil)
-        
-        let backgroundConf = URLSessionConfiguration.background(withIdentifier: "RequestService.Background.Session")
-        backgroundSession = URLSession(configuration: backgroundConf,
-                                       delegate: nil,
-                                       delegateQueue: nil)
     }
     
     public func downloadRequestTask(patch:URL,
