@@ -152,19 +152,17 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
                 break
             }
         }
-        debugPrint("---tempo array count is ", tempoLocalArray.count)
         if tempoLocalArray.count == 0 {
             return originalItemsArray
         }
         
-
         let allCurrentMediaItems = (allMediaItems.count > 0) ? allMediaItems : originalItemsArray
         var allAppendedItemsMD5List = allCurrentMediaItems.map{return $0.md5}
-        
         if !isPaginationDidEnd {
+            guard let lastRemoteObject = tempoArray.last else {
+                return originalItemsArray
+            }
             for localItem in tempoLocalArray {
-                debugPrint("---localMD5 is", localItem.md5)
-                debugPrint("---ALL ITEMS MD5 ", allAppendedItemsMD5List)
                 if allAppendedItemsMD5List.contains(localItem.md5) {
                     if let unwrpedIndex = allLocalItems.index(of: localItem) {
                         allLocalItems.remove(at: unwrpedIndex)
@@ -172,21 +170,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
                     
                     continue
                 }
-//                debugPrint("localMD5 is", localItem.md5)
                 
-//                else {
-//
-////                    tempoArray.append(localItem)
-//                    allAppendedItemsMD5List.append(localItem.md5)
-//                    if let unwrpedIndex = allLocalItems.index(of: localItem) {
-//                        allLocalItems.remove(at: unwrpedIndex)
-//                    }
-//
-//                }
-                
-                guard let lastRemoteObject = allCurrentMediaItems.last else {
-                    return originalItemsArray
-                }
+               
                 switch currentSortType {
                 case .timeUp, .timeUpWithoutSection:
 
@@ -214,16 +199,17 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
                         continue
                     }
                 case .metaDataTimeUp:
+                   
                     if  localItem.metaDate < lastRemoteObject.metaDate {
                         continue
                     }
+                    
                 case .metaDataTimeDown:
                     if localItem.metaDate > lastRemoteObject.metaDate {
                         continue
                     }
                 }
-//                debugPrint("ALL LOCAL ITEMS ", allLocalItems.count)
-                
+
                 tempoArray.append(localItem)
                 allAppendedItemsMD5List.append(localItem.md5)
                 if let unwrpedIndex = allLocalItems.index(of: localItem) {
@@ -232,7 +218,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             }
         } else {
             debugPrint("---!!!???PAGINATION ENDED APPEND ALL LOCAL ITEMS")
-//            tempoArray.append(contentsOf: tempoLocalArray)
+            tempoArray.append(contentsOf: tempoLocalArray)
 //            debugPrint("ALL LOCAL ITEMS ", allLocalItems.count)
 //            tempoLocalArray.forEach {
 //                if !allAppendedItemsMD5List.contains($0.md5) {
@@ -280,10 +266,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     private func addByDate(lastItem: WrapData, newItem: WrapData, isMetaDate: Bool) {
         if var lastItemCreatedDate = lastItem.creationDate,
             var newItemCreationDate = newItem.creationDate {
-            if isMetaDate, let lastItemMetaDate = lastItem.metaData?.takenDate,
-                let newItemMetaDate = newItem.metaData?.takenDate {
-                lastItemCreatedDate =  lastItemMetaDate
-                newItemCreationDate = newItemMetaDate
+            if isMetaDate {
+                lastItemCreatedDate =  lastItem.metaDate
+                newItemCreationDate = newItem.metaDate
             }
             if lastItemCreatedDate.getYear() == newItemCreationDate.getYear(),
                 lastItemCreatedDate.getMonth() == newItemCreationDate.getMonth() {
