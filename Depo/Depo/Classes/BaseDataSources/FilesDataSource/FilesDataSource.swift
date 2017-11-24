@@ -116,10 +116,10 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
         let manager = PHImageManager.default()
         
         let options = PHImageRequestOptions()
-        options.isNetworkAccessAllowed = false
+        options.isNetworkAccessAllowed = true
         options.isSynchronous = false
         options.version = .current
-        options.deliveryMode = .highQualityFormat
+        options.deliveryMode = .opportunistic
         
         let targetSize = CGSize(width: 300, height: 300)
 
