@@ -242,16 +242,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         case .sizeZA:
             tempoArray.sort{$0.fileSize < $1.fileSize}
         case .metaDataTimeUp:
-            tempoArray.sort{
-                if let firstMetaDate = $0.metaData?.takenDate,
-                    let secondMetaDate = $1.metaData?.takenDate{
-                    return firstMetaDate > secondMetaDate
-                } else {
-                    return $0.creationDate! > $1.creationDate!
-                }
-                }
+            tempoArray.sort{$0.metaDate > $1.metaDate}
         case .metaDataTimeDown:
-            tempoArray.sort{$0.creationDate! < $1.creationDate!}
+            tempoArray.sort{$0.metaDate < $1.metaDate}
         }
         debugPrint("!!!ALL LOCAL ITEMS SORTED APPENDED!!!")
         return tempoArray
