@@ -483,10 +483,10 @@ class WrapData: BaseDataSourceItem, Wrappered {
         md5 = baseModel.md5
         
         name = baseModel.name
-//        if let fileName = name {
-//            md5 = String(format: "%@%i", fileName, fileSize)
-//        }
-        debugPrint("--LOCAL md5 is ", md5)
+        if let fileName = name {
+            md5 = String(format: "%@%i", fileName, fileSize)
+        }
+        
         fileType = baseModel.fileType
         isLocalItem = true
         creationDate = baseModel.dateOfCreation
@@ -559,9 +559,9 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
         
         favorites = remote.metadata?.favourite ?? false
-//        if let fileName = name {
-//            md5 = String(format: "%@%i", fileName, fileSize)//remote.hash ?? ""
-//        }
+        if let fileName = name {
+            md5 = String(format: "%@%i", fileName, fileSize)//remote.hash ?? ""
+        }
         
         patchToPreview = .remoteUrl(url)
         id = remote.id
