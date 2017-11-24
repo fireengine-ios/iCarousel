@@ -117,7 +117,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         viewController.needShowTabBar = true
         viewController.isFavorites = true
         let configurator = BaseFilesGreedModuleConfigurator()
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share,.move,.delete, .sync, .download],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .delete],
                                                style: .default, tintColor: nil)
         let gridListTopBarConfig = GridListTopBarConfig(
             defaultGridListViewtype: .Grid,
