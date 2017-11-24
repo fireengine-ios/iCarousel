@@ -16,6 +16,8 @@ target 'Depo_LifeTech' do
     pod 'Adjust'
     #pod 'ActiveLabel'
 
+    pod 'Alamofire', '~> 4.5'
+
     #Keyboard
     pod 'Typist'
 

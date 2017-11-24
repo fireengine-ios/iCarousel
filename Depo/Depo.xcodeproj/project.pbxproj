@@ -524,6 +524,13 @@
 		CC5705DE3B84973A3C2928C7 /* AlbumDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7051E0E1A28BE580D7FEE520 /* AlbumDetailInteractor.swift */; };
 		CDE2227E3AD0825FD2B61890 /* BaseFilesGreedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43F31D403CF3A25954AE0EF /* BaseFilesGreedViewController.swift */; };
 		CE04525B1F2F1012001F8FA6 /* NavBarConfugurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04525A1F2F1012001F8FA6 /* NavBarConfugurator.swift */; };
+		CE08BDE41FC8403C00440CA0 /* AuthenticationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE01FC8403B00440CA0 /* AuthenticationRepository.swift */; };
+		CE08BDE51FC8403C00440CA0 /* AuthenticationServiceNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE11FC8403B00440CA0 /* AuthenticationServiceNew.swift */; };
+		CE08BDE61FC8403C00440CA0 /* AuthorizationURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE21FC8403B00440CA0 /* AuthorizationURLs.swift */; };
+		CE08BDE71FC8403C00440CA0 /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE31FC8403B00440CA0 /* AuthorizationManager.swift */; };
+		CE08BDEA1FC8404600440CA0 /* URLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE81FC8404500440CA0 /* URLs.swift */; };
+		CE08BDEB1FC8404600440CA0 /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE91FC8404600440CA0 /* TokenStorage.swift */; };
+		CE08BDED1FC8415600440CA0 /* URL+Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDEC1FC8415600440CA0 /* URL+Path.swift */; };
 		CE09155E1F3870D000C82A44 /* WrapItemFileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09155D1F3870D000C82A44 /* WrapItemFileService.swift */; };
 		CE0ED96E1FBC0F5A00487632 /* BiometricsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED9631FBC0F5A00487632 /* BiometricsManager.swift */; };
 		CE0ED9701FBC0F5A00487632 /* PasscodeViewImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED9651FBC0F5A00487632 /* PasscodeViewImp.swift */; };
@@ -1788,6 +1795,13 @@
 		CD80CEB97E85BA37E721D389 /* FeedbackViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		CDFFF80AD607CB90108A1537 /* FeedbackViewRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewRouterInput.swift; sourceTree = "<group>"; };
 		CE04525A1F2F1012001F8FA6 /* NavBarConfugurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavBarConfugurator.swift; sourceTree = "<group>"; };
+		CE08BDE01FC8403B00440CA0 /* AuthenticationRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationRepository.swift; sourceTree = "<group>"; };
+		CE08BDE11FC8403B00440CA0 /* AuthenticationServiceNew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationServiceNew.swift; sourceTree = "<group>"; };
+		CE08BDE21FC8403B00440CA0 /* AuthorizationURLs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationURLs.swift; sourceTree = "<group>"; };
+		CE08BDE31FC8403B00440CA0 /* AuthorizationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationManager.swift; sourceTree = "<group>"; };
+		CE08BDE81FC8404500440CA0 /* URLs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLs.swift; sourceTree = "<group>"; };
+		CE08BDE91FC8404600440CA0 /* TokenStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenStorage.swift; sourceTree = "<group>"; };
+		CE08BDEC1FC8415600440CA0 /* URL+Path.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+Path.swift"; sourceTree = "<group>"; };
 		CE09155D1F3870D000C82A44 /* WrapItemFileService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrapItemFileService.swift; sourceTree = "<group>"; };
 		CE0ED9631FBC0F5A00487632 /* BiometricsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiometricsManager.swift; sourceTree = "<group>"; };
 		CE0ED9651FBC0F5A00487632 /* PasscodeViewImp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeViewImp.swift; sourceTree = "<group>"; };
@@ -5363,6 +5377,20 @@
 			path = Configurator;
 			sourceTree = "<group>";
 		};
+		CE08BDDF1FC8403B00440CA0 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				CE08BDE91FC8404600440CA0 /* TokenStorage.swift */,
+				CE08BDE81FC8404500440CA0 /* URLs.swift */,
+				CE08BDE01FC8403B00440CA0 /* AuthenticationRepository.swift */,
+				CE08BDE11FC8403B00440CA0 /* AuthenticationServiceNew.swift */,
+				CE08BDE21FC8403B00440CA0 /* AuthorizationURLs.swift */,
+				CE08BDE31FC8403B00440CA0 /* AuthorizationManager.swift */,
+				CE08BDEC1FC8415600440CA0 /* URL+Path.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
 		CE09155C1F3870D000C82A44 /* WrapItemFileService */ = {
 			isa = PBXGroup;
 			children = (
@@ -5793,6 +5821,7 @@
 		CE51A0C61EF8ED38005DCEE0 /* ApiServices */ = {
 			isa = PBXGroup;
 			children = (
+				CE08BDDF1FC8403B00440CA0 /* Authentication */,
 				CE51A0C71EF8ED38005DCEE0 /* AuthenticationService */,
 				CE51A0D11EF8F308005DCEE0 /* RequestService */,
 				EFA74F9C1FBF371100CF946E /* PrintService */,
@@ -7261,6 +7290,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Depo_LifeTech/Pods-Depo_LifeTech-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/CircleProgressBar/CircleProgressBar.framework",
 				"${BUILT_PRODUCTS_DIR}/ExpandableTableViewController/ExpandableTableViewController.framework",
@@ -7282,6 +7312,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Adjust.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CircleProgressBar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ExpandableTableViewController.framework",
@@ -7670,6 +7701,7 @@
 				8CD8F4F41F1E202600F1257B /* GradientLoadingIndicator.swift in Sources */,
 				8C7786A31F3F38F0005CB432 /* VisualMusicPlayerPresenter.swift in Sources */,
 				CE3471871F02F38400B97AC3 /* AuthenticationServiceResponse.swift in Sources */,
+				CE08BDEA1FC8404600440CA0 /* URLs.swift in Sources */,
 				CE51ACCB1EF90853005DCEE0 /* RegistrationInteractor.swift in Sources */,
 				8C6EF8781F348B5C002AC795 /* BottomSelectionTabBarInteractor.swift in Sources */,
 				CE51ACCC1EF90853005DCEE0 /* RegistrationRouterInput.swift in Sources */,
@@ -7686,6 +7718,7 @@
 				CEAE3F981EFD4E6900A405B2 /* WhiteButtonWithRoundedCorner.swift in Sources */,
 				7CBF50241F44723D00D67BF3 /* AlbumService.swift in Sources */,
 				CE51ACD11EF90853005DCEE0 /* TermsAndServicesViewOutput.swift in Sources */,
+				CE08BDE41FC8403C00440CA0 /* AuthenticationRepository.swift in Sources */,
 				D49886571F3EFBE200F50C95 /* ImportPhotosConfigurator.swift in Sources */,
 				CE2F56191F7552A900F49DA1 /* PackagesInteractorOutput.swift in Sources */,
 				CE51ACD21EF90853005DCEE0 /* TermsAndServicesViewController.swift in Sources */,
@@ -7872,6 +7905,7 @@
 				4215E960FC28A4F5C3F1DA8A /* UploadedItemsModuleInput.swift in Sources */,
 				7C7ED4DD1F84C8C400DC5D33 /* CircleYellowButton.swift in Sources */,
 				E121576F506E3512DE62F2BF /* UploadedItemsPresenter.swift in Sources */,
+				CE08BDE61FC8403C00440CA0 /* AuthorizationURLs.swift in Sources */,
 				010B5388E6913FEA0813D2C8 /* UploadedItemsInteractorInput.swift in Sources */,
 				7C5526131F7B9CCD00A21F3C /* WrapItemOperatonManager.swift in Sources */,
 				CE4CFEC11F78F94900FB4C3D /* BytesType.swift in Sources */,
@@ -7944,6 +7978,7 @@
 				BA593E311D8B7ABB01ABB7B7 /* PhotoCellRouter.swift in Sources */,
 				CEE1D1FF1F714F350008F4CF /* MediaItemOperations.swift in Sources */,
 				8CFF86971F0FA84A00520D18 /* ContactsSyncService.swift in Sources */,
+				CE08BDE51FC8403C00440CA0 /* AuthenticationServiceNew.swift in Sources */,
 				361C8CB14774F1A202875263 /* PhotoCellConfigurator.swift in Sources */,
 				7C18D75D1F9F461A00F8679D /* ShadowView.swift in Sources */,
 				7C6E2F921F31E4F800536DB6 /* CreateStoryNameInteractorOutput.swift in Sources */,
@@ -8015,6 +8050,7 @@
 				B73973BC5864F1C639D252EA /* SyncContactsModuleInput.swift in Sources */,
 				DAAF43DBFF829F405419E4E8 /* SyncContactsPresenter.swift in Sources */,
 				7CDABD101F1E3A6300C8CC16 /* UserProfileViewInput.swift in Sources */,
+				CE08BDED1FC8415600440CA0 /* URL+Path.swift in Sources */,
 				2F4FBBADE418935193F54EBB /* SyncContactsInteractorInput.swift in Sources */,
 				97DC05B9B3DCF2CBAE060AF4 /* SyncContactsInteractorOutput.swift in Sources */,
 				555C0C8351470D02E705873D /* SyncContactsInteractor.swift in Sources */,
@@ -8216,10 +8252,12 @@
 				D143F1B72DFAC4DD04CF11B7 /* OTPViewRouterInput.swift in Sources */,
 				46DCABF967D788D30B3ECEE1 /* OTPViewConfigurator.swift in Sources */,
 				7F27470E56D2B8E0764CFF33 /* OTPViewInitializer.swift in Sources */,
+				CE08BDE71FC8403C00440CA0 /* AuthorizationManager.swift in Sources */,
 				980738277831905CE1389C42 /* FreeAppSpaceViewController.swift in Sources */,
 				D1F7307987DD553C63317B99 /* FreeAppSpacePresenter.swift in Sources */,
 				10CC7D3FA3B7A3A380C4E7D2 /* FreeAppSpaceInteractor.swift in Sources */,
 				868B89BA3A01CCDC66E16667 /* FreeAppSpaceRouter.swift in Sources */,
+				CE08BDEB1FC8404600440CA0 /* TokenStorage.swift in Sources */,
 				B7C673A176A577E30FAB824E /* FreeAppSpaceConfigurator.swift in Sources */,
 				29F301A021F9712D24CB97EE /* FreeAppSpaceInitializer.swift in Sources */,
 			);

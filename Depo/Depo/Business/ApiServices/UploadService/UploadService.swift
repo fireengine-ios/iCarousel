@@ -282,7 +282,7 @@ final class UploadService: BaseRequestService {
         finishedSyncOperationsCount = 0
     }
     
-    func upload(uploadParam: Upload, success: FileOperationSucces?, fail: FailResponse? ) -> URLSessionUploadTask {
+    func upload(uploadParam: Upload, success: FileOperationSucces?, fail: FailResponse? ) -> URLSessionTask {
     
         let request = executeUploadRequest(param: uploadParam, response: { (data, response, error) in
                             
@@ -328,7 +328,7 @@ class UploadOperations: Operation {
     let folder: String
     let success: UploadOperationSuccess?
     let fail: FailResponse?
-    var requestObject: URLSessionUploadTask?
+    var requestObject: URLSessionTask?
     var isRealCancel = false
     
     private let semaphore: DispatchSemaphore
@@ -424,7 +424,7 @@ class UploadOperations: Operation {
         UploadService.default.baseUrl(success: success, fail: fail)
     }
     
-    private func upload(uploadParam: Upload, success: FileOperationSucces?, fail: FailResponse? )-> URLSessionUploadTask {
+    private func upload(uploadParam: Upload, success: FileOperationSucces?, fail: FailResponse? )-> URLSessionTask {
         return UploadService.default.upload(uploadParam: uploadParam,
                                             success: success,
                                             fail: fail)

@@ -226,7 +226,7 @@ class BaseRequestService {
         task.resume()
     }
     
-    func executeUploadRequest(param: UploadRequestParametrs, response:@escaping RequestFileUploadResponse) -> URLSessionUploadTask {
+    func executeUploadRequest(param: UploadRequestParametrs, response:@escaping RequestFileUploadResponse) -> URLSessionTask {
         let app = UIApplication.shared
         var backgroundTaskID = UIBackgroundTaskInvalid
         backgroundTaskID = app.beginBackgroundTask(withName: param.urlToLocalFile.absoluteString) {
@@ -246,7 +246,7 @@ class BaseRequestService {
         return task
     }
     
-    func executeUploadDataRequest(param: UploadDataRequestParametrs, response:@escaping RequestFileUploadResponse) -> URLSessionUploadTask{
+    func executeUploadDataRequest(param: UploadDataRequestParametrs, response:@escaping RequestFileUploadResponse) -> URLSessionTask{
         
         let task = requestService.uploadFileRequestTask(path: param.patch,
                                                         headerParametrs: param.header,
