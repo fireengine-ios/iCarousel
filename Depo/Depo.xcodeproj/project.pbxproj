@@ -1031,7 +1031,7 @@
 		EFA74FB51FBF378F00CF946E /* PrintInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA74FAB1FBF378F00CF946E /* PrintInteractorInput.swift */; };
 		EFA74FB61FBF378F00CF946E /* PrintInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA74FAC1FBF378F00CF946E /* PrintInteractorOutput.swift */; };
 		EFA74FB71FBF378F00CF946E /* PrintInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA74FAD1FBF378F00CF946E /* PrintInteractor.swift */; };
-		F05B61575758F7C684735D3F /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		F05B61575758F7C684735D3F /* (null) in Sources */ = {isa = PBXBuildFile; };
 		F05F94EB8B3A970E994475FE /* SelectFolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C65BBC58B8393C6251C13D6 /* SelectFolderViewController.swift */; };
 		F2C69F643F8005F8666F6AAF /* UploadedItemsRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0834AFC75083AA1A9D733C5 /* UploadedItemsRouterInput.swift */; };
 		F3E679ACEE5BB82BEA6E79CC /* SelectNameInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088E9D4D411FE756F92A449 /* SelectNameInitializer.swift */; };
@@ -8274,7 +8274,7 @@
 				33B696E2ADDE28FC3BD303F0 /* ActivityTimelineConfigurator.swift in Sources */,
 				6F604137FCE625E5C5E97B9A /* ActivityTimelineInitializer.swift in Sources */,
 				CE0ED9771FBC0F5A00487632 /* PasscodeManager.swift in Sources */,
-				F05B61575758F7C684735D3F /* BuildFile in Sources */,
+				F05B61575758F7C684735D3F /* (null) in Sources */,
 				CEF69DE11FB5851E00FCE6AB /* UploadParametrs.swift in Sources */,
 				CEC9F4AC1FB46D7000362B8C /* ImportFromDropboxPresenter.swift in Sources */,
 				0B7649A4654AF442656E21DF /* OTPViewController.swift in Sources */,
