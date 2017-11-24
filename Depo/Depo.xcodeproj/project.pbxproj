@@ -1021,7 +1021,7 @@
 		EFA74FB51FBF378F00CF946E /* PrintInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA74FAB1FBF378F00CF946E /* PrintInteractorInput.swift */; };
 		EFA74FB61FBF378F00CF946E /* PrintInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA74FAC1FBF378F00CF946E /* PrintInteractorOutput.swift */; };
 		EFA74FB71FBF378F00CF946E /* PrintInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA74FAD1FBF378F00CF946E /* PrintInteractor.swift */; };
-		F05B61575758F7C684735D3F /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		F05B61575758F7C684735D3F /* (null) in Sources */ = {isa = PBXBuildFile; };
 		F05F94EB8B3A970E994475FE /* SelectFolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C65BBC58B8393C6251C13D6 /* SelectFolderViewController.swift */; };
 		F2C69F643F8005F8666F6AAF /* UploadedItemsRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0834AFC75083AA1A9D733C5 /* UploadedItemsRouterInput.swift */; };
 		F3E679ACEE5BB82BEA6E79CC /* SelectNameInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088E9D4D411FE756F92A449 /* SelectNameInitializer.swift */; };
@@ -2461,8 +2461,8 @@
 		1ABC710687B8CDE0F37A8170 /* CreateStory */ = {
 			isa = PBXGroup;
 			children = (
-				7C66E8991F979C3300D98F27 /* CreateStoryPreviy */,
 				7C6E2F7B1F31E4F800536DB6 /* CreateStoryName */,
+				7C66E8991F979C3300D98F27 /* CreateStoryPreviy */,
 				7C6E2F671F31E4AF00536DB6 /* CreationStorySelectionItems */,
 				7C4988021F3320420039C5F2 /* CreateStoryPhotosOrder */,
 			);
@@ -3543,20 +3543,11 @@
 			path = SingletonStorage;
 			sourceTree = "<group>";
 		};
-		7C355E1E1F00EA27003B004C /* CollectionViewCellsModules */ = {
-			isa = PBXGroup;
-			children = (
-				7C355E5F1F012239003B004C /* CollectionViewDataSource */,
-			);
-			path = CollectionViewCellsModules;
-			sourceTree = "<group>";
-		};
 		7C355E5F1F012239003B004C /* CollectionViewDataSource */ = {
 			isa = PBXGroup;
 			children = (
 				7C355E601F01226B003B004C /* BaseCollectionViewDataSource.swift */,
 				7C355E621F0123E0003B004C /* CollectionViewLayout.swift */,
-				7CD1F8CE1F0140900028F51A /* BaseCollectionViewController.swift */,
 			);
 			path = CollectionViewDataSource;
 			sourceTree = "<group>";
@@ -3784,13 +3775,13 @@
 		7C6E2F671F31E4AF00536DB6 /* CreationStorySelectionItems */ = {
 			isa = PBXGroup;
 			children = (
-				875321241FBDBBC100AFA0BB /* PhotoSelectionDataSource */,
-				7C6E2FA51F33048A00536DB6 /* AudioSelectionDataSource */,
 				7C6E2F721F31E4C900536DB6 /* View */,
 				7C6E2F6D1F31E4C900536DB6 /* Presenter */,
 				7C6E2F6B1F31E4C900536DB6 /* Interactor */,
 				7C6E2F6F1F31E4C900536DB6 /* Router */,
 				7C6E2F681F31E4C900536DB6 /* Configurator */,
+				7C6E2FA61F3304D700536DB6 /* AudioSelectionDataSource.swift */,
+				8766D2FE1FBDB06600316F46 /* PhotoSelectiondDataSource.swift */,
 			);
 			path = CreationStorySelectionItems;
 			sourceTree = "<group>";
@@ -3898,14 +3889,6 @@
 				7C6E2F8D1F31E4F800536DB6 /* CreateStoryNameViewOutput.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		7C6E2FA51F33048A00536DB6 /* AudioSelectionDataSource */ = {
-			isa = PBXGroup;
-			children = (
-				7C6E2FA61F3304D700536DB6 /* AudioSelectionDataSource.swift */,
-			);
-			path = AudioSelectionDataSource;
 			sourceTree = "<group>";
 		};
 		7C77B6709747A566080885C4 /* Router */ = {
@@ -4401,14 +4384,6 @@
 			path = Presenter;
 			sourceTree = "<group>";
 		};
-		875321241FBDBBC100AFA0BB /* PhotoSelectionDataSource */ = {
-			isa = PBXGroup;
-			children = (
-				8766D2FE1FBDB06600316F46 /* PhotoSelectiondDataSource.swift */,
-			);
-			path = PhotoSelectionDataSource;
-			sourceTree = "<group>";
-		};
 		88624F2AE6A9AF52410B741C /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
@@ -4842,14 +4817,6 @@
 			children = (
 				8CF89EF81F1351A800F1A2D0 /* LoginPhoneMailCell.swift */,
 				8C32AFD51F1367E60098083A /* LoginPhoneMailCell.xib */,
-			);
-			path = SubViews;
-			sourceTree = "<group>";
-		};
-		8CFA18291EEEB73400AF236E /* SubViews */ = {
-			isa = PBXGroup;
-			children = (
-				8CFA18361EEFBC5500AF236E /* Cells */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -5333,62 +5300,21 @@
 			path = Configurator;
 			sourceTree = "<group>";
 		};
-		C206234150DD1B9E1424D61C /* Modules */ = {
+		C206234150DD1B9E1424D61C /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				CE2F55FF1F7552A900F49DA1 /* Packages */,
+				8C6EF8601F348B5C002AC795 /* BottomSelectionTabBar */,
+				8C77868A1F3F38EF005CB432 /* VisualMusicPlayer */,
+				8DCB215C1F3C6ABC00BAFE1E /* SearchViewController */,
 				8C00970A1F6BD96300FA069C /* AlertFilesActionsSheet */,
 				8C0097071F6BD8AA00FA069C /* MoreFilesActions */,
-				CE95ED301F516736002F923A /* HelpAndSupport */,
-				8C77868A1F3F38EF005CB432 /* VisualMusicPlayer */,
-				D49886451F3EFBE200F50C95 /* ImportPhotos */,
-				D47863DE1F3F18FA00EFDC6D /* UsageInfo */,
-				8DCB215C1F3C6ABC00BAFE1E /* SearchViewController */,
-				8C6EF8601F348B5C002AC795 /* BottomSelectionTabBar */,
-				7CDABCF21F1E3A6300C8CC16 /* UserProfile */,
-				294AAF57B2D1D7B0D771EB44 /* Splash */,
-				7C355E1E1F00EA27003B004C /* CollectionViewCellsModules */,
-				7CD1F9001F0288DC0028F51A /* Welcome */,
-				7CD1F8E01F0288CA0028F51A /* WiFiSync */,
-				CEAE3F9D1EFD4F0D00A405B2 /* HomePage */,
-				7CC814511EF7A93E001DFCF0 /* AutoSync */,
-				8C049C6D1EEE8E7F0086DA84 /* Login */,
-				2B39FB04635CDE7B54750A4C /* Registration */,
-				762FCEFD487BFE9A7ACC832D /* TermsAndServices */,
-				E106596B4B7DAC3DE7CFA644 /* Introduce */,
-				E3F92B477C3B581616EAD04C /* PhoneVerefication */,
-				CB47E015BFEA75771011D20E /* ForgotPassword */,
-				0EF572E69D74C918C201B7C4 /* CompleteProfile */,
-				075D2C92C9FBB3B73F76CB90 /* LikeFilter */,
-				1FFBE2A6FBBEA028772BBA97 /* ExpandStorage */,
-				757A718BE83ED66BA6739219 /* UploadedItems */,
-				56CE46284ACDF61A64DCEB28 /* HomeHeader */,
-				3064E02B6455F8283162B7B7 /* BaseFilesGreed */,
-				6882865E5119E605098DEB27 /* PhotoCell */,
-				4E5C4BF572351115AA690D8D /* VideoCell */,
-				35466CD131154C1D21C7C31C /* PhotoVideoDetail */,
-				92C9F550DC7528C74BAEFD9F /* UserInfoSubView */,
-				05A75126899674B79F6FA6F9 /* SyncContacts */,
-				3C4921A13B9D2D3165521B9C /* Settings */,
-				3EABB6A70DB5801ACC311373 /* SettingsIpad */,
 				AB9A66994B1C797EE6890922 /* ActionsMenu */,
-				120D20B58FE02EDFFDC3E5EF /* FileInfo */,
-				1ABC710687B8CDE0F37A8170 /* CreateStory */,
-				3C9A2005A04679D300893C3E /* UploadFilesSelection */,
-				218D03D551C55699103C7754 /* SelectFolder */,
 				7F23F23111EFAC4189CA6CA2 /* SelectName */,
-				48E148CC62B54EFD8E872CF0 /* LBAlbumLikePreviewSlider */,
-				A981DAC5F519E2A31F7DC6B4 /* Albums */,
-				387B628AF67B5E2E2A29B58E /* AlbumDetail */,
-				5E26BCF377F078459F09451C /* FeedbackView */,
-				D68883816EC3361501EB6861 /* ActivityTimeline */,
-				72836BFADA2D23CEF3EADB75 /* OTPView */,
-				93E92ABFC04D8544F8D821E6 /* FreeAppSpace */,
-				CEC3C2301FB99AF800C3D67F /* PasscodeSettings */,
-				CEC3C2031FB9961900C3D67F /* PasscodeEnter */,
+				120D20B58FE02EDFFDC3E5EF /* FileInfo */,
+				35466CD131154C1D21C7C31C /* PhotoVideoDetail */,
 				EFA74F9F1FBF378F00CF946E /* Print */,
 			);
-			path = Modules;
+			path = Main;
 			sourceTree = "<group>";
 		};
 		C3E6F774523B0C33C60BE23C /* View */ = {
@@ -5526,13 +5452,13 @@
 		CE2BA7C91FC7075900AA3EBE /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				CE3EB30A1FC7F0AD000B70D6 /* UserStories */,
 				7CD1F8D41F014F150028F51A /* Router.swift */,
 				7C3A74341F04DE2800124DF5 /* BaseDataSources */,
 				8C0B2F231EF3142400706DC0 /* Cells */,
 				CEAE3FCB1EFD500B00A405B2 /* CollectionViewCells */,
 				CEAE3F8F1EFD4CF100A405B2 /* Buttons */,
 				7C032B851EEFFC1A006532C8 /* SubViews */,
-				C206234150DD1B9E1424D61C /* Modules */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -5741,6 +5667,104 @@
 				CE3AF7731F01D9D7002AD17C /* ReachabilityService.swift */,
 			);
 			path = ReachabilityService;
+			sourceTree = "<group>";
+		};
+		CE3EB30A1FC7F0AD000B70D6 /* UserStories */ = {
+			isa = PBXGroup;
+			children = (
+				CE3EB30C1FC7F4D2000B70D6 /* Start */,
+				C206234150DD1B9E1424D61C /* Main */,
+				CE3EB30E1FC7F6A0000B70D6 /* Grid */,
+				CE3EB30D1FC7F512000B70D6 /* Settings */,
+				CE3EB30F1FC7F7E7000B70D6 /* Home */,
+				1ABC710687B8CDE0F37A8170 /* CreateStory */,
+			);
+			path = UserStories;
+			sourceTree = "<group>";
+		};
+		CE3EB30B1FC7F0BF000B70D6 /* HomeCards */ = {
+			isa = PBXGroup;
+			children = (
+				7CD1F8CE1F0140900028F51A /* BaseCollectionViewController.swift */,
+				7CD1F9001F0288DC0028F51A /* Welcome */,
+				0EF572E69D74C918C201B7C4 /* CompleteProfile */,
+				7CD1F8E01F0288CA0028F51A /* WiFiSync */,
+				1FFBE2A6FBBEA028772BBA97 /* ExpandStorage */,
+				757A718BE83ED66BA6739219 /* UploadedItems */,
+				075D2C92C9FBB3B73F76CB90 /* LikeFilter */,
+			);
+			path = HomeCards;
+			sourceTree = "<group>";
+		};
+		CE3EB30C1FC7F4D2000B70D6 /* Start */ = {
+			isa = PBXGroup;
+			children = (
+				294AAF57B2D1D7B0D771EB44 /* Splash */,
+				E106596B4B7DAC3DE7CFA644 /* Introduce */,
+				8C049C6D1EEE8E7F0086DA84 /* Login */,
+				2B39FB04635CDE7B54750A4C /* Registration */,
+				762FCEFD487BFE9A7ACC832D /* TermsAndServices */,
+				E3F92B477C3B581616EAD04C /* PhoneVerefication */,
+				CB47E015BFEA75771011D20E /* ForgotPassword */,
+			);
+			path = Start;
+			sourceTree = "<group>";
+		};
+		CE3EB30D1FC7F512000B70D6 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				3C4921A13B9D2D3165521B9C /* Settings */,
+				3EABB6A70DB5801ACC311373 /* SettingsIpad */,
+				92C9F550DC7528C74BAEFD9F /* UserInfoSubView */,
+				7CDABCF21F1E3A6300C8CC16 /* UserProfile */,
+				72836BFADA2D23CEF3EADB75 /* OTPView */,
+				7CC814511EF7A93E001DFCF0 /* AutoSync */,
+				D49886451F3EFBE200F50C95 /* ImportPhotos */,
+				D47863DE1F3F18FA00EFDC6D /* UsageInfo */,
+				CE2F55FF1F7552A900F49DA1 /* Packages */,
+				05A75126899674B79F6FA6F9 /* SyncContacts */,
+				CE95ED301F516736002F923A /* HelpAndSupport */,
+				5E26BCF377F078459F09451C /* FeedbackView */,
+				D68883816EC3361501EB6861 /* ActivityTimeline */,
+				CE3EB3111FC7F84E000B70D6 /* Passcode */,
+				93E92ABFC04D8544F8D821E6 /* FreeAppSpace */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		CE3EB30E1FC7F6A0000B70D6 /* Grid */ = {
+			isa = PBXGroup;
+			children = (
+				3064E02B6455F8283162B7B7 /* BaseFilesGreed */,
+				3C9A2005A04679D300893C3E /* UploadFilesSelection */,
+				218D03D551C55699103C7754 /* SelectFolder */,
+				A981DAC5F519E2A31F7DC6B4 /* Albums */,
+				387B628AF67B5E2E2A29B58E /* AlbumDetail */,
+				48E148CC62B54EFD8E872CF0 /* LBAlbumLikePreviewSlider */,
+				6882865E5119E605098DEB27 /* PhotoCell */,
+				4E5C4BF572351115AA690D8D /* VideoCell */,
+			);
+			path = Grid;
+			sourceTree = "<group>";
+		};
+		CE3EB30F1FC7F7E7000B70D6 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				7C355E5F1F012239003B004C /* CollectionViewDataSource */,
+				CEAE3F9D1EFD4F0D00A405B2 /* HomePage */,
+				56CE46284ACDF61A64DCEB28 /* HomeHeader */,
+				CE3EB30B1FC7F0BF000B70D6 /* HomeCards */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		CE3EB3111FC7F84E000B70D6 /* Passcode */ = {
+			isa = PBXGroup;
+			children = (
+				CEC3C2301FB99AF800C3D67F /* PasscodeSettings */,
+				CEC3C2031FB9961900C3D67F /* PasscodeEnter */,
+			);
+			path = Passcode;
 			sourceTree = "<group>";
 		};
 		CE3F33AD1F34881800EE37E7 /* SharedService */ = {
@@ -6925,7 +6949,7 @@
 		F6726BE035768C2FD9A85010 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8CFA18291EEEB73400AF236E /* SubViews */,
+				8CFA18361EEFBC5500AF236E /* Cells */,
 				04CF1643276D50FAE9FC2305 /* RegistrationViewInput.swift */,
 				A44DB6B541540CC3F60A6E22 /* RegistrationViewController.swift */,
 				2B4738D31A12B7DD8C76B4E7 /* RegistrationViewOutput.swift */,
@@ -8195,7 +8219,7 @@
 				33B696E2ADDE28FC3BD303F0 /* ActivityTimelineConfigurator.swift in Sources */,
 				6F604137FCE625E5C5E97B9A /* ActivityTimelineInitializer.swift in Sources */,
 				CE0ED9771FBC0F5A00487632 /* PasscodeManager.swift in Sources */,
-				F05B61575758F7C684735D3F /* BuildFile in Sources */,
+				F05B61575758F7C684735D3F /* (null) in Sources */,
 				CEF69DE11FB5851E00FCE6AB /* UploadParametrs.swift in Sources */,
 				CEC9F4AC1FB46D7000362B8C /* ImportFromDropboxPresenter.swift in Sources */,
 				0B7649A4654AF442656E21DF /* OTPViewController.swift in Sources */,
