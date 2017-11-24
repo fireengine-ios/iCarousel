@@ -1021,7 +1021,7 @@
 		EFA74FB51FBF378F00CF946E /* PrintInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA74FAB1FBF378F00CF946E /* PrintInteractorInput.swift */; };
 		EFA74FB61FBF378F00CF946E /* PrintInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA74FAC1FBF378F00CF946E /* PrintInteractorOutput.swift */; };
 		EFA74FB71FBF378F00CF946E /* PrintInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA74FAD1FBF378F00CF946E /* PrintInteractor.swift */; };
-		F05B61575758F7C684735D3F /* (null) in Sources */ = {isa = PBXBuildFile; };
+		F05B61575758F7C684735D3F /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		F05F94EB8B3A970E994475FE /* SelectFolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C65BBC58B8393C6251C13D6 /* SelectFolderViewController.swift */; };
 		F2C69F643F8005F8666F6AAF /* UploadedItemsRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0834AFC75083AA1A9D733C5 /* UploadedItemsRouterInput.swift */; };
 		F3E679ACEE5BB82BEA6E79CC /* SelectNameInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088E9D4D411FE756F92A449 /* SelectNameInitializer.swift */; };
@@ -3569,8 +3569,8 @@
 				CE2F55F41F75515C00F49DA1 /* Packages */,
 				7CED0B121F2392700016CE0C /* WrapperedItemsUtils */,
 				7CDABD141F1F90D400C8CC16 /* SortingForModels */,
-				CE95ED2E1F5162A7002F923A /* FAQSectionItem.swift */,
 				CE43633C1F6FC3D3004724BF /* ActivityTimeline */,
+				CE95ED2E1F5162A7002F923A /* FAQSectionItem.swift */,
 				7C3A74381F04F4B800124DF5 /* BaseMediaContent.swift */,
 				CECA95961F163CC80054BDC0 /* WrapperedItems.swift */,
 				7CFF0C8D1F4C1E1800E72E6A /* AlbumItem.swift */,
@@ -3927,9 +3927,8 @@
 				CE09155C1F3870D000C82A44 /* WrapItemFileService */,
 				D496B9A61F386C36008227CC /* FBService */,
 				CECA95931F1610360054BDC0 /* ImageDownloderService */,
-				8CBA3E961EF5E60800072983 /* CustomUserInterfaceServises */,
-				CE37B0211F7B7BDE00DDE209 /* IAPManager.swift */,
 				7CC8144C1EF41AD3001DFCF0 /* CustomPopUpService */,
+				CE37B0211F7B7BDE00DDE209 /* IAPManager.swift */,
 				CE52011D1FB4348900C11DD0 /* ActivityIndicatorManager.swift */,
 			);
 			path = Services;
@@ -4772,13 +4771,6 @@
 			path = Validation;
 			sourceTree = "<group>";
 		};
-		8CBA3E961EF5E60800072983 /* CustomUserInterfaceServises */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CustomUserInterfaceServises;
-			sourceTree = "<group>";
-		};
 		8CD8F4EF1F1CC3C100F1257B /* FloatingView */ = {
 			isa = PBXGroup;
 			children = (
@@ -5453,12 +5445,11 @@
 			isa = PBXGroup;
 			children = (
 				CE3EB30A1FC7F0AD000B70D6 /* UserStories */,
-				7CD1F8D41F014F150028F51A /* Router.swift */,
-				7C3A74341F04DE2800124DF5 /* BaseDataSources */,
 				8C0B2F231EF3142400706DC0 /* Cells */,
 				CEAE3FCB1EFD500B00A405B2 /* CollectionViewCells */,
 				CEAE3F8F1EFD4CF100A405B2 /* Buttons */,
 				7C032B851EEFFC1A006532C8 /* SubViews */,
+				7CD1F8D41F014F150028F51A /* Router.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -5736,6 +5727,7 @@
 			isa = PBXGroup;
 			children = (
 				3064E02B6455F8283162B7B7 /* BaseFilesGreed */,
+				7C3A74341F04DE2800124DF5 /* BaseDataSources */,
 				3C9A2005A04679D300893C3E /* UploadFilesSelection */,
 				218D03D551C55699103C7754 /* SelectFolder */,
 				A981DAC5F519E2A31F7DC6B4 /* Albums */,
@@ -8219,7 +8211,7 @@
 				33B696E2ADDE28FC3BD303F0 /* ActivityTimelineConfigurator.swift in Sources */,
 				6F604137FCE625E5C5E97B9A /* ActivityTimelineInitializer.swift in Sources */,
 				CE0ED9771FBC0F5A00487632 /* PasscodeManager.swift in Sources */,
-				F05B61575758F7C684735D3F /* (null) in Sources */,
+				F05B61575758F7C684735D3F /* BuildFile in Sources */,
 				CEF69DE11FB5851E00FCE6AB /* UploadParametrs.swift in Sources */,
 				CEC9F4AC1FB46D7000362B8C /* ImportFromDropboxPresenter.swift in Sources */,
 				0B7649A4654AF442656E21DF /* OTPViewController.swift in Sources */,

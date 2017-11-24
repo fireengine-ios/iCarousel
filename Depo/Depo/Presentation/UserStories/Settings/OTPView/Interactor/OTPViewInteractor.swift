@@ -28,19 +28,11 @@ class OTPViewInteractor: PhoneVereficationInteractor {
     }
     
     override var phoneNumber: String {
-        if let phone = phoneNumberString{
-            return phone ?? ""
-        }
-        
-        return ""
+        return phoneNumberString ?? ""
     }
     
     override var email: String {
-        if let info = userInfo{
-            return info.email ?? ""
-        }
-        
-        return ""
+        return userInfo?.email ?? ""
     }
     
     override func verifyCode(code: String) {

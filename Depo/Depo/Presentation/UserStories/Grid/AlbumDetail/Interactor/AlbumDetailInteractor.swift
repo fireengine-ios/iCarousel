@@ -20,14 +20,14 @@ class AlbumDetailInteractor: BaseFilesGreedInteractor {
         }
         
         remote.allItems(albumUUID: albumObject.uuid,
-                        sortBy: sortBy, sortOrder: sortOrder, success: { [weak self] (albums) in
+                        sortBy: sortBy, sortOrder: sortOrder, success: { albums in
 //            self?.items(items: albums)
             }, fail: { })
         
     }
     
     override func reloadItems(_ searchText: String!, sortBy: SortType, sortOrder: SortOrder, newFieldValue: FieldValue?) {
-        guard let albumService = remoteItems as? AlbumDetailService, let unwrapedAlbumUUID = album?.uuid else {
+        guard let albumService = remoteItems as? AlbumDetailService else {
             debugPrint("NOT AlbumDetailService")
             return
         }

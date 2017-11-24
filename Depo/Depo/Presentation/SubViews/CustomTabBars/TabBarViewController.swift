@@ -38,8 +38,6 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     static let notificationMusicDrop = "MusicDrop"
     static let notificationMusicStop = "MusicStop"
     
-    lazy var activityManager = ActivityIndicatorManager()
-    
     let originalPlusBotttomConstraint: CGFloat = 10
     
     var photoBtn: SubPlussButtonView!
@@ -94,7 +92,6 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBar.delegate = self
-        activityManager.delegate = self
         
         let items = [("outlineHome",TextConstants.home),
                      ("outlinePhotosVideos", TextConstants.photoAndVideo),
@@ -448,12 +445,9 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         
         WrapItemOperatonManager.default.startOperationWith(type: .upload, allOperations: 1, completedOperations: 0)
 
-        //activityManager.start()
-        UploadService.default.upload(imageData: data) { [weak self] result in
+        UploadService.default.upload(imageData: data) { result in
             DispatchQueue.main.async {
                 WrapItemOperatonManager.default.stopOperationWithType(type: .upload)
-
-                //self?.activityManager.stop()
                 switch result {
                 case .success(_):
                     CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: "Success", withText: "Photo uploaded", okButtonText: "OK")
