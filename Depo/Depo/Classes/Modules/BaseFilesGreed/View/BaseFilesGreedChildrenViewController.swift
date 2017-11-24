@@ -28,6 +28,11 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
         }else{
 //            editingTabBar?.dismiss()
             self.navigationItem.leftBarButtonItem = nil
+            
+            if mainTitle != "" {
+                self.subTitle = output.getSortTypeString()
+            }
+            self.setTitle(withString: mainTitle, andSubTitle: subTitle)
         }
     }
 
