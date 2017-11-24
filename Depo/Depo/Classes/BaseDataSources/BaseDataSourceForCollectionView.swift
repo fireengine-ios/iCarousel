@@ -483,6 +483,9 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             
             if !isObjctSelected(object: object){
                 onSelectObject(object: object)
+            }
+            
+            if !isSelectionStateActive{
                 forwardDelegate.onLongPressInCell()
             }
         }
