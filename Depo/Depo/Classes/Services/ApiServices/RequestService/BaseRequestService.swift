@@ -16,7 +16,7 @@ protocol ObjectFromRequestResponse: class {
 }
 
 
-enum ErrorResponse : CustomStringConvertible  {
+enum ErrorResponse : CustomStringConvertible, Error  {
     
     case failResponse(ObjectFromRequestResponse?)
     case error(Error)
@@ -155,17 +155,14 @@ class JsonConvertor {
         
         if let data = value.requestParametrs as? Data  {
             jsonData = data
-        } else {
-           
-            do {
-                jsonData = try JSONSerialization.data(withJSONObject: value.requestParametrs,
-                                                      options: .prettyPrinted)
-            } catch {
-                print(error.localizedDescription)
-            }
+        } else if let str = value.requestParametrs as? String {
+            jsonData = str.data(using: .utf8)
+        } else if let data = try? JSONSerialization.data(withJSONObject: value.requestParametrs,
+                                                 options: .prettyPrinted) {
+            jsonData = data
         }
-        if jsonData != nil {
-            debugPrint("JSON:", String(data: jsonData!, encoding: .utf8) )
+        if let data = jsonData, let str = String(data: data, encoding: .utf8) {
+            debugPrint("JSON:", str)
         }
         return jsonData
     }

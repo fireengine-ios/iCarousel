@@ -49,28 +49,3 @@ class FBPermissionsObject: ObjectRequestResponse {
         }
     }
 }
-
-final class SocialStatusResponse: ObjectRequestResponse {
-    
-    private struct SocialStatusKeys {
-        static let facebook = "facebook"
-        static let twitter = "twitter"
-        static let instagram = "instagram"
-        static let dropbox = "dropbox"
-    }
-    
-    var facebook: Bool?
-    var twitter: Bool?
-    var instagram: Bool?
-    var dropbox: Bool?
-    
-    override func mapping() {
-        facebook = json?[SocialStatusKeys.facebook].bool
-        twitter = json?[SocialStatusKeys.twitter].bool
-        instagram = json?[SocialStatusKeys.instagram].bool
-        dropbox = json?[SocialStatusKeys.dropbox].bool
-    }
-}
-
-
-

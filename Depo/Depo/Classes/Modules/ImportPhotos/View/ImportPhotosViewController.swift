@@ -11,6 +11,7 @@ import UIKit
 class ImportPhotosViewController: UIViewController {
     var fbOutput: ImportFromFBViewOutput!
     var dbOutput: ImportFromDropboxViewOutput!
+    var instOutput: ImportFromInstagramViewOutput!
     
     @IBOutlet weak fileprivate var importDropboxLabel: UILabel!
     @IBOutlet weak fileprivate var importFacebookLabel: UILabel!
@@ -21,7 +22,7 @@ class ImportPhotosViewController: UIViewController {
     @IBOutlet weak fileprivate var importInstagramSwitch: UISwitch!
     @IBOutlet weak fileprivate var importCropySwitch: UISwitch!
     
-    lazy var activityManager = ActivityIndicatorManager()
+    private lazy var activityManager = ActivityIndicatorManager()
     
     var isFBConnected: Bool = false {
         didSet {
@@ -35,6 +36,12 @@ class ImportPhotosViewController: UIViewController {
         }
     }
     
+    var isInstagramConnected: Bool = false {
+        didSet {
+            importInstagramSwitch.setOn(isInstagramConnected, animated: true)
+        }
+    }
+    
     // MARK: - LifeCicle
     
     override func viewDidLoad() {
@@ -45,6 +52,7 @@ class ImportPhotosViewController: UIViewController {
         configureSwitches()
         fbOutput.viewIsReady()
         dbOutput.viewIsReady()
+        instOutput.viewIsReady()
     }
     
     // MARK: - Helpers
@@ -52,6 +60,7 @@ class ImportPhotosViewController: UIViewController {
     fileprivate func configureLabels() {
         setTitle(withString: TextConstants.importPhotos)
         navigationController?.navigationItem.title = TextConstants.backTitle
+        
         importDropboxLabel.text = TextConstants.importFromDB
         importFacebookLabel.text = TextConstants.importFromFB
         importInstagramLabel.text = TextConstants.importFromInstagram
@@ -59,9 +68,6 @@ class ImportPhotosViewController: UIViewController {
     }
     
     fileprivate func configureSwitches() {
-        importInstagramSwitch.isOn = false
-        importInstagramSwitch.isEnabled = false
-        
         importCropySwitch.isOn = false
         importCropySwitch.isEnabled = false
     }
@@ -85,7 +91,11 @@ class ImportPhotosViewController: UIViewController {
     }
     
     @IBAction fileprivate func importFromInstagramSwitchValueChanged(_ sender: UISwitch) {
-        // Coming soon
+        if sender.isOn {
+            instOutput.startInstagram()
+        } else {
+            instOutput.stopInstagram()
+        }
     }
     
     @IBAction fileprivate func importFromCropySwitchValueChanged(_ sender: UISwitch) {
@@ -137,11 +147,12 @@ extension ImportPhotosViewController: ImportFromDropboxViewInput {
     // MARK: Status
     
     func dbStatusSuccessCallback(status: DropboxStatusObject) {
-        if status.connected == true {
-            isDBConnected = true
-        } else {
-            isDBConnected = false
+        guard let isConnected = status.connected else {
+            return
         }
+        isDBConnected = isConnected
+        
+        ///maybe will be
         //switch status.status {
         //case .finished, .failed, .cancelled:
         //    isDBConnected = false
@@ -163,6 +174,41 @@ extension ImportPhotosViewController: ImportFromDropboxViewInput {
     
     func failedDropboxStart(errorMessage: String) {
         isDBConnected = false
+        print(errorMessage)
+    }
+}
+
+extension ImportPhotosViewController: ImportFromInstagramViewInput {
+    
+    // MARK: Status
+    
+    func instagramStatusSuccess() {
+        isInstagramConnected = true
+    }
+    
+    func instagramStatusFailure() {
+        isInstagramConnected = false
+    }
+    
+    // MARK: Start
+    
+    func instagramStartSuccess() {
+        isInstagramConnected = true
+    }
+    
+    func instagramStartFailure(errorMessage: String) {
+        isInstagramConnected = false
+        print(errorMessage)
+    }
+    
+    // MARK: Stop
+    
+    func instagramStopSuccess() {
+        isInstagramConnected = false
+    }
+    
+    func instagramStopFailure(errorMessage: String) {
+        isInstagramConnected = true
         print(errorMessage)
     }
 }

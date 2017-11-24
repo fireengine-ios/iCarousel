@@ -138,8 +138,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     }
     
     private func appendLocalItems(originalItemsArray: [WrapData]) -> [WrapData] {
-        var tempoArray = originalItemsArray//[WrapData]()
-        
+        var tempoArray = [WrapData]()
         var tempoLocalArray = [WrapData]()
         
         if let unwrapedFilters = originalFilters, let specificFilters = getFileFilterType(filters: unwrapedFilters) {
@@ -156,84 +155,76 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             return originalItemsArray
         }
         
-        let allCurrentMediaItems = (allMediaItems.count > 0) ? allMediaItems : originalItemsArray
-        var allAppendedItemsMD5List = allCurrentMediaItems.map{return $0.md5}
         if !isPaginationDidEnd {
-            guard let lastRemoteObject = tempoArray.last else {
-                return originalItemsArray
-            }
-            for localItem in tempoLocalArray {
-                if allAppendedItemsMD5List.contains(localItem.md5) {
-                    if let unwrpedIndex = allLocalItems.index(of: localItem) {
-                        allLocalItems.remove(at: unwrpedIndex)
-                    }
-                    
-                    continue
-                }
+            var remoteItemsMD5List = originalItemsArray.map{return $0.md5}
+            for remoteItem in originalItemsArray {
                 
-               
-                switch currentSortType {
-                case .timeUp, .timeUpWithoutSection:
+                innerLocalsLoop: for localItem in tempoLocalArray {
+                    guard let lastRemoteObject = originalItemsArray.last else {
+                        return originalItemsArray
+                    }
+                    switch currentSortType {
+                    case .timeUp, .timeUpWithoutSection:
+                        
+                        if localItem.creationDate! < lastRemoteObject.creationDate! {
+                            continue innerLocalsLoop
+                        }
+                    case .timeDown, .timeDownWithoutSection:
+                        if localItem.creationDate! > lastRemoteObject.creationDate! {
+                            continue innerLocalsLoop
+                        }
+                    case .lettersAZ, .albumlettersAZ:
+                        if String(localItem.name!.first!).uppercased() < String(lastRemoteObject.name!.first!).uppercased() {
+                            continue innerLocalsLoop
+                        }
+                    case .lettersZA, .albumlettersZA:
+                        if String(localItem.name!.first!).uppercased() > String(lastRemoteObject.name!.first!).uppercased() {
+                            continue innerLocalsLoop
+                        }
+                    case .sizeAZ:
+                        if localItem.fileSize > lastRemoteObject.fileSize {
+                            continue innerLocalsLoop
+                        }
+                    case .sizeZA:
+                        if localItem.fileSize < lastRemoteObject.fileSize {
+                            continue innerLocalsLoop
+                        }
+                    case .metaDataTimeUp:
+                        if let lastObjectMetaDate = lastRemoteObject.metaData?.takenDate,
+                            localItem.creationDate! < lastObjectMetaDate {
+                            continue innerLocalsLoop
+                        }
+                    case .metaDataTimeDown:
+                        if let lastObjectMetaDate = lastRemoteObject.metaData?.takenDate,
+                            localItem.creationDate! > lastObjectMetaDate {
 
-                    if localItem.creationDate! < lastRemoteObject.creationDate! {
-                        continue
+                            continue innerLocalsLoop
+                        }
                     }
-                case .timeDown, .timeDownWithoutSection:
-                    if localItem.creationDate! > lastRemoteObject.creationDate! {
-                        continue
-                    }
-                case .lettersAZ, .albumlettersAZ:
-                    if String(localItem.name!.first!).uppercased() < String(lastRemoteObject.name!.first!).uppercased() {
-                        continue
-                    }
-                case .lettersZA, .albumlettersZA:
-                    if String(localItem.name!.first!).uppercased() > String(lastRemoteObject.name!.first!).uppercased() {
-                        continue
-                    }
-                case .sizeAZ:
-                    if localItem.fileSize > lastRemoteObject.fileSize {
-                        continue
-                    }
-                case .sizeZA:
-                    if localItem.fileSize < lastRemoteObject.fileSize {
-                        continue
-                    }
-                case .metaDataTimeUp:
-                   
-                    if  localItem.metaDate < lastRemoteObject.metaDate {
-                        continue
+                    if remoteItemsMD5List.contains(localItem.md5) {
+                        if let unwrpedIndex = allLocalItems.index(of: localItem) {
+                            allLocalItems.remove(at: unwrpedIndex)
+                        }
+                        continue innerLocalsLoop
+                    } else {
+                        tempoArray.append(localItem)
+                        remoteItemsMD5List.append(localItem.md5)
+                        if let unwrpedIndex = allLocalItems.index(of: localItem) {
+                            allLocalItems.remove(at: unwrpedIndex)
+                        }
                     }
                     
-                case .metaDataTimeDown:
-                    if localItem.metaDate > lastRemoteObject.metaDate {
-                        continue
-                    }
                 }
-
-                tempoArray.append(localItem)
-                allAppendedItemsMD5List.append(localItem.md5)
-                if let unwrpedIndex = allLocalItems.index(of: localItem) {
+                tempoArray.append(remoteItem)
+            }
+        } else {
+            debugPrint("!!!???PAGINATION ENDED APPEND ALL LOCAL ITEMS")
+            tempoArray.append(contentsOf: tempoLocalArray)
+            tempoLocalArray.forEach{
+                if let unwrpedIndex = allLocalItems.index(of: $0) {
                     allLocalItems.remove(at: unwrpedIndex)
                 }
             }
-        } else {
-            debugPrint("---!!!???PAGINATION ENDED APPEND ALL LOCAL ITEMS")
-            tempoArray.append(contentsOf: tempoLocalArray)
-//            debugPrint("ALL LOCAL ITEMS ", allLocalItems.count)
-//            tempoLocalArray.forEach {
-//                if !allAppendedItemsMD5List.contains($0.md5) {
-//                    tempoArray.append(contentsOf: tempoLocalArray)
-//                    allAppendedItemsMD5List.append($0.md5)
-//                    if let unwrpedIndex = allLocalItems.index(of: $0) {
-//                        allLocalItems.remove(at: unwrpedIndex)
-//                    }
-//                } else {
-//                    if let unwrpedIndex = allLocalItems.index(of: $0) {
-//                        allLocalItems.remove(at: unwrpedIndex)
-//                    }
-//                }
-//
-//            }
 //            allLocalItems.removeAll()
         }
         
@@ -252,12 +243,15 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             tempoArray.sort{$0.fileSize < $1.fileSize}
         case .metaDataTimeUp:
             tempoArray.sort{
-                    return $0.metaDate > $1.metaDate
+                if let firstMetaDate = $0.metaData?.takenDate,
+                    let secondMetaDate = $1.metaData?.takenDate{
+                    return firstMetaDate > secondMetaDate
+                } else {
+                    return $0.creationDate! > $1.creationDate!
+                }
                 }
         case .metaDataTimeDown:
-            tempoArray.sort{
-                return $0.metaDate < $1.metaDate
-            }
+            tempoArray.sort{$0.creationDate! < $1.creationDate!}
         }
         debugPrint("!!!ALL LOCAL ITEMS SORTED APPENDED!!!")
         return tempoArray
@@ -266,9 +260,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     private func addByDate(lastItem: WrapData, newItem: WrapData, isMetaDate: Bool) {
         if var lastItemCreatedDate = lastItem.creationDate,
             var newItemCreationDate = newItem.creationDate {
-            if isMetaDate {
-                lastItemCreatedDate =  lastItem.metaDate
-                newItemCreationDate = newItem.metaDate
+            if isMetaDate, let lastItemMetaDate = lastItem.metaData?.takenDate,
+                let newItemMetaDate = newItem.metaData?.takenDate {
+                lastItemCreatedDate =  lastItemMetaDate
+                newItemCreationDate = newItemMetaDate
             }
             if lastItemCreatedDate.getYear() == newItemCreationDate.getYear(),
                 lastItemCreatedDate.getMonth() == newItemCreationDate.getMonth() {
@@ -692,7 +687,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         
         switch wraped.patchToPreview {
         case .localMediaContent(let local):
-//            print("Local: indexPath: \(indexPath), assetId: \(local.asset.localIdentifier)")
             FilesDataSource().getAssetThumbnail(asset: local.asset, indexPath: indexPath, completion: { (image, path) in
                 if let cellToChange = self.collectionView.cellForItem(at: path) as? CollectionViewCellDataProtocol{
                     DispatchQueue.main.async {

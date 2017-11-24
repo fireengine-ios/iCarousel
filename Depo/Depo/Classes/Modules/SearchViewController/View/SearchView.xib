@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -13,12 +13,14 @@
             <connections>
                 <outlet property="collectionView" destination="1hH-31-UT2" id="tpf-st-dHZ"/>
                 <outlet property="containerViewBottomConstraint" destination="hG6-Qx-lnz" id="IgS-Nz-Zta"/>
+                <outlet property="floatingHeaderContainerHeightConstraint" destination="pMc-9l-rlR" id="MeZ-qO-blL"/>
                 <outlet property="musicBarContainer" destination="KvD-De-0PR" id="1ek-CL-FKi"/>
                 <outlet property="musicBarContainerHeightConstraint" destination="m4J-tT-zr0" id="Ana-4k-E7C"/>
                 <outlet property="navigationBar" destination="3f6-kH-dNq" id="GjJ-GJ-Wcd"/>
                 <outlet property="noFilesLabel" destination="tpr-ro-tFS" id="dxm-Tn-e7a"/>
                 <outlet property="noFilesView" destination="ve5-7k-qJd" id="Nd2-jD-VQX"/>
                 <outlet property="suggestTableView" destination="Xpp-j0-kcB" id="vus-tZ-CBU"/>
+                <outlet property="topBarContainer" destination="XDt-9i-CGy" id="9cX-1z-S18"/>
                 <outlet property="view" destination="iN0-l3-epB" id="grU-6m-tef"/>
             </connections>
         </placeholder>
@@ -27,6 +29,13 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XDt-9i-CGy">
+                    <rect key="frame" x="0.0" y="64" width="375" height="0.0"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" id="pMc-9l-rlR"/>
+                    </constraints>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KvD-De-0PR">
                     <rect key="frame" x="0.0" y="597" width="375" height="70"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -102,16 +111,19 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="ve5-7k-qJd" secondAttribute="bottom" id="0bG-Py-ol8"/>
+                <constraint firstItem="1hH-31-UT2" firstAttribute="top" secondItem="XDt-9i-CGy" secondAttribute="bottom" id="4Hc-1T-FzX"/>
                 <constraint firstItem="Xpp-j0-kcB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="5fo-Be-HHE"/>
                 <constraint firstItem="ve5-7k-qJd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="64" id="92P-PO-Jo6"/>
                 <constraint firstItem="Hdy-4c-itc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Crd-rg-sFJ"/>
                 <constraint firstItem="Hdy-4c-itc" firstAttribute="top" secondItem="3f6-kH-dNq" secondAttribute="bottom" constant="-64" id="D6U-HZ-sGi"/>
+                <constraint firstAttribute="trailing" secondItem="XDt-9i-CGy" secondAttribute="trailing" id="DTz-09-CJw"/>
                 <constraint firstAttribute="trailing" secondItem="KvD-De-0PR" secondAttribute="trailing" id="FD1-Rb-ahS"/>
                 <constraint firstItem="KvD-De-0PR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="FSj-p9-fuf"/>
                 <constraint firstAttribute="trailing" secondItem="Xpp-j0-kcB" secondAttribute="trailing" id="I53-me-NG8"/>
                 <constraint firstAttribute="trailing" secondItem="3f6-kH-dNq" secondAttribute="trailing" id="LcR-lZ-ewJ"/>
                 <constraint firstItem="3f6-kH-dNq" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Ool-HC-3hS"/>
-                <constraint firstItem="1hH-31-UT2" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="64" id="Yee-4h-6ee"/>
+                <constraint firstItem="XDt-9i-CGy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Qn8-A3-0yu"/>
+                <constraint firstItem="XDt-9i-CGy" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="64" id="QpN-GC-2Nl"/>
                 <constraint firstAttribute="trailing" secondItem="ve5-7k-qJd" secondAttribute="trailing" id="Zpr-fs-r7z"/>
                 <constraint firstItem="ve5-7k-qJd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="a2L-wr-rqe"/>
                 <constraint firstAttribute="trailing" secondItem="1hH-31-UT2" secondAttribute="trailing" id="bNf-Vy-vXz"/>

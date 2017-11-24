@@ -17,7 +17,17 @@ class SearchViewInitializer {
     class func initializeAllFilesViewController(with nibName:String, output: SearchModuleOutput?) -> UIViewController {
         let viewController = SearchViewController(nibName: nibName, bundle: nil)
         let configurator = SearchViewConfigurator()
-        configurator.configure(viewController: viewController, remoteServices: RemoteSearchService(requestSize: 100), output: output)
+        
+        let gridListTopBarConfig = GridListTopBarConfig(
+            defaultGridListViewtype: .Grid,
+            availableSortTypes: [],
+            defaultSortType: .TimeNewOld,
+            availableFilter: false,
+            showGridListButton: true
+        )
+        
+        configurator.configure(viewController: viewController, remoteServices: RemoteSearchService(requestSize: 100), output: output, topBarConfig: gridListTopBarConfig)
+        
         return viewController
     }
 }

@@ -43,5 +43,18 @@ class ImportPhotosConfigurator {
         
         dbPresenter.interactor = dbInteractor
         viewController.dbOutput = dbPresenter
+        
+        // Instagram configuration
+        let instRouter = ImportFromInstagramRouter()
+        
+        let instPresenter = ImportFromInstagramPresenter()
+        instPresenter.view = viewController
+        instPresenter.router = instRouter
+        
+        let instInteractor = ImportFromInstagramInteractor()
+        instInteractor.instOutput = instPresenter
+        
+        instPresenter.interactor = instInteractor
+        viewController.instOutput = instPresenter
     }
 }

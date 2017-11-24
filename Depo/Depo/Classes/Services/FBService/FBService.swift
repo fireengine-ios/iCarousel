@@ -67,10 +67,4 @@ class FBService: BaseRequestService {
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: fb, handler: handler)
     }
-    
-    func socialStatus(success: SuccessResponse?, fail: FailResponse?) {
-        let params = SocialStatusParametrs()
-        let handler = BaseResponseHandler<SocialStatusResponse, ObjectRequestResponse>(success: success, fail: fail)
-        executeGetRequest(param: params, handler: handler)
-    }
 }

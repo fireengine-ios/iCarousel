@@ -97,7 +97,7 @@ class VisualMusicPlayerViewController: UIViewController, VisualMusicPlayerViewIn
     }
     @IBAction func actionMoreButton(_ sender: UIButton) {
         guard let item = player.currentItem else { return }
-        alert.showSpecifiedAlertSheet(with: item, presentedBy: sender, onSourceView: nil, viewController: self)
+        alert.showSpecifiedMusicAlertSheet(with: item, presentedBy: sender, onSourceView: nil, viewController: self)
     }
     @IBAction func actionShuffleButton(_ sender: UIButton) {
 //        sender.isSelected = !sender.isSelected

@@ -9,11 +9,14 @@
 import Foundation
 
 class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractorOutput, BaseDataSourceForCollectionViewDelegate {
+    
     weak var view: SearchViewInput!
     var interactor: SearchViewInteractorInput!
     var router: SearchViewRouterInput!
     
     var moduleOutput: SearchModuleOutput?
+    
+    var topBarConfig: GridListTopBarConfig?
     
     var dataSource = BaseDataSourceForCollectionView()
     var showedSpinner = false
@@ -38,7 +41,11 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         dataSource.delegate = self
         interactor.viewIsReady()
         player.delegates.add(view as! MediaPlayerDelegate)
+        dataSource.displayingType = .list
+        dataSource.setPreferedCellReUseID(reUseID: CollectionViewCellsIdsConstant.baseMultiFileCell)
         dataSource.isHeaderless = true
+        
+        setupTopBar()
 //        sortedRule = .albumlettersAZ
 //        dataSource.currentSortType = sortedRule
     }
@@ -48,6 +55,16 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
             return
         }
         player.delegates.remove(view)
+    }
+    
+    //MARK: - UnderNavBarBar/TopBar
+    
+    private func setupTopBar() {
+        guard let unwrapedConfig = topBarConfig else {
+            return
+        }
+        view.setupUnderNavBarBar(withConfig: unwrapedConfig)
+        sortedRule = unwrapedConfig.defaultSortType.sortedRulesConveted
     }
 
     func searchWith(searchText: String, sortBy: SortType, sortOrder: SortOrder) {
@@ -83,6 +100,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         
         self.showedSpinner = false
         //items.sorted(by: {$0.creationDate! > $1.creationDate!})
+        dataSource.dropData()
         dataSource.appendCollectionView(items: items)
 //        dataSource.configurateWithSimpleData(collectionData: files, sortingRules: sortedRule, types: filters, syncType: syncType)
         
@@ -147,15 +165,16 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         return CGSize(width: view.getCollectionViewWidth(), height: 65)
     }
     
+    
     func getCellSizeForGreed() -> CGSize {
         if (Device.isIpad){
-            return CGSize(width: 90, height: 90)
+            return CGSize(width: 180, height: 180)
+        }else{
+            let w: CGFloat = (view.getCollectionViewWidth() - NumericConstants.iPhoneGreedHorizontalSpace * 3)/NumericConstants.numerCellInDocumentLineOnIphone
+            return CGSize(width: w, height: w)
         }
-        
-        let w = view.getCollectionViewWidth()
-        let cellW: CGFloat = (w - NumericConstants.iPhoneGreedInset * 2 - NumericConstants.iPhoneGreedHorizontalSpace * NumericConstants.numerCellInLineOnIphone)/NumericConstants.numerCellInLineOnIphone
-        return CGSize(width: cellW, height: cellW)
     }
+    
     
     func onLongPressInCell() {
         startEditing()
@@ -181,4 +200,29 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     func getNextItems() {
         
     }
+    
+    //MARK: - View output/TopBar/UnderNavBarBar Delegates
+    
+    func viewAppearanceChangedTopBar(asGrid: Bool) {
+        viewAppearanceChanged(asGrid: asGrid)
+    }
+    
+    func sortedPushedTopBar(with rule:  MoreActionsConfig.SortRullesType) {
+//        sortedPushed(with: rule.sortedRulesConveted)
+    }
+    
+    func filtersTopBar(cahngedTo filters: [MoreActionsConfig.MoreActionsFileType]) {
+        
+    }
+    
+    //MARK: - MoreActionsViewDelegate
+    
+    func viewAppearanceChanged(asGrid: Bool){
+        if (asGrid){
+            dataSource.updateDisplayngType(type: .greed)
+        }else{
+            dataSource.updateDisplayngType(type: .list)
+        }
+    }
+    
 }

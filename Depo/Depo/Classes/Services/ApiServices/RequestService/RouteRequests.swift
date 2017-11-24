@@ -48,8 +48,12 @@ struct RouteRequests {
     static let fbStart       = "api/migration/facebook/start"
     static let fbStop        = "api/migration/facebook/stop"
     
-    static let socialStatus = "api/share/social/status"
-    
+    //MARK: -  Instagram
+    static let socialStatus = "/api/share/social/status"
+    static let instagramConfig = "/api/share/social/instagram/config"
+    static let instagramSyncStatus = "/api/share/social/instagram/syncStatus"
+    static let instagramCreateMigration = "/api/share/social/instagram/migration/create"
+    static let instagramCancelMigration = "/api/share/social/instagram/migration/cancel"
     
     // MARK: Captcha
     

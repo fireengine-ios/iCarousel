@@ -119,7 +119,7 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
         options.isNetworkAccessAllowed = false
         options.isSynchronous = false
         options.version = .current
-        options.deliveryMode = .fastFormat
+        options.deliveryMode = .highQualityFormat
         
         let targetSize = CGSize(width: 300, height: 300)
 

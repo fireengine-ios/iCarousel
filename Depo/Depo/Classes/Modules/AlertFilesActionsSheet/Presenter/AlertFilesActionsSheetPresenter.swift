@@ -67,6 +67,16 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         presentAlertSheet(with: [headerAction] + actions, presentedBy: sender, viewController: viewController)
     }
     
+    func showSpecifiedMusicAlertSheet(with item: WrapData, presentedBy sender: Any?, onSourceView sourceView: UIView?, viewController: UIViewController?) {
+        var types: [ElementTypes] = []
+        
+        types.append(item.favorites ? .removeFromFavorites : .addToFavorites)
+        
+        let actions = constractActions(with: types, for: [item])
+        
+        presentAlertSheet(with: actions, presentedBy: sender, viewController: viewController)
+    }
+    
     private func adjastActionTypes(for items: [Item]) -> [ElementTypes] {
         var actionTypes: [ElementTypes] = []
         if items.count == 1, let item = items.first {

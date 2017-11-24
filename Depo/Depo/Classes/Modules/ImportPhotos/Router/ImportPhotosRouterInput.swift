@@ -15,3 +15,7 @@ protocol ImportFromFBRouterInput {
 protocol ImportFromDropboxRouterInput {
     func goToOnboarding()
 }
+
+protocol ImportFromInstagramRouterInput {
+    func openInstagramAuth(param: InstagramConfigResponse, delegate: InstagramAuthViewControllerDelegate?)
+}

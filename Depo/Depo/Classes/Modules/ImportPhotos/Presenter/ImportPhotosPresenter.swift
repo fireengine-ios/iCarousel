@@ -111,7 +111,7 @@ extension ImportFromFBPresenter: ImportFromFBInteractorOutput {
         interactor.requestStatus()
     }
     
-    // MARK: Permissions
+    // MARK: Token
     
     func tokenSuccessCallback(token: String) {
         interactor.requestConnect(withToken: token)
@@ -138,17 +138,4 @@ extension ImportFromFBPresenter: ImportFromFBInteractorOutput {
     func goToOnboarding() {
         router.goToOnboarding()
     }
-    
-    
-    /// MAYBE WILL BE NEED
-    // MARK: - Start to sync with FB
-    
-    //    func success(socialStatus: SocialStatusResponse) {
-    //        compliteAsyncOperationEnableScreen()
-    //    }
-    //
-    //    func failed(with errorMessage: String) {
-    //        compliteAsyncOperationEnableScreen()
-    ////        view.show(error: errorMessage)
-    //    }
 }
