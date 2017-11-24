@@ -5793,6 +5793,8 @@
 		CE51A0C61EF8ED38005DCEE0 /* ApiServices */ = {
 			isa = PBXGroup;
 			children = (
+				CE51A0C71EF8ED38005DCEE0 /* AuthenticationService */,
+				CE51A0D11EF8F308005DCEE0 /* RequestService */,
 				EFA74F9C1FBF371100CF946E /* PrintService */,
 				CE2F562A1F7553C800F49DA1 /* SubscriptionsService */,
 				CE2F56261F7553B500F49DA1 /* OffersService */,
@@ -5803,9 +5805,7 @@
 				CE246A0C1F3D2CDE008DF705 /* SyncService */,
 				CE246A011F3C5B5E008DF705 /* UploadService */,
 				CE2469F31F3BF8F3008DF705 /* CreateStoryService */,
-				CE51A0D11EF8F308005DCEE0 /* RequestService */,
 				CE3F33AD1F34881800EE37E7 /* SharedService */,
-				CE51A0C71EF8ED38005DCEE0 /* AuthenticationService */,
 				CE51A0CC1EF8F081005DCEE0 /* CaptcaService */,
 				CE3AF76E1F01D63D002AD17C /* EULAService */,
 				CEDFECAD1F11C294003D1A75 /* SearchService */,

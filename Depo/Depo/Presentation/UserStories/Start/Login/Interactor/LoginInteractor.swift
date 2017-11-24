@@ -60,8 +60,8 @@ class LoginInteractor: LoginInteractorInput {
             guard let `self` = self else {
                 return
             }
-            ApplicationSession.sharedSession.session.rememberMe = self.rememberMe
-            ApplicationSession.sharedSession.saveData()
+//            ApplicationSession.sharedSession.session.rememberMe = self.rememberMe
+//            ApplicationSession.sharedSession.saveData()
             DispatchQueue.main.async { [weak self] in
                 self?.output.succesLogin()
             }

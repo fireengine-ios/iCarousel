@@ -57,14 +57,14 @@ class RequestHeaders {
     
     static func authification() -> RequestHeaderParametrs {
         var result = base()
-        let token = ApplicationSession.sharedSession.session.authToken ?? ""
+        let token = "" //ApplicationSession.sharedSession.session.authToken ?? ""
         result = result + [HeaderConstant.AuthToken : token]
         return result 
     }
     
     static func authificationByRememberMe() -> RequestHeaderParametrs {
         var result = base()
-        let token = ApplicationSession.sharedSession.session.rememberMeToken ?? ""
+        let token = "" //ApplicationSession.sharedSession.session.rememberMeToken ?? ""
         result = result + [HeaderConstant.RememberMeToken : token]
         return result
     }

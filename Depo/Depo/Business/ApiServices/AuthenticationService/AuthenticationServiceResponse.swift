@@ -79,7 +79,7 @@ class LoginResponse: ObjectRequestResponse {
         //Need set remember me Token because we need to store it.
         //As we can understand API documentation, we should receive it but server did not send X-Remember-Me-Token in remember me login method
         if (rememberMeToken == nil){
-            rememberMeToken = ApplicationSession.sharedSession.session.rememberMeToken
+//            rememberMeToken = ApplicationSession.sharedSession.session.rememberMeToken
         }
         
         token = self.responseHeader?[HeaderConstant.AuthToken] as? String

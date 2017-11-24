@@ -123,7 +123,7 @@ class ContactsSyncService {
     }
     
     private func setup() {
-        SyncSettings.shared().token = ApplicationSession.sharedSession.session.authToken
+//        SyncSettings.shared().token = ApplicationSession.sharedSession.session.authToken
         SyncSettings.shared().url =  ContactsSyncServiceConstant.webProdURL
         SyncSettings.shared().environment = .productionEnvironment//.developmentEnvironment
     }

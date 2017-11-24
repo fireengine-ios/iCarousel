@@ -245,14 +245,14 @@ class AuthenticationService: BaseRequestService {
                 // TODO: GURIN
                 return
             }
-            ApplicationSession.sharedSession.updateSession(loginData: data)
+//            ApplicationSession.sharedSession.updateSession(loginData: data)
             self?.success?()
         }
         
         failLogin = { (result) in
             // remove token
             let loginData = LoginResponse(withJSON: nil)
-            ApplicationSession.sharedSession.updateSession(loginData: loginData)
+//            ApplicationSession.sharedSession.updateSession(loginData: loginData)
             self.fail?(result)
         }
     }
@@ -294,13 +294,13 @@ class AuthenticationService: BaseRequestService {
             /// in LoginResponse(withJSON: nil)
             /// rememberMeToken = ApplicationSession.sharedSession.session.rememberMeToken
             s.rememberMeToken = nil
-            ApplicationSession.sharedSession.updateSession(loginData: s)
+//            ApplicationSession.sharedSession.updateSession(loginData: s)
             success?()
         }
         
         let failResponse: FailResponse = { value in
             let s = LoginResponse(withJSON: nil)
-            ApplicationSession.sharedSession.updateSession(loginData: s)
+//            ApplicationSession.sharedSession.updateSession(loginData: s)
             success?()
         }
         successResponse()

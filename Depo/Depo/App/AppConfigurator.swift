@@ -14,7 +14,7 @@ class AppConfigurator {
     static let dropboxManager: DropboxManager = factory.resolve()
     
     class func applicationStarted(){
-        ApplicationSessionManager.start()
+//        ApplicationSessionManager.start()
         dropboxManager.start()
         
         CoreDataStack.default.appendLocalMediaItems(nil)
