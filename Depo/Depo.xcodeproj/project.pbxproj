@@ -1021,7 +1021,7 @@
 		EFA74FB51FBF378F00CF946E /* PrintInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA74FAB1FBF378F00CF946E /* PrintInteractorInput.swift */; };
 		EFA74FB61FBF378F00CF946E /* PrintInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA74FAC1FBF378F00CF946E /* PrintInteractorOutput.swift */; };
 		EFA74FB71FBF378F00CF946E /* PrintInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA74FAD1FBF378F00CF946E /* PrintInteractor.swift */; };
-		F05B61575758F7C684735D3F /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		F05B61575758F7C684735D3F /* (null) in Sources */ = {isa = PBXBuildFile; };
 		F05F94EB8B3A970E994475FE /* SelectFolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C65BBC58B8393C6251C13D6 /* SelectFolderViewController.swift */; };
 		F2C69F643F8005F8666F6AAF /* UploadedItemsRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0834AFC75083AA1A9D733C5 /* UploadedItemsRouterInput.swift */; };
 		F3E679ACEE5BB82BEA6E79CC /* SelectNameInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088E9D4D411FE756F92A449 /* SelectNameInitializer.swift */; };
@@ -2273,6 +2273,7 @@
 			isa = PBXGroup;
 			children = (
 				CE6FBFBB1FB2DC3F008FC18C /* AppDelegate.swift */,
+				7CDB43341F86678D00789FA6 /* AppConfigurator.swift */,
 				672F866E1E6027EF00229F58 /* LaunchScreen.storyboard */,
 				7C032B801EEFE408006532C8 /* Constants */,
 				CEBBDDD91F01E4CF00CDF527 /* Resources */,
@@ -3903,7 +3904,6 @@
 		7C942FE81EF931A7008F8A8E /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				7CDB43331F86664F00789FA6 /* AppConfigurator */,
 				CEE1D1FB1F714EEF0008F4CF /* MD5 */,
 				7CFE92FB1F601E47008A3B72 /* SMS */,
 				7CFE92ED1F5EC5C9008A3B72 /* Mail */,
@@ -3917,8 +3917,6 @@
 			isa = PBXGroup;
 			children = (
 				8CFF86691F0F86E800520D18 /* AppSession */,
-				CE51A0C61EF8ED38005DCEE0 /* ApiServices */,
-				CED5E81D1EF7E81D009649EB /* HardwareService */,
 				CEA9033B1FC4301F0037DC23 /* InstagramService */,
 				7CB2E30C1FB9CB26009CF813 /* FreeAppSpace */,
 				7C1663F31F793C53006DC87C /* AutoSyncSettingStorrage */,
@@ -3928,6 +3926,7 @@
 				D496B9A61F386C36008227CC /* FBService */,
 				CECA95931F1610360054BDC0 /* ImageDownloderService */,
 				7CC8144C1EF41AD3001DFCF0 /* CustomPopUpService */,
+				CE907A2E1F94D49800D2F8CE /* MulticastDelegate.swift */,
 				CE37B0211F7B7BDE00DDE209 /* IAPManager.swift */,
 				CE52011D1FB4348900C11DD0 /* ActivityIndicatorManager.swift */,
 			);
@@ -4244,14 +4243,6 @@
 				7CDABD151F1F912600C8CC16 /* WrapperedItemsSorting.swift */,
 			);
 			path = SortingForModels;
-			sourceTree = "<group>";
-		};
-		7CDB43331F86664F00789FA6 /* AppConfigurator */ = {
-			isa = PBXGroup;
-			children = (
-				7CDB43341F86678D00789FA6 /* AppConfigurator.swift */,
-			);
-			path = AppConfigurator;
 			sourceTree = "<group>";
 		};
 		7CE779B21F4471AA00CFDB2B /* AlbumService */ = {
@@ -4739,7 +4730,7 @@
 				8C7786991F3F38EF005CB432 /* VisualMusicPlayerViewController.swift */,
 				8C77869B1F3F38EF005CB432 /* VisualMusicPlayerViewInput.swift */,
 				8C77869C1F3F38EF005CB432 /* VisualMusicPlayerViewOutput.swift */,
-				8C7786851F3F38D9005CB432 /* MusicBar */,
+				CE907A2F1F94D49800D2F8CE /* VolumeSlider.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5296,6 +5287,7 @@
 			isa = PBXGroup;
 			children = (
 				8C6EF8601F348B5C002AC795 /* BottomSelectionTabBar */,
+				8C7786851F3F38D9005CB432 /* MusicBar */,
 				8C77868A1F3F38EF005CB432 /* VisualMusicPlayer */,
 				8DCB215C1F3C6ABC00BAFE1E /* SearchViewController */,
 				8C00970A1F6BD96300FA069C /* AlertFilesActionsSheet */,
@@ -5457,8 +5449,11 @@
 		CE2BA7CA1FC7077500AA3EBE /* Business */ = {
 			isa = PBXGroup;
 			children = (
+				CEAD6BDD1F94EF320085FF30 /* Factory.swift */,
 				CE3AA9831F4D648C000157AF /* CoreData */,
 				7C3A74371F04F47500124DF5 /* Models */,
+				CE51A0C61EF8ED38005DCEE0 /* ApiServices */,
+				CED5E81D1EF7E81D009649EB /* HardwareService */,
 				7CA6C69B1EF1811100D21EBE /* Services */,
 			);
 			path = Business;
@@ -5816,7 +5811,7 @@
 				CEDFECAD1F11C294003D1A75 /* SearchService */,
 				CE83B5EB1F208E2700DE262C /* RemoteServices */,
 				CEADDA9A1F23480D001DDA8A /* FileService */,
-				CE8F44ED1F6AB7790062C2E0 /* ActivityTimeline */,
+				CE8F44ED1F6AB7790062C2E0 /* ActivityTimelineService */,
 			);
 			path = ApiServices;
 			sourceTree = "<group>";
@@ -5868,14 +5863,14 @@
 			path = RemoteServices;
 			sourceTree = "<group>";
 		};
-		CE8F44ED1F6AB7790062C2E0 /* ActivityTimeline */ = {
+		CE8F44ED1F6AB7790062C2E0 /* ActivityTimelineService */ = {
 			isa = PBXGroup;
 			children = (
 				CE8F44E51F6AB59C0062C2E0 /* ActivityTimelineService.swift */,
 				CE8F44E71F6AB5CB0062C2E0 /* ActivityTimelineServiceResponse.swift */,
 				CE8F44EE1F6ABB540062C2E0 /* ActivityTimelineParameters.swift */,
 			);
-			path = ActivityTimeline;
+			path = ActivityTimelineService;
 			sourceTree = "<group>";
 		};
 		CE8F44F41F6AC1C60062C2E0 /* ActivityTimelineHeader */ = {
@@ -6056,10 +6051,7 @@
 				7CA2A7AF1F14CE3F00F37E2C /* LocalMediaStorage.swift */,
 				CEAE3F831EFD3FC800A405B2 /* MediaService.swift */,
 				CEE005751F7B846C004FA8DE /* PHPhotoLibraryChangeObserver.swift */,
-				CE907A2E1F94D49800D2F8CE /* MulticastDelegate.swift */,
 				CE907A301F94D49900D2F8CE /* MediaPlayer.swift */,
-				CE907A2F1F94D49800D2F8CE /* VolumeSlider.swift */,
-				CEAD6BDD1F94EF320085FF30 /* Factory.swift */,
 			);
 			path = MediaService;
 			sourceTree = "<group>";
@@ -8211,7 +8203,7 @@
 				33B696E2ADDE28FC3BD303F0 /* ActivityTimelineConfigurator.swift in Sources */,
 				6F604137FCE625E5C5E97B9A /* ActivityTimelineInitializer.swift in Sources */,
 				CE0ED9771FBC0F5A00487632 /* PasscodeManager.swift in Sources */,
-				F05B61575758F7C684735D3F /* BuildFile in Sources */,
+				F05B61575758F7C684735D3F /* (null) in Sources */,
 				CEF69DE11FB5851E00FCE6AB /* UploadParametrs.swift in Sources */,
 				CEC9F4AC1FB46D7000362B8C /* ImportFromDropboxPresenter.swift in Sources */,
 				0B7649A4654AF442656E21DF /* OTPViewController.swift in Sources */,
