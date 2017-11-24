@@ -102,6 +102,8 @@ struct TextConstants {
     
     static let search = "Search"
     
+    static let noFilesFoundInSearch = "No results found for your query."
+    
     // MARK: - Sync Contacts
     
     static let backUpMyContacts = "Back Up My Contacts"

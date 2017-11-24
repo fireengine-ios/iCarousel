@@ -69,7 +69,7 @@ class GridListTopBar: UIViewController {
     
     private func setupSortingView(withTypes types: [MoreActionsConfig.SortRullesType],
                                   defaultType: MoreActionsConfig.SortRullesType) {
-   
+        sortByButton.isHidden = types.isEmpty
     }
     
     private func setupFilterSegmentView() {

@@ -17,6 +17,10 @@ protocol SearchViewOutput {
     func getSuggestion(text: String)
     func tapCancel()
     
+    func viewAppearanceChangedTopBar(asGrid: Bool)
+    func sortedPushedTopBar(with rule:  MoreActionsConfig.SortRullesType)
+    func filtersTopBar(cahngedTo filters: [MoreActionsConfig.MoreActionsFileType])
+    
     func playerDidHide()
     func willDismissController()
 }

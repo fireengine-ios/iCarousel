@@ -687,7 +687,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         
         switch wraped.patchToPreview {
         case .localMediaContent(let local):
-            print("Local: indexPath: \(indexPath), assetId: \(local.asset.localIdentifier)")
             FilesDataSource().getAssetThumbnail(asset: local.asset, indexPath: indexPath, completion: { (image, path) in
                 if let cellToChange = self.collectionView.cellForItem(at: path) as? CollectionViewCellDataProtocol{
                     DispatchQueue.main.async {
