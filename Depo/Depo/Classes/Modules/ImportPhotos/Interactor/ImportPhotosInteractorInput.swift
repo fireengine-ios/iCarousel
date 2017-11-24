@@ -17,9 +17,6 @@ protocol ImportFromFBInteractorInput {
     func requestStatus()
     func requestStart()
     func requestStop()
-    
-    /// MAYBE WILL BE NEED
-    //func sucialStatus()
 }
 
 // MARK: - Dropbox
@@ -30,4 +27,13 @@ protocol ImportFromDropboxInteractorInput {
     func login()
     func requestConnect(withToken token: String)
     func requestStart()
+}
+
+protocol ImportFromInstagramInteractorInput {
+    func getConnectionStatus()
+    func getConnection()
+    func getConfig()
+    func setAsync(status: Bool)
+    func uploadCurrent()
+    func cancelUpload()
 }

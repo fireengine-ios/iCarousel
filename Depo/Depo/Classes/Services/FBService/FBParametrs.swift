@@ -46,11 +46,5 @@ class FBStop: BaseRequestParametrs {
     }
 }
 
-class SocialStatusParametrs: BaseRequestParametrs {
-    override var patch: URL {
-        return URL(string: RouteRequests.socialStatus, relativeTo: super.patch)!
-    }
-}
-
 
 

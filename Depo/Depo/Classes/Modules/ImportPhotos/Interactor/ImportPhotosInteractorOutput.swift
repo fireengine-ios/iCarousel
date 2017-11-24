@@ -60,3 +60,29 @@ protocol ImportFromDropboxInteractorOutput {
 //    
 //    func goToOnboarding()
 }
+
+// MARK: - Instagram
+
+protocol ImportFromInstagramInteractorOutput {
+    
+    func connectionSuccess(isConnected: Bool)
+    func connectionFailure(errorMessage: String)
+    
+    func syncStatusSuccess(status: Bool)
+    func syncStatusFailure(errorMessage: String)
+    
+    func configSuccess(instagramConfig: InstagramConfigResponse)
+    func configFailure(errorMessage: String)
+    
+    func startAsyncSuccess()
+    func startAsyncFailure(errorMessage: String)
+    
+    func uploadCurrentSuccess()
+    func uploadCurrentFailure(errorMessage: String)
+    
+    func stopAsyncSuccess()
+    func stopAsyncFailure(errorMessage: String)
+    
+    func cancelUploadSuccess()
+    func cancelUploadFailure(errorMessage: String)
+}

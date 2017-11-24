@@ -19,19 +19,14 @@ protocol ImportFromFBViewOutput {
 // MARK: - Dropbox
 
 protocol ImportFromDropboxViewOutput {
-    
     func viewIsReady()
     func startDropbox()
-    
-//    func requestToken(withCurrentToken currentToken: String, withConsumerKey consumerKey: String, withAppSecret appSecret: String, withAuthTokenSecret authTokenSecret: String)
-//
-//    func requestConnect(withToken token: String)
-//
-//    func requestStatusForStart()
-//
-//    func requestStatus()
-//
-//    func requestStart()
-//
-//    func onLogout()
+}
+
+// MARK: - Instagram
+
+protocol ImportFromInstagramViewOutput {
+    func viewIsReady()
+    func startInstagram()
+    func stopInstagram()
 }
