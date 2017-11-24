@@ -225,66 +225,103 @@ typealias  SuccessLogout = () -> Swift.Void
 
 typealias  FailLoginType = FailResponse
 
-
+import Alamofire
 class AuthenticationService: BaseRequestService {
     
-    private var success: SuccessLogin?
-    
-    private var fail: FailLoginType?
-    
-    private var successLogin: SuccessResponse!
-    
-    private var failLogin: FailResponse!
-    
-    
-     override init() {
-        super.init()
-        
-        successLogin = {  [weak self] (succes) in
-            guard let data = succes as? LoginResponse else {
-                // TODO: GURIN
-                return
-            }
-//            ApplicationSession.sharedSession.updateSession(loginData: data)
-            self?.success?()
-        }
-        
-        failLogin = { (result) in
-            // remove token
-            let loginData = LoginResponse(withJSON: nil)
-//            ApplicationSession.sharedSession.updateSession(loginData: loginData)
-            self.fail?(result)
-        }
-    }
+//    private var success: SuccessLogin?
+//
+//    private var fail: FailLoginType?
+//
+//    private var successLogin: SuccessResponse!
+//
+//    private var failLogin: FailResponse!
+//
+//
+//     override init() {
+//        super.init()
+//
+//        successLogin = {  [weak self] (succes) in
+//            guard let data = succes as? LoginResponse else {
+//                // TODO: GURIN
+//                return
+//            }
+////            ApplicationSession.sharedSession.updateSession(loginData: data)
+//            self?.success?()
+//        }
+//
+//        failLogin = { (result) in
+//            // remove token
+//            let loginData = LoginResponse(withJSON: nil)
+////            ApplicationSession.sharedSession.updateSession(loginData: loginData)
+//            self.fail?(result)
+//        }
+//    }
     
     func login(user: AuthenticationUser, sucess:SuccessLogin?, fail: FailResponse?) {
-        self.success = sucess
-        self.fail = fail
-        let handler = BaseResponseHandler<LoginResponse,FailLoginResponse>(success: successLogin, fail: failLogin)
-        executePostRequest(param: user, handler: handler)
+//        self.success = sucess
+//        self.fail = fail
+//        let handler = BaseResponseHandler<LoginResponse,FailLoginResponse>(success: successLogin, fail: failLogin)
+//        executePostRequest(param: user, handler: handler)
+        
+        let params: [String : Any] =  [
+            "username": user.login,
+            "password": user.password,
+            "deviceInfo": [
+                "name": "MacBook Pro — user",
+                "deviceType": "IPHONE",
+                "uuid":  "621DF1D4-D76E-451C-9609-8B54E7A4F8C1"
+            ]
+        ]
+        
+        let tokenStorage: TokenStorage = TokenStorageUserDefaults()
+        
+        SessionManager.default.request(URLs.login, method: .post, parameters: params, encoding: JSONEncoding.prettyPrinted)
+                .validate()
+                .responseString { response in
+
+                    debugPrint(response)
+                    switch response.result {
+                    case .success(_):
+                        if let headers = response.response?.allHeaderFields as? [String: Any],
+                            let accessToken = headers["X-Auth-Token"] as? String,
+                            let refreshToken = headers["X-Remember-Me-Token"] as? String
+                        {
+                            tokenStorage.accessToken = accessToken
+                            tokenStorage.refreshToken = refreshToken
+                            sucess?()
+                            
+                        } else {
+                            let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
+                            fail?(ErrorResponse.error(error))
+                        }
+                    case .failure(let error):
+                        fail?(ErrorResponse.error(error))
+                    }
+            }
+        
     }
     
     func autificationByRememberMe(sucess:SuccessLogin?, fail: FailResponse?) {
         let user = AuthenticationUserByRememberMe()
-        self.success = sucess
-        self.fail = fail
-        let handler = BaseResponseHandler<LoginResponse,FailLoginResponse>(success: successLogin, fail: failLogin)
-        executePostRequest(param: user, handler: handler)
+//        self.success = sucess
+//        self.fail = fail
+//        let handler = BaseResponseHandler<LoginResponse,FailLoginResponse>(success: successLogin, fail: failLogin)
+//        executePostRequest(param: user, handler: handler)
     }
     
     func autificationByToken(sucess:SuccessLogin?, fail: FailResponse?) {
         let user = AuthenticationUserByToken()
-        self.success = sucess
-        self.fail = fail
-        let handler = BaseResponseHandler<LoginResponse,FailLoginResponse>(success: successLogin, fail: failLogin)
-        executePostRequest(param: user, handler: handler)
+//        self.success = sucess
+//        self.fail = fail
+//        let handler = BaseResponseHandler<LoginResponse,FailLoginResponse>(success: successLogin, fail: failLogin)
+//        executePostRequest(param: user, handler: handler)
     }
     
     func turkcellAutification(user: Authentication3G, sucess:SuccessLogin?, fail: FailResponse?) {
-        self.success = sucess
-        self.fail = fail
-        let handler = BaseResponseHandler<LoginResponse,FailLoginResponse>(success: successLogin, fail: fail)
-        executePostRequest(param: user, handler: handler)
+//        self.success = sucess
+//        self.fail = fail
+//        let handler = BaseResponseHandler<LoginResponse,FailLoginResponse>(success: successLogin, fail: fail)
+//        executePostRequest(param: user, handler: handler)
     }
     
     func logout(success:SuccessLogout?) {

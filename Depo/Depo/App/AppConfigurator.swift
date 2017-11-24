@@ -8,6 +8,7 @@
 
 import UIKit
 import SDWebImage
+import Alamofire
 
 class AppConfigurator {
     
@@ -20,6 +21,14 @@ class AppConfigurator {
         CoreDataStack.default.appendLocalMediaItems(nil)
         
         self.configureSDWebImage()
+        
+        let urls: AuthorizationURLs = AuthorizationURLsImp()
+        let tokenStorage: TokenStorage = TokenStorageUserDefaults()
+        let auth: AuthorizationRepository = AuthorizationRepositoryImp(urls: urls, tokenStorage: tokenStorage)
+        
+        let sessionManager = SessionManager.default
+        sessionManager.retrier = auth
+        sessionManager.adapter = auth
     }
     
     class private func configureSDWebImage() {

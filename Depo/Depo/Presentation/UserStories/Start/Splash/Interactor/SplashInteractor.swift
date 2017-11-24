@@ -17,6 +17,13 @@ class SplashInteractor: SplashInteractorInput {
     }
 
     func startLoginInBackroung(){
+        let tokenStorage: TokenStorage = TokenStorageUserDefaults()
+        
+        if tokenStorage.accessToken == nil {
+            failLogin()
+        } else {
+            successLogin()
+        }
 //        if ApplicationSession.sharedSession.session.rememberMe {
 //            authByRememberMe()
 //        } else {
@@ -24,19 +31,19 @@ class SplashInteractor: SplashInteractorInput {
 //        }
     }
     
-    private func authByRememberMe() {
-        output.startAsyncOperation()
-        
-        let success: SuccessLogin = { [weak self] in
-            self?.successLogin()
-        }
-        
-        let fail: FailResponse = { [weak self] (failObject) in
-            self?.failLogin()
-        }
-        
-        AuthenticationService().authification(success: success, fail: fail)
-    }
+//    private func authByRememberMe() {
+//        output.startAsyncOperation()
+//
+//        let success: SuccessLogin = { [weak self] in
+//            self?.successLogin()
+//        }
+//
+//        let fail: FailResponse = { [weak self] (failObject) in
+//            self?.failLogin()
+//        }
+//
+//        AuthenticationService().authification(success: success, fail: fail)
+//    }
     
     func successLogin(){
         DispatchQueue.main.async {
