@@ -28,15 +28,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         view.onShowSelectedItem(at: index, from: items)
         var barConfig = interactor.bottomBarConfig
         
-        if items[index].syncStatus != .notSynced {
-            barConfig = EditingBarConfig(elementsConfig: barConfig.elementsConfig + [.delete], style: .black, tintColor: nil)
-        }
         
-        if items[index].syncStatus == .notSynced {
-            barConfig = EditingBarConfig(elementsConfig: barConfig.elementsConfig + [.sync], style: .black, tintColor: nil)
-        } else if items[index].syncStatus == .synced {
-            barConfig = EditingBarConfig(elementsConfig: barConfig.elementsConfig + [.download], style: .black, tintColor: nil)
-        }
 //        if items[index].fileType == .image {
 //            
 //        }
@@ -47,6 +39,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     func setSelectedItemIndex(selectedIndex: Int) {
         interactor.setSelectedItemIndex(selectedIndex: selectedIndex)
         view.onItemSelected(at: selectedIndex, from: interactor.allItems)
+        bottomBarPresenter?.setupTabBarWith(config: interactor.bottomBarConfig)
     }
     
     func onInfo(object: Item){
