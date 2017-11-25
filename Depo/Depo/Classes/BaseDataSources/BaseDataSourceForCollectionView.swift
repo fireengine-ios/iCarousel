@@ -155,7 +155,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             return originalItemsArray
         }
         var tempoAllItemsMD5 = (allMediaItems.count > 0) ? allMediaItems.map{return $0.md5} : originalItemsArray.map{return $0.md5}
-//        var remoteItemsMD5List = originalItemsArray.map{return $0.md5}
         if !isPaginationDidEnd {
             guard let lastRemoteObject = originalItemsArray.last else {
                 return originalItemsArray
@@ -167,13 +166,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
                     }
                     continue
                 }
-//                else {
-//                    tempoArray.append(localItem)
-//                    tempoAllItemsMD5.append(localItem.md5)
-//                    if let unwrpedIndex = allLocalItems.index(of: localItem) {
-//                        allLocalItems.remove(at: unwrpedIndex)
-//                    }
-//                }
                 
                 switch currentSortType {
                 case .timeUp, .timeUpWithoutSection:

@@ -361,8 +361,8 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
                 localPlayer!.replaceCurrentItem(with: plauerItem)
                 playerController = AVPlayerViewController()
                 playerController!.player = localPlayer!
-                self.present(playerController!, animated: true) {[weak playerController] in
-                    playerController?.player!.play()
+                self.present(playerController!, animated: true) { [weak playerController] in
+                    playerController?.player?.play()
                 }
             }
 
