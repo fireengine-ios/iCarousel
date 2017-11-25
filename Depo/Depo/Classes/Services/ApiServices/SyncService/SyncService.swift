@@ -54,25 +54,25 @@ class SyncService: NSObject {
     
     @objc func startSyncImmediately() {
         timeLastAutoSync = NSDate().timeIntervalSince1970
-        if (isSyncing) {
-            hasNewItemsToSync = true
-        }
         self.startAutoSync()
     }
     
     @objc func onReachabilityChanged() {
         if isSyncing {
             if !reachabilityService.isReachable {
-                hasNewItemsToSync = true
                 stopSync()
+                hasNewItemsToSync = true
             }
         } else {
-            startSyncImmediately()
+            if reachabilityService.isReachable {
+                startSyncImmediately()
+            }
         }
     }
     
     func startSync(imageViaWiFiOnly: Bool, videoViaWiFiOnly: Bool) {
-        if (isSyncing){
+        if (isSyncing) {
+            hasNewItemsToSync = true
             return
         }
         
