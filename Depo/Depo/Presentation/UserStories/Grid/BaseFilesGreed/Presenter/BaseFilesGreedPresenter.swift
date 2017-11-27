@@ -399,8 +399,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 actionTypes.remove(at: index)
             }
             
-            if selectedItems.count == 1 {
-                actionTypes.append(.rename)
+            if selectedItems.count != 1, let renameIndex = actionTypes.index(of: .rename) {
+                actionTypes.remove(at: renameIndex)
             }
             
             let noSyncItems = selectedItems.filter{ $0.syncStatus != SyncWrapperedStatus.synced }
