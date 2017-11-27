@@ -212,19 +212,19 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
     }
     
     @IBAction func onSuggestionButton(){
-        if (complaint){
-            onComplaintButton()
+        guard !suggeston else {
+            return
         }
-        suggeston = !suggeston
-        suggestionButton.setImage(getImageForChecbox(isSelected: suggeston), for: .normal)
+        
+        toggleButtons()
     }
     
     @IBAction func onComplaintButton(){
-        if (suggeston){
-            onSuggestionButton()
+        guard !complaint else {
+            return
         }
-        complaint = !complaint
-        complaintButton.setImage(getImageForChecbox(isSelected: complaint), for: .normal)
+        
+        toggleButtons()
     }
     
     @IBAction func onSendButton(){
@@ -257,6 +257,13 @@ class FeedbackViewController: UIViewController, FeedbackViewInput, DropDovnViewD
         if (index < languagesArray.count){
             selectedLanguage = languagesArray[index]
         }
+    }
+    
+    private func toggleButtons() {
+        suggeston = !suggeston
+        complaint = !complaint
+        suggestionButton.setImage(getImageForChecbox(isSelected: suggeston), for: .normal)
+        complaintButton.setImage(getImageForChecbox(isSelected: complaint), for: .normal)
     }
     
 }

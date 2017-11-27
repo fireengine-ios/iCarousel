@@ -27,12 +27,19 @@ class FreeAppSpacePresenter: BaseFilesGreedPresenter, CustomPopUpAlertActions{
         if (dataSource.selectedItemsArray.count == 0){
             return
         }
-        customPopUp.delegate = self
-        let titleSting = String(format: TextConstants.freeAppSpaceAlertTitle, dataSource.selectedItemsArray.count)
-        customPopUp.showCustomAlert(withTitle: titleSting,
-                                    withText: TextConstants.freeAppSpaceAlertText,
-                                    firstButtonText: TextConstants.freeAppSpaceAlertCancel,
-                                    secondButtonText: TextConstants.freeAppSpaceAlertDelete)
+//        customPopUp.delegate = self
+//        let titleSting = String(format: TextConstants.freeAppSpaceAlertTitle, dataSource.selectedItemsArray.count)
+//        customPopUp.showCustomAlert(withTitle: titleSting,
+//                                    withText: TextConstants.freeAppSpaceAlertText,
+//                                    firstButtonText: TextConstants.freeAppSpaceAlertCancel,
+//                                    secondButtonText: TextConstants.freeAppSpaceAlertDelete)
+        
+        if let int = interactor as? FreeAppSpaceInteractor {
+            if let array = dataSource.getSelectedItems() as? [WrapData]{
+                startAsyncOperation()
+                int.onDeleteSelectedItems(selectedItems: array)
+            }
+        }
         
     }
     
@@ -59,12 +66,7 @@ class FreeAppSpacePresenter: BaseFilesGreedPresenter, CustomPopUpAlertActions{
     }
     
     func otherAction() {
-        startAsyncOperation()
-        if let int = interactor as? FreeAppSpaceInteractor {
-            if let array = dataSource.getSelectedItems() as? [WrapData]{
-                int.onDeleteSelectedItems(selectedItems: array)
-            }
-        }
+        
     }
     
 }

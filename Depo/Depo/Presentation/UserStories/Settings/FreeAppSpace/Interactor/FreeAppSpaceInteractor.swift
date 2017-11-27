@@ -12,8 +12,7 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
         let uuids = FreeAppSpace.default.getServerUIDSForLocalitem(localItemsArray: selectedItems)
         
         FileService().details(uuids: uuids, success: {[weak self] (objects) in
-            let localFilesForDelete = FreeAppSpace.default.getLocalFiesComaredWithServerObjects(serverObjects: objects, localObjects: selectedItems)
-            print(localFilesForDelete.count)
+            //let localFilesForDelete = FreeAppSpace.default.getLocalFiesComaredWithServerObjects(serverObjects: objects, localObjects: selectedItems)
             
             let array = FreeAppSpace.default.getLocalFiesComaredWithServerObjects(serverObjects: objects, localObjects: selectedItems)
             
@@ -33,14 +32,19 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
                     DispatchQueue.main.async {
                         presenter.onItemDeleted()
                     }
-                    if FreeAppSpace.default.isDuplicatesNotAvailable() {
-                        DispatchQueue.main.async {
-                            WrapItemOperatonManager.default.stopOperationWithType(type: .freeAppSpace)
-                            WrapItemOperatonManager.default.stopOperationWithType(type: .freeAppSpaceWarning)
-                            presenter.goBack()
-                        }
-                    }else{
-                        presenter.reloadData()
+//                    if FreeAppSpace.default.isDuplicatesNotAvailable() {
+//                        DispatchQueue.main.async {
+//                            WrapItemOperatonManager.default.stopOperationWithType(type: .freeAppSpace)
+//                            WrapItemOperatonManager.default.stopOperationWithType(type: .freeAppSpaceWarning)
+//                            presenter.goBack()
+//                        }
+//                    }else{
+//                        presenter.reloadData()
+//                    }
+                    DispatchQueue.main.async {
+                        WrapItemOperatonManager.default.stopOperationWithType(type: .freeAppSpace)
+                        WrapItemOperatonManager.default.stopOperationWithType(type: .freeAppSpaceWarning)
+                        presenter.goBack()
                     }
                 }
                 

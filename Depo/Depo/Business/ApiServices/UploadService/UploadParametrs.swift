@@ -87,7 +87,7 @@ class Upload: UploadRequestParametrs {
             HeaderConstant.XMetaStrategy         : uploadStrategy.rawValue,
             HeaderConstant.XMetaRecentServerHash : "s",
             HeaderConstant.XObjectMetaFileName   : item.name ?? tmpUUId,
-            HeaderConstant.Etag                   : md5
+//            HeaderConstant.Etag                   : md5
             //                  HeaderConstant.ContentLength         : contentLenght,
             //                  HeaderConstant.XObjectMetaParentUuid : rootFolder,
             //                  HeaderConstant.XObjectMetaSpecialFolder:uploadTo.rawValue,
@@ -130,7 +130,7 @@ final class UploadDataParametrs: UploadDataRequestParametrs {
             HeaderConstant.ContentType: "image/jpg",
             HeaderConstant.XMetaStrategy: MetaStrategy.WithoutConflictControl.rawValue,
             HeaderConstant.XMetaRecentServerHash: "s",
-            HeaderConstant.Etag: md5,
+//            HeaderConstant.Etag: md5,
             HeaderConstant.XObjectMetaFileName: tmpUUId
         ]
     }

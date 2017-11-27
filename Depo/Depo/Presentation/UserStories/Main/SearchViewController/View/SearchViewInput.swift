@@ -14,6 +14,7 @@ protocol SearchViewInput: class {
     func endSearchRequestWith(text: String)
     func successWithSuggestList(list: [SuggestionObject])
     func scrollViewDidScroll(scrollView: UIScrollView)
+    func setupUnderNavBarBar(withConfig config: GridListTopBarConfig)
     func dismissController()
     
     func showMusicBar()

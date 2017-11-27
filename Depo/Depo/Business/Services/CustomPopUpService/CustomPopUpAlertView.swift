@@ -86,7 +86,8 @@ class CustomPopUpAlert: UIView {
             infoImageHeight.constant = infoImageHeightOriginalconstant
             infoImageTop.constant = infoImageTopOriginalconstant
             addConstraint(NSLayoutConstraint(item: self, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: iPhoneWeightInfo))
-            infoImageView.image = UIImage(named: "CustomPopUpSuccess")
+            let image = UIImage(named: "successImage")
+            infoImageView.image = image
         }
         layoutIfNeeded()
     }
