@@ -154,26 +154,20 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         if tempoLocalArray.count == 0 {
             return originalItemsArray
         }
-        var tempoAllItemsMD5 = (allMediaItems.count > 0) ? allMediaItems.map{return $0.md5} : originalItemsArray.map{return $0.md5}
-//        var remoteItemsMD5List = originalItemsArray.map{return $0.md5}
+        let allItemsArray = allMediaItems + originalItemsArray
+        var allItemsMD5 = allItemsArray.map{return $0.md5}
+        debugPrint("!!!!all appended md5 is ",allItemsMD5)
         if !isPaginationDidEnd {
             guard let lastRemoteObject = originalItemsArray.last else {
                 return originalItemsArray
             }
-             for localItem in tempoLocalArray {
-                if tempoAllItemsMD5.contains(localItem.md5) {
+            for localItem in tempoLocalArray {
+                if allItemsMD5.contains(localItem.md5) {
                     if let unwrpedIndex = allLocalItems.index(of: localItem) {
                         allLocalItems.remove(at: unwrpedIndex)
                     }
                     continue
                 }
-//                else {
-//                    tempoArray.append(localItem)
-//                    tempoAllItemsMD5.append(localItem.md5)
-//                    if let unwrpedIndex = allLocalItems.index(of: localItem) {
-//                        allLocalItems.remove(at: unwrpedIndex)
-//                    }
-//                }
                 
                 switch currentSortType {
                 case .timeUp, .timeUpWithoutSection:
@@ -211,7 +205,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
                     }
                 }
                 tempoArray.append(localItem)
-                tempoAllItemsMD5.append(localItem.md5)
+                allItemsMD5.append(localItem.md5)
                 if let unwrpedIndex = allLocalItems.index(of: localItem) {
                     allLocalItems.remove(at: unwrpedIndex)
                 }
@@ -250,13 +244,14 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     }
     
     private func addByDate(lastItem: WrapData, newItem: WrapData, isMetaDate: Bool) {
-        if var lastItemCreatedDate = lastItem.creationDate,
-            var newItemCreationDate = newItem.creationDate {
-            if isMetaDate, let lastItemMetaDate = lastItem.metaData?.takenDate,
-                let newItemMetaDate = newItem.metaData?.takenDate {
-                lastItemCreatedDate =  lastItemMetaDate
-                newItemCreationDate = newItemMetaDate
-            }
+        let lastItemCreatedDate =  isMetaDate ? lastItem.metaDate : lastItem.creationDate!
+        let newItemCreationDate = isMetaDate ? newItem.metaDate : newItem.creationDate!
+//        if var lastItemCreatedDate = lastItem.creationDate,
+//            var newItemCreationDate = newItem.creationDate {
+//            if isMetaDate, let lastItemMetaDate = lastItem.metaData?.takenDate,
+//                let newItemMetaDate = newItem.metaData?.takenDate {
+            
+//            }
             if lastItemCreatedDate.getYear() == newItemCreationDate.getYear(),
                 lastItemCreatedDate.getMonth() == newItemCreationDate.getMonth() {
                 
@@ -265,10 +260,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
             } else {
                 allItems.append([newItem])
             }
-        } else {
-            allItems.append([newItem])
-        }
-        
+//        }
+//    else {
+//            allItems.append([newItem])
+//        }
+    
     }
     
     private func addByName(lastItem: WrapData, newItem: WrapData) {
