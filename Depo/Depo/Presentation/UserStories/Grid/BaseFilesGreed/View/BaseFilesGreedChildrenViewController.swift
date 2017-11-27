@@ -20,22 +20,19 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
         }
         self.setTitle(withString: mainTitle, andSubTitle: subTitle)
     }
-    
-    override  func setupSelectionStyle(isSelection: Bool){
-        if (isSelection){
-//            editingTabBar?.show()
-            self.navigationItem.leftBarButtonItem = cancelSelectionButton!
-        }else{
-//            editingTabBar?.dismiss()
-            self.navigationItem.leftBarButtonItem = nil
-            
-            if mainTitle != "" {
-                self.subTitle = output.getSortTypeString()
-            }
-            self.setTitle(withString: mainTitle, andSubTitle: subTitle)
-        }
-    }
 
+    override func startSelection(with numberOfItems: Int) {
+        self.navigationItem.leftBarButtonItem = cancelSelectionButton!
+    }
+    
+    override func stopSelection() {
+        self.navigationItem.leftBarButtonItem = nil
+        if mainTitle != "" {
+            self.subTitle = output.getSortTypeString()
+        }
+        self.setTitle(withString: mainTitle, andSubTitle: subTitle)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
