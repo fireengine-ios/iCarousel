@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="TurkcellSaturaReg.ttf">
+            <string>TurkcellSaturaReg</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ImportPhotosViewController" customModule="Depo_LifeTech" customModuleProvider="target">
+            <connections>
+                <outlet property="importCropyLabel" destination="xmE-ya-QJp" id="Ja7-gJ-96p"/>
+                <outlet property="importCropySwitch" destination="vhu-Lb-m7J" id="ZDj-wE-DeV"/>
+                <outlet property="importDropboxLabel" destination="6bQ-nV-vDX" id="qdi-Hz-FE7"/>
+                <outlet property="importDropboxSwitch" destination="M46-Ol-r8G" id="F1z-wj-WNo"/>
+                <outlet property="importFacebookLabel" destination="VPI-Qd-fe0" id="5qC-iX-FXu"/>
+                <outlet property="importFacebookSwitch" destination="hcd-ne-ugE" id="tW0-TB-7eP"/>
+                <outlet property="importInstagramLabel" destination="LyN-rW-KDA" id="QUM-IQ-XYm"/>
+                <outlet property="importInstagramSwitch" destination="KXA-kD-OLy" id="IJc-Dw-VRy"/>
+                <outlet property="view" destination="iN0-l3-epB" id="dnh-F2-y1c"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Import fearture is totally free of charge and does not affect your internet package" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zfm-OS-iBM">
+                    <rect key="frame" x="20" y="84" width="335" height="37.5"/>
+                    <fontDescription key="fontDescription" name="TurkcellSaturaReg" family="TurkcellSaturaReg" pointSize="16"/>
+                    <color key="textColor" red="0.37254901959999998" green="0.37254901959999998" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZVn-PT-4L8">
+                    <rect key="frame" x="29" y="144.5" width="326" height="31"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dropox" translatesAutoresizingMaskIntoConstraints="NO" id="7VT-4i-z0z">
+                            <rect key="frame" x="0.0" y="5.5" width="22" height="20"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Import From Dropbox" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6bQ-nV-vDX">
+                            <rect key="frame" x="36" y="5" width="174.5" height="21"/>
+                            <fontDescription key="fontDescription" name="TurkcellSaturaReg" family="TurkcellSaturaReg" pointSize="18"/>
+                            <color key="textColor" red="0.30196078431372547" green="0.30196078431372547" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="M46-Ol-r8G">
+                            <rect key="frame" x="277" y="0.0" width="51" height="31"/>
+                            <connections>
+                                <action selector="importFromDropboxSwitchValueChanged:" destination="-1" eventType="valueChanged" id="Yh9-8l-MLx"/>
+                            </connections>
+                        </switch>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="7VT-4i-z0z" firstAttribute="leading" secondItem="ZVn-PT-4L8" secondAttribute="leading" id="0G8-UH-5tA"/>
+                        <constraint firstItem="6bQ-nV-vDX" firstAttribute="leading" secondItem="ZVn-PT-4L8" secondAttribute="leading" constant="36" id="Gt1-Hk-kOK"/>
+                        <constraint firstItem="7VT-4i-z0z" firstAttribute="centerY" secondItem="ZVn-PT-4L8" secondAttribute="centerY" id="HX5-Bz-Ngy"/>
+                        <constraint firstItem="6bQ-nV-vDX" firstAttribute="centerY" secondItem="ZVn-PT-4L8" secondAttribute="centerY" id="W2w-Sy-piA"/>
+                        <constraint firstItem="M46-Ol-r8G" firstAttribute="centerY" secondItem="ZVn-PT-4L8" secondAttribute="centerY" id="Wvk-3b-Jj0"/>
+                        <constraint firstAttribute="height" constant="31" id="d1s-nk-4PR"/>
+                        <constraint firstAttribute="trailing" secondItem="M46-Ol-r8G" secondAttribute="trailing" id="psF-3o-PH3"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eqk-Rd-19j">
+                    <rect key="frame" x="29" y="197.5" width="326" height="31"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="facebook" translatesAutoresizingMaskIntoConstraints="NO" id="e1l-h0-sDt">
+                            <rect key="frame" x="0.0" y="4.5" width="10" height="22"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Import From Facebook" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VPI-Qd-fe0">
+                            <rect key="frame" x="36" y="5" width="184.5" height="21"/>
+                            <fontDescription key="fontDescription" name="TurkcellSaturaReg" family="TurkcellSaturaReg" pointSize="18"/>
+                            <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="hcd-ne-ugE">
+                            <rect key="frame" x="277" y="0.0" width="51" height="31"/>
+                            <connections>
+                                <action selector="importFromFacebookSwitchValueChanged:" destination="-1" eventType="valueChanged" id="bMo-tw-hBq"/>
+                            </connections>
+                        </switch>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="e1l-h0-sDt" firstAttribute="leading" secondItem="Eqk-Rd-19j" secondAttribute="leading" id="Bd8-Dy-Lgl"/>
+                        <constraint firstItem="VPI-Qd-fe0" firstAttribute="leading" secondItem="Eqk-Rd-19j" secondAttribute="leading" constant="36" id="Civ-nT-1iT"/>
+                        <constraint firstAttribute="height" constant="31" id="M0v-Uy-rNG"/>
+                        <constraint firstAttribute="trailing" secondItem="hcd-ne-ugE" secondAttribute="trailing" id="Rup-rz-y0u"/>
+                        <constraint firstItem="VPI-Qd-fe0" firstAttribute="centerY" secondItem="Eqk-Rd-19j" secondAttribute="centerY" id="VyW-dn-dYL"/>
+                        <constraint firstItem="hcd-ne-ugE" firstAttribute="centerY" secondItem="Eqk-Rd-19j" secondAttribute="centerY" id="bzF-05-KHU"/>
+                        <constraint firstItem="e1l-h0-sDt" firstAttribute="centerY" secondItem="Eqk-Rd-19j" secondAttribute="centerY" id="vaX-Vi-7Af"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lug-sc-2GG">
+                    <rect key="frame" x="29" y="250.5" width="326" height="31"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="instagram" translatesAutoresizingMaskIntoConstraints="NO" id="27s-Lf-hqu">
+                            <rect key="frame" x="0.0" y="4.5" width="22" height="22"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Import From Instagram" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LyN-rW-KDA">
+                            <rect key="frame" x="36" y="5" width="185" height="21"/>
+                            <fontDescription key="fontDescription" name="TurkcellSaturaReg" family="TurkcellSaturaReg" pointSize="18"/>
+                            <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="KXA-kD-OLy">
+                            <rect key="frame" x="277" y="0.0" width="51" height="31"/>
+                            <connections>
+                                <action selector="importFromInstagramSwitchValueChanged:" destination="-1" eventType="valueChanged" id="nEO-X4-HbT"/>
+                            </connections>
+                        </switch>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="27s-Lf-hqu" firstAttribute="centerY" secondItem="lug-sc-2GG" secondAttribute="centerY" id="BB2-Q0-KzC"/>
+                        <constraint firstAttribute="height" constant="31" id="E1q-L9-ejB"/>
+                        <constraint firstAttribute="trailing" secondItem="KXA-kD-OLy" secondAttribute="trailing" id="GpJ-yN-tHl"/>
+                        <constraint firstItem="KXA-kD-OLy" firstAttribute="centerY" secondItem="lug-sc-2GG" secondAttribute="centerY" id="g4H-06-oHa"/>
+                        <constraint firstItem="LyN-rW-KDA" firstAttribute="leading" secondItem="lug-sc-2GG" secondAttribute="leading" constant="36" id="pzz-oe-K2g"/>
+                        <constraint firstItem="LyN-rW-KDA" firstAttribute="centerY" secondItem="lug-sc-2GG" secondAttribute="centerY" id="tfQ-I8-XcG"/>
+                        <constraint firstItem="27s-Lf-hqu" firstAttribute="leading" secondItem="lug-sc-2GG" secondAttribute="leading" id="vfg-4J-mFQ"/>
+                    </constraints>
+                </view>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9py-wk-Ufk">
+                    <rect key="frame" x="29" y="303.5" width="326" height="31"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cropy" translatesAutoresizingMaskIntoConstraints="NO" id="wWT-6u-WhK">
+                            <rect key="frame" x="0.0" y="4.5" width="22" height="22"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Import From Cropy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xmE-ya-QJp">
+                            <rect key="frame" x="36" y="5" width="153.5" height="21"/>
+                            <fontDescription key="fontDescription" name="TurkcellSaturaReg" family="TurkcellSaturaReg" pointSize="18"/>
+                            <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vhu-Lb-m7J">
+                            <rect key="frame" x="277" y="0.0" width="51" height="31"/>
+                            <connections>
+                                <action selector="importFromCropySwitchValueChanged:" destination="-1" eventType="valueChanged" id="AFB-a3-3p9"/>
+                            </connections>
+                        </switch>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="xmE-ya-QJp" firstAttribute="centerY" secondItem="9py-wk-Ufk" secondAttribute="centerY" id="FHp-ah-PWV"/>
+                        <constraint firstItem="xmE-ya-QJp" firstAttribute="leading" secondItem="9py-wk-Ufk" secondAttribute="leading" constant="36" id="Lck-Wx-Tqm"/>
+                        <constraint firstAttribute="height" constant="31" id="Oc2-4l-rIf"/>
+                        <constraint firstAttribute="trailing" secondItem="vhu-Lb-m7J" secondAttribute="trailing" id="V1M-f5-Oq3"/>
+                        <constraint firstItem="vhu-Lb-m7J" firstAttribute="centerY" secondItem="9py-wk-Ufk" secondAttribute="centerY" id="Vb8-kh-ajc"/>
+                        <constraint firstItem="wWT-6u-WhK" firstAttribute="leading" secondItem="9py-wk-Ufk" secondAttribute="leading" id="enp-la-bdl"/>
+                        <constraint firstItem="wWT-6u-WhK" firstAttribute="centerY" secondItem="9py-wk-Ufk" secondAttribute="centerY" id="nhR-TY-mKd"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="9py-wk-Ufk" firstAttribute="trailing" secondItem="ZVn-PT-4L8" secondAttribute="trailing" id="022-iO-dJ7"/>
+                <constraint firstItem="Eqk-Rd-19j" firstAttribute="trailing" secondItem="ZVn-PT-4L8" secondAttribute="trailing" id="4Xv-PB-3Jx"/>
+                <constraint firstAttribute="trailing" secondItem="Zfm-OS-iBM" secondAttribute="trailing" constant="20" id="8K6-5q-Ch6"/>
+                <constraint firstItem="lug-sc-2GG" firstAttribute="leading" secondItem="ZVn-PT-4L8" secondAttribute="leading" id="9IC-dG-CNi"/>
+                <constraint firstItem="Zfm-OS-iBM" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="A2M-Ei-0Wr"/>
+                <constraint firstItem="lug-sc-2GG" firstAttribute="top" secondItem="Eqk-Rd-19j" secondAttribute="bottom" constant="22" id="AVw-Oy-VjU"/>
+                <constraint firstItem="Eqk-Rd-19j" firstAttribute="leading" secondItem="ZVn-PT-4L8" secondAttribute="leading" id="Mqp-7I-T0p"/>
+                <constraint firstItem="Eqk-Rd-19j" firstAttribute="top" secondItem="ZVn-PT-4L8" secondAttribute="bottom" constant="22" id="NHY-ta-dr5"/>
+                <constraint firstItem="lug-sc-2GG" firstAttribute="trailing" secondItem="ZVn-PT-4L8" secondAttribute="trailing" id="QUR-9N-8cg"/>
+                <constraint firstItem="Zfm-OS-iBM" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="84" id="Xvx-jf-MWu"/>
+                <constraint firstItem="9py-wk-Ufk" firstAttribute="leading" secondItem="ZVn-PT-4L8" secondAttribute="leading" id="cwa-tx-oy9"/>
+                <constraint firstAttribute="trailing" secondItem="ZVn-PT-4L8" secondAttribute="trailing" constant="20" id="fRP-Wg-1BZ"/>
+                <constraint firstItem="ZVn-PT-4L8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="29" id="nla-WD-dnv"/>
+                <constraint firstItem="ZVn-PT-4L8" firstAttribute="top" secondItem="Zfm-OS-iBM" secondAttribute="bottom" constant="23" id="o8f-oV-uAb"/>
+                <constraint firstItem="9py-wk-Ufk" firstAttribute="top" secondItem="lug-sc-2GG" secondAttribute="bottom" constant="22" id="piy-Jz-ewZ"/>
+            </constraints>
+            <point key="canvasLocation" x="33.5" y="54.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="cropy" width="22" height="22"/>
+        <image name="dropox" width="22" height="20"/>
+        <image name="facebook" width="10" height="22"/>
+        <image name="instagram" width="22" height="22"/>
+    </resources>
+</document>
