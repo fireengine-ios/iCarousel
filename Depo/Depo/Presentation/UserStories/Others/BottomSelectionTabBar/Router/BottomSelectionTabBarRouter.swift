@@ -7,6 +7,7 @@
 //
 
 class BottomSelectionTabBarRouter: BottomSelectionTabBarRouterInput {
+    
     func onInfo(object: Item) {
         let router = RouterVC()
         let viewContr = router.fileInfo!
@@ -21,5 +22,15 @@ class BottomSelectionTabBarRouter: BottomSelectionTabBarRouterInput {
         let router = RouterVC()
         let controller = router.addPhotosToAlbum(photos: items)
         router.pushViewControllertoTableViewNavBar(viewController: controller)
+    }
+    
+    func showPrint(items: [BaseDataSourceItem]) {
+        guard let wrapperedArray = items as? [Item] else {
+            return
+        }
+        let router = RouterVC()
+        
+        let vc = PrintInitializer.viewController(data: wrapperedArray)
+        router.pushViewController(viewController: vc)
     }
 }

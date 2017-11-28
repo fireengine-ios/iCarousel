@@ -382,6 +382,7 @@ struct TextConstants {
     static let tabBarAddToAlbumLabel = "Add To Album"
     static let tabAlbumCoverAlbumLabel = "Make album cover"
     static let tabBarEditeLabel = "Edit"
+    static let tabBarPrintLabel = "Print"
     static let tabBarDownloadLabel = "Download"
     static let tabBarSyncLabel = "Sync"
     static let tabBarMoveLabel = "Move"

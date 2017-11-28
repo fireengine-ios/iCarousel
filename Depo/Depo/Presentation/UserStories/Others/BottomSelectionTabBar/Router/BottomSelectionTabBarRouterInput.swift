@@ -9,9 +9,10 @@
 import Foundation
 
 protocol BottomSelectionTabBarRouterInput {
-    //Test
+    
     func onInfo(object: Item)
     
     func addToAlbum(items: [BaseDataSourceItem])
     
+    func showPrint(items: [BaseDataSourceItem])
 }
