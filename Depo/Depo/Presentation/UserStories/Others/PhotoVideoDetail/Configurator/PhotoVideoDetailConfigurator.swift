@@ -17,17 +17,24 @@ class PhotoVideoDetailModuleConfigurator {
         }
     }
 
+    func configureModuleFromAlbumForViewInput<UIViewController>(viewInput: UIViewController, photoVideoBottomBarConfig: EditingBarConfig, documentsBottomBarConfig: EditingBarConfig) {
+        
+        if let viewController = viewInput as? PhotoVideoDetailViewController {
+            configure(viewController: viewController, photoVideoBottomBarConfig: photoVideoBottomBarConfig, documentsBottomBarConfig: documentsBottomBarConfig, interactor: PhotoVideoAlbumDetailInteractor())
+        }
+    }
+    
     private func configure(viewController: PhotoVideoDetailViewController,
                            photoVideoBottomBarConfig: EditingBarConfig,
                            documentsBottomBarConfig: EditingBarConfig,
-                           alertSheetConfig: AlertFilesActionsSheetInitialConfig? = nil) {
+                           alertSheetConfig: AlertFilesActionsSheetInitialConfig? = nil,
+                           interactor: PhotoVideoDetailInteractor = PhotoVideoDetailInteractor()) {
         let router = PhotoVideoDetailRouter()
 
         let presenter = PhotoVideoDetailPresenter()
         presenter.view = viewController
         presenter.router = router
 
-        let interactor = PhotoVideoDetailInteractor()
         interactor.output = presenter
         interactor.photoVideoBottomBarConfig = photoVideoBottomBarConfig
         interactor.documentsBottomBarConfig = documentsBottomBarConfig
