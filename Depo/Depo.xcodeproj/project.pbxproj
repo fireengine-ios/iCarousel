@@ -763,6 +763,9 @@
 		CE6DE7571FCBE84100C23CBD /* FBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DE74D1FCBE84100C23CBD /* FBService.swift */; };
 		CE6DE7581FCBE84100C23CBD /* FBResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DE74E1FCBE84100C23CBD /* FBResponses.swift */; };
 		CE6DE7591FCBE84100C23CBD /* FBParametrs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DE74F1FCBE84100C23CBD /* FBParametrs.swift */; };
+		CE6DE75C1FCC3ECF00C23CBD /* OptInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DE75A1FCC3ECF00C23CBD /* OptInController.swift */; };
+		CE6DE75D1FCC3ECF00C23CBD /* OptInController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6DE75B1FCC3ECF00C23CBD /* OptInController.xib */; };
+		CE6DE7601FCC44F800C23CBD /* KeyboardLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DE75F1FCC44F800C23CBD /* KeyboardLayoutConstraint.swift */; };
 		CE6FBFBC1FB2DC3F008FC18C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6FBFBB1FB2DC3F008FC18C /* AppDelegate.swift */; };
 		CE79E4A81F695DA200C1F151 /* Depo_LifeTechUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE79E4A71F695DA200C1F151 /* Depo_LifeTechUITests.swift */; };
 		CE8F44E41F6AAFA80062C2E0 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F44E31F6AAFA80062C2E0 /* UITableView+Extensions.swift */; };
@@ -1833,6 +1836,9 @@
 		CE6DE74D1FCBE84100C23CBD /* FBService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBService.swift; sourceTree = "<group>"; };
 		CE6DE74E1FCBE84100C23CBD /* FBResponses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBResponses.swift; sourceTree = "<group>"; };
 		CE6DE74F1FCBE84100C23CBD /* FBParametrs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBParametrs.swift; sourceTree = "<group>"; };
+		CE6DE75A1FCC3ECF00C23CBD /* OptInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptInController.swift; sourceTree = "<group>"; };
+		CE6DE75B1FCC3ECF00C23CBD /* OptInController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptInController.xib; sourceTree = "<group>"; };
+		CE6DE75F1FCC44F800C23CBD /* KeyboardLayoutConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutConstraint.swift; sourceTree = "<group>"; };
 		CE6FBFBB1FB2DC3F008FC18C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE79E4A51F695DA200C1F151 /* Depo_LifeTechUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Depo_LifeTechUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE79E4A71F695DA200C1F151 /* Depo_LifeTechUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Depo_LifeTechUITests.swift; sourceTree = "<group>"; };
@@ -5275,6 +5281,7 @@
 				CEAE3F8F1EFD4CF100A405B2 /* Buttons */,
 				7C032B851EEFFC1A006532C8 /* SubViews */,
 				7CD1F8D41F014F150028F51A /* Router.swift */,
+				CE6DE75F1FCC44F800C23CBD /* KeyboardLayoutConstraint.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -5536,6 +5543,7 @@
 				3EABB6A70DB5801ACC311373 /* SettingsIpad */,
 				92C9F550DC7528C74BAEFD9F /* UserInfoSubView */,
 				7CDABCF21F1E3A6300C8CC16 /* UserProfile */,
+				CE6DE75E1FCC440300C23CBD /* OptInController */,
 				72836BFADA2D23CEF3EADB75 /* OTPView */,
 				7CC814511EF7A93E001DFCF0 /* AutoSync */,
 				D49886451F3EFBE200F50C95 /* ImportPhotos */,
@@ -5716,6 +5724,15 @@
 				CE6DE74F1FCBE84100C23CBD /* FBParametrs.swift */,
 			);
 			path = FBService;
+			sourceTree = "<group>";
+		};
+		CE6DE75E1FCC440300C23CBD /* OptInController */ = {
+			isa = PBXGroup;
+			children = (
+				CE6DE75B1FCC3ECF00C23CBD /* OptInController.xib */,
+				CE6DE75A1FCC3ECF00C23CBD /* OptInController.swift */,
+			);
+			path = OptInController;
 			sourceTree = "<group>";
 		};
 		CE79E4A61F695DA200C1F151 /* Depo_LifeTechUITests */ = {
@@ -6926,6 +6943,7 @@
 			files = (
 				CEAE3FDE1EFD500B00A405B2 /* HomeViewTopView.xib in Resources */,
 				CE51AD201EF90853005DCEE0 /* LoginViewController.xib in Resources */,
+				CE6DE75D1FCC3ECF00C23CBD /* OptInController.xib in Resources */,
 				CEAE3F931EFD4D7C00A405B2 /* SubPlusButtons.xib in Resources */,
 				7C634FAB1F0F936700B5B93D /* SettingsTableViewCell.xib in Resources */,
 				7C00FE191F5957570041D041 /* AppRater.bundle in Resources */,
@@ -7313,6 +7331,7 @@
 				7C355E1A1F00E920003B004C /* CollectionViewCellForController.swift in Sources */,
 				CE2F55FD1F7551CD00F49DA1 /* AccountResponse.swift in Sources */,
 				7CF6BDE11F0B97050066709E /* CollectionViewCellForAudio.swift in Sources */,
+				CE6DE7601FCC44F800C23CBD /* KeyboardLayoutConstraint.swift in Sources */,
 				CE51ABCD1EF90853005DCEE0 /* AutoSyncInitializer.swift in Sources */,
 				7C49881B1F3320420039C5F2 /* CreateStoryPhotosOrderRouter.swift in Sources */,
 				CE51ABD01EF90853005DCEE0 /* UpdateServerIntegration.m in Sources */,
@@ -8029,6 +8048,7 @@
 				10CC7D3FA3B7A3A380C4E7D2 /* FreeAppSpaceInteractor.swift in Sources */,
 				868B89BA3A01CCDC66E16667 /* FreeAppSpaceRouter.swift in Sources */,
 				B7C673A176A577E30FAB824E /* FreeAppSpaceConfigurator.swift in Sources */,
+				CE6DE75C1FCC3ECF00C23CBD /* OptInController.swift in Sources */,
 				29F301A021F9712D24CB97EE /* FreeAppSpaceInitializer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
