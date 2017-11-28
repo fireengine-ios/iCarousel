@@ -451,14 +451,12 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         debugPrint("finished")
         dataSource.setSelectionState(selectionState: false)
         view.setupSelectionStyle(isSelection: false)
-        onChangeSelectedItemsCount(selectedItemsCount: 0)
     }
     
     func operationFailed(withType type: ElementTypes) {
         debugPrint("failed")
         dataSource.setSelectionState(selectionState: false)
         view.setupSelectionStyle(isSelection: false)
-        onChangeSelectedItemsCount(selectedItemsCount: 0)
     }
     
     func selectModeSelected() {
