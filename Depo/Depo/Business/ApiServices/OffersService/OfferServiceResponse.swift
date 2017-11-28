@@ -111,7 +111,31 @@ class ValidateApplePurchaseResponse: ObjectRequestResponse {
     var offer: String?
     
     override func mapping() {
-        print(json ?? "json nil")
         offer = json?.string
+    }
+}
+
+final class InitOfferResponse: ObjectRequestResponse {
+    
+    struct InitOfferKeys {
+        static let status = "status"
+        static let value = "value"
+    }
+    
+    var status: String?
+    var value: String?
+    
+    override func mapping() {
+        status = json?[InitOfferKeys.status].string ///"OK" - good
+        value = json?[InitOfferKeys.value].string
+    }
+}
+
+class VerifyOfferResponse: ObjectRequestResponse {
+    
+    var error: String?
+    
+    override func mapping() {
+        error = json?.string
     }
 }
