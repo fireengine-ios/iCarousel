@@ -8,4 +8,6 @@
 
 protocol BaseFilesGreedModuleInput: BaseItemInputPassingProtocol {
     
+    func moveBack()
+    
 }

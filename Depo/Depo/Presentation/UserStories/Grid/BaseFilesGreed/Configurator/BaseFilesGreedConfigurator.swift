@@ -101,6 +101,7 @@ class BaseFilesGreedModuleConfigurator {
         
         presenter.view = viewController
         presenter.router = router
+        router.view = viewController
         
         if let barConfig = bottomBarConfig {
             let bottomBarVCmodule = BottomSelectionTabBarModuleInitializer()

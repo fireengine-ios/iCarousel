@@ -11,7 +11,7 @@ import UIKit
 
 class AlbumItem: BaseDataSourceItem {
     
-    let imageCount: Int?
+    var imageCount: Int?
     
     let videoCount: Int?
     

@@ -45,6 +45,7 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
                     return
                 }
                 
+                uploadVC.currentVC.navigationController?.viewControllers.first?.dismiss(animated: true)
                 uploadVC.currentVC.navigationController?.popViewController(animated: true)
             }
         } else {

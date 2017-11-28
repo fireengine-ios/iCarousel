@@ -430,7 +430,7 @@ class RouterVC: NSObject {
     //MARK: Upload All files
     
     func uploadPhotos() -> UIViewController {
-        let controller = LocalAlbumModuleInitializer.initializeAlbumsController(with: "BaseFilesGreedViewController")
+        let controller = LocalAlbumModuleInitializer.initializeLocalAlbumsController(with: "BaseFilesGreedViewController")
         //UploadFilesSelectionModuleInitializer.initializeViewController(with: "BaseFilesGreedViewController")
         return controller
     }

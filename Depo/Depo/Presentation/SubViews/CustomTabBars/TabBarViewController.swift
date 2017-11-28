@@ -399,10 +399,13 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
             return
         }
         if (button == uploadBtn){
-//            debugPrint("root UUID is ", getFolderUUID())
             let router = RouterVC()
             let controller = router.uploadPhotos()
-            router.pushViewController(viewController: controller)
+            let navigation = UINavigationController(rootViewController: controller)
+            
+            navigation.navigationBar.isHidden = false
+            router.presentViewController(controller: navigation)
+            
             return
         }
     }

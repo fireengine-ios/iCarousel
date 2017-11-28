@@ -346,6 +346,10 @@
 		86593D52883EC28AF112A281 /* UploadFilesSelectionInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82180F7E73B665AC7BA7EE23 /* UploadFilesSelectionInteractorInput.swift */; };
 		868B89BA3A01CCDC66E16667 /* FreeAppSpaceRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BCED48F4E9B72F1A00F2BB /* FreeAppSpaceRouter.swift */; };
 		872D8C119282747BDC9A55C6 /* ActivityTimelineInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1FF28B20122B510C14A5A2 /* ActivityTimelineInteractorInput.swift */; };
+		873204F01FCC121B004DEB31 /* LocalAlbumCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873204EE1FCC121B004DEB31 /* LocalAlbumCollectionViewCell.swift */; };
+		873204F11FCC121B004DEB31 /* LocalAlbumCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 873204EF1FCC121B004DEB31 /* LocalAlbumCollectionViewCell.xib */; };
+		873204F31FCC3ADA004DEB31 /* PHAssetCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873204F21FCC3AD9004DEB31 /* PHAssetCollection.swift */; };
+		873ED3C81FCCB533000A0989 /* LocalAlbumConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873ED3C71FCCB533000A0989 /* LocalAlbumConfigurator.swift */; };
 		874332EF1FC4279A00873EE1 /* LocalAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874332EE1FC4279A00873EE1 /* LocalAlbumViewController.swift */; };
 		874332F51FC4280800873EE1 /* LocalAlbumRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874332F41FC4280800873EE1 /* LocalAlbumRouter.swift */; };
 		874332F91FC428FF00873EE1 /* LocalAlbumPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874332F81FC428FF00873EE1 /* LocalAlbumPresenter.swift */; };
@@ -1502,6 +1506,10 @@
 		85F5FE523AF707161585AB4D /* CompleteProfileViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CompleteProfileViewInput.swift; sourceTree = "<group>"; };
 		85FC663D1385AB04CA228302 /* FeedbackViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewOutput.swift; sourceTree = "<group>"; };
 		86781F866B6A2923E2A27B5D /* IntroduceInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceInitializer.swift; sourceTree = "<group>"; };
+		873204EE1FCC121B004DEB31 /* LocalAlbumCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAlbumCollectionViewCell.swift; sourceTree = "<group>"; };
+		873204EF1FCC121B004DEB31 /* LocalAlbumCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocalAlbumCollectionViewCell.xib; sourceTree = "<group>"; };
+		873204F21FCC3AD9004DEB31 /* PHAssetCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PHAssetCollection.swift; sourceTree = "<group>"; };
+		873ED3C71FCCB533000A0989 /* LocalAlbumConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAlbumConfigurator.swift; sourceTree = "<group>"; };
 		874332EE1FC4279A00873EE1 /* LocalAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAlbumViewController.swift; sourceTree = "<group>"; };
 		874332F41FC4280800873EE1 /* LocalAlbumRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAlbumRouter.swift; sourceTree = "<group>"; };
 		874332F81FC428FF00873EE1 /* LocalAlbumPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAlbumPresenter.swift; sourceTree = "<group>"; };
@@ -2113,6 +2121,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE51AD121EF90853005DCEE0 /* AssetsLibrary.framework in Frameworks */,
 				7CDB43321F865B0B00789FA6 /* CoreLocation.framework in Frameworks */,
 				7CFE92F11F5EC666008A3B72 /* MessageUI.framework in Frameworks */,
 				CE3AA9AF1F4D686D000157AF /* CoreData.framework in Frameworks */,
@@ -2131,7 +2140,6 @@
 				CE51AD0D1EF90853005DCEE0 /* MobileCoreServices.framework in Frameworks */,
 				CE51AD0E1EF90853005DCEE0 /* CoreTelephony.framework in Frameworks */,
 				CE51AD111EF90853005DCEE0 /* MediaPlayer.framework in Frameworks */,
-				CE51AD121EF90853005DCEE0 /* AssetsLibrary.framework in Frameworks */,
 				CE51AD131EF90853005DCEE0 /* QuartzCore.framework in Frameworks */,
 				CE51AD141EF90853005DCEE0 /* libsqlite3.dylib in Frameworks */,
 				CE51AD151EF90853005DCEE0 /* AddressBook.framework in Frameworks */,
@@ -4297,6 +4305,7 @@
 			isa = PBXGroup;
 			children = (
 				87E272AE1FC429CF005B54B4 /* LocalAlbumModuleInitializer.swift */,
+				873ED3C71FCCB533000A0989 /* LocalAlbumConfigurator.swift */,
 			);
 			path = Configurator;
 			sourceTree = "<group>";
@@ -5500,6 +5509,7 @@
 		CE34718A1F03689C00B97AC3 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				873204F21FCC3AD9004DEB31 /* PHAssetCollection.swift */,
 				CEC3C22E1FB997A600C3D67F /* FromNib.swift */,
 				CEDFDF0C1FBEE5F9006BFCAE /* UIApplication+topController.swift */,
 				CEDFDF0E1FBEE616006BFCAE /* FirstResponder.swift */,
@@ -6115,6 +6125,8 @@
 				D47864011F3F330200EFDC6D /* SubscriptionPlanCollectionViewCell.xib */,
 				7C0435051F4DBAAF00193C75 /* AlbumCollectionViewCell.swift */,
 				7C0435061F4DBAAF00193C75 /* AlbumCollectionViewCell.xib */,
+				873204EE1FCC121B004DEB31 /* LocalAlbumCollectionViewCell.swift */,
+				873204EF1FCC121B004DEB31 /* LocalAlbumCollectionViewCell.xib */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -7097,6 +7109,7 @@
 				7C634FA11F0F7C2C00B5B93D /* UserInfoSubViewViewController.xib in Resources */,
 				7CEEC1C11F332B0000BD433F /* PhotosOrderCollectionViewCell.xib in Resources */,
 				CE2F561F1F7552A900F49DA1 /* PackagesViewController.xib in Resources */,
+				873204F11FCC121B004DEB31 /* LocalAlbumCollectionViewCell.xib in Resources */,
 				8C5408491F62AD9100D4717A /* GridListTopBarSortingTableCell.xib in Resources */,
 				CEBBDE0B1F01E69B00CDF527 /* TurkcellSaturaIta.ttf in Resources */,
 				CE0ED9751FBC0F5A00487632 /* PasscodeViewImp.xib in Resources */,
@@ -7320,6 +7333,7 @@
 				CE907A311F94D49900D2F8CE /* MulticastDelegate.swift in Sources */,
 				7C1F89951F7140AF00740177 /* PopUpSwipeCell.swift in Sources */,
 				CE51AB6C1EF90853005DCEE0 /* LoginPresenter.swift in Sources */,
+				873ED3C81FCCB533000A0989 /* LocalAlbumConfigurator.swift in Sources */,
 				CE51AB6E1EF90853005DCEE0 /* CurioLocationManager.m in Sources */,
 				CE3AA9C31F4D860F000157AF /* LifeBoxModel.xcdatamodeld in Sources */,
 				CE51AB701EF90853005DCEE0 /* AutoSyncViewInput.swift in Sources */,
@@ -7642,6 +7656,7 @@
 				D49886621F3EFBE200F50C95 /* ImportPhotosViewOutput.swift in Sources */,
 				CE2F55FC1F7551CD00F49DA1 /* AccountService.swift in Sources */,
 				8C5408451F62A26000D4717A /* GridListTopBarSortingTableView.swift in Sources */,
+				873204F31FCC3ADA004DEB31 /* PHAssetCollection.swift in Sources */,
 				CEAE3FB21EFD4F0D00A405B2 /* HomePageInteractor.swift in Sources */,
 				CE51ACE91EF90853005DCEE0 /* PhoneVereficationViewInput.swift in Sources */,
 				7C4485091F10FE09003AF631 /* SplitIpadViewContoller.swift in Sources */,
@@ -7844,6 +7859,8 @@
 				CEDFECB91F11D1D0003D1A75 /* Dictionary.swift in Sources */,
 				D47863F31F3F18FA00EFDC6D /* UsageInfoInteractor.swift in Sources */,
 				7C6E2FA71F3304D700536DB6 /* AudioSelectionDataSource.swift in Sources */,
+				693ECBAF2ACF4DCFB3D3CE86 /* PhotoCellInteractorOutput.swift in Sources */,
+				873204F01FCC121B004DEB31 /* LocalAlbumCollectionViewCell.swift in Sources */,
 				7CFF0C8E1F4C1E1800E72E6A /* AlbumItem.swift in Sources */,
 				7CDABD0C1F1E3A6300C8CC16 /* UserProfileRouter.swift in Sources */,
 				7C0DBC311F2F2CE000F90590 /* SelectionImageView.swift in Sources */,

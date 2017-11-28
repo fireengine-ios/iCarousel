@@ -94,33 +94,42 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     func getAllAlbums() -> [AlbumItem] {
-        let fetchResult = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .albumRegular, options: nil)
+        let album = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: nil)
+        let smartAlbum = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .any, options: nil)
         
         var albums = [AlbumItem]()
-        fetchResult.enumerateObjects { (object, index, stop) in
-            let item = AlbumItem(uuid: object.localIdentifier,
-                                          name: object.localizedTitle,
-                                          creationDate: nil,
-                                          lastModifiDate: nil,
-                                          fileType: .photoAlbum,
-                                          syncStatus: .unknown,
-                                          isLocalItem: true)
-            let fetchOptions = PHFetchOptions()
-            fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-            fetchOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
-            if let asset = PHAsset.fetchAssets(in: object, options: fetchOptions).firstObject {
-                let info = self.fullInfoAboutAsset(asset: asset)
-                
-                let baseMediaContent = BaseMediaContent(curentAsset: asset,
-                                                        urlToFile: info.url,
-                                                        size: info.size,
-                                                        md5: info.md5)
-                item.preview = WrapData(baseModel: baseMediaContent)
+        
+        [album, smartAlbum].forEach { album in
+            album.enumerateObjects { (object, index, stop) in
+                if object.photosCount > 0 {
+                    let item = AlbumItem(uuid: object.localIdentifier,
+                                         name: object.localizedTitle,
+                                         creationDate: nil,
+                                         lastModifiDate: nil,
+                                         fileType: .photoAlbum,
+                                         syncStatus: .unknown,
+                                         isLocalItem: true)
+                    item.imageCount = object.photosCount
+                    
+                    let fetchOptions = PHFetchOptions()
+                    fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+                    fetchOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
+                    
+                    if let asset = PHAsset.fetchAssets(in: object, options: fetchOptions).firstObject {
+                        let info = self.fullInfoAboutAsset(asset: asset)
+                        
+                        let baseMediaContent = BaseMediaContent(curentAsset: asset,
+                                                                urlToFile: info.url,
+                                                                size: info.size,
+                                                                md5: info.md5)
+                        item.preview = WrapData(baseModel: baseMediaContent)
+                    }
+                    
+                    albums.append(item)
+                }
             }
-            
-            albums.append(item)
         }
-
+        
         return albums
     }
     

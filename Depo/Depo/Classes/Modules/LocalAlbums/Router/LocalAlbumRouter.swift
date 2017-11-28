@@ -7,7 +7,7 @@
 //
 
 class LocalAlbumRouter: BaseFilesGreedRouter {
-    
+        
     override func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]) {
         let router = RouterVC()
         
@@ -16,13 +16,14 @@ class LocalAlbumRouter: BaseFilesGreedRouter {
                 return
             }
             let controller = router.uploadPhotos(rootUUID: album.uuid)
-            router.pushViewController(viewController: controller)
+
+            view.navigationController?.pushViewController(controller, animated: true)
             return
         }
-        if (item.fileType == .musicPlayList){
-            
-            return
-        }
+    }
+    
+    override func showBack() {
+        view.dismiss(animated: true, completion: {})
     }
     
 }
