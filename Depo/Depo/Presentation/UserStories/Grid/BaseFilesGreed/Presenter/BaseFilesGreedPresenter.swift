@@ -483,5 +483,9 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func getSortTypeString() -> String {
         return self.sortedRule.descriptionForTitle
     }
+    
+    func moveBack() {
+        router.showBack()
+    }
 }
 

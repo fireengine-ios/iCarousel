@@ -45,4 +45,6 @@ protocol BaseFilesGreedViewOutput {
     func filtersTopBar(cahngedTo filters: [MoreActionsConfig.MoreActionsFileType])
     
     func moreActionsPressed(sender: Any)
+    
+    func moveBack()
 }

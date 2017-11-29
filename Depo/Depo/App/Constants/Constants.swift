@@ -406,6 +406,7 @@ struct TextConstants {
     //MARK: Albums
     static let albumsTitle = "Albums"
     static let selectAlbumButtonTitle = "Add"
+    static let uploadPhotos = "Upload Photos"
     
     //MARK: Feedback View
     static let feedbackViewTitle = "Thanks for leaving a comment!"
