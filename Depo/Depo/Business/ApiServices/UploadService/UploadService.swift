@@ -142,6 +142,7 @@ final class UploadService: BaseRequestService {
         let operations: [UploadOperations] = itemsToUpload.flatMap {
             let operation = UploadOperations(item: $0, uploadType: .fromHomePage, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, success: { (finishedOperation) in
                 finishedOperation.item.syncStatus = .synced
+                finishedOperation.item.isLocalItem = false
                 CoreDataStack.default.appendOnlyNewItems(items: [finishedOperation.item])
                 
                 guard self.allUploadOperationsCount != 0 else {

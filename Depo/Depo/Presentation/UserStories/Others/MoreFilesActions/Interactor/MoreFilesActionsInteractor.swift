@@ -287,13 +287,12 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
     }
     
     func addToFavorites(items: [BaseDataSourceItem]) {
-        guard let items = items as? [Item] else { //FIXME: transform all to BaseDataSourceItem
-            return
-        }
-        output?.operationStarted(type: .addToFavorites)
-        fileService.addToFavourite(files: items,
-                                   success: succesAction(elementType: .addToFavorites),
-                                   fail: failAction(elementType: .addToFavorites))
+        sync(items: items, action: { [weak self] in
+            guard let items = items as? [WrapData] else { return }
+            self?.fileService.addToFavourite(files: items,
+                                       success: self?.succesAction(elementType: .addToFavorites),
+                                       fail: self?.failAction(elementType: .addToFavorites))
+        }, cancel: {})
     }
     
     func removeFromFavorites(items: [BaseDataSourceItem]) {
