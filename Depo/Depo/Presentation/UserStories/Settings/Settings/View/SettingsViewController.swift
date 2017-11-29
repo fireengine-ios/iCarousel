@@ -50,6 +50,9 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
                              bundle: nil)
         
         tableView.register(nib, forCellReuseIdentifier: CellsIdConstants.settingTableViewCellID)
+        tableView.register(UINib.init(nibName: CellsIdConstants.settingsTableViewSwitchCellID,
+                                      bundle: nil),
+                           forCellReuseIdentifier: CellsIdConstants.settingsTableViewSwitchCellID)
         
         tableView.backgroundColor = UIColor.clear
         
@@ -127,14 +130,24 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.settingTableViewCellID, for: indexPath)
-        guard let  settingCell = cell as? SettingsTableViewCell else {
+
+        let isSecurityCell = (indexPath == IndexPath(row: 4, section: 1) || indexPath == IndexPath(row: 5, section: 1))
+
+        let reusableID = isSecurityCell ? CellsIdConstants.settingsTableViewSwitchCellID : CellsIdConstants.settingTableViewCellID
+        let cell = tableView.dequeueReusableCell(withIdentifier: reusableID, for: indexPath)
+        let array = tableDataArray[indexPath.section]
+        if let settingCell = cell as? SettingsTableViewCell  {
+            cell.selectionStyle = .none
+            settingCell.setTextForLabel(titleText: array[indexPath.row], needShowSeparator: indexPath.row != array.count - 1)
+            return settingCell
+        } else if let settingSwitchCell = cell as? SettingsTableViewSwitchCell {
+//            settingSwitchCell.sel
+            settingSwitchCell.setTextForLabel(titleText: array[indexPath.row], needShowSeparator: indexPath.row != array.count - 1)
+            return settingSwitchCell
+        } else {
             return cell
         }
-        cell.selectionStyle = .none
-        let array = tableDataArray[indexPath.section]
-        settingCell.setTextForLabel(titleText: array[indexPath.row], needShowSeparator: indexPath.row != array.count - 1)
-        return settingCell
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
