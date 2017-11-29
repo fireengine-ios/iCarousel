@@ -14,6 +14,8 @@ class BaseViewController: UIViewController {
     
     var needShowTabBar: Bool = false
     
+    var floatingButtonsArray = [FloatingButtonsType]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

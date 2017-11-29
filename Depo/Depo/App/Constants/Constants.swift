@@ -129,6 +129,8 @@ struct TextConstants {
     static let upload = "Upload"
     static let createStory = "Create a Story"
     static let newFolder = "New Folder"
+    static let createAlbum = "Create album"
+    static let uploadFromLifebox = "Upload from lifebox"
     
     //MARK: - Navigation bar img names
 

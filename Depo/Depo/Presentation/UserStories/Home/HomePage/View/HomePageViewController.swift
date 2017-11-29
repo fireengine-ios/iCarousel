@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomePageViewController: UIViewController, HomePageViewInput, BaseCollectionViewDataSourceDelegate, UICollectionViewDelegate, SearchModuleOutput {
+class HomePageViewController: BaseViewController, HomePageViewInput, BaseCollectionViewDataSourceDelegate, UICollectionViewDelegate, SearchModuleOutput {
 
     var output: HomePageViewOutput!
     
@@ -194,6 +194,7 @@ class HomePageViewController: UIViewController, HomePageViewInput, BaseCollectio
     }
     
     func previewSearchResultsHide() { }
+    
 }
 
 

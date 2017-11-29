@@ -53,14 +53,13 @@
                     <color key="selectedImageTintColor" red="0.2666666667" green="0.80000000000000004" blue="0.81568627449999997" alpha="1" colorSpace="calibratedRGB"/>
                 </tabBar>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HTg-Qb-BHM">
-                    <rect key="frame" x="157.5" y="597" width="60" height="60"/>
+                    <rect key="frame" x="157" y="596" width="61" height="61"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="60" id="eNR-wi-msA"/>
-                        <constraint firstAttribute="width" constant="60" id="gh2-wD-vOm"/>
+                        <constraint firstAttribute="height" constant="61" id="eNR-wi-msA"/>
+                        <constraint firstAttribute="width" constant="61" id="gh2-wD-vOm"/>
                     </constraints>
-                    <state key="normal" image="add" backgroundImage="menu2"/>
+                    <state key="normal" image="CenterButton"/>
                     <state key="disabled" image="add"/>
-                    <state key="selected" image="menu2"/>
                     <connections>
                         <action selector="plussBtnAction:" destination="-1" eventType="touchUpInside" id="CJy-Uz-sSH"/>
                     </connections>
@@ -92,7 +91,7 @@
         </view>
     </objects>
     <resources>
-        <image name="add" width="58" height="58"/>
-        <image name="menu2" width="58" height="58"/>
+        <image name="CenterButton" width="64" height="64"/>
+        <image name="add" width="64" height="64"/>
     </resources>
 </document>

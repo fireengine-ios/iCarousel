@@ -22,6 +22,17 @@ class RouterVC: NSObject {
         return rootviewController
     }
     
+    func getFloatingButtonsArray() -> [FloatingButtonsType]{
+        let nController = navigationController
+        let viewController = nController?.viewControllers.last
+        
+        if let baseViewController = viewController as? BaseViewController{
+            return baseViewController.floatingButtonsArray
+        }
+        
+        return [FloatingButtonsType]()
+    }
+    
     // MARK: Navigation controller
     
     var navigationController: UINavigationController? {

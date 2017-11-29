@@ -31,6 +31,7 @@ struct ColorConstants {
     static let activityTimelineDraws = UIColor(red: 6/255, green: 44/255, blue: 66/255, alpha: 1)
     static let lightPeach = UIColor(red: 255/255, green: 226/255, blue: 198/255, alpha: 1)
     static let yellowButtonColor = UIColor(red: 1, green: 199/255, blue: 77/255, alpha: 1)
+    static let grayTabBarButtonsColor = UIColor(red: 155/255, green: 155/255, blue: 155/255, alpha: 1)
 }
 
 extension UIColor {
