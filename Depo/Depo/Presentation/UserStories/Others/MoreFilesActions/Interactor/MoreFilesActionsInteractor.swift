@@ -276,7 +276,11 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
     
     func createStory(items: [BaseDataSourceItem]) {
         let router = RouterVC()
-        router.createStoryName(items: items)
+        sync(items: items, action: {
+            DispatchQueue.main.async {
+                router.createStoryName(items: items)
+            }
+        }, cancel: {})
     }
     
     func addToFavorites(items: [BaseDataSourceItem]) {
