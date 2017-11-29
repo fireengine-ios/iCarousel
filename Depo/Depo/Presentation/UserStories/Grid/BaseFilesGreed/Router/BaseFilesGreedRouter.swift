@@ -9,6 +9,7 @@
 class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
     
     let player: MediaPlayer = factory.resolve()
+    weak var view: BaseFilesGreedViewController!
     
     func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]) {
         let router = RouterVC()
@@ -51,6 +52,10 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
         
         let vc = PrintInitializer.viewController(data: wrapperedArray)
         router.pushViewController(viewController: vc)
+    }
+    
+    func showBack() {
+        view.dismiss(animated: true, completion: {})
     }
         
 }

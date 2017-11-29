@@ -58,6 +58,7 @@ class EditinglBar: CustomTabBar {
         static let share = ("ShareButtonIcon", TextConstants.tabBarShareLabel)
         static let info = ("InfoButtonIcon", TextConstants.tabBarInfoLabel)
         static let edit = ("EditButtonIcon", TextConstants.tabBarEditeLabel)
+        static let print = ("PrintButtonIcon", TextConstants.tabBarPrintLabel)
         static let delete = ("DeleteShareButton", TextConstants.tabBarDeleteLabel)
         static let move = ("MoveButtonIcon", TextConstants.tabBarMoveLabel)
         static let addToAlbum = ("MoveButtonIcon", TextConstants.tabBarAddToAlbumLabel)

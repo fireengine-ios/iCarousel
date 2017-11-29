@@ -292,13 +292,6 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
     }
     
     func onItemSelected(at index: Int, from items: [PhotoVideoDetailViewInput.Item]) {
-        if let editButtonIndex = interactor?.bottomBarConfig.elementsConfig.index(of: .edit) {
-            if items[index].fileType == .video {
-               editingTabBar.disableItems(atIntdex: [editButtonIndex])
-            } else {
-                editingTabBar.enableIems(atIndex: [editButtonIndex])
-            }
-        }
     }
     
     // MARK: BaseFileContentViewDeleGate
@@ -361,8 +354,8 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
                 localPlayer!.replaceCurrentItem(with: plauerItem)
                 playerController = AVPlayerViewController()
                 playerController!.player = localPlayer!
-                self.present(playerController!, animated: true) {[weak playerController] in
-                    playerController?.player!.play()
+                self.present(playerController!, animated: true) { [weak playerController] in
+                    playerController?.player?.play()
                 }
             }
 

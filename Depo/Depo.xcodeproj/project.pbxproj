@@ -346,8 +346,17 @@
 		86593D52883EC28AF112A281 /* UploadFilesSelectionInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82180F7E73B665AC7BA7EE23 /* UploadFilesSelectionInteractorInput.swift */; };
 		868B89BA3A01CCDC66E16667 /* FreeAppSpaceRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BCED48F4E9B72F1A00F2BB /* FreeAppSpaceRouter.swift */; };
 		872D8C119282747BDC9A55C6 /* ActivityTimelineInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1FF28B20122B510C14A5A2 /* ActivityTimelineInteractorInput.swift */; };
+		873204F01FCC121B004DEB31 /* LocalAlbumCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873204EE1FCC121B004DEB31 /* LocalAlbumCollectionViewCell.swift */; };
+		873204F11FCC121B004DEB31 /* LocalAlbumCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 873204EF1FCC121B004DEB31 /* LocalAlbumCollectionViewCell.xib */; };
+		873204F31FCC3ADA004DEB31 /* PHAssetCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873204F21FCC3AD9004DEB31 /* PHAssetCollection.swift */; };
 		8766D2FF1FBDB06600316F46 /* PhotoSelectiondDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8766D2FE1FBDB06600316F46 /* PhotoSelectiondDataSource.swift */; };
 		876B212A1A0511735B065186 /* SyncContactsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245B0B417FC8FE0BAF38799E /* SyncContactsRouter.swift */; };
+		87C316061FCD77CC00845B0A /* LocalAlbumPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C315FC1FCD77CB00845B0A /* LocalAlbumPresenter.swift */; };
+		87C316071FCD77CC00845B0A /* LocalAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C315FE1FCD77CB00845B0A /* LocalAlbumViewController.swift */; };
+		87C316081FCD77CC00845B0A /* LocalAlbumModuleInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C316001FCD77CB00845B0A /* LocalAlbumModuleInitializer.swift */; };
+		87C316091FCD77CC00845B0A /* LocalAlbumConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C316011FCD77CB00845B0A /* LocalAlbumConfigurator.swift */; };
+		87C3160A1FCD77CC00845B0A /* LocalAlbumInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C316031FCD77CB00845B0A /* LocalAlbumInteractor.swift */; };
+		87C3160B1FCD77CC00845B0A /* LocalAlbumRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C316051FCD77CB00845B0A /* LocalAlbumRouter.swift */; };
 		8A1850C93CAA6D754F2E796D /* CompleteProfileInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BD358C05E4865147AD6DAE /* CompleteProfileInteractorOutput.swift */; };
 		8AC9821D58B05574782F11AB /* FeedbackViewInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E8EB45148F901AC01702F /* FeedbackViewInitializer.swift */; };
 		8BC2414816C90E31214FFA9E /* BaseFilesGreedInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3D81D8F4441B332E687B17 /* BaseFilesGreedInitializer.swift */; };
@@ -987,6 +996,7 @@
 		ECB8AAA638B83B4143502385 /* HomeHeaderViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82EFD8C000647F52E5E9F30F /* HomeHeaderViewInput.swift */; };
 		ED00E6080A9C91B4A3F19BDC /* ActionsMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4A95B8FCF8E339EF87B05 /* ActionsMenuView.swift */; };
 		EDD8CBFAF2355BDB13376953 /* ActivityTimelinePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBFD42348DB7E7086DFA5D8 /* ActivityTimelinePresenter.swift */; };
+		EF1B60441FCD9E0D00662CBC /* PhotoVideoAlbumDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1B60431FCD9E0D00662CBC /* PhotoVideoAlbumDetailInteractor.swift */; };
 		EF2EE1EEC26868913C9251BD /* FeedbackViewModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA23BA709900F6EF8480710 /* FeedbackViewModuleInput.swift */; };
 		EF9B85CF5585F042A8D5103F /* LikeFilterInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A4E83DDEBA92B2A944CD37 /* LikeFilterInteractorInput.swift */; };
 		EFA74F9E1FBF371200CF946E /* PrintService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA74F9D1FBF371100CF946E /* PrintService.swift */; };
@@ -1502,7 +1512,22 @@
 		85F5FE523AF707161585AB4D /* CompleteProfileViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CompleteProfileViewInput.swift; sourceTree = "<group>"; };
 		85FC663D1385AB04CA228302 /* FeedbackViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewOutput.swift; sourceTree = "<group>"; };
 		86781F866B6A2923E2A27B5D /* IntroduceInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceInitializer.swift; sourceTree = "<group>"; };
+		873204EE1FCC121B004DEB31 /* LocalAlbumCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAlbumCollectionViewCell.swift; sourceTree = "<group>"; };
+		873204EF1FCC121B004DEB31 /* LocalAlbumCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocalAlbumCollectionViewCell.xib; sourceTree = "<group>"; };
+		873204F21FCC3AD9004DEB31 /* PHAssetCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PHAssetCollection.swift; sourceTree = "<group>"; };
 		8766D2FE1FBDB06600316F46 /* PhotoSelectiondDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectiondDataSource.swift; sourceTree = "<group>"; };
+		87C315F01FCD779F00845B0A /* LocalAlbumPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAlbumPresenter.swift; sourceTree = "<group>"; };
+		87C315F21FCD779F00845B0A /* LocalAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAlbumViewController.swift; sourceTree = "<group>"; };
+		87C315F41FCD779F00845B0A /* LocalAlbumModuleInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAlbumModuleInitializer.swift; sourceTree = "<group>"; };
+		87C315F51FCD779F00845B0A /* LocalAlbumConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAlbumConfigurator.swift; sourceTree = "<group>"; };
+		87C315F71FCD779F00845B0A /* LocalAlbumInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAlbumInteractor.swift; sourceTree = "<group>"; };
+		87C315F91FCD779F00845B0A /* LocalAlbumRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAlbumRouter.swift; sourceTree = "<group>"; };
+		87C315FC1FCD77CB00845B0A /* LocalAlbumPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalAlbumPresenter.swift; sourceTree = "<group>"; };
+		87C315FE1FCD77CB00845B0A /* LocalAlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalAlbumViewController.swift; sourceTree = "<group>"; };
+		87C316001FCD77CB00845B0A /* LocalAlbumModuleInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalAlbumModuleInitializer.swift; sourceTree = "<group>"; };
+		87C316011FCD77CB00845B0A /* LocalAlbumConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalAlbumConfigurator.swift; sourceTree = "<group>"; };
+		87C316031FCD77CB00845B0A /* LocalAlbumInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalAlbumInteractor.swift; sourceTree = "<group>"; };
+		87C316051FCD77CB00845B0A /* LocalAlbumRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalAlbumRouter.swift; sourceTree = "<group>"; };
 		8831E41C046C33B2DA7E6FFE /* SettingsViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsViewInput.swift; sourceTree = "<group>"; };
 		8A4620DB4814DE9B2BF69415 /* SplashModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashModuleInput.swift; sourceTree = "<group>"; };
 		8A5C72DCCEC8922AEA678B57 /* HomeHeaderInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HomeHeaderInteractor.swift; sourceTree = "<group>"; };
@@ -2071,6 +2096,7 @@
 		EDE8BFD15AF72B3992E638CF /* ExpandStorageConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ExpandStorageConfigurator.swift; sourceTree = "<group>"; };
 		EED76B8EC80CDF294DAF95F7 /* ActivityTimelineRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityTimelineRouter.swift; sourceTree = "<group>"; };
 		EEEFEDC411CE8C9592155BE8 /* UploadedItemsViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadedItemsViewInput.swift; sourceTree = "<group>"; };
+		EF1B60431FCD9E0D00662CBC /* PhotoVideoAlbumDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoAlbumDetailInteractor.swift; sourceTree = "<group>"; };
 		EFA74F9D1FBF371100CF946E /* PrintService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintService.swift; sourceTree = "<group>"; };
 		EFA74FA11FBF378F00CF946E /* PrintPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintPresenter.swift; sourceTree = "<group>"; };
 		EFA74FA31FBF378F00CF946E /* PrintViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintViewController.swift; sourceTree = "<group>"; };
@@ -2112,6 +2138,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE51AD121EF90853005DCEE0 /* AssetsLibrary.framework in Frameworks */,
 				7CDB43321F865B0B00789FA6 /* CoreLocation.framework in Frameworks */,
 				7CFE92F11F5EC666008A3B72 /* MessageUI.framework in Frameworks */,
 				CE3AA9AF1F4D686D000157AF /* CoreData.framework in Frameworks */,
@@ -2130,7 +2157,6 @@
 				CE51AD0D1EF90853005DCEE0 /* MobileCoreServices.framework in Frameworks */,
 				CE51AD0E1EF90853005DCEE0 /* CoreTelephony.framework in Frameworks */,
 				CE51AD111EF90853005DCEE0 /* MediaPlayer.framework in Frameworks */,
-				CE51AD121EF90853005DCEE0 /* AssetsLibrary.framework in Frameworks */,
 				CE51AD131EF90853005DCEE0 /* QuartzCore.framework in Frameworks */,
 				CE51AD141EF90853005DCEE0 /* libsqlite3.dylib in Frameworks */,
 				CE51AD151EF90853005DCEE0 /* AddressBook.framework in Frameworks */,
@@ -2164,6 +2190,7 @@
 		051E1DEA19CAC2F900FD1E03 = {
 			isa = PBXGroup;
 			children = (
+				87C315EE1FCD779F00845B0A /* LocalAlbums */,
 				051E1DFC19CAC2F900FD1E03 /* Depo */,
 				CE79E4A61F695DA200C1F151 /* Depo_LifeTechUITests */,
 				051E1DF519CAC2F900FD1E03 /* Frameworks */,
@@ -4248,6 +4275,113 @@
 			path = Presenter;
 			sourceTree = "<group>";
 		};
+		87C315EE1FCD779F00845B0A /* LocalAlbums */ = {
+			isa = PBXGroup;
+			children = (
+				87C315EF1FCD779F00845B0A /* Presenter */,
+				87C315F11FCD779F00845B0A /* View */,
+				87C315F31FCD779F00845B0A /* Configurator */,
+				87C315F61FCD779F00845B0A /* Interactor */,
+				87C315F81FCD779F00845B0A /* Router */,
+			);
+			name = LocalAlbums;
+			path = Depo/Presentation/UserStories/Others/LocalAlbums;
+			sourceTree = "<group>";
+		};
+		87C315EF1FCD779F00845B0A /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				87C315F01FCD779F00845B0A /* LocalAlbumPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		87C315F11FCD779F00845B0A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				87C315F21FCD779F00845B0A /* LocalAlbumViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		87C315F31FCD779F00845B0A /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				87C315F41FCD779F00845B0A /* LocalAlbumModuleInitializer.swift */,
+				87C315F51FCD779F00845B0A /* LocalAlbumConfigurator.swift */,
+			);
+			path = Configurator;
+			sourceTree = "<group>";
+		};
+		87C315F61FCD779F00845B0A /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				87C315F71FCD779F00845B0A /* LocalAlbumInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		87C315F81FCD779F00845B0A /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				87C315F91FCD779F00845B0A /* LocalAlbumRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		87C315FA1FCD77CB00845B0A /* LocalAlbums */ = {
+			isa = PBXGroup;
+			children = (
+				87C315FB1FCD77CB00845B0A /* Presenter */,
+				87C315FD1FCD77CB00845B0A /* View */,
+				87C315FF1FCD77CB00845B0A /* Configurator */,
+				87C316021FCD77CB00845B0A /* Interactor */,
+				87C316041FCD77CB00845B0A /* Router */,
+			);
+			path = LocalAlbums;
+			sourceTree = "<group>";
+		};
+		87C315FB1FCD77CB00845B0A /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				87C315FC1FCD77CB00845B0A /* LocalAlbumPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		87C315FD1FCD77CB00845B0A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				87C315FE1FCD77CB00845B0A /* LocalAlbumViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		87C315FF1FCD77CB00845B0A /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				87C316001FCD77CB00845B0A /* LocalAlbumModuleInitializer.swift */,
+				87C316011FCD77CB00845B0A /* LocalAlbumConfigurator.swift */,
+			);
+			path = Configurator;
+			sourceTree = "<group>";
+		};
+		87C316021FCD77CB00845B0A /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				87C316031FCD77CB00845B0A /* LocalAlbumInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		87C316041FCD77CB00845B0A /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				87C316051FCD77CB00845B0A /* LocalAlbumRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 		88624F2AE6A9AF52410B741C /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
@@ -5129,6 +5263,7 @@
 		C206234150DD1B9E1424D61C /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				87C315FA1FCD77CB00845B0A /* LocalAlbums */,
 				8C6EF8601F348B5C002AC795 /* BottomSelectionTabBar */,
 				8C7786851F3F38D9005CB432 /* MusicBar */,
 				8C77868A1F3F38EF005CB432 /* VisualMusicPlayer */,
@@ -5431,6 +5566,7 @@
 		CE34718A1F03689C00B97AC3 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				873204F21FCC3AD9004DEB31 /* PHAssetCollection.swift */,
 				CEC3C22E1FB997A600C3D67F /* FromNib.swift */,
 				CEDFDF0C1FBEE5F9006BFCAE /* UIApplication+topController.swift */,
 				CEDFDF0E1FBEE616006BFCAE /* FirstResponder.swift */,
@@ -6057,6 +6193,8 @@
 				D47864011F3F330200EFDC6D /* SubscriptionPlanCollectionViewCell.xib */,
 				7C0435051F4DBAAF00193C75 /* AlbumCollectionViewCell.swift */,
 				7C0435061F4DBAAF00193C75 /* AlbumCollectionViewCell.xib */,
+				873204EE1FCC121B004DEB31 /* LocalAlbumCollectionViewCell.swift */,
+				873204EF1FCC121B004DEB31 /* LocalAlbumCollectionViewCell.xib */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -6793,6 +6931,7 @@
 				F9ACD7C82C97B84CF13A1A92 /* PhotoVideoDetailInteractorInput.swift */,
 				5047D2D77F166BBE66169F8E /* PhotoVideoDetailInteractorOutput.swift */,
 				B889664B5BCF5EDBAC69D0C0 /* PhotoVideoDetailInteractor.swift */,
+				EF1B60431FCD9E0D00662CBC /* PhotoVideoAlbumDetailInteractor.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -7040,6 +7179,7 @@
 				7C634FA11F0F7C2C00B5B93D /* UserInfoSubViewViewController.xib in Resources */,
 				7CEEC1C11F332B0000BD433F /* PhotosOrderCollectionViewCell.xib in Resources */,
 				CE2F561F1F7552A900F49DA1 /* PackagesViewController.xib in Resources */,
+				873204F11FCC121B004DEB31 /* LocalAlbumCollectionViewCell.xib in Resources */,
 				8C5408491F62AD9100D4717A /* GridListTopBarSortingTableCell.xib in Resources */,
 				CEBBDE0B1F01E69B00CDF527 /* TurkcellSaturaIta.ttf in Resources */,
 				CE0ED9751FBC0F5A00487632 /* PasscodeViewImp.xib in Resources */,
@@ -7377,6 +7517,7 @@
 				7CD1F8F81F0288CA0028F51A /* WiFiSyncModuleInput.swift in Sources */,
 				CE51AC041EF90853005DCEE0 /* CountiesGSMCodeCompositor.swift in Sources */,
 				CEAE3FB31EFD4F0D00A405B2 /* HomePageInteractorInput.swift in Sources */,
+				87C3160A1FCD77CC00845B0A /* LocalAlbumInteractor.swift in Sources */,
 				CEAE3FD61EFD500B00A405B2 /* BaseCollectionViewCellWithSwipe.swift in Sources */,
 				7C1F89921F70FFDF00740177 /* ViewForPopUp.swift in Sources */,
 				7C66E8AE1F979C3300D98F27 /* CreateStoryPreviewPresenter.swift in Sources */,
@@ -7389,13 +7530,16 @@
 				CEDFDF0D1FBEE5F9006BFCAE /* UIApplication+topController.swift in Sources */,
 				8C7786A91F3F38F0005CB432 /* VisualMusicPlayerViewOutput.swift in Sources */,
 				CE51AC0D1EF90853005DCEE0 /* UIAlertViewCustom.m in Sources */,
+				87C316081FCD77CC00845B0A /* LocalAlbumModuleInitializer.swift in Sources */,
 				CE51AC151EF90853005DCEE0 /* UpdaterController.m in Sources */,
 				CE4140631F0A5F6D001924E1 /* CaptchaViewController.swift in Sources */,
 				CECA331A1F73DA660093CB3C /* CollectionSortingRules.swift in Sources */,
+				EF1B60441FCD9E0D00662CBC /* PhotoVideoAlbumDetailInteractor.swift in Sources */,
 				CE51AC1E1EF90853005DCEE0 /* RegistrationDataSource.swift in Sources */,
 				8C6EF87E1F348B5C002AC795 /* BottomSelectionTabBarPresenter.swift in Sources */,
 				7CD1F8F91F0288CA0028F51A /* WiFiSyncPresenter.swift in Sources */,
 				CE3F33AF1F34881800EE37E7 /* SharedService.swift in Sources */,
+				87C3160B1FCD77CC00845B0A /* LocalAlbumRouter.swift in Sources */,
 				CE51AC221EF90853005DCEE0 /* CellsConstant.swift in Sources */,
 				CEAE3FF11EFD517300A405B2 /* GradientView.swift in Sources */,
 				D498865E1F3EFBE200F50C95 /* ImportPhotosRouterInput.swift in Sources */,
@@ -7408,6 +7552,7 @@
 				CE04525B1F2F1012001F8FA6 /* NavBarConfugurator.swift in Sources */,
 				7CD1F8FA1F0288CA0028F51A /* WiFiSyncRouter.swift in Sources */,
 				CEB1CEAA1F21E11200C9DD8F /* SwiftyJSONExtension.swift in Sources */,
+				87C316071FCD77CC00845B0A /* LocalAlbumViewController.swift in Sources */,
 				CECA95951F1610590054BDC0 /* RemoteDownloder.swift in Sources */,
 				7C634F9F1F0E6E7E00B5B93D /* BlueButtonWithWhiteText.swift in Sources */,
 				7CD1F8F61F0288CA0028F51A /* WiFiSyncInteractorInput.swift in Sources */,
@@ -7488,6 +7633,7 @@
 				CEAE3FEC1EFD517300A405B2 /* CustomNavBarButton.swift in Sources */,
 				7CDABD111F1E3A6300C8CC16 /* UserProfileViewOutput.swift in Sources */,
 				CEF69DDF1FB584F700FCE6AB /* UploadResponse.swift in Sources */,
+				87C316091FCD77CC00845B0A /* LocalAlbumConfigurator.swift in Sources */,
 				D47863F41F3F18FA00EFDC6D /* UsageInfoInteractorInput.swift in Sources */,
 				CEF69DDD1FB584CD00FCE6AB /* Result.swift in Sources */,
 				7C6E2F751F31E4C900536DB6 /* CreateStorySelectionInitializer.swift in Sources */,
@@ -7586,6 +7732,7 @@
 				D49886621F3EFBE200F50C95 /* ImportPhotosViewOutput.swift in Sources */,
 				CE2F55FC1F7551CD00F49DA1 /* AccountService.swift in Sources */,
 				8C5408451F62A26000D4717A /* GridListTopBarSortingTableView.swift in Sources */,
+				873204F31FCC3ADA004DEB31 /* PHAssetCollection.swift in Sources */,
 				CEAE3FB21EFD4F0D00A405B2 /* HomePageInteractor.swift in Sources */,
 				CE51ACE91EF90853005DCEE0 /* PhoneVereficationViewInput.swift in Sources */,
 				7C4485091F10FE09003AF631 /* SplitIpadViewContoller.swift in Sources */,
@@ -7661,6 +7808,7 @@
 				9DFBB1604A67AE7F01120790 /* CompleteProfileViewController.swift in Sources */,
 				5720F7C789BE159E29BDC7EE /* CompleteProfileModuleInput.swift in Sources */,
 				8CFF86901F0F96E600520D18 /* SyncDBUtils.m in Sources */,
+				87C316061FCD77CC00845B0A /* LocalAlbumPresenter.swift in Sources */,
 				7C6E2F9A1F31E4F800536DB6 /* CreateStoryNameViewOutput.swift in Sources */,
 				0D3A5AC196CA4CBF0837C33C /* CompleteProfilePresenter.swift in Sources */,
 				265478F6639B1332E1AD5E9E /* CompleteProfileInteractorInput.swift in Sources */,
@@ -7788,6 +7936,7 @@
 				CEDFECB91F11D1D0003D1A75 /* Dictionary.swift in Sources */,
 				D47863F31F3F18FA00EFDC6D /* UsageInfoInteractor.swift in Sources */,
 				7C6E2FA71F3304D700536DB6 /* AudioSelectionDataSource.swift in Sources */,
+				873204F01FCC121B004DEB31 /* LocalAlbumCollectionViewCell.swift in Sources */,
 				7CFF0C8E1F4C1E1800E72E6A /* AlbumItem.swift in Sources */,
 				7CDABD0C1F1E3A6300C8CC16 /* UserProfileRouter.swift in Sources */,
 				7C0DBC311F2F2CE000F90590 /* SelectionImageView.swift in Sources */,

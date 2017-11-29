@@ -130,6 +130,8 @@ struct TextConstants {
     static let upload = "Upload"
     static let createStory = "Create a Story"
     static let newFolder = "New Folder"
+    static let createAlbum = "Create album"
+    static let uploadFromLifebox = "Upload from lifebox"
     
     //MARK: - Navigation bar img names
 
@@ -383,6 +385,7 @@ struct TextConstants {
     static let tabBarAddToAlbumLabel = "Add To Album"
     static let tabAlbumCoverAlbumLabel = "Make album cover"
     static let tabBarEditeLabel = "Edit"
+    static let tabBarPrintLabel = "Print"
     static let tabBarDownloadLabel = "Download"
     static let tabBarSyncLabel = "Sync"
     static let tabBarMoveLabel = "Move"
@@ -406,6 +409,7 @@ struct TextConstants {
     //MARK: Albums
     static let albumsTitle = "Albums"
     static let selectAlbumButtonTitle = "Add"
+    static let uploadPhotos = "Upload Photos"
     
     //MARK: Feedback View
     static let feedbackViewTitle = "Thanks for leaving a comment!"

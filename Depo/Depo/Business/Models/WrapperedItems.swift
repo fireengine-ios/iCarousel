@@ -596,6 +596,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
                 let urlToFile = URL(string: url)!
                 let tmp  = LocalMediaContent(asset: asset,
                                              urlToFile: urlToFile)
+                mediaItem.metadata?.duration = asset.duration
                 patchToPreview = .localMediaContent(tmp)
             } else {
                 // WARNIG: THIS CASE INCOREECTif 
@@ -622,6 +623,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         syncStatus =  SyncWrapperedStatus(value: mediaItem.syncStatusValue)
         fileType = FileType(value: mediaItem.fileTypeValue)
         isFolder = mediaItem.isFolder
+        duration = WrapData.getDuration(duration: mediaItem.metadata?.duration)
         
         albums = mediaItem.albumsUUIDs
         
