@@ -28,11 +28,14 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
     }
     
     func selectShareType(sourceRect: CGRect?) {
-        if sharingItems.contains(where: { return $0.fileType != .image && $0.fileType != .video }) {
-            shareViaLink(sourceRect: sourceRect)
-        } else {
-            showSharingMenu(sourceRect: sourceRect)
-        }
+        sync(items: sharingItems, action: { [weak self] in
+            guard let `self` = self else { return }
+            if self.sharingItems.contains(where: { return $0.fileType != .image && $0.fileType != .video }) {
+                self.shareViaLink(sourceRect: sourceRect)
+            } else {
+                self.showSharingMenu(sourceRect: sourceRect)
+            }
+        }, cancel: {})
     }
     
     func showSharingMenu(sourceRect: CGRect?) {
