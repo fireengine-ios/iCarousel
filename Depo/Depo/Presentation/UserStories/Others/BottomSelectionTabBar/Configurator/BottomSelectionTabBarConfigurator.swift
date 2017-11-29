@@ -12,18 +12,20 @@ class BottomSelectionTabBarModuleConfigurator {
 
     func configureModuleForViewInput<UIViewController>(viewInput: UIViewController,
                                                        presenter: BottomSelectionTabBarPresenter?,
+                                                       interactor: BottomSelectionTabBarInteractor,
+                                                       router: BottomSelectionTabBarRouter,
                                                        config: EditingBarConfig) {
 
         if let viewController = viewInput as? BottomSelectionTabBarViewController {
-            configure(viewController: viewController, settablePresenter: presenter, config: config)
+            configure(viewController: viewController, settablePresenter: presenter, interactor: interactor, router: router, config: config)
         }
     }
 
     private func configure(viewController: BottomSelectionTabBarViewController,
                            settablePresenter: BottomSelectionTabBarPresenter?,
+                           interactor: BottomSelectionTabBarInteractor,
+                           router: BottomSelectionTabBarRouter,
                            config: EditingBarConfig) {
-
-        let router = BottomSelectionTabBarRouter()
         
         var presenter: BottomSelectionTabBarPresenter
         if let settablePresenter = settablePresenter {
@@ -35,7 +37,6 @@ class BottomSelectionTabBarModuleConfigurator {
         presenter.view = viewController
         presenter.router = router
 
-        let interactor = BottomSelectionTabBarInteractor()
         interactor.dataStorage.currentBarConfig = config
         interactor.output = presenter
 

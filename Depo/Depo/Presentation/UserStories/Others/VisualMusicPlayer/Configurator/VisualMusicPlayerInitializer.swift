@@ -10,13 +10,24 @@ import UIKit
 
 class VisualMusicPlayerModuleInitializer: NSObject {
 
-    //Connect with object on storyboard
-    @IBOutlet weak var visualmusicplayerViewController: VisualMusicPlayerViewController!
+    lazy var visualmusicplayerViewController = VisualMusicPlayerViewController(nibName: "VisualMusicPlayerViewController", bundle: nil)
 
     override func awakeFromNib() {
 
         let configurator = VisualMusicPlayerModuleConfigurator()
-        configurator.configureModuleForViewInput(viewInput: visualmusicplayerViewController)
+        
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .info, .move, .delete],
+                                               style: .blackOpaque, tintColor: nil)
+        configurator.configureModuleForViewInput(viewInput: visualmusicplayerViewController, bottomBarConfig: bottomBarConfig)
+    }
+    
+    func setupVC() {
+        let configurator = VisualMusicPlayerModuleConfigurator()
+        
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .info, .move, .delete],
+                                               style: .blackOpaque, tintColor: nil)
+        
+        configurator.configureModuleForViewInput(viewInput: visualmusicplayerViewController, bottomBarConfig: bottomBarConfig)
     }
 
 }
