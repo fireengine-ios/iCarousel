@@ -340,8 +340,8 @@ class AuthenticationService: BaseRequestService {
     
     func authification(success:SuccessLogin?, fail: FailResponse?, byRememberMe: Bool  = false) {
         
-        let rechability = ReachabilityService()
-        if (rechability.isReachableViaWiFi || byRememberMe ){
+        let reachability = ReachabilityService()
+        if (reachability.isReachableViaWiFi || byRememberMe ){ //TODO: check if we need byRememberMe flag
             autificationByRememberMe(sucess: success, fail: fail)
         } else {
             let user = Authentication3G()
