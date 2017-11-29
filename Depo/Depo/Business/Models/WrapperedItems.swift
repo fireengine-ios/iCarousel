@@ -629,7 +629,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
         /// metaData filling
         metaData?.favourite = mediaItem.favoritesValue
-        metaData?.album = mediaItem.metadata?.album
+        //        metaData?.album = mediaItem.metadata?.album //FIXME: currently disabled
         metaData?.artist = mediaItem.metadata?.artist
         metaData?.duration = mediaItem.metadata?.duration
         metaData?.genre = mediaItem.metadata?.genre ?? []

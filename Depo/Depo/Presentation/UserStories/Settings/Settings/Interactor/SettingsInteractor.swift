@@ -13,22 +13,52 @@ class SettingsInteractor: SettingsInteractorInput {
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     private lazy var biometricsManager: BiometricsManager = factory.resolve()
     
+    private var userInfoResponse: AccountInfoResponse?
+    
     var isPasscodeEmpty: Bool {
         return passcodeStorage.isEmpty
     }
     
     func getCellsData(){
-        let array = [[TextConstants.settingsViewCellBeckup,
-                      TextConstants.settingsViewCellImportPhotos,
-                      TextConstants.settingsViewCellAutoUpload],
-                     [TextConstants.settingsViewCellActivityTimline,
-                      TextConstants.settingsViewCellRecentlyDeletedFiles,
-                      TextConstants.settingsViewCellUsageInfo,
-                      TextConstants.settingsViewCellPasscode],
-                     [TextConstants.settingsViewCellHelp,
-                      TextConstants.settingsViewCellLogout]]
         
-        output.cellsDataForSettings(array: array)
+        var securityCells = [TextConstants.settingsViewCellActivityTimline,
+                             TextConstants.settingsViewCellRecentlyDeletedFiles,
+                             TextConstants.settingsViewCellUsageInfo,
+                             TextConstants.settingsViewCellPasscode]
+        
+//        AccountService().securitySettingsInfo(success: { (response) in
+//            debugPrint(response)
+//        }) { (error) in
+//
+//        }
+
+//        AccountService().securitySettingsChange(turkcellPasswordAuthEnabled: true, mobileNetworkAuthEnabled: false, success: { (response) in
+//            debugPrint(response)
+//        }) { (error) in
+//
+//        }
+        
+//        AccountService().info(success: { [weak self] (responce) in
+//            self?.userInfoResponse = responce as? AccountInfoResponse
+//                if self?.userInfoResponse?.accountType == "TURKCELL" {
+                    securityCells.append(contentsOf: [TextConstants.settingsViewCellTurkcellPasscode,
+                                                      TextConstants.settingsViewCellTurkcellAutoLogin])
+//                }
+//
+//            DispatchQueue.main.async {
+                let array = [[TextConstants.settingsViewCellBeckup,
+                              TextConstants.settingsViewCellImportPhotos,
+                              TextConstants.settingsViewCellAutoUpload],
+                             securityCells,
+                             [TextConstants.settingsViewCellHelp,
+                              TextConstants.settingsViewCellLogout]]
+//
+                output.cellsDataForSettings(array: array)
+//            }
+//        }, fail: { [weak self] (error) in
+//
+//
+//        })
     }
     
     func onLogout() {

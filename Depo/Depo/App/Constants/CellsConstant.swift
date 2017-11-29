@@ -16,6 +16,7 @@ struct CellsIdConstants {
     static let autoSyncInformCellID = "AutoSyncInformTableViewCell"
     static let autoSyncSwitcherCellID = "AutoSyncSwitcherTableViewCell"
     static let settingTableViewCellID = "SettingsTableViewCell"
+    static let settingsTableViewSwitchCellID = "SettingsTableViewSwitchCell"
     static let actionsMenuCellID = "ActionsMenuTableViewCell"
     static let dropDovnCellID = "DropDovnTableViewCell"
     static let popUpCellID = "PopUpSwipeCell"

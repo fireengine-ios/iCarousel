@@ -34,6 +34,9 @@ struct AccountJSONConstants {
     static let bytesUsed = "bytesUsed"
     static let objectCount = "objectCount"
     static let projectID = "projectId"
+    
+    static let securitySettingsTurkcellPassword = "turkcellPasswordAuthEnabled"
+    static let securitySettingsMobileNetwor = "mobileNetworkAuthEnabled"
 }
 
 class AccountInfoResponse: ObjectRequestResponse {
@@ -73,6 +76,17 @@ class AccountInfoResponse: ObjectRequestResponse {
         urlForPhoto = json?[AccountJSONConstants.url].url
         projectID = json?[AccountJSONConstants.projectID].string
     }
+}
+
+class SecuritySettingsInfoResponse: ObjectRequestResponse {
+    var turkcellPasswordAuthEnabled: Bool?
+    var mobileNetworkAuthEnabled: Bool?
+    
+    override func mapping() {
+        turkcellPasswordAuthEnabled =  json?[AccountJSONConstants.securitySettingsTurkcellPassword].bool
+        mobileNetworkAuthEnabled =  json?[AccountJSONConstants.securitySettingsMobileNetwor].bool
+    }
+    
 }
 
 class QuotaInfoResponse: ObjectRequestResponse {

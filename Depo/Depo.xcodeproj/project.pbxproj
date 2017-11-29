@@ -366,6 +366,8 @@
 		8C19EB921F06514B0057D2A2 /* InfoButtonCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C19EB911F06514B0057D2A2 /* InfoButtonCellProtocol.swift */; };
 		8C32AFD61F1367E60098083A /* LoginPhoneMailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C32AFD51F1367E60098083A /* LoginPhoneMailCell.xib */; };
 		8C3B70B81F31B0BC0019715A /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3B70B71F31B0BC0019715A /* UIButtonExtension.swift */; };
+		8C4E8D021FCD8CDB0040E250 /* SettingsTableViewSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4E8D011FCD8CDB0040E250 /* SettingsTableViewSwitchCell.swift */; };
+		8C4E8D041FCD8D2B0040E250 /* SettingsTableViewSwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C4E8D031FCD8D2B0040E250 /* SettingsTableViewSwitchCell.xib */; };
 		8C54083F1F61C03B00D4717A /* GridListTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C54083E1F61C03B00D4717A /* GridListTopBar.swift */; };
 		8C5408411F61C0E000D4717A /* GridListTopBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C5408401F61C0E000D4717A /* GridListTopBar.xib */; };
 		8C5408431F62895300D4717A /* GridListTopBarConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5408421F62895300D4717A /* GridListTopBarConfig.swift */; };
@@ -1542,6 +1544,8 @@
 		8C32AFD51F1367E60098083A /* LoginPhoneMailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginPhoneMailCell.xib; sourceTree = "<group>"; };
 		8C3B70B71F31B0BC0019715A /* UIButtonExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 		8C4A9D0E1EEAD99B001D2465 /* TermsAndServicesScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TermsAndServicesScreen.xib; sourceTree = "<group>"; };
+		8C4E8D011FCD8CDB0040E250 /* SettingsTableViewSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewSwitchCell.swift; sourceTree = "<group>"; };
+		8C4E8D031FCD8D2B0040E250 /* SettingsTableViewSwitchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsTableViewSwitchCell.xib; sourceTree = "<group>"; };
 		8C54083E1F61C03B00D4717A /* GridListTopBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridListTopBar.swift; sourceTree = "<group>"; };
 		8C5408401F61C0E000D4717A /* GridListTopBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GridListTopBar.xib; sourceTree = "<group>"; };
 		8C5408421F62895300D4717A /* GridListTopBarConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridListTopBarConfig.swift; sourceTree = "<group>"; };
@@ -3587,6 +3591,8 @@
 			children = (
 				7C634FA81F0F936700B5B93D /* SettingsTableViewCell.swift */,
 				7C634FA91F0F936700B5B93D /* SettingsTableViewCell.xib */,
+				8C4E8D011FCD8CDB0040E250 /* SettingsTableViewSwitchCell.swift */,
+				8C4E8D031FCD8D2B0040E250 /* SettingsTableViewSwitchCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -6938,6 +6944,7 @@
 				CEDFEC911F10C40C003D1A75 /* InfoPlist.strings in Resources */,
 				CEDFEC971F10C40C003D1A75 /* InfoPlist.strings in Resources */,
 				CEDFEC961F10C40C003D1A75 /* Localizable.strings in Resources */,
+				8C4E8D041FCD8D2B0040E250 /* SettingsTableViewSwitchCell.xib in Resources */,
 				CEAE3FF31EFD517300A405B2 /* TabBarView.xib in Resources */,
 				7CD1F8DF1F0272E20028F51A /* UploadedItemsViewController.xib in Resources */,
 				CEDFEC991F10C40C003D1A75 /* InfoPlist.strings in Resources */,
@@ -7548,6 +7555,7 @@
 				EFA74FAE1FBF378F00CF946E /* PrintPresenter.swift in Sources */,
 				CE51ACE51EF90853005DCEE0 /* IntroduceRouterInput.swift in Sources */,
 				CE51ACE61EF90853005DCEE0 /* IntroduceRouter.swift in Sources */,
+				8C4E8D021FCD8CDB0040E250 /* SettingsTableViewSwitchCell.swift in Sources */,
 				7C6E2F541F31BD2200536DB6 /* PhotoStory.swift in Sources */,
 				CE51ACE71EF90853005DCEE0 /* IntroduceConfigurator.swift in Sources */,
 				CE0ED9761FBC0F5A00487632 /* PasscodeStorage.swift in Sources */,
