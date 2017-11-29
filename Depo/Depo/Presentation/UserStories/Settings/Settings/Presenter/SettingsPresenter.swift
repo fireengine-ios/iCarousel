@@ -77,6 +77,22 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         router.goToPasscodeSettings()
     }
     
+    func turkcellSecurityStatusNeeded(passcode: Bool, autoLogin: Bool) {
+        
+    }
+    
+    func turkcellSecurityChanged(passcode: Bool, autoLogin: Bool) {
+        interactor.changeTurkcellSecurity(passcode: passcode, autoLogin: autoLogin)
+    }
+    
+    func turkCellSecuritySettingsAccuered(passcode: Bool, autoLogin: Bool) {
+        view.changeTurkCellSecurity(passcode: passcode, autologin: autoLogin)
+    }
+    
+    func turkCellSecurityfailed() {
+        
+    }
+    
     override func outputView() -> Waiting? {
         return view as? Waiting
     }

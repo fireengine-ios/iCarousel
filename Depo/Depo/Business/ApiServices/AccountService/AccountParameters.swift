@@ -150,8 +150,8 @@ class SecuritySettingsChangeInfoParametres: BaseRequestParametrs {
     }
     
     override var requestParametrs: Any {
-        return ["turkcellPasswordAuthEnabled": false,
-                "mobileNetworkAuthEnabled": true]
+        return ["turkcellPasswordAuthEnabled": turkcellPasswordAuthEnabled,
+                "mobileNetworkAuthEnabled": mobileNetworkAuthEnabled]
     }
     
     override var patch: URL {

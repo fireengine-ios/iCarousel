@@ -26,17 +26,9 @@ class SettingsInteractor: SettingsInteractorInput {
                              TextConstants.settingsViewCellUsageInfo,
                              TextConstants.settingsViewCellPasscode]
         
-//        AccountService().securitySettingsInfo(success: { (response) in
-//            debugPrint(response)
-//        }) { (error) in
-//
-//        }
+      
 
-//        AccountService().securitySettingsChange(turkcellPasswordAuthEnabled: true, mobileNetworkAuthEnabled: false, success: { (response) in
-//            debugPrint(response)
-//        }) { (error) in
-//
-//        }
+
         
 //        AccountService().info(success: { [weak self] (responce) in
 //            self?.userInfoResponse = responce as? AccountInfoResponse
@@ -59,12 +51,34 @@ class SettingsInteractor: SettingsInteractorInput {
 //
 //
 //        })
+        AccountService().securitySettingsInfo(success: { [weak self] (response) in
+            guard let unwrapedSecurityresponse = response as? SecuritySettingsInfoResponse,
+                let turkCellPasswordOn = unwrapedSecurityresponse.turkcellPasswordAuthEnabled,
+                let turkCellAutoLogin = unwrapedSecurityresponse.mobileNetworkAuthEnabled else {
+                    return
+            }
+            DispatchQueue.main.async {
+                self?.output.turkCellSecuritySettingsAccuered(passcode: turkCellPasswordOn, autoLogin: turkCellAutoLogin)
+            }
+            
+        }) { [weak self] (error) in
+            
+        }
+    }
+    
+    func changeTurkcellSecurity(passcode: Bool, autoLogin: Bool) {
+        AccountService().securitySettingsChange(turkcellPasswordAuthEnabled: passcode, mobileNetworkAuthEnabled: autoLogin, success: { (response) in
+            
+            debugPrint(response)
+        }) { (error) in
+            
+        }
     }
     
     func onLogout() {
         let authService = AuthenticationService()
-        authService.logout {
-            DispatchQueue.main.async { [weak self] in
+        authService.logout { [weak self] in
+            DispatchQueue.main.async {
                 self?.passcodeStorage.clearPasscode()
                 self?.biometricsManager.isEnabled = false
                 CoreDataStack.default.clearDataBase()

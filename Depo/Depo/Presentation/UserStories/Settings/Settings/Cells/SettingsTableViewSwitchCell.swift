@@ -6,12 +6,20 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
+protocol SettingsTableViewSwitchCellDelegate: class {
+    func switchToggled(positionOn: Bool, cell: SettingsTableViewSwitchCell)
+}
+
 class SettingsTableViewSwitchCell: UITableViewCell {
+    
+    weak var actionDelegate: SettingsTableViewSwitchCellDelegate?
     
     @IBOutlet weak var cellSwitch: UISwitch!
     
     @IBOutlet weak var cellLabel: UILabel!
     @IBOutlet weak var separator: UIView!
+    
+    //TODO: create a protocol for settings cell
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -19,25 +27,21 @@ class SettingsTableViewSwitchCell: UITableViewCell {
         
         cellLabel.textColor = ColorConstants.textGrayColor
         cellLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
+        cellSwitch.addTarget(self, action: #selector(self.swichChanged), for: .valueChanged)
     }
     
-//    override func setSelected(_ selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: animated)
-//        //let bgView = UIView()
-//        if (selected){
-//            titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
-//            backgroundColor = ColorConstants.selectedCellBlueColor
-//        }else{
-//            titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
-//            backgroundColor = ColorConstants.whiteColor
-//        }
-//        //backgroundView = bgView
-//        // Configure the view for the selected state
-//    }
+    @objc func swichChanged() {
+        actionDelegate?.switchToggled(positionOn: cellSwitch.isOn, cell: self)
+    }
     
-    func setTextForLabel(titleText: String, needShowSeparator:Bool){
+    func setTextForLabel(titleText: String, needShowSeparator:Bool) {
         cellLabel.text = titleText
         separator.isHidden = !needShowSeparator
     }
     
+    func changeSwithcState(turnOn: Bool) {
+        if cellSwitch.isOn != turnOn {
+          cellSwitch.setOn(turnOn, animated: true)
+        }
+    }
 }
