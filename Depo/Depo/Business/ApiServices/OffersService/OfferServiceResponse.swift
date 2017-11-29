@@ -120,14 +120,15 @@ final class InitOfferResponse: ObjectRequestResponse {
     struct InitOfferKeys {
         static let status = "status"
         static let value = "value"
+        static let referenceToken = "referenceToken"
     }
     
     var status: String?
-    var value: String?
+    var referenceToken: String?
     
     override func mapping() {
         status = json?[InitOfferKeys.status].string ///"OK" - good
-        value = json?[InitOfferKeys.value].string
+        referenceToken = json?[InitOfferKeys.value][InitOfferKeys.referenceToken].string
     }
 }
 

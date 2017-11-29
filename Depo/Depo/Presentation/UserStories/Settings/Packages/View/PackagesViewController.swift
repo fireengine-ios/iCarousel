@@ -9,6 +9,11 @@
 import UIKit
 
 class PackagesViewController: UIViewController {
+    var output: PackagesViewOutput!
+    
+    @IBOutlet weak private var collectionView: UICollectionView!
+    
+    private lazy var activityManager = ActivityIndicatorManager()
     
     private var plans = [SubscriptionPlan]() {
         didSet {
@@ -16,12 +21,10 @@ class PackagesViewController: UIViewController {
         }
     }
 
-    @IBOutlet weak private var collectionView: UICollectionView!
-    
-    var output: PackagesViewOutput!
-
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        activityManager.delegate = self
         setupCollectionView()
         output.viewIsReady()
     }
@@ -35,7 +38,7 @@ class PackagesViewController: UIViewController {
 extension PackagesViewController: PackagesViewInput {
     
     func display(error: ErrorResponse) {
-        print(error.description)
+        CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: "Error", withText: error.description, okButtonText: TextConstants.ok)
     }
     
     func display(subscriptionPlans array: [SubscriptionPlan]) {
@@ -49,6 +52,7 @@ extension PackagesViewController: PackagesViewInput {
         
         let cancelAction = UIAlertAction(title: TextConstants.offersCancel, style: .cancel, handler: nil)
         let buyAction = UIAlertAction(title: TextConstants.offersBuy, style: .default) { action in
+            alertVC.dismiss(animated: true, completion: nil)
             self.output.buy(offer: offer)
         }
         
@@ -122,3 +126,15 @@ extension PackagesViewController: UICollectionViewDelegateFlowLayout {
 // MARK: UICollectionViewDelegate
 extension PackagesViewController: UICollectionViewDelegate {
 }
+
+// MARK: - ActivityIndicator
+extension PackagesViewController: ActivityIndicator {
+    func startActivityIndicator() {
+        activityManager.start()
+    }
+    
+    func stopActivityIndicator() {
+        activityManager.stop()
+    }
+}
+
