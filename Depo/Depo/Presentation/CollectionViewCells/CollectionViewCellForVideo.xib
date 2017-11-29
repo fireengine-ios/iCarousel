@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -26,10 +26,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MBu-f2-VfC">
-                        <rect key="frame" x="68" y="68" width="14" height="14"/>
+                        <rect key="frame" x="74" y="3" width="12" height="12"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="14" id="OaE-gs-Ojj"/>
-                            <constraint firstAttribute="height" constant="14" id="rTI-zZ-jZo"/>
+                            <constraint firstAttribute="width" constant="12" id="OaE-gs-Ojj"/>
+                            <constraint firstAttribute="height" constant="12" id="rTI-zZ-jZo"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NtU-N7-Qtp">
@@ -43,7 +43,7 @@
                         <rect key="frame" x="35" y="35" width="20" height="20"/>
                     </activityIndicatorView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vty-wj-zHS">
-                        <rect key="frame" x="24" y="68" width="42" height="21"/>
+                        <rect key="frame" x="20" y="67" width="66" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="D4h-Rz-Itg"/>
                         </constraints>
@@ -52,42 +52,43 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favoriteStar" translatesAutoresizingMaskIntoConstraints="NO" id="LGC-Nm-9e9">
-                        <rect key="frame" x="6" y="8" width="13" height="12"/>
+                        <rect key="frame" x="4" y="3" width="13" height="12"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="12" id="VKV-e4-PLr"/>
                             <constraint firstAttribute="width" constant="13" id="zFw-JM-MCE"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play" translatesAutoresizingMaskIntoConstraints="NO" id="Tgi-g8-grY">
-                        <rect key="frame" x="40" y="33" width="20" height="20"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="thumbnailPlay" translatesAutoresizingMaskIntoConstraints="NO" id="Tgi-g8-grY">
+                        <rect key="frame" x="7" y="72.5" width="10" height="10"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="20" id="Lvl-tQ-j2j"/>
-                            <constraint firstAttribute="height" constant="20" id="rX2-VJ-Y1u"/>
+                            <constraint firstAttribute="width" constant="10" id="Lvl-tQ-j2j"/>
+                            <constraint firstAttribute="height" constant="10" id="rX2-VJ-Y1u"/>
                         </constraints>
                     </imageView>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstItem="uip-Zv-Lj0" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="0cJ-xn-Dl4"/>
-                <constraint firstAttribute="trailing" secondItem="MBu-f2-VfC" secondAttribute="trailing" constant="8" id="46D-IE-JX3"/>
+                <constraint firstAttribute="trailing" secondItem="MBu-f2-VfC" secondAttribute="trailing" constant="4" id="46D-IE-JX3"/>
+                <constraint firstAttribute="trailing" secondItem="Vty-wj-zHS" secondAttribute="trailing" constant="4" id="8VM-Ll-Ysn"/>
                 <constraint firstAttribute="trailing" secondItem="32d-zc-raV" secondAttribute="trailing" id="8fy-UM-maF"/>
+                <constraint firstItem="Tgi-g8-grY" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="7" id="9ts-ny-6yx"/>
                 <constraint firstItem="NtU-N7-Qtp" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="AzI-My-mbB"/>
-                <constraint firstAttribute="bottom" secondItem="MBu-f2-VfC" secondAttribute="bottom" constant="8" id="Lgo-eT-IlG"/>
                 <constraint firstItem="32d-zc-raV" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Msf-LT-G79"/>
                 <constraint firstItem="32d-zc-raV" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="NFr-R3-l3Z"/>
                 <constraint firstAttribute="bottom" secondItem="uip-Zv-Lj0" secondAttribute="bottom" id="PSa-Qx-1RX"/>
-                <constraint firstItem="Vty-wj-zHS" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="S1x-lJ-QjA"/>
-                <constraint firstItem="LGC-Nm-9e9" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="Xsr-dZ-rMV"/>
-                <constraint firstItem="Tgi-g8-grY" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" constant="-2" id="Y0M-PJ-Br9"/>
+                <constraint firstItem="Vty-wj-zHS" firstAttribute="leading" secondItem="Tgi-g8-grY" secondAttribute="trailing" constant="3" id="XEN-PY-yHX"/>
+                <constraint firstItem="LGC-Nm-9e9" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="3" id="Xsr-dZ-rMV"/>
                 <constraint firstItem="EFu-Rx-2DV" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="YZI-dU-X04"/>
                 <constraint firstAttribute="bottom" secondItem="32d-zc-raV" secondAttribute="bottom" id="dIL-Dc-EKM"/>
                 <constraint firstItem="EFu-Rx-2DV" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="eBQ-RI-ROZ"/>
-                <constraint firstItem="LGC-Nm-9e9" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="6" id="fvC-qT-sXd"/>
+                <constraint firstItem="LGC-Nm-9e9" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="4" id="fvC-qT-sXd"/>
+                <constraint firstItem="MBu-f2-VfC" firstAttribute="centerY" secondItem="LGC-Nm-9e9" secondAttribute="centerY" id="gvo-dW-ZIa"/>
                 <constraint firstItem="uip-Zv-Lj0" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="lCZ-MQ-bDz"/>
                 <constraint firstAttribute="trailing" secondItem="uip-Zv-Lj0" secondAttribute="trailing" id="oR2-TF-Y6S"/>
-                <constraint firstItem="Tgi-g8-grY" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" constant="5" id="tip-AI-Xkh"/>
-                <constraint firstAttribute="bottom" secondItem="Vty-wj-zHS" secondAttribute="bottom" constant="1" id="vif-We-1bV"/>
+                <constraint firstAttribute="bottom" secondItem="Vty-wj-zHS" secondAttribute="bottom" constant="2" id="vif-We-1bV"/>
                 <constraint firstAttribute="trailing" secondItem="NtU-N7-Qtp" secondAttribute="trailing" constant="5" id="vsi-Qa-QHS"/>
+                <constraint firstItem="Tgi-g8-grY" firstAttribute="centerY" secondItem="Vty-wj-zHS" secondAttribute="centerY" id="xqN-5S-4Js"/>
             </constraints>
             <connections>
                 <outlet property="activity" destination="EFu-Rx-2DV" id="c9y-ah-pjQ"/>
@@ -102,6 +103,6 @@
     </objects>
     <resources>
         <image name="favoriteStar" width="13" height="12"/>
-        <image name="play" width="32" height="36"/>
+        <image name="thumbnailPlay" width="11" height="11"/>
     </resources>
 </document>
