@@ -307,9 +307,13 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
     // Photo Action
     
     func addToAlbum(items: [BaseDataSourceItem]) {
-        let router = RouterVC()
-        let vc = router.addPhotosToAlbum(photos: items)
-        router.pushViewController(viewController: vc)
+        sync(items: items, action: {
+            let router = RouterVC()
+            let vc = router.addPhotosToAlbum(photos: items)
+            DispatchQueue.main.async {
+                router.pushViewController(viewController: vc)
+            }
+        }, cancel: {})
     }
     
     func backUp(items: [BaseDataSourceItem]) {
