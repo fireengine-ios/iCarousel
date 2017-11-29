@@ -95,27 +95,26 @@ final class UploadService: BaseRequestService {
         }
     }
     
-    func uploadFileList(items: [WrapData], uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", success: FileOperationSucces?, fail: FailResponse? ) {
+    @discardableResult func uploadFileList(items: [WrapData], uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", success: FileOperationSucces?, fail: FailResponse? ) -> [UploadOperations]? {
         
         switch uploadType {
         case .autoSync:
-            self.syncFileList(items: items, uploadStategy: uploadStategy, uploadTo: uploadTo, success: {
+            return self.syncFileList(items: items, uploadStategy: uploadStategy, uploadTo: uploadTo, success: {
                 success?()
             }, fail: { (errorResponse) in
                 fail?(errorResponse)
             })
         default:
-            self.uploadFileList(items: items, uploadStategy: uploadStategy, uploadTo: uploadTo, success: {
+            return self.uploadFileList(items: items, uploadStategy: uploadStategy, uploadTo: uploadTo, needsSuccess: uploadType == .syncToUse, success: {
                 success?()
             }, fail: { (errorResponse) in
                 fail?(errorResponse)
             })
-            break
         }
     
     }
     
-    private func uploadFileList(items: [WrapData], uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", success: FileOperationSucces?, fail: FailResponse? ) {
+    @discardableResult private func uploadFileList(items: [WrapData], uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, needsSuccess: Bool = false, folder: String = "", success: FileOperationSucces?, fail: FailResponse?) -> [UploadOperations]? {
         // filter all items which md5's are not in the uploadOperations
         let itemsToUpload = items.filter { (item) -> Bool in
             return (self.uploadOperations.first(where: { (operation) -> Bool in
@@ -132,7 +131,7 @@ final class UploadService: BaseRequestService {
         }
         
         guard !itemsToUpload.isEmpty else {
-            return
+            return nil
         }
         
         WrapItemOperatonManager.default.startOperationWith(type: .upload, allOperations: itemsToUpload.count, completedOperations: 0)
@@ -165,7 +164,7 @@ final class UploadService: BaseRequestService {
                 
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: UploadService.notificatioUploadServiceDidUpload),
                                                 object: nil)
-            }, fail: { (fail) in
+            }, fail: { (operationFail) in
                 self.finishedUploadOperationsCount += 1
                 
                 if self.allUploadOperationsCount == self.finishedUploadOperationsCount {
@@ -177,7 +176,12 @@ final class UploadService: BaseRequestService {
                         return nil
                     })
                     WrapItemOperatonManager.default.stopOperationWithType(type: .upload)
-                    success?()
+                    if !needsSuccess {
+                        success?()
+                    } else {
+                        fail?(operationFail)
+                    }
+                    
                 }
             })
             operation.queuePriority = .high
@@ -189,9 +193,11 @@ final class UploadService: BaseRequestService {
             self.uploadQueue.addOperations(operations, waitUntilFinished: false)
             print("UPLOADING upload: \(operations.count) have been added to the upload queue")
         }
+        
+        return operations
     }
     
-    private func syncFileList(items: [WrapData], uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", success: FileOperationSucces?, fail: FailResponse? ) {
+    @discardableResult private func syncFileList(items: [WrapData], uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", success: FileOperationSucces?, fail: FailResponse? )  -> [UploadOperations]? {
         // filter all items which md5's are not in the uploadOperations
         let itemsToSync = items.filter { (item) -> Bool in
             return (self.uploadOperations.first(where: { (operation) -> Bool in
@@ -200,7 +206,7 @@ final class UploadService: BaseRequestService {
         }
         
         guard !itemsToSync.isEmpty else {
-            return
+            return nil
         }
         
         WrapItemOperatonManager.default.startOperationWith(type: .sync, allOperations: itemsToSync.count, completedOperations: 0)
@@ -259,6 +265,7 @@ final class UploadService: BaseRequestService {
             print("UPLOADING sync: \(operations.count) have been added to the sync queue")
         }
         
+        return uploadOperations
     }
     
     func cancelOperations(){

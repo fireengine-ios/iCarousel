@@ -18,12 +18,27 @@ protocol Waiting {
     
     func showSpinerIncludeNavigatinBar()
     
+    func showSpinerWithCancelClosure(_ cancel: @escaping () -> Void)
+    
     func hideSpinerIncludeNavigatinBar()
     
     func hideSpiner()
 }
 
 extension UIViewController: Waiting {
+    
+    func showSpinerWithCancelClosure(_ cancel: @escaping () -> Void) {
+        DispatchQueue.main.async {
+            guard let window = UIApplication.shared.delegate?.window as? UIWindow else { return }
+            let hud = MBProgressHUD.showAdded(to: window, animated: true)
+            hud.backgroundView.color = ColorConstants.whiteColor.withAlphaComponent(0.88)
+            let gestureRecognizer = TapGestureRecognizerWithClosure(closure: { [weak self] in
+                cancel()
+                self?.hideSpinerIncludeNavigatinBar()
+            })
+            hud.backgroundView.addGestureRecognizer(gestureRecognizer)
+        }
+    }
     
     func showSpiner() {
         DispatchQueue.main.async {
