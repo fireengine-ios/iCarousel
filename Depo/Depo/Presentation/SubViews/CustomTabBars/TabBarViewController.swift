@@ -8,6 +8,15 @@
 
 import UIKit
 
+enum FloatingButtonsType: String {
+    case floatingButtonTakeAPhoto = "Take a Photo"
+    case floatingButtonUpload = "Upload"
+    case floatingButtonCreateAStory = "Create a Story"
+    case floatingButtonNewFolder = "New Folder"
+    case floatingButtonCreateAlbum = "Create album"
+    case floatingButtonUploadFromLifebox = "Upload from lifebox"
+}
+
 final class TabBarViewController: UIViewController, UITabBarDelegate {
     
     @IBOutlet weak var tabBar: CustomTabBar!
@@ -40,13 +49,12 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     
     let originalPlusBotttomConstraint: CGFloat = 10
     
-    var photoBtn: SubPlussButtonView!
-    
-    fileprivate var uploadBtn: SubPlussButtonView!
-    
-    fileprivate var storyBtn: SubPlussButtonView!
-
-    fileprivate var folderBtn: SubPlussButtonView!
+    fileprivate var photoBtn            : SubPlussButtonView!
+    fileprivate var uploadBtn           : SubPlussButtonView!
+    fileprivate var storyBtn            : SubPlussButtonView!
+    fileprivate var folderBtn           : SubPlussButtonView!
+    fileprivate var albumBtn            : SubPlussButtonView!
+    fileprivate var uploadFromLifebox   : SubPlussButtonView!
 
     let musicBar = MusicBar.initFromXib()
     let player: MediaPlayer = factory.resolve()
@@ -256,6 +264,15 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     
     fileprivate func changeViewState(state: Bool) {
         plussButton.isSelected = state
+        
+        UIView.animate(withDuration: NumericConstants.animationDuration) {
+            if state{
+                self.plussButton.transform = CGAffineTransform(rotationAngle: .pi/4)
+            }else{
+                self.plussButton.transform = CGAffineTransform(rotationAngle: 0)
+            }
+        }
+        
         showCurtainView(show: state)
         if state {
             showButtonRainbow()
@@ -287,70 +304,175 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
     
     func setupSubButtons() {
         
-        photoBtn = createSubButton(withText: TextConstants.takePhoto,
-                                   imageName: "takePhoto", asLeft: true)
-        photoBtn.endCenterXconstant = photoBtn.frame.width * 0.5
-        photoBtn.endBotConstant = photoBtn.frame.height
+        photoBtn = createSubButton(withText: TextConstants.takePhoto, imageName: "TakeFhoto", asLeft: true)
+        photoBtn?.changeVisability(toHidden: true)
         
-        uploadBtn = createSubButton(withText: TextConstants.upload,
-                                    imageName: "upload", asLeft: true)
-        uploadBtn.endCenterXconstant = photoBtn.frame.width * 0.25
-        uploadBtn.endBotConstant = uploadBtn.frame.height * 1.8
-       
-        storyBtn = createSubButton(withText: TextConstants.createStory,
-                                   imageName: "createStory", asLeft: false)
-        storyBtn.endCenterXconstant = -photoBtn.frame.width * 0.25
-        storyBtn.endBotConstant = storyBtn.frame.height * 1.8
+        uploadBtn = createSubButton(withText: TextConstants.upload, imageName: "Upload", asLeft: true)
+        uploadBtn?.changeVisability(toHidden: true)
         
-        folderBtn = createSubButton(withText: TextConstants.newFolder,
-                                    imageName: "newFolder", asLeft: false)
-        folderBtn.endCenterXconstant = -photoBtn.frame.width * 0.5
-        folderBtn.endBotConstant = folderBtn.frame.height
+        storyBtn = createSubButton(withText: TextConstants.createStory, imageName: "CreateAStory", asLeft: false)
+        storyBtn?.changeVisability(toHidden: true)
+        
+        folderBtn = createSubButton(withText: TextConstants.newFolder, imageName: "NewFolder", asLeft: false)
+        folderBtn?.changeVisability(toHidden: true)
+        
+        uploadFromLifebox = createSubButton(withText: TextConstants.uploadFromLifebox, imageName: "NewFolder", asLeft: false)
+        uploadFromLifebox?.changeVisability(toHidden: true)
+        
+        albumBtn = createSubButton(withText: TextConstants.createAlbum, imageName: "NewFolder", asLeft: false)
+        albumBtn?.changeVisability(toHidden: true)
+        
+        view.bringSubview(toFront: plussButton)
     }
 
-    func createSubButton(withText text: String, imageName: String, asLeft: Bool) -> SubPlussButtonView {
-        let subButton = SubPlussButtonView.getFromNib(asLeft: asLeft, withImageName: imageName, labelText: text)
-        subButton?.actionDelegate = self
-        view.addSubview(subButton!)
-        setupOriginalPlustBtnConstraint(forView: subButton!)
+    func createSubButton(withText text: String, imageName: String, asLeft: Bool) -> SubPlussButtonView? {
+        if let subButton = SubPlussButtonView.getFromNib(asLeft: asLeft, withImageName: imageName, labelText: text){
+            subButton.actionDelegate = self
+            view.addSubview(subButton)
+            
+            subButton.translatesAutoresizingMaskIntoConstraints = false
+            
+            subButton.bottomConstraint = NSLayoutConstraint(item: subButton, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
+            subButton.bottomConstraintOrigialConstant = 0
+            
+            subButton.centerXConstraint = NSLayoutConstraint(item: subButton, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0)
+            subButton.centerXConstraintOriginalConstant = 0
+            
+            var constraintsArray = [NSLayoutConstraint]()
+            constraintsArray.append(subButton.bottomConstraint!)
+            constraintsArray.append(subButton.centerXConstraint!)
+            constraintsArray.append(NSLayoutConstraint(item: subButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80))
+            constraintsArray.append(NSLayoutConstraint(item: subButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 65))
+            NSLayoutConstraint.activate(constraintsArray)
+            
+            view.layoutIfNeeded()
+            
+            return subButton
+        }
         
-        subButton?.changeVisability(toHidden: true)
-        return subButton!
+        return nil
+    }
+    
+    private func getFloatingButtonsArray()-> [SubPlussButtonView]{
+        let array = RouterVC().getFloatingButtonsArray()
+        var buttonsArray = [SubPlussButtonView]()
+        for type in array{
+            switch type{
+            case .floatingButtonCreateAlbum:
+                buttonsArray.append(albumBtn)
+            case .floatingButtonCreateAStory:
+                buttonsArray.append(storyBtn)
+            case .floatingButtonNewFolder:
+                buttonsArray.append(folderBtn)
+            case .floatingButtonTakeAPhoto:
+                buttonsArray.append(photoBtn)
+            case .floatingButtonUpload:
+                buttonsArray.append(uploadBtn)
+            case .floatingButtonUploadFromLifebox:
+                buttonsArray.append(uploadFromLifebox)
+            }
+        }
+        
+        if (buttonsArray.count == 0) || (buttonsArray.count > 4){
+            return [SubPlussButtonView]()
+        }
+        
+        return buttonsArray
+    }
+    
+    private func getAllFloatingButtonsArray()-> [SubPlussButtonView]{
+        var buttonsArray = [SubPlussButtonView]()
+        buttonsArray.append(albumBtn)
+        buttonsArray.append(storyBtn)
+        buttonsArray.append(folderBtn)
+        buttonsArray.append(photoBtn)
+        buttonsArray.append(uploadBtn)
+        buttonsArray.append(uploadFromLifebox)
+        return buttonsArray
     }
     
     private func showButtonRainbow() {
-        changeButtonsAppearance(toHidden: false, withAnimation: true)
+        
+        let buttonsArray = getFloatingButtonsArray()
+        let count = buttonsArray.count
+        
+        if count == 1{
+            let obj0 = buttonsArray[0]
+            obj0.centerXConstraint!.constant = 0
+            obj0.bottomConstraint!.constant = -obj0.frame.size.height - tabBar.frame.size.height
+        }
+        if count == 2{
+            let obj0 = buttonsArray[0]
+            let obj1 = buttonsArray[1]
+            
+            obj0.centerXConstraint!.constant = -obj0.frame.size.width * 0.75
+            obj0.bottomConstraint!.constant = -obj0.frame.size.height * 0.75 - tabBar.frame.size.height
+            
+            obj1.centerXConstraint!.constant = obj0.frame.size.width * 0.75
+            obj1.bottomConstraint!.constant = -obj0.frame.size.height * 0.75 - tabBar.frame.size.height
+        }
+        if count == 3{
+            let obj0 = buttonsArray[0]
+            let obj1 = buttonsArray[1]
+            let obj2 = buttonsArray[2]
+            
+            obj0.centerXConstraint!.constant = -obj0.frame.size.width
+            obj0.bottomConstraint!.constant = -tabBar.frame.size.height
+            
+            obj1.centerXConstraint!.constant = 0
+            obj1.bottomConstraint!.constant = -obj0.frame.size.height - tabBar.frame.size.height
+            
+            obj2.centerXConstraint!.constant = obj0.frame.size.width
+            obj2.bottomConstraint!.constant = -tabBar.frame.size.height
+        }
+        if count == 4{
+            let obj0 = buttonsArray[0]
+            let obj1 = buttonsArray[1]
+            let obj2 = buttonsArray[2]
+            let obj3 = buttonsArray[3]
+            
+            obj0.centerXConstraint!.constant = -obj0.frame.size.width
+            obj0.bottomConstraint!.constant = -tabBar.frame.size.height
+            
+            obj1.centerXConstraint!.constant = -obj0.frame.size.width * 0.5
+            obj1.bottomConstraint!.constant = -obj0.frame.size.height - tabBar.frame.size.height
+            
+            obj2.centerXConstraint!.constant = obj0.frame.size.width * 0.5
+            obj2.bottomConstraint!.constant = -obj3.frame.size.height - tabBar.frame.size.height
+            
+            obj3.centerXConstraint!.constant = obj0.frame.size.width
+            obj3.bottomConstraint!.constant = -tabBar.frame.size.height
+            
+            
+        }
+        changeButtonsAppearance(toHidden: false, withAnimation: true, forButtons: buttonsArray)
+        //view.layoutIfNeeded()
     }
     
     private func hideButtonRainbow() {
-        changeButtonsAppearance(toHidden: true, withAnimation: true)
+        let buttonsArray = getAllFloatingButtonsArray()
+        changeButtonsAppearance(toHidden: true, withAnimation: true, forButtons: buttonsArray)
     }
     
-    private func changeButtonsAppearance(toHidden hidden: Bool, withAnimation animate: Bool) {
-        if photoBtn.alpha == 0, hidden == true {
+    private func changeButtonsAppearance(toHidden hidden: Bool, withAnimation animate: Bool, forButtons buttons:[SubPlussButtonView]) {
+        if buttons.count == 0 {
             return
         }
-        photoBtn?.changeConstraints(asHidden: hidden)
-        uploadBtn?.changeConstraints(asHidden: hidden)
-        storyBtn?.changeConstraints(asHidden: hidden)
-        folderBtn?.changeConstraints(asHidden: hidden)
         
         UIView.animate(withDuration: NumericConstants.animationDuration, delay: 0.0, options: .showHideTransitionViews, animations: {
+            for button in buttons{
+                button.changeVisability(toHidden: hidden)
+            }
             self.view.layoutIfNeeded()
-            self.photoBtn?.changeVisability(toHidden: hidden)
-            self.uploadBtn?.changeVisability(toHidden: hidden)
-            self.storyBtn?.changeVisability(toHidden: hidden)
-            self.folderBtn?.changeVisability(toHidden: hidden)
-
         }, completion: { _ in })
     }
     
     private func setupOriginalPlustBtnConstraint(forView unconstrainedView: SubPlussButtonView) {
-        let centerX = NSLayoutConstraint(item: view, attribute: .centerX, relatedBy: .equal, toItem: unconstrainedView.button, attribute: .centerX, multiplier: 1, constant: 0)
-        let bot = NSLayoutConstraint(item: view, attribute: .bottom, relatedBy: .equal, toItem: unconstrainedView, attribute: .bottom, multiplier: 1, constant: 10)
-        unconstrainedView.centerXConstraint = centerX
-        unconstrainedView.botConstraint = bot
-        view.addConstraints([centerX, bot])
+//        let centerX = NSLayoutConstraint(item: view, attribute: .centerX, relatedBy: .equal, toItem: unconstrainedView.button, attribute: .centerX, multiplier: 1, constant: 0)
+//        let bot = NSLayoutConstraint(item: view, attribute: .bottom, relatedBy: .equal, toItem: unconstrainedView, attribute: .bottom, multiplier: 1, constant: 10)
+//        unconstrainedView.centerXConstraint = centerX
+//        unconstrainedView.botConstraint = bot
+//        view.addConstraints([centerX, bot])
         view.layoutIfNeeded()
     }
     
@@ -404,6 +526,16 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
             let controller = router.uploadPhotos(rootUUID: getFolderUUID() ?? "")
             router.pushViewController(viewController: controller)
             return
+        }
+        if (button == albumBtn){
+            //создание альбома
+            let router = RouterVC()
+            let controller = router.createNewAlbum()
+            router.pushViewController(viewController: controller)
+            return
+        }
+        if (button == uploadFromLifebox){
+            //копия файла в текущую папку на сервере
         }
     }
     

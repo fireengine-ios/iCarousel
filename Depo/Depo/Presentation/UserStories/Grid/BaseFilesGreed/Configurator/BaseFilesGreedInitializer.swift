@@ -20,6 +20,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
     class func initializePhotoVideosViewController(with nibName:String) -> UIViewController {
         let viewController = BaseFilesGreedViewController(nibName: nibName, bundle: nil)
         viewController.needShowTabBar = true
+        viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonCreateAStory, .floatingButtonCreateAlbum])
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .delete, .sync, .download, .addToAlbum],
                                                style: .default, tintColor: nil)
@@ -46,6 +47,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
     class func initializeMusicViewController(with nibName:String) -> UIViewController {
         let viewController = BaseFilesGreedViewController(nibName: nibName, bundle: nil)
         viewController.needShowTabBar = true
+        viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto])
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share,.move,.delete],
                                                style: .default, tintColor: nil)
@@ -69,6 +71,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
     class func initializeDocumentsViewController(with nibName:String) -> UIViewController {
         let viewController = BaseFilesGreedViewController(nibName: nibName, bundle: nil)
         viewController.needShowTabBar = true
+        viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto])
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share,.move,.delete],
                                                style: .default, tintColor: nil)
@@ -92,6 +95,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
     class func initializeAllFilesViewController(with nibName:String) -> UIViewController {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
         viewController.needShowTabBar = true
+        viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonCreateAStory, .floatingButtonNewFolder])
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share,.move,.delete],
                                                style: .default, tintColor: nil)
@@ -115,6 +119,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
     class func initializeFavoritesViewController(with nibName:String) -> UIViewController {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
         viewController.needShowTabBar = true
+        viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonCreateAStory])
         viewController.isFavorites = true
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .delete],
@@ -139,6 +144,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
     class func initializeFilesFromFolderViewController(with nibName:String, folder: Item) -> UIViewController {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
         viewController.needShowTabBar = true
+        viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonNewFolder, .floatingButtonUploadFromLifebox])
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share,.move,.delete, .sync, .download],
                                                style: .default, tintColor: nil)
