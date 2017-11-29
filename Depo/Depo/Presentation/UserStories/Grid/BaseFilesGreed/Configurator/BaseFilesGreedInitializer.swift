@@ -111,7 +111,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
                                bottomBarConfig: bottomBarConfig,
                                topBarConfig: gridListTopBarConfig,
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
-                                                                                     selectionModeTypes: []))
+                                                                                     selectionModeTypes: [.rename]))
         viewController.mainTitle = TextConstants.homeButtonAllFiles
         return viewController
     }
@@ -136,7 +136,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
                                 bottomBarConfig: bottomBarConfig,
                                 topBarConfig: gridListTopBarConfig,
                                 alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
-                                                                                      selectionModeTypes: []))
+                                                                                      selectionModeTypes: [.rename]))
         viewController.mainTitle = TextConstants.homeButtonFavorites
         return viewController
     }

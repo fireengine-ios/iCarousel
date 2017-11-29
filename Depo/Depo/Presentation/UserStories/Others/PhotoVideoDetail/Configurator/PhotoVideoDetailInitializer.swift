@@ -14,9 +14,9 @@ class PhotoVideoDetailModuleInitializer: NSObject {
     var photovideodetailViewController: PhotoVideoDetailViewController!
 
     class func initializeViewController(with nibName:String) -> UIViewController {
-        let photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .info, .edit],
+        let photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .print, .edit],
                                                          style: .blackOpaque, tintColor: nil)
-        let documentsBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .info, .move, .delete],
+        let documentsBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .print, .move, .delete],
                                                         style: .blackOpaque, tintColor: nil)
         let viewController = PhotoVideoDetailViewController(nibName: nibName, bundle: nil)
         let configurator = PhotoVideoDetailModuleConfigurator()

@@ -47,6 +47,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 itemTupple.append(EditinglBar.PreDetermendTypes.addToAlbum)
             case .makeAlbumCover:
                 itemTupple.append(EditinglBar.PreDetermendTypes.makeCover)
+            case .print:
+                itemTupple.append(EditinglBar.PreDetermendTypes.print)
             default:
                 break
             }
@@ -123,6 +125,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         }
         
         let type = types[index]
+        
         switch type {
         case .delete:
             interactor.delete(item: selectedItems)
@@ -158,6 +161,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         case .addToAlbum:
             //interactor.addToAlbum(items: selectedItems)
             router.addToAlbum(items: selectedItems)
+        case .print:
+            router.showPrint(items: selectedItems)
         default:
             break
         }
