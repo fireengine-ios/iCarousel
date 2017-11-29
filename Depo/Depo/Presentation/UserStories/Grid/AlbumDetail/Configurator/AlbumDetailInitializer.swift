@@ -25,7 +25,7 @@ class AlbumDetailModuleInitializer: NSObject {
         interactor.album = album
         
         configurator.configure(viewController: viewController, fileFilters: [.rootAlbum(album.uuid)],
-                               bottomBarConfig: bottomBarConfig, router: BaseFilesGreedRouter(),
+                               bottomBarConfig: bottomBarConfig, router: AlbumDetailRouter(),
                                presenter: presentor, interactor: interactor,
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.shareAlbum, .download, .select],
                                                                                      selectionModeTypes: [.createStory, .delete]),

@@ -982,6 +982,7 @@
 		ECB8AAA638B83B4143502385 /* HomeHeaderViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82EFD8C000647F52E5E9F30F /* HomeHeaderViewInput.swift */; };
 		ED00E6080A9C91B4A3F19BDC /* ActionsMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4A95B8FCF8E339EF87B05 /* ActionsMenuView.swift */; };
 		EDD8CBFAF2355BDB13376953 /* ActivityTimelinePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBFD42348DB7E7086DFA5D8 /* ActivityTimelinePresenter.swift */; };
+		EF1B60441FCD9E0D00662CBC /* PhotoVideoAlbumDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1B60431FCD9E0D00662CBC /* PhotoVideoAlbumDetailInteractor.swift */; };
 		EF2EE1EEC26868913C9251BD /* FeedbackViewModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA23BA709900F6EF8480710 /* FeedbackViewModuleInput.swift */; };
 		EF9B85CF5585F042A8D5103F /* LikeFilterInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A4E83DDEBA92B2A944CD37 /* LikeFilterInteractorInput.swift */; };
 		EFA74F9E1FBF371200CF946E /* PrintService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA74F9D1FBF371100CF946E /* PrintService.swift */; };
@@ -2061,6 +2062,7 @@
 		EDE8BFD15AF72B3992E638CF /* ExpandStorageConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ExpandStorageConfigurator.swift; sourceTree = "<group>"; };
 		EED76B8EC80CDF294DAF95F7 /* ActivityTimelineRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityTimelineRouter.swift; sourceTree = "<group>"; };
 		EEEFEDC411CE8C9592155BE8 /* UploadedItemsViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadedItemsViewInput.swift; sourceTree = "<group>"; };
+		EF1B60431FCD9E0D00662CBC /* PhotoVideoAlbumDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoAlbumDetailInteractor.swift; sourceTree = "<group>"; };
 		EFA74F9D1FBF371100CF946E /* PrintService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintService.swift; sourceTree = "<group>"; };
 		EFA74FA11FBF378F00CF946E /* PrintPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintPresenter.swift; sourceTree = "<group>"; };
 		EFA74FA31FBF378F00CF946E /* PrintViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintViewController.swift; sourceTree = "<group>"; };
@@ -6770,6 +6772,7 @@
 				F9ACD7C82C97B84CF13A1A92 /* PhotoVideoDetailInteractorInput.swift */,
 				5047D2D77F166BBE66169F8E /* PhotoVideoDetailInteractorOutput.swift */,
 				B889664B5BCF5EDBAC69D0C0 /* PhotoVideoDetailInteractor.swift */,
+				EF1B60431FCD9E0D00662CBC /* PhotoVideoAlbumDetailInteractor.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -7366,6 +7369,7 @@
 				CE51AC151EF90853005DCEE0 /* UpdaterController.m in Sources */,
 				CE4140631F0A5F6D001924E1 /* CaptchaViewController.swift in Sources */,
 				CECA331A1F73DA660093CB3C /* CollectionSortingRules.swift in Sources */,
+				EF1B60441FCD9E0D00662CBC /* PhotoVideoAlbumDetailInteractor.swift in Sources */,
 				CE51AC1E1EF90853005DCEE0 /* RegistrationDataSource.swift in Sources */,
 				8C6EF87E1F348B5C002AC795 /* BottomSelectionTabBarPresenter.swift in Sources */,
 				7CD1F8F91F0288CA0028F51A /* WiFiSyncPresenter.swift in Sources */,
