@@ -59,7 +59,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         switch selectedItem.fileType {
         case .image, .video:
             var barConfig = photoVideoBottomBarConfig!
-            if .video == selectedItem.fileType, let editIndex = barConfig.elementsConfig.index(of: .edit) {
+            if .video == selectedItem.fileType || selectedItem.isLocalItem, let editIndex = barConfig.elementsConfig.index(of: .edit) {
                 var elementsConfig = barConfig.elementsConfig
                 elementsConfig.remove(at: editIndex)
                 barConfig = EditingBarConfig(elementsConfig: elementsConfig, style: .black, tintColor: nil)
