@@ -93,6 +93,45 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         return mediaContent
     }
     
+    func getAllAlbums() -> [AlbumItem] {
+        let album = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: nil)
+        let smartAlbum = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .any, options: nil)
+        
+        var albums = [AlbumItem]()
+        
+        [album, smartAlbum].forEach { album in
+            album.enumerateObjects { (object, index, stop) in
+                if object.photosCount > 0 {
+                    let item = AlbumItem(uuid: object.localIdentifier,
+                                         name: object.localizedTitle,
+                                         creationDate: nil,
+                                         lastModifiDate: nil,
+                                         fileType: .photoAlbum,
+                                         syncStatus: .unknown,
+                                         isLocalItem: true)
+                    item.imageCount = object.photosCount
+                    
+                    let fetchOptions = PHFetchOptions()
+                    fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+                    fetchOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
+                    
+                    if let asset = PHAsset.fetchAssets(in: object, options: fetchOptions).firstObject {
+                        let info = self.fullInfoAboutAsset(asset: asset)
+                        
+                        let baseMediaContent = BaseMediaContent(curentAsset: asset,
+                                                                urlToFile: info.url,
+                                                                size: info.size,
+                                                                md5: info.md5)
+                        item.preview = WrapData(baseModel: baseMediaContent)
+                    }
+                    
+                    albums.append(item)
+                }
+            }
+        }
+        
+        return albums
+    }
     
     // MARK: Image
     

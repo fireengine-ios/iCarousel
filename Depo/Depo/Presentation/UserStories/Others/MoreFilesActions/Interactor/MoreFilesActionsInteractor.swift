@@ -28,11 +28,14 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
     }
     
     func selectShareType(sourceRect: CGRect?) {
-        if sharingItems.contains(where: { return $0.fileType != .image && $0.fileType != .video }) {
-            shareViaLink(sourceRect: sourceRect)
-        } else {
-            showSharingMenu(sourceRect: sourceRect)
-        }
+        sync(items: sharingItems, action: { [weak self] in
+            guard let `self` = self else { return }
+            if self.sharingItems.contains(where: { return $0.fileType != .image && $0.fileType != .video }) {
+                self.shareViaLink(sourceRect: sourceRect)
+            } else {
+                self.showSharingMenu(sourceRect: sourceRect)
+            }
+        }, cancel: {})
     }
     
     func showSharingMenu(sourceRect: CGRect?) {
@@ -195,14 +198,22 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
     private func deleteFromAlbums(items: [BaseDataSourceItem]){
         self.output?.operationStarted(type: .removeFromAlbum)
         
-        let parameters = DeletePhotosFromAlbum(albumUUID: "", photos: items as! [Item])
+        var album = ""
+        
+        for item in items {
+            if let item = item as? WrapData, let albumID = item.albums?.first {
+                album = albumID
+                break
+            }
+        }
+        
+        let parameters = DeletePhotosFromAlbum(albumUUID: album, photos: items as! [Item])
         PhotosAlbumService().deletePhotosFromAlbum(parameters: parameters, success: {
             DispatchQueue.main.async { [weak self] in
                 self?.output?.operationFinished(type: .removeFromAlbum)
             }
         }) { (errorRespone) in
             DispatchQueue.main.async { [weak self] in
-                
                 self?.output?.operationFailed(type: .removeFromAlbum, message: errorRespone.description)
             }
         }
@@ -268,17 +279,20 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
     
     func createStory(items: [BaseDataSourceItem]) {
         let router = RouterVC()
-        router.createStoryName(items: items)
+        sync(items: items, action: {
+            DispatchQueue.main.async {
+                router.createStoryName(items: items)
+            }
+        }, cancel: {})
     }
     
     func addToFavorites(items: [BaseDataSourceItem]) {
-        guard let items = items as? [Item] else { //FIXME: transform all to BaseDataSourceItem
-            return
-        }
-        output?.operationStarted(type: .addToFavorites)
-        fileService.addToFavourite(files: items,
-                                   success: succesAction(elementType: .addToFavorites),
-                                   fail: failAction(elementType: .addToFavorites))
+        sync(items: items, action: { [weak self] in
+            guard let items = items as? [WrapData] else { return }
+            self?.fileService.addToFavourite(files: items,
+                                       success: self?.succesAction(elementType: .addToFavorites),
+                                       fail: self?.failAction(elementType: .addToFavorites))
+        }, cancel: {})
     }
     
     func removeFromFavorites(items: [BaseDataSourceItem]) {
@@ -295,9 +309,13 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
     // Photo Action
     
     func addToAlbum(items: [BaseDataSourceItem]) {
-        let router = RouterVC()
-        let vc = router.addPhotosToAlbum(photos: items)
-        router.pushViewController(viewController: vc)
+        sync(items: items, action: {
+            let router = RouterVC()
+            let vc = router.addPhotosToAlbum(photos: items)
+            DispatchQueue.main.async {
+                router.pushViewController(viewController: vc)
+            }
+        }, cancel: {})
     }
     
     func backUp(items: [BaseDataSourceItem]) {
@@ -377,5 +395,21 @@ class MoreFilesActionsInteractor: MoreFilesActionsInteractorInput {
             }
         }
         return failResponse
+    }
+    
+    private func sync(items: [BaseDataSourceItem], action: @escaping () -> Void, cancel: @escaping () -> Void, fail: FailResponse? = nil) {
+        guard let items = items as? [WrapData] else { return }
+        let successClosure = { [weak self] in
+            self?.output?.compliteAsyncOperationEnableScreen()
+            action()
+        }
+        let failClosure: FailResponse = { [weak self] (errorResponse) in
+            self?.output?.compliteAsyncOperationEnableScreen()
+            fail?(errorResponse)
+        }
+        let operations = fileService.syncItemsIfNeeded(items, success: successClosure, fail: failClosure)
+        if let operations = operations {
+            output?.startCancelableAsync(operations: operations, cancel: cancel)
+        }
     }
 }

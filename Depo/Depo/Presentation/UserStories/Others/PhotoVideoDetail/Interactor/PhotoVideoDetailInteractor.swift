@@ -59,6 +59,11 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         switch selectedItem.fileType {
         case .image, .video:
             var barConfig = photoVideoBottomBarConfig!
+            if .video == selectedItem.fileType, let editIndex = barConfig.elementsConfig.index(of: .edit) {
+                var elementsConfig = barConfig.elementsConfig
+                elementsConfig.remove(at: editIndex)
+                barConfig = EditingBarConfig(elementsConfig: elementsConfig, style: .black, tintColor: nil)
+            }
             if selectedItem.syncStatus != .notSynced {
                 barConfig = EditingBarConfig(elementsConfig: barConfig.elementsConfig + [.delete], style: .black, tintColor: nil)
             }

@@ -14,11 +14,13 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationBarWithGradientStyle()
-        if mainTitle != "" {
-            self.subTitle = output.getSortTypeString()
-        }
-        self.setTitle(withString: mainTitle, andSubTitle: subTitle)
+            navigationBarWithGradientStyle()
+
+            if mainTitle != "" {
+                self.subTitle = output.getSortTypeString()
+            }
+            self.setTitle(withString: mainTitle, andSubTitle: subTitle)
+        
     }
 
     override func startSelection(with numberOfItems: Int) {
@@ -37,8 +39,8 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
         super.viewDidAppear(animated)
     }
     
-    override func configurateNavigationBar(){
-        configureNavBarActions()
+    override func configurateNavigationBar() {
+            configureNavBarActions()
     }
     
     override func isNeedShowTabBar() -> Bool{

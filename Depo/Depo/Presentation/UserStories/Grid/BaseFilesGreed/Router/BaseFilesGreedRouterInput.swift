@@ -13,5 +13,7 @@ protocol BaseFilesGreedRouterInput {
     func onItemSelected(item: BaseDataSourceItem, from data:[[BaseDataSourceItem]])
     
     func showPrint(items: [BaseDataSourceItem])
+    
+    func showBack()
 }
 

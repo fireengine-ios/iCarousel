@@ -218,10 +218,8 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     @objc func onCancelSelectionButton(){
-        if (mainTitle != "") && (mainTitle != nil){
-            self.setTitle(withString: mainTitle, andSubTitle: subTitle)
-        }
-        output.onCancelSelection()
+            output.onCancelSelection()
+        
     }
     
     func changeSortingRepresentation(sortType type: SortedRules) {
