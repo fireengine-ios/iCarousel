@@ -11,7 +11,6 @@ import Foundation
 protocol PackagesInteractorOutput: class {
     func successed(offers: [OfferServiceResponse])
     func successed(offerApples: [OfferApple])
-//    func successed(activateOffer: OfferServiceResponse)
     func successed(tokenForOffer: String)
     func successed(tokenForResend: String)
     func successedVerifyOffer()

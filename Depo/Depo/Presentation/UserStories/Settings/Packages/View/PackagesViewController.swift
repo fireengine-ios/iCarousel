@@ -38,7 +38,7 @@ class PackagesViewController: UIViewController {
 extension PackagesViewController: PackagesViewInput {
     
     func display(error: ErrorResponse) {
-        CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: "Error", withText: error.description, okButtonText: TextConstants.ok)
+        CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: TextConstants.errorAlert, withText: error.description, okButtonText: TextConstants.ok)
     }
     
     func display(subscriptionPlans array: [SubscriptionPlan]) {

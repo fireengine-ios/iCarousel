@@ -28,6 +28,7 @@ class CodeTextField: UITextField {
     var inputTextLimit = NumericConstants.vereficationCharacterLimit
     var underlineColor = UIColor.gray
     var underlineWidth: CGFloat = 1
+    let fontKern = 20
     
     private lazy var bottomBorder = CALayer()
     
@@ -57,7 +58,7 @@ extension CodeTextField: UITextFieldDelegate {
             newString.count <= inputTextLimit
             else { return false}
         
-        typingAttributes?[NSAttributedStringKey.kern.rawValue] = 20
+        typingAttributes?[NSAttributedStringKey.kern.rawValue] = fontKern
         
         return true
     }

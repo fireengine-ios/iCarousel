@@ -43,7 +43,7 @@ final class OptInController: UIViewController {
         automaticallyAdjustsScrollViewInsets = false
         
         codeTextField.becomeFirstResponder()
-        setupTimer(withRemainingTime: 120)
+        setupTimer(withRemainingTime: NumericConstants.vereficationTimerLimit)
         
         resendButton.isHidden = true
         resendButton.layer.cornerRadius = 20
@@ -82,7 +82,6 @@ final class OptInController: UIViewController {
     }
     
     var attempts: Int = 0
-    let MaxAttemps: Int = 3
     
     func verify(code: String) {
         delegate?.optIn(self, didEnterCode: code)
@@ -106,7 +105,8 @@ final class OptInController: UIViewController {
     
     func increaseNumberOfAttemps() {
         attempts += 1
-        if attempts >= MaxAttemps {
+        
+        if attempts >= NumericConstants.maxVereficationAttempts {
             attempts = 0
             endEnterCode()
             delegate?.optInReachedMaxAttempts(self)
