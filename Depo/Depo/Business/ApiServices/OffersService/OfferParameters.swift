@@ -14,6 +14,9 @@ private struct OfferPath {
     static let activateOffer = "/api/account/activateOffer"
     static let allAccessOffers = "/api/account/allAccessOffers/APPLE"
     static let validateApplePurchase = "/api/inapppurchase/apple/validatePurchase"
+    
+    static let initOffer = "/api/account/initOfferPurchase"
+    static let verifyOffer = "/api/account/verifyOfferPurchase"
 }
 
 class OfferAllParameters: BaseRequestParametrs {
@@ -65,5 +68,42 @@ class ValidateApplePurchaseParameters: BaseRequestParametrs {
                     "productId": productId]
         }
         return ["receiptId": receiptId]
+    }
+}
+
+final class InitOfferParameters: BaseRequestParametrs {
+    
+    let offerId: String
+    
+    init(offerId: String) {
+        self.offerId = offerId
+    }
+    
+    override var patch: URL {
+        return URL(string: OfferPath.initOffer, relativeTo: super.patch)!
+    }
+    
+    override var requestParametrs: Any {
+        return offerId
+    }
+}
+
+final class VerifyOfferParameters: BaseRequestParametrs {
+    
+    let otp: String
+    let referenceToken: String
+    
+    init(otp: String, referenceToken: String) {
+        self.otp = otp
+        self.referenceToken = referenceToken
+    }
+    
+    override var patch: URL {
+        return URL(string: OfferPath.verifyOffer, relativeTo: super.patch)!
+    }
+    
+    override var requestParametrs: Any {
+        return ["otp": otp,
+                "referenceToken": referenceToken]
     }
 }

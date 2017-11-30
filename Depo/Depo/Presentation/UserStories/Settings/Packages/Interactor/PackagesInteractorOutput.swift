@@ -11,9 +11,13 @@ import Foundation
 protocol PackagesInteractorOutput: class {
     func successed(offers: [OfferServiceResponse])
     func successed(offerApples: [OfferApple])
-    func successed(activateOffer: OfferServiceResponse)
+//    func successed(activateOffer: OfferServiceResponse)
+    func successed(tokenForOffer: String)
+    func successed(tokenForResend: String)
+    func successedVerifyOffer()
     func successed(activeSubscriptions: [SubscriptionPlanBaseResponse])
     func successed(accountTypeString: String)
     func successed(offerApple: OfferApple)
     func failedUsage(with error: ErrorResponse)
+    func failedVerifyOffer()
 }

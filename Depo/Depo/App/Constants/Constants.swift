@@ -22,6 +22,7 @@ struct TextConstants {
     static let registrationTitleText = "Register to lifebox and get a 5 GB of storage for free!"
     static let registrationNextButtonText = "Next"
     static let registrationResendButtonText = "Resend"
+    static let optInNavigarionTitle = "Verify Your Purchase"
     static let phoneVereficationMainTitleText = "Verify Your Phone Number"
     static let phoneVereficationInfoTitleText = "Enter the verification code"
     static let phoneVereficationNonValidCodeErrorText = "Verification code is invalid. \n Please try again."
