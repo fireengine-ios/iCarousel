@@ -141,6 +141,15 @@ final class VerifyOfferResponse: ObjectRequestResponse {
     }
 }
 
+final class JobExistsResponse: ObjectRequestResponse {
+    
+    var isJobExists: Bool?
+    
+    override func mapping() {
+        isJobExists = json?["isJobExists"].bool
+    }
+}
+
 final class SubmitPromocodeResponse: ObjectRequestResponse {
     
     var error: String?
