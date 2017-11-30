@@ -15,8 +15,8 @@ private struct OfferPath {
     static let allAccessOffers = "/api/account/allAccessOffers/APPLE"
     static let validateApplePurchase = "/api/inapppurchase/apple/validatePurchase"
     
-    static let initOffer = "account/initOfferPurchase"
-    static let verifyOffer = "/account/verifyOfferPurchase"
+    static let initOffer = "/api/account/initOfferPurchase"
+    static let verifyOffer = "/api/account/verifyOfferPurchase"
 }
 
 class OfferAllParameters: BaseRequestParametrs {
