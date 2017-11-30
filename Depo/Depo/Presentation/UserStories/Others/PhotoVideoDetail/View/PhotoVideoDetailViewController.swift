@@ -259,9 +259,13 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
         return getActionsForMostPartOfObjects(object: object)
     }
 
-    @objc func onRightBarButtonItem(sender: UIButton){
+    @objc func onRightBarButtonItem(sender: UIButton) {
         
-        output.moreButtonPressed(sender: sender)
+        let stackCountViews = self.navigationController?.viewControllers.count ?? 0
+        let inAlbumState = stackCountViews > 1 && self.navigationController?.viewControllers[stackCountViews - 2] is AlbumDetailViewController
+        
+        output.moreButtonPressed(sender: sender, inAlbumState: inAlbumState)
+
 //        let actionsView = ActionsMenuView.initFromXib()
 //        
 //        var actions = [ActionMenyItem]()
