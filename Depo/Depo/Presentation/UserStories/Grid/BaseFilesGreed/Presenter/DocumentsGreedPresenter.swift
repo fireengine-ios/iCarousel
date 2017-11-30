@@ -33,7 +33,7 @@ class DocumentsGreedPresenter: BaseFilesGreedPresenter {
     }
     
     override func operationFinished(withType type: ElementTypes, response: Any?) {
-        if type == .delete {
+        if type == .delete || type == .addToFavorites || type == .removeFromFavorites {
             onReloadData()  
         }
     }
