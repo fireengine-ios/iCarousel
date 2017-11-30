@@ -98,7 +98,12 @@ class GSMUserInputCell: ProtoInputTextCell {//BaseUserInputCellView {
 extension GSMUserInputCell {
     
     override func textFieldDidEndEditing(_ textField: UITextField) {
-        delegate?.phoneNumberChanged(toNumber: textInputField.text!)
+        var number = textField.text!
+        if gsmCountryCodeLabel.text == "+90", number.first == "0", let index = number.index(of: "0") {
+            number = String(number[number.index(after: index)...])
+        }
+        textField.text = number
+        delegate?.phoneNumberChanged(toNumber: number)
     }
     
     override func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -111,7 +116,5 @@ extension GSMUserInputCell {
         let result = string.rangeOfCharacter(from: notAvailableCharacterSet)
         return result == nil
     }
-    
-    
     
 }
