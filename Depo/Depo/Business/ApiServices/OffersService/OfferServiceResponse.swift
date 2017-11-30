@@ -132,7 +132,16 @@ final class InitOfferResponse: ObjectRequestResponse {
     }
 }
 
-class VerifyOfferResponse: ObjectRequestResponse {
+final class VerifyOfferResponse: ObjectRequestResponse {
+    
+    var error: String?
+    
+    override func mapping() {
+        error = json?.string
+    }
+}
+
+final class SubmitPromocodeResponse: ObjectRequestResponse {
     
     var error: String?
     

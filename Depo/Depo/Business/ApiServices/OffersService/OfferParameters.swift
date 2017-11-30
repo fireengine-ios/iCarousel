@@ -17,6 +17,8 @@ private struct OfferPath {
     
     static let initOffer = "/api/account/initOfferPurchase"
     static let verifyOffer = "/api/account/verifyOfferPurchase"
+    
+    static let submitPromocode = "/api/account/verifyOfferPurchase"
 }
 
 class OfferAllParameters: BaseRequestParametrs {
@@ -105,5 +107,22 @@ final class VerifyOfferParameters: BaseRequestParametrs {
     override var requestParametrs: Any {
         return ["otp": otp,
                 "referenceToken": referenceToken]
+    }
+}
+
+final class SubmitPromocodeParameters: BaseRequestParametrs {
+    
+    let promocode: String
+    
+    init(promocode: String) {
+        self.promocode = promocode
+    }
+    
+    override var patch: URL {
+        return URL(string: OfferPath.submitPromocode, relativeTo: super.patch)!
+    }
+    
+    override var requestParametrs: Any {
+        return ["promocode": promocode]
     }
 }

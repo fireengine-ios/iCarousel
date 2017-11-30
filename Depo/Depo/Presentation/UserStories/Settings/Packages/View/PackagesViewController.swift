@@ -12,6 +12,7 @@ class PackagesViewController: UIViewController {
     var output: PackagesViewOutput!
     
     @IBOutlet weak private var collectionView: UICollectionView!
+    @IBOutlet var keyboardHideManager: KeyboardHideManager!
     
     private lazy var activityManager = ActivityIndicatorManager()
     
