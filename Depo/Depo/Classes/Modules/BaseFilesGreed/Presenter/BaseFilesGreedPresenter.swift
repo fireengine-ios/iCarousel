@@ -401,7 +401,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 actionTypes.append(.rename)
             }
 
-            let syncPhotos = selectedItems.filter{ $0.syncStatus == .synced && $0.fileType == .image }
+            let syncPhotos = selectedItems.filter{ !$0.isLocalItem && $0.fileType == .image }
             if !syncPhotos.isEmpty {
                 actionTypes.append(.print)
             }
@@ -465,7 +465,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func printSelected() {
-        let syncPhotos = selectedItems.filter{ $0.syncStatus == .synced && $0.fileType == .image }
+        let syncPhotos = selectedItems.filter{ !$0.isLocalItem && $0.fileType == .image }
         if !syncPhotos.isEmpty {
             router.showPrint(items: syncPhotos)
         }
