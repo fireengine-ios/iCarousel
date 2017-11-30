@@ -111,6 +111,20 @@ class WrapItemFileService: WrapItemFileOperations {
                                      fail: fail)
     }
     
+    func syncItemsIfNeeded(_ items: [WrapData], success: FileOperationSucces?, fail: FailResponse?) -> [UploadOperations]? {
+        let localFiles = localWrapedData(files: items)
+        guard localFiles.count > 0 else {
+            success?()
+            return nil
+        }
+        return uploadService.uploadFileList(items: localFiles,
+                                            uploadType: .syncToUse,
+                                            uploadStategy: .WithoutConflictControl,
+                                            uploadTo: .MOBILE_UPLOAD,
+                                            success: success,
+                                            fail: fail)
+    }
+    
     func download(items: [WrapData], toPath: String, success: FileOperationSucces?, fail: FailResponse?) {
         let downloadItems = remoteWrapDataItems(files: items)
         

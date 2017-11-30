@@ -159,8 +159,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         case .removeFromAlbum:
             interactor.removeFromAlbum(items: selectedItems)
         case .addToAlbum:
-            //interactor.addToAlbum(items: selectedItems)
-            router.addToAlbum(items: selectedItems)
+            interactor.addToAlbum(items: selectedItems)
         case .print:
             router.showPrint(items: selectedItems)
         default:
