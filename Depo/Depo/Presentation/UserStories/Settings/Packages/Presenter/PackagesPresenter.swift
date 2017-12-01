@@ -21,7 +21,7 @@ class PackagesPresenter {
             let plans = subscriptionPlans.flatMap { $0.subscriptionPlanRole }
             var isSubTur = false
             for plan in plans {
-                if plan.hasPrefix("lifebox") || plan.hasPrefix("kktcell") {
+                if plan.hasPrefix("lifebox") || plan.hasPrefix("kktcell") || plan.hasPrefix("moldcell") {
                     isSubTur = true
                     break
                 }
@@ -85,6 +85,7 @@ extension PackagesPresenter: PackagesViewOutput {
     }
 }
 
+// MARK: - OptInControllerDelegate
 extension PackagesPresenter: OptInControllerDelegate {
     func optInResendPressed(_ optInVC: OptInController) {
         self.optInVC = optInVC
@@ -108,9 +109,13 @@ extension PackagesPresenter: OptInControllerDelegate {
     }
 }
 
-
 // MARK: PackagesInteractorOutput
 extension PackagesPresenter: PackagesInteractorOutput {
+    
+    func successedJobExists() {
+        interactor.getOffers()
+    }
+    
     func failedVerifyOffer() {
         optInVC?.increaseNumberOfAttemps()
         optInVC?.clearCode()
@@ -150,7 +155,7 @@ extension PackagesPresenter: PackagesInteractorOutput {
         accountType = accountType(for: accountTypeString, subscriptionPlans: activeSubscriptions)
         switch accountType {
         case .turkcell:
-            interactor.getOffers()
+            interactor.checkJobExists()
         case .subTurkcell:
             break
         case .all:

@@ -227,6 +227,22 @@ extension PackagesInteractor: PackagesInteractorInput {
         })
     }
     
+    func checkJobExists() {
+        offersService.getJobExists(
+            success: { [weak self] response in
+                guard let jobResponse = response as? JobExistsResponse else { return }
+                if jobResponse.isJobExists == true {
+                    DispatchQueue.main.async {
+                        self?.output.successedJobExists()
+                    }
+                }
+            }, fail: { [weak self] errorResponse in
+                DispatchQueue.main.async {
+                    self?.output.failedUsage(with: errorResponse)
+                }
+        })
+    }
+    
     func getOfferApples() {
         offersService.offersAllApple(
             success: { [weak self] response in

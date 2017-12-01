@@ -10,6 +10,7 @@ import Foundation
 
 protocol PackagesInteractorInput {
     func getOffers()
+    func checkJobExists()
     func getOfferApples()
     func getToken(for offer: OfferServiceResponse)
     func getResendToken(for offer: OfferServiceResponse)
