@@ -152,6 +152,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         let presenter: BaseFilesGreedPresenter = DocumentsGreedPresenter()
         let interactor = BaseFilesGreedInteractor(remoteItems: FilesFromFolderService(requestSize: 999, rootFolder: folder.uuid))
         interactor.folder = folder
+        viewController.parentUUID = folder.uuid
         
         configurator.configure(viewController: viewController, fileFilters: [.rootFolder(folder.uuid)],
                                bottomBarConfig: bottomBarConfig, router: BaseFilesGreedRouter(),

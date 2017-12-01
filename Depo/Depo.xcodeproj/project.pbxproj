@@ -3430,6 +3430,13 @@
 			path = ViewForPopUp;
 			sourceTree = "<group>";
 		};
+		7C233CA61FD18DDA0013CCA0 /* UploadFromLifeBox */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UploadFromLifeBox;
+			sourceTree = "<group>";
+		};
 		7C2F56F71F1CC1980014870B /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -5690,6 +5697,7 @@
 		CE3EB30E1FC7F6A0000B70D6 /* Grid */ = {
 			isa = PBXGroup;
 			children = (
+				7C233CA61FD18DDA0013CCA0 /* UploadFromLifeBox */,
 				3064E02B6455F8283162B7B7 /* BaseFilesGreed */,
 				7C3A74341F04DE2800124DF5 /* BaseDataSources */,
 				3C9A2005A04679D300893C3E /* UploadFilesSelection */,
@@ -7222,7 +7230,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		82B2D76F0D1B2CE153F470BD /* [CP] Embed Pods Frameworks */ = {

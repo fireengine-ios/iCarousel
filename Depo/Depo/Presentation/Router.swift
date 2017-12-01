@@ -33,6 +33,21 @@ class RouterVC: NSObject {
         return [FloatingButtonsType]()
     }
     
+    func getParentUUID() -> String{
+        let nController = navigationController
+        let viewController = nController?.viewControllers.last
+        
+        if let baseViewController = viewController as? BaseViewController{
+            return baseViewController.parentUUID
+        }
+        
+        return ""
+    }
+    
+    func isRootViewControllerAlbumDetail() -> Bool{
+        return navigationController?.viewControllers.last is AlbumDetailViewController
+    }
+    
     // MARK: Navigation controller
     
     var navigationController: UINavigationController? {

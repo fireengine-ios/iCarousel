@@ -40,7 +40,7 @@ final class UploadService: BaseRequestService {
         super.init()
     }
 
-    func upload(imageData: Data, handler: @escaping (Result<Void>) -> Void) {
+    func upload(imageData: Data, parentUUID: String = "", isFaorites: Bool = false, handler: @escaping (Result<SearchItemResponse>) -> Void) {
         baseUrl(success: { [weak self] urlResponse in
             
             guard let url = urlResponse?.url else {
@@ -48,6 +48,8 @@ final class UploadService: BaseRequestService {
             }
             
             let uploadParam = UploadDataParametrs(data: imageData, url: url)
+            uploadParam.parentUuid = parentUUID
+            uploadParam.isFavorites = isFaorites
             
             _ = self?.executeUploadDataRequest(param: uploadParam, response: { [weak self]
                 (data, response, error) in
@@ -62,19 +64,17 @@ final class UploadService: BaseRequestService {
                     return handler(.failed(CustomErrors.unknown))
                 }
                 
-                let uploadNotifParam = UploadNotify(parentUUID: "",
+                let uploadNotifParam = UploadNotify(parentUUID: parentUUID,
                                                     fileUUID: uploadParam.tmpUUId )
 
                 self?.uploadNotify(param: uploadNotifParam, success: { baseurlResponse in
-                    /// MAYBE WILL BE NEED
-                    //guard let response = baseurlResponse as? UploadNotifyResponse else {
-                    //    return handler(.failed(CustomErrors.unknown))
-                    //}
-                    //print(response.itemResponse ?? "")
-                    
+                    guard let response = baseurlResponse as? SearchItemResponse else {
+                        return handler(.failed(CustomErrors.unknown))
+                    }
+
                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: UploadService.notificatioUploadServiceDidUpload),
                                                     object: nil)
-                    handler(.success(()))
+                    handler(.success(response))
                 }, fail: { errorResponse in
                     handler(.failed(CustomErrors.text(errorResponse.description)))
                 })
@@ -95,17 +95,16 @@ final class UploadService: BaseRequestService {
         }
     }
     
-    func uploadFileList(items: [WrapData], uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", success: FileOperationSucces?, fail: FailResponse? ) {
-        
+    func uploadFileList(items: [WrapData], uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, success: FileOperationSucces?, fail: FailResponse? ) {
         switch uploadType {
         case .autoSync:
-            self.syncFileList(items: items, uploadStategy: uploadStategy, uploadTo: uploadTo, success: {
+            self.syncFileList(items: items, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: {
                 success?()
             }, fail: { (errorResponse) in
                 fail?(errorResponse)
             })
         default:
-            self.uploadFileList(items: items, uploadStategy: uploadStategy, uploadTo: uploadTo, success: {
+            self.uploadFileList(items: items, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: {
                 success?()
             }, fail: { (errorResponse) in
                 fail?(errorResponse)
@@ -115,7 +114,7 @@ final class UploadService: BaseRequestService {
     
     }
     
-    private func uploadFileList(items: [WrapData], uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", success: FileOperationSucces?, fail: FailResponse? ) {
+    private func uploadFileList(items: [WrapData], uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, success: FileOperationSucces?, fail: FailResponse? ) {
         // filter all items which md5's are not in the uploadOperations
         let itemsToUpload = items.filter { (item) -> Bool in
             return (self.uploadOperations.first(where: { (operation) -> Bool in
@@ -140,8 +139,9 @@ final class UploadService: BaseRequestService {
         WrapItemOperatonManager.default.setProgressForOperationWith(type: .upload,
                                                                     allOperations: self.allUploadOperationsCount,
                                                                     completedOperations: self.finishedUploadOperationsCount)
+        
         let operations: [UploadOperations] = itemsToUpload.flatMap {
-            let operation = UploadOperations(item: $0, uploadType: .fromHomePage, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, success: { (finishedOperation) in
+            let operation = UploadOperations(item: $0, uploadType: .fromHomePage, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { (finishedOperation) in
                 finishedOperation.item.syncStatus = .synced
                 CoreDataStack.default.appendOnlyNewItems(items: [finishedOperation.item])
                 
@@ -183,7 +183,6 @@ final class UploadService: BaseRequestService {
             operation.queuePriority = .high
             return operation
         }
-        
         uploadOperations.insert(contentsOf: operations, at: 0)
         dispatchQueue.async {
             self.uploadQueue.addOperations(operations, waitUntilFinished: false)
@@ -191,7 +190,7 @@ final class UploadService: BaseRequestService {
         }
     }
     
-    private func syncFileList(items: [WrapData], uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", success: FileOperationSucces?, fail: FailResponse? ) {
+    private func syncFileList(items: [WrapData], uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, success: FileOperationSucces?, fail: FailResponse? ) {
         // filter all items which md5's are not in the uploadOperations
         let itemsToSync = items.filter { (item) -> Bool in
             return (self.uploadOperations.first(where: { (operation) -> Bool in
@@ -209,7 +208,7 @@ final class UploadService: BaseRequestService {
                                                                     allOperations: self.allSyncOperationsCount,
                                                                     completedOperations: self.finishedSyncOperationsCount)
         let operations: [UploadOperations] = itemsToSync.flatMap {
-            let operation = UploadOperations(item: $0, uploadType: .autoSync, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, success: { (finishedOperation) in
+            let operation = UploadOperations(item: $0, uploadType: .autoSync, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { (finishedOperation) in
                 
                 finishedOperation.item.syncStatus = .synced
                 CoreDataStack.default.updateLocalItemSyncStatus(item: finishedOperation.item)//appendOnlyNewItems(items: [finishedOperation.item])
@@ -312,7 +311,7 @@ final class UploadService: BaseRequestService {
     }
     
     func uploadNotify(param: UploadNotify, success: @escaping SuccessResponse, fail:FailResponse?) {
-        let handler = BaseResponseHandler<UploadNotifyResponse, ObjectRequestResponse>(success: success, fail: fail)
+        let handler = BaseResponseHandler<SearchItemResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }
 }
@@ -330,10 +329,12 @@ class UploadOperations: Operation {
     let fail: FailResponse?
     var requestObject: URLSessionUploadTask?
     var isRealCancel = false
+    var isFavorites: Bool = false
+    var isPhotoAlbum: Bool = false
     
     private let semaphore: DispatchSemaphore
     
-    init(item: WrapData, uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", success: UploadOperationSuccess?, fail: FailResponse?) {
+    init(item: WrapData, uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, success: UploadOperationSuccess?, fail: FailResponse?) {
         self.item = item
         self.uploadType = uploadType
         self.uploadTo = uploadTo
@@ -342,6 +343,8 @@ class UploadOperations: Operation {
         self.success = success
         self.fail = fail
         self.semaphore = DispatchSemaphore(value: 0)
+        self.isFavorites = isFavorites
+        self.isPhotoAlbum = isFromAlbum
         
         super.init()
         self.qualityOfService = (uploadType == .autoSync) ? .background : .userInitiated
@@ -360,6 +363,8 @@ class UploadOperations: Operation {
     }
     
     override func main() {
+        
+        let isPhotoA = isPhotoAlbum
         
         if isRealCancel {
             if let req = requestObject {
@@ -394,14 +399,28 @@ class UploadOperations: Operation {
                                       destitantion: (baseurlResponse?.url!)!,
                                       uploadStategy: self.uploadStategy,
                                       uploadTo: self.uploadTo,
-                                      rootFolder: self.folder)
+                                      rootFolder: self.folder,
+                                      isFavorite: self.isFavorites)
+            
             self.requestObject = self.upload(uploadParam: uploadParam, success: { [weak self] in
                 
-                let uploadNotifParam = UploadNotify(parentUUID: "",
+                let uploadNotifParam = UploadNotify(parentUUID: uploadParam.rootFolder,
                                                     fileUUID:uploadParam.tmpUUId )
                 
                 self?.uploadNotify(param: uploadNotifParam, success: { baseurlResponse in
                     try? FileManager.default.removeItem(at: uploadParam.urlToLocalFile)
+                    
+                    if isPhotoA{
+                        if let resp = baseurlResponse as? SearchItemResponse{
+                            let item = Item.init(remote: resp)
+                            let parameter = AddPhotosToAlbum(albumUUID: uploadParam.rootFolder, photos: [item])
+                            PhotosAlbumService().addPhotosToAlbum(parameters: parameter, success: {
+                                
+                            }, fail: { (error) in
+                                
+                            })
+                        }
+                    }
                     
 //                    if let response = baseurlResponse as? UploadNotifyResponse,
 //                        let uploadedFileDetail = response.itemResponse {
