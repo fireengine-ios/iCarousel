@@ -99,8 +99,10 @@ extension GSMUserInputCell {
     
     override func textFieldDidEndEditing(_ textField: UITextField) {
         var number = textField.text!
-        if gsmCountryCodeLabel.text == "+90", number.first == "0", let index = number.index(of: "0") {
-            number = String(number[number.index(after: index)...])
+        let isTurkeyNumber = gsmCountryCodeLabel.text == "+90"
+        if isTurkeyNumber, number.first == "0" {
+            let sliceRange = number.index(after: number.startIndex)...
+            number = String(number[sliceRange])
         }
         textField.text = number
         delegate?.phoneNumberChanged(toNumber: number)
