@@ -101,11 +101,6 @@ extension PackagesInteractor: PackagesInteractorInput {
     }
     
     func getToken(for offer: OfferServiceResponse) {
-        /// temp logic
-//        output.successed(tokenForOffer: "qweqwe")
-//        return
-//        return
-        
         offersService.initOffer(offer: offer,
             success: { [weak self] response in
                 guard let offerResponse = response as? InitOfferResponse,
@@ -128,20 +123,6 @@ extension PackagesInteractor: PackagesInteractorInput {
     }
     
     func verifyOffer(token: String, otp: String) {
-        /// temp logic
-//        if otp == "222222" {
-//            DispatchQueue.main.async {
-//                self.output.successedVerifyOffer()
-//            }
-//        } else {
-//            DispatchQueue.main.async {
-//                self.output.failedVerifyOffer()
-//            }
-//        }
-//
-//        return
-//        return
-        
         offersService.verifyOffer(otp: otp, referenceToken: token,
             success: { [weak self] response in
                 /// maybe will be need
@@ -177,22 +158,6 @@ extension PackagesInteractor: PackagesInteractorInput {
                 }
         })
     }
-    
-    
-//    func activate(offer: OfferServiceResponse) {
-//        offersService.activate(offer: offer,
-//            success: { [weak self] response in
-//                /// MAYBE WILL BE NEED
-//                //guard let offerResponse = response as? OfferActivateServiceResponse else { return }
-//                DispatchQueue.main.async {
-//                    self?.output.successed(activateOffer: offer)
-//                }
-//            }, fail: { [weak self] errorResponse in
-//                DispatchQueue.main.async {
-//                    self?.output.failedUsage(with: errorResponse)
-//                }
-//        })
-//    }
     
     func activate(offerApple: OfferApple) {
         iapManager.purchase(offerApple: offerApple) { [weak self] result in
@@ -244,14 +209,10 @@ extension PackagesInteractor: PackagesInteractorInput {
     }
     
     func submit(promocode: String) {
-//        output.successedPromocode()
-//        return
-//        return
-        
         offersService.submit(promocode: promocode,
              success: { [weak self] response in
                 /// maybe will be need
-//                guard let response = response as? SubmitPromocodeResponse else { return }
+                //guard let response = response as? SubmitPromocodeResponse else { return }
                 DispatchQueue.main.async {
                     self?.output.successedPromocode()
                 }

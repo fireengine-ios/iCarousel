@@ -15,6 +15,9 @@ class UsageInfoPresenter: BasePresenter {
 // MARK: - UsageInfoViewOutput
 extension UsageInfoPresenter: UsageInfoViewOutput {
     func viewIsReady() {
+    }
+    
+    func viewWillAppear() {
         interactor.getUsage()
     }
     
@@ -30,6 +33,6 @@ extension UsageInfoPresenter: UsageInfoInteractorOutput {
     }
     
     func failedUsage(with error: ErrorResponse) {
-        
+        view.display(error: error)
     }
 }

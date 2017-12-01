@@ -179,10 +179,11 @@
         </view>
         <customObject id="2I8-Re-xUl" customClass="KeyboardHideManager" customModule="Depo_LifeTech" customModuleProvider="target">
             <userDefinedRuntimeAttributes>
-                <userDefinedRuntimeAttribute type="boolean" keyPath="scrollSupport" value="YES"/>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="scrollSupport" value="NO"/>
             </userDefinedRuntimeAttributes>
             <connections>
                 <outletCollection property="targets" destination="cPJ-cW-pMM" collectionClass="NSMutableArray" id="vCg-ct-gM5"/>
+                <outletCollection property="targets" destination="5bp-6o-N2u" collectionClass="NSMutableArray" id="KKB-zx-C0u"/>
             </connections>
         </customObject>
     </objects>

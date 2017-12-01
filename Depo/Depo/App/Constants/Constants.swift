@@ -88,7 +88,7 @@ struct TextConstants {
     
     static let serverResponceError = "Wrong type of answer"
     
-    static let errorAlert = "ERROR"
+    static let errorAlert = "Error"
     static let errorAlerTitleBackupAlreadyExist = "Overwrite backup?"
     static let errorAlertTextBackupAlreadyExist = "You have already a backup. Do you want to overwrite the existing one?"
     static let errorAlertNopeBtnBackupAlreadyExist = "Nope"
