@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MailVereficationViewController" customModule="Depo_LifeTech" customModuleProvider="target">
+            <connections>
+                <outlet property="inputTextField" destination="ebZ-eJ-wcy" id="sTo-15-DWc"/>
+                <outlet property="sendButton" destination="0xo-kd-RYU" id="DYD-t0-Dxq"/>
+                <outlet property="titleLabel" destination="Q6U-vK-zhh" id="aLa-TJ-9Gi"/>
+                <outlet property="view" destination="iN0-l3-epB" id="9Hl-qi-Orj"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q6U-vK-zhh">
+                    <rect key="frame" x="166" y="247.5" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ebZ-eJ-wcy">
+                    <rect key="frame" x="62.5" y="318.5" width="250" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="250" id="aJV-GE-BSq"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0xo-kd-RYU">
+                    <rect key="frame" x="164" y="396" width="46" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="SEND"/>
+                    <connections>
+                        <action selector="sendAction:" destination="-1" eventType="touchUpInside" id="h4b-Cu-kgX"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="ebZ-eJ-wcy" firstAttribute="top" secondItem="Q6U-vK-zhh" secondAttribute="bottom" constant="50" id="RC8-kp-pPf"/>
+                <constraint firstItem="Q6U-vK-zhh" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Sqm-uH-wDr"/>
+                <constraint firstItem="ebZ-eJ-wcy" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="j2r-cK-AKt"/>
+                <constraint firstItem="ebZ-eJ-wcy" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="keE-6V-fjW"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

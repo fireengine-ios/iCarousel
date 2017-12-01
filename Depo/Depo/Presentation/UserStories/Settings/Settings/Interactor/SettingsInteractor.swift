@@ -19,6 +19,13 @@ class SettingsInteractor: SettingsInteractorInput {
         return passcodeStorage.isEmpty
     }
     
+    var isTurkcellUser: Bool {
+        return (userInfoResponse?.accountType == "TURKCELL")
+    }
+    var isEmptyMail: Bool {
+        return userInfoResponse?.email?.isEmpty ?? false
+    }
+    
     func getCellsData(){
         
         var securityCells = [TextConstants.settingsViewCellActivityTimline,

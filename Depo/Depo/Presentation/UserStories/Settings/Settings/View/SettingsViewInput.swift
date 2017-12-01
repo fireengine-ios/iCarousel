@@ -13,4 +13,5 @@ protocol SettingsViewInput: class {
     
     func profileInfoChanged()
     func profileWontChange()
+
 }

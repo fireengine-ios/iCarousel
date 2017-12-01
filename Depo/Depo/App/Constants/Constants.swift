@@ -24,6 +24,7 @@ struct TextConstants {
     static let registrationResendButtonText = "Resend"
     static let optInNavigarionTitle = "Verify Your Purchase"
     static let phoneVereficationMainTitleText = "Verify Your Phone Number"
+    static let mailVereficationMainTitleText = "Verify Your Email"
     static let phoneVereficationInfoTitleText = "Enter the verification code"
     static let phoneVereficationNonValidCodeErrorText = "Verification code is invalid. \n Please try again."
     static let phoneVereficationResendRequestFailedErrorText = "Request failed \n Please try again"

@@ -74,7 +74,18 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     }
     
     func goToPasscodeSettings() {
-        router.goToPasscodeSettings()
+        router.goToPasscodeSettings(inNeedOfMail: inNeedOfMailVerefication())
+    }
+    
+    func inNeedOfMailVerefication() -> Bool {
+        if interactor.isTurkcellUser, interactor.isEmptyMail {
+            return true
+        }
+        return false
+    }
+    
+    var inNeedOfMail: Bool {
+        return inNeedOfMailVerefication()
     }
     
     override func outputView() -> Waiting? {

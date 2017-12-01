@@ -12,6 +12,8 @@ protocol SettingsInteractorInput {
     func getCellsData()
     func onLogout()
     func uploadPhoto(withPhoto photo: Data)
-    var isPasscodeEmpty: Bool { get }
     func checkConnectedToNetwork()
+    var isPasscodeEmpty: Bool { get }
+    var isTurkcellUser: Bool { get }
+    var isEmptyMail: Bool { get }
 }

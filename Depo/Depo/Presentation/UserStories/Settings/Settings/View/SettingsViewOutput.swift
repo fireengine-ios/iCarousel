@@ -40,4 +40,6 @@ protocol SettingsViewOutput {
     func openPasscode(handler: @escaping () -> Void)
     
     var isPasscodeEmpty: Bool { get }
+    
+    var inNeedOfMail: Bool { get }
 }
