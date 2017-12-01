@@ -16,6 +16,8 @@ protocol BaseAsyncOperationInteractorOutput {
     
     func startAsyncOperationDisableScreen()
     
+    func startCancelableAsync(operations: [Operation], cancel: @escaping () -> Void)
+    
     func compliteAsyncOperationEnableScreen(errorMessage: String?)
     
     func compliteAsyncOperationEnableScreen()
@@ -23,10 +25,19 @@ protocol BaseAsyncOperationInteractorOutput {
     func asyncOperationSucces()
     
     func asyncOperationFail(errorMessage: String?)
+
 }
 
 class BasePresenter: BaseAsyncOperationInteractorOutput {
     
+    func startCancelableAsync(operations: [Operation], cancel: @escaping () -> Void) {
+        outputView()?.showSpinerWithCancelClosure {
+            for operation in operations {
+                operation.cancel()
+            }
+            cancel()
+        }
+    }
     
     func outputView() -> Waiting? {
         return nil

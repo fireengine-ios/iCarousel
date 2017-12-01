@@ -14,6 +14,7 @@ class AlbumDetailModuleInitializer: NSObject {
     class func initializeAlbumDetailController(with nibName:String, album: AlbumItem) -> AlbumDetailViewController {
         let viewController = AlbumDetailViewController(nibName: nibName, bundle: nil)
         viewController.needShowTabBar = true
+        viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonUploadFromLifebox])
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .addToAlbum, .print, .removeFromAlbum],
                                                style: .default, tintColor: nil)
@@ -25,7 +26,7 @@ class AlbumDetailModuleInitializer: NSObject {
         interactor.album = album
         
         configurator.configure(viewController: viewController, fileFilters: [.rootAlbum(album.uuid)],
-                               bottomBarConfig: bottomBarConfig, router: BaseFilesGreedRouter(),
+                               bottomBarConfig: bottomBarConfig, router: AlbumDetailRouter(),
                                presenter: presentor, interactor: interactor,
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.shareAlbum, .download, .select],
                                                                                      selectionModeTypes: [.createStory, .delete]),

@@ -11,8 +11,10 @@ import Foundation
 protocol PackagesInteractorInput {
     func getOffers()
     func getOfferApples()
-    func activate(offer: OfferServiceResponse)
+    func getToken(for offer: OfferServiceResponse)
+    func getResendToken(for offer: OfferServiceResponse)
     func activate(offerApple: OfferApple)
+    func verifyOffer(token: String, otp: String)
     func getActiveSubscriptions()
     func getAccountType()
     func convertToSubscriptionPlans(offers: [OfferServiceResponse]) -> [SubscriptionPlan]

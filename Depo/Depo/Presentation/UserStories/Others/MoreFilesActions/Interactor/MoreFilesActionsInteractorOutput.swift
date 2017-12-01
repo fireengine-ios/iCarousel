@@ -6,7 +6,7 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
-protocol MoreFilesActionsInteractorOutput: class {
+protocol MoreFilesActionsInteractorOutput: class, BaseAsyncOperationInteractorOutput {
     func operationFinished(type: ElementTypes)//add type?
     func operationFailed(type: ElementTypes, message: String)
     func operationStarted(type: ElementTypes)

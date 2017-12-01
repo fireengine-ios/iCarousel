@@ -22,6 +22,7 @@ struct TextConstants {
     static let registrationTitleText = "Register to lifebox and get a 5 GB of storage for free!"
     static let registrationNextButtonText = "Next"
     static let registrationResendButtonText = "Resend"
+    static let optInNavigarionTitle = "Verify Your Purchase"
     static let phoneVereficationMainTitleText = "Verify Your Phone Number"
     static let phoneVereficationInfoTitleText = "Enter the verification code"
     static let phoneVereficationNonValidCodeErrorText = "Verification code is invalid. \n Please try again."
@@ -129,6 +130,8 @@ struct TextConstants {
     static let upload = "Upload"
     static let createStory = "Create a Story"
     static let newFolder = "New Folder"
+    static let createAlbum = "Create album"
+    static let uploadFromLifebox = "Upload from lifebox"
     
     //MARK: - Navigation bar img names
 
@@ -406,6 +409,7 @@ struct TextConstants {
     //MARK: Albums
     static let albumsTitle = "Albums"
     static let selectAlbumButtonTitle = "Add"
+    static let uploadPhotos = "Upload Photos"
     
     //MARK: Feedback View
     static let feedbackViewTitle = "Thanks for leaving a comment!"
@@ -576,6 +580,7 @@ struct NumericConstants {
     //verefy phone screen
     static let vereficationCharacterLimit = 6
     static let vereficationTimerLimit = 120//in seconds
+    static let maxVereficationAttempts = 3
     //
     
     static let numerCellInLineOnIphone: CGFloat = 4

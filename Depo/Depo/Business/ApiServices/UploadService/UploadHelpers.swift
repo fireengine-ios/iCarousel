@@ -17,6 +17,7 @@ enum MetaSpesialFolder: String {
 enum UploadType {
     case fromHomePage
     case autoSync
+    case syncToUse
     case other
 }
 

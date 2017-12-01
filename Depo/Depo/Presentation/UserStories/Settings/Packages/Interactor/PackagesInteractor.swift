@@ -99,28 +99,26 @@ extension PackagesInteractor: PackagesInteractorInput {
                 }
         })
     }
-
-    /// MAYBE WILL BE NEED
-//    func getCurrentSubscription() {
-//        subscriptionsService.currentSubscription(
-//            success: { response in
-//                guard let subscriptionsResponce = response as? CurrentSubscriptionResponse,
-//                    let subscription = subscriptionsResponce.subscription else { return }
-//                print(subscription)
-//            }, fail: { [weak self] errorResponse in
-//                DispatchQueue.main.async {
-//                    self?.output.failedUsage(with: errorResponse)
-//                }
-//        })
-//    }
     
-    func activate(offer: OfferServiceResponse) {
-        offersService.activate(offer: offer,
+    func getToken(for offer: OfferServiceResponse) {
+        /// temp logic
+        output.successed(tokenForOffer: "qweqwe")
+        return
+        return
+            
+        offersService.initOffer(offer: offer,
             success: { [weak self] response in
-                /// MAYBE WILL BE NEED
-                //guard let offerResponse = response as? OfferActivateServiceResponse else { return }
+                guard let offerResponse = response as? InitOfferResponse,
+                    let token = offerResponse.referenceToken
+                else {
+                    DispatchQueue.main.async {
+                        self?.output.failedUsage(with: ErrorResponse.string("token nil"))
+                    }
+                    return
+                }
+            
                 DispatchQueue.main.async {
-                    self?.output.successed(activateOffer: offer)
+                    self?.output.successed(tokenForOffer: token)
                 }
             }, fail: { [weak self] errorResponse in
                 DispatchQueue.main.async {
@@ -128,6 +126,73 @@ extension PackagesInteractor: PackagesInteractorInput {
                 }
         })
     }
+    
+    func verifyOffer(token: String, otp: String) {
+        /// temp logic
+        if otp == "222222" {
+            DispatchQueue.main.async {
+                self.output.successedVerifyOffer()
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.output.failedVerifyOffer()
+            }
+        }
+        
+        return
+        return
+        
+        offersService.verifyOffer(otp: otp, referenceToken: token,
+            success: { [weak self] response in
+                /// maybe will be need
+                //guard let offerResponse = response as? VerifyOfferResponse else { return }
+                DispatchQueue.main.async {
+                    self?.output.successedVerifyOffer()
+                }
+            }, fail: { [weak self] errorResponse in
+                DispatchQueue.main.async {
+                    self?.output.failedVerifyOffer()
+                }
+        })
+    }
+    
+    func getResendToken(for offer: OfferServiceResponse) {
+        offersService.initOffer(offer: offer,
+            success: { [weak self] response in
+                guard let offerResponse = response as? InitOfferResponse,
+                    let token = offerResponse.referenceToken
+                    else {
+                        DispatchQueue.main.async {
+                            self?.output.failedUsage(with: ErrorResponse.string("token nil"))
+                        }
+                        return
+                }
+                
+                DispatchQueue.main.async {
+                    self?.output.successed(tokenForResend: token)
+                }
+            }, fail: { [weak self] errorResponse in
+                DispatchQueue.main.async {
+                    self?.output.failedUsage(with: errorResponse)
+                }
+        })
+    }
+    
+    
+//    func activate(offer: OfferServiceResponse) {
+//        offersService.activate(offer: offer,
+//            success: { [weak self] response in
+//                /// MAYBE WILL BE NEED
+//                //guard let offerResponse = response as? OfferActivateServiceResponse else { return }
+//                DispatchQueue.main.async {
+//                    self?.output.successed(activateOffer: offer)
+//                }
+//            }, fail: { [weak self] errorResponse in
+//                DispatchQueue.main.async {
+//                    self?.output.failedUsage(with: errorResponse)
+//                }
+//        })
+//    }
     
     func activate(offerApple: OfferApple) {
         iapManager.purchase(offerApple: offerApple) { [weak self] result in
