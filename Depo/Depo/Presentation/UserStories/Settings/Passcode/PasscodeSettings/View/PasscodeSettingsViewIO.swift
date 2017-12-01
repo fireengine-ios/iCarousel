@@ -10,6 +10,7 @@ import Foundation
 
 protocol PasscodeSettingsViewInput: class {
     func setup(state: PasscodeSettingsViewState, animated: Bool)
+    func presentMailVerefication()
 }
 
 protocol PasscodeSettingsViewOutput: class {

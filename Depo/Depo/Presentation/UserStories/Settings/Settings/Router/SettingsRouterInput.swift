@@ -28,7 +28,7 @@ protocol SettingsRouterInput {
     
     func goToPackages()
     
-    func goToPasscodeSettings()
+    func goToPasscodeSettings(inNeedOfMail: Bool)
     
     func closeEnterPasscode()
     

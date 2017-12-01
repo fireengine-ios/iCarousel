@@ -19,11 +19,21 @@ extension PasscodeSettingsPresenter: PasscodeSettingsViewOutput {
     }
     
     func changePasscode() {
-        router.changePasscode()
+        if interactor.inNeedOfMailVerefication {
+            view?.presentMailVerefication()
+        } else {
+            router.changePasscode()
+        }
+        
     }
     
     func setTouchId(enable: Bool) {
-        isBiometricsEnabled = enable
+        if interactor.inNeedOfMailVerefication {
+            view?.presentMailVerefication()
+        } else {
+            isBiometricsEnabled = enable
+        }
+        
     }
     
     func turnOffPasscode() {
@@ -32,7 +42,11 @@ extension PasscodeSettingsPresenter: PasscodeSettingsViewOutput {
     }
     
     func setPasscode() {
-        router.setPasscode()
+        if interactor.inNeedOfMailVerefication {
+            view?.presentMailVerefication()
+        } else {
+            router.setPasscode()
+        }
     }
     
     var isPasscodeEmpty: Bool {

@@ -40,7 +40,9 @@ protocol SettingsViewOutput {
     func openPasscode(handler: @escaping () -> Void)
     
     var isPasscodeEmpty: Bool { get }
-    
+
     func turkcellSecurityStatusNeeded(passcode: Bool, autoLogin: Bool)
     func turkcellSecurityChanged(passcode: Bool, autoLogin: Bool)
+
+    var inNeedOfMail: Bool { get }
 }

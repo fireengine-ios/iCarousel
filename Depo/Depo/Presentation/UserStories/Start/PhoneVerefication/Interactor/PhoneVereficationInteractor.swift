@@ -18,7 +18,7 @@ class PhoneVereficationInteractor: PhoneVereficationInteractorInput {
     
     var attempts: Int = 0
     
-    let MaxAttemps: Int = 3
+    let MaxAttemps = NumericConstants.maxVereficationAttempts
     
     func saveSignUpResponse(withResponse response: SignUpSuccessResponse, andUserInfo userInfo: RegistrationUserInfoModel) {
         dataStorage.signUpResponse = response

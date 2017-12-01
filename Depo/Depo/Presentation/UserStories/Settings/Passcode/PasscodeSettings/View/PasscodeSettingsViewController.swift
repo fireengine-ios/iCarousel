@@ -109,4 +109,10 @@ extension PasscodeSettingsViewController: PasscodeSettingsViewInput {
             }
         }
     }
+    
+    func presentMailVerefication() {
+        
+        
+        
+    }
 }

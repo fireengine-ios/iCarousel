@@ -46,8 +46,9 @@ class SettingsRouter: SettingsRouterInput {
         router.pushViewController(viewController: router.packages)
     }
     
-    func goToPasscodeSettings() {
-        router.pushViewController(viewController: router.passcodeSettings())
+    func goToPasscodeSettings(inNeedOfMail: Bool) {
+        
+        router.pushViewController(viewController: router.passcodeSettings(inNeedOfMail: inNeedOfMail))
     }
     
     func closeEnterPasscode() {

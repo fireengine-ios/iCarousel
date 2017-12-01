@@ -19,6 +19,13 @@ class SettingsInteractor: SettingsInteractorInput {
         return passcodeStorage.isEmpty
     }
     
+    var isTurkcellUser: Bool {
+        return (userInfoResponse?.accountType == "TURKCELL")
+    }
+    var isEmptyMail: Bool {
+        return userInfoResponse?.email?.isEmpty ?? false
+    }
+    
     func getCellsData(){
         
         var securityCells = [TextConstants.settingsViewCellActivityTimline,
@@ -26,9 +33,18 @@ class SettingsInteractor: SettingsInteractorInput {
                              TextConstants.settingsViewCellUsageInfo,
                              TextConstants.settingsViewCellPasscode]
         
-      
 
+//        AccountService().securitySettingsInfo(success: { (response) in
+//            debugPrint(response)
+//        }) { (error) in
+//
+//        }
 
+//        AccountService().securitySettingsChange(turkcellPasswordAuthEnabled: true, mobileNetworkAuthEnabled: false, success: { (response) in
+//            debugPrint(response)
+//        }) { (error) in
+//
+//        }
         
 //        AccountService().info(success: { [weak self] (responce) in
 //            self?.userInfoResponse = responce as? AccountInfoResponse

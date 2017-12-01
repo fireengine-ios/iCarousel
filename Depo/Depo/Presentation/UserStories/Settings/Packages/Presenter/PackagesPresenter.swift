@@ -7,7 +7,7 @@
 //
 
 class PackagesPresenter {
-    weak var view: PackagesViewInput!
+    weak var view: PackagesViewInput?
     var interactor: PackagesInteractorInput!
     var router: PackagesRouterInput!
     
@@ -33,6 +33,11 @@ class PackagesPresenter {
             }
         }
     }
+    
+    var referenceToken = ""
+    var userPhone = ""
+    var offerToBuy: OfferServiceResponse?
+    var optInVC: OptInController?
 }
 
 // MARK: PackagesViewOutput
@@ -61,21 +66,84 @@ extension PackagesPresenter: PackagesViewOutput {
     }
     
     func buy(offer: OfferServiceResponse) {
-        interactor.activate(offer: offer)
+        view?.startActivityIndicator()
+        
+        AccountService().info(success: { [weak self] responce in
+            guard let userInfoResponse = responce as? AccountInfoResponse else { return }
+            self?.userPhone = userInfoResponse.fullPhoneNumber
+            self?.offerToBuy = offer
+            DispatchQueue.main.async {
+                self?.view?.startActivityIndicator()
+                self?.interactor.getToken(for: offer)
+                self?.view?.stopActivityIndicator()
+            }
+        },  fail: { [weak self] failResponse in
+            DispatchQueue.main.async {
+                self?.view?.stopActivityIndicator()
+            }
+        })
     }
 }
 
+extension PackagesPresenter: OptInControllerDelegate {
+    func optInResendPressed(_ optInVC: OptInController) {
+        self.optInVC = optInVC
+        if let offer = offerToBuy {
+            interactor.getResendToken(for: offer)
+        }
+    }
+    
+    func optInReachedMaxAttempts(_ optInVC: OptInController) {
+        optInVC.showResendButton()
+        optInVC.dropTimer()
+    }
+    
+    func optInNavigationTitle() -> String {
+        return TextConstants.optInNavigarionTitle
+    }
+    
+    func optIn(_ optInVC: OptInController, didEnterCode code: String) {
+        self.optInVC = optInVC
+        interactor.verifyOffer(token: referenceToken, otp: code)
+    }
+}
+
+
 // MARK: PackagesInteractorOutput
 extension PackagesPresenter: PackagesInteractorOutput {
+    func failedVerifyOffer() {
+        optInVC?.increaseNumberOfAttemps()
+        optInVC?.clearCode()
+        optInVC?.view.endEditing(true)
+        CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: TextConstants.checkPhoneAlertTitle, withText: TextConstants.phoneVereficationNonValidCodeErrorText, okButtonText: TextConstants.ok)
+    }
+    
+    func successedVerifyOffer() {
+        optInVC?.resignFirstResponder()
+        RouterVC().popViewController()
+    }
+    
     func successed(activeSubscriptions: [SubscriptionPlanBaseResponse]) {
         interactor.getAccountType()
         self.activeSubscriptions = activeSubscriptions
         let subscriptionPlans = interactor.convertToASubscriptionList(activeSubscriptionList: activeSubscriptions)
-        view.display(subscriptionPlans: subscriptionPlans)
+        view?.display(subscriptionPlans: subscriptionPlans)
     }
     
-    func successed(activateOffer: OfferServiceResponse) {
-        print("Offer activated")
+    func successed(tokenForOffer: String) {
+        view?.stopActivityIndicator()
+        referenceToken = tokenForOffer
+        
+        let vc = OptInController.with(phone: userPhone)
+        vc.delegate = self
+        RouterVC().pushViewController(viewController: vc)
+    }
+    
+    func successed(tokenForResend: String) {
+        referenceToken = tokenForResend
+        optInVC?.setupTimer(withRemainingTime: NumericConstants.vereficationTimerLimit)
+        optInVC?.startEnterCode()
+        optInVC?.hideResendButton()
     }
     
     func successed(accountTypeString: String) {
@@ -92,12 +160,12 @@ extension PackagesPresenter: PackagesInteractorOutput {
     
     func successed(offers: [OfferServiceResponse]) {
         let subscriptionPlans = interactor.convertToSubscriptionPlans(offers: offers)
-        view.display(subscriptionPlans: subscriptionPlans)
+        view?.display(subscriptionPlans: subscriptionPlans)
     }
     
     func successed(offerApples: [OfferApple]) {
         let subscriptionPlans = interactor.convertToSubscriptionPlans(offerApples: offerApples)
-        view.display(subscriptionPlans: subscriptionPlans)
+        view?.display(subscriptionPlans: subscriptionPlans)
     }
     
     func successed(offerApple: OfferApple) {
@@ -105,7 +173,8 @@ extension PackagesPresenter: PackagesInteractorOutput {
     }
     
     func failedUsage(with error: ErrorResponse) {
-        view.display(error: error)
+        view?.stopActivityIndicator()
+        view?.display(error: error)
     }
 }
 

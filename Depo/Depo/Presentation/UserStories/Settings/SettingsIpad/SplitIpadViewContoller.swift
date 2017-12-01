@@ -10,7 +10,7 @@ import UIKit
 
 class SplitIpadViewContoller: NSObject, UISplitViewControllerDelegate, SettingsDelegate {
     
-    private var splitViewController  = UISplitViewController()
+    private var splitViewController = UISplitViewController()
     private var leftController: SettingsViewController?
     
     func configurateWithControllers(leftViewController: SettingsViewController, controllers : [UIViewController]){
@@ -76,9 +76,9 @@ class SplitIpadViewContoller: NSObject, UISplitViewControllerDelegate, SettingsD
         configurateWithControllers(leftViewController: left, controllers: [RouterVC().vcActivityTimeline])
     }
     
-    func goToPasscodeSettings() {
+    func goToPasscodeSettings(inNeedOfMail: Bool) {
         if let left = leftController{
-            configurateWithControllers(leftViewController: left, controllers: [RouterVC().passcodeSettings()])
+            configurateWithControllers(leftViewController: left, controllers: [RouterVC().passcodeSettings(inNeedOfMail: inNeedOfMail)])
         }
     }
 }

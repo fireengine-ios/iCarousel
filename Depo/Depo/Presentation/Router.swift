@@ -22,6 +22,17 @@ class RouterVC: NSObject {
         return rootviewController
     }
     
+    func getFloatingButtonsArray() -> [FloatingButtonsType]{
+        let nController = navigationController
+        let viewController = nController?.viewControllers.last
+        
+        if let baseViewController = viewController as? BaseViewController{
+            return baseViewController.floatingButtonsArray
+        }
+        
+        return [FloatingButtonsType]()
+    }
+    
     // MARK: Navigation controller
     
     var navigationController: UINavigationController? {
@@ -430,7 +441,7 @@ class RouterVC: NSObject {
     //MARK: Upload All files
     
     func uploadPhotos() -> UIViewController {
-        let controller = UploadFilesSelectionModuleInitializer.initializeUploadPhotosViewController()
+        let controller = LocalAlbumModuleInitializer.initializeLocalAlbumsController(with: "BaseFilesGreedViewController")
         //UploadFilesSelectionModuleInitializer.initializeViewController(with: "BaseFilesGreedViewController")
         return controller
     }
@@ -450,6 +461,14 @@ class RouterVC: NSObject {
     
     func filesDetailViewController(fileObject:WrapData, from items:[[WrapData]]) -> UIViewController {
         let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController")
+        let c = controller as! PhotoVideoDetailViewController
+        c.interactor!.onSelectItem(fileObject: fileObject, from: items)
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        return c
+    }
+    
+    func filesDetailAlbumViewController(fileObject:WrapData, from items:[[WrapData]]) -> UIViewController {
+        let controller = PhotoVideoDetailModuleInitializer.initializeAlbumViewController(with: "PhotoVideoDetailViewController")
         let c = controller as! PhotoVideoDetailViewController
         c.interactor!.onSelectItem(fileObject: fileObject, from: items)
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
@@ -577,7 +596,7 @@ class RouterVC: NSObject {
     
     // MARK: - Passcode
     
-    func passcodeSettings() -> UIViewController {
-        return PasscodeSettingsModuleInitializer.viewController
+    func passcodeSettings(inNeedOfMail: Bool) -> UIViewController {
+        return PasscodeSettingsModuleInitializer.setupModule(inNeedOfMail: inNeedOfMail)
     }
 }

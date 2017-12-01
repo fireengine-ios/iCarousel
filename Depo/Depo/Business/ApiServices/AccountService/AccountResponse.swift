@@ -58,6 +58,13 @@ class AccountInfoResponse: ObjectRequestResponse {
     var urlForPhoto: URL?
     var projectID: String?
     
+    var fullPhoneNumber: String {
+        if let code = countryCode, let number = phoneNumber {
+            return "+\(code)\(number)"
+        }
+        return ""
+    }
+    
     override func mapping() {
         mobileUploadsSpecialFolderUuid = json?[AccountJSONConstants.mobileUploadsSpecialFolderUuid].string
         isCropyTagAvailable = json?[AccountJSONConstants.isCropyTagAvailable].bool

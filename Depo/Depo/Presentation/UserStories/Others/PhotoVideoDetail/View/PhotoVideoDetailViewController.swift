@@ -292,13 +292,6 @@ class PhotoVideoDetailViewController: BaseViewController, PhotoVideoDetailViewIn
     }
     
     func onItemSelected(at index: Int, from items: [PhotoVideoDetailViewInput.Item]) {
-        if let editButtonIndex = interactor?.bottomBarConfig.elementsConfig.index(of: .edit) {
-            if items[index].fileType == .video {
-               editingTabBar.disableItems(atIntdex: [editButtonIndex])
-            } else {
-                editingTabBar.enableIems(atIndex: [editButtonIndex])
-            }
-        }
     }
     
     // MARK: BaseFileContentViewDeleGate

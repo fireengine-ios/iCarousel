@@ -11,6 +11,8 @@ class PasscodeSettingsInteractor {
     
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     private lazy var biometricsManager: BiometricsManager = factory.resolve()
+    
+    var isEmptyMail: Bool?
 }
 
 // MARK: PasscodeSettingsInteractorInput
@@ -35,5 +37,9 @@ extension PasscodeSettingsInteractor: PasscodeSettingsInteractorInput {
     
     var isPasscodeEmpty: Bool {
         return passcodeStorage.isEmpty
+    }
+    
+    var inNeedOfMailVerefication: Bool {
+        return isEmptyMail ?? false
     }
 }

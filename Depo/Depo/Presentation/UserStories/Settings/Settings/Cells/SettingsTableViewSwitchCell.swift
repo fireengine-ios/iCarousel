@@ -6,6 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
+
 protocol SettingsTableViewSwitchCellDelegate: class {
     func switchToggled(positionOn: Bool, cell: SettingsTableViewSwitchCell)
 }
@@ -13,14 +14,13 @@ protocol SettingsTableViewSwitchCellDelegate: class {
 class SettingsTableViewSwitchCell: UITableViewCell {
     
     weak var actionDelegate: SettingsTableViewSwitchCellDelegate?
-    
+
     @IBOutlet weak var cellSwitch: UISwitch!
     
     @IBOutlet weak var cellLabel: UILabel!
     @IBOutlet weak var separator: UIView!
     
-    //TODO: create a protocol for settings cell
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

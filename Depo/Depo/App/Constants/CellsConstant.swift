@@ -36,6 +36,7 @@ struct CollectionViewCellsIdsConstant {
     static let photosOrderCell = "PhotosOrderCollectionViewCell"
     static let folderSelectionCell = "FolderSelectionCollectionViewCell"
     static let albumCell = "AlbumCollectionViewCell"
+    static let localAlbumCell = "LocalAlbumCollectionViewCell"
 }
 
 struct CollectionViewSuplementaryConstants {
