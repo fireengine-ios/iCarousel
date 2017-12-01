@@ -21,10 +21,20 @@ class LoginPhoneMailCell: BaseUserInputCellView {
             return false
         } else if string.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil, textField.text?.count == 0 {
             loginCellActionDelegate?.firstCharacterIsNum(fromCell: self, string: string)
-            if string == "0", CoreTelephonyService().isTurkcellOperator() { return false }
         }
 
         return true
+    }
+    
+    override func textFieldDidEndEditing(_ textField: UITextField) {
+        guard var text = textInputField.text else {
+            return
+        }
+        
+        if text.count >= 4, text[text.index(text.startIndex, offsetBy: 3)] == "0" {
+            text.remove(at: text.index(text.startIndex, offsetBy: 3))
+            textInputField.text = text
+        }
     }
     
     func enterPhoneCode(code: String) {
