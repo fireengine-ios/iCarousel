@@ -42,6 +42,10 @@ class PackagesPresenter {
 
 // MARK: PackagesViewOutput
 extension PackagesPresenter: PackagesViewOutput {
+    func submit(promocode: String) {
+        interactor.submit(promocode: promocode)
+    }
+    
     func viewIsReady() {
         interactor.getActiveSubscriptions()
     }
@@ -111,6 +115,13 @@ extension PackagesPresenter: OptInControllerDelegate {
 
 // MARK: PackagesInteractorOutput
 extension PackagesPresenter: PackagesInteractorOutput {
+    func successedPromocode() {
+        view?.successedPromocode()
+    }
+    
+    func failedPromocode(with errorString: String) {
+        view?.show(promocodeError: errorString)
+    }
     
     func successedJobExists() {
         interactor.getOffers()

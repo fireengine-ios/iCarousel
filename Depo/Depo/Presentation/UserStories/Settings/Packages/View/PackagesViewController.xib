@@ -21,6 +21,7 @@
             <connections>
                 <outlet property="collectionView" destination="YAO-ir-hJp" id="1Vf-KB-ZSS"/>
                 <outlet property="keyboardHideManager" destination="2I8-Re-xUl" id="aFr-EU-UJX"/>
+                <outlet property="promoView" destination="5bp-6o-N2u" id="9NB-9L-Bts"/>
                 <outlet property="view" destination="iN0-l3-epB" id="fj3-X7-Fa4"/>
             </connections>
         </placeholder>
@@ -112,6 +113,9 @@
                                                 <constraint firstAttribute="height" constant="30" id="jMj-kK-3xS"/>
                                             </constraints>
                                             <state key="normal" title="Button"/>
+                                            <connections>
+                                                <action selector="actionApplyButton:" destination="5bp-6o-N2u" eventType="touchUpInside" id="IaS-tB-HQJ"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

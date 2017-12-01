@@ -574,11 +574,13 @@ struct TextConstants {
     static let passcodeNumberOfTries = "You have %@ attempts left"
     static let errorConnectedToNetwork = "Please check your internet connection is active and Cellular Data is ON under Settings/lifebox."
     
-    static let promocodeTitle = "lifebox Size Özel Kampanya"
     static let apply = "Apply"
+    static let success = "Success"
+    
+    static let promocodeTitle = "lifebox Size Özel Kampanya"
     static let promocodePlaceholder = "Enter Your Promotion Code"
     static let promocodeError = "Invalid Promo Code"
-    static let promocodeSuccess = "Promo code activated"
+    static let promocodeSuccess = "Promo code was applied"
 }
 
 

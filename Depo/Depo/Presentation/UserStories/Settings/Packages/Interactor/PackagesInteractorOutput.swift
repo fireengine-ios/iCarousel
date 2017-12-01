@@ -20,4 +20,7 @@ protocol PackagesInteractorOutput: class {
     func successed(offerApple: OfferApple)
     func failedUsage(with error: ErrorResponse)
     func failedVerifyOffer()
+    
+    func successedPromocode()
+    func failedPromocode(with errorString: String)
 }

@@ -102,10 +102,10 @@ extension PackagesInteractor: PackagesInteractorInput {
     
     func getToken(for offer: OfferServiceResponse) {
         /// temp logic
-        output.successed(tokenForOffer: "qweqwe")
-        return
-        return
-            
+//        output.successed(tokenForOffer: "qweqwe")
+//        return
+//        return
+        
         offersService.initOffer(offer: offer,
             success: { [weak self] response in
                 guard let offerResponse = response as? InitOfferResponse,
@@ -129,18 +129,18 @@ extension PackagesInteractor: PackagesInteractorInput {
     
     func verifyOffer(token: String, otp: String) {
         /// temp logic
-        if otp == "222222" {
-            DispatchQueue.main.async {
-                self.output.successedVerifyOffer()
-            }
-        } else {
-            DispatchQueue.main.async {
-                self.output.failedVerifyOffer()
-            }
-        }
-        
-        return
-        return
+//        if otp == "222222" {
+//            DispatchQueue.main.async {
+//                self.output.successedVerifyOffer()
+//            }
+//        } else {
+//            DispatchQueue.main.async {
+//                self.output.failedVerifyOffer()
+//            }
+//        }
+//
+//        return
+//        return
         
         offersService.verifyOffer(otp: otp, referenceToken: token,
             success: { [weak self] response in
@@ -231,7 +231,7 @@ extension PackagesInteractor: PackagesInteractorInput {
         offersService.getJobExists(
             success: { [weak self] response in
                 guard let jobResponse = response as? JobExistsResponse else { return }
-                if jobResponse.isJobExists == true {
+                if jobResponse.isJobExists == false {
                     DispatchQueue.main.async {
                         self?.output.successedJobExists()
                     }
@@ -239,6 +239,25 @@ extension PackagesInteractor: PackagesInteractorInput {
             }, fail: { [weak self] errorResponse in
                 DispatchQueue.main.async {
                     self?.output.failedUsage(with: errorResponse)
+                }
+        })
+    }
+    
+    func submit(promocode: String) {
+//        output.successedPromocode()
+//        return
+//        return
+        
+        offersService.submit(promocode: promocode,
+             success: { [weak self] response in
+                /// maybe will be need
+//                guard let response = response as? SubmitPromocodeResponse else { return }
+                DispatchQueue.main.async {
+                    self?.output.successedPromocode()
+                }
+            }, fail: { [weak self] errorResponse in
+                DispatchQueue.main.async {
+                    self?.output.failedPromocode(with: TextConstants.promocodeError)
                 }
         })
     }

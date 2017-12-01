@@ -8,23 +8,8 @@
 
 import UIKit
 
-final class InsetsTextField: UITextField {
-    @IBInspectable var insetX: CGFloat = 5 {
-        didSet { layoutIfNeeded() }
-    }
-    @IBInspectable var insetY: CGFloat = 5 {
-        didSet { layoutIfNeeded() }
-    }
-    
-    /// placeholder position
-    override func textRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.insetBy(dx: insetX, dy: insetY)
-    }
-    
-    /// text position
-    override func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.insetBy(dx: insetX, dy: insetY)
-    }
+protocol PromoViewDelegate: class {
+    func promoView(_ promoView: PromoView, didPressApplyWithPromocode promocode: String)
 }
 
 final class PromoView: UIView {
@@ -68,20 +53,9 @@ final class PromoView: UIView {
         }
     }
     
-    let offersService: OffersService = OffersServiceIml()
+    weak var deleagte: PromoViewDelegate?
     
     @IBAction func actionApplyButton(_ sender: UIButton) {
-        
-        offersService.submit(promocode: codeTextField.text!,
-            success: { [weak self] response in
-                guard let response = response as? SubmitPromocodeResponse else { return }
-                DispatchQueue.main.async {
-                    CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: TextConstants.errorAlert, withText: TextConstants.promocodeSuccess, okButtonText: TextConstants.ok)
-                }
-            }, fail: { [weak self] errorResponse in
-                DispatchQueue.main.async {
-                    self?.errorLabel.text = TextConstants.promocodeError
-                }
-        })
+        deleagte?.promoView(self, didPressApplyWithPromocode: codeTextField.text!)
     }
 }

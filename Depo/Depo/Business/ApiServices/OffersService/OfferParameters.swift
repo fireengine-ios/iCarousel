@@ -20,7 +20,7 @@ private struct OfferPath {
     
     static let jobExists = "/api/account/isSubscriptionJobExists"
     
-    static let submitPromocode = "/api/account/verifyOfferPurchase"
+    static let submitPromocode = "https://mylifebox.com/api/promo/activate"
 }
 
 class OfferAllParameters: BaseRequestParametrs {
@@ -127,10 +127,10 @@ final class SubmitPromocodeParameters: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        return URL(string: OfferPath.submitPromocode, relativeTo: super.patch)!
+        return URL(string: OfferPath.submitPromocode)!
     }
     
     override var requestParametrs: Any {
-        return ["promocode": promocode]
+        return promocode
     }
 }
