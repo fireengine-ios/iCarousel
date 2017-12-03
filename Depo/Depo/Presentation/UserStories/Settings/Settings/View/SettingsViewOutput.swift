@@ -10,6 +10,8 @@ protocol SettingsViewOutput {
 
     func viewIsReady()
     
+    func viewWillBecomeActive()
+    
     func onLogout()
     
     func goToContactSync()

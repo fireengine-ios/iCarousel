@@ -74,6 +74,7 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
         } else {
             self.setTitle(withString: "Settings")
         }
+        output.viewWillBecomeActive()
     }
     
     override func viewDidAppear(_ animated: Bool) {

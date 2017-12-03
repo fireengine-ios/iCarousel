@@ -92,7 +92,6 @@ class SettingsInteractor: SettingsInteractorInput {
     }
     
     func uploadPhoto(withPhoto photo: Data) {
-        
         AccountService().setProfilePhoto(param: UserPhoto(photo: photo), success: {[weak self] (response) in
             DispatchQueue.main.async {
                 self?.output.profilePhotoUploadSuccessed()
@@ -103,7 +102,6 @@ class SettingsInteractor: SettingsInteractorInput {
                 }
                 
         })
-        
     }
     
     func checkConnectedToNetwork() {
