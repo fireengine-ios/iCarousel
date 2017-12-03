@@ -82,7 +82,7 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     }
     
     func inNeedOfMailVerefication() -> Bool {
-//        return true
+        return true//TEST TEST QA TEST
         if interactor.isTurkcellUser, interactor.isEmptyMail {
             return true
         }

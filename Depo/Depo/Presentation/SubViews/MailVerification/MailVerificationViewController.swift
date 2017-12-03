@@ -60,15 +60,8 @@ class MailVerificationViewController: UIViewController {
                                     DispatchQueue.main.async {
                                         self?.actionDelegate?.mailVerified()
                                     }
-                                    AccountService().securitySettingsChange(turkcellPasswordAuthEnabled: false,
-                                                                            mobileNetworkAuthEnabled: false,
-                                                                            success: { [weak self] (response) in
-                                                                                self?.hideSpiner()
-                                        self?.dismiss(animated: true, completion: nil)
-                                        
-                                    }) { (error) in
-                                        self?.hideSpiner()
-                                    }
+                                    self?.hideSpiner()
+                                    self?.dismiss(animated: true, completion: nil)
             },
                                 fail: { [weak self] error in
                                     DispatchQueue.main.async {

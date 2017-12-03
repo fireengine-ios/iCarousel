@@ -191,15 +191,13 @@ struct  ForgotPassword: RequestParametrs {
 }
 
 class EmailUpdate: BaseRequestParametrs {
-//    /api/account/email
     let email: String
     
     init(mail: String) {
         email = mail
     }
     
-    override var requestParametrs: Any {
-        
+    override var requestParametrs: Any { 
         return email
     }
     
