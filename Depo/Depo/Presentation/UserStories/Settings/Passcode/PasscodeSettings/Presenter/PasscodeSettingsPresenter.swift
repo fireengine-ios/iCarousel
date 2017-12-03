@@ -22,7 +22,7 @@ extension PasscodeSettingsPresenter: PasscodeSettingsViewOutput {
         if interactor.inNeedOfMailVerefication {
             view?.presentMailVerefication()
         } else {
-            router.changePasscode()
+            router.changePasscode(isTurkCellUser: interactor.isTurkcellUserFlag)
         }
         
     }
@@ -45,7 +45,7 @@ extension PasscodeSettingsPresenter: PasscodeSettingsViewOutput {
         if interactor.inNeedOfMailVerefication {
             view?.presentMailVerefication()
         } else {
-            router.setPasscode()
+            router.setPasscode(isTurkCellUser: interactor.isTurkcellUserFlag)
         }
     }
     

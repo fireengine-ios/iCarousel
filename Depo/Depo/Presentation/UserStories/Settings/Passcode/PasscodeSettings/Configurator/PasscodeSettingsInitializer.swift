@@ -13,15 +13,15 @@ class PasscodeSettingsModuleInitializer: NSObject {
         let nibName = String(describing: PasscodeSettingsViewController.self)
         let viewController = PasscodeSettingsViewController(nibName: nibName, bundle: nil)
         let configurator = PasscodeSettingsModuleConfigurator()
-        configurator.configureModuleForViewInput(viewInput: viewController, inNeedOfMail: false)
+        configurator.configureModuleForViewInput(viewInput: viewController, isTurkcell: false, inNeedOfMail: false)
         return viewController
     }
     
-    static func setupModule(inNeedOfMail: Bool) -> UIViewController {
+    static func setupModule(isTurkcell: Bool, inNeedOfMail: Bool) -> UIViewController {
         let nibName = String(describing: PasscodeSettingsViewController.self)
         let viewController = PasscodeSettingsViewController(nibName: nibName, bundle: nil)
         let configurator = PasscodeSettingsModuleConfigurator()
-        configurator.configureModuleForViewInput(viewInput: viewController, inNeedOfMail: inNeedOfMail)
+        configurator.configureModuleForViewInput(viewInput: viewController, isTurkcell: isTurkcell, inNeedOfMail: inNeedOfMail)
         return viewController
     }
 }

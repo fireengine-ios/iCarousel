@@ -21,7 +21,7 @@ protocol SettingsDelegate: class{
     
     func goToActivityTimeline()
     
-    func goToPasscodeSettings(inNeedOfMail: Bool)
+    func goToPasscodeSettings(isTurkcell: Bool, inNeedOfMail: Bool)
 }
 
 class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDelegate, UITableViewDataSource {
@@ -247,7 +247,8 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
     private func showPasscodeOrPasscodeSettings() {
         let routerBlock = { [weak self] in
             if let settingsDelegate = self?.settingsDelegate {
-                settingsDelegate.goToPasscodeSettings(inNeedOfMail: self?.output.inNeedOfMail ?? false)
+                settingsDelegate.goToPasscodeSettings(isTurkcell: self?.output.isTurkCellUser ?? false,
+                                                      inNeedOfMail: self?.output.inNeedOfMail ?? false)
             } else {
                 self?.output.goToPasscodeSettings()
             }

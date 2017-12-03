@@ -13,6 +13,7 @@ class PasscodeSettingsInteractor {
     private lazy var biometricsManager: BiometricsManager = factory.resolve()
     
     var isEmptyMail: Bool?
+    var isTurkcellUser: Bool?
 }
 
 // MARK: PasscodeSettingsInteractorInput
@@ -43,4 +44,6 @@ extension PasscodeSettingsInteractor: PasscodeSettingsInteractorInput {
         get { return isEmptyMail ?? false }
         set { isEmptyMail = newValue }
     }
+    
+    var isTurkcellUserFlag: Bool { return isTurkcellUser ?? false }
 }

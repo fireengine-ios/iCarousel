@@ -74,11 +74,11 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     }
     
     func goToPasscodeSettings() {
-        router.goToPasscodeSettings(inNeedOfMail: inNeedOfMailVerefication())
+        router.goToPasscodeSettings(isTurkcell: interactor.isTurkcellUser, inNeedOfMail: inNeedOfMailVerefication())
     }
     
     func inNeedOfMailVerefication() -> Bool {
-        return true
+//        return true
         if interactor.isTurkcellUser, interactor.isEmptyMail {
             return true
         }
@@ -88,6 +88,8 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     var inNeedOfMail: Bool {
         return inNeedOfMailVerefication()
     }
+    
+    var isTurkCellUser: Bool { return interactor.isTurkcellUser }
     
     func turkcellSecurityStatusNeeded(passcode: Bool, autoLogin: Bool) {
         

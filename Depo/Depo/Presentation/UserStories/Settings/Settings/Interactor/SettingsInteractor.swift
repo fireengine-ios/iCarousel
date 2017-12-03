@@ -28,44 +28,33 @@ class SettingsInteractor: SettingsInteractorInput {
     
     func getCellsData(){
         
-        var securityCells = [TextConstants.settingsViewCellActivityTimline,
+        let securityCells = [TextConstants.settingsViewCellActivityTimline,
                              TextConstants.settingsViewCellRecentlyDeletedFiles,
                              TextConstants.settingsViewCellUsageInfo,
                              TextConstants.settingsViewCellPasscode]
         
-
-//        AccountService().securitySettingsInfo(success: { (response) in
-//            debugPrint(response)
-//        }) { (error) in
-//
-//        }
-
-//        AccountService().securitySettingsChange(turkcellPasswordAuthEnabled: true, mobileNetworkAuthEnabled: false, success: { (response) in
-//            debugPrint(response)
-//        }) { (error) in
-//
-//        }
-        
+        var array = [[TextConstants.settingsViewCellBeckup,
+                      TextConstants.settingsViewCellImportPhotos,
+                      TextConstants.settingsViewCellAutoUpload],
+                     securityCells,
+                     [TextConstants.settingsViewCellHelp,
+                      TextConstants.settingsViewCellLogout]]
         AccountService().info(success: { [weak self] (responce) in
-            self?.userInfoResponse = responce as? AccountInfoResponse
-//                if self?.userInfoResponse?.accountType == "TURKCELL" {
-                    securityCells.append(contentsOf: [TextConstants.settingsViewCellTurkcellPasscode,
-                                                      TextConstants.settingsViewCellTurkcellAutoLogin])
-//                }
-//
+            guard let `self` = self else {
+                return
+            }
+            self.userInfoResponse = responce as? AccountInfoResponse
+                if self.isTurkcellUser {
+                    array[1].append(contentsOf: [TextConstants.settingsViewCellTurkcellPasscode,
+                                                  TextConstants.settingsViewCellTurkcellAutoLogin])
+                }
             DispatchQueue.main.async {
-                let array = [[TextConstants.settingsViewCellBeckup,
-                              TextConstants.settingsViewCellImportPhotos,
-                              TextConstants.settingsViewCellAutoUpload],
-                             securityCells,
-                             [TextConstants.settingsViewCellHelp,
-                              TextConstants.settingsViewCellLogout]]
-//
-                self?.output.cellsDataForSettings(array: array)
+                self.output.cellsDataForSettings(array: array)
             }  
         }, fail: { [weak self] (error) in
-
-
+            DispatchQueue.main.async {
+                self?.output.cellsDataForSettings(array: array)
+            }
         })
         AccountService().securitySettingsInfo(success: { [weak self] (response) in
             guard let unwrapedSecurityresponse = response as? SecuritySettingsInfoResponse,
@@ -77,7 +66,7 @@ class SettingsInteractor: SettingsInteractorInput {
                 self?.output.turkCellSecuritySettingsAccuered(passcode: turkCellPasswordOn, autoLogin: turkCellAutoLogin)
             }
             
-        }) { [weak self] (error) in
+        }) { (error) in
             
         }
     }
@@ -85,7 +74,6 @@ class SettingsInteractor: SettingsInteractorInput {
     func changeTurkcellSecurity(passcode: Bool, autoLogin: Bool) {
         AccountService().securitySettingsChange(turkcellPasswordAuthEnabled: passcode, mobileNetworkAuthEnabled: autoLogin, success: { (response) in
             
-            debugPrint(response)
         }) { (error) in
             
         }

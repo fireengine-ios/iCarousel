@@ -596,7 +596,7 @@ class RouterVC: NSObject {
     
     // MARK: - Passcode
     
-    func passcodeSettings(inNeedOfMail: Bool) -> UIViewController {
-        return PasscodeSettingsModuleInitializer.setupModule(inNeedOfMail: inNeedOfMail)
+    func passcodeSettings(isTurkcell: Bool, inNeedOfMail: Bool) -> UIViewController {
+        return PasscodeSettingsModuleInitializer.setupModule(isTurkcell: isTurkcell, inNeedOfMail: inNeedOfMail)
     }
 }

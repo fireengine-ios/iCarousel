@@ -41,7 +41,6 @@ class MailVerificationViewController: UIViewController {
     
     
     @IBAction func sendAction(_ sender: Any) {
-        debugPrint("send action")
         verifyMail()
     }
     @IBAction func refuseAction(_ sender: Any) {
@@ -53,15 +52,30 @@ class MailVerificationViewController: UIViewController {
             CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: TextConstants.errorAlert, withText: TextConstants.registrationCellPlaceholderEmail, okButtonText: TextConstants.ok)
             return
         }
+        showSpiner()
+
         let authService = AuthenticationService()
         authService.updateEmail(emailUpdateParameters: EmailUpdate(mail: email),
                                 sucess: { [weak self] response in
-                                    self?.actionDelegate?.mailVerified()
-                                    self?.dismiss(animated: true, completion: nil)
+                                    DispatchQueue.main.async {
+                                        self?.actionDelegate?.mailVerified()
+                                    }
+                                    AccountService().securitySettingsChange(turkcellPasswordAuthEnabled: false,
+                                                                            mobileNetworkAuthEnabled: false,
+                                                                            success: { [weak self] (response) in
+                                                                                self?.hideSpiner()
+                                        self?.dismiss(animated: true, completion: nil)
+                                        
+                                    }) { (error) in
+                                        self?.hideSpiner()
+                                    }
             },
                                 fail: { [weak self] error in
-                                    self?.actionDelegate?.mailVerificationFailed()
-                                    CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: TextConstants.errorAlert, withText: TextConstants.notCorrectEmail, okButtonText: TextConstants.ok)
+                                    DispatchQueue.main.async {
+                                        self?.actionDelegate?.mailVerificationFailed()
+                                        self?.hideSpiner()
+                                        CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: TextConstants.errorAlert, withText: TextConstants.notCorrectEmail, okButtonText: TextConstants.ok)
+                                    }
         })
     }
     

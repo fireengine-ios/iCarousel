@@ -93,7 +93,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
     }
     
     func securitySettingsChange(turkcellPasswordAuthEnabled: Bool? = nil, mobileNetworkAuthEnabled: Bool? = nil,
-                                success: SuccessResponse?, fail: @escaping FailResponse) {
+                                success: SuccessResponse?, fail: FailResponse?) {
         
         let parametres = SecuritySettingsChangeInfoParametres(turkcellPasswordAuth: turkcellPasswordAuthEnabled ?? false,
                                                               mobileNetworkAuth: mobileNetworkAuthEnabled ?? false)
