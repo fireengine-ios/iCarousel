@@ -40,6 +40,7 @@ extension PasscodeSettingsInteractor: PasscodeSettingsInteractorInput {
     }
     
     var inNeedOfMailVerefication: Bool {
-        return isEmptyMail ?? false
+        get { return isEmptyMail ?? false }
+        set { isEmptyMail = newValue }
     }
 }

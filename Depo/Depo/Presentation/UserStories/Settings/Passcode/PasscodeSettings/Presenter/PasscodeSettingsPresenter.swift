@@ -65,6 +65,10 @@ extension PasscodeSettingsPresenter: PasscodeSettingsViewOutput {
     var isAvailableFaceID: Bool {
         return interactor.isAvailableFaceID
     }
+    
+    func mailVerified() {
+        interactor.inNeedOfMailVerefication = false
+    }
 }
 
 // MARK: PasscodeSettingsInteractorOutput

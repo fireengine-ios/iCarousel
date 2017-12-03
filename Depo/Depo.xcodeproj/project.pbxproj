@@ -3361,7 +3361,7 @@
 		7C032B851EEFFC1A006532C8 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
-				8C881BD01FCFF86B00C86236 /* MailVerefication */,
+				8C881BD01FCFF86B00C86236 /* MailVerification */,
 				7C18D75B1F9F460000F8679D /* ShadowView */,
 				8C54083D1F61C00400D4717A /* TopBar */,
 				7C1F89901F70FFB700740177 /* ViewForPopUp */,
@@ -4765,13 +4765,13 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		8C881BD01FCFF86B00C86236 /* MailVerefication */ = {
+		8C881BD01FCFF86B00C86236 /* MailVerification */ = {
 			isa = PBXGroup;
 			children = (
 				8C881BD11FCFFAF100C86236 /* MailVerificationViewController.swift */,
 				8C881BD31FCFFAFC00C86236 /* MailVerificationViewController.xib */,
 			);
-			path = MailVerefication;
+			path = MailVerification;
 			sourceTree = "<group>";
 		};
 		8CAACDC81F14F39000B0A6FF /* Servieces */ = {

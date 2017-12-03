@@ -190,11 +190,43 @@ struct  ForgotPassword: RequestParametrs {
     }
 }
 
+class EmailUpdate: BaseRequestParametrs {
+//    /api/account/email
+    let email: String
+    
+    init(mail: String) {
+        email = mail
+    }
+    
+    override var requestParametrs: Any {
+        
+        return email
+    }
+    
+    override var patch: URL {
+        return URL(string: RouteRequests.mailUpdate, relativeTo:super.patch)!
+    }
+    
+    override var header: RequestHeaderParametrs {
+        return RequestHeaders.authification()//base()
+    }
+}
 
 class EmailVerification: BaseRequestParametrs {
     
+    let email: String
+    
+    init(mail: String) {
+        email = mail
+    }
+    
+    override var requestParametrs: Any {
+        let dict = [LbRequestkeys.email : email]
+        return dict
+    }
+    
     override var patch: URL {
-        return URL(string: RouteRequests.forgotPassword, relativeTo:super.patch)!
+        return URL(string: RouteRequests.mailVerefication, relativeTo:super.patch)!
     }
     
     override var header: RequestHeaderParametrs {
@@ -325,6 +357,11 @@ class AuthenticationService: BaseRequestService {
         
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: sucess, fail: fail)
         executePostRequest(param: resendVerification, handler: handler)
+    }
+    
+    func updateEmail(emailUpdateParameters: EmailUpdate, sucess:SuccessResponse?, fail:FailResponse?) {
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: sucess, fail: fail)
+        executePostRequest(param: emailUpdateParameters, handler: handler)
     }
     
     func verificationEmail(emailVerification:EmailVerification, sucess:SuccessResponse?, fail:FailResponse?) {

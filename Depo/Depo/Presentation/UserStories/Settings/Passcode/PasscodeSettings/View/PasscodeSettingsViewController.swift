@@ -111,7 +111,9 @@ extension PasscodeSettingsViewController: PasscodeSettingsViewInput {
     }
     
     func presentMailVerefication() {
-        
+        let mailController = MailVerificationViewController()
+        mailController.actionDelegate = self
+        self.present(mailController, animated: true, completion: nil)
         
         
     }
@@ -120,6 +122,7 @@ extension PasscodeSettingsViewController: PasscodeSettingsViewInput {
 extension PasscodeSettingsViewController: MailVerificationViewControllerDelegate {
     func mailVerified() {
         debugPrint("mail verified")
+        output.mailVerified()
     }
     
     func mailVerificationFailed() {

@@ -19,6 +19,7 @@ protocol PasscodeSettingsViewOutput: class {
     func setTouchId(enable: Bool)
     func turnOffPasscode()
     func setPasscode()
+    func mailVerified()
     
     var isPasscodeEmpty: Bool { get }
     var isBiometricsAvailable: Bool { get }

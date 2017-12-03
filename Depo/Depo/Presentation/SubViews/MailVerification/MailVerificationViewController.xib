@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MailVerificationViewController" customModule="Depo_LifeTech" customModuleProvider="target">
             <connections>
                 <outlet property="inputTextField" destination="ebZ-eJ-wcy" id="sTo-15-DWc"/>
+                <outlet property="refuseButton" destination="v3j-56-NbJ" id="89W-tx-K3f"/>
                 <outlet property="sendButton" destination="0xo-kd-RYU" id="DYD-t0-Dxq"/>
                 <outlet property="titleLabel" destination="Q6U-vK-zhh" id="aLa-TJ-9Gi"/>
                 <outlet property="view" destination="iN0-l3-epB" id="9Hl-qi-Orj"/>
@@ -37,21 +38,31 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0xo-kd-RYU">
-                    <rect key="frame" x="164" y="396" width="46" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0xo-kd-RYU">
+                    <rect key="frame" x="167" y="398.5" width="40" height="30"/>
                     <state key="normal" title="SEND"/>
                     <connections>
                         <action selector="sendAction:" destination="-1" eventType="touchUpInside" id="h4b-Cu-kgX"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v3j-56-NbJ">
+                    <rect key="frame" x="164" y="448.5" width="46" height="30"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="refuseAction:" destination="-1" eventType="touchUpInside" id="oA0-gg-4HG"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="0xo-kd-RYU" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="7LT-M6-1PK"/>
+                <constraint firstItem="v3j-56-NbJ" firstAttribute="top" secondItem="0xo-kd-RYU" secondAttribute="bottom" constant="20" id="QrS-Wb-67w"/>
                 <constraint firstItem="ebZ-eJ-wcy" firstAttribute="top" secondItem="Q6U-vK-zhh" secondAttribute="bottom" constant="50" id="RC8-kp-pPf"/>
                 <constraint firstItem="Q6U-vK-zhh" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Sqm-uH-wDr"/>
+                <constraint firstItem="0xo-kd-RYU" firstAttribute="top" secondItem="ebZ-eJ-wcy" secondAttribute="bottom" constant="50" id="hsg-up-iiR"/>
                 <constraint firstItem="ebZ-eJ-wcy" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="j2r-cK-AKt"/>
                 <constraint firstItem="ebZ-eJ-wcy" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="keE-6V-fjW"/>
+                <constraint firstItem="v3j-56-NbJ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="pwP-J4-ncw"/>
             </constraints>
         </view>
     </objects>

@@ -27,7 +27,8 @@ struct RouteRequests {
     static let resendVerificationSMS = "api/verify/sendVerificationSMS"
     
     static let forgotPassword = "/api/account/forgotPassword"
-    
+    static let mailVerefication = "/api/verify/sendVerificationEmail"
+    static let mailUpdate = "/api/account/email"
     
     //MARK: EULA 
     static let eulaGet     = "api/eula/get/%@"

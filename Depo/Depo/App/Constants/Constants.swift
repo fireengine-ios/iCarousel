@@ -17,6 +17,7 @@ struct TextConstants {
     static let registrationCellTitlePassword = "Password"//NSLocalizedString("PasswordPlaceholder", comment: "")
     static let registrationCellTitleReEnterPassword = "Re-Enter Password"
     static let registrationCellPlaceholderEmail = " You have to fill in your mail"
+    static let notCorrectEmail = "Please enter valid Email"
     static let registrationCellPlaceholderPassword = " You have to fill in a password"
     static let registrationCellPlaceholderReFillPassword = " You have to fill in a password"
     static let registrationTitleText = "Register to lifebox and get a 5 GB of storage for free!"
@@ -94,6 +95,9 @@ struct TextConstants {
     static let errorAlertTextBackupAlreadyExist = "You have already a backup. Do you want to overwrite the existing one?"
     static let errorAlertNopeBtnBackupAlreadyExist = "Nope"
     static let errorAlertYesBtnBackupAlreadyExist = "Yes"
+    
+    //MARK: - mail update
+    static let updaitMailMaybeLater = "Maybe later"
     
     // MARK: - DetailScreenError 
     
