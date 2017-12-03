@@ -93,7 +93,7 @@ class LoginDataSource: NSObject, UITableViewDelegate, UITableViewDataSource, Pro
             cell.textDelegate = self
             #if DEBUG
                 cell.textInput.text = "test8714"//
-                "Best6257515"//".FsddQ646"//".FsddQ646"//"Best6257515"
+                //"Best6257515"//".FsddQ646"//".FsddQ646"//"Best6257515"
             #endif
             return cell
         }

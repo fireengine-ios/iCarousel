@@ -6,7 +6,12 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class MailVereficationViewController: UIViewController {
+protocol MailVerificationViewControllerDelegate {
+    func mailVerified()
+    func mailVerificationFailed()
+}
+
+class MailVerificationViewController: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
     
@@ -14,6 +19,7 @@ class MailVereficationViewController: UIViewController {
     
     @IBOutlet weak var sendButton: UIButton!
     
+    weak var actionDelegate: MailVerificationViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +35,7 @@ class MailVereficationViewController: UIViewController {
     
     @IBAction func sendAction(_ sender: Any) {
         debugPrint("send action")
+        self.actionDelegate?.mailVerified()
     }
     
 }

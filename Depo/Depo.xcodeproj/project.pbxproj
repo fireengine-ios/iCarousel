@@ -424,8 +424,8 @@
 		8C7786A71F3F38F0005CB432 /* VisualMusicPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C77869A1F3F38EF005CB432 /* VisualMusicPlayerViewController.xib */; };
 		8C7786A81F3F38F0005CB432 /* VisualMusicPlayerViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77869B1F3F38EF005CB432 /* VisualMusicPlayerViewInput.swift */; };
 		8C7786A91F3F38F0005CB432 /* VisualMusicPlayerViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77869C1F3F38EF005CB432 /* VisualMusicPlayerViewOutput.swift */; };
-		8C881BD21FCFFAF100C86236 /* MailVereficationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C881BD11FCFFAF100C86236 /* MailVereficationViewController.swift */; };
-		8C881BD41FCFFAFC00C86236 /* MailVereficationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C881BD31FCFFAFC00C86236 /* MailVereficationViewController.xib */; };
+		8C881BD21FCFFAF100C86236 /* MailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C881BD11FCFFAF100C86236 /* MailVerificationViewController.swift */; };
+		8C881BD41FCFFAFC00C86236 /* MailVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C881BD31FCFFAFC00C86236 /* MailVerificationViewController.xib */; };
 		8CAACDCA1F14F3B400B0A6FF /* TermsAndServicesDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAACDC91F14F3B400B0A6FF /* TermsAndServicesDataStorage.swift */; };
 		8CB293331F72676900134C97 /* AlertFilesActionsSheetInitialConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB293321F72676900134C97 /* AlertFilesActionsSheetInitialConfig.swift */; };
 		8CB780611F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB780601F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift */; };
@@ -1627,8 +1627,8 @@
 		8C77869B1F3F38EF005CB432 /* VisualMusicPlayerViewInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualMusicPlayerViewInput.swift; sourceTree = "<group>"; };
 		8C77869C1F3F38EF005CB432 /* VisualMusicPlayerViewOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualMusicPlayerViewOutput.swift; sourceTree = "<group>"; };
 		8C8387F71EE9767C00AB89B9 /* RegistrationScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistrationScreen.xib; sourceTree = "<group>"; };
-		8C881BD11FCFFAF100C86236 /* MailVereficationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailVereficationViewController.swift; sourceTree = "<group>"; };
-		8C881BD31FCFFAFC00C86236 /* MailVereficationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MailVereficationViewController.xib; sourceTree = "<group>"; };
+		8C881BD11FCFFAF100C86236 /* MailVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailVerificationViewController.swift; sourceTree = "<group>"; };
+		8C881BD31FCFFAFC00C86236 /* MailVerificationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MailVerificationViewController.xib; sourceTree = "<group>"; };
 		8CAACDC91F14F3B400B0A6FF /* TermsAndServicesDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsAndServicesDataStorage.swift; sourceTree = "<group>"; };
 		8CB293321F72676900134C97 /* AlertFilesActionsSheetInitialConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFilesActionsSheetInitialConfig.swift; sourceTree = "<group>"; };
 		8CB780601F700B6B003410A2 /* AlertFilesActionsSheetConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFilesActionsSheetConfigurator.swift; sourceTree = "<group>"; };
@@ -4768,8 +4768,8 @@
 		8C881BD01FCFF86B00C86236 /* MailVerefication */ = {
 			isa = PBXGroup;
 			children = (
-				8C881BD11FCFFAF100C86236 /* MailVereficationViewController.swift */,
-				8C881BD31FCFFAFC00C86236 /* MailVereficationViewController.xib */,
+				8C881BD11FCFFAF100C86236 /* MailVerificationViewController.swift */,
+				8C881BD31FCFFAFC00C86236 /* MailVerificationViewController.xib */,
 			);
 			path = MailVerefication;
 			sourceTree = "<group>";
@@ -7150,7 +7150,7 @@
 				D47864021F3F330200EFDC6D /* SubscriptionPlanCollectionViewCell.xib in Resources */,
 				7C241EFA1F960E1C00322149 /* CollectionViewCellForStoryPhoto.xib in Resources */,
 				CEC05B671F05333800332EBA /* PhoneVereficationScreen~ipad.xib in Resources */,
-				8C881BD41FCFFAFC00C86236 /* MailVereficationViewController.xib in Resources */,
+				8C881BD41FCFFAFC00C86236 /* MailVerificationViewController.xib in Resources */,
 				EFA74FB11FBF378F00CF946E /* PrintViewController.xib in Resources */,
 				CE4140621F0A5F6D001924E1 /* CaptchaViewController.xib in Resources */,
 				CE51AE6C1EF90853005DCEE0 /* AutoSyncViewController.xib in Resources */,
@@ -8083,7 +8083,7 @@
 				8C6EF8771F348B5C002AC795 /* BottomSelectionTabBarInitializer.swift in Sources */,
 				3E9E7380965142B606376820 /* SplashInteractorOutput.swift in Sources */,
 				C116353E0B4CB7B653684344 /* SplashInteractor.swift in Sources */,
-				8C881BD21FCFFAF100C86236 /* MailVereficationViewController.swift in Sources */,
+				8C881BD21FCFFAF100C86236 /* MailVerificationViewController.swift in Sources */,
 				44A9155A999E7CF45CED922A /* SplashRouterInput.swift in Sources */,
 				D5AAB0E3366C42E757055E8C /* SplashRouter.swift in Sources */,
 				CE246A031F3C5B5E008DF705 /* UploadService.swift in Sources */,

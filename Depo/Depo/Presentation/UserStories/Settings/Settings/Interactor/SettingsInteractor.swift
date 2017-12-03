@@ -46,14 +46,14 @@ class SettingsInteractor: SettingsInteractorInput {
 //
 //        }
         
-//        AccountService().info(success: { [weak self] (responce) in
-//            self?.userInfoResponse = responce as? AccountInfoResponse
+        AccountService().info(success: { [weak self] (responce) in
+            self?.userInfoResponse = responce as? AccountInfoResponse
 //                if self?.userInfoResponse?.accountType == "TURKCELL" {
                     securityCells.append(contentsOf: [TextConstants.settingsViewCellTurkcellPasscode,
                                                       TextConstants.settingsViewCellTurkcellAutoLogin])
 //                }
 //
-//            DispatchQueue.main.async {
+            DispatchQueue.main.async {
                 let array = [[TextConstants.settingsViewCellBeckup,
                               TextConstants.settingsViewCellImportPhotos,
                               TextConstants.settingsViewCellAutoUpload],
@@ -61,12 +61,12 @@ class SettingsInteractor: SettingsInteractorInput {
                              [TextConstants.settingsViewCellHelp,
                               TextConstants.settingsViewCellLogout]]
 //
-                output.cellsDataForSettings(array: array)
-//            }
-//        }, fail: { [weak self] (error) in
-//
-//
-//        })
+                self?.output.cellsDataForSettings(array: array)
+            }  
+        }, fail: { [weak self] (error) in
+
+
+        })
         AccountService().securitySettingsInfo(success: { [weak self] (response) in
             guard let unwrapedSecurityresponse = response as? SecuritySettingsInfoResponse,
                 let turkCellPasswordOn = unwrapedSecurityresponse.turkcellPasswordAuthEnabled,
