@@ -68,7 +68,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         var actions = [ElementTypes]()
         
         switch currentItem.fileType {
-        case .audio, .video:
+        case .audio, .video, .image:
             actions = ActionSheetPredetermendConfigs.photoVideoDetailActions
         case .allDocs:
             actions = ActionSheetPredetermendConfigs.documetsDetailActions
