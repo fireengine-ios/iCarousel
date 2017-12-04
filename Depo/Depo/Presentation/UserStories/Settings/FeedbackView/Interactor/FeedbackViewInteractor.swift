@@ -96,7 +96,7 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
                 let packages = subscriptions
                     .flatMap { $0.subscriptionPlanName }
                     .joined(separator: ", ")
-                let userInfoString = String(format: "Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n", versionString, phoneString, CoreTelephonyService().operatorName() ?? "" , UIDevice.current.model, UIDevice.current.systemVersion, Device.locale, languageName, ReachabilityService().isReachableViaWiFi ? "WWAN" : "WIFI", quota, quotaUsed, packages)
+                let userInfoString = String(format: TextConstants.feedbackMailTextFormat, versionString, phoneString, CoreTelephonyService().operatorName() ?? "" , UIDevice.current.model, UIDevice.current.systemVersion, Device.locale, languageName, ReachabilityService().isReachableViaWiFi ? "WWAN" : "WIFI", quota, quotaUsed, packages)
                 
                 self?.output.asyncOperationSucces()
                 self?.output.languageRequestSended(text: userInfoString)
