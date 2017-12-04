@@ -12,6 +12,8 @@ class PackagesViewController: UIViewController {
     var output: PackagesViewOutput!
     
     @IBOutlet weak private var collectionView: UICollectionView!
+    @IBOutlet weak private var promoView: PromoView!
+    @IBOutlet var keyboardHideManager: KeyboardHideManager!
     
     private lazy var activityManager = ActivityIndicatorManager()
     
@@ -25,6 +27,7 @@ class PackagesViewController: UIViewController {
         super.viewDidLoad()
         
         activityManager.delegate = self
+        promoView.deleagte = self
         setupCollectionView()
         output.viewIsReady()
     }
@@ -36,6 +39,23 @@ class PackagesViewController: UIViewController {
 
 // MARK: PackagesViewInput
 extension PackagesViewController: PackagesViewInput {
+    
+    func reloadPackages() {
+        plans = []
+        output.viewIsReady()
+    }
+    
+    func successedPromocode() {
+        CustomPopUp.sharedInstance.showCustomSuccessAlert(withTitle: TextConstants.success, withText: TextConstants.promocodeSuccess, okButtonText: TextConstants.ok)
+        
+        promoView.endEditing(true)
+        promoView.codeTextField.text = ""
+        reloadPackages()
+    }
+    
+    func show(promocodeError: String) {
+        promoView.errorLabel.text = promocodeError
+    }
     
     func display(error: ErrorResponse) {
         CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: TextConstants.errorAlert, withText: error.description, okButtonText: TextConstants.ok)
@@ -138,3 +158,9 @@ extension PackagesViewController: ActivityIndicator {
     }
 }
 
+// MARK: - PromoViewDelegate
+extension PackagesViewController: PromoViewDelegate {
+    func promoView(_ promoView: PromoView, didPressApplyWithPromocode promocode: String) {
+        output.submit(promocode: promocode)
+    }
+}

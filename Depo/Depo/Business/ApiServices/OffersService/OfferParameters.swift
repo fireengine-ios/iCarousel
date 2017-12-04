@@ -17,6 +17,10 @@ private struct OfferPath {
     
     static let initOffer = "/api/account/initOfferPurchase"
     static let verifyOffer = "/api/account/verifyOfferPurchase"
+    
+    static let jobExists = "/api/account/isSubscriptionJobExists"
+    
+    static let submitPromocode = "https://mylifebox.com/api/promo/activate"
 }
 
 class OfferAllParameters: BaseRequestParametrs {
@@ -105,5 +109,28 @@ final class VerifyOfferParameters: BaseRequestParametrs {
     override var requestParametrs: Any {
         return ["otp": otp,
                 "referenceToken": referenceToken]
+    }
+}
+
+final class JobExistsParameters: BaseRequestParametrs {
+    override var patch: URL {
+        return URL(string: OfferPath.jobExists, relativeTo: super.patch)!
+    }
+}
+
+final class SubmitPromocodeParameters: BaseRequestParametrs {
+    
+    let promocode: String
+    
+    init(promocode: String) {
+        self.promocode = promocode
+    }
+    
+    override var patch: URL {
+        return URL(string: OfferPath.submitPromocode)!
+    }
+    
+    override var requestParametrs: Any {
+        return promocode
     }
 }

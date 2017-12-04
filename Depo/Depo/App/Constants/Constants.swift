@@ -90,7 +90,7 @@ struct TextConstants {
     
     static let serverResponceError = "Wrong type of answer"
     
-    static let errorAlert = "ERROR"
+    static let errorAlert = "Error"
     static let errorAlerTitleBackupAlreadyExist = "Overwrite backup?"
     static let errorAlertTextBackupAlreadyExist = "You have already a backup. Do you want to overwrite the existing one?"
     static let errorAlertNopeBtnBackupAlreadyExist = "Nope"
@@ -587,6 +587,14 @@ struct TextConstants {
     static let passcodeEnableTouchID = "Enable Touch ID"
     static let passcodeNumberOfTries = "You have %@ attempts left"
     static let errorConnectedToNetwork = "Please check your internet connection is active and Cellular Data is ON under Settings/lifebox."
+    
+    static let apply = "Apply"
+    static let success = "Success"
+    
+    static let promocodeTitle = "lifebox Size Özel Kampanya"
+    static let promocodePlaceholder = "Enter Your Promotion Code"
+    static let promocodeError = "Invalid Promo Code"
+    static let promocodeSuccess = "Promo code was applied"
 }
 
 

@@ -15,6 +15,8 @@ protocol OffersService {
     func validateApplePurchase(with receiptId: String, productId: String?, success: SuccessResponse?, fail: @escaping FailResponse)
     func initOffer(offer: OfferServiceResponse, success: SuccessResponse?, fail: @escaping FailResponse)
     func verifyOffer(otp: String, referenceToken: String, success: SuccessResponse?, fail: @escaping FailResponse)
+    func getJobExists(success: SuccessResponse?, fail: @escaping FailResponse)
+    func submit(promocode: String, success: SuccessResponse?, fail: @escaping FailResponse)
 }
 
 class OffersServiceIml: BaseRequestService, OffersService {
@@ -57,6 +59,18 @@ class OffersServiceIml: BaseRequestService, OffersService {
     func verifyOffer(otp: String, referenceToken: String, success: SuccessResponse?, fail: @escaping FailResponse) {
         let param = VerifyOfferParameters(otp: otp, referenceToken: referenceToken)
         let handler = BaseResponseHandler<InitOfferResponse, ObjectRequestResponse>(success: success, fail: fail)
+        executePostRequest(param: param, handler: handler)
+    }
+    
+    func getJobExists(success: SuccessResponse?, fail: @escaping FailResponse) {
+        let param = JobExistsParameters()
+        let handler = BaseResponseHandler<JobExistsResponse, ObjectRequestResponse>(success: success, fail: fail)
+        executeGetRequest(param: param, handler: handler)
+    }
+    
+    func submit(promocode: String, success: SuccessResponse?, fail: @escaping FailResponse) {
+        let param = SubmitPromocodeParameters(promocode: promocode)
+        let handler = BaseResponseHandler<SubmitPromocodeResponse, ObjectRequestResponse>(success: success, fail: fail)
         executePostRequest(param: param, handler: handler)
     }
 }
