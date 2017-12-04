@@ -150,6 +150,16 @@
 		7C1F89921F70FFDF00740177 /* ViewForPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F89911F70FFDF00740177 /* ViewForPopUp.swift */; };
 		7C1F89951F7140AF00740177 /* PopUpSwipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1F89931F7140AF00740177 /* PopUpSwipeCell.swift */; };
 		7C1F89961F7140AF00740177 /* PopUpSwipeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F89941F7140AF00740177 /* PopUpSwipeCell.xib */; };
+		7C233CCF1FD51E290013CCA0 /* UploadFromLifeBoxConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CC11FD51E280013CCA0 /* UploadFromLifeBoxConfigurator.swift */; };
+		7C233CD01FD51E290013CCA0 /* UploadFromLifeBoxInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CC21FD51E280013CCA0 /* UploadFromLifeBoxInitializer.swift */; };
+		7C233CD11FD51E290013CCA0 /* UploadFromLifeBoxModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CC41FD51E280013CCA0 /* UploadFromLifeBoxModuleInput.swift */; };
+		7C233CD21FD51E290013CCA0 /* UploadFromLifeBoxPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CC51FD51E280013CCA0 /* UploadFromLifeBoxPresenter.swift */; };
+		7C233CD31FD51E290013CCA0 /* UploadFromLifeBoxRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CC71FD51E280013CCA0 /* UploadFromLifeBoxRouterInput.swift */; };
+		7C233CD41FD51E290013CCA0 /* UploadFromLifeBoxRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CC81FD51E280013CCA0 /* UploadFromLifeBoxRouter.swift */; };
+		7C233CD51FD51E290013CCA0 /* UploadFromLifeBoxInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CCA1FD51E290013CCA0 /* UploadFromLifeBoxInteractor.swift */; };
+		7C233CD61FD51E290013CCA0 /* UploadFromLifeBoxInteractorIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CCB1FD51E290013CCA0 /* UploadFromLifeBoxInteractorIO.swift */; };
+		7C233CD71FD51E290013CCA0 /* UploadFromLifeBoxViewIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CCD1FD51E290013CCA0 /* UploadFromLifeBoxViewIO.swift */; };
+		7C233CD81FD51E290013CCA0 /* UploadFromLifeBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CCE1FD51E290013CCA0 /* UploadFromLifeBoxViewController.swift */; };
 		7C241EF81F960BA300322149 /* CollectionViewCellForStoryPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C241EF71F960BA300322149 /* CollectionViewCellForStoryPhoto.swift */; };
 		7C241EFA1F960E1C00322149 /* CollectionViewCellForStoryPhoto.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C241EF91F960E1B00322149 /* CollectionViewCellForStoryPhoto.xib */; };
 		7C2F56F61F1CC0FE0014870B /* ActionsMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C2F56F51F1CC0FE0014870B /* ActionsMenuView.xib */; };
@@ -1285,6 +1295,16 @@
 		7C1F89911F70FFDF00740177 /* ViewForPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewForPopUp.swift; sourceTree = "<group>"; };
 		7C1F89931F7140AF00740177 /* PopUpSwipeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpSwipeCell.swift; sourceTree = "<group>"; };
 		7C1F89941F7140AF00740177 /* PopUpSwipeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopUpSwipeCell.xib; sourceTree = "<group>"; };
+		7C233CC11FD51E280013CCA0 /* UploadFromLifeBoxConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadFromLifeBoxConfigurator.swift; sourceTree = "<group>"; };
+		7C233CC21FD51E280013CCA0 /* UploadFromLifeBoxInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadFromLifeBoxInitializer.swift; sourceTree = "<group>"; };
+		7C233CC41FD51E280013CCA0 /* UploadFromLifeBoxModuleInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadFromLifeBoxModuleInput.swift; sourceTree = "<group>"; };
+		7C233CC51FD51E280013CCA0 /* UploadFromLifeBoxPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadFromLifeBoxPresenter.swift; sourceTree = "<group>"; };
+		7C233CC71FD51E280013CCA0 /* UploadFromLifeBoxRouterInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadFromLifeBoxRouterInput.swift; sourceTree = "<group>"; };
+		7C233CC81FD51E280013CCA0 /* UploadFromLifeBoxRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadFromLifeBoxRouter.swift; sourceTree = "<group>"; };
+		7C233CCA1FD51E290013CCA0 /* UploadFromLifeBoxInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadFromLifeBoxInteractor.swift; sourceTree = "<group>"; };
+		7C233CCB1FD51E290013CCA0 /* UploadFromLifeBoxInteractorIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadFromLifeBoxInteractorIO.swift; sourceTree = "<group>"; };
+		7C233CCD1FD51E290013CCA0 /* UploadFromLifeBoxViewIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadFromLifeBoxViewIO.swift; sourceTree = "<group>"; };
+		7C233CCE1FD51E290013CCA0 /* UploadFromLifeBoxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadFromLifeBoxViewController.swift; sourceTree = "<group>"; };
 		7C241EF71F960BA300322149 /* CollectionViewCellForStoryPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellForStoryPhoto.swift; sourceTree = "<group>"; };
 		7C241EF91F960E1B00322149 /* CollectionViewCellForStoryPhoto.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewCellForStoryPhoto.xib; sourceTree = "<group>"; };
 		7C2F56F51F1CC0FE0014870B /* ActionsMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActionsMenuView.xib; sourceTree = "<group>"; };
@@ -3448,6 +3468,63 @@
 				7C1F89941F7140AF00740177 /* PopUpSwipeCell.xib */,
 			);
 			path = ViewForPopUp;
+			sourceTree = "<group>";
+		};
+		7C233CA61FD18DDA0013CCA0 /* UploadFromLifeBox */ = {
+			isa = PBXGroup;
+			children = (
+				7C233CC01FD51E280013CCA0 /* Configurator */,
+				7C233CC91FD51E290013CCA0 /* Interactor */,
+				7C233CC31FD51E280013CCA0 /* Presenter */,
+				7C233CC61FD51E280013CCA0 /* Router */,
+				7C233CCC1FD51E290013CCA0 /* View */,
+			);
+			path = UploadFromLifeBox;
+			sourceTree = "<group>";
+		};
+		7C233CC01FD51E280013CCA0 /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				7C233CC11FD51E280013CCA0 /* UploadFromLifeBoxConfigurator.swift */,
+				7C233CC21FD51E280013CCA0 /* UploadFromLifeBoxInitializer.swift */,
+			);
+			path = Configurator;
+			sourceTree = "<group>";
+		};
+		7C233CC31FD51E280013CCA0 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				7C233CC41FD51E280013CCA0 /* UploadFromLifeBoxModuleInput.swift */,
+				7C233CC51FD51E280013CCA0 /* UploadFromLifeBoxPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		7C233CC61FD51E280013CCA0 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				7C233CC71FD51E280013CCA0 /* UploadFromLifeBoxRouterInput.swift */,
+				7C233CC81FD51E280013CCA0 /* UploadFromLifeBoxRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		7C233CC91FD51E290013CCA0 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				7C233CCA1FD51E290013CCA0 /* UploadFromLifeBoxInteractor.swift */,
+				7C233CCB1FD51E290013CCA0 /* UploadFromLifeBoxInteractorIO.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		7C233CCC1FD51E290013CCA0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7C233CCD1FD51E290013CCA0 /* UploadFromLifeBoxViewIO.swift */,
+				7C233CCE1FD51E290013CCA0 /* UploadFromLifeBoxViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		7C2F56F71F1CC1980014870B /* Cell */ = {
@@ -5714,6 +5791,7 @@
 		CE3EB30E1FC7F6A0000B70D6 /* Grid */ = {
 			isa = PBXGroup;
 			children = (
+				7C233CA61FD18DDA0013CCA0 /* UploadFromLifeBox */,
 				3064E02B6455F8283162B7B7 /* BaseFilesGreed */,
 				7C3A74341F04DE2800124DF5 /* BaseDataSources */,
 				3C9A2005A04679D300893C3E /* UploadFilesSelection */,
@@ -7257,7 +7335,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		82B2D76F0D1B2CE153F470BD /* [CP] Embed Pods Frameworks */ = {
@@ -7399,6 +7477,7 @@
 				7CD1F8F71F0288CA0028F51A /* WiFiSyncInteractorOutput.swift in Sources */,
 				7CAB66DD1F0CFB85005B26F1 /* CollectionViewCellDataProtocol.swift in Sources */,
 				CEAE3FB11EFD4F0D00A405B2 /* HomePageInitializer.swift in Sources */,
+				7C233CD61FD51E290013CCA0 /* UploadFromLifeBoxInteractorIO.swift in Sources */,
 				7C49881E1F3320420039C5F2 /* CreateStoryPhotosOrderViewInput.swift in Sources */,
 				8DCB21781F3C8BC000BAFE1E /* SeacrhViewRouter.swift in Sources */,
 				CE51AB531EF90853005DCEE0 /* CurioNetwork.m in Sources */,
@@ -7538,6 +7617,7 @@
 				CE51AC091EF90853005DCEE0 /* AutoSyncInteractor.swift in Sources */,
 				7C3A74441F05371B00124DF5 /* FilesDataSource.swift in Sources */,
 				CE51AC0C1EF90853005DCEE0 /* CurioActionToolkit.m in Sources */,
+				7C233CD51FD51E290013CCA0 /* UploadFromLifeBoxInteractor.swift in Sources */,
 				CEDFDF0D1FBEE5F9006BFCAE /* UIApplication+topController.swift in Sources */,
 				8C7786A91F3F38F0005CB432 /* VisualMusicPlayerViewOutput.swift in Sources */,
 				CE51AC0D1EF90853005DCEE0 /* UIAlertViewCustom.m in Sources */,
@@ -7577,6 +7657,7 @@
 				CE51AC461EF90853005DCEE0 /* CurioReachabilityEx.m in Sources */,
 				7CB2E30E1FB9CB4C009CF813 /* FreeAppSpace.swift in Sources */,
 				7C83B6F31F3D916F006D05E3 /* SettingsAutoSyncModel.swift in Sources */,
+				7C233CD01FD51E290013CCA0 /* UploadFromLifeBoxInitializer.swift in Sources */,
 				CE51AC471EF90853005DCEE0 /* DataStorage.swift in Sources */,
 				CE51AC481EF90853005DCEE0 /* BaseUserInputCellView.swift in Sources */,
 				CE51AC4A1EF90853005DCEE0 /* LoginConfigurator.swift in Sources */,
@@ -7610,6 +7691,7 @@
 				8CFF866B1F0F874F00520D18 /* ApplicationSession.swift in Sources */,
 				CE51AC7E1EF90853005DCEE0 /* LoginInitializer.swift in Sources */,
 				CEAD6BDE1F94EF320085FF30 /* Factory.swift in Sources */,
+				7C233CD31FD51E290013CCA0 /* UploadFromLifeBoxRouterInput.swift in Sources */,
 				CE95ED511F516736002F923A /* HelpAndSupportInteractorOutput.swift in Sources */,
 				8C0097141F6BDA6900FA069C /* MoreFilesActionsInteractorOutput.swift in Sources */,
 				8CFF868C1F0F96E600520D18 /* ContactUtil.m in Sources */,
@@ -7710,6 +7792,7 @@
 				CE51ACD61EF90853005DCEE0 /* TermsAndServicesInteractorInput.swift in Sources */,
 				CE51ACD71EF90853005DCEE0 /* TermsAndServicesInteractorOutput.swift in Sources */,
 				CE51ACD81EF90853005DCEE0 /* TermsAndServicesInteractor.swift in Sources */,
+				7C233CD71FD51E290013CCA0 /* UploadFromLifeBoxViewIO.swift in Sources */,
 				8CAACDCA1F14F3B400B0A6FF /* TermsAndServicesDataStorage.swift in Sources */,
 				CE51ACD91EF90853005DCEE0 /* TermsAndServicesRouterInput.swift in Sources */,
 				CEACBEA11F6C0EEA003BE328 /* RingView.swift in Sources */,
@@ -7730,6 +7813,7 @@
 				CE51ACE41EF90853005DCEE0 /* IntroduceInteractor.swift in Sources */,
 				EFA74FAE1FBF378F00CF946E /* PrintPresenter.swift in Sources */,
 				CE51ACE51EF90853005DCEE0 /* IntroduceRouterInput.swift in Sources */,
+				7C233CCF1FD51E290013CCA0 /* UploadFromLifeBoxConfigurator.swift in Sources */,
 				CE51ACE61EF90853005DCEE0 /* IntroduceRouter.swift in Sources */,
 				7C6E2F541F31BD2200536DB6 /* PhotoStory.swift in Sources */,
 				CE51ACE71EF90853005DCEE0 /* IntroduceConfigurator.swift in Sources */,
@@ -7799,6 +7883,7 @@
 				CEF0C2841FC5493200105C31 /* ImportFromInstagramPresenter.swift in Sources */,
 				D47863F51F3F18FA00EFDC6D /* UsageInfoInteractorOutput.swift in Sources */,
 				CE246A0E1F3D2CDE008DF705 /* SyncService.swift in Sources */,
+				7C233CD81FD51E290013CCA0 /* UploadFromLifeBoxViewController.swift in Sources */,
 				CEB996CF1F0770470074E264 /* RequestsKey.swift in Sources */,
 				7CAC23BC1F45718700607660 /* RemoteService.swift in Sources */,
 				D47863F11F3F18FA00EFDC6D /* UsageInfoConfigurator.swift in Sources */,
@@ -7883,6 +7968,7 @@
 				39EB93C2291B9CEB5172FB15 /* ExpandStorageInitializer.swift in Sources */,
 				142A29D90D8A7CF39AC8F82C /* UploadedItemsViewInput.swift in Sources */,
 				92CB379A913C184F1ED25C74 /* UploadedItemsViewOutput.swift in Sources */,
+				7C233CD21FD51E290013CCA0 /* UploadFromLifeBoxPresenter.swift in Sources */,
 				7CFE92E81F5D85A5008A3B72 /* DropDovnView.swift in Sources */,
 				CE6DE7531FCBE84100C23CBD /* DropboxParametrs.swift in Sources */,
 				7C6E2F901F31E4F800536DB6 /* CreateStoryNameInteractor.swift in Sources */,
@@ -8176,6 +8262,7 @@
 				DB6E1B2B2651A46923CB165B /* FeedbackViewController.swift in Sources */,
 				EF2EE1EEC26868913C9251BD /* FeedbackViewModuleInput.swift in Sources */,
 				C1FD046A70F4C0DF7651095E /* FeedbackViewPresenter.swift in Sources */,
+				7C233CD41FD51E290013CCA0 /* UploadFromLifeBoxRouter.swift in Sources */,
 				7C5AFD701F69768300DBB9E7 /* BaseViewController.swift in Sources */,
 				6DD569A1DD4A69901636564E /* FeedbackViewInteractorInput.swift in Sources */,
 				CEF69DE91FB5A26D00FCE6AB /* UIImage+Orientation.swift in Sources */,
@@ -8212,6 +8299,7 @@
 				D143F1B72DFAC4DD04CF11B7 /* OTPViewRouterInput.swift in Sources */,
 				46DCABF967D788D30B3ECEE1 /* OTPViewConfigurator.swift in Sources */,
 				7F27470E56D2B8E0764CFF33 /* OTPViewInitializer.swift in Sources */,
+				7C233CD11FD51E290013CCA0 /* UploadFromLifeBoxModuleInput.swift in Sources */,
 				980738277831905CE1389C42 /* FreeAppSpaceViewController.swift in Sources */,
 				D1F7307987DD553C63317B99 /* FreeAppSpacePresenter.swift in Sources */,
 				10CC7D3FA3B7A3A380C4E7D2 /* FreeAppSpaceInteractor.swift in Sources */,

@@ -391,6 +391,9 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         return buttonsArray
     }
     
+    static let bottomSpace: CGFloat = 7
+    static let spaceBeetwenbuttons: CGFloat = 3
+    
     private func showButtonRainbow() {
         
         let buttonsArray = getFloatingButtonsArray()
@@ -399,17 +402,17 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
         if count == 1{
             let obj0 = buttonsArray[0]
             obj0.centerXConstraint!.constant = 0
-            obj0.bottomConstraint!.constant = -obj0.frame.size.height - tabBar.frame.size.height
+            obj0.bottomConstraint!.constant = -obj0.frame.size.height - tabBar.frame.size.height - TabBarViewController.bottomSpace
         }
         if count == 2{
             let obj0 = buttonsArray[0]
             let obj1 = buttonsArray[1]
             
             obj0.centerXConstraint!.constant = -obj0.frame.size.width * 0.75
-            obj0.bottomConstraint!.constant = -obj0.frame.size.height * 0.75 - tabBar.frame.size.height
+            obj0.bottomConstraint!.constant = -obj0.frame.size.height * 0.75 - tabBar.frame.size.height - TabBarViewController.bottomSpace - TabBarViewController.spaceBeetwenbuttons
             
             obj1.centerXConstraint!.constant = obj0.frame.size.width * 0.75
-            obj1.bottomConstraint!.constant = -obj0.frame.size.height * 0.75 - tabBar.frame.size.height
+            obj1.bottomConstraint!.constant = -obj0.frame.size.height * 0.75 - tabBar.frame.size.height - TabBarViewController.bottomSpace - TabBarViewController.spaceBeetwenbuttons
         }
         if count == 3{
             let obj0 = buttonsArray[0]
@@ -417,13 +420,13 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
             let obj2 = buttonsArray[2]
             
             obj0.centerXConstraint!.constant = -obj0.frame.size.width
-            obj0.bottomConstraint!.constant = -tabBar.frame.size.height
+            obj0.bottomConstraint!.constant = -tabBar.frame.size.height - TabBarViewController.bottomSpace
             
             obj1.centerXConstraint!.constant = 0
-            obj1.bottomConstraint!.constant = -obj0.frame.size.height - tabBar.frame.size.height
+            obj1.bottomConstraint!.constant = -obj0.frame.size.height - tabBar.frame.size.height - TabBarViewController.bottomSpace - TabBarViewController.spaceBeetwenbuttons
             
             obj2.centerXConstraint!.constant = obj0.frame.size.width
-            obj2.bottomConstraint!.constant = -tabBar.frame.size.height
+            obj2.bottomConstraint!.constant = -tabBar.frame.size.height - TabBarViewController.bottomSpace
         }
         if count == 4{
             let obj0 = buttonsArray[0]
@@ -432,16 +435,16 @@ final class TabBarViewController: UIViewController, UITabBarDelegate {
             let obj3 = buttonsArray[3]
             
             obj0.centerXConstraint!.constant = -obj0.frame.size.width
-            obj0.bottomConstraint!.constant = -tabBar.frame.size.height
+            obj0.bottomConstraint!.constant = -tabBar.frame.size.height - TabBarViewController.bottomSpace
             
             obj1.centerXConstraint!.constant = -obj0.frame.size.width * 0.5
-            obj1.bottomConstraint!.constant = -obj0.frame.size.height - tabBar.frame.size.height
+            obj1.bottomConstraint!.constant = -obj0.frame.size.height - tabBar.frame.size.height - TabBarViewController.bottomSpace - TabBarViewController.spaceBeetwenbuttons
             
             obj2.centerXConstraint!.constant = obj0.frame.size.width * 0.5
-            obj2.bottomConstraint!.constant = -obj3.frame.size.height - tabBar.frame.size.height
+            obj2.bottomConstraint!.constant = -obj3.frame.size.height - tabBar.frame.size.height - TabBarViewController.bottomSpace - TabBarViewController.spaceBeetwenbuttons
             
             obj3.centerXConstraint!.constant = obj0.frame.size.width
-            obj3.bottomConstraint!.constant = -tabBar.frame.size.height
+            obj3.bottomConstraint!.constant = -tabBar.frame.size.height - TabBarViewController.bottomSpace
             
             
         }
@@ -579,17 +582,33 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         //UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
         
         WrapItemOperatonManager.default.startOperationWith(type: .upload, allOperations: 1, completedOperations: 0)
-
-        UploadService.default.upload(imageData: data) { result in
-            DispatchQueue.main.async {
-                WrapItemOperatonManager.default.stopOperationWithType(type: .upload)
-                switch result {
-                case .success(_):
+        let parentUUID = RouterVC().getParentUUID()
+        let isPhotoAlbum = RouterVC().isRootViewControllerAlbumDetail()
+        let isFavorites = RouterVC().isOnFavoritesView()
+        UploadService.default.upload(imageData: data, parentUUID: parentUUID, isFaorites: isFavorites) { result in
+            WrapItemOperatonManager.default.stopOperationWithType(type: .upload)
+            switch result {
+            case .success(let fhotoUploadResponce):
+                DispatchQueue.main.async {
                     CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: "Success", withText: "Photo uploaded", okButtonText: "OK")
-                case .failed(let error):
+                }
+                
+                if isPhotoAlbum{
+                    let item = Item.init(remote: fhotoUploadResponce)
+                    let parameter = AddPhotosToAlbum(albumUUID: parentUUID, photos: [item])
+                    PhotosAlbumService().addPhotosToAlbum(parameters: parameter, success: {
+                        
+                    }, fail: { (error) in
+                        
+                    })
+                }
+                
+            case .failed(let error):
+                DispatchQueue.main.async {
                     CustomPopUp.sharedInstance.showCustomAlert(withText: error.localizedDescription, okButtonText: "OK")
                 }
             }
+            
         }
         
         picker.dismiss(animated: true, completion: nil)

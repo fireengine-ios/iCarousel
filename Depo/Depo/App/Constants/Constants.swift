@@ -346,6 +346,7 @@ struct TextConstants {
     static let createStoryNoSelectedPhotosError = "Sorry, but story photos should not be empty"
     static let createStoryCreated = "Story created"
     static let createStoryNotCreated = "Story not created"
+    static let failWhileAddingToAlbum = "Fail while adding to album"
     
     //MARK: Create story Audio
     static let createStoryNoSelectedAudioError = "Sorry, but story audio should not be empty"
@@ -365,6 +366,12 @@ struct TextConstants {
     static let uploadFilesNothingUploadOk = "Ok"
     static let uploadSuccessful = "Upload was successful"
     static let uploadFailed = "Upload failed"
+    
+    //MARK: UploadFromLifeBox
+    static let uploadFromLifeBoxTitle = "Upload from lifebox"
+    static let uploadFromLifeBoxNextButton = "Next"
+    static let uploadFromLifeBoxNoSelectedPhotosError = "Sorry, but photos not selected"
+    static let uploadFromLifeBoxEmptyFolderButtonText = "Ok"
     
     
     //MARK: Select Folder

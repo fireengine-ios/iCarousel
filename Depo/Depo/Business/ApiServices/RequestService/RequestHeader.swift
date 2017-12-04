@@ -27,6 +27,7 @@ struct HeaderConstant {
     static let XObjectMetaIosMetadataHash = "X-Object-Meta-Ios-Metadata-Hash"
     static let XObjectMetaAlbumLabel = "X-Object-Meta-Album-Label"
     static let XObjectMetaFolderLabel = "X-Object-Meta-Folder-Label"
+    static let XObjectMetaFavorites = "X-Object-Meta-Favourite"
     static let Expect = "Expect"
     static let Etag = "ETag"
     
