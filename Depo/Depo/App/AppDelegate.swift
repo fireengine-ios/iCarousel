@@ -34,6 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
+        startMenloworks(with: launchOptions)
+        
         return true
     }
     
@@ -118,4 +120,55 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             FactoryMain.mediaPlayer.handle(event: event)
         }
     }
+    
 }
+
+
+//Notifications
+
+extension AppDelegate {
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        MPush.applicationDidRegisterForRemoteNotifications(withDeviceToken: deviceToken)
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        MPush.applicationDidFailToRegisterForRemoteNotificationsWithError(error)
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
+        MPush.applicationDidReceiveRemoteNotification(userInfo)
+    }
+    
+    func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
+        MPush.applicationDidReceive(notification)
+    }
+}
+
+
+//Menloworks
+
+extension AppDelegate {
+    private func startMenloworks(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
+        var notificationTypes: NSInteger?
+        if #available(iOS 8, *) {
+            let types: UIUserNotificationType = [UIUserNotificationType.alert, UIUserNotificationType.badge, UIUserNotificationType.sound]
+            notificationTypes = NSInteger(types.rawValue)
+        } else {
+            let types: UIUserNotificationType = [UIUserNotificationType.alert, UIUserNotificationType.sound, UIUserNotificationType.badge]
+            notificationTypes = NSInteger(types.rawValue)
+        }
+        
+        if notificationTypes != nil {
+            MPush.register(forRemoteNotificationTypes: notificationTypes!)
+            MPush.applicationDidFinishLaunching(options: launchOptions)
+        }
+    }
+    
+}
+
+
+
+
+
+
+

@@ -17,8 +17,9 @@ extension PasscodeSettingsRouter: PasscodeSettingsRouterInput {
         router.popViewController()
     }
     
-    func changePasscode() {
+    func changePasscode(isTurkCellUser: Bool) {
         let vc = PasscodeEnterViewController.with(flow: .setNew)
+        vc.isTurkCellUser = isTurkCellUser
         let routerVC = RouterVC()
         vc.success = {
             routerVC.navigationController?.popViewController(animated: true)
@@ -26,8 +27,9 @@ extension PasscodeSettingsRouter: PasscodeSettingsRouterInput {
         routerVC.pushViewController(viewController: vc)
     }
     
-    func setPasscode() {
+    func setPasscode(isTurkCellUser: Bool) {
         let vc = PasscodeEnterViewController.with(flow: .create)
+        vc.isTurkCellUser = isTurkCellUser
         let routerVC = RouterVC()
         vc.success = {
             routerVC.navigationController?.popViewController(animated: true)

@@ -268,9 +268,9 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     // MARK: Bottom Bar
     
     private func startEditing() {
-        //call tabbar
-        view.setupSelectionStyle(isSelection: true)
-        view.setThreeDotsMenu(active: dataSource.selectedItemsArray.count > 0)
+        let selectedItemsCount = dataSource.selectedItemsArray.count
+        view.startSelection(with: selectedItemsCount)
+        view.setThreeDotsMenu(active: selectedItemsCount > 0)
         dataSource.setSelectionState(selectionState: true)
     }
     
@@ -278,7 +278,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     private func stopEditing() {
         bottomBarPresenter?.dismiss(animated: true)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
-        view.setupSelectionStyle(isSelection: false)
+        view.stopSelection()
         dataSource.setSelectionState(selectionState: false)
         view.setThreeDotsMenu(active: true)
     }
@@ -353,7 +353,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func viewWillDisappear() {
         bottomBarPresenter?.dismiss(animated: true)
         dataSource.setSelectionState(selectionState: false)
-        view.setupSelectionStyle(isSelection: false)
+        view.stopSelection()
     }
     
     func viewWillAppear() {
@@ -450,13 +450,15 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func operationFinished(withType type: ElementTypes, response: Any?) {
         debugPrint("finished")
         dataSource.setSelectionState(selectionState: false)
-        view.setupSelectionStyle(isSelection: false)
+        view.stopSelection()
+        onChangeSelectedItemsCount(selectedItemsCount: 0)
     }
     
     func operationFailed(withType type: ElementTypes) {
         debugPrint("failed")
         dataSource.setSelectionState(selectionState: false)
-        view.setupSelectionStyle(isSelection: false)
+        view.stopSelection()
+        onChangeSelectedItemsCount(selectedItemsCount: 0)
     }
     
     func selectModeSelected() {
@@ -471,7 +473,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func selectAllModeSelected() {
-        view.setupSelectionStyle(isSelection: true)
+        view.startSelection(with: dataSource.selectedItemsArray.count)
         dataSource.selectAll(isTrue: true)
     }
     

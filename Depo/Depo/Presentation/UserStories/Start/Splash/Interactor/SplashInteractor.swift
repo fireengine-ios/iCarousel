@@ -17,14 +17,14 @@ class SplashInteractor: SplashInteractorInput {
     }
 
     func startLoginInBackroung(){
-        if ApplicationSession.sharedSession.session.rememberMe {
-            authByRememberMe()
-        } else {
-            output.onFailLogin()
-        }
+//        if ApplicationSession.sharedSession.session.rememberMe {
+            auth()
+//        } else {
+//            output.onFailLogin()
+//        }
     }
     
-    private func authByRememberMe() {
+    private func auth() {
         output.startAsyncOperation()
         
         let success: SuccessLogin = { [weak self] in
@@ -35,7 +35,7 @@ class SplashInteractor: SplashInteractorInput {
             self?.failLogin()
         }
         
-        AuthenticationService().authification(success: success, fail: fail)
+        AuthenticationService().authenticate(success: success, fail: fail)
     }
     
     func successLogin(){

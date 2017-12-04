@@ -36,6 +36,11 @@ class UsageInfoViewController: UIViewController {
         output.viewIsReady()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        output.viewWillAppear()
+    }
+    
     private func setupTableView() {
         tableView.register(nibCell: InternetDataUsageCell.self)
     }
@@ -74,7 +79,7 @@ extension UsageInfoViewController: UsageInfoViewInput {
     }
     
     func display(error: ErrorResponse) {
-        
+        CustomPopUp.sharedInstance.showCustomInfoAlert(withTitle: TextConstants.errorAlert, withText: error.description, okButtonText: TextConstants.ok)
     }
 }
 

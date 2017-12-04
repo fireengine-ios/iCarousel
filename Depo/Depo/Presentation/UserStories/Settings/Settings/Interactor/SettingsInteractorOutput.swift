@@ -20,4 +20,7 @@ protocol SettingsInteractorOutput: class {
     func profilePhotoUploadFailed()
     
     func connectToNetworkFailed()
+    
+    func turkCellSecuritySettingsAccuered(passcode: Bool, autoLogin: Bool)
+    func turkCellSecurityfailed()
 }

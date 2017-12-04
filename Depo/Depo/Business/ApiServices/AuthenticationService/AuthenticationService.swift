@@ -190,11 +190,40 @@ struct  ForgotPassword: RequestParametrs {
     }
 }
 
+class EmailUpdate: BaseRequestParametrs {
+    let email: String
+    
+    init(mail: String) {
+        email = mail
+    }
+    
+    override var requestParametrs: Any { 
+        return email
+    }
+    
+    override var patch: URL {
+        return URL(string: RouteRequests.mailUpdate, relativeTo:super.patch)!
+    }
+    
+    override var header: RequestHeaderParametrs {
+        return RequestHeaders.authification()//base()
+    }
+}
 
 class EmailVerification: BaseRequestParametrs {
     
+    let email: String
+    
+    init(mail: String) {
+        email = mail
+    }
+    
+    override var requestParametrs: Any {
+        return [LbRequestkeys.email : email]
+    }
+    
     override var patch: URL {
-        return URL(string: RouteRequests.forgotPassword, relativeTo:super.patch)!
+        return URL(string: RouteRequests.mailVerefication, relativeTo:super.patch)!
     }
     
     override var header: RequestHeaderParametrs {
@@ -327,6 +356,11 @@ class AuthenticationService: BaseRequestService {
         executePostRequest(param: resendVerification, handler: handler)
     }
     
+    func updateEmail(emailUpdateParameters: EmailUpdate, sucess:SuccessResponse?, fail:FailResponse?) {
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: sucess, fail: fail)
+        executePostRequest(param: emailUpdateParameters, handler: handler)
+    }
+    
     func verificationEmail(emailVerification:EmailVerification, sucess:SuccessResponse?, fail:FailResponse?) {
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: sucess, fail: fail)
         executePostRequest(param: emailVerification, handler: handler)
@@ -338,16 +372,28 @@ class AuthenticationService: BaseRequestService {
         executePostRequest(param: forgotPassword, handler: handler)
     }
     
-    func authification(success:SuccessLogin?, fail: FailResponse?, byRememberMe: Bool  = false) {
-        
-        let rechability = ReachabilityService()
-        if (rechability.isReachableViaWiFi || byRememberMe ){
+    func authenticate(success:SuccessLogin?, fail: FailResponse?) {
+        let reachability = ReachabilityService()
+        if !reachability.isReachableViaWiFi {
+            turkcellAuth(success: success, fail: fail)
+        } else {
+            authification(success: success, fail: fail, byRememberMe: true)
+        }
+    }
+    
+    private func authification(success:SuccessLogin?, fail: FailResponse?, byRememberMe: Bool  = false) {
+        let reachability = ReachabilityService()
+        if (reachability.isReachableViaWiFi || byRememberMe ){ //TODO: check if we need byRememberMe flag
             autificationByRememberMe(sucess: success, fail: fail)
         } else {
-            let user = Authentication3G()
-            self.turkcellAutification(user: user, sucess: success, fail: { [weak self] error in
-                self?.authification(success: success, fail: fail, byRememberMe: true)
-            })
+            turkcellAuth(success: success, fail: fail)
         }
+    }
+    
+    private func turkcellAuth(success:SuccessLogin?, fail: FailResponse?) {
+        let user = Authentication3G()
+        self.turkcellAutification(user: user, sucess: success, fail: { [weak self] error in
+            self?.authification(success: success, fail: fail, byRememberMe: true)
+        })
     }
 }

@@ -19,11 +19,21 @@ extension PasscodeSettingsPresenter: PasscodeSettingsViewOutput {
     }
     
     func changePasscode() {
-        router.changePasscode()
+        if interactor.inNeedOfMailVerefication {
+            view?.presentMailVerefication()
+        } else {
+            router.changePasscode(isTurkCellUser: interactor.isTurkcellUserFlag)
+        }
+        
     }
     
     func setTouchId(enable: Bool) {
-        isBiometricsEnabled = enable
+        if interactor.inNeedOfMailVerefication {
+            view?.presentMailVerefication()
+        } else {
+            isBiometricsEnabled = enable
+        }
+        
     }
     
     func turnOffPasscode() {
@@ -32,7 +42,11 @@ extension PasscodeSettingsPresenter: PasscodeSettingsViewOutput {
     }
     
     func setPasscode() {
-        router.setPasscode()
+        if interactor.inNeedOfMailVerefication {
+            view?.presentMailVerefication()
+        } else {
+            router.setPasscode(isTurkCellUser: interactor.isTurkcellUserFlag)
+        }
     }
     
     var isPasscodeEmpty: Bool {
@@ -50,6 +64,10 @@ extension PasscodeSettingsPresenter: PasscodeSettingsViewOutput {
     
     var isAvailableFaceID: Bool {
         return interactor.isAvailableFaceID
+    }
+    
+    func mailVerified() {
+        interactor.inNeedOfMailVerefication = false
     }
 }
 

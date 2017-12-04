@@ -83,4 +83,22 @@ class AccountService: BaseRequestService, AccountServicePrl {
         let handler = BaseResponseHandler<SignUpSuccessResponse, SignUpFailResponse>(success: success, fail: fail)
         executePostRequest(param: parameters, handler: handler)
     }
+    
+    //MARK: - User Security
+    
+    func securitySettingsInfo(success: SuccessResponse?, fail: @escaping FailResponse) {
+        let parametres = SecuritySettingsInfoParametres()
+        let handler = BaseResponseHandler<SecuritySettingsInfoResponse, SignUpFailResponse>(success: success, fail: fail)
+        executeGetRequest(param: parametres, handler: handler)
+    }
+    
+    func securitySettingsChange(turkcellPasswordAuthEnabled: Bool? = nil, mobileNetworkAuthEnabled: Bool? = nil,
+                                success: SuccessResponse?, fail: FailResponse?) {
+        
+        let parametres = SecuritySettingsChangeInfoParametres(turkcellPasswordAuth: turkcellPasswordAuthEnabled ?? false,
+                                                              mobileNetworkAuth: mobileNetworkAuthEnabled ?? false)
+        let handler = BaseResponseHandler<SecuritySettingsInfoResponse, SignUpFailResponse>(success: success, fail: fail)
+        executePostRequest(param: parametres, handler: handler)
+    }
+    
 }

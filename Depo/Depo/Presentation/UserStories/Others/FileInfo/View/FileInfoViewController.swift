@@ -19,8 +19,6 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var durationH: NSLayoutConstraint!
     @IBOutlet weak var moreFileInfoLabel: UILabel!
-    @IBOutlet weak var dateModifiedTitle: UILabel!
-    @IBOutlet weak var dateModifiedLabel: UILabel!
     @IBOutlet weak var uploadDateTitle: UILabel!
     @IBOutlet weak var uploadDateLabel: UILabel!
     @IBOutlet weak var takenDateTitle: UILabel!
@@ -58,13 +56,6 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
         
         durationLabel.textColor = ColorConstants.textGrayColor
         durationLabel.font = UIFont.TurkcellSaturaRegFont(size: 19)
-        
-        dateModifiedTitle.text = TextConstants.fileInfoDateModifiedTitle
-        dateModifiedTitle.textColor = ColorConstants.textGrayColor
-        dateModifiedTitle.font = UIFont.TurkcellSaturaRegFont(size: 19)
-        
-        dateModifiedLabel.textColor = ColorConstants.textGrayColor
-        dateModifiedLabel.font = UIFont.TurkcellSaturaRegFont(size: 19)
         
         moreFileInfoLabel.textColor = ColorConstants.textGrayColor
         moreFileInfoLabel.font = UIFont.TurkcellSaturaRegFont(size: 19)
@@ -139,23 +130,23 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
             view.layoutSubviews()
         }
         
-        dateModifiedLabel.text = object.lastModifiDate?.getDateInFormat(format: "dd MMMM yyyy")
-        
         if let obj = object as? WrapData, obj.syncStatus == .synced, let takenDate = obj.metaData?.takenDate {
             takenDateLabel.text = takenDate.getDateInFormat(format: "dd MMMM yyyy")
-            if let createdDate = object.creationDate, createdDate == takenDate {
+            if let createdDate = object.creationDate {
                 uploadDateLabel.text = createdDate.getDateInFormat(format: "dd MMMM yyyy")
+                if createdDate == takenDate {
+                    takenDateLabel.isHidden = true
+                    takenDateTitle.isHidden = true
+                }
             } else {
-                uploadDateLabel.isHidden = true
-                uploadDateTitle.isHidden = true
+                hiddeInfoDateLabels()
             }
         } else {
-            takenDateLabel.isHidden = true
-            takenDateTitle.isHidden = true
-            uploadDateLabel.isHidden = true
-            uploadDateTitle.isHidden = true
-        }
+            hiddeInfoDateLabels()
     }
+}
+
+    
     
     func addReturnIfNeed(string: inout String){
         if string.count > 0 {
@@ -210,12 +201,19 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
     
     // MARK: Actions
     
-    @IBAction func onHideKeyboard(){
+    @IBAction func onHideKeyboard() {
         fileName.resignFirstResponder()
     }
     
     @objc func onSave() {
         output.onRename(newName: fileName.text!)
+    }
+    
+    private func hiddeInfoDateLabels () {
+        takenDateLabel.isHidden = true
+        takenDateTitle.isHidden = true
+        uploadDateLabel.isHidden = true
+        uploadDateTitle.isHidden = true
     }
     
 }
