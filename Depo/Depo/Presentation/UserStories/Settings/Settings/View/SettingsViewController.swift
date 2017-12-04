@@ -146,7 +146,7 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
             let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.settingsTableViewSwitchCellID, for: indexPath) as! SettingsTableViewSwitchCell
             cell.actionDelegate = self
             cell.setTextForLabel(titleText: array[indexPath.row], needShowSeparator: indexPath.row != array.count - 1)
-            cell.cellSwitch.setOn(unwrapedturkCellSeuritySettingsPass, animated: true)
+            cell.stateSwitch.setOn(unwrapedturkCellSeuritySettingsPass, animated: true)
             return cell
         } else if indexPath == turkCellSecurityAutologinCellIndex,
             let unwrapedturkCellSeuritySettingsAutoLogin = turkCellSeuritySettingsAutoLoginState {
@@ -154,7 +154,7 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
             let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.settingsTableViewSwitchCellID, for: indexPath) as! SettingsTableViewSwitchCell
             cell.actionDelegate = self
             cell.setTextForLabel(titleText: array[indexPath.row], needShowSeparator: indexPath.row != array.count - 1)
-            cell.cellSwitch.setOn(unwrapedturkCellSeuritySettingsAutoLogin, animated: true)
+            cell.stateSwitch.setOn(unwrapedturkCellSeuritySettingsAutoLogin, animated: true)
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.settingTableViewCellID, for: indexPath) as! SettingsTableViewCell
@@ -223,7 +223,7 @@ class SettingsViewController: UIViewController, SettingsViewInput, UITableViewDe
                 guard let securityCell = tableView.cellForRow(at: indexPath) as? SettingsTableViewSwitchCell else {
                     break
                 }
-                securityCell.cellSwitch.setOn(!securityCell.cellSwitch.isOn, animated: true)
+                securityCell.stateSwitch.setOn(!securityCell.stateSwitch.isOn, animated: true)
             default:
                 break
             }
@@ -348,8 +348,8 @@ extension SettingsViewController: UIImagePickerControllerDelegate, UINavigationC
     }
     
     func changeTurkCellSecurity(passcode: Bool, autologin: Bool) {
-        turkCellSeuritySettingsPass = passcode
-        turkCellSeuritySettingsAutoLogin = autologin
+        turkCellSeuritySettingsPassState = passcode
+        turkCellSeuritySettingsAutoLoginState = autologin
         guard let securityPasscodeCell = tableView.cellForRow(at: turkCellSecurityPasscodeCellIndex) as? SettingsTableViewSwitchCell,
             let securityAutoLoginCell = tableView.cellForRow(at: turkCellSecurityAutologinCellIndex) as? SettingsTableViewSwitchCell else {
                 return
@@ -365,6 +365,6 @@ extension SettingsViewController: SettingsTableViewSwitchCellDelegate {
             let securityAutoLoginCell = tableView.cellForRow(at: turkCellSecurityAutologinCellIndex) as? SettingsTableViewSwitchCell else {
                 return
         }
-        output.turkcellSecurityChanged(passcode: securityPasscodeCell.cellSwitch.isOn, autoLogin: securityAutoLoginCell.cellSwitch.isOn)
+        output.turkcellSecurityChanged(passcode: securityPasscodeCell.stateSwitch.isOn, autoLogin: securityAutoLoginCell.stateSwitch.isOn)
     }
 }
