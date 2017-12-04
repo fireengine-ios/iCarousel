@@ -84,6 +84,10 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
         takenDateLabel.textColor = ColorConstants.textGrayColor
         takenDateLabel.font = UIFont.TurkcellSaturaRegFont(size: 19)
         
+        let saveButton = UIBarButtonItem(title: TextConstants.fileInfoSave, style: .done, target: self, action: #selector(onSave))
+        
+        navigationItem.setRightBarButton(saveButton, animated: false)
+        
         output.viewIsReady()
     }
     
@@ -97,9 +101,11 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
         
         fileName.text = object.name
         
-        if (object.fileType == FileType.folder){
+        if (object.fileType == .folder){
             folderSizeTitle.text = TextConstants.fileInfoFolderSizeTitle
-        }else{
+        } else if object.fileType == .photoAlbum {
+            
+        }  else {
             folderSizeTitle.text = TextConstants.fileInfoFileSizeTitle
         }
         
@@ -118,7 +124,16 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
             let formatter = ByteCountFormatter()
             formatter.countStyle = .binary
             folderSizeLabel.text = formatter.string(fromByteCount: obj.fileSize)
-            
+        } else if let album = object as? AlbumItem {
+            folderSizeTitle.text = TextConstants.fileInfoAlbumSizeTitle
+            fileNameTitle.text = TextConstants.fileInfoAlbumNameTitle
+            fileInfoTitle.text = TextConstants.fileInfoAlbumInfoTitle
+            var count = 0
+            count += album.audioCount ?? 0
+            count += album.imageCount ?? 0
+            count += album.videoCount ?? 0
+            folderSizeLabel.text = String(count)
+            durationH.constant = 0
         } else {
             durationH.constant = 0
             view.layoutSubviews()
@@ -192,9 +207,15 @@ class FileInfoViewController: UIViewController, FileInfoViewInput, UITextFieldDe
         return true
     }
     
-    // MARK: Button actions
+    
+    // MARK: Actions
     
     @IBAction func onHideKeyboard(){
         fileName.resignFirstResponder()
     }
+    
+    @objc func onSave() {
+        output.onRename(newName: fileName.text!)
+    }
+    
 }

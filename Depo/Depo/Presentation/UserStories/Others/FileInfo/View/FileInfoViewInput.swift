@@ -18,4 +18,5 @@ protocol FileInfoViewInput: class {
     func startRenaming()
     
     func setObject(object: BaseDataSourceItem)
+    
 }
